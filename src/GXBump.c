@@ -8,7 +8,7 @@ extern u8 lbl_807B0DC0[];
 void fn_80617340(void);
 void fn_806173E0(void);
 void fn_80617420(void);
-void fn_80617460(void);
+void GXSetTevIndirect(void);
 void fn_806174C0(void);
 void fn_80617520(void);
 void fn_80617580(void);
@@ -100,7 +100,7 @@ asm void fn_80617420(void)
     blr
 }
 
-asm void fn_80617460(void)
+asm void GXSetTevIndirect(void)
 {
     nofralloc
     lwz r10, __GXData
@@ -109,14 +109,14 @@ asm void fn_80617460(void)
     add r9, r10, r0
     lwz r11, 0x180(r9)
     rlwimi r11, r4, 18, 13, 13
-    bgt lbl_fn_80617460_00000148
+    bgt lbl_GXSetTevIndirect_00000148
     rlwimi r11, r6, 20, 10, 11
     rlwimi r11, r5, 16, 14, 15
-    b lbl_fn_80617460_00000150
-lbl_fn_80617460_00000148:
+    b lbl_GXSetTevIndirect_00000150
+lbl_GXSetTevIndirect_00000148:
     rlwimi r11, r4, 19, 10, 11
     oris r11, r11, 0x3
-lbl_fn_80617460_00000150:
+lbl_GXSetTevIndirect_00000150:
     lis r3, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r3)

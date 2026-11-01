@@ -13,12 +13,12 @@ extern void _savegpr_15(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_805F3210(void);
+extern void OSUnlockMutex(void);
 extern void fn_805F3350(void);
 extern void fn_80612E80(void);
 extern void fn_806134E0(void);
 extern void fn_80613520(void);
-extern void fn_80613960(void);
+extern void __GXSetVtxDesc(void);
 extern void fn_80613BB0(void);
 extern void fn_80614790(void);
 extern void fn_80615D20(void);
@@ -31,14 +31,14 @@ extern void fn_80617220(void);
 extern void fn_80617340(void);
 extern void fn_806173E0(void);
 extern void fn_80617420(void);
-extern void fn_80617460(void);
+extern void GXSetTevIndirect(void);
 extern void fn_806174C0(void);
 extern void fn_80617520(void);
-extern void fn_806176F0(void);
+extern void GXSetTevSwapMode(void);
 extern void fn_80617730(void);
 extern void fn_806177F0(void);
 extern void fn_80617880(void);
-extern void fn_806179E0(void);
+extern void GXSetNumTevStages(void);
 extern void fn_80617A10(void);
 extern void fn_80617D50(void);
 extern void fn_80725FF0(void);
@@ -201,7 +201,7 @@ lbl_fn_807265A0_0000012C:
     lis r4, lbl_8087D678@ha
     mr r30, r3
     addi r3, r4, lbl_8087D678@l
-    bl fn_805F3210
+    bl OSUnlockMutex
     la r3, lbl_80880560
     bl OSWakeupThread
     mr r3, r30
@@ -264,7 +264,7 @@ lbl_fn_80726680_0000020C:
     lis r4, lbl_8087D678@ha
     mr r30, r3
     addi r3, r4, lbl_8087D678@l
-    bl fn_805F3210
+    bl OSUnlockMutex
     la r3, lbl_80880560
     bl OSWakeupThread
     mr r3, r30
@@ -674,7 +674,7 @@ lbl_fn_80726B90_00000758:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x0
     bl fn_80617200
     li r3, 0x1
@@ -683,13 +683,13 @@ lbl_fn_80726B90_00000758:
     li r6, 0xf
     bl fn_80617D50
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     bl fn_80617220
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -713,7 +713,7 @@ lbl_fn_80726B90_00000758:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -803,7 +803,7 @@ lbl_fn_80726B90_00000954:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x0
     bl fn_80617200
     li r3, 0x1
@@ -812,13 +812,13 @@ lbl_fn_80726B90_00000954:
     li r6, 0xf
     bl fn_80617D50
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     bl fn_80617220
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -909,7 +909,7 @@ lbl_fn_80726B90_00000AF4:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x0
     bl fn_80617200
     li r3, 0x1
@@ -918,13 +918,13 @@ lbl_fn_80726B90_00000AF4:
     li r6, 0xf
     bl fn_80617D50
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     bl fn_80617220
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1015,7 +1015,7 @@ lbl_fn_80726B90_00000C94:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x0
     bl fn_80617200
     li r3, 0x1
@@ -1024,13 +1024,13 @@ lbl_fn_80726B90_00000C94:
     li r6, 0xf
     bl fn_80617D50
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     bl fn_80617220
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1121,7 +1121,7 @@ lbl_fn_80726B90_00000E34:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x0
     bl fn_80617200
     li r3, 0x1
@@ -1130,13 +1130,13 @@ lbl_fn_80726B90_00000E34:
     li r6, 0xf
     bl fn_80617D50
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     bl fn_80617220
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1711,7 +1711,7 @@ lbl_fn_80727B60_000016A4:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x0
     bl fn_80617200
     li r3, 0x1
@@ -1720,7 +1720,7 @@ lbl_fn_80727B60_000016A4:
     li r6, 0xf
     bl fn_80617D50
     li r3, 0x2
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     bl fn_80617220
     li r3, 0x1
@@ -1728,11 +1728,11 @@ lbl_fn_80727B60_000016A4:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1766,7 +1766,7 @@ lbl_fn_80727B60_000016A4:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1797,7 +1797,7 @@ lbl_fn_80727B60_000016A4:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0

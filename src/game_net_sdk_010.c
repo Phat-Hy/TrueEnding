@@ -16,7 +16,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void fn_8067E23C(void);
 extern void fn_806809C0(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_806A70E0(void);
 extern void fn_806A7110(void);
 extern void fn_806A7130(void);
@@ -430,7 +430,7 @@ lbl_fn_806ADC80_00000410:
     bl fn_806D0350
     addi r3, r1, 0x10
     addi r4, r25, 0x8e
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_806ADC80_00000584
     lwz r3, lbl_8085FF78@l(r31)
@@ -662,7 +662,7 @@ lbl_fn_806ADFE0_0000076C:
     bl fn_806D0350
     addi r3, r1, 0x8
     addi r4, r25, 0x8e
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_806ADFE0_000008B4
     lwz r3, lbl_8085FF78@l(r31)
@@ -2120,7 +2120,7 @@ lbl_fn_806AF3F0_00001C20:
     bl fn_806CF570
     addi r3, r29, 0x8e
     addi r4, r1, 0x20
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_806AF3F0_00001D08
     lwz r3, lbl_8085FF90@l(r31)

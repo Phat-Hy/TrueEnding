@@ -19,14 +19,14 @@ extern void fn_80128818(void);
 extern void fn_80128930(void);
 extern void fn_8014C228(void);
 extern void fn_8014DEE4(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_801718F8(void);
-extern void fn_80370174(void);
+extern void world_getGlobalFlag(void);
 extern void fn_803C17FC(void);
 extern void fn_803C1840(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_80695AD0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void vec3_isNonZero(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -340,11 +340,11 @@ asm void fn_8016F67C(void)
     stfs f0, 0x34(r1)
     lfs f1, 0x538(r3)
     addi r3, r1, 0x48
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x2c
     addi r3, r1, 0x48
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f3, lbl_808819B0
     addi r31, r1, 0x20
     lfs f0, 0x620(r30)
@@ -532,7 +532,7 @@ lbl_fn_8016F824_00000608:
     beq lbl_fn_8016F824_0000068C
     lwz r3, lbl_8087F430
     li r4, 0x25
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x1
     blt lbl_fn_8016F824_0000066C
     lwz r3, 0x648(r30)
@@ -682,7 +682,7 @@ lbl_fn_8016F824_00000810:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8016F824_0000084C
     lwz r3, 0xf80(r30)
@@ -728,7 +728,7 @@ lbl_fn_8016F824_000008B8:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8016F824_000008F4
     lwz r3, 0xf80(r30)
@@ -739,7 +739,7 @@ lbl_fn_8016F824_000008B8:
 lbl_fn_8016F824_000008F4:
     mr r3, r30
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r30)
     li r0, 0x0
     cmpwi r3, 0x0
@@ -942,7 +942,7 @@ lbl_fn_8016FDCC_00000BD8:
     beq lbl_fn_8016FDCC_00000C5C
     lwz r3, lbl_8087F430
     li r4, 0x25
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x1
     blt lbl_fn_8016FDCC_00000C3C
     lwz r3, 0x648(r30)
@@ -1092,7 +1092,7 @@ lbl_fn_8016FDCC_00000DE0:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8016FDCC_00000E1C
     lwz r3, 0xf80(r30)
@@ -1138,7 +1138,7 @@ lbl_fn_8016FDCC_00000E88:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8016FDCC_00000EC4
     lwz r3, 0xf80(r30)
@@ -1149,7 +1149,7 @@ lbl_fn_8016FDCC_00000E88:
 lbl_fn_8016FDCC_00000EC4:
     mr r3, r30
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r30)
     li r0, 0x0
     cmpwi r3, 0x0
@@ -1403,7 +1403,7 @@ lbl_fn_8017039C_00001264:
     beq lbl_fn_8017039C_000012E8
     lwz r3, lbl_8087F430
     li r4, 0x25
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x1
     blt lbl_fn_8017039C_000012C8
     lwz r3, 0x648(r30)
@@ -1553,7 +1553,7 @@ lbl_fn_8017039C_0000146C:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8017039C_000014A8
     lwz r3, 0xf80(r30)
@@ -1599,7 +1599,7 @@ lbl_fn_8017039C_00001514:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8017039C_00001550
     lwz r3, 0xf80(r30)
@@ -1610,7 +1610,7 @@ lbl_fn_8017039C_00001514:
 lbl_fn_8017039C_00001550:
     mr r3, r30
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r30)
     li r0, 0x0
     cmpwi r3, 0x0
@@ -1790,7 +1790,7 @@ lbl_fn_80170A20_000017E0:
     beq lbl_fn_80170A20_00001864
     lwz r3, lbl_8087F430
     li r4, 0x25
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x1
     blt lbl_fn_80170A20_00001844
     lwz r3, 0x648(r31)
@@ -1940,7 +1940,7 @@ lbl_fn_80170A20_000019E8:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80170A20_00001A24
     lwz r3, 0xf80(r31)
@@ -1986,7 +1986,7 @@ lbl_fn_80170A20_00001A90:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80170A20_00001ACC
     lwz r3, 0xf80(r31)
@@ -1997,7 +1997,7 @@ lbl_fn_80170A20_00001A90:
 lbl_fn_80170A20_00001ACC:
     mr r3, r31
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r31)
     li r0, 0x0
     cmpwi r3, 0x0

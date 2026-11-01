@@ -6,23 +6,23 @@ extern void __files(void);
 extern void _restgpr_16(void);
 extern void _savegpr_16(void);
 extern void dtor_80084684(void);
-extern void fn_800844D8(void);
-extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_free(void);
+extern void mem_realloc(void);
+extern void mem_getAllocSize(void);
 extern void fn_8011F91C(void);
 extern void fn_8011FC10(void);
 extern void fn_8021ECD0(void);
-extern void fn_80370174(void);
-extern void fn_80370320(void);
-extern void fn_80370A78(void);
+extern void world_getGlobalFlag(void);
+extern void world_setGlobalFlag(void);
+extern void world_getLocalFlag(void);
 extern void fn_803BF898(void);
 extern void fn_803EC16C(void);
 extern void fn_803EC374(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
-extern void fn_80695720(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void printf(void);
+extern void abort(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 
 /* External data declarations */
@@ -118,7 +118,7 @@ asm void fn_803C9318(void)
     lwz r3, 0x0(r3)
     cmpwi r3, 0x0
     beq lbl_fn_803C9318_00000048
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803C9318_00000048:
     cmpwi r31, 0x0
     ble lbl_fn_803C9318_00000058
@@ -150,7 +150,7 @@ asm void fn_803C9378(void)
     cmpwi r0, 0x0
     beq lbl_fn_803C9378_000000AC
     mr r3, r0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803C9378_000000AC:
     mullw r0, r30, r31
     stw r30, 0x4(r29)
@@ -160,7 +160,7 @@ lbl_fn_803C9378_000000AC:
     la r6, lbl_8087DDE8
     slwi r3, r0, 1
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x0(r29)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -211,14 +211,14 @@ lbl_fn_803C940C_00000148:
     la r5, lbl_8087DDE4
     la r6, lbl_8087DDE0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803C94BC@ha
     lis r5, fn_803BF898@ha
     mr r7, r30
     li r6, 0x8
     addi r4, r4, fn_803C94BC@l
     addi r5, r5, fn_803BF898@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C940C_0000019C
 lbl_fn_803C940C_00000194:
@@ -394,8 +394,8 @@ lbl_fn_803C95EC_00000364:
     addi r4, r4, 0x39f
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803C95EC_000003A4:
     lis r3, 0x38e
     addi r0, r3, 0x38e3
@@ -445,8 +445,8 @@ lbl_fn_803C95EC_000003FC:
     addi r4, r4, 0x39f
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803C95EC_00000464:
     lis r3, 0x38e
     addi r0, r3, 0x38e3
@@ -501,11 +501,11 @@ lbl_fn_803C95EC_000004F8:
     addi r4, r4, 0x39f
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803C95EC_0000052C:
     mulli r3, r28, 0x18
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_803C95EC_00000560
@@ -515,8 +515,8 @@ lbl_fn_803C95EC_0000052C:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8078BC80@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803C95EC_00000560:
     lwz r0, 0x24(r1)
     stw r31, 0x20(r1)
@@ -648,8 +648,8 @@ lbl_fn_803C99A8_0000070C:
     addi r4, r4, 0x39f
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803C99A8_00000744:
     li r5, 0x0
     addi r4, r29, 0x8
@@ -675,8 +675,8 @@ lbl_fn_803C99A8_00000744:
     addi r4, r4, 0x39f
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803C99A8_000007AC:
     lis r3, 0x71c
     addi r0, r3, 0x71c7
@@ -731,11 +731,11 @@ lbl_fn_803C99A8_00000840:
     addi r4, r4, 0x39f
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803C99A8_00000874:
     mulli r3, r28, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_803C99A8_000008A8
@@ -745,8 +745,8 @@ lbl_fn_803C99A8_00000874:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8078BC9C@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803C99A8_000008A8:
     lwz r3, 0x18(r1)
     li r0, 0xc
@@ -854,7 +854,7 @@ asm void fn_803C9CE4(void)
     beq lbl_fn_803C9CE4_00000A1C
     beq lbl_fn_803C9CE4_00000A1C
     subi r3, r6, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803C9CE4_00000A1C:
     cmpwi r30, 0x0
     stw r30, 0x0(r29)
@@ -865,13 +865,13 @@ lbl_fn_803C9CE4_00000A1C:
     la r6, lbl_8087DDD8
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803C95E8@ha
     mr r7, r30
     addi r4, r4, fn_803C95E8@l
     li r5, 0x0
     li r6, 0x18
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C9CE4_00000A6C
 lbl_fn_803C9CE4_00000A64:
@@ -935,7 +935,7 @@ asm void fn_803C9DD0(void)
     cmpwi r0, 0x0
     beq lbl_fn_803C9DD0_00000B04
     mr r3, r0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803C9DD0_00000B04:
     cmpwi r30, 0x0
     stw r30, 0x0(r29)
@@ -945,7 +945,7 @@ lbl_fn_803C9DD0_00000B04:
     la r5, lbl_8087DDD4
     la r6, lbl_8087DDD0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x4(r29)
     b lbl_fn_803C9DD0_00000B38
 lbl_fn_803C9DD0_00000B30:
@@ -1007,7 +1007,7 @@ asm void fn_803C9E98(void)
     lwz r3, 0x0(r3)
     cmpwi r3, 0x0
     beq lbl_fn_803C9E98_00000BC8
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803C9E98_00000BC8:
     cmpwi r31, 0x0
     ble lbl_fn_803C9E98_00000BD8
@@ -1039,7 +1039,7 @@ asm void fn_803C9EF8(void)
     cmpwi r0, 0x0
     beq lbl_fn_803C9EF8_00000C2C
     mr r3, r0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803C9EF8_00000C2C:
     mullw r3, r30, r31
     stw r30, 0x4(r29)
@@ -1048,7 +1048,7 @@ lbl_fn_803C9EF8_00000C2C:
     la r5, lbl_8087DDCC
     la r6, lbl_8087DDC8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x0(r29)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -1085,7 +1085,7 @@ asm void fn_803C9F84(void)
     cmpwi r0, 0x0
     beq lbl_fn_803C9F84_00000CB8
     mr r3, r0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803C9F84_00000CB8:
     cmpwi r30, 0x0
     stw r30, 0x0(r29)
@@ -1095,7 +1095,7 @@ lbl_fn_803C9F84_00000CB8:
     la r5, lbl_8087DDC4
     la r6, lbl_8087DDC0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x4(r29)
     b lbl_fn_803C9F84_00000CEC
 lbl_fn_803C9F84_00000CE4:
@@ -1140,7 +1140,7 @@ asm void fn_803CA014(void)
     la r5, lbl_8087DDBC
     la r6, lbl_8087DDB8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     cmpwi r31, 0x0
     stw r3, 0x4(r29)
     beq lbl_fn_803CA014_00000DC4
@@ -1174,7 +1174,7 @@ lbl_fn_803CA014_00000DC4:
     cmpwi r31, 0x0
     beq lbl_fn_803CA014_00000DD4
     mr r3, r31
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803CA014_00000DD4:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1230,7 +1230,7 @@ lbl_fn_803CA0F4_00000E74:
     lwz r3, 0x14c(r3)
     cmpwi r3, 0x0
     beq lbl_fn_803CA0F4_00000E84
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803CA0F4_00000E84:
     cmpwi r22, 0x0
     stw r22, 0x148(r28)
@@ -1240,7 +1240,7 @@ lbl_fn_803CA0F4_00000E84:
     la r5, lbl_8087DDB4
     la r6, lbl_8087DDB0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x14c(r28)
     b lbl_fn_803CA0F4_00000EB8
 lbl_fn_803CA0F4_00000EB0:
@@ -1339,7 +1339,7 @@ lbl_fn_803CA0F4_00000FD8:
     lwz r3, 0x14c(r28)
     cmpwi r3, 0x0
     beq lbl_fn_803CA0F4_00001000
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803CA0F4_00001000:
     li r0, 0x1
     stw r0, 0x148(r28)
@@ -1348,7 +1348,7 @@ lbl_fn_803CA0F4_00001000:
     la r5, lbl_8087DDB4
     la r6, lbl_8087DDB0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x14c(r28)
     b lbl_fn_803CA0F4_0000102C
     stw r0, 0x14c(r28)
@@ -1408,7 +1408,7 @@ lbl_fn_803CA0F4_000010E0:
     lwz r3, 0x154(r28)
     cmpwi r3, 0x0
     beq lbl_fn_803CA0F4_000010F0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803CA0F4_000010F0:
     cmpwi r22, 0x0
     stw r22, 0x150(r28)
@@ -1418,7 +1418,7 @@ lbl_fn_803CA0F4_000010F0:
     la r5, lbl_8087DDB4
     la r6, lbl_8087DDB0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x154(r28)
     b lbl_fn_803CA0F4_00001124
 lbl_fn_803CA0F4_0000111C:
@@ -1596,7 +1596,7 @@ asm void fn_803CA604(void)
     mr r3, r4
     li r23, 0x1
     li r4, 0x392
-    bl fn_80370174
+    bl world_getGlobalFlag
     lwz r4, 0x64(r20)
     clrlwi r0, r3, 28
     lwz r17, 0x50(r4)
@@ -1657,20 +1657,20 @@ lbl_fn_803CA604_00001434:
     beq lbl_fn_803CA604_00001478
     lwz r3, lbl_8087F430
     li r4, 0x392
-    bl fn_80370174
+    bl world_getGlobalFlag
     clrlwi r5, r17, 28
     li r4, 0x392
     rlwimi r5, r3, 4, 0, 27
     lwz r3, lbl_8087F430
     li r6, 0x1
-    bl fn_80370320
+    bl world_setGlobalFlag
     b lbl_fn_803CA604_00001478
 lbl_fn_803CA604_00001464:
     mr r3, r4
     li r4, 0x392
     li r5, 0x0
     li r6, 0x1
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_803CA604_00001478:
     lwz r0, 0xe4(r20)
     li r17, 0x0
@@ -1695,7 +1695,7 @@ lbl_fn_803CA604_000014BC:
     lwz r3, 0x18c(r20)
     cmpwi r3, 0x0
     beq lbl_fn_803CA604_000014CC
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803CA604_000014CC:
     cmpwi r17, 0x0
     stw r17, 0x188(r20)
@@ -1705,7 +1705,7 @@ lbl_fn_803CA604_000014CC:
     la r5, lbl_8087DDAC
     la r6, lbl_8087DDA8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x18c(r20)
     b lbl_fn_803CA604_00001500
 lbl_fn_803CA604_000014F8:
@@ -1764,11 +1764,11 @@ lbl_fn_803CA604_00001588:
     fadds f0, f30, f0
     stfs f0, 0x40(r1)
     lfs f1, 0x14(r25)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x38
     addi r3, r1, 0x78
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f3, 0x38(r1)
     mr r3, r16
     lfs f0, 0x4(r25)
@@ -1820,11 +1820,11 @@ lbl_fn_803CA604_00001588:
     lfs f1, 0x14(r25)
     stfs f28, 0x24(r1)
     stfs f29, 0x28(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x14
     addi r3, r1, 0x48
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f3, 0x14(r1)
     addi r0, r17, 0x4dd3
     lfs f0, 0x38(r1)
@@ -1864,7 +1864,7 @@ lbl_fn_803CA604_00001588:
     lwz r4, 0xc(r31)
     li r5, 0x0
     li r6, 0x1
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_803CA604_0000175C:
     addi r22, r22, 0x1
     addi r18, r18, 0x48
@@ -1921,12 +1921,12 @@ lbl_fn_803CAABC_000017F0:
     bne lbl_fn_803CAABC_00001824
     lwz r3, lbl_8087F430
     lwz r4, 0x30(r29)
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_803CAABC_00001830
 lbl_fn_803CAABC_00001824:
     lwz r3, lbl_8087F430
     lwz r4, 0x30(r29)
-    bl fn_80370A78
+    bl world_getLocalFlag
 lbl_fn_803CAABC_00001830:
     lwz r0, 0x34(r29)
     subf r0, r3, r0
@@ -2049,12 +2049,12 @@ lbl_fn_803CAABC_000019AC:
     bne lbl_fn_803CAABC_000019E0
     lwz r3, lbl_8087F430
     lwz r4, 0x24(r29)
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_803CAABC_000019EC
 lbl_fn_803CAABC_000019E0:
     lwz r3, lbl_8087F430
     lwz r4, 0x24(r29)
-    bl fn_80370A78
+    bl world_getLocalFlag
 lbl_fn_803CAABC_000019EC:
     lwz r0, 0x28(r29)
     subf r0, r3, r0
@@ -2083,12 +2083,12 @@ lbl_fn_803CAABC_00001A20:
     bne lbl_fn_803CAABC_00001A54
     lwz r3, lbl_8087F430
     lwz r4, 0x24(r31)
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_803CAABC_00001A60
 lbl_fn_803CAABC_00001A54:
     lwz r3, lbl_8087F430
     lwz r4, 0x24(r31)
-    bl fn_80370A78
+    bl world_getLocalFlag
 lbl_fn_803CAABC_00001A60:
     lwz r0, 0x28(r31)
     subf r0, r3, r0
@@ -2142,12 +2142,12 @@ lbl_fn_803CAABC_00001AEC:
     bne lbl_fn_803CAABC_00001B20
     lwz r3, lbl_8087F430
     lwz r4, 0x68(r31)
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_803CAABC_00001B2C
 lbl_fn_803CAABC_00001B20:
     lwz r3, lbl_8087F430
     lwz r4, 0x68(r31)
-    bl fn_80370A78
+    bl world_getLocalFlag
 lbl_fn_803CAABC_00001B2C:
     lwz r0, 0x6c(r31)
     subf r0, r3, r0

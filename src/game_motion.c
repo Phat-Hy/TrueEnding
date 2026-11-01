@@ -9,30 +9,30 @@ extern void _restgpr_27(void);
 extern void _savegpr_23(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_800761A8(void);
-extern void fn_80076760(void);
+extern void gx_applyRenderState(void);
+extern void gx_setRenderStateParam(void);
 extern void fn_80076A28(void);
 extern void fn_800B5994(void);
 extern void fn_800D5F68(void);
-extern void fn_805F8980(void);
-extern void fn_805F95A0(void);
+extern void PSMTXIdentity(void);
+extern void PSMTXMultVecArraySR(void);
 extern void fn_80612E80(void);
 extern void fn_806134E0(void);
 extern void fn_80613520(void);
 extern void fn_80614190(void);
 extern void fn_80614790(void);
-extern void fn_80614CC0(void);
-extern void fn_80614D30(void);
-extern void fn_80615560(void);
+extern void GXSetTexCopySrc(void);
+extern void GXSetTexCopyDst(void);
+extern void GXCopyTex(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
 extern void fn_80617A10(void);
 extern void fn_806180B0(void);
 extern void fn_80618290(void);
-extern void fn_80618350(void);
-extern void fn_80618400(void);
+extern void GXLoadPosMtxImm(void);
+extern void GXSetCurrentMtx(void);
 extern void fn_806185A0(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 
 /* External data declarations */
 extern u8 jumptable_807791E0[];
@@ -997,17 +997,17 @@ asm void fn_800BFCB4(void)
     mr r3, r24
     li r4, 0x8
     li r5, 0x1
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r24
     li r4, 0x9
     li r5, 0x7
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r24
     li r4, 0xa
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     lwz r3, lbl_8087EEE0
-    bl fn_800761A8
+    bl gx_applyRenderState
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
@@ -1036,7 +1036,7 @@ lbl_fn_800BFCB4_00000CB8:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_00000CC8:
     mr r26, r3
 lbl_fn_800BFCB4_00000CCC:
@@ -1058,7 +1058,7 @@ lbl_fn_800BFCB4_00000D00:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_00000D10:
     mr r25, r3
 lbl_fn_800BFCB4_00000D14:
@@ -1080,7 +1080,7 @@ lbl_fn_800BFCB4_00000D48:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_00000D58:
     mr r24, r3
 lbl_fn_800BFCB4_00000D5C:
@@ -1102,7 +1102,7 @@ lbl_fn_800BFCB4_00000D90:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_00000DA0:
     slwi r3, r3, 24
     slwi r0, r26, 16
@@ -1137,7 +1137,7 @@ lbl_fn_800BFCB4_00000E10:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_00000E20:
     mr r24, r3
 lbl_fn_800BFCB4_00000E24:
@@ -1159,7 +1159,7 @@ lbl_fn_800BFCB4_00000E58:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_00000E68:
     mr r26, r3
 lbl_fn_800BFCB4_00000E6C:
@@ -1181,7 +1181,7 @@ lbl_fn_800BFCB4_00000EA0:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_00000EB0:
     mr r25, r3
 lbl_fn_800BFCB4_00000EB4:
@@ -1203,7 +1203,7 @@ lbl_fn_800BFCB4_00000EE8:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_00000EF8:
     slwi r3, r3, 24
     slwi r0, r24, 16
@@ -1238,7 +1238,7 @@ lbl_fn_800BFCB4_00000F68:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_00000F78:
     mr r25, r3
 lbl_fn_800BFCB4_00000F7C:
@@ -1260,7 +1260,7 @@ lbl_fn_800BFCB4_00000FB0:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_00000FC0:
     mr r27, r3
 lbl_fn_800BFCB4_00000FC4:
@@ -1282,7 +1282,7 @@ lbl_fn_800BFCB4_00000FF8:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_00001008:
     mr r26, r3
 lbl_fn_800BFCB4_0000100C:
@@ -1304,7 +1304,7 @@ lbl_fn_800BFCB4_00001040:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_00001050:
     slwi r3, r3, 24
     slwi r0, r25, 16
@@ -1339,7 +1339,7 @@ lbl_fn_800BFCB4_000010C0:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_000010D0:
     mr r26, r3
 lbl_fn_800BFCB4_000010D4:
@@ -1361,7 +1361,7 @@ lbl_fn_800BFCB4_00001108:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_00001118:
     mr r28, r3
 lbl_fn_800BFCB4_0000111C:
@@ -1383,7 +1383,7 @@ lbl_fn_800BFCB4_00001150:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_00001160:
     mr r27, r3
 lbl_fn_800BFCB4_00001164:
@@ -1405,7 +1405,7 @@ lbl_fn_800BFCB4_00001198:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_000011A8:
     slwi r3, r3, 24
     slwi r0, r26, 16
@@ -1455,17 +1455,17 @@ lbl_fn_800BFCB4_000011A8:
     fsubs f2, f2, f4
     lfs f6, lbl_8087D908
     fsubs f4, f0, f4
-    bl fn_805F95A0
+    bl PSMTXMultVecArraySR
     addi r3, r1, 0x60
     li r4, 0x1
     bl fn_80618290
     addi r3, r1, 0x30
-    bl fn_805F8980
+    bl PSMTXIdentity
     addi r3, r1, 0x30
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     li r3, 0x80
     li r4, 0x0
     li r5, 0x4
@@ -1585,15 +1585,15 @@ asm void fn_800C0508(void)
     lwz r31, 0x3c(r5)
     clrlwi r6, r30, 16
     clrlwi r5, r31, 16
-    bl fn_80614CC0
+    bl GXSetTexCopySrc
     clrlwi r3, r31, 16
     clrlwi r4, r30, 16
     li r5, 0x6
     li r6, 0x0
-    bl fn_80614D30
+    bl GXSetTexCopyDst
     lwz r3, 0x774(r28)
     clrlwi r4, r29, 24
-    bl fn_80615560
+    bl GXCopyTex
     bl fn_80614190
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1623,15 +1623,15 @@ asm void fn_800C0590(void)
     li r4, 0x0
     clrlwi r5, r31, 16
     clrlwi r6, r30, 16
-    bl fn_80614CC0
+    bl GXSetTexCopySrc
     mr r5, r29
     clrlwi r3, r31, 16
     clrlwi r4, r30, 16
     li r6, 0x0
-    bl fn_80614D30
+    bl GXSetTexCopyDst
     lwz r3, 0x79c(r27)
     clrlwi r4, r28, 24
-    bl fn_80615560
+    bl GXCopyTex
     bl fn_80614190
     cmpwi r29, 0x16
     beq lbl_fn_800C0590_00001560

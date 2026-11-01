@@ -11,10 +11,10 @@ extern void _savegpr_27(void);
 extern void fn_8004ED34(void);
 extern void fn_800697D8(void);
 extern void fn_8008B978(void);
-extern void fn_80092814(void);
-extern void fn_80097D7C(void);
+extern void atn_Model_findBoneIndex(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_8011F8F4(void);
 extern void fn_8011F91C(void);
 extern void fn_8011FC10(void);
@@ -22,16 +22,16 @@ extern void fn_8011FE3C(void);
 extern void fn_8013310C(void);
 extern void fn_8013322C(void);
 extern void fn_80161570(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_8017039C(void);
 extern void fn_80170F20(void);
 extern void fn_80171DB0(void);
 extern void fn_8021ECD0(void);
 extern void fn_8035E858(void);
-extern void fn_80370174(void);
-extern void fn_80370320(void);
-extern void fn_80370B78(void);
-extern void fn_80370BD0(void);
+extern void world_getGlobalFlag(void);
+extern void world_setGlobalFlag(void);
+extern void world_startMapTransition(void);
+extern void world_reloadMapTransition(void);
 extern void fn_803712BC(void);
 extern void fn_80373148(void);
 extern void fn_8037D4C0(void);
@@ -40,8 +40,8 @@ extern void fn_803CC6D0(void);
 extern void fn_803E5E64(void);
 extern void fn_803EEE10(void);
 extern void fn_80444020(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -109,7 +109,7 @@ asm void fn_803A90E8(void)
     lwz r3, lbl_8087F8A0
     li r4, 0x0
     lwz r3, 0x48(r3)
-    bl fn_8016E970
+    bl actor_setState
     li r3, 0x0
     li r0, 0x1
     stw r3, 0x0(r31)
@@ -234,7 +234,7 @@ lbl_fn_803A914C_00000198:
     lfs f1, lbl_80885B74
     li r6, 0x5
     subi r5, r5, 0x5
-    bl fn_80370B78
+    bl world_startMapTransition
 lbl_fn_803A914C_000001CC:
     lwz r0, 0x10(r30)
     rlwinm r0, r0, 0, 27, 27
@@ -253,7 +253,7 @@ lbl_fn_803A914C_000001CC:
     bl fn_803935AC
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_803A914C_00000214:
     lwz r3, 0xb8(r28)
     li r0, 0x0
@@ -480,7 +480,7 @@ lbl_fn_803A956C_00000504:
     lwz r4, 0xc0(r27)
     li r5, 0x0
     lfs f1, lbl_80885BD4
-    bl fn_80370BD0
+    bl world_reloadMapTransition
 lbl_fn_803A956C_0000052C:
     lwz r3, 0xb8(r27)
     li r0, 0x0
@@ -631,7 +631,7 @@ lbl_fn_803A956C_0000071C:
     bl fn_803935AC
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_803A956C_00000764:
     lwz r0, 0x10(r29)
     rlwinm r0, r0, 0, 24, 24
@@ -737,7 +737,7 @@ lbl_fn_803A98EC_00000888:
     lfs f1, lbl_80885B74
     li r6, 0x5
     subi r5, r5, 0x5
-    bl fn_80370B78
+    bl world_startMapTransition
 lbl_fn_803A98EC_000008BC:
     lwz r0, 0x14(r29)
     rlwinm r0, r0, 0, 29, 29
@@ -745,13 +745,13 @@ lbl_fn_803A98EC_000008BC:
     bne lbl_fn_803A98EC_000008F0
     lwz r3, lbl_8087F430
     li r4, 0x3
-    bl fn_80370174
+    bl world_getGlobalFlag
     stw r3, 0xc4(r27)
     li r4, 0x3
     li r5, 0x1
     li r6, 0x0
     lwz r3, lbl_8087F430
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_803A98EC_000008F0:
     lwz r0, 0x14(r29)
     rlwinm r0, r0, 0, 28, 28
@@ -880,7 +880,7 @@ lbl_fn_803A98EC_00000A8C:
     lwz r5, 0xc4(r27)
     li r4, 0x3
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_803A98EC_00000AB8:
     lwz r0, 0x14(r29)
     rlwinm r0, r0, 0, 28, 28
@@ -1246,11 +1246,11 @@ lbl_fn_803A9DBC_00000F70:
     stfs f3, 0x90(r1)
     stfs f0, 0x94(r1)
     lfs f1, 0x7c(r29)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x8c
     addi r3, r1, 0xb8
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f9, 0x94(r1)
     lfs f8, 0x90(r1)
     lfs f7, 0x8c(r1)
@@ -1472,7 +1472,7 @@ lbl_fn_803A9DBC_000012C4:
     lfs f31, 0x2e4(r30)
     addi r3, r30, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f31, f1
     blt lbl_fn_803A9DBC_00001330
 lbl_fn_803A9DBC_000012FC:
@@ -1544,7 +1544,7 @@ lbl_fn_803A9DBC_000013C4:
     bl fn_800C31F4
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_803A9DBC_000013F8:
     cmpwi r31, 0x0
     beq lbl_fn_803A9DBC_00001424
@@ -1556,7 +1556,7 @@ lbl_fn_803A9DBC_000013F8:
     beq lbl_fn_803A9DBC_00001424
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_803A9DBC_00001424:
     lwz r0, 0x20(r27)
     rlwinm r0, r0, 0, 28, 28
@@ -1714,7 +1714,7 @@ lbl_fn_803AA5E4_000015E0:
     mr r3, r26
     addi r4, r1, 0x208
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     mr r29, r3
     bge lbl_fn_803AA5E4_00001678

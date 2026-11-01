@@ -16,7 +16,7 @@ extern void fn_801010A0(void);
 extern void fn_801010E8(void);
 extern void fn_8010EE78(void);
 extern void fn_8014FAD0(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_804AE3BC(void);
 extern void fn_804CF198(void);
 extern void fn_804CF640(void);
@@ -87,10 +87,10 @@ extern void fn_8050E534(void);
 extern void fn_8050E59C(void);
 extern void fn_8050E630(void);
 extern void fn_8050F8B4(void);
-extern void fn_805F9920(void);
-extern void fn_805F9990(void);
+extern void PSVECSquareMag(void);
+extern void PSVECDotProduct(void);
 extern void fn_8067CE80(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80695B28(void);
 extern void fn_806A8E40(void);
 extern void fn_806B0E30(void);
@@ -458,7 +458,7 @@ lbl_fn_804EDB10_00000444:
     mr r22, r3
     mr r3, r23
     mr r4, r22
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_804EDB10_0000054C
     lwz r0, 0xe8(r30)
@@ -470,7 +470,7 @@ lbl_fn_804EDB10_00000478:
     lwz r3, 0xf0(r30)
 lbl_fn_804EDB10_0000047C:
     mr r4, r22
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_804EDB10_0000054C
     b lbl_fn_804EDB10_000004E4
@@ -1196,7 +1196,7 @@ lbl_fn_804EE4F4_00000E14:
     lfs f2, 0x14(r30)
     psq_st f1, 0x0(r29), 0, 0
     stfs f2, 0x70(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_8088761C
     fcmpo cr0, f1, f0
     ble lbl_fn_804EE4F4_00000E6C
@@ -1323,7 +1323,7 @@ lbl_fn_804EE4F4_00000FEC:
     addi r3, r1, 0x5c
     stfs f3, 0x60(r1)
     stfs f0, 0x64(r1)
-    bl fn_805F9990
+    bl PSVECDotProduct
     lfs f0, lbl_80887620
     fcmpo cr0, f1, f0
     ble lbl_fn_804EE4F4_00001088
@@ -1685,7 +1685,7 @@ lbl_fn_804EEB38_000014D4:
     cmpwi r28, 0x0
     beq lbl_fn_804EEB38_000015FC
     lwz r3, 0x0(r31)
-    bl fn_80219E6C
+    bl task_findEntryById
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_804EEB38_000015FC
@@ -1870,7 +1870,7 @@ lbl_fn_804EED80_00001764:
     addi r3, r3, lbl_807C6BB8@l
     stw r28, 0xc(r3)
     lwz r3, 0x0(r30)
-    bl fn_80219E6C
+    bl task_findEntryById
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_804EED80_00001968

@@ -6,19 +6,19 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
-extern void fn_800844D8(void);
+extern void actor_dispatchMessage(void);
+extern void mem_free(void);
 extern void fn_800E0A64(void);
 extern void fn_800E14A4(void);
 extern void fn_800E1A48(void);
 extern void fn_800E1D5C(void);
 extern void fn_80232ACC(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_80232FF4(void);
 extern void fn_802346AC(void);
 extern void fn_802347DC(void);
 extern void fn_80234958(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_8023A680(void);
 extern void fn_8024067C(void);
 extern void fn_8024068C(void);
@@ -78,7 +78,7 @@ asm void fn_8023B724(void)
 lbl_fn_8023B724_00000040:
     lwz r3, 0x4c(r4)
     lwz r4, 0x50(r4)
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r3, 0x58(r27)
     bl fn_802346AC
     lwz r3, 0x40(r27)
@@ -233,7 +233,7 @@ lbl_fn_8023B724_00000288:
     lwz r4, 0x4c(r4)
     lwz r5, 0x50(r27)
     lwz r6, 0x5c(r27)
-    bl fn_80239DAC
+    bl res_findResourceSlot
 lbl_fn_8023B724_00000298:
     addi r11, r1, 0x160
     mr r3, r31
@@ -397,7 +397,7 @@ lbl_fn_8023BA10_000004A0:
 lbl_fn_8023BA10_000004C4:
     lwz r28, 0x38(r1)
     li r3, 0x8
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_8023BA10_000004F0
@@ -777,7 +777,7 @@ lbl_fn_8023C0C0_000009F8:
 lbl_fn_8023C0C0_00000A1C:
     lwz r30, 0x28(r1)
     li r3, 0x30
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_8023C0C0_00000BDC
@@ -842,7 +842,7 @@ lbl_fn_8023C0C0_00000AFC:
     addi r3, r29, 0x18
     addi r8, r1, 0x10
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8023C0C0_00000B18:
     lwz r0, 0x30(r1)
     srwi. r0, r0, 31
@@ -893,7 +893,7 @@ lbl_fn_8023C0C0_00000BAC:
     addi r3, r29, 0x24
     addi r8, r1, 0x18
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8023C0C0_00000BC8:
     lwz r0, 0x3c(r1)
     srwi. r0, r0, 31
@@ -968,7 +968,7 @@ lbl_fn_8023C0C0_00000C8C:
     lwz r6, 0x8(r24)
     lwz r0, 0x4(r24)
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8023C0C0_00000CD4:
     cmpwi r29, 0x0
     beq lbl_fn_8023C0C0_00000CF0
@@ -1244,7 +1244,7 @@ lbl_fn_8023C6F4_0000103C:
     bne lbl_fn_8023C6F4_000010BC
 lbl_fn_8023C6F4_00001060:
     li r3, 0x18
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_8023C6F4_00001088
@@ -1505,7 +1505,7 @@ lbl_fn_8023C6F4_000013B4:
     bne lbl_fn_8023C6F4_00001434
 lbl_fn_8023C6F4_000013D8:
     li r3, 0x18
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_8023C6F4_00001400
@@ -1819,7 +1819,7 @@ lbl_fn_8023C6F4_000017E4:
     bne lbl_fn_8023C6F4_00001864
 lbl_fn_8023C6F4_00001808:
     li r3, 0x18
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_8023C6F4_00001830

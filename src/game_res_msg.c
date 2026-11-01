@@ -13,10 +13,10 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_80072914(void);
-extern void fn_800761A8(void);
+extern void gx_applyRenderState(void);
 extern void fn_8022D078(void);
 extern void fn_8022D478(void);
-extern void fn_80234CD8(void);
+extern void font_renderString(void);
 extern void fn_80235BF8(void);
 extern void fn_80238218(void);
 extern void fn_802386FC(void);
@@ -24,12 +24,12 @@ extern void fn_8023A2A8(void);
 extern void fn_8023A340(void);
 extern void fn_804738C4(void);
 extern void fn_80473C20(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_destructor(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
-extern void fn_805F93C0(void);
-extern void fn_805F98D0(void);
+extern void PSMTXMultVec(void);
+extern void PSVECNormalize(void);
 extern void fn_80614790(void);
 extern void fn_80615C40(void);
 extern void fn_8068B770(void);
@@ -77,23 +77,23 @@ extern u32 lbl_80883144;
 /* Function declarations */
 void fn_8023686C(void);
 void fn_802368B0(void);
-void fn_80236938(void);
+void msg_drawText(void);
 void fn_80236B84(void);
 void fn_80236FFC(void);
 void fn_802371AC(void);
 void fn_802371BC(void);
 void fn_80237518(void);
-void fn_8023756C(void);
+void atn_LH_Effect_destructor(void);
 void fn_802375C4(void);
 void fn_80237654(void);
 void fn_802376D0(void);
 void fn_8023772C(void);
 void fn_80237784(void);
 void fn_8023779C(void);
-void fn_802377B8(void);
-void fn_8023780C(void);
-void fn_8023781C(void);
-void fn_80237874(void);
+void res_MsgHandle_constructor(void);
+void res_MsgHandle_destructor(void);
+void res_MsgHandle_unload(void);
+void res_MsgHandle_update(void);
 void fn_802378C4(void);
 void fn_802378E0(void);
 void fn_8023793C(void);
@@ -153,7 +153,7 @@ asm void fn_802368B0(void)
     stfs f1, lbl_8087F390
     stfs f0, lbl_8087F394
     bl fn_8022D478
-    bl fn_80234CD8
+    bl font_renderString
     bl fn_80235BF8
     lwz r3, lbl_8087EEE0
     li r4, 0x0
@@ -166,7 +166,7 @@ asm void fn_802368B0(void)
     blr
 }
 
-asm void fn_80236938(void)
+asm void msg_drawText(void)
 {
     nofralloc
     stwu r1, -0xd0(r1)
@@ -179,14 +179,14 @@ asm void fn_80236938(void)
     mr r29, r4
     mr r30, r6
     mr r31, r7
-    beq lbl_fn_80236938_00000110
+    beq lbl_msg_drawText_00000110
     lwz r3, lbl_8087EFB4
     addi r4, r1, 0x64
     psq_l f1, 0x10c(r3), 0, 0
     lfs f2, 0x114(r3)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x6c(r1)
-lbl_fn_80236938_00000110:
+lbl_msg_drawText_00000110:
     lfs f6, lbl_80883130
     addi r4, r1, 0xc
     lfs f0, 0x0(r5)
@@ -218,7 +218,7 @@ lbl_fn_80236938_00000110:
     stw r0, 0xc(r1)
     bl fn_80615C40
     lwz r3, lbl_8087EEE0
-    bl fn_800761A8
+    bl gx_applyRenderState
     clrlwi r5, r28, 16
     li r3, 0x98
     li r4, 0x0
@@ -232,8 +232,8 @@ lbl_fn_80236938_00000110:
     li r19, 0x0
     li r27, 0x0
     lis r26, 0xcc01
-    b lbl_fn_80236938_000002F8
-lbl_fn_80236938_000001C8:
+    b lbl_msg_drawText_000002F8
+lbl_msg_drawText_000001C8:
     lfsx f4, r29, r27
     add r3, r29, r27
     stfs f4, -0x8000(r26)
@@ -242,7 +242,7 @@ lbl_fn_80236938_000001C8:
     stfs f5, -0x8000(r26)
     lfs f6, 0x8(r3)
     stfs f6, -0x8000(r26)
-    beq lbl_fn_80236938_000002DC
+    beq lbl_msg_drawText_000002DC
     lfs f0, 0x8(r30)
     mr r3, r25
     lfs f3, 0x4(r30)
@@ -260,7 +260,7 @@ lbl_fn_80236938_000001C8:
     stfs f2, 0x30(r1)
     psq_st f1, 0x0(r25), 0, 0
     stfs f2, 0x54(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f3, 0x6c(r1)
     mr r3, r23
     lfs f0, 0x60(r1)
@@ -278,7 +278,7 @@ lbl_fn_80236938_000001C8:
     psq_l f1, 0x0(r22), 0, 0
     psq_st f1, 0x0(r23), 0, 0
     stfs f2, 0x48(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f3, 0x54(r1)
     mr r3, r21
     lfs f0, 0x48(r1)
@@ -296,14 +296,14 @@ lbl_fn_80236938_000001C8:
     psq_l f1, 0x0(r20), 0, 0
     psq_st f1, 0x0(r21), 0, 0
     stfs f2, 0x3c(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f4, 0x3c(r1)
     lfs f3, 0x38(r1)
     lfs f0, 0x34(r1)
     stfs f0, -0x8000(r26)
     stfs f3, -0x8000(r26)
     stfs f4, -0x8000(r26)
-lbl_fn_80236938_000002DC:
+lbl_msg_drawText_000002DC:
     add r3, r29, r27
     addi r19, r19, 0x1
     lfs f0, 0xc(r3)
@@ -311,9 +311,9 @@ lbl_fn_80236938_000002DC:
     stfs f0, -0x8000(r26)
     lfs f0, 0x10(r3)
     stfs f0, -0x8000(r26)
-lbl_fn_80236938_000002F8:
+lbl_msg_drawText_000002F8:
     cmpw r19, r28
-    blt lbl_fn_80236938_000001C8
+    blt lbl_msg_drawText_000001C8
     addi r11, r1, 0xd0
     bl _restgpr_19
     lwz r0, 0xd4(r1)
@@ -493,7 +493,7 @@ lbl_fn_80236B84_00000518:
     mr r4, r23
     mr r5, r23
     stfs f2, 0x1c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0x1c(r1)
     addi r3, r1, 0x2c
     psq_l f1, 0x0(r23), 0, 0
@@ -516,7 +516,7 @@ lbl_fn_80236B84_000005D8:
     mr r5, r22
     stfs f2, 0x10(r1)
     psq_st f1, 0x0(r22), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0x10(r1)
     psq_l f1, 0x0(r22), 0, 0
     fcmpo cr0, f2, f31
@@ -659,7 +659,7 @@ asm void fn_80236FFC(void)
     stfs f8, 0x8(r1)
     stfs f7, 0xc(r1)
     stfs f0, 0x10(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     rlwinm r3, r31, 0, 8, 8
     lfs f11, 0x10(r1)
     subis r0, r3, 0x80
@@ -1016,7 +1016,7 @@ asm void fn_80237518(void)
     mr r30, r3
     stw r0, 0x0(r3)
     mr r3, r31
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r4, lbl_8078FCF8@ha
     mr r3, r30
     addi r4, r4, lbl_8078FCF8@l
@@ -1029,7 +1029,7 @@ asm void fn_80237518(void)
     blr
 }
 
-asm void fn_8023756C(void)
+asm void atn_LH_Effect_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1040,14 +1040,14 @@ asm void fn_8023756C(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_8023756C_00000D3C
+    beq lbl_atn_LH_Effect_destructor_00000D3C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
     cmpwi r31, 0x0
-    ble lbl_fn_8023756C_00000D3C
+    ble lbl_atn_LH_Effect_destructor_00000D3C
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8023756C_00000D3C:
+lbl_atn_LH_Effect_destructor_00000D3C:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1086,7 +1086,7 @@ lbl_fn_802375C4_00000DAC:
     addic. r3, r30, 0x4
     beq lbl_fn_802375C4_00000DBC
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_802375C4_00000DBC:
     cmpwi r31, 0x0
     ble lbl_fn_802375C4_00000DCC
@@ -1149,7 +1149,7 @@ asm void fn_802376D0(void)
     stw r31, 0xc(r1)
     mr r31, r3
     addi r3, r3, 0x4
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_802376D0_00000E90
     li r3, 0x1
@@ -1225,7 +1225,7 @@ lbl_fn_8023779C_00000F44:
     blr
 }
 
-asm void fn_802377B8(void)
+asm void res_MsgHandle_constructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1238,7 +1238,7 @@ asm void fn_802377B8(void)
     mr r30, r3
     stw r0, 0x0(r3)
     mr r3, r31
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r4, lbl_8078FD48@ha
     mr r3, r30
     addi r4, r4, lbl_8078FD48@l
@@ -1251,7 +1251,7 @@ asm void fn_802377B8(void)
     blr
 }
 
-asm void fn_8023780C(void)
+asm void res_MsgHandle_destructor(void)
 {
     nofralloc
     lwzu r12, 0x4(r3)
@@ -1260,7 +1260,7 @@ asm void fn_8023780C(void)
     bctr
 }
 
-asm void fn_8023781C(void)
+asm void res_MsgHandle_unload(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1270,18 +1270,18 @@ asm void fn_8023781C(void)
     mr r31, r3
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8023781C_00000FF4
+    beq lbl_res_MsgHandle_unload_00000FF4
     lwz r3, lbl_8087F3C0
     cmpwi r3, 0x0
-    beq lbl_fn_8023781C_00000FE4
+    beq lbl_res_MsgHandle_unload_00000FE4
     mr r4, r31
     bl fn_8023A340
-lbl_fn_8023781C_00000FE4:
+lbl_res_MsgHandle_unload_00000FE4:
     addi r3, r31, 0x4
     bl fn_80473F88
     li r0, 0x0
     stw r0, 0x0(r31)
-lbl_fn_8023781C_00000FF4:
+lbl_res_MsgHandle_unload_00000FF4:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -1289,7 +1289,7 @@ lbl_fn_8023781C_00000FF4:
     blr
 }
 
-asm void fn_80237874(void)
+asm void res_MsgHandle_update(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1298,17 +1298,17 @@ asm void fn_80237874(void)
     stw r31, 0xc(r1)
     mr r31, r3
     addi r3, r3, 0x4
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
-    bne lbl_fn_80237874_00001040
+    bne lbl_res_MsgHandle_update_00001040
     addi r3, r31, 0x4
     bl fn_80473C20
     stw r3, 0x0(r31)
     li r3, 0x0
-    b lbl_fn_80237874_00001044
-lbl_fn_80237874_00001040:
+    b lbl_res_MsgHandle_update_00001044
+lbl_res_MsgHandle_update_00001040:
     li r3, 0x1
-lbl_fn_80237874_00001044:
+lbl_res_MsgHandle_update_00001044:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

@@ -11,15 +11,15 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
-extern void fn_800D246C(void);
+extern void ref_releaseHandle(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC6B4(void);
-extern void fn_800EF3EC(void);
+extern void str_findChar(void);
+extern void cam_initStickBindings(void);
 extern void fn_801334CC(void);
 extern void fn_801F3FF8(void);
 extern void fn_801F64D0(void);
@@ -33,16 +33,16 @@ extern void fn_80207C34(void);
 extern void fn_802375C4(void);
 extern void fn_802376D0(void);
 extern void fn_8023772C(void);
-extern void fn_8023781C(void);
-extern void fn_80237874(void);
-extern void fn_80370174(void);
+extern void res_MsgHandle_unload(void);
+extern void res_MsgHandle_update(void);
+extern void world_getGlobalFlag(void);
 extern void fn_803E5E64(void);
 extern void fn_804439FC(void);
 extern void fn_80444020(void);
 extern void fn_80444CF8(void);
-extern void fn_80473E8C(void);
-extern void fn_80473F18(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_destructor(void);
+extern void atn_LoadHandle_getName(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_80695A50(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -72,7 +72,7 @@ extern u32 lbl_808813C8;
 extern u32 lbl_808813CC;
 
 /* Function declarations */
-void fn_800EF7A0(void);
+void atn_LH_Xsca_destructor(void);
 void fn_800EF7F8(void);
 void fn_800EF8DC(void);
 void fn_800EF91C(void);
@@ -93,7 +93,7 @@ void fn_800F03C4(void);
 void fn_800F0BC0(void);
 void fn_800F0D14(void);
 
-asm void fn_800EF7A0(void)
+asm void atn_LH_Xsca_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -104,14 +104,14 @@ asm void fn_800EF7A0(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_800EF7A0_0000003C
+    beq lbl_atn_LH_Xsca_destructor_0000003C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
     cmpwi r31, 0x0
-    ble lbl_fn_800EF7A0_0000003C
+    ble lbl_atn_LH_Xsca_destructor_0000003C
     mr r3, r30
     bl dtor_80084684
-lbl_fn_800EF7A0_0000003C:
+lbl_atn_LH_Xsca_destructor_0000003C:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -137,21 +137,21 @@ asm void fn_800EF7F8(void)
     addic. r3, r3, 0x3c
     beq lbl_fn_800EF7F8_00000090
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800EF7F8_00000090:
     addic. r3, r29, 0x34
     beq lbl_fn_800EF7F8_000000A0
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800EF7F8_000000A0:
     addic. r31, r29, 0x28
     beq lbl_fn_800EF7F8_000000C0
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_800EF7F8_000000C0
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800EF7F8_000000C0:
     addi r3, r29, 0x1c
     li r4, -0x1
@@ -159,20 +159,20 @@ lbl_fn_800EF7F8_000000C0:
     addic. r31, r29, 0x10
     beq lbl_fn_800EF7F8_000000EC
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_800EF7F8_000000EC
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800EF7F8_000000EC:
     addic. r31, r29, 0x4
     beq lbl_fn_800EF7F8_0000010C
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_800EF7F8_0000010C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800EF7F8_0000010C:
     cmpwi r30, 0x0
     ble lbl_fn_800EF7F8_0000011C
@@ -227,14 +227,14 @@ lbl_fn_800EF91C_000001A0:
     lwz r0, lbl_8087F030
     add r29, r0, r31
     addi r3, r29, 0x4
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     beq lbl_fn_800EF91C_000001C0
     li r0, 0x1
     b lbl_fn_800EF91C_00000234
 lbl_fn_800EF91C_000001C0:
     addi r3, r29, 0x10
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     beq lbl_fn_800EF91C_000001D8
     li r0, 0x1
@@ -248,21 +248,21 @@ lbl_fn_800EF91C_000001D8:
     b lbl_fn_800EF91C_00000234
 lbl_fn_800EF91C_000001F0:
     addi r3, r29, 0x28
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     beq lbl_fn_800EF91C_00000208
     li r0, 0x1
     b lbl_fn_800EF91C_00000234
 lbl_fn_800EF91C_00000208:
     addi r3, r29, 0x34
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_800EF91C_00000220
     li r0, 0x1
     b lbl_fn_800EF91C_00000234
 lbl_fn_800EF91C_00000220:
     addi r3, r29, 0x3c
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     neg r0, r3
     or r0, r0, r3
     srwi r0, r0, 31
@@ -332,13 +332,13 @@ lbl_fn_800EFA18_000002D4:
     beq lbl_fn_800EFA18_000003A4
     stw r31, 0x44(r28)
     addi r3, r28, 0x4
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addi r3, r28, 0x10
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addi r3, r28, 0x1c
     bl fn_8023772C
     addi r3, r28, 0x28
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addi r3, r28, 0x34
     bl fn_80473F88
     addi r3, r28, 0x3c
@@ -357,13 +357,13 @@ lbl_fn_800EFA18_0000033C:
     beq lbl_fn_800EFA18_000003A4
     stw r31, 0x44(r28)
     addi r3, r28, 0x4
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addi r3, r28, 0x10
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addi r3, r28, 0x1c
     bl fn_8023772C
     addi r3, r28, 0x28
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addi r3, r28, 0x34
     bl fn_80473F88
     addi r3, r28, 0x3c
@@ -371,7 +371,7 @@ lbl_fn_800EFA18_0000033C:
     b lbl_fn_800EFA18_000003A4
 lbl_fn_800EFA18_0000039C:
     mr r3, r28
-    bl fn_800EF3EC
+    bl cam_initStickBindings
 lbl_fn_800EFA18_000003A4:
     addi r30, r30, 0x48
     addi r29, r29, 0x1
@@ -449,11 +449,11 @@ lbl_fn_800EFBC4_0000047C:
     cmpwi r31, 0x0
     beq lbl_fn_800EFBC4_000004AC
     addi r3, r31, 0x4
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_800EFBC4_000004AC
     addi r3, r31, 0x8
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     cmpwi r3, 0x0
     beq lbl_fn_800EFBC4_000004AC
     addi r3, r31, 0x4
@@ -500,11 +500,11 @@ lbl_fn_800EFC64_0000051C:
     cmpwi r31, 0x0
     beq lbl_fn_800EFC64_0000054C
     addi r3, r31, 0x10
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_800EFC64_0000054C
     addi r3, r31, 0x14
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     cmpwi r3, 0x0
     beq lbl_fn_800EFC64_0000054C
     addi r3, r31, 0x10
@@ -601,7 +601,7 @@ lbl_fn_800EFDA0_00000658:
     cmpwi r31, 0x0
     beq lbl_fn_800EFDA0_00000684
     addi r3, r31, 0x28
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_800EFDA0_00000684
     lwz r0, 0x28(r31)
@@ -743,7 +743,7 @@ asm void fn_800EFF68(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_800EFF68_0000081C
     mr r4, r31
@@ -768,7 +768,7 @@ asm void fn_800EFFD8(void)
     addi r11, r1, 0x30
     bl _savegpr_25
     mr r31, r3
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lfs f0, lbl_808813B8
     lis r3, lbl_80779CA8@ha
     li r0, 0x0
@@ -788,7 +788,7 @@ asm void fn_800EFFD8(void)
     bl fn_801F3FF8
     stw r3, 0x50(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     addi r29, r30, 0x25
     addi r28, r30, 0x48
     addi r27, r30, 0x6d
@@ -802,28 +802,28 @@ lbl_fn_800EFFD8_000008BC:
     add r5, r31, r26
     li r4, 0x1
     stw r3, 0x54(r5)
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r31
     mr r4, r28
     bl fn_801F64D0
     add r5, r31, r26
     li r4, 0x1
     stw r3, 0x70(r5)
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r31
     mr r4, r27
     bl fn_801F64D0
     add r5, r31, r26
     li r4, 0x1
     stw r3, 0x8c(r5)
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r31
     mr r4, r30
     bl fn_801F64D0
     add r5, r31, r26
     li r4, 0x1
     stw r3, 0xa8(r5)
-    bl fn_800D246C
+    bl atn_Task_setActive
     addi r25, r25, 0x1
     addi r26, r26, 0x4
     cmplwi r25, 0x7
@@ -835,13 +835,13 @@ lbl_fn_800EFFD8_000008BC:
     bl fn_801F64D0
     stw r3, 0x17c(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0xe1
     bl fn_801F64D0
     stw r3, 0x180(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     addi r3, r31, 0xc4
     li r4, 0x0
     li r5, 0x1c
@@ -877,7 +877,7 @@ asm void fn_800F015C(void)
     li r0, 0x0
     stw r0, lbl_8087F040
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r31, 0x0
     ble lbl_fn_800F015C_00000A00
     mr r3, r30
@@ -914,7 +914,7 @@ asm void fn_800F01BC(void)
     lwz r3, 0x50(r27)
     ori r0, r0, 0x4
     stw r0, 0x38(r27)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r4, 0x50(r27)
     lis r3, lbl_80735440@ha
     lis r30, lbl_80735460@ha
@@ -940,7 +940,7 @@ lbl_fn_800F01BC_00000AAC:
     bl fn_801F6C80
     lwz r3, 0x54(r29)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x54(r29)
     addi r4, r30, 0x107
     stw r28, 0x14(r1)
@@ -955,7 +955,7 @@ lbl_fn_800F01BC_00000AAC:
     bl fn_801F6C80
     lwz r3, 0x70(r29)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x70(r29)
     addi r4, r30, 0x107
     stw r28, 0xc(r1)
@@ -970,7 +970,7 @@ lbl_fn_800F01BC_00000AAC:
     bl fn_801F6C80
     lwz r3, 0x8c(r29)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x8c(r29)
     addi r4, r30, 0x107
     stw r28, 0x14(r1)
@@ -985,7 +985,7 @@ lbl_fn_800F01BC_00000AAC:
     bl fn_801F6C80
     lwz r3, 0xa8(r29)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0xa8(r29)
     addi r28, r28, 0x1
     cmplwi r28, 0x7
@@ -996,7 +996,7 @@ lbl_fn_800F01BC_00000AAC:
     blt lbl_fn_800F01BC_00000AAC
     lwz r3, 0x17c(r27)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x17c(r27)
     li r28, 0x0
     li r4, 0x0
@@ -1006,7 +1006,7 @@ lbl_fn_800F01BC_00000AAC:
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, 0x180(r27)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r4, 0x180(r27)
     li r0, 0x1
     li r3, 0x1
@@ -1712,7 +1712,7 @@ asm void fn_800F0D14(void)
     bl fn_800C31F4
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r0, 0x38(r23)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
@@ -1750,7 +1750,7 @@ lbl_fn_800F0D14_00001668:
     addi r22, r3, lbl_80735460@l
     addi r3, r22, 0x128
     addi r24, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f29
     mr r4, r3
     mr r3, r24
@@ -2038,7 +2038,7 @@ lbl_fn_800F0D14_00001AA8:
     cmpwi r3, 0x0
     beq lbl_fn_800F0D14_00001B50
     li r4, 0x11b
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     ble lbl_fn_800F0D14_00001B50
     lwz r0, 0x170(r23)

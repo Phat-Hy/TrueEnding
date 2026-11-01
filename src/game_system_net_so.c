@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_8004ED34(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800F52F8(void);
 extern void fn_800F84C8(void);
 extern void fn_800F8524(void);
@@ -40,8 +40,8 @@ extern void fn_80390374(void);
 extern void fn_803903C4(void);
 extern void fn_803903CC(void);
 extern void fn_803C2048(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9940(void);
+extern void PSVECNormalize(void);
+extern void PSVECMag(void);
 
 /* External data declarations */
 extern u8 jumptable_8078A528[];
@@ -232,7 +232,7 @@ lbl_fn_8038E540_00000164:
     stfs f0, 0x5c(r1)
     stfs f6, 0x60(r1)
     stfs f4, 0x64(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f4, 0x64(r1)
     lis r27, 0x800
     lfs f3, 0x60(r1)
@@ -313,14 +313,14 @@ lbl_fn_8038E540_0000026C:
     stfs f0, 0x44(r1)
     stfs f3, 0x48(r1)
     stfs f4, 0x4c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f3, lbl_80885974
     fcmpo cr0, f3, f1
     bge lbl_fn_8038E540_00000314
     b lbl_fn_8038E540_00000320
 lbl_fn_8038E540_00000314:
     addi r3, r1, 0x44
-    bl fn_805F9940
+    bl PSVECMag
     fmr f3, f1
 lbl_fn_8038E540_00000320:
     lfs f0, 0x54(r1)
@@ -490,7 +490,7 @@ lbl_fn_8038E9B0_000004EC:
     stfs f0, 0xc8(r1)
     stfs f6, 0xcc(r1)
     stfs f4, 0xd0(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f4, 0xd0(r1)
     lis r7, 0x8000
     lfs f3, 0xcc(r1)
@@ -547,14 +547,14 @@ lbl_fn_8038E9B0_000004EC:
     stfs f0, 0xb0(r1)
     stfs f3, 0xb4(r1)
     stfs f4, 0xb8(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f3, lbl_80885974
     fcmpo cr0, f3, f1
     bge lbl_fn_8038E9B0_0000067C
     b lbl_fn_8038E9B0_00000688
 lbl_fn_8038E9B0_0000067C:
     addi r3, r1, 0xb0
-    bl fn_805F9940
+    bl PSVECMag
     fmr f3, f1
 lbl_fn_8038E9B0_00000688:
     lfs f0, 0xc0(r1)
@@ -611,7 +611,7 @@ lbl_fn_8038E9B0_000006C0:
     stfs f0, 0x80(r1)
     stfs f6, 0x84(r1)
     stfs f4, 0x88(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f4, 0x88(r1)
     li r28, 0x0
     lfs f3, 0x84(r1)
@@ -670,14 +670,14 @@ lbl_fn_8038E9B0_000007A8:
     stfs f0, 0x68(r1)
     stfs f3, 0x6c(r1)
     stfs f4, 0x70(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f3, lbl_80885974
     fcmpo cr0, f3, f1
     bge lbl_fn_8038E9B0_00000850
     b lbl_fn_8038E9B0_0000085C
 lbl_fn_8038E9B0_00000850:
     addi r3, r1, 0x68
-    bl fn_805F9940
+    bl PSVECMag
     fmr f3, f1
 lbl_fn_8038E9B0_0000085C:
     lfs f0, 0x78(r1)
@@ -1254,7 +1254,7 @@ lbl_fn_8038F52C_0000109C:
     mr r3, r30
     bl fn_800F84C8
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     addi r3, r1, 0x1cc
     addi r4, r29, 0x51c
     bl fn_8037E964
@@ -1439,7 +1439,7 @@ lbl_fn_8038F52C_00001268:
     mr r3, r30
     bl fn_800F84C8
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fmr f31, f1
     addi r3, r1, 0x118
     addi r4, r29, 0x51c
@@ -2012,7 +2012,7 @@ lbl_fn_8038F52C_00001B80:
     mr r3, r30
     bl fn_800F84C8
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_8088597C
     mr r3, r30
     fsubs f30, f1, f0
@@ -2024,7 +2024,7 @@ lbl_fn_8038F52C_00001B80:
     mr r3, r30
     bl fn_800F84C8
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_8088597C
     mr r3, r30
     fsubs f30, f1, f0
@@ -2042,7 +2042,7 @@ lbl_fn_8038F52C_00001C48:
     mr r3, r30
     bl fn_800F84C8
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_8088597C
     mr r3, r30
     fsubs f30, f1, f0

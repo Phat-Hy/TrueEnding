@@ -27,7 +27,7 @@ extern void fn_801240B4(void);
 extern void fn_801248DC(void);
 extern void fn_80124BE4(void);
 extern void fn_8017C974(void);
-extern void fn_80370174(void);
+extern void world_getGlobalFlag(void);
 
 /* External data declarations */
 extern u8 jumptable_8077A228[];
@@ -52,17 +52,17 @@ extern u32 lbl_80881834;
 /* Function declarations */
 void fn_801222D4(void);
 void fn_80122330(void);
-void fn_80122550(void);
-void fn_80122558(void);
-void fn_80122560(void);
+void* magic_getOffset6C(void* ptr);
+void* magic_getOffset51C(void* ptr);
+void f32_abs(void);
 void fn_8012256C(void);
 void fn_80122C70(void);
-void fn_801231B0(void);
-void fn_801231B8(void);
-void fn_801231C8(void);
-void fn_801231D0(void);
-void fn_801237E0(void);
-void fn_801237E8(void);
+void* magic_getOffset244(void* ptr);
+u32 magic_isField28Zero(void* ptr);
+u32 magic_getField20(void* ptr);
+void magic_dispatchActionCommand(void);
+u32 magic_getField8(void* ptr);
+void* magic_getOffset78(void* ptr);
 void fn_801237F0(void);
 
 asm void fn_801222D4(void)
@@ -182,16 +182,16 @@ lbl_fn_80122330_00000178:
     cmpwi r3, 0x0
     beq lbl_fn_80122330_000001C4
     bl fn_80121F00
-    bl fn_80122550
+    bl magic_getOffset6C
     mr r30, r3
-    bl fn_80122558
+    bl magic_getOffset51C
     lfs f2, 0xc(r3)
     mr r3, r30
     lfs f1, lbl_8088181C
     lfs f0, lbl_80881820
     fdivs f31, f2, f1
     fmuls f31, f31, f0
-    bl fn_80122558
+    bl magic_getOffset51C
     lfs f1, 0x0(r3)
     lfs f0, lbl_80881824
     fdivs f0, f0, f1
@@ -225,7 +225,7 @@ lbl_fn_80122330_00000204:
     lfs f0, 0xc(r31)
     fsubs f1, f31, f0
     bl fn_800133B0
-    bl fn_80122560
+    bl f32_abs
     lfs f0, lbl_8088182C
     fcmpo cr0, f1, f0
     ble lbl_fn_80122330_00000244
@@ -249,21 +249,17 @@ lbl_fn_80122330_0000025C:
     blr
 }
 
-asm void fn_80122550(void)
+void* magic_getOffset6C(void* ptr)
 {
-    nofralloc
-    addi r3, r3, 0x6c
-    blr
+    return (char*)ptr + 0x6c;
 }
 
-asm void fn_80122558(void)
+void* magic_getOffset51C(void* ptr)
 {
-    nofralloc
-    addi r3, r3, 0x51c
-    blr
+    return (char*)ptr + 0x51c;
 }
 
-asm void fn_80122560(void)
+asm void f32_abs(void)
 {
     nofralloc
     fabs f0, f1
@@ -953,7 +949,7 @@ lbl_fn_80122C70_00000BB0:
     cmpwi r3, 0x0
     beq lbl_fn_80122C70_00000C04
     li r4, 0xd0
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     beq lbl_fn_80122C70_00000C04
     li r31, 0x0
@@ -969,7 +965,7 @@ lbl_fn_80122C70_00000C18:
     cmpwi r3, 0x0
     beq lbl_fn_80122C70_00000C3C
     li r4, 0xd0
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     beq lbl_fn_80122C70_00000C3C
     li r31, 0x0
@@ -1149,30 +1145,22 @@ lbl_fn_80122C70_00000EC8:
     blr
 }
 
-asm void fn_801231B0(void)
+void* magic_getOffset244(void* ptr)
 {
-    nofralloc
-    addi r3, r3, 0x244
-    blr
+    return (char*)ptr + 0x244;
 }
 
-asm void fn_801231B8(void)
+u32 magic_isField28Zero(void* ptr)
 {
-    nofralloc
-    lwz r0, 0x28(r3)
-    cntlzw r0, r0
-    srwi r3, r0, 5
-    blr
+    return *(u32*)((char*)ptr + 0x28) == 0;
 }
 
-asm void fn_801231C8(void)
+u32 magic_getField20(void* ptr)
 {
-    nofralloc
-    lwz r3, 0x20(r3)
-    blr
+    return *(u32*)((char*)ptr + 0x20);
 }
 
-asm void fn_801231D0(void)
+asm void magic_dispatchActionCommand(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -1186,10 +1174,10 @@ asm void fn_801231D0(void)
     stw r29, 0x14(r1)
     mr r29, r3
     bl fn_800F52F8
-    bl fn_801231B0
+    bl magic_getOffset244
     subi r0, r30, 0x4
     cmplwi r0, 0x2b
-    bgt lbl_fn_801231D0_000014CC
+    bgt lbl_magic_dispatchActionCommand_000014CC
     lis r4, jumptable_8077A300@ha
     slwi r0, r0, 2
     addi r4, r4, jumptable_8077A300@l
@@ -1201,158 +1189,158 @@ asm void fn_801231D0(void)
     bl fn_80122C70
     li r4, 0x1
     bl fn_80121F08
-    b lbl_fn_801231D0_000014E8
+    b lbl_magic_dispatchActionCommand_000014E8
     bl fn_801156BC
     li r4, 0x0
     bl fn_800A58D0
     cmpwi r3, 0x0
-    beq lbl_fn_801231D0_00000FB8
+    beq lbl_magic_dispatchActionCommand_00000FB8
     li r31, 0x0
     li r3, 0xb
     li r4, 0x1
     bl fn_80121F08
     cmpwi r3, 0x0
-    bne lbl_fn_801231D0_00000FB0
+    bne lbl_magic_dispatchActionCommand_00000FB0
     mr r3, r29
     mr r4, r30
     bl fn_80122C70
     li r4, 0x1
     bl fn_80121F08
     cmpwi r3, 0x0
-    beq lbl_fn_801231D0_00000FD0
-lbl_fn_801231D0_00000FB0:
+    beq lbl_magic_dispatchActionCommand_00000FD0
+lbl_magic_dispatchActionCommand_00000FB0:
     li r31, 0x1
-    b lbl_fn_801231D0_00000FD0
-lbl_fn_801231D0_00000FB8:
+    b lbl_magic_dispatchActionCommand_00000FD0
+lbl_magic_dispatchActionCommand_00000FB8:
     mr r3, r29
     mr r4, r30
     bl fn_80122C70
     li r4, 0x1
     bl fn_80121F08
     mr r31, r3
-lbl_fn_801231D0_00000FD0:
+lbl_magic_dispatchActionCommand_00000FD0:
     mr r3, r31
-    b lbl_fn_801231D0_000014E8
+    b lbl_magic_dispatchActionCommand_000014E8
     bl fn_801156C4
     bl fn_80122280
     lwz r0, 0x10(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_801231D0_00001018
+    bne lbl_magic_dispatchActionCommand_00001018
     li r31, 0x0
     li r3, 0x9
     li r4, 0x1
     bl fn_8012216C
     cmpwi r3, 0x0
-    beq lbl_fn_801231D0_00001040
+    beq lbl_magic_dispatchActionCommand_00001040
     lwz r0, 0x0(r29)
     cmpwi r0, 0xa
-    bne lbl_fn_801231D0_00001040
+    bne lbl_magic_dispatchActionCommand_00001040
     li r31, 0x1
-    b lbl_fn_801231D0_00001040
-lbl_fn_801231D0_00001018:
+    b lbl_magic_dispatchActionCommand_00001040
+lbl_magic_dispatchActionCommand_00001018:
     li r31, 0x0
     li r3, 0x6
     li r4, 0x1
     bl fn_8012216C
     cmpwi r3, 0x0
-    beq lbl_fn_801231D0_00001040
+    beq lbl_magic_dispatchActionCommand_00001040
     lwz r0, 0x0(r29)
     cmpwi r0, 0xa
-    bne lbl_fn_801231D0_00001040
+    bne lbl_magic_dispatchActionCommand_00001040
     li r31, 0x1
-lbl_fn_801231D0_00001040:
+lbl_magic_dispatchActionCommand_00001040:
     mr r3, r31
-    b lbl_fn_801231D0_000014E8
+    b lbl_magic_dispatchActionCommand_000014E8
     bl fn_801156C4
     bl fn_80122280
     lwz r0, 0x8(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_801231D0_00001068
+    beq lbl_magic_dispatchActionCommand_00001068
     cmpwi r0, 0x1
-    beq lbl_fn_801231D0_000010D8
-    b lbl_fn_801231D0_000014E4
-lbl_fn_801231D0_00001068:
+    beq lbl_magic_dispatchActionCommand_000010D8
+    b lbl_magic_dispatchActionCommand_000014E4
+lbl_magic_dispatchActionCommand_00001068:
     bl fn_80122238
     li r4, 0x1
     bl fn_80121F08
     cmpwi r3, 0x0
-    beq lbl_fn_801231D0_0000109C
+    beq lbl_magic_dispatchActionCommand_0000109C
     mr r3, r29
     li r4, 0x0
     bl fn_801248DC
     lfs f0, lbl_80881828
     fcmpo cr0, f1, f0
-    ble lbl_fn_801231D0_0000109C
+    ble lbl_magic_dispatchActionCommand_0000109C
     li r3, 0x1
-    b lbl_fn_801231D0_000014E8
-lbl_fn_801231D0_0000109C:
+    b lbl_magic_dispatchActionCommand_000014E8
+lbl_magic_dispatchActionCommand_0000109C:
     mr r3, r29
     mr r4, r30
     bl fn_80122C70
     li r4, 0x1
     bl fn_80121F08
     cmpwi r3, 0x0
-    beq lbl_fn_801231D0_000014E4
+    beq lbl_magic_dispatchActionCommand_000014E4
     mr r3, r29
     li r4, 0x0
     bl fn_801248DC
     lfs f0, lbl_80881828
     fcmpo cr0, f1, f0
-    ble lbl_fn_801231D0_000014E4
+    ble lbl_magic_dispatchActionCommand_000014E4
     li r3, 0x1
-    b lbl_fn_801231D0_000014E8
-lbl_fn_801231D0_000010D8:
+    b lbl_magic_dispatchActionCommand_000014E8
+lbl_magic_dispatchActionCommand_000010D8:
     bl fn_80122238
     li r4, 0x1
     bl fn_80121F08
     cmpwi r3, 0x0
-    beq lbl_fn_801231D0_0000110C
+    beq lbl_magic_dispatchActionCommand_0000110C
     mr r3, r29
     li r4, 0x0
     bl fn_801248DC
     lfs f0, lbl_80881828
     fcmpo cr0, f1, f0
-    ble lbl_fn_801231D0_0000110C
+    ble lbl_magic_dispatchActionCommand_0000110C
     li r3, 0x1
-    b lbl_fn_801231D0_000014E8
-lbl_fn_801231D0_0000110C:
+    b lbl_magic_dispatchActionCommand_000014E8
+lbl_magic_dispatchActionCommand_0000110C:
     mr r3, r29
     li r4, 0x0
     bl fn_801248DC
     lfs f0, lbl_80881828
     fcmpo cr0, f1, f0
-    ble lbl_fn_801231D0_000014E4
+    ble lbl_magic_dispatchActionCommand_000014E4
     mr r3, r29
     li r31, 0x0
     li r4, 0x7
     bl fn_801240B4
     cmpwi r3, 0x0
-    beq lbl_fn_801231D0_00001158
+    beq lbl_magic_dispatchActionCommand_00001158
     mr r3, r29
     mr r4, r30
     bl fn_80122C70
     li r4, 0x1
     bl fn_80121F08
     cmpwi r3, 0x0
-    bne lbl_fn_801231D0_00001188
-lbl_fn_801231D0_00001158:
+    bne lbl_magic_dispatchActionCommand_00001188
+lbl_magic_dispatchActionCommand_00001158:
     mr r3, r29
     mr r4, r30
     bl fn_80122C70
     li r4, 0x1
     bl fn_8012216C
     cmpwi r3, 0x0
-    beq lbl_fn_801231D0_0000118C
+    beq lbl_magic_dispatchActionCommand_0000118C
     mr r3, r29
     li r4, 0x7
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
-    beq lbl_fn_801231D0_0000118C
-lbl_fn_801231D0_00001188:
+    beq lbl_magic_dispatchActionCommand_0000118C
+lbl_magic_dispatchActionCommand_00001188:
     li r31, 0x1
-lbl_fn_801231D0_0000118C:
+lbl_magic_dispatchActionCommand_0000118C:
     mr r3, r31
-    b lbl_fn_801231D0_000014E8
+    b lbl_magic_dispatchActionCommand_000014E8
     bl fn_801156BC
     li r4, 0x0
     li r5, 0x4
@@ -1361,70 +1349,70 @@ lbl_fn_801231D0_0000118C:
     bl fn_80013404
     lfs f0, lbl_80881830
     fcmpo cr0, f1, f0
-    ble lbl_fn_801231D0_000011D0
+    ble lbl_magic_dispatchActionCommand_000011D0
     bl fn_801156C4
-    bl fn_801237E0
+    bl magic_getField8
     cmpwi r3, 0x0
-    beq lbl_fn_801231D0_000011D0
+    beq lbl_magic_dispatchActionCommand_000011D0
     li r3, 0x1
-    b lbl_fn_801231D0_000014E8
-lbl_fn_801231D0_000011D0:
+    b lbl_magic_dispatchActionCommand_000014E8
+lbl_magic_dispatchActionCommand_000011D0:
     mr r3, r29
     mr r4, r30
     bl fn_80122C70
     li r4, 0x1
     bl fn_80121F08
-    b lbl_fn_801231D0_000014E8
+    b lbl_magic_dispatchActionCommand_000014E8
     mr r3, r29
     li r4, 0x1
     bl fn_80122C70
     li r4, 0x1
     bl fn_80121F08
     cmpwi r3, 0x0
-    beq lbl_fn_801231D0_000014E4
+    beq lbl_magic_dispatchActionCommand_000014E4
     li r3, 0x1
-    b lbl_fn_801231D0_000014E8
+    b lbl_magic_dispatchActionCommand_000014E8
     mr r3, r29
     li r4, 0x0
     bl fn_80122C70
     li r4, 0x1
     bl fn_80121F08
     cmpwi r3, 0x0
-    bne lbl_fn_801231D0_000014E4
+    bne lbl_magic_dispatchActionCommand_000014E4
     mr r3, r29
     li r4, 0x0
     bl fn_80122C70
     li r4, 0x1
     bl fn_80121FD4
     cmpwi r3, 0x0
-    beq lbl_fn_801231D0_000014E4
+    beq lbl_magic_dispatchActionCommand_000014E4
     li r3, 0x1
-    b lbl_fn_801231D0_000014E8
+    b lbl_magic_dispatchActionCommand_000014E8
     lwz r0, 0x38(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_801231D0_000012A8
+    beq lbl_magic_dispatchActionCommand_000012A8
     bl fn_801156C4
-    bl fn_801231B8
+    bl magic_isField28Zero
     cmpwi r3, 0x0
-    bne lbl_fn_801231D0_00001290
+    bne lbl_magic_dispatchActionCommand_00001290
     lbz r0, 0x2a(r29)
     cmpwi r0, 0x0
-    bne lbl_fn_801231D0_00001290
+    bne lbl_magic_dispatchActionCommand_00001290
     bl fn_80122238
     li r4, 0x1
     bl fn_8012216C
     cmpwi r3, 0x0
-    beq lbl_fn_801231D0_00001290
+    beq lbl_magic_dispatchActionCommand_00001290
     li r3, 0x1
-    b lbl_fn_801231D0_000014E8
-lbl_fn_801231D0_00001290:
+    b lbl_magic_dispatchActionCommand_000014E8
+lbl_magic_dispatchActionCommand_00001290:
     mr r3, r29
     li r4, 0x20
     bl fn_80122C70
     li r4, 0x1
     bl fn_80121F08
-    b lbl_fn_801231D0_000014E8
-lbl_fn_801231D0_000012A8:
+    b lbl_magic_dispatchActionCommand_000014E8
+lbl_magic_dispatchActionCommand_000012A8:
     bl fn_801156BC
     li r4, 0x0
     li r5, 0x6
@@ -1441,37 +1429,37 @@ lbl_fn_801231D0_000012A8:
     fcmpo cr0, f31, f0
     mfcr r3
     extrwi r3, r3, 1, 1
-    b lbl_fn_801231D0_000014E8
+    b lbl_magic_dispatchActionCommand_000014E8
     lwz r0, 0x38(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_801231D0_00001358
+    beq lbl_magic_dispatchActionCommand_00001358
     bl fn_801156C4
-    bl fn_801231B8
+    bl magic_isField28Zero
     cmpwi r3, 0x0
-    beq lbl_fn_801231D0_00001320
+    beq lbl_magic_dispatchActionCommand_00001320
     li r3, 0x4
     li r4, 0x1
     bl fn_8012216C
     cntlzw r0, r3
     srwi r31, r0, 5
-    b lbl_fn_801231D0_00001350
-lbl_fn_801231D0_00001320:
+    b lbl_magic_dispatchActionCommand_00001350
+lbl_magic_dispatchActionCommand_00001320:
     li r31, 0x0
     bl fn_80122238
     li r4, 0x1
     bl fn_8012216C
     cmpwi r3, 0x0
-    bne lbl_fn_801231D0_00001350
+    bne lbl_magic_dispatchActionCommand_00001350
     li r3, 0x4
     li r4, 0x1
     bl fn_8012216C
     cmpwi r3, 0x0
-    bne lbl_fn_801231D0_00001350
+    bne lbl_magic_dispatchActionCommand_00001350
     li r31, 0x1
-lbl_fn_801231D0_00001350:
+lbl_magic_dispatchActionCommand_00001350:
     mr r3, r31
-    b lbl_fn_801231D0_000014E8
-lbl_fn_801231D0_00001358:
+    b lbl_magic_dispatchActionCommand_000014E8
+lbl_magic_dispatchActionCommand_00001358:
     bl fn_801156BC
     li r4, 0x0
     li r5, 0x6
@@ -1481,24 +1469,24 @@ lbl_fn_801231D0_00001358:
     fcmpo cr0, f1, f0
     mfcr r3
     extrwi r3, r3, 1, 1
-    b lbl_fn_801231D0_000014E8
+    b lbl_magic_dispatchActionCommand_000014E8
     li r31, 0x0
     li r3, 0x4
     li r4, 0x1
     bl fn_8012216C
     cmpwi r3, 0x0
-    beq lbl_fn_801231D0_000013A8
+    beq lbl_magic_dispatchActionCommand_000013A8
     lwz r0, 0x8(r29)
     cmpwi r0, 0x8
-    bne lbl_fn_801231D0_000013A8
+    bne lbl_magic_dispatchActionCommand_000013A8
     li r31, 0x1
-lbl_fn_801231D0_000013A8:
+lbl_magic_dispatchActionCommand_000013A8:
     mr r3, r31
-    b lbl_fn_801231D0_000014E8
+    b lbl_magic_dispatchActionCommand_000014E8
     bl fn_801156C4
-    bl fn_801231C8
+    bl magic_getField20
     cmpwi r3, 0x2
-    bne lbl_fn_801231D0_000013F4
+    bne lbl_magic_dispatchActionCommand_000013F4
     mr r3, r29
     mr r4, r30
     li r31, 0x0
@@ -1506,38 +1494,38 @@ lbl_fn_801231D0_000013A8:
     li r4, 0x1
     bl fn_801220A0
     cmpwi r3, 0x0
-    beq lbl_fn_801231D0_0000140C
+    beq lbl_magic_dispatchActionCommand_0000140C
     lwz r0, 0x4(r29)
     cmpwi r0, 0x7
-    bge lbl_fn_801231D0_0000140C
+    bge lbl_magic_dispatchActionCommand_0000140C
     li r31, 0x1
-    b lbl_fn_801231D0_0000140C
-lbl_fn_801231D0_000013F4:
+    b lbl_magic_dispatchActionCommand_0000140C
+lbl_magic_dispatchActionCommand_000013F4:
     mr r3, r29
     mr r4, r30
     bl fn_80122C70
     li r4, 0x1
     bl fn_80121F08
     mr r31, r3
-lbl_fn_801231D0_0000140C:
+lbl_magic_dispatchActionCommand_0000140C:
     mr r3, r31
-    b lbl_fn_801231D0_000014E8
+    b lbl_magic_dispatchActionCommand_000014E8
     li r31, 0x0
     li r3, 0x6
     li r4, 0x1
     bl fn_80121F08
     cmpwi r3, 0x0
-    bne lbl_fn_801231D0_00001440
+    bne lbl_magic_dispatchActionCommand_00001440
     li r3, 0x9
     li r4, 0x1
     bl fn_80121F08
     cmpwi r3, 0x0
-    beq lbl_fn_801231D0_00001444
-lbl_fn_801231D0_00001440:
+    beq lbl_magic_dispatchActionCommand_00001444
+lbl_magic_dispatchActionCommand_00001440:
     li r31, 0x1
-lbl_fn_801231D0_00001444:
+lbl_magic_dispatchActionCommand_00001444:
     mr r3, r31
-    b lbl_fn_801231D0_000014E8
+    b lbl_magic_dispatchActionCommand_000014E8
     mr r3, r29
     mr r4, r30
     bl fn_80122C70
@@ -1549,38 +1537,38 @@ lbl_fn_801231D0_00001444:
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
-    b lbl_fn_801231D0_000014E8
+    b lbl_magic_dispatchActionCommand_000014E8
     bl fn_801156C4
-    bl fn_801237E8
+    bl magic_getOffset78
     lwz r3, 0x8(r3)
     subi r0, r3, 0x1
     cmplwi r0, 0x1
-    ble lbl_fn_801231D0_0000149C
+    ble lbl_magic_dispatchActionCommand_0000149C
     li r3, 0x0
-    b lbl_fn_801231D0_000014E8
-lbl_fn_801231D0_0000149C:
+    b lbl_magic_dispatchActionCommand_000014E8
+lbl_magic_dispatchActionCommand_0000149C:
     mr r3, r29
     mr r4, r30
     bl fn_80122C70
     li r4, 0x1
     bl fn_80121F08
-    b lbl_fn_801231D0_000014E8
+    b lbl_magic_dispatchActionCommand_000014E8
     mr r3, r29
     mr r4, r30
     bl fn_80122C70
     li r4, 0x0
     bl fn_80121F08
-    b lbl_fn_801231D0_000014E8
-lbl_fn_801231D0_000014CC:
+    b lbl_magic_dispatchActionCommand_000014E8
+lbl_magic_dispatchActionCommand_000014CC:
     mr r3, r29
     mr r4, r30
     bl fn_80122C70
     li r4, 0x1
     bl fn_80121F08
-    b lbl_fn_801231D0_000014E8
-lbl_fn_801231D0_000014E4:
+    b lbl_magic_dispatchActionCommand_000014E8
+lbl_magic_dispatchActionCommand_000014E4:
     li r3, 0x0
-lbl_fn_801231D0_000014E8:
+lbl_magic_dispatchActionCommand_000014E8:
     lwz r0, 0x34(r1)
     psq_l f31, 0x28(r1), 0, 0
     lfd f31, 0x20(r1)
@@ -1592,18 +1580,14 @@ lbl_fn_801231D0_000014E8:
     blr
 }
 
-asm void fn_801237E0(void)
+u32 magic_getField8(void* ptr)
 {
-    nofralloc
-    lwz r3, 0x8(r3)
-    blr
+    return *(u32*)((char*)ptr + 0x8);
 }
 
-asm void fn_801237E8(void)
+void* magic_getOffset78(void* ptr)
 {
-    nofralloc
-    addi r3, r3, 0x78
-    blr
+    return (char*)ptr + 0x78;
 }
 
 asm void fn_801237F0(void)

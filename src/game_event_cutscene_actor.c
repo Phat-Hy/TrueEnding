@@ -12,13 +12,13 @@ extern void _restgpr_24(void);
 extern void _savegpr_24(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_800463A8(void);
 extern void fn_80047DCC(void);
 extern void fn_8004C9B4(void);
 extern void fn_8004D124(void);
 extern void fn_8004D258(void);
-extern void fn_8005DD60(void);
+extern void party_initTextures(void);
 extern void fn_8005DED8(void);
 extern void fn_800696C8(void);
 extern void fn_80069E50(void);
@@ -28,14 +28,14 @@ extern void fn_80071220(void);
 extern void fn_800713D4(void);
 extern void fn_80071D60(void);
 extern void fn_800827E0(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
-extern void fn_800846FC(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
+extern void mem_realloc(void);
 extern void fn_80084A78(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_80089620(void);
 extern void fn_8008BBD8(void);
-extern void fn_800A2C48(void);
+extern void font_calcTextExtents(void);
 extern void fn_800A5508(void);
 extern void fn_800A5554(void);
 extern void fn_800A8FF0(void);
@@ -43,7 +43,7 @@ extern void fn_800B95C4(void);
 extern void fn_800BC798(void);
 extern void fn_800BD94C(void);
 extern void fn_800BD9C0(void);
-extern void fn_800BDBC8(void);
+extern void atn_Model_updateAnimation(void);
 extern void fn_800BFAC4(void);
 extern void fn_800C622C(void);
 extern void fn_800CCBA4(void);
@@ -52,9 +52,9 @@ extern void fn_800CECF0(void);
 extern void fn_800CFDF0(void);
 extern void fn_800CFFB8(void);
 extern void fn_800D0684(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D2494(void);
-extern void fn_800D2AD8(void);
+extern void atn_Task_constructor(void);
+extern void atn_Fog_apply(void);
+extern void atn_Task_pause(void);
 extern void fn_800D2D7C(void);
 extern void fn_800DBF68(void);
 extern void fn_800DCA6C(void);
@@ -73,28 +73,28 @@ extern void fn_8046F014(void);
 extern void fn_8046F2C4(void);
 extern void fn_8047043C(void);
 extern void fn_80470528(void);
-extern void fn_8047B594(void);
+extern void atn_TaskEntry_zeroInit(void* obj);
 extern void fn_8047B5A0(void);
 extern void fn_8047B5CC(void);
 extern void fn_8047B684(void);
 extern void fn_8047B6B0(void);
 extern void fn_80570C54(void);
-extern void fn_80570CFC(void);
+extern void homeMenu_returnToWiiMenu(void);
 extern void fn_805728C0(void);
 extern void fn_8057E8C8(void);
 extern void fn_8057EAF4(void);
 extern void fn_805A6B58(void);
 extern void fn_805A6BD8(void);
-extern void fn_805A6BDC(void);
+extern void archive_mountCheckStatus(void);
 extern void fn_805A6D14(void);
-extern void fn_805F30F0(void);
-extern void fn_80603AA0(void);
-extern void fn_80682428(void);
-extern void fn_806846C4(void);
-extern void fn_806846FC(void);
+extern void OSInitMutex(void);
+extern void VISetNextFrameBuffer(void);
+extern void strcmp(void);
+extern void wmemcpy(void);
+extern void wmemcmp(void);
 extern void fn_80686A48(void);
 extern void fn_806952C4(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -120,7 +120,7 @@ extern u32 lbl_8087E07C;
 extern u32 lbl_8087E080;
 extern u32 lbl_8087E084;
 extern u32 lbl_8087EE90;
-extern u32 lbl_8087EE94;
+extern u32 g_TaskManager;
 extern u32 lbl_8087EE98;
 extern u32 lbl_8087EEB0;
 extern u32 lbl_8087EEB8;
@@ -155,14 +155,14 @@ extern u32 lbl_80886F78;
 void fn_8047961C(void);
 void fn_80479940(void);
 void fn_80479998(void);
-void fn_804799CC(void);
+void perf_recordElapsedTime(void);
 void main(void);
 void fn_80479EA0(void);
 void fn_8047A158(void);
 void fn_8047A410(void);
 void fn_8047A424(void);
-void fn_8047A4C8(void);
-void fn_8047AEBC(void);
+void taskManager_initSystem(void);
+void cutscene_actor_updatePose(void);
 
 asm void fn_8047961C(void)
 {
@@ -210,7 +210,7 @@ asm void fn_8047961C(void)
     mr r3, r29
     mr r4, r26
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_8047961C_000000B0:
     addi r30, r30, 0x50
     addi r24, r1, 0x20
@@ -250,7 +250,7 @@ lbl_fn_8047961C_00000120:
     la r3, lbl_808813D0
 lbl_fn_8047961C_00000124:
     mr r4, r30
-    bl fn_806846FC
+    bl wmemcmp
     cntlzw r0, r3
     srwi r0, r0, 5
 lbl_fn_8047961C_00000134:
@@ -280,7 +280,7 @@ lbl_fn_8047961C_00000158:
     mr r4, r24
     addi r3, r29, 0x4
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_8047961C_00000198:
     lwz r0, 0x160(r30)
     addi r29, r29, 0x90
@@ -344,7 +344,7 @@ lbl_fn_8047961C_0000025C:
     mr r3, r26
     mr r4, r24
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_8047961C_00000284:
     stw r27, 0x124(r1)
     stw r28, 0x128(r1)
@@ -436,7 +436,7 @@ asm void fn_80479998(void)
     blr
 }
 
-asm void fn_804799CC(void)
+asm void perf_recordElapsedTime(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -467,14 +467,14 @@ asm void main(void)
     mflr r0
     stw r0, 0xa4(r1)
     stmw r14, 0x58(r1)
-    bl fn_8047A4C8
+    bl taskManager_initSystem
     lis r20, fn_8047A410@ha
     lis r21, fn_8047A424@ha
     lis r23, lbl_80775B60@ha
     lis r29, lbl_80775B98@ha
     lis r30, lbl_80775B30@ha
     lis r22, fn_80479998@ha
-    lis r14, fn_804799CC@ha
+    lis r14, perf_recordElapsedTime@ha
     li r0, 0x0
     stw r0, 0x4c(r1)
     lis r19, lbl_807C8A98@ha
@@ -486,7 +486,7 @@ asm void main(void)
     addi r20, r20, fn_8047A410@l
     addi r21, r21, fn_8047A424@l
     addi r22, r22, fn_80479998@l
-    addi r14, r14, fn_804799CC@l
+    addi r14, r14, perf_recordElapsedTime@l
     li r24, 0x0
     lis r25, lbl_80775BC8@ha
     li r28, 0x1
@@ -618,7 +618,7 @@ lbl_main_00000614:
     lwz r3, lbl_8087EF70
     bl fn_800A5554
     lwz r3, lbl_8087EFB4
-    bl fn_800BDBC8
+    bl atn_Model_updateAnimation
     lwz r15, lbl_8087F534
     bl OSGetTime
     stw r4, 0x1c(r15)
@@ -628,7 +628,7 @@ lbl_main_00000614:
     cmpwi r0, 0x1
     beq lbl_main_00000654
     lwz r3, lbl_8087F530
-    bl fn_800D2494
+    bl atn_Fog_apply
     lwz r3, lbl_8087EE98
     bl fn_8004D124
 lbl_main_00000654:
@@ -645,7 +645,7 @@ lbl_main_00000654:
     lwz r3, lbl_8087F530
     bl fn_800D2D7C
     lwz r3, lbl_8087F530
-    bl fn_800D2AD8
+    bl atn_Task_pause
     lwz r3, lbl_8087F4E8
     bl fn_8044073C
     lwz r7, lbl_8087F0A8
@@ -697,7 +697,7 @@ lbl_main_000006C0:
     subfe r0, r5, r3
     stw r0, 0x10(r15)
     lwz r3, lbl_8087F534
-    bl fn_805A6BDC
+    bl archive_mountCheckStatus
     lwz r4, lbl_8087F0A8
     lwz r3, lbl_8087EEE0
     lwz r4, 0x30(r4)
@@ -706,8 +706,8 @@ lbl_main_000006C0:
     srwi r4, r0, 5
     bl fn_80071D60
     lwz r3, lbl_8087F9A0
-    bl fn_80570CFC
-    lwz r18, lbl_8087EE94
+    bl homeMenu_returnToWiiMenu
+    lwz r18, g_TaskManager
     li r16, 0x0
     li r31, 0x0
     b lbl_main_00000860
@@ -730,7 +730,7 @@ lbl_main_0000078C:
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r27, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_main_000007F0
     stw r28, 0x4(r3)
@@ -743,7 +743,7 @@ lbl_main_000007F0:
     stw r24, 0x10(r1)
     beq lbl_main_00000808
     li r3, 0x0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_main_00000808:
     lwz r3, 0x1c(r1)
     addi r4, r25, lbl_80775BC8@l
@@ -1215,7 +1215,7 @@ lbl_fn_8047A424_00000E64:
     lis r3, lbl_80790060@ha
     lwz r4, lbl_80790060@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_8047A424_00000E8C
@@ -1233,7 +1233,7 @@ lbl_fn_8047A424_00000E94:
     blr
 }
 
-asm void fn_8047A4C8(void)
+asm void taskManager_initSystem(void)
 {
     nofralloc
     stwu r1, -0x250(r1)
@@ -1257,21 +1257,21 @@ asm void fn_8047A4C8(void)
     mtspr GQR5, r3
     bl fn_800827E0
     addi r3, r3, 0x1b4
-    bl fn_805F30F0
+    bl OSInitMutex
     bl DVDInit
-    bl fn_80603AA0
+    bl VISetNextFrameBuffer
     bl NWC24SuspendScheduler
     bl fn_80570C54
     bl SCGetLanguage
     clrlwi r0, r3, 24
     cmplwi r0, 0x6
-    blt lbl_fn_8047A4C8_00000F28
+    blt lbl_taskManager_initSystem_00000F28
     li r3, 0x1
-lbl_fn_8047A4C8_00000F28:
+lbl_taskManager_initSystem_00000F28:
     clrlwi. r0, r3, 24
-    bne lbl_fn_8047A4C8_00000F34
+    bne lbl_taskManager_initSystem_00000F34
     li r3, 0x1
-lbl_fn_8047A4C8_00000F34:
+lbl_taskManager_initSystem_00000F34:
     clrlwi r3, r3, 24
     bl fn_8006BA54
     bl fn_80071220
@@ -1289,12 +1289,12 @@ lbl_fn_8047A4C8_00000F34:
     li r7, 0x0
     li r4, 0x1
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
-    beq lbl_fn_8047A4C8_00000F8C
+    beq lbl_taskManager_initSystem_00000F8C
     li r4, 0x0
-    bl fn_800D1D3C
-lbl_fn_8047A4C8_00000F8C:
+    bl atn_Task_constructor
+lbl_taskManager_initSystem_00000F8C:
     stw r3, lbl_8087F530
     bl fn_80089620
     bl fn_800B95C4
@@ -1303,24 +1303,24 @@ lbl_fn_8047A4C8_00000F8C:
     li r0, 0x1
     stw r0, 0x18(r4)
     stw r0, 0x1c(r4)
-    lwz r0, lbl_8087EE94
+    lwz r0, g_TaskManager
     cmpwi r0, 0x0
-    bne lbl_fn_8047A4C8_00000FEC
+    bne lbl_taskManager_initSystem_00000FEC
     li r3, 0xc
     li r4, 0x1
     la r5, lbl_8087E07C
     la r6, lbl_8087E078
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
-    beq lbl_fn_8047A4C8_00000FE8
+    beq lbl_taskManager_initSystem_00000FE8
     li r0, 0x0
     stw r0, 0x0(r3)
     stw r0, 0x4(r3)
     stw r0, 0x8(r3)
-lbl_fn_8047A4C8_00000FE8:
-    stw r3, lbl_8087EE94
-lbl_fn_8047A4C8_00000FEC:
+lbl_taskManager_initSystem_00000FE8:
+    stw r3, g_TaskManager
+lbl_taskManager_initSystem_00000FEC:
     lbz r0, lbl_8087F53A
     lis r4, lbl_80790068@ha
     lwzu r6, lbl_80790068@l(r4)
@@ -1340,7 +1340,7 @@ lbl_fn_8047A4C8_00000FEC:
     stw r4, 0x108(r1)
     stw r7, 0x10c(r1)
     stw r0, 0x228(r1)
-    bne lbl_fn_8047A4C8_00001064
+    bne lbl_taskManager_initSystem_00001064
     lis r7, lbl_807C8AA8@ha
     lis r5, fn_8047B684@ha
     lis r4, fn_8047B6B0@ha
@@ -1351,7 +1351,7 @@ lbl_fn_8047A4C8_00000FEC:
     stw r5, 0x4(r6)
     stw r4, lbl_807C8AA8@l(r7)
     stb r0, lbl_8087F53A
-lbl_fn_8047A4C8_00001064:
+lbl_taskManager_initSystem_00001064:
     lwz r6, 0x100(r1)
     addi r3, r1, 0xa0
     lwz r5, 0x104(r1)
@@ -1364,7 +1364,7 @@ lbl_fn_8047A4C8_00001064:
     crclr 6
     bl fn_8008BBD8
     cmpwi r3, 0x0
-    bne lbl_fn_8047A4C8_000010D8
+    bne lbl_taskManager_initSystem_000010D8
     addic. r0, r1, 0x22c
     lwz r6, 0xa0(r1)
     lwz r5, 0xa4(r1)
@@ -1374,47 +1374,47 @@ lbl_fn_8047A4C8_00001064:
     stw r5, 0x94(r1)
     stw r4, 0x98(r1)
     stw r0, 0x9c(r1)
-    beq lbl_fn_8047A4C8_000010D0
+    beq lbl_taskManager_initSystem_000010D0
     stw r6, 0x22c(r1)
     stw r5, 0x230(r1)
     stw r4, 0x234(r1)
     stw r0, 0x238(r1)
-lbl_fn_8047A4C8_000010D0:
+lbl_taskManager_initSystem_000010D0:
     li r0, 0x1
-    b lbl_fn_8047A4C8_000010DC
-lbl_fn_8047A4C8_000010D8:
+    b lbl_taskManager_initSystem_000010DC
+lbl_taskManager_initSystem_000010D8:
     li r0, 0x0
-lbl_fn_8047A4C8_000010DC:
+lbl_taskManager_initSystem_000010DC:
     cmpwi r0, 0x0
-    beq lbl_fn_8047A4C8_000010F4
+    beq lbl_taskManager_initSystem_000010F4
     lis r4, lbl_807C8AA8@ha
     addi r4, r4, lbl_807C8AA8@l
     stw r4, 0x228(r1)
-    b lbl_fn_8047A4C8_000010FC
-lbl_fn_8047A4C8_000010F4:
+    b lbl_taskManager_initSystem_000010FC
+lbl_taskManager_initSystem_000010F4:
     li r0, 0x0
     stw r0, 0x228(r1)
-lbl_fn_8047A4C8_000010FC:
-    lwz r3, lbl_8087EE94
+lbl_taskManager_initSystem_000010FC:
+    lwz r3, g_TaskManager
     addi r4, r1, 0x228
-    bl fn_8047AEBC
+    bl cutscene_actor_updatePose
     addic. r4, r1, 0x228
-    beq lbl_fn_8047A4C8_00001144
+    beq lbl_taskManager_initSystem_00001144
     lwz r5, 0x228(r1)
     cmpwi r5, 0x0
-    beq lbl_fn_8047A4C8_00001144
+    beq lbl_taskManager_initSystem_00001144
     lwz r12, 0x0(r5)
     cmpwi r12, 0x0
-    beq lbl_fn_8047A4C8_0000113C
+    beq lbl_taskManager_initSystem_0000113C
     addi r3, r4, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047A4C8_0000113C:
+lbl_taskManager_initSystem_0000113C:
     li r0, 0x0
     stw r0, 0x228(r1)
-lbl_fn_8047A4C8_00001144:
+lbl_taskManager_initSystem_00001144:
     lbz r0, lbl_8087F539
     lis r4, lbl_80790074@ha
     lwzu r6, lbl_80790074@l(r4)
@@ -1434,7 +1434,7 @@ lbl_fn_8047A4C8_00001144:
     stw r4, 0xf8(r1)
     stw r7, 0xfc(r1)
     stw r0, 0x214(r1)
-    bne lbl_fn_8047A4C8_000011BC
+    bne lbl_taskManager_initSystem_000011BC
     lis r7, lbl_807C8AA0@ha
     lis r5, fn_8047B5A0@ha
     lis r4, fn_8047B5CC@ha
@@ -1445,7 +1445,7 @@ lbl_fn_8047A4C8_00001144:
     stw r5, 0x4(r6)
     stw r4, lbl_807C8AA0@l(r7)
     stb r0, lbl_8087F539
-lbl_fn_8047A4C8_000011BC:
+lbl_taskManager_initSystem_000011BC:
     lwz r6, 0xf0(r1)
     addi r3, r1, 0x68
     lwz r5, 0xf4(r1)
@@ -1458,7 +1458,7 @@ lbl_fn_8047A4C8_000011BC:
     crclr 6
     bl fn_8008BBD8
     cmpwi r3, 0x0
-    bne lbl_fn_8047A4C8_00001230
+    bne lbl_taskManager_initSystem_00001230
     addic. r0, r1, 0x218
     lwz r6, 0x68(r1)
     lwz r5, 0x6c(r1)
@@ -1468,47 +1468,47 @@ lbl_fn_8047A4C8_000011BC:
     stw r5, 0x5c(r1)
     stw r4, 0x60(r1)
     stw r0, 0x64(r1)
-    beq lbl_fn_8047A4C8_00001228
+    beq lbl_taskManager_initSystem_00001228
     stw r6, 0x218(r1)
     stw r5, 0x21c(r1)
     stw r4, 0x220(r1)
     stw r0, 0x224(r1)
-lbl_fn_8047A4C8_00001228:
+lbl_taskManager_initSystem_00001228:
     li r0, 0x1
-    b lbl_fn_8047A4C8_00001234
-lbl_fn_8047A4C8_00001230:
+    b lbl_taskManager_initSystem_00001234
+lbl_taskManager_initSystem_00001230:
     li r0, 0x0
-lbl_fn_8047A4C8_00001234:
+lbl_taskManager_initSystem_00001234:
     cmpwi r0, 0x0
-    beq lbl_fn_8047A4C8_0000124C
+    beq lbl_taskManager_initSystem_0000124C
     lis r4, lbl_807C8AA0@ha
     addi r4, r4, lbl_807C8AA0@l
     stw r4, 0x214(r1)
-    b lbl_fn_8047A4C8_00001254
-lbl_fn_8047A4C8_0000124C:
+    b lbl_taskManager_initSystem_00001254
+lbl_taskManager_initSystem_0000124C:
     li r0, 0x0
     stw r0, 0x214(r1)
-lbl_fn_8047A4C8_00001254:
-    lwz r3, lbl_8087EE94
+lbl_taskManager_initSystem_00001254:
+    lwz r3, g_TaskManager
     addi r4, r1, 0x214
-    bl fn_8047AEBC
+    bl cutscene_actor_updatePose
     addic. r4, r1, 0x214
-    beq lbl_fn_8047A4C8_0000129C
+    beq lbl_taskManager_initSystem_0000129C
     lwz r5, 0x214(r1)
     cmpwi r5, 0x0
-    beq lbl_fn_8047A4C8_0000129C
+    beq lbl_taskManager_initSystem_0000129C
     lwz r12, 0x0(r5)
     cmpwi r12, 0x0
-    beq lbl_fn_8047A4C8_00001294
+    beq lbl_taskManager_initSystem_00001294
     addi r3, r4, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047A4C8_00001294:
+lbl_taskManager_initSystem_00001294:
     li r0, 0x0
     stw r0, 0x214(r1)
-lbl_fn_8047A4C8_0000129C:
+lbl_taskManager_initSystem_0000129C:
     lbz r0, lbl_8087F539
     lis r4, lbl_80790080@ha
     lwzu r6, lbl_80790080@l(r4)
@@ -1528,7 +1528,7 @@ lbl_fn_8047A4C8_0000129C:
     stw r4, 0xe8(r1)
     stw r7, 0xec(r1)
     stw r0, 0x200(r1)
-    bne lbl_fn_8047A4C8_00001314
+    bne lbl_taskManager_initSystem_00001314
     lis r7, lbl_807C8AA0@ha
     lis r5, fn_8047B5A0@ha
     lis r4, fn_8047B5CC@ha
@@ -1539,7 +1539,7 @@ lbl_fn_8047A4C8_0000129C:
     stw r5, 0x4(r6)
     stw r4, lbl_807C8AA0@l(r7)
     stb r0, lbl_8087F539
-lbl_fn_8047A4C8_00001314:
+lbl_taskManager_initSystem_00001314:
     lwz r6, 0xe0(r1)
     addi r3, r1, 0x30
     lwz r5, 0xe4(r1)
@@ -1552,7 +1552,7 @@ lbl_fn_8047A4C8_00001314:
     crclr 6
     bl fn_8008BBD8
     cmpwi r3, 0x0
-    bne lbl_fn_8047A4C8_00001388
+    bne lbl_taskManager_initSystem_00001388
     addic. r0, r1, 0x204
     lwz r6, 0x30(r1)
     lwz r5, 0x34(r1)
@@ -1562,47 +1562,47 @@ lbl_fn_8047A4C8_00001314:
     stw r5, 0x24(r1)
     stw r4, 0x28(r1)
     stw r0, 0x2c(r1)
-    beq lbl_fn_8047A4C8_00001380
+    beq lbl_taskManager_initSystem_00001380
     stw r6, 0x204(r1)
     stw r5, 0x208(r1)
     stw r4, 0x20c(r1)
     stw r0, 0x210(r1)
-lbl_fn_8047A4C8_00001380:
+lbl_taskManager_initSystem_00001380:
     li r0, 0x1
-    b lbl_fn_8047A4C8_0000138C
-lbl_fn_8047A4C8_00001388:
+    b lbl_taskManager_initSystem_0000138C
+lbl_taskManager_initSystem_00001388:
     li r0, 0x0
-lbl_fn_8047A4C8_0000138C:
+lbl_taskManager_initSystem_0000138C:
     cmpwi r0, 0x0
-    beq lbl_fn_8047A4C8_000013A4
+    beq lbl_taskManager_initSystem_000013A4
     lis r4, lbl_807C8AA0@ha
     addi r4, r4, lbl_807C8AA0@l
     stw r4, 0x200(r1)
-    b lbl_fn_8047A4C8_000013AC
-lbl_fn_8047A4C8_000013A4:
+    b lbl_taskManager_initSystem_000013AC
+lbl_taskManager_initSystem_000013A4:
     li r0, 0x0
     stw r0, 0x200(r1)
-lbl_fn_8047A4C8_000013AC:
-    lwz r3, lbl_8087EE94
+lbl_taskManager_initSystem_000013AC:
+    lwz r3, g_TaskManager
     addi r4, r1, 0x200
-    bl fn_8047AEBC
+    bl cutscene_actor_updatePose
     addic. r4, r1, 0x200
-    beq lbl_fn_8047A4C8_000013F4
+    beq lbl_taskManager_initSystem_000013F4
     lwz r5, 0x200(r1)
     cmpwi r5, 0x0
-    beq lbl_fn_8047A4C8_000013F4
+    beq lbl_taskManager_initSystem_000013F4
     lwz r12, 0x0(r5)
     cmpwi r12, 0x0
-    beq lbl_fn_8047A4C8_000013EC
+    beq lbl_taskManager_initSystem_000013EC
     addi r3, r4, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047A4C8_000013EC:
+lbl_taskManager_initSystem_000013EC:
     li r0, 0x0
     stw r0, 0x200(r1)
-lbl_fn_8047A4C8_000013F4:
+lbl_taskManager_initSystem_000013F4:
     lis r29, lbl_8075626C@ha
     addi r29, r29, lbl_8075626C@l
     addi r3, r29, 0x4
@@ -1627,11 +1627,11 @@ lbl_fn_8047A4C8_000013F4:
     mr r6, r5
     li r4, 0x1
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
-    beq lbl_fn_8047A4C8_00001464
+    beq lbl_taskManager_initSystem_00001464
     bl fn_805A6B58
-lbl_fn_8047A4C8_00001464:
+lbl_taskManager_initSystem_00001464:
     stw r3, lbl_8087F534
     bl fn_800696C8
     lwz r3, lbl_8087F530
@@ -1698,18 +1698,18 @@ lbl_fn_8047A4C8_00001464:
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r3, lbl_8087EFB4
     mr r5, r31
     lis r4, 0x4
     bl fn_800BD9C0
     lwz r0, 0xd4(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_8047A4C8_00001594
+    beq lbl_taskManager_initSystem_00001594
     lwz r3, 0xdc(r1)
     bl dtor_80084684
-lbl_fn_8047A4C8_00001594:
-    bl fn_8005DD60
+lbl_taskManager_initSystem_00001594:
+    bl party_initTextures
     lis r4, lbl_8075626C@ha
     li r0, 0x0
     addi r4, r4, lbl_8075626C@l
@@ -1732,17 +1732,17 @@ lbl_fn_8047A4C8_00001594:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r3, lbl_8087EEB0
     mr r5, r30
     lis r4, 0x4
     bl fn_8005DED8
     lwz r0, 0xc8(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_8047A4C8_00001618
+    beq lbl_taskManager_initSystem_00001618
     lwz r3, 0xd0(r1)
     bl dtor_80084684
-lbl_fn_8047A4C8_00001618:
+lbl_taskManager_initSystem_00001618:
     li r3, 0x480
     li r4, 0x200
     li r5, 0x100
@@ -1752,14 +1752,14 @@ lbl_fn_8047A4C8_00001618:
     bl fn_800A5508
     lwz r4, lbl_8087F018
     cmpwi r4, 0x0
-    beq lbl_fn_8047A4C8_00001658
+    beq lbl_taskManager_initSystem_00001658
     li r0, 0x0
     stw r0, 0x40d4(r4)
     lwz r4, lbl_8087F018
     stw r0, 0x40d8(r4)
     lwz r4, lbl_8087F018
     stw r0, 0x40dc(r4)
-lbl_fn_8047A4C8_00001658:
+lbl_taskManager_initSystem_00001658:
     bl fn_800463A8
     bl fn_800CCBA4
     lwz r3, lbl_8087EFE8
@@ -1888,7 +1888,7 @@ lbl_fn_8047A4C8_00001658:
     lwz r3, lbl_8087F530
     bl fn_801F0D80
     lwz r3, lbl_8087F530
-    bl fn_800A2C48
+    bl font_calcTextExtents
     lwz r3, lbl_8087F530
     bl fn_804405F8
     bl fn_80207F80
@@ -1908,7 +1908,7 @@ lbl_fn_8047A4C8_00001658:
     blr
 }
 
-asm void fn_8047AEBC(void)
+asm void cutscene_actor_updatePose(void)
 {
     nofralloc
     stwu r1, -0xb0(r1)
@@ -1919,53 +1919,53 @@ asm void fn_8047AEBC(void)
     mr r31, r4
     lwz r0, 0x8(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8047AEBC_000018D0
+    beq lbl_cutscene_actor_updatePose_000018D0
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_8047AEBC_00001B2C
-lbl_fn_8047AEBC_000018D0:
+    bne lbl_cutscene_actor_updatePose_00001B2C
+lbl_cutscene_actor_updatePose_000018D0:
     lwz r0, 0x4(r3)
     cmplwi r0, 0x8
-    bgt lbl_fn_8047AEBC_00001D90
+    bgt lbl_cutscene_actor_updatePose_00001D90
     li r3, 0xb0
     li r4, 0x0
     la r5, lbl_8087E084
     la r6, lbl_8087E080
     li r7, 0x0
-    bl fn_800846FC
-    lis r4, fn_8047B594@ha
+    bl mem_realloc
+    lis r4, atn_TaskEntry_zeroInit@ha
     lis r5, fn_800C622C@ha
-    addi r4, r4, fn_8047B594@l
+    addi r4, r4, atn_TaskEntry_zeroInit@l
     li r6, 0x14
     addi r5, r5, fn_800C622C@l
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x8(r30)
     mr r26, r3
     cmpwi r0, 0x0
-    beq lbl_fn_8047AEBC_00001B1C
+    beq lbl_cutscene_actor_updatePose_00001B1C
     lwz r0, 0x0(r30)
     li r29, 0x8
     cmplwi r0, 0x8
-    bge lbl_fn_8047AEBC_00001934
+    bge lbl_cutscene_actor_updatePose_00001934
     mr r29, r0
-lbl_fn_8047AEBC_00001934:
+lbl_cutscene_actor_updatePose_00001934:
     cmpwi r29, 0x0
     li r24, 0x0
-    beq lbl_fn_8047AEBC_00001B0C
+    beq lbl_cutscene_actor_updatePose_00001B0C
     mr r22, r26
     addi r25, r1, 0x8
     addi r27, r1, 0x1c
     li r21, 0x0
     li r28, 0x0
-    b lbl_fn_8047AEBC_00001B04
-lbl_fn_8047AEBC_00001958:
+    b lbl_cutscene_actor_updatePose_00001B04
+lbl_cutscene_actor_updatePose_00001958:
     lwz r0, 0x8(r30)
     stw r28, 0x8(r1)
     add r6, r0, r21
     lwzx r0, r21, r0
     cmpwi r0, 0x0
-    beq lbl_fn_8047AEBC_00001990
+    beq lbl_cutscene_actor_updatePose_00001990
     stw r0, 0x8(r1)
     addi r3, r6, 0x4
     addi r4, r25, 0x4
@@ -1974,13 +1974,13 @@ lbl_fn_8047AEBC_00001958:
     lwz r12, 0x0(r6)
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001990:
+lbl_cutscene_actor_updatePose_00001990:
     cmplw r22, r25
-    beq lbl_fn_8047AEBC_00001AC0
+    beq lbl_cutscene_actor_updatePose_00001AC0
     lwz r0, 0x8(r1)
     stw r28, 0x1c(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_8047AEBC_000019C8
+    beq lbl_cutscene_actor_updatePose_000019C8
     lwz r6, 0x8(r1)
     addi r3, r1, 0xc
     stw r6, 0x1c(r1)
@@ -1989,26 +1989,26 @@ lbl_fn_8047AEBC_00001990:
     lwz r12, 0x0(r6)
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_000019C8:
+lbl_cutscene_actor_updatePose_000019C8:
     cmplw r22, r25
-    beq lbl_fn_8047AEBC_00001A2C
+    beq lbl_cutscene_actor_updatePose_00001A2C
     lwz r3, 0x8(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_8047AEBC_00001A00
+    beq lbl_cutscene_actor_updatePose_00001A00
     lwz r12, 0x0(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_8047AEBC_000019FC
+    beq lbl_cutscene_actor_updatePose_000019FC
     addi r3, r1, 0xc
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_000019FC:
+lbl_cutscene_actor_updatePose_000019FC:
     stw r28, 0x8(r1)
-lbl_fn_8047AEBC_00001A00:
+lbl_cutscene_actor_updatePose_00001A00:
     lwz r0, 0x0(r22)
     cmpwi r0, 0x0
-    beq lbl_fn_8047AEBC_00001A2C
+    beq lbl_cutscene_actor_updatePose_00001A2C
     stw r0, 0x8(r1)
     addi r3, r22, 0x4
     addi r4, r1, 0xc
@@ -2017,26 +2017,26 @@ lbl_fn_8047AEBC_00001A00:
     lwz r12, 0x0(r6)
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001A2C:
+lbl_cutscene_actor_updatePose_00001A2C:
     cmplw r27, r22
-    beq lbl_fn_8047AEBC_00001A90
+    beq lbl_cutscene_actor_updatePose_00001A90
     lwz r3, 0x0(r22)
     cmpwi r3, 0x0
-    beq lbl_fn_8047AEBC_00001A64
+    beq lbl_cutscene_actor_updatePose_00001A64
     lwz r12, 0x0(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_8047AEBC_00001A60
+    beq lbl_cutscene_actor_updatePose_00001A60
     addi r3, r22, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001A60:
+lbl_cutscene_actor_updatePose_00001A60:
     stw r28, 0x0(r22)
-lbl_fn_8047AEBC_00001A64:
+lbl_cutscene_actor_updatePose_00001A64:
     lwz r0, 0x1c(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_8047AEBC_00001A90
+    beq lbl_cutscene_actor_updatePose_00001A90
     stw r0, 0x0(r22)
     addi r3, r1, 0x20
     addi r4, r22, 0x4
@@ -2045,100 +2045,100 @@ lbl_fn_8047AEBC_00001A64:
     lwz r12, 0x0(r6)
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001A90:
+lbl_cutscene_actor_updatePose_00001A90:
     lwz r3, 0x1c(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_8047AEBC_00001AC0
+    beq lbl_cutscene_actor_updatePose_00001AC0
     lwz r12, 0x0(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_8047AEBC_00001ABC
+    beq lbl_cutscene_actor_updatePose_00001ABC
     addi r3, r1, 0x20
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001ABC:
+lbl_cutscene_actor_updatePose_00001ABC:
     stw r28, 0x1c(r1)
-lbl_fn_8047AEBC_00001AC0:
+lbl_cutscene_actor_updatePose_00001AC0:
     cmpwi r25, 0x0
-    beq lbl_fn_8047AEBC_00001AF8
+    beq lbl_cutscene_actor_updatePose_00001AF8
     lwz r3, 0x8(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_8047AEBC_00001AF8
+    beq lbl_cutscene_actor_updatePose_00001AF8
     lwz r12, 0x0(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_8047AEBC_00001AF4
+    beq lbl_cutscene_actor_updatePose_00001AF4
     addi r3, r25, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001AF4:
+lbl_cutscene_actor_updatePose_00001AF4:
     stw r28, 0x8(r1)
-lbl_fn_8047AEBC_00001AF8:
+lbl_cutscene_actor_updatePose_00001AF8:
     addi r21, r21, 0x14
     addi r22, r22, 0x14
     addi r24, r24, 0x1
-lbl_fn_8047AEBC_00001B04:
+lbl_cutscene_actor_updatePose_00001B04:
     cmplw r24, r29
-    blt lbl_fn_8047AEBC_00001958
-lbl_fn_8047AEBC_00001B0C:
+    blt lbl_cutscene_actor_updatePose_00001958
+lbl_cutscene_actor_updatePose_00001B0C:
     lis r4, fn_800C622C@ha
     lwz r3, 0x8(r30)
     addi r4, r4, fn_800C622C@l
     bl fn_80695A50
-lbl_fn_8047AEBC_00001B1C:
+lbl_cutscene_actor_updatePose_00001B1C:
     li r0, 0x8
     stw r26, 0x8(r30)
     stw r0, 0x4(r30)
-    b lbl_fn_8047AEBC_00001D90
-lbl_fn_8047AEBC_00001B2C:
+    b lbl_cutscene_actor_updatePose_00001D90
+lbl_cutscene_actor_updatePose_00001B2C:
     lwz r3, 0x0(r3)
     cmplw r3, r0
-    blt lbl_fn_8047AEBC_00001D90
+    blt lbl_cutscene_actor_updatePose_00001D90
     slwi r24, r3, 1
     cmplw r0, r24
-    bgt lbl_fn_8047AEBC_00001D90
+    bgt lbl_cutscene_actor_updatePose_00001D90
     mulli r3, r24, 0x14
     li r4, 0x0
     la r5, lbl_8087E084
     la r6, lbl_8087E080
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
-    lis r4, fn_8047B594@ha
+    bl mem_realloc
+    lis r4, atn_TaskEntry_zeroInit@ha
     lis r5, fn_800C622C@ha
     mr r7, r24
     li r6, 0x14
-    addi r4, r4, fn_8047B594@l
+    addi r4, r4, atn_TaskEntry_zeroInit@l
     addi r5, r5, fn_800C622C@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x8(r30)
     mr r23, r3
     cmpwi r0, 0x0
-    beq lbl_fn_8047AEBC_00001D88
+    beq lbl_cutscene_actor_updatePose_00001D88
     lwz r0, 0x0(r30)
     mr r27, r24
     cmplw r24, r0
-    ble lbl_fn_8047AEBC_00001BA0
+    ble lbl_cutscene_actor_updatePose_00001BA0
     mr r27, r0
-lbl_fn_8047AEBC_00001BA0:
+lbl_cutscene_actor_updatePose_00001BA0:
     cmpwi r27, 0x0
     li r26, 0x0
-    beq lbl_fn_8047AEBC_00001D78
+    beq lbl_cutscene_actor_updatePose_00001D78
     mr r21, r23
     addi r25, r1, 0x30
     addi r29, r1, 0x44
     li r22, 0x0
     li r28, 0x0
-    b lbl_fn_8047AEBC_00001D70
-lbl_fn_8047AEBC_00001BC4:
+    b lbl_cutscene_actor_updatePose_00001D70
+lbl_cutscene_actor_updatePose_00001BC4:
     lwz r0, 0x8(r30)
     stw r28, 0x30(r1)
     add r6, r0, r22
     lwzx r0, r22, r0
     cmpwi r0, 0x0
-    beq lbl_fn_8047AEBC_00001BFC
+    beq lbl_cutscene_actor_updatePose_00001BFC
     stw r0, 0x30(r1)
     addi r3, r6, 0x4
     addi r4, r25, 0x4
@@ -2147,13 +2147,13 @@ lbl_fn_8047AEBC_00001BC4:
     lwz r12, 0x0(r6)
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001BFC:
+lbl_cutscene_actor_updatePose_00001BFC:
     cmplw r21, r25
-    beq lbl_fn_8047AEBC_00001D2C
+    beq lbl_cutscene_actor_updatePose_00001D2C
     lwz r0, 0x30(r1)
     stw r28, 0x44(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_8047AEBC_00001C34
+    beq lbl_cutscene_actor_updatePose_00001C34
     lwz r6, 0x30(r1)
     addi r3, r1, 0x34
     stw r6, 0x44(r1)
@@ -2162,26 +2162,26 @@ lbl_fn_8047AEBC_00001BFC:
     lwz r12, 0x0(r6)
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001C34:
+lbl_cutscene_actor_updatePose_00001C34:
     cmplw r21, r25
-    beq lbl_fn_8047AEBC_00001C98
+    beq lbl_cutscene_actor_updatePose_00001C98
     lwz r3, 0x30(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_8047AEBC_00001C6C
+    beq lbl_cutscene_actor_updatePose_00001C6C
     lwz r12, 0x0(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_8047AEBC_00001C68
+    beq lbl_cutscene_actor_updatePose_00001C68
     addi r3, r1, 0x34
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001C68:
+lbl_cutscene_actor_updatePose_00001C68:
     stw r28, 0x30(r1)
-lbl_fn_8047AEBC_00001C6C:
+lbl_cutscene_actor_updatePose_00001C6C:
     lwz r0, 0x0(r21)
     cmpwi r0, 0x0
-    beq lbl_fn_8047AEBC_00001C98
+    beq lbl_cutscene_actor_updatePose_00001C98
     stw r0, 0x30(r1)
     addi r3, r21, 0x4
     addi r4, r1, 0x34
@@ -2190,26 +2190,26 @@ lbl_fn_8047AEBC_00001C6C:
     lwz r12, 0x0(r6)
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001C98:
+lbl_cutscene_actor_updatePose_00001C98:
     cmplw r29, r21
-    beq lbl_fn_8047AEBC_00001CFC
+    beq lbl_cutscene_actor_updatePose_00001CFC
     lwz r3, 0x0(r21)
     cmpwi r3, 0x0
-    beq lbl_fn_8047AEBC_00001CD0
+    beq lbl_cutscene_actor_updatePose_00001CD0
     lwz r12, 0x0(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_8047AEBC_00001CCC
+    beq lbl_cutscene_actor_updatePose_00001CCC
     addi r3, r21, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001CCC:
+lbl_cutscene_actor_updatePose_00001CCC:
     stw r28, 0x0(r21)
-lbl_fn_8047AEBC_00001CD0:
+lbl_cutscene_actor_updatePose_00001CD0:
     lwz r0, 0x44(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_8047AEBC_00001CFC
+    beq lbl_cutscene_actor_updatePose_00001CFC
     stw r0, 0x0(r21)
     addi r3, r1, 0x48
     addi r4, r21, 0x4
@@ -2218,52 +2218,52 @@ lbl_fn_8047AEBC_00001CD0:
     lwz r12, 0x0(r6)
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001CFC:
+lbl_cutscene_actor_updatePose_00001CFC:
     lwz r3, 0x44(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_8047AEBC_00001D2C
+    beq lbl_cutscene_actor_updatePose_00001D2C
     lwz r12, 0x0(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_8047AEBC_00001D28
+    beq lbl_cutscene_actor_updatePose_00001D28
     addi r3, r1, 0x48
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001D28:
+lbl_cutscene_actor_updatePose_00001D28:
     stw r28, 0x44(r1)
-lbl_fn_8047AEBC_00001D2C:
+lbl_cutscene_actor_updatePose_00001D2C:
     cmpwi r25, 0x0
-    beq lbl_fn_8047AEBC_00001D64
+    beq lbl_cutscene_actor_updatePose_00001D64
     lwz r3, 0x30(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_8047AEBC_00001D64
+    beq lbl_cutscene_actor_updatePose_00001D64
     lwz r12, 0x0(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_8047AEBC_00001D60
+    beq lbl_cutscene_actor_updatePose_00001D60
     addi r3, r25, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001D60:
+lbl_cutscene_actor_updatePose_00001D60:
     stw r28, 0x30(r1)
-lbl_fn_8047AEBC_00001D64:
+lbl_cutscene_actor_updatePose_00001D64:
     addi r22, r22, 0x14
     addi r21, r21, 0x14
     addi r26, r26, 0x1
-lbl_fn_8047AEBC_00001D70:
+lbl_cutscene_actor_updatePose_00001D70:
     cmplw r26, r27
-    blt lbl_fn_8047AEBC_00001BC4
-lbl_fn_8047AEBC_00001D78:
+    blt lbl_cutscene_actor_updatePose_00001BC4
+lbl_cutscene_actor_updatePose_00001D78:
     lis r4, fn_800C622C@ha
     lwz r3, 0x8(r30)
     addi r4, r4, fn_800C622C@l
     bl fn_80695A50
-lbl_fn_8047AEBC_00001D88:
+lbl_cutscene_actor_updatePose_00001D88:
     stw r23, 0x8(r30)
     stw r24, 0x4(r30)
-lbl_fn_8047AEBC_00001D90:
+lbl_cutscene_actor_updatePose_00001D90:
     lwz r3, 0x0(r30)
     li r0, 0x0
     lwz r4, 0x8(r30)
@@ -2272,7 +2272,7 @@ lbl_fn_8047AEBC_00001D90:
     lwz r6, 0x0(r31)
     add r27, r4, r3
     cmpwi r6, 0x0
-    beq lbl_fn_8047AEBC_00001DD0
+    beq lbl_cutscene_actor_updatePose_00001DD0
     stw r6, 0x6c(r1)
     addi r3, r31, 0x4
     addi r4, r1, 0x70
@@ -2280,15 +2280,15 @@ lbl_fn_8047AEBC_00001D90:
     lwz r12, 0x0(r6)
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001DD0:
+lbl_cutscene_actor_updatePose_00001DD0:
     addi r0, r1, 0x6c
     cmplw r27, r0
-    beq lbl_fn_8047AEBC_00001F1C
+    beq lbl_cutscene_actor_updatePose_00001F1C
     lwz r3, 0x6c(r1)
     li r0, 0x0
     stw r0, 0x58(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_8047AEBC_00001E10
+    beq lbl_cutscene_actor_updatePose_00001E10
     lwz r6, 0x6c(r1)
     addi r3, r1, 0x70
     stw r6, 0x58(r1)
@@ -2297,28 +2297,28 @@ lbl_fn_8047AEBC_00001DD0:
     lwz r12, 0x0(r6)
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001E10:
+lbl_cutscene_actor_updatePose_00001E10:
     addi r0, r1, 0x6c
     cmplw r27, r0
-    beq lbl_fn_8047AEBC_00001E7C
+    beq lbl_cutscene_actor_updatePose_00001E7C
     lwz r3, 0x6c(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_8047AEBC_00001E50
+    beq lbl_cutscene_actor_updatePose_00001E50
     lwz r12, 0x0(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_8047AEBC_00001E48
+    beq lbl_cutscene_actor_updatePose_00001E48
     addi r3, r1, 0x70
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001E48:
+lbl_cutscene_actor_updatePose_00001E48:
     li r0, 0x0
     stw r0, 0x6c(r1)
-lbl_fn_8047AEBC_00001E50:
+lbl_cutscene_actor_updatePose_00001E50:
     lwz r0, 0x0(r27)
     cmpwi r0, 0x0
-    beq lbl_fn_8047AEBC_00001E7C
+    beq lbl_cutscene_actor_updatePose_00001E7C
     stw r0, 0x6c(r1)
     addi r3, r27, 0x4
     addi r4, r1, 0x70
@@ -2327,28 +2327,28 @@ lbl_fn_8047AEBC_00001E50:
     lwz r12, 0x0(r6)
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001E7C:
+lbl_cutscene_actor_updatePose_00001E7C:
     addi r0, r1, 0x58
     cmplw r0, r27
-    beq lbl_fn_8047AEBC_00001EE8
+    beq lbl_cutscene_actor_updatePose_00001EE8
     lwz r3, 0x0(r27)
     cmpwi r3, 0x0
-    beq lbl_fn_8047AEBC_00001EBC
+    beq lbl_cutscene_actor_updatePose_00001EBC
     lwz r12, 0x0(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_8047AEBC_00001EB4
+    beq lbl_cutscene_actor_updatePose_00001EB4
     addi r3, r27, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001EB4:
+lbl_cutscene_actor_updatePose_00001EB4:
     li r0, 0x0
     stw r0, 0x0(r27)
-lbl_fn_8047AEBC_00001EBC:
+lbl_cutscene_actor_updatePose_00001EBC:
     lwz r0, 0x58(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_8047AEBC_00001EE8
+    beq lbl_cutscene_actor_updatePose_00001EE8
     stw r0, 0x0(r27)
     addi r3, r1, 0x5c
     addi r4, r27, 0x4
@@ -2357,39 +2357,39 @@ lbl_fn_8047AEBC_00001EBC:
     lwz r12, 0x0(r6)
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001EE8:
+lbl_cutscene_actor_updatePose_00001EE8:
     lwz r3, 0x58(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_8047AEBC_00001F1C
+    beq lbl_cutscene_actor_updatePose_00001F1C
     lwz r12, 0x0(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_8047AEBC_00001F14
+    beq lbl_cutscene_actor_updatePose_00001F14
     addi r3, r1, 0x5c
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001F14:
+lbl_cutscene_actor_updatePose_00001F14:
     li r0, 0x0
     stw r0, 0x58(r1)
-lbl_fn_8047AEBC_00001F1C:
+lbl_cutscene_actor_updatePose_00001F1C:
     addic. r3, r1, 0x6c
-    beq lbl_fn_8047AEBC_00001F58
+    beq lbl_cutscene_actor_updatePose_00001F58
     lwz r4, 0x6c(r1)
     cmpwi r4, 0x0
-    beq lbl_fn_8047AEBC_00001F58
+    beq lbl_cutscene_actor_updatePose_00001F58
     lwz r12, 0x0(r4)
     cmpwi r12, 0x0
-    beq lbl_fn_8047AEBC_00001F50
+    beq lbl_cutscene_actor_updatePose_00001F50
     addi r3, r3, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001F50:
+lbl_cutscene_actor_updatePose_00001F50:
     li r0, 0x0
     stw r0, 0x6c(r1)
-lbl_fn_8047AEBC_00001F58:
+lbl_cutscene_actor_updatePose_00001F58:
     lwz r3, 0x0(r30)
     addi r0, r3, 0x1
     stw r0, 0x0(r30)

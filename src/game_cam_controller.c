@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -165,7 +165,7 @@ lbl_fn_800EC2C4_00000160:
     lwz r0, 0x4(r30)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_800EC2C4_000001A4:
     lwz r4, 0xc(r30)
     srwi. r0, r4, 31
@@ -193,7 +193,7 @@ lbl_fn_800EC2C4_000001C8:
     lwz r0, 0x10(r30)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_800EC2C4_0000020C:
     lbz r6, 0x18(r30)
     mr r3, r29
@@ -245,7 +245,7 @@ asm void fn_800EC440(void)
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     cmpwi r28, 0x0
     stb r31, 0x18(r26)
     stb r31, 0x19(r26)
@@ -272,7 +272,7 @@ lbl_fn_800EC440_000002F8:
     add r7, r28, r0
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_800EC440_00000328:
     mr r3, r26
     lmw r26, 0x18(r1)
@@ -409,7 +409,7 @@ lbl_fn_800EC654_000004AC:
     lwz r0, 0xc(r31)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_800EC654_000004F0:
     lwz r4, 0x14(r31)
     srwi. r0, r4, 31
@@ -438,7 +438,7 @@ lbl_fn_800EC654_00000514:
     lwz r0, 0x0(r28)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_800EC654_0000055C:
     lbz r11, 0x20(r31)
     mr r3, r30
@@ -523,7 +523,7 @@ lbl_fn_800EC7F0_0000064C:
     lwz r6, 0x8(r29)
     lwz r0, 0x4(r29)
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_800EC7F0_0000068C:
     lwz r3, 0xc(r29)
     srwi. r0, r3, 31
@@ -551,7 +551,7 @@ lbl_fn_800EC7F0_000006B0:
     lwz r6, 0x14(r29)
     lwz r0, 0x10(r29)
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_800EC7F0_000006F4:
     lbz r0, 0x18(r29)
     li r3, 0x0
@@ -951,7 +951,7 @@ lbl_fn_800EC7F0_00000C10:
     stb r0, 0x14(r1)
     addi r8, r1, 0x14
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     li r0, 0x1
     b lbl_fn_800EC7F0_00001210
 lbl_fn_800EC7F0_00000C30:
@@ -1408,7 +1408,7 @@ lbl_fn_800EC7F0_000011EC:
     stb r0, 0xc(r1)
     addi r8, r1, 0xc
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     li r0, 0x1
     b lbl_fn_800EC7F0_00001210
 lbl_fn_800EC7F0_0000120C:
@@ -1875,7 +1875,7 @@ lbl_fn_800ED4E0_000017DC:
     stb r0, 0x8(r1)
     li r4, 0x0
     addi r3, r3, 0x30
-    bl fn_80013F78
+    bl actor_dispatchMessage
     li r0, 0x1
     b lbl_fn_800ED4E0_00001DD4
 lbl_fn_800ED4E0_000017FC:
@@ -2332,7 +2332,7 @@ lbl_fn_800ED4E0_00001DB8:
     stb r0, 0x10(r1)
     li r4, 0x0
     addi r3, r3, 0x30
-    bl fn_80013F78
+    bl actor_dispatchMessage
     li r0, 0x1
 lbl_fn_800ED4E0_00001DD4:
     stb r0, 0x2c(r31)

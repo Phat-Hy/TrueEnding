@@ -6,7 +6,7 @@ extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void fn_804E09B0(void);
 extern void fn_804E0CE8(void);
-extern void fn_806846C4(void);
+extern void wmemcpy(void);
 extern void fn_80686A48(void);
 
 /* External data declarations */
@@ -1327,7 +1327,7 @@ lbl_fn_804E2920_00001384:
     mr r4, r15
     addi r3, r16, 0x3bc
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_804E2920_000013CC:
     lwz r0, 0x3fc(r23)
     addi r3, r23, 0x448
@@ -1391,7 +1391,7 @@ lbl_fn_804E2920_0000147C:
     mr r4, r15
     addi r3, r16, 0x6d0
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_804E2920_000014C4:
     lwz r0, 0x710(r23)
     addi r3, r23, 0x75c
@@ -1455,7 +1455,7 @@ lbl_fn_804E2920_00001574:
     mr r4, r15
     addi r3, r16, 0x9e4
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_804E2920_000015BC:
     lwz r0, 0xa24(r23)
     addi r3, r23, 0xa70
@@ -1519,7 +1519,7 @@ lbl_fn_804E2920_0000166C:
     mr r4, r15
     addi r3, r16, 0xcf8
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_804E2920_000016B4:
     lwz r0, 0xd3c(r23)
     addi r6, r23, 0x30
@@ -1669,7 +1669,7 @@ lbl_fn_804E2920_000018BC:
     mr r4, r28
     addi r3, r23, 0x3bc
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_804E2920_00001900:
     lwz r0, 0x404(r1)
     addi r5, r23, 0x448
@@ -1731,7 +1731,7 @@ lbl_fn_804E2920_000019AC:
     mr r4, r27
     addi r3, r23, 0x6d0
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_804E2920_000019F0:
     lwz r0, 0x718(r1)
     addi r5, r23, 0x75c
@@ -1793,7 +1793,7 @@ lbl_fn_804E2920_00001A9C:
     mr r4, r26
     addi r3, r23, 0x9e4
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_804E2920_00001AE0:
     lwz r0, 0xa2c(r1)
     addi r5, r23, 0xa70
@@ -1855,7 +1855,7 @@ lbl_fn_804E2920_00001B8C:
     mr r4, r25
     addi r3, r23, 0xcf8
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_804E2920_00001BD0:
     lwz r0, 0xd44(r1)
     lwz r3, 0xd40(r1)

@@ -3,9 +3,9 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_80394068(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_80697BB8(void);
 
 /* External data declarations */
@@ -27,15 +27,15 @@ void fn_806954D0(void);
 void fn_806954D4(void);
 void fn_806954E0(void);
 void fn_806954EC(void);
-void fn_80695720(void);
+void runtime_registerStaticObject(void);
 void dtor_80695824(void);
 void fn_806958E0(void);
 void fn_806959D8(void);
 void fn_80695A50(void);
-void fn_80695AD0(void);
+void vec3_isNonZero(void);
 void fn_80695B00(void);
 void fn_80695B28(void);
-void fn_80695D84(void);
+void runtime_clampDouble(void);
 void __save_fpr(void);
 void __restore_fpr(void);
 void __save_gpr(void);
@@ -150,7 +150,7 @@ lbl___register_atexit_00000014:
 asm void fn_806954CC(void)
 {
     nofralloc
-    b fn_80686EA4
+    b abort
 }
 
 asm void fn_806954D0(void)
@@ -345,7 +345,7 @@ lbl_fn_806954EC_00000280:
     blr
 }
 
-asm void fn_80695720(void)
+asm void runtime_registerStaticObject(void)
 {
     nofralloc
     stwu r1, -0x40(r1)
@@ -357,12 +357,12 @@ asm void fn_80695720(void)
     mr r27, r4
     mr r28, r6
     mr r29, r7
-    beq lbl_fn_80695720_0000038C
+    beq lbl_runtime_registerStaticObject_0000038C
     cmpwi r4, 0x0
     stw r6, 0x0(r3)
     addi r30, r3, 0x10
     stw r7, 0x4(r3)
-    beq lbl_fn_80695720_0000038C
+    beq lbl_runtime_registerStaticObject_0000038C
     li r0, 0x0
     stw r30, 0x8(r1)
     mr r31, r30
@@ -370,8 +370,8 @@ asm void fn_80695720(void)
     stw r7, 0x10(r1)
     stw r5, 0x14(r1)
     stw r0, 0x18(r1)
-    b lbl_fn_80695720_00000320
-lbl_fn_80695720_000002FC:
+    b lbl_runtime_registerStaticObject_00000320
+lbl_runtime_registerStaticObject_000002FC:
     mr r12, r27
     mr r3, r31
     li r4, 0x1
@@ -381,22 +381,22 @@ lbl_fn_80695720_000002FC:
     add r31, r31, r28
     addi r0, r3, 0x1
     stw r0, 0x18(r1)
-lbl_fn_80695720_00000320:
+lbl_runtime_registerStaticObject_00000320:
     lwz r4, 0x18(r1)
     cmplw r4, r29
-    blt lbl_fn_80695720_000002FC
+    blt lbl_runtime_registerStaticObject_000002FC
     lwz r0, 0x10(r1)
     cmplw r4, r0
-    bge lbl_fn_80695720_0000038C
+    bge lbl_runtime_registerStaticObject_0000038C
     lwz r0, 0x14(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_80695720_0000038C
+    beq lbl_runtime_registerStaticObject_0000038C
     lwz r0, 0xc(r1)
     lwz r3, 0x8(r1)
     mullw r0, r0, r4
     add r31, r3, r0
-    b lbl_fn_80695720_00000380
-lbl_fn_80695720_00000358:
+    b lbl_runtime_registerStaticObject_00000380
+lbl_runtime_registerStaticObject_00000358:
     lwz r0, 0xc(r1)
     li r4, -0x1
     lwz r12, 0x14(r1)
@@ -407,11 +407,11 @@ lbl_fn_80695720_00000358:
     lwz r3, 0x18(r1)
     subi r0, r3, 0x1
     stw r0, 0x18(r1)
-lbl_fn_80695720_00000380:
+lbl_runtime_registerStaticObject_00000380:
     lwz r0, 0x18(r1)
     cmpwi r0, 0x0
-    bne lbl_fn_80695720_00000358
-lbl_fn_80695720_0000038C:
+    bne lbl_runtime_registerStaticObject_00000358
+lbl_runtime_registerStaticObject_0000038C:
     mr r3, r30
     lmw r27, 0x2c(r1)
     lwz r0, 0x44(r1)
@@ -617,7 +617,7 @@ lbl_fn_80695A50_0000062C:
     blt lbl_fn_80695A50_00000610
 lbl_fn_80695A50_00000634:
     subi r3, r26, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80695A50_0000063C:
     lmw r26, 0x8(r1)
     lwz r0, 0x24(r1)
@@ -626,7 +626,7 @@ lbl_fn_80695A50_0000063C:
     blr
 }
 
-asm void fn_80695AD0(void)
+asm void vec3_isNonZero(void)
 {
     nofralloc
     lwz r5, 0x0(r3)
@@ -843,7 +843,7 @@ lbl_fn_80695B28_000008F0:
     blr
 }
 
-asm void fn_80695D84(void)
+asm void runtime_clampDouble(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -855,20 +855,20 @@ asm void fn_80695D84(void)
     lfd f4, 0x10(r4)
     fcmpu cr0, f1, f0
     fcmpu cr6, f1, f3
-    blt lbl_fn_80695D84_00000958
+    blt lbl_runtime_clampDouble_00000958
     subi r3, r3, 0x1
-    bge cr6, lbl_fn_80695D84_00000958
+    bge cr6, lbl_runtime_clampDouble_00000958
     fcmpu cr7, f1, f4
     fmr f2, f1
-    blt cr7, lbl_fn_80695D84_00000944
+    blt cr7, lbl_runtime_clampDouble_00000944
     fsub f2, f1, f4
-lbl_fn_80695D84_00000944:
+lbl_runtime_clampDouble_00000944:
     fctiwz f2, f2
     stfd f2, 0x8(r1)
     lwz r3, 0xc(r1)
-    blt cr7, lbl_fn_80695D84_00000958
+    blt cr7, lbl_runtime_clampDouble_00000958
     addis r3, r3, 0x8000
-lbl_fn_80695D84_00000958:
+lbl_runtime_clampDouble_00000958:
     addi r1, r1, 0x10
     blr
 }

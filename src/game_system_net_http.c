@@ -4,28 +4,28 @@
 /* External function declarations */
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
-extern void fn_80014798(void);
-extern void fn_8004B378(void);
-extern void fn_800616C0(void);
+extern void actor_dispatchMessage(void);
+extern void atn_LH_Binary_destructor(void);
+extern void item_useConsumable(void);
+extern void skill_calculateDamage(void);
 extern void fn_80063D3C(void);
 extern void fn_8006AA20(void);
 extern void fn_8006B2D8(void);
 extern void fn_8006CA80(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_8008B964(void);
 extern void fn_800C31F4(void);
-extern void fn_800D1D3C(void);
+extern void atn_Task_constructor(void);
 extern void fn_80116BD4(void);
 extern void fn_803918EC(void);
 extern void fn_80393BEC(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9750(void);
-extern void fn_805F98D0(void);
-extern void fn_80680CF8(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSMTX44Identity(void);
+extern void PSVECNormalize(void);
+extern void rand(void);
 extern void fn_8068A850(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_806958E0(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -121,9 +121,9 @@ asm void fn_803920C8(void)
     stfs f5, 0x64(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x88(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     addi r31, r1, 0x74
-    bl fn_80680CF8
+    bl rand
     lis r28, 0x4178
     lis r29, lbl_8074E008@ha
     addi r0, r28, 0x749f
@@ -146,7 +146,7 @@ asm void fn_803920C8(void)
     fdivs f5, f6, f5
     fmuls f3, f3, f5
     fmadds f31, f0, f4, f3
-    bl fn_80680CF8
+    bl rand
     addi r0, r28, 0x749f
     lfs f4, 0x908(r30)
     mulhw r0, r0, r3
@@ -235,7 +235,7 @@ lbl_fn_803920C8_00000254:
 lbl_fn_803920C8_0000025C:
     frsp f2, f2
     lfs f1, 0x68(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_803920C8_00000270:
@@ -243,7 +243,7 @@ lbl_fn_803920C8_00000270:
     addi r3, r1, 0x98
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_808858E8
     addi r4, r1, 0x38
     lfs f30, 0xa0(r1)
@@ -293,7 +293,7 @@ lbl_fn_803920C8_00000270:
     stfs f6, 0xf4(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_808859C8
     fabs f3, f2
@@ -314,7 +314,7 @@ lbl_fn_803920C8_00000380:
     b lbl_fn_803920C8_000003A0
 lbl_fn_803920C8_0000038C:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -328,11 +328,11 @@ lbl_fn_803920C8_000003A0:
     lfs f1, 0x6c(r1)
     stfs f2, 0x4c(r1)
     stfs f2, 0x70(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x74
     addi r3, r1, 0x108
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f3, 0x8c(r1)
     addi r3, r1, 0x8c
     lfs f0, 0x74(r1)
@@ -699,7 +699,7 @@ lbl_fn_80392964_0000090C:
     mr r3, r27
     bl fn_803928C0
     addi r3, r27, 0x1f4
-    bl fn_8004B378
+    bl item_useConsumable
     bl fn_8008B964
     addi r4, r27, 0x1f4
     bl fn_80116BD4
@@ -1227,7 +1227,7 @@ asm void fn_80392FE8(void)
     stfs f27, 0x8(r1)
     stfs f26, 0xc(r1)
     stfs f25, 0x10(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     addi r3, r1, 0x68
     lfs f2, 0x70(r1)
     psq_l f1, 0x0(r3), 0, 0
@@ -1319,7 +1319,7 @@ asm void fn_8039328C(void)
     li r6, 0x0
     li r7, 0x0
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lfs f1, 0x14(r29)
     addi r3, r1, 0x8
     lfs f2, 0x18(r29)
@@ -1339,7 +1339,7 @@ asm void fn_8039328C(void)
     li r6, 0x0
     li r7, 0x0
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r0, 0x7fc(r29)
     cmpwi r0, 0x6
     bne lbl_fn_8039328C_000012C0
@@ -1402,7 +1402,7 @@ asm void fn_803933F4(void)
     stw r28, 0x30(r1)
     stw r0, 0x18(r1)
     stw r0, 0x20(r1)
-    bl fn_80680CF8
+    bl rand
     lis r28, 0x4178
     lis r29, lbl_8074E008@ha
     addi r0, r28, 0x749f
@@ -1425,7 +1425,7 @@ asm void fn_803933F4(void)
     fdivs f5, f6, f5
     fmuls f3, f3, f5
     fmadds f31, f0, f4, f3
-    bl fn_80680CF8
+    bl rand
     addi r4, r28, 0x749f
     lfs f0, lbl_808858E8
     mulhw r5, r4, r3
@@ -1560,7 +1560,7 @@ asm void fn_80393610(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80393610_000015BC
     mr r4, r28
@@ -1594,15 +1594,15 @@ asm void fn_803936A4(void)
     mr r22, r5
     mr r24, r6
     mr r20, r7
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_8078B128@ha
     lis r4, fn_8006CA80@ha
     addi r3, r3, lbl_8078B128@l
-    lis r5, fn_80014798@ha
+    lis r5, atn_LH_Binary_destructor@ha
     stw r3, 0x0(r21)
     addi r3, r21, 0x48
     addi r4, r4, fn_8006CA80@l
-    addi r5, r5, fn_80014798@l
+    addi r5, r5, atn_LH_Binary_destructor@l
     li r6, 0x8
     li r7, 0x3
     bl fn_806958E0
@@ -1704,7 +1704,7 @@ asm void fn_803936A4(void)
     addi r8, r1, 0x30
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x60(r1)
     srwi. r0, r0, 31
     bne lbl_fn_803936A4_000017D0
@@ -1755,7 +1755,7 @@ lbl_fn_803936A4_0000183C:
     add r7, r22, r0
     addi r8, r1, 0x28
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x60(r1)
     srwi. r0, r0, 31
     bne lbl_fn_803936A4_00001880
@@ -1819,7 +1819,7 @@ lbl_fn_803936A4_0000190C:
     addi r8, r1, 0x20
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r3, r1, 0x54
     addi r4, r1, 0x48
     bl fn_8006B2D8
@@ -1848,7 +1848,7 @@ lbl_fn_803936A4_0000198C:
     add r7, r26, r0
     addi r8, r1, 0x18
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r3, r1, 0x3c
     addi r4, r1, 0x38
     bl fn_80393BEC
@@ -1877,7 +1877,7 @@ lbl_fn_803936A4_00001A04:
     add r7, r6, r0
     addi r8, r1, 0x10
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x3c(r1)
     srwi. r0, r0, 31
     beq lbl_fn_803936A4_00001A30
@@ -1903,7 +1903,7 @@ lbl_fn_803936A4_00001A4C:
     add r7, r25, r0
     addi r8, r1, 0x8
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x54(r1)
     srwi. r0, r0, 31
     bne lbl_fn_803936A4_00001A8C

@@ -9,7 +9,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_22(void);
 extern void _savegpr_27(void);
 extern void fn_8004B338(void);
-extern void fn_8004B378(void);
+extern void item_useConsumable(void);
 extern void fn_8005DF90(void);
 extern void fn_80063764(void);
 extern void fn_800638B0(void);
@@ -18,28 +18,28 @@ extern void fn_8006FDD8(void);
 extern void fn_8006FE08(void);
 extern void fn_80070C98(void);
 extern void fn_80071D74(void);
-extern void fn_80071E04(void);
+extern void gx_drawScreenQuad(void);
 extern void fn_80075DEC(void);
-extern void fn_80076760(void);
+extern void gx_setRenderStateParam(void);
 extern void fn_800A96AC(void);
 extern void fn_800B6C70(void);
 extern void fn_800BDB58(void);
 extern void fn_800C1424(void);
 extern void fn_800D5E18(void);
-extern void fn_805F89F0(void);
-extern void fn_805F9240(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9420(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9990(void);
+extern void PSMTXConcat(void);
+extern void C_MTXLookAt(void);
+extern void PSMTXMultVec(void);
+extern void PSMTXMultVecArray(void);
+extern void PSVECNormalize(void);
+extern void PSVECDotProduct(void);
 extern void fn_80614190(void);
-extern void fn_80614CC0(void);
-extern void fn_80614D30(void);
+extern void GXSetTexCopySrc(void);
+extern void GXSetTexCopyDst(void);
 extern void fn_80615190(void);
-extern void fn_80615560(void);
+extern void GXCopyTex(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
-extern void fn_80617DA0(void);
+extern void GXSetZCompLoc(void);
 extern void fn_80618570(void);
 
 /* External data declarations */
@@ -303,7 +303,7 @@ lbl_fn_800B7090_000002BC:
     stfs f11, 0xcc(r1)
     stfs f10, 0xd0(r1)
     stfs f11, 0xd4(r1)
-    bl fn_805F9990
+    bl PSVECDotProduct
     fabs f11, f1
     lfs f10, lbl_80880F88
     frsp f11, f11
@@ -324,7 +324,7 @@ lbl_fn_800B7090_000002BC:
     stfs f10, 0xb4(r1)
     stfs f10, 0xb8(r1)
     stfs f2, 0xbc(r1)
-    bl fn_805F9990
+    bl PSVECDotProduct
     fabs f11, f1
     lfs f10, lbl_80880F88
     frsp f11, f11
@@ -356,7 +356,7 @@ lbl_fn_800B7090_00000410:
     lfs f2, 0x110(r1)
     stfs f2, 0x1c(r22)
     psq_st f1, 0x14(r22), 0, 0
-    bl fn_805F9240
+    bl C_MTXLookAt
     lfs f28, 0x14(r23)
     addi r24, r1, 0x178
     lfs f13, 0x10(r23)
@@ -433,7 +433,7 @@ lbl_fn_800B7090_00000410:
     stfs f2, 0x8c(r1)
     psq_st f1, 0x0(r31), 0, 0
     stfs f2, 0x1d4(r1)
-    bl fn_805F9420
+    bl PSMTXMultVecArray
     addi r4, r1, 0x18
     addi r3, r1, 0x24
     psq_l f1, 0x0(r24), 0, 0
@@ -631,7 +631,7 @@ lbl_fn_800B7090_00000410:
     psq_l f1, 0x0(r5), 0, 0
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x98(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f12, 0x98(r1)
     addi r4, r1, 0xf0
     lfs f10, 0x94(r1)
@@ -662,7 +662,7 @@ lbl_fn_800B7090_00000410:
     stfs f2, 0x10(r22)
     stfs f31, 0xc8(r22)
     stfs f10, 0xcc(r22)
-    bl fn_8004B378
+    bl item_useConsumable
     addi r11, r1, 0x210
     psq_l f31, 0x248(r1), 0, 0
     lfd f31, 0x240(r1)
@@ -908,7 +908,7 @@ lbl_fn_800B79E4_00000C94:
     stfs f2, 0x7c(r1)
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0x88(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x88(r1)
     addi r3, r1, 0xb0
     psq_l f1, 0x0(r28), 0, 0
@@ -917,7 +917,7 @@ lbl_fn_800B79E4_00000C94:
 lbl_fn_800B79E4_00000CE4:
     addi r3, r1, 0xb0
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f10, lbl_80880F90
     addi r7, r1, 0x1c8
     lfs f9, lbl_80880F94
@@ -1600,7 +1600,7 @@ lbl_fn_800B79E4_00001758:
     mr r3, r22
     mr r4, r23
     mr r5, r23
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r24, r24, 0x1
     addi r23, r23, 0xc
     cmpwi r24, 0x8
@@ -1920,26 +1920,26 @@ lbl_fn_800B8964_00001C18:
     blt lbl_fn_800B8964_00001C18
     lwz r28, lbl_8087EEE0
     mr r3, r28
-    bl fn_80071E04
+    bl gx_drawScreenQuad
     mr r3, r28
     li r4, 0x6
     li r5, 0x2
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r28
     addi r4, r29, 0x2f0
     bl fn_80071D74
     mr r3, r28
     li r4, 0x8
     li r5, 0x1
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r28
     li r4, 0x9
     li r5, 0x2
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r28
     li r4, 0xa
     li r5, 0x1
-    bl fn_80076760
+    bl gx_setRenderStateParam
     lwz r5, lbl_8087EFA8
     lis r4, lbl_80732ED0@ha
     lfs f1, lbl_80880F7C
@@ -2040,15 +2040,15 @@ lbl_fn_800B8964_00001C18:
     clrlwi r6, r30, 16
     li r3, 0x0
     li r4, 0x0
-    bl fn_80614CC0
+    bl GXSetTexCopySrc
     extrwi r3, r31, 15, 16
     extrwi r4, r30, 15, 16
     li r5, 0x4
     li r6, 0x1
-    bl fn_80614D30
+    bl GXSetTexCopyDst
     lwz r3, 0x45c(r29)
     li r4, 0x1
-    bl fn_80615560
+    bl GXCopyTex
     lwz r0, 0xc(r1)
     addi r3, r1, 0x10
     stw r0, 0x10(r1)
@@ -2106,15 +2106,15 @@ asm void fn_800B8F40(void)
     li r3, 0x0
     lwz r27, 0x79c(r4)
     li r4, 0x0
-    bl fn_80614CC0
+    bl GXSetTexCopySrc
     clrlwi r3, r30, 16
     clrlwi r4, r29, 16
     li r5, 0x13
     li r6, 0x0
-    bl fn_80614D30
+    bl GXSetTexCopyDst
     mr r3, r27
     li r4, 0x0
-    bl fn_80615560
+    bl GXCopyTex
     mr r4, r27
     addi r3, r31, 0x480
     clrlwi r5, r30, 16
@@ -2129,15 +2129,15 @@ lbl_fn_800B8F40_00001F64:
     clrlwi r6, r29, 16
     li r3, 0x0
     li r4, 0x0
-    bl fn_80614CC0
+    bl GXSetTexCopySrc
     extrwi r3, r30, 15, 16
     extrwi r4, r29, 15, 16
     li r5, 0x4
     li r6, 0x1
-    bl fn_80614D30
+    bl GXSetTexCopyDst
     lwz r3, 0x45c(r31)
     li r4, 0x1
-    bl fn_80615560
+    bl GXCopyTex
     srwi r3, r30, 31
     srwi r0, r29, 31
     add r5, r3, r30
@@ -2157,7 +2157,7 @@ lbl_fn_800B8F40_00001F64:
     lwz r3, lbl_8087EEE0
     bl fn_80075DEC
     li r3, 0x1
-    bl fn_80617DA0
+    bl GXSetZCompLoc
     lwz r3, lbl_8087EFB4
     lwz r0, 0x74(r31)
     stw r0, 0x104(r3)
@@ -2422,11 +2422,11 @@ lbl_fn_800B8F40_00002344:
     fmuls f0, f0, f29
     stfs f9, 0xe0(r1)
     stfs f0, 0xe4(r1)
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xc8
     addi r4, r1, 0x68
     addi r5, r1, 0x98
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r6, r1, 0x98
     addi r3, r31, 0x2c0
     psq_l f1, 0x0(r6), 0, 0
@@ -2443,11 +2443,11 @@ lbl_fn_800B8F40_00002344:
     psq_st f3, 0x4b0(r31), 0, 0
     psq_st f4, 0x4b8(r31), 0, 0
     psq_st f5, 0x4c0(r31), 0, 0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xf8
     addi r4, r1, 0x8
     addi r5, r1, 0x38
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x38
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0

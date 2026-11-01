@@ -7,12 +7,12 @@ extern void _restgpr_14(void);
 extern void _restgpr_25(void);
 extern void _savegpr_14(void);
 extern void _savegpr_25(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000DCF4(void);
 extern void fn_8000DD0C(void);
 extern void fn_8001047C(void);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void fn_800133B0(void);
 extern void fn_800A555C(void);
 extern void fn_8012A190(void);
@@ -21,7 +21,7 @@ extern void fn_80139F2C(void);
 extern void fn_8013C38C(void);
 extern void fn_8013C3A8(void);
 extern void fn_80147A00(void);
-extern void fn_80370A78(void);
+extern void world_getLocalFlag(void);
 extern void fn_803CFC58(void);
 extern void fn_804AE3BC(void);
 extern void fn_804CF374(void);
@@ -51,7 +51,7 @@ extern void fn_804EB3D0(void);
 extern void fn_804EB874(void);
 extern void fn_80506530(void);
 extern void fn_8050E098(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_806A8E40(void);
 extern void fn_806B0E30(void);
 
@@ -150,7 +150,7 @@ lbl_fn_804E651C_000000C4:
     cmpwi r3, 0x0
     beq lbl_fn_804E651C_000000DC
     li r4, 0xfb
-    bl fn_80370A78
+    bl world_getLocalFlag
     b lbl_fn_804E651C_000000E0
 lbl_fn_804E651C_000000DC:
     li r3, 0x0
@@ -317,7 +317,7 @@ lbl_fn_804E67A0_00000300:
 lbl_fn_804E67A0_00000308:
     li r25, 0xa
 lbl_fn_804E67A0_0000030C:
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r25
     mullw r0, r0, r25
     subf r0, r0, r3
@@ -359,7 +359,7 @@ lbl_fn_804E67A0_00000388:
     b lbl_fn_804E67A0_00000414
 lbl_fn_804E67A0_00000394:
     lwz r25, 0xa0(r1)
-    bl fn_80680CF8
+    bl rand
     divwu r0, r3, r25
     lwz r4, 0x74(r1)
     addi r5, r1, 0x78
@@ -419,7 +419,7 @@ lbl_fn_804E67A0_00000458:
     b lbl_fn_804E67A0_000004E4
 lbl_fn_804E67A0_00000464:
     lwz r25, 0xa0(r1)
-    bl fn_80680CF8
+    bl rand
     divwu r0, r3, r25
     lwz r4, 0x48(r1)
     addi r5, r1, 0x4c
@@ -520,7 +520,7 @@ lbl_fn_804E67A0_0000052C:
 lbl_fn_804E67A0_000005D8:
     cmpwi r31, 0x0
     ble lbl_fn_804E67A0_000006A0
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r31
     li r5, 0x0
     mullw r0, r0, r31
@@ -578,7 +578,7 @@ lbl_fn_804E67A0_000006A0:
     addi r29, r29, 0x4
     cmpwi r24, 0x3
     blt lbl_fn_804E67A0_00000500
-    bl fn_80680CF8
+    bl rand
     stw r3, 0x598(r26)
     mr r29, r26
     addi r31, r1, 0x74
@@ -1674,7 +1674,7 @@ asm void fn_804E7AC4(void)
     bl fn_8013C38C
     mr r4, r3
     mr r3, r27
-    bl fn_8000D124
+    bl vec3_copy
     mr r3, r29
     li r4, 0x1
     bl fn_804E8094
@@ -1685,10 +1685,10 @@ asm void fn_804E7AC4(void)
     mr r4, r3
     mr r5, r28
     addi r3, r1, 0x20
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r27, 0xc
     addi r4, r1, 0x20
-    bl fn_8000D124
+    bl vec3_copy
     mr r3, r29
     bl fn_8013C3A8
     cmpwi r3, 0x0
@@ -1801,7 +1801,7 @@ lbl_fn_804E7AC4_0000176C:
     bl fn_8013C38C
     mr r4, r3
     mr r3, r25
-    bl fn_8000D124
+    bl vec3_copy
     lwz r3, 0x0(r28)
     li r4, 0x1
     bl fn_804E8094
@@ -1812,10 +1812,10 @@ lbl_fn_804E7AC4_0000176C:
     mr r4, r3
     mr r5, r30
     addi r3, r1, 0x14
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r25, 0xc
     addi r4, r1, 0x14
-    bl fn_8000D124
+    bl vec3_copy
     lwz r3, 0x0(r28)
     bl fn_8013C3A8
     cmpwi r3, 0x0
@@ -1932,7 +1932,7 @@ lbl_fn_804E7AC4_000019C8:
     bl fn_8013C38C
     mr r4, r3
     mr r3, r27
-    bl fn_8000D124
+    bl vec3_copy
     lwz r3, 0x10c(r1)
     li r4, 0x1
     bl fn_804E8094
@@ -1943,10 +1943,10 @@ lbl_fn_804E7AC4_000019C8:
     mr r4, r3
     mr r5, r29
     addi r3, r1, 0x8
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r27, 0xc
     addi r4, r1, 0x8
-    bl fn_8000D124
+    bl vec3_copy
     lwz r3, 0x10c(r1)
     bl fn_8013C3A8
     cmpwi r3, 0x0

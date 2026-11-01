@@ -10,13 +10,13 @@ extern void fn_800128FC(void);
 extern void fn_80046EE0(void);
 extern void fn_80047B54(void);
 extern void fn_800499D0(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_8008A4E0(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_800A555C(void);
 extern void fn_800C37FC(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D2338(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_unlink(void);
 extern void fn_801255C8(void);
 extern void fn_80126214(void);
 extern void fn_80128A30(void);
@@ -30,14 +30,14 @@ extern void fn_805381CC(void);
 extern void fn_805382C0(void);
 extern void fn_80538DC8(void);
 extern void fn_8057F0FC(void);
-extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9160(void);
-extern void fn_805F9750(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
-extern void fn_805F9940(void);
-extern void fn_8068AEA4(void);
+extern void PSMTXConcat(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXScale(void);
+extern void PSMTX44Identity(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
+extern void PSVECMag(void);
+extern void std_atan2(void);
 extern void fn_806958E0(void);
 
 /* External data declarations */
@@ -101,8 +101,8 @@ void fn_8010E604(void);
 void fn_8010E60C(void);
 void fn_8010E7B8(void);
 void fn_8010EB58(void);
-void fn_8010EBE0(void);
-void fn_8010ECBC(void);
+void cloth_updateSimulation(void);
+void cloth_unlinkTask(void);
 
 asm void fn_8010D770(void)
 {
@@ -209,7 +209,7 @@ asm void fn_8010D854(void)
     li r5, 0x0
     addi r31, r3, 0xb0
     mr r3, r31
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_8010D854_0000015C
     li r4, 0x0
@@ -237,11 +237,11 @@ lbl_fn_8010D854_00000168:
     stfs f31, 0x8(r1)
     stfs f31, 0xc(r1)
     stfs f31, 0x10(r1)
-    bl fn_805F9160
+    bl PSMTXScale
     mr r3, r30
     addi r4, r1, 0x20
     addi r5, r1, 0x50
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x50
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -654,7 +654,7 @@ lbl_fn_8010DD34_000006C4:
     fsubs f0, f3, f0
     stfs f4, 0xe4(r1)
     stfs f0, 0xe0(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fmuls f0, f29, f29
     fcmpo cr0, f1, f0
     ble lbl_fn_8010DD34_00000748
@@ -704,7 +704,7 @@ lbl_fn_8010DD34_00000788:
     lfs f2, 0x60(r28)
     stfs f2, 0x100(r1)
     psq_st f1, 0x0(r3), 0, 0
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, lbl_808815FC
     fmr f31, f1
     fcmpo cr0, f1, f0
@@ -722,7 +722,7 @@ lbl_fn_8010DD34_000007E0:
     mr r4, r29
     psq_st f1, 0x0(r29), 0, 0
     stfs f2, 0xb8(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0xb8(r1)
     addi r28, r1, 0xbc
     psq_l f1, 0x0(r29), 0, 0
@@ -747,7 +747,7 @@ lbl_fn_8010DD34_00000854:
 lbl_fn_8010DD34_0000085C:
     frsp f2, f2
     lfs f1, 0xbc(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x90(r1)
 lbl_fn_8010DD34_00000870:
@@ -755,7 +755,7 @@ lbl_fn_8010DD34_00000870:
     addi r3, r1, 0x190
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_808815F8
     addi r4, r1, 0x80
     lfs f29, 0x198(r1)
@@ -805,7 +805,7 @@ lbl_fn_8010DD34_00000870:
     stfs f6, 0x1ec(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x88(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x88(r1)
     lfs f0, lbl_80881604
     fabs f3, f2
@@ -826,7 +826,7 @@ lbl_fn_8010DD34_00000980:
     b lbl_fn_8010DD34_000009A0
 lbl_fn_8010DD34_0000098C:
     lfs f1, 0x84(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x8c(r1)
@@ -856,7 +856,7 @@ lbl_fn_8010DD34_000009CC:
     stfs f4, 0xf0(r1)
     stfs f0, 0xec(r1)
     stfs f6, 0xf4(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fabs f3, f1
     lfs f0, lbl_80881604
     frsp f3, f3
@@ -870,7 +870,7 @@ lbl_fn_8010DD34_000009CC:
     mr r4, r28
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0xa0(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0xa0(r1)
     addi r29, r1, 0xa4
     psq_l f1, 0x0(r28), 0, 0
@@ -895,7 +895,7 @@ lbl_fn_8010DD34_00000A80:
 lbl_fn_8010DD34_00000A88:
     frsp f2, f2
     lfs f1, 0xa4(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_8010DD34_00000A9C:
@@ -903,7 +903,7 @@ lbl_fn_8010DD34_00000A9C:
     addi r3, r1, 0x120
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_808815F8
     addi r4, r1, 0x38
     lfs f30, 0x128(r1)
@@ -953,7 +953,7 @@ lbl_fn_8010DD34_00000A9C:
     stfs f6, 0x17c(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_80881604
     fabs f3, f2
@@ -974,7 +974,7 @@ lbl_fn_8010DD34_00000BAC:
     b lbl_fn_8010DD34_00000BCC
 lbl_fn_8010DD34_00000BB8:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -1405,7 +1405,7 @@ lbl_fn_8010E7B8_00001140:
     lfs f2, 0x60(r29)
     stfs f2, 0x70(r1)
     psq_st f1, 0x0(r3), 0, 0
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, lbl_80881624
     fmr f31, f1
     fcmpo cr0, f1, f0
@@ -1423,7 +1423,7 @@ lbl_fn_8010E7B8_00001174:
     mr r4, r30
     psq_st f1, 0x0(r30), 0, 0
     stfs f2, 0x58(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x58(r1)
     addi r29, r1, 0x5c
     psq_l f1, 0x0(r30), 0, 0
@@ -1448,7 +1448,7 @@ lbl_fn_8010E7B8_000011E8:
 lbl_fn_8010E7B8_000011F0:
     frsp f2, f2
     lfs f1, 0x5c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_8010E7B8_00001204:
@@ -1456,7 +1456,7 @@ lbl_fn_8010E7B8_00001204:
     addi r3, r1, 0x80
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80881620
     addi r4, r1, 0x38
     lfs f29, 0x88(r1)
@@ -1506,7 +1506,7 @@ lbl_fn_8010E7B8_00001204:
     stfs f6, 0xdc(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_8088162C
     fabs f3, f2
@@ -1527,7 +1527,7 @@ lbl_fn_8010E7B8_00001314:
     b lbl_fn_8010E7B8_00001334
 lbl_fn_8010E7B8_00001320:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -1602,12 +1602,12 @@ asm void fn_8010EB58(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_8010EB58_0000144C
     mr r4, r30
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_80779ED8@ha
     li r0, 0x0
     addi r3, r3, lbl_80779ED8@l
@@ -1627,7 +1627,7 @@ lbl_fn_8010EB58_00001458:
     blr
 }
 
-asm void fn_8010EBE0(void)
+asm void cloth_updateSimulation(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1638,16 +1638,16 @@ asm void fn_8010EBE0(void)
     mr r30, r3
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8010EBE0_000014A0
+    beq lbl_cloth_updateSimulation_000014A0
     cmpwi r0, 0x1
-    beq lbl_fn_8010EBE0_0000150C
-    b lbl_fn_8010EBE0_00001524
-lbl_fn_8010EBE0_000014A0:
+    beq lbl_cloth_updateSimulation_0000150C
+    b lbl_cloth_updateSimulation_00001524
+lbl_cloth_updateSimulation_000014A0:
     lwz r3, lbl_8087F518
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_8010EBE0_00001524
+    bne lbl_cloth_updateSimulation_00001524
     bl fn_8046EC7C
     lis r4, lbl_80736614@ha
     lwz r3, lbl_8087EE90
@@ -1660,9 +1660,9 @@ lbl_fn_8010EBE0_000014A0:
     stw r3, 0x2a10(r4)
     lwz r3, lbl_8087F9C0
     cmpwi r3, 0x0
-    beq lbl_fn_8010EBE0_000014EC
+    beq lbl_cloth_updateSimulation_000014EC
     bl fn_8057F0FC
-lbl_fn_8010EBE0_000014EC:
+lbl_cloth_updateSimulation_000014EC:
     bl fn_802144A8
     lwz r31, lbl_8087EE90
     bl fn_803CE148
@@ -1671,14 +1671,14 @@ lbl_fn_8010EBE0_000014EC:
     bl fn_80047B54
     li r0, 0x1
     stw r0, 0x48(r30)
-lbl_fn_8010EBE0_0000150C:
+lbl_cloth_updateSimulation_0000150C:
     lwz r3, lbl_8087F518
     bl fn_8046ECC8
     cmpwi r3, 0x0
-    bne lbl_fn_8010EBE0_00001524
+    bne lbl_cloth_updateSimulation_00001524
     li r0, 0x3
     stw r0, 0x48(r30)
-lbl_fn_8010EBE0_00001524:
+lbl_cloth_updateSimulation_00001524:
     lwz r3, 0x48(r30)
     lwz r31, 0xc(r1)
     subi r0, r3, 0x3
@@ -1691,13 +1691,13 @@ lbl_fn_8010EBE0_00001524:
     blr
 }
 
-asm void fn_8010ECBC(void)
+asm void cloth_unlinkTask(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_800D2338
+    bl atn_Task_unlink
     lwz r4, lbl_8087F0A8
     lwz r3, lbl_8087EFC0
     addi r4, r4, 0x1b4

@@ -6,20 +6,20 @@ extern void __files(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_800844D8(void);
-extern void fn_800CB3A0(void);
+extern void mem_free(void);
+extern void ref_releaseHandle(void);
 extern void fn_8011F8F4(void);
 extern void fn_8011F91C(void);
 extern void fn_8011FC10(void);
 extern void fn_8011FE3C(void);
 extern void fn_80154654(void);
 extern void fn_80155DAC(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_8016F824(void);
 extern void fn_8016FDCC(void);
 extern void fn_8017039C(void);
 extern void fn_80370094(void);
-extern void fn_80370320(void);
+extern void world_setGlobalFlag(void);
 extern void fn_803935FC(void);
 extern void fn_8039BF04(void);
 extern void fn_8039C7F0(void);
@@ -30,9 +30,9 @@ extern void fn_803B57EC(void);
 extern void fn_803B583C(void);
 extern void fn_803B58D8(void);
 extern void fn_803CC6B4(void);
-extern void fn_805F9940(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void PSVECMag(void);
+extern void printf(void);
+extern void abort(void);
 extern void memmove(void);
 
 /* External data declarations */
@@ -94,7 +94,7 @@ asm void fn_8039E280(void)
     bl fn_803B58D8
     mr r3, r30
     li r4, 0x5
-    bl fn_8016E970
+    bl actor_setState
     li r0, 0x0
     stw r0, 0xb4(r27)
     li r0, 0x1
@@ -161,7 +161,7 @@ asm void fn_8039E328(void)
     bl fn_803935FC
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_8039E328_00000148:
     lwz r3, 0x2c(r30)
     lwz r0, 0xb4(r29)
@@ -437,7 +437,7 @@ lbl_fn_8039E328_000004F8:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
     lwz r3, 0x48(r3)
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_8039E328_0000056C
 lbl_fn_8039E328_00000524:
     lwz r0, 0xac(r3)
@@ -712,7 +712,7 @@ asm void fn_8039EACC(void)
     bl fn_803935FC
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087F0A8
     lwz r0, 0xb8(r3)
     cmpwi r0, 0x0
@@ -733,7 +733,7 @@ lbl_fn_8039EACC_000008D8:
     lwz r3, lbl_8087F8A0
     li r4, 0x5
     lwz r3, 0x48(r3)
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_8039EACC_000008E8:
     lwz r0, 0x0(r29)
     lis r3, lbl_8074ED24@ha
@@ -811,7 +811,7 @@ lbl_fn_8039EBB8_000009E4:
     bl fn_803935FC
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8039EBB8_00000A18
 lbl_fn_8039EBB8_00000A04:
     lwz r3, 0x54(r28)
@@ -1077,13 +1077,13 @@ lbl_fn_8039EBB8_00000D88:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
     lwz r3, 0x48(r3)
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_8039EBB8_00000DC4
 lbl_fn_8039EBB8_00000DB4:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
     lwz r3, 0x48(r3)
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_8039EBB8_00000DC4:
     li r0, 0x0
     stw r0, 0x4(r30)
@@ -1309,8 +1309,8 @@ lbl_fn_8039F08C_000010A8:
     addi r4, r4, 0xce
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8039F08C_000010E0:
     lwz r4, 0x130(r23)
     li r6, 0x0
@@ -1336,8 +1336,8 @@ lbl_fn_8039F08C_000010E0:
     addi r4, r4, 0xce
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8039F08C_00001148:
     lis r3, 0x444
     addi r0, r3, 0x4444
@@ -1392,11 +1392,11 @@ lbl_fn_8039F08C_000011DC:
     addi r4, r4, 0xce
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8039F08C_00001210:
     mulli r3, r31, 0x14
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r22, r3
     bne lbl_fn_8039F08C_00001244
@@ -1406,8 +1406,8 @@ lbl_fn_8039F08C_00001210:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8078B2F8@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8039F08C_00001244:
     lwz r6, 0x130(r23)
     li r0, 0x14
@@ -1650,12 +1650,12 @@ asm void fn_8039F7D8(void)
     li r5, 0x0
     lwz r3, lbl_8087F430
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     lwz r3, lbl_8087F430
     li r4, 0x11d
     li r5, 0x0
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     lwz r4, 0x0(r31)
     lis r3, lbl_8074ED24@ha
     li r0, 0x0
@@ -1856,7 +1856,7 @@ lbl_fn_8039F9A4_00001844:
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fctiwz f0, f1
     stfd f0, 0x18(r1)
     lwz r8, 0x1c(r1)

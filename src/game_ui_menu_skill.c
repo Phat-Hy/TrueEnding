@@ -7,9 +7,9 @@ extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void fn_8004ED34(void);
 extern void fn_80051A88(void);
-extern void fn_80092814(void);
-extern void fn_80097C08(void);
-extern void fn_80097D7C(void);
+extern void atn_Model_findBoneIndex(void);
+extern void atn_Anim_setLayerAnimation(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A56A8(void);
 extern void fn_8010A308(void);
 extern void fn_801446F0(void);
@@ -17,15 +17,15 @@ extern void fn_801539E0(void);
 extern void fn_80155DAC(void);
 extern void fn_80176DFC(void);
 extern void fn_803EA77C(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9750(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
-extern void fn_805F9940(void);
-extern void fn_80680CF8(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSMTX44Identity(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
+extern void PSVECMag(void);
+extern void rand(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 
 /* External data declarations */
 extern u8 lbl_8073B2E8[];
@@ -127,7 +127,7 @@ asm void fn_801B8DFC(void)
     addi r31, r3, 0xb0
     mr r3, r31
     stfs f0, 0x24c(r31)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80882518
     lis r4, lbl_80781040@ha
     stfs f0, 0x238(r31)
@@ -147,10 +147,10 @@ asm void fn_801B8DFC(void)
     lfs f31, lbl_80882544
     stfs f5, 0x10(r1)
     stfs f0, 0x8(r1)
-    bl fn_805F9940
+    bl PSVECMag
     addi r3, r1, 0x8
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     lwz r4, 0x4(r28)
     addi r3, r1, 0x8
     lfs f0, lbl_80882528
@@ -195,7 +195,7 @@ lbl_fn_801B8DFC_0000017C:
 lbl_fn_801B8DFC_00000184:
     fmr f2, f3
     lfs f1, 0x14(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x24(r1)
 lbl_fn_801B8DFC_00000198:
@@ -203,7 +203,7 @@ lbl_fn_801B8DFC_00000198:
     addi r3, r1, 0xa8
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_8088251C
     addi r4, r1, 0x2c
     lfs f4, 0xb0(r1)
@@ -253,7 +253,7 @@ lbl_fn_801B8DFC_00000198:
     stfs f13, 0x94(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x34(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x34(r1)
     lfs f0, lbl_80882528
     fabs f3, f2
@@ -274,7 +274,7 @@ lbl_fn_801B8DFC_000002A8:
     b lbl_fn_801B8DFC_000002C8
 lbl_fn_801B8DFC_000002B4:
     lfs f1, 0x30(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x20(r1)
@@ -343,7 +343,7 @@ asm void fn_801B9128(void)
     addi r30, r3, 0xb0
     mr r3, r30
     stfs f0, 0x24c(r30)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f5, 0x4(r29)
     lis r4, lbl_80780FC0@ha
     lfs f4, 0x4(r28)
@@ -368,7 +368,7 @@ asm void fn_801B9128(void)
     stfs f2, 0x7c(r1)
     stfs f2, 0x2c(r31)
     stfs f0, 0x28(r31)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fabs f3, f1
     lfs f0, lbl_80882528
     frsp f3, f3
@@ -376,7 +376,7 @@ asm void fn_801B9128(void)
     blt lbl_fn_801B9128_0000043C
     addi r3, r31, 0x24
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_801B9128_0000043C:
     lfs f2, 0x2c(r31)
     addi r30, r1, 0x5c
@@ -402,7 +402,7 @@ lbl_fn_801B9128_00000480:
 lbl_fn_801B9128_00000488:
     frsp f2, f2
     lfs f1, 0x5c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_801B9128_0000049C:
@@ -410,7 +410,7 @@ lbl_fn_801B9128_0000049C:
     addi r3, r1, 0x80
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_8088251C
     addi r4, r1, 0x38
     lfs f30, 0x88(r1)
@@ -460,7 +460,7 @@ lbl_fn_801B9128_0000049C:
     stfs f6, 0xdc(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_80882528
     fabs f3, f2
@@ -481,7 +481,7 @@ lbl_fn_801B9128_000005AC:
     b lbl_fn_801B9128_000005CC
 lbl_fn_801B9128_000005B8:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -512,7 +512,7 @@ lbl_fn_801B9128_000005CC:
     addi r29, r3, 0xb0
     stfs f5, 0x70(r1)
     mr r3, r29
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_801B9128_00000648
     li r3, 0x0
@@ -531,7 +531,7 @@ lbl_fn_801B9128_00000654:
     addi r29, r3, 0xb0
     mr r3, r29
     addi r4, r4, 0x5
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_801B9128_0000068C
     li r3, 0x0
@@ -550,7 +550,7 @@ lbl_fn_801B9128_00000698:
     addi r29, r3, 0xb0
     mr r3, r29
     addi r4, r4, 0xc
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_801B9128_000006D0
     li r3, 0x0
@@ -569,7 +569,7 @@ lbl_fn_801B9128_000006DC:
     addi r29, r3, 0xb0
     mr r3, r29
     addi r4, r4, 0x11
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_801B9128_00000714
     li r3, 0x0
@@ -632,7 +632,7 @@ asm void fn_801B9598(void)
     lwz r5, 0x4(r3)
     lfs f31, 0x2e4(r5)
     addi r3, r5, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f31, f1
     cror eq, gt, eq
     bne lbl_fn_801B9598_00000868
@@ -668,7 +668,7 @@ lbl_fn_801B9598_0000080C:
     lwz r3, 0x4(r30)
     stfs f0, 0x10(r1)
     addi r3, r3, 0xb0
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     li r31, 0x1
 lbl_fn_801B9598_00000868:
     lwz r3, 0x4(r30)
@@ -678,7 +678,7 @@ lbl_fn_801B9598_00000868:
     addi r28, r3, 0xb0
     addi r4, r4, lbl_8073B2E8@l
     mr r3, r28
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_801B9598_00000898
     li r3, 0x0
@@ -697,7 +697,7 @@ lbl_fn_801B9598_000008A4:
     addi r28, r3, 0xb0
     mr r3, r28
     addi r4, r4, 0x5
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_801B9598_000008DC
     li r3, 0x0
@@ -716,7 +716,7 @@ lbl_fn_801B9598_000008E8:
     addi r28, r3, 0xb0
     mr r3, r28
     addi r4, r4, 0xc
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_801B9598_00000920
     li r3, 0x0
@@ -735,7 +735,7 @@ lbl_fn_801B9598_0000092C:
     addi r28, r3, 0xb0
     mr r3, r28
     addi r4, r4, 0x11
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_801B9598_00000964
     li r3, 0x0
@@ -1056,7 +1056,7 @@ lbl_fn_801B9A54_00000D24:
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f3, 0x1c(r29)
     addi r3, r1, 0x5c
     lfs f0, 0x10(r29)
@@ -1070,10 +1070,10 @@ lbl_fn_801B9A54_00000D24:
     stfs f4, 0x60(r1)
     stfs f0, 0x5c(r1)
     stfs f6, 0x64(r1)
-    bl fn_805F9940
+    bl PSVECMag
     addi r3, r1, 0x5c
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     addi r31, r1, 0x5c
     lfs f2, 0x64(r1)
     psq_l f1, 0x0(r31), 0, 0
@@ -1085,7 +1085,7 @@ lbl_fn_801B9A54_00000D24:
     stfs f2, 0x28(r29)
     stw r0, 0x2c(r29)
     stfs f0, 0x60(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lwz r3, 0x4(r29)
     addi r30, r1, 0x50
     lfs f2, 0x10(r29)
@@ -1115,7 +1115,7 @@ lbl_fn_801B9A54_00000E10:
 lbl_fn_801B9A54_00000E18:
     frsp f2, f2
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_801B9A54_00000E2C:
@@ -1123,7 +1123,7 @@ lbl_fn_801B9A54_00000E2C:
     addi r3, r1, 0x68
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80882550
     addi r4, r1, 0x38
     lfs f30, 0x70(r1)
@@ -1173,7 +1173,7 @@ lbl_fn_801B9A54_00000E2C:
     stfs f6, 0xc4(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_8088255C
     fabs f3, f2
@@ -1194,7 +1194,7 @@ lbl_fn_801B9A54_00000F3C:
     b lbl_fn_801B9A54_00000F5C
 lbl_fn_801B9A54_00000F48:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -1264,7 +1264,7 @@ lbl_fn_801B9DE4_0000103C:
     lfs f30, 0x234(r31)
     mr r3, r31
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f5, lbl_80882554
     fsubs f0, f1, f5
     fcmpo cr0, f30, f0
@@ -1284,7 +1284,7 @@ lbl_fn_801B9DE4_0000103C:
     stfs f2, 0x180(r1)
     fadds f1, f3, f0
     lfd f2, lbl_8073B308@l(r3)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80882568
     fcmpo cr0, f3, f0
@@ -1314,7 +1314,7 @@ lbl_fn_801B9DE4_000010E4:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r3, 0x4(r27)
     li r4, 0x0
     li r5, 0x0
@@ -1353,7 +1353,7 @@ lbl_fn_801B9DE4_00001128:
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80882554
     li r4, 0x0
     stfs f0, 0x238(r31)
@@ -1382,7 +1382,7 @@ lbl_fn_801B9DE4_00001128:
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
     beq lbl_fn_801B9DE4_00001228
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -1419,7 +1419,7 @@ lbl_fn_801B9DE4_00001248:
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80882554
     addi r4, r1, 0x148
     stfs f0, 0x238(r31)
@@ -1441,7 +1441,7 @@ lbl_fn_801B9DE4_00001248:
     stfs f2, 0x150(r1)
     fadds f1, f3, f0
     lfd f2, lbl_8073B308@l(r3)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80882568
     fcmpo cr0, f3, f0
@@ -1474,7 +1474,7 @@ lbl_fn_801B9DE4_00001324:
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
     beq lbl_fn_801B9DE4_00001388
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -1634,7 +1634,7 @@ lbl_fn_801B9DE4_00001558:
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80882554
     addi r3, r1, 0x13c
     stfs f0, 0x238(r31)
@@ -1660,7 +1660,7 @@ lbl_fn_801B9DE4_00001558:
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
     beq lbl_fn_801B9DE4_0000162C
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -1705,7 +1705,7 @@ lbl_fn_801B9DE4_00001664:
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80882554
     addi r3, r1, 0x13c
     stfs f0, 0x238(r31)
@@ -1725,7 +1725,7 @@ lbl_fn_801B9DE4_00001664:
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
     beq lbl_fn_801B9DE4_00001720
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -1756,11 +1756,11 @@ lbl_fn_801B9DE4_0000173C:
     stfs f3, 0xb4(r1)
     stfs f0, 0xb8(r1)
     lfs f1, 0x538(r5)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0xb0
     addi r3, r1, 0x228
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f4, 0xb8(r1)
     addi r3, r1, 0x1f8
     lfs f5, lbl_80882594
@@ -1789,11 +1789,11 @@ lbl_fn_801B9DE4_0000173C:
     lfs f1, 0x538(r5)
     stfs f7, 0xc0(r1)
     stfs f6, 0xc4(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x98
     addi r3, r1, 0x1f8
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f4, lbl_80882594
     addi r4, r1, 0x258
     lfs f0, 0x9c(r1)
@@ -1866,7 +1866,7 @@ lbl_fn_801B9DE4_00001918:
 lbl_fn_801B9DE4_00001920:
     frsp f2, f2
     lfs f1, 0x8c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x60(r1)
 lbl_fn_801B9DE4_00001934:
@@ -1874,7 +1874,7 @@ lbl_fn_801B9DE4_00001934:
     addi r3, r1, 0x188
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80882550
     addi r4, r1, 0x50
     lfs f30, 0x190(r1)
@@ -1924,7 +1924,7 @@ lbl_fn_801B9DE4_00001934:
     stfs f6, 0x1e4(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x58(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x58(r1)
     lfs f0, lbl_8088255C
     fabs f3, f2
@@ -1945,7 +1945,7 @@ lbl_fn_801B9DE4_00001A44:
     b lbl_fn_801B9DE4_00001A64
 lbl_fn_801B9DE4_00001A50:
     lfs f1, 0x54(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x5c(r1)
@@ -1978,7 +1978,7 @@ lbl_fn_801B9DE4_00001A8C:
     lwz r6, 0x4(r27)
     psq_st f1, 0x534(r6), 0, 0
     stfs f2, 0x53c(r6)
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_801B9DE4_00001AE4
     li r0, 0x0
@@ -1994,7 +1994,7 @@ lbl_fn_801B9DE4_00001AF0:
     mr r3, r31
     addi r4, r4, lbl_8073B36C@l
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_801B9DE4_00001B1C
     li r3, 0x0
@@ -2082,7 +2082,7 @@ lbl_fn_801B9DE4_00001C08:
     addi r4, r26, lbl_8073B36C@l
     mr r3, r25
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_801B9DE4_00001C58
     li r0, 0x0
@@ -2098,7 +2098,7 @@ lbl_fn_801B9DE4_00001C64:
     addi r4, r26, lbl_8073B36C@l
     mr r3, r25
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_801B9DE4_00001C90
     li r3, 0x0
@@ -2170,7 +2170,7 @@ lbl_fn_801B9DE4_00001D50:
     lfs f30, 0x234(r31)
     mr r3, r31
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fdivs f3, f30, f1
     lfs f0, lbl_808825A8
     lfs f10, lbl_80882554
@@ -2182,7 +2182,7 @@ lbl_fn_801B9DE4_00001D88:
     lfs f30, 0x234(r31)
     mr r3, r31
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fdivs f3, f30, f1
     lfs f0, lbl_808825A8
     fmuls f10, f0, f3
@@ -2220,7 +2220,7 @@ lbl_fn_801B9DE4_00001E18:
     lfs f30, 0x234(r31)
     mr r3, r31
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f30, f1
     cror eq, gt, eq
     bne lbl_fn_801B9DE4_00001E4C

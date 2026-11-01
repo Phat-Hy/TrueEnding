@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8003DD50(void);
 extern void fn_8003DEE0(void);
 extern void fn_8003E530(void);
@@ -201,7 +201,7 @@ lbl_fn_8001E0B8_00000058:
     lwz r0, 0x4(r30)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8001E0B8_00000098:
     lwz r0, 0x0(r31)
     mr r3, r29
@@ -1174,7 +1174,7 @@ asm void fn_8001EA18(void)
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lis r3, lbl_807C6B84@ha
     addi r30, r1, 0x31
     addi r3, r3, lbl_807C6B84@l

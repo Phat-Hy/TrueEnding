@@ -3,13 +3,13 @@
 extern f32 lbl_80888578;
 extern f32 lbl_8088857C;
 
-void fn_805F98D0(void);
-void fn_805F9920(void);
-void fn_805F9940(void);
-void fn_805F9990(void);
-void fn_805F99B0(void);
+void PSVECNormalize(void);
+void PSVECSquareMag(void);
+void PSVECMag(void);
+void PSVECDotProduct(void);
+void PSVECCrossProduct(void);
 
-asm void fn_805F98D0(void) {
+asm void PSVECNormalize(void) {
     nofralloc
     psq_l f2, 0x0(r3), 0, 0
     psq_l f3, 0x8(r3), 1, 0
@@ -30,7 +30,7 @@ asm void fn_805F98D0(void) {
     blr
 }
 
-asm void fn_805F9920(void) {
+asm void PSVECSquareMag(void) {
     nofralloc
     psq_l f0, 0x0(r3), 0, 0
     lfs f1, 0x8(r3)
@@ -40,7 +40,7 @@ asm void fn_805F9920(void) {
     blr
 }
 
-asm void fn_805F9940(void) {
+asm void PSVECMag(void) {
     nofralloc
     psq_l f0, 0x0(r3), 0, 0
     lfs f4, lbl_80888578
@@ -61,7 +61,7 @@ asm void fn_805F9940(void) {
     blr
 }
 
-asm void fn_805F9990(void) {
+asm void PSVECDotProduct(void) {
     nofralloc
     psq_l f2, 0x4(r3), 0, 0
     psq_l f3, 0x4(r4), 0, 0
@@ -73,7 +73,7 @@ asm void fn_805F9990(void) {
     blr
 }
 
-asm void fn_805F99B0(void) {
+asm void PSVECCrossProduct(void) {
     nofralloc
     psq_l f1, 0x0(r4), 0, 0
     lfs f2, 0x8(r3)

@@ -13,17 +13,17 @@ extern void _savegpr_19(void);
 extern void _savegpr_20(void);
 extern void _savegpr_21(void);
 extern void fn_8004ECC0(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_800BFAC8(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_8011F8F4(void);
 extern void fn_8011F91C(void);
 extern void fn_8011FC10(void);
 extern void fn_8011FE3C(void);
-extern void fn_801231D0(void);
-extern void fn_8013655C(void);
+extern void magic_dispatchActionCommand(void);
+extern void boss_updatePhaseState(void);
 extern void fn_8036554C(void);
-extern void fn_80370174(void);
+extern void world_getGlobalFlag(void);
 extern void fn_8037F690(void);
 extern void fn_803935FC(void);
 extern void fn_8039BC0C(void);
@@ -34,12 +34,12 @@ extern void fn_803E3050(void);
 extern void fn_803E3384(void);
 extern void fn_803E3C78(void);
 extern void fn_803E6ADC(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
-extern void fn_805F9940(void);
-extern void fn_805F9990(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
+extern void PSVECMag(void);
+extern void PSVECDotProduct(void);
 
 /* External data declarations */
 extern u8 jumptable_8078B1C0[];
@@ -222,13 +222,13 @@ lbl_fn_803AE1D4_000001B4:
     stfs f4, 0x54(r1)
     stfs f0, 0x50(r1)
     stfs f6, 0x58(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fmr f23, f1
     fcmpo cr0, f1, f28
     ble lbl_fn_803AE1D4_00000204
     addi r3, r1, 0x50
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_803AE1D4_00000204:
     fcmpo cr0, f23, f29
     mfcr r0
@@ -243,7 +243,7 @@ lbl_fn_803AE1D4_00000204:
     cmpwi r3, 0x0
     beq lbl_fn_803AE1D4_00000248
     li r4, 0xa1e
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     beq lbl_fn_803AE1D4_00000248
     li r16, 0x1
@@ -315,7 +315,7 @@ lbl_fn_803AE1D4_00000324:
     addi r4, r31, 0x6e
     mr r3, r16
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_803AE1D4_00000348
     li r3, 0x0
@@ -400,7 +400,7 @@ lbl_fn_803AE1D4_00000424:
     stfs f6, 0x10(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0xc(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fsubs f0, f1, f25
     fdivs f0, f0, f26
     stfs f0, 0x7c(r1)
@@ -574,13 +574,13 @@ lbl_fn_803AE718_00000680:
     fsubs f0, f1, f0
     stfs f2, 0x48(r1)
     stfs f0, 0x44(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fmr f28, f1
     fcmpo cr0, f1, f29
     ble lbl_fn_803AE718_000006F0
     addi r3, r1, 0x44
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_803AE718_000006F0:
     fmuls f0, f31, f31
     fcmpo cr0, f28, f0
@@ -647,7 +647,7 @@ lbl_fn_803AE718_00000718:
     cmpwi r3, 0x0
     beq lbl_fn_803AE718_00000800
     li r4, 0xce
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     beq lbl_fn_803AE718_00000800
 lbl_fn_803AE718_000007FC:
@@ -865,7 +865,7 @@ lbl_fn_803AEA24_00000AA4:
     fsubs f0, f3, f0
     stfs f4, 0xc(r1)
     stfs f0, 0x8(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fmuls f0, f31, f31
     fcmpo cr0, f1, f0
     bge lbl_fn_803AEA24_00000B44
@@ -883,7 +883,7 @@ lbl_fn_803AEA24_00000AA4:
     cmpwi r3, 0x0
     beq lbl_fn_803AEA24_00000B44
     li r4, 0xce
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     beq lbl_fn_803AEA24_00000B44
 lbl_fn_803AEA24_00000B40:
@@ -937,11 +937,11 @@ asm void fn_803AED54(void)
     stfs f1, 0x18(r1)
     stfs f0, 0x1c(r1)
     lfs f1, 0x538(r30)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x14
     addi r3, r1, 0x20
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f29, lbl_80885B24
     li r26, 0x0
     lfs f31, lbl_80885BA0
@@ -978,7 +978,7 @@ lbl_fn_803AED54_00000C74:
     cmpwi r25, 0x0
     beq lbl_fn_803AED54_00000ED8
     mr r3, r25
-    bl fn_8013655C
+    bl boss_updatePhaseState
     cmpwi r3, 0x0
     bne lbl_fn_803AED54_00000ED8
     lwz r0, 0x38(r25)
@@ -1049,7 +1049,7 @@ lbl_fn_803AED54_00000D38:
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fabs f0, f1
     fmr f28, f1
     frsp f0, f0
@@ -1057,14 +1057,14 @@ lbl_fn_803AED54_00000D38:
     blt lbl_fn_803AED54_00000DA4
     addi r3, r1, 0x8
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_803AED54_00000DA4:
     fcmpo cr0, f28, f30
     li r25, 0x0
     bge lbl_fn_803AED54_00000DC8
     addi r3, r1, 0x8
     addi r4, r1, 0x14
-    bl fn_805F9990
+    bl PSVECDotProduct
     fcmpo cr0, f1, f31
     ble lbl_fn_803AED54_00000DC8
     li r25, 0x1
@@ -1115,7 +1115,7 @@ lbl_fn_803AED54_00000E44:
     cmpwi r3, 0x0
     beq lbl_fn_803AED54_00000E80
     li r4, 0xa1e
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     beq lbl_fn_803AED54_00000E80
     li r29, 0x1
@@ -1198,11 +1198,11 @@ asm void fn_803AF0FC(void)
     stfs f1, 0x18(r1)
     stfs f0, 0x1c(r1)
     lfs f1, 0x538(r30)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x14
     addi r3, r1, 0x20
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f29, lbl_80885B24
     li r26, 0x0
     lfs f31, lbl_80885BA0
@@ -1237,7 +1237,7 @@ lbl_fn_803AF0FC_00001014:
     cmpwi r25, 0x0
     beq lbl_fn_803AF0FC_00001278
     mr r3, r25
-    bl fn_8013655C
+    bl boss_updatePhaseState
     cmpwi r3, 0x0
     bne lbl_fn_803AF0FC_00001278
     lwz r0, 0x38(r25)
@@ -1308,7 +1308,7 @@ lbl_fn_803AF0FC_000010D8:
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fabs f0, f1
     fmr f28, f1
     frsp f0, f0
@@ -1316,14 +1316,14 @@ lbl_fn_803AF0FC_000010D8:
     blt lbl_fn_803AF0FC_00001144
     addi r3, r1, 0x8
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_803AF0FC_00001144:
     fcmpo cr0, f28, f30
     li r25, 0x0
     bge lbl_fn_803AF0FC_00001168
     addi r3, r1, 0x8
     addi r4, r1, 0x14
-    bl fn_805F9990
+    bl PSVECDotProduct
     fcmpo cr0, f1, f31
     ble lbl_fn_803AF0FC_00001168
     li r25, 0x1
@@ -1374,7 +1374,7 @@ lbl_fn_803AF0FC_000011E4:
     cmpwi r3, 0x0
     beq lbl_fn_803AF0FC_00001220
     li r4, 0xa1e
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     beq lbl_fn_803AF0FC_00001220
     li r29, 0x1
@@ -1457,11 +1457,11 @@ asm void fn_803AF49C(void)
     stfs f1, 0x18(r1)
     stfs f0, 0x1c(r1)
     lfs f1, 0x538(r30)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x14
     addi r3, r1, 0x20
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f29, lbl_80885B24
     li r26, 0x0
     lfs f31, lbl_80885BA0
@@ -1496,7 +1496,7 @@ lbl_fn_803AF49C_000013B4:
     cmpwi r25, 0x0
     beq lbl_fn_803AF49C_00001618
     mr r3, r25
-    bl fn_8013655C
+    bl boss_updatePhaseState
     cmpwi r3, 0x0
     bne lbl_fn_803AF49C_00001618
     lwz r0, 0x38(r25)
@@ -1567,7 +1567,7 @@ lbl_fn_803AF49C_00001478:
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fabs f0, f1
     fmr f28, f1
     frsp f0, f0
@@ -1575,14 +1575,14 @@ lbl_fn_803AF49C_00001478:
     blt lbl_fn_803AF49C_000014E4
     addi r3, r1, 0x8
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_803AF49C_000014E4:
     fcmpo cr0, f28, f30
     li r25, 0x0
     bge lbl_fn_803AF49C_00001508
     addi r3, r1, 0x8
     addi r4, r1, 0x14
-    bl fn_805F9990
+    bl PSVECDotProduct
     fcmpo cr0, f1, f31
     ble lbl_fn_803AF49C_00001508
     li r25, 0x1
@@ -1633,7 +1633,7 @@ lbl_fn_803AF49C_00001584:
     cmpwi r3, 0x0
     beq lbl_fn_803AF49C_000015C0
     li r4, 0xa1e
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     beq lbl_fn_803AF49C_000015C0
     li r29, 0x1
@@ -1731,11 +1731,11 @@ asm void fn_803AF83C(void)
     stfs f7, 0x114(r1)
     stfs f0, 0x118(r1)
     lfs f1, 0x538(r16)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x110
     addi r3, r1, 0x1c0
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lwz r0, 0xf8(r23)
     li r3, -0x1
     stw r3, 0x1a0(r1)
@@ -1794,7 +1794,7 @@ lbl_fn_803AF83C_000017E8:
     cmpwi r19, 0x0
     beq lbl_fn_803AF83C_00001970
     mr r3, r19
-    bl fn_8013655C
+    bl boss_updatePhaseState
     cmpwi r3, 0x0
     bne lbl_fn_803AF83C_00001970
     lwz r0, 0x38(r19)
@@ -1865,7 +1865,7 @@ lbl_fn_803AF83C_000018E0:
     cmpwi r3, 0x0
     beq lbl_fn_803AF83C_000018FC
     li r4, 0xa1e
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     bgt lbl_fn_803AF83C_00001904
 lbl_fn_803AF83C_000018FC:
@@ -1939,7 +1939,7 @@ lbl_fn_803AF83C_000019BC:
     stfs f8, 0xc0(r1)
     stfs f0, 0xbc(r1)
     stfs f10, 0xc4(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f22
     bge lbl_fn_803AF83C_00001A0C
     lwz r0, 0x4(r14)
@@ -2008,7 +2008,7 @@ lbl_fn_803AF83C_00001AC0:
     b lbl_fn_803AF83C_000025B4
 lbl_fn_803AF83C_00001AE0:
     mr r3, r28
-    bl fn_8013655C
+    bl boss_updatePhaseState
     cmpwi r3, 0x0
     bne lbl_fn_803AF83C_000025AC
     lwz r0, 0x38(r28)
@@ -2077,7 +2077,7 @@ lbl_fn_803AF83C_00001BA0:
     stfs f8, 0x108(r1)
     stfs f0, 0x104(r1)
     stfs f10, 0x10c(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fabs f0, f1
     fmr f22, f1
     frsp f0, f0
@@ -2085,7 +2085,7 @@ lbl_fn_803AF83C_00001BA0:
     blt lbl_fn_803AF83C_00001C00
     addi r3, r1, 0x104
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_803AF83C_00001C00:
     lwz r0, 0xc(r29)
     li r27, 0x0
@@ -2185,7 +2185,7 @@ lbl_fn_803AF83C_00001D1C:
     cmpwi r3, 0x0
     beq lbl_fn_803AF83C_00001D8C
     li r4, 0xa1e
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     beq lbl_fn_803AF83C_00001D8C
     li r15, 0x1
@@ -2202,7 +2202,7 @@ lbl_fn_803AF83C_00001DA8:
     lwz r3, lbl_8087F0A8
     li r4, 0x0
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
 lbl_fn_803AF83C_00001DB8:
     cmpwi r3, 0x0
     beq lbl_fn_803AF83C_000024E0
@@ -2281,7 +2281,7 @@ lbl_fn_803AF83C_00001EC8:
     cmpwi r3, 0x0
     beq lbl_fn_803AF83C_00001EE4
     li r4, 0xa1e
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     bgt lbl_fn_803AF83C_00001EEC
 lbl_fn_803AF83C_00001EE4:
@@ -2319,7 +2319,7 @@ lbl_fn_803AF83C_00001F44:
     addi r0, r3, 0x1
     stw r0, 0xd8(r23)
     lwz r3, lbl_8087F430
-    bl fn_80370174
+    bl world_getGlobalFlag
     slwi r0, r3, 2
     lwz r3, 0xd8(r23)
     lwzx r0, r14, r0
@@ -2334,7 +2334,7 @@ lbl_fn_803AF83C_00001F44:
     bl fn_803935FC
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803AF83C_000024E0
     lwz r3, lbl_8087F430
     lwz r0, 0x868(r3)
@@ -2350,7 +2350,7 @@ lbl_fn_803AF83C_00001FC8:
     cmpwi r3, 0x0
     beq lbl_fn_803AF83C_00001FE4
     li r4, 0xa1e
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     bgt lbl_fn_803AF83C_00001FEC
 lbl_fn_803AF83C_00001FE4:
@@ -2392,7 +2392,7 @@ lbl_fn_803AF83C_00001FF0:
     stfs f0, 0x44(r1)
     stfs f8, 0x48(r1)
     stfs f11, 0x4c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x150(r1)
     addi r4, r1, 0xf8
     stfs f26, 0x100(r1)
@@ -2420,11 +2420,11 @@ lbl_fn_803AF83C_00001FF0:
     stfs f26, 0x1fc(r1)
     stfs f26, 0x20c(r1)
     stfs f26, 0x21c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r4, r1, 0xec
     mr r3, r18
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f7, 0x140(r1)
     addi r3, r1, 0xb0
     lfs f0, 0x100(r1)
@@ -2549,7 +2549,7 @@ lbl_fn_803AF83C_00001FF0:
     bl fn_803935FC
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_803AF83C_000022EC:
     cmpwi r20, 0x0
     bne lbl_fn_803AF83C_000024E0
@@ -2579,7 +2579,7 @@ lbl_fn_803AF83C_000022EC:
     stfs f8, 0x3c(r1)
     stfs f0, 0x38(r1)
     stfs f10, 0x40(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fabs f0, f1
     fmr f30, f1
     frsp f0, f0
@@ -2599,7 +2599,7 @@ lbl_fn_803AF83C_000022EC:
     fsubs f0, f7, f0
     stfs f8, 0x130(r1)
     stfs f0, 0x134(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     fsubs f9, f30, f23
     lfs f8, 0x12c(r1)
     lfs f7, 0x130(r1)
@@ -2642,7 +2642,7 @@ lbl_fn_803AF83C_00002434:
     cmpwi r3, 0x0
     beq lbl_fn_803AF83C_000024E0
     li r4, 0xce
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     beq lbl_fn_803AF83C_000024E0
 lbl_fn_803AF83C_00002458:

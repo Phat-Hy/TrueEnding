@@ -18,19 +18,19 @@ extern void fn_8005DFC8(void);
 extern void fn_8006BA8C(void);
 extern void fn_8006BB6C(void);
 extern void fn_80071D74(void);
-extern void fn_80071E04(void);
-extern void fn_80076760(void);
+extern void gx_drawScreenQuad(void);
+extern void gx_setRenderStateParam(void);
 extern void fn_800827E0(void);
 extern void fn_800839EC(void);
 extern void fn_80083AD4(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800928B0(void);
 extern void fn_800A4228(void);
 extern void fn_800A555C(void);
 extern void fn_800BDB58(void);
 extern void fn_800CF7DC(void);
-extern void fn_800D5738(void);
-extern void fn_800D5808(void);
+struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
+extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D594C(void);
 extern void fn_800DF0F0(void);
 extern void fn_8010ED4C(void);
@@ -53,19 +53,19 @@ extern void fn_805C3ED0(void);
 extern void fn_805C3F40(void);
 extern void fn_805C3FA0(void);
 extern void fn_805C3FB0(void);
-extern void fn_805F9050(void);
-extern void fn_805F93C0(void);
-extern void fn_805F95A0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9940(void);
-extern void fn_805F9990(void);
-extern void fn_805F99B0(void);
-extern void fn_80617DA0(void);
+extern void PSMTXRotAxis(void);
+extern void PSMTXMultVec(void);
+extern void PSMTXMultVecArraySR(void);
+extern void PSVECNormalize(void);
+extern void PSVECMag(void);
+extern void PSVECDotProduct(void);
+extern void PSVECCrossProduct(void);
+extern void GXSetZCompLoc(void);
 extern void fn_80658240(void);
 extern void fn_80660CF0(void);
 extern void fn_806823B0(void);
 extern void fn_8068A850(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 extern char* strcpy(char* dest, const char* src);
 
 /* External data declarations */
@@ -501,7 +501,7 @@ asm void fn_804405F8(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_804405F8_0000051C
@@ -516,7 +516,7 @@ asm void fn_804405F8(void)
     stw r0, 0x90(r3)
     stw r28, 0x94(r3)
     addi r3, r3, 0xa0
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     stw r31, 0xd0(r29)
     addi r3, r29, 0x4
     addi r4, r29, 0x98
@@ -560,7 +560,7 @@ asm void fn_804406C4(void)
     bl fn_804410C0
     addi r3, r30, 0xa0
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     cmpwi r31, 0x0
     ble lbl_fn_804406C4_0000059C
     mr r3, r30
@@ -785,7 +785,7 @@ lbl_fn_80440994_00000864:
 lbl_fn_80440994_00000890:
     lfs f0, lbl_80886A2C
     fmuls f1, f0, f1
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r7, lbl_8087EEE0
     slwi r0, r3, 24
     oris r4, r0, 0xff
@@ -1501,7 +1501,7 @@ asm void fn_804413D4(void)
     lwz r31, lbl_8087EEE0
     stw r0, 0x88(r1)
     stw r0, 0x90(r1)
-    bl fn_80617DA0
+    bl GXSetZCompLoc
     lwz r0, 0x44(r31)
     cmpwi r0, 0x0
     bne lbl_fn_804413D4_000012B8
@@ -1516,7 +1516,7 @@ asm void fn_804413D4(void)
     lfs f6, lbl_80886A70
     fmuls f2, f10, f9
     fmuls f3, f0, f9
-    bl fn_805F95A0
+    bl PSMTXMultVecArraySR
     b lbl_fn_804413D4_000012E8
 lbl_fn_804413D4_000012B8:
     lfs f11, lbl_80886A44
@@ -1530,14 +1530,14 @@ lbl_fn_804413D4_000012B8:
     lfs f6, lbl_80886A70
     fmuls f2, f10, f9
     fmuls f3, f0, f9
-    bl fn_805F95A0
+    bl PSMTXMultVecArraySR
 lbl_fn_804413D4_000012E8:
     mr r3, r31
     addi r4, r1, 0x48
     bl fn_80071D74
     bl fn_805C3E70
     mr r3, r31
-    bl fn_80071E04
+    bl gx_drawScreenQuad
     lwz r0, 0x40(r31)
     lis r4, lbl_80754518@ha
     lwz r5, 0x3c(r31)
@@ -1555,7 +1555,7 @@ lbl_fn_804413D4_000012E8:
     fsubs f2, f9, f10
     lfs f6, lbl_80886A78
     fsubs f4, f0, f10
-    bl fn_805F95A0
+    bl PSMTXMultVecArraySR
     addi r5, r1, 0x8
     addi r4, r1, 0x48
     psq_l f1, 0x0(r5), 0, 0
@@ -1579,27 +1579,27 @@ lbl_fn_804413D4_000012E8:
     mr r3, r31
     li r4, 0x6
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0x8
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0x9
     li r5, 0x7
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0xa
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0x4
     li r5, 0x4
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0x5
     li r5, 0x5
-    bl fn_80076760
+    bl gx_setRenderStateParam
     lwz r0, 0xa4(r1)
     lwz r31, 0x9c(r1)
     mtlr r0
@@ -1957,7 +1957,7 @@ lbl_fn_80441918_000018D4:
     mr r3, r4
     stfs f2, 0x40(r1)
     psq_st f1, 0x0(r4), 0, 0
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f4, 0x80(r31)
     addi r3, r1, 0x44
     lfs f3, 0x40(r1)
@@ -2039,25 +2039,25 @@ lbl_fn_80441918_00001A10:
     fsubs f0, f3, f0
     stfs f4, 0x78(r1)
     stfs f0, 0x74(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fmr f30, f1
     addi r3, r1, 0x74
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     psq_l f1, 0x20(r31), 0, 0
     addi r30, r1, 0x68
     lfs f2, 0x28(r31)
     mr r3, r30
     stfs f2, 0x70(r1)
     psq_st f1, 0x0(r30), 0, 0
-    bl fn_805F9940
+    bl PSVECMag
     fmr f31, f1
     mr r3, r30
     mr r4, r30
-    bl fn_805F98D0
+    bl PSVECNormalize
     mr r3, r30
     addi r4, r1, 0x74
-    bl fn_805F9990
+    bl PSVECDotProduct
     lfs f0, 0xc4(r31)
     fmr f28, f1
     fmr f1, f0
@@ -2087,7 +2087,7 @@ lbl_fn_80441918_00001AF4:
     mr r4, r30
     addi r3, r1, 0x74
     addi r5, r1, 0x5c
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     lfs f3, lbl_80886A80
     li r0, 0x0
     lfs f0, 0x5c(r1)
@@ -2107,11 +2107,11 @@ lbl_fn_80441918_00001B34:
     addi r3, r1, 0x90
     addi r4, r1, 0x5c
     fneg f1, f0
-    bl fn_805F9050
+    bl PSMTXRotAxis
     addi r4, r1, 0x68
     addi r3, r1, 0x90
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
 lbl_fn_80441918_00001B60:
     lfs f4, 0x80(r31)
     addi r3, r1, 0x8

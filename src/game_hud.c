@@ -12,40 +12,40 @@ extern void _savegpr_22(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8004FF58(void);
 extern void fn_8006B174(void);
 extern void fn_80070B60(void);
 extern void fn_80079ECC(void);
 extern void fn_8007A36C(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
-extern void fn_800846FC(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
+extern void mem_realloc(void);
 extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
 extern void fn_8008B140(void);
-extern void fn_80091684(void);
-extern void fn_800954DC(void);
+extern void atn_Model_updateMatrices(void);
+extern void atn_Lockon_updateTargetTextures(void);
 extern void fn_80095CD0(void);
-extern void fn_8009D58C(void);
+extern void atn_Model_drawMeshNode(void);
 extern void fn_800A005C(void);
 extern void fn_800BDB58(void);
 extern void fn_800C0A50(void);
 extern void fn_800C122C(void);
-extern void fn_800DC6B4(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
-extern void fn_80473F50(void);
+extern void str_findChar(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_destructor(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_80475DF8(void);
-extern void fn_805F89F0(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9420(void);
-extern void fn_805F9940(void);
-extern void fn_805F9990(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
-extern void fn_80695720(void);
+extern void PSMTXConcat(void);
+extern void PSMTXMultVec(void);
+extern void PSMTXMultVecArray(void);
+extern void PSVECMag(void);
+extern void PSVECDotProduct(void);
+extern void printf(void);
+extern void abort(void);
+extern void runtime_registerStaticObject(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -72,16 +72,16 @@ extern u32 lbl_80880C88;
 
 /* Function declarations */
 void fn_8009E1E4(void);
-void fn_8009E448(void);
+void atn_Model_drawNodes(void);
 void fn_8009E5A0(void);
 void fn_8009E690(void);
-void fn_8009E6EC(void);
+void hud_updateTargetReticle(void);
 void fn_8009EB20(void);
 void fn_8009EC2C(void);
 void fn_8009EE30(void);
-void fn_8009F444(void);
-void fn_8009F448(void);
-void fn_8009F4AC(void);
+void hud_projectWorldPoints(void);
+void hud_copyBoneMatrices(void);
+void atn_HUD_projectWorldPoints(void);
 void fn_8009F688(void);
 void fn_8009F690(void);
 void fn_8009F694(void);
@@ -159,7 +159,7 @@ asm void fn_8009E1E4(void)
     stfs f4, 0x20(r1)
     stfs f3, 0x24(r1)
     stfs f0, 0x28(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x24(r30)
     fmr f30, f1
     lfs f3, 0x14(r30)
@@ -168,7 +168,7 @@ asm void fn_8009E1E4(void)
     stfs f4, 0x14(r1)
     stfs f3, 0x18(r1)
     stfs f0, 0x1c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x20(r30)
     fmr f31, f1
     lfs f3, 0x10(r30)
@@ -177,7 +177,7 @@ asm void fn_8009E1E4(void)
     stfs f4, 0x8(r1)
     stfs f3, 0xc(r1)
     stfs f0, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     frsp f3, f31
     stfs f1, 0x38(r1)
     frsp f0, f30
@@ -256,7 +256,7 @@ lbl_fn_8009E1E4_000001C8:
     blr
 }
 
-asm void fn_8009E448(void)
+asm void atn_Model_drawNodes(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -268,32 +268,32 @@ asm void fn_8009E448(void)
     lwz r0, 0x4(r3)
     rlwinm r0, r0, 0, 28, 28
     cmpwi r0, 0x8
-    bne lbl_fn_8009E448_0000029C
+    bne lbl_atn_Model_drawNodes_0000029C
     lwz r3, lbl_8087EFA8
     lwz r0, 0x104(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_8009E448_000002AC
-lbl_fn_8009E448_0000029C:
+    bne lbl_atn_Model_drawNodes_000002AC
+lbl_atn_Model_drawNodes_0000029C:
     lwz r3, lbl_8087EFA8
     lwz r0, 0x13c(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8009E448_000002D4
-lbl_fn_8009E448_000002AC:
+    beq lbl_atn_Model_drawNodes_000002D4
+lbl_atn_Model_drawNodes_000002AC:
     lwz r0, 0x150(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8009E448_000002D4
+    beq lbl_atn_Model_drawNodes_000002D4
     lwz r3, lbl_8087EFB4
     addi r4, r27, 0x30
     addi r3, r3, 0x418
     bl fn_8004FF58
     cmpwi r3, 0x0
-    bne lbl_fn_8009E448_000002D4
+    bne lbl_atn_Model_drawNodes_000002D4
     li r30, 0x0
-lbl_fn_8009E448_000002D4:
+lbl_atn_Model_drawNodes_000002D4:
     li r29, 0x0
     li r31, 0x0
-    b lbl_fn_8009E448_0000039C
-lbl_fn_8009E448_000002E0:
+    b lbl_atn_Model_drawNodes_0000039C
+lbl_atn_Model_drawNodes_000002E0:
     lwz r3, 0x50(r27)
     lwz r4, 0xc(r27)
     lhax r0, r3, r31
@@ -303,54 +303,54 @@ lbl_fn_8009E448_000002E0:
     cmpwi r5, 0x0
     lwz r3, 0x44(r27)
     lwzx r28, r4, r0
-    beq lbl_fn_8009E448_00000318
+    beq lbl_atn_Model_drawNodes_00000318
     lwz r0, 0x18(r28)
     slwi r0, r0, 2
     lwzx r0, r5, r0
-    b lbl_fn_8009E448_0000031C
-lbl_fn_8009E448_00000318:
+    b lbl_atn_Model_drawNodes_0000031C
+lbl_atn_Model_drawNodes_00000318:
     lwz r0, 0x18(r28)
-lbl_fn_8009E448_0000031C:
+lbl_atn_Model_drawNodes_0000031C:
     lbzx r0, r3, r0
     cmpwi r0, 0x0
-    beq lbl_fn_8009E448_00000394
+    beq lbl_atn_Model_drawNodes_00000394
     lwz r0, 0x48(r27)
     cmpwi r0, 0x0
-    beq lbl_fn_8009E448_0000035C
+    beq lbl_atn_Model_drawNodes_0000035C
     lwz r3, 0x10(r28)
     lbz r0, 0x0(r3)
     cmpwi r0, 0x6f
-    bne lbl_fn_8009E448_00000394
+    bne lbl_atn_Model_drawNodes_00000394
     lbz r0, 0x1(r3)
     cmpwi r0, 0x70
-    bne lbl_fn_8009E448_00000394
+    bne lbl_atn_Model_drawNodes_00000394
     lbz r0, 0x2(r3)
     cmpwi r0, 0x5f
-    bne lbl_fn_8009E448_00000394
-lbl_fn_8009E448_0000035C:
+    bne lbl_atn_Model_drawNodes_00000394
+lbl_atn_Model_drawNodes_0000035C:
     li r25, 0x0
     li r26, 0x0
-    b lbl_fn_8009E448_00000388
-lbl_fn_8009E448_00000368:
+    b lbl_atn_Model_drawNodes_00000388
+lbl_atn_Model_drawNodes_00000368:
     lwz r0, 0x74(r28)
     mr r3, r27
     mr r4, r28
     mr r6, r30
     add r5, r0, r26
-    bl fn_8009D58C
+    bl atn_Model_drawMeshNode
     addi r26, r26, 0xc
     addi r25, r25, 0x1
-lbl_fn_8009E448_00000388:
+lbl_atn_Model_drawNodes_00000388:
     lwz r0, 0x70(r28)
     cmpw r25, r0
-    blt lbl_fn_8009E448_00000368
-lbl_fn_8009E448_00000394:
+    blt lbl_atn_Model_drawNodes_00000368
+lbl_atn_Model_drawNodes_00000394:
     addi r31, r31, 0x2
     addi r29, r29, 0x1
-lbl_fn_8009E448_0000039C:
+lbl_atn_Model_drawNodes_0000039C:
     lwz r0, 0x54(r27)
     cmplw r29, r0
-    blt lbl_fn_8009E448_000002E0
+    blt lbl_atn_Model_drawNodes_000002E0
     lmw r25, 0x14(r1)
     lwz r0, 0x34(r1)
     mtlr r0
@@ -402,12 +402,12 @@ asm void fn_8009E5A0(void)
     li r4, 0x6
     mr r6, r5
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     li r4, 0x0
     li r5, 0x0
     li r6, 0x30
     li r7, 0x100
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, lbl_8087EF40
 lbl_fn_8009E5A0_0000047C:
     li r0, 0x0
@@ -453,7 +453,7 @@ lbl_fn_8009E690_000004F0:
     blr
 }
 
-asm void fn_8009E6EC(void)
+asm void hud_updateTargetReticle(void)
 {
     nofralloc
     stwu r1, -0x50(r1)
@@ -468,13 +468,13 @@ asm void fn_8009E6EC(void)
     lwz r0, 0x64(r3)
     lwz r4, 0x1ec(r29)
     cmpwi r4, 0x0
-    bne lbl_fn_8009E6EC_00000544
+    bne lbl_hud_updateTargetReticle_00000544
     lwz r4, lbl_8087EFB4
     lwz r4, 0x2fc(r4)
-lbl_fn_8009E6EC_00000544:
+lbl_hud_updateTargetReticle_00000544:
     cmpwi r0, 0x0
     stw r4, 0x68(r3)
-    bne lbl_fn_8009E6EC_0000057C
+    bne lbl_hud_updateTargetReticle_0000057C
     psq_l f1, 0x8(r3), 0, 0
     addi r4, r1, 0x8
     lfs f2, 0x10(r3)
@@ -486,7 +486,7 @@ lbl_fn_8009E6EC_00000544:
     bl fn_800C122C
     mr r0, r3
     stw r3, 0x64(r30)
-lbl_fn_8009E6EC_0000057C:
+lbl_hud_updateTargetReticle_0000057C:
     stw r0, 0x1ec(r29)
     lis r3, 0x4
     addi r0, r3, 0x2030
@@ -507,11 +507,11 @@ lbl_fn_8009E6EC_0000057C:
     addi r3, r3, 0x204
     bl fn_8004FF58
     cmpwi r3, 0x0
-    bne lbl_fn_8009E6EC_000005DC
+    bne lbl_hud_updateTargetReticle_000005DC
     lbz r0, 0x84(r30)
     rlwinm r0, r0, 0, 25, 23
     stb r0, 0x84(r30)
-lbl_fn_8009E6EC_000005DC:
+lbl_hud_updateTargetReticle_000005DC:
     lbz r0, 0x84(r30)
     li r3, 0x0
     lwz r7, 0x4(r30)
@@ -521,45 +521,45 @@ lbl_fn_8009E6EC_000005DC:
     lwz r6, 0x14(r7)
     rlwinm r0, r6, 0, 21, 21
     cmplwi r0, 0x400
-    beq lbl_fn_8009E6EC_00000614
+    beq lbl_hud_updateTargetReticle_00000614
     rlwinm r0, r6, 0, 20, 20
     cmplwi r0, 0x800
-    beq lbl_fn_8009E6EC_00000614
+    beq lbl_hud_updateTargetReticle_00000614
     li r4, 0x0
-lbl_fn_8009E6EC_00000614:
+lbl_hud_updateTargetReticle_00000614:
     cmpwi r4, 0x0
-    beq lbl_fn_8009E6EC_0000065C
+    beq lbl_hud_updateTargetReticle_0000065C
     lwz r5, 0x1ec(r7)
     li r4, 0x1
     cmpwi r5, 0x0
-    bne lbl_fn_8009E6EC_00000634
+    bne lbl_hud_updateTargetReticle_00000634
     lwz r5, lbl_8087EFB4
     lwz r5, 0x2fc(r5)
-lbl_fn_8009E6EC_00000634:
+lbl_hud_updateTargetReticle_00000634:
     lwz r0, 0x120(r5)
     cmpwi r0, 0x0
-    bne lbl_fn_8009E6EC_00000650
+    bne lbl_hud_updateTargetReticle_00000650
     rlwinm r0, r6, 0, 19, 19
     cmplwi r0, 0x1000
-    beq lbl_fn_8009E6EC_00000650
+    beq lbl_hud_updateTargetReticle_00000650
     li r4, 0x0
-lbl_fn_8009E6EC_00000650:
+lbl_hud_updateTargetReticle_00000650:
     cmpwi r4, 0x0
-    beq lbl_fn_8009E6EC_0000065C
+    beq lbl_hud_updateTargetReticle_0000065C
     li r3, 0x1
-lbl_fn_8009E6EC_0000065C:
+lbl_hud_updateTargetReticle_0000065C:
     cmpwi r3, 0x0
-    beq lbl_fn_8009E6EC_000006E8
+    beq lbl_hud_updateTargetReticle_000006E8
     lwz r0, 0x14(r7)
     rlwinm r0, r0, 0, 21, 21
     cmplwi r0, 0x400
-    bne lbl_fn_8009E6EC_000006E8
+    bne lbl_hud_updateTargetReticle_000006E8
     lwz r3, 0x1ec(r7)
     cmpwi r3, 0x0
-    bne lbl_fn_8009E6EC_00000688
+    bne lbl_hud_updateTargetReticle_00000688
     lwz r3, lbl_8087EFB4
     lwz r3, 0x2fc(r3)
-lbl_fn_8009E6EC_00000688:
+lbl_hud_updateTargetReticle_00000688:
     psq_l f1, 0x0(r31), 0, 0
     addi r29, r1, 0x18
     lfs f2, 0x8(r31)
@@ -568,7 +568,7 @@ lbl_fn_8009E6EC_00000688:
     mr r5, r29
     addi r3, r3, 0x124
     psq_st f1, 0x0(r29), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0x20(r1)
     addi r4, r1, 0x28
     psq_l f1, 0x0(r29), 0, 0
@@ -580,19 +580,19 @@ lbl_fn_8009E6EC_00000688:
     stfs f0, 0x34(r1)
     bl fn_8004FF58
     cmpwi r3, 0x0
-    beq lbl_fn_8009E6EC_000006E8
+    beq lbl_hud_updateTargetReticle_000006E8
     lbz r0, 0x84(r30)
     ori r0, r0, 0x20
     stb r0, 0x84(r30)
-lbl_fn_8009E6EC_000006E8:
+lbl_hud_updateTargetReticle_000006E8:
     lbz r3, 0x84(r30)
     rlwinm r3, r3, 0, 26, 24
     stb r3, 0x84(r30)
     extrwi. r0, r3, 1, 24
-    bne lbl_fn_8009E6EC_00000704
+    bne lbl_hud_updateTargetReticle_00000704
     extrwi. r0, r3, 1, 26
-    beq lbl_fn_8009E6EC_00000920
-lbl_fn_8009E6EC_00000704:
+    beq lbl_hud_updateTargetReticle_00000920
+lbl_hud_updateTargetReticle_00000704:
     lwz r3, lbl_8087EFB4
     mr r4, r30
     lfs f1, lbl_80880C78
@@ -602,145 +602,145 @@ lbl_fn_8009E6EC_00000704:
     lwz r0, 0x14(r5)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    bne lbl_fn_8009E6EC_0000074C
+    bne lbl_hud_updateTargetReticle_0000074C
     lbz r0, 0x84(r30)
     extrwi. r0, r0, 1, 24
-    beq lbl_fn_8009E6EC_0000074C
+    beq lbl_hud_updateTargetReticle_0000074C
     lfs f1, 0xa8(r5)
     mr r4, r30
     lwz r3, lbl_8087EFB4
     li r5, 0x3
     bl fn_800BDB58
-lbl_fn_8009E6EC_0000074C:
+lbl_hud_updateTargetReticle_0000074C:
     lwz r5, 0x4(r30)
     li r4, 0x0
     li r3, 0x1
     lwz r7, 0x14(r5)
     rlwinm r0, r7, 0, 21, 21
     cmplwi r0, 0x400
-    beq lbl_fn_8009E6EC_00000778
+    beq lbl_hud_updateTargetReticle_00000778
     rlwinm r0, r7, 0, 20, 20
     cmplwi r0, 0x800
-    beq lbl_fn_8009E6EC_00000778
+    beq lbl_hud_updateTargetReticle_00000778
     li r3, 0x0
-lbl_fn_8009E6EC_00000778:
+lbl_hud_updateTargetReticle_00000778:
     cmpwi r3, 0x0
-    beq lbl_fn_8009E6EC_000007C0
+    beq lbl_hud_updateTargetReticle_000007C0
     lwz r3, 0x1ec(r5)
     li r6, 0x1
     cmpwi r3, 0x0
-    bne lbl_fn_8009E6EC_00000798
+    bne lbl_hud_updateTargetReticle_00000798
     lwz r3, lbl_8087EFB4
     lwz r3, 0x2fc(r3)
-lbl_fn_8009E6EC_00000798:
+lbl_hud_updateTargetReticle_00000798:
     lwz r0, 0x120(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_8009E6EC_000007B4
+    bne lbl_hud_updateTargetReticle_000007B4
     rlwinm r0, r7, 0, 19, 19
     cmplwi r0, 0x1000
-    beq lbl_fn_8009E6EC_000007B4
+    beq lbl_hud_updateTargetReticle_000007B4
     li r6, 0x0
-lbl_fn_8009E6EC_000007B4:
+lbl_hud_updateTargetReticle_000007B4:
     cmpwi r6, 0x0
-    beq lbl_fn_8009E6EC_000007C0
+    beq lbl_hud_updateTargetReticle_000007C0
     li r4, 0x1
-lbl_fn_8009E6EC_000007C0:
+lbl_hud_updateTargetReticle_000007C0:
     cmpwi r4, 0x0
-    beq lbl_fn_8009E6EC_00000854
+    beq lbl_hud_updateTargetReticle_00000854
     rlwinm r0, r7, 0, 21, 21
     cmplwi r0, 0x400
-    bne lbl_fn_8009E6EC_00000834
+    bne lbl_hud_updateTargetReticle_00000834
     lbz r0, 0x84(r30)
     extrwi. r0, r0, 1, 26
-    beq lbl_fn_8009E6EC_00000854
+    beq lbl_hud_updateTargetReticle_00000854
     lwz r3, 0x1ec(r5)
     cmpwi r3, 0x0
-    bne lbl_fn_8009E6EC_000007F4
+    bne lbl_hud_updateTargetReticle_000007F4
     lwz r3, lbl_8087EFB4
     lwz r3, 0x2fc(r3)
-lbl_fn_8009E6EC_000007F4:
+lbl_hud_updateTargetReticle_000007F4:
     addi r29, r3, 0x154
     addi r4, r1, 0x28
     mr r3, r29
-    bl fn_805F9990
+    bl PSVECDotProduct
     lfs f3, 0xc(r29)
     lfs f0, 0x34(r1)
     fadds f3, f3, f1
     fcmpo cr0, f3, f0
-    bge lbl_fn_8009E6EC_00000854
+    bge lbl_hud_updateTargetReticle_00000854
     lwz r6, 0x4(r30)
     mr r4, r30
     lwz r3, lbl_8087EFB4
     li r5, 0x4
     lfs f1, 0xa8(r6)
     bl fn_800BDB58
-    b lbl_fn_8009E6EC_00000854
-lbl_fn_8009E6EC_00000834:
+    b lbl_hud_updateTargetReticle_00000854
+lbl_hud_updateTargetReticle_00000834:
     lbz r0, 0x84(r30)
     extrwi. r0, r0, 1, 24
-    beq lbl_fn_8009E6EC_00000854
+    beq lbl_hud_updateTargetReticle_00000854
     lfs f1, 0xa8(r5)
     mr r4, r30
     lwz r3, lbl_8087EFB4
     li r5, 0x4
     bl fn_800BDB58
-lbl_fn_8009E6EC_00000854:
+lbl_hud_updateTargetReticle_00000854:
     lbz r0, 0x84(r30)
     extrwi. r0, r0, 1, 24
-    beq lbl_fn_8009E6EC_000008B0
+    beq lbl_hud_updateTargetReticle_000008B0
     lwz r5, 0x4(r30)
     lwz r0, 0x14(r5)
     rlwinm r0, r0, 0, 27, 27
     cmplwi r0, 0x10
-    bne lbl_fn_8009E6EC_00000888
+    bne lbl_hud_updateTargetReticle_00000888
     lfs f1, 0xa8(r5)
     mr r4, r30
     lwz r3, lbl_8087EFB4
     li r5, 0x8
     bl fn_800BDB58
-lbl_fn_8009E6EC_00000888:
+lbl_hud_updateTargetReticle_00000888:
     lwz r5, 0x4(r30)
     lwz r0, 0x14(r5)
     rlwinm r0, r0, 0, 26, 26
     cmplwi r0, 0x20
-    bne lbl_fn_8009E6EC_000008B0
+    bne lbl_hud_updateTargetReticle_000008B0
     lfs f1, 0xa8(r5)
     mr r4, r30
     lwz r3, lbl_8087EFB4
     li r5, 0x6
     bl fn_800BDB58
-lbl_fn_8009E6EC_000008B0:
+lbl_hud_updateTargetReticle_000008B0:
     lwz r5, 0x4(r30)
     lwz r0, 0x14(r5)
     rlwinm r0, r0, 0, 18, 18
     cmplwi r0, 0x2000
-    bne lbl_fn_8009E6EC_000008D8
+    bne lbl_hud_updateTargetReticle_000008D8
     lfs f1, 0xa8(r5)
     mr r4, r30
     lwz r3, lbl_8087EFB4
     li r5, 0x9
     bl fn_800BDB58
-lbl_fn_8009E6EC_000008D8:
+lbl_hud_updateTargetReticle_000008D8:
     lwz r3, 0x4(r30)
     lwz r0, 0x14(r3)
     rlwinm r3, r0, 0, 13, 13
     subis r0, r3, 0x4
     cmplwi r0, 0x0
-    bne lbl_fn_8009E6EC_00000900
+    bne lbl_hud_updateTargetReticle_00000900
     lwz r3, lbl_8087EFB4
     li r0, 0x1
     addis r3, r3, 0x5
     stw r0, 0x4960(r3)
-lbl_fn_8009E6EC_00000900:
+lbl_hud_updateTargetReticle_00000900:
     lbz r0, 0x84(r30)
     extrwi. r0, r0, 1, 25
-    beq lbl_fn_8009E6EC_00000920
+    beq lbl_hud_updateTargetReticle_00000920
     lwz r3, lbl_8087EFB4
     mr r4, r30
     lfs f1, lbl_80880C78
     li r5, 0x0
     bl fn_800BDB58
-lbl_fn_8009E6EC_00000920:
+lbl_hud_updateTargetReticle_00000920:
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)
     lwz r30, 0x48(r1)
@@ -778,7 +778,7 @@ asm void fn_8009EB20(void)
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x14(r31)
     lfs f2, lbl_80880C78
     fsubs f0, f1, f0
@@ -871,14 +871,14 @@ lbl_fn_8009EC2C_00000AC0:
     cmpwi r0, 0x8
     bne lbl_fn_8009EC2C_00000BCC
     lwz r6, 0x6c(r3)
-    lis r5, fn_8009F444@ha
+    lis r5, hud_projectWorldPoints@ha
     lwz r0, 0x4(r31)
-    addi r5, r5, fn_8009F444@l
-    lis r4, fn_8009F448@ha
+    addi r5, r5, hud_projectWorldPoints@l
+    lis r4, hud_copyBoneMatrices@ha
     stw r5, 0x18(r1)
     or r0, r0, r6
     stw r0, 0x4(r31)
-    addi r4, r4, fn_8009F448@l
+    addi r4, r4, hud_copyBoneMatrices@l
     psq_l f2, 0x38(r3), 0, 0
     psq_l f3, 0x40(r3), 0, 0
     psq_l f4, 0x48(r3), 0, 0
@@ -1005,7 +1005,7 @@ asm void fn_8009EE30(void)
     stfs f12, 0x98(r1)
     stfs f11, 0x9c(r1)
     stfs f10, 0xa0(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f10, 0x24(r23)
     fmr f30, f1
     lfs f11, 0x14(r23)
@@ -1014,7 +1014,7 @@ asm void fn_8009EE30(void)
     stfs f12, 0x8c(r1)
     stfs f11, 0x90(r1)
     stfs f10, 0x94(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f10, 0x20(r23)
     fmr f31, f1
     lfs f11, 0x10(r23)
@@ -1023,7 +1023,7 @@ asm void fn_8009EE30(void)
     stfs f12, 0x80(r1)
     stfs f11, 0x84(r1)
     stfs f10, 0x88(r1)
-    bl fn_805F9940
+    bl PSVECMag
     frsp f11, f31
     stfs f1, 0xbc(r1)
     frsp f10, f30
@@ -1062,7 +1062,7 @@ lbl_fn_8009EE30_00000D5C:
     psq_st f1, 0x0(r4), 0, 0
     lfs f10, 0xb8(r6)
     stfs f10, 0x14(r22)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lwz r3, 0x4(r22)
     lfs f10, 0x14(r22)
     lfs f11, 0xbc(r3)
@@ -1166,7 +1166,7 @@ lbl_fn_8009EE30_00000D5C:
     stfs f2, 0x7c(r1)
     psq_st f1, 0x0(r31), 0, 0
     stfs f2, 0x154(r1)
-    bl fn_805F9420
+    bl PSMTXMultVecArray
     addi r5, r1, 0x8
     addi r3, r1, 0x14
     psq_l f1, 0x0(r24), 0, 0
@@ -1372,20 +1372,19 @@ lbl_fn_8009EE30_00001238:
     blr
 }
 
-asm void fn_8009F444(void)
+void hud_projectWorldPoints(void)
 {
-    nofralloc
-    b fn_8009F4AC
+    atn_HUD_projectWorldPoints();
 }
 
-asm void fn_8009F448(void)
+asm void hud_copyBoneMatrices(void)
 {
     nofralloc
     lwz r8, 0x3c(r4)
     li r7, 0x0
     li r3, 0x0
-    b lbl_fn_8009F448_000012B8
-lbl_fn_8009F448_00001274:
+    b lbl_hud_copyBoneMatrices_000012B8
+lbl_hud_copyBoneMatrices_00001274:
     lwz r0, lbl_8087EF40
     add r6, r8, r3
     addi r7, r7, 0x1
@@ -1403,14 +1402,14 @@ lbl_fn_8009F448_00001274:
     psq_st f4, 0x18(r6), 0, 0
     psq_st f5, 0x20(r6), 0, 0
     psq_st f6, 0x28(r6), 0, 0
-lbl_fn_8009F448_000012B8:
+lbl_hud_copyBoneMatrices_000012B8:
     lwz r0, 0x38(r4)
     cmplw r7, r0
-    blt lbl_fn_8009F448_00001274
+    blt lbl_hud_copyBoneMatrices_00001274
     blr
 }
 
-asm void fn_8009F4AC(void)
+asm void atn_HUD_projectWorldPoints(void)
 {
     nofralloc
     stwu r1, -0xc0(r1)
@@ -1436,16 +1435,16 @@ asm void fn_8009F4AC(void)
     lwz r0, 0x6c(r3)
     rlwinm r0, r0, 0, 21, 21
     cmpwi r0, 0x400
-    bne lbl_fn_8009F4AC_00001380
+    bne lbl_atn_HUD_projectWorldPoints_00001380
     lwz r3, lbl_8087EFB4
     lwz r0, 0x2f8(r3)
     cmpwi r0, 0x4
-    bne lbl_fn_8009F4AC_00001380
+    bne lbl_atn_HUD_projectWorldPoints_00001380
     lwz r3, 0x2fc(r3)
     mr r4, r29
     addi r5, r1, 0x40
     addi r3, r3, 0x124
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x40
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1459,12 +1458,12 @@ asm void fn_8009F4AC(void)
     psq_st f4, 0x18(r29), 0, 0
     psq_st f5, 0x20(r29), 0, 0
     psq_st f6, 0x28(r29), 0, 0
-lbl_fn_8009F4AC_00001380:
+lbl_atn_HUD_projectWorldPoints_00001380:
     lwz r29, 0x3c(r31)
     li r27, 0x0
     li r28, 0x0
-    b lbl_fn_8009F4AC_0000142C
-lbl_fn_8009F4AC_00001390:
+    b lbl_atn_HUD_projectWorldPoints_0000142C
+lbl_atn_HUD_projectWorldPoints_00001390:
     add r4, r29, r28
     lwz r0, lbl_8087EF40
     psq_l f2, 0x8(r4), 0, 0
@@ -1482,15 +1481,15 @@ lbl_fn_8009F4AC_00001390:
     psq_st f6, 0x28(r3), 0, 0
     lwz r0, 0x80(r30)
     cmpwi r0, 0x0
-    beq lbl_fn_8009F4AC_000013E0
+    beq lbl_atn_HUD_projectWorldPoints_000013E0
     add r4, r0, r28
-    b lbl_fn_8009F4AC_000013F0
-lbl_fn_8009F4AC_000013E0:
+    b lbl_atn_HUD_projectWorldPoints_000013F0
+lbl_atn_HUD_projectWorldPoints_000013E0:
     addi r3, r1, 0x70
     addi r5, r1, 0x10
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r4, r1, 0x10
-lbl_fn_8009F4AC_000013F0:
+lbl_atn_HUD_projectWorldPoints_000013F0:
     psq_l f2, 0x8(r4), 0, 0
     add r3, r29, r28
     psq_l f3, 0x10(r4), 0, 0
@@ -1506,10 +1505,10 @@ lbl_fn_8009F4AC_000013F0:
     psq_st f4, 0x18(r3), 0, 0
     psq_st f5, 0x20(r3), 0, 0
     psq_st f6, 0x28(r3), 0, 0
-lbl_fn_8009F4AC_0000142C:
+lbl_atn_HUD_projectWorldPoints_0000142C:
     lwz r0, 0x38(r31)
     cmplw r27, r0
-    blt lbl_fn_8009F4AC_00001390
+    blt lbl_atn_HUD_projectWorldPoints_00001390
     lwz r0, 0x50(r31)
     mr r3, r31
     lwz r4, lbl_8087EFB4
@@ -1517,21 +1516,21 @@ lbl_fn_8009F4AC_0000142C:
     addi r4, r4, 0x15c
     add r5, r31, r0
     lwz r5, 0x178(r5)
-    bl fn_80091684
+    bl atn_Model_updateMatrices
     lwz r3, 0x4(r30)
     addi r0, r3, 0x10
     cmplw r31, r0
-    bne lbl_fn_8009F4AC_0000148C
+    bne lbl_atn_HUD_projectWorldPoints_0000148C
     lwz r4, 0x7c(r30)
     cmpwi r4, 0x0
-    beq lbl_fn_8009F4AC_0000148C
+    beq lbl_atn_HUD_projectWorldPoints_0000148C
     addi r5, r1, 0x8
     psq_l f1, 0x74(r30), 0, 0
     psq_st f1, 0x0(r5), 0, 0
     mr r3, r31
     lfs f1, 0x70(r30)
-    bl fn_800954DC
-lbl_fn_8009F4AC_0000148C:
+    bl atn_Lockon_updateTargetTextures
+lbl_atn_HUD_projectWorldPoints_0000148C:
     addi r11, r1, 0xc0
     bl _restgpr_27
     lwz r0, 0xc4(r1)
@@ -1659,7 +1658,7 @@ asm void fn_8009F788(void)
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r24
     addi r3, r1, 0x48
     bl fn_8006B174
@@ -1677,7 +1676,7 @@ lbl_fn_8009F788_00001628:
 lbl_fn_8009F788_0000163C:
     lwz r3, 0x50(r1)
 lbl_fn_8009F788_00001640:
-    bl fn_800DC6B4
+    bl str_findChar
     lbz r0, lbl_8087EF48
     mr r31, r3
     extsb. r0, r0
@@ -1747,11 +1746,11 @@ lbl_fn_8009F788_00001710:
     li r4, 0x6
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8009F788_00001874
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r3, lbl_8078FBB0@ha
     li r24, 0x0
     addi r3, r3, lbl_8078FBB0@l
@@ -1780,7 +1779,7 @@ lbl_fn_8009F788_00001710:
     addi r8, r1, 0xc
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r25
     addi r3, r1, 0x24
     bl fn_8006B174
@@ -1811,7 +1810,7 @@ lbl_fn_8009F788_00001804:
 lbl_fn_8009F788_00001828:
     lwz r3, 0x2c(r1)
 lbl_fn_8009F788_0000182C:
-    bl fn_800DC6B4
+    bl str_findChar
     clrlwi r5, r3, 16
     lis r0, 0x4330
     lis r4, lbl_807326D0@ha
@@ -1931,8 +1930,8 @@ lbl_fn_8009F788_000019B8:
     addi r4, r4, 0x1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8009F788_000019F0:
     lwz r4, 0x4(r29)
     li r6, 0x0
@@ -1958,8 +1957,8 @@ lbl_fn_8009F788_000019F0:
     addi r4, r4, 0x1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8009F788_00001A58:
     lis r3, 0x1555
     addi r0, r3, 0x5555
@@ -2014,11 +2013,11 @@ lbl_fn_8009F788_00001AEC:
     addi r4, r4, 0x1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8009F788_00001B20:
     slwi r3, r24, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r25, r3
     bne lbl_fn_8009F788_00001B54
@@ -2028,8 +2027,8 @@ lbl_fn_8009F788_00001B20:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8009F788_00001B54:
     lwz r5, 0x4(r29)
     lwz r3, 0x58(r1)
@@ -2142,7 +2141,7 @@ lbl_fn_8009FE24_00001CB0:
     beq lbl_fn_8009FE24_00001CEC
     mr r3, r24
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_8009FE24_00001CEC:
     mr r3, r24
     bl dtor_80084684
@@ -2157,7 +2156,7 @@ lbl_fn_8009FE24_00001CFC:
     cmpwi r0, 0x0
     bne lbl_fn_8009FE24_00001D40
     mr r3, r24
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_8009FE24_00001D2C
     li r0, 0x1
@@ -2230,7 +2229,7 @@ asm void fn_8009FFCC(void)
     lwz r0, 0x8(r3)
     cmpwi r0, 0x0
     bne lbl_fn_8009FFCC_00001E34
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_8009FFCC_00001E1C
     li r3, 0x1

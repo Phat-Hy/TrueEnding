@@ -4,27 +4,27 @@
 /* External function declarations */
 extern void fn_80044E0C(void);
 extern void fn_8004ED34(void);
-extern void fn_80084320(void);
-extern void fn_80097D7C(void);
+extern void mem_alloc(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
 extern void fn_8011BEB8(void);
 extern void fn_8014C228(void);
 extern void fn_8014DEE4(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_8018B48C(void);
 extern void fn_8018CAEC(void);
 extern void fn_8018DAE4(void);
 extern void fn_801A5E90(void);
 extern void fn_801C3DCC(void);
 extern void fn_801C9F6C(void);
-extern void fn_80219E6C(void);
-extern void fn_80370174(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
-extern void fn_80695AD0(void);
+extern void task_findEntryById(void);
+extern void world_getGlobalFlag(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
+extern void vec3_isNonZero(void);
 
 /* External data declarations */
 extern u8 lbl_80737A9C[];
@@ -90,7 +90,7 @@ asm void fn_80157C34(void)
     b lbl_fn_80157C34_00000068
 lbl_fn_80157C34_00000054:
     li r3, 0xc8
-    bl fn_80219E6C
+    bl task_findEntryById
     lwz r0, 0x638(r29)
     stw r0, 0x63c(r29)
     stw r3, 0x638(r29)
@@ -119,13 +119,13 @@ lbl_fn_80157C34_00000098:
     stfs f5, 0x40(r1)
     stfs f3, 0x38(r1)
     stfs f0, 0x3c(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_808819B8
     fcmpo cr0, f1, f0
     ble lbl_fn_80157C34_000000E4
     addi r3, r1, 0x38
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     b lbl_fn_80157C34_00000130
 lbl_fn_80157C34_000000E4:
     lfs f3, lbl_8088196C
@@ -136,11 +136,11 @@ lbl_fn_80157C34_000000E4:
     stfs f3, 0x30(r1)
     stfs f0, 0x34(r1)
     lfs f1, 0x538(r29)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x2c
     addi r3, r1, 0x48
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r4, r1, 0x2c
     lfs f2, 0x34(r1)
     addi r3, r1, 0x38
@@ -155,7 +155,7 @@ lbl_fn_80157C34_00000130:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80157C34_0000016C
@@ -194,7 +194,7 @@ lbl_fn_80157C34_000001C0:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80157C34_000001FC
     lwz r3, 0xf80(r29)
@@ -240,7 +240,7 @@ lbl_fn_80157C34_00000268:
     stw r5, 0x20(r1)
     stw r4, 0x24(r1)
     stw r0, 0x28(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80157C34_000002A4
     lwz r3, 0xf80(r29)
@@ -286,7 +286,7 @@ lbl_fn_80157C34_00000310:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80157C34_0000034C
     lwz r3, 0xf80(r29)
@@ -297,7 +297,7 @@ lbl_fn_80157C34_00000310:
 lbl_fn_80157C34_0000034C:
     mr r3, r29
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r29)
     li r0, 0x0
     cmpwi r3, 0x0
@@ -369,7 +369,7 @@ asm void fn_8015802C(void)
     b lbl_fn_8015802C_00000460
 lbl_fn_8015802C_0000044C:
     li r3, 0xc8
-    bl fn_80219E6C
+    bl task_findEntryById
     lwz r0, 0x638(r28)
     stw r0, 0x63c(r28)
     stw r3, 0x638(r28)
@@ -394,7 +394,7 @@ lbl_fn_8015802C_00000490:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8015802C_000004DC
@@ -437,7 +437,7 @@ lbl_fn_8015802C_00000530:
     stw r5, 0x2c(r1)
     stw r4, 0x30(r1)
     stw r0, 0x34(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8015802C_0000056C
     lwz r3, 0xf80(r29)
@@ -483,7 +483,7 @@ lbl_fn_8015802C_000005D8:
     stw r5, 0x44(r1)
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8015802C_00000614
     lwz r3, 0xf80(r29)
@@ -529,7 +529,7 @@ lbl_fn_8015802C_00000680:
     stw r5, 0x38(r1)
     stw r4, 0x3c(r1)
     stw r0, 0x40(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8015802C_000006BC
     lwz r3, 0xf80(r29)
@@ -540,7 +540,7 @@ lbl_fn_8015802C_00000680:
 lbl_fn_8015802C_000006BC:
     mr r3, r29
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r29)
     li r0, 0x0
     cmpwi r3, 0x0
@@ -637,7 +637,7 @@ lbl_fn_8015802C_0000081C:
     beq lbl_fn_8015802C_000008A0
     lwz r3, lbl_8087F430
     li r4, 0x25
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x1
     blt lbl_fn_8015802C_00000880
     lwz r3, 0x648(r29)
@@ -751,7 +751,7 @@ lbl_fn_8015802C_00000980:
     li r7, 0x0
     stfs f0, 0xfbc(r29)
     stw r8, 0x58c(r29)
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8015802C_000009DC
@@ -790,7 +790,7 @@ lbl_fn_8015802C_00000A30:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8015802C_00000A6C
     lwz r3, 0xf80(r28)
@@ -836,7 +836,7 @@ lbl_fn_8015802C_00000AD8:
     stw r5, 0x20(r1)
     stw r4, 0x24(r1)
     stw r0, 0x28(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8015802C_00000B14
     lwz r3, 0xf80(r28)
@@ -882,7 +882,7 @@ lbl_fn_8015802C_00000B80:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8015802C_00000BBC
     lwz r3, 0xf80(r28)
@@ -893,7 +893,7 @@ lbl_fn_8015802C_00000B80:
 lbl_fn_8015802C_00000BBC:
     mr r3, r28
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r28)
     li r0, 0x0
     cmpwi r3, 0x0
@@ -967,7 +967,7 @@ lbl_fn_801588A0_00000CAC:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_801588A0_00000CF0
@@ -1008,7 +1008,7 @@ lbl_fn_801588A0_00000D44:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_801588A0_00000D80
     lwz r3, 0xf80(r29)
@@ -1054,7 +1054,7 @@ lbl_fn_801588A0_00000DEC:
     stw r5, 0x20(r1)
     stw r4, 0x24(r1)
     stw r0, 0x28(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_801588A0_00000E28
     lwz r3, 0xf80(r29)
@@ -1100,7 +1100,7 @@ lbl_fn_801588A0_00000E94:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_801588A0_00000ED0
     lwz r3, 0xf80(r29)
@@ -1111,7 +1111,7 @@ lbl_fn_801588A0_00000E94:
 lbl_fn_801588A0_00000ED0:
     mr r3, r29
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r29)
     li r0, 0x0
     cmpwi r3, 0x0
@@ -1185,7 +1185,7 @@ lbl_fn_80158BB4_00000FC4:
     lfs f31, 0x2e4(r3)
     li r4, 0x0
     addi r3, r3, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_80881978
     fsubs f0, f1, f0
     fcmpo cr0, f31, f0
@@ -1197,7 +1197,7 @@ lbl_fn_80158BB4_00000FFC:
     lfs f31, 0x2e4(r3)
     li r4, 0x0
     addi r3, r3, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f31, f1
     cror eq, gt, eq
     mfcr r3
@@ -1207,7 +1207,7 @@ lbl_fn_80158BB4_00001020:
     lfs f31, 0x2e4(r3)
     li r4, 0x0
     addi r3, r3, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_808819C0
     fsubs f0, f1, f0
     fcmpo cr0, f31, f0
@@ -1268,7 +1268,7 @@ lbl_fn_80158CA4_000010CC:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80158CA4_0000110C
     lwz r3, 0xf80(r31)
@@ -1329,7 +1329,7 @@ lbl_fn_80158D60_00001188:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80158D60_000011C8
     lwz r3, 0xf80(r31)
@@ -1392,7 +1392,7 @@ lbl_fn_80158E1C_0000124C:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80158E1C_00001290
     lwz r4, 0xf80(r31)
@@ -1438,7 +1438,7 @@ asm void fn_80158EF0(void)
     stw r28, 0x50(r1)
     mr r28, r4
     li r4, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80158EF0_00001324
@@ -1477,7 +1477,7 @@ lbl_fn_80158EF0_00001378:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80158EF0_000013B4
     lwz r3, 0xf80(r29)
@@ -1523,7 +1523,7 @@ lbl_fn_80158EF0_00001420:
     stw r5, 0x20(r1)
     stw r4, 0x24(r1)
     stw r0, 0x28(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80158EF0_0000145C
     lwz r3, 0xf80(r29)
@@ -1569,7 +1569,7 @@ lbl_fn_80158EF0_000014C8:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80158EF0_00001504
     lwz r3, 0xf80(r29)
@@ -1580,7 +1580,7 @@ lbl_fn_80158EF0_000014C8:
 lbl_fn_80158EF0_00001504:
     mr r3, r29
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r29)
     li r0, 0x0
     cmpwi r3, 0x0
@@ -1703,7 +1703,7 @@ asm void fn_801591E8(void)
     stfs f1, 0x30(r1)
     li r7, 0x0
     stw r30, 0x13ac(r29)
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_801591E8_000016FC
@@ -1743,7 +1743,7 @@ lbl_fn_801591E8_00001750:
     stw r5, 0x20(r1)
     stw r4, 0x24(r1)
     stw r0, 0x28(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_801591E8_0000178C
     lwz r3, 0xf80(r29)
@@ -1789,7 +1789,7 @@ lbl_fn_801591E8_000017F8:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_801591E8_00001834
     lwz r3, 0xf80(r29)
@@ -1835,7 +1835,7 @@ lbl_fn_801591E8_000018A0:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_801591E8_000018DC
     lwz r3, 0xf80(r29)
@@ -1846,7 +1846,7 @@ lbl_fn_801591E8_000018A0:
 lbl_fn_801591E8_000018DC:
     mr r3, r29
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r29)
     li r0, 0x0
     cmpwi r3, 0x0

@@ -10,10 +10,10 @@ extern u8 lbl_80775208[];
 extern u32 lbl_8087D6C0;
 
 /* Function declarations */
-void fn_800081C0(void);
+void entry_callCtors(void);
 void fn_80008210(void);
 
-asm void fn_800081C0(void)
+asm void entry_callCtors(void)
 {
     nofralloc
     lwz r0, lbl_8087D6C0
@@ -22,21 +22,21 @@ asm void fn_800081C0(void)
     li r5, 0x0
     mtctr r0
     cmpwi r0, 0x0
-    ble lbl_fn_800081C0_00000048
-lbl_fn_800081C0_0000001C:
+    ble lbl_entry_callCtors_00000048
+lbl_entry_callCtors_0000001C:
     lwz r0, 0x0(r4)
     cmpw r3, r0
-    bne lbl_fn_800081C0_0000003C
+    bne lbl_entry_callCtors_0000003C
     mulli r0, r5, 0x28
     lis r3, lbl_80775208@ha
     addi r3, r3, lbl_80775208@l
     add r3, r3, r0
     blr
-lbl_fn_800081C0_0000003C:
+lbl_entry_callCtors_0000003C:
     addi r4, r4, 0x28
     addi r5, r5, 0x1
-    bdnz lbl_fn_800081C0_0000001C
-lbl_fn_800081C0_00000048:
+    bdnz lbl_entry_callCtors_0000001C
+lbl_entry_callCtors_00000048:
     li r3, 0x0
     blr
 }

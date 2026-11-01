@@ -4,12 +4,12 @@
 /* External function declarations */
 extern void fn_800827E0(void);
 extern void fn_800838B8(void);
-extern void fn_800D246C(void);
+extern void atn_Task_setActive(void);
 extern void fn_800E2A24(void);
 extern void fn_8012111C(void);
 extern void fn_8014F698(void);
 extern void fn_8014F960(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_804AE3BC(void);
 extern void fn_804CF198(void);
 extern void fn_804CF640(void);
@@ -21,8 +21,8 @@ extern void fn_8050A730(void);
 extern void fn_8050A964(void);
 extern void fn_8050A984(void);
 extern void fn_8050E630(void);
-extern void fn_805F9920(void);
-extern void fn_805F9990(void);
+extern void PSVECSquareMag(void);
+extern void PSVECDotProduct(void);
 extern void fn_806A8E40(void);
 extern void fn_806B0E30(void);
 extern void fn_806B1250(void);
@@ -866,7 +866,7 @@ asm void fn_804F1F38(void)
     beq lbl_fn_804F1F38_00000B04
     mr r3, r4
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
 lbl_fn_804F1F38_00000B04:
     li r29, 0x0
     li r30, 0x0
@@ -899,7 +899,7 @@ lbl_fn_804F1F38_00000B3C:
     cmpwi r3, 0x0
     beq lbl_fn_804F1F38_00000B78
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
 lbl_fn_804F1F38_00000B78:
     addi r29, r29, 0x1
     addi r30, r30, 0xd5c
@@ -1357,7 +1357,7 @@ lbl_fn_804F2454_00001198:
     lfs f2, 0x14(r31)
     stfs f2, 0x80(r1)
     psq_st f1, 0x0(r28), 0, 0
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_8088761C
     fcmpo cr0, f1, f0
     ble lbl_fn_804F2454_0000120C
@@ -1484,7 +1484,7 @@ lbl_fn_804F2454_0000138C:
     addi r3, r1, 0x6c
     stfs f3, 0x70(r1)
     stfs f0, 0x74(r1)
-    bl fn_805F9990
+    bl PSVECDotProduct
     lfs f0, lbl_80887620
     fcmpo cr0, f1, f0
     ble lbl_fn_804F2454_00001428
@@ -1746,7 +1746,7 @@ lbl_fn_804F2998_000016D4:
     stw r4, 0x84(r1)
     bl fn_800E2A24
     lwz r3, 0x0(r30)
-    bl fn_80219E6C
+    bl task_findEntryById
     stw r3, 0x10(r1)
     mr r3, r29
     addi r4, r1, 0x8

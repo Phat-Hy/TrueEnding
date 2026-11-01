@@ -46,7 +46,7 @@ void fn_801DFFA4(void);
 void fn_801E057C(void);
 void fn_801E07A4(void);
 void fn_801E0B0C(void);
-void fn_801E18E0(void);
+void sound_applyAudioFilter(void);
 
 asm void fn_801DFFA4(void)
 {
@@ -1807,7 +1807,7 @@ lbl_fn_801E0B0C_000018A4:
     addi r3, r1, 0x14
     addi r4, r1, 0x10
     stw r6, 0x14(r1)
-    bl fn_801E18E0
+    bl sound_applyAudioFilter
     stw r23, 0x0(r24)
     b lbl_fn_801E0B0C_00000BA4
 lbl_fn_801E0B0C_000018FC:
@@ -1816,7 +1816,7 @@ lbl_fn_801E0B0C_000018FC:
     addi r3, r1, 0xc
     addi r4, r1, 0x8
     stw r23, 0xc(r1)
-    bl fn_801E18E0
+    bl sound_applyAudioFilter
     stw r23, 0x0(r25)
     b lbl_fn_801E0B0C_00000BA4
 lbl_fn_801E0B0C_0000191C:
@@ -1830,7 +1830,7 @@ lbl_fn_801E0B0C_0000191C:
     blr
 }
 
-asm void fn_801E18E0(void)
+asm void sound_applyAudioFilter(void)
 {
     nofralloc
     stwu r1, -0xf0(r1)
@@ -1848,7 +1848,7 @@ asm void fn_801E18E0(void)
     mr r26, r5
     addi r28, r6, 0x6667
     subi r27, r31, 0x5555
-lbl_fn_801E18E0_00001978:
+lbl_sound_applyAudioFilter_00001978:
     lwz r30, 0x0(r24)
     lwz r29, 0x0(r25)
     subf r0, r30, r29
@@ -1857,35 +1857,35 @@ lbl_fn_801E18E0_00001978:
     srwi r3, r0, 31
     add r7, r0, r3
     cmpwi r7, 0x1
-    ble lbl_fn_801E18E0_000026F0
+    ble lbl_sound_applyAudioFilter_000026F0
     cmpwi r7, 0x14
-    bgt lbl_fn_801E18E0_00001B5C
+    bgt lbl_sound_applyAudioFilter_00001B5C
     cmplw r30, r29
-    beq lbl_fn_801E18E0_000026F0
+    beq lbl_sound_applyAudioFilter_000026F0
     subi r28, r29, 0x18
     cmplw r30, r28
-    beq lbl_fn_801E18E0_000026F0
+    beq lbl_sound_applyAudioFilter_000026F0
     lfs f31, lbl_80882AF0
-    b lbl_fn_801E18E0_00001B50
-lbl_fn_801E18E0_000019C0:
+    b lbl_sound_applyAudioFilter_00001B50
+lbl_sound_applyAudioFilter_000019C0:
     cmplw r30, r29
     mr r25, r30
-    beq lbl_fn_801E18E0_00001ACC
+    beq lbl_sound_applyAudioFilter_00001ACC
     addi r24, r30, 0x18
-    b lbl_fn_801E18E0_00001AC4
-lbl_fn_801E18E0_000019D4:
+    b lbl_sound_applyAudioFilter_00001AC4
+lbl_sound_applyAudioFilter_000019D4:
     lwz r3, 0x4(r24)
     lwz r0, 0x4(r25)
     cmpw r3, r0
-    bne lbl_fn_801E18E0_00001A54
+    bne lbl_sound_applyAudioFilter_00001A54
     lwz r0, 0xc(r24)
     cmpwi r0, 0x0
-    blt lbl_fn_801E18E0_00001A3C
+    blt lbl_sound_applyAudioFilter_00001A3C
     lwz r4, 0xc(r25)
     cmpwi r4, 0x0
-    blt lbl_fn_801E18E0_00001A3C
+    blt lbl_sound_applyAudioFilter_00001A3C
     cmpw r0, r4
-    bne lbl_fn_801E18E0_00001A24
+    bne lbl_sound_applyAudioFilter_00001A24
     lwz r0, 0x14(r24)
     lwz r4, 0x14(r25)
     xor r0, r4, r0
@@ -1893,23 +1893,23 @@ lbl_fn_801E18E0_000019D4:
     and r0, r0, r4
     subf r0, r0, r3
     srwi r0, r0, 31
-    b lbl_fn_801E18E0_00001AB4
-lbl_fn_801E18E0_00001A24:
+    b lbl_sound_applyAudioFilter_00001AB4
+lbl_sound_applyAudioFilter_00001A24:
     xor r0, r4, r0
     srawi r3, r0, 1
     and r0, r0, r4
     subf r0, r0, r3
     srwi r0, r0, 31
-    b lbl_fn_801E18E0_00001AB4
-lbl_fn_801E18E0_00001A3C:
+    b lbl_sound_applyAudioFilter_00001AB4
+lbl_sound_applyAudioFilter_00001A3C:
     cmpwi r0, 0x0
-    blt lbl_fn_801E18E0_00001A4C
+    blt lbl_sound_applyAudioFilter_00001A4C
     li r0, 0x1
-    b lbl_fn_801E18E0_00001AB4
-lbl_fn_801E18E0_00001A4C:
+    b lbl_sound_applyAudioFilter_00001AB4
+lbl_sound_applyAudioFilter_00001A4C:
     li r0, 0x0
-    b lbl_fn_801E18E0_00001AB4
-lbl_fn_801E18E0_00001A54:
+    b lbl_sound_applyAudioFilter_00001AB4
+lbl_sound_applyAudioFilter_00001A54:
     lwz r4, 0x0(r25)
     lwz r3, 0x0(r24)
     lfs f0, 0x4(r4)
@@ -1918,7 +1918,7 @@ lbl_fn_801E18E0_00001A54:
     fabs f2, f2
     frsp f2, f2
     fcmpo cr0, f2, f31
-    bge lbl_fn_801E18E0_00001AA8
+    bge lbl_sound_applyAudioFilter_00001AA8
     bl fn_80206BE4
     bl fn_80211480
     mr r22, r3
@@ -1930,23 +1930,23 @@ lbl_fn_801E18E0_00001A54:
     lwz r4, 0x8(r4)
     bl fn_80686AF0
     srwi r0, r3, 31
-    b lbl_fn_801E18E0_00001AB4
-lbl_fn_801E18E0_00001AA8:
+    b lbl_sound_applyAudioFilter_00001AB4
+lbl_sound_applyAudioFilter_00001AA8:
     fcmpo cr0, f1, f0
     mfcr r0
     extrwi r0, r0, 1, 1
-lbl_fn_801E18E0_00001AB4:
+lbl_sound_applyAudioFilter_00001AB4:
     cmpwi r0, 0x0
-    beq lbl_fn_801E18E0_00001AC0
+    beq lbl_sound_applyAudioFilter_00001AC0
     mr r25, r24
-lbl_fn_801E18E0_00001AC0:
+lbl_sound_applyAudioFilter_00001AC0:
     addi r24, r24, 0x18
-lbl_fn_801E18E0_00001AC4:
+lbl_sound_applyAudioFilter_00001AC4:
     cmplw r24, r29
-    bne lbl_fn_801E18E0_000019D4
-lbl_fn_801E18E0_00001ACC:
+    bne lbl_sound_applyAudioFilter_000019D4
+lbl_sound_applyAudioFilter_00001ACC:
     cmplw r25, r30
-    beq lbl_fn_801E18E0_00001B4C
+    beq lbl_sound_applyAudioFilter_00001B4C
     lwz r8, 0x0(r25)
     lwz r7, 0x4(r25)
     lwz r6, 0x8(r25)
@@ -1977,13 +1977,13 @@ lbl_fn_801E18E0_00001ACC:
     stw r4, 0xb0(r1)
     stw r3, 0xb4(r1)
     stw r3, 0x14(r30)
-lbl_fn_801E18E0_00001B4C:
+lbl_sound_applyAudioFilter_00001B4C:
     addi r30, r30, 0x18
-lbl_fn_801E18E0_00001B50:
+lbl_sound_applyAudioFilter_00001B50:
     cmplw r30, r28
-    bne lbl_fn_801E18E0_000019C0
-    b lbl_fn_801E18E0_000026F0
-lbl_fn_801E18E0_00001B5C:
+    bne lbl_sound_applyAudioFilter_000019C0
+    b lbl_sound_applyAudioFilter_000026F0
+lbl_sound_applyAudioFilter_00001B5C:
     lwz r4, lbl_8087DA8C
     srawi r0, r7, 2
     addze r5, r0
@@ -1998,9 +1998,9 @@ lbl_fn_801E18E0_00001B5C:
     add r0, r5, r0
     mulli r0, r0, 0x18
     add r0, r30, r0
-    blt lbl_fn_801E18E0_00001B9C
+    blt lbl_sound_applyAudioFilter_00001B9C
     li r8, -0x4
-lbl_fn_801E18E0_00001B9C:
+lbl_sound_applyAudioFilter_00001B9C:
     mulhw r4, r28, r8
     addi r3, r8, 0x1
     slwi r5, r7, 2
@@ -2018,10 +2018,10 @@ lbl_fn_801E18E0_00001B9C:
     add r3, r5, r3
     mulli r3, r3, 0x18
     add r7, r6, r3
-    blt lbl_fn_801E18E0_00001BEC
+    blt lbl_sound_applyAudioFilter_00001BEC
     li r8, -0x4
     stw r8, lbl_8087DA8C
-lbl_fn_801E18E0_00001BEC:
+lbl_sound_applyAudioFilter_00001BEC:
     lwz r5, 0x0(r25)
     mr r6, r26
     addi r3, r1, 0x20
@@ -2034,22 +2034,22 @@ lbl_fn_801E18E0_00001BEC:
     bl fn_801E27A8
     lwz r23, 0x0(r24)
     mr r30, r29
-    b lbl_fn_801E18E0_00001C24
-lbl_fn_801E18E0_00001C20:
+    b lbl_sound_applyAudioFilter_00001C24
+lbl_sound_applyAudioFilter_00001C20:
     addi r23, r23, 0x18
-lbl_fn_801E18E0_00001C24:
+lbl_sound_applyAudioFilter_00001C24:
     lwz r3, 0x4(r23)
     lwz r0, 0x4(r29)
     cmpw r3, r0
-    bne lbl_fn_801E18E0_00001CA4
+    bne lbl_sound_applyAudioFilter_00001CA4
     lwz r0, 0xc(r23)
     cmpwi r0, 0x0
-    blt lbl_fn_801E18E0_00001C8C
+    blt lbl_sound_applyAudioFilter_00001C8C
     lwz r4, 0xc(r29)
     cmpwi r4, 0x0
-    blt lbl_fn_801E18E0_00001C8C
+    blt lbl_sound_applyAudioFilter_00001C8C
     cmpw r0, r4
-    bne lbl_fn_801E18E0_00001C74
+    bne lbl_sound_applyAudioFilter_00001C74
     lwz r0, 0x14(r23)
     lwz r4, 0x14(r29)
     xor r0, r4, r0
@@ -2057,23 +2057,23 @@ lbl_fn_801E18E0_00001C24:
     and r0, r0, r4
     subf r0, r0, r3
     srwi r0, r0, 31
-    b lbl_fn_801E18E0_00001D04
-lbl_fn_801E18E0_00001C74:
+    b lbl_sound_applyAudioFilter_00001D04
+lbl_sound_applyAudioFilter_00001C74:
     xor r0, r4, r0
     srawi r3, r0, 1
     and r0, r0, r4
     subf r0, r0, r3
     srwi r0, r0, 31
-    b lbl_fn_801E18E0_00001D04
-lbl_fn_801E18E0_00001C8C:
+    b lbl_sound_applyAudioFilter_00001D04
+lbl_sound_applyAudioFilter_00001C8C:
     cmpwi r0, 0x0
-    blt lbl_fn_801E18E0_00001C9C
+    blt lbl_sound_applyAudioFilter_00001C9C
     li r0, 0x1
-    b lbl_fn_801E18E0_00001D04
-lbl_fn_801E18E0_00001C9C:
+    b lbl_sound_applyAudioFilter_00001D04
+lbl_sound_applyAudioFilter_00001C9C:
     li r0, 0x0
-    b lbl_fn_801E18E0_00001D04
-lbl_fn_801E18E0_00001CA4:
+    b lbl_sound_applyAudioFilter_00001D04
+lbl_sound_applyAudioFilter_00001CA4:
     lwz r4, 0x0(r29)
     lwz r3, 0x0(r23)
     lfs f0, 0x4(r4)
@@ -2082,7 +2082,7 @@ lbl_fn_801E18E0_00001CA4:
     fabs f2, f2
     frsp f2, f2
     fcmpo cr0, f2, f31
-    bge lbl_fn_801E18E0_00001CF8
+    bge lbl_sound_applyAudioFilter_00001CF8
     bl fn_80206BE4
     bl fn_80211480
     mr r22, r3
@@ -2094,30 +2094,30 @@ lbl_fn_801E18E0_00001CA4:
     lwz r4, 0x8(r4)
     bl fn_80686AF0
     srwi r0, r3, 31
-    b lbl_fn_801E18E0_00001D04
-lbl_fn_801E18E0_00001CF8:
+    b lbl_sound_applyAudioFilter_00001D04
+lbl_sound_applyAudioFilter_00001CF8:
     fcmpo cr0, f1, f0
     mfcr r0
     extrwi r0, r0, 1, 1
-lbl_fn_801E18E0_00001D04:
+lbl_sound_applyAudioFilter_00001D04:
     cmpwi r0, 0x0
-    bne lbl_fn_801E18E0_00001C20
-lbl_fn_801E18E0_00001D0C:
+    bne lbl_sound_applyAudioFilter_00001C20
+lbl_sound_applyAudioFilter_00001D0C:
     subi r30, r30, 0x18
     cmplw r23, r30
-    beq lbl_fn_801E18E0_00001E00
+    beq lbl_sound_applyAudioFilter_00001E00
     lwz r3, 0x4(r30)
     lwz r0, 0x4(r29)
     cmpw r3, r0
-    bne lbl_fn_801E18E0_00001D98
+    bne lbl_sound_applyAudioFilter_00001D98
     lwz r0, 0xc(r30)
     cmpwi r0, 0x0
-    blt lbl_fn_801E18E0_00001D80
+    blt lbl_sound_applyAudioFilter_00001D80
     lwz r4, 0xc(r29)
     cmpwi r4, 0x0
-    blt lbl_fn_801E18E0_00001D80
+    blt lbl_sound_applyAudioFilter_00001D80
     cmpw r0, r4
-    bne lbl_fn_801E18E0_00001D68
+    bne lbl_sound_applyAudioFilter_00001D68
     lwz r0, 0x14(r30)
     lwz r4, 0x14(r29)
     xor r0, r4, r0
@@ -2125,23 +2125,23 @@ lbl_fn_801E18E0_00001D0C:
     and r0, r0, r4
     subf r0, r0, r3
     srwi r0, r0, 31
-    b lbl_fn_801E18E0_00001DF8
-lbl_fn_801E18E0_00001D68:
+    b lbl_sound_applyAudioFilter_00001DF8
+lbl_sound_applyAudioFilter_00001D68:
     xor r0, r4, r0
     srawi r3, r0, 1
     and r0, r0, r4
     subf r0, r0, r3
     srwi r0, r0, 31
-    b lbl_fn_801E18E0_00001DF8
-lbl_fn_801E18E0_00001D80:
+    b lbl_sound_applyAudioFilter_00001DF8
+lbl_sound_applyAudioFilter_00001D80:
     cmpwi r0, 0x0
-    blt lbl_fn_801E18E0_00001D90
+    blt lbl_sound_applyAudioFilter_00001D90
     li r0, 0x1
-    b lbl_fn_801E18E0_00001DF8
-lbl_fn_801E18E0_00001D90:
+    b lbl_sound_applyAudioFilter_00001DF8
+lbl_sound_applyAudioFilter_00001D90:
     li r0, 0x0
-    b lbl_fn_801E18E0_00001DF8
-lbl_fn_801E18E0_00001D98:
+    b lbl_sound_applyAudioFilter_00001DF8
+lbl_sound_applyAudioFilter_00001D98:
     lwz r4, 0x0(r29)
     lwz r3, 0x0(r30)
     lfs f0, 0x4(r4)
@@ -2150,7 +2150,7 @@ lbl_fn_801E18E0_00001D98:
     fabs f2, f2
     frsp f2, f2
     fcmpo cr0, f2, f31
-    bge lbl_fn_801E18E0_00001DEC
+    bge lbl_sound_applyAudioFilter_00001DEC
     bl fn_80206BE4
     bl fn_80211480
     mr r22, r3
@@ -2162,17 +2162,17 @@ lbl_fn_801E18E0_00001D98:
     lwz r4, 0x8(r4)
     bl fn_80686AF0
     srwi r0, r3, 31
-    b lbl_fn_801E18E0_00001DF8
-lbl_fn_801E18E0_00001DEC:
+    b lbl_sound_applyAudioFilter_00001DF8
+lbl_sound_applyAudioFilter_00001DEC:
     fcmpo cr0, f1, f0
     mfcr r0
     extrwi r0, r0, 1, 1
-lbl_fn_801E18E0_00001DF8:
+lbl_sound_applyAudioFilter_00001DF8:
     cmpwi r0, 0x0
-    beq lbl_fn_801E18E0_00001D0C
-lbl_fn_801E18E0_00001E00:
+    beq lbl_sound_applyAudioFilter_00001D0C
+lbl_sound_applyAudioFilter_00001E00:
     cmplw r23, r30
-    bge lbl_fn_801E18E0_000020F4
+    bge lbl_sound_applyAudioFilter_000020F4
     lwz r8, 0x0(r23)
     lwz r7, 0x4(r23)
     lwz r6, 0x8(r23)
@@ -2204,22 +2204,22 @@ lbl_fn_801E18E0_00001E00:
     stw r4, 0x98(r1)
     stw r3, 0x9c(r1)
     stw r3, 0x14(r30)
-    b lbl_fn_801E18E0_00001E8C
-lbl_fn_801E18E0_00001E88:
+    b lbl_sound_applyAudioFilter_00001E8C
+lbl_sound_applyAudioFilter_00001E88:
     addi r23, r23, 0x18
-lbl_fn_801E18E0_00001E8C:
+lbl_sound_applyAudioFilter_00001E8C:
     lwz r3, 0x4(r23)
     lwz r0, 0x4(r29)
     cmpw r3, r0
-    bne lbl_fn_801E18E0_00001F0C
+    bne lbl_sound_applyAudioFilter_00001F0C
     lwz r0, 0xc(r23)
     cmpwi r0, 0x0
-    blt lbl_fn_801E18E0_00001EF4
+    blt lbl_sound_applyAudioFilter_00001EF4
     lwz r4, 0xc(r29)
     cmpwi r4, 0x0
-    blt lbl_fn_801E18E0_00001EF4
+    blt lbl_sound_applyAudioFilter_00001EF4
     cmpw r0, r4
-    bne lbl_fn_801E18E0_00001EDC
+    bne lbl_sound_applyAudioFilter_00001EDC
     lwz r0, 0x14(r23)
     lwz r4, 0x14(r29)
     xor r0, r4, r0
@@ -2227,23 +2227,23 @@ lbl_fn_801E18E0_00001E8C:
     and r0, r0, r4
     subf r0, r0, r3
     srwi r0, r0, 31
-    b lbl_fn_801E18E0_00001F6C
-lbl_fn_801E18E0_00001EDC:
+    b lbl_sound_applyAudioFilter_00001F6C
+lbl_sound_applyAudioFilter_00001EDC:
     xor r0, r4, r0
     srawi r3, r0, 1
     and r0, r0, r4
     subf r0, r0, r3
     srwi r0, r0, 31
-    b lbl_fn_801E18E0_00001F6C
-lbl_fn_801E18E0_00001EF4:
+    b lbl_sound_applyAudioFilter_00001F6C
+lbl_sound_applyAudioFilter_00001EF4:
     cmpwi r0, 0x0
-    blt lbl_fn_801E18E0_00001F04
+    blt lbl_sound_applyAudioFilter_00001F04
     li r0, 0x1
-    b lbl_fn_801E18E0_00001F6C
-lbl_fn_801E18E0_00001F04:
+    b lbl_sound_applyAudioFilter_00001F6C
+lbl_sound_applyAudioFilter_00001F04:
     li r0, 0x0
-    b lbl_fn_801E18E0_00001F6C
-lbl_fn_801E18E0_00001F0C:
+    b lbl_sound_applyAudioFilter_00001F6C
+lbl_sound_applyAudioFilter_00001F0C:
     lwz r4, 0x0(r29)
     lwz r3, 0x0(r23)
     lfs f0, 0x4(r4)
@@ -2252,7 +2252,7 @@ lbl_fn_801E18E0_00001F0C:
     fabs f2, f2
     frsp f2, f2
     fcmpo cr0, f2, f31
-    bge lbl_fn_801E18E0_00001F60
+    bge lbl_sound_applyAudioFilter_00001F60
     bl fn_80206BE4
     bl fn_80211480
     mr r22, r3
@@ -2264,28 +2264,28 @@ lbl_fn_801E18E0_00001F0C:
     lwz r4, 0x8(r4)
     bl fn_80686AF0
     srwi r0, r3, 31
-    b lbl_fn_801E18E0_00001F6C
-lbl_fn_801E18E0_00001F60:
+    b lbl_sound_applyAudioFilter_00001F6C
+lbl_sound_applyAudioFilter_00001F60:
     fcmpo cr0, f1, f0
     mfcr r0
     extrwi r0, r0, 1, 1
-lbl_fn_801E18E0_00001F6C:
+lbl_sound_applyAudioFilter_00001F6C:
     cmpwi r0, 0x0
-    bne lbl_fn_801E18E0_00001E88
-lbl_fn_801E18E0_00001F74:
+    bne lbl_sound_applyAudioFilter_00001E88
+lbl_sound_applyAudioFilter_00001F74:
     subi r30, r30, 0x18
     lwz r0, 0x4(r29)
     lwz r3, 0x4(r30)
     cmpw r3, r0
-    bne lbl_fn_801E18E0_00001FF8
+    bne lbl_sound_applyAudioFilter_00001FF8
     lwz r0, 0xc(r30)
     cmpwi r0, 0x0
-    blt lbl_fn_801E18E0_00001FE0
+    blt lbl_sound_applyAudioFilter_00001FE0
     lwz r4, 0xc(r29)
     cmpwi r4, 0x0
-    blt lbl_fn_801E18E0_00001FE0
+    blt lbl_sound_applyAudioFilter_00001FE0
     cmpw r0, r4
-    bne lbl_fn_801E18E0_00001FC8
+    bne lbl_sound_applyAudioFilter_00001FC8
     lwz r0, 0x14(r30)
     lwz r4, 0x14(r29)
     xor r0, r4, r0
@@ -2293,23 +2293,23 @@ lbl_fn_801E18E0_00001F74:
     and r0, r0, r4
     subf r0, r0, r3
     srwi r0, r0, 31
-    b lbl_fn_801E18E0_00002058
-lbl_fn_801E18E0_00001FC8:
+    b lbl_sound_applyAudioFilter_00002058
+lbl_sound_applyAudioFilter_00001FC8:
     xor r0, r4, r0
     srawi r3, r0, 1
     and r0, r0, r4
     subf r0, r0, r3
     srwi r0, r0, 31
-    b lbl_fn_801E18E0_00002058
-lbl_fn_801E18E0_00001FE0:
+    b lbl_sound_applyAudioFilter_00002058
+lbl_sound_applyAudioFilter_00001FE0:
     cmpwi r0, 0x0
-    blt lbl_fn_801E18E0_00001FF0
+    blt lbl_sound_applyAudioFilter_00001FF0
     li r0, 0x1
-    b lbl_fn_801E18E0_00002058
-lbl_fn_801E18E0_00001FF0:
+    b lbl_sound_applyAudioFilter_00002058
+lbl_sound_applyAudioFilter_00001FF0:
     li r0, 0x0
-    b lbl_fn_801E18E0_00002058
-lbl_fn_801E18E0_00001FF8:
+    b lbl_sound_applyAudioFilter_00002058
+lbl_sound_applyAudioFilter_00001FF8:
     lwz r4, 0x0(r29)
     lwz r3, 0x0(r30)
     lfs f0, 0x4(r4)
@@ -2318,7 +2318,7 @@ lbl_fn_801E18E0_00001FF8:
     fabs f2, f2
     frsp f2, f2
     fcmpo cr0, f2, f31
-    bge lbl_fn_801E18E0_0000204C
+    bge lbl_sound_applyAudioFilter_0000204C
     bl fn_80206BE4
     bl fn_80211480
     mr r22, r3
@@ -2330,19 +2330,19 @@ lbl_fn_801E18E0_00001FF8:
     lwz r4, 0x8(r4)
     bl fn_80686AF0
     srwi r0, r3, 31
-    b lbl_fn_801E18E0_00002058
-lbl_fn_801E18E0_0000204C:
+    b lbl_sound_applyAudioFilter_00002058
+lbl_sound_applyAudioFilter_0000204C:
     fcmpo cr0, f1, f0
     mfcr r0
     extrwi r0, r0, 1, 1
-lbl_fn_801E18E0_00002058:
+lbl_sound_applyAudioFilter_00002058:
     cmpwi r0, 0x0
-    beq lbl_fn_801E18E0_00001F74
+    beq lbl_sound_applyAudioFilter_00001F74
     xor r0, r30, r23
     cntlzw r0, r0
     slw r0, r30, r0
     srwi. r0, r0, 31
-    beq lbl_fn_801E18E0_000020F4
+    beq lbl_sound_applyAudioFilter_000020F4
     lwz r8, 0x0(r23)
     lwz r7, 0x4(r23)
     lwz r6, 0x8(r23)
@@ -2374,11 +2374,11 @@ lbl_fn_801E18E0_00002058:
     stw r4, 0x80(r1)
     stw r3, 0x84(r1)
     stw r3, 0x14(r30)
-    b lbl_fn_801E18E0_00001E8C
-lbl_fn_801E18E0_000020F4:
+    b lbl_sound_applyAudioFilter_00001E8C
+lbl_sound_applyAudioFilter_000020F4:
     lwz r6, 0x0(r24)
     cmplw r23, r6
-    bne lbl_fn_801E18E0_00002678
+    bne lbl_sound_applyAudioFilter_00002678
     lwz r9, 0x0(r23)
     lwz r8, 0x4(r23)
     lwz r7, 0x8(r23)
@@ -2416,15 +2416,15 @@ lbl_fn_801E18E0_000020F4:
     stw r6, 0x64(r1)
     stw r5, 0x68(r1)
     stw r4, 0x6c(r1)
-    bne lbl_fn_801E18E0_00002208
+    bne lbl_sound_applyAudioFilter_00002208
     lwz r0, 0xc(r10)
     cmpwi r0, 0x0
-    blt lbl_fn_801E18E0_000021F0
+    blt lbl_sound_applyAudioFilter_000021F0
     lwz r4, 0xc(r30)
     cmpwi r4, 0x0
-    blt lbl_fn_801E18E0_000021F0
+    blt lbl_sound_applyAudioFilter_000021F0
     cmpw r0, r4
-    bne lbl_fn_801E18E0_000021D8
+    bne lbl_sound_applyAudioFilter_000021D8
     lwz r0, 0x14(r10)
     lwz r4, 0x14(r30)
     xor r0, r4, r0
@@ -2432,23 +2432,23 @@ lbl_fn_801E18E0_000020F4:
     and r0, r0, r4
     subf r0, r0, r3
     srwi r0, r0, 31
-    b lbl_fn_801E18E0_00002268
-lbl_fn_801E18E0_000021D8:
+    b lbl_sound_applyAudioFilter_00002268
+lbl_sound_applyAudioFilter_000021D8:
     xor r0, r4, r0
     srawi r3, r0, 1
     and r0, r0, r4
     subf r0, r0, r3
     srwi r0, r0, 31
-    b lbl_fn_801E18E0_00002268
-lbl_fn_801E18E0_000021F0:
+    b lbl_sound_applyAudioFilter_00002268
+lbl_sound_applyAudioFilter_000021F0:
     cmpwi r0, 0x0
-    blt lbl_fn_801E18E0_00002200
+    blt lbl_sound_applyAudioFilter_00002200
     li r0, 0x1
-    b lbl_fn_801E18E0_00002268
-lbl_fn_801E18E0_00002200:
+    b lbl_sound_applyAudioFilter_00002268
+lbl_sound_applyAudioFilter_00002200:
     li r0, 0x0
-    b lbl_fn_801E18E0_00002268
-lbl_fn_801E18E0_00002208:
+    b lbl_sound_applyAudioFilter_00002268
+lbl_sound_applyAudioFilter_00002208:
     lwz r4, 0x0(r30)
     lwz r3, 0x0(r10)
     lfs f0, 0x4(r4)
@@ -2457,7 +2457,7 @@ lbl_fn_801E18E0_00002208:
     fabs f2, f2
     frsp f2, f2
     fcmpo cr0, f2, f31
-    bge lbl_fn_801E18E0_0000225C
+    bge lbl_sound_applyAudioFilter_0000225C
     bl fn_80206BE4
     bl fn_80211480
     mr r29, r3
@@ -2469,34 +2469,34 @@ lbl_fn_801E18E0_00002208:
     lwz r4, 0x8(r4)
     bl fn_80686AF0
     srwi r0, r3, 31
-    b lbl_fn_801E18E0_00002268
-lbl_fn_801E18E0_0000225C:
+    b lbl_sound_applyAudioFilter_00002268
+lbl_sound_applyAudioFilter_0000225C:
     fcmpo cr0, f1, f0
     mfcr r0
     extrwi r0, r0, 1, 1
-lbl_fn_801E18E0_00002268:
+lbl_sound_applyAudioFilter_00002268:
     cmpwi r0, 0x0
-    bne lbl_fn_801E18E0_000023F0
-    b lbl_fn_801E18E0_00002278
-lbl_fn_801E18E0_00002274:
+    bne lbl_sound_applyAudioFilter_000023F0
+    b lbl_sound_applyAudioFilter_00002278
+lbl_sound_applyAudioFilter_00002274:
     addi r23, r23, 0x18
-lbl_fn_801E18E0_00002278:
+lbl_sound_applyAudioFilter_00002278:
     lwz r0, 0x0(r25)
     cmplw r23, r0
-    beq lbl_fn_801E18E0_00002370
+    beq lbl_sound_applyAudioFilter_00002370
     lwz r5, 0x0(r24)
     lwz r0, 0x4(r23)
     lwz r3, 0x4(r5)
     cmpw r3, r0
-    bne lbl_fn_801E18E0_00002308
+    bne lbl_sound_applyAudioFilter_00002308
     lwz r0, 0xc(r5)
     cmpwi r0, 0x0
-    blt lbl_fn_801E18E0_000022F0
+    blt lbl_sound_applyAudioFilter_000022F0
     lwz r4, 0xc(r23)
     cmpwi r4, 0x0
-    blt lbl_fn_801E18E0_000022F0
+    blt lbl_sound_applyAudioFilter_000022F0
     cmpw r0, r4
-    bne lbl_fn_801E18E0_000022D8
+    bne lbl_sound_applyAudioFilter_000022D8
     lwz r0, 0x14(r5)
     lwz r4, 0x14(r23)
     xor r0, r4, r0
@@ -2504,23 +2504,23 @@ lbl_fn_801E18E0_00002278:
     and r0, r0, r4
     subf r0, r0, r3
     srwi r0, r0, 31
-    b lbl_fn_801E18E0_00002368
-lbl_fn_801E18E0_000022D8:
+    b lbl_sound_applyAudioFilter_00002368
+lbl_sound_applyAudioFilter_000022D8:
     xor r0, r4, r0
     srawi r3, r0, 1
     and r0, r0, r4
     subf r0, r0, r3
     srwi r0, r0, 31
-    b lbl_fn_801E18E0_00002368
-lbl_fn_801E18E0_000022F0:
+    b lbl_sound_applyAudioFilter_00002368
+lbl_sound_applyAudioFilter_000022F0:
     cmpwi r0, 0x0
-    blt lbl_fn_801E18E0_00002300
+    blt lbl_sound_applyAudioFilter_00002300
     li r0, 0x1
-    b lbl_fn_801E18E0_00002368
-lbl_fn_801E18E0_00002300:
+    b lbl_sound_applyAudioFilter_00002368
+lbl_sound_applyAudioFilter_00002300:
     li r0, 0x0
-    b lbl_fn_801E18E0_00002368
-lbl_fn_801E18E0_00002308:
+    b lbl_sound_applyAudioFilter_00002368
+lbl_sound_applyAudioFilter_00002308:
     lwz r4, 0x0(r23)
     lwz r3, 0x0(r5)
     lfs f0, 0x4(r4)
@@ -2529,7 +2529,7 @@ lbl_fn_801E18E0_00002308:
     fabs f2, f2
     frsp f2, f2
     fcmpo cr0, f2, f31
-    bge lbl_fn_801E18E0_0000235C
+    bge lbl_sound_applyAudioFilter_0000235C
     bl fn_80206BE4
     bl fn_80211480
     mr r29, r3
@@ -2541,17 +2541,17 @@ lbl_fn_801E18E0_00002308:
     lwz r4, 0x8(r4)
     bl fn_80686AF0
     srwi r0, r3, 31
-    b lbl_fn_801E18E0_00002368
-lbl_fn_801E18E0_0000235C:
+    b lbl_sound_applyAudioFilter_00002368
+lbl_sound_applyAudioFilter_0000235C:
     fcmpo cr0, f1, f0
     mfcr r0
     extrwi r0, r0, 1, 1
-lbl_fn_801E18E0_00002368:
+lbl_sound_applyAudioFilter_00002368:
     cmpwi r0, 0x0
-    beq lbl_fn_801E18E0_00002274
-lbl_fn_801E18E0_00002370:
+    beq lbl_sound_applyAudioFilter_00002274
+lbl_sound_applyAudioFilter_00002370:
     cmplw r23, r30
-    bge lbl_fn_801E18E0_000023F0
+    bge lbl_sound_applyAudioFilter_000023F0
     lwz r8, 0x0(r23)
     lwz r7, 0x4(r23)
     lwz r6, 0x8(r23)
@@ -2582,26 +2582,26 @@ lbl_fn_801E18E0_00002370:
     stw r4, 0x50(r1)
     stw r3, 0x54(r1)
     stw r3, 0x14(r30)
-lbl_fn_801E18E0_000023F0:
+lbl_sound_applyAudioFilter_000023F0:
     cmplw r23, r30
-    bge lbl_fn_801E18E0_00002670
-    b lbl_fn_801E18E0_00002400
-lbl_fn_801E18E0_000023FC:
+    bge lbl_sound_applyAudioFilter_00002670
+    b lbl_sound_applyAudioFilter_00002400
+lbl_sound_applyAudioFilter_000023FC:
     addi r23, r23, 0x18
-lbl_fn_801E18E0_00002400:
+lbl_sound_applyAudioFilter_00002400:
     lwz r5, 0x0(r24)
     lwz r0, 0x4(r23)
     lwz r3, 0x4(r5)
     cmpw r3, r0
-    bne lbl_fn_801E18E0_00002484
+    bne lbl_sound_applyAudioFilter_00002484
     lwz r0, 0xc(r5)
     cmpwi r0, 0x0
-    blt lbl_fn_801E18E0_0000246C
+    blt lbl_sound_applyAudioFilter_0000246C
     lwz r4, 0xc(r23)
     cmpwi r4, 0x0
-    blt lbl_fn_801E18E0_0000246C
+    blt lbl_sound_applyAudioFilter_0000246C
     cmpw r0, r4
-    bne lbl_fn_801E18E0_00002454
+    bne lbl_sound_applyAudioFilter_00002454
     lwz r0, 0x14(r5)
     lwz r4, 0x14(r23)
     xor r0, r4, r0
@@ -2609,23 +2609,23 @@ lbl_fn_801E18E0_00002400:
     and r0, r0, r4
     subf r0, r0, r3
     srwi r0, r0, 31
-    b lbl_fn_801E18E0_000024E4
-lbl_fn_801E18E0_00002454:
+    b lbl_sound_applyAudioFilter_000024E4
+lbl_sound_applyAudioFilter_00002454:
     xor r0, r4, r0
     srawi r3, r0, 1
     and r0, r0, r4
     subf r0, r0, r3
     srwi r0, r0, 31
-    b lbl_fn_801E18E0_000024E4
-lbl_fn_801E18E0_0000246C:
+    b lbl_sound_applyAudioFilter_000024E4
+lbl_sound_applyAudioFilter_0000246C:
     cmpwi r0, 0x0
-    blt lbl_fn_801E18E0_0000247C
+    blt lbl_sound_applyAudioFilter_0000247C
     li r0, 0x1
-    b lbl_fn_801E18E0_000024E4
-lbl_fn_801E18E0_0000247C:
+    b lbl_sound_applyAudioFilter_000024E4
+lbl_sound_applyAudioFilter_0000247C:
     li r0, 0x0
-    b lbl_fn_801E18E0_000024E4
-lbl_fn_801E18E0_00002484:
+    b lbl_sound_applyAudioFilter_000024E4
+lbl_sound_applyAudioFilter_00002484:
     lwz r4, 0x0(r23)
     lwz r3, 0x0(r5)
     lfs f0, 0x4(r4)
@@ -2634,7 +2634,7 @@ lbl_fn_801E18E0_00002484:
     fabs f2, f2
     frsp f2, f2
     fcmpo cr0, f2, f31
-    bge lbl_fn_801E18E0_000024D8
+    bge lbl_sound_applyAudioFilter_000024D8
     bl fn_80206BE4
     bl fn_80211480
     mr r29, r3
@@ -2646,29 +2646,29 @@ lbl_fn_801E18E0_00002484:
     lwz r4, 0x8(r4)
     bl fn_80686AF0
     srwi r0, r3, 31
-    b lbl_fn_801E18E0_000024E4
-lbl_fn_801E18E0_000024D8:
+    b lbl_sound_applyAudioFilter_000024E4
+lbl_sound_applyAudioFilter_000024D8:
     fcmpo cr0, f1, f0
     mfcr r0
     extrwi r0, r0, 1, 1
-lbl_fn_801E18E0_000024E4:
+lbl_sound_applyAudioFilter_000024E4:
     cmpwi r0, 0x0
-    beq lbl_fn_801E18E0_000023FC
-lbl_fn_801E18E0_000024EC:
+    beq lbl_sound_applyAudioFilter_000023FC
+lbl_sound_applyAudioFilter_000024EC:
     lwz r5, 0x0(r24)
     subi r30, r30, 0x18
     lwz r0, 0x4(r30)
     lwz r3, 0x4(r5)
     cmpw r3, r0
-    bne lbl_fn_801E18E0_00002574
+    bne lbl_sound_applyAudioFilter_00002574
     lwz r0, 0xc(r5)
     cmpwi r0, 0x0
-    blt lbl_fn_801E18E0_0000255C
+    blt lbl_sound_applyAudioFilter_0000255C
     lwz r4, 0xc(r30)
     cmpwi r4, 0x0
-    blt lbl_fn_801E18E0_0000255C
+    blt lbl_sound_applyAudioFilter_0000255C
     cmpw r0, r4
-    bne lbl_fn_801E18E0_00002544
+    bne lbl_sound_applyAudioFilter_00002544
     lwz r0, 0x14(r5)
     lwz r4, 0x14(r30)
     xor r0, r4, r0
@@ -2676,23 +2676,23 @@ lbl_fn_801E18E0_000024EC:
     and r0, r0, r4
     subf r0, r0, r3
     srwi r0, r0, 31
-    b lbl_fn_801E18E0_000025D4
-lbl_fn_801E18E0_00002544:
+    b lbl_sound_applyAudioFilter_000025D4
+lbl_sound_applyAudioFilter_00002544:
     xor r0, r4, r0
     srawi r3, r0, 1
     and r0, r0, r4
     subf r0, r0, r3
     srwi r0, r0, 31
-    b lbl_fn_801E18E0_000025D4
-lbl_fn_801E18E0_0000255C:
+    b lbl_sound_applyAudioFilter_000025D4
+lbl_sound_applyAudioFilter_0000255C:
     cmpwi r0, 0x0
-    blt lbl_fn_801E18E0_0000256C
+    blt lbl_sound_applyAudioFilter_0000256C
     li r0, 0x1
-    b lbl_fn_801E18E0_000025D4
-lbl_fn_801E18E0_0000256C:
+    b lbl_sound_applyAudioFilter_000025D4
+lbl_sound_applyAudioFilter_0000256C:
     li r0, 0x0
-    b lbl_fn_801E18E0_000025D4
-lbl_fn_801E18E0_00002574:
+    b lbl_sound_applyAudioFilter_000025D4
+lbl_sound_applyAudioFilter_00002574:
     lwz r4, 0x0(r30)
     lwz r3, 0x0(r5)
     lfs f0, 0x4(r4)
@@ -2701,7 +2701,7 @@ lbl_fn_801E18E0_00002574:
     fabs f2, f2
     frsp f2, f2
     fcmpo cr0, f2, f31
-    bge lbl_fn_801E18E0_000025C8
+    bge lbl_sound_applyAudioFilter_000025C8
     bl fn_80206BE4
     bl fn_80211480
     mr r29, r3
@@ -2713,19 +2713,19 @@ lbl_fn_801E18E0_00002574:
     lwz r4, 0x8(r4)
     bl fn_80686AF0
     srwi r0, r3, 31
-    b lbl_fn_801E18E0_000025D4
-lbl_fn_801E18E0_000025C8:
+    b lbl_sound_applyAudioFilter_000025D4
+lbl_sound_applyAudioFilter_000025C8:
     fcmpo cr0, f1, f0
     mfcr r0
     extrwi r0, r0, 1, 1
-lbl_fn_801E18E0_000025D4:
+lbl_sound_applyAudioFilter_000025D4:
     cmpwi r0, 0x0
-    bne lbl_fn_801E18E0_000024EC
+    bne lbl_sound_applyAudioFilter_000024EC
     xor r0, r30, r23
     cntlzw r0, r0
     slw r0, r30, r0
     srwi. r0, r0, 31
-    beq lbl_fn_801E18E0_00002670
+    beq lbl_sound_applyAudioFilter_00002670
     lwz r8, 0x0(r23)
     lwz r7, 0x4(r23)
     lwz r6, 0x8(r23)
@@ -2757,11 +2757,11 @@ lbl_fn_801E18E0_000025D4:
     stw r4, 0x38(r1)
     stw r3, 0x3c(r1)
     stw r3, 0x14(r30)
-    b lbl_fn_801E18E0_00002400
-lbl_fn_801E18E0_00002670:
+    b lbl_sound_applyAudioFilter_00002400
+lbl_sound_applyAudioFilter_00002670:
     stw r23, 0x0(r24)
-    b lbl_fn_801E18E0_00001978
-lbl_fn_801E18E0_00002678:
+    b lbl_sound_applyAudioFilter_00001978
+lbl_sound_applyAudioFilter_00002678:
     lwz r3, 0x0(r25)
     subf r0, r6, r23
     subi r5, r31, 0x5555
@@ -2775,25 +2775,25 @@ lbl_fn_801E18E0_00002678:
     srwi r4, r0, 31
     add r0, r0, r4
     cmpw r5, r0
-    bge lbl_fn_801E18E0_000026D0
+    bge lbl_sound_applyAudioFilter_000026D0
     stw r23, 0x10(r1)
     mr r5, r26
     addi r3, r1, 0x14
     addi r4, r1, 0x10
     stw r6, 0x14(r1)
-    bl fn_801E18E0
+    bl sound_applyAudioFilter
     stw r23, 0x0(r24)
-    b lbl_fn_801E18E0_00001978
-lbl_fn_801E18E0_000026D0:
+    b lbl_sound_applyAudioFilter_00001978
+lbl_sound_applyAudioFilter_000026D0:
     stw r3, 0x8(r1)
     mr r5, r26
     addi r3, r1, 0xc
     addi r4, r1, 0x8
     stw r23, 0xc(r1)
-    bl fn_801E18E0
+    bl sound_applyAudioFilter
     stw r23, 0x0(r25)
-    b lbl_fn_801E18E0_00001978
-lbl_fn_801E18E0_000026F0:
+    b lbl_sound_applyAudioFilter_00001978
+lbl_sound_applyAudioFilter_000026F0:
     addi r11, r1, 0xe0
     psq_l f31, 0xe8(r1), 0, 0
     lfd f31, 0xe0(r1)

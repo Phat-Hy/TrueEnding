@@ -10,26 +10,26 @@ extern void _restgpr_27(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void dtor_80084684(void);
+extern void dtor_80084684(void*);
 extern void fn_8004B290(void);
 extern void fn_8004B338(void);
-extern void fn_8004B378(void);
-extern void fn_800827E0(void);
+extern void item_useConsumable(void);
+extern void* fn_800827E0(void);
 extern void fn_800839EC(void);
-extern void fn_80083AD4(void);
+extern void fn_80083AD4(void*, void*);
 extern void fn_800C2418(void);
 extern void fn_800C2448(void);
 extern void fn_800C2520(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
-extern void fn_80473EFC(void);
-extern void fn_80473F50(void);
-extern void fn_80473F88(void);
-extern void fn_80473FCC(void);
+struct atn_LoadHandle; extern void atn_LoadHandle_constructor(void*);
+extern void atn_LoadHandle_destructor(void*, int);
+extern void atn_LoadHandle_getStatus(void);
+extern void atn_LoadHandle_isLoading(void);
+extern void fn_80473F88(void*);
+extern void taskManager_updateTasks(void);
 extern void fn_80478158(void);
-extern void fn_805F89F0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F99B0(void);
+extern void PSMTXConcat(void);
+extern void PSVECNormalize(void);
+extern void PSVECCrossProduct(void);
 extern void fn_80615E00(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
@@ -65,15 +65,37 @@ extern u32 lbl_80881200;
 extern u32 lbl_80881204;
 
 /* Function declarations */
-void fn_800D56C4(void);
-void fn_800D5714(void);
-void fn_800D5738(void);
-void fn_800D57B0(void);
-void fn_800D5808(void);
-void fn_800D58A4(void);
+typedef struct atn_TaskBase {
+    void* vtable;
+    u32 unk4;
+    u64 cookie;
+    u64 taskId;
+} atn_TaskBase;
+
+BOOL atn_TaskBase_isValid(atn_TaskBase* task);
+void atn_Task_initCookie(void);
+typedef struct atn_LoadHandle {
+    void* vtable;
+    u32 field_04;
+} atn_LoadHandle;
+
+typedef struct atn_LH_Texture {
+    u8 raw[0x20];
+    atn_LoadHandle handle;
+    void* field_28;
+    u8 field_2c;
+    u8 field_2d;
+    u8 field_2e;
+    u8 field_2f;
+} atn_LH_Texture;
+
+atn_LH_Texture* atn_LH_Texture_constructor(atn_LH_Texture* this);
+atn_LoadHandle* atn_LH_Texture_destructor(atn_LoadHandle* handle, int flags);
+atn_LH_Texture* atn_LH_Texture_destructAndFree(atn_LH_Texture* this, int flags);
+void atn_LH_Texture_release(atn_LH_Texture* this);
 void fn_800D5908(void);
 void fn_800D594C(void);
-void fn_800D59B8(void);
+void atn_LH_Texture_update(void);
 void fn_800D5A3C(void);
 void fn_800D5B58(void);
 void fn_800D5C84(void);
@@ -89,185 +111,78 @@ void fn_800D6B60(void);
 void fn_800D6BA0(void);
 void fn_800D6BE0(void);
 
-asm void fn_800D56C4(void)
+BOOL atn_TaskBase_isValid(atn_TaskBase* task)
 {
-    nofralloc
-    cmpwi r3, 0x0
-    beq lbl_fn_800D56C4_00000048
-    lis r5, lbl_807C75D0@ha
-    lwz r6, 0x8(r3)
-    addi r4, r5, lbl_807C75D0@l
-    lwz r0, lbl_807C75D0@l(r5)
-    lwz r5, 0xc(r3)
-    lwz r4, 0x4(r4)
-    xor r0, r6, r0
-    xor r4, r5, r4
-    or. r0, r4, r0
-    bne lbl_fn_800D56C4_00000048
-    lwz r0, 0x10(r3)
-    lwz r3, 0x14(r3)
-    or. r0, r3, r0
-    beq lbl_fn_800D56C4_00000048
-    li r3, 0x1
-    blr
-lbl_fn_800D56C4_00000048:
-    li r3, 0x0
-    blr
+    if (task && task->cookie == *(u64*)lbl_807C75D0) {
+        if (task->taskId != 0) {
+            return 1;
+        }
+    }
+    return 0;
 }
 
-asm void fn_800D5714(void)
+void atn_Task_initCookie(void)
 {
-    nofralloc
-    lis r3, lbl_80734628@ha
-    lis r4, lbl_807C75D0@ha
-    addi r5, r3, lbl_80734628@l
-    lwz r0, lbl_80734628@l(r3)
-    addi r3, r4, lbl_807C75D0@l
-    lwz r5, 0x4(r5)
-    stw r5, 0x4(r3)
-    stw r0, lbl_807C75D0@l(r4)
-    blr
+    *(u64*)lbl_807C75D0 = *(u64*)lbl_80734628;
 }
 
-asm void fn_800D5738(void)
+atn_LH_Texture* atn_LH_Texture_constructor(atn_LH_Texture* this)
 {
-    nofralloc
-    stwu r1, -0x10(r1)
-    mflr r0
-    stw r0, 0x14(r1)
-    stw r31, 0xc(r1)
-    addi r31, r3, 0x20
-    stw r30, 0x8(r1)
-    mr r30, r3
-    mr r3, r31
-    bl fn_80473E74
-    lis r3, lbl_8078FFB0@ha
-    li r0, 0x0
-    addi r3, r3, lbl_8078FFB0@l
-    lis r4, 0xbad1
-    stw r3, 0x0(r31)
-    mr r3, r30
-    subi r4, r4, 0xff3
-    li r5, 0x20
-    stw r0, 0x28(r30)
-    stb r0, 0x2c(r30)
-    stb r0, 0x2d(r30)
-    stb r0, 0x2e(r30)
-    stb r0, 0x2f(r30)
-    bl memset
-    mr r3, r30
-    lwz r31, 0xc(r1)
-    lwz r30, 0x8(r1)
-    lwz r0, 0x14(r1)
-    mtlr r0
-    addi r1, r1, 0x10
-    blr
+    atn_LoadHandle* handle = &this->handle;
+    atn_LoadHandle_constructor(handle);
+    handle->vtable = (void*)lbl_8078FFB0;
+    this->field_28 = 0;
+    this->field_2c = 0;
+    this->field_2d = 0;
+    this->field_2e = 0;
+    this->field_2f = 0;
+    memset(this, 0xBAD0F00D, 0x20);
+    return this;
 }
 
-asm void fn_800D57B0(void)
+atn_LoadHandle* atn_LH_Texture_destructor(atn_LoadHandle* handle, int flags)
 {
-    nofralloc
-    stwu r1, -0x10(r1)
-    mflr r0
-    cmpwi r3, 0x0
-    stw r0, 0x14(r1)
-    stw r31, 0xc(r1)
-    mr r31, r4
-    stw r30, 0x8(r1)
-    mr r30, r3
-    beq lbl_fn_800D57B0_00000128
-    li r4, 0x0
-    bl fn_80473E8C
-    cmpwi r31, 0x0
-    ble lbl_fn_800D57B0_00000128
-    mr r3, r30
-    bl dtor_80084684
-lbl_fn_800D57B0_00000128:
-    mr r3, r30
-    lwz r31, 0xc(r1)
-    lwz r30, 0x8(r1)
-    lwz r0, 0x14(r1)
-    mtlr r0
-    addi r1, r1, 0x10
-    blr
+    if (handle) {
+        atn_LoadHandle_destructor(handle, 0);
+        if (flags > 0) {
+            dtor_80084684(handle);
+        }
+    }
+    return handle;
 }
 
-asm void fn_800D5808(void)
+
+
+static inline void atn_LH_Texture_release_inline(atn_LH_Texture* this)
 {
-    nofralloc
-    stwu r1, -0x20(r1)
-    mflr r0
-    cmpwi r3, 0x0
-    stw r0, 0x24(r1)
-    stw r31, 0x1c(r1)
-    stw r30, 0x18(r1)
-    stw r29, 0x14(r1)
-    mr r29, r4
-    stw r28, 0x10(r1)
-    mr r28, r3
-    beq lbl_fn_800D5808_000001BC
-    addi r3, r3, 0x20
-    bl fn_80473F88
-    lwz r30, 0x28(r28)
-    li r31, 0x0
-    stb r31, 0x2c(r28)
-    cmpwi r30, 0x0
-    beq lbl_fn_800D5808_0000019C
-    bl fn_800827E0
-    mr r4, r30
-    bl fn_80083AD4
-    stw r31, 0x28(r28)
-lbl_fn_800D5808_0000019C:
-    addic. r3, r28, 0x20
-    beq lbl_fn_800D5808_000001AC
-    li r4, 0x0
-    bl fn_80473E8C
-lbl_fn_800D5808_000001AC:
-    cmpwi r29, 0x0
-    ble lbl_fn_800D5808_000001BC
-    mr r3, r28
-    bl dtor_80084684
-lbl_fn_800D5808_000001BC:
-    lwz r31, 0x1c(r1)
-    mr r3, r28
-    lwz r30, 0x18(r1)
-    lwz r29, 0x14(r1)
-    lwz r28, 0x10(r1)
-    lwz r0, 0x24(r1)
-    mtlr r0
-    addi r1, r1, 0x20
-    blr
+    void* buffer;
+    fn_80473F88(&this->handle);
+    buffer = this->field_28;
+    this->field_2c = 0;
+    if (buffer != NULL) {
+        void* heap = fn_800827E0();
+        fn_80083AD4(heap, buffer);
+        this->field_28 = NULL;
+    }
 }
 
-asm void fn_800D58A4(void)
+void atn_LH_Texture_release(atn_LH_Texture* this)
 {
-    nofralloc
-    stwu r1, -0x20(r1)
-    mflr r0
-    stw r0, 0x24(r1)
-    stw r31, 0x1c(r1)
-    stw r30, 0x18(r1)
-    stw r29, 0x14(r1)
-    mr r29, r3
-    addi r3, r3, 0x20
-    bl fn_80473F88
-    lwz r30, 0x28(r29)
-    li r31, 0x0
-    stb r31, 0x2c(r29)
-    cmpwi r30, 0x0
-    beq lbl_fn_800D58A4_00000228
-    bl fn_800827E0
-    mr r4, r30
-    bl fn_80083AD4
-    stw r31, 0x28(r29)
-lbl_fn_800D58A4_00000228:
-    lwz r0, 0x24(r1)
-    lwz r31, 0x1c(r1)
-    lwz r30, 0x18(r1)
-    lwz r29, 0x14(r1)
-    mtlr r0
-    addi r1, r1, 0x20
-    blr
+    atn_LH_Texture_release_inline(this);
+}
+
+atn_LH_Texture* atn_LH_Texture_destructAndFree(atn_LH_Texture* this, int flags)
+{
+    if (this) {
+        atn_LH_Texture_release_inline(this);
+        if (&this->handle != NULL) {
+            atn_LoadHandle_destructor(&this->handle, 0);
+        }
+        if (flags > 0) {
+            dtor_80084684(this);
+        }
+    }
+    return this;
 }
 
 asm void fn_800D5908(void)
@@ -301,11 +216,11 @@ asm void fn_800D594C(void)
     stw r31, 0xc(r1)
     mr r31, r3
     addi r3, r3, 0x20
-    bl fn_80473FCC
+    bl taskManager_updateTasks
     li r0, 0x0
     stb r0, 0x2c(r31)
     addi r3, r31, 0x20
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_800D594C_000002E0
     lbz r5, 0x2d(r31)
@@ -325,7 +240,7 @@ lbl_fn_800D594C_000002E0:
     blr
 }
 
-asm void fn_800D59B8(void)
+asm void atn_LH_Texture_update(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -334,19 +249,19 @@ asm void fn_800D59B8(void)
     stw r31, 0xc(r1)
     mr r31, r3
     addi r3, r3, 0x20
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
-    beq lbl_fn_800D59B8_00000320
+    beq lbl_atn_LH_Texture_update_00000320
     li r3, 0x1
-    b lbl_fn_800D59B8_00000364
-lbl_fn_800D59B8_00000320:
+    b lbl_atn_LH_Texture_update_00000364
+lbl_atn_LH_Texture_update_00000320:
     lbz r0, 0x2c(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_800D59B8_00000360
+    bne lbl_atn_LH_Texture_update_00000360
     addi r3, r31, 0x20
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
-    bne lbl_fn_800D59B8_00000360
+    bne lbl_atn_LH_Texture_update_00000360
     lbz r5, 0x2d(r31)
     li r0, 0x1
     lbz r6, 0x2e(r31)
@@ -356,9 +271,9 @@ lbl_fn_800D59B8_00000320:
     extsb r5, r5
     extsb r6, r6
     bl fn_80478158
-lbl_fn_800D59B8_00000360:
+lbl_atn_LH_Texture_update_00000360:
     li r3, 0x0
-lbl_fn_800D59B8_00000364:
+lbl_atn_LH_Texture_update_00000364:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -882,7 +797,7 @@ lbl_fn_800D5F68_00000AF0:
     addi r3, r1, 0xc8
     addi r4, r1, 0xbc
     addi r5, r1, 0x44
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     addi r3, r1, 0x44
     addi r30, r1, 0xb0
     psq_l f1, 0x0(r3), 0, 0
@@ -891,11 +806,11 @@ lbl_fn_800D5F68_00000AF0:
     mr r4, r30
     psq_st f1, 0x0(r30), 0, 0
     stfs f2, 0xb8(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     mr r3, r30
     addi r4, r1, 0xc8
     addi r5, r1, 0x38
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     lfs f0, 0xd0(r1)
     addi r4, r1, 0x38
     lfs f30, lbl_808811E0
@@ -938,11 +853,11 @@ lbl_fn_800D5F68_00000AF0:
     stfs f30, 0x384(r1)
     stfs f30, 0x394(r1)
     stfs f30, 0x3a4(r1)
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x3d8
     addi r4, r1, 0x198
     addi r5, r1, 0x1c8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x1c8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1039,7 +954,7 @@ lbl_fn_800D5F68_00000D1C:
     psq_l f1, 0x0(r6), 0, 0
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x94(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f7, 0x98(r1)
     lfs f0, 0x8c(r1)
     lfs f8, 0xa0(r1)
@@ -1069,7 +984,7 @@ lbl_fn_800D5F68_00000DC0:
     psq_st f1, 0x0(r3), 0, 0
     mr r4, r3
     stfs f2, 0x7c(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f0, 0x80(r1)
     lfs f8, lbl_808811E0
     fabs f9, f0
@@ -1108,17 +1023,17 @@ lbl_fn_800D5F68_00000E60:
     addi r3, r1, 0x74
     addi r4, r1, 0x68
     addi r5, r1, 0x5c
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     addi r3, r1, 0x5c
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     addi r3, r1, 0x5c
     addi r4, r1, 0x74
     addi r5, r1, 0x50
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     addi r3, r1, 0x50
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f30, lbl_808811E0
     addi r3, r1, 0x288
     lfs f31, 0x5c(r1)
@@ -1147,11 +1062,11 @@ lbl_fn_800D5F68_00000E60:
     stfs f30, 0x2c4(r1)
     stfs f30, 0x2d4(r1)
     stfs f30, 0x2e4(r1)
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x318
     addi r4, r1, 0x138
     addi r5, r1, 0x168
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x168
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1229,7 +1144,7 @@ lbl_fn_800D5F68_00000FA8:
     stfs f8, 0x40(r28)
     stfs f28, 0x48(r28)
     stfs f7, 0x44(r28)
-    bl fn_8004B378
+    bl item_useConsumable
     b lbl_fn_800D5F68_00001078
 lbl_fn_800D5F68_00001050:
     lwz r3, lbl_8087EFB4
@@ -1300,11 +1215,11 @@ lbl_fn_800D5F68_00001148:
     addi r3, r1, 0x228
     addi r4, r1, 0x258
     addi r5, r1, 0xd8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x1f8
     addi r4, r1, 0xd8
     addi r5, r1, 0x108
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x108
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0

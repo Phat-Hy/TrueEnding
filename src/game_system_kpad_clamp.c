@@ -5,7 +5,7 @@
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void fn_8000D114(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8000D3A8(void);
 extern void fn_8000D430(void);
 extern void fn_8000DD0C(void);
@@ -18,16 +18,16 @@ extern void fn_80043D58(void);
 extern void fn_8004ED34(void);
 extern void fn_80057A64(void);
 extern void fn_80057A68(void);
-extern void fn_80097C08(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097E80(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB5B4(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800CFA28(void);
-extern void fn_800D246C(void);
-extern void fn_800DC6B4(void);
+extern void atn_Task_setActive(void);
+extern void str_findChar(void);
 extern void fn_800E0AA8(void);
 extern void fn_800EC204(void);
 extern void fn_800EFE3C(void);
@@ -54,7 +54,7 @@ extern void fn_8013C3A8(void);
 extern void fn_8013C554(void);
 extern void fn_801404F8(void);
 extern void fn_801479D8(void);
-extern void fn_80148B38(void);
+extern void quest_checkCondition(void);
 extern void fn_8014DEE4(void);
 extern void fn_80151210(void);
 extern void fn_801539E0(void);
@@ -121,9 +121,9 @@ extern void fn_80570A44(void);
 extern void fn_8059C330(void);
 extern void fn_8059D17C(void);
 extern void fn_8059D26C(void);
-extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9160(void);
+extern void PSMTXConcat(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXScale(void);
 
 /* External data declarations */
 extern u8 lbl_8074DA10[];
@@ -227,11 +227,11 @@ asm void fn_8037257C(void)
     beq lbl_fn_8037257C_000000C0
     addi r3, r1, 0x38
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x38
     addi r5, r1, 0x8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -252,11 +252,11 @@ lbl_fn_8037257C_000000C0:
     beq lbl_fn_8037257C_00000120
     addi r3, r1, 0x98
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x98
     addi r5, r1, 0x68
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x68
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -277,11 +277,11 @@ lbl_fn_8037257C_00000120:
     beq lbl_fn_8037257C_00000180
     addi r3, r1, 0xf8
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0xf8
     addi r5, r1, 0xc8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xc8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -299,7 +299,7 @@ lbl_fn_8037257C_00000180:
     mr r3, r29
     mr r4, r31
     addi r5, r1, 0x158
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x158
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -334,11 +334,11 @@ asm void fn_80372754(void)
     mr r31, r3
     lfs f3, 0x8(r4)
     addi r3, r1, 0x8
-    bl fn_805F9160
+    bl PSMTXScale
     mr r3, r31
     addi r4, r1, 0x8
     addi r5, r1, 0x38
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x38
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -427,7 +427,7 @@ lbl_fn_803727DC_000002C0:
     bne lbl_fn_803727DC_00000350
     lwz r3, lbl_8087F8A0
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     b lbl_fn_803727DC_00000360
 lbl_fn_803727DC_00000350:
     lwz r3, lbl_8087F8A0
@@ -437,14 +437,14 @@ lbl_fn_803727DC_00000350:
 lbl_fn_803727DC_00000360:
     lwz r3, lbl_8087F428
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F408
     li r4, 0x0
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
     lwz r3, 0x10d8(r31)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F580
     bl fn_804A2FBC
     lwz r3, lbl_8087F4F0
@@ -523,7 +523,7 @@ asm void fn_803729B4(void)
     bl fn_8059C330
     bl fn_800F7FA0
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     bl fn_800F7FA0
     li r4, 0x1
     bl fn_80373084
@@ -570,7 +570,7 @@ lbl_fn_803729B4_00000540:
     bl fn_8012A1B8
     mr r4, r3
     addi r3, r1, 0x74
-    bl fn_8000D124
+    bl vec3_copy
     lfs f29, lbl_808857D0
     li r29, 0x0
     lfs f28, lbl_8088579C
@@ -721,7 +721,7 @@ lbl_fn_803729B4_00000724:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     b lbl_fn_803729B4_000007C8
 lbl_fn_803729B4_00000790:
     mr r3, r26
@@ -737,7 +737,7 @@ lbl_fn_803729B4_00000790:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
 lbl_fn_803729B4_000007C8:
     mr r3, r26
     bl fn_8000DD0C
@@ -848,7 +848,7 @@ lbl_fn_803729B4_000008B8:
     bl fn_8000D3A8
     lfs f1, lbl_8088572C
     mr r3, r26
-    bl fn_80148B38
+    bl quest_checkCondition
     mr r3, r26
     bl fn_8000DD0C
     lfs f1, lbl_8088570C
@@ -1179,7 +1179,7 @@ lbl_fn_803731E8_00000D10:
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, 0x10d8(r30)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F4A0
     bl fn_803EE514
     lwz r3, lbl_8087F048
@@ -1254,7 +1254,7 @@ lbl_fn_803731E8_00000D10:
     lwz r3, 0xb34(r3)
     stfs f0, 0x100(r3)
     lwz r3, lbl_8087F3C0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F3C0
     li r4, 0x0
     stw r31, 0xe8(r3)
@@ -1310,7 +1310,7 @@ lbl_fn_803731E8_00000F80:
     bl fn_800CB440
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087EE78
     cmpwi r3, 0x0
     beq lbl_fn_803731E8_00000FCC
@@ -1525,7 +1525,7 @@ asm void fn_803737C0(void)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
     lwz r3, 0x10d8(r30)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F4A0
     bl fn_803EE560
     lwz r4, lbl_8087F488
@@ -1575,7 +1575,7 @@ asm void fn_803737C0(void)
     stfs f0, 0x100(r4)
     lwz r4, 0xb1c(r31)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80885708
     mr r4, r3
     mr r3, r29
@@ -1621,7 +1621,7 @@ asm void fn_803737C0(void)
     bl fn_803E4950
     lwz r3, lbl_8087F3C0
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087EFE8
     li r4, 0x1
     li r5, 0x0
@@ -1725,7 +1725,7 @@ asm void fn_80373AE8(void)
     bl fn_800C31F4
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lfs f1, lbl_808857B4
     addi r3, r31, 0x55a8
     li r4, 0x5
@@ -1891,7 +1891,7 @@ lbl_fn_80373AE8_00001854:
     bgt lbl_fn_80373AE8_00001960
     lwz r3, lbl_8087F3C0
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x5598(r31)
     li r5, 0x1
     lwz r0, 0x559c(r31)
@@ -1920,7 +1920,7 @@ lbl_fn_80373AE8_00001854:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80373AE8_000018E0:
     lwz r0, 0x5598(r31)
     cmpwi r0, 0x0
@@ -1945,7 +1945,7 @@ lbl_fn_80373AE8_000018E0:
     stw r7, 0x70(r6)
     stw r0, 0x563c(r31)
     stw r9, 0x55ac(r31)
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x55b4(r31)
     cmpwi r3, 0x0
     beq lbl_fn_80373AE8_00001960
@@ -1985,7 +1985,7 @@ lbl_fn_80373AE8_000019BC:
     li r4, 0x1
     stw r0, 0xe8(r3)
     lwz r3, lbl_8087F3C0
-    bl fn_800D246C
+    bl atn_Task_setActive
     b lbl_fn_80373AE8_000019E4
 lbl_fn_80373AE8_000019D8:
     lwz r3, lbl_8087F3C0

@@ -6,11 +6,11 @@ extern void __files(void);
 extern void __register_global_object(void);
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
-extern void fn_800844D8(void);
-extern void fn_800DC6B4(void);
+extern void mem_free(void);
+extern void str_findChar(void);
 extern void fn_8050E630(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 extern void fn_8068B770(void);
 extern void fn_8068BC30(void);
 extern void fn_8068BD60(void);
@@ -1176,11 +1176,11 @@ asm void fn_804FF3D4(void)
     addi r4, r4, lbl_80759E48@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804FF3D4_00001144:
     mulli r3, r30, 0xd5c
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_804FF3D4_00001178
@@ -1190,8 +1190,8 @@ lbl_fn_804FF3D4_00001144:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80791764@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804FF3D4_00001178:
     stw r31, 0x0(r29)
     stw r30, 0x8(r29)
@@ -1217,7 +1217,7 @@ asm void fn_804FF47C(void)
     stw r30, 0x8(r1)
     lis r30, lbl_807C8AE8@ha
     addi r30, r30, lbl_807C8AE8@l
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, lbl_8087F604
     la r3, lbl_8087F608
     bl fn_8068B770

@@ -6,14 +6,14 @@ extern void _restgpr_25(void);
 extern void _restgpr_27(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_800BFAC8(void);
 extern void fn_8016F3D0(void);
 extern void fn_801F6D7C(void);
 extern void fn_801F7DF0(void);
 extern void fn_801F837C(void);
 extern void fn_80219558(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_8021A984(void);
 extern void fn_8021A9CC(void);
 extern void fn_8036554C(void);
@@ -21,7 +21,7 @@ extern void fn_803E0250(void);
 extern void fn_803E0AB4(void);
 extern void fn_804EB874(void);
 extern void fn_8059A268(void);
-extern void fn_805F9920(void);
+extern void PSVECSquareMag(void);
 
 /* External data declarations */
 extern u8 lbl_80750650[];
@@ -333,7 +333,7 @@ lbl_fn_803DE89C_0000035C:
     stfs f0, 0x14(r1)
     stfs f4, 0x18(r1)
     stfs f7, 0x1c(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fmuls f0, f31, f31
     fcmpo cr0, f1, f0
     bge lbl_fn_803DE89C_000003D4
@@ -420,7 +420,7 @@ lbl_fn_803DE89C_000004CC:
     li r5, 0x0
     mr r3, r31
     addi r4, r4, 0x10c1
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_803DE89C_00000520
     li r3, 0x0
@@ -534,14 +534,14 @@ lbl_fn_803DE89C_00000694:
     b lbl_fn_803DE89C_000006AC
 lbl_fn_803DE89C_000006A0:
     li r3, 0x7531
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r30, r3
 lbl_fn_803DE89C_000006AC:
     lwz r0, 0x4(r30)
     cmpwi r0, 0x4ef9
     bne lbl_fn_803DE89C_000006C4
     li r3, 0x7532
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r30, r3
 lbl_fn_803DE89C_000006C4:
     lis r4, lbl_807506A0@ha

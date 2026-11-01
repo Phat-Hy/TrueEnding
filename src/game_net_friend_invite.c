@@ -16,19 +16,19 @@ extern void fn_80049654(void);
 extern void fn_8004B338(void);
 extern void fn_800827E0(void);
 extern void fn_80083AD4(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800897D8(void);
 extern void fn_80089ACC(void);
 extern void fn_800A555C(void);
 extern void fn_800C310C(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB58C(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800CE368(void);
-extern void fn_800D1E9C(void);
-extern void fn_800D2338(void);
-extern void fn_800D246C(void);
+extern void atn_Task_destructor(void);
+extern void atn_Task_unlink(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800D8814(void);
 extern void fn_800EC1F4(void);
@@ -41,7 +41,7 @@ extern void fn_801125F8(void);
 extern void fn_80112960(void);
 extern void fn_80114AA0(void);
 extern void fn_801156BC(void);
-extern void fn_80122550(void);
+extern void magic_getOffset6C(void);
 extern void fn_8012B3E8(void);
 extern void fn_8012B988(void);
 extern void fn_8012D8B8(void);
@@ -56,12 +56,12 @@ extern void fn_80206B14(void);
 extern void fn_8020A3E4(void);
 extern void fn_8020A81C(void);
 extern void fn_8020ED84(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_802375C4(void);
-extern void fn_8023781C(void);
-extern void fn_80237874(void);
+extern void res_MsgHandle_unload(void);
+extern void res_MsgHandle_update(void);
 extern void fn_80239798(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_80244CA0(void);
 extern void fn_80244CAC(void);
 extern void fn_8026607C(void);
@@ -73,7 +73,7 @@ extern void fn_80364E7C(void);
 extern void fn_8036503C(void);
 extern void fn_80365320(void);
 extern void fn_8036635C(void);
-extern void fn_80370AE4(void);
+extern void world_setLocalFlag(void);
 extern void fn_8037308C(void);
 extern void fn_80373118(void);
 extern void fn_80373148(void);
@@ -87,10 +87,10 @@ extern void fn_803D6E70(void);
 extern void fn_803D7100(void);
 extern void fn_803EFDAC(void);
 extern void fn_8046ECDC(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
-extern void fn_80473E8C(void);
-extern void fn_80473F50(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
+extern void atn_LoadHandle_destructor(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_804814F0(void);
 extern void fn_8049D68C(void);
@@ -1462,11 +1462,11 @@ lbl_fn_804D201C_00000EA4:
     subic. r26, r26, 0x6698
     beq lbl_fn_804D201C_00000EC8
     mr r3, r26
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r26, 0x4
     beq lbl_fn_804D201C_00000EC8
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_804D201C_00000EC8:
     addis r3, r30, 0x1
     li r4, -0x1
@@ -1480,11 +1480,11 @@ lbl_fn_804D201C_00000EC8:
     subic. r26, r26, 0x694c
     beq lbl_fn_804D201C_00000F0C
     mr r3, r26
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r26, 0x4
     beq lbl_fn_804D201C_00000F0C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_804D201C_00000F0C:
     addic. r3, r30, 0x2b80
     beq lbl_fn_804D201C_00000F38
@@ -1500,39 +1500,39 @@ lbl_fn_804D201C_00000F0C:
 lbl_fn_804D201C_00000F38:
     addi r3, r30, 0x2b78
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addi r3, r30, 0x2b74
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addi r3, r30, 0x2b70
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addic. r3, r30, 0x2b68
     beq lbl_fn_804D201C_00000F6C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_804D201C_00000F6C:
     addic. r3, r30, 0x2b60
     beq lbl_fn_804D201C_00000F7C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_804D201C_00000F7C:
     addic. r3, r30, 0x2b58
     beq lbl_fn_804D201C_00000F8C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_804D201C_00000F8C:
     addic. r3, r30, 0x2b50
     beq lbl_fn_804D201C_00000F9C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_804D201C_00000F9C:
     addic. r26, r30, 0x2a50
     beq lbl_fn_804D201C_00000FD4
     lwz r3, 0xfc(r26)
     cmpwi r3, 0x0
     beq lbl_fn_804D201C_00000FB4
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_804D201C_00000FB4:
     li r0, 0x0
     lis r4, fn_804D1414@ha
@@ -1549,7 +1549,7 @@ lbl_fn_804D201C_00000FD4:
     lwz r3, 0x4(r26)
     cmpwi r3, 0x0
     beq lbl_fn_804D201C_00000FF0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_804D201C_00000FF0:
     li r0, 0x0
     stw r0, 0x4(r26)
@@ -1591,7 +1591,7 @@ lbl_fn_804D201C_00001054:
 lbl_fn_804D201C_00001078:
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r31, 0x0
     ble lbl_fn_804D201C_00001094
     mr r3, r30
@@ -1659,7 +1659,7 @@ asm void fn_804D250C(void)
     bne lbl_fn_804D250C_000011B8
     addis r3, r30, 0x1
     subi r3, r3, 0x6698
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_804D250C_000011B8
     mr r3, r30
@@ -1668,10 +1668,10 @@ asm void fn_804D250C(void)
     beq lbl_fn_804D250C_000011B8
     mr r3, r30
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r3, lbl_8087F59C
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F59C
     li r0, 0x2
     li r31, 0x0
@@ -1681,7 +1681,7 @@ asm void fn_804D250C(void)
     stw r31, 0x29a0(r3)
     stw r31, 0x29a8(r3)
     lwz r3, lbl_8087F588
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r4, 0x2b7c(r30)
     li r3, 0x1
     stw r31, 0x58(r4)
@@ -1739,7 +1739,7 @@ lbl_fn_804D25D4_00001224:
     bne lbl_fn_804D25D4_00001270
     lwz r3, 0x0(r22)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
 lbl_fn_804D25D4_00001270:
     lwz r3, 0x0(r22)
     bl fn_803CFC58
@@ -1752,7 +1752,7 @@ lbl_fn_804D25D4_00001270:
     bl fn_804D5F5C
     lwz r3, 0x0(r22)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
 lbl_fn_804D25D4_000012A0:
     addi r21, r21, 0x1
 lbl_fn_804D25D4_000012A4:
@@ -2190,7 +2190,7 @@ lbl_fn_804D25D4_000018A0:
     bl fn_800C31F4
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r24
     li r4, 0x3
     bl fn_804D6030
@@ -2212,9 +2212,9 @@ lbl_fn_804D25D4_000018FC:
     bl fn_800C31F4
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r24
-    bl fn_800D2338
+    bl atn_Task_unlink
     b lbl_fn_804D25D4_00004898
 lbl_fn_804D25D4_00001934:
     bl fn_801156BC
@@ -2239,9 +2239,9 @@ lbl_fn_804D25D4_00001960:
     bl fn_800C31F4
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r24
-    bl fn_800D2338
+    bl atn_Task_unlink
     b lbl_fn_804D25D4_00004898
     mr r3, r24
     bl fn_80505DD4
@@ -2253,7 +2253,7 @@ lbl_fn_804D25D4_00001960:
     addis r5, r24, 0x1
     li r4, 0x1
     stw r3, -0x6890(r5)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r12, 0x2b58(r24)
     addi r3, r24, 0x2b58
     lwz r4, lbl_80887598
@@ -2375,19 +2375,19 @@ lbl_fn_804D25D4_00001A8C:
     b lbl_fn_804D25D4_00004898
     addi r3, r24, 0x2b58
     li r21, 0x1
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_00001BD4
     addi r3, r24, 0x2b60
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_00001BD4
     addi r3, r24, 0x2b68
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_00001BD4
     addi r3, r24, 0x2b50
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00001BD8
 lbl_fn_804D25D4_00001BD4:
@@ -2402,28 +2402,28 @@ lbl_fn_804D25D4_00001BEC:
     cmpwi r21, 0x0
     beq lbl_fn_804D25D4_00001DA0
     addi r3, r24, 0x2b60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r22, r3
     addi r3, r24, 0x2b60
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r5, r22
     addi r3, r24, 0x69c
     bl fn_805061CC
     addi r3, r24, 0x2b68
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r22, r3
     addi r3, r24, 0x2b68
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r5, r22
     addi r3, r24, 0x2a50
     bl fn_80506D98
     addi r3, r24, 0x2b50
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r22, r3
     addi r3, r24, 0x2b50
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r5, r22
     addi r3, r24, 0x610
@@ -2460,7 +2460,7 @@ lbl_fn_804D25D4_00001CC0:
     addis r3, r24, 0x1
     li r4, 0x0
     lwz r3, -0x6890(r3)
-    bl fn_800D246C
+    bl atn_Task_setActive
     bl fn_800F7FA0
     addis r4, r24, 0x1
     li r5, 0x0
@@ -2542,7 +2542,7 @@ lbl_fn_804D25D4_00001DD0:
     mr r4, r22
     bl fn_804D0304
     mr r3, r24
-    bl fn_800D2338
+    bl atn_Task_unlink
     b lbl_fn_804D25D4_00004898
     bl fn_804D1698
     bl fn_80509A9C
@@ -2558,11 +2558,11 @@ lbl_fn_804D25D4_00001DD0:
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00004898
     addi r3, r24, 0x2b58
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_00004898
     addi r3, r24, 0x2b60
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_00004898
     addi r3, r24, 0x4fc
@@ -2847,7 +2847,7 @@ lbl_fn_804D25D4_00002274:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r24
     li r4, 0x0
     bl fn_804DBD0C
@@ -3403,9 +3403,9 @@ lbl_fn_804D25D4_00002A5C:
     mr r4, r24
     li r5, 0x0
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     bl fn_800F7FA0
-    bl fn_800D2338
+    bl atn_Task_unlink
     b lbl_fn_804D25D4_00004898
 lbl_fn_804D25D4_00002AA8:
     mr r3, r24
@@ -3593,7 +3593,7 @@ lbl_fn_804D25D4_00002D44:
     lwz r3, 0x5e0(r24)
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00002D74
-    bl fn_80122550
+    bl magic_getOffset6C
     lfs f1, lbl_808875CC
     li r4, 0x1
     li r5, 0x1
@@ -3639,7 +3639,7 @@ lbl_fn_804D25D4_00002DF4:
     beq lbl_fn_804D25D4_00002E0C
     bl fn_804D640C
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
 lbl_fn_804D25D4_00002E0C:
     addi r3, r24, 0x4fc
     li r4, 0x1a
@@ -3809,7 +3809,7 @@ lbl_fn_804D25D4_00003054:
     bl fn_804AF520
     bl fn_804D16D8
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     bl fn_804D16D8
     li r4, 0x1
     bl fn_804B50C0
@@ -4374,7 +4374,7 @@ lbl_fn_804D25D4_000038A4:
     mulli r5, r3, 0x1e
     lwz r3, 0x5e0(r24)
     li r4, 0xff
-    bl fn_80370AE4
+    bl world_setLocalFlag
 lbl_fn_804D25D4_000038F0:
     mr r3, r24
     bl fn_804D63D4
@@ -4944,7 +4944,7 @@ lbl_fn_804D25D4_0000410C:
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_0000414C
     bl fn_804D5FD4
-    bl fn_800D2338
+    bl atn_Task_unlink
 lbl_fn_804D25D4_0000414C:
     mr r3, r24
     bl fn_804E5BC8
@@ -4961,13 +4961,13 @@ lbl_fn_804D25D4_0000414C:
     bl fn_804B691C
     bl fn_804D16D8
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     b lbl_fn_804D25D4_00004898
     addis r3, r24, 0x1
     lwz r3, -0x668c(r3)
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_000041B0
-    bl fn_800D2338
+    bl atn_Task_unlink
     addis r3, r24, 0x1
     li r0, 0x0
     stw r0, -0x668c(r3)
@@ -5013,7 +5013,7 @@ lbl_fn_804D25D4_00004220:
     bne lbl_fn_804D25D4_000046D8
     addis r3, r24, 0x1
     subi r3, r3, 0x6698
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_000046D8
     mr r3, r24
@@ -5461,7 +5461,7 @@ lbl_fn_804D25D4_000048D4:
     addi r3, r24, 0x2b70
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
 lbl_fn_804D25D4_000048F4:
     lis r3, 0x1b4f
     lwz r4, 0x5cc(r24)

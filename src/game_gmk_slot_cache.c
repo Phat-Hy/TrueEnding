@@ -26,19 +26,19 @@ extern void fn_802114D8(void);
 extern void fn_802114E0(void);
 extern void fn_8021150C(void);
 extern void fn_80213B78(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_8021E444(void);
 extern void fn_8021E5A4(void);
-extern void fn_80370174(void);
+extern void world_getGlobalFlag(void);
 extern void fn_80373148(void);
 extern void fn_803750E4(void);
 extern void fn_80445F44(void);
 extern void fn_804490E0(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_804A24C4(void);
 extern void fn_804A28F8(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -105,7 +105,7 @@ asm void fn_8044386C(void)
 lbl_fn_8044386C_0000002C:
     mr r3, r4
     subi r3, r3, 0x2500
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_8044386C_0000005C
     addis r3, r31, 0x1
@@ -296,7 +296,7 @@ lbl_fn_804439FC_000002C4:
     cmpwi r3, 0x0
     beq lbl_fn_804439FC_00000314
     li r4, 0x8a
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x1
     bne lbl_fn_804439FC_000002E8
     li r24, 0x0
@@ -304,7 +304,7 @@ lbl_fn_804439FC_000002C4:
 lbl_fn_804439FC_000002E8:
     lwz r3, lbl_8087F430
     li r4, 0x8a
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x2
     blt lbl_fn_804439FC_00000314
     li r24, 0x64
@@ -315,7 +315,7 @@ lbl_fn_804439FC_00000304:
     srawi r0, r0, 31
     andi. r24, r0, 0x64
 lbl_fn_804439FC_00000314:
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x51ec
     subi r0, r4, 0x7ae1
     mulhw r0, r0, r3
@@ -741,7 +741,7 @@ lbl_fn_80444020_000008F8:
     cmpwi r3, 0x0
     lwz r24, 0x48(r4)
     ble lbl_fn_80444020_00000918
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r23, r3
     b lbl_fn_80444020_0000091C
 lbl_fn_80444020_00000918:
@@ -1900,7 +1900,7 @@ lbl_fn_80444EFC_000017EC:
     lfsx f0, r3, r0
     fmuls f31, f31, f0
 lbl_fn_80444EFC_00001820:
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x4178
     lis r4, 0x4330
     addi r0, r5, 0x749f
@@ -2124,7 +2124,7 @@ lbl_fn_80445130_00001B38:
     lfs f0, lbl_80886AF8
     fmuls f31, f31, f0
 lbl_fn_80445130_00001B5C:
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lis r0, 0x4330
     addi r5, r4, 0x749f
@@ -2471,7 +2471,7 @@ lbl_fn_80445130_00002034:
     bne lbl_fn_80445130_00002054
     lfs f31, 0x130(r25)
 lbl_fn_80445130_00002054:
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lis r0, 0x4330
     addi r5, r4, 0x749f
@@ -2864,7 +2864,7 @@ lbl_fn_80445130_000025D8:
     beq lbl_fn_80445130_00002650
     cmpwi r26, 0x0
     ble lbl_fn_80445130_0000263C
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r26
     lwz r5, 0x58(r1)
     addi r4, r1, 0x5c
@@ -2902,7 +2902,7 @@ lbl_fn_80445130_00002650:
     cmpwi r3, 0x0
     beq lbl_fn_80445130_0000267C
     li r4, 0x11b
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     bgt lbl_fn_80445130_00002698
 lbl_fn_80445130_0000267C:

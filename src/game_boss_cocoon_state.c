@@ -7,14 +7,14 @@ extern void _restgpr_27(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80084320(void);
-extern void fn_800846FC(void);
-extern void fn_80084C24(void);
-extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
-extern void fn_800D246C(void);
+extern void mem_alloc(void);
+extern void mem_realloc(void);
+extern void mem_getAllocSize(void);
+extern void skin_applyWeights(void);
+extern void ref_releaseHandle(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
+extern void atn_Task_setActive(void);
 extern void fn_8010A828(void);
 extern void fn_801F64D0(void);
 extern void fn_801F6C2C(void);
@@ -29,8 +29,8 @@ extern void fn_804439FC(void);
 extern void fn_8044F434(void);
 extern void fn_8044F96C(void);
 extern void fn_80450590(void);
-extern void fn_80680CF8(void);
-extern void fn_80695720(void);
+extern void rand(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern void fn_80695A50(void);
@@ -81,7 +81,7 @@ void fn_8044D104(void);
 void fn_8044D184(void);
 void fn_8044D1A4(void);
 void fn_8044D208(void);
-void fn_8044D3A0(void);
+void weapon_getDamageParam(void);
 void fn_8044D404(void);
 void fn_8044D490(void);
 void fn_8044D4F0(void);
@@ -329,14 +329,14 @@ lbl_fn_8044D208_00000298:
     beq lbl_fn_8044D208_0000034C
     cmpwi r29, 0x2
     bne lbl_fn_8044D208_0000034C
-    bl fn_80680CF8
+    bl rand
     slwi r0, r3, 29
     srwi r3, r3, 31
     subf r0, r3, r0
     rotlwi r0, r0, 3
     add r0, r0, r3
     mulli r27, r0, 0x14
-    bl fn_80680CF8
+    bl rand
     lis r26, 0x6666
     addi r0, r26, 0x6667
     mulhw r0, r0, r3
@@ -346,14 +346,14 @@ lbl_fn_8044D208_00000298:
     mulli r0, r0, 0xa
     subf r0, r0, r3
     add r30, r0, r27
-    bl fn_80680CF8
+    bl rand
     slwi r0, r3, 29
     srwi r3, r3, 31
     subf r0, r3, r0
     rotlwi r0, r0, 3
     add r0, r0, r3
     mulli r27, r0, 0x14
-    bl fn_80680CF8
+    bl rand
     addi r0, r26, 0x6667
     slwi r4, r31, 6
     mulhw r5, r0, r3
@@ -384,7 +384,7 @@ lbl_fn_8044D208_00000364:
     blr
 }
 
-asm void fn_8044D3A0(void)
+asm void weapon_getDamageParam(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -397,17 +397,17 @@ asm void fn_8044D3A0(void)
     mr r3, r5
     bl fn_80219558
     cmplwi r3, 0x6
-    bgt lbl_fn_8044D3A0_000003C0
+    bgt lbl_weapon_getDamageParam_000003C0
     addis r4, r30, 0x1
     slwi r0, r3, 6
     add r3, r4, r0
     slwi r0, r31, 3
     add r3, r3, r0
     lwz r3, -0x7d50(r3)
-    b lbl_fn_8044D3A0_000003C4
-lbl_fn_8044D3A0_000003C0:
+    b lbl_weapon_getDamageParam_000003C4
+lbl_weapon_getDamageParam_000003C0:
     li r3, -0x1
-lbl_fn_8044D3A0_000003C4:
+lbl_weapon_getDamageParam_000003C4:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -897,12 +897,12 @@ asm void fn_8044D9BC(void)
     la r5, lbl_8087E024
     la r6, lbl_8087E020
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r20, r3
     beq lbl_fn_8044D9BC_00000A00
     mr r4, r19
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     li r0, 0x0
     stw r0, 0x48(r20)
     lis r3, lbl_8078F388@ha
@@ -922,7 +922,7 @@ lbl_fn_8044D9BC_00000A04:
     lwz r3, 0x4c(r20)
     cmpwi r3, 0x0
     beq lbl_fn_8044D9BC_00000A30
-    bl fn_80084C24
+    bl mem_getAllocSize
     stw r19, 0x4c(r20)
 lbl_fn_8044D9BC_00000A30:
     lwz r3, 0x50(r20)
@@ -946,7 +946,7 @@ lbl_fn_8044D9BC_00000A6C:
     la r5, lbl_8087E014
     la r6, lbl_8087E010
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x4c(r20)
     li r4, 0x0
     li r5, 0x1
@@ -964,14 +964,14 @@ lbl_fn_8044D9BC_00000AA0:
     mulli r3, r19, 0x84
     li r7, 0x0
     addi r3, r3, 0x10
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8044E198@ha
     lis r5, fn_8044E158@ha
     mr r7, r19
     li r6, 0x84
     addi r4, r4, fn_8044E198@l
     addi r5, r5, fn_8044E158@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x50(r20)
 lbl_fn_8044D9BC_00000AE4:
     lwz r23, lbl_8087F4F8
@@ -1234,7 +1234,7 @@ lbl_fn_8044D9BC_00000E60:
     cmpwi r3, 0x0
     beq lbl_fn_8044D9BC_00000E74
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
 lbl_fn_8044D9BC_00000E74:
     addi r22, r22, 0x4
 lbl_fn_8044D9BC_00000E78:
@@ -1262,12 +1262,12 @@ lbl_fn_8044D9BC_00000EA4:
     la r5, lbl_8087E01C
     la r6, lbl_8087E018
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r20, r3
     beq lbl_fn_8044D9BC_00001068
     mr r4, r19
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_8078F348@ha
     addis r6, r20, 0x1
     addi r3, r3, lbl_8078F348@l
@@ -1403,7 +1403,7 @@ asm void fn_8044E0A8(void)
     stw r31, 0x48(r3)
     beq lbl_fn_8044E0A8_000010D4
     mr r3, r0
-    bl fn_80084C24
+    bl mem_getAllocSize
     stw r31, 0x4c(r29)
 lbl_fn_8044E0A8_000010D4:
     lwz r3, 0x50(r29)
@@ -1417,7 +1417,7 @@ lbl_fn_8044E0A8_000010D4:
 lbl_fn_8044E0A8_000010F4:
     mr r3, r29
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r30, 0x0
     ble lbl_fn_8044E0A8_00001110
     mr r3, r29
@@ -1538,7 +1538,7 @@ lbl_fn_8044E1BC_00001264:
     cmpwi r3, 0x0
     beq lbl_fn_8044E1BC_00001278
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
 lbl_fn_8044E1BC_00001278:
     addi r24, r24, 0x4
 lbl_fn_8044E1BC_0000127C:
@@ -1945,10 +1945,10 @@ lbl_fn_8044E644_0000179C:
     addi r5, r31, 0x8
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087EFE8
     li r0, 0x0
     stw r0, 0x34d8(r3)

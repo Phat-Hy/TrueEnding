@@ -11,30 +11,30 @@ extern void _savegpr_17(void);
 extern void _savegpr_23(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8004ED34(void);
 extern void fn_80051A88(void);
 extern void fn_80051CD8(void);
 extern void fn_80060D58(void);
-extern void fn_800616C0(void);
-extern void fn_800844D8(void);
-extern void fn_80370174(void);
-extern void fn_80370320(void);
-extern void fn_80370A78(void);
-extern void fn_80370AE4(void);
+extern void skill_calculateDamage(void);
+extern void mem_free(void);
+extern void world_getGlobalFlag(void);
+extern void world_setGlobalFlag(void);
+extern void world_getLocalFlag(void);
+extern void world_setLocalFlag(void);
 extern void fn_803ACE18(void);
 extern void fn_803ACF88(void);
 extern void fn_803AD3D8(void);
 extern void fn_803E3C78(void);
-extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F90D0(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9940(void);
-extern void fn_805F9990(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
-extern void fn_80686EA4(void);
+extern void PSMTXConcat(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXTrans(void);
+extern void PSMTXMultVec(void);
+extern void PSVECMag(void);
+extern void PSVECDotProduct(void);
+extern void printf(void);
+extern void rand(void);
+extern void abort(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -257,25 +257,25 @@ lbl_fn_8039AB10_00000244:
     stfs f28, 0x4c(r1)
     lfs f0, 0x14(r5)
     fadds f1, f29, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x44
     addi r3, r1, 0x90
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     stfs f27, 0x38(r1)
     addi r3, r1, 0x60
     li r4, 0x79
     stfs f27, 0x3c(r1)
     stfs f28, 0x40(r1)
     lfs f1, 0x538(r29)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x38
     addi r3, r1, 0x60
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r3, r1, 0x44
     addi r4, r1, 0x38
-    bl fn_805F9990
+    bl PSVECDotProduct
     fcmpo cr0, f1, f30
     mfcr r0
     extrwi r23, r0, 1, 1
@@ -331,7 +331,7 @@ lbl_fn_8039AB10_0000036C:
     cmpwi r3, 0x0
     beq lbl_fn_8039AB10_000003A8
     li r4, 0xa1e
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     beq lbl_fn_8039AB10_000003A8
     li r23, 0x1
@@ -582,7 +582,7 @@ lbl_fn_8039AF50_000006F8:
     cmpwi r3, 0x0
     beq lbl_fn_8039AF50_00000734
     li r4, 0xa1e
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     beq lbl_fn_8039AF50_00000734
     li r23, 0x1
@@ -707,7 +707,7 @@ lbl_fn_8039B2BC_000008B0:
     lfs f1, 0x4(r21)
     lfs f2, 0x8(r21)
     lfs f3, 0xc(r21)
-    bl fn_805F90D0
+    bl PSMTXTrans
     psq_l f1, 0x0(r27), 0, 0
     addi r3, r1, 0xc0
     psq_l f2, 0x8(r27), 0, 0
@@ -723,11 +723,11 @@ lbl_fn_8039B2BC_000008B0:
     psq_st f5, 0x20(r28), 0, 0
     psq_st f6, 0x28(r28), 0, 0
     lfs f1, 0x14(r21)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r28
     addi r4, r1, 0xc0
     addi r5, r1, 0x90
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r26), 0, 0
     mulli r0, r18, 0x48
     psq_l f2, 0x8(r26), 0, 0
@@ -811,7 +811,7 @@ lbl_fn_8039B2BC_00000A30:
     cmpwi r3, 0x0
     beq lbl_fn_8039B2BC_00000A78
     li r4, 0xa1e
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     beq lbl_fn_8039B2BC_00000A78
     li r18, 0x1
@@ -918,7 +918,7 @@ lbl_fn_8039B2BC_00000B54:
     fsubs f0, f7, f0
     stfs f8, 0xc(r1)
     stfs f0, 0x8(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fsubs f0, f1, f30
     fdivs f0, f0, f27
     stfs f0, 0x8c(r1)
@@ -1121,7 +1121,7 @@ lbl_fn_8039B7B0_00000E8C:
     cmpwi r3, 0x0
     beq lbl_fn_8039B7B0_00000ED4
     li r4, 0xa1e
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     beq lbl_fn_8039B7B0_00000ED4
     li r17, 0x1
@@ -1228,7 +1228,7 @@ lbl_fn_8039B7B0_00000FB0:
     fsubs f0, f3, f0
     stfs f4, 0xc(r1)
     stfs f0, 0x8(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fsubs f0, f1, f31
     fdivs f0, f0, f28
     stfs f0, 0x9c(r1)
@@ -1363,7 +1363,7 @@ asm void fn_8039BC6C(void)
     li r6, 0x0
     li r7, 0x0
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r0, 0x94(r30)
     cmpwi r0, 0x0
     beq lbl_fn_8039BC6C_0000128C
@@ -1391,7 +1391,7 @@ asm void fn_8039BC6C(void)
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
 lbl_fn_8039BC6C_0000128C:
     lwz r0, 0x114(r1)
     lwz r31, 0x10c(r1)
@@ -1531,12 +1531,12 @@ lbl_fn_8039BF04_00001444:
     bne lbl_fn_8039BF04_0000145C
     mr r3, r0
     mr r4, r24
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_8039BF04_00001468
 lbl_fn_8039BF04_0000145C:
     mr r3, r0
     mr r4, r24
-    bl fn_80370A78
+    bl world_getLocalFlag
 lbl_fn_8039BF04_00001468:
     mr r29, r3
 lbl_fn_8039BF04_0000146C:
@@ -1562,18 +1562,18 @@ lbl_fn_8039BF04_000014B0:
     cmpwi r25, 0x2
     bne lbl_fn_8039BF04_000014C4
     mr r4, r26
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_8039BF04_000014FC
 lbl_fn_8039BF04_000014C4:
     cmpwi r25, 0x1
     bne lbl_fn_8039BF04_000014D8
     mr r4, r26
-    bl fn_80370A78
+    bl world_getLocalFlag
     b lbl_fn_8039BF04_000014FC
 lbl_fn_8039BF04_000014D8:
     cmpwi r25, 0x3
     bne lbl_fn_8039BF04_000014F8
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r26
     mullw r0, r0, r26
     subf r3, r0, r3
@@ -1594,11 +1594,11 @@ lbl_fn_8039BF04_00001518:
     cmpwi r23, 0x1
     bne lbl_fn_8039BF04_0000152C
     mr r4, r24
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_8039BF04_00001534
 lbl_fn_8039BF04_0000152C:
     mr r4, r24
-    bl fn_80370A78
+    bl world_getLocalFlag
 lbl_fn_8039BF04_00001534:
     mr r27, r3
 lbl_fn_8039BF04_00001538:
@@ -1611,18 +1611,18 @@ lbl_fn_8039BF04_0000154C:
     cmpwi r25, 0x2
     bne lbl_fn_8039BF04_00001560
     mr r4, r26
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_8039BF04_00001598
 lbl_fn_8039BF04_00001560:
     cmpwi r25, 0x1
     bne lbl_fn_8039BF04_00001574
     mr r4, r26
-    bl fn_80370A78
+    bl world_getLocalFlag
     b lbl_fn_8039BF04_00001598
 lbl_fn_8039BF04_00001574:
     cmpwi r25, 0x3
     bne lbl_fn_8039BF04_00001594
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r26
     mullw r0, r0, r26
     subf r3, r0, r3
@@ -1643,11 +1643,11 @@ lbl_fn_8039BF04_000015B4:
     cmpwi r23, 0x1
     bne lbl_fn_8039BF04_000015C8
     mr r4, r24
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_8039BF04_000015D0
 lbl_fn_8039BF04_000015C8:
     mr r4, r24
-    bl fn_80370A78
+    bl world_getLocalFlag
 lbl_fn_8039BF04_000015D0:
     mr r27, r3
 lbl_fn_8039BF04_000015D4:
@@ -1660,18 +1660,18 @@ lbl_fn_8039BF04_000015E8:
     cmpwi r25, 0x2
     bne lbl_fn_8039BF04_000015FC
     mr r4, r26
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_8039BF04_00001634
 lbl_fn_8039BF04_000015FC:
     cmpwi r25, 0x1
     bne lbl_fn_8039BF04_00001610
     mr r4, r26
-    bl fn_80370A78
+    bl world_getLocalFlag
     b lbl_fn_8039BF04_00001634
 lbl_fn_8039BF04_00001610:
     cmpwi r25, 0x3
     bne lbl_fn_8039BF04_00001630
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r26
     mullw r0, r0, r26
     subf r3, r0, r3
@@ -1692,11 +1692,11 @@ lbl_fn_8039BF04_00001650:
     cmpwi r23, 0x1
     bne lbl_fn_8039BF04_00001664
     mr r4, r24
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_8039BF04_0000166C
 lbl_fn_8039BF04_00001664:
     mr r4, r24
-    bl fn_80370A78
+    bl world_getLocalFlag
 lbl_fn_8039BF04_0000166C:
     mr r27, r3
 lbl_fn_8039BF04_00001670:
@@ -1709,18 +1709,18 @@ lbl_fn_8039BF04_00001684:
     cmpwi r25, 0x2
     bne lbl_fn_8039BF04_00001698
     mr r4, r26
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_8039BF04_000016D0
 lbl_fn_8039BF04_00001698:
     cmpwi r25, 0x1
     bne lbl_fn_8039BF04_000016AC
     mr r4, r26
-    bl fn_80370A78
+    bl world_getLocalFlag
     b lbl_fn_8039BF04_000016D0
 lbl_fn_8039BF04_000016AC:
     cmpwi r25, 0x3
     bne lbl_fn_8039BF04_000016CC
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r26
     mullw r0, r0, r26
     subf r3, r0, r3
@@ -1741,11 +1741,11 @@ lbl_fn_8039BF04_000016EC:
     cmpwi r23, 0x1
     bne lbl_fn_8039BF04_00001700
     mr r4, r24
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_8039BF04_00001708
 lbl_fn_8039BF04_00001700:
     mr r4, r24
-    bl fn_80370A78
+    bl world_getLocalFlag
 lbl_fn_8039BF04_00001708:
     mr r27, r3
 lbl_fn_8039BF04_0000170C:
@@ -1758,18 +1758,18 @@ lbl_fn_8039BF04_00001720:
     cmpwi r25, 0x2
     bne lbl_fn_8039BF04_00001734
     mr r4, r26
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_8039BF04_0000176C
 lbl_fn_8039BF04_00001734:
     cmpwi r25, 0x1
     bne lbl_fn_8039BF04_00001748
     mr r4, r26
-    bl fn_80370A78
+    bl world_getLocalFlag
     b lbl_fn_8039BF04_0000176C
 lbl_fn_8039BF04_00001748:
     cmpwi r25, 0x3
     bne lbl_fn_8039BF04_00001768
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r26
     mullw r0, r0, r26
     subf r3, r0, r3
@@ -1794,12 +1794,12 @@ lbl_fn_8039BF04_00001784:
     mr r4, r24
     mr r5, r27
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     b lbl_fn_8039BF04_000017B8
 lbl_fn_8039BF04_000017AC:
     mr r4, r24
     mr r5, r27
-    bl fn_80370AE4
+    bl world_setLocalFlag
 lbl_fn_8039BF04_000017B8:
     li r0, 0x1
     stw r0, 0xf0(r22)
@@ -1865,7 +1865,7 @@ lbl_fn_8039BF04_000017C8:
     add r7, r7, r24
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x388(r22)
     lwz r4, 0x38c(r22)
     cmplw r0, r4
@@ -1899,7 +1899,7 @@ lbl_fn_8039BF04_000018FC:
     lwz r0, 0x50(r1)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8039BF04_0000193C:
     lwz r3, 0x388(r22)
     addi r0, r3, 0x1
@@ -1916,8 +1916,8 @@ lbl_fn_8039BF04_0000194C:
     addi r3, r3, __files@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8039BF04_0000197C:
     lwz r4, 0x388(r22)
     li r6, 0x0
@@ -1943,8 +1943,8 @@ lbl_fn_8039BF04_0000197C:
     addi r4, r4, 0xce
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8039BF04_000019E4:
     lis r3, 0x71c
     addi r0, r3, 0x71c7
@@ -1999,11 +1999,11 @@ lbl_fn_8039BF04_00001A78:
     addi r4, r4, 0xce
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8039BF04_00001AAC:
     mulli r3, r21, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r23, r3
     bne lbl_fn_8039BF04_00001AE0
@@ -2013,8 +2013,8 @@ lbl_fn_8039BF04_00001AAC:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80778910@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8039BF04_00001AE0:
     lwz r6, 0x388(r22)
     li r0, 0x0
@@ -2052,7 +2052,7 @@ lbl_fn_8039BF04_00001B30:
     lwz r0, 0x50(r1)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8039BF04_00001B70:
     lwz r0, 0x388(r22)
     lis r3, 0x2aab

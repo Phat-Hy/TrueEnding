@@ -15,22 +15,22 @@ extern void fn_8004B338(void);
 extern void fn_800697D8(void);
 extern void fn_8006A250(void);
 extern void fn_8006A5A8(void);
-extern void fn_80084320(void);
-extern void fn_80084C24(void);
+extern void mem_alloc(void);
+extern void mem_getAllocSize(void);
 extern void fn_800897D8(void);
 extern void fn_800A5B30(void);
 extern void fn_800AFEBC(void);
 extern void fn_800C16B4(void);
 extern void fn_800C289C(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CDF84(void);
 extern void fn_800CE368(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
-extern void fn_800D2338(void);
-extern void fn_800D246C(void);
-extern void fn_800EF588(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
+extern void atn_Task_unlink(void);
+extern void atn_Task_setActive(void);
+extern void camera_setMode(void);
 extern void fn_800EF8DC(void);
 extern void fn_800EFF68(void);
 extern void fn_800F13BC(void);
@@ -70,10 +70,10 @@ extern void fn_80442F68(void);
 extern void fn_8046F96C(void);
 extern void fn_8047043C(void);
 extern void fn_80470528(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_80473F88(void);
 extern void fn_8047E4BC(void);
 extern void fn_80490EB8(void);
@@ -90,7 +90,7 @@ extern void fn_8056B398(void);
 extern void fn_8056C39C(void);
 extern void fn_8057EF44(void);
 extern void fn_805A70F4(void);
-extern void fn_805F98D0(void);
+extern void PSVECNormalize(void);
 extern void fn_80605540(void);
 extern void fn_806055A0(void);
 extern void fn_806959D8(void);
@@ -173,11 +173,11 @@ void fn_8036554C(void);
 void fn_8036555C(void);
 void fn_8036562C(void);
 void fn_80365708(void);
-void fn_803658B8(void);
+void world_Manager_constructor(void);
 void fn_8036635C(void);
 void fn_80366364(void);
 void fn_803663A4(void);
-void fn_80366454(void);
+void world_Manager_destructor(void);
 
 asm void fn_80365320(void)
 {
@@ -309,12 +309,12 @@ asm void fn_80365464(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_80365464_000001AC
     mr r4, r30
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_8078A038@ha
     addi r3, r3, lbl_8078A038@l
     stw r3, 0x0(r31)
@@ -345,7 +345,7 @@ asm void fn_803654EC(void)
     li r0, 0x0
     stw r0, lbl_8087F428
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r31, 0x0
     ble lbl_fn_803654EC_00000210
     mr r3, r30
@@ -519,13 +519,13 @@ asm void fn_80365708(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80365708_00000460
     addi r5, r31, lbl_807C8458@l
     mr r4, r29
     addi r5, r5, 0x4
-    bl fn_803658B8
+    bl world_Manager_constructor
 lbl_fn_80365708_00000460:
     stw r3, lbl_8087F430
     b lbl_fn_80365708_00000578
@@ -553,12 +553,12 @@ lbl_fn_80365708_00000468:
     stw r8, 0x20(r1)
     stw r8, 0x28(r1)
     stw r10, 0x24(r1)
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80365708_000004DC
     mr r4, r29
     addi r5, r1, 0x8
-    bl fn_803658B8
+    bl world_Manager_constructor
 lbl_fn_80365708_000004DC:
     lwz r31, lbl_8087F460
     stw r3, lbl_8087F430
@@ -596,12 +596,12 @@ lbl_fn_80365708_00000544:
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80365708_00000574
     mr r4, r29
     mr r5, r30
-    bl fn_803658B8
+    bl world_Manager_constructor
 lbl_fn_80365708_00000574:
     stw r3, lbl_8087F430
 lbl_fn_80365708_00000578:
@@ -615,7 +615,7 @@ lbl_fn_80365708_00000578:
     blr
 }
 
-asm void fn_803658B8(void)
+asm void world_Manager_constructor(void)
 {
     nofralloc
     stwu r1, -0x170(r1)
@@ -626,7 +626,7 @@ asm void fn_803658B8(void)
     mr r29, r3
     mr r30, r4
     mr r31, r5
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lwz r11, 0x0(r31)
     lis r12, lbl_8078A3D0@ha
     lwz r10, 0x4(r31)
@@ -669,13 +669,13 @@ asm void fn_803658B8(void)
     stw r27, 0x54f8(r29)
     stw r27, 0x54fc(r29)
     stw r27, 0x5500(r29)
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r26, lbl_8078FBB0@ha
     addi r25, r29, 0x550c
     addi r26, r26, lbl_8078FBB0@l
     stw r26, 0x0(r28)
     mr r3, r25
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r5, lbl_8074DC1C@ha
     stw r26, 0x0(r25)
     addi r5, r5, lbl_8074DC1C@l
@@ -699,11 +699,11 @@ asm void fn_803658B8(void)
     stw r27, 0x5564(r29)
     stw r27, 0x5568(r29)
     stb r27, 0x556c(r29)
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
-    beq lbl_fn_803658B8_000006EC
+    beq lbl_world_Manager_constructor_000006EC
     bl fn_8056B38C
-lbl_fn_803658B8_000006EC:
+lbl_world_Manager_constructor_000006EC:
     li r26, 0x0
     stw r3, 0x558c(r29)
     addi r3, r29, 0x55a8
@@ -772,13 +772,13 @@ lbl_fn_803658B8_000006EC:
     stw r0, 0x561c(r29)
     stw r26, 0x5620(r29)
     stw r26, 0x5624(r29)
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r0, r3
-    beq lbl_fn_803658B8_00000814
+    beq lbl_world_Manager_constructor_00000814
     bl fn_803BAA90
     mr r0, r3
-lbl_fn_803658B8_00000814:
+lbl_world_Manager_constructor_00000814:
     lfs f4, lbl_8088570C
     li r26, 0x0
     li r27, 0x1
@@ -828,7 +828,7 @@ lbl_fn_803658B8_00000814:
     stw r26, 0x56d0(r29)
     stw r26, 0x56d4(r29)
     stw r26, 0x56d8(r29)
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r3, lbl_80790000@ha
     stw r26, 0x56e4(r29)
     addi r3, r3, lbl_80790000@l
@@ -851,10 +851,10 @@ lbl_fn_803658B8_00000814:
     stw r26, 0x5764(r29)
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
-    beq lbl_fn_803658B8_00000940
+    beq lbl_world_Manager_constructor_00000940
     stw r27, 0x18(r3)
     stw r27, 0x1c(r3)
-lbl_fn_803658B8_00000940:
+lbl_world_Manager_constructor_00000940:
     lis r4, lbl_8074DC1C@ha
     addi r3, r29, 0x5690
     addi r4, r4, lbl_8074DC1C@l
@@ -864,20 +864,20 @@ lbl_fn_803658B8_00000940:
     bl fn_8047043C
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
-    beq lbl_fn_803658B8_00000974
+    beq lbl_world_Manager_constructor_00000974
     li r0, 0x0
     stw r0, 0x18(r3)
     stw r0, 0x1c(r3)
-lbl_fn_803658B8_00000974:
+lbl_world_Manager_constructor_00000974:
     lwz r3, lbl_8087EE98
     cmpwi r3, 0x0
-    beq lbl_fn_803658B8_00000994
+    beq lbl_world_Manager_constructor_00000994
     lwz r0, lbl_8087F610
     addis r3, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
     stw r0, -0x6fcc(r3)
-lbl_fn_803658B8_00000994:
+lbl_world_Manager_constructor_00000994:
     lis r5, lbl_8074DC1C@ha
     lis r28, 0x1
     addi r5, r5, lbl_8074DC1C@l
@@ -885,20 +885,20 @@ lbl_fn_803658B8_00000994:
     mr r6, r5
     addi r3, r28, 0x3560
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r25, r3
-    beq lbl_fn_803658B8_000009CC
+    beq lbl_world_Manager_constructor_000009CC
     addi r5, r28, 0x3560
     li r4, 0x0
     bl memset
-lbl_fn_803658B8_000009CC:
+lbl_world_Manager_constructor_000009CC:
     lwz r3, 0x562c(r29)
     stw r25, 0x562c(r29)
     bl dtor_80084684
     lwz r4, 0x64(r29)
     cmpwi r4, 0x0
-    beq lbl_fn_803658B8_00000A40
+    beq lbl_world_Manager_constructor_00000A40
     lwz r3, 0x562c(r29)
     lis r5, 0x1
     addi r5, r5, 0x34a8
@@ -921,38 +921,38 @@ lbl_fn_803658B8_000009CC:
     stw r4, 0x5c(r29)
     stw r3, 0x5630(r29)
     stw r0, 0x5748(r29)
-    b lbl_fn_803658B8_00000A48
-lbl_fn_803658B8_00000A40:
+    b lbl_world_Manager_constructor_00000A48
+lbl_world_Manager_constructor_00000A40:
     li r0, 0x1
     stw r0, 0x5630(r29)
-lbl_fn_803658B8_00000A48:
+lbl_world_Manager_constructor_00000A48:
     mr r3, r29
     bl fn_803B8C6C
     stw r3, 0x5634(r29)
     lwz r0, lbl_8087F610
     cmpwi r0, 0x0
-    bne lbl_fn_803658B8_00000A94
+    bne lbl_world_Manager_constructor_00000A94
     lwz r3, 0x48(r29)
     cmpwi r3, 0x2
-    bne lbl_fn_803658B8_00000A88
+    bne lbl_world_Manager_constructor_00000A88
     lwz r4, 0x4c(r29)
     cmpwi r4, 0x9
-    bne lbl_fn_803658B8_00000A88
+    bne lbl_world_Manager_constructor_00000A88
     lwz r5, 0x50(r29)
     bl fn_80208634
     stw r3, 0x10d4(r29)
-    b lbl_fn_803658B8_00000A94
-lbl_fn_803658B8_00000A88:
+    b lbl_world_Manager_constructor_00000A94
+lbl_world_Manager_constructor_00000A88:
     lwz r4, 0x4c(r29)
     bl fn_802085E0
     stw r3, 0x10d4(r29)
-lbl_fn_803658B8_00000A94:
+lbl_world_Manager_constructor_00000A94:
     lwz r0, lbl_8087F610
     cmpwi r0, 0x0
-    bne lbl_fn_803658B8_00000AA8
+    bne lbl_world_Manager_constructor_00000AA8
     lwz r3, lbl_8087F9C0
     bl fn_8057EF44
-lbl_fn_803658B8_00000AA8:
+lbl_world_Manager_constructor_00000AA8:
     bl fn_80212790
     mr r3, r30
     li r4, 0x240
@@ -964,32 +964,32 @@ lbl_fn_803658B8_00000AA8:
     li r4, 0x120
     lwz r3, lbl_8087F3C0
     cmpwi r0, 0x1
-    bne lbl_fn_803658B8_00000ADC
+    bne lbl_world_Manager_constructor_00000ADC
     li r4, 0x80
-lbl_fn_803658B8_00000ADC:
+lbl_world_Manager_constructor_00000ADC:
     bl fn_8023A678
     lwz r4, 0x0(r31)
     li r0, 0x1
     lwz r3, lbl_8087F3C0
     cmpwi r4, 0x3
     stw r0, 0xf0(r3)
-    beq lbl_fn_803658B8_00000B70
+    beq lbl_world_Manager_constructor_00000B70
     cmpwi r4, 0x4
-    beq lbl_fn_803658B8_00000B70
+    beq lbl_world_Manager_constructor_00000B70
     cmpwi r30, 0x0
     addi r26, r29, 0x6c
-    beq lbl_fn_803658B8_00000B68
+    beq lbl_world_Manager_constructor_00000B68
     li r3, 0x78
     li r4, 0x1
     la r5, lbl_8087DCDC
     la r6, lbl_8087DCD8
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r25, r3
-    beq lbl_fn_803658B8_00000B6C
+    beq lbl_world_Manager_constructor_00000B6C
     mr r4, r30
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_8078A394@ha
     li r0, 0x0
     addi r3, r3, lbl_8078A394@l
@@ -1001,12 +1001,12 @@ lbl_fn_803658B8_00000ADC:
     stw r0, 0x58(r25)
     stw r0, 0x5c(r25)
     stw r0, 0x70(r25)
-    b lbl_fn_803658B8_00000B6C
-lbl_fn_803658B8_00000B68:
+    b lbl_world_Manager_constructor_00000B6C
+lbl_world_Manager_constructor_00000B68:
     li r25, 0x0
-lbl_fn_803658B8_00000B6C:
+lbl_world_Manager_constructor_00000B6C:
     stw r25, 0x10e0(r29)
-lbl_fn_803658B8_00000B70:
+lbl_world_Manager_constructor_00000B70:
     mr r3, r29
     bl fn_80490EB8
     mr r3, r29
@@ -1074,80 +1074,80 @@ lbl_fn_803658B8_00000B70:
     bl fn_804A29C4
     lwz r0, lbl_8087F610
     cmpwi r0, 0x0
-    bne lbl_fn_803658B8_00000C8C
+    bne lbl_world_Manager_constructor_00000C8C
     mr r3, r29
     bl fn_8052A88C
     stw r3, 0x567c(r29)
-lbl_fn_803658B8_00000C8C:
+lbl_world_Manager_constructor_00000C8C:
     lwz r0, lbl_8087EE90
     cmpwi r0, 0x0
-    beq lbl_fn_803658B8_00000CDC
+    beq lbl_world_Manager_constructor_00000CDC
     lwz r3, 0x0(r31)
     lwz r4, 0x4(r31)
     lwz r5, 0x8(r31)
     bl fn_803CE160
     cmpwi r3, 0x0
-    beq lbl_fn_803658B8_00000CC8
+    beq lbl_world_Manager_constructor_00000CC8
     lwz r25, lbl_8087EE90
     bl fn_803CE154
     mr r4, r3
     mr r3, r25
     bl fn_80047B54
-    b lbl_fn_803658B8_00000CDC
-lbl_fn_803658B8_00000CC8:
+    b lbl_world_Manager_constructor_00000CDC
+lbl_world_Manager_constructor_00000CC8:
     lwz r25, lbl_8087EE90
     bl fn_803CE148
     mr r4, r3
     mr r3, r25
     bl fn_80047B54
-lbl_fn_803658B8_00000CDC:
+lbl_world_Manager_constructor_00000CDC:
     lwz r3, 0x0(r31)
     lwz r4, 0x4(r31)
     lwz r5, 0x8(r31)
     bl fn_8036555C
     cmpwi r3, 0x0
-    bne lbl_fn_803658B8_00000D04
+    bne lbl_world_Manager_constructor_00000D04
     lwz r3, lbl_8087F048
     bl fn_800F2C9C
     lwz r3, lbl_8087F8A8
     bl fn_8054A9AC
-lbl_fn_803658B8_00000D04:
+lbl_world_Manager_constructor_00000D04:
     lwz r0, 0x0(r31)
     lwz r4, 0x8(r31)
     cmpwi r0, 0x1
     lwz r3, 0x4(r31)
-    bne lbl_fn_803658B8_00000D20
+    bne lbl_world_Manager_constructor_00000D20
     li r0, 0x1
-    b lbl_fn_803658B8_00000D44
-lbl_fn_803658B8_00000D20:
+    b lbl_world_Manager_constructor_00000D44
+lbl_world_Manager_constructor_00000D20:
     cmpwi r0, 0x2
-    bne lbl_fn_803658B8_00000D40
+    bne lbl_world_Manager_constructor_00000D40
     cmpwi r3, 0x44
-    bne lbl_fn_803658B8_00000D40
+    bne lbl_world_Manager_constructor_00000D40
     subi r0, r4, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
-    b lbl_fn_803658B8_00000D44
-lbl_fn_803658B8_00000D40:
+    b lbl_world_Manager_constructor_00000D44
+lbl_world_Manager_constructor_00000D40:
     li r0, 0x0
-lbl_fn_803658B8_00000D44:
+lbl_world_Manager_constructor_00000D44:
     lwz r3, lbl_8087EF8C
     cmpwi r0, 0x0
     li r4, 0x2
     addi r3, r3, 0x118
-    beq lbl_fn_803658B8_00000D5C
+    beq lbl_world_Manager_constructor_00000D5C
     li r4, 0x4
-lbl_fn_803658B8_00000D5C:
+lbl_world_Manager_constructor_00000D5C:
     bl fn_800AFEBC
     lwz r3, 0x0(r31)
     lwz r4, 0x4(r31)
-    bl fn_800EF588
+    bl camera_setMode
     lwz r3, lbl_8087EE90
     cmpwi r3, 0x0
-    beq lbl_fn_803658B8_00000DA4
+    beq lbl_world_Manager_constructor_00000DA4
     lwz r0, lbl_8087F610
     cmpwi r0, 0x0
-    bne lbl_fn_803658B8_00000DA4
+    bne lbl_world_Manager_constructor_00000DA4
     lis r7, lbl_8074DBE0@ha
     lwzu r6, lbl_8074DBE0@l(r7)
     stw r6, 0x8(r1)
@@ -1156,7 +1156,7 @@ lbl_fn_803658B8_00000D5C:
     li r5, 0x2
     stw r0, 0xc(r1)
     bl fn_8004829C
-lbl_fn_803658B8_00000DA4:
+lbl_world_Manager_constructor_00000DA4:
     lwz r3, lbl_8087F490
     bl fn_803D022C
     lwz r3, 0x0(r31)
@@ -1164,10 +1164,10 @@ lbl_fn_803658B8_00000DA4:
     lwz r5, 0x8(r31)
     bl fn_8036555C
     cmpwi r3, 0x0
-    bne lbl_fn_803658B8_00000DCC
+    bne lbl_world_Manager_constructor_00000DCC
     lwz r3, lbl_8087F490
     bl fn_803D0B20
-lbl_fn_803658B8_00000DCC:
+lbl_world_Manager_constructor_00000DCC:
     mr r3, r29
     li r4, 0xa
     lis r5, 0xff00
@@ -1208,10 +1208,10 @@ lbl_fn_803658B8_00000DCC:
     lwz r0, lbl_8087EEB8
     lwz r25, 0x54(r29)
     cmpwi r0, 0x0
-    beq lbl_fn_803658B8_00000F0C
+    beq lbl_world_Manager_constructor_00000F0C
     lwz r0, 0x10d0(r29)
     cmpw r0, r25
-    ble lbl_fn_803658B8_00000EB8
+    ble lbl_world_Manager_constructor_00000EB8
     addi r3, r1, 0x50
     li r4, 0x0
     li r5, 0x100
@@ -1227,15 +1227,15 @@ lbl_fn_803658B8_00000DCC:
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x50
     bl fn_800697D8
-lbl_fn_803658B8_00000EB8:
+lbl_world_Manager_constructor_00000EB8:
     lwz r4, 0x10d0(r29)
     cmpwi r4, 0x0
-    blt lbl_fn_803658B8_00000ED4
+    blt lbl_world_Manager_constructor_00000ED4
     lis r3, 0xf
     addi r0, r3, 0x423f
     cmpw r4, r0
-    ble lbl_fn_803658B8_00000F0C
-lbl_fn_803658B8_00000ED4:
+    ble lbl_world_Manager_constructor_00000F0C
+lbl_world_Manager_constructor_00000ED4:
     addi r3, r1, 0x50
     li r4, 0x0
     li r5, 0x100
@@ -1250,7 +1250,7 @@ lbl_fn_803658B8_00000ED4:
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x50
     bl fn_800697D8
-lbl_fn_803658B8_00000F0C:
+lbl_world_Manager_constructor_00000F0C:
     li r4, 0x1
     stw r25, 0x10d0(r29)
     stw r4, 0x10e4(r29)
@@ -1262,42 +1262,42 @@ lbl_fn_803658B8_00000F0C:
     lwz r3, lbl_8087F0A8
     lwz r0, 0x194(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_803658B8_00000F40
+    beq lbl_world_Manager_constructor_00000F40
     stw r4, 0x156c(r29)
-lbl_fn_803658B8_00000F40:
+lbl_world_Manager_constructor_00000F40:
     lwz r12, 0x68(r29)
     li r0, 0x1
     stw r0, 0x115c(r29)
     cmpwi r12, 0x0
-    beq lbl_fn_803658B8_00000F60
+    beq lbl_world_Manager_constructor_00000F60
     mr r3, r29
     mtctr r12
     bctrl
-lbl_fn_803658B8_00000F60:
+lbl_world_Manager_constructor_00000F60:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F408
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F890
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F428
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F580
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x567c(r29)
     cmpwi r3, 0x0
-    beq lbl_fn_803658B8_00000FB0
+    beq lbl_world_Manager_constructor_00000FB0
     li r4, 0x1
-    bl fn_800D246C
-lbl_fn_803658B8_00000FB0:
+    bl atn_Task_setActive
+lbl_world_Manager_constructor_00000FB0:
     lwz r3, lbl_8087F120
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r12, 0x56dc(r29)
     lis r4, lbl_8074DC1C@ha
     addi r4, r4, lbl_8074DC1C@l
@@ -1311,15 +1311,15 @@ lbl_fn_803658B8_00000FB0:
     stw r0, 0x88(r3)
     lwz r0, lbl_8087F610
     cmpwi r0, 0x0
-    bne lbl_fn_803658B8_00001010
+    bne lbl_world_Manager_constructor_00001010
     lwz r3, lbl_8087F420
     li r0, 0x1
     stw r0, 0xc(r3)
     lwz r3, lbl_8087F018
     cmpwi r3, 0x0
-    beq lbl_fn_803658B8_00001010
+    beq lbl_world_Manager_constructor_00001010
     stw r0, 0x40e0(r3)
-lbl_fn_803658B8_00001010:
+lbl_world_Manager_constructor_00001010:
     li r0, 0x0
     stw r0, 0x5768(r29)
     addi r11, r1, 0x170
@@ -1377,7 +1377,7 @@ asm void fn_803663A4(void)
     addic. r3, r3, 0x10
     beq lbl_fn_803663A4_000010B8
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_803663A4_000010B8:
     addic. r0, r30, 0x8
     beq lbl_fn_803663A4_000010E4
@@ -1397,7 +1397,7 @@ lbl_fn_803663A4_000010E4:
     lwz r3, 0x4(r30)
     cmpwi r3, 0x0
     beq lbl_fn_803663A4_000010FC
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803663A4_000010FC:
     li r0, 0x0
     stw r0, 0x4(r30)
@@ -1417,7 +1417,7 @@ lbl_fn_803663A4_00001118:
     blr
 }
 
-asm void fn_80366454(void)
+asm void world_Manager_destructor(void)
 {
     nofralloc
     stwu r1, -0x270(r1)
@@ -1428,7 +1428,7 @@ asm void fn_80366454(void)
     cmpwi r3, 0x0
     mr r28, r3
     mr r29, r4
-    beq lbl_fn_80366454_00001A04
+    beq lbl_world_Manager_destructor_00001A04
     lis r4, lbl_8078A3D0@ha
     li r0, 0x0
     addi r4, r4, lbl_8078A3D0@l
@@ -1436,34 +1436,34 @@ asm void fn_80366454(void)
     stw r0, lbl_8087F430
     lwz r3, 0x10e0(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_0000117C
-    bl fn_800D2338
-lbl_fn_80366454_0000117C:
+    beq lbl_world_Manager_destructor_0000117C
+    bl atn_Task_unlink
+lbl_world_Manager_destructor_0000117C:
     lwz r3, lbl_8087F3C0
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_00001198
+    beq lbl_world_Manager_destructor_00001198
     li r0, 0x0
     stw r0, 0xf0(r3)
     lwz r3, lbl_8087F3C0
     stw r0, 0xcc(r3)
-lbl_fn_80366454_00001198:
+lbl_world_Manager_destructor_00001198:
     lwz r3, lbl_8087EE98
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_000011B0
+    beq lbl_world_Manager_destructor_000011B0
     addis r3, r3, 0x1
     li r0, 0x1
     stw r0, -0x6fcc(r3)
-lbl_fn_80366454_000011B0:
+lbl_world_Manager_destructor_000011B0:
     lwz r3, 0x5590(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_000011C4
+    beq lbl_world_Manager_destructor_000011C4
     li r4, 0x1
     bl fn_8056C39C
-lbl_fn_80366454_000011C4:
+lbl_world_Manager_destructor_000011C4:
     lwz r25, 0x5628(r28)
     cmpwi r25, 0x0
-    beq lbl_fn_80366454_000011F4
-    beq lbl_fn_80366454_000011F4
+    beq lbl_world_Manager_destructor_000011F4
+    beq lbl_world_Manager_destructor_000011F4
     lis r4, fn_8012AFE8@ha
     mr r3, r25
     addi r4, r4, fn_8012AFE8@l
@@ -1472,38 +1472,38 @@ lbl_fn_80366454_000011C4:
     bl fn_806959D8
     mr r3, r25
     bl dtor_80084684
-lbl_fn_80366454_000011F4:
+lbl_world_Manager_destructor_000011F4:
     addi r3, r28, 0x550c
-    bl fn_80470580
+    bl boss_getOffset54
     mr r25, r3
     addi r3, r28, 0x550c
-    bl fn_8047059C
+    bl boss_getOffset50
     cmpwi r25, 0x0
     srwi r5, r3, 2
-    beq lbl_fn_80366454_00001228
+    beq lbl_world_Manager_destructor_00001228
     lwz r3, lbl_8087F518
     mr r4, r25
     bl fn_8046F96C
     addi r3, r28, 0x550c
     bl fn_80473F88
-lbl_fn_80366454_00001228:
+lbl_world_Manager_destructor_00001228:
     bl fn_800EF8DC
     bl fn_80442F68
     lwz r3, lbl_8087EE90
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_0000124C
+    beq lbl_world_Manager_destructor_0000124C
     lwz r0, lbl_8087F610
     cmpwi r0, 0x0
-    bne lbl_fn_80366454_0000124C
+    bne lbl_world_Manager_destructor_0000124C
     bl fn_8004895C
-lbl_fn_80366454_0000124C:
+lbl_world_Manager_destructor_0000124C:
     lwz r3, lbl_8087EE90
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_00001264
+    beq lbl_world_Manager_destructor_00001264
     bl fn_80049654
     lwz r3, lbl_8087EE90
     bl fn_800498D4
-lbl_fn_80366454_00001264:
+lbl_world_Manager_destructor_00001264:
     lwz r3, lbl_8087EFE8
     bl fn_800CE368
     lwz r3, lbl_8087EFE8
@@ -1513,29 +1513,29 @@ lbl_fn_80366454_00001264:
     stw r0, 0x2a10(r3)
     lwz r3, lbl_8087F3C0
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_00001290
-    bl fn_800D2338
-lbl_fn_80366454_00001290:
+    beq lbl_world_Manager_destructor_00001290
+    bl atn_Task_unlink
+lbl_world_Manager_destructor_00001290:
     lis r3, lbl_807C8458@ha
     lwz r0, lbl_807C8458@l(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80366454_000012A8
+    beq lbl_world_Manager_destructor_000012A8
     li r0, 0x0
     stw r0, lbl_807C8458@l(r3)
-lbl_fn_80366454_000012A8:
+lbl_world_Manager_destructor_000012A8:
     li r30, 0x0
     stw r30, lbl_8087F460
     lwz r3, lbl_8087EFB4
     bl fn_800C16B4
     cmpwi r30, 0x0
     stw r30, 0x74(r3)
-    bne lbl_fn_80366454_000012D0
+    bne lbl_world_Manager_destructor_000012D0
     lwz r0, 0x70(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80366454_000012D4
-lbl_fn_80366454_000012D0:
+    beq lbl_world_Manager_destructor_000012D4
+lbl_world_Manager_destructor_000012D0:
     li r30, 0x1
-lbl_fn_80366454_000012D4:
+lbl_world_Manager_destructor_000012D4:
     stw r30, 0x70(r3)
     lwz r3, lbl_8087EFB4
     bl fn_800C16B4
@@ -1809,7 +1809,7 @@ lbl_fn_80366454_000012D4:
     stfs f10, 0x10(r1)
     psq_st f1, 0x0(r26), 0, 0
     stfs f2, 0x1c(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x1c(r1)
     mr r0, r31
     psq_l f1, 0x0(r26), 0, 0
@@ -1878,25 +1878,25 @@ lbl_fn_80366454_000012D4:
     stfs f5, 0x100(r1)
     stfs f4, 0x104(r1)
     stfs f3, 0x108(r1)
-    bne lbl_fn_80366454_00001840
+    bne lbl_world_Manager_destructor_00001840
     lwz r3, lbl_8087F4E8
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_00001840
+    beq lbl_world_Manager_destructor_00001840
     stw r31, 0x88(r3)
-lbl_fn_80366454_00001840:
+lbl_world_Manager_destructor_00001840:
     lwz r3, lbl_8087EF70
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_00001854
+    beq lbl_world_Manager_destructor_00001854
     li r4, 0x5
     bl fn_800A5B30
-lbl_fn_80366454_00001854:
+lbl_world_Manager_destructor_00001854:
     li r3, 0x1
     bl fn_80605540
     li r3, 0x0
     bl fn_806055A0
     lwz r0, lbl_8087F610
     cmpwi r0, 0x0
-    bne lbl_fn_80366454_00001894
+    bne lbl_world_Manager_destructor_00001894
     lwz r3, lbl_8087F9C0
     bl fn_8057EF44
     lwz r3, lbl_8087F420
@@ -1904,116 +1904,116 @@ lbl_fn_80366454_00001854:
     stw r0, 0xc(r3)
     lwz r3, lbl_8087F018
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_00001894
+    beq lbl_world_Manager_destructor_00001894
     stw r0, 0x40e0(r3)
-lbl_fn_80366454_00001894:
+lbl_world_Manager_destructor_00001894:
     lwz r3, lbl_8087EF8C
     li r4, 0x2
     addi r3, r3, 0x118
     bl fn_800AFEBC
     addic. r3, r28, 0x56dc
-    beq lbl_fn_80366454_000018B4
+    beq lbl_world_Manager_destructor_000018B4
     li r4, 0x0
-    bl fn_80473E8C
-lbl_fn_80366454_000018B4:
+    bl atn_LoadHandle_destructor
+lbl_world_Manager_destructor_000018B4:
     addic. r3, r28, 0x5690
-    beq lbl_fn_80366454_000018C0
+    beq lbl_world_Manager_destructor_000018C0
     bl fn_80470528
-lbl_fn_80366454_000018C0:
+lbl_world_Manager_destructor_000018C0:
     addic. r0, r28, 0x562c
-    beq lbl_fn_80366454_000018D0
+    beq lbl_world_Manager_destructor_000018D0
     lwz r3, 0x562c(r28)
     bl dtor_80084684
-lbl_fn_80366454_000018D0:
+lbl_world_Manager_destructor_000018D0:
     addi r3, r28, 0x55a8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addic. r0, r28, 0x558c
-    beq lbl_fn_80366454_000018F0
+    beq lbl_world_Manager_destructor_000018F0
     lwz r3, 0x558c(r28)
     li r4, 0x1
     bl fn_8056B398
-lbl_fn_80366454_000018F0:
+lbl_world_Manager_destructor_000018F0:
     addic. r25, r28, 0x550c
-    beq lbl_fn_80366454_0000193C
+    beq lbl_world_Manager_destructor_0000193C
     addic. r0, r25, 0x44
-    beq lbl_fn_80366454_00001910
+    beq lbl_world_Manager_destructor_00001910
     lwz r3, 0x4c(r25)
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_00001910
-    bl fn_80084C24
-lbl_fn_80366454_00001910:
+    beq lbl_world_Manager_destructor_00001910
+    bl mem_getAllocSize
+lbl_world_Manager_destructor_00001910:
     addic. r0, r25, 0x38
-    beq lbl_fn_80366454_00001928
+    beq lbl_world_Manager_destructor_00001928
     lwz r3, 0x40(r25)
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_00001928
-    bl fn_80084C24
-lbl_fn_80366454_00001928:
+    beq lbl_world_Manager_destructor_00001928
+    bl mem_getAllocSize
+lbl_world_Manager_destructor_00001928:
     cmpwi r25, 0x0
-    beq lbl_fn_80366454_0000193C
+    beq lbl_world_Manager_destructor_0000193C
     mr r3, r25
     li r4, 0x0
-    bl fn_80473E8C
-lbl_fn_80366454_0000193C:
+    bl atn_LoadHandle_destructor
+lbl_world_Manager_destructor_0000193C:
     addic. r25, r28, 0x54f4
-    beq lbl_fn_80366454_000019A4
+    beq lbl_world_Manager_destructor_000019A4
     addic. r3, r25, 0x10
-    beq lbl_fn_80366454_00001954
+    beq lbl_world_Manager_destructor_00001954
     li r4, 0x0
-    bl fn_80473E8C
-lbl_fn_80366454_00001954:
+    bl atn_LoadHandle_destructor
+lbl_world_Manager_destructor_00001954:
     addic. r0, r25, 0x8
-    beq lbl_fn_80366454_00001980
+    beq lbl_world_Manager_destructor_00001980
     lwz r3, 0xc(r25)
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_00001974
+    beq lbl_world_Manager_destructor_00001974
     lis r4, fn_80366364@ha
     addi r4, r4, fn_80366364@l
     bl fn_80695A50
-lbl_fn_80366454_00001974:
+lbl_world_Manager_destructor_00001974:
     li r0, 0x0
     stw r0, 0xc(r25)
     stw r0, 0x8(r25)
-lbl_fn_80366454_00001980:
+lbl_world_Manager_destructor_00001980:
     cmpwi r25, 0x0
-    beq lbl_fn_80366454_000019A4
+    beq lbl_world_Manager_destructor_000019A4
     lwz r3, 0x4(r25)
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_00001998
-    bl fn_80084C24
-lbl_fn_80366454_00001998:
+    beq lbl_world_Manager_destructor_00001998
+    bl mem_getAllocSize
+lbl_world_Manager_destructor_00001998:
     li r0, 0x0
     stw r0, 0x4(r25)
     stw r0, 0x0(r25)
-lbl_fn_80366454_000019A4:
+lbl_world_Manager_destructor_000019A4:
     addic. r25, r28, 0xd18
-    beq lbl_fn_80366454_000019DC
+    beq lbl_world_Manager_destructor_000019DC
     addic. r0, r25, 0x1fc
-    beq lbl_fn_80366454_000019D0
+    beq lbl_world_Manager_destructor_000019D0
     lwz r4, 0x1fc(r25)
     cmpwi r4, 0x0
-    beq lbl_fn_80366454_000019D0
+    beq lbl_world_Manager_destructor_000019D0
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_000019D0
+    beq lbl_world_Manager_destructor_000019D0
     bl fn_800897D8
-lbl_fn_80366454_000019D0:
+lbl_world_Manager_destructor_000019D0:
     addi r3, r25, 0x8
     li r4, -0x1
     bl fn_8004B338
-lbl_fn_80366454_000019DC:
+lbl_world_Manager_destructor_000019DC:
     addi r3, r28, 0x6c
     li r4, -0x1
     bl fn_8037DC68
     mr r3, r28
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r29, 0x0
-    ble lbl_fn_80366454_00001A04
+    ble lbl_world_Manager_destructor_00001A04
     mr r3, r28
     bl dtor_80084684
-lbl_fn_80366454_00001A04:
+lbl_world_Manager_destructor_00001A04:
     addi r11, r1, 0x270
     mr r3, r28
     bl _restgpr_25

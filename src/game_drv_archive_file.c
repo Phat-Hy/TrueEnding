@@ -11,8 +11,8 @@ extern void fn_800185B4(void);
 extern void fn_80018608(void);
 extern void fn_8003E918(void);
 extern void fn_800A55D4(void);
-extern void fn_800CB3A0(void);
-extern void fn_800CB5C8(void);
+extern void ref_releaseHandle(void);
+extern void morph_updateMesh(void);
 extern void fn_8012D180(void);
 extern void fn_8014DEE4(void);
 extern void fn_80160170(void);
@@ -23,7 +23,7 @@ extern void fn_80178864(void);
 extern void fn_8017ABD4(void);
 extern void fn_8017AC08(void);
 extern void fn_80219558(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_8021A77C(void);
 extern void fn_8021A888(void);
 extern void fn_803750E4(void);
@@ -35,11 +35,11 @@ extern void fn_805A70D8(void);
 extern void fn_805AB82C(void);
 extern void fn_805ADC24(void);
 extern void fn_805ADDD8(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
-extern void fn_80680CF8(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
+extern void rand(void);
 
 /* External data declarations */
 extern u8 jumptable_80797618[];
@@ -434,7 +434,7 @@ lbl_fn_805A96D8_000004E0:
     lwz r3, 0x70(r31)
     cmpwi r3, 0x0
     ble lbl_fn_805A96D8_0000057C
-    bl fn_80219E6C
+    bl task_findEntryById
     lbz r0, 0x2(r3)
     cmpwi r0, 0x7
     bne lbl_fn_805A96D8_0000093C
@@ -763,7 +763,7 @@ asm void fn_805AA018(void)
 lbl_fn_805AA018_000009B4:
     cmpwi r30, 0x9
     bne lbl_fn_805AA018_000009EC
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -797,7 +797,7 @@ lbl_fn_805AA018_00000A08:
 lbl_fn_805AA018_00000A30:
     cmpwi r30, 0x9
     bne lbl_fn_805AA018_00000A68
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -824,7 +824,7 @@ lbl_fn_805AA018_00000A68:
 lbl_fn_805AA018_00000A94:
     cmpwi r30, 0x9
     bne lbl_fn_805AA018_00000ACC
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -858,7 +858,7 @@ lbl_fn_805AA018_00000AE8:
 lbl_fn_805AA018_00000B10:
     cmpwi r30, 0x9
     bne lbl_fn_805AA018_00000B48
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -885,7 +885,7 @@ lbl_fn_805AA018_00000B64:
     b lbl_fn_805AA018_00000CB0
     cmpwi r30, 0x9
     bne lbl_fn_805AA018_00000BAC
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -904,7 +904,7 @@ lbl_fn_805AA018_00000BAC:
     b lbl_fn_805AA018_00000CB0
     cmpwi r30, 0x9
     bne lbl_fn_805AA018_00000BF4
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -1124,7 +1124,7 @@ lbl_fn_805AA4E8_00000EB0:
     addi r3, r31, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     b lbl_fn_805AA4E8_00000EF8
 lbl_fn_805AA4E8_00000ECC:
     lwz r0, 0xa78(r3)
@@ -1138,7 +1138,7 @@ lbl_fn_805AA4E8_00000EE0:
     addi r3, r31, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
 lbl_fn_805AA4E8_00000EF8:
     lwz r3, lbl_8087F8A0
     lwz r30, 0x48(r3)
@@ -1269,7 +1269,7 @@ lbl_fn_805AA738_000010B4:
     addi r3, r30, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lfs f1, lbl_808882F4
     li r31, 0x0
     li r0, 0x2
@@ -1290,7 +1290,7 @@ lbl_fn_805AA738_000010B4:
     stw r0, 0x15f0(r30)
     stw r31, 0x15f4(r30)
     stw r31, 0x15f8(r30)
-    bl fn_800CB5C8
+    bl morph_updateMesh
     stw r31, 0x15cc(r30)
     lwz r3, 0x15bc(r30)
     stw r31, 0x15d0(r30)
@@ -1339,7 +1339,7 @@ asm void fn_805AA830(void)
     stfs f3, 0x10(r1)
     stfs f1, 0x8(r1)
     stfs f0, 0xc(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80888330
     fcmpo cr0, f1, f0
     ble lbl_fn_805AA830_00001238
@@ -1354,13 +1354,13 @@ asm void fn_805AA830(void)
     stfs f2, 0x8(r1)
     stfs f1, 0xc(r1)
     stfs f0, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80888330
     fcmpo cr0, f1, f0
     bge lbl_fn_805AA830_00001244
     addi r3, r1, 0x8
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x8(r1)
     lfs f3, lbl_80888328
     lfs f1, 0xc(r1)
@@ -1611,14 +1611,14 @@ lbl_fn_805AA950_00001584:
     b lbl_fn_805AA950_0000159C
 lbl_fn_805AA950_00001590:
     li r3, 0x7531
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r31, r3
 lbl_fn_805AA950_0000159C:
     lwz r0, 0x4(r31)
     cmpwi r0, 0x4ef9
     bne lbl_fn_805AA950_000015B4
     li r3, 0x7532
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r31, r3
 lbl_fn_805AA950_000015B4:
     lwz r3, 0x4(r31)
@@ -1633,7 +1633,7 @@ lbl_fn_805AA950_000015B4:
     cmpwi r0, 0x2
     bne lbl_fn_805AA950_000015EC
     li r3, 0xbbf
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r31, r3
 lbl_fn_805AA950_000015EC:
     lbz r0, 0x2(r31)
@@ -1661,7 +1661,7 @@ lbl_fn_805AA950_00001628:
     cmplwi r0, 0x1
     bgt lbl_fn_805AA950_0000164C
     li r3, 0x7530
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r22, r3
 lbl_fn_805AA950_0000164C:
     lwz r3, 0x4(r22)
@@ -1675,7 +1675,7 @@ lbl_fn_805AA950_0000164C:
     cmpwi r0, 0x2
     bne lbl_fn_805AA950_00001680
     li r3, 0xbbf
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r22, r3
 lbl_fn_805AA950_00001680:
     lwz r3, lbl_8087F490
@@ -1701,7 +1701,7 @@ lbl_fn_805AA950_000016B8:
     stw r5, 0x70(r1)
     stw r4, 0x74(r1)
     stw r0, 0x78(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_808882F4
     fcmpo cr0, f1, f0
     ble lbl_fn_805AA950_000016F0
@@ -1718,7 +1718,7 @@ lbl_fn_805AA950_000016F8:
     mr r3, r25
     stfs f2, 0x6c(r1)
     psq_st f1, 0x0(r25), 0, 0
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80888344
     fcmpo cr0, f1, f0
     bge lbl_fn_805AA950_0000174C
@@ -1736,18 +1736,18 @@ lbl_fn_805AA950_000016F8:
 lbl_fn_805AA950_0000174C:
     mr r3, r25
     mr r4, r25
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_805AA950_00001758:
     lwz r5, lbl_8087F430
     addi r3, r1, 0xe0
     li r4, 0x79
     lfs f0, 0x90c(r5)
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x64
     addi r3, r1, 0xe0
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r4, r1, 0x64
     lfs f2, 0x6c(r1)
     addi r3, r1, 0x28
@@ -1841,7 +1841,7 @@ lbl_fn_805AA950_00001898:
     ble lbl_fn_805AA950_000018E4
     addi r3, r1, 0x58
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_805AA950_000018E4:
     lfs f2, 0x60(r1)
     addi r3, r1, 0x10
@@ -1883,7 +1883,7 @@ lbl_fn_805AA950_00001924:
     bl fn_805A70D8
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_805AA950_00001AC8
 lbl_fn_805AA950_00001984:
     lwz r0, 0xa88(r28)
@@ -1965,7 +1965,7 @@ lbl_fn_805AA950_00001A6C:
     bl fn_805A70D8
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_805AA950_00001AC8
 lbl_fn_805AA950_00001AAC:
     addi r24, r24, 0x1

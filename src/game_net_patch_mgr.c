@@ -8,15 +8,15 @@ extern void _restgpr_27(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
-extern void fn_80084C24(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
+extern void mem_getAllocSize(void);
 extern void fn_800DC880(void);
 extern void fn_800DCA6C(void);
 extern void fn_8053770C(void);
 extern void fn_8053C6A8(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 
 /* External data declarations */
 extern u8 lbl_8075DA28[];
@@ -621,7 +621,7 @@ lbl_fn_8053A410_0000079C:
     lwz r3, 0x4(r30)
     cmpwi r3, 0x0
     beq lbl_fn_8053A410_000007C4
-    bl fn_80084C24
+    bl mem_getAllocSize
     li r0, 0x0
     stw r0, 0x4(r30)
 lbl_fn_8053A410_000007C4:
@@ -672,7 +672,7 @@ asm void fn_8053A514(void)
     mr r26, r4
     li r3, 0x40
     li r4, 0x4
-    bl fn_80084320
+    bl mem_alloc
     cmpwi cr1, r3, 0x0
     mr r25, r3
     beq cr1, lbl_fn_8053A514_00000874
@@ -685,7 +685,7 @@ lbl_fn_8053A514_00000874:
     stw r25, 0x28(r1)
     li r3, 0x10
     stw r0, 0x2c(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi cr6, r3, 0x0
     beq cr6, lbl_fn_8053A514_000008AC
     li r0, 0x1
@@ -761,8 +761,8 @@ lbl_fn_8053A514_00000964:
     addi r4, r4, 0x1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8053A514_000009A4:
     lis r3, 0xaaab
     subi r0, r3, 0x5555
@@ -834,8 +834,8 @@ lbl_fn_8053A514_00000A4C:
     addi r4, r4, 0x1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8053A514_00000AB4:
     lis r3, 0xaaab
     subi r0, r3, 0x5555
@@ -891,11 +891,11 @@ lbl_fn_8053A514_00000B48:
     addi r4, r4, 0x1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8053A514_00000B7C:
     slwi r3, r30, 3
-    bl fn_800844D8
+    bl mem_free
     cmpwi cr6, r3, 0x0
     mr r31, r3
     bne cr6, lbl_fn_8053A514_00000BB0
@@ -905,8 +905,8 @@ lbl_fn_8053A514_00000B7C:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80793BF0@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8053A514_00000BB0:
     lwz r0, 0x34(r1)
     stw r31, 0x30(r1)
@@ -1376,7 +1376,7 @@ lbl_fn_8053AD54_000011B8:
     lwz r3, 0x4(r30)
     cmpwi cr1, r3, 0x0
     beq cr1, lbl_fn_8053AD54_000011E0
-    bl fn_80084C24
+    bl mem_getAllocSize
     li r0, 0x0
     stw r0, 0x4(r30)
 lbl_fn_8053AD54_000011E0:
@@ -1521,7 +1521,7 @@ lbl_fn_8053B034_00001388:
     li r4, 0x4
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi cr1, r3, 0x0
     mr r25, r3
     beq cr1, lbl_fn_8053B034_000013C0
@@ -1534,7 +1534,7 @@ lbl_fn_8053B034_000013C0:
     stw r25, 0x28(r1)
     li r3, 0x10
     stw r0, 0x2c(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi cr6, r3, 0x0
     beq cr6, lbl_fn_8053B034_000013F8
     li r0, 0x1
@@ -1610,8 +1610,8 @@ lbl_fn_8053B034_000014B0:
     addi r4, r4, 0x1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8053B034_000014F0:
     lis r3, 0xaaab
     subi r0, r3, 0x5555
@@ -1683,8 +1683,8 @@ lbl_fn_8053B034_00001598:
     addi r4, r4, 0x1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8053B034_00001600:
     lis r3, 0xaaab
     subi r0, r3, 0x5555
@@ -1740,11 +1740,11 @@ lbl_fn_8053B034_00001694:
     addi r4, r4, 0x1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8053B034_000016C8:
     slwi r3, r30, 3
-    bl fn_800844D8
+    bl mem_free
     cmpwi cr6, r3, 0x0
     mr r31, r3
     bne cr6, lbl_fn_8053B034_000016FC
@@ -1754,8 +1754,8 @@ lbl_fn_8053B034_000016C8:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80793DB8@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8053B034_000016FC:
     lwz r0, 0x34(r1)
     stw r31, 0x30(r1)

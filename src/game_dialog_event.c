@@ -6,7 +6,7 @@ extern void __register_global_object(void);
 extern void _restgpr_23(void);
 extern void _savegpr_23(void);
 extern void fn_8000D114(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8001047C(void);
 extern void fn_80011034(void);
 extern void fn_80013410(void);
@@ -14,7 +14,7 @@ extern void fn_80013484(void);
 extern void fn_8003EFB0(void);
 extern void fn_80045694(void);
 extern void fn_8004ED34(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_80093F1C(void);
 extern void fn_80094778(void);
 extern void fn_800F52F0(void);
@@ -41,7 +41,7 @@ extern void fn_80140500(void);
 extern void fn_80140518(void);
 extern void fn_8014052C(void);
 extern void fn_80148334(void);
-extern void fn_8014C0B4(void);
+extern void dialog_setScriptSlot(void);
 extern void fn_8014DEE4(void);
 extern void fn_801511C4(void);
 extern void fn_80151204(void);
@@ -69,16 +69,16 @@ extern void fn_8020EF80(void);
 extern void fn_80211480(void);
 extern void fn_80211940(void);
 extern void fn_80219558(void);
-extern void fn_80219E6C(void);
-extern void fn_80370174(void);
+extern void task_findEntryById(void);
+extern void world_getGlobalFlag(void);
 extern void fn_8044D034(void);
 extern void fn_8044D1A4(void);
 extern void fn_804EB654(void);
 extern void fn_804EB818(void);
 extern void fn_805634D4(void);
 extern void fn_805638C0(void);
-extern void fn_80680CF8(void);
-extern void fn_80695AD0(void);
+extern void rand(void);
+extern void vec3_isNonZero(void);
 
 /* External data declarations */
 extern u8 jumptable_8077AAD0[];
@@ -589,7 +589,7 @@ asm void fn_8014FD30(void)
     mr r3, r31
     li r4, 0x0
     li r5, 0x6
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
 lbl_fn_8014FD30_00000620:
     lwz r0, 0x488(r31)
     cmpwi r0, 0x14
@@ -597,7 +597,7 @@ lbl_fn_8014FD30_00000620:
     mr r3, r31
     li r4, 0x1
     li r5, 0x17
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
 lbl_fn_8014FD30_0000063C:
     lwz r0, 0x48c(r31)
     cmpwi r0, 0x1a
@@ -605,7 +605,7 @@ lbl_fn_8014FD30_0000063C:
     mr r3, r31
     li r4, 0x2
     li r5, 0x1d
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
 lbl_fn_8014FD30_00000658:
     lwz r0, 0x490(r31)
     cmpwi r0, 0x20
@@ -613,7 +613,7 @@ lbl_fn_8014FD30_00000658:
     mr r3, r31
     li r4, 0x3
     li r5, 0x24
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     b lbl_fn_8014FD30_00000720
 lbl_fn_8014FD30_00000678:
     lis r30, lbl_80737A9C@ha
@@ -636,7 +636,7 @@ lbl_fn_8014FD30_00000678:
     mr r3, r31
     li r4, 0x0
     li r5, 0x2
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
 lbl_fn_8014FD30_000006CC:
     lwz r0, 0x488(r31)
     cmpwi r0, 0x17
@@ -644,7 +644,7 @@ lbl_fn_8014FD30_000006CC:
     mr r3, r31
     li r4, 0x1
     li r5, 0x14
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
 lbl_fn_8014FD30_000006E8:
     lwz r0, 0x48c(r31)
     cmpwi r0, 0x1d
@@ -652,7 +652,7 @@ lbl_fn_8014FD30_000006E8:
     mr r3, r31
     li r4, 0x2
     li r5, 0x1a
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
 lbl_fn_8014FD30_00000704:
     lwz r0, 0x490(r31)
     cmpwi r0, 0x24
@@ -660,7 +660,7 @@ lbl_fn_8014FD30_00000704:
     mr r3, r31
     li r4, 0x3
     li r5, 0x20
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
 lbl_fn_8014FD30_00000720:
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)
@@ -773,7 +773,7 @@ lbl_fn_8014FF9C_0000089C:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8014FF9C_000008F0
     li r0, 0x1
@@ -864,7 +864,7 @@ lbl_fn_801501F0_000009C4:
     lwz r3, 0x4(r5)
     cmpwi r3, 0x0
     ble lbl_fn_801501F0_000009F0
-    bl fn_80219E6C
+    bl task_findEntryById
     b lbl_fn_801501F0_000009FC
 lbl_fn_801501F0_000009F0:
     addi r4, r4, 0x14
@@ -903,7 +903,7 @@ lbl_fn_801501F0_00000A54:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_801501F0_00000A94
     lwz r3, 0xf80(r31)
@@ -985,7 +985,7 @@ lbl_fn_801501F0_00000B70:
     lwz r3, 0x4(r5)
     cmpwi r3, 0x0
     ble lbl_fn_801501F0_00000B9C
-    bl fn_80219E6C
+    bl task_findEntryById
     b lbl_fn_801501F0_00000BA8
 lbl_fn_801501F0_00000B9C:
     addi r4, r4, 0x14
@@ -1096,7 +1096,7 @@ lbl_fn_80150460_00000CF4:
     lwz r3, 0x4(r5)
     cmpwi r3, 0x0
     ble lbl_fn_80150460_00000D20
-    bl fn_80219E6C
+    bl task_findEntryById
     b lbl_fn_80150460_00000D2C
 lbl_fn_80150460_00000D20:
     addi r4, r4, 0x14
@@ -1123,7 +1123,7 @@ lbl_fn_80150460_00000D50:
     lwz r3, 0x4(r5)
     cmpwi r3, 0x0
     ble lbl_fn_80150460_00000D7C
-    bl fn_80219E6C
+    bl task_findEntryById
     b lbl_fn_80150460_00000D88
 lbl_fn_80150460_00000D7C:
     addi r4, r4, 0x14
@@ -1272,10 +1272,10 @@ asm void fn_8015076C(void)
     stw r24, 0x120(r1)
     mr r4, r25
     addi r3, r1, 0x124
-    bl fn_8000D124
+    bl vec3_copy
     mr r4, r29
     addi r3, r1, 0x130
-    bl fn_8000D124
+    bl vec3_copy
     cmpwi r28, 0x0
     stw r26, 0x13c(r1)
     stw r27, 0x140(r1)
@@ -1289,7 +1289,7 @@ asm void fn_8015076C(void)
     bl fn_800F72CC
     addi r3, r1, 0x124
     addi r4, r1, 0xbc
-    bl fn_8000D124
+    bl vec3_copy
     lwz r0, 0x140(r1)
     oris r0, r0, 0x1
     stw r0, 0x140(r1)
@@ -1412,7 +1412,7 @@ lbl_fn_8015076C_00001138:
 lbl_fn_8015076C_00001158:
     bl fn_80121F00
     li r4, 0x67
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     beq lbl_fn_8015076C_000012D0
     mr r3, r23
@@ -1577,7 +1577,7 @@ lbl_fn_8015076C_00001310:
     bl fn_80011034
     addi r3, r1, 0xe0
     addi r4, r1, 0x20
-    bl fn_8000D124
+    bl vec3_copy
 lbl_fn_8015076C_000013E8:
     mr r3, r23
     bl fn_8016DA4C
@@ -1882,7 +1882,7 @@ lbl_fn_8015076C_00001818:
     addi r3, r1, 0x104
     li r4, 0x2
     bl fn_80151194
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x6666
     li r0, 0x3c
     addi r4, r4, 0x6667

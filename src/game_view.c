@@ -5,18 +5,18 @@
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800897D8(void);
 extern void fn_8008A76C(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008BBD8(void);
 extern void fn_80091CFC(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
-extern void fn_800D246C(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800D5738(void);
-extern void fn_800D5808(void);
+struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
+extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800E2A24(void);
 extern void fn_800EF73C(void);
 extern void fn_800F2BB8(void);
@@ -32,10 +32,10 @@ extern void fn_8010ED4C(void);
 extern void fn_8010EE38(void);
 extern void fn_80237518(void);
 extern void fn_802375C4(void);
-extern void fn_802377B8(void);
-extern void fn_8023781C(void);
+extern void res_MsgHandle_constructor(void);
+extern void res_MsgHandle_unload(void);
 extern void fn_80441590(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_80478714(void);
 extern void fn_80548D58(void);
 extern void fn_8054A6EC(void);
@@ -80,7 +80,7 @@ void fn_800F1430(void);
 void fn_800F1EE0(void);
 void fn_800F1F38(void);
 void fn_800F1F94(void);
-void fn_800F26D4(void);
+void camera_isObjectVisible(void);
 void fn_800F29D0(void);
 
 asm void fn_800F1378(void)
@@ -130,7 +130,7 @@ asm void fn_800F13BC(void)
     mr r6, r5
     subi r3, r3, 0x1c50
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_800F13BC_0000009C
     mr r4, r31
@@ -157,7 +157,7 @@ asm void fn_800F1430(void)
     psq_st f31, 0x58(r1), 0, 0
     bl _savegpr_26
     mr r31, r3
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_80779DA0@ha
     li r26, 0x0
     addi r3, r3, lbl_80779DA0@l
@@ -193,7 +193,7 @@ asm void fn_800F1430(void)
     addis r3, r31, 0x1
     stw r26, -0x34cc(r3)
     subi r3, r3, 0x3484
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     addis r3, r31, 0x1
     lfs f0, lbl_80881478
     subi r5, r3, 0x3410
@@ -231,16 +231,16 @@ lbl_fn_800F1430_000001B4:
     stw r26, 0x63b8(r3)
     stw r0, 0x63bc(r3)
     addi r3, r3, 0x63c0
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x3
     addi r3, r3, 0x63cc
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x3
     addi r3, r3, 0x63d8
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x3
     addi r3, r3, 0x63e4
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x3
     lis r27, fn_80237518@ha
     lis r30, fn_802375C4@ha
@@ -252,12 +252,12 @@ lbl_fn_800F1430_000001B4:
     bl fn_806958E0
     addis r3, r31, 0x3
     addi r3, r3, 0x64ec
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x3
-    lis r29, fn_802377B8@ha
+    lis r29, res_MsgHandle_constructor@ha
     lis r28, fn_800EF73C@ha
     li r6, 0xc
-    addi r4, r29, fn_802377B8@l
+    addi r4, r29, res_MsgHandle_constructor@l
     li r7, 0x3
     addi r5, r28, fn_800EF73C@l
     addi r3, r3, 0x64f8
@@ -285,25 +285,25 @@ lbl_fn_800F1430_000001B4:
     bl fn_806958E0
     addis r3, r31, 0x3
     addi r3, r3, 0x65b8
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x3
     addi r3, r3, 0x65c4
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x3
     addi r3, r3, 0x65d0
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x3
     addi r3, r3, 0x65dc
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x3
-    addi r4, r29, fn_802377B8@l
+    addi r4, r29, res_MsgHandle_constructor@l
     addi r5, r28, fn_800EF73C@l
     li r6, 0xc
     li r7, 0x7
     addi r3, r3, 0x65e8
     bl fn_806958E0
     addis r3, r31, 0x3
-    addi r4, r29, fn_802377B8@l
+    addi r4, r29, res_MsgHandle_constructor@l
     addi r5, r28, fn_800EF73C@l
     li r6, 0xc
     li r7, 0x1f
@@ -407,7 +407,7 @@ lbl_fn_800F1430_00000448:
     li r0, 0x1
     stw r0, -0x7640(r3)
     subi r3, r3, 0x763c
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x760c
     bl fn_80237518
@@ -464,43 +464,43 @@ lbl_fn_800F1430_00000448:
     bl fn_800E2A24
     addis r3, r31, 0x4
     subi r3, r3, 0x750c
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x7500
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
-    lis r30, fn_802377B8@ha
+    lis r30, res_MsgHandle_constructor@ha
     lis r29, fn_800EF73C@ha
     li r6, 0xc
-    addi r4, r30, fn_802377B8@l
+    addi r4, r30, res_MsgHandle_constructor@l
     li r7, 0x3
     addi r5, r29, fn_800EF73C@l
     subi r3, r3, 0x74f4
     bl fn_806958E0
     addis r3, r31, 0x4
     subi r3, r3, 0x74d0
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x74c4
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x74b8
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x74ac
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x74a0
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
-    addi r4, r30, fn_802377B8@l
+    addi r4, r30, res_MsgHandle_constructor@l
     addi r5, r29, fn_800EF73C@l
     li r6, 0xc
     li r7, 0x3
     subi r3, r3, 0x7494
     bl fn_806958E0
     addis r3, r31, 0x4
-    addi r4, r30, fn_802377B8@l
+    addi r4, r30, res_MsgHandle_constructor@l
     addi r5, r29, fn_800EF73C@l
     li r6, 0xc
     li r7, 0x3
@@ -508,52 +508,52 @@ lbl_fn_800F1430_00000448:
     bl fn_806958E0
     addis r3, r31, 0x4
     subi r3, r3, 0x744c
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x7440
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x7434
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x7428
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x741c
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x7410
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x7404
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x73f8
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x73ec
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x73e0
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x73d4
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x73c8
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x73bc
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x73b0
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x73a4
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x7398
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     lfs f3, lbl_80881478
     subi r7, r3, 0x6e28
@@ -744,10 +744,10 @@ lbl_fn_800F1430_000009A0:
     lfs f0, lbl_808814AC
     li r29, 0x0
     mr r3, r30
-    lis r4, fn_802377B8@ha
+    lis r4, res_MsgHandle_constructor@ha
     lis r5, fn_800EF73C@ha
     stw r29, -0x1d20(r30)
-    addi r4, r4, fn_802377B8@l
+    addi r4, r4, res_MsgHandle_constructor@l
     li r6, 0xc
     stw r29, -0x1d1c(r30)
     addi r5, r5, fn_800EF73C@l
@@ -934,161 +934,161 @@ asm void fn_800F1F94(void)
     subic. r29, r29, 0x7398
     beq lbl_fn_800F1F94_00000C8C
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000C8C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00000C8C:
     addis r29, r30, 0x4
     subic. r29, r29, 0x73a4
     beq lbl_fn_800F1F94_00000CB0
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000CB0
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00000CB0:
     addis r29, r30, 0x4
     subic. r29, r29, 0x73b0
     beq lbl_fn_800F1F94_00000CD4
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000CD4
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00000CD4:
     addis r29, r30, 0x4
     subic. r29, r29, 0x73bc
     beq lbl_fn_800F1F94_00000CF8
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000CF8
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00000CF8:
     addis r29, r30, 0x4
     subic. r29, r29, 0x73c8
     beq lbl_fn_800F1F94_00000D1C
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000D1C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00000D1C:
     addis r29, r30, 0x4
     subic. r29, r29, 0x73d4
     beq lbl_fn_800F1F94_00000D40
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000D40
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00000D40:
     addis r29, r30, 0x4
     subic. r29, r29, 0x73e0
     beq lbl_fn_800F1F94_00000D64
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000D64
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00000D64:
     addis r29, r30, 0x4
     subic. r29, r29, 0x73ec
     beq lbl_fn_800F1F94_00000D88
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000D88
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00000D88:
     addis r29, r30, 0x4
     subic. r29, r29, 0x73f8
     beq lbl_fn_800F1F94_00000DAC
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000DAC
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00000DAC:
     addis r29, r30, 0x4
     subic. r29, r29, 0x7404
     beq lbl_fn_800F1F94_00000DD0
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000DD0
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00000DD0:
     addis r29, r30, 0x4
     subic. r29, r29, 0x7410
     beq lbl_fn_800F1F94_00000DF4
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000DF4
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00000DF4:
     addis r29, r30, 0x4
     subic. r29, r29, 0x741c
     beq lbl_fn_800F1F94_00000E18
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000E18
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00000E18:
     addis r29, r30, 0x4
     subic. r29, r29, 0x7428
     beq lbl_fn_800F1F94_00000E3C
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000E3C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00000E3C:
     addis r29, r30, 0x4
     subic. r29, r29, 0x7434
     beq lbl_fn_800F1F94_00000E60
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000E60
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00000E60:
     addis r29, r30, 0x4
     subic. r29, r29, 0x7440
     beq lbl_fn_800F1F94_00000E84
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000E84
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00000E84:
     addis r29, r30, 0x4
     subic. r29, r29, 0x744c
     beq lbl_fn_800F1F94_00000EA8
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000EA8
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00000EA8:
     addis r3, r30, 0x4
     lis r29, fn_800EF73C@ha
@@ -1107,51 +1107,51 @@ lbl_fn_800F1F94_00000EA8:
     subic. r29, r29, 0x74a0
     beq lbl_fn_800F1F94_00000F00
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000F00
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00000F00:
     addis r29, r30, 0x4
     subic. r29, r29, 0x74ac
     beq lbl_fn_800F1F94_00000F24
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000F24
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00000F24:
     addis r29, r30, 0x4
     subic. r29, r29, 0x74b8
     beq lbl_fn_800F1F94_00000F48
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000F48
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00000F48:
     addis r29, r30, 0x4
     subic. r29, r29, 0x74c4
     beq lbl_fn_800F1F94_00000F6C
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000F6C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00000F6C:
     addis r29, r30, 0x4
     subic. r29, r29, 0x74d0
     beq lbl_fn_800F1F94_00000F90
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000F90
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00000F90:
     addis r3, r30, 0x4
     lis r4, fn_800EF73C@ha
@@ -1164,21 +1164,21 @@ lbl_fn_800F1F94_00000F90:
     subic. r29, r29, 0x7500
     beq lbl_fn_800F1F94_00000FD0
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000FD0
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00000FD0:
     addis r29, r30, 0x4
     subic. r29, r29, 0x750c
     beq lbl_fn_800F1F94_00000FF4
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000FF4
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00000FF4:
     addis r3, r30, 0x4
     subic. r0, r3, 0x75a8
@@ -1198,7 +1198,7 @@ lbl_fn_800F1F94_0000101C:
     addis r3, r30, 0x4
     li r4, -0x1
     subi r3, r3, 0x763c
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addis r29, r30, 0x4
     subic. r29, r29, 0x7658
     beq lbl_fn_800F1F94_00001060
@@ -1246,41 +1246,41 @@ lbl_fn_800F1F94_000010A8:
     addic. r29, r29, 0x65dc
     beq lbl_fn_800F1F94_00001100
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00001100
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00001100:
     addis r29, r30, 0x3
     addic. r29, r29, 0x65d0
     beq lbl_fn_800F1F94_00001124
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00001124
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00001124:
     addis r29, r30, 0x3
     addic. r29, r29, 0x65c4
     beq lbl_fn_800F1F94_00001148
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00001148
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00001148:
     addis r29, r30, 0x3
     addic. r29, r29, 0x65b8
     beq lbl_fn_800F1F94_0000116C
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_0000116C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_0000116C:
     addis r3, r30, 0x3
     lis r29, fn_802375C4@ha
@@ -1312,11 +1312,11 @@ lbl_fn_800F1F94_0000116C:
     addic. r29, r29, 0x64ec
     beq lbl_fn_800F1F94_000011F8
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_000011F8
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_000011F8:
     addis r3, r30, 0x3
     lis r4, fn_802375C4@ha
@@ -1329,41 +1329,41 @@ lbl_fn_800F1F94_000011F8:
     addic. r29, r29, 0x63e4
     beq lbl_fn_800F1F94_00001238
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00001238
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00001238:
     addis r29, r30, 0x3
     addic. r29, r29, 0x63d8
     beq lbl_fn_800F1F94_0000125C
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_0000125C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_0000125C:
     addis r29, r30, 0x3
     addic. r29, r29, 0x63cc
     beq lbl_fn_800F1F94_00001280
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00001280
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00001280:
     addis r29, r30, 0x3
     addic. r29, r29, 0x63c0
     beq lbl_fn_800F1F94_000012A4
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_000012A4
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_000012A4:
     addis r3, r30, 0x1
     lis r4, fn_80108150@ha
@@ -1375,7 +1375,7 @@ lbl_fn_800F1F94_000012A4:
     addis r3, r30, 0x1
     li r4, -0x1
     subi r3, r3, 0x3484
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addis r3, r30, 0x1
     lis r4, fn_800F1F38@ha
     addi r4, r4, fn_800F1F38@l
@@ -1398,7 +1398,7 @@ lbl_fn_800F1F94_000012A4:
     bl fn_806959D8
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r31, 0x0
     ble lbl_fn_800F1F94_0000133C
     mr r3, r30
@@ -1414,7 +1414,7 @@ lbl_fn_800F1F94_0000133C:
     blr
 }
 
-asm void fn_800F26D4(void)
+asm void camera_isObjectVisible(void)
 {
     nofralloc
     stwu r1, -0xb0(r1)
@@ -1425,27 +1425,27 @@ asm void fn_800F26D4(void)
     li r20, 0x1
     bl fn_800D3FA4
     cmpwi r3, 0x0
-    bne lbl_fn_800F26D4_00001384
+    bne lbl_camera_isObjectVisible_00001384
     li r20, 0x0
-lbl_fn_800F26D4_00001384:
+lbl_camera_isObjectVisible_00001384:
     mr r3, r18
     bl fn_800F3490
     cmpwi r3, 0x0
-    beq lbl_fn_800F26D4_00001398
+    beq lbl_camera_isObjectVisible_00001398
     li r20, 0x0
-lbl_fn_800F26D4_00001398:
+lbl_camera_isObjectVisible_00001398:
     mr r3, r18
     bl fn_800F3B4C
     cmpwi r3, 0x0
-    beq lbl_fn_800F26D4_000013AC
+    beq lbl_camera_isObjectVisible_000013AC
     li r20, 0x0
-lbl_fn_800F26D4_000013AC:
+lbl_camera_isObjectVisible_000013AC:
     cmpwi r20, 0x0
-    beq lbl_fn_800F26D4_00001640
+    beq lbl_camera_isObjectVisible_00001640
     addis r3, r18, 0x1
     li r4, 0x0
     lwz r3, -0x34d0(r3)
-    bl fn_800D246C
+    bl atn_Task_setActive
     addis r4, r18, 0x1
     lwz r3, -0x34d0(r4)
     lwz r0, 0xfc(r3)
@@ -1457,9 +1457,9 @@ lbl_fn_800F26D4_000013AC:
     stw r0, 0x38(r3)
     lwz r3, -0x34a0(r4)
     cmpwi r3, 0x0
-    beq lbl_fn_800F26D4_00001420
+    beq lbl_camera_isObjectVisible_00001420
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     addis r4, r18, 0x1
     lwz r3, -0x34a0(r4)
     lwz r0, 0xfc(r3)
@@ -1469,11 +1469,11 @@ lbl_fn_800F26D4_000013AC:
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
-lbl_fn_800F26D4_00001420:
+lbl_camera_isObjectVisible_00001420:
     addis r3, r18, 0x4
     li r4, 0x0
     lwz r3, -0x1d0c(r3)
-    bl fn_800D246C
+    bl atn_Task_setActive
     addis r4, r18, 0x4
     lis r27, lbl_807C7850@ha
     lwz r3, -0x1d0c(r4)
@@ -1501,11 +1501,11 @@ lbl_fn_800F26D4_00001420:
     li r31, 0x1
     li r26, 0x0
     subi r22, r22, 0x45ac
-lbl_fn_800F26D4_0000149C:
+lbl_camera_isObjectVisible_0000149C:
     lwz r0, 0x20c(r22)
     srawi r0, r0, 24
     cmpwi r0, 0x8
-    bne lbl_fn_800F26D4_00001620
+    bne lbl_camera_isObjectVisible_00001620
     lbz r0, lbl_8087F04C
     lwz r4, 0x0(r25)
     extsb. r0, r0
@@ -1522,11 +1522,11 @@ lbl_fn_800F26D4_0000149C:
     stw r0, 0x48(r1)
     stw r21, 0x4c(r1)
     stw r26, 0x50(r1)
-    bne lbl_fn_800F26D4_000014FC
+    bne lbl_camera_isObjectVisible_000014FC
     stw r29, 0x4(r28)
     stw r30, lbl_807C7850@l(r27)
     stb r31, lbl_8087F04C
-lbl_fn_800F26D4_000014FC:
+lbl_camera_isObjectVisible_000014FC:
     lwz r6, 0x40(r1)
     addi r3, r1, 0x18
     lwz r5, 0x44(r1)
@@ -1539,7 +1539,7 @@ lbl_fn_800F26D4_000014FC:
     crclr 6
     bl fn_8008BBD8
     cmpwi r3, 0x0
-    bne lbl_fn_800F26D4_00001570
+    bne lbl_camera_isObjectVisible_00001570
     lwz r5, 0x18(r1)
     cmpwi r23, 0x0
     lwz r4, 0x1c(r1)
@@ -1549,43 +1549,43 @@ lbl_fn_800F26D4_000014FC:
     stw r4, 0xc(r1)
     stw r3, 0x10(r1)
     stw r0, 0x14(r1)
-    beq lbl_fn_800F26D4_00001568
+    beq lbl_camera_isObjectVisible_00001568
     stw r5, 0x54(r1)
     stw r4, 0x58(r1)
     stw r3, 0x5c(r1)
     stw r0, 0x60(r1)
-lbl_fn_800F26D4_00001568:
+lbl_camera_isObjectVisible_00001568:
     li r0, 0x1
-    b lbl_fn_800F26D4_00001574
-lbl_fn_800F26D4_00001570:
+    b lbl_camera_isObjectVisible_00001574
+lbl_camera_isObjectVisible_00001570:
     li r0, 0x0
-lbl_fn_800F26D4_00001574:
+lbl_camera_isObjectVisible_00001574:
     cmpwi r0, 0x0
-    beq lbl_fn_800F26D4_00001584
+    beq lbl_camera_isObjectVisible_00001584
     stw r28, 0x50(r1)
-    b lbl_fn_800F26D4_00001588
-lbl_fn_800F26D4_00001584:
+    b lbl_camera_isObjectVisible_00001588
+lbl_camera_isObjectVisible_00001584:
     stw r26, 0x50(r1)
-lbl_fn_800F26D4_00001588:
+lbl_camera_isObjectVisible_00001588:
     mr r3, r22
     addi r4, r1, 0x50
     bl fn_800F29D0
     cmpwi r24, 0x0
-    beq lbl_fn_800F26D4_000015CC
+    beq lbl_camera_isObjectVisible_000015CC
     lwz r3, 0x50(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_800F26D4_000015CC
+    beq lbl_camera_isObjectVisible_000015CC
     lwz r12, 0x0(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_800F26D4_000015C8
+    beq lbl_camera_isObjectVisible_000015C8
     addi r3, r24, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_800F26D4_000015C8:
+lbl_camera_isObjectVisible_000015C8:
     stw r26, 0x50(r1)
-lbl_fn_800F26D4_000015CC:
+lbl_camera_isObjectVisible_000015CC:
     mr r3, r22
     addi r4, r17, 0x1
     bl fn_80091CFC
@@ -1607,16 +1607,16 @@ lbl_fn_800F26D4_000015CC:
     mr r3, r22
     addi r4, r17, 0x31
     bl fn_80091CFC
-lbl_fn_800F26D4_00001620:
+lbl_camera_isObjectVisible_00001620:
     addi r19, r19, 0x1
     addi r21, r21, 0x21c
     cmplwi r19, 0x8
     addi r22, r22, 0x21c
-    blt lbl_fn_800F26D4_0000149C
+    blt lbl_camera_isObjectVisible_0000149C
     mr r3, r18
     li r4, 0x1
-    bl fn_800D246C
-lbl_fn_800F26D4_00001640:
+    bl atn_Task_setActive
+lbl_camera_isObjectVisible_00001640:
     mr r3, r20
     lmw r17, 0x74(r1)
     lwz r0, 0xb4(r1)

@@ -6,12 +6,12 @@ extern void __register_global_object(void);
 extern void fn_8003EFB0(void);
 extern void fn_80044E0C(void);
 extern void fn_800457A4(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_80097D40(void);
 extern void fn_8010C00C(void);
 extern void fn_8012B988(void);
 extern void fn_8013407C(void);
-extern void fn_8014C0B4(void);
+extern void dialog_setScriptSlot(void);
 extern void fn_8014C228(void);
 extern void fn_8014FD30(void);
 extern void fn_80206B14(void);
@@ -19,12 +19,12 @@ extern void fn_80206BE4(void);
 extern void fn_80211480(void);
 extern void fn_80211940(void);
 extern void fn_80219558(void);
-extern void fn_8044D3A0(void);
+extern void weapon_getDamageParam(void);
 extern void fn_804EB754(void);
 extern void fn_8059C088(void);
-extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F90D0(void);
+extern void PSMTXConcat(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXTrans(void);
 
 /* External data declarations */
 extern u8 lbl_80737A9C[];
@@ -250,103 +250,103 @@ lbl_fn_8014DEE4_0000029C:
     mr r3, r30
     li r4, 0x0
     li r5, 0x4
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x1
     li r5, 0x16
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x2
     li r5, 0x1c
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x3
     li r5, 0x22
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x4
     li r5, 0x2a
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x5
     li r5, 0x19d
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x6
     li r5, 0x19e
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x7
     li r5, 0x1ba
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x8
     li r5, 0x1bb
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x9
     li r5, 0x19f
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0xa
     li r5, 0x1a0
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0xb
     li r5, 0x1bc
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0xc
     li r5, 0x1bd
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0xd
     li r5, 0x1a1
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0xe
     li r5, 0x1a2
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0xf
     li r5, 0x1be
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x10
     li r5, 0x1bf
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x11
     li r5, 0x1a3
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x12
     li r5, 0x1a4
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x13
     li r5, 0x16a
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x14
     li r5, 0x16a
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x16
     li r5, 0x15c
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x15
     li r5, 0x15d
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x17
     li r5, 0x15e
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x18
     li r5, 0x15f
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     b lbl_fn_8014DEE4_000009D0
 lbl_fn_8014DEE4_00000440:
     lwz r3, 0x50(r30)
@@ -356,86 +356,86 @@ lbl_fn_8014DEE4_00000440:
     mr r3, r30
     li r4, 0x0
     li r5, 0x5
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     b lbl_fn_8014DEE4_00000474
 lbl_fn_8014DEE4_00000464:
     mr r3, r30
     li r4, 0x0
     li r5, 0x3
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
 lbl_fn_8014DEE4_00000474:
     mr r3, r30
     li r4, 0x1
     li r5, 0x15
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x2
     li r5, 0x1b
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x3
     li r5, 0x21
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x4
     li r5, 0x29
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x5
     li r5, 0x195
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x6
     li r5, 0x196
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x7
     li r5, 0x1b1
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x8
     li r5, 0x1b2
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x9
     li r5, 0x197
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0xa
     li r5, 0x198
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0xb
     li r5, 0x1b3
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0xc
     li r5, 0x1b4
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0xd
     li r5, 0x199
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0xe
     li r5, 0x19a
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0xf
     li r5, 0x1b5
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x10
     li r5, 0x1b6
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x11
     li r5, 0x19b
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x12
     li r5, 0x19c
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     lwz r3, 0x648(r30)
     lwz r3, 0x274(r3)
     lwz r0, 0x7c(r3)
@@ -444,33 +444,33 @@ lbl_fn_8014DEE4_00000474:
     mr r3, r30
     li r4, 0x13
     li r5, 0x165
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x14
     li r5, 0x165
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x16
     li r5, 0x166
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x15
     li r5, 0x167
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x17
     li r5, 0x168
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x18
     li r5, 0x169
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     b lbl_fn_8014DEE4_000009D0
 lbl_fn_8014DEE4_0000060C:
     mr r3, r30
     li r4, 0x13
     li r5, 0x156
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     addi r3, r30, 0xb0
     li r4, 0x157
     bl fn_80097D40
@@ -479,48 +479,48 @@ lbl_fn_8014DEE4_0000060C:
     mr r3, r30
     li r4, 0x14
     li r5, 0x157
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     b lbl_fn_8014DEE4_00000654
 lbl_fn_8014DEE4_00000644:
     mr r3, r30
     li r4, 0x14
     li r5, 0x156
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
 lbl_fn_8014DEE4_00000654:
     mr r3, r30
     li r4, 0x16
     li r5, 0x15c
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x15
     li r5, 0x15d
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x17
     li r5, 0x15e
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x18
     li r5, 0x15f
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     b lbl_fn_8014DEE4_000009D0
 lbl_fn_8014DEE4_00000698:
     mr r3, r30
     li r4, 0x0
     li r5, 0x0
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x1
     li r5, 0x12
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x2
     li r5, 0x18
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x3
     li r5, 0x1e
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     lwz r3, 0x50(r30)
     bl fn_80219558
     cmpwi r3, 0x0
@@ -530,189 +530,189 @@ lbl_fn_8014DEE4_00000698:
 lbl_fn_8014DEE4_000006F0:
     mr r3, r30
     li r4, 0x4
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x5
     li r5, 0x185
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x6
     li r5, 0x186
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x7
     li r5, 0x1a5
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x8
     li r5, 0x1a6
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x9
     li r5, 0x187
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0xa
     li r5, 0x188
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0xb
     li r5, 0x1a7
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0xc
     li r5, 0x1a8
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0xd
     li r5, 0x189
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0xe
     li r5, 0x18a
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0xf
     li r5, 0x1a9
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x10
     li r5, 0x1aa
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x11
     li r5, 0x18b
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x12
     li r5, 0x18c
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x13
     li r5, 0x156
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x14
     li r5, 0x156
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x16
     li r5, 0x15c
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x15
     li r5, 0x15d
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x17
     li r5, 0x15e
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x18
     li r5, 0x15f
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     b lbl_fn_8014DEE4_000009D0
 lbl_fn_8014DEE4_00000840:
     mr r3, r30
     li r4, 0x0
     li r5, 0x1
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x1
     li r5, 0x13
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x2
     li r5, 0x19
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x3
     li r5, 0x1f
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x4
     li r5, 0x27
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x5
     li r5, 0x18d
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x6
     li r5, 0x18e
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x7
     li r5, 0x1ab
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x8
     li r5, 0x1ac
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x9
     li r5, 0x18f
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0xa
     li r5, 0x190
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0xb
     li r5, 0x1ad
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0xc
     li r5, 0x1ae
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0xd
     li r5, 0x191
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0xe
     li r5, 0x192
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0xf
     li r5, 0x1af
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x10
     li r5, 0x1b0
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x11
     li r5, 0x193
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x12
     li r5, 0x194
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x13
     li r5, 0x156
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x14
     li r5, 0x156
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x16
     li r5, 0x15c
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x15
     li r5, 0x15d
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x17
     li r5, 0x15e
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x18
     li r5, 0x15f
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
 lbl_fn_8014DEE4_000009D0:
     lwz r3, 0x5c(r30)
     lwz r0, 0x11c(r3)
@@ -721,27 +721,27 @@ lbl_fn_8014DEE4_000009D0:
     mr r3, r30
     li r4, 0x19
     li r5, 0x1c4
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x1a
     li r5, 0x1c5
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x1b
     li r5, 0x1ce
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x1c
     li r5, 0x1cf
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x1d
     li r5, 0x1d0
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x1e
     li r5, 0x1d1
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     b lbl_fn_8014DEE4_00000C00
 lbl_fn_8014DEE4_00000A44:
     lwz r0, 0x690(r30)
@@ -750,27 +750,27 @@ lbl_fn_8014DEE4_00000A44:
     mr r3, r30
     li r4, 0x19
     li r5, 0x1c2
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x1a
     li r5, 0x1c3
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x1b
     li r5, 0x1ca
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x1c
     li r5, 0x1cb
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x1d
     li r5, 0x1cc
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x1e
     li r5, 0x1cd
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     b lbl_fn_8014DEE4_00000C00
 lbl_fn_8014DEE4_00000AB4:
     lwz r3, 0x648(r30)
@@ -781,27 +781,27 @@ lbl_fn_8014DEE4_00000AB4:
     mr r3, r30
     li r4, 0x19
     li r5, 0x1c4
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x1a
     li r5, 0x1c5
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x1b
     li r5, 0x1ce
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x1c
     li r5, 0x1cb
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x1d
     li r5, 0x1d0
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x1e
     li r5, 0x1d1
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     b lbl_fn_8014DEE4_00000C00
 lbl_fn_8014DEE4_00000B2C:
     lwz r3, 0x50(r30)
@@ -811,53 +811,53 @@ lbl_fn_8014DEE4_00000B2C:
     mr r3, r30
     li r4, 0x19
     li r5, 0x2
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x1a
     li r5, 0x33
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x1b
     li r5, 0x14
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x1c
     li r5, 0x14
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x1d
     li r5, 0x14
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x1e
     li r5, 0x14
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     b lbl_fn_8014DEE4_00000C00
 lbl_fn_8014DEE4_00000BA0:
     mr r3, r30
     li r4, 0x19
     li r5, 0x1c0
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x1a
     li r5, 0x1c1
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x1b
     li r5, 0x1c6
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x1c
     li r5, 0x1c7
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x1d
     li r5, 0x1c8
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x1e
     li r5, 0x1c9
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
 lbl_fn_8014DEE4_00000C00:
     mr r3, r30
     bl fn_8014FD30
@@ -870,7 +870,7 @@ lbl_fn_8014DEE4_00000C08:
     addi r4, r4, lbl_80737A9C@l
     li r5, 0x0
     addi r4, r4, 0x34f
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_8014DEE4_00000C3C
     li r0, 0x0
@@ -908,7 +908,7 @@ lbl_fn_8014DEE4_00000C48:
     addi r4, r4, lbl_80737A9C@l
     li r5, 0x0
     addi r4, r4, 0x35c
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_8014DEE4_00000CCC
     li r0, 0x0
@@ -942,7 +942,7 @@ lbl_fn_8014DEE4_00000D20:
     addi r4, r4, lbl_80737A9C@l
     li r5, 0x0
     addi r4, r4, 0x35c
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_8014DEE4_00000D48
     li r0, 0x0
@@ -977,11 +977,11 @@ lbl_fn_8014DEE4_00000D54:
     beq lbl_fn_8014DEE4_00000E00
     addi r3, r1, 0x80
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x80
     addi r5, r1, 0x50
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x50
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1002,11 +1002,11 @@ lbl_fn_8014DEE4_00000E00:
     beq lbl_fn_8014DEE4_00000E60
     addi r3, r1, 0xe0
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0xe0
     addi r5, r1, 0xb0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xb0
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1027,11 +1027,11 @@ lbl_fn_8014DEE4_00000E60:
     beq lbl_fn_8014DEE4_00000EC0
     addi r3, r1, 0x140
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x140
     addi r5, r1, 0x110
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x110
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1053,11 +1053,11 @@ lbl_fn_8014DEE4_00000EC0:
     stfs f1, 0x14(r1)
     stfs f2, 0x18(r1)
     stfs f1, 0x1c(r1)
-    bl fn_805F90D0
+    bl PSMTXTrans
     addi r3, r1, 0x20
     addi r4, r1, 0x1a0
     addi r5, r1, 0x170
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x170
     addi r4, r1, 0x20
     psq_l f1, 0x0(r3), 0, 0
@@ -1185,7 +1185,7 @@ asm void fn_8014EF48(void)
     addi r4, r4, lbl_80737A9C@l
     addi r3, r3, 0xb0
     addi r4, r4, 0x34f
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_8014EF48_000010B0
     li r0, 0x0
@@ -1223,7 +1223,7 @@ lbl_fn_8014EF48_000010BC:
     addi r4, r4, lbl_80737A9C@l
     li r5, 0x0
     addi r4, r4, 0x35c
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_8014EF48_00001140
     li r0, 0x0
@@ -1257,7 +1257,7 @@ lbl_fn_8014EF48_00001194:
     addi r4, r4, lbl_80737A9C@l
     li r5, 0x0
     addi r4, r4, 0x35c
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_8014EF48_000011BC
     li r0, 0x0
@@ -1292,11 +1292,11 @@ lbl_fn_8014EF48_000011C8:
     beq lbl_fn_8014EF48_00001274
     addi r3, r1, 0x140
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x140
     addi r5, r1, 0x170
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x170
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1317,11 +1317,11 @@ lbl_fn_8014EF48_00001274:
     beq lbl_fn_8014EF48_000012D4
     addi r3, r1, 0xe0
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0xe0
     addi r5, r1, 0x110
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x110
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1342,11 +1342,11 @@ lbl_fn_8014EF48_000012D4:
     beq lbl_fn_8014EF48_00001334
     addi r3, r1, 0x80
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x80
     addi r5, r1, 0xb0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xb0
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1368,11 +1368,11 @@ lbl_fn_8014EF48_00001334:
     stfs f1, 0x8(r1)
     stfs f2, 0xc(r1)
     stfs f1, 0x10(r1)
-    bl fn_805F90D0
+    bl PSMTXTrans
     addi r3, r1, 0x1a0
     addi r4, r1, 0x20
     addi r5, r1, 0x50
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r4, r1, 0x50
     addi r3, r1, 0x1a0
     psq_l f1, 0x0(r4), 0, 0
@@ -1471,7 +1471,7 @@ lbl_fn_8014F2B4_000014B0:
     blt lbl_fn_8014F2B4_000014DC
     lwz r5, 0x50(r30)
     mr r4, r27
-    bl fn_8044D3A0
+    bl weapon_getDamageParam
     cmpwi r3, 0x0
     blt lbl_fn_8014F2B4_000014DC
     mr r29, r3

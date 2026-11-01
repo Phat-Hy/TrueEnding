@@ -15,7 +15,7 @@ extern void fn_800CA1D4(void);
 extern void fn_800CA2FC(void);
 extern void fn_800CA3D4(void);
 extern void fn_8059E380(void);
-extern void fn_805F9940(void);
+extern void PSVECMag(void);
 extern void fn_80695B00(void);
 extern void fn_80709AD0(void);
 extern void fn_80709F20(void);
@@ -86,7 +86,7 @@ void fn_800CB14C(void);
 void fn_800CB1F4(void);
 void fn_800CB360(void);
 void fn_800CB36C(void);
-void fn_800CB3A0(void);
+void ref_releaseHandle(void);
 void fn_800CB404(void);
 void fn_800CB440(void);
 void fn_800CB480(void);
@@ -98,7 +98,7 @@ void fn_800CB518(void);
 void fn_800CB538(void);
 void fn_800CB58C(void);
 void fn_800CB5B4(void);
-void fn_800CB5C8(void);
+void morph_updateMesh(void);
 void fn_800CB640(void);
 void fn_800CB654(void);
 void fn_800CB668(void);
@@ -1122,7 +1122,7 @@ asm void fn_800CB0A0(void)
     fsubs f0, f1, f0
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f2, 0x10(r30)
     lfs f0, lbl_80881180
     fcmpo cr0, f2, f0
@@ -1174,7 +1174,7 @@ asm void fn_800CB14C(void)
     fsubs f0, f1, f0
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f2, 0x10(r30)
     lfs f0, lbl_80881180
     fcmpo cr0, f2, f0
@@ -1330,7 +1330,7 @@ lbl_fn_800CB36C_00000F54:
     blr
 }
 
-asm void fn_800CB3A0(void)
+asm void ref_releaseHandle(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1339,21 +1339,21 @@ asm void fn_800CB3A0(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    beq lbl_fn_800CB3A0_00000FC0
+    beq lbl_ref_releaseHandle_00000FC0
     lwz r6, 0x0(r3)
     cmpwi r6, 0x0
-    beq lbl_fn_800CB3A0_00000FB0
+    beq lbl_ref_releaseHandle_00000FB0
     lwz r5, 0xa4(r6)
     li r0, 0x0
     subi r5, r5, 0x1
     stw r5, 0xa4(r6)
     stw r0, 0x0(r3)
-lbl_fn_800CB3A0_00000FB0:
+lbl_ref_releaseHandle_00000FB0:
     cmpwi r4, 0x0
-    ble lbl_fn_800CB3A0_00000FC0
+    ble lbl_ref_releaseHandle_00000FC0
     mr r3, r31
     bl dtor_80084684
-lbl_fn_800CB3A0_00000FC0:
+lbl_ref_releaseHandle_00000FC0:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -1540,7 +1540,7 @@ asm void fn_800CB5B4(void)
     blr
 }
 
-asm void fn_800CB5C8(void)
+asm void morph_updateMesh(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1552,23 +1552,23 @@ asm void fn_800CB5C8(void)
     mr r30, r3
     lwz r6, 0x0(r3)
     cmpwi r6, 0x0
-    beq lbl_fn_800CB5C8_000011D4
+    beq lbl_morph_updateMesh_000011D4
     lwz r3, 0x4(r6)
     cmpwi r3, 0x0
-    beq lbl_fn_800CB5C8_000011D4
+    beq lbl_morph_updateMesh_000011D4
     bl fn_80709AD0
-lbl_fn_800CB5C8_000011D4:
+lbl_morph_updateMesh_000011D4:
     cmpwi r31, 0x0
-    bne lbl_fn_800CB5C8_000011FC
+    bne lbl_morph_updateMesh_000011FC
     lwz r4, 0x0(r30)
     cmpwi r4, 0x0
-    beq lbl_fn_800CB5C8_000011FC
+    beq lbl_morph_updateMesh_000011FC
     lwz r3, 0xa4(r4)
     li r0, 0x0
     subi r3, r3, 0x1
     stw r3, 0xa4(r4)
     stw r0, 0x0(r30)
-lbl_fn_800CB5C8_000011FC:
+lbl_morph_updateMesh_000011FC:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

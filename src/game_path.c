@@ -24,14 +24,14 @@ extern void fn_80057A68(void);
 extern void fn_80057A78(void);
 extern void fn_80063D3C(void);
 extern void fn_8006471C(void);
-extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F90D0(void);
-extern void fn_805F93C0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
-extern void fn_805F9940(void);
-extern void fn_805F9990(void);
+extern void PSMTXConcat(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXTrans(void);
+extern void PSMTXMultVec(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
+extern void PSVECMag(void);
+extern void PSVECDotProduct(void);
 
 /* External data declarations */
 extern u8 lbl_807776A0[];
@@ -50,18 +50,18 @@ extern u32 lbl_80880970;
 void fn_8005691C(void);
 void fn_80056AE8(void);
 void fn_80056DB8(void);
-void fn_80056E40(void);
+void atn_ColliBase_destructor(void);
 void fn_80056EB0(void);
-void fn_80056F30(void);
-void fn_80056F9C(void);
-void fn_80057008(void);
-void fn_80057074(void);
-void fn_80057094(void);
-void fn_80057124(void);
-void fn_80057280(void);
-void fn_800573E4(void);
-void fn_80057450(void);
-void fn_80057474(void);
+void atn_ColliSphere_testRay(void);
+void atn_ColliSphere_testSphere(void);
+void atn_ColliSphere_testCapsule(void);
+void atn_ColliSphere_testBox(void);
+void atn_ColliSphere_getAABB(void);
+void atn_ColliCapsule_testRay(void);
+void atn_ColliCapsule_testSphere(void);
+void atn_ColliCapsule_testCapsule(void);
+void atn_ColliCapsule_testBox(void);
+void atn_ColliCapsule_getAABB(void);
 void fn_800575BC(void);
 void fn_800577D8(void);
 
@@ -108,7 +108,7 @@ lbl_fn_8005691C_00000040:
     stfs f2, 0x48(r1)
     psq_st f1, 0x0(r31), 0, 0
     stfs f2, 0x3c(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f3, 0x8(r28)
     mr r3, r31
     lfs f0, 0x8(r26)
@@ -123,7 +123,7 @@ lbl_fn_8005691C_00000040:
     stfs f4, 0x2c(r1)
     stfs f0, 0x28(r1)
     stfs f6, 0x30(r1)
-    bl fn_805F9990
+    bl PSVECDotProduct
     lfs f4, 0x3c(r1)
     addi r3, r1, 0x1c
     lfs f3, 0x38(r1)
@@ -143,7 +143,7 @@ lbl_fn_8005691C_00000040:
     stfs f0, 0x1c(r1)
     stfs f3, 0x20(r1)
     stfs f4, 0x24(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fadds f0, f31, f30
     fmuls f0, f0, f0
     fcmpo cr0, f1, f0
@@ -222,7 +222,7 @@ lbl_fn_80056AE8_00000214:
     mr r4, r31
     mr r5, r31
     stfs f2, 0x84(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f9, 0x8(r24)
     addi r30, r1, 0x64
     lfs f7, 0x8(r21)
@@ -244,7 +244,7 @@ lbl_fn_80056AE8_00000214:
     stfs f2, 0x78(r1)
     psq_st f1, 0x0(r30), 0, 0
     stfs f2, 0x6c(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f7, 0x84(r1)
     mr r3, r30
     lfs f0, 0x8(r21)
@@ -259,7 +259,7 @@ lbl_fn_80056AE8_00000214:
     fsubs f0, f7, f0
     stfs f8, 0x5c(r1)
     stfs f0, 0x58(r1)
-    bl fn_805F9990
+    bl PSVECDotProduct
     lfs f8, 0x6c(r1)
     addi r3, r1, 0x4c
     lfs f7, 0x68(r1)
@@ -279,7 +279,7 @@ lbl_fn_80056AE8_00000214:
     stfs f0, 0x4c(r1)
     stfs f7, 0x50(r1)
     stfs f8, 0x54(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fadds f0, f31, f30
     fmuls f0, f0, f0
     fcmpo cr0, f1, f0
@@ -311,10 +311,10 @@ lbl_fn_80056AE8_0000033C:
     stfs f0, 0xb4(r1)
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0x48(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     mr r3, r28
     mr r4, r28
-    bl fn_805F98D0
+    bl PSVECNormalize
     addi r27, r1, 0x34
     psq_l f1, 0x0(r22), 0, 0
     lfs f2, 0x8(r22)
@@ -323,7 +323,7 @@ lbl_fn_80056AE8_0000033C:
     mr r4, r27
     mr r5, r27
     stfs f2, 0x3c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r26, r1, 0x28
     psq_l f1, 0xc(r22), 0, 0
     lfs f2, 0x14(r22)
@@ -332,7 +332,7 @@ lbl_fn_80056AE8_0000033C:
     mr r4, r26
     mr r5, r26
     stfs f2, 0x30(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r25, r1, 0x1c
     psq_l f1, 0x18(r22), 0, 0
     lfs f2, 0x20(r22)
@@ -341,7 +341,7 @@ lbl_fn_80056AE8_0000033C:
     mr r4, r25
     mr r5, r25
     stfs f2, 0x24(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     stw r28, 0x8(r1)
     fmr f1, f31
     mr r3, r20
@@ -420,7 +420,7 @@ lbl_fn_80056DB8_0000050C:
     blr
 }
 
-asm void fn_80056E40(void)
+asm void atn_ColliBase_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -431,21 +431,21 @@ asm void fn_80056E40(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_80056E40_00000578
+    beq lbl_atn_ColliBase_destructor_00000578
     lis r4, lbl_807776A0@ha
     addi r4, r4, lbl_807776A0@l
     stw r4, 0x0(r3)
     lwz r3, lbl_8087EE98
     cmpwi r3, 0x0
-    beq lbl_fn_80056E40_00000568
+    beq lbl_atn_ColliBase_destructor_00000568
     mr r4, r30
     bl fn_8004CBB0
-lbl_fn_80056E40_00000568:
+lbl_atn_ColliBase_destructor_00000568:
     cmpwi r31, 0x0
-    ble lbl_fn_80056E40_00000578
+    ble lbl_atn_ColliBase_destructor_00000578
     mr r3, r30
     bl dtor_80084684
-lbl_fn_80056E40_00000578:
+lbl_atn_ColliBase_destructor_00000578:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -495,7 +495,7 @@ lbl_fn_80056EB0_0000060C:
     blr
 }
 
-asm void fn_80056F30(void)
+asm void atn_ColliSphere_testRay(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -506,21 +506,21 @@ asm void fn_80056F30(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    ble lbl_fn_80056F30_00000664
+    ble lbl_atn_ColliSphere_testRay_00000664
     mr r3, r31
     mr r4, r6
     addi r5, r30, 0x3c
     bl fn_800523A0
     cmpwi r3, 0x0
-    beq lbl_fn_80056F30_00000664
+    beq lbl_atn_ColliSphere_testRay_00000664
     addi r0, r30, 0x1c
     stw r0, 0x34(r31)
     li r3, 0x1
     stw r30, 0x38(r31)
-    b lbl_fn_80056F30_00000668
-lbl_fn_80056F30_00000664:
+    b lbl_atn_ColliSphere_testRay_00000668
+lbl_atn_ColliSphere_testRay_00000664:
     li r3, 0x0
-lbl_fn_80056F30_00000668:
+lbl_atn_ColliSphere_testRay_00000668:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -529,7 +529,7 @@ lbl_fn_80056F30_00000668:
     blr
 }
 
-asm void fn_80056F9C(void)
+asm void atn_ColliSphere_testSphere(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -540,21 +540,21 @@ asm void fn_80056F9C(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    ble lbl_fn_80056F9C_000006D0
+    ble lbl_atn_ColliSphere_testSphere_000006D0
     mr r3, r31
     mr r4, r6
     addi r5, r30, 0x3c
     bl fn_8005361C
     cmpwi r3, 0x0
-    beq lbl_fn_80056F9C_000006D0
+    beq lbl_atn_ColliSphere_testSphere_000006D0
     addi r0, r30, 0x1c
     stw r0, 0x34(r31)
     li r3, 0x1
     stw r30, 0x38(r31)
-    b lbl_fn_80056F9C_000006D4
-lbl_fn_80056F9C_000006D0:
+    b lbl_atn_ColliSphere_testSphere_000006D4
+lbl_atn_ColliSphere_testSphere_000006D0:
     li r3, 0x0
-lbl_fn_80056F9C_000006D4:
+lbl_atn_ColliSphere_testSphere_000006D4:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -563,7 +563,7 @@ lbl_fn_80056F9C_000006D4:
     blr
 }
 
-asm void fn_80057008(void)
+asm void atn_ColliSphere_testCapsule(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -574,21 +574,21 @@ asm void fn_80057008(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    ble lbl_fn_80057008_0000073C
+    ble lbl_atn_ColliSphere_testCapsule_0000073C
     mr r3, r31
     mr r4, r6
     addi r5, r30, 0x3c
     bl fn_800551BC
     cmpwi r3, 0x0
-    beq lbl_fn_80057008_0000073C
+    beq lbl_atn_ColliSphere_testCapsule_0000073C
     addi r0, r30, 0x1c
     stw r0, 0x34(r31)
     li r3, 0x1
     stw r30, 0x38(r31)
-    b lbl_fn_80057008_00000740
-lbl_fn_80057008_0000073C:
+    b lbl_atn_ColliSphere_testCapsule_00000740
+lbl_atn_ColliSphere_testCapsule_0000073C:
     li r3, 0x0
-lbl_fn_80057008_00000740:
+lbl_atn_ColliSphere_testCapsule_00000740:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -597,7 +597,7 @@ lbl_fn_80057008_00000740:
     blr
 }
 
-asm void fn_80057074(void)
+asm void atn_ColliSphere_testBox(void)
 {
     nofralloc
     mr r6, r3
@@ -610,7 +610,7 @@ asm void fn_80057074(void)
     b fn_80063D3C
 }
 
-asm void fn_80057094(void)
+asm void atn_ColliSphere_getAABB(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -651,7 +651,7 @@ asm void fn_80057094(void)
     blr
 }
 
-asm void fn_80057124(void)
+asm void atn_ColliCapsule_testRay(void)
 {
     nofralloc
     stwu r1, -0x40(r1)
@@ -665,20 +665,20 @@ asm void fn_80057124(void)
     mr r29, r4
     stw r28, 0x30(r1)
     mr r28, r3
-    ble lbl_fn_80057124_00000940
+    ble lbl_atn_ColliCapsule_testRay_00000940
     lwz r0, 0x8(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_80057124_00000868
+    bne lbl_atn_ColliCapsule_testRay_00000868
     lfs f4, lbl_80880968
     lfs f3, 0x54(r3)
     lfs f0, 0xc(r6)
     fmuls f3, f4, f3
     fcmpo cr0, f3, f0
-    bge lbl_fn_80057124_00000868
+    bge lbl_atn_ColliCapsule_testRay_00000868
     li r3, 0x0
-    b lbl_fn_80057124_00000944
-lbl_fn_80057124_00000868:
+    b lbl_atn_ColliCapsule_testRay_00000944
+lbl_atn_ColliCapsule_testRay_00000868:
     psq_l f1, 0x3c(r3), 0, 0
     addi r31, r1, 0x14
     lfs f2, 0x44(r3)
@@ -694,7 +694,7 @@ lbl_fn_80057124_00000868:
     clrrwi r3, r0, 31
     addis r0, r3, 0x8000
     cmplwi r0, 0x0
-    bne lbl_fn_80057124_00000914
+    bne lbl_atn_ColliCapsule_testRay_00000914
     frsp f5, f2
     lfs f4, 0x1c(r1)
     lfs f3, 0x24(r1)
@@ -708,7 +708,7 @@ lbl_fn_80057124_00000868:
     fsubs f0, f3, f0
     stfs f4, 0x10(r1)
     stfs f0, 0x8(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fmr f3, f1
     lfs f0, lbl_8088096C
     lfs f2, 0x1c(r1)
@@ -717,27 +717,27 @@ lbl_fn_80057124_00000868:
     fcmpo cr0, f3, f0
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x28(r1)
-    bge lbl_fn_80057124_00000908
+    bge lbl_atn_ColliCapsule_testRay_00000908
     fmr f3, f0
-lbl_fn_80057124_00000908:
+lbl_atn_ColliCapsule_testRay_00000908:
     lfs f0, 0x24(r1)
     fadds f0, f0, f3
     stfs f0, 0x24(r1)
-lbl_fn_80057124_00000914:
+lbl_atn_ColliCapsule_testRay_00000914:
     mr r3, r29
     mr r4, r30
     addi r5, r1, 0x14
     bl fn_8005256C
     cmpwi r3, 0x0
-    beq lbl_fn_80057124_00000940
+    beq lbl_atn_ColliCapsule_testRay_00000940
     addi r0, r28, 0x1c
     stw r0, 0x34(r29)
     li r3, 0x1
     stw r28, 0x38(r29)
-    b lbl_fn_80057124_00000944
-lbl_fn_80057124_00000940:
+    b lbl_atn_ColliCapsule_testRay_00000944
+lbl_atn_ColliCapsule_testRay_00000940:
     li r3, 0x0
-lbl_fn_80057124_00000944:
+lbl_atn_ColliCapsule_testRay_00000944:
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     lwz r30, 0x38(r1)
@@ -748,7 +748,7 @@ lbl_fn_80057124_00000944:
     blr
 }
 
-asm void fn_80057280(void)
+asm void atn_ColliCapsule_testSphere(void)
 {
     nofralloc
     stwu r1, -0x40(r1)
@@ -762,16 +762,16 @@ asm void fn_80057280(void)
     mr r29, r4
     stw r28, 0x30(r1)
     mr r28, r3
-    ble lbl_fn_80057280_00000AA4
+    ble lbl_atn_ColliCapsule_testSphere_00000AA4
     rlwinm r4, r7, 0, 8, 8
     subis r0, r4, 0x80
     cmplwi r0, 0x0
-    bne lbl_fn_80057280_00000A78
+    bne lbl_atn_ColliCapsule_testSphere_00000A78
     lwz r0, 0x8(r3)
     clrrwi r4, r0, 31
     addis r0, r4, 0x8000
     cmplwi r0, 0x0
-    bne lbl_fn_80057280_00000A78
+    bne lbl_atn_ColliCapsule_testSphere_00000A78
     lfs f2, 0x44(r3)
     addi r31, r1, 0x14
     psq_l f1, 0x3c(r3), 0, 0
@@ -795,7 +795,7 @@ asm void fn_80057280(void)
     stfs f6, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f5, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fmr f3, f1
     lfs f0, lbl_8088096C
     lfs f2, 0x1c(r1)
@@ -804,9 +804,9 @@ asm void fn_80057280(void)
     fcmpo cr0, f3, f0
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x28(r1)
-    bge lbl_fn_80057280_00000A40
+    bge lbl_atn_ColliCapsule_testSphere_00000A40
     fmr f3, f0
-lbl_fn_80057280_00000A40:
+lbl_atn_ColliCapsule_testSphere_00000A40:
     lfs f0, 0x24(r1)
     mr r3, r29
     mr r4, r30
@@ -815,27 +815,27 @@ lbl_fn_80057280_00000A40:
     stfs f0, 0x24(r1)
     bl fn_80053BD0
     cmpwi r3, 0x0
-    beq lbl_fn_80057280_00000AA4
+    beq lbl_atn_ColliCapsule_testSphere_00000AA4
     addi r0, r28, 0x1c
     stw r0, 0x34(r29)
     li r3, 0x1
     stw r28, 0x38(r29)
-    b lbl_fn_80057280_00000AA8
-lbl_fn_80057280_00000A78:
+    b lbl_atn_ColliCapsule_testSphere_00000AA8
+lbl_atn_ColliCapsule_testSphere_00000A78:
     mr r3, r29
     mr r4, r30
     addi r5, r28, 0x3c
     bl fn_80053BD0
     cmpwi r3, 0x0
-    beq lbl_fn_80057280_00000AA4
+    beq lbl_atn_ColliCapsule_testSphere_00000AA4
     addi r0, r28, 0x1c
     stw r0, 0x34(r29)
     li r3, 0x1
     stw r28, 0x38(r29)
-    b lbl_fn_80057280_00000AA8
-lbl_fn_80057280_00000AA4:
+    b lbl_atn_ColliCapsule_testSphere_00000AA8
+lbl_atn_ColliCapsule_testSphere_00000AA4:
     li r3, 0x0
-lbl_fn_80057280_00000AA8:
+lbl_atn_ColliCapsule_testSphere_00000AA8:
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     lwz r30, 0x38(r1)
@@ -846,7 +846,7 @@ lbl_fn_80057280_00000AA8:
     blr
 }
 
-asm void fn_800573E4(void)
+asm void atn_ColliCapsule_testCapsule(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -857,21 +857,21 @@ asm void fn_800573E4(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    ble lbl_fn_800573E4_00000B18
+    ble lbl_atn_ColliCapsule_testCapsule_00000B18
     mr r3, r31
     mr r4, r6
     addi r5, r30, 0x3c
     bl fn_80055810
     cmpwi r3, 0x0
-    beq lbl_fn_800573E4_00000B18
+    beq lbl_atn_ColliCapsule_testCapsule_00000B18
     addi r0, r30, 0x1c
     stw r0, 0x34(r31)
     li r3, 0x1
     stw r30, 0x38(r31)
-    b lbl_fn_800573E4_00000B1C
-lbl_fn_800573E4_00000B18:
+    b lbl_atn_ColliCapsule_testCapsule_00000B1C
+lbl_atn_ColliCapsule_testCapsule_00000B18:
     li r3, 0x0
-lbl_fn_800573E4_00000B1C:
+lbl_atn_ColliCapsule_testCapsule_00000B1C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -880,7 +880,7 @@ lbl_fn_800573E4_00000B1C:
     blr
 }
 
-asm void fn_80057450(void)
+asm void atn_ColliCapsule_testBox(void)
 {
     nofralloc
     mr r5, r3
@@ -894,7 +894,7 @@ asm void fn_80057450(void)
     b fn_8006471C
 }
 
-asm void fn_80057474(void)
+asm void atn_ColliCapsule_getAABB(void)
 {
     nofralloc
     stwu r1, -0x80(r1)
@@ -961,7 +961,7 @@ asm void fn_80057474(void)
     stfs f1, 0x8(r1)
     stfs f5, 0xc(r1)
     stfs f0, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f2, 0x54(r30)
     lfs f0, 0x1c(r31)
     fadds f1, f2, f1
@@ -996,7 +996,7 @@ asm void fn_800575BC(void)
     lfs f3, 0x8(r4)
     mr r29, r6
     addi r3, r1, 0x188
-    bl fn_805F90D0
+    bl PSMTXTrans
     lfs f7, lbl_80880960
     addi r31, r1, 0x188
     lfs f1, 0x8(r28)
@@ -1018,11 +1018,11 @@ asm void fn_800575BC(void)
     beq lbl_fn_800575BC_00000D70
     addi r3, r1, 0x128
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x128
     addi r5, r1, 0x158
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x158
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1043,11 +1043,11 @@ lbl_fn_800575BC_00000D70:
     beq lbl_fn_800575BC_00000DD0
     addi r3, r1, 0xc8
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0xc8
     addi r5, r1, 0xf8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xf8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1068,11 +1068,11 @@ lbl_fn_800575BC_00000DD0:
     beq lbl_fn_800575BC_00000E30
     addi r3, r1, 0x68
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x68
     addi r5, r1, 0x98
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x98
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1090,7 +1090,7 @@ lbl_fn_800575BC_00000E30:
     mr r3, r31
     mr r4, r30
     addi r5, r1, 0x8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r4, r1, 0x8
     mr r3, r27
     psq_l f1, 0x0(r4), 0, 0

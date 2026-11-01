@@ -12,9 +12,9 @@ extern void fn_80011410(void);
 extern void fn_800133B0(void);
 extern void fn_80013404(void);
 extern void fn_80057A68(void);
-extern void fn_800846FC(void);
-extern void fn_80084C24(void);
-extern void fn_80092814(void);
+extern void mem_realloc(void);
+extern void mem_getAllocSize(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_80094E2C(void);
 extern void fn_8010F668(void);
 extern void fn_8012A288(void);
@@ -35,11 +35,11 @@ extern void fn_8014989C(void);
 extern void fn_801498D8(void);
 extern void fn_801498F0(void);
 extern void fn_80565B9C(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9190(void);
-extern void fn_805F93C0(void);
-extern void fn_80682428(void);
-extern void fn_80695720(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXQuat(void);
+extern void PSMTXMultVec(void);
+extern void strcmp(void);
+extern void runtime_registerStaticObject(void);
 
 /* External data declarations */
 extern u8 lbl_80737A9C[];
@@ -88,7 +88,7 @@ void fn_80148340(void);
 void fn_80148990(void);
 void fn_801489CC(void);
 void fn_80148B0C(void);
-void fn_80148B38(void);
+void quest_checkCondition(void);
 void fn_80148CC4(void);
 
 asm void fn_801479D8(void)
@@ -121,7 +121,7 @@ asm void fn_80147A00(void)
 asm void fn_80147A08(void)
 {
     nofralloc
-    b fn_805F9190
+    b PSMTXQuat
 }
 
 asm void fn_80147A0C(void)
@@ -398,11 +398,11 @@ lbl_fn_80147B04_000003B0:
     stfs f0, 0xc4(r1)
     lfs f1, 0x538(r3)
     addi r3, r1, 0x198
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0xbc
     addi r3, r1, 0x198
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f3, 0xc8(r1)
     lfs f0, 0xbc(r1)
     lfs f5, 0xcc(r1)
@@ -425,11 +425,11 @@ lbl_fn_80147B04_00000418:
     stfs f0, 0xb8(r1)
     lfs f1, 0x538(r3)
     addi r3, r1, 0x168
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0xb0
     addi r3, r1, 0x168
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f3, 0xc8(r1)
     lfs f0, 0xb0(r1)
     lfs f5, 0xcc(r1)
@@ -459,11 +459,11 @@ lbl_fn_80147B04_00000494:
     stfs f0, 0xac(r1)
     lfs f1, 0x538(r3)
     addi r3, r1, 0x138
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0xa4
     addi r3, r1, 0x138
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f3, 0xc8(r1)
     lfs f0, 0xa4(r1)
     lfs f5, 0xcc(r1)
@@ -488,7 +488,7 @@ lbl_fn_80147B04_000004F8:
     addi r4, r4, lbl_80737A9C@l
     li r5, 0x0
     addi r4, r4, 0x32d
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80147B04_00000538
     li r30, 0x0
@@ -503,7 +503,7 @@ lbl_fn_80147B04_00000544:
     addi r4, r4, lbl_80737A9C@l
     li r5, 0x0
     addi r4, r4, 0x335
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80147B04_0000056C
     li r29, 0x0
@@ -518,7 +518,7 @@ lbl_fn_80147B04_00000578:
     addi r4, r4, lbl_80737A9C@l
     li r5, 0x0
     addi r4, r4, 0x60
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80147B04_000005A0
     li r5, 0x0
@@ -627,11 +627,11 @@ lbl_fn_80147B04_00000694:
     lfs f1, 0x538(r31)
     stfs f4, 0x98(r1)
     stfs f0, 0xa0(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x20
     addi r3, r1, 0x108
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f0, 0x28(r1)
     addi r3, r1, 0xd8
     lfs f6, lbl_808819B0
@@ -659,11 +659,11 @@ lbl_fn_80147B04_00000694:
     stfs f6, 0xc8(r1)
     stfs f5, 0xcc(r1)
     stfs f4, 0xd0(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x8
     addi r3, r1, 0xd8
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f5, 0x10(r1)
     lfs f4, lbl_808819B0
     lfs f3, 0xc(r1)
@@ -707,7 +707,7 @@ lbl_fn_80147B04_0000083C:
     addi r4, r4, lbl_80737A9C@l
     li r5, 0x0
     addi r4, r4, 0x60
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80147B04_00000874
     li r3, 0x0
@@ -804,7 +804,7 @@ asm void fn_80148340(void)
     beq lbl_fn_80148340_000009B0
     beq lbl_fn_80148340_000009A8
     subi r3, r4, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80148340_000009A8:
     li r0, 0x0
     stw r0, 0x62c(r31)
@@ -818,13 +818,13 @@ lbl_fn_80148340_000009B0:
     la r5, lbl_8087D9E4
     la r6, lbl_8087D9E0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     li r5, 0x0
     addi r4, r4, fn_80148990@l
     li r6, 0x14
     li r7, 0x1
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -914,7 +914,7 @@ lbl_fn_80148340_00000B30:
     cmpwi r3, 0x0
     beq lbl_fn_80148340_00000B44
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80148340_00000B44:
     stw r29, 0x62c(r31)
     stw r30, 0x628(r31)
@@ -979,13 +979,13 @@ lbl_fn_80148340_00000C0C:
     la r5, lbl_8087D9E4
     la r6, lbl_8087D9E0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     li r5, 0x0
     addi r4, r4, fn_80148990@l
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -1075,7 +1075,7 @@ lbl_fn_80148340_00000D8C:
     cmpwi r3, 0x0
     beq lbl_fn_80148340_00000DA0
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80148340_00000DA0:
     stw r29, 0x62c(r31)
     stw r30, 0x628(r31)
@@ -1093,13 +1093,13 @@ lbl_fn_80148340_00000DAC:
     la r6, lbl_8087D9E0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     mr r7, r30
     addi r4, r4, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -1189,7 +1189,7 @@ lbl_fn_80148340_00000F38:
     cmpwi r3, 0x0
     beq lbl_fn_80148340_00000F4C
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80148340_00000F4C:
     stw r29, 0x62c(r31)
     stw r30, 0x628(r31)
@@ -1300,7 +1300,7 @@ lbl_fn_801489CC_000010A0:
     addi r4, r4, lbl_80737A9C@l
     addi r3, r3, 0xb0
     addi r4, r4, 0x60
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_801489CC_000010E0
     li r4, 0x0
@@ -1348,7 +1348,7 @@ lbl_fn_80148B0C_00001158:
     blr
 }
 
-asm void fn_80148B38(void)
+asm void quest_checkCondition(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1360,38 +1360,38 @@ asm void fn_80148B38(void)
     stw r29, 0x14(r1)
     lwz r4, 0x648(r3)
     cmpwi r4, 0x0
-    beq lbl_fn_80148B38_00001268
+    beq lbl_quest_checkCondition_00001268
     lwz r0, 0x4(r4)
     cmpwi r0, 0x1
-    bne lbl_fn_80148B38_000011F0
+    bne lbl_quest_checkCondition_000011F0
     lwz r0, 0x2dc(r3)
     lis r4, lbl_80737A9C@ha
     addi r4, r4, lbl_80737A9C@l
     cmpwi r0, 0x26
     addi r4, r4, 0x34f
-    beq lbl_fn_80148B38_000011B4
+    beq lbl_quest_checkCondition_000011B4
     cmpwi r0, 0x17e
-    bne lbl_fn_80148B38_000011C0
-lbl_fn_80148B38_000011B4:
+    bne lbl_quest_checkCondition_000011C0
+lbl_quest_checkCondition_000011B4:
     lis r4, lbl_80737A9C@ha
     addi r4, r4, lbl_80737A9C@l
     addi r4, r4, 0x35c
-lbl_fn_80148B38_000011C0:
+lbl_quest_checkCondition_000011C0:
     li r5, 0x0
     addi r3, r3, 0xb0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
-    bge lbl_fn_80148B38_000011DC
+    bge lbl_quest_checkCondition_000011DC
     li r0, 0x0
-    b lbl_fn_80148B38_000011E8
-lbl_fn_80148B38_000011DC:
+    b lbl_quest_checkCondition_000011E8
+lbl_quest_checkCondition_000011DC:
     mulli r0, r3, 0x30
     lwz r3, 0xec(r31)
     add r0, r3, r0
-lbl_fn_80148B38_000011E8:
+lbl_quest_checkCondition_000011E8:
     lwz r3, 0x648(r31)
     stw r0, 0x224(r3)
-lbl_fn_80148B38_000011F0:
+lbl_quest_checkCondition_000011F0:
     lwz r3, 0x648(r31)
     lfs f0, 0xf0(r31)
     stfs f0, 0x50(r3)
@@ -1408,7 +1408,7 @@ lbl_fn_80148B38_000011F0:
     bctrl
     lwz r3, 0x64c(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_80148B38_00001268
+    beq lbl_quest_checkCondition_00001268
     lfs f0, 0xf0(r31)
     stfs f0, 0x50(r3)
     lfs f0, 0xf4(r31)
@@ -1422,38 +1422,38 @@ lbl_fn_80148B38_000011F0:
     lwz r12, 0x10(r12)
     mtctr r12
     bctrl
-lbl_fn_80148B38_00001268:
+lbl_quest_checkCondition_00001268:
     addi r30, r31, 0x680
     li r29, 0x0
-lbl_fn_80148B38_00001270:
+lbl_quest_checkCondition_00001270:
     lwz r3, 0x0(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_80148B38_00001280
+    beq lbl_quest_checkCondition_00001280
     bl fn_80565B9C
-lbl_fn_80148B38_00001280:
+lbl_quest_checkCondition_00001280:
     addi r29, r29, 0x1
     addi r30, r30, 0x4
     cmplwi r29, 0x8
-    blt lbl_fn_80148B38_00001270
+    blt lbl_quest_checkCondition_00001270
     mr r30, r31
     li r29, 0x0
-    b lbl_fn_80148B38_000012C4
-lbl_fn_80148B38_0000129C:
+    b lbl_quest_checkCondition_000012C4
+lbl_quest_checkCondition_0000129C:
     lwz r3, 0x6a8(r30)
     lwz r0, 0x3dc(r3)
     srawi. r0, r0, 31
-    beq lbl_fn_80148B38_000012BC
+    beq lbl_quest_checkCondition_000012BC
     lwz r12, 0x0(r3)
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_80148B38_000012BC:
+lbl_quest_checkCondition_000012BC:
     addi r30, r30, 0x4
     addi r29, r29, 0x1
-lbl_fn_80148B38_000012C4:
+lbl_quest_checkCondition_000012C4:
     lwz r0, 0x6a4(r31)
     cmplw r29, r0
-    blt lbl_fn_80148B38_0000129C
+    blt lbl_quest_checkCondition_0000129C
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -1495,7 +1495,7 @@ asm void fn_80148CC4(void)
     addi r29, r29, lbl_80737A9C@l
     mr r3, r28
     addi r4, r29, 0x5b
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80148CC4_0000149C
     lwz r3, 0x648(r30)
@@ -1582,7 +1582,7 @@ lbl_fn_80148CC4_00001478:
 lbl_fn_80148CC4_0000149C:
     mr r3, r28
     addi r4, r29, 0x6c
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80148CC4_000015A8
     lwz r3, 0x12a4(r30)
@@ -1654,7 +1654,7 @@ lbl_fn_80148CC4_0000154C:
 lbl_fn_80148CC4_000015A8:
     mr r3, r28
     addi r4, r29, 0x60
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80148CC4_000016D8
     lwz r0, 0x12a4(r30)
@@ -1736,12 +1736,12 @@ lbl_fn_80148CC4_000016AC:
 lbl_fn_80148CC4_000016D8:
     mr r3, r28
     addi r4, r29, 0x72
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_80148CC4_00001700
     mr r3, r28
     addi r4, r29, 0x80
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80148CC4_000019B0
 lbl_fn_80148CC4_00001700:
@@ -1780,7 +1780,7 @@ lbl_fn_80148CC4_00001770:
     addi r4, r4, lbl_80737A9C@l
     lwz r3, 0x10(r27)
     addi r4, r4, 0x80
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80148CC4_000017D4
     lfs f0, lbl_8088196C
@@ -1839,7 +1839,7 @@ lbl_fn_80148CC4_00001850:
     lwz r3, 0x10(r27)
     addi r4, r4, lbl_80737A9C@l
     addi r4, r4, 0x80
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80148CC4_00001BE8
     addi r3, r1, 0xe8
@@ -1912,7 +1912,7 @@ lbl_fn_80148CC4_00001958:
     addi r4, r4, lbl_80737A9C@l
     lwz r3, 0x10(r27)
     addi r4, r4, 0x80
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80148CC4_00001984
     fneg f1, f30
@@ -1933,7 +1933,7 @@ lbl_fn_80148CC4_00001984:
 lbl_fn_80148CC4_000019B0:
     mr r3, r28
     addi r4, r29, 0xad
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80148CC4_00001BE8
     lwz r3, 0x12a8(r30)
@@ -1944,12 +1944,12 @@ lbl_fn_80148CC4_000019B0:
     addi r3, r30, 0xb0
     addi r4, r29, 0x5b
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     mr r28, r3
     addi r3, r30, 0xb0
     addi r4, r29, 0x56
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r28, 0x0
     mr r29, r3
     blt lbl_fn_80148CC4_00001BE8

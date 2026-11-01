@@ -10,15 +10,15 @@ extern void _savegpr_21(void);
 extern void _savegpr_22(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_805D2E00(void);
 extern void fn_805D9D10(void);
 extern void fn_805D9D80(void);
 extern void fn_805D9DF0(void);
 extern void fn_805D9E10(void);
-extern void fn_805F8CA0(void);
-extern void fn_805F90D0(void);
-extern void fn_805F93C0(void);
+extern void PSMTXInverse(void);
+extern void PSMTXTrans(void);
+extern void PSMTXMultVec(void);
 extern void fn_80612E80(void);
 extern void fn_806134E0(void);
 extern void fn_80613520(void);
@@ -30,9 +30,9 @@ extern void fn_80615D20(void);
 extern void fn_80615D50(void);
 extern void fn_80617340(void);
 extern void fn_80617880(void);
-extern void fn_806179E0(void);
+extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
-extern void fn_80618350(void);
+extern void GXLoadPosMtxImm(void);
 extern void fn_8061A0F0(void);
 extern void fn_8061A100(void);
 
@@ -607,7 +607,7 @@ asm void fn_805C03A0(void)
     li r3, 0x0
     bl fn_80613BB0
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0x4
     bl fn_80617340
@@ -626,10 +626,10 @@ asm void fn_805C03A0(void)
     lfs f1, lbl_80764140@l(r4)
     fmr f2, f1
     fmr f3, f1
-    bl fn_805F90D0
+    bl PSMTXTrans
     addi r3, r1, 0x8
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     mr r3, r30
     li r4, 0x0
     bl fn_806149C0
@@ -1017,7 +1017,7 @@ lbl_fn_805C0980_00000C14:
     b lbl_fn_805C0980_00000C48
 lbl_fn_805C0980_00000C24:
     li r3, 0x10
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_805C0980_00000C3C
     stw r31, 0x0(r3)
@@ -1599,7 +1599,7 @@ lbl_fn_805C10E0_000013B4:
     b lbl_fn_805C10E0_00001430
 lbl_fn_805C10E0_000013CC:
     li r3, 0x30
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_805C10E0_00001410
@@ -1617,7 +1617,7 @@ lbl_fn_805C10E0_000013CC:
     stw r24, 0x2c(r29)
 lbl_fn_805C10E0_00001410:
     li r3, 0x10
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_805C10E0_0000142C
     subi r0, r27, 0x4
@@ -1983,7 +1983,7 @@ lbl_fn_805C1630_000018BC:
     lwz r3, 0x2c(r30)
     addi r4, r1, 0x38
     addi r3, r3, 0x84
-    bl fn_805F8CA0
+    bl PSMTXInverse
     lis r3, lbl_80764140@ha
     stfs f30, 0x8(r1)
     lfs f0, lbl_80764140@l(r3)
@@ -1992,7 +1992,7 @@ lbl_fn_805C1630_000018BC:
     addi r4, r1, 0x8
     addi r5, r1, 0x28
     stfs f0, 0x10(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lwz r4, 0x2c(r30)
     mr r5, r31
     addi r3, r1, 0x18

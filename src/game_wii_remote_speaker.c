@@ -17,7 +17,7 @@ extern void fn_80012540(void);
 extern void fn_8001296C(void);
 extern void fn_80012D34(void);
 extern void fn_80013530(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_800928B0(void);
 extern void fn_8048B3B8(void);
 extern void fn_8048BD04(void);
@@ -28,12 +28,12 @@ extern void fn_805381F4(void);
 extern void fn_80538DC8(void);
 extern void fn_80541BDC(void);
 extern void fn_80551198(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9750(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9940(void);
-extern void fn_80680CF8(void);
-extern void fn_8068AEA4(void);
+extern void PSMTXRotRad(void);
+extern void PSMTX44Identity(void);
+extern void PSVECNormalize(void);
+extern void PSVECMag(void);
+extern void rand(void);
+extern void std_atan2(void);
 
 /* External data declarations */
 extern u8 lbl_8075E850[];
@@ -693,7 +693,7 @@ lbl_fn_80553A78_00000828:
     fabs f0, f0
     stfs f2, 0x10(r1)
     frsp f31, f0
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x24(r1)
     lis r28, lbl_8075E850@ha
@@ -707,7 +707,7 @@ lbl_fn_80553A78_00000828:
     fmuls f0, f0, f3
     fsubs f0, f0, f28
     stfs f0, 0x8(r1)
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x2c(r1)
     lfs f0, lbl_80887E58
@@ -1263,13 +1263,13 @@ lbl_fn_8055408C_00000FCC:
     fsubs f0, f3, f0
     stfs f4, 0x120(r1)
     stfs f0, 0x11c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, lbl_80887E30
     fcmpo cr0, f1, f0
     ble lbl_fn_8055408C_000013F8
     addi r3, r1, 0x11c
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x124(r1)
     addi r3, r1, 0x11c
     lfs f0, lbl_80887E3C
@@ -1295,7 +1295,7 @@ lbl_fn_8055408C_000010AC:
 lbl_fn_8055408C_000010B4:
     frsp f2, f2
     lfs f1, 0x110(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x90(r1)
 lbl_fn_8055408C_000010C8:
@@ -1303,7 +1303,7 @@ lbl_fn_8055408C_000010C8:
     addi r3, r1, 0x1f0
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80887E30
     addi r4, r1, 0x80
     lfs f29, 0x1f8(r1)
@@ -1353,7 +1353,7 @@ lbl_fn_8055408C_000010C8:
     stfs f6, 0x24c(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x88(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x88(r1)
     lfs f0, lbl_80887E3C
     fabs f3, f2
@@ -1374,7 +1374,7 @@ lbl_fn_8055408C_000011D8:
     b lbl_fn_8055408C_000011F8
 lbl_fn_8055408C_000011E4:
     lfs f1, 0x84(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x8c(r1)
@@ -1413,7 +1413,7 @@ lbl_fn_8055408C_00001264:
 lbl_fn_8055408C_0000126C:
     frsp f2, f2
     lfs f1, 0x104(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_8055408C_00001280:
@@ -1421,7 +1421,7 @@ lbl_fn_8055408C_00001280:
     addi r3, r1, 0x180
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80887E30
     addi r4, r1, 0x38
     lfs f30, 0x188(r1)
@@ -1471,7 +1471,7 @@ lbl_fn_8055408C_00001280:
     stfs f6, 0x1dc(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_80887E3C
     fabs f3, f2
@@ -1492,7 +1492,7 @@ lbl_fn_8055408C_00001390:
     b lbl_fn_8055408C_000013B0
 lbl_fn_8055408C_0000139C:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -1540,7 +1540,7 @@ lbl_fn_8055408C_0000141C:
     stfs f3, 0xf0(r1)
     stfs f0, 0xec(r1)
     stfs f4, 0xf4(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, lbl_80887E30
     fmr f29, f1
     fcmpo cr0, f1, f0
@@ -1548,7 +1548,7 @@ lbl_fn_8055408C_0000141C:
     fmuls f29, f1, f30
     addi r3, r1, 0xec
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_8055408C_00001478:
     lfs f0, 0xf4(r1)
     addi r4, r1, 0xa4
@@ -1812,7 +1812,7 @@ lbl_fn_805549EC_000017F4:
     fmuls f0, f0, f1
     fabs f0, f0
     frsp f29, f0
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x14(r1)
     lis r28, lbl_8075E850@ha
@@ -1825,7 +1825,7 @@ lbl_fn_805549EC_000017F4:
     fdivs f1, f2, f1
     fmuls f0, f0, f1
     fsubs f29, f0, f29
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0xc(r1)
     lfs f1, lbl_80887E58
@@ -2031,7 +2031,7 @@ lbl_fn_80554DF0_00001AC4:
     mr r30, r3
     mr r4, r29
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80554DF0_00001B20
     li r28, 0x0
@@ -2049,7 +2049,7 @@ lbl_fn_80554DF0_00001B2C:
     mr r29, r3
     mr r4, r30
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80554DF0_00001B60
     li r4, 0x0
@@ -2090,7 +2090,7 @@ lbl_fn_80554DF0_00001B6C:
     stfs f12, 0x20(r1)
     stfs f0, 0x24(r1)
     stfs f11, 0x28(r1)
-    bl fn_805F9940
+    bl PSVECMag
     addi r4, r1, 0x50
     lfs f2, 0x58(r1)
     addi r3, r1, 0x5c

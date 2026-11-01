@@ -9,18 +9,18 @@ extern void fn_8006A900(void);
 extern void fn_8006EF48(void);
 extern void fn_8006F2F0(void);
 extern void fn_800827E0(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_80084F84(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
-extern void fn_800D246C(void);
+extern void ref_releaseHandle(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800DD3FC(void);
 extern void fn_800E426C(void);
 extern void fn_800E4278(void);
-extern void fn_801231D0(void);
-extern void fn_80149A30(void);
+extern void magic_dispatchActionCommand(void);
+extern void dialog_renderWindow(void);
 extern void fn_8014DEE4(void);
 extern void fn_8016EB48(void);
 extern void fn_801E9EA4(void);
@@ -30,7 +30,7 @@ extern void fn_80360B00(void);
 extern void fn_8036CFA4(void);
 extern void fn_8036D2D0(void);
 extern void fn_8036FC58(void);
-extern void fn_80370320(void);
+extern void world_setGlobalFlag(void);
 extern void fn_8037C69C(void);
 extern void fn_8037EF30(void);
 extern void fn_80389838(void);
@@ -47,8 +47,8 @@ extern void fn_80541214(void);
 extern void fn_8054A340(void);
 extern void fn_8056BF90(void);
 extern void fn_8056F2FC(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -97,7 +97,7 @@ extern u32 lbl_80885794;
 void fn_8036B438(void);
 void fn_8036B44C(void);
 void fn_8036B748(void);
-void fn_8036B7F4(void);
+void world_Manager_postUpdate(void);
 void fn_8036CA60(void);
 void fn_8036CC90(void);
 
@@ -389,7 +389,7 @@ lbl_fn_8036B748_000003A8:
     blr
 }
 
-asm void fn_8036B7F4(void)
+asm void world_Manager_postUpdate(void)
 {
     nofralloc
     stwu r1, -0x610(r1)
@@ -416,38 +416,38 @@ asm void fn_8036B7F4(void)
     lwz r4, 0x184(r4)
     stw r0, 0x588(r1)
     cmpwi r4, 0x0
-    beq lbl_fn_8036B7F4_00000AB0
+    beq lbl_world_Manager_postUpdate_00000AB0
     lwz r4, lbl_8087EEB0
     li r0, 0x13
     lfs f31, lbl_80885770
     stw r0, 0xa0(r4)
     lwz r4, 0x10d8(r3)
     cmpwi r4, 0x0
-    beq lbl_fn_8036B7F4_00000444
+    beq lbl_world_Manager_postUpdate_00000444
     lwz r0, 0x64(r4)
-    b lbl_fn_8036B7F4_00000448
-lbl_fn_8036B7F4_00000444:
+    b lbl_world_Manager_postUpdate_00000448
+lbl_world_Manager_postUpdate_00000444:
     li r0, 0x0
-lbl_fn_8036B7F4_00000448:
+lbl_world_Manager_postUpdate_00000448:
     cmpwi r0, 0x0
-    beq lbl_fn_8036B7F4_00000808
+    beq lbl_world_Manager_postUpdate_00000808
     cmpwi r4, 0x0
-    beq lbl_fn_8036B7F4_00000460
+    beq lbl_world_Manager_postUpdate_00000460
     lwz r3, 0x64(r4)
-    b lbl_fn_8036B7F4_00000464
-lbl_fn_8036B7F4_00000460:
+    b lbl_world_Manager_postUpdate_00000464
+lbl_world_Manager_postUpdate_00000460:
     li r3, 0x0
-lbl_fn_8036B7F4_00000464:
+lbl_world_Manager_postUpdate_00000464:
     lwz r0, 0x54(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8036B7F4_00000808
+    beq lbl_world_Manager_postUpdate_00000808
     cmpwi r4, 0x0
-    beq lbl_fn_8036B7F4_00000480
+    beq lbl_world_Manager_postUpdate_00000480
     lwz r3, 0x64(r4)
-    b lbl_fn_8036B7F4_00000484
-lbl_fn_8036B7F4_00000480:
+    b lbl_world_Manager_postUpdate_00000484
+lbl_world_Manager_postUpdate_00000480:
     li r3, 0x0
-lbl_fn_8036B7F4_00000484:
+lbl_world_Manager_postUpdate_00000484:
     lwz r29, 0x54(r3)
     addi r4, r1, 0x180
     lwz r3, lbl_8087EEC8
@@ -564,18 +564,18 @@ lbl_fn_8036B7F4_00000484:
     lwz r0, 0x54e4(r27)
     fadds f31, f31, f0
     cmpwi r0, 0x8
-    bne lbl_fn_8036B7F4_00000750
+    bne lbl_world_Manager_postUpdate_00000750
     lwz r3, lbl_8087F540
     lwz r28, 0x70(r3)
     cmpwi r28, 0x0
-    beq lbl_fn_8036B7F4_00000750
+    beq lbl_world_Manager_postUpdate_00000750
     lwz r5, 0x4c(r28)
     cmpwi r5, 0x0
-    beq lbl_fn_8036B7F4_00000678
-    b lbl_fn_8036B7F4_0000067C
-lbl_fn_8036B7F4_00000678:
+    beq lbl_world_Manager_postUpdate_00000678
+    b lbl_world_Manager_postUpdate_0000067C
+lbl_world_Manager_postUpdate_00000678:
     la r5, lbl_8087EF00
-lbl_fn_8036B7F4_0000067C:
+lbl_world_Manager_postUpdate_0000067C:
     lwz r3, lbl_8087EEC8
     addi r4, r1, 0x180
     li r6, 0x100
@@ -583,7 +583,7 @@ lbl_fn_8036B7F4_0000067C:
     mr r3, r28
     bl fn_80541214
     cmpwi r3, 0x0
-    beq lbl_fn_8036B7F4_000006C8
+    beq lbl_world_Manager_postUpdate_000006C8
     mr r3, r28
     bl fn_80541214
     lis r4, lbl_8078A408@ha
@@ -594,8 +594,8 @@ lbl_fn_8036B7F4_0000067C:
     addi r5, r1, 0x180
     crclr 6
     bl fn_800DD3FC
-    b lbl_fn_8036B7F4_000006E4
-lbl_fn_8036B7F4_000006C8:
+    b lbl_world_Manager_postUpdate_000006E4
+lbl_world_Manager_postUpdate_000006C8:
     lis r4, lbl_8078A408@ha
     addi r3, r1, 0x380
     addi r4, r4, lbl_8078A408@l
@@ -603,7 +603,7 @@ lbl_fn_8036B7F4_000006C8:
     addi r4, r4, 0x74
     crclr 6
     bl fn_800DD3FC
-lbl_fn_8036B7F4_000006E4:
+lbl_world_Manager_postUpdate_000006E4:
     lwz r3, lbl_8087EEC8
     addi r4, r1, 0x380
     lfs f1, lbl_80885774
@@ -631,11 +631,11 @@ lbl_fn_8036B7F4_000006E4:
     bl fn_80061824
     lfs f0, lbl_8088577C
     fadds f31, f31, f0
-lbl_fn_8036B7F4_00000750:
+lbl_world_Manager_postUpdate_00000750:
     lwz r3, lbl_8087F0A8
     lwz r0, 0x194(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8036B7F4_00000808
+    beq lbl_world_Manager_postUpdate_00000808
     lis r3, 0x8889
     lwz r5, 0x5744(r27)
     subi r0, r3, 0x7777
@@ -678,7 +678,7 @@ lbl_fn_8036B7F4_00000750:
     bl fn_80061824
     lfs f0, lbl_8088577C
     fadds f31, f31, f0
-lbl_fn_8036B7F4_00000808:
+lbl_world_Manager_postUpdate_00000808:
     bl fn_800827E0
     lwz r12, 0x138(r3)
     mr r29, r3
@@ -849,43 +849,43 @@ lbl_fn_8036B7F4_00000808:
     lwz r3, lbl_8087EEB0
     li r0, 0x12
     stw r0, 0xa0(r3)
-lbl_fn_8036B7F4_00000AB0:
+lbl_world_Manager_postUpdate_00000AB0:
     lwz r3, 0x5620(r27)
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r0, 0x5538(r27)
     cmpwi r0, 0x0
-    beq lbl_fn_8036B7F4_00000AF4
+    beq lbl_world_Manager_postUpdate_00000AF4
     lwz r0, 0x5538(r27)
     cmpwi r0, 0x1
-    bne lbl_fn_8036B7F4_00000AE0
+    bne lbl_world_Manager_postUpdate_00000AE0
     lwz r3, 0x5624(r27)
     bl fn_8006A900
-lbl_fn_8036B7F4_00000AE0:
+lbl_world_Manager_postUpdate_00000AE0:
     lwz r3, 0x5620(r27)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
-    b lbl_fn_8036B7F4_000015E0
-lbl_fn_8036B7F4_00000AF4:
+    b lbl_world_Manager_postUpdate_000015E0
+lbl_world_Manager_postUpdate_00000AF4:
     lwz r0, 0x563c(r27)
     cmpwi r0, 0x0
-    blt lbl_fn_8036B7F4_00000B18
+    blt lbl_world_Manager_postUpdate_00000B18
     lwz r3, 0x5624(r27)
     stw r0, 0x78(r3)
     lwz r3, 0x5624(r27)
     bl fn_8006A900
     li r0, -0x1
     stw r0, 0x563c(r27)
-lbl_fn_8036B7F4_00000B18:
+lbl_world_Manager_postUpdate_00000B18:
     lwz r3, lbl_8087F120
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    bne lbl_fn_8036B7F4_00000B30
+    bne lbl_world_Manager_postUpdate_00000B30
     bl fn_801E9EA4
-lbl_fn_8036B7F4_00000B30:
+lbl_world_Manager_postUpdate_00000B30:
     lwz r3, lbl_8087F120
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
@@ -894,34 +894,34 @@ lbl_fn_8036B7F4_00000B30:
     lwz r3, lbl_8087F8A0
     cmpwi r0, 0x0
     lwz r3, 0x48(r3)
-    bne lbl_fn_8036B7F4_00000BB4
+    bne lbl_world_Manager_postUpdate_00000BB4
     lwz r0, 0x868(r27)
     cmpwi r0, 0x6
-    beq lbl_fn_8036B7F4_00000BB4
+    beq lbl_world_Manager_postUpdate_00000BB4
     cmpwi r0, 0x5
-    beq lbl_fn_8036B7F4_00000BB4
+    beq lbl_world_Manager_postUpdate_00000BB4
     lwz r4, 0x648(r3)
     cmpwi r4, 0x0
-    beq lbl_fn_8036B7F4_00000B80
+    beq lbl_world_Manager_postUpdate_00000B80
     lwz r0, 0x4(r4)
     cmpwi r0, 0x1
-    beq lbl_fn_8036B7F4_00000BA4
-lbl_fn_8036B7F4_00000B80:
+    beq lbl_world_Manager_postUpdate_00000BA4
+lbl_world_Manager_postUpdate_00000B80:
     lwz r0, 0x12a4(r3)
     extrwi. r0, r0, 1, 25
-    beq lbl_fn_8036B7F4_00000BB4
+    beq lbl_world_Manager_postUpdate_00000BB4
     lwz r3, 0x50(r3)
     subis r0, r3, 0xa
     cmplwi r0, 0xae76
-    beq lbl_fn_8036B7F4_00000BA4
+    beq lbl_world_Manager_postUpdate_00000BA4
     cmplwi r0, 0xae77
-    bne lbl_fn_8036B7F4_00000BB4
-lbl_fn_8036B7F4_00000BA4:
+    bne lbl_world_Manager_postUpdate_00000BB4
+lbl_world_Manager_postUpdate_00000BA4:
     lwz r3, lbl_8087F120
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
-lbl_fn_8036B7F4_00000BB4:
+lbl_world_Manager_postUpdate_00000BB4:
     lwz r3, lbl_8087F490
     bl fn_803D2A6C
     lwz r3, lbl_8087F490
@@ -932,7 +932,7 @@ lbl_fn_8036B7F4_00000BB4:
     li r28, 0x0
     cmplwi r0, 0xe
     lwz r30, 0x8(r3)
-    bgt lbl_fn_8036B7F4_000015C8
+    bgt lbl_world_Manager_postUpdate_000015C8
     lis r3, jumptable_8078A290@ha
     slwi r0, r0, 2
     addi r3, r3, jumptable_8078A290@l
@@ -943,103 +943,103 @@ lbl_fn_8036B7F4_00000BB4:
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
-    b lbl_fn_8036B7F4_000015C8
+    b lbl_world_Manager_postUpdate_000015C8
     lwz r3, 0x5620(r27)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
-    b lbl_fn_8036B7F4_000015C8
+    b lbl_world_Manager_postUpdate_000015C8
     lwz r3, 0x868(r27)
     subi r0, r3, 0x3
     cmplwi r0, 0x1
-    bgt lbl_fn_8036B7F4_00000C3C
+    bgt lbl_world_Manager_postUpdate_00000C3C
     lwz r3, lbl_8087F8A0
     lwz r3, 0x48(r3)
     bl fn_800E426C
-lbl_fn_8036B7F4_00000C3C:
+lbl_world_Manager_postUpdate_00000C3C:
     lwz r3, 0x56d4(r27)
     cmpwi r3, 0x0
-    beq lbl_fn_8036B7F4_00000C4C
-    bl fn_80149A30
-lbl_fn_8036B7F4_00000C4C:
+    beq lbl_world_Manager_postUpdate_00000C4C
+    bl dialog_renderWindow
+lbl_world_Manager_postUpdate_00000C4C:
     lwz r3, 0x5620(r27)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
     lwz r3, 0x868(r27)
     cmpwi r3, 0x6
-    bne lbl_fn_8036B7F4_00000C7C
+    bne lbl_world_Manager_postUpdate_00000C7C
     lwz r0, 0x86c(r27)
     cmpw r3, r0
-    bne lbl_fn_8036B7F4_00000C7C
+    bne lbl_world_Manager_postUpdate_00000C7C
     li r29, 0x1
-    b lbl_fn_8036B7F4_00000CD4
-lbl_fn_8036B7F4_00000C7C:
+    b lbl_world_Manager_postUpdate_00000CD4
+lbl_world_Manager_postUpdate_00000C7C:
     cmpwi r3, 0x7
-    bne lbl_fn_8036B7F4_00000C90
+    bne lbl_world_Manager_postUpdate_00000C90
     li r29, 0x1
     li r28, 0x1
-    b lbl_fn_8036B7F4_00000CD4
-lbl_fn_8036B7F4_00000C90:
+    b lbl_world_Manager_postUpdate_00000CD4
+lbl_world_Manager_postUpdate_00000C90:
     cmpwi r3, 0x5
-    bne lbl_fn_8036B7F4_00000CD4
+    bne lbl_world_Manager_postUpdate_00000CD4
     lwz r0, lbl_8087F610
     lwz r3, lbl_8087F8A0
     cmpwi r0, 0x0
     lwz r3, 0x48(r3)
-    beq lbl_fn_8036B7F4_00000CD4
+    beq lbl_world_Manager_postUpdate_00000CD4
     cmpwi r3, 0x0
-    beq lbl_fn_8036B7F4_00000CD4
+    beq lbl_world_Manager_postUpdate_00000CD4
     lwz r0, 0x55c(r3)
     cmpwi r0, 0x6
-    bne lbl_fn_8036B7F4_00000CD4
+    bne lbl_world_Manager_postUpdate_00000CD4
     lwz r0, 0x560(r3)
     cmpwi r0, 0xd
-    bne lbl_fn_8036B7F4_00000CD4
+    bne lbl_world_Manager_postUpdate_00000CD4
     li r29, 0x1
     li r28, 0x1
-lbl_fn_8036B7F4_00000CD4:
+lbl_world_Manager_postUpdate_00000CD4:
     lwz r0, 0x5590(r27)
     cmpwi r0, 0x0
-    beq lbl_fn_8036B7F4_000015C8
+    beq lbl_world_Manager_postUpdate_000015C8
     lwz r0, 0x5594(r27)
     lwz r31, lbl_8087F490
     cmpwi r0, 0x0
-    beq lbl_fn_8036B7F4_00000CFC
+    beq lbl_world_Manager_postUpdate_00000CFC
     lwz r0, 0x55a4(r27)
     cmpwi r0, 0x0
-    bgt lbl_fn_8036B7F4_00000D08
-lbl_fn_8036B7F4_00000CFC:
+    bgt lbl_world_Manager_postUpdate_00000D08
+lbl_world_Manager_postUpdate_00000CFC:
     lwz r0, 0x55b8(r27)
     cmpwi r0, 0x0
-    ble lbl_fn_8036B7F4_00000F1C
-lbl_fn_8036B7F4_00000D08:
+    ble lbl_world_Manager_postUpdate_00000F1C
+lbl_world_Manager_postUpdate_00000D08:
     cmpwi r30, 0x0
-    bne lbl_fn_8036B7F4_00000D38
+    bne lbl_world_Manager_postUpdate_00000D38
     lwz r3, 0xb08(r31)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    bne lbl_fn_8036B7F4_00000D38
+    bne lbl_world_Manager_postUpdate_00000D38
     lwz r3, 0xb0c(r31)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    beq lbl_fn_8036B7F4_00000D68
-lbl_fn_8036B7F4_00000D38:
+    beq lbl_world_Manager_postUpdate_00000D68
+lbl_world_Manager_postUpdate_00000D38:
     cmpwi r30, 0x0
-    beq lbl_fn_8036B7F4_00000DC4
+    beq lbl_world_Manager_postUpdate_00000DC4
     lwz r3, 0xb10(r31)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    bne lbl_fn_8036B7F4_00000DC4
+    bne lbl_world_Manager_postUpdate_00000DC4
     lwz r3, 0xb14(r31)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    bne lbl_fn_8036B7F4_00000DC4
-lbl_fn_8036B7F4_00000D68:
+    bne lbl_world_Manager_postUpdate_00000DC4
+lbl_world_Manager_postUpdate_00000D68:
     lis r4, lbl_8074DA10@ha
     lfs f1, lbl_80885708
     addi r4, r4, lbl_8074DA10@l
@@ -1050,49 +1050,49 @@ lbl_fn_8036B7F4_00000D68:
     bl fn_800C31F4
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     cmpwi r30, 0x0
-    beq lbl_fn_8036B7F4_00000DB0
+    beq lbl_world_Manager_postUpdate_00000DB0
     lwz r3, 0xb10(r31)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
-    b lbl_fn_8036B7F4_000015C8
-lbl_fn_8036B7F4_00000DB0:
+    b lbl_world_Manager_postUpdate_000015C8
+lbl_world_Manager_postUpdate_00000DB0:
     lwz r3, 0xb08(r31)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
-    b lbl_fn_8036B7F4_000015C8
-lbl_fn_8036B7F4_00000DC4:
+    b lbl_world_Manager_postUpdate_000015C8
+lbl_world_Manager_postUpdate_00000DC4:
     cmpwi r30, 0x0
-    bne lbl_fn_8036B7F4_00000DF4
+    bne lbl_world_Manager_postUpdate_00000DF4
     lwz r3, 0xb08(r31)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    beq lbl_fn_8036B7F4_00000DF4
+    beq lbl_world_Manager_postUpdate_00000DF4
     lwz r3, 0xb0c(r31)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    beq lbl_fn_8036B7F4_00000E24
-lbl_fn_8036B7F4_00000DF4:
+    beq lbl_world_Manager_postUpdate_00000E24
+lbl_world_Manager_postUpdate_00000DF4:
     cmpwi r30, 0x0
-    beq lbl_fn_8036B7F4_00000EB4
+    beq lbl_world_Manager_postUpdate_00000EB4
     lwz r3, 0xb10(r31)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    beq lbl_fn_8036B7F4_00000EB4
+    beq lbl_world_Manager_postUpdate_00000EB4
     lwz r3, 0xb14(r31)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    bne lbl_fn_8036B7F4_00000EB4
-lbl_fn_8036B7F4_00000E24:
+    bne lbl_world_Manager_postUpdate_00000EB4
+lbl_world_Manager_postUpdate_00000E24:
     cmpwi r30, 0x0
-    beq lbl_fn_8036B7F4_00000E70
+    beq lbl_world_Manager_postUpdate_00000E70
     lwz r3, 0xb14(r31)
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
@@ -1104,13 +1104,13 @@ lbl_fn_8036B7F4_00000E24:
     cror eq, gt, eq
     mfcr r0
     extrwi. r0, r0, 1, 2
-    beq lbl_fn_8036B7F4_000015C8
+    beq lbl_world_Manager_postUpdate_000015C8
     lwz r3, 0xb14(r31)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
-    b lbl_fn_8036B7F4_000015C8
-lbl_fn_8036B7F4_00000E70:
+    b lbl_world_Manager_postUpdate_000015C8
+lbl_world_Manager_postUpdate_00000E70:
     lwz r3, 0xb0c(r31)
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
@@ -1122,69 +1122,69 @@ lbl_fn_8036B7F4_00000E70:
     cror eq, gt, eq
     mfcr r0
     extrwi. r0, r0, 1, 2
-    beq lbl_fn_8036B7F4_000015C8
+    beq lbl_world_Manager_postUpdate_000015C8
     lwz r3, 0xb0c(r31)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
-    b lbl_fn_8036B7F4_000015C8
-lbl_fn_8036B7F4_00000EB4:
+    b lbl_world_Manager_postUpdate_000015C8
+lbl_world_Manager_postUpdate_00000EB4:
     cmpwi r30, 0x0
-    bne lbl_fn_8036B7F4_00000ED0
+    bne lbl_world_Manager_postUpdate_00000ED0
     lwz r3, 0xb0c(r31)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    bne lbl_fn_8036B7F4_00000EEC
-lbl_fn_8036B7F4_00000ED0:
+    bne lbl_world_Manager_postUpdate_00000EEC
+lbl_world_Manager_postUpdate_00000ED0:
     cmpwi r30, 0x0
-    beq lbl_fn_8036B7F4_000015C8
+    beq lbl_world_Manager_postUpdate_000015C8
     lwz r3, 0xb14(r31)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    beq lbl_fn_8036B7F4_000015C8
-lbl_fn_8036B7F4_00000EEC:
+    beq lbl_world_Manager_postUpdate_000015C8
+lbl_world_Manager_postUpdate_00000EEC:
     cmpwi r30, 0x0
-    beq lbl_fn_8036B7F4_00000F08
+    beq lbl_world_Manager_postUpdate_00000F08
     lwz r3, 0xb10(r31)
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
-    b lbl_fn_8036B7F4_000015C8
-lbl_fn_8036B7F4_00000F08:
+    b lbl_world_Manager_postUpdate_000015C8
+lbl_world_Manager_postUpdate_00000F08:
     lwz r3, 0xb08(r31)
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
-    b lbl_fn_8036B7F4_000015C8
-lbl_fn_8036B7F4_00000F1C:
+    b lbl_world_Manager_postUpdate_000015C8
+lbl_world_Manager_postUpdate_00000F1C:
     cmpwi r30, 0x0
-    bne lbl_fn_8036B7F4_00000F4C
+    bne lbl_world_Manager_postUpdate_00000F4C
     lwz r3, 0xb08(r31)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    bne lbl_fn_8036B7F4_00000F7C
+    bne lbl_world_Manager_postUpdate_00000F7C
     lwz r3, 0xb0c(r31)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    bne lbl_fn_8036B7F4_00000F7C
-lbl_fn_8036B7F4_00000F4C:
+    bne lbl_world_Manager_postUpdate_00000F7C
+lbl_world_Manager_postUpdate_00000F4C:
     cmpwi r30, 0x0
-    beq lbl_fn_8036B7F4_00000FA8
+    beq lbl_world_Manager_postUpdate_00000FA8
     lwz r3, 0xb10(r31)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    bne lbl_fn_8036B7F4_00000F7C
+    bne lbl_world_Manager_postUpdate_00000F7C
     lwz r3, 0xb14(r31)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    beq lbl_fn_8036B7F4_00000FA8
-lbl_fn_8036B7F4_00000F7C:
+    beq lbl_world_Manager_postUpdate_00000FA8
+lbl_world_Manager_postUpdate_00000F7C:
     lis r4, lbl_8074DA10@ha
     lfs f1, lbl_80885708
     addi r4, r4, lbl_8074DA10@l
@@ -1195,8 +1195,8 @@ lbl_fn_8036B7F4_00000F7C:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
-lbl_fn_8036B7F4_00000FA8:
+    bl ref_releaseHandle
+lbl_world_Manager_postUpdate_00000FA8:
     lwz r3, 0xb08(r31)
     lfs f0, lbl_8088570C
     lwz r0, 0x38(r3)
@@ -1234,25 +1234,25 @@ lbl_fn_8036B7F4_00000FA8:
     stfs f0, 0x100(r3)
     lwz r3, 0xb14(r31)
     stfs f0, 0x100(r3)
-    b lbl_fn_8036B7F4_000015C8
+    b lbl_world_Manager_postUpdate_000015C8
     lwz r30, lbl_8087F490
     lwz r4, 0xb20(r30)
     lwz r0, 0x38(r4)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    beq lbl_fn_8036B7F4_000010A4
+    beq lbl_world_Manager_postUpdate_000010A4
     lwz r3, 0xb1c(r30)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    bne lbl_fn_8036B7F4_000010A4
+    bne lbl_world_Manager_postUpdate_000010A4
     lfs f3, 0xa0(r4)
     lfs f0, 0x100(r4)
     fcmpo cr0, f0, f3
     cror eq, gt, eq
     mfcr r0
     extrwi. r0, r0, 1, 2
-    beq lbl_fn_8036B7F4_000010A4
+    beq lbl_world_Manager_postUpdate_000010A4
     lwz r0, 0x38(r4)
     ori r0, r0, 0x4
     stw r0, 0x38(r4)
@@ -1260,63 +1260,63 @@ lbl_fn_8036B7F4_00000FA8:
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
-lbl_fn_8036B7F4_000010A4:
+lbl_world_Manager_postUpdate_000010A4:
     lwz r3, 0xb18(r30)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    beq lbl_fn_8036B7F4_000010E0
+    beq lbl_world_Manager_postUpdate_000010E0
     lfs f3, 0xa0(r3)
     lfs f0, 0x100(r3)
     fcmpo cr0, f0, f3
     cror eq, gt, eq
     mfcr r0
     extrwi. r0, r0, 1, 2
-    beq lbl_fn_8036B7F4_000010E0
+    beq lbl_world_Manager_postUpdate_000010E0
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
-lbl_fn_8036B7F4_000010E0:
+lbl_world_Manager_postUpdate_000010E0:
     lwz r0, 0x5598(r27)
     lwz r3, 0x5590(r27)
     neg r4, r0
     bl fn_8056F2FC
     lwz r0, 0x10ac(r27)
     cmpwi r0, 0x0
-    beq lbl_fn_8036B7F4_000015C8
+    beq lbl_world_Manager_postUpdate_000015C8
     lwz r0, 0x5598(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8036B7F4_000015C8
+    bne lbl_world_Manager_postUpdate_000015C8
     lwz r4, 0xb1c(r30)
     lis r3, lbl_8074DC1C@ha
     addi r3, r3, lbl_8074DC1C@l
     addi r3, r3, 0x15d
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_8088570C
     mr r4, r3
     mr r3, r29
     bl fn_801FECE0
     li r29, 0x1
-    b lbl_fn_8036B7F4_000015C8
+    b lbl_world_Manager_postUpdate_000015C8
     lwz r4, lbl_8087F490
     lwz r5, 0xb20(r4)
     lwz r0, 0x38(r5)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    beq lbl_fn_8036B7F4_0000119C
+    beq lbl_world_Manager_postUpdate_0000119C
     lwz r3, 0xb1c(r4)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    bne lbl_fn_8036B7F4_0000119C
+    bne lbl_world_Manager_postUpdate_0000119C
     lfs f3, 0xa0(r5)
     lfs f0, 0x100(r5)
     fcmpo cr0, f0, f3
     cror eq, gt, eq
     mfcr r0
     extrwi. r0, r0, 1, 2
-    beq lbl_fn_8036B7F4_0000119C
+    beq lbl_world_Manager_postUpdate_0000119C
     lwz r0, 0x38(r5)
     ori r0, r0, 0x4
     stw r0, 0x38(r5)
@@ -1324,32 +1324,32 @@ lbl_fn_8036B7F4_000010E0:
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
-lbl_fn_8036B7F4_0000119C:
+lbl_world_Manager_postUpdate_0000119C:
     lwz r3, 0xb18(r4)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    beq lbl_fn_8036B7F4_000011D8
+    beq lbl_world_Manager_postUpdate_000011D8
     lfs f3, 0xa0(r3)
     lfs f0, 0x100(r3)
     fcmpo cr0, f0, f3
     cror eq, gt, eq
     mfcr r0
     extrwi. r0, r0, 1, 2
-    beq lbl_fn_8036B7F4_000011D8
+    beq lbl_world_Manager_postUpdate_000011D8
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
-lbl_fn_8036B7F4_000011D8:
+lbl_world_Manager_postUpdate_000011D8:
     lwz r0, 0x10ac(r27)
     cmpwi r0, 0x0
-    beq lbl_fn_8036B7F4_000015C8
+    beq lbl_world_Manager_postUpdate_000015C8
     lwz r4, 0xb1c(r4)
     lis r3, lbl_8074DC1C@ha
     addi r3, r3, lbl_8074DC1C@l
     addi r3, r3, 0x15d
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_8088570C
     mr r4, r3
     mr r3, r29
@@ -1357,19 +1357,19 @@ lbl_fn_8036B7F4_000011D8:
     lwz r3, lbl_8087F9F8
     li r29, 0x1
     cmpwi r3, 0x0
-    beq lbl_fn_8036B7F4_000015C8
+    beq lbl_world_Manager_postUpdate_000015C8
     lwz r0, 0xa70(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_8036B7F4_000015C8
+    bne lbl_world_Manager_postUpdate_000015C8
     li r28, 0x1
-    b lbl_fn_8036B7F4_000015C8
+    b lbl_world_Manager_postUpdate_000015C8
     lwz r3, 0x5620(r27)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
     lwz r0, 0x5590(r27)
     cmpwi r0, 0x0
-    beq lbl_fn_8036B7F4_000015C8
+    beq lbl_world_Manager_postUpdate_000015C8
     lwz r3, lbl_8087F490
     lfs f0, lbl_8088570C
     lwz r4, 0xb08(r3)
@@ -1408,12 +1408,12 @@ lbl_fn_8036B7F4_000011D8:
     stfs f0, 0x100(r4)
     lwz r3, 0xb14(r3)
     stfs f0, 0x100(r3)
-    b lbl_fn_8036B7F4_000015C8
+    b lbl_world_Manager_postUpdate_000015C8
     addi r3, r27, 0xd18
     bl fn_8037C69C
     lwz r0, 0x5590(r27)
     cmpwi r0, 0x0
-    beq lbl_fn_8036B7F4_000015C8
+    beq lbl_world_Manager_postUpdate_000015C8
     lwz r3, lbl_8087F490
     lfs f0, lbl_8088570C
     lwz r4, 0xb08(r3)
@@ -1452,7 +1452,7 @@ lbl_fn_8036B7F4_000011D8:
     stfs f0, 0x100(r4)
     lwz r3, 0xb14(r3)
     stfs f0, 0x100(r3)
-    b lbl_fn_8036B7F4_000015C8
+    b lbl_world_Manager_postUpdate_000015C8
     lwz r3, lbl_8087F518
     li r4, 0x1
     bl fn_8046ECDC
@@ -1462,7 +1462,7 @@ lbl_fn_8036B7F4_000011D8:
     stw r0, 0x38(r3)
     lwz r0, 0x56e4(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8036B7F4_00001594
+    bne lbl_world_Manager_postUpdate_00001594
     lwz r8, 0x10d8(r27)
     li r6, 0x0
     lwz r3, lbl_8087F8A0
@@ -1472,24 +1472,24 @@ lbl_fn_8036B7F4_000011D8:
     lwz r5, 0x56e8(r27)
     mtctr r0
     cmplwi r0, 0x0
-    ble lbl_fn_8036B7F4_00001410
-lbl_fn_8036B7F4_000013E8:
+    ble lbl_world_Manager_postUpdate_00001410
+lbl_world_Manager_postUpdate_000013E8:
     lwz r4, 0x7c(r8)
     lwzx r0, r4, r7
     cmpw r5, r0
-    bne lbl_fn_8036B7F4_00001404
+    bne lbl_world_Manager_postUpdate_00001404
     mulli r0, r6, 0x28
     add r30, r4, r0
-    b lbl_fn_8036B7F4_00001414
-lbl_fn_8036B7F4_00001404:
+    b lbl_world_Manager_postUpdate_00001414
+lbl_world_Manager_postUpdate_00001404:
     addi r7, r7, 0x28
     addi r6, r6, 0x1
-    bdnz lbl_fn_8036B7F4_000013E8
-lbl_fn_8036B7F4_00001410:
+    bdnz lbl_world_Manager_postUpdate_000013E8
+lbl_world_Manager_postUpdate_00001410:
     li r30, 0x0
-lbl_fn_8036B7F4_00001414:
+lbl_world_Manager_postUpdate_00001414:
     cmpwi r30, 0x0
-    beq lbl_fn_8036B7F4_000015BC
+    beq lbl_world_Manager_postUpdate_000015BC
     lfs f2, 0xc(r30)
     addi r7, r1, 0x1c
     psq_l f1, 0x4(r30), 0, 0
@@ -1517,13 +1517,13 @@ lbl_fn_8036B7F4_00001414:
     lwz r4, 0x10d0(r27)
     addi r0, r3, 0x27c0
     cmpw r4, r0
-    blt lbl_fn_8036B7F4_000015BC
+    blt lbl_world_Manager_postUpdate_000015BC
     lwz r3, lbl_8087F8A0
     li r4, 0x1
     bl fn_8054A340
     cmpwi r3, 0x0
     mr r31, r3
-    beq lbl_fn_8036B7F4_000015BC
+    beq lbl_world_Manager_postUpdate_000015BC
     lfs f3, lbl_80885750
     addi r3, r1, 0x50
     lfs f0, lbl_8088570C
@@ -1532,11 +1532,11 @@ lbl_fn_8036B7F4_00001414:
     stfs f0, 0x38(r1)
     stfs f3, 0x3c(r1)
     lfs f1, 0x14(r30)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x34
     addi r3, r1, 0x50
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f3, 0xc(r30)
     addi r4, r1, 0x28
     lfs f0, 0x3c(r1)
@@ -1558,7 +1558,7 @@ lbl_fn_8036B7F4_00001414:
     lwz r3, 0x10d8(r27)
     bl fn_803C1560
     cmpwi r3, 0x0
-    beq lbl_fn_8036B7F4_000015BC
+    beq lbl_world_Manager_postUpdate_000015BC
     subi r0, r3, 0x1
     lwz r3, 0x10d8(r27)
     mulli r0, r0, 0x30
@@ -1583,31 +1583,31 @@ lbl_fn_8036B7F4_00001414:
     psq_st f1, 0x534(r31), 0, 0
     stfs f2, 0x53c(r31)
     bl fn_8016EB48
-    b lbl_fn_8036B7F4_000015BC
-lbl_fn_8036B7F4_00001594:
+    b lbl_world_Manager_postUpdate_000015BC
+lbl_world_Manager_postUpdate_00001594:
     cmpwi r0, 0x5
-    ble lbl_fn_8036B7F4_000015BC
+    ble lbl_world_Manager_postUpdate_000015BC
     lwz r3, lbl_8087FA20
     cmpwi r3, 0x0
-    beq lbl_fn_8036B7F4_000015B4
+    beq lbl_world_Manager_postUpdate_000015B4
     bl fn_800D3FA4
     cmpwi r3, 0x0
-    beq lbl_fn_8036B7F4_000015BC
-lbl_fn_8036B7F4_000015B4:
+    beq lbl_world_Manager_postUpdate_000015BC
+lbl_world_Manager_postUpdate_000015B4:
     mr r3, r27
     bl fn_8036FC58
-lbl_fn_8036B7F4_000015BC:
+lbl_world_Manager_postUpdate_000015BC:
     lwz r3, 0x56e4(r27)
     addi r0, r3, 0x1
     stw r0, 0x56e4(r27)
-lbl_fn_8036B7F4_000015C8:
+lbl_world_Manager_postUpdate_000015C8:
     lwz r3, lbl_8087F490
     mr r4, r29
     mr r5, r28
     bl fn_803DAB4C
     addi r3, r27, 0x6c
     bl fn_8039328C
-lbl_fn_8036B7F4_000015E0:
+lbl_world_Manager_postUpdate_000015E0:
     addi r11, r1, 0x5b0
     psq_l f31, 0x608(r1), 0, 0
     lfd f31, 0x600(r1)
@@ -1642,7 +1642,7 @@ asm void fn_8036CA60(void)
     mr r29, r3
     stw r28, 0x10(r1)
     lwz r3, 0x10d8(r3)
-    bl fn_800D246C
+    bl atn_Task_setActive
     cmpwi r30, 0x0
     ble lbl_fn_8036CA60_00001670
     lwz r3, 0x10d8(r29)
@@ -1720,7 +1720,7 @@ lbl_fn_8036CA60_00001724:
     mr r6, r5
     subi r3, r3, 0x4244
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8036CA60_0000177C
     bl fn_8056BF90
@@ -1941,7 +1941,7 @@ lbl_fn_8036CC90_00001A70:
     lwz r3, lbl_8087F0A8
     li r4, 0x8
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_8036CC90_00001B2C
     lwz r3, lbl_8087F490
@@ -1953,7 +1953,7 @@ lbl_fn_8036CC90_00001A70:
     li r4, 0xac
     li r5, 0x0
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     lwz r6, lbl_8087F8A0
     li r4, 0x0
     lfs f2, lbl_8088570C

@@ -6,12 +6,12 @@ extern void dtor_80084684(void);
 extern void fn_800827E0(void);
 extern void fn_800839EC(void);
 extern void fn_80083AD4(void);
-extern void fn_80084320(void);
-extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_alloc(void);
+extern void mem_realloc(void);
+extern void mem_getAllocSize(void);
 extern void fn_800A4494(void);
-extern void fn_800D1E9C(void);
-extern void fn_800DC288(void);
+extern void atn_Task_destructor(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DDA70(void);
 extern void fn_800DDD18(void);
 extern void fn_800DEEDC(void);
@@ -33,9 +33,9 @@ extern void fn_80621B80(void);
 extern void fn_80621C50(void);
 extern void fn_80621CD0(void);
 extern void fn_806823B0(void);
-extern void fn_80682428(void);
-extern void fn_80682544(void);
-extern void fn_806825B4(void);
+extern void strcmp(void);
+extern void strncmp(void);
+extern void strrchr(void);
 extern char* strcpy(char* dest, const char* src);
 
 /* External data declarations */
@@ -63,7 +63,7 @@ extern u32 lbl_80880CB8;
 extern u32 lbl_80880CC0;
 
 /* Function declarations */
-void fn_800A500C(void);
+void msg_formatTextWithAlignment(void);
 void fn_800A5218(void);
 void fn_800A54B0(void);
 void fn_800A5508(void);
@@ -94,7 +94,7 @@ void fn_800A686C(void);
 void fn_800A68D4(void);
 void fn_800A693C(void);
 
-asm void fn_800A500C(void)
+asm void msg_formatTextWithAlignment(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -105,7 +105,7 @@ asm void fn_800A500C(void)
     stw r31, 0xc(r1)
     mr r31, r3
     stw r5, 0x15c(r3)
-    bgt lbl_fn_800A500C_000001F8
+    bgt lbl_msg_formatTextWithAlignment_000001F8
     lis r5, jumptable_80778A40@ha
     slwi r0, r0, 2
     addi r5, r5, jumptable_80778A40@l
@@ -113,126 +113,126 @@ asm void fn_800A500C(void)
     mtctr r5
     bctr
     cmpwi r4, 0x0
-    bne lbl_fn_800A500C_000000B4
+    bne lbl_msg_formatTextWithAlignment_000000B4
     lwz r4, 0x164(r3)
     clrlwi r0, r4, 31
     cmplwi r0, 0x1
-    bne lbl_fn_800A500C_00000060
+    bne lbl_msg_formatTextWithAlignment_00000060
     li r0, 0x12
     stw r0, 0x158(r3)
-    b lbl_fn_800A500C_000001F8
-lbl_fn_800A500C_00000060:
+    b lbl_msg_formatTextWithAlignment_000001F8
+lbl_msg_formatTextWithAlignment_00000060:
     rlwinm r0, r4, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_800A500C_00000078
+    bne lbl_msg_formatTextWithAlignment_00000078
     li r0, 0x13
     stw r0, 0x158(r3)
-    b lbl_fn_800A500C_000001F8
-lbl_fn_800A500C_00000078:
+    b lbl_msg_formatTextWithAlignment_000001F8
+lbl_msg_formatTextWithAlignment_00000078:
     rlwinm r0, r4, 0, 29, 29
     cmplwi r0, 0x4
-    bne lbl_fn_800A500C_00000090
+    bne lbl_msg_formatTextWithAlignment_00000090
     li r0, 0x14
     stw r0, 0x158(r3)
-    b lbl_fn_800A500C_000001F8
-lbl_fn_800A500C_00000090:
+    b lbl_msg_formatTextWithAlignment_000001F8
+lbl_msg_formatTextWithAlignment_00000090:
     rlwinm r0, r4, 0, 28, 28
     cmplwi r0, 0x8
-    bne lbl_fn_800A500C_000000A8
+    bne lbl_msg_formatTextWithAlignment_000000A8
     li r0, 0x15
     stw r0, 0x158(r3)
-    b lbl_fn_800A500C_000001F8
-lbl_fn_800A500C_000000A8:
+    b lbl_msg_formatTextWithAlignment_000001F8
+lbl_msg_formatTextWithAlignment_000000A8:
     li r0, 0x0
     stw r0, 0x158(r3)
-    b lbl_fn_800A500C_000001F8
-lbl_fn_800A500C_000000B4:
+    b lbl_msg_formatTextWithAlignment_000001F8
+lbl_msg_formatTextWithAlignment_000000B4:
     bl fn_800A4494
     stw r3, 0x158(r31)
-    b lbl_fn_800A500C_000001F8
+    b lbl_msg_formatTextWithAlignment_000001F8
     cmpwi r4, 0x0
-    beq lbl_fn_800A500C_000001F8
+    beq lbl_msg_formatTextWithAlignment_000001F8
     cmpwi r4, -0x6
-    bne lbl_fn_800A500C_000000DC
+    bne lbl_msg_formatTextWithAlignment_000000DC
     lwz r0, 0x48(r3)
     cmpwi r0, 0x2
-    beq lbl_fn_800A500C_000001F8
-lbl_fn_800A500C_000000DC:
+    beq lbl_msg_formatTextWithAlignment_000001F8
+lbl_msg_formatTextWithAlignment_000000DC:
     mr r3, r31
     bl fn_800A4494
     stw r3, 0x158(r31)
-    b lbl_fn_800A500C_000001F8
+    b lbl_msg_formatTextWithAlignment_000001F8
     cmpwi r4, 0x0
-    beq lbl_fn_800A500C_000001F8
+    beq lbl_msg_formatTextWithAlignment_000001F8
     bl fn_800A4494
     stw r3, 0x158(r31)
-    b lbl_fn_800A500C_000001F8
+    b lbl_msg_formatTextWithAlignment_000001F8
     cmpwi r4, 0x0
-    beq lbl_fn_800A500C_000001F8
+    beq lbl_msg_formatTextWithAlignment_000001F8
     bl fn_800A4494
     stw r3, 0x158(r31)
-    b lbl_fn_800A500C_000001F8
+    b lbl_msg_formatTextWithAlignment_000001F8
     cmpwi r4, 0x0
-    beq lbl_fn_800A500C_000001F8
+    beq lbl_msg_formatTextWithAlignment_000001F8
     bl fn_800A4494
     stw r3, 0x158(r31)
-    b lbl_fn_800A500C_000001F8
+    b lbl_msg_formatTextWithAlignment_000001F8
     cmpwi r4, 0x0
-    beq lbl_fn_800A500C_000001F8
+    beq lbl_msg_formatTextWithAlignment_000001F8
     bl fn_800A4494
     stw r3, 0x158(r31)
-    b lbl_fn_800A500C_000001F8
+    b lbl_msg_formatTextWithAlignment_000001F8
     cmpwi r4, 0x0
-    bge lbl_fn_800A500C_00000150
+    bge lbl_msg_formatTextWithAlignment_00000150
     bl fn_800A4494
     stw r3, 0x158(r31)
-    b lbl_fn_800A500C_000001F8
-lbl_fn_800A500C_00000150:
+    b lbl_msg_formatTextWithAlignment_000001F8
+lbl_msg_formatTextWithAlignment_00000150:
     lwz r0, 0x154(r3)
     cmpw r4, r0
-    beq lbl_fn_800A500C_000001F8
+    beq lbl_msg_formatTextWithAlignment_000001F8
     li r0, 0x5
     stw r0, 0x158(r3)
-    b lbl_fn_800A500C_000001F8
+    b lbl_msg_formatTextWithAlignment_000001F8
     cmpwi r4, 0x0
-    bge lbl_fn_800A500C_0000017C
+    bge lbl_msg_formatTextWithAlignment_0000017C
     bl fn_800A4494
     stw r3, 0x158(r31)
-    b lbl_fn_800A500C_000001F8
-lbl_fn_800A500C_0000017C:
+    b lbl_msg_formatTextWithAlignment_000001F8
+lbl_msg_formatTextWithAlignment_0000017C:
     lwz r0, 0x150(r3)
     cmpw r4, r0
-    beq lbl_fn_800A500C_000001F8
+    beq lbl_msg_formatTextWithAlignment_000001F8
     li r0, 0x5
     stw r0, 0x158(r3)
-    b lbl_fn_800A500C_000001F8
+    b lbl_msg_formatTextWithAlignment_000001F8
     cmpwi r4, 0x0
-    bge lbl_fn_800A500C_000001A8
+    bge lbl_msg_formatTextWithAlignment_000001A8
     bl fn_800A4494
     stw r3, 0x158(r31)
-    b lbl_fn_800A500C_000001F8
-lbl_fn_800A500C_000001A8:
+    b lbl_msg_formatTextWithAlignment_000001F8
+lbl_msg_formatTextWithAlignment_000001A8:
     lwz r0, 0x150(r3)
     cmpw r4, r0
-    beq lbl_fn_800A500C_000001F8
+    beq lbl_msg_formatTextWithAlignment_000001F8
     li r0, 0x5
     stw r0, 0x158(r3)
-    b lbl_fn_800A500C_000001F8
+    b lbl_msg_formatTextWithAlignment_000001F8
     cmpwi r4, 0x0
-    beq lbl_fn_800A500C_000001F8
+    beq lbl_msg_formatTextWithAlignment_000001F8
     bl fn_800A4494
     stw r3, 0x158(r31)
-    b lbl_fn_800A500C_000001F8
+    b lbl_msg_formatTextWithAlignment_000001F8
     cmpwi r4, 0x0
-    beq lbl_fn_800A500C_000001F8
+    beq lbl_msg_formatTextWithAlignment_000001F8
     bl fn_800A4494
     stw r3, 0x158(r31)
-    b lbl_fn_800A500C_000001F8
+    b lbl_msg_formatTextWithAlignment_000001F8
     cmpwi r4, 0x0
-    beq lbl_fn_800A500C_000001F8
+    beq lbl_msg_formatTextWithAlignment_000001F8
     bl fn_800A4494
     stw r3, 0x158(r31)
-lbl_fn_800A500C_000001F8:
+lbl_msg_formatTextWithAlignment_000001F8:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -280,7 +280,7 @@ lbl_fn_800A5218_00000280:
     bl strcpy
     addi r3, r1, 0x8
     li r4, 0x2f
-    bl fn_806825B4
+    bl strrchr
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_800A5218_000002C8
@@ -436,7 +436,7 @@ asm void fn_800A54B0(void)
     mr r30, r3
     beq lbl_fn_800A54B0_000004E0
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r31, 0x0
     ble lbl_fn_800A54B0_000004E0
     mr r3, r30
@@ -467,7 +467,7 @@ asm void fn_800A5508(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     stw r3, lbl_8087EF70
 lbl_fn_800A5508_00000538:
     lwz r0, 0x14(r1)
@@ -972,7 +972,7 @@ asm void fn_800A5B40(void)
     lis r29, lbl_807329E8@ha
     addi r4, r29, lbl_807329E8@l
     stb r0, 0x0(r3)
-    bl fn_80682544
+    bl strncmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_800A5B40_00000B84
@@ -983,7 +983,7 @@ lbl_fn_800A5B40_00000B84:
     mr r3, r30
     addi r4, r29, 0x4
     li r5, 0x3
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_800A5B40_00000BA8
     li r0, 0x1
@@ -992,7 +992,7 @@ lbl_fn_800A5B40_00000BA8:
     mr r3, r30
     addi r4, r29, 0x8
     li r5, 0x3
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_800A5B40_00000BC8
     li r0, 0x1
@@ -1001,7 +1001,7 @@ lbl_fn_800A5B40_00000BC8:
     mr r3, r30
     addi r4, r29, 0xc
     li r5, 0x3
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_800A5B40_00000BE8
     li r0, 0x1
@@ -1010,7 +1010,7 @@ lbl_fn_800A5B40_00000BE8:
     mr r3, r30
     addi r4, r29, 0x10
     li r5, 0x3
-    bl fn_80682544
+    bl strncmp
     cntlzw r0, r3
     srwi r0, r0, 5
 lbl_fn_800A5B40_00000C00:
@@ -1142,7 +1142,7 @@ asm void fn_800A5D6C(void)
     cmpwi r0, 0x0
     beq lbl_fn_800A5D6C_00000DAC
     mr r3, r0
-    bl fn_80084C24
+    bl mem_getAllocSize
     li r0, 0x0
     stw r0, 0x8(r30)
 lbl_fn_800A5D6C_00000DAC:
@@ -1182,7 +1182,7 @@ asm void fn_800A5E00(void)
     cmpwi r0, 0x0
     beq lbl_fn_800A5E00_00000E30
     mr r3, r0
-    bl fn_80084C24
+    bl mem_getAllocSize
     li r0, 0x0
     stw r0, 0x8(r29)
 lbl_fn_800A5E00_00000E30:
@@ -1214,7 +1214,7 @@ lbl_fn_800A5E00_00000E30:
     addi r5, r3, 0x14
     mr r3, r31
     mr r6, r5
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x8(r29)
     mr r5, r31
     li r4, 0x0
@@ -1277,7 +1277,7 @@ lbl_fn_800A5F18_00000F48:
     addi r3, r1, 0x8
     addi r4, r29, lbl_807329E8@l
     li r5, 0x3
-    bl fn_80682544
+    bl strncmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_800A5F18_00000F8C
@@ -1287,7 +1287,7 @@ lbl_fn_800A5F18_00000F8C:
     addi r3, r1, 0x8
     addi r4, r30, 0x4
     li r5, 0x3
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_800A5F18_00000FAC
     li r0, 0x1
@@ -1296,7 +1296,7 @@ lbl_fn_800A5F18_00000FAC:
     addi r3, r1, 0x8
     addi r4, r30, 0x8
     li r5, 0x3
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_800A5F18_00000FCC
     li r0, 0x1
@@ -1305,7 +1305,7 @@ lbl_fn_800A5F18_00000FCC:
     addi r3, r1, 0x8
     addi r4, r30, 0xc
     li r5, 0x3
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_800A5F18_00000FEC
     li r0, 0x1
@@ -1314,7 +1314,7 @@ lbl_fn_800A5F18_00000FEC:
     addi r3, r1, 0x8
     addi r4, r30, 0x10
     li r5, 0x3
-    bl fn_80682544
+    bl strncmp
     cntlzw r0, r3
     srwi r0, r0, 5
 lbl_fn_800A5F18_00001004:
@@ -1370,7 +1370,7 @@ lbl_fn_800A5F18_0000109C:
 lbl_fn_800A5F18_000010AC:
     addi r3, r1, 0x8
     addi r4, r30, 0x15
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_800A5F18_000010C8
     subi r25, r25, 0x1
@@ -1378,7 +1378,7 @@ lbl_fn_800A5F18_000010AC:
 lbl_fn_800A5F18_000010C8:
     addi r3, r1, 0x8
     addi r4, r30, 0x17
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_800A5F18_000010E8
     li r27, 0x0
@@ -1387,7 +1387,7 @@ lbl_fn_800A5F18_000010C8:
 lbl_fn_800A5F18_000010E8:
     addi r3, r1, 0x8
     addi r4, r30, 0x19
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_800A5F18_00001108
     li r27, 0x0
@@ -1406,7 +1406,7 @@ lbl_fn_800A5F18_00001110:
     addi r3, r1, 0x8
     addi r4, r4, lbl_807329E8@l
     addi r4, r4, 0x19
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_800A5F18_00001148
     li r3, 0x0
@@ -1466,7 +1466,7 @@ lbl_fn_800A6198_000011E0:
     mr r3, r20
     addi r4, r25, lbl_807329E8@l
     li r5, 0x3
-    bl fn_80682544
+    bl strncmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_800A6198_00001334
@@ -1477,7 +1477,7 @@ lbl_fn_800A6198_000011E0:
     addi r3, r1, 0x8
     addi r4, r25, lbl_807329E8@l
     li r5, 0x3
-    bl fn_80682544
+    bl strncmp
     lwz r4, 0x8(r16)
     neg r5, r3
     lwz r0, lbl_8087EF78
@@ -1556,7 +1556,7 @@ lbl_fn_800A6198_00001334:
     mr r3, r20
     addi r4, r26, 0x4
     li r5, 0x3
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_800A6198_00001354
     li r0, 0x1
@@ -1565,7 +1565,7 @@ lbl_fn_800A6198_00001354:
     mr r3, r20
     addi r4, r26, 0x8
     li r5, 0x3
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_800A6198_00001374
     li r0, 0x1
@@ -1574,7 +1574,7 @@ lbl_fn_800A6198_00001374:
     mr r3, r20
     addi r4, r26, 0xc
     li r5, 0x3
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_800A6198_00001394
     li r0, 0x1
@@ -1583,7 +1583,7 @@ lbl_fn_800A6198_00001394:
     mr r3, r20
     addi r4, r26, 0x10
     li r5, 0x3
-    bl fn_80682544
+    bl strncmp
     cntlzw r0, r3
     srwi r0, r0, 5
 lbl_fn_800A6198_000013AC:
@@ -1596,7 +1596,7 @@ lbl_fn_800A6198_000013AC:
     addi r3, r1, 0x8
     addi r4, r26, 0x4
     li r5, 0x3
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_800A6198_000013E4
     li r5, 0x0
@@ -1605,7 +1605,7 @@ lbl_fn_800A6198_000013E4:
     addi r3, r1, 0x8
     addi r4, r26, 0x8
     li r5, 0x3
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_800A6198_00001404
     li r5, 0x1
@@ -1614,7 +1614,7 @@ lbl_fn_800A6198_00001404:
     addi r3, r1, 0x8
     addi r4, r26, 0xc
     li r5, 0x3
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_800A6198_00001424
     li r5, 0x2
@@ -1623,7 +1623,7 @@ lbl_fn_800A6198_00001424:
     addi r3, r1, 0x8
     addi r4, r26, 0x10
     li r5, 0x3
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     li r5, 0x3
     beq lbl_fn_800A6198_00001444
@@ -1929,7 +1929,7 @@ lbl_fn_800A67D4_00001830:
     stw r0, lbl_8087EF78
 lbl_fn_800A67D4_0000183C:
     mr r3, r4
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x4(r31)
     mr r3, r31
     lwz r31, 0xc(r1)

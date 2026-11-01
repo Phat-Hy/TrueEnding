@@ -8,7 +8,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8000D0F8(void);
 extern void fn_8000D114(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8000D3A8(void);
 extern void fn_8000D430(void);
 extern void fn_8000D9E8(void);
@@ -16,32 +16,32 @@ extern void fn_8000DCF4(void);
 extern void fn_8001047C(void);
 extern void fn_80011034(void);
 extern void fn_80012C88(void);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void fn_80013410(void);
 extern void fn_80013484(void);
 extern void fn_8003EFB0(void);
 extern void fn_8004ECC0(void);
 extern void fn_8004ED34(void);
 extern void fn_80057A64(void);
-extern void fn_8005B9CC(void);
+extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
-extern void fn_8008CCE8(void);
-extern void fn_80092814(void);
+extern void atn_Matrix_copy_2(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_80092F1C(void);
-extern void fn_80096E94(void);
-extern void fn_800C344C(void);
+extern void lockon_updateTarget(void);
+extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800CB6E4(void);
-extern void fn_800D246C(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800F52F8(void);
 extern void fn_800F72CC(void);
 extern void fn_800F7F90(void);
@@ -65,12 +65,12 @@ extern void fn_801A03E0(void);
 extern void fn_801A03E8(void);
 extern void fn_801A03EC(void);
 extern void fn_801A0408(void);
-extern void fn_80232B7C(void);
-extern void fn_802377B8(void);
-extern void fn_8023780C(void);
-extern void fn_80237874(void);
-extern void fn_80239DAC(void);
-extern void fn_8023A8B4(void);
+extern void sound_initGlobalInstances(void);
+extern void res_MsgHandle_constructor(void);
+extern void res_MsgHandle_destructor(void);
+extern void res_MsgHandle_update(void);
+extern void res_findResourceSlot(void);
+extern void res_registerResource(void);
 extern void fn_80266154(void);
 extern void fn_802A36B0(void);
 extern void fn_802A4094(void);
@@ -90,13 +90,13 @@ extern void fn_803EFDAC(void);
 extern void fn_803FB870(void);
 extern void fn_803FBC34(void);
 extern void fn_804093B4(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void fn_804EB1B0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9940(void);
-extern void fn_80682428(void);
-extern void fn_80684600(void);
+extern void PSVECNormalize(void);
+extern void PSVECMag(void);
+extern void strcmp(void);
+extern void atoi(void);
 extern char* strcpy(char* dest, const char* src);
 
 /* External data declarations */
@@ -273,7 +273,7 @@ asm void fn_803F9F34(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_803F9F34_0000017C
     mr r4, r30
@@ -311,7 +311,7 @@ asm void fn_803F9FA8(void)
     stw r4, 0x0(r31)
     li r4, 0x1
     li r5, 0x20
-    bl fn_80096E94
+    bl lockon_updateTarget
     li r30, 0x0
     li r0, 0x1
     stw r29, 0x4c4(r31)
@@ -323,9 +323,9 @@ asm void fn_803F9FA8(void)
     stw r30, 0x4f4(r31)
     stw r30, 0x4f8(r31)
     stw r30, 0x4fc(r31)
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r31, 0x50c
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r31, 0x518
     bl fn_800CB360
     li r0, 0xff
@@ -365,7 +365,7 @@ lbl_fn_803F9FA8_0000027C:
     bl fn_804093B4
     stw r3, 0x51c(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x4c4(r31)
     addi r4, r1, 0x8
     lfs f0, lbl_80886038
@@ -415,11 +415,11 @@ asm void fn_803FA148(void)
     cmpwi r3, 0x0
     bne lbl_fn_803FA148_000003B8
     addi r3, r31, 0x500
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_803FA148_000003B8
     addi r3, r31, 0x50c
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_803FA148_000003B8
     mr r3, r31
@@ -432,7 +432,7 @@ asm void fn_803FA148(void)
     cmpwi r3, 0x0
     beq lbl_fn_803FA148_000003B0
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x51c(r31)
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
@@ -478,10 +478,10 @@ asm void fn_803FA214(void)
     stw r29, 0x744(r1)
     mr r29, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r29, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -516,17 +516,17 @@ asm void fn_803FA214(void)
     addi r31, r31, lbl_80752568@l
 lbl_fn_803FA214_000004B0:
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lbz r0, 0x0(r3)
     mr r30, r3
     cmpwi r0, 0x3b
     beq lbl_fn_803FA214_00000590
     addi r4, r31, 0x1
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803FA214_000004F4
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r29, 0xf4
     li r5, 0x0
@@ -535,17 +535,17 @@ lbl_fn_803FA214_000004B0:
 lbl_fn_803FA214_000004F4:
     mr r3, r30
     addi r4, r31, 0x7
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803FA214_0000053C
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r1, 0x8
     bl strcpy
     addi r3, r1, 0x108
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     addi r3, r29, 0xf4
     addi r4, r1, 0x8
     li r5, 0x0
@@ -554,26 +554,26 @@ lbl_fn_803FA214_000004F4:
 lbl_fn_803FA214_0000053C:
     mr r3, r30
     addi r4, r31, 0x11
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803FA214_00000590
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lbz r0, 0x0(r3)
     extsb. r0, r0
     beq lbl_fn_803FA214_00000570
     mr r4, r3
     addi r3, r29, 0x500
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
 lbl_fn_803FA214_00000570:
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lbz r0, 0x0(r3)
     extsb. r0, r0
     beq lbl_fn_803FA214_00000590
     mr r4, r3
     addi r3, r29, 0x50c
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
 lbl_fn_803FA214_00000590:
     addi r3, r1, 0x108
     bl fn_8005BBF8
@@ -600,10 +600,10 @@ asm void fn_803FA3D0(void)
     stw r28, 0x640(r1)
     mr r28, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r31, r3
     addi r3, r28, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -639,22 +639,22 @@ asm void fn_803FA3D0(void)
     addi r30, r30, lbl_80752568@l
 lbl_fn_803FA3D0_00000674:
     addi r3, r1, 0x8
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lbz r0, 0x0(r3)
     mr r29, r3
     cmpwi r0, 0x3b
     beq lbl_fn_803FA3D0_000006FC
     addi r4, r30, 0x15
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803FA3D0_000006D8
     addi r3, r1, 0x8
-    bl fn_8005B9CC
-    bl fn_80684600
+    bl talk_formatQuotedString
+    bl atoi
     stw r3, 0x4f4(r28)
     addi r3, r1, 0x8
-    bl fn_8005B9CC
-    bl fn_80684600
+    bl talk_formatQuotedString
+    bl atoi
     stw r3, 0x4f8(r28)
     lwz r0, lbl_8087F610
     cmpwi r0, 0x0
@@ -666,12 +666,12 @@ lbl_fn_803FA3D0_00000674:
 lbl_fn_803FA3D0_000006D8:
     mr r3, r29
     addi r4, r30, 0x23
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803FA3D0_000006FC
     addi r3, r1, 0x8
-    bl fn_8005B9CC
-    bl fn_80684600
+    bl talk_formatQuotedString
+    bl atoi
     stw r3, 0x4fc(r28)
 lbl_fn_803FA3D0_000006FC:
     addi r3, r1, 0x8
@@ -855,13 +855,13 @@ lbl_fn_803FA5C8_00000944:
     addi r5, r31, 0x6c
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r31, 0x518
     addi r4, r1, 0x8
     bl fn_803FAE08
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_803FA5C8_0000098C:
     bl fn_80121F00
     cmpwi r3, 0x0
@@ -948,7 +948,7 @@ lbl_fn_803FA5C8_00000AA0:
     bl fn_803FAE38
     mr r4, r3
     addi r3, r1, 0x160
-    bl fn_8008CCE8
+    bl atn_Matrix_copy_2
     lfs f1, lbl_80886040
     addi r3, r1, 0x160
     bl fn_80144ED4
@@ -962,7 +962,7 @@ lbl_fn_803FA5C8_00000AA0:
     bl fn_8000D0F8
     addi r3, r31, 0x6c
     addi r4, r1, 0x84
-    bl fn_8000D124
+    bl vec3_copy
     b lbl_fn_803FA5C8_00000F94
 lbl_fn_803FA5C8_00000B08:
     lwz r0, 0x54(r31)
@@ -1003,7 +1003,7 @@ lbl_fn_803FA5C8_00000B08:
     bl fn_803FAE84
     addi r3, r31, 0x6c
     addi r4, r1, 0xe4
-    bl fn_8000D124
+    bl vec3_copy
     b lbl_fn_803FA5C8_00000F70
 lbl_fn_803FA5C8_00000BA8:
     cmpwi r0, 0x5
@@ -1067,7 +1067,7 @@ lbl_fn_803FA5C8_00000C08:
     addi r3, r1, 0xb4
     addi r4, r31, 0x4e4
     addi r5, r1, 0xc0
-    bl fn_80013338
+    bl vec3_sub
     lfs f1, lbl_80886050
     addi r3, r1, 0x48
     addi r4, r1, 0xb4
@@ -1085,14 +1085,14 @@ lbl_fn_803FA5C8_00000C08:
     bl fn_80013410
     addi r3, r31, 0x4e4
     addi r4, r1, 0x6c
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r1, 0x3c
     addi r4, r1, 0x194
     addi r5, r1, 0x1b8
     bl fn_80013410
     addi r3, r31, 0x6c
     addi r4, r1, 0x3c
-    bl fn_8000D124
+    bl vec3_copy
     b lbl_fn_803FA5C8_00000D4C
 lbl_fn_803FA5C8_00000D04:
     lwz r0, 0x4f0(r31)
@@ -1141,7 +1141,7 @@ lbl_fn_803FA5C8_00000D88:
     bl fn_80011034
     addi r3, r31, 0x78
     addi r4, r1, 0x30
-    bl fn_8000D124
+    bl vec3_copy
     lfs f1, 0x78(r31)
     lfs f0, lbl_80886058
     fadds f0, f1, f0
@@ -1170,7 +1170,7 @@ lbl_fn_803FA5C8_00000DC8:
     bl fn_80011034
     addi r3, r31, 0x78
     addi r4, r1, 0x18
-    bl fn_8000D124
+    bl vec3_copy
     lfs f1, 0x78(r31)
     lfs f0, lbl_80886058
     fadds f0, f1, f0
@@ -1201,7 +1201,7 @@ lbl_fn_803FA5C8_00000E6C:
     mr r4, r3
     addi r3, r1, 0x9c
     addi r5, r31, 0x6c
-    bl fn_80013338
+    bl vec3_sub
     mr r3, r30
     bl fn_80198C00
     bl fn_80315644
@@ -1239,7 +1239,7 @@ lbl_fn_803FA5C8_00000EF8:
     mr r4, r3
     addi r3, r1, 0x90
     addi r5, r31, 0x6c
-    bl fn_80013338
+    bl vec3_sub
     mr r3, r30
     bl fn_80198C00
     bl fn_80315644
@@ -1331,7 +1331,7 @@ asm void fn_803FAE38(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_803FAE38_00001050
     li r3, 0x0
@@ -1618,10 +1618,10 @@ lbl_fn_803FAF8C_000013F8:
     mr r4, r30
     li r5, 0x0
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     mr r3, r30
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80886038
     li r11, -0x1
     lfs f1, lbl_8088603C
@@ -1646,7 +1646,7 @@ lbl_fn_803FAF8C_000013F8:
     stfs f1, 0x44(r1)
     stw r11, 0x8(r1)
     stw r0, 0xc(r1)
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_803FAF8C_00001494:
     lis r3, 0x1062
     lwz r4, 0x48(r30)
@@ -1666,10 +1666,10 @@ lbl_fn_803FAF8C_00001494:
     addi r5, r30, 0x6c
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x18
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_803FAF8C_000014EC:
     lis r3, 0x1062
     lwz r4, 0x48(r30)
@@ -1726,11 +1726,11 @@ lbl_fn_803FAF8C_00001594:
     li r5, 0x0
     lwz r3, lbl_8087F3C0
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     addi r3, r30, 0x518
     li r4, 0xa
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lfs f0, lbl_80886038
     li r0, 0xff
     stw r29, 0x4cc(r30)
@@ -1755,7 +1755,7 @@ lbl_fn_803FAF8C_000015DC:
     stfs f4, 0x68(r1)
     stfs f3, 0x60(r1)
     stfs f0, 0x64(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f31, lbl_80886068
     lis r0, 0x4330
     lwz r4, lbl_8087F0A8
@@ -1780,7 +1780,7 @@ lbl_fn_803FAF8C_000015DC:
     fdivs f0, f5, f7
     fmuls f3, f3, f4
     fmsubs f30, f7, f3, f0
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f3, 0x60(r1)
     lis r4, lbl_80752540@ha
     lfs f0, 0x68(r1)
@@ -1800,10 +1800,10 @@ lbl_fn_803FAF8C_000015DC:
     psq_st f1, 0x4e4(r30), 0, 0
     lfs f1, lbl_8088603C
     stfs f2, 0x4ec(r30)
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r0, 0xc(r31)
     cmpwi r0, 0x1
     bne lbl_fn_803FAF8C_00001870
@@ -1874,10 +1874,10 @@ lbl_fn_803FAF8C_000016F4:
     fmuls f4, f12, f4
     fnmsubs f0, f3, f4, f0
     stfs f0, 0x4e8(r30)
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803FAF8C_00001870
 lbl_fn_803FAF8C_00001808:
     psq_l f1, 0x14(r31), 0, 0
@@ -1891,7 +1891,7 @@ lbl_fn_803FAF8C_00001808:
     psq_st f1, 0x6c(r30), 0, 0
     stw r6, 0x4f0(r30)
     stb r0, 0x520(r30)
-    bl fn_800CB5C8
+    bl morph_updateMesh
     b lbl_fn_803FAF8C_00001870
 lbl_fn_803FAF8C_0000183C:
     lwz r0, 0x4fc(r30)
@@ -1902,11 +1902,11 @@ lbl_fn_803FAF8C_0000183C:
     li r6, 0x0
     stw r0, 0x4d0(r30)
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     addi r3, r30, 0x518
     li r4, 0xa
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
 lbl_fn_803FAF8C_00001870:
     lfs f0, lbl_80886038
     stfs f0, 0x4d4(r30)

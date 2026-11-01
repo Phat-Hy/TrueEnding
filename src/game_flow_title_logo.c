@@ -5,11 +5,11 @@
 extern void _restgpr_24(void);
 extern void _savegpr_24(void);
 extern void fn_802376D0(void);
-extern void fn_80237874(void);
+extern void res_MsgHandle_update(void);
 extern void fn_804E2844(void);
 extern void fn_804E2920(void);
 extern void fn_804E4C60(void);
-extern void fn_806846C4(void);
+extern void wmemcpy(void);
 extern void fn_80686A48(void);
 
 /* External data declarations */
@@ -41,7 +41,7 @@ asm void fn_804DF408(void)
     bne lbl_fn_804DF408_0000009C
     addis r3, r3, 0x1
     subi r3, r3, 0x694c
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_804DF408_0000009C
     addis r3, r31, 0x1
@@ -2953,7 +2953,7 @@ lbl_fn_804E0CE8_00002B40:
     mr r4, r29
     addi r3, r30, 0x3bc
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_804E0CE8_00002B88:
     lwz r0, 0x3fc(r31)
     addi r3, r31, 0x448
@@ -3018,7 +3018,7 @@ lbl_fn_804E0CE8_00002C3C:
     mr r4, r29
     addi r3, r30, 0x6d0
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_804E0CE8_00002C84:
     lwz r0, 0x710(r31)
     addi r3, r31, 0x75c
@@ -3083,7 +3083,7 @@ lbl_fn_804E0CE8_00002D38:
     mr r4, r29
     addi r3, r30, 0x9e4
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_804E0CE8_00002D80:
     lwz r0, 0xa24(r31)
     addi r3, r31, 0xa70
@@ -3148,7 +3148,7 @@ lbl_fn_804E0CE8_00002E34:
     mr r4, r29
     addi r3, r30, 0xcf8
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_804E0CE8_00002E7C:
     lwz r6, 0xd38(r31)
     li r0, 0xf
@@ -3301,7 +3301,7 @@ lbl_fn_804E0CE8_0000308C:
     mr r4, r29
     addi r3, r31, 0x3bc
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_804E0CE8_000030D4:
     lwz r0, 0x404(r1)
     addi r7, r1, 0x450
@@ -3366,7 +3366,7 @@ lbl_fn_804E0CE8_00003188:
     mr r4, r29
     addi r3, r31, 0x6d0
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_804E0CE8_000031D0:
     lwz r0, 0x718(r1)
     addi r7, r1, 0x764
@@ -3431,7 +3431,7 @@ lbl_fn_804E0CE8_00003284:
     mr r4, r29
     addi r3, r31, 0x9e4
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_804E0CE8_000032CC:
     lwz r0, 0xa2c(r1)
     addi r7, r1, 0xa78
@@ -3496,7 +3496,7 @@ lbl_fn_804E0CE8_00003380:
     mr r4, r29
     addi r3, r31, 0xcf8
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_804E0CE8_000033C8:
     lwz r3, 0xd40(r1)
     lwz r0, 0xd44(r1)

@@ -16,15 +16,15 @@ extern void fn_800A55D4(void);
 extern void fn_800A56A8(void);
 extern void fn_800A58D0(void);
 extern void fn_800BFAC8(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_80112974(void);
 extern void fn_80114468(void);
 extern void fn_8011447C(void);
 extern void fn_801FECE0(void);
-extern void fn_80232B7C(void);
-extern void fn_80239DAC(void);
+extern void sound_initGlobalInstances(void);
+extern void res_findResourceSlot(void);
 extern void fn_8023A680(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void fn_804786F8(void);
 extern void fn_8047F6B0(void);
 extern void fn_8047F850(void);
@@ -41,9 +41,9 @@ extern void fn_80541370(void);
 extern void fn_80541BDC(void);
 extern void fn_805430A4(void);
 extern void fn_805430C0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9940(void);
-extern void fn_80682428(void);
+extern void PSVECNormalize(void);
+extern void PSVECMag(void);
+extern void strcmp(void);
 
 /* External data declarations */
 extern u8 lbl_8075EC98[];
@@ -129,7 +129,7 @@ lbl_fn_8055D004_00000068:
     lis r3, lbl_80794DC0@ha
     lwz r4, lbl_80794DC0@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_8055D004_00000098
@@ -1245,7 +1245,7 @@ lbl_fn_8055DBF8_00000EC8:
     lis r4, lbl_8075FAF8@ha
     mr r24, r3
     addi r3, r4, lbl_8075FAF8@l
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r3, lbl_8087F3C0
     li r0, 0x4
     stw r0, 0xb8(r3)
@@ -1255,7 +1255,7 @@ lbl_fn_8055DBF8_00000EC8:
     lwz r25, 0x18(r29)
     mr r3, r28
     mr r4, r26
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     cmpwi r24, 0x0
     beq lbl_fn_8055DBF8_00000FEC
     neg r0, r30
@@ -1299,7 +1299,7 @@ lbl_fn_8055DBF8_00001030:
     lwz r25, 0x18(r29)
     mr r3, r28
     mr r4, r26
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80887EB4
     li r3, -0x1
     stfs f0, 0x18(r1)
@@ -1318,7 +1318,7 @@ lbl_fn_8055DBF8_00001030:
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_8055DBF8_0000108C:
     lwz r3, lbl_8087F3C0
     li r0, 0x0
@@ -1404,7 +1404,7 @@ lbl_fn_8055DBF8_00001180:
     stw r7, 0xb8(r6)
     srwi r6, r0, 5
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     li r0, 0x0
     stw r0, 0xb8(r3)
@@ -1519,7 +1519,7 @@ lbl_fn_8055E258_000012D4:
 lbl_fn_8055E258_00001318:
     lfs f31, lbl_80887EB8
 lbl_fn_8055E258_0000131C:
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r31
@@ -1961,7 +1961,7 @@ lbl_fn_8055E724_00001810:
     stfs f5, 0x60(r1)
     stfs f3, 0x5c(r1)
     stfs f0, 0x64(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f4, 0x88(r1)
     fmr f31, f1
     lfs f3, 0x70(r1)
@@ -1978,11 +1978,11 @@ lbl_fn_8055E724_00001810:
     stfs f5, 0x54(r1)
     stfs f3, 0x50(r1)
     stfs f0, 0x64(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fcmpo cr0, f31, f1
     ble lbl_fn_8055E724_00001948
     addi r3, r1, 0x50
-    bl fn_805F9940
+    bl PSVECMag
     fmr f31, f1
 lbl_fn_8055E724_00001948:
     lfs f3, lbl_80887EBC
@@ -2041,7 +2041,7 @@ lbl_fn_8055E724_00001948:
     fsubs f0, f4, f3
     stfs f5, 0xac(r1)
     stfs f0, 0xb0(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f4, 0xac(r1)
     mr r3, r29
     lfs f5, lbl_80887EC4

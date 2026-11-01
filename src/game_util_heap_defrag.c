@@ -9,16 +9,16 @@ extern void _savegpr_22(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800A555C(void);
-extern void fn_800CB3A0(void);
-extern void fn_800D246C(void);
+extern void ref_releaseHandle(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800DD3FC(void);
 extern void fn_80117228(void);
 extern void fn_801F3FF8(void);
-extern void fn_801F4E8C(void);
+extern void saveSlot_readSummary(void);
 extern void fn_801F64D0(void);
 extern void fn_801F6C80(void);
 extern void fn_801F6E78(void);
@@ -38,8 +38,8 @@ extern void fn_8044D500(void);
 extern void fn_8044D560(void);
 extern void fn_8044D678(void);
 extern void fn_8044D6AC(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void fn_804A39EC(void);
 extern void fn_804A3A68(void);
 extern void fn_804A3C24(void);
@@ -157,10 +157,10 @@ lbl_fn_80587B74_0000005C:
     b lbl_fn_80587B74_000000D0
 lbl_fn_80587B74_0000007C:
     addi r3, r3, 0x58
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r31, r3
     addi r3, r30, 0x58
-    bl fn_80470580
+    bl boss_getOffset54
     lwz r12, 0x0(r30)
     mr r4, r3
     mr r3, r30
@@ -210,7 +210,7 @@ asm void fn_80587C5C(void)
     bl fn_80117228
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r12, 0x0(r31)
     mr r3, r31
     li r4, 0x5
@@ -224,7 +224,7 @@ lbl_fn_80587C5C_0000015C:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r12, 0x0(r31)
     mr r3, r31
     li r4, 0x7
@@ -273,7 +273,7 @@ lbl_fn_80587D14_00000204:
     bl fn_80117228
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r12, 0x0(r30)
     mr r3, r30
     li r4, 0x7
@@ -287,7 +287,7 @@ lbl_fn_80587D14_00000238:
     bl fn_80117228
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r12, 0x0(r30)
     mr r3, r30
     li r4, 0x1
@@ -307,7 +307,7 @@ lbl_fn_80587D14_0000026C:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r12, 0x0(r30)
     mr r3, r30
     li r4, 0x1
@@ -381,7 +381,7 @@ lbl_fn_80587E40_0000037C:
     addi r5, r5, lbl_80761914@l
     addi r3, r5, 0x103
     addi r31, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r31
     addi r5, r1, 0x18
@@ -392,7 +392,7 @@ lbl_fn_80587E40_000003B4:
     bl fn_80117228
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r12, 0x0(r29)
     mr r3, r29
     li r4, 0x8
@@ -406,7 +406,7 @@ lbl_fn_80587E40_000003E8:
     bl fn_80117228
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r29
     mr r5, r30
     li r4, 0x1
@@ -431,7 +431,7 @@ lbl_fn_80587E40_00000430:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r12, 0x0(r29)
     mr r3, r29
     li r4, 0x4
@@ -538,7 +538,7 @@ asm void fn_805880F4(void)
     stw r0, 0x38(r6)
     lwz r4, 0x5b74(r5)
     addi r24, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80888114
     mr r4, r3
     mr r3, r24
@@ -572,11 +572,11 @@ lbl_fn_805880F4_0000062C:
     bl sprintf
     lwz r25, 0x5b74(r27)
     addi r3, r1, 0x50
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r25
     addi r3, r1, 0x28
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lfs f6, 0x28(r1)
     add r3, r29, r28
     lfs f5, 0x2c(r1)
@@ -752,11 +752,11 @@ lbl_fn_805883DC_000008D4:
     bl sprintf
     lwz r25, 0x5b70(r31)
     addi r3, r1, 0x30
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r25
     addi r3, r1, 0x8
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lfs f4, 0x8(r1)
     addis r3, r26, 0x2
     lfs f3, 0xc(r1)
@@ -920,7 +920,7 @@ asm void fn_80588688(void)
     mr r6, r5
     addi r3, r3, 0x5c38
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80588688_00000B7C
     mr r4, r29
@@ -977,7 +977,7 @@ asm void fn_80588714(void)
     addis r5, r28, 0x2
     li r4, 0x1
     stw r3, 0x5b68(r5)
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r28
     addi r4, r31, 0x2a
     li r5, 0x0
@@ -985,7 +985,7 @@ asm void fn_80588714(void)
     addis r5, r28, 0x2
     li r4, 0x1
     stw r3, 0x5b6c(r5)
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r28
     addi r4, r31, 0x52
     li r5, 0x0
@@ -993,7 +993,7 @@ asm void fn_80588714(void)
     addis r5, r28, 0x2
     li r4, 0x1
     stw r3, 0x5b70(r5)
-    bl fn_800D246C
+    bl atn_Task_setActive
     addi r31, r31, 0x7c
     li r29, 0x0
     li r30, 0x0
@@ -1005,7 +1005,7 @@ lbl_fn_80588714_00000C78:
     li r4, 0x1
     addi r0, r5, 0x5b74
     stwx r3, r28, r0
-    bl fn_800D246C
+    bl atn_Task_setActive
     addi r29, r29, 0x1
     addi r30, r30, 0x4
     cmpwi r29, 0xa
@@ -1019,7 +1019,7 @@ lbl_fn_80588714_00000C78:
     addis r5, r28, 0x2
     li r4, 0x1
     stw r3, 0x5b9c(r5)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r31, 0x1c(r1)
     mr r3, r28
     lwz r30, 0x18(r1)
@@ -1098,10 +1098,10 @@ asm void fn_80588908(void)
     mr r3, r31
     bl fn_8057F8FC
     addi r3, r31, 0x58
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r28, r3
     addi r3, r31, 0x58
-    bl fn_80470580
+    bl boss_getOffset54
     lwz r12, 0x0(r31)
     mr r4, r3
     mr r3, r31
@@ -1159,7 +1159,7 @@ lbl_fn_80588908_00000E80:
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, 0x5b6c(r5)
-    bl fn_800D246C
+    bl atn_Task_setActive
     addis r6, r31, 0x2
     lfs f1, lbl_80888134
     lwz r3, 0x5b6c(r6)
@@ -1197,7 +1197,7 @@ lbl_fn_80588908_00000F08:
     addis r3, r31, 0x2
     li r4, 0x0
     lwz r3, 0x5b9c(r3)
-    bl fn_800D246C
+    bl atn_Task_setActive
     addis r6, r31, 0x2
     li r0, 0x1
     lwz r5, 0x5b9c(r6)
@@ -1379,11 +1379,11 @@ lbl_fn_80588BE4_000011B0:
     addis r4, r31, 0x2
     addi r3, r1, 0x20
     lwz r30, 0x5b70(r4)
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r30
     addi r3, r1, 0x8
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     addis r8, r31, 0x2
     lwz r3, lbl_8087F580
     lwz r4, 0x5c24(r8)
@@ -1534,7 +1534,7 @@ lbl_fn_80588E28_000013F0:
     bl fn_80117228
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r31
     li r4, 0x1
     li r5, 0xb
@@ -1584,7 +1584,7 @@ lbl_fn_80588E28_000014B0:
     bl fn_80117228
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r31
     li r4, 0x1
     li r5, 0xa
@@ -1663,7 +1663,7 @@ asm void fn_8058910C(void)
     bl fn_80117228
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r12, 0x0(r30)
     mr r3, r30
     li r4, 0x8
@@ -1690,7 +1690,7 @@ lbl_fn_8058910C_0000160C:
     bl fn_80117228
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r12, 0x0(r30)
     mr r3, r30
     li r4, 0x5
@@ -1711,7 +1711,7 @@ lbl_fn_8058910C_00001668:
     bl fn_80117228
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -1725,7 +1725,7 @@ lbl_fn_8058910C_000016B8:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r12, 0x0(r30)
     mr r3, r30
     li r4, 0x7
@@ -1761,7 +1761,7 @@ asm void fn_80589274(void)
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80589274_00001748:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1914,7 +1914,7 @@ lbl_fn_80589450_00001948:
     bl fn_80117228
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r12, 0x0(r30)
     mr r3, r30
     li r4, 0x7
@@ -1928,7 +1928,7 @@ lbl_fn_80589450_0000197C:
     bl fn_80117228
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r12, 0x0(r30)
     mr r3, r30
     li r4, 0x5
@@ -1942,7 +1942,7 @@ lbl_fn_80589450_000019B0:
     bl fn_80117228
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r12, 0x0(r30)
     mr r3, r30
     li r4, 0x1
@@ -1962,7 +1962,7 @@ lbl_fn_80589450_000019E4:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r12, 0x0(r30)
     mr r3, r30
     li r4, 0x1

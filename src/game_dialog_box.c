@@ -11,7 +11,7 @@ extern void fn_80063D3C(void);
 extern void fn_8006EF48(void);
 extern void fn_8006F2F0(void);
 extern void fn_8008CD60(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_8009373C(void);
 extern void fn_80094F98(void);
 extern void fn_800BFAC8(void);
@@ -22,16 +22,16 @@ extern void fn_801333A4(void);
 extern void fn_80134290(void);
 extern void fn_8014FB60(void);
 extern void fn_8021BE98(void);
-extern void fn_80370174(void);
+extern void world_getGlobalFlag(void);
 extern void fn_80481654(void);
 extern void fn_804918A4(void);
 extern void fn_80565F38(void);
-extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9920(void);
+extern void PSMTXConcat(void);
+extern void PSMTXRotRad(void);
+extern void PSVECSquareMag(void);
 extern void fn_805F99F0(void);
 extern void fn_805F9A50(void);
-extern void fn_806868C4(void);
+extern void swprintf(void);
 extern void fn_8072D210(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -91,7 +91,7 @@ void fn_80149888(void);
 void fn_8014989C(void);
 void fn_801498D8(void);
 void fn_801498F0(void);
-void fn_80149A30(void);
+void dialog_renderWindow(void);
 
 asm void fn_801495E8(void)
 {
@@ -104,7 +104,7 @@ asm void fn_801495E8(void)
     mr r3, r4
     mr r4, r31
     mr r5, r31
-    bl fn_805F89F0
+    bl PSMTXConcat
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -123,11 +123,11 @@ asm void fn_80149624(void)
     stw r31, 0x6c(r1)
     mr r31, r3
     addi r3, r1, 0x8
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x8
     addi r5, r1, 0x38
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x38
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -189,11 +189,11 @@ asm void fn_801496A8(void)
     fmr f1, f0
     addi r3, r1, 0xd8
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0xd8
     addi r5, r1, 0x108
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x108
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -214,11 +214,11 @@ lbl_fn_801496A8_00000180:
     beq lbl_fn_801496A8_000001E0
     addi r3, r1, 0x78
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x78
     addi r5, r1, 0xa8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xa8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -239,11 +239,11 @@ lbl_fn_801496A8_000001E0:
     beq lbl_fn_801496A8_00000240
     addi r3, r1, 0x18
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x18
     addi r5, r1, 0x48
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x48
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -261,7 +261,7 @@ lbl_fn_801496A8_00000240:
     mr r3, r30
     mr r4, r31
     addi r5, r1, 0x168
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x168
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -415,7 +415,7 @@ asm void fn_801498F0(void)
     blr
 }
 
-asm void fn_80149A30(void)
+asm void dialog_renderWindow(void)
 {
     nofralloc
     stwu r1, -0xc50(r1)
@@ -436,17 +436,17 @@ asm void fn_80149A30(void)
     lwz r4, 0x20(r4)
     stw r0, 0xc00(r1)
     cmpwi r4, 0x0
-    beq lbl_fn_80149A30_00002798
+    beq lbl_dialog_renderWindow_00002798
     lwz r0, 0x54c(r3)
     rlwinm r5, r0, 0, 28, 28
     subfic r4, r5, 0x8
     subi r0, r5, 0x8
     or r0, r4, r0
     srwi. r0, r0, 31
-    beq lbl_fn_80149A30_00002798
+    beq lbl_dialog_renderWindow_00002798
     lwz r0, 0x12a8(r3)
     extrwi. r0, r0, 1, 22
-    bne lbl_fn_80149A30_00002798
+    bne lbl_dialog_renderWindow_00002798
     lwz r4, lbl_8087EFB4
     lfs f0, 0x530(r3)
     lfs f3, 0x114(r4)
@@ -461,48 +461,48 @@ asm void fn_80149A30(void)
     stfs f4, 0xf8(r1)
     stfs f0, 0xf4(r1)
     stfs f6, 0xfc(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lwz r0, 0x55c(r24)
     fmr f31, f1
     cmpwi r0, 0x8
-    beq lbl_fn_80149A30_00000AEC
+    beq lbl_dialog_renderWindow_00000AEC
     lwz r3, 0x48(r24)
     li r0, 0x1
     lfs f0, lbl_80881964
     cmpwi r3, 0x1
     stfs f0, 0x15c(r24)
-    beq lbl_fn_80149A30_0000052C
+    beq lbl_dialog_renderWindow_0000052C
     cmpwi r3, 0x4
-    beq lbl_fn_80149A30_0000052C
+    beq lbl_dialog_renderWindow_0000052C
     li r0, 0x0
-lbl_fn_80149A30_0000052C:
+lbl_dialog_renderWindow_0000052C:
     cmpwi r0, 0x0
-    bne lbl_fn_80149A30_00000540
+    bne lbl_dialog_renderWindow_00000540
     lwz r0, lbl_8087FA20
     cmpwi r0, 0x0
-    beq lbl_fn_80149A30_0000054C
-lbl_fn_80149A30_00000540:
+    beq lbl_dialog_renderWindow_0000054C
+lbl_dialog_renderWindow_00000540:
     lfs f0, lbl_80881ADC
     fcmpo cr0, f1, f0
-    bgt lbl_fn_80149A30_00002798
-lbl_fn_80149A30_0000054C:
+    bgt lbl_dialog_renderWindow_00002798
+lbl_dialog_renderWindow_0000054C:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_80149A30_00000AF4
+    beq lbl_dialog_renderWindow_00000AF4
     lwz r0, 0x868(r3)
     cmpwi r0, 0x6
-    beq lbl_fn_80149A30_00000AF4
+    beq lbl_dialog_renderWindow_00000AF4
     lwz r0, 0x520(r24)
     cmpwi r0, 0x0
-    blt lbl_fn_80149A30_000005B8
-    bge lbl_fn_80149A30_0000057C
+    blt lbl_dialog_renderWindow_000005B8
+    bge lbl_dialog_renderWindow_0000057C
     li r5, 0x0
-    b lbl_fn_80149A30_00000588
-lbl_fn_80149A30_0000057C:
+    b lbl_dialog_renderWindow_00000588
+lbl_dialog_renderWindow_0000057C:
     mulli r0, r0, 0x30
     lwz r3, 0xec(r24)
     add r5, r3, r0
-lbl_fn_80149A30_00000588:
+lbl_dialog_renderWindow_00000588:
     lfs f0, 0x1c(r5)
     addi r4, r1, 0xe8
     lfs f3, 0xc(r5)
@@ -514,19 +514,19 @@ lbl_fn_80149A30_00000588:
     stfs f2, 0xf0(r1)
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x1d8(r1)
-    b lbl_fn_80149A30_00000620
-lbl_fn_80149A30_000005B8:
+    b lbl_dialog_renderWindow_00000620
+lbl_dialog_renderWindow_000005B8:
     lwz r0, 0x524(r24)
     cmpwi r0, 0x0
-    blt lbl_fn_80149A30_0000060C
-    bge lbl_fn_80149A30_000005D0
+    blt lbl_dialog_renderWindow_0000060C
+    bge lbl_dialog_renderWindow_000005D0
     li r5, 0x0
-    b lbl_fn_80149A30_000005DC
-lbl_fn_80149A30_000005D0:
+    b lbl_dialog_renderWindow_000005DC
+lbl_dialog_renderWindow_000005D0:
     mulli r0, r0, 0x30
     lwz r3, 0xec(r24)
     add r5, r3, r0
-lbl_fn_80149A30_000005DC:
+lbl_dialog_renderWindow_000005DC:
     lfs f0, 0x1c(r5)
     addi r4, r1, 0xdc
     lfs f3, 0xc(r5)
@@ -538,14 +538,14 @@ lbl_fn_80149A30_000005DC:
     stfs f2, 0xe4(r1)
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x1d8(r1)
-    b lbl_fn_80149A30_00000620
-lbl_fn_80149A30_0000060C:
+    b lbl_dialog_renderWindow_00000620
+lbl_dialog_renderWindow_0000060C:
     psq_l f1, 0x528(r24), 0, 0
     addi r3, r1, 0x1d0
     lfs f2, 0x530(r24)
     stfs f2, 0x1d8(r1)
     psq_st f1, 0x0(r3), 0, 0
-lbl_fn_80149A30_00000620:
+lbl_dialog_renderWindow_00000620:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x1c4
     addi r5, r1, 0x1d0
@@ -553,9 +553,9 @@ lbl_fn_80149A30_00000620:
     lfs f0, 0x1cc(r1)
     lfs f4, lbl_8088196C
     fcmpo cr0, f0, f4
-    bge lbl_fn_80149A30_00000644
-    b lbl_fn_80149A30_00000680
-lbl_fn_80149A30_00000644:
+    bge lbl_dialog_renderWindow_00000644
+    b lbl_dialog_renderWindow_00000680
+lbl_dialog_renderWindow_00000644:
     lwz r3, lbl_8087EFB4
     lfs f0, 0x1d8(r1)
     lfs f4, 0x114(r3)
@@ -571,33 +571,33 @@ lbl_fn_80149A30_00000644:
     fmadds f4, f6, f6, f0
     stfs f3, 0xd4(r1)
     stfs f5, 0xd8(r1)
-lbl_fn_80149A30_00000680:
+lbl_dialog_renderWindow_00000680:
     lwz r0, 0x48(r24)
     cmpwi r0, 0x0
-    bne lbl_fn_80149A30_00000AB0
+    bne lbl_dialog_renderWindow_00000AB0
     lwz r3, lbl_8087F430
     li r4, 0x1
     lwz r0, 0x868(r3)
     cmpwi r0, 0x3
-    bne lbl_fn_80149A30_000006A8
+    bne lbl_dialog_renderWindow_000006A8
     li r4, 0x0
-    b lbl_fn_80149A30_000006D8
-lbl_fn_80149A30_000006A8:
+    b lbl_dialog_renderWindow_000006D8
+lbl_dialog_renderWindow_000006A8:
     cmpwi r0, 0x4
-    bne lbl_fn_80149A30_000006D8
+    bne lbl_dialog_renderWindow_000006D8
     lwz r0, 0x12a4(r24)
     li r4, 0x0
     extrwi. r0, r0, 1, 25
-    beq lbl_fn_80149A30_000006D8
+    beq lbl_dialog_renderWindow_000006D8
     lwz r0, 0x674(r24)
     srwi r0, r0, 31
     xori r0, r0, 0x1
     cmpwi r0, 0x0
-    bne lbl_fn_80149A30_000006D8
+    bne lbl_dialog_renderWindow_000006D8
     li r4, 0x1
-lbl_fn_80149A30_000006D8:
+lbl_dialog_renderWindow_000006D8:
     cmpwi r4, 0x0
-    beq lbl_fn_80149A30_00000AF4
+    beq lbl_dialog_renderWindow_00000AF4
     lwz r5, lbl_8087EFB4
     lis r3, lbl_80737A9C@ha
     addi r3, r3, lbl_80737A9C@l
@@ -609,120 +609,120 @@ lbl_fn_80149A30_000006D8:
     stfs f2, 0x1c0(r1)
     li r5, 0x0
     psq_st f1, 0x0(r6), 0, 0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
-    bge lbl_fn_80149A30_00000720
+    bge lbl_dialog_renderWindow_00000720
     li r31, 0x0
-    b lbl_fn_80149A30_0000072C
-lbl_fn_80149A30_00000720:
+    b lbl_dialog_renderWindow_0000072C
+lbl_dialog_renderWindow_00000720:
     mulli r0, r3, 0x30
     lwz r3, 0xec(r24)
     add r31, r3, r0
-lbl_fn_80149A30_0000072C:
+lbl_dialog_renderWindow_0000072C:
     lis r4, lbl_80737A9C@ha
     addi r3, r24, 0xb0
     addi r4, r4, lbl_80737A9C@l
     li r5, 0x0
     addi r4, r4, 0x5b
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
-    bge lbl_fn_80149A30_00000754
+    bge lbl_dialog_renderWindow_00000754
     li r30, 0x0
-    b lbl_fn_80149A30_00000760
-lbl_fn_80149A30_00000754:
+    b lbl_dialog_renderWindow_00000760
+lbl_dialog_renderWindow_00000754:
     mulli r0, r3, 0x30
     lwz r3, 0xec(r24)
     add r30, r3, r0
-lbl_fn_80149A30_00000760:
+lbl_dialog_renderWindow_00000760:
     lis r4, lbl_80737A9C@ha
     addi r3, r24, 0xb0
     addi r4, r4, lbl_80737A9C@l
     li r5, 0x0
     addi r4, r4, 0x60
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
-    bge lbl_fn_80149A30_00000788
+    bge lbl_dialog_renderWindow_00000788
     li r29, 0x0
-    b lbl_fn_80149A30_00000794
-lbl_fn_80149A30_00000788:
+    b lbl_dialog_renderWindow_00000794
+lbl_dialog_renderWindow_00000788:
     mulli r0, r3, 0x30
     lwz r3, 0xec(r24)
     add r29, r3, r0
-lbl_fn_80149A30_00000794:
+lbl_dialog_renderWindow_00000794:
     lis r4, lbl_80737A9C@ha
     addi r3, r24, 0xb0
     addi r4, r4, lbl_80737A9C@l
     li r5, 0x0
     addi r4, r4, 0x72
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
-    bge lbl_fn_80149A30_000007BC
+    bge lbl_dialog_renderWindow_000007BC
     li r28, 0x0
-    b lbl_fn_80149A30_000007C8
-lbl_fn_80149A30_000007BC:
+    b lbl_dialog_renderWindow_000007C8
+lbl_dialog_renderWindow_000007BC:
     mulli r0, r3, 0x30
     lwz r3, 0xec(r24)
     add r28, r3, r0
-lbl_fn_80149A30_000007C8:
+lbl_dialog_renderWindow_000007C8:
     lis r4, lbl_80737A9C@ha
     addi r3, r24, 0xb0
     addi r4, r4, lbl_80737A9C@l
     li r5, 0x0
     addi r4, r4, 0x368
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
-    bge lbl_fn_80149A30_000007F0
+    bge lbl_dialog_renderWindow_000007F0
     li r27, 0x0
-    b lbl_fn_80149A30_000007FC
-lbl_fn_80149A30_000007F0:
+    b lbl_dialog_renderWindow_000007FC
+lbl_dialog_renderWindow_000007F0:
     mulli r0, r3, 0x30
     lwz r3, 0xec(r24)
     add r27, r3, r0
-lbl_fn_80149A30_000007FC:
+lbl_dialog_renderWindow_000007FC:
     lis r4, lbl_80737A9C@ha
     addi r3, r24, 0xb0
     addi r4, r4, lbl_80737A9C@l
     li r5, 0x0
     addi r4, r4, 0x80
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
-    bge lbl_fn_80149A30_00000824
+    bge lbl_dialog_renderWindow_00000824
     li r26, 0x0
-    b lbl_fn_80149A30_00000830
-lbl_fn_80149A30_00000824:
+    b lbl_dialog_renderWindow_00000830
+lbl_dialog_renderWindow_00000824:
     mulli r0, r3, 0x30
     lwz r3, 0xec(r24)
     add r26, r3, r0
-lbl_fn_80149A30_00000830:
+lbl_dialog_renderWindow_00000830:
     lis r4, lbl_80737A9C@ha
     addi r3, r24, 0xb0
     addi r4, r4, lbl_80737A9C@l
     li r5, 0x0
     addi r4, r4, 0x373
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
-    bge lbl_fn_80149A30_00000858
+    bge lbl_dialog_renderWindow_00000858
     li r25, 0x0
-    b lbl_fn_80149A30_00000864
-lbl_fn_80149A30_00000858:
+    b lbl_dialog_renderWindow_00000864
+lbl_dialog_renderWindow_00000858:
     mulli r0, r3, 0x30
     lwz r3, 0xec(r24)
     add r25, r3, r0
-lbl_fn_80149A30_00000864:
+lbl_dialog_renderWindow_00000864:
     cmpwi r31, 0x0
-    beq lbl_fn_80149A30_00000AF4
+    beq lbl_dialog_renderWindow_00000AF4
     cmpwi r30, 0x0
-    beq lbl_fn_80149A30_00000AF4
+    beq lbl_dialog_renderWindow_00000AF4
     cmpwi r29, 0x0
-    beq lbl_fn_80149A30_00000AF4
+    beq lbl_dialog_renderWindow_00000AF4
     cmpwi r28, 0x0
-    beq lbl_fn_80149A30_00000AF4
+    beq lbl_dialog_renderWindow_00000AF4
     cmpwi r27, 0x0
-    beq lbl_fn_80149A30_00000AF4
+    beq lbl_dialog_renderWindow_00000AF4
     cmpwi r26, 0x0
-    beq lbl_fn_80149A30_00000AF4
+    beq lbl_dialog_renderWindow_00000AF4
     cmpwi r25, 0x0
-    beq lbl_fn_80149A30_00000AF4
+    beq lbl_dialog_renderWindow_00000AF4
     lfs f0, 0x1c(r31)
     addi r5, r1, 0xc4
     lfs f3, 0xc(r31)
@@ -752,11 +752,11 @@ lbl_fn_80149A30_00000864:
     stfs f0, 0xb8(r1)
     stfs f4, 0xbc(r1)
     stfs f7, 0xc0(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, 0x1b4(r1)
     fmuls f0, f0, f0
     fcmpo cr0, f1, f0
-    blt lbl_fn_80149A30_00002798
+    blt lbl_dialog_renderWindow_00002798
     lfs f0, 0x1c(r30)
     addi r31, r1, 0x1dc
     lfs f3, 0xc(r30)
@@ -792,7 +792,7 @@ lbl_fn_80149A30_00000864:
     lfs f0, 0x1f4(r1)
     fmuls f0, f0, f0
     fcmpo cr0, f1, f0
-    blt lbl_fn_80149A30_00002798
+    blt lbl_dialog_renderWindow_00002798
     lfs f3, 0x2c(r28)
     addi r6, r1, 0x94
     lfs f4, 0x1c(r28)
@@ -823,7 +823,7 @@ lbl_fn_80149A30_00000864:
     lfs f0, 0x1f4(r1)
     fmuls f0, f0, f0
     fcmpo cr0, f1, f0
-    blt lbl_fn_80149A30_00002798
+    blt lbl_dialog_renderWindow_00002798
     lfs f3, 0x2c(r26)
     addi r6, r1, 0x7c
     lfs f4, 0x1c(r26)
@@ -854,295 +854,295 @@ lbl_fn_80149A30_00000864:
     lfs f0, 0x1f4(r1)
     fmuls f0, f0, f0
     fcmpo cr0, f1, f0
-    bge lbl_fn_80149A30_00000AF4
-    b lbl_fn_80149A30_00002798
-lbl_fn_80149A30_00000AB0:
+    bge lbl_dialog_renderWindow_00000AF4
+    b lbl_dialog_renderWindow_00002798
+lbl_dialog_renderWindow_00000AB0:
     lwz r0, 0x12a4(r24)
     extrwi r0, r0, 1, 9
     cmplwi r0, 0x1
-    beq lbl_fn_80149A30_00000AF4
+    beq lbl_dialog_renderWindow_00000AF4
     lfs f0, lbl_80881AE8
     fcmpo cr0, f4, f0
-    bge lbl_fn_80149A30_00000AF4
+    bge lbl_dialog_renderWindow_00000AF4
     lwz r3, lbl_8087EFB4
     lfs f3, 0x1d4(r1)
     lfs f4, 0x110(r3)
     lfs f0, lbl_80881974
     fsubs f3, f4, f3
     fcmpo cr0, f3, f0
-    bge lbl_fn_80149A30_00000AF4
-    b lbl_fn_80149A30_00002798
-lbl_fn_80149A30_00000AEC:
+    bge lbl_dialog_renderWindow_00000AF4
+    b lbl_dialog_renderWindow_00002798
+lbl_dialog_renderWindow_00000AEC:
     lfs f0, lbl_808819AC
     stfs f0, 0x15c(r24)
-lbl_fn_80149A30_00000AF4:
+lbl_dialog_renderWindow_00000AF4:
     lwz r3, lbl_8087F430
     cmpwi cr1, r3, 0x0
-    beq cr1, lbl_fn_80149A30_00000E64
+    beq cr1, lbl_dialog_renderWindow_00000E64
     lwz r0, lbl_8087FA20
     cmpwi r0, 0x0
-    bne lbl_fn_80149A30_00000E64
+    bne lbl_dialog_renderWindow_00000E64
     li r25, 0x1
-    beq cr1, lbl_fn_80149A30_00000BA0
+    beq cr1, lbl_dialog_renderWindow_00000BA0
     li r4, 0xd9
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x1
-    beq lbl_fn_80149A30_00000B38
+    beq lbl_dialog_renderWindow_00000B38
     cmpwi r3, 0x2
-    beq lbl_fn_80149A30_00000B7C
+    beq lbl_dialog_renderWindow_00000B7C
     cmpwi r3, 0x3
-    beq lbl_fn_80149A30_00000B90
-    b lbl_fn_80149A30_00000BA0
-lbl_fn_80149A30_00000B38:
+    beq lbl_dialog_renderWindow_00000B90
+    b lbl_dialog_renderWindow_00000BA0
+lbl_dialog_renderWindow_00000B38:
     lwz r0, 0x48(r24)
     li r25, 0x1
     li r3, 0x1
     cmpwi r0, 0x0
-    beq lbl_fn_80149A30_00000B60
+    beq lbl_dialog_renderWindow_00000B60
     lwz r0, 0x12a4(r24)
     extrwi r0, r0, 1, 9
     cmplwi r0, 0x1
-    beq lbl_fn_80149A30_00000B60
+    beq lbl_dialog_renderWindow_00000B60
     li r3, 0x0
-lbl_fn_80149A30_00000B60:
+lbl_dialog_renderWindow_00000B60:
     cmpwi r3, 0x0
-    bne lbl_fn_80149A30_00000BA0
+    bne lbl_dialog_renderWindow_00000BA0
     lwz r0, 0x55c(r24)
     cmpwi r0, 0x8
-    beq lbl_fn_80149A30_00000BA0
+    beq lbl_dialog_renderWindow_00000BA0
     li r25, 0x0
-    b lbl_fn_80149A30_00000BA0
-lbl_fn_80149A30_00000B7C:
+    b lbl_dialog_renderWindow_00000BA0
+lbl_dialog_renderWindow_00000B7C:
     lwz r3, 0x55c(r24)
     subi r0, r3, 0x8
     cntlzw r0, r0
     srwi r25, r0, 5
-    b lbl_fn_80149A30_00000BA0
-lbl_fn_80149A30_00000B90:
+    b lbl_dialog_renderWindow_00000BA0
+lbl_dialog_renderWindow_00000B90:
     lwz r3, 0x48(r24)
     subi r0, r3, 0x2
     cntlzw r0, r0
     srwi r25, r0, 5
-lbl_fn_80149A30_00000BA0:
+lbl_dialog_renderWindow_00000BA0:
     cmpwi r25, 0x0
-    beq lbl_fn_80149A30_00000D08
+    beq lbl_dialog_renderWindow_00000D08
     lwz r0, 0xb4(r24)
     mr r3, r24
     ori r0, r0, 0x400
     stw r0, 0xb4(r24)
     bl fn_8014FB60
     cmpwi r3, 0x0
-    beq lbl_fn_80149A30_00000BEC
+    beq lbl_dialog_renderWindow_00000BEC
     lwz r3, 0x648(r24)
     lwz r0, 0x14(r3)
     ori r0, r0, 0x400
     stw r0, 0x14(r3)
     lwz r3, 0x64c(r24)
     cmpwi r3, 0x0
-    beq lbl_fn_80149A30_00000BEC
+    beq lbl_dialog_renderWindow_00000BEC
     lwz r0, 0x14(r3)
     ori r0, r0, 0x400
     stw r0, 0x14(r3)
-lbl_fn_80149A30_00000BEC:
+lbl_dialog_renderWindow_00000BEC:
     li r0, 0x2
     addi r5, r24, 0x680
     li r7, 0x0
     li r3, 0x1
     mtctr r0
-lbl_fn_80149A30_00000C00:
+lbl_dialog_renderWindow_00000C00:
     lwz r4, 0x0(r5)
     cmpwi r4, 0x0
-    beq lbl_fn_80149A30_00000C2C
+    beq lbl_dialog_renderWindow_00000C2C
     lwz r0, 0x6a0(r24)
     slw r6, r3, r7
     and r0, r6, r0
     cmplw r6, r0
-    bne lbl_fn_80149A30_00000C2C
+    bne lbl_dialog_renderWindow_00000C2C
     lwz r0, 0x28(r4)
     ori r0, r0, 0x400
     stw r0, 0x28(r4)
-lbl_fn_80149A30_00000C2C:
+lbl_dialog_renderWindow_00000C2C:
     lwz r4, 0x4(r5)
     addi r7, r7, 0x1
     cmpwi r4, 0x0
-    beq lbl_fn_80149A30_00000C5C
+    beq lbl_dialog_renderWindow_00000C5C
     lwz r0, 0x6a0(r24)
     slw r6, r3, r7
     and r0, r6, r0
     cmplw r6, r0
-    bne lbl_fn_80149A30_00000C5C
+    bne lbl_dialog_renderWindow_00000C5C
     lwz r0, 0x28(r4)
     ori r0, r0, 0x400
     stw r0, 0x28(r4)
-lbl_fn_80149A30_00000C5C:
+lbl_dialog_renderWindow_00000C5C:
     lwz r4, 0x8(r5)
     addi r7, r7, 0x1
     cmpwi r4, 0x0
-    beq lbl_fn_80149A30_00000C8C
+    beq lbl_dialog_renderWindow_00000C8C
     lwz r0, 0x6a0(r24)
     slw r6, r3, r7
     and r0, r6, r0
     cmplw r6, r0
-    bne lbl_fn_80149A30_00000C8C
+    bne lbl_dialog_renderWindow_00000C8C
     lwz r0, 0x28(r4)
     ori r0, r0, 0x400
     stw r0, 0x28(r4)
-lbl_fn_80149A30_00000C8C:
+lbl_dialog_renderWindow_00000C8C:
     lwz r4, 0xc(r5)
     addi r7, r7, 0x1
     cmpwi r4, 0x0
-    beq lbl_fn_80149A30_00000CBC
+    beq lbl_dialog_renderWindow_00000CBC
     lwz r0, 0x6a0(r24)
     slw r6, r3, r7
     and r0, r6, r0
     cmplw r6, r0
-    bne lbl_fn_80149A30_00000CBC
+    bne lbl_dialog_renderWindow_00000CBC
     lwz r0, 0x28(r4)
     ori r0, r0, 0x400
     stw r0, 0x28(r4)
-lbl_fn_80149A30_00000CBC:
+lbl_dialog_renderWindow_00000CBC:
     addi r5, r5, 0x10
     addi r7, r7, 0x1
-    bdnz lbl_fn_80149A30_00000C00
+    bdnz lbl_dialog_renderWindow_00000C00
     mr r3, r24
     li r5, 0x0
-    b lbl_fn_80149A30_00000CF8
-lbl_fn_80149A30_00000CD4:
+    b lbl_dialog_renderWindow_00000CF8
+lbl_dialog_renderWindow_00000CD4:
     lwz r4, 0x6a8(r3)
     lwz r0, 0x3dc(r4)
     srawi. r0, r0, 31
-    beq lbl_fn_80149A30_00000CF0
+    beq lbl_dialog_renderWindow_00000CF0
     lwz r0, 0x8(r4)
     ori r0, r0, 0x400
     stw r0, 0x8(r4)
-lbl_fn_80149A30_00000CF0:
+lbl_dialog_renderWindow_00000CF0:
     addi r3, r3, 0x4
     addi r5, r5, 0x1
-lbl_fn_80149A30_00000CF8:
+lbl_dialog_renderWindow_00000CF8:
     lwz r0, 0x6a4(r24)
     cmplw r5, r0
-    blt lbl_fn_80149A30_00000CD4
-    b lbl_fn_80149A30_00000E64
-lbl_fn_80149A30_00000D08:
+    blt lbl_dialog_renderWindow_00000CD4
+    b lbl_dialog_renderWindow_00000E64
+lbl_dialog_renderWindow_00000D08:
     lwz r0, 0xb4(r24)
     mr r3, r24
     rlwinm r0, r0, 0, 22, 20
     stw r0, 0xb4(r24)
     bl fn_8014FB60
     cmpwi r3, 0x0
-    beq lbl_fn_80149A30_00000D4C
+    beq lbl_dialog_renderWindow_00000D4C
     lwz r3, 0x648(r24)
     lwz r0, 0x14(r3)
     rlwinm r0, r0, 0, 22, 20
     stw r0, 0x14(r3)
     lwz r3, 0x64c(r24)
     cmpwi r3, 0x0
-    beq lbl_fn_80149A30_00000D4C
+    beq lbl_dialog_renderWindow_00000D4C
     lwz r0, 0x14(r3)
     rlwinm r0, r0, 0, 22, 20
     stw r0, 0x14(r3)
-lbl_fn_80149A30_00000D4C:
+lbl_dialog_renderWindow_00000D4C:
     li r0, 0x2
     addi r5, r24, 0x680
     li r7, 0x0
     li r3, 0x1
     mtctr r0
-lbl_fn_80149A30_00000D60:
+lbl_dialog_renderWindow_00000D60:
     lwz r4, 0x0(r5)
     cmpwi r4, 0x0
-    beq lbl_fn_80149A30_00000D8C
+    beq lbl_dialog_renderWindow_00000D8C
     lwz r0, 0x6a0(r24)
     slw r6, r3, r7
     and r0, r6, r0
     cmplw r6, r0
-    bne lbl_fn_80149A30_00000D8C
+    bne lbl_dialog_renderWindow_00000D8C
     lwz r0, 0x28(r4)
     rlwinm r0, r0, 0, 22, 20
     stw r0, 0x28(r4)
-lbl_fn_80149A30_00000D8C:
+lbl_dialog_renderWindow_00000D8C:
     lwz r4, 0x4(r5)
     addi r7, r7, 0x1
     cmpwi r4, 0x0
-    beq lbl_fn_80149A30_00000DBC
+    beq lbl_dialog_renderWindow_00000DBC
     lwz r0, 0x6a0(r24)
     slw r6, r3, r7
     and r0, r6, r0
     cmplw r6, r0
-    bne lbl_fn_80149A30_00000DBC
+    bne lbl_dialog_renderWindow_00000DBC
     lwz r0, 0x28(r4)
     rlwinm r0, r0, 0, 22, 20
     stw r0, 0x28(r4)
-lbl_fn_80149A30_00000DBC:
+lbl_dialog_renderWindow_00000DBC:
     lwz r4, 0x8(r5)
     addi r7, r7, 0x1
     cmpwi r4, 0x0
-    beq lbl_fn_80149A30_00000DEC
+    beq lbl_dialog_renderWindow_00000DEC
     lwz r0, 0x6a0(r24)
     slw r6, r3, r7
     and r0, r6, r0
     cmplw r6, r0
-    bne lbl_fn_80149A30_00000DEC
+    bne lbl_dialog_renderWindow_00000DEC
     lwz r0, 0x28(r4)
     rlwinm r0, r0, 0, 22, 20
     stw r0, 0x28(r4)
-lbl_fn_80149A30_00000DEC:
+lbl_dialog_renderWindow_00000DEC:
     lwz r4, 0xc(r5)
     addi r7, r7, 0x1
     cmpwi r4, 0x0
-    beq lbl_fn_80149A30_00000E1C
+    beq lbl_dialog_renderWindow_00000E1C
     lwz r0, 0x6a0(r24)
     slw r6, r3, r7
     and r0, r6, r0
     cmplw r6, r0
-    bne lbl_fn_80149A30_00000E1C
+    bne lbl_dialog_renderWindow_00000E1C
     lwz r0, 0x28(r4)
     rlwinm r0, r0, 0, 22, 20
     stw r0, 0x28(r4)
-lbl_fn_80149A30_00000E1C:
+lbl_dialog_renderWindow_00000E1C:
     addi r5, r5, 0x10
     addi r7, r7, 0x1
-    bdnz lbl_fn_80149A30_00000D60
+    bdnz lbl_dialog_renderWindow_00000D60
     mr r3, r24
     li r5, 0x0
-    b lbl_fn_80149A30_00000E58
-lbl_fn_80149A30_00000E34:
+    b lbl_dialog_renderWindow_00000E58
+lbl_dialog_renderWindow_00000E34:
     lwz r4, 0x6a8(r3)
     lwz r0, 0x3dc(r4)
     srawi. r0, r0, 31
-    beq lbl_fn_80149A30_00000E50
+    beq lbl_dialog_renderWindow_00000E50
     lwz r0, 0x8(r4)
     rlwinm r0, r0, 0, 22, 20
     stw r0, 0x8(r4)
-lbl_fn_80149A30_00000E50:
+lbl_dialog_renderWindow_00000E50:
     addi r3, r3, 0x4
     addi r5, r5, 0x1
-lbl_fn_80149A30_00000E58:
+lbl_dialog_renderWindow_00000E58:
     lwz r0, 0x6a4(r24)
     cmplw r5, r0
-    blt lbl_fn_80149A30_00000E34
-lbl_fn_80149A30_00000E64:
+    blt lbl_dialog_renderWindow_00000E34
+lbl_dialog_renderWindow_00000E64:
     lwz r0, 0x137c(r24)
     li r25, 0x1
     rlwinm r0, r0, 0, 28, 28
     cmplwi r0, 0x8
-    bne lbl_fn_80149A30_00000E80
+    bne lbl_dialog_renderWindow_00000E80
     li r0, 0x0
-    b lbl_fn_80149A30_00000F14
-lbl_fn_80149A30_00000E80:
+    b lbl_dialog_renderWindow_00000F14
+lbl_dialog_renderWindow_00000E80:
     lwz r4, lbl_8087F430
     cmpwi r4, 0x0
-    beq lbl_fn_80149A30_00000F10
+    beq lbl_dialog_renderWindow_00000F10
     lwz r0, 0x48(r4)
     cmpwi r0, 0x1
-    bne lbl_fn_80149A30_00000EA0
+    bne lbl_dialog_renderWindow_00000EA0
     li r0, 0x1
-    b lbl_fn_80149A30_00000F14
-lbl_fn_80149A30_00000EA0:
+    b lbl_dialog_renderWindow_00000F14
+lbl_dialog_renderWindow_00000EA0:
     cmpwi r0, 0x2
-    bne lbl_fn_80149A30_00000F10
+    bne lbl_dialog_renderWindow_00000F10
     lwz r0, 0x4c(r4)
     cmplwi r0, 0x41
-    bgt lbl_fn_80149A30_00000F10
+    bgt lbl_dialog_renderWindow_00000F10
     lis r3, jumptable_8077A998@ha
     slwi r0, r0, 2
     addi r3, r3, jumptable_8077A998@l
@@ -1150,37 +1150,37 @@ lbl_fn_80149A30_00000EA0:
     mtctr r3
     bctr
     li r0, 0x1
-    b lbl_fn_80149A30_00000F14
+    b lbl_dialog_renderWindow_00000F14
     lwz r3, 0x50(r4)
     subi r0, r3, 0x2
     cntlzw r0, r0
     srwi r0, r0, 5
-    b lbl_fn_80149A30_00000F14
+    b lbl_dialog_renderWindow_00000F14
     lwz r3, 0x50(r4)
     subi r0, r3, 0x2
     cmplwi r0, 0x1
-    ble lbl_fn_80149A30_00000F08
+    ble lbl_dialog_renderWindow_00000F08
     cmpwi r3, 0x6
-    beq lbl_fn_80149A30_00000F08
+    beq lbl_dialog_renderWindow_00000F08
     cmpwi r3, 0xb
-    bne lbl_fn_80149A30_00000F10
-lbl_fn_80149A30_00000F08:
+    bne lbl_dialog_renderWindow_00000F10
+lbl_dialog_renderWindow_00000F08:
     li r0, 0x1
-    b lbl_fn_80149A30_00000F14
-lbl_fn_80149A30_00000F10:
+    b lbl_dialog_renderWindow_00000F14
+lbl_dialog_renderWindow_00000F10:
     li r0, 0x0
-lbl_fn_80149A30_00000F14:
+lbl_dialog_renderWindow_00000F14:
     cmpwi r0, 0x0
-    beq lbl_fn_80149A30_00000F88
+    beq lbl_dialog_renderWindow_00000F88
     lwz r3, lbl_8087F8A0
     cmpwi r3, 0x0
-    beq lbl_fn_80149A30_00000F88
+    beq lbl_dialog_renderWindow_00000F88
     lwz r3, 0x48(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80149A30_00000F88
+    beq lbl_dialog_renderWindow_00000F88
     lwz r0, 0x48(r24)
     cmpwi r0, 0x0
-    beq lbl_fn_80149A30_00000F88
+    beq lbl_dialog_renderWindow_00000F88
     lfs f3, 0x52c(r3)
     lfs f0, 0x52c(r24)
     lfs f5, 0x530(r3)
@@ -1199,93 +1199,93 @@ lbl_fn_80149A30_00000F14:
     stfs f4, 0x1a4(r1)
     mfcr r25
     srwi r25, r25, 31
-lbl_fn_80149A30_00000F88:
+lbl_dialog_renderWindow_00000F88:
     lwz r0, 0x12a4(r24)
     extrwi. r0, r0, 1, 28
-    bne lbl_fn_80149A30_00000FB0
+    bne lbl_dialog_renderWindow_00000FB0
     lwz r0, 0x12a8(r24)
     extrwi. r0, r0, 1, 30
-    bne lbl_fn_80149A30_00000FB0
+    bne lbl_dialog_renderWindow_00000FB0
     lwz r0, 0x137c(r24)
     rlwinm r0, r0, 0, 28, 28
     cmplwi r0, 0x8
-    bne lbl_fn_80149A30_00000FB4
-lbl_fn_80149A30_00000FB0:
+    bne lbl_dialog_renderWindow_00000FB4
+lbl_dialog_renderWindow_00000FB0:
     li r25, 0x0
-lbl_fn_80149A30_00000FB4:
+lbl_dialog_renderWindow_00000FB4:
     cmpwi r25, 0x0
-    beq lbl_fn_80149A30_00000FCC
+    beq lbl_dialog_renderWindow_00000FCC
     lwz r0, 0xb4(r24)
     ori r0, r0, 0x4
     stw r0, 0xb4(r24)
-    b lbl_fn_80149A30_00000FD8
-lbl_fn_80149A30_00000FCC:
+    b lbl_dialog_renderWindow_00000FD8
+lbl_dialog_renderWindow_00000FCC:
     lwz r0, 0xb4(r24)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0xb4(r24)
-lbl_fn_80149A30_00000FD8:
+lbl_dialog_renderWindow_00000FD8:
     addi r3, r24, 0xb0
     bl fn_8008CD60
     mr r3, r24
     bl fn_8014FB60
     cmpwi r3, 0x0
     mr r26, r3
-    beq lbl_fn_80149A30_00001118
+    beq lbl_dialog_renderWindow_00001118
     lwz r0, lbl_8087F610
     cmpwi r0, 0x0
-    beq lbl_fn_80149A30_00001090
+    beq lbl_dialog_renderWindow_00001090
     lwz r3, 0x678(r24)
     cmpwi r3, 0x0
-    bne lbl_fn_80149A30_00001018
+    bne lbl_dialog_renderWindow_00001018
     lwz r0, 0x67c(r24)
     cmpwi r0, 0x0
-    beq lbl_fn_80149A30_00001090
-lbl_fn_80149A30_00001018:
+    beq lbl_dialog_renderWindow_00001090
+lbl_dialog_renderWindow_00001018:
     cmpwi r3, 0x0
-    beq lbl_fn_80149A30_0000104C
+    beq lbl_dialog_renderWindow_0000104C
     lwz r12, 0x0(r3)
     lwz r12, 0xc(r12)
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    bne lbl_fn_80149A30_0000104C
+    bne lbl_dialog_renderWindow_0000104C
     lwz r3, 0x648(r24)
     lwz r12, 0x0(r3)
     lwz r12, 0x14(r12)
     mtctr r12
     bctrl
-lbl_fn_80149A30_0000104C:
+lbl_dialog_renderWindow_0000104C:
     lwz r3, 0x67c(r24)
     cmpwi r3, 0x0
-    beq lbl_fn_80149A30_00001140
+    beq lbl_dialog_renderWindow_00001140
     lwz r12, 0x0(r3)
     lwz r12, 0xc(r12)
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    bne lbl_fn_80149A30_00001140
+    bne lbl_dialog_renderWindow_00001140
     lwz r3, 0x64c(r24)
     cmpwi r3, 0x0
-    beq lbl_fn_80149A30_00001140
+    beq lbl_dialog_renderWindow_00001140
     lwz r12, 0x0(r3)
     lwz r12, 0x14(r12)
     mtctr r12
     bctrl
-    b lbl_fn_80149A30_00001140
-lbl_fn_80149A30_00001090:
+    b lbl_dialog_renderWindow_00001140
+lbl_dialog_renderWindow_00001090:
     cmpwi r25, 0x0
-    beq lbl_fn_80149A30_000010AC
+    beq lbl_dialog_renderWindow_000010AC
     lwz r3, 0x648(r24)
     lwz r0, 0x14(r3)
     ori r0, r0, 0x4
     stw r0, 0x14(r3)
-    b lbl_fn_80149A30_000010BC
-lbl_fn_80149A30_000010AC:
+    b lbl_dialog_renderWindow_000010BC
+lbl_dialog_renderWindow_000010AC:
     lwz r3, 0x648(r24)
     lwz r0, 0x14(r3)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x14(r3)
-lbl_fn_80149A30_000010BC:
+lbl_dialog_renderWindow_000010BC:
     lwz r3, 0x648(r24)
     lwz r12, 0x0(r3)
     lwz r12, 0x14(r12)
@@ -1293,133 +1293,133 @@ lbl_fn_80149A30_000010BC:
     bctrl
     lwz r3, 0x64c(r24)
     cmpwi r3, 0x0
-    beq lbl_fn_80149A30_00001140
+    beq lbl_dialog_renderWindow_00001140
     cmpwi r25, 0x0
-    beq lbl_fn_80149A30_000010F4
+    beq lbl_dialog_renderWindow_000010F4
     lwz r0, 0x14(r3)
     ori r0, r0, 0x4
     stw r0, 0x14(r3)
-    b lbl_fn_80149A30_00001100
-lbl_fn_80149A30_000010F4:
+    b lbl_dialog_renderWindow_00001100
+lbl_dialog_renderWindow_000010F4:
     lwz r0, 0x14(r3)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x14(r3)
-lbl_fn_80149A30_00001100:
+lbl_dialog_renderWindow_00001100:
     lwz r3, 0x64c(r24)
     lwz r12, 0x0(r3)
     lwz r12, 0x14(r12)
     mtctr r12
     bctrl
-    b lbl_fn_80149A30_00001140
-lbl_fn_80149A30_00001118:
+    b lbl_dialog_renderWindow_00001140
+lbl_dialog_renderWindow_00001118:
     lwz r3, 0x648(r24)
     cmpwi r3, 0x0
-    beq lbl_fn_80149A30_0000112C
+    beq lbl_dialog_renderWindow_0000112C
     li r4, 0x1
     bl fn_80044E0C
-lbl_fn_80149A30_0000112C:
+lbl_dialog_renderWindow_0000112C:
     lwz r3, 0x64c(r24)
     cmpwi r3, 0x0
-    beq lbl_fn_80149A30_00001140
+    beq lbl_dialog_renderWindow_00001140
     li r4, 0x1
     bl fn_80044E0C
-lbl_fn_80149A30_00001140:
+lbl_dialog_renderWindow_00001140:
     lwz r0, 0x1208(r24)
     cntlzw r0, r0
     srwi. r31, r0, 5
-    beq lbl_fn_80149A30_00001168
+    beq lbl_dialog_renderWindow_00001168
     lwz r3, 0x2dc(r24)
     subi r3, r3, 0x6c
     xori r0, r3, 0x4
     cntlzw r0, r0
     slw r0, r3, r0
     srwi r31, r0, 31
-lbl_fn_80149A30_00001168:
+lbl_dialog_renderWindow_00001168:
     cmpwi r31, 0x0
-    beq lbl_fn_80149A30_0000119C
+    beq lbl_dialog_renderWindow_0000119C
     lwz r3, 0x648(r24)
     neg r0, r3
     or r0, r0, r3
     srwi. r0, r0, 31
-    beq lbl_fn_80149A30_00001194
+    beq lbl_dialog_renderWindow_00001194
     lwz r3, 0x4(r3)
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
-lbl_fn_80149A30_00001194:
+lbl_dialog_renderWindow_00001194:
     cntlzw r0, r0
     srwi r31, r0, 5
-lbl_fn_80149A30_0000119C:
+lbl_dialog_renderWindow_0000119C:
     addi r29, r24, 0x680
     li r27, 0x0
     li r28, 0x1
-lbl_fn_80149A30_000011A8:
+lbl_dialog_renderWindow_000011A8:
     lwz r4, 0x0(r29)
     cmpwi r4, 0x0
-    beq lbl_fn_80149A30_00001230
+    beq lbl_dialog_renderWindow_00001230
     lwz r0, 0x6a0(r24)
     slw r3, r28, r27
     and r0, r3, r0
     cmplw r3, r0
-    bne lbl_fn_80149A30_00001230
+    bne lbl_dialog_renderWindow_00001230
     lwz r5, 0x0(r4)
     cmpwi r5, 0x4
-    bne lbl_fn_80149A30_000011E8
+    bne lbl_dialog_renderWindow_000011E8
     lwz r0, 0x7e0(r24)
     rlwinm r3, r0, 0, 12, 12
     subis r0, r3, 0x8
     cmplwi r0, 0x0
-    beq lbl_fn_80149A30_00001230
-lbl_fn_80149A30_000011E8:
+    beq lbl_dialog_renderWindow_00001230
+lbl_dialog_renderWindow_000011E8:
     cmpwi r5, 0x4
-    bne lbl_fn_80149A30_00001214
+    bne lbl_dialog_renderWindow_00001214
     cmpwi r25, 0x0
-    beq lbl_fn_80149A30_00001208
+    beq lbl_dialog_renderWindow_00001208
     lwz r0, 0x28(r4)
     ori r0, r0, 0x4
     stw r0, 0x28(r4)
-    b lbl_fn_80149A30_00001214
-lbl_fn_80149A30_00001208:
+    b lbl_dialog_renderWindow_00001214
+lbl_dialog_renderWindow_00001208:
     lwz r0, 0x28(r4)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x28(r4)
-lbl_fn_80149A30_00001214:
+lbl_dialog_renderWindow_00001214:
     lwz r3, 0x0(r29)
     lwz r0, 0x0(r3)
     cmpwi r0, 0x4
-    bne lbl_fn_80149A30_0000122C
+    bne lbl_dialog_renderWindow_0000122C
     cmpwi r31, 0x0
-    beq lbl_fn_80149A30_00001230
-lbl_fn_80149A30_0000122C:
+    beq lbl_dialog_renderWindow_00001230
+lbl_dialog_renderWindow_0000122C:
     bl fn_80565F38
-lbl_fn_80149A30_00001230:
+lbl_dialog_renderWindow_00001230:
     addi r27, r27, 0x1
     addi r29, r29, 0x4
     cmplwi r27, 0x8
-    blt lbl_fn_80149A30_000011A8
+    blt lbl_dialog_renderWindow_000011A8
     mr r25, r24
     li r27, 0x0
-    b lbl_fn_80149A30_00001274
-lbl_fn_80149A30_0000124C:
+    b lbl_dialog_renderWindow_00001274
+lbl_dialog_renderWindow_0000124C:
     lwz r3, 0x6a8(r25)
     lwz r0, 0x3dc(r3)
     srawi. r0, r0, 31
-    beq lbl_fn_80149A30_0000126C
+    beq lbl_dialog_renderWindow_0000126C
     lwz r12, 0x0(r3)
     lwz r12, 0xc(r12)
     mtctr r12
     bctrl
-lbl_fn_80149A30_0000126C:
+lbl_dialog_renderWindow_0000126C:
     addi r25, r25, 0x4
     addi r27, r27, 0x1
-lbl_fn_80149A30_00001274:
+lbl_dialog_renderWindow_00001274:
     lwz r0, 0x6a4(r24)
     cmplw r27, r0
-    blt lbl_fn_80149A30_0000124C
+    blt lbl_dialog_renderWindow_0000124C
     lwz r3, 0x50(r24)
     subis r0, r3, 0xa
     cmplwi r0, 0xae76
-    bne lbl_fn_80149A30_00001334
+    bne lbl_dialog_renderWindow_00001334
     lis r25, lbl_80737A9C@ha
     mr r5, r31
     addi r25, r25, lbl_80737A9C@l
@@ -1460,10 +1460,10 @@ lbl_fn_80149A30_00001274:
     addi r3, r24, 0xb0
     addi r4, r25, 0x3e9
     bl fn_8009373C
-    b lbl_fn_80149A30_00001384
-lbl_fn_80149A30_00001334:
+    b lbl_dialog_renderWindow_00001384
+lbl_dialog_renderWindow_00001334:
     cmplwi r0, 0xae77
-    bne lbl_fn_80149A30_00001384
+    bne lbl_dialog_renderWindow_00001384
     lis r25, lbl_80737A9C@ha
     mr r5, r26
     addi r25, r25, lbl_80737A9C@l
@@ -1482,7 +1482,7 @@ lbl_fn_80149A30_00001334:
     addi r3, r24, 0xb0
     addi r4, r25, 0x417
     bl fn_8009373C
-lbl_fn_80149A30_00001384:
+lbl_dialog_renderWindow_00001384:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x190
     addi r5, r24, 0x528
@@ -1493,10 +1493,10 @@ lbl_fn_80149A30_00001384:
     lwz r0, 0x34(r3)
     fsubs f30, f3, f0
     cmpwi r0, 0x0
-    beq lbl_fn_80149A30_00001674
+    beq lbl_dialog_renderWindow_00001674
     lfs f0, lbl_80881AA4
     fcmpo cr0, f31, f0
-    bge lbl_fn_80149A30_00001674
+    bge lbl_dialog_renderWindow_00001674
     lwz r3, lbl_8087EEB0
     addi r4, r24, 0x614
     lfs f1, 0x620(r24)
@@ -1506,10 +1506,10 @@ lbl_fn_80149A30_00001384:
     lfs f3, 0x198(r1)
     lfs f0, lbl_8088196C
     fcmpo cr0, f3, f0
-    ble lbl_fn_80149A30_00001674
+    ble lbl_dialog_renderWindow_00001674
     lfs f0, lbl_80881964
     fcmpo cr0, f3, f0
-    bge lbl_fn_80149A30_00001674
+    bge lbl_dialog_renderWindow_00001674
     lis r3, 0x51ec
     lwz r8, 0x50(r24)
     subi r0, r3, 0x7ae1
@@ -1568,7 +1568,7 @@ lbl_fn_80149A30_00001384:
     addi r5, r25, lbl_8077C6F8@l
     li r4, 0x100
     crclr 6
-    bl fn_806868C4
+    bl swprintf
     lwz r3, lbl_8087EEC8
     addi r4, r1, 0x9f8
     lfs f1, lbl_80881A88
@@ -1608,7 +1608,7 @@ lbl_fn_80149A30_00001384:
     lfs f2, 0x2e8(r24)
     lfs f1, 0x2fc(r24)
     crset 6
-    bl fn_806868C4
+    bl swprintf
     lwz r3, lbl_8087EEC8
     addi r4, r1, 0x9f8
     lfs f1, lbl_80881A88
@@ -1642,7 +1642,7 @@ lbl_fn_80149A30_00001384:
     fadds f30, f30, f0
     li r4, 0x100
     crset 6
-    bl fn_806868C4
+    bl swprintf
     lwz r3, lbl_8087EEC8
     addi r4, r1, 0x9f8
     lfs f1, lbl_80881A88
@@ -1671,21 +1671,21 @@ lbl_fn_80149A30_00001384:
     bl fn_80061824
     lfs f0, lbl_80881A88
     fadds f30, f30, f0
-lbl_fn_80149A30_00001674:
+lbl_dialog_renderWindow_00001674:
     lwz r3, lbl_8087F0A8
     lwz r0, 0x58(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80149A30_00001774
+    beq lbl_dialog_renderWindow_00001774
     lfs f0, lbl_80881AA4
     fcmpo cr0, f31, f0
-    bge lbl_fn_80149A30_00001774
+    bge lbl_dialog_renderWindow_00001774
     lfs f3, 0x198(r1)
     lfs f0, lbl_8088196C
     fcmpo cr0, f3, f0
-    ble lbl_fn_80149A30_00001774
+    ble lbl_dialog_renderWindow_00001774
     lfs f0, lbl_80881964
     fcmpo cr0, f3, f0
-    bge lbl_fn_80149A30_00001774
+    bge lbl_dialog_renderWindow_00001774
     lwz r25, lbl_8087F558
     addi r3, r1, 0x60
     addi r4, r24, 0xb0
@@ -1695,7 +1695,7 @@ lbl_fn_80149A30_00001674:
     bl fn_804918A4
     cmpwi r3, 0x0
     mr r5, r3
-    beq lbl_fn_80149A30_000016F4
+    beq lbl_dialog_renderWindow_000016F4
     lis r4, lbl_80737A9C@ha
     addi r3, r1, 0x2f8
     addi r4, r4, lbl_80737A9C@l
@@ -1703,8 +1703,8 @@ lbl_fn_80149A30_00001674:
     addi r4, r4, 0x426
     crclr 6
     bl sprintf
-    b lbl_fn_80149A30_00001710
-lbl_fn_80149A30_000016F4:
+    b lbl_dialog_renderWindow_00001710
+lbl_dialog_renderWindow_000016F4:
     lis r4, lbl_80737A9C@ha
     addi r3, r1, 0x2f8
     addi r4, r4, lbl_80737A9C@l
@@ -1712,7 +1712,7 @@ lbl_fn_80149A30_000016F4:
     addi r4, r4, 0x430
     crclr 6
     bl sprintf
-lbl_fn_80149A30_00001710:
+lbl_dialog_renderWindow_00001710:
     lwz r3, lbl_8087EEC8
     addi r4, r1, 0x7f8
     addi r5, r1, 0x2f8
@@ -1738,24 +1738,24 @@ lbl_fn_80149A30_00001710:
     bl fn_80061824
     lfs f0, lbl_80881A88
     fadds f30, f30, f0
-lbl_fn_80149A30_00001774:
+lbl_dialog_renderWindow_00001774:
     lwz r3, lbl_8087F0A8
     lwz r0, 0x54(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80149A30_00001CD0
+    beq lbl_dialog_renderWindow_00001CD0
     lwz r0, 0x48(r24)
     cmpwi r0, 0x5
-    beq lbl_fn_80149A30_00001CD0
+    beq lbl_dialog_renderWindow_00001CD0
     lfs f0, lbl_80881AA4
     fcmpo cr0, f31, f0
-    bge lbl_fn_80149A30_00001CD0
+    bge lbl_dialog_renderWindow_00001CD0
     lfs f3, 0x198(r1)
     lfs f0, lbl_8088196C
     fcmpo cr0, f3, f0
-    ble lbl_fn_80149A30_00001CD0
+    ble lbl_dialog_renderWindow_00001CD0
     lfs f0, lbl_80881964
     fcmpo cr0, f3, f0
-    bge lbl_fn_80149A30_00001CD0
+    bge lbl_dialog_renderWindow_00001CD0
     lis r3, 0x51ec
     lwz r8, 0x50(r24)
     subi r0, r3, 0x7ae1
@@ -1810,7 +1810,7 @@ lbl_fn_80149A30_00001774:
     lwz r0, 0x48(r24)
     fadds f30, f30, f0
     cmpwi r0, 0x0
-    bne lbl_fn_80149A30_000018C4
+    bne lbl_dialog_renderWindow_000018C4
     lis r4, lbl_8077C6F8@ha
     lfs f2, 0xc00(r24)
     addi r4, r4, lbl_8077C6F8@l
@@ -1821,11 +1821,11 @@ lbl_fn_80149A30_00001774:
     addi r3, r1, 0x5f8
     li r4, 0x100
     crset 6
-    bl fn_806868C4
-    b lbl_fn_80149A30_0000191C
-lbl_fn_80149A30_000018C4:
+    bl swprintf
+    b lbl_dialog_renderWindow_0000191C
+lbl_dialog_renderWindow_000018C4:
     cmpwi r0, 0x3
-    bne lbl_fn_80149A30_000018F8
+    bne lbl_dialog_renderWindow_000018F8
     lis r4, lbl_8077C6F8@ha
     lwz r6, 0x934(r24)
     addi r4, r4, lbl_8077C6F8@l
@@ -1835,9 +1835,9 @@ lbl_fn_80149A30_000018C4:
     addi r3, r1, 0x5f8
     li r4, 0x100
     crset 6
-    bl fn_806868C4
-    b lbl_fn_80149A30_0000191C
-lbl_fn_80149A30_000018F8:
+    bl swprintf
+    b lbl_dialog_renderWindow_0000191C
+lbl_dialog_renderWindow_000018F8:
     lis r5, lbl_8077C6F8@ha
     lwz r6, 0x934(r24)
     addi r5, r5, lbl_8077C6F8@l
@@ -1846,8 +1846,8 @@ lbl_fn_80149A30_000018F8:
     li r4, 0x100
     addi r5, r5, 0x152
     crset 6
-    bl fn_806868C4
-lbl_fn_80149A30_0000191C:
+    bl swprintf
+lbl_dialog_renderWindow_0000191C:
     lfs f3, lbl_8088196C
     lis r5, 0xb000
     lfs f4, lbl_80881A88
@@ -1879,11 +1879,11 @@ lbl_fn_80149A30_0000191C:
     addi r3, r1, 0x5f8
     li r4, 0x100
     li r6, 0x20
-    bne lbl_fn_80149A30_000019A0
+    bne lbl_dialog_renderWindow_000019A0
     li r6, 0x44
-lbl_fn_80149A30_000019A0:
+lbl_dialog_renderWindow_000019A0:
     crset 6
-    bl fn_806868C4
+    bl swprintf
     lfs f3, lbl_8088196C
     lis r26, 0xb000
     lfs f4, lbl_80881A88
@@ -1912,7 +1912,7 @@ lbl_fn_80149A30_000019A0:
     addi r5, r25, 0x1a2
     li r4, 0x100
     crset 6
-    bl fn_806868C4
+    bl swprintf
     lfs f3, lbl_8088196C
     fmr f2, f30
     lfs f4, lbl_80881A88
@@ -1938,7 +1938,7 @@ lbl_fn_80149A30_000019A0:
     lfs f2, 0x8c8(r24)
     li r4, 0x100
     crset 6
-    bl fn_806868C4
+    bl swprintf
     lfs f3, lbl_8088196C
     fmr f2, f30
     lfs f4, lbl_80881A88
@@ -1960,14 +1960,14 @@ lbl_fn_80149A30_000019A0:
     addi r27, r24, 0x12d4
     li r28, 0x0
     fadds f30, f30, f31
-    b lbl_fn_80149A30_00001B60
-lbl_fn_80149A30_00001ADC:
+    b lbl_dialog_renderWindow_00001B60
+lbl_dialog_renderWindow_00001ADC:
     lwz r4, 0x0(r27)
     cmpwi r4, 0x0
-    beq lbl_fn_80149A30_00001B58
+    beq lbl_dialog_renderWindow_00001B58
     lwz r0, 0x4(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_80149A30_00001B58
+    bne lbl_dialog_renderWindow_00001B58
     lwz r5, 0x4(r4)
     addi r3, r1, 0x5f8
     lwz r6, 0x8(r4)
@@ -1993,26 +1993,26 @@ lbl_fn_80149A30_00001ADC:
     lis r10, 0xff00
     bl fn_80061824
     fadds f30, f30, f31
-lbl_fn_80149A30_00001B58:
+lbl_dialog_renderWindow_00001B58:
     addi r27, r27, 0x14
     addi r28, r28, 0x1
-lbl_fn_80149A30_00001B60:
+lbl_dialog_renderWindow_00001B60:
     lwz r0, 0x12d0(r24)
     cmplw r28, r0
-    blt lbl_fn_80149A30_00001ADC
+    blt lbl_dialog_renderWindow_00001ADC
     lis r26, lbl_8077C6F8@ha
     lfs f31, lbl_80881A88
     addi r27, r24, 0xb58
     li r28, 0x0
     addi r26, r26, lbl_8077C6F8@l
     lis r25, 0xb000
-    b lbl_fn_80149A30_00001C04
-lbl_fn_80149A30_00001B88:
+    b lbl_dialog_renderWindow_00001C04
+lbl_dialog_renderWindow_00001B88:
     lwz r4, 0x0(r27)
     addi r3, r1, 0x3f8
     bl fn_8021BE98
     cmpwi r3, 0x0
-    beq lbl_fn_80149A30_00001BFC
+    beq lbl_dialog_renderWindow_00001BFC
     lwz r6, 0xc(r27)
     addi r3, r1, 0x5f8
     addi r4, r26, 0x228
@@ -2037,13 +2037,13 @@ lbl_fn_80149A30_00001B88:
     lis r10, 0xff00
     bl fn_80061824
     fadds f30, f30, f31
-lbl_fn_80149A30_00001BFC:
+lbl_dialog_renderWindow_00001BFC:
     addi r27, r27, 0x14
     addi r28, r28, 0x1
-lbl_fn_80149A30_00001C04:
+lbl_dialog_renderWindow_00001C04:
     lwz r0, 0xb54(r24)
     cmplw r28, r0
-    blt lbl_fn_80149A30_00001B88
+    blt lbl_dialog_renderWindow_00001B88
     lis r28, lbl_807375C0@ha
     lis r26, lbl_80737A9C@ha
     lfs f31, lbl_80881A88
@@ -2052,12 +2052,12 @@ lbl_fn_80149A30_00001C04:
     li r29, 0x0
     lis r25, 0xb000
     li r27, 0x1
-lbl_fn_80149A30_00001C30:
+lbl_dialog_renderWindow_00001C30:
     lwz r0, 0x7e0(r24)
     slw r4, r27, r29
     and r0, r4, r0
     cmplw r4, r0
-    bne lbl_fn_80149A30_00001CC0
+    bne lbl_dialog_renderWindow_00001CC0
     addi r3, r24, 0x7d4
     bl fn_801333A4
     lwz r5, 0x0(r28)
@@ -2089,21 +2089,21 @@ lbl_fn_80149A30_00001C30:
     lis r10, 0xff00
     bl fn_80061824
     fadds f30, f30, f31
-lbl_fn_80149A30_00001CC0:
+lbl_dialog_renderWindow_00001CC0:
     addi r29, r29, 0x1
     addi r28, r28, 0x4
     cmplwi r29, 0x20
-    blt lbl_fn_80149A30_00001C30
-lbl_fn_80149A30_00001CD0:
+    blt lbl_dialog_renderWindow_00001C30
+lbl_dialog_renderWindow_00001CD0:
     lwz r3, lbl_8087F0A8
     lwz r0, 0x38(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80149A30_00001D38
+    beq lbl_dialog_renderWindow_00001D38
     addi r26, r1, 0x50
     li r27, 0x0
     li r25, 0x0
-    b lbl_fn_80149A30_00001D2C
-lbl_fn_80149A30_00001CF0:
+    b lbl_dialog_renderWindow_00001D2C
+lbl_dialog_renderWindow_00001CF0:
     lwz r0, 0x62c(r24)
     mr r4, r26
     lwz r3, lbl_8087EEB0
@@ -2119,60 +2119,60 @@ lbl_fn_80149A30_00001CF0:
     bl fn_80063D3C
     addi r27, r27, 0x1
     addi r25, r25, 0x14
-lbl_fn_80149A30_00001D2C:
+lbl_dialog_renderWindow_00001D2C:
     lwz r0, 0x624(r24)
     cmplw r27, r0
-    blt lbl_fn_80149A30_00001CF0
-lbl_fn_80149A30_00001D38:
+    blt lbl_dialog_renderWindow_00001CF0
+lbl_dialog_renderWindow_00001D38:
     lwz r3, lbl_8087F430
     li r25, 0x0
     cmpwi r3, 0x0
-    beq lbl_fn_80149A30_00001D70
+    beq lbl_dialog_renderWindow_00001D70
     lwz r0, 0x54e4(r3)
     cmpwi r0, 0x8
-    bne lbl_fn_80149A30_00001D70
+    bne lbl_dialog_renderWindow_00001D70
     lwz r3, lbl_8087F540
     cmpwi r3, 0x0
-    beq lbl_fn_80149A30_00001D70
+    beq lbl_dialog_renderWindow_00001D70
     bl fn_80481654
     cmpwi r3, 0x0
-    beq lbl_fn_80149A30_00001D70
+    beq lbl_dialog_renderWindow_00001D70
     li r25, 0x1
-lbl_fn_80149A30_00001D70:
+lbl_dialog_renderWindow_00001D70:
     lwz r0, 0x38(r24)
     clrlwi r0, r0, 31
     cmplwi r0, 0x1
-    beq lbl_fn_80149A30_00002798
+    beq lbl_dialog_renderWindow_00002798
     cmpwi r25, 0x0
-    bne lbl_fn_80149A30_00002798
+    bne lbl_dialog_renderWindow_00002798
     lwz r0, 0x12a4(r24)
     extrwi. r0, r0, 1, 21
-    beq lbl_fn_80149A30_00001DA8
+    beq lbl_dialog_renderWindow_00001DA8
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
-    beq lbl_fn_80149A30_00001DA8
+    beq lbl_dialog_renderWindow_00001DA8
     mr r4, r24
     bl fn_8010A4A8
-lbl_fn_80149A30_00001DA8:
+lbl_dialog_renderWindow_00001DA8:
     lwz r4, lbl_8087F610
     cmpwi r4, 0x0
-    beq lbl_fn_80149A30_00001DDC
+    beq lbl_dialog_renderWindow_00001DDC
     lwz r0, 0x4fc(r4)
     li r3, 0x0
     cmpwi r0, 0x1e
-    bne lbl_fn_80149A30_00001DD4
+    bne lbl_dialog_renderWindow_00001DD4
     lwz r0, 0x50c(r4)
     cmpwi r0, 0x5
-    bge lbl_fn_80149A30_00001DD4
+    bge lbl_dialog_renderWindow_00001DD4
     li r3, 0x1
-lbl_fn_80149A30_00001DD4:
+lbl_dialog_renderWindow_00001DD4:
     cmpwi r3, 0x0
-    beq lbl_fn_80149A30_00002178
-lbl_fn_80149A30_00001DDC:
+    beq lbl_dialog_renderWindow_00002178
+lbl_dialog_renderWindow_00001DDC:
     lwz r0, 0x7e8(r24)
     rlwinm r0, r0, 0, 18, 18
     cmplwi r0, 0x2000
-    bne lbl_fn_80149A30_00001F6C
+    bne lbl_dialog_renderWindow_00001F6C
     lfs f3, lbl_80881A20
     lfs f0, 0x5b0(r24)
     lfs f5, lbl_8088196C
@@ -2191,50 +2191,50 @@ lbl_fn_80149A30_00001DDC:
     cmpwi r0, 0x2
     stfs f6, 0x48(r1)
     stfs f5, 0x4c(r1)
-    bne lbl_fn_80149A30_00001EB4
+    bne lbl_dialog_renderWindow_00001EB4
     lwz r3, 0x7e0(r24)
     rlwinm r0, r3, 0, 23, 23
     cmplwi r0, 0x100
-    beq lbl_fn_80149A30_00001EB4
+    beq lbl_dialog_renderWindow_00001EB4
     rlwinm r3, r3, 0, 15, 15
     subis r0, r3, 0x1
     cmplwi r0, 0x0
-    beq lbl_fn_80149A30_00001EB4
+    beq lbl_dialog_renderWindow_00001EB4
     cmpwi r4, 0x0
     li r0, 0x0
-    beq lbl_fn_80149A30_00001E90
+    beq lbl_dialog_renderWindow_00001E90
     lwz r4, lbl_8087F610
     li r3, 0x1
     lwz r4, 0x540(r4)
     cmpwi r4, 0x0
-    beq lbl_fn_80149A30_00001E84
+    beq lbl_dialog_renderWindow_00001E84
     cmpwi r4, 0x1
-    beq lbl_fn_80149A30_00001E84
+    beq lbl_dialog_renderWindow_00001E84
     li r3, 0x0
-lbl_fn_80149A30_00001E84:
+lbl_dialog_renderWindow_00001E84:
     cmpwi r3, 0x0
-    beq lbl_fn_80149A30_00001E90
+    beq lbl_dialog_renderWindow_00001E90
     li r0, 0x1
-lbl_fn_80149A30_00001E90:
+lbl_dialog_renderWindow_00001E90:
     cmpwi r0, 0x0
-    bne lbl_fn_80149A30_00001EB4
+    bne lbl_dialog_renderWindow_00001EB4
     lwz r3, lbl_8087F1E4
     lwz r25, 0x1fc(r3)
     cmpwi r25, 0x0
-    beq lbl_fn_80149A30_00001EAC
-    b lbl_fn_80149A30_00001ECC
-lbl_fn_80149A30_00001EAC:
+    beq lbl_dialog_renderWindow_00001EAC
+    b lbl_dialog_renderWindow_00001ECC
+lbl_dialog_renderWindow_00001EAC:
     la r25, lbl_808813D0
-    b lbl_fn_80149A30_00001ECC
-lbl_fn_80149A30_00001EB4:
+    b lbl_dialog_renderWindow_00001ECC
+lbl_dialog_renderWindow_00001EB4:
     lwz r3, lbl_8087F1E4
     lwz r25, 0x204(r3)
     cmpwi r25, 0x0
-    beq lbl_fn_80149A30_00001EC8
-    b lbl_fn_80149A30_00001ECC
-lbl_fn_80149A30_00001EC8:
+    beq lbl_dialog_renderWindow_00001EC8
+    b lbl_dialog_renderWindow_00001ECC
+lbl_dialog_renderWindow_00001EC8:
     la r25, lbl_808813D0
-lbl_fn_80149A30_00001ECC:
+lbl_dialog_renderWindow_00001ECC:
     lfs f31, lbl_80881A88
     mr r4, r25
     lwz r3, lbl_8087EEC8
@@ -2251,10 +2251,10 @@ lbl_fn_80149A30_00001ECC:
     lfs f4, 0x180(r1)
     lfs f3, lbl_8088196C
     fcmpo cr0, f4, f3
-    ble lbl_fn_80149A30_00002178
+    ble lbl_dialog_renderWindow_00002178
     lfs f0, lbl_80881964
     fcmpo cr0, f4, f0
-    bge lbl_fn_80149A30_00002178
+    bge lbl_dialog_renderWindow_00002178
     lfs f9, lbl_808819A8
     lis r5, 0xa001
     lfs f0, 0x178(r1)
@@ -2274,12 +2274,12 @@ lbl_fn_80149A30_00001ECC:
     li r9, 0x0
     lis r10, 0xff00
     bl fn_80061824
-    b lbl_fn_80149A30_00002178
-lbl_fn_80149A30_00001F6C:
+    b lbl_dialog_renderWindow_00002178
+lbl_dialog_renderWindow_00001F6C:
     lwz r3, 0x7e0(r24)
     clrlwi r0, r3, 31
     cmplwi r0, 0x1
-    bne lbl_fn_80149A30_00002074
+    bne lbl_dialog_renderWindow_00002074
     lfs f3, lbl_80881A20
     lfs f0, 0x5b0(r24)
     lfs f5, lbl_8088196C
@@ -2299,11 +2299,11 @@ lbl_fn_80149A30_00001F6C:
     cmpwi r25, 0x0
     stfs f6, 0x3c(r1)
     stfs f5, 0x40(r1)
-    beq lbl_fn_80149A30_00001FD0
-    b lbl_fn_80149A30_00001FD4
-lbl_fn_80149A30_00001FD0:
+    beq lbl_dialog_renderWindow_00001FD0
+    b lbl_dialog_renderWindow_00001FD4
+lbl_dialog_renderWindow_00001FD0:
     la r25, lbl_808813D0
-lbl_fn_80149A30_00001FD4:
+lbl_dialog_renderWindow_00001FD4:
     lfs f31, lbl_80881A88
     mr r4, r25
     lwz r3, lbl_8087EEC8
@@ -2320,10 +2320,10 @@ lbl_fn_80149A30_00001FD4:
     lfs f4, 0x168(r1)
     lfs f3, lbl_8088196C
     fcmpo cr0, f4, f3
-    ble lbl_fn_80149A30_00002178
+    ble lbl_dialog_renderWindow_00002178
     lfs f0, lbl_80881964
     fcmpo cr0, f4, f0
-    bge lbl_fn_80149A30_00002178
+    bge lbl_dialog_renderWindow_00002178
     lfs f9, lbl_808819A8
     lis r5, 0xd0ab
     lfs f0, 0x160(r1)
@@ -2343,12 +2343,12 @@ lbl_fn_80149A30_00001FD4:
     li r9, 0x0
     lis r10, 0xff00
     bl fn_80061824
-    b lbl_fn_80149A30_00002178
-lbl_fn_80149A30_00002074:
+    b lbl_dialog_renderWindow_00002178
+lbl_dialog_renderWindow_00002074:
     rlwinm r3, r3, 0, 9, 9
     subis r0, r3, 0x40
     cmplwi r0, 0x0
-    bne lbl_fn_80149A30_00002178
+    bne lbl_dialog_renderWindow_00002178
     lfs f3, lbl_80881A20
     lfs f0, 0x5b0(r24)
     lfs f5, lbl_8088196C
@@ -2368,11 +2368,11 @@ lbl_fn_80149A30_00002074:
     cmpwi r25, 0x0
     stfs f6, 0x30(r1)
     stfs f5, 0x34(r1)
-    beq lbl_fn_80149A30_000020D8
-    b lbl_fn_80149A30_000020DC
-lbl_fn_80149A30_000020D8:
+    beq lbl_dialog_renderWindow_000020D8
+    b lbl_dialog_renderWindow_000020DC
+lbl_dialog_renderWindow_000020D8:
     la r25, lbl_808813D0
-lbl_fn_80149A30_000020DC:
+lbl_dialog_renderWindow_000020DC:
     lfs f31, lbl_80881A88
     mr r4, r25
     lwz r3, lbl_8087EEC8
@@ -2389,10 +2389,10 @@ lbl_fn_80149A30_000020DC:
     lfs f4, 0x150(r1)
     lfs f3, lbl_8088196C
     fcmpo cr0, f4, f3
-    ble lbl_fn_80149A30_00002178
+    ble lbl_dialog_renderWindow_00002178
     lfs f0, lbl_80881964
     fcmpo cr0, f4, f0
-    bge lbl_fn_80149A30_00002178
+    bge lbl_dialog_renderWindow_00002178
     lfs f9, lbl_808819A8
     lis r5, 0xc0ab
     lfs f0, 0x148(r1)
@@ -2412,19 +2412,19 @@ lbl_fn_80149A30_000020DC:
     li r9, 0x0
     lis r10, 0xff00
     bl fn_80061824
-lbl_fn_80149A30_00002178:
+lbl_dialog_renderWindow_00002178:
     lbz r4, 0xd75(r24)
     extsb. r3, r4
-    beq lbl_fn_80149A30_00002484
+    beq lbl_dialog_renderWindow_00002484
     lwz r0, 0x48(r24)
     cmpwi r0, 0x2
-    bne lbl_fn_80149A30_00002484
+    bne lbl_dialog_renderWindow_00002484
     lwz r0, 0x7e0(r24)
     rlwinm r0, r0, 0, 26, 26
     cmplwi r0, 0x20
-    beq lbl_fn_80149A30_00002798
+    beq lbl_dialog_renderWindow_00002798
     cmpwi r3, 0x2
-    beq lbl_fn_80149A30_00002798
+    beq lbl_dialog_renderWindow_00002798
     lfs f3, lbl_80881A20
     lis r3, lbl_80737808@ha
     lfs f0, 0x5b0(r24)
@@ -2456,68 +2456,68 @@ lbl_fn_80149A30_00002178:
     fmadds f3, f4, f5, f3
     stfs f7, 0x28(r1)
     fmuls f30, f0, f3
-    beq lbl_fn_80149A30_0000222C
-    b lbl_fn_80149A30_00002230
-lbl_fn_80149A30_0000222C:
+    beq lbl_dialog_renderWindow_0000222C
+    b lbl_dialog_renderWindow_00002230
+lbl_dialog_renderWindow_0000222C:
     la r27, lbl_808813D0
-lbl_fn_80149A30_00002230:
+lbl_dialog_renderWindow_00002230:
     lwz r28, 0x1ec(r3)
     cmpwi r28, 0x0
-    beq lbl_fn_80149A30_00002240
-    b lbl_fn_80149A30_00002244
-lbl_fn_80149A30_00002240:
+    beq lbl_dialog_renderWindow_00002240
+    b lbl_dialog_renderWindow_00002244
+lbl_dialog_renderWindow_00002240:
     la r28, lbl_808813D0
-lbl_fn_80149A30_00002244:
+lbl_dialog_renderWindow_00002244:
     lwz r25, 0xe7c(r3)
     cmpwi r25, 0x0
-    beq lbl_fn_80149A30_00002254
-    b lbl_fn_80149A30_00002258
-lbl_fn_80149A30_00002254:
+    beq lbl_dialog_renderWindow_00002254
+    b lbl_dialog_renderWindow_00002258
+lbl_dialog_renderWindow_00002254:
     la r25, lbl_808813D0
-lbl_fn_80149A30_00002258:
+lbl_dialog_renderWindow_00002258:
     lis r4, 0xa100
     addi r3, r24, 0xd74
     subi r26, r4, 0x3fc0
     bl fn_8011D21C
     cmpwi r3, 0x0
-    bne lbl_fn_80149A30_00002280
+    bne lbl_dialog_renderWindow_00002280
     lwz r4, 0xd94(r24)
     rlwinm r0, r4, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_80149A30_00002290
-lbl_fn_80149A30_00002280:
+    beq lbl_dialog_renderWindow_00002290
+lbl_dialog_renderWindow_00002280:
     lwz r4, 0xd94(r24)
     rlwinm r0, r4, 0, 29, 29
     cmplwi r0, 0x4
-    bne lbl_fn_80149A30_0000229C
-lbl_fn_80149A30_00002290:
+    bne lbl_dialog_renderWindow_0000229C
+lbl_dialog_renderWindow_00002290:
     lfs f0, lbl_808819A4
     fmuls f30, f30, f0
-    b lbl_fn_80149A30_000022BC
-lbl_fn_80149A30_0000229C:
+    b lbl_dialog_renderWindow_000022BC
+lbl_dialog_renderWindow_0000229C:
     lbz r0, 0xd75(r24)
     cmpwi r0, 0x1
-    bne lbl_fn_80149A30_000022B8
+    bne lbl_dialog_renderWindow_000022B8
     lis r3, 0xa0ff
     mr r25, r28
     addi r26, r3, 0x4040
-    b lbl_fn_80149A30_000022BC
-lbl_fn_80149A30_000022B8:
+    b lbl_dialog_renderWindow_000022BC
+lbl_dialog_renderWindow_000022B8:
     mr r25, r27
-lbl_fn_80149A30_000022BC:
+lbl_dialog_renderWindow_000022BC:
     lbz r0, 0xd74(r24)
     cmpwi r0, 0x1
-    bne lbl_fn_80149A30_000022E4
+    bne lbl_dialog_renderWindow_000022E4
     rlwinm r0, r4, 0, 29, 29
     cmplwi r0, 0x4
-    beq lbl_fn_80149A30_000022E4
+    beq lbl_dialog_renderWindow_000022E4
     lha r0, 0xd78(r24)
     cmpwi r0, 0x5a
-    blt lbl_fn_80149A30_000022E4
+    blt lbl_dialog_renderWindow_000022E4
     li r25, 0x0
-lbl_fn_80149A30_000022E4:
+lbl_dialog_renderWindow_000022E4:
     cmpwi r25, 0x0
-    beq lbl_fn_80149A30_00002798
+    beq lbl_dialog_renderWindow_00002798
     fmr f1, f30
     lwz r3, lbl_8087EEC8
     lfs f2, lbl_8088196C
@@ -2533,16 +2533,16 @@ lbl_fn_80149A30_000022E4:
     lfs f3, 0x138(r1)
     lfs f0, lbl_8088196C
     fcmpo cr0, f3, f0
-    ble lbl_fn_80149A30_00002798
+    ble lbl_dialog_renderWindow_00002798
     lfs f0, lbl_80881964
     fcmpo cr0, f3, f0
-    bge lbl_fn_80149A30_00002798
+    bge lbl_dialog_renderWindow_00002798
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_80149A30_0000240C
+    beq lbl_dialog_renderWindow_0000240C
     lwz r0, 0x868(r3)
     cmpwi r0, 0x6
-    beq lbl_fn_80149A30_0000240C
+    beq lbl_dialog_renderWindow_0000240C
     lwz r4, lbl_8087EEE0
     lis r3, lbl_80737808@ha
     lfd f4, lbl_80737808@l(r3)
@@ -2555,14 +2555,14 @@ lbl_fn_80149A30_000022E4:
     fsubs f0, f0, f4
     fmuls f0, f3, f0
     fcmpo cr0, f5, f0
-    ble lbl_fn_80149A30_00002388
-    b lbl_fn_80149A30_00002398
-lbl_fn_80149A30_00002388:
+    ble lbl_dialog_renderWindow_00002388
+    b lbl_dialog_renderWindow_00002398
+lbl_dialog_renderWindow_00002388:
     stw r0, 0xbfc(r1)
     lfd f0, 0xbf8(r1)
     fsubs f0, f0, f4
     fmuls f5, f3, f0
-lbl_fn_80149A30_00002398:
+lbl_dialog_renderWindow_00002398:
     xoris r0, r3, 0x8000
     stw r0, 0xc04(r1)
     lis r3, lbl_80737808@ha
@@ -2572,7 +2572,7 @@ lbl_fn_80149A30_00002398:
     fsubs f0, f0, f4
     fmsubs f0, f3, f0, f30
     fcmpo cr0, f5, f0
-    bge lbl_fn_80149A30_000023F8
+    bge lbl_dialog_renderWindow_000023F8
     stw r0, 0xbfc(r1)
     lfs f3, lbl_80881994
     lfd f0, 0xbf8(r1)
@@ -2580,22 +2580,22 @@ lbl_fn_80149A30_00002398:
     fsubs f0, f0, f4
     fmuls f0, f3, f0
     fcmpo cr0, f5, f0
-    ble lbl_fn_80149A30_000023E4
-    b lbl_fn_80149A30_00002408
-lbl_fn_80149A30_000023E4:
+    ble lbl_dialog_renderWindow_000023E4
+    b lbl_dialog_renderWindow_00002408
+lbl_dialog_renderWindow_000023E4:
     stw r0, 0xc04(r1)
     lfd f0, 0xc00(r1)
     fsubs f0, f0, f4
     fmuls f5, f3, f0
-    b lbl_fn_80149A30_00002408
-lbl_fn_80149A30_000023F8:
+    b lbl_dialog_renderWindow_00002408
+lbl_dialog_renderWindow_000023F8:
     stw r0, 0xbfc(r1)
     lfd f0, 0xbf8(r1)
     fsubs f0, f0, f4
     fmsubs f5, f3, f0, f30
-lbl_fn_80149A30_00002408:
+lbl_dialog_renderWindow_00002408:
     stfs f5, 0x134(r1)
-lbl_fn_80149A30_0000240C:
+lbl_dialog_renderWindow_0000240C:
     lwz r0, 0x12c8(r24)
     lis r3, lbl_80737808@ha
     lfd f8, lbl_80737808@l(r3)
@@ -2625,16 +2625,16 @@ lbl_fn_80149A30_0000240C:
     li r9, 0x0
     lis r10, 0xff00
     bl fn_80061824
-    b lbl_fn_80149A30_00002798
-lbl_fn_80149A30_00002484:
+    b lbl_dialog_renderWindow_00002798
+lbl_dialog_renderWindow_00002484:
     lwz r3, lbl_8087F098
     cmpwi r3, 0x0
-    beq lbl_fn_80149A30_0000262C
+    beq lbl_dialog_renderWindow_0000262C
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80149A30_0000262C
+    beq lbl_dialog_renderWindow_0000262C
     extsb. r0, r4
-    beq lbl_fn_80149A30_00002798
+    beq lbl_dialog_renderWindow_00002798
     lfs f3, lbl_80881A20
     lfs f0, 0x5b0(r24)
     lfs f5, lbl_8088196C
@@ -2654,33 +2654,33 @@ lbl_fn_80149A30_00002484:
     cmpwi r3, 0x0
     stfs f6, 0x18(r1)
     stfs f5, 0x1c(r1)
-    beq lbl_fn_80149A30_000024F8
-    b lbl_fn_80149A30_000024FC
-lbl_fn_80149A30_000024F8:
+    beq lbl_dialog_renderWindow_000024F8
+    b lbl_dialog_renderWindow_000024FC
+lbl_dialog_renderWindow_000024F8:
     la r3, lbl_808813D0
-lbl_fn_80149A30_000024FC:
+lbl_dialog_renderWindow_000024FC:
     lwz r27, 0x1ec(r4)
     cmpwi r27, 0x0
-    beq lbl_fn_80149A30_0000250C
-    b lbl_fn_80149A30_00002510
-lbl_fn_80149A30_0000250C:
+    beq lbl_dialog_renderWindow_0000250C
+    b lbl_dialog_renderWindow_00002510
+lbl_dialog_renderWindow_0000250C:
     la r27, lbl_808813D0
-lbl_fn_80149A30_00002510:
+lbl_dialog_renderWindow_00002510:
     lbz r4, 0xd75(r24)
     cmpwi r4, 0x1
-    bne lbl_fn_80149A30_00002520
-    b lbl_fn_80149A30_00002524
-lbl_fn_80149A30_00002520:
+    bne lbl_dialog_renderWindow_00002520
+    b lbl_dialog_renderWindow_00002524
+lbl_dialog_renderWindow_00002520:
     mr r27, r3
-lbl_fn_80149A30_00002524:
+lbl_dialog_renderWindow_00002524:
     extsb r0, r4
     lis r3, 0xa100
     cmpwi r0, 0x1
     subi r26, r3, 0x3fc0
-    bne lbl_fn_80149A30_00002540
+    bne lbl_dialog_renderWindow_00002540
     lis r3, 0xa0ff
     addi r26, r3, 0x4040
-lbl_fn_80149A30_00002540:
+lbl_dialog_renderWindow_00002540:
     lwz r0, 0x12c8(r24)
     lis r25, lbl_80737808@ha
     lfd f5, lbl_80737808@l(r25)
@@ -2708,10 +2708,10 @@ lbl_fn_80149A30_00002540:
     lfs f4, 0x120(r1)
     lfs f3, lbl_8088196C
     fcmpo cr0, f4, f3
-    ble lbl_fn_80149A30_00002798
+    ble lbl_dialog_renderWindow_00002798
     lfs f0, lbl_80881964
     fcmpo cr0, f4, f0
-    bge lbl_fn_80149A30_00002798
+    bge lbl_dialog_renderWindow_00002798
     lwz r0, 0x12c8(r24)
     fmr f4, f31
     lfs f8, 0x11c(r1)
@@ -2739,18 +2739,18 @@ lbl_fn_80149A30_00002540:
     li r9, 0x0
     lis r10, 0xff00
     bl fn_80061824
-    b lbl_fn_80149A30_00002798
-lbl_fn_80149A30_0000262C:
+    b lbl_dialog_renderWindow_00002798
+lbl_dialog_renderWindow_0000262C:
     lwz r0, 0x55c(r24)
     cmpwi r0, 0x6
-    bne lbl_fn_80149A30_00002798
+    bne lbl_dialog_renderWindow_00002798
     lwz r0, 0x560(r24)
     cmpwi r0, 0x60
-    bne lbl_fn_80149A30_00002798
+    bne lbl_dialog_renderWindow_00002798
     addi r3, r24, 0x7d4
     bl fn_80134290
     cmpwi r3, 0x0
-    bne lbl_fn_80149A30_00002798
+    bne lbl_dialog_renderWindow_00002798
     lfs f3, lbl_80881A20
     lfs f0, 0x5b0(r24)
     lfs f5, lbl_8088196C
@@ -2770,11 +2770,11 @@ lbl_fn_80149A30_0000262C:
     cmpwi r26, 0x0
     stfs f6, 0xc(r1)
     stfs f5, 0x10(r1)
-    beq lbl_fn_80149A30_000026A8
-    b lbl_fn_80149A30_000026AC
-lbl_fn_80149A30_000026A8:
+    beq lbl_dialog_renderWindow_000026A8
+    b lbl_dialog_renderWindow_000026AC
+lbl_dialog_renderWindow_000026A8:
     la r26, lbl_808813D0
-lbl_fn_80149A30_000026AC:
+lbl_dialog_renderWindow_000026AC:
     lwz r0, 0x12c8(r24)
     lis r25, lbl_80737808@ha
     lfd f5, lbl_80737808@l(r25)
@@ -2802,10 +2802,10 @@ lbl_fn_80149A30_000026AC:
     lfs f4, 0x108(r1)
     lfs f3, lbl_8088196C
     fcmpo cr0, f4, f3
-    ble lbl_fn_80149A30_00002798
+    ble lbl_dialog_renderWindow_00002798
     lfs f0, lbl_80881964
     fcmpo cr0, f4, f0
-    bge lbl_fn_80149A30_00002798
+    bge lbl_dialog_renderWindow_00002798
     lwz r0, 0x12c8(r24)
     lis r5, 0xa100
     lfs f7, 0x104(r1)
@@ -2834,7 +2834,7 @@ lbl_fn_80149A30_000026AC:
     li r9, 0x0
     lis r10, 0xff00
     bl fn_80061824
-lbl_fn_80149A30_00002798:
+lbl_dialog_renderWindow_00002798:
     li r0, 0xc48
     addi r11, r1, 0xc30
     psq_lx f31, r1, r0, 0, 0

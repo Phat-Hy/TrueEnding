@@ -4,8 +4,8 @@
 extern void fn_8068AD58(void);
 extern void fn_8068A850(void);
 extern void fn_8068AE24(void);
-extern void fn_805F98D0(void);
-extern void fn_805F99B0(void);
+extern void PSVECNormalize(void);
+extern void PSVECCrossProduct(void);
 
 /* External constants */
 extern f32 lbl_80888550;
@@ -20,21 +20,21 @@ extern f32 lbl_80888570;
 extern f32 lbl_80888574;
 
 /* Forward declarations */
-void fn_805F8E70(void);
-void fn_805F8EF0(void);
-void fn_805F8FA0(void);
-void fn_805F9050(void);
-void fn_805F90D0(void);
-void fn_805F9110(void);
-void fn_805F9160(void);
-void fn_805F9190(void);
-void fn_805F9240(void);
-void fn_805F93C0(void);
-void fn_805F9420(void);
-void fn_805F94B0(void);
-void fn_805F95A0(void);
+void PSMTXRotRad(void);
+void PSMTXRotTrig(void);
+void PSMTXRotAxisRad(void);
+void PSMTXRotAxis(void);
+void PSMTXTrans(void);
+void PSMTXTransApply(void);
+void PSMTXScale(void);
+void PSMTXQuat(void);
+void C_MTXLookAt(void);
+void PSMTXMultVec(void);
+void PSMTXMultVecArray(void);
+void PSMTXMultVecSR(void);
+void PSMTXMultVecArraySR(void);
 
-asm void fn_805F8E70(void) {
+asm void PSMTXRotRad(void) {
     nofralloc
     stwu r1, -0x30(r1)
     mflr r0
@@ -56,7 +56,7 @@ asm void fn_805F8E70(void) {
     mr r3, r30
     fmr f1, f31
     extsb r4, r31
-    bl fn_805F8EF0
+    bl PSMTXRotTrig
     lwz r0, 0x34(r1)
     psq_l f31, 0x28(r1), 0, 0
     lfd f31, 0x20(r1)
@@ -69,7 +69,7 @@ asm void fn_805F8E70(void) {
     blr
 }
 
-asm void fn_805F8EF0(void) {
+asm void PSMTXRotTrig(void) {
     nofralloc
     frsp f5, f1
     ori r0, r4, 0x20
@@ -120,7 +120,7 @@ lbl_rot_z:
     blr
 }
 
-asm void fn_805F8FA0(void) {
+asm void PSMTXRotAxisRad(void) {
     nofralloc
     psq_l f3, 0x0(r4), 0, 0
     frsp f11, f2
@@ -168,7 +168,7 @@ asm void fn_805F8FA0(void) {
     blr
 }
 
-asm void fn_805F9050(void) {
+asm void PSMTXRotAxis(void) {
     nofralloc
     stwu r1, -0x30(r1)
     mflr r0
@@ -190,7 +190,7 @@ asm void fn_805F9050(void) {
     mr r3, r30
     fmr f1, f31
     mr r4, r31
-    bl fn_805F8FA0
+    bl PSMTXRotAxisRad
     lwz r0, 0x34(r1)
     psq_l f31, 0x28(r1), 0, 0
     lfd f31, 0x20(r1)
@@ -203,7 +203,7 @@ asm void fn_805F9050(void) {
     blr
 }
 
-asm void fn_805F90D0(void) {
+asm void PSMTXTrans(void) {
     nofralloc
     lfs f0, lbl_80888554
     lfs f4, lbl_80888550
@@ -220,7 +220,7 @@ asm void fn_805F90D0(void) {
     blr
 }
 
-asm void fn_805F9110(void) {
+asm void PSMTXTransApply(void) {
     nofralloc
     psq_l f4, 0x0(r3), 0, 0
     frsp f1, f1
@@ -243,7 +243,7 @@ asm void fn_805F9110(void) {
     blr
 }
 
-asm void fn_805F9160(void) {
+asm void PSMTXScale(void) {
     nofralloc
     lfs f0, lbl_80888554
     stfs f1, 0x0(r3)
@@ -257,7 +257,7 @@ asm void fn_805F9160(void) {
     blr
 }
 
-asm void fn_805F9190(void) {
+asm void PSMTXQuat(void) {
     nofralloc
     psq_l f4, 0x0(r4), 0, 0
     psq_l f5, 0x8(r4), 0, 0
@@ -302,7 +302,7 @@ asm void fn_805F9190(void) {
     blr
 }
 
-asm void fn_805F9240(void) {
+asm void C_MTXLookAt(void) {
     nofralloc
     stwu r1, -0x40(r1)
     mflr r0
@@ -327,18 +327,18 @@ asm void fn_805F9240(void) {
     stfs f2, 0x24(r1)
     mr r4, r3
     stfs f0, 0x28(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     mr r3, r31
     addi r4, r1, 0x20
     addi r5, r1, 0x14
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     addi r3, r1, 0x14
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     addi r3, r1, 0x20
     addi r4, r1, 0x14
     addi r5, r1, 0x8
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     lfs f0, 0x14(r1)
     stfs f0, 0x0(r29)
     lfs f4, 0x0(r30)
@@ -399,7 +399,7 @@ asm void fn_805F9240(void) {
     blr
 }
 
-asm void fn_805F93C0(void) {
+asm void PSMTXMultVec(void) {
     nofralloc
     psq_l f0, 0x0(r4), 0, 0
     psq_l f2, 0x0(r3), 0, 0
@@ -424,7 +424,7 @@ asm void fn_805F93C0(void) {
     blr
 }
 
-asm void fn_805F9420(void) {
+asm void PSMTXMultVecArray(void) {
     nofralloc
     psq_l f13, 0x0(r3), 0, 0
     psq_l f12, 0x10(r3), 0, 0
@@ -464,7 +464,7 @@ lbl_loop:
     blr
 }
 
-asm void fn_805F94B0(void) {
+asm void PSMTXMultVecSR(void) {
     nofralloc
     stwu r1, -0x40(r1)
     mflr r0
@@ -527,7 +527,7 @@ asm void fn_805F94B0(void) {
     blr
 }
 
-asm void fn_805F95A0(void) {
+asm void PSMTXMultVecArraySR(void) {
     nofralloc
     fsubs f11, f4, f3
     lfs f8, lbl_80888568

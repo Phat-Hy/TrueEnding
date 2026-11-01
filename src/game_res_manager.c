@@ -14,9 +14,9 @@ extern void dtor_80084684(void);
 extern void fn_8000DB1C(void);
 extern void fn_80012A1C(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8003E4A4(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800DC880(void);
 extern void fn_800DC980(void);
 extern void fn_800F7250(void);
@@ -1472,7 +1472,7 @@ asm void fn_80224A2C(void)
     addi r8, r1, 0xb0
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r27, r30, 0x41f
     stw r31, 0x10(r26)
     mr r3, r27
@@ -1491,7 +1491,7 @@ asm void fn_80224A2C(void)
     addi r8, r1, 0xa8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r27, r30, 0x426
     stw r31, 0x20(r26)
     mr r3, r27
@@ -1510,7 +1510,7 @@ asm void fn_80224A2C(void)
     addi r8, r1, 0xa0
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r27, r30, 0x42d
     stw r31, 0x30(r26)
     mr r3, r27
@@ -1529,7 +1529,7 @@ asm void fn_80224A2C(void)
     addi r8, r1, 0x98
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r27, r30, 0x435
     stw r31, 0x40(r26)
     mr r3, r27
@@ -1548,7 +1548,7 @@ asm void fn_80224A2C(void)
     addi r8, r1, 0x90
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r27, r30, 0x43a
     stw r31, 0x50(r26)
     mr r3, r27
@@ -1567,7 +1567,7 @@ asm void fn_80224A2C(void)
     addi r8, r1, 0x88
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lis r4, fn_8022513C@ha
     addi r5, r29, 0x0
     addi r4, r4, fn_8022513C@l
@@ -1592,7 +1592,7 @@ asm void fn_80224A2C(void)
     addi r8, r1, 0x80
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r26, r30, 0x43f
     stw r31, 0x10(r27)
     mr r3, r26
@@ -1611,7 +1611,7 @@ asm void fn_80224A2C(void)
     addi r8, r1, 0x78
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r26, r30, 0x445
     stw r31, 0x20(r27)
     mr r3, r26
@@ -1630,7 +1630,7 @@ asm void fn_80224A2C(void)
     addi r8, r1, 0x70
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r26, r30, 0x44c
     stw r31, 0x30(r27)
     mr r3, r26
@@ -1649,7 +1649,7 @@ asm void fn_80224A2C(void)
     addi r8, r1, 0x68
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r26, r30, 0x452
     stw r31, 0x40(r27)
     mr r3, r26
@@ -1668,7 +1668,7 @@ asm void fn_80224A2C(void)
     addi r8, r1, 0x60
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r26, r30, 0x45b
     stw r31, 0x50(r27)
     mr r3, r26
@@ -1687,7 +1687,7 @@ asm void fn_80224A2C(void)
     addi r8, r1, 0x58
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lis r4, fn_802251C0@ha
     addi r5, r29, 0xc
     addi r4, r4, fn_802251C0@l
@@ -1712,7 +1712,7 @@ asm void fn_80224A2C(void)
     addi r8, r1, 0x50
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r26, r30, 0x460
     stw r31, 0x10(r27)
     mr r3, r26
@@ -1731,7 +1731,7 @@ asm void fn_80224A2C(void)
     addi r8, r1, 0x48
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r26, r30, 0x44c
     stw r31, 0x20(r27)
     mr r3, r26
@@ -1750,7 +1750,7 @@ asm void fn_80224A2C(void)
     addi r8, r1, 0x40
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r26, r30, 0x419
     stw r31, 0x30(r27)
     mr r3, r26
@@ -1769,7 +1769,7 @@ asm void fn_80224A2C(void)
     addi r8, r1, 0x38
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r26, r30, 0x464
     stw r31, 0x40(r27)
     mr r3, r26
@@ -1788,7 +1788,7 @@ asm void fn_80224A2C(void)
     addi r8, r1, 0x30
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r26, r30, 0x44c
     stw r31, 0x50(r27)
     mr r3, r26
@@ -1807,7 +1807,7 @@ asm void fn_80224A2C(void)
     addi r8, r1, 0x28
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r26, r30, 0x419
     stw r31, 0x60(r27)
     mr r3, r26
@@ -1826,7 +1826,7 @@ asm void fn_80224A2C(void)
     addi r8, r1, 0x20
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r26, r30, 0x46a
     stw r31, 0x70(r27)
     mr r3, r26
@@ -1845,7 +1845,7 @@ asm void fn_80224A2C(void)
     addi r8, r1, 0x18
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r26, r30, 0x44c
     stw r31, 0x80(r27)
     mr r3, r26
@@ -1864,7 +1864,7 @@ asm void fn_80224A2C(void)
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r26, r30, 0x419
     stw r31, 0x90(r27)
     mr r3, r26
@@ -1883,7 +1883,7 @@ asm void fn_80224A2C(void)
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lis r4, fn_802251DC@ha
     addi r5, r29, 0x18
     addi r4, r4, fn_802251DC@l
@@ -1983,7 +1983,7 @@ asm void fn_802251F8(void)
     li r4, 0x4
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_802251F8_00001984
     mr r4, r30

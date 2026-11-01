@@ -2,7 +2,7 @@
 
 /* External functions referenced */
 extern void fn_80615F30(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 
 /* External SDA symbols */
 extern u32 __GXData;
@@ -10,22 +10,22 @@ extern f32 lbl_80888740;
 extern f64 lbl_80888748;
 
 /* Function declarations */
-void fn_80614C80(void);
-void fn_80614CC0(void);
-void fn_80614D00(void);
-void fn_80614D30(void);
+void GXSetDispCopySrc(void);
+void GXSetTexCopySrc(void);
+void GXSetDispCopyDst(void);
+void GXSetTexCopyDst(void);
 void fn_80614E40(void);
 void fn_80614E60(void);
 void fn_80614E90(void);
 void fn_806150C0(void);
 void fn_80615190(void);
-void fn_80615210(void);
+void __GXSetSamplePattern(void);
 void fn_80615400(void);
-void fn_80615420(void);
-void fn_80615560(void);
+void GXCopyDisp(void);
+void GXCopyTex(void);
 void fn_806156C0(void);
 
-asm void fn_80614C80(void)
+asm void GXSetDispCopySrc(void)
 {
     nofralloc
     lwz r8, __GXData
@@ -46,7 +46,7 @@ asm void fn_80614C80(void)
     blr
 }
 
-asm void fn_80614CC0(void)
+asm void GXSetTexCopySrc(void)
 {
     nofralloc
     lwz r8, __GXData
@@ -67,7 +67,7 @@ asm void fn_80614CC0(void)
     blr
 }
 
-asm void fn_80614D00(void)
+asm void GXSetDispCopyDst(void)
 {
     nofralloc
     clrlslwi r0, r3, 17, 1
@@ -81,7 +81,7 @@ asm void fn_80614D00(void)
     blr
 }
 
-asm void fn_80614D30(void)
+asm void GXSetTexCopyDst(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -99,27 +99,27 @@ asm void fn_80614D30(void)
     stw r29, 0x24(r1)
     stw r28, 0x20(r1)
     stb r0, 0x250(r7)
-    bne lbl_fn_80614D30_000000F4
+    bne lbl_GXSetTexCopyDst_000000F4
     li r31, 0xb
-lbl_fn_80614D30_000000F4:
+lbl_GXSetTexCopyDst_000000F4:
     cmplwi r5, 0x3
-    ble lbl_fn_80614D30_00000104
+    ble lbl_GXSetTexCopyDst_00000104
     cmpwi r5, 0x26
-    bne lbl_fn_80614D30_0000011C
-lbl_fn_80614D30_00000104:
+    bne lbl_GXSetTexCopyDst_0000011C
+lbl_GXSetTexCopyDst_00000104:
     li r0, 0x3
     lwz r3, 0x24c(r7)
     rlwimi r3, r0, 15, 15, 16
     stw r3, 0x24c(r7)
     addi r29, r7, 0x24c
-    b lbl_fn_80614D30_00000130
-lbl_fn_80614D30_0000011C:
+    b lbl_GXSetTexCopyDst_00000130
+lbl_GXSetTexCopyDst_0000011C:
     li r0, 0x2
     lwz r3, 0x24c(r7)
     rlwimi r3, r0, 15, 15, 16
     stw r3, 0x24c(r7)
     addi r29, r7, 0x24c
-lbl_fn_80614D30_00000130:
+lbl_GXSetTexCopyDst_00000130:
     extrwi r0, r5, 1, 27
     stb r0, 0x250(r7)
     mr r3, r5
@@ -219,7 +219,7 @@ asm void fn_80614E90(void)
     mr r28, r3
     mr r30, r29
     fdivs f1, f0, f28
-    bl fn_80695D84
+    bl runtime_clampDouble
     subi r0, r28, 0x1
     clrlwi r4, r3, 23
     slwi r31, r0, 8
@@ -258,7 +258,7 @@ lbl_fn_80614E90_000002F0:
     fsubs f1, f1, f31
     fdivs f28, f1, f0
     fdivs f1, f30, f28
-    bl fn_80695D84
+    bl runtime_clampDouble
     clrlwi r4, r3, 23
     divwu r3, r31, r4
     subi r0, r4, 0x81
@@ -299,7 +299,7 @@ lbl_fn_80614E90_0000037C:
     fsubs f1, f1, f30
     fdivs f28, f1, f0
     fdivs f1, f31, f28
-    bl fn_80695D84
+    bl runtime_clampDouble
     clrlwi r4, r3, 23
     divwu r3, r31, r4
     subi r0, r4, 0x81
@@ -352,7 +352,7 @@ asm void fn_806150C0(void)
     lfs f0, lbl_80888740
     stw r0, 0x14(r1)
     fdivs f1, f0, f1
-    bl fn_80695D84
+    bl runtime_clampDouble
     lis r4, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r4)
@@ -439,11 +439,11 @@ asm void fn_80615190(void)
     blr
 }
 
-asm void fn_80615210(void)
+asm void __GXSetSamplePattern(void)
 {
     nofralloc
     cmpwi r3, 0x0
-    beq lbl_fn_80615210_0000068C
+    beq lbl___GXSetSamplePattern_0000068C
     lbz r8, 0x0(r4)
     li r0, 0x0
     lbz r10, 0x1(r4)
@@ -504,8 +504,8 @@ asm void fn_80615210(void)
     rlwimi r3, r10, 24, 0, 7
     rlwimi r7, r9, 24, 0, 7
     rlwimi r8, r4, 24, 0, 7
-    b lbl_fn_80615210_000006AC
-lbl_fn_80615210_0000068C:
+    b lbl___GXSetSamplePattern_000006AC
+lbl___GXSetSamplePattern_0000068C:
     lis r8, 0x166
     lis r3, 0x266
     lis r7, 0x366
@@ -514,7 +514,7 @@ lbl_fn_80615210_0000068C:
     addi r3, r3, 0x6666
     addi r7, r7, 0x6666
     addi r8, r4, 0x6666
-lbl_fn_80615210_000006AC:
+lbl___GXSetSamplePattern_000006AC:
     lis r9, 0xcc01
     li r10, 0x61
     stb r10, -0x8000(r9)
@@ -532,7 +532,7 @@ lbl_fn_80615210_000006AC:
     stw r7, -0x8000(r9)
     stb r10, -0x8000(r9)
     stw r8, -0x8000(r9)
-    beq lbl_fn_80615210_00000730
+    beq lbl___GXSetSamplePattern_00000730
     lbz r4, 0x0(r6)
     lbz r0, 0x4(r6)
     rlwimi r11, r4, 0, 26, 31
@@ -547,8 +547,8 @@ lbl_fn_80615210_000006AC:
     rlwimi r12, r3, 6, 20, 25
     rlwimi r11, r4, 18, 8, 13
     rlwimi r12, r0, 12, 14, 19
-    b lbl_fn_80615210_0000074C
-lbl_fn_80615210_00000730:
+    b lbl___GXSetSamplePattern_0000074C
+lbl___GXSetSamplePattern_00000730:
     li r3, 0x15
     clrrwi r11, r11, 12
     rlwimi r12, r3, 0, 26, 31
@@ -556,7 +556,7 @@ lbl_fn_80615210_00000730:
     rlwimi r11, r3, 12, 14, 19
     rlwimi r11, r0, 18, 8, 13
     rlwinm r12, r12, 0, 26, 13
-lbl_fn_80615210_0000074C:
+lbl___GXSetSamplePattern_0000074C:
     lis r4, 0xcc01
     li r5, 0x61
     stb r5, -0x8000(r4)
@@ -579,11 +579,11 @@ asm void fn_80615400(void)
     blr
 }
 
-asm void fn_80615420(void)
+asm void GXCopyDisp(void)
 {
     nofralloc
     cmpwi r4, 0x0
-    beq lbl_fn_80615420_000007D4
+    beq lbl_GXCopyDisp_000007D4
     lwz r7, __GXData
     lis r5, 0xcc01
     li r0, 0x61
@@ -595,30 +595,30 @@ asm void fn_80615420(void)
     stb r0, -0x8000(r5)
     clrrwi r0, r6, 2
     stw r0, -0x8000(r5)
-lbl_fn_80615420_000007D4:
+lbl_GXCopyDisp_000007D4:
     cmpwi r4, 0x0
     li r12, 0x0
-    bne lbl_fn_80615420_000007F8
+    bne lbl_GXCopyDisp_000007F8
     lwz r5, __GXData
     lwz r0, 0x22c(r5)
     addi r10, r5, 0x22c
     clrlwi r0, r0, 29
     cmplwi r0, 0x3
-    bne lbl_fn_80615420_00000828
-lbl_fn_80615420_000007F8:
+    bne lbl_GXCopyDisp_00000828
+lbl_GXCopyDisp_000007F8:
     lwz r5, __GXData
     lwz r7, 0x22c(r5)
     addi r10, r5, 0x22c
     extrwi r0, r7, 1, 25
     cmplwi r0, 0x1
-    bne lbl_fn_80615420_00000828
+    bne lbl_GXCopyDisp_00000828
     lis r6, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r6)
     rlwinm r0, r7, 0, 26, 24
     li r12, 0x1
     stw r0, -0x8000(r6)
-lbl_fn_80615420_00000828:
+lbl_GXCopyDisp_00000828:
     lis r8, 0xcc01
     li r9, 0x61
     stb r9, -0x8000(r8)
@@ -647,32 +647,32 @@ lbl_fn_80615420_00000828:
     stb r9, -0x8000(r8)
     lwz r0, 0x23c(r11)
     stw r0, -0x8000(r8)
-    beq lbl_fn_80615420_000008B4
+    beq lbl_GXCopyDisp_000008B4
     stb r9, -0x8000(r8)
     lwz r0, 0x228(r11)
     stw r0, -0x8000(r8)
     stb r9, -0x8000(r8)
     lwz r0, 0x220(r11)
     stw r0, -0x8000(r8)
-lbl_fn_80615420_000008B4:
+lbl_GXCopyDisp_000008B4:
     cmpwi r12, 0x0
-    beq lbl_fn_80615420_000008D0
+    beq lbl_GXCopyDisp_000008D0
     lis r3, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r3)
     lwz r0, 0x0(r10)
     stw r0, -0x8000(r3)
-lbl_fn_80615420_000008D0:
+lbl_GXCopyDisp_000008D0:
     li r0, 0x0
     sth r0, 0x2(r5)
     blr
 }
 
-asm void fn_80615560(void)
+asm void GXCopyTex(void)
 {
     nofralloc
     cmpwi r4, 0x0
-    beq lbl_fn_80615560_00000914
+    beq lbl_GXCopyTex_00000914
     lwz r7, __GXData
     lis r5, 0xcc01
     li r0, 0x61
@@ -684,39 +684,39 @@ asm void fn_80615560(void)
     stb r0, -0x8000(r5)
     clrrwi r0, r6, 2
     stw r0, -0x8000(r5)
-lbl_fn_80615560_00000914:
+lbl_GXCopyTex_00000914:
     lwz r9, __GXData
     li r11, 0x0
     lbz r0, 0x250(r9)
     lwz r6, 0x22c(r9)
     cmpwi r0, 0x0
-    beq lbl_fn_80615560_00000944
+    beq lbl_GXCopyTex_00000944
     clrlwi r0, r6, 29
     cmplwi r0, 0x3
-    beq lbl_fn_80615560_00000944
+    beq lbl_GXCopyTex_00000944
     li r0, 0x3
     li r11, 0x1
     rlwimi r6, r0, 0, 29, 31
-lbl_fn_80615560_00000944:
+lbl_GXCopyTex_00000944:
     cmpwi r4, 0x0
-    bne lbl_fn_80615560_00000958
+    bne lbl_GXCopyTex_00000958
     clrlwi r0, r6, 29
     cmplwi r0, 0x3
-    bne lbl_fn_80615560_0000096C
-lbl_fn_80615560_00000958:
+    bne lbl_GXCopyTex_0000096C
+lbl_GXCopyTex_00000958:
     extrwi r0, r6, 1, 25
     cmplwi r0, 0x1
-    bne lbl_fn_80615560_0000096C
+    bne lbl_GXCopyTex_0000096C
     li r11, 0x1
     rlwinm r6, r6, 0, 26, 24
-lbl_fn_80615560_0000096C:
+lbl_GXCopyTex_0000096C:
     cmpwi r11, 0x0
-    beq lbl_fn_80615560_00000984
+    beq lbl_GXCopyTex_00000984
     lis r5, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r5)
     stw r6, -0x8000(r5)
-lbl_fn_80615560_00000984:
+lbl_GXCopyTex_00000984:
     lis r7, 0xcc01
     li r8, 0x61
     stb r8, -0x8000(r7)
@@ -745,22 +745,22 @@ lbl_fn_80615560_00000984:
     stb r8, -0x8000(r7)
     lwz r0, 0x24c(r10)
     stw r0, -0x8000(r7)
-    beq lbl_fn_80615560_00000A10
+    beq lbl_GXCopyTex_00000A10
     stb r8, -0x8000(r7)
     lwz r0, 0x228(r10)
     stw r0, -0x8000(r7)
     stb r8, -0x8000(r7)
     lwz r0, 0x220(r10)
     stw r0, -0x8000(r7)
-lbl_fn_80615560_00000A10:
+lbl_GXCopyTex_00000A10:
     cmpwi r11, 0x0
-    beq lbl_fn_80615560_00000A2C
+    beq lbl_GXCopyTex_00000A2C
     lis r3, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r3)
     lwz r0, 0x22c(r9)
     stw r0, -0x8000(r3)
-lbl_fn_80615560_00000A2C:
+lbl_GXCopyTex_00000A2C:
     li r0, 0x0
     sth r0, 0x2(r9)
     blr

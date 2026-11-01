@@ -22,13 +22,13 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_8061AA80(void);
 extern void fn_8061ABE0(void);
-extern void fn_8061B3A0(void);
+extern void ISFS_GetUsageAsync(void);
 extern void fn_8061BC10(void);
 extern void fn_80620EF0(void);
 extern void fn_80620FD0(void);
 extern void fn_8068236C(void);
-extern void fn_80682428(void);
-extern void fn_80682544(void);
+extern void strcmp(void);
+extern void strncmp(void);
 extern void fn_80686A80(void);
 extern void fn_80686AF0(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -84,7 +84,7 @@ void fn_806220F0(void);
 void fn_80622170(void);
 void fn_80622180(void);
 void fn_80622260(void);
-void fn_80622310(void);
+void NANDAsyncCallback(void);
 
 asm void nandConvertPath(void)
 {
@@ -113,7 +113,7 @@ lbl_nandConvertPath_00000044:
     bl fn_80620FD0
     addi r3, r1, 0x188
     la r4, lbl_8087E904
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_nandConvertPath_0000007C
     mr r3, r29
@@ -124,7 +124,7 @@ lbl_nandConvertPath_00000044:
 lbl_nandConvertPath_0000007C:
     addi r3, r1, 0x188
     la r4, lbl_8087E908
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_nandConvertPath_000000B0
     mr r4, r30
@@ -141,7 +141,7 @@ lbl_nandConvertPath_000000B0:
     beq lbl_nandConvertPath_00000114
     mr r3, r30
     la r4, lbl_8087E8FC
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_nandConvertPath_000000E8
     addi r3, r1, 0x8
@@ -198,7 +198,7 @@ asm void nandIsPrivatePath(void)
     li r5, 0x8
     stw r0, 0x14(r1)
     addi r4, r4, lbl_807B1070@l
-    bl fn_80682544
+    bl strncmp
     cntlzw r0, r3
     srwi r3, r0, 5
     lwz r0, 0x14(r1)
@@ -218,7 +218,7 @@ asm void fn_806212F0(void)
     addi r4, r4, lbl_807B107C@l
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_806212F0_000001E0
     lbz r0, 0x9(r31)
@@ -713,7 +713,7 @@ lbl_fn_806218E0_0000084C:
     addi r3, r30, 0x34
     addi r4, r4, lbl_807B1070@l
     li r5, 0x8
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_806218E0_00000878
     li r0, 0x1
@@ -801,7 +801,7 @@ lbl_fn_806218E0_00000988:
     addi r3, r1, 0x10
     addi r4, r4, lbl_807B1070@l
     li r5, 0x8
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_806218E0_000009B4
     li r0, 0x1
@@ -1061,7 +1061,7 @@ lbl_fn_80621D70_00000CF8:
     addi r3, r28, 0x34
     addi r4, r4, lbl_807B107C@l
     li r5, 0x9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_80621D70_00000D30
     lbz r0, 0x3d(r28)
@@ -1153,7 +1153,7 @@ lbl_fn_80621D70_00000E44:
     addi r3, r1, 0x10
     addi r4, r4, lbl_807B107C@l
     li r5, 0x9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_80621D70_00000E7C
     lbz r0, 0x19(r1)
@@ -1392,12 +1392,12 @@ lbl_fn_80622260_0000114C:
     stw r3, 0xb4(r31)
     stw r0, 0x7c(r31)
     bl fn_80622170
-    lis r6, fn_80622310@ha
+    lis r6, NANDAsyncCallback@ha
     mr r7, r31
     addi r4, r31, 0x9c
     addi r5, r31, 0xa0
-    addi r6, r6, fn_80622310@l
-    bl fn_8061B3A0
+    addi r6, r6, NANDAsyncCallback@l
+    bl ISFS_GetUsageAsync
     bl nandConvertErrorCode
 lbl_fn_80622260_000011A4:
     addi r11, r1, 0x20
@@ -1408,7 +1408,7 @@ lbl_fn_80622260_000011A4:
     blr
 }
 
-asm void fn_80622310(void)
+asm void NANDAsyncCallback(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1417,14 +1417,14 @@ asm void fn_80622310(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r4
-    beq lbl_fn_80622310_000011E4
+    beq lbl_NANDAsyncCallback_000011E4
     cmpwi r3, -0x6a
-    bne lbl_fn_80622310_000013CC
-lbl_fn_80622310_000011E4:
+    bne lbl_NANDAsyncCallback_000013CC
+lbl_NANDAsyncCallback_000011E4:
     lwz r5, 0xb4(r4)
     cmpwi r3, 0x0
     lwz r3, 0x0(r5)
-    bne lbl_fn_80622310_00001214
+    bne lbl_NANDAsyncCallback_00001214
     lwz r7, 0xa4(r4)
     lwz r6, 0xac(r4)
     lwz r5, 0xa8(r4)
@@ -1433,30 +1433,30 @@ lbl_fn_80622310_000011E4:
     stw r6, 0xa4(r4)
     add r0, r5, r0
     stw r0, 0xa8(r4)
-lbl_fn_80622310_00001214:
+lbl_NANDAsyncCallback_00001214:
     cmpwi r3, 0x0
-    beq lbl_fn_80622310_00001260
+    beq lbl_NANDAsyncCallback_00001260
     lwz r5, 0xb4(r4)
-    lis r6, fn_80622310@ha
+    lis r6, NANDAsyncCallback@ha
     mr r7, r31
     addi r0, r5, 0x4
     stw r0, 0xb4(r4)
     addi r4, r4, 0xac
     addi r5, r31, 0xb0
-    addi r6, r6, fn_80622310@l
-    bl fn_8061B3A0
+    addi r6, r6, NANDAsyncCallback@l
+    bl ISFS_GetUsageAsync
     cmpwi r3, 0x0
-    beq lbl_fn_80622310_000013E0
+    beq lbl_NANDAsyncCallback_000013E0
     bl nandConvertErrorCode
     lwz r12, 0x4(r31)
     mr r4, r31
     mtctr r12
     bctrl
-    b lbl_fn_80622310_000013E0
-lbl_fn_80622310_00001260:
+    b lbl_NANDAsyncCallback_000013E0
+lbl_NANDAsyncCallback_00001260:
     lwz r0, 0x7c(r4)
     cmpwi r0, 0x14
-    bne lbl_fn_80622310_000012EC
+    bne lbl_NANDAsyncCallback_000012EC
     lwz r3, 0x90(r4)
     li r8, 0x0
     lwz r0, 0x9c(r4)
@@ -1466,24 +1466,24 @@ lbl_fn_80622310_00001260:
     cmplwi r0, 0x400
     lwz r0, 0xa0(r4)
     lwz r5, 0x94(r4)
-    ble lbl_fn_80622310_00001298
+    ble lbl_NANDAsyncCallback_00001298
     ori r8, r8, 0x1
-lbl_fn_80622310_00001298:
+lbl_NANDAsyncCallback_00001298:
     add r0, r0, r5
     cmplwi r0, 0x21
-    ble lbl_fn_80622310_000012A8
+    ble lbl_NANDAsyncCallback_000012A8
     ori r8, r8, 0x2
-lbl_fn_80622310_000012A8:
+lbl_NANDAsyncCallback_000012A8:
     add r0, r6, r3
     cmplwi r0, 0x4400
-    ble lbl_fn_80622310_000012B8
+    ble lbl_NANDAsyncCallback_000012B8
     ori r8, r8, 0x4
-lbl_fn_80622310_000012B8:
+lbl_NANDAsyncCallback_000012B8:
     add r0, r7, r5
     cmplwi r0, 0xfa0
-    ble lbl_fn_80622310_000012C8
+    ble lbl_NANDAsyncCallback_000012C8
     ori r8, r8, 0x8
-lbl_fn_80622310_000012C8:
+lbl_NANDAsyncCallback_000012C8:
     lwz r4, 0x98(r4)
     li r3, 0x0
     stw r8, 0x0(r4)
@@ -1492,10 +1492,10 @@ lbl_fn_80622310_000012C8:
     mr r4, r31
     mtctr r12
     bctrl
-    b lbl_fn_80622310_000013E0
-lbl_fn_80622310_000012EC:
+    b lbl_NANDAsyncCallback_000013E0
+lbl_NANDAsyncCallback_000012EC:
     cmpwi r0, 0x15
-    bne lbl_fn_80622310_00001398
+    bne lbl_NANDAsyncCallback_00001398
     lwz r5, 0xa4(r4)
     li r3, 0x4400
     lwz r9, 0xa8(r4)
@@ -1521,15 +1521,15 @@ lbl_fn_80622310_000012EC:
     subfic r0, r11, 0x21
     cmplw r8, r5
     andc r0, r0, r3
-    bge lbl_fn_80622310_00001360
+    bge lbl_NANDAsyncCallback_00001360
     mr r5, r8
-lbl_fn_80622310_00001360:
+lbl_NANDAsyncCallback_00001360:
     lwz r3, 0xc(r4)
     cmplw r6, r0
     stw r5, 0x0(r3)
-    bge lbl_fn_80622310_00001374
+    bge lbl_NANDAsyncCallback_00001374
     mr r0, r6
-lbl_fn_80622310_00001374:
+lbl_NANDAsyncCallback_00001374:
     lwz r4, 0x10(r4)
     li r3, 0x0
     stw r0, 0x0(r4)
@@ -1538,8 +1538,8 @@ lbl_fn_80622310_00001374:
     mr r4, r31
     mtctr r12
     bctrl
-    b lbl_fn_80622310_000013E0
-lbl_fn_80622310_00001398:
+    b lbl_NANDAsyncCallback_000013E0
+lbl_NANDAsyncCallback_00001398:
     lis r3, lbl_807B11D4@ha
     lis r4, lbl_807B11BC@ha
     addi r3, r3, lbl_807B11D4@l
@@ -1552,14 +1552,14 @@ lbl_fn_80622310_00001398:
     mr r4, r31
     mtctr r12
     bctrl
-    b lbl_fn_80622310_000013E0
-lbl_fn_80622310_000013CC:
+    b lbl_NANDAsyncCallback_000013E0
+lbl_NANDAsyncCallback_000013CC:
     bl nandConvertErrorCode
     lwz r12, 0x4(r31)
     mr r4, r31
     mtctr r12
     bctrl
-lbl_fn_80622310_000013E0:
+lbl_NANDAsyncCallback_000013E0:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

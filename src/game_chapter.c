@@ -10,13 +10,13 @@ extern void dtor_80084684(void);
 extern void fn_8004FF58(void);
 extern void fn_8006FEBC(void);
 extern void fn_80072914(void);
-extern void fn_800761A8(void);
+extern void gx_applyRenderState(void);
 extern void fn_800763C0(void);
-extern void fn_80076760(void);
-extern void fn_800846FC(void);
-extern void fn_80084C24(void);
-extern void fn_800874C8(void);
-extern void fn_8008771C(void);
+extern void gx_setRenderStateParam(void);
+extern void mem_realloc(void);
+extern void mem_getAllocSize(void);
+extern void route_findNextWaypoint(void);
+extern void route_interpolatePath(void);
 extern void fn_80088AF4(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
@@ -25,29 +25,29 @@ extern void fn_800BDB58(void);
 extern void fn_800BFAC8(void);
 extern void fn_800C169C(void);
 extern void fn_800C2448(void);
-extern void fn_800D5738(void);
-extern void fn_800D5808(void);
+struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
+extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
-extern void fn_800D59B8(void);
+extern void atn_LH_Texture_update(void);
 extern void fn_800D69A8(void);
 extern void fn_800D6A84(void);
 extern void fn_80612E80(void);
 extern void fn_806134E0(void);
 extern void fn_80613520(void);
-extern void fn_80613960(void);
+extern void __GXSetVtxDesc(void);
 extern void fn_80613BB0(void);
 extern void fn_80614790(void);
 extern void fn_80615D20(void);
 extern void fn_80615D50(void);
 extern void fn_80617340(void);
 extern void fn_80617880(void);
-extern void fn_806179E0(void);
-extern void fn_80618350(void);
-extern void fn_80618400(void);
-extern void fn_80695720(void);
+extern void GXSetNumTevStages(void);
+extern void GXLoadPosMtxImm(void);
+extern void GXSetCurrentMtx(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -87,10 +87,10 @@ void fn_80077058(void);
 void fn_8007708C(void);
 void fn_80077160(void);
 void fn_80077418(void);
-void fn_8007741C(void);
+void atn_LensFlare_destructor(void);
 void fn_800774D4(void);
 void fn_80077534(void);
-void fn_80077548(void);
+void atn_LensFlare_draw(void);
 void fn_8007786C(void);
 void fn_80078938(void);
 
@@ -194,12 +194,12 @@ asm void fn_80077160(void)
     lfs f2, 0x8(r6)
     addi r7, r7, lbl_80777D08@l
     stw r7, 0x0(r3)
-    lis r7, fn_800D5738@ha
-    lis r6, fn_800D5808@ha
+    lis r7, atn_LH_Texture_constructor@ha
+    lis r6, atn_LH_Texture_destructAndFree@ha
     mr r24, r5
     stw r4, 0x4(r3)
-    addi r4, r7, fn_800D5738@l
-    addi r5, r6, fn_800D5808@l
+    addi r4, r7, atn_LH_Texture_constructor@l
+    addi r5, r6, atn_LH_Texture_destructAndFree@l
     mr r31, r3
     psq_st f1, 0x8(r3), 0, 0
     li r6, 0x30
@@ -233,7 +233,7 @@ lbl_fn_80077160_00000198:
     beq lbl_fn_80077160_000001E4
     beq lbl_fn_80077160_000001E4
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80077160_000001E4:
     cmpwi r24, 0x0
     stw r24, 0x18(r31)
@@ -244,13 +244,13 @@ lbl_fn_80077160_000001E4:
     la r6, lbl_8087D758
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80077418@ha
     mr r7, r24
     addi r4, r4, fn_80077418@l
     li r5, 0x0
     li r6, 0x1c
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x1c(r31)
     b lbl_fn_80077160_00000234
 lbl_fn_80077160_0000022C:
@@ -315,7 +315,7 @@ lbl_fn_80077160_0000029C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80880AD0
     mr r3, r24
     lfs f2, lbl_80880AD8
@@ -324,7 +324,7 @@ lbl_fn_80077160_0000029C:
     addi r5, r28, 0x4
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80880AE0
     mr r3, r24
     lfs f2, lbl_80880AE4
@@ -333,7 +333,7 @@ lbl_fn_80077160_0000029C:
     addi r5, r28, 0x8
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80880AD0
     mr r3, r24
     lfs f2, lbl_80880AD4
@@ -362,13 +362,11 @@ lbl_fn_80077160_00000388:
     blr
 }
 
-asm void fn_80077418(void)
+void fn_80077418(void)
 {
-    nofralloc
-    blr
 }
 
-asm void fn_8007741C(void)
+asm void atn_LensFlare_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -379,41 +377,41 @@ asm void fn_8007741C(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_8007741C_00000460
+    beq lbl_atn_LensFlare_destructor_00000460
     addic. r0, r3, 0x140
-    beq lbl_fn_8007741C_0000040C
+    beq lbl_atn_LensFlare_destructor_0000040C
     lwz r4, 0x140(r3)
     cmpwi r4, 0x0
-    beq lbl_fn_8007741C_0000040C
+    beq lbl_atn_LensFlare_destructor_0000040C
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
-    beq lbl_fn_8007741C_0000040C
+    beq lbl_atn_LensFlare_destructor_0000040C
     bl fn_800897D8
-lbl_fn_8007741C_0000040C:
-    lis r4, fn_800D5808@ha
+lbl_atn_LensFlare_destructor_0000040C:
+    lis r4, atn_LH_Texture_destructAndFree@ha
     addi r3, r30, 0x20
-    addi r4, r4, fn_800D5808@l
+    addi r4, r4, atn_LH_Texture_destructAndFree@l
     li r5, 0x30
     li r6, 0x6
     bl fn_806959D8
     addic. r0, r30, 0x18
-    beq lbl_fn_8007741C_00000450
+    beq lbl_atn_LensFlare_destructor_00000450
     lwz r3, 0x1c(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_8007741C_00000444
-    beq lbl_fn_8007741C_00000444
+    beq lbl_atn_LensFlare_destructor_00000444
+    beq lbl_atn_LensFlare_destructor_00000444
     subi r3, r3, 0x10
-    bl fn_80084C24
-lbl_fn_8007741C_00000444:
+    bl mem_getAllocSize
+lbl_atn_LensFlare_destructor_00000444:
     li r0, 0x0
     stw r0, 0x1c(r30)
     stw r0, 0x18(r30)
-lbl_fn_8007741C_00000450:
+lbl_atn_LensFlare_destructor_00000450:
     cmpwi r31, 0x0
-    ble lbl_fn_8007741C_00000460
+    ble lbl_atn_LensFlare_destructor_00000460
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8007741C_00000460:
+lbl_atn_LensFlare_destructor_00000460:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -437,7 +435,7 @@ asm void fn_800774D4(void)
     li r29, 0x0
 lbl_fn_800774D4_000004A0:
     mr r3, r31
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     addi r29, r29, 0x1
     or r30, r30, r3
     cmpwi r29, 0x6
@@ -463,7 +461,7 @@ asm void fn_80077534(void)
     b fn_800BDB58
 }
 
-asm void fn_80077548(void)
+asm void atn_LensFlare_draw(void)
 {
     nofralloc
     stwu r1, -0xd0(r1)
@@ -480,7 +478,7 @@ asm void fn_80077548(void)
     bl fn_800BDB40
     lwz r0, 0x4(r30)
     cmpwi r0, 0x1
-    bne lbl_fn_80077548_000005B8
+    bne lbl_atn_LensFlare_draw_000005B8
     lwz r3, 0x2fc(r31)
     li r4, 0x0
     bl fn_800C2448
@@ -516,7 +514,7 @@ asm void fn_80077548(void)
     stfs f2, 0x4c(r1)
     psq_st f1, 0x8(r30), 0, 0
     stfs f2, 0x10(r30)
-lbl_fn_80077548_000005B8:
+lbl_atn_LensFlare_draw_000005B8:
     psq_l f1, 0x8(r30), 0, 0
     addi r4, r1, 0x50
     lfs f2, 0x10(r30)
@@ -527,7 +525,7 @@ lbl_fn_80077548_000005B8:
     stfs f0, 0x5c(r1)
     bl fn_8004FF58
     cmpwi r3, 0x0
-    beq lbl_fn_80077548_000007F4
+    beq lbl_atn_LensFlare_draw_000007F4
     lfs f5, 0x5c(r1)
     addi r31, r1, 0x88
     lfs f4, 0x58(r1)
@@ -568,7 +566,7 @@ lbl_fn_80077548_000005B8:
     lfs f0, lbl_80880AD4
     fmr f31, f1
     fcmpu cr0, f0, f1
-    beq lbl_fn_80077548_000007F4
+    beq lbl_atn_LensFlare_draw_000007F4
     mr r4, r31
     addi r3, r1, 0x70
     bl fn_8006FEBC
@@ -598,58 +596,58 @@ lbl_fn_80077548_000005B8:
     stw r3, 0xa8(r1)
     lfd f0, 0xa8(r1)
     fsubs f9, f0, f3
-    bge lbl_fn_80077548_00000704
-    b lbl_fn_80077548_00000714
-lbl_fn_80077548_00000704:
+    bge lbl_atn_LensFlare_draw_00000704
+    b lbl_atn_LensFlare_draw_00000714
+lbl_atn_LensFlare_draw_00000704:
     fcmpo cr0, f6, f5
-    ble lbl_fn_80077548_00000710
+    ble lbl_atn_LensFlare_draw_00000710
     fmr f6, f5
-lbl_fn_80077548_00000710:
+lbl_atn_LensFlare_draw_00000710:
     fmr f4, f6
-lbl_fn_80077548_00000714:
+lbl_atn_LensFlare_draw_00000714:
     lfs f0, 0x74(r1)
     lfs f3, lbl_8087D744
     stfs f4, 0x70(r1)
     fcmpo cr0, f0, f3
-    bge lbl_fn_80077548_0000072C
-    b lbl_fn_80077548_0000073C
-lbl_fn_80077548_0000072C:
+    bge lbl_atn_LensFlare_draw_0000072C
+    b lbl_atn_LensFlare_draw_0000073C
+lbl_atn_LensFlare_draw_0000072C:
     fcmpo cr0, f0, f9
-    ble lbl_fn_80077548_00000738
+    ble lbl_atn_LensFlare_draw_00000738
     fmr f0, f9
-lbl_fn_80077548_00000738:
+lbl_atn_LensFlare_draw_00000738:
     fmr f3, f0
-lbl_fn_80077548_0000073C:
+lbl_atn_LensFlare_draw_0000073C:
     lfs f0, 0x7c(r1)
     lfs f4, lbl_8087D748
     stfs f3, 0x74(r1)
     fcmpo cr0, f0, f4
-    bge lbl_fn_80077548_00000754
-    b lbl_fn_80077548_00000768
-lbl_fn_80077548_00000754:
+    bge lbl_atn_LensFlare_draw_00000754
+    b lbl_atn_LensFlare_draw_00000768
+lbl_atn_LensFlare_draw_00000754:
     fcmpo cr0, f0, f5
-    ble lbl_fn_80077548_00000760
-    b lbl_fn_80077548_00000764
-lbl_fn_80077548_00000760:
+    ble lbl_atn_LensFlare_draw_00000760
+    b lbl_atn_LensFlare_draw_00000764
+lbl_atn_LensFlare_draw_00000760:
     fmr f5, f0
-lbl_fn_80077548_00000764:
+lbl_atn_LensFlare_draw_00000764:
     fmr f4, f5
-lbl_fn_80077548_00000768:
+lbl_atn_LensFlare_draw_00000768:
     lfs f0, 0x80(r1)
     lfs f7, lbl_8087D74C
     stfs f4, 0x7c(r1)
     fcmpo cr0, f0, f7
-    bge lbl_fn_80077548_00000780
-    b lbl_fn_80077548_00000794
-lbl_fn_80077548_00000780:
+    bge lbl_atn_LensFlare_draw_00000780
+    b lbl_atn_LensFlare_draw_00000794
+lbl_atn_LensFlare_draw_00000780:
     fcmpo cr0, f0, f9
-    ble lbl_fn_80077548_0000078C
-    b lbl_fn_80077548_00000790
-lbl_fn_80077548_0000078C:
+    ble lbl_atn_LensFlare_draw_0000078C
+    b lbl_atn_LensFlare_draw_00000790
+lbl_atn_LensFlare_draw_0000078C:
     fmr f9, f0
-lbl_fn_80077548_00000790:
+lbl_atn_LensFlare_draw_00000790:
     fmr f7, f9
-lbl_fn_80077548_00000794:
+lbl_atn_LensFlare_draw_00000794:
     frsp f0, f7
     lfs f3, 0x74(r1)
     lfs f6, 0x70(r1)
@@ -665,19 +663,19 @@ lbl_fn_80077548_00000794:
     fsubs f0, f0, f4
     fsubs f0, f3, f0
     fcmpo cr0, f0, f1
-    bge lbl_fn_80077548_000007D8
-    b lbl_fn_80077548_000007EC
-lbl_fn_80077548_000007D8:
+    bge lbl_atn_LensFlare_draw_000007D8
+    b lbl_atn_LensFlare_draw_000007EC
+lbl_atn_LensFlare_draw_000007D8:
     lfs f1, lbl_8087D754
     fcmpo cr0, f0, f1
-    ble lbl_fn_80077548_000007E8
-    b lbl_fn_80077548_000007EC
-lbl_fn_80077548_000007E8:
+    ble lbl_atn_LensFlare_draw_000007E8
+    b lbl_atn_LensFlare_draw_000007EC
+lbl_atn_LensFlare_draw_000007E8:
     fmr f1, f0
-lbl_fn_80077548_000007EC:
+lbl_atn_LensFlare_draw_000007EC:
     mr r3, r30
     bl fn_80078938
-lbl_fn_80077548_000007F4:
+lbl_atn_LensFlare_draw_000007F4:
     lwz r0, 0xd4(r1)
     psq_l f31, 0xc8(r1), 0, 0
     lfd f31, 0xc0(r1)
@@ -721,7 +719,7 @@ lbl_fn_8007786C_00000878:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_00000888:
     mr r27, r3
 lbl_fn_8007786C_0000088C:
@@ -743,7 +741,7 @@ lbl_fn_8007786C_000008C0:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_000008D0:
     mr r26, r3
 lbl_fn_8007786C_000008D4:
@@ -765,7 +763,7 @@ lbl_fn_8007786C_00000908:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_00000918:
     mr r25, r3
 lbl_fn_8007786C_0000091C:
@@ -787,7 +785,7 @@ lbl_fn_8007786C_00000950:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_00000960:
     lfs f4, 0x0(r31)
     slwi r4, r26, 8
@@ -824,7 +822,7 @@ lbl_fn_8007786C_000009D8:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_000009E8:
     mr r27, r3
 lbl_fn_8007786C_000009EC:
@@ -846,7 +844,7 @@ lbl_fn_8007786C_00000A20:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_00000A30:
     mr r26, r3
 lbl_fn_8007786C_00000A34:
@@ -868,7 +866,7 @@ lbl_fn_8007786C_00000A68:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_00000A78:
     mr r25, r3
 lbl_fn_8007786C_00000A7C:
@@ -890,7 +888,7 @@ lbl_fn_8007786C_00000AB0:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_00000AC0:
     lfs f5, 0x4(r28)
     slwi r4, r26, 8
@@ -939,7 +937,7 @@ lbl_fn_8007786C_00000B68:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_00000B78:
     mr r27, r3
 lbl_fn_8007786C_00000B7C:
@@ -961,7 +959,7 @@ lbl_fn_8007786C_00000BB0:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_00000BC0:
     mr r26, r3
 lbl_fn_8007786C_00000BC4:
@@ -983,7 +981,7 @@ lbl_fn_8007786C_00000BF8:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_00000C08:
     mr r25, r3
 lbl_fn_8007786C_00000C0C:
@@ -1005,7 +1003,7 @@ lbl_fn_8007786C_00000C40:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_00000C50:
     lfs f5, 0x4(r28)
     slwi r4, r26, 8
@@ -1063,7 +1061,7 @@ lbl_fn_8007786C_00000D1C:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_00000D2C:
     mr r27, r3
 lbl_fn_8007786C_00000D30:
@@ -1085,7 +1083,7 @@ lbl_fn_8007786C_00000D64:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_00000D74:
     mr r26, r3
 lbl_fn_8007786C_00000D78:
@@ -1107,7 +1105,7 @@ lbl_fn_8007786C_00000DAC:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_00000DBC:
     mr r25, r3
 lbl_fn_8007786C_00000DC0:
@@ -1129,7 +1127,7 @@ lbl_fn_8007786C_00000DF4:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_00000E04:
     lfs f5, 0x4(r28)
     slwi r4, r26, 8
@@ -1178,7 +1176,7 @@ lbl_fn_8007786C_00000EAC:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_00000EBC:
     mr r27, r3
 lbl_fn_8007786C_00000EC0:
@@ -1200,7 +1198,7 @@ lbl_fn_8007786C_00000EF4:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_00000F04:
     mr r26, r3
 lbl_fn_8007786C_00000F08:
@@ -1222,7 +1220,7 @@ lbl_fn_8007786C_00000F3C:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_00000F4C:
     mr r25, r3
 lbl_fn_8007786C_00000F50:
@@ -1244,7 +1242,7 @@ lbl_fn_8007786C_00000F84:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_00000F94:
     lfs f5, 0x4(r28)
     slwi r4, r26, 8
@@ -1302,7 +1300,7 @@ lbl_fn_8007786C_00001060:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_00001070:
     mr r27, r3
 lbl_fn_8007786C_00001074:
@@ -1324,7 +1322,7 @@ lbl_fn_8007786C_000010A8:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_000010B8:
     mr r26, r3
 lbl_fn_8007786C_000010BC:
@@ -1346,7 +1344,7 @@ lbl_fn_8007786C_000010F0:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_00001100:
     mr r25, r3
 lbl_fn_8007786C_00001104:
@@ -1368,7 +1366,7 @@ lbl_fn_8007786C_00001138:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_00001148:
     lfs f5, 0x4(r28)
     slwi r4, r26, 8
@@ -1417,7 +1415,7 @@ lbl_fn_8007786C_000011F0:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_00001200:
     mr r27, r3
 lbl_fn_8007786C_00001204:
@@ -1439,7 +1437,7 @@ lbl_fn_8007786C_00001238:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_00001248:
     mr r26, r3
 lbl_fn_8007786C_0000124C:
@@ -1461,7 +1459,7 @@ lbl_fn_8007786C_00001280:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_00001290:
     mr r25, r3
 lbl_fn_8007786C_00001294:
@@ -1483,7 +1481,7 @@ lbl_fn_8007786C_000012C8:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_000012D8:
     lfs f5, 0x4(r28)
     slwi r4, r26, 8
@@ -1541,7 +1539,7 @@ lbl_fn_8007786C_000013A4:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_000013B4:
     mr r27, r3
 lbl_fn_8007786C_000013B8:
@@ -1563,7 +1561,7 @@ lbl_fn_8007786C_000013EC:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_000013FC:
     mr r26, r3
 lbl_fn_8007786C_00001400:
@@ -1585,7 +1583,7 @@ lbl_fn_8007786C_00001434:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_00001444:
     mr r25, r3
 lbl_fn_8007786C_00001448:
@@ -1607,7 +1605,7 @@ lbl_fn_8007786C_0000147C:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_0000148C:
     lfs f5, 0x4(r28)
     slwi r4, r26, 8
@@ -1656,7 +1654,7 @@ lbl_fn_8007786C_00001534:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_00001544:
     mr r25, r3
 lbl_fn_8007786C_00001548:
@@ -1678,7 +1676,7 @@ lbl_fn_8007786C_0000157C:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_0000158C:
     mr r27, r3
 lbl_fn_8007786C_00001590:
@@ -1700,7 +1698,7 @@ lbl_fn_8007786C_000015C4:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_000015D4:
     mr r26, r3
 lbl_fn_8007786C_000015D8:
@@ -1722,7 +1720,7 @@ lbl_fn_8007786C_0000160C:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_0000161C:
     lfs f5, 0x4(r28)
     slwi r4, r27, 8
@@ -1780,7 +1778,7 @@ lbl_fn_8007786C_000016E8:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_000016F8:
     mr r26, r3
 lbl_fn_8007786C_000016FC:
@@ -1802,7 +1800,7 @@ lbl_fn_8007786C_00001730:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_00001740:
     mr r27, r3
 lbl_fn_8007786C_00001744:
@@ -1824,7 +1822,7 @@ lbl_fn_8007786C_00001778:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_00001788:
     mr r30, r3
 lbl_fn_8007786C_0000178C:
@@ -1846,7 +1844,7 @@ lbl_fn_8007786C_000017C0:
     lfs f3, lbl_80880AF8
     lfs f0, lbl_80880AF4
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_8007786C_000017D0:
     lfs f5, 0x4(r28)
     slwi r4, r27, 8
@@ -2125,7 +2123,7 @@ asm void fn_80078938(void)
     li r3, 0x1
     bl fn_80613BB0
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -2148,7 +2146,7 @@ asm void fn_80078938(void)
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
@@ -2181,15 +2179,15 @@ asm void fn_80078938(void)
     li r4, 0x8
     li r5, 0x0
     mr r3, r29
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r29
     li r4, 0x9
     li r5, 0x7
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r29
     li r4, 0xa
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     lwz r3, lbl_8087EEE0
     li r4, 0x1
     bl fn_80072914
@@ -2209,9 +2207,9 @@ asm void fn_80078938(void)
     stfs f0, 0x1d8(r1)
     stfs f0, 0x1c4(r1)
     stfs f0, 0x1b0(r1)
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     mr r4, r30
     addi r3, r1, 0x170
     addi r5, r1, 0x194
@@ -2264,7 +2262,7 @@ asm void fn_80078938(void)
     stfs f2, 0x64(r1)
     psq_st f1, 0x0(r5), 0, 0
     stfs f2, 0x190(r1)
-    bl fn_800761A8
+    bl gx_applyRenderState
     lfs f27, lbl_80880AF4
     li r28, 0x0
     lfs f28, lbl_80880AD0

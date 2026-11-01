@@ -7,9 +7,9 @@ extern void _savegpr_26(void);
 extern void fn_80044E0C(void);
 extern void fn_8004ED34(void);
 extern void fn_80050A1C(void);
-extern void fn_80097C08(void);
-extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void atn_Anim_setLayerAnimation(void);
+extern void skin_applyWeights(void);
+extern void ref_releaseHandle(void);
 extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
 extern void fn_80107380(void);
@@ -33,7 +33,7 @@ extern void fn_8014DEE4(void);
 extern void fn_8015487C(void);
 extern void fn_80154C08(void);
 extern void fn_80164DCC(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80178A6C(void);
 extern void fn_80179D44(void);
 extern void fn_80204E04(void);
@@ -42,16 +42,16 @@ extern void fn_8021A8D0(void);
 extern void fn_8021A918(void);
 extern void fn_8023A02C(void);
 extern void fn_8023A098(void);
-extern void fn_80370174(void);
-extern void fn_80370320(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
-extern void fn_805F9990(void);
-extern void fn_805F99B0(void);
+extern void world_getGlobalFlag(void);
+extern void world_setGlobalFlag(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
+extern void PSVECDotProduct(void);
+extern void PSVECCrossProduct(void);
 extern void fn_8068A850(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 
 /* External data declarations */
 extern u8 jumptable_8077AD5C[];
@@ -170,7 +170,7 @@ lbl_fn_80152D10_0000010C:
     beq lbl_fn_80152D10_00000190
     lwz r3, lbl_8087F430
     li r4, 0x25
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x1
     blt lbl_fn_80152D10_00000170
     lwz r3, 0x648(r31)
@@ -456,7 +456,7 @@ lbl_fn_80153004_0000050C:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80153004_00000548
     lwz r3, 0xf80(r30)
@@ -502,7 +502,7 @@ lbl_fn_80153004_000005B4:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80153004_000005F0
     lwz r3, 0xf80(r30)
@@ -513,7 +513,7 @@ lbl_fn_80153004_000005B4:
 lbl_fn_80153004_000005F0:
     mr r3, r30
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r30)
     li r0, 0x0
     cmpwi r3, 0x0
@@ -811,7 +811,7 @@ asm void fn_80153698(void)
     stfs f2, 0x14(r1)
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0x20(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lwz r9, 0x34(r30)
     addi r5, r29, 0xc14
     psq_l f1, 0x0(r28), 0, 0
@@ -867,14 +867,14 @@ asm void fn_80153698(void)
     stfs f3, 0x28(r1)
     stfs f0, 0x2c(r1)
     lfs f1, 0x538(r29)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x24
     addi r3, r1, 0x58
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r3, r1, 0x24
     addi r4, r29, 0xc14
-    bl fn_805F9990
+    bl PSVECDotProduct
     lfs f0, lbl_8088196C
     fcmpo cr0, f1, f0
     cror eq, gt, eq
@@ -932,7 +932,7 @@ lbl_fn_80153698_00000BCC:
     lfs f2, lbl_80881994
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     b lbl_fn_80153698_00000C1C
 lbl_fn_80153698_00000BE8:
     extrwi. r0, r3, 1, 2
@@ -949,7 +949,7 @@ lbl_fn_80153698_00000C04:
     lfs f2, lbl_80881994
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
 lbl_fn_80153698_00000C1C:
     lis r4, lbl_80737490@ha
     lfs f1, lbl_80881964
@@ -959,10 +959,10 @@ lbl_fn_80153698_00000C1C:
     addi r5, r29, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087F0A8
     lwz r0, 0x3d8(r3)
     cmpwi r0, 0x0
@@ -976,19 +976,19 @@ lbl_fn_80153698_00000C68:
     bne lbl_fn_80153698_00000CB0
     lwz r3, lbl_8087F430
     li r4, 0xed
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     bne lbl_fn_80153698_00000CB0
     lwz r3, lbl_8087F430
     li r4, 0xea
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x1
     bne lbl_fn_80153698_00000CB0
     lwz r3, lbl_8087F430
     li r4, 0xed
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_80153698_00000CB0:
     lwz r0, 0xa4(r1)
     lwz r31, 0x9c(r1)
@@ -1062,7 +1062,7 @@ lbl_fn_801539E0_00000D9C:
     beq lbl_fn_801539E0_00000E20
     lwz r3, lbl_8087F430
     li r4, 0x25
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x1
     blt lbl_fn_801539E0_00000E00
     lwz r3, 0x648(r31)
@@ -1137,7 +1137,7 @@ asm void fn_80153B44(void)
     stfs f4, 0x78(r1)
     stfs f0, 0x74(r1)
     stfs f6, 0x7c(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_808819B0
     fcmpo cr0, f1, f0
     bge lbl_fn_80153B44_00000EC8
@@ -1160,7 +1160,7 @@ lbl_fn_80153B44_00000EC8:
     stfs f4, 0x6c(r1)
     stfs f0, 0x68(r1)
     stfs f6, 0x70(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_808819B0
     fcmpo cr0, f1, f0
     bge lbl_fn_80153B44_00000F20
@@ -1261,11 +1261,11 @@ lbl_fn_80153B44_0000105C:
     stfs f0, 0x60(r1)
     stfs f30, 0x28(r1)
     lfs f1, 0x538(r30)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x20
     addi r3, r1, 0x80
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f4, 0x28(r1)
     addi r5, r1, 0x5c
     lfs f3, 0x24(r1)
@@ -1477,12 +1477,12 @@ lbl_fn_80153FD8_00001370:
     bge lbl_fn_80153FD8_000013B8
     lwz r3, lbl_8087F430
     li r4, 0x25
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x1
     beq lbl_fn_80153FD8_000013B8
     lwz r3, lbl_8087F430
     li r4, 0x25
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x2
     bne lbl_fn_80153FD8_000013CC
     bl fn_8013539C
@@ -1596,7 +1596,7 @@ lbl_fn_80153FD8_00001538:
     lfs f2, lbl_80881994
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     b lbl_fn_80153FD8_000015CC
 lbl_fn_80153FD8_00001554:
     lwz r3, 0x12a4(r31)
@@ -1616,7 +1616,7 @@ lbl_fn_80153FD8_0000157C:
     lfs f2, lbl_80881994
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     b lbl_fn_80153FD8_000015CC
 lbl_fn_80153FD8_00001598:
     extrwi. r0, r3, 1, 2
@@ -1633,7 +1633,7 @@ lbl_fn_80153FD8_000015B4:
     lfs f2, lbl_80881994
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
 lbl_fn_80153FD8_000015CC:
     lis r4, lbl_80737490@ha
     lfs f1, lbl_80881964
@@ -1643,10 +1643,10 @@ lbl_fn_80153FD8_000015CC:
     addi r5, r31, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x4
@@ -1714,7 +1714,7 @@ lbl_fn_80154344_000016CC:
     beq lbl_fn_80154344_00001750
     lwz r3, lbl_8087F430
     li r4, 0x25
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x1
     blt lbl_fn_80154344_00001730
     lwz r3, 0x648(r31)
@@ -1836,7 +1836,7 @@ lbl_fn_80154488_00001848:
 lbl_fn_80154488_0000188C:
     addi r3, r1, 0x50
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f3, lbl_8088196C
     addi r3, r31, 0xc14
     lfs f0, lbl_80881964
@@ -1845,13 +1845,13 @@ lbl_fn_80154488_0000188C:
     addi r5, r1, 0x44
     stfs f0, 0x18(r1)
     stfs f3, 0x1c(r1)
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     addi r3, r1, 0x44
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     addi r3, r1, 0x44
     addi r4, r1, 0x50
-    bl fn_805F9990
+    bl PSVECDotProduct
     fabs f0, f1
     lis r3, lbl_80737828@ha
     lfd f1, lbl_80737828@l(r3)
@@ -1863,7 +1863,7 @@ lbl_fn_80154488_0000188C:
     addi r3, r1, 0x44
     addi r4, r1, 0x50
     addi r5, r1, 0x8
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     lfs f3, 0xc(r1)
     lfs f0, lbl_8088196C
     fcmpo cr0, f3, f0

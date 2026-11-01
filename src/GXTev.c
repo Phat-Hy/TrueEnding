@@ -2,9 +2,9 @@
 
 /* External functions referenced */
 extern void __GXFlushTextureState(void);
-extern void fn_80614510(void);
+extern void __GXSetDirtyState(void);
 extern void fn_806148E0(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 
 /* Jump tables */
 extern u32 jumptable_807B0E58[];
@@ -31,24 +31,24 @@ extern f32 lbl_808887F8;
 extern f32 lbl_808887FC;
 
 /* Function declarations */
-void fn_80617650(void);
-void fn_806176A0(void);
-void fn_806176F0(void);
+void GXSetTevKColorSel(void);
+void GXSetTevKAlphaSel(void);
+void GXSetTevSwapMode(void);
 void fn_80617730(void);
 void fn_806177B0(void);
 void fn_806177F0(void);
 void fn_80617880(void);
-void fn_806179E0(void);
+void GXSetNumTevStages(void);
 void fn_80617A10(void);
 void fn_80617C40(void);
 void fn_80617D50(void);
-void fn_80617DA0(void);
-void fn_80617DD0(void);
-void fn_80617E00(void);
-void fn_80617E40(void);
-void fn_80617E70(void);
-void fn_80617F20(void);
-void fn_80617F50(void);
+void GXSetZCompLoc(void);
+void GXSetDither(void);
+void GXSetZMode(void);
+void GXSetColorUpdate(void);
+void GXSetBlendMode(void);
+void GXSetAlphaUpdate(void);
+void GXSetDstAlpha(void);
 void fn_80617F80(void);
 void fn_80617FC0(void);
 void fn_80618030(void);
@@ -56,37 +56,37 @@ void fn_806180B0(void);
 void fn_80618240(void);
 void fn_80618290(void);
 void fn_80618300(void);
-void fn_80618350(void);
-void fn_806183A0(void);
-void fn_80618400(void);
-void fn_80618420(void);
+void GXLoadPosMtxImm(void);
+void GXLoadNrmMtxImm3x3(void);
+void GXSetCurrentMtx(void);
+void GXLoadTexMtxImm(void);
 void fn_806184E0(void);
 void fn_80618570(void);
 void fn_806185A0(void);
 void fn_806185C0(void);
 void fn_80618630(void);
-void fn_80618670(void);
-void fn_806186A0(void);
-void fn_80618730(void);
+void __GXSetIndTexMtx(void);
+void GXSetIndTexCoordScale(void);
+void __GXSetTevKonst(void);
 void fn_80618F50(void);
 
-asm void fn_80617650(void)
+asm void GXSetTevKColorSel(void)
 {
     nofralloc
     clrlwi. r0, r3, 31
     lwz r5, __GXData
     extlwi r0, r3, 30, 1
     add r3, r5, r0
-    beq lbl_fn_80617650_00000024
+    beq lbl_GXSetTevKColorSel_00000024
     lwz r0, 0x200(r3)
     rlwimi r0, r4, 14, 13, 17
     stw r0, 0x200(r3)
-    b lbl_fn_80617650_00000030
-lbl_fn_80617650_00000024:
+    b lbl_GXSetTevKColorSel_00000030
+lbl_GXSetTevKColorSel_00000024:
     lwz r0, 0x200(r3)
     rlwimi r0, r4, 4, 23, 27
     stw r0, 0x200(r3)
-lbl_fn_80617650_00000030:
+lbl_GXSetTevKColorSel_00000030:
     lis r4, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r4)
@@ -97,23 +97,23 @@ lbl_fn_80617650_00000030:
     blr
 }
 
-asm void fn_806176A0(void)
+asm void GXSetTevKAlphaSel(void)
 {
     nofralloc
     clrlwi. r0, r3, 31
     lwz r5, __GXData
     extlwi r0, r3, 30, 1
     add r3, r5, r0
-    beq lbl_fn_806176A0_00000074
+    beq lbl_GXSetTevKAlphaSel_00000074
     lwz r0, 0x200(r3)
     rlwimi r0, r4, 19, 8, 12
     stw r0, 0x200(r3)
-    b lbl_fn_806176A0_00000080
-lbl_fn_806176A0_00000074:
+    b lbl_GXSetTevKAlphaSel_00000080
+lbl_GXSetTevKAlphaSel_00000074:
     lwz r0, 0x200(r3)
     rlwimi r0, r4, 9, 18, 22
     stw r0, 0x200(r3)
-lbl_fn_806176A0_00000080:
+lbl_GXSetTevKAlphaSel_00000080:
     lis r4, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r4)
@@ -124,7 +124,7 @@ lbl_fn_806176A0_00000080:
     blr
 }
 
-asm void fn_806176F0(void)
+asm void GXSetTevSwapMode(void)
 {
     nofralloc
     lwz r9, __GXData
@@ -344,7 +344,7 @@ lbl_fn_80617880_0000035C:
     blr
 }
 
-asm void fn_806179E0(void)
+asm void GXSetNumTevStages(void)
 {
     nofralloc
     lwz r4, __GXData
@@ -452,7 +452,7 @@ lbl_fn_80617A10_000004C8:
     fsubs f0, f0, f2
     fdivs f0, f3, f0
     stfs f0, 0xc(r1)
-    bl fn_80695D84
+    bl runtime_clampDouble
     lis r4, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r4)
@@ -613,7 +613,7 @@ asm void fn_80617D50(void)
     blr
 }
 
-asm void fn_80617DA0(void)
+asm void GXSetZCompLoc(void)
 {
     nofralloc
     lwz r7, __GXData
@@ -629,7 +629,7 @@ asm void fn_80617DA0(void)
     blr
 }
 
-asm void fn_80617DD0(void)
+asm void GXSetDither(void)
 {
     nofralloc
     lwz r7, __GXData
@@ -645,7 +645,7 @@ asm void fn_80617DD0(void)
     blr
 }
 
-asm void fn_80617E00(void)
+asm void GXSetZMode(void)
 {
     nofralloc
     lwz r9, __GXData
@@ -663,7 +663,7 @@ asm void fn_80617E00(void)
     blr
 }
 
-asm void fn_80617E40(void)
+asm void GXSetColorUpdate(void)
 {
     nofralloc
     lwz r7, __GXData
@@ -680,7 +680,7 @@ asm void fn_80617E40(void)
     blr
 }
 
-asm void fn_80617E70(void)
+asm void GXSetBlendMode(void)
 {
     nofralloc
     lwz r9, __GXData
@@ -694,7 +694,7 @@ asm void fn_80617E70(void)
     rlwimi r5, r4, 3, 26, 28
     stw r5, 0x22c(r9)
     cmplw r8, r5
-    beq lbl_fn_80617E70_00000884
+    beq lbl_GXSetBlendMode_00000884
     lis r5, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r5)
@@ -708,10 +708,10 @@ asm void fn_80617E70(void)
     lwz r0, 0x5fc(r9)
     ori r0, r0, 0x4
     stw r0, 0x5fc(r9)
-lbl_fn_80617E70_00000884:
+lbl_GXSetBlendMode_00000884:
     lwzx r0, r6, r7
     cmplwi r0, 0x4
-    bne lbl_fn_80617E70_000008BC
+    bne lbl_GXSetBlendMode_000008BC
     subi r0, r3, 0x4
     lwz r4, 0x224(r9)
     rlwimi r4, r0, 9, 21, 22
@@ -723,13 +723,13 @@ lbl_fn_80617E70_00000884:
     stb r0, -0x8000(r3)
     lwz r0, 0x224(r9)
     stw r0, -0x8000(r3)
-lbl_fn_80617E70_000008BC:
+lbl_GXSetBlendMode_000008BC:
     li r0, 0x0
     sth r0, 0x2(r9)
     blr
 }
 
-asm void fn_80617F20(void)
+asm void GXSetAlphaUpdate(void)
 {
     nofralloc
     lwz r7, __GXData
@@ -745,7 +745,7 @@ asm void fn_80617F20(void)
     blr
 }
 
-asm void fn_80617F50(void)
+asm void GXSetDstAlpha(void)
 {
     nofralloc
     lwz r8, __GXData
@@ -828,7 +828,7 @@ asm void fn_80618030(void)
     lwz r0, 0x5fc(r31)
     cmpwi r0, 0x0
     beq lbl_fn_80618030_00000A14
-    bl fn_80614510
+    bl __GXSetDirtyState
 lbl_fn_80618030_00000A14:
     lwz r0, 0x0(r31)
     cmpwi r0, 0x0
@@ -1034,7 +1034,7 @@ lbl_fn_80618300_00000CCC:
     blr
 }
 
-asm void fn_80618350(void)
+asm void GXLoadPosMtxImm(void)
 {
     nofralloc
     lis r5, 0xcc01
@@ -1059,7 +1059,7 @@ asm void fn_80618350(void)
     blr
 }
 
-asm void fn_806183A0(void)
+asm void GXLoadNrmMtxImm3x3(void)
 {
     nofralloc
     slwi r0, r4, 2
@@ -1086,7 +1086,7 @@ asm void fn_806183A0(void)
     blr
 }
 
-asm void fn_80618400(void)
+asm void GXSetCurrentMtx(void)
 {
     nofralloc
     lwz r4, __GXData
@@ -1099,25 +1099,25 @@ asm void fn_80618400(void)
     blr
 }
 
-asm void fn_80618420(void)
+asm void GXLoadTexMtxImm(void)
 {
     nofralloc
     cmplwi r4, 0x40
-    blt lbl_fn_80618420_00000DE8
+    blt lbl_GXLoadTexMtxImm_00000DE8
     subi r0, r4, 0x40
     slwi r4, r0, 2
     addi r7, r4, 0x500
-    b lbl_fn_80618420_00000DEC
-lbl_fn_80618420_00000DE8:
+    b lbl_GXLoadTexMtxImm_00000DEC
+lbl_GXLoadTexMtxImm_00000DE8:
     slwi r7, r4, 2
-lbl_fn_80618420_00000DEC:
+lbl_GXLoadTexMtxImm_00000DEC:
     cmpwi r5, 0x1
-    bne lbl_fn_80618420_00000DFC
+    bne lbl_GXLoadTexMtxImm_00000DFC
     li r6, 0x8
-    b lbl_fn_80618420_00000E00
-lbl_fn_80618420_00000DFC:
+    b lbl_GXLoadTexMtxImm_00000E00
+lbl_GXLoadTexMtxImm_00000DFC:
     li r6, 0xc
-lbl_fn_80618420_00000E00:
+lbl_GXLoadTexMtxImm_00000E00:
     lis r4, 0xcc01
     subi r6, r6, 0x1
     li r0, 0x10
@@ -1126,7 +1126,7 @@ lbl_fn_80618420_00000E00:
     cmpwi r5, 0x0
     or r0, r7, r0
     stw r0, -0x8000(r4)
-    bne lbl_fn_80618420_00000E5C
+    bne lbl_GXLoadTexMtxImm_00000E5C
     addi r4, r4, -0x8000
     psq_l f5, 0x0(r3), 0, 0
     psq_l f4, 0x8(r3), 0, 0
@@ -1141,7 +1141,7 @@ lbl_fn_80618420_00000E00:
     psq_st f1, 0x0(r4), 0, 0
     psq_st f0, 0x0(r4), 0, 0
     blr
-lbl_fn_80618420_00000E5C:
+lbl_GXLoadTexMtxImm_00000E5C:
     addi r4, r4, -0x8000
     psq_l f3, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1275,7 +1275,7 @@ asm void fn_80618630(void)
     blr
 }
 
-asm void fn_80618670(void)
+asm void __GXSetIndTexMtx(void)
 {
     nofralloc
     lis r6, 0xcc01
@@ -1290,11 +1290,11 @@ asm void fn_80618670(void)
     blr
 }
 
-asm void fn_806186A0(void)
+asm void GXSetIndTexCoordScale(void)
 {
     nofralloc
     cmpwi r3, 0x5
-    bge lbl_fn_806186A0_00001094
+    bge lbl_GXSetIndTexCoordScale_00001094
     lis r5, 0xcc01
     li r0, 0x8
     stb r0, -0x8000(r5)
@@ -1309,8 +1309,8 @@ asm void fn_806186A0(void)
     stw r0, -0x8000(r5)
     lwz r0, 0x80(r6)
     stw r0, -0x8000(r5)
-    b lbl_fn_806186A0_000010CC
-lbl_fn_806186A0_00001094:
+    b lbl_GXSetIndTexCoordScale_000010CC
+lbl_GXSetIndTexCoordScale_00001094:
     lis r5, 0xcc01
     li r0, 0x8
     stb r0, -0x8000(r5)
@@ -1325,28 +1325,28 @@ lbl_fn_806186A0_00001094:
     stw r0, -0x8000(r5)
     lwz r0, 0x84(r6)
     stw r0, -0x8000(r5)
-lbl_fn_806186A0_000010CC:
+lbl_GXSetIndTexCoordScale_000010CC:
     li r0, 0x1
     sth r0, 0x2(r6)
     blr
 }
 
-asm void fn_80618730(void)
+asm void __GXSetTevKonst(void)
 {
     nofralloc
     lwz r5, __GXData
     lwz r6, 0x5ec(r5)
     subi r0, r6, 0xb
     cmplwi r0, 0xf
-    ble lbl_fn_80618730_00001130
+    ble lbl___GXSetTevKonst_00001130
     cmplwi r6, 0xa
-    ble lbl_fn_80618730_00001110
+    ble lbl___GXSetTevKonst_00001110
     subi r0, r6, 0x1b
     cmplwi r0, 0x6
-    ble lbl_fn_80618730_00001148
+    ble lbl___GXSetTevKonst_00001148
     cmpwi r6, 0x22
-    bne lbl_fn_80618730_0000115C
-lbl_fn_80618730_00001110:
+    bne lbl___GXSetTevKonst_0000115C
+lbl___GXSetTevKonst_00001110:
     lis r7, 0xcc01
     li r0, 0x10
     stb r0, -0x8000(r7)
@@ -1354,40 +1354,40 @@ lbl_fn_80618730_00001110:
     li r0, 0x0
     stw r6, -0x8000(r7)
     stw r0, -0x8000(r7)
-    b lbl_fn_80618730_0000115C
-lbl_fn_80618730_00001130:
+    b lbl___GXSetTevKonst_0000115C
+lbl___GXSetTevKonst_00001130:
     lis r6, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r6)
     lis r0, 0x2300
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_0000115C
-lbl_fn_80618730_00001148:
+    b lbl___GXSetTevKonst_0000115C
+lbl___GXSetTevKonst_00001148:
     lis r6, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r6)
     lis r0, 0x2400
     stw r0, -0x8000(r6)
-lbl_fn_80618730_0000115C:
+lbl___GXSetTevKonst_0000115C:
     lwz r6, 0x5f0(r5)
     cmplwi r6, 0x8
-    ble lbl_fn_80618730_00001188
+    ble lbl___GXSetTevKonst_00001188
     subi r0, r6, 0x9
     cmplwi r0, 0x7
-    ble lbl_fn_80618730_000011A0
+    ble lbl___GXSetTevKonst_000011A0
     subi r0, r6, 0x11
     cmplwi r0, 0x3
-    ble lbl_fn_80618730_000011CC
+    ble lbl___GXSetTevKonst_000011CC
     cmpwi r6, 0x15
-    bne lbl_fn_80618730_000011D8
-lbl_fn_80618730_00001188:
+    bne lbl___GXSetTevKonst_000011D8
+lbl___GXSetTevKonst_00001188:
     lis r6, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r6)
     lis r0, 0x6700
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000011D8
-lbl_fn_80618730_000011A0:
+    b lbl___GXSetTevKonst_000011D8
+lbl___GXSetTevKonst_000011A0:
     lwz r8, 0x5f4(r5)
     lis r6, 0xcc01
     li r7, 0x8
@@ -1398,15 +1398,15 @@ lbl_fn_80618730_000011A0:
     stb r0, -0x8000(r6)
     lwz r0, 0x5f4(r5)
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000011D8
-lbl_fn_80618730_000011CC:
+    b lbl___GXSetTevKonst_000011D8
+lbl___GXSetTevKonst_000011CC:
     lwz r6, __cpReg
     li r0, 0x0
     sth r0, 0x6(r6)
-lbl_fn_80618730_000011D8:
+lbl___GXSetTevKonst_000011D8:
     cmplwi r3, 0x22
     stw r3, 0x5ec(r5)
-    bgt lbl_fn_80618730_000015FC
+    bgt lbl___GXSetTevKonst_000015FC
     lis r6, jumptable_807B0EB0@ha
     slwi r0, r3, 2
     addi r6, r6, jumptable_807B0EB0@l
@@ -1420,7 +1420,7 @@ lbl_fn_80618730_000011D8:
     li r0, 0x273
     stw r3, -0x8000(r6)
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x10
     stb r0, -0x8000(r6)
@@ -1428,7 +1428,7 @@ lbl_fn_80618730_000011D8:
     li r0, 0x14a
     stw r3, -0x8000(r6)
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x10
     stb r0, -0x8000(r6)
@@ -1436,7 +1436,7 @@ lbl_fn_80618730_000011D8:
     li r0, 0x16b
     stw r3, -0x8000(r6)
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x10
     stb r0, -0x8000(r6)
@@ -1444,7 +1444,7 @@ lbl_fn_80618730_000011D8:
     li r0, 0x84
     stw r3, -0x8000(r6)
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x10
     stb r0, -0x8000(r6)
@@ -1452,7 +1452,7 @@ lbl_fn_80618730_000011D8:
     li r0, 0xc6
     stw r3, -0x8000(r6)
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x10
     stb r0, -0x8000(r6)
@@ -1460,7 +1460,7 @@ lbl_fn_80618730_000011D8:
     li r0, 0x210
     stw r3, -0x8000(r6)
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x10
     stb r0, -0x8000(r6)
@@ -1468,7 +1468,7 @@ lbl_fn_80618730_000011D8:
     li r0, 0x252
     stw r3, -0x8000(r6)
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x10
     stb r0, -0x8000(r6)
@@ -1476,7 +1476,7 @@ lbl_fn_80618730_000011D8:
     li r0, 0x231
     stw r3, -0x8000(r6)
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x10
     stb r0, -0x8000(r6)
@@ -1484,7 +1484,7 @@ lbl_fn_80618730_000011D8:
     li r0, 0x1ad
     stw r3, -0x8000(r6)
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x10
     stb r0, -0x8000(r6)
@@ -1492,7 +1492,7 @@ lbl_fn_80618730_000011D8:
     li r0, 0x1ce
     stw r3, -0x8000(r6)
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x10
     stb r0, -0x8000(r6)
@@ -1500,7 +1500,7 @@ lbl_fn_80618730_000011D8:
     li r0, 0x21
     stw r3, -0x8000(r6)
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x10
     stb r0, -0x8000(r6)
@@ -1508,171 +1508,171 @@ lbl_fn_80618730_000011D8:
     li r0, 0x153
     stw r3, -0x8000(r6)
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r6)
     lis r3, 0x2301
     subi r0, r3, 0x5181
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r6)
     lis r3, 0x2301
     subi r0, r3, 0x7181
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r6)
     lis r3, 0x2301
     subi r0, r3, 0x6181
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r6)
     lis r3, 0x2300
     addi r0, r3, 0x1e7f
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r6)
     lis r3, 0x2301
     subi r0, r3, 0x53c1
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r6)
     lis r3, 0x2301
     subi r0, r3, 0x5381
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r6)
     lis r3, 0x2301
     subi r0, r3, 0x5341
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r6)
     lis r3, 0x2301
     subi r0, r3, 0x5301
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r6)
     lis r3, 0x2301
     subi r0, r3, 0x52c1
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r6)
     lis r3, 0x2301
     subi r0, r3, 0x5281
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r6)
     lis r3, 0x2301
     subi r0, r3, 0x5241
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r6)
     lis r3, 0x2301
     subi r0, r3, 0x5201
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r6)
     lis r3, 0x2301
     subi r0, r3, 0x51c1
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r6)
     lis r3, 0x2301
     subi r0, r3, 0x5d81
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r6)
     lis r3, 0x2301
     subi r0, r3, 0x5981
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r6)
     lis r3, 0x2301
     subi r0, r3, 0x5581
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r6)
     lis r3, 0x2403
     subi r0, r3, 0x3f3a
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r6)
     lis r3, 0x2403
     subi r0, r3, 0x3e95
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r6)
     lis r3, 0x2403
     subi r0, r3, 0x3f19
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r6)
     lis r3, 0x2403
     subi r0, r3, 0x3ef8
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r6)
     lis r3, 0x2403
     subi r0, r3, 0x3ed7
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r6)
     lis r3, 0x2403
     subi r0, r3, 0x3eb6
     stw r0, -0x8000(r6)
-    b lbl_fn_80618730_000015FC
+    b lbl___GXSetTevKonst_000015FC
     lis r6, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r6)
     lis r3, 0x2403
     subi r0, r3, 0x3e53
     stw r0, -0x8000(r6)
-lbl_fn_80618730_000015FC:
+lbl___GXSetTevKonst_000015FC:
     cmplwi r4, 0x15
     stw r4, 0x5f0(r5)
-    bgt lbl_fn_80618730_000018F0
+    bgt lbl___GXSetTevKonst_000018F0
     lis r3, jumptable_807B0E58@ha
     slwi r0, r4, 2
     addi r3, r3, jumptable_807B0E58@l
@@ -1685,70 +1685,70 @@ lbl_fn_80618730_000015FC:
     lis r3, 0x6700
     addi r0, r3, 0x42
     stw r0, -0x8000(r4)
-    b lbl_fn_80618730_000018F0
+    b lbl___GXSetTevKonst_000018F0
     lis r4, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r4)
     lis r3, 0x6700
     addi r0, r3, 0x84
     stw r0, -0x8000(r4)
-    b lbl_fn_80618730_000018F0
+    b lbl___GXSetTevKonst_000018F0
     lis r4, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r4)
     lis r3, 0x6700
     addi r0, r3, 0x63
     stw r0, -0x8000(r4)
-    b lbl_fn_80618730_000018F0
+    b lbl___GXSetTevKonst_000018F0
     lis r4, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r4)
     lis r3, 0x6700
     addi r0, r3, 0x129
     stw r0, -0x8000(r4)
-    b lbl_fn_80618730_000018F0
+    b lbl___GXSetTevKonst_000018F0
     lis r4, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r4)
     lis r3, 0x6700
     addi r0, r3, 0x252
     stw r0, -0x8000(r4)
-    b lbl_fn_80618730_000018F0
+    b lbl___GXSetTevKonst_000018F0
     lis r4, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r4)
     lis r3, 0x6700
     addi r0, r3, 0x21
     stw r0, -0x8000(r4)
-    b lbl_fn_80618730_000018F0
+    b lbl___GXSetTevKonst_000018F0
     lis r4, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r4)
     lis r3, 0x6700
     addi r0, r3, 0x14b
     stw r0, -0x8000(r4)
-    b lbl_fn_80618730_000018F0
+    b lbl___GXSetTevKonst_000018F0
     lis r4, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r4)
     lis r3, 0x6700
     addi r0, r3, 0x18d
     stw r0, -0x8000(r4)
-    b lbl_fn_80618730_000018F0
+    b lbl___GXSetTevKonst_000018F0
     lis r4, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r4)
     lis r3, 0x6700
     addi r0, r3, 0x1cf
     stw r0, -0x8000(r4)
-    b lbl_fn_80618730_000018F0
+    b lbl___GXSetTevKonst_000018F0
     lis r4, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r4)
     lis r3, 0x6700
     addi r0, r3, 0x211
     stw r0, -0x8000(r4)
-    b lbl_fn_80618730_000018F0
+    b lbl___GXSetTevKonst_000018F0
     lwz r3, 0x5f4(r5)
     li r0, 0x2
     rlwimi r3, r0, 4, 24, 27
@@ -1760,7 +1760,7 @@ lbl_fn_80618730_000015FC:
     stb r0, -0x8000(r3)
     lwz r0, 0x5f4(r5)
     stw r0, -0x8000(r3)
-    b lbl_fn_80618730_000018F0
+    b lbl___GXSetTevKonst_000018F0
     lwz r3, 0x5f4(r5)
     li r0, 0x3
     rlwimi r3, r0, 4, 24, 27
@@ -1772,7 +1772,7 @@ lbl_fn_80618730_000015FC:
     stb r0, -0x8000(r3)
     lwz r0, 0x5f4(r5)
     stw r0, -0x8000(r3)
-    b lbl_fn_80618730_000018F0
+    b lbl___GXSetTevKonst_000018F0
     lwz r3, 0x5f4(r5)
     li r0, 0x4
     rlwimi r3, r0, 4, 24, 27
@@ -1784,7 +1784,7 @@ lbl_fn_80618730_000015FC:
     stb r0, -0x8000(r3)
     lwz r0, 0x5f4(r5)
     stw r0, -0x8000(r3)
-    b lbl_fn_80618730_000018F0
+    b lbl___GXSetTevKonst_000018F0
     lwz r3, 0x5f4(r5)
     li r0, 0x5
     rlwimi r3, r0, 4, 24, 27
@@ -1796,7 +1796,7 @@ lbl_fn_80618730_000015FC:
     stb r0, -0x8000(r3)
     lwz r0, 0x5f4(r5)
     stw r0, -0x8000(r3)
-    b lbl_fn_80618730_000018F0
+    b lbl___GXSetTevKonst_000018F0
     lwz r3, 0x5f4(r5)
     li r0, 0x6
     rlwimi r3, r0, 4, 24, 27
@@ -1808,7 +1808,7 @@ lbl_fn_80618730_000015FC:
     stb r0, -0x8000(r3)
     lwz r0, 0x5f4(r5)
     stw r0, -0x8000(r3)
-    b lbl_fn_80618730_000018F0
+    b lbl___GXSetTevKonst_000018F0
     lwz r3, 0x5f4(r5)
     li r0, 0x7
     rlwimi r3, r0, 4, 24, 27
@@ -1820,7 +1820,7 @@ lbl_fn_80618730_000015FC:
     stb r0, -0x8000(r3)
     lwz r0, 0x5f4(r5)
     stw r0, -0x8000(r3)
-    b lbl_fn_80618730_000018F0
+    b lbl___GXSetTevKonst_000018F0
     lwz r3, 0x5f4(r5)
     li r0, 0x9
     rlwimi r3, r0, 4, 24, 27
@@ -1832,7 +1832,7 @@ lbl_fn_80618730_000015FC:
     stb r0, -0x8000(r3)
     lwz r0, 0x5f4(r5)
     stw r0, -0x8000(r3)
-    b lbl_fn_80618730_000018F0
+    b lbl___GXSetTevKonst_000018F0
     li r4, 0x8
     lwz r0, 0x5f4(r5)
     rlwimi r0, r4, 4, 24, 27
@@ -1843,23 +1843,23 @@ lbl_fn_80618730_000015FC:
     stb r0, -0x8000(r3)
     lwz r0, 0x5f4(r5)
     stw r0, -0x8000(r3)
-    b lbl_fn_80618730_000018F0
+    b lbl___GXSetTevKonst_000018F0
     lwz r3, __cpReg
     li r0, 0x2
     sth r0, 0x6(r3)
-    b lbl_fn_80618730_000018F0
+    b lbl___GXSetTevKonst_000018F0
     lwz r3, __cpReg
     li r0, 0x3
     sth r0, 0x6(r3)
-    b lbl_fn_80618730_000018F0
+    b lbl___GXSetTevKonst_000018F0
     lwz r3, __cpReg
     li r0, 0x4
     sth r0, 0x6(r3)
-    b lbl_fn_80618730_000018F0
+    b lbl___GXSetTevKonst_000018F0
     lwz r3, __cpReg
     li r0, 0x5
     sth r0, 0x6(r3)
-lbl_fn_80618730_000018F0:
+lbl___GXSetTevKonst_000018F0:
     li r0, 0x0
     sth r0, 0x2(r5)
     blr

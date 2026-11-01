@@ -20,7 +20,7 @@ extern void fn_8012F188(void);
 extern void fn_80164EF4(void);
 extern void fn_80164F54(void);
 extern void fn_80165284(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_8016F3D0(void);
 extern void fn_8016F4D8(void);
 extern void fn_8016F5EC(void);
@@ -28,14 +28,14 @@ extern void fn_801789D8(void);
 extern void fn_8017A5D8(void);
 extern void fn_80210220(void);
 extern void fn_80219558(void);
-extern void fn_80370174(void);
+extern void world_getGlobalFlag(void);
 extern void fn_80373148(void);
 extern void fn_803C1884(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9920(void);
-extern void fn_805F9940(void);
-extern void fn_80680CF8(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSVECSquareMag(void);
+extern void PSVECMag(void);
+extern void rand(void);
 
 /* External data declarations */
 extern u8 lbl_80735EB0[];
@@ -301,7 +301,7 @@ lbl_fn_80102EAC_000002D0:
     stw r0, 0x804(r29)
     lwz r3, 0x0(r29)
     lwz r4, 0x564(r3)
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_80102EAC_0000030C:
     addi r11, r1, 0x40
     bl _restgpr_25
@@ -1683,7 +1683,7 @@ lbl_fn_80103FD4_00001528:
     lwz r0, 0x54(r15)
     cmpwi r0, 0x0
     ble lbl_fn_80103FD4_000015C0
-    bl fn_80680CF8
+    bl rand
     lwz r5, 0x54(r15)
     lwz r0, 0x6e0(r28)
     divw r4, r3, r5
@@ -1816,7 +1816,7 @@ lbl_fn_80103FD4_0000172C:
     stfs f4, 0x30(r1)
     stfs f0, 0x2c(r1)
     stfs f6, 0x34(r1)
-    bl fn_805F9940
+    bl PSVECMag
     stfs f1, 0x24c(r16)
     lwz r0, 0x12a4(r26)
     extrwi. r0, r0, 1, 3
@@ -1908,7 +1908,7 @@ lbl_fn_80103FD4_00001834:
     beq lbl_fn_80103FD4_000018C8
     lwz r3, lbl_8087F430
     li r4, 0xa
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     ble lbl_fn_80103FD4_000018D4
 lbl_fn_80103FD4_000018C8:
@@ -1919,7 +1919,7 @@ lbl_fn_80103FD4_000018D0:
 lbl_fn_80103FD4_000018D4:
     fcmpu cr0, f20, f16
     bne lbl_fn_80103FD4_00001918
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x8c(r1)
     lfd f0, 0x88(r1)
@@ -2031,11 +2031,11 @@ lbl_fn_80103FD4_00001A3C:
     psq_st f1, 0x0(r17), 0, 0
     fmr f1, f0
     stfs f2, 0x4c(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x38
     addi r3, r1, 0x50
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f5, 0x44(r1)
     addi r3, r1, 0x20
     lfs f0, 0x38(r1)
@@ -2058,7 +2058,7 @@ lbl_fn_80103FD4_00001A3C:
     stfs f8, 0x20(r1)
     stfs f3, 0x24(r1)
     stfs f0, 0x28(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fsubs f0, f1, f28
     fcmpo cr0, f19, f0
     ble lbl_fn_80103FD4_00001AEC
@@ -2456,7 +2456,7 @@ lbl_fn_80103FD4_00002024:
     stfs f4, 0x18(r1)
     stfs f0, 0x14(r1)
     stfs f6, 0x1c(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lwz r4, 0x0(r28)
     fmr f16, f1
     lfs f0, 0x530(r15)
@@ -2472,7 +2472,7 @@ lbl_fn_80103FD4_00002024:
     stfs f4, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f6, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fmuls f0, f31, f1
     fcmpo cr0, f16, f0
     ble lbl_fn_80103FD4_00002124
@@ -2740,7 +2740,7 @@ lbl_fn_80103FD4_00002418:
     stw r18, 0x804(r28)
     lwz r3, 0x0(r28)
     lwz r4, 0x564(r3)
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_80103FD4_00002450:
     lwz r0, 0xfd8(r30)
     stw r0, 0x930(r28)

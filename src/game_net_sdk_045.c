@@ -13,11 +13,11 @@ extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_8067E23C(void);
-extern void fn_80682428(void);
-extern void fn_80682544(void);
-extern void fn_806827C4(void);
+extern void strcmp(void);
+extern void strncmp(void);
+extern void strstr(void);
 extern void fn_80683B54(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_8068B1FC(void);
 extern void fn_806A420C(void);
 extern void fn_806A4260(void);
@@ -1447,7 +1447,7 @@ lbl_fn_806FE1F0_0000124C:
     stb r0, 0x14(r4)
     ble lbl_fn_806FE1F0_000013B0
     mr r3, r30
-    bl fn_80684600
+    bl atoi
     stw r3, 0x20(r29)
     mr r4, r29
     addi r3, r28, 0x8
@@ -1511,7 +1511,7 @@ lbl_fn_806FE1F0_00001340:
     mr r4, r30
     addi r3, r3, lbl_807C5D8C@l
     li r5, 0x8
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_806FE1F0_00001394
     mr r3, r29
@@ -1642,7 +1642,7 @@ lbl_fn_806FE3E0_000014FC:
 lbl_fn_806FE3E0_00001524:
     addi r3, r1, 0x18
     addi r4, r25, lbl_807C5D98@l
-    bl fn_806827C4
+    bl strstr
     neg r0, r3
     addi r4, r1, 0x18
     or r0, r0, r3
@@ -2100,7 +2100,7 @@ lbl_fn_806FEAA0_00001B00:
     lis r4, lbl_807C5DA4@ha
     mr r3, r31
     addi r4, r4, lbl_807C5DA4@l
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_806FEAA0_00001B20
     lwz r3, 0x1c(r29)
@@ -2163,7 +2163,7 @@ lbl_fn_806FEAA0_00001BC8:
     b lbl_fn_806FEAA0_00001BE0
 lbl_fn_806FEAA0_00001BD8:
     mr r3, r31
-    bl fn_80684600
+    bl atoi
 lbl_fn_806FEAA0_00001BE0:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -2394,7 +2394,7 @@ lbl_fn_806FED40_00001E60:
 lbl_fn_806FED40_00001E78:
     lwz r4, 0x0(r23)
     mr r3, r31
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_806FED40_00001E94
     li r0, 0x0

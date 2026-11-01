@@ -8,7 +8,7 @@ extern void _restgpr_16(void);
 extern void _savegpr_16(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_800499D0(void);
 extern void fn_8006B174(void);
 extern void fn_8006BA30(void);
@@ -39,7 +39,7 @@ extern void fn_805B6AE4(void);
 extern void fn_805B6C10(void);
 extern void fn_805B6C48(void);
 extern void fn_806140C0(void);
-extern void fn_8068093C(void);
+extern void vsprintf(void);
 extern void fn_80686A48(void);
 extern void fn_80686AC4(void);
 extern void fn_80686B64(void);
@@ -83,11 +83,11 @@ extern u32 lbl_80881290;
 /* Function declarations */
 void fn_800DC12C(void);
 void fn_800DC1DC(void);
-void fn_800DC288(void);
+void str_skipWhitespace(void);
 void fn_800DC3C8(void);
 void fn_800DC3CC(void);
 void fn_800DC500(void);
-void fn_800DC6B4(void);
+void str_findChar(void);
 void fn_800DC880(void);
 void fn_800DC978(void);
 void fn_800DC97C(void);
@@ -221,57 +221,57 @@ lbl_fn_800DC1DC_0000013C:
     blr
 }
 
-asm void fn_800DC288(void)
+asm void str_skipWhitespace(void)
 {
     nofralloc
-    b lbl_fn_800DC288_00000160
-lbl_fn_800DC288_00000160:
+    b lbl_str_skipWhitespace_00000160
+lbl_str_skipWhitespace_00000160:
     lis r5, lbl_80734870@ha
     stwu r1, -0x10(r1)
     addi r5, r5, lbl_80734870@l
-    b lbl_fn_800DC288_00000174
-lbl_fn_800DC288_00000170:
+    b lbl_str_skipWhitespace_00000174
+lbl_str_skipWhitespace_00000170:
     addi r3, r3, 0x1
-lbl_fn_800DC288_00000174:
+lbl_str_skipWhitespace_00000174:
     lbz r6, 0x0(r3)
     extsb r4, r6
     cmpwi r4, 0x20
-    beq lbl_fn_800DC288_00000170
+    beq lbl_str_skipWhitespace_00000170
     subi r0, r6, 0x30
     li r7, 0x0
     clrlwi r0, r0, 24
     cmplwi r0, 0x9
-    ble lbl_fn_800DC288_000001B0
+    ble lbl_str_skipWhitespace_000001B0
     cmpwi r4, 0x2d
-    beq lbl_fn_800DC288_000001B0
+    beq lbl_str_skipWhitespace_000001B0
     cmpwi r4, 0x2e
-    beq lbl_fn_800DC288_000001B0
+    beq lbl_str_skipWhitespace_000001B0
     lfs f1, lbl_80881258
-    b lbl_fn_800DC288_00000294
-lbl_fn_800DC288_000001B0:
+    b lbl_str_skipWhitespace_00000294
+lbl_str_skipWhitespace_000001B0:
     lfd f5, 0x8(r5)
     extsb r0, r6
     cmpwi r0, 0x2d
     lfd f4, 0x0(r5)
     fmr f6, f5
     li r6, 0x0
-    bne lbl_fn_800DC288_000001D4
+    bne lbl_str_skipWhitespace_000001D4
     lfd f5, 0x10(r5)
     li r7, 0x1
-lbl_fn_800DC288_000001D4:
+lbl_str_skipWhitespace_000001D4:
     lfd f2, 0x20(r5)
     add r3, r3, r7
     lfd f1, 0x28(r5)
     lis r4, 0x4330
     lfd f3, 0x18(r5)
-    b lbl_fn_800DC288_0000025C
-lbl_fn_800DC288_000001EC:
+    b lbl_str_skipWhitespace_0000025C
+lbl_str_skipWhitespace_000001EC:
     li r6, 0x1
     addi r3, r3, 0x1
-    b lbl_fn_800DC288_0000025C
-lbl_fn_800DC288_000001F8:
+    b lbl_str_skipWhitespace_0000025C
+lbl_str_skipWhitespace_000001F8:
     cmpwi r6, 0x0
-    bne lbl_fn_800DC288_00000230
+    bne lbl_str_skipWhitespace_00000230
     lbz r0, 0x0(r3)
     fmul f4, f4, f3
     stw r4, 0x8(r1)
@@ -283,8 +283,8 @@ lbl_fn_800DC288_000001F8:
     lfd f0, 0x8(r1)
     fsubs f0, f0, f1
     fadd f4, f4, f0
-    b lbl_fn_800DC288_0000025C
-lbl_fn_800DC288_00000230:
+    b lbl_str_skipWhitespace_0000025C
+lbl_str_skipWhitespace_00000230:
     lbz r0, 0x0(r3)
     fmul f6, f6, f2
     stw r4, 0x8(r1)
@@ -296,22 +296,22 @@ lbl_fn_800DC288_00000230:
     lfd f0, 0x8(r1)
     fsubs f0, f0, f1
     fmadd f4, f6, f0, f4
-lbl_fn_800DC288_0000025C:
+lbl_str_skipWhitespace_0000025C:
     lbz r5, 0x0(r3)
     subi r0, r5, 0x30
     clrlwi r0, r0, 24
     cmplwi r0, 0x9
-    ble lbl_fn_800DC288_000001F8
+    ble lbl_str_skipWhitespace_000001F8
     extsb r0, r5
     cmpwi r0, 0x2e
-    beq lbl_fn_800DC288_000001EC
+    beq lbl_str_skipWhitespace_000001EC
     fmul f1, f4, f5
     lfs f0, lbl_8088125C
     frsp f1, f1
     fcmpu cr0, f0, f1
-    bne lbl_fn_800DC288_00000294
+    bne lbl_str_skipWhitespace_00000294
     lfs f1, lbl_80881258
-lbl_fn_800DC288_00000294:
+lbl_str_skipWhitespace_00000294:
     addi r1, r1, 0x10
     blr
 }
@@ -532,7 +532,7 @@ lbl_fn_800DC500_0000056C:
     blr
 }
 
-asm void fn_800DC6B4(void)
+asm void str_findChar(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -546,18 +546,18 @@ asm void fn_800DC6B4(void)
     cmpwi r3, 0x0
     li r0, -0x1
     li r5, 0x0
-    beq lbl_fn_800DC6B4_00000730
+    beq lbl_str_findChar_00000730
     cmplwi r3, 0x8
     subi r7, r3, 0x8
-    ble lbl_fn_800DC6B4_000006EC
+    ble lbl_str_findChar_000006EC
     addi r6, r7, 0x7
     lis r4, lbl_807348A0@ha
     srwi r6, r6, 3
     addi r4, r4, lbl_807348A0@l
     mtctr r6
     cmplwi r7, 0x0
-    ble lbl_fn_800DC6B4_000006EC
-lbl_fn_800DC6B4_000005E0:
+    ble lbl_str_findChar_000006EC
+lbl_str_findChar_000005E0:
     lbzx r6, r31, r5
     add r29, r31, r5
     srwi r9, r0, 24
@@ -624,16 +624,16 @@ lbl_fn_800DC6B4_000005E0:
     clrlslwi r6, r6, 24, 2
     lwzx r6, r4, r6
     xor r0, r0, r6
-    bdnz lbl_fn_800DC6B4_000005E0
-lbl_fn_800DC6B4_000006EC:
+    bdnz lbl_str_findChar_000005E0
+lbl_str_findChar_000006EC:
     lis r7, lbl_807348A0@ha
     subf r4, r5, r3
     addi r7, r7, lbl_807348A0@l
     add r6, r31, r5
     mtctr r4
     cmplw r5, r3
-    bge lbl_fn_800DC6B4_00000730
-lbl_fn_800DC6B4_00000708:
+    bge lbl_str_findChar_00000730
+lbl_str_findChar_00000708:
     lbz r3, 0x0(r6)
     srwi r4, r0, 24
     slwi r0, r0, 8
@@ -643,8 +643,8 @@ lbl_fn_800DC6B4_00000708:
     clrlslwi r3, r3, 24, 2
     lwzx r3, r7, r3
     xor r0, r0, r3
-    bdnz lbl_fn_800DC6B4_00000708
-lbl_fn_800DC6B4_00000730:
+    bdnz lbl_str_findChar_00000708
+lbl_str_findChar_00000730:
     li r3, -0x1
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -781,7 +781,7 @@ lbl_fn_800DC980_00000890:
     stw r12, 0x70(r1)
     stw r11, 0x74(r1)
     stw r0, 0x78(r1)
-    bl fn_8068093C
+    bl vsprintf
     li r0, 0x0
     stw r0, 0x0(r30)
     addi r3, r1, 0x80
@@ -801,7 +801,7 @@ lbl_fn_800DC980_00000890:
     add r7, r7, r31
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x294(r1)
     lwz r31, 0x28c(r1)
     lwz r30, 0x288(r1)
@@ -880,7 +880,7 @@ lbl_fn_800DCA70_000009C0:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r30
     addi r3, r1, 0x10
     bl fn_8006B174

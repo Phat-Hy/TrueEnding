@@ -53,7 +53,7 @@ extern void fn_805FEBB0(void);
 extern void fn_805FF240(void);
 extern void fn_806036E0(void);
 extern void fn_80603730(void);
-extern void fn_80603AA0(void);
+extern void VISetNextFrameBuffer(void);
 extern void fn_80604580(void);
 extern void fn_80604C50(void);
 extern void fn_80604FB0(void);
@@ -61,7 +61,7 @@ extern void fn_80605140(void);
 extern void fn_806051C0(void);
 extern void fn_80613E30(void);
 extern void fn_806809C0(void);
-extern void fn_80682544(void);
+extern void strncmp(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -353,7 +353,7 @@ lbl_fn_805EF630_00000390:
     mr r3, r31
     addi r4, r4, lbl_8079CB00@l
     li r5, 0xa
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     ble lbl_fn_805EF630_000003D8
     li r0, 0x1
@@ -1063,7 +1063,7 @@ asm void OSFatal(void)
     addi r3, r24, lbl_807CB320@l
     bl OSSetCurrentContext
     bl __OSStopAudioSystem
-    bl fn_80603AA0
+    bl VISetNextFrameBuffer
     li r3, 0x80
     bl __OSUnmaskInterrupts
     li r3, 0x1

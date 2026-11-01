@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_800E1D5C(void);
 extern void fn_80242A8C(void);
 extern void fn_80242FF4(void);
@@ -62,7 +62,7 @@ lbl_fn_8023D308_00000064:
     bne lbl_fn_8023D308_000000E4
 lbl_fn_8023D308_00000088:
     li r3, 0x18
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_8023D308_000000B0
@@ -323,7 +323,7 @@ lbl_fn_8023D308_000003DC:
     bne lbl_fn_8023D308_0000045C
 lbl_fn_8023D308_00000400:
     li r3, 0x18
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_8023D308_00000428
@@ -637,7 +637,7 @@ lbl_fn_8023D308_0000080C:
     bne lbl_fn_8023D308_0000088C
 lbl_fn_8023D308_00000830:
     li r3, 0x18
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_8023D308_00000858
@@ -901,7 +901,7 @@ lbl_fn_8023DE24_00000B84:
     bne lbl_fn_8023DE24_00000C04
 lbl_fn_8023DE24_00000BA8:
     li r3, 0x18
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_8023DE24_00000BD0
@@ -1163,7 +1163,7 @@ lbl_fn_8023DE24_00000F00:
     bne lbl_fn_8023DE24_00000F80
 lbl_fn_8023DE24_00000F24:
     li r3, 0x18
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_8023DE24_00000F4C
@@ -1478,7 +1478,7 @@ lbl_fn_8023DE24_00001334:
     bne lbl_fn_8023DE24_000013B4
 lbl_fn_8023DE24_00001358:
     li r3, 0x18
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_8023DE24_00001380
@@ -1826,7 +1826,7 @@ lbl_fn_8023EA78_000017D8:
     bne lbl_fn_8023EA78_00001858
 lbl_fn_8023EA78_000017FC:
     li r3, 0x18
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_8023EA78_00001824
@@ -2088,7 +2088,7 @@ lbl_fn_8023EA78_00001B54:
     bne lbl_fn_8023EA78_00001BD4
 lbl_fn_8023EA78_00001B78:
     li r3, 0x18
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_8023EA78_00001BA0
@@ -2403,7 +2403,7 @@ lbl_fn_8023EA78_00001F88:
     bne lbl_fn_8023EA78_00002008
 lbl_fn_8023EA78_00001FAC:
     li r3, 0x18
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_8023EA78_00001FD4

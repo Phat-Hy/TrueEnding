@@ -9,27 +9,27 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_8000D0F8(void);
 extern void fn_8000D114(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8000DD0C(void);
 extern void fn_8001047C(void);
 extern void fn_80011034(void);
 extern void fn_80011410(void);
 extern void fn_80012C88(void);
-extern void fn_800132EC(void);
-extern void fn_80013338(void);
+extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
+extern void vec3_sub(void);
 extern void fn_8001336C(void);
 extern void fn_800133B0(void);
 extern void fn_80013404(void);
 extern void fn_80057A64(void);
 extern void fn_80057A68(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_800F7260(void);
 extern void fn_800F7FF0(void);
 extern void fn_801125F8(void);
 extern void fn_8016EB48(void);
-extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_80682428(void);
+extern void PSMTXConcat(void);
+extern void PSMTXRotRad(void);
+extern void strcmp(void);
 
 /* External data declarations */
 extern u8 lbl_80737200[];
@@ -638,7 +638,7 @@ asm void fn_801298EC(void)
     addi r3, r4, 0xb0
     addi r4, r5, lbl_80737200@l
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     stw r3, 0x30(r31)
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -695,7 +695,7 @@ asm void fn_80129978(void)
     mr r4, r5
     mr r3, r30
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80129978_0000088C
     li r3, 0x0
@@ -818,7 +818,7 @@ lbl_fn_80129A6C_00000A04:
     bne lbl_fn_80129A6C_00000A80
     addi r3, r1, 0xf4
     addi r4, r31, 0xc
-    bl fn_8000D124
+    bl vec3_copy
     lfs f1, 0xf8(r1)
     bl fn_80013404
     lfs f2, 0x28(r31)
@@ -876,7 +876,7 @@ lbl_fn_80129A6C_00000AC0:
     bl fn_8012A1B8
     mr r4, r3
     addi r3, r1, 0xf4
-    bl fn_8000D124
+    bl vec3_copy
     b lbl_fn_80129A6C_00000B6C
 lbl_fn_80129A6C_00000AEC:
     lwz r3, 0x0(r31)
@@ -889,10 +889,10 @@ lbl_fn_80129A6C_00000AEC:
     addi r3, r1, 0x70
     addi r4, r1, 0xdc
     addi r5, r1, 0x64
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0xd0
     addi r4, r1, 0x70
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r1, 0xd0
     bl fn_8012A1E0
     cmpwi r3, 0x0
@@ -901,7 +901,7 @@ lbl_fn_80129A6C_00000AEC:
     bl fn_8012A1B8
     mr r4, r3
     addi r3, r1, 0xf4
-    bl fn_8000D124
+    bl vec3_copy
     b lbl_fn_80129A6C_00000B6C
 lbl_fn_80129A6C_00000B4C:
     addi r3, r1, 0xd0
@@ -911,7 +911,7 @@ lbl_fn_80129A6C_00000B4C:
     bl fn_80011034
     addi r3, r1, 0xf4
     addi r4, r1, 0x58
-    bl fn_8000D124
+    bl vec3_copy
 lbl_fn_80129A6C_00000B6C:
     lis r29, fn_800133B0@ha
     addi r3, r1, 0xf4
@@ -974,7 +974,7 @@ lbl_fn_80129A6C_00000C28:
     bl fn_800F7260
     addi r3, r31, 0x18
     addi r4, r1, 0x4c
-    bl fn_8000D124
+    bl vec3_copy
     lwz r0, 0x4(r31)
     li r3, 0x0
     stb r3, 0x34(r31)
@@ -1025,10 +1025,10 @@ lbl_fn_80129A6C_00000C98:
     bne lbl_fn_80129A6C_00000D18
     addi r3, r1, 0x100
     addi r4, r31, 0x54
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r1, 0x10c
     addi r4, r31, 0x54
-    bl fn_8000D124
+    bl vec3_copy
     b lbl_fn_80129A6C_00000F9C
 lbl_fn_80129A6C_00000D18:
     cmpwi r0, 0x0
@@ -1054,13 +1054,13 @@ lbl_fn_80129A6C_00000D58:
     li r5, 0x0
     addi r29, r4, lbl_80737200@l
     addi r4, r29, 0x5
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     stw r3, 0x8(r1)
     lwz r3, 0x0(r31)
     bl fn_8000DD0C
     addi r4, r29, 0xb
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     stw r3, 0xc(r1)
     addi r27, r1, 0x8
     addi r28, r1, 0x100
@@ -1076,7 +1076,7 @@ lbl_fn_80129A6C_00000DA0:
     bl fn_8012A1B8
     mr r4, r3
     mr r3, r28
-    bl fn_8000D124
+    bl vec3_copy
     b lbl_fn_80129A6C_00000E4C
 lbl_fn_80129A6C_00000DCC:
     lwz r3, 0x0(r31)
@@ -1089,10 +1089,10 @@ lbl_fn_80129A6C_00000DCC:
     addi r3, r1, 0x34
     addi r4, r1, 0xac
     addi r5, r1, 0x28
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0xa0
     addi r4, r1, 0x34
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r1, 0xa0
     bl fn_8012A1E0
     cmpwi r3, 0x0
@@ -1101,7 +1101,7 @@ lbl_fn_80129A6C_00000DCC:
     bl fn_8012A1B8
     mr r4, r3
     mr r3, r28
-    bl fn_8000D124
+    bl vec3_copy
     b lbl_fn_80129A6C_00000E4C
 lbl_fn_80129A6C_00000E2C:
     addi r3, r1, 0xa0
@@ -1111,7 +1111,7 @@ lbl_fn_80129A6C_00000E2C:
     bl fn_80011034
     mr r3, r28
     addi r4, r1, 0x1c
-    bl fn_8000D124
+    bl vec3_copy
 lbl_fn_80129A6C_00000E4C:
     mr r3, r28
     addi r4, r30, fn_800133B0@l
@@ -1124,7 +1124,7 @@ lbl_fn_80129A6C_00000E4C:
     lwz r3, 0x0(r31)
     bl fn_8000DD0C
     addi r4, r29, 0x11
-    bl fn_800132EC
+    bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x118
     bl fn_8001336C
@@ -1225,7 +1225,7 @@ lbl_fn_80129A6C_00000FBC:
     bl fn_800F7260
     mr r3, r28
     addi r4, r1, 0x10
-    bl fn_8000D124
+    bl vec3_copy
     lwz r0, 0x4c(r31)
     cmpwi r0, 0x3
     bne lbl_fn_80129A6C_00000FF0
@@ -1367,7 +1367,7 @@ asm void fn_8012A288(void)
     addi r29, r29, lbl_80737200@l
     mr r3, r28
     addi r4, r29, 0x11
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8012A288_00001330
     psq_l f1, 0x0(r31), 0, 0
@@ -1389,11 +1389,11 @@ asm void fn_8012A288(void)
     lfs f0, 0x3c(r30)
     fneg f7, f7
     fmuls f1, f7, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r29
     addi r4, r1, 0x488
     addi r5, r1, 0x458
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x458
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1415,11 +1415,11 @@ asm void fn_8012A288(void)
     lfs f0, 0x3c(r30)
     li r4, 0x7a
     fmuls f1, f7, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r29
     addi r4, r1, 0x428
     addi r5, r1, 0x3f8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x3f8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1462,11 +1462,11 @@ lbl_fn_8012A288_0000128C:
     fmuls f1, f7, f0
     stfs f9, 0x30(r1)
     stfs f8, 0x34(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r4, r31
     mr r5, r31
     addi r3, r1, 0x548
-    bl fn_805F89F0
+    bl PSMTXConcat
     lfs f8, 0x2c(r1)
     li r3, 0x1
     lfs f7, 0x30(r1)
@@ -1481,7 +1481,7 @@ lbl_fn_8012A288_00001330:
     blt lbl_fn_8012A288_000014F0
     mr r3, r28
     mr r4, r29
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8012A288_000014F0
     psq_l f1, 0x0(r31), 0, 0
@@ -1503,11 +1503,11 @@ lbl_fn_8012A288_00001330:
     lfs f0, 0x40(r30)
     fneg f7, f7
     fmuls f1, f7, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r29
     addi r4, r1, 0x3c8
     addi r5, r1, 0x398
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x398
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1529,11 +1529,11 @@ lbl_fn_8012A288_00001330:
     lfs f0, 0x40(r30)
     li r4, 0x7a
     fmuls f1, f7, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r29
     addi r4, r1, 0x368
     addi r5, r1, 0x338
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x338
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1576,11 +1576,11 @@ lbl_fn_8012A288_0000144C:
     fmuls f1, f7, f0
     stfs f9, 0x24(r1)
     stfs f8, 0x28(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r4, r31
     mr r5, r31
     addi r3, r1, 0x518
-    bl fn_805F89F0
+    bl PSMTXConcat
     lfs f8, 0x20(r1)
     li r3, 0x1
     lfs f7, 0x24(r1)
@@ -1596,7 +1596,7 @@ lbl_fn_8012A288_000014F0:
     mr r3, r28
     addi r4, r4, lbl_80737200@l
     addi r4, r4, 0x16
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8012A288_00001630
     psq_l f1, 0x0(r31), 0, 0
@@ -1618,11 +1618,11 @@ lbl_fn_8012A288_000014F0:
     lfs f0, 0x44(r30)
     fneg f7, f7
     fmuls f1, f7, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r29
     addi r4, r1, 0x308
     addi r5, r1, 0x2d8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r5, r1, 0x2d8
     lfs f0, lbl_808818A8
     psq_l f1, 0x0(r5), 0, 0
@@ -1657,11 +1657,11 @@ lbl_fn_8012A288_000014F0:
     fmuls f1, f7, f0
     stfs f9, 0x18(r1)
     stfs f8, 0x1c(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r4, r31
     mr r5, r31
     addi r3, r1, 0x4e8
-    bl fn_805F89F0
+    bl PSMTXConcat
     lfs f8, 0x14(r1)
     li r3, 0x1
     lfs f7, 0x18(r1)
@@ -1677,7 +1677,7 @@ lbl_fn_8012A288_00001630:
     mr r3, r28
     addi r4, r4, lbl_80737200@l
     addi r4, r4, 0x1d
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8012A288_00001770
     psq_l f1, 0x0(r31), 0, 0
@@ -1699,11 +1699,11 @@ lbl_fn_8012A288_00001630:
     lfs f0, 0x48(r30)
     fneg f7, f7
     fmuls f1, f7, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r29
     addi r4, r1, 0x2a8
     addi r5, r1, 0x278
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r5, r1, 0x278
     lfs f0, lbl_808818A8
     psq_l f1, 0x0(r5), 0, 0
@@ -1738,11 +1738,11 @@ lbl_fn_8012A288_00001630:
     fmuls f1, f7, f0
     stfs f9, 0xc(r1)
     stfs f8, 0x10(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r4, r31
     mr r5, r31
     addi r3, r1, 0x4b8
-    bl fn_805F89F0
+    bl PSMTXConcat
     lfs f8, 0x8(r1)
     li r3, 0x1
     lfs f7, 0xc(r1)
@@ -1760,7 +1760,7 @@ lbl_fn_8012A288_00001770:
     addi r29, r29, lbl_80737200@l
     mr r3, r27
     addi r4, r29, 0x5
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8012A288_000018FC
     psq_l f1, 0x0(r31), 0, 0
@@ -1779,11 +1779,11 @@ lbl_fn_8012A288_00001770:
     psq_st f4, 0x18(r29), 0, 0
     psq_st f5, 0x20(r29), 0, 0
     lfs f1, 0x60(r30)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r29
     addi r4, r1, 0x248
     addi r5, r1, 0x218
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x218
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1803,11 +1803,11 @@ lbl_fn_8012A288_00001770:
     lfs f1, 0x68(r30)
     addi r3, r1, 0x1e8
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r29
     addi r4, r1, 0x1e8
     addi r5, r1, 0x1b8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x1b8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1825,11 +1825,11 @@ lbl_fn_8012A288_00001884:
     lfs f1, 0x64(r30)
     addi r3, r1, 0x188
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r3, r1, 0x5a8
     addi r4, r1, 0x188
     addi r5, r1, 0x158
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r4, r1, 0x158
     addi r5, r1, 0x5a8
     psq_l f1, 0x0(r4), 0, 0
@@ -1855,7 +1855,7 @@ lbl_fn_8012A288_00001884:
 lbl_fn_8012A288_000018FC:
     mr r3, r27
     addi r4, r29, 0xb
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8012A288_00001A70
     psq_l f1, 0x0(r31), 0, 0
@@ -1874,11 +1874,11 @@ lbl_fn_8012A288_000018FC:
     psq_st f4, 0x18(r29), 0, 0
     psq_st f5, 0x20(r29), 0, 0
     lfs f1, 0x6c(r30)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r29
     addi r4, r1, 0x128
     addi r5, r1, 0xf8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xf8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1898,11 +1898,11 @@ lbl_fn_8012A288_000018FC:
     lfs f1, 0x74(r30)
     addi r3, r1, 0xc8
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r29
     addi r4, r1, 0xc8
     addi r5, r1, 0x98
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x98
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1920,11 +1920,11 @@ lbl_fn_8012A288_000019F8:
     lfs f1, 0x70(r30)
     addi r3, r1, 0x68
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r3, r1, 0x578
     addi r4, r1, 0x68
     addi r5, r1, 0x38
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r4, r1, 0x38
     addi r5, r1, 0x578
     psq_l f1, 0x0(r4), 0, 0

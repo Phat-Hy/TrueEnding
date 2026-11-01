@@ -13,17 +13,17 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8003E120(void);
 extern void fn_8006969C(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_80507794(void);
 extern void fn_805077F4(void);
 extern void fn_8061C8A0(void);
 extern void fn_8061D4C0(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern u32 strlen(const char* str);
@@ -131,7 +131,7 @@ lbl_fn_805BE380_00000094:
     mr r6, r5
     li r7, 0x0
     add r27, r27, r0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_805BE380_000000F8
@@ -979,7 +979,7 @@ lbl_fn_805BEEC8_00000C00:
     addi r6, r6, lbl_807640C0@l
 lbl_fn_805BEEC8_00000C08:
     add r7, r7, r31
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lis r4, fn_805BEFD0@ha
     lis r5, fn_805BEFE8@ha
     addi r3, r29, 0x24
@@ -1628,11 +1628,11 @@ asm void fn_805BF798(void)
     addi r4, r4, 0x1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805BF798_00001474:
     li r3, 0x28
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_805BF798_000014A8
@@ -1642,8 +1642,8 @@ lbl_fn_805BF798_00001474:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80797A08@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805BF798_000014A8:
     addic. r3, r30, 0xc
     addi r0, r31, 0x4

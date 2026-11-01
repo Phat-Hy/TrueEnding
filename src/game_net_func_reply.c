@@ -29,9 +29,9 @@ extern void fn_8050E6F8(void);
 extern void fn_8050E7E0(void);
 extern void fn_8050E998(void);
 extern void fn_8050EB8C(void);
-extern void fn_805F30F0(void);
-extern void fn_805F3130(void);
-extern void fn_805F3210(void);
+extern void OSInitMutex(void);
+extern void OSLockMutex(void);
+extern void OSUnlockMutex(void);
 extern void fn_80624D40(void);
 extern void fn_806823B0(void);
 extern void fn_80686A64(void);
@@ -200,7 +200,7 @@ lbl_fn_80508DA0_00000144:
     li r0, 0x1
     stw r0, 0xc8(r3)
     addi r3, r3, 0x414
-    bl fn_805F30F0
+    bl OSInitMutex
     lis r4, lbl_8075B098@ha
     lis r3, 0x534c
     lis r6, fn_8050D504@ha
@@ -1095,14 +1095,14 @@ asm void fn_80509A8C(void)
 {
     nofralloc
     addi r3, r3, 0x414
-    b fn_805F3130
+    b OSLockMutex
 }
 
 asm void fn_80509A94(void)
 {
     nofralloc
     addi r3, r3, 0x414
-    b fn_805F3210
+    b OSUnlockMutex
 }
 
 asm void fn_80509A9C(void)

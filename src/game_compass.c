@@ -3,12 +3,12 @@
 
 /* External function declarations */
 extern void DCZeroRange(void);
-extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_realloc(void);
+extern void mem_getAllocSize(void);
 extern void fn_80089ACC(void);
 extern void fn_8008B964(void);
-extern void fn_8008CD1C(void);
-extern void fn_8008CD50(void);
+extern void atn_Matrix_copy(void);
+extern void atn_Matrix_concat(void);
 extern void fn_8008D784(void);
 extern void fn_8008E2D4(void);
 extern void fn_8008EECC(void);
@@ -20,13 +20,13 @@ extern void fn_8009A0F8(void);
 extern void fn_8009A2C0(void);
 extern void fn_8009A490(void);
 extern void fn_8009A504(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_80476130(void);
-extern void fn_805F89F0(void);
-extern void fn_805F8AC0(void);
-extern void fn_805F8CA0(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9940(void);
+extern void PSMTXConcat(void);
+extern void PSMTXConcatArray(void);
+extern void PSMTXInverse(void);
+extern void PSMTXMultVec(void);
+extern void PSVECMag(void);
 extern void fn_8067E23C(void);
 extern void fn_8068AE24(void);
 
@@ -47,7 +47,7 @@ extern u32 lbl_80880C14;
 
 /* Function declarations */
 void fn_800910D4(void);
-void fn_80091684(void);
+void atn_Model_updateMatrices(void);
 void fn_80091A90(void);
 void fn_80091C00(void);
 void fn_80091C10(void);
@@ -55,7 +55,7 @@ void fn_80091CFC(void);
 void fn_800920B8(void);
 void fn_8009246C(void);
 void fn_80092768(void);
-void fn_80092814(void);
+void atn_Model_findBoneIndex(void);
 void fn_800928B0(void);
 void fn_8009290C(void);
 void fn_80092954(void);
@@ -434,7 +434,7 @@ lbl_fn_800910D4_00000520:
     blr
 }
 
-asm void fn_80091684(void)
+asm void atn_Model_updateMatrices(void)
 {
     nofralloc
     stwu r1, -0xf0(r1)
@@ -448,7 +448,7 @@ asm void fn_80091684(void)
     mr r31, r3
     mr r4, r24
     addi r3, r26, 0x60
-    bl fn_8008CD1C
+    bl atn_Matrix_copy
     lwz r0, 0x48(r31)
     stw r0, 0x5c(r26)
     lwz r3, 0x20c(r26)
@@ -458,18 +458,18 @@ asm void fn_80091684(void)
     srawi. r0, r0, 31
     add r4, r26, r4
     addi r30, r4, 0x164
-    beq lbl_fn_80091684_00000630
+    beq lbl_atn_Model_updateMatrices_00000630
     extlwi r0, r3, 2, 26
     srawi. r0, r0, 31
-    beq lbl_fn_80091684_00000630
+    beq lbl_atn_Model_updateMatrices_00000630
     bl fn_8008B964
     bl fn_8008E2D4
     cmpwi r3, 0x3
-    bne lbl_fn_80091684_00000630
+    bne lbl_atn_Model_updateMatrices_00000630
     li r0, -0x1
     stw r0, 0x5c(r26)
     addi r30, r26, 0x1c4
-lbl_fn_80091684_00000630:
+lbl_atn_Model_updateMatrices_00000630:
     addi r3, r31, 0x30
     bl fn_80089ACC
     mulli r5, r3, 0x30
@@ -494,9 +494,9 @@ lbl_fn_80091684_00000630:
     mulli r4, r0, 0x30
     bl DCZeroRange
     cmpwi r25, 0x0
-    beq lbl_fn_80091684_00000820
+    beq lbl_atn_Model_updateMatrices_00000820
     cmpwi r27, 0x0
-    beq lbl_fn_80091684_00000720
+    beq lbl_atn_Model_updateMatrices_00000720
     lwz r3, 0x8(r30)
     mr r4, r24
     mr r5, r28
@@ -507,8 +507,8 @@ lbl_fn_80091684_00000630:
     bl fn_8009A504
     li r24, 0x0
     li r30, 0x0
-    b lbl_fn_80091684_00000710
-lbl_fn_80091684_000006C8:
+    b lbl_atn_Model_updateMatrices_00000710
+lbl_atn_Model_updateMatrices_000006C8:
     lwz r0, 0x18(r29)
     addi r3, r1, 0xa0
     addi r5, r26, 0x60
@@ -518,21 +518,21 @@ lbl_fn_80091684_000006C8:
     lwzx r0, r27, r0
     mulli r0, r0, 0x30
     add r4, r28, r0
-    bl fn_8008CD50
+    bl atn_Matrix_concat
     lwz r3, 0x8(r1)
     addi r4, r1, 0xa0
-    bl fn_8008CD1C
+    bl atn_Matrix_copy
     lwz r3, 0x8(r1)
     addi r30, r30, 0x8
     addi r24, r24, 0x1
     addi r0, r3, 0x30
     stw r0, 0x8(r1)
-lbl_fn_80091684_00000710:
+lbl_atn_Model_updateMatrices_00000710:
     lwz r0, 0x14(r29)
     cmpw r24, r0
-    blt lbl_fn_80091684_000006C8
-    b lbl_fn_80091684_00000798
-lbl_fn_80091684_00000720:
+    blt lbl_atn_Model_updateMatrices_000006C8
+    b lbl_atn_Model_updateMatrices_00000798
+lbl_atn_Model_updateMatrices_00000720:
     addi r3, r31, 0x30
     bl fn_80089ACC
     mr r6, r3
@@ -543,8 +543,8 @@ lbl_fn_80091684_00000720:
     bl fn_8009A490
     li r24, 0x0
     li r27, 0x0
-    b lbl_fn_80091684_0000078C
-lbl_fn_80091684_0000074C:
+    b lbl_atn_Model_updateMatrices_0000078C
+lbl_atn_Model_updateMatrices_0000074C:
     lwz r0, 0x18(r29)
     addi r3, r1, 0x70
     addi r5, r26, 0x60
@@ -552,30 +552,30 @@ lbl_fn_80091684_0000074C:
     lwz r0, 0x4(r4)
     mulli r0, r0, 0x30
     add r4, r28, r0
-    bl fn_8008CD50
+    bl atn_Matrix_concat
     lwz r3, 0x8(r1)
     addi r4, r1, 0x70
-    bl fn_8008CD1C
+    bl atn_Matrix_copy
     lwz r3, 0x8(r1)
     addi r27, r27, 0x8
     addi r24, r24, 0x1
     addi r0, r3, 0x30
     stw r0, 0x8(r1)
-lbl_fn_80091684_0000078C:
+lbl_atn_Model_updateMatrices_0000078C:
     lwz r0, 0x14(r29)
     cmpw r24, r0
-    blt lbl_fn_80091684_0000074C
-lbl_fn_80091684_00000798:
+    blt lbl_atn_Model_updateMatrices_0000074C
+lbl_atn_Model_updateMatrices_00000798:
     lwz r6, 0x1c(r29)
     cmpwi r6, 0x0
-    bne lbl_fn_80091684_000007BC
+    bne lbl_atn_Model_updateMatrices_000007BC
     lwz r0, 0x24(r29)
     cmpwi r0, 0x0
-    bne lbl_fn_80091684_000007BC
+    bne lbl_atn_Model_updateMatrices_000007BC
     lwz r0, 0x2c(r29)
     cmpwi r0, 0x0
-    beq lbl_fn_80091684_000009A8
-lbl_fn_80091684_000007BC:
+    beq lbl_atn_Model_updateMatrices_000009A8
+lbl_atn_Model_updateMatrices_000007BC:
     lwz r3, 0x8(r1)
     lis r4, 0xe000
     lwz r5, 0x20(r29)
@@ -600,10 +600,10 @@ lbl_fn_80091684_000007BC:
     lwz r5, 0x30(r29)
     lwz r6, 0x2c(r29)
     bl fn_800910D4
-    b lbl_fn_80091684_000009A8
-lbl_fn_80091684_00000820:
+    b lbl_atn_Model_updateMatrices_000009A8
+lbl_atn_Model_updateMatrices_00000820:
     cmpwi r27, 0x0
-    beq lbl_fn_80091684_000008AC
+    beq lbl_atn_Model_updateMatrices_000008AC
     lwz r3, 0x8(r30)
     mr r4, r24
     mr r5, r28
@@ -614,8 +614,8 @@ lbl_fn_80091684_00000820:
     bl fn_80090834
     li r24, 0x0
     li r30, 0x0
-    b lbl_fn_80091684_0000089C
-lbl_fn_80091684_00000854:
+    b lbl_atn_Model_updateMatrices_0000089C
+lbl_atn_Model_updateMatrices_00000854:
     lwz r0, 0x18(r29)
     addi r3, r1, 0x40
     addi r5, r26, 0x60
@@ -625,21 +625,21 @@ lbl_fn_80091684_00000854:
     lwzx r0, r27, r0
     mulli r0, r0, 0x30
     add r4, r28, r0
-    bl fn_8008CD50
+    bl atn_Matrix_concat
     lwz r3, 0x8(r1)
     addi r4, r1, 0x40
-    bl fn_8008CD1C
+    bl atn_Matrix_copy
     lwz r3, 0x8(r1)
     addi r30, r30, 0x8
     addi r24, r24, 0x1
     addi r0, r3, 0x30
     stw r0, 0x8(r1)
-lbl_fn_80091684_0000089C:
+lbl_atn_Model_updateMatrices_0000089C:
     lwz r0, 0x14(r29)
     cmpw r24, r0
-    blt lbl_fn_80091684_00000854
-    b lbl_fn_80091684_00000924
-lbl_fn_80091684_000008AC:
+    blt lbl_atn_Model_updateMatrices_00000854
+    b lbl_atn_Model_updateMatrices_00000924
+lbl_atn_Model_updateMatrices_000008AC:
     addi r3, r31, 0x30
     bl fn_80089ACC
     mr r6, r3
@@ -650,8 +650,8 @@ lbl_fn_80091684_000008AC:
     bl fn_800908FC
     li r24, 0x0
     li r27, 0x0
-    b lbl_fn_80091684_00000918
-lbl_fn_80091684_000008D8:
+    b lbl_atn_Model_updateMatrices_00000918
+lbl_atn_Model_updateMatrices_000008D8:
     lwz r0, 0x18(r29)
     addi r3, r1, 0x10
     addi r5, r26, 0x60
@@ -659,30 +659,30 @@ lbl_fn_80091684_000008D8:
     lwz r0, 0x4(r4)
     mulli r0, r0, 0x30
     add r4, r28, r0
-    bl fn_8008CD50
+    bl atn_Matrix_concat
     lwz r3, 0x8(r1)
     addi r4, r1, 0x10
-    bl fn_8008CD1C
+    bl atn_Matrix_copy
     lwz r3, 0x8(r1)
     addi r27, r27, 0x8
     addi r24, r24, 0x1
     addi r0, r3, 0x30
     stw r0, 0x8(r1)
-lbl_fn_80091684_00000918:
+lbl_atn_Model_updateMatrices_00000918:
     lwz r0, 0x14(r29)
     cmpw r24, r0
-    blt lbl_fn_80091684_000008D8
-lbl_fn_80091684_00000924:
+    blt lbl_atn_Model_updateMatrices_000008D8
+lbl_atn_Model_updateMatrices_00000924:
     lwz r6, 0x1c(r29)
     cmpwi r6, 0x0
-    bne lbl_fn_80091684_00000948
+    bne lbl_atn_Model_updateMatrices_00000948
     lwz r0, 0x24(r29)
     cmpwi r0, 0x0
-    bne lbl_fn_80091684_00000948
+    bne lbl_atn_Model_updateMatrices_00000948
     lwz r0, 0x2c(r29)
     cmpwi r0, 0x0
-    beq lbl_fn_80091684_000009A8
-lbl_fn_80091684_00000948:
+    beq lbl_atn_Model_updateMatrices_000009A8
+lbl_atn_Model_updateMatrices_00000948:
     lwz r3, 0x8(r1)
     lis r4, 0xe000
     lwz r5, 0x20(r29)
@@ -707,7 +707,7 @@ lbl_fn_80091684_00000948:
     lwz r5, 0x30(r29)
     lwz r6, 0x2c(r29)
     bl fn_800910D4
-lbl_fn_80091684_000009A8:
+lbl_atn_Model_updateMatrices_000009A8:
     lmw r24, 0xd0(r1)
     lwz r0, 0xf4(r1)
     mtlr r0
@@ -738,7 +738,7 @@ asm void fn_80091A90(void)
     cmpwi r0, 0x3
     bne lbl_fn_80091A90_00000A14
     lwz r5, 0x1d8(r3)
-    bl fn_80091684
+    bl atn_Model_updateMatrices
     b lbl_fn_80091A90_00000B10
 lbl_fn_80091A90_00000A14:
     lwz r4, 0x50(r3)
@@ -750,7 +750,7 @@ lbl_fn_80091A90_00000A14:
     mr r4, r30
     add r5, r29, r0
     lwz r5, 0x178(r5)
-    bl fn_80091684
+    bl atn_Model_updateMatrices
     b lbl_fn_80091A90_00000B10
 lbl_fn_80091A90_00000A40:
     mr r4, r30
@@ -775,11 +775,11 @@ lbl_fn_80091A90_00000A40:
     psq_st f3, 0x10(r31), 0, 0
     psq_st f4, 0x18(r31), 0, 0
     psq_st f5, 0x20(r31), 0, 0
-    bl fn_805F8CA0
+    bl PSMTXInverse
     mr r3, r30
     mr r4, r31
     mr r5, r31
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r30), 0, 0
     psq_l f2, 0x8(r30), 0, 0
     psq_l f3, 0x10(r30), 0, 0
@@ -800,12 +800,12 @@ lbl_fn_80091A90_00000A40:
     ble lbl_fn_80091A90_00000B04
     mr r3, r31
     mr r5, r4
-    bl fn_805F8AC0
+    bl PSMTXConcatArray
     b lbl_fn_80091A90_00000B10
 lbl_fn_80091A90_00000B04:
     mr r3, r31
     mr r5, r4
-    bl fn_805F89F0
+    bl PSMTXConcat
 lbl_fn_80091A90_00000B10:
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)
@@ -907,7 +907,7 @@ asm void fn_80091CFC(void)
     stw r28, 0x10(r1)
     mr r28, r3
     mr r3, r4
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r5, 0x16c(r28)
     cmpwi r5, 0x0
     bne lbl_fn_80091CFC_00000C64
@@ -964,7 +964,7 @@ lbl_fn_80091CFC_00000CF0:
     la r5, lbl_8087D7E0
     la r6, lbl_8087D7DC
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0xd4(r28)
     mr r31, r3
     cmpwi r0, 0x0
@@ -1040,7 +1040,7 @@ lbl_fn_80091CFC_00000E10:
     bdnz lbl_fn_80091CFC_00000E10
 lbl_fn_80091CFC_00000E28:
     lwz r3, 0xd4(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80091CFC_00000E30:
     li r0, 0x8
     stw r31, 0xd4(r28)
@@ -1058,7 +1058,7 @@ lbl_fn_80091CFC_00000E40:
     la r5, lbl_8087D7E0
     la r6, lbl_8087D7DC
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0xd4(r28)
     mr r30, r3
     cmpwi r0, 0x0
@@ -1134,7 +1134,7 @@ lbl_fn_80091CFC_00000F6C:
     bdnz lbl_fn_80091CFC_00000F6C
 lbl_fn_80091CFC_00000F84:
     lwz r3, 0xd4(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80091CFC_00000F8C:
     stw r30, 0xd4(r28)
     stw r31, 0xd0(r28)
@@ -1229,7 +1229,7 @@ lbl_fn_800920B8_000010A4:
     la r5, lbl_8087D7E0
     la r6, lbl_8087D7DC
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0xd4(r28)
     mr r29, r3
     cmpwi r0, 0x0
@@ -1305,7 +1305,7 @@ lbl_fn_800920B8_000011C4:
     bdnz lbl_fn_800920B8_000011C4
 lbl_fn_800920B8_000011DC:
     lwz r3, 0xd4(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800920B8_000011E4:
     li r0, 0x8
     stw r29, 0xd4(r28)
@@ -1323,7 +1323,7 @@ lbl_fn_800920B8_000011F4:
     la r5, lbl_8087D7E0
     la r6, lbl_8087D7DC
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0xd4(r28)
     mr r30, r3
     cmpwi r0, 0x0
@@ -1399,7 +1399,7 @@ lbl_fn_800920B8_00001320:
     bdnz lbl_fn_800920B8_00001320
 lbl_fn_800920B8_00001338:
     lwz r3, 0xd4(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800920B8_00001340:
     stw r30, 0xd4(r28)
     stw r29, 0xd0(r28)
@@ -1705,7 +1705,7 @@ lbl_fn_80092768_0000172C:
     blr
 }
 
-asm void fn_80092814(void)
+asm void atn_Model_findBoneIndex(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1716,35 +1716,35 @@ asm void fn_80092814(void)
     stw r30, 0x8(r1)
     mr r30, r3
     mr r3, r4
-    bl fn_800DC6B4
+    bl str_findChar
     mulli r0, r31, 0x18
     add r4, r30, r0
     lwz r5, 0x16c(r4)
     cmpwi r5, 0x0
-    bne lbl_fn_80092814_00001780
+    bne lbl_atn_Model_findBoneIndex_00001780
     li r6, -0x1
-    b lbl_fn_80092814_000017C0
-lbl_fn_80092814_00001780:
+    b lbl_atn_Model_findBoneIndex_000017C0
+lbl_atn_Model_findBoneIndex_00001780:
     lwz r0, 0x44(r5)
     li r6, 0x0
     li r7, 0x0
     mtctr r0
     cmpwi r0, 0x0
-    ble lbl_fn_80092814_000017BC
-lbl_fn_80092814_00001798:
+    ble lbl_atn_Model_findBoneIndex_000017BC
+lbl_atn_Model_findBoneIndex_00001798:
     lwz r4, 0x48(r5)
     lwzx r4, r4, r7
     lwz r0, 0x14(r4)
     cmplw r3, r0
-    bne lbl_fn_80092814_000017B0
-    b lbl_fn_80092814_000017C0
-lbl_fn_80092814_000017B0:
+    bne lbl_atn_Model_findBoneIndex_000017B0
+    b lbl_atn_Model_findBoneIndex_000017C0
+lbl_atn_Model_findBoneIndex_000017B0:
     addi r7, r7, 0x4
     addi r6, r6, 0x1
-    bdnz lbl_fn_80092814_00001798
-lbl_fn_80092814_000017BC:
+    bdnz lbl_atn_Model_findBoneIndex_00001798
+lbl_atn_Model_findBoneIndex_000017BC:
     li r6, -0x1
-lbl_fn_80092814_000017C0:
+lbl_atn_Model_findBoneIndex_000017C0:
     lwz r31, 0xc(r1)
     mr r3, r6
     lwz r30, 0x8(r1)
@@ -1820,7 +1820,7 @@ asm void fn_80092954(void)
     stw r31, 0xc(r1)
     mr r31, r3
     mr r3, r4
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r0, 0x104(r31)
     li r5, 0x0
     mtctr r0
@@ -2082,7 +2082,7 @@ lbl_fn_80092A4C_00001C1C:
     stfs f2, 0x10(r1)
     addi r3, r1, 0x30
     psq_st f1, 0x0(r30), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     psq_l f1, 0x0(r30), 0, 0
     addi r3, r1, 0x14
     lwz r30, lbl_8087EFB4
@@ -2103,7 +2103,7 @@ lbl_fn_80092A4C_00001C1C:
     stfs f0, 0x14(r1)
     stfs f8, 0x18(r1)
     stfs f11, 0x1c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x2c(r1)
     lfs f17, lbl_80880BF8
     fsubs f0, f1, f0

@@ -8,18 +8,18 @@ extern void dtor_80084684(void);
 extern void fn_8005E3E4(void);
 extern void fn_8006144C(void);
 extern void fn_8006F72C(void);
-extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_realloc(void);
+extern void mem_getAllocSize(void);
 extern void fn_800DBF68(void);
 extern void fn_801EC158(void);
 extern void fn_801EC6C0(void);
-extern void fn_801ED928(void);
+extern void net_player_interpolateState(void);
 extern void fn_801EDC78(void);
 extern void fn_801F2398(void);
 extern void fn_801F3EF4(void);
 extern void fn_801F94F4(void);
 extern void fn_801FF1B8(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 
 /* External data declarations */
 extern u8 lbl_8073CDC8[];
@@ -54,7 +54,7 @@ void fn_801EFAB8(void);
 void fn_801EFB00(void);
 void fn_801EFB4C(void);
 void fn_801EFB90(void);
-void fn_801EFBE8(void);
+void player_syncPositionAndMotion(void);
 void fn_801F0364(void);
 void fn_801F03AC(void);
 void fn_801F04FC(void);
@@ -190,7 +190,7 @@ lbl_fn_801EF36C_00000190:
     la r5, lbl_8087DAE4
     la r6, lbl_8087DAE0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0xc(r28)
     mr r30, r3
     cmpwi r0, 0x0
@@ -266,7 +266,7 @@ lbl_fn_801EF36C_000002B0:
     bdnz lbl_fn_801EF36C_000002B0
 lbl_fn_801EF36C_000002C8:
     lwz r3, 0xc(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801EF36C_000002D0:
     li r0, 0x8
     stw r30, 0xc(r28)
@@ -284,7 +284,7 @@ lbl_fn_801EF36C_000002E0:
     la r5, lbl_8087DAE4
     la r6, lbl_8087DAE0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0xc(r28)
     mr r31, r3
     cmpwi r0, 0x0
@@ -360,7 +360,7 @@ lbl_fn_801EF36C_0000040C:
     bdnz lbl_fn_801EF36C_0000040C
 lbl_fn_801EF36C_00000424:
     lwz r3, 0xc(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801EF36C_0000042C:
     stw r31, 0xc(r28)
     stw r30, 0x8(r28)
@@ -417,13 +417,13 @@ lbl_fn_801EF7E0_000004C0:
     cmpwi r3, 0x0
     stw r31, 0x8(r29)
     beq lbl_fn_801EF7E0_000004EC
-    bl fn_80084C24
+    bl mem_getAllocSize
     stw r31, 0xc(r29)
 lbl_fn_801EF7E0_000004EC:
     lwz r3, 0x94(r29)
     cmpwi r3, 0x0
     beq lbl_fn_801EF7E0_000004FC
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801EF7E0_000004FC:
     li r0, 0x0
     stw r0, 0x94(r29)
@@ -717,7 +717,7 @@ lbl_fn_801EFB90_00000860:
     blr
 }
 
-asm void fn_801EFBE8(void)
+asm void player_syncPositionAndMotion(void)
 {
     nofralloc
     stwu r1, -0x80(r1)
@@ -728,7 +728,7 @@ asm void fn_801EFBE8(void)
     mr r31, r3
     bl fn_801EDC78
     cmpwi r3, 0x0
-    beq lbl_fn_801EFBE8_00000FE0
+    beq lbl_player_syncPositionAndMotion_00000FE0
     lfs f0, lbl_80882C10
     li r30, 0x0
     stfs f0, 0x50(r1)
@@ -743,12 +743,12 @@ asm void fn_801EFBE8(void)
     stfs f0, 0x60(r1)
     stfs f0, 0x10(r1)
     stw r30, 0x14(r1)
-    bl fn_801ED928
+    bl net_player_interpolateState
     lfs f3, 0x34(r1)
     lfs f5, lbl_80882C10
     fcmpo cr0, f3, f5
     cror eq, lt, eq
-    beq lbl_fn_801EFBE8_00000FE0
+    beq lbl_player_syncPositionAndMotion_00000FE0
     lfs f1, 0x4c(r1)
     lfs f2, 0x28(r1)
     fmuls f1, f1, f3
@@ -762,85 +762,85 @@ asm void fn_801EFBE8(void)
     stfs f0, 0x20(r1)
     stfs f1, 0x24(r1)
     cror eq, gt, eq
-    bne lbl_fn_801EFBE8_00000930
+    bne lbl_player_syncPositionAndMotion_00000930
     li r30, 0xff
-    b lbl_fn_801EFBE8_00000954
-lbl_fn_801EFBE8_00000930:
+    b lbl_player_syncPositionAndMotion_00000954
+lbl_player_syncPositionAndMotion_00000930:
     fcmpo cr0, f2, f5
     cror eq, lt, eq
-    bne lbl_fn_801EFBE8_00000940
-    b lbl_fn_801EFBE8_00000954
-lbl_fn_801EFBE8_00000940:
+    bne lbl_player_syncPositionAndMotion_00000940
+    b lbl_player_syncPositionAndMotion_00000954
+lbl_player_syncPositionAndMotion_00000940:
     lfs f1, lbl_80882C18
     lfs f0, lbl_80882C14
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     mr r30, r3
-lbl_fn_801EFBE8_00000954:
+lbl_player_syncPositionAndMotion_00000954:
     lfs f2, 0x2c(r1)
     lfs f0, lbl_80882C1C
     fcmpo cr0, f2, f0
     cror eq, gt, eq
-    bne lbl_fn_801EFBE8_00000970
+    bne lbl_player_syncPositionAndMotion_00000970
     li r29, 0xff
-    b lbl_fn_801EFBE8_0000099C
-lbl_fn_801EFBE8_00000970:
+    b lbl_player_syncPositionAndMotion_0000099C
+lbl_player_syncPositionAndMotion_00000970:
     lfs f0, lbl_80882C10
     fcmpo cr0, f2, f0
     cror eq, lt, eq
-    bne lbl_fn_801EFBE8_00000988
+    bne lbl_player_syncPositionAndMotion_00000988
     li r3, 0x0
-    b lbl_fn_801EFBE8_00000998
-lbl_fn_801EFBE8_00000988:
+    b lbl_player_syncPositionAndMotion_00000998
+lbl_player_syncPositionAndMotion_00000988:
     lfs f1, lbl_80882C18
     lfs f0, lbl_80882C14
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
-lbl_fn_801EFBE8_00000998:
+    bl runtime_clampDouble
+lbl_player_syncPositionAndMotion_00000998:
     mr r29, r3
-lbl_fn_801EFBE8_0000099C:
+lbl_player_syncPositionAndMotion_0000099C:
     lfs f2, 0x30(r1)
     lfs f0, lbl_80882C1C
     fcmpo cr0, f2, f0
     cror eq, gt, eq
-    bne lbl_fn_801EFBE8_000009B8
+    bne lbl_player_syncPositionAndMotion_000009B8
     li r28, 0xff
-    b lbl_fn_801EFBE8_000009E4
-lbl_fn_801EFBE8_000009B8:
+    b lbl_player_syncPositionAndMotion_000009E4
+lbl_player_syncPositionAndMotion_000009B8:
     lfs f0, lbl_80882C10
     fcmpo cr0, f2, f0
     cror eq, lt, eq
-    bne lbl_fn_801EFBE8_000009D0
+    bne lbl_player_syncPositionAndMotion_000009D0
     li r3, 0x0
-    b lbl_fn_801EFBE8_000009E0
-lbl_fn_801EFBE8_000009D0:
+    b lbl_player_syncPositionAndMotion_000009E0
+lbl_player_syncPositionAndMotion_000009D0:
     lfs f1, lbl_80882C18
     lfs f0, lbl_80882C14
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
-lbl_fn_801EFBE8_000009E0:
+    bl runtime_clampDouble
+lbl_player_syncPositionAndMotion_000009E0:
     mr r28, r3
-lbl_fn_801EFBE8_000009E4:
+lbl_player_syncPositionAndMotion_000009E4:
     lfs f2, 0x34(r1)
     lfs f0, lbl_80882C1C
     fcmpo cr0, f2, f0
     cror eq, gt, eq
-    bne lbl_fn_801EFBE8_00000A00
+    bne lbl_player_syncPositionAndMotion_00000A00
     li r3, 0xff
-    b lbl_fn_801EFBE8_00000A28
-lbl_fn_801EFBE8_00000A00:
+    b lbl_player_syncPositionAndMotion_00000A28
+lbl_player_syncPositionAndMotion_00000A00:
     lfs f0, lbl_80882C10
     fcmpo cr0, f2, f0
     cror eq, lt, eq
-    bne lbl_fn_801EFBE8_00000A18
+    bne lbl_player_syncPositionAndMotion_00000A18
     li r3, 0x0
-    b lbl_fn_801EFBE8_00000A28
-lbl_fn_801EFBE8_00000A18:
+    b lbl_player_syncPositionAndMotion_00000A28
+lbl_player_syncPositionAndMotion_00000A18:
     lfs f1, lbl_80882C18
     lfs f0, lbl_80882C14
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
-lbl_fn_801EFBE8_00000A28:
+    bl runtime_clampDouble
+lbl_player_syncPositionAndMotion_00000A28:
     lfs f2, 0x18(r1)
     slwi r3, r3, 24
     lfs f0, lbl_80882C1C
@@ -851,88 +851,88 @@ lbl_fn_801EFBE8_00000A28:
     or r0, r0, r3
     or r27, r28, r0
     cror eq, gt, eq
-    bne lbl_fn_801EFBE8_00000A5C
+    bne lbl_player_syncPositionAndMotion_00000A5C
     li r28, 0xff
-    b lbl_fn_801EFBE8_00000A88
-lbl_fn_801EFBE8_00000A5C:
+    b lbl_player_syncPositionAndMotion_00000A88
+lbl_player_syncPositionAndMotion_00000A5C:
     lfs f0, lbl_80882C10
     fcmpo cr0, f2, f0
     cror eq, lt, eq
-    bne lbl_fn_801EFBE8_00000A74
+    bne lbl_player_syncPositionAndMotion_00000A74
     li r3, 0x0
-    b lbl_fn_801EFBE8_00000A84
-lbl_fn_801EFBE8_00000A74:
+    b lbl_player_syncPositionAndMotion_00000A84
+lbl_player_syncPositionAndMotion_00000A74:
     lfs f1, lbl_80882C18
     lfs f0, lbl_80882C14
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
-lbl_fn_801EFBE8_00000A84:
+    bl runtime_clampDouble
+lbl_player_syncPositionAndMotion_00000A84:
     mr r28, r3
-lbl_fn_801EFBE8_00000A88:
+lbl_player_syncPositionAndMotion_00000A88:
     lfs f2, 0x1c(r1)
     lfs f0, lbl_80882C1C
     fcmpo cr0, f2, f0
     cror eq, gt, eq
-    bne lbl_fn_801EFBE8_00000AA4
+    bne lbl_player_syncPositionAndMotion_00000AA4
     li r29, 0xff
-    b lbl_fn_801EFBE8_00000AD0
-lbl_fn_801EFBE8_00000AA4:
+    b lbl_player_syncPositionAndMotion_00000AD0
+lbl_player_syncPositionAndMotion_00000AA4:
     lfs f0, lbl_80882C10
     fcmpo cr0, f2, f0
     cror eq, lt, eq
-    bne lbl_fn_801EFBE8_00000ABC
+    bne lbl_player_syncPositionAndMotion_00000ABC
     li r3, 0x0
-    b lbl_fn_801EFBE8_00000ACC
-lbl_fn_801EFBE8_00000ABC:
+    b lbl_player_syncPositionAndMotion_00000ACC
+lbl_player_syncPositionAndMotion_00000ABC:
     lfs f1, lbl_80882C18
     lfs f0, lbl_80882C14
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
-lbl_fn_801EFBE8_00000ACC:
+    bl runtime_clampDouble
+lbl_player_syncPositionAndMotion_00000ACC:
     mr r29, r3
-lbl_fn_801EFBE8_00000AD0:
+lbl_player_syncPositionAndMotion_00000AD0:
     lfs f2, 0x20(r1)
     lfs f0, lbl_80882C1C
     fcmpo cr0, f2, f0
     cror eq, gt, eq
-    bne lbl_fn_801EFBE8_00000AEC
+    bne lbl_player_syncPositionAndMotion_00000AEC
     li r30, 0xff
-    b lbl_fn_801EFBE8_00000B18
-lbl_fn_801EFBE8_00000AEC:
+    b lbl_player_syncPositionAndMotion_00000B18
+lbl_player_syncPositionAndMotion_00000AEC:
     lfs f0, lbl_80882C10
     fcmpo cr0, f2, f0
     cror eq, lt, eq
-    bne lbl_fn_801EFBE8_00000B04
+    bne lbl_player_syncPositionAndMotion_00000B04
     li r3, 0x0
-    b lbl_fn_801EFBE8_00000B14
-lbl_fn_801EFBE8_00000B04:
+    b lbl_player_syncPositionAndMotion_00000B14
+lbl_player_syncPositionAndMotion_00000B04:
     lfs f1, lbl_80882C18
     lfs f0, lbl_80882C14
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
-lbl_fn_801EFBE8_00000B14:
+    bl runtime_clampDouble
+lbl_player_syncPositionAndMotion_00000B14:
     mr r30, r3
-lbl_fn_801EFBE8_00000B18:
+lbl_player_syncPositionAndMotion_00000B18:
     lfs f2, 0x24(r1)
     lfs f0, lbl_80882C1C
     fcmpo cr0, f2, f0
     cror eq, gt, eq
-    bne lbl_fn_801EFBE8_00000B34
+    bne lbl_player_syncPositionAndMotion_00000B34
     li r3, 0xff
-    b lbl_fn_801EFBE8_00000B5C
-lbl_fn_801EFBE8_00000B34:
+    b lbl_player_syncPositionAndMotion_00000B5C
+lbl_player_syncPositionAndMotion_00000B34:
     lfs f0, lbl_80882C10
     fcmpo cr0, f2, f0
     cror eq, lt, eq
-    bne lbl_fn_801EFBE8_00000B4C
+    bne lbl_player_syncPositionAndMotion_00000B4C
     li r3, 0x0
-    b lbl_fn_801EFBE8_00000B5C
-lbl_fn_801EFBE8_00000B4C:
+    b lbl_player_syncPositionAndMotion_00000B5C
+lbl_player_syncPositionAndMotion_00000B4C:
     lfs f1, lbl_80882C18
     lfs f0, lbl_80882C14
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
-lbl_fn_801EFBE8_00000B5C:
+    bl runtime_clampDouble
+lbl_player_syncPositionAndMotion_00000B5C:
     lwz r4, lbl_8087EEB0
     slwi r0, r28, 16
     lfs f8, lbl_80882C1C
@@ -958,7 +958,7 @@ lbl_fn_801EFBE8_00000B5C:
     bl fn_8005E3E4
     lhz r0, 0xe(r31)
     cmplwi r0, 0x1
-    bne lbl_fn_801EFBE8_00000C1C
+    bne lbl_player_syncPositionAndMotion_00000C1C
     lfs f8, lbl_80882C1C
     mr r4, r27
     stfs f8, 0x8(r1)
@@ -980,10 +980,10 @@ lbl_fn_801EFBE8_00000B5C:
     lfs f5, 0x5c(r1)
     lwz r6, 0x14(r1)
     bl fn_8005E3E4
-    b lbl_fn_801EFBE8_00000FE0
-lbl_fn_801EFBE8_00000C1C:
+    b lbl_player_syncPositionAndMotion_00000FE0
+lbl_player_syncPositionAndMotion_00000C1C:
     cmplwi r0, 0x2
-    bne lbl_fn_801EFBE8_00000D58
+    bne lbl_player_syncPositionAndMotion_00000D58
     lfs f8, lbl_80882C1C
     mr r4, r27
     stfs f8, 0x8(r1)
@@ -1060,10 +1060,10 @@ lbl_fn_801EFBE8_00000C1C:
     lfs f5, 0x5c(r1)
     lwz r6, 0x14(r1)
     bl fn_8005E3E4
-    b lbl_fn_801EFBE8_00000FE0
-lbl_fn_801EFBE8_00000D58:
+    b lbl_player_syncPositionAndMotion_00000FE0
+lbl_player_syncPositionAndMotion_00000D58:
     cmplwi r0, 0x3
-    bne lbl_fn_801EFBE8_00000FE0
+    bne lbl_player_syncPositionAndMotion_00000FE0
     lfs f8, lbl_80882C1C
     mr r4, r27
     stfs f8, 0x8(r1)
@@ -1224,7 +1224,7 @@ lbl_fn_801EFBE8_00000D58:
     lfs f5, 0x5c(r1)
     lwz r6, 0x14(r1)
     bl fn_8005E3E4
-lbl_fn_801EFBE8_00000FE0:
+lbl_player_syncPositionAndMotion_00000FE0:
     addi r11, r1, 0x80
     bl _restgpr_27
     lwz r0, 0x84(r1)
@@ -1876,7 +1876,7 @@ asm void fn_801F0B5C(void)
     stfs f0, 0x48(r1)
     stfs f0, 0x8(r1)
     stw r29, 0xc(r1)
-    bl fn_801ED928
+    bl net_player_interpolateState
     lfs f2, 0x10(r1)
     lfs f0, lbl_80882C3C
     lfs f31, 0x38(r1)
@@ -1900,7 +1900,7 @@ lbl_fn_801F0B5C_000018BC:
     lfs f1, lbl_80882C38
     lfs f0, lbl_80882C34
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     mr r29, r3
 lbl_fn_801F0B5C_000018D0:
     lfs f2, 0x14(r1)
@@ -1921,7 +1921,7 @@ lbl_fn_801F0B5C_00001904:
     lfs f1, lbl_80882C38
     lfs f0, lbl_80882C34
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_801F0B5C_00001914:
     mr r30, r3
 lbl_fn_801F0B5C_00001918:
@@ -1943,7 +1943,7 @@ lbl_fn_801F0B5C_0000194C:
     lfs f1, lbl_80882C38
     lfs f0, lbl_80882C34
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_801F0B5C_0000195C:
     mr r31, r3
 lbl_fn_801F0B5C_00001960:
@@ -1965,7 +1965,7 @@ lbl_fn_801F0B5C_00001994:
     lfs f1, lbl_80882C38
     lfs f0, lbl_80882C34
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_801F0B5C_000019A4:
     slwi r4, r30, 8
     fmr f1, f31

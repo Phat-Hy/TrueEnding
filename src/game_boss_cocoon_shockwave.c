@@ -5,7 +5,7 @@
 extern void OSSleepTicks(void);
 extern void __files(void);
 extern void dtor_80084684(void);
-extern void fn_8006A950(void);
+extern void atn_normalizePath(char* str);
 extern void fn_8006B404(void);
 extern void fn_80070E14(void);
 extern void fn_80076C44(void);
@@ -13,21 +13,21 @@ extern void fn_80076F88(void);
 extern void fn_8007C144(void);
 extern void fn_8007C3F8(void);
 extern void fn_8007C46C(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
-extern void fn_800846FC(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
+extern void mem_realloc(void);
 extern void fn_80084A78(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800904E0(void);
 extern void fn_8009A584(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800DCA6C(void);
 extern void fn_8024373C(void);
 extern void fn_80243758(void);
 extern void fn_802437B4(void);
 extern void fn_802437C0(void);
 extern void fn_80243814(void);
-extern void fn_8046C3FC(void);
+extern void atn_Arc_decompressChunk(void);
 extern void fn_8046D1EC(void);
 extern void fn_8046F5CC(void);
 extern void fn_8046F834(void);
@@ -39,12 +39,12 @@ extern void fn_804730D4(void);
 extern void fn_804730E4(void);
 extern void fn_80473104(void);
 extern void fn_80473130(void);
-extern void fn_805F8CA0(void);
-extern void fn_80680770(void);
-extern void fn_80682428(void);
-extern void fn_80686EA4(void);
+extern void PSMTXInverse(void);
+extern void printf(void);
+extern void strcmp(void);
+extern void abort(void);
 extern void fn_806952C4(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -75,7 +75,7 @@ extern u32 lbl_8087D7EC;
 extern u32 lbl_8087D7F0;
 extern u32 lbl_8087E058;
 extern u32 lbl_8087E05C;
-extern u32 lbl_8087EE94;
+extern u32 g_TaskManager;
 extern u32 lbl_8087EEE0;
 extern u32 lbl_8087F518;
 extern u32 lbl_8087F520;
@@ -83,34 +83,34 @@ extern u32 lbl_80886F00;
 extern u32 lbl_80886F04;
 
 /* Function declarations */
-void fn_80473B20(void);
-void fn_80473BC0(void);
+void atn_LoadEfp_constructor(void);
+void atn_LoadEfp_destructor(void);
 void fn_80473C20(void);
-void fn_80473C3C(void);
+void atn_LH_Efp_onNotify(void);
 void fn_80473C88(void);
-void fn_80473E74(void);
-void fn_80473E8C(void);
-void fn_80473EFC(void);
-void fn_80473F18(void);
-void fn_80473F34(void);
-void fn_80473F50(void);
+void atn_LoadHandle_constructor(void);
+void atn_LoadHandle_destructor(void);
+void atn_LoadHandle_getStatus(void);
+void atn_LoadHandle_getName(void);
+void atn_LoadHandle_getData(void);
+void atn_LoadHandle_isLoading(void);
 void fn_80473F88(void);
-void fn_80473FCC(void);
+void taskManager_updateTasks(void);
 void fn_804741C0(void);
-void fn_80474224(void);
-void fn_804742F4(void);
-void fn_8047462C(void);
+void atn_LoadMaterial_constructor(void);
+void atn_LoadMaterial_destructor(void);
+void atn_LH_Material_onNotify(void);
 void fn_80474678(void);
 void fn_80474860(void);
 void fn_8047486C(void);
-void fn_80474888(void);
-void fn_804749C8(void);
+void atn_LoadModel_constructor(void);
+void atn_LoadModel_destructor(void);
 void fn_80474E0C(void);
 void fn_80474E4C(void);
 void fn_80474E68(void);
 void fn_80474F0C(void);
 
-asm void fn_80473B20(void)
+asm void atn_LoadEfp_constructor(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -122,32 +122,32 @@ asm void fn_80473B20(void)
     mr r30, r4
     stw r29, 0x14(r1)
     mr r29, r3
-    beq lbl_fn_80473B20_00000080
+    beq lbl_atn_LoadEfp_constructor_00000080
     addic. r31, r3, 0x5c
-    beq lbl_fn_80473B20_00000064
+    beq lbl_atn_LoadEfp_constructor_00000064
     mr r3, r31
     bl fn_802437C0
     cmpwi r31, 0x0
-    beq lbl_fn_80473B20_00000064
+    beq lbl_atn_LoadEfp_constructor_00000064
     lwz r3, 0x4(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_80473B20_00000058
+    beq lbl_atn_LoadEfp_constructor_00000058
     lis r4, fn_80243758@ha
     addi r4, r4, fn_80243758@l
     bl fn_80695A50
-lbl_fn_80473B20_00000058:
+lbl_atn_LoadEfp_constructor_00000058:
     li r0, 0x0
     stw r0, 0x4(r31)
     stw r0, 0x0(r31)
-lbl_fn_80473B20_00000064:
+lbl_atn_LoadEfp_constructor_00000064:
     mr r3, r29
     li r4, 0x0
     bl fn_8047304C
     cmpwi r30, 0x0
-    ble lbl_fn_80473B20_00000080
+    ble lbl_atn_LoadEfp_constructor_00000080
     mr r3, r29
     bl dtor_80084684
-lbl_fn_80473B20_00000080:
+lbl_atn_LoadEfp_constructor_00000080:
     lwz r31, 0x1c(r1)
     mr r3, r29
     lwz r30, 0x18(r1)
@@ -158,7 +158,7 @@ lbl_fn_80473B20_00000080:
     blr
 }
 
-asm void fn_80473BC0(void)
+asm void atn_LoadEfp_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -168,19 +168,19 @@ asm void fn_80473BC0(void)
     mr r31, r3
     lbz r0, 0x4(r3)
     cmplwi r0, 0x2
-    bne lbl_fn_80473BC0_000000EC
+    bne lbl_atn_LoadEfp_destructor_000000EC
     lwz r4, 0x54(r3)
     lwz r5, 0x50(r3)
     addi r3, r3, 0x5c
     bl fn_80243814
     cmpwi r3, 0x0
-    bne lbl_fn_80473BC0_000000EC
+    bne lbl_atn_LoadEfp_destructor_000000EC
     mr r3, r31
     li r4, 0x3
     bl fn_80473104
     mr r3, r31
     bl fn_80473130
-lbl_fn_80473BC0_000000EC:
+lbl_atn_LoadEfp_destructor_000000EC:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -201,7 +201,7 @@ lbl_fn_80473C20_00000114:
     blr
 }
 
-asm void fn_80473C3C(void)
+asm void atn_LH_Efp_onNotify(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -240,11 +240,11 @@ asm void fn_80473C88(void)
     mr r28, r5
     bl fn_8046D1EC
     addi r3, r1, 0x10
-    bl fn_8006A950
+    bl atn_normalizePath
     addi r3, r1, 0x10
     bl fn_8006B404
     addi r3, r1, 0x10
-    bl fn_800DC6B4
+    bl str_findChar
     cmpwi r28, 0x0
     mr r5, r3
     li r30, 0x0
@@ -284,7 +284,7 @@ lbl_fn_80473C88_00000214:
     li r4, 0x2
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80473C88_0000026C
@@ -301,12 +301,12 @@ lbl_fn_80473C88_00000214:
 lbl_fn_80473C88_0000026C:
     mr r3, r31
     mr r4, r30
-    bl fn_8046C3FC
+    bl atn_Arc_decompressChunk
     cmpwi r3, 0x0
     beq lbl_fn_80473C88_0000030C
     addi r28, r31, 0x3ed0
     li r3, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_80473C88_000002B8
@@ -316,8 +316,8 @@ lbl_fn_80473C88_0000026C:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80779810@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80473C88_000002B8:
     addic. r3, r29, 0x8
     addi r0, r31, 0x3ed0
@@ -364,7 +364,7 @@ lbl_fn_80473C88_00000330:
     blr
 }
 
-asm void fn_80473E74(void)
+asm void atn_LoadHandle_constructor(void)
 {
     nofralloc
     lis r4, lbl_8078FD70@ha
@@ -375,7 +375,7 @@ asm void fn_80473E74(void)
     blr
 }
 
-asm void fn_80473E8C(void)
+asm void atn_LoadHandle_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -386,21 +386,21 @@ asm void fn_80473E8C(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_80473E8C_000003C0
+    beq lbl_atn_LoadHandle_destructor_000003C0
     lwz r0, 0x4(r3)
     lis r4, lbl_8078FD70@ha
     addi r4, r4, lbl_8078FD70@l
     stw r4, 0x0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80473E8C_000003B0
+    beq lbl_atn_LoadHandle_destructor_000003B0
     mr r3, r0
     bl fn_804730E4
-lbl_fn_80473E8C_000003B0:
+lbl_atn_LoadHandle_destructor_000003B0:
     cmpwi r31, 0x0
-    ble lbl_fn_80473E8C_000003C0
+    ble lbl_atn_LoadHandle_destructor_000003C0
     mr r3, r30
     bl dtor_80084684
-lbl_fn_80473E8C_000003C0:
+lbl_atn_LoadHandle_destructor_000003C0:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -410,51 +410,51 @@ lbl_fn_80473E8C_000003C0:
     blr
 }
 
-asm void fn_80473EFC(void)
+asm void atn_LoadHandle_getStatus(void)
 {
     nofralloc
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80473EFC_000003F0
+    beq lbl_atn_LoadHandle_getStatus_000003F0
     lbz r3, 0x4(r3)
     blr
-lbl_fn_80473EFC_000003F0:
+lbl_atn_LoadHandle_getStatus_000003F0:
     li r3, 0x0
     blr
 }
 
-asm void fn_80473F18(void)
+asm void atn_LoadHandle_getName(void)
 {
     nofralloc
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80473F18_0000040C
+    beq lbl_atn_LoadHandle_getName_0000040C
     addi r3, r3, 0x6
     blr
-lbl_fn_80473F18_0000040C:
+lbl_atn_LoadHandle_getName_0000040C:
     li r3, 0x0
     blr
 }
 
-asm void fn_80473F34(void)
+asm void atn_LoadHandle_getData(void)
 {
     nofralloc
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80473F34_00000428
+    beq lbl_atn_LoadHandle_getData_00000428
     lwz r3, 0x48(r3)
     blr
-lbl_fn_80473F34_00000428:
+lbl_atn_LoadHandle_getData_00000428:
     li r3, 0x0
     blr
 }
 
-asm void fn_80473F50(void)
+asm void atn_LoadHandle_isLoading(void)
 {
     nofralloc
     lwz r4, 0x4(r3)
     cmpwi r4, 0x0
-    beq lbl_fn_80473F50_00000460
+    beq lbl_atn_LoadHandle_isLoading_00000460
     lbz r0, 0x4(r4)
     li r3, 0x1
     cmpwi r0, 0x1
@@ -464,7 +464,7 @@ asm void fn_80473F50(void)
     beqlr
     li r3, 0x0
     blr
-lbl_fn_80473F50_00000460:
+lbl_atn_LoadHandle_isLoading_00000460:
     li r3, 0x0
     blr
 }
@@ -492,7 +492,7 @@ lbl_fn_80473F88_00000498:
     blr
 }
 
-asm void fn_80473FCC(void)
+asm void taskManager_updateTasks(void)
 {
     nofralloc
     stwu r1, -0x70(r1)
@@ -506,7 +506,7 @@ asm void fn_80473FCC(void)
     bctrl
     lwz r0, 0x4(r20)
     cmpwi r0, 0x0
-    beq lbl_fn_80473FCC_0000068C
+    beq lbl_taskManager_updateTasks_0000068C
     lis r25, lbl_80775B60@ha
     lis r30, lbl_80775B98@ha
     lis r31, lbl_80775B30@ha
@@ -521,24 +521,24 @@ asm void fn_80473FCC(void)
     lis r27, lbl_80775BC8@ha
     li r29, 0x1
     lis r18, 0x8000
-lbl_fn_80473FCC_00000514:
+lbl_taskManager_updateTasks_00000514:
     lwz r3, lbl_8087F518
     lwz r12, 0x0(r3)
     lwz r12, 0x10(r12)
     mtctr r12
     bctrl
-    lwz r21, lbl_8087EE94
+    lwz r21, g_TaskManager
     cmpwi r21, 0x0
-    beq lbl_fn_80473FCC_00000620
+    beq lbl_taskManager_updateTasks_00000620
     li r23, 0x0
     li r19, 0x0
-    b lbl_fn_80473FCC_00000614
-lbl_fn_80473FCC_00000540:
+    b lbl_taskManager_updateTasks_00000614
+lbl_taskManager_updateTasks_00000540:
     lwz r0, 0x8(r21)
     add r22, r0, r19
     lwzx r0, r19, r0
     cmpwi r0, 0x0
-    bne lbl_fn_80473FCC_000005F8
+    bne lbl_taskManager_updateTasks_000005F8
     stw r25, 0x18(r1)
     addi r3, r27, lbl_80775BC8@l
     stb r26, 0x8(r1)
@@ -552,21 +552,21 @@ lbl_fn_80473FCC_00000540:
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r28, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
-    beq lbl_fn_80473FCC_000005A4
+    beq lbl_taskManager_updateTasks_000005A4
     stw r29, 0x4(r3)
     stw r29, 0x8(r3)
     stw r30, 0x0(r3)
     stw r16, 0xc(r3)
-lbl_fn_80473FCC_000005A4:
+lbl_taskManager_updateTasks_000005A4:
     cmpwi r26, 0x0
     stw r3, 0x20(r1)
     stw r26, 0x10(r1)
-    beq lbl_fn_80473FCC_000005BC
+    beq lbl_taskManager_updateTasks_000005BC
     li r3, 0x0
-    bl fn_80084C24
-lbl_fn_80473FCC_000005BC:
+    bl mem_getAllocSize
+lbl_taskManager_updateTasks_000005BC:
     lwz r3, 0x1c(r1)
     addi r4, r27, lbl_80775BC8@l
     bl strcpy
@@ -574,15 +574,15 @@ lbl_fn_80473FCC_000005BC:
     addi r3, r1, 0x18
     bl fn_800DCA6C
     cmpwi r24, 0x0
-    beq lbl_fn_80473FCC_000005F8
+    beq lbl_taskManager_updateTasks_000005F8
     addic. r3, r24, 0x4
-    beq lbl_fn_80473FCC_000005F8
-    beq lbl_fn_80473FCC_000005F8
+    beq lbl_taskManager_updateTasks_000005F8
+    beq lbl_taskManager_updateTasks_000005F8
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80473FCC_000005F8
+    beq lbl_taskManager_updateTasks_000005F8
     bl fn_806952C4
-lbl_fn_80473FCC_000005F8:
+lbl_taskManager_updateTasks_000005F8:
     lwz r4, 0x0(r22)
     addi r3, r22, 0x4
     lwz r12, 0x4(r4)
@@ -590,11 +590,11 @@ lbl_fn_80473FCC_000005F8:
     bctrl
     addi r23, r23, 0x1
     addi r19, r19, 0x14
-lbl_fn_80473FCC_00000614:
+lbl_taskManager_updateTasks_00000614:
     lwz r0, 0x0(r21)
     cmplw r23, r0
-    blt lbl_fn_80473FCC_00000540
-lbl_fn_80473FCC_00000620:
+    blt lbl_taskManager_updateTasks_00000540
+lbl_taskManager_updateTasks_00000620:
     lwz r3, 0x4(r20)
     lwz r12, 0x0(r3)
     lwz r12, 0xc(r12)
@@ -602,29 +602,29 @@ lbl_fn_80473FCC_00000620:
     bctrl
     lwz r4, 0x4(r20)
     cmpwi r4, 0x0
-    beq lbl_fn_80473FCC_00000664
+    beq lbl_taskManager_updateTasks_00000664
     lbz r3, 0x4(r4)
     li r0, 0x1
     cmpwi r3, 0x1
-    beq lbl_fn_80473FCC_00000668
+    beq lbl_taskManager_updateTasks_00000668
     lbz r3, 0x4(r4)
     cmpwi r3, 0x2
-    beq lbl_fn_80473FCC_00000668
+    beq lbl_taskManager_updateTasks_00000668
     li r0, 0x0
-    b lbl_fn_80473FCC_00000668
-lbl_fn_80473FCC_00000664:
+    b lbl_taskManager_updateTasks_00000668
+lbl_taskManager_updateTasks_00000664:
     li r0, 0x0
-lbl_fn_80473FCC_00000668:
+lbl_taskManager_updateTasks_00000668:
     cmpwi r0, 0x0
-    beq lbl_fn_80473FCC_0000068C
+    beq lbl_taskManager_updateTasks_0000068C
     lwz r0, 0xf8(r18)
     li r3, 0x0
     srwi r0, r0, 2
     mulhwu r0, r17, r0
     srwi r4, r0, 6
     bl OSSleepTicks
-    b lbl_fn_80473FCC_00000514
-lbl_fn_80473FCC_0000068C:
+    b lbl_taskManager_updateTasks_00000514
+lbl_taskManager_updateTasks_0000068C:
     lmw r16, 0x30(r1)
     lwz r0, 0x74(r1)
     mtlr r0
@@ -664,7 +664,7 @@ lbl_fn_804741C0_000006EC:
     blr
 }
 
-asm void fn_80474224(void)
+asm void atn_LoadMaterial_constructor(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -676,45 +676,45 @@ asm void fn_80474224(void)
     mr r30, r4
     stw r29, 0x14(r1)
     mr r29, r3
-    beq lbl_fn_80474224_000007B4
+    beq lbl_atn_LoadMaterial_constructor_000007B4
     lis r4, lbl_8078FD80@ha
     lwz r31, 0x5c(r3)
     addi r4, r4, lbl_8078FD80@l
     stw r4, 0x0(r3)
-    b lbl_fn_80474224_00000750
-lbl_fn_80474224_00000740:
+    b lbl_atn_LoadMaterial_constructor_00000750
+lbl_atn_LoadMaterial_constructor_00000740:
     lwz r3, 0x0(r31)
     li r4, 0x1
     bl fn_8007C3F8
     addi r31, r31, 0x4
-lbl_fn_80474224_00000750:
+lbl_atn_LoadMaterial_constructor_00000750:
     lwz r0, 0x60(r29)
     lwz r3, 0x5c(r29)
     slwi r0, r0, 2
     add r0, r3, r0
     cmplw r31, r0
-    bne lbl_fn_80474224_00000740
+    bne lbl_atn_LoadMaterial_constructor_00000740
     addic. r4, r29, 0x5c
-    beq lbl_fn_80474224_00000798
-    beq lbl_fn_80474224_00000798
-    beq lbl_fn_80474224_00000798
-    beq lbl_fn_80474224_00000798
+    beq lbl_atn_LoadMaterial_constructor_00000798
+    beq lbl_atn_LoadMaterial_constructor_00000798
+    beq lbl_atn_LoadMaterial_constructor_00000798
+    beq lbl_atn_LoadMaterial_constructor_00000798
     lwz r3, 0x0(r4)
     cmpwi r3, 0x0
-    beq lbl_fn_80474224_00000798
+    beq lbl_atn_LoadMaterial_constructor_00000798
     lwz r0, 0x4(r4)
     subf r0, r0, r0
     stw r0, 0x4(r4)
     bl dtor_80084684
-lbl_fn_80474224_00000798:
+lbl_atn_LoadMaterial_constructor_00000798:
     mr r3, r29
     li r4, 0x0
     bl fn_8047304C
     cmpwi r30, 0x0
-    ble lbl_fn_80474224_000007B4
+    ble lbl_atn_LoadMaterial_constructor_000007B4
     mr r3, r29
     bl dtor_80084684
-lbl_fn_80474224_000007B4:
+lbl_atn_LoadMaterial_constructor_000007B4:
     lwz r31, 0x1c(r1)
     mr r3, r29
     lwz r30, 0x18(r1)
@@ -725,7 +725,7 @@ lbl_fn_80474224_000007B4:
     blr
 }
 
-asm void fn_804742F4(void)
+asm void atn_LoadMaterial_destructor(void)
 {
     nofralloc
     stwu r1, -0x70(r1)
@@ -735,7 +735,7 @@ asm void fn_804742F4(void)
     mr r30, r3
     lbz r0, 0x4(r3)
     cmplwi r0, 0x2
-    bne lbl_fn_804742F4_00000AF8
+    bne lbl_atn_LoadMaterial_destructor_00000AF8
     lwz r17, 0x54(r3)
     lis r20, lbl_80755D68@ha
     lis r4, __files@ha
@@ -750,21 +750,21 @@ asm void fn_804742F4(void)
     lis r26, 0x1555
     lis r28, 0x2aab
     lis r29, lbl_80775A88@ha
-    b lbl_fn_804742F4_00000ACC
-lbl_fn_804742F4_00000830:
+    b lbl_atn_LoadMaterial_destructor_00000ACC
+lbl_atn_LoadMaterial_destructor_00000830:
     addi r5, r20, lbl_80755D68@l
     li r3, 0x54
     mr r6, r5
     li r4, 0x6
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r16, r3
-    beq lbl_fn_804742F4_00000860
+    beq lbl_atn_LoadMaterial_destructor_00000860
     li r4, 0x0
     bl fn_8007C144
     mr r16, r3
-lbl_fn_804742F4_00000860:
+lbl_atn_LoadMaterial_destructor_00000860:
     mr r3, r16
     mr r5, r31
     mr r6, r18
@@ -774,25 +774,25 @@ lbl_fn_804742F4_00000860:
     lwz r4, 0x60(r30)
     lwz r3, 0x64(r30)
     cmplw r4, r3
-    bge lbl_fn_804742F4_000008A4
+    bge lbl_atn_LoadMaterial_destructor_000008A4
     addi r4, r4, 0x1
     lwz r3, 0x5c(r30)
     slwi r0, r4, 2
     stw r4, 0x60(r30)
     add r3, r3, r0
     stw r16, -0x4(r3)
-    b lbl_fn_804742F4_00000AC0
-lbl_fn_804742F4_000008A4:
+    b lbl_atn_LoadMaterial_destructor_00000AC0
+lbl_atn_LoadMaterial_destructor_000008A4:
     subi r0, r21, 0x1
     subf r0, r3, r0
     cmplwi r0, 0x1
-    bge lbl_fn_804742F4_000008C8
+    bge lbl_atn_LoadMaterial_destructor_000008C8
     addi r4, r22, 0x1
     addi r3, r23, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
-lbl_fn_804742F4_000008C8:
+    bl printf
+    bl abort
+lbl_atn_LoadMaterial_destructor_000008C8:
     addi r3, r30, 0x64
     stw r24, 0x14(r1)
     subi r0, r21, 0x1
@@ -807,16 +807,16 @@ lbl_fn_804742F4_000008C8:
     subf r0, r25, r0
     cmplw r3, r0
     stw r3, 0x8(r1)
-    ble lbl_fn_804742F4_00000918
+    ble lbl_atn_LoadMaterial_destructor_00000918
     addi r4, r22, 0x1
     addi r3, r23, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
-lbl_fn_804742F4_00000918:
+    bl printf
+    bl abort
+lbl_atn_LoadMaterial_destructor_00000918:
     addi r0, r26, 0x5555
     cmplw r25, r0
-    bge lbl_fn_804742F4_00000960
+    bge lbl_atn_LoadMaterial_destructor_00000960
     addi r4, r25, 0x1
     subi r5, r27, 0x3333
     slwi r3, r4, 2
@@ -827,51 +827,51 @@ lbl_fn_804742F4_00000918:
     srwi r4, r4, 2
     stw r4, 0x10(r1)
     cmplw r4, r0
-    bge lbl_fn_804742F4_00000954
+    bge lbl_atn_LoadMaterial_destructor_00000954
     addi r3, r1, 0x8
-lbl_fn_804742F4_00000954:
+lbl_atn_LoadMaterial_destructor_00000954:
     lwz r0, 0x0(r3)
     add r18, r25, r0
-    b lbl_fn_804742F4_0000099C
-lbl_fn_804742F4_00000960:
+    b lbl_atn_LoadMaterial_destructor_0000099C
+lbl_atn_LoadMaterial_destructor_00000960:
     subi r0, r28, 0x5556
     cmplw r25, r0
-    bge lbl_fn_804742F4_00000998
+    bge lbl_atn_LoadMaterial_destructor_00000998
     addi r3, r25, 0x1
     lwz r0, 0x8(r1)
     srwi r3, r3, 1
     stw r3, 0xc(r1)
     cmplw r3, r0
     addi r3, r1, 0xc
-    bge lbl_fn_804742F4_0000098C
+    bge lbl_atn_LoadMaterial_destructor_0000098C
     addi r3, r1, 0x8
-lbl_fn_804742F4_0000098C:
+lbl_atn_LoadMaterial_destructor_0000098C:
     lwz r0, 0x0(r3)
     add r18, r25, r0
-    b lbl_fn_804742F4_0000099C
-lbl_fn_804742F4_00000998:
+    b lbl_atn_LoadMaterial_destructor_0000099C
+lbl_atn_LoadMaterial_destructor_00000998:
     subi r18, r21, 0x1
-lbl_fn_804742F4_0000099C:
+lbl_atn_LoadMaterial_destructor_0000099C:
     subi r0, r21, 0x1
     cmplw r18, r0
-    ble lbl_fn_804742F4_000009BC
+    ble lbl_atn_LoadMaterial_destructor_000009BC
     addi r4, r22, 0x1
     addi r3, r23, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
-lbl_fn_804742F4_000009BC:
+    bl printf
+    bl abort
+lbl_atn_LoadMaterial_destructor_000009BC:
     slwi r3, r18, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r25, r3
-    bne lbl_fn_804742F4_000009E4
+    bne lbl_atn_LoadMaterial_destructor_000009E4
     addi r3, r23, 0xa0
     addi r4, r29, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
-lbl_fn_804742F4_000009E4:
+    bl printf
+    bl abort
+lbl_atn_LoadMaterial_destructor_000009E4:
     lwz r0, 0x18(r1)
     stw r25, 0x14(r1)
     slwi r3, r0, 2
@@ -921,30 +921,30 @@ lbl_fn_804742F4_000009E4:
     lwz r0, 0x18(r1)
     stw r0, 0x60(r30)
     stw r24, 0x18(r1)
-    beq lbl_fn_804742F4_00000AC0
+    beq lbl_atn_LoadMaterial_destructor_00000AC0
     lwz r3, 0x14(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_804742F4_00000AC0
+    beq lbl_atn_LoadMaterial_destructor_00000AC0
     stw r24, 0x18(r1)
     bl dtor_80084684
-lbl_fn_804742F4_00000AC0:
+lbl_atn_LoadMaterial_destructor_00000AC0:
     lwz r0, 0x50(r30)
     subf r3, r17, r31
     subf r18, r3, r0
-lbl_fn_804742F4_00000ACC:
+lbl_atn_LoadMaterial_destructor_00000ACC:
     cmpwi r31, 0x0
-    beq lbl_fn_804742F4_00000AE4
+    beq lbl_atn_LoadMaterial_destructor_00000AE4
     lwz r0, 0x50(r30)
     subf r3, r17, r31
     cmpw r3, r0
-    blt lbl_fn_804742F4_00000830
-lbl_fn_804742F4_00000AE4:
+    blt lbl_atn_LoadMaterial_destructor_00000830
+lbl_atn_LoadMaterial_destructor_00000AE4:
     mr r3, r30
     bl fn_80473130
     mr r3, r30
     li r4, 0x3
     bl fn_80473104
-lbl_fn_804742F4_00000AF8:
+lbl_atn_LoadMaterial_destructor_00000AF8:
     lmw r16, 0x30(r1)
     lwz r0, 0x74(r1)
     mtlr r0
@@ -952,7 +952,7 @@ lbl_fn_804742F4_00000AF8:
     blr
 }
 
-asm void fn_8047462C(void)
+asm void atn_LH_Material_onNotify(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -991,11 +991,11 @@ asm void fn_80474678(void)
     mr r28, r5
     bl fn_8046D1EC
     addi r3, r1, 0x10
-    bl fn_8006A950
+    bl atn_normalizePath
     addi r3, r1, 0x10
     bl fn_8006B404
     addi r3, r1, 0x10
-    bl fn_800DC6B4
+    bl str_findChar
     cmpwi r28, 0x0
     mr r5, r3
     li r30, 0x0
@@ -1035,7 +1035,7 @@ lbl_fn_80474678_00000C04:
     li r4, 0x2
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80474678_00000C58
@@ -1051,12 +1051,12 @@ lbl_fn_80474678_00000C04:
 lbl_fn_80474678_00000C58:
     mr r3, r31
     mr r4, r30
-    bl fn_8046C3FC
+    bl atn_Arc_decompressChunk
     cmpwi r3, 0x0
     beq lbl_fn_80474678_00000CF8
     addi r28, r31, 0x3ed0
     li r3, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_80474678_00000CA4
@@ -1066,8 +1066,8 @@ lbl_fn_80474678_00000C58:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80779810@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80474678_00000CA4:
     addic. r3, r29, 0x8
     addi r0, r31, 0x3ed0
@@ -1135,7 +1135,7 @@ lbl_fn_8047486C_00000D60:
     blr
 }
 
-asm void fn_80474888(void)
+asm void atn_LoadModel_constructor(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1148,78 +1148,78 @@ asm void fn_80474888(void)
     mr r29, r4
     stw r28, 0x10(r1)
     mr r28, r3
-    beq lbl_fn_80474888_00000E84
+    beq lbl_atn_LoadModel_constructor_00000E84
     lis r4, lbl_8078FDD8@ha
     li r30, 0x0
     addi r4, r4, lbl_8078FDD8@l
     stw r4, 0x0(r3)
     li r31, 0x0
-    b lbl_fn_80474888_00000DC4
-lbl_fn_80474888_00000DAC:
+    b lbl_atn_LoadModel_constructor_00000DC4
+lbl_atn_LoadModel_constructor_00000DAC:
     lwz r4, 0x80(r28)
     lwz r3, lbl_8087EEE0
     lwzx r4, r4, r31
     bl fn_80076F88
     addi r31, r31, 0x4
     addi r30, r30, 0x1
-lbl_fn_80474888_00000DC4:
+lbl_atn_LoadModel_constructor_00000DC4:
     lwz r0, 0x7c(r28)
     cmplw r30, r0
-    blt lbl_fn_80474888_00000DAC
+    blt lbl_atn_LoadModel_constructor_00000DAC
     addic. r0, r28, 0x84
-    beq lbl_fn_80474888_00000DF4
+    beq lbl_atn_LoadModel_constructor_00000DF4
     lwz r3, 0x88(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_80474888_00000DE8
-    bl fn_80084C24
-lbl_fn_80474888_00000DE8:
+    beq lbl_atn_LoadModel_constructor_00000DE8
+    bl mem_getAllocSize
+lbl_atn_LoadModel_constructor_00000DE8:
     li r0, 0x0
     stw r0, 0x88(r28)
     stw r0, 0x84(r28)
-lbl_fn_80474888_00000DF4:
+lbl_atn_LoadModel_constructor_00000DF4:
     addic. r0, r28, 0x7c
-    beq lbl_fn_80474888_00000E18
+    beq lbl_atn_LoadModel_constructor_00000E18
     lwz r3, 0x80(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_80474888_00000E0C
-    bl fn_80084C24
-lbl_fn_80474888_00000E0C:
+    beq lbl_atn_LoadModel_constructor_00000E0C
+    bl mem_getAllocSize
+lbl_atn_LoadModel_constructor_00000E0C:
     li r0, 0x0
     stw r0, 0x80(r28)
     stw r0, 0x7c(r28)
-lbl_fn_80474888_00000E18:
+lbl_atn_LoadModel_constructor_00000E18:
     addic. r0, r28, 0x70
-    beq lbl_fn_80474888_00000E3C
+    beq lbl_atn_LoadModel_constructor_00000E3C
     lwz r3, 0x74(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_80474888_00000E30
-    bl fn_80084C24
-lbl_fn_80474888_00000E30:
+    beq lbl_atn_LoadModel_constructor_00000E30
+    bl mem_getAllocSize
+lbl_atn_LoadModel_constructor_00000E30:
     li r0, 0x0
     stw r0, 0x74(r28)
     stw r0, 0x70(r28)
-lbl_fn_80474888_00000E3C:
+lbl_atn_LoadModel_constructor_00000E3C:
     addic. r0, r28, 0x68
-    beq lbl_fn_80474888_00000E68
+    beq lbl_atn_LoadModel_constructor_00000E68
     lwz r3, 0x6c(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_80474888_00000E5C
-    beq lbl_fn_80474888_00000E5C
+    beq lbl_atn_LoadModel_constructor_00000E5C
+    beq lbl_atn_LoadModel_constructor_00000E5C
     subi r3, r3, 0x10
-    bl fn_80084C24
-lbl_fn_80474888_00000E5C:
+    bl mem_getAllocSize
+lbl_atn_LoadModel_constructor_00000E5C:
     li r0, 0x0
     stw r0, 0x6c(r28)
     stw r0, 0x68(r28)
-lbl_fn_80474888_00000E68:
+lbl_atn_LoadModel_constructor_00000E68:
     mr r3, r28
     li r4, 0x0
     bl fn_8047304C
     cmpwi r29, 0x0
-    ble lbl_fn_80474888_00000E84
+    ble lbl_atn_LoadModel_constructor_00000E84
     mr r3, r28
     bl dtor_80084684
-lbl_fn_80474888_00000E84:
+lbl_atn_LoadModel_constructor_00000E84:
     lwz r31, 0x1c(r1)
     mr r3, r28
     lwz r30, 0x18(r1)
@@ -1231,7 +1231,7 @@ lbl_fn_80474888_00000E84:
     blr
 }
 
-asm void fn_804749C8(void)
+asm void atn_LoadModel_destructor(void)
 {
     nofralloc
     stwu r1, -0xd0(r1)
@@ -1244,7 +1244,7 @@ asm void fn_804749C8(void)
     stw r28, 0xc0(r1)
     lbz r0, 0x4(r3)
     cmplwi r0, 0x2
-    bne lbl_fn_804749C8_000012CC
+    bne lbl_atn_LoadModel_destructor_000012CC
     li r4, 0x3
     bl fn_80473104
     lwz r29, 0x54(r30)
@@ -1254,7 +1254,7 @@ asm void fn_804749C8(void)
     li r3, 0x0
     stw r3, 0x20(r1)
     extsb. r0, r0
-    bne lbl_fn_804749C8_00000F24
+    bne lbl_atn_LoadModel_destructor_00000F24
     lis r6, lbl_807C8A60@ha
     lis r4, fn_80474E4C@ha
     lis r3, fn_80474E68@ha
@@ -1265,36 +1265,36 @@ asm void fn_804749C8(void)
     stw r4, 0x4(r5)
     stw r3, lbl_807C8A60@l(r6)
     stb r0, lbl_8087F520
-lbl_fn_804749C8_00000F24:
+lbl_atn_LoadModel_destructor_00000F24:
     lis r3, lbl_807C8A60@ha
     lwz r12, lbl_807C8A60@l(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_804749C8_00000F48
+    beq lbl_atn_LoadModel_destructor_00000F48
     addi r3, r1, 0x24
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_804749C8_00000F48:
+lbl_atn_LoadModel_destructor_00000F48:
     lis r0, fn_80474E0C@ha
     addic. r0, r0, 19980
-    beq lbl_fn_804749C8_00000F60
+    beq lbl_atn_LoadModel_destructor_00000F60
     stw r0, 0x24(r1)
     li r0, 0x1
-    b lbl_fn_804749C8_00000F64
-lbl_fn_804749C8_00000F60:
+    b lbl_atn_LoadModel_destructor_00000F64
+lbl_atn_LoadModel_destructor_00000F60:
     li r0, 0x0
-lbl_fn_804749C8_00000F64:
+lbl_atn_LoadModel_destructor_00000F64:
     cmpwi r0, 0x0
-    beq lbl_fn_804749C8_00000F7C
+    beq lbl_atn_LoadModel_destructor_00000F7C
     lis r3, lbl_807C8A60@ha
     addi r3, r3, lbl_807C8A60@l
     stw r3, 0x20(r1)
-    b lbl_fn_804749C8_00000F84
-lbl_fn_804749C8_00000F7C:
+    b lbl_atn_LoadModel_destructor_00000F84
+lbl_atn_LoadModel_destructor_00000F7C:
     li r0, 0x0
     stw r0, 0x20(r1)
-lbl_fn_804749C8_00000F84:
+lbl_atn_LoadModel_destructor_00000F84:
     lwz r5, 0x50(r30)
     mr r4, r29
     mr r7, r30
@@ -1302,54 +1302,54 @@ lbl_fn_804749C8_00000F84:
     addi r6, r1, 0x20
     bl fn_804714B0
     addic. r3, r1, 0x20
-    beq lbl_fn_804749C8_00000FD8
+    beq lbl_atn_LoadModel_destructor_00000FD8
     lwz r4, 0x20(r1)
     cmpwi r4, 0x0
-    beq lbl_fn_804749C8_00000FD8
+    beq lbl_atn_LoadModel_destructor_00000FD8
     lwz r12, 0x0(r4)
     cmpwi r12, 0x0
-    beq lbl_fn_804749C8_00000FD0
+    beq lbl_atn_LoadModel_destructor_00000FD0
     addi r3, r3, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_804749C8_00000FD0:
+lbl_atn_LoadModel_destructor_00000FD0:
     li r0, 0x0
     stw r0, 0x20(r1)
-lbl_fn_804749C8_00000FD8:
+lbl_atn_LoadModel_destructor_00000FD8:
     lwz r31, 0x5c(r30)
     cmpwi r31, 0x0
-    beq lbl_fn_804749C8_000012CC
+    beq lbl_atn_LoadModel_destructor_000012CC
     lwz r3, 0x6c(r30)
     lwz r29, 0x44(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_804749C8_00001000
-    beq lbl_fn_804749C8_00001000
+    beq lbl_atn_LoadModel_destructor_00001000
+    beq lbl_atn_LoadModel_destructor_00001000
     subi r3, r3, 0x10
-    bl fn_80084C24
-lbl_fn_804749C8_00001000:
+    bl mem_getAllocSize
+lbl_atn_LoadModel_destructor_00001000:
     cmpwi r29, 0x0
     stw r29, 0x68(r30)
-    beq lbl_fn_804749C8_00001044
+    beq lbl_atn_LoadModel_destructor_00001044
     mulli r3, r29, 0x30
     li r4, 0x6
     la r5, lbl_8087D7F0
     la r6, lbl_8087D7EC
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r7, r29
     li r4, 0x0
     li r5, 0x0
     li r6, 0x30
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x6c(r30)
-    b lbl_fn_804749C8_0000104C
-lbl_fn_804749C8_00001044:
+    b lbl_atn_LoadModel_destructor_0000104C
+lbl_atn_LoadModel_destructor_00001044:
     li r0, 0x0
     stw r0, 0x6c(r30)
-lbl_fn_804749C8_0000104C:
+lbl_atn_LoadModel_destructor_0000104C:
     li r0, 0x0
     stw r0, 0xc(r1)
     mr r4, r31
@@ -1361,22 +1361,22 @@ lbl_fn_804749C8_0000104C:
     li r9, 0x0
     bl fn_800904E0
     addic. r3, r1, 0xc
-    beq lbl_fn_804749C8_000010B0
+    beq lbl_atn_LoadModel_destructor_000010B0
     lwz r4, 0xc(r1)
     cmpwi r4, 0x0
-    beq lbl_fn_804749C8_000010B0
+    beq lbl_atn_LoadModel_destructor_000010B0
     lwz r12, 0x0(r4)
     cmpwi r12, 0x0
-    beq lbl_fn_804749C8_000010A8
+    beq lbl_atn_LoadModel_destructor_000010A8
     addi r3, r3, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_804749C8_000010A8:
+lbl_atn_LoadModel_destructor_000010A8:
     li r0, 0x0
     stw r0, 0xc(r1)
-lbl_fn_804749C8_000010B0:
+lbl_atn_LoadModel_destructor_000010B0:
     lfs f1, lbl_80886F00
     addi r3, r1, 0x68
     lfs f0, lbl_80886F04
@@ -1396,80 +1396,80 @@ lbl_fn_804749C8_000010B0:
     bl fn_8009A584
     li r28, 0x0
     li r29, 0x0
-    b lbl_fn_804749C8_00001118
-lbl_fn_804749C8_00001100:
+    b lbl_atn_LoadModel_destructor_00001118
+lbl_atn_LoadModel_destructor_00001100:
     lwz r0, 0x6c(r30)
     add r3, r0, r29
     mr r4, r3
-    bl fn_805F8CA0
+    bl PSMTXInverse
     addi r29, r29, 0x30
     addi r28, r28, 0x1
-lbl_fn_804749C8_00001118:
+lbl_atn_LoadModel_destructor_00001118:
     lwz r0, 0x68(r30)
     cmplw r28, r0
-    blt lbl_fn_804749C8_00001100
+    blt lbl_atn_LoadModel_destructor_00001100
     lwz r5, 0x5c(r30)
     li r28, 0x0
     li r4, 0x0
     lwz r0, 0x44(r5)
     mtctr r0
     cmpwi r0, 0x0
-    ble lbl_fn_804749C8_00001160
-lbl_fn_804749C8_00001140:
+    ble lbl_atn_LoadModel_destructor_00001160
+lbl_atn_LoadModel_destructor_00001140:
     lwz r3, 0x48(r5)
     lwzx r3, r3, r4
     lwz r0, 0x70(r3)
     cmpwi r0, 0x0
-    ble lbl_fn_804749C8_00001158
+    ble lbl_atn_LoadModel_destructor_00001158
     addi r28, r28, 0x1
-lbl_fn_804749C8_00001158:
+lbl_atn_LoadModel_destructor_00001158:
     addi r4, r4, 0x4
-    bdnz lbl_fn_804749C8_00001140
-lbl_fn_804749C8_00001160:
+    bdnz lbl_atn_LoadModel_destructor_00001140
+lbl_atn_LoadModel_destructor_00001160:
     cmpwi r28, 0x0
-    ble lbl_fn_804749C8_000011F4
+    ble lbl_atn_LoadModel_destructor_000011F4
     lwz r3, 0x74(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_804749C8_00001178
-    bl fn_80084C24
-lbl_fn_804749C8_00001178:
+    beq lbl_atn_LoadModel_destructor_00001178
+    bl mem_getAllocSize
+lbl_atn_LoadModel_destructor_00001178:
     cmpwi r28, 0x0
     stw r28, 0x70(r30)
-    beq lbl_fn_804749C8_000011A4
+    beq lbl_atn_LoadModel_destructor_000011A4
     slwi r3, r28, 1
     li r4, 0x6
     la r5, lbl_8087D7E8
     la r6, lbl_8087D7E4
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x74(r30)
-    b lbl_fn_804749C8_000011AC
-lbl_fn_804749C8_000011A4:
+    b lbl_atn_LoadModel_destructor_000011AC
+lbl_atn_LoadModel_destructor_000011A4:
     li r0, 0x0
     stw r0, 0x74(r30)
-lbl_fn_804749C8_000011AC:
+lbl_atn_LoadModel_destructor_000011AC:
     li r3, 0x0
     li r6, 0x0
     li r5, 0x0
-    b lbl_fn_804749C8_000011E4
-lbl_fn_804749C8_000011BC:
+    b lbl_atn_LoadModel_destructor_000011E4
+lbl_atn_LoadModel_destructor_000011BC:
     lwz r4, 0x48(r4)
     lwzx r4, r4, r5
     lwz r0, 0x70(r4)
     cmpwi r0, 0x0
-    ble lbl_fn_804749C8_000011DC
+    ble lbl_atn_LoadModel_destructor_000011DC
     lwz r4, 0x74(r30)
     sthx r6, r4, r3
     addi r3, r3, 0x2
-lbl_fn_804749C8_000011DC:
+lbl_atn_LoadModel_destructor_000011DC:
     addi r5, r5, 0x4
     addi r6, r6, 0x1
-lbl_fn_804749C8_000011E4:
+lbl_atn_LoadModel_destructor_000011E4:
     lwz r4, 0x5c(r30)
     lwz r0, 0x44(r4)
     cmpw r6, r0
-    blt lbl_fn_804749C8_000011BC
-lbl_fn_804749C8_000011F4:
+    blt lbl_atn_LoadModel_destructor_000011BC
+lbl_atn_LoadModel_destructor_000011F4:
     mr r3, r30
     mr r4, r31
     bl fn_80474F0C
@@ -1478,60 +1478,60 @@ lbl_fn_804749C8_000011F4:
     lwz r0, 0x3c(r5)
     mtctr r0
     cmpwi r0, 0x0
-    ble lbl_fn_804749C8_0000124C
-lbl_fn_804749C8_00001218:
+    ble lbl_atn_LoadModel_destructor_0000124C
+lbl_atn_LoadModel_destructor_00001218:
     lwz r3, 0x40(r5)
     lwzx r3, r3, r4
     lwz r0, 0x24(r3)
     cmpwi r0, -0x1
-    bne lbl_fn_804749C8_00001238
+    bne lbl_atn_LoadModel_destructor_00001238
     lwz r0, 0x28(r3)
     cmpwi r0, -0x1
-    beq lbl_fn_804749C8_00001244
-lbl_fn_804749C8_00001238:
+    beq lbl_atn_LoadModel_destructor_00001244
+lbl_atn_LoadModel_destructor_00001238:
     li r0, 0x1
     stw r0, 0x78(r30)
-    b lbl_fn_804749C8_0000124C
-lbl_fn_804749C8_00001244:
+    b lbl_atn_LoadModel_destructor_0000124C
+lbl_atn_LoadModel_destructor_00001244:
     addi r4, r4, 0x4
-    bdnz lbl_fn_804749C8_00001218
-lbl_fn_804749C8_0000124C:
+    bdnz lbl_atn_LoadModel_destructor_00001218
+lbl_atn_LoadModel_destructor_0000124C:
     addic. r3, r1, 0x94
-    beq lbl_fn_804749C8_0000128C
-    beq lbl_fn_804749C8_0000128C
+    beq lbl_atn_LoadModel_destructor_0000128C
+    beq lbl_atn_LoadModel_destructor_0000128C
     lwz r4, 0x94(r1)
     cmpwi r4, 0x0
-    beq lbl_fn_804749C8_0000128C
+    beq lbl_atn_LoadModel_destructor_0000128C
     lwz r12, 0x0(r4)
     cmpwi r12, 0x0
-    beq lbl_fn_804749C8_00001284
+    beq lbl_atn_LoadModel_destructor_00001284
     addi r3, r3, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_804749C8_00001284:
+lbl_atn_LoadModel_destructor_00001284:
     li r0, 0x0
     stw r0, 0x94(r1)
-lbl_fn_804749C8_0000128C:
+lbl_atn_LoadModel_destructor_0000128C:
     addic. r3, r1, 0x80
-    beq lbl_fn_804749C8_000012CC
-    beq lbl_fn_804749C8_000012CC
+    beq lbl_atn_LoadModel_destructor_000012CC
+    beq lbl_atn_LoadModel_destructor_000012CC
     lwz r4, 0x80(r1)
     cmpwi r4, 0x0
-    beq lbl_fn_804749C8_000012CC
+    beq lbl_atn_LoadModel_destructor_000012CC
     lwz r12, 0x0(r4)
     cmpwi r12, 0x0
-    beq lbl_fn_804749C8_000012C4
+    beq lbl_atn_LoadModel_destructor_000012C4
     addi r3, r3, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_804749C8_000012C4:
+lbl_atn_LoadModel_destructor_000012C4:
     li r0, 0x0
     stw r0, 0x80(r1)
-lbl_fn_804749C8_000012CC:
+lbl_atn_LoadModel_destructor_000012CC:
     lwz r0, 0xd4(r1)
     lwz r31, 0xcc(r1)
     lwz r30, 0xc8(r1)
@@ -1610,7 +1610,7 @@ lbl_fn_80474E68_000013A4:
     lis r3, lbl_8078FDD0@ha
     lwz r4, lbl_8078FDD0@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_80474E68_000013CC
@@ -1644,7 +1644,7 @@ asm void fn_80474F0C(void)
     cmpwi r0, 0x0
     beq lbl_fn_80474F0C_00001424
     mr r3, r0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80474F0C_00001424:
     cmpwi r14, 0x0
     stw r14, 0x7c(r23)
@@ -1654,7 +1654,7 @@ lbl_fn_80474F0C_00001424:
     la r5, lbl_8087D6EC
     la r6, lbl_8087D6E8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x80(r23)
     b lbl_fn_80474F0C_00001458
 lbl_fn_80474F0C_00001450:
@@ -2083,7 +2083,7 @@ lbl_fn_80474F0C_00001AA8:
     lwz r15, 0x3c(r24)
     cmpwi r3, 0x0
     beq lbl_fn_80474F0C_00001AC4
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80474F0C_00001AC4:
     cmpwi r15, 0x0
     stw r15, 0x84(r23)
@@ -2093,7 +2093,7 @@ lbl_fn_80474F0C_00001AC4:
     la r5, lbl_8087E05C
     la r6, lbl_8087E058
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x88(r23)
     b lbl_fn_80474F0C_00001AF8
 lbl_fn_80474F0C_00001AF0:

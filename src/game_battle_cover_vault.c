@@ -10,19 +10,19 @@ extern void fn_800577D8(void);
 extern void fn_80058078(void);
 extern void fn_800580BC(void);
 extern void fn_800588FC(void);
-extern void fn_8005B9CC(void);
+extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void fn_80063D3C(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
 extern void fn_80092F1C(void);
-extern void fn_80097A88(void);
+extern void atn_Anim_applyLayerTransform(void);
 extern void fn_80097B34(void);
-extern void fn_80097C08(void);
-extern void fn_800D246C(void);
-extern void fn_800DC288(void);
+extern void atn_Anim_setLayerAnimation(void);
+extern void atn_Task_setActive(void);
+extern void str_skipWhitespace(void);
 extern void fn_8011BE54(void);
 extern void fn_8011F91C(void);
 extern void fn_8011FC10(void);
@@ -35,29 +35,29 @@ extern void fn_801644D4(void);
 extern void fn_80176ACC(void);
 extern void fn_8017CB2C(void);
 extern void fn_802180A8(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_80237654(void);
 extern void fn_802376D0(void);
-extern void fn_8023780C(void);
-extern void fn_80237874(void);
-extern void fn_80239DAC(void);
+extern void res_MsgHandle_destructor(void);
+extern void res_MsgHandle_update(void);
+extern void res_findResourceSlot(void);
 extern void fn_8023A02C(void);
 extern void fn_8023A680(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void fn_803E598C(void);
 extern void fn_803EC568(void);
 extern void fn_803EC7A0(void);
 extern void fn_803EC91C(void);
 extern void fn_803ED774(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void fn_80499B9C(void);
 extern void fn_80499C48(void);
 extern void fn_8049D68C(void);
-extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_80682428(void);
+extern void PSMTXConcat(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void strcmp(void);
 extern char* strcpy(char* dest, const char* src);
 
 /* External data declarations */
@@ -149,7 +149,7 @@ asm void fn_803F8324(void)
     stfs f7, 0x28(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x1c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f9, 0x20(r1)
     addi r30, r1, 0x150
     lfs f8, 0x14(r1)
@@ -182,11 +182,11 @@ asm void fn_803F8324(void)
     beq lbl_fn_803F8324_0000016C
     addi r3, r1, 0x60
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x60
     addi r5, r1, 0x30
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x30
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -207,11 +207,11 @@ lbl_fn_803F8324_0000016C:
     beq lbl_fn_803F8324_000001CC
     addi r3, r1, 0xc0
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0xc0
     addi r5, r1, 0x90
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x90
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -232,11 +232,11 @@ lbl_fn_803F8324_000001CC:
     beq lbl_fn_803F8324_0000022C
     addi r3, r1, 0x120
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x120
     addi r5, r1, 0xf0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xf0
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -254,7 +254,7 @@ lbl_fn_803F8324_0000022C:
     addi r4, r1, 0x1c0
     addi r3, r1, 0x150
     mr r5, r4
-    bl fn_805F89F0
+    bl PSMTXConcat
     lfs f0, 0x20(r1)
     addi r5, r1, 0x1c0
     stfs f0, 0x1cc(r1)
@@ -460,7 +460,7 @@ lbl_fn_803F87E0_00000500:
     b lbl_fn_803F87E0_00000558
 lbl_fn_803F87E0_00000518:
     addi r3, r31, 0x92c
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     beq lbl_fn_803F87E0_00000530
     li r3, 0x1
@@ -497,10 +497,10 @@ asm void fn_803F8890(void)
     stw r28, 0x740(r1)
     mr r28, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r31, r3
     addi r3, r28, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -536,17 +536,17 @@ asm void fn_803F8890(void)
     addi r30, r3, lbl_807523EC@l
 lbl_fn_803F8890_00000624:
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lbz r0, 0x0(r3)
     mr r29, r3
     cmpwi r0, 0x3b
     beq lbl_fn_803F8890_00000944
     addi r4, r30, 0x1
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803F8890_0000067C
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r28, 0xf4
     li r5, 0x0
@@ -560,17 +560,17 @@ lbl_fn_803F8890_00000624:
 lbl_fn_803F8890_0000067C:
     mr r3, r29
     addi r4, r30, 0x7
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803F8890_000006C4
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r1, 0x8
     bl strcpy
     addi r3, r1, 0x108
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     addi r3, r28, 0xf4
     addi r4, r1, 0x8
     li r5, 0x0
@@ -579,30 +579,30 @@ lbl_fn_803F8890_0000067C:
 lbl_fn_803F8890_000006C4:
     mr r3, r29
     addi r4, r30, 0x11
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803F8890_0000070C
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r1, 0x8
     bl strcpy
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_802180A8
     stw r3, 0x970(r28)
     mr r4, r3
     addi r3, r28, 0xf4
     addi r5, r1, 0x8
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
 lbl_fn_803F8890_0000070C:
     mr r3, r29
     addi r4, r30, 0x18
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803F8890_0000073C
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r28, 0x4c8
     bl fn_80058078
@@ -611,79 +611,79 @@ lbl_fn_803F8890_0000070C:
 lbl_fn_803F8890_0000073C:
     mr r3, r29
     addi r4, r30, 0x25
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803F8890_000007E8
     addi r3, r1, 0x108
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     stfs f1, 0x974(r28)
     addi r3, r1, 0x108
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     stfs f1, 0x978(r28)
     addi r3, r1, 0x108
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     stfs f1, 0x97c(r28)
     addi r3, r1, 0x108
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     stfs f1, 0x980(r28)
     addi r3, r1, 0x108
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     stfs f1, 0x984(r28)
     addi r3, r1, 0x108
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     stfs f1, 0x988(r28)
     addi r3, r1, 0x108
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     stfs f1, 0x98c(r28)
     addi r3, r1, 0x108
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     stfs f1, 0x990(r28)
     addi r3, r1, 0x108
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     stfs f1, 0x994(r28)
     stw r31, 0x8cc(r28)
     b lbl_fn_803F8890_00000944
 lbl_fn_803F8890_000007E8:
     mr r3, r29
     addi r4, r30, 0x2f
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803F8890_00000844
     addi r3, r1, 0x108
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     stfs f1, 0x998(r28)
     addi r3, r1, 0x108
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     stfs f1, 0x99c(r28)
     addi r3, r1, 0x108
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     stfs f1, 0x9a0(r28)
     addi r3, r1, 0x108
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     stfs f1, 0x9a4(r28)
     stw r31, 0x91c(r28)
     b lbl_fn_803F8890_00000944
 lbl_fn_803F8890_00000844:
     mr r3, r29
     addi r4, r30, 0x3c
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803F8890_00000870
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r28, 0x920
     bl fn_80237654
@@ -691,23 +691,23 @@ lbl_fn_803F8890_00000844:
 lbl_fn_803F8890_00000870:
     mr r3, r29
     addi r4, r30, 0x40
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803F8890_0000089C
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r28, 0x92c
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     b lbl_fn_803F8890_00000944
 lbl_fn_803F8890_0000089C:
     mr r3, r29
     addi r4, r30, 0x44
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803F8890_000008D8
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     mr r3, r28
     bl fn_8049D68C
@@ -719,17 +719,17 @@ lbl_fn_803F8890_0000089C:
 lbl_fn_803F8890_000008D8:
     mr r3, r29
     addi r4, r30, 0x48
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803F8890_00000924
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r1, 0x8
     bl strcpy
     addi r3, r1, 0x8
     addi r4, r30, 0x4d
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     li r0, 0x1
     bne lbl_fn_803F8890_0000091C
@@ -740,7 +740,7 @@ lbl_fn_803F8890_0000091C:
 lbl_fn_803F8890_00000924:
     mr r3, r29
     addi r4, r30, 0x50
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803F8890_00000944
     mr r3, r28
@@ -771,7 +771,7 @@ asm void fn_803F8C98(void)
     mr r30, r4
     mr r29, r3
     mr r3, r30
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lis r28, lbl_807523EC@ha
     mr r27, r3
     addi r31, r28, lbl_807523EC@l
@@ -779,7 +779,7 @@ asm void fn_803F8C98(void)
 lbl_fn_803F8C98_000009A4:
     mr r3, r27
     addi r4, r31, 0x55
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803F8C98_000009C8
     lwz r0, 0x9ac(r29)
@@ -789,7 +789,7 @@ lbl_fn_803F8C98_000009A4:
 lbl_fn_803F8C98_000009C8:
     mr r3, r27
     addi r4, r31, 0x68
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803F8C98_000009EC
     lwz r0, 0x9ac(r29)
@@ -799,7 +799,7 @@ lbl_fn_803F8C98_000009C8:
 lbl_fn_803F8C98_000009EC:
     mr r3, r27
     addi r4, r31, 0x77
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803F8C98_00000A10
     lwz r0, 0x9ac(r29)
@@ -809,7 +809,7 @@ lbl_fn_803F8C98_000009EC:
 lbl_fn_803F8C98_00000A10:
     mr r3, r27
     addi r4, r31, 0x8b
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803F8C98_00000A34
     lwz r0, 0x9ac(r29)
@@ -819,7 +819,7 @@ lbl_fn_803F8C98_00000A10:
 lbl_fn_803F8C98_00000A34:
     mr r3, r27
     addi r4, r31, 0x99
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803F8C98_00000A58
     lwz r0, 0x9ac(r29)
@@ -829,7 +829,7 @@ lbl_fn_803F8C98_00000A34:
 lbl_fn_803F8C98_00000A58:
     mr r3, r27
     addi r4, r31, 0xab
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803F8C98_00000A7C
     lwz r0, 0x9ac(r29)
@@ -839,7 +839,7 @@ lbl_fn_803F8C98_00000A58:
 lbl_fn_803F8C98_00000A7C:
     mr r3, r27
     addi r4, r31, 0xbf
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803F8C98_00000AA0
     lwz r0, 0x9ac(r29)
@@ -849,7 +849,7 @@ lbl_fn_803F8C98_00000A7C:
 lbl_fn_803F8C98_00000AA0:
     mr r3, r27
     addi r4, r31, 0xcb
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803F8C98_00000AC4
     lwz r0, 0x9ac(r29)
@@ -859,7 +859,7 @@ lbl_fn_803F8C98_00000AA0:
 lbl_fn_803F8C98_00000AC4:
     mr r3, r27
     addi r4, r31, 0xdf
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803F8C98_00000AE8
     lwz r0, 0x9ac(r29)
@@ -869,7 +869,7 @@ lbl_fn_803F8C98_00000AC4:
 lbl_fn_803F8C98_00000AE8:
     mr r3, r27
     addi r4, r31, 0xf0
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803F8C98_00000B08
     lwz r0, 0x9ac(r29)
@@ -877,14 +877,14 @@ lbl_fn_803F8C98_00000AE8:
     stw r0, 0x9ac(r29)
 lbl_fn_803F8C98_00000B08:
     mr r3, r30
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r27, r3
 lbl_fn_803F8C98_00000B14:
     cmpwi r27, 0x0
     beq lbl_fn_803F8C98_00000B30
     mr r4, r27
     addi r3, r28, lbl_807523EC@l
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803F8C98_000009A4
 lbl_fn_803F8C98_00000B30:
@@ -929,7 +929,7 @@ lbl_fn_803F8E68_00000BA0:
     bl fn_803F8F30
     li r3, 0x0
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     li r0, 0x0
     stw r0, 0x8(r1)
     li r3, -0x1
@@ -1011,7 +1011,7 @@ lbl_fn_803F8F30_00000CB0:
     lfs f2, lbl_80886024
     li r4, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
 lbl_fn_803F8F30_00000CC8:
     lwz r3, 0x9ac(r31)
     lwz r4, 0x96c(r31)
@@ -1112,7 +1112,7 @@ lbl_fn_803F8F30_00000E00:
     li r5, 0x0
     extrwi r0, r0, 1, 29
     xori r6, r0, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r0, 0x96c(r31)
     cmpwi r0, 0x0
     bne lbl_fn_803F8F30_00000E38
@@ -1123,7 +1123,7 @@ lbl_fn_803F8F30_00000E00:
 lbl_fn_803F8F30_00000E38:
     mr r3, r31
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r3, lbl_8087F3C0
     li r0, 0x1
     stw r0, 0xb8(r3)
@@ -1188,7 +1188,7 @@ lbl_fn_803F8F30_00000EC0:
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     b lbl_fn_803F8F30_00001078
 lbl_fn_803F8F30_00000F40:
     lwz r12, 0x0(r31)
@@ -1227,7 +1227,7 @@ lbl_fn_803F8F30_00000F40:
     stw r11, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     b lbl_fn_803F8F30_00001078
 lbl_fn_803F8F30_00000FD8:
     lfs f0, lbl_80886018
@@ -1270,7 +1270,7 @@ lbl_fn_803F8F30_0000102C:
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_803F8F30_00001078:
     lwz r0, 0x9ac(r31)
     rlwinm r0, r0, 0, 25, 25
@@ -1314,10 +1314,8 @@ asm void fn_803F9400(void)
     blr
 }
 
-asm void fn_803F9408(void)
+void fn_803F9408(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_803F940C(void)
@@ -1349,7 +1347,7 @@ asm void fn_803F9420(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_803F9420_00001194
@@ -1757,7 +1755,7 @@ lbl_fn_803F9624_000016EC:
     bl fn_80176ACC
     lwz r3, 0xf8(r30)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0xf8(r30)
     lwz r0, 0x12a4(r3)
     extrwi. r0, r0, 1, 6
@@ -1793,11 +1791,11 @@ lbl_fn_803F9624_0000171C:
     stfs f0, 0x70(r1)
     stfs f0, 0x74(r1)
     lfs f1, 0x14(r5)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x70
     addi r3, r1, 0xa0
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lwz r3, 0xf4(r30)
     addi r4, r1, 0x38
     lfs f0, lbl_80886028

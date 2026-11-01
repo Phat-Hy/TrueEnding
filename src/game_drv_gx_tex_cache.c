@@ -60,10 +60,10 @@ extern void fn_805E3F20(void);
 extern void fn_805E4070(void);
 extern void fn_805E4080(void);
 extern void fn_805F2670(void);
-extern void fn_805F27A0(void);
+extern void OSReceiveMessage(void);
 extern void fn_805F2880(void);
-extern void fn_805F30F0(void);
-extern void fn_805F8980(void);
+extern void OSInitMutex(void);
+extern void PSMTXIdentity(void);
 extern void fn_806078D0(void);
 extern void fn_80607900(void);
 extern void fn_80607D70(void);
@@ -79,18 +79,18 @@ extern void fn_80615D50(void);
 extern void fn_80617200(void);
 extern void fn_806173E0(void);
 extern void fn_80617420(void);
-extern void fn_80617460(void);
+extern void GXSetTevIndirect(void);
 extern void fn_806174C0(void);
-extern void fn_806176F0(void);
+extern void GXSetTevSwapMode(void);
 extern void fn_80617730(void);
 extern void fn_806177B0(void);
 extern void fn_80617880(void);
-extern void fn_806179E0(void);
+extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
-extern void fn_80617DD0(void);
-extern void fn_80617E00(void);
-extern void fn_80618350(void);
-extern void fn_80618400(void);
+extern void GXSetDither(void);
+extern void GXSetZMode(void);
+extern void GXLoadPosMtxImm(void);
+extern void GXSetCurrentMtx(void);
 extern void fn_80619920(void);
 extern void fn_806199D0(void);
 extern void fn_8061A0F0(void);
@@ -101,8 +101,8 @@ extern void fn_80625C90(void);
 extern void fn_806263E0(void);
 extern void fn_8065F520(void);
 extern void fn_806823B0(void);
-extern void fn_80682428(void);
-extern void fn_8068AEAC(void);
+extern void strcmp(void);
+extern void std_sqrt(void);
 extern char* strcpy(char* dest, const char* src);
 
 /* External data declarations */
@@ -173,7 +173,7 @@ lbl_fn_805C3330_00000020:
     li r5, 0x1
     addis r3, r3, 0x1
     addi r3, r3, 0x4680
-    bl fn_805F27A0
+    bl OSReceiveMessage
     lwz r0, 0x8(r1)
     cmplwi r0, 0x1
     bne lbl_fn_805C3330_0000021C
@@ -756,7 +756,7 @@ asm void fn_805C3B20(void)
     li r29, -0x388
     b lbl_fn_805C3B20_00000860
 lbl_fn_805C3B20_0000083C:
-    bl fn_8068AEAC
+    bl std_sqrt
     frsp f2, f1
     lfs f1, 0x30(r31)
     lfs f0, 0x2c(r31)
@@ -1117,12 +1117,12 @@ asm void fn_805C3FE0(void)
     stw r0, 0x44(r1)
     bl fn_80614A80
     addi r3, r1, 0x8
-    bl fn_805F8980
+    bl PSMTXIdentity
     addi r3, r1, 0x8
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
@@ -1154,7 +1154,7 @@ asm void fn_805C3FE0(void)
     li r3, 0x0
     bl fn_80613BB0
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0xff
     li r5, 0xff
@@ -1172,7 +1172,7 @@ asm void fn_805C3FE0(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x0
     li r4, 0x7
     li r5, 0x7
@@ -1198,11 +1198,11 @@ asm void fn_805C3FE0(void)
     li r6, 0x5
     bl fn_80617D50
     li r3, 0x0
-    bl fn_80617DD0
+    bl GXSetDither
     li r3, 0x0
     li r4, 0x7
     li r5, 0x0
-    bl fn_80617E00
+    bl GXSetZMode
     li r3, 0x0
     bl fn_80615400
     li r3, 0x0
@@ -1216,7 +1216,7 @@ asm void fn_805C3FE0(void)
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     lwz r0, 0x44(r1)
     mtlr r0
     addi r1, r1, 0x40
@@ -1284,7 +1284,7 @@ lbl_fn_805C41A0_00000F1C:
     bl OSCreateAlarm
     lis r3, lbl_807CA150@ha
     addi r3, r3, lbl_807CA150@l
-    bl fn_805F30F0
+    bl OSInitMutex
     lwz r31, 0x1c(r1)
     mr r3, r28
     lwz r30, 0x18(r1)
@@ -1686,17 +1686,17 @@ lbl_fn_805C4690_000014D8:
     addi r22, r24, 0xb0
     addi r4, r28, 0xb38
     mr r3, r22
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_805C4690_00001518
     mr r3, r22
     addi r4, r28, 0xb40
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_805C4690_00001518
     mr r3, r22
     addi r4, r28, 0xb48
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_805C4690_00001528
 lbl_fn_805C4690_00001518:
@@ -2107,7 +2107,7 @@ lbl_fn_805C4690_00001AA8:
     stb r0, 0x248(r31)
     stfs f0, 0x20(r1)
     stfs f0, 0x23c(r31)
-    bl fn_805F8980
+    bl PSMTXIdentity
     lwz r3, 0x28(r1)
     lis r27, lbl_807CA210@ha
     lwz r0, 0x2c(r1)

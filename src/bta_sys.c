@@ -71,7 +71,7 @@ extern void fn_8065C630(void);
 extern void fn_8065C6B0(void);
 extern void fn_8065C750(void);
 extern void fn_8065CDA0(void);
-extern void fn_8068093C(void);
+extern void vsprintf(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -134,7 +134,7 @@ void fn_80629710(void);
 void fn_80629720(void);
 void fn_80629750(void);
 void fn_80629810(void);
-void fn_80629830(void);
+void bta_sys_log(void);
 void fn_80629850(void);
 void fn_80629870(void);
 void fn_80629890(void);
@@ -148,7 +148,7 @@ void fn_80629A60(void);
 void fn_80629AA0(void);
 void fn_80629E20(void);
 void fn_80629E90(void);
-void fn_80629EA4(void);
+void bd_addr_copy(void);
 void fn_80629ED8(void);
 void fn_80629F78(void);
 void fn_80629F88(void);
@@ -1391,7 +1391,7 @@ lbl_fn_80629750_000010B4:
     stw r12, 0x68(r1)
     stw r11, 0x6c(r1)
     stw r0, 0x70(r1)
-    bl fn_8068093C
+    bl vsprintf
     addi r3, r31, lbl_8081E2E0@l
     la r4, lbl_8087EAB8
     mr r5, r3
@@ -1418,7 +1418,7 @@ asm void fn_80629810(void)
     blr
 }
 
-asm void fn_80629830(void)
+asm void bta_sys_log(void)
 {
     nofralloc
     lbz r0, lbl_80880178
@@ -1931,7 +1931,7 @@ asm void fn_80629E90(void)
     b fn_80627ED0
 }
 
-asm void fn_80629EA4(void)
+asm void bd_addr_copy(void)
 {
     nofralloc
     lbz r9, 0x0(r4)

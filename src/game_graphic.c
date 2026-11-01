@@ -18,35 +18,35 @@ extern void fn_800763FC(void);
 extern void fn_800827E0(void);
 extern void fn_800839EC(void);
 extern void fn_80083AD4(void);
-extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_realloc(void);
+extern void mem_getAllocSize(void);
 extern void fn_800A96AC(void);
-extern void fn_800A981C(void);
+extern void layout_drawPane(void);
 extern void fn_800AE568(void);
 extern void fn_800BFAC8(void);
 extern void fn_800BFB70(void);
 extern void fn_800BFC18(void);
 extern void fn_800C0508(void);
 extern void fn_800C1424(void);
-extern void fn_800D5738(void);
+struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void fn_800D594C(void);
-extern void fn_805F8C50(void);
-extern void fn_805F8CA0(void);
-extern void fn_805F93C0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9990(void);
-extern void fn_80613960(void);
+extern void PSMTXTranspose(void);
+extern void PSMTXInverse(void);
+extern void PSMTXMultVec(void);
+extern void PSVECNormalize(void);
+extern void PSVECDotProduct(void);
+extern void __GXSetVtxDesc(void);
 extern void fn_80613BB0(void);
 extern void fn_80614190(void);
-extern void fn_80614CC0(void);
-extern void fn_80614D30(void);
-extern void fn_80615560(void);
+extern void GXSetTexCopySrc(void);
+extern void GXSetTexCopyDst(void);
+extern void GXCopyTex(void);
 extern void fn_80615D20(void);
 extern void fn_80615D50(void);
 extern void fn_80615E00(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
-extern void fn_806167B0(void);
+extern void GXDrawDone(void);
 extern void fn_80616EF0(void);
 extern void fn_80617030(void);
 extern void fn_80617130(void);
@@ -56,18 +56,18 @@ extern void fn_80617270(void);
 extern void fn_80617340(void);
 extern void fn_806173E0(void);
 extern void fn_80617420(void);
-extern void fn_80617460(void);
+extern void GXSetTevIndirect(void);
 extern void fn_806174C0(void);
 extern void fn_806175F0(void);
-extern void fn_80617650(void);
-extern void fn_806176F0(void);
+extern void GXSetTevKColorSel(void);
+extern void GXSetTevSwapMode(void);
 extern void fn_80617880(void);
-extern void fn_806179E0(void);
+extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
-extern void fn_80617E00(void);
-extern void fn_80618420(void);
-extern void fn_8068AEB0(void);
-extern void fn_80695720(void);
+extern void GXSetZMode(void);
+extern void GXLoadTexMtxImm(void);
+extern void std_pow(void);
+extern void runtime_registerStaticObject(void);
 
 /* External data declarations */
 extern u8 lbl_80732C78[];
@@ -126,8 +126,8 @@ void fn_800AF544(void);
 void fn_800AFE40(void);
 void fn_800AFEBC(void);
 void fn_800AFFEC(void);
-void fn_800B089C(void);
-void fn_800B0A44(void);
+void graphic_initViewportTransform(void);
+void graphic_dummyCallback(void);
 void fn_800B0A48(void);
 void fn_800B0A70(void);
 
@@ -227,7 +227,7 @@ lbl_fn_800AEF68_00000148:
     psq_st f1, 0x0(r3), 0, 0
     mr r4, r3
     stfs f2, 0x64(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f9, 0x64(r1)
     addi r5, r1, 0x74
     lfs f8, lbl_80880E1C
@@ -294,7 +294,7 @@ lbl_fn_800AEF68_000001CC:
     psq_l f1, 0x0(r6), 0, 0
     psq_st f1, 0x0(r29), 0, 0
     stfs f2, 0xc4(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lwz r5, lbl_8087EFB4
     addi r28, r1, 0x44
     addi r6, r1, 0x20
@@ -315,7 +315,7 @@ lbl_fn_800AEF68_000001CC:
     psq_l f1, 0x0(r6), 0, 0
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0x4c(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     addi r27, r1, 0xb0
     psq_l f1, 0x0(r28), 0, 0
     lfs f2, 0x4c(r1)
@@ -323,10 +323,10 @@ lbl_fn_800AEF68_000001CC:
     psq_st f1, 0x0(r27), 0, 0
     mr r4, r27
     stfs f2, 0xb8(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     mr r3, r29
     mr r4, r27
-    bl fn_805F9990
+    bl PSVECDotProduct
     lis r3, lbl_80732C80@ha
     lfd f0, lbl_80732C80@l(r3)
     fcmpo cr0, f1, f0
@@ -442,7 +442,7 @@ lbl_fn_800AEF68_0000043C:
 lbl_fn_800AEF68_0000046C:
     addi r3, r1, 0xa4
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     lwz r5, lbl_8087EFB4
     addi r27, r1, 0x100
     lfs f0, lbl_80880E10
@@ -463,10 +463,10 @@ lbl_fn_800AEF68_0000046C:
     stfs f0, 0x10c(r1)
     stfs f0, 0x11c(r1)
     stfs f0, 0x12c(r1)
-    bl fn_805F8CA0
+    bl PSMTXInverse
     mr r3, r27
     mr r4, r27
-    bl fn_805F8C50
+    bl PSMTXTranspose
     addi r3, r1, 0xa4
     addi r4, r1, 0x98
     psq_l f1, 0x0(r3), 0, 0
@@ -475,7 +475,7 @@ lbl_fn_800AEF68_0000046C:
     mr r5, r4
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0xa0(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f7, 0x9c(r1)
     addi r3, r1, 0x10
     lfs f0, 0x98(r1)
@@ -553,13 +553,13 @@ asm void fn_800AF544(void)
     stw r0, 0x60(r1)
     li r4, 0x3
     li r5, 0x0
-    bl fn_80617E00
+    bl GXSetZMode
     lfs f1, 0x74(r24)
     lfs f0, lbl_80880E20
     lwz r29, 0x4(r24)
     fcmpo cr0, f1, f0
     blt lbl_fn_800AF544_00000EC0
-    bl fn_806167B0
+    bl GXDrawDone
     lwz r4, lbl_8087EEE0
     li r23, 0x1
     lwz r0, 0x14(r29)
@@ -631,7 +631,7 @@ lbl_fn_800AF544_0000065C:
     cmpwi r0, 0x0
     beq lbl_fn_800AF544_00000790
     li r3, 0x2
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x3
     bl fn_80613BB0
     li r3, 0x1
@@ -649,11 +649,11 @@ lbl_fn_800AF544_0000065C:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     b lbl_fn_800AF544_000007B0
 lbl_fn_800AF544_00000790:
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x2
     bl fn_80613BB0
     li r3, 0x1
@@ -684,14 +684,14 @@ lbl_fn_800AF544_000007B0:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x1
     li r4, 0x1
     li r5, 0x4
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x0
     li r4, 0x1
     li r5, 0x1
@@ -731,7 +731,7 @@ lbl_fn_800AF544_000007B0:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -740,7 +740,7 @@ lbl_fn_800AF544_000007B0:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     lwz r0, 0x14(r29)
     cmpwi r0, 0x0
     beq lbl_fn_800AF544_00000954
@@ -756,7 +756,7 @@ lbl_fn_800AF544_000007B0:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x1
     li r4, 0x2
     li r5, 0x2
@@ -765,7 +765,7 @@ lbl_fn_800AF544_000007B0:
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
 lbl_fn_800AF544_00000954:
     li r3, 0x0
     li r4, 0x4
@@ -799,28 +799,28 @@ lbl_fn_800AF544_000009A8:
     clrlslwi r6, r26, 17, 1
     li r3, 0x0
     li r4, 0x0
-    bl fn_80614CC0
+    bl GXSetTexCopySrc
     mr r5, r25
     clrlwi r3, r27, 16
     clrlwi r4, r26, 16
     li r6, 0x1
-    bl fn_80614D30
+    bl GXSetTexCopyDst
     b lbl_fn_800AF544_00000A10
 lbl_fn_800AF544_000009E8:
     clrlwi r5, r27, 16
     clrlwi r6, r26, 16
     li r3, 0x0
     li r4, 0x0
-    bl fn_80614CC0
+    bl GXSetTexCopySrc
     mr r5, r25
     clrlwi r3, r27, 16
     clrlwi r4, r26, 16
     li r6, 0x0
-    bl fn_80614D30
+    bl GXSetTexCopyDst
 lbl_fn_800AF544_00000A10:
     mr r3, r28
     li r4, 0x1
-    bl fn_80615560
+    bl GXCopyTex
     bl fn_80614190
     lwz r3, lbl_8087EEE0
     bl fn_80075DEC
@@ -833,7 +833,7 @@ lbl_fn_800AF544_00000A10:
     addi r3, r24, 0x8
     li r8, 0x0
     li r9, 0x0
-    bl fn_800A981C
+    bl layout_drawPane
     lfs f1, lbl_80880E10
     mr r4, r28
     lfs f2, lbl_80880E0C
@@ -843,7 +843,7 @@ lbl_fn_800AF544_00000A10:
     addi r3, r1, 0x38
     li r8, 0x0
     li r9, 0x0
-    bl fn_800A981C
+    bl layout_drawPane
     lwz r0, 0x18(r29)
     cmpwi r0, 0x0
     beq lbl_fn_800AF544_00000A8C
@@ -889,7 +889,7 @@ lbl_fn_800AF544_00000AE4:
     fmuls f2, f2, f0
     li r8, 0x0
     li r9, 0x1
-    bl fn_800A981C
+    bl layout_drawPane
     addi r22, r22, 0x1
 lbl_fn_800AF544_00000B20:
     lwz r0, 0xc(r29)
@@ -901,7 +901,7 @@ lbl_fn_800AF544_00000B2C:
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x2
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     bl fn_80617200
     lfs f5, 0x28(r29)
@@ -1009,7 +1009,7 @@ lbl_fn_800AF544_00000C1C:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x0
     li r4, 0xf
     li r5, 0xf
@@ -1025,14 +1025,14 @@ lbl_fn_800AF544_00000C1C:
     bl fn_80617220
     li r3, 0x1
     li r4, 0xc
-    bl fn_80617650
+    bl GXSetTevKColorSel
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x1
     li r4, 0xf
     li r5, 0x8
@@ -1052,14 +1052,14 @@ lbl_fn_800AF544_00000C1C:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x1
     li r4, 0x1
     li r5, 0x4
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lwz r4, lbl_8087EFB4
     li r5, 0x0
     lwz r3, lbl_8087EEE0
@@ -1366,11 +1366,11 @@ lbl_fn_800AFFEC_000011D4:
     lfd f0, 0x50(r1)
     fsubs f27, f0, f31
     fmr f1, f27
-    bl fn_8068AEB0
+    bl std_pow
     frsp f29, f1
     lfs f2, 0x9c(r28)
     fmr f1, f27
-    bl fn_8068AEB0
+    bl std_pow
     frsp f1, f1
     addi r29, r29, 0x1
     fadds f0, f30, f29
@@ -1593,7 +1593,7 @@ lbl_fn_800AFFEC_000014D0:
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     bl fn_80617200
     li r3, 0x0
@@ -1610,7 +1610,7 @@ lbl_fn_800AFFEC_000014D0:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x0
     bl fn_80617220
     lwz r4, lbl_8087EFB4
@@ -1635,23 +1635,23 @@ lbl_fn_800AFFEC_000014D0:
     clrlwi r6, r26, 16
     li r3, 0x0
     li r4, 0x0
-    bl fn_80614CC0
+    bl GXSetTexCopySrc
     clrlwi r3, r27, 16
     clrlwi r4, r26, 16
     li r5, 0x4
     li r6, 0x0
-    bl fn_80614D30
+    bl GXSetTexCopyDst
     slwi r0, r29, 2
     li r4, 0x1
     add r3, r28, r0
     lwz r3, 0x84(r3)
-    bl fn_80615560
+    bl GXCopyTex
     li r3, 0x1
     bl fn_80613BB0
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     bl fn_80617200
     li r3, 0x0
@@ -1676,7 +1676,7 @@ lbl_fn_800AFFEC_000014D0:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x0
     bl fn_80617220
     lwz r4, lbl_8087EFB4
@@ -1862,7 +1862,7 @@ lbl_fn_800AFFEC_000018F4:
     blr
 }
 
-asm void fn_800B089C(void)
+asm void graphic_initViewportTransform(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1910,16 +1910,16 @@ asm void fn_800B089C(void)
     stw r0, 0x80(r3)
     stw r0, 0x84(r3)
     addi r3, r3, 0x88
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     addi r3, r30, 0xb8
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     lwz r3, 0x84(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_800B089C_00001A0C
-    beq lbl_fn_800B089C_00001A0C
+    beq lbl_graphic_initViewportTransform_00001A0C
+    beq lbl_graphic_initViewportTransform_00001A0C
     subi r3, r3, 0x10
-    bl fn_80084C24
-lbl_fn_800B089C_00001A0C:
+    bl mem_getAllocSize
+lbl_graphic_initViewportTransform_00001A0C:
     li r0, 0x100
     stw r0, 0x80(r30)
     mulli r3, r0, 0x1c
@@ -1928,31 +1928,31 @@ lbl_fn_800B089C_00001A0C:
     la r6, lbl_8087D870
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
-    lis r4, fn_800B0A44@ha
+    bl mem_realloc
+    lis r4, graphic_dummyCallback@ha
     li r5, 0x0
-    addi r4, r4, fn_800B0A44@l
+    addi r4, r4, graphic_dummyCallback@l
     li r6, 0x1c
     li r7, 0x100
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x84(r30)
-    b lbl_fn_800B089C_00001A54
+    b lbl_graphic_initViewportTransform_00001A54
     stw r0, 0x84(r30)
-lbl_fn_800B089C_00001A54:
+lbl_graphic_initViewportTransform_00001A54:
     li r6, 0x0
     li r5, 0x0
     li r4, 0x0
-    b lbl_fn_800B089C_00001A78
-lbl_fn_800B089C_00001A64:
+    b lbl_graphic_initViewportTransform_00001A78
+lbl_graphic_initViewportTransform_00001A64:
     lwz r0, 0x84(r30)
     addi r6, r6, 0x1
     add r3, r0, r5
     addi r5, r5, 0x1c
     stw r4, 0x18(r3)
-lbl_fn_800B089C_00001A78:
+lbl_graphic_initViewportTransform_00001A78:
     lwz r0, 0x80(r30)
     cmplw r6, r0
-    blt lbl_fn_800B089C_00001A64
+    blt lbl_graphic_initViewportTransform_00001A64
     li r0, 0x1
     lis r31, lbl_80732D00@ha
     stb r0, 0xe5(r30)
@@ -1977,10 +1977,8 @@ lbl_fn_800B089C_00001A78:
     blr
 }
 
-asm void fn_800B0A44(void)
+void graphic_dummyCallback(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_800B0A48(void)
@@ -2013,11 +2011,11 @@ asm void fn_800B0A70(void)
     stw r29, 0x74(r1)
     stw r28, 0x70(r1)
     mr r28, r3
-    bl fn_806167B0
+    bl GXDrawDone
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     bl fn_80617200
     li r3, 0x4
@@ -2036,7 +2034,7 @@ asm void fn_800B0A70(void)
     li r6, 0x1e
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lfs f1, lbl_80880E6C
     addi r3, r1, 0x18
     lfs f0, lbl_80880E60
@@ -2054,7 +2052,7 @@ asm void fn_800B0A70(void)
     stfs f0, 0x40(r1)
     stfs f0, 0x2c(r1)
     stfs f0, 0x18(r1)
-    bl fn_80618420
+    bl GXLoadTexMtxImm
     li r3, 0x0
     li r4, 0xf
     li r5, 0xf
@@ -2067,7 +2065,7 @@ asm void fn_800B0A70(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0

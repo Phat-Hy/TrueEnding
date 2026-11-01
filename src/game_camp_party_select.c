@@ -5,18 +5,18 @@
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_80014798(void);
+extern void atn_LH_Binary_destructor(void);
 extern void fn_8004B20C(void);
 extern void fn_8005BD10(void);
 extern void fn_8005BEF8(void);
 extern void fn_8005BFAC(void);
 extern void fn_80060D58(void);
-extern void fn_800616C0(void);
+extern void skill_calculateDamage(void);
 extern void fn_8006CA80(void);
 extern void fn_8006F420(void);
-extern void fn_80084320(void);
-extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_alloc(void);
+extern void mem_realloc(void);
+extern void mem_getAllocSize(void);
 extern void fn_800A4228(void);
 extern void fn_800A48B8(void);
 extern void fn_800A49C4(void);
@@ -25,8 +25,8 @@ extern void fn_800A4D00(void);
 extern void fn_800A4E08(void);
 extern void fn_800A555C(void);
 extern void fn_800A55AC(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
 extern void fn_800D3FA4(void);
 extern void fn_803BDEE4(void);
 extern void fn_803BE8B4(void);
@@ -37,11 +37,11 @@ extern void fn_803CE408(void);
 extern void fn_803CE448(void);
 extern void fn_8046ECDC(void);
 extern void fn_8046EED8(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
-extern void fn_80473F50(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_destructor(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_8049D52C(void);
 extern void fn_8061E760(void);
 extern void fn_8061E940(void);
@@ -49,7 +49,7 @@ extern void fn_8061F2F0(void);
 extern void fn_8061FC70(void);
 extern void fn_80620030(void);
 extern void fn_80621CD0(void);
-extern void fn_806846C4(void);
+extern void wmemcpy(void);
 extern void fn_80686A48(void);
 extern void fn_80686AF0(void);
 extern void fn_806958E0(void);
@@ -414,7 +414,7 @@ lbl_fn_803B7E20_00000394:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lfs f4, lbl_80885C64
     addi r4, r31, 0x12
     lwz r0, 0xd68(r30)
@@ -432,7 +432,7 @@ lbl_fn_803B7E20_00000420:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lfs f4, lbl_80885C64
     lis r4, lbl_8074FF58@ha
     lwz r0, 0xd68(r30)
@@ -452,7 +452,7 @@ lbl_fn_803B7E20_0000046C:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     b lbl_fn_803B7E20_000004E0
 lbl_fn_803B7E20_00000484:
     lfs f1, lbl_80885C58
@@ -477,7 +477,7 @@ lbl_fn_803B7E20_00000484:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
 lbl_fn_803B7E20_000004E0:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -586,7 +586,7 @@ asm void fn_803B80F4(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_8078B548@ha
     li r0, 0x0
     addi r3, r3, lbl_8078B548@l
@@ -641,7 +641,7 @@ asm void fn_803B8160(void)
     addi r3, r31, 0x3560
     li r4, 0x1
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x150(r30)
     addi r5, r31, 0x3560
     li r4, 0x0
@@ -682,7 +682,7 @@ asm void fn_803B8200(void)
     mr r6, r5
     addi r3, r31, 0x3560
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x150(r30)
     addi r5, r31, 0x3560
     li r4, 0x0
@@ -711,7 +711,7 @@ asm void fn_803B8270(void)
     cmpwi r0, 0x0
     beq lbl_fn_803B8270_000007D8
     mr r3, r0
-    bl fn_80084C24
+    bl mem_getAllocSize
     stw r31, 0x150(r30)
 lbl_fn_803B8270_000007D8:
     lwz r0, 0x14(r1)
@@ -732,7 +732,7 @@ asm void fn_803B82C0(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     mr r29, r3
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_8078B588@ha
     li r0, 0x0
     addi r3, r3, lbl_8078B588@l
@@ -776,7 +776,7 @@ asm void fn_803B834C(void)
     mr r30, r3
     beq lbl_fn_803B834C_000008B8
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r31, 0x0
     ble lbl_fn_803B834C_000008B8
     mr r3, r30
@@ -1427,7 +1427,7 @@ lbl_fn_803B8B08_00001148:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     addi r27, r27, 0x1
     addi r28, r28, 0xb8
     cmpwi r27, 0x11
@@ -1463,7 +1463,7 @@ asm void fn_803B8C6C(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_803B8C6C_0000121C
@@ -1720,7 +1720,7 @@ asm void fn_803B8FE8(void)
     beq lbl_fn_803B8FE8_00001558
     beq lbl_fn_803B8FE8_00001548
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
 lbl_fn_803B8FE8_00001548:
     cmpwi r31, 0x0
     ble lbl_fn_803B8FE8_00001558
@@ -1755,12 +1755,12 @@ asm void fn_803B9044(void)
     mr r6, r5
     subi r3, r3, 0x1d60
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_803B9044_00001654
     mr r4, r27
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_8078B620@ha
     addi r27, r29, 0x50
     addi r3, r3, lbl_8078B620@l
@@ -1769,19 +1769,19 @@ asm void fn_803B9044(void)
     stw r28, 0x48(r29)
     mr r3, r27
     stw r30, 0x4c(r29)
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r31, lbl_8078FBB0@ha
     addi r28, r29, 0x58
     addi r31, r31, lbl_8078FBB0@l
     stw r31, 0x0(r27)
     mr r3, r28
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r4, fn_8006CA80@ha
-    lis r5, fn_80014798@ha
+    lis r5, atn_LH_Binary_destructor@ha
     stw r31, 0x0(r28)
     addi r3, r29, 0x60
     addi r4, r4, fn_8006CA80@l
-    addi r5, r5, fn_80014798@l
+    addi r5, r5, atn_LH_Binary_destructor@l
     li r6, 0x8
     li r7, 0x8
     bl fn_806958E0
@@ -1819,9 +1819,9 @@ asm void fn_803B9140(void)
     mr r30, r3
     beq lbl_fn_803B9140_000016F0
     li r0, 0x0
-    lis r4, fn_80014798@ha
+    lis r4, atn_LH_Binary_destructor@ha
     stw r0, lbl_8087F470
-    addi r4, r4, fn_80014798@l
+    addi r4, r4, atn_LH_Binary_destructor@l
     li r5, 0x8
     li r6, 0x8
     addi r3, r3, 0x60
@@ -1829,16 +1829,16 @@ asm void fn_803B9140(void)
     addic. r3, r30, 0x58
     beq lbl_fn_803B9140_000016C4
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_803B9140_000016C4:
     addic. r3, r30, 0x50
     beq lbl_fn_803B9140_000016D4
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_803B9140_000016D4:
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r31, 0x0
     ble lbl_fn_803B9140_000016F0
     mr r3, r30
@@ -1873,7 +1873,7 @@ asm void fn_803B91DC(void)
     b lbl_fn_803B91DC_00001834
 lbl_fn_803B91DC_00001748:
     addi r3, r3, 0x50
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_803B91DC_00001760
     li r3, 0x0
@@ -1915,7 +1915,7 @@ lbl_fn_803B91DC_000017D4:
     b lbl_fn_803B91DC_00001838
 lbl_fn_803B91DC_000017DC:
     addi r3, r29, 0x58
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_803B91DC_000017F4
     li r3, 0x0
@@ -1926,7 +1926,7 @@ lbl_fn_803B91DC_000017F4:
     b lbl_fn_803B91DC_00001820
 lbl_fn_803B91DC_00001800:
     mr r3, r31
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_803B91DC_00001818
     li r3, 0x0
@@ -1961,10 +1961,10 @@ asm void fn_803B9324(void)
     stmw r23, 0xd6c(r1)
     mr r28, r3
     addi r3, r3, 0x50
-    bl fn_8047059C
+    bl boss_getOffset50
     srwi r26, r3, 1
     addi r3, r28, 0x50
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_8078B608@ha
     li r0, 0x0
     addi r4, r4, lbl_8078B608@l
@@ -2037,7 +2037,7 @@ lbl_fn_803B9324_00001930:
     mr r4, r23
     addi r3, r28, 0xc4
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
     b lbl_fn_803B9324_00001B30
 lbl_fn_803B9324_00001994:
     mr r3, r23
@@ -2056,7 +2056,7 @@ lbl_fn_803B9324_00001994:
     mr r4, r23
     addi r3, r28, 0x104
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
     b lbl_fn_803B9324_00001B30
 lbl_fn_803B9324_000019DC:
     mr r3, r23

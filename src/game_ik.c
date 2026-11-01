@@ -9,19 +9,19 @@ extern void fn_80049B74(void);
 extern void fn_80049CDC(void);
 extern void fn_80049E3C(void);
 extern void fn_800697D8(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_80084A78(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800A555C(void);
 extern void fn_800A5584(void);
 extern void fn_800A55AC(void);
 extern void fn_800DCA6C(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9240(void);
-extern void fn_805F93C0(void);
+extern void PSMTXRotRad(void);
+extern void C_MTXLookAt(void);
+extern void PSMTXMultVec(void);
 extern void fn_80686A48(void);
 extern void fn_806952C4(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern void fn_80709AD0(void);
 extern void fn_8070AD40(void);
 extern void fn_8070AD50(void);
@@ -165,7 +165,7 @@ lbl_fn_800C6CD4_0000005C:
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r18, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_800C6CD4_000000E0
     stw r19, 0x4(r3)
@@ -178,7 +178,7 @@ lbl_fn_800C6CD4_000000E0:
     stw r30, 0x10(r1)
     beq lbl_fn_800C6CD4_000000F8
     li r3, 0x0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800C6CD4_000000F8:
     lwz r3, 0x1c(r1)
     addi r4, r31, lbl_80775BC8@l
@@ -842,7 +842,7 @@ lbl_fn_800C7568_0000092C:
     stw r5, 0x24(r1)
     stw r4, 0x28(r1)
     stw r0, 0x2c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_800C7568_00000A84
     lwz r29, 0x2418(r26)
@@ -873,7 +873,7 @@ lbl_fn_800C7568_0000092C:
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r0, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_800C7568_000009EC
     li r0, 0x1
@@ -888,7 +888,7 @@ lbl_fn_800C7568_000009EC:
     stw r3, 0x20(r1)
     stw r0, 0x10(r1)
     b lbl_fn_800C7568_00000A00
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800C7568_00000A00:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x1c(r1)
@@ -1193,7 +1193,7 @@ asm void fn_800C7A30(void)
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r0, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_800C7A30_00000E04
     li r0, 0x1
@@ -1208,7 +1208,7 @@ lbl_fn_800C7A30_00000E04:
     stw r3, 0x20(r1)
     stw r0, 0x10(r1)
     b lbl_fn_800C7A30_00000E18
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800C7A30_00000E18:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x1c(r1)
@@ -1285,7 +1285,7 @@ asm void fn_800C7B78(void)
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r0, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_800C7B78_00000F40
     li r0, 0x1
@@ -1300,7 +1300,7 @@ lbl_fn_800C7B78_00000F40:
     stw r3, 0x20(r1)
     stw r0, 0x10(r1)
     b lbl_fn_800C7B78_00000F54
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800C7B78_00000F54:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x1c(r1)
@@ -1372,7 +1372,7 @@ asm void fn_800C7CA8(void)
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r0, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_800C7CA8_00001068
     li r0, 0x1
@@ -1387,7 +1387,7 @@ lbl_fn_800C7CA8_00001068:
     stw r3, 0x20(r1)
     stw r0, 0x10(r1)
     b lbl_fn_800C7CA8_0000107C
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800C7CA8_0000107C:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x1c(r1)
@@ -1539,11 +1539,11 @@ asm void fn_800C7F08(void)
     stfs f0, 0x28(r1)
     lfs f1, 0x80(r3)
     addi r3, r1, 0x60
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x20
     addi r3, r1, 0x60
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f7, lbl_80881168
     addi r3, r1, 0x30
     lfs f0, lbl_8088116C
@@ -1565,7 +1565,7 @@ asm void fn_800C7F08(void)
     stfs f10, 0x1c(r1)
     stfs f0, 0x14(r1)
     stfs f8, 0x18(r1)
-    bl fn_805F9240
+    bl C_MTXLookAt
     addi r5, r1, 0x30
     addi r4, r1, 0x90
     psq_l f1, 0x0(r5), 0, 0

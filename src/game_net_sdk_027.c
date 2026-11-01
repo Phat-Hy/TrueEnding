@@ -15,16 +15,16 @@ extern void _restgpr_27(void);
 extern void _savegpr_23(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
-extern void fn_805F30F0(void);
-extern void fn_805F3130(void);
-extern void fn_805F3210(void);
+extern void OSInitMutex(void);
+extern void OSLockMutex(void);
+extern void OSUnlockMutex(void);
 extern void fn_8067AEC4(void);
 extern void fn_8067AF64(void);
 extern void fn_8067B094(void);
 extern void fn_8067B3AC(void);
 extern void fn_8067E23C(void);
-extern void fn_80682428(void);
-extern void fn_80682544(void);
+extern void strcmp(void);
+extern void strncmp(void);
 extern void fn_806A38C8(void);
 extern void fn_806A39B8(void);
 extern void fn_806A3A5C(void);
@@ -799,7 +799,7 @@ asm void fn_806D8060(void)
     mr r5, r3
     mr r4, r27
     addi r3, r24, lbl_807C2AC0@l
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_806D8060_000008F8
     lis r24, lbl_80860EB4@ha
@@ -975,7 +975,7 @@ lbl_fn_806D8060_00000A84:
     beq lbl_fn_806D8060_00000AD4
     lwz r3, 0x10(r23)
     mr r4, r27
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_806D8060_00000AD4
     mr r3, r23
@@ -1546,19 +1546,19 @@ lbl_fn_806D8A90_00001270:
 asm void fn_806D8AF0(void)
 {
     nofralloc
-    b fn_805F30F0
+    b OSInitMutex
 }
 
 asm void fn_806D8B00(void)
 {
     nofralloc
-    b fn_805F3130
+    b OSLockMutex
 }
 
 asm void fn_806D8B10(void)
 {
     nofralloc
-    b fn_805F3210
+    b OSUnlockMutex
 }
 
 asm void fn_806D8B20(void)

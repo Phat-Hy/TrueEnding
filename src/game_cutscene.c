@@ -6,7 +6,7 @@ extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_800697D8(void);
 extern void fn_8007A994(void);
 extern void fn_8007AA64(void);
@@ -16,16 +16,16 @@ extern void fn_8007E9EC(void);
 extern void fn_8007EA24(void);
 extern void fn_8007FAF0(void);
 extern void fn_80081080(void);
-extern void fn_80084320(void);
-extern void fn_800846FC(void);
-extern void fn_80084C24(void);
-extern void fn_800D5808(void);
+extern void mem_alloc(void);
+extern void mem_realloc(void);
+extern void mem_getAllocSize(void);
+extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
-extern void fn_800DC6B4(void);
+extern void str_skipWhitespace(void);
+extern void str_findChar(void);
 extern void fn_8067E23C(void);
-extern void fn_80682544(void);
-extern void fn_80695720(void);
+extern void strncmp(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
@@ -155,7 +155,7 @@ lbl_fn_8007C46C_00000140:
     mr r4, r20
     mr r5, r21
     addi r3, r16, 0x1
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_8007C46C_0000016C
     b lbl_fn_8007C46C_00000184
@@ -182,7 +182,7 @@ lbl_fn_8007C46C_0000019C:
     mr r4, r19
     mr r5, r21
     addi r3, r16, 0x1
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_8007C46C_000001C8
     b lbl_fn_8007C46C_000001E0
@@ -228,14 +228,14 @@ lbl_fn_8007C46C_00000240:
     la r5, lbl_8087D778
     la r6, lbl_8087D774
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8007E9EC@ha
     lis r5, fn_8007AA64@ha
     addi r4, r4, fn_8007E9EC@l
     li r6, 0x18
     addi r5, r5, fn_8007AA64@l
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x108(r1)
     mr r21, r3
     cmpwi r0, 0x0
@@ -282,7 +282,7 @@ lbl_fn_8007C46C_000002FC:
     la r5, lbl_8087D790
     la r6, lbl_8087D78C
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r24, r3
     mr r4, r28
     mr r5, r25
@@ -291,7 +291,7 @@ lbl_fn_8007C46C_000002FC:
     lwz r3, 0x0(r23)
     cmpwi r3, 0x0
     beq lbl_fn_8007C46C_0000034C
-    bl fn_80084C24
+    bl mem_getAllocSize
     stw r26, 0x0(r23)
 lbl_fn_8007C46C_0000034C:
     stw r24, 0x0(r23)
@@ -300,7 +300,7 @@ lbl_fn_8007C46C_00000354:
     lwz r3, 0x0(r23)
     cmpwi r3, 0x0
     beq lbl_fn_8007C46C_00000368
-    bl fn_80084C24
+    bl mem_getAllocSize
     stw r26, 0x0(r23)
 lbl_fn_8007C46C_00000368:
     lbz r0, 0x11(r20)
@@ -337,7 +337,7 @@ lbl_fn_8007C46C_000003C0:
     mr r6, r5
     li r4, 0x6
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8007C46C_00000418
     lwz r4, 0x8(r20)
@@ -362,7 +362,7 @@ lbl_fn_8007C46C_0000041C:
     mr r6, r5
     li r4, 0x6
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8007C46C_00000474
     lwz r4, 0xc(r20)
@@ -407,14 +407,14 @@ lbl_fn_8007C46C_000004AC:
     la r6, lbl_8087D774
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8007E9EC@ha
     lis r5, fn_8007AA64@ha
     mr r7, r22
     li r6, 0x18
     addi r4, r4, fn_8007E9EC@l
     addi r5, r5, fn_8007AA64@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x108(r1)
     mr r21, r3
     cmpwi r0, 0x0
@@ -461,7 +461,7 @@ lbl_fn_8007C46C_00000578:
     la r5, lbl_8087D790
     la r6, lbl_8087D78C
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r23, r3
     mr r4, r17
     mr r5, r20
@@ -470,7 +470,7 @@ lbl_fn_8007C46C_00000578:
     lwz r3, 0x0(r18)
     cmpwi r3, 0x0
     beq lbl_fn_8007C46C_000005C8
-    bl fn_80084C24
+    bl mem_getAllocSize
     stw r26, 0x0(r18)
 lbl_fn_8007C46C_000005C8:
     stw r23, 0x0(r18)
@@ -479,7 +479,7 @@ lbl_fn_8007C46C_000005D0:
     lwz r3, 0x0(r18)
     cmpwi r3, 0x0
     beq lbl_fn_8007C46C_000005E4
-    bl fn_80084C24
+    bl mem_getAllocSize
     stw r26, 0x0(r18)
 lbl_fn_8007C46C_000005E4:
     lbz r0, 0x11(r24)
@@ -516,7 +516,7 @@ lbl_fn_8007C46C_0000063C:
     mr r6, r5
     li r4, 0x6
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8007C46C_00000694
     lwz r4, 0x8(r24)
@@ -541,7 +541,7 @@ lbl_fn_8007C46C_00000698:
     mr r6, r5
     li r4, 0x6
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8007C46C_000006F0
     lwz r4, 0xc(r24)
@@ -605,7 +605,7 @@ lbl_fn_8007C46C_00000770:
     la r5, lbl_8087D790
     la r6, lbl_8087D78C
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r18, r3
     mr r4, r20
     mr r5, r19
@@ -614,7 +614,7 @@ lbl_fn_8007C46C_00000770:
     lwz r3, 0x0(r17)
     cmpwi r3, 0x0
     beq lbl_fn_8007C46C_000007C0
-    bl fn_80084C24
+    bl mem_getAllocSize
     stw r26, 0x0(r17)
 lbl_fn_8007C46C_000007C0:
     stw r18, 0x0(r17)
@@ -623,7 +623,7 @@ lbl_fn_8007C46C_000007C8:
     lwz r3, 0x0(r17)
     cmpwi r3, 0x0
     beq lbl_fn_8007C46C_000007DC
-    bl fn_80084C24
+    bl mem_getAllocSize
     stw r26, 0x0(r17)
 lbl_fn_8007C46C_000007DC:
     lbz r0, 0x121(r1)
@@ -660,7 +660,7 @@ lbl_fn_8007C46C_00000834:
     mr r6, r5
     li r4, 0x6
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8007C46C_0000088C
     lwz r4, 0x118(r1)
@@ -685,7 +685,7 @@ lbl_fn_8007C46C_00000890:
     mr r6, r5
     li r4, 0x6
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8007C46C_000008E8
     lwz r4, 0x11c(r1)
@@ -728,7 +728,7 @@ lbl_fn_8007C46C_00000928:
     cmpwi r3, 0x0
     beq lbl_fn_8007C46C_00000950
     li r4, 0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     stb r26, 0x121(r1)
     stw r26, 0x114(r1)
 lbl_fn_8007C46C_00000950:
@@ -737,7 +737,7 @@ lbl_fn_8007C46C_00000950:
     lwz r3, 0x110(r1)
     cmpwi r3, 0x0
     beq lbl_fn_8007C46C_00002028
-    bl fn_80084C24
+    bl mem_getAllocSize
     stw r26, 0x110(r1)
     b lbl_fn_8007C46C_00002028
 lbl_fn_8007C46C_00000970:
@@ -774,7 +774,7 @@ lbl_fn_8007C46C_000009BC:
     lwz r0, 0x9c(r1)
     mr r4, r3
     stbx r26, r4, r0
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x0(r15)
     b lbl_fn_8007C46C_00002028
     add r3, r16, r22
@@ -802,7 +802,7 @@ lbl_fn_8007C46C_00000A24:
     lwz r0, 0x9c(r1)
     mr r4, r3
     stbx r26, r4, r0
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x4(r15)
     b lbl_fn_8007C46C_00002028
     mr r4, r17
@@ -823,7 +823,7 @@ lbl_fn_8007C46C_00000A88:
     mr r3, r16
     mr r4, r20
     mr r5, r17
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_8007C46C_00000AB4
     b lbl_fn_8007C46C_00000ACC
@@ -863,7 +863,7 @@ lbl_fn_8007C46C_00000B14:
     mr r3, r16
     mr r4, r20
     mr r5, r17
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_8007C46C_00000B40
     b lbl_fn_8007C46C_00000B58
@@ -903,7 +903,7 @@ lbl_fn_8007C46C_00000BA0:
     mr r3, r16
     mr r4, r20
     mr r5, r17
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_8007C46C_00000BCC
     b lbl_fn_8007C46C_00000BE4
@@ -933,7 +933,7 @@ lbl_fn_8007C46C_00000BF8:
     mr r4, r17
     bl fn_8007A994
     mr r16, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f0, f30, f1
     mr r4, r17
     addi r5, r1, 0x9c
@@ -945,7 +945,7 @@ lbl_fn_8007C46C_00000BF8:
     add r3, r16, r0
     bl fn_8007A994
     mr r16, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f0, f30, f1
     mr r4, r17
     addi r5, r1, 0x9c
@@ -957,7 +957,7 @@ lbl_fn_8007C46C_00000BF8:
     add r3, r16, r0
     bl fn_8007A994
     mr r16, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f0, f30, f1
     mr r4, r17
     addi r5, r1, 0x9c
@@ -969,7 +969,7 @@ lbl_fn_8007C46C_00000BF8:
     add r3, r16, r0
     bl fn_8007A994
     mr r16, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f0, f30, f1
     fctiwz f0, f0
     stfd f0, 0x598(r1)
@@ -982,7 +982,7 @@ lbl_fn_8007C46C_00000BF8:
     mr r4, r17
     bl fn_8007A994
     mr r16, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f0, f30, f1
     mr r4, r17
     addi r5, r1, 0x9c
@@ -994,7 +994,7 @@ lbl_fn_8007C46C_00000BF8:
     add r3, r16, r0
     bl fn_8007A994
     mr r16, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f0, f30, f1
     mr r4, r17
     addi r5, r1, 0x9c
@@ -1006,7 +1006,7 @@ lbl_fn_8007C46C_00000BF8:
     add r3, r16, r0
     bl fn_8007A994
     mr r16, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f0, f30, f1
     fctiwz f0, f0
     stfd f0, 0x588(r1)
@@ -1019,7 +1019,7 @@ lbl_fn_8007C46C_00000BF8:
     mr r4, r17
     bl fn_8007A994
     mr r16, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f0, f30, f1
     mr r4, r17
     addi r5, r1, 0x9c
@@ -1031,7 +1031,7 @@ lbl_fn_8007C46C_00000BF8:
     add r3, r16, r0
     bl fn_8007A994
     mr r16, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f0, f30, f1
     mr r4, r17
     addi r5, r1, 0x9c
@@ -1043,7 +1043,7 @@ lbl_fn_8007C46C_00000BF8:
     add r3, r16, r0
     bl fn_8007A994
     mr r16, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f0, f30, f1
     fctiwz f0, f0
     stfd f0, 0x588(r1)
@@ -1059,7 +1059,7 @@ lbl_fn_8007C46C_00000BF8:
     slwi r0, r17, 2
     mr r16, r3
     add r17, r15, r0
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f0, f30, f1
     mr r4, r19
     addi r5, r1, 0x9c
@@ -1071,7 +1071,7 @@ lbl_fn_8007C46C_00000BF8:
     add r3, r16, r0
     bl fn_8007A994
     mr r16, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f0, f30, f1
     mr r4, r19
     addi r5, r1, 0x9c
@@ -1083,7 +1083,7 @@ lbl_fn_8007C46C_00000BF8:
     add r3, r16, r0
     bl fn_8007A994
     mr r16, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f0, f30, f1
     fctiwz f0, f0
     stfd f0, 0x588(r1)
@@ -1110,7 +1110,7 @@ lbl_fn_8007C46C_00000EC8:
     mr r3, r20
     mr r4, r18
     mr r5, r19
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_8007C46C_00000EF4
     b lbl_fn_8007C46C_00000F0C
@@ -1130,7 +1130,7 @@ lbl_fn_8007C46C_00000F0C:
     mr r4, r16
     bl fn_8007A994
     mr r17, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0x9c(r1)
     mr r4, r16
     stfs f1, 0x130(r1)
@@ -1138,7 +1138,7 @@ lbl_fn_8007C46C_00000F0C:
     add r3, r17, r0
     bl fn_8007A994
     mr r17, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0x9c(r1)
     mr r4, r16
     stfs f1, 0x134(r1)
@@ -1146,7 +1146,7 @@ lbl_fn_8007C46C_00000F0C:
     add r3, r17, r0
     bl fn_8007A994
     mr r17, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0x9c(r1)
     mr r4, r16
     stfs f1, 0x138(r1)
@@ -1154,7 +1154,7 @@ lbl_fn_8007C46C_00000F0C:
     add r3, r17, r0
     bl fn_8007A994
     mr r17, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0x9c(r1)
     mr r4, r16
     stfs f1, 0x13c(r1)
@@ -1162,7 +1162,7 @@ lbl_fn_8007C46C_00000F0C:
     add r3, r17, r0
     bl fn_8007A994
     mr r17, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0x9c(r1)
     mr r4, r16
     stfs f1, 0x140(r1)
@@ -1170,7 +1170,7 @@ lbl_fn_8007C46C_00000F0C:
     add r3, r17, r0
     bl fn_8007A994
     mr r17, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0x9c(r1)
     mr r4, r16
     stfs f1, 0x144(r1)
@@ -1178,7 +1178,7 @@ lbl_fn_8007C46C_00000F0C:
     add r3, r17, r0
     bl fn_8007A994
     mr r17, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0x9c(r1)
     mr r4, r16
     stfs f1, 0x148(r1)
@@ -1186,7 +1186,7 @@ lbl_fn_8007C46C_00000F0C:
     add r3, r17, r0
     bl fn_8007A994
     mr r17, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0x9c(r1)
     mr r4, r16
     stfs f1, 0x14c(r1)
@@ -1194,7 +1194,7 @@ lbl_fn_8007C46C_00000F0C:
     add r3, r17, r0
     bl fn_8007A994
     mr r17, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0x9c(r1)
     mr r4, r16
     stfs f1, 0x150(r1)
@@ -1202,7 +1202,7 @@ lbl_fn_8007C46C_00000F0C:
     add r3, r17, r0
     bl fn_8007A994
     mr r16, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     lfs f0, 0x144(r1)
     li r3, 0x0
     stfs f1, 0x154(r1)
@@ -1237,7 +1237,7 @@ lbl_fn_8007C46C_00001094:
     mr r4, r17
     bl fn_8007A994
     mr r16, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0x9c(r1)
     mr r4, r17
     stfs f1, 0x158(r1)
@@ -1245,7 +1245,7 @@ lbl_fn_8007C46C_00001094:
     add r3, r16, r0
     bl fn_8007A994
     mr r16, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0x9c(r1)
     mr r4, r17
     stfs f1, 0x15c(r1)
@@ -1253,7 +1253,7 @@ lbl_fn_8007C46C_00001094:
     add r3, r16, r0
     bl fn_8007A994
     mr r16, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0x9c(r1)
     mr r4, r17
     stfs f1, 0x160(r1)
@@ -1261,7 +1261,7 @@ lbl_fn_8007C46C_00001094:
     add r3, r16, r0
     bl fn_8007A994
     mr r16, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0x9c(r1)
     mr r4, r17
     stfs f1, 0x164(r1)
@@ -1269,7 +1269,7 @@ lbl_fn_8007C46C_00001094:
     add r3, r16, r0
     bl fn_8007A994
     mr r16, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0x9c(r1)
     mr r4, r17
     stfs f1, 0x168(r1)
@@ -1277,7 +1277,7 @@ lbl_fn_8007C46C_00001094:
     add r3, r16, r0
     bl fn_8007A994
     mr r16, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     lfs f0, 0x158(r1)
     li r3, 0x0
     stfs f1, 0x16c(r1)
@@ -1320,13 +1320,13 @@ lbl_fn_8007C46C_000011E8:
     la r5, lbl_8087D770
     la r6, lbl_8087D76C
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8007C0D8@ha
     li r5, 0x0
     addi r4, r4, fn_8007C0D8@l
     li r6, 0x54
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0xfc(r1)
     mr r17, r3
     cmpwi r0, 0x0
@@ -1390,7 +1390,7 @@ lbl_fn_8007C46C_00001304:
     cmpwi r3, 0x0
     beq lbl_fn_8007C46C_00001318
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8007C46C_00001318:
     li r0, 0x8
     stw r17, 0xfc(r1)
@@ -1409,13 +1409,13 @@ lbl_fn_8007C46C_00001328:
     la r6, lbl_8087D76C
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8007C0D8@ha
     mr r7, r17
     addi r4, r4, fn_8007C0D8@l
     li r5, 0x0
     li r6, 0x54
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0xfc(r1)
     mr r18, r3
     cmpwi r0, 0x0
@@ -1479,7 +1479,7 @@ lbl_fn_8007C46C_00001454:
     cmpwi r3, 0x0
     beq lbl_fn_8007C46C_00001468
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8007C46C_00001468:
     stw r18, 0xfc(r1)
     stw r17, 0xf8(r1)
@@ -1535,7 +1535,7 @@ lbl_fn_8007C46C_00001470:
     addi r5, r1, 0x9c
     bl fn_8007A994
     mr r16, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x30(r15)
     b lbl_fn_8007C46C_00002028
     mr r4, r17
@@ -1543,7 +1543,7 @@ lbl_fn_8007C46C_00001470:
     addi r5, r1, 0x9c
     bl fn_8007A994
     mr r16, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     fcmpo cr0, f1, f28
     stw r26, 0x34(r15)
     bge lbl_fn_8007C46C_00001578
@@ -1583,7 +1583,7 @@ lbl_fn_8007C46C_0000158C:
     addi r8, r1, 0x44
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r17, 0x9c(r1)
     addi r3, r1, 0xd0
     stw r26, 0xd0(r1)
@@ -1599,7 +1599,7 @@ lbl_fn_8007C46C_0000158C:
     addi r8, r1, 0x3c
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0xdc(r1)
     srwi r0, r0, 31
     cntlzw r0, r0
@@ -1748,7 +1748,7 @@ lbl_fn_8007C46C_000017C0:
     addi r8, r1, 0x34
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r17, 0x9c(r1)
     addi r3, r1, 0xb8
     stw r26, 0xb8(r1)
@@ -1764,7 +1764,7 @@ lbl_fn_8007C46C_000017C0:
     addi r8, r1, 0x2c
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0xc4(r1)
     srwi r0, r0, 31
     cntlzw r0, r0
@@ -1922,7 +1922,7 @@ lbl_fn_8007C46C_00001A98:
     mr r3, r16
     mr r4, r19
     mr r5, r17
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_8007C46C_00001AC4
     b lbl_fn_8007C46C_00001ADC
@@ -1988,7 +1988,7 @@ lbl_fn_8007C46C_00001B3C:
     addi r8, r1, 0x24
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r18, r31, 0x86
     mr r3, r18
     bl strlen
@@ -2163,7 +2163,7 @@ lbl_fn_8007C46C_00001D88:
     addi r8, r1, 0x1c
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r17, 0x9c(r1)
     addi r3, r1, 0xa0
     stw r26, 0xa0(r1)
@@ -2179,7 +2179,7 @@ lbl_fn_8007C46C_00001D88:
     addi r8, r1, 0x14
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0xac(r1)
     srwi r0, r0, 31
     cntlzw r0, r0
@@ -2355,14 +2355,14 @@ lbl_fn_8007C46C_0000209C:
     mr r6, r5
     li r7, 0x0
     addi r3, r3, 0x10
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8007E9EC@ha
     lis r5, fn_8007AA64@ha
     mr r7, r14
     li r6, 0x18
     addi r4, r4, fn_8007E9EC@l
     addi r5, r5, fn_8007AA64@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
 lbl_fn_8007C46C_000020D8:
     stw r3, 0xc(r15)
     li r20, 0x0
@@ -2404,7 +2404,7 @@ lbl_fn_8007C46C_00002140:
     la r5, lbl_8087D790
     la r6, lbl_8087D78C
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r23, r3
     mr r4, r25
     mr r5, r24
@@ -2413,7 +2413,7 @@ lbl_fn_8007C46C_00002140:
     lwz r3, 0x0(r17)
     cmpwi r3, 0x0
     beq lbl_fn_8007C46C_00002190
-    bl fn_80084C24
+    bl mem_getAllocSize
     stw r22, 0x0(r17)
 lbl_fn_8007C46C_00002190:
     stw r23, 0x0(r17)
@@ -2422,7 +2422,7 @@ lbl_fn_8007C46C_00002198:
     lwz r3, 0x0(r17)
     cmpwi r3, 0x0
     beq lbl_fn_8007C46C_000021AC
-    bl fn_80084C24
+    bl mem_getAllocSize
     stw r22, 0x0(r17)
 lbl_fn_8007C46C_000021AC:
     lbz r0, 0x11(r18)
@@ -2459,7 +2459,7 @@ lbl_fn_8007C46C_00002204:
     mr r6, r5
     li r4, 0x6
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8007C46C_0000225C
     lwz r4, 0x8(r18)
@@ -2484,7 +2484,7 @@ lbl_fn_8007C46C_00002260:
     mr r6, r5
     li r4, 0x6
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8007C46C_000022B8
     lwz r4, 0xc(r18)
@@ -2521,13 +2521,13 @@ lbl_fn_8007C46C_000022E8:
     mr r6, r5
     li r7, 0x0
     addi r3, r3, 0x10
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8007C0D8@ha
     mr r7, r14
     addi r4, r4, fn_8007C0D8@l
     li r5, 0x0
     li r6, 0x54
-    bl fn_80695720
+    bl runtime_registerStaticObject
 lbl_fn_8007C46C_00002320:
     stw r3, 0x10(r15)
     li r10, 0x0
@@ -2676,7 +2676,7 @@ lbl_fn_8007C46C_00002510:
     beq lbl_fn_8007C46C_0000252C
     beq lbl_fn_8007C46C_0000252C
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8007C46C_0000252C:
     lwz r3, 0x108(r1)
     cmpwi r3, 0x0

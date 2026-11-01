@@ -21,9 +21,9 @@ extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_805EE150(void);
-extern void fn_805F30F0(void);
-extern void fn_805F8980(void);
-extern void fn_805F95A0(void);
+extern void OSInitMutex(void);
+extern void PSMTXIdentity(void);
+extern void PSMTXMultVecArraySR(void);
 extern void fn_805FA200(void);
 extern void fn_805FA390(void);
 extern void fn_805FA4E0(void);
@@ -33,15 +33,15 @@ extern void fn_805FEF70(void);
 extern void fn_806036E0(void);
 extern void fn_80603730(void);
 extern void fn_80618290(void);
-extern void fn_80618350(void);
-extern void fn_80618400(void);
+extern void GXLoadPosMtxImm(void);
+extern void GXSetCurrentMtx(void);
 extern void fn_80619920(void);
 extern void fn_806199D0(void);
 extern void fn_80619A00(void);
 extern void fn_80619AB0(void);
 extern void fn_80619B80(void);
 extern void fn_80619C60(void);
-extern void fn_806869BC(void);
+extern void vswprintf(void);
 extern void fn_80722FE0(void);
 extern void fn_80723050(void);
 extern void fn_80724330(void);
@@ -214,7 +214,7 @@ lbl_fn_807244F0_00000094:
     mr r4, r30
     mr r5, r29
     addi r6, r1, 0x68
-    bl fn_806869BC
+    bl vswprintf
     mr r8, r3
     mr r3, r25
     mr r4, r26
@@ -271,7 +271,7 @@ lbl_fn_80724610_0000015C:
     mr r4, r30
     mr r5, r28
     mr r6, r29
-    bl fn_806869BC
+    bl vswprintf
     mr r8, r3
     mr r3, r24
     mr r4, r25
@@ -487,17 +487,17 @@ asm void fn_80724920(void)
     stw r0, 0x84(r1)
     lfd f0, 0x80(r1)
     fsubs f2, f0, f2
-    bl fn_805F95A0
+    bl PSMTXMultVecArraySR
     addi r3, r1, 0x38
     li r4, 0x1
     bl fn_80618290
     addi r3, r1, 0x8
-    bl fn_805F8980
+    bl PSMTXIdentity
     addi r3, r1, 0x8
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     mr r3, r31
     bl fn_80724790
     lwz r0, 0x94(r1)
@@ -2485,7 +2485,7 @@ asm void fn_807263E0(void)
     bne lbl_fn_807263E0_00001F50
     lis r3, lbl_8087D678@ha
     addi r3, r3, lbl_8087D678@l
-    bl fn_805F30F0
+    bl OSInitMutex
     la r3, lbl_80880560
     bl OSInitThreadQueue
     li r0, 0x1
@@ -2524,7 +2524,7 @@ asm void fn_80726470(void)
     bne lbl_fn_80726470_00001FE0
     lis r3, lbl_8087D678@ha
     addi r3, r3, lbl_8087D678@l
-    bl fn_805F30F0
+    bl OSInitMutex
     la r3, lbl_80880560
     bl OSInitThreadQueue
     li r0, 0x1

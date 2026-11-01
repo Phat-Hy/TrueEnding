@@ -6,7 +6,7 @@ extern void _restgpr_21(void);
 extern void _savegpr_21(void);
 extern void dtor_80084684(void);
 extern void fn_8000D7DC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_8008BBD8(void);
 extern void fn_80099010(void);
 extern void fn_8011C074(void);
@@ -20,9 +20,9 @@ extern void fn_80171DB0(void);
 extern void fn_8017B3C0(void);
 extern void fn_8017B434(void);
 extern void fn_8017BC4C(void);
-extern void fn_805F9940(void);
+extern void PSVECMag(void);
 extern void fn_805F99F0(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_806958E0(void);
 extern void fn_80695A50(void);
 extern void fn_80695B00(void);
@@ -309,7 +309,7 @@ lbl_fn_8011CD84_0000030C:
     stfs f4, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f6, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x5b0(r31)
     lfs f3, 0x5b0(r29)
     lfs f4, lbl_808817A4
@@ -608,7 +608,7 @@ asm void fn_8011D320(void)
     lwz r3, 0xc(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8011D320_0000072C
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8011D320_0000072C:
     li r0, 0x0
     stw r0, 0xc(r30)
@@ -962,7 +962,7 @@ lbl_fn_8011D78C_00000BC4:
     lis r3, lbl_8077A160@ha
     lwz r4, lbl_8077A160@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_8011D78C_00000BF4

@@ -1407,10 +1407,8 @@ lbl_InitMetroTRKCommTable_00000ED8:
     blr
 }
 
-asm void TRKUARTInterruptHandler(void)
+void TRKUARTInterruptHandler(void)
 {
-    nofralloc
-    blr
 }
 
 asm void TRKInitializeIntDrivenUART(void)

@@ -7,45 +7,45 @@ extern void _savegpr_14(void);
 extern void dtor_80084684(void);
 extern void fn_80041C0C(void);
 extern void fn_80042740(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void fn_800928B0(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A555C(void);
 extern void fn_800A5584(void);
 extern void fn_800A55AC(void);
 extern void fn_800A55D4(void);
 extern void fn_800A58D0(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800CB6B0(void);
 extern void fn_800CB6E4(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800EF73C(void);
 extern void fn_8011FFF8(void);
 extern void fn_8017C974(void);
 extern void fn_8018412C(void);
 extern void fn_80184548(void);
 extern void fn_80218218(void);
-extern void fn_80232B7C(void);
-extern void fn_802377B8(void);
-extern void fn_80239DAC(void);
+extern void sound_initGlobalInstances(void);
+extern void res_MsgHandle_constructor(void);
+extern void res_findResourceSlot(void);
 extern void fn_8023A680(void);
-extern void fn_8023A8B4(void);
-extern void fn_80370174(void);
+extern void res_registerResource(void);
+extern void world_getGlobalFlag(void);
 extern void fn_80373148(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_destructor(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_804741C0(void);
 extern void fn_804768B4(void);
 extern void fn_80476CE4(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_80682544(void);
-extern void fn_80695720(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void strncmp(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 extern u32 strlen(const char* str);
 
@@ -89,7 +89,7 @@ void fn_80120E38(void);
 void fn_80120E48(void);
 void fn_80120F4C(void);
 void fn_80120F5C(void);
-void fn_80120FF0(void);
+void atn_LH_Model_destructor(void);
 void fn_80121048(void);
 void fn_801210B4(void);
 void fn_801210C4(void);
@@ -142,14 +142,14 @@ asm void fn_80120D44(void)
     la r6, lbl_8087D9B8
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
-    lis r4, fn_802377B8@ha
+    bl mem_realloc
+    lis r4, res_MsgHandle_constructor@ha
     lis r5, fn_800EF73C@ha
     mr r7, r26
     li r6, 0xc
-    addi r4, r4, fn_802377B8@l
+    addi r4, r4, res_MsgHandle_constructor@l
     addi r5, r5, fn_800EF73C@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     mr r30, r3
     b lbl_fn_80120D44_00000084
 lbl_fn_80120D44_00000080:
@@ -223,14 +223,14 @@ asm void fn_80120E48(void)
     la r6, lbl_8087D9B0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80042740@ha
     lis r5, fn_80041C0C@ha
     mr r7, r25
     li r6, 0x20
     addi r4, r4, fn_80042740@l
     addi r5, r5, fn_80041C0C@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     mr r29, r3
     b lbl_fn_80120E48_00000188
 lbl_fn_80120E48_00000184:
@@ -311,7 +311,7 @@ asm void fn_80120F5C(void)
     stb r0, 0x11(r3)
     stb r0, 0x12(r3)
     mr r3, r30
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r4, lbl_8078FEA0@ha
     lis r3, fn_8011FFF8@ha
     addi r4, r4, lbl_8078FEA0@l
@@ -334,7 +334,7 @@ asm void fn_80120F5C(void)
     blr
 }
 
-asm void fn_80120FF0(void)
+asm void atn_LH_Model_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -345,14 +345,14 @@ asm void fn_80120FF0(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_80120FF0_00000308
+    beq lbl_atn_LH_Model_destructor_00000308
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
     cmpwi r31, 0x0
-    ble lbl_fn_80120FF0_00000308
+    ble lbl_atn_LH_Model_destructor_00000308
     mr r3, r30
     bl dtor_80084684
-lbl_fn_80120FF0_00000308:
+lbl_atn_LH_Model_destructor_00000308:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -376,11 +376,11 @@ asm void fn_80121048(void)
     beq lbl_fn_80121048_00000374
     li r4, -0x1
     addi r3, r3, 0x28
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addic. r3, r30, 0x14
     beq lbl_fn_80121048_00000364
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80121048_00000364:
     cmpwi r31, 0x0
     ble lbl_fn_80121048_00000374
@@ -414,7 +414,7 @@ asm void fn_801210C4(void)
     stw r31, 0xc(r1)
     mr r31, r3
     addi r3, r3, 0x14
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_801210C4_000003D8
     addi r3, r31, 0x14
@@ -490,7 +490,7 @@ lbl_fn_8012111C_00000474:
     cmpwi r3, 0x0
     beq lbl_fn_8012111C_000004B0
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
 lbl_fn_8012111C_000004B0:
     li r0, 0x0
     stw r0, 0x24(r31)
@@ -501,7 +501,7 @@ lbl_fn_8012111C_000004B8:
     addi r3, r31, 0x28
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     li r0, 0x0
     stw r0, 0x2c(r31)
 lbl_fn_8012111C_000004DC:
@@ -651,14 +651,14 @@ lbl_fn_8012133C_000006D8:
     stw r3, 0x130(r1)
     lwz r3, 0x4(r15)
     bl fn_80218218
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r4, 0x8(r15)
     stw r3, 0x134(r1)
     mr r3, r23
     mulli r0, r4, 0x30
     add r5, r23, r0
     lfs f24, 0x234(r5)
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lwz r0, 0x8(r15)
     fmr f25, f1
     lwz r3, lbl_8087EFA8
@@ -843,7 +843,7 @@ lbl_fn_8012133C_00000978:
 lbl_fn_8012133C_000009A8:
     lwz r4, 0x4(r15)
     mr r3, r15
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r0, 0x24(r24)
     cmpwi r0, 0x0
     beq lbl_fn_8012133C_00000A38
@@ -952,7 +952,7 @@ lbl_fn_8012133C_00000B2C:
     mulli r0, r0, 0xc
     lwz r4, 0x4(r15)
     add r3, r3, r0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r0, 0x24(r24)
     cmpwi r0, 0x0
     beq lbl_fn_8012133C_00000BFC
@@ -1002,14 +1002,14 @@ lbl_fn_8012133C_00000BA8:
     stfs f29, 0x44(r1)
     stw r27, 0x8(r1)
     stw r28, 0xc(r1)
-    bl fn_8023A8B4
+    bl res_registerResource
     b lbl_fn_8012133C_00000CC4
 lbl_fn_8012133C_00000BFC:
     lwz r5, 0x0(r15)
     addi r3, r1, 0xe8
     li r4, 0x79
     lfs f1, 0x538(r5)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     psq_l f1, 0x14(r24), 0, 0
     mr r4, r26
     lfs f2, 0x1c(r24)
@@ -1017,7 +1017,7 @@ lbl_fn_8012133C_00000BFC:
     stfs f2, 0x68(r1)
     addi r3, r1, 0xe8
     psq_st f1, 0x0(r26), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lwz r4, 0x0(r15)
     addi r8, r1, 0x78
     lfs f0, 0x68(r1)
@@ -1054,7 +1054,7 @@ lbl_fn_8012133C_00000BFC:
     stfs f29, 0x34(r1)
     stw r27, 0x8(r1)
     stw r28, 0xc(r1)
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_8012133C_00000CC4:
     lwz r3, 0x30(r24)
     clrlwi r0, r3, 31
@@ -1176,7 +1176,7 @@ lbl_fn_8012133C_00000E24:
     mr r3, r18
     addi r4, r30, 0x14
     li r5, 0xc
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_8012133C_00000E88
     addi r18, r30, 0x21
@@ -1185,7 +1185,7 @@ lbl_fn_8012133C_00000E88:
     mr r3, r18
     addi r4, r30, 0x3b
     li r5, 0xc
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_8012133C_00000EA4
     addi r18, r30, 0x2e
@@ -1220,20 +1220,20 @@ lbl_fn_8012133C_00000EDC:
     stfs f3, 0x58(r1)
     stfs f0, 0x5c(r1)
     lfs f1, 0x20(r24)
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x20
     addi r4, r1, 0x1c
     bl fn_800CB440
     addi r3, r1, 0x1c
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8012133C_00000FD0
 lbl_fn_8012133C_00000F34:
     lwz r5, 0x0(r15)
     addi r3, r1, 0xb8
     li r4, 0x79
     lfs f1, 0x538(r5)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     psq_l f1, 0x14(r24), 0, 0
     mr r4, r25
     lfs f2, 0x1c(r24)
@@ -1241,7 +1241,7 @@ lbl_fn_8012133C_00000F34:
     stfs f2, 0x74(r1)
     addi r3, r1, 0xb8
     psq_st f1, 0x0(r25), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lwz r7, 0x0(r15)
     mr r4, r18
     lfs f0, 0x74(r1)
@@ -1261,13 +1261,13 @@ lbl_fn_8012133C_00000F34:
     stfs f4, 0x4c(r1)
     stfs f0, 0x48(r1)
     lfs f1, 0x20(r24)
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x20
     addi r4, r1, 0x18
     bl fn_800CB440
     addi r3, r1, 0x18
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_8012133C_00000FD0:
     lwz r0, 0x30(r24)
     cmpwi r0, 0x0
@@ -1290,7 +1290,7 @@ lbl_fn_8012133C_00001010:
     addi r3, r1, 0x20
     li r18, 0x1
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8012133C_00001070
 lbl_fn_8012133C_00001024:
     lwz r4, lbl_8087F430
@@ -1370,7 +1370,7 @@ asm void fn_80121E14(void)
     lwz r5, 0x4(r30)
     mr r4, r6
     srwi r6, r0, 5
-    bl fn_80239DAC
+    bl res_findResourceSlot
 lbl_fn_80121E14_00001138:
     li r0, 0x0
     stw r0, 0x24(r30)
@@ -1385,7 +1385,7 @@ lbl_fn_80121E14_00001140:
     srawi r4, r4, 31
     addi r3, r30, 0x28
     andc r4, r0, r4
-    bl fn_800CB5C8
+    bl morph_updateMesh
     li r0, 0x0
     stw r0, 0x2c(r30)
 lbl_fn_80121E14_00001174:
@@ -1407,13 +1407,13 @@ asm void fn_80121EB0(void)
     lis r31, lbl_80737138@ha
     addi r31, r31, lbl_80737138@l
     addi r3, r31, 0xa1
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, lbl_8087F078
     addi r3, r31, 0xaa
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, lbl_8087F07C
     addi r3, r31, 0xb4
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
     stw r3, lbl_8087F080
@@ -1725,7 +1725,7 @@ asm void fn_80122288(void)
     cmpwi r3, 0x0
     beq lbl_fn_80122288_00001598
     li r4, 0xd0
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     beq lbl_fn_80122288_00001598
     li r31, 0x0

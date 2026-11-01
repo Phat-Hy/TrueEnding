@@ -54,13 +54,13 @@ extern void fn_805DDE30(void);
 extern void fn_805DDEA0(void);
 extern void fn_805DF170(void);
 extern void fn_805DF2D0(void);
-extern void fn_805F89B0(void);
-extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9110(void);
-extern void fn_805F9160(void);
-extern void fn_80618350(void);
-extern void fn_80618400(void);
+extern void PSMTXCopy(void);
+extern void PSMTXConcat(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXTransApply(void);
+extern void PSMTXScale(void);
+extern void GXLoadPosMtxImm(void);
+extern void GXSetCurrentMtx(void);
 extern void fn_8061A0F0(void);
 extern void fn_8061A100(void);
 extern void fn_806958E0(void);
@@ -351,50 +351,50 @@ lbl_fn_805D3170_00000298:
     addi r3, r1, 0x40
     lfs f2, 0xc(r1)
     lfs f3, 0x4(r31)
-    bl fn_805F9160
+    bl PSMTXScale
     lfs f1, 0x10(r31)
     addi r3, r1, 0x10
     lfs f0, 0x38(r29)
     li r4, 0x78
     fmuls f1, f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r3, r1, 0x10
     addi r4, r1, 0x40
     addi r5, r1, 0x70
-    bl fn_805F89F0
+    bl PSMTXConcat
     lfs f1, 0x10(r31)
     addi r3, r1, 0x10
     lfs f0, 0x3c(r29)
     li r4, 0x79
     fmuls f1, f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r3, r1, 0x10
     addi r4, r1, 0x70
     addi r5, r1, 0x40
-    bl fn_805F89F0
+    bl PSMTXConcat
     lfs f1, 0x10(r31)
     addi r3, r1, 0x10
     lfs f0, 0x40(r29)
     li r4, 0x7a
     fmuls f1, f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r3, r1, 0x10
     addi r4, r1, 0x40
     addi r5, r1, 0x70
-    bl fn_805F89F0
+    bl PSMTXConcat
     lfs f1, 0x2c(r29)
     addi r3, r1, 0x70
     lfs f2, 0x30(r29)
     addi r4, r29, 0x54
     lfs f3, 0x34(r29)
-    bl fn_805F9110
+    bl PSMTXTransApply
     lwz r3, 0xc(r29)
     cmpwi r3, 0x0
     beq lbl_fn_805D3170_0000035C
     addi r3, r3, 0x84
     addi r4, r29, 0x54
     addi r5, r29, 0x84
-    bl fn_805F89F0
+    bl PSMTXConcat
     b lbl_fn_805D3170_000003DC
 lbl_fn_805D3170_0000035C:
     lbz r0, 0x50(r30)
@@ -429,7 +429,7 @@ lbl_fn_805D3170_000003CC:
     addi r3, r30, 0x4
     addi r4, r29, 0x54
     addi r5, r29, 0x84
-    bl fn_805F89F0
+    bl PSMTXConcat
 lbl_fn_805D3170_000003DC:
     lbz r0, 0x50(r30)
     extrwi. r0, r0, 1, 25
@@ -994,7 +994,7 @@ asm void fn_805D3A90(void)
     addi r3, r4, 0x4
     addi r4, r5, 0x84
     addi r5, r1, 0x8
-    bl fn_805F89F0
+    bl PSMTXConcat
     lfs f2, 0x40(r31)
     lis r3, lbl_80764588@ha
     lfs f1, 0x38(r31)
@@ -1028,7 +1028,7 @@ lbl_fn_805D3A90_00000BB4:
     beq lbl_fn_805D3A90_00000C10
     addi r3, r3, 0x84
     addi r4, r1, 0x8
-    bl fn_805F89B0
+    bl PSMTXCopy
     lfs f2, 0xc(r1)
     addi r3, r1, 0x8
     lfs f1, 0x1c(r1)
@@ -1044,9 +1044,9 @@ lbl_fn_805D3A90_00000C10:
     addi r3, r3, 0x84
 lbl_fn_805D3A90_00000C14:
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     mtlr r0

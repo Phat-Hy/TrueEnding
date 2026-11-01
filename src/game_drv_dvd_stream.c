@@ -8,7 +8,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void fn_8003E918(void);
 extern void fn_8006F72C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800DBF68(void);
 extern void fn_800FDE60(void);
 extern void fn_801333E4(void);
@@ -23,10 +23,10 @@ extern void fn_805AF618(void);
 extern void fn_805B01C4(void);
 extern void fn_805B0D70(void);
 extern void fn_805B38A0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9920(void);
-extern void fn_80680CF8(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSVECSquareMag(void);
+extern void rand(void);
 extern void fn_806958E0(void);
 
 /* External data declarations */
@@ -526,7 +526,7 @@ lbl_fn_805AE038_00000560:
     bl fn_805A70D8
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_805AE038_000005AC
 lbl_fn_805AE038_00000590:
     lfs f1, lbl_808882F8
@@ -535,7 +535,7 @@ lbl_fn_805AE038_00000590:
     bl fn_805A70D8
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_805AE038_000005AC:
     li r0, 0x1
     stw r0, 0x15f0(r30)
@@ -551,7 +551,7 @@ lbl_fn_805AE038_000005BC:
     bl fn_805A70D8
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_805AE038_000005E4:
     li r0, 0x0
     li r3, 0x2
@@ -1168,11 +1168,11 @@ lbl_fn_805AE868_00000D9C:
     stfs f30, 0xc(r1)
     stfs f31, 0x10(r1)
     lfs f1, 0x538(r28)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x8
     addi r3, r1, 0x20
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0x10(r1)
     mr r5, r28
     lfs f1, 0xc(r1)
@@ -1723,7 +1723,7 @@ lbl_fn_805AEFA0_000014DC:
     lwz r3, 0x0(r3)
     b lbl_fn_805AEFA0_0000167C
 lbl_fn_805AEFA0_000014F8:
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4330
     xoris r0, r3, 0x8000
     stw r0, 0x1c(r1)
@@ -1801,7 +1801,7 @@ lbl_fn_805AEFA0_000015CC:
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f31
     bge lbl_fn_805AEFA0_00001634
     mr r26, r25
@@ -1880,7 +1880,7 @@ lbl_fn_805AF1C8_00001704:
     lwz r3, 0x0(r3)
     b lbl_fn_805AF1C8_000018A4
 lbl_fn_805AF1C8_00001720:
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4330
     xoris r0, r3, 0x8000
     stw r0, 0x1c(r1)
@@ -1958,7 +1958,7 @@ lbl_fn_805AF1C8_000017F4:
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f31
     bge lbl_fn_805AF1C8_0000185C
     mr r26, r25
@@ -2037,7 +2037,7 @@ lbl_fn_805AF3F0_0000192C:
     lwz r3, 0x0(r3)
     b lbl_fn_805AF3F0_00001ACC
 lbl_fn_805AF3F0_00001948:
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4330
     xoris r0, r3, 0x8000
     stw r0, 0x1c(r1)
@@ -2115,7 +2115,7 @@ lbl_fn_805AF3F0_00001A1C:
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f31
     bge lbl_fn_805AF3F0_00001A84
     mr r26, r25

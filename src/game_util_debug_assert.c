@@ -8,12 +8,12 @@ extern void _restgpr_22(void);
 extern void _savegpr_14(void);
 extern void _savegpr_22(void);
 extern void dtor_80084684(void);
-extern void fn_800844D8(void);
-extern void fn_800DC6B4(void);
+extern void mem_free(void);
+extern void str_findChar(void);
 extern void fn_80116FC0(void);
 extern void fn_801F4AA0(void);
 extern void fn_801F4CB4(void);
-extern void fn_801F4E8C(void);
+extern void saveSlot_readSummary(void);
 extern void fn_801F6C80(void);
 extern void fn_801F6E78(void);
 extern void fn_801F7DF0(void);
@@ -31,17 +31,17 @@ extern void fn_80211770(void);
 extern void fn_80212840(void);
 extern void fn_80212C34(void);
 extern void fn_8021C6A4(void);
-extern void fn_80370174(void);
+extern void world_getGlobalFlag(void);
 extern void fn_804444E8(void);
 extern void fn_804A3C24(void);
 extern void fn_804A4CE4(void);
 extern void fn_804A7DD4(void);
 extern void fn_80584754(void);
 extern void fn_80598534(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void fn_80686AF0(void);
 extern void fn_80686CF8(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -802,7 +802,7 @@ asm void fn_805969D8(void)
     cmpwi r3, 0x0
     beq lbl_fn_805969D8_00000AE4
     li r4, 0x11b
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     ble lbl_fn_805969D8_00000AE4
     li r25, 0x1
@@ -865,7 +865,7 @@ lbl_fn_805969D8_00000BA4:
     cmpwi r3, 0x0
     beq lbl_fn_805969D8_00000BC8
     li r4, 0x11b
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     ble lbl_fn_805969D8_00000BC8
     li r25, 0x1
@@ -886,7 +886,7 @@ lbl_fn_805969D8_00000BEC:
     stw r0, 0x2c(r1)
     beq lbl_fn_805969D8_00000C30
     li r4, 0xdb
-    bl fn_80370174
+    bl world_getGlobalFlag
     lwz r4, 0x2c(r1)
     subfic r0, r3, 0x64
     lis r3, 0x51ec
@@ -903,7 +903,7 @@ lbl_fn_805969D8_00000C30:
 lbl_fn_805969D8_00000C38:
     lwz r3, lbl_8087F430
     li r4, 0x11c
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     beq lbl_fn_805969D8_00000C54
     li r0, 0x0
@@ -981,8 +981,8 @@ lbl_fn_805969D8_00000D40:
     addi r4, r4, 0x2b0
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805969D8_00000D78:
     addis r5, r27, 0x2
     li r6, 0x0
@@ -1009,8 +1009,8 @@ lbl_fn_805969D8_00000D78:
     addi r4, r4, 0x2b0
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805969D8_00000DE4:
     lis r3, 0xf8
     addi r0, r3, 0x3e0f
@@ -1065,11 +1065,11 @@ lbl_fn_805969D8_00000E78:
     addi r4, r4, 0x2b0
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805969D8_00000EAC:
     mulli r3, r25, 0x58
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r26, r3
     bne lbl_fn_805969D8_00000EE0
@@ -1079,8 +1079,8 @@ lbl_fn_805969D8_00000EAC:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80796AB0@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805969D8_00000EE0:
     addis r3, r27, 0x2
     lwz r7, 0x18(r1)
@@ -1392,7 +1392,7 @@ asm void fn_8059726C(void)
     stw r0, 0x38(r6)
     lwz r4, 0x5b78(r7)
     addi r24, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80888154
     mr r4, r3
     mr r3, r24
@@ -1432,11 +1432,11 @@ lbl_fn_8059726C_000013B8:
     bl sprintf
     lwz r24, 0x5b78(r31)
     addi r3, r1, 0x30
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r24
     addi r3, r1, 0x8
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lfs f4, 0x8(r1)
     addis r3, r28, 0x2
     lfs f3, 0xc(r1)
@@ -1602,11 +1602,11 @@ asm void fn_80597558(void)
     stfs f0, 0xa0(r1)
     stfs f0, 0xa4(r1)
     lwz r14, 0x5b70(r4)
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r14
     addi r3, r1, 0x30
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lfs f4, 0x30(r1)
     addis r3, r15, 0x2
     lfs f3, 0x34(r1)
@@ -1643,11 +1643,11 @@ lbl_fn_80597558_000016D4:
     bl sprintf
     lwz r18, 0x5b70(r14)
     addi r3, r1, 0xe8
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r18
     addi r3, r1, 0x1c
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lfs f4, 0x1c(r1)
     addis r3, r19, 0x2
     lfs f3, 0x20(r1)
@@ -1685,11 +1685,11 @@ lbl_fn_80597558_00001778:
     bl sprintf
     lwz r18, 0x5b70(r14)
     addi r3, r1, 0xe8
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r18
     addi r3, r1, 0x8
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lfs f4, 0x8(r1)
     addis r3, r19, 0x2
     lfs f3, 0xc(r1)
@@ -1754,7 +1754,7 @@ lbl_fn_80597558_00001888:
     cmpwi r3, 0x0
     beq lbl_fn_80597558_00001BD8
     li r4, 0x11b
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     ble lbl_fn_80597558_00001BD8
     addis r6, r15, 0x2
@@ -2454,7 +2454,7 @@ lbl_fn_80597558_000022C8:
     addi r3, r1, 0xe8
     lwz r4, 0x5b70(r4)
     addi r24, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r24
     mr r5, r25
@@ -2540,7 +2540,7 @@ lbl_fn_80597558_00002438:
     lwz r4, 0x5b70(r3)
     addi r3, r1, 0xe8
     addi r24, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r24
     mr r5, r20
@@ -2570,7 +2570,7 @@ lbl_fn_80597558_00002464:
     lwz r4, 0x5b70(r3)
     addi r3, r1, 0xe8
     addi r24, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r24
     mr r5, r20
@@ -2584,7 +2584,7 @@ lbl_fn_80597558_00002464:
     lwz r4, 0x5b70(r3)
     addi r3, r1, 0xe8
     addi r24, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r24
     mr r5, r20
@@ -2600,11 +2600,11 @@ lbl_fn_80597558_0000250C:
     addis r4, r15, 0x2
     addi r3, r1, 0xa8
     lwz r20, 0x5b70(r4)
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r20
     addi r3, r1, 0x44
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lwz r0, 0x38(r17)
     mr r3, r17
     addi r4, r28, 0x269

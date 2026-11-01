@@ -7,21 +7,21 @@ extern void _restgpr_27(void);
 extern void _savegpr_22(void);
 extern void _savegpr_27(void);
 extern void fn_800A56A8(void);
-extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void skin_applyWeights(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB688(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_8017A160(void);
 extern void fn_801FECE0(void);
 extern void fn_801FED24(void);
 extern void fn_80210220(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_8023A680(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9750(void);
-extern void fn_805F9940(void);
-extern void fn_80680CF8(void);
-extern void fn_8068AEA4(void);
+extern void PSMTXRotRad(void);
+extern void PSMTX44Identity(void);
+extern void PSVECMag(void);
+extern void rand(void);
+extern void std_atan2(void);
 
 /* External data declarations */
 extern u8 lbl_80735DD0[];
@@ -131,7 +131,7 @@ lbl_fn_801018E4_000000C4:
 lbl_fn_801018E4_000000CC:
     frsp f2, f2
     lfs f1, 0x60(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x58(r1)
 lbl_fn_801018E4_000000E0:
@@ -139,7 +139,7 @@ lbl_fn_801018E4_000000E0:
     addi r3, r1, 0x70
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80881478
     addi r4, r1, 0x48
     lfs f30, 0x78(r1)
@@ -189,7 +189,7 @@ lbl_fn_801018E4_000000E0:
     stfs f6, 0xcc(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x50(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x50(r1)
     lfs f0, lbl_808814D4
     fabs f3, f2
@@ -210,7 +210,7 @@ lbl_fn_801018E4_000001F0:
     b lbl_fn_801018E4_00000210
 lbl_fn_801018E4_000001FC:
     lfs f1, 0x4c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x54(r1)
@@ -238,7 +238,7 @@ lbl_fn_801018E4_00000258:
 lbl_fn_801018E4_0000025C:
     mr r3, r30
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     li r0, 0x0
     stw r0, 0x8(r1)
     li r0, -0x1
@@ -270,7 +270,7 @@ lbl_fn_801018E4_000002B8:
     ble lbl_fn_801018E4_000003D0
     mr r3, r30
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     li r0, 0x0
     stw r0, 0x8(r1)
     subi r0, r28, 0x1
@@ -306,7 +306,7 @@ lbl_fn_801018E4_00000358:
 lbl_fn_801018E4_0000035C:
     mr r3, r30
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     li r0, 0x0
     stw r0, 0x8(r1)
     li r3, -0x1
@@ -368,7 +368,7 @@ asm void fn_80101CDC(void)
     lwz r0, 0x84(r4)
     cmpwi r0, 0x1
     bne lbl_fn_80101CDC_00000498
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x5555
     lis r4, lbl_80735DD0@ha
     addi r0, r5, 0x5556
@@ -386,15 +386,15 @@ asm void fn_80101CDC(void)
     addi r0, r8, 0x11
     slwi r0, r0, 2
     lwzx r4, r4, r0
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x1c
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_80101CDC_000008A8
 lbl_fn_80101CDC_00000498:
     cmpwi r0, 0x0
     bne lbl_fn_80101CDC_000008A8
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x5555
     cmpwi r31, 0x0
     addi r0, r4, 0x5556
@@ -544,7 +544,7 @@ lbl_fn_80101CDC_00000690:
 lbl_fn_80101CDC_00000698:
     li r30, 0xf
 lbl_fn_80101CDC_0000069C:
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lis r0, 0x4330
     addi r5, r4, 0x749f
@@ -584,7 +584,7 @@ lbl_fn_80101CDC_00000710:
     addi r5, r29, 0x1c
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     fmr f1, f31
     addi r3, r1, 0x20
     li r4, 0x0
@@ -599,10 +599,10 @@ lbl_fn_80101CDC_00000710:
     addi r5, r29, 0x1c
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x18
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80101CDC_00000780:
     lwz r0, 0x78(r29)
     cmpwi r0, 0x0
@@ -615,14 +615,14 @@ lbl_fn_80101CDC_00000780:
     addi r5, r29, 0x1c
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80101CDC_000007BC:
     addi r3, r1, 0x20
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_80101CDC_000008A8
 lbl_fn_80101CDC_000007CC:
     cmpwi r0, 0x2
@@ -644,10 +644,10 @@ lbl_fn_80101CDC_000007CC:
     addi r5, r29, 0x1c
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_80101CDC_000008A8
 lbl_fn_80101CDC_0000082C:
     cmpwi r0, 0x0
@@ -664,10 +664,10 @@ lbl_fn_80101CDC_0000082C:
     addi r5, r29, 0x1c
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_80101CDC_000008A8
 lbl_fn_80101CDC_00000878:
     lis r4, lbl_80735DD0@ha
@@ -678,10 +678,10 @@ lbl_fn_80101CDC_00000878:
     addi r5, r29, 0x1c
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80101CDC_000008A8:
     lwz r0, 0x54(r1)
     psq_l f31, 0x48(r1), 0, 0
@@ -835,7 +835,7 @@ lbl_fn_8010220C_00000A98:
     stw r0, -0x34cc(r3)
     addi r3, r30, 0x3c0
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f29
     mr r4, r3
     mr r3, r29
@@ -844,7 +844,7 @@ lbl_fn_8010220C_00000A98:
     addi r3, r30, 0x3c7
     lwz r4, -0x34d0(r4)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f28
     mr r4, r3
     mr r3, r29
@@ -853,7 +853,7 @@ lbl_fn_8010220C_00000A98:
     addi r3, r30, 0x3ce
     lwz r4, -0x34d0(r4)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f27
     mr r4, r3
     mr r3, r29
@@ -862,7 +862,7 @@ lbl_fn_8010220C_00000A98:
     addi r3, r30, 0x3d5
     lwz r4, -0x34d0(r4)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f26
     mr r4, r3
     mr r3, r29
@@ -904,7 +904,7 @@ lbl_fn_8010220C_00000B88:
     addi r29, r5, 0x58
     fmadds f2, f2, f4, f3
     fadds f29, f0, f2
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f29
     mr r4, r3
     mr r3, r29
@@ -924,7 +924,7 @@ lbl_fn_8010220C_00000B88:
     addi r29, r4, 0x58
     fmadds f2, f2, f4, f3
     fadds f29, f0, f2
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f29
     mr r4, r3
     mr r3, r29
@@ -942,7 +942,7 @@ lbl_fn_8010220C_00000B88:
     addi r29, r4, 0x58
     fmadds f2, f2, f3, f31
     fadds f29, f0, f2
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f29
     mr r4, r3
     mr r3, r29
@@ -960,7 +960,7 @@ lbl_fn_8010220C_00000B88:
     addi r29, r4, 0x58
     fmadds f2, f2, f3, f30
     fadds f29, f0, f2
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f29
     mr r4, r3
     mr r3, r29
@@ -1035,7 +1035,7 @@ lbl_fn_8010220C_00000D54:
     psq_st f1, 0x0(r6), 0, 0
     lfs f29, -0x34b8(r5)
     stfs f5, 0xc(r1)
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f29
     mr r4, r3
     mr r3, r29
@@ -1046,7 +1046,7 @@ lbl_fn_8010220C_00000D54:
     lwz r4, -0x34d0(r5)
     lfs f29, -0x34b4(r5)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f29
     mr r4, r3
     mr r3, r29
@@ -1059,7 +1059,7 @@ lbl_fn_8010220C_00000D54:
     lwz r4, -0x34a0(r4)
     fadds f29, f2, f0
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f29
     mr r4, r3
     mr r3, r29
@@ -1072,7 +1072,7 @@ lbl_fn_8010220C_00000D54:
     lwz r4, -0x34a0(r4)
     fadds f29, f2, f0
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f29
     mr r4, r3
     mr r3, r29
@@ -1455,7 +1455,7 @@ lbl_fn_80102A40_0000130C:
     stfs f2, 0x18(r1)
     stfs f0, 0x14(r1)
     stfs f4, 0x1c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f2, 0x34(r31)
     lfs f0, lbl_80881478
     fdivs f2, f1, f2
@@ -1572,7 +1572,7 @@ lbl_fn_80102A40_000014B4:
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x34(r31)
     fdivs f0, f1, f0
     fcmpo cr0, f0, f29

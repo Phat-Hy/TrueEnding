@@ -26,9 +26,9 @@ extern void __GXSetIndirectMask(void);
 extern void __GXSetTmemConfig(void);
 extern void fn_806134E0(void);
 extern void fn_806136C0(void);
-extern void fn_80613910(void);
-extern void fn_80613950(void);
-extern void fn_80613960(void);
+extern void GXSetArray(void);
+extern void GXInvalidateVtxCache(void);
+extern void __GXSetVtxDesc(void);
 extern void fn_80613BB0(void);
 extern void fn_806141C0(void);
 extern void fn_806141D0(void);
@@ -44,13 +44,13 @@ extern void fn_80614A40(void);
 extern void fn_80614A80(void);
 extern void fn_80614AB0(void);
 extern void fn_80614AF0(void);
-extern void fn_80614C80(void);
-extern void fn_80614D00(void);
+extern void GXSetDispCopySrc(void);
+extern void GXSetDispCopyDst(void);
 extern void fn_80614E40(void);
 extern void fn_80614E60(void);
 extern void fn_806150C0(void);
 extern void fn_80615190(void);
-extern void fn_80615210(void);
+extern void __GXSetSamplePattern(void);
 extern void fn_80615400(void);
 extern void fn_806156C0(void);
 extern void fn_80615B60(void);
@@ -59,43 +59,43 @@ extern void fn_80615D20(void);
 extern void fn_80615D50(void);
 extern void fn_80615FF0(void);
 extern void fn_806165B0(void);
-extern void fn_806167B0(void);
+extern void GXDrawDone(void);
 extern void fn_80616800(void);
 extern void fn_80616820(void);
 extern void fn_80617030(void);
 extern void fn_80617200(void);
 extern void fn_80617220(void);
 extern void fn_80617340(void);
-extern void fn_80617650(void);
-extern void fn_806176A0(void);
-extern void fn_806176F0(void);
+extern void GXSetTevKColorSel(void);
+extern void GXSetTevKAlphaSel(void);
+extern void GXSetTevSwapMode(void);
 extern void fn_80617730(void);
 extern void fn_806177B0(void);
 extern void fn_806177F0(void);
 extern void fn_80617880(void);
-extern void fn_806179E0(void);
+extern void GXSetNumTevStages(void);
 extern void fn_80617A10(void);
 extern void fn_80617C40(void);
 extern void fn_80617D50(void);
-extern void fn_80617DA0(void);
-extern void fn_80617DD0(void);
-extern void fn_80617E00(void);
-extern void fn_80617E40(void);
-extern void fn_80617E70(void);
-extern void fn_80617F20(void);
-extern void fn_80617F50(void);
+extern void GXSetZCompLoc(void);
+extern void GXSetDither(void);
+extern void GXSetZMode(void);
+extern void GXSetColorUpdate(void);
+extern void GXSetBlendMode(void);
+extern void GXSetAlphaUpdate(void);
+extern void GXSetDstAlpha(void);
 extern void fn_80617F80(void);
 extern void fn_80617FC0(void);
 extern void fn_80618300(void);
-extern void fn_80618350(void);
-extern void fn_806183A0(void);
-extern void fn_80618400(void);
-extern void fn_80618420(void);
+extern void GXLoadPosMtxImm(void);
+extern void GXLoadNrmMtxImm3x3(void);
+extern void GXSetCurrentMtx(void);
+extern void GXLoadTexMtxImm(void);
 extern void fn_80618570(void);
 extern void fn_806185C0(void);
 extern void fn_80618630(void);
-extern void fn_80618670(void);
-extern void fn_80618730(void);
+extern void __GXSetIndTexMtx(void);
+extern void __GXSetTevKonst(void);
 extern void fn_80618F50(void);
 extern void fn_80611060(void);
 extern void fn_80611150(void);
@@ -609,66 +609,66 @@ lbl___GXInitGX_000006D8:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x1
     li r4, 0x1
     li r5, 0x5
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x2
     li r4, 0x1
     li r5, 0x6
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x3
     li r4, 0x1
     li r5, 0x7
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x4
     li r4, 0x1
     li r5, 0x8
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x5
     li r4, 0x1
     li r5, 0x9
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x6
     li r4, 0x1
     li r5, 0xa
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x7
     li r4, 0x1
     li r5, 0xb
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x1
     bl fn_80613BB0
     bl fn_806134E0
-    bl fn_80613950
+    bl GXInvalidateVtxCache
     li r31, 0x9
 lbl___GXInitGX_000007E0:
     lwz r4, __GXData
     mr r3, r31
     li r5, 0x0
-    bl fn_80613910
+    bl GXSetArray
     addi r31, r31, 0x1
     cmplwi r31, 0x18
     ble lbl___GXInitGX_000007E0
@@ -734,20 +734,20 @@ lbl___GXInitGX_00000800:
     stfs f0, 0x64(r1)
     stfs f1, 0x68(r1)
     stfs f0, 0x6c(r1)
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     addi r3, r1, 0x40
     li r4, 0x0
-    bl fn_806183A0
+    bl GXLoadNrmMtxImm3x3
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     addi r3, r1, 0x40
     li r4, 0x3c
     li r5, 0x0
-    bl fn_80618420
+    bl GXLoadTexMtxImm
     addi r3, r1, 0x40
     li r4, 0x7d
     li r5, 0x0
-    bl fn_80618420
+    bl GXLoadTexMtxImm
     lhz r3, 0x4(r27)
     lhz r0, 0x8(r27)
     stw r3, 0x74(r1)
@@ -770,7 +770,7 @@ lbl___GXInitGX_00000800:
     li r3, 0x2
     bl fn_80614A80
     li r3, 0x0
-    bl fn_80618670
+    bl __GXSetIndTexMtx
     lhz r5, 0x4(r27)
     li r3, 0x0
     lhz r6, 0x6(r27)
@@ -813,7 +813,7 @@ lbl___GXInitGX_00000800:
     addi r4, r1, 0xc
     li r3, 0x5
     bl fn_80615C40
-    bl fn_806167B0
+    bl GXDrawDone
     lis r3, fn_80611060@ha
     addi r3, r3, fn_80611060@l
     bl fn_80616800
@@ -934,7 +934,7 @@ lbl___GXInitGX_00000800:
     li r6, 0xff
     bl fn_80617880
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0x3
     bl fn_80617340
@@ -952,14 +952,14 @@ lbl___GXInitGX_00000800:
 lbl___GXInitGX_00000C4C:
     mr r3, r31
     li r4, 0x6
-    bl fn_80617650
+    bl GXSetTevKColorSel
     mr r3, r31
     li r4, 0x0
-    bl fn_806176A0
+    bl GXSetTevKAlphaSel
     mr r3, r31
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     addi r31, r31, 0x1
     cmplwi r31, 0x10
     blt lbl___GXInitGX_00000C4C
@@ -1030,23 +1030,23 @@ lbl___GXInitGX_00000CE4:
     li r6, 0x0
     bl fn_80617D50
     li r3, 0x1
-    bl fn_80617DA0
+    bl GXSetZCompLoc
     li r3, 0x1
-    bl fn_80617DD0
+    bl GXSetDither
     li r3, 0x1
     li r4, 0x3
     li r5, 0x1
-    bl fn_80617E00
+    bl GXSetZMode
     li r3, 0x1
-    bl fn_80617E40
+    bl GXSetColorUpdate
     li r3, 0x1
-    bl fn_80617F20
+    bl GXSetAlphaUpdate
     li r3, 0x0
     li r4, 0x0
-    bl fn_80617F50
+    bl GXSetDstAlpha
     li r3, 0x0
     li r4, 0x0
-    bl fn_80617E70
+    bl GXSetBlendMode
     li r3, 0x1
     li r4, 0x1
     bl fn_80617F80
@@ -1066,10 +1066,10 @@ lbl___GXInitGX_00000DF8:
     li r3, 0x0
     lhz r6, 0x6(r27)
     li r4, 0x0
-    bl fn_80614C80
+    bl GXSetDispCopySrc
     lhz r3, 0x4(r27)
     lhz r4, 0x6(r27)
-    bl fn_80614D00
+    bl GXSetDispCopyDst
     lhz r3, 0x8(r27)
     lhz r0, 0x6(r27)
     stw r3, 0x74(r1)
@@ -1087,7 +1087,7 @@ lbl___GXInitGX_00000DF8:
     addi r4, r27, 0x1a
     addi r6, r27, 0x32
     li r5, 0x1
-    bl fn_80615210
+    bl __GXSetSamplePattern
     li r3, 0x0
     bl fn_80615400
     li r3, 0x0
@@ -1118,7 +1118,7 @@ lbl___GXInitGX_00000DF8:
     bl fn_806142D0
     li r3, 0x23
     li r4, 0x16
-    bl fn_80618730
+    bl __GXSetTevKonst
     bl fn_80618F50
     addi r11, r1, 0xa0
     bl _restgpr_27

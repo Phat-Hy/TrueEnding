@@ -11,12 +11,12 @@ extern void _savegpr_23(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_8000D114(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_80011034(void);
 extern void fn_80011410(void);
 extern void fn_80012774(void);
-extern void fn_80013338(void);
-extern void fn_80013F78(void);
+extern void vec3_sub(void);
+extern void actor_dispatchMessage(void);
 extern void fn_80049B74(void);
 extern void fn_8004AE84(void);
 extern void fn_8004B158(void);
@@ -86,7 +86,7 @@ extern void fn_805381CC(void);
 extern void fn_80541214(void);
 extern void fn_8054FAD8(void);
 extern void fn_805A38F4(void);
-extern void fn_805F8CA0(void);
+extern void PSMTXInverse(void);
 extern void fn_8067E23C(void);
 extern u32 strlen(const char* str);
 
@@ -405,10 +405,10 @@ lbl_fn_80487490_000003A8:
     mr r5, r3
     addi r3, r1, 0x6c
     addi r4, r31, 0x1e94
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x84
     addi r4, r1, 0x6c
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r1, 0x84
     bl fn_8012A1E0
     cmpwi r3, 0x0
@@ -430,10 +430,10 @@ lbl_fn_80487490_0000040C:
     addi r3, r1, 0x54
     addi r4, r1, 0x84
     addi r5, r1, 0x78
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x84
     addi r4, r1, 0x54
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r1, 0xd8
     addi r4, r1, 0x108
     bl fn_80487BD0
@@ -487,7 +487,7 @@ lbl_fn_80487490_000004D4:
     bl fn_800F7260
     addi r3, r31, 0x243c
     addi r4, r1, 0x48
-    bl fn_8000D124
+    bl vec3_copy
     lfs f31, lbl_80886F8C
     addi r3, r31, 0x243c
     bl fn_8012A1E0
@@ -544,7 +544,7 @@ lbl_fn_80487490_00000588:
     bl fn_8000D114
     mr r4, r3
     addi r3, r31, 0x243c
-    bl fn_8000D124
+    bl vec3_copy
 lbl_fn_80487490_000005E8:
     addi r3, r31, 0x23b8
     bl fn_803D6EDC
@@ -661,7 +661,7 @@ asm void fn_80487BD0(void)
     psq_st f4, 0x18(r3), 0, 0
     psq_st f5, 0x20(r3), 0, 0
     psq_st f6, 0x28(r3), 0, 0
-    b fn_805F8CA0
+    b PSMTXInverse
 }
 
 asm void fn_80487C08(void)
@@ -1177,7 +1177,7 @@ lbl_fn_804881B8_00000E3C:
     add r7, r24, r0
     addi r8, r1, 0xc
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lfs f0, lbl_80886F8C
     oris r31, r31, 0x8000
     stfs f0, 0x1e8c(r22)

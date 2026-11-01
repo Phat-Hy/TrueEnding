@@ -22,9 +22,9 @@ extern void fn_8006A5A8(void);
 extern void fn_8006EF48(void);
 extern void fn_80076FF8(void);
 extern void fn_80079044(void);
-extern void fn_80084320(void);
-extern void fn_800874C8(void);
-extern void fn_8008771C(void);
+extern void mem_alloc(void);
+extern void route_findNextWaypoint(void);
+extern void route_interpolatePath(void);
 extern void fn_80087858(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
@@ -37,18 +37,18 @@ extern void fn_800C1FB4(void);
 extern void fn_800C310C(void);
 extern void fn_800CDF84(void);
 extern void fn_800CE368(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
-extern void fn_800D2338(void);
-extern void fn_800D246C(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
+extern void atn_Task_unlink(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_801F0544(void);
 extern void fn_801F3FF8(void);
 extern void fn_801FEB9C(void);
-extern void fn_802377B8(void);
-extern void fn_8023780C(void);
-extern void fn_8023781C(void);
-extern void fn_80237874(void);
+extern void res_MsgHandle_constructor(void);
+extern void res_MsgHandle_destructor(void);
+extern void res_MsgHandle_unload(void);
+extern void res_MsgHandle_update(void);
 extern void fn_80239798(void);
 extern void fn_803B27F8(void);
 extern void fn_803B33F8(void);
@@ -65,9 +65,9 @@ extern void fn_80453DBC(void);
 extern void fn_8046ECDC(void);
 extern void fn_8047043C(void);
 extern void fn_80470528(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_destructor(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_804741C0(void);
 extern void fn_8047C7FC(void);
 extern void fn_8047E528(void);
@@ -81,11 +81,11 @@ extern void fn_8052E984(void);
 extern void fn_8052EEC0(void);
 extern void fn_8052F890(void);
 extern void fn_80533BE0(void);
-extern void fn_80536CAC(void);
-extern void fn_805F98D0(void);
+extern void spectateView_renderInterface(void);
+extern void PSVECNormalize(void);
 extern void fn_806163C0(void);
 extern void fn_806163E0(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -174,8 +174,8 @@ void fn_805319C8(void);
 void fn_80531E84(void);
 void fn_80531ED4(void);
 void fn_80531F48(void);
-void fn_805327B4(void);
-void fn_80532ABC(void);
+void spectateManager_init(void);
+void spectateManager_update(void);
 
 asm void fn_80531814(void)
 {
@@ -275,7 +275,7 @@ lbl_fn_80531820_00000110:
     lwz r3, lbl_8087F540
     bl fn_8047F8B0
     mr r3, r31
-    bl fn_800D2338
+    bl atn_Task_unlink
     b lbl_fn_80531820_000001A0
 lbl_fn_80531820_00000158:
     lfs f1, 0x50(r3)
@@ -575,7 +575,7 @@ lbl_fn_805319C8_00000584:
 lbl_fn_805319C8_00000588:
     lfs f0, lbl_80887B74
     fmuls f1, f0, f2
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r4, lbl_8087EEB0
     li r0, 0x13
     lis r5, lbl_8075D450@ha
@@ -679,7 +679,7 @@ asm void fn_80531ED4(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80531ED4_0000071C
     mr r4, r30
@@ -714,7 +714,7 @@ asm void fn_80531F48(void)
     mr r28, r3
     mr r29, r4
     mr r26, r5
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_80793A20@ha
     li r30, 0x0
     addi r3, r3, lbl_80793A20@l
@@ -732,9 +732,9 @@ asm void fn_80531F48(void)
     addi r3, r28, 0x27c
     bl fn_8004AD9C
     addi r3, r28, 0x290
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r28, 0x29c
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     lfs f5, lbl_80887BB4
     li r31, 0x1
     lfs f4, lbl_80887BB8
@@ -837,7 +837,7 @@ asm void fn_80531F48(void)
     stfs f5, 0x428(r28)
     stfs f5, 0x42c(r28)
     stfs f5, 0x430(r28)
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lfs f5, lbl_80887BB4
     lis r3, lbl_8078FBB0@ha
     lfs f4, lbl_80887BB8
@@ -1028,7 +1028,7 @@ asm void fn_80531F48(void)
     stfs f9, 0x88(r1)
     psq_st f1, 0x0(r27), 0, 0
     stfs f2, 0x94(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     psq_l f1, 0x0(r27), 0, 0
     addi r3, r26, 0x488
     lfs f2, 0x94(r1)
@@ -1077,7 +1077,7 @@ asm void fn_80531F48(void)
     bl fn_8006A5A8
     stw r3, 0x2cc(r28)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x2cc(r28)
     li r0, 0x12
     stw r0, 0x78(r3)
@@ -1246,7 +1246,7 @@ lbl_fn_80531F48_00000F6C:
     blr
 }
 
-asm void fn_805327B4(void)
+asm void spectateManager_init(void)
 {
     nofralloc
     stwu r1, -0x90(r1)
@@ -1258,16 +1258,16 @@ asm void fn_805327B4(void)
     stw r30, 0x88(r1)
     mr r30, r3
     stw r29, 0x84(r1)
-    beq lbl_fn_805327B4_00001288
+    beq lbl_spectateManager_init_00001288
     lwz r0, 0x2ac(r3)
     lis r4, lbl_80793A20@ha
     addi r4, r4, lbl_80793A20@l
     stw r4, 0x0(r3)
     cmpwi r0, 0x19
-    beq lbl_fn_805327B4_00000FE8
+    beq lbl_spectateManager_init_00000FE8
     lwz r3, 0x2c8(r3)
-    bl fn_800D2338
-lbl_fn_805327B4_00000FE8:
+    bl atn_Task_unlink
+lbl_spectateManager_init_00000FE8:
     lwz r4, lbl_8087EFA8
     li r6, 0x0
     stw r6, 0x50(r1)
@@ -1341,97 +1341,97 @@ lbl_fn_805327B4_00000FE8:
     bl fn_800CE368
     lwz r3, lbl_8087F3C0
     cmpwi r3, 0x0
-    beq lbl_fn_805327B4_00001114
-    bl fn_800D2338
-lbl_fn_805327B4_00001114:
+    beq lbl_spectateManager_init_00001114
+    bl atn_Task_unlink
+lbl_spectateManager_init_00001114:
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
-    beq lbl_fn_805327B4_00001128
+    beq lbl_spectateManager_init_00001128
     li r0, 0x0
     stw r0, 0xc(r3)
-lbl_fn_805327B4_00001128:
+lbl_spectateManager_init_00001128:
     lwz r3, lbl_8087F018
     cmpwi r3, 0x0
-    beq lbl_fn_805327B4_0000113C
+    beq lbl_spectateManager_init_0000113C
     li r0, 0x0
     stw r0, 0x40e0(r3)
-lbl_fn_805327B4_0000113C:
+lbl_spectateManager_init_0000113C:
     lwz r3, lbl_8087F9A0
     cmpwi r3, 0x0
-    beq lbl_fn_805327B4_0000115C
+    beq lbl_spectateManager_init_0000115C
     lwz r0, 0x24(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_805327B4_0000115C
+    beq lbl_spectateManager_init_0000115C
     li r0, 0x0
     stw r0, 0x24(r3)
-lbl_fn_805327B4_0000115C:
+lbl_spectateManager_init_0000115C:
     addic. r3, r30, 0x6ec
-    beq lbl_fn_805327B4_00001170
+    beq lbl_spectateManager_init_00001170
     addi r3, r3, 0x64
     li r4, -0x1
     bl fn_800C1FB4
-lbl_fn_805327B4_00001170:
+lbl_spectateManager_init_00001170:
     addic. r3, r30, 0x6a0
-    beq lbl_fn_805327B4_0000117C
+    beq lbl_spectateManager_init_0000117C
     bl fn_80470528
-lbl_fn_805327B4_0000117C:
+lbl_spectateManager_init_0000117C:
     addic. r3, r30, 0x438
-    beq lbl_fn_805327B4_0000118C
+    beq lbl_spectateManager_init_0000118C
     li r4, 0x0
-    bl fn_80473E8C
-lbl_fn_805327B4_0000118C:
+    bl atn_LoadHandle_destructor
+lbl_spectateManager_init_0000118C:
     addic. r0, r30, 0x314
-    beq lbl_fn_805327B4_000011B0
+    beq lbl_spectateManager_init_000011B0
     lwz r4, 0x314(r30)
     cmpwi r4, 0x0
-    beq lbl_fn_805327B4_000011B0
+    beq lbl_spectateManager_init_000011B0
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
-    beq lbl_fn_805327B4_000011B0
+    beq lbl_spectateManager_init_000011B0
     bl fn_800897D8
-lbl_fn_805327B4_000011B0:
+lbl_spectateManager_init_000011B0:
     addic. r4, r30, 0x2e4
-    beq lbl_fn_805327B4_000011DC
-    beq lbl_fn_805327B4_000011DC
-    beq lbl_fn_805327B4_000011DC
+    beq lbl_spectateManager_init_000011DC
+    beq lbl_spectateManager_init_000011DC
+    beq lbl_spectateManager_init_000011DC
     lwz r3, 0x0(r4)
     cmpwi r3, 0x0
-    beq lbl_fn_805327B4_000011DC
+    beq lbl_spectateManager_init_000011DC
     lwz r0, 0x4(r4)
     subf r0, r0, r0
     stw r0, 0x4(r4)
     bl dtor_80084684
-lbl_fn_805327B4_000011DC:
+lbl_spectateManager_init_000011DC:
     addic. r4, r30, 0x2d0
-    beq lbl_fn_805327B4_00001208
-    beq lbl_fn_805327B4_00001208
-    beq lbl_fn_805327B4_00001208
+    beq lbl_spectateManager_init_00001208
+    beq lbl_spectateManager_init_00001208
+    beq lbl_spectateManager_init_00001208
     lwz r3, 0x0(r4)
     cmpwi r3, 0x0
-    beq lbl_fn_805327B4_00001208
+    beq lbl_spectateManager_init_00001208
     lwz r0, 0x4(r4)
     subf r0, r0, r0
     stw r0, 0x4(r4)
     bl dtor_80084684
-lbl_fn_805327B4_00001208:
+lbl_spectateManager_init_00001208:
     addic. r29, r30, 0x29c
-    beq lbl_fn_805327B4_00001228
+    beq lbl_spectateManager_init_00001228
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
-    beq lbl_fn_805327B4_00001228
+    beq lbl_spectateManager_init_00001228
     li r4, 0x0
-    bl fn_80473E8C
-lbl_fn_805327B4_00001228:
+    bl atn_LoadHandle_destructor
+lbl_spectateManager_init_00001228:
     addic. r29, r30, 0x290
-    beq lbl_fn_805327B4_00001248
+    beq lbl_spectateManager_init_00001248
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
-    beq lbl_fn_805327B4_00001248
+    beq lbl_spectateManager_init_00001248
     li r4, 0x0
-    bl fn_80473E8C
-lbl_fn_805327B4_00001248:
+    bl atn_LoadHandle_destructor
+lbl_spectateManager_init_00001248:
     addi r3, r30, 0x27c
     li r4, -0x1
     bl fn_8004ADF4
@@ -1443,12 +1443,12 @@ lbl_fn_805327B4_00001248:
     bl fn_8004B338
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r31, 0x0
-    ble lbl_fn_805327B4_00001288
+    ble lbl_spectateManager_init_00001288
     mr r3, r30
     bl dtor_80084684
-lbl_fn_805327B4_00001288:
+lbl_spectateManager_init_00001288:
     mr r3, r30
     lwz r31, 0x8c(r1)
     lwz r30, 0x88(r1)
@@ -1459,7 +1459,7 @@ lbl_fn_805327B4_00001288:
     blr
 }
 
-asm void fn_80532ABC(void)
+asm void spectateManager_update(void)
 {
     nofralloc
     stwu r1, -0x370(r1)
@@ -1473,11 +1473,11 @@ asm void fn_80532ABC(void)
     bl fn_8046ECDC
     lwz r4, 0x2a8(r30)
     cmpwi r4, 0x0
-    bne lbl_fn_80532ABC_000015F4
+    bne lbl_spectateManager_update_000015F4
     lwz r3, 0x6e0(r30)
     lbz r0, 0x154(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80532ABC_000021FC
+    bne lbl_spectateManager_update_000021FC
     lis r3, lbl_8075D5B0@ha
     addi r0, r4, 0x1
     addi r3, r3, lbl_8075D5B0@l
@@ -1485,7 +1485,7 @@ asm void fn_80532ABC(void)
     addi r29, r3, 0x1
     stw r0, 0x2a8(r30)
     cmplw r29, r28
-    beq lbl_fn_80532ABC_00001324
+    beq lbl_spectateManager_update_00001324
     mr r3, r29
     bl strlen
     mr r5, r3
@@ -1493,7 +1493,7 @@ asm void fn_80532ABC(void)
     mr r4, r29
     addi r5, r5, 0x1
     bl memcpy
-lbl_fn_80532ABC_00001324:
+lbl_spectateManager_update_00001324:
     li r0, 0x1
     stw r0, 0x48(r1)
     mr r3, r30
@@ -1508,102 +1508,102 @@ lbl_fn_80532ABC_00001324:
     mr r3, r26
     bl fn_803CE44C
     cmpwi r3, 0x0
-    bne lbl_fn_80532ABC_00001384
+    bne lbl_spectateManager_update_00001384
     lwz r3, lbl_8087F0A8
     cmpwi r3, 0x0
-    beq lbl_fn_80532ABC_00001384
+    beq lbl_spectateManager_update_00001384
     lhz r0, 0xa(r26)
     clrlwi r0, r0, 31
     stb r0, 0x1140(r3)
     lwz r3, lbl_8087F0A8
     lha r0, 0x8(r26)
     stw r0, 0x113c(r3)
-lbl_fn_80532ABC_00001384:
+lbl_spectateManager_update_00001384:
     lwz r0, 0x260(r30)
     cmpwi r0, -0x1
-    bne lbl_fn_80532ABC_00001484
+    bne lbl_spectateManager_update_00001484
     mr r3, r26
     bl fn_803CE44C
     cmpwi r3, 0x0
-    bne lbl_fn_80532ABC_000013A8
+    bne lbl_spectateManager_update_000013A8
     lwz r5, 0x0(r26)
-    b lbl_fn_80532ABC_000013AC
-lbl_fn_80532ABC_000013A8:
+    b lbl_spectateManager_update_000013AC
+lbl_spectateManager_update_000013A8:
     li r5, 0x0
-lbl_fn_80532ABC_000013AC:
+lbl_spectateManager_update_000013AC:
     lis r4, 0x6
     addi r0, r4, 0x1e68
     cmpw r5, r0
-    bge lbl_fn_80532ABC_000013F4
+    bge lbl_spectateManager_update_000013F4
     lis r3, 0x3
     addi r0, r3, 0x1128
     cmpw r5, r0
-    bge lbl_fn_80532ABC_000013E0
+    bge lbl_spectateManager_update_000013E0
     lis r3, 0x2
     subi r0, r3, 0x61f0
     cmpw r5, r0
-    bge lbl_fn_80532ABC_00001434
-    b lbl_fn_80532ABC_00001428
-lbl_fn_80532ABC_000013E0:
+    bge lbl_spectateManager_update_00001434
+    b lbl_spectateManager_update_00001428
+lbl_spectateManager_update_000013E0:
     lis r3, 0x5
     subi r0, r3, 0x6838
     cmpw r5, r0
-    bge lbl_fn_80532ABC_0000144C
-    b lbl_fn_80532ABC_00001440
-lbl_fn_80532ABC_000013F4:
+    bge lbl_spectateManager_update_0000144C
+    b lbl_spectateManager_update_00001440
+lbl_spectateManager_update_000013F4:
     lis r3, 0x8
     subi r0, r3, 0x5af8
     cmpw r5, r0
-    bge lbl_fn_80532ABC_00001414
+    bge lbl_spectateManager_update_00001414
     addi r0, r4, 0x3da8
     cmpw r5, r0
-    bge lbl_fn_80532ABC_00001464
-    b lbl_fn_80532ABC_00001458
-lbl_fn_80532ABC_00001414:
+    bge lbl_spectateManager_update_00001464
+    b lbl_spectateManager_update_00001458
+lbl_spectateManager_update_00001414:
     lis r3, 0x9
     addi r0, r3, 0x27c0
     cmpw r5, r0
-    bge lbl_fn_80532ABC_0000147C
-    b lbl_fn_80532ABC_00001470
-lbl_fn_80532ABC_00001428:
+    bge lbl_spectateManager_update_0000147C
+    b lbl_spectateManager_update_00001470
+lbl_spectateManager_update_00001428:
     li r0, 0x0
     stw r0, 0x260(r30)
-    b lbl_fn_80532ABC_00001484
-lbl_fn_80532ABC_00001434:
+    b lbl_spectateManager_update_00001484
+lbl_spectateManager_update_00001434:
     li r0, 0x3
     stw r0, 0x260(r30)
-    b lbl_fn_80532ABC_00001484
-lbl_fn_80532ABC_00001440:
+    b lbl_spectateManager_update_00001484
+lbl_spectateManager_update_00001440:
     li r0, 0x4
     stw r0, 0x260(r30)
-    b lbl_fn_80532ABC_00001484
-lbl_fn_80532ABC_0000144C:
+    b lbl_spectateManager_update_00001484
+lbl_spectateManager_update_0000144C:
     li r0, 0x5
     stw r0, 0x260(r30)
-    b lbl_fn_80532ABC_00001484
-lbl_fn_80532ABC_00001458:
+    b lbl_spectateManager_update_00001484
+lbl_spectateManager_update_00001458:
     li r0, 0x6
     stw r0, 0x260(r30)
-    b lbl_fn_80532ABC_00001484
-lbl_fn_80532ABC_00001464:
+    b lbl_spectateManager_update_00001484
+lbl_spectateManager_update_00001464:
     li r0, 0x7
     stw r0, 0x260(r30)
-    b lbl_fn_80532ABC_00001484
-lbl_fn_80532ABC_00001470:
+    b lbl_spectateManager_update_00001484
+lbl_spectateManager_update_00001470:
     li r0, 0x8
     stw r0, 0x260(r30)
-    b lbl_fn_80532ABC_00001484
-lbl_fn_80532ABC_0000147C:
+    b lbl_spectateManager_update_00001484
+lbl_spectateManager_update_0000147C:
     li r0, 0x2
     stw r0, 0x260(r30)
-lbl_fn_80532ABC_00001484:
+lbl_spectateManager_update_00001484:
     lwz r3, lbl_8087F0A8
     lwz r0, 0x194(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80532ABC_0000149C
+    beq lbl_spectateManager_update_0000149C
     li r0, 0x0
     stw r0, 0x260(r30)
-lbl_fn_80532ABC_0000149C:
+lbl_spectateManager_update_0000149C:
     lis r4, lbl_8075D5B0@ha
     lwz r5, 0x260(r30)
     addi r4, r4, lbl_8075D5B0@l
@@ -1613,11 +1613,11 @@ lbl_fn_80532ABC_0000149C:
     bl sprintf
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
-    beq lbl_fn_80532ABC_000014D0
+    beq lbl_spectateManager_update_000014D0
     li r0, 0x1
     stw r0, 0x18(r3)
     stw r0, 0x1c(r3)
-lbl_fn_80532ABC_000014D0:
+lbl_spectateManager_update_000014D0:
     addi r3, r30, 0x6a0
     addi r4, r1, 0x250
     li r5, 0x0
@@ -1625,61 +1625,61 @@ lbl_fn_80532ABC_000014D0:
     bl fn_8047043C
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
-    beq lbl_fn_80532ABC_000014FC
+    beq lbl_spectateManager_update_000014FC
     li r0, 0x0
     stw r0, 0x18(r3)
     stw r0, 0x1c(r3)
-lbl_fn_80532ABC_000014FC:
+lbl_spectateManager_update_000014FC:
     lis r28, lbl_8075D5B0@ha
     addi r3, r30, 0x290
     addi r28, r28, lbl_8075D5B0@l
     addi r4, r28, 0x18
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r30, 0x29c
     addi r4, r28, 0x26
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     mr r3, r30
     addi r4, r28, 0x34
     li r5, 0x0
     bl fn_801F3FF8
     stw r3, 0x48(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r30
     addi r4, r28, 0x5b
     li r5, 0x0
     bl fn_801F3FF8
     stw r3, 0x4c(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r30
     addi r4, r28, 0x85
     li r5, 0x0
     bl fn_801F3FF8
     stw r3, 0x50(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r30
     addi r4, r28, 0xa5
     li r5, 0x0
     bl fn_801F3FF8
     stw r3, 0x54(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r30
     addi r4, r28, 0xd4
     li r5, 0x0
     bl fn_801F3FF8
     stw r3, 0x58(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r30
     addi r4, r28, 0x105
     li r5, 0x0
     bl fn_801F3FF8
     stw r3, 0x60(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r5, 0x260(r30)
     addi r3, r1, 0x150
     addi r4, r28, 0x124
@@ -1691,35 +1691,35 @@ lbl_fn_80532ABC_000014FC:
     lwz r12, 0xc(r12)
     mtctr r12
     bctrl
-    b lbl_fn_80532ABC_000021FC
-lbl_fn_80532ABC_000015F4:
+    b lbl_spectateManager_update_000021FC
+lbl_spectateManager_update_000015F4:
     cmpwi r4, 0x1
-    bne lbl_fn_80532ABC_00001774
+    bne lbl_spectateManager_update_00001774
     mr r3, r30
     bl fn_800D3FA4
     cmpwi r3, 0x0
-    beq lbl_fn_80532ABC_000021FC
+    beq lbl_spectateManager_update_000021FC
     li r3, 0x0
     bl fn_800C310C
     cmpwi r3, 0x0
-    bne lbl_fn_80532ABC_000021FC
+    bne lbl_spectateManager_update_000021FC
     addi r3, r30, 0x438
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
-    bne lbl_fn_80532ABC_000021FC
+    bne lbl_spectateManager_update_000021FC
     addi r3, r30, 0x290
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
-    bne lbl_fn_80532ABC_000021FC
+    bne lbl_spectateManager_update_000021FC
     addi r3, r30, 0x29c
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
-    bne lbl_fn_80532ABC_000021FC
+    bne lbl_spectateManager_update_000021FC
     lwz r4, 0x2a8(r30)
     mr r3, r30
     addi r0, r4, 0x1
     stw r0, 0x2a8(r30)
-    bl fn_80536CAC
+    bl spectateView_renderInterface
     lis r4, lbl_8075D5B0@ha
     addi r3, r30, 0x268
     addi r4, r4, lbl_8075D5B0@l
@@ -1731,14 +1731,14 @@ lbl_fn_80532ABC_000015F4:
     bl fn_8049D68C
     stw r3, 0x258(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r30
     addi r4, r30, 0x5a0
     li r5, 0x0
     bl fn_801F3FF8
     stw r3, 0x5c(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     addi r3, r30, 0x368
     psq_l f1, 0x440(r30), 0, 0
     lfs f2, 0x448(r30)
@@ -1788,36 +1788,36 @@ lbl_fn_80532ABC_000015F4:
     stfs f7, 0x3e4(r30)
     stfs f0, 0x384(r30)
     stw r3, 0x3e8(r30)
-    b lbl_fn_80532ABC_000021FC
-lbl_fn_80532ABC_00001774:
+    b lbl_spectateManager_update_000021FC
+lbl_spectateManager_update_00001774:
     cmpwi r4, 0x2
-    bne lbl_fn_80532ABC_00001D1C
+    bne lbl_spectateManager_update_00001D1C
     mr r3, r30
     li r26, 0x1
     bl fn_800D3FA4
     cmpwi r3, 0x0
-    beq lbl_fn_80532ABC_000017C4
+    beq lbl_spectateManager_update_000017C4
     addi r3, r30, 0x268
     bl fn_8004B0E4
     cmpwi r3, 0x0
-    bne lbl_fn_80532ABC_000017C4
+    bne lbl_spectateManager_update_000017C4
     addi r3, r30, 0x27c
     bl fn_8004B0E4
     cmpwi r3, 0x0
-    bne lbl_fn_80532ABC_000017C4
+    bne lbl_spectateManager_update_000017C4
     lwz r3, 0x258(r30)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_80532ABC_000017C8
-lbl_fn_80532ABC_000017C4:
+    beq lbl_spectateManager_update_000017C8
+lbl_spectateManager_update_000017C4:
     li r26, 0x0
-lbl_fn_80532ABC_000017C8:
+lbl_spectateManager_update_000017C8:
     cmpwi r26, 0x0
-    beq lbl_fn_80532ABC_000021FC
+    beq lbl_spectateManager_update_000021FC
     lwz r3, 0x258(r30)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x258(r30)
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
@@ -2137,14 +2137,14 @@ lbl_fn_80532ABC_000017C8:
     lwz r3, lbl_8087EFB4
     lwz r3, 0x10(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80532ABC_00001CE8
+    beq lbl_spectateManager_update_00001CE8
     lwz r0, 0x4(r3)
     stw r0, 0xba8(r30)
-    b lbl_fn_80532ABC_00001CF0
-lbl_fn_80532ABC_00001CE8:
+    b lbl_spectateManager_update_00001CF0
+lbl_spectateManager_update_00001CE8:
     li r0, 0x0
     stw r0, 0xba8(r30)
-lbl_fn_80532ABC_00001CF0:
+lbl_spectateManager_update_00001CF0:
     lis r4, lbl_8075D5B0@ha
     li r0, 0x3
     addi r4, r4, lbl_8075D5B0@l
@@ -2154,23 +2154,23 @@ lbl_fn_80532ABC_00001CF0:
     bl fn_8049D68C
     stw r3, 0x25c(r30)
     li r4, 0x1
-    bl fn_800D246C
-    b lbl_fn_80532ABC_000021FC
-lbl_fn_80532ABC_00001D1C:
+    bl atn_Task_setActive
+    b lbl_spectateManager_update_000021FC
+lbl_spectateManager_update_00001D1C:
     cmpwi r4, 0x3
-    bne lbl_fn_80532ABC_000021FC
+    bne lbl_spectateManager_update_000021FC
     lwz r3, 0x25c(r30)
     li r4, 0x1
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_80532ABC_00001D40
+    beq lbl_spectateManager_update_00001D40
     li r4, 0x0
-lbl_fn_80532ABC_00001D40:
+lbl_spectateManager_update_00001D40:
     cmpwi r4, 0x0
-    beq lbl_fn_80532ABC_000021FC
+    beq lbl_spectateManager_update_000021FC
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     addi r3, r30, 0x6a0
     bl fn_80470528
     mr r3, r30
@@ -2232,21 +2232,21 @@ lbl_fn_80532ABC_00001D40:
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r3)
     lwz r3, 0x5c(r30)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x60(r30)
     li r4, 0x0
     lwz r0, 0xfc(r3)
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r3)
     lwz r3, 0x60(r30)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x48(r30)
     li r4, 0x0
     lwz r0, 0xfc(r3)
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r3)
     lwz r3, 0x48(r30)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x4c(r30)
     li r4, 0x0
     lfs f0, lbl_80887BB4
@@ -2256,24 +2256,24 @@ lbl_fn_80532ABC_00001D40:
     lwz r3, 0x4c(r30)
     stfs f0, 0x104(r3)
     lwz r3, 0x4c(r30)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x50(r30)
     li r4, 0x0
     lwz r0, 0xfc(r3)
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r3)
     lwz r3, 0x50(r30)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x54(r30)
     li r4, 0x0
     lwz r0, 0xfc(r3)
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r3)
     lwz r3, 0x54(r30)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x58(r30)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r7, lbl_8087F0A8
     li r4, 0x1
     lwz r5, 0x2c8(r30)
@@ -2319,18 +2319,18 @@ lbl_fn_80532ABC_00001D40:
     addi r4, r28, 0x197
     stfs f1, 0xb8(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_80532ABC_00001FC4
+    bne lbl_spectateManager_update_00001FC4
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
-    beq lbl_fn_80532ABC_00001FC4
+    beq lbl_spectateManager_update_00001FC4
     addi r3, r3, 0x10
     bl fn_8008937C
     stw r3, 0x314(r30)
     mr r29, r3
-    b lbl_fn_80532ABC_00001FC8
-lbl_fn_80532ABC_00001FC4:
+    b lbl_spectateManager_update_00001FC8
+lbl_spectateManager_update_00001FC4:
     li r29, 0x0
-lbl_fn_80532ABC_00001FC8:
+lbl_spectateManager_update_00001FC8:
     lis r4, lbl_8075D5B0@ha
     mr r3, r29
     addi r28, r4, lbl_8075D5B0@l
@@ -2374,7 +2374,7 @@ lbl_fn_80532ABC_00001FC8:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80887C10
     mr r3, r29
     lfs f2, lbl_80887C14
@@ -2383,7 +2383,7 @@ lbl_fn_80532ABC_00001FC8:
     addi r5, r30, 0x430
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80887BB4
     mr r3, r29
     lfs f2, lbl_80887BE8
@@ -2392,12 +2392,12 @@ lbl_fn_80532ABC_00001FC8:
     addi r5, r30, 0x344
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     li r31, 0x0
     li r26, 0x0
     lis r29, 0x1062
-    b lbl_fn_80532ABC_00002168
-lbl_fn_80532ABC_000020D0:
+    b lbl_spectateManager_update_00002168
+lbl_spectateManager_update_000020D0:
     lwz r0, 0x2d0(r30)
     lwz r3, lbl_8087F4A0
     add r27, r0, r26
@@ -2405,17 +2405,17 @@ lbl_fn_80532ABC_000020D0:
     lwz r5, 0x4(r27)
     bl fn_803EEE10
     cmpwi r3, 0x0
-    beq lbl_fn_80532ABC_00002108
+    beq lbl_spectateManager_update_00002108
     lwz r12, 0x0(r3)
     lwz r4, 0x8(r27)
     lwz r12, 0x70(r12)
     mtctr r12
     bctrl
-    b lbl_fn_80532ABC_00002160
-lbl_fn_80532ABC_00002108:
+    b lbl_spectateManager_update_00002160
+lbl_spectateManager_update_00002108:
     lwz r0, lbl_8087EEB8
     cmpwi r0, 0x0
-    beq lbl_fn_80532ABC_00002160
+    beq lbl_spectateManager_update_00002160
     lwz r9, 0x0(r27)
     addi r0, r29, 0x4dd3
     lwz r7, 0x4(r27)
@@ -2435,55 +2435,55 @@ lbl_fn_80532ABC_00002108:
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x50
     bl fn_800697D8
-lbl_fn_80532ABC_00002160:
+lbl_spectateManager_update_00002160:
     addi r26, r26, 0x10
     addi r31, r31, 0x1
-lbl_fn_80532ABC_00002168:
+lbl_spectateManager_update_00002168:
     lwz r0, 0x2d4(r30)
     cmplw r31, r0
-    blt lbl_fn_80532ABC_000020D0
+    blt lbl_spectateManager_update_000020D0
     li r0, 0x1
     stw r0, 0x2c4(r30)
     li r26, 0x0
     li r27, 0x0
-lbl_fn_80532ABC_00002184:
+lbl_spectateManager_update_00002184:
     lwz r0, 0x6e4(r30)
     add r3, r0, r27
     addi r3, r3, 0x4c
     bl fn_803BEAB4
     cmpwi r3, 0x0
-    beq lbl_fn_80532ABC_000021A8
+    beq lbl_spectateManager_update_000021A8
     li r0, 0x0
     stw r0, 0x2c4(r30)
-    b lbl_fn_80532ABC_000021B8
-lbl_fn_80532ABC_000021A8:
+    b lbl_spectateManager_update_000021B8
+lbl_spectateManager_update_000021A8:
     addi r26, r26, 0x1
     addi r27, r27, 0xb8
     cmpwi r26, 0x11
-    blt lbl_fn_80532ABC_00002184
-lbl_fn_80532ABC_000021B8:
+    blt lbl_spectateManager_update_00002184
+lbl_spectateManager_update_000021B8:
     lwz r3, 0x6e0(r30)
     bl fn_803B8144
     cmpwi r3, 0x0
-    beq lbl_fn_80532ABC_000021D8
+    beq lbl_spectateManager_update_000021D8
     lwz r3, 0x6e0(r30)
-    bl fn_800D2338
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0x6e0(r30)
-lbl_fn_80532ABC_000021D8:
+lbl_spectateManager_update_000021D8:
     lwz r0, 0x2c4(r30)
     cmpwi r0, 0x0
-    beq lbl_fn_80532ABC_000021F4
+    beq lbl_spectateManager_update_000021F4
     lwz r3, 0x6e4(r30)
-    bl fn_800D2338
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0x6e4(r30)
-lbl_fn_80532ABC_000021F4:
+lbl_spectateManager_update_000021F4:
     li r3, 0x1
-    b lbl_fn_80532ABC_00002200
-lbl_fn_80532ABC_000021FC:
+    b lbl_spectateManager_update_00002200
+lbl_spectateManager_update_000021FC:
     li r3, 0x0
-lbl_fn_80532ABC_00002200:
+lbl_spectateManager_update_00002200:
     addi r11, r1, 0x370
     bl _restgpr_26
     lwz r0, 0x374(r1)

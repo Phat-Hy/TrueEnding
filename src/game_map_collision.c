@@ -9,14 +9,14 @@ extern void _savegpr_18(void);
 extern void _savegpr_19(void);
 extern void dtor_80084684(void);
 extern void fn_8004ED34(void);
-extern void fn_8005B3CC(void);
+extern void talk_parseQuotedString(void);
 extern void fn_8005B6E8(void);
-extern void fn_800616C0(void);
-extern void fn_800844D8(void);
-extern void fn_80097C08(void);
+extern void skill_calculateDamage(void);
+extern void mem_free(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800BFAC8(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800DC12C(void);
 extern void fn_80125474(void);
 extern void fn_801255C8(void);
@@ -24,8 +24,8 @@ extern void fn_80126214(void);
 extern void fn_80128818(void);
 extern void fn_80139560(void);
 extern void fn_80145334(void);
-extern void fn_80149A30(void);
-extern void fn_8014C0B4(void);
+extern void dialog_renderWindow(void);
+extern void dialog_setScriptSlot(void);
 extern void fn_8014C228(void);
 extern void fn_801598B4(void);
 extern void fn_80159BA4(void);
@@ -35,22 +35,22 @@ extern void fn_8035B694(void);
 extern void fn_8035B78C(void);
 extern void fn_803C1560(void);
 extern void fn_803CD958(void);
-extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9160(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9750(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
-extern void fn_805F9940(void);
-extern void fn_805F9990(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
-extern void fn_80682428(void);
-extern void fn_80686EA4(void);
+extern void PSMTXConcat(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXScale(void);
+extern void PSMTXMultVec(void);
+extern void PSMTX44Identity(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
+extern void PSVECMag(void);
+extern void PSVECDotProduct(void);
+extern void printf(void);
+extern void rand(void);
+extern void strcmp(void);
+extern void abort(void);
 extern void fn_8068AE9C(void);
-extern void fn_8068AEA4(void);
-extern void fn_80695D84(void);
+extern void std_atan2(void);
+extern void runtime_clampDouble(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -178,7 +178,7 @@ asm void fn_801805A4(void)
     la r4, lbl_8087D708
     bl fn_8005B6E8
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lis r4, __files@ha
     lis r19, lbl_80738154@ha
     mr r18, r3
@@ -214,8 +214,8 @@ lbl_fn_801805A4_0000015C:
     addi r4, r19, lbl_80738154@l
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801805A4_00000180:
     addi r3, r21, 0x14bc
     stw r23, 0x14(r1)
@@ -235,8 +235,8 @@ lbl_fn_801805A4_00000180:
     addi r4, r19, lbl_80738154@l
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801805A4_000001D0:
     addi r0, r28, 0x5555
     cmplw r27, r0
@@ -282,19 +282,19 @@ lbl_fn_801805A4_00000254:
     addi r4, r19, lbl_80738154@l
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801805A4_00000274:
     slwi r3, r18, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_801805A4_0000029C
     addi r3, r26, 0xa0
     addi r4, r31, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801805A4_0000029C:
     lwz r0, 0x18(r1)
     stw r27, 0x14(r1)
@@ -353,14 +353,14 @@ lbl_fn_801805A4_0000029C:
     bl dtor_80084684
 lbl_fn_801805A4_00000378:
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r18, r3
 lbl_fn_801805A4_00000384:
     cmpwi r18, 0x0
     beq lbl_fn_801805A4_000003A0
     mr r4, r18
     addi r3, r20, 0x14
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_801805A4_00000124
 lbl_fn_801805A4_000003A0:
@@ -460,7 +460,7 @@ asm void fn_801809F4(void)
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lwz r3, lbl_8087F0A8
     lfs f0, 0x564(r3)
     fcmpo cr0, f1, f0
@@ -490,7 +490,7 @@ lbl_fn_801809F4_00000534:
 asm void fn_80180ADC(void)
 {
     nofralloc
-    b fn_80149A30
+    b dialog_renderWindow
 }
 
 asm void fn_80180AE0(void)
@@ -547,7 +547,7 @@ lbl_fn_80180AE0_000005D4:
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lwz r3, lbl_8087F0A8
     lfs f0, 0x564(r3)
     fcmpo cr0, f1, f0
@@ -653,7 +653,7 @@ lbl_fn_80180AE0_0000078C:
     lfs f1, lbl_80881C14
     lfs f0, lbl_80881C10
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80180AE0_0000079C:
     mr r30, r3
 lbl_fn_80180AE0_000007A0:
@@ -675,7 +675,7 @@ lbl_fn_80180AE0_000007D4:
     lfs f1, lbl_80881C14
     lfs f0, lbl_80881C10
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80180AE0_000007E4:
     mr r29, r3
 lbl_fn_80180AE0_000007E8:
@@ -697,7 +697,7 @@ lbl_fn_80180AE0_0000081C:
     lfs f1, lbl_80881C14
     lfs f0, lbl_80881C10
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80180AE0_0000082C:
     mr r28, r3
 lbl_fn_80180AE0_00000830:
@@ -719,7 +719,7 @@ lbl_fn_80180AE0_00000864:
     lfs f1, lbl_80881C14
     lfs f0, lbl_80881C10
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80180AE0_00000874:
     lfs f3, lbl_80881C04
     slwi r4, r29, 8
@@ -738,7 +738,7 @@ lbl_fn_80180AE0_00000874:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r0, 0x14c0(r31)
     lis r4, lbl_80738154@ha
     addi r4, r4, lbl_80738154@l
@@ -781,7 +781,7 @@ lbl_fn_80180AE0_00000948:
     lfs f1, lbl_80881C14
     lfs f0, lbl_80881C10
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80180AE0_00000958:
     mr r28, r3
 lbl_fn_80180AE0_0000095C:
@@ -803,7 +803,7 @@ lbl_fn_80180AE0_00000990:
     lfs f1, lbl_80881C14
     lfs f0, lbl_80881C10
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80180AE0_000009A0:
     mr r30, r3
 lbl_fn_80180AE0_000009A4:
@@ -825,7 +825,7 @@ lbl_fn_80180AE0_000009D8:
     lfs f1, lbl_80881C14
     lfs f0, lbl_80881C10
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80180AE0_000009E8:
     mr r29, r3
 lbl_fn_80180AE0_000009EC:
@@ -847,7 +847,7 @@ lbl_fn_80180AE0_00000A20:
     lfs f1, lbl_80881C14
     lfs f0, lbl_80881C10
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80180AE0_00000A30:
     lfs f3, lbl_80881C04
     slwi r4, r30, 8
@@ -866,7 +866,7 @@ lbl_fn_80180AE0_00000A30:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r4, lbl_8087F8A0
     addi r3, r1, 0x28
     lfs f1, lbl_80881C0C
@@ -884,7 +884,7 @@ lbl_fn_80180AE0_00000A30:
     stfs f2, 0x2c(r1)
     stfs f0, 0x28(r1)
     stfs f4, 0x30(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lis r4, lbl_80738154@ha
     lwz r5, 0x14c8(r31)
     addi r4, r4, lbl_80738154@l
@@ -914,7 +914,7 @@ lbl_fn_80180AE0_00000B20:
     lfs f1, lbl_80881C14
     lfs f0, lbl_80881C10
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80180AE0_00000B30:
     mr r29, r3
 lbl_fn_80180AE0_00000B34:
@@ -936,7 +936,7 @@ lbl_fn_80180AE0_00000B68:
     lfs f1, lbl_80881C14
     lfs f0, lbl_80881C10
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80180AE0_00000B78:
     mr r30, r3
 lbl_fn_80180AE0_00000B7C:
@@ -958,7 +958,7 @@ lbl_fn_80180AE0_00000BB0:
     lfs f1, lbl_80881C14
     lfs f0, lbl_80881C10
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80180AE0_00000BC0:
     mr r31, r3
 lbl_fn_80180AE0_00000BC4:
@@ -980,7 +980,7 @@ lbl_fn_80180AE0_00000BF8:
     lfs f1, lbl_80881C14
     lfs f0, lbl_80881C10
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80180AE0_00000C08:
     lfs f3, lbl_80881C04
     slwi r4, r30, 8
@@ -999,7 +999,7 @@ lbl_fn_80180AE0_00000C08:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
 lbl_fn_80180AE0_00000C50:
     lwz r0, 0x1a4(r1)
     psq_l f31, 0x198(r1), 0, 0
@@ -1027,20 +1027,20 @@ asm void fn_8018120C(void)
     li r4, 0x3
     li r5, 0x1f
     lwz r3, 0x48(r3)
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     lwz r3, lbl_8087F8A0
     li r4, 0x2
     li r5, 0x19
     lwz r3, 0x48(r3)
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x3
     li r5, 0x1f
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x2
     li r5, 0x19
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -1083,7 +1083,7 @@ asm void fn_8018128C(void)
     stfs f4, 0x10(r1)
     stfs f0, 0x8(r1)
     stfs f2, 0xc(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lwz r31, lbl_8087F0A8
     fmr f31, f1
     lfs f0, 0x564(r31)
@@ -1260,7 +1260,7 @@ asm void fn_801814F0(void)
     stfs f4, 0x10(r1)
     stfs f0, 0x8(r1)
     stfs f2, 0xc(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x564(r31)
     fmr f31, f1
     fcmpo cr0, f1, f0
@@ -1369,25 +1369,25 @@ lbl_fn_8018161C_00001118:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087F8A0
     li r4, 0x3
     li r5, 0x1f
     lwz r3, 0x48(r3)
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     lwz r3, lbl_8087F8A0
     li r4, 0x2
     li r5, 0x19
     lwz r3, 0x48(r3)
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x3
     li r5, 0x1f
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x2
     li r5, 0x19
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     lwz r0, 0x14b0(r30)
     cmpwi r0, 0x2
     beq lbl_fn_8018161C_000011A0
@@ -1410,7 +1410,7 @@ lbl_fn_8018161C_000011AC:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80881BF8
     stfs f0, 0x2e8(r30)
     b lbl_fn_8018161C_00001494
@@ -1430,16 +1430,16 @@ lbl_fn_8018161C_000011EC:
     stfs f7, 0x40(r1)
     stfs f0, 0x44(r1)
     lfs f1, 0x538(r28)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x3c
     addi r3, r1, 0x1c8
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f1, 0x540(r30)
     addi r3, r1, 0x198
     lfs f2, 0x544(r30)
     lfs f3, 0x548(r30)
-    bl fn_805F9160
+    bl PSMTXScale
     addi r4, r1, 0x198
     addi r3, r30, 0x14d4
     psq_l f1, 0x0(r4), 0, 0
@@ -1474,11 +1474,11 @@ lbl_fn_8018161C_000011EC:
     beq lbl_fn_8018161C_00001320
     addi r3, r1, 0x78
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r29
     addi r4, r1, 0x78
     addi r5, r1, 0x48
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x48
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1499,11 +1499,11 @@ lbl_fn_8018161C_00001320:
     beq lbl_fn_8018161C_00001380
     addi r3, r1, 0xd8
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r29
     addi r4, r1, 0xd8
     addi r5, r1, 0xa8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xa8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1524,11 +1524,11 @@ lbl_fn_8018161C_00001380:
     beq lbl_fn_8018161C_000013E0
     addi r3, r1, 0x138
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r29
     addi r4, r1, 0x138
     addi r5, r1, 0x108
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x108
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1546,7 +1546,7 @@ lbl_fn_8018161C_000013E0:
     addi r4, r30, 0x14d4
     addi r3, r1, 0x168
     mr r5, r4
-    bl fn_805F89F0
+    bl PSMTXConcat
     lfs f9, 0x44(r1)
     mr r3, r30
     lfs f8, lbl_80881C28
@@ -1666,11 +1666,11 @@ asm void fn_80181A64(void)
     stfs f2, 0x1c(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x34(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lwz r22, 0x14b8(r20)
     li r24, 0x0
     li r23, -0x1
-    bl fn_80680CF8
+    bl rand
     divwu r4, r3, r22
     subi r0, r21, 0x1
     lfs f30, lbl_80881C04
@@ -1745,10 +1745,10 @@ lbl_fn_80181A64_00001640:
     psq_l f1, 0x0(r27), 0, 0
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0x10(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     mr r3, r28
     addi r4, r1, 0x2c
-    bl fn_805F9990
+    bl PSVECDotProduct
     bl fn_8068AE9C
     frsp f29, f1
     b lbl_fn_80181A64_00001724
@@ -1931,13 +1931,13 @@ lbl_fn_80181D94_00001928:
     cmpwi r0, 0x0
     bne lbl_fn_80181D94_00001B44
     mr r3, r29
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80881C34
     fcmpo cr0, f1, f0
     ble lbl_fn_80181D94_00001B48
     mr r3, r29
     mr r4, r29
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x70(r1)
     addi r31, r1, 0x50
     psq_l f1, 0x0(r29), 0, 0
@@ -1962,7 +1962,7 @@ lbl_fn_80181D94_000019CC:
 lbl_fn_80181D94_000019D4:
     frsp f2, f2
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_80181D94_000019E8:
@@ -1970,7 +1970,7 @@ lbl_fn_80181D94_000019E8:
     addi r3, r1, 0x78
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80881C04
     addi r4, r1, 0x38
     lfs f29, 0x80(r1)
@@ -2020,7 +2020,7 @@ lbl_fn_80181D94_000019E8:
     stfs f6, 0xd4(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_80881C38
     fabs f3, f2
@@ -2041,7 +2041,7 @@ lbl_fn_80181D94_00001AF8:
     b lbl_fn_80181D94_00001B18
 lbl_fn_80181D94_00001B04:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)

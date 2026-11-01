@@ -14,22 +14,22 @@ extern void fn_80080528(void);
 extern void fn_800816A8(void);
 extern void fn_800827E0(void);
 extern void fn_800838B8(void);
-extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_realloc(void);
+extern void mem_getAllocSize(void);
 extern void fn_800902C0(void);
-extern void fn_80091684(void);
+extern void atn_Model_updateMatrices(void);
 extern void fn_80095300(void);
 extern void fn_800BDB58(void);
 extern void fn_800C0A50(void);
 extern void fn_800C122C(void);
-extern void fn_80473F18(void);
+extern void atn_LoadHandle_getName(void);
 extern void fn_80476130(void);
 extern void fn_80476194(void);
 extern void fn_804761B0(void);
-extern void fn_805F89F0(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9940(void);
-extern void fn_80695720(void);
+extern void PSMTXConcat(void);
+extern void PSMTXMultVec(void);
+extern void PSVECMag(void);
+extern void runtime_registerStaticObject(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -54,11 +54,11 @@ extern u32 lbl_80880C0C;
 void fn_8008C828(void);
 void fn_8008C850(void);
 void fn_8008C950(void);
-void fn_8008CCC0(void);
-void fn_8008CCD4(void);
-void fn_8008CCE8(void);
-void fn_8008CD1C(void);
-void fn_8008CD50(void);
+void atn_AABB_getMax(void);
+void atn_AABB_getMin(void);
+void atn_Matrix_copy_2(void);
+void atn_Matrix_copy(void);
+void atn_Matrix_concat(void);
 void fn_8008CD60(void);
 void fn_8008D6C0(void);
 void fn_8008D784(void);
@@ -176,7 +176,7 @@ asm void fn_8008C950(void)
     beq lbl_fn_8008C950_00000170
     beq lbl_fn_8008C950_00000170
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8008C950_00000170:
     cmpwi r29, 0x0
     stw r29, 0x38(r30)
@@ -187,12 +187,12 @@ lbl_fn_8008C950_00000170:
     la r6, lbl_8087D7EC
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r7, r29
     li r4, 0x0
     li r5, 0x0
     li r6, 0x30
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x3c(r30)
     b lbl_fn_8008C950_000001BC
 lbl_fn_8008C950_000001B4:
@@ -205,7 +205,7 @@ lbl_fn_8008C950_000001BC:
     cmpwi r0, 0x1800
     ble lbl_fn_8008C950_0000020C
     addi r3, r30, 0x164
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     lwz r4, 0x8(r31)
     lis r7, lbl_80732368@ha
     mr r5, r3
@@ -243,7 +243,7 @@ lbl_fn_8008C950_0000020C:
     lwz r29, 0x44(r3)
     beq lbl_fn_8008C950_0000026C
     mr r3, r0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8008C950_0000026C:
     cmpwi r29, 0x0
     stw r29, 0xe4(r30)
@@ -253,7 +253,7 @@ lbl_fn_8008C950_0000026C:
     la r5, lbl_8087D7E8
     la r6, lbl_8087D7E4
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0xe8(r30)
     b lbl_fn_8008C950_000002A0
 lbl_fn_8008C950_00000298:
@@ -265,7 +265,7 @@ lbl_fn_8008C950_000002A0:
     cmpwi r3, 0x0
     lwz r29, 0x44(r4)
     beq lbl_fn_8008C950_000002B8
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8008C950_000002B8:
     cmpwi r29, 0x0
     stw r29, 0xec(r30)
@@ -275,7 +275,7 @@ lbl_fn_8008C950_000002B8:
     la r5, lbl_8087D7F8
     la r6, lbl_8087D7F4
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0xf0(r30)
     b lbl_fn_8008C950_000002EC
 lbl_fn_8008C950_000002E4:
@@ -359,7 +359,7 @@ lbl_fn_8008C950_00000318:
     stfs f0, 0x20(r1)
     stfs f4, 0x24(r1)
     stfs f9, 0x28(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, lbl_80880C08
     li r0, 0x0
     mr r3, r30
@@ -395,7 +395,7 @@ lbl_fn_8008C950_0000047C:
     blr
 }
 
-asm void fn_8008CCC0(void)
+asm void atn_AABB_getMax(void)
 {
     nofralloc
     psq_l f1, 0x1c(r4), 0, 0
@@ -405,7 +405,7 @@ asm void fn_8008CCC0(void)
     blr
 }
 
-asm void fn_8008CCD4(void)
+asm void atn_AABB_getMin(void)
 {
     nofralloc
     psq_l f1, 0x10(r4), 0, 0
@@ -415,7 +415,7 @@ asm void fn_8008CCD4(void)
     blr
 }
 
-asm void fn_8008CCE8(void)
+asm void atn_Matrix_copy_2(void)
 {
     nofralloc
     psq_l f1, 0x0(r4), 0, 0
@@ -433,7 +433,7 @@ asm void fn_8008CCE8(void)
     blr
 }
 
-asm void fn_8008CD1C(void)
+asm void atn_Matrix_copy(void)
 {
     nofralloc
     psq_l f1, 0x0(r4), 0, 0
@@ -451,13 +451,13 @@ asm void fn_8008CD1C(void)
     blr
 }
 
-asm void fn_8008CD50(void)
+asm void atn_Matrix_concat(void)
 {
     nofralloc
     mr r0, r3
     mr r3, r5
     mr r5, r0
-    b fn_805F89F0
+    b PSMTXConcat
 }
 
 asm void fn_8008CD60(void)
@@ -666,7 +666,7 @@ lbl_fn_8008CD60_0000082C:
     stfs f2, 0x1c(r1)
     addi r3, r1, 0xf8
     psq_st f1, 0x0(r29), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     psq_l f1, 0x0(r29), 0, 0
     mr r4, r30
     lfs f2, 0x1c(r1)
@@ -1042,7 +1042,7 @@ lbl_fn_8008CD60_00000DA8:
     stfs f2, 0x10(r1)
     addi r3, r1, 0x68
     psq_st f1, 0x0(r30), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     psq_l f1, 0x0(r30), 0, 0
     addi r4, r1, 0x58
     lfs f2, 0x10(r1)
@@ -1120,7 +1120,7 @@ asm void fn_8008D6C0(void)
     mulli r0, r0, 0x18
     add r5, r29, r0
     lwz r5, 0x178(r5)
-    bl fn_80091684
+    bl atn_Model_updateMatrices
 lbl_fn_8008D6C0_00000EF8:
     lwz r0, 0x20c(r29)
     clrlwi. r0, r0, 31
@@ -1342,7 +1342,7 @@ lbl_fn_8008D78C_000011FC:
     stfs f2, 0x7c(r1)
     addi r3, r1, 0x1e0
     psq_st f1, 0x0(r28), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     psq_l f1, 0x0(r28), 0, 0
     li r3, 0x0
     lfs f2, 0x7c(r1)
@@ -1448,7 +1448,7 @@ lbl_fn_8008D78C_0000128C:
     stfs f0, 0x44(r1)
     stfs f8, 0x48(r1)
     stfs f10, 0x4c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, lbl_80880C08
     addi r4, r1, 0x150
     fmuls f7, f0, f1
@@ -1587,7 +1587,7 @@ lbl_fn_8008D78C_000015C8:
     mr r5, r29
     addi r3, r1, 0x150
     stfs f2, 0x70(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     psq_l f1, 0x0(r29), 0, 0
     addi r3, r31, 0x204
     lfs f2, 0x70(r1)
@@ -1743,7 +1743,7 @@ lbl_fn_8008D78C_000017FC:
     fsubs f0, f7, f0
     stfs f8, 0xc(r1)
     stfs f0, 0x8(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0xec(r1)
     lwz r3, lbl_8087EFA8
     fsubs f7, f1, f0
@@ -1834,7 +1834,7 @@ lbl_fn_8008D78C_00001964:
     psq_st f1, 0x0(r28), 0, 0
     addi r3, r6, 0x124
     stfs f2, 0x88(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0x88(r1)
     addi r4, r1, 0xc0
     psq_l f1, 0x0(r28), 0, 0

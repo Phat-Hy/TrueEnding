@@ -15,8 +15,8 @@ extern void fn_805B697C(void);
 extern void fn_805E4090(void);
 extern void fn_805E7480(void);
 extern void fn_805E7520(void);
-extern void fn_805F8980(void);
-extern void fn_805F95A0(void);
+extern void PSMTXIdentity(void);
+extern void PSMTXMultVecArraySR(void);
 extern void fn_805FA270(void);
 extern void fn_805FA390(void);
 extern void fn_805FA4E0(void);
@@ -28,38 +28,38 @@ extern void fn_80607870(void);
 extern void fn_80612E80(void);
 extern void fn_806134E0(void);
 extern void fn_80613520(void);
-extern void fn_80613960(void);
+extern void __GXSetVtxDesc(void);
 extern void fn_80613BB0(void);
 extern void fn_80614790(void);
 extern void fn_80615400(void);
 extern void fn_80615D20(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
-extern void fn_806167B0(void);
+extern void GXDrawDone(void);
 extern void fn_80617340(void);
 extern void fn_806173E0(void);
 extern void fn_80617420(void);
-extern void fn_80617460(void);
+extern void GXSetTevIndirect(void);
 extern void fn_806174C0(void);
 extern void fn_80617580(void);
 extern void fn_806175F0(void);
-extern void fn_80617650(void);
-extern void fn_806176A0(void);
-extern void fn_806176F0(void);
+extern void GXSetTevKColorSel(void);
+extern void GXSetTevKAlphaSel(void);
+extern void GXSetTevSwapMode(void);
 extern void fn_80617730(void);
 extern void fn_80617880(void);
-extern void fn_806179E0(void);
+extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
-extern void fn_80617DA0(void);
-extern void fn_80617DD0(void);
-extern void fn_80617E00(void);
-extern void fn_80617E70(void);
+extern void GXSetZCompLoc(void);
+extern void GXSetDither(void);
+extern void GXSetZMode(void);
+extern void GXSetBlendMode(void);
 extern void fn_80618290(void);
-extern void fn_80618350(void);
-extern void fn_80618400(void);
+extern void GXLoadPosMtxImm(void);
+extern void GXSetCurrentMtx(void);
 extern void fn_80618570(void);
 extern void fn_806185C0(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 
 /* External data declarations */
 extern u8 lbl_80763DC8[];
@@ -114,7 +114,7 @@ asm void fn_805B4DF4(void)
     li r4, 0x7
     stw r0, 0x14(r1)
     li r5, 0x0
-    bl fn_80617E00
+    bl GXSetZMode
     li r3, 0x0
     li r4, 0x1
     li r5, 0x0
@@ -125,7 +125,7 @@ asm void fn_805B4DF4(void)
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -137,19 +137,19 @@ asm void fn_805B4DF4(void)
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x2
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x3
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1
@@ -196,7 +196,7 @@ asm void fn_805B4F0C(void)
     lhz r29, 0x6(r3)
     li r3, 0x0
     stw r0, 0x98(r1)
-    bl fn_80617E70
+    bl GXSetBlendMode
     xoris r0, r29, 0x8000
     stw r0, 0x94(r1)
     xoris r0, r30, 0x8000
@@ -212,7 +212,7 @@ asm void fn_805B4F0C(void)
     fsubs f2, f2, f4
     lfs f6, lbl_808883D0
     fsubs f4, f0, f4
-    bl fn_805F95A0
+    bl PSMTXMultVecArraySR
     addi r3, r1, 0x50
     li r4, 0x1
     bl fn_80618290
@@ -236,25 +236,25 @@ asm void fn_805B4F0C(void)
     li r4, 0x0
     bl fn_806185C0
     addi r3, r1, 0x20
-    bl fn_805F8980
+    bl PSMTXIdentity
     addi r3, r1, 0x20
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     li r3, 0x1
     li r4, 0x7
     li r5, 0x0
-    bl fn_80617E00
+    bl GXSetZMode
     li r3, 0x0
     li r4, 0x1
     li r5, 0x0
     li r6, 0x0
     bl fn_80617D50
     li r3, 0x1
-    bl fn_80617DA0
+    bl GXSetZCompLoc
     li r3, 0x0
-    bl fn_80617DD0
+    bl GXSetDither
     li r3, 0x0
     bl fn_80615400
     li r3, 0x0
@@ -267,15 +267,15 @@ asm void fn_805B4F0C(void)
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x1
     li r4, 0x1
     li r5, 0x4
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
-    bl fn_806167B0
+    bl __GXSetVtxDesc
+    bl GXDrawDone
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
@@ -296,7 +296,7 @@ asm void fn_805B4F0C(void)
     li r7, 0x0
     bl fn_80613520
     li r3, 0x4
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0x1
     li r5, 0x1
@@ -314,7 +314,7 @@ asm void fn_805B4F0C(void)
     li r6, 0x0
     li r7, 0x0
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x0
     li r4, 0x7
     li r5, 0x4
@@ -330,14 +330,14 @@ asm void fn_805B4F0C(void)
     bl fn_806174C0
     li r3, 0x0
     li r4, 0xc
-    bl fn_80617650
+    bl GXSetTevKColorSel
     li r3, 0x0
     li r4, 0x1c
-    bl fn_806176A0
+    bl GXSetTevKAlphaSel
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x1
     li r4, 0x1
     li r5, 0x2
@@ -355,7 +355,7 @@ asm void fn_805B4F0C(void)
     li r6, 0x1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x1
     li r4, 0x7
     li r5, 0x4
@@ -371,14 +371,14 @@ asm void fn_805B4F0C(void)
     bl fn_806174C0
     li r3, 0x1
     li r4, 0xd
-    bl fn_80617650
+    bl GXSetTevKColorSel
     li r3, 0x1
     li r4, 0x1d
-    bl fn_806176A0
+    bl GXSetTevKAlphaSel
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x2
     li r4, 0x0
     li r5, 0x0
@@ -396,7 +396,7 @@ asm void fn_805B4F0C(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x2
     li r4, 0x4
     li r5, 0x7
@@ -413,7 +413,7 @@ asm void fn_805B4F0C(void)
     li r3, 0x2
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x3
     li r4, 0xff
     li r5, 0xff
@@ -431,7 +431,7 @@ asm void fn_805B4F0C(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x3
     li r4, 0x7
     li r5, 0x7
@@ -448,10 +448,10 @@ asm void fn_805B4F0C(void)
     li r3, 0x3
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x3
     li r4, 0xe
-    bl fn_80617650
+    bl GXSetTevKColorSel
     lis r6, lbl_80763DC8@ha
     lwzu r5, lbl_80763DC8@l(r6)
     stw r5, 0x18(r1)
@@ -779,7 +779,7 @@ lbl_fn_805B5714_000009D8:
     lis r4, lbl_80763DE0@ha
     addi r3, r29, 0x3c
     addi r4, r4, lbl_80763DE0@l
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_805B5714_00000A10
     mr r3, r29

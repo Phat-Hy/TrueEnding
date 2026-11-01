@@ -7,18 +7,18 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8004ECC0(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_8020924C(void);
 extern void fn_8020A81C(void);
 extern void fn_8020FCE8(void);
 extern void fn_8036E430(void);
 extern void fn_8036E92C(void);
 extern void fn_8036E994(void);
-extern void fn_80370174(void);
-extern void fn_80370320(void);
-extern void fn_80370A78(void);
+extern void world_getGlobalFlag(void);
+extern void world_setGlobalFlag(void);
+extern void world_getLocalFlag(void);
 extern void fn_80371164(void);
 extern void fn_80373148(void);
 extern void fn_803754F0(void);
@@ -33,11 +33,11 @@ extern void fn_803E58E4(void);
 extern void fn_803E598C(void);
 extern void fn_80449A18(void);
 extern void fn_804A0F58(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9940(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
-extern void fn_80686EA4(void);
+extern void PSVECNormalize(void);
+extern void PSVECMag(void);
+extern void printf(void);
+extern void rand(void);
+extern void abort(void);
 extern void memmove(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -480,18 +480,18 @@ lbl_fn_803AAF74_0000053C:
     cmpwi r0, 0x2
     bne lbl_fn_803AAF74_00000550
     mr r4, r31
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_803AAF74_00000584
 lbl_fn_803AAF74_00000550:
     cmpwi r0, 0x1
     bne lbl_fn_803AAF74_00000564
     mr r4, r31
-    bl fn_80370A78
+    bl world_getLocalFlag
     b lbl_fn_803AAF74_00000584
 lbl_fn_803AAF74_00000564:
     cmpwi r0, 0x3
     bne lbl_fn_803AAF74_00000580
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r31
     mullw r0, r0, r31
     subf r3, r0, r3
@@ -665,7 +665,7 @@ asm void fn_803AB1F4(void)
     mr r30, r4
     li r4, 0x391
     lwz r3, lbl_8087F430
-    bl fn_80370320
+    bl world_setGlobalFlag
     lwz r3, lbl_8087F430
     li r4, 0x1
     bl fn_8036E92C
@@ -722,7 +722,7 @@ lbl_fn_803AB26C_00000864:
     li r4, 0x391
     li r5, 0x0
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     li r4, 0x0
 lbl_fn_803AB26C_0000087C:
     lwz r0, 0x0(r31)
@@ -908,7 +908,7 @@ lbl_fn_803AB428_00000A7C:
     add r7, r7, r18
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x388(r15)
     lwz r3, 0x38c(r15)
     cmplw r0, r3
@@ -942,7 +942,7 @@ lbl_fn_803AB428_00000B34:
     lwz r0, 0x30(r1)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_803AB428_00000B74:
     lwz r3, 0x388(r15)
     addi r0, r3, 0x1
@@ -956,8 +956,8 @@ lbl_fn_803AB428_00000B84:
     addi r4, r24, 0xce
     addi r3, r27, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803AB428_00000BA8:
     addi r3, r15, 0x38c
     stw r30, 0x38(r1)
@@ -977,8 +977,8 @@ lbl_fn_803AB428_00000BA8:
     addi r4, r24, 0xce
     addi r3, r27, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803AB428_00000BF8:
     addi r0, r28, 0x71c7
     cmplw r18, r0
@@ -1024,11 +1024,11 @@ lbl_fn_803AB428_00000C7C:
     addi r4, r24, 0xce
     addi r3, r27, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803AB428_00000C9C:
     mulli r3, r18, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r19, r3
     bne lbl_fn_803AB428_00000CC8
@@ -1036,8 +1036,8 @@ lbl_fn_803AB428_00000C9C:
     addi r3, r27, 0xa0
     addi r4, r4, lbl_80778910@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803AB428_00000CC8:
     lwz r0, 0x3c(r1)
     stw r19, 0x38(r1)
@@ -1074,7 +1074,7 @@ lbl_fn_803AB428_00000D14:
     lwz r0, 0x30(r1)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_803AB428_00000D54:
     lwz r3, 0x3c(r1)
     subi r6, r31, 0x5555
@@ -1244,7 +1244,7 @@ asm void fn_803AB96C(void)
     add r7, r7, r27
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x388(r30)
     lwz r4, 0x38c(r30)
     cmplw r0, r4
@@ -1278,7 +1278,7 @@ lbl_fn_803AB96C_00000FF4:
     lwz r0, 0x38(r1)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_803AB96C_00001034:
     lwz r3, 0x388(r30)
     addi r0, r3, 0x1
@@ -1295,8 +1295,8 @@ lbl_fn_803AB96C_00001044:
     addi r3, r3, __files@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803AB96C_00001074:
     li r5, 0x0
     addi r4, r30, 0x38c
@@ -1322,8 +1322,8 @@ lbl_fn_803AB96C_00001074:
     addi r4, r4, 0xce
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803AB96C_000010DC:
     lis r3, 0x71c
     addi r0, r3, 0x71c7
@@ -1378,11 +1378,11 @@ lbl_fn_803AB96C_00001170:
     addi r4, r4, 0xce
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803AB96C_000011A4:
     mulli r3, r28, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_803AB96C_000011D8
@@ -1392,8 +1392,8 @@ lbl_fn_803AB96C_000011A4:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80778910@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803AB96C_000011D8:
     lwz r3, 0x44(r1)
     li r0, 0x0
@@ -1431,7 +1431,7 @@ lbl_fn_803AB96C_00001228:
     lwz r0, 0x38(r1)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_803AB96C_00001268:
     lwz r4, 0x44(r1)
     lis r3, 0x2aab
@@ -1570,7 +1570,7 @@ asm void fn_803ABE54(void)
     stfs f4, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f6, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fabs f3, f1
     lfs f0, lbl_80885B24
     fmr f31, f1
@@ -1591,7 +1591,7 @@ asm void fn_803ABE54(void)
     fsubs f0, f3, f0
     stfs f4, 0x28(r1)
     stfs f0, 0x2c(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     fsubs f5, f31, f30
     lfs f4, 0x24(r1)
     lfs f3, 0x28(r1)

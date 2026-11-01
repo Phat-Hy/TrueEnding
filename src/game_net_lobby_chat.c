@@ -8,24 +8,24 @@ extern void _savegpr_14(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8006B174(void);
 extern void fn_8006B2D8(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_8008B130(void);
 extern void fn_800C2448(void);
 extern void fn_800C24B4(void);
 extern void fn_800CB360(void);
-extern void fn_800D1D3C(void);
-extern void fn_800DC6B4(void);
+extern void atn_Task_constructor(void);
+extern void str_findChar(void);
 extern void fn_802114D8(void);
 extern void fn_802114E0(void);
-extern void fn_80370174(void);
-extern void fn_80370320(void);
+extern void world_getGlobalFlag(void);
+extern void world_setGlobalFlag(void);
 extern void fn_8049D1A4(void);
 extern void fn_8049E480(void);
 extern void fn_8067E23C(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -73,7 +73,7 @@ asm void fn_804A0614(void)
 lbl_fn_804A0614_00000028:
     lwz r3, 0x8(r4)
 lbl_fn_804A0614_0000002C:
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r6, 0x70(r31)
     b lbl_fn_804A0614_00000080
 lbl_fn_804A0614_00000038:
@@ -144,7 +144,7 @@ lbl_fn_804A06B4_000000CC:
     addi r8, r1, 0x18
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r24
     addi r3, r1, 0x70
     bl fn_8006B174
@@ -196,7 +196,7 @@ lbl_fn_804A06B4_0000017C:
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r30
     addi r3, r1, 0x58
     bl fn_8006B174
@@ -345,7 +345,7 @@ lbl_fn_804A06B4_00000388:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r28
     addi r3, r1, 0x40
     bl fn_8006B174
@@ -538,7 +538,7 @@ lbl_fn_804A0BCC_000005FC:
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r30
     addi r3, r1, 0x30
     bl fn_8006B174
@@ -565,7 +565,7 @@ lbl_fn_804A0BCC_000006A0:
 lbl_fn_804A0BCC_000006B4:
     lwz r3, 0x5c(r1)
 lbl_fn_804A0BCC_000006B8:
-    bl fn_800DC6B4
+    bl str_findChar
     cmplw r25, r3
     bne lbl_fn_804A0BCC_000006E0
     lwz r0, 0x54(r1)
@@ -604,7 +604,7 @@ lbl_fn_804A0BCC_000006F8:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r29
     addi r3, r1, 0x18
     bl fn_8006B174
@@ -631,7 +631,7 @@ lbl_fn_804A0BCC_0000078C:
 lbl_fn_804A0BCC_000007A0:
     lwz r3, 0x50(r1)
 lbl_fn_804A0BCC_000007A4:
-    bl fn_800DC6B4
+    bl str_findChar
     cmplw r25, r3
     bne lbl_fn_804A0BCC_000007CC
     lwz r0, 0x48(r1)
@@ -674,7 +674,7 @@ asm void fn_804A0E18(void)
     mr r3, r4
     stw r29, 0x14(r1)
     mr r29, r5
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r30, 0x70(r30)
     mr r31, r3
     b lbl_fn_804A0E18_00000858
@@ -1638,11 +1638,11 @@ asm void fn_804A1C4C(void)
     beq lbl_fn_804A1C4C_00001700
     mr r3, r0
     li r4, 0x387
-    bl fn_80370174
+    bl world_getGlobalFlag
     mr r31, r3
     lwz r3, lbl_8087F430
     li r4, 0x388
-    bl fn_80370174
+    bl world_getGlobalFlag
     srwi r4, r3, 16
     clrlwi r0, r3, 16
     lis r3, 0x4330
@@ -1674,7 +1674,7 @@ asm void fn_804A1C4C(void)
 lbl_fn_804A1C4C_000016E8:
     lwz r3, lbl_8087F430
     li r4, 0x38b
-    bl fn_80370174
+    bl world_getGlobalFlag
     lwz r4, lbl_8087EFB4
     lwz r4, 0x10(r4)
     stw r3, 0x4(r4)
@@ -1702,7 +1702,7 @@ asm void fn_804A1D2C(void)
     lfs f1, lbl_808871A8
     lfs f0, 0x110(r3)
     fmuls f1, f1, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     lfs f1, lbl_808871A8
     slwi r7, r3, 16
     lfs f0, 0x114(r30)
@@ -1715,19 +1715,19 @@ asm void fn_804A1D2C(void)
     stfd f0, 0x8(r1)
     lwz r0, 0xc(r1)
     or r31, r7, r0
-    bl fn_80370320
+    bl world_setGlobalFlag
     lwz r3, lbl_8087F430
     mr r5, r31
     li r4, 0x388
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     lwz r5, lbl_8087EFB4
     li r4, 0x38b
     lwz r3, lbl_8087F430
     li r6, 0x0
     lwz r5, 0x10(r5)
     lwz r5, 0x4(r5)
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_804A1D2C_000017B0:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1754,7 +1754,7 @@ asm void fn_804A1DDC(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_804A1DDC_00001814
     mr r4, r31
@@ -1779,7 +1779,7 @@ asm void fn_804A1E44(void)
     addi r11, r1, 0x20
     bl _savegpr_27
     mr r31, r3
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     addi r6, r31, 0x6c
     addi r7, r31, 0x23c
     lfs f0, lbl_808871B0

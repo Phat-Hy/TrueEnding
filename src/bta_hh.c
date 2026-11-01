@@ -5,15 +5,15 @@ extern void _restgpr_26(void);
 extern void _restgpr_27(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_80626AC0(void);
+extern void scapi_initContext(void);
 extern void fn_80628150(void);
 extern void fn_80628160(void);
 extern void fn_80629810(void);
-extern void fn_80629830(void);
+extern void bta_sys_log(void);
 extern void fn_80629850(void);
 extern void fn_80629870(void);
 extern void fn_80629890(void);
-extern void fn_80629EA4(void);
+extern void bd_addr_copy(void);
 extern void fn_80629ED8(void);
 extern void fn_80629FA8(void);
 extern void fn_8062A06C(void);
@@ -264,7 +264,7 @@ lbl_fn_8062DDA8_0000020C:
     bne lbl_fn_8062DDA8_00000290
     lwz r3, lbl_8087EAA8
     lhz r3, 0x8(r3)
-    bl fn_80626AC0
+    bl scapi_initContext
     stw r3, 0x228(r30)
     lis r6, fn_8062DC74@ha
     lwz r5, lbl_8087EAA8
@@ -283,7 +283,7 @@ lbl_fn_8062DDA8_0000020C:
     lis r4, lbl_807B3570@ha
     li r3, 0x504
     addi r4, r4, lbl_807B3570@l
-    bl fn_80629830
+    bl bta_sys_log
 lbl_fn_8062DDA8_00000278:
     li r0, 0x7
     lis r3, lbl_8081FDE8@ha
@@ -327,7 +327,7 @@ asm void fn_8062DF3C(void)
     lbz r5, 0x0(r30)
     addi r4, r4, lbl_807B35C0@l
     li r3, 0x504
-    bl fn_80629830
+    bl bta_sys_log
 lbl_fn_8062DF3C_00000308:
     addi r3, r1, 0x8
     li r4, 0x0
@@ -337,7 +337,7 @@ lbl_fn_8062DF3C_00000308:
     addi r3, r1, 0x8
     addi r4, r29, 0x8
     stb r0, 0xf(r1)
-    bl fn_80629EA4
+    bl bd_addr_copy
     lbz r31, 0x0(r30)
     cmpwi r31, 0x0
     bne lbl_fn_8062DF3C_0000039C
@@ -358,7 +358,7 @@ lbl_fn_8062DF3C_00000308:
     lis r4, lbl_807B35E0@ha
     li r3, 0x504
     addi r4, r4, lbl_807B35E0@l
-    bl fn_80629830
+    bl bta_sys_log
 lbl_fn_8062DF3C_00000380:
     lbz r3, 0x16(r29)
     bl fn_8063FC00
@@ -471,7 +471,7 @@ lbl_fn_8062E10C_000004CC:
     stb r30, 0xf(r1)
     addi r3, r1, 0x8
     addi r4, r29, 0x8
-    bl fn_80629EA4
+    bl bd_addr_copy
     lis r31, lbl_8081FDE8@ha
     addi r31, r31, lbl_8081FDE8@l
     lbz r3, 0x22d(r31)
@@ -554,7 +554,7 @@ lbl_fn_8062E234_000005F4:
     lis r4, lbl_807B362C@ha
     li r3, 0x503
     addi r4, r4, lbl_807B362C@l
-    bl fn_80629830
+    bl bta_sys_log
 lbl_fn_8062E234_00000610:
     lbz r0, 0x15(r30)
     cmpwi r0, 0x0
@@ -573,7 +573,7 @@ lbl_fn_8062E234_00000630:
     bl memset
     addi r3, r1, 0x10
     addi r4, r30, 0x8
-    bl fn_80629EA4
+    bl bd_addr_copy
     mr r3, r30
     addi r4, r1, 0x8
     bl fn_8062DDA8
@@ -750,7 +750,7 @@ lbl_fn_8062E344_0000089C:
     addi r4, r31, 0x8
     lbz r0, 0x16(r31)
     stb r0, 0x17(r1)
-    bl fn_80629EA4
+    bl bd_addr_copy
     lis r5, lbl_8081FDE8@ha
     addi r4, r1, 0x10
     addi r5, r5, lbl_8081FDE8@l
@@ -835,7 +835,7 @@ lbl_fn_8062E5AC_000009D4:
 lbl_fn_8062E5AC_000009D8:
     addi r4, r29, 0x2a8
     li r3, 0x504
-    bl fn_80629830
+    bl bta_sys_log
 lbl_fn_8062E5AC_000009E4:
     li r0, 0x0
     stb r0, 0xc(r1)
@@ -899,7 +899,7 @@ lbl_fn_8062E5AC_00000AB8:
 lbl_fn_8062E5AC_00000ABC:
     addi r4, r29, 0x2cc
     li r3, 0x504
-    bl fn_80629830
+    bl bta_sys_log
 lbl_fn_8062E5AC_00000AC8:
     lbz r4, 0x15(r31)
     addi r5, r31, 0x8
@@ -971,7 +971,7 @@ lbl_fn_8062E7A4_00000BB4:
     stb r0, 0x16(r1)
     addi r3, r1, 0x10
     addi r4, r31, 0x8
-    bl fn_80629EA4
+    bl bd_addr_copy
     lbz r3, 0x16(r31)
     bl fn_8063FE6C
     lis r5, lbl_8081FDE8@ha
@@ -1107,7 +1107,7 @@ asm void fn_8062E9C0(void)
 lbl_fn_8062E9C0_00000D94:
     addi r3, r1, 0x10
     addi r4, r4, 0x8
-    bl fn_80629EA4
+    bl bd_addr_copy
     lbz r3, 0x16(r30)
     cmplwi r3, 0xff
     bne lbl_fn_8062E9C0_00000E08
@@ -1146,7 +1146,7 @@ lbl_fn_8062E9C0_00000E1C:
     addi r3, r1, 0x10
     addi r4, r30, 0x8
     stb r0, 0x17(r1)
-    bl fn_80629EA4
+    bl bd_addr_copy
     lbz r0, 0x1c(r30)
     cmplwi r0, 0x3
     beq lbl_fn_8062E9C0_00000E7C
@@ -1293,7 +1293,7 @@ asm void fn_8062EC40(void)
     lis r4, lbl_807B3850@ha
     li r3, 0x500
     addi r4, r4, lbl_807B3850@l
-    bl fn_80629830
+    bl bta_sys_log
 lbl_fn_8062EC40_00001040:
     li r0, 0x6
     stb r0, 0x8(r1)
@@ -1351,7 +1351,7 @@ lbl_fn_8062EC40_000010F4:
     lis r4, lbl_807B386C@ha
     li r3, 0x504
     addi r4, r4, lbl_807B386C@l
-    bl fn_80629830
+    bl bta_sys_log
 lbl_fn_8062EC40_00001110:
     lbz r0, 0x8(r30)
     cmplwi r0, 0x1
@@ -1442,7 +1442,7 @@ lbl_fn_8062EE08_00001240:
 lbl_fn_8062EE08_00001244:
     addi r4, r7, 0x490
     li r3, 0x504
-    bl fn_80629830
+    bl bta_sys_log
 lbl_fn_8062EE08_00001250:
     cmplwi r29, 0x8
     bgt lbl_fn_8062EE08_000013DC
@@ -1556,7 +1556,7 @@ lbl_fn_8062EE08_000013DC:
     cmplwi r31, 0x1710
     beq lbl_fn_8062EE08_0000140C
     li r3, 0x18
-    bl fn_80626AC0
+    bl scapi_initContext
     cmpwi r3, 0x0
     beq lbl_fn_8062EE08_0000140C
     sth r31, 0x0(r3)
@@ -1593,7 +1593,7 @@ asm void fn_8062F0A0(void)
     bl fn_8062A33C
     bl fn_80628160
     li r3, 0x34
-    bl fn_80626AC0
+    bl scapi_initContext
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_8062F0A0_00001498
@@ -1623,7 +1623,7 @@ asm void fn_8062F128(void)
     mflr r0
     li r3, 0x8
     stw r0, 0x14(r1)
-    bl fn_80626AC0
+    bl scapi_initContext
     cmpwi r3, 0x0
     beq lbl_fn_8062F128_000014DC
     li r0, 0x170d
@@ -1646,7 +1646,7 @@ asm void fn_8062F160(void)
     stw r30, 0x8(r1)
     mr r30, r3
     li r3, 0x8
-    bl fn_80626AC0
+    bl scapi_initContext
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_8062F160_00001538
@@ -1681,7 +1681,7 @@ asm void fn_8062F1C4(void)
     stw r28, 0x10(r1)
     mr r28, r3
     li r3, 0x10
-    bl fn_80626AC0
+    bl scapi_initContext
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_8062F1C4_000015C8
@@ -1696,7 +1696,7 @@ asm void fn_8062F1C4(void)
     sth r0, 0x6(r31)
     stb r30, 0xe(r31)
     stb r29, 0xf(r31)
-    bl fn_80629EA4
+    bl bd_addr_copy
     mr r3, r31
     bl fn_8062A350
     b lbl_fn_8062F1C4_000015E4
@@ -1731,7 +1731,7 @@ asm void fn_8062F278(void)
     stw r29, 0x14(r1)
     mr r29, r3
     li r3, 0x14
-    bl fn_80626AC0
+    bl scapi_initContext
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_8062F278_00001678
@@ -1775,7 +1775,7 @@ asm void fn_8062F308(void)
     mr r29, r6
     mr r30, r7
     li r3, 0x1c
-    bl fn_80626AC0
+    bl scapi_initContext
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_8062F308_00001724
@@ -1797,7 +1797,7 @@ asm void fn_8062F308(void)
     bl memcpy
     mr r4, r26
     addi r3, r31, 0x8
-    bl fn_80629EA4
+    bl bd_addr_copy
     mr r3, r31
     bl fn_8062A350
 lbl_fn_8062F308_00001724:
@@ -1819,7 +1819,7 @@ asm void fn_8062F3B0(void)
     stw r30, 0x8(r1)
     mr r30, r3
     li r3, 0x1c
-    bl fn_80626AC0
+    bl scapi_initContext
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_8062F3B0_00001790
@@ -1850,7 +1850,7 @@ asm void fn_8062F41C(void)
     li r3, 0x8
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
-    bl fn_80626AC0
+    bl scapi_initContext
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_8062F41C_000017E8
@@ -1911,7 +1911,7 @@ lbl_fn_8062F470_00001884:
     addi r3, r1, 0x8
     addi r4, r29, 0x8
     li r30, 0x2
-    bl fn_80629EA4
+    bl bd_addr_copy
     li r3, 0x9
     li r0, 0xff
     stb r3, 0xe(r1)
@@ -1923,7 +1923,7 @@ lbl_fn_8062F470_000018A8:
     bne lbl_fn_8062F470_000018D4
     addi r3, r1, 0x8
     addi r4, r29, 0x8
-    bl fn_80629EA4
+    bl bd_addr_copy
     li r3, 0x9
     li r0, 0xff
     stb r3, 0xe(r1)
@@ -1973,7 +1973,7 @@ lbl_fn_8062F470_00001954:
     lhz r5, 0x6(r29)
     addi r4, r31, 0x0
     li r3, 0x500
-    bl fn_80629830
+    bl bta_sys_log
 lbl_fn_8062F470_00001970:
     clrlwi. r3, r30, 16
     beq lbl_fn_8062F470_00001B38
@@ -2342,7 +2342,7 @@ lbl_fn_8062F9C4_00001E24:
     bne lbl_fn_8062F9C4_00001E48
     mr r4, r27
     addi r3, r3, 0x18
-    bl fn_80629EA4
+    bl bd_addr_copy
     b lbl_fn_8062F9C4_00001E50
 lbl_fn_8062F9C4_00001E48:
     addi r29, r29, 0x1
@@ -2426,7 +2426,7 @@ asm void fn_8062FB80(void)
     mr r5, r30
     addi r4, r4, lbl_807B3D74@l
     li r3, 0x504
-    bl fn_80629830
+    bl bta_sys_log
 lbl_fn_8062FB80_00001F58:
     li r0, 0x1
     cmpwi r29, 0x0
@@ -2441,7 +2441,7 @@ lbl_fn_8062FB80_00001F58:
     lhz r3, 0x0(r29)
     cmpwi r3, 0x0
     beq lbl_fn_8062FB80_00001FB0
-    bl fn_80626AC0
+    bl scapi_initContext
     cmpwi r3, 0x0
     stw r3, 0x4(r26)
     beq lbl_fn_8062FB80_00001FB0

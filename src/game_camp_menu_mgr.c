@@ -6,15 +6,15 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8006F72C(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800A555C(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
-extern void fn_800CB5C8(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
-extern void fn_800D246C(void);
+extern void morph_updateMesh(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DBF68(void);
 extern void fn_800DFB40(void);
@@ -28,8 +28,8 @@ extern void fn_801F6C80(void);
 extern void fn_801F837C(void);
 extern void fn_8020924C(void);
 extern void fn_8021F3E8(void);
-extern void fn_80370320(void);
-extern void fn_80370AE4(void);
+extern void world_setGlobalFlag(void);
+extern void world_setLocalFlag(void);
 extern void fn_803B3D2C(void);
 extern void fn_803B4338(void);
 extern void fn_803B5974(void);
@@ -104,7 +104,7 @@ asm void fn_803B612C(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_803B612C_00000050
     mr r4, r31
@@ -129,7 +129,7 @@ asm void fn_803B6190(void)
     stw r31, 0xc(r1)
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lfs f0, lbl_80885C20
     lis r3, lbl_8078B460@ha
     li r31, 0x0
@@ -167,7 +167,7 @@ asm void fn_803B6190(void)
     li r4, 0x1
     stb r31, 0x4d(r3)
     lwz r3, 0x48(r30)
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -191,10 +191,10 @@ asm void fn_803B6260(void)
     beq lbl_fn_803B6260_00000180
     li r4, -0x1
     addi r3, r3, 0x6c
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r31, 0x0
     ble lbl_fn_803B6260_00000180
     mr r3, r30
@@ -222,7 +222,7 @@ asm void fn_803B62C8(void)
     beq lbl_fn_803B62C8_000001E0
     lwz r3, 0x48(r31)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r4, 0x48(r31)
     li r3, 0x1
     lwz r0, 0x38(r4)
@@ -529,7 +529,7 @@ lbl_fn_803B6324_00000600:
     addi r3, r31, 0x6c
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, lbl_8087F0A8
     lfs f1, lbl_80885C34
     lwz r0, 0x174(r3)
@@ -549,7 +549,7 @@ lbl_fn_803B6324_00000630:
     bl fn_800CB440
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803B6324_00000824
 lbl_fn_803B6324_00000668:
     lwz r6, 0x48(r31)
@@ -569,7 +569,7 @@ lbl_fn_803B6324_00000668:
     li r5, 0x0
     ori r0, r0, 0x4
     stw r0, 0x38(r6)
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lbz r0, 0x71(r31)
     cmpwi r0, 0x0
     beq lbl_fn_803B6324_00000824
@@ -582,7 +582,7 @@ lbl_fn_803B6324_00000668:
     bne lbl_fn_803B6324_000006E8
     lwz r4, 0x78(r31)
     li r5, 0x1
-    bl fn_80370AE4
+    bl world_setLocalFlag
     b lbl_fn_803B6324_00000824
 lbl_fn_803B6324_000006E8:
     cmpwi r0, 0x1
@@ -590,7 +590,7 @@ lbl_fn_803B6324_000006E8:
     lwz r4, 0x78(r31)
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     b lbl_fn_803B6324_00000824
 lbl_fn_803B6324_00000704:
     lwz r6, 0x1b8(r31)
@@ -667,7 +667,7 @@ lbl_fn_803B6324_000007DC:
     bl fn_803B4338
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r31
     li r4, 0x0
     bl fn_803B6C88
@@ -771,7 +771,7 @@ lbl_fn_803B6970_0000095C:
     addi r3, r31, 0x6c
     li r4, 0xa
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x54(r31)
     addi r0, r3, 0xa
     stw r0, 0x54(r31)
@@ -941,7 +941,7 @@ lbl_fn_803B6C88_00000B9C:
     lwz r0, 0x38(r6)
     ori r0, r0, 0x4
     stw r0, 0x38(r6)
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lbz r0, 0x71(r29)
     cmpwi r0, 0x0
     beq lbl_fn_803B6C88_00000C3C
@@ -954,7 +954,7 @@ lbl_fn_803B6C88_00000B9C:
     bne lbl_fn_803B6C88_00000C24
     lwz r4, 0x78(r29)
     li r5, 0x1
-    bl fn_80370AE4
+    bl world_setLocalFlag
     b lbl_fn_803B6C88_00000C3C
 lbl_fn_803B6C88_00000C24:
     cmpwi r0, 0x1
@@ -962,7 +962,7 @@ lbl_fn_803B6C88_00000C24:
     lwz r4, 0x78(r29)
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_803B6C88_00000C3C:
     lbz r0, 0x70(r29)
     cmpwi r0, 0x0
@@ -1089,7 +1089,7 @@ lbl_fn_803B6E04_00000DD4:
     addi r3, r31, 0x6c
     li r4, 0xa
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x54(r31)
     addi r0, r3, 0xa
     stw r0, 0x54(r31)
@@ -1821,7 +1821,7 @@ asm void fn_803B78E8(void)
     lwz r4, 0x78(r3)
     mr r3, r5
     li r5, 0x1
-    b fn_80370AE4
+    b world_setLocalFlag
 lbl_fn_803B78E8_000017F8:
     cmpwi r0, 0x1
     bnelr
@@ -1829,7 +1829,7 @@ lbl_fn_803B78E8_000017F8:
     mr r3, r5
     li r5, 0x1
     li r6, 0x0
-    b fn_80370320
+    b world_setGlobalFlag
     blr
 }
 
@@ -1854,7 +1854,7 @@ asm void fn_803B7944(void)
     mr r6, r5
     addi r3, r31, 0x42e0
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_803B7944_000018B0

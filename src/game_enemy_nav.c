@@ -6,8 +6,8 @@ extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void dtor_80084684(void);
 extern void fn_8000D430(void);
-extern void fn_800874C8(void);
-extern void fn_8008771C(void);
+extern void route_findNextWaypoint(void);
+extern void route_interpolatePath(void);
 extern void fn_80087E9C(void);
 extern void fn_8008937C(void);
 extern void fn_80129A6C(void);
@@ -17,9 +17,9 @@ extern void fn_8012D628(void);
 extern void fn_8012D714(void);
 extern void fn_8020FCE8(void);
 extern void fn_80219558(void);
-extern void fn_80370174(void);
+extern void world_getGlobalFlag(void);
 extern void fn_80375B78(void);
-extern void fn_8068AEB0(void);
+extern void std_pow(void);
 
 /* External data declarations */
 extern u8 lbl_80737200[];
@@ -197,7 +197,7 @@ asm void fn_8012AD20(void)
     li r6, 0x0
     li r7, 0x3
     li r8, 0x1
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_808818F8
     mr r3, r29
     lfs f2, lbl_808818FC
@@ -215,7 +215,7 @@ asm void fn_8012AD20(void)
     addi r5, r28, 0x38
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r29
     mr r10, r28
     addi r4, r30, 0x3b
@@ -224,7 +224,7 @@ asm void fn_8012AD20(void)
     li r6, 0x0
     li r7, 0x3
     li r8, 0x1
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_808818F8
     mr r3, r29
     lfs f2, lbl_808818FC
@@ -242,7 +242,7 @@ asm void fn_8012AD20(void)
     addi r5, r28, 0x78
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -406,7 +406,7 @@ lbl_fn_8012B028_00000480:
     lfd f2, lbl_80737340@l(r3)
     lfd f0, 0x8(r1)
     fsubs f1, f0, f1
-    bl fn_8068AEB0
+    bl std_pow
     frsp f1, f1
     lfs f0, lbl_80881908
     lwz r0, 0x1ac(r31)
@@ -1199,7 +1199,7 @@ lbl_fn_8012B988_00001058:
     cmpwi r3, 0x0
     beq lbl_fn_8012B988_00001100
     li r4, 0x11a
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     ble lbl_fn_8012B988_00001100
     xoris r0, r3, 0x8000

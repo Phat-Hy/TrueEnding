@@ -7,41 +7,41 @@ extern void _restgpr_27(void);
 extern void _savegpr_24(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8000DD04(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_80070B60(void);
 extern void fn_80070C98(void);
 extern void fn_80080048(void);
-extern void fn_80084320(void);
-extern void fn_800846FC(void);
-extern void fn_80084C24(void);
-extern void fn_8008A4B0(void);
+extern void mem_alloc(void);
+extern void mem_realloc(void);
+extern void mem_getAllocSize(void);
+extern void* area_refresh(void*);
 extern void fn_8008A4E0(void);
-extern void fn_8008CCC0(void);
-extern void fn_8008CCD4(void);
-extern void fn_8008CCE8(void);
-extern void fn_8008CD1C(void);
-extern void fn_8008CD50(void);
+extern void atn_AABB_getMax(void);
+extern void atn_AABB_getMin(void);
+extern void atn_Matrix_copy_2(void);
+extern void atn_Matrix_copy(void);
+extern void atn_Matrix_concat(void);
 extern void fn_8008E2DC(void);
 extern void fn_8008E2E0(void);
 extern void fn_8008F5F8(void);
 extern void fn_80091C00(void);
 extern void fn_800A03A0(void);
 extern void fn_800A1060(void);
-extern void fn_800D5808(void);
+extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D87A4(void);
 extern void fn_800D87B0(void);
 extern void fn_800D8808(void);
-extern void fn_800DC6B4(void);
-extern void fn_80473E8C(void);
-extern void fn_80473F34(void);
+extern void str_findChar(void);
+extern void atn_LoadHandle_destructor(void);
+extern void atn_LoadHandle_getData(void);
 extern void fn_80476130(void);
-extern void fn_805F93C0(void);
+extern void PSMTXMultVec(void);
 extern void fn_8067E23C(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -77,16 +77,16 @@ extern u32 lbl_80880C24;
 void fn_80094F98(void);
 void fn_800952F8(void);
 void fn_80095300(void);
-void fn_800954DC(void);
+void atn_Lockon_updateTargetTextures(void);
 void fn_80095750(void);
 void fn_80095B08(void);
 void fn_80095CD0(void);
 void fn_80095D44(void);
 void fn_80095F10(void);
 void fn_80096218(void);
-void fn_80096E94(void);
+void lockon_updateTarget(void);
 void fn_800970CC(void);
-void fn_80097128(void);
+void atn_LH_Motion_destructor(void);
 void fn_80097180(void);
 
 asm void fn_80094F98(void)
@@ -267,7 +267,7 @@ lbl_fn_80094F98_00000288:
     stfs f2, 0x10(r1)
     mr r4, r31
     psq_st f1, 0x0(r31), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     psq_l f1, 0x0(r31), 0, 0
     lfs f2, 0x10(r1)
     stfs f2, 0x8(r29)
@@ -334,24 +334,24 @@ asm void fn_80095300(void)
     bl fn_8000DD04
     mr r4, r3
     addi r3, r1, 0x14
-    bl fn_8008CCD4
+    bl atn_AABB_getMin
     mr r3, r27
     addi r4, r1, 0x14
-    bl fn_8000D124
+    bl vec3_copy
     mr r3, r28
     bl fn_8000DD04
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8008CCC0
+    bl atn_AABB_getMax
     addi r3, r27, 0xc
     addi r4, r1, 0x8
-    bl fn_8000D124
+    bl vec3_copy
     mr r3, r28
     bl fn_800952F8
     mr r29, r3
     addi r3, r1, 0x158
     mr r4, r29
-    bl fn_8008CCE8
+    bl atn_Matrix_copy_2
     lwz r0, 0xb0(r28)
     cmpwi r0, 0x0
     blt lbl_fn_80095300_000004F4
@@ -369,7 +369,7 @@ asm void fn_80095300(void)
     mr r5, r3
     addi r3, r1, 0x128
     add r4, r31, r0
-    bl fn_8008CD50
+    bl atn_Matrix_concat
     lfs f1, 0xac(r28)
     mr r4, r27
     addi r3, r1, 0xb0
@@ -389,7 +389,7 @@ asm void fn_80095300(void)
     mr r5, r3
     addi r3, r1, 0xf8
     add r4, r31, r0
-    bl fn_8008CD50
+    bl atn_Matrix_concat
     lfs f1, 0xac(r28)
     mr r4, r27
     addi r3, r1, 0x98
@@ -418,10 +418,10 @@ lbl_fn_80095300_000004C4:
     mr r5, r3
     addi r3, r1, 0xc8
     add r4, r31, r0
-    bl fn_8008CD50
+    bl atn_Matrix_concat
     addi r3, r1, 0x158
     addi r4, r1, 0xc8
-    bl fn_8008CD1C
+    bl atn_Matrix_copy
 lbl_fn_80095300_000004F4:
     lfs f1, 0xac(r28)
     mr r4, r27
@@ -446,7 +446,7 @@ lbl_fn_80095300_0000052C:
     blr
 }
 
-asm void fn_800954DC(void)
+asm void atn_Lockon_updateTargetTextures(void)
 {
     nofralloc
     stwu r1, -0xa0(r1)
@@ -473,7 +473,7 @@ asm void fn_800954DC(void)
     mr r26, r3
     mr r27, r4
     mr r28, r5
-    beq lbl_fn_800954DC_00000768
+    beq lbl_atn_Lockon_updateTargetTextures_00000768
     lwz r30, 0x104(r3)
     li r29, 0x0
     lfs f27, lbl_80880B88
@@ -483,122 +483,122 @@ asm void fn_800954DC(void)
     lfs f29, lbl_80880B90
     lfs f30, lbl_80880B94
     lfs f31, lbl_80880B98
-    b lbl_fn_800954DC_00000760
-lbl_fn_800954DC_000005D0:
+    b lbl_atn_Lockon_updateTargetTextures_00000760
+lbl_atn_Lockon_updateTargetTextures_000005D0:
     lwz r3, 0x130(r26)
     lwz r4, 0x108(r26)
     lwzx r0, r3, r31
     lwzx r3, r4, r31
     cmpwi r0, -0x1
-    ble lbl_fn_800954DC_00000758
+    ble lbl_atn_Lockon_updateTargetTextures_00000758
     mulli r0, r0, 0x18
     lwz r3, 0xc(r3)
     add r24, r3, r0
     lwz r0, 0x8(r24)
     cmpwi r0, 0x0
-    bne lbl_fn_800954DC_00000638
+    bne lbl_atn_Lockon_updateTargetTextures_00000638
     li r3, 0x14
     li r4, 0x6
     la r5, lbl_8087D780
     la r6, lbl_8087D77C
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
-    beq lbl_fn_800954DC_00000634
+    beq lbl_atn_Lockon_updateTargetTextures_00000634
     stfs f27, 0x0(r3)
     stfs f28, 0x4(r3)
     stfs f29, 0x8(r3)
     stfs f30, 0xc(r3)
     stfs f31, 0x10(r3)
-lbl_fn_800954DC_00000634:
+lbl_atn_Lockon_updateTargetTextures_00000634:
     stw r3, 0x8(r24)
-lbl_fn_800954DC_00000638:
+lbl_atn_Lockon_updateTargetTextures_00000638:
     lwz r3, 0x8(r24)
     stfs f25, 0x0(r3)
     lwz r0, 0x8(r24)
     cmpwi r0, 0x0
-    bne lbl_fn_800954DC_00000684
+    bne lbl_atn_Lockon_updateTargetTextures_00000684
     li r3, 0x14
     li r4, 0x6
     la r5, lbl_8087D780
     la r6, lbl_8087D77C
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
-    beq lbl_fn_800954DC_00000680
+    beq lbl_atn_Lockon_updateTargetTextures_00000680
     stfs f27, 0x0(r3)
     stfs f28, 0x4(r3)
     stfs f29, 0x8(r3)
     stfs f30, 0xc(r3)
     stfs f31, 0x10(r3)
-lbl_fn_800954DC_00000680:
+lbl_atn_Lockon_updateTargetTextures_00000680:
     stw r3, 0x8(r24)
-lbl_fn_800954DC_00000684:
+lbl_atn_Lockon_updateTargetTextures_00000684:
     lwz r3, 0x8(r24)
     stfs f25, 0x4(r3)
     lwz r0, 0x8(r24)
     lfs f26, 0x0(r28)
     cmpwi r0, 0x0
-    bne lbl_fn_800954DC_000006D4
+    bne lbl_atn_Lockon_updateTargetTextures_000006D4
     li r3, 0x14
     li r4, 0x6
     la r5, lbl_8087D780
     la r6, lbl_8087D77C
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
-    beq lbl_fn_800954DC_000006D0
+    beq lbl_atn_Lockon_updateTargetTextures_000006D0
     stfs f27, 0x0(r3)
     stfs f28, 0x4(r3)
     stfs f29, 0x8(r3)
     stfs f30, 0xc(r3)
     stfs f31, 0x10(r3)
-lbl_fn_800954DC_000006D0:
+lbl_atn_Lockon_updateTargetTextures_000006D0:
     stw r3, 0x8(r24)
-lbl_fn_800954DC_000006D4:
+lbl_atn_Lockon_updateTargetTextures_000006D4:
     lwz r3, 0x8(r24)
     stfs f26, 0xc(r3)
     lwz r0, 0x8(r24)
     lfs f26, 0x4(r28)
     cmpwi r0, 0x0
-    bne lbl_fn_800954DC_00000724
+    bne lbl_atn_Lockon_updateTargetTextures_00000724
     li r3, 0x14
     li r4, 0x6
     la r5, lbl_8087D780
     la r6, lbl_8087D77C
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
-    beq lbl_fn_800954DC_00000720
+    beq lbl_atn_Lockon_updateTargetTextures_00000720
     stfs f27, 0x0(r3)
     stfs f28, 0x4(r3)
     stfs f29, 0x8(r3)
     stfs f30, 0xc(r3)
     stfs f31, 0x10(r3)
-lbl_fn_800954DC_00000720:
+lbl_atn_Lockon_updateTargetTextures_00000720:
     stw r3, 0x8(r24)
-lbl_fn_800954DC_00000724:
+lbl_atn_Lockon_updateTargetTextures_00000724:
     lwz r3, 0x8(r24)
     stfs f26, 0x10(r3)
     lbz r0, 0x11(r24)
     cmpwi r0, 0x0
-    beq lbl_fn_800954DC_00000754
+    beq lbl_atn_Lockon_updateTargetTextures_00000754
     lwz r3, 0x4(r24)
     cmpwi r3, 0x0
-    beq lbl_fn_800954DC_00000754
+    beq lbl_atn_Lockon_updateTargetTextures_00000754
     li r4, 0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     stb r25, 0x11(r24)
     stw r25, 0x4(r24)
-lbl_fn_800954DC_00000754:
+lbl_atn_Lockon_updateTargetTextures_00000754:
     stw r27, 0x4(r24)
-lbl_fn_800954DC_00000758:
+lbl_atn_Lockon_updateTargetTextures_00000758:
     addi r31, r31, 0x4
     addi r29, r29, 0x1
-lbl_fn_800954DC_00000760:
+lbl_atn_Lockon_updateTargetTextures_00000760:
     cmplw r29, r30
-    blt lbl_fn_800954DC_000005D0
-lbl_fn_800954DC_00000768:
+    blt lbl_atn_Lockon_updateTargetTextures_000005D0
+lbl_atn_Lockon_updateTargetTextures_00000768:
     addi r11, r1, 0x30
     psq_l f31, 0x98(r1), 0, 0
     lfd f31, 0x90(r1)
@@ -638,7 +638,7 @@ asm void fn_80095750(void)
     li r3, 0x18
     mr r6, r5
     li r4, 0x6
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_80095750_00000818
@@ -669,9 +669,9 @@ lbl_fn_80095750_00000834:
     add r7, r27, r0
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r3, r27
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0xc(r31)
     addi r3, r30, 0x4
     stw r30, 0x10(r31)
@@ -693,7 +693,7 @@ lbl_fn_80095750_0000089C:
     la r5, lbl_8087D7D8
     la r6, lbl_8087D7D4
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x1ec(r28)
     mr r29, r3
     cmpwi r0, 0x0
@@ -769,7 +769,7 @@ lbl_fn_80095750_000009BC:
     bdnz lbl_fn_80095750_000009BC
 lbl_fn_80095750_000009D4:
     lwz r3, 0x1ec(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80095750_000009DC:
     li r0, 0x8
     stw r29, 0x1ec(r28)
@@ -787,7 +787,7 @@ lbl_fn_80095750_000009EC:
     la r5, lbl_8087D7D8
     la r6, lbl_8087D7D4
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x1ec(r28)
     mr r30, r3
     cmpwi r0, 0x0
@@ -863,7 +863,7 @@ lbl_fn_80095750_00000B18:
     bdnz lbl_fn_80095750_00000B18
 lbl_fn_80095750_00000B30:
     lwz r3, 0x1ec(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80095750_00000B38:
     stw r30, 0x1ec(r28)
     stw r29, 0x1e8(r28)
@@ -902,7 +902,7 @@ asm void fn_80095B08(void)
 lbl_fn_80095B08_00000BA8:
     lwz r3, 0x8(r4)
 lbl_fn_80095B08_00000BAC:
-    bl fn_800DC6B4
+    bl str_findChar
     mr r31, r3
     addi r30, r28, 0x1
     li r29, 0x0
@@ -1226,7 +1226,7 @@ lbl_fn_80095F10_00000FDC:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80095F10_00001268
     lwz r3, 0x208(r30)
@@ -1408,7 +1408,7 @@ asm void fn_80096218(void)
     b lbl_fn_80096218_0000159C
 lbl_fn_80096218_000012AC:
     mr r3, r21
-    bl fn_80473F34
+    bl atn_LoadHandle_getData
     lwz r0, 0x8(r28)
     mr r26, r3
     cmpwi r0, 0x0
@@ -1425,7 +1425,7 @@ lbl_fn_80096218_000012D0:
     la r5, lbl_8087D7E0
     la r6, lbl_8087D7DC
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x8(r28)
     mr r24, r3
     cmpwi r0, 0x0
@@ -1502,7 +1502,7 @@ lbl_fn_80096218_000013F0:
     bdnz lbl_fn_80096218_000013F0
 lbl_fn_80096218_0000140C:
     lwz r3, 0x8(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80096218_00001414:
     stw r24, 0x8(r28)
     stw r25, 0x4(r28)
@@ -1519,7 +1519,7 @@ lbl_fn_80096218_00001420:
     la r5, lbl_8087D7E0
     la r6, lbl_8087D7DC
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x8(r28)
     mr r30, r3
     cmpwi r0, 0x0
@@ -1596,7 +1596,7 @@ lbl_fn_80096218_0000154C:
     bdnz lbl_fn_80096218_0000154C
 lbl_fn_80096218_00001568:
     lwz r3, 0x8(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80096218_00001570:
     stw r30, 0x8(r28)
     stw r24, 0x4(r28)
@@ -1617,7 +1617,7 @@ lbl_fn_80096218_0000159C:
     cmpw r31, r0
     blt lbl_fn_80096218_000012AC
     addi r3, r27, 0xfc
-    bl fn_80473F34
+    bl atn_LoadHandle_getData
     lwz r0, 0x8(r28)
     mr r25, r3
     cmpwi r0, 0x0
@@ -1634,7 +1634,7 @@ lbl_fn_80096218_000015D4:
     la r5, lbl_8087D7E0
     la r6, lbl_8087D7DC
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x8(r28)
     mr r24, r3
     cmpwi r0, 0x0
@@ -1710,7 +1710,7 @@ lbl_fn_80096218_000016F4:
     bdnz lbl_fn_80096218_000016F4
 lbl_fn_80096218_0000170C:
     lwz r3, 0x8(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80096218_00001714:
     li r0, 0x8
     stw r24, 0x8(r28)
@@ -1728,7 +1728,7 @@ lbl_fn_80096218_00001724:
     la r5, lbl_8087D7E0
     la r6, lbl_8087D7DC
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x8(r28)
     mr r24, r3
     cmpwi r0, 0x0
@@ -1804,7 +1804,7 @@ lbl_fn_80096218_00001850:
     bdnz lbl_fn_80096218_00001850
 lbl_fn_80096218_00001868:
     lwz r3, 0x8(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80096218_00001870:
     stw r24, 0x8(r28)
     stw r26, 0x4(r28)
@@ -1831,7 +1831,7 @@ lbl_fn_80096218_000018B0:
     cmpwi r3, 0x0
     beq lbl_fn_80096218_00001BAC
     addi r3, r3, 0x20
-    bl fn_80473F34
+    bl atn_LoadHandle_getData
     lwz r0, 0x8(r28)
     mr r25, r3
     cmpwi r0, 0x0
@@ -1848,7 +1848,7 @@ lbl_fn_80096218_000018E8:
     la r5, lbl_8087D7E0
     la r6, lbl_8087D7DC
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x8(r28)
     mr r23, r3
     cmpwi r0, 0x0
@@ -1925,7 +1925,7 @@ lbl_fn_80096218_00001A08:
     bdnz lbl_fn_80096218_00001A08
 lbl_fn_80096218_00001A24:
     lwz r3, 0x8(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80096218_00001A2C:
     stw r23, 0x8(r28)
     stw r26, 0x4(r28)
@@ -1942,7 +1942,7 @@ lbl_fn_80096218_00001A38:
     la r5, lbl_8087D7E0
     la r6, lbl_8087D7DC
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x8(r28)
     mr r24, r3
     cmpwi r0, 0x0
@@ -2019,7 +2019,7 @@ lbl_fn_80096218_00001B64:
     bdnz lbl_fn_80096218_00001B64
 lbl_fn_80096218_00001B80:
     lwz r3, 0x8(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80096218_00001B88:
     stw r24, 0x8(r28)
     stw r23, 0x4(r28)
@@ -2069,7 +2069,7 @@ lbl_fn_80096218_00001C10:
     la r5, lbl_8087D7D0
     la r6, lbl_8087D7CC
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x8(r29)
     mr r23, r3
     cmpwi r0, 0x0
@@ -2146,7 +2146,7 @@ lbl_fn_80096218_00001D30:
     bdnz lbl_fn_80096218_00001D30
 lbl_fn_80096218_00001D4C:
     lwz r3, 0x8(r29)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80096218_00001D54:
     stw r23, 0x8(r29)
     stw r30, 0x4(r29)
@@ -2163,7 +2163,7 @@ lbl_fn_80096218_00001D60:
     la r5, lbl_8087D7D0
     la r6, lbl_8087D7CC
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x8(r29)
     mr r23, r3
     cmpwi r0, 0x0
@@ -2240,7 +2240,7 @@ lbl_fn_80096218_00001E8C:
     bdnz lbl_fn_80096218_00001E8C
 lbl_fn_80096218_00001EA8:
     lwz r3, 0x8(r29)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80096218_00001EB0:
     stw r23, 0x8(r29)
     stw r24, 0x4(r29)
@@ -2265,7 +2265,7 @@ lbl_fn_80096218_00001EDC:
     blr
 }
 
-asm void fn_80096E94(void)
+asm void lockon_updateTarget(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -2308,7 +2308,7 @@ asm void fn_80096E94(void)
     stb r4, 0x3c8(r31)
     lwz r0, lbl_8087EF18
     cmpwi r0, 0x0
-    bne lbl_fn_80096E94_00001FE0
+    bne lbl_lockon_updateTarget_00001FE0
     lis r3, lbl_80732368@ha
     lis r6, 0x1
     addi r3, r3, lbl_80732368@l
@@ -2317,15 +2317,15 @@ asm void fn_80096E94(void)
     li r7, 0x0
     subi r3, r6, 0x4ff0
     mr r6, r5
-    bl fn_800846FC
-    lis r4, fn_8008A4B0@ha
+    bl mem_realloc
+    lis r4, area_refresh@ha
     li r5, 0x0
-    addi r4, r4, fn_8008A4B0@l
+    addi r4, r4, area_refresh@l
     li r6, 0x2c
     li r7, 0x400
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, lbl_8087EF18
-lbl_fn_80096E94_00001FE0:
+lbl_lockon_updateTarget_00001FE0:
     li r0, 0x2
     mr r6, r31
     lfs f2, lbl_80880BF8
@@ -2335,7 +2335,7 @@ lbl_fn_80096E94_00001FE0:
     lfs f0, lbl_80880C24
     li r3, 0x0
     mtctr r0
-lbl_fn_80096E94_00002004:
+lbl_lockon_updateTarget_00002004:
     stw r5, 0x22c(r6)
     stfs f2, 0x234(r6)
     stfs f1, 0x238(r6)
@@ -2373,41 +2373,41 @@ lbl_fn_80096E94_00002004:
     stfs f2, 0x2b4(r6)
     stfs f2, 0x2b8(r6)
     addi r6, r6, 0x90
-    bdnz lbl_fn_80096E94_00002004
+    bdnz lbl_lockon_updateTarget_00002004
     lwz r0, 0x4(r31)
     clrlwi r0, r0, 31
     cmplwi r0, 0x1
-    beq lbl_fn_80096E94_00002118
+    beq lbl_lockon_updateTarget_00002118
     lwz r3, 0x228(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_80096E94_000020C4
+    beq lbl_lockon_updateTarget_000020C4
     lis r4, fn_800970CC@ha
     addi r4, r4, fn_800970CC@l
     bl fn_80695A50
-lbl_fn_80096E94_000020C4:
+lbl_lockon_updateTarget_000020C4:
     cmpwi r30, 0x0
     stw r30, 0x224(r31)
-    beq lbl_fn_80096E94_00002110
+    beq lbl_lockon_updateTarget_00002110
     mulli r3, r30, 0xc
     li r4, 0xb
     la r5, lbl_8087D7C8
     la r6, lbl_8087D7C4
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_800A03A0@ha
     lis r5, fn_800970CC@ha
     mr r7, r30
     li r6, 0xc
     addi r4, r4, fn_800A03A0@l
     addi r5, r5, fn_800970CC@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x228(r31)
-    b lbl_fn_80096E94_00002118
-lbl_fn_80096E94_00002110:
+    b lbl_lockon_updateTarget_00002118
+lbl_lockon_updateTarget_00002110:
     li r0, 0x0
     stw r0, 0x228(r31)
-lbl_fn_80096E94_00002118:
+lbl_lockon_updateTarget_00002118:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -2431,7 +2431,7 @@ asm void fn_800970CC(void)
     beq lbl_fn_800970CC_00002174
     beq lbl_fn_800970CC_00002164
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800970CC_00002164:
     cmpwi r31, 0x0
     ble lbl_fn_800970CC_00002174
@@ -2447,7 +2447,7 @@ lbl_fn_800970CC_00002174:
     blr
 }
 
-asm void fn_80097128(void)
+asm void atn_LH_Motion_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -2458,14 +2458,14 @@ asm void fn_80097128(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_80097128_000021CC
+    beq lbl_atn_LH_Motion_destructor_000021CC
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
     cmpwi r31, 0x0
-    ble lbl_fn_80097128_000021CC
+    ble lbl_atn_LH_Motion_destructor_000021CC
     mr r3, r30
     bl dtor_80084684
-lbl_fn_80097128_000021CC:
+lbl_atn_LH_Motion_destructor_000021CC:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

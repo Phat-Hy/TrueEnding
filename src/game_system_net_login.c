@@ -5,7 +5,7 @@
 extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void fn_80056DB8(void);
-extern void fn_800D246C(void);
+extern void atn_Task_setActive(void);
 extern void fn_8012D8B8(void);
 extern void fn_80145334(void);
 extern void fn_80154654(void);
@@ -13,7 +13,7 @@ extern void fn_801765D8(void);
 extern void fn_80176ACC(void);
 extern void fn_8021ECD0(void);
 extern void fn_8036554C(void);
-extern void fn_80370174(void);
+extern void world_getGlobalFlag(void);
 extern void fn_803972A8(void);
 extern void fn_80397BEC(void);
 extern void fn_8039C7F0(void);
@@ -281,7 +281,7 @@ lbl_fn_80395848_000002D0:
     beq lbl_fn_80395848_00000338
     lwz r4, 0xc(r3)
     mr r3, r0
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     ble lbl_fn_80395848_00000338
     li r20, -0x1
@@ -632,7 +632,7 @@ lbl_fn_80395F34_000007E8:
 lbl_fn_80395F34_000007F8:
     lwz r3, lbl_8087F430
     li r4, 0x1b
-    bl fn_80370174
+    bl world_getGlobalFlag
     lwz r4, 0x18(r22)
     mr r29, r3
     addi r30, r21, 0x80
@@ -894,7 +894,7 @@ lbl_fn_80396298_00000B4C:
 lbl_fn_80396298_00000B5C:
     lwz r3, lbl_8087F430
     li r4, 0x1b
-    bl fn_80370174
+    bl world_getGlobalFlag
     lwz r4, 0x24(r22)
     mr r29, r3
     addi r30, r21, 0x80
@@ -1707,7 +1707,7 @@ lbl_fn_803965FC_00001624:
     li r0, 0x0
     li r4, 0x0
     stw r0, 0x58c(r22)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r0, 0x12a4(r22)
     extrwi. r0, r0, 1, 6
     beq lbl_fn_803965FC_00001668
@@ -1838,7 +1838,7 @@ lbl_fn_80396F44_000017F8:
 lbl_fn_80396F44_00001808:
     lwz r3, lbl_8087F430
     li r4, 0x1b
-    bl fn_80370174
+    bl world_getGlobalFlag
     lwz r4, 0x140(r22)
     mr r29, r3
     addi r30, r21, 0x80

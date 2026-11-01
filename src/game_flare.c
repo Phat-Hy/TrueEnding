@@ -10,7 +10,7 @@ extern void fn_8003EA3C(void);
 extern void fn_8003F1E4(void);
 extern void fn_8004ED34(void);
 extern void fn_80063484(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_800A56A8(void);
 extern void fn_800E62AC(void);
 extern void fn_800E7650(void);
@@ -21,12 +21,12 @@ extern void fn_8010220C(void);
 extern void fn_80108C10(void);
 extern void fn_801092C8(void);
 extern void fn_80122330(void);
-extern void fn_801231D0(void);
+extern void magic_dispatchActionCommand(void);
 extern void fn_801240B4(void);
 extern void fn_801248DC(void);
 extern void fn_80124B60(void);
 extern void fn_8013310C(void);
-extern void fn_80149A30(void);
+extern void dialog_renderWindow(void);
 extern void fn_80153698(void);
 extern void fn_801539E0(void);
 extern void fn_80153B44(void);
@@ -39,7 +39,7 @@ extern void fn_80155DAC(void);
 extern void fn_80166544(void);
 extern void fn_80166A54(void);
 extern void fn_8016DC14(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_8016F3D0(void);
 extern void fn_80178018(void);
 extern void fn_80178668(void);
@@ -48,13 +48,13 @@ extern void fn_8017C9AC(void);
 extern void fn_80211480(void);
 extern void fn_80211734(void);
 extern void fn_80219558(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_8036DAF4(void);
 extern void fn_8036DB3C(void);
 extern void fn_8036DDD4(void);
 extern void fn_8036E098(void);
-extern void fn_80370174(void);
-extern void fn_80370320(void);
+extern void world_getGlobalFlag(void);
+extern void world_setGlobalFlag(void);
 extern void fn_803761BC(void);
 extern void fn_8037EF30(void);
 extern void fn_803CC77C(void);
@@ -66,15 +66,15 @@ extern void fn_803FC870(void);
 extern void fn_8044441C(void);
 extern void fn_804444E8(void);
 extern void fn_8054D798(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
-extern void fn_805F9940(void);
-extern void fn_805F9990(void);
-extern void fn_805F99B0(void);
-extern void fn_80682428(void);
-extern void fn_8068AEA8(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
+extern void PSVECMag(void);
+extern void PSVECDotProduct(void);
+extern void PSVECCrossProduct(void);
+extern void strcmp(void);
+extern void std_fmod(void);
 extern void fn_80695B00(void);
 
 /* External data declarations */
@@ -179,7 +179,7 @@ lbl_fn_800E3EA4_00000094:
     lis r3, lbl_80779B60@ha
     lwz r4, lbl_80779B60@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_800E3EA4_000000C4
@@ -246,7 +246,7 @@ lbl_fn_800E3F5C_0000013C:
     psq_l f1, 0x0(r5), 0, 0
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f7, lbl_8088130C
     lfs f0, 0x8e4(r28)
     fcmpo cr0, f7, f0
@@ -390,7 +390,7 @@ asm void fn_800E41FC(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_80149A30
+    bl dialog_renderWindow
     lwz r3, lbl_8087F0A8
     lwz r0, 0x34(r3)
     cmpwi r0, 0x0
@@ -670,7 +670,7 @@ lbl_fn_800E4278_00000720:
     fneg f0, f1
     addi r3, r1, 0xf4
     stfs f0, 0xfc(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fmr f30, f1
     mr r4, r22
     addi r3, r1, 0xe8
@@ -680,7 +680,7 @@ lbl_fn_800E4278_00000720:
     lfs f0, 0x538(r22)
     lfd f2, lbl_80735258@l(r3)
     fsubs f1, f3, f0
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f31, f1
     lfs f0, lbl_8088131C
     fcmpo cr0, f31, f0
@@ -749,7 +749,7 @@ lbl_fn_800E4278_0000087C:
 lbl_fn_800E4278_000008A8:
     lwz r3, lbl_8087F0A8
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E4278_00000B30
     cmpwi r31, 0x3
@@ -768,13 +768,13 @@ lbl_fn_800E4278_000008CC:
     stfs f5, 0xe4(r1)
     stfs f3, 0xdc(r1)
     stfs f0, 0xe0(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_8088132C
     fcmpo cr0, f1, f0
     ble lbl_fn_800E4278_00000918
     addi r3, r1, 0xdc
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     b lbl_fn_800E4278_00000964
 lbl_fn_800E4278_00000918:
     lfs f3, lbl_808812DC
@@ -785,11 +785,11 @@ lbl_fn_800E4278_00000918:
     stfs f3, 0xb0(r1)
     stfs f0, 0xb4(r1)
     lfs f1, 0x538(r22)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0xac
     addi r3, r1, 0x248
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r4, r1, 0xac
     lfs f2, 0xb4(r1)
     addi r3, r1, 0xdc
@@ -807,14 +807,14 @@ lbl_fn_800E4278_00000964:
     stfs f3, 0xa4(r1)
     stfs f0, 0xa8(r1)
     lfs f1, 0x538(r22)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0xa0
     addi r3, r1, 0x218
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r3, r1, 0xdc
     addi r4, r1, 0xa0
-    bl fn_805F9990
+    bl PSVECDotProduct
     lfs f0, lbl_808812DC
     fcmpo cr0, f1, f0
     bge lbl_fn_800E4278_00000B04
@@ -831,14 +831,14 @@ lbl_fn_800E4278_000009C0:
     stfs f3, 0x98(r1)
     stfs f0, 0x9c(r1)
     lfs f1, 0x538(r22)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x94
     addi r3, r1, 0x1e8
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r3, r1, 0xdc
     addi r4, r1, 0x94
-    bl fn_805F9990
+    bl PSVECDotProduct
     lfs f0, lbl_808812DC
     fcmpo cr0, f1, f0
     ble lbl_fn_800E4278_00000B04
@@ -873,14 +873,14 @@ lbl_fn_800E4278_00000A64:
     stfs f3, 0x80(r1)
     stfs f0, 0x84(r1)
     lfs f1, 0x538(r22)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x7c
     addi r3, r1, 0x1b8
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r3, r1, 0xdc
     addi r4, r1, 0x7c
-    bl fn_805F9990
+    bl PSVECDotProduct
     lfs f0, lbl_808812DC
     fcmpo cr0, f1, f0
     ble lbl_fn_800E4278_00000B04
@@ -999,7 +999,7 @@ lbl_fn_800E4278_00000C48:
     lwz r3, lbl_8087F0A8
     li r4, 0x2
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E4278_00000D3C
     cmpwi r24, 0x4
@@ -1012,7 +1012,7 @@ lbl_fn_800E4278_00000C48:
     addi r5, r1, 0x64
     stfs f0, 0x5c(r1)
     stfs f3, 0x60(r1)
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     lwz r12, 0x0(r22)
     mr r3, r22
     addi r4, r1, 0x64
@@ -1069,7 +1069,7 @@ lbl_fn_800E4278_00000D3C:
     stw r0, 0x198(r1)
     li r4, 0x13
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E4278_00000D78
     mr r3, r22
@@ -1123,7 +1123,7 @@ lbl_fn_800E4278_00000DE4:
     bne lbl_fn_800E4278_0000158C
     lwz r3, lbl_8087F430
     li r4, 0xd0
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     bne lbl_fn_800E4278_0000158C
     lwz r5, lbl_8087F490
@@ -1171,13 +1171,13 @@ lbl_fn_800E4278_00000E7C:
     stw r5, 0x198(r1)
     addi r3, r3, 0x48c
     stw r0, 0x19c(r1)
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     bne lbl_fn_800E4278_00000F04
     lwz r3, lbl_8087F0A8
     li r4, 0x4
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E4278_00001070
 lbl_fn_800E4278_00000F04:
@@ -1202,13 +1202,13 @@ lbl_fn_800E4278_00000F2C:
     stw r5, 0x198(r1)
     addi r3, r3, 0x48c
     stw r0, 0x19c(r1)
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     bne lbl_fn_800E4278_00000F74
     lwz r3, lbl_8087F0A8
     li r4, 0x0
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E4278_00001070
 lbl_fn_800E4278_00000F74:
@@ -1244,7 +1244,7 @@ lbl_fn_800E4278_00000FCC:
     li r26, 0x1
     li r4, 0x2
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     mr r24, r3
     b lbl_fn_800E4278_00001070
 lbl_fn_800E4278_00000FF8:
@@ -1277,7 +1277,7 @@ lbl_fn_800E4278_00001040:
     stw r5, 0x198(r1)
     addi r3, r3, 0x48c
     stw r0, 0x19c(r1)
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     mr r24, r3
 lbl_fn_800E4278_00001070:
     cmpwi r26, 0x0
@@ -1327,7 +1327,7 @@ lbl_fn_800E4278_000010CC:
     li r26, 0x1
     addi r3, r3, 0x48c
     li r4, 0x13
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E4278_00001148
     mr r3, r22
@@ -1415,7 +1415,7 @@ lbl_fn_800E4278_00001254:
     bne lbl_fn_800E4278_00001278
     addi r3, r3, 0x48c
     li r4, 0x2
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E4278_0000158C
 lbl_fn_800E4278_00001278:
@@ -1423,7 +1423,7 @@ lbl_fn_800E4278_00001278:
     cmpwi r0, 0x9
     bne lbl_fn_800E4278_00001484
     li r3, 0x2711
-    bl fn_80219E6C
+    bl task_findEntryById
     lwz r0, 0x7e0(r24)
     mr r25, r3
     rlwinm r0, r0, 0, 26, 26
@@ -1463,7 +1463,7 @@ lbl_fn_800E4278_000012B0:
     li r7, 0x0
     bl fn_801092C8
     li r3, 0x4fbf
-    bl fn_80219E6C
+    bl task_findEntryById
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_800E4278_0000147C
@@ -1495,7 +1495,7 @@ lbl_fn_800E4278_00001360:
     stfs f3, 0xc4(r1)
     stfs f0, 0xc8(r1)
     stfs f3, 0xcc(r1)
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_800E4278_000013B0
     b lbl_fn_800E4278_000013BC
@@ -1512,7 +1512,7 @@ lbl_fn_800E4278_000013BC:
     li r5, 0x0
     mr r3, r24
     addi r4, r4, 0x1
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_800E4278_000013F0
     li r3, 0x0
@@ -1696,12 +1696,12 @@ lbl_fn_800E4278_000015F0:
 lbl_fn_800E4278_00001680:
     mr r3, r23
     li r4, 0x8f
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x1
     bne lbl_fn_800E4278_000017A8
     mr r3, r23
     li r4, 0xa9
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     bne lbl_fn_800E4278_000017A8
     lwz r3, 0x12a4(r22)
@@ -1727,7 +1727,7 @@ lbl_fn_800E4278_000016D8:
     li r4, 0xa9
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     b lbl_fn_800E4278_000017A8
 lbl_fn_800E4278_00001704:
     cmpwi r3, 0x6
@@ -1886,7 +1886,7 @@ lbl_fn_800E4278_0000191C:
     stw r0, 0x12a4(r22)
     lwz r3, lbl_8087F0A8
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E4278_00001964
     lfs f1, lbl_808812E4
@@ -1912,7 +1912,7 @@ lbl_fn_800E4278_00001964:
     bgt lbl_fn_800E4278_000019FC
     lwz r4, 0x564(r22)
     mr r3, r22
-    bl fn_8016E970
+    bl actor_setState
     mr r3, r22
     li r4, 0x1
     bl fn_80155DAC

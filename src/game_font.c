@@ -6,22 +6,22 @@ extern void NANDSetAutoErrorMessaging(void);
 extern void __register_global_object(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8006B0C8(void);
 extern void fn_8006B174(void);
 extern void fn_8006EF48(void);
 extern void fn_800827E0(void);
 extern void fn_800838B8(void);
 extern void fn_80083AD4(void);
-extern void fn_80084320(void);
-extern void fn_800A500C(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D246C(void);
+extern void mem_alloc(void);
+extern void msg_formatTextWithAlignment(void* res, void* font, u32 mode);
+extern void atn_Task_constructor(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_801F0758(void);
 extern void fn_801F3FF8(void);
-extern void fn_801F4E8C(void);
+extern void saveSlot_readSummary(void);
 extern void fn_801FEC74(void);
 extern void fn_801FECE0(void);
 extern void fn_801FED24(void);
@@ -34,7 +34,7 @@ extern void fn_8061EC60(void);
 extern void fn_8061EF10(void);
 extern void fn_8061EF90(void);
 extern void fn_8061F460(void);
-extern void fn_8061F470(void);
+extern void* msg_getStringPointer(const char* str);
 extern void fn_8061F9F0(void);
 extern void fn_8061FBE0(void);
 extern void fn_80620220(void);
@@ -71,19 +71,19 @@ extern u32 lbl_80880CAC;
 
 /* Function declarations */
 void fn_800A291C(void);
-void fn_800A2978(void);
-void fn_800A29B4(void);
-void fn_800A29F0(void);
-void fn_800A2A2C(void);
-void fn_800A2A68(void);
-void fn_800A2AA4(void);
-void fn_800A2AE0(void);
+void font_drawTextCenter(void* font, const char* str);
+void font_drawTextLeft(void* font, const char* str);
+void font_drawTextRight(void* font, const char* str);
+void fn_800A2A2C(void* font, const char* str);
+void fn_800A2A68(void* font, const char* str);
+void fn_800A2AA4(void* font, const char* str);
+void fn_800A2AE0(void* font, const char* str);
 void fn_800A2B1C(void);
 void fn_800A2B58(void);
 void fn_800A2B94(void);
 void fn_800A2BD0(void);
 void fn_800A2C0C(void);
-void fn_800A2C48(void);
+void font_calcTextExtents(void);
 void fn_800A2D20(void);
 void fn_800A2D60(void);
 void fn_800A2DE0(void);
@@ -131,144 +131,39 @@ asm void fn_800A291C(void)
     blr
 }
 
-asm void fn_800A2978(void)
+void font_drawTextCenter(void* font, const char* str)
 {
-    nofralloc
-    stwu r1, -0x10(r1)
-    mflr r0
-    stw r0, 0x14(r1)
-    stw r31, 0xc(r1)
-    mr r31, r3
-    mr r3, r4
-    bl fn_8061F470
-    mr r4, r31
-    li r5, 0x3
-    bl fn_800A500C
-    lwz r0, 0x14(r1)
-    lwz r31, 0xc(r1)
-    mtlr r0
-    addi r1, r1, 0x10
-    blr
+    msg_formatTextWithAlignment(msg_getStringPointer(str), font, 3);
 }
 
-asm void fn_800A29B4(void)
+void font_drawTextLeft(void* font, const char* str)
 {
-    nofralloc
-    stwu r1, -0x10(r1)
-    mflr r0
-    stw r0, 0x14(r1)
-    stw r31, 0xc(r1)
-    mr r31, r3
-    mr r3, r4
-    bl fn_8061F470
-    mr r4, r31
-    li r5, 0x5
-    bl fn_800A500C
-    lwz r0, 0x14(r1)
-    lwz r31, 0xc(r1)
-    mtlr r0
-    addi r1, r1, 0x10
-    blr
+    msg_formatTextWithAlignment(msg_getStringPointer(str), font, 5);
 }
 
-asm void fn_800A29F0(void)
+void font_drawTextRight(void* font, const char* str)
 {
-    nofralloc
-    stwu r1, -0x10(r1)
-    mflr r0
-    stw r0, 0x14(r1)
-    stw r31, 0xc(r1)
-    mr r31, r3
-    mr r3, r4
-    bl fn_8061F470
-    mr r4, r31
-    li r5, 0x7
-    bl fn_800A500C
-    lwz r0, 0x14(r1)
-    lwz r31, 0xc(r1)
-    mtlr r0
-    addi r1, r1, 0x10
-    blr
+    msg_formatTextWithAlignment(msg_getStringPointer(str), font, 7);
 }
 
-asm void fn_800A2A2C(void)
+void fn_800A2A2C(void* font, const char* str)
 {
-    nofralloc
-    stwu r1, -0x10(r1)
-    mflr r0
-    stw r0, 0x14(r1)
-    stw r31, 0xc(r1)
-    mr r31, r3
-    mr r3, r4
-    bl fn_8061F470
-    mr r4, r31
-    li r5, 0x9
-    bl fn_800A500C
-    lwz r0, 0x14(r1)
-    lwz r31, 0xc(r1)
-    mtlr r0
-    addi r1, r1, 0x10
-    blr
+    msg_formatTextWithAlignment(msg_getStringPointer(str), font, 9);
 }
 
-asm void fn_800A2A68(void)
+void fn_800A2A68(void* font, const char* str)
 {
-    nofralloc
-    stwu r1, -0x10(r1)
-    mflr r0
-    stw r0, 0x14(r1)
-    stw r31, 0xc(r1)
-    mr r31, r3
-    mr r3, r4
-    bl fn_8061F470
-    mr r4, r31
-    li r5, 0xd
-    bl fn_800A500C
-    lwz r0, 0x14(r1)
-    lwz r31, 0xc(r1)
-    mtlr r0
-    addi r1, r1, 0x10
-    blr
+    msg_formatTextWithAlignment(msg_getStringPointer(str), font, 0xd);
 }
 
-asm void fn_800A2AA4(void)
+void fn_800A2AA4(void* font, const char* str)
 {
-    nofralloc
-    stwu r1, -0x10(r1)
-    mflr r0
-    stw r0, 0x14(r1)
-    stw r31, 0xc(r1)
-    mr r31, r3
-    mr r3, r4
-    bl fn_8061F470
-    mr r4, r31
-    li r5, 0xf
-    bl fn_800A500C
-    lwz r0, 0x14(r1)
-    lwz r31, 0xc(r1)
-    mtlr r0
-    addi r1, r1, 0x10
-    blr
+    msg_formatTextWithAlignment(msg_getStringPointer(str), font, 0xf);
 }
 
-asm void fn_800A2AE0(void)
+void fn_800A2AE0(void* font, const char* str)
 {
-    nofralloc
-    stwu r1, -0x10(r1)
-    mflr r0
-    stw r0, 0x14(r1)
-    stw r31, 0xc(r1)
-    mr r31, r3
-    mr r3, r4
-    bl fn_8061F470
-    mr r4, r31
-    li r5, 0x11
-    bl fn_800A500C
-    lwz r0, 0x14(r1)
-    lwz r31, 0xc(r1)
-    mtlr r0
-    addi r1, r1, 0x10
-    blr
+    msg_formatTextWithAlignment(msg_getStringPointer(str), font, 0x11);
 }
 
 asm void fn_800A2B1C(void)
@@ -280,10 +175,10 @@ asm void fn_800A2B1C(void)
     stw r31, 0xc(r1)
     mr r31, r3
     mr r3, r4
-    bl fn_8061F470
+    bl msg_getStringPointer
     mr r4, r31
     li r5, 0x13
-    bl fn_800A500C
+    bl msg_formatTextWithAlignment
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -300,10 +195,10 @@ asm void fn_800A2B58(void)
     stw r31, 0xc(r1)
     mr r31, r3
     mr r3, r4
-    bl fn_8061F470
+    bl msg_getStringPointer
     mr r4, r31
     li r5, 0xb
-    bl fn_800A500C
+    bl msg_formatTextWithAlignment
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -320,10 +215,10 @@ asm void fn_800A2B94(void)
     stw r31, 0xc(r1)
     mr r31, r3
     mr r3, r4
-    bl fn_8061F470
+    bl msg_getStringPointer
     mr r4, r31
     li r5, 0x15
-    bl fn_800A500C
+    bl msg_formatTextWithAlignment
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -340,10 +235,10 @@ asm void fn_800A2BD0(void)
     stw r31, 0xc(r1)
     mr r31, r3
     mr r3, r4
-    bl fn_8061F470
+    bl msg_getStringPointer
     mr r4, r31
     li r5, 0x17
-    bl fn_800A500C
+    bl msg_formatTextWithAlignment
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -360,10 +255,10 @@ asm void fn_800A2C0C(void)
     stw r31, 0xc(r1)
     mr r31, r3
     mr r3, r4
-    bl fn_8061F470
+    bl msg_getStringPointer
     mr r4, r31
     li r5, 0x19
-    bl fn_800A500C
+    bl msg_formatTextWithAlignment
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -371,7 +266,7 @@ asm void fn_800A2C0C(void)
     blr
 }
 
-asm void fn_800A2C48(void)
+asm void font_calcTextExtents(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -383,7 +278,7 @@ asm void fn_800A2C48(void)
     mr r29, r3
     lwz r0, lbl_8087EF68
     cmpwi r0, 0x0
-    bne lbl_fn_800A2C48_000003E4
+    bne lbl_font_calcTextExtents_000003E4
     lis r31, lbl_807327B4@ha
     lis r3, 0x1
     addi r5, r31, lbl_807327B4@l
@@ -391,12 +286,12 @@ asm void fn_800A2C48(void)
     mr r6, r5
     subi r3, r3, 0x7d20
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
-    beq lbl_fn_800A2C48_000003E0
+    beq lbl_font_calcTextExtents_000003E0
     mr r4, r29
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_80778A9C@ha
     li r0, 0x0
     addi r3, r3, lbl_80778A9C@l
@@ -418,10 +313,10 @@ asm void fn_800A2C48(void)
     addis r5, r30, 0x1
     li r4, 0x1
     stw r3, -0x7d40(r5)
-    bl fn_800D246C
-lbl_fn_800A2C48_000003E0:
+    bl atn_Task_setActive
+lbl_font_calcTextExtents_000003E0:
     stw r30, lbl_8087EF68
-lbl_fn_800A2C48_000003E4:
+lbl_font_calcTextExtents_000003E4:
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
     lwz r29, 0x14(r1)
@@ -468,7 +363,7 @@ asm void fn_800A2D60(void)
     addis r3, r31, 0x1
     li r4, 0x0
     lwz r3, -0x7d40(r3)
-    bl fn_800D246C
+    bl atn_Task_setActive
     addis r6, r31, 0x1
     li r0, 0x13
     lwz r5, -0x7d40(r6)
@@ -532,12 +427,12 @@ lbl_fn_800A2DE0_00000520:
     addi r3, r3, 0x178
     bl fn_8061F460
     lis r5, 0x1
-    lis r8, fn_800A29F0@ha
+    lis r8, font_drawTextRight@ha
     addi r7, r5, -0x8000
     addi r3, r31, 0x4c
     addi r4, r31, 0x234
     addi r6, r31, 0x2c0
-    addi r8, r8, fn_800A29F0@l
+    addi r8, r8, font_drawTextRight@l
     addi r9, r31, 0x178
     li r5, 0x2
     bl fn_80620220
@@ -568,7 +463,7 @@ lbl_fn_800A2DE0_00000588:
     addi r8, r1, 0x30
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r30
     addi r3, r1, 0xc0
     bl fn_8006B174
@@ -650,9 +545,9 @@ lbl_fn_800A2DE0_000006F0:
     mr r4, r31
     addi r3, r31, 0x178
     bl fn_8061F460
-    lis r6, fn_800A29B4@ha
+    lis r6, font_drawTextLeft@ha
     addi r3, r1, 0xd0
-    addi r6, r6, fn_800A29B4@l
+    addi r6, r6, font_drawTextLeft@l
     addi r7, r31, 0x178
     li r4, 0x34
     li r5, 0x0
@@ -709,7 +604,7 @@ lbl_fn_800A2DE0_00000794:
     addi r8, r1, 0x2c
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r30
     addi r3, r1, 0x9c
     bl fn_8006B174
@@ -744,9 +639,9 @@ lbl_fn_800A2DE0_00000850:
     mr r4, r31
     addi r3, r31, 0x178
     bl fn_8061F460
-    lis r6, fn_800A29B4@ha
+    lis r6, font_drawTextLeft@ha
     addi r3, r1, 0x5d0
-    addi r6, r6, fn_800A29B4@l
+    addi r6, r6, font_drawTextLeft@l
     addi r7, r31, 0x178
     li r4, 0x34
     li r5, 0x0
@@ -774,9 +669,9 @@ lbl_fn_800A2DE0_000008C4:
     mr r4, r31
     addi r3, r3, 0x178
     bl fn_8061F460
-    lis r6, fn_800A29B4@ha
+    lis r6, font_drawTextLeft@ha
     addi r3, r31, 0x4c
-    addi r6, r6, fn_800A29B4@l
+    addi r6, r6, font_drawTextLeft@l
     addi r7, r31, 0x178
     li r4, 0x34
     li r5, 0x0
@@ -850,7 +745,7 @@ lbl_fn_800A2DE0_0000099C:
     addi r8, r1, 0x24
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r30
     addi r3, r1, 0x84
     bl fn_8006B174
@@ -939,7 +834,7 @@ lbl_fn_800A2DE0_00000AF0:
     addi r8, r1, 0x1c
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r30
     addi r3, r1, 0x6c
     bl fn_8006B174
@@ -1669,7 +1564,7 @@ lbl_fn_800A2DE0_000015E0:
     addi r8, r1, 0x14
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r29
     addi r3, r1, 0x54
     bl fn_8006B174
@@ -1721,7 +1616,7 @@ lbl_fn_800A2DE0_0000169C:
     addi r8, r1, 0xc
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r29
     addi r3, r1, 0x3c
     bl fn_8006B0C8
@@ -1919,7 +1814,7 @@ lbl_fn_800A4244_0000197C:
     addi r30, r30, lbl_807327B4@l
     addi r3, r30, 0x25
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80880CA0
     mr r4, r3
     mr r3, r29
@@ -1928,7 +1823,7 @@ lbl_fn_800A4244_0000197C:
     addi r3, r30, 0x2a
     lwz r4, -0x7d40(r4)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80880CA0
     mr r4, r3
     mr r3, r29
@@ -1941,7 +1836,7 @@ lbl_fn_800A4244_000019E8:
     addi r30, r30, lbl_807327B4@l
     addi r3, r30, 0x25
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80880CA4
     mr r4, r3
     mr r3, r29
@@ -1950,7 +1845,7 @@ lbl_fn_800A4244_000019E8:
     addi r3, r30, 0x2a
     lwz r4, -0x7d40(r4)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80880CA8
     mr r4, r3
     mr r3, r29
@@ -1969,11 +1864,11 @@ lbl_fn_800A4244_00001A38:
     addis r4, r31, 0x1
     addi r3, r30, 0x3a
     lwz r30, -0x7d40(r4)
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r30
     addi r3, r1, 0x14
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     mr r4, r29
     addi r3, r1, 0x8
     li r5, 0x0
@@ -2006,7 +1901,7 @@ lbl_fn_800A4244_00001ADC:
     addi r5, r5, lbl_807327B4@l
     addi r3, r5, 0x47
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f0, lbl_80880CAC
     mr r4, r3
     mr r3, r29
@@ -2336,11 +2231,11 @@ lbl_fn_800A4794_00001ED8:
     stw r0, 0x15c(r28)
     bl fn_8061F460
     srawi r0, r29, 14
-    lis r6, fn_800A2978@ha
+    lis r6, font_drawTextCenter@ha
     addze r3, r0
     stw r31, 0x164(r28)
     addi r5, r28, 0x164
-    addi r6, r6, fn_800A2978@l
+    addi r6, r6, font_drawTextCenter@l
     addi r3, r3, 0x1
     addi r7, r28, 0x178
     li r4, 0x1
@@ -2495,12 +2390,12 @@ lbl_fn_800A49C4_00002108:
     stw r0, 0x15c(r31)
     bl fn_8061F460
     lis r5, 0x1
-    lis r8, fn_800A29F0@ha
+    lis r8, font_drawTextRight@ha
     addi r7, r5, -0x8000
     addi r3, r31, 0x4c
     addi r4, r31, 0x234
     addi r6, r31, 0x2c0
-    addi r8, r8, fn_800A29F0@l
+    addi r8, r8, font_drawTextRight@l
     addi r9, r31, 0x178
     li r5, 0x1
     bl fn_80620220
@@ -2571,13 +2466,13 @@ lbl_fn_800A4AD4_00002218:
     stw r0, 0x15c(r31)
     bl fn_8061F460
     srawi r0, r27, 14
-    lis r6, fn_800A2978@ha
+    lis r6, font_drawTextCenter@ha
     addze r3, r0
     stw r30, 0x164(r31)
     mr r4, r28
     addi r5, r31, 0x164
     addi r3, r3, 0x1
-    addi r6, r6, fn_800A2978@l
+    addi r6, r6, font_drawTextCenter@l
     addi r7, r31, 0x178
     bl fn_80622260
     mr r4, r3
@@ -2647,12 +2542,12 @@ lbl_fn_800A4BE4_00002328:
     stw r0, 0x15c(r28)
     bl fn_8061F460
     lis r5, 0x1
-    lis r8, fn_800A29F0@ha
+    lis r8, font_drawTextRight@ha
     addi r7, r5, -0x8000
     mr r3, r29
     addi r4, r28, 0x234
     addi r6, r28, 0x2c0
-    addi r8, r8, fn_800A29F0@l
+    addi r8, r8, font_drawTextRight@l
     addi r9, r28, 0x178
     li r5, 0x1
     bl fn_80620220

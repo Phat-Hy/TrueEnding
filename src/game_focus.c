@@ -4,24 +4,24 @@
 /* External function declarations */
 extern void _restgpr_14(void);
 extern void _savegpr_14(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_80084A78(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_80098948(void);
 extern void fn_800A0548(void);
-extern void fn_800A08D4(void);
+extern void atn_Anim_getDuration(void);
 extern void fn_800A08E0(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800DCA6C(void);
 extern void fn_805ED460(void);
 extern void fn_805ED5A0(void);
-extern void fn_805F89F0(void);
-extern void fn_805F9160(void);
-extern void fn_805F9190(void);
-extern void fn_805F93C0(void);
+extern void PSMTXConcat(void);
+extern void PSMTXScale(void);
+extern void PSMTXQuat(void);
+extern void PSMTXMultVec(void);
 extern void fn_805F99F0(void);
 extern void fn_806952C4(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern void fn_8072D210(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -546,13 +546,13 @@ lbl_fn_800991D0_00000718:
     cmpwi r0, 0x0
     beq lbl_fn_800991D0_00000AD8
     mr r3, r19
-    bl fn_800A08D4
+    bl atn_Anim_getDuration
     lfs f0, 0x234(r29)
     fcmpo cr0, f0, f1
     cror eq, gt, eq
     bne lbl_fn_800991D0_00000AD8
     mr r3, r19
-    bl fn_800A08D4
+    bl atn_Anim_getDuration
     lfs f0, 0x234(r29)
     fsubs f0, f0, f1
     stfs f0, 0x234(r29)
@@ -827,7 +827,7 @@ lbl_fn_800991D0_00000B2C:
     stw r5, 0x1b0(r1)
     stw r4, 0x1b4(r1)
     stw r0, 0x1b8(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_800991D0_00000C50
     lwz r0, 0x370(r15)
@@ -852,7 +852,7 @@ lbl_fn_800991D0_00000B2C:
     stw r3, 0x88(r1)
     li r3, 0x10
     stw r0, 0x8c(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_800991D0_00000BD4
     li r0, 0x1
@@ -868,7 +868,7 @@ lbl_fn_800991D0_00000BD4:
     stw r30, 0x88(r1)
     beq lbl_fn_800991D0_00000BEC
     li r3, 0x0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800991D0_00000BEC:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x94(r1)
@@ -943,7 +943,7 @@ asm void fn_80099E9C(void)
     stw r30, 0x10(r1)
     mr r30, r3
     mr r3, r4
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r5, 0x16c(r30)
     cmpwi r5, 0x0
     bne lbl_fn_80099E9C_00000D0C
@@ -1387,11 +1387,11 @@ lbl_fn_8009A490_000012E8:
     mr r3, r30
     mr r4, r31
     mr r5, r27
-    bl fn_805F89F0
+    bl PSMTXConcat
     mr r3, r29
     mr r4, r27
     mr r5, r27
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r27, r27, 0x30
     subi r28, r28, 0x1
     addi r31, r31, 0x30
@@ -1426,11 +1426,11 @@ lbl_fn_8009A504_00001360:
     mr r5, r26
     mulli r0, r0, 0x30
     add r3, r27, r0
-    bl fn_805F89F0
+    bl PSMTXConcat
     mr r3, r29
     mr r4, r26
     mr r5, r26
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r26, r26, 0x30
     addi r30, r30, 0x30
     addi r31, r31, 0x4
@@ -1605,7 +1605,7 @@ lbl_fn_8009A5CC_000015C8:
     mr r4, r17
     addi r3, r1, 0x1b0
     addi r5, r1, 0x150
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r27), 0, 0
     psq_l f2, 0x8(r27), 0, 0
     psq_l f3, 0x10(r27), 0, 0
@@ -1625,7 +1625,7 @@ lbl_fn_8009A5CC_00001620:
     addi r4, r1, 0xb4
     mr r3, r17
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
 lbl_fn_8009A5CC_00001638:
     psq_l f1, 0x40(r20), 0, 0
     addi r3, r1, 0xa8
@@ -1755,7 +1755,7 @@ lbl_fn_8009A5CC_00001750:
 lbl_fn_8009A5CC_00001820:
     addi r3, r1, 0x120
     addi r4, r1, 0x98
-    bl fn_805F9190
+    bl PSMTXQuat
     lfs f8, 0xb4(r1)
     addi r3, r1, 0x1b0
     lfs f7, 0xb8(r1)
@@ -1765,7 +1765,7 @@ lbl_fn_8009A5CC_00001820:
     stfs f8, 0x12c(r1)
     stfs f7, 0x13c(r1)
     stfs f0, 0x14c(r1)
-    bl fn_805F89F0
+    bl PSMTXConcat
     lfs f2, 0x3c(r20)
     cmpwi r18, 0x0
     psq_l f1, 0x34(r20), 0, 0
@@ -1816,7 +1816,7 @@ lbl_fn_8009A5CC_000018F4:
     stw r5, 0x5c(r1)
     stw r4, 0x60(r1)
     stw r0, 0x64(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8009A5CC_00001A60
     lwz r18, 0x48(r15)
@@ -1853,7 +1853,7 @@ lbl_fn_8009A5CC_00001938:
     stw r3, 0x40(r1)
     li r3, 0x10
     stw r0, 0x44(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_8009A5CC_000019C8
     li r0, 0x1
@@ -1869,7 +1869,7 @@ lbl_fn_8009A5CC_000019C8:
     stw r14, 0x40(r1)
     beq lbl_fn_8009A5CC_000019E0
     li r3, 0x0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8009A5CC_000019E0:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x54(r1)
@@ -1921,7 +1921,7 @@ lbl_fn_8009A5CC_00001A88:
     addi r3, r1, 0xf0
     lfs f2, 0x8c(r1)
     lfs f3, 0x90(r1)
-    bl fn_805F9160
+    bl PSMTXScale
     psq_l f1, 0x0(r23), 0, 0
     mr r18, r24
     psq_l f2, 0x8(r23), 0, 0
@@ -1938,7 +1938,7 @@ lbl_fn_8009A5CC_00001A88:
     psq_st f4, 0x18(r24), 0, 0
     psq_st f5, 0x20(r24), 0, 0
     psq_st f6, 0x28(r24), 0, 0
-    bl fn_805F89F0
+    bl PSMTXConcat
     mulli r0, r19, 0x30
     lwz r3, 0x4(r15)
     psq_l f2, 0x8(r22), 0, 0
@@ -2169,7 +2169,7 @@ lbl_fn_8009ADA4_00001E10:
     mr r4, r17
     addi r3, r1, 0x278
     addi r5, r1, 0x1e8
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r14), 0, 0
     psq_l f2, 0x8(r14), 0, 0
     psq_l f3, 0x10(r14), 0, 0
@@ -2189,7 +2189,7 @@ lbl_fn_8009ADA4_00001E68:
     addi r4, r1, 0x148
     mr r3, r17
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
 lbl_fn_8009ADA4_00001E80:
     cmpwi r27, 0x0
     beq lbl_fn_8009ADA4_000020A0
@@ -2417,7 +2417,7 @@ lbl_fn_8009ADA4_00002120:
 lbl_fn_8009ADA4_000021DC:
     addi r3, r1, 0x1b8
     addi r4, r1, 0x138
-    bl fn_805F9190
+    bl PSMTXQuat
     lfs f8, 0x148(r1)
     addi r3, r1, 0x278
     lfs f7, 0x14c(r1)
@@ -2427,7 +2427,7 @@ lbl_fn_8009ADA4_000021DC:
     stfs f8, 0x1c4(r1)
     stfs f7, 0x1d4(r1)
     stfs f0, 0x1e4(r1)
-    bl fn_805F89F0
+    bl PSMTXConcat
     lwz r0, 0x0(r18)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
@@ -2504,7 +2504,7 @@ lbl_fn_8009ADA4_0000230C:
     stw r5, 0xa4(r1)
     stw r4, 0xa8(r1)
     stw r0, 0xac(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8009ADA4_00002478
     lwz r18, 0x48(r15)
@@ -2542,7 +2542,7 @@ lbl_fn_8009ADA4_00002350:
     stw r3, 0x68(r1)
     li r3, 0x10
     stw r0, 0x6c(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_8009ADA4_000023E4
     li r0, 0x1
@@ -2557,7 +2557,7 @@ lbl_fn_8009ADA4_000023E4:
     stw r3, 0x94(r1)
     stw r0, 0x68(r1)
     b lbl_fn_8009ADA4_000023F8
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8009ADA4_000023F8:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x90(r1)
@@ -2609,7 +2609,7 @@ lbl_fn_8009ADA4_000024A0:
     addi r3, r1, 0x188
     lfs f2, 0x114(r1)
     lfs f3, 0x118(r1)
-    bl fn_805F9160
+    bl PSMTXScale
     psq_l f1, 0x0(r23), 0, 0
     mr r18, r24
     psq_l f2, 0x8(r23), 0, 0
@@ -2626,7 +2626,7 @@ lbl_fn_8009ADA4_000024A0:
     psq_st f4, 0x18(r24), 0, 0
     psq_st f5, 0x20(r24), 0, 0
     psq_st f6, 0x28(r24), 0, 0
-    bl fn_805F89F0
+    bl PSMTXConcat
     mulli r0, r20, 0x30
     lwz r3, 0x4(r15)
     psq_l f2, 0x8(r22), 0, 0
@@ -2686,7 +2686,7 @@ lbl_fn_8009ADA4_000025B8:
     stw r5, 0x98(r1)
     stw r4, 0x9c(r1)
     stw r0, 0xa0(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8009ADA4_000026EC
     stw r28, 0x70(r1)
@@ -2715,7 +2715,7 @@ lbl_fn_8009ADA4_000025B8:
     stw r3, 0x60(r1)
     li r3, 0x10
     stw r0, 0x64(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_8009ADA4_00002670
     li r0, 0x1
@@ -2730,7 +2730,7 @@ lbl_fn_8009ADA4_00002670:
     stw r3, 0x88(r1)
     stw r0, 0x60(r1)
     b lbl_fn_8009ADA4_00002684
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8009ADA4_00002684:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x84(r1)

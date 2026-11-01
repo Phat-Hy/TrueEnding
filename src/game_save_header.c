@@ -10,19 +10,19 @@ extern void _savegpr_17(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
-extern void fn_8005B710(void);
+extern void actor_dispatchMessage(void);
+extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
 extern void fn_80061824(void);
 extern void fn_8006AD24(void);
 extern void fn_8006EF48(void);
 extern void fn_8006F72C(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
-extern void fn_800846FC(void);
-extern void fn_80084C24(void);
-extern void fn_800D1D3C(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
+extern void mem_realloc(void);
+extern void mem_getAllocSize(void);
+extern void atn_Task_constructor(void);
 extern void fn_800DBF68(void);
 extern void fn_800DC1DC(void);
 extern void fn_800E0000(void);
@@ -30,7 +30,7 @@ extern void fn_800E0908(void);
 extern void fn_801EC158(void);
 extern void fn_801EC6C0(void);
 extern void fn_801EC784(void);
-extern void fn_801ED928(void);
+extern void net_player_interpolateState(void);
 extern void fn_801EDC78(void);
 extern void fn_801EEE54(void);
 extern void fn_801F04FC(void);
@@ -39,18 +39,18 @@ extern void fn_801F1418(void);
 extern void fn_801F14FC(void);
 extern void fn_801F1658(void);
 extern void fn_801F1E7C(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
-extern void fn_80473F50(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_destructor(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
-extern void fn_80473FCC(void);
-extern void fn_80680770(void);
+extern void taskManager_updateTasks(void);
+extern void printf(void);
 extern void fn_80686A48(void);
 extern void fn_80686A64(void);
-extern void fn_80686EA4(void);
-extern void fn_80695D84(void);
+extern void abort(void);
+extern void runtime_clampDouble(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -89,8 +89,8 @@ extern u32 lbl_80882C84;
 
 /* Function declarations */
 void fn_801F275C(void);
-void fn_801F2A88(void);
-void fn_801F2A8C(void);
+void save_dummyCallback(void);
+void save_updateHeader(void);
 void fn_801F33A8(void);
 void fn_801F33D4(void);
 void fn_801F3490(void);
@@ -101,7 +101,7 @@ void fn_801F36C8(void);
 void fn_801F3E20(void);
 void fn_801F3EF4(void);
 void fn_801F3F74(void);
-void fn_801F3FF4(void);
+void save_dummyCallback2(void);
 void fn_801F3FF8(void);
 void fn_801F407C(void);
 
@@ -135,7 +135,7 @@ lbl_fn_801F275C_00000048:
     la r5, lbl_8087DAEC
     la r6, lbl_8087DAE8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x48(r29)
     mr r31, r3
     cmpwi r0, 0x0
@@ -211,7 +211,7 @@ lbl_fn_801F275C_00000168:
     bdnz lbl_fn_801F275C_00000168
 lbl_fn_801F275C_00000180:
     lwz r3, 0x48(r29)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801F275C_00000188:
     stw r31, 0x48(r29)
     li r0, 0x8
@@ -229,7 +229,7 @@ lbl_fn_801F275C_00000198:
     la r5, lbl_8087DAEC
     la r6, lbl_8087DAE8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x48(r29)
     mr r30, r3
     cmpwi r0, 0x0
@@ -305,7 +305,7 @@ lbl_fn_801F275C_000002C4:
     bdnz lbl_fn_801F275C_000002C4
 lbl_fn_801F275C_000002DC:
     lwz r3, 0x48(r29)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801F275C_000002E4:
     stw r30, 0x48(r29)
     stw r31, 0x44(r29)
@@ -329,13 +329,11 @@ lbl_fn_801F275C_0000030C:
     blr
 }
 
-asm void fn_801F2A88(void)
+void save_dummyCallback(void)
 {
-    nofralloc
-    blr
 }
 
-asm void fn_801F2A8C(void)
+asm void save_updateHeader(void)
 {
     nofralloc
     stwu r1, -0x140(r1)
@@ -367,16 +365,16 @@ asm void fn_801F2A8C(void)
     stfs f0, 0xa0(r1)
     stfs f0, 0x10(r1)
     stw r0, 0x14(r1)
-    bl fn_801ED928
+    bl net_player_interpolateState
     lfs f1, 0x94(r1)
     lfs f0, lbl_80882C60
     fcmpo cr0, f1, f0
     cror eq, gt, eq
-    beq lbl_fn_801F2A8C_00000C0C
+    beq lbl_save_updateHeader_00000C0C
     mr r3, r31
     bl fn_801EDC78
     cmpwi r3, 0x0
-    beq lbl_fn_801F2A8C_00000C0C
+    beq lbl_save_updateHeader_00000C0C
     lfs f3, 0x80(r1)
     lfs f2, 0x84(r1)
     lfs f1, 0x88(r1)
@@ -388,57 +386,57 @@ asm void fn_801F2A8C(void)
     lwz r3, 0xfc(r31)
     lwz r12, 0x9c(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_801F2A8C_00000434
+    beq lbl_save_updateHeader_00000434
     lhz r0, 0xe(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_801F2A8C_00000420
+    bne lbl_save_updateHeader_00000420
     mr r3, r31
     addi r4, r1, 0x50
     li r5, 0x0
     mtctr r12
     bctrl
-    b lbl_fn_801F2A8C_00000434
-lbl_fn_801F2A8C_00000420:
+    b lbl_save_updateHeader_00000434
+lbl_save_updateHeader_00000420:
     mr r3, r31
     addi r4, r1, 0x50
     addi r5, r1, 0x40
     mtctr r12
     bctrl
-lbl_fn_801F2A8C_00000434:
+lbl_save_updateHeader_00000434:
     lfs f1, 0x5c(r1)
     lfs f0, lbl_80882C5C
     fcmpo cr0, f1, f0
     cror eq, lt, eq
-    beq lbl_fn_801F2A8C_00000C0C
+    beq lbl_save_updateHeader_00000C0C
     lfs f0, 0x4c(r1)
     lbz r0, lbl_8087F140
     fmuls f0, f0, f1
     cmpwi r0, 0x0
     stfs f0, 0x4c(r1)
-    bne lbl_fn_801F2A8C_000005AC
+    bne lbl_save_updateHeader_000005AC
     lis r3, lbl_807C7F74@ha
     addi r3, r3, lbl_807C7F74@l
     lwz r0, 0x8(r3)
     cmplwi r0, 0x1e
-    bge lbl_fn_801F2A8C_000005A0
+    bge lbl_save_updateHeader_000005A0
     li r0, 0x0
     stw r0, 0x18(r1)
     li r3, 0x168
     stw r0, 0x1c(r1)
     stw r0, 0x20(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r30, r3
-    bne lbl_fn_801F2A8C_000004B8
+    bne lbl_save_updateHeader_000004B8
     lis r3, __files@ha
     lis r4, lbl_807799A0@ha
     addi r3, r3, __files@l
     addi r3, r3, 0xa0
     addi r4, r4, lbl_807799A0@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
-lbl_fn_801F2A8C_000004B8:
+    bl printf
+    bl abort
+lbl_save_updateHeader_000004B8:
     lis r29, lbl_807C7F74@ha
     lis r3, 0x2aab
     addi r28, r29, lbl_807C7F74@l
@@ -479,32 +477,32 @@ lbl_fn_801F2A8C_000004B8:
     stw r5, 0x18(r1)
     stw r4, 0x4(r28)
     stw r18, 0x1c(r1)
-    beq lbl_fn_801F2A8C_000005A0
+    beq lbl_save_updateHeader_000005A0
     mulli r3, r18, 0xc
     subf r0, r18, r18
     stw r0, 0x1c(r1)
     add r17, r5, r3
-    b lbl_fn_801F2A8C_00000590
-lbl_fn_801F2A8C_00000570:
+    b lbl_save_updateHeader_00000590
+lbl_save_updateHeader_00000570:
     subic. r17, r17, 0xc
-    beq lbl_fn_801F2A8C_0000058C
+    beq lbl_save_updateHeader_0000058C
     lwz r0, 0x0(r17)
     srwi. r0, r0, 31
-    beq lbl_fn_801F2A8C_0000058C
+    beq lbl_save_updateHeader_0000058C
     lwz r3, 0x8(r17)
     bl dtor_80084684
-lbl_fn_801F2A8C_0000058C:
+lbl_save_updateHeader_0000058C:
     subi r18, r18, 0x1
-lbl_fn_801F2A8C_00000590:
+lbl_save_updateHeader_00000590:
     cmpwi r18, 0x0
-    bne lbl_fn_801F2A8C_00000570
+    bne lbl_save_updateHeader_00000570
     lwz r3, 0x18(r1)
     bl dtor_80084684
-lbl_fn_801F2A8C_000005A0:
+lbl_save_updateHeader_000005A0:
     li r0, 0x1
     stb r0, lbl_8087F140
-    b lbl_fn_801F2A8C_000005F8
-lbl_fn_801F2A8C_000005AC:
+    b lbl_save_updateHeader_000005F8
+lbl_save_updateHeader_000005AC:
     lis r3, lbl_807C7F74@ha
     addi r5, r3, lbl_807C7F74@l
     lwz r4, lbl_807C7F74@l(r3)
@@ -513,31 +511,31 @@ lbl_fn_801F2A8C_000005AC:
     subf r0, r18, r18
     stw r0, 0x4(r5)
     add r17, r4, r3
-    b lbl_fn_801F2A8C_000005F0
-lbl_fn_801F2A8C_000005D0:
+    b lbl_save_updateHeader_000005F0
+lbl_save_updateHeader_000005D0:
     subic. r17, r17, 0xc
-    beq lbl_fn_801F2A8C_000005EC
+    beq lbl_save_updateHeader_000005EC
     lwz r0, 0x0(r17)
     srwi. r0, r0, 31
-    beq lbl_fn_801F2A8C_000005EC
+    beq lbl_save_updateHeader_000005EC
     lwz r3, 0x8(r17)
     bl dtor_80084684
-lbl_fn_801F2A8C_000005EC:
+lbl_save_updateHeader_000005EC:
     subi r18, r18, 0x1
-lbl_fn_801F2A8C_000005F0:
+lbl_save_updateHeader_000005F0:
     cmpwi r18, 0x0
-    bne lbl_fn_801F2A8C_000005D0
-lbl_fn_801F2A8C_000005F8:
+    bne lbl_save_updateHeader_000005D0
+lbl_save_updateHeader_000005F8:
     lwz r0, 0x140(r31)
     lis r3, lbl_807C7F74@ha
     addi r3, r3, lbl_807C7F74@l
     srwi. r0, r0, 31
-    bne lbl_fn_801F2A8C_00000614
+    bne lbl_save_updateHeader_00000614
     addi r4, r31, 0x142
-    b lbl_fn_801F2A8C_00000618
-lbl_fn_801F2A8C_00000614:
+    b lbl_save_updateHeader_00000618
+lbl_save_updateHeader_00000614:
     lwz r4, 0x148(r31)
-lbl_fn_801F2A8C_00000618:
+lbl_save_updateHeader_00000618:
     lis r7, fn_801F1418@ha
     lfs f1, lbl_80882C64
     lfs f2, 0x98(r1)
@@ -552,51 +550,51 @@ lbl_fn_801F2A8C_00000618:
     li r23, 0x0
     addi r17, r29, lbl_807C7F74@l
     li r28, -0x1
-    b lbl_fn_801F2A8C_0000079C
-lbl_fn_801F2A8C_00000654:
+    b lbl_save_updateHeader_0000079C
+lbl_save_updateHeader_00000654:
     lwz r0, lbl_807C7F74@l(r29)
     li r3, -0x1
     add r4, r0, r23
     lwzx r0, r23, r0
     srwi. r0, r0, 31
-    bne lbl_fn_801F2A8C_0000067C
+    bne lbl_save_updateHeader_0000067C
     lbz r0, 0x0(r4)
     addi r6, r4, 0x2
     clrlwi r5, r0, 25
-    b lbl_fn_801F2A8C_00000684
-lbl_fn_801F2A8C_0000067C:
+    b lbl_save_updateHeader_00000684
+lbl_save_updateHeader_0000067C:
     lwz r6, 0x8(r4)
     lwz r5, 0x4(r4)
-lbl_fn_801F2A8C_00000684:
+lbl_save_updateHeader_00000684:
     cmpwi r5, 0x0
-    beq lbl_fn_801F2A8C_000006D4
+    beq lbl_save_updateHeader_000006D4
     subi r0, r5, 0x1
     cmplw r0, r28
-    bge lbl_fn_801F2A8C_0000069C
+    bge lbl_save_updateHeader_0000069C
     mr r3, r0
-lbl_fn_801F2A8C_0000069C:
+lbl_save_updateHeader_0000069C:
     slwi r0, r3, 1
     add r3, r6, r0
-lbl_fn_801F2A8C_000006A4:
+lbl_save_updateHeader_000006A4:
     lhz r0, 0x0(r3)
     cmplwi r0, 0xd
-    bne lbl_fn_801F2A8C_000006C4
+    bne lbl_save_updateHeader_000006C4
     subf r3, r6, r3
     srwi r0, r3, 31
     add r0, r0, r3
     srawi r6, r0, 1
-    b lbl_fn_801F2A8C_000006D8
-lbl_fn_801F2A8C_000006C4:
+    b lbl_save_updateHeader_000006D8
+lbl_save_updateHeader_000006C4:
     cmplw r3, r6
-    ble lbl_fn_801F2A8C_000006D4
+    ble lbl_save_updateHeader_000006D4
     subi r3, r3, 0x2
-    b lbl_fn_801F2A8C_000006A4
-lbl_fn_801F2A8C_000006D4:
+    b lbl_save_updateHeader_000006A4
+lbl_save_updateHeader_000006D4:
     li r6, -0x1
-lbl_fn_801F2A8C_000006D8:
+lbl_save_updateHeader_000006D8:
     addis r0, r6, 0x1
     cmplwi r0, 0xffff
-    beq lbl_fn_801F2A8C_00000794
+    beq lbl_save_updateHeader_00000794
     addi r3, r1, 0x24
     li r5, 0x0
     bl fn_800E0908
@@ -604,36 +602,36 @@ lbl_fn_801F2A8C_000006D8:
     add r3, r0, r23
     lwzx r0, r23, r0
     srwi. r5, r0, 31
-    bne lbl_fn_801F2A8C_00000728
+    bne lbl_save_updateHeader_00000728
     lwz r4, 0x24(r1)
     srwi. r0, r4, 31
-    bne lbl_fn_801F2A8C_00000728
+    bne lbl_save_updateHeader_00000728
     lwz r0, 0x28(r1)
     stw r4, 0x0(r3)
     stw r0, 0x4(r3)
     lwz r0, 0x2c(r1)
     stw r0, 0x8(r3)
-    b lbl_fn_801F2A8C_00000780
-lbl_fn_801F2A8C_00000728:
+    b lbl_save_updateHeader_00000780
+lbl_save_updateHeader_00000728:
     cmpwi r5, 0x0
-    beq lbl_fn_801F2A8C_00000738
+    beq lbl_save_updateHeader_00000738
     lwz r5, 0x4(r3)
-    b lbl_fn_801F2A8C_00000740
-lbl_fn_801F2A8C_00000738:
+    b lbl_save_updateHeader_00000740
+lbl_save_updateHeader_00000738:
     lbz r0, 0x0(r3)
     clrlwi r5, r0, 25
-lbl_fn_801F2A8C_00000740:
+lbl_save_updateHeader_00000740:
     lwz r0, 0x24(r1)
     srwi. r0, r0, 31
-    bne lbl_fn_801F2A8C_0000075C
+    bne lbl_save_updateHeader_0000075C
     lbz r0, 0x24(r1)
     mr r6, r24
     clrlwi r0, r0, 25
-    b lbl_fn_801F2A8C_00000764
-lbl_fn_801F2A8C_0000075C:
+    b lbl_save_updateHeader_00000764
+lbl_save_updateHeader_0000075C:
     lwz r6, 0x2c(r1)
     lwz r0, 0x28(r1)
-lbl_fn_801F2A8C_00000764:
+lbl_save_updateHeader_00000764:
     lbz r4, 0xc(r1)
     slwi r0, r0, 1
     stb r4, 0x8(r1)
@@ -641,22 +639,22 @@ lbl_fn_801F2A8C_00000764:
     addi r8, r1, 0x8
     li r4, 0x0
     bl fn_8006F72C
-lbl_fn_801F2A8C_00000780:
+lbl_save_updateHeader_00000780:
     lwz r0, 0x24(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_801F2A8C_00000794
+    beq lbl_save_updateHeader_00000794
     lwz r3, 0x2c(r1)
     bl dtor_80084684
-lbl_fn_801F2A8C_00000794:
+lbl_save_updateHeader_00000794:
     addi r23, r23, 0xc
     addi r25, r25, 0x1
-lbl_fn_801F2A8C_0000079C:
+lbl_save_updateHeader_0000079C:
     lwz r0, 0x4(r17)
     cmplw r25, r0
-    blt lbl_fn_801F2A8C_00000654
+    blt lbl_save_updateHeader_00000654
     cmpwi r0, 0x0
     li r22, 0x0
-    beq lbl_fn_801F2A8C_00000C0C
+    beq lbl_save_updateHeader_00000C0C
     lis r28, lbl_807C7F74@ha
     lfs f28, lbl_80882C70
     lfs f29, lbl_80882C5C
@@ -666,19 +664,19 @@ lbl_fn_801F2A8C_0000079C:
     lfs f31, lbl_80882C68
     li r24, 0x0
     li r29, 0x0
-    b lbl_fn_801F2A8C_00000C00
-lbl_fn_801F2A8C_000007DC:
+    b lbl_save_updateHeader_00000C00
+lbl_save_updateHeader_000007DC:
     lwz r0, lbl_807C7F74@l(r28)
     lfs f27, lbl_80882C5C
     add r3, r0, r24
     lwzx r0, r24, r0
     srwi. r0, r0, 31
-    bne lbl_fn_801F2A8C_000007FC
+    bne lbl_save_updateHeader_000007FC
     addi r3, r3, 0x2
-    b lbl_fn_801F2A8C_00000800
-lbl_fn_801F2A8C_000007FC:
+    b lbl_save_updateHeader_00000800
+lbl_save_updateHeader_000007FC:
     lwz r3, 0x8(r3)
-lbl_fn_801F2A8C_00000800:
+lbl_save_updateHeader_00000800:
     lfs f1, 0x98(r1)
     li r4, 0x1
     lhz r5, 0x12c(r31)
@@ -686,14 +684,14 @@ lbl_fn_801F2A8C_00000800:
     bl fn_801F14FC
     lhz r0, 0x12e(r31)
     cmplwi r0, 0x1
-    bne lbl_fn_801F2A8C_00000828
+    bne lbl_save_updateHeader_00000828
     fneg f0, f1
     fmuls f27, f31, f0
-lbl_fn_801F2A8C_00000828:
+lbl_save_updateHeader_00000828:
     cmplwi r0, 0x2
-    bne lbl_fn_801F2A8C_00000834
+    bne lbl_save_updateHeader_00000834
     fneg f27, f1
-lbl_fn_801F2A8C_00000834:
+lbl_save_updateHeader_00000834:
     lfs f0, 0x90(r1)
     li r18, 0x0
     stw r29, 0x30(r1)
@@ -701,112 +699,112 @@ lbl_fn_801F2A8C_00000834:
     fadds f27, f0, f27
     stw r29, 0x38(r1)
     stw r29, 0x34(r1)
-    b lbl_fn_801F2A8C_00000878
-lbl_fn_801F2A8C_00000854:
+    b lbl_save_updateHeader_00000878
+lbl_save_updateHeader_00000854:
     subic. r17, r17, 0x10
-    beq lbl_fn_801F2A8C_00000874
-    beq lbl_fn_801F2A8C_00000874
+    beq lbl_save_updateHeader_00000874
+    beq lbl_save_updateHeader_00000874
     lwz r0, 0x0(r17)
     srwi. r0, r0, 31
-    beq lbl_fn_801F2A8C_00000874
+    beq lbl_save_updateHeader_00000874
     lwz r3, 0x8(r17)
     bl dtor_80084684
-lbl_fn_801F2A8C_00000874:
+lbl_save_updateHeader_00000874:
     subi r18, r18, 0x1
-lbl_fn_801F2A8C_00000878:
+lbl_save_updateHeader_00000878:
     cmpwi r18, 0x0
-    bne lbl_fn_801F2A8C_00000854
+    bne lbl_save_updateHeader_00000854
     lwz r0, lbl_807C7F74@l(r28)
     addi r3, r1, 0x30
     add r4, r0, r24
     bl fn_801F1658
     li r21, 0x0
     li r23, 0x0
-    b lbl_fn_801F2A8C_00000B70
-lbl_fn_801F2A8C_0000089C:
+    b lbl_save_updateHeader_00000B70
+lbl_save_updateHeader_0000089C:
     lwz r0, 0x30(r1)
     add r17, r0, r23
     lwz r0, 0xc(r17)
     cmpwi r0, 0x0
-    bge lbl_fn_801F2A8C_00000B1C
+    bge lbl_save_updateHeader_00000B1C
     lwz r0, 0x0(r17)
     srwi. r0, r0, 31
-    bne lbl_fn_801F2A8C_000008C4
+    bne lbl_save_updateHeader_000008C4
     addi r26, r17, 0x2
-    b lbl_fn_801F2A8C_000008C8
-lbl_fn_801F2A8C_000008C4:
+    b lbl_save_updateHeader_000008C8
+lbl_save_updateHeader_000008C4:
     lwz r26, 0x8(r17)
-lbl_fn_801F2A8C_000008C8:
+lbl_save_updateHeader_000008C8:
     lfs f0, 0x40(r1)
     fcmpo cr0, f0, f28
     cror eq, gt, eq
-    bne lbl_fn_801F2A8C_000008E0
+    bne lbl_save_updateHeader_000008E0
     li r18, 0xff
-    b lbl_fn_801F2A8C_00000900
-lbl_fn_801F2A8C_000008E0:
+    b lbl_save_updateHeader_00000900
+lbl_save_updateHeader_000008E0:
     fcmpo cr0, f0, f29
     cror eq, lt, eq
-    bne lbl_fn_801F2A8C_000008F4
+    bne lbl_save_updateHeader_000008F4
     li r3, 0x0
-    b lbl_fn_801F2A8C_000008FC
-lbl_fn_801F2A8C_000008F4:
+    b lbl_save_updateHeader_000008FC
+lbl_save_updateHeader_000008F4:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
-lbl_fn_801F2A8C_000008FC:
+    bl runtime_clampDouble
+lbl_save_updateHeader_000008FC:
     mr r18, r3
-lbl_fn_801F2A8C_00000900:
+lbl_save_updateHeader_00000900:
     lfs f0, 0x44(r1)
     fcmpo cr0, f0, f28
     cror eq, gt, eq
-    bne lbl_fn_801F2A8C_00000918
+    bne lbl_save_updateHeader_00000918
     li r17, 0xff
-    b lbl_fn_801F2A8C_00000938
-lbl_fn_801F2A8C_00000918:
+    b lbl_save_updateHeader_00000938
+lbl_save_updateHeader_00000918:
     fcmpo cr0, f0, f29
     cror eq, lt, eq
-    bne lbl_fn_801F2A8C_0000092C
+    bne lbl_save_updateHeader_0000092C
     li r3, 0x0
-    b lbl_fn_801F2A8C_00000934
-lbl_fn_801F2A8C_0000092C:
+    b lbl_save_updateHeader_00000934
+lbl_save_updateHeader_0000092C:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
-lbl_fn_801F2A8C_00000934:
+    bl runtime_clampDouble
+lbl_save_updateHeader_00000934:
     mr r17, r3
-lbl_fn_801F2A8C_00000938:
+lbl_save_updateHeader_00000938:
     lfs f0, 0x48(r1)
     fcmpo cr0, f0, f28
     cror eq, gt, eq
-    bne lbl_fn_801F2A8C_00000950
+    bne lbl_save_updateHeader_00000950
     li r30, 0xff
-    b lbl_fn_801F2A8C_00000970
-lbl_fn_801F2A8C_00000950:
+    b lbl_save_updateHeader_00000970
+lbl_save_updateHeader_00000950:
     fcmpo cr0, f0, f29
     cror eq, lt, eq
-    bne lbl_fn_801F2A8C_00000964
+    bne lbl_save_updateHeader_00000964
     li r3, 0x0
-    b lbl_fn_801F2A8C_0000096C
-lbl_fn_801F2A8C_00000964:
+    b lbl_save_updateHeader_0000096C
+lbl_save_updateHeader_00000964:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
-lbl_fn_801F2A8C_0000096C:
+    bl runtime_clampDouble
+lbl_save_updateHeader_0000096C:
     mr r30, r3
-lbl_fn_801F2A8C_00000970:
+lbl_save_updateHeader_00000970:
     lfs f0, 0x4c(r1)
     fcmpo cr0, f0, f28
     cror eq, gt, eq
-    bne lbl_fn_801F2A8C_00000988
+    bne lbl_save_updateHeader_00000988
     li r3, 0xff
-    b lbl_fn_801F2A8C_000009A4
-lbl_fn_801F2A8C_00000988:
+    b lbl_save_updateHeader_000009A4
+lbl_save_updateHeader_00000988:
     fcmpo cr0, f0, f29
     cror eq, lt, eq
-    bne lbl_fn_801F2A8C_0000099C
+    bne lbl_save_updateHeader_0000099C
     li r3, 0x0
-    b lbl_fn_801F2A8C_000009A4
-lbl_fn_801F2A8C_0000099C:
+    b lbl_save_updateHeader_000009A4
+lbl_save_updateHeader_0000099C:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
-lbl_fn_801F2A8C_000009A4:
+    bl runtime_clampDouble
+lbl_save_updateHeader_000009A4:
     lfs f0, 0x50(r1)
     slwi r4, r3, 24
     slwi r3, r18, 16
@@ -818,73 +816,73 @@ lbl_fn_801F2A8C_000009A4:
     or r0, r3, r4
     or r30, r30, r0
     cror eq, gt, eq
-    bne lbl_fn_801F2A8C_000009DC
+    bne lbl_save_updateHeader_000009DC
     li r17, 0xff
-    b lbl_fn_801F2A8C_000009FC
-lbl_fn_801F2A8C_000009DC:
+    b lbl_save_updateHeader_000009FC
+lbl_save_updateHeader_000009DC:
     fcmpo cr0, f0, f29
     cror eq, lt, eq
-    bne lbl_fn_801F2A8C_000009F0
+    bne lbl_save_updateHeader_000009F0
     li r3, 0x0
-    b lbl_fn_801F2A8C_000009F8
-lbl_fn_801F2A8C_000009F0:
+    b lbl_save_updateHeader_000009F8
+lbl_save_updateHeader_000009F0:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
-lbl_fn_801F2A8C_000009F8:
+    bl runtime_clampDouble
+lbl_save_updateHeader_000009F8:
     mr r17, r3
-lbl_fn_801F2A8C_000009FC:
+lbl_save_updateHeader_000009FC:
     lfs f0, 0x54(r1)
     fcmpo cr0, f0, f28
     cror eq, gt, eq
-    bne lbl_fn_801F2A8C_00000A14
+    bne lbl_save_updateHeader_00000A14
     li r18, 0xff
-    b lbl_fn_801F2A8C_00000A34
-lbl_fn_801F2A8C_00000A14:
+    b lbl_save_updateHeader_00000A34
+lbl_save_updateHeader_00000A14:
     fcmpo cr0, f0, f29
     cror eq, lt, eq
-    bne lbl_fn_801F2A8C_00000A28
+    bne lbl_save_updateHeader_00000A28
     li r3, 0x0
-    b lbl_fn_801F2A8C_00000A30
-lbl_fn_801F2A8C_00000A28:
+    b lbl_save_updateHeader_00000A30
+lbl_save_updateHeader_00000A28:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
-lbl_fn_801F2A8C_00000A30:
+    bl runtime_clampDouble
+lbl_save_updateHeader_00000A30:
     mr r18, r3
-lbl_fn_801F2A8C_00000A34:
+lbl_save_updateHeader_00000A34:
     lfs f0, 0x58(r1)
     fcmpo cr0, f0, f28
     cror eq, gt, eq
-    bne lbl_fn_801F2A8C_00000A4C
+    bne lbl_save_updateHeader_00000A4C
     li r19, 0xff
-    b lbl_fn_801F2A8C_00000A6C
-lbl_fn_801F2A8C_00000A4C:
+    b lbl_save_updateHeader_00000A6C
+lbl_save_updateHeader_00000A4C:
     fcmpo cr0, f0, f29
     cror eq, lt, eq
-    bne lbl_fn_801F2A8C_00000A60
+    bne lbl_save_updateHeader_00000A60
     li r3, 0x0
-    b lbl_fn_801F2A8C_00000A68
-lbl_fn_801F2A8C_00000A60:
+    b lbl_save_updateHeader_00000A68
+lbl_save_updateHeader_00000A60:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
-lbl_fn_801F2A8C_00000A68:
+    bl runtime_clampDouble
+lbl_save_updateHeader_00000A68:
     mr r19, r3
-lbl_fn_801F2A8C_00000A6C:
+lbl_save_updateHeader_00000A6C:
     lfs f0, 0x5c(r1)
     fcmpo cr0, f0, f28
     cror eq, gt, eq
-    bne lbl_fn_801F2A8C_00000A84
+    bne lbl_save_updateHeader_00000A84
     li r3, 0xff
-    b lbl_fn_801F2A8C_00000AA0
-lbl_fn_801F2A8C_00000A84:
+    b lbl_save_updateHeader_00000AA0
+lbl_save_updateHeader_00000A84:
     fcmpo cr0, f0, f29
     cror eq, lt, eq
-    bne lbl_fn_801F2A8C_00000A98
+    bne lbl_save_updateHeader_00000A98
     li r3, 0x0
-    b lbl_fn_801F2A8C_00000AA0
-lbl_fn_801F2A8C_00000A98:
+    b lbl_save_updateHeader_00000AA0
+lbl_save_updateHeader_00000A98:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
-lbl_fn_801F2A8C_00000AA0:
+    bl runtime_clampDouble
+lbl_save_updateHeader_00000AA0:
     slwi r5, r18, 8
     slwi r4, r3, 24
     slwi r0, r17, 16
@@ -915,8 +913,8 @@ lbl_fn_801F2A8C_00000AA0:
     lfs f2, lbl_80882C5C
     bl fn_8006EF48
     fadds f27, f27, f1
-    b lbl_fn_801F2A8C_00000B68
-lbl_fn_801F2A8C_00000B1C:
+    b lbl_save_updateHeader_00000B68
+lbl_save_updateHeader_00000B1C:
     lfs f1, 0x94(r1)
     addi r5, r1, 0x60
     lfs f4, 0x98(r1)
@@ -936,13 +934,13 @@ lbl_fn_801F2A8C_00000B1C:
     lfs f1, 0x98(r1)
     bl fn_801F1E7C
     fadds f27, f27, f1
-lbl_fn_801F2A8C_00000B68:
+lbl_save_updateHeader_00000B68:
     addi r23, r23, 0x10
     addi r21, r21, 0x1
-lbl_fn_801F2A8C_00000B70:
+lbl_save_updateHeader_00000B70:
     lwz r0, 0x34(r1)
     cmplw r21, r0
-    blt lbl_fn_801F2A8C_0000089C
+    blt lbl_save_updateHeader_0000089C
     lfs f2, 0x9c(r1)
     cmpwi r27, 0x0
     lfs f1, 0x130(r31)
@@ -950,41 +948,41 @@ lbl_fn_801F2A8C_00000B70:
     fadds f1, f2, f1
     fadds f0, f0, f1
     stfs f0, 0x94(r1)
-    beq lbl_fn_801F2A8C_00000BF8
-    beq lbl_fn_801F2A8C_00000BF8
+    beq lbl_save_updateHeader_00000BF8
+    beq lbl_save_updateHeader_00000BF8
     lwz r4, 0x30(r1)
     cmpwi r4, 0x0
-    beq lbl_fn_801F2A8C_00000BF8
+    beq lbl_save_updateHeader_00000BF8
     lwz r18, 0x34(r1)
     slwi r3, r18, 4
     subf r0, r18, r18
     stw r0, 0x34(r1)
     add r17, r4, r3
-    b lbl_fn_801F2A8C_00000BE8
-lbl_fn_801F2A8C_00000BC4:
+    b lbl_save_updateHeader_00000BE8
+lbl_save_updateHeader_00000BC4:
     subic. r17, r17, 0x10
-    beq lbl_fn_801F2A8C_00000BE4
-    beq lbl_fn_801F2A8C_00000BE4
+    beq lbl_save_updateHeader_00000BE4
+    beq lbl_save_updateHeader_00000BE4
     lwz r0, 0x0(r17)
     srwi. r0, r0, 31
-    beq lbl_fn_801F2A8C_00000BE4
+    beq lbl_save_updateHeader_00000BE4
     lwz r3, 0x8(r17)
     bl dtor_80084684
-lbl_fn_801F2A8C_00000BE4:
+lbl_save_updateHeader_00000BE4:
     subi r18, r18, 0x1
-lbl_fn_801F2A8C_00000BE8:
+lbl_save_updateHeader_00000BE8:
     cmpwi r18, 0x0
-    bne lbl_fn_801F2A8C_00000BC4
+    bne lbl_save_updateHeader_00000BC4
     lwz r3, 0x30(r1)
     bl dtor_80084684
-lbl_fn_801F2A8C_00000BF8:
+lbl_save_updateHeader_00000BF8:
     addi r24, r24, 0xc
     addi r22, r22, 0x1
-lbl_fn_801F2A8C_00000C00:
+lbl_save_updateHeader_00000C00:
     lwz r0, 0x4(r20)
     cmplw r22, r0
-    blt lbl_fn_801F2A8C_000007DC
-lbl_fn_801F2A8C_00000C0C:
+    blt lbl_save_updateHeader_000007DC
+lbl_save_updateHeader_00000C0C:
     addi r11, r1, 0xf0
     psq_l f31, 0x138(r1), 0, 0
     lfd f31, 0x130(r1)
@@ -1092,7 +1090,7 @@ asm void fn_801F3490(void)
     stw r31, 0x4(r3)
     stw r31, 0x8(r3)
     mr r3, r30
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r3, lbl_8078FBB0@ha
     stw r31, 0x14(r29)
     addi r3, r3, lbl_8078FBB0@l
@@ -1123,7 +1121,7 @@ asm void fn_801F34F8(void)
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_801F34F8_00000DD4
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801F34F8_00000DD4:
     lwz r3, 0x14(r29)
     li r31, 0x0
@@ -1131,20 +1129,20 @@ lbl_fn_801F34F8_00000DD4:
     cmpwi r3, 0x0
     stw r31, 0x0(r29)
     beq lbl_fn_801F34F8_00000DF4
-    bl fn_80084C24
+    bl mem_getAllocSize
     stw r31, 0x14(r29)
 lbl_fn_801F34F8_00000DF4:
     addic. r3, r29, 0xc
     beq lbl_fn_801F34F8_00000E04
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_801F34F8_00000E04:
     cmpwi r29, 0x0
     beq lbl_fn_801F34F8_00000E28
     lwz r3, 0x4(r29)
     cmpwi r3, 0x0
     beq lbl_fn_801F34F8_00000E1C
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801F34F8_00000E1C:
     li r0, 0x0
     stw r0, 0x4(r29)
@@ -1176,9 +1174,9 @@ asm void fn_801F35B4(void)
     mr r31, r3
     beq lbl_fn_801F35B4_00000EA4
     addi r3, r3, 0xc
-    bl fn_80473FCC
+    bl taskManager_updateTasks
     addi r3, r31, 0xc
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_801F35B4_00000E98
     li r0, 0x2
@@ -1216,21 +1214,21 @@ asm void fn_801F362C(void)
     cmpwi r0, 0x1
     bne lbl_fn_801F362C_00000F50
     addi r3, r3, 0xc
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_801F362C_00000F0C
     li r3, 0x1
     b lbl_fn_801F362C_00000F54
 lbl_fn_801F362C_00000F0C:
     addi r3, r30, 0xc
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_801F362C_00000F40
     addi r3, r30, 0xc
-    bl fn_8047059C
+    bl boss_getOffset50
     srwi r31, r3, 1
     addi r3, r30, 0xc
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r3, r30
     subi r5, r31, 0x1
@@ -1265,7 +1263,7 @@ asm void fn_801F36C8(void)
     cmpwi r0, 0x0
     beq lbl_fn_801F36C8_00000F9C
     mr r3, r0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801F36C8_00000F9C:
     lwz r3, 0x14(r29)
     li r16, 0x0
@@ -1273,7 +1271,7 @@ lbl_fn_801F36C8_00000F9C:
     cmpwi r3, 0x0
     stw r16, 0x0(r29)
     beq lbl_fn_801F36C8_00000FBC
-    bl fn_80084C24
+    bl mem_getAllocSize
     stw r16, 0x14(r29)
 lbl_fn_801F36C8_00000FBC:
     lis r6, lbl_8077A090@ha
@@ -1339,7 +1337,7 @@ lbl_fn_801F36C8_00001038:
     lis r26, lbl_80782BB0@ha
 lbl_fn_801F36C8_000010A4:
     addi r3, r1, 0x60
-    bl fn_8005B710
+    bl talk_parseDialogue
     lhz r0, 0x0(r3)
     cmplwi r0, 0x23
     beq lbl_fn_801F36C8_00001520
@@ -1354,7 +1352,7 @@ lbl_fn_801F36C8_000010A4:
     bl fn_800DC1DC
     stw r3, 0x30(r1)
     addi r3, r1, 0x60
-    bl fn_8005B710
+    bl talk_parseDialogue
     lwz r0, 0x34(r1)
     mr r22, r3
     srwi. r0, r0, 31
@@ -1438,8 +1436,8 @@ lbl_fn_801F36C8_000011FC:
     addi r4, r19, lbl_8073E380@l
     addi r3, r20, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801F36C8_00001220:
     lwz r3, 0x44(r1)
     subi r0, r18, 0x1
@@ -1458,8 +1456,8 @@ lbl_fn_801F36C8_00001220:
     addi r4, r19, lbl_8073E380@l
     addi r3, r20, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801F36C8_0000126C:
     addi r0, r23, 0x5555
     cmplw r22, r0
@@ -1505,19 +1503,19 @@ lbl_fn_801F36C8_000012F0:
     addi r4, r19, lbl_8073E380@l
     addi r3, r20, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801F36C8_00001310:
     slwi r3, r22, 4
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r17, r3
     bne lbl_fn_801F36C8_00001338
     addi r3, r20, 0xa0
     addi r4, r26, lbl_80782BB0@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801F36C8_00001338:
     lwz r5, 0x44(r1)
     lwz r0, 0x50(r1)
@@ -1658,7 +1656,7 @@ lbl_fn_801F36C8_00001520:
     lwz r16, 0x44(r1)
     cmpwi r3, 0x0
     beq lbl_fn_801F36C8_00001544
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801F36C8_00001544:
     cmpwi r16, 0x0
     stw r16, 0x0(r29)
@@ -1668,7 +1666,7 @@ lbl_fn_801F36C8_00001544:
     la r5, lbl_8087DAF4
     la r6, lbl_8087DAF0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x4(r29)
     b lbl_fn_801F36C8_00001578
 lbl_fn_801F36C8_00001570:
@@ -1682,7 +1680,7 @@ lbl_fn_801F36C8_00001578:
     addi r5, r5, 0x14
     li r7, 0x0
     mr r6, r5
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x14(r29)
     li r16, 0x0
     li r19, 0x0
@@ -1888,7 +1886,7 @@ asm void fn_801F3F74(void)
     lwz r3, 0x130(r3)
     cmpwi r3, 0x0
     beq lbl_fn_801F3F74_00001854
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801F3F74_00001854:
     li r0, 0x0
     stw r0, 0x130(r30)
@@ -1911,10 +1909,8 @@ lbl_fn_801F3F74_0000187C:
     blr
 }
 
-asm void fn_801F3FF4(void)
+void save_dummyCallback2(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_801F3FF8(void)
@@ -1937,7 +1933,7 @@ asm void fn_801F3FF8(void)
     li r4, 0x8
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_801F3FF8_00001904
     mr r4, r29
@@ -1968,7 +1964,7 @@ asm void fn_801F407C(void)
     mr r31, r3
     mr r28, r5
     mr r27, r6
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r4, lbl_80782C08@ha
     addi r3, r31, 0x48
     addi r4, r4, lbl_80782C08@l
@@ -1976,7 +1972,7 @@ asm void fn_801F407C(void)
     bl fn_801EEE54
     addi r30, r31, 0xf0
     mr r3, r30
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lwz r0, 0xfc(r31)
     rlwimi r0, r27, 31, 0, 0
     lfs f1, lbl_80882C80
@@ -2012,7 +2008,7 @@ asm void fn_801F407C(void)
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lis r3, lbl_8073E420@ha
     stw r30, 0x18(r1)
     addi r3, r3, lbl_8073E420@l
@@ -2034,7 +2030,7 @@ asm void fn_801F407C(void)
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r3, r29
     mr r4, r27
     bl fn_8006AD24

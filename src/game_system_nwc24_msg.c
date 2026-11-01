@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void fn_8000D114(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8000D3A4(void);
 extern void fn_8001047C(void);
 extern void fn_800109E0(void);
@@ -11,13 +11,13 @@ extern void fn_80011034(void);
 extern void fn_80011220(void);
 extern void fn_80011410(void);
 extern void fn_80012C88(void);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void fn_80013410(void);
-extern void fn_8004B378(void);
+extern void item_useConsumable(void);
 extern void fn_8004D388(void);
 extern void fn_8004ED34(void);
 extern void fn_80057A68(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A56A8(void);
 extern void fn_800A58D0(void);
 extern void fn_800F72CC(void);
@@ -38,7 +38,7 @@ extern void fn_80178088(void);
 extern void fn_801A03E8(void);
 extern void fn_801C3910(void);
 extern void fn_8032EC94(void);
-extern void fn_80370174(void);
+extern void world_getGlobalFlag(void);
 extern void fn_80373148(void);
 extern void fn_8037E964(void);
 extern void fn_8037F664(void);
@@ -58,14 +58,14 @@ extern void fn_803928C0(void);
 extern void fn_80392964(void);
 extern void fn_80392A04(void);
 extern void fn_80392FE8(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9940(void);
-extern void fn_805F99B0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSVECNormalize(void);
+extern void PSVECMag(void);
+extern void PSVECCrossProduct(void);
 extern void fn_8068A4A8(void);
 extern void fn_8068AE24(void);
-extern void fn_8068AEA8(void);
+extern void std_fmod(void);
 
 /* External data declarations */
 extern u8 lbl_8074E008[];
@@ -219,11 +219,11 @@ lbl_fn_80387548_00000130:
     stfs f3, 0x54(r1)
     stfs f0, 0x58(r1)
     lfs f1, 0x538(r31)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x50
     addi r3, r1, 0xc0
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f5, 0x58(r1)
     lfs f4, lbl_80885914
     lfs f3, 0x54(r1)
@@ -283,7 +283,7 @@ lbl_fn_80387548_000001C8:
     stfs f0, 0x80(r1)
     stfs f3, 0x84(r1)
     stfs f4, 0x88(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f5, 0x65c(r30)
     addi r6, r1, 0x2c
     lfs f4, 0x88(r1)
@@ -316,7 +316,7 @@ lbl_fn_80387548_000001C8:
     stfs f0, 0xb4(r1)
     stfs f2, 0x34(r1)
     lfs f31, 0x654(r30)
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     lfs f4, 0x10(r1)
     mr r3, r30
     lfs f3, 0xc(r1)
@@ -352,7 +352,7 @@ lbl_fn_80387548_000001C8:
     lfs f2, 0xac(r1)
     stfs f2, 0x1c(r30)
     psq_st f1, 0x14(r30), 0, 0
-    bl fn_8004B378
+    bl item_useConsumable
     mr r4, r30
     addi r3, r30, 0x1f4
     bl fn_80392A04
@@ -361,7 +361,7 @@ lbl_fn_80387548_000001C8:
     mr r3, r30
     bl fn_803928C0
     addi r3, r30, 0x1f4
-    bl fn_8004B378
+    bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r30, 0x1f4
     bl fn_80116BD4
@@ -427,7 +427,7 @@ lbl_fn_80387910_00000454:
     addi r3, r1, 0x110
     addi r4, r1, 0x11c
     addi r5, r1, 0x128
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x104
     addi r4, r1, 0x110
     bl fn_8001047C
@@ -480,7 +480,7 @@ lbl_fn_80387910_000004D8:
     addi r5, r1, 0x128
     fnmsubs f0, f2, f1, f0
     stfs f0, 0x12c(r1)
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0xec
     bl fn_8000D3A4
     lfs f2, 0x1c8(r1)
@@ -490,10 +490,10 @@ lbl_fn_80387910_000004D8:
     fsubs f2, f2, f1
     fmuls f2, f2, f0
     fadds f30, f1, f2
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r29, 0x868
     addi r4, r1, 0x11c
-    bl fn_8000D124
+    bl vec3_copy
     lfs f1, lbl_808858E8
     fneg f3, f30
     addi r3, r1, 0x110
@@ -514,7 +514,7 @@ lbl_fn_80387910_000004D8:
     bl fn_80013410
     addi r3, r1, 0x128
     addi r4, r1, 0x98
-    bl fn_8000D124
+    bl vec3_copy
     lfs f1, 0x1cc(r1)
     addi r7, r1, 0x11c
     lfs f0, 0x1ec(r1)
@@ -541,7 +541,7 @@ lbl_fn_80387910_000004D8:
     addi r3, r1, 0xd4
     addi r4, r1, 0x11c
     addi r5, r1, 0x128
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0xd4
     bl fn_801C3910
     lfs f0, lbl_80885958
@@ -580,15 +580,15 @@ lbl_fn_80387910_00000680:
     bl fn_80012C88
     addi r3, r1, 0x11c
     addi r4, r1, 0xc8
-    bl fn_8000D124
+    bl vec3_copy
 lbl_fn_80387910_000006E4:
     addi r3, r1, 0x74
     addi r4, r1, 0x11c
     addi r5, r1, 0x128
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x110
     addi r4, r1, 0x74
-    bl fn_8000D124
+    bl vec3_copy
     lfs f0, lbl_808858E8
     addi r3, r1, 0x104
     stfs f0, 0x114(r1)
@@ -605,7 +605,7 @@ lbl_fn_80387910_00000730:
     addi r3, r1, 0x68
     addi r4, r1, 0x11c
     addi r5, r1, 0x128
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x68
     bl fn_8000D3A4
     frsp f2, f1
@@ -632,7 +632,7 @@ lbl_fn_80387910_00000730:
     stfs f0, 0xc(r1)
     addi r4, r1, 0x11c
     addi r5, r1, 0x128
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0xbc
     addi r4, r1, 0x44
     bl fn_80011034
@@ -655,7 +655,7 @@ lbl_fn_80387910_00000730:
     bl fn_8010F6FC
     addi r3, r1, 0x110
     addi r4, r1, 0x38
-    bl fn_8000D124
+    bl vec3_copy
     lfs f1, 0x10(r1)
     addi r3, r1, 0x14
     addi r4, r1, 0x110
@@ -663,10 +663,10 @@ lbl_fn_80387910_00000730:
     addi r3, r1, 0x20
     addi r4, r1, 0x11c
     addi r5, r1, 0x14
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x128
     addi r4, r1, 0x20
-    bl fn_8000D124
+    bl vec3_copy
 lbl_fn_80387910_00000834:
     mr r3, r29
     addi r4, r1, 0x128
@@ -678,7 +678,7 @@ lbl_fn_80387910_00000834:
     mr r3, r29
     bl fn_8037F688
     mr r3, r29
-    bl fn_8004B378
+    bl item_useConsumable
     mr r3, r29
     li r4, 0x0
     li r5, 0x1
@@ -784,7 +784,7 @@ lbl_fn_80387DE4_000009B4:
     lis r3, lbl_8074E010@ha
     lfd f2, lbl_8074E010@l(r3)
     fneg f1, f0
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_808858EC
     fcmpo cr0, f3, f0
@@ -802,7 +802,7 @@ lbl_fn_80387DE4_00000A08:
     lis r3, lbl_8074E010@ha
     lfd f2, lbl_8074E010@l(r3)
     fsubs f1, f0, f3
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_808858EC
     fcmpo cr0, f3, f0
@@ -824,7 +824,7 @@ lbl_fn_80387DE4_00000A48:
     fmuls f0, f0, f30
     stfs f0, 0x96c(r30)
     fadds f1, f0, f3
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f4, f1
     lfs f0, lbl_808858EC
     fcmpo cr0, f4, f0
@@ -928,7 +928,7 @@ lbl_fn_80387DE4_00000BB8:
     lis r3, lbl_8074E010@ha
     lfd f2, lbl_8074E010@l(r3)
     fadds f1, f0, f3
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_808858EC
     fcmpo cr0, f3, f0
@@ -1046,7 +1046,7 @@ lbl_fn_80387DE4_00000D58:
     stfs f4, 0x54(r1)
     stfs f0, 0x50(r1)
     stfs f6, 0x58(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, lbl_80885974
     fcmpo cr0, f1, f0
     ble lbl_fn_80387DE4_00000DC4
@@ -1226,11 +1226,11 @@ asm void fn_803884B8(void)
     stfs f3, 0xa4(r1)
     stfs f3, 0xa8(r1)
     stfs f3, 0xac(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x98
     addi r3, r1, 0xd8
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lwz r0, 0x560(r30)
     lfs f31, 0x7bc(r29)
     cmpwi r0, 0xf
@@ -1288,7 +1288,7 @@ lbl_fn_803884B8_00001118:
     lfs f28, 0x2e4(r30)
     addi r3, r30, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_80885A6C
     lfs f3, lbl_80885A04
     fmuls f0, f0, f28
@@ -1300,7 +1300,7 @@ lbl_fn_803884B8_00001144:
     lfs f28, 0x2e4(r30)
     addi r3, r30, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_80885A6C
     fmuls f0, f0, f28
     fdivs f3, f0, f1
@@ -1332,7 +1332,7 @@ lbl_fn_803884B8_000011B0:
 lbl_fn_803884B8_000011B4:
     addi r3, r30, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f4, lbl_80885914
     lfs f0, lbl_80885A44
     fsubs f3, f1, f4
@@ -1354,7 +1354,7 @@ lbl_fn_803884B8_000011FC:
 lbl_fn_803884B8_00001200:
     addi r3, r30, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f3, lbl_80885914
     lfs f0, lbl_80885A44
     fsubs f3, f1, f3
@@ -1367,7 +1367,7 @@ lbl_fn_803884B8_00001220:
     li r4, 0x0
     fadds f0, f0, f5
     fmuls f30, f28, f0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_80885A6C
     lfs f3, lbl_80885A04
     fmuls f0, f0, f27
@@ -1379,7 +1379,7 @@ lbl_fn_803884B8_00001258:
     lfs f27, 0x2e4(r30)
     addi r3, r30, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_80885A6C
     fmuls f0, f0, f27
     fdivs f3, f0, f1
@@ -1392,7 +1392,7 @@ lbl_fn_803884B8_00001284:
     lfs f27, 0x2e4(r30)
     addi r3, r30, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_80885A44
     lfs f3, lbl_80885A04
     fmuls f0, f0, f27
@@ -1404,7 +1404,7 @@ lbl_fn_803884B8_000012B0:
     lfs f27, 0x2e4(r30)
     addi r3, r30, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_80885A44
     fmuls f0, f0, f27
     fdivs f3, f0, f1
@@ -1486,7 +1486,7 @@ lbl_fn_803884B8_000012DC:
     stfs f2, 0xd0(r1)
     fadds f0, f0, f30
     stfs f0, 0xcc(r1)
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     lfs f4, 0x10(r1)
     mr r3, r29
     lfs f3, 0xc(r1)
@@ -1522,7 +1522,7 @@ lbl_fn_803884B8_000012DC:
     stfs f2, 0x1c(r29)
     psq_st f1, 0x14(r29), 0, 0
     lwz r3, lbl_8087F430
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     beq lbl_fn_803884B8_000014C4
     lfs f3, 0x52c(r30)
@@ -1541,7 +1541,7 @@ lbl_fn_803884B8_000014C4:
     stfs f0, 0x50(r29)
 lbl_fn_803884B8_000014CC:
     mr r3, r29
-    bl fn_8004B378
+    bl item_useConsumable
     mr r4, r29
     addi r3, r29, 0x1f4
     bl fn_80392A04
@@ -1550,7 +1550,7 @@ lbl_fn_803884B8_000014CC:
     mr r3, r29
     bl fn_803928C0
     addi r3, r29, 0x1f4
-    bl fn_8004B378
+    bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r29, 0x1f4
     bl fn_80116BD4
@@ -1637,7 +1637,7 @@ asm void fn_80388A88(void)
     stfs f6, 0x10(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0xc(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f3, 0x73c(r31)
     fmr f31, f1
     lfs f0, lbl_808859E4
@@ -1670,7 +1670,7 @@ lbl_fn_80388A88_000016AC:
     stfs f3, 0x50(r31)
 lbl_fn_80388A88_000016B0:
     mr r3, r31
-    bl fn_8004B378
+    bl item_useConsumable
     mr r4, r31
     addi r3, r31, 0x1f4
     bl fn_80392A04
@@ -1679,7 +1679,7 @@ lbl_fn_80388A88_000016B0:
     mr r3, r31
     bl fn_803928C0
     addi r3, r31, 0x1f4
-    bl fn_8004B378
+    bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r31, 0x1f4
     bl fn_80116BD4
@@ -1717,11 +1717,11 @@ asm void fn_80388C44(void)
     fadds f1, f0, f31
     stfs f4, 0xa8(r1)
     stfs f5, 0xac(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0xa4
     addi r3, r1, 0x110
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     mr r4, r30
     addi r3, r1, 0x74
     bl fn_80178088
@@ -1746,20 +1746,20 @@ asm void fn_80388C44(void)
     stfs f0, 0x94(r1)
     lfs f0, 0x77c(r31)
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x8c
     addi r3, r1, 0xe0
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f0, lbl_808858EC
     addi r3, r1, 0xb0
     li r4, 0x79
     fadds f1, f0, f31
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x8c
     addi r3, r1, 0xb0
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f5, 0x774(r31)
     li r0, 0x0
     lfs f4, 0x94(r1)
@@ -1937,7 +1937,7 @@ lbl_fn_80388C44_00001A88:
     stfs f2, 0x1c(r31)
     psq_st f1, 0x14(r31), 0, 0
     stfs f0, 0x50(r31)
-    bl fn_8004B378
+    bl item_useConsumable
     mr r4, r31
     addi r3, r31, 0x1f4
     bl fn_80392A04
@@ -1950,7 +1950,7 @@ lbl_fn_80388C44_00001A88:
     mr r3, r31
     bl fn_803928C0
     addi r3, r31, 0x1f4
-    bl fn_8004B378
+    bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r31, 0x1f4
     bl fn_80116BD4

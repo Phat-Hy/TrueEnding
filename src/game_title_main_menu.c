@@ -13,31 +13,31 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8003E120(void);
 extern void fn_8004ECC0(void);
 extern void fn_80051A88(void);
 extern void fn_80051B70(void);
 extern void fn_80051BC4(void);
 extern void fn_80051CD8(void);
-extern void fn_800844D8(void);
-extern void fn_80092814(void);
+extern void mem_free(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_8011F8F4(void);
 extern void fn_8011F91C(void);
 extern void fn_8011FC10(void);
 extern void fn_8011FE3C(void);
 extern void fn_801240B4(void);
-extern void fn_80370174(void);
+extern void world_getGlobalFlag(void);
 extern void fn_803E3C78(void);
 extern void fn_8047F580(void);
-extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F90D0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
-extern void fn_805F9940(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void PSMTXConcat(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXTrans(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
+extern void PSVECMag(void);
+extern void printf(void);
+extern void abort(void);
 
 /* External data declarations */
 extern u8 lbl_8074F8CC[];
@@ -126,7 +126,7 @@ asm void fn_803AC3D8(void)
     fsubs f0, f4, f3
     stfs f5, 0x5c(r1)
     stfs f0, 0x60(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fabs f3, f1
     lfs f0, lbl_80885B24
     frsp f3, f3
@@ -134,7 +134,7 @@ asm void fn_803AC3D8(void)
     blt lbl_fn_803AC3D8_000000B0
     mr r3, r30
     mr r4, r30
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_803AC3D8_000000B0:
     lfs f4, 0x5c(r1)
     addi r4, r1, 0x30
@@ -192,7 +192,7 @@ lbl_fn_803AC3D8_000000B0:
     stfs f4, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f6, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fabs f3, f1
     lfs f0, lbl_80885B24
     fmr f31, f1
@@ -213,7 +213,7 @@ lbl_fn_803AC3D8_000000B0:
     fsubs f0, f3, f0
     stfs f4, 0x28(r1)
     stfs f0, 0x2c(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     fsubs f5, f31, f30
     lfs f4, 0x24(r1)
     lfs f3, 0x28(r1)
@@ -341,7 +341,7 @@ asm void fn_803AC708(void)
     stfs f5, 0x10(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x50(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f7, lbl_80885B2C
     addi r3, r1, 0x3c
     lfs f4, 0x50(r1)
@@ -888,7 +888,7 @@ lbl_fn_803ACE18_00000AD8:
     lfs f1, 0x4(r29)
     lfs f2, 0x8(r29)
     lfs f3, 0xc(r29)
-    bl fn_805F90D0
+    bl PSMTXTrans
     addi r5, r1, 0x68
     addi r30, r1, 0xa4
     psq_l f1, 0x0(r5), 0, 0
@@ -906,11 +906,11 @@ lbl_fn_803ACE18_00000AD8:
     psq_st f5, 0x20(r30), 0, 0
     psq_st f6, 0x28(r30), 0, 0
     lfs f1, 0x14(r29)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x38
     addi r5, r1, 0x8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r5, r1, 0x8
     mr r3, r28
     psq_l f1, 0x0(r5), 0, 0
@@ -1103,11 +1103,11 @@ asm void fn_803AD148(void)
     addi r4, r4, 0x239
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803AD148_00000DC8:
     li r3, 0x14
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_803AD148_00000DFC
@@ -1117,8 +1117,8 @@ lbl_fn_803AD148_00000DC8:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8078B330@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803AD148_00000DFC:
     addic. r3, r27, 0xc
     addi r0, r28, 0x4
@@ -1299,11 +1299,11 @@ asm void fn_803AD3D8(void)
     addi r4, r4, 0x239
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803AD3D8_00001058:
     li r3, 0x14
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_803AD3D8_0000108C
@@ -1313,8 +1313,8 @@ lbl_fn_803AD3D8_00001058:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8078B314@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803AD3D8_0000108C:
     addic. r3, r27, 0xc
     addi r0, r28, 0x4
@@ -1508,7 +1508,7 @@ lbl_fn_803AD668_000012CC:
     addi r8, r1, 0x14
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     b lbl_fn_803AD668_0000135C
 lbl_fn_803AD668_00001318:
     lwz r30, 0xc(r4)
@@ -1527,7 +1527,7 @@ lbl_fn_803AD668_00001318:
     addi r8, r1, 0xc
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_803AD668_0000135C:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
@@ -1671,13 +1671,13 @@ lbl_fn_803AD750_00001528:
     stfs f4, 0x54(r1)
     stfs f0, 0x50(r1)
     stfs f6, 0x58(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fmr f23, f1
     fcmpo cr0, f1, f28
     ble lbl_fn_803AD750_00001578
     addi r3, r1, 0x50
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_803AD750_00001578:
     fcmpo cr0, f23, f29
     mfcr r0
@@ -1692,7 +1692,7 @@ lbl_fn_803AD750_00001578:
     cmpwi r3, 0x0
     beq lbl_fn_803AD750_000015BC
     li r4, 0xa1e
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     beq lbl_fn_803AD750_000015BC
     li r17, 0x1
@@ -1764,7 +1764,7 @@ lbl_fn_803AD750_00001698:
     addi r4, r31, 0x6e
     mr r3, r17
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_803AD750_000016BC
     li r3, 0x0
@@ -1849,7 +1849,7 @@ lbl_fn_803AD750_00001798:
     stfs f6, 0x10(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0xc(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fsubs f0, f1, f25
     fdivs f0, f0, f26
     stfs f0, 0x7c(r1)
@@ -2045,13 +2045,13 @@ lbl_fn_803ADC90_00001A6C:
     stfs f4, 0x54(r1)
     stfs f0, 0x50(r1)
     stfs f6, 0x58(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fmr f23, f1
     fcmpo cr0, f1, f28
     ble lbl_fn_803ADC90_00001ABC
     addi r3, r1, 0x50
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_803ADC90_00001ABC:
     fcmpo cr0, f23, f29
     mfcr r0
@@ -2066,7 +2066,7 @@ lbl_fn_803ADC90_00001ABC:
     cmpwi r3, 0x0
     beq lbl_fn_803ADC90_00001B00
     li r4, 0xa1e
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     beq lbl_fn_803ADC90_00001B00
     li r16, 0x1
@@ -2138,7 +2138,7 @@ lbl_fn_803ADC90_00001BDC:
     addi r4, r31, 0x6e
     mr r3, r16
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_803ADC90_00001C00
     li r3, 0x0
@@ -2223,7 +2223,7 @@ lbl_fn_803ADC90_00001CDC:
     stfs f6, 0x10(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0xc(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fsubs f0, f1, f25
     fdivs f0, f0, f26
     stfs f0, 0x7c(r1)

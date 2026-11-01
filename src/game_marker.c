@@ -13,18 +13,18 @@ extern void _savegpr_27(void);
 extern void fn_8004FF58(void);
 extern void fn_80070B60(void);
 extern void fn_80070C98(void);
-extern void fn_80076760(void);
+extern void gx_setRenderStateParam(void);
 extern void fn_800902C0(void);
-extern void fn_80091684(void);
+extern void atn_Model_updateMatrices(void);
 extern void fn_80091A90(void);
-extern void fn_8009B93C(void);
+extern void atn_Model_drawSubNodes(void);
 extern void fn_8009E1E4(void);
 extern void fn_804761CC(void);
 extern void fn_804761E8(void);
-extern void fn_805F89F0(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9420(void);
-extern void fn_805F9940(void);
+extern void PSMTXConcat(void);
+extern void PSMTXMultVec(void);
+extern void PSMTXMultVecArray(void);
+extern void PSVECMag(void);
 
 /* External data declarations */
 
@@ -56,7 +56,7 @@ void fn_8008EECC(void);
 void fn_8008EED4(void);
 void fn_8008EEDC(void);
 void fn_8008F5F8(void);
-void fn_8008FA24(void);
+void atn_Model_draw(void);
 
 asm void fn_8008E2D4(void)
 {
@@ -271,7 +271,7 @@ lbl_fn_8008E304_000002D8:
     stfs f2, 0x20(r1)
     addi r3, r1, 0xf8
     psq_st f1, 0x0(r28), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f0, 0xa8(r29)
     lwz r0, 0x2f8(r30)
     fmuls f0, f0, f24
@@ -327,7 +327,7 @@ lbl_fn_8008E304_000003CC:
     addi r4, r3, 0x124
     addi r3, r1, 0x38
     addi r5, r1, 0x68
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x68
     addi r4, r1, 0x38
     psq_l f1, 0x0(r3), 0, 0
@@ -386,7 +386,7 @@ lbl_fn_8008E304_000004A8:
     mr r3, r29
     mr r5, r27
     addi r4, r30, 0x15c
-    bl fn_80091684
+    bl atn_Model_updateMatrices
 lbl_fn_8008E304_000004B8:
     stw r31, 0x50(r29)
 lbl_fn_8008E304_000004BC:
@@ -721,7 +721,7 @@ lbl_fn_8008E818_00000978:
     stfs f2, 0x30(r1)
     addi r3, r1, 0x58
     psq_st f1, 0x0(r24), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     psq_l f1, 0x0(r24), 0, 0
     addi r6, r1, 0x38
     lfs f2, 0x30(r1)
@@ -834,16 +834,16 @@ lbl_fn_8008E818_00000B24:
     lwz r3, lbl_8087EEE0
     li r4, 0x6
     li r5, 0x2
-    bl fn_80076760
+    bl gx_setRenderStateParam
     b lbl_fn_8008E818_00000B60
 lbl_fn_8008E818_00000B50:
     lwz r3, lbl_8087EEE0
     li r4, 0x6
     li r5, 0x1
-    bl fn_80076760
+    bl gx_setRenderStateParam
 lbl_fn_8008E818_00000B60:
     addi r3, r1, 0xe8
-    bl fn_8009B93C
+    bl atn_Model_drawSubNodes
     addi r11, r1, 0x1d0
     psq_l f31, 0x2b8(r1), 0, 0
     lfd f31, 0x2b0(r1)
@@ -1002,7 +1002,7 @@ lbl_fn_8008EEDC_00000CBC:
     stfs f10, 0xb0(r1)
     stfs f12, 0xb4(r1)
     stfs f27, 0xb8(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fmuls f11, f31, f1
     mr r4, r30
     mr r5, r30
@@ -1014,7 +1014,7 @@ lbl_fn_8008EEDC_00000CBC:
     lwz r3, 0x3c(r15)
     mulli r0, r0, 0x30
     add r3, r3, r0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     mr r3, r18
     mr r4, r30
     bl fn_8004FF58
@@ -1121,7 +1121,7 @@ lbl_fn_8008EEDC_00000CBC:
     stfs f10, 0x7c(r1)
     psq_st f1, 0x0(r7), 0, 0
     stfs f2, 0x1bc(r1)
-    bl fn_805F9420
+    bl PSMTXMultVecArray
     psq_l f1, 0x0(r21), 0, 0
     mr r5, r22
     lfs f2, 0x168(r1)
@@ -1451,7 +1451,7 @@ asm void fn_8008F5F8(void)
     stfs f30, 0x10(r1)
     psq_st f1, 0x0(r25), 0, 0
     stfs f2, 0xdc(r1)
-    bl fn_805F9420
+    bl PSMTXMultVecArray
     addi r3, r1, 0x74
     addi r4, r1, 0x68
     psq_l f1, 0x0(r23), 0, 0
@@ -1634,7 +1634,7 @@ asm void fn_8008F5F8(void)
     blr
 }
 
-asm void fn_8008FA24(void)
+asm void atn_Model_draw(void)
 {
     nofralloc
     stwu r1, -0x340(r1)
@@ -1683,14 +1683,14 @@ asm void fn_8008FA24(void)
     srawi. r0, r0, 31
     mr r30, r7
     add r31, r3, r4
-    beq lbl_fn_8008FA24_00001B60
+    beq lbl_atn_Model_draw_00001B60
     extlwi r0, r8, 2, 27
     srawi. r0, r0, 31
-    beq lbl_fn_8008FA24_00001B60
+    beq lbl_atn_Model_draw_00001B60
     lwz r4, lbl_8087EFB4
     lwz r0, 0x2f8(r4)
     cmpwi r0, 0x3
-    bne lbl_fn_8008FA24_00001B60
+    bne lbl_atn_Model_draw_00001B60
     lwz r8, 0x1cc(r3)
     addi r3, r1, 0x38
     addi r7, r1, 0x44
@@ -1749,7 +1749,7 @@ asm void fn_8008FA24(void)
     stfs f0, 0x50(r1)
     stfs f8, 0x54(r1)
     stfs f10, 0x58(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, lbl_80880C08
     addi r4, r1, 0x1a0
     psq_l f2, 0x10(r26), 0, 0
@@ -1768,10 +1768,10 @@ asm void fn_8008FA24(void)
     lwz r7, 0xb0(r26)
     stfs f7, 0xe4(r1)
     cmpwi r7, 0x0
-    blt lbl_fn_8008FA24_00001B14
+    blt lbl_atn_Model_draw_00001B14
     lwz r0, 0xb4(r26)
     cmpwi r0, 0x0
-    blt lbl_fn_8008FA24_00001AD8
+    blt lbl_atn_Model_draw_00001AD8
     mulli r0, r0, 0x30
     lwz r6, 0x3c(r26)
     addi r3, r1, 0x1d0
@@ -1862,8 +1862,8 @@ asm void fn_8008FA24(void)
     psq_st f4, 0x18(r4), 0, 0
     psq_st f5, 0x20(r4), 0, 0
     psq_st f6, 0x28(r4), 0, 0
-    b lbl_fn_8008FA24_00001B14
-lbl_fn_8008FA24_00001AD8:
+    b lbl_atn_Model_draw_00001B14
+lbl_atn_Model_draw_00001AD8:
     mulli r0, r7, 0x30
     lwz r3, 0x3c(r26)
     add r3, r3, r0
@@ -1879,7 +1879,7 @@ lbl_fn_8008FA24_00001AD8:
     psq_st f3, 0x10(r4), 0, 0
     psq_st f4, 0x18(r4), 0, 0
     psq_st f5, 0x20(r4), 0, 0
-lbl_fn_8008FA24_00001B14:
+lbl_atn_Model_draw_00001B14:
     addi r24, r1, 0x74
     psq_l f1, 0x0(r25), 0, 0
     lfs f2, 0xe0(r1)
@@ -1888,7 +1888,7 @@ lbl_fn_8008FA24_00001B14:
     mr r5, r24
     addi r3, r1, 0x1a0
     stfs f2, 0x7c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0x7c(r1)
     addi r3, r1, 0xe8
     psq_l f1, 0x0(r24), 0, 0
@@ -1898,8 +1898,8 @@ lbl_fn_8008FA24_00001B14:
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0xf0(r1)
     stfs f0, 0xf4(r1)
-    b lbl_fn_8008FA24_00001DB8
-lbl_fn_8008FA24_00001B60:
+    b lbl_atn_Model_draw_00001DB8
+lbl_atn_Model_draw_00001B60:
     psq_l f1, 0x8(r3), 0, 0
     addi r5, r1, 0x110
     psq_l f2, 0x10(r3), 0, 0
@@ -1916,10 +1916,10 @@ lbl_fn_8008FA24_00001B60:
     psq_st f5, 0x20(r5), 0, 0
     lwz r8, 0xb0(r3)
     cmpwi r8, 0x0
-    blt lbl_fn_8008FA24_00001D5C
+    blt lbl_atn_Model_draw_00001D5C
     lwz r0, 0xb4(r3)
     cmpwi r0, 0x0
-    blt lbl_fn_8008FA24_00001D20
+    blt lbl_atn_Model_draw_00001D20
     mulli r0, r0, 0x30
     lwz r7, 0x3c(r3)
     lfs f31, lbl_80880C08
@@ -2011,8 +2011,8 @@ lbl_fn_8008FA24_00001B60:
     psq_st f4, 0x18(r5), 0, 0
     psq_st f5, 0x20(r5), 0, 0
     psq_st f6, 0x28(r5), 0, 0
-    b lbl_fn_8008FA24_00001D5C
-lbl_fn_8008FA24_00001D20:
+    b lbl_atn_Model_draw_00001D5C
+lbl_atn_Model_draw_00001D20:
     mulli r0, r8, 0x30
     lwz r4, 0x3c(r3)
     add r4, r4, r0
@@ -2028,7 +2028,7 @@ lbl_fn_8008FA24_00001D20:
     psq_st f3, 0x10(r5), 0, 0
     psq_st f4, 0x18(r5), 0, 0
     psq_st f5, 0x20(r5), 0, 0
-lbl_fn_8008FA24_00001D5C:
+lbl_atn_Model_draw_00001D5C:
     lfs f7, 0x54(r3)
     addi r25, r1, 0x14
     lfs f0, 0xac(r3)
@@ -2040,7 +2040,7 @@ lbl_fn_8008FA24_00001D5C:
     stfs f2, 0x1c(r1)
     addi r3, r1, 0x110
     psq_st f1, 0x0(r25), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f0, 0xa8(r26)
     addi r3, r1, 0xe8
     psq_l f1, 0x0(r25), 0, 0
@@ -2052,15 +2052,15 @@ lbl_fn_8008FA24_00001D5C:
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0xf0(r1)
     stfs f0, 0xf4(r1)
-lbl_fn_8008FA24_00001DB8:
+lbl_atn_Model_draw_00001DB8:
     mr r3, r29
     addi r4, r1, 0xe8
     bl fn_8004FF58
     cmpwi r3, 0x0
-    bne lbl_fn_8008FA24_00001DD4
+    bne lbl_atn_Model_draw_00001DD4
     li r3, 0x0
-    b lbl_fn_8008FA24_00001F58
-lbl_fn_8008FA24_00001DD4:
+    b lbl_atn_Model_draw_00001F58
+lbl_atn_Model_draw_00001DD4:
     lfs f7, 0x8(r28)
     addi r3, r1, 0x8
     lfs f0, 0xf0(r1)
@@ -2074,22 +2074,22 @@ lbl_fn_8008FA24_00001DD4:
     fsubs f0, f7, f0
     stfs f8, 0xc(r1)
     stfs f0, 0x8(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lwz r3, lbl_8087EFA8
     lfs f0, 0x10c(r3)
     fcmpo cr0, f1, f0
-    ble lbl_fn_8008FA24_00001E24
+    ble lbl_atn_Model_draw_00001E24
     li r3, 0x0
-    b lbl_fn_8008FA24_00001F58
-lbl_fn_8008FA24_00001E24:
+    b lbl_atn_Model_draw_00001F58
+lbl_atn_Model_draw_00001E24:
     cmpwi r30, 0x0
-    beq lbl_fn_8008FA24_00001F54
+    beq lbl_atn_Model_draw_00001F54
     lfs f7, lbl_80880C18
     lfs f0, 0xac(r26)
     lfs f9, 0xf4(r1)
     fmuls f0, f7, f0
     fcmpo cr0, f9, f0
-    bge lbl_fn_8008FA24_00001EEC
+    bge lbl_atn_Model_draw_00001EEC
     lfs f8, 0xf0(r1)
     addi r4, r1, 0xbc
     lfs f7, 0xec(r1)
@@ -2131,8 +2131,8 @@ lbl_fn_8008FA24_00001E24:
     stfs f8, 0xac(r1)
     psq_st f1, 0xc(r30), 0, 0
     stfs f2, 0x14(r30)
-    b lbl_fn_8008FA24_00001F54
-lbl_fn_8008FA24_00001EEC:
+    b lbl_atn_Model_draw_00001F54
+lbl_atn_Model_draw_00001EEC:
     lwz r3, 0x16c(r31)
     addi r8, r1, 0x8c
     lfs f7, lbl_80880C1C
@@ -2159,9 +2159,9 @@ lbl_fn_8008FA24_00001EEC:
     psq_st f1, 0xc(r30), 0, 0
     stfs f2, 0x14(r30)
     bl fn_8008EEDC
-lbl_fn_8008FA24_00001F54:
+lbl_atn_Model_draw_00001F54:
     li r3, 0x1
-lbl_fn_8008FA24_00001F58:
+lbl_atn_Model_draw_00001F58:
     addi r11, r1, 0x250
     psq_l f31, 0x338(r1), 0, 0
     lfd f31, 0x330(r1)

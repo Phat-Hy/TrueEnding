@@ -14,9 +14,9 @@ extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_805EE150(void);
-extern void fn_805F30F0(void);
-extern void fn_805F3130(void);
-extern void fn_805F3210(void);
+extern void OSInitMutex(void);
+extern void OSLockMutex(void);
+extern void OSUnlockMutex(void);
 extern void fn_80619920(void);
 extern void fn_806199D0(void);
 extern void fn_80619A00(void);
@@ -244,7 +244,7 @@ asm void fn_806A6600(void)
     bne lbl_fn_806A6600_000000D4
     lis r3, lbl_8085FA60@ha
     addi r3, r3, lbl_8085FA60@l
-    bl fn_805F30F0
+    bl OSInitMutex
     li r0, 0x1
     stw r0, lbl_80880464
 lbl_fn_806A6600_000000D4:
@@ -253,7 +253,7 @@ lbl_fn_806A6600_000000D4:
     beq lbl_fn_806A6600_000000EC
     lis r3, lbl_8085FA60@ha
     addi r3, r3, lbl_8085FA60@l
-    bl fn_805F3130
+    bl OSLockMutex
 lbl_fn_806A6600_000000EC:
     lwz r0, lbl_80880460
     cmpwi r0, 0x0
@@ -278,7 +278,7 @@ lbl_fn_806A6600_00000130:
     beq lbl_fn_806A6600_00000148
     lis r3, lbl_8085FA60@ha
     addi r3, r3, lbl_8085FA60@l
-    bl fn_805F3210
+    bl OSUnlockMutex
 lbl_fn_806A6600_00000148:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -299,7 +299,7 @@ asm void fn_806A66D0(void)
     beq lbl_fn_806A66D0_0000018C
     lis r3, lbl_8085FA60@ha
     addi r3, r3, lbl_8085FA60@l
-    bl fn_805F3130
+    bl OSLockMutex
 lbl_fn_806A66D0_0000018C:
     lwz r0, lbl_80880460
     cmpwi r0, 0x0
@@ -313,7 +313,7 @@ lbl_fn_806A66D0_000001A4:
     beq lbl_fn_806A66D0_000001BC
     lis r3, lbl_8085FA60@ha
     addi r3, r3, lbl_8085FA60@l
-    bl fn_805F3210
+    bl OSUnlockMutex
 lbl_fn_806A66D0_000001BC:
     lwz r0, 0x14(r1)
     mtlr r0

@@ -9,7 +9,7 @@ extern void fn_8004B290(void);
 extern void fn_80057A64(void);
 extern void fn_8005DFC8(void);
 extern void fn_8006FEBC(void);
-extern void fn_80071E04(void);
+extern void gx_drawScreenQuad(void);
 extern void fn_80075DEC(void);
 extern void fn_80075F58(void);
 extern void fn_80076174(void);
@@ -19,18 +19,18 @@ extern void fn_800B33A8(void);
 extern void fn_800B3454(void);
 extern void fn_800C0508(void);
 extern void fn_800C0590(void);
-extern void fn_800D5738(void);
-extern void fn_800D5808(void);
+struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
+extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5B58(void);
 extern void fn_80614190(void);
-extern void fn_80614CC0(void);
-extern void fn_80614D30(void);
+extern void GXSetTexCopySrc(void);
+extern void GXSetTexCopyDst(void);
 extern void fn_80615190(void);
-extern void fn_80615560(void);
+extern void GXCopyTex(void);
 extern void fn_80616250(void);
 extern void fn_806163C0(void);
 extern void fn_806163E0(void);
-extern void fn_80617E00(void);
+extern void GXSetZMode(void);
 extern void fn_8068A6D8(void);
 extern void fn_8068A918(void);
 extern void fn_806958E0(void);
@@ -574,7 +574,7 @@ asm void fn_800B67F8(void)
     psq_l f1, 0x0(r5), 0, 0
     psq_st f1, 0x58(r3), 0, 0
     lwz r3, lbl_8087EEE0
-    bl fn_80071E04
+    bl gx_drawScreenQuad
     lwz r3, lbl_8087EEE0
     li r4, 0x0
     bl fn_80076174
@@ -652,7 +652,7 @@ asm void fn_800B68BC(void)
     stw r0, 0x18(r3)
     stw r4, 0x0(r3)
     addi r3, r3, 0x5c
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     lwz r5, lbl_8087EEE0
     addi r3, r30, 0x5c
     addi r8, r31, 0x8
@@ -754,20 +754,20 @@ asm void fn_800B6A00(void)
     li r3, 0x1
     li r4, 0x3
     li r5, 0x1
-    bl fn_80617E00
+    bl GXSetZMode
     mr r5, r30
     mr r6, r31
     li r3, 0x0
     li r4, 0x0
-    bl fn_80614CC0
+    bl GXSetTexCopySrc
     mr r3, r30
     mr r4, r31
     li r5, 0x4
     li r6, 0x0
-    bl fn_80614D30
+    bl GXSetTexCopyDst
     mr r3, r29
     li r4, 0x1
-    bl fn_80615560
+    bl GXCopyTex
     bl fn_80614190
     mr r3, r28
     bl fn_800B3454
@@ -838,7 +838,7 @@ asm void fn_800B6B90(void)
     beq lbl_fn_800B6B90_000009B8
     li r4, -0x1
     addi r3, r3, 0x5c
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     cmpwi r31, 0x0
     ble lbl_fn_800B6B90_000009B8
     mr r3, r30

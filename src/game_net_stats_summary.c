@@ -11,7 +11,7 @@ extern void fn_8000EE8C(void);
 extern void fn_8000FAE8(void);
 extern void fn_800127CC(void);
 extern void fn_800128FC(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8004B0E4(void);
 extern void fn_80069BF4(void);
 extern void fn_8006A250(void);
@@ -25,11 +25,11 @@ extern void fn_800A4450(void);
 extern void fn_800C3094(void);
 extern void fn_800C310C(void);
 extern void fn_800C3124(void);
-extern void fn_800D2338(void);
-extern void fn_800D246C(void);
-extern void fn_800DC6B4(void);
-extern void fn_801231D0(void);
-extern void fn_8013655C(void);
+extern void atn_Task_unlink(void);
+extern void atn_Task_setActive(void);
+extern void str_findChar(void);
+extern void magic_dispatchActionCommand(void);
+extern void boss_updatePhaseState(void);
 extern void fn_801F3FF8(void);
 extern void fn_801FEC74(void);
 extern void fn_801FECE0(void);
@@ -47,7 +47,7 @@ extern void fn_803EB234(void);
 extern void fn_80470364(void);
 extern void fn_80470528(void);
 extern void fn_8047054C(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_8047F580(void);
 extern void fn_80483E94(void);
 extern void fn_80489A50(void);
@@ -294,7 +294,7 @@ asm void fn_8053F1B8(void)
     mtctr r4
     bctr
     addi r3, r3, 0x1c4
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_8053F1B8_00000560
     mr r3, r31
@@ -416,7 +416,7 @@ lbl_fn_8053F1B8_0000044C:
     lis r3, lbl_8075E148@ha
     addi r3, r3, lbl_8075E148@l
     addi r3, r3, 0x23
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r30, 0x58
@@ -448,7 +448,7 @@ lbl_fn_8053F1B8_0000046C:
 lbl_fn_8053F1B8_000004C8:
     lwz r3, 0x2c0(r3)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x2c0(r31)
     lfs f1, 0xa0(r3)
     lfs f0, 0x100(r3)
@@ -460,7 +460,7 @@ lbl_fn_8053F1B8_000004C8:
     lwz r3, lbl_8087F0A8
     li r4, 0x0
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_8053F1B8_00000560
     lwz r4, 0x2c0(r31)
@@ -987,7 +987,7 @@ lbl_fn_8053F81C_00000C1C:
     addi r3, r24, 0x68
     addi r8, r1, 0x18
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8053F81C_00000C38:
     lwz r0, 0x5c(r1)
     srwi. r0, r0, 31
@@ -1075,7 +1075,7 @@ lbl_fn_8053F81C_00000D50:
     addi r3, r24, 0x68
     addi r8, r1, 0x10
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8053F81C_00000D6C:
     lwz r0, 0x38(r1)
     srwi. r0, r0, 31
@@ -1137,7 +1137,7 @@ lbl_fn_8053F81C_00000E28:
     addi r3, r24, 0x68
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8053F81C_00000E44:
     lwz r0, 0x20(r1)
     srwi. r0, r0, 31
@@ -1351,7 +1351,7 @@ lbl_fn_8053F81C_000010C8:
     lwz r3, lbl_8087F540
     li r4, 0x1
     lwz r3, 0x2400(r3)
-    bl fn_800D246C
+    bl atn_Task_setActive
 lbl_fn_8053F81C_000010F8:
     lwz r0, 0x190(r24)
     cmpwi r0, 0x151b
@@ -1361,7 +1361,7 @@ lbl_fn_8053F81C_000010F8:
     lwz r3, lbl_8087F540
     li r4, 0x1
     lwz r3, 0x2400(r3)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F540
     lfs f1, lbl_80887CC4
     lwz r3, 0x2400(r3)
@@ -1388,7 +1388,7 @@ lbl_fn_8053F81C_00001144:
     bl fn_801F3FF8
     stw r3, 0x2c0(r24)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x2c0(r24)
     lwz r0, 0xfc(r3)
     rlwinm r0, r0, 0, 4, 2
@@ -1444,7 +1444,7 @@ lbl_fn_80540120_00001224:
     bl fn_800128FC
     cmpwi r3, 0x0
     beq lbl_fn_80540120_0000124C
-    bl fn_8013655C
+    bl boss_updatePhaseState
     cmpwi r3, 0x0
     beq lbl_fn_80540120_0000124C
     li r3, 0x0
@@ -2034,14 +2034,14 @@ lbl_fn_805406C0_000019D4:
     lwz r3, 0x1ec(r30)
     cmpwi r3, 0x0
     beq lbl_fn_805406C0_000019FC
-    bl fn_800D2338
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0x1ec(r30)
 lbl_fn_805406C0_000019FC:
     lwz r3, 0x280(r30)
     cmpwi r3, 0x0
     beq lbl_fn_805406C0_00001A14
-    bl fn_800D2338
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0x280(r30)
 lbl_fn_805406C0_00001A14:

@@ -8,10 +8,10 @@ extern void fn_8004ECC0(void);
 extern void fn_8004ED34(void);
 extern void fn_80051B70(void);
 extern void fn_800BFAC8(void);
-extern void fn_800CB3A0(void);
-extern void fn_801231D0(void);
+extern void ref_releaseHandle(void);
+extern void magic_dispatchActionCommand(void);
 extern void fn_801240B4(void);
-extern void fn_80370174(void);
+extern void world_getGlobalFlag(void);
 extern void fn_8037F690(void);
 extern void fn_803935FC(void);
 extern void fn_8039BC0C(void);
@@ -22,9 +22,9 @@ extern void fn_803AD148(void);
 extern void fn_803E3050(void);
 extern void fn_803E3384(void);
 extern void fn_803E6ADC(void);
-extern void fn_805F93C0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9940(void);
+extern void PSMTXMultVec(void);
+extern void PSVECNormalize(void);
+extern void PSVECMag(void);
 
 /* External data declarations */
 extern u8 jumptable_8078A788[];
@@ -294,7 +294,7 @@ lbl_fn_80399148_00000324:
     cmpwi r3, 0x0
     beq lbl_fn_80399148_00000394
     li r4, 0xa1e
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     beq lbl_fn_80399148_00000394
     li r20, 0x1
@@ -311,7 +311,7 @@ lbl_fn_80399148_000003B0:
     lwz r3, lbl_8087F0A8
     li r4, 0x0
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
 lbl_fn_80399148_000003C0:
     cmpwi r3, 0x0
     beq lbl_fn_80399148_000004EC
@@ -758,7 +758,7 @@ lbl_fn_80399734_000009C4:
     cmpwi r3, 0x0
     beq lbl_fn_80399734_00000A34
     li r4, 0xa1e
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     beq lbl_fn_80399734_00000A34
     li r16, 0x1
@@ -775,7 +775,7 @@ lbl_fn_80399734_00000A50:
     lwz r3, lbl_8087F0A8
     li r4, 0x0
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
 lbl_fn_80399734_00000A60:
     cmpwi r3, 0x0
     beq lbl_fn_80399734_0000187C
@@ -870,7 +870,7 @@ lbl_fn_80399734_00000BAC:
     cmpwi r3, 0x0
     beq lbl_fn_80399734_00000BC8
     li r4, 0xa1e
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     bgt lbl_fn_80399734_00000BD0
 lbl_fn_80399734_00000BC8:
@@ -903,7 +903,7 @@ lbl_fn_80399734_00000BD4:
     fsubs f0, f8, f7
     stfs f9, 0x22c(r1)
     stfs f0, 0x230(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f8, 0x22c(r1)
     addi r5, r1, 0x170
     lfs f7, 0x230(r1)
@@ -957,7 +957,7 @@ lbl_fn_80399734_00000BD4:
     stfs f8, 0x64(r1)
     stfs f0, 0x60(r1)
     stfs f10, 0x68(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fabs f0, f1
     fmr f31, f1
     frsp f0, f0
@@ -977,7 +977,7 @@ lbl_fn_80399734_00000BD4:
     fsubs f0, f7, f0
     stfs f8, 0x1e8(r1)
     stfs f0, 0x1ec(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     fsubs f9, f31, f23
     lfs f8, 0x1e4(r1)
     lfs f7, 0x1e8(r1)
@@ -1063,7 +1063,7 @@ lbl_fn_80399734_00000E84:
     cmpwi r3, 0x0
     beq lbl_fn_80399734_00000EA0
     li r4, 0xa1e
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     bgt lbl_fn_80399734_00000EA8
 lbl_fn_80399734_00000EA0:
@@ -1096,7 +1096,7 @@ lbl_fn_80399734_00000EAC:
     fsubs f0, f8, f7
     stfs f9, 0x214(r1)
     stfs f0, 0x218(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f8, 0x214(r1)
     addi r5, r1, 0x150
     lfs f7, 0x218(r1)
@@ -1150,7 +1150,7 @@ lbl_fn_80399734_00000EAC:
     stfs f8, 0x58(r1)
     stfs f0, 0x54(r1)
     stfs f10, 0x5c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fabs f0, f1
     fmr f31, f1
     frsp f0, f0
@@ -1170,7 +1170,7 @@ lbl_fn_80399734_00000EAC:
     fsubs f0, f7, f0
     stfs f8, 0x1d0(r1)
     stfs f0, 0x1d4(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     fsubs f9, f31, f23
     lfs f8, 0x1cc(r1)
     lfs f7, 0x1d0(r1)
@@ -1252,7 +1252,7 @@ lbl_fn_80399734_00001144:
     addi r0, r3, 0x1
     stw r0, 0xd8(r27)
     lwz r3, lbl_8087F430
-    bl fn_80370174
+    bl world_getGlobalFlag
     slwi r0, r3, 2
     lwz r3, 0x2d8(r1)
     lwz r4, 0xd8(r27)
@@ -1267,7 +1267,7 @@ lbl_fn_80399734_00001144:
     bl fn_803935FC
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80399734_00001198:
     cmpwi r17, 0x0
     bne lbl_fn_80399734_0000187C
@@ -1298,7 +1298,7 @@ lbl_fn_80399734_000011F8:
     cmpwi r3, 0x0
     beq lbl_fn_80399734_00001214
     li r4, 0xa1e
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     bgt lbl_fn_80399734_0000121C
 lbl_fn_80399734_00001214:
@@ -1329,7 +1329,7 @@ lbl_fn_80399734_00001220:
     fsubs f0, f8, f7
     stfs f9, 0x1fc(r1)
     stfs f0, 0x200(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f8, 0x1fc(r1)
     addi r4, r1, 0x130
     lfs f7, 0x200(r1)
@@ -1364,7 +1364,7 @@ lbl_fn_80399734_00001220:
     stfs f10, 0x50(r1)
     stfs f0, 0x48(r1)
     stfs f8, 0x4c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x13c(r1)
     addi r4, r1, 0x114
     stfs f28, 0x11c(r1)
@@ -1392,11 +1392,11 @@ lbl_fn_80399734_00001220:
     stfs f28, 0x264(r1)
     stfs f28, 0x274(r1)
     stfs f28, 0x284(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r4, r1, 0x108
     mr r3, r20
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f7, 0x138(r1)
     addi r3, r1, 0xd8
     lfs f0, 0x11c(r1)
@@ -1491,7 +1491,7 @@ lbl_fn_80399734_00001220:
     stfs f8, 0x40(r1)
     stfs f0, 0x3c(r1)
     stfs f10, 0x44(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fabs f0, f1
     fmr f31, f1
     frsp f0, f0
@@ -1511,7 +1511,7 @@ lbl_fn_80399734_00001220:
     fsubs f0, f7, f0
     stfs f8, 0x1b8(r1)
     stfs f0, 0x1bc(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     fsubs f9, f31, f23
     lfs f8, 0x1b4(r1)
     lfs f7, 0x1b8(r1)
@@ -1610,7 +1610,7 @@ lbl_fn_80399734_00001628:
     bl fn_803935FC
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80399734_000016C4:
     cmpwi r17, 0x0
     bne lbl_fn_80399734_0000187C
@@ -1638,7 +1638,7 @@ lbl_fn_80399734_000016C4:
     stfs f8, 0x34(r1)
     stfs f0, 0x30(r1)
     stfs f10, 0x38(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fabs f0, f1
     fmr f31, f1
     frsp f0, f0
@@ -1658,7 +1658,7 @@ lbl_fn_80399734_000016C4:
     fsubs f0, f7, f0
     stfs f8, 0x1a0(r1)
     stfs f0, 0x1a4(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     fsubs f9, f31, f23
     lfs f8, 0x19c(r1)
     lfs f7, 0x1a0(r1)
@@ -1700,7 +1700,7 @@ lbl_fn_80399734_00001800:
     cmpwi r3, 0x0
     beq lbl_fn_80399734_0000187C
     li r4, 0xce
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     beq lbl_fn_80399734_0000187C
 lbl_fn_80399734_00001824:

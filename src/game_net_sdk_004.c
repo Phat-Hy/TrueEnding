@@ -20,9 +20,9 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_805EC060(void);
 extern void fn_805ED1C0(void);
-extern void fn_805F30F0(void);
-extern void fn_805F3130(void);
-extern void fn_805F3210(void);
+extern void OSInitMutex(void);
+extern void OSLockMutex(void);
+extern void OSUnlockMutex(void);
 extern void fn_805F3410(void);
 extern void fn_805F3420(void);
 extern void fn_805F6DF0(void);
@@ -836,20 +836,20 @@ asm void fn_806A0B48(void)
     cmpwi r0, 0x0
     bne lbl_fn_806A0B48_000008CC
     addi r3, r31, 0x4
-    bl fn_805F30F0
+    bl OSInitMutex
     addi r3, r31, 0x1c
     bl fn_805F3410
     li r0, 0x1
     stw r0, 0x0(r31)
 lbl_fn_806A0B48_000008CC:
     addi r3, r31, 0x4
-    bl fn_805F3130
+    bl OSLockMutex
     li r0, 0x0
     addi r3, r31, 0x1c
     stw r0, 0xc(r30)
     bl fn_805F3420
     addi r3, r31, 0x4
-    bl fn_805F3210
+    bl OSUnlockMutex
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1703,9 +1703,9 @@ asm void NWC24SuspendScheduler(void)
     clrlwi. r0, r0, 31
     bne lbl_NWC24SuspendScheduler_0000131C
     addi r3, r31, 0x0
-    bl fn_805F30F0
+    bl OSInitMutex
     addi r3, r31, 0x18
-    bl fn_805F30F0
+    bl OSInitMutex
     addi r3, r31, 0x40
     li r4, 0x0
     li r5, 0x20
@@ -1722,7 +1722,7 @@ lbl_NWC24SuspendScheduler_0000131C:
     bl OSRestoreInterrupts
 lbl_NWC24SuspendScheduler_00001324:
     addi r3, r31, 0x18
-    bl fn_805F3130
+    bl OSLockMutex
     bl fn_806A1AC0
     cmpwi r3, 0x0
     mr r30, r3
@@ -1734,7 +1734,7 @@ lbl_NWC24SuspendScheduler_00001324:
     subf r30, r0, r3
 lbl_NWC24SuspendScheduler_00001350:
     addi r3, r31, 0x18
-    bl fn_805F3210
+    bl OSUnlockMutex
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1763,9 +1763,9 @@ asm void fn_806A1634(void)
     clrlwi. r0, r0, 31
     bne lbl_fn_806A1634_000013EC
     addi r3, r31, 0x0
-    bl fn_805F30F0
+    bl OSInitMutex
     addi r3, r31, 0x18
-    bl fn_805F30F0
+    bl OSInitMutex
     addi r3, r31, 0x40
     li r4, 0x0
     li r5, 0x20
@@ -1782,7 +1782,7 @@ lbl_fn_806A1634_000013EC:
     bl OSRestoreInterrupts
 lbl_fn_806A1634_000013F4:
     addi r3, r31, 0x18
-    bl fn_805F3130
+    bl OSLockMutex
     lwz r0, lbl_80880410
     cmpwi r0, 0x0
     ble lbl_fn_806A1634_0000141C
@@ -1803,7 +1803,7 @@ lbl_fn_806A1634_0000141C:
     subf r30, r0, r3
 lbl_fn_806A1634_00001440:
     addi r3, r31, 0x18
-    bl fn_805F3210
+    bl OSUnlockMutex
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1863,9 +1863,9 @@ lbl_fn_806A1724_000014E4:
     clrlwi. r0, r0, 31
     bne lbl_fn_806A1724_00001540
     addi r3, r30, 0x0
-    bl fn_805F30F0
+    bl OSInitMutex
     addi r3, r30, 0x18
-    bl fn_805F30F0
+    bl OSInitMutex
     addi r3, r30, 0x40
     li r4, 0x0
     li r5, 0x20
@@ -1882,7 +1882,7 @@ lbl_fn_806A1724_00001540:
     bl OSRestoreInterrupts
 lbl_fn_806A1724_00001548:
     addi r3, r30, 0x0
-    bl fn_805F3130
+    bl OSLockMutex
     addi r3, r30, 0x40
     li r4, 0x0
     li r5, 0x20
@@ -1920,7 +1920,7 @@ lbl_fn_806A1724_000015BC:
     mr r29, r3
 lbl_fn_806A1724_000015D8:
     addi r3, r30, 0x0
-    bl fn_805F3210
+    bl OSUnlockMutex
     mr r3, r29
 lbl_fn_806A1724_000015E4:
     lwz r0, 0x24(r1)
@@ -1976,9 +1976,9 @@ lbl_fn_806A18C4_0000166C:
     clrlwi. r0, r0, 31
     bne lbl_fn_806A18C4_000016C8
     addi r3, r29, 0x0
-    bl fn_805F30F0
+    bl OSInitMutex
     addi r3, r29, 0x18
-    bl fn_805F30F0
+    bl OSInitMutex
     addi r3, r29, 0x40
     li r4, 0x0
     li r5, 0x20
@@ -1995,7 +1995,7 @@ lbl_fn_806A18C4_000016C8:
     bl OSRestoreInterrupts
 lbl_fn_806A18C4_000016D0:
     addi r3, r29, 0x0
-    bl fn_805F3130
+    bl OSLockMutex
     lis r30, lbl_807BC9D8@ha
     lis r4, lbl_807BC9B0@ha
     addi r3, r30, lbl_807BC9D8@l
@@ -2050,7 +2050,7 @@ lbl_fn_806A18C4_00001780:
     mr r28, r3
 lbl_fn_806A18C4_0000179C:
     addi r3, r29, 0x0
-    bl fn_805F3210
+    bl OSUnlockMutex
     mr r3, r28
 lbl_fn_806A18C4_000017A8:
     addi r11, r1, 0x30
@@ -2143,9 +2143,9 @@ lbl_fn_806A1AE0_0000185C:
     clrlwi. r0, r0, 31
     bne lbl_fn_806A1AE0_000018B8
     addi r3, r31, 0x0
-    bl fn_805F30F0
+    bl OSInitMutex
     addi r3, r31, 0x18
-    bl fn_805F30F0
+    bl OSInitMutex
     addi r3, r31, 0x40
     li r4, 0x0
     li r5, 0x20
@@ -2162,7 +2162,7 @@ lbl_fn_806A1AE0_000018B8:
     bl OSRestoreInterrupts
 lbl_fn_806A1AE0_000018C0:
     addi r3, r31, 0x0
-    bl fn_805F3130
+    bl OSLockMutex
     lis r4, lbl_807BC9B0@ha
     mr r3, r27
     addi r4, r4, lbl_807BC9B0@l
@@ -2204,7 +2204,7 @@ lbl_fn_806A1AE0_00001944:
     mr r30, r3
 lbl_fn_806A1AE0_0000195C:
     addi r3, r31, 0x0
-    bl fn_805F3210
+    bl OSUnlockMutex
     mr r3, r30
 lbl_fn_806A1AE0_00001968:
     addi r11, r1, 0x30
@@ -2461,7 +2461,7 @@ lbl_fn_806A1F5C_00001CE4:
     cmpwi r0, 0x0
     bne lbl_fn_806A1F5C_00001D34
     addi r3, r30, 0x80
-    bl fn_805F30F0
+    bl OSInitMutex
     addi r3, r30, 0xa0
     li r4, 0x0
     li r5, 0x20
@@ -2477,7 +2477,7 @@ lbl_fn_806A1F5C_00001D34:
     bl OSRestoreInterrupts
 lbl_fn_806A1F5C_00001D3C:
     addi r3, r30, 0x80
-    bl fn_805F3130
+    bl OSLockMutex
     lis r31, lbl_807BCA0C@ha
     lis r4, lbl_807BC9F8@ha
     addi r3, r31, lbl_807BCA0C@l
@@ -2512,7 +2512,7 @@ lbl_fn_806A1F5C_00001DA4:
     mr r29, r3
 lbl_fn_806A1F5C_00001DC0:
     addi r3, r30, 0x80
-    bl fn_805F3210
+    bl OSUnlockMutex
     mr r3, r29
 lbl_fn_806A1F5C_00001DCC:
     addi r11, r1, 0x30

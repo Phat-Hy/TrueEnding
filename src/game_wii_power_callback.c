@@ -3,16 +3,16 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_80084A78(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800C411C(void);
 extern void fn_800DCA6C(void);
 extern void fn_80365708(void);
 extern void fn_803B27F8(void);
 extern void fn_803B29A8(void);
-extern void fn_8047059C(void);
-extern void fn_80473F50(void);
+extern void boss_getOffset50(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_80531ED4(void);
 extern void fn_80572860(void);
 extern void fn_80572E70(void);
@@ -24,7 +24,7 @@ extern void fn_805738BC(void);
 extern void fn_80573B18(void);
 extern void fn_80573F44(void);
 extern void fn_80574178(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_806952C4(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -55,8 +55,8 @@ void fn_805747EC(void);
 void fn_80574884(void);
 void fn_8057491C(void);
 void fn_80574AF0(void);
-void fn_80574D20(void);
-void fn_80574EE0(void);
+void power_handleShutdownEvent(void);
+void power_handleResetEvent(void);
 void fn_8057501C(void);
 void fn_80575F10(void);
 
@@ -193,7 +193,7 @@ lbl_fn_805746B0_000001A8:
     lis r3, lbl_80796710@ha
     lwz r4, lbl_80796710@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_805746B0_000001D0
@@ -537,7 +537,7 @@ asm void fn_80574AF0(void)
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r0, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_80574AF0_000006A8
     li r0, 0x1
@@ -552,7 +552,7 @@ lbl_fn_80574AF0_000006A8:
     stw r3, 0x20(r1)
     stw r0, 0x10(r1)
     b lbl_fn_80574AF0_000006BC
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80574AF0_000006BC:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x1c(r1)
@@ -621,7 +621,7 @@ lbl_fn_80574AF0_00000704:
     blr
 }
 
-asm void fn_80574D20(void)
+asm void power_handleShutdownEvent(void)
 {
     nofralloc
     stwu r1, -0x80(r1)
@@ -652,7 +652,7 @@ asm void fn_80574D20(void)
     stw r5, 0x60(r1)
     stw r4, 0x64(r1)
     stw r0, 0x68(r1)
-    bne lbl_fn_80574D20_000008FC
+    bne lbl_power_handleShutdownEvent_000008FC
     lis r4, lbl_80775B60@ha
     li r0, 0x0
     addi r4, r4, lbl_80775B60@l
@@ -671,9 +671,9 @@ asm void fn_80574D20(void)
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r0, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
-    beq lbl_fn_80574D20_000008A0
+    beq lbl_power_handleShutdownEvent_000008A0
     li r0, 0x1
     stw r0, 0x4(r3)
     lis r4, lbl_80775B98@ha
@@ -681,13 +681,13 @@ asm void fn_80574D20(void)
     addi r4, r4, lbl_80775B98@l
     stw r4, 0x0(r3)
     stw r29, 0xc(r3)
-lbl_fn_80574D20_000008A0:
+lbl_power_handleShutdownEvent_000008A0:
     li r0, 0x0
     stw r3, 0x20(r1)
     stw r0, 0x10(r1)
-    b lbl_fn_80574D20_000008B4
-    bl fn_80084C24
-lbl_fn_80574D20_000008B4:
+    b lbl_power_handleShutdownEvent_000008B4
+    bl mem_getAllocSize
+lbl_power_handleShutdownEvent_000008B4:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x1c(r1)
     addi r4, r4, lbl_80775BC8@l
@@ -698,15 +698,15 @@ lbl_fn_80574D20_000008B4:
     stw r4, 0x18(r1)
     bl fn_800DCA6C
     addic. r3, r1, 0x18
-    beq lbl_fn_80574D20_000008FC
+    beq lbl_power_handleShutdownEvent_000008FC
     addic. r3, r3, 0x4
-    beq lbl_fn_80574D20_000008FC
-    beq lbl_fn_80574D20_000008FC
+    beq lbl_power_handleShutdownEvent_000008FC
+    beq lbl_power_handleShutdownEvent_000008FC
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80574D20_000008FC
+    beq lbl_power_handleShutdownEvent_000008FC
     bl fn_806952C4
-lbl_fn_80574D20_000008FC:
+lbl_power_handleShutdownEvent_000008FC:
     lwz r29, 0x48(r1)
     mr r4, r31
     lwz r12, 0x4c(r1)
@@ -741,7 +741,7 @@ lbl_fn_80574D20_000008FC:
     blr
 }
 
-asm void fn_80574EE0(void)
+asm void power_handleResetEvent(void)
 {
     nofralloc
     stwu r1, -0x40(r1)
@@ -756,7 +756,7 @@ asm void fn_80574EE0(void)
     lwz r0, 0x48(r3)
     lwz r30, 0x5c(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80574EE0_00000A7C
+    bne lbl_power_handleResetEvent_00000A7C
     lis r4, lbl_80775B60@ha
     li r0, 0x0
     addi r4, r4, lbl_80775B60@l
@@ -775,9 +775,9 @@ asm void fn_80574EE0(void)
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r0, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
-    beq lbl_fn_80574EE0_00000A20
+    beq lbl_power_handleResetEvent_00000A20
     li r0, 0x1
     stw r0, 0x4(r3)
     lis r4, lbl_80775B98@ha
@@ -785,13 +785,13 @@ asm void fn_80574EE0(void)
     addi r4, r4, lbl_80775B98@l
     stw r4, 0x0(r3)
     stw r31, 0xc(r3)
-lbl_fn_80574EE0_00000A20:
+lbl_power_handleResetEvent_00000A20:
     li r0, 0x0
     stw r3, 0x20(r1)
     stw r0, 0x10(r1)
-    b lbl_fn_80574EE0_00000A34
-    bl fn_80084C24
-lbl_fn_80574EE0_00000A34:
+    b lbl_power_handleResetEvent_00000A34
+    bl mem_getAllocSize
+lbl_power_handleResetEvent_00000A34:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x1c(r1)
     addi r4, r4, lbl_80775BC8@l
@@ -802,15 +802,15 @@ lbl_fn_80574EE0_00000A34:
     stw r4, 0x18(r1)
     bl fn_800DCA6C
     addic. r3, r1, 0x18
-    beq lbl_fn_80574EE0_00000A7C
+    beq lbl_power_handleResetEvent_00000A7C
     addic. r3, r3, 0x4
-    beq lbl_fn_80574EE0_00000A7C
-    beq lbl_fn_80574EE0_00000A7C
+    beq lbl_power_handleResetEvent_00000A7C
+    beq lbl_power_handleResetEvent_00000A7C
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80574EE0_00000A7C
+    beq lbl_power_handleResetEvent_00000A7C
     bl fn_806952C4
-lbl_fn_80574EE0_00000A7C:
+lbl_power_handleResetEvent_00000A7C:
     lwz r6, 0x48(r28)
     mr r4, r29
     mr r5, r30
@@ -1806,14 +1806,14 @@ asm void fn_80575F10(void)
     b lbl_fn_80575F10_000019F8
 lbl_fn_80575F10_000019D8:
     addi r3, r3, 0x1c4
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_80575F10_000019F0
     li r3, 0x0
     b lbl_fn_80575F10_000019F8
 lbl_fn_80575F10_000019F0:
     addi r3, r31, 0x1c4
-    bl fn_8047059C
+    bl boss_getOffset50
 lbl_fn_80575F10_000019F8:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

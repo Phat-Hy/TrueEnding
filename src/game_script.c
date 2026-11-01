@@ -19,7 +19,7 @@ extern void _savegpr_22(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_80050A1C(void);
 extern void fn_800629F0(void);
 extern void fn_800697D8(void);
@@ -30,11 +30,11 @@ extern void fn_80072E08(void);
 extern void fn_800827E0(void);
 extern void fn_800838B8(void);
 extern void fn_800839EC(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
-extern void fn_805F9640(void);
-extern void fn_805F97D0(void);
-extern void fn_805F9990(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
+extern void PSMTX44Inverse(void);
+extern void PSMTX44Copy(void);
+extern void PSVECDotProduct(void);
 extern void fn_806036E0(void);
 extern void fn_80603730(void);
 extern void fn_80603FF0(void);
@@ -44,44 +44,44 @@ extern void fn_806050D0(void);
 extern void fn_80605140(void);
 extern void fn_806052C0(void);
 extern void fn_80607120(void);
-extern void fn_80612A60(void);
-extern void fn_80612AF0(void);
+extern void GXGetFifoStatus(void);
+extern void GXGetFifoCount(void);
 extern void fn_80612B10(void);
 extern void fn_80612B60(void);
-extern void fn_80612E70(void);
-extern void fn_80613950(void);
-extern void fn_80613C60(void);
-extern void fn_80613FF0(void);
+extern u32 __GXGetOverflowCount(void);
+extern void GXInvalidateVtxCache(void);
+extern void GXFlush(void);
+extern void GXSetDrawSync(void);
 extern void fn_80614190(void);
 extern void fn_80614B20(void);
-extern void fn_80614C80(void);
-extern void fn_80614CC0(void);
-extern void fn_80614D00(void);
-extern void fn_80614D30(void);
+extern void GXSetDispCopySrc(void);
+extern void GXSetTexCopySrc(void);
+extern void GXSetDispCopyDst(void);
+extern void GXSetTexCopyDst(void);
 extern void fn_80614E90(void);
 extern void fn_806150C0(void);
 extern void fn_80615190(void);
-extern void fn_80615210(void);
+extern void __GXSetSamplePattern(void);
 extern void fn_80615400(void);
-extern void fn_80615420(void);
-extern void fn_80615560(void);
+extern void GXCopyDisp(void);
+extern void GXCopyTex(void);
 extern void fn_80616400(void);
-extern void fn_806167B0(void);
-extern void fn_80617DA0(void);
-extern void fn_80617E00(void);
-extern void fn_80617E70(void);
+extern void GXDrawDone(void);
+extern void GXSetZCompLoc(void);
+extern void GXSetZMode(void);
+extern void GXSetBlendMode(void);
 extern void fn_80618290(void);
 extern void fn_80618570(void);
 extern void fn_806185C0(void);
 extern void fn_80624830(void);
 extern void fn_80624910(void);
 extern void fn_806249F0(void);
-extern void fn_80680770(void);
-extern void fn_806846C4(void);
-extern void fn_806846CC(void);
+extern void printf(void);
+extern void wmemcpy(void);
+extern void wmemmove(void);
 extern void fn_80686A48(void);
-extern void fn_80686EA4(void);
-extern void fn_80695D84(void);
+extern void abort(void);
+extern void runtime_clampDouble(void);
 extern void memmove(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -154,7 +154,7 @@ void fn_80071220(void);
 void fn_80071274(void);
 void fn_800713D4(void);
 void fn_8007192C(void);
-void fn_80071AFC(void);
+void gx_syncFrameFifo(void);
 void fn_80071D60(void);
 void fn_80071D68(void);
 void fn_80071D74(void);
@@ -678,7 +678,7 @@ lbl_fn_8006F5E8_000006E8:
     addi r8, r1, 0x8
     add r7, r7, r0
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r3, r30
     lwz r31, 0x11c(r1)
     lwz r30, 0x118(r1)
@@ -775,8 +775,8 @@ lbl_fn_8006F72C_00000834:
     addi r4, r4, 0x10d
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8006F72C_00000860:
     lwz r0, 0x8(r1)
     subf r3, r20, r28
@@ -807,8 +807,8 @@ lbl_fn_8006F72C_000008B0:
     addi r4, r4, 0x128
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8006F72C_000008D4:
     add r24, r25, r30
     add r0, r20, r26
@@ -827,7 +827,7 @@ lbl_fn_8006F72C_00000904:
     cmplw r27, r0
     blt lbl_fn_8006F72C_000008F8
     slwi r3, r27, 1
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_8006F72C_00000940
@@ -837,15 +837,15 @@ lbl_fn_8006F72C_00000904:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80777BF8@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8006F72C_00000940:
     cmpwi r20, 0x0
     beq lbl_fn_8006F72C_00000958
     mr r3, r30
     mr r4, r29
     mr r5, r20
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_8006F72C_00000958:
     subf r3, r21, r22
     slwi r22, r20, 1
@@ -864,7 +864,7 @@ lbl_fn_8006F72C_00000958:
     mr r5, r23
     add r3, r20, r3
     add r4, r4, r0
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_8006F72C_000009A0:
     cmpwi r31, 0x0
     slwi r0, r24, 1
@@ -935,13 +935,13 @@ lbl_fn_8006F72C_00000A74:
     slwi r0, r26, 1
     add r3, r4, r3
     add r4, r4, r0
-    bl fn_806846CC
+    bl wmemmove
 lbl_fn_8006F72C_00000A9C:
     slwi r0, r20, 1
     mr r4, r21
     mr r5, r25
     add r3, r29, r0
-    bl fn_806846CC
+    bl wmemmove
     cmpwi r31, 0x0
     slwi r0, r24, 1
     lhz r3, lbl_8087D736
@@ -1119,11 +1119,11 @@ lbl_fn_8006FAB0_00000D20:
     mr r4, r27
     add r19, r19, r24
     mr r3, r19
-    bl fn_805F9990
+    bl PSVECDotProduct
     fmr f27, f1
     mr r3, r19
     mr r4, r26
-    bl fn_805F9990
+    bl PSVECDotProduct
     lfs f0, 0xc(r19)
     fadds f3, f0, f1
     fabs f0, f3
@@ -1172,7 +1172,7 @@ lbl_fn_8006FAB0_00000DEC:
     beq lbl_fn_8006FAB0_00000E1C
     mr r3, r19
     addi r4, r1, 0x68
-    bl fn_805F9990
+    bl PSVECDotProduct
     lfs f0, 0xc(r19)
     fadds f0, f0, f1
     fadd f0, f29, f0
@@ -1359,7 +1359,7 @@ asm void fn_8006FEBC(void)
     stfs f10, 0x12c(r1)
     stfs f11, 0x13c(r1)
     stfs f12, 0x14c(r1)
-    bl fn_805F9640
+    bl PSMTX44Inverse
     lfs f24, 0x10(r22)
     addi r5, r1, 0x20
     lfs f13, 0xc(r22)
@@ -1437,7 +1437,7 @@ asm void fn_8006FEBC(void)
     stfs f10, 0x7c(r1)
     psq_st f1, 0x0(r31), 0, 0
     stfs f2, 0x1bc(r1)
-    bl fn_805F97D0
+    bl PSMTX44Copy
     addi r4, r1, 0x8
     addi r3, r1, 0x14
     psq_l f1, 0x0(r24), 0, 0
@@ -1781,7 +1781,7 @@ asm void fn_800704DC(void)
     stfs f10, 0x7c(r1)
     psq_st f1, 0x0(r31), 0, 0
     stfs f2, 0xf4(r1)
-    bl fn_805F97D0
+    bl PSMTX44Copy
     addi r4, r1, 0x8
     addi r3, r1, 0x14
     psq_l f1, 0x0(r24), 0, 0
@@ -2614,7 +2614,7 @@ asm void fn_80071220(void)
     li r4, 0x6
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80071220_00002318
     bl fn_80071274
@@ -2980,7 +2980,7 @@ lbl_fn_800713D4_000026B4:
     lfd f1, 0x8(r1)
     fsubs f1, f1, f2
     fadds f1, f1, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r0, 0x68(r30)
     mr r28, r3
     lfd f2, lbl_807316C8@l(r27)
@@ -2990,7 +2990,7 @@ lbl_fn_800713D4_000026B4:
     lfd f1, 0x10(r1)
     fsubs f1, f1, f2
     fadds f1, f1, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r0, 0x64(r30)
     mr r29, r3
     lfd f1, lbl_807316C8@l(r27)
@@ -3000,7 +3000,7 @@ lbl_fn_800713D4_000026B4:
     lfd f0, 0x8(r1)
     fsubs f0, f0, f1
     fadds f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r0, 0x60(r30)
     mr r31, r3
     lfd f1, lbl_807316C8@l(r27)
@@ -3010,7 +3010,7 @@ lbl_fn_800713D4_000026B4:
     lfd f0, 0x10(r1)
     fsubs f0, f0, f1
     fadds f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     mr r4, r31
     mr r5, r29
     mr r6, r28
@@ -3024,15 +3024,15 @@ lbl_fn_800713D4_000026B4:
     lhz r6, 0x6(r30)
     li r3, 0x0
     li r4, 0x0
-    bl fn_80614C80
+    bl GXSetDispCopySrc
     lhz r3, 0x4(r30)
     mr r4, r27
-    bl fn_80614D00
+    bl GXSetDispCopyDst
     lbz r3, 0x19(r30)
     addi r4, r30, 0x1a
     addi r6, r30, 0x32
     li r5, 0x0
-    bl fn_80615210
+    bl __GXSetSamplePattern
     li r3, 0x0
     bl fn_80615400
     lbz r0, 0x19(r30)
@@ -3040,16 +3040,16 @@ lbl_fn_800713D4_000026B4:
     beq lbl_fn_800713D4_00002930
     li r3, 0x2
     li r4, 0x0
-    bl fn_80617E70
+    bl GXSetBlendMode
     b lbl_fn_800713D4_0000293C
 lbl_fn_800713D4_00002930:
     li r3, 0x0
     li r4, 0x0
-    bl fn_80617E70
+    bl GXSetBlendMode
 lbl_fn_800713D4_0000293C:
     lwz r3, 0x74(r30)
     li r4, 0x1
-    bl fn_80615420
+    bl GXCopyDisp
     mr r3, r30
     bl fn_80604580
     lwz r3, 0x70(r30)
@@ -3169,7 +3169,7 @@ lbl_fn_8007192C_00002A24:
     lfd f1, 0x10(r1)
     fsubs f1, f1, f2
     fadds f1, f1, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r0, 0x68(r31)
     mr r28, r3
     lfd f2, lbl_807316C8@l(r27)
@@ -3179,7 +3179,7 @@ lbl_fn_8007192C_00002A24:
     lfd f1, 0x18(r1)
     fsubs f1, f1, f2
     fadds f1, f1, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r0, 0x64(r31)
     mr r29, r3
     lfd f1, lbl_807316C8@l(r27)
@@ -3189,7 +3189,7 @@ lbl_fn_8007192C_00002A24:
     lfd f0, 0x10(r1)
     fsubs f0, f0, f1
     fadds f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r0, 0x60(r31)
     mr r30, r3
     lfd f1, lbl_807316C8@l(r27)
@@ -3199,13 +3199,13 @@ lbl_fn_8007192C_00002A24:
     lfd f0, 0x18(r1)
     fsubs f0, f0, f1
     fadds f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     mr r4, r30
     mr r5, r29
     mr r6, r28
     bl fn_806185C0
-    bl fn_80613950
-    bl fn_806167B0
+    bl GXInvalidateVtxCache
+    bl GXDrawDone
     addi r11, r1, 0x40
     bl _restgpr_27
     lwz r0, 0x44(r1)
@@ -3214,7 +3214,7 @@ lbl_fn_8007192C_00002A24:
     blr
 }
 
-asm void fn_80071AFC(void)
+asm void gx_syncFrameFifo(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -3225,16 +3225,16 @@ asm void fn_80071AFC(void)
     stmw r27, 0x1c(r1)
     mr r27, r3
     li r3, 0x1
-    bl fn_80617E00
+    bl GXSetZMode
     li r3, 0x1
-    bl fn_80617DA0
-    bl fn_80613C60
+    bl GXSetZCompLoc
+    bl GXFlush
     lwz r3, 0x50(r27)
-    bl fn_80612A60
+    bl GXGetFifoStatus
     lwz r3, 0x50(r27)
     addi r4, r1, 0xc
     addi r5, r1, 0x8
-    bl fn_80612AF0
+    bl GXGetFifoCount
     lwz r31, 0x8(r1)
     lhz r30, lbl_8087D738
     lwz r29, 0x78(r27)
@@ -3244,12 +3244,12 @@ asm void fn_80071AFC(void)
     addi r6, r6, lbl_807C6F68@l
     lhz r4, 0x50(r6)
     cmplwi r4, 0x5
-    bne lbl_fn_80071AFC_00002C34
+    bne lbl_gx_syncFrameFifo_00002C34
     li r0, 0x0
     sth r0, 0x52(r6)
     sth r0, 0x50(r6)
-    b lbl_fn_80071AFC_00002C88
-lbl_fn_80071AFC_00002C34:
+    b lbl_gx_syncFrameFifo_00002C88
+lbl_gx_syncFrameFifo_00002C34:
     lis r3, 0x6666
     addi r5, r4, 0x1
     addi r3, r3, 0x6667
@@ -3263,7 +3263,7 @@ lbl_fn_80071AFC_00002C34:
     sth r3, 0x50(r6)
     clrlwi r3, r3, 16
     cmplw r3, r0
-    bne lbl_fn_80071AFC_00002C88
+    bne lbl_gx_syncFrameFifo_00002C88
     lis r5, lbl_807317C0@ha
     li r4, 0x3fb
     addi r5, r5, lbl_807317C0@l
@@ -3271,7 +3271,7 @@ lbl_fn_80071AFC_00002C34:
     addi r5, r5, 0x2c
     crclr 6
     bl OSPanic
-lbl_fn_80071AFC_00002C88:
+lbl_gx_syncFrameFifo_00002C88:
     lis r5, lbl_807C6F68@ha
     li r0, 0x0
     addi r5, r5, lbl_807C6F68@l
@@ -3285,14 +3285,14 @@ lbl_fn_80071AFC_00002C88:
     bl OSRestoreInterrupts
     lbz r0, lbl_8087EED8
     cmpwi r0, 0x0
-    bne lbl_fn_80071AFC_00002CD0
+    bne lbl_gx_syncFrameFifo_00002CD0
     li r0, 0x1
     stb r0, lbl_8087EED8
     lwz r3, 0x8(r1)
     bl fn_80612B60
-lbl_fn_80071AFC_00002CD0:
+lbl_gx_syncFrameFifo_00002CD0:
     lhz r3, lbl_8087D738
-    bl fn_80613FF0
+    bl GXSetDrawSync
     lwz r8, lbl_8087EFA8
     addi r6, r1, 0x10
     li r3, 0x0
@@ -3328,50 +3328,50 @@ lbl_fn_80071AFC_00002CD0:
     lwz r5, lbl_8087EFA8
     lwz r0, 0x3ac(r5)
     clrlwi r5, r0, 24
-    bl fn_80615210
+    bl __GXSetSamplePattern
     lwz r3, 0x78(r27)
     li r4, 0x1
-    bl fn_80615420
-    bl fn_80613C60
+    bl GXCopyDisp
+    bl GXFlush
     lhz r3, lbl_8087D738
     addi r0, r3, 0x1
     sth r0, lbl_8087D738
     lwz r3, 0x70(r27)
     lwz r0, 0x78(r27)
     cmplw r0, r3
-    bne lbl_fn_80071AFC_00002D98
+    bne lbl_gx_syncFrameFifo_00002D98
     lwz r3, 0x74(r27)
-lbl_fn_80071AFC_00002D98:
+lbl_gx_syncFrameFifo_00002D98:
     stw r3, 0x78(r27)
-    bl fn_80612E70
+    bl __GXGetOverflowCount
     bl OSDisableInterrupts
     lis r27, lbl_807C6F68@ha
     lis r28, lbl_807C6F60@ha
     addi r27, r27, lbl_807C6F68@l
-    b lbl_fn_80071AFC_00002DC4
-lbl_fn_80071AFC_00002DB4:
+    b lbl_gx_syncFrameFifo_00002DC4
+lbl_gx_syncFrameFifo_00002DB4:
     bl OSRestoreInterrupts
     addi r3, r28, lbl_807C6F60@l
     bl OSSleepThread
     bl OSDisableInterrupts
-lbl_fn_80071AFC_00002DC4:
+lbl_gx_syncFrameFifo_00002DC4:
     lhz r5, 0x50(r27)
     cmplwi r5, 0x5
-    bne lbl_fn_80071AFC_00002DD8
+    bne lbl_gx_syncFrameFifo_00002DD8
     li r0, 0x0
-    b lbl_fn_80071AFC_00002DF8
-lbl_fn_80071AFC_00002DD8:
+    b lbl_gx_syncFrameFifo_00002DF8
+lbl_gx_syncFrameFifo_00002DD8:
     lhz r6, 0x52(r27)
     addi r0, r5, 0x5
     cmplw r5, r6
     subf r4, r6, r0
     addi r0, r4, 0x1
-    blt lbl_fn_80071AFC_00002DF8
+    blt lbl_gx_syncFrameFifo_00002DF8
     subf r4, r6, r5
     addi r0, r4, 0x1
-lbl_fn_80071AFC_00002DF8:
+lbl_gx_syncFrameFifo_00002DF8:
     cmplwi r0, 0x1
-    bgt lbl_fn_80071AFC_00002DB4
+    bgt lbl_gx_syncFrameFifo_00002DB4
     bl OSRestoreInterrupts
     lmw r27, 0x1c(r1)
     lwz r0, 0x34(r1)
@@ -3419,7 +3419,7 @@ asm void fn_80071D80(void)
     lwz r0, 0x40(r30)
     clrlwi r5, r5, 16
     clrlwi r6, r0, 16
-    bl fn_80614CC0
+    bl GXSetTexCopySrc
     mr r3, r31
     bl fn_80616400
     lwz r0, 0x40(r30)
@@ -3428,10 +3428,10 @@ asm void fn_80071D80(void)
     li r6, 0x0
     clrlwi r4, r0, 16
     clrlwi r3, r3, 16
-    bl fn_80614D30
+    bl GXSetTexCopyDst
     lwz r3, 0x28(r31)
     li r4, 0x0
-    bl fn_80615560
+    bl GXCopyTex
     bl fn_80614190
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

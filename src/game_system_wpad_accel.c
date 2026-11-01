@@ -8,8 +8,8 @@ extern void fn_8004A1D4(void);
 extern void fn_8006A204(void);
 extern void fn_8006A900(void);
 extern void fn_800A4228(void);
-extern void fn_800D2338(void);
-extern void fn_800D246C(void);
+extern void atn_Task_unlink(void);
+extern void atn_Task_setActive(void);
 extern void fn_800E2FE0(void);
 extern void fn_800EFB78(void);
 extern void fn_8011BF3C(void);
@@ -23,7 +23,7 @@ extern void fn_80219558(void);
 extern void fn_8036554C(void);
 extern void fn_8036EA6C(void);
 extern void fn_8036EE0C(void);
-extern void fn_80370320(void);
+extern void world_setGlobalFlag(void);
 extern void fn_80378610(void);
 extern void fn_803786FC(void);
 extern void fn_80378CCC(void);
@@ -49,14 +49,14 @@ extern void fn_80584FE8(void);
 extern void fn_80586DB4(void);
 extern void fn_80588688(void);
 extern void fn_8058ABF8(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9750(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
-extern void fn_805F9940(void);
-extern void fn_805F9990(void);
-extern void fn_8068AEA4(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSMTX44Identity(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
+extern void PSVECMag(void);
+extern void PSVECDotProduct(void);
+extern void std_atan2(void);
 
 /* External data declarations */
 extern u8 lbl_8074DBE8[];
@@ -110,7 +110,7 @@ void fn_8036DB3C(void);
 void fn_8036DBC0(void);
 void fn_8036DDD4(void);
 void fn_8036E098(void);
-void fn_8036E170(void);
+void wpad_accel_updateOrientation(void);
 void fn_8036E428(void);
 void fn_8036E430(void);
 void fn_8036E494(void);
@@ -181,7 +181,7 @@ lbl_fn_8036CFA4_00000098:
     stfs f2, 0x58(r1)
     psq_st f1, 0x0(r30), 0, 0
     stfs f2, 0x64(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x64(r1)
     addi r29, r1, 0x68
     psq_l f1, 0x0(r30), 0, 0
@@ -206,7 +206,7 @@ lbl_fn_8036CFA4_0000012C:
 lbl_fn_8036CFA4_00000134:
     frsp f2, f2
     lfs f1, 0x68(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_8036CFA4_00000148:
@@ -214,7 +214,7 @@ lbl_fn_8036CFA4_00000148:
     addi r3, r1, 0x78
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_8088570C
     addi r4, r1, 0x38
     lfs f30, 0x80(r1)
@@ -264,7 +264,7 @@ lbl_fn_8036CFA4_00000148:
     stfs f6, 0xd4(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_80885798
     fabs f3, f2
@@ -285,7 +285,7 @@ lbl_fn_8036CFA4_00000258:
     b lbl_fn_8036CFA4_00000278
 lbl_fn_8036CFA4_00000264:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -451,14 +451,14 @@ lbl_fn_8036D2D0_00000498:
     bne lbl_fn_8036D2D0_00000AEC
     lwz r3, lbl_8087F8A0
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F8A0
     li r4, 0x0
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
     lwz r3, lbl_8087F408
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r5, lbl_8087F408
     li r0, 0x0
     li r4, 0x0
@@ -473,7 +473,7 @@ lbl_fn_8036D2D0_00000498:
     stw r0, 0x2928(r3)
     lwz r3, 0x10d8(r30)
     lwz r3, 0x134(r3)
-    bl fn_800D246C
+    bl atn_Task_setActive
     b lbl_fn_8036D2D0_00000AEC
 lbl_fn_8036D2D0_0000050C:
     lwz r4, 0x56d0(r3)
@@ -560,14 +560,14 @@ lbl_fn_8036D2D0_00000640:
     li r4, 0x1
     stw r31, 0x56d4(r30)
     lwz r3, lbl_8087F8A0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F8A0
     li r4, 0x1
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, lbl_8087F408
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F408
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
@@ -650,14 +650,14 @@ lbl_fn_8036D2D0_0000079C:
     li r4, 0x1
     stw r31, 0x56d4(r30)
     lwz r3, lbl_8087F8A0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F8A0
     li r4, 0x1
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, lbl_8087F408
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F408
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
@@ -756,7 +756,7 @@ lbl_fn_8036D2D0_000007E4:
     stfs f4, 0x30(r1)
     stfs f0, 0x2c(r1)
     stfs f6, 0x34(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, lbl_808857AC
     fmuls f0, f0, f1
     stfs f0, 0x10c8(r30)
@@ -785,7 +785,7 @@ lbl_fn_8036D2D0_00000968:
     stfs f4, 0x24(r1)
     stfs f0, 0x20(r1)
     stfs f6, 0x28(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, lbl_808857AC
     fmuls f0, f0, f1
     stfs f0, 0x10c8(r30)
@@ -805,7 +805,7 @@ lbl_fn_8036D2D0_000009F8:
     stw r31, 0x56d4(r30)
     li r4, 0x1
     lwz r3, lbl_8087F8A0
-    bl fn_800D246C
+    bl atn_Task_setActive
     cmpwi r27, 0x4
     beq lbl_fn_8036D2D0_00000A18
     cmpwi r27, 0x6
@@ -818,7 +818,7 @@ lbl_fn_8036D2D0_00000A18:
 lbl_fn_8036D2D0_00000A28:
     lwz r3, lbl_8087F408
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
 lbl_fn_8036D2D0_00000A34:
     lwz r4, 0x56d4(r30)
     cmpwi r4, 0x0
@@ -842,7 +842,7 @@ lbl_fn_8036D2D0_00000A60:
     stw r31, 0x2928(r3)
     lwz r3, 0x10d8(r30)
     lwz r3, 0x134(r3)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F8A0
     lwz r27, 0x48(r3)
     cmpwi r27, 0x0
@@ -1014,7 +1014,7 @@ lbl_fn_8036DBC0_00000C7C:
     b lbl_fn_8036DBC0_00000E04
 lbl_fn_8036DBC0_00000C90:
     mr r3, r30
-    bl fn_805F9920
+    bl PSVECSquareMag
     lwz r3, 0x48(r31)
     li r4, 0x0
     li r0, 0x1
@@ -1078,11 +1078,11 @@ lbl_fn_8036DBC0_00000D10:
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fmr f30, f1
     addi r3, r1, 0x8
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     fcmpo cr0, f30, f31
     bge lbl_fn_8036DBC0_00000DF4
     lfs f0, lbl_8088570C
@@ -1158,11 +1158,11 @@ asm void fn_8036DDD4(void)
     stfs f1, 0x18(r1)
     stfs f0, 0x1c(r1)
     lfs f1, 0x538(r31)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x14
     addi r3, r1, 0x20
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lwz r3, lbl_8087F428
     bl fn_8036554C
     lis r4, lbl_8074DBE8@ha
@@ -1268,11 +1268,11 @@ lbl_fn_8036DDD4_00001004:
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fmr f29, f1
     addi r3, r1, 0x8
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     lwz r3, lbl_8087F0A8
     lfs f0, lbl_80885728
     lwz r0, 0x320(r3)
@@ -1286,7 +1286,7 @@ lbl_fn_8036DDD4_00001064:
     bge lbl_fn_8036DDD4_0000108C
     addi r3, r1, 0x8
     addi r4, r1, 0x14
-    bl fn_805F9990
+    bl PSVECDotProduct
     fcmpo cr0, f1, f31
     ble lbl_fn_8036DDD4_0000108C
     li r28, 0x1
@@ -1345,11 +1345,11 @@ asm void fn_8036E098(void)
     stfs f1, 0xc(r1)
     stfs f0, 0x10(r1)
     lfs f1, 0x538(r31)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x8
     addi r3, r1, 0x18
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lwz r3, lbl_8087F4A0
     lwz r29, 0x48(r3)
     b lbl_fn_8036E098_000011A4
@@ -1385,7 +1385,7 @@ lbl_fn_8036E098_000011B0:
     blr
 }
 
-asm void fn_8036E170(void)
+asm void wpad_accel_updateOrientation(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1396,64 +1396,64 @@ asm void fn_8036E170(void)
     stw r30, 0x18(r1)
     lwz r0, 0x54e4(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8036E170_000012AC
+    beq lbl_wpad_accel_updateOrientation_000012AC
     cmpwi r0, 0xe
-    beq lbl_fn_8036E170_000012AC
+    beq lbl_wpad_accel_updateOrientation_000012AC
     cmpwi r0, 0x3
-    beq lbl_fn_8036E170_00001208
+    beq lbl_wpad_accel_updateOrientation_00001208
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_00001208:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_00001208:
     lwz r4, lbl_8087F9C8
     cmpwi r4, 0x0
-    beq lbl_fn_8036E170_0000122C
+    beq lbl_wpad_accel_updateOrientation_0000122C
     addis r4, r4, 0x2
     lwz r0, 0x5b40(r4)
     cmpwi r0, 0x0
-    bne lbl_fn_8036E170_0000122C
+    bne lbl_wpad_accel_updateOrientation_0000122C
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_0000122C:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_0000122C:
     lwz r4, lbl_8087F9E0
     cmpwi r4, 0x0
-    beq lbl_fn_8036E170_00001250
+    beq lbl_wpad_accel_updateOrientation_00001250
     addis r4, r4, 0x2
     lwz r0, 0x5b40(r4)
     cmpwi r0, 0x0
-    bne lbl_fn_8036E170_00001250
+    bne lbl_wpad_accel_updateOrientation_00001250
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_00001250:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_00001250:
     lwz r4, lbl_8087F9D0
     cmpwi r4, 0x0
-    beq lbl_fn_8036E170_00001274
+    beq lbl_wpad_accel_updateOrientation_00001274
     addis r4, r4, 0x2
     lwz r0, 0x5b40(r4)
     cmpwi r0, 0x0
-    bne lbl_fn_8036E170_00001274
+    bne lbl_wpad_accel_updateOrientation_00001274
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_00001274:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_00001274:
     lwz r4, lbl_8087F9D8
     cmpwi r4, 0x0
-    beq lbl_fn_8036E170_00001298
+    beq lbl_wpad_accel_updateOrientation_00001298
     addis r4, r4, 0x2
     lwz r0, 0x5b40(r4)
     cmpwi r0, 0x0
-    bne lbl_fn_8036E170_00001298
+    bne lbl_wpad_accel_updateOrientation_00001298
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_00001298:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_00001298:
     lwz r0, lbl_8087F508
     cmpwi r0, 0x0
-    beq lbl_fn_8036E170_000012AC
+    beq lbl_wpad_accel_updateOrientation_000012AC
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_000012AC:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_000012AC:
     lwz r3, 0x5620(r3)
     lwz r6, 0x48(r3)
     cmpwi r6, 0x0
-    beq lbl_fn_8036E170_000012E4
+    beq lbl_wpad_accel_updateOrientation_000012E4
     lwz r4, 0x58(r3)
     lwz r0, 0x54(r3)
     lwz r5, 0x4c(r3)
@@ -1463,123 +1463,123 @@ lbl_fn_8036E170_000012AC:
     and r0, r0, r5
     subf r0, r0, r4
     srwi r0, r0, 31
-    b lbl_fn_8036E170_000012E8
-lbl_fn_8036E170_000012E4:
+    b lbl_wpad_accel_updateOrientation_000012E8
+lbl_wpad_accel_updateOrientation_000012E4:
     li r0, 0x1
-lbl_fn_8036E170_000012E8:
+lbl_wpad_accel_updateOrientation_000012E8:
     cmpwi r0, 0x0
-    bne lbl_fn_8036E170_000012F8
+    bne lbl_wpad_accel_updateOrientation_000012F8
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_000012F8:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_000012F8:
     cmpwi r3, 0x0
-    beq lbl_fn_8036E170_0000131C
+    beq lbl_wpad_accel_updateOrientation_0000131C
     cmpwi r6, 0x0
-    beq lbl_fn_8036E170_0000131C
+    beq lbl_wpad_accel_updateOrientation_0000131C
     bl fn_8006A204
     cmpwi r3, 0x0
-    bne lbl_fn_8036E170_0000131C
+    bne lbl_wpad_accel_updateOrientation_0000131C
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_0000131C:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_0000131C:
     lwz r3, lbl_8087F540
     bl fn_80481668
     cmpwi r3, 0x0
-    beq lbl_fn_8036E170_00001334
+    beq lbl_wpad_accel_updateOrientation_00001334
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_00001334:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_00001334:
     lwz r0, 0x1294(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_8036E170_0000134C
+    bne lbl_wpad_accel_updateOrientation_0000134C
     lwz r0, lbl_8087F610
     cmpwi r0, 0x0
-    beq lbl_fn_8036E170_00001354
-lbl_fn_8036E170_0000134C:
+    beq lbl_wpad_accel_updateOrientation_00001354
+lbl_wpad_accel_updateOrientation_0000134C:
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_00001354:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_00001354:
     lwz r3, lbl_8087F490
     lwz r3, 0x263c(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_8036E170_00001378
+    beq lbl_wpad_accel_updateOrientation_00001378
     lwz r0, 0x50(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8036E170_00001378
+    beq lbl_wpad_accel_updateOrientation_00001378
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_00001378:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_00001378:
     lwz r0, 0x56d4(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_8036E170_00001390
+    bne lbl_wpad_accel_updateOrientation_00001390
     lwz r0, 0x56d8(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_8036E170_00001398
-lbl_fn_8036E170_00001390:
+    beq lbl_wpad_accel_updateOrientation_00001398
+lbl_wpad_accel_updateOrientation_00001390:
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_00001398:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_00001398:
     lwz r0, 0x54e4(r31)
     cmpwi r0, 0x3
-    beq lbl_fn_8036E170_00001418
+    beq lbl_wpad_accel_updateOrientation_00001418
     lwz r3, lbl_8087F8A0
     lwz r30, 0x48(r3)
     mr r3, r30
     bl fn_8017C974
     cmpwi r3, 0x0
-    bne lbl_fn_8036E170_000013C8
+    bne lbl_wpad_accel_updateOrientation_000013C8
     lwz r0, 0x5760(r31)
     cmpwi r0, 0x0
-    ble lbl_fn_8036E170_000013D0
-lbl_fn_8036E170_000013C8:
+    ble lbl_wpad_accel_updateOrientation_000013D0
+lbl_wpad_accel_updateOrientation_000013C8:
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_000013D0:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_000013D0:
     lfs f1, 0x568(r30)
     lfs f0, lbl_808857C0
     fcmpo cr0, f1, f0
-    bge lbl_fn_8036E170_000013E8
+    bge lbl_wpad_accel_updateOrientation_000013E8
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_000013E8:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_000013E8:
     lwz r0, 0x55c(r30)
     cmpwi r0, 0x1
-    beq lbl_fn_8036E170_00001418
+    beq lbl_wpad_accel_updateOrientation_00001418
     cmpwi r0, 0x6
-    bne lbl_fn_8036E170_00001410
+    bne lbl_wpad_accel_updateOrientation_00001410
     lwz r0, 0x560(r30)
     cmpwi r0, 0x4
-    beq lbl_fn_8036E170_00001418
+    beq lbl_wpad_accel_updateOrientation_00001418
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_00001410:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_00001410:
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_00001418:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_00001418:
     lwz r3, 0x10d8(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_8036E170_00001444
+    beq lbl_wpad_accel_updateOrientation_00001444
     lwz r3, 0x134(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_8036E170_00001444
+    beq lbl_wpad_accel_updateOrientation_00001444
     lwz r0, 0xe8(r3)
     cmpwi r0, 0x0
-    ble lbl_fn_8036E170_00001444
+    ble lbl_wpad_accel_updateOrientation_00001444
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_00001444:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_00001444:
     lwz r3, lbl_8087EF68
     cmpwi r3, 0x0
-    beq lbl_fn_8036E170_00001468
+    beq lbl_wpad_accel_updateOrientation_00001468
     addi r4, r1, 0x8
     bl fn_800A4228
     cmpwi r3, 0x0
-    beq lbl_fn_8036E170_00001468
+    beq lbl_wpad_accel_updateOrientation_00001468
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_00001468:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_00001468:
     li r3, 0x1
-lbl_fn_8036E170_0000146C:
+lbl_wpad_accel_updateOrientation_0000146C:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -1809,7 +1809,7 @@ asm void fn_8036E6D4(void)
     li r4, 0x394
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_8036E6D4_0000177C:
     mr r3, r28
     li r4, 0x3
@@ -1935,29 +1935,29 @@ asm void fn_8036E89C(void)
     li r4, 0x394
     li r5, 0x0
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_8036E89C_0000192C:
     mr r3, r31
     bl fn_8036EE0C
     lwz r3, lbl_8087F9C8
     cmpwi r3, 0x0
     beq lbl_fn_8036E89C_00001944
-    bl fn_800D2338
+    bl atn_Task_unlink
 lbl_fn_8036E89C_00001944:
     lwz r3, lbl_8087F9E0
     cmpwi r3, 0x0
     beq lbl_fn_8036E89C_00001954
-    bl fn_800D2338
+    bl atn_Task_unlink
 lbl_fn_8036E89C_00001954:
     lwz r3, lbl_8087F9D0
     cmpwi r3, 0x0
     beq lbl_fn_8036E89C_00001964
-    bl fn_800D2338
+    bl atn_Task_unlink
 lbl_fn_8036E89C_00001964:
     lwz r3, lbl_8087F9D8
     cmpwi r3, 0x0
     beq lbl_fn_8036E89C_00001974
-    bl fn_800D2338
+    bl atn_Task_unlink
 lbl_fn_8036E89C_00001974:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

@@ -12,8 +12,8 @@ extern void fn_8008510C(void);
 extern void fn_800DC12C(void);
 extern void fn_8022AB18(void);
 extern void fn_8022ADB8(void);
-extern void fn_8022B114(void);
-extern void fn_8022B848(void);
+extern void texCache_freeBlock(void);
+extern void* fn_8022B848(void*, u32, u32);
 extern void fn_8022B84C(void);
 extern u32 strlen(const char* str);
 
@@ -31,13 +31,13 @@ extern u32 lbl_8087EF08;
 
 /* Function declarations */
 void fn_80084110(void);
-void fn_80084320(void);
-void fn_800844D8(void);
+void mem_alloc(void);
+void mem_free(void);
 void dtor_80084684(void);
-void fn_800846FC(void);
+void mem_realloc(void);
 void fn_800848B4(void);
 void fn_80084A78(void);
-void fn_80084C24(void);
+void mem_getAllocSize(void);
 void fn_80084DC8(void);
 void fn_80084E00(void);
 void fn_80084E08(void);
@@ -47,7 +47,7 @@ void fn_80084E4C(void);
 void fn_80084E50(void);
 void fn_80084E78(void);
 void fn_80084EE8(void);
-void fn_80084F30(void);
+void* field_getTextureSlot(void* field, u32 arg2, u32 arg3);
 void fn_80084F58(void);
 void fn_80084F6C(void);
 void fn_80084F7C(void);
@@ -203,7 +203,7 @@ lbl_fn_80084110_000001F0:
     blr
 }
 
-asm void fn_80084320(void)
+asm void mem_alloc(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -216,7 +216,7 @@ asm void fn_80084320(void)
     mr r29, r3
     lbz r0, lbl_8087EF08
     extsb. r0, r0
-    bne lbl_fn_80084320_00000394
+    bne lbl_mem_alloc_00000394
     lis r8, lbl_807C709C@ha
     lis r5, lbl_80778598@ha
     addi r31, r8, lbl_807C709C@l
@@ -239,20 +239,20 @@ asm void fn_80084320(void)
     stw r7, 0x54(r31)
     stw r7, 0x48(r31)
     stw r7, 0x4c(r31)
-    bge lbl_fn_80084320_000002C4
+    bge lbl_mem_alloc_000002C4
     addi r0, r3, 0xf
     subf r0, r9, r0
     srwi r0, r0, 4
     mtctr r0
-    bge lbl_fn_80084320_000002C4
-lbl_fn_80084320_000002AC:
+    bge lbl_mem_alloc_000002C4
+lbl_mem_alloc_000002AC:
     stw r7, 0x8(r9)
     stw r7, 0xc(r9)
     stw r7, 0x0(r9)
     stw r7, 0x4(r9)
     addi r9, r9, 0x10
-    bdnz lbl_fn_80084320_000002AC
-lbl_fn_80084320_000002C4:
+    bdnz lbl_mem_alloc_000002AC
+lbl_mem_alloc_000002C4:
     addi r7, r31, 0xe8
     addi r3, r31, 0x138
     lis r6, lbl_80778560@ha
@@ -270,20 +270,20 @@ lbl_fn_80084320_000002C4:
     stw r5, 0xe4(r31)
     stw r5, 0xd8(r31)
     stw r5, 0xdc(r31)
-    bge lbl_fn_80084320_00000338
+    bge lbl_mem_alloc_00000338
     addi r0, r3, 0xf
     subf r0, r7, r0
     srwi r0, r0, 4
     mtctr r0
-    bge lbl_fn_80084320_00000338
-lbl_fn_80084320_00000320:
+    bge lbl_mem_alloc_00000338
+lbl_mem_alloc_00000320:
     stw r5, 0x8(r7)
     stw r5, 0xc(r7)
     stw r5, 0x0(r7)
     stw r5, 0x4(r7)
     addi r7, r7, 0x10
-    bdnz lbl_fn_80084320_00000320
-lbl_fn_80084320_00000338:
+    bdnz lbl_mem_alloc_00000320
+lbl_mem_alloc_00000338:
     addi r3, r31, 0x138
     bl fn_80084E50
     addi r3, r31, 0x150
@@ -307,7 +307,7 @@ lbl_fn_80084320_00000338:
     bl __register_global_object
     li r0, 0x1
     stb r0, lbl_8087EF08
-lbl_fn_80084320_00000394:
+lbl_mem_alloc_00000394:
     lis r3, lbl_807C709C@ha
     mr r4, r29
     addi r3, r3, lbl_807C709C@l
@@ -323,7 +323,7 @@ lbl_fn_80084320_00000394:
     blr
 }
 
-asm void fn_800844D8(void)
+asm void mem_free(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -334,7 +334,7 @@ asm void fn_800844D8(void)
     mr r30, r3
     lbz r0, lbl_8087EF08
     extsb. r0, r0
-    bne lbl_fn_800844D8_00000544
+    bne lbl_mem_free_00000544
     lis r8, lbl_807C709C@ha
     lis r5, lbl_80778598@ha
     addi r31, r8, lbl_807C709C@l
@@ -357,20 +357,20 @@ asm void fn_800844D8(void)
     stw r7, 0x54(r31)
     stw r7, 0x48(r31)
     stw r7, 0x4c(r31)
-    bge lbl_fn_800844D8_00000474
+    bge lbl_mem_free_00000474
     addi r0, r3, 0xf
     subf r0, r9, r0
     srwi r0, r0, 4
     mtctr r0
-    bge lbl_fn_800844D8_00000474
-lbl_fn_800844D8_0000045C:
+    bge lbl_mem_free_00000474
+lbl_mem_free_0000045C:
     stw r7, 0x8(r9)
     stw r7, 0xc(r9)
     stw r7, 0x0(r9)
     stw r7, 0x4(r9)
     addi r9, r9, 0x10
-    bdnz lbl_fn_800844D8_0000045C
-lbl_fn_800844D8_00000474:
+    bdnz lbl_mem_free_0000045C
+lbl_mem_free_00000474:
     addi r7, r31, 0xe8
     addi r3, r31, 0x138
     lis r6, lbl_80778560@ha
@@ -388,20 +388,20 @@ lbl_fn_800844D8_00000474:
     stw r5, 0xe4(r31)
     stw r5, 0xd8(r31)
     stw r5, 0xdc(r31)
-    bge lbl_fn_800844D8_000004E8
+    bge lbl_mem_free_000004E8
     addi r0, r3, 0xf
     subf r0, r7, r0
     srwi r0, r0, 4
     mtctr r0
-    bge lbl_fn_800844D8_000004E8
-lbl_fn_800844D8_000004D0:
+    bge lbl_mem_free_000004E8
+lbl_mem_free_000004D0:
     stw r5, 0x8(r7)
     stw r5, 0xc(r7)
     stw r5, 0x0(r7)
     stw r5, 0x4(r7)
     addi r7, r7, 0x10
-    bdnz lbl_fn_800844D8_000004D0
-lbl_fn_800844D8_000004E8:
+    bdnz lbl_mem_free_000004D0
+lbl_mem_free_000004E8:
     addi r3, r31, 0x138
     bl fn_80084E50
     addi r3, r31, 0x150
@@ -425,7 +425,7 @@ lbl_fn_800844D8_000004E8:
     bl __register_global_object
     li r0, 0x1
     stb r0, lbl_8087EF08
-lbl_fn_800844D8_00000544:
+lbl_mem_free_00000544:
     lis r3, lbl_807C709C@ha
     mr r4, r30
     addi r3, r3, lbl_807C709C@l
@@ -476,7 +476,7 @@ lbl_dtor_80084684_000005C4:
     blr
 }
 
-asm void fn_800846FC(void)
+asm void mem_realloc(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -489,7 +489,7 @@ asm void fn_800846FC(void)
     mr r29, r3
     lbz r0, lbl_8087EF08
     extsb. r0, r0
-    bne lbl_fn_800846FC_00000770
+    bne lbl_mem_realloc_00000770
     lis r8, lbl_807C709C@ha
     lis r5, lbl_80778598@ha
     addi r31, r8, lbl_807C709C@l
@@ -512,20 +512,20 @@ asm void fn_800846FC(void)
     stw r7, 0x54(r31)
     stw r7, 0x48(r31)
     stw r7, 0x4c(r31)
-    bge lbl_fn_800846FC_000006A0
+    bge lbl_mem_realloc_000006A0
     addi r0, r3, 0xf
     subf r0, r9, r0
     srwi r0, r0, 4
     mtctr r0
-    bge lbl_fn_800846FC_000006A0
-lbl_fn_800846FC_00000688:
+    bge lbl_mem_realloc_000006A0
+lbl_mem_realloc_00000688:
     stw r7, 0x8(r9)
     stw r7, 0xc(r9)
     stw r7, 0x0(r9)
     stw r7, 0x4(r9)
     addi r9, r9, 0x10
-    bdnz lbl_fn_800846FC_00000688
-lbl_fn_800846FC_000006A0:
+    bdnz lbl_mem_realloc_00000688
+lbl_mem_realloc_000006A0:
     addi r7, r31, 0xe8
     addi r3, r31, 0x138
     lis r6, lbl_80778560@ha
@@ -543,20 +543,20 @@ lbl_fn_800846FC_000006A0:
     stw r5, 0xe4(r31)
     stw r5, 0xd8(r31)
     stw r5, 0xdc(r31)
-    bge lbl_fn_800846FC_00000714
+    bge lbl_mem_realloc_00000714
     addi r0, r3, 0xf
     subf r0, r7, r0
     srwi r0, r0, 4
     mtctr r0
-    bge lbl_fn_800846FC_00000714
-lbl_fn_800846FC_000006FC:
+    bge lbl_mem_realloc_00000714
+lbl_mem_realloc_000006FC:
     stw r5, 0x8(r7)
     stw r5, 0xc(r7)
     stw r5, 0x0(r7)
     stw r5, 0x4(r7)
     addi r7, r7, 0x10
-    bdnz lbl_fn_800846FC_000006FC
-lbl_fn_800846FC_00000714:
+    bdnz lbl_mem_realloc_000006FC
+lbl_mem_realloc_00000714:
     addi r3, r31, 0x138
     bl fn_80084E50
     addi r3, r31, 0x150
@@ -580,7 +580,7 @@ lbl_fn_800846FC_00000714:
     bl __register_global_object
     li r0, 0x1
     stb r0, lbl_8087EF08
-lbl_fn_800846FC_00000770:
+lbl_mem_realloc_00000770:
     lis r3, lbl_807C709C@ha
     mr r4, r29
     addi r3, r3, lbl_807C709C@l
@@ -836,7 +836,7 @@ lbl_fn_80084A78_00000AE4:
     blr
 }
 
-asm void fn_80084C24(void)
+asm void mem_getAllocSize(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -847,7 +847,7 @@ asm void fn_80084C24(void)
     mr r30, r3
     lbz r0, lbl_8087EF08
     extsb. r0, r0
-    bne lbl_fn_80084C24_00000C90
+    bne lbl_mem_getAllocSize_00000C90
     lis r8, lbl_807C709C@ha
     lis r5, lbl_80778598@ha
     addi r31, r8, lbl_807C709C@l
@@ -870,20 +870,20 @@ asm void fn_80084C24(void)
     stw r7, 0x54(r31)
     stw r7, 0x48(r31)
     stw r7, 0x4c(r31)
-    bge lbl_fn_80084C24_00000BC0
+    bge lbl_mem_getAllocSize_00000BC0
     addi r0, r3, 0xf
     subf r0, r9, r0
     srwi r0, r0, 4
     mtctr r0
-    bge lbl_fn_80084C24_00000BC0
-lbl_fn_80084C24_00000BA8:
+    bge lbl_mem_getAllocSize_00000BC0
+lbl_mem_getAllocSize_00000BA8:
     stw r7, 0x8(r9)
     stw r7, 0xc(r9)
     stw r7, 0x0(r9)
     stw r7, 0x4(r9)
     addi r9, r9, 0x10
-    bdnz lbl_fn_80084C24_00000BA8
-lbl_fn_80084C24_00000BC0:
+    bdnz lbl_mem_getAllocSize_00000BA8
+lbl_mem_getAllocSize_00000BC0:
     addi r7, r31, 0xe8
     addi r3, r31, 0x138
     lis r6, lbl_80778560@ha
@@ -901,20 +901,20 @@ lbl_fn_80084C24_00000BC0:
     stw r5, 0xe4(r31)
     stw r5, 0xd8(r31)
     stw r5, 0xdc(r31)
-    bge lbl_fn_80084C24_00000C34
+    bge lbl_mem_getAllocSize_00000C34
     addi r0, r3, 0xf
     subf r0, r7, r0
     srwi r0, r0, 4
     mtctr r0
-    bge lbl_fn_80084C24_00000C34
-lbl_fn_80084C24_00000C1C:
+    bge lbl_mem_getAllocSize_00000C34
+lbl_mem_getAllocSize_00000C1C:
     stw r5, 0x8(r7)
     stw r5, 0xc(r7)
     stw r5, 0x0(r7)
     stw r5, 0x4(r7)
     addi r7, r7, 0x10
-    bdnz lbl_fn_80084C24_00000C1C
-lbl_fn_80084C24_00000C34:
+    bdnz lbl_mem_getAllocSize_00000C1C
+lbl_mem_getAllocSize_00000C34:
     addi r3, r31, 0x138
     bl fn_80084E50
     addi r3, r31, 0x150
@@ -938,7 +938,7 @@ lbl_fn_80084C24_00000C34:
     bl __register_global_object
     li r0, 0x1
     stb r0, lbl_8087EF08
-lbl_fn_80084C24_00000C90:
+lbl_mem_getAllocSize_00000C90:
     lis r3, lbl_807C709C@ha
     mr r4, r30
     addi r3, r3, lbl_807C709C@l
@@ -1088,20 +1088,12 @@ asm void fn_80084EE8(void)
     blr
 }
 
-asm void fn_80084F30(void)
+void* field_getTextureSlot(void* field, u32 arg2, u32 arg3)
 {
-    nofralloc
-    lwz r0, 0x4(r3)
-    mr r6, r4
-    cmpwi r0, 0x0
-    beq lbl_fn_80084F30_00000E40
-    lwz r3, 0x14(r3)
-    mr r4, r5
-    mr r5, r6
-    b fn_8022B848
-lbl_fn_80084F30_00000E40:
-    li r3, 0x0
-    blr
+    if (*(void**)((char*)field + 0x4) != NULL) {
+        return fn_8022B848(*(void**)((char*)field + 0x14), arg3, arg2);
+    }
+    return NULL;
 }
 
 asm void fn_80084F58(void)
@@ -1110,7 +1102,7 @@ asm void fn_80084F58(void)
     lwz r3, 0x14(r3)
     cmpwi r3, 0x0
     beqlr
-    b fn_8022B114
+    b texCache_freeBlock
     blr
 }
 

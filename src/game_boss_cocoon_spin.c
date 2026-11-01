@@ -4,25 +4,25 @@
 /* External function declarations */
 extern void __files(void);
 extern void dtor_80084684(void);
-extern void fn_8006A950(void);
+extern void atn_normalizePath(char* str);
 extern void fn_8006B404(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_80084A78(void);
-extern void fn_80084C24(void);
-extern void fn_800DC6B4(void);
+extern void mem_getAllocSize(void);
+extern void str_findChar(void);
 extern void fn_800DCA6C(void);
-extern void fn_8046C3FC(void);
+extern void atn_Arc_decompressChunk(void);
 extern void fn_8046D1EC(void);
 extern void fn_8046F5CC(void);
 extern void fn_8046F834(void);
 extern void fn_80472FAC(void);
 extern void fn_804730D4(void);
 extern void fn_80473104(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 extern void fn_806952C4(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -52,7 +52,7 @@ void fn_8047123C(void);
 void fn_804714A4(void);
 void fn_804714B0(void);
 void fn_804716B8(void);
-void fn_80471FD0(void);
+void atn_Curve_evalHermite(void);
 
 asm void fn_80470604(void)
 {
@@ -69,11 +69,11 @@ asm void fn_80470604(void)
     mr r28, r5
     bl fn_8046D1EC
     addi r3, r1, 0x10
-    bl fn_8006A950
+    bl atn_normalizePath
     addi r3, r1, 0x10
     bl fn_8006B404
     addi r3, r1, 0x10
-    bl fn_800DC6B4
+    bl str_findChar
     cmpwi r28, 0x0
     mr r5, r3
     li r29, 0x0
@@ -113,7 +113,7 @@ lbl_fn_80470604_000000AC:
     li r4, 0x2
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_80470604_000000E8
@@ -123,12 +123,12 @@ lbl_fn_80470604_000000AC:
 lbl_fn_80470604_000000E8:
     mr r3, r31
     mr r4, r29
-    bl fn_8046C3FC
+    bl atn_Arc_decompressChunk
     cmpwi r3, 0x0
     beq lbl_fn_80470604_00000188
     addi r28, r31, 0x3ed0
     li r3, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_80470604_00000134
@@ -138,8 +138,8 @@ lbl_fn_80470604_000000E8:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80779810@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80470604_00000134:
     addic. r3, r30, 0x8
     addi r0, r31, 0x3ed0
@@ -1313,7 +1313,7 @@ lbl_fn_804714B0_00000F90:
     stw r5, 0x24(r1)
     stw r4, 0x28(r1)
     stw r0, 0x2c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_804714B0_00001088
     lwz r0, 0x0(r16)
@@ -1332,7 +1332,7 @@ lbl_fn_804714B0_00000F90:
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r28, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_804714B0_00001014
     stw r29, 0x4(r3)
@@ -1345,7 +1345,7 @@ lbl_fn_804714B0_00001014:
     stw r25, 0x10(r1)
     beq lbl_fn_804714B0_0000102C
     li r3, 0x0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_804714B0_0000102C:
     lwz r3, 0x1c(r1)
     addi r4, r26, lbl_80775BC8@l
@@ -2102,7 +2102,7 @@ lbl_fn_804716B8_000019AC:
     blr
 }
 
-asm void fn_80471FD0(void)
+asm void atn_Curve_evalHermite(void)
 {
     nofralloc
     fres f11, f2

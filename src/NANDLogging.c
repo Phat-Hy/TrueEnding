@@ -13,7 +13,7 @@ extern void fn_8061BB80(void);
 extern void fn_80622170(void);
 extern void fn_806809C0(void);
 extern void fn_8068236C(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void vsnprintf(void);
 
 /* External data declarations */
@@ -255,7 +255,7 @@ lbl_asyncRoutine_00000308:
     addi r3, r31, 0x100
     li r0, 0x0
     stb r0, 0xff(r3)
-    bl fn_80684600
+    bl atoi
     mr r30, r3
     addi r3, r31, 0x200
     li r4, 0x20
@@ -345,7 +345,7 @@ lbl_asyncRoutine_0000046C:
     cmpwi r3, 0x100
     bne lbl_asyncRoutine_000004CC
     addi r3, r31, 0x100
-    bl fn_80684600
+    bl atoi
     mr r0, r3
     lis r6, asyncRoutine@ha
     lwz r3, lbl_8087E930
@@ -377,7 +377,7 @@ lbl_asyncRoutine_000004EC:
     cmpwi r0, 0x7
     bne lbl_asyncRoutine_0000056C
     addi r3, r31, 0x100
-    bl fn_80684600
+    bl atoi
     slwi r0, r3, 8
     cmpw r30, r0
     bne lbl_asyncRoutine_0000054C

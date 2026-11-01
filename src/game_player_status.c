@@ -9,10 +9,10 @@ extern void fn_800A5870(void);
 extern void fn_800A58D0(void);
 extern void fn_80122C70(void);
 extern void fn_8017C974(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9750(void);
-extern void fn_805F9940(void);
-extern void fn_8068AEA4(void);
+extern void PSMTXRotRad(void);
+extern void PSMTX44Identity(void);
+extern void PSVECMag(void);
+extern void std_atan2(void);
 
 /* External data declarations */
 extern u8 jumptable_8077A5A8[];
@@ -1005,7 +1005,7 @@ asm void fn_801248DC(void)
     fneg f0, f1
     addi r3, r1, 0x50
     stfs f0, 0x58(r1)
-    bl fn_805F9940
+    bl PSVECMag
     cmpwi r30, 0x0
     fmr f31, f1
     beq lbl_fn_801248DC_00000EAC
@@ -1029,7 +1029,7 @@ lbl_fn_801248DC_00000D24:
     b lbl_fn_801248DC_00000D3C
 lbl_fn_801248DC_00000D2C:
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0xc(r1)
 lbl_fn_801248DC_00000D3C:
@@ -1037,7 +1037,7 @@ lbl_fn_801248DC_00000D3C:
     addi r3, r1, 0xa0
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80881818
     addi r4, r1, 0x14
     lfs f4, 0xa8(r1)
@@ -1087,7 +1087,7 @@ lbl_fn_801248DC_00000D3C:
     stfs f13, 0x8c(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x1c(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x1c(r1)
     lfs f0, lbl_80881838
     fabs f3, f2
@@ -1108,7 +1108,7 @@ lbl_fn_801248DC_00000E4C:
     b lbl_fn_801248DC_00000E6C
 lbl_fn_801248DC_00000E58:
     lfs f1, 0x18(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x8(r1)

@@ -4,21 +4,21 @@
 /* External function declarations */
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_80042108(void);
 extern void fn_8004AD9C(void);
 extern void fn_8006A250(void);
 extern void fn_80079044(void);
-extern void fn_80084320(void);
-extern void fn_800874C8(void);
-extern void fn_8008771C(void);
+extern void mem_alloc(void);
+extern void route_findNextWaypoint(void);
+extern void route_interpolatePath(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
 extern void fn_800C16C0(void);
 extern void fn_800C1814(void);
 extern void fn_800C2448(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D246C(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D94F8(void);
 extern void fn_800F7260(void);
 extern void fn_800F8524(void);
@@ -33,14 +33,14 @@ extern void fn_8047DC98(void);
 extern void fn_8053B02C(void);
 extern void fn_805412AC(void);
 extern void fn_8054E578(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9190(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9750(void);
-extern void fn_805F98D0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXQuat(void);
+extern void PSMTXMultVec(void);
+extern void PSMTX44Identity(void);
+extern void PSVECNormalize(void);
 extern void fn_805F9D20(void);
-extern void fn_80682428(void);
-extern void fn_8068AEA4(void);
+extern void strcmp(void);
+extern void std_atan2(void);
 extern void fn_806958E0(void);
 extern void fn_80695B00(void);
 extern void fn_8072D210(void);
@@ -96,7 +96,7 @@ extern u32 lbl_80886FEC;
 extern u32 lbl_80886FF0;
 
 /* Function declarations */
-void fn_8047B594(void);
+void atn_TaskEntry_zeroInit(void* obj);
 void fn_8047B5A0(void);
 void fn_8047B5CC(void);
 void fn_8047B684(void);
@@ -105,11 +105,11 @@ void fn_8047B768(void);
 void fn_8047BBBC(void);
 void fn_8047BFF4(void);
 void fn_8047C1D8(void);
-void fn_8047C770(void);
-void fn_8047C778(void);
-void fn_8047C780(void);
+void* fn_8047C770(void* obj);
+void* fn_8047C778(void* obj);
+void* fn_8047C780(void* obj);
 void fn_8047C788(void);
-void fn_8047C7D4(void);
+void* fn_8047C7D4(void* obj);
 void fn_8047C7DC(void);
 void fn_8047C7FC(void);
 void fn_8047C848(void);
@@ -126,12 +126,9 @@ void fn_8047CEBC(void);
 void fn_8047CF48(void);
 void fn_8047CF7C(void);
 
-asm void fn_8047B594(void)
+void atn_TaskEntry_zeroInit(void* obj)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    blr
+    *(u32*)obj = 0;
 }
 
 asm void fn_8047B5A0(void)
@@ -187,7 +184,7 @@ lbl_fn_8047B5CC_000000A0:
     lis r3, lbl_80790090@ha
     lwz r4, lbl_80790090@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_8047B5CC_000000D0
@@ -258,7 +255,7 @@ lbl_fn_8047B6B0_00000184:
     lis r3, lbl_80790098@ha
     lwz r4, lbl_80790098@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_8047B6B0_000001B4
@@ -1148,7 +1145,7 @@ lbl_fn_8047C1D8_00000CC4:
 lbl_fn_8047C1D8_00000CCC:
     frsp f2, f2
     lfs f1, 0xe4(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0xc0(r1)
 lbl_fn_8047C1D8_00000CE0:
@@ -1156,7 +1153,7 @@ lbl_fn_8047C1D8_00000CE0:
     addi r3, r1, 0x180
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80886F8C
     addi r4, r1, 0xb0
     lfs f30, 0x188(r1)
@@ -1206,7 +1203,7 @@ lbl_fn_8047C1D8_00000CE0:
     stfs f6, 0x1dc(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0xb8(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0xb8(r1)
     lfs f0, lbl_80886F80
     fabs f3, f2
@@ -1227,7 +1224,7 @@ lbl_fn_8047C1D8_00000DF0:
     b lbl_fn_8047C1D8_00000E10
 lbl_fn_8047C1D8_00000DFC:
     lfs f1, 0xb4(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0xbc(r1)
@@ -1310,7 +1307,7 @@ lbl_fn_8047C1D8_00000F2C:
 lbl_fn_8047C1D8_00000F34:
     frsp f2, f2
     lfs f1, 0xd8(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x78(r1)
 lbl_fn_8047C1D8_00000F48:
@@ -1318,7 +1315,7 @@ lbl_fn_8047C1D8_00000F48:
     addi r3, r1, 0x110
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80886F8C
     addi r4, r1, 0x68
     lfs f30, 0x118(r1)
@@ -1368,7 +1365,7 @@ lbl_fn_8047C1D8_00000F48:
     stfs f6, 0x16c(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x70(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x70(r1)
     lfs f0, lbl_80886F80
     fabs f3, f2
@@ -1389,7 +1386,7 @@ lbl_fn_8047C1D8_00001058:
     b lbl_fn_8047C1D8_00001078
 lbl_fn_8047C1D8_00001064:
     lfs f1, 0x6c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x74(r1)
@@ -1465,11 +1462,11 @@ lbl_fn_8047C1D8_00001078:
     stfs f3, 0x0(r29)
     stfs f3, 0x4(r29)
     stfs f0, 0x8(r29)
-    bl fn_805F9190
+    bl PSMTXQuat
     mr r4, r29
     mr r5, r29
     addi r3, r1, 0x1f0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lwz r0, 0x264(r1)
     psq_l f31, 0x258(r1), 0, 0
     lfd f31, 0x250(r1)
@@ -1485,25 +1482,19 @@ lbl_fn_8047C1D8_00001078:
     blr
 }
 
-asm void fn_8047C770(void)
+void* fn_8047C770(void* obj)
 {
-    nofralloc
-    addi r3, r3, 0x3c
-    blr
+    return (char*)obj + 0x3c;
 }
 
-asm void fn_8047C778(void)
+void* fn_8047C778(void* obj)
 {
-    nofralloc
-    addi r3, r3, 0x2c
-    blr
+    return (char*)obj + 0x2c;
 }
 
-asm void fn_8047C780(void)
+void* fn_8047C780(void* obj)
 {
-    nofralloc
-    addi r3, r3, 0x198
-    blr
+    return (char*)obj + 0x198;
 }
 
 asm void fn_8047C788(void)
@@ -1530,11 +1521,9 @@ asm void fn_8047C788(void)
     blr
 }
 
-asm void fn_8047C7D4(void)
+void* fn_8047C7D4(void* obj)
 {
-    nofralloc
-    addi r3, r3, 0x238
-    blr
+    return (char*)obj + 0x238;
 }
 
 asm void fn_8047C7DC(void)
@@ -1874,7 +1863,7 @@ asm void fn_8047CB74(void)
     bl fn_8047C780
     addi r3, r3, 0x38
     addi r4, r1, 0x38
-    bl fn_8000D124
+    bl vec3_copy
     mr r3, r28
     bl fn_8047C780
     fmr f1, f30
@@ -2108,7 +2097,7 @@ asm void fn_8047CF7C(void)
     addi r11, r1, 0x150
     bl _savegpr_26
     mr r31, r3
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lfs f0, lbl_80886F90
     lis r3, lbl_807900C0@ha
     li r30, 0x0
@@ -2306,7 +2295,7 @@ asm void fn_8047CF7C(void)
     stfs f2, 0xdc(r1)
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0xd0(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f8, lbl_80886F8C
     addi r7, r1, 0x88
     lfs f9, lbl_80886F90
@@ -2605,7 +2594,7 @@ lbl_fn_8047CF7C_000020F0:
     bl fn_801F3FF8
     stw r3, 0x1a7c(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     addi r4, r29, lbl_80756380@l
     mr r3, r31
     addi r4, r4, 0x22
@@ -2613,7 +2602,7 @@ lbl_fn_8047CF7C_000020F0:
     bl fn_801F3FF8
     stw r3, 0x1a80(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r31
     li r4, 0x0
     li r5, 0x0
@@ -2621,7 +2610,7 @@ lbl_fn_8047CF7C_000020F0:
     bl fn_8006A250
     stw r3, 0x1aa8(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     stw r30, 0x1aa0(r31)
     stw r30, 0x1aa4(r31)
     stw r30, 0x1aac(r31)
@@ -2633,12 +2622,12 @@ lbl_fn_8047CF7C_000020F0:
     la r5, lbl_8087E0B4
     la r6, lbl_8087E0B0
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_fn_8047CF7C_00002238
     mr r4, r31
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_80790130@ha
     addi r3, r3, lbl_80790130@l
     stw r3, 0x0(r27)
@@ -2653,12 +2642,12 @@ lbl_fn_8047CF7C_0000223C:
     la r5, lbl_8087E0AC
     la r6, lbl_8087E0A8
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_fn_8047CF7C_00002280
     mr r4, r31
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_807900F8@ha
     addi r3, r3, lbl_807900F8@l
     stw r3, 0x0(r27)
@@ -2724,7 +2713,7 @@ lbl_fn_8047CF7C_000022C8:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r27
     addi r4, r29, 0xab
     addi r5, r31, 0x1f64
@@ -2733,7 +2722,7 @@ lbl_fn_8047CF7C_000022C8:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r27
     addi r4, r29, 0xb8
     addi r5, r31, 0x238c
@@ -2742,7 +2731,7 @@ lbl_fn_8047CF7C_000022C8:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r27
     addi r4, r29, 0xc3
     bl fn_8008937C
@@ -2754,7 +2743,7 @@ lbl_fn_8047CF7C_000022C8:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80886F8C
     mr r3, r26
     lfs f2, lbl_80886F90
@@ -2763,7 +2752,7 @@ lbl_fn_8047CF7C_000022C8:
     addi r5, r31, 0x2410
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80886F8C
     mr r3, r26
     lfs f2, lbl_80886F90
@@ -2772,7 +2761,7 @@ lbl_fn_8047CF7C_000022C8:
     addi r5, r31, 0x2414
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80886F8C
     mr r3, r26
     lfs f2, lbl_80886F90
@@ -2781,7 +2770,7 @@ lbl_fn_8047CF7C_000022C8:
     addi r5, r31, 0x2418
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80886F8C
     mr r3, r27
     lfs f2, lbl_80886FB4
@@ -2790,7 +2779,7 @@ lbl_fn_8047CF7C_000022C8:
     addi r5, r31, 0x5c
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80886F8C
     mr r3, r27
     lfs f2, lbl_80886FB4
@@ -2799,7 +2788,7 @@ lbl_fn_8047CF7C_000022C8:
     addi r5, r31, 0x60
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80886F90
     mr r3, r27
     lfs f2, lbl_80886FD0
@@ -2808,7 +2797,7 @@ lbl_fn_8047CF7C_000022C8:
     addi r5, r31, 0x1a58
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     addi r3, r31, 0x1eb8
     addi r4, r29, 0x12c
     bl fn_800C1814
@@ -2880,21 +2869,21 @@ lbl_fn_8047CF7C_000022C8:
     bl fn_801F3FF8
     stw r3, 0x23ac(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r31
     addi r4, r29, 0x14d
     li r5, 0x0
     bl fn_801F3FF8
     stw r3, 0x23b0(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r31
     addi r4, r29, 0x16c
     li r5, 0x0
     bl fn_801F3FF8
     stw r3, 0x48(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lis r4, lbl_807C7030@ha
     addi r6, r1, 0xec
     addi r4, r4, lbl_807C7030@l
@@ -2914,7 +2903,7 @@ lbl_fn_8047CF7C_000022C8:
     bl fn_801F3FF8
     stw r3, 0x241c(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lis r6, lbl_807C7028@ha
     addi r4, r31, 0x2424
     addi r6, r6, lbl_807C7028@l
@@ -2931,7 +2920,7 @@ lbl_fn_8047CF7C_000022C8:
     bl fn_801F3FF8
     stw r3, 0x2438(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_80886F8C
     addi r4, r1, 0xe0
     stfs f0, 0xe0(r1)

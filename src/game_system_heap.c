@@ -6,14 +6,14 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8006F72C(void);
-extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_realloc(void);
+extern void mem_getAllocSize(void);
 extern void fn_800A6BD4(void);
-extern void fn_800D5738(void);
-extern void fn_800D5808(void);
-extern void fn_800D58A4(void);
+struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
+extern void atn_LH_Texture_destructAndFree(void);
+extern void atn_LH_Texture_release(void);
 extern void fn_800DBF68(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800DD3FC(void);
 extern void fn_801EC158(void);
 extern void fn_801EC6C0(void);
@@ -44,7 +44,7 @@ void fn_801F9488(void);
 void fn_801F94F4(void);
 void fn_801F97A8(void);
 void fn_801F9860(void);
-void fn_801F9E6C(void);
+void player_dummyCallback(void);
 void fn_801F9E70(void);
 
 asm void fn_801F8FE4(void)
@@ -61,7 +61,7 @@ asm void fn_801F8FE4(void)
     mr r3, r4
     stb r0, 0x8(r1)
     stb r0, 0x9(r1)
-    bl fn_800DC6B4
+    bl str_findChar
     lbz r4, 0x9(r1)
     mr r7, r31
     lbz r0, 0x8(r1)
@@ -134,7 +134,7 @@ asm void fn_801F90E0(void)
     mr r3, r4
     stb r0, 0x8(r1)
     stb r5, 0x9(r1)
-    bl fn_800DC6B4
+    bl str_findChar
     lbz r4, 0x9(r1)
     mr r7, r31
     lbz r0, 0x8(r1)
@@ -242,7 +242,7 @@ lbl_fn_801F91DC_0000027C:
     mr r3, r29
     stw r0, 0x28(r1)
     stw r0, 0x2c(r1)
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r0, 0x24(r1)
     stw r3, 0x20(r1)
     srwi. r0, r0, 31
@@ -478,9 +478,9 @@ lbl_fn_801F94F4_000005B4:
     bdnz lbl_fn_801F94F4_000005B4
 lbl_fn_801F94F4_000005C4:
     addi r3, r30, 0x194
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     addi r3, r30, 0x1c4
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     addi r5, r30, 0x1f8
     addi r3, r30, 0x204
     cmplw r5, r3
@@ -522,7 +522,7 @@ lbl_fn_801F94F4_00000644:
     crclr 6
     bl sprintf
     addi r3, r1, 0x8
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x12c(r30)
     addi r3, r30, 0x130
     lfs f1, lbl_80882CA0
@@ -567,7 +567,7 @@ lbl_fn_801F94F4_000006CC:
     crclr 6
     bl sprintf
     addi r3, r1, 0x8
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x160(r30)
     addi r3, r30, 0x164
     lfs f1, lbl_80882CA0
@@ -629,9 +629,9 @@ asm void fn_801F97A8(void)
     addi r4, r4, lbl_80782D80@l
     stw r4, 0x0(r3)
     addi r3, r3, 0x194
-    bl fn_800D58A4
+    bl atn_LH_Texture_release
     addi r3, r30, 0x1c4
-    bl fn_800D58A4
+    bl atn_LH_Texture_release
     lwz r3, 0xfc(r30)
     cmpwi r3, 0x0
     beq lbl_fn_801F97A8_0000082C
@@ -645,10 +645,10 @@ asm void fn_801F97A8(void)
 lbl_fn_801F97A8_0000082C:
     addi r3, r30, 0x1c4
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addi r3, r30, 0x194
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     mr r3, r30
     li r4, 0x0
     bl fn_801EC6C0
@@ -696,7 +696,7 @@ lbl_fn_801F9860_000008C4:
     la r5, lbl_8087DB04
     la r6, lbl_8087DB00
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x30(r28)
     mr r30, r3
     cmpwi r0, 0x0
@@ -772,7 +772,7 @@ lbl_fn_801F9860_000009E4:
     bdnz lbl_fn_801F9860_000009E4
 lbl_fn_801F9860_000009FC:
     lwz r3, 0x30(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801F9860_00000A04:
     stw r30, 0x30(r28)
     li r0, 0x8
@@ -790,7 +790,7 @@ lbl_fn_801F9860_00000A14:
     la r5, lbl_8087DB04
     la r6, lbl_8087DB00
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x30(r28)
     mr r29, r3
     cmpwi r0, 0x0
@@ -866,7 +866,7 @@ lbl_fn_801F9860_00000B40:
     bdnz lbl_fn_801F9860_00000B40
 lbl_fn_801F9860_00000B58:
     lwz r3, 0x30(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801F9860_00000B60:
     stw r29, 0x30(r28)
     stw r30, 0x2c(r28)
@@ -895,7 +895,7 @@ lbl_fn_801F9860_00000BA4:
     la r5, lbl_8087DB04
     la r6, lbl_8087DB00
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x30(r30)
     mr r29, r3
     cmpwi r0, 0x0
@@ -971,7 +971,7 @@ lbl_fn_801F9860_00000CC4:
     bdnz lbl_fn_801F9860_00000CC4
 lbl_fn_801F9860_00000CDC:
     lwz r3, 0x30(r30)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801F9860_00000CE4:
     stw r29, 0x30(r30)
     li r0, 0x8
@@ -989,7 +989,7 @@ lbl_fn_801F9860_00000CF4:
     la r5, lbl_8087DB04
     la r6, lbl_8087DB00
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x30(r30)
     mr r28, r3
     cmpwi r0, 0x0
@@ -1065,7 +1065,7 @@ lbl_fn_801F9860_00000E20:
     bdnz lbl_fn_801F9860_00000E20
 lbl_fn_801F9860_00000E38:
     lwz r3, 0x30(r30)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801F9860_00000E40:
     stw r28, 0x30(r30)
     stw r29, 0x2c(r30)
@@ -1089,10 +1089,8 @@ lbl_fn_801F9860_00000E68:
     blr
 }
 
-asm void fn_801F9E6C(void)
+void player_dummyCallback(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_801F9E70(void)

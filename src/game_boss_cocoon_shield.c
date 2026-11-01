@@ -7,13 +7,13 @@ extern void DCZeroRange(void);
 extern void __files(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
-extern void fn_8000EB8C(void);
+extern void sys_copyString(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8003E4A4(void);
 extern void fn_8004212C(void);
 extern void fn_80042218(void);
-extern void fn_8005B710(void);
+extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
 extern void fn_8006A9A4(void);
@@ -21,7 +21,7 @@ extern void fn_8006AC08(void);
 extern void fn_8006AF38(void);
 extern void fn_8006B174(void);
 extern void fn_8006BBCC(void);
-extern void fn_8006BC64(void);
+extern void atn_FileList_destructor(void);
 extern void fn_8006C300(void);
 extern void fn_8006C3F0(void);
 extern void fn_8006D008(void);
@@ -29,10 +29,10 @@ extern void fn_8006F420(void);
 extern void fn_8006F72C(void);
 extern void fn_800827E0(void);
 extern void fn_800839EC(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
-extern void fn_800846FC(void);
-extern void fn_800D5738(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
+extern void mem_realloc(void);
+struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void fn_800D5908(void);
 extern void fn_800DBF68(void);
 extern void fn_800DC1DC(void);
@@ -43,26 +43,26 @@ extern void fn_8046D19C(void);
 extern void fn_8046D1C4(void);
 extern void fn_8046D1CC(void);
 extern void fn_8046DBF8(void);
-extern void fn_8046FBB0(void);
-extern void fn_8046FD1C(void);
+extern void atn_Arc_findFile(void);
+extern void atn_Arc_getFileEntry(void);
 extern void fn_8046FD2C(void);
 extern void fn_80470264(void);
-extern void fn_80470580(void);
+extern void boss_getOffset54(void);
 extern void fn_80473104(void);
-extern void fn_80473EFC(void);
+extern void atn_LoadHandle_getStatus(void);
 extern void fn_805F9EF0(void);
 extern void fn_805FA200(void);
 extern void fn_805FA390(void);
 extern void fn_805FA4E0(void);
 extern void fn_806250D0(void);
 extern void fn_80625110(void);
-extern void fn_806254D0(void);
-extern void fn_80680770(void);
+extern void CXUncompressAny(void);
+extern void printf(void);
 extern void fn_806823B0(void);
-extern void fn_806827C4(void);
+extern void strstr(void);
 extern void fn_80686A48(void);
-extern void fn_80686EA4(void);
-extern void fn_80695720(void);
+extern void abort(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 extern u32 strlen(const char* str);
 
@@ -85,14 +85,14 @@ extern u32 lbl_8087F510;
 /* Function declarations */
 void fn_8046B798(void);
 void fn_8046BB60(void);
-void fn_8046BBB0(void);
+void atn_Arc_initDecompressHeader(void);
 void fn_8046BBE0(void);
-void fn_8046BBF0(void);
+void atn_Arc_decompressEntry(void);
 void fn_8046BEE4(void);
 void fn_8046BF88(void);
 void fn_8046C1C8(void);
-void fn_8046C2D4(void);
-void fn_8046C3FC(void);
+void atn_Arc_loadEntry(void);
+void atn_Arc_decompressChunk(void);
 void fn_8046CBB0(void);
 void fn_8046CBBC(void);
 void fn_8046CBC0(void);
@@ -165,7 +165,7 @@ lbl_fn_8046B798_000000AC:
     li r24, 0x0
 lbl_fn_8046B798_000000DC:
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     lhz r0, 0x0(r3)
     cmplwi r0, 0x23
     beq lbl_fn_8046B798_000000FC
@@ -193,14 +193,14 @@ lbl_fn_8046B798_00000124:
     la r6, lbl_8087E044
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8046BB60@ha
     lis r5, fn_8046A514@ha
     mr r7, r24
     li r6, 0x54
     addi r4, r4, fn_8046BB60@l
     addi r5, r5, fn_8046A514@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x9c(r25)
     b lbl_fn_8046B798_00000178
 lbl_fn_8046B798_00000170:
@@ -226,7 +226,7 @@ lbl_fn_8046B798_00000194:
     li r27, 0x0
 lbl_fn_8046B798_000001B4:
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     lhz r0, 0x0(r3)
     cmplwi r0, 0x23
     beq lbl_fn_8046B798_000003A4
@@ -237,11 +237,11 @@ lbl_fn_8046B798_000001B4:
     bl fn_800DC1DC
     stw r3, 0x0(r28)
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     bl fn_800DC1DC
     stw r3, 0x4(r28)
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     bl fn_800DC1DC
     stw r3, 0x8(r28)
     addi r3, r1, 0x30
@@ -250,7 +250,7 @@ lbl_fn_8046B798_000001B4:
     bl memset
     lwz r24, lbl_8087EEC8
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     mr r5, r3
     mr r3, r24
     addi r4, r1, 0x30
@@ -267,7 +267,7 @@ lbl_fn_8046B798_000001B4:
     bl fn_800D5908
 lbl_fn_8046B798_00000254:
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     lwz r0, 0x3c(r28)
     mr r24, r3
     srwi. r0, r0, 31
@@ -291,7 +291,7 @@ lbl_fn_8046B798_0000027C:
     li r4, 0x0
     bl fn_8006F72C
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     stw r30, 0x20(r1)
     mr r24, r3
     stw r30, 0x24(r1)
@@ -379,7 +379,7 @@ asm void fn_8046BB60(void)
     stw r31, 0xc(r1)
     mr r31, r3
     addi r3, r3, 0xc
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     li r0, 0x0
     stw r0, 0x3c(r31)
     mr r3, r31
@@ -395,7 +395,7 @@ asm void fn_8046BB60(void)
     blr
 }
 
-asm void fn_8046BBB0(void)
+asm void atn_Arc_initDecompressHeader(void)
 {
     nofralloc
     addi r0, r3, 0xb3
@@ -421,7 +421,7 @@ asm void fn_8046BBE0(void)
     blr
 }
 
-asm void fn_8046BBF0(void)
+asm void atn_Arc_decompressEntry(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -432,36 +432,36 @@ asm void fn_8046BBF0(void)
     mr r29, r4
     addi r31, r4, 0x54
     li r27, 0x0
-    b lbl_fn_8046BBF0_000005F4
-lbl_fn_8046BBF0_0000047C:
+    b lbl_atn_Arc_decompressEntry_000005F4
+lbl_atn_Arc_decompressEntry_0000047C:
     lwz r30, 0x0(r31)
     lwz r3, 0x4(r29)
     lwz r4, 0x20(r30)
     cmpwi r4, 0x0
-    beq lbl_fn_8046BBF0_00000520
+    beq lbl_atn_Arc_decompressEntry_00000520
     lwz r0, 0x10(r29)
     cmpwi r0, -0x3
-    beq lbl_fn_8046BBF0_000004CC
+    beq lbl_atn_Arc_decompressEntry_000004CC
     lwz r5, 0x8(r29)
     cmplw r5, r4
-    blt lbl_fn_8046BBF0_000004C0
+    blt lbl_atn_Arc_decompressEntry_000004C0
     lwz r0, 0x1c(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_8046BBF0_000004C0
+    bne lbl_atn_Arc_decompressEntry_000004C0
     lwz r4, 0x8(r30)
-    bl fn_806254D0
-    b lbl_fn_8046BBF0_000004CC
-lbl_fn_8046BBF0_000004C0:
+    bl CXUncompressAny
+    b lbl_atn_Arc_decompressEntry_000004CC
+lbl_atn_Arc_decompressEntry_000004C0:
     mr r4, r3
     addi r3, r30, 0x24
     bl fn_80625110
-lbl_fn_8046BBF0_000004CC:
+lbl_atn_Arc_decompressEntry_000004CC:
     lwz r3, 0x8(r29)
     lwz r0, 0x20(r30)
     cmplw r0, r3
-    bge lbl_fn_8046BBF0_000004E0
+    bge lbl_atn_Arc_decompressEntry_000004E0
     mr r3, r0
-lbl_fn_8046BBF0_000004E0:
+lbl_atn_Arc_decompressEntry_000004E0:
     lwz r0, 0x1c(r30)
     add r3, r0, r3
     stw r3, 0x1c(r30)
@@ -471,20 +471,20 @@ lbl_fn_8046BBF0_000004E0:
     srwi r0, r0, 1
     subf r0, r0, r3
     srwi. r26, r0, 31
-    beq lbl_fn_8046BBF0_00000550
+    beq lbl_atn_Arc_decompressEntry_00000550
     cmpwi r4, 0x0
-    beq lbl_fn_8046BBF0_00000550
+    beq lbl_atn_Arc_decompressEntry_00000550
     lwz r3, 0x8(r30)
     lwz r4, 0x4(r30)
     bl DCFlushRangeNoSync
-    b lbl_fn_8046BBF0_00000550
-lbl_fn_8046BBF0_00000520:
+    b lbl_atn_Arc_decompressEntry_00000550
+lbl_atn_Arc_decompressEntry_00000520:
     lwz r3, 0x8(r29)
     lwz r0, 0x4(r30)
     cmplw r0, r3
-    bge lbl_fn_8046BBF0_00000534
+    bge lbl_atn_Arc_decompressEntry_00000534
     mr r3, r0
-lbl_fn_8046BBF0_00000534:
+lbl_atn_Arc_decompressEntry_00000534:
     lwz r0, 0x1c(r30)
     add r3, r0, r3
     stw r3, 0x1c(r30)
@@ -492,64 +492,64 @@ lbl_fn_8046BBF0_00000534:
     subf r0, r3, r0
     cntlzw r0, r0
     srwi r26, r0, 5
-lbl_fn_8046BBF0_00000550:
+lbl_atn_Arc_decompressEntry_00000550:
     cmpwi r26, 0x0
-    beq lbl_fn_8046BBF0_000005F0
+    beq lbl_atn_Arc_decompressEntry_000005F0
     addi r0, r29, 0x54
     subf r0, r0, r31
     srawi r0, r0, 2
     addze r4, r0
     slwi r0, r4, 2
     add r5, r29, r0
-    b lbl_fn_8046BBF0_00000584
-lbl_fn_8046BBF0_00000574:
+    b lbl_atn_Arc_decompressEntry_00000584
+lbl_atn_Arc_decompressEntry_00000574:
     lwz r0, 0x58(r5)
     addi r4, r4, 0x1
     stw r0, 0x54(r5)
     addi r5, r5, 0x4
-lbl_fn_8046BBF0_00000584:
+lbl_atn_Arc_decompressEntry_00000584:
     lwz r3, 0x50(r29)
     subi r0, r3, 0x1
     cmplw r4, r0
-    blt lbl_fn_8046BBF0_00000574
+    blt lbl_atn_Arc_decompressEntry_00000574
     stw r0, 0x50(r29)
     lwz r4, 0x10(r29)
     lwz r3, 0x8(r30)
     lwz r0, 0x4(r30)
     cmpwi r4, -0x3
     stbx r27, r3, r0
-    bne lbl_fn_8046BBF0_000005C0
+    bne lbl_atn_Arc_decompressEntry_000005C0
     lwz r3, 0x0(r30)
     li r4, 0x3
     bl fn_80473104
-    b lbl_fn_8046BBF0_000005E4
-lbl_fn_8046BBF0_000005C0:
+    b lbl_atn_Arc_decompressEntry_000005E4
+lbl_atn_Arc_decompressEntry_000005C0:
     cmpwi r4, 0x0
-    bge lbl_fn_8046BBF0_000005D8
+    bge lbl_atn_Arc_decompressEntry_000005D8
     lwz r3, 0x0(r30)
     li r4, 0x4
     bl fn_80473104
-    b lbl_fn_8046BBF0_000005E4
-lbl_fn_8046BBF0_000005D8:
+    b lbl_atn_Arc_decompressEntry_000005E4
+lbl_atn_Arc_decompressEntry_000005D8:
     lwz r3, 0x0(r30)
     li r4, 0x2
     bl fn_80473104
-lbl_fn_8046BBF0_000005E4:
+lbl_atn_Arc_decompressEntry_000005E4:
     mr r3, r30
     bl dtor_80084684
-    b lbl_fn_8046BBF0_000005F4
-lbl_fn_8046BBF0_000005F0:
+    b lbl_atn_Arc_decompressEntry_000005F4
+lbl_atn_Arc_decompressEntry_000005F0:
     addi r31, r31, 0x4
-lbl_fn_8046BBF0_000005F4:
+lbl_atn_Arc_decompressEntry_000005F4:
     lwz r0, 0x50(r29)
     slwi r0, r0, 2
     add r3, r29, r0
     addi r0, r3, 0x54
     cmplw r31, r0
-    bne lbl_fn_8046BBF0_0000047C
+    bne lbl_atn_Arc_decompressEntry_0000047C
     lwz r0, 0x50(r29)
     cmpwi r0, 0x0
-    bne lbl_fn_8046BBF0_00000644
+    bne lbl_atn_Arc_decompressEntry_00000644
     li r0, 0x0
     stw r0, 0x0(r29)
     addi r3, r29, 0x14
@@ -560,35 +560,35 @@ lbl_fn_8046BBF0_000005F4:
     subi r0, r4, 0x1
     stw r0, 0xc(r28)
     bl fn_8046BF88
-    b lbl_fn_8046BBF0_00000738
-lbl_fn_8046BBF0_00000644:
+    b lbl_atn_Arc_decompressEntry_00000738
+lbl_atn_Arc_decompressEntry_00000644:
     lwz r27, 0x54(r29)
     lwz r4, 0x20(r27)
     cmpwi r4, 0x0
-    beq lbl_fn_8046BBF0_00000660
+    beq lbl_atn_Arc_decompressEntry_00000660
     addis r3, r29, 0x4
     lwz r6, 0xb4(r3)
-    b lbl_fn_8046BBF0_0000066C
-lbl_fn_8046BBF0_00000660:
+    b lbl_atn_Arc_decompressEntry_0000066C
+lbl_atn_Arc_decompressEntry_00000660:
     lwz r3, 0x8(r27)
     lwz r0, 0x1c(r27)
     add r6, r3, r0
-lbl_fn_8046BBF0_0000066C:
+lbl_atn_Arc_decompressEntry_0000066C:
     cmpwi r4, 0x0
-    ble lbl_fn_8046BBF0_00000694
+    ble lbl_atn_Arc_decompressEntry_00000694
     lwz r0, 0x14(r28)
     lwz r5, 0x1c(r27)
     slwi r7, r0, 10
     subf r0, r5, r4
     cmplw r0, r7
-    bge lbl_fn_8046BBF0_000006A0
+    bge lbl_atn_Arc_decompressEntry_000006A0
     mr r7, r0
-    b lbl_fn_8046BBF0_000006A0
-lbl_fn_8046BBF0_00000694:
+    b lbl_atn_Arc_decompressEntry_000006A0
+lbl_atn_Arc_decompressEntry_00000694:
     lwz r5, 0x1c(r27)
     lwz r0, 0x4(r27)
     subf r7, r5, r0
-lbl_fn_8046BBF0_000006A0:
+lbl_atn_Arc_decompressEntry_000006A0:
     lwz r4, 0x18(r27)
     li r0, 0x1
     li r30, 0x0
@@ -614,7 +614,7 @@ lbl_fn_8046BBF0_000006A0:
     li r8, 0x2
     bl fn_805FA4E0
     cmpwi r3, 0x0
-    bne lbl_fn_8046BBF0_00000738
+    bne lbl_atn_Arc_decompressEntry_00000738
     lwz r3, 0x0(r27)
     li r4, 0x4
     bl fn_80473104
@@ -627,7 +627,7 @@ lbl_fn_8046BBF0_000006A0:
     lwz r3, 0xc(r28)
     subi r0, r3, 0x1
     stw r0, 0xc(r28)
-lbl_fn_8046BBF0_00000738:
+lbl_atn_Arc_decompressEntry_00000738:
     lmw r26, 0x8(r1)
     lwz r0, 0x24(r1)
     mtlr r0
@@ -721,7 +721,7 @@ lbl_fn_8046BF88_00000818:
     bne lbl_fn_8046BF88_000008A4
     addi r3, r26, 0x6
     addi r4, r27, 0x1
-    bl fn_806827C4
+    bl strstr
     cmpwi r3, 0x0
     bne lbl_fn_8046BF88_000008A4
     stb r31, 0x5(r26)
@@ -864,7 +864,7 @@ asm void fn_8046C1C8(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8046C1C8_00000AE0
@@ -884,14 +884,14 @@ asm void fn_8046C1C8(void)
     stw r9, 0x14(r3)
     stw r0, 0x18(r3)
     addi r3, r8, 0x180
-    bl fn_800846FC
-    lis r4, fn_8046BBB0@ha
+    bl mem_realloc
+    lis r4, atn_Arc_initDecompressHeader@ha
     lis r6, 0x4
-    addi r4, r4, fn_8046BBB0@l
+    addi r4, r4, atn_Arc_initDecompressHeader@l
     li r5, 0x0
     addi r6, r6, 0xb8
     li r7, 0x2
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x10(r30)
 lbl_fn_8046C1C8_00000AE0:
     stw r30, lbl_8087F510
@@ -906,7 +906,7 @@ lbl_fn_8046C1C8_00000AF0:
     cmpwi r0, 0x2
     bne lbl_fn_8046C1C8_00000B0C
     mr r3, r31
-    bl fn_8046BBF0
+    bl atn_Arc_decompressEntry
 lbl_fn_8046C1C8_00000B0C:
     addi r30, r30, 0x1
     addis r29, r29, 0x4
@@ -922,7 +922,7 @@ lbl_fn_8046C1C8_00000B0C:
     blr
 }
 
-asm void fn_8046C2D4(void)
+asm void atn_Arc_loadEntry(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -934,21 +934,21 @@ asm void fn_8046C2D4(void)
     mr r26, r5
     mr r3, r25
     mr r4, r27
-    bl fn_8046FD1C
+    bl atn_Arc_getFileEntry
     mr r3, r25
     mr r4, r27
-    bl fn_8046FD1C
+    bl atn_Arc_getFileEntry
     lwz r31, 0x8(r3)
     mr r3, r25
     mr r4, r27
-    bl fn_8046FD1C
+    bl atn_Arc_getFileEntry
     lwz r0, 0x70(r25)
     addi r4, r31, 0x20
     lwz r30, 0xc(r3)
     clrrwi r29, r4, 5
     cmpwi r0, 0x0
     li r28, 0x0
-    bne lbl_fn_8046C2D4_00000BC8
+    bne lbl_atn_Arc_loadEntry_00000BC8
     bl fn_800827E0
     lis r7, lbl_80755608@ha
     mr r4, r29
@@ -960,36 +960,36 @@ asm void fn_8046C2D4(void)
     li r10, 0x0
     bl fn_800839EC
     mr r28, r3
-lbl_fn_8046C2D4_00000BC8:
+lbl_atn_Arc_loadEntry_00000BC8:
     mr r3, r25
     mr r4, r27
     bl fn_8046FD2C
     cmpwi r30, 0x0
     mr r4, r3
-    beq lbl_fn_8046C2D4_00000BF8
+    beq lbl_atn_Arc_loadEntry_00000BF8
     mr r4, r28
-    bl fn_806254D0
+    bl CXUncompressAny
     mr r3, r28
     mr r4, r29
     bl DCFlushRangeNoSync
-    b lbl_fn_8046C2D4_00000C18
-lbl_fn_8046C2D4_00000BF8:
+    b lbl_atn_Arc_loadEntry_00000C18
+lbl_atn_Arc_loadEntry_00000BF8:
     lwz r0, 0x70(r25)
     cmpwi r0, 0x0
-    bne lbl_fn_8046C2D4_00000C14
+    bne lbl_atn_Arc_loadEntry_00000C14
     mr r3, r28
     mr r5, r31
     bl memcpy
-    b lbl_fn_8046C2D4_00000C18
-lbl_fn_8046C2D4_00000C14:
+    b lbl_atn_Arc_loadEntry_00000C18
+lbl_atn_Arc_loadEntry_00000C14:
     mr r28, r4
-lbl_fn_8046C2D4_00000C18:
+lbl_atn_Arc_loadEntry_00000C18:
     lwz r0, 0x70(r25)
     cmpwi r0, 0x0
-    bne lbl_fn_8046C2D4_00000C2C
+    bne lbl_atn_Arc_loadEntry_00000C2C
     li r0, 0x0
     stbx r0, r28, r31
-lbl_fn_8046C2D4_00000C2C:
+lbl_atn_Arc_loadEntry_00000C2C:
     stw r28, 0x54(r26)
     mr r3, r26
     li r4, 0x2
@@ -997,9 +997,9 @@ lbl_fn_8046C2D4_00000C2C:
     bl fn_80473104
     lwz r0, 0x70(r25)
     cmpwi r0, 0x0
-    beq lbl_fn_8046C2D4_00000C50
+    beq lbl_atn_Arc_loadEntry_00000C50
     stw r25, 0x58(r26)
-lbl_fn_8046C2D4_00000C50:
+lbl_atn_Arc_loadEntry_00000C50:
     lmw r25, 0x14(r1)
     lwz r0, 0x34(r1)
     mtlr r0
@@ -1007,7 +1007,7 @@ lbl_fn_8046C2D4_00000C50:
     blr
 }
 
-asm void fn_8046C3FC(void)
+asm void atn_Arc_decompressChunk(void)
 {
     nofralloc
     stwu r1, -0x150(r1)
@@ -1026,49 +1026,49 @@ asm void fn_8046C3FC(void)
     li r19, 0x1
     lwz r0, 0x3ed8(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8046C3FC_00000CBC
+    beq lbl_atn_Arc_decompressChunk_00000CBC
     mr r3, r31
     bl fn_805F9EF0
     cmpwi r3, 0x0
-    blt lbl_fn_8046C3FC_00000CBC
+    blt lbl_atn_Arc_decompressChunk_00000CBC
     li r19, 0x0
-lbl_fn_8046C3FC_00000CBC:
+lbl_atn_Arc_decompressChunk_00000CBC:
     cmpwi r19, 0x0
-    beq lbl_fn_8046C3FC_00000EB4
+    beq lbl_atn_Arc_decompressChunk_00000EB4
     lwz r30, 0x4028(r22)
     addi r19, r22, 0x4024
-    b lbl_fn_8046C3FC_00000EAC
-lbl_fn_8046C3FC_00000CD0:
+    b lbl_atn_Arc_decompressChunk_00000EAC
+lbl_atn_Arc_decompressChunk_00000CD0:
     lwz r3, 0x8(r30)
     mr r4, r31
-    bl fn_8046FBB0
+    bl atn_Arc_findFile
     cmpwi r3, -0x1
     mr r18, r3
-    beq lbl_fn_8046C3FC_00000EA8
+    beq lbl_atn_Arc_decompressChunk_00000EA8
     lwz r20, 0x8(r30)
     li r21, 0x0
     addi r3, r20, 0x10
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
-    bne lbl_fn_8046C3FC_00000D14
+    bne lbl_atn_Arc_decompressChunk_00000D14
     addi r3, r20, 0x10
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
-    beq lbl_fn_8046C3FC_00000D14
+    beq lbl_atn_Arc_decompressChunk_00000D14
     li r21, 0x1
-lbl_fn_8046C3FC_00000D14:
+lbl_atn_Arc_decompressChunk_00000D14:
     cmpwi r21, 0x0
-    bne lbl_fn_8046C3FC_00000E88
+    bne lbl_atn_Arc_decompressChunk_00000E88
     lwz r3, 0x8(r30)
     bl fn_80470264
     cmpwi r3, 0x0
-    beq lbl_fn_8046C3FC_00000EA8
+    beq lbl_atn_Arc_decompressChunk_00000EA8
     lwz r0, 0x8(r30)
     addi r21, r1, 0xd4
     cmplw r31, r21
     stw r0, 0xcc(r1)
     stw r23, 0xd0(r1)
-    beq lbl_fn_8046C3FC_00000D60
+    beq lbl_atn_Arc_decompressChunk_00000D60
     mr r3, r31
     bl strlen
     mr r5, r3
@@ -1076,28 +1076,28 @@ lbl_fn_8046C3FC_00000D14:
     mr r4, r31
     addi r5, r5, 0x1
     bl memcpy
-lbl_fn_8046C3FC_00000D60:
+lbl_atn_Arc_decompressChunk_00000D60:
     stw r18, 0x114(r1)
     li r3, 0x54
     lwz r30, 0x4040(r22)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r20, r3
-    bne lbl_fn_8046C3FC_00000D9C
+    bne lbl_atn_Arc_decompressChunk_00000D9C
     lis r3, __files@ha
     lis r4, lbl_8078FB50@ha
     addi r3, r3, __files@l
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8078FB50@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
-lbl_fn_8046C3FC_00000D9C:
+    bl printf
+    bl abort
+lbl_atn_Arc_decompressChunk_00000D9C:
     addic. r4, r20, 0x8
     addi r0, r22, 0x403c
     stw r0, 0x10(r1)
     stw r20, 0x14(r1)
-    beq lbl_fn_8046C3FC_00000E48
+    beq lbl_atn_Arc_decompressChunk_00000E48
     lwz r0, 0xcc(r1)
     stw r0, 0x0(r4)
     lwz r0, 0xd0(r1)
@@ -1136,7 +1136,7 @@ lbl_fn_8046C3FC_00000D9C:
     stw r0, 0x44(r4)
     lwz r0, 0x114(r1)
     stw r0, 0x48(r4)
-lbl_fn_8046C3FC_00000E48:
+lbl_atn_Arc_decompressChunk_00000E48:
     lwz r3, 0x0(r30)
     li r4, 0x0
     lwz r5, 0x14(r1)
@@ -1149,36 +1149,36 @@ lbl_fn_8046C3FC_00000E48:
     stw r4, 0x14(r1)
     addi r0, r3, 0x1
     stw r0, 0x4038(r22)
-    b lbl_fn_8046C3FC_00000E80
+    b lbl_atn_Arc_decompressChunk_00000E80
     bl dtor_80084684
-lbl_fn_8046C3FC_00000E80:
+lbl_atn_Arc_decompressChunk_00000E80:
     li r3, 0x1
-    b lbl_fn_8046C3FC_00001404
-lbl_fn_8046C3FC_00000E88:
+    b lbl_atn_Arc_decompressChunk_00001404
+lbl_atn_Arc_decompressChunk_00000E88:
     lwz r4, 0x8(r30)
     mr r3, r22
     mr r5, r23
     mr r6, r31
     mr r7, r18
-    bl fn_8046C2D4
+    bl atn_Arc_loadEntry
     li r3, 0x1
-    b lbl_fn_8046C3FC_00001404
-lbl_fn_8046C3FC_00000EA8:
+    b lbl_atn_Arc_decompressChunk_00001404
+lbl_atn_Arc_decompressChunk_00000EA8:
     lwz r30, 0x4(r30)
-lbl_fn_8046C3FC_00000EAC:
+lbl_atn_Arc_decompressChunk_00000EAC:
     cmplw r30, r19
-    bne lbl_fn_8046C3FC_00000CD0
-lbl_fn_8046C3FC_00000EB4:
+    bne lbl_atn_Arc_decompressChunk_00000CD0
+lbl_atn_Arc_decompressChunk_00000EB4:
     lis r5, lbl_80755608@ha
     li r3, 0x50
     addi r5, r5, lbl_80755608@l
     li r4, 0x2
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
-    beq lbl_fn_8046C3FC_00000F0C
+    beq lbl_atn_Arc_decompressChunk_00000F0C
     stw r23, 0x0(r3)
     li r0, 0x0
     stw r0, 0x4(r3)
@@ -1191,34 +1191,34 @@ lbl_fn_8046C3FC_00000EB4:
     stw r0, 0x3c(r3)
     stw r0, 0x40(r3)
     stw r0, 0x44(r3)
-lbl_fn_8046C3FC_00000F0C:
+lbl_atn_Arc_decompressChunk_00000F0C:
     lwz r0, 0x3ed8(r22)
     cmpwi r0, 0x0
-    bne lbl_fn_8046C3FC_00000FAC
+    bne lbl_atn_Arc_decompressChunk_00000FAC
     lwz r21, 0x4034(r22)
     addi r19, r22, 0x4030
-    b lbl_fn_8046C3FC_00000FA4
-lbl_fn_8046C3FC_00000F24:
+    b lbl_atn_Arc_decompressChunk_00000FA4
+lbl_atn_Arc_decompressChunk_00000F24:
     lwz r3, 0x8(r21)
     mr r4, r31
-    bl fn_8046FBB0
+    bl atn_Arc_findFile
     cmpwi r3, -0x1
     mr r29, r3
-    beq lbl_fn_8046C3FC_00000FA0
+    beq lbl_atn_Arc_decompressChunk_00000FA0
     lwz r3, 0x8(r21)
     mr r4, r29
     lwz r0, 0x24(r3)
     stw r0, 0x48(r30)
     lwz r3, 0x8(r21)
-    bl fn_8046FD1C
+    bl atn_Arc_getFileEntry
     lwz r26, 0x4(r3)
     mr r4, r29
     lwz r3, 0x8(r21)
-    bl fn_8046FD1C
+    bl atn_Arc_getFileEntry
     lwz r28, 0x8(r3)
     mr r4, r29
     lwz r3, 0x8(r21)
-    bl fn_8046FD1C
+    bl atn_Arc_getFileEntry
     lwz r27, 0xc(r3)
     addi r4, r1, 0x90
     lwz r3, 0x48(r30)
@@ -1229,47 +1229,47 @@ lbl_fn_8046C3FC_00000F24:
     rlwimi r25, r0, 2, 30, 31
     slwi r24, r0, 2
     bl fn_805FA390
-    b lbl_fn_8046C3FC_00000FAC
-lbl_fn_8046C3FC_00000FA0:
+    b lbl_atn_Arc_decompressChunk_00000FAC
+lbl_atn_Arc_decompressChunk_00000FA0:
     lwz r21, 0x4(r21)
-lbl_fn_8046C3FC_00000FA4:
+lbl_atn_Arc_decompressChunk_00000FA4:
     cmplw r21, r19
-    bne lbl_fn_8046C3FC_00000F24
-lbl_fn_8046C3FC_00000FAC:
+    bne lbl_atn_Arc_decompressChunk_00000F24
+lbl_atn_Arc_decompressChunk_00000FAC:
     cmpwi r29, -0x1
-    bne lbl_fn_8046C3FC_000010B0
+    bne lbl_atn_Arc_decompressChunk_000010B0
     mr r3, r31
     bl fn_805F9EF0
     cmpwi r3, -0x1
     stw r3, 0x48(r30)
-    bne lbl_fn_8046C3FC_00001080
+    bne lbl_atn_Arc_decompressChunk_00001080
     lwz r0, 0x3ed8(r22)
     cmpwi r0, 0x0
-    beq lbl_fn_8046C3FC_00001068
+    beq lbl_atn_Arc_decompressChunk_00001068
     lwz r21, 0x4034(r22)
     addi r19, r22, 0x4030
-    b lbl_fn_8046C3FC_00001060
-lbl_fn_8046C3FC_00000FE0:
+    b lbl_atn_Arc_decompressChunk_00001060
+lbl_atn_Arc_decompressChunk_00000FE0:
     lwz r3, 0x8(r21)
     mr r4, r31
-    bl fn_8046FBB0
+    bl atn_Arc_findFile
     cmpwi r3, -0x1
     mr r29, r3
-    beq lbl_fn_8046C3FC_0000105C
+    beq lbl_atn_Arc_decompressChunk_0000105C
     lwz r3, 0x8(r21)
     mr r4, r29
     lwz r0, 0x24(r3)
     stw r0, 0x48(r30)
     lwz r3, 0x8(r21)
-    bl fn_8046FD1C
+    bl atn_Arc_getFileEntry
     lwz r26, 0x4(r3)
     mr r4, r29
     lwz r3, 0x8(r21)
-    bl fn_8046FD1C
+    bl atn_Arc_getFileEntry
     lwz r28, 0x8(r3)
     mr r4, r29
     lwz r3, 0x8(r21)
-    bl fn_8046FD1C
+    bl atn_Arc_getFileEntry
     lwz r27, 0xc(r3)
     addi r4, r1, 0x54
     lwz r3, 0x48(r30)
@@ -1280,22 +1280,22 @@ lbl_fn_8046C3FC_00000FE0:
     rlwimi r25, r0, 2, 30, 31
     slwi r24, r0, 2
     bl fn_805FA390
-    b lbl_fn_8046C3FC_00001068
-lbl_fn_8046C3FC_0000105C:
+    b lbl_atn_Arc_decompressChunk_00001068
+lbl_atn_Arc_decompressChunk_0000105C:
     lwz r21, 0x4(r21)
-lbl_fn_8046C3FC_00001060:
+lbl_atn_Arc_decompressChunk_00001060:
     cmplw r21, r19
-    bne lbl_fn_8046C3FC_00000FE0
-lbl_fn_8046C3FC_00001068:
+    bne lbl_atn_Arc_decompressChunk_00000FE0
+lbl_atn_Arc_decompressChunk_00001068:
     cmpwi r29, -0x1
-    bne lbl_fn_8046C3FC_00001080
+    bne lbl_atn_Arc_decompressChunk_00001080
     mr r3, r30
     bl dtor_80084684
     li r3, 0x0
-    b lbl_fn_8046C3FC_00001404
-lbl_fn_8046C3FC_00001080:
+    b lbl_atn_Arc_decompressChunk_00001404
+lbl_atn_Arc_decompressChunk_00001080:
     cmpwi r29, -0x1
-    bne lbl_fn_8046C3FC_000010B0
+    bne lbl_atn_Arc_decompressChunk_000010B0
     lwz r3, 0x48(r30)
     addi r4, r1, 0x18
     bl fn_805FA200
@@ -1306,7 +1306,7 @@ lbl_fn_8046C3FC_00001080:
     rlwimi r25, r0, 2, 30, 31
     slwi r24, r0, 2
     bl fn_805FA390
-lbl_fn_8046C3FC_000010B0:
+lbl_atn_Arc_decompressChunk_000010B0:
     stw r26, 0x18(r30)
     lis r21, lbl_80755608@ha
     addi r0, r28, 0x20
@@ -1315,7 +1315,7 @@ lbl_fn_8046C3FC_000010B0:
     stw r27, 0x20(r30)
     clrrwi r18, r0, 5
     addi r4, r21, 0x1
-    bl fn_806827C4
+    bl strstr
     neg r0, r3
     or r0, r0, r3
     srwi r0, r0, 31
@@ -1331,12 +1331,12 @@ lbl_fn_8046C3FC_000010B0:
     bl fn_800839EC
     cmpwi r3, 0x0
     stw r3, 0x8(r30)
-    bne lbl_fn_8046C3FC_00001124
+    bne lbl_atn_Arc_decompressChunk_00001124
     mr r3, r30
     bl dtor_80084684
     li r3, 0x0
-    b lbl_fn_8046C3FC_00001404
-lbl_fn_8046C3FC_00001124:
+    b lbl_atn_Arc_decompressChunk_00001404
+lbl_atn_Arc_decompressChunk_00001124:
     mr r4, r18
     bl DCZeroRange
     stw r28, 0x4(r30)
@@ -1347,24 +1347,24 @@ lbl_fn_8046C3FC_00001124:
     stw r28, 0x50(r23)
     lwz r0, 0x20(r30)
     cmpwi r0, 0x0
-    beq lbl_fn_8046C3FC_0000115C
+    beq lbl_atn_Arc_decompressChunk_0000115C
     lwz r4, 0x8(r30)
     addi r3, r30, 0x24
     bl fn_806250D0
-lbl_fn_8046C3FC_0000115C:
+lbl_atn_Arc_decompressChunk_0000115C:
     lwz r0, lbl_8087F510
     cmpwi r0, 0x0
-    bne lbl_fn_8046C3FC_000011F8
+    bne lbl_atn_Arc_decompressChunk_000011F8
     lis r21, lbl_80755608@ha
     li r3, 0x1c
     addi r5, r21, lbl_80755608@l
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r20, r3
-    beq lbl_fn_8046C3FC_000011F4
+    beq lbl_atn_Arc_decompressChunk_000011F4
     li r10, 0x0
     stw r10, 0x0(r3)
     addi r4, r3, 0x4
@@ -1381,31 +1381,31 @@ lbl_fn_8046C3FC_0000115C:
     stw r9, 0x14(r3)
     stw r0, 0x18(r3)
     addi r3, r8, 0x180
-    bl fn_800846FC
-    lis r4, fn_8046BBB0@ha
+    bl mem_realloc
+    lis r4, atn_Arc_initDecompressHeader@ha
     lis r6, 0x4
-    addi r4, r4, fn_8046BBB0@l
+    addi r4, r4, atn_Arc_initDecompressHeader@l
     li r5, 0x0
     addi r6, r6, 0xb8
     li r7, 0x2
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x10(r20)
-lbl_fn_8046C3FC_000011F4:
+lbl_atn_Arc_decompressChunk_000011F4:
     stw r20, lbl_8087F510
-lbl_fn_8046C3FC_000011F8:
+lbl_atn_Arc_decompressChunk_000011F8:
     lwz r29, lbl_8087F510
     lwz r0, 0xc(r29)
     cmpwi r0, 0x2
-    bge lbl_fn_8046C3FC_00001378
+    bge lbl_atn_Arc_decompressChunk_00001378
     li r0, 0x2
     li r5, 0x0
     li r4, 0x0
     mtctr r0
-lbl_fn_8046C3FC_00001218:
+lbl_atn_Arc_decompressChunk_00001218:
     lwz r3, 0x10(r29)
     lwzx r0, r3, r4
     cmpwi r0, 0x0
-    bne lbl_fn_8046C3FC_0000124C
+    bne lbl_atn_Arc_decompressChunk_0000124C
     lis r3, 0x4
     lwz r4, 0xc(r29)
     addi r0, r3, 0xb8
@@ -1414,50 +1414,50 @@ lbl_fn_8046C3FC_00001218:
     stw r3, 0xc(r29)
     lwz r3, 0x10(r29)
     add r31, r3, r0
-    b lbl_fn_8046C3FC_00001260
-lbl_fn_8046C3FC_0000124C:
+    b lbl_atn_Arc_decompressChunk_00001260
+lbl_atn_Arc_decompressChunk_0000124C:
     addis r4, r4, 0x4
     addi r5, r5, 0x1
     addi r4, r4, 0xb8
-    bdnz lbl_fn_8046C3FC_00001218
+    bdnz lbl_atn_Arc_decompressChunk_00001218
     li r31, 0x0
-lbl_fn_8046C3FC_00001260:
+lbl_atn_Arc_decompressChunk_00001260:
     lwz r0, 0x50(r31)
     slwi r0, r0, 2
     add r0, r31, r0
     addic. r3, r0, 0x54
-    beq lbl_fn_8046C3FC_00001278
+    beq lbl_atn_Arc_decompressChunk_00001278
     stw r30, 0x0(r3)
-lbl_fn_8046C3FC_00001278:
+lbl_atn_Arc_decompressChunk_00001278:
     lwz r3, 0x50(r31)
     addi r0, r3, 0x1
     stw r0, 0x50(r31)
     lwz r4, 0x20(r30)
     cmpwi r4, 0x0
-    beq lbl_fn_8046C3FC_0000129C
+    beq lbl_atn_Arc_decompressChunk_0000129C
     addis r3, r31, 0x4
     lwz r5, 0xb4(r3)
-    b lbl_fn_8046C3FC_000012A8
-lbl_fn_8046C3FC_0000129C:
+    b lbl_atn_Arc_decompressChunk_000012A8
+lbl_atn_Arc_decompressChunk_0000129C:
     lwz r3, 0x8(r30)
     lwz r0, 0x1c(r30)
     add r5, r3, r0
-lbl_fn_8046C3FC_000012A8:
+lbl_atn_Arc_decompressChunk_000012A8:
     cmpwi r4, 0x0
-    ble lbl_fn_8046C3FC_000012D0
+    ble lbl_atn_Arc_decompressChunk_000012D0
     lwz r0, 0x14(r29)
     lwz r6, 0x1c(r30)
     slwi r7, r0, 10
     subf r0, r6, r4
     cmplw r0, r7
-    bge lbl_fn_8046C3FC_000012DC
+    bge lbl_atn_Arc_decompressChunk_000012DC
     mr r7, r0
-    b lbl_fn_8046C3FC_000012DC
-lbl_fn_8046C3FC_000012D0:
+    b lbl_atn_Arc_decompressChunk_000012DC
+lbl_atn_Arc_decompressChunk_000012D0:
     lwz r6, 0x1c(r30)
     lwz r0, 0x4(r30)
     subf r7, r6, r0
-lbl_fn_8046C3FC_000012DC:
+lbl_atn_Arc_decompressChunk_000012DC:
     lwz r3, 0x18(r30)
     li r0, 0x1
     li r21, 0x0
@@ -1483,7 +1483,7 @@ lbl_fn_8046C3FC_000012DC:
     clrrwi r5, r0, 5
     bl fn_805FA4E0
     cmpwi r3, 0x0
-    bne lbl_fn_8046C3FC_00001400
+    bne lbl_atn_Arc_decompressChunk_00001400
     lwz r3, 0x0(r30)
     li r4, 0x4
     bl fn_80473104
@@ -1496,30 +1496,30 @@ lbl_fn_8046C3FC_000012DC:
     lwz r3, 0xc(r29)
     subi r0, r3, 0x1
     stw r0, 0xc(r29)
-    b lbl_fn_8046C3FC_00001400
-lbl_fn_8046C3FC_00001378:
+    b lbl_atn_Arc_decompressChunk_00001400
+lbl_atn_Arc_decompressChunk_00001378:
     addi r19, r29, 0x4
     li r3, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r20, r3
-    bne lbl_fn_8046C3FC_000013B0
+    bne lbl_atn_Arc_decompressChunk_000013B0
     lis r3, __files@ha
     lis r4, lbl_80779810@ha
     addi r3, r3, __files@l
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80779810@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
-lbl_fn_8046C3FC_000013B0:
+    bl printf
+    bl abort
+lbl_atn_Arc_decompressChunk_000013B0:
     addic. r3, r20, 0x8
     addi r0, r29, 0x4
     stw r0, 0x8(r1)
     stw r20, 0xc(r1)
-    beq lbl_fn_8046C3FC_000013C8
+    beq lbl_atn_Arc_decompressChunk_000013C8
     stw r30, 0x0(r3)
-lbl_fn_8046C3FC_000013C8:
+lbl_atn_Arc_decompressChunk_000013C8:
     lwz r3, 0x0(r19)
     li r4, 0x0
     lwz r5, 0xc(r1)
@@ -1532,11 +1532,11 @@ lbl_fn_8046C3FC_000013C8:
     stw r4, 0xc(r1)
     addi r0, r3, 0x1
     stw r0, 0x0(r29)
-    b lbl_fn_8046C3FC_00001400
+    b lbl_atn_Arc_decompressChunk_00001400
     bl dtor_80084684
-lbl_fn_8046C3FC_00001400:
+lbl_atn_Arc_decompressChunk_00001400:
     li r3, 0x1
-lbl_fn_8046C3FC_00001404:
+lbl_atn_Arc_decompressChunk_00001404:
     lmw r18, 0x118(r1)
     lwz r0, 0x154(r1)
     mtlr r0
@@ -1586,7 +1586,7 @@ asm void fn_8046CBC0(void)
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r3, r31
     bl fn_8006A9A4
     lwz r0, 0x10(r1)
@@ -1711,7 +1711,7 @@ lbl_fn_8046CC90_000015AC:
     bl fn_8003E4A4
     addi r3, r1, 0x5c
     li r4, -0x1
-    bl fn_8006BC64
+    bl atn_FileList_destructor
     addi r3, r1, 0x38
     li r4, -0x1
     bl dtor_80013D60
@@ -1725,7 +1725,7 @@ lbl_fn_8046CC90_000015AC:
 lbl_fn_8046CC90_00001680:
     addi r3, r1, 0x5c
     li r4, -0x1
-    bl fn_8006BC64
+    bl atn_FileList_destructor
     addi r3, r1, 0x38
     li r4, -0x1
     bl dtor_80013D60
@@ -1787,7 +1787,7 @@ lbl_fn_8046CC90_00001760:
     addi r31, r31, lbl_8075561C@l
     li r30, 0x0
     addi r4, r31, 0x2
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_00001788
     addi r30, r31, 0x8
@@ -1795,7 +1795,7 @@ lbl_fn_8046CC90_00001760:
 lbl_fn_8046CC90_00001788:
     addi r3, r1, 0x44
     addi r4, r31, 0x14
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_000017A4
     addi r30, r31, 0x1c
@@ -1803,7 +1803,7 @@ lbl_fn_8046CC90_00001788:
 lbl_fn_8046CC90_000017A4:
     addi r3, r1, 0x44
     addi r4, r31, 0x2a
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_000017C0
     addi r30, r31, 0x31
@@ -1811,7 +1811,7 @@ lbl_fn_8046CC90_000017A4:
 lbl_fn_8046CC90_000017C0:
     addi r3, r1, 0x44
     addi r4, r31, 0x3e
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_000017DC
     addi r30, r31, 0x42
@@ -1819,7 +1819,7 @@ lbl_fn_8046CC90_000017C0:
 lbl_fn_8046CC90_000017DC:
     addi r3, r1, 0x44
     addi r4, r31, 0x4c
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_000017F8
     addi r30, r31, 0x50
@@ -1827,7 +1827,7 @@ lbl_fn_8046CC90_000017DC:
 lbl_fn_8046CC90_000017F8:
     addi r3, r1, 0x44
     addi r4, r31, 0x5a
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_00001814
     addi r30, r31, 0x64
@@ -1835,12 +1835,12 @@ lbl_fn_8046CC90_000017F8:
 lbl_fn_8046CC90_00001814:
     addi r3, r1, 0x44
     addi r4, r31, 0x77
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_8046CC90_0000183C
     addi r3, r1, 0x44
     addi r4, r31, 0x7c
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_0000184C
 lbl_fn_8046CC90_0000183C:
@@ -1851,7 +1851,7 @@ lbl_fn_8046CC90_0000183C:
 lbl_fn_8046CC90_0000184C:
     addi r3, r1, 0x44
     addi r4, r31, 0x90
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_00001868
     addi r30, r31, 0x99
@@ -1859,7 +1859,7 @@ lbl_fn_8046CC90_0000184C:
 lbl_fn_8046CC90_00001868:
     addi r3, r1, 0x44
     addi r4, r31, 0xa8
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_00001884
     addi r30, r31, 0xb0
@@ -1867,7 +1867,7 @@ lbl_fn_8046CC90_00001868:
 lbl_fn_8046CC90_00001884:
     addi r3, r1, 0x44
     addi r4, r31, 0xbe
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_000018A0
     addi r30, r31, 0xc2
@@ -1875,7 +1875,7 @@ lbl_fn_8046CC90_00001884:
 lbl_fn_8046CC90_000018A0:
     addi r3, r1, 0x44
     addi r4, r31, 0xd0
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_000018BC
     addi r30, r31, 0xd7
@@ -1883,7 +1883,7 @@ lbl_fn_8046CC90_000018A0:
 lbl_fn_8046CC90_000018BC:
     addi r3, r1, 0x44
     addi r4, r31, 0xe4
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_000018D8
     addi r30, r31, 0xe9
@@ -1891,12 +1891,12 @@ lbl_fn_8046CC90_000018BC:
 lbl_fn_8046CC90_000018D8:
     addi r3, r1, 0x44
     addi r4, r31, 0xf4
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_8046CC90_00001900
     addi r3, r1, 0x44
     addi r4, r31, 0xf8
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_00001910
 lbl_fn_8046CC90_00001900:
@@ -1907,7 +1907,7 @@ lbl_fn_8046CC90_00001900:
 lbl_fn_8046CC90_00001910:
     addi r3, r1, 0x44
     addi r4, r31, 0x106
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_0000192C
     addi r30, r31, 0x10a
@@ -1915,7 +1915,7 @@ lbl_fn_8046CC90_00001910:
 lbl_fn_8046CC90_0000192C:
     addi r3, r1, 0x44
     addi r4, r31, 0x11a
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_00001948
     addi r30, r31, 0x11e
@@ -1923,7 +1923,7 @@ lbl_fn_8046CC90_0000192C:
 lbl_fn_8046CC90_00001948:
     addi r3, r1, 0x44
     addi r4, r31, 0x13b
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_00001960
     addi r30, r31, 0x12c

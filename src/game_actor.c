@@ -18,23 +18,23 @@ extern void fn_8001C1B8(void);
 extern void fn_8001C1BC(void);
 extern void fn_8003E918(void);
 extern void fn_80060D58(void);
-extern void fn_800616C0(void);
+extern void skill_calculateDamage(void);
 extern void fn_80062C8C(void);
 extern void fn_80063200(void);
 extern void fn_80063484(void);
 extern void fn_800638B0(void);
 extern void fn_8007708C(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
-extern void fn_800846FC(void);
-extern void fn_80084C24(void);
-extern void fn_800874C8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
+extern void mem_realloc(void);
+extern void mem_getAllocSize(void);
+extern void route_findNextWaypoint(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
-extern void fn_800D246C(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_80102890(void);
 extern void fn_801083D8(void);
@@ -48,15 +48,15 @@ extern void fn_8035B854(void);
 extern void fn_8036554C(void);
 extern void fn_803C11A4(void);
 extern void fn_803C1884(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_80547E48(void);
 extern void fn_8054A690(void);
 extern void fn_805B3518(void);
 extern void fn_805B3658(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void rand(void);
+extern void abort(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern void memmove(void);
@@ -130,7 +130,7 @@ extern u32 lbl_80880728;
 /* Function declarations */
 void dtor_80013D60(void);
 void fn_80013DC4(void);
-void fn_80013F78(void);
+void actor_dispatchMessage(void);
 void dtor_80014250(void);
 void fn_800142C4(void);
 void fn_800142CC(void);
@@ -138,7 +138,7 @@ void fn_800142D4(void);
 void fn_800143E8(void);
 void fn_800144FC(void);
 void fn_80014564(void);
-void fn_80014798(void);
+void atn_LH_Binary_destructor(void);
 void fn_800147F0(void);
 void fn_8001482C(void);
 void fn_8001486C(void);
@@ -205,8 +205,8 @@ asm void fn_80013DC4(void)
     addi r4, r4, 0x82
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80013DC4_000000B0:
     lwz r0, 0x0(r31)
     srwi. r29, r0, 31
@@ -241,7 +241,7 @@ lbl_fn_80013DC4_000000F8:
 lbl_fn_80013DC4_00000118:
     ble cr1, lbl_fn_80013DC4_00000154
     mr r3, r30
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_80013DC4_00000190
@@ -251,12 +251,12 @@ lbl_fn_80013DC4_00000118:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80775AC0@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
     b lbl_fn_80013DC4_00000190
 lbl_fn_80013DC4_00000154:
     mr r3, r30
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_80013DC4_00000188
@@ -266,8 +266,8 @@ lbl_fn_80013DC4_00000154:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80775AC0@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80013DC4_00000188:
     cmpwi r27, 0x0
     beq lbl_fn_80013DC4_00000204
@@ -313,7 +313,7 @@ lbl_fn_80013DC4_00000204:
     blr
 }
 
-asm void fn_80013F78(void)
+asm void actor_dispatchMessage(void)
 {
     nofralloc
     stwu r1, -0x60(r1)
@@ -327,19 +327,19 @@ asm void fn_80013F78(void)
     stw r5, 0x8(r1)
     lwz r0, 0x0(r3)
     srwi. r31, r0, 31
-    bne lbl_fn_80013F78_0000025C
+    bne lbl_actor_dispatchMessage_0000025C
     lbz r0, 0x0(r3)
     addi r29, r3, 0x1
     li r27, 0xb
     clrlwi r28, r0, 25
-    b lbl_fn_80013F78_00000268
-lbl_fn_80013F78_0000025C:
+    b lbl_actor_dispatchMessage_00000268
+lbl_actor_dispatchMessage_0000025C:
     lwz r29, 0x8(r3)
     clrlwi r27, r0, 1
     lwz r28, 0x4(r3)
-lbl_fn_80013F78_00000268:
+lbl_actor_dispatchMessage_00000268:
     cmplw r4, r28
-    ble lbl_fn_80013F78_00000294
+    ble lbl_actor_dispatchMessage_00000294
     lis r4, lbl_8072F924@ha
     lis r3, __files@ha
     addi r4, r4, lbl_8072F924@l
@@ -347,28 +347,28 @@ lbl_fn_80013F78_00000268:
     addi r4, r4, 0xa5
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
-lbl_fn_80013F78_00000294:
+    bl printf
+    bl abort
+lbl_actor_dispatchMessage_00000294:
     lwz r0, 0x8(r1)
     subf r3, r21, r28
     stw r3, 0x14(r1)
     addi r4, r1, 0x8
     cmplw r3, r0
-    bge lbl_fn_80013F78_000002B0
+    bge lbl_actor_dispatchMessage_000002B0
     addi r4, r1, 0x14
-lbl_fn_80013F78_000002B0:
+lbl_actor_dispatchMessage_000002B0:
     lis r3, 0x8000
     subf r25, r22, r23
     subi r0, r3, 0x2
     lwz r26, 0x0(r4)
     cmplw r25, r0
-    bgt lbl_fn_80013F78_000002D8
+    bgt lbl_actor_dispatchMessage_000002D8
     subf r30, r26, r28
     subf r0, r25, r0
     cmplw r30, r0
-    ble lbl_fn_80013F78_000002FC
-lbl_fn_80013F78_000002D8:
+    ble lbl_actor_dispatchMessage_000002FC
+lbl_actor_dispatchMessage_000002D8:
     lis r4, lbl_8072F924@ha
     lis r3, __files@ha
     addi r4, r4, lbl_8072F924@l
@@ -376,99 +376,99 @@ lbl_fn_80013F78_000002D8:
     addi r4, r4, 0xc0
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
-lbl_fn_80013F78_000002FC:
+    bl printf
+    bl abort
+lbl_actor_dispatchMessage_000002FC:
     add r30, r25, r30
     add r0, r21, r26
     cmplw r30, r27
     subf r24, r0, r28
-    blt lbl_fn_80013F78_000003F0
+    blt lbl_actor_dispatchMessage_000003F0
     addi r3, r27, 0xf
     addi r0, r30, 0x1
     clrrwi r27, r3, 4
-    b lbl_fn_80013F78_0000032C
-lbl_fn_80013F78_00000320:
+    b lbl_actor_dispatchMessage_0000032C
+lbl_actor_dispatchMessage_00000320:
     slwi r3, r27, 1
     addi r3, r3, 0xf
     clrrwi r27, r3, 4
-lbl_fn_80013F78_0000032C:
+lbl_actor_dispatchMessage_0000032C:
     cmplw r27, r0
-    blt lbl_fn_80013F78_00000320
+    blt lbl_actor_dispatchMessage_00000320
     mr r3, r27
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r28, r3
-    bne lbl_fn_80013F78_00000368
+    bne lbl_actor_dispatchMessage_00000368
     lis r3, __files@ha
     lis r4, lbl_80775AC0@ha
     addi r3, r3, __files@l
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80775AC0@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
-lbl_fn_80013F78_00000368:
+    bl printf
+    bl abort
+lbl_actor_dispatchMessage_00000368:
     cmpwi r21, 0x0
-    beq lbl_fn_80013F78_00000380
+    beq lbl_actor_dispatchMessage_00000380
     mr r3, r28
     mr r4, r29
     mr r5, r21
     bl memcpy
-lbl_fn_80013F78_00000380:
+lbl_actor_dispatchMessage_00000380:
     add r19, r28, r21
     mr r4, r22
     mr r3, r19
     subf r5, r22, r23
     bl memmove
     cmpwi r24, 0x0
-    beq lbl_fn_80013F78_000003B0
+    beq lbl_actor_dispatchMessage_000003B0
     add r0, r29, r21
     mr r5, r24
     add r3, r19, r25
     add r4, r26, r0
     bl memcpy
-lbl_fn_80013F78_000003B0:
+lbl_actor_dispatchMessage_000003B0:
     lbz r0, lbl_8087D6C8
     cmpwi r31, 0x0
     stbx r0, r28, r30
-    beq lbl_fn_80013F78_000003CC
+    beq lbl_actor_dispatchMessage_000003CC
     mr r3, r29
     bl dtor_80084684
-    b lbl_fn_80013F78_000003D8
-lbl_fn_80013F78_000003CC:
+    b lbl_actor_dispatchMessage_000003D8
+lbl_actor_dispatchMessage_000003CC:
     lwz r0, 0x0(r20)
     oris r0, r0, 0x8000
     stw r0, 0x0(r20)
-lbl_fn_80013F78_000003D8:
+lbl_actor_dispatchMessage_000003D8:
     lwz r0, 0x0(r20)
     rlwimi r0, r27, 0, 1, 31
     stw r28, 0x8(r20)
     stw r30, 0x4(r20)
     stw r0, 0x0(r20)
-    b lbl_fn_80013F78_000004D8
-lbl_fn_80013F78_000003F0:
+    b lbl_actor_dispatchMessage_000004D8
+lbl_actor_dispatchMessage_000003F0:
     cmpwi r24, 0x0
     li r3, 0x0
     stw r3, 0x18(r1)
     stw r3, 0x1c(r1)
     stw r3, 0x20(r1)
-    beq lbl_fn_80013F78_00000474
+    beq lbl_actor_dispatchMessage_00000474
     add r0, r29, r21
     add r0, r25, r0
     cmplw r0, r23
-    bge lbl_fn_80013F78_00000474
+    bge lbl_actor_dispatchMessage_00000474
     add r0, r29, r28
     cmplw r23, r0
-    bgt lbl_fn_80013F78_00000474
+    bgt lbl_actor_dispatchMessage_00000474
     cmpwi r3, 0x0
-    bne lbl_fn_80013F78_00000438
+    bne lbl_actor_dispatchMessage_00000438
     lbz r0, 0x18(r1)
     clrlwi r5, r0, 25
-    b lbl_fn_80013F78_0000043C
-lbl_fn_80013F78_00000438:
+    b lbl_actor_dispatchMessage_0000043C
+lbl_actor_dispatchMessage_00000438:
     li r5, 0x0
-lbl_fn_80013F78_0000043C:
+lbl_actor_dispatchMessage_0000043C:
     lbz r0, 0xc(r1)
     mr r6, r22
     stb r0, 0x10(r1)
@@ -476,23 +476,23 @@ lbl_fn_80013F78_0000043C:
     addi r3, r1, 0x18
     addi r8, r1, 0x10
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x18(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_80013F78_00000470
+    beq lbl_actor_dispatchMessage_00000470
     lwz r22, 0x20(r1)
-    b lbl_fn_80013F78_00000474
-lbl_fn_80013F78_00000470:
+    b lbl_actor_dispatchMessage_00000474
+lbl_actor_dispatchMessage_00000470:
     addi r22, r1, 0x19
-lbl_fn_80013F78_00000474:
+lbl_actor_dispatchMessage_00000474:
     cmpwi r24, 0x0
-    beq lbl_fn_80013F78_00000490
+    beq lbl_actor_dispatchMessage_00000490
     add r0, r29, r21
     mr r5, r24
     add r3, r0, r25
     add r4, r0, r26
     bl memmove
-lbl_fn_80013F78_00000490:
+lbl_actor_dispatchMessage_00000490:
     mr r4, r22
     mr r5, r25
     add r3, r29, r21
@@ -500,20 +500,20 @@ lbl_fn_80013F78_00000490:
     lbz r0, lbl_8087D6C9
     cmpwi r31, 0x0
     stbx r0, r29, r30
-    bne lbl_fn_80013F78_000004C0
+    bne lbl_actor_dispatchMessage_000004C0
     lbz r0, 0x0(r20)
     rlwimi r0, r30, 0, 25, 31
     stb r0, 0x0(r20)
-    b lbl_fn_80013F78_000004C4
-lbl_fn_80013F78_000004C0:
+    b lbl_actor_dispatchMessage_000004C4
+lbl_actor_dispatchMessage_000004C0:
     stw r30, 0x4(r20)
-lbl_fn_80013F78_000004C4:
+lbl_actor_dispatchMessage_000004C4:
     lwz r0, 0x18(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_80013F78_000004D8
+    beq lbl_actor_dispatchMessage_000004D8
     lwz r3, 0x20(r1)
     bl dtor_80084684
-lbl_fn_80013F78_000004D8:
+lbl_actor_dispatchMessage_000004D8:
     mr r3, r20
     lmw r19, 0x2c(r1)
     lwz r0, 0x64(r1)
@@ -745,7 +745,7 @@ asm void fn_800144FC(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_800144FC_000007E8
     mr r4, r31
@@ -770,7 +770,7 @@ asm void fn_80014564(void)
     addi r11, r1, 0x30
     bl _savegpr_25
     mr r31, r3
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_80775AE0@ha
     li r26, 0x0
     addi r3, r3, lbl_80775AE0@l
@@ -782,13 +782,13 @@ asm void fn_80014564(void)
     stw r26, 0x50(r31)
     stw r26, 0x54(r31)
     stw r26, 0x58(r31)
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r30, lbl_8078FBB0@ha
     addi r25, r31, 0x64
     addi r30, r30, lbl_8078FBB0@l
     stw r30, 0x0(r27)
     mr r3, r25
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lfs f0, lbl_808806B8
     li r27, 0x1
     lis r28, fn_800147F0@ha
@@ -878,7 +878,7 @@ lbl_fn_80014564_00000960:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r25
     addi r4, r30, 0x37
     addi r5, r31, 0x7d4
@@ -887,7 +887,7 @@ lbl_fn_80014564_00000960:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r25
     addi r4, r30, 0x4a
     addi r5, r31, 0x7d8
@@ -909,7 +909,7 @@ lbl_fn_80014564_00000960:
     blr
 }
 
-asm void fn_80014798(void)
+asm void atn_LH_Binary_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -920,14 +920,14 @@ asm void fn_80014798(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_80014798_00000A74
+    beq lbl_atn_LH_Binary_destructor_00000A74
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
     cmpwi r31, 0x0
-    ble lbl_fn_80014798_00000A74
+    ble lbl_atn_LH_Binary_destructor_00000A74
     mr r3, r30
     bl dtor_80084684
-lbl_fn_80014798_00000A74:
+lbl_atn_LH_Binary_destructor_00000A74:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1042,16 +1042,16 @@ lbl_fn_8001486C_00000BE0:
     addic. r3, r30, 0x64
     beq lbl_fn_8001486C_00000BF0
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_8001486C_00000BF0:
     addic. r3, r30, 0x5c
     beq lbl_fn_8001486C_00000C00
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_8001486C_00000C00:
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r31, 0x0
     ble lbl_fn_8001486C_00000C1C
     mr r3, r30
@@ -1082,7 +1082,7 @@ asm void fn_80014998(void)
 lbl_fn_80014998_00000C60:
     mr r3, r31
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     li r3, 0x1
 lbl_fn_80014998_00000C70:
     lwz r0, 0x14(r1)
@@ -1576,7 +1576,7 @@ lbl_fn_80014A5C_000012D0:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     cmpwi r23, 0x0
     fadds f23, f27, f27
     beq lbl_fn_80014A5C_000028F8
@@ -1599,7 +1599,7 @@ lbl_fn_80014A5C_000012D0:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     mr r3, r23
     bl fn_8017C904
     mr r5, r3
@@ -1620,7 +1620,7 @@ lbl_fn_80014A5C_000012D0:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     fadds f23, f23, f27
     lfs f0, lbl_808806BC
     fmr f1, f25
@@ -1635,7 +1635,7 @@ lbl_fn_80014A5C_000012D0:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r5, 0x60(r23)
     addi r3, r1, 0x148
     addi r4, r21, 0x66
@@ -1655,7 +1655,7 @@ lbl_fn_80014A5C_000012D0:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     fadds f23, f23, f27
     lfs f0, lbl_808806BC
     fmr f1, f25
@@ -1670,7 +1670,7 @@ lbl_fn_80014A5C_000012D0:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r5, 0x58(r23)
     addi r3, r1, 0x148
     addi r4, r21, 0x78
@@ -1689,7 +1689,7 @@ lbl_fn_80014A5C_000012D0:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lfs f0, lbl_808806BC
     fmr f1, f24
     fmr f2, f23
@@ -1703,7 +1703,7 @@ lbl_fn_80014A5C_000012D0:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r5, 0x80(r23)
     addi r3, r1, 0x148
     addi r4, r21, 0x78
@@ -1722,7 +1722,7 @@ lbl_fn_80014A5C_000012D0:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     fadds f23, f23, f27
     lfs f0, lbl_808806BC
     fmr f1, f25
@@ -1737,7 +1737,7 @@ lbl_fn_80014A5C_000012D0:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     cmpwi r27, 0x0
     beq lbl_fn_80014A5C_00001618
     lis r3, 0x51ec
@@ -1770,7 +1770,7 @@ lbl_fn_80014A5C_000012D0:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
 lbl_fn_80014A5C_00001618:
     fadds f23, f23, f27
     lfs f3, lbl_808806D8
@@ -1791,7 +1791,7 @@ lbl_fn_80014A5C_00001618:
     fsubs f3, f31, f0
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r5, 0x0(r28)
     cmpwi r5, 0x0
     blt lbl_fn_80014A5C_0000169C
@@ -1827,7 +1827,7 @@ lbl_fn_80014A5C_000016B4:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     fadds f23, f23, f27
     lfs f0, lbl_808806BC
     lis r21, lbl_8072FD8C@ha
@@ -1844,7 +1844,7 @@ lbl_fn_80014A5C_000016B4:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lha r5, 0xe2(r28)
     cmpwi r5, 0x0
     blt lbl_fn_80014A5C_00001788
@@ -1890,7 +1890,7 @@ lbl_fn_80014A5C_000017A8:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     fadds f23, f23, f27
     lfs f0, lbl_808806BC
     lis r21, lbl_8072FD8C@ha
@@ -1907,7 +1907,7 @@ lbl_fn_80014A5C_000017A8:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r5, 0xec(r28)
     addi r3, r1, 0x148
     addi r4, r21, 0x78
@@ -1926,7 +1926,7 @@ lbl_fn_80014A5C_000017A8:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lfs f0, lbl_808806BC
     fmr f1, f24
     fmr f2, f23
@@ -1940,7 +1940,7 @@ lbl_fn_80014A5C_000017A8:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lhz r0, 0xe0(r28)
     addi r3, r1, 0x148
     addi r4, r21, 0x78
@@ -1960,7 +1960,7 @@ lbl_fn_80014A5C_000017A8:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     fadds f23, f23, f27
     lfs f0, lbl_808806BC
     fmr f1, f25
@@ -1975,7 +1975,7 @@ lbl_fn_80014A5C_000017A8:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r3, 0xc(r28)
     cmpwi r3, 0x0
     ble lbl_fn_80014A5C_00001968
@@ -2009,7 +2009,7 @@ lbl_fn_80014A5C_0000197C:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lfs f0, lbl_808806BC
     lis r21, lbl_8072FD8C@ha
     addi r21, r21, lbl_8072FD8C@l
@@ -2025,7 +2025,7 @@ lbl_fn_80014A5C_0000197C:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r3, 0x10(r28)
     cmpwi r3, 0x0
     ble lbl_fn_80014A5C_00001A28
@@ -2059,7 +2059,7 @@ lbl_fn_80014A5C_00001A3C:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     fadds f23, f23, f27
     lfs f0, lbl_808806BC
     lis r21, lbl_8072FD8C@ha
@@ -2076,7 +2076,7 @@ lbl_fn_80014A5C_00001A3C:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r3, 0x14(r28)
     cmpwi r3, 0x0
     ble lbl_fn_80014A5C_00001AEC
@@ -2110,7 +2110,7 @@ lbl_fn_80014A5C_00001B00:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lfs f0, lbl_808806BC
     lis r21, lbl_8072FD8C@ha
     addi r21, r21, lbl_8072FD8C@l
@@ -2126,7 +2126,7 @@ lbl_fn_80014A5C_00001B00:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r3, 0x18(r28)
     cmpwi r3, 0x0
     ble lbl_fn_80014A5C_00001BAC
@@ -2160,7 +2160,7 @@ lbl_fn_80014A5C_00001BC0:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     fadds f23, f23, f27
     lfs f0, lbl_808806BC
     lis r21, lbl_8072FD8C@ha
@@ -2177,7 +2177,7 @@ lbl_fn_80014A5C_00001BC0:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r5, 0xbc(r28)
     addi r3, r1, 0x148
     addi r4, r21, 0x78
@@ -2196,7 +2196,7 @@ lbl_fn_80014A5C_00001BC0:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     fadds f23, f23, f27
     lfs f0, lbl_808806BC
     fmr f1, f25
@@ -2211,7 +2211,7 @@ lbl_fn_80014A5C_00001BC0:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r5, 0x4(r28)
     addi r3, r1, 0x148
     addi r4, r21, 0x78
@@ -2230,7 +2230,7 @@ lbl_fn_80014A5C_00001BC0:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     fadds f23, f23, f27
     lfs f0, lbl_808806BC
     fmr f1, f25
@@ -2245,7 +2245,7 @@ lbl_fn_80014A5C_00001BC0:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r5, 0xb4(r28)
     addi r3, r1, 0x148
     lwz r6, 0xb8(r28)
@@ -2265,7 +2265,7 @@ lbl_fn_80014A5C_00001BC0:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lfs f0, lbl_808806BC
     fmr f1, f24
     fmr f2, f23
@@ -2279,7 +2279,7 @@ lbl_fn_80014A5C_00001BC0:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r4, 0xb4(r28)
     mr r3, r29
     bl fn_803C1884
@@ -2315,7 +2315,7 @@ lbl_fn_80014A5C_00001E24:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     fadds f23, f23, f27
     lfs f0, lbl_808806BC
     lis r21, lbl_8072FD8C@ha
@@ -2332,7 +2332,7 @@ lbl_fn_80014A5C_00001E24:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r5, 0x674(r23)
     addi r3, r1, 0x148
     addi r4, r21, 0x78
@@ -2352,7 +2352,7 @@ lbl_fn_80014A5C_00001E24:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lfs f0, lbl_808806BC
     fmr f1, f24
     fmr f2, f23
@@ -2366,7 +2366,7 @@ lbl_fn_80014A5C_00001E24:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r3, 0xd4(r28)
     cmpwi r3, 0x0
     beq lbl_fn_80014A5C_00001FA4
@@ -2398,7 +2398,7 @@ lbl_fn_80014A5C_00001F50:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
 lbl_fn_80014A5C_00001FA4:
     fadds f23, f23, f27
     lfs f0, lbl_808806BC
@@ -2417,7 +2417,7 @@ lbl_fn_80014A5C_00001FA4:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r5, 0xc0(r28)
     addi r3, r1, 0x148
     addi r4, r30, 0x78
@@ -2436,7 +2436,7 @@ lbl_fn_80014A5C_00001FA4:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lfs f0, lbl_808806BC
     fmr f1, f24
     fmr f2, f23
@@ -2450,7 +2450,7 @@ lbl_fn_80014A5C_00001FA4:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r5, 0xd8(r28)
     addi r3, r1, 0x148
     addi r4, r30, 0x78
@@ -2469,7 +2469,7 @@ lbl_fn_80014A5C_00001FA4:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     fadds f23, f23, f27
     lfs f0, lbl_808806D8
     lfs f20, lbl_808806BC
@@ -2497,7 +2497,7 @@ lbl_fn_80014A5C_000020DC:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lfs f1, 0x160(r31)
     addi r3, r1, 0x148
     addi r4, r30, 0x14a
@@ -2516,7 +2516,7 @@ lbl_fn_80014A5C_000020DC:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lfs f1, 0x180(r31)
     addi r3, r1, 0x148
     addi r4, r30, 0x14a
@@ -2535,7 +2535,7 @@ lbl_fn_80014A5C_000020DC:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     addi r20, r20, 0x1
     fadds f23, f23, f27
     cmplwi r20, 0x8
@@ -2559,7 +2559,7 @@ lbl_fn_80014A5C_000020DC:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r0, 0x38(r23)
     addi r3, r1, 0x148
     addi r4, r30, 0x15b
@@ -2590,7 +2590,7 @@ lbl_fn_80014A5C_000020DC:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     fadds f23, f23, f27
     lfs f0, lbl_808806BC
     fmr f1, f25
@@ -2605,7 +2605,7 @@ lbl_fn_80014A5C_000020DC:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r7, 0x560(r23)
     addi r3, r1, 0x148
     lwz r6, 0x564(r23)
@@ -2626,7 +2626,7 @@ lbl_fn_80014A5C_000020DC:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     fadds f23, f23, f27
     lfs f0, lbl_808806BC
     fmr f1, f25
@@ -2641,7 +2641,7 @@ lbl_fn_80014A5C_000020DC:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r0, 0x12a4(r23)
     addi r3, r1, 0x148
     addi r4, r30, 0x17b
@@ -2663,7 +2663,7 @@ lbl_fn_80014A5C_000020DC:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     fadds f23, f23, f27
     lfs f0, lbl_808806BC
     fmr f1, f25
@@ -2678,7 +2678,7 @@ lbl_fn_80014A5C_000020DC:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     addi r3, r1, 0x148
     addi r4, r30, 0x66
     addi r5, r28, 0x1b0
@@ -2697,7 +2697,7 @@ lbl_fn_80014A5C_000020DC:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r3, 0xc(r28)
     cmpwi r3, 0x0
     ble lbl_fn_80014A5C_000024A4
@@ -2901,7 +2901,7 @@ lbl_fn_80014A5C_000026F4:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r3, lbl_8087F048
     fadds f20, f27, f27
     mr r4, r23
@@ -3002,7 +3002,7 @@ lbl_fn_80014A5C_000028A0:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     fadds f20, f20, f27
 lbl_fn_80014A5C_000028D8:
     addi r27, r27, 0x934
@@ -3063,7 +3063,7 @@ lbl_fn_80014A5C_0000296C:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lfs f1, 0xac(r22)
     addi r3, r1, 0x48
     addi r4, r23, 0x1b8
@@ -3082,7 +3082,7 @@ lbl_fn_80014A5C_0000296C:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lfs f1, 0xbc(r22)
     addi r3, r1, 0x48
     addi r4, r23, 0x1b8
@@ -3101,7 +3101,7 @@ lbl_fn_80014A5C_0000296C:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lfs f1, 0xcc(r22)
     addi r3, r1, 0x48
     addi r4, r23, 0x1b8
@@ -3120,7 +3120,7 @@ lbl_fn_80014A5C_0000296C:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     addi r20, r20, 0x1
     fadds f28, f28, f25
     cmpwi r20, 0x4
@@ -3273,7 +3273,7 @@ lbl_fn_80016888_00002CA8:
     bl fn_8001C1BC
     mr r3, r31
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F408
     lwz r0, 0x48(r3)
     stw r0, 0x8c(r31)
@@ -3371,7 +3371,7 @@ lbl_fn_80016A94_00002DD8:
     lfs f2, 0x53c(r31)
     psq_st f1, 0x0(r30), 0, 0
     stfs f2, 0x1c(r1)
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lis r0, 0x4330
     addi r5, r4, 0x749f
@@ -3428,7 +3428,7 @@ asm void fn_80016C10(void)
     stw r28, 0xc(r1)
     lwz r0, 0x74(r30)
     b lbl_fn_80016C10_00002EEC
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80016C10_00002EEC:
     cmpwi r0, 0x0
     stw r0, 0x8(r1)
@@ -3438,7 +3438,7 @@ lbl_fn_80016C10_00002EEC:
     la r5, lbl_8087D6EC
     la r6, lbl_8087D6E8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0xc(r1)
     b lbl_fn_80016C10_00002F20
 lbl_fn_80016C10_00002F18:
@@ -3593,7 +3593,7 @@ lbl_fn_80016C10_00003120:
     bne lbl_fn_80016C10_00003148
     cmpwi r3, 0x0
     beq lbl_fn_80016C10_00003134
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80016C10_00003134:
     li r0, 0x0
     stw r0, 0xc(r1)
@@ -3601,7 +3601,7 @@ lbl_fn_80016C10_00003134:
     stw r0, 0x8(r1)
     b lbl_fn_80016C10_000031D0
 lbl_fn_80016C10_00003148:
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r28
     lwz r4, 0x74(r30)
     lwz r5, 0xc(r1)
@@ -3634,7 +3634,7 @@ lbl_fn_80016C10_000031B0:
     cmpwi r5, 0x0
     beq lbl_fn_80016C10_000031C0
     mr r3, r5
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80016C10_000031C0:
     li r0, 0x0
     stw r0, 0xc(r1)
@@ -3664,7 +3664,7 @@ asm void fn_80016F48(void)
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_80016F48_0000321C
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80016F48_0000321C:
     cmpwi r31, 0x0
     li r0, 0x0

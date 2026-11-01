@@ -14,13 +14,13 @@ extern void dtor_80084684(void);
 extern void fn_8059E340(void);
 extern void fn_8059E380(void);
 extern void fn_8059FFD8(void);
-extern void fn_805F3130(void);
-extern void fn_805F3210(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9940(void);
+extern void OSLockMutex(void);
+extern void OSUnlockMutex(void);
+extern void PSMTXMultVec(void);
+extern void PSVECMag(void);
 extern void fn_8068A850(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEB0(void);
+extern void std_atan2(void);
+extern void std_pow(void);
 extern void fn_80703F90(void);
 extern void fn_80704890(void);
 extern void fn_807097E0(void);
@@ -131,7 +131,7 @@ asm void fn_80713C10(void)
     mr r30, r4
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3130
+    bl OSLockMutex
     lwz r31, 0xc8(r31)
     b lbl_fn_80713C10_00000068
 lbl_fn_80713C10_00000030:
@@ -155,7 +155,7 @@ lbl_fn_80713C10_00000068:
     bne lbl_fn_80713C10_00000030
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3210
+    bl OSUnlockMutex
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -200,13 +200,13 @@ asm void fn_80713CB0(void)
     stw r0, 0x20(r1)
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3130
+    bl OSLockMutex
     lbz r0, 0x5(r30)
     cmpwi r0, 0x0
     bne lbl_fn_80713CB0_00000144
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3210
+    bl OSUnlockMutex
     b lbl_fn_80713CB0_000005A8
 lbl_fn_80713CB0_00000144:
     lwz r0, 0xc8(r30)
@@ -214,7 +214,7 @@ lbl_fn_80713CB0_00000144:
     bne lbl_fn_80713CB0_00000160
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3210
+    bl OSUnlockMutex
     b lbl_fn_80713CB0_000005A8
 lbl_fn_80713CB0_00000160:
     lha r4, 0x72(r30)
@@ -511,7 +511,7 @@ lbl_fn_80713CB0_00000594:
     bne lbl_fn_80713CB0_000004A4
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3210
+    bl OSUnlockMutex
 lbl_fn_80713CB0_000005A8:
     addi r11, r1, 0x40
     psq_l f31, 0xe8(r1), 0, 0
@@ -554,7 +554,7 @@ asm void fn_80714230(void)
     mr r30, r3
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3130
+    bl OSLockMutex
     lwz r31, 0xc8(r30)
     b lbl_fn_80714230_00000658
 lbl_fn_80714230_0000064C:
@@ -568,7 +568,7 @@ lbl_fn_80714230_00000658:
     stw r0, 0xc8(r30)
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3210
+    bl OSUnlockMutex
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -591,7 +591,7 @@ asm void fn_807142A0(void)
     mr r29, r3
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3130
+    bl OSLockMutex
     cmpwi r30, 0x0
     beq lbl_fn_807142A0_000006D0
     cmpwi r30, 0x2
@@ -616,7 +616,7 @@ lbl_fn_807142A0_000006F8:
     stw r0, 0xc8(r31)
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3210
+    bl OSUnlockMutex
     b lbl_fn_807142A0_0000075C
     b lbl_fn_807142A0_00000744
 lbl_fn_807142A0_00000720:
@@ -626,7 +626,7 @@ lbl_fn_807142A0_00000720:
     stw r0, 0xd4(r3)
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3210
+    bl OSUnlockMutex
     b lbl_fn_807142A0_0000075C
 lbl_fn_807142A0_00000740:
     mr r3, r0
@@ -636,7 +636,7 @@ lbl_fn_807142A0_00000744:
     bne lbl_fn_807142A0_00000720
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3210
+    bl OSUnlockMutex
 lbl_fn_807142A0_0000075C:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -659,7 +659,7 @@ asm void fn_80714390(void)
     mr r30, r3
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3130
+    bl OSLockMutex
     cmpwi r31, 0x0
     beq lbl_fn_80714390_000007CC
     cmpwi r31, 0x3
@@ -676,7 +676,7 @@ lbl_fn_80714390_000007CC:
 lbl_fn_80714390_000007D8:
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3130
+    bl OSLockMutex
     lwz r31, 0xc8(r30)
     b lbl_fn_80714390_00000800
 lbl_fn_80714390_000007EC:
@@ -692,14 +692,14 @@ lbl_fn_80714390_00000800:
     stw r0, 0xc8(r30)
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3210
+    bl OSUnlockMutex
     li r0, 0x1
     stb r0, 0x48(r30)
     b lbl_fn_80714390_000008C0
 lbl_fn_80714390_00000828:
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3130
+    bl OSLockMutex
     mr r3, r30
     bl fn_80713CB0
     lwz r31, 0xc8(r30)
@@ -717,10 +717,10 @@ lbl_fn_80714390_0000085C:
     bne lbl_fn_80714390_00000844
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3210
+    bl OSUnlockMutex
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3130
+    bl OSLockMutex
     lwz r31, 0xc8(r30)
     b lbl_fn_80714390_00000890
 lbl_fn_80714390_00000884:
@@ -734,7 +734,7 @@ lbl_fn_80714390_00000890:
     stw r0, 0xc8(r30)
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3210
+    bl OSUnlockMutex
     li r0, 0x1
     stb r0, 0x48(r30)
     b lbl_fn_80714390_000008C0
@@ -744,7 +744,7 @@ lbl_fn_80714390_000008B8:
 lbl_fn_80714390_000008C0:
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3210
+    bl OSUnlockMutex
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -785,7 +785,7 @@ asm void fn_80714520(void)
     mr r29, r7
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3130
+    bl OSLockMutex
     lbz r0, 0x89(r25)
     lis r3, 0x8102
     addi r3, r3, 0x409
@@ -891,7 +891,7 @@ lbl_fn_80714520_00000A94:
     bne lbl_fn_80714520_00000AF0
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3210
+    bl OSUnlockMutex
     li r3, 0x0
     b lbl_fn_80714520_00000D00
 lbl_fn_80714520_00000AF0:
@@ -915,13 +915,13 @@ lbl_fn_80714520_00000B20:
 lbl_fn_80714520_00000B28:
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3130
+    bl OSLockMutex
     lwz r0, 0xc8(r25)
     stw r0, 0xd4(r30)
     stw r30, 0xc8(r25)
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3210
+    bl OSUnlockMutex
 lbl_fn_80714520_00000B4C:
     lbz r4, 0x90(r25)
     cmplwi r4, 0x7f
@@ -1042,7 +1042,7 @@ lbl_fn_80714520_00000CA4:
     stw r0, 0xb8(r30)
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3210
+    bl OSUnlockMutex
     mr r3, r30
 lbl_fn_80714520_00000D00:
     addi r11, r1, 0x70
@@ -1359,7 +1359,7 @@ asm void fn_80714D00(void)
     ps_sub f0, f2, f1
     mr r3, r8
     psq_st f0, 0x8(r8), 1, 0
-    bl fn_805F9940
+    bl PSVECMag
     lbz r3, 0x1d(r28)
     lis r0, 0x4330
     stw r0, 0x18(r1)
@@ -1385,7 +1385,7 @@ lbl_fn_80714D00_00001198:
     fsubs f0, f1, f4
     fmr f1, f2
     fdivs f2, f0, f3
-    bl fn_8068AEB0
+    bl std_pow
     frsp f5, f1
     b lbl_fn_80714D00_000011D4
 lbl_fn_80714D00_000011B0:
@@ -1453,9 +1453,9 @@ asm void fn_80714E40(void)
     mr r31, r8
     mr r3, r28
     addi r5, r1, 0x8
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r3, r1, 0x8
-    bl fn_805F9940
+    bl PSVECMag
     fmr f25, f1
     lfs f27, 0x20(r27)
     lfs f26, 0x48(r28)
@@ -1557,7 +1557,7 @@ lbl_fn_80714FA0_000013EC:
     psq_l f0, 0x38(r4), 1, 0
     ps_sub f0, f1, f0
     psq_st f0, 0x8(r31), 1, 0
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, lbl_808891E8
     fcmpo cr0, f1, f0
     ble lbl_fn_80714FA0_00001444
@@ -1601,10 +1601,10 @@ lbl_fn_80714FA0_00001444:
     b lbl_fn_80714FA0_000014CC
 lbl_fn_80714FA0_000014B8:
     addi r3, r29, 0xc
-    bl fn_805F9940
+    bl PSVECMag
     fneg f29, f1
     addi r3, r28, 0x3c
-    bl fn_805F9940
+    bl PSVECMag
 lbl_fn_80714FA0_000014CC:
     fmuls f1, f1, f30
     fmuls f29, f29, f30
@@ -1660,7 +1660,7 @@ asm void fn_80715150(void)
     psq_st f0, 0x0(r3), 0, 0
     ps_sub f0, f2, f1
     psq_st f0, 0x8(r3), 1, 0
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x4c(r30)
     lfs f3, lbl_808891E8
     fcmpo cr0, f1, f0
@@ -2054,7 +2054,7 @@ lbl_fn_807156B0_00001AF8:
     stfs f1, 0x8(r1)
     stfs f0, 0xc(r1)
     stfs f2, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fcmpo cr0, f1, f31
     ble lbl_fn_807156B0_00001B38
     fdivs f2, f31, f1
@@ -2066,7 +2066,7 @@ lbl_fn_807156B0_00001AF8:
     stfs f0, 0x10(r1)
 lbl_fn_807156B0_00001B38:
     addi r3, r1, 0x8
-    bl fn_805F9940
+    bl PSVECMag
     lfs f2, 0x0(r29)
     lfs f0, 0x8(r29)
     fmuls f3, f2, f1
@@ -2081,11 +2081,11 @@ lbl_fn_807156B0_00001B68:
     lfs f0, 0x1c(r1)
     lfs f1, 0x14(r1)
     fneg f2, f0
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     addi r3, r1, 0x14
     stfs f0, 0x0(r30)
-    bl fn_805F9940
+    bl PSVECMag
     fdivs f0, f1, f31
     stfs f0, 0x0(r31)
     psq_l f31, 0x48(r1), 0, 0

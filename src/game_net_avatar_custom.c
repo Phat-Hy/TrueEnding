@@ -12,14 +12,14 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8000D9E8(void);
-extern void fn_80013F78(void);
-extern void fn_80084320(void);
-extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void actor_dispatchMessage(void);
+extern void mem_alloc(void);
+extern void mem_realloc(void);
+extern void mem_getAllocSize(void);
 extern void fn_8009EE30(void);
-extern void fn_800D2338(void);
-extern void fn_800D246C(void);
-extern void fn_800DC6B4(void);
+extern void atn_Task_unlink(void);
+extern void atn_Task_setActive(void);
+extern void str_findChar(void);
 extern void fn_800F52F0(void);
 extern void fn_80116EB8(void);
 extern void fn_8012CE4C(void);
@@ -29,7 +29,7 @@ extern void fn_801D082C(void);
 extern void fn_801D80A0(void);
 extern void fn_801D80B4(void);
 extern void fn_801F3FF8(void);
-extern void fn_801F4E8C(void);
+extern void saveSlot_readSummary(void);
 extern void fn_801F6C80(void);
 extern void fn_801F6E78(void);
 extern void fn_801F837C(void);
@@ -74,8 +74,8 @@ extern void fn_80528A94(void);
 extern void fn_80528BF4(void);
 extern void fn_8054A340(void);
 extern void fn_805BA358(void);
-extern void fn_80682428(void);
-extern void fn_80695720(void);
+extern void strcmp(void);
+extern void runtime_registerStaticObject(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -158,7 +158,7 @@ lbl_fn_8052624C_0000003C:
     bl fn_80202118
     mr r31, r3
     mr r3, r30
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r31, 0x58
@@ -185,7 +185,7 @@ lbl_fn_8052624C_000000A4:
     bl fn_80202118
     mr r31, r3
     mr r3, r30
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r31, 0x58
@@ -240,11 +240,11 @@ lbl_fn_8052635C_00000160:
     bl fn_80202118
     mr r31, r3
     addi r3, r1, 0x20
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r31
     addi r3, r1, 0x8
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     mr r3, r30
     addi r4, r27, 0x2a5
     addi r5, r1, 0x8
@@ -427,7 +427,7 @@ asm void fn_80526660(void)
     stw r0, 0x4(r3)
     stw r0, 0x8(r3)
     b lbl_fn_80526660_00000438
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80526660_00000438:
     lwz r0, 0x14(r1)
     mtlr r0
@@ -479,7 +479,7 @@ asm void fn_805266C0(void)
     bl fn_80202A6C
     stw r3, 0x18(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     b lbl_fn_805266C0_0000066C
     lis r4, lbl_8075C6C4@ha
     mr r3, r6
@@ -489,7 +489,7 @@ asm void fn_805266C0(void)
     bl fn_80202A6C
     stw r3, 0x18(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     b lbl_fn_805266C0_0000066C
     lis r4, lbl_8075C6C4@ha
     mr r3, r6
@@ -499,7 +499,7 @@ asm void fn_805266C0(void)
     bl fn_80202A6C
     stw r3, 0x18(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     b lbl_fn_805266C0_0000066C
     lis r4, lbl_8075C6C4@ha
     mr r3, r6
@@ -509,7 +509,7 @@ asm void fn_805266C0(void)
     bl fn_80202A6C
     stw r3, 0x18(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     b lbl_fn_805266C0_0000066C
     lis r4, lbl_8075C6C4@ha
     mr r3, r6
@@ -519,7 +519,7 @@ asm void fn_805266C0(void)
     bl fn_80202A6C
     stw r3, 0x18(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     b lbl_fn_805266C0_0000066C
     lis r4, lbl_8075C6C4@ha
     mr r3, r6
@@ -529,7 +529,7 @@ asm void fn_805266C0(void)
     bl fn_80202A6C
     stw r3, 0x18(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     b lbl_fn_805266C0_0000066C
     lis r4, lbl_8075C6C4@ha
     mr r3, r6
@@ -539,7 +539,7 @@ asm void fn_805266C0(void)
     bl fn_80202A6C
     stw r3, 0x18(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     b lbl_fn_805266C0_0000066C
     lis r4, lbl_8075C6C4@ha
     mr r3, r6
@@ -549,7 +549,7 @@ asm void fn_805266C0(void)
     bl fn_80202A6C
     stw r3, 0x18(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     b lbl_fn_805266C0_0000066C
     lis r4, lbl_8075C6C4@ha
     mr r3, r6
@@ -559,7 +559,7 @@ asm void fn_805266C0(void)
     bl fn_80202A6C
     stw r3, 0x18(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     b lbl_fn_805266C0_0000066C
     lis r4, lbl_8075C6C4@ha
     mr r3, r6
@@ -569,7 +569,7 @@ asm void fn_805266C0(void)
     bl fn_80202A6C
     stw r3, 0x18(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     b lbl_fn_805266C0_0000066C
     lis r4, lbl_8075C6C4@ha
     mr r3, r6
@@ -579,7 +579,7 @@ asm void fn_805266C0(void)
     bl fn_80202A6C
     stw r3, 0x18(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
 lbl_fn_805266C0_0000066C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -604,7 +604,7 @@ asm void fn_805268CC(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805268CC_000006D0
     mr r4, r31
@@ -706,7 +706,7 @@ lbl_fn_80526930_000007EC:
     add r7, r30, r0
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     li r0, 0x8
     li r3, 0x0
     cmpwi r0, 0x0
@@ -719,19 +719,19 @@ lbl_fn_80526930_000007EC:
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_801D082C@ha
     li r5, 0x0
     addi r4, r4, fn_801D082C@l
     li r6, 0x40
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0x50(r31)
     cmpwi r4, 0x0
     stw r3, 0x50(r31)
     beq lbl_fn_80526930_00000880
     subi r3, r4, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80526930_00000880:
     lis r6, lbl_8075CCF0@ha
     lwz r4, 0x4c(r31)
@@ -765,14 +765,14 @@ lbl_fn_80526930_000008DC:
     bl fn_80201E78
     stw r3, 0xd4(r28)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0x49
     li r5, 0x1
     bl fn_80202A6C
     stw r3, 0xd8(r28)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     addi r27, r27, 0x1
     addi r29, r29, 0x8
     cmpwi r27, 0x7
@@ -785,7 +785,7 @@ lbl_fn_80526930_000008DC:
     bl fn_801F3FF8
     stw r3, 0x10c(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     li r0, 0x0
     stw r0, 0x5dc(r31)
     addi r11, r1, 0x30
@@ -856,10 +856,10 @@ asm void fn_80526C20(void)
 lbl_fn_80526C20_00000A18:
     lwz r3, 0xd4(r31)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0xd8(r31)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     addi r30, r30, 0x1
     addi r31, r31, 0x8
     cmpwi r30, 0x7
@@ -1223,11 +1223,11 @@ lbl_fn_80526D98_00000EE8:
     bl fn_80202118
     mr r25, r3
     addi r3, r1, 0x88
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r25
     addi r3, r1, 0x70
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lwz r5, 0x7c(r29)
     mr r3, r29
     mr r6, r31
@@ -1265,11 +1265,11 @@ lbl_fn_80526D98_00000FB8:
     bl fn_80202118
     mr r25, r3
     addi r3, r1, 0x88
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r25
     addi r3, r1, 0x5c
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lwz r3, 0xd4(r28)
     bl fn_80202118
     lis r5, lbl_8075CE98@ha
@@ -1313,7 +1313,7 @@ lbl_fn_80526D98_00001074:
     addi r28, r28, lbl_8075CED4@l
     addi r3, r28, 0xab
     addi r25, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f27
     mr r4, r3
     mr r3, r25
@@ -1321,7 +1321,7 @@ lbl_fn_80526D98_00001074:
     lwz r4, 0x10c(r29)
     addi r3, r28, 0xb2
     addi r25, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80887A60
     mr r4, r3
     mr r3, r25
@@ -1334,7 +1334,7 @@ lbl_fn_80526D98_000010D0:
     addi r28, r28, lbl_8075CED4@l
     addi r3, r28, 0xab
     addi r25, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80887A60
     mr r4, r3
     mr r3, r25
@@ -1344,7 +1344,7 @@ lbl_fn_80526D98_000010D0:
     lwz r4, 0x10c(r29)
     fneg f27, f0
     addi r25, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f27
     mr r4, r3
     mr r3, r25
@@ -1356,7 +1356,7 @@ lbl_fn_80526D98_00001128:
     addi r28, r28, lbl_8075CED4@l
     addi r3, r28, 0xab
     addi r25, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80887A60
     mr r4, r3
     mr r3, r25
@@ -1364,7 +1364,7 @@ lbl_fn_80526D98_00001128:
     lwz r4, 0x10c(r29)
     addi r3, r28, 0xb2
     addi r25, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80887A60
     mr r4, r3
     mr r3, r25
@@ -1601,7 +1601,7 @@ lbl_fn_805275EC_00001474:
     lwz r3, 0x5dc(r31)
     cmpwi r3, 0x0
     beq lbl_fn_805275EC_0000149C
-    bl fn_800D2338
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0x5dc(r31)
 lbl_fn_805275EC_0000149C:
@@ -1640,7 +1640,7 @@ asm void fn_8052770C(void)
 lbl_fn_8052770C_00001508:
     lwz r3, 0x4(r29)
     addi r4, r31, 0xb9
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8052770C_00001524
     lwz r3, 0x50(r26)
@@ -1656,7 +1656,7 @@ lbl_fn_8052770C_00001530:
     lwz r3, 0x5dc(r26)
     cmpwi r3, 0x0
     beq lbl_fn_8052770C_00001554
-    bl fn_800D2338
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0x5dc(r26)
 lbl_fn_8052770C_00001554:
@@ -1756,7 +1756,7 @@ lbl_fn_805277C4_0000169C:
     cmpwi r0, 0x4
     bne lbl_fn_805277C4_000016C0
     mr r3, r5
-    bl fn_800D2338
+    bl atn_Task_unlink
     li r3, 0x0
     li r0, 0xf
     stw r3, 0x5dc(r31)

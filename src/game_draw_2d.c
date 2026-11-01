@@ -12,22 +12,22 @@ extern void fn_800500FC(void);
 extern void fn_800502A8(void);
 extern void fn_80071D68(void);
 extern void fn_80071D74(void);
-extern void fn_80071E04(void);
+extern void gx_drawScreenQuad(void);
 extern void fn_80075DEC(void);
 extern void fn_80075F58(void);
-extern void fn_800761A8(void);
+extern void gx_applyRenderState(void);
 extern void fn_800763FC(void);
-extern void fn_80076760(void);
+extern void gx_setRenderStateParam(void);
 extern void fn_800848B4(void);
-extern void fn_80084C24(void);
-extern void fn_800874C8(void);
-extern void fn_8008771C(void);
+extern void mem_getAllocSize(void);
+extern void route_findNextWaypoint(void);
+extern void route_interpolatePath(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
 extern void fn_80088AF4(void);
 extern void fn_8008937C(void);
 extern void fn_800A96AC(void);
-extern void fn_800A981C(void);
+extern void layout_drawPane(void);
 extern void fn_800B448C(void);
 extern void fn_800B4694(void);
 extern void fn_800B47AC(void);
@@ -35,13 +35,13 @@ extern void fn_800BFB70(void);
 extern void fn_800C0508(void);
 extern void fn_80476194(void);
 extern void fn_804761B0(void);
-extern void fn_805F95A0(void);
-extern void fn_80613960(void);
+extern void PSMTXMultVecArraySR(void);
+extern void __GXSetVtxDesc(void);
 extern void fn_80613BB0(void);
 extern void fn_80614190(void);
-extern void fn_80614CC0(void);
-extern void fn_80614D30(void);
-extern void fn_80615560(void);
+extern void GXSetTexCopySrc(void);
+extern void GXSetTexCopyDst(void);
+extern void GXCopyTex(void);
 extern void fn_80615D20(void);
 extern void fn_80615D50(void);
 extern void fn_80615FF0(void);
@@ -50,10 +50,10 @@ extern void fn_80617200(void);
 extern void fn_80617220(void);
 extern void fn_80617340(void);
 extern void fn_80617880(void);
-extern void fn_806179E0(void);
+extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
-extern void fn_80617DA0(void);
-extern void fn_80680CF8(void);
+extern void GXSetZCompLoc(void);
+extern void rand(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
 
@@ -114,7 +114,7 @@ void fn_800B326C(void);
 void fn_800B3328(void);
 void fn_800B33A8(void);
 void fn_800B3454(void);
-void fn_800B3464(void);
+void atn_HUD_drawNodeList(void);
 void fn_800B34C0(void);
 void fn_800B35F4(void);
 void fn_800B35F8(void);
@@ -164,7 +164,7 @@ asm void fn_800B23C8(void)
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80880EFC
     mr r3, r30
     lfs f2, lbl_80880EF4
@@ -191,7 +191,7 @@ asm void fn_800B23C8(void)
     addi r5, r29, 0x4c
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80880ED0
     mr r3, r30
     lfs f2, lbl_80880F04
@@ -200,7 +200,7 @@ asm void fn_800B23C8(void)
     addi r5, r29, 0x50
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80880EF0
     mr r3, r30
     lfs f2, lbl_80880F0C
@@ -209,7 +209,7 @@ asm void fn_800B23C8(void)
     addi r5, r29, 0x54
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80880ED0
     mr r3, r30
     lfs f2, lbl_80880F0C
@@ -218,7 +218,7 @@ asm void fn_800B23C8(void)
     addi r5, r29, 0x58
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80880ED0
     mr r3, r30
     lfs f2, lbl_80880F0C
@@ -227,7 +227,7 @@ asm void fn_800B23C8(void)
     addi r5, r29, 0x5c
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80880F14
     mr r3, r30
     lfs f2, lbl_80880F18
@@ -279,7 +279,7 @@ asm void fn_800B257C(void)
     mr r30, r4
     lfs f30, 0x30(r3)
     mr r31, r5
-    bl fn_80680CF8
+    bl rand
     lis r28, 0x4178
     lis r27, lbl_80732D28@ha
     addi r0, r28, 0x749f
@@ -301,7 +301,7 @@ asm void fn_800B257C(void)
     fsubs f4, f4, f5
     fdivs f3, f4, f3
     fmadds f30, f0, f3, f30
-    bl fn_80680CF8
+    bl rand
     addi r0, r28, 0x749f
     lfs f7, lbl_80880F04
     mulhw r0, r0, r3
@@ -387,7 +387,7 @@ lbl_fn_800B257C_00000384:
     stfs f28, 0x10(r1)
     lfs f29, 0x50(r29)
     lfs f28, 0x4c(r29)
-    bl fn_80680CF8
+    bl rand
     lis r27, 0x4178
     lis r28, lbl_80732D28@ha
     addi r0, r27, 0x749f
@@ -412,7 +412,7 @@ lbl_fn_800B257C_00000384:
     lfs f3, 0x5c(r29)
     fmuls f29, f4, f3
     fmuls f28, f0, f3
-    bl fn_80680CF8
+    bl rand
     addi r0, r27, 0x749f
     lfd f6, lbl_80732D28@l(r28)
     mulhw r0, r0, r3
@@ -453,7 +453,7 @@ lbl_fn_800B257C_0000048C:
     lfs f3, 0x4(r30)
     lfs f0, 0x10(r30)
     fsubs f28, f3, f0
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x4178
     lis r4, lbl_80732D28@ha
     addi r0, r5, 0x749f
@@ -974,7 +974,7 @@ asm void fn_800B2EA0(void)
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     bl fn_80617200
     li r3, 0x0
@@ -991,7 +991,7 @@ asm void fn_800B2EA0(void)
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x0
     bl fn_80617220
     lwz r4, lbl_8087EFB4
@@ -1011,15 +1011,15 @@ asm void fn_800B2EA0(void)
     clrlslwi r6, r30, 17, 1
     li r3, 0x0
     li r4, 0x0
-    bl fn_80614CC0
+    bl GXSetTexCopySrc
     clrlwi r3, r31, 16
     clrlwi r4, r30, 16
     li r5, 0x6
     li r6, 0x1
-    bl fn_80614D30
+    bl GXSetTexCopyDst
     mr r3, r29
     li r4, 0x1
-    bl fn_80615560
+    bl GXCopyTex
     bl fn_80614190
     lwz r3, lbl_8087EFA8
     lfs f1, 0x420(r3)
@@ -1042,7 +1042,7 @@ asm void fn_800B2EA0(void)
     li r7, 0x6
     li r8, 0x0
     li r9, 0x0
-    bl fn_800A981C
+    bl layout_drawPane
     lwz r3, lbl_8087EFA8
     lfs f1, 0x420(r3)
     bl fn_8068A850
@@ -1064,13 +1064,13 @@ asm void fn_800B2EA0(void)
     li r8, 0x0
     li r9, 0x0
     fmuls f1, f0, f1
-    bl fn_800A981C
+    bl layout_drawPane
     li r3, 0x1
     bl fn_80613BB0
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     bl fn_80617200
     lwz r3, lbl_8087EEE0
@@ -1271,7 +1271,7 @@ asm void fn_800B33A8(void)
     mr r30, r3
     lwz r31, lbl_8087EEE0
     mr r3, r31
-    bl fn_80071E04
+    bl gx_drawScreenQuad
     lwz r4, lbl_8087EFB4
     mr r3, r31
     addi r4, r4, 0x18c
@@ -1279,21 +1279,21 @@ asm void fn_800B33A8(void)
     mr r3, r31
     li r4, 0x6
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0x8
     li r5, 0x1
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0x9
     li r5, 0x2
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0xa
     li r5, 0x1
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
-    bl fn_800761A8
+    bl gx_applyRenderState
     lwz r4, 0x14(r30)
     li r0, 0x0
     lwz r3, lbl_8087EFB4
@@ -1317,7 +1317,7 @@ asm void fn_800B3454(void)
     blr
 }
 
-asm void fn_800B3464(void)
+asm void atn_HUD_drawNodeList(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1327,8 +1327,8 @@ asm void fn_800B3464(void)
     stw r30, 0x8(r1)
     mr r30, r4
     lwz r31, lbl_8087EFB4
-    b lbl_fn_800B3464_000010DC
-lbl_fn_800B3464_000010C0:
+    b lbl_atn_HUD_drawNodeList_000010DC
+lbl_atn_HUD_drawNodeList_000010C0:
     lwz r3, 0x0(r30)
     mr r4, r31
     lwz r12, 0x0(r3)
@@ -1336,9 +1336,9 @@ lbl_fn_800B3464_000010C0:
     mtctr r12
     bctrl
     lwz r30, 0x8(r30)
-lbl_fn_800B3464_000010DC:
+lbl_atn_HUD_drawNodeList_000010DC:
     cmpwi r30, 0x0
-    bne lbl_fn_800B3464_000010C0
+    bne lbl_atn_HUD_drawNodeList_000010C0
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1356,7 +1356,7 @@ asm void fn_800B34C0(void)
     stw r31, 0x9c(r1)
     lwz r31, lbl_8087EEE0
     mr r3, r31
-    bl fn_80071E04
+    bl gx_drawScreenQuad
     lwz r0, 0x40(r31)
     lis r4, 0x4330
     lfs f1, lbl_80880F38
@@ -1377,7 +1377,7 @@ asm void fn_800B34C0(void)
     stw r4, 0x90(r1)
     lfd f0, 0x90(r1)
     fsubs f4, f0, f9
-    bl fn_805F95A0
+    bl PSMTXMultVecArraySR
     addi r5, r1, 0x8
     addi r4, r1, 0x48
     psq_l f1, 0x0(r5), 0, 0
@@ -1401,27 +1401,27 @@ asm void fn_800B34C0(void)
     mr r3, r31
     li r4, 0x6
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0x8
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0x9
     li r5, 0x7
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0xa
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0x4
     li r5, 0x4
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0x5
     li r5, 0x5
-    bl fn_80076760
+    bl gx_setRenderStateParam
     lwz r0, 0xa4(r1)
     lwz r31, 0x9c(r1)
     mtlr r0
@@ -1488,7 +1488,7 @@ asm void fn_800B365C(void)
     mr r30, r3
     lwz r31, lbl_8087EEE0
     mr r3, r31
-    bl fn_80071E04
+    bl gx_drawScreenQuad
     lwz r4, lbl_8087EFB4
     mr r3, r31
     addi r4, r4, 0x18c
@@ -1496,21 +1496,21 @@ asm void fn_800B365C(void)
     mr r3, r31
     li r4, 0x6
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0x8
     li r5, 0x1
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0x9
     li r5, 0x2
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0xa
     li r5, 0x1
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
-    bl fn_800761A8
+    bl gx_applyRenderState
     lwz r4, 0x14(r30)
     li r3, 0x0
     lwz r5, lbl_8087EFB4
@@ -1523,21 +1523,21 @@ asm void fn_800B365C(void)
     lwz r31, lbl_8087EEE0
     stb r0, lbl_8087EFB0
     mr r3, r31
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0x8
     li r5, 0x1
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0x9
     li r5, 0x2
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0xa
     li r5, 0x1
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
-    bl fn_800761A8
+    bl gx_applyRenderState
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1567,7 +1567,7 @@ asm void fn_800B3770(void)
     stw r30, 0x8(r1)
     lwz r30, lbl_8087EEE0
     mr r3, r30
-    bl fn_80071E04
+    bl gx_drawScreenQuad
     lwz r4, lbl_8087EFB4
     mr r3, r30
     addi r4, r4, 0x18c
@@ -1575,21 +1575,21 @@ asm void fn_800B3770(void)
     mr r3, r30
     li r4, 0x6
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r30
     li r4, 0x8
     li r5, 0x1
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r30
     li r4, 0x9
     li r5, 0x2
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r30
     li r4, 0xa
     li r5, 0x1
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r30
-    bl fn_800761A8
+    bl gx_applyRenderState
     lwz r5, 0x14(r31)
     li r0, 0x0
     lwz r4, lbl_8087EFB4
@@ -1597,7 +1597,7 @@ asm void fn_800B3770(void)
     clrlwi r5, r5, 31
     stw r5, 0x954(r4)
     stw r0, 0x18(r31)
-    bl fn_80617DA0
+    bl GXSetZCompLoc
     lwz r5, lbl_8087EEE0
     li r3, 0x0
     li r4, 0x0
@@ -1605,18 +1605,18 @@ asm void fn_800B3770(void)
     lwz r31, 0x3c(r5)
     clrlwi r6, r30, 16
     clrlwi r5, r31, 16
-    bl fn_80614CC0
+    bl GXSetTexCopySrc
     clrlwi r3, r31, 16
     clrlwi r4, r30, 16
     li r5, 0x13
     li r6, 0x0
-    bl fn_80614D30
+    bl GXSetTexCopyDst
     lwz r3, lbl_8087EFB4
     li r4, 0x1
     lwz r3, 0x79c(r3)
-    bl fn_80615560
+    bl GXCopyTex
     li r3, 0x1
-    bl fn_80617DA0
+    bl GXSetZCompLoc
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1949,7 +1949,7 @@ asm void fn_800B3C3C(void)
     li r30, 0x0
 lbl_fn_800B3C3C_000018B8:
     lwz r3, 0x14(r31)
-    bl fn_80084C24
+    bl mem_getAllocSize
     addi r30, r30, 0x1
     addi r31, r31, 0x4
     cmpwi r30, 0x5

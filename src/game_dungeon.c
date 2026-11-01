@@ -13,8 +13,8 @@ extern void fn_80084E50(void);
 extern void fn_80084E78(void);
 extern void fn_80084EE8(void);
 extern void fn_80084FA0(void);
-extern void fn_805F3130(void);
-extern void fn_805F3210(void);
+extern void OSLockMutex(void);
+extern void OSUnlockMutex(void);
 
 /* External data declarations */
 extern u8 lbl_80732048[];
@@ -204,7 +204,7 @@ lbl_fn_80081E54_0000022C:
     cmpwi r31, 0x0
     beq lbl_fn_80081E54_0000023C
     mr r3, r31
-    bl fn_805F3130
+    bl OSLockMutex
 lbl_fn_80081E54_0000023C:
     lwz r12, 0x138(r29)
     addi r3, r29, 0x138
@@ -248,7 +248,7 @@ lbl_fn_80081E54_000002CC:
     cmpwi r31, 0x0
     beq lbl_fn_80081E54_000002DC
     mr r3, r31
-    bl fn_805F3210
+    bl OSUnlockMutex
 lbl_fn_80081E54_000002DC:
     mr r3, r27
     lmw r27, 0xc(r1)
@@ -490,7 +490,7 @@ lbl_fn_80082260_00000638:
     cmpwi r31, 0x0
     beq lbl_fn_80082260_00000648
     mr r3, r31
-    bl fn_805F3130
+    bl OSLockMutex
 lbl_fn_80082260_00000648:
     lwz r12, 0x150(r29)
     addi r3, r29, 0x150
@@ -518,7 +518,7 @@ lbl_fn_80082260_000006A0:
     cmpwi r31, 0x0
     beq lbl_fn_80082260_000006B0
     mr r3, r31
-    bl fn_805F3210
+    bl OSUnlockMutex
 lbl_fn_80082260_000006B0:
     mr r3, r27
     lmw r27, 0xc(r1)

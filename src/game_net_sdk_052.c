@@ -14,8 +14,8 @@ extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_805F3130(void);
-extern void fn_805F3210(void);
+extern void OSLockMutex(void);
+extern void OSUnlockMutex(void);
 extern void fn_80619CB0(void);
 extern void fn_80619D40(void);
 extern void fn_80619D70(void);
@@ -1285,7 +1285,7 @@ asm void fn_8070C780(void)
     add r30, r4, r5
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3130
+    bl OSLockMutex
     bl OSDisableInterrupts
     lbz r0, lbl_808804C0
     mr r29, r3
@@ -1348,7 +1348,7 @@ lbl_fn_8070C780_000010C4:
     bne lbl_fn_8070C780_0000106C
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3210
+    bl OSUnlockMutex
     addi r11, r1, 0x30
     bl _restgpr_22
     lwz r0, 0x34(r1)
@@ -1369,7 +1369,7 @@ asm void fn_8070C8B0(void)
     add r30, r4, r5
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3130
+    bl OSLockMutex
     bl OSDisableInterrupts
     lbz r0, lbl_808804C0
     mr r29, r3
@@ -1432,7 +1432,7 @@ lbl_fn_8070C8B0_000011F4:
     bne lbl_fn_8070C8B0_0000119C
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3210
+    bl OSUnlockMutex
     addi r11, r1, 0x30
     bl _restgpr_22
     lwz r0, 0x34(r1)
@@ -1937,7 +1937,7 @@ asm void fn_8070CFD0(void)
     stw r28, 0x10(r1)
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3130
+    bl OSLockMutex
     lbz r3, 0x98(r30)
     lwz r0, 0x50(r30)
     add r3, r3, r0
@@ -1954,7 +1954,7 @@ lbl_fn_8070CFD0_00001870:
     bne lbl_fn_8070CFD0_00001890
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3210
+    bl OSUnlockMutex
     li r3, 0x0
     b lbl_fn_8070CFD0_000019A0
 lbl_fn_8070CFD0_00001890:
@@ -1992,7 +1992,7 @@ lbl_fn_8070CFD0_000018E8:
     bne lbl_fn_8070CFD0_0000190C
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3210
+    bl OSUnlockMutex
     li r3, 0x0
     b lbl_fn_8070CFD0_000019A0
 lbl_fn_8070CFD0_0000190C:
@@ -2011,7 +2011,7 @@ lbl_fn_8070CFD0_00001930:
     bge lbl_fn_8070CFD0_0000194C
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3210
+    bl OSUnlockMutex
     li r3, 0x0
     b lbl_fn_8070CFD0_000019A0
 lbl_fn_8070CFD0_0000194C:
@@ -2035,7 +2035,7 @@ lbl_fn_8070CFD0_0000195C:
     bl fn_8070ABC0
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3210
+    bl OSUnlockMutex
     li r3, 0x1
 lbl_fn_8070CFD0_000019A0:
     lwz r0, 0x24(r1)

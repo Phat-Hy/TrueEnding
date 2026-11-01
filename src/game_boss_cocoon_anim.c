@@ -19,7 +19,7 @@ extern void fn_8020EF80(void);
 extern void fn_802114D8(void);
 extern void fn_802114E0(void);
 extern void fn_80213E60(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_8021E444(void);
 extern void fn_80373148(void);
 extern void fn_803E5E64(void);
@@ -28,8 +28,8 @@ extern void fn_804439FC(void);
 extern void fn_80444CF8(void);
 extern void fn_80445F44(void);
 extern void fn_8044D678(void);
-extern void fn_80680CF8(void);
-extern void fn_806846C4(void);
+extern void rand(void);
+extern void wmemcpy(void);
 extern void fn_80686A48(void);
 
 /* External data declarations */
@@ -110,7 +110,7 @@ lbl_fn_80450590_00000088:
     mr r3, r30
     mr r4, r29
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80450590_000000BC:
     subic. r28, r28, 0x1
     subi r30, r30, 0x40
@@ -128,7 +128,7 @@ lbl_fn_80450590_000000BC:
     mr r4, r30
     addi r3, r31, 0x2c
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
     b lbl_fn_80450590_000001C8
 lbl_fn_80450590_00000104:
     addi r3, r1, 0x88
@@ -155,7 +155,7 @@ lbl_fn_80450590_00000138:
     mr r4, r30
     addi r3, r31, 0x6c
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
     b lbl_fn_80450590_000001C8
 lbl_fn_80450590_00000168:
     addi r3, r1, 0x8
@@ -182,7 +182,7 @@ lbl_fn_80450590_0000019C:
     mr r4, r30
     addi r3, r31, 0x2c
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80450590_000001C8:
     lwz r0, 0x1a4(r1)
     lwz r31, 0x19c(r1)
@@ -246,7 +246,7 @@ lbl_fn_80450778_00000284:
     cmpwi r3, 0x0
     lwz r30, 0x48(r4)
     ble lbl_fn_80450778_000002A0
-    bl fn_80219E6C
+    bl task_findEntryById
     b lbl_fn_80450778_000002A4
 lbl_fn_80450778_000002A0:
     li r3, 0x0
@@ -2002,7 +2002,7 @@ lbl_fn_804515A8_00001B28:
     add r14, r14, r0
     bdnz lbl_fn_804515A8_00001B28
 lbl_fn_804515A8_00001B38:
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r14
     lwz r4, 0x2410(r1)
     addi r5, r1, 0x2414
@@ -2043,7 +2043,7 @@ lbl_fn_804515A8_00001BB4:
     beq lbl_fn_804515A8_00001C18
     bl fn_80206B68
     mr r14, r3
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r14
     mullw r0, r0, r14
     subf r3, r0, r3
@@ -2052,7 +2052,7 @@ lbl_fn_804515A8_00001BB4:
     mr r14, r3
     extrwi. r0, r0, 1, 1
     bne lbl_fn_804515A8_00001BF4
-    bl fn_80680CF8
+    bl rand
 lbl_fn_804515A8_00001BF4:
     mr r3, r14
     bl fn_80206BE4
@@ -2071,7 +2071,7 @@ lbl_fn_804515A8_00001C18:
     beq lbl_fn_804515A8_00001C94
     bl fn_8020EE58
     mr r14, r3
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r14
     mullw r0, r0, r14
     subf r3, r0, r3
@@ -2102,7 +2102,7 @@ lbl_fn_804515A8_00001C94:
     lwz r4, 0x4(r3)
     cmpwi r4, 0x2714
     bne lbl_fn_804515A8_00001D38
-    bl fn_80680CF8
+    bl rand
     lis r14, 0x6666
     lwz r0, 0x24(r15)
     addi r4, r14, 0x6667
@@ -2116,7 +2116,7 @@ lbl_fn_804515A8_00001C94:
     mullw r0, r0, r3
     cmpwi r0, 0x1
     ble lbl_fn_804515A8_00001D0C
-    bl fn_80680CF8
+    bl rand
     addi r4, r14, 0x6667
     lwz r0, 0x24(r15)
     mulhw r4, r4, r3
@@ -2131,7 +2131,7 @@ lbl_fn_804515A8_00001C94:
 lbl_fn_804515A8_00001D0C:
     li r14, 0x1
 lbl_fn_804515A8_00001D10:
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r14
     lwz r4, 0x20(r15)
     li r6, 0x1
@@ -2152,13 +2152,13 @@ lbl_fn_804515A8_00001D38:
 lbl_fn_804515A8_00001D54:
     bl fn_802114D8
     mr r14, r3
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r14
     mullw r0, r0, r14
     subf r3, r0, r3
     bl fn_802114E0
     mr r14, r3
-    bl fn_80680CF8
+    bl rand
     lwz r5, 0x24(r15)
     li r6, 0x1
     lwz r4, 0x4(r14)

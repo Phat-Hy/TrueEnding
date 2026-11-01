@@ -19,16 +19,16 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_805EC3B0(void);
 extern void fn_805EC870(void);
-extern void fn_805F3130(void);
-extern void fn_805F3210(void);
-extern void fn_80609D50(void);
+extern void OSLockMutex(void);
+extern void OSUnlockMutex(void);
+extern void __AXGetBufferSamples(void);
 extern void fn_80609D80(void);
 extern void fn_80609E50(void);
 extern void fn_80625910(void);
 extern void fn_80661B60(void);
 extern void fn_80663330(void);
 extern void fn_806633C0(void);
-extern void fn_80682544(void);
+extern void strncmp(void);
 extern void fn_80709700(void);
 extern void fn_807097C0(void);
 extern void fn_8070C650(void);
@@ -118,9 +118,9 @@ void fn_807112D0(void);
 void fn_80711320(void);
 void fn_80711390(void);
 void fn_80711430(void);
-void fn_80711440(void);
+void net_alarm_scheduleTimeout(void);
 void fn_807114E0(void);
-void fn_80711530(void);
+void net_resetAllSockets(void);
 void fn_80711630(void);
 void fn_807116A0(void);
 void fn_807116B0(void);
@@ -1118,7 +1118,7 @@ asm void fn_80710810(void)
     stw r4, 0x0(r3)
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3130
+    bl OSLockMutex
     lwz r31, 0xc(r29)
     bl fn_8070C650
     lwz r0, 0x14(r29)
@@ -1137,7 +1137,7 @@ asm void fn_80710810(void)
     stw r0, 0x14(r29)
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3210
+    bl OSUnlockMutex
     cmpwi r30, 0x0
     li r0, 0x0
     stw r0, 0x14(r29)
@@ -1202,7 +1202,7 @@ asm void fn_80710940(void)
     mr r30, r3
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3130
+    bl OSLockMutex
     lwz r31, 0xc(r30)
     bl fn_8070C650
     lwz r0, 0x14(r30)
@@ -1221,7 +1221,7 @@ asm void fn_80710940(void)
     stw r0, 0x14(r30)
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3210
+    bl OSUnlockMutex
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -2011,7 +2011,7 @@ asm void fn_80711430(void)
     blr
 }
 
-asm void fn_80711440(void)
+asm void net_alarm_scheduleTimeout(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -2021,7 +2021,7 @@ asm void fn_80711440(void)
     mr r31, r3
     lbz r0, 0x0(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80711440_000019FC
+    bne lbl_net_alarm_scheduleTimeout_000019FC
     addi r3, r3, 0x8
     bl OSCreateAlarm
     bl OSGetTime
@@ -2030,7 +2030,7 @@ asm void fn_80711440(void)
     lwz r0, 0xf8(r6)
     lis r6, 0x1062
     addi r10, r6, 0x4dd3
-    lis r9, fn_80711530@ha
+    lis r9, net_resetAllSockets@ha
     srwi r0, r0, 2
     subi r5, r5, 0x217d
     mulhwu r8, r5, r0
@@ -2040,7 +2040,7 @@ asm void fn_80711440(void)
     mr r5, r3
     addi r3, r31, 0x8
     srwi r4, r8, 15
-    addi r9, r9, fn_80711530@l
+    addi r9, r9, net_resetAllSockets@l
     mullw r0, r4, r0
     li r7, 0x0
     mulhwu r0, r10, r0
@@ -2048,7 +2048,7 @@ asm void fn_80711440(void)
     bl fn_805EC3B0
     li r0, 0x1
     stb r0, 0x0(r31)
-lbl_fn_80711440_000019FC:
+lbl_net_alarm_scheduleTimeout_000019FC:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -2079,7 +2079,7 @@ lbl_fn_807114E0_00001A44:
     blr
 }
 
-asm void fn_80711530(void)
+asm void net_resetAllSockets(void)
 {
     nofralloc
     stwu r1, -0x70(r1)
@@ -2090,19 +2090,19 @@ asm void fn_80711530(void)
     stw r29, 0x64(r1)
     lbz r0, lbl_808804D0
     extsb. r0, r0
-    bne lbl_fn_80711530_00001AD8
+    bne lbl_net_resetAllSockets_00001AD8
     lis r3, lbl_80862FB0@ha
     li r0, 0x0
     addi r30, r3, lbl_80862FB0@l
     stb r0, lbl_80862FB0@l(r3)
     addi r29, r30, 0x38
     addi r31, r30, 0x2d8
-lbl_fn_80711530_00001AA0:
+lbl_net_resetAllSockets_00001AA0:
     mr r3, r29
     bl fn_80710A00
     addi r29, r29, 0xa8
     cmplw r29, r31
-    blt lbl_fn_80711530_00001AA0
+    blt lbl_net_resetAllSockets_00001AA0
     li r4, 0x1
     li r5, 0x0
     li r3, 0x2
@@ -2112,18 +2112,18 @@ lbl_fn_80711530_00001AA0:
     stw r3, 0x1bc(r30)
     stw r0, 0x264(r30)
     stb r4, lbl_808804D0
-lbl_fn_80711530_00001AD8:
+lbl_net_resetAllSockets_00001AD8:
     lis r30, lbl_80862FB0@ha
     addi r30, r30, lbl_80862FB0@l
-    bl fn_80609D50
+    bl __AXGetBufferSamples
     cmpwi r3, 0x28
-    blt lbl_fn_80711530_00001B40
+    blt lbl_net_resetAllSockets_00001B40
     addi r29, r30, 0x38
     li r31, 0x0
-lbl_fn_80711530_00001AF4:
+lbl_net_resetAllSockets_00001AF4:
     lwz r0, 0x40(r30)
     cmpwi r0, 0x4
-    bne lbl_fn_80711530_00001B1C
+    bne lbl_net_resetAllSockets_00001B1C
     mr r3, r31
     addi r4, r1, 0x8
     li r5, 0x28
@@ -2131,17 +2131,17 @@ lbl_fn_80711530_00001AF4:
     mr r3, r29
     addi r4, r1, 0x8
     bl fn_80710CD0
-lbl_fn_80711530_00001B1C:
+lbl_net_resetAllSockets_00001B1C:
     mr r3, r29
     bl fn_80710BF0
     addi r31, r31, 0x1
     addi r29, r29, 0xa8
     cmpwi r31, 0x4
     addi r30, r30, 0xa8
-    blt lbl_fn_80711530_00001AF4
+    blt lbl_net_resetAllSockets_00001AF4
     li r3, 0x28
     bl fn_80609E50
-lbl_fn_80711530_00001B40:
+lbl_net_resetAllSockets_00001B40:
     lwz r0, 0x74(r1)
     lwz r31, 0x6c(r1)
     lwz r30, 0x68(r1)
@@ -2228,7 +2228,7 @@ lbl_fn_807116B0_00001C34:
     mr r3, r24
     mr r5, r27
     addi r4, r31, 0x10
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_807116B0_00001C70
     lwz r0, 0x8(r31)
@@ -2383,10 +2383,10 @@ asm void fn_80711910(void)
     stw r0, 0xc8(r3)
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3130
+    bl OSLockMutex
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3130
+    bl OSLockMutex
     lbz r0, 0xcd(r27)
     cmpwi r0, 0x0
     beq lbl_fn_80711910_00001ECC
@@ -2421,7 +2421,7 @@ lbl_fn_80711910_00001EFC:
 lbl_fn_80711910_00001F08:
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3130
+    bl OSLockMutex
     cmpwi r30, 0xf
     ble lbl_fn_80711910_00001F24
     li r3, 0x0
@@ -2434,7 +2434,7 @@ lbl_fn_80711910_00001F2C:
     bne lbl_fn_80711910_00001F44
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3210
+    bl OSUnlockMutex
     b lbl_fn_80711910_00001F78
 lbl_fn_80711910_00001F44:
     bl fn_80713850
@@ -2449,7 +2449,7 @@ lbl_fn_80711910_00001F44:
     stw r31, 0x100(r3)
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3210
+    bl OSUnlockMutex
 lbl_fn_80711910_00001F78:
     addi r30, r30, 0x1
     addi r29, r29, 0x4
@@ -2457,10 +2457,10 @@ lbl_fn_80711910_00001F78:
     blt lbl_fn_80711910_00001F08
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3210
+    bl OSUnlockMutex
     bl fn_807187D0
     addi r3, r3, 0x354
-    bl fn_805F3210
+    bl OSUnlockMutex
     cmpwi r28, 0x0
     ble lbl_fn_80711910_00001FB0
     mr r3, r27

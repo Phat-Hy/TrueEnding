@@ -36,13 +36,13 @@ extern void fn_800629F0(void);
 extern void fn_80472A34(void);
 extern void fn_80472C90(void);
 extern void fn_80472D64(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
-extern void fn_80473F50(void);
-extern void fn_805F93C0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9940(void);
-extern void fn_805F99B0(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_destructor(void);
+extern void atn_LoadHandle_isLoading(void);
+extern void PSMTXMultVec(void);
+extern void PSVECNormalize(void);
+extern void PSVECMag(void);
+extern void PSVECCrossProduct(void);
 extern void fn_80614790(void);
 
 /* External data declarations */
@@ -69,47 +69,45 @@ extern u32 lbl_80880980;
 void fn_80057A64(void);
 void fn_80057A68(void);
 void fn_80057A78(void);
-void fn_80057BE8(void);
-void fn_80057C94(void);
-void fn_80057D40(void);
-void fn_80057DEC(void);
-void fn_80057E38(void);
+void atn_ColliBox_testRay(void);
+void atn_ColliBox_testSphere(void);
+void atn_ColliBox_testCapsule(void);
+void atn_ColliBox_testBox(void);
+void atn_ColliBox_getAABB(void);
 void fn_80057F28(void);
-void fn_80058020(void);
+void atn_LH_ColliObject_destructor(void);
 void fn_80058078(void);
 void fn_800580BC(void);
-void fn_80058120(void);
-void fn_8005823C(void);
-void fn_80058358(void);
-void fn_80058474(void);
+void atn_ColliObject_testRay(void);
+void atn_ColliObject_testSphere(void);
+void atn_ColliObject_testCapsule(void);
+void atn_ColliObject_testBox(void);
 void fn_800584B4(void);
 void fn_800584D8(void);
-void fn_8005886C(void);
+void atn_ColliObject_getAABB(void);
 void fn_800588FC(void);
 void fn_80058A1C(void);
-void fn_80058B20(void);
+void atn_LH_ColliTree_destructor(void);
 void fn_80058B78(void);
 void fn_80058BBC(void);
-void fn_80058C20(void);
-void fn_80058D0C(void);
-void fn_80058DF8(void);
+void atn_ColliTree_testRay(void);
+void atn_ColliTree_testSphere(void);
+void atn_ColliTree_testCapsule(void);
 void fn_80058EE4(void);
-void fn_800591D4(void);
+void atn_ColliTree_testBox(void);
 void fn_80059240(void);
 void fn_80059264(void);
-void fn_800593F4(void);
-void fn_80059468(void);
-void fn_800594DC(void);
-void fn_80059550(void);
-void fn_800595D8(void);
+void atn_ColliSphere_destructor(void);
+void atn_ColliCapsule_destructor(void);
+void atn_ColliBox_destructor(void);
+void atn_ColliObject_destructor(void);
+void atn_ColliTree_destructor(void);
 void fn_80059660(void);
 void fn_80059784(void);
 void fn_80059A40(void);
 
-asm void fn_80057A64(void)
+void fn_80057A64(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_80057A68(void)
@@ -171,7 +169,7 @@ asm void fn_80057A78(void)
     stfs f0, 0x20(r1)
     stfs f3, 0x24(r1)
     stfs f9, 0x28(r1)
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     addi r4, r1, 0x14
     lfs f2, 0x1c(r1)
     psq_l f1, 0x0(r4), 0, 0
@@ -179,7 +177,7 @@ asm void fn_80057A78(void)
     psq_st f1, 0x0(r3), 0, 0
     mr r4, r3
     stfs f2, 0x2c(r28)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f5, 0x8(r30)
     addi r3, r1, 0x8
     lfs f4, 0x8(r31)
@@ -206,7 +204,7 @@ asm void fn_80057A78(void)
     stfs f0, 0x8(r1)
     stfs f3, 0xc(r1)
     stfs f9, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     stfs f1, 0x3c(r28)
     lwz r31, 0x4c(r1)
     lwz r30, 0x48(r1)
@@ -218,7 +216,7 @@ asm void fn_80057A78(void)
     blr
 }
 
-asm void fn_80057BE8(void)
+asm void atn_ColliBox_testRay(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -230,40 +228,40 @@ asm void fn_80057BE8(void)
     mr r25, r4
     mr r26, r5
     mr r27, r6
-    ble lbl_fn_80057BE8_00000218
+    ble lbl_atn_ColliBox_testRay_00000218
     mr r3, r27
     addi r4, r24, 0x3c
     bl fn_80051CD8
     cmpwi r3, 0x0
-    beq lbl_fn_80057BE8_00000218
+    beq lbl_atn_ColliBox_testRay_00000218
     addi r30, r24, 0x78
     addi r31, r24, 0x1c
     li r29, 0x0
     li r28, 0x0
-lbl_fn_80057BE8_000001D0:
+lbl_atn_ColliBox_testRay_000001D0:
     mr r3, r25
     mr r4, r27
     mr r5, r30
     bl fn_80053254
     cmpwi r3, 0x0
-    beq lbl_fn_80057BE8_00000200
+    beq lbl_atn_ColliBox_testRay_00000200
     stw r31, 0x34(r25)
     addi r29, r29, 0x1
     cmpw r29, r26
     stw r24, 0x38(r25)
     addi r25, r25, 0x50
-    bge lbl_fn_80057BE8_00000210
-lbl_fn_80057BE8_00000200:
+    bge lbl_atn_ColliBox_testRay_00000210
+lbl_atn_ColliBox_testRay_00000200:
     addi r28, r28, 0x1
     addi r30, r30, 0x40
     cmpwi r28, 0xc
-    blt lbl_fn_80057BE8_000001D0
-lbl_fn_80057BE8_00000210:
+    blt lbl_atn_ColliBox_testRay_000001D0
+lbl_atn_ColliBox_testRay_00000210:
     mr r3, r29
-    b lbl_fn_80057BE8_0000021C
-lbl_fn_80057BE8_00000218:
+    b lbl_atn_ColliBox_testRay_0000021C
+lbl_atn_ColliBox_testRay_00000218:
     li r3, 0x0
-lbl_fn_80057BE8_0000021C:
+lbl_atn_ColliBox_testRay_0000021C:
     lmw r24, 0x10(r1)
     lwz r0, 0x34(r1)
     mtlr r0
@@ -271,7 +269,7 @@ lbl_fn_80057BE8_0000021C:
     blr
 }
 
-asm void fn_80057C94(void)
+asm void atn_ColliBox_testSphere(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -283,40 +281,40 @@ asm void fn_80057C94(void)
     mr r25, r4
     mr r26, r5
     mr r27, r6
-    ble lbl_fn_80057C94_000002C4
+    ble lbl_atn_ColliBox_testSphere_000002C4
     mr r3, r27
     addi r4, r24, 0x3c
     bl fn_80051E90
     cmpwi r3, 0x0
-    beq lbl_fn_80057C94_000002C4
+    beq lbl_atn_ColliBox_testSphere_000002C4
     addi r30, r24, 0x78
     addi r31, r24, 0x1c
     li r29, 0x0
     li r28, 0x0
-lbl_fn_80057C94_0000027C:
+lbl_atn_ColliBox_testSphere_0000027C:
     mr r3, r25
     mr r4, r27
     mr r5, r30
     bl fn_80054038
     cmpwi r3, 0x0
-    beq lbl_fn_80057C94_000002AC
+    beq lbl_atn_ColliBox_testSphere_000002AC
     stw r31, 0x34(r25)
     addi r29, r29, 0x1
     cmpw r29, r26
     stw r24, 0x38(r25)
     addi r25, r25, 0x50
-    bge lbl_fn_80057C94_000002BC
-lbl_fn_80057C94_000002AC:
+    bge lbl_atn_ColliBox_testSphere_000002BC
+lbl_atn_ColliBox_testSphere_000002AC:
     addi r28, r28, 0x1
     addi r30, r30, 0x40
     cmpwi r28, 0xc
-    blt lbl_fn_80057C94_0000027C
-lbl_fn_80057C94_000002BC:
+    blt lbl_atn_ColliBox_testSphere_0000027C
+lbl_atn_ColliBox_testSphere_000002BC:
     mr r3, r29
-    b lbl_fn_80057C94_000002C8
-lbl_fn_80057C94_000002C4:
+    b lbl_atn_ColliBox_testSphere_000002C8
+lbl_atn_ColliBox_testSphere_000002C4:
     li r3, 0x0
-lbl_fn_80057C94_000002C8:
+lbl_atn_ColliBox_testSphere_000002C8:
     lmw r24, 0x10(r1)
     lwz r0, 0x34(r1)
     mtlr r0
@@ -324,7 +322,7 @@ lbl_fn_80057C94_000002C8:
     blr
 }
 
-asm void fn_80057D40(void)
+asm void atn_ColliBox_testCapsule(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -336,40 +334,40 @@ asm void fn_80057D40(void)
     mr r25, r4
     mr r26, r5
     mr r27, r6
-    ble lbl_fn_80057D40_00000370
+    ble lbl_atn_ColliBox_testCapsule_00000370
     mr r3, r27
     addi r4, r24, 0x3c
     bl fn_800520F0
     cmpwi r3, 0x0
-    beq lbl_fn_80057D40_00000370
+    beq lbl_atn_ColliBox_testCapsule_00000370
     addi r30, r24, 0x78
     addi r31, r24, 0x1c
     li r29, 0x0
     li r28, 0x0
-lbl_fn_80057D40_00000328:
+lbl_atn_ColliBox_testCapsule_00000328:
     mr r3, r25
     mr r4, r27
     mr r5, r30
     bl fn_8005691C
     cmpwi r3, 0x0
-    beq lbl_fn_80057D40_00000358
+    beq lbl_atn_ColliBox_testCapsule_00000358
     stw r31, 0x34(r25)
     addi r29, r29, 0x1
     cmpw r29, r26
     stw r24, 0x38(r25)
     addi r25, r25, 0x50
-    bge lbl_fn_80057D40_00000368
-lbl_fn_80057D40_00000358:
+    bge lbl_atn_ColliBox_testCapsule_00000368
+lbl_atn_ColliBox_testCapsule_00000358:
     addi r28, r28, 0x1
     addi r30, r30, 0x40
     cmpwi r28, 0xc
-    blt lbl_fn_80057D40_00000328
-lbl_fn_80057D40_00000368:
+    blt lbl_atn_ColliBox_testCapsule_00000328
+lbl_atn_ColliBox_testCapsule_00000368:
     mr r3, r29
-    b lbl_fn_80057D40_00000374
-lbl_fn_80057D40_00000370:
+    b lbl_atn_ColliBox_testCapsule_00000374
+lbl_atn_ColliBox_testCapsule_00000370:
     li r3, 0x0
-lbl_fn_80057D40_00000374:
+lbl_atn_ColliBox_testCapsule_00000374:
     lmw r24, 0x10(r1)
     lwz r0, 0x34(r1)
     mtlr r0
@@ -377,7 +375,7 @@ lbl_fn_80057D40_00000374:
     blr
 }
 
-asm void fn_80057DEC(void)
+asm void atn_ColliBox_testBox(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -401,7 +399,7 @@ asm void fn_80057DEC(void)
     blr
 }
 
-asm void fn_80057E38(void)
+asm void atn_ColliBox_getAABB(void)
 {
     nofralloc
     stwu r1, -0x50(r1)
@@ -423,7 +421,7 @@ asm void fn_80057E38(void)
     stfs f2, 0x10(r1)
     psq_st f1, 0x0(r5), 0, 0
     stfs f2, 0x28(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f9, 0x1c(r31)
     frsp f0, f1
     lfs f3, lbl_80880964
@@ -505,7 +503,7 @@ lbl_fn_80057F28_0000053C:
     addi r3, r3, lbl_807775C0@l
     stw r3, 0x0(r30)
     mr r3, r31
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lfs f1, lbl_80880960
     lis r3, lbl_8078FC38@ha
     lfs f0, lbl_80880964
@@ -534,7 +532,7 @@ lbl_fn_80057F28_0000053C:
     blr
 }
 
-asm void fn_80058020(void)
+asm void atn_LH_ColliObject_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -545,14 +543,14 @@ asm void fn_80058020(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_80058020_000005F8
+    beq lbl_atn_LH_ColliObject_destructor_000005F8
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
     cmpwi r31, 0x0
-    ble lbl_fn_80058020_000005F8
+    ble lbl_atn_LH_ColliObject_destructor_000005F8
     mr r3, r30
     bl dtor_80084684
-lbl_fn_80058020_000005F8:
+lbl_atn_LH_ColliObject_destructor_000005F8:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -599,7 +597,7 @@ asm void fn_800580BC(void)
     b lbl_fn_800580BC_000006A8
 lbl_fn_800580BC_00000680:
     addi r3, r3, 0x3c
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_800580BC_00000698
     li r3, 0x1
@@ -617,7 +615,7 @@ lbl_fn_800580BC_000006A8:
     blr
 }
 
-asm void fn_80058120(void)
+asm void atn_ColliObject_testRay(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -634,10 +632,10 @@ asm void fn_80058120(void)
     addi r4, r26, 0x78
     bl fn_80051A88
     cmpwi r3, 0x0
-    bne lbl_fn_80058120_00000700
+    bne lbl_atn_ColliObject_testRay_00000700
     li r3, 0x0
-    b lbl_fn_80058120_000007C4
-lbl_fn_80058120_00000700:
+    b lbl_atn_ColliObject_testRay_000007C4
+lbl_atn_ColliObject_testRay_00000700:
     lwz r6, 0x44(r26)
     mr r3, r27
     mr r4, r28
@@ -648,27 +646,27 @@ lbl_fn_80058120_00000700:
     bl fn_80059B5C
     cmpwi cr1, r3, 0x0
     li r7, 0x0
-    ble cr1, lbl_fn_80058120_000007C4
+    ble cr1, lbl_atn_ColliObject_testRay_000007C4
     cmpwi r3, 0x8
     subi r5, r3, 0x8
-    ble lbl_fn_80058120_000007A0
+    ble lbl_atn_ColliObject_testRay_000007A0
     li r6, 0x0
-    blt cr1, lbl_fn_80058120_00000754
+    blt cr1, lbl_atn_ColliObject_testRay_00000754
     lis r4, 0x8000
     subi r0, r4, 0x2
     cmpw r3, r0
-    bgt lbl_fn_80058120_00000754
+    bgt lbl_atn_ColliObject_testRay_00000754
     li r6, 0x1
-lbl_fn_80058120_00000754:
+lbl_atn_ColliObject_testRay_00000754:
     cmpwi r6, 0x0
-    beq lbl_fn_80058120_000007A0
+    beq lbl_atn_ColliObject_testRay_000007A0
     addi r0, r5, 0x7
     mr r4, r27
     srwi r0, r0, 3
     mtctr r0
     cmpwi r5, 0x0
-    ble lbl_fn_80058120_000007A0
-lbl_fn_80058120_00000774:
+    ble lbl_atn_ColliObject_testRay_000007A0
+lbl_atn_ColliObject_testRay_00000774:
     stw r26, 0x38(r4)
     addi r7, r7, 0x8
     stw r26, 0x88(r4)
@@ -679,19 +677,19 @@ lbl_fn_80058120_00000774:
     stw r26, 0x218(r4)
     stw r26, 0x268(r4)
     addi r4, r4, 0x280
-    bdnz lbl_fn_80058120_00000774
-lbl_fn_80058120_000007A0:
+    bdnz lbl_atn_ColliObject_testRay_00000774
+lbl_atn_ColliObject_testRay_000007A0:
     mulli r4, r7, 0x50
     subf r0, r7, r3
     add r4, r27, r4
     mtctr r0
     cmpw r7, r3
-    bge lbl_fn_80058120_000007C4
-lbl_fn_80058120_000007B8:
+    bge lbl_atn_ColliObject_testRay_000007C4
+lbl_atn_ColliObject_testRay_000007B8:
     stw r26, 0x38(r4)
     addi r4, r4, 0x50
-    bdnz lbl_fn_80058120_000007B8
-lbl_fn_80058120_000007C4:
+    bdnz lbl_atn_ColliObject_testRay_000007B8
+lbl_atn_ColliObject_testRay_000007C4:
     lmw r26, 0x8(r1)
     lwz r0, 0x24(r1)
     mtlr r0
@@ -699,7 +697,7 @@ lbl_fn_80058120_000007C4:
     blr
 }
 
-asm void fn_8005823C(void)
+asm void atn_ColliObject_testSphere(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -716,10 +714,10 @@ asm void fn_8005823C(void)
     addi r4, r26, 0x78
     bl fn_80051B70
     cmpwi r3, 0x0
-    bne lbl_fn_8005823C_0000081C
+    bne lbl_atn_ColliObject_testSphere_0000081C
     li r3, 0x0
-    b lbl_fn_8005823C_000008E0
-lbl_fn_8005823C_0000081C:
+    b lbl_atn_ColliObject_testSphere_000008E0
+lbl_atn_ColliObject_testSphere_0000081C:
     lwz r6, 0x44(r26)
     mr r3, r27
     mr r4, r28
@@ -730,27 +728,27 @@ lbl_fn_8005823C_0000081C:
     bl fn_8005A084
     cmpwi cr1, r3, 0x0
     li r7, 0x0
-    ble cr1, lbl_fn_8005823C_000008E0
+    ble cr1, lbl_atn_ColliObject_testSphere_000008E0
     cmpwi r3, 0x8
     subi r5, r3, 0x8
-    ble lbl_fn_8005823C_000008BC
+    ble lbl_atn_ColliObject_testSphere_000008BC
     li r6, 0x0
-    blt cr1, lbl_fn_8005823C_00000870
+    blt cr1, lbl_atn_ColliObject_testSphere_00000870
     lis r4, 0x8000
     subi r0, r4, 0x2
     cmpw r3, r0
-    bgt lbl_fn_8005823C_00000870
+    bgt lbl_atn_ColliObject_testSphere_00000870
     li r6, 0x1
-lbl_fn_8005823C_00000870:
+lbl_atn_ColliObject_testSphere_00000870:
     cmpwi r6, 0x0
-    beq lbl_fn_8005823C_000008BC
+    beq lbl_atn_ColliObject_testSphere_000008BC
     addi r0, r5, 0x7
     mr r4, r27
     srwi r0, r0, 3
     mtctr r0
     cmpwi r5, 0x0
-    ble lbl_fn_8005823C_000008BC
-lbl_fn_8005823C_00000890:
+    ble lbl_atn_ColliObject_testSphere_000008BC
+lbl_atn_ColliObject_testSphere_00000890:
     stw r26, 0x38(r4)
     addi r7, r7, 0x8
     stw r26, 0x88(r4)
@@ -761,19 +759,19 @@ lbl_fn_8005823C_00000890:
     stw r26, 0x218(r4)
     stw r26, 0x268(r4)
     addi r4, r4, 0x280
-    bdnz lbl_fn_8005823C_00000890
-lbl_fn_8005823C_000008BC:
+    bdnz lbl_atn_ColliObject_testSphere_00000890
+lbl_atn_ColliObject_testSphere_000008BC:
     mulli r4, r7, 0x50
     subf r0, r7, r3
     add r4, r27, r4
     mtctr r0
     cmpw r7, r3
-    bge lbl_fn_8005823C_000008E0
-lbl_fn_8005823C_000008D4:
+    bge lbl_atn_ColliObject_testSphere_000008E0
+lbl_atn_ColliObject_testSphere_000008D4:
     stw r26, 0x38(r4)
     addi r4, r4, 0x50
-    bdnz lbl_fn_8005823C_000008D4
-lbl_fn_8005823C_000008E0:
+    bdnz lbl_atn_ColliObject_testSphere_000008D4
+lbl_atn_ColliObject_testSphere_000008E0:
     lmw r26, 0x8(r1)
     lwz r0, 0x24(r1)
     mtlr r0
@@ -781,7 +779,7 @@ lbl_fn_8005823C_000008E0:
     blr
 }
 
-asm void fn_80058358(void)
+asm void atn_ColliObject_testCapsule(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -798,10 +796,10 @@ asm void fn_80058358(void)
     addi r4, r26, 0x78
     bl fn_80051C10
     cmpwi r3, 0x0
-    bne lbl_fn_80058358_00000938
+    bne lbl_atn_ColliObject_testCapsule_00000938
     li r3, 0x0
-    b lbl_fn_80058358_000009FC
-lbl_fn_80058358_00000938:
+    b lbl_atn_ColliObject_testCapsule_000009FC
+lbl_atn_ColliObject_testCapsule_00000938:
     lwz r6, 0x44(r26)
     mr r3, r27
     mr r4, r28
@@ -812,27 +810,27 @@ lbl_fn_80058358_00000938:
     bl fn_8005A5AC
     cmpwi cr1, r3, 0x0
     li r7, 0x0
-    ble cr1, lbl_fn_80058358_000009FC
+    ble cr1, lbl_atn_ColliObject_testCapsule_000009FC
     cmpwi r3, 0x8
     subi r5, r3, 0x8
-    ble lbl_fn_80058358_000009D8
+    ble lbl_atn_ColliObject_testCapsule_000009D8
     li r6, 0x0
-    blt cr1, lbl_fn_80058358_0000098C
+    blt cr1, lbl_atn_ColliObject_testCapsule_0000098C
     lis r4, 0x8000
     subi r0, r4, 0x2
     cmpw r3, r0
-    bgt lbl_fn_80058358_0000098C
+    bgt lbl_atn_ColliObject_testCapsule_0000098C
     li r6, 0x1
-lbl_fn_80058358_0000098C:
+lbl_atn_ColliObject_testCapsule_0000098C:
     cmpwi r6, 0x0
-    beq lbl_fn_80058358_000009D8
+    beq lbl_atn_ColliObject_testCapsule_000009D8
     addi r0, r5, 0x7
     mr r4, r27
     srwi r0, r0, 3
     mtctr r0
     cmpwi r5, 0x0
-    ble lbl_fn_80058358_000009D8
-lbl_fn_80058358_000009AC:
+    ble lbl_atn_ColliObject_testCapsule_000009D8
+lbl_atn_ColliObject_testCapsule_000009AC:
     stw r26, 0x38(r4)
     addi r7, r7, 0x8
     stw r26, 0x88(r4)
@@ -843,19 +841,19 @@ lbl_fn_80058358_000009AC:
     stw r26, 0x218(r4)
     stw r26, 0x268(r4)
     addi r4, r4, 0x280
-    bdnz lbl_fn_80058358_000009AC
-lbl_fn_80058358_000009D8:
+    bdnz lbl_atn_ColliObject_testCapsule_000009AC
+lbl_atn_ColliObject_testCapsule_000009D8:
     mulli r4, r7, 0x50
     subf r0, r7, r3
     add r4, r27, r4
     mtctr r0
     cmpw r7, r3
-    bge lbl_fn_80058358_000009FC
-lbl_fn_80058358_000009F0:
+    bge lbl_atn_ColliObject_testCapsule_000009FC
+lbl_atn_ColliObject_testCapsule_000009F0:
     stw r26, 0x38(r4)
     addi r4, r4, 0x50
-    bdnz lbl_fn_80058358_000009F0
-lbl_fn_80058358_000009FC:
+    bdnz lbl_atn_ColliObject_testCapsule_000009F0
+lbl_atn_ColliObject_testCapsule_000009FC:
     lmw r26, 0x8(r1)
     lwz r0, 0x24(r1)
     mtlr r0
@@ -863,7 +861,7 @@ lbl_fn_80058358_000009FC:
     blr
 }
 
-asm void fn_80058474(void)
+asm void atn_ColliObject_testBox(void)
 {
     nofralloc
     lwz r0, 0x44(r3)
@@ -994,7 +992,7 @@ lbl_fn_800584D8_00000B24:
     stfs f31, 0xbc(r1)
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0x4c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     frsp f7, f29
     lfs f0, 0x4c(r1)
     frsp f9, f28
@@ -1018,7 +1016,7 @@ lbl_fn_800584D8_00000B24:
     lfs f2, 0x7c(r1)
     psq_st f1, 0x0(r25), 0, 0
     stfs f2, 0x34(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     frsp f7, f29
     lfs f0, 0x34(r1)
     frsp f9, f28
@@ -1042,7 +1040,7 @@ lbl_fn_800584D8_00000B24:
     lfs f2, 0x70(r1)
     psq_st f1, 0x0(r22), 0, 0
     stfs f2, 0x1c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     frsp f7, f29
     lfs f0, 0x1c(r1)
     frsp f9, f28
@@ -1137,7 +1135,7 @@ lbl_fn_800584D8_00000DC4:
     blr
 }
 
-asm void fn_8005886C(void)
+asm void atn_ColliObject_getAABB(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -1203,7 +1201,7 @@ asm void fn_800588FC(void)
     lfs f0, 0xc(r3)
     addi r3, r31, 0x48
     stfs f0, 0x84(r31)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f0, 0x70(r31)
     addi r3, r1, 0x20
     lfs f3, 0x60(r31)
@@ -1211,7 +1209,7 @@ asm void fn_800588FC(void)
     stfs f4, 0x20(r1)
     stfs f3, 0x24(r1)
     stfs f0, 0x28(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x6c(r31)
     fmr f30, f1
     lfs f3, 0x5c(r31)
@@ -1220,7 +1218,7 @@ asm void fn_800588FC(void)
     stfs f4, 0x14(r1)
     stfs f3, 0x18(r1)
     stfs f0, 0x1c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x68(r31)
     fmr f31, f1
     lfs f3, 0x58(r31)
@@ -1229,12 +1227,12 @@ asm void fn_800588FC(void)
     stfs f4, 0x8(r1)
     stfs f3, 0xc(r1)
     stfs f0, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     stfs f31, 0x30(r1)
     addi r3, r1, 0x2c
     stfs f1, 0x2c(r1)
     stfs f30, 0x34(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x84(r31)
     fmuls f0, f0, f1
     stfs f0, 0x84(r31)
@@ -1296,7 +1294,7 @@ lbl_fn_80058A1C_00001030:
     addi r3, r3, lbl_80777588@l
     stw r3, 0x0(r30)
     mr r3, r31
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lwz r0, 0x8(r30)
     lis r3, lbl_8078FC90@ha
     lfs f1, lbl_80880960
@@ -1328,7 +1326,7 @@ lbl_fn_80058A1C_00001030:
     blr
 }
 
-asm void fn_80058B20(void)
+asm void atn_LH_ColliTree_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1339,14 +1337,14 @@ asm void fn_80058B20(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_80058B20_000010F8
+    beq lbl_atn_LH_ColliTree_destructor_000010F8
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
     cmpwi r31, 0x0
-    ble lbl_fn_80058B20_000010F8
+    ble lbl_atn_LH_ColliTree_destructor_000010F8
     mr r3, r30
     bl dtor_80084684
-lbl_fn_80058B20_000010F8:
+lbl_atn_LH_ColliTree_destructor_000010F8:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1393,7 +1391,7 @@ asm void fn_80058BBC(void)
     b lbl_fn_80058BBC_000011A8
 lbl_fn_80058BBC_00001180:
     addi r3, r3, 0x3c
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_80058BBC_00001198
     li r3, 0x1
@@ -1411,7 +1409,7 @@ lbl_fn_80058BBC_000011A8:
     blr
 }
 
-asm void fn_80058C20(void)
+asm void atn_ColliTree_testRay(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1428,27 +1426,27 @@ asm void fn_80058C20(void)
     bl fn_8005AAD4
     cmpwi cr1, r3, 0x0
     li r7, 0x0
-    ble cr1, lbl_fn_80058C20_00001290
+    ble cr1, lbl_atn_ColliTree_testRay_00001290
     cmpwi r3, 0x8
     subi r5, r3, 0x8
-    ble lbl_fn_80058C20_0000126C
+    ble lbl_atn_ColliTree_testRay_0000126C
     li r6, 0x0
-    blt cr1, lbl_fn_80058C20_00001220
+    blt cr1, lbl_atn_ColliTree_testRay_00001220
     lis r4, 0x8000
     subi r0, r4, 0x2
     cmpw r3, r0
-    bgt lbl_fn_80058C20_00001220
+    bgt lbl_atn_ColliTree_testRay_00001220
     li r6, 0x1
-lbl_fn_80058C20_00001220:
+lbl_atn_ColliTree_testRay_00001220:
     cmpwi r6, 0x0
-    beq lbl_fn_80058C20_0000126C
+    beq lbl_atn_ColliTree_testRay_0000126C
     addi r0, r5, 0x7
     mr r4, r31
     srwi r0, r0, 3
     mtctr r0
     cmpwi r5, 0x0
-    ble lbl_fn_80058C20_0000126C
-lbl_fn_80058C20_00001240:
+    ble lbl_atn_ColliTree_testRay_0000126C
+lbl_atn_ColliTree_testRay_00001240:
     stw r30, 0x38(r4)
     addi r7, r7, 0x8
     stw r30, 0x88(r4)
@@ -1459,19 +1457,19 @@ lbl_fn_80058C20_00001240:
     stw r30, 0x218(r4)
     stw r30, 0x268(r4)
     addi r4, r4, 0x280
-    bdnz lbl_fn_80058C20_00001240
-lbl_fn_80058C20_0000126C:
+    bdnz lbl_atn_ColliTree_testRay_00001240
+lbl_atn_ColliTree_testRay_0000126C:
     mulli r4, r7, 0x50
     subf r0, r7, r3
     add r4, r31, r4
     mtctr r0
     cmpw r7, r3
-    bge lbl_fn_80058C20_00001290
-lbl_fn_80058C20_00001284:
+    bge lbl_atn_ColliTree_testRay_00001290
+lbl_atn_ColliTree_testRay_00001284:
     stw r30, 0x38(r4)
     addi r4, r4, 0x50
-    bdnz lbl_fn_80058C20_00001284
-lbl_fn_80058C20_00001290:
+    bdnz lbl_atn_ColliTree_testRay_00001284
+lbl_atn_ColliTree_testRay_00001290:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1480,7 +1478,7 @@ lbl_fn_80058C20_00001290:
     blr
 }
 
-asm void fn_80058D0C(void)
+asm void atn_ColliTree_testSphere(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1497,27 +1495,27 @@ asm void fn_80058D0C(void)
     bl fn_8005AD74
     cmpwi cr1, r3, 0x0
     li r7, 0x0
-    ble cr1, lbl_fn_80058D0C_0000137C
+    ble cr1, lbl_atn_ColliTree_testSphere_0000137C
     cmpwi r3, 0x8
     subi r5, r3, 0x8
-    ble lbl_fn_80058D0C_00001358
+    ble lbl_atn_ColliTree_testSphere_00001358
     li r6, 0x0
-    blt cr1, lbl_fn_80058D0C_0000130C
+    blt cr1, lbl_atn_ColliTree_testSphere_0000130C
     lis r4, 0x8000
     subi r0, r4, 0x2
     cmpw r3, r0
-    bgt lbl_fn_80058D0C_0000130C
+    bgt lbl_atn_ColliTree_testSphere_0000130C
     li r6, 0x1
-lbl_fn_80058D0C_0000130C:
+lbl_atn_ColliTree_testSphere_0000130C:
     cmpwi r6, 0x0
-    beq lbl_fn_80058D0C_00001358
+    beq lbl_atn_ColliTree_testSphere_00001358
     addi r0, r5, 0x7
     mr r4, r31
     srwi r0, r0, 3
     mtctr r0
     cmpwi r5, 0x0
-    ble lbl_fn_80058D0C_00001358
-lbl_fn_80058D0C_0000132C:
+    ble lbl_atn_ColliTree_testSphere_00001358
+lbl_atn_ColliTree_testSphere_0000132C:
     stw r30, 0x38(r4)
     addi r7, r7, 0x8
     stw r30, 0x88(r4)
@@ -1528,19 +1526,19 @@ lbl_fn_80058D0C_0000132C:
     stw r30, 0x218(r4)
     stw r30, 0x268(r4)
     addi r4, r4, 0x280
-    bdnz lbl_fn_80058D0C_0000132C
-lbl_fn_80058D0C_00001358:
+    bdnz lbl_atn_ColliTree_testSphere_0000132C
+lbl_atn_ColliTree_testSphere_00001358:
     mulli r4, r7, 0x50
     subf r0, r7, r3
     add r4, r31, r4
     mtctr r0
     cmpw r7, r3
-    bge lbl_fn_80058D0C_0000137C
-lbl_fn_80058D0C_00001370:
+    bge lbl_atn_ColliTree_testSphere_0000137C
+lbl_atn_ColliTree_testSphere_00001370:
     stw r30, 0x38(r4)
     addi r4, r4, 0x50
-    bdnz lbl_fn_80058D0C_00001370
-lbl_fn_80058D0C_0000137C:
+    bdnz lbl_atn_ColliTree_testSphere_00001370
+lbl_atn_ColliTree_testSphere_0000137C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1549,7 +1547,7 @@ lbl_fn_80058D0C_0000137C:
     blr
 }
 
-asm void fn_80058DF8(void)
+asm void atn_ColliTree_testCapsule(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1566,27 +1564,27 @@ asm void fn_80058DF8(void)
     bl fn_8005B05C
     cmpwi cr1, r3, 0x0
     li r7, 0x0
-    ble cr1, lbl_fn_80058DF8_00001468
+    ble cr1, lbl_atn_ColliTree_testCapsule_00001468
     cmpwi r3, 0x8
     subi r5, r3, 0x8
-    ble lbl_fn_80058DF8_00001444
+    ble lbl_atn_ColliTree_testCapsule_00001444
     li r6, 0x0
-    blt cr1, lbl_fn_80058DF8_000013F8
+    blt cr1, lbl_atn_ColliTree_testCapsule_000013F8
     lis r4, 0x8000
     subi r0, r4, 0x2
     cmpw r3, r0
-    bgt lbl_fn_80058DF8_000013F8
+    bgt lbl_atn_ColliTree_testCapsule_000013F8
     li r6, 0x1
-lbl_fn_80058DF8_000013F8:
+lbl_atn_ColliTree_testCapsule_000013F8:
     cmpwi r6, 0x0
-    beq lbl_fn_80058DF8_00001444
+    beq lbl_atn_ColliTree_testCapsule_00001444
     addi r0, r5, 0x7
     mr r4, r31
     srwi r0, r0, 3
     mtctr r0
     cmpwi r5, 0x0
-    ble lbl_fn_80058DF8_00001444
-lbl_fn_80058DF8_00001418:
+    ble lbl_atn_ColliTree_testCapsule_00001444
+lbl_atn_ColliTree_testCapsule_00001418:
     stw r30, 0x38(r4)
     addi r7, r7, 0x8
     stw r30, 0x88(r4)
@@ -1597,19 +1595,19 @@ lbl_fn_80058DF8_00001418:
     stw r30, 0x218(r4)
     stw r30, 0x268(r4)
     addi r4, r4, 0x280
-    bdnz lbl_fn_80058DF8_00001418
-lbl_fn_80058DF8_00001444:
+    bdnz lbl_atn_ColliTree_testCapsule_00001418
+lbl_atn_ColliTree_testCapsule_00001444:
     mulli r4, r7, 0x50
     subf r0, r7, r3
     add r4, r31, r4
     mtctr r0
     cmpw r7, r3
-    bge lbl_fn_80058DF8_00001468
-lbl_fn_80058DF8_0000145C:
+    bge lbl_atn_ColliTree_testCapsule_00001468
+lbl_atn_ColliTree_testCapsule_0000145C:
     stw r30, 0x38(r4)
     addi r4, r4, 0x50
-    bdnz lbl_fn_80058DF8_0000145C
-lbl_fn_80058DF8_00001468:
+    bdnz lbl_atn_ColliTree_testCapsule_0000145C
+lbl_atn_ColliTree_testCapsule_00001468:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1813,7 +1811,7 @@ lbl_fn_80058EE4_00001718:
     blr
 }
 
-asm void fn_800591D4(void)
+asm void atn_ColliTree_testBox(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1827,10 +1825,10 @@ asm void fn_800591D4(void)
     mr r31, r3
     lwz r9, 0x44(r3)
     cmpwi r9, 0x0
-    beq lbl_fn_800591D4_000017C8
+    beq lbl_atn_ColliTree_testBox_000017C8
     lwz r0, 0x14(r9)
     cmpwi r0, 0x0
-    beq lbl_fn_800591D4_000017C8
+    beq lbl_atn_ColliTree_testBox_000017C8
     lwz r3, lbl_8087EEB0
     mr r4, r31
     lfs f1, lbl_80880978
@@ -1838,7 +1836,7 @@ asm void fn_800591D4(void)
     mr r6, r11
     mr r7, r10
     bl fn_8006297C
-lbl_fn_800591D4_000017C8:
+lbl_atn_ColliTree_testBox_000017C8:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -1974,7 +1972,7 @@ lbl_fn_80059264_00001978:
     blr
 }
 
-asm void fn_800593F4(void)
+asm void atn_ColliSphere_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1985,22 +1983,22 @@ asm void fn_800593F4(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_800593F4_000019E8
-    beq lbl_fn_800593F4_000019D8
+    beq lbl_atn_ColliSphere_destructor_000019E8
+    beq lbl_atn_ColliSphere_destructor_000019D8
     lis r4, lbl_807776A0@ha
     addi r4, r4, lbl_807776A0@l
     stw r4, 0x0(r3)
     lwz r3, lbl_8087EE98
     cmpwi r3, 0x0
-    beq lbl_fn_800593F4_000019D8
+    beq lbl_atn_ColliSphere_destructor_000019D8
     mr r4, r30
     bl fn_8004CBB0
-lbl_fn_800593F4_000019D8:
+lbl_atn_ColliSphere_destructor_000019D8:
     cmpwi r31, 0x0
-    ble lbl_fn_800593F4_000019E8
+    ble lbl_atn_ColliSphere_destructor_000019E8
     mr r3, r30
     bl dtor_80084684
-lbl_fn_800593F4_000019E8:
+lbl_atn_ColliSphere_destructor_000019E8:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -2010,7 +2008,7 @@ lbl_fn_800593F4_000019E8:
     blr
 }
 
-asm void fn_80059468(void)
+asm void atn_ColliCapsule_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -2021,22 +2019,22 @@ asm void fn_80059468(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_80059468_00001A5C
-    beq lbl_fn_80059468_00001A4C
+    beq lbl_atn_ColliCapsule_destructor_00001A5C
+    beq lbl_atn_ColliCapsule_destructor_00001A4C
     lis r4, lbl_807776A0@ha
     addi r4, r4, lbl_807776A0@l
     stw r4, 0x0(r3)
     lwz r3, lbl_8087EE98
     cmpwi r3, 0x0
-    beq lbl_fn_80059468_00001A4C
+    beq lbl_atn_ColliCapsule_destructor_00001A4C
     mr r4, r30
     bl fn_8004CBB0
-lbl_fn_80059468_00001A4C:
+lbl_atn_ColliCapsule_destructor_00001A4C:
     cmpwi r31, 0x0
-    ble lbl_fn_80059468_00001A5C
+    ble lbl_atn_ColliCapsule_destructor_00001A5C
     mr r3, r30
     bl dtor_80084684
-lbl_fn_80059468_00001A5C:
+lbl_atn_ColliCapsule_destructor_00001A5C:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -2046,7 +2044,7 @@ lbl_fn_80059468_00001A5C:
     blr
 }
 
-asm void fn_800594DC(void)
+asm void atn_ColliBox_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -2057,22 +2055,22 @@ asm void fn_800594DC(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_800594DC_00001AD0
-    beq lbl_fn_800594DC_00001AC0
+    beq lbl_atn_ColliBox_destructor_00001AD0
+    beq lbl_atn_ColliBox_destructor_00001AC0
     lis r4, lbl_807776A0@ha
     addi r4, r4, lbl_807776A0@l
     stw r4, 0x0(r3)
     lwz r3, lbl_8087EE98
     cmpwi r3, 0x0
-    beq lbl_fn_800594DC_00001AC0
+    beq lbl_atn_ColliBox_destructor_00001AC0
     mr r4, r30
     bl fn_8004CBB0
-lbl_fn_800594DC_00001AC0:
+lbl_atn_ColliBox_destructor_00001AC0:
     cmpwi r31, 0x0
-    ble lbl_fn_800594DC_00001AD0
+    ble lbl_atn_ColliBox_destructor_00001AD0
     mr r3, r30
     bl dtor_80084684
-lbl_fn_800594DC_00001AD0:
+lbl_atn_ColliBox_destructor_00001AD0:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -2082,7 +2080,7 @@ lbl_fn_800594DC_00001AD0:
     blr
 }
 
-asm void fn_80059550(void)
+asm void atn_ColliObject_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -2093,28 +2091,28 @@ asm void fn_80059550(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_80059550_00001B58
+    beq lbl_atn_ColliObject_destructor_00001B58
     addic. r3, r3, 0x3c
-    beq lbl_fn_80059550_00001B20
+    beq lbl_atn_ColliObject_destructor_00001B20
     li r4, 0x0
-    bl fn_80473E8C
-lbl_fn_80059550_00001B20:
+    bl atn_LoadHandle_destructor
+lbl_atn_ColliObject_destructor_00001B20:
     cmpwi r30, 0x0
-    beq lbl_fn_80059550_00001B48
+    beq lbl_atn_ColliObject_destructor_00001B48
     lis r3, lbl_807776A0@ha
     addi r3, r3, lbl_807776A0@l
     stw r3, 0x0(r30)
     lwz r3, lbl_8087EE98
     cmpwi r3, 0x0
-    beq lbl_fn_80059550_00001B48
+    beq lbl_atn_ColliObject_destructor_00001B48
     mr r4, r30
     bl fn_8004CBB0
-lbl_fn_80059550_00001B48:
+lbl_atn_ColliObject_destructor_00001B48:
     cmpwi r31, 0x0
-    ble lbl_fn_80059550_00001B58
+    ble lbl_atn_ColliObject_destructor_00001B58
     mr r3, r30
     bl dtor_80084684
-lbl_fn_80059550_00001B58:
+lbl_atn_ColliObject_destructor_00001B58:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -2124,7 +2122,7 @@ lbl_fn_80059550_00001B58:
     blr
 }
 
-asm void fn_800595D8(void)
+asm void atn_ColliTree_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -2135,28 +2133,28 @@ asm void fn_800595D8(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_800595D8_00001BE0
+    beq lbl_atn_ColliTree_destructor_00001BE0
     addic. r3, r3, 0x3c
-    beq lbl_fn_800595D8_00001BA8
+    beq lbl_atn_ColliTree_destructor_00001BA8
     li r4, 0x0
-    bl fn_80473E8C
-lbl_fn_800595D8_00001BA8:
+    bl atn_LoadHandle_destructor
+lbl_atn_ColliTree_destructor_00001BA8:
     cmpwi r30, 0x0
-    beq lbl_fn_800595D8_00001BD0
+    beq lbl_atn_ColliTree_destructor_00001BD0
     lis r3, lbl_807776A0@ha
     addi r3, r3, lbl_807776A0@l
     stw r3, 0x0(r30)
     lwz r3, lbl_8087EE98
     cmpwi r3, 0x0
-    beq lbl_fn_800595D8_00001BD0
+    beq lbl_atn_ColliTree_destructor_00001BD0
     mr r4, r30
     bl fn_8004CBB0
-lbl_fn_800595D8_00001BD0:
+lbl_atn_ColliTree_destructor_00001BD0:
     cmpwi r31, 0x0
-    ble lbl_fn_800595D8_00001BE0
+    ble lbl_atn_ColliTree_destructor_00001BE0
     mr r3, r30
     bl dtor_80084684
-lbl_fn_800595D8_00001BE0:
+lbl_atn_ColliTree_destructor_00001BE0:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -2320,7 +2318,7 @@ lbl_fn_80059784_00001DF8:
     stfs f2, 0x1c(r1)
     mr r5, r17
     psq_st f1, 0x0(r17), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     psq_l f1, 0x0(r17), 0, 0
     mr r3, r30
     lfs f2, 0x1c(r1)
@@ -2332,7 +2330,7 @@ lbl_fn_80059784_00001DF8:
     lfs f2, 0x14(r24)
     stfs f2, 0x28(r1)
     psq_st f1, 0x0(r19), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     psq_l f1, 0x0(r19), 0, 0
     mr r3, r30
     lfs f2, 0x28(r1)
@@ -2344,7 +2342,7 @@ lbl_fn_80059784_00001DF8:
     lfs f2, 0x20(r24)
     stfs f2, 0x34(r1)
     psq_st f1, 0x0(r20), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     psq_l f1, 0x0(r20), 0, 0
     mr r3, r30
     lfs f2, 0x34(r1)
@@ -2356,7 +2354,7 @@ lbl_fn_80059784_00001DF8:
     lfs f2, 0x38(r24)
     stfs f2, 0x40(r1)
     psq_st f1, 0x0(r21), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     psq_l f1, 0x0(r21), 0, 0
     mr r3, r22
     lfs f2, 0x40(r1)
@@ -2383,10 +2381,10 @@ lbl_fn_80059784_00001DF8:
     lfs f2, 0x2c(r24)
     stfs f2, 0x10(r1)
     psq_st f1, 0x0(r23), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     mr r3, r23
     mr r4, r23
-    bl fn_805F98D0
+    bl PSVECNormalize
     psq_l f1, 0x0(r23), 0, 0
     lfs f2, 0x10(r1)
     psq_st f1, 0x24(r18), 0, 0

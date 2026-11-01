@@ -14,12 +14,12 @@ extern void fn_802301EC(void);
 extern void fn_80230F3C(void);
 extern void fn_8023329C(void);
 extern void fn_80238560(void);
-extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9940(void);
-extern void fn_805F99B0(void);
+extern void PSMTXConcat(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSVECNormalize(void);
+extern void PSVECMag(void);
+extern void PSVECCrossProduct(void);
 
 /* External data declarations */
 extern u8 lbl_80742F78[];
@@ -51,9 +51,9 @@ void fn_802328DC(void);
 void fn_802328EC(void);
 void fn_80232AC4(void);
 void fn_80232ACC(void);
-void fn_80232B7C(void);
-void fn_80232B88(void);
-void fn_80232B90(void);
+void sound_initGlobalInstances(u32 r3, u32 r4);
+u32 sound_getGlobalInstance1(void);
+u32 sound_getGlobalInstance2(void);
 void fn_80232B98(void);
 void fn_80232BEC(void);
 void fn_80232D04(void);
@@ -96,15 +96,15 @@ lbl_fn_80231508_00000064:
     lfs f1, 0xd4(r3)
     addi r3, r1, 0x80
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f1, 0xd0(r31)
     addi r3, r1, 0xb0
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r3, r1, 0x80
     addi r4, r1, 0xb0
     addi r5, r1, 0xe0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r4, r1, 0xe0
     addi r3, r1, 0x110
     psq_l f1, 0x0(r4), 0, 0
@@ -124,7 +124,7 @@ lbl_fn_80231508_000000E0:
     lfs f1, 0xd4(r3)
     addi r3, r1, 0x50
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x50
     addi r3, r1, 0x110
     psq_l f1, 0x0(r4), 0, 0
@@ -161,16 +161,16 @@ lbl_fn_80231508_00000160:
     beq lbl_fn_80231508_0000018C
     addi r3, r1, 0x20
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x110
     addi r3, r1, 0x20
     mr r5, r4
-    bl fn_805F89F0
+    bl PSMTXConcat
 lbl_fn_80231508_0000018C:
     addi r4, r1, 0x110
     addi r3, r31, 0x38
     mr r5, r4
-    bl fn_805F89F0
+    bl PSMTXConcat
     b lbl_fn_80231508_000001D4
 lbl_fn_80231508_000001A0:
     psq_l f1, 0x38(r3), 0, 0
@@ -199,7 +199,7 @@ lbl_fn_80231508_000001D4:
     stfs f2, 0x10(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x1c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f7, 0x80(r31)
     lfs f0, 0x14(r1)
     lfs f8, 0x84(r31)
@@ -278,7 +278,7 @@ lbl_fn_80231754_000002E0:
     lfs f2, 0x70(r24)
     stfs f2, 0x1c(r1)
     psq_st f1, 0x0(r28), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f3, 0x74(r24)
     mr r3, r24
     lfs f0, 0x14(r1)
@@ -544,7 +544,7 @@ lbl_fn_8023193C_000006D8:
     mr r5, r31
     addi r3, r26, 0x38
     psq_st f1, 0x0(r31), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0x58(r1)
     addi r3, r1, 0x80
     psq_l f1, 0x0(r31), 0, 0
@@ -913,7 +913,7 @@ lbl_fn_8023193C_00000C38:
     beq lbl_fn_8023193C_00000C80
     addi r3, r1, 0x68
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_8023193C_00000C80:
     lfs f0, lbl_808830D0
     fcmpu cr0, f0, f31
@@ -1016,7 +1016,7 @@ lbl_fn_8023193C_00000DD4:
     lfs f0, lbl_808830DC
     fmuls f3, f3, f29
     fmuls f29, f0, f3
-    bl fn_805F9940
+    bl PSVECMag
     fdivs f3, f1, f29
     lfs f0, lbl_80883108
     lfs f5, 0x254(r25)
@@ -1032,7 +1032,7 @@ lbl_fn_8023193C_00000DD4:
     stfs f3, 0x14(r1)
     stfs f0, 0x18(r1)
     stfs f3, 0x1c(r1)
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     addi r4, r1, 0x20
     lfs f2, 0x28(r1)
     psq_l f1, 0x0(r4), 0, 0
@@ -1040,7 +1040,7 @@ lbl_fn_8023193C_00000DD4:
     psq_st f1, 0x0(r3), 0, 0
     mr r4, r3
     stfs f2, 0x18c(r26)
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_8023193C_00000E4C:
     lwz r3, 0x30(r29)
     cmpwi r3, 0x0
@@ -1404,7 +1404,7 @@ lbl_fn_8023193C_00001348:
     psq_l f1, 0x0(r5), 0, 0
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x17c(r26)
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_8023193C_000013A0:
     li r3, 0x0
 lbl_fn_8023193C_000013A4:
@@ -1622,26 +1622,20 @@ lbl_fn_80232ACC_00001648:
     blr
 }
 
-asm void fn_80232B7C(void)
+void sound_initGlobalInstances(u32 r3, u32 r4)
 {
-    nofralloc
-    stw r3, lbl_8087F364
-    stw r4, lbl_8087DBE8
-    blr
+    lbl_8087F364 = r3;
+    lbl_8087DBE8 = r4;
 }
 
-asm void fn_80232B88(void)
+u32 sound_getGlobalInstance1(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F364
-    blr
+    return lbl_8087F364;
 }
 
-asm void fn_80232B90(void)
+u32 sound_getGlobalInstance2(void)
 {
-    nofralloc
-    lwz r3, lbl_8087DBE8
-    blr
+    return lbl_8087DBE8;
 }
 
 asm void fn_80232B98(void)

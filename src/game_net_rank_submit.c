@@ -9,21 +9,21 @@ extern void _savegpr_19(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8005B710(void);
+extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
 extern void fn_8006F5E8(void);
-extern void fn_80084C24(void);
-extern void fn_80092814(void);
+extern void mem_getAllocSize(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_8009EE30(void);
 extern void fn_800A58D0(void);
-extern void fn_800D246C(void);
-extern void fn_800DC6B4(void);
+extern void atn_Task_setActive(void);
+extern void str_findChar(void);
 extern void fn_8010A828(void);
 extern void fn_80116EB8(void);
 extern void fn_80116FC0(void);
 extern void fn_801F4728(void);
-extern void fn_801F4E8C(void);
+extern void saveSlot_readSummary(void);
 extern void fn_801F6C2C(void);
 extern void fn_801F6D7C(void);
 extern void fn_801F837C(void);
@@ -34,9 +34,9 @@ extern void fn_801FEE08(void);
 extern void fn_80202118(void);
 extern void fn_80202D00(void);
 extern void fn_8044D878(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
-extern void fn_80473E8C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_804A53D4(void);
 extern void fn_804A5E40(void);
 extern void fn_8050FA80(void);
@@ -47,8 +47,8 @@ extern void fn_805112AC(void);
 extern void fn_805118B8(void);
 extern void fn_805119CC(void);
 extern void fn_8052635C(void);
-extern void fn_805F89F0(void);
-extern void fn_806846C4(void);
+extern void PSMTXConcat(void);
+extern void wmemcpy(void);
 extern void fn_80686A48(void);
 extern void fn_80686B24(void);
 extern void fn_806958E0(void);
@@ -119,7 +119,7 @@ asm void fn_805226A8(void)
     cmpwi r3, 0x0
     beq lbl_fn_805226A8_00000040
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_805226A8_00000040:
     cmpwi r31, 0x0
     ble lbl_fn_805226A8_00000050
@@ -218,7 +218,7 @@ lbl_fn_805227D0_00000170:
     addic. r3, r30, 0x184
     beq lbl_fn_805227D0_00000180
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_805227D0_00000180:
     lis r4, fn_805226A8@ha
     addi r3, r30, 0xf0
@@ -272,7 +272,7 @@ asm void fn_80522880(void)
 lbl_fn_80522880_00000218:
     lwz r3, 0xf0(r30)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     li r31, 0x0
     li r29, 0x0
     b lbl_fn_80522880_0000024C
@@ -281,7 +281,7 @@ lbl_fn_80522880_00000230:
     li r4, 0x0
     add r3, r0, r29
     lwz r3, 0x18(r3)
-    bl fn_800D246C
+    bl atn_Task_setActive
     addi r29, r29, 0x20
     addi r31, r31, 0x1
 lbl_fn_80522880_0000024C:
@@ -347,10 +347,10 @@ asm void fn_8052293C(void)
     li r7, 0x4
     bl fn_806958E0
     addi r3, r23, 0x184
-    bl fn_8047059C
+    bl boss_getOffset50
     srwi r24, r3, 1
     addi r3, r23, 0x184
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r24, 0x0
     beq lbl_fn_8052293C_0000034C
     addi r3, r3, 0x2
@@ -372,7 +372,7 @@ lbl_fn_8052293C_0000035C:
     addi r31, r1, 0xe8
 lbl_fn_8052293C_00000384:
     addi r3, r1, 0x128
-    bl fn_8005B710
+    bl talk_parseDialogue
     la r4, lbl_8087E498
     li r5, 0x1
     bl fn_80686B24
@@ -383,7 +383,7 @@ lbl_fn_8052293C_00000384:
     lwz r22, lbl_8087EEC8
     stw r26, 0xc(r1)
     stw r26, 0x10(r1)
-    bl fn_8005B710
+    bl talk_parseDialogue
     mr r5, r3
     mr r3, r22
     mr r4, r25
@@ -407,7 +407,7 @@ lbl_fn_8052293C_000003E0:
     bl memcpy
 lbl_fn_8052293C_00000404:
     addi r3, r1, 0x128
-    bl fn_8005B710
+    bl talk_parseDialogue
     cmplw r3, r28
     mr r22, r3
     beq lbl_fn_8052293C_00000430
@@ -416,10 +416,10 @@ lbl_fn_8052293C_00000404:
     mr r3, r28
     mr r4, r22
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_8052293C_00000430:
     addi r3, r1, 0x128
-    bl fn_8005B710
+    bl talk_parseDialogue
     cmplw r3, r29
     mr r22, r3
     beq lbl_fn_8052293C_0000045C
@@ -428,10 +428,10 @@ lbl_fn_8052293C_00000430:
     mr r3, r29
     mr r4, r22
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_8052293C_0000045C:
     addi r3, r1, 0x128
-    bl fn_8005B710
+    bl talk_parseDialogue
     cmplw r3, r30
     mr r22, r3
     beq lbl_fn_8052293C_00000488
@@ -440,10 +440,10 @@ lbl_fn_8052293C_0000045C:
     mr r3, r30
     mr r4, r22
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_8052293C_00000488:
     addi r3, r1, 0x128
-    bl fn_8005B710
+    bl talk_parseDialogue
     cmplw r3, r31
     mr r22, r3
     beq lbl_fn_8052293C_000004B4
@@ -452,7 +452,7 @@ lbl_fn_8052293C_00000488:
     mr r3, r31
     mr r4, r22
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_8052293C_000004B4:
     lwz r0, 0x18c(r23)
     mulli r0, r0, 0x110
@@ -641,7 +641,7 @@ lbl_fn_80522DDC_00000760:
     bl fn_80202118
     mr r30, r3
     mr r3, r29
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_808879F0
     mr r4, r3
     addi r3, r30, 0x58
@@ -666,7 +666,7 @@ lbl_fn_80522DDC_00000794:
     mr r3, r30
     mr r4, r29
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_000007E4:
     addi r29, r31, 0x910
     addi r0, r31, 0x800
@@ -678,7 +678,7 @@ lbl_fn_80522DDC_000007E4:
     mr r4, r29
     addi r3, r31, 0x800
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_00000810:
     addi r29, r1, 0x8
     addi r0, r31, 0x910
@@ -690,7 +690,7 @@ lbl_fn_80522DDC_00000810:
     mr r4, r29
     addi r3, r31, 0x910
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_0000083C:
     addi r29, r31, 0x840
     addi r30, r1, 0x8
@@ -702,7 +702,7 @@ lbl_fn_80522DDC_0000083C:
     mr r3, r30
     mr r4, r29
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_00000868:
     addi r29, r31, 0x950
     addi r0, r31, 0x840
@@ -714,7 +714,7 @@ lbl_fn_80522DDC_00000868:
     mr r4, r29
     addi r3, r31, 0x840
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_00000894:
     addi r29, r1, 0x8
     addi r0, r31, 0x950
@@ -726,7 +726,7 @@ lbl_fn_80522DDC_00000894:
     mr r4, r29
     addi r3, r31, 0x950
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_000008C0:
     addi r29, r31, 0xee0
     addi r30, r1, 0x8
@@ -738,7 +738,7 @@ lbl_fn_80522DDC_000008C0:
     mr r3, r30
     mr r4, r29
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_000008EC:
     addi r29, r31, 0xff0
     addi r0, r31, 0xee0
@@ -750,7 +750,7 @@ lbl_fn_80522DDC_000008EC:
     mr r4, r29
     addi r3, r31, 0xee0
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_00000918:
     addi r29, r1, 0x8
     addi r0, r31, 0xff0
@@ -762,7 +762,7 @@ lbl_fn_80522DDC_00000918:
     mr r4, r29
     addi r3, r31, 0xff0
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_00000944:
     addi r29, r31, 0xf20
     addi r30, r1, 0x8
@@ -774,7 +774,7 @@ lbl_fn_80522DDC_00000944:
     mr r3, r30
     mr r4, r29
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_00000970:
     addi r29, r31, 0x1030
     addi r0, r31, 0xf20
@@ -786,7 +786,7 @@ lbl_fn_80522DDC_00000970:
     mr r4, r29
     addi r3, r31, 0xf20
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_0000099C:
     addi r29, r1, 0x8
     addi r0, r31, 0x1030
@@ -798,7 +798,7 @@ lbl_fn_80522DDC_0000099C:
     mr r4, r29
     addi r3, r31, 0x1030
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_000009C8:
     lis r3, lbl_8075C6C4@ha
     mr r28, r31
@@ -814,7 +814,7 @@ lbl_fn_80522DDC_000009DC:
     bl fn_80202118
     mr r30, r3
     mr r3, r29
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_808879F8
     mr r4, r3
     addi r3, r30, 0x58
@@ -838,7 +838,7 @@ lbl_fn_80522DDC_00000A20:
     mr r3, r30
     mr r4, r29
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_00000A58:
     addi r29, r31, 0xb30
     addi r0, r31, 0xa20
@@ -850,7 +850,7 @@ lbl_fn_80522DDC_00000A58:
     mr r4, r29
     addi r3, r31, 0xa20
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_00000A84:
     addi r29, r1, 0x8
     addi r0, r31, 0xb30
@@ -862,7 +862,7 @@ lbl_fn_80522DDC_00000A84:
     mr r4, r29
     addi r3, r31, 0xb30
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_00000AB0:
     addi r29, r31, 0xa60
     addi r30, r1, 0x8
@@ -874,7 +874,7 @@ lbl_fn_80522DDC_00000AB0:
     mr r3, r30
     mr r4, r29
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_00000ADC:
     addi r29, r31, 0xb70
     addi r0, r31, 0xa60
@@ -886,7 +886,7 @@ lbl_fn_80522DDC_00000ADC:
     mr r4, r29
     addi r3, r31, 0xa60
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_00000B08:
     addi r29, r1, 0x8
     addi r0, r31, 0xb70
@@ -898,7 +898,7 @@ lbl_fn_80522DDC_00000B08:
     mr r4, r29
     addi r3, r31, 0xb70
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_00000B34:
     addi r11, r1, 0x60
     bl _restgpr_27
@@ -1395,7 +1395,7 @@ lbl_fn_805233FC_0000120C:
     bl fn_80202118
     mr r26, r3
     mr r3, r22
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r26, 0x58
@@ -1406,7 +1406,7 @@ lbl_fn_805233FC_0000120C:
     bl fn_80202118
     mr r26, r3
     mr r3, r22
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r26, 0x58
@@ -1440,7 +1440,7 @@ lbl_fn_805233FC_000012B0:
     bl fn_80202118
     mr r26, r3
     mr r3, r20
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r5, r19
     addi r3, r26, 0x58
@@ -1456,7 +1456,7 @@ lbl_fn_805233FC_000012E8:
     bl fn_80202118
     mr r26, r3
     mr r3, r22
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_808879F8
     mr r4, r3
     addi r3, r26, 0x58
@@ -1601,11 +1601,11 @@ lbl_fn_805233FC_000014D8:
     cmpwi r26, 0x0
     beq lbl_fn_805233FC_00001554
     addi r3, r29, 0x294
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r26
     addi r3, r1, 0x168
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lwz r3, 0x144(r23)
     bl fn_80202118
     addi r4, r29, 0x2a5
@@ -1642,7 +1642,7 @@ lbl_fn_805233FC_00001598:
     bl fn_80202118
     mr r27, r3
     mr r3, r22
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f27
     mr r4, r3
     addi r3, r27, 0x58
@@ -1661,7 +1661,7 @@ lbl_fn_805233FC_000015E4:
     bl fn_80202118
     mr r27, r3
     mr r3, r22
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f27
     mr r4, r3
     addi r3, r27, 0x58
@@ -1682,7 +1682,7 @@ lbl_fn_805233FC_0000160C:
     addi r21, r29, 0x58
     addi r26, r3, lbl_8075C6C4@l
     addi r3, r26, 0x2c1
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_808879F0
     mr r4, r3
     mr r3, r21
@@ -1699,7 +1699,7 @@ lbl_fn_805233FC_00001668:
     bl fn_80202118
     mr r26, r3
     mr r3, r22
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_808879F0
     mr r4, r3
     addi r3, r26, 0x58
@@ -1715,7 +1715,7 @@ lbl_fn_805233FC_000016B0:
     addi r21, r29, 0x58
     addi r26, r3, lbl_8075C6C4@l
     addi r3, r26, 0x2c1
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_808879F8
     mr r4, r3
     mr r3, r21
@@ -1732,7 +1732,7 @@ lbl_fn_805233FC_000016E0:
     bl fn_80202118
     mr r26, r3
     mr r3, r22
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_808879F8
     mr r4, r3
     addi r3, r26, 0x58
@@ -1757,7 +1757,7 @@ lbl_fn_805233FC_00001724:
     addi r26, r26, lbl_8075C6C4@l
     addi r21, r29, 0x58
     addi r3, r26, 0x2c7
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r21
     mr r5, r22
@@ -1767,7 +1767,7 @@ lbl_fn_805233FC_00001724:
     bl fn_80116FC0
     mr r22, r3
     addi r3, r26, 0x2d1
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r21
     mr r5, r22
@@ -1786,7 +1786,7 @@ lbl_fn_805233FC_0000179C:
     addi r26, r26, lbl_8075C6C4@l
     addi r21, r29, 0x58
     addi r3, r26, 0x2c7
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r21
     mr r5, r22
@@ -1796,7 +1796,7 @@ lbl_fn_805233FC_0000179C:
     bl fn_80116FC0
     mr r22, r3
     addi r3, r26, 0x2d1
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r21
     mr r5, r22
@@ -1812,7 +1812,7 @@ lbl_fn_805233FC_0000180C:
     addi r26, r26, lbl_8075C6C4@l
     addi r21, r29, 0x58
     addi r3, r26, 0x2c7
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r21
     mr r5, r22
@@ -1822,7 +1822,7 @@ lbl_fn_805233FC_0000180C:
     bl fn_80116FC0
     mr r22, r3
     addi r3, r26, 0x2d1
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r21
     mr r5, r22
@@ -1888,7 +1888,7 @@ lbl_fn_805233FC_00001934:
     addi r4, r4, lbl_8075C6C4@l
     li r5, 0x0
     addi r4, r4, 0x263
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_805233FC_0000195C
     li r4, 0x0
@@ -1920,7 +1920,7 @@ lbl_fn_805233FC_000019B0:
     addi r4, r1, 0x180
     addi r3, r3, 0x30
     mr r5, r4
-    bl fn_805F89F0
+    bl PSMTXConcat
     lis r31, lbl_8075C6C4@ha
     addi r3, r1, 0x1b0
     addi r31, r31, lbl_8075C6C4@l
@@ -1934,11 +1934,11 @@ lbl_fn_805233FC_000019B0:
     bl fn_80202118
     mr r22, r3
     addi r3, r1, 0x1b0
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r22
     addi r3, r1, 0xf0
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lfs f10, 0xf0(r1)
     mr r3, r25
     lfs f9, 0xf4(r1)
@@ -1972,11 +1972,11 @@ lbl_fn_805233FC_000019B0:
     bl sprintf
     lwz r22, 0x178(r25)
     addi r3, r1, 0x1b0
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r22
     addi r3, r1, 0x140
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lfs f9, lbl_80887A10
     addi r6, r1, 0x154
     lfs f8, 0x140(r1)
@@ -2029,11 +2029,11 @@ lbl_fn_805233FC_00001B54:
     mr r26, r3
 lbl_fn_805233FC_00001B60:
     addi r3, r1, 0x1b0
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r26
     addi r3, r1, 0x12c
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lwz r3, 0x138(r25)
     bl fn_80202118
     lis r4, lbl_8075C6C4@ha
@@ -2065,11 +2065,11 @@ lbl_fn_805233FC_00001B98:
     bl fn_80202118
     mr r22, r3
     addi r3, r1, 0x1b0
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r22
     addi r3, r1, 0x118
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lwz r3, 0x0(r21)
     subi r0, r3, 0x1
     cmplwi r0, 0x6
@@ -2243,7 +2243,7 @@ lbl_fn_805233FC_00001E6C:
     addi r26, r26, lbl_8075C6C4@l
     addi r3, r26, 0x347
     addi r21, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f27
     mr r4, r3
     mr r3, r21
@@ -2251,7 +2251,7 @@ lbl_fn_805233FC_00001E6C:
     lwz r4, 0x17c(r25)
     addi r3, r26, 0x34e
     addi r21, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_808879F0
     mr r4, r3
     mr r3, r21
@@ -2264,7 +2264,7 @@ lbl_fn_805233FC_00001EC8:
     addi r26, r26, lbl_8075C6C4@l
     addi r3, r26, 0x347
     addi r21, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_808879F0
     mr r4, r3
     mr r3, r21
@@ -2274,7 +2274,7 @@ lbl_fn_805233FC_00001EC8:
     lwz r4, 0x17c(r25)
     fneg f27, f0
     addi r21, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f27
     mr r4, r3
     mr r3, r21
@@ -2286,7 +2286,7 @@ lbl_fn_805233FC_00001F20:
     addi r26, r26, lbl_8075C6C4@l
     addi r3, r26, 0x347
     addi r21, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_808879F0
     mr r4, r3
     mr r3, r21
@@ -2294,7 +2294,7 @@ lbl_fn_805233FC_00001F20:
     lwz r4, 0x17c(r25)
     addi r3, r26, 0x34e
     addi r21, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_808879F0
     mr r4, r3
     mr r3, r21
@@ -2322,11 +2322,11 @@ lbl_fn_805233FC_00001F68:
     stfs f0, 0x10c(r1)
     stfs f0, 0x110(r1)
     stfs f0, 0x114(r1)
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r22
     addi r3, r1, 0xc8
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lfs f10, 0xc8(r1)
     addi r4, r26, 0x2a5
     lfs f9, 0xcc(r1)
@@ -2357,7 +2357,7 @@ lbl_fn_805233FC_00001F68:
     stw r0, 0x224(r1)
     lfd f0, 0x220(r1)
     fsubs f27, f0, f7
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f27
     mr r4, r3
     mr r3, r21

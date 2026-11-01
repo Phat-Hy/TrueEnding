@@ -10,7 +10,7 @@ extern void fn_800838B8(void);
 extern void fn_8016F3D0(void);
 extern void fn_80178668(void);
 extern void fn_80178864(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_804AE3BC(void);
 extern void fn_804D818C(void);
 extern void fn_804E82C8(void);
@@ -854,7 +854,7 @@ lbl_fn_804F3884_00000A60:
     cmpwi r30, 0x0
     beq lbl_fn_804F3884_00000AF0
     li r3, 0x4fc1
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r4, r3
     lwz r3, 0x0(r31)
     mr r7, r30
@@ -871,7 +871,7 @@ lbl_fn_804F3884_00000AC0:
     cmpwi r30, 0x0
     beq lbl_fn_804F3884_00000AF0
     li r3, 0x4fc1
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r4, r3
     lwz r3, 0x0(r31)
     mr r5, r30

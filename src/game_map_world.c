@@ -2,12 +2,12 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_800846FC(void);
-extern void fn_80084C24(void);
-extern void fn_80092814(void);
+extern void mem_realloc(void);
+extern void mem_getAllocSize(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_80096218(void);
-extern void fn_80097C08(void);
-extern void fn_80097CCC(void);
+extern void atn_Anim_setLayerAnimation(void);
+extern void cursor_updateSlotState(void);
 extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
 extern void fn_801065F4(void);
@@ -25,19 +25,19 @@ extern void fn_8015487C(void);
 extern void fn_80179730(void);
 extern void fn_80204E04(void);
 extern void fn_80208748(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_8021A960(void);
 extern void fn_803761A4(void);
 extern void fn_803B3B38(void);
 extern void fn_80418318(void);
 extern void fn_804188A0(void);
-extern void fn_80473F34(void);
+extern void atn_LoadHandle_getData(void);
 extern void fn_80563A64(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_80684600(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void atoi(void);
 extern void fn_80686A64(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 
 /* External data declarations */
 extern u8 lbl_807374B8[];
@@ -148,17 +148,17 @@ asm void fn_80179A34(void)
     beq lbl_fn_80179A34_000000DC
     lwz r3, 0x10(r4)
     addi r3, r3, 0x8
-    bl fn_80684600
+    bl atoi
     lwz r4, 0x60(r31)
     mulli r30, r3, 0x64
     lwz r3, 0x10(r4)
     addi r3, r3, 0x2
-    bl fn_80684600
+    bl atoi
     lwz r4, 0x60(r31)
     mulli r31, r3, 0x2710
     lwz r3, 0x10(r4)
     addi r3, r3, 0xb
-    bl fn_80684600
+    bl atoi
     add r0, r31, r30
     add r3, r3, r0
     b lbl_fn_80179A34_000000E0
@@ -729,7 +729,7 @@ lbl_fn_8017A160_0000080C:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8017A160_0000084C
     lwz r3, 0xf80(r31)
@@ -795,7 +795,7 @@ lbl_fn_8017A228_000008DC:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8017A228_00000920
     lwz r3, 0xf80(r30)
@@ -865,13 +865,13 @@ asm void fn_8017A33C(void)
     li r7, 0x0
     li r8, 0x1
     addi r3, r3, 0xb0
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lis r4, lbl_80737A9C@ha
     addi r3, r30, 0xb0
     addi r4, r4, lbl_80737A9C@l
     li r5, 0x0
     addi r4, r4, 0x6c
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_8017A33C_000009F8
     li r4, 0x0
@@ -896,7 +896,7 @@ lbl_fn_8017A33C_00000A24:
     lfs f1, lbl_8088196C
     li r4, 0x3
     addi r3, r3, 0xb0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     cmpwi r29, 0x0
     beq lbl_fn_8017A33C_00000A74
     lwz r3, 0x139c(r30)
@@ -956,7 +956,7 @@ lbl_fn_8017A450_00000AF0:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8017A450_00000B30
     lwz r3, 0xf80(r31)
@@ -1375,7 +1375,7 @@ lbl_fn_8017A9A8_000010F4:
     lwz r3, 0xaa4(r29)
     cmpwi r3, 0x0
     ble lbl_fn_8017A9A8_0000110C
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r28, r3
     b lbl_fn_8017A9A8_00001110
 lbl_fn_8017A9A8_0000110C:
@@ -1542,19 +1542,19 @@ asm void fn_8017AC44(void)
     stfs f0, 0x10(r1)
     lfs f1, 0x538(r3)
     addi r3, r1, 0x18
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x8
     addi r3, r1, 0x18
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f1, lbl_808819CC
     addi r3, r1, 0x48
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x8
     addi r3, r1, 0x48
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f4, 0x8(r1)
     addi r3, r1, 0x8
     lfs f5, lbl_808819F8
@@ -1639,7 +1639,7 @@ lbl_fn_8017AD44_00001438:
     cmplw r30, r0
     blt lbl_fn_8017AD44_0000141C
     addi r3, r27, 0x98
-    bl fn_80473F34
+    bl atn_LoadHandle_getData
     lwz r0, 0x8(r28)
     mr r31, r3
     cmpwi r0, 0x0
@@ -1656,7 +1656,7 @@ lbl_fn_8017AD44_00001468:
     la r5, lbl_8087D7E0
     la r6, lbl_8087D7DC
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x8(r28)
     mr r29, r3
     cmpwi r0, 0x0
@@ -1732,7 +1732,7 @@ lbl_fn_8017AD44_00001588:
     bdnz lbl_fn_8017AD44_00001588
 lbl_fn_8017AD44_000015A0:
     lwz r3, 0x8(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8017AD44_000015A8:
     li r0, 0x8
     stw r29, 0x8(r28)
@@ -1750,7 +1750,7 @@ lbl_fn_8017AD44_000015B8:
     la r5, lbl_8087D7E0
     la r6, lbl_8087D7DC
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x8(r28)
     mr r30, r3
     cmpwi r0, 0x0
@@ -1826,7 +1826,7 @@ lbl_fn_8017AD44_000016E4:
     bdnz lbl_fn_8017AD44_000016E4
 lbl_fn_8017AD44_000016FC:
     lwz r3, 0x8(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8017AD44_00001704:
     stw r30, 0x8(r28)
     stw r29, 0x4(r28)
@@ -1931,7 +1931,7 @@ asm void fn_8017B1C4(void)
     stw r30, 0x1404(r3)
     beq lbl_fn_8017B1C4_00001858
     mr r3, r5
-    bl fn_80084C24
+    bl mem_getAllocSize
     stw r30, 0x1408(r28)
 lbl_fn_8017B1C4_00001858:
     lwz r31, 0x0(r29)
@@ -1942,7 +1942,7 @@ lbl_fn_8017B1C4_00001858:
     la r5, lbl_8087D9DC
     la r6, lbl_8087D9D8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r30, r3
     b lbl_fn_8017B1C4_00001888
 lbl_fn_8017B1C4_00001884:
@@ -2022,7 +2022,7 @@ lbl_fn_8017B1C4_00001980:
     bdnz lbl_fn_8017B1C4_00001980
 lbl_fn_8017B1C4_00001998:
     lwz r3, 0x1408(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8017B1C4_000019A0:
     stw r30, 0x1408(r28)
     li r6, 0x0

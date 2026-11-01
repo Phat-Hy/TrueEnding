@@ -22,7 +22,7 @@ extern void fn_805D2DB0(void);
 extern void fn_805D9BE0(void);
 extern void fn_805D9C70(void);
 extern void fn_805D9CC0(void);
-extern void fn_805F8980(void);
+extern void PSMTXIdentity(void);
 extern void fn_80612E80(void);
 extern void fn_806134E0(void);
 extern void fn_80613520(void);
@@ -39,11 +39,11 @@ extern void fn_80616390(void);
 extern void fn_80617200(void);
 extern void fn_80617220(void);
 extern void fn_80617340(void);
-extern void fn_806176F0(void);
+extern void GXSetTevSwapMode(void);
 extern void fn_80617730(void);
 extern void fn_806177B0(void);
 extern void fn_80617880(void);
-extern void fn_806179E0(void);
+extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
 extern void fn_8061A0F0(void);
 extern void fn_8061A100(void);
@@ -836,7 +836,7 @@ asm void fn_805CE550(void)
     li r3, 0x0
     bl fn_80613BB0
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     bl fn_80617200
     li r3, 0x0
@@ -852,7 +852,7 @@ asm void fn_805CE550(void)
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1
@@ -1018,7 +1018,7 @@ asm void fn_805CE830(void)
     addi r3, r3, 0x50
     bl memset
     addi r3, r31, 0x4
-    bl fn_805F8980
+    bl PSMTXIdentity
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)

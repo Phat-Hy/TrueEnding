@@ -16,9 +16,9 @@ extern void fn_8006A250(void);
 extern void fn_8006CA80(void);
 extern void fn_80076FF8(void);
 extern void fn_80079044(void);
-extern void fn_80084320(void);
-extern void fn_800874C8(void);
-extern void fn_8008771C(void);
+extern void mem_alloc(void);
+extern void route_findNextWaypoint(void);
+extern void route_interpolatePath(void);
 extern void fn_80087858(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
@@ -29,17 +29,17 @@ extern void fn_800BC2E0(void);
 extern void fn_800C1A1C(void);
 extern void fn_800C1FB4(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CFBA0(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
-extern void fn_800D246C(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_801125F8(void);
 extern void fn_80112960(void);
 extern void fn_80114AA0(void);
 extern void fn_80117228(void);
-extern void fn_801231D0(void);
+extern void magic_dispatchActionCommand(void);
 extern void fn_801CFD68(void);
 extern void fn_801D0BAC(void);
 extern void fn_8020A3E4(void);
@@ -54,8 +54,8 @@ extern void fn_803D71C4(void);
 extern void fn_8046ECDC(void);
 extern void fn_80470364(void);
 extern void fn_80470528(void);
-extern void fn_80473E8C(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_destructor(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_8048A264(void);
 extern void fn_8048A290(void);
 extern void fn_8049D68C(void);
@@ -76,7 +76,7 @@ extern void fn_80530178(void);
 extern void fn_805303D4(void);
 extern void fn_805305D4(void);
 extern void fn_80530DB8(void);
-extern void fn_805F98D0(void);
+extern void PSVECNormalize(void);
 
 /* External data declarations */
 extern u8 jumptable_807937E8[];
@@ -303,7 +303,7 @@ asm void fn_8052A88C(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8052A88C_00000270
     mr r4, r31
@@ -329,7 +329,7 @@ asm void fn_8052A8F0(void)
     stw r30, 0x48(r1)
     stw r29, 0x44(r1)
     mr r29, r3
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r4, lbl_80793830@ha
     addi r3, r29, 0x48
     addi r4, r4, lbl_80793830@l
@@ -499,47 +499,47 @@ lbl_fn_8052A8F0_000004C4:
     bl fn_8052ACD4
     lwz r3, 0x460(r29)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r29
     bl fn_8052911C
     stw r3, 0x11d0(r29)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r29
     bl fn_805268CC
     stw r3, 0x11d4(r29)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r29
     bl fn_8051B924
     stw r3, 0x11d8(r29)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r29
     bl fn_805169FC
     stw r3, 0x11dc(r29)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r29
     bl fn_80521E20
     stw r3, 0x11e0(r29)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r29
     bl fn_801CFD68
     stw r3, 0x11e4(r29)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r29
     bl fn_805128C4
     stw r3, 0x11ec(r29)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r29
     bl fn_80514724
     stw r3, 0x11e8(r29)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r12, 0x1334(r29)
     addi r3, r29, 0x1334
     addi r4, r31, 0x50
@@ -762,7 +762,7 @@ asm void fn_8052ACDC(void)
     stfs f9, 0x1c(r1)
     psq_st f1, 0x0(r31), 0, 0
     stfs f2, 0x10(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     psq_l f1, 0x0(r31), 0, 0
     addi r3, r30, 0x67c
     lfs f2, 0x10(r1)
@@ -840,15 +840,15 @@ lbl_fn_8052B014_000009DC:
     addic. r3, r29, 0x1344
     beq lbl_fn_8052B014_000009EC
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_8052B014_000009EC:
     addi r3, r29, 0x1340
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addic. r3, r29, 0x1334
     beq lbl_fn_8052B014_00000A08
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_8052B014_00000A08:
     addic. r31, r29, 0x12b0
     beq lbl_fn_8052B014_00000A6C
@@ -913,7 +913,7 @@ lbl_fn_8052B014_00000AD0:
     bl fn_8004B338
     mr r3, r29
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r30, 0x0
     ble lbl_fn_8052B014_00000B04
     mr r3, r29
@@ -961,16 +961,16 @@ lbl_fn_8052B190_00000B74:
     cmpwi r3, 0x0
     beq lbl_fn_8052B190_0000116C
     addi r3, r25, 0x1334
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_8052B190_0000116C
     addi r3, r25, 0x1344
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_8052B190_0000116C
     lwz r3, 0x460(r25)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x11d0(r25)
     lwz r4, 0x460(r25)
     lwz r12, 0x0(r3)
@@ -979,7 +979,7 @@ lbl_fn_8052B190_00000B74:
     bctrl
     lwz r3, 0x11d0(r25)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x11d4(r25)
     lwz r4, 0x460(r25)
     lwz r12, 0x0(r3)
@@ -988,7 +988,7 @@ lbl_fn_8052B190_00000B74:
     bctrl
     lwz r3, 0x11d4(r25)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x11d8(r25)
     lwz r4, 0x460(r25)
     lwz r12, 0x0(r3)
@@ -997,7 +997,7 @@ lbl_fn_8052B190_00000B74:
     bctrl
     lwz r3, 0x11d8(r25)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x11dc(r25)
     lwz r4, 0x460(r25)
     lwz r12, 0x0(r3)
@@ -1006,7 +1006,7 @@ lbl_fn_8052B190_00000B74:
     bctrl
     lwz r3, 0x11dc(r25)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x11e0(r25)
     lwz r4, 0x460(r25)
     lwz r12, 0x0(r3)
@@ -1015,7 +1015,7 @@ lbl_fn_8052B190_00000B74:
     bctrl
     lwz r3, 0x11e0(r25)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x11e4(r25)
     lwz r4, 0x460(r25)
     lwz r12, 0x0(r3)
@@ -1024,7 +1024,7 @@ lbl_fn_8052B190_00000B74:
     bctrl
     lwz r3, 0x11e4(r25)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x11ec(r25)
     lwz r4, 0x460(r25)
     lwz r12, 0x0(r3)
@@ -1033,7 +1033,7 @@ lbl_fn_8052B190_00000B74:
     bctrl
     lwz r3, 0x11ec(r25)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x11e8(r25)
     lwz r4, 0x460(r25)
     lwz r12, 0x0(r3)
@@ -1042,7 +1042,7 @@ lbl_fn_8052B190_00000B74:
     bctrl
     lwz r3, 0x11e8(r25)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r25
     li r4, 0x0
     bl fn_8052DEF0
@@ -1086,7 +1086,7 @@ lbl_fn_8052B190_00000B74:
     addi r5, r25, 0x1368
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r28
     addi r4, r29, 0xa2
     addi r5, r25, 0x1220
@@ -1102,7 +1102,7 @@ lbl_fn_8052B190_00000B74:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80887AB0
     mr r3, r28
     lfs f2, lbl_80887B10
@@ -1132,7 +1132,7 @@ lbl_fn_8052B190_00000B74:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lwz r3, 0x11d0(r25)
     mr r4, r28
     lwz r12, 0x0(r3)
@@ -1203,7 +1203,7 @@ lbl_fn_8052B190_00000F0C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r25
     addi r4, r29, 0xe8
     addi r5, r31, 0x2c
@@ -1212,7 +1212,7 @@ lbl_fn_8052B190_00000F0C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r25
     addi r4, r29, 0xea
     addi r5, r31, 0x30
@@ -1221,7 +1221,7 @@ lbl_fn_8052B190_00000F0C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r26
     addi r4, r29, 0xec
     bl fn_8008937C
@@ -1233,7 +1233,7 @@ lbl_fn_8052B190_00000F0C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r25
     addi r4, r29, 0xe6
     addi r5, r31, 0x38
@@ -1242,7 +1242,7 @@ lbl_fn_8052B190_00000F0C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r25
     addi r4, r29, 0xe8
     addi r5, r31, 0x3c
@@ -1251,7 +1251,7 @@ lbl_fn_8052B190_00000F0C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r25
     addi r4, r29, 0xea
     addi r5, r31, 0x40
@@ -1260,7 +1260,7 @@ lbl_fn_8052B190_00000F0C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r26
     addi r4, r29, 0xf7
     bl fn_8008937C
@@ -1272,7 +1272,7 @@ lbl_fn_8052B190_00000F0C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r25
     addi r4, r29, 0xe8
     addi r5, r31, 0x4c
@@ -1281,7 +1281,7 @@ lbl_fn_8052B190_00000F0C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r25
     addi r4, r29, 0xea
     addi r5, r31, 0x50
@@ -1290,7 +1290,7 @@ lbl_fn_8052B190_00000F0C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r26
     addi r4, r29, 0xfd
     bl fn_8008937C
@@ -1302,7 +1302,7 @@ lbl_fn_8052B190_00000F0C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r25
     addi r4, r29, 0xe6
     addi r5, r31, 0x58
@@ -1311,7 +1311,7 @@ lbl_fn_8052B190_00000F0C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r25
     addi r4, r29, 0xe8
     addi r5, r31, 0x5c
@@ -1320,7 +1320,7 @@ lbl_fn_8052B190_00000F0C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r25
     addi r4, r29, 0xea
     addi r5, r31, 0x60
@@ -1329,7 +1329,7 @@ lbl_fn_8052B190_00000F0C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     addi r27, r27, 0x1
 lbl_fn_8052B190_00001154:
     addi r3, r30, lbl_807C912C@l
@@ -1870,7 +1870,7 @@ lbl_fn_8052BD00_000018EC:
     lwz r3, lbl_8087F0A8
     li r4, 0x10
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_8052BD00_00001A34
     lwz r3, 0x11f0(r31)
@@ -1918,7 +1918,7 @@ lbl_fn_8052BD00_00001998:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8052BD00_000019F4
 lbl_fn_8052BD00_000019BC:
     mr r3, r31

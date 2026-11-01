@@ -61,11 +61,11 @@ void fn_8061CE50(void);
 void IOS_IoctlAsync(void);
 void fn_8061D080(void);
 void fn_8061D1B0(void);
-void fn_8061D2F0(void);
+void IOS_IoctlvAsync(void);
 void IOS_Ioctlv(void);
 void fn_8061D4C0(void);
 void iosCreateHeap(void);
-void fn_8061D920(void);
+void iosAlloc(void);
 void iosAllocAligned(void);
 void iosFree(void);
 
@@ -1341,7 +1341,7 @@ lbl_fn_8061D1B0_000010F0:
     blr
 }
 
-asm void fn_8061D2F0(void)
+asm void IOS_IoctlvAsync(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -1358,20 +1358,20 @@ asm void fn_8061D2F0(void)
     mr r29, r8
     mr r30, r9
     li r31, 0x0
-    bne lbl_fn_8061D2F0_00001154
+    bne lbl_IOS_IoctlvAsync_00001154
     li r31, -0x4
-    b lbl_fn_8061D2F0_0000119C
-lbl_fn_8061D2F0_00001154:
+    b lbl_IOS_IoctlvAsync_0000119C
+lbl_IOS_IoctlvAsync_00001154:
     lwz r3, hid_8087E8D4
     li r4, 0x40
     li r5, 0x20
     bl iosAllocAligned
     cmpwi r3, 0x0
     stw r3, 0x8(r1)
-    bne lbl_fn_8061D2F0_00001178
+    bne lbl_IOS_IoctlvAsync_00001178
     li r31, -0x16
-    b lbl_fn_8061D2F0_0000119C
-lbl_fn_8061D2F0_00001178:
+    b lbl_IOS_IoctlvAsync_0000119C
+lbl_IOS_IoctlvAsync_00001178:
     stw r29, 0x20(r3)
     li r5, 0x0
     li r0, 0x7
@@ -1381,9 +1381,9 @@ lbl_fn_8061D2F0_00001178:
     stw r5, 0x28(r4)
     stw r0, 0x0(r3)
     stw r24, 0x8(r3)
-lbl_fn_8061D2F0_0000119C:
+lbl_IOS_IoctlvAsync_0000119C:
     cmpwi r31, 0x0
-    bne lbl_fn_8061D2F0_000011D8
+    bne lbl_IOS_IoctlvAsync_000011D8
     lwz r3, 0x8(r1)
     mr r4, r25
     mr r5, r26
@@ -1392,12 +1392,12 @@ lbl_fn_8061D2F0_0000119C:
     bl fn_8061D1B0
     cmpwi r3, 0x0
     mr r31, r3
-    bne lbl_fn_8061D2F0_000011D8
+    bne lbl_IOS_IoctlvAsync_000011D8
     lwz r3, 0x8(r1)
     mr r4, r29
     bl __ios_Ipc2
     mr r31, r3
-lbl_fn_8061D2F0_000011D8:
+lbl_IOS_IoctlvAsync_000011D8:
     addi r11, r1, 0x30
     mr r3, r31
     bl _restgpr_24
@@ -1776,7 +1776,7 @@ lbl_iosCreateHeap_0000171C:
     blr
 }
 
-asm void fn_8061D920(void)
+asm void iosAlloc(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1792,65 +1792,65 @@ asm void fn_8061D920(void)
     mr r28, r3
     bl OSDisableInterrupts
     cmpwi r29, 0x0
-    beq lbl_fn_8061D920_00001914
+    beq lbl_iosAlloc_00001914
     cmpwi r30, 0x0
-    beq lbl_fn_8061D920_00001914
+    beq lbl_iosAlloc_00001914
     subi r0, r30, 0x1
     and. r0, r30, r0
-    bne lbl_fn_8061D920_00001914
+    bne lbl_iosAlloc_00001914
     cmplwi r30, 0x20
-    bge lbl_fn_8061D920_00001798
+    bge lbl_iosAlloc_00001798
     li r30, 0x20
-lbl_fn_8061D920_00001798:
+lbl_iosAlloc_00001798:
     cmplwi r28, 0x7
     addi r0, r29, 0x1f
     clrrwi r29, r0, 5
-    bgt lbl_fn_8061D920_000017C0
+    bgt lbl_iosAlloc_000017C0
     lis r4, lbl_807E7780@ha
     slwi r0, r28, 4
     addi r4, r4, lbl_807E7780@l
     lwzux r0, r4, r0
     cmpwi r0, 0x0
-    bne lbl_fn_8061D920_000017C8
-lbl_fn_8061D920_000017C0:
+    bne lbl_iosAlloc_000017C8
+lbl_iosAlloc_000017C0:
     li r31, 0x0
-    b lbl_fn_8061D920_00001914
-lbl_fn_8061D920_000017C8:
+    b lbl_iosAlloc_00001914
+lbl_iosAlloc_000017C8:
     lwz r8, 0xc(r4)
     subi r6, r30, 0x1
     li r5, 0x0
-    b lbl_fn_8061D920_0000182C
-lbl_fn_8061D920_000017D8:
+    b lbl_iosAlloc_0000182C
+lbl_iosAlloc_000017D8:
     lwz r7, 0x4(r8)
     addi r0, r8, 0x10
     and r0, r0, r6
     cmplw r7, r29
     subf r0, r0, r30
     and r0, r6, r0
-    bne lbl_fn_8061D920_00001804
+    bne lbl_iosAlloc_00001804
     cmpwi r0, 0x0
-    bne lbl_fn_8061D920_00001804
+    bne lbl_iosAlloc_00001804
     mr r5, r8
-    b lbl_fn_8061D920_00001834
-lbl_fn_8061D920_00001804:
+    b lbl_iosAlloc_00001834
+lbl_iosAlloc_00001804:
     add r0, r29, r0
     cmplw r7, r0
-    blt lbl_fn_8061D920_00001828
+    blt lbl_iosAlloc_00001828
     cmpwi r5, 0x0
-    beq lbl_fn_8061D920_00001824
+    beq lbl_iosAlloc_00001824
     lwz r0, 0x4(r5)
     cmplw r7, r0
-    bge lbl_fn_8061D920_00001828
-lbl_fn_8061D920_00001824:
+    bge lbl_iosAlloc_00001828
+lbl_iosAlloc_00001824:
     mr r5, r8
-lbl_fn_8061D920_00001828:
+lbl_iosAlloc_00001828:
     lwz r8, 0xc(r8)
-lbl_fn_8061D920_0000182C:
+lbl_iosAlloc_0000182C:
     cmpwi r8, 0x0
-    bne lbl_fn_8061D920_000017D8
-lbl_fn_8061D920_00001834:
+    bne lbl_iosAlloc_000017D8
+lbl_iosAlloc_00001834:
     cmpwi r5, 0x0
-    beq lbl_fn_8061D920_00001914
+    beq lbl_iosAlloc_00001914
     subi r7, r30, 0x1
     addi r0, r5, 0x10
     and r0, r0, r7
@@ -1860,7 +1860,7 @@ lbl_fn_8061D920_00001834:
     add r7, r29, r8
     addi r0, r7, 0x10
     cmplw r6, r0
-    ble lbl_fn_8061D920_000018A8
+    ble lbl_iosAlloc_000018A8
     add r6, r5, r29
     lis r0, 0xbabe
     add r9, r8, r6
@@ -1874,43 +1874,43 @@ lbl_fn_8061D920_00001834:
     stw r6, 0x1c(r9)
     addi r9, r9, 0x10
     cmpwi r6, 0x0
-    beq lbl_fn_8061D920_000018A0
+    beq lbl_iosAlloc_000018A0
     stw r9, 0x8(r6)
-lbl_fn_8061D920_000018A0:
+lbl_iosAlloc_000018A0:
     stw r9, 0xc(r5)
     stw r7, 0x4(r5)
-lbl_fn_8061D920_000018A8:
+lbl_iosAlloc_000018A8:
     lis r6, 0xbabe
     addi r0, r6, 0x1
     stw r0, 0x0(r5)
     lwz r6, 0x8(r5)
     cmpwi r6, 0x0
-    beq lbl_fn_8061D920_000018CC
+    beq lbl_iosAlloc_000018CC
     lwz r0, 0xc(r5)
     stw r0, 0xc(r6)
-    b lbl_fn_8061D920_000018D4
-lbl_fn_8061D920_000018CC:
+    b lbl_iosAlloc_000018D4
+lbl_iosAlloc_000018CC:
     lwz r0, 0xc(r5)
     stw r0, 0xc(r4)
-lbl_fn_8061D920_000018D4:
+lbl_iosAlloc_000018D4:
     lwz r4, 0xc(r5)
     cmpwi r4, 0x0
-    beq lbl_fn_8061D920_000018E8
+    beq lbl_iosAlloc_000018E8
     lwz r0, 0x8(r5)
     stw r0, 0x8(r4)
-lbl_fn_8061D920_000018E8:
+lbl_iosAlloc_000018E8:
     li r0, 0x0
     stw r0, 0xc(r5)
     add r31, r5, r8
     cmpwi r8, 0x0
     stw r0, 0x8(r5)
     addi r31, r31, 0x10
-    beq lbl_fn_8061D920_00001914
+    beq lbl_iosAlloc_00001914
     lis r4, 0xbabe
     addi r0, r4, 0x2
     stw r0, -0x10(r31)
     stw r5, -0x8(r31)
-lbl_fn_8061D920_00001914:
+lbl_iosAlloc_00001914:
     bl OSRestoreInterrupts
     mr r3, r31
     lwz r31, 0x1c(r1)
@@ -1926,7 +1926,7 @@ lbl_fn_8061D920_00001914:
 asm void iosAllocAligned(void)
 {
     nofralloc
-    b fn_8061D920
+    b iosAlloc
 }
 
 asm void iosFree(void)

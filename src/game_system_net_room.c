@@ -10,7 +10,7 @@ extern void fn_80017E90(void);
 extern void fn_80017EB0(void);
 extern void fn_800697D8(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800FDE60(void);
 extern void fn_8011CD84(void);
 extern void fn_8011F8F4(void);
@@ -28,9 +28,9 @@ extern void fn_801539E0(void);
 extern void fn_80183930(void);
 extern void fn_80219558(void);
 extern void fn_8036554C(void);
-extern void fn_80370174(void);
-extern void fn_80370A78(void);
-extern void fn_80370BD0(void);
+extern void world_getGlobalFlag(void);
+extern void world_getLocalFlag(void);
+extern void world_reloadMapTransition(void);
 extern void fn_80371334(void);
 extern void fn_80373148(void);
 extern void fn_8039BF04(void);
@@ -58,12 +58,12 @@ extern void fn_805B3E68(void);
 extern void fn_805B3F24(void);
 extern void fn_805B3FD4(void);
 extern void fn_805B4D94(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9750(void);
-extern void fn_805F9920(void);
-extern void fn_80680CF8(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void PSMTXRotRad(void);
+extern void PSMTX44Identity(void);
+extern void PSVECSquareMag(void);
+extern void rand(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -157,20 +157,20 @@ lbl_fn_8039FBFC_00000050:
     cmpwi r0, 0x2
     bne lbl_fn_8039FBFC_00000068
     mr r4, r31
-    bl fn_80370174
+    bl world_getGlobalFlag
     mr r31, r3
     b lbl_fn_8039FBFC_0000009C
 lbl_fn_8039FBFC_00000068:
     cmpwi r0, 0x1
     bne lbl_fn_8039FBFC_00000080
     mr r4, r31
-    bl fn_80370A78
+    bl world_getLocalFlag
     mr r31, r3
     b lbl_fn_8039FBFC_0000009C
 lbl_fn_8039FBFC_00000080:
     cmpwi r0, 0x3
     bne lbl_fn_8039FBFC_0000009C
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r31
     mullw r0, r0, r31
     subf r3, r0, r3
@@ -374,7 +374,7 @@ lbl_fn_8039FBFC_000002C4:
     bl fn_800C31F4
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8039FBFC_00000428
 lbl_fn_8039FBFC_000003A8:
     cmpwi r31, 0x2
@@ -395,7 +395,7 @@ lbl_fn_8039FBFC_000003A8:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8039FBFC_00000428
 lbl_fn_8039FBFC_000003F8:
     li r0, 0x0
@@ -489,7 +489,7 @@ lbl_fn_803A0040_00000504:
     stfs f2, 0x18(r1)
     stfs f0, 0x14(r1)
     stfs f4, 0x1c(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f31
     bge lbl_fn_803A0040_0000059C
     cmpwi r28, 0x0
@@ -551,7 +551,7 @@ lbl_fn_803A0040_000005E4:
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f31
     bge lbl_fn_803A0040_0000067C
     cmpwi r27, 0x0
@@ -1592,18 +1592,18 @@ lbl_fn_803A0F4C_000013D4:
     cmpwi r0, 0x2
     bne lbl_fn_803A0F4C_000013E8
     mr r4, r29
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_803A0F4C_0000141C
 lbl_fn_803A0F4C_000013E8:
     cmpwi r0, 0x1
     bne lbl_fn_803A0F4C_000013FC
     mr r4, r29
-    bl fn_80370A78
+    bl world_getLocalFlag
     b lbl_fn_803A0F4C_0000141C
 lbl_fn_803A0F4C_000013FC:
     cmpwi r0, 0x3
     bne lbl_fn_803A0F4C_00001418
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r29
     mullw r0, r0, r29
     subf r3, r0, r3
@@ -1625,18 +1625,18 @@ lbl_fn_803A0F4C_00001440:
     cmpwi r0, 0x2
     bne lbl_fn_803A0F4C_00001454
     mr r4, r29
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_803A0F4C_00001488
 lbl_fn_803A0F4C_00001454:
     cmpwi r0, 0x1
     bne lbl_fn_803A0F4C_00001468
     mr r4, r29
-    bl fn_80370A78
+    bl world_getLocalFlag
     b lbl_fn_803A0F4C_00001488
 lbl_fn_803A0F4C_00001468:
     cmpwi r0, 0x3
     bne lbl_fn_803A0F4C_00001484
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r29
     mullw r0, r0, r29
     subf r3, r0, r3
@@ -1665,20 +1665,20 @@ lbl_fn_803A0F4C_000014C8:
     cmpwi r0, 0x2
     bne lbl_fn_803A0F4C_000014E0
     mr r4, r29
-    bl fn_80370174
+    bl world_getGlobalFlag
     mr r29, r3
     b lbl_fn_803A0F4C_00001514
 lbl_fn_803A0F4C_000014E0:
     cmpwi r0, 0x1
     bne lbl_fn_803A0F4C_000014F8
     mr r4, r29
-    bl fn_80370A78
+    bl world_getLocalFlag
     mr r29, r3
     b lbl_fn_803A0F4C_00001514
 lbl_fn_803A0F4C_000014F8:
     cmpwi r0, 0x3
     bne lbl_fn_803A0F4C_00001514
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r29
     mullw r0, r0, r29
     subf r3, r0, r3
@@ -1836,7 +1836,7 @@ lbl_fn_803A11D8_000016D0:
     stfs f10, 0x6c(r1)
     stfs f0, 0x68(r1)
     stfs f12, 0x70(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80885B80
     fcmpo cr0, f1, f0
     ble lbl_fn_803A11D8_00001960
@@ -1860,7 +1860,7 @@ lbl_fn_803A11D8_00001774:
     b lbl_fn_803A11D8_0000178C
 lbl_fn_803A11D8_0000177C:
     lfs f1, 0x68(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0xc(r1)
 lbl_fn_803A11D8_0000178C:
@@ -1868,7 +1868,7 @@ lbl_fn_803A11D8_0000178C:
     addi r3, r1, 0xb8
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f9, lbl_80885B10
     addi r4, r1, 0x14
     lfs f10, 0xc0(r1)
@@ -1918,7 +1918,7 @@ lbl_fn_803A11D8_0000178C:
     stfs f26, 0xa4(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x1c(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x1c(r1)
     lfs f0, lbl_80885B24
     fabs f9, f2
@@ -1939,7 +1939,7 @@ lbl_fn_803A11D8_0000189C:
     b lbl_fn_803A11D8_000018BC
 lbl_fn_803A11D8_000018A8:
     lfs f1, 0x18(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x8(r1)
@@ -1951,7 +1951,7 @@ lbl_fn_803A11D8_000018BC:
     stfs f2, 0x10(r1)
     stfs f2, 0x70(r1)
     stfs f2, 0x68(r1)
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -1967,7 +1967,7 @@ lbl_fn_803A11D8_000018FC:
     lfs f0, 0x6c(r1)
     lfd f2, lbl_8074F5F0@l(r3)
     fmadds f1, f9, f10, f0
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f9, f1
     lfs f0, lbl_80885B3C
     fcmpo cr0, f9, f0
@@ -2257,7 +2257,7 @@ lbl_fn_803A11D8_00001D30:
     bne lbl_fn_803A11D8_00001D58
     li r5, 0xf
 lbl_fn_803A11D8_00001D58:
-    bl fn_80370BD0
+    bl world_reloadMapTransition
 lbl_fn_803A11D8_00001D5C:
     psq_l f31, 0x178(r1), 0, 0
     mr r3, r30

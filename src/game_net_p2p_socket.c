@@ -16,8 +16,8 @@ extern void fn_800827E0(void);
 extern void fn_800838B8(void);
 extern void fn_800839EC(void);
 extern void fn_80083AD4(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_80084E50(void);
 extern void fn_80084EE8(void);
 extern void fn_80508DA0(void);
@@ -33,8 +33,8 @@ extern void fn_8050E630(void);
 extern void fn_8050F5AC(void);
 extern void fn_8050F668(void);
 extern void fn_8050F758(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 extern void fn_806A295C(void);
 extern void fn_806A2E8C(void);
 extern void fn_806A7020(void);
@@ -1476,7 +1476,7 @@ asm void fn_8050D3EC(void)
     li r4, 0x5
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8050D3EC_000012C4
     bl fn_80084E50
@@ -1853,7 +1853,7 @@ lbl_fn_8050D7F0_00001768:
     addi r31, r30, 0x8
     stw r3, 0x940(r1)
     li r3, 0x940
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_8050D7F0_00001814
@@ -1863,8 +1863,8 @@ lbl_fn_8050D7F0_00001768:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80793180@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8050D7F0_00001814:
     addic. r3, r29, 0x20
     addi r0, r30, 0x8

@@ -6,10 +6,10 @@ extern void OSGetTick(void);
 extern void __files(void);
 extern void dtor_80084684(void);
 extern void fn_8003E120(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
+extern void printf(void);
+extern void abort(void);
 
 /* External data declarations */
 extern u8 lbl_80732768[];
@@ -139,11 +139,11 @@ asm void fn_800A1A3C(void)
     addi r4, r4, 0x1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_800A1A3C_00000160:
     li r3, 0x28
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_800A1A3C_00000194
@@ -153,8 +153,8 @@ lbl_fn_800A1A3C_00000160:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_807789AC@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_800A1A3C_00000194:
     addic. r3, r27, 0x10
     addi r0, r28, 0x4
@@ -341,11 +341,11 @@ asm void fn_800A1CE4(void)
     addi r4, r4, 0x1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_800A1CE4_00000408:
     li r3, 0x20
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_800A1CE4_0000043C
@@ -355,8 +355,8 @@ lbl_fn_800A1CE4_00000408:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80778990@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_800A1CE4_0000043C:
     addic. r3, r27, 0x10
     addi r0, r28, 0x4
@@ -1045,7 +1045,7 @@ asm void fn_800A2664(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_800A2664_00000FCC

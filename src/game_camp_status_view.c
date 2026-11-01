@@ -29,10 +29,10 @@ extern void fn_80183774(void);
 extern void fn_80219558(void);
 extern void fn_8036DAF4(void);
 extern void fn_80370094(void);
-extern void fn_80370174(void);
-extern void fn_80370320(void);
-extern void fn_80370A78(void);
-extern void fn_80370AE4(void);
+extern void world_getGlobalFlag(void);
+extern void world_setGlobalFlag(void);
+extern void world_getLocalFlag(void);
+extern void world_setLocalFlag(void);
 extern void fn_80373148(void);
 extern void fn_8039BC0C(void);
 extern void fn_803ACD50(void);
@@ -40,17 +40,17 @@ extern void fn_803AD148(void);
 extern void fn_803AD278(void);
 extern void fn_803B84DC(void);
 extern void fn_803B8F50(void);
-extern void fn_80470580(void);
+extern void boss_getOffset54(void);
 extern void fn_8049B72C(void);
 extern void fn_804A0BCC(void);
 extern void fn_804A0E90(void);
 extern void fn_8054A0A0(void);
 extern void fn_8054A340(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
 extern void fn_80622180(void);
 extern void fn_8067E23C(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_806958E0(void);
 
 /* External data declarations */
@@ -122,7 +122,7 @@ asm void fn_803B9638(void)
     li r4, 0x0
     bl fn_80622180
     addi r3, r31, 0x58
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     addi r3, r31, 0x200
     li r5, 0x6000
@@ -137,7 +137,7 @@ asm void fn_803B9638(void)
 lbl_fn_803B9638_00000090:
     add r3, r31, r29
     addi r3, r3, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     add r5, r31, r30
     mr r4, r3
     addi r3, r5, 0x6200
@@ -258,7 +258,7 @@ asm void fn_803B9804(void)
 lbl_fn_803B9804_00000208:
     mr r3, r26
     mr r4, r27
-    bl fn_80370174
+    bl world_getGlobalFlag
     addi r27, r27, 0x1
     stwu r3, 0x4(r25)
     cmpwi r27, 0x1000
@@ -268,7 +268,7 @@ lbl_fn_803B9804_00000208:
 lbl_fn_803B9804_0000022C:
     mr r3, r26
     mr r4, r27
-    bl fn_80370A78
+    bl world_getLocalFlag
     addi r27, r27, 0x1
     stw r3, 0x4004(r25)
     cmpwi r27, 0x100
@@ -403,7 +403,7 @@ lbl_fn_803B9804_000003F0:
 lbl_fn_803B9804_00000408:
     cmplwi r0, 0x3
     bne lbl_fn_803B9804_00000428
-    bl fn_80680CF8
+    bl rand
     lwz r4, 0x8(r25)
     divw r0, r3, r4
     mullw r0, r0, r4
@@ -602,7 +602,7 @@ asm void fn_803B9C98(void)
     li r4, 0x11b
     li r5, 0x0
     li r6, 0x1
-    bl fn_80370320
+    bl world_setGlobalFlag
     mr r31, r28
     li r29, 0x0
 lbl_fn_803B9C98_000006C8:
@@ -612,14 +612,14 @@ lbl_fn_803B9C98_000006C8:
     mr r4, r29
     li r5, 0x1
     li r6, 0x1
-    bl fn_80370320
+    bl world_setGlobalFlag
     b lbl_fn_803B9C98_000006FC
 lbl_fn_803B9C98_000006E8:
     lwz r5, 0x4(r31)
     mr r3, r30
     mr r4, r29
     li r6, 0x1
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_803B9C98_000006FC:
     addi r29, r29, 0x1
     addi r31, r31, 0x4
@@ -662,7 +662,7 @@ lbl_fn_803B9D78_00000774:
     lwz r5, 0x4004(r25)
     mr r3, r30
     mr r4, r24
-    bl fn_80370AE4
+    bl world_setLocalFlag
     addi r24, r24, 0x1
     addi r25, r25, 0x4
     cmpwi r24, 0x100
@@ -832,14 +832,14 @@ lbl_fn_803B9D78_000009C0:
     beq lbl_fn_803B9D78_00000A00
     mr r3, r30
     li r4, 0x397
-    bl fn_80370174
+    bl world_getGlobalFlag
     mr r4, r3
     mr r3, r24
     bl fn_80183618
     lwz r26, lbl_8087F098
     mr r3, r30
     li r4, 0x398
-    bl fn_80370174
+    bl world_getGlobalFlag
     mr r4, r3
     mr r3, r26
     bl fn_80183774
@@ -1463,11 +1463,11 @@ lbl_fn_803BA620_00001214:
     stfs f29, 0xc(r1)
     stfs f30, 0x10(r1)
     lfs f1, 0x538(r29)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x8
     addi r3, r1, 0x20
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f4, 0x10(r1)
     mr r3, r29
     lfs f3, 0xc(r1)

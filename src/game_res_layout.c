@@ -6,19 +6,19 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_800697D8(void);
-extern void fn_80084320(void);
-extern void fn_800846FC(void);
-extern void fn_80084C24(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
-extern void fn_8022B850(void);
+extern void mem_alloc(void);
+extern void mem_realloc(void);
+extern void mem_getAllocSize(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
+extern void texCache_allocateSlot(void);
 extern void fn_8022C2A0(void);
 extern void fn_8022C9C8(void);
-extern void fn_80234A8C(void);
+extern void font_loadGlyphMetrics(void);
 extern void fn_802371BC(void);
 extern void fn_80237DA8(void);
-extern void fn_805F93C0(void);
-extern void fn_80695720(void);
+extern void PSMTXMultVec(void);
+extern void runtime_registerStaticObject(void);
 
 /* External data declarations */
 extern u8 lbl_80742FD8[];
@@ -353,7 +353,7 @@ asm void fn_80238588(void)
     addi r3, r1, 0x18
     stfs f0, 0x4c(r1)
     stfs f0, 0x48(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f7, 0x0(r29)
     lis r0, 0x4330
     lfs f0, 0x8(r1)
@@ -843,7 +843,7 @@ asm void fn_80238CA0(void)
     mr r6, r5
     slwi r3, r0, 2
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x30(r31)
     li r5, 0x0
     lfs f0, lbl_8088315C
@@ -1224,7 +1224,7 @@ lbl_fn_80239030_00001054:
     mulli r3, r3, 0xb0
     li r7, 0x0
     mr r6, r5
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x1c(r27)
     li r30, 0x0
     li r22, 0x0
@@ -1248,7 +1248,7 @@ lbl_fn_80239030_000010A4:
     slwi r3, r0, 3
     li r7, 0x0
     addi r29, r29, 0x4
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x4(r21)
     mr r4, r29
     lwz r0, 0x0(r21)
@@ -1354,7 +1354,7 @@ lbl_fn_80239030_00001224:
     mulli r3, r3, 0x68
     li r7, 0x0
     mr r6, r5
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x24(r27)
     li r29, 0x0
     li r23, 0x0
@@ -1378,7 +1378,7 @@ lbl_fn_80239030_00001274:
     slwi r3, r0, 3
     li r7, 0x0
     addi r28, r28, 0x4
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x4(r20)
     mr r4, r28
     lwz r0, 0x0(r20)
@@ -1506,7 +1506,7 @@ lbl_fn_80239030_00001444:
     mr r6, r5
     slwi r3, r0, 2
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x34(r27)
     b lbl_fn_80239030_0000148C
 lbl_fn_80239030_00001484:
@@ -1553,7 +1553,7 @@ lbl_fn_802396A0_000014FC:
     add r0, r30, r29
     add r3, r3, r0
     lwz r3, 0x4(r3)
-    bl fn_80084C24
+    bl mem_getAllocSize
     addi r27, r27, 0x1
     addi r30, r30, 0x8
     cmplwi r27, 0x16
@@ -1565,7 +1565,7 @@ lbl_fn_802396A0_00001528:
     cmplw r28, r0
     blt lbl_fn_802396A0_000014F4
     lwz r3, 0x1c(r31)
-    bl fn_80084C24
+    bl mem_getAllocSize
     li r27, 0x0
     li r30, 0x0
     b lbl_fn_802396A0_0000157C
@@ -1577,7 +1577,7 @@ lbl_fn_802396A0_00001550:
     add r0, r29, r30
     add r3, r3, r0
     lwz r3, 0x4(r3)
-    bl fn_80084C24
+    bl mem_getAllocSize
     addi r28, r28, 0x1
     addi r29, r29, 0x8
     cmplwi r28, 0xd
@@ -1589,14 +1589,14 @@ lbl_fn_802396A0_0000157C:
     cmplw r27, r0
     blt lbl_fn_802396A0_00001548
     lwz r3, 0x24(r31)
-    bl fn_80084C24
+    bl mem_getAllocSize
     lwz r3, 0x30(r31)
     cmpwi r3, 0x0
     beq lbl_fn_802396A0_000015A0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_802396A0_000015A0:
     lwz r3, 0x34(r31)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_802396A0_000015A8:
     lmw r27, 0xc(r1)
     lwz r0, 0x24(r1)
@@ -1608,7 +1608,7 @@ lbl_fn_802396A0_000015A8:
 asm void fn_80239794(void)
 {
     nofralloc
-    b fn_80234A8C
+    b font_loadGlyphMetrics
 }
 
 asm void fn_80239798(void)
@@ -1634,7 +1634,7 @@ asm void fn_80239798(void)
     li r4, 0x7
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80239798_00001634
     mr r4, r27
@@ -1667,7 +1667,7 @@ asm void fn_80239828(void)
     mr r28, r6
     mr r31, r7
     mr r30, r8
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r5, lbl_80783BB8@ha
     li r7, 0x0
     addi r5, r5, lbl_80783BB8@l
@@ -1722,7 +1722,7 @@ asm void fn_80239828(void)
     stw r7, 0xec(r29)
     stw r7, 0xf0(r29)
     stw r7, 0xf4(r29)
-    bl fn_8022B850
+    bl texCache_allocateSlot
     lwz r0, 0xdc(r29)
     stw r30, 0xd4(r29)
     cmplw r0, r30
@@ -1733,13 +1733,13 @@ asm void fn_80239828(void)
     la r6, lbl_8087DC18
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80239AB4@ha
     mr r7, r30
     addi r4, r4, fn_80239AB4@l
     li r5, 0x0
     li r6, 0x64
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0xe0(r29)
     mr r31, r3
     cmpwi r0, 0x0
@@ -1813,7 +1813,7 @@ lbl_fn_80239828_000018A4:
     cmpwi r3, 0x0
     beq lbl_fn_80239828_000018B8
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80239828_000018B8:
     stw r31, 0xe0(r29)
     stw r30, 0xdc(r29)
@@ -1862,7 +1862,7 @@ asm void fn_80239AB8(void)
     beq lbl_fn_80239AB8_0000194C
     beq lbl_fn_80239AB8_0000194C
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80239AB8_0000194C:
     addic. r0, r29, 0x4c
     beq lbl_fn_80239AB8_000019BC
@@ -1889,7 +1889,7 @@ lbl_fn_80239AB8_00001990:
     beq lbl_fn_80239AB8_000019B0
     beq lbl_fn_80239AB8_000019B0
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80239AB8_000019B0:
     li r0, 0x0
     stw r0, 0xc(r31)
@@ -1897,7 +1897,7 @@ lbl_fn_80239AB8_000019B0:
 lbl_fn_80239AB8_000019BC:
     mr r3, r29
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r30, 0x0
     ble lbl_fn_80239AB8_000019D8
     mr r3, r29

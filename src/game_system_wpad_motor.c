@@ -15,16 +15,16 @@ extern void fn_8006A900(void);
 extern void fn_8006AA20(void);
 extern void fn_8006D0C8(void);
 extern void fn_8007708C(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_8009246C(void);
 extern void fn_800A555C(void);
 extern void fn_800AFEBC(void);
 extern void fn_800C7F08(void);
 extern void fn_800CF45C(void);
 extern void fn_800D0240(void);
-extern void fn_800D2338(void);
-extern void fn_800D246C(void);
-extern void fn_800D2494(void);
+extern void atn_Task_unlink(void);
+extern void atn_Task_setActive(void);
+extern void atn_Fog_apply(void);
 extern void fn_800D3FA4(void);
 extern void fn_800D8448(void);
 extern void fn_800D8458(void);
@@ -43,7 +43,7 @@ extern void fn_80116E7C(void);
 extern void fn_80119ECC(void);
 extern void fn_8011F87C(void);
 extern void fn_8011FB98(void);
-extern void fn_801231D0(void);
+extern void magic_dispatchActionCommand(void);
 extern void fn_80123C7C(void);
 extern void fn_801240B4(void);
 extern void fn_8012AFE8(void);
@@ -74,12 +74,12 @@ extern void fn_8036B44C(void);
 extern void fn_8036CA60(void);
 extern void fn_8036CC90(void);
 extern void fn_8036CFA4(void);
-extern void fn_8036E170(void);
+extern void wpad_accel_updateOrientation(void);
 extern void fn_8036E494(void);
 extern void fn_8036EE0C(void);
 extern void fn_8036FD4C(void);
-extern void fn_80370320(void);
-extern void fn_80370CD0(void);
+extern void world_setGlobalFlag(void);
+extern void world_startTransitionFade(void);
 extern void fn_803727DC(void);
 extern void fn_803731E8(void);
 extern void fn_803737C0(void);
@@ -121,9 +121,9 @@ extern void fn_8046F8B8(void);
 extern void fn_8046F96C(void);
 extern void fn_80470364(void);
 extern void fn_80470528(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
-extern void fn_80473F50(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_8047E528(void);
 extern void fn_8047F91C(void);
@@ -154,13 +154,13 @@ extern void fn_80570A50(void);
 extern void fn_8059C330(void);
 extern void fn_805AA738(void);
 extern void fn_805BA358(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9940(void);
-extern void fn_80682544(void);
-extern void fn_80684600(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSVECMag(void);
+extern void strncmp(void);
+extern void atoi(void);
 extern void fn_8068A918(void);
-extern void fn_8068AEA8(void);
+extern void std_fmod(void);
 extern void fn_806959D8(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -231,9 +231,9 @@ extern u32 lbl_80885768;
 extern u32 lbl_8088576C;
 
 /* Function declarations */
-void fn_80368280(void);
+void world_Manager_draw(void);
 
-asm void fn_80368280(void)
+asm void world_Manager_draw(void)
 {
     nofralloc
     stwu r1, -0x860(r1)
@@ -251,16 +251,16 @@ asm void fn_80368280(void)
     stw r6, 0x828(r1)
     cmplw r5, r0
     stw r5, 0x5744(r3)
-    bge lbl_fn_80368280_00000044
+    bge lbl_world_Manager_draw_00000044
     mr r0, r5
-lbl_fn_80368280_00000044:
+lbl_world_Manager_draw_00000044:
     lwz r4, 0x5748(r3)
     stw r0, 0x5744(r3)
     cmpwi r4, 0x0
-    beq lbl_fn_80368280_0000005C
+    beq lbl_world_Manager_draw_0000005C
     subi r0, r4, 0x1
     stw r0, 0x5748(r3)
-lbl_fn_80368280_0000005C:
+lbl_world_Manager_draw_0000005C:
     lis r4, 0x8889
     lwz r0, 0x5744(r3)
     subi r4, r4, 0x7777
@@ -271,10 +271,10 @@ lbl_fn_80368280_0000005C:
     mulhwu r0, r4, r0
     srwi r0, r0, 5
     stw r0, 0x4424(r3)
-    beq lbl_fn_80368280_00001E90
+    beq lbl_world_Manager_draw_00001E90
     lwz r0, 0x5538(r3)
     cmplwi r0, 0x9
-    bgt lbl_fn_80368280_000031A0
+    bgt lbl_world_Manager_draw_000031A0
     lis r4, jumptable_8078A268@ha
     slwi r0, r0, 2
     addi r4, r4, jumptable_8078A268@l
@@ -284,10 +284,10 @@ lbl_fn_80368280_0000005C:
     lwz r3, 0x5624(r3)
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80368280_000000C4
+    bne lbl_world_Manager_draw_000000C4
     li r0, 0x1
     stw r0, 0x48(r3)
-lbl_fn_80368280_000000C4:
+lbl_world_Manager_draw_000000C4:
     lwz r27, lbl_8087F534
     bl OSGetTime
     stw r4, 0x64(r27)
@@ -309,50 +309,50 @@ lbl_fn_80368280_000000C4:
     cmpwi r5, 0x44
     lwz r3, 0x5514(r28)
     lwz r0, 0x5524(r28)
-    bne lbl_fn_80368280_0000012C
+    bne lbl_world_Manager_draw_0000012C
     cmpwi r4, 0x1
-    bne lbl_fn_80368280_0000012C
+    bne lbl_world_Manager_draw_0000012C
     li r0, 0x1
-    b lbl_fn_80368280_00000170
-lbl_fn_80368280_0000012C:
+    b lbl_world_Manager_draw_00000170
+lbl_world_Manager_draw_0000012C:
     cmpwi r5, 0x7
-    bne lbl_fn_80368280_00000144
+    bne lbl_world_Manager_draw_00000144
     cmpwi r4, 0x1
-    bne lbl_fn_80368280_00000144
+    bne lbl_world_Manager_draw_00000144
     li r0, 0x1
-    b lbl_fn_80368280_00000170
-lbl_fn_80368280_00000144:
+    b lbl_world_Manager_draw_00000170
+lbl_world_Manager_draw_00000144:
     cmpw r3, r0
-    beq lbl_fn_80368280_00000154
+    beq lbl_world_Manager_draw_00000154
     li r0, 0x0
-    b lbl_fn_80368280_00000170
-lbl_fn_80368280_00000154:
+    b lbl_world_Manager_draw_00000170
+lbl_world_Manager_draw_00000154:
     cmpwi r5, 0xf
-    beq lbl_fn_80368280_00000164
+    beq lbl_world_Manager_draw_00000164
     cmpwi r5, 0x37
-    bne lbl_fn_80368280_0000016C
-lbl_fn_80368280_00000164:
+    bne lbl_world_Manager_draw_0000016C
+lbl_world_Manager_draw_00000164:
     li r0, 0x0
-    b lbl_fn_80368280_00000170
-lbl_fn_80368280_0000016C:
+    b lbl_world_Manager_draw_00000170
+lbl_world_Manager_draw_0000016C:
     li r0, 0x1
-lbl_fn_80368280_00000170:
+lbl_world_Manager_draw_00000170:
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_0000054C
+    beq lbl_world_Manager_draw_0000054C
     lwz r0, 0x553c(r28)
     cmpwi r0, 0x0
-    bne lbl_fn_80368280_0000054C
+    bne lbl_world_Manager_draw_0000054C
     lwz r0, 0x5764(r28)
     cmpwi r0, 0x14
-    bge lbl_fn_80368280_0000054C
+    bge lbl_world_Manager_draw_0000054C
     lwz r3, lbl_8087F0A8
     lwz r0, 0x28(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_0000054C
+    beq lbl_world_Manager_draw_0000054C
     addi r3, r1, 0x620
     bl fn_8006AA20
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_0000054C
+    beq lbl_world_Manager_draw_0000054C
     lwz r5, 0x5764(r28)
     addi r3, r28, 0x550c
     addi r4, r1, 0x620
@@ -370,18 +370,18 @@ lbl_fn_80368280_00000170:
     bl fn_8021771C
     cmpwi r3, 0x0
     mr r31, r3
-    beq lbl_fn_80368280_0000055C
+    beq lbl_world_Manager_draw_0000055C
     lwz r0, 0xb8(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_0000055C
+    beq lbl_world_Manager_draw_0000055C
     li r29, 0x0
     lis r27, 0x51ec
-    b lbl_fn_80368280_000002F4
-lbl_fn_80368280_00000210:
+    b lbl_world_Manager_draw_000002F4
+lbl_world_Manager_draw_00000210:
     subis r3, r30, 0x3
     subi r0, r3, 0xcdc
     cmplwi r0, 0x63
-    bgt lbl_fn_80368280_00000254
+    bgt lbl_world_Manager_draw_00000254
     subi r0, r27, 0x7ae1
     lwz r4, lbl_8087F4F0
     mulhw r0, r0, r30
@@ -395,61 +395,61 @@ lbl_fn_80368280_00000210:
     lwz r3, 0x64a0(r3)
     bl fn_80219544
     mr r30, r3
-lbl_fn_80368280_00000254:
+lbl_world_Manager_draw_00000254:
     lwz r3, lbl_8087F8A0
     lwz r24, 0x48(r3)
-    b lbl_fn_80368280_00000280
-lbl_fn_80368280_00000260:
+    b lbl_world_Manager_draw_00000280
+lbl_world_Manager_draw_00000260:
     lwz r0, 0x50(r24)
     cmpw r30, r0
-    bne lbl_fn_80368280_0000027C
+    bne lbl_world_Manager_draw_0000027C
     mr r3, r24
     addi r4, r28, 0x5544
     addi r5, r28, 0x5550
     bl fn_8017AD44
-lbl_fn_80368280_0000027C:
+lbl_world_Manager_draw_0000027C:
     lwz r24, 0x14ac(r24)
-lbl_fn_80368280_00000280:
+lbl_world_Manager_draw_00000280:
     cmpwi r24, 0x0
-    bne lbl_fn_80368280_00000260
+    bne lbl_world_Manager_draw_00000260
     lwz r3, lbl_8087F890
     lwz r24, 0x48(r3)
-    b lbl_fn_80368280_000002B4
-lbl_fn_80368280_00000294:
+    b lbl_world_Manager_draw_000002B4
+lbl_world_Manager_draw_00000294:
     lwz r0, 0x50(r24)
     cmpw r30, r0
-    bne lbl_fn_80368280_000002B0
+    bne lbl_world_Manager_draw_000002B0
     mr r3, r24
     addi r4, r28, 0x5544
     addi r5, r28, 0x5550
     bl fn_8017AD44
-lbl_fn_80368280_000002B0:
+lbl_world_Manager_draw_000002B0:
     lwz r24, 0x1424(r24)
-lbl_fn_80368280_000002B4:
+lbl_world_Manager_draw_000002B4:
     cmpwi r24, 0x0
-    bne lbl_fn_80368280_00000294
+    bne lbl_world_Manager_draw_00000294
     lwz r3, lbl_8087F408
     lwz r24, 0x48(r3)
-    b lbl_fn_80368280_000002E8
-lbl_fn_80368280_000002C8:
+    b lbl_world_Manager_draw_000002E8
+lbl_world_Manager_draw_000002C8:
     lwz r0, 0x50(r24)
     cmpw r30, r0
-    bne lbl_fn_80368280_000002E4
+    bne lbl_world_Manager_draw_000002E4
     mr r3, r24
     addi r4, r28, 0x5544
     addi r5, r28, 0x5550
     bl fn_8017AD44
-lbl_fn_80368280_000002E4:
+lbl_world_Manager_draw_000002E4:
     lwz r24, 0x14ac(r24)
-lbl_fn_80368280_000002E8:
+lbl_world_Manager_draw_000002E8:
     cmpwi r24, 0x0
-    bne lbl_fn_80368280_000002C8
+    bne lbl_world_Manager_draw_000002C8
     addi r29, r29, 0x4
-lbl_fn_80368280_000002F4:
+lbl_world_Manager_draw_000002F4:
     lwz r3, 0xb8(r31)
     lwzx r30, r3, r29
     cmpwi r30, 0x0
-    bge lbl_fn_80368280_00000210
+    bge lbl_world_Manager_draw_00000210
     lwz r0, 0x5544(r28)
     addi r5, r1, 0xc
     lwz r3, 0x554c(r28)
@@ -461,48 +461,48 @@ lbl_fn_80368280_000002F4:
     slwi r0, r0, 2
     add r5, r6, r0
     cmplw r6, r5
-    beq lbl_fn_80368280_00000360
+    beq lbl_world_Manager_draw_00000360
     addi r4, r6, 0x4
-    b lbl_fn_80368280_00000358
-lbl_fn_80368280_0000033C:
+    b lbl_world_Manager_draw_00000358
+lbl_world_Manager_draw_0000033C:
     lwz r3, 0x0(r6)
     lwz r0, 0x0(r4)
     cmplw r3, r0
-    bne lbl_fn_80368280_00000350
-    b lbl_fn_80368280_00000364
-lbl_fn_80368280_00000350:
+    bne lbl_world_Manager_draw_00000350
+    b lbl_world_Manager_draw_00000364
+lbl_world_Manager_draw_00000350:
     mr r6, r4
     addi r4, r4, 0x4
-lbl_fn_80368280_00000358:
+lbl_world_Manager_draw_00000358:
     cmplw r4, r5
-    bne lbl_fn_80368280_0000033C
-lbl_fn_80368280_00000360:
+    bne lbl_world_Manager_draw_0000033C
+lbl_world_Manager_draw_00000360:
     mr r6, r5
-lbl_fn_80368280_00000364:
+lbl_world_Manager_draw_00000364:
     cmplw r6, r5
-    beq lbl_fn_80368280_0000039C
+    beq lbl_world_Manager_draw_0000039C
     addi r4, r6, 0x8
-    b lbl_fn_80368280_00000390
-lbl_fn_80368280_00000374:
+    b lbl_world_Manager_draw_00000390
+lbl_world_Manager_draw_00000374:
     lwz r3, 0x0(r6)
     lwz r0, 0x0(r4)
     cmplw r3, r0
-    beq lbl_fn_80368280_0000038C
+    beq lbl_world_Manager_draw_0000038C
     lwz r0, 0x0(r4)
     stwu r0, 0x4(r6)
-lbl_fn_80368280_0000038C:
+lbl_world_Manager_draw_0000038C:
     addi r4, r4, 0x4
-lbl_fn_80368280_00000390:
+lbl_world_Manager_draw_00000390:
     cmplw r4, r5
-    bne lbl_fn_80368280_00000374
+    bne lbl_world_Manager_draw_00000374
     addi r6, r6, 0x4
-lbl_fn_80368280_0000039C:
+lbl_world_Manager_draw_0000039C:
     lwz r3, 0x5544(r28)
     lwz r0, 0x554c(r28)
     slwi r3, r3, 2
     add r3, r0, r3
     cmplw r6, r3
-    beq lbl_fn_80368280_00000404
+    beq lbl_world_Manager_draw_00000404
     subf r0, r0, r6
     subf r4, r6, r3
     srawi r0, r0, 2
@@ -511,21 +511,21 @@ lbl_fn_80368280_0000039C:
     addze r7, r0
     slwi r4, r3, 2
     slwi r5, r7, 2
-    b lbl_fn_80368280_000003F0
-lbl_fn_80368280_000003D8:
+    b lbl_world_Manager_draw_000003F0
+lbl_world_Manager_draw_000003D8:
     lwz r6, 0x554c(r28)
     add r0, r4, r5
     addi r3, r3, 0x1
     lwzx r0, r6, r0
     stwx r0, r6, r4
     addi r4, r4, 0x4
-lbl_fn_80368280_000003F0:
+lbl_world_Manager_draw_000003F0:
     lwz r0, 0x5544(r28)
     subf r0, r7, r0
     cmplw r3, r0
-    blt lbl_fn_80368280_000003D8
+    blt lbl_world_Manager_draw_000003D8
     stw r0, 0x5544(r28)
-lbl_fn_80368280_00000404:
+lbl_world_Manager_draw_00000404:
     lwz r0, 0x5550(r28)
     addi r5, r1, 0x8
     lwz r3, 0x5558(r28)
@@ -537,48 +537,48 @@ lbl_fn_80368280_00000404:
     slwi r0, r0, 2
     add r5, r6, r0
     cmplw r6, r5
-    beq lbl_fn_80368280_00000460
+    beq lbl_world_Manager_draw_00000460
     addi r4, r6, 0x4
-    b lbl_fn_80368280_00000458
-lbl_fn_80368280_0000043C:
+    b lbl_world_Manager_draw_00000458
+lbl_world_Manager_draw_0000043C:
     lwz r3, 0x0(r6)
     lwz r0, 0x0(r4)
     cmplw r3, r0
-    bne lbl_fn_80368280_00000450
-    b lbl_fn_80368280_00000464
-lbl_fn_80368280_00000450:
+    bne lbl_world_Manager_draw_00000450
+    b lbl_world_Manager_draw_00000464
+lbl_world_Manager_draw_00000450:
     mr r6, r4
     addi r4, r4, 0x4
-lbl_fn_80368280_00000458:
+lbl_world_Manager_draw_00000458:
     cmplw r4, r5
-    bne lbl_fn_80368280_0000043C
-lbl_fn_80368280_00000460:
+    bne lbl_world_Manager_draw_0000043C
+lbl_world_Manager_draw_00000460:
     mr r6, r5
-lbl_fn_80368280_00000464:
+lbl_world_Manager_draw_00000464:
     cmplw r6, r5
-    beq lbl_fn_80368280_0000049C
+    beq lbl_world_Manager_draw_0000049C
     addi r4, r6, 0x8
-    b lbl_fn_80368280_00000490
-lbl_fn_80368280_00000474:
+    b lbl_world_Manager_draw_00000490
+lbl_world_Manager_draw_00000474:
     lwz r3, 0x0(r6)
     lwz r0, 0x0(r4)
     cmplw r3, r0
-    beq lbl_fn_80368280_0000048C
+    beq lbl_world_Manager_draw_0000048C
     lwz r0, 0x0(r4)
     stwu r0, 0x4(r6)
-lbl_fn_80368280_0000048C:
+lbl_world_Manager_draw_0000048C:
     addi r4, r4, 0x4
-lbl_fn_80368280_00000490:
+lbl_world_Manager_draw_00000490:
     cmplw r4, r5
-    bne lbl_fn_80368280_00000474
+    bne lbl_world_Manager_draw_00000474
     addi r6, r6, 0x4
-lbl_fn_80368280_0000049C:
+lbl_world_Manager_draw_0000049C:
     lwz r3, 0x5550(r28)
     lwz r0, 0x5558(r28)
     slwi r3, r3, 2
     add r3, r0, r3
     cmplw r6, r3
-    beq lbl_fn_80368280_00000504
+    beq lbl_world_Manager_draw_00000504
     subf r0, r0, r6
     subf r4, r6, r3
     srawi r0, r0, 2
@@ -587,104 +587,104 @@ lbl_fn_80368280_0000049C:
     addze r7, r0
     slwi r4, r3, 2
     slwi r5, r7, 2
-    b lbl_fn_80368280_000004F0
-lbl_fn_80368280_000004D8:
+    b lbl_world_Manager_draw_000004F0
+lbl_world_Manager_draw_000004D8:
     lwz r6, 0x5558(r28)
     add r0, r4, r5
     addi r3, r3, 0x1
     lwzx r0, r6, r0
     stwx r0, r6, r4
     addi r4, r4, 0x4
-lbl_fn_80368280_000004F0:
+lbl_world_Manager_draw_000004F0:
     lwz r0, 0x5550(r28)
     subf r0, r7, r0
     cmplw r3, r0
-    blt lbl_fn_80368280_000004D8
+    blt lbl_world_Manager_draw_000004D8
     stw r0, 0x5550(r28)
-lbl_fn_80368280_00000504:
+lbl_world_Manager_draw_00000504:
     lwz r5, 0x5544(r28)
     cmpwi r5, 0x0
-    beq lbl_fn_80368280_0000051C
+    beq lbl_world_Manager_draw_0000051C
     lwz r3, lbl_8087F518
     lwz r4, 0x554c(r28)
     bl fn_8046F8B8
-lbl_fn_80368280_0000051C:
+lbl_world_Manager_draw_0000051C:
     li r24, 0x0
     li r29, 0x0
-    b lbl_fn_80368280_0000053C
-lbl_fn_80368280_00000528:
+    b lbl_world_Manager_draw_0000053C
+lbl_world_Manager_draw_00000528:
     lwz r3, 0x5558(r28)
     lwzx r3, r3, r29
     bl fn_800D8448
     addi r24, r24, 0x1
     addi r29, r29, 0x4
-lbl_fn_80368280_0000053C:
+lbl_world_Manager_draw_0000053C:
     lwz r0, 0x5550(r28)
     cmplw r24, r0
-    blt lbl_fn_80368280_00000528
-    b lbl_fn_80368280_0000055C
-lbl_fn_80368280_0000054C:
+    blt lbl_world_Manager_draw_00000528
+    b lbl_world_Manager_draw_0000055C
+lbl_world_Manager_draw_0000054C:
     li r3, 0x0
     li r0, 0x3
     stw r3, 0x5764(r28)
     stw r0, 0x5538(r28)
-lbl_fn_80368280_0000055C:
+lbl_world_Manager_draw_0000055C:
     lwz r3, lbl_8087F448
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00000588
+    beq lbl_world_Manager_draw_00000588
     lwz r4, 0x10d8(r28)
     lwz r0, 0x64(r4)
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_00000588
+    beq lbl_world_Manager_draw_00000588
     lwz r4, 0x5514(r28)
     lwz r5, 0x5518(r28)
     lwz r6, 0x551c(r28)
     bl fn_8037D684
-lbl_fn_80368280_00000588:
+lbl_world_Manager_draw_00000588:
     lwz r3, lbl_8087F418
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_000031A0
+    beq lbl_world_Manager_draw_000031A0
     bl fn_8035E858
-    b lbl_fn_80368280_000031A0
+    b lbl_world_Manager_draw_000031A0
     addi r3, r3, 0x550c
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
-    bne lbl_fn_80368280_000031A0
+    bne lbl_world_Manager_draw_000031A0
     addi r3, r28, 0x550c
-    bl fn_80470580
+    bl boss_getOffset54
     mr r24, r3
     addi r3, r28, 0x550c
-    bl fn_8047059C
+    bl boss_getOffset50
     cmpwi r24, 0x0
     srwi r5, r3, 2
-    beq lbl_fn_80368280_000005D8
+    beq lbl_world_Manager_draw_000005D8
     lwz r3, lbl_8087F518
     mr r4, r24
     bl fn_8046F8B8
-lbl_fn_80368280_000005D8:
+lbl_world_Manager_draw_000005D8:
     li r0, 0x3
     stw r0, 0x5538(r28)
-    b lbl_fn_80368280_000031A0
+    b lbl_world_Manager_draw_000031A0
     lwz r3, lbl_8087F448
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00000620
+    beq lbl_world_Manager_draw_00000620
     lwz r0, 0x48(r3)
     li r4, 0x0
     cmpwi r0, 0x3
-    blt lbl_fn_80368280_0000060C
+    blt lbl_world_Manager_draw_0000060C
     cmpwi r0, 0x5
-    bgt lbl_fn_80368280_0000060C
+    bgt lbl_world_Manager_draw_0000060C
     li r4, 0x1
-lbl_fn_80368280_0000060C:
+lbl_world_Manager_draw_0000060C:
     cmpwi r4, 0x0
-    beq lbl_fn_80368280_00000620
+    beq lbl_world_Manager_draw_00000620
     bl fn_8037D34C
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_000031A0
-lbl_fn_80368280_00000620:
+    beq lbl_world_Manager_draw_000031A0
+lbl_world_Manager_draw_00000620:
     lwz r0, 0x54e4(r28)
     cmpwi r0, 0xe
-    bne lbl_fn_80368280_00000650
+    bne lbl_world_Manager_draw_00000650
     lwz r3, lbl_8087F9F8
     bl fn_805AA738
     lwz r3, lbl_8087F430
@@ -694,10 +694,10 @@ lbl_fn_80368280_00000620:
     addi r3, r28, 0x6c
     li r4, 0x0
     bl fn_80389838
-lbl_fn_80368280_00000650:
+lbl_world_Manager_draw_00000650:
     lwz r3, lbl_8087F048
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087EE68
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
@@ -722,28 +722,28 @@ lbl_fn_80368280_00000650:
     lwz r3, 0x5514(r28)
     lwz r0, 0x5524(r28)
     cmpw r3, r0
-    beq lbl_fn_80368280_000006D4
+    beq lbl_world_Manager_draw_000006D4
     subi r0, r3, 0x1
     lwz r3, lbl_8087EEC8
     cntlzw r0, r0
     srwi r4, r0, 5
     bl fn_8006D0C8
-lbl_fn_80368280_000006D4:
+lbl_world_Manager_draw_000006D4:
     lwz r3, lbl_8087F3C0
     li r4, 0x1
     bl fn_8023A5A8
     lwz r3, lbl_8087F3C0
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F408
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F890
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F9E8
     li r4, 0x1
     bl fn_8059C330
@@ -762,13 +762,13 @@ lbl_fn_80368280_000006D4:
     stw r0, 0x48(r3)
     lwz r0, 0x553c(r28)
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_00000770
+    beq lbl_world_Manager_draw_00000770
     lwz r3, lbl_8087F8A0
     bl fn_8011F87C
     lwz r3, lbl_8087F890
     bl fn_80547A24
-    b lbl_fn_80368280_0000079C
-lbl_fn_80368280_00000770:
+    b lbl_world_Manager_draw_0000079C
+lbl_world_Manager_draw_00000770:
     lwz r3, lbl_8087F8A0
     bl fn_8054A39C
     lwz r3, 0x5514(r28)
@@ -777,10 +777,10 @@ lbl_fn_80368280_00000770:
     lwz r6, 0x10d0(r28)
     bl fn_8036562C
     cmpwi r3, 0x0
-    bne lbl_fn_80368280_0000079C
+    bne lbl_world_Manager_draw_0000079C
     lwz r3, lbl_8087F890
     bl fn_80547A24
-lbl_fn_80368280_0000079C:
+lbl_world_Manager_draw_0000079C:
     lwz r3, lbl_8087F408
     bl fn_8011FB98
     lwz r3, lbl_8087F890
@@ -789,7 +789,7 @@ lbl_fn_80368280_0000079C:
     bl fn_803CCD98
     lwz r3, lbl_8087F540
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_000007DC
+    beq lbl_world_Manager_draw_000007DC
     bl fn_8047E528
     lwz r3, lbl_8087F540
     li r4, 0x0
@@ -797,35 +797,35 @@ lbl_fn_80368280_0000079C:
     bl fn_80483714
     lwz r3, lbl_8087F540
     bl fn_804805B4
-lbl_fn_80368280_000007DC:
+lbl_world_Manager_draw_000007DC:
     lwz r3, lbl_8087F040
     bl fn_800F1378
     addi r3, r28, 0x6c
     bl fn_803933A4
     lwz r3, lbl_8087F098
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00000808
+    beq lbl_world_Manager_draw_00000808
     li r4, 0x0
     bl fn_80183774
     lwz r3, lbl_8087F098
     bl fn_80182890
-lbl_fn_80368280_00000808:
+lbl_world_Manager_draw_00000808:
     li r27, 0x0
     stw r27, 0x5660(r28)
     lwz r3, 0x10d8(r28)
-    bl fn_800D2338
+    bl atn_Task_unlink
     lwz r3, 0x5590(r28)
     stw r27, 0x10d8(r28)
     cmpwi r3, 0x0
     stw r27, 0x5594(r28)
     stw r27, 0x55a4(r28)
-    beq lbl_fn_80368280_00000844
+    beq lbl_world_Manager_draw_00000844
     li r4, 0x1
     bl fn_8056C39C
     stw r27, 0x5590(r28)
     lwz r3, lbl_8087F3C0
     stw r27, 0xcc(r3)
-lbl_fn_80368280_00000844:
+lbl_world_Manager_draw_00000844:
     li r0, 0x0
     stw r0, 0x56d0(r28)
     lwz r3, 0x5514(r28)
@@ -835,24 +835,24 @@ lbl_fn_80368280_00000844:
     lwz r5, 0x551c(r28)
     bl fn_8036555C
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00000884
+    beq lbl_world_Manager_draw_00000884
     lwz r3, lbl_8087F048
     bl fn_800F3170
     lwz r3, lbl_8087F8A8
     bl fn_8054AF0C
     lwz r3, lbl_8087F490
     bl fn_803D11B4
-lbl_fn_80368280_00000884:
+lbl_world_Manager_draw_00000884:
     lwz r3, lbl_8087F490
     bl fn_803E454C
     lwz r3, lbl_8087F490
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F120
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_000008A8
+    beq lbl_world_Manager_draw_000008A8
     bl fn_801E97DC
-lbl_fn_80368280_000008A8:
+lbl_world_Manager_draw_000008A8:
     lwz r3, lbl_8087EFA8
     li r0, 0x0
     lfs f0, lbl_80885708
@@ -861,30 +861,30 @@ lbl_fn_80368280_000008A8:
     stw r0, 0x240(r3)
     lwz r3, 0x5514(r28)
     cmpwi r3, 0x2
-    bne lbl_fn_80368280_000008E8
+    bne lbl_world_Manager_draw_000008E8
     lwz r4, 0x5518(r28)
     cmpwi r4, 0x9
-    bne lbl_fn_80368280_000008E8
+    bne lbl_world_Manager_draw_000008E8
     lwz r5, 0x551c(r28)
     bl fn_80208634
     stw r3, 0x10d4(r28)
-    b lbl_fn_80368280_000008F4
-lbl_fn_80368280_000008E8:
+    b lbl_world_Manager_draw_000008F4
+lbl_world_Manager_draw_000008E8:
     lwz r4, 0x5518(r28)
     bl fn_802085E0
     stw r3, 0x10d4(r28)
-lbl_fn_80368280_000008F4:
+lbl_world_Manager_draw_000008F4:
     lwz r0, 0x54e4(r28)
     li r3, 0x4
     stw r3, 0x5538(r28)
     cmpwi r0, 0x6
-    bne lbl_fn_80368280_000031A0
+    bne lbl_world_Manager_draw_000031A0
     li r0, 0x0
     stw r0, 0x54e4(r28)
-    b lbl_fn_80368280_000031A0
+    b lbl_world_Manager_draw_000031A0
     lwz r0, lbl_8087EE90
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_00000980
+    beq lbl_world_Manager_draw_00000980
     lwz r3, 0x5524(r3)
     lwz r4, 0x5528(r28)
     lwz r5, 0x552c(r28)
@@ -895,34 +895,34 @@ lbl_fn_80368280_000008F4:
     lwz r5, 0x551c(r28)
     bl fn_803CE160
     cmpw r27, r3
-    beq lbl_fn_80368280_00000980
+    beq lbl_world_Manager_draw_00000980
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_0000096C
+    beq lbl_world_Manager_draw_0000096C
     lwz r25, lbl_8087EE90
     bl fn_803CE154
     mr r4, r3
     mr r3, r25
     bl fn_80047B54
-    b lbl_fn_80368280_00000980
-lbl_fn_80368280_0000096C:
+    b lbl_world_Manager_draw_00000980
+lbl_world_Manager_draw_0000096C:
     lwz r25, lbl_8087EE90
     bl fn_803CE148
     mr r4, r3
     mr r3, r25
     bl fn_80047B54
-lbl_fn_80368280_00000980:
+lbl_world_Manager_draw_00000980:
     lwz r3, 0x553c(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00000990
+    beq lbl_world_Manager_draw_00000990
     bl fn_803BE590
-lbl_fn_80368280_00000990:
+lbl_world_Manager_draw_00000990:
     lwz r0, 0x5514(r28)
     li r4, 0x120
     lwz r3, lbl_8087F3C0
     cmpwi r0, 0x1
-    bne lbl_fn_80368280_000009A8
+    bne lbl_world_Manager_draw_000009A8
     li r4, 0x80
-lbl_fn_80368280_000009A8:
+lbl_world_Manager_draw_000009A8:
     bl fn_8023A678
     lwz r3, 0x5514(r28)
     lwz r4, 0x5518(r28)
@@ -930,18 +930,18 @@ lbl_fn_80368280_000009A8:
     lwz r6, 0x10d0(r28)
     bl fn_8036562C
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00000A14
+    beq lbl_world_Manager_draw_00000A14
     lwz r0, 0x553c(r28)
     cmpwi r0, 0x0
-    bne lbl_fn_80368280_000009F0
+    bne lbl_world_Manager_draw_000009F0
     lwz r3, 0x5524(r28)
     lwz r4, 0x5528(r28)
     lwz r5, 0x552c(r28)
     lwz r6, 0x10d0(r28)
     bl fn_8036562C
     cmpwi r3, 0x0
-    bne lbl_fn_80368280_00000A14
-lbl_fn_80368280_000009F0:
+    bne lbl_world_Manager_draw_00000A14
+lbl_world_Manager_draw_000009F0:
     lis r4, lbl_8074DC1C@ha
     addi r3, r28, 0x5690
     addi r4, r4, lbl_8074DC1C@l
@@ -950,14 +950,14 @@ lbl_fn_80368280_000009F0:
     li r6, 0x0
     li r7, 0x1
     bl fn_80470364
-    b lbl_fn_80368280_00000A9C
-lbl_fn_80368280_00000A14:
+    b lbl_world_Manager_draw_00000A9C
+lbl_world_Manager_draw_00000A14:
     lwz r3, 0x5514(r28)
     cmpwi r3, 0x1
-    beq lbl_fn_80368280_00000A50
+    beq lbl_world_Manager_draw_00000A50
     lwz r0, 0x5524(r28)
     cmpwi r0, 0x1
-    bne lbl_fn_80368280_00000A50
+    bne lbl_world_Manager_draw_00000A50
     lis r4, lbl_8074DC1C@ha
     addi r3, r28, 0x5690
     addi r4, r4, lbl_8074DC1C@l
@@ -966,19 +966,19 @@ lbl_fn_80368280_00000A14:
     li r6, 0x0
     li r7, 0x1
     bl fn_80470364
-    b lbl_fn_80368280_00000A9C
-lbl_fn_80368280_00000A50:
+    b lbl_world_Manager_draw_00000A9C
+lbl_world_Manager_draw_00000A50:
     lwz r4, 0x5518(r28)
     lwz r5, 0x551c(r28)
     bl fn_8036555C
     cmpwi r3, 0x0
-    bne lbl_fn_80368280_00000A9C
+    bne lbl_world_Manager_draw_00000A9C
     lwz r3, 0x5524(r28)
     lwz r4, 0x5528(r28)
     lwz r5, 0x552c(r28)
     bl fn_8036555C
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00000A9C
+    beq lbl_world_Manager_draw_00000A9C
     lis r4, lbl_8074DC1C@ha
     addi r3, r28, 0x5690
     addi r4, r4, lbl_8074DC1C@l
@@ -987,89 +987,89 @@ lbl_fn_80368280_00000A50:
     li r6, 0x0
     li r7, 0x1
     bl fn_80470364
-lbl_fn_80368280_00000A9C:
+lbl_world_Manager_draw_00000A9C:
     lwz r5, lbl_8087F8A0
     lwz r3, 0x48(r5)
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00000AD8
+    beq lbl_world_Manager_draw_00000AD8
     lwz r0, 0x5518(r28)
     lwz r4, 0x5514(r28)
     cmpwi r0, 0x44
-    bne lbl_fn_80368280_00000ACC
+    bne lbl_world_Manager_draw_00000ACC
     lwz r0, 0x551c(r28)
     cmpwi r0, 0x1
-    bne lbl_fn_80368280_00000ACC
+    bne lbl_world_Manager_draw_00000ACC
     li r4, 0x1
-lbl_fn_80368280_00000ACC:
+lbl_world_Manager_draw_00000ACC:
     lwz r5, 0x5524(r28)
     bl fn_800EBD00
-    b lbl_fn_80368280_00000AE4
-lbl_fn_80368280_00000AD8:
+    b lbl_world_Manager_draw_00000AE4
+lbl_world_Manager_draw_00000AD8:
     lwz r4, 0x5514(r28)
     mr r3, r5
     bl fn_80549F18
-lbl_fn_80368280_00000AE4:
+lbl_world_Manager_draw_00000AE4:
     lwz r3, 0x5514(r28)
     lwz r4, 0x5518(r28)
     lwz r5, 0x551c(r28)
     lwz r6, 0x10d0(r28)
     bl fn_8036562C
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00000B08
+    beq lbl_world_Manager_draw_00000B08
     lwz r3, lbl_8087F890
     bl fn_80547984
-lbl_fn_80368280_00000B08:
+lbl_world_Manager_draw_00000B08:
     lwz r3, lbl_8087F418
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00000B2C
+    beq lbl_world_Manager_draw_00000B2C
     lwz r4, 0x5514(r28)
     lwz r5, 0x5518(r28)
     lwz r6, 0x551c(r28)
     lwz r7, 0x5520(r28)
     lwz r8, 0x553c(r28)
     bl fn_8036097C
-lbl_fn_80368280_00000B2C:
+lbl_world_Manager_draw_00000B2C:
     li r0, 0x5
     stw r0, 0x5538(r28)
-    b lbl_fn_80368280_000031A0
+    b lbl_world_Manager_draw_000031A0
     lwz r5, 0x5624(r3)
     lwz r4, 0x58(r5)
     lwz r0, 0x54(r5)
     lwz r5, 0x4c(r5)
     add r0, r4, r0
     cmpw r5, r0
-    bge lbl_fn_80368280_00000B7C
+    bge lbl_world_Manager_draw_00000B7C
     lwz r0, 0x54f0(r3)
     cmpwi r0, 0x1
-    bne lbl_fn_80368280_000031A0
+    bne lbl_world_Manager_draw_000031A0
     lwz r4, 0x5620(r3)
     lwz r3, 0x58(r4)
     lwz r0, 0x54(r4)
     lwz r4, 0x4c(r4)
     add r0, r3, r0
     cmpw r4, r0
-    blt lbl_fn_80368280_000031A0
-lbl_fn_80368280_00000B7C:
+    blt lbl_world_Manager_draw_000031A0
+lbl_world_Manager_draw_00000B7C:
     lwz r3, lbl_8087F418
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00000B94
+    beq lbl_world_Manager_draw_00000B94
     bl fn_80360A2C
     cmpwi r3, 0x0
-    bne lbl_fn_80368280_00000E5C
-lbl_fn_80368280_00000B94:
+    bne lbl_world_Manager_draw_00000E5C
+lbl_world_Manager_draw_00000B94:
     lwz r3, lbl_8087F8A0
     lwz r3, 0x48(r3)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_80368280_00000E5C
+    bne lbl_world_Manager_draw_00000E5C
     bl fn_800EBE84
     cmpwi r3, 0x0
-    bne lbl_fn_80368280_00000E5C
+    bne lbl_world_Manager_draw_00000E5C
     lwz r3, lbl_8087F890
     bl fn_80547B58
     cmpwi r3, 0x0
-    bne lbl_fn_80368280_00000E5C
+    bne lbl_world_Manager_draw_00000E5C
     lwz r3, 0x5514(r28)
     li r30, 0x0
     lwz r4, 0x5518(r28)
@@ -1077,10 +1077,10 @@ lbl_fn_80368280_00000B94:
     bl fn_8021771C
     cmpwi r3, 0x0
     mr r27, r3
-    beq lbl_fn_80368280_00000DC8
+    beq lbl_world_Manager_draw_00000DC8
     lwz r0, 0x44(r3)
     cmpwi r0, 0x2
-    bne lbl_fn_80368280_00000DC8
+    bne lbl_world_Manager_draw_00000DC8
     lwz r25, 0x0(r3)
     lis r4, lbl_8074DC1C@ha
     addi r4, r4, lbl_8074DC1C@l
@@ -1088,40 +1088,40 @@ lbl_fn_80368280_00000B94:
     mr r3, r25
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
-    bne lbl_fn_80368280_00000C4C
+    bne lbl_world_Manager_draw_00000C4C
     addi r3, r25, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r29, r3, 0x64
-    bne lbl_fn_80368280_00000C4C
+    bne lbl_world_Manager_draw_00000C4C
     mr r3, r25
     bl strlen
     cmplwi r3, 0x8
-    blt lbl_fn_80368280_00000C4C
+    blt lbl_world_Manager_draw_00000C4C
     addi r3, r25, 0x6
-    bl fn_80684600
+    bl atoi
     add r29, r29, r3
-lbl_fn_80368280_00000C4C:
+lbl_world_Manager_draw_00000C4C:
     lis r3, lbl_8074DAF8@ha
     addi r3, r3, lbl_8074DAF8@l
-    b lbl_fn_80368280_00000C6C
-lbl_fn_80368280_00000C58:
+    b lbl_world_Manager_draw_00000C6C
+lbl_world_Manager_draw_00000C58:
     cmpw r29, r0
-    bne lbl_fn_80368280_00000C68
+    bne lbl_world_Manager_draw_00000C68
     li r0, 0x1
-    b lbl_fn_80368280_00000C7C
-lbl_fn_80368280_00000C68:
+    b lbl_world_Manager_draw_00000C7C
+lbl_world_Manager_draw_00000C68:
     addi r3, r3, 0x4
-lbl_fn_80368280_00000C6C:
+lbl_world_Manager_draw_00000C6C:
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
-    bgt lbl_fn_80368280_00000C58
+    bgt lbl_world_Manager_draw_00000C58
     li r0, 0x0
-lbl_fn_80368280_00000C7C:
+lbl_world_Manager_draw_00000C7C:
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_00000DC8
+    beq lbl_world_Manager_draw_00000DC8
     lwz r25, 0x0(r27)
     lis r4, lbl_8074DC1C@ha
     addi r4, r4, lbl_8074DC1C@l
@@ -1129,67 +1129,67 @@ lbl_fn_80368280_00000C7C:
     mr r3, r25
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
-    bne lbl_fn_80368280_00000CDC
+    bne lbl_world_Manager_draw_00000CDC
     addi r3, r25, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r29, r3, 0x64
-    bne lbl_fn_80368280_00000CDC
+    bne lbl_world_Manager_draw_00000CDC
     mr r3, r25
     bl strlen
     cmplwi r3, 0x8
-    blt lbl_fn_80368280_00000CDC
+    blt lbl_world_Manager_draw_00000CDC
     addi r3, r25, 0x6
-    bl fn_80684600
+    bl atoi
     add r29, r29, r3
-lbl_fn_80368280_00000CDC:
+lbl_world_Manager_draw_00000CDC:
     lis r4, lbl_8074DA2C@ha
     li r3, 0x0
     addi r4, r4, lbl_8074DA2C@l
-    b lbl_fn_80368280_00000D10
-lbl_fn_80368280_00000CEC:
+    b lbl_world_Manager_draw_00000D10
+lbl_world_Manager_draw_00000CEC:
     cmpw r29, r0
-    bne lbl_fn_80368280_00000D08
+    bne lbl_world_Manager_draw_00000D08
     mulli r0, r3, 0xc
     lis r3, lbl_8074DA2C@ha
     addi r3, r3, lbl_8074DA2C@l
     add r29, r3, r0
-    b lbl_fn_80368280_00000D20
-lbl_fn_80368280_00000D08:
+    b lbl_world_Manager_draw_00000D20
+lbl_world_Manager_draw_00000D08:
     addi r4, r4, 0xc
     addi r3, r3, 0x1
-lbl_fn_80368280_00000D10:
+lbl_world_Manager_draw_00000D10:
     lwz r0, 0x0(r4)
     cmpwi r0, 0x0
-    bgt lbl_fn_80368280_00000CEC
+    bgt lbl_world_Manager_draw_00000CEC
     li r29, 0x0
-lbl_fn_80368280_00000D20:
+lbl_world_Manager_draw_00000D20:
     cmpwi r29, 0x0
-    bne lbl_fn_80368280_00000D64
+    bne lbl_world_Manager_draw_00000D64
     lwz r4, 0x48(r27)
     li r3, 0x2
     bl fn_802085E0
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00000DC8
+    beq lbl_world_Manager_draw_00000DC8
     lwz r3, 0x60(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00000DC8
+    beq lbl_world_Manager_draw_00000DC8
     lwz r5, 0x10d0(r28)
     lwz r0, 0x4(r3)
     srawi r4, r5, 31
     srwi r3, r0, 31
     subfc r0, r0, r5
     adde r30, r4, r3
-    b lbl_fn_80368280_00000DC8
-lbl_fn_80368280_00000D64:
+    b lbl_world_Manager_draw_00000DC8
+lbl_world_Manager_draw_00000D64:
     lwz r5, 0x4(r29)
     cmplwi r5, 0xfff
-    ble lbl_fn_80368280_00000DA8
+    ble lbl_world_Manager_draw_00000DA8
     lwz r0, lbl_8087EEB8
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_00000DA0
+    beq lbl_world_Manager_draw_00000DA0
     lis r4, lbl_8074DC1C@ha
     addi r3, r1, 0x520
     addi r4, r4, lbl_8074DC1C@l
@@ -1199,26 +1199,26 @@ lbl_fn_80368280_00000D64:
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x520
     bl fn_800697D8
-lbl_fn_80368280_00000DA0:
+lbl_world_Manager_draw_00000DA0:
     li r5, 0x0
-    b lbl_fn_80368280_00000DB4
-lbl_fn_80368280_00000DA8:
+    b lbl_world_Manager_draw_00000DB4
+lbl_world_Manager_draw_00000DA8:
     slwi r0, r5, 2
     add r3, r28, r0
     lwz r5, 0x10e4(r3)
-lbl_fn_80368280_00000DB4:
+lbl_world_Manager_draw_00000DB4:
     lwz r0, 0x8(r29)
     srawi r4, r5, 31
     srwi r3, r0, 31
     subfc r0, r0, r5
     adde r30, r4, r3
-lbl_fn_80368280_00000DC8:
+lbl_world_Manager_draw_00000DC8:
     cmpwi r30, 0x0
-    beq lbl_fn_80368280_00000E54
+    beq lbl_world_Manager_draw_00000E54
     lwz r3, lbl_8087F8A0
     lwz r25, 0x48(r3)
     cmpwi r25, 0x0
-    beq lbl_fn_80368280_00000E54
+    beq lbl_world_Manager_draw_00000E54
     lwz r3, 0x5514(r28)
     lwz r4, 0x5518(r28)
     lwz r5, 0x551c(r28)
@@ -1229,9 +1229,9 @@ lbl_fn_80368280_00000DC8:
     lwz r4, 0x5518(r28)
     bl fn_802085E0
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00000E54
+    beq lbl_world_Manager_draw_00000E54
     cmpwi r27, 0x0
-    beq lbl_fn_80368280_00000E54
+    beq lbl_world_Manager_draw_00000E54
     xoris r0, r24, 0x8000
     stw r0, 0x824(r1)
     lis r4, lbl_8074DBE8@ha
@@ -1248,40 +1248,40 @@ lbl_fn_80368280_00000DC8:
     add r0, r4, r0
     subf r0, r3, r0
     stw r0, 0x1548(r28)
-lbl_fn_80368280_00000E54:
+lbl_world_Manager_draw_00000E54:
     li r0, 0x6
     stw r0, 0x5538(r28)
-lbl_fn_80368280_00000E5C:
+lbl_world_Manager_draw_00000E5C:
     lwz r3, lbl_8087F518
     li r4, 0x1
     bl fn_8046ECDC
-    b lbl_fn_80368280_000031A0
+    b lbl_world_Manager_draw_000031A0
     lwz r5, 0x5514(r3)
     lwz r4, 0x551c(r3)
     cmpwi r5, 0x1
     lwz r0, 0x5518(r3)
-    bne lbl_fn_80368280_00000E88
+    bne lbl_world_Manager_draw_00000E88
     li r0, 0x1
-    b lbl_fn_80368280_00000EAC
-lbl_fn_80368280_00000E88:
+    b lbl_world_Manager_draw_00000EAC
+lbl_world_Manager_draw_00000E88:
     cmpwi r5, 0x2
-    bne lbl_fn_80368280_00000EA8
+    bne lbl_world_Manager_draw_00000EA8
     cmpwi r0, 0x44
-    bne lbl_fn_80368280_00000EA8
+    bne lbl_world_Manager_draw_00000EA8
     subi r0, r4, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
-    b lbl_fn_80368280_00000EAC
-lbl_fn_80368280_00000EA8:
+    b lbl_world_Manager_draw_00000EAC
+lbl_world_Manager_draw_00000EA8:
     li r0, 0x0
-lbl_fn_80368280_00000EAC:
+lbl_world_Manager_draw_00000EAC:
     lwz r3, lbl_8087EF8C
     cmpwi r0, 0x0
     li r4, 0x2
     addi r3, r3, 0x118
-    beq lbl_fn_80368280_00000EC4
+    beq lbl_world_Manager_draw_00000EC4
     li r4, 0x4
-lbl_fn_80368280_00000EC4:
+lbl_world_Manager_draw_00000EC4:
     bl fn_800AFEBC
     lwz r3, 0x5514(r28)
     lwz r4, 0x5518(r28)
@@ -1291,46 +1291,46 @@ lbl_fn_80368280_00000EC4:
     lwz r5, 0x551c(r28)
     bl fn_8036555C
     cmpwi r3, 0x0
-    bne lbl_fn_80368280_00000F04
+    bne lbl_world_Manager_draw_00000F04
     lwz r3, lbl_8087F048
     bl fn_800F2C9C
     lwz r3, lbl_8087F8A8
     bl fn_8054A9AC
     lwz r3, lbl_8087F490
     bl fn_803D0B20
-lbl_fn_80368280_00000F04:
+lbl_world_Manager_draw_00000F04:
     li r0, 0x7
     stw r0, 0x5538(r28)
     li r4, 0x1
     lwz r3, lbl_8087F518
     bl fn_8046ECDC
-    b lbl_fn_80368280_000031A0
+    b lbl_world_Manager_draw_000031A0
     lwz r3, lbl_8087F518
     li r4, 0x1
     bl fn_8046ECDC
     lwz r3, lbl_8087F048
     bl fn_800F3490
     cmpwi r3, 0x0
-    bne lbl_fn_80368280_000031A0
+    bne lbl_world_Manager_draw_000031A0
     lwz r3, lbl_8087F490
     bl fn_803D1574
     cmpwi r3, 0x0
-    bne lbl_fn_80368280_000031A0
+    bne lbl_world_Manager_draw_000031A0
     lwz r3, lbl_8087F8A8
     bl fn_800D3FA4
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_000031A0
+    beq lbl_world_Manager_draw_000031A0
     addi r3, r28, 0x5690
     bl fn_80470528
     li r0, 0x8
     stw r0, 0x5538(r28)
-    b lbl_fn_80368280_000031A0
+    b lbl_world_Manager_draw_000031A0
     lwz r3, lbl_8087F518
     li r4, 0x1
     bl fn_8046ECDC
     lwz r0, 0x553c(r28)
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_0000118C
+    beq lbl_world_Manager_draw_0000118C
     lwz r3, 0x48(r28)
     li r29, 0x0
     lwz r4, 0x4c(r28)
@@ -1338,10 +1338,10 @@ lbl_fn_80368280_00000F04:
     bl fn_8021771C
     cmpwi r3, 0x0
     mr r27, r3
-    beq lbl_fn_80368280_00001184
+    beq lbl_world_Manager_draw_00001184
     lwz r0, 0x44(r3)
     cmpwi r0, 0x2
-    bne lbl_fn_80368280_00001184
+    bne lbl_world_Manager_draw_00001184
     lwz r25, 0x0(r3)
     lis r4, lbl_8074DC1C@ha
     addi r4, r4, lbl_8074DC1C@l
@@ -1349,40 +1349,40 @@ lbl_fn_80368280_00000F04:
     mr r3, r25
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
-    bne lbl_fn_80368280_00001008
+    bne lbl_world_Manager_draw_00001008
     addi r3, r25, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r30, r3, 0x64
-    bne lbl_fn_80368280_00001008
+    bne lbl_world_Manager_draw_00001008
     mr r3, r25
     bl strlen
     cmplwi r3, 0x8
-    blt lbl_fn_80368280_00001008
+    blt lbl_world_Manager_draw_00001008
     addi r3, r25, 0x6
-    bl fn_80684600
+    bl atoi
     add r30, r30, r3
-lbl_fn_80368280_00001008:
+lbl_world_Manager_draw_00001008:
     lis r3, lbl_8074DAF8@ha
     addi r3, r3, lbl_8074DAF8@l
-    b lbl_fn_80368280_00001028
-lbl_fn_80368280_00001014:
+    b lbl_world_Manager_draw_00001028
+lbl_world_Manager_draw_00001014:
     cmpw r30, r0
-    bne lbl_fn_80368280_00001024
+    bne lbl_world_Manager_draw_00001024
     li r0, 0x1
-    b lbl_fn_80368280_00001038
-lbl_fn_80368280_00001024:
+    b lbl_world_Manager_draw_00001038
+lbl_world_Manager_draw_00001024:
     addi r3, r3, 0x4
-lbl_fn_80368280_00001028:
+lbl_world_Manager_draw_00001028:
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
-    bgt lbl_fn_80368280_00001014
+    bgt lbl_world_Manager_draw_00001014
     li r0, 0x0
-lbl_fn_80368280_00001038:
+lbl_world_Manager_draw_00001038:
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_00001184
+    beq lbl_world_Manager_draw_00001184
     lwz r25, 0x0(r27)
     lis r4, lbl_8074DC1C@ha
     addi r4, r4, lbl_8074DC1C@l
@@ -1390,67 +1390,67 @@ lbl_fn_80368280_00001038:
     mr r3, r25
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
-    bne lbl_fn_80368280_00001098
+    bne lbl_world_Manager_draw_00001098
     addi r3, r25, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r30, r3, 0x64
-    bne lbl_fn_80368280_00001098
+    bne lbl_world_Manager_draw_00001098
     mr r3, r25
     bl strlen
     cmplwi r3, 0x8
-    blt lbl_fn_80368280_00001098
+    blt lbl_world_Manager_draw_00001098
     addi r3, r25, 0x6
-    bl fn_80684600
+    bl atoi
     add r30, r30, r3
-lbl_fn_80368280_00001098:
+lbl_world_Manager_draw_00001098:
     lis r4, lbl_8074DA2C@ha
     li r3, 0x0
     addi r4, r4, lbl_8074DA2C@l
-    b lbl_fn_80368280_000010CC
-lbl_fn_80368280_000010A8:
+    b lbl_world_Manager_draw_000010CC
+lbl_world_Manager_draw_000010A8:
     cmpw r30, r0
-    bne lbl_fn_80368280_000010C4
+    bne lbl_world_Manager_draw_000010C4
     mulli r0, r3, 0xc
     lis r3, lbl_8074DA2C@ha
     addi r3, r3, lbl_8074DA2C@l
     add r30, r3, r0
-    b lbl_fn_80368280_000010DC
-lbl_fn_80368280_000010C4:
+    b lbl_world_Manager_draw_000010DC
+lbl_world_Manager_draw_000010C4:
     addi r4, r4, 0xc
     addi r3, r3, 0x1
-lbl_fn_80368280_000010CC:
+lbl_world_Manager_draw_000010CC:
     lwz r0, 0x0(r4)
     cmpwi r0, 0x0
-    bgt lbl_fn_80368280_000010A8
+    bgt lbl_world_Manager_draw_000010A8
     li r30, 0x0
-lbl_fn_80368280_000010DC:
+lbl_world_Manager_draw_000010DC:
     cmpwi r30, 0x0
-    bne lbl_fn_80368280_00001120
+    bne lbl_world_Manager_draw_00001120
     lwz r4, 0x48(r27)
     li r3, 0x2
     bl fn_802085E0
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00001184
+    beq lbl_world_Manager_draw_00001184
     lwz r3, 0x60(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00001184
+    beq lbl_world_Manager_draw_00001184
     lwz r5, 0x10d0(r28)
     lwz r0, 0x4(r3)
     srawi r4, r5, 31
     srwi r3, r0, 31
     subfc r0, r0, r5
     adde r29, r4, r3
-    b lbl_fn_80368280_00001184
-lbl_fn_80368280_00001120:
+    b lbl_world_Manager_draw_00001184
+lbl_world_Manager_draw_00001120:
     lwz r5, 0x4(r30)
     cmplwi r5, 0xfff
-    ble lbl_fn_80368280_00001164
+    ble lbl_world_Manager_draw_00001164
     lwz r0, lbl_8087EEB8
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_0000115C
+    beq lbl_world_Manager_draw_0000115C
     lis r4, lbl_8074DC1C@ha
     addi r3, r1, 0x420
     addi r4, r4, lbl_8074DC1C@l
@@ -1460,23 +1460,23 @@ lbl_fn_80368280_00001120:
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x420
     bl fn_800697D8
-lbl_fn_80368280_0000115C:
+lbl_world_Manager_draw_0000115C:
     li r5, 0x0
-    b lbl_fn_80368280_00001170
-lbl_fn_80368280_00001164:
+    b lbl_world_Manager_draw_00001170
+lbl_world_Manager_draw_00001164:
     slwi r0, r5, 2
     add r3, r28, r0
     lwz r5, 0x10e4(r3)
-lbl_fn_80368280_00001170:
+lbl_world_Manager_draw_00001170:
     lwz r0, 0x8(r30)
     srawi r4, r5, 31
     srwi r3, r0, 31
     subfc r0, r0, r5
     adde r29, r4, r3
-lbl_fn_80368280_00001184:
+lbl_world_Manager_draw_00001184:
     stw r29, 0x5694(r28)
     stw r29, 0x5698(r28)
-lbl_fn_80368280_0000118C:
+lbl_world_Manager_draw_0000118C:
     lwz r4, 0x5514(r28)
     mr r3, r28
     lwz r5, 0x5518(r28)
@@ -1485,29 +1485,29 @@ lbl_fn_80368280_0000118C:
     lwz r0, 0x553c(r28)
     stw r3, 0x5534(r28)
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_000011B4
+    beq lbl_world_Manager_draw_000011B4
     stw r0, 0x9b0(r3)
-lbl_fn_80368280_000011B4:
+lbl_world_Manager_draw_000011B4:
     lwz r3, 0x5534(r28)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r0, 0x5534(r28)
     li r3, 0x9
     stw r3, 0x5538(r28)
     stw r0, 0x10d8(r28)
-    b lbl_fn_80368280_000031A0
+    b lbl_world_Manager_draw_000031A0
     mr r3, r28
     bl fn_8036FD4C
     cmpwi r3, 0x0
-    bne lbl_fn_80368280_000031A0
+    bne lbl_world_Manager_draw_000031A0
     lwz r3, lbl_8087F8A0
     lwz r3, 0x48(r3)
     bl fn_800EBE84
     cmpwi r3, 0x0
-    bne lbl_fn_80368280_000031A0
+    bne lbl_world_Manager_draw_000031A0
     lwz r3, lbl_8087F048
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087EE68
     li r4, 0x0
     lwz r0, 0x38(r3)
@@ -1522,24 +1522,24 @@ lbl_fn_80368280_000011B4:
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
     lwz r3, lbl_8087F3C0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F8A0
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F408
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F890
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x553c(r28)
     lwz r0, 0x5534(r28)
     cmpwi r3, 0x0
     stw r0, 0x10d8(r28)
-    beq lbl_fn_80368280_00001280
+    beq lbl_world_Manager_draw_00001280
     bl fn_803BE670
-    b lbl_fn_80368280_000012B0
-lbl_fn_80368280_00001280:
+    b lbl_world_Manager_draw_000012B0
+lbl_world_Manager_draw_00001280:
     addi r3, r28, 0x50e4
     li r4, 0x0
     li r5, 0x400
@@ -1552,13 +1552,13 @@ lbl_fn_80368280_00001280:
     li r4, 0x0
     li r5, 0x400
     bl memset
-lbl_fn_80368280_000012B0:
+lbl_world_Manager_draw_000012B0:
     lwz r4, 0x5520(r28)
     mr r3, r28
     bl fn_8036CA60
     lwz r3, 0x553c(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_000012E8
+    beq lbl_world_Manager_draw_000012E8
     bl fn_803BE6B8
     lfs f1, lbl_80885744
     addi r3, r28, 0x6c
@@ -1567,7 +1567,7 @@ lbl_fn_80368280_000012B0:
     bl fn_8037EF30
     li r0, 0x5
     stw r0, 0x5748(r28)
-lbl_fn_80368280_000012E8:
+lbl_world_Manager_draw_000012E8:
     mr r3, r28
     li r4, 0x0
     bl fn_80367A40
@@ -1579,29 +1579,29 @@ lbl_fn_80368280_000012E8:
     bl fn_803E32EC
     lwz r3, lbl_8087F490
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x574c(r28)
     cmpwi r3, 0x0
-    ble lbl_fn_80368280_00001330
+    ble lbl_world_Manager_draw_00001330
     li r0, 0x1
     stw r0, 0x1434(r28)
     stw r3, 0x154c(r28)
-lbl_fn_80368280_00001330:
+lbl_world_Manager_draw_00001330:
     li r0, 0x0
     stw r0, 0x574c(r28)
     lwz r3, lbl_8087F4F0
     bl fn_8044D028
     lwz r0, 0x553c(r28)
     cmpwi r0, 0x0
-    bne lbl_fn_80368280_000014E4
+    bne lbl_world_Manager_draw_000014E4
     lwz r0, lbl_8087FA20
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_000014E4
+    beq lbl_world_Manager_draw_000014E4
     lis r3, 0x9
     lwz r4, 0x10d0(r28)
     addi r0, r3, 0x27c0
     cmpw r4, r0
-    blt lbl_fn_80368280_000014E4
+    blt lbl_world_Manager_draw_000014E4
     lwz r3, lbl_8087F8A0
     li r4, 0x1
     bl fn_8054A340
@@ -1619,7 +1619,7 @@ lbl_fn_80368280_00001330:
     lfs f2, 0x530(r6)
     psq_st f1, 0x0(r5), 0, 0
     stfs f2, 0x78(r1)
-    beq lbl_fn_80368280_000014E4
+    beq lbl_world_Manager_draw_000014E4
     frsp f0, f2
     lfs f6, 0x530(r3)
     lfs f5, 0x52c(r3)
@@ -1633,10 +1633,10 @@ lbl_fn_80368280_00001330:
     fsubs f0, f3, f0
     stfs f4, 0x38(r1)
     stfs f0, 0x34(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, lbl_8088574C
     fcmpo cr0, f1, f0
-    ble lbl_fn_80368280_000014E4
+    ble lbl_world_Manager_draw_000014E4
     lfs f3, lbl_80885750
     addi r3, r1, 0xc8
     lfs f0, lbl_8088570C
@@ -1645,11 +1645,11 @@ lbl_fn_80368280_00001330:
     stfs f3, 0x64(r1)
     stfs f0, 0x68(r1)
     stfs f3, 0x6c(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x64
     addi r3, r1, 0xc8
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f3, 0x78(r1)
     addi r4, r1, 0x58
     lfs f0, 0x6c(r1)
@@ -1671,7 +1671,7 @@ lbl_fn_80368280_00001330:
     lwz r3, 0x10d8(r28)
     bl fn_803C1560
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_000014E4
+    beq lbl_world_Manager_draw_000014E4
     subi r0, r3, 0x1
     lwz r3, 0x10d8(r28)
     mulli r0, r0, 0x30
@@ -1696,7 +1696,7 @@ lbl_fn_80368280_00001330:
     stfs f0, 0x30(r1)
     stfs f2, 0x53c(r24)
     bl fn_8016EB48
-lbl_fn_80368280_000014E4:
+lbl_world_Manager_draw_000014E4:
     lwz r5, 0x551c(r28)
     li r30, 0x0
     lwz r4, 0x5518(r28)
@@ -1704,10 +1704,10 @@ lbl_fn_80368280_000014E4:
     bl fn_8021771C
     cmpwi r3, 0x0
     mr r27, r3
-    beq lbl_fn_80368280_000016E4
+    beq lbl_world_Manager_draw_000016E4
     lwz r0, 0x44(r3)
     cmpwi r0, 0x2
-    bne lbl_fn_80368280_000016E4
+    bne lbl_world_Manager_draw_000016E4
     lwz r25, 0x0(r3)
     lis r4, lbl_8074DC1C@ha
     addi r4, r4, lbl_8074DC1C@l
@@ -1715,40 +1715,40 @@ lbl_fn_80368280_000014E4:
     mr r3, r25
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
-    bne lbl_fn_80368280_00001568
+    bne lbl_world_Manager_draw_00001568
     addi r3, r25, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r29, r3, 0x64
-    bne lbl_fn_80368280_00001568
+    bne lbl_world_Manager_draw_00001568
     mr r3, r25
     bl strlen
     cmplwi r3, 0x8
-    blt lbl_fn_80368280_00001568
+    blt lbl_world_Manager_draw_00001568
     addi r3, r25, 0x6
-    bl fn_80684600
+    bl atoi
     add r29, r29, r3
-lbl_fn_80368280_00001568:
+lbl_world_Manager_draw_00001568:
     lis r3, lbl_8074DAF8@ha
     addi r3, r3, lbl_8074DAF8@l
-    b lbl_fn_80368280_00001588
-lbl_fn_80368280_00001574:
+    b lbl_world_Manager_draw_00001588
+lbl_world_Manager_draw_00001574:
     cmpw r29, r0
-    bne lbl_fn_80368280_00001584
+    bne lbl_world_Manager_draw_00001584
     li r0, 0x1
-    b lbl_fn_80368280_00001598
-lbl_fn_80368280_00001584:
+    b lbl_world_Manager_draw_00001598
+lbl_world_Manager_draw_00001584:
     addi r3, r3, 0x4
-lbl_fn_80368280_00001588:
+lbl_world_Manager_draw_00001588:
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
-    bgt lbl_fn_80368280_00001574
+    bgt lbl_world_Manager_draw_00001574
     li r0, 0x0
-lbl_fn_80368280_00001598:
+lbl_world_Manager_draw_00001598:
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_000016E4
+    beq lbl_world_Manager_draw_000016E4
     lwz r25, 0x0(r27)
     lis r4, lbl_8074DC1C@ha
     addi r4, r4, lbl_8074DC1C@l
@@ -1756,67 +1756,67 @@ lbl_fn_80368280_00001598:
     mr r3, r25
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
-    bne lbl_fn_80368280_000015F8
+    bne lbl_world_Manager_draw_000015F8
     addi r3, r25, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r29, r3, 0x64
-    bne lbl_fn_80368280_000015F8
+    bne lbl_world_Manager_draw_000015F8
     mr r3, r25
     bl strlen
     cmplwi r3, 0x8
-    blt lbl_fn_80368280_000015F8
+    blt lbl_world_Manager_draw_000015F8
     addi r3, r25, 0x6
-    bl fn_80684600
+    bl atoi
     add r29, r29, r3
-lbl_fn_80368280_000015F8:
+lbl_world_Manager_draw_000015F8:
     lis r4, lbl_8074DA2C@ha
     li r3, 0x0
     addi r4, r4, lbl_8074DA2C@l
-    b lbl_fn_80368280_0000162C
-lbl_fn_80368280_00001608:
+    b lbl_world_Manager_draw_0000162C
+lbl_world_Manager_draw_00001608:
     cmpw r29, r0
-    bne lbl_fn_80368280_00001624
+    bne lbl_world_Manager_draw_00001624
     mulli r0, r3, 0xc
     lis r3, lbl_8074DA2C@ha
     addi r3, r3, lbl_8074DA2C@l
     add r29, r3, r0
-    b lbl_fn_80368280_0000163C
-lbl_fn_80368280_00001624:
+    b lbl_world_Manager_draw_0000163C
+lbl_world_Manager_draw_00001624:
     addi r4, r4, 0xc
     addi r3, r3, 0x1
-lbl_fn_80368280_0000162C:
+lbl_world_Manager_draw_0000162C:
     lwz r0, 0x0(r4)
     cmpwi r0, 0x0
-    bgt lbl_fn_80368280_00001608
+    bgt lbl_world_Manager_draw_00001608
     li r29, 0x0
-lbl_fn_80368280_0000163C:
+lbl_world_Manager_draw_0000163C:
     cmpwi r29, 0x0
-    bne lbl_fn_80368280_00001680
+    bne lbl_world_Manager_draw_00001680
     lwz r4, 0x48(r27)
     li r3, 0x2
     bl fn_802085E0
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_000016E4
+    beq lbl_world_Manager_draw_000016E4
     lwz r3, 0x60(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_000016E4
+    beq lbl_world_Manager_draw_000016E4
     lwz r5, 0x10d0(r28)
     lwz r0, 0x4(r3)
     srawi r4, r5, 31
     srwi r3, r0, 31
     subfc r0, r0, r5
     adde r30, r4, r3
-    b lbl_fn_80368280_000016E4
-lbl_fn_80368280_00001680:
+    b lbl_world_Manager_draw_000016E4
+lbl_world_Manager_draw_00001680:
     lwz r5, 0x4(r29)
     cmplwi r5, 0xfff
-    ble lbl_fn_80368280_000016C4
+    ble lbl_world_Manager_draw_000016C4
     lwz r0, lbl_8087EEB8
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_000016BC
+    beq lbl_world_Manager_draw_000016BC
     lis r4, lbl_8074DC1C@ha
     addi r3, r1, 0x320
     addi r4, r4, lbl_8074DC1C@l
@@ -1826,26 +1826,26 @@ lbl_fn_80368280_00001680:
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x320
     bl fn_800697D8
-lbl_fn_80368280_000016BC:
+lbl_world_Manager_draw_000016BC:
     li r5, 0x0
-    b lbl_fn_80368280_000016D0
-lbl_fn_80368280_000016C4:
+    b lbl_world_Manager_draw_000016D0
+lbl_world_Manager_draw_000016C4:
     slwi r0, r5, 2
     add r3, r28, r0
     lwz r5, 0x10e4(r3)
-lbl_fn_80368280_000016D0:
+lbl_world_Manager_draw_000016D0:
     lwz r0, 0x8(r29)
     srawi r4, r5, 31
     srwi r3, r0, 31
     subfc r0, r0, r5
     adde r30, r4, r3
-lbl_fn_80368280_000016E4:
+lbl_world_Manager_draw_000016E4:
     cmpwi r30, 0x0
-    beq lbl_fn_80368280_00001770
+    beq lbl_world_Manager_draw_00001770
     lwz r3, lbl_8087F8A0
     lwz r25, 0x48(r3)
     cmpwi r25, 0x0
-    beq lbl_fn_80368280_00001770
+    beq lbl_world_Manager_draw_00001770
     lwz r3, 0x5514(r28)
     lwz r4, 0x5518(r28)
     lwz r5, 0x551c(r28)
@@ -1856,9 +1856,9 @@ lbl_fn_80368280_000016E4:
     lwz r4, 0x5518(r28)
     bl fn_802085E0
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00001770
+    beq lbl_world_Manager_draw_00001770
     cmpwi r27, 0x0
-    beq lbl_fn_80368280_00001770
+    beq lbl_world_Manager_draw_00001770
     xoris r0, r24, 0x8000
     stw r0, 0x82c(r1)
     lis r4, lbl_8074DBE8@ha
@@ -1875,7 +1875,7 @@ lbl_fn_80368280_000016E4:
     add r0, r4, r0
     subf r0, r3, r0
     stw r0, 0x1548(r28)
-lbl_fn_80368280_00001770:
+lbl_world_Manager_draw_00001770:
     lwz r4, 0x870(r28)
     addi r3, r28, 0x6c
     bl fn_80389838
@@ -1897,32 +1897,32 @@ lbl_fn_80368280_00001770:
     stw r4, 0x5540(r28)
     lwz r25, lbl_8087F460
     cmpwi r25, 0x0
-    beq lbl_fn_80368280_0000181C
-    beq lbl_fn_80368280_00001814
+    beq lbl_world_Manager_draw_0000181C
+    beq lbl_world_Manager_draw_00001814
     addis r3, r25, 0x1
     subic. r0, r3, 0x61a0
-    beq lbl_fn_80368280_000017F0
+    beq lbl_world_Manager_draw_000017F0
     lis r4, fn_80119ECC@ha
     subi r3, r3, 0x4fdc
     addi r4, r4, fn_80119ECC@l
     li r5, 0x2d4
     li r6, 0x1c
     bl fn_806959D8
-lbl_fn_80368280_000017F0:
+lbl_world_Manager_draw_000017F0:
     addic. r3, r25, 0x539c
-    beq lbl_fn_80368280_0000180C
+    beq lbl_world_Manager_draw_0000180C
     lis r4, fn_8012AFE8@ha
     li r5, 0x240
     addi r4, r4, fn_8012AFE8@l
     li r6, 0x7
     bl fn_806959D8
-lbl_fn_80368280_0000180C:
+lbl_world_Manager_draw_0000180C:
     mr r3, r25
     bl dtor_80084684
-lbl_fn_80368280_00001814:
+lbl_world_Manager_draw_00001814:
     li r0, 0x0
     stw r0, lbl_8087F460
-lbl_fn_80368280_0000181C:
+lbl_world_Manager_draw_0000181C:
     lwz r3, 0x5624(r28)
     li r5, 0x0
     li r4, 0x2
@@ -1938,7 +1938,7 @@ lbl_fn_80368280_0000181C:
     stw r5, 0x70(r3)
     lwz r0, 0x54f0(r28)
     cmpwi r0, 0x1
-    bne lbl_fn_80368280_000018B4
+    bne lbl_world_Manager_draw_000018B4
     lwz r7, 0x5620(r28)
     li r3, 0x1
     li r0, 0x1e
@@ -1961,7 +1961,7 @@ lbl_fn_80368280_0000181C:
     stfs f0, 0x74(r4)
     lwz r4, 0x5620(r28)
     stw r3, 0x48(r4)
-lbl_fn_80368280_000018B4:
+lbl_world_Manager_draw_000018B4:
     li r0, 0x4
     li r27, 0x1
     stw r0, 0x5760(r28)
@@ -1970,51 +1970,51 @@ lbl_fn_80368280_000018B4:
     li r4, 0xc
     stw r27, 0x5638(r28)
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     lwz r0, 0x5668(r28)
     stw r27, 0x5630(r28)
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_000019C0
+    beq lbl_world_Manager_draw_000019C0
     lwz r0, lbl_8087FA20
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_000019C0
+    beq lbl_world_Manager_draw_000019C0
     lwz r0, 0x10d8(r28)
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_000019C0
+    beq lbl_world_Manager_draw_000019C0
     lis r3, 0x9
     lwz r4, 0x10d0(r28)
     addi r0, r3, 0x27c0
     cmpw r4, r0
-    blt lbl_fn_80368280_000019C0
+    blt lbl_world_Manager_draw_000019C0
     lwz r3, lbl_8087F8A0
     li r4, 0x1
     bl fn_8054A340
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_000019C0
+    beq lbl_world_Manager_draw_000019C0
     lwz r4, 0x10d8(r28)
     li r5, 0x0
     li r6, 0x0
     lwz r0, 0x78(r4)
     mtctr r0
     cmplwi r0, 0x0
-    ble lbl_fn_80368280_0000196C
-lbl_fn_80368280_00001944:
+    ble lbl_world_Manager_draw_0000196C
+lbl_world_Manager_draw_00001944:
     lwz r7, 0x7c(r4)
     lwzx r0, r7, r6
     cmpwi r0, 0x233c
-    bne lbl_fn_80368280_00001960
+    bne lbl_world_Manager_draw_00001960
     mulli r0, r5, 0x28
     add r7, r7, r0
-    b lbl_fn_80368280_00001970
-lbl_fn_80368280_00001960:
+    b lbl_world_Manager_draw_00001970
+lbl_world_Manager_draw_00001960:
     addi r6, r6, 0x28
     addi r5, r5, 0x1
-    bdnz lbl_fn_80368280_00001944
-lbl_fn_80368280_0000196C:
+    bdnz lbl_world_Manager_draw_00001944
+lbl_world_Manager_draw_0000196C:
     li r7, 0x0
-lbl_fn_80368280_00001970:
+lbl_world_Manager_draw_00001970:
     cmpwi r7, 0x0
-    beq lbl_fn_80368280_000019C0
+    beq lbl_world_Manager_draw_000019C0
     lfs f2, 0xc(r7)
     addi r8, r1, 0x1c
     psq_l f1, 0x4(r7), 0, 0
@@ -2033,42 +2033,42 @@ lbl_fn_80368280_00001970:
     stfs f2, 0x53c(r3)
     stfs f0, 0x24(r1)
     bl fn_8016EB48
-lbl_fn_80368280_000019C0:
+lbl_world_Manager_draw_000019C0:
     lwz r0, 0x5694(r28)
     li r3, 0x0
     stw r3, 0x5668(r28)
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_00001D20
+    beq lbl_world_Manager_draw_00001D20
     lwz r4, 0x10d8(r28)
     cmpwi r4, 0x0
-    beq lbl_fn_80368280_000019E4
+    beq lbl_world_Manager_draw_000019E4
     lwz r3, 0x64(r4)
-lbl_fn_80368280_000019E4:
+lbl_world_Manager_draw_000019E4:
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00001D20
+    beq lbl_world_Manager_draw_00001D20
     cmpwi r4, 0x0
-    beq lbl_fn_80368280_000019FC
+    beq lbl_world_Manager_draw_000019FC
     lwz r3, 0x64(r4)
-    b lbl_fn_80368280_00001A00
-lbl_fn_80368280_000019FC:
+    b lbl_world_Manager_draw_00001A00
+lbl_world_Manager_draw_000019FC:
     li r3, 0x0
-lbl_fn_80368280_00001A00:
+lbl_world_Manager_draw_00001A00:
     cmpwi r4, 0x0
     lwz r30, 0x48(r3)
-    beq lbl_fn_80368280_00001A14
+    beq lbl_world_Manager_draw_00001A14
     lwz r3, 0x64(r4)
-    b lbl_fn_80368280_00001A18
-lbl_fn_80368280_00001A14:
+    b lbl_world_Manager_draw_00001A18
+lbl_world_Manager_draw_00001A14:
     li r3, 0x0
-lbl_fn_80368280_00001A18:
+lbl_world_Manager_draw_00001A18:
     cmpwi r4, 0x0
     lwz r29, 0x4c(r3)
-    beq lbl_fn_80368280_00001A2C
+    beq lbl_world_Manager_draw_00001A2C
     lwz r3, 0x64(r4)
-    b lbl_fn_80368280_00001A30
-lbl_fn_80368280_00001A2C:
+    b lbl_world_Manager_draw_00001A30
+lbl_world_Manager_draw_00001A2C:
     li r3, 0x0
-lbl_fn_80368280_00001A30:
+lbl_world_Manager_draw_00001A30:
     lwz r26, 0x50(r3)
     mr r3, r30
     mr r4, r29
@@ -2077,10 +2077,10 @@ lbl_fn_80368280_00001A30:
     bl fn_8021771C
     cmpwi r3, 0x0
     mr r31, r3
-    beq lbl_fn_80368280_00001CF8
+    beq lbl_world_Manager_draw_00001CF8
     lwz r0, 0x44(r3)
     cmpwi r0, 0x2
-    bne lbl_fn_80368280_00001CF8
+    bne lbl_world_Manager_draw_00001CF8
     mr r3, r30
     mr r4, r29
     mr r5, r26
@@ -2088,10 +2088,10 @@ lbl_fn_80368280_00001A30:
     bl fn_8021771C
     cmpwi r3, 0x0
     mr r27, r3
-    beq lbl_fn_80368280_00001C60
+    beq lbl_world_Manager_draw_00001C60
     lwz r0, 0x44(r3)
     cmpwi r0, 0x2
-    bne lbl_fn_80368280_00001C60
+    bne lbl_world_Manager_draw_00001C60
     lwz r24, 0x0(r3)
     lis r4, lbl_8074DC1C@ha
     addi r4, r4, lbl_8074DC1C@l
@@ -2099,40 +2099,40 @@ lbl_fn_80368280_00001A30:
     mr r3, r24
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
-    bne lbl_fn_80368280_00001AE4
+    bne lbl_world_Manager_draw_00001AE4
     addi r3, r24, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r26, r3, 0x64
-    bne lbl_fn_80368280_00001AE4
+    bne lbl_world_Manager_draw_00001AE4
     mr r3, r24
     bl strlen
     cmplwi r3, 0x8
-    blt lbl_fn_80368280_00001AE4
+    blt lbl_world_Manager_draw_00001AE4
     addi r3, r24, 0x6
-    bl fn_80684600
+    bl atoi
     add r26, r26, r3
-lbl_fn_80368280_00001AE4:
+lbl_world_Manager_draw_00001AE4:
     lis r3, lbl_8074DAF8@ha
     addi r3, r3, lbl_8074DAF8@l
-    b lbl_fn_80368280_00001B04
-lbl_fn_80368280_00001AF0:
+    b lbl_world_Manager_draw_00001B04
+lbl_world_Manager_draw_00001AF0:
     cmpw r26, r0
-    bne lbl_fn_80368280_00001B00
+    bne lbl_world_Manager_draw_00001B00
     li r0, 0x1
-    b lbl_fn_80368280_00001B14
-lbl_fn_80368280_00001B00:
+    b lbl_world_Manager_draw_00001B14
+lbl_world_Manager_draw_00001B00:
     addi r3, r3, 0x4
-lbl_fn_80368280_00001B04:
+lbl_world_Manager_draw_00001B04:
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
-    bgt lbl_fn_80368280_00001AF0
+    bgt lbl_world_Manager_draw_00001AF0
     li r0, 0x0
-lbl_fn_80368280_00001B14:
+lbl_world_Manager_draw_00001B14:
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_00001C60
+    beq lbl_world_Manager_draw_00001C60
     lwz r24, 0x0(r27)
     lis r4, lbl_8074DC1C@ha
     addi r4, r4, lbl_8074DC1C@l
@@ -2140,67 +2140,67 @@ lbl_fn_80368280_00001B14:
     mr r3, r24
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
-    bne lbl_fn_80368280_00001B74
+    bne lbl_world_Manager_draw_00001B74
     addi r3, r24, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r26, r3, 0x64
-    bne lbl_fn_80368280_00001B74
+    bne lbl_world_Manager_draw_00001B74
     mr r3, r24
     bl strlen
     cmplwi r3, 0x8
-    blt lbl_fn_80368280_00001B74
+    blt lbl_world_Manager_draw_00001B74
     addi r3, r24, 0x6
-    bl fn_80684600
+    bl atoi
     add r26, r26, r3
-lbl_fn_80368280_00001B74:
+lbl_world_Manager_draw_00001B74:
     lis r4, lbl_8074DA2C@ha
     li r3, 0x0
     addi r4, r4, lbl_8074DA2C@l
-    b lbl_fn_80368280_00001BA8
-lbl_fn_80368280_00001B84:
+    b lbl_world_Manager_draw_00001BA8
+lbl_world_Manager_draw_00001B84:
     cmpw r26, r0
-    bne lbl_fn_80368280_00001BA0
+    bne lbl_world_Manager_draw_00001BA0
     mulli r0, r3, 0xc
     lis r3, lbl_8074DA2C@ha
     addi r3, r3, lbl_8074DA2C@l
     add r26, r3, r0
-    b lbl_fn_80368280_00001BB8
-lbl_fn_80368280_00001BA0:
+    b lbl_world_Manager_draw_00001BB8
+lbl_world_Manager_draw_00001BA0:
     addi r4, r4, 0xc
     addi r3, r3, 0x1
-lbl_fn_80368280_00001BA8:
+lbl_world_Manager_draw_00001BA8:
     lwz r0, 0x0(r4)
     cmpwi r0, 0x0
-    bgt lbl_fn_80368280_00001B84
+    bgt lbl_world_Manager_draw_00001B84
     li r26, 0x0
-lbl_fn_80368280_00001BB8:
+lbl_world_Manager_draw_00001BB8:
     cmpwi r26, 0x0
-    bne lbl_fn_80368280_00001BFC
+    bne lbl_world_Manager_draw_00001BFC
     lwz r4, 0x48(r27)
     li r3, 0x2
     bl fn_802085E0
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00001C60
+    beq lbl_world_Manager_draw_00001C60
     lwz r3, 0x60(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00001C60
+    beq lbl_world_Manager_draw_00001C60
     lwz r5, 0x10d0(r28)
     lwz r0, 0x4(r3)
     srawi r4, r5, 31
     srwi r3, r0, 31
     subfc r0, r0, r5
     adde r25, r4, r3
-    b lbl_fn_80368280_00001C60
-lbl_fn_80368280_00001BFC:
+    b lbl_world_Manager_draw_00001C60
+lbl_world_Manager_draw_00001BFC:
     lwz r5, 0x4(r26)
     cmplwi r5, 0xfff
-    ble lbl_fn_80368280_00001C40
+    ble lbl_world_Manager_draw_00001C40
     lwz r0, lbl_8087EEB8
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_00001C38
+    beq lbl_world_Manager_draw_00001C38
     lis r4, lbl_8074DC1C@ha
     addi r3, r1, 0x220
     addi r4, r4, lbl_8074DC1C@l
@@ -2210,22 +2210,22 @@ lbl_fn_80368280_00001BFC:
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x220
     bl fn_800697D8
-lbl_fn_80368280_00001C38:
+lbl_world_Manager_draw_00001C38:
     li r5, 0x0
-    b lbl_fn_80368280_00001C4C
-lbl_fn_80368280_00001C40:
+    b lbl_world_Manager_draw_00001C4C
+lbl_world_Manager_draw_00001C40:
     slwi r0, r5, 2
     add r3, r28, r0
     lwz r5, 0x10e4(r3)
-lbl_fn_80368280_00001C4C:
+lbl_world_Manager_draw_00001C4C:
     lwz r0, 0x8(r26)
     srawi r4, r5, 31
     srwi r3, r0, 31
     subfc r0, r0, r5
     adde r25, r4, r3
-lbl_fn_80368280_00001C60:
+lbl_world_Manager_draw_00001C60:
     cmpwi r25, 0x0
-    beq lbl_fn_80368280_00001CF8
+    beq lbl_world_Manager_draw_00001CF8
     lwz r24, 0x0(r31)
     lis r4, lbl_8074DC1C@ha
     addi r4, r4, lbl_8074DC1C@l
@@ -2233,142 +2233,142 @@ lbl_fn_80368280_00001C60:
     mr r3, r24
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
-    bne lbl_fn_80368280_00001CC0
+    bne lbl_world_Manager_draw_00001CC0
     addi r3, r24, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r25, r3, 0x64
-    bne lbl_fn_80368280_00001CC0
+    bne lbl_world_Manager_draw_00001CC0
     mr r3, r24
     bl strlen
     cmplwi r3, 0x8
-    blt lbl_fn_80368280_00001CC0
+    blt lbl_world_Manager_draw_00001CC0
     addi r3, r24, 0x6
-    bl fn_80684600
+    bl atoi
     add r25, r25, r3
-lbl_fn_80368280_00001CC0:
+lbl_world_Manager_draw_00001CC0:
     lis r3, lbl_8074DB70@ha
     addi r3, r3, lbl_8074DB70@l
-    b lbl_fn_80368280_00001CE0
-lbl_fn_80368280_00001CCC:
+    b lbl_world_Manager_draw_00001CE0
+lbl_world_Manager_draw_00001CCC:
     cmpw r25, r0
-    bne lbl_fn_80368280_00001CDC
+    bne lbl_world_Manager_draw_00001CDC
     li r0, 0x1
-    b lbl_fn_80368280_00001CF0
-lbl_fn_80368280_00001CDC:
+    b lbl_world_Manager_draw_00001CF0
+lbl_world_Manager_draw_00001CDC:
     addi r3, r3, 0x4
-lbl_fn_80368280_00001CE0:
+lbl_world_Manager_draw_00001CE0:
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
-    bgt lbl_fn_80368280_00001CCC
+    bgt lbl_world_Manager_draw_00001CCC
     li r0, 0x0
-lbl_fn_80368280_00001CF0:
+lbl_world_Manager_draw_00001CF0:
     cntlzw r0, r0
     srwi r25, r0, 5
-lbl_fn_80368280_00001CF8:
+lbl_world_Manager_draw_00001CF8:
     cmpwi r25, 0x0
-    beq lbl_fn_80368280_00001D20
+    beq lbl_world_Manager_draw_00001D20
     cmpwi r30, 0x2
-    bne lbl_fn_80368280_00001D18
+    bne lbl_world_Manager_draw_00001D18
     cmpwi r29, 0x9
-    bne lbl_fn_80368280_00001D18
+    bne lbl_world_Manager_draw_00001D18
     li r0, 0x0
-    b lbl_fn_80368280_00001D24
-lbl_fn_80368280_00001D18:
+    b lbl_world_Manager_draw_00001D24
+lbl_world_Manager_draw_00001D18:
     li r0, 0x1
-    b lbl_fn_80368280_00001D24
-lbl_fn_80368280_00001D20:
+    b lbl_world_Manager_draw_00001D24
+lbl_world_Manager_draw_00001D20:
     li r0, 0x0
-lbl_fn_80368280_00001D24:
+lbl_world_Manager_draw_00001D24:
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_00001D4C
+    beq lbl_world_Manager_draw_00001D4C
     lwz r0, 0x17e4(r28)
     cmpwi r0, 0x0
-    bne lbl_fn_80368280_00001D4C
+    bne lbl_world_Manager_draw_00001D4C
     mr r3, r28
     li r4, 0x1c0
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
-lbl_fn_80368280_00001D4C:
+    bl world_setGlobalFlag
+lbl_world_Manager_draw_00001D4C:
     lwz r5, 0x5544(r28)
     li r0, 0x0
     stw r0, 0x54ec(r28)
     cmpwi r5, 0x0
-    beq lbl_fn_80368280_00001D6C
+    beq lbl_world_Manager_draw_00001D6C
     lwz r3, lbl_8087F518
     lwz r4, 0x554c(r28)
     bl fn_8046F96C
-lbl_fn_80368280_00001D6C:
+lbl_world_Manager_draw_00001D6C:
     li r24, 0x0
     li r29, 0x0
-    b lbl_fn_80368280_00001D8C
-lbl_fn_80368280_00001D78:
+    b lbl_world_Manager_draw_00001D8C
+lbl_world_Manager_draw_00001D78:
     lwz r3, 0x5558(r28)
     lwzx r3, r3, r29
     bl fn_800D8458
     addi r24, r24, 0x1
     addi r29, r29, 0x4
-lbl_fn_80368280_00001D8C:
+lbl_world_Manager_draw_00001D8C:
     lwz r0, 0x5550(r28)
     cmplw r24, r0
-    blt lbl_fn_80368280_00001D78
+    blt lbl_world_Manager_draw_00001D78
     lwz r3, 0x554c(r28)
     li r29, 0x0
     stw r29, 0x5544(r28)
     cmpwi r3, 0x0
     stw r29, 0x5548(r28)
-    beq lbl_fn_80368280_00001DB8
-    bl fn_80084C24
+    beq lbl_world_Manager_draw_00001DB8
+    bl mem_getAllocSize
     stw r29, 0x554c(r28)
-lbl_fn_80368280_00001DB8:
+lbl_world_Manager_draw_00001DB8:
     lwz r3, 0x5558(r28)
     li r29, 0x0
     stw r29, 0x5550(r28)
     cmpwi r3, 0x0
     stw r29, 0x5554(r28)
-    beq lbl_fn_80368280_00001DD8
-    bl fn_80084C24
+    beq lbl_world_Manager_draw_00001DD8
+    bl mem_getAllocSize
     stw r29, 0x5558(r28)
-lbl_fn_80368280_00001DD8:
+lbl_world_Manager_draw_00001DD8:
     addi r3, r28, 0x550c
-    bl fn_80470580
+    bl boss_getOffset54
     mr r24, r3
     addi r3, r28, 0x550c
-    bl fn_8047059C
+    bl boss_getOffset50
     cmpwi r24, 0x0
     srwi r5, r3, 2
-    beq lbl_fn_80368280_00001E0C
+    beq lbl_world_Manager_draw_00001E0C
     lwz r3, lbl_8087F518
     mr r4, r24
     bl fn_8046F96C
     addi r3, r28, 0x550c
     bl fn_80473F88
-lbl_fn_80368280_00001E0C:
+lbl_world_Manager_draw_00001E0C:
     lwz r3, lbl_8087F448
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00001E58
+    beq lbl_world_Manager_draw_00001E58
     lwz r0, 0x84(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_00001E2C
+    beq lbl_world_Manager_draw_00001E2C
     lwz r0, 0xc4(r3)
-    b lbl_fn_80368280_00001E30
-lbl_fn_80368280_00001E2C:
+    b lbl_world_Manager_draw_00001E30
+lbl_world_Manager_draw_00001E2C:
     lwz r0, 0x8c(r3)
-lbl_fn_80368280_00001E30:
+lbl_world_Manager_draw_00001E30:
     cmpwi r0, 0x0
-    ble lbl_fn_80368280_00001E58
+    ble lbl_world_Manager_draw_00001E58
     bl fn_8037D34C
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00001E58
+    beq lbl_world_Manager_draw_00001E58
     lwz r3, lbl_8087F448
     li r4, 0x0
     li r5, 0x10
     li r6, 0x2d
     bl fn_8037D3E8
-lbl_fn_80368280_00001E58:
+lbl_world_Manager_draw_00001E58:
     lwz r3, lbl_8087F4E8
     li r0, 0x1
     stw r0, 0x88(r3)
@@ -2382,95 +2382,95 @@ lbl_fn_80368280_00001E58:
     stw r0, 0x74(r25)
     subfe r0, r5, r3
     stw r0, 0x70(r25)
-    b lbl_fn_80368280_000031A0
-lbl_fn_80368280_00001E90:
+    b lbl_world_Manager_draw_000031A0
+lbl_world_Manager_draw_00001E90:
     lwz r0, 0x54e4(r3)
     lwz r4, lbl_8087F8A0
     cmpwi r0, 0x0
     lwz r4, 0x48(r4)
-    bne lbl_fn_80368280_00001EEC
+    bne lbl_world_Manager_draw_00001EEC
     lwz r0, 0x12a4(r4)
     li r5, 0x0
     srwi. r0, r0, 31
-    beq lbl_fn_80368280_00001EC4
+    beq lbl_world_Manager_draw_00001EC4
     lwz r0, 0xc48(r4)
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_00001EC4
+    beq lbl_world_Manager_draw_00001EC4
     li r5, 0x1
-lbl_fn_80368280_00001EC4:
+lbl_world_Manager_draw_00001EC4:
     cmpwi r5, 0x0
-    bne lbl_fn_80368280_00001ED8
+    bne lbl_world_Manager_draw_00001ED8
     lwz r0, 0x12a4(r4)
     extrwi. r0, r0, 1, 25
-    beq lbl_fn_80368280_00001EEC
-lbl_fn_80368280_00001ED8:
+    beq lbl_world_Manager_draw_00001EEC
+lbl_world_Manager_draw_00001ED8:
     lwz r4, lbl_8087EFB4
     li r0, 0x1
     addis r4, r4, 0x5
     stw r0, 0x4964(r4)
-    b lbl_fn_80368280_00001EFC
-lbl_fn_80368280_00001EEC:
+    b lbl_world_Manager_draw_00001EFC
+lbl_world_Manager_draw_00001EEC:
     lwz r4, lbl_8087EFB4
     li r0, 0x0
     addis r4, r4, 0x5
     stw r0, 0x4964(r4)
-lbl_fn_80368280_00001EFC:
+lbl_world_Manager_draw_00001EFC:
     lwz r0, 0x5674(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80368280_00001F28
+    bne lbl_world_Manager_draw_00001F28
     lwz r3, lbl_8087F0A8
     li r4, 0x9
     addi r3, r3, 0x48c
     bl fn_801240B4
     cmpwi r3, 0x0
-    bne lbl_fn_80368280_00001F28
+    bne lbl_world_Manager_draw_00001F28
     li r0, 0x1
     stw r0, 0x5674(r28)
-lbl_fn_80368280_00001F28:
+lbl_world_Manager_draw_00001F28:
     lwz r0, 0x566c(r28)
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_00001F48
+    beq lbl_world_Manager_draw_00001F48
     li r0, 0x0
     stw r0, 0x566c(r28)
     mr r3, r28
-    bl fn_80370CD0
-    b lbl_fn_80368280_000031A0
-lbl_fn_80368280_00001F48:
+    bl world_startTransitionFade
+    b lbl_world_Manager_draw_000031A0
+lbl_world_Manager_draw_00001F48:
     lwz r3, lbl_8087F0A8
     lwz r0, 0x194(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_0000218C
+    beq lbl_world_Manager_draw_0000218C
     lwz r0, 0x54e4(r28)
     cmpwi r0, 0x8
-    bne lbl_fn_80368280_00001F70
+    bne lbl_world_Manager_draw_00001F70
     lwz r3, 0x5744(r28)
     subi r0, r3, 0x1
     stw r0, 0x5744(r28)
-lbl_fn_80368280_00001F70:
+lbl_world_Manager_draw_00001F70:
     lwz r0, 0x5744(r28)
     cmplwi r0, 0x5460
-    blt lbl_fn_80368280_0000218C
+    blt lbl_world_Manager_draw_0000218C
     lwz r0, 0x54e4(r28)
     cmpwi r0, 0x6
-    bne lbl_fn_80368280_00001FA4
+    bne lbl_world_Manager_draw_00001FA4
     lwz r3, 0x575c(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_0000218C
-    bl fn_800D2338
+    beq lbl_world_Manager_draw_0000218C
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0x575c(r28)
-    b lbl_fn_80368280_0000218C
-lbl_fn_80368280_00001FA4:
+    b lbl_world_Manager_draw_0000218C
+lbl_world_Manager_draw_00001FA4:
     lwz r3, 0x575c(r28)
     cmpwi r3, 0x0
-    bne lbl_fn_80368280_0000204C
+    bne lbl_world_Manager_draw_0000204C
     cmpwi r0, 0x8
-    bne lbl_fn_80368280_00001FC8
+    bne lbl_world_Manager_draw_00001FC8
     lwz r3, lbl_8087F540
     lwz r0, 0x70(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80368280_0000218C
-lbl_fn_80368280_00001FC8:
+    bne lbl_world_Manager_draw_0000218C
+lbl_world_Manager_draw_00001FC8:
     mr r3, r28
     li r4, 0x3c
     li r5, 0x0
@@ -2488,7 +2488,7 @@ lbl_fn_80368280_00001FC8:
     stw r0, 0x48(r3)
     lwz r3, lbl_8087EFE8
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_0000218C
+    beq lbl_world_Manager_draw_0000218C
     lfs f1, lbl_8088570C
     li r4, 0x0
     li r5, 0x3c
@@ -2503,19 +2503,19 @@ lbl_fn_80368280_00001FC8:
     lfs f1, lbl_8088570C
     li r5, 0x3c
     bl fn_800D0240
-    b lbl_fn_80368280_0000218C
-lbl_fn_80368280_0000204C:
+    b lbl_world_Manager_draw_0000218C
+lbl_world_Manager_draw_0000204C:
     lwz r0, 0x54(r3)
     lwz r3, 0x4c(r3)
     cmpw r3, r0
-    blt lbl_fn_80368280_0000218C
+    blt lbl_world_Manager_draw_0000218C
     lwz r3, 0x10d8(r28)
     lwz r3, 0x64(r3)
     lwz r0, 0x48(r3)
     cmpwi r0, 0x3
-    beq lbl_fn_80368280_00002094
+    beq lbl_world_Manager_draw_00002094
     cmpwi r0, 0x4
-    beq lbl_fn_80368280_00002094
+    beq lbl_world_Manager_draw_00002094
     lwz r3, 0x5624(r28)
     li r0, 0x12
     stw r0, 0x78(r3)
@@ -2523,43 +2523,43 @@ lbl_fn_80368280_0000204C:
     bl fn_8006A900
     li r0, 0x1
     stw r0, 0x566c(r28)
-lbl_fn_80368280_00002094:
+lbl_world_Manager_draw_00002094:
     lwz r3, 0x56ec(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_000020AC
+    beq lbl_world_Manager_draw_000020AC
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
-lbl_fn_80368280_000020AC:
+lbl_world_Manager_draw_000020AC:
     lwz r3, 0x56f0(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_000020C4
+    beq lbl_world_Manager_draw_000020C4
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
-lbl_fn_80368280_000020C4:
+lbl_world_Manager_draw_000020C4:
     lwz r3, lbl_8087F580
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_000020D4
+    beq lbl_world_Manager_draw_000020D4
     bl fn_804A2FBC
-lbl_fn_80368280_000020D4:
+lbl_world_Manager_draw_000020D4:
     lwz r3, lbl_8087F3C0
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F540
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, 0x567c(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00002108
+    beq lbl_world_Manager_draw_00002108
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
-lbl_fn_80368280_00002108:
+lbl_world_Manager_draw_00002108:
     lwz r3, lbl_8087EFE8
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_0000215C
+    beq lbl_world_Manager_draw_0000215C
     li r4, 0x0
     li r5, 0x0
     bl fn_800CF45C
@@ -2578,10 +2578,10 @@ lbl_fn_80368280_00002108:
     lfs f1, lbl_80885708
     li r5, 0x0
     bl fn_800D0240
-lbl_fn_80368280_0000215C:
+lbl_world_Manager_draw_0000215C:
     lwz r3, lbl_8087F418
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_0000218C
+    beq lbl_world_Manager_draw_0000218C
     li r4, 0x0
     li r5, 0x1
     li r6, 0x0
@@ -2591,26 +2591,26 @@ lbl_fn_80368280_0000215C:
     li r5, 0x1
     li r6, 0x0
     bl fn_80360780
-lbl_fn_80368280_0000218C:
+lbl_world_Manager_draw_0000218C:
     lwz r0, 0x5684(r28)
     lwz r3, 0x5760(r28)
     cmpwi r0, 0x0
     subi r0, r3, 0x1
     stw r0, 0x5760(r28)
-    beq lbl_fn_80368280_000021C4
+    beq lbl_world_Manager_draw_000021C4
     mr r3, r28
-    bl fn_8036E170
+    bl wpad_accel_updateOrientation
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_000021BC
+    beq lbl_world_Manager_draw_000021BC
     mr r3, r28
     bl fn_8036E494
-lbl_fn_80368280_000021BC:
+lbl_world_Manager_draw_000021BC:
     li r0, 0x0
     stw r0, 0x5684(r28)
-lbl_fn_80368280_000021C4:
+lbl_world_Manager_draw_000021C4:
     lwz r0, 0x54e4(r28)
     cmplwi r0, 0xe
-    bgt lbl_fn_80368280_00002F18
+    bgt lbl_world_Manager_draw_00002F18
     lis r3, jumptable_8078A22C@ha
     slwi r0, r0, 2
     addi r3, r3, jumptable_8078A22C@l
@@ -2620,33 +2620,33 @@ lbl_fn_80368280_000021C4:
     lwz r3, 0x5620(r28)
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80368280_00002F18
+    bne lbl_world_Manager_draw_00002F18
     li r0, 0x0
     stw r0, 0x54f0(r28)
-    b lbl_fn_80368280_00002F18
+    b lbl_world_Manager_draw_00002F18
     lwz r3, 0x5750(r28)
     lwz r0, 0xbc(r3)
     cmpwi r0, 0x1
-    bne lbl_fn_80368280_00002F18
+    bne lbl_world_Manager_draw_00002F18
     lwz r25, 0xb0(r3)
     mr r3, r28
     bl fn_8036EE0C
     lwz r0, 0x5754(r28)
     cmpwi r0, 0x1
-    bne lbl_fn_80368280_00002244
+    bne lbl_world_Manager_draw_00002244
     lwz r4, 0x5758(r28)
     mr r3, r28
     mr r5, r25
     li r6, 0x0
-    bl fn_80370320
-    b lbl_fn_80368280_000022B8
-lbl_fn_80368280_00002244:
+    bl world_setGlobalFlag
+    b lbl_world_Manager_draw_000022B8
+lbl_world_Manager_draw_00002244:
     lwz r5, 0x5758(r28)
     cmplwi r5, 0xff
-    ble lbl_fn_80368280_00002284
+    ble lbl_world_Manager_draw_00002284
     lwz r0, lbl_8087EEB8
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_000022B8
+    beq lbl_world_Manager_draw_000022B8
     lis r4, lbl_8074DC1C@ha
     addi r3, r1, 0x120
     addi r4, r4, lbl_8074DC1C@l
@@ -2656,42 +2656,42 @@ lbl_fn_80368280_00002244:
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x120
     bl fn_800697D8
-    b lbl_fn_80368280_000022B8
-lbl_fn_80368280_00002284:
+    b lbl_world_Manager_draw_000022B8
+lbl_world_Manager_draw_00002284:
     slwi r0, r5, 2
     add r3, r28, r0
     lwz r6, 0x50e4(r3)
     stw r25, 0x50e4(r3)
     lwz r3, 0x10d8(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_000022B8
+    beq lbl_world_Manager_draw_000022B8
     lwz r3, 0x134(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_000022B8
+    beq lbl_world_Manager_draw_000022B8
     mr r7, r25
     li r4, 0x0
     bl fn_803AB96C
-lbl_fn_80368280_000022B8:
+lbl_world_Manager_draw_000022B8:
     lwz r3, 0x5750(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00002F18
-    bl fn_800D2338
+    beq lbl_world_Manager_draw_00002F18
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0x5750(r28)
-    b lbl_fn_80368280_00002F18
+    b lbl_world_Manager_draw_00002F18
     lwz r3, lbl_8087F490
     lwz r0, 0xd8c(r3)
     cmpwi r0, 0x1
-    bne lbl_fn_80368280_00002348
+    bne lbl_world_Manager_draw_00002348
     lwz r3, lbl_8087F0A8
     li r4, 0x0
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00002348
+    beq lbl_world_Manager_draw_00002348
     lwz r0, 0x56f4(r28)
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_0000233C
+    beq lbl_world_Manager_draw_0000233C
     lwz r0, 0x5718(r28)
     mr r3, r28
     slwi r0, r0, 2
@@ -2705,33 +2705,33 @@ lbl_fn_80368280_000022B8:
     stw r4, 0x5718(r28)
     subi r0, r3, 0x1
     stw r0, 0x56f4(r28)
-lbl_fn_80368280_0000233C:
+lbl_world_Manager_draw_0000233C:
     lwz r3, lbl_8087F490
     bl fn_803E4478
-    b lbl_fn_80368280_00002F18
-lbl_fn_80368280_00002348:
+    b lbl_world_Manager_draw_00002F18
+lbl_world_Manager_draw_00002348:
     lwz r3, lbl_8087F490
     lwz r0, 0xd8c(r3)
     cmpwi r0, 0x1
-    beq lbl_fn_80368280_0000236C
+    beq lbl_world_Manager_draw_0000236C
     lwz r0, 0x56f4(r28)
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_0000236C
+    beq lbl_world_Manager_draw_0000236C
     li r0, 0x0
     stw r0, 0x56f4(r28)
-lbl_fn_80368280_0000236C:
+lbl_world_Manager_draw_0000236C:
     lwz r3, lbl_8087F8A0
     lwz r3, 0x48(r3)
     bl fn_800E3F5C
     lwz r4, 0x56a4(r28)
     cmpwi r4, 0x0
-    ble lbl_fn_80368280_000024B8
+    ble lbl_world_Manager_draw_000024B8
     lwz r3, 0x569c(r28)
     cmpwi r3, 0x0
-    ble lbl_fn_80368280_00002454
+    ble lbl_world_Manager_draw_00002454
     subic. r0, r3, 0x1
     stw r0, 0x569c(r28)
-    bgt lbl_fn_80368280_000024B8
+    bgt lbl_world_Manager_draw_000024B8
     lwz r7, lbl_8087EFA8
     li r0, 0x1
     lfs f0, lbl_80885748
@@ -2777,11 +2777,11 @@ lbl_fn_80368280_0000236C:
     stfs f3, 0x118(r1)
     stw r0, 0xf8(r1)
     stfs f0, 0x3a4(r3)
-    b lbl_fn_80368280_000024B8
-lbl_fn_80368280_00002454:
+    b lbl_world_Manager_draw_000024B8
+lbl_world_Manager_draw_00002454:
     subic. r0, r4, 0x1
     stw r0, 0x56a4(r28)
-    bgt lbl_fn_80368280_000024B8
+    bgt lbl_world_Manager_draw_000024B8
     lwz r3, lbl_8087EFA8
     lwz r0, 0x56a8(r28)
     stw r0, 0x240(r3)
@@ -2804,10 +2804,10 @@ lbl_fn_80368280_00002454:
     lwz r3, lbl_8087EFA8
     lfs f0, 0x56cc(r28)
     stfs f0, 0x3a4(r3)
-lbl_fn_80368280_000024B8:
+lbl_world_Manager_draw_000024B8:
     lwz r4, 0x10e8(r28)
     cmpwi r4, 0xa
-    blt lbl_fn_80368280_000024E4
+    blt lbl_world_Manager_draw_000024E4
     lis r3, 0x6666
     addi r0, r3, 0x6667
     mulhw r0, r0, r4
@@ -2815,143 +2815,143 @@ lbl_fn_80368280_000024B8:
     srwi r3, r0, 31
     add r0, r0, r3
     stw r0, 0x10ec(r28)
-    b lbl_fn_80368280_00002500
-lbl_fn_80368280_000024E4:
+    b lbl_world_Manager_draw_00002500
+lbl_world_Manager_draw_000024E4:
     cmpwi r4, -0xa
-    bgt lbl_fn_80368280_000024F8
+    bgt lbl_world_Manager_draw_000024F8
     li r0, -0x1
     stw r0, 0x10ec(r28)
-    b lbl_fn_80368280_00002500
-lbl_fn_80368280_000024F8:
+    b lbl_world_Manager_draw_00002500
+lbl_world_Manager_draw_000024F8:
     li r0, 0x0
     stw r0, 0x10ec(r28)
-lbl_fn_80368280_00002500:
+lbl_world_Manager_draw_00002500:
     lwz r3, 0x5590(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00002510
+    beq lbl_world_Manager_draw_00002510
     bl fn_8056C3DC
-lbl_fn_80368280_00002510:
+lbl_world_Manager_draw_00002510:
     lwz r3, 0x5620(r28)
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80368280_00002528
+    bne lbl_world_Manager_draw_00002528
     li r0, 0x0
     stw r0, 0x54f0(r28)
-lbl_fn_80368280_00002528:
+lbl_world_Manager_draw_00002528:
     lwz r0, 0x868(r28)
     cmpwi r0, 0x1
-    bne lbl_fn_80368280_00002540
+    bne lbl_world_Manager_draw_00002540
     mr r3, r28
     bl fn_8036CFA4
-    b lbl_fn_80368280_0000265C
-lbl_fn_80368280_00002540:
+    b lbl_world_Manager_draw_0000265C
+lbl_world_Manager_draw_00002540:
     lwz r3, lbl_8087F490
     bl fn_803E32EC
     lwz r3, lbl_8087F8A0
     lwz r4, 0x48(r3)
     lwz r0, 0x648(r4)
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_000025EC
+    beq lbl_world_Manager_draw_000025EC
     lwz r3, lbl_8087F0A8
     li r4, 0xb
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_000025B0
+    beq lbl_world_Manager_draw_000025B0
     lwz r3, 0x5590(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_000025B0
+    beq lbl_world_Manager_draw_000025B0
     bl fn_80570A50
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_000025B0
+    beq lbl_world_Manager_draw_000025B0
     lwz r0, 0x5594(r28)
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_000025B0
+    beq lbl_world_Manager_draw_000025B0
     lwz r0, 0x55a4(r28)
     cmpwi r0, 0x0
-    ble lbl_fn_80368280_000025B0
+    ble lbl_world_Manager_draw_000025B0
     mr r3, r28
     bl fn_803731E8
-    b lbl_fn_80368280_0000265C
-lbl_fn_80368280_000025B0:
+    b lbl_world_Manager_draw_0000265C
+lbl_world_Manager_draw_000025B0:
     lwz r3, 0x868(r28)
     cmpwi r3, 0x6
-    bne lbl_fn_80368280_000025E0
+    bne lbl_world_Manager_draw_000025E0
     lwz r0, 0x86c(r28)
     cmpw r3, r0
-    bne lbl_fn_80368280_000025E0
+    bne lbl_world_Manager_draw_000025E0
     lwz r3, lbl_8087F9F8
     lwz r0, 0xa70(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80368280_000025E0
+    bne lbl_world_Manager_draw_000025E0
     addi r3, r28, 0x6c
     bl fn_80390A88
-lbl_fn_80368280_000025E0:
+lbl_world_Manager_draw_000025E0:
     mr r3, r28
     bl fn_8036CC90
-    b lbl_fn_80368280_0000265C
-lbl_fn_80368280_000025EC:
+    b lbl_world_Manager_draw_0000265C
+lbl_world_Manager_draw_000025EC:
     lwz r0, 0x55c(r4)
     cmpwi r0, 0x5
-    bne lbl_fn_80368280_0000260C
+    bne lbl_world_Manager_draw_0000260C
     addi r3, r28, 0x6c
     bl fn_8038F52C
     addi r3, r28, 0x6c
     bl fn_8037F744
-    b lbl_fn_80368280_00002614
-lbl_fn_80368280_0000260C:
+    b lbl_world_Manager_draw_00002614
+lbl_world_Manager_draw_0000260C:
     mr r3, r28
     bl fn_8036CC90
-lbl_fn_80368280_00002614:
+lbl_world_Manager_draw_00002614:
     lwz r0, lbl_8087FA20
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_0000265C
+    beq lbl_world_Manager_draw_0000265C
     lwz r3, lbl_8087F0A8
     li r4, 0x2d
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_0000265C
+    beq lbl_world_Manager_draw_0000265C
     lwz r0, 0x56f0(r28)
     cmpwi r0, 0x0
-    bne lbl_fn_80368280_0000265C
+    bne lbl_world_Manager_draw_0000265C
     lwz r3, lbl_8087FA20
     lwz r3, 0x258(r3)
     lwz r0, 0x160c(r3)
     cntlzw r0, r0
     srwi r0, r0, 5
     stw r0, 0x160c(r3)
-lbl_fn_80368280_0000265C:
+lbl_world_Manager_draw_0000265C:
     addi r3, r28, 0xd18
     bl fn_803792F0
-    b lbl_fn_80368280_00002F18
+    b lbl_world_Manager_draw_00002F18
     lwz r3, lbl_8087F440
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00002F18
+    beq lbl_world_Manager_draw_00002F18
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_80368280_00002F18
+    beq lbl_world_Manager_draw_00002F18
     lwz r3, 0x5624(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00002F18
+    beq lbl_world_Manager_draw_00002F18
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_00002F18
+    beq lbl_world_Manager_draw_00002F18
     lwz r0, 0x4c(r3)
     cmpwi r0, 0x1
-    bgt lbl_fn_80368280_00002F18
+    bgt lbl_world_Manager_draw_00002F18
     li r0, 0x0
     stw r0, 0x4c(r3)
     li r0, 0x2
     lwz r3, 0x5624(r28)
     stw r0, 0x58(r3)
-    b lbl_fn_80368280_00002F18
+    b lbl_world_Manager_draw_00002F18
     mr r3, r28
     bl fn_80373AE8
     lwz r0, 0x10ac(r28)
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_000026F4
+    beq lbl_world_Manager_draw_000026F4
     lwz r5, lbl_8087F8A0
     li r4, 0x0
     lwz r3, 0x10d8(r28)
@@ -2959,8 +2959,8 @@ lbl_fn_80368280_0000265C:
     lwz r3, 0x64(r3)
     addi r5, r5, 0x528
     bl fn_804A0580
-    b lbl_fn_80368280_00002710
-lbl_fn_80368280_000026F4:
+    b lbl_world_Manager_draw_00002710
+lbl_world_Manager_draw_000026F4:
     lwz r5, lbl_8087F8A0
     li r4, 0x1
     lwz r3, 0x10d8(r28)
@@ -2968,19 +2968,19 @@ lbl_fn_80368280_000026F4:
     lwz r3, 0x64(r3)
     addi r5, r5, 0x528
     bl fn_804A0580
-lbl_fn_80368280_00002710:
+lbl_world_Manager_draw_00002710:
     lwz r0, 0x5598(r28)
     cmpwi r0, 0x0
-    bne lbl_fn_80368280_00002F18
+    bne lbl_world_Manager_draw_00002F18
     lwz r0, 0x55ac(r28)
     cmpwi r0, 0x1
-    bne lbl_fn_80368280_00002F18
+    bne lbl_world_Manager_draw_00002F18
     addi r3, r28, 0x6c
     li r24, 0x0
     bl fn_8037F744
     lwz r6, lbl_8087F490
     cmpwi r6, 0x0
-    beq lbl_fn_80368280_00002788
+    beq lbl_world_Manager_draw_00002788
     li r3, 0x6
     stw r3, 0x764(r6)
     li r4, 0x0
@@ -2999,32 +2999,32 @@ lbl_fn_80368280_00002710:
     stw r3, 0x88(r1)
     stw r0, 0x8c(r1)
     stw r4, 0x77c(r6)
-lbl_fn_80368280_00002788:
+lbl_world_Manager_draw_00002788:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
     bl fn_800A555C
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_000027A4
+    beq lbl_world_Manager_draw_000027A4
     li r24, 0x1
-lbl_fn_80368280_000027A4:
+lbl_world_Manager_draw_000027A4:
     cmpwi r24, 0x0
-    beq lbl_fn_80368280_000027B4
+    beq lbl_world_Manager_draw_000027B4
     mr r3, r28
     bl fn_803737C0
-lbl_fn_80368280_000027B4:
+lbl_world_Manager_draw_000027B4:
     lwz r3, 0x55a4(r28)
     subi r0, r3, 0x1
     stw r0, 0x55a4(r28)
-    b lbl_fn_80368280_00002F18
+    b lbl_world_Manager_draw_00002F18
     lwz r0, 0x86c(r28)
     lwz r3, 0x868(r28)
     cmpw r3, r0
-    bne lbl_fn_80368280_000027E0
+    bne lbl_world_Manager_draw_000027E0
     lwz r3, lbl_8087EFA8
     li r0, 0x0
     stw r0, 0x240(r3)
-lbl_fn_80368280_000027E0:
+lbl_world_Manager_draw_000027E0:
     lwz r3, lbl_8087F3C0
     li r4, 0x5
     bl fn_8023A614
@@ -3043,10 +3043,10 @@ lbl_fn_80368280_000027E0:
     lwz r3, lbl_8087F9F8
     lwz r0, 0xa70(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80368280_00002F18
+    bne lbl_world_Manager_draw_00002F18
     mr r3, r28
     bl fn_803743AC
-    b lbl_fn_80368280_00002F18
+    b lbl_world_Manager_draw_00002F18
     lwz r3, lbl_8087F540
     lwz r0, 0x1a38(r3)
     mulli r0, r0, 0x65c
@@ -3054,53 +3054,53 @@ lbl_fn_80368280_000027E0:
     addi r3, r3, 0xc8
     bl fn_80116E7C
     cmpwi r3, 0x0
-    bne lbl_fn_80368280_00002860
+    bne lbl_world_Manager_draw_00002860
     mr r3, r28
     bl fn_8036CFA4
-lbl_fn_80368280_00002860:
+lbl_world_Manager_draw_00002860:
     lwz r3, lbl_8087F540
     lwz r4, lbl_8087F9C0
     lwz r3, 0x70(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_0000288C
+    beq lbl_world_Manager_draw_0000288C
     lwz r0, 0x194(r3)
     cmpwi r0, 0xa
-    bne lbl_fn_80368280_0000288C
+    bne lbl_world_Manager_draw_0000288C
     lwz r3, 0x5650(r28)
     addi r0, r3, 0x1
     stw r0, 0x5650(r28)
-lbl_fn_80368280_0000288C:
+lbl_world_Manager_draw_0000288C:
     lwz r0, 0x5650(r28)
     cmpwi r0, 0x5a
-    bgt lbl_fn_80368280_000028A4
+    bgt lbl_world_Manager_draw_000028A4
     lwz r0, 0x80(r4)
     cmpwi r0, 0x2
-    bne lbl_fn_80368280_00002A4C
-lbl_fn_80368280_000028A4:
+    bne lbl_world_Manager_draw_00002A4C
+lbl_world_Manager_draw_000028A4:
     lwz r3, lbl_8087F540
     lwz r3, 0x70(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00002A4C
+    beq lbl_world_Manager_draw_00002A4C
     lwz r4, lbl_8087F0A8
     lwz r0, 0x194(r4)
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_000028D0
+    beq lbl_world_Manager_draw_000028D0
     lwz r0, 0x190(r3)
     cmpwi r0, 0x19d
-    beq lbl_fn_80368280_00002A4C
-lbl_fn_80368280_000028D0:
+    beq lbl_world_Manager_draw_00002A4C
+lbl_world_Manager_draw_000028D0:
     bl fn_80541214
     lwz r3, 0x10(r3)
     subi r0, r3, 0x1
     cmplwi r0, 0x1
-    ble lbl_fn_80368280_000028F0
+    ble lbl_world_Manager_draw_000028F0
     cmpwi r3, 0x3
-    beq lbl_fn_80368280_00002980
-    b lbl_fn_80368280_00002A40
-lbl_fn_80368280_000028F0:
+    beq lbl_world_Manager_draw_00002980
+    b lbl_world_Manager_draw_00002A40
+lbl_world_Manager_draw_000028F0:
     lwz r3, 0x5654(r28)
     cmpwi r3, 0x0
-    ble lbl_fn_80368280_0000295C
+    ble lbl_world_Manager_draw_0000295C
     subi r0, r3, 0x1
     stw r0, 0x5654(r28)
     lis r6, lbl_807C7030@ha
@@ -3117,62 +3117,62 @@ lbl_fn_80368280_000028F0:
     lwz r3, lbl_8087F0A8
     li r4, 0x28
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00002A90
+    beq lbl_world_Manager_draw_00002A90
     lwz r3, lbl_8087F540
     li r4, 0x0
     li r5, 0x0
     bl fn_8047F994
-    b lbl_fn_80368280_00002A90
-lbl_fn_80368280_0000295C:
+    b lbl_world_Manager_draw_00002A90
+lbl_world_Manager_draw_0000295C:
     lwz r3, lbl_8087F0A8
     li r4, 0x27
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00002A90
+    beq lbl_world_Manager_draw_00002A90
     li r0, 0x78
     stw r0, 0x5654(r28)
-    b lbl_fn_80368280_00002A90
-lbl_fn_80368280_00002980:
+    b lbl_world_Manager_draw_00002A90
+lbl_world_Manager_draw_00002980:
     lwz r0, 0x565c(r28)
     lwz r24, lbl_8087EEF0
     cmpwi r0, 0x0
-    bne lbl_fn_80368280_000029A8
+    bne lbl_world_Manager_draw_000029A8
     lwz r3, lbl_8087F0A8
     li r4, 0x27
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_000029C4
-lbl_fn_80368280_000029A8:
+    beq lbl_world_Manager_draw_000029C4
+lbl_world_Manager_draw_000029A8:
     lwz r3, lbl_8087F540
     li r4, 0x0
     li r5, 0x0
     bl fn_8047F994
     li r0, 0x0
     stw r0, 0x565c(r28)
-    b lbl_fn_80368280_00002A90
-lbl_fn_80368280_000029C4:
+    b lbl_world_Manager_draw_00002A90
+lbl_world_Manager_draw_000029C4:
     lwz r3, lbl_8087F0A8
     li r4, 0x27
     addi r3, r3, 0x48c
     bl fn_80123C7C
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_000029F0
+    beq lbl_world_Manager_draw_000029F0
     lwz r3, lbl_8087F540
     li r4, 0x1
     li r5, 0x0
     bl fn_8047F994
-    b lbl_fn_80368280_00002A90
-lbl_fn_80368280_000029F0:
+    b lbl_world_Manager_draw_00002A90
+lbl_world_Manager_draw_000029F0:
     cmpwi r24, 0x0
-    beq lbl_fn_80368280_00002A90
+    beq lbl_world_Manager_draw_00002A90
     lwz r0, 0xd90(r24)
     li r29, 0x0
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_00002A2C
+    beq lbl_world_Manager_draw_00002A2C
     lis r4, 0x1
     mr r3, r24
     subi r0, r4, 0xe4f
@@ -3180,57 +3180,57 @@ lbl_fn_80368280_000029F0:
     clrlwi r5, r0, 16
     bl fn_8007708C
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00002A2C
+    beq lbl_world_Manager_draw_00002A2C
     li r29, 0x1
-lbl_fn_80368280_00002A2C:
+lbl_world_Manager_draw_00002A2C:
     cmpwi r29, 0x0
-    beq lbl_fn_80368280_00002A90
+    beq lbl_world_Manager_draw_00002A90
     lwz r3, lbl_8087F540
     bl fn_8047F91C
-    b lbl_fn_80368280_00002A90
-lbl_fn_80368280_00002A40:
+    b lbl_world_Manager_draw_00002A90
+lbl_world_Manager_draw_00002A40:
     li r0, 0x0
     stw r0, 0x565c(r28)
-    b lbl_fn_80368280_00002A90
-lbl_fn_80368280_00002A4C:
+    b lbl_world_Manager_draw_00002A90
+lbl_world_Manager_draw_00002A4C:
     lwz r3, lbl_8087F0A8
     li r4, 0x27
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00002A70
+    beq lbl_world_Manager_draw_00002A70
     li r0, 0x1
     stw r0, 0x565c(r28)
-    b lbl_fn_80368280_00002A90
-lbl_fn_80368280_00002A70:
+    b lbl_world_Manager_draw_00002A90
+lbl_world_Manager_draw_00002A70:
     lwz r3, lbl_8087F0A8
     li r4, 0x27
     addi r3, r3, 0x48c
     bl fn_80123C7C
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00002A90
+    beq lbl_world_Manager_draw_00002A90
     li r0, 0x0
     stw r0, 0x565c(r28)
-lbl_fn_80368280_00002A90:
+lbl_world_Manager_draw_00002A90:
     lwz r3, lbl_8087F540
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00002F18
+    beq lbl_world_Manager_draw_00002F18
     lwz r0, 0x2388(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_00002D78
+    beq lbl_world_Manager_draw_00002D78
     lwz r4, lbl_8087EFA8
     lwz r0, 0x414(r4)
     cmpwi r0, 0x0
-    bne lbl_fn_80368280_00002D78
+    bne lbl_world_Manager_draw_00002D78
     lwz r3, 0x70(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00002D78
+    beq lbl_world_Manager_draw_00002D78
     lwz r0, 0x194(r3)
     cmpwi r0, 0xa
-    bne lbl_fn_80368280_00002D78
+    bne lbl_world_Manager_draw_00002D78
     lwz r0, 0x5768(r28)
     cmpwi r0, 0x0
-    bne lbl_fn_80368280_00002B14
+    bne lbl_world_Manager_draw_00002B14
     li r0, 0x1
     stw r0, 0x5768(r28)
     bl OSGetTime
@@ -3245,7 +3245,7 @@ lbl_fn_80368280_00002A90:
     bl __div2i
     stw r4, 0x5774(r28)
     stw r3, 0x5770(r28)
-lbl_fn_80368280_00002B14:
+lbl_world_Manager_draw_00002B14:
     bl OSGetTime
     lis r6, 0x8000
     lis r5, 0x1062
@@ -3276,17 +3276,17 @@ lbl_fn_80368280_00002B14:
     lwz r3, lbl_8087F540
     lwz r0, 0x1e78(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_00002BA0
+    beq lbl_world_Manager_draw_00002BA0
     lfs f3, 0x1e88(r3)
     lfs f0, lbl_80885708
     fadds f0, f3, f0
     stfs f0, 0x1e88(r3)
-lbl_fn_80368280_00002BA0:
+lbl_world_Manager_draw_00002BA0:
     lfs f3, 0x5658(r28)
     lfs f0, lbl_80885760
     fcmpo cr0, f3, f0
     cror eq, gt, eq
-    bne lbl_fn_80368280_00002D78
+    bne lbl_world_Manager_draw_00002D78
     lfs f0, lbl_80885728
     fmuls f1, f0, f3
     bl fn_8068A918
@@ -3301,11 +3301,11 @@ lbl_fn_80368280_00002BA0:
     stfd f0, 0x830(r1)
     lwz r29, 0x834(r1)
     mr r25, r29
-    bl fn_800D246C
-    b lbl_fn_80368280_00002C1C
-lbl_fn_80368280_00002BF4:
+    bl atn_Task_setActive
+    b lbl_world_Manager_draw_00002C1C
+lbl_world_Manager_draw_00002BF4:
     mr r3, r28
-    bl fn_800D2494
+    bl atn_Fog_apply
     lwz r3, lbl_8087F3C0
     li r4, 0x0
     li r5, 0x0
@@ -3314,15 +3314,15 @@ lbl_fn_80368280_00002BF4:
     lwz r3, lbl_8087F3C0
     bl fn_80239C14
     subi r25, r25, 0x1
-lbl_fn_80368280_00002C1C:
+lbl_world_Manager_draw_00002C1C:
     cmpwi r25, 0x0
-    bgt lbl_fn_80368280_00002BF4
+    bgt lbl_world_Manager_draw_00002BF4
     lwz r0, 0x38(r28)
     mr r3, r28
     mr r4, r26
     rlwinm r0, r0, 0, 28, 26
     stw r0, 0x38(r28)
-    bl fn_800D246C
+    bl atn_Task_setActive
     xoris r0, r29, 0x8000
     stw r0, 0x82c(r1)
     lis r3, lbl_8074DBE8@ha
@@ -3336,30 +3336,30 @@ lbl_fn_80368280_00002C1C:
     lwz r3, lbl_8087F540
     lwz r0, 0x1e78(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_00002D78
+    beq lbl_world_Manager_draw_00002D78
     cmpwi cr1, r29, 0x0
     li r6, 0x0
-    ble cr1, lbl_fn_80368280_00002D78
+    ble cr1, lbl_world_Manager_draw_00002D78
     cmpwi r29, 0x8
     subi r4, r29, 0x8
-    ble lbl_fn_80368280_00002D50
+    ble lbl_world_Manager_draw_00002D50
     li r5, 0x0
-    blt cr1, lbl_fn_80368280_00002CA8
+    blt cr1, lbl_world_Manager_draw_00002CA8
     lis r3, 0x8000
     subi r0, r3, 0x2
     cmpw r29, r0
-    bgt lbl_fn_80368280_00002CA8
+    bgt lbl_world_Manager_draw_00002CA8
     li r5, 0x1
-lbl_fn_80368280_00002CA8:
+lbl_world_Manager_draw_00002CA8:
     cmpwi r5, 0x0
-    beq lbl_fn_80368280_00002D50
+    beq lbl_world_Manager_draw_00002D50
     addi r0, r4, 0x7
     lfs f3, lbl_80885708
     srwi r0, r0, 3
     mtctr r0
     cmpwi r4, 0x0
-    ble lbl_fn_80368280_00002D50
-lbl_fn_80368280_00002CC8:
+    ble lbl_world_Manager_draw_00002D50
+lbl_world_Manager_draw_00002CC8:
     lwz r3, lbl_8087F540
     addi r6, r6, 0x8
     lfs f0, 0x1e88(r3)
@@ -3393,29 +3393,29 @@ lbl_fn_80368280_00002CC8:
     lfs f0, 0x1e88(r3)
     fadds f0, f0, f3
     stfs f0, 0x1e88(r3)
-    bdnz lbl_fn_80368280_00002CC8
-lbl_fn_80368280_00002D50:
+    bdnz lbl_world_Manager_draw_00002CC8
+lbl_world_Manager_draw_00002D50:
     subf r0, r6, r29
     lfs f3, lbl_80885708
     mtctr r0
     cmpw r6, r29
-    bge lbl_fn_80368280_00002D78
-lbl_fn_80368280_00002D64:
+    bge lbl_world_Manager_draw_00002D78
+lbl_world_Manager_draw_00002D64:
     lwz r3, lbl_8087F540
     lfs f0, 0x1e88(r3)
     fadds f0, f0, f3
     stfs f0, 0x1e88(r3)
-    bdnz lbl_fn_80368280_00002D64
-lbl_fn_80368280_00002D78:
+    bdnz lbl_world_Manager_draw_00002D64
+lbl_world_Manager_draw_00002D78:
     lwz r3, lbl_8087F540
     lwz r0, 0x1e78(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_00002F18
+    beq lbl_world_Manager_draw_00002F18
     lfs f3, 0x1e8c(r3)
     lfs f0, lbl_80885708
     fadds f0, f3, f0
     stfs f0, 0x1e8c(r3)
-    b lbl_fn_80368280_00002F18
+    b lbl_world_Manager_draw_00002F18
     lwz r5, lbl_8087F8A0
     li r4, 0x1
     lwz r3, 0x10d8(r28)
@@ -3427,10 +3427,10 @@ lbl_fn_80368280_00002D78:
     bl fn_803792F0
     lwz r0, 0xd18(r28)
     cmpwi r0, 0x0
-    bne lbl_fn_80368280_00002F18
+    bne lbl_world_Manager_draw_00002F18
     mr r3, r28
     bl fn_803727DC
-    b lbl_fn_80368280_00002F18
+    b lbl_world_Manager_draw_00002F18
     lwz r5, lbl_8087F8A0
     li r4, 0x1
     lwz r3, 0x10d8(r28)
@@ -3442,10 +3442,10 @@ lbl_fn_80368280_00002D78:
     bl fn_803792F0
     lwz r0, 0x1070(r28)
     cmpwi r0, 0x96
-    ble lbl_fn_80368280_00002F18
+    ble lbl_world_Manager_draw_00002F18
     lwz r0, 0x54e4(r28)
     cmpwi r0, 0xa
-    bne lbl_fn_80368280_00002F18
+    bne lbl_world_Manager_draw_00002F18
     li r0, 0xb
     stw r0, 0x54e4(r28)
     li r0, 0x0
@@ -3476,54 +3476,54 @@ lbl_fn_80368280_00002D78:
     stfs f3, 0xc0(r1)
     stfs f0, 0xc4(r1)
     stfs f0, 0x260(r7)
-    b lbl_fn_80368280_00002F18
+    b lbl_world_Manager_draw_00002F18
     addi r3, r28, 0x6c
     bl fn_8037F744
     lwz r3, 0x5620(r28)
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80368280_00002F18
+    bne lbl_world_Manager_draw_00002F18
     li r0, 0x0
     stw r0, 0x54f0(r28)
-    b lbl_fn_80368280_00002F18
+    b lbl_world_Manager_draw_00002F18
     lwz r3, 0x56ec(r28)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_80368280_00002EF4
+    bne lbl_world_Manager_draw_00002EF4
     lwz r0, 0x88(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80368280_00002EF4
+    bne lbl_world_Manager_draw_00002EF4
     lwz r4, lbl_8087F430
     addi r4, r4, 0x260
     bl fn_805BA358
     lwz r3, lbl_8087F580
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00002F18
+    beq lbl_world_Manager_draw_00002F18
     bl fn_804A2F98
-    b lbl_fn_80368280_00002F18
-lbl_fn_80368280_00002EF4:
+    b lbl_world_Manager_draw_00002F18
+lbl_world_Manager_draw_00002EF4:
     lwz r0, 0x88(r3)
     cmpwi r0, 0x4
-    bne lbl_fn_80368280_00002F18
+    bne lbl_world_Manager_draw_00002F18
     lwz r3, lbl_8087F580
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00002F10
+    beq lbl_world_Manager_draw_00002F10
     bl fn_804A2FBC
-lbl_fn_80368280_00002F10:
+lbl_world_Manager_draw_00002F10:
     mr r3, r28
     bl fn_80376568
-lbl_fn_80368280_00002F18:
+lbl_world_Manager_draw_00002F18:
     lwz r3, lbl_8087F0A8
     li r4, 0x10
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00002F68
+    beq lbl_world_Manager_draw_00002F68
     mr r3, r28
-    bl fn_8036E170
+    bl wpad_accel_updateOrientation
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00002F68
+    beq lbl_world_Manager_draw_00002F68
     lwz r3, 0x5624(r28)
     li r0, 0x12
     stw r0, 0x78(r3)
@@ -3534,13 +3534,13 @@ lbl_fn_80368280_00002F18:
     stw r3, 0x5684(r28)
     stw r0, 0x5688(r28)
     stw r0, 0x568c(r28)
-lbl_fn_80368280_00002F68:
+lbl_world_Manager_draw_00002F68:
     lwz r0, lbl_8087EFE8
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_0000301C
+    beq lbl_world_Manager_draw_0000301C
     lwz r0, 0x54e4(r28)
     cmpwi r0, 0x0
-    bne lbl_fn_80368280_0000301C
+    bne lbl_world_Manager_draw_0000301C
     lwz r3, lbl_8087F8A0
     addi r4, r1, 0x4c
     lfs f0, lbl_80885708
@@ -3562,121 +3562,121 @@ lbl_fn_80368280_00002F68:
     stfs f2, 0x48(r1)
     fadds f1, f3, f0
     lfd f2, lbl_8074DBF0@l(r3)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80885764
     fcmpo cr0, f3, f0
-    ble lbl_fn_80368280_00002FF0
+    ble lbl_world_Manager_draw_00002FF0
     lfs f0, lbl_80885768
     fsubs f3, f3, f0
-lbl_fn_80368280_00002FF0:
+lbl_world_Manager_draw_00002FF0:
     lfs f0, lbl_8088576C
     fcmpo cr0, f3, f0
-    bge lbl_fn_80368280_00003004
+    bge lbl_world_Manager_draw_00003004
     lfs f0, lbl_80885768
     fadds f3, f3, f0
-lbl_fn_80368280_00003004:
+lbl_world_Manager_draw_00003004:
     lwz r3, lbl_8087EFE8
     addi r4, r1, 0x4c
     stfs f3, 0x44(r1)
     addi r5, r1, 0x40
     addi r3, r3, 0x2984
     bl fn_800C7F08
-lbl_fn_80368280_0000301C:
+lbl_world_Manager_draw_0000301C:
     lwz r3, 0x564c(r28)
     cmpwi r3, 0x0
-    ble lbl_fn_80368280_00003058
+    ble lbl_world_Manager_draw_00003058
     subic. r0, r3, 0x1
     stw r0, 0x564c(r28)
-    bgt lbl_fn_80368280_00003058
+    bgt lbl_world_Manager_draw_00003058
     lwz r3, lbl_8087F8A0
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00003058
+    beq lbl_world_Manager_draw_00003058
     lwz r3, 0x48(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00003058
+    beq lbl_world_Manager_draw_00003058
     lwz r0, 0x54c(r3)
     rlwinm r0, r0, 0, 28, 26
     stw r0, 0x54c(r3)
-lbl_fn_80368280_00003058:
+lbl_world_Manager_draw_00003058:
     lwz r3, lbl_8087F8A0
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_000030CC
+    beq lbl_world_Manager_draw_000030CC
     lwz r4, 0x48(r3)
     li r5, 0x0
-    b lbl_fn_80368280_000030A8
-lbl_fn_80368280_00003070:
+    b lbl_world_Manager_draw_000030A8
+lbl_world_Manager_draw_00003070:
     lwz r0, 0x38(r4)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    beq lbl_fn_80368280_000030A4
+    beq lbl_world_Manager_draw_000030A4
     lwz r0, 0x54c(r4)
     rlwinm r0, r0, 0, 18, 18
     cmplwi r0, 0x2000
-    beq lbl_fn_80368280_000030A4
+    beq lbl_world_Manager_draw_000030A4
     lwz r3, 0x5c(r4)
     lbz r0, 0x122(r3)
     cmpwi r0, 0x2
-    bne lbl_fn_80368280_000030A4
+    bne lbl_world_Manager_draw_000030A4
     addi r5, r5, 0x1
-lbl_fn_80368280_000030A4:
+lbl_world_Manager_draw_000030A4:
     lwz r4, 0x14ac(r4)
-lbl_fn_80368280_000030A8:
+lbl_world_Manager_draw_000030A8:
     cmpwi r4, 0x0
-    bne lbl_fn_80368280_00003070
+    bne lbl_world_Manager_draw_00003070
     lwz r0, 0x12fc(r28)
     cmpw r0, r5
-    beq lbl_fn_80368280_000030CC
+    beq lbl_world_Manager_draw_000030CC
     mr r3, r28
     li r4, 0x86
     li r6, 0x0
-    bl fn_80370320
-lbl_fn_80368280_000030CC:
+    bl world_setGlobalFlag
+lbl_world_Manager_draw_000030CC:
     lwz r3, 0x54e4(r28)
     lwz r0, 0x54e8(r28)
     cmpw r0, r3
-    beq lbl_fn_80368280_000030EC
+    beq lbl_world_Manager_draw_000030EC
     li r0, 0x0
     stw r3, 0x54e8(r28)
     stw r0, 0x54ec(r28)
-    b lbl_fn_80368280_000030F8
-lbl_fn_80368280_000030EC:
+    b lbl_world_Manager_draw_000030F8
+lbl_world_Manager_draw_000030EC:
     lwz r3, 0x54ec(r28)
     addi r0, r3, 0x1
     stw r0, 0x54ec(r28)
-lbl_fn_80368280_000030F8:
+lbl_world_Manager_draw_000030F8:
     lwz r3, 0x56f0(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_80368280_00003150
+    beq lbl_world_Manager_draw_00003150
     lwz r0, 0x38(r3)
     clrlwi r0, r0, 31
     cmplwi r0, 0x1
-    bne lbl_fn_80368280_00003134
+    bne lbl_world_Manager_draw_00003134
     lwz r3, lbl_8087F540
     bl fn_80481668
     cmpwi r3, 0x0
-    bne lbl_fn_80368280_000031A0
+    bne lbl_world_Manager_draw_000031A0
     lwz r3, 0x56f0(r28)
     li r4, 0x0
-    bl fn_800D246C
-    b lbl_fn_80368280_000031A0
-lbl_fn_80368280_00003134:
+    bl atn_Task_setActive
+    b lbl_world_Manager_draw_000031A0
+lbl_world_Manager_draw_00003134:
     lwz r0, 0x58(r3)
     cmpwi r0, 0x4
-    bne lbl_fn_80368280_000031A0
-    bl fn_800D2338
+    bne lbl_world_Manager_draw_000031A0
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0x56f0(r28)
-    b lbl_fn_80368280_000031A0
-lbl_fn_80368280_00003150:
+    b lbl_world_Manager_draw_000031A0
+lbl_world_Manager_draw_00003150:
     lwz r0, 0x571c(r28)
     cmpwi r0, 0x0
-    beq lbl_fn_80368280_000031A0
+    beq lbl_world_Manager_draw_000031A0
     lwz r0, 0x54e4(r28)
     cmpwi r0, 0x8
-    beq lbl_fn_80368280_000031A0
+    beq lbl_world_Manager_draw_000031A0
     cmpwi r0, 0xd
-    beq lbl_fn_80368280_000031A0
+    beq lbl_world_Manager_draw_000031A0
     lwz r5, 0x5740(r28)
     mr r3, r28
     lwz r4, 0x571c(r28)
@@ -3689,7 +3689,7 @@ lbl_fn_80368280_00003150:
     stw r5, 0x5740(r28)
     stw r0, 0x571c(r28)
     bl fn_80376324
-lbl_fn_80368280_000031A0:
+lbl_world_Manager_draw_000031A0:
     addi r11, r1, 0x860
     bl _restgpr_24
     lwz r0, 0x864(r1)

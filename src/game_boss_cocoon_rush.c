@@ -7,23 +7,23 @@ extern void _restgpr_15(void);
 extern void _savegpr_15(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_800698DC(void);
-extern void fn_8006A950(void);
+extern void atn_normalizePath(char* str);
 extern void fn_8006AD24(void);
 extern void fn_8006B0C8(void);
 extern void fn_8006B404(void);
 extern void fn_8006D008(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_8008A4E0(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
-extern void fn_800D5738(void);
-extern void fn_800D5808(void);
+struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
+extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
-extern void fn_800D59B8(void);
-extern void fn_800DC6B4(void);
+extern void atn_LH_Texture_update(void);
+extern void str_findChar(void);
 extern void fn_8022D754(void);
 extern void fn_80239030(void);
 extern void fn_802396A0(void);
@@ -31,22 +31,22 @@ extern void fn_8043F5C4(void);
 extern void fn_8043F63C(void);
 extern void fn_8043FA08(void);
 extern void fn_8043FE90(void);
-extern void fn_8046C3FC(void);
+extern void atn_Arc_decompressChunk(void);
 extern void fn_8046D1EC(void);
 extern void fn_8046DD20(void);
 extern void fn_8046F5CC(void);
 extern void fn_8046F834(void);
-extern void fn_80471FD0(void);
+extern void atn_Curve_evalHermite(void);
 extern void fn_80473F88(void);
-extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F90D0(void);
-extern void fn_805F9160(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9940(void);
-extern void fn_80680770(void);
-extern void fn_80682428(void);
-extern void fn_80686EA4(void);
+extern void PSMTXConcat(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXTrans(void);
+extern void PSMTXScale(void);
+extern void PSMTXMultVec(void);
+extern void PSVECMag(void);
+extern void printf(void);
+extern void strcmp(void);
+extern void abort(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -74,19 +74,19 @@ extern u32 lbl_80886EF4;
 extern u32 lbl_80886EF8;
 
 /* Function declarations */
-void fn_8047202C(void);
+void atn_Curve_evaluate(void);
 void fn_80472340(void);
-void fn_80472344(void);
-void fn_8047239C(void);
+void atn_LoadColliObject_constructor(void);
+void atn_LoadColliObject_destructor(void);
 void fn_80472424(void);
 void fn_80472A34(void);
-void fn_80472A50(void);
+void atn_LH_ColliObject_onNotify(void);
 void fn_80472A9C(void);
 void fn_80472C90(void);
-void fn_80472CAC(void);
-void fn_80472D04(void);
+void atn_LoadColliTree_constructor(void);
+void atn_LoadColliTree_destructor(void);
 void fn_80472D64(void);
-void fn_80472D80(void);
+void atn_LH_ColliTree_onNotify(void);
 void fn_80472DCC(void);
 void fn_80472FAC(void);
 void fn_8047304C(void);
@@ -95,13 +95,13 @@ void fn_804730E4(void);
 void fn_80473104(void);
 void fn_80473130(void);
 void fn_80473184(void);
-void fn_804731C0(void);
-void fn_804732DC(void);
+void atn_LoadEffect_constructor(void);
+void atn_LoadEffect_destructor(void);
 void fn_804738C4(void);
-void fn_804738E0(void);
+void atn_LH_Effect_onNotify(void);
 void fn_8047392C(void);
 
-asm void fn_8047202C(void)
+asm void atn_Curve_evaluate(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -109,13 +109,13 @@ asm void fn_8047202C(void)
     stw r0, 0x14(r1)
     lhz r0, 0x2(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_8047202C_00000024
+    bne lbl_atn_Curve_evaluate_00000024
     lwz r3, 0x8(r3)
     lfs f1, 0x0(r3)
-    b lbl_fn_8047202C_00000304
-lbl_fn_8047202C_00000024:
+    b lbl_atn_Curve_evaluate_00000304
+lbl_atn_Curve_evaluate_00000024:
     cmplwi r0, 0x3
-    bne lbl_fn_8047202C_00000148
+    bne lbl_atn_Curve_evaluate_00000148
     lhz r0, 0x6(r3)
     slwi r0, r0, 8
     ori r5, r0, 0x7
@@ -127,45 +127,45 @@ lbl_fn_8047202C_00000024:
     psq_l f0, 0x0(r7), 1, 5
     fcmpo cr0, f1, f0
     cror eq, lt, eq
-    bne lbl_fn_8047202C_00000064
+    bne lbl_atn_Curve_evaluate_00000064
     psq_l f1, 0x2(r7), 1, 6
-    b lbl_fn_8047202C_00000304
-lbl_fn_8047202C_00000064:
+    b lbl_atn_Curve_evaluate_00000304
+lbl_atn_Curve_evaluate_00000064:
     subi r0, r5, 0x1
     slwi r0, r0, 2
     add r3, r7, r0
     psq_l f0, 0x0(r3), 1, 5
     fcmpo cr0, f1, f0
     cror eq, gt, eq
-    bne lbl_fn_8047202C_00000088
+    bne lbl_atn_Curve_evaluate_00000088
     psq_l f1, 0x2(r3), 1, 6
-    b lbl_fn_8047202C_00000304
-lbl_fn_8047202C_00000088:
+    b lbl_atn_Curve_evaluate_00000304
+lbl_atn_Curve_evaluate_00000088:
     lha r3, 0x0(r4)
     subi r0, r5, 0x2
     cmpw r3, r0
-    bgt lbl_fn_8047202C_000000A0
+    bgt lbl_atn_Curve_evaluate_000000A0
     cmpwi r3, 0x0
-    bge lbl_fn_8047202C_000000A8
-lbl_fn_8047202C_000000A0:
+    bge lbl_atn_Curve_evaluate_000000A8
+lbl_atn_Curve_evaluate_000000A0:
     li r0, 0x0
     sth r0, 0x0(r4)
-lbl_fn_8047202C_000000A8:
+lbl_atn_Curve_evaluate_000000A8:
     lha r0, 0x0(r4)
     slwi r0, r0, 2
     psq_lx f0, r7, r0, 1, 5
     fcmpo cr0, f1, f0
-    bge lbl_fn_8047202C_000000C4
+    bge lbl_atn_Curve_evaluate_000000C4
     li r0, 0x0
     sth r0, 0x0(r4)
-lbl_fn_8047202C_000000C4:
+lbl_atn_Curve_evaluate_000000C4:
     subi r0, r5, 0x1
-    b lbl_fn_8047202C_000000D8
-lbl_fn_8047202C_000000CC:
+    b lbl_atn_Curve_evaluate_000000D8
+lbl_atn_Curve_evaluate_000000CC:
     lha r3, 0x0(r4)
     addi r3, r3, 0x1
     sth r3, 0x0(r4)
-lbl_fn_8047202C_000000D8:
+lbl_atn_Curve_evaluate_000000D8:
     lha r6, 0x0(r4)
     addi r5, r6, 0x1
     slwi r3, r5, 2
@@ -174,10 +174,10 @@ lbl_fn_8047202C_000000D8:
     cror eq, gt, eq
     mfcr r3
     extrwi. r3, r3, 1, 2
-    beq lbl_fn_8047202C_00000104
+    beq lbl_atn_Curve_evaluate_00000104
     cmpw r6, r0
-    blt lbl_fn_8047202C_000000CC
-lbl_fn_8047202C_00000104:
+    blt lbl_atn_Curve_evaluate_000000CC
+lbl_atn_Curve_evaluate_00000104:
     extsh r0, r5
     slwi r3, r6, 2
     slwi r0, r0, 2
@@ -194,10 +194,10 @@ lbl_fn_8047202C_00000104:
     fsubs f0, f0, f1
     fmuls f0, f0, f3
     fmadds f1, f4, f1, f0
-    b lbl_fn_8047202C_00000304
-lbl_fn_8047202C_00000148:
+    b lbl_atn_Curve_evaluate_00000304
+lbl_atn_Curve_evaluate_00000148:
     cmplwi r0, 0x4
-    bne lbl_fn_8047202C_000001F4
+    bne lbl_atn_Curve_evaluate_000001F4
     lhz r0, 0x6(r3)
     slwi r0, r0, 8
     ori r4, r0, 0x7
@@ -207,22 +207,22 @@ lbl_fn_8047202C_00000148:
     lfs f0, lbl_80886EE4
     lwz r5, 0x8(r3)
     fcmpo cr0, f1, f0
-    bge lbl_fn_8047202C_00000180
+    bge lbl_atn_Curve_evaluate_00000180
     psq_l f1, 0x0(r5), 1, 6
-    b lbl_fn_8047202C_00000304
-lbl_fn_8047202C_00000180:
+    b lbl_atn_Curve_evaluate_00000304
+lbl_atn_Curve_evaluate_00000180:
     fctiwz f0, f1
     lhz r3, 0x4(r3)
     stfd f0, 0x8(r1)
     subi r0, r3, 0x1
     lwz r6, 0xc(r1)
     cmpw r6, r0
-    blt lbl_fn_8047202C_000001AC
+    blt lbl_atn_Curve_evaluate_000001AC
     clrlslwi r0, r3, 16, 1
     add r3, r5, r0
     psq_l f1, -0x2(r3), 1, 6
-    b lbl_fn_8047202C_00000304
-lbl_fn_8047202C_000001AC:
+    b lbl_atn_Curve_evaluate_00000304
+lbl_atn_Curve_evaluate_000001AC:
     xoris r3, r6, 0x8000
     lis r0, 0x4330
     stw r3, 0xc(r1)
@@ -240,8 +240,8 @@ lbl_fn_8047202C_000001AC:
     fsubs f0, f0, f3
     fmuls f0, f0, f1
     fmadds f1, f2, f3, f0
-    b lbl_fn_8047202C_00000304
-lbl_fn_8047202C_000001F4:
+    b lbl_atn_Curve_evaluate_00000304
+lbl_atn_Curve_evaluate_000001F4:
     lhz r0, 0x6(r3)
     slwi r0, r0, 8
     ori r5, r0, 0x7
@@ -253,45 +253,45 @@ lbl_fn_8047202C_000001F4:
     psq_l f0, 0x0(r7), 1, 5
     fcmpo cr0, f1, f0
     cror eq, lt, eq
-    bne lbl_fn_8047202C_0000022C
+    bne lbl_atn_Curve_evaluate_0000022C
     psq_l f1, 0x2(r7), 1, 6
-    b lbl_fn_8047202C_00000304
-lbl_fn_8047202C_0000022C:
+    b lbl_atn_Curve_evaluate_00000304
+lbl_atn_Curve_evaluate_0000022C:
     subi r0, r5, 0x1
     mulli r0, r0, 0x6
     add r3, r7, r0
     psq_l f0, 0x0(r3), 1, 5
     fcmpo cr0, f1, f0
     cror eq, gt, eq
-    bne lbl_fn_8047202C_00000250
+    bne lbl_atn_Curve_evaluate_00000250
     psq_l f1, 0x2(r3), 1, 6
-    b lbl_fn_8047202C_00000304
-lbl_fn_8047202C_00000250:
+    b lbl_atn_Curve_evaluate_00000304
+lbl_atn_Curve_evaluate_00000250:
     lha r3, 0x0(r4)
     subi r0, r5, 0x2
     cmpw r3, r0
-    bgt lbl_fn_8047202C_00000268
+    bgt lbl_atn_Curve_evaluate_00000268
     cmpwi r3, 0x0
-    bge lbl_fn_8047202C_00000270
-lbl_fn_8047202C_00000268:
+    bge lbl_atn_Curve_evaluate_00000270
+lbl_atn_Curve_evaluate_00000268:
     li r0, 0x0
     sth r0, 0x0(r4)
-lbl_fn_8047202C_00000270:
+lbl_atn_Curve_evaluate_00000270:
     lha r0, 0x0(r4)
     mulli r0, r0, 0x6
     psq_lx f0, r7, r0, 1, 5
     fcmpo cr0, f1, f0
-    bge lbl_fn_8047202C_0000028C
+    bge lbl_atn_Curve_evaluate_0000028C
     li r0, 0x0
     sth r0, 0x0(r4)
-lbl_fn_8047202C_0000028C:
+lbl_atn_Curve_evaluate_0000028C:
     subi r0, r5, 0x1
-    b lbl_fn_8047202C_000002A0
-lbl_fn_8047202C_00000294:
+    b lbl_atn_Curve_evaluate_000002A0
+lbl_atn_Curve_evaluate_00000294:
     lha r3, 0x0(r4)
     addi r3, r3, 0x1
     sth r3, 0x0(r4)
-lbl_fn_8047202C_000002A0:
+lbl_atn_Curve_evaluate_000002A0:
     lha r6, 0x0(r4)
     addi r5, r6, 0x1
     mulli r3, r5, 0x6
@@ -300,10 +300,10 @@ lbl_fn_8047202C_000002A0:
     cror eq, gt, eq
     mfcr r3
     extrwi. r3, r3, 1, 2
-    beq lbl_fn_8047202C_000002CC
+    beq lbl_atn_Curve_evaluate_000002CC
     cmpw r6, r0
-    blt lbl_fn_8047202C_00000294
-lbl_fn_8047202C_000002CC:
+    blt lbl_atn_Curve_evaluate_00000294
+lbl_atn_Curve_evaluate_000002CC:
     extsh r0, r5
     mulli r3, r6, 0x6
     mulli r0, r0, 0x6
@@ -317,8 +317,8 @@ lbl_fn_8047202C_000002CC:
     fsubs f2, f2, f0
     addi r4, r4, 0x2
     addi r5, r5, lbl_8078FBF0@l
-    bl fn_80471FD0
-lbl_fn_8047202C_00000304:
+    bl atn_Curve_evalHermite
+lbl_atn_Curve_evaluate_00000304:
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10
@@ -331,7 +331,7 @@ asm void fn_80472340(void)
     blr
 }
 
-asm void fn_80472344(void)
+asm void atn_LoadColliObject_constructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -342,14 +342,14 @@ asm void fn_80472344(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_80472344_00000354
+    beq lbl_atn_LoadColliObject_constructor_00000354
     li r4, 0x0
     bl fn_8047304C
     cmpwi r31, 0x0
-    ble lbl_fn_80472344_00000354
+    ble lbl_atn_LoadColliObject_constructor_00000354
     mr r3, r30
     bl dtor_80084684
-lbl_fn_80472344_00000354:
+lbl_atn_LoadColliObject_constructor_00000354:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -359,7 +359,7 @@ lbl_fn_80472344_00000354:
     blr
 }
 
-asm void fn_8047239C(void)
+asm void atn_LoadColliObject_destructor(void)
 {
     nofralloc
     stwu r1, -0x50(r1)
@@ -369,7 +369,7 @@ asm void fn_8047239C(void)
     mr r31, r3
     lbz r0, 0x4(r3)
     cmplwi r0, 0x2
-    bne lbl_fn_8047239C_000003E4
+    bne lbl_atn_LoadColliObject_destructor_000003E4
     lwz r4, 0x54(r31)
     addi r3, r1, 0x14
     bl fn_8043F5C4
@@ -391,7 +391,7 @@ asm void fn_8047239C(void)
     addi r3, r1, 0x14
     li r4, -0x1
     bl fn_8043F63C
-lbl_fn_8047239C_000003E4:
+lbl_atn_LoadColliObject_destructor_000003E4:
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)
     mtlr r0
@@ -473,11 +473,11 @@ lbl_fn_80472424_000004A4:
     stfs f1, 0x38(r1)
     stfs f2, 0x3c(r1)
     stfs f3, 0x40(r1)
-    bl fn_805F90D0
+    bl PSMTXTrans
     mr r3, r29
     addi r4, r1, 0x290
     addi r5, r1, 0x2c0
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r30), 0, 0
     psq_l f2, 0x8(r30), 0, 0
     psq_l f3, 0x10(r30), 0, 0
@@ -516,11 +516,11 @@ lbl_fn_80472424_00000554:
     beq lbl_fn_80472424_000005FC
     addi r3, r1, 0x1a0
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r24
     addi r4, r1, 0x1a0
     addi r5, r1, 0x170
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r25), 0, 0
     psq_l f2, 0x8(r25), 0, 0
     psq_l f3, 0x10(r25), 0, 0
@@ -539,11 +539,11 @@ lbl_fn_80472424_000005FC:
     beq lbl_fn_80472424_00000654
     addi r3, r1, 0x200
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r24
     addi r4, r1, 0x200
     addi r5, r1, 0x1d0
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r26), 0, 0
     psq_l f2, 0x8(r26), 0, 0
     psq_l f3, 0x10(r26), 0, 0
@@ -562,11 +562,11 @@ lbl_fn_80472424_00000654:
     beq lbl_fn_80472424_000006AC
     addi r3, r1, 0x260
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r24
     addi r4, r1, 0x260
     addi r5, r1, 0x230
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r27), 0, 0
     psq_l f2, 0x8(r27), 0, 0
     psq_l f3, 0x10(r27), 0, 0
@@ -583,7 +583,7 @@ lbl_fn_80472424_000006AC:
     mr r3, r29
     mr r4, r24
     addi r5, r1, 0x110
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r28), 0, 0
     psq_l f2, 0x8(r28), 0, 0
     psq_l f3, 0x10(r28), 0, 0
@@ -607,11 +607,11 @@ lbl_fn_80472424_000006EC:
     stfs f1, 0x20(r1)
     stfs f2, 0x24(r1)
     stfs f3, 0x28(r1)
-    bl fn_805F9160
+    bl PSMTXScale
     addi r3, r1, 0x2f0
     addi r4, r1, 0xb0
     addi r5, r1, 0xe0
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r23), 0, 0
     psq_l f2, 0x8(r23), 0, 0
     psq_l f3, 0x10(r23), 0, 0
@@ -640,7 +640,7 @@ lbl_fn_80472424_00000788:
     cmpwi r19, 0x0
     beq lbl_fn_80472424_00000988
     addi r3, r1, 0xa0
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0xc(r19)
     fmuls f7, f28, f1
     stfs f0, 0x80(r1)
@@ -652,7 +652,7 @@ lbl_fn_80472424_00000788:
     fmuls f25, f29, f7
     lfs f0, 0x14(r19)
     stfs f0, 0x88(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f0, 0x18(r19)
     psq_l f1, 0x0(r21), 0, 0
     fmuls f0, f0, f25
@@ -706,7 +706,7 @@ lbl_fn_80472424_00000814:
     stfs f7, 0x5c(r1)
     stfs f9, 0x60(r1)
     stfs f11, 0x64(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f7, 0x98(r1)
     fmr f31, f1
     lfs f0, 0x7c(r1)
@@ -721,7 +721,7 @@ lbl_fn_80472424_00000814:
     fsubs f0, f7, f0
     stfs f8, 0x6c(r1)
     stfs f0, 0x68(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f7, 0x9c(r1)
     lfs f0, 0x6c(r15)
     fadds f7, f7, f1
@@ -741,7 +741,7 @@ lbl_fn_80472424_00000814:
     fsubs f0, f7, f0
     stfs f8, 0x54(r1)
     stfs f0, 0x50(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x9c(r1)
     fadds f0, f0, f1
     b lbl_fn_80472424_00000974
@@ -759,7 +759,7 @@ lbl_fn_80472424_00000934:
     fsubs f0, f7, f0
     stfs f8, 0x48(r1)
     stfs f0, 0x44(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x6c(r15)
     fadds f0, f0, f1
 lbl_fn_80472424_00000974:
@@ -818,7 +818,7 @@ lbl_fn_80472A34_00000A1C:
     blr
 }
 
-asm void fn_80472A50(void)
+asm void atn_LH_ColliObject_onNotify(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -857,11 +857,11 @@ asm void fn_80472A9C(void)
     mr r28, r5
     bl fn_8046D1EC
     addi r3, r1, 0x10
-    bl fn_8006A950
+    bl atn_normalizePath
     addi r3, r1, 0x10
     bl fn_8006B404
     addi r3, r1, 0x10
-    bl fn_800DC6B4
+    bl str_findChar
     cmpwi r28, 0x0
     mr r5, r3
     li r30, 0x0
@@ -901,7 +901,7 @@ lbl_fn_80472A9C_00000B1C:
     li r4, 0x2
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80472A9C_00000B7C
@@ -920,12 +920,12 @@ lbl_fn_80472A9C_00000B1C:
 lbl_fn_80472A9C_00000B7C:
     mr r3, r31
     mr r4, r30
-    bl fn_8046C3FC
+    bl atn_Arc_decompressChunk
     cmpwi r3, 0x0
     beq lbl_fn_80472A9C_00000C1C
     addi r28, r31, 0x3ed0
     li r3, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_80472A9C_00000BC8
@@ -935,8 +935,8 @@ lbl_fn_80472A9C_00000B7C:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80779810@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80472A9C_00000BC8:
     addic. r3, r29, 0x8
     addi r0, r31, 0x3ed0
@@ -996,7 +996,7 @@ lbl_fn_80472C90_00000C78:
     blr
 }
 
-asm void fn_80472CAC(void)
+asm void atn_LoadColliTree_constructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1007,14 +1007,14 @@ asm void fn_80472CAC(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_80472CAC_00000CBC
+    beq lbl_atn_LoadColliTree_constructor_00000CBC
     li r4, 0x0
     bl fn_8047304C
     cmpwi r31, 0x0
-    ble lbl_fn_80472CAC_00000CBC
+    ble lbl_atn_LoadColliTree_constructor_00000CBC
     mr r3, r30
     bl dtor_80084684
-lbl_fn_80472CAC_00000CBC:
+lbl_atn_LoadColliTree_constructor_00000CBC:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1024,7 +1024,7 @@ lbl_fn_80472CAC_00000CBC:
     blr
 }
 
-asm void fn_80472D04(void)
+asm void atn_LoadColliTree_destructor(void)
 {
     nofralloc
     stwu r1, -0x50(r1)
@@ -1034,7 +1034,7 @@ asm void fn_80472D04(void)
     mr r31, r3
     lbz r0, 0x4(r3)
     cmplwi r0, 0x2
-    bne lbl_fn_80472D04_00000D24
+    bne lbl_atn_LoadColliTree_destructor_00000D24
     lwz r4, 0x54(r31)
     addi r3, r1, 0x8
     bl fn_8043FA08
@@ -1046,7 +1046,7 @@ asm void fn_80472D04(void)
     addi r3, r1, 0x8
     li r4, -0x1
     bl fn_8043FE90
-lbl_fn_80472D04_00000D24:
+lbl_atn_LoadColliTree_destructor_00000D24:
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)
     mtlr r0
@@ -1067,7 +1067,7 @@ lbl_fn_80472D64_00000D4C:
     blr
 }
 
-asm void fn_80472D80(void)
+asm void atn_LH_ColliTree_onNotify(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1106,11 +1106,11 @@ asm void fn_80472DCC(void)
     mr r28, r5
     bl fn_8046D1EC
     addi r3, r1, 0x10
-    bl fn_8006A950
+    bl atn_normalizePath
     addi r3, r1, 0x10
     bl fn_8006B404
     addi r3, r1, 0x10
-    bl fn_800DC6B4
+    bl str_findChar
     cmpwi r28, 0x0
     mr r5, r3
     li r30, 0x0
@@ -1150,7 +1150,7 @@ lbl_fn_80472DCC_00000E4C:
     li r4, 0x2
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80472DCC_00000E98
@@ -1164,12 +1164,12 @@ lbl_fn_80472DCC_00000E4C:
 lbl_fn_80472DCC_00000E98:
     mr r3, r31
     mr r4, r30
-    bl fn_8046C3FC
+    bl atn_Arc_decompressChunk
     cmpwi r3, 0x0
     beq lbl_fn_80472DCC_00000F38
     addi r28, r31, 0x3ed0
     li r3, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_80472DCC_00000EE4
@@ -1179,8 +1179,8 @@ lbl_fn_80472DCC_00000E98:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80779810@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80472DCC_00000EE4:
     addic. r3, r29, 0x8
     addi r0, r31, 0x3ed0
@@ -1262,7 +1262,7 @@ lbl_fn_80472FAC_00000FE0:
     stw r0, 0x50(r30)
     stw r0, 0x54(r30)
     stw r0, 0x58(r30)
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x48(r30)
     mr r3, r30
     lwz r31, 0xc(r1)
@@ -1399,7 +1399,7 @@ asm void fn_80473184(void)
     blr
 }
 
-asm void fn_804731C0(void)
+asm void atn_LoadEffect_constructor(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -1409,7 +1409,7 @@ asm void fn_804731C0(void)
     stmw r25, 0x14(r1)
     mr r25, r3
     mr r26, r4
-    beq lbl_fn_804731C0_00001298
+    beq lbl_atn_LoadEffect_constructor_00001298
     lis r4, lbl_8078FCD0@ha
     li r27, 0x0
     addi r4, r4, lbl_8078FCD0@l
@@ -1417,63 +1417,63 @@ asm void fn_804731C0(void)
     li r30, 0x0
     li r29, 0x0
     li r31, 0x0
-    b lbl_fn_804731C0_00001268
-lbl_fn_804731C0_000011D4:
+    b lbl_atn_LoadEffect_constructor_00001268
+lbl_atn_LoadEffect_constructor_000011D4:
     lwz r3, 0x90(r25)
     lwz r0, 0x68(r25)
     lwzx r28, r3, r29
     add r3, r0, r30
     cmpwi cr1, r28, 0x0
-    beq cr1, lbl_fn_804731C0_0000125C
+    beq cr1, lbl_atn_LoadEffect_constructor_0000125C
     lwz r0, 0x104(r3)
     cmplwi r0, 0x1
-    bne lbl_fn_804731C0_00001218
-    beq cr1, lbl_fn_804731C0_00001254
+    bne lbl_atn_LoadEffect_constructor_00001218
+    beq cr1, lbl_atn_LoadEffect_constructor_00001254
     lwz r12, 0x0(r28)
     mr r3, r28
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-    b lbl_fn_804731C0_00001254
-lbl_fn_804731C0_00001218:
+    b lbl_atn_LoadEffect_constructor_00001254
+lbl_atn_LoadEffect_constructor_00001218:
     cmplwi r0, 0x2
-    bne lbl_fn_804731C0_00001248
-    beq cr1, lbl_fn_804731C0_00001254
+    bne lbl_atn_LoadEffect_constructor_00001248
+    beq cr1, lbl_atn_LoadEffect_constructor_00001254
     addi r3, r28, 0x30
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     mr r3, r28
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     mr r3, r28
     bl dtor_80084684
-    b lbl_fn_804731C0_00001254
-lbl_fn_804731C0_00001248:
+    b lbl_atn_LoadEffect_constructor_00001254
+lbl_atn_LoadEffect_constructor_00001248:
     mr r3, r28
     li r4, 0x1
-    bl fn_800D5808
-lbl_fn_804731C0_00001254:
+    bl atn_LH_Texture_destructAndFree
+lbl_atn_LoadEffect_constructor_00001254:
     lwz r3, 0x90(r25)
     stwx r31, r3, r29
-lbl_fn_804731C0_0000125C:
+lbl_atn_LoadEffect_constructor_0000125C:
     addi r30, r30, 0x138
     addi r29, r29, 0x4
     addi r27, r27, 0x1
-lbl_fn_804731C0_00001268:
+lbl_atn_LoadEffect_constructor_00001268:
     lwz r0, 0x64(r25)
     cmplw r27, r0
-    blt lbl_fn_804731C0_000011D4
+    blt lbl_atn_LoadEffect_constructor_000011D4
     addi r3, r25, 0x5c
     bl fn_802396A0
     mr r3, r25
     li r4, 0x0
     bl fn_8047304C
     cmpwi r26, 0x0
-    ble lbl_fn_804731C0_00001298
+    ble lbl_atn_LoadEffect_constructor_00001298
     mr r3, r25
     bl dtor_80084684
-lbl_fn_804731C0_00001298:
+lbl_atn_LoadEffect_constructor_00001298:
     mr r3, r25
     lmw r25, 0x14(r1)
     lwz r0, 0x34(r1)
@@ -1482,7 +1482,7 @@ lbl_fn_804731C0_00001298:
     blr
 }
 
-asm void fn_804732DC(void)
+asm void atn_LoadEffect_destructor(void)
 {
     nofralloc
     stwu r1, -0xd0(r1)
@@ -1492,89 +1492,89 @@ asm void fn_804732DC(void)
     mr r17, r3
     lbz r0, 0x4(r3)
     cmplwi r0, 0x2
-    bne lbl_fn_804732DC_00001884
+    bne lbl_atn_LoadEffect_destructor_00001884
     lwz r0, 0xa0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_804732DC_000013C8
+    beq lbl_atn_LoadEffect_destructor_000013C8
     lwz r0, 0x4c(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_804732DC_000012F4
+    bne lbl_atn_LoadEffect_destructor_000012F4
     li r4, 0x5
     bl fn_80473104
-    b lbl_fn_804732DC_00001884
-lbl_fn_804732DC_000012F4:
+    b lbl_atn_LoadEffect_destructor_00001884
+lbl_atn_LoadEffect_destructor_000012F4:
     li r22, 0x0
     li r23, 0x0
     li r19, 0x0
     li r20, 0x0
-    b lbl_fn_804732DC_000013A4
-lbl_fn_804732DC_00001308:
+    b lbl_atn_LoadEffect_destructor_000013A4
+lbl_atn_LoadEffect_destructor_00001308:
     lwz r3, 0x90(r17)
     lwz r0, 0x68(r17)
     lwzx r21, r3, r20
     add r3, r0, r19
     cmpwi r21, 0x0
-    beq lbl_fn_804732DC_00001398
+    beq lbl_atn_LoadEffect_destructor_00001398
     lwz r0, 0x104(r3)
     cmplwi r0, 0x1
-    bne lbl_fn_804732DC_00001344
+    bne lbl_atn_LoadEffect_destructor_00001344
     mr r3, r21
     bl fn_8008B140
     cmpwi r3, 0x0
-    beq lbl_fn_804732DC_00001398
+    beq lbl_atn_LoadEffect_destructor_00001398
     li r22, 0x1
-    b lbl_fn_804732DC_00001398
-lbl_fn_804732DC_00001344:
+    b lbl_atn_LoadEffect_destructor_00001398
+lbl_atn_LoadEffect_destructor_00001344:
     cmplwi r0, 0x2
-    bne lbl_fn_804732DC_00001384
+    bne lbl_atn_LoadEffect_destructor_00001384
     mr r3, r21
     li r18, 0x0
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
-    bne lbl_fn_804732DC_00001370
+    bne lbl_atn_LoadEffect_destructor_00001370
     addi r3, r21, 0x30
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
-    beq lbl_fn_804732DC_00001374
-lbl_fn_804732DC_00001370:
+    beq lbl_atn_LoadEffect_destructor_00001374
+lbl_atn_LoadEffect_destructor_00001370:
     li r18, 0x1
-lbl_fn_804732DC_00001374:
+lbl_atn_LoadEffect_destructor_00001374:
     cmpwi r18, 0x0
-    beq lbl_fn_804732DC_00001398
+    beq lbl_atn_LoadEffect_destructor_00001398
     li r22, 0x1
-    b lbl_fn_804732DC_00001398
-lbl_fn_804732DC_00001384:
+    b lbl_atn_LoadEffect_destructor_00001398
+lbl_atn_LoadEffect_destructor_00001384:
     mr r3, r21
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
-    beq lbl_fn_804732DC_00001398
+    beq lbl_atn_LoadEffect_destructor_00001398
     li r22, 0x1
-lbl_fn_804732DC_00001398:
+lbl_atn_LoadEffect_destructor_00001398:
     addi r19, r19, 0x138
     addi r20, r20, 0x4
     addi r23, r23, 0x1
-lbl_fn_804732DC_000013A4:
+lbl_atn_LoadEffect_destructor_000013A4:
     lwz r0, 0x64(r17)
     cmplw r23, r0
-    blt lbl_fn_804732DC_00001308
+    blt lbl_atn_LoadEffect_destructor_00001308
     cmpwi r22, 0x0
-    bne lbl_fn_804732DC_00001884
+    bne lbl_atn_LoadEffect_destructor_00001884
     mr r3, r17
     li r4, 0x3
     bl fn_80473104
-    b lbl_fn_804732DC_00001884
-lbl_fn_804732DC_000013C8:
+    b lbl_atn_LoadEffect_destructor_00001884
+lbl_atn_LoadEffect_destructor_000013C8:
     lwz r3, 0x54(r3)
     addi r4, r17, 0x5c
     bl fn_80239030
     cmpwi r3, 0x0
-    bne lbl_fn_804732DC_000013F0
+    bne lbl_atn_LoadEffect_destructor_000013F0
     mr r3, r17
     bl fn_80473130
     mr r3, r17
     li r4, 0x4
     bl fn_80473104
-lbl_fn_804732DC_000013F0:
+lbl_atn_LoadEffect_destructor_000013F0:
     addi r19, r17, 0x6
     stw r19, 0x9c(r17)
     li r0, 0x0
@@ -1596,16 +1596,16 @@ lbl_fn_804732DC_000013F0:
     addi r8, r1, 0x18
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r18
     addi r3, r1, 0x80
     bl fn_8006B0C8
     lwz r0, 0x5c(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_804732DC_00001468
+    beq lbl_atn_LoadEffect_destructor_00001468
     lwz r3, 0x64(r1)
     bl dtor_80084684
-lbl_fn_804732DC_00001468:
+lbl_atn_LoadEffect_destructor_00001468:
     lis r27, lbl_80755CB8@ha
     addi r22, r1, 0x69
     addi r28, r27, lbl_80755CB8@l
@@ -1618,8 +1618,8 @@ lbl_fn_804732DC_00001468:
     lis r29, 0x200
     li r30, 0x1
     li r31, 0x0
-    b lbl_fn_804732DC_0000185C
-lbl_fn_804732DC_0000149C:
+    b lbl_atn_LoadEffect_destructor_0000185C
+lbl_atn_LoadEffect_destructor_0000149C:
     lwz r0, 0x68(r17)
     add r18, r0, r24
     mr r3, r18
@@ -1634,31 +1634,31 @@ lbl_fn_804732DC_0000149C:
     bl fn_8006D008
     lwz r0, 0x50(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_804732DC_000014E0
+    beq lbl_atn_LoadEffect_destructor_000014E0
     lwz r3, 0x58(r1)
     bl dtor_80084684
-lbl_fn_804732DC_000014E0:
+lbl_atn_LoadEffect_destructor_000014E0:
     lwz r0, 0x104(r18)
     cmplwi r0, 0x1
-    bne lbl_fn_804732DC_000015E4
+    bne lbl_atn_LoadEffect_destructor_000015E4
     addi r5, r28, 0x2
     li r3, 0x214
     mr r6, r5
     li r4, 0x7
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r26, r3
-    beq lbl_fn_804732DC_0000151C
+    beq lbl_atn_LoadEffect_destructor_0000151C
     addi r4, r29, 0x1
     bl fn_8008A4E0
     mr r26, r3
-lbl_fn_804732DC_0000151C:
+lbl_atn_LoadEffect_destructor_0000151C:
     addi r3, r18, 0x80
     addi r4, r28, 0x2
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
-    beq lbl_fn_804732DC_000015B4
+    beq lbl_atn_LoadEffect_destructor_000015B4
     mr r5, r28
     addi r3, r1, 0x44
     addi r4, r1, 0x80
@@ -1669,81 +1669,81 @@ lbl_fn_804732DC_0000151C:
     bl fn_8006D008
     lwz r0, 0x44(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_804732DC_00001564
+    beq lbl_atn_LoadEffect_destructor_00001564
     lwz r3, 0x4c(r1)
     bl dtor_80084684
-lbl_fn_804732DC_00001564:
+lbl_atn_LoadEffect_destructor_00001564:
     lwz r0, 0x68(r1)
     srwi. r0, r0, 31
-    bne lbl_fn_804732DC_00001578
+    bne lbl_atn_LoadEffect_destructor_00001578
     mr r5, r22
-    b lbl_fn_804732DC_0000157C
-lbl_fn_804732DC_00001578:
+    b lbl_atn_LoadEffect_destructor_0000157C
+lbl_atn_LoadEffect_destructor_00001578:
     lwz r5, 0x70(r1)
-lbl_fn_804732DC_0000157C:
+lbl_atn_LoadEffect_destructor_0000157C:
     lwz r0, 0x74(r1)
     mr r3, r26
     srwi. r0, r0, 31
-    bne lbl_fn_804732DC_00001594
+    bne lbl_atn_LoadEffect_destructor_00001594
     mr r4, r21
-    b lbl_fn_804732DC_00001598
-lbl_fn_804732DC_00001594:
+    b lbl_atn_LoadEffect_destructor_00001598
+lbl_atn_LoadEffect_destructor_00001594:
     lwz r4, 0x7c(r1)
-lbl_fn_804732DC_00001598:
+lbl_atn_LoadEffect_destructor_00001598:
     bl fn_8008AD4C
     lwz r0, 0x68(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_804732DC_000015D8
+    beq lbl_atn_LoadEffect_destructor_000015D8
     lwz r3, 0x70(r1)
     bl dtor_80084684
-    b lbl_fn_804732DC_000015D8
-lbl_fn_804732DC_000015B4:
+    b lbl_atn_LoadEffect_destructor_000015D8
+lbl_atn_LoadEffect_destructor_000015B4:
     lwz r0, 0x74(r1)
     mr r3, r26
     srwi. r0, r0, 31
-    bne lbl_fn_804732DC_000015CC
+    bne lbl_atn_LoadEffect_destructor_000015CC
     mr r4, r21
-    b lbl_fn_804732DC_000015D0
-lbl_fn_804732DC_000015CC:
+    b lbl_atn_LoadEffect_destructor_000015D0
+lbl_atn_LoadEffect_destructor_000015CC:
     lwz r4, 0x7c(r1)
-lbl_fn_804732DC_000015D0:
+lbl_atn_LoadEffect_destructor_000015D0:
     li r5, 0x0
     bl fn_8008AD4C
-lbl_fn_804732DC_000015D8:
+lbl_atn_LoadEffect_destructor_000015D8:
     lwz r3, 0x90(r17)
     stwx r26, r3, r23
-    b lbl_fn_804732DC_0000183C
-lbl_fn_804732DC_000015E4:
+    b lbl_atn_LoadEffect_destructor_0000183C
+lbl_atn_LoadEffect_destructor_000015E4:
     cmplwi r0, 0x2
-    bne lbl_fn_804732DC_00001758
+    bne lbl_atn_LoadEffect_destructor_00001758
     addi r5, r28, 0x2
     li r3, 0x60
     mr r6, r5
     li r4, 0x7
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r26, r3
-    beq lbl_fn_804732DC_0000161C
-    bl fn_800D5738
+    beq lbl_atn_LoadEffect_destructor_0000161C
+    bl atn_LH_Texture_constructor
     addi r3, r26, 0x30
-    bl fn_800D5738
-lbl_fn_804732DC_0000161C:
+    bl atn_LH_Texture_constructor
+lbl_atn_LoadEffect_destructor_0000161C:
     mr r3, r18
     bl strlen
     cmpwi r3, 0x0
-    beq lbl_fn_804732DC_0000164C
+    beq lbl_atn_LoadEffect_destructor_0000164C
     lwz r0, 0x74(r1)
     mr r3, r26
     srwi. r0, r0, 31
-    bne lbl_fn_804732DC_00001644
+    bne lbl_atn_LoadEffect_destructor_00001644
     mr r4, r21
-    b lbl_fn_804732DC_00001648
-lbl_fn_804732DC_00001644:
+    b lbl_atn_LoadEffect_destructor_00001648
+lbl_atn_LoadEffect_destructor_00001644:
     lwz r4, 0x7c(r1)
-lbl_fn_804732DC_00001648:
+lbl_atn_LoadEffect_destructor_00001648:
     bl fn_800D5908
-lbl_fn_804732DC_0000164C:
+lbl_atn_LoadEffect_destructor_0000164C:
     stb r30, 0x2d(r26)
     addi r3, r1, 0x38
     addi r4, r1, 0x80
@@ -1756,76 +1756,76 @@ lbl_fn_804732DC_0000164C:
     bl fn_8006D008
     lwz r0, 0x74(r1)
     srwi. r3, r0, 31
-    bne lbl_fn_804732DC_000016A4
+    bne lbl_atn_LoadEffect_destructor_000016A4
     lwz r4, 0x2c(r1)
     srwi. r0, r4, 31
-    bne lbl_fn_804732DC_000016A4
+    bne lbl_atn_LoadEffect_destructor_000016A4
     lwz r3, 0x30(r1)
     lwz r0, 0x34(r1)
     stw r4, 0x74(r1)
     stw r3, 0x78(r1)
     stw r0, 0x7c(r1)
-    b lbl_fn_804732DC_000016FC
-lbl_fn_804732DC_000016A4:
+    b lbl_atn_LoadEffect_destructor_000016FC
+lbl_atn_LoadEffect_destructor_000016A4:
     cmpwi r3, 0x0
-    beq lbl_fn_804732DC_000016B4
+    beq lbl_atn_LoadEffect_destructor_000016B4
     lwz r5, 0x78(r1)
-    b lbl_fn_804732DC_000016BC
-lbl_fn_804732DC_000016B4:
+    b lbl_atn_LoadEffect_destructor_000016BC
+lbl_atn_LoadEffect_destructor_000016B4:
     lbz r0, 0x74(r1)
     clrlwi r5, r0, 25
-lbl_fn_804732DC_000016BC:
+lbl_atn_LoadEffect_destructor_000016BC:
     lwz r0, 0x2c(r1)
     srwi. r0, r0, 31
-    bne lbl_fn_804732DC_000016D8
+    bne lbl_atn_LoadEffect_destructor_000016D8
     lbz r0, 0x2c(r1)
     mr r6, r20
     clrlwi r4, r0, 25
-    b lbl_fn_804732DC_000016E0
-lbl_fn_804732DC_000016D8:
+    b lbl_atn_LoadEffect_destructor_000016E0
+lbl_atn_LoadEffect_destructor_000016D8:
     lwz r6, 0x34(r1)
     lwz r4, 0x30(r1)
-lbl_fn_804732DC_000016E0:
+lbl_atn_LoadEffect_destructor_000016E0:
     lbz r0, 0x14(r1)
     add r7, r6, r4
     stb r0, 0x10(r1)
     addi r3, r1, 0x74
     addi r8, r1, 0x10
     li r4, 0x0
-    bl fn_80013F78
-lbl_fn_804732DC_000016FC:
+    bl actor_dispatchMessage
+lbl_atn_LoadEffect_destructor_000016FC:
     lwz r0, 0x2c(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_804732DC_00001710
+    beq lbl_atn_LoadEffect_destructor_00001710
     lwz r3, 0x34(r1)
     bl dtor_80084684
-lbl_fn_804732DC_00001710:
+lbl_atn_LoadEffect_destructor_00001710:
     lwz r0, 0x38(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_804732DC_00001724
+    beq lbl_atn_LoadEffect_destructor_00001724
     lwz r3, 0x40(r1)
     bl dtor_80084684
-lbl_fn_804732DC_00001724:
+lbl_atn_LoadEffect_destructor_00001724:
     lwz r0, 0x74(r1)
     addi r3, r26, 0x30
     srwi. r0, r0, 31
-    bne lbl_fn_804732DC_0000173C
+    bne lbl_atn_LoadEffect_destructor_0000173C
     mr r4, r21
-    b lbl_fn_804732DC_00001740
-lbl_fn_804732DC_0000173C:
+    b lbl_atn_LoadEffect_destructor_00001740
+lbl_atn_LoadEffect_destructor_0000173C:
     lwz r4, 0x7c(r1)
-lbl_fn_804732DC_00001740:
+lbl_atn_LoadEffect_destructor_00001740:
     bl fn_800D5908
     stb r30, 0x5d(r26)
     stb r30, 0x5e(r26)
     lwz r3, 0x90(r17)
     stwx r26, r3, r23
-    b lbl_fn_804732DC_0000183C
-lbl_fn_804732DC_00001758:
+    b lbl_atn_LoadEffect_destructor_0000183C
+lbl_atn_LoadEffect_destructor_00001758:
     mr r3, r18
     bl strlen
     cmpwi r3, 0x0
-    beq lbl_fn_804732DC_00001834
+    beq lbl_atn_LoadEffect_destructor_00001834
     addi r18, r28, 0x3
     stw r31, 0x20(r1)
     mr r3, r18
@@ -1844,68 +1844,68 @@ lbl_fn_804732DC_00001758:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r25
     addi r3, r1, 0x74
     bl fn_8006AD24
     lwz r0, 0x20(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_804732DC_000017D4
+    beq lbl_atn_LoadEffect_destructor_000017D4
     lwz r3, 0x28(r1)
     bl dtor_80084684
-lbl_fn_804732DC_000017D4:
+lbl_atn_LoadEffect_destructor_000017D4:
     addi r5, r28, 0x2
     li r3, 0x30
     mr r6, r5
     li r4, 0x7
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r18, r3
-    beq lbl_fn_804732DC_00001800
-    bl fn_800D5738
+    beq lbl_atn_LoadEffect_destructor_00001800
+    bl atn_LH_Texture_constructor
     mr r18, r3
-lbl_fn_804732DC_00001800:
+lbl_atn_LoadEffect_destructor_00001800:
     lwz r0, 0x74(r1)
     mr r3, r18
     srwi. r0, r0, 31
-    bne lbl_fn_804732DC_00001818
+    bne lbl_atn_LoadEffect_destructor_00001818
     mr r4, r21
-    b lbl_fn_804732DC_0000181C
-lbl_fn_804732DC_00001818:
+    b lbl_atn_LoadEffect_destructor_0000181C
+lbl_atn_LoadEffect_destructor_00001818:
     lwz r4, 0x7c(r1)
-lbl_fn_804732DC_0000181C:
+lbl_atn_LoadEffect_destructor_0000181C:
     bl fn_800D5908
     stb r30, 0x2d(r18)
     stb r30, 0x2e(r18)
     lwz r3, 0x90(r17)
     stwx r18, r3, r23
-    b lbl_fn_804732DC_0000183C
-lbl_fn_804732DC_00001834:
+    b lbl_atn_LoadEffect_destructor_0000183C
+lbl_atn_LoadEffect_destructor_00001834:
     lwz r3, 0x90(r17)
     stwx r31, r3, r23
-lbl_fn_804732DC_0000183C:
+lbl_atn_LoadEffect_destructor_0000183C:
     lwz r0, 0x74(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_804732DC_00001850
+    beq lbl_atn_LoadEffect_destructor_00001850
     lwz r3, 0x7c(r1)
     bl dtor_80084684
-lbl_fn_804732DC_00001850:
+lbl_atn_LoadEffect_destructor_00001850:
     addi r24, r24, 0x138
     addi r23, r23, 0x4
     addi r19, r19, 0x1
-lbl_fn_804732DC_0000185C:
+lbl_atn_LoadEffect_destructor_0000185C:
     lwz r0, 0x64(r17)
     cmplw r19, r0
-    blt lbl_fn_804732DC_0000149C
+    blt lbl_atn_LoadEffect_destructor_0000149C
     li r0, 0x1
     stw r0, 0xa0(r17)
     lwz r0, 0x80(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_804732DC_00001884
+    beq lbl_atn_LoadEffect_destructor_00001884
     lwz r3, 0x88(r1)
     bl dtor_80084684
-lbl_fn_804732DC_00001884:
+lbl_atn_LoadEffect_destructor_00001884:
     lmw r17, 0x94(r1)
     lwz r0, 0xd4(r1)
     mtlr r0
@@ -1926,7 +1926,7 @@ lbl_fn_804738C4_000018AC:
     blr
 }
 
-asm void fn_804738E0(void)
+asm void atn_LH_Effect_onNotify(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1965,11 +1965,11 @@ asm void fn_8047392C(void)
     mr r28, r5
     bl fn_8046D1EC
     addi r3, r1, 0x10
-    bl fn_8006A950
+    bl atn_normalizePath
     addi r3, r1, 0x10
     bl fn_8006B404
     addi r3, r1, 0x10
-    bl fn_800DC6B4
+    bl str_findChar
     cmpwi r28, 0x0
     mr r5, r3
     li r30, 0x0
@@ -2010,7 +2010,7 @@ lbl_fn_8047392C_000019AC:
     addi r5, r5, 0x2
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8047392C_00001A0C
@@ -2028,12 +2028,12 @@ lbl_fn_8047392C_000019AC:
 lbl_fn_8047392C_00001A0C:
     mr r3, r31
     mr r4, r30
-    bl fn_8046C3FC
+    bl atn_Arc_decompressChunk
     cmpwi r3, 0x0
     beq lbl_fn_8047392C_00001AAC
     addi r28, r31, 0x3ed0
     li r3, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_8047392C_00001A58
@@ -2043,8 +2043,8 @@ lbl_fn_8047392C_00001A0C:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80779810@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8047392C_00001A58:
     addic. r3, r29, 0x8
     addi r0, r31, 0x3ed0

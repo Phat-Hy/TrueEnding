@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void fn_800499D0(void);
 extern void fn_80049A28(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_8008BBD8(void);
 extern void fn_800C7DC4(void);
 extern void fn_800C8078(void);
@@ -1503,7 +1503,7 @@ asm void fn_800CCBA4(void)
     li r4, 0xa
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_800CCBA4_000013E4
     bl fn_800CCBF8

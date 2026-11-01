@@ -6,23 +6,23 @@ extern void _restgpr_20(void);
 extern void _restgpr_23(void);
 extern void _savegpr_20(void);
 extern void _savegpr_23(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800C3094(void);
 extern void fn_800C3124(void);
-extern void fn_800D2338(void);
-extern void fn_800D246C(void);
+extern void atn_Task_unlink(void);
+extern void atn_Task_setActive(void);
 extern void fn_801027A4(void);
 extern void fn_801546F4(void);
 extern void fn_8015495C(void);
 extern void fn_8016DF3C(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80237654(void);
 extern void fn_8023772C(void);
-extern void fn_8023780C(void);
-extern void fn_8023781C(void);
+extern void res_MsgHandle_destructor(void);
+extern void res_MsgHandle_unload(void);
 extern void fn_8035B694(void);
 extern void fn_80365708(void);
-extern void fn_80370AE4(void);
+extern void world_setLocalFlag(void);
 extern void fn_80374964(void);
 extern void fn_8037624C(void);
 extern void fn_804AE3BC(void);
@@ -38,7 +38,7 @@ extern void fn_80509B50(void);
 extern void fn_8050BA6C(void);
 extern void fn_8050DDE0(void);
 extern void fn_8050E098(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_806A8E40(void);
 extern void fn_806A8E70(void);
 extern void fn_806B0DE0(void);
@@ -163,7 +163,7 @@ lbl_fn_804DDA08_000000E8:
     li r25, 0x0
     b lbl_fn_804DDA08_00000138
 lbl_fn_804DDA08_00000100:
-    bl fn_80680CF8
+    bl rand
     addi r4, r24, 0x1
     add r5, r23, r25
     divw r0, r3, r4
@@ -290,7 +290,7 @@ lbl_fn_804DDA08_000002AC:
     li r0, 0x1
     b lbl_fn_804DDA08_000002F4
 lbl_fn_804DDA08_000002BC:
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x64(r1)
     stw r31, 0x60(r1)
@@ -1263,7 +1263,7 @@ asm void fn_804DE888(void)
     add r0, r0, r5
     mulli r0, r0, 0xa
     subf r5, r0, r6
-    bl fn_80370AE4
+    bl world_setLocalFlag
     lwz r0, 0x598(r24)
     addi r7, r23, 0x6667
     lwz r3, 0x5e0(r24)
@@ -1278,7 +1278,7 @@ asm void fn_804DE888(void)
     add r0, r0, r5
     mulli r0, r0, 0xa
     subf r5, r0, r6
-    bl fn_80370AE4
+    bl world_setLocalFlag
     lis r3, 0x51ec
     lwz r4, 0x598(r24)
     subi r3, r3, 0x7ae1
@@ -1295,11 +1295,11 @@ asm void fn_804DE888(void)
     add r0, r0, r5
     mulli r0, r0, 0xa
     subf r5, r0, r6
-    bl fn_80370AE4
+    bl world_setLocalFlag
     lwz r3, 0x5e0(r24)
     li r4, 0xff
     li r5, 0x0
-    bl fn_80370AE4
+    bl world_setLocalFlag
     lwz r4, lbl_8087F9C0
     li r23, 0x0
     addis r3, r24, 0x1
@@ -1328,7 +1328,7 @@ asm void fn_804DE888(void)
     bl fn_804C566C
     lwz r3, lbl_8087F5E4
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r4, lbl_8087F628
     addis r3, r4, 0x1
     lbz r0, -0x3deb(r3)
@@ -1536,7 +1536,7 @@ lbl_fn_804DE888_000012AC:
     la r5, lbl_8087E178
     la r6, lbl_8087E174
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r21, r3
     beq lbl_fn_804DE888_00001394
@@ -1659,7 +1659,7 @@ lbl_fn_804DE888_000014B4:
     bne lbl_fn_804DE888_00001528
     lwz r3, 0x0(r29)
     li r4, 0x2
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0x0(r29)
     addi r5, r1, 0x14
     li r4, 0x0
@@ -1741,11 +1741,11 @@ lbl_fn_804DE888_000015D8:
     bl fn_805012C8
     lwz r3, lbl_8087F840
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     addis r3, r24, 0x1
     lwz r4, lbl_808875A4
     subi r3, r3, 0x694c
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addis r3, r24, 0x1
     lwz r4, lbl_808875A8
     subi r3, r3, 0x6940
@@ -1859,7 +1859,7 @@ asm void fn_804DF120(void)
     cmpwi r0, 0x0
     beq lbl_fn_804DF120_000018D0
     mr r3, r0
-    bl fn_800D2338
+    bl atn_Task_unlink
     lwz r0, 0x5f4(r30)
     li r3, 0x0
     stw r3, 0x5e0(r30)
@@ -1934,7 +1934,7 @@ lbl_fn_804DF120_00001864:
     lwz r3, 0x0(r27)
     cmpwi r3, 0x0
     beq lbl_fn_804DF120_000018BC
-    bl fn_800D2338
+    bl atn_Task_unlink
     stw r28, 0x0(r27)
     lwz r0, 0x5e4(r30)
     add. r3, r0, r29
@@ -1966,11 +1966,11 @@ lbl_fn_804DF120_000018D0:
     lwz r3, lbl_8087F840
     cmpwi r3, 0x0
     beq lbl_fn_804DF120_000018E0
-    bl fn_800D2338
+    bl atn_Task_unlink
 lbl_fn_804DF120_000018E0:
     addis r3, r30, 0x1
     subi r3, r3, 0x694c
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addis r3, r30, 0x1
     subi r3, r3, 0x6940
     bl fn_8023772C

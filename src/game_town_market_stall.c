@@ -5,19 +5,19 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800897D8(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
+extern void ref_releaseHandle(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
 extern void fn_800D3FA4(void);
-extern void fn_800D5738(void);
-extern void fn_800D5808(void);
+struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
+extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_80237518(void);
 extern void fn_802375C4(void);
-extern void fn_80370174(void);
-extern void fn_80370320(void);
+extern void world_getGlobalFlag(void);
+extern void world_setGlobalFlag(void);
 extern void fn_80373148(void);
 extern void fn_803761E4(void);
 extern void fn_803761EC(void);
@@ -312,12 +312,12 @@ asm void fn_803CE4B0(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_803CE4B0_000002B8
     mr r4, r30
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r4, lbl_8078BE08@ha
     li r3, 0x0
     addi r4, r4, lbl_8078BE08@l
@@ -354,7 +354,7 @@ asm void fn_803CE550(void)
     li r0, 0x0
     stw r0, lbl_8087F488
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r31, 0x0
     ble lbl_fn_803CE550_0000031C
     mr r3, r30
@@ -545,11 +545,11 @@ asm void fn_803CE768(void)
     stw r3, 0x4c(r31)
     li r4, 0x385
     lwz r3, lbl_8087F430
-    bl fn_80370174
+    bl world_getGlobalFlag
     stw r3, 0x50(r31)
     li r4, 0x386
     lwz r3, lbl_8087F430
-    bl fn_80370174
+    bl world_getGlobalFlag
     clrlwi r4, r3, 16
     srwi r3, r3, 16
     neg r0, r4
@@ -583,7 +583,7 @@ asm void fn_803CE7E0(void)
     li r4, 0x385
     lwz r5, 0x50(r31)
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     lwz r0, 0x54(r31)
     li r4, 0x386
     lwz r7, 0x48(r31)
@@ -591,7 +591,7 @@ asm void fn_803CE7E0(void)
     clrlwi r5, r0, 16
     lwz r3, lbl_8087F430
     rlwimi r5, r7, 16, 0, 15
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_803CE7E0_000005C8:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -678,7 +678,7 @@ asm void fn_803CE910(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_803CE910_000006EC
     mr r4, r31
@@ -720,7 +720,7 @@ asm void fn_803CE980(void)
     mr r31, r3
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lfs f3, lbl_80885D58
     lis r4, lbl_8078C584@ha
     li r3, 0x0
@@ -911,13 +911,13 @@ lbl_fn_803CE980_000009F0:
     stw r29, 0xdac(r31)
     stw r29, 0xdb0(r31)
     stw r29, 0xdc8(r31)
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     addi r3, r31, 0xe04
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     addi r3, r31, 0xe34
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     addi r3, r31, 0xe64
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     stw r29, 0x1118(r31)
     addi r3, r31, 0x1158
     stw r29, 0x1130(r31)
@@ -1685,16 +1685,16 @@ lbl_fn_803CF79C_00001578:
     bl fn_802375C4
     addi r3, r29, 0xe64
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addi r3, r29, 0xe34
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addi r3, r29, 0xe04
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addi r3, r29, 0xdd4
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addic. r3, r29, 0xd90
     beq lbl_fn_803CF79C_00001610
     addic. r0, r3, 0x8
@@ -1719,7 +1719,7 @@ lbl_fn_803CF79C_00001610:
 lbl_fn_803CF79C_0000163C:
     mr r3, r29
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r30, 0x0
     ble lbl_fn_803CF79C_00001658
     mr r3, r29
@@ -1809,7 +1809,7 @@ asm void fn_803CF938(void)
     bl fn_800C31F4
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, 0x265c(r31)
     addi r0, r3, 0x1
     stw r0, 0x265c(r31)
@@ -1963,7 +1963,7 @@ lbl_fn_803CF938_0000198C:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r0, 0x2660(r31)
     andc r0, r0, r28
     stw r0, 0x2660(r31)

@@ -8,32 +8,32 @@ extern void _savegpr_17(void);
 extern void _savegpr_20(void);
 extern void dtor_80084684(void);
 extern void fn_8004B290(void);
-extern void fn_8004B378(void);
+extern void item_useConsumable(void);
 extern void fn_8004D388(void);
 extern void fn_8004ECC0(void);
 extern void fn_8004ED34(void);
 extern void fn_8006A250(void);
 extern void fn_8006EF48(void);
 extern void fn_80076FF8(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087858(void);
 extern void fn_8008937C(void);
 extern void fn_800A555C(void);
 extern void fn_800A55AC(void);
-extern void fn_800CB3A0(void);
-extern void fn_800D2338(void);
-extern void fn_800DC6B4(void);
+extern void ref_releaseHandle(void);
+extern void atn_Task_unlink(void);
+extern void str_findChar(void);
 extern void fn_80116FC0(void);
 extern void fn_80117228(void);
 extern void fn_80117914(void);
 extern void fn_80119ECC(void);
 extern void fn_8012AFE8(void);
-extern void fn_801F4E8C(void);
+extern void saveSlot_readSummary(void);
 extern void fn_801FECE0(void);
 extern void fn_801FED24(void);
 extern void fn_801FEE08(void);
-extern void fn_80370320(void);
-extern void fn_80370F8C(void);
+extern void world_setGlobalFlag(void);
+extern void world_advanceChapter(void);
 extern void fn_80377298(void);
 extern void fn_80389838(void);
 extern void fn_803903E0(void);
@@ -53,12 +53,12 @@ extern void fn_804A5B9C(void);
 extern void fn_80572B70(void);
 extern void fn_805BDCC0(void);
 extern void fn_805BF414(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
-extern void fn_805F9940(void);
-extern void fn_80680CF8(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
+extern void PSVECMag(void);
+extern void rand(void);
 extern void fn_806959D8(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -170,11 +170,11 @@ lbl_fn_803775DC_0000008C:
     lwz r5, lbl_8087F460
     li r4, 0x0
     li r6, 0x0
-    bl fn_80370F8C
+    bl world_advanceChapter
     b lbl_fn_803775DC_0000011C
 lbl_fn_803775DC_000000AC:
     lwz r3, lbl_8087F430
-    bl fn_800D2338
+    bl atn_Task_unlink
     lis r4, lbl_8074DEC0@ha
     lwz r3, lbl_8087F9AC
     addi r4, r4, lbl_8074DEC0@l
@@ -188,7 +188,7 @@ lbl_fn_803775DC_000000CC:
     lwz r5, lbl_8087F460
     li r4, 0x1
     li r6, 0x0
-    bl fn_80370F8C
+    bl world_advanceChapter
     b lbl_fn_803775DC_0000011C
 lbl_fn_803775DC_000000EC:
     lwz r3, lbl_8087F430
@@ -197,15 +197,15 @@ lbl_fn_803775DC_000000EC:
     li r4, 0x1b
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     lwz r3, lbl_8087F430
     li r4, 0x0
     li r5, 0x0
     li r6, 0x1
-    bl fn_80370F8C
+    bl world_advanceChapter
 lbl_fn_803775DC_0000011C:
     mr r3, r29
-    bl fn_800D2338
+    bl atn_Task_unlink
     b lbl_fn_803775DC_00000AFC
 lbl_fn_803775DC_00000128:
     lwz r4, 0x288(r3)
@@ -319,7 +319,7 @@ lbl_fn_803775DC_000002B4:
     addi r28, r28, lbl_8074DEC0@l
     addi r3, r28, 0x71
     addi r27, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_8088581C
     mr r4, r3
     mr r3, r27
@@ -328,7 +328,7 @@ lbl_fn_803775DC_000002B4:
     lwz r4, 0x4c(r29)
     addi r3, r28, 0x71
     addi r27, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_8088581C
     mr r4, r3
     mr r3, r27
@@ -372,7 +372,7 @@ lbl_fn_803775DC_0000037C:
     bl fn_80117228
     addi r3, r1, 0x20
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803775DC_000007F0
 lbl_fn_803775DC_00000398:
     lwz r3, lbl_8087EF70
@@ -402,7 +402,7 @@ lbl_fn_803775DC_000003E8:
     bl fn_80117228
     addi r3, r1, 0x1c
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803775DC_000007F0
 lbl_fn_803775DC_00000404:
     lwz r3, lbl_8087EF70
@@ -443,7 +443,7 @@ lbl_fn_803775DC_00000478:
     bl fn_80117228
     addi r3, r1, 0x18
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803775DC_00000AFC
 lbl_fn_803775DC_00000494:
     cmpwi r0, 0x1
@@ -471,7 +471,7 @@ lbl_fn_803775DC_000004DC:
     bl fn_80117228
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803775DC_00000AFC
 lbl_fn_803775DC_000004F8:
     addi r3, r1, 0x10
@@ -479,7 +479,7 @@ lbl_fn_803775DC_000004F8:
     bl fn_80117228
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     li r30, 0x1
     b lbl_fn_803775DC_000007F0
 lbl_fn_803775DC_00000518:
@@ -491,7 +491,7 @@ lbl_fn_803775DC_00000518:
     lwz r0, 0x13c(r3)
     cmpwi r0, 0x7
     bne lbl_fn_803775DC_00000594
-    bl fn_800D2338
+    bl atn_Task_unlink
     lwz r3, 0x70(r29)
     li r0, 0x1
     stw r3, 0x74(r29)
@@ -644,7 +644,7 @@ lbl_fn_803775DC_00000744:
     bl fn_80117228
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803775DC_000007F0
 lbl_fn_803775DC_00000760:
     cmpwi r0, 0x4
@@ -685,7 +685,7 @@ lbl_fn_803775DC_000007D8:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_803775DC_000007F0:
     lis r28, lbl_8074DEC0@ha
     addi r26, r31, 0x18
@@ -747,7 +747,7 @@ lbl_fn_803775DC_00000878:
     lwz r4, 0x48(r29)
     addi r3, r1, 0x38
     addi r27, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r27
@@ -760,7 +760,7 @@ lbl_fn_803775DC_00000878:
     lwz r4, 0x48(r29)
     addi r3, r1, 0x38
     addi r27, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r27
     mr r5, r20
@@ -814,16 +814,16 @@ lbl_fn_803775DC_00000994:
     bl sprintf
     lwz r27, 0x48(r29)
     addi r3, r1, 0x38
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r27
     addi r3, r1, 0x24
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lwz r4, 0x4c(r29)
     addi r3, r28, 0x71
     lfs f31, 0x24(r1)
     addi r27, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r27
@@ -833,7 +833,7 @@ lbl_fn_803775DC_00000994:
     addi r3, r28, 0x71
     lfs f31, 0x28(r1)
     addi r27, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r27
@@ -843,7 +843,7 @@ lbl_fn_803775DC_00000994:
     addi r3, r28, 0x71
     lfs f31, 0x34(r1)
     addi r27, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r27
@@ -853,7 +853,7 @@ lbl_fn_803775DC_00000994:
     addi r3, r28, 0xa0
     lfs f31, 0x2c(r1)
     addi r27, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r27
@@ -862,7 +862,7 @@ lbl_fn_803775DC_00000994:
     addi r3, r28, 0xa6
     lfs f31, 0x30(r1)
     addi r27, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r27
@@ -924,7 +924,7 @@ asm void fn_803780F8(void)
     addi r3, r3, lbl_8074DEC0@l
     addi r3, r3, 0xbc
     addi r30, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80885800
     mr r4, r3
     mr r3, r30
@@ -936,7 +936,7 @@ lbl_fn_803780F8_00000B6C:
     addi r3, r3, lbl_8074DEC0@l
     addi r3, r3, 0xbc
     addi r30, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_808857FC
     mr r4, r3
     mr r3, r30
@@ -982,7 +982,7 @@ lbl_fn_803780F8_00000B94:
     psq_st f1, 0xa8(r31), 0, 0
     stfs f2, 0xb0(r31)
     stfs f0, 0xe4(r31)
-    bl fn_8004B378
+    bl item_useConsumable
     lwz r3, lbl_8087EFB4
     lwz r0, 0x94(r31)
     stw r0, 0x104(r3)
@@ -1210,7 +1210,7 @@ lbl_fn_80378474_00000F7C:
     addi r5, r29, 0x200
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80885830
     mr r3, r30
     lfs f2, lbl_80885848
@@ -1219,7 +1219,7 @@ lbl_fn_80378474_00000F7C:
     addi r5, r29, 0x208
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80885830
     mr r3, r30
     lfs f2, lbl_80885850
@@ -1228,7 +1228,7 @@ lbl_fn_80378474_00000F7C:
     addi r5, r29, 0x20c
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80885830
     mr r3, r30
     lfs f2, lbl_80885854
@@ -1373,7 +1373,7 @@ lbl_fn_803786FC_00001194:
     stfs f3, 0x58(r1)
     stfs f0, 0x50(r1)
     stfs f0, 0x54(r1)
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lis r0, 0x4330
     addi r5, r4, 0x749f
@@ -1399,11 +1399,11 @@ lbl_fn_803786FC_00001194:
     fsubs f3, f3, f6
     fdivs f3, f3, f5
     fnmsubs f1, f4, f3, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x50
     addi r3, r1, 0xf0
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f3, 0x50(r1)
     mr r5, r29
     lfs f0, 0x44(r1)
@@ -1449,7 +1449,7 @@ lbl_fn_803786FC_000012C4:
     stfs f3, 0x58(r1)
     stfs f0, 0x50(r1)
     stfs f0, 0x54(r1)
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lis r0, 0x4330
     addi r5, r4, 0x749f
@@ -1472,11 +1472,11 @@ lbl_fn_803786FC_000012C4:
     fsubs f4, f4, f5
     fdivs f3, f4, f3
     fmuls f1, f0, f3
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x50
     addi r3, r1, 0xc0
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f3, 0x50(r1)
     mr r5, r29
     lfs f0, 0x44(r1)
@@ -1521,7 +1521,7 @@ lbl_fn_803786FC_000013E4:
     li r4, 0x79
     psq_st f1, 0x0(r5), 0, 0
     lfs f1, 0x318(r30)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f1, lbl_80885830
     mr r3, r28
     addi r29, r1, 0x90
@@ -1538,7 +1538,7 @@ lbl_fn_803786FC_000013E4:
     mr r5, r4
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x34(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f3, 0x44(r1)
     addi r5, r1, 0x50
     lfs f0, 0x2c(r1)
@@ -1559,7 +1559,7 @@ lbl_fn_803786FC_000013E4:
     stfs f2, 0x58(r1)
     psq_st f1, 0x0(r5), 0, 0
     lfs f1, 0x318(r30)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f1, lbl_80885830
     mr r3, r28
     addi r29, r1, 0x60
@@ -1576,7 +1576,7 @@ lbl_fn_803786FC_000013E4:
     mr r5, r4
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x1c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f3, 0x50(r1)
     lfs f0, 0x14(r1)
     lfs f5, 0x54(r1)
@@ -1663,7 +1663,7 @@ lbl_fn_803786FC_000015EC:
     stfs f2, 0x18(r30)
     psq_st f1, 0x10(r30), 0, 0
     stfs f31, 0x58(r30)
-    bl fn_8004B378
+    bl item_useConsumable
     lwz r0, 0x394(r30)
     li r3, 0x0
     stw r3, 0x358(r30)
@@ -1820,7 +1820,7 @@ lbl_fn_80378D34_0000183C:
     fsubs f0, f3, f0
     stfs f4, 0x84(r1)
     stfs f0, 0x80(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, lbl_8088586C
     addi r27, r1, 0xbc
     lfs f2, 0x8(r17)
@@ -1859,7 +1859,7 @@ lbl_fn_80378D34_000018C4:
     psq_l f1, 0x0(r25), 0, 0
     psq_st f1, 0x0(r26), 0, 0
     stfs f2, 0x70(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f0, 0x70(r1)
     mr r5, r22
     lfs f3, 0x6c(r1)
@@ -1952,7 +1952,7 @@ lbl_fn_80378D34_00001A10:
     stfs f6, 0x34(r1)
     stfs f0, 0x2c(r1)
     stfs f4, 0x30(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80885874
     fcmpo cr0, f1, f0
     ble lbl_fn_80378D34_00001AF8

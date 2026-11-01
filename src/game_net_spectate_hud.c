@@ -8,22 +8,22 @@ extern void _restgpr_27(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_800081C0(void);
+extern void entry_callCtors(void);
 extern void fn_80010374(void);
 extern void fn_80011964(void);
 extern void fn_80012A1C(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_800928B0(void);
 extern void fn_80539CF0(void);
 extern void fn_8053A16C(void);
 extern void fn_80541BDC(void);
 extern void fn_80541C98(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9750(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
-extern void fn_8068AEA4(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSMTX44Identity(void);
+extern void printf(void);
+extern void abort(void);
+extern void std_atan2(void);
 
 /* External data declarations */
 extern u8 lbl_8075D928[];
@@ -294,11 +294,11 @@ lbl_fn_805382C0_000002A4:
     bl fn_80011964
     addi r3, r1, 0x20
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x14
     addi r3, r1, 0x20
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     mr r4, r30
     addi r3, r1, 0x8
     bl fn_80010374
@@ -522,7 +522,7 @@ lbl_fn_805384D0_000005B8:
 lbl_fn_805384D0_000005C0:
     fmr f2, f4
     lfs f1, 0x74(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_805384D0_000005D4:
@@ -530,7 +530,7 @@ lbl_fn_805384D0_000005D4:
     addi r3, r1, 0x90
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80887C68
     addi r4, r1, 0x38
     lfs f30, 0x98(r1)
@@ -580,7 +580,7 @@ lbl_fn_805384D0_000005D4:
     stfs f6, 0xec(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_80887C70
     fabs f3, f2
@@ -601,7 +601,7 @@ lbl_fn_805384D0_000006E4:
     b lbl_fn_805384D0_00000704
 lbl_fn_805384D0_000006F0:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -615,11 +615,11 @@ lbl_fn_805384D0_00000704:
     lfs f1, 0x78(r1)
     stfs f2, 0x4c(r1)
     stfs f2, 0x7c(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x80
     addi r3, r1, 0x130
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f5, 0x2c(r30)
     lfs f6, 0x1c(r30)
     lfs f7, 0xc(r30)
@@ -641,11 +641,11 @@ lbl_fn_805384D0_0000077C:
     bl fn_80011964
     addi r3, r1, 0x100
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x80
     addi r3, r1, 0x100
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     mr r4, r28
     addi r3, r1, 0x50
     bl fn_80010374
@@ -1319,7 +1319,7 @@ asm void fn_805391E8(void)
     stw r30, 0x8(r1)
     mr r30, r3
     lwz r3, 0xc(r3)
-    bl fn_800081C0
+    bl entry_callCtors
     lwz r0, 0x14(r3)
     li r8, 0x0
     lwz r5, 0x18(r3)
@@ -1575,8 +1575,8 @@ lbl_fn_805393FC_00001374:
     addi r4, r4, lbl_8075D94C@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805393FC_000013A8:
     li r5, 0x0
     addi r4, r30, 0x28
@@ -1601,8 +1601,8 @@ lbl_fn_805393FC_000013A8:
     addi r4, r4, lbl_8075D94C@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805393FC_0000140C:
     lis r3, 0xaab
     subi r0, r3, 0x5556
@@ -1656,11 +1656,11 @@ lbl_fn_805393FC_000014A0:
     addi r4, r4, lbl_8075D94C@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805393FC_000014D0:
     slwi r3, r31, 3
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_805393FC_00001504
@@ -1670,8 +1670,8 @@ lbl_fn_805393FC_000014D0:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80793B0C@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805393FC_00001504:
     lwz r0, 0x2c(r1)
     stw r29, 0x28(r1)

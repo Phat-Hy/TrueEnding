@@ -7,14 +7,14 @@ extern void dtor_80084684(void);
 extern void fn_8000D760(void);
 extern void fn_8000F1EC(void);
 extern void fn_8001282C(void);
-extern void fn_80014798(void);
+extern void atn_LH_Binary_destructor(void);
 extern void fn_80041C0C(void);
-extern void fn_80084320(void);
-extern void fn_800846FC(void);
-extern void fn_80084C24(void);
-extern void fn_800CB3A0(void);
-extern void fn_800D1E9C(void);
-extern void fn_800D246C(void);
+extern void mem_alloc(void);
+extern void mem_realloc(void);
+extern void mem_getAllocSize(void);
+extern void ref_releaseHandle(void);
+extern void atn_Task_destructor(void);
+extern void atn_Task_setActive(void);
 extern void fn_80112784(void);
 extern void fn_80117E34(void);
 extern void fn_8016E4C4(void);
@@ -27,7 +27,7 @@ extern void fn_803663A4(void);
 extern void fn_80373148(void);
 extern void fn_803B57EC(void);
 extern void fn_803CCC84(void);
-extern void fn_80473E74(void);
+extern void atn_LoadHandle_constructor(void);
 extern void fn_8047F8B0(void);
 extern void fn_8047F994(void);
 extern void fn_8048169C(void);
@@ -1234,7 +1234,7 @@ lbl_fn_8053E054_00000DC4:
     beq lbl_fn_8053E054_00000DE4
     beq lbl_fn_8053E054_00000DE4
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8053E054_00000DE4:
     addic. r0, r31, 0x118
     beq lbl_fn_8053E054_00000E04
@@ -1243,7 +1243,7 @@ lbl_fn_8053E054_00000DE4:
     beq lbl_fn_8053E054_00000E04
     beq lbl_fn_8053E054_00000E04
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8053E054_00000E04:
     addic. r3, r31, 0xac
     beq lbl_fn_8053E054_00000E34
@@ -1336,7 +1336,7 @@ lbl_fn_8053E054_00000F3C:
     beq lbl_fn_8053E054_00000F5C
     beq lbl_fn_8053E054_00000F5C
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8053E054_00000F5C:
     cmpwi r31, 0x0
     beq lbl_fn_8053E054_00000F80
@@ -1468,7 +1468,7 @@ asm void fn_8053E4B0(void)
     stw r0, 0x8(r3)
     stw r0, 0xc(r3)
     mr r3, r31
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r4, lbl_8078FBB0@ha
     mr r3, r30
     addi r4, r4, lbl_8078FBB0@l
@@ -1505,7 +1505,7 @@ asm void fn_8053E520(void)
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8053E520_00001170
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8053E520_00001170:
     cmpwi r31, 0x0
     li r0, 0x0
@@ -1601,7 +1601,7 @@ asm void fn_8053E65C(void)
     cmpwi r0, 0x0
     beq lbl_fn_8053E65C_000012B0
     mr r3, r0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8053E65C_000012B0:
     cmpwi r30, 0x0
     stw r30, 0x0(r29)
@@ -1611,7 +1611,7 @@ lbl_fn_8053E65C_000012B0:
     la r5, lbl_8087E4CC
     la r6, lbl_8087E4C8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x4(r29)
     b lbl_fn_8053E65C_000012E4
 lbl_fn_8053E65C_000012DC:
@@ -1660,13 +1660,13 @@ asm void fn_8053E6E4(void)
     bl fn_803663A4
     addi r3, r30, 0x1c4
     li r4, -0x1
-    bl fn_80014798
+    bl atn_LH_Binary_destructor
     addi r3, r30, 0x184
     li r4, -0x1
     bl fn_8053E3B4
-    lis r4, fn_800CB3A0@ha
+    lis r4, ref_releaseHandle@ha
     addi r3, r30, 0x174
-    addi r4, r4, fn_800CB3A0@l
+    addi r4, r4, ref_releaseHandle@l
     li r5, 0x4
     li r6, 0x4
     bl fn_806959D8
@@ -1717,7 +1717,7 @@ asm void fn_8053E6E4(void)
     bl fn_80537784
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r31, 0x0
     ble lbl_fn_8053E6E4_00001470
     mr r3, r30
@@ -1746,7 +1746,7 @@ asm void fn_8053E870(void)
     stw r31, 0xc(r1)
     mr r31, r3
     li r3, 0x2c8
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8053E870_000014CC
     mr r4, r31
@@ -1988,7 +1988,7 @@ lbl_fn_8053E8D4_000017A4:
     bne lbl_fn_8053E8D4_000017E0
 lbl_fn_8053E8D4_000017C8:
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F540
     lfs f0, lbl_80887CA0
     lwz r3, 0x2400(r3)
@@ -2127,7 +2127,7 @@ asm void fn_8053ED50(void)
     beq lbl_fn_8053ED50_000019D8
     mr r3, r4
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F540
     lfs f0, lbl_80887CA0
     lwz r3, 0x2400(r3)

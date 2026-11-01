@@ -7,7 +7,7 @@
 static asm void __OSLoadFPUContext(register u32 r3, register OSContext* context);
 static asm void __OSSaveFPUContext(register u32 r3, register u32 r4, register OSContext* context);
 static asm void OSSwitchFPUContext(register __OSException exception, register OSContext* context);
-extern void fn_80695D84(void); // __cvt_fp2unsigned
+extern void runtime_clampDouble(void); // __cvt_fp2unsigned
 extern void _savegpr_25(void);
 extern void _restgpr_25(void);
 
@@ -523,10 +523,10 @@ asm void OSDumpContext(register OSContext* context) {
     li r25, 0x0
 @loc_805EDECC:
     lfd f1, 0x98(r26)
-    bl fn_80695D84
+    bl runtime_clampDouble
     lfd f1, 0x90(r26)
     mr r29, r3
-    bl fn_80695D84
+    bl runtime_clampDouble
     mr r5, r3
     mr r4, r25
     mr r7, r29
@@ -545,10 +545,10 @@ asm void OSDumpContext(register OSContext* context) {
     li r25, 0x0
 @loc_805EDF20:
     lfd f1, 0x1d0(r26)
-    bl fn_80695D84
+    bl runtime_clampDouble
     lfd f1, 0x1c8(r26)
     mr r29, r3
-    bl fn_80695D84
+    bl runtime_clampDouble
     mr r5, r3
     mr r4, r25
     mr r7, r29

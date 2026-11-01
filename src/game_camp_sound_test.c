@@ -6,12 +6,12 @@ extern void _restgpr_22(void);
 extern void _restgpr_23(void);
 extern void _savegpr_22(void);
 extern void _savegpr_23(void);
-extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_realloc(void);
+extern void mem_getAllocSize(void);
 extern void fn_803BF824(void);
 extern void fn_803BF8EC(void);
 extern void fn_803BF960(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 
 /* External data declarations */
@@ -85,8 +85,8 @@ void fn_803C7FE0(void);
 void fn_803C7FE4(void);
 void fn_803C8130(void);
 void fn_803C81D8(void);
-void fn_803C81DC(void);
-void fn_803C8284(void);
+void soundTest_initOption(void);
+void soundTest_dummyCallback(void);
 void fn_803C8288(void);
 void fn_803C8330(void);
 void fn_803C8334(void);
@@ -153,14 +153,14 @@ lbl_fn_803C7964_00000048:
     la r6, lbl_8087DEA0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803C7A14@ha
     lis r5, fn_803BF824@ha
     mr r7, r30
     li r6, 0x148
     addi r4, r4, fn_803C7A14@l
     addi r5, r5, fn_803BF824@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C7964_0000009C
 lbl_fn_803C7964_00000094:
@@ -208,14 +208,14 @@ asm void fn_803C7A24(void)
     la r6, lbl_8087DE98
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803C7A14@ha
     lis r5, fn_803BF824@ha
     mr r7, r22
     li r6, 0x148
     addi r4, r4, fn_803C7A14@l
     addi r5, r5, fn_803BF824@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     cmpwi r28, 0x0
     stw r3, 0x4(r25)
     beq lbl_fn_803C7A24_000002A8
@@ -273,7 +273,7 @@ lbl_fn_803C7A24_000001C8:
     lwz r22, 0x140(r29)
     cmpwi r3, 0x0
     beq lbl_fn_803C7A24_00000218
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803C7A24_00000218:
     cmpwi r22, 0x0
     stw r22, 0x140(r30)
@@ -283,7 +283,7 @@ lbl_fn_803C7A24_00000218:
     la r5, lbl_8087D6EC
     la r6, lbl_8087D6E8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x144(r30)
     b lbl_fn_803C7A24_00000248
 lbl_fn_803C7A24_00000244:
@@ -351,7 +351,7 @@ asm void fn_803C7C34(void)
     beq lbl_fn_803C7C34_00000314
     beq lbl_fn_803C7C34_00000314
     subi r3, r6, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803C7C34_00000314:
     cmpwi r30, 0x0
     stw r30, 0x0(r29)
@@ -362,13 +362,13 @@ lbl_fn_803C7C34_00000314:
     la r5, lbl_8087DE94
     la r6, lbl_8087DE90
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803C7CDC@ha
     mr r7, r30
     addi r4, r4, fn_803C7CDC@l
     li r5, 0x0
     li r6, 0x20
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C7C34_00000364
 lbl_fn_803C7C34_0000035C:
@@ -433,7 +433,7 @@ asm void fn_803C7D20(void)
     beq lbl_fn_803C7D20_00000400
     beq lbl_fn_803C7D20_00000400
     subi r3, r6, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803C7D20_00000400:
     cmpwi r30, 0x0
     stw r30, 0x0(r29)
@@ -444,13 +444,13 @@ lbl_fn_803C7D20_00000400:
     la r5, lbl_8087DE8C
     la r6, lbl_8087DE88
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803C7DC8@ha
     mr r7, r30
     addi r4, r4, fn_803C7DC8@l
     li r5, 0x0
     li r6, 0x20
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C7D20_00000450
 lbl_fn_803C7D20_00000448:
@@ -508,13 +508,13 @@ asm void fn_803C7DF8(void)
     la r6, lbl_8087DE80
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803C7DC8@ha
     mr r7, r31
     addi r4, r4, fn_803C7DC8@l
     li r5, 0x0
     li r6, 0x20
-    bl fn_80695720
+    bl runtime_registerStaticObject
     cmpwi r30, 0x0
     stw r3, 0x4(r28)
     beq lbl_fn_803C7DF8_000005A0
@@ -560,7 +560,7 @@ lbl_fn_803C7DF8_000005A0:
     beq lbl_fn_803C7DF8_000005B4
     beq lbl_fn_803C7DF8_000005B4
     subi r3, r30, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803C7DF8_000005B4:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -596,7 +596,7 @@ asm void fn_803C7F38(void)
     beq lbl_fn_803C7F38_00000618
     beq lbl_fn_803C7F38_00000618
     subi r3, r6, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803C7F38_00000618:
     cmpwi r30, 0x0
     stw r30, 0x0(r29)
@@ -607,13 +607,13 @@ lbl_fn_803C7F38_00000618:
     la r6, lbl_8087DE78
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803C7FE0@ha
     mr r7, r30
     addi r4, r4, fn_803C7FE0@l
     li r5, 0x0
     li r6, 0x28
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C7F38_00000668
 lbl_fn_803C7F38_00000660:
@@ -660,13 +660,13 @@ asm void fn_803C7FE4(void)
     la r6, lbl_8087DE70
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803C7FE0@ha
     mr r7, r30
     addi r4, r4, fn_803C7FE0@l
     li r5, 0x0
     li r6, 0x28
-    bl fn_80695720
+    bl runtime_registerStaticObject
     cmpwi r29, 0x0
     stw r3, 0x4(r31)
     beq lbl_fn_803C7FE4_000007A0
@@ -717,7 +717,7 @@ lbl_fn_803C7FE4_000007A0:
     beq lbl_fn_803C7FE4_000007B4
     beq lbl_fn_803C7FE4_000007B4
     subi r3, r29, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803C7FE4_000007B4:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -746,7 +746,7 @@ asm void fn_803C8130(void)
     beq lbl_fn_803C8130_00000810
     beq lbl_fn_803C8130_00000810
     subi r3, r6, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803C8130_00000810:
     cmpwi r30, 0x0
     stw r30, 0x0(r29)
@@ -757,13 +757,13 @@ lbl_fn_803C8130_00000810:
     la r6, lbl_8087DE68
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803C81D8@ha
     mr r7, r30
     addi r4, r4, fn_803C81D8@l
     li r5, 0x0
     li r6, 0x30
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C8130_00000860
 lbl_fn_803C8130_00000858:
@@ -785,7 +785,7 @@ asm void fn_803C81D8(void)
     blr
 }
 
-asm void fn_803C81DC(void)
+asm void soundTest_initOption(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -799,33 +799,33 @@ asm void fn_803C81DC(void)
     mr r29, r3
     lwz r6, 0x4(r3)
     cmpwi r6, 0x0
-    beq lbl_fn_803C81DC_000008BC
-    beq lbl_fn_803C81DC_000008BC
+    beq lbl_soundTest_initOption_000008BC
+    beq lbl_soundTest_initOption_000008BC
     subi r3, r6, 0x10
-    bl fn_80084C24
-lbl_fn_803C81DC_000008BC:
+    bl mem_getAllocSize
+lbl_soundTest_initOption_000008BC:
     cmpwi r30, 0x0
     stw r30, 0x0(r29)
-    beq lbl_fn_803C81DC_00000904
+    beq lbl_soundTest_initOption_00000904
     slwi r3, r30, 6
     mr r4, r31
     addi r3, r3, 0x10
     la r5, lbl_8087DE64
     la r6, lbl_8087DE60
     li r7, 0x0
-    bl fn_800846FC
-    lis r4, fn_803C8284@ha
+    bl mem_realloc
+    lis r4, soundTest_dummyCallback@ha
     mr r7, r30
-    addi r4, r4, fn_803C8284@l
+    addi r4, r4, soundTest_dummyCallback@l
     li r5, 0x0
     li r6, 0x40
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
-    b lbl_fn_803C81DC_0000090C
-lbl_fn_803C81DC_00000904:
+    b lbl_soundTest_initOption_0000090C
+lbl_soundTest_initOption_00000904:
     li r0, 0x0
     stw r0, 0x4(r29)
-lbl_fn_803C81DC_0000090C:
+lbl_soundTest_initOption_0000090C:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -835,10 +835,8 @@ lbl_fn_803C81DC_0000090C:
     blr
 }
 
-asm void fn_803C8284(void)
+void soundTest_dummyCallback(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_803C8288(void)
@@ -858,7 +856,7 @@ asm void fn_803C8288(void)
     beq lbl_fn_803C8288_00000968
     beq lbl_fn_803C8288_00000968
     subi r3, r6, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803C8288_00000968:
     cmpwi r30, 0x0
     stw r30, 0x0(r29)
@@ -869,13 +867,13 @@ lbl_fn_803C8288_00000968:
     la r6, lbl_8087DE58
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803C8330@ha
     mr r7, r30
     addi r4, r4, fn_803C8330@l
     li r5, 0x0
     li r6, 0x30
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C8288_000009B8
 lbl_fn_803C8288_000009B0:
@@ -921,7 +919,7 @@ asm void fn_803C833C(void)
     beq lbl_fn_803C833C_00000A1C
     beq lbl_fn_803C833C_00000A1C
     subi r3, r6, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803C833C_00000A1C:
     cmpwi r30, 0x0
     stw r30, 0x0(r29)
@@ -932,13 +930,13 @@ lbl_fn_803C833C_00000A1C:
     la r5, lbl_8087DE54
     la r6, lbl_8087DE50
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803C83E4@ha
     mr r7, r30
     addi r4, r4, fn_803C83E4@l
     li r5, 0x0
     li r6, 0x40
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C833C_00000A6C
 lbl_fn_803C833C_00000A64:
@@ -985,13 +983,13 @@ asm void fn_803C83E8(void)
     la r6, lbl_8087DE48
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803C83E4@ha
     mr r7, r28
     addi r4, r4, fn_803C83E4@l
     li r5, 0x0
     li r6, 0x40
-    bl fn_80695720
+    bl runtime_registerStaticObject
     cmpwi r31, 0x0
     stw r3, 0x4(r29)
     beq lbl_fn_803C83E8_00000BD4
@@ -1054,7 +1052,7 @@ lbl_fn_803C83E8_00000BD4:
     beq lbl_fn_803C83E8_00000BE8
     beq lbl_fn_803C83E8_00000BE8
     subi r3, r31, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803C83E8_00000BE8:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1102,14 +1100,14 @@ lbl_fn_803C856C_00000C50:
     la r6, lbl_8087DE40
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803C861C@ha
     lis r5, fn_803BF8EC@ha
     mr r7, r30
     li r6, 0x48
     addi r4, r4, fn_803C861C@l
     addi r5, r5, fn_803BF8EC@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C856C_00000CA4
 lbl_fn_803C856C_00000C9C:
@@ -1157,14 +1155,14 @@ asm void fn_803C862C(void)
     la r6, lbl_8087DE38
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803C861C@ha
     lis r5, fn_803BF8EC@ha
     mr r7, r23
     li r6, 0x48
     addi r4, r4, fn_803C861C@l
     addi r5, r5, fn_803BF8EC@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     cmpwi r28, 0x0
     stw r3, 0x4(r25)
     beq lbl_fn_803C862C_00000E84
@@ -1196,7 +1194,7 @@ lbl_fn_803C862C_00000D64:
     lwz r23, 0x24(r29)
     cmpwi r3, 0x0
     beq lbl_fn_803C862C_00000DBC
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803C862C_00000DBC:
     cmpwi r23, 0x0
     stw r23, 0x24(r30)
@@ -1206,7 +1204,7 @@ lbl_fn_803C862C_00000DBC:
     la r5, lbl_8087D6EC
     la r6, lbl_8087D6E8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x28(r30)
     b lbl_fn_803C862C_00000DEC
 lbl_fn_803C862C_00000DE8:
@@ -1287,7 +1285,7 @@ asm void fn_803C8810(void)
     cmpwi r0, 0x0
     beq lbl_fn_803C8810_00000EEC
     mr r3, r0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803C8810_00000EEC:
     cmpwi r30, 0x0
     stw r30, 0x0(r29)
@@ -1297,7 +1295,7 @@ lbl_fn_803C8810_00000EEC:
     la r5, lbl_8087D6EC
     la r6, lbl_8087D6E8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x4(r29)
     b lbl_fn_803C8810_00000F20
 lbl_fn_803C8810_00000F18:
@@ -1349,14 +1347,14 @@ lbl_fn_803C88A0_00000F84:
     la r6, lbl_8087DE30
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803C8950@ha
     lis r5, fn_803BF960@ha
     mr r7, r30
     li r6, 0x28
     addi r4, r4, fn_803C8950@l
     addi r5, r5, fn_803BF960@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C88A0_00000FD8
 lbl_fn_803C88A0_00000FD0:
@@ -1404,14 +1402,14 @@ asm void fn_803C8960(void)
     la r6, lbl_8087DE28
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803C8950@ha
     lis r5, fn_803BF960@ha
     mr r7, r23
     li r6, 0x28
     addi r4, r4, fn_803C8950@l
     addi r5, r5, fn_803BF960@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     cmpwi r31, 0x0
     stw r3, 0x4(r28)
     beq lbl_fn_803C8960_00001180
@@ -1439,7 +1437,7 @@ lbl_fn_803C8960_00001098:
     lwz r23, 0x18(r24)
     cmpwi r3, 0x0
     beq lbl_fn_803C8960_000010E0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803C8960_000010E0:
     cmpwi r23, 0x0
     stw r23, 0x18(r25)
@@ -1449,7 +1447,7 @@ lbl_fn_803C8960_000010E0:
     la r5, lbl_8087D6EC
     la r6, lbl_8087D6E8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x1c(r25)
     b lbl_fn_803C8960_00001110
 lbl_fn_803C8960_0000110C:
@@ -1521,7 +1519,7 @@ asm void fn_803C8B0C(void)
     beq lbl_fn_803C8B0C_000011EC
     beq lbl_fn_803C8B0C_000011EC
     subi r3, r6, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803C8B0C_000011EC:
     cmpwi r30, 0x0
     stw r30, 0x0(r29)
@@ -1532,13 +1530,13 @@ lbl_fn_803C8B0C_000011EC:
     la r6, lbl_8087DE20
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803C8BB4@ha
     mr r7, r30
     addi r4, r4, fn_803C8BB4@l
     li r5, 0x0
     li r6, 0x30
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C8B0C_0000123C
 lbl_fn_803C8B0C_00001234:
@@ -1584,7 +1582,7 @@ asm void fn_803C8BC0(void)
     beq lbl_fn_803C8BC0_000012A0
     beq lbl_fn_803C8BC0_000012A0
     subi r3, r6, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803C8BC0_000012A0:
     cmpwi r30, 0x0
     stw r30, 0x0(r29)
@@ -1595,13 +1593,13 @@ lbl_fn_803C8BC0_000012A0:
     la r5, lbl_8087DE1C
     la r6, lbl_8087DE18
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803C8C68@ha
     mr r7, r30
     addi r4, r4, fn_803C8C68@l
     li r5, 0x0
     li r6, 0x80
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C8BC0_000012F0
 lbl_fn_803C8BC0_000012E8:
@@ -1648,13 +1646,13 @@ asm void fn_803C8C6C(void)
     la r6, lbl_8087DE10
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803C8C68@ha
     mr r7, r28
     addi r4, r4, fn_803C8C68@l
     li r5, 0x0
     li r6, 0x80
-    bl fn_80695720
+    bl runtime_registerStaticObject
     cmpwi r31, 0x0
     stw r3, 0x4(r29)
     beq lbl_fn_803C8C6C_000014D4
@@ -1748,7 +1746,7 @@ lbl_fn_803C8C6C_000014D4:
     beq lbl_fn_803C8C6C_000014E8
     beq lbl_fn_803C8C6C_000014E8
     subi r3, r31, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803C8C6C_000014E8:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1784,7 +1782,7 @@ asm void fn_803C8E6C(void)
     beq lbl_fn_803C8E6C_0000154C
     beq lbl_fn_803C8E6C_0000154C
     subi r3, r6, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803C8E6C_0000154C:
     cmpwi r30, 0x0
     stw r30, 0x0(r29)
@@ -1795,13 +1793,13 @@ lbl_fn_803C8E6C_0000154C:
     la r6, lbl_8087DE08
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803C8F14@ha
     mr r7, r30
     addi r4, r4, fn_803C8F14@l
     li r5, 0x0
     li r6, 0x58
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C8E6C_0000159C
 lbl_fn_803C8E6C_00001594:
@@ -1848,13 +1846,13 @@ asm void fn_803C8F18(void)
     la r6, lbl_8087DE00
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803C8F14@ha
     mr r7, r28
     addi r4, r4, fn_803C8F14@l
     li r5, 0x0
     li r6, 0x58
-    bl fn_80695720
+    bl runtime_registerStaticObject
     cmpwi r31, 0x0
     stw r3, 0x4(r29)
     beq lbl_fn_803C8F18_0000172C
@@ -1927,7 +1925,7 @@ lbl_fn_803C8F18_0000172C:
     beq lbl_fn_803C8F18_00001740
     beq lbl_fn_803C8F18_00001740
     subi r3, r31, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803C8F18_00001740:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1963,7 +1961,7 @@ asm void fn_803C90C4(void)
     beq lbl_fn_803C90C4_000017A4
     beq lbl_fn_803C90C4_000017A4
     subi r3, r6, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803C90C4_000017A4:
     cmpwi r30, 0x0
     stw r30, 0x0(r29)
@@ -1974,13 +1972,13 @@ lbl_fn_803C90C4_000017A4:
     la r6, lbl_8087DDF8
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803C916C@ha
     mr r7, r30
     addi r4, r4, fn_803C916C@l
     li r5, 0x0
     li r6, 0x50
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C90C4_000017F4
 lbl_fn_803C90C4_000017EC:
@@ -2027,13 +2025,13 @@ asm void fn_803C9170(void)
     la r6, lbl_8087DDF0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803C916C@ha
     mr r7, r28
     addi r4, r4, fn_803C916C@l
     li r5, 0x0
     li r6, 0x50
-    bl fn_80695720
+    bl runtime_registerStaticObject
     cmpwi r31, 0x0
     stw r3, 0x4(r29)
     beq lbl_fn_803C9170_00001974
@@ -2102,7 +2100,7 @@ lbl_fn_803C9170_00001974:
     beq lbl_fn_803C9170_00001988
     beq lbl_fn_803C9170_00001988
     subi r3, r31, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803C9170_00001988:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

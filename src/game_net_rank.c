@@ -13,19 +13,19 @@ extern void dtor_80084684(void);
 extern void fn_8006F17C(void);
 extern void fn_8006F72C(void);
 extern void fn_8006FA4C(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_800A58D0(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
-extern void fn_800D246C(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800D5738(void);
-extern void fn_800D5808(void);
+struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
+extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
-extern void fn_800D59B8(void);
+extern void atn_LH_Texture_update(void);
 extern void fn_800DBF68(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800E0908(void);
 extern void fn_801EC158(void);
 extern void fn_801EC6C0(void);
@@ -43,10 +43,10 @@ extern void fn_801FEA9C(void);
 extern void fn_801FECE0(void);
 extern void fn_801FED24(void);
 extern void fn_801FEDBC(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void fn_80686A48(void);
 extern void fn_80686B24(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -120,7 +120,7 @@ asm void fn_801F0D80(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_801F0D80_00000054
     mr r4, r31
@@ -144,15 +144,15 @@ asm void fn_801F0DF0(void)
     stw r0, 0x24(r1)
     stmw r27, 0xc(r1)
     mr r27, r3
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_80782B10@ha
-    lis r4, fn_800D5738@ha
+    lis r4, atn_LH_Texture_constructor@ha
     addi r3, r3, lbl_80782B10@l
-    lis r5, fn_800D5808@ha
+    lis r5, atn_LH_Texture_destructAndFree@ha
     stw r3, 0x0(r27)
     addi r3, r27, 0x48
-    addi r4, r4, fn_800D5738@l
-    addi r5, r5, fn_800D5808@l
+    addi r4, r4, atn_LH_Texture_constructor@l
+    addi r5, r5, atn_LH_Texture_destructAndFree@l
     li r6, 0x30
     li r7, 0x6
     bl fn_806958E0
@@ -193,7 +193,7 @@ lbl_fn_801F0DF0_00000118:
     rlwinm r0, r0, 0, 2, 0
     stw r0, 0xfc(r3)
     lwz r3, 0x180(r29)
-    bl fn_800D246C
+    bl atn_Task_setActive
     addi r28, r28, 0x1
     addi r31, r31, 0x4
     cmpwi r28, 0xa
@@ -222,15 +222,15 @@ asm void fn_801F0EF4(void)
     li r4, -0x1
     addi r3, r3, 0x168
     bl fn_801F34F8
-    lis r4, fn_800D5808@ha
+    lis r4, atn_LH_Texture_destructAndFree@ha
     addi r3, r30, 0x48
-    addi r4, r4, fn_800D5808@l
+    addi r4, r4, atn_LH_Texture_destructAndFree@l
     li r5, 0x30
     li r6, 0x6
     bl fn_806959D8
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r31, 0x0
     ble lbl_fn_801F0EF4_000001D8
     mr r3, r30
@@ -261,7 +261,7 @@ lbl_fn_801F0F74_00000214:
     li r27, 0x0
 lbl_fn_801F0F74_0000021C:
     mr r3, r30
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     beq lbl_fn_801F0F74_00000230
     li r29, 0x0
@@ -292,7 +292,7 @@ lbl_fn_801F0F74_00000278:
 lbl_fn_801F0F74_00000284:
     lwz r3, 0x180(r26)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x180(r26)
     addi r27, r27, 0x1
     cmpwi r27, 0xa
@@ -416,7 +416,7 @@ lbl_fn_801F10E0_000003C8:
     addi r30, r30, lbl_8073E228@l
     addi r31, r3, 0x58
     addi r3, r30, 0x41
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r31
@@ -432,7 +432,7 @@ lbl_fn_801F10E0_000003C8:
     addi r3, r30, 0x41
     addi r23, r4, 0x58
     fnmsubs f31, f4, f3, f0
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r23
@@ -445,7 +445,7 @@ lbl_fn_801F10E0_000003C8:
     lfs f0, 0x2c(r4)
     addi r23, r5, 0x58
     fmuls f31, f3, f0
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r23
@@ -458,7 +458,7 @@ lbl_fn_801F10E0_000003C8:
     lfs f0, 0x30(r4)
     addi r23, r5, 0x58
     fmuls f31, f3, f0
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r23
@@ -468,7 +468,7 @@ lbl_fn_801F10E0_000003C8:
     addi r3, r30, 0x41
     lfs f31, 0x10(r27)
     addi r23, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r23
@@ -477,7 +477,7 @@ lbl_fn_801F10E0_000003C8:
     lwz r4, 0x180(r24)
     addi r3, r30, 0x49
     addi r23, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f30
     mr r4, r3
     mr r3, r23
@@ -488,7 +488,7 @@ lbl_fn_801F10E0_000003C8:
     lfs f31, 0x24(r3)
     addi r3, r30, 0x51
     addi r23, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r23
@@ -1096,8 +1096,8 @@ lbl_fn_801F19D0_00000D0C:
     addi r4, r4, 0x86
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801F19D0_00000D44:
     li r5, 0x0
     addi r4, r29, 0x8
@@ -1123,8 +1123,8 @@ lbl_fn_801F19D0_00000D44:
     addi r4, r4, 0x86
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801F19D0_00000DAC:
     lis r3, 0x555
     addi r0, r3, 0x5555
@@ -1179,11 +1179,11 @@ lbl_fn_801F19D0_00000E40:
     addi r4, r4, 0x86
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801F19D0_00000E74:
     slwi r3, r28, 4
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_801F19D0_00000EA8
@@ -1193,8 +1193,8 @@ lbl_fn_801F19D0_00000E74:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80782B48@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801F19D0_00000EA8:
     lwz r3, 0x30(r1)
     li r0, 0x0
@@ -1754,7 +1754,7 @@ lbl_fn_801F2398_000016A0:
     crclr 6
     bl sprintf
     addi r3, r1, 0x30
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x134(r31)
     li r0, 0x0
     lis r30, lbl_80782BA0@ha

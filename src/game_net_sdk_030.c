@@ -16,11 +16,11 @@ extern void _savegpr_21(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068236C(void);
-extern void fn_80682428(void);
-extern void fn_80682544(void);
-extern void fn_80684600(void);
+extern void strcmp(void);
+extern void strncmp(void);
+extern void atoi(void);
 extern void fn_806A4270(void);
 extern void fn_806D5850(void);
 extern void fn_806D58F0(void);
@@ -148,7 +148,7 @@ asm void fn_806DDA30(void)
 lbl_fn_806DDA30_00000054:
     mr r3, r22
     addi r4, r23, 0x180
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_806DDA30_00000114
     lwz r22, 0x44(r21)
@@ -211,7 +211,7 @@ lbl_fn_806DDA30_00000114:
     bl fn_806E8FB0
     addi r3, r1, 0x648
     addi r4, r23, 0x184
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_806DDA30_00000178
     mr r3, r20
@@ -226,7 +226,7 @@ lbl_fn_806DDA30_00000114:
     b lbl_fn_806DDA30_00000410
 lbl_fn_806DDA30_00000178:
     addi r3, r1, 0x448
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_806DDA30_00000234
@@ -1405,7 +1405,7 @@ lbl_fn_806DEBA0_000011BC:
     addi r4, r28, 0x6c
     li r5, 0x5
     subi r3, r3, 0x5
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     beq lbl_fn_806DEBA0_000011F4
     li r3, 0x3
@@ -1423,7 +1423,7 @@ lbl_fn_806DEBA0_000011F4:
     b lbl_fn_806DEBA0_000012B8
 lbl_fn_806DEBA0_0000121C:
     addi r3, r1, 0x8
-    bl fn_80684600
+    bl atoi
     stw r3, 0x0(r26)
     addi r4, r28, 0x78
     addi r5, r1, 0x8
@@ -1436,7 +1436,7 @@ lbl_fn_806DEBA0_0000121C:
     b lbl_fn_806DEBA0_000012B8
 lbl_fn_806DEBA0_0000124C:
     addi r3, r1, 0x8
-    bl fn_80684600
+    bl atoi
     lwz r0, 0x0(r31)
     lwz r5, 0x8(r31)
     subf r0, r0, r30
@@ -2314,7 +2314,7 @@ asm void fn_806DF860(void)
     addi r27, r31, 0x198
     li r25, 0x0
 lbl_fn_806DF860_00001E6C:
-    bl fn_80680CF8
+    bl rand
     mulhwu r5, r26, r3
     add r4, r29, r25
     addi r25, r25, 0x1

@@ -16,15 +16,15 @@ extern void dtor_80084684(void);
 extern void fn_80061824(void);
 extern void fn_8006EF48(void);
 extern void fn_8006F72C(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
-extern void fn_800846FC(void);
-extern void fn_80084C24(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D5738(void);
-extern void fn_800D5808(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
+extern void mem_realloc(void);
+extern void mem_getAllocSize(void);
+extern void atn_Task_constructor(void);
+struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
+extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
-extern void fn_800D59B8(void);
+extern void atn_LH_Texture_update(void);
 extern void fn_800D5B58(void);
 extern void fn_800D71A4(void);
 extern void fn_800D71D4(void);
@@ -39,14 +39,14 @@ extern void fn_800DC3C8(void);
 extern void fn_80478198(void);
 extern void fn_806163C0(void);
 extern void fn_806163E0(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void fn_80686A48(void);
 extern void fn_80686A64(void);
-extern void fn_80686EA4(void);
-extern void fn_80695720(void);
+extern void abort(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 
 /* External data declarations */
 extern u8 lbl_80734758[];
@@ -181,7 +181,7 @@ asm void fn_800D8698(void)
     li r3, 0x1bc
     li r4, 0x6
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_800D8698_000000E0
@@ -193,11 +193,11 @@ asm void fn_800D8698(void)
     addi r3, r3, 0x4
     bl fn_800D81CC
     addi r3, r31, 0x18c
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
 lbl_fn_800D8698_000000E0:
     addi r29, r27, 0x4
     li r3, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_800D8698_00000118
@@ -207,8 +207,8 @@ lbl_fn_800D8698_000000E0:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80779810@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_800D8698_00000118:
     addic. r3, r30, 0x8
     addi r0, r27, 0x4
@@ -378,8 +378,8 @@ lbl_fn_800D8894_000002C0:
     addi r4, r4, 0x27
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_800D8894_000002F8:
     li r5, 0x0
     addi r4, r30, 0x1c
@@ -405,8 +405,8 @@ lbl_fn_800D8894_000002F8:
     addi r4, r4, 0x27
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_800D8894_00000360:
     lis r3, 0x1555
     addi r0, r3, 0x5555
@@ -461,11 +461,11 @@ lbl_fn_800D8894_000003F4:
     addi r4, r4, 0x27
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_800D8894_00000428:
     slwi r3, r28, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_800D8894_0000045C
@@ -475,8 +475,8 @@ lbl_fn_800D8894_00000428:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_800D8894_0000045C:
     lwz r0, 0x18(r1)
     stw r31, 0x14(r1)
@@ -624,21 +624,21 @@ asm void fn_800D8C14(void)
     addi r3, r3, 0x10
     bl fn_800D71A4
     addi r3, r30, 0x198
-    bl fn_800D5738
-    lis r4, fn_800D5738@ha
-    lis r5, fn_800D5808@ha
+    bl atn_LH_Texture_constructor
+    lis r4, atn_LH_Texture_constructor@ha
+    lis r5, atn_LH_Texture_destructAndFree@ha
     addi r3, r30, 0x1c8
     li r6, 0x30
-    addi r4, r4, fn_800D5738@l
-    addi r5, r5, fn_800D5808@l
+    addi r4, r4, atn_LH_Texture_constructor@l
+    addi r5, r5, atn_LH_Texture_destructAndFree@l
     li r7, 0x6
     bl fn_806958E0
     addi r3, r30, 0x2e8
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     addi r3, r30, 0x318
     bl fn_800D71A4
     addi r3, r30, 0x338
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     addi r3, r30, 0x368
     bl fn_800D71A4
     stw r27, 0x388(r30)
@@ -799,22 +799,22 @@ lbl_fn_800D8E84_000008AC:
     bl fn_800D71D4
     addi r3, r30, 0x338
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addi r3, r30, 0x318
     li r4, -0x1
     bl fn_800D71D4
     addi r3, r30, 0x2e8
     li r4, -0x1
-    bl fn_800D5808
-    lis r4, fn_800D5808@ha
+    bl atn_LH_Texture_destructAndFree
+    lis r4, atn_LH_Texture_destructAndFree@ha
     addi r3, r30, 0x1c8
-    addi r4, r4, fn_800D5808@l
+    addi r4, r4, atn_LH_Texture_destructAndFree@l
     li r5, 0x30
     li r6, 0x6
     bl fn_806959D8
     addi r3, r30, 0x198
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addi r3, r30, 0x10
     li r4, -0x1
     bl fn_800D71D4
@@ -847,14 +847,14 @@ asm void fn_800D8F5C(void)
     cmpwi r0, 0x0
     bne lbl_fn_800D8F5C_000009A4
     addi r3, r3, 0x198
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     mr r30, r3
     addi r31, r28, 0x1c8
     li r29, 0x0
     b lbl_fn_800D8F5C_00000990
 lbl_fn_800D8F5C_0000097C:
     mr r3, r31
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     or r30, r30, r3
     addi r31, r31, 0x30
     addi r29, r29, 0x1
@@ -935,7 +935,7 @@ asm void fn_800D8FEC(void)
     mr r6, r5
     li r4, 0x6
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_800D8FEC_00000AE0
@@ -980,7 +980,7 @@ lbl_fn_800D8FEC_00000AE0:
     mr r6, r5
     li r4, 0x6
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_800D8FEC_00000B90
@@ -1013,7 +1013,7 @@ lbl_fn_800D8FEC_00000B90:
     addi r5, r5, 0x26
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_800D8FEC_00000C10
@@ -1071,7 +1071,7 @@ lbl_fn_800D8FEC_00000C90:
     mr r6, r5
     li r4, 0x6
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_800D8FEC_00000CFC
@@ -1181,7 +1181,7 @@ asm void fn_800D9410(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lfs f1, lbl_80881228
     lis r3, lbl_80779868@ha
     li r8, 0x0
@@ -1258,7 +1258,7 @@ asm void fn_800D94F8(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_800D94F8_00000F20
     mr r4, r31
@@ -1676,7 +1676,7 @@ lbl_fn_800D9960_00001418:
     b lbl_fn_800D9960_00001444
     beq lbl_fn_800D9960_00001444
     li r3, -0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800D9960_00001444:
     cmpwi r21, 0x0
     stw r21, 0x38(r1)
@@ -1687,13 +1687,13 @@ lbl_fn_800D9960_00001444:
     la r6, lbl_8087D950
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_800D98DC@ha
     mr r7, r21
     addi r4, r4, fn_800D98DC@l
     li r5, 0x0
     li r6, 0xc
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x3c(r1)
     b lbl_fn_800D9960_00001494
 lbl_fn_800D9960_0000148C:
@@ -1703,7 +1703,7 @@ lbl_fn_800D9960_00001494:
     lwz r3, 0x34(r1)
     cmpwi r3, 0x0
     beq lbl_fn_800D9960_000014A4
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800D9960_000014A4:
     cmpwi r21, 0x0
     stw r21, 0x30(r1)
@@ -1713,7 +1713,7 @@ lbl_fn_800D9960_000014A4:
     la r5, lbl_8087D94C
     la r6, lbl_8087D948
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x34(r1)
     b lbl_fn_800D9960_000014D8
 lbl_fn_800D9960_000014D0:
@@ -2229,7 +2229,7 @@ lbl_fn_800D9960_00001BF8:
     b lbl_fn_800D9960_00001C14
 lbl_fn_800D9960_00001C0C:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00001C14:
     mr r17, r3
 lbl_fn_800D9960_00001C18:
@@ -2247,7 +2247,7 @@ lbl_fn_800D9960_00001C30:
     b lbl_fn_800D9960_00001C4C
 lbl_fn_800D9960_00001C44:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00001C4C:
     mr r16, r3
 lbl_fn_800D9960_00001C50:
@@ -2265,7 +2265,7 @@ lbl_fn_800D9960_00001C68:
     b lbl_fn_800D9960_00001C84
 lbl_fn_800D9960_00001C7C:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00001C84:
     mr r15, r3
 lbl_fn_800D9960_00001C88:
@@ -2283,7 +2283,7 @@ lbl_fn_800D9960_00001CA0:
     b lbl_fn_800D9960_00001CBC
 lbl_fn_800D9960_00001CB4:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00001CBC:
     lwz r0, 0x4c(r1)
     slwi r4, r3, 24
@@ -2328,7 +2328,7 @@ lbl_fn_800D9960_00001D40:
     b lbl_fn_800D9960_00001D5C
 lbl_fn_800D9960_00001D54:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00001D5C:
     mr r17, r3
 lbl_fn_800D9960_00001D60:
@@ -2346,7 +2346,7 @@ lbl_fn_800D9960_00001D78:
     b lbl_fn_800D9960_00001D94
 lbl_fn_800D9960_00001D8C:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00001D94:
     mr r16, r3
 lbl_fn_800D9960_00001D98:
@@ -2364,7 +2364,7 @@ lbl_fn_800D9960_00001DB0:
     b lbl_fn_800D9960_00001DCC
 lbl_fn_800D9960_00001DC4:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00001DCC:
     mr r15, r3
 lbl_fn_800D9960_00001DD0:
@@ -2382,7 +2382,7 @@ lbl_fn_800D9960_00001DE8:
     b lbl_fn_800D9960_00001E04
 lbl_fn_800D9960_00001DFC:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00001E04:
     lwz r0, 0x4c(r1)
     slwi r4, r3, 24
@@ -2427,7 +2427,7 @@ lbl_fn_800D9960_00001E88:
     b lbl_fn_800D9960_00001EA4
 lbl_fn_800D9960_00001E9C:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00001EA4:
     mr r17, r3
 lbl_fn_800D9960_00001EA8:
@@ -2445,7 +2445,7 @@ lbl_fn_800D9960_00001EC0:
     b lbl_fn_800D9960_00001EDC
 lbl_fn_800D9960_00001ED4:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00001EDC:
     mr r16, r3
 lbl_fn_800D9960_00001EE0:
@@ -2463,7 +2463,7 @@ lbl_fn_800D9960_00001EF8:
     b lbl_fn_800D9960_00001F14
 lbl_fn_800D9960_00001F0C:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00001F14:
     mr r15, r3
 lbl_fn_800D9960_00001F18:
@@ -2481,7 +2481,7 @@ lbl_fn_800D9960_00001F30:
     b lbl_fn_800D9960_00001F4C
 lbl_fn_800D9960_00001F44:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00001F4C:
     lwz r0, 0x4c(r1)
     slwi r4, r3, 24
@@ -2526,7 +2526,7 @@ lbl_fn_800D9960_00001FD0:
     b lbl_fn_800D9960_00001FEC
 lbl_fn_800D9960_00001FE4:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00001FEC:
     mr r17, r3
 lbl_fn_800D9960_00001FF0:
@@ -2544,7 +2544,7 @@ lbl_fn_800D9960_00002008:
     b lbl_fn_800D9960_00002024
 lbl_fn_800D9960_0000201C:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00002024:
     mr r16, r3
 lbl_fn_800D9960_00002028:
@@ -2562,7 +2562,7 @@ lbl_fn_800D9960_00002040:
     b lbl_fn_800D9960_0000205C
 lbl_fn_800D9960_00002054:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_0000205C:
     mr r15, r3
 lbl_fn_800D9960_00002060:
@@ -2580,7 +2580,7 @@ lbl_fn_800D9960_00002078:
     b lbl_fn_800D9960_00002094
 lbl_fn_800D9960_0000208C:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00002094:
     lwz r0, 0x4c(r1)
     slwi r4, r3, 24
@@ -2627,7 +2627,7 @@ lbl_fn_800D9960_0000211C:
     b lbl_fn_800D9960_00002138
 lbl_fn_800D9960_00002130:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00002138:
     mr r15, r3
 lbl_fn_800D9960_0000213C:
@@ -2645,7 +2645,7 @@ lbl_fn_800D9960_00002154:
     b lbl_fn_800D9960_00002170
 lbl_fn_800D9960_00002168:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00002170:
     mr r16, r3
 lbl_fn_800D9960_00002174:
@@ -2663,7 +2663,7 @@ lbl_fn_800D9960_0000218C:
     b lbl_fn_800D9960_000021A8
 lbl_fn_800D9960_000021A0:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_000021A8:
     mr r17, r3
 lbl_fn_800D9960_000021AC:
@@ -2681,7 +2681,7 @@ lbl_fn_800D9960_000021C4:
     b lbl_fn_800D9960_000021E0
 lbl_fn_800D9960_000021D8:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_000021E0:
     lwz r0, 0x4c(r1)
     slwi r4, r3, 24
@@ -2753,7 +2753,7 @@ lbl_fn_800D9960_000022C8:
     lwz r3, 0x34(r1)
     cmpwi r3, 0x0
     beq lbl_fn_800D9960_000022D8
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800D9960_000022D8:
     lwz r3, 0x3c(r1)
     li r0, 0x0
@@ -2763,7 +2763,7 @@ lbl_fn_800D9960_000022D8:
     beq lbl_fn_800D9960_000022FC
     beq lbl_fn_800D9960_000022FC
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800D9960_000022FC:
     li r0, 0x0
     stw r0, 0x3c(r1)

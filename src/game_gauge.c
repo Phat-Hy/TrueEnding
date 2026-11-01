@@ -9,13 +9,13 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
-extern void fn_8005B9CC(void);
+extern void actor_dispatchMessage(void);
+extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void fn_8006B0C8(void);
-extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_realloc(void);
+extern void mem_getAllocSize(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B138(void);
 extern void fn_80092F1C(void);
@@ -26,21 +26,21 @@ extern void fn_800A1B84(void);
 extern void fn_800A1CE4(void);
 extern void fn_800A1E24(void);
 extern void fn_800A1F84(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DC500(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_802376D0(void);
-extern void fn_80237874(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
-extern void fn_8047202C(void);
-extern void fn_80473E74(void);
-extern void fn_80473F18(void);
-extern void fn_80473F50(void);
+extern void res_MsgHandle_update(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
+extern void atn_Curve_evaluate(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_getName(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_80476884(void);
 extern void fn_804768B4(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_8072D210(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -71,9 +71,9 @@ void fn_800A0448(void);
 void fn_800A04A0(void);
 void fn_800A0548(void);
 void fn_800A05AC(void);
-void fn_800A05FC(void);
-void fn_800A0610(void);
-void fn_800A08D4(void);
+void atn_Anim_evalNode(void);
+void atn_Anim_evalNodeTransform(void);
+void atn_Anim_getDuration(void);
 void fn_800A08E0(void);
 void fn_800A091C(void);
 void fn_800A09D0(void);
@@ -94,10 +94,10 @@ asm void fn_800A005C(void)
     psq_stx f31, r1, r0, 0, 0
     bl _savegpr_26
     mr r30, r3
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r31, r3
     mr r3, r30
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r28, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -129,7 +129,7 @@ asm void fn_800A005C(void)
     la r4, lbl_8087D710
     bl fn_8005BCE8
     mr r3, r30
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     stw r28, 0x18(r1)
     mr r29, r3
     addi r31, r1, 0x18
@@ -148,7 +148,7 @@ asm void fn_800A005C(void)
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r31
     addi r3, r1, 0x24
     bl fn_8006B0C8
@@ -164,14 +164,14 @@ lbl_fn_800A005C_00000120:
     addi r29, r28, lbl_807326D8@l
 lbl_fn_800A005C_00000130:
     addi r3, r1, 0x430
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r26, r3
     addi r4, r29, 0x15
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_800A005C_000001A8
     addi r3, r1, 0x430
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lwz r0, 0x24(r1)
     mr r27, r3
     srwi. r0, r0, 31
@@ -193,16 +193,16 @@ lbl_fn_800A005C_00000174:
     add r7, r27, r0
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     b lbl_fn_800A005C_000002FC
 lbl_fn_800A005C_000001A8:
     mr r3, r26
     addi r4, r29, 0x1c
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_800A005C_00000260
     addi r3, r1, 0x430
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lwz r0, 0x24(r1)
     mr r6, r3
     addi r3, r1, 0x330
@@ -217,10 +217,10 @@ lbl_fn_800A005C_000001E8:
     crclr 6
     bl sprintf
     addi r3, r1, 0x430
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r26, r3
     addi r4, r28, lbl_807326D8@l
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_800A005C_00000220
     addi r3, r30, 0x10
@@ -250,11 +250,11 @@ lbl_fn_800A005C_00000240:
 lbl_fn_800A005C_00000260:
     mr r3, r26
     addi r4, r29, 0x28
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_800A005C_000002FC
     addi r3, r1, 0x430
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lwz r0, 0x24(r1)
     mr r6, r3
     addi r3, r1, 0x130
@@ -269,7 +269,7 @@ lbl_fn_800A005C_000002A0:
     crclr 6
     bl sprintf
     addi r3, r1, 0x430
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lwz r0, 0x24(r1)
     mr r6, r3
     addi r3, r1, 0x30
@@ -284,8 +284,8 @@ lbl_fn_800A005C_000002D4:
     crclr 6
     bl sprintf
     addi r3, r1, 0x430
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     fmuls f1, f31, f1
     addi r3, r30, 0x10
     addi r4, r1, 0x130
@@ -321,7 +321,7 @@ asm void fn_800A03A0(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r3, lbl_8078FE50@ha
     li r0, 0x0
     addi r3, r3, lbl_8078FE50@l
@@ -374,7 +374,7 @@ asm void fn_800A0448(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_800A0448_00000414
     li r3, 0x1
@@ -411,7 +411,7 @@ asm void fn_800A04A0(void)
     stw r29, 0xc(r1)
     mr r29, r3
     mr r3, r5
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r7, 0x8(r29)
     li r6, 0x0
     lwz r0, 0x14(r7)
@@ -428,7 +428,7 @@ lbl_fn_800A04A0_00000490:
     mr r3, r29
     mr r4, r30
     mr r6, r31
-    bl fn_800A0610
+    bl atn_Anim_evalNodeTransform
     li r3, 0x1
     b lbl_fn_800A04A0_000004CC
 lbl_fn_800A04A0_000004C0:
@@ -466,7 +466,7 @@ lbl_fn_800A0548_00000510:
     cmplw r0, r5
     bne lbl_fn_800A0548_00000534
     mr r5, r7
-    bl fn_800A0610
+    bl atn_Anim_evalNodeTransform
     li r3, 0x1
     b lbl_fn_800A0548_00000540
 lbl_fn_800A0548_00000534:
@@ -508,17 +508,17 @@ lbl_fn_800A05AC_00000598:
     blr
 }
 
-asm void fn_800A05FC(void)
+asm void atn_Anim_evalNode(void)
 {
     nofralloc
     lwz r7, 0x8(r3)
     slwi r0, r5, 2
     lwz r5, 0x18(r7)
     lwzx r5, r5, r0
-    b fn_800A0610
+    b atn_Anim_evalNodeTransform
 }
 
-asm void fn_800A0610(void)
+asm void atn_Anim_evalNodeTransform(void)
 {
     nofralloc
     stwu r1, -0x90(r1)
@@ -540,13 +540,13 @@ asm void fn_800A0610(void)
     mr r29, r6
     li r31, 0x0
     li r30, 0x0
-    beq lbl_fn_800A0610_00000664
+    beq lbl_atn_Anim_evalNodeTransform_00000664
     mulli r0, r31, 0xc
     lwz r3, 0x1c(r5)
     mr r4, r29
     li r31, 0x1
     add r3, r3, r0
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     mulli r0, r31, 0xc
     stfs f1, 0x20(r27)
     lwz r3, 0x1c(r28)
@@ -554,7 +554,7 @@ asm void fn_800A0610(void)
     addi r4, r29, 0x2
     add r3, r3, r0
     li r31, 0x2
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     mulli r0, r31, 0xc
     stfs f1, 0x24(r27)
     lwz r3, 0x1c(r28)
@@ -563,12 +563,12 @@ asm void fn_800A0610(void)
     add r3, r3, r0
     li r31, 0x3
     li r30, 0x3
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     stfs f1, 0x28(r27)
-lbl_fn_800A0610_00000664:
+lbl_atn_Anim_evalNodeTransform_00000664:
     lwz r0, 0x18(r28)
     rlwinm. r0, r0, 0, 30, 30
-    beq lbl_fn_800A0610_000007BC
+    beq lbl_atn_Anim_evalNodeTransform_000007BC
     mulli r3, r31, 0xc
     slwi r0, r30, 1
     lwz r5, 0x1c(r28)
@@ -577,7 +577,7 @@ lbl_fn_800A0610_00000664:
     add r3, r5, r3
     addi r31, r31, 0x1
     addi r30, r30, 0x1
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     mulli r3, r31, 0xc
     slwi r0, r30, 1
     stfs f1, 0x30(r1)
@@ -587,7 +587,7 @@ lbl_fn_800A0610_00000664:
     add r3, r5, r3
     addi r31, r31, 0x1
     addi r30, r30, 0x1
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     mulli r3, r31, 0xc
     slwi r0, r30, 1
     stfs f1, 0x34(r1)
@@ -597,7 +597,7 @@ lbl_fn_800A0610_00000664:
     add r3, r5, r3
     addi r31, r31, 0x1
     addi r30, r30, 0x1
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     lfs f4, 0x30(r1)
     frsp f30, f1
     lfs f3, lbl_80880C94
@@ -652,10 +652,10 @@ lbl_fn_800A0610_00000664:
     psq_l f2, 0x8(r3), 0, 0
     psq_st f1, 0x10(r27), 0, 0
     psq_st f2, 0x18(r27), 0, 0
-lbl_fn_800A0610_000007BC:
+lbl_atn_Anim_evalNodeTransform_000007BC:
     lwz r0, 0x18(r28)
     clrlwi. r0, r0, 31
-    beq lbl_fn_800A0610_00000838
+    beq lbl_atn_Anim_evalNodeTransform_00000838
     mulli r3, r31, 0xc
     slwi r0, r30, 1
     lwz r5, 0x1c(r28)
@@ -664,7 +664,7 @@ lbl_fn_800A0610_000007BC:
     add r3, r5, r3
     addi r31, r31, 0x1
     addi r30, r30, 0x1
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     mulli r3, r31, 0xc
     slwi r0, r30, 1
     stfs f1, 0x4(r27)
@@ -674,7 +674,7 @@ lbl_fn_800A0610_000007BC:
     add r3, r5, r3
     addi r31, r31, 0x1
     addi r30, r30, 0x1
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     mulli r3, r31, 0xc
     stfs f1, 0x8(r27)
     lwz r4, 0x1c(r28)
@@ -682,9 +682,9 @@ lbl_fn_800A0610_000007BC:
     slwi r0, r30, 1
     add r3, r4, r3
     add r4, r29, r0
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     stfs f1, 0xc(r27)
-lbl_fn_800A0610_00000838:
+lbl_atn_Anim_evalNodeTransform_00000838:
     lwz r3, 0x0(r27)
     lwz r0, 0x18(r28)
     or r0, r3, r0
@@ -703,7 +703,7 @@ lbl_fn_800A0610_00000838:
     blr
 }
 
-asm void fn_800A08D4(void)
+asm void atn_Anim_getDuration(void)
 {
     nofralloc
     lwz r3, 0x8(r3)
@@ -765,7 +765,7 @@ lbl_fn_800A091C_0000090C:
 lbl_fn_800A091C_00000924:
     lwz r0, 0x20(r29)
     add r3, r0, r31
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     beq lbl_fn_800A091C_00000940
     li r3, 0x1
@@ -950,7 +950,7 @@ lbl_fn_800A0A68_00000B8C:
     stw r0, 0x1c(r29)
     bgt lbl_fn_800A0A68_00000C20
     lwz r3, 0x18(r29)
-    bl fn_80084C24
+    bl mem_getAllocSize
     lwz r0, 0xc(r31)
     mr r25, r29
     cmplw r29, r0
@@ -1397,7 +1397,7 @@ lbl_fn_800A1060_0000117C:
     stw r0, 0x1c(r29)
     bgt lbl_fn_800A1060_00001210
     lwz r3, 0x18(r29)
-    bl fn_80084C24
+    bl mem_getAllocSize
     lwz r0, 0xc(r31)
     mr r27, r29
     cmplw r29, r0
@@ -1675,7 +1675,7 @@ lbl_fn_800A130C_0000153C:
     li r4, 0x6
     mr r6, r5
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r30, r3
     mr r5, r31
     addi r4, r1, 0xa8

@@ -12,31 +12,31 @@ extern void fn_800184F4(void);
 extern void fn_80018608(void);
 extern void fn_8003E918(void);
 extern void fn_80043EAC(void);
-extern void fn_80044134(void);
-extern void fn_8004424C(void);
+extern void Arms_destructor(void);
+extern void Arms_execute(void);
 extern void fn_8005DFC8(void);
 extern void fn_80061824(void);
 extern void fn_8006EF48(void);
 extern void fn_800827E0(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_80084F84(void);
 extern void fn_800A555C(void);
 extern void fn_800A55FC(void);
 extern void fn_800A5920(void);
 extern void fn_800C31F4(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
-extern void fn_800CB5C8(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
-extern void fn_800D2338(void);
-extern void fn_800D246C(void);
+extern void morph_updateMesh(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
+extern void atn_Task_unlink(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800D59B8(void);
+extern void atn_LH_Texture_update(void);
 extern void fn_800E0000(void);
 extern void fn_800EE794(void);
-extern void fn_801231D0(void);
+extern void magic_dispatchActionCommand(void);
 extern void fn_801240B4(void);
 extern void fn_8012D180(void);
 extern void fn_80160170(void);
@@ -46,7 +46,7 @@ extern void fn_8017ABD4(void);
 extern void fn_801F3FF8(void);
 extern void fn_801F64D0(void);
 extern void fn_80219558(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_8021A77C(void);
 extern void fn_80375184(void);
 extern void fn_8037F744(void);
@@ -64,14 +64,14 @@ extern void fn_805AC75C(void);
 extern void fn_805ADDD8(void);
 extern void fn_805ADF54(void);
 extern void fn_805AE18C(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9750(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void PSMTXRotRad(void);
+extern void PSMTX44Identity(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 extern void fn_8068B100(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 
 /* External data declarations */
 extern u8 lbl_807637E0[];
@@ -142,16 +142,16 @@ extern u32 lbl_80888324;
 extern u32 lbl_80888328;
 
 /* Function declarations */
-void fn_805A6404(void);
-void fn_805A646C(void);
-void fn_805A6614(void);
+void arms_attachWeapon(void);
+void arms_updateWeaponState(void);
+void arms_calcWeaponHitbox(void);
 void fn_805A6A84(void);
 void fn_805A6AC0(void);
 void fn_805A6B18(void);
 void fn_805A6B54(void);
 void fn_805A6B58(void);
 void fn_805A6BD8(void);
-void fn_805A6BDC(void);
+void archive_mountCheckStatus(void);
 void fn_805A6D14(void);
 void fn_805A6D24(void);
 void fn_805A70D8(void);
@@ -164,7 +164,7 @@ void fn_805A7650(void);
 void fn_805A76E4(void);
 void fn_805A7820(void);
 
-asm void fn_805A6404(void)
+asm void arms_attachWeapon(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -176,17 +176,17 @@ asm void fn_805A6404(void)
     li r30, 0x1
     stw r29, 0x14(r1)
     li r29, 0x0
-lbl_fn_805A6404_00000024:
+lbl_arms_attachWeapon_00000024:
     mr r3, r31
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
-    beq lbl_fn_805A6404_00000038
+    beq lbl_arms_attachWeapon_00000038
     li r30, 0x0
-lbl_fn_805A6404_00000038:
+lbl_arms_attachWeapon_00000038:
     addi r29, r29, 0x1
     addi r31, r31, 0x30
     cmpwi r29, 0x2
-    blt lbl_fn_805A6404_00000024
+    blt lbl_arms_attachWeapon_00000024
     mr r3, r30
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -197,7 +197,7 @@ lbl_fn_805A6404_00000038:
     blr
 }
 
-asm void fn_805A646C(void)
+asm void arms_updateWeaponState(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -208,42 +208,42 @@ asm void fn_805A646C(void)
     mr r30, r3
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_805A646C_000000A8
+    beq lbl_arms_updateWeaponState_000000A8
     cmpwi r0, 0x1
-    beq lbl_fn_805A646C_00000108
+    beq lbl_arms_updateWeaponState_00000108
     cmpwi r0, 0x2
-    beq lbl_fn_805A646C_0000016C
+    beq lbl_arms_updateWeaponState_0000016C
     cmpwi r0, 0x3
-    beq lbl_fn_805A646C_000001B0
-    b lbl_fn_805A646C_000001F8
-lbl_fn_805A646C_000000A8:
+    beq lbl_arms_updateWeaponState_000001B0
+    b lbl_arms_updateWeaponState_000001F8
+lbl_arms_updateWeaponState_000000A8:
     lwz r4, 0x50(r3)
     li r31, 0x0
     addi r0, r4, 0x1
     stw r0, 0x50(r3)
     cmpwi r0, 0x1e
-    blt lbl_fn_805A646C_000000DC
+    blt lbl_arms_updateWeaponState_000000DC
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x0
     bl fn_800A5920
     cmpwi r3, 0x0
-    beq lbl_fn_805A646C_000000DC
+    beq lbl_arms_updateWeaponState_000000DC
     li r31, 0x1
-lbl_fn_805A646C_000000DC:
+lbl_arms_updateWeaponState_000000DC:
     lwz r0, 0x50(r30)
     cmpwi r0, 0x257
-    blt lbl_fn_805A646C_000000EC
+    blt lbl_arms_updateWeaponState_000000EC
     li r31, 0x1
-lbl_fn_805A646C_000000EC:
+lbl_arms_updateWeaponState_000000EC:
     cmpwi r31, 0x0
-    beq lbl_fn_805A646C_000001F8
+    beq lbl_arms_updateWeaponState_000001F8
     li r3, 0x2
     li r0, 0x0
     stw r3, 0x48(r30)
     stw r0, 0x4c(r30)
-    b lbl_fn_805A646C_000001F8
-lbl_fn_805A646C_00000108:
+    b lbl_arms_updateWeaponState_000001F8
+lbl_arms_updateWeaponState_00000108:
     lwz r5, lbl_8087EEE0
     lis r0, 0x4330
     stw r0, 0x8(r1)
@@ -256,27 +256,27 @@ lbl_fn_805A646C_00000108:
     lfd f1, 0x8(r1)
     fsubs f1, f1, f2
     fcmpo cr0, f1, f0
-    ble lbl_fn_805A646C_0000014C
+    ble lbl_arms_updateWeaponState_0000014C
     li r4, 0x0
     li r0, 0x3
     stw r4, 0x4c(r3)
     stw r0, 0x48(r3)
-lbl_fn_805A646C_0000014C:
+lbl_arms_updateWeaponState_0000014C:
     lwz r4, 0x4c(r3)
     addi r0, r4, 0x1
     stw r0, 0x4c(r3)
     cmpwi r0, 0xf
-    blt lbl_fn_805A646C_000001F8
+    blt lbl_arms_updateWeaponState_000001F8
     li r0, 0x0
     stw r0, 0x48(r3)
-    b lbl_fn_805A646C_000001F8
-lbl_fn_805A646C_0000016C:
+    b lbl_arms_updateWeaponState_000001F8
+lbl_arms_updateWeaponState_0000016C:
     lwz r4, 0x4c(r3)
     addi r0, r4, 0x1
     stw r0, 0x4c(r3)
     cmpwi r0, 0xf
-    blt lbl_fn_805A646C_000001F8
-    bl fn_800D2338
+    blt lbl_arms_updateWeaponState_000001F8
+    bl atn_Task_unlink
     lwz r4, lbl_8087F4E8
     li r0, 0x1
     lis r3, lbl_807637FC@ha
@@ -287,19 +287,19 @@ lbl_fn_805A646C_0000016C:
     stw r0, 0x90(r3)
     lwz r3, lbl_8087F9AC
     bl fn_80572B70
-    b lbl_fn_805A646C_000001F8
-lbl_fn_805A646C_000001B0:
+    b lbl_arms_updateWeaponState_000001F8
+lbl_arms_updateWeaponState_000001B0:
     lwz r4, 0x4c(r3)
     addi r0, r4, 0x1
     stw r0, 0x4c(r3)
     cmpwi r0, 0x2d
-    ble lbl_fn_805A646C_000001F8
+    ble lbl_arms_updateWeaponState_000001F8
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x0
     bl fn_800A5920
     cmpwi r3, 0x0
-    beq lbl_fn_805A646C_000001F8
+    beq lbl_arms_updateWeaponState_000001F8
     li r3, 0xf
     li r0, 0x4
     stw r3, 0x4c(r30)
@@ -307,7 +307,7 @@ lbl_fn_805A646C_000001B0:
     stw r0, 0x48(r30)
     lwz r3, lbl_8087F9A0
     bl fn_80571560
-lbl_fn_805A646C_000001F8:
+lbl_arms_updateWeaponState_000001F8:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -316,7 +316,7 @@ lbl_fn_805A646C_000001F8:
     blr
 }
 
-asm void fn_805A6614(void)
+asm void arms_calcWeaponHitbox(void)
 {
     nofralloc
     stwu r1, -0xc0(r1)
@@ -361,13 +361,13 @@ asm void fn_805A6614(void)
     clrlwi r0, r0, 31
     xor r0, r0, r4
     subf r31, r4, r0
-    ble lbl_fn_805A6614_00000324
+    ble lbl_arms_calcWeaponHitbox_00000324
     cmpwi r6, 0x1
-    beq lbl_fn_805A6614_000002D0
+    beq lbl_arms_calcWeaponHitbox_000002D0
     cmpwi r6, 0x2
-    beq lbl_fn_805A6614_000002F8
-    b lbl_fn_805A6614_00000508
-lbl_fn_805A6614_000002D0:
+    beq lbl_arms_calcWeaponHitbox_000002F8
+    b lbl_arms_calcWeaponHitbox_00000508
+lbl_arms_calcWeaponHitbox_000002D0:
     lwz r0, 0x4c(r3)
     lis r3, lbl_807637E0@ha
     lfd f2, lbl_807637E0@l(r3)
@@ -377,8 +377,8 @@ lbl_fn_805A6614_000002D0:
     lfd f1, 0x18(r1)
     fsubs f1, f1, f2
     fdivs f31, f1, f0
-    b lbl_fn_805A6614_00000508
-lbl_fn_805A6614_000002F8:
+    b lbl_arms_calcWeaponHitbox_00000508
+lbl_arms_calcWeaponHitbox_000002F8:
     lwz r0, 0x4c(r3)
     lis r3, lbl_807637E0@ha
     lfd f2, lbl_807637E0@l(r3)
@@ -389,8 +389,8 @@ lbl_fn_805A6614_000002F8:
     lfd f1, 0x20(r1)
     fsubs f1, f1, f2
     fdivs f31, f1, f0
-    b lbl_fn_805A6614_00000508
-lbl_fn_805A6614_00000324:
+    b lbl_arms_calcWeaponHitbox_00000508
+lbl_arms_calcWeaponHitbox_00000324:
     lwz r0, 0x4c(r3)
     lis r3, lbl_807637E0@ha
     lfd f2, lbl_807637E0@l(r3)
@@ -401,14 +401,14 @@ lbl_fn_805A6614_00000324:
     fsubs f0, f0, f2
     fdivs f0, f0, f1
     fcmpo cr0, f31, f0
-    bge lbl_fn_805A6614_00000354
-    b lbl_fn_805A6614_00000364
-lbl_fn_805A6614_00000354:
+    bge lbl_arms_calcWeaponHitbox_00000354
+    b lbl_arms_calcWeaponHitbox_00000364
+lbl_arms_calcWeaponHitbox_00000354:
     stw r0, 0x24(r1)
     lfd f0, 0x20(r1)
     fsubs f0, f0, f2
     fdivs f31, f0, f1
-lbl_fn_805A6614_00000364:
+lbl_arms_calcWeaponHitbox_00000364:
     li r0, 0x0
     stw r0, 0x8(r1)
     lwz r4, lbl_8087F1E4
@@ -417,11 +417,11 @@ lbl_fn_805A6614_00000364:
     stw r0, 0x10(r1)
     lwz r4, 0xe3c(r4)
     cmpwi r4, 0x0
-    beq lbl_fn_805A6614_0000038C
-    b lbl_fn_805A6614_00000390
-lbl_fn_805A6614_0000038C:
+    beq lbl_arms_calcWeaponHitbox_0000038C
+    b lbl_arms_calcWeaponHitbox_00000390
+lbl_arms_calcWeaponHitbox_0000038C:
     la r4, lbl_808813D0
-lbl_fn_805A6614_00000390:
+lbl_arms_calcWeaponHitbox_00000390:
     lfs f1, lbl_808882AC
     li r5, 0x1
     lfs f2, lbl_808882B0
@@ -438,20 +438,20 @@ lbl_fn_805A6614_00000390:
     lfs f28, lbl_808882C4
     lfs f29, lbl_808882C0
     lfs f30, lbl_808882C8
-    b lbl_fn_805A6614_00000498
-lbl_fn_805A6614_000003D4:
+    b lbl_arms_calcWeaponHitbox_00000498
+lbl_arms_calcWeaponHitbox_000003D4:
     lwz r0, 0x8(r1)
     lwz r3, lbl_8087EEC8
     add r4, r0, r30
     lwzx r0, r30, r0
     lfs f1, lbl_808882B0
     srwi. r0, r0, 31
-    bne lbl_fn_805A6614_000003F8
+    bne lbl_arms_calcWeaponHitbox_000003F8
     addi r4, r4, 0x2
-    b lbl_fn_805A6614_000003FC
-lbl_fn_805A6614_000003F8:
+    b lbl_arms_calcWeaponHitbox_000003FC
+lbl_arms_calcWeaponHitbox_000003F8:
     lwz r4, 0x8(r4)
-lbl_fn_805A6614_000003FC:
+lbl_arms_calcWeaponHitbox_000003FC:
     lfs f2, lbl_808882B4
     li r5, 0x1
     li r6, 0x1
@@ -463,7 +463,7 @@ lbl_fn_805A6614_000003FC:
     fmuls f24, f26, f2
     fsubs f0, f0, f27
     fmadds f23, f28, f0, f29
-    bl fn_80695D84
+    bl runtime_clampDouble
     slwi r0, r3, 24
     lfs f4, lbl_808882B0
     oris r5, r0, 0xff
@@ -476,12 +476,12 @@ lbl_fn_805A6614_000003FC:
     srwi. r0, r0, 31
     lfs f3, lbl_808882B4
     ori r5, r5, 0xffff
-    bne lbl_fn_805A6614_00000468
+    bne lbl_arms_calcWeaponHitbox_00000468
     addi r4, r4, 0x2
-    b lbl_fn_805A6614_0000046C
-lbl_fn_805A6614_00000468:
+    b lbl_arms_calcWeaponHitbox_0000046C
+lbl_arms_calcWeaponHitbox_00000468:
     lwz r4, 0x8(r4)
-lbl_fn_805A6614_0000046C:
+lbl_arms_calcWeaponHitbox_0000046C:
     lfs f6, lbl_808882B4
     li r6, 0x1
     li r7, 0x1
@@ -493,39 +493,39 @@ lbl_fn_805A6614_0000046C:
     bl fn_80061824
     addi r30, r30, 0xc
     addi r31, r31, 0x1
-lbl_fn_805A6614_00000498:
+lbl_arms_calcWeaponHitbox_00000498:
     lwz r0, 0xc(r1)
     cmplw r31, r0
-    blt lbl_fn_805A6614_000003D4
+    blt lbl_arms_calcWeaponHitbox_000003D4
     addic. r0, r1, 0x8
-    beq lbl_fn_805A6614_00000620
-    beq lbl_fn_805A6614_00000620
+    beq lbl_arms_calcWeaponHitbox_00000620
+    beq lbl_arms_calcWeaponHitbox_00000620
     lwz r4, 0x8(r1)
     cmpwi r4, 0x0
-    beq lbl_fn_805A6614_00000620
+    beq lbl_arms_calcWeaponHitbox_00000620
     lwz r31, 0xc(r1)
     mulli r3, r31, 0xc
     subf r0, r31, r31
     stw r0, 0xc(r1)
     add r30, r4, r3
-    b lbl_fn_805A6614_000004F4
-lbl_fn_805A6614_000004D4:
+    b lbl_arms_calcWeaponHitbox_000004F4
+lbl_arms_calcWeaponHitbox_000004D4:
     subic. r30, r30, 0xc
-    beq lbl_fn_805A6614_000004F0
+    beq lbl_arms_calcWeaponHitbox_000004F0
     lwz r0, 0x0(r30)
     srwi. r0, r0, 31
-    beq lbl_fn_805A6614_000004F0
+    beq lbl_arms_calcWeaponHitbox_000004F0
     lwz r3, 0x8(r30)
     bl dtor_80084684
-lbl_fn_805A6614_000004F0:
+lbl_arms_calcWeaponHitbox_000004F0:
     subi r31, r31, 0x1
-lbl_fn_805A6614_000004F4:
+lbl_arms_calcWeaponHitbox_000004F4:
     cmpwi r31, 0x0
-    bne lbl_fn_805A6614_000004D4
+    bne lbl_arms_calcWeaponHitbox_000004D4
     lwz r3, 0x8(r1)
     bl dtor_80084684
-    b lbl_fn_805A6614_00000620
-lbl_fn_805A6614_00000508:
+    b lbl_arms_calcWeaponHitbox_00000620
+lbl_arms_calcWeaponHitbox_00000508:
     lwz r6, lbl_8087EEE0
     lis r5, lbl_807637E0@ha
     lfs f8, lbl_808882A4
@@ -560,15 +560,15 @@ lbl_fn_805A6614_00000508:
     fsubs f1, f1, f5
     fsubs f7, f4, f5
     fdivs f9, f1, f0
-    beq lbl_fn_805A6614_000005A4
+    beq lbl_arms_calcWeaponHitbox_000005A4
     fmr f2, f10
     lfs f8, lbl_808882D4
     lfs f6, lbl_808882C4
-    b lbl_fn_805A6614_000005AC
-lbl_fn_805A6614_000005A4:
+    b lbl_arms_calcWeaponHitbox_000005AC
+lbl_arms_calcWeaponHitbox_000005A4:
     lfs f10, lbl_808882D8
     lfs f6, lbl_808882DC
-lbl_fn_805A6614_000005AC:
+lbl_arms_calcWeaponHitbox_000005AC:
     fmuls f5, f8, f2
     lfs f0, lbl_808882C8
     fmuls f4, f9, f10
@@ -583,7 +583,7 @@ lbl_fn_805A6614_000005AC:
     fmuls f7, f7, f0
     fsubs f0, f7, f3
     fmadds f25, f2, f0, f6
-    bl fn_80695D84
+    bl runtime_clampDouble
     mulli r0, r31, 0x30
     slwi r4, r3, 24
     fmr f1, f25
@@ -598,7 +598,7 @@ lbl_fn_805A6614_000005AC:
     addi r5, r5, 0x54
     li r6, 0x1
     bl fn_8005DFC8
-lbl_fn_805A6614_00000620:
+lbl_arms_calcWeaponHitbox_00000620:
     lwz r0, 0xc4(r1)
     psq_l f31, 0xb8(r1), 0, 0
     lfd f31, 0xb0(r1)
@@ -658,7 +658,7 @@ asm void fn_805A6AC0(void)
     mr r30, r3
     beq lbl_fn_805A6AC0_000006F8
     li r4, 0x0
-    bl fn_80044134
+    bl Arms_destructor
     cmpwi r31, 0x0
     ble lbl_fn_805A6AC0_000006F8
     mr r3, r30
@@ -681,7 +681,7 @@ asm void fn_805A6B18(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     li r31, 0x0
-    bl fn_8004424C
+    bl Arms_execute
     cmpwi r3, 0x0
     beq lbl_fn_805A6B18_00000738
     li r31, 0x1
@@ -743,7 +743,7 @@ asm void fn_805A6BD8(void)
     blr
 }
 
-asm void fn_805A6BDC(void)
+asm void archive_mountCheckStatus(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -870,7 +870,7 @@ lbl_fn_805A6D24_00000984:
 lbl_fn_805A6D24_0000098C:
     frsp f2, f2
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_805A6D24_000009A0:
@@ -878,7 +878,7 @@ lbl_fn_805A6D24_000009A0:
     addi r3, r1, 0x60
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_808882F4
     addi r4, r1, 0x38
     lfs f30, 0x68(r1)
@@ -928,7 +928,7 @@ lbl_fn_805A6D24_000009A0:
     stfs f6, 0xbc(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_808882E8
     fabs f3, f2
@@ -949,7 +949,7 @@ lbl_fn_805A6D24_00000AB0:
     b lbl_fn_805A6D24_00000AD0
 lbl_fn_805A6D24_00000ABC:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -964,7 +964,7 @@ lbl_fn_805A6D24_00000AD0:
     lfs f1, 0x54(r1)
     lfd f2, lbl_80763848@l(r3)
     stfs f0, 0x4c(r1)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f0, f1
     lfs f3, lbl_808882FC
     fcmpo cr0, f0, f3
@@ -1125,7 +1125,7 @@ asm void fn_805A70F4(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A70F4_00000D3C
     mr r4, r31
@@ -1152,7 +1152,7 @@ asm void fn_805A715C(void)
     lis r31, lbl_80763848@ha
     mr r30, r3
     addi r31, r31, lbl_80763848@l
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_807976EC@ha
     lis r4, lbl_80775B18@ha
     li r29, 0x0
@@ -1307,45 +1307,45 @@ lbl_fn_805A715C_00000FA0:
     bl fn_801F3FF8
     stw r3, 0x15b0(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r30
     addi r4, r29, 0x25
     li r5, 0x0
     bl fn_801F3FF8
     stw r3, 0x15b8(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r30
     addi r4, r29, 0x4b
     li r5, 0x0
     bl fn_801F3FF8
     stw r3, 0x15b4(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r30
     addi r4, r29, 0x6d
     bl fn_801F64D0
     stw r3, 0x15bc(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r30
     addi r4, r29, 0x8d
     bl fn_801F64D0
     stw r3, 0x15c8(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r30
     addi r4, r29, 0xad
     bl fn_801F64D0
     stw r3, 0x15c0(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r30
     addi r4, r29, 0xcd
     bl fn_801F64D0
     stw r3, 0x15c4(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lis r6, lbl_807C95B0@ha
     li r0, 0x6
     addi r5, r31, 0xd0
@@ -1515,7 +1515,7 @@ asm void fn_805A7650(void)
     stw r0, lbl_8087F9F8
     li r4, -0x1
     addi r3, r3, 0x16c0
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addic. r3, r30, 0xec
     beq lbl_fn_805A7650_000012A8
     beq lbl_fn_805A7650_000012A8
@@ -1528,7 +1528,7 @@ asm void fn_805A7650(void)
 lbl_fn_805A7650_000012A8:
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r31, 0x0
     ble lbl_fn_805A7650_000012C4
     mr r3, r30
@@ -1560,7 +1560,7 @@ asm void fn_805A76E4(void)
     beq lbl_fn_805A76E4_000013F4
     lwz r3, 0x15b0(r31)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x15b0(r31)
     li r4, 0x0
     lfs f0, lbl_808882F4
@@ -1574,14 +1574,14 @@ asm void fn_805A76E4(void)
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, 0x15b8(r31)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x15b8(r31)
     li r4, 0x0
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, 0x15b4(r31)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x15b4(r31)
     li r29, 0x0
     lfs f0, lbl_808882F8
@@ -1599,7 +1599,7 @@ asm void fn_805A76E4(void)
 lbl_fn_805A76E4_000013A8:
     lwz r3, 0x15bc(r31)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x15bc(r31)
     addi r29, r29, 0x1
     cmpwi r29, 0x4
@@ -1713,7 +1713,7 @@ lbl_fn_805A7820_00001540:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lfs f3, lbl_808882F4
     li r25, 0x0
     li r0, 0x2
@@ -1734,7 +1734,7 @@ lbl_fn_805A7820_00001540:
     stw r0, 0x15f0(r24)
     stw r25, 0x15f4(r24)
     stw r25, 0x15f8(r24)
-    bl fn_800CB5C8
+    bl morph_updateMesh
     stw r25, 0x15cc(r24)
     lwz r3, 0x15bc(r24)
     stw r25, 0x15d0(r24)
@@ -1788,7 +1788,7 @@ lbl_fn_805A7820_00001660:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     b lbl_fn_805A7820_00003284
 lbl_fn_805A7820_0000167C:
     cmpwi r0, 0x2
@@ -1814,7 +1814,7 @@ lbl_fn_805A7820_000016B8:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     cmpwi r25, 0x0
     beq lbl_fn_805A7820_0000173C
     lwz r5, 0xa88(r24)
@@ -1868,7 +1868,7 @@ lbl_fn_805A7820_00001778:
     bl fn_805A70D8
     addi r3, r1, 0x34
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_805A7820_00003284
 lbl_fn_805A7820_00001798:
     lwz r0, 0xa78(r24)
@@ -1886,7 +1886,7 @@ lbl_fn_805A7820_000017BC:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0xa88(r24)
     lwz r0, 0x158c(r24)
     cmpw cr1, r0, r3
@@ -1923,7 +1923,7 @@ lbl_fn_805A7820_00001844:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
 lbl_fn_805A7820_0000185C:
     li r0, 0x0
     stw r0, 0x15cc(r24)
@@ -2329,7 +2329,7 @@ lbl_fn_805A7820_00001DE0:
     bl fn_805A70D8
     addi r3, r1, 0x30
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_805A7820_0000207C
 lbl_fn_805A7820_00001E1C:
     li r0, 0x1
@@ -2340,7 +2340,7 @@ lbl_fn_805A7820_00001E1C:
     bl fn_805A70D8
     addi r3, r1, 0x2c
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_805A7820_0000207C
 lbl_fn_805A7820_00001E44:
     cmpwi r26, 0x0
@@ -2454,7 +2454,7 @@ lbl_fn_805A7820_00001FC8:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lfs f3, lbl_808882F4
     li r25, 0x0
     li r0, 0x2
@@ -2475,7 +2475,7 @@ lbl_fn_805A7820_00001FC8:
     stw r0, 0x15f0(r24)
     stw r25, 0x15f4(r24)
     stw r25, 0x15f8(r24)
-    bl fn_800CB5C8
+    bl morph_updateMesh
     stw r25, 0x15cc(r24)
     lwz r3, 0x15bc(r24)
     stw r25, 0x15d0(r24)
@@ -2494,7 +2494,7 @@ lbl_fn_805A7820_00002060:
     bl fn_805A70D8
     addi r3, r1, 0x28
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_805A7820_0000207C:
     lwz r3, lbl_8087F490
     lfs f29, lbl_808882F4
@@ -2601,7 +2601,7 @@ lbl_fn_805A7820_00002184:
     lwz r3, lbl_8087F0A8
     li r4, 0x0
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_805A7820_00002334
     lwz r0, 0xa0(r24)
@@ -2629,7 +2629,7 @@ lbl_fn_805A7820_00002268:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0xa88(r24)
     lwz r0, 0x158c(r24)
     cmpw cr1, r0, r3
@@ -2666,7 +2666,7 @@ lbl_fn_805A7820_000022F0:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
 lbl_fn_805A7820_00002308:
     li r0, 0x0
     stw r0, 0x15cc(r24)
@@ -2677,13 +2677,13 @@ lbl_fn_805A7820_00002308:
     bl fn_805A70D8
     addi r3, r1, 0x24
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_805A7820_00003174
 lbl_fn_805A7820_00002334:
     lwz r3, lbl_8087F0A8
     li r4, 0x1
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_805A7820_00003174
     lwz r0, 0xa78(r24)
@@ -2699,7 +2699,7 @@ lbl_fn_805A7820_00002368:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x158c(r24)
     cmpwi r3, 0x0
     blt lbl_fn_805A7820_000023BC
@@ -2791,7 +2791,7 @@ lbl_fn_805A7820_000024AC:
     bl fn_805A70D8
     addi r3, r1, 0x20
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_805A7820_00003174
 lbl_fn_805A7820_000024D8:
     cmpwi r0, 0x4
@@ -2849,7 +2849,7 @@ lbl_fn_805A7820_000024D8:
     bl fn_800CB440
     addi r3, r1, 0x1c
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_805A7820_000025B8:
     lwz r3, lbl_8087F490
     lfs f29, lbl_808882F4
@@ -2984,7 +2984,7 @@ lbl_fn_805A7820_00002778:
     lwz r3, lbl_8087F0A8
     li r4, 0x0
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_805A7820_000027AC
     li r26, 0x1
@@ -3010,7 +3010,7 @@ lbl_fn_805A7820_000027E0:
     lwz r3, lbl_8087F0A8
     li r4, 0x0
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_805A7820_0000281C
     li r25, 0x1
@@ -3019,7 +3019,7 @@ lbl_fn_805A7820_00002808:
     lwz r3, lbl_8087F0A8
     li r4, 0x0
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     mr r25, r3
 lbl_fn_805A7820_0000281C:
     cmpwi r25, 0x0
@@ -3077,7 +3077,7 @@ lbl_fn_805A7820_000028E0:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lfs f3, lbl_808882F4
     li r25, 0x0
     li r0, 0x2
@@ -3098,7 +3098,7 @@ lbl_fn_805A7820_000028E0:
     stw r0, 0x15f0(r24)
     stw r25, 0x15f4(r24)
     stw r25, 0x15f8(r24)
-    bl fn_800CB5C8
+    bl morph_updateMesh
     stw r25, 0x15cc(r24)
     lwz r3, 0x15bc(r24)
     stw r25, 0x15d0(r24)
@@ -3117,7 +3117,7 @@ lbl_fn_805A7820_00002978:
     bl fn_805A70D8
     addi r3, r1, 0x18
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, 0x1594(r24)
     addi r0, r3, 0x1
     stw r0, 0x1594(r24)
@@ -3199,7 +3199,7 @@ lbl_fn_805A7820_00002A50:
     bl fn_805A70D8
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r0, 0xa78(r24)
     lwz r3, 0x158c(r24)
     cmpwi r0, 0x0
@@ -3215,7 +3215,7 @@ lbl_fn_805A7820_00002ADC:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0xa88(r24)
     lwz r0, 0x158c(r24)
     cmpw cr1, r0, r3
@@ -3252,7 +3252,7 @@ lbl_fn_805A7820_00002B64:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
 lbl_fn_805A7820_00002B7C:
     li r0, 0x0
     stw r0, 0x15cc(r24)
@@ -3269,7 +3269,7 @@ lbl_fn_805A7820_00002BA4:
     lwz r3, lbl_8087F0A8
     li r4, 0x1
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_805A7820_00003174
     lbz r0, 0x15ec(r24)
@@ -3292,7 +3292,7 @@ lbl_fn_805A7820_00002BF4:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lfs f3, lbl_808882F4
     li r25, 0x0
     li r0, 0x2
@@ -3313,7 +3313,7 @@ lbl_fn_805A7820_00002BF4:
     stw r0, 0x15f0(r24)
     stw r25, 0x15f4(r24)
     stw r25, 0x15f8(r24)
-    bl fn_800CB5C8
+    bl morph_updateMesh
     stw r25, 0x15cc(r24)
     lwz r3, 0x15bc(r24)
     stw r25, 0x15d0(r24)
@@ -3345,7 +3345,7 @@ lbl_fn_805A7820_00002CBC:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r0, 0x158c(r24)
     cmpwi r0, 0x0
     blt lbl_fn_805A7820_00002D10
@@ -3377,7 +3377,7 @@ lbl_fn_805A7820_00002D24:
     bl fn_805A70D8
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addi r4, r31, 0x8a4
     lfs f2, 0x8ac(r31)
     psq_l f1, 0x0(r4), 0, 0
@@ -3446,7 +3446,7 @@ lbl_fn_805A7820_00002E20:
     bl fn_805A70D8
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r5, 0x1594(r24)
     mr r3, r24
     li r4, 0x0
@@ -3522,7 +3522,7 @@ lbl_fn_805A7820_00002F50:
     cmpwi r3, 0x0
     ble lbl_fn_805A7820_00002F74
     lwz r26, lbl_8087F9E8
-    bl fn_80219E6C
+    bl task_findEntryById
     lwz r4, 0x0(r27)
     mr r5, r3
     mr r3, r26
@@ -3571,7 +3571,7 @@ lbl_fn_805A7820_00002FF4:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x158c(r24)
     cmpwi r3, 0x0
     bge lbl_fn_805A7820_00003024
@@ -3670,12 +3670,12 @@ lbl_fn_805A7820_00003158:
     bl fn_805A70D8
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_805A7820_00003174:
     lwz r3, lbl_8087F0A8
     li r4, 0x2e
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_805A7820_000031B0
     lwz r3, 0x1590(r24)

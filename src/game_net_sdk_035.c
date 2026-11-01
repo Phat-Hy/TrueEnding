@@ -12,13 +12,13 @@ extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_80680CF8(void);
-extern void fn_80680D18(void);
+extern void rand(void);
+extern void srand(void);
 extern void fn_806820D4(void);
 extern void fn_8068236C(void);
-extern void fn_80682544(void);
-extern void fn_806827C4(void);
-extern void fn_80684600(void);
+extern void strncmp(void);
+extern void strstr(void);
+extern void atoi(void);
 extern void fn_806D58F0(void);
 extern void fn_806D5900(void);
 extern void fn_806D5930(void);
@@ -306,7 +306,7 @@ lbl_fn_806E8890_00000294:
     mr r3, r30
     addi r4, r31, 0x50
     li r5, 0x4
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     beq lbl_fn_806E8890_000002D4
     mr r3, r28
@@ -393,7 +393,7 @@ lbl_fn_806E89D0_000003D4:
     mr r3, r30
     addi r4, r31, 0xcc
     li r5, 0x4
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     beq lbl_fn_806E89D0_00000414
     mr r3, r28
@@ -493,7 +493,7 @@ asm void fn_806E8B60(void)
     mr r3, r28
     li r5, 0x7
     addi r4, r31, 0x0
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_806E8B60_000006C0
     addi r25, r31, 0x8
@@ -501,7 +501,7 @@ asm void fn_806E8B60(void)
     lbz r0, 0x0(r25)
     mr r4, r25
     extsb r24, r0
-    bl fn_806827C4
+    bl strstr
     cmpwi r3, 0x0
     mr r26, r3
     bne lbl_fn_806E8B60_00000588
@@ -536,7 +536,7 @@ lbl_fn_806E8B60_000005DC:
     cmpwi r0, 0x0
     beq lbl_fn_806E8B60_000005F0
     addi r3, r1, 0x8
-    bl fn_80684600
+    bl atoi
     stw r3, 0x5b8(r30)
 lbl_fn_806E8B60_000005F0:
     addi r24, r31, 0x10
@@ -544,7 +544,7 @@ lbl_fn_806E8B60_000005F0:
     lbz r0, 0x0(r24)
     mr r4, r24
     extsb r25, r0
-    bl fn_806827C4
+    bl strstr
     cmpwi r3, 0x0
     mr r26, r3
     bne lbl_fn_806E8B60_0000061C
@@ -585,7 +585,7 @@ lbl_fn_806E8B60_00000680:
     beq lbl_fn_806E8B60_000006B8
     mr r3, r28
     addi r4, r31, 0x20
-    bl fn_806827C4
+    bl strstr
     neg r0, r3
     li r4, 0x4
     or r0, r0, r3
@@ -626,7 +626,7 @@ asm void fn_806E8D30(void)
     mr r28, r7
     extsb r29, r8
     mr r3, r25
-    bl fn_806827C4
+    bl strstr
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_806E8D30_00000738
@@ -687,7 +687,7 @@ asm void fn_806E8E10(void)
     mr r28, r5
     mr r29, r6
     extsb r30, r0
-    bl fn_806827C4
+    bl strstr
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_806E8E10_00000808
@@ -1035,8 +1035,8 @@ asm void fn_806E92D0(void)
     bl _savegpr_27
     mr r27, r3
     bl fn_806D8F30
-    bl fn_80680D18
-    bl fn_80680CF8
+    bl srand
+    bl rand
     lis r4, 0x2c0b
     li r28, 0x0
     addi r31, r4, 0x2c1
@@ -1064,7 +1064,7 @@ lbl_fn_806E92D0_00000CDC:
     xor r3, r4, r3
     xor r0, r3, r0
     xor r28, r0, r5
-    bl fn_80680CF8
+    bl rand
     mulhw r0, r31, r3
     cmpwi r28, 0x0
     srawi r0, r0, 4
@@ -1168,7 +1168,7 @@ lbl_fn_806E93E0_00000E60:
     cmpwi r27, 0xd
     bne lbl_fn_806E93E0_00000EA4
 lbl_fn_806E93E0_00000E78:
-    bl fn_80680CF8
+    bl rand
     addi r0, r23, 0x2c1
     mulhw r0, r0, r3
     srawi r0, r0, 4

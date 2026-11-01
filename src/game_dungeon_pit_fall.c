@@ -6,29 +6,29 @@ extern void _restgpr_19(void);
 extern void _savegpr_19(void);
 extern void dtor_80084684(void);
 extern void fn_8007A530(void);
-extern void fn_80084320(void);
-extern void fn_80084C24(void);
+extern void mem_alloc(void);
+extern void mem_getAllocSize(void);
 extern void fn_800CA144(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB480(void);
 extern void fn_800CB4EC(void);
 extern void fn_800CB504(void);
 extern void fn_800CB58C(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800CB6E4(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
 extern void fn_800D3FA4(void);
 extern void fn_80179F98(void);
 extern void fn_801F583C(void);
 extern void fn_801F5BC8(void);
 extern void fn_803EA09C(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
-extern void fn_80473F50(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_destructor(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
@@ -1087,12 +1087,12 @@ asm void fn_803E836C(void)
     li r4, 0xa
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_803E836C_0000120C
     mr r4, r30
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_8078C690@ha
     lis r4, fn_803E8698@ha
     addi r3, r3, lbl_8078C690@l
@@ -1301,14 +1301,14 @@ asm void fn_803E8698(void)
     mr r3, r30
     stw r31, 0x8(r29)
     stw r0, 0xc(r29)
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r4, lbl_8078FBB0@ha
     mr r3, r29
     addi r4, r4, lbl_8078FBB0@l
     stw r4, 0x0(r30)
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r4, 0x18(r29)
     cmpwi r4, 0x0
     beq lbl_fn_803E8698_000012BC
@@ -1362,7 +1362,7 @@ asm void fn_803E877C(void)
     addic. r3, r3, 0x10
     beq lbl_fn_803E877C_00001348
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_803E877C_00001348:
     addic. r31, r29, 0x4
     beq lbl_fn_803E877C_00001378
@@ -1372,7 +1372,7 @@ lbl_fn_803E877C_00001348:
     beq lbl_fn_803E877C_0000136C
     beq lbl_fn_803E877C_0000136C
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803E877C_0000136C:
     li r0, 0x0
     stw r0, 0x4(r31)
@@ -1380,7 +1380,7 @@ lbl_fn_803E877C_0000136C:
 lbl_fn_803E877C_00001378:
     mr r3, r29
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     cmpwi r30, 0x0
     ble lbl_fn_803E877C_00001394
     mr r3, r29
@@ -1424,7 +1424,7 @@ asm void fn_803E8820(void)
     stw r5, 0x1c(r3)
     stw r5, 0x20(r3)
     b lbl_fn_803E8820_0000148C
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x18(r5)
     cmpwi r3, 0x0
     beq lbl_fn_803E8820_00001450
@@ -1505,7 +1505,7 @@ lbl_fn_803E8948_00001510:
     addi r29, r3, 0x48
     li r5, 0x0
     mr r3, r29
-    bl fn_800CB5C8
+    bl morph_updateMesh
     mr r3, r29
     bl fn_800CB480
     addi r30, r30, 0x1
@@ -1532,7 +1532,7 @@ lbl_fn_803E8948_0000156C:
     bl fn_806959D8
     mr r3, r27
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r28, 0x0
     ble lbl_fn_803E8948_000015A0
     mr r3, r27
@@ -1609,7 +1609,7 @@ lbl_fn_803E8A50_00001618:
     bl fn_803EA09C
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_803E8A50_00001694:
     addi r0, r19, 0x114
     addi r3, r26, 0x6667
@@ -1692,7 +1692,7 @@ lbl_fn_803E8A50_000017A0:
     bne lbl_fn_803E8A50_00001A94
     lwz r3, 0x24(r20)
     addi r3, r3, 0x10
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_803E8A50_00001A94
 lbl_fn_803E8A50_000017CC:
@@ -1719,7 +1719,7 @@ lbl_fn_803E8A50_000017EC:
     mr r3, r22
     li r4, 0x5
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x18(r22)
     cmpwi r3, 0x0
     beq lbl_fn_803E8A50_00001858
@@ -1763,16 +1763,16 @@ lbl_fn_803E8A50_000018B0:
     beq lbl_fn_803E8A50_00001920
     lwz r3, 0x24(r20)
     addi r3, r3, 0x10
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_803E8A50_00001920
     lwz r3, 0x24(r20)
     addi r3, r3, 0x10
-    bl fn_8047059C
+    bl boss_getOffset50
     lwz r4, 0x24(r20)
     mr r21, r3
     addi r3, r4, 0x10
-    bl fn_80470580
+    bl boss_getOffset54
     lwz r6, 0x24(r20)
     mr r4, r3
     mr r5, r21
@@ -1857,7 +1857,7 @@ lbl_fn_803E8A50_000019F8:
     li r4, 0x0
     li r5, 0x0
     mr r3, r21
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x18(r21)
     cmpwi r3, 0x0
     beq lbl_fn_803E8A50_00001A44

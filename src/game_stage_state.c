@@ -4,12 +4,12 @@
 /* External function declarations */
 extern void __files(void);
 extern void dtor_80084684(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_80084A78(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_8008BBD8(void);
-extern void fn_80097C08(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_setLayerAnimation(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800DCA6C(void);
 extern void fn_8012476C(void);
 extern void fn_801539E0(void);
@@ -18,9 +18,9 @@ extern void fn_80188F08(void);
 extern void fn_80188F40(void);
 extern void fn_801905AC(void);
 extern void fn_801905DC(void);
-extern void fn_80680770(void);
-extern void fn_80682428(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void strcmp(void);
+extern void abort(void);
 extern void fn_806952C4(void);
 extern void fn_80695B00(void);
 extern char* strcpy(char* dest, const char* src);
@@ -93,7 +93,7 @@ lbl_fn_8019BF8C_00000028:
     li r4, 0x0
     addi r3, r3, 0xb0
     lfs f31, 0x234(r3)
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f31, f1
     cror eq, gt, eq
     mfcr r3
@@ -174,7 +174,7 @@ lbl_fn_8019BFF0_00000118:
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80881FBC
     mr r3, r31
     stfs f0, 0x238(r30)
@@ -205,7 +205,7 @@ asm void fn_8019C104(void)
     lfs f31, 0x234(r31)
     mr r3, r31
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f31, f1
     cror eq, gt, eq
     bne lbl_fn_8019C104_00000284
@@ -224,7 +224,7 @@ asm void fn_8019C104(void)
     stfs f0, 0x24c(r31)
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80881FBC
     stfs f0, 0x238(r31)
     b lbl_fn_8019C104_00000284
@@ -353,7 +353,7 @@ lbl_fn_8019C234_00000374:
     stw r5, 0xe4(r1)
     stw r4, 0xe8(r1)
     stw r0, 0xec(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r28, r3
     bne lbl_fn_8019C234_0000040C
@@ -363,8 +363,8 @@ lbl_fn_8019C234_00000374:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077CF28@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8019C234_0000040C:
     cmpwi r28, 0x0
     beq lbl_fn_8019C234_0000044C
@@ -478,7 +478,7 @@ lbl_fn_8019C234_0000051C:
     stw r5, 0x9c(r1)
     stw r4, 0xa0(r1)
     stw r0, 0xa4(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r28, r3
     bne lbl_fn_8019C234_000005E4
@@ -488,8 +488,8 @@ lbl_fn_8019C234_0000051C:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077EEB8@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8019C234_000005E4:
     cmpwi r28, 0x0
     beq lbl_fn_8019C234_0000062C
@@ -667,7 +667,7 @@ lbl_fn_8019C234_00000804:
     stw r5, 0x68(r1)
     stw r4, 0x6c(r1)
     stw r0, 0x70(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r28, r3
     bne lbl_fn_8019C234_0000089C
@@ -677,8 +677,8 @@ lbl_fn_8019C234_00000804:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077DC10@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8019C234_0000089C:
     cmpwi r28, 0x0
     beq lbl_fn_8019C234_000008CC
@@ -1323,7 +1323,7 @@ asm void fn_8019D0C4(void)
     mr r30, r5
     stw r29, 0x14(r1)
     mr r29, r4
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_8019D0C4_0000118C
@@ -1333,8 +1333,8 @@ asm void fn_8019D0C4(void)
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077EED4@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8019D0C4_0000118C:
     cmpwi r31, 0x0
     beq lbl_fn_8019D0C4_000011FC
@@ -1594,7 +1594,7 @@ asm void fn_8019D42C(void)
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r0, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_8019D42C_00001534
     li r0, 0x1
@@ -1609,7 +1609,7 @@ lbl_fn_8019D42C_00001534:
     stw r3, 0x28(r1)
     stw r0, 0x10(r1)
     b lbl_fn_8019D42C_00001548
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8019D42C_00001548:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x24(r1)
@@ -1656,7 +1656,7 @@ lbl_fn_8019D42C_00001590:
     stw r3, 0x18(r1)
     li r3, 0x10
     stw r0, 0x1c(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_8019D42C_00001620
     li r0, 0x1
@@ -1671,7 +1671,7 @@ lbl_fn_8019D42C_00001620:
     stw r3, 0x34(r1)
     stw r0, 0x18(r1)
     b lbl_fn_8019D42C_00001634
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8019D42C_00001634:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x30(r1)
@@ -1727,7 +1727,7 @@ lbl_fn_8019D634_000016E0:
     bne lbl_fn_8019D634_00001798
     lwz r30, 0x0(r3)
     li r3, 0x28
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_8019D634_00001720
@@ -1737,8 +1737,8 @@ lbl_fn_8019D634_000016E0:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077EED4@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8019D634_00001720:
     cmpwi r29, 0x0
     beq lbl_fn_8019D634_00001790
@@ -1824,7 +1824,7 @@ lbl_fn_8019D634_00001840:
     lis r3, lbl_8077ED78@ha
     lwz r4, lbl_8077ED78@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_8019D634_0000186C
@@ -1886,7 +1886,7 @@ lbl_fn_8019D858_00001904:
     bne lbl_fn_8019D858_00001994
     lwz r30, 0x0(r3)
     li r3, 0x20
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_8019D858_00001944
@@ -1896,8 +1896,8 @@ lbl_fn_8019D858_00001904:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077EEB8@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8019D858_00001944:
     cmpwi r29, 0x0
     beq lbl_fn_8019D858_0000198C
@@ -1933,7 +1933,7 @@ lbl_fn_8019D858_000019B0:
     lis r3, lbl_8077DDC0@ha
     lwz r4, lbl_8077DDC0@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_8019D858_000019DC

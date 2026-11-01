@@ -6,13 +6,13 @@ extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_80044C50(void);
 extern void fn_80044CCC(void);
 extern void fn_80044E0C(void);
 extern void fn_8004D388(void);
 extern void fn_8004ED34(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void fn_800E2FE0(void);
 extern void fn_800EC7F0(void);
 extern void fn_800EF7F8(void);
@@ -23,30 +23,30 @@ extern void fn_80179D44(void);
 extern void fn_80207C00(void);
 extern void fn_80207C08(void);
 extern void fn_80207C34(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_8021A984(void);
 extern void fn_80237518(void);
 extern void fn_80237654(void);
-extern void fn_802377B8(void);
-extern void fn_8023780C(void);
-extern void fn_8023781C(void);
-extern void fn_80370174(void);
+extern void res_MsgHandle_constructor(void);
+extern void res_MsgHandle_destructor(void);
+extern void res_MsgHandle_unload(void);
+extern void world_getGlobalFlag(void);
 extern void fn_80373148(void);
 extern void fn_803761BC(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_804EB1B0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9750(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
-extern void fn_805F9940(void);
-extern void fn_80680CF8(void);
-extern void fn_80682428(void);
-extern void fn_8068AEA4(void);
-extern void fn_80695720(void);
+extern void PSMTXRotRad(void);
+extern void PSMTX44Identity(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
+extern void PSVECMag(void);
+extern void rand(void);
+extern void strcmp(void);
+extern void std_atan2(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -113,8 +113,8 @@ void fn_800EF3D8(void);
 void fn_800EF3DC(void);
 void fn_800EF3E0(void);
 void fn_800EF3E8(void);
-void fn_800EF3EC(void);
-void fn_800EF588(void);
+void cam_initStickBindings(void);
+void camera_setMode(void);
 void fn_800EF6BC(void);
 void fn_800EF73C(void);
 
@@ -157,7 +157,7 @@ lbl_fn_800EDFE8_0000004C:
     lwz r0, 0xc(r31)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_800EDFE8_00000090:
     lwz r4, 0x14(r31)
     srwi. r0, r4, 31
@@ -186,7 +186,7 @@ lbl_fn_800EDFE8_000000B4:
     lwz r0, 0x0(r28)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_800EDFE8_000000FC:
     lwz r0, 0x4(r31)
     mr r3, r30
@@ -399,7 +399,7 @@ lbl_fn_800EE360_000003A8:
     cmpwi r3, 0x0
     beq lbl_fn_800EE360_000003D4
     li r4, 0x399
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     bgt lbl_fn_800EE360_00000498
 lbl_fn_800EE360_000003D4:
@@ -523,7 +523,7 @@ lbl_fn_800EE4D8_00000558:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_800EE4D8_000005A4
     lwz r3, 0xf80(r31)
@@ -805,7 +805,7 @@ lbl_fn_800EE794_000008B0:
     stfs f4, 0x60(r1)
     stfs f0, 0x5c(r1)
     stfs f6, 0x64(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f30
     bge lbl_fn_800EE794_0000093C
     fmr f30, f1
@@ -884,7 +884,7 @@ lbl_fn_800EE794_00000A24:
     lwz r3, 0xaa4(r26)
     cmpwi r3, 0x0
     ble lbl_fn_800EE794_00000A4C
-    bl fn_80219E6C
+    bl task_findEntryById
     b lbl_fn_800EE794_00000A50
 lbl_fn_800EE794_00000A4C:
     li r3, 0x0
@@ -907,7 +907,7 @@ lbl_fn_800EE794_00000A50:
     stfs f4, 0x54(r1)
     stfs f0, 0x50(r1)
     stfs f6, 0x58(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f30
     bge lbl_fn_800EE794_00000AAC
     fmr f30, f1
@@ -979,7 +979,7 @@ lbl_fn_800EE794_00000B40:
     stfs f4, 0x48(r1)
     stfs f0, 0x44(r1)
     stfs f6, 0x4c(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f30
     bge lbl_fn_800EE794_00000BB4
     fmr f30, f1
@@ -1021,12 +1021,12 @@ lbl_fn_800EE794_00000C04:
     stfs f5, 0x88(r1)
     stfs f3, 0x80(r1)
     stfs f0, 0x84(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fcmpo cr0, f1, f30
     ble lbl_fn_800EE794_00000FC8
     addi r3, r1, 0x80
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f0, lbl_808812DC
     li r29, 0x0
     li r3, 0x1
@@ -1038,7 +1038,7 @@ lbl_fn_800EE794_00000C04:
     stfs f0, 0xbc(r1)
     stfs f0, 0xc0(r1)
     stw r29, 0xc4(r1)
-    bl fn_80680CF8
+    bl rand
     lfs f4, 0x88(r1)
     lis r4, 0x6666
     lfs f0, 0x84(r1)
@@ -1353,7 +1353,7 @@ lbl_fn_800EF080_000010FC:
 lbl_fn_800EF080_00001104:
     frsp f2, f2
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_800EF080_00001118:
@@ -1361,7 +1361,7 @@ lbl_fn_800EF080_00001118:
     addi r3, r1, 0x60
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_808812DC
     addi r4, r1, 0x38
     lfs f30, 0x68(r1)
@@ -1411,7 +1411,7 @@ lbl_fn_800EF080_00001118:
     stfs f6, 0xbc(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_808812FC
     fabs f3, f2
@@ -1432,7 +1432,7 @@ lbl_fn_800EF080_00001228:
     b lbl_fn_800EF080_00001248
 lbl_fn_800EF080_00001234:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -1635,7 +1635,7 @@ asm void fn_800EF3E8(void)
     b fn_800E2FE0
 }
 
-asm void fn_800EF3EC(void)
+asm void cam_initStickBindings(void)
 {
     nofralloc
     stwu r1, -0x220(r1)
@@ -1647,7 +1647,7 @@ asm void fn_800EF3EC(void)
     stw r29, 0x214(r1)
     lwz r0, 0x44(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_800EF3EC_00001584
+    bne lbl_cam_initStickBindings_00001584
     lwz r5, 0x0(r3)
     li r0, 0x1
     lis r4, lbl_80735428@ha
@@ -1655,57 +1655,57 @@ asm void fn_800EF3EC(void)
     addi r30, r5, 0x4
     mr r3, r30
     addi r4, r4, lbl_80735428@l
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
-    beq lbl_fn_800EF3EC_00001460
+    beq lbl_cam_initStickBindings_00001460
     mr r4, r30
     addi r3, r31, 0x4
-    bl fn_8023780C
-lbl_fn_800EF3EC_00001460:
+    bl res_MsgHandle_destructor
+lbl_cam_initStickBindings_00001460:
     lwz r3, 0x0(r31)
     lis r4, lbl_80735428@ha
     addi r4, r4, lbl_80735428@l
     addi r30, r3, 0x24
     mr r3, r30
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
-    beq lbl_fn_800EF3EC_0000148C
+    beq lbl_cam_initStickBindings_0000148C
     mr r4, r30
     addi r3, r31, 0x10
-    bl fn_8023780C
-lbl_fn_800EF3EC_0000148C:
+    bl res_MsgHandle_destructor
+lbl_cam_initStickBindings_0000148C:
     lwz r3, 0x0(r31)
     lis r4, lbl_80735428@ha
     addi r4, r4, lbl_80735428@l
     addi r30, r3, 0x44
     mr r3, r30
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
-    beq lbl_fn_800EF3EC_000014B8
+    beq lbl_cam_initStickBindings_000014B8
     mr r4, r30
     addi r3, r31, 0x1c
     bl fn_80237654
-lbl_fn_800EF3EC_000014B8:
+lbl_cam_initStickBindings_000014B8:
     lwz r3, 0x0(r31)
     lis r4, lbl_80735428@ha
     addi r4, r4, lbl_80735428@l
     addi r30, r3, 0x64
     mr r3, r30
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
-    beq lbl_fn_800EF3EC_000014E4
+    beq lbl_cam_initStickBindings_000014E4
     mr r4, r30
     addi r3, r31, 0x28
-    bl fn_8023780C
-lbl_fn_800EF3EC_000014E4:
+    bl res_MsgHandle_destructor
+lbl_cam_initStickBindings_000014E4:
     lwz r3, 0x0(r31)
     lis r30, lbl_80735428@ha
     addi r4, r30, lbl_80735428@l
     addi r29, r3, 0xe4
     mr r3, r29
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
-    beq lbl_fn_800EF3EC_00001534
+    beq lbl_cam_initStickBindings_00001534
     addi r4, r30, lbl_80735428@l
     mr r5, r29
     addi r3, r1, 0x108
@@ -1718,15 +1718,15 @@ lbl_fn_800EF3EC_000014E4:
     lwz r12, 0xc(r12)
     mtctr r12
     bctrl
-lbl_fn_800EF3EC_00001534:
+lbl_cam_initStickBindings_00001534:
     lwz r3, 0x0(r31)
     lis r30, lbl_80735428@ha
     addi r4, r30, lbl_80735428@l
     addi r29, r3, 0x104
     mr r3, r29
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
-    beq lbl_fn_800EF3EC_00001584
+    beq lbl_cam_initStickBindings_00001584
     addi r4, r30, lbl_80735428@l
     mr r5, r29
     addi r3, r1, 0x8
@@ -1739,7 +1739,7 @@ lbl_fn_800EF3EC_00001534:
     lwz r12, 0xc(r12)
     mtctr r12
     bctrl
-lbl_fn_800EF3EC_00001584:
+lbl_cam_initStickBindings_00001584:
     lwz r0, 0x224(r1)
     lwz r31, 0x21c(r1)
     lwz r30, 0x218(r1)
@@ -1749,7 +1749,7 @@ lbl_fn_800EF3EC_00001584:
     blr
 }
 
-asm void fn_800EF588(void)
+asm void camera_setMode(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1762,7 +1762,7 @@ asm void fn_800EF588(void)
     mr r29, r4
     lwz r0, lbl_8087F030
     cmpwi r0, 0x0
-    beq lbl_fn_800EF588_000015E8
+    beq lbl_camera_setMode_000015E8
     lis r4, fn_800EF7F8@ha
     mr r3, r0
     addi r4, r4, fn_800EF7F8@l
@@ -1770,7 +1770,7 @@ asm void fn_800EF588(void)
     li r0, 0x0
     stw r0, lbl_8087F030
     stw r0, lbl_8087F034
-lbl_fn_800EF588_000015E8:
+lbl_camera_setMode_000015E8:
     stw r30, lbl_8087D968
     stw r29, lbl_8087F038
     bl fn_80207C00
@@ -1783,19 +1783,19 @@ lbl_fn_800EF588_000015E8:
     mr r6, r5
     li r4, 0x1
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_800EF6BC@ha
     lis r5, fn_800EF7F8@ha
     mr r7, r31
     li r6, 0x48
     addi r4, r4, fn_800EF6BC@l
     addi r5, r5, fn_800EF7F8@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, lbl_8087F030
     li r30, 0x0
     li r31, 0x0
-    b lbl_fn_800EF588_000016AC
-lbl_fn_800EF588_00001648:
+    b lbl_camera_setMode_000016AC
+lbl_camera_setMode_00001648:
     lwz r0, lbl_8087F030
     mr r3, r30
     add r29, r0, r31
@@ -1803,31 +1803,31 @@ lbl_fn_800EF588_00001648:
     stw r3, 0x0(r29)
     lwz r4, lbl_8087D968
     cmpwi r4, 0x1
-    bne lbl_fn_800EF588_00001678
+    bne lbl_camera_setMode_00001678
     lwz r3, 0x0(r29)
     lwz r0, 0x124(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_800EF588_000016A4
-lbl_fn_800EF588_00001678:
+    beq lbl_camera_setMode_000016A4
+lbl_camera_setMode_00001678:
     cmpwi r4, 0x2
-    bne lbl_fn_800EF588_0000169C
+    bne lbl_camera_setMode_0000169C
     lwz r4, lbl_8087F038
     cmpwi r4, 0xff
-    bge lbl_fn_800EF588_0000169C
+    bge lbl_camera_setMode_0000169C
     lwz r3, 0x0(r29)
     bl fn_80207C34
     cmpwi r3, 0x0
-    beq lbl_fn_800EF588_000016A4
-lbl_fn_800EF588_0000169C:
+    beq lbl_camera_setMode_000016A4
+lbl_camera_setMode_0000169C:
     mr r3, r29
-    bl fn_800EF3EC
-lbl_fn_800EF588_000016A4:
+    bl cam_initStickBindings
+lbl_camera_setMode_000016A4:
     addi r31, r31, 0x48
     addi r30, r30, 0x1
-lbl_fn_800EF588_000016AC:
+lbl_camera_setMode_000016AC:
     lwz r0, lbl_8087F034
     cmplw r30, r0
-    blt lbl_fn_800EF588_00001648
+    blt lbl_camera_setMode_00001648
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -1848,22 +1848,22 @@ asm void fn_800EF6BC(void)
     mr r27, r3
     stw r30, 0x0(r3)
     addi r3, r3, 0x4
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r27, 0x10
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r27, 0x1c
     bl fn_80237518
     addi r3, r27, 0x28
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r29, r27, 0x34
     mr r3, r29
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r31, lbl_80790000@ha
     addi r28, r27, 0x3c
     addi r31, r31, lbl_80790000@l
     stw r31, 0x0(r29)
     mr r3, r28
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     stw r31, 0x0(r28)
     mr r3, r27
     stw r30, 0x44(r27)
@@ -1886,11 +1886,11 @@ asm void fn_800EF73C(void)
     stw r30, 0x8(r1)
     mr r30, r3
     beq lbl_fn_800EF73C_0000179C
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r30, 0x4
     beq lbl_fn_800EF73C_0000178C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800EF73C_0000178C:
     cmpwi r31, 0x0
     ble lbl_fn_800EF73C_0000179C

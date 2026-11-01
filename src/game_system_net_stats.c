@@ -8,8 +8,8 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_80043B34(void);
 extern void fn_80043BDC(void);
-extern void fn_80097D7C(void);
-extern void fn_800DC6B4(void);
+extern void atn_Anim_getLayerDuration(void);
+extern void str_findChar(void);
 extern void fn_80109828(void);
 extern void fn_8011F8F4(void);
 extern void fn_8011F91C(void);
@@ -29,10 +29,10 @@ extern void fn_80183588(void);
 extern void fn_80183618(void);
 extern void fn_80183774(void);
 extern void fn_801EB8C0(void);
-extern void fn_80370174(void);
-extern void fn_80370320(void);
-extern void fn_80370A78(void);
-extern void fn_80370AE4(void);
+extern void world_getGlobalFlag(void);
+extern void world_setGlobalFlag(void);
+extern void world_getLocalFlag(void);
+extern void world_setLocalFlag(void);
 extern void fn_803748E0(void);
 extern void fn_8037EF30(void);
 extern void fn_8039BF04(void);
@@ -53,9 +53,9 @@ extern void fn_804AAD68(void);
 extern void fn_804AAFCC(void);
 extern void fn_8054A0A0(void);
 extern void fn_805B4D94(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_80680CF8(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void rand(void);
 
 /* External data declarations */
 extern u8 jumptable_8078AFE0[];
@@ -204,11 +204,11 @@ lbl_fn_803A5118_00000118:
     stfs f1, 0x24(r1)
     stfs f0, 0x28(r1)
     lfs f1, 0x538(r29)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x20
     addi r3, r1, 0x68
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0x28(r1)
     mr r3, r29
     lfs f1, 0x24(r1)
@@ -227,7 +227,7 @@ lbl_fn_803A5118_00000118:
     addi r3, r29, 0xb0
     stfs f0, 0x2ec(r29)
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     stfs f1, 0x2e4(r29)
     mr r3, r29
     bl fn_80145334
@@ -244,11 +244,11 @@ lbl_fn_803A5118_000001C0:
     stfs f1, 0xc(r1)
     stfs f0, 0x10(r1)
     lfs f1, 0x538(r29)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x8
     addi r3, r1, 0x38
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0x10(r1)
     mr r3, r29
     lfs f1, 0xc(r1)
@@ -945,11 +945,11 @@ lbl_fn_803A5A8C_00000B3C:
     bne lbl_fn_803A5A8C_00000B74
     mr r5, r31
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     b lbl_fn_803A5A8C_00000B7C
 lbl_fn_803A5A8C_00000B74:
     mr r5, r31
-    bl fn_80370AE4
+    bl world_setLocalFlag
 lbl_fn_803A5A8C_00000B7C:
     li r0, 0x1
     stw r0, 0xf0(r28)
@@ -994,20 +994,20 @@ lbl_fn_803A5CDC_00000C00:
     cmpwi r0, 0x2
     bne lbl_fn_803A5CDC_00000C18
     mr r4, r29
-    bl fn_80370174
+    bl world_getGlobalFlag
     mr r29, r3
     b lbl_fn_803A5CDC_00000C4C
 lbl_fn_803A5CDC_00000C18:
     cmpwi r0, 0x1
     bne lbl_fn_803A5CDC_00000C30
     mr r4, r29
-    bl fn_80370A78
+    bl world_getLocalFlag
     mr r29, r3
     b lbl_fn_803A5CDC_00000C4C
 lbl_fn_803A5CDC_00000C30:
     cmpwi r0, 0x3
     bne lbl_fn_803A5CDC_00000C4C
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r29
     mullw r0, r0, r29
     subf r3, r0, r3
@@ -1534,20 +1534,20 @@ lbl_fn_803A6410_00001338:
     cmpwi r0, 0x2
     bne lbl_fn_803A6410_00001350
     mr r4, r31
-    bl fn_80370174
+    bl world_getGlobalFlag
     mr r31, r3
     b lbl_fn_803A6410_00001384
 lbl_fn_803A6410_00001350:
     cmpwi r0, 0x1
     bne lbl_fn_803A6410_00001368
     mr r4, r31
-    bl fn_80370A78
+    bl world_getLocalFlag
     mr r31, r3
     b lbl_fn_803A6410_00001384
 lbl_fn_803A6410_00001368:
     cmpwi r0, 0x3
     bne lbl_fn_803A6410_00001384
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r31
     mullw r0, r0, r31
     subf r3, r0, r3
@@ -1564,18 +1564,18 @@ lbl_fn_803A6410_000013A0:
     cmpwi r0, 0x2
     bne lbl_fn_803A6410_000013B4
     mr r4, r28
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_803A6410_000013E8
 lbl_fn_803A6410_000013B4:
     cmpwi r0, 0x1
     bne lbl_fn_803A6410_000013C8
     mr r4, r28
-    bl fn_80370A78
+    bl world_getLocalFlag
     b lbl_fn_803A6410_000013E8
 lbl_fn_803A6410_000013C8:
     cmpwi r0, 0x3
     bne lbl_fn_803A6410_000013E4
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r28
     mullw r0, r0, r28
     subf r3, r0, r3
@@ -1874,7 +1874,7 @@ lbl_fn_803A68B8_000017D8:
     bne lbl_fn_803A68B8_000017F4
     mr r3, r6
     mr r4, r31
-    bl fn_80370174
+    bl world_getGlobalFlag
     mr r31, r3
     b lbl_fn_803A68B8_0000182C
 lbl_fn_803A68B8_000017F4:
@@ -1882,13 +1882,13 @@ lbl_fn_803A68B8_000017F4:
     bne lbl_fn_803A68B8_00001810
     mr r3, r6
     mr r4, r31
-    bl fn_80370A78
+    bl world_getLocalFlag
     mr r31, r3
     b lbl_fn_803A68B8_0000182C
 lbl_fn_803A68B8_00001810:
     cmpwi r0, 0x3
     bne lbl_fn_803A68B8_0000182C
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r31
     mullw r0, r0, r31
     subf r3, r0, r3
@@ -1904,7 +1904,7 @@ lbl_fn_803A68B8_0000182C:
     addi r3, r1, 0x8
     li r29, -0x1
     li r28, 0x0
-    bl fn_800DC6B4
+    bl str_findChar
     li r0, 0x10
     mr r4, r27
     li r5, 0x0

@@ -10,7 +10,7 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_8000D430(void);
 extern void fn_8004A2CC(void);
-extern void fn_8005B9CC(void);
+extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void fn_80061824(void);
@@ -18,48 +18,48 @@ extern void fn_8006A250(void);
 extern void fn_8006BA30(void);
 extern void fn_8006F2F0(void);
 extern void fn_8007192C(void);
-extern void fn_80071AFC(void);
+extern void gx_syncFrameFifo(void);
 extern void fn_80071D60(void);
 extern void fn_80075DEC(void);
-extern void fn_80084320(void);
-extern void fn_800846FC(void);
+extern void mem_alloc(void);
+extern void mem_realloc(void);
 extern void fn_80089EE4(void);
 extern void fn_8008CD60(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_800928B0(void);
 extern void fn_80093F58(void);
 extern void fn_80097D9C(void);
 extern void fn_800A4228(void);
 extern void fn_800A555C(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CF7DC(void);
-extern void fn_800D246C(void);
-extern void fn_800DC288(void);
-extern void fn_800DC6B4(void);
+extern void atn_Task_setActive(void);
+extern void str_skipWhitespace(void);
+extern void str_findChar(void);
 extern void fn_801F3FF8(void);
-extern void fn_801F4E8C(void);
+extern void saveSlot_readSummary(void);
 extern void fn_801FECE0(void);
 extern void fn_801FED24(void);
 extern void fn_801FEE08(void);
 extern void fn_8037177C(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void fn_804FB534(void);
 extern void fn_805F0E90(void);
 extern void fn_805F1B50(void);
 extern void fn_805F1D30(void);
-extern void fn_805F8980(void);
-extern void fn_805F89F0(void);
-extern void fn_805F9160(void);
-extern void fn_805F95A0(void);
-extern void fn_805F9940(void);
+extern void PSMTXIdentity(void);
+extern void PSMTXConcat(void);
+extern void PSMTXScale(void);
+extern void PSMTXMultVecArraySR(void);
+extern void PSVECMag(void);
 extern void fn_805FEB00(void);
 extern void fn_805FF120(void);
 extern void fn_80612E80(void);
 extern void fn_806134E0(void);
 extern void fn_80613520(void);
-extern void fn_80613960(void);
+extern void __GXSetVtxDesc(void);
 extern void fn_80613BB0(void);
 extern void fn_80614790(void);
 extern void fn_80615D20(void);
@@ -68,16 +68,16 @@ extern void fn_80616250(void);
 extern void fn_806165B0(void);
 extern void fn_80617340(void);
 extern void fn_80617880(void);
-extern void fn_806179E0(void);
+extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
-extern void fn_80617E00(void);
+extern void GXSetZMode(void);
 extern void fn_80618290(void);
-extern void fn_80618350(void);
-extern void fn_80618400(void);
-extern void fn_80618420(void);
-extern void fn_80682428(void);
-extern void fn_80695AD0(void);
-extern void fn_80695D84(void);
+extern void GXLoadPosMtxImm(void);
+extern void GXSetCurrentMtx(void);
+extern void GXLoadTexMtxImm(void);
+extern void strcmp(void);
+extern void vec3_isNonZero(void);
+extern void runtime_clampDouble(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -133,8 +133,8 @@ void fn_80363C10(void);
 void fn_80363C28(void);
 void fn_80363CE4(void);
 void fn_80363D38(void);
-void fn_80363DBC(void);
-void fn_803646C4(void);
+void dvd_renderFatalErrorScreen(void);
+void dvd_initFatalErrorScreen(void);
 void fn_80364BE8(void);
 void fn_80364DAC(void);
 void fn_80364DB4(void);
@@ -152,10 +152,10 @@ asm void fn_803637D4(void)
     stw r29, 0x674(r1)
     mr r29, r3
     addi r3, r3, 0x3ec
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r29, 0x3ec
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -190,43 +190,43 @@ asm void fn_803637D4(void)
     addi r31, r31, lbl_8074B780@l
 lbl_fn_803637D4_000000B0:
     addi r3, r1, 0x34
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lbz r0, 0x0(r3)
     mr r30, r3
     cmpwi r0, 0x3b
     beq lbl_fn_803637D4_00000160
     addi r4, r31, 0x1e
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803637D4_0000010C
     addi r3, r1, 0x34
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     stfs f1, 0x3e0(r29)
     addi r3, r1, 0x34
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     stfs f1, 0x3e4(r29)
     addi r3, r1, 0x34
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     stfs f1, 0x3e8(r29)
     b lbl_fn_803637D4_00000160
 lbl_fn_803637D4_0000010C:
     mr r3, r30
     addi r4, r31, 0x24
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803637D4_00000134
     addi r3, r1, 0x34
-    bl fn_8005B9CC
-    bl fn_800DC6B4
+    bl talk_formatQuotedString
+    bl str_findChar
     stw r3, 0x3d8(r29)
     b lbl_fn_803637D4_00000160
 lbl_fn_803637D4_00000134:
     mr r3, r30
     addi r4, r31, 0x33
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803637D4_00000160
     addi r3, r1, 0x8
@@ -313,11 +313,11 @@ lbl_fn_803639A0_00000220:
     lfs f1, 0x3e0(r29)
     lfs f2, 0x3e4(r29)
     lfs f3, 0x3e8(r29)
-    bl fn_805F9160
+    bl PSMTXScale
     mr r3, r31
     addi r4, r1, 0x80
     addi r5, r1, 0x50
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r4, r1, 0x50
     addi r3, r1, 0x14
     psq_l f1, 0x0(r4), 0, 0
@@ -344,7 +344,7 @@ lbl_fn_803639A0_00000220:
     stfs f0, 0x14(r1)
     stfs f7, 0x18(r1)
     stfs f8, 0x1c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f8, 0xd4(r1)
     fmr f30, f1
     lfs f7, 0xc4(r1)
@@ -353,7 +353,7 @@ lbl_fn_803639A0_00000220:
     stfs f0, 0x20(r1)
     stfs f7, 0x24(r1)
     stfs f8, 0x28(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f8, 0xd0(r1)
     fmr f31, f1
     lfs f7, 0xc0(r1)
@@ -362,7 +362,7 @@ lbl_fn_803639A0_00000220:
     stfs f0, 0x2c(r1)
     stfs f7, 0x30(r1)
     stfs f8, 0x34(r1)
-    bl fn_805F9940
+    bl PSVECMag
     frsp f7, f31
     stfs f1, 0x8(r1)
     frsp f0, f30
@@ -402,7 +402,7 @@ lbl_fn_803639A0_00000378:
     addi r4, r4, 0x3d
     li r31, 0x0
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     mulli r0, r3, 0x2c
     stwx r31, r30, r0
 lbl_fn_803639A0_000003C0:
@@ -525,7 +525,7 @@ asm void fn_80363CE4(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80363CE4_00000550
     bl fn_80363D38
@@ -576,7 +576,7 @@ asm void fn_80363D38(void)
     blr
 }
 
-asm void fn_80363DBC(void)
+asm void dvd_renderFatalErrorScreen(void)
 {
     nofralloc
     stwu r1, -0x230(r1)
@@ -587,13 +587,13 @@ asm void fn_80363DBC(void)
     lwz r0, 0x20(r3)
     mr r30, r3
     cmpwi r0, 0x0
-    bne lbl_fn_80363DBC_00000ED8
+    bne lbl_dvd_renderFatalErrorScreen_00000ED8
     lwz r5, 0x24(r3)
     cmpwi r5, 0x0
-    bne lbl_fn_80363DBC_000006AC
+    bne lbl_dvd_renderFatalErrorScreen_000006AC
     lwz r0, 0x1c(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80363DBC_000007D4
+    bne lbl_dvd_renderFatalErrorScreen_000007D4
     lis r31, lbl_8074D8C0@ha
     lwz r3, lbl_8087F530
     addi r31, r31, lbl_8074D8C0@l
@@ -602,7 +602,7 @@ asm void fn_80363DBC(void)
     bl fn_801F3FF8
     stw r3, 0x24(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x24(r30)
     li r0, 0x13
     addi r4, r31, 0x1
@@ -612,43 +612,43 @@ asm void fn_80363DBC(void)
     bl fn_801F3FF8
     stw r3, 0x28(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F530
     addi r4, r31, 0x1e
     li r5, 0x0
     bl fn_801F3FF8
     stw r3, 0x2c(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F530
     addi r4, r31, 0x3b
     li r5, 0x0
     bl fn_801F3FF8
     stw r3, 0x30(r30)
     li r4, 0x1
-    bl fn_800D246C
-    b lbl_fn_80363DBC_000007D4
-lbl_fn_80363DBC_000006AC:
+    bl atn_Task_setActive
+    b lbl_dvd_renderFatalErrorScreen_000007D4
+lbl_dvd_renderFatalErrorScreen_000006AC:
     lwz r0, 0x34(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80363DBC_000007D4
+    bne lbl_dvd_renderFatalErrorScreen_000007D4
     lwz r0, 0x38(r5)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_80363DBC_000007D4
+    bne lbl_dvd_renderFatalErrorScreen_000007D4
     lwz r4, 0x28(r3)
     lwz r0, 0x38(r4)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_80363DBC_000007D4
+    bne lbl_dvd_renderFatalErrorScreen_000007D4
     lwz r3, 0x2c(r3)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_80363DBC_000007D4
+    bne lbl_dvd_renderFatalErrorScreen_000007D4
     mr r3, r5
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r4, 0x24(r30)
     lis r3, lbl_8074D8C0@ha
     addi r3, r3, lbl_8074D8C0@l
@@ -662,7 +662,7 @@ lbl_fn_80363DBC_000006AC:
     stw r0, 0xfc(r4)
     lwz r4, 0x24(r30)
     addi r31, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_808856CC
     mr r4, r3
     mr r3, r31
@@ -670,7 +670,7 @@ lbl_fn_80363DBC_000006AC:
     bl fn_801FED24
     lwz r3, 0x28(r30)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x28(r30)
     li r4, 0x0
     lwz r0, 0x38(r3)
@@ -681,7 +681,7 @@ lbl_fn_80363DBC_000006AC:
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r3)
     lwz r3, 0x2c(r30)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x2c(r30)
     li r4, 0x0
     lwz r0, 0x38(r3)
@@ -692,7 +692,7 @@ lbl_fn_80363DBC_000006AC:
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r3)
     lwz r3, 0x30(r30)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x30(r30)
     li r4, 0x1
     lwz r0, 0x38(r3)
@@ -703,13 +703,13 @@ lbl_fn_80363DBC_000006AC:
     oris r0, r0, 0x1000
     stw r0, 0xfc(r3)
     stw r4, 0x34(r30)
-lbl_fn_80363DBC_000007D4:
+lbl_dvd_renderFatalErrorScreen_000007D4:
     lwz r0, 0x44(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_80363DBC_00000808
+    bne lbl_dvd_renderFatalErrorScreen_00000808
     lwz r3, lbl_8087F530
     cmpwi r3, 0x0
-    beq lbl_fn_80363DBC_00000808
+    beq lbl_dvd_renderFatalErrorScreen_00000808
     li r4, 0x1
     li r5, 0x0
     lis r6, 0xff00
@@ -717,156 +717,156 @@ lbl_fn_80363DBC_000007D4:
     stw r3, 0x44(r30)
     lfs f0, lbl_808856D0
     stfs f0, 0x74(r3)
-lbl_fn_80363DBC_00000808:
+lbl_dvd_renderFatalErrorScreen_00000808:
     lwz r0, 0x0(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_80363DBC_00000828
+    bne lbl_dvd_renderFatalErrorScreen_00000828
     lwz r0, 0x4(r30)
     cmpwi r0, 0x0
-    beq lbl_fn_80363DBC_00000828
+    beq lbl_dvd_renderFatalErrorScreen_00000828
     li r0, 0x0
     stw r0, 0x4(r30)
-lbl_fn_80363DBC_00000828:
+lbl_dvd_renderFatalErrorScreen_00000828:
     lwz r0, 0x18(r30)
     li r31, 0x0
     li r3, 0x0
     cmpwi r0, 0x0
-    bne lbl_fn_80363DBC_00000854
+    bne lbl_dvd_renderFatalErrorScreen_00000854
     lwz r0, 0x1c(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_80363DBC_00000854
+    bne lbl_dvd_renderFatalErrorScreen_00000854
     lwz r0, 0x34(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_80363DBC_00000858
-lbl_fn_80363DBC_00000854:
+    bne lbl_dvd_renderFatalErrorScreen_00000858
+lbl_dvd_renderFatalErrorScreen_00000854:
     li r3, 0x1
-lbl_fn_80363DBC_00000858:
+lbl_dvd_renderFatalErrorScreen_00000858:
     cmpwi r3, 0x0
-    bne lbl_fn_80363DBC_000008F0
+    bne lbl_dvd_renderFatalErrorScreen_000008F0
     lwz r0, 0xc(r30)
     cmpwi r0, 0x0
-    beq lbl_fn_80363DBC_000008DC
+    beq lbl_dvd_renderFatalErrorScreen_000008DC
     lwz r4, lbl_8087F018
     cmpwi r4, 0x0
-    beq lbl_fn_80363DBC_000008DC
+    beq lbl_dvd_renderFatalErrorScreen_000008DC
     lwz r3, lbl_8087F4E8
     cmpwi r3, 0x0
-    beq lbl_fn_80363DBC_00000890
+    beq lbl_dvd_renderFatalErrorScreen_00000890
     lwz r0, 0x84(r3)
     cmpwi r0, 0x1
-    beq lbl_fn_80363DBC_000008DC
-lbl_fn_80363DBC_00000890:
+    beq lbl_dvd_renderFatalErrorScreen_000008DC
+lbl_dvd_renderFatalErrorScreen_00000890:
     lwz r3, lbl_8087F018
     lwz r0, 0x40c0(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80363DBC_000008A4
+    bne lbl_dvd_renderFatalErrorScreen_000008A4
     li r31, 0x5
-lbl_fn_80363DBC_000008A4:
+lbl_dvd_renderFatalErrorScreen_000008A4:
     lwz r0, 0x0(r30)
     lbz r3, 0x5c(r4)
     cmpwi r0, 0x5
-    beq lbl_fn_80363DBC_000008DC
+    beq lbl_dvd_renderFatalErrorScreen_000008DC
     cmpwi r31, 0x0
-    bne lbl_fn_80363DBC_000008DC
+    bne lbl_dvd_renderFatalErrorScreen_000008DC
     lwz r0, 0x10(r30)
     cmpwi r0, 0x0
-    bgt lbl_fn_80363DBC_000008DC
+    bgt lbl_dvd_renderFatalErrorScreen_000008DC
     cmpwi r3, 0x1
-    beq lbl_fn_80363DBC_000008DC
+    beq lbl_dvd_renderFatalErrorScreen_000008DC
     cmpwi r3, 0x2
-    beq lbl_fn_80363DBC_000008DC
+    beq lbl_dvd_renderFatalErrorScreen_000008DC
     li r31, 0x6
-lbl_fn_80363DBC_000008DC:
+lbl_dvd_renderFatalErrorScreen_000008DC:
     lwz r3, 0x10(r30)
     cmpwi r3, 0x0
-    ble lbl_fn_80363DBC_000008F0
+    ble lbl_dvd_renderFatalErrorScreen_000008F0
     subi r0, r3, 0x1
     stw r0, 0x10(r30)
-lbl_fn_80363DBC_000008F0:
+lbl_dvd_renderFatalErrorScreen_000008F0:
     bl fn_805FEB00
     cmpwi r3, -0x1
-    beq lbl_fn_80363DBC_00000918
+    beq lbl_dvd_renderFatalErrorScreen_00000918
     cmpwi r3, 0x4
-    beq lbl_fn_80363DBC_00000920
+    beq lbl_dvd_renderFatalErrorScreen_00000920
     cmpwi r3, 0x6
-    beq lbl_fn_80363DBC_00000928
+    beq lbl_dvd_renderFatalErrorScreen_00000928
     cmpwi r3, 0xb
-    beq lbl_fn_80363DBC_00000930
-    b lbl_fn_80363DBC_00000934
-lbl_fn_80363DBC_00000918:
+    beq lbl_dvd_renderFatalErrorScreen_00000930
+    b lbl_dvd_renderFatalErrorScreen_00000934
+lbl_dvd_renderFatalErrorScreen_00000918:
     li r31, 0x1
-    b lbl_fn_80363DBC_00000934
-lbl_fn_80363DBC_00000920:
+    b lbl_dvd_renderFatalErrorScreen_00000934
+lbl_dvd_renderFatalErrorScreen_00000920:
     li r31, 0x2
-    b lbl_fn_80363DBC_00000934
-lbl_fn_80363DBC_00000928:
+    b lbl_dvd_renderFatalErrorScreen_00000934
+lbl_dvd_renderFatalErrorScreen_00000928:
     li r31, 0x3
-    b lbl_fn_80363DBC_00000934
-lbl_fn_80363DBC_00000930:
+    b lbl_dvd_renderFatalErrorScreen_00000934
+lbl_dvd_renderFatalErrorScreen_00000930:
     li r31, 0x4
-lbl_fn_80363DBC_00000934:
+lbl_dvd_renderFatalErrorScreen_00000934:
     cmpwi r31, 0x0
-    bne lbl_fn_80363DBC_00000988
+    bne lbl_dvd_renderFatalErrorScreen_00000988
     lwz r3, 0x0(r30)
     subi r0, r3, 0x1
     cmplwi r0, 0x3
-    bgt lbl_fn_80363DBC_0000095C
+    bgt lbl_dvd_renderFatalErrorScreen_0000095C
     bl fn_805FF120
     cmpwi r3, 0x0
-    bne lbl_fn_80363DBC_0000095C
+    bne lbl_dvd_renderFatalErrorScreen_0000095C
     lwz r31, 0x0(r30)
-lbl_fn_80363DBC_0000095C:
+lbl_dvd_renderFatalErrorScreen_0000095C:
     lwz r3, 0x0(r30)
     subi r0, r3, 0x5
     cmplwi r0, 0x1
-    bgt lbl_fn_80363DBC_00000988
+    bgt lbl_dvd_renderFatalErrorScreen_00000988
     lwz r3, lbl_8087F4E8
     cmpwi r3, 0x0
-    beq lbl_fn_80363DBC_00000988
+    beq lbl_dvd_renderFatalErrorScreen_00000988
     lwz r0, 0x84(r3)
     cmpwi r0, 0x1
-    bne lbl_fn_80363DBC_00000988
+    bne lbl_dvd_renderFatalErrorScreen_00000988
     lwz r31, 0x0(r30)
-lbl_fn_80363DBC_00000988:
+lbl_dvd_renderFatalErrorScreen_00000988:
     cmpwi r31, 0x0
-    bne lbl_fn_80363DBC_00000A68
+    bne lbl_dvd_renderFatalErrorScreen_00000A68
     lwz r3, 0x8(r30)
     cmpwi r3, 0x0
-    ble lbl_fn_80363DBC_000009A8
+    ble lbl_dvd_renderFatalErrorScreen_000009A8
     subi r0, r3, 0x1
     stw r0, 0x8(r30)
-    b lbl_fn_80363DBC_00000BAC
-lbl_fn_80363DBC_000009A8:
+    b lbl_dvd_renderFatalErrorScreen_00000BAC
+lbl_dvd_renderFatalErrorScreen_000009A8:
     lwz r0, 0x0(r30)
     cmpwi r0, 0x0
-    beq lbl_fn_80363DBC_00000BAC
+    beq lbl_dvd_renderFatalErrorScreen_00000BAC
     cmpwi r0, 0x5
-    bne lbl_fn_80363DBC_000009C4
+    bne lbl_dvd_renderFatalErrorScreen_000009C4
     li r0, 0xf
     stw r0, 0x10(r30)
-lbl_fn_80363DBC_000009C4:
+lbl_dvd_renderFatalErrorScreen_000009C4:
     lwz r0, 0x34(r30)
     lwz r3, 0x0(r30)
     cmpwi r0, 0x0
     stw r3, 0x4(r30)
     stw r31, 0x0(r30)
-    beq lbl_fn_80363DBC_00000A00
+    beq lbl_dvd_renderFatalErrorScreen_00000A00
     lwz r3, 0x24(r30)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    beq lbl_fn_80363DBC_00000A00
+    beq lbl_dvd_renderFatalErrorScreen_00000A00
     lfs f0, lbl_808856D4
     li r0, 0x1
     stfs f0, 0x104(r3)
     stw r0, 0x38(r30)
-lbl_fn_80363DBC_00000A00:
+lbl_dvd_renderFatalErrorScreen_00000A00:
     lwz r3, 0x44(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_80363DBC_00000A54
+    beq lbl_dvd_renderFatalErrorScreen_00000A54
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80363DBC_00000A54
+    beq lbl_dvd_renderFatalErrorScreen_00000A54
     li r0, 0x0
     stw r0, 0x5c(r3)
     li r4, -0x1
@@ -882,34 +882,34 @@ lbl_fn_80363DBC_00000A00:
     stw r3, 0x4c(r6)
     lwz r3, 0x44(r30)
     stw r0, 0x48(r3)
-lbl_fn_80363DBC_00000A54:
+lbl_dvd_renderFatalErrorScreen_00000A54:
     lwz r3, 0x48(r30)
     li r0, 0x0
     stw r0, 0x48(r30)
     bl dtor_80084684
-    b lbl_fn_80363DBC_00000BAC
-lbl_fn_80363DBC_00000A68:
+    b lbl_dvd_renderFatalErrorScreen_00000BAC
+lbl_dvd_renderFatalErrorScreen_00000A68:
     lwz r0, 0x0(r30)
     cmpw r0, r31
-    beq lbl_fn_80363DBC_00000BAC
+    beq lbl_dvd_renderFatalErrorScreen_00000BAC
     lwz r0, 0x18(r30)
     li r4, 0x3
     stw r31, 0x0(r30)
     li r3, 0x0
     cmpwi r0, 0x0
     stw r4, 0x8(r30)
-    bne lbl_fn_80363DBC_00000AA8
+    bne lbl_dvd_renderFatalErrorScreen_00000AA8
     lwz r0, 0x1c(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_80363DBC_00000AA8
+    bne lbl_dvd_renderFatalErrorScreen_00000AA8
     lwz r0, 0x34(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_80363DBC_00000AAC
-lbl_fn_80363DBC_00000AA8:
+    bne lbl_dvd_renderFatalErrorScreen_00000AAC
+lbl_dvd_renderFatalErrorScreen_00000AA8:
     li r3, 0x1
-lbl_fn_80363DBC_00000AAC:
+lbl_dvd_renderFatalErrorScreen_00000AAC:
     cmpwi r3, 0x0
-    bne lbl_fn_80363DBC_00000B50
+    bne lbl_dvd_renderFatalErrorScreen_00000B50
     li r0, 0x0
     lis r27, lbl_80789EB0@ha
     lis r31, lbl_8074CCD0@ha
@@ -918,7 +918,7 @@ lbl_fn_80363DBC_00000AAC:
     li r26, 0x0
     addi r31, r31, lbl_8074CCD0@l
     li r28, 0x0
-lbl_fn_80363DBC_00000AD4:
+lbl_dvd_renderFatalErrorScreen_00000AD4:
     bl fn_8006BA30
     mulli r4, r3, 0x1f0
     lwz r0, 0x0(r30)
@@ -932,7 +932,7 @@ lbl_fn_80363DBC_00000AD4:
     lwz r4, 0x24(r30)
     lwz r3, 0x0(r27)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r29
     addi r5, r1, 0x10
@@ -941,7 +941,7 @@ lbl_fn_80363DBC_00000AD4:
     addi r27, r27, 0x4
     cmpwi r26, 0x4
     addi r28, r28, 0x4
-    blt lbl_fn_80363DBC_00000AD4
+    blt lbl_dvd_renderFatalErrorScreen_00000AD4
     lwz r3, 0x24(r30)
     lfs f0, lbl_808856D8
     stfs f0, 0x104(r3)
@@ -949,11 +949,11 @@ lbl_fn_80363DBC_00000AD4:
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
-    b lbl_fn_80363DBC_00000B8C
-lbl_fn_80363DBC_00000B50:
+    b lbl_dvd_renderFatalErrorScreen_00000B8C
+lbl_dvd_renderFatalErrorScreen_00000B50:
     lwz r3, 0x44(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_80363DBC_00000B84
+    beq lbl_dvd_renderFatalErrorScreen_00000B84
     li r0, 0x7530
     stw r0, 0x5c(r3)
     li r4, 0x1
@@ -964,79 +964,79 @@ lbl_fn_80363DBC_00000B50:
     stw r0, 0x4c(r3)
     lwz r3, 0x44(r30)
     stw r4, 0x48(r3)
-lbl_fn_80363DBC_00000B84:
+lbl_dvd_renderFatalErrorScreen_00000B84:
     mr r3, r30
     bl fn_80364BE8
-lbl_fn_80363DBC_00000B8C:
+lbl_dvd_renderFatalErrorScreen_00000B8C:
     lwz r3, 0x0(r30)
     subi r0, r3, 0x1
     cmplwi r0, 0x3
-    bgt lbl_fn_80363DBC_00000BAC
+    bgt lbl_dvd_renderFatalErrorScreen_00000BAC
     lwz r3, lbl_8087F610
     cmpwi r3, 0x0
-    beq lbl_fn_80363DBC_00000BAC
+    beq lbl_dvd_renderFatalErrorScreen_00000BAC
     bl fn_804FB534
-lbl_fn_80363DBC_00000BAC:
+lbl_dvd_renderFatalErrorScreen_00000BAC:
     lwz r0, 0x38(r30)
     cmpwi r0, 0x0
-    beq lbl_fn_80363DBC_00000BF4
+    beq lbl_dvd_renderFatalErrorScreen_00000BF4
     lwz r4, 0x24(r30)
     lwz r0, 0x38(r4)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    beq lbl_fn_80363DBC_00000BF4
+    beq lbl_dvd_renderFatalErrorScreen_00000BF4
     lfs f1, 0x100(r4)
     lfs f0, lbl_808856DC
     fcmpo cr0, f1, f0
     cror eq, lt, eq
-    bne lbl_fn_80363DBC_00000BF4
+    bne lbl_dvd_renderFatalErrorScreen_00000BF4
     lwz r3, 0x38(r4)
     li r0, 0x0
     ori r3, r3, 0x4
     stw r3, 0x38(r4)
     stw r0, 0x38(r30)
-lbl_fn_80363DBC_00000BF4:
+lbl_dvd_renderFatalErrorScreen_00000BF4:
     lwz r0, 0x3c(r30)
     cmpwi r0, 0x0
-    beq lbl_fn_80363DBC_00000C78
+    beq lbl_dvd_renderFatalErrorScreen_00000C78
     lwz r4, 0x28(r30)
     lwz r0, 0x38(r4)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    beq lbl_fn_80363DBC_00000C3C
+    beq lbl_dvd_renderFatalErrorScreen_00000C3C
     lfs f1, 0x100(r4)
     lfs f0, lbl_808856DC
     fcmpo cr0, f1, f0
     cror eq, lt, eq
-    bne lbl_fn_80363DBC_00000C3C
+    bne lbl_dvd_renderFatalErrorScreen_00000C3C
     lwz r3, 0x38(r4)
     li r0, 0x0
     ori r3, r3, 0x4
     stw r3, 0x38(r4)
     stw r0, 0x3c(r30)
-lbl_fn_80363DBC_00000C3C:
+lbl_dvd_renderFatalErrorScreen_00000C3C:
     lwz r4, 0x2c(r30)
     lwz r0, 0x38(r4)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    beq lbl_fn_80363DBC_00000C78
+    beq lbl_dvd_renderFatalErrorScreen_00000C78
     lfs f1, 0x100(r4)
     lfs f0, lbl_808856DC
     fcmpo cr0, f1, f0
     cror eq, lt, eq
-    bne lbl_fn_80363DBC_00000C78
+    bne lbl_dvd_renderFatalErrorScreen_00000C78
     lwz r3, 0x38(r4)
     li r0, 0x0
     ori r3, r3, 0x4
     stw r3, 0x38(r4)
     stw r0, 0x3c(r30)
-lbl_fn_80363DBC_00000C78:
+lbl_dvd_renderFatalErrorScreen_00000C78:
     lwz r5, 0x44(r30)
     cmpwi r5, 0x0
-    beq lbl_fn_80363DBC_00000CD8
+    beq lbl_dvd_renderFatalErrorScreen_00000CD8
     lwz r0, 0x48(r5)
     cmpwi r0, 0x0
-    beq lbl_fn_80363DBC_00000CD8
+    beq lbl_dvd_renderFatalErrorScreen_00000CD8
     lwz r4, 0x50(r5)
     lis r0, 0x4330
     stw r0, 0x210(r1)
@@ -1048,124 +1048,124 @@ lbl_fn_80363DBC_00000C78:
     lfd f1, 0x210(r1)
     fsubs f1, f1, f2
     fcmpo cr0, f1, f0
-    ble lbl_fn_80363DBC_00000CD8
+    ble lbl_dvd_renderFatalErrorScreen_00000CD8
     lwz r3, 0x4c(r5)
     lwz r0, 0x54(r5)
     cmpw r3, r0
-    blt lbl_fn_80363DBC_00000CD8
+    blt lbl_dvd_renderFatalErrorScreen_00000CD8
     li r0, 0x0
     stw r0, 0x50(r5)
-lbl_fn_80363DBC_00000CD8:
+lbl_dvd_renderFatalErrorScreen_00000CD8:
     lwz r0, 0x0(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_80363DBC_00000DB4
+    bne lbl_dvd_renderFatalErrorScreen_00000DB4
     lwz r0, 0x14(r30)
     cmpwi r0, 0x0
-    beq lbl_fn_80363DBC_00000ED8
+    beq lbl_dvd_renderFatalErrorScreen_00000ED8
     lwz r3, lbl_8087EFC0
     cmpwi r3, 0x0
-    beq lbl_fn_80363DBC_00000D10
+    beq lbl_dvd_renderFatalErrorScreen_00000D10
     clrlwi r0, r0, 31
     cmplwi r0, 0x1
-    bne lbl_fn_80363DBC_00000D10
+    bne lbl_dvd_renderFatalErrorScreen_00000D10
     li r4, 0x0
-    bl fn_800D246C
-lbl_fn_80363DBC_00000D10:
+    bl atn_Task_setActive
+lbl_dvd_renderFatalErrorScreen_00000D10:
     lwz r3, lbl_8087EFE8
     cmpwi r3, 0x0
-    beq lbl_fn_80363DBC_00000D3C
+    beq lbl_dvd_renderFatalErrorScreen_00000D3C
     lwz r0, 0x14(r30)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_80363DBC_00000D3C
+    bne lbl_dvd_renderFatalErrorScreen_00000D3C
     li r4, 0x0
     li r5, 0x8
     li r6, 0x9
     bl fn_800CF7DC
-lbl_fn_80363DBC_00000D3C:
+lbl_dvd_renderFatalErrorScreen_00000D3C:
     lwz r3, lbl_8087EE90
     cmpwi r3, 0x0
-    beq lbl_fn_80363DBC_00000D68
+    beq lbl_dvd_renderFatalErrorScreen_00000D68
     lwz r0, 0x14(r30)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    bne lbl_fn_80363DBC_00000D68
+    bne lbl_dvd_renderFatalErrorScreen_00000D68
     li r4, 0x0
     li r5, 0x8
     li r6, 0x0
     bl fn_8004A2CC
-lbl_fn_80363DBC_00000D68:
+lbl_dvd_renderFatalErrorScreen_00000D68:
     lwz r3, lbl_8087F010
     cmpwi r3, 0x0
-    beq lbl_fn_80363DBC_00000D98
+    beq lbl_dvd_renderFatalErrorScreen_00000D98
     lwz r0, 0x8(r3)
     cmpwi r0, 0x5
-    bne lbl_fn_80363DBC_00000D98
+    bne lbl_dvd_renderFatalErrorScreen_00000D98
     lwz r0, 0x14(r30)
     rlwinm r0, r0, 0, 28, 28
     cmplwi r0, 0x8
-    bne lbl_fn_80363DBC_00000D98
+    bne lbl_dvd_renderFatalErrorScreen_00000D98
     li r0, 0x4
     stw r0, 0x8(r3)
-lbl_fn_80363DBC_00000D98:
+lbl_dvd_renderFatalErrorScreen_00000D98:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_80363DBC_00000DA8
+    beq lbl_dvd_renderFatalErrorScreen_00000DA8
     bl fn_8037177C
-lbl_fn_80363DBC_00000DA8:
+lbl_dvd_renderFatalErrorScreen_00000DA8:
     li r0, 0x0
     stw r0, 0x14(r30)
-    b lbl_fn_80363DBC_00000ED8
-lbl_fn_80363DBC_00000DB4:
+    b lbl_dvd_renderFatalErrorScreen_00000ED8
+lbl_dvd_renderFatalErrorScreen_00000DB4:
     lwz r0, lbl_8087F610
     li r26, 0x1
     cmpwi r0, 0x0
-    beq lbl_fn_80363DBC_00000DD8
+    beq lbl_dvd_renderFatalErrorScreen_00000DD8
     lwz r3, lbl_8087F628
     lwz r0, 0xc8(r3)
     cmpwi r0, 0x8
-    blt lbl_fn_80363DBC_00000DD8
+    blt lbl_dvd_renderFatalErrorScreen_00000DD8
     li r26, 0x0
-lbl_fn_80363DBC_00000DD8:
+lbl_dvd_renderFatalErrorScreen_00000DD8:
     lwz r27, lbl_8087EF68
     cmpwi r27, 0x0
-    beq lbl_fn_80363DBC_00000E18
+    beq lbl_dvd_renderFatalErrorScreen_00000E18
     mr r3, r27
     addi r4, r1, 0x8
     li r29, 0x1
     bl fn_800A4228
     cmpwi r3, 0x0
-    bne lbl_fn_80363DBC_00000E0C
+    bne lbl_dvd_renderFatalErrorScreen_00000E0C
     lwz r0, 0x174(r27)
     cmpwi r0, 0x0
-    bgt lbl_fn_80363DBC_00000E0C
+    bgt lbl_dvd_renderFatalErrorScreen_00000E0C
     li r29, 0x0
-lbl_fn_80363DBC_00000E0C:
+lbl_dvd_renderFatalErrorScreen_00000E0C:
     cmpwi r29, 0x0
-    beq lbl_fn_80363DBC_00000E18
+    beq lbl_dvd_renderFatalErrorScreen_00000E18
     li r26, 0x0
-lbl_fn_80363DBC_00000E18:
+lbl_dvd_renderFatalErrorScreen_00000E18:
     cmpwi r26, 0x0
-    beq lbl_fn_80363DBC_00000ED8
+    beq lbl_dvd_renderFatalErrorScreen_00000ED8
     lwz r0, 0x14(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_80363DBC_00000ED8
+    bne lbl_dvd_renderFatalErrorScreen_00000ED8
     lwz r3, lbl_8087EFC0
     cmpwi r3, 0x0
-    beq lbl_fn_80363DBC_00000E5C
+    beq lbl_dvd_renderFatalErrorScreen_00000E5C
     lwz r0, 0x38(r3)
     clrlwi r0, r0, 31
     cmplwi r0, 0x1
-    beq lbl_fn_80363DBC_00000E5C
+    beq lbl_dvd_renderFatalErrorScreen_00000E5C
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r0, 0x14(r30)
     ori r0, r0, 0x1
     stw r0, 0x14(r30)
-lbl_fn_80363DBC_00000E5C:
+lbl_dvd_renderFatalErrorScreen_00000E5C:
     lwz r3, lbl_8087EFE8
     cmpwi r3, 0x0
-    beq lbl_fn_80363DBC_00000E84
+    beq lbl_dvd_renderFatalErrorScreen_00000E84
     li r4, 0x1
     li r5, 0x8
     li r6, 0x0
@@ -1173,10 +1173,10 @@ lbl_fn_80363DBC_00000E5C:
     lwz r0, 0x14(r30)
     ori r0, r0, 0x2
     stw r0, 0x14(r30)
-lbl_fn_80363DBC_00000E84:
+lbl_dvd_renderFatalErrorScreen_00000E84:
     lwz r3, lbl_8087EE90
     cmpwi r3, 0x0
-    beq lbl_fn_80363DBC_00000EAC
+    beq lbl_dvd_renderFatalErrorScreen_00000EAC
     li r4, 0x1
     li r5, 0x8
     li r6, 0x0
@@ -1184,19 +1184,19 @@ lbl_fn_80363DBC_00000E84:
     lwz r0, 0x14(r30)
     ori r0, r0, 0x4
     stw r0, 0x14(r30)
-lbl_fn_80363DBC_00000EAC:
+lbl_dvd_renderFatalErrorScreen_00000EAC:
     lwz r3, lbl_8087F010
     cmpwi r3, 0x0
-    beq lbl_fn_80363DBC_00000ED8
+    beq lbl_dvd_renderFatalErrorScreen_00000ED8
     lwz r0, 0x8(r3)
     cmpwi r0, 0x4
-    bne lbl_fn_80363DBC_00000ED8
+    bne lbl_dvd_renderFatalErrorScreen_00000ED8
     li r0, 0x5
     stw r0, 0x8(r3)
     lwz r0, 0x14(r30)
     ori r0, r0, 0x8
     stw r0, 0x14(r30)
-lbl_fn_80363DBC_00000ED8:
+lbl_dvd_renderFatalErrorScreen_00000ED8:
     addi r11, r1, 0x230
     bl _restgpr_26
     lwz r0, 0x234(r1)
@@ -1205,7 +1205,7 @@ lbl_fn_80363DBC_00000ED8:
     blr
 }
 
-asm void fn_803646C4(void)
+asm void dvd_initFatalErrorScreen(void)
 {
     nofralloc
     stwu r1, -0x400(r1)
@@ -1223,32 +1223,32 @@ asm void fn_803646C4(void)
     mr r26, r3
     li r4, 0x0
     cmpwi r0, 0x0
-    bne lbl_fn_803646C4_00000F48
+    bne lbl_dvd_initFatalErrorScreen_00000F48
     lwz r0, 0x1c(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_803646C4_00000F48
+    bne lbl_dvd_initFatalErrorScreen_00000F48
     lwz r0, 0x34(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_803646C4_00000F4C
-lbl_fn_803646C4_00000F48:
+    bne lbl_dvd_initFatalErrorScreen_00000F4C
+lbl_dvd_initFatalErrorScreen_00000F48:
     li r4, 0x1
-lbl_fn_803646C4_00000F4C:
+lbl_dvd_initFatalErrorScreen_00000F4C:
     cmpwi r4, 0x0
-    bne lbl_fn_803646C4_00001040
+    bne lbl_dvd_initFatalErrorScreen_00001040
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_803646C4_000013E4
+    beq lbl_dvd_initFatalErrorScreen_000013E4
     lwz r0, 0x34(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_803646C4_00000F88
+    beq lbl_dvd_initFatalErrorScreen_00000F88
     lwz r3, 0x24(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_803646C4_00000F88
+    beq lbl_dvd_initFatalErrorScreen_00000F88
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    bne lbl_fn_803646C4_000013E4
-lbl_fn_803646C4_00000F88:
+    bne lbl_dvd_initFatalErrorScreen_000013E4
+lbl_dvd_initFatalErrorScreen_00000F88:
     lfs f29, lbl_808856E0
     lis r3, lbl_8074D8B8@ha
     lfs f0, lbl_808856E8
@@ -1259,7 +1259,7 @@ lbl_fn_803646C4_00000F88:
     li r23, 0x0
     li r22, 0x0
     lis r24, 0x4330
-lbl_fn_803646C4_00000FB0:
+lbl_dvd_initFatalErrorScreen_00000FB0:
     bl fn_8006BA30
     mulli r4, r3, 0x1f0
     lwz r0, 0x0(r26)
@@ -1294,15 +1294,15 @@ lbl_fn_803646C4_00000FB0:
     addi r23, r23, 0x1
     addi r22, r22, 0x4
     cmplwi r23, 0x4
-    blt lbl_fn_803646C4_00000FB0
-    b lbl_fn_803646C4_000013E4
-lbl_fn_803646C4_00001040:
+    blt lbl_dvd_initFatalErrorScreen_00000FB0
+    b lbl_dvd_initFatalErrorScreen_000013E4
+lbl_dvd_initFatalErrorScreen_00001040:
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_803646C4_000013E4
+    beq lbl_dvd_initFatalErrorScreen_000013E4
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_803646C4_00001078
+    bne lbl_dvd_initFatalErrorScreen_00001078
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x390(r1)
@@ -1310,8 +1310,8 @@ lbl_fn_803646C4_00001040:
     lwz r0, 0x8(r5)
     stw r3, 0x394(r1)
     stw r0, 0x398(r1)
-    b lbl_fn_803646C4_00001094
-lbl_fn_803646C4_00001078:
+    b lbl_dvd_initFatalErrorScreen_00001094
+lbl_dvd_initFatalErrorScreen_00001078:
     lis r5, lbl_80789EC8@ha
     lwzu r4, lbl_80789EC8@l(r5)
     stw r4, 0x390(r1)
@@ -1319,7 +1319,7 @@ lbl_fn_803646C4_00001078:
     lwz r0, 0x8(r5)
     stw r3, 0x394(r1)
     stw r0, 0x398(r1)
-lbl_fn_803646C4_00001094:
+lbl_dvd_initFatalErrorScreen_00001094:
     lwz r5, 0x390(r1)
     addi r3, r1, 0x28
     lwz r4, 0x394(r1)
@@ -1327,9 +1327,9 @@ lbl_fn_803646C4_00001094:
     stw r5, 0x28(r1)
     stw r4, 0x2c(r1)
     stw r0, 0x30(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_803646C4_000013BC
+    beq lbl_dvd_initFatalErrorScreen_000013BC
     lfs f2, lbl_808856DC
     lfs f0, lbl_808856D8
     stfs f2, 0x18(r1)
@@ -1339,87 +1339,87 @@ lbl_fn_803646C4_00001094:
     stfs f2, 0x20(r1)
     stfs f0, 0x24(r1)
     cror eq, gt, eq
-    bne lbl_fn_803646C4_000010EC
+    bne lbl_dvd_initFatalErrorScreen_000010EC
     li r27, 0xff
-    b lbl_fn_803646C4_00001114
-lbl_fn_803646C4_000010EC:
+    b lbl_dvd_initFatalErrorScreen_00001114
+lbl_dvd_initFatalErrorScreen_000010EC:
     fcmpo cr0, f2, f2
     cror eq, lt, eq
-    bne lbl_fn_803646C4_00001100
+    bne lbl_dvd_initFatalErrorScreen_00001100
     li r3, 0x0
-    b lbl_fn_803646C4_00001110
-lbl_fn_803646C4_00001100:
+    b lbl_dvd_initFatalErrorScreen_00001110
+lbl_dvd_initFatalErrorScreen_00001100:
     lfs f1, lbl_808856F4
     lfs f0, lbl_808856F0
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
-lbl_fn_803646C4_00001110:
+    bl runtime_clampDouble
+lbl_dvd_initFatalErrorScreen_00001110:
     mr r27, r3
-lbl_fn_803646C4_00001114:
+lbl_dvd_initFatalErrorScreen_00001114:
     lfs f2, 0x1c(r1)
     lfs f0, lbl_808856D8
     fcmpo cr0, f2, f0
     cror eq, gt, eq
-    bne lbl_fn_803646C4_00001130
+    bne lbl_dvd_initFatalErrorScreen_00001130
     li r25, 0xff
-    b lbl_fn_803646C4_0000115C
-lbl_fn_803646C4_00001130:
+    b lbl_dvd_initFatalErrorScreen_0000115C
+lbl_dvd_initFatalErrorScreen_00001130:
     lfs f0, lbl_808856DC
     fcmpo cr0, f2, f0
     cror eq, lt, eq
-    bne lbl_fn_803646C4_00001148
+    bne lbl_dvd_initFatalErrorScreen_00001148
     li r3, 0x0
-    b lbl_fn_803646C4_00001158
-lbl_fn_803646C4_00001148:
+    b lbl_dvd_initFatalErrorScreen_00001158
+lbl_dvd_initFatalErrorScreen_00001148:
     lfs f1, lbl_808856F4
     lfs f0, lbl_808856F0
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
-lbl_fn_803646C4_00001158:
+    bl runtime_clampDouble
+lbl_dvd_initFatalErrorScreen_00001158:
     mr r25, r3
-lbl_fn_803646C4_0000115C:
+lbl_dvd_initFatalErrorScreen_0000115C:
     lfs f2, 0x20(r1)
     lfs f0, lbl_808856D8
     fcmpo cr0, f2, f0
     cror eq, gt, eq
-    bne lbl_fn_803646C4_00001178
+    bne lbl_dvd_initFatalErrorScreen_00001178
     li r24, 0xff
-    b lbl_fn_803646C4_000011A4
-lbl_fn_803646C4_00001178:
+    b lbl_dvd_initFatalErrorScreen_000011A4
+lbl_dvd_initFatalErrorScreen_00001178:
     lfs f0, lbl_808856DC
     fcmpo cr0, f2, f0
     cror eq, lt, eq
-    bne lbl_fn_803646C4_00001190
+    bne lbl_dvd_initFatalErrorScreen_00001190
     li r3, 0x0
-    b lbl_fn_803646C4_000011A0
-lbl_fn_803646C4_00001190:
+    b lbl_dvd_initFatalErrorScreen_000011A0
+lbl_dvd_initFatalErrorScreen_00001190:
     lfs f1, lbl_808856F4
     lfs f0, lbl_808856F0
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
-lbl_fn_803646C4_000011A0:
+    bl runtime_clampDouble
+lbl_dvd_initFatalErrorScreen_000011A0:
     mr r24, r3
-lbl_fn_803646C4_000011A4:
+lbl_dvd_initFatalErrorScreen_000011A4:
     lfs f2, 0x24(r1)
     lfs f0, lbl_808856D8
     fcmpo cr0, f2, f0
     cror eq, gt, eq
-    bne lbl_fn_803646C4_000011C0
+    bne lbl_dvd_initFatalErrorScreen_000011C0
     li r3, 0xff
-    b lbl_fn_803646C4_000011E8
-lbl_fn_803646C4_000011C0:
+    b lbl_dvd_initFatalErrorScreen_000011E8
+lbl_dvd_initFatalErrorScreen_000011C0:
     lfs f0, lbl_808856DC
     fcmpo cr0, f2, f0
     cror eq, lt, eq
-    bne lbl_fn_803646C4_000011D8
+    bne lbl_dvd_initFatalErrorScreen_000011D8
     li r3, 0x0
-    b lbl_fn_803646C4_000011E8
-lbl_fn_803646C4_000011D8:
+    b lbl_dvd_initFatalErrorScreen_000011E8
+lbl_dvd_initFatalErrorScreen_000011D8:
     lfs f1, lbl_808856F4
     lfs f0, lbl_808856F0
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
-lbl_fn_803646C4_000011E8:
+    bl runtime_clampDouble
+lbl_dvd_initFatalErrorScreen_000011E8:
     slwi r3, r3, 24
     slwi r0, r27, 16
     or r3, r3, r0
@@ -1442,7 +1442,7 @@ lbl_fn_803646C4_000011E8:
     li r29, 0x0
     li r28, 0x32
     lis r25, 0x4330
-lbl_fn_803646C4_00001240:
+lbl_dvd_initFatalErrorScreen_00001240:
     bl fn_8006BA30
     mulli r4, r3, 0x1f0
     lwz r0, 0x0(r26)
@@ -1456,8 +1456,8 @@ lbl_fn_803646C4_00001240:
     crclr 6
     bl sprintf
     addi r23, r1, 0x88
-    b lbl_fn_803646C4_00001384
-lbl_fn_803646C4_00001278:
+    b lbl_dvd_initFatalErrorScreen_00001384
+lbl_dvd_initFatalErrorScreen_00001278:
     mr r3, r23
     addi r4, r1, 0x8
     addi r5, r1, 0xc
@@ -1503,11 +1503,11 @@ lbl_fn_803646C4_00001278:
     fdivs f1, f31, f1
     fsubs f0, f0, f30
     fdivs f2, f31, f0
-    bl fn_805F9160
+    bl PSMTXScale
     addi r3, r1, 0x58
     li r4, 0x1e
     li r5, 0x1
-    bl fn_80618420
+    bl GXLoadTexMtxImm
     li r3, 0x1
     bl fn_80613BB0
     li r3, 0x0
@@ -1516,7 +1516,7 @@ lbl_fn_803646C4_00001278:
     li r6, 0x1e
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lwz r6, 0xc(r1)
     mr r3, r26
     lwz r7, 0x10(r1)
@@ -1525,34 +1525,34 @@ lbl_fn_803646C4_00001278:
     bl fn_80364DB4
     lwz r0, 0x14(r1)
     add r22, r22, r0
-lbl_fn_803646C4_00001384:
+lbl_dvd_initFatalErrorScreen_00001384:
     lbz r0, 0x0(r23)
     extsb. r0, r0
-    bne lbl_fn_803646C4_00001278
+    bne lbl_dvd_initFatalErrorScreen_00001278
     addi r27, r27, 0x1
     addi r28, r28, 0x1e
     cmplwi r27, 0x4
     addi r29, r29, 0x4
-    blt lbl_fn_803646C4_00001240
+    blt lbl_dvd_initFatalErrorScreen_00001240
     mr r3, r30
-    bl fn_80071AFC
+    bl gx_syncFrameFifo
     mr r3, r30
     li r4, 0x1
     bl fn_80071D60
-    b lbl_fn_803646C4_000013E4
-lbl_fn_803646C4_000013BC:
+    b lbl_dvd_initFatalErrorScreen_000013E4
+lbl_dvd_initFatalErrorScreen_000013BC:
     lwz r0, 0x34(r26)
     cmpwi r0, 0x0
-    beq lbl_fn_803646C4_000013DC
+    beq lbl_dvd_initFatalErrorScreen_000013DC
     lwz r3, 0x24(r26)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    bne lbl_fn_803646C4_000013E4
-lbl_fn_803646C4_000013DC:
+    bne lbl_dvd_initFatalErrorScreen_000013E4
+lbl_dvd_initFatalErrorScreen_000013DC:
     mr r3, r26
     bl fn_80364BE8
-lbl_fn_803646C4_000013E4:
+lbl_dvd_initFatalErrorScreen_000013E4:
     addi r11, r1, 0x3d0
     psq_l f31, 0x3f8(r1), 0, 0
     lfd f31, 0x3f0(r1)
@@ -1586,7 +1586,7 @@ asm void fn_80364BE8(void)
     mr r6, r5
     addi r3, r3, 0xf00
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r0, r3
     lwz r3, 0x48(r31)
     stw r0, 0x48(r31)
@@ -1600,7 +1600,7 @@ lbl_fn_80364BE8_0000146C:
     mr r6, r5
     addi r3, r3, 0x120
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r0, r3
     lwz r3, 0x48(r31)
     stw r0, 0x48(r31)
@@ -1629,25 +1629,25 @@ lbl_fn_80364BE8_0000149C:
     stw r4, 0x80(r1)
     lfd f0, 0x80(r1)
     fsubs f4, f0, f4
-    bl fn_805F95A0
+    bl PSMTXMultVecArraySR
     addi r3, r1, 0x38
     li r4, 0x1
     bl fn_80618290
     addi r3, r1, 0x8
-    bl fn_805F8980
+    bl PSMTXIdentity
     addi r3, r1, 0x8
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     li r3, 0x1
     li r4, 0x7
     li r5, 0x1
-    bl fn_80617E00
+    bl GXSetZMode
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0x3
     bl fn_80617340
@@ -1787,7 +1787,7 @@ lbl_fn_80364E7C_00001704:
     lwz r4, 0x2c(r31)
     lwz r3, 0x0(r28)
     addi r30, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r30
     addi r5, r1, 0x208
@@ -1840,7 +1840,7 @@ lbl_fn_80364E7C_000017D0:
     lwz r4, 0x28(r31)
     lwz r3, 0x0(r28)
     addi r30, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r30
     addi r5, r1, 0x8
@@ -1903,11 +1903,11 @@ asm void fn_8036503C(void)
     lis r3, lbl_8074D8C0@ha
     addi r3, r3, lbl_8074D8C0@l
     addi r3, r3, 0x68
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r29
     addi r3, r1, 0x24
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lfs f4, 0x24(r1)
     lfs f3, 0x28(r1)
     lfs f2, 0x2c(r1)
@@ -1923,11 +1923,11 @@ lbl_fn_8036503C_0000191C:
     lis r3, lbl_8074D8C0@ha
     addi r3, r3, lbl_8074D8C0@l
     addi r3, r3, 0x76
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r29
     addi r3, r1, 0x10
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lfs f4, 0x10(r1)
     lfs f3, 0x14(r1)
     lfs f2, 0x18(r1)
@@ -1945,7 +1945,7 @@ lbl_fn_8036503C_00001964:
     lfs f31, 0x38(r1)
     addi r3, r30, 0x84
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -1955,7 +1955,7 @@ lbl_fn_8036503C_00001964:
     addi r3, r30, 0x84
     lfs f31, 0x3c(r1)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -1965,7 +1965,7 @@ lbl_fn_8036503C_00001964:
     addi r3, r30, 0x84
     lfs f31, 0x48(r1)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -1975,7 +1975,7 @@ lbl_fn_8036503C_00001964:
     addi r3, r30, 0x8f
     lfs f31, 0x40(r1)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -1984,7 +1984,7 @@ lbl_fn_8036503C_00001964:
     addi r3, r30, 0x95
     lfs f31, 0x44(r1)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -2022,7 +2022,7 @@ lbl_fn_8036503C_00001A80:
     bl fn_800C31F4
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8036503C_00001B28
 lbl_fn_8036503C_00001AB0:
     mr r3, r29
@@ -2056,7 +2056,7 @@ lbl_fn_8036503C_00001AFC:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_8036503C_00001B28:
     lwz r0, 0x74(r1)
     psq_l f31, 0x68(r1), 0, 0

@@ -15,18 +15,18 @@ extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void fn_8005ED68(void);
 extern void fn_8006F2F0(void);
-extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_realloc(void);
+extern void mem_getAllocSize(void);
 extern void fn_800BDB58(void);
-extern void fn_800D59B8(void);
-extern void fn_80473EFC(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
+extern void atn_LH_Texture_update(void);
+extern void atn_LoadHandle_getStatus(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
 extern void fn_806163C0(void);
 extern void fn_806163E0(void);
 extern void fn_80686A48(void);
 extern void fn_80686A64(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -56,10 +56,10 @@ extern u32 lbl_808809BC;
 void fn_800610A0(void);
 void fn_800610A4(void);
 void fn_8006144C(void);
-void fn_800616C0(void);
+void skill_calculateDamage(void);
 void fn_80061824(void);
 void fn_80061AE4(void);
-void fn_80061DEC(void);
+void atn_ComDrawFont_destructor(void);
 void fn_80061E2C(void);
 void fn_80062908(void);
 void fn_8006297C(void);
@@ -67,10 +67,8 @@ void fn_800629F0(void);
 void fn_80062C8C(void);
 void fn_80062F7C(void);
 
-asm void fn_800610A0(void)
+void fn_800610A0(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_800610A4(void)
@@ -134,7 +132,7 @@ lbl_fn_800610A4_000000C0:
     add r3, r0, r6
     li r6, 0x10
     li r7, 0x5
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0xc(r29)
     mr r28, r3
     addi r0, r4, 0x64
@@ -154,7 +152,7 @@ lbl_fn_800610A4_000000F0:
     stfs f2, 0x70(r1)
     psq_st f1, 0x0(r27), 0, 0
     stfs f2, 0x7c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     fadds f3, f27, f30
     addi r25, r1, 0x5c
     lfs f0, lbl_808809A0
@@ -174,7 +172,7 @@ lbl_fn_800610A4_000000F0:
     stfs f0, 0x58(r1)
     psq_st f1, 0x0(r25), 0, 0
     stfs f2, 0x64(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     fadds f4, f27, f30
     addi r24, r1, 0x44
     fadds f3, f28, f31
@@ -195,7 +193,7 @@ lbl_fn_800610A4_000000F0:
     stfs f0, 0x40(r1)
     psq_st f1, 0x0(r24), 0, 0
     stfs f2, 0x4c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     fadds f3, f28, f31
     addi r23, r1, 0x2c
     lfs f0, lbl_808809A0
@@ -215,7 +213,7 @@ lbl_fn_800610A4_000000F0:
     stfs f0, 0x28(r1)
     psq_st f1, 0x0(r23), 0, 0
     stfs f2, 0x34(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f0, lbl_808809A0
     addi r22, r1, 0x14
     lfs f2, 0x34(r1)
@@ -234,7 +232,7 @@ lbl_fn_800610A4_000000F0:
     stfs f0, 0x10(r1)
     psq_st f1, 0x0(r22), 0, 0
     stfs f2, 0x1c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0x1c(r1)
     addi r3, r1, 0xb0
     psq_l f1, 0x0(r22), 0, 0
@@ -384,7 +382,7 @@ lbl_fn_8006144C_00000468:
     add r3, r0, r6
     li r6, 0x10
     li r7, 0x2
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0xc(r29)
     mr r28, r3
     addi r0, r4, 0x34
@@ -404,7 +402,7 @@ lbl_fn_8006144C_00000498:
     stfs f2, 0x28(r1)
     psq_st f1, 0x0(r27), 0, 0
     stfs f2, 0x34(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f0, lbl_808809A0
     addi r25, r1, 0x14
     lfs f2, 0x34(r1)
@@ -423,7 +421,7 @@ lbl_fn_8006144C_00000498:
     stfs f0, 0x10(r1)
     psq_st f1, 0x0(r25), 0, 0
     stfs f2, 0x1c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0x1c(r1)
     addi r3, r1, 0x44
     psq_l f1, 0x0(r25), 0, 0
@@ -496,7 +494,7 @@ lbl_fn_8006144C_000005E0:
     blr
 }
 
-asm void fn_800616C0(void)
+asm void skill_calculateDamage(void)
 {
     nofralloc
     stwu r1, -0x90(r1)
@@ -534,19 +532,19 @@ asm void fn_800616C0(void)
     addi r29, r3, 0x1
     li r31, 0x0
     cmplwi r29, 0x200
-    blt lbl_fn_800616C0_000006DC
+    blt lbl_skill_calculateDamage_000006DC
     lis r5, lbl_80731340@ha
     slwi r3, r29, 1
     addi r5, r5, lbl_80731340@l
     li r4, 0x6
     mr r6, r5
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r31, r3
     li r3, 0x0
-    bl fn_80084C24
+    bl mem_getAllocSize
     mr r30, r31
-lbl_fn_800616C0_000006DC:
+lbl_skill_calculateDamage_000006DC:
     lwz r3, lbl_8087EEC8
     mr r4, r30
     mr r5, r24
@@ -570,7 +568,7 @@ lbl_fn_800616C0_000006DC:
     lis r10, 0xff00
     bl fn_80061824
     mr r3, r31
-    bl fn_80084C24
+    bl mem_getAllocSize
     addi r11, r1, 0x30
     psq_l f31, 0x88(r1), 0, 0
     lfd f31, 0x80(r1)
@@ -999,7 +997,7 @@ lbl_fn_80061AE4_00000CDC:
     blr
 }
 
-asm void fn_80061DEC(void)
+asm void atn_ComDrawFont_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1008,11 +1006,11 @@ asm void fn_80061DEC(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    beq lbl_fn_80061DEC_00000D74
+    beq lbl_atn_ComDrawFont_destructor_00000D74
     cmpwi r4, 0x0
-    ble lbl_fn_80061DEC_00000D74
+    ble lbl_atn_ComDrawFont_destructor_00000D74
     bl dtor_80084684
-lbl_fn_80061DEC_00000D74:
+lbl_atn_ComDrawFont_destructor_00000D74:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -1221,7 +1219,7 @@ lbl_fn_80061E2C_00001060:
     add r3, r0, r7
     li r6, 0x20
     li r7, 0x4
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0xc(r15)
     mr r28, r3
     addi r0, r4, 0x94
@@ -1244,7 +1242,7 @@ lbl_fn_80061E2C_00001090:
     stfs f21, 0xd8(r1)
     psq_st f1, 0x0(r27), 0, 0
     stfs f2, 0xe4(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0xe4(r1)
     addi r6, r1, 0x140
     psq_l f1, 0x0(r27), 0, 0
@@ -1279,7 +1277,7 @@ lbl_fn_80061E2C_00001090:
     stfs f21, 0xb0(r1)
     psq_st f1, 0x0(r25), 0, 0
     stfs f2, 0xbc(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0xbc(r1)
     addi r5, r1, 0x140
     psq_l f1, 0x0(r25), 0, 0
@@ -1316,7 +1314,7 @@ lbl_fn_80061E2C_00001090:
     stfs f21, 0x88(r1)
     psq_st f1, 0x0(r23), 0, 0
     stfs f2, 0x94(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0x94(r1)
     addi r6, r1, 0x140
     psq_l f1, 0x0(r23), 0, 0
@@ -1352,7 +1350,7 @@ lbl_fn_80061E2C_00001090:
     stfs f21, 0x60(r1)
     psq_st f1, 0x0(r21), 0, 0
     stfs f2, 0x6c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0x6c(r1)
     addi r4, r1, 0x220
     psq_l f1, 0x0(r21), 0, 0
@@ -1443,7 +1441,7 @@ lbl_fn_80061E2C_000013D0:
     li r6, 0x20
     add r3, r0, r7
     li r7, 0x4
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0xc(r15)
     mr r20, r3
     addi r0, r4, 0x94
@@ -1466,7 +1464,7 @@ lbl_fn_80061E2C_000013FC:
     fmuls f3, f3, f27
     fmuls f1, f29, f0
     stfs f3, 0x4(r5)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r3, r1, 0x1f0
     stfs f30, 0x130(r1)
     add r3, r3, r27
@@ -1547,7 +1545,7 @@ lbl_fn_80061E2C_000014DC:
     psq_st f1, 0x0(r6), 0, 0
     stfs f2, 0x34(r1)
     stfs f2, 0x8(r6)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f0, 0x0(r24)
     mr r4, r22
     mr r5, r22
@@ -1564,7 +1562,7 @@ lbl_fn_80061E2C_000014DC:
     psq_l f1, 0x0(r24), 0, 0
     psq_st f1, 0x0(r22), 0, 0
     stfs f2, 0x28(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r3, r1, 0x160
     psq_l f1, 0x0(r22), 0, 0
     add r3, r3, r30
@@ -1665,11 +1663,11 @@ lbl_fn_80061E2C_000016E4:
     cmpwi r0, 0x0
     bne lbl_fn_80061E2C_00001724
     mr r3, r17
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_80061E2C_00001728
     addi r3, r17, 0x20
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_80061E2C_00001728
 lbl_fn_80061E2C_00001724:
@@ -1695,12 +1693,12 @@ lbl_fn_80061E2C_00001744:
     lwz r0, 0x28(r3)
     cmpwi r0, 0x0
     bne lbl_fn_80061E2C_0000178C
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_80061E2C_00001790
     lwz r3, 0x8(r1)
     addi r3, r3, 0x20
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_80061E2C_00001790
 lbl_fn_80061E2C_0000178C:
@@ -1894,7 +1892,7 @@ lbl_fn_800629F0_000019E8:
     add r3, r0, r6
     li r6, 0x10
     li r7, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0xc(r26)
     mr r25, r3
     addi r0, r4, 0x154
@@ -1976,7 +1974,7 @@ lbl_fn_800629F0_00001B30:
     mr r3, r30
     mr r4, r26
     mr r5, r26
-    bl fn_805F93C0
+    bl PSMTXMultVec
 lbl_fn_800629F0_00001B48:
     lfs f2, 0x0(r26)
     addi r24, r24, 0x1
@@ -2105,7 +2103,7 @@ lbl_fn_80062C8C_00001D04:
     add r3, r0, r6
     addi r4, r4, fn_800610A0@l
     li r6, 0x10
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0xc(r27)
     mr r31, r3
     add r0, r0, r24
@@ -2142,11 +2140,11 @@ lbl_fn_80062C8C_00001D6C:
     stfs f29, 0x10(r1)
     fsubs f3, f3, f30
     fmuls f1, f3, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x8
     addi r3, r1, 0x18
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f4, 0x8(r1)
     addi r0, r26, 0x1
     lfs f3, 0xc(r1)
@@ -2293,7 +2291,7 @@ lbl_fn_80062F7C_00001FBC:
     add r3, r0, r6
     li r6, 0x10
     li r7, 0x4
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0xc(r29)
     mr r30, r3
     addi r0, r4, 0x54
@@ -2331,7 +2329,7 @@ lbl_fn_80062F7C_00001FEC:
     stfs f5, 0xc(r1)
     stfs f27, 0x10(r1)
     stw r28, 0x3c(r30)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     frsp f28, f25
     lfs f29, 0xc(r1)
     frsp f30, f27
@@ -2341,7 +2339,7 @@ lbl_fn_80062F7C_00002084:
     mr r4, r29
     mr r5, r29
     addi r3, r1, 0x18
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f0, 0x0(r29)
     addi r28, r28, 0x1
     cmplwi r28, 0x4

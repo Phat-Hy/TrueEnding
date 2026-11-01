@@ -9,18 +9,18 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_800584B4(void);
 extern void fn_80059240(void);
-extern void fn_8006D7B0(void);
+extern void gimmick_updateAll(void);
 extern void fn_8006F17C(void);
 extern void fn_80072914(void);
-extern void fn_80074EC8(void);
-extern void fn_800761A8(void);
+extern void gx_beginQuadBatch(void);
+extern void gx_applyRenderState(void);
 extern void fn_800763FC(void);
-extern void fn_80076760(void);
+extern void gx_setRenderStateParam(void);
 extern void fn_80076BE4(void);
 extern void fn_80612E80(void);
 extern void fn_806134E0(void);
 extern void fn_80613520(void);
-extern void fn_80613960(void);
+extern void __GXSetVtxDesc(void);
 extern void fn_80613BB0(void);
 extern void fn_80614790(void);
 extern void fn_80615B60(void);
@@ -31,20 +31,20 @@ extern void fn_80617220(void);
 extern void fn_80617340(void);
 extern void fn_806173E0(void);
 extern void fn_80617420(void);
-extern void fn_80617460(void);
+extern void GXSetTevIndirect(void);
 extern void fn_806174C0(void);
 extern void fn_806175F0(void);
-extern void fn_80617650(void);
-extern void fn_806176F0(void);
+extern void GXSetTevKColorSel(void);
+extern void GXSetTevSwapMode(void);
 extern void fn_80617730(void);
 extern void fn_806177B0(void);
 extern void fn_80617880(void);
-extern void fn_806179E0(void);
+extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
-extern void fn_80618350(void);
-extern void fn_80618400(void);
+extern void GXLoadPosMtxImm(void);
+extern void GXSetCurrentMtx(void);
 extern void fn_80686A48(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 
 /* External data declarations */
 extern u8 lbl_80731140[];
@@ -59,29 +59,29 @@ extern u32 lbl_808809A4;
 extern u32 lbl_808809E0;
 
 /* Function declarations */
-void fn_80065060(void);
-void fn_8006533C(void);
-void fn_800656C8(void);
-void fn_80065B34(void);
-void fn_80066098(void);
-void fn_80066A74(void);
-void fn_80067480(void);
-void fn_800678BC(void);
-void fn_80067EB8(void);
-void fn_80067FFC(void);
-void fn_80068164(void);
-void fn_800685E4(void);
-void fn_80068B70(void);
-void fn_80068BB0(void);
-void fn_80068BF0(void);
-void fn_80068C30(void);
-void fn_80068C70(void);
-void fn_80068CB0(void);
-void fn_80068CF0(void);
-void fn_80068D30(void);
-void fn_80068D70(void);
+void atn_ComDrawLine_execute(void);
+void atn_ComDrawTexture_execute(void);
+void atn_ComDrawTextureAdd_execute(void);
+void atn_ComDrawTextureMask_execute(void);
+void atn_ComDrawTextureMono_execute(void);
+void atn_ComDrawTextureMaskMono_execute(void);
+void atn_ComDrawFont_execute(void);
+void atn_ComDrawFontSideFade_execute(void);
+void atn_ComDrawColliObject_execute(void);
+void atn_ComDrawColliTree_execute(void);
+void atn_ComDrawD3TextureMask_execute(void);
+void atn_ComDrawWindow_execute(void);
+void atn_ComDrawLine_destructor(void);
+void atn_ComDrawTextureAdd_destructor(void);
+void atn_ComDrawTextureMono_destructor(void);
+void atn_ComDrawTextureMaskMono_destructor(void);
+void atn_ComDrawFontSideFade_destructor(void);
+void atn_ComDrawColliObject_destructor(void);
+void atn_ComDrawColliTree_destructor(void);
+void atn_ComDrawD3TextureMask_destructor(void);
+void atn_ComDrawWindow_destructor(void);
 
-asm void fn_80065060(void)
+asm void atn_ComDrawLine_execute(void)
 {
     nofralloc
     stwu r1, -0x50(r1)
@@ -98,7 +98,7 @@ asm void fn_80065060(void)
     li r3, 0x0
     bl fn_80613BB0
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0xff
     li r5, 0xff
@@ -129,7 +129,7 @@ asm void fn_80065060(void)
     bl fn_80612E80
     lwz r0, 0x4(r31)
     cmpwi r0, 0x1
-    bne lbl_fn_80065060_000001A4
+    bne lbl_atn_ComDrawLine_execute_000001A4
     lfs f1, lbl_808809A0
     addi r3, r1, 0x8
     lfs f0, lbl_808809A4
@@ -146,9 +146,9 @@ asm void fn_80065060(void)
     stfs f0, 0x30(r1)
     stfs f0, 0x1c(r1)
     stfs f0, 0x8(r1)
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     li r3, 0x0
     li r4, 0x9
     li r5, 0x0
@@ -162,7 +162,7 @@ asm void fn_80065060(void)
     li r7, 0x0
     bl fn_80613520
     lwz r3, lbl_8087EEE0
-    bl fn_800761A8
+    bl gx_applyRenderState
     lwz r0, 0x14(r31)
     li r4, 0x0
     lwz r3, 0xc(r31)
@@ -171,8 +171,8 @@ asm void fn_80065060(void)
     li r6, 0x0
     li r5, 0x0
     lis r4, 0xcc01
-    b lbl_fn_80065060_00000194
-lbl_fn_80065060_00000160:
+    b lbl_atn_ComDrawLine_execute_00000194
+lbl_atn_ComDrawLine_execute_00000160:
     lwz r0, 0x8(r31)
     addi r6, r6, 0x1
     add r3, r0, r5
@@ -186,30 +186,30 @@ lbl_fn_80065060_00000160:
     lwz r0, 0xc(r3)
     rotlwi r0, r0, 8
     stw r0, -0x8000(r4)
-lbl_fn_80065060_00000194:
+lbl_atn_ComDrawLine_execute_00000194:
     lwz r0, 0x14(r31)
     cmpw r6, r0
-    blt lbl_fn_80065060_00000160
-    b lbl_fn_80065060_000002BC
-lbl_fn_80065060_000001A4:
+    blt lbl_atn_ComDrawLine_execute_00000160
+    b lbl_atn_ComDrawLine_execute_000002BC
+lbl_atn_ComDrawLine_execute_000001A4:
     lwz r3, lbl_8087EEE0
     li r4, 0x6
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     lwz r29, lbl_8087EEE0
     li r4, 0x8
     lbz r30, 0x18(r31)
     li r5, 0x1
     mr r3, r29
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r29
     li r4, 0x9
     li r5, 0x2
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r29
     mr r5, r30
     li r4, 0xa
-    bl fn_80076760
+    bl gx_setRenderStateParam
     li r3, 0x7
     li r4, 0x0
     li r5, 0x0
@@ -218,9 +218,9 @@ lbl_fn_80065060_000001A4:
     bl fn_806177B0
     addi r3, r28, 0x15c
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
@@ -234,7 +234,7 @@ lbl_fn_80065060_000001A4:
     li r7, 0x0
     bl fn_80613520
     lwz r3, lbl_8087EEE0
-    bl fn_800761A8
+    bl gx_applyRenderState
     lwz r0, 0x14(r31)
     li r4, 0x0
     lwz r3, 0xc(r31)
@@ -243,8 +243,8 @@ lbl_fn_80065060_000001A4:
     li r6, 0x0
     li r5, 0x0
     lis r4, 0xcc01
-    b lbl_fn_80065060_000002B0
-lbl_fn_80065060_00000274:
+    b lbl_atn_ComDrawLine_execute_000002B0
+lbl_atn_ComDrawLine_execute_00000274:
     lwz r0, 0x8(r31)
     addi r6, r6, 0x1
     add r3, r0, r5
@@ -260,11 +260,11 @@ lbl_fn_80065060_00000274:
     lwz r0, 0xc(r3)
     rotlwi r0, r0, 8
     stw r0, -0x8000(r4)
-lbl_fn_80065060_000002B0:
+lbl_atn_ComDrawLine_execute_000002B0:
     lwz r0, 0x14(r31)
     cmpw r6, r0
-    blt lbl_fn_80065060_00000274
-lbl_fn_80065060_000002BC:
+    blt lbl_atn_ComDrawLine_execute_00000274
+lbl_atn_ComDrawLine_execute_000002BC:
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)
     lwz r30, 0x48(r1)
@@ -275,7 +275,7 @@ lbl_fn_80065060_000002BC:
     blr
 }
 
-asm void fn_8006533C(void)
+asm void atn_ComDrawTexture_execute(void)
 {
     nofralloc
     stwu r1, -0x50(r1)
@@ -292,7 +292,7 @@ asm void fn_8006533C(void)
     li r3, 0x1
     bl fn_80613BB0
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -315,10 +315,10 @@ asm void fn_8006533C(void)
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lwz r0, 0x4(r31)
     cmpwi r0, 0x1
-    bne lbl_fn_8006533C_000003D0
+    bne lbl_atn_ComDrawTexture_execute_000003D0
     lfs f1, lbl_808809A0
     addi r3, r1, 0x8
     lfs f0, lbl_808809A4
@@ -335,35 +335,35 @@ asm void fn_8006533C(void)
     stfs f0, 0x30(r1)
     stfs f0, 0x1c(r1)
     stfs f0, 0x8(r1)
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
-    b lbl_fn_8006533C_0000042C
-lbl_fn_8006533C_000003D0:
+    bl GXSetCurrentMtx
+    b lbl_atn_ComDrawTexture_execute_0000042C
+lbl_atn_ComDrawTexture_execute_000003D0:
     lwz r3, lbl_8087EEE0
     li r4, 0x6
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     lwz r29, lbl_8087EEE0
     li r4, 0x8
     lbz r30, 0x11(r31)
     li r5, 0x1
     mr r3, r29
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r29
     li r4, 0x9
     li r5, 0x2
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r29
     mr r5, r30
     li r4, 0xa
-    bl fn_80076760
+    bl gx_setRenderStateParam
     addi r3, r28, 0x15c
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
-lbl_fn_8006533C_0000042C:
+    bl GXSetCurrentMtx
+lbl_atn_ComDrawTexture_execute_0000042C:
     lwz r3, lbl_8087EEE0
     li r5, 0x0
     lwz r4, 0xc(r31)
@@ -388,7 +388,7 @@ lbl_fn_8006533C_0000042C:
     bl fn_80612E80
     lwz r0, 0x4(r31)
     cmpwi r0, 0x1
-    bne lbl_fn_8006533C_000004DC
+    bne lbl_atn_ComDrawTexture_execute_000004DC
     li r3, 0x0
     li r4, 0x9
     li r5, 0x0
@@ -407,8 +407,8 @@ lbl_fn_8006533C_0000042C:
     li r6, 0x4
     li r7, 0x0
     bl fn_80613520
-    b lbl_fn_8006533C_00000524
-lbl_fn_8006533C_000004DC:
+    b lbl_atn_ComDrawTexture_execute_00000524
+lbl_atn_ComDrawTexture_execute_000004DC:
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
@@ -427,9 +427,9 @@ lbl_fn_8006533C_000004DC:
     li r6, 0x4
     li r7, 0x0
     bl fn_80613520
-lbl_fn_8006533C_00000524:
+lbl_atn_ComDrawTexture_execute_00000524:
     lwz r3, lbl_8087EEE0
-    bl fn_800761A8
+    bl gx_applyRenderState
     li r3, 0x80
     li r4, 0x0
     li r5, 0x4
@@ -439,18 +439,18 @@ lbl_fn_8006533C_00000524:
     li r5, 0x0
     lis r4, 0xcc01
     mtctr r0
-lbl_fn_8006533C_00000550:
+lbl_atn_ComDrawTexture_execute_00000550:
     lwz r0, 0x4(r31)
     cmpwi r0, 0x1
-    bne lbl_fn_8006533C_00000578
+    bne lbl_atn_ComDrawTexture_execute_00000578
     lwz r0, 0x8(r31)
     add r3, r0, r5
     lfsx f0, r5, r0
     lfs f1, 0x4(r3)
     stfs f0, -0x8000(r4)
     stfs f1, -0x8000(r4)
-    b lbl_fn_8006533C_00000598
-lbl_fn_8006533C_00000578:
+    b lbl_atn_ComDrawTexture_execute_00000598
+lbl_atn_ComDrawTexture_execute_00000578:
     lwz r0, 0x8(r31)
     add r3, r0, r5
     lfsx f0, r5, r0
@@ -459,7 +459,7 @@ lbl_fn_8006533C_00000578:
     stfs f0, -0x8000(r4)
     stfs f1, -0x8000(r4)
     stfs f2, -0x8000(r4)
-lbl_fn_8006533C_00000598:
+lbl_atn_ComDrawTexture_execute_00000598:
     lwz r0, 0x8(r31)
     add r3, r0, r5
     lwz r0, 0xc(r3)
@@ -474,15 +474,15 @@ lbl_fn_8006533C_00000598:
     stfs f1, -0x8000(r4)
     lwz r0, 0x4(r31)
     cmpwi r0, 0x1
-    bne lbl_fn_8006533C_000005F0
+    bne lbl_atn_ComDrawTexture_execute_000005F0
     lwz r0, 0x8(r31)
     add r3, r0, r5
     lfsx f0, r5, r0
     lfs f1, 0x4(r3)
     stfs f0, -0x8000(r4)
     stfs f1, -0x8000(r4)
-    b lbl_fn_8006533C_00000610
-lbl_fn_8006533C_000005F0:
+    b lbl_atn_ComDrawTexture_execute_00000610
+lbl_atn_ComDrawTexture_execute_000005F0:
     lwz r0, 0x8(r31)
     add r3, r0, r5
     lfsx f0, r5, r0
@@ -491,7 +491,7 @@ lbl_fn_8006533C_000005F0:
     stfs f0, -0x8000(r4)
     stfs f1, -0x8000(r4)
     stfs f2, -0x8000(r4)
-lbl_fn_8006533C_00000610:
+lbl_atn_ComDrawTexture_execute_00000610:
     lwz r0, 0x8(r31)
     addi r6, r6, 0x1
     add r3, r0, r5
@@ -505,7 +505,7 @@ lbl_fn_8006533C_00000610:
     lfs f0, 0x10(r3)
     stfs f0, -0x8000(r4)
     stfs f1, -0x8000(r4)
-    bdnz lbl_fn_8006533C_00000550
+    bdnz lbl_atn_ComDrawTexture_execute_00000550
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)
     lwz r30, 0x48(r1)
@@ -516,7 +516,7 @@ lbl_fn_8006533C_00000610:
     blr
 }
 
-asm void fn_800656C8(void)
+asm void atn_ComDrawTextureAdd_execute(void)
 {
     nofralloc
     stwu r1, -0x50(r1)
@@ -529,13 +529,13 @@ asm void fn_800656C8(void)
     stw r28, 0x40(r1)
     mr r28, r4
     lwz r3, lbl_8087EEE0
-    bl fn_800761A8
+    bl gx_applyRenderState
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x1
     bl fn_80613BB0
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -558,10 +558,10 @@ asm void fn_800656C8(void)
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lwz r0, 0x4(r31)
     cmpwi r0, 0x1
-    bne lbl_fn_800656C8_00000764
+    bne lbl_atn_ComDrawTextureAdd_execute_00000764
     lfs f1, lbl_808809A0
     addi r3, r1, 0x8
     lfs f0, lbl_808809A4
@@ -578,52 +578,52 @@ asm void fn_800656C8(void)
     stfs f0, 0x30(r1)
     stfs f0, 0x1c(r1)
     stfs f0, 0x8(r1)
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
-    b lbl_fn_800656C8_000007C0
-lbl_fn_800656C8_00000764:
+    bl GXSetCurrentMtx
+    b lbl_atn_ComDrawTextureAdd_execute_000007C0
+lbl_atn_ComDrawTextureAdd_execute_00000764:
     lwz r3, lbl_8087EEE0
     li r4, 0x6
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     lwz r29, lbl_8087EEE0
     li r4, 0x8
     lbz r30, 0x11(r31)
     li r5, 0x1
     mr r3, r29
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r29
     li r4, 0x9
     li r5, 0x2
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r29
     mr r5, r30
     li r4, 0xa
-    bl fn_80076760
+    bl gx_setRenderStateParam
     addi r3, r28, 0x15c
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
-lbl_fn_800656C8_000007C0:
+    bl GXSetCurrentMtx
+lbl_atn_ComDrawTextureAdd_execute_000007C0:
     lwz r3, lbl_8087EEE0
     li r5, 0x0
     lwz r4, 0xc(r31)
     bl fn_800763FC
     lwz r0, 0x14(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_800656C8_00000800
+    beq lbl_atn_ComDrawTextureAdd_execute_00000800
     cmpwi r0, 0x1
-    beq lbl_fn_800656C8_00000824
+    beq lbl_atn_ComDrawTextureAdd_execute_00000824
     cmpwi r0, 0x2
-    beq lbl_fn_800656C8_00000848
+    beq lbl_atn_ComDrawTextureAdd_execute_00000848
     cmpwi r0, 0x3
-    beq lbl_fn_800656C8_0000086C
+    beq lbl_atn_ComDrawTextureAdd_execute_0000086C
     cmpwi r0, 0x4
-    beq lbl_fn_800656C8_00000890
-    b lbl_fn_800656C8_000008B0
-lbl_fn_800656C8_00000800:
+    beq lbl_atn_ComDrawTextureAdd_execute_00000890
+    b lbl_atn_ComDrawTextureAdd_execute_000008B0
+lbl_atn_ComDrawTextureAdd_execute_00000800:
     lbz r3, 0x10(r31)
     li r4, 0x4
     li r5, 0x5
@@ -632,8 +632,8 @@ lbl_fn_800656C8_00000800:
     or r0, r0, r3
     srwi r3, r0, 31
     bl fn_80617D50
-    b lbl_fn_800656C8_000008B0
-lbl_fn_800656C8_00000824:
+    b lbl_atn_ComDrawTextureAdd_execute_000008B0
+lbl_atn_ComDrawTextureAdd_execute_00000824:
     lbz r3, 0x10(r31)
     li r4, 0x4
     li r5, 0x1
@@ -642,8 +642,8 @@ lbl_fn_800656C8_00000824:
     or r0, r0, r3
     srwi r3, r0, 31
     bl fn_80617D50
-    b lbl_fn_800656C8_000008B0
-lbl_fn_800656C8_00000848:
+    b lbl_atn_ComDrawTextureAdd_execute_000008B0
+lbl_atn_ComDrawTextureAdd_execute_00000848:
     lbz r3, 0x10(r31)
     li r4, 0x3
     li r5, 0x1
@@ -652,8 +652,8 @@ lbl_fn_800656C8_00000848:
     or r0, r0, r3
     srwi r3, r0, 31
     bl fn_80617D50
-    b lbl_fn_800656C8_000008B0
-lbl_fn_800656C8_0000086C:
+    b lbl_atn_ComDrawTextureAdd_execute_000008B0
+lbl_atn_ComDrawTextureAdd_execute_0000086C:
     lbz r3, 0x10(r31)
     li r4, 0x0
     li r5, 0x5
@@ -662,8 +662,8 @@ lbl_fn_800656C8_0000086C:
     or r0, r0, r3
     srwi r3, r0, 31
     bl fn_80617D50
-    b lbl_fn_800656C8_000008B0
-lbl_fn_800656C8_00000890:
+    b lbl_atn_ComDrawTextureAdd_execute_000008B0
+lbl_atn_ComDrawTextureAdd_execute_00000890:
     lbz r3, 0x10(r31)
     li r4, 0x0
     li r5, 0x3
@@ -672,7 +672,7 @@ lbl_fn_800656C8_00000890:
     or r0, r0, r3
     srwi r3, r0, 31
     bl fn_80617D50
-lbl_fn_800656C8_000008B0:
+lbl_atn_ComDrawTextureAdd_execute_000008B0:
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
@@ -685,7 +685,7 @@ lbl_fn_800656C8_000008B0:
     bl fn_80612E80
     lwz r0, 0x4(r31)
     cmpwi r0, 0x1
-    bne lbl_fn_800656C8_00000930
+    bne lbl_atn_ComDrawTextureAdd_execute_00000930
     li r3, 0x0
     li r4, 0x9
     li r5, 0x0
@@ -704,8 +704,8 @@ lbl_fn_800656C8_000008B0:
     li r6, 0x4
     li r7, 0x0
     bl fn_80613520
-    b lbl_fn_800656C8_00000978
-lbl_fn_800656C8_00000930:
+    b lbl_atn_ComDrawTextureAdd_execute_00000978
+lbl_atn_ComDrawTextureAdd_execute_00000930:
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
@@ -724,7 +724,7 @@ lbl_fn_800656C8_00000930:
     li r6, 0x4
     li r7, 0x0
     bl fn_80613520
-lbl_fn_800656C8_00000978:
+lbl_atn_ComDrawTextureAdd_execute_00000978:
     li r3, 0x80
     li r4, 0x0
     li r5, 0x4
@@ -734,18 +734,18 @@ lbl_fn_800656C8_00000978:
     li r5, 0x0
     lis r4, 0xcc01
     mtctr r0
-lbl_fn_800656C8_0000099C:
+lbl_atn_ComDrawTextureAdd_execute_0000099C:
     lwz r0, 0x4(r31)
     cmpwi r0, 0x1
-    bne lbl_fn_800656C8_000009C4
+    bne lbl_atn_ComDrawTextureAdd_execute_000009C4
     lwz r0, 0x8(r31)
     add r3, r0, r5
     lfsx f0, r5, r0
     lfs f1, 0x4(r3)
     stfs f0, -0x8000(r4)
     stfs f1, -0x8000(r4)
-    b lbl_fn_800656C8_000009E4
-lbl_fn_800656C8_000009C4:
+    b lbl_atn_ComDrawTextureAdd_execute_000009E4
+lbl_atn_ComDrawTextureAdd_execute_000009C4:
     lwz r0, 0x8(r31)
     add r3, r0, r5
     lfsx f0, r5, r0
@@ -754,7 +754,7 @@ lbl_fn_800656C8_000009C4:
     stfs f0, -0x8000(r4)
     stfs f1, -0x8000(r4)
     stfs f2, -0x8000(r4)
-lbl_fn_800656C8_000009E4:
+lbl_atn_ComDrawTextureAdd_execute_000009E4:
     lwz r0, 0x8(r31)
     add r3, r0, r5
     lwz r0, 0xc(r3)
@@ -769,15 +769,15 @@ lbl_fn_800656C8_000009E4:
     stfs f1, -0x8000(r4)
     lwz r0, 0x4(r31)
     cmpwi r0, 0x1
-    bne lbl_fn_800656C8_00000A3C
+    bne lbl_atn_ComDrawTextureAdd_execute_00000A3C
     lwz r0, 0x8(r31)
     add r3, r0, r5
     lfsx f0, r5, r0
     lfs f1, 0x4(r3)
     stfs f0, -0x8000(r4)
     stfs f1, -0x8000(r4)
-    b lbl_fn_800656C8_00000A5C
-lbl_fn_800656C8_00000A3C:
+    b lbl_atn_ComDrawTextureAdd_execute_00000A5C
+lbl_atn_ComDrawTextureAdd_execute_00000A3C:
     lwz r0, 0x8(r31)
     add r3, r0, r5
     lfsx f0, r5, r0
@@ -786,7 +786,7 @@ lbl_fn_800656C8_00000A3C:
     stfs f0, -0x8000(r4)
     stfs f1, -0x8000(r4)
     stfs f2, -0x8000(r4)
-lbl_fn_800656C8_00000A5C:
+lbl_atn_ComDrawTextureAdd_execute_00000A5C:
     lwz r0, 0x8(r31)
     addi r6, r6, 0x1
     add r3, r0, r5
@@ -800,7 +800,7 @@ lbl_fn_800656C8_00000A5C:
     lfs f0, 0x10(r3)
     stfs f0, -0x8000(r4)
     stfs f1, -0x8000(r4)
-    bdnz lbl_fn_800656C8_0000099C
+    bdnz lbl_atn_ComDrawTextureAdd_execute_0000099C
     lbz r3, 0x10(r31)
     li r4, 0x4
     li r5, 0x5
@@ -819,7 +819,7 @@ lbl_fn_800656C8_00000A5C:
     blr
 }
 
-asm void fn_80065B34(void)
+asm void atn_ComDrawTextureMask_execute(void)
 {
     nofralloc
     stwu r1, -0x50(r1)
@@ -832,13 +832,13 @@ asm void fn_80065B34(void)
     stw r28, 0x40(r1)
     mr r28, r4
     lwz r3, lbl_8087EEE0
-    bl fn_800761A8
+    bl gx_applyRenderState
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x2
     bl fn_80613BB0
     li r3, 0x2
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -848,7 +848,7 @@ asm void fn_80065B34(void)
     li r3, 0x1
     li r4, 0x0
     li r5, 0x1
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -877,7 +877,7 @@ asm void fn_80065B34(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -903,7 +903,7 @@ asm void fn_80065B34(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -925,17 +925,17 @@ asm void fn_80065B34(void)
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x1
     li r4, 0x1
     li r5, 0x5
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lwz r0, 0x4(r31)
     cmpwi r0, 0x1
-    bne lbl_fn_80065B34_00000CEC
+    bne lbl_atn_ComDrawTextureMask_execute_00000CEC
     lfs f1, lbl_808809A0
     addi r3, r1, 0x8
     lfs f0, lbl_808809A4
@@ -952,104 +952,104 @@ asm void fn_80065B34(void)
     stfs f0, 0x30(r1)
     stfs f0, 0x1c(r1)
     stfs f0, 0x8(r1)
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
-    b lbl_fn_80065B34_00000D48
-lbl_fn_80065B34_00000CEC:
+    bl GXSetCurrentMtx
+    b lbl_atn_ComDrawTextureMask_execute_00000D48
+lbl_atn_ComDrawTextureMask_execute_00000CEC:
     lwz r3, lbl_8087EEE0
     li r4, 0x6
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     lwz r29, lbl_8087EEE0
     li r4, 0x8
     lbz r30, 0x14(r31)
     li r5, 0x1
     mr r3, r29
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r29
     li r4, 0x9
     li r5, 0x2
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r29
     mr r5, r30
     li r4, 0xa
-    bl fn_80076760
+    bl gx_setRenderStateParam
     addi r3, r28, 0x15c
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
-lbl_fn_80065B34_00000D48:
+    bl GXSetCurrentMtx
+lbl_atn_ComDrawTextureMask_execute_00000D48:
     lwz r4, 0xc(r31)
     lwz r3, lbl_8087EEE0
     cmpwi r4, 0x0
-    beq lbl_fn_80065B34_00000D5C
-    b lbl_fn_80065B34_00000D64
-lbl_fn_80065B34_00000D5C:
+    beq lbl_atn_ComDrawTextureMask_execute_00000D5C
+    b lbl_atn_ComDrawTextureMask_execute_00000D64
+lbl_atn_ComDrawTextureMask_execute_00000D5C:
     lwz r4, lbl_8087EEB0
     addi r4, r4, 0x10
-lbl_fn_80065B34_00000D64:
+lbl_atn_ComDrawTextureMask_execute_00000D64:
     li r5, 0x0
     bl fn_800763FC
     lwz r4, 0x10(r31)
     lwz r3, lbl_8087EEE0
     cmpwi r4, 0x0
-    beq lbl_fn_80065B34_00000D80
-    b lbl_fn_80065B34_00000D88
-lbl_fn_80065B34_00000D80:
+    beq lbl_atn_ComDrawTextureMask_execute_00000D80
+    b lbl_atn_ComDrawTextureMask_execute_00000D88
+lbl_atn_ComDrawTextureMask_execute_00000D80:
     lwz r4, lbl_8087EEB0
     addi r4, r4, 0x10
-lbl_fn_80065B34_00000D88:
+lbl_atn_ComDrawTextureMask_execute_00000D88:
     li r5, 0x1
     bl fn_800763FC
     lwz r0, 0x18(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_80065B34_00000DC0
+    beq lbl_atn_ComDrawTextureMask_execute_00000DC0
     cmpwi r0, 0x1
-    beq lbl_fn_80065B34_00000DD8
+    beq lbl_atn_ComDrawTextureMask_execute_00000DD8
     cmpwi r0, 0x2
-    beq lbl_fn_80065B34_00000DF0
+    beq lbl_atn_ComDrawTextureMask_execute_00000DF0
     cmpwi r0, 0x3
-    beq lbl_fn_80065B34_00000E08
+    beq lbl_atn_ComDrawTextureMask_execute_00000E08
     cmpwi r0, 0x4
-    beq lbl_fn_80065B34_00000E20
-    b lbl_fn_80065B34_00000E34
-lbl_fn_80065B34_00000DC0:
+    beq lbl_atn_ComDrawTextureMask_execute_00000E20
+    b lbl_atn_ComDrawTextureMask_execute_00000E34
+lbl_atn_ComDrawTextureMask_execute_00000DC0:
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
     li r6, 0x0
     bl fn_80617D50
-    b lbl_fn_80065B34_00000E34
-lbl_fn_80065B34_00000DD8:
+    b lbl_atn_ComDrawTextureMask_execute_00000E34
+lbl_atn_ComDrawTextureMask_execute_00000DD8:
     li r3, 0x1
     li r4, 0x4
     li r5, 0x1
     li r6, 0x0
     bl fn_80617D50
-    b lbl_fn_80065B34_00000E34
-lbl_fn_80065B34_00000DF0:
+    b lbl_atn_ComDrawTextureMask_execute_00000E34
+lbl_atn_ComDrawTextureMask_execute_00000DF0:
     li r3, 0x1
     li r4, 0x3
     li r5, 0x1
     li r6, 0x0
     bl fn_80617D50
-    b lbl_fn_80065B34_00000E34
-lbl_fn_80065B34_00000E08:
+    b lbl_atn_ComDrawTextureMask_execute_00000E34
+lbl_atn_ComDrawTextureMask_execute_00000E08:
     li r3, 0x1
     li r4, 0x0
     li r5, 0x5
     li r6, 0x0
     bl fn_80617D50
-    b lbl_fn_80065B34_00000E34
-lbl_fn_80065B34_00000E20:
+    b lbl_atn_ComDrawTextureMask_execute_00000E34
+lbl_atn_ComDrawTextureMask_execute_00000E20:
     li r3, 0x1
     li r4, 0x0
     li r5, 0x3
     li r6, 0x0
     bl fn_80617D50
-lbl_fn_80065B34_00000E34:
+lbl_atn_ComDrawTextureMask_execute_00000E34:
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
@@ -1065,7 +1065,7 @@ lbl_fn_80065B34_00000E34:
     bl fn_80612E80
     lwz r0, 0x4(r31)
     cmpwi r0, 0x1
-    bne lbl_fn_80065B34_00000ED8
+    bne lbl_atn_ComDrawTextureMask_execute_00000ED8
     li r3, 0x0
     li r4, 0x9
     li r5, 0x0
@@ -1090,8 +1090,8 @@ lbl_fn_80065B34_00000E34:
     li r6, 0x4
     li r7, 0x0
     bl fn_80613520
-    b lbl_fn_80065B34_00000F38
-lbl_fn_80065B34_00000ED8:
+    b lbl_atn_ComDrawTextureMask_execute_00000F38
+lbl_atn_ComDrawTextureMask_execute_00000ED8:
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
@@ -1116,9 +1116,9 @@ lbl_fn_80065B34_00000ED8:
     li r6, 0x4
     li r7, 0x0
     bl fn_80613520
-lbl_fn_80065B34_00000F38:
+lbl_atn_ComDrawTextureMask_execute_00000F38:
     lwz r3, lbl_8087EEE0
-    bl fn_800761A8
+    bl gx_applyRenderState
     li r3, 0x80
     li r4, 0x0
     li r5, 0x4
@@ -1127,18 +1127,18 @@ lbl_fn_80065B34_00000F38:
     li r5, 0x0
     lis r4, 0xcc01
     mtctr r0
-lbl_fn_80065B34_00000F60:
+lbl_atn_ComDrawTextureMask_execute_00000F60:
     lwz r0, 0x4(r31)
     cmpwi r0, 0x1
-    bne lbl_fn_80065B34_00000F88
+    bne lbl_atn_ComDrawTextureMask_execute_00000F88
     lwz r0, 0x8(r31)
     add r3, r0, r5
     lfsx f0, r5, r0
     lfs f1, 0x4(r3)
     stfs f0, -0x8000(r4)
     stfs f1, -0x8000(r4)
-    b lbl_fn_80065B34_00000FA8
-lbl_fn_80065B34_00000F88:
+    b lbl_atn_ComDrawTextureMask_execute_00000FA8
+lbl_atn_ComDrawTextureMask_execute_00000F88:
     lwz r0, 0x8(r31)
     add r3, r0, r5
     lfsx f0, r5, r0
@@ -1147,7 +1147,7 @@ lbl_fn_80065B34_00000F88:
     stfs f0, -0x8000(r4)
     stfs f1, -0x8000(r4)
     stfs f2, -0x8000(r4)
-lbl_fn_80065B34_00000FA8:
+lbl_atn_ComDrawTextureMask_execute_00000FA8:
     lwz r0, 0x8(r31)
     add r3, r0, r5
     lwz r0, 0xc(r3)
@@ -1166,11 +1166,11 @@ lbl_fn_80065B34_00000FA8:
     lfs f0, 0x18(r3)
     stfs f0, -0x8000(r4)
     stfs f1, -0x8000(r4)
-    bdnz lbl_fn_80065B34_00000F60
+    bdnz lbl_atn_ComDrawTextureMask_execute_00000F60
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -1186,7 +1186,7 @@ lbl_fn_80065B34_00000FA8:
     blr
 }
 
-asm void fn_80066098(void)
+asm void atn_ComDrawTextureMono_execute(void)
 {
     nofralloc
     stwu r1, -0x190(r1)
@@ -1241,7 +1241,7 @@ asm void fn_80066098(void)
     stfs f0, 0xf0(r1)
     stfs f6, 0x100(r1)
     mtctr r0
-lbl_fn_80066098_00001108:
+lbl_atn_ComDrawTextureMono_execute_00001108:
     lfs f8, 0xc(r8)
     lfs f7, 0x8(r8)
     lfs f6, 0x4(r8)
@@ -1302,13 +1302,13 @@ lbl_fn_80066098_00001108:
     stfs f0, 0xc(r7)
     addi r7, r7, 0x10
     stfs f0, 0x54(r1)
-    bdnz lbl_fn_80066098_00001108
+    bdnz lbl_atn_ComDrawTextureMono_execute_00001108
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x1
     bl fn_80613BB0
     li r3, 0x4
-    bl fn_806179E0
+    bl GXSetNumTevStages
     lwz r3, lbl_8087EEE0
     li r5, 0x0
     lwz r4, 0xc(r30)
@@ -1435,10 +1435,10 @@ lbl_fn_80066098_00001108:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0xc
-    bl fn_80617650
+    bl GXSetTevKColorSel
     li r3, 0x0
     li r4, 0xf
     li r5, 0xe
@@ -1457,7 +1457,7 @@ lbl_fn_80066098_00001108:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1475,10 +1475,10 @@ lbl_fn_80066098_00001108:
     li r3, 0x1
     li r4, 0x1
     li r5, 0x1
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x1
     li r4, 0xd
-    bl fn_80617650
+    bl GXSetTevKColorSel
     li r3, 0x1
     li r4, 0xf
     li r5, 0xe
@@ -1497,7 +1497,7 @@ lbl_fn_80066098_00001108:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -1515,10 +1515,10 @@ lbl_fn_80066098_00001108:
     li r3, 0x2
     li r4, 0x2
     li r5, 0x2
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x2
     li r4, 0xe
-    bl fn_80617650
+    bl GXSetTevKColorSel
     li r3, 0x2
     li r4, 0xf
     li r5, 0xe
@@ -1537,7 +1537,7 @@ lbl_fn_80066098_00001108:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x2
     li r4, 0x0
     li r5, 0x0
@@ -1555,7 +1555,7 @@ lbl_fn_80066098_00001108:
     li r3, 0x3
     li r4, 0x3
     li r5, 0x3
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x3
     li r4, 0xf
     li r5, 0x0
@@ -1574,7 +1574,7 @@ lbl_fn_80066098_00001108:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x3
     li r4, 0x0
     li r5, 0x0
@@ -1603,10 +1603,10 @@ lbl_fn_80066098_00001108:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lwz r0, 0x4(r30)
     cmpwi r0, 0x1
-    bne lbl_fn_80066098_0000170C
+    bne lbl_atn_ComDrawTextureMono_execute_0000170C
     lfs f1, lbl_808809A0
     addi r3, r1, 0x58
     lfs f0, lbl_808809A4
@@ -1623,35 +1623,35 @@ lbl_fn_80066098_00001108:
     stfs f0, 0x80(r1)
     stfs f0, 0x6c(r1)
     stfs f0, 0x58(r1)
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
-    b lbl_fn_80066098_00001768
-lbl_fn_80066098_0000170C:
+    bl GXSetCurrentMtx
+    b lbl_atn_ComDrawTextureMono_execute_00001768
+lbl_atn_ComDrawTextureMono_execute_0000170C:
     lwz r3, lbl_8087EEE0
     li r4, 0x6
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     lwz r28, lbl_8087EEE0
     li r4, 0x8
     lbz r29, 0x11(r30)
     li r5, 0x1
     mr r3, r28
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r28
     li r4, 0x9
     li r5, 0x2
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r28
     mr r5, r29
     li r4, 0xa
-    bl fn_80076760
+    bl gx_setRenderStateParam
     addi r3, r31, 0x15c
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
-lbl_fn_80066098_00001768:
+    bl GXSetCurrentMtx
+lbl_atn_ComDrawTextureMono_execute_00001768:
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
@@ -1664,7 +1664,7 @@ lbl_fn_80066098_00001768:
     bl fn_80612E80
     lwz r0, 0x4(r30)
     cmpwi r0, 0x1
-    bne lbl_fn_80066098_000017E8
+    bne lbl_atn_ComDrawTextureMono_execute_000017E8
     li r3, 0x0
     li r4, 0x9
     li r5, 0x0
@@ -1683,8 +1683,8 @@ lbl_fn_80066098_00001768:
     li r6, 0x4
     li r7, 0x0
     bl fn_80613520
-    b lbl_fn_80066098_00001830
-lbl_fn_80066098_000017E8:
+    b lbl_atn_ComDrawTextureMono_execute_00001830
+lbl_atn_ComDrawTextureMono_execute_000017E8:
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
@@ -1703,9 +1703,9 @@ lbl_fn_80066098_000017E8:
     li r6, 0x4
     li r7, 0x0
     bl fn_80613520
-lbl_fn_80066098_00001830:
+lbl_atn_ComDrawTextureMono_execute_00001830:
     lwz r3, lbl_8087EEE0
-    bl fn_800761A8
+    bl gx_applyRenderState
     li r3, 0x80
     li r4, 0x0
     li r5, 0x4
@@ -1715,18 +1715,18 @@ lbl_fn_80066098_00001830:
     li r5, 0x0
     lis r4, 0xcc01
     mtctr r0
-lbl_fn_80066098_0000185C:
+lbl_atn_ComDrawTextureMono_execute_0000185C:
     lwz r0, 0x4(r30)
     cmpwi r0, 0x1
-    bne lbl_fn_80066098_00001884
+    bne lbl_atn_ComDrawTextureMono_execute_00001884
     lwz r0, 0x8(r30)
     add r3, r0, r5
     lfsx f0, r5, r0
     lfs f1, 0x4(r3)
     stfs f0, -0x8000(r4)
     stfs f1, -0x8000(r4)
-    b lbl_fn_80066098_000018A4
-lbl_fn_80066098_00001884:
+    b lbl_atn_ComDrawTextureMono_execute_000018A4
+lbl_atn_ComDrawTextureMono_execute_00001884:
     lwz r0, 0x8(r30)
     add r3, r0, r5
     lfsx f0, r5, r0
@@ -1735,7 +1735,7 @@ lbl_fn_80066098_00001884:
     stfs f0, -0x8000(r4)
     stfs f1, -0x8000(r4)
     stfs f2, -0x8000(r4)
-lbl_fn_80066098_000018A4:
+lbl_atn_ComDrawTextureMono_execute_000018A4:
     lwz r0, 0x8(r30)
     add r3, r0, r5
     lwz r0, 0xc(r3)
@@ -1750,15 +1750,15 @@ lbl_fn_80066098_000018A4:
     stfs f1, -0x8000(r4)
     lwz r0, 0x4(r30)
     cmpwi r0, 0x1
-    bne lbl_fn_80066098_000018FC
+    bne lbl_atn_ComDrawTextureMono_execute_000018FC
     lwz r0, 0x8(r30)
     add r3, r0, r5
     lfsx f0, r5, r0
     lfs f1, 0x4(r3)
     stfs f0, -0x8000(r4)
     stfs f1, -0x8000(r4)
-    b lbl_fn_80066098_0000191C
-lbl_fn_80066098_000018FC:
+    b lbl_atn_ComDrawTextureMono_execute_0000191C
+lbl_atn_ComDrawTextureMono_execute_000018FC:
     lwz r0, 0x8(r30)
     add r3, r0, r5
     lfsx f0, r5, r0
@@ -1767,7 +1767,7 @@ lbl_fn_80066098_000018FC:
     stfs f0, -0x8000(r4)
     stfs f1, -0x8000(r4)
     stfs f2, -0x8000(r4)
-lbl_fn_80066098_0000191C:
+lbl_atn_ComDrawTextureMono_execute_0000191C:
     lwz r0, 0x8(r30)
     addi r6, r6, 0x1
     add r3, r0, r5
@@ -1781,7 +1781,7 @@ lbl_fn_80066098_0000191C:
     lfs f0, 0x10(r3)
     stfs f0, -0x8000(r4)
     stfs f1, -0x8000(r4)
-    bdnz lbl_fn_80066098_0000185C
+    bdnz lbl_atn_ComDrawTextureMono_execute_0000185C
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1
@@ -1809,19 +1809,19 @@ lbl_fn_80066098_0000191C:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x2
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x3
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     lwz r0, 0x194(r1)
     lwz r31, 0x18c(r1)
     lwz r30, 0x188(r1)
@@ -1832,7 +1832,7 @@ lbl_fn_80066098_0000191C:
     blr
 }
 
-asm void fn_80066A74(void)
+asm void atn_ComDrawTextureMaskMono_execute(void)
 {
     nofralloc
     stwu r1, -0x190(r1)
@@ -1848,7 +1848,7 @@ asm void fn_80066A74(void)
     stw r0, 0x108(r1)
     lwz r3, lbl_8087EEE0
     stw r0, 0x110(r1)
-    bl fn_800761A8
+    bl gx_applyRenderState
     lis r7, lbl_80731140@ha
     lwzu r4, lbl_80731140@l(r7)
     stw r4, 0x28(r1)
@@ -1889,7 +1889,7 @@ asm void fn_80066A74(void)
     stfs f0, 0xf0(r1)
     stfs f6, 0x100(r1)
     mtctr r0
-lbl_fn_80066A74_00001AEC:
+lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     lfs f8, 0xc(r8)
     lfs f7, 0x8(r8)
     lfs f6, 0x4(r8)
@@ -1950,13 +1950,13 @@ lbl_fn_80066A74_00001AEC:
     stfs f0, 0xc(r9)
     addi r9, r9, 0x10
     stfs f0, 0x54(r1)
-    bdnz lbl_fn_80066A74_00001AEC
+    bdnz lbl_atn_ComDrawTextureMaskMono_execute_00001AEC
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x2
     bl fn_80613BB0
     li r3, 0x4
-    bl fn_806179E0
+    bl GXSetNumTevStages
     lfs f4, lbl_808809E0
     addi r4, r1, 0x20
     lfs f0, 0x88(r1)
@@ -2074,10 +2074,10 @@ lbl_fn_80066A74_00001AEC:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0xc
-    bl fn_80617650
+    bl GXSetTevKColorSel
     li r3, 0x0
     li r4, 0xf
     li r5, 0xe
@@ -2096,7 +2096,7 @@ lbl_fn_80066A74_00001AEC:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -2114,10 +2114,10 @@ lbl_fn_80066A74_00001AEC:
     li r3, 0x1
     li r4, 0x1
     li r5, 0x1
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x1
     li r4, 0xd
-    bl fn_80617650
+    bl GXSetTevKColorSel
     li r3, 0x1
     li r4, 0xf
     li r5, 0xe
@@ -2136,7 +2136,7 @@ lbl_fn_80066A74_00001AEC:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -2154,10 +2154,10 @@ lbl_fn_80066A74_00001AEC:
     li r3, 0x2
     li r4, 0x2
     li r5, 0x2
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x2
     li r4, 0xe
-    bl fn_80617650
+    bl GXSetTevKColorSel
     li r3, 0x2
     li r4, 0xf
     li r5, 0xe
@@ -2176,7 +2176,7 @@ lbl_fn_80066A74_00001AEC:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x2
     li r4, 0x0
     li r5, 0x0
@@ -2194,7 +2194,7 @@ lbl_fn_80066A74_00001AEC:
     li r3, 0x3
     li r4, 0x3
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x3
     li r4, 0xf
     li r5, 0x0
@@ -2213,7 +2213,7 @@ lbl_fn_80066A74_00001AEC:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x3
     li r4, 0x0
     li r5, 0x0
@@ -2242,17 +2242,17 @@ lbl_fn_80066A74_00001AEC:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x1
     li r4, 0x1
     li r5, 0x5
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lwz r0, 0x4(r30)
     cmpwi r0, 0x1
-    bne lbl_fn_80066A74_000020E8
+    bne lbl_atn_ComDrawTextureMaskMono_execute_000020E8
     lfs f1, lbl_808809A0
     addi r3, r1, 0x58
     lfs f0, lbl_808809A4
@@ -2269,55 +2269,55 @@ lbl_fn_80066A74_00001AEC:
     stfs f0, 0x80(r1)
     stfs f0, 0x6c(r1)
     stfs f0, 0x58(r1)
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
-    b lbl_fn_80066A74_00002144
-lbl_fn_80066A74_000020E8:
+    bl GXSetCurrentMtx
+    b lbl_atn_ComDrawTextureMaskMono_execute_00002144
+lbl_atn_ComDrawTextureMaskMono_execute_000020E8:
     lwz r3, lbl_8087EEE0
     li r4, 0x6
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     lwz r28, lbl_8087EEE0
     li r4, 0x8
     lbz r29, 0x14(r30)
     li r5, 0x1
     mr r3, r28
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r28
     li r4, 0x9
     li r5, 0x2
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r28
     mr r5, r29
     li r4, 0xa
-    bl fn_80076760
+    bl gx_setRenderStateParam
     addi r3, r31, 0x15c
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
-lbl_fn_80066A74_00002144:
+    bl GXSetCurrentMtx
+lbl_atn_ComDrawTextureMaskMono_execute_00002144:
     lwz r4, 0xc(r30)
     lwz r3, lbl_8087EEE0
     cmpwi r4, 0x0
-    beq lbl_fn_80066A74_00002158
-    b lbl_fn_80066A74_00002160
-lbl_fn_80066A74_00002158:
+    beq lbl_atn_ComDrawTextureMaskMono_execute_00002158
+    b lbl_atn_ComDrawTextureMaskMono_execute_00002160
+lbl_atn_ComDrawTextureMaskMono_execute_00002158:
     lwz r4, lbl_8087EEB0
     addi r4, r4, 0x10
-lbl_fn_80066A74_00002160:
+lbl_atn_ComDrawTextureMaskMono_execute_00002160:
     li r5, 0x0
     bl fn_800763FC
     lwz r4, 0x10(r30)
     lwz r3, lbl_8087EEE0
     cmpwi r4, 0x0
-    beq lbl_fn_80066A74_0000217C
-    b lbl_fn_80066A74_00002184
-lbl_fn_80066A74_0000217C:
+    beq lbl_atn_ComDrawTextureMaskMono_execute_0000217C
+    b lbl_atn_ComDrawTextureMaskMono_execute_00002184
+lbl_atn_ComDrawTextureMaskMono_execute_0000217C:
     lwz r4, lbl_8087EEB0
     addi r4, r4, 0x10
-lbl_fn_80066A74_00002184:
+lbl_atn_ComDrawTextureMaskMono_execute_00002184:
     li r5, 0x1
     bl fn_800763FC
     li r3, 0x1
@@ -2340,7 +2340,7 @@ lbl_fn_80066A74_00002184:
     bl fn_80612E80
     lwz r0, 0x4(r30)
     cmpwi r0, 0x1
-    bne lbl_fn_80066A74_00002244
+    bne lbl_atn_ComDrawTextureMaskMono_execute_00002244
     li r3, 0x0
     li r4, 0x9
     li r5, 0x0
@@ -2365,8 +2365,8 @@ lbl_fn_80066A74_00002184:
     li r6, 0x4
     li r7, 0x0
     bl fn_80613520
-    b lbl_fn_80066A74_000022A4
-lbl_fn_80066A74_00002244:
+    b lbl_atn_ComDrawTextureMaskMono_execute_000022A4
+lbl_atn_ComDrawTextureMaskMono_execute_00002244:
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
@@ -2391,9 +2391,9 @@ lbl_fn_80066A74_00002244:
     li r6, 0x4
     li r7, 0x0
     bl fn_80613520
-lbl_fn_80066A74_000022A4:
+lbl_atn_ComDrawTextureMaskMono_execute_000022A4:
     lwz r3, lbl_8087EEE0
-    bl fn_800761A8
+    bl gx_applyRenderState
     li r3, 0x80
     li r4, 0x0
     li r5, 0x4
@@ -2402,18 +2402,18 @@ lbl_fn_80066A74_000022A4:
     li r5, 0x0
     lis r4, 0xcc01
     mtctr r0
-lbl_fn_80066A74_000022CC:
+lbl_atn_ComDrawTextureMaskMono_execute_000022CC:
     lwz r0, 0x4(r30)
     cmpwi r0, 0x1
-    bne lbl_fn_80066A74_000022F4
+    bne lbl_atn_ComDrawTextureMaskMono_execute_000022F4
     lwz r0, 0x8(r30)
     add r3, r0, r5
     lfsx f0, r5, r0
     lfs f1, 0x4(r3)
     stfs f0, -0x8000(r4)
     stfs f1, -0x8000(r4)
-    b lbl_fn_80066A74_00002314
-lbl_fn_80066A74_000022F4:
+    b lbl_atn_ComDrawTextureMaskMono_execute_00002314
+lbl_atn_ComDrawTextureMaskMono_execute_000022F4:
     lwz r0, 0x8(r30)
     add r3, r0, r5
     lfsx f0, r5, r0
@@ -2422,7 +2422,7 @@ lbl_fn_80066A74_000022F4:
     stfs f0, -0x8000(r4)
     stfs f1, -0x8000(r4)
     stfs f2, -0x8000(r4)
-lbl_fn_80066A74_00002314:
+lbl_atn_ComDrawTextureMaskMono_execute_00002314:
     lwz r0, 0x8(r30)
     add r3, r0, r5
     lwz r0, 0xc(r3)
@@ -2441,7 +2441,7 @@ lbl_fn_80066A74_00002314:
     lfs f0, 0x18(r3)
     stfs f0, -0x8000(r4)
     stfs f1, -0x8000(r4)
-    bdnz lbl_fn_80066A74_000022CC
+    bdnz lbl_atn_ComDrawTextureMaskMono_execute_000022CC
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1
@@ -2469,19 +2469,19 @@ lbl_fn_80066A74_00002314:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x2
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x3
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     lwz r0, 0x194(r1)
     lwz r31, 0x18c(r1)
     lwz r30, 0x188(r1)
@@ -2492,7 +2492,7 @@ lbl_fn_80066A74_00002314:
     blr
 }
 
-asm void fn_80067480(void)
+asm void atn_ComDrawFont_execute(void)
 {
     nofralloc
     stwu r1, -0x50(r1)
@@ -2508,7 +2508,7 @@ asm void fn_80067480(void)
     li r3, 0x1
     bl fn_80613BB0
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -2518,7 +2518,7 @@ asm void fn_80067480(void)
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -2542,7 +2542,7 @@ asm void fn_80067480(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -2564,10 +2564,10 @@ asm void fn_80067480(void)
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lwz r0, 0x4(r30)
     cmpwi r0, 0x1
-    bne lbl_fn_80067480_00002594
+    bne lbl_atn_ComDrawFont_execute_00002594
     lfs f7, lbl_808809A0
     addi r3, r1, 0x8
     lfs f0, lbl_808809A4
@@ -2584,38 +2584,38 @@ asm void fn_80067480(void)
     stfs f0, 0x30(r1)
     stfs f0, 0x1c(r1)
     stfs f0, 0x8(r1)
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
-    b lbl_fn_80067480_000025F0
-lbl_fn_80067480_00002594:
+    bl GXSetCurrentMtx
+    b lbl_atn_ComDrawFont_execute_000025F0
+lbl_atn_ComDrawFont_execute_00002594:
     lwz r3, lbl_8087EEE0
     li r4, 0x6
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     lwz r28, lbl_8087EEE0
     li r4, 0x8
     lbz r29, 0x2c(r30)
     li r5, 0x1
     mr r3, r28
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r28
     li r4, 0x9
     li r5, 0x2
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r28
     mr r5, r29
     li r4, 0xa
-    bl fn_80076760
+    bl gx_setRenderStateParam
     addi r3, r27, 0x15c
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
-lbl_fn_80067480_000025F0:
+    bl GXSetCurrentMtx
+lbl_atn_ComDrawFont_execute_000025F0:
     lbz r0, 0x2d(r30)
     cmpwi r0, 0x0
-    beq lbl_fn_80067480_00002620
+    beq lbl_atn_ComDrawFont_execute_00002620
     mr r3, r31
     li r4, 0x1
     bl fn_80072914
@@ -2624,8 +2624,8 @@ lbl_fn_80067480_000025F0:
     li r5, 0x1
     li r6, 0x0
     bl fn_80617D50
-    b lbl_fn_80067480_00002640
-lbl_fn_80067480_00002620:
+    b lbl_atn_ComDrawFont_execute_00002640
+lbl_atn_ComDrawFont_execute_00002620:
     mr r3, r31
     li r4, 0x0
     bl fn_80072914
@@ -2634,7 +2634,7 @@ lbl_fn_80067480_00002620:
     li r5, 0x5
     li r6, 0x0
     bl fn_80617D50
-lbl_fn_80067480_00002640:
+lbl_atn_ComDrawFont_execute_00002640:
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
@@ -2647,7 +2647,7 @@ lbl_fn_80067480_00002640:
     bl fn_80612E80
     lwz r0, 0x4(r30)
     cmpwi r0, 0x1
-    bne lbl_fn_80067480_000026C0
+    bne lbl_atn_ComDrawFont_execute_000026C0
     li r3, 0x0
     li r4, 0x9
     li r5, 0x0
@@ -2666,8 +2666,8 @@ lbl_fn_80067480_00002640:
     li r6, 0x4
     li r7, 0x0
     bl fn_80613520
-    b lbl_fn_80067480_00002744
-lbl_fn_80067480_000026C0:
+    b lbl_atn_ComDrawFont_execute_00002744
+lbl_atn_ComDrawFont_execute_000026C0:
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
@@ -2701,28 +2701,28 @@ lbl_fn_80067480_000026C0:
     psq_st f4, 0x18(r3), 0, 0
     psq_st f5, 0x20(r3), 0, 0
     psq_st f6, 0x28(r3), 0, 0
-lbl_fn_80067480_00002744:
+lbl_atn_ComDrawFont_execute_00002744:
     lwz r0, 0x60(r30)
     cmpwi r0, 0x1
-    bne lbl_fn_80067480_00002760
+    bne lbl_atn_ComDrawFont_execute_00002760
     lwz r0, 0xc(r30)
     ori r0, r0, 0x2
     stw r0, 0xc(r30)
-    b lbl_fn_80067480_0000278C
-lbl_fn_80067480_00002760:
+    b lbl_atn_ComDrawFont_execute_0000278C
+lbl_atn_ComDrawFont_execute_00002760:
     cmpwi r0, 0x2
-    bne lbl_fn_80067480_00002778
+    bne lbl_atn_ComDrawFont_execute_00002778
     lwz r0, 0xc(r30)
     ori r0, r0, 0x8
     stw r0, 0xc(r30)
-    b lbl_fn_80067480_0000278C
-lbl_fn_80067480_00002778:
+    b lbl_atn_ComDrawFont_execute_0000278C
+lbl_atn_ComDrawFont_execute_00002778:
     cmpwi r0, 0x3
-    bne lbl_fn_80067480_0000278C
+    bne lbl_atn_ComDrawFont_execute_0000278C
     lwz r0, 0xc(r30)
     ori r0, r0, 0x10
     stw r0, 0xc(r30)
-lbl_fn_80067480_0000278C:
+lbl_atn_ComDrawFont_execute_0000278C:
     lwz r3, lbl_8087EEC8
     mr r4, r27
     lfs f1, 0x14(r30)
@@ -2737,7 +2737,7 @@ lbl_fn_80067480_0000278C:
     lwz r9, 0x6c(r30)
     lfs f6, 0x64(r30)
     lfs f7, 0x68(r30)
-    bl fn_8006D7B0
+    bl gimmick_updateAll
     lwz r5, lbl_8087EEC8
     li r3, 0x0
     lfs f7, lbl_808809A0
@@ -2757,10 +2757,10 @@ lbl_fn_80067480_0000278C:
     stfs f0, 0x3290(r6)
     stfs f0, 0x327c(r6)
     stfs f0, 0x3268(r6)
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     lbz r0, 0x2d(r30)
     cmpwi r0, 0x0
-    beq lbl_fn_80067480_00002844
+    beq lbl_atn_ComDrawFont_execute_00002844
     mr r3, r31
     li r4, 0x0
     bl fn_80072914
@@ -2769,7 +2769,7 @@ lbl_fn_80067480_0000278C:
     li r5, 0x5
     li r6, 0x0
     bl fn_80617D50
-lbl_fn_80067480_00002844:
+lbl_atn_ComDrawFont_execute_00002844:
     addi r11, r1, 0x50
     bl _restgpr_27
     lwz r0, 0x54(r1)
@@ -2778,7 +2778,7 @@ lbl_fn_80067480_00002844:
     blr
 }
 
-asm void fn_800678BC(void)
+asm void atn_ComDrawFontSideFade_execute(void)
 {
     nofralloc
     stwu r1, -0xd0(r1)
@@ -2824,42 +2824,42 @@ asm void fn_800678BC(void)
     lfs f31, lbl_808809A0
     li r22, 0x0
     lis r25, 0xff00
-    b lbl_fn_800678BC_000029CC
-lbl_fn_800678BC_0000290C:
+    b lbl_atn_ComDrawFontSideFade_execute_000029CC
+lbl_atn_ComDrawFontSideFade_execute_0000290C:
     lwz r3, 0x10(r27)
     fcmpo cr0, f31, f30
     lhzx r20, r3, r22
     cror eq, lt, eq
-    bne lbl_fn_800678BC_000029A4
+    bne lbl_atn_ComDrawFontSideFade_execute_000029A4
     lfs f7, 0x74(r27)
     lfs f0, 0x1c(r27)
     fsubs f0, f7, f0
     fcmpo cr0, f30, f0
     cror eq, lt, eq
-    bne lbl_fn_800678BC_000029A4
+    bne lbl_atn_ComDrawFontSideFade_execute_000029A4
     fcmpo cr0, f30, f29
     add r24, r31, r26
-    bge lbl_fn_800678BC_0000295C
+    bge lbl_atn_ComDrawFontSideFade_execute_0000295C
     fdivs f0, f30, f29
     fmuls f1, f26, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     slwi r0, r3, 24
     stw r0, 0xc(r24)
-    b lbl_fn_800678BC_00002988
-lbl_fn_800678BC_0000295C:
+    b lbl_atn_ComDrawFontSideFade_execute_00002988
+lbl_atn_ComDrawFontSideFade_execute_0000295C:
     fcmpo cr0, f28, f30
-    bge lbl_fn_800678BC_00002984
+    bge lbl_atn_ComDrawFontSideFade_execute_00002984
     fsubs f0, f30, f28
     fdivs f0, f0, f29
     fsubs f0, f27, f0
     fmuls f1, f26, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     slwi r0, r3, 24
     stw r0, 0xc(r24)
-    b lbl_fn_800678BC_00002988
-lbl_fn_800678BC_00002984:
+    b lbl_atn_ComDrawFontSideFade_execute_00002988
+lbl_atn_ComDrawFontSideFade_execute_00002984:
     stw r25, 0xc(r24)
-lbl_fn_800678BC_00002988:
+lbl_atn_ComDrawFontSideFade_execute_00002988:
     lfs f0, 0x70(r27)
     addi r30, r30, 0x1
     addi r26, r26, 0xc
@@ -2867,7 +2867,7 @@ lbl_fn_800678BC_00002988:
     stfs f0, 0x8(r24)
     sth r20, 0x4(r24)
     sth r29, 0x6(r24)
-lbl_fn_800678BC_000029A4:
+lbl_atn_ComDrawFontSideFade_execute_000029A4:
     lwz r0, 0xc(r27)
     mr r4, r20
     lwz r3, lbl_8087EEC8
@@ -2878,16 +2878,16 @@ lbl_fn_800678BC_000029A4:
     fadds f30, f30, f1
     addi r22, r22, 0x2
     addi r21, r21, 0x1
-lbl_fn_800678BC_000029CC:
+lbl_atn_ComDrawFontSideFade_execute_000029CC:
     cmpw r21, r23
-    blt lbl_fn_800678BC_0000290C
+    blt lbl_atn_ComDrawFontSideFade_execute_0000290C
     lwz r29, lbl_8087EEE0
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x1
     bl fn_80613BB0
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -2897,7 +2897,7 @@ lbl_fn_800678BC_000029CC:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -2921,7 +2921,7 @@ lbl_fn_800678BC_000029CC:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -2943,10 +2943,10 @@ lbl_fn_800678BC_000029CC:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lwz r0, 0x4(r27)
     cmpwi r0, 0x1
-    bne lbl_fn_800678BC_00002B2C
+    bne lbl_atn_ComDrawFontSideFade_execute_00002B2C
     lfs f7, lbl_808809A0
     addi r3, r1, 0x8
     lfs f0, lbl_808809A4
@@ -2963,38 +2963,38 @@ lbl_fn_800678BC_000029CC:
     stfs f0, 0x30(r1)
     stfs f0, 0x1c(r1)
     stfs f0, 0x8(r1)
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
-    b lbl_fn_800678BC_00002B88
-lbl_fn_800678BC_00002B2C:
+    bl GXSetCurrentMtx
+    b lbl_atn_ComDrawFontSideFade_execute_00002B88
+lbl_atn_ComDrawFontSideFade_execute_00002B2C:
     lwz r3, lbl_8087EEE0
     li r4, 0x6
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     lwz r22, lbl_8087EEE0
     li r4, 0x8
     lbz r23, 0x2c(r27)
     li r5, 0x1
     mr r3, r22
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r22
     li r4, 0x9
     li r5, 0x2
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r22
     mr r5, r23
     li r4, 0xa
-    bl fn_80076760
+    bl gx_setRenderStateParam
     addi r3, r28, 0x15c
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
-lbl_fn_800678BC_00002B88:
+    bl GXSetCurrentMtx
+lbl_atn_ComDrawFontSideFade_execute_00002B88:
     lbz r0, 0x2d(r27)
     cmpwi r0, 0x0
-    beq lbl_fn_800678BC_00002BB8
+    beq lbl_atn_ComDrawFontSideFade_execute_00002BB8
     mr r3, r29
     li r4, 0x1
     bl fn_80072914
@@ -3003,8 +3003,8 @@ lbl_fn_800678BC_00002B88:
     li r5, 0x1
     li r6, 0x0
     bl fn_80617D50
-    b lbl_fn_800678BC_00002BD8
-lbl_fn_800678BC_00002BB8:
+    b lbl_atn_ComDrawFontSideFade_execute_00002BD8
+lbl_atn_ComDrawFontSideFade_execute_00002BB8:
     mr r3, r29
     li r4, 0x0
     bl fn_80072914
@@ -3013,7 +3013,7 @@ lbl_fn_800678BC_00002BB8:
     li r5, 0x5
     li r6, 0x0
     bl fn_80617D50
-lbl_fn_800678BC_00002BD8:
+lbl_atn_ComDrawFontSideFade_execute_00002BD8:
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
@@ -3026,7 +3026,7 @@ lbl_fn_800678BC_00002BD8:
     bl fn_80612E80
     lwz r0, 0x4(r27)
     cmpwi r0, 0x1
-    bne lbl_fn_800678BC_00002C58
+    bne lbl_atn_ComDrawFontSideFade_execute_00002C58
     li r3, 0x0
     li r4, 0x9
     li r5, 0x0
@@ -3045,8 +3045,8 @@ lbl_fn_800678BC_00002BD8:
     li r6, 0x4
     li r7, 0x0
     bl fn_80613520
-    b lbl_fn_800678BC_00002CDC
-lbl_fn_800678BC_00002C58:
+    b lbl_atn_ComDrawFontSideFade_execute_00002CDC
+lbl_atn_ComDrawFontSideFade_execute_00002C58:
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
@@ -3080,32 +3080,32 @@ lbl_fn_800678BC_00002C58:
     psq_st f4, 0x18(r3), 0, 0
     psq_st f5, 0x20(r3), 0, 0
     psq_st f6, 0x28(r3), 0, 0
-lbl_fn_800678BC_00002CDC:
+lbl_atn_ComDrawFontSideFade_execute_00002CDC:
     lwz r0, 0x60(r27)
     cmpwi r0, 0x1
-    bne lbl_fn_800678BC_00002CF8
+    bne lbl_atn_ComDrawFontSideFade_execute_00002CF8
     lwz r0, 0xc(r27)
     ori r0, r0, 0x2
     stw r0, 0xc(r27)
-    b lbl_fn_800678BC_00002D24
-lbl_fn_800678BC_00002CF8:
+    b lbl_atn_ComDrawFontSideFade_execute_00002D24
+lbl_atn_ComDrawFontSideFade_execute_00002CF8:
     cmpwi r0, 0x2
-    bne lbl_fn_800678BC_00002D10
+    bne lbl_atn_ComDrawFontSideFade_execute_00002D10
     lwz r0, 0xc(r27)
     ori r0, r0, 0x8
     stw r0, 0xc(r27)
-    b lbl_fn_800678BC_00002D24
-lbl_fn_800678BC_00002D10:
+    b lbl_atn_ComDrawFontSideFade_execute_00002D24
+lbl_atn_ComDrawFontSideFade_execute_00002D10:
     cmpwi r0, 0x3
-    bne lbl_fn_800678BC_00002D24
+    bne lbl_atn_ComDrawFontSideFade_execute_00002D24
     lwz r0, 0xc(r27)
     ori r0, r0, 0x10
     stw r0, 0xc(r27)
-lbl_fn_800678BC_00002D24:
+lbl_atn_ComDrawFontSideFade_execute_00002D24:
     li r20, 0x0
     li r26, 0x0
-    b lbl_fn_800678BC_00002D8C
-lbl_fn_800678BC_00002D30:
+    b lbl_atn_ComDrawFontSideFade_execute_00002D8C
+lbl_atn_ComDrawFontSideFade_execute_00002D30:
     add r4, r31, r26
     lwz r3, 0x24(r27)
     lwz r0, 0x6c(r27)
@@ -3126,12 +3126,12 @@ lbl_fn_800678BC_00002D30:
     lfs f5, 0x28(r27)
     lfs f6, 0x64(r27)
     lfs f7, 0x68(r27)
-    bl fn_8006D7B0
+    bl gimmick_updateAll
     addi r20, r20, 0x1
     addi r26, r26, 0xc
-lbl_fn_800678BC_00002D8C:
+lbl_atn_ComDrawFontSideFade_execute_00002D8C:
     cmpw r20, r30
-    blt lbl_fn_800678BC_00002D30
+    blt lbl_atn_ComDrawFontSideFade_execute_00002D30
     lwz r5, lbl_8087EEC8
     li r3, 0x0
     lfs f7, lbl_808809A0
@@ -3151,10 +3151,10 @@ lbl_fn_800678BC_00002D8C:
     stfs f0, 0x3290(r6)
     stfs f0, 0x327c(r6)
     stfs f0, 0x3268(r6)
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     lbz r0, 0x2d(r27)
     cmpwi r0, 0x0
-    beq lbl_fn_800678BC_00002E10
+    beq lbl_atn_ComDrawFontSideFade_execute_00002E10
     mr r3, r29
     li r4, 0x0
     bl fn_80072914
@@ -3163,7 +3163,7 @@ lbl_fn_800678BC_00002D8C:
     li r5, 0x5
     li r6, 0x0
     bl fn_80617D50
-lbl_fn_800678BC_00002E10:
+lbl_atn_ComDrawFontSideFade_execute_00002E10:
     addi r11, r1, 0x70
     psq_l f31, 0xc8(r1), 0, 0
     lfd f31, 0xc0(r1)
@@ -3184,7 +3184,7 @@ lbl_fn_800678BC_00002E10:
     blr
 }
 
-asm void fn_80067EB8(void)
+asm void atn_ComDrawColliObject_execute(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -3198,13 +3198,13 @@ asm void fn_80067EB8(void)
     stw r29, 0x24(r1)
     mr r29, r3
     lwz r3, lbl_8087EEE0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x0
     bl fn_80613BB0
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0xff
     li r5, 0xff
@@ -3243,9 +3243,9 @@ asm void fn_80067EB8(void)
     bl fn_80615D50
     addi r3, r30, 0x15c
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
@@ -3270,7 +3270,7 @@ asm void fn_80067EB8(void)
     blr
 }
 
-asm void fn_80067FFC(void)
+asm void atn_ComDrawColliTree_execute(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -3284,13 +3284,13 @@ asm void fn_80067FFC(void)
     stw r29, 0x24(r1)
     mr r29, r3
     lwz r3, lbl_8087EEE0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x0
     bl fn_80613BB0
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0xff
     li r5, 0xff
@@ -3329,9 +3329,9 @@ asm void fn_80067FFC(void)
     bl fn_80615D50
     addi r3, r30, 0x15c
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
@@ -3365,7 +3365,7 @@ asm void fn_80067FFC(void)
     blr
 }
 
-asm void fn_80068164(void)
+asm void atn_ComDrawD3TextureMask_execute(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -3383,24 +3383,24 @@ asm void fn_80068164(void)
     mr r3, r30
     li r4, 0x6
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     lwz r5, 0x20(r31)
     mr r3, r30
     li r4, 0x8
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r30
     li r4, 0x9
     li r5, 0x2
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r30
     li r4, 0xa
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     addi r3, r29, 0x15c
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x1
@@ -3413,20 +3413,20 @@ asm void fn_80068164(void)
     bl fn_80617730
     lwz r0, 0x1c(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_80068164_000031C8
+    bne lbl_atn_ComDrawD3TextureMask_execute_000031C8
     lwz r3, lbl_8087EEB0
     addi r0, r3, 0x10
     stw r0, 0x1c(r31)
-lbl_fn_80068164_000031C8:
+lbl_atn_ComDrawD3TextureMask_execute_000031C8:
     lwz r0, 0x18(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_80068164_00003344
+    beq lbl_atn_ComDrawD3TextureMask_execute_00003344
     li r3, 0x2
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x1
     li r4, 0x0
     li r5, 0x1
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -3455,7 +3455,7 @@ lbl_fn_80068164_000031C8:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -3481,7 +3481,7 @@ lbl_fn_80068164_000031C8:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -3503,7 +3503,7 @@ lbl_fn_80068164_000031C8:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lwz r3, lbl_8087EEE0
     li r5, 0x0
     lwz r4, 0x18(r31)
@@ -3512,14 +3512,14 @@ lbl_fn_80068164_000031C8:
     li r5, 0x1
     lwz r4, 0x1c(r31)
     bl fn_800763FC
-    b lbl_fn_80068164_00003424
-lbl_fn_80068164_00003344:
+    b lbl_atn_ComDrawD3TextureMask_execute_00003424
+lbl_atn_ComDrawD3TextureMask_execute_00003344:
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -3543,7 +3543,7 @@ lbl_fn_80068164_00003344:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -3565,19 +3565,19 @@ lbl_fn_80068164_00003344:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lwz r3, lbl_8087EEE0
     li r5, 0x0
     lwz r4, 0x1c(r31)
     bl fn_800763FC
-lbl_fn_80068164_00003424:
+lbl_atn_ComDrawD3TextureMask_execute_00003424:
     lwz r3, lbl_8087EEE0
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
     li r7, 0x0
     li r8, 0x0
-    bl fn_80074EC8
+    bl gx_beginQuadBatch
     lwz r3, lbl_8087EEE0
     li r4, 0x0
     bl fn_80076BE4
@@ -3610,7 +3610,7 @@ lbl_fn_80068164_00003424:
     li r7, 0x0
     bl fn_80613520
     lwz r3, lbl_8087EEE0
-    bl fn_800761A8
+    bl gx_applyRenderState
     lwz r0, 0x14(r31)
     li r4, 0x0
     lwz r3, 0xc(r31)
@@ -3619,8 +3619,8 @@ lbl_fn_80068164_00003424:
     li r6, 0x0
     li r5, 0x0
     lis r4, 0xcc01
-    b lbl_fn_80068164_0000353C
-lbl_fn_80068164_000034E8:
+    b lbl_atn_ComDrawD3TextureMask_execute_0000353C
+lbl_atn_ComDrawD3TextureMask_execute_000034E8:
     lwz r0, 0x8(r31)
     addi r6, r6, 0x1
     add r3, r0, r5
@@ -3642,18 +3642,18 @@ lbl_fn_80068164_000034E8:
     lfs f0, 0x10(r3)
     stfs f0, -0x8000(r4)
     stfs f1, -0x8000(r4)
-lbl_fn_80068164_0000353C:
+lbl_atn_ComDrawD3TextureMask_execute_0000353C:
     lwz r0, 0x14(r31)
     cmpw r6, r0
-    blt lbl_fn_80068164_000034E8
+    blt lbl_atn_ComDrawD3TextureMask_execute_000034E8
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -3663,7 +3663,7 @@ lbl_fn_80068164_0000353C:
     blr
 }
 
-asm void fn_800685E4(void)
+asm void atn_ComDrawWindow_execute(void)
 {
     nofralloc
     stwu r1, -0x50(r1)
@@ -3674,13 +3674,13 @@ asm void fn_800685E4(void)
     mr r30, r3
     lwz r3, lbl_8087EEE0
     mr r29, r4
-    bl fn_800761A8
+    bl gx_applyRenderState
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x2
     bl fn_80613BB0
     li r3, 0x2
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -3690,7 +3690,7 @@ asm void fn_800685E4(void)
     li r3, 0x1
     li r4, 0x0
     li r5, 0x1
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -3719,7 +3719,7 @@ asm void fn_800685E4(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -3745,7 +3745,7 @@ asm void fn_800685E4(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -3767,17 +3767,17 @@ asm void fn_800685E4(void)
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x1
     li r4, 0x1
     li r5, 0x5
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lwz r0, 0x4(r30)
     cmpwi r0, 0x1
-    bne lbl_fn_800685E4_00003794
+    bne lbl_atn_ComDrawWindow_execute_00003794
     lfs f1, lbl_808809A0
     addi r3, r1, 0x8
     lfs f0, lbl_808809A4
@@ -3794,82 +3794,82 @@ asm void fn_800685E4(void)
     stfs f0, 0x30(r1)
     stfs f0, 0x1c(r1)
     stfs f0, 0x8(r1)
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
-    b lbl_fn_800685E4_000037F0
-lbl_fn_800685E4_00003794:
+    bl GXSetCurrentMtx
+    b lbl_atn_ComDrawWindow_execute_000037F0
+lbl_atn_ComDrawWindow_execute_00003794:
     lwz r3, lbl_8087EEE0
     li r4, 0x6
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     lwz r27, lbl_8087EEE0
     li r4, 0x8
     lbz r28, 0x30(r30)
     li r5, 0x1
     mr r3, r27
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r27
     li r4, 0x9
     li r5, 0x2
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r27
     mr r5, r28
     li r4, 0xa
-    bl fn_80076760
+    bl gx_setRenderStateParam
     addi r3, r29, 0x15c
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
-lbl_fn_800685E4_000037F0:
+    bl GXSetCurrentMtx
+lbl_atn_ComDrawWindow_execute_000037F0:
     lwz r0, 0x34(r30)
     cmpwi r0, 0x0
-    beq lbl_fn_800685E4_00003820
+    beq lbl_atn_ComDrawWindow_execute_00003820
     cmpwi r0, 0x1
-    beq lbl_fn_800685E4_00003838
+    beq lbl_atn_ComDrawWindow_execute_00003838
     cmpwi r0, 0x2
-    beq lbl_fn_800685E4_00003850
+    beq lbl_atn_ComDrawWindow_execute_00003850
     cmpwi r0, 0x3
-    beq lbl_fn_800685E4_00003868
+    beq lbl_atn_ComDrawWindow_execute_00003868
     cmpwi r0, 0x4
-    beq lbl_fn_800685E4_00003880
-    b lbl_fn_800685E4_00003894
-lbl_fn_800685E4_00003820:
+    beq lbl_atn_ComDrawWindow_execute_00003880
+    b lbl_atn_ComDrawWindow_execute_00003894
+lbl_atn_ComDrawWindow_execute_00003820:
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
     li r6, 0x0
     bl fn_80617D50
-    b lbl_fn_800685E4_00003894
-lbl_fn_800685E4_00003838:
+    b lbl_atn_ComDrawWindow_execute_00003894
+lbl_atn_ComDrawWindow_execute_00003838:
     li r3, 0x1
     li r4, 0x4
     li r5, 0x1
     li r6, 0x0
     bl fn_80617D50
-    b lbl_fn_800685E4_00003894
-lbl_fn_800685E4_00003850:
+    b lbl_atn_ComDrawWindow_execute_00003894
+lbl_atn_ComDrawWindow_execute_00003850:
     li r3, 0x1
     li r4, 0x3
     li r5, 0x1
     li r6, 0x0
     bl fn_80617D50
-    b lbl_fn_800685E4_00003894
-lbl_fn_800685E4_00003868:
+    b lbl_atn_ComDrawWindow_execute_00003894
+lbl_atn_ComDrawWindow_execute_00003868:
     li r3, 0x1
     li r4, 0x0
     li r5, 0x5
     li r6, 0x0
     bl fn_80617D50
-    b lbl_fn_800685E4_00003894
-lbl_fn_800685E4_00003880:
+    b lbl_atn_ComDrawWindow_execute_00003894
+lbl_atn_ComDrawWindow_execute_00003880:
     li r3, 0x1
     li r4, 0x0
     li r5, 0x3
     li r6, 0x0
     bl fn_80617D50
-lbl_fn_800685E4_00003894:
+lbl_atn_ComDrawWindow_execute_00003894:
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
@@ -3885,7 +3885,7 @@ lbl_fn_800685E4_00003894:
     bl fn_80612E80
     lwz r0, 0x4(r30)
     cmpwi r0, 0x1
-    bne lbl_fn_800685E4_00003938
+    bne lbl_atn_ComDrawWindow_execute_00003938
     li r3, 0x0
     li r4, 0x9
     li r5, 0x0
@@ -3910,8 +3910,8 @@ lbl_fn_800685E4_00003894:
     li r6, 0x4
     li r7, 0x0
     bl fn_80613520
-    b lbl_fn_800685E4_00003998
-lbl_fn_800685E4_00003938:
+    b lbl_atn_ComDrawWindow_execute_00003998
+lbl_atn_ComDrawWindow_execute_00003938:
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
@@ -3936,64 +3936,64 @@ lbl_fn_800685E4_00003938:
     li r6, 0x4
     li r7, 0x0
     bl fn_80613520
-lbl_fn_800685E4_00003998:
+lbl_atn_ComDrawWindow_execute_00003998:
     mr r27, r30
     li r31, 0x0
     lis r28, 0xcc01
     li r29, 0x4
-lbl_fn_800685E4_000039A8:
+lbl_atn_ComDrawWindow_execute_000039A8:
     lwz r4, lbl_8087EEB0
     li r5, 0x0
     lwz r3, lbl_8087EEE0
     addi r4, r4, 0x10
     bl fn_800763FC
     cmplwi r31, 0x4
-    bge lbl_fn_800685E4_000039EC
+    bge lbl_atn_ComDrawWindow_execute_000039EC
     lwz r4, 0x28(r30)
     lwz r3, lbl_8087EEE0
     cmpwi r4, 0x0
-    beq lbl_fn_800685E4_000039D8
-    b lbl_fn_800685E4_000039E0
-lbl_fn_800685E4_000039D8:
+    beq lbl_atn_ComDrawWindow_execute_000039D8
+    b lbl_atn_ComDrawWindow_execute_000039E0
+lbl_atn_ComDrawWindow_execute_000039D8:
     lwz r4, lbl_8087EEB0
     addi r4, r4, 0x10
-lbl_fn_800685E4_000039E0:
+lbl_atn_ComDrawWindow_execute_000039E0:
     li r5, 0x1
     bl fn_800763FC
-    b lbl_fn_800685E4_00003A10
-lbl_fn_800685E4_000039EC:
+    b lbl_atn_ComDrawWindow_execute_00003A10
+lbl_atn_ComDrawWindow_execute_000039EC:
     lwz r4, 0x2c(r30)
     lwz r3, lbl_8087EEE0
     cmpwi r4, 0x0
-    beq lbl_fn_800685E4_00003A00
-    b lbl_fn_800685E4_00003A08
-lbl_fn_800685E4_00003A00:
+    beq lbl_atn_ComDrawWindow_execute_00003A00
+    b lbl_atn_ComDrawWindow_execute_00003A08
+lbl_atn_ComDrawWindow_execute_00003A00:
     lwz r4, lbl_8087EEB0
     addi r4, r4, 0x10
-lbl_fn_800685E4_00003A08:
+lbl_atn_ComDrawWindow_execute_00003A08:
     li r5, 0x1
     bl fn_800763FC
-lbl_fn_800685E4_00003A10:
+lbl_atn_ComDrawWindow_execute_00003A10:
     lwz r3, lbl_8087EEE0
-    bl fn_800761A8
+    bl gx_applyRenderState
     li r3, 0x80
     li r4, 0x0
     li r5, 0x4
     bl fn_80614790
     li r4, 0x0
     mtctr r29
-lbl_fn_800685E4_00003A30:
+lbl_atn_ComDrawWindow_execute_00003A30:
     lwz r0, 0x4(r30)
     cmpwi r0, 0x1
-    bne lbl_fn_800685E4_00003A58
+    bne lbl_atn_ComDrawWindow_execute_00003A58
     lwz r0, 0x8(r27)
     add r3, r0, r4
     lfsx f0, r4, r0
     lfs f1, 0x4(r3)
     stfs f0, -0x8000(r28)
     stfs f1, -0x8000(r28)
-    b lbl_fn_800685E4_00003A78
-lbl_fn_800685E4_00003A58:
+    b lbl_atn_ComDrawWindow_execute_00003A78
+lbl_atn_ComDrawWindow_execute_00003A58:
     lwz r0, 0x8(r27)
     add r3, r0, r4
     lfsx f0, r4, r0
@@ -4002,7 +4002,7 @@ lbl_fn_800685E4_00003A58:
     stfs f0, -0x8000(r28)
     stfs f1, -0x8000(r28)
     stfs f2, -0x8000(r28)
-lbl_fn_800685E4_00003A78:
+lbl_atn_ComDrawWindow_execute_00003A78:
     lwz r0, 0x8(r27)
     add r3, r0, r4
     lwz r0, 0xc(r3)
@@ -4021,15 +4021,15 @@ lbl_fn_800685E4_00003A78:
     lfs f0, 0x18(r3)
     stfs f0, -0x8000(r28)
     stfs f1, -0x8000(r28)
-    bdnz lbl_fn_800685E4_00003A30
+    bdnz lbl_atn_ComDrawWindow_execute_00003A30
     addi r31, r31, 0x1
     addi r27, r27, 0x4
     cmplwi r31, 0x8
-    blt lbl_fn_800685E4_000039A8
+    blt lbl_atn_ComDrawWindow_execute_000039A8
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -4043,7 +4043,7 @@ lbl_fn_800685E4_00003A78:
     blr
 }
 
-asm void fn_80068B70(void)
+asm void atn_ComDrawLine_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -4052,11 +4052,11 @@ asm void fn_80068B70(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    beq lbl_fn_80068B70_00003B38
+    beq lbl_atn_ComDrawLine_destructor_00003B38
     cmpwi r4, 0x0
-    ble lbl_fn_80068B70_00003B38
+    ble lbl_atn_ComDrawLine_destructor_00003B38
     bl dtor_80084684
-lbl_fn_80068B70_00003B38:
+lbl_atn_ComDrawLine_destructor_00003B38:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -4065,7 +4065,7 @@ lbl_fn_80068B70_00003B38:
     blr
 }
 
-asm void fn_80068BB0(void)
+asm void atn_ComDrawTextureAdd_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -4074,11 +4074,11 @@ asm void fn_80068BB0(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    beq lbl_fn_80068BB0_00003B78
+    beq lbl_atn_ComDrawTextureAdd_destructor_00003B78
     cmpwi r4, 0x0
-    ble lbl_fn_80068BB0_00003B78
+    ble lbl_atn_ComDrawTextureAdd_destructor_00003B78
     bl dtor_80084684
-lbl_fn_80068BB0_00003B78:
+lbl_atn_ComDrawTextureAdd_destructor_00003B78:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -4087,7 +4087,7 @@ lbl_fn_80068BB0_00003B78:
     blr
 }
 
-asm void fn_80068BF0(void)
+asm void atn_ComDrawTextureMono_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -4096,11 +4096,11 @@ asm void fn_80068BF0(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    beq lbl_fn_80068BF0_00003BB8
+    beq lbl_atn_ComDrawTextureMono_destructor_00003BB8
     cmpwi r4, 0x0
-    ble lbl_fn_80068BF0_00003BB8
+    ble lbl_atn_ComDrawTextureMono_destructor_00003BB8
     bl dtor_80084684
-lbl_fn_80068BF0_00003BB8:
+lbl_atn_ComDrawTextureMono_destructor_00003BB8:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -4109,7 +4109,7 @@ lbl_fn_80068BF0_00003BB8:
     blr
 }
 
-asm void fn_80068C30(void)
+asm void atn_ComDrawTextureMaskMono_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -4118,11 +4118,11 @@ asm void fn_80068C30(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    beq lbl_fn_80068C30_00003BF8
+    beq lbl_atn_ComDrawTextureMaskMono_destructor_00003BF8
     cmpwi r4, 0x0
-    ble lbl_fn_80068C30_00003BF8
+    ble lbl_atn_ComDrawTextureMaskMono_destructor_00003BF8
     bl dtor_80084684
-lbl_fn_80068C30_00003BF8:
+lbl_atn_ComDrawTextureMaskMono_destructor_00003BF8:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -4131,7 +4131,7 @@ lbl_fn_80068C30_00003BF8:
     blr
 }
 
-asm void fn_80068C70(void)
+asm void atn_ComDrawFontSideFade_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -4140,11 +4140,11 @@ asm void fn_80068C70(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    beq lbl_fn_80068C70_00003C38
+    beq lbl_atn_ComDrawFontSideFade_destructor_00003C38
     cmpwi r4, 0x0
-    ble lbl_fn_80068C70_00003C38
+    ble lbl_atn_ComDrawFontSideFade_destructor_00003C38
     bl dtor_80084684
-lbl_fn_80068C70_00003C38:
+lbl_atn_ComDrawFontSideFade_destructor_00003C38:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -4153,7 +4153,7 @@ lbl_fn_80068C70_00003C38:
     blr
 }
 
-asm void fn_80068CB0(void)
+asm void atn_ComDrawColliObject_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -4162,11 +4162,11 @@ asm void fn_80068CB0(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    beq lbl_fn_80068CB0_00003C78
+    beq lbl_atn_ComDrawColliObject_destructor_00003C78
     cmpwi r4, 0x0
-    ble lbl_fn_80068CB0_00003C78
+    ble lbl_atn_ComDrawColliObject_destructor_00003C78
     bl dtor_80084684
-lbl_fn_80068CB0_00003C78:
+lbl_atn_ComDrawColliObject_destructor_00003C78:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -4175,7 +4175,7 @@ lbl_fn_80068CB0_00003C78:
     blr
 }
 
-asm void fn_80068CF0(void)
+asm void atn_ComDrawColliTree_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -4184,11 +4184,11 @@ asm void fn_80068CF0(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    beq lbl_fn_80068CF0_00003CB8
+    beq lbl_atn_ComDrawColliTree_destructor_00003CB8
     cmpwi r4, 0x0
-    ble lbl_fn_80068CF0_00003CB8
+    ble lbl_atn_ComDrawColliTree_destructor_00003CB8
     bl dtor_80084684
-lbl_fn_80068CF0_00003CB8:
+lbl_atn_ComDrawColliTree_destructor_00003CB8:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -4197,7 +4197,7 @@ lbl_fn_80068CF0_00003CB8:
     blr
 }
 
-asm void fn_80068D30(void)
+asm void atn_ComDrawD3TextureMask_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -4206,11 +4206,11 @@ asm void fn_80068D30(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    beq lbl_fn_80068D30_00003CF8
+    beq lbl_atn_ComDrawD3TextureMask_destructor_00003CF8
     cmpwi r4, 0x0
-    ble lbl_fn_80068D30_00003CF8
+    ble lbl_atn_ComDrawD3TextureMask_destructor_00003CF8
     bl dtor_80084684
-lbl_fn_80068D30_00003CF8:
+lbl_atn_ComDrawD3TextureMask_destructor_00003CF8:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -4219,7 +4219,7 @@ lbl_fn_80068D30_00003CF8:
     blr
 }
 
-asm void fn_80068D70(void)
+asm void atn_ComDrawWindow_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -4228,11 +4228,11 @@ asm void fn_80068D70(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    beq lbl_fn_80068D70_00003D38
+    beq lbl_atn_ComDrawWindow_destructor_00003D38
     cmpwi r4, 0x0
-    ble lbl_fn_80068D70_00003D38
+    ble lbl_atn_ComDrawWindow_destructor_00003D38
     bl dtor_80084684
-lbl_fn_80068D70_00003D38:
+lbl_atn_ComDrawWindow_destructor_00003D38:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)

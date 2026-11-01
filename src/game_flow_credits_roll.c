@@ -9,12 +9,12 @@ extern void _restgpr_22(void);
 extern void _savegpr_14(void);
 extern void _savegpr_22(void);
 extern void dtor_80084684(void);
-extern void fn_800844D8(void);
-extern void fn_800D246C(void);
+extern void mem_free(void);
+extern void atn_Task_setActive(void);
 extern void fn_801539E0(void);
 extern void fn_8015495C(void);
 extern void fn_80155DAC(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_8016F3D0(void);
 extern void fn_804AE3BC(void);
 extern void fn_804D818C(void);
@@ -22,10 +22,10 @@ extern void fn_804FC7E4(void);
 extern void fn_8050BA6C(void);
 extern void fn_8050DDE0(void);
 extern void fn_8050E098(void);
-extern void fn_805F9920(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
-extern void fn_80686EA4(void);
+extern void PSVECSquareMag(void);
+extern void printf(void);
+extern void rand(void);
+extern void abort(void);
 extern void fn_806A8E40(void);
 extern void fn_806A8E70(void);
 extern void fn_806B0DE0(void);
@@ -293,8 +293,8 @@ lbl_fn_804E9C68_000002C8:
     addi r3, r3, __files@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804E9C68_000002F8:
     lwz r3, 0x5f4(r15)
     addi r4, r15, 0x5f8
@@ -317,8 +317,8 @@ lbl_fn_804E9C68_000002F8:
     addi r3, r3, __files@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804E9C68_00000354:
     addi r0, r28, 0x5ceb
     cmplw r19, r0
@@ -367,11 +367,11 @@ lbl_fn_804E9C68_000003D8:
     addi r3, r3, __files@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804E9C68_00000404:
     mulli r3, r20, 0xb4
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r19, r3
     bne lbl_fn_804E9C68_00000438
@@ -381,8 +381,8 @@ lbl_fn_804E9C68_00000404:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80791780@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804E9C68_00000438:
     lwz r7, 0x5f4(r15)
     addi r5, r1, 0x5c
@@ -627,7 +627,7 @@ lbl_fn_804E9C68_000007CC:
     beq lbl_fn_804E9C68_00000898
     mr r3, r16
     li r4, 0x2
-    bl fn_8016E970
+    bl actor_setState
     mr r3, r16
     li r4, 0x0
     li r5, 0x1
@@ -1043,7 +1043,7 @@ lbl_fn_804EA8BC_00000D30:
     cmpwi r3, 0x0
     beq lbl_fn_804EA8BC_00000D50
     mr r4, r30
-    bl fn_800D246C
+    bl atn_Task_setActive
 lbl_fn_804EA8BC_00000D50:
     li r27, 0x0
     li r28, 0x0
@@ -1076,7 +1076,7 @@ lbl_fn_804EA8BC_00000D88:
     cmpwi r3, 0x0
     beq lbl_fn_804EA8BC_00000DC4
     mr r4, r30
-    bl fn_800D246C
+    bl atn_Task_setActive
 lbl_fn_804EA8BC_00000DC4:
     addi r27, r27, 0x1
     addi r28, r28, 0xd5c
@@ -1211,7 +1211,7 @@ lbl_fn_804EAA88_00000F50:
     lwz r23, 0x44(r1)
     cmplwi r23, 0x2
     ble lbl_fn_804EAA88_00001068
-    bl fn_80680CF8
+    bl rand
     subi r5, r23, 0x2
     lwz r0, 0x608(r24)
     divwu r4, r3, r5
@@ -1258,7 +1258,7 @@ lbl_fn_804EAA88_00000FB4:
     stfs f4, 0x24(r1)
     stfs f0, 0x20(r1)
     stfs f6, 0x28(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f31
     bge lbl_fn_804EAA88_00001034
     li r29, 0x0
@@ -1281,7 +1281,7 @@ lbl_fn_804EAA88_00001048:
     b lbl_fn_804EAA88_0000107C
 lbl_fn_804EAA88_00001068:
     lwz r23, 0x44(r1)
-    bl fn_80680CF8
+    bl rand
     divwu r0, r3, r23
     mullw r0, r0, r23
     subf r27, r0, r3
@@ -1301,7 +1301,7 @@ lbl_fn_804EAA88_0000107C:
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x40(r1)
     bne lbl_fn_804EAA88_000011D8
-    bl fn_80680CF8
+    bl rand
     lis r29, 0x4178
     lis r31, 0x4330
     addi r0, r29, 0x749f
@@ -1323,7 +1323,7 @@ lbl_fn_804EAA88_0000107C:
     fsubs f5, f5, f6
     fdivs f4, f5, f4
     fmsubs f31, f3, f4, f0
-    bl fn_80680CF8
+    bl rand
     addi r0, r29, 0x749f
     stw r31, 0xd0(r1)
     mulhw r0, r0, r3
@@ -1342,7 +1342,7 @@ lbl_fn_804EAA88_0000107C:
     fsubs f5, f5, f6
     fdivs f4, f5, f4
     fmsubs f30, f3, f4, f0
-    bl fn_80680CF8
+    bl rand
     addi r0, r29, 0x749f
     lfs f3, 0x3c(r1)
     mulhw r0, r0, r3

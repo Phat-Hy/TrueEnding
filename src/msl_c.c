@@ -6,7 +6,7 @@ extern void OSGetConsoleType(void);
 extern void __div2u(void);
 extern void __files(void);
 extern void __mod2u(void);
-extern void __register_atexit(void);
+extern int __register_atexit(void (*)(void));
 extern void __va_arg(void);
 extern void _restgpr_14(void);
 extern void _restgpr_15(void);
@@ -14,7 +14,7 @@ extern void _restgpr_21(void);
 extern void _savegpr_14(void);
 extern void _savegpr_15(void);
 extern void _savegpr_21(void);
-extern void exit(void);
+extern void exit(int);
 extern void fn_8061A350(void);
 extern void fn_8061A3A0(void);
 extern void fn_80678668(void);
@@ -22,7 +22,7 @@ extern void fn_8067AF64(void);
 extern void fn_8068A824(void);
 extern void fn_8068AA68(void);
 extern void fn_8068AAF0(void);
-extern void fn_8068AEB0(void);
+extern void std_pow(void);
 extern void fn_8068B0FC(void);
 extern void fn_806964D0(void);
 extern u32 strlen(const char* str);
@@ -137,15 +137,15 @@ void __pformatter_8067FD34(void);
 void __FileWrite(void);
 void __StringWrite(void);
 void fn_806806A4(void);
-void fn_80680770(void);
+void printf(void);
 void vprintf(void);
 void vsnprintf(void);
-void fn_8068093C(void);
+void vsprintf(void);
 void fn_806809C0(void);
 void sprintf(void);
-void fn_80680B88(void);
-void fn_80680CF8(void);
-void fn_80680D18(void);
+void qsort(void);
+int rand(void);
+void srand(u32 seed);
 void fn_80680D20(void);
 void fn_806813B4(void);
 void fn_8068204C(void);
@@ -155,25 +155,25 @@ void strcpy(void);
 void fn_8068236C(void);
 void fn_806823B0(void);
 void fn_806823DC(void);
-void fn_80682428(void);
-void fn_80682544(void);
+void strcmp(void);
+void strncmp(void);
 void strchr(void);
-void fn_806825B4(void);
+void strrchr(void);
 void fn_806825FC(void);
-void fn_806826A0(void);
-void fn_806827C4(void);
+void strtok(void);
+void strstr(void);
 void fn_80682830(void);
 void fn_80683B54(void);
 void fn_80683BB0(void);
 void fn_80683FC4(void);
 void fn_8068446C(void);
 void fn_80684514(void);
-void fn_80684600(void);
-void fn_806846C4(void);
-void fn_806846CC(void);
-void fn_806846D4(void);
-void fn_806846FC(void);
-void fn_80684730(void);
+void atoi(void);
+void* wmemcpy(void* dest, const void* src, u32 n);
+void* wmemmove(void* dest, const void* src, u32 n);
+u16* wmemchr(const u16* s, u16 c, u32 n);
+int wmemcmp(const u16* s1, const u16* s2, u32 n);
+void wcscmp(void);
 void fn_80684CC0(void);
 void fn_80684F04(void);
 void fn_806851C0(void);
@@ -181,8 +181,8 @@ void fn_80685614(void);
 void fn_8068573C(void);
 void fn_80685ECC(void);
 void fn_80686858(void);
-void fn_806868C4(void);
-void fn_806869BC(void);
+void swprintf(void);
+void vswprintf(void);
 void fn_80686A48(void);
 void fn_80686A64(void);
 void fn_80686A80(void);
@@ -194,8 +194,8 @@ void fn_80686B90(void);
 void fn_80686CF8(void);
 void fwide(void);
 void fn_80686DD4(void);
-void fn_80686EA4(void);
-void fn_80686ED8(void);
+void abort(void);
+int atexit(void (*func)(void));
 void __msl_runtime_constraint_violation_s(void);
 
 asm void __close_all(void)
@@ -1884,7 +1884,7 @@ lbl_fn_8067C734_000016D0:
     lfd f1, lbl_80888A78
     lfd f0, 0x128(r1)
     fsub f2, f0, f2
-    bl fn_8068AEB0
+    bl std_pow
     fdiv f31, f31, f1
     b lbl_fn_8067C734_00001720
 lbl_fn_8067C734_00001700:
@@ -1894,7 +1894,7 @@ lbl_fn_8067C734_00001700:
     lfd f0, 0x130(r1)
     lfd f1, lbl_80888A78
     fsub f2, f0, f2
-    bl fn_8068AEB0
+    bl std_pow
     fmul f31, f31, f1
 lbl_fn_8067C734_00001720:
     fmr f1, f31
@@ -6461,7 +6461,7 @@ lbl_fn_806806A4_000052EC:
     blr
 }
 
-asm void fn_80680770(void)
+asm void printf(void)
 {
     nofralloc
     stwu r1, -0x80(r1)
@@ -6471,7 +6471,7 @@ asm void fn_80680770(void)
     mr r31, r4
     stw r30, 0x78(r1)
     mr r30, r3
-    bne cr1, lbl_fn_80680770_00005344
+    bne cr1, lbl_printf_00005344
     stfd f1, 0x28(r1)
     stfd f2, 0x30(r1)
     stfd f3, 0x38(r1)
@@ -6480,7 +6480,7 @@ asm void fn_80680770(void)
     stfd f6, 0x50(r1)
     stfd f7, 0x58(r1)
     stfd f8, 0x60(r1)
-lbl_fn_80680770_00005344:
+lbl_printf_00005344:
     stw r3, 0x8(r1)
     mr r3, r30
     stw r4, 0xc(r1)
@@ -6493,10 +6493,10 @@ lbl_fn_80680770_00005344:
     stw r10, 0x24(r1)
     bl fwide
     cmpwi r3, 0x0
-    blt lbl_fn_80680770_00005380
+    blt lbl_printf_00005380
     li r3, -0x1
-    b lbl_fn_80680770_000053B4
-lbl_fn_80680770_00005380:
+    b lbl_printf_000053B4
+lbl_printf_00005380:
     addi r7, r1, 0x88
     addi r0, r1, 0x8
     lis r4, 0x200
@@ -6510,7 +6510,7 @@ lbl_fn_80680770_00005380:
     li r7, 0x0
     stw r0, 0x70(r1)
     bl __pformatter_8067FD34
-lbl_fn_80680770_000053B4:
+lbl_printf_000053B4:
     lwz r0, 0x84(r1)
     lwz r31, 0x7c(r1)
     lwz r30, 0x78(r1)
@@ -6598,7 +6598,7 @@ lbl_vsnprintf_000054B4:
     blr
 }
 
-asm void fn_8068093C(void)
+asm void vsprintf(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -6621,14 +6621,14 @@ asm void fn_8068093C(void)
     stw r31, 0x10(r1)
     bl __pformatter_8067FD34
     cmpwi r29, 0x0
-    beq lbl_fn_8068093C_00005538
+    beq lbl_vsprintf_00005538
     cmplw r3, r30
-    bge lbl_fn_8068093C_00005534
+    bge lbl_vsprintf_00005534
     stbx r31, r29, r3
-    b lbl_fn_8068093C_00005538
-lbl_fn_8068093C_00005534:
+    b lbl_vsprintf_00005538
+lbl_vsprintf_00005534:
     stb r31, -0x2(r29)
-lbl_fn_8068093C_00005538:
+lbl_vsprintf_00005538:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
     lwz r30, 0x28(r1)
@@ -6768,7 +6768,7 @@ lbl_sprintf_00005708:
     blr
 }
 
-asm void fn_80680B88(void)
+asm void qsort(void)
 {
     nofralloc
     stwu r1, -0x40(r1)
@@ -6779,7 +6779,7 @@ asm void fn_80680B88(void)
     mr r27, r3
     mr r28, r5
     mr r29, r6
-    blt lbl_fn_80680B88_00005878
+    blt lbl_qsort_00005878
     srwi r7, r4, 1
     slwi r0, r5, 1
     addi r31, r7, 0x1
@@ -6792,44 +6792,44 @@ asm void fn_80680B88(void)
     add r23, r3, r4
     mullw r26, r31, r5
     add r22, r3, r0
-lbl_fn_80680B88_00005770:
+lbl_qsort_00005770:
     cmplwi r31, 0x1
-    ble lbl_fn_80680B88_00005788
+    ble lbl_qsort_00005788
     subf r26, r28, r26
     subf r23, r28, r23
     subi r31, r31, 0x1
-    b lbl_fn_80680B88_000057C4
-lbl_fn_80680B88_00005788:
+    b lbl_qsort_000057C4
+lbl_qsort_00005788:
     subi r3, r22, 0x1
     subi r4, r23, 0x1
     addi r5, r28, 0x1
-    b lbl_fn_80680B88_000057AC
-lbl_fn_80680B88_00005798:
+    b lbl_qsort_000057AC
+lbl_qsort_00005798:
     lbz r6, 0x1(r4)
     lbz r0, 0x1(r3)
     stbu r0, 0x1(r4)
     extsb r6, r6
     stbu r6, 0x1(r3)
-lbl_fn_80680B88_000057AC:
+lbl_qsort_000057AC:
     subic. r5, r5, 0x1
-    bne lbl_fn_80680B88_00005798
+    bne lbl_qsort_00005798
     subi r30, r30, 0x1
     cmplwi r30, 0x1
-    beq lbl_fn_80680B88_00005878
+    beq lbl_qsort_00005878
     subf r22, r28, r22
-lbl_fn_80680B88_000057C4:
+lbl_qsort_000057C4:
     add r0, r26, r25
     mr r24, r31
     add r20, r27, r0
-    b lbl_fn_80680B88_00005868
-lbl_fn_80680B88_000057D4:
+    b lbl_qsort_00005868
+lbl_qsort_000057D4:
     slwi r24, r24, 1
     mr r21, r20
     subi r0, r24, 0x1
     mullw r0, r28, r0
     cmplw r24, r30
     add r20, r27, r0
-    bge lbl_fn_80680B88_00005818
+    bge lbl_qsort_00005818
     add r19, r20, r28
     mr r12, r29
     mr r3, r20
@@ -6837,22 +6837,22 @@ lbl_fn_80680B88_000057D4:
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    bge lbl_fn_80680B88_00005818
+    bge lbl_qsort_00005818
     mr r20, r19
     addi r24, r24, 0x1
-lbl_fn_80680B88_00005818:
+lbl_qsort_00005818:
     mr r12, r29
     mr r3, r21
     mr r4, r20
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    bge lbl_fn_80680B88_00005770
+    bge lbl_qsort_00005770
     subi r3, r20, 0x1
     subi r4, r21, 0x1
     addi r5, r28, 0x1
-    b lbl_fn_80680B88_00005860
-lbl_fn_80680B88_00005844:
+    b lbl_qsort_00005860
+lbl_qsort_00005844:
     lbz r6, 0x1(r4)
     lbz r0, 0x1(r3)
     stb r0, 0x1(r4)
@@ -6860,15 +6860,15 @@ lbl_fn_80680B88_00005844:
     addi r4, r4, 0x1
     stb r6, 0x1(r3)
     addi r3, r3, 0x1
-lbl_fn_80680B88_00005860:
+lbl_qsort_00005860:
     subic. r5, r5, 0x1
-    bne lbl_fn_80680B88_00005844
-lbl_fn_80680B88_00005868:
+    bne lbl_qsort_00005844
+lbl_qsort_00005868:
     slwi r0, r24, 1
     cmplw r0, r30
-    ble lbl_fn_80680B88_000057D4
-    b lbl_fn_80680B88_00005770
-lbl_fn_80680B88_00005878:
+    ble lbl_qsort_000057D4
+    b lbl_qsort_00005770
+lbl_qsort_00005878:
     lmw r19, 0xc(r1)
     lwz r0, 0x44(r1)
     mtlr r0
@@ -6876,24 +6876,15 @@ lbl_fn_80680B88_00005878:
     blr
 }
 
-asm void fn_80680CF8(void)
+int rand(void)
 {
-    nofralloc
-    lis r3, 0x41c6
-    lwz r4, lbl_8087EBF0
-    addi r0, r3, 0x4e6d
-    mullw r3, r4, r0
-    addi r0, r3, 0x3039
-    stw r0, lbl_8087EBF0
-    extrwi r3, r0, 15, 1
-    blr
+    lbl_8087EBF0 = lbl_8087EBF0 * 1103515245 + 12345;
+    return (lbl_8087EBF0 >> 16) & 0x7fff;
 }
 
-asm void fn_80680D18(void)
+void srand(u32 seed)
 {
-    nofralloc
-    stw r3, lbl_8087EBF0
-    blr
+    lbl_8087EBF0 = seed;
 }
 
 asm void fn_80680D20(void)
@@ -8599,49 +8590,49 @@ lbl_fn_806823DC_00006FB0:
     blr
 }
 
-asm void fn_80682428(void)
+asm void strcmp(void)
 {
     nofralloc
     lbz r5, 0x0(r3)
     lbz r0, 0x0(r4)
     subf. r0, r0, r5
-    beq lbl_fn_80682428_00006FD4
+    beq lbl_strcmp_00006FD4
     mr r3, r0
     blr
-lbl_fn_80682428_00006FD4:
+lbl_strcmp_00006FD4:
     clrlwi r0, r4, 30
     clrlwi r6, r3, 30
     cmplw r0, r6
-    bne lbl_fn_80682428_000070A0
+    bne lbl_strcmp_000070A0
     cmpwi r6, 0x0
-    beq lbl_fn_80682428_00007040
+    beq lbl_strcmp_00007040
     cmpwi r5, 0x0
-    bne lbl_fn_80682428_00006FFC
+    bne lbl_strcmp_00006FFC
     li r3, 0x0
     blr
-lbl_fn_80682428_00006FFC:
+lbl_strcmp_00006FFC:
     subfic r0, r6, 0x3
     mtctr r0
     cmpwi r0, 0x0
-    beq lbl_fn_80682428_00007038
-lbl_fn_80682428_0000700C:
+    beq lbl_strcmp_00007038
+lbl_strcmp_0000700C:
     lbzu r5, 0x1(r3)
     lbzu r0, 0x1(r4)
     subf. r0, r0, r5
-    beq lbl_fn_80682428_00007024
+    beq lbl_strcmp_00007024
     mr r3, r0
     blr
-lbl_fn_80682428_00007024:
+lbl_strcmp_00007024:
     cmpwi r5, 0x0
-    bne lbl_fn_80682428_00007034
+    bne lbl_strcmp_00007034
     li r3, 0x0
     blr
-lbl_fn_80682428_00007034:
-    bdnz lbl_fn_80682428_0000700C
-lbl_fn_80682428_00007038:
+lbl_strcmp_00007034:
+    bdnz lbl_strcmp_0000700C
+lbl_strcmp_00007038:
     addi r3, r3, 0x1
     addi r4, r4, 0x1
-lbl_fn_80682428_00007040:
+lbl_strcmp_00007040:
     lwz r7, 0x0(r3)
     lis r5, lbl_80808080@ha
     addi r6, r5, lbl_80808080@l
@@ -8650,65 +8641,65 @@ lbl_fn_80682428_00007040:
     subi r5, r5, 0x101
     andc r5, r5, r7
     and. r0, r5, r6
-    bne lbl_fn_80682428_00007088
-    b lbl_fn_80682428_00007080
-lbl_fn_80682428_00007068:
+    bne lbl_strcmp_00007088
+    b lbl_strcmp_00007080
+lbl_strcmp_00007068:
     lwzu r7, 0x4(r3)
     lwzu r8, 0x4(r4)
     subis r5, r7, 0x101
     subi r0, r5, 0x101
     and. r0, r0, r6
-    bne lbl_fn_80682428_00007088
-lbl_fn_80682428_00007080:
+    bne lbl_strcmp_00007088
+lbl_strcmp_00007080:
     cmplw r7, r8
-    beq lbl_fn_80682428_00007068
-lbl_fn_80682428_00007088:
+    beq lbl_strcmp_00007068
+lbl_strcmp_00007088:
     lbz r5, 0x0(r3)
     lbz r0, 0x0(r4)
     subf. r0, r0, r5
-    beq lbl_fn_80682428_000070A0
+    beq lbl_strcmp_000070A0
     mr r3, r0
     blr
-lbl_fn_80682428_000070A0:
+lbl_strcmp_000070A0:
     cmpwi r5, 0x0
-    bne lbl_fn_80682428_000070B0
+    bne lbl_strcmp_000070B0
     li r3, 0x0
     blr
-lbl_fn_80682428_000070B0:
+lbl_strcmp_000070B0:
     lbzu r5, 0x1(r3)
     lbzu r0, 0x1(r4)
     subf. r0, r0, r5
-    beq lbl_fn_80682428_000070C8
+    beq lbl_strcmp_000070C8
     mr r3, r0
     blr
-lbl_fn_80682428_000070C8:
+lbl_strcmp_000070C8:
     cmpwi r5, 0x0
-    bne lbl_fn_80682428_000070B0
+    bne lbl_strcmp_000070B0
     li r3, 0x0
     blr
 }
 
-asm void fn_80682544(void)
+asm void strncmp(void)
 {
     nofralloc
     subi r3, r3, 0x1
     subi r4, r4, 0x1
     addi r6, r5, 0x1
-    b lbl_fn_80682544_00007108
-lbl_fn_80682544_000070E8:
+    b lbl_strncmp_00007108
+lbl_strncmp_000070E8:
     lbzu r0, 0x1(r3)
     lbzu r5, 0x1(r4)
     cmplw r0, r5
-    beq lbl_fn_80682544_00007100
+    beq lbl_strncmp_00007100
     subf r3, r5, r0
     blr
-lbl_fn_80682544_00007100:
+lbl_strncmp_00007100:
     cmpwi r0, 0x0
-    beq lbl_fn_80682544_00007110
-lbl_fn_80682544_00007108:
+    beq lbl_strncmp_00007110
+lbl_strncmp_00007108:
     subic. r6, r6, 0x1
-    bne lbl_fn_80682544_000070E8
-lbl_fn_80682544_00007110:
+    bne lbl_strncmp_000070E8
+lbl_strncmp_00007110:
     li r3, 0x0
     blr
 }
@@ -8732,28 +8723,28 @@ lbl_strchr_0000712C:
     blr
 }
 
-asm void fn_806825B4(void)
+asm void strrchr(void)
 {
     nofralloc
     subi r5, r3, 0x1
     clrlwi r0, r4, 24
     li r3, 0x0
-    b lbl_fn_806825B4_00007164
-lbl_fn_806825B4_00007158:
+    b lbl_strrchr_00007164
+lbl_strrchr_00007158:
     cmplw r4, r0
-    bne lbl_fn_806825B4_00007164
+    bne lbl_strrchr_00007164
     mr r3, r5
-lbl_fn_806825B4_00007164:
+lbl_strrchr_00007164:
     lbzu r4, 0x1(r5)
     cmpwi r4, 0x0
-    bne lbl_fn_806825B4_00007158
+    bne lbl_strrchr_00007158
     cmpwi r3, 0x0
     bnelr
     cmpwi r0, 0x0
-    beq lbl_fn_806825B4_00007188
+    beq lbl_strrchr_00007188
     li r3, 0x0
     blr
-lbl_fn_806825B4_00007188:
+lbl_strrchr_00007188:
     mr r3, r5
     blr
 }
@@ -8809,7 +8800,7 @@ lbl_fn_806825FC_00007228:
     blr
 }
 
-asm void fn_806826A0(void)
+asm void strtok(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -8823,14 +8814,14 @@ asm void fn_806826A0(void)
     stw r0, 0x1c(r1)
     stw r0, 0x20(r1)
     stw r0, 0x24(r1)
-    beq lbl_fn_806826A0_00007268
+    beq lbl_strtok_00007268
     stw r3, lbl_8087EBFC
-lbl_fn_806826A0_00007268:
+lbl_strtok_00007268:
     subi r7, r4, 0x1
     addi r5, r1, 0x8
     li r3, 0x1
-    b lbl_fn_806826A0_00007294
-lbl_fn_806826A0_00007278:
+    b lbl_strtok_00007294
+lbl_strtok_00007278:
     extrwi r6, r0, 5, 24
     clrlwi r0, r0, 29
     slw r0, r3, r0
@@ -8838,68 +8829,68 @@ lbl_fn_806826A0_00007278:
     clrlwi r0, r0, 24
     or r0, r4, r0
     stbx r0, r5, r6
-lbl_fn_806826A0_00007294:
+lbl_strtok_00007294:
     lbzu r0, 0x1(r7)
     cmpwi r0, 0x0
-    bne lbl_fn_806826A0_00007278
+    bne lbl_strtok_00007278
     lwz r4, lbl_8087EBFC
     addi r5, r1, 0x8
     li r3, 0x1
     subi r7, r4, 0x1
-    b lbl_fn_806826A0_000072D0
-lbl_fn_806826A0_000072B4:
+    b lbl_strtok_000072D0
+lbl_strtok_000072B4:
     extrwi r4, r6, 5, 24
     clrlwi r0, r6, 29
     slw r0, r3, r0
     lbzx r4, r5, r4
     clrlwi r0, r0, 24
     and. r0, r4, r0
-    beq lbl_fn_806826A0_000072DC
-lbl_fn_806826A0_000072D0:
+    beq lbl_strtok_000072DC
+lbl_strtok_000072D0:
     lbzu r6, 0x1(r7)
     cmpwi r6, 0x0
-    bne lbl_fn_806826A0_000072B4
-lbl_fn_806826A0_000072DC:
+    bne lbl_strtok_000072B4
+lbl_strtok_000072DC:
     cmpwi r6, 0x0
-    bne lbl_fn_806826A0_000072F4
+    bne lbl_strtok_000072F4
     lwz r0, lbl_8087EBF8
     li r3, 0x0
     stw r0, lbl_8087EBFC
-    b lbl_fn_806826A0_00007350
-lbl_fn_806826A0_000072F4:
+    b lbl_strtok_00007350
+lbl_strtok_000072F4:
     mr r3, r7
     addi r6, r1, 0x8
     li r4, 0x1
-    b lbl_fn_806826A0_00007320
-lbl_fn_806826A0_00007304:
+    b lbl_strtok_00007320
+lbl_strtok_00007304:
     extrwi r5, r8, 5, 24
     clrlwi r0, r8, 29
     slw r0, r4, r0
     lbzx r5, r6, r5
     clrlwi r0, r0, 24
     and. r0, r5, r0
-    bne lbl_fn_806826A0_0000732C
-lbl_fn_806826A0_00007320:
+    bne lbl_strtok_0000732C
+lbl_strtok_00007320:
     lbzu r8, 0x1(r7)
     cmpwi r8, 0x0
-    bne lbl_fn_806826A0_00007304
-lbl_fn_806826A0_0000732C:
+    bne lbl_strtok_00007304
+lbl_strtok_0000732C:
     cmpwi r8, 0x0
-    bne lbl_fn_806826A0_00007340
+    bne lbl_strtok_00007340
     lwz r0, lbl_8087EBF8
     stw r0, lbl_8087EBFC
-    b lbl_fn_806826A0_00007350
-lbl_fn_806826A0_00007340:
+    b lbl_strtok_00007350
+lbl_strtok_00007340:
     addi r4, r7, 0x1
     li r0, 0x0
     stw r4, lbl_8087EBFC
     stb r0, 0x0(r7)
-lbl_fn_806826A0_00007350:
+lbl_strtok_00007350:
     addi r1, r1, 0x30
     blr
 }
 
-asm void fn_806827C4(void)
+asm void strstr(void)
 {
     nofralloc
     cmpwi r4, 0x0
@@ -8907,30 +8898,30 @@ asm void fn_806827C4(void)
     beqlr
     lbz r6, 0x0(r4)
     cmpwi r6, 0x0
-    bne lbl_fn_806827C4_000073B0
+    bne lbl_strstr_000073B0
     blr
-    b lbl_fn_806827C4_000073B0
-lbl_fn_806827C4_00007378:
+    b lbl_strstr_000073B0
+lbl_strstr_00007378:
     cmplw r0, r6
-    bne lbl_fn_806827C4_000073B0
+    bne lbl_strstr_000073B0
     subi r7, r5, 0x1
     subi r8, r4, 0x1
-lbl_fn_806827C4_00007388:
+lbl_strstr_00007388:
     lbzu r0, 0x1(r7)
     lbzu r3, 0x1(r8)
     cmplw r0, r3
-    bne lbl_fn_806827C4_000073A0
+    bne lbl_strstr_000073A0
     cmpwi r0, 0x0
-    bne lbl_fn_806827C4_00007388
-lbl_fn_806827C4_000073A0:
+    bne lbl_strstr_00007388
+lbl_strstr_000073A0:
     cmpwi r3, 0x0
-    bne lbl_fn_806827C4_000073B0
+    bne lbl_strstr_000073B0
     mr r3, r5
     blr
-lbl_fn_806827C4_000073B0:
+lbl_strstr_000073B0:
     lbzu r0, 0x1(r5)
     cmpwi r0, 0x0
-    bne lbl_fn_806827C4_00007378
+    bne lbl_strstr_00007378
     li r3, 0x0
     blr
 }
@@ -11165,7 +11156,7 @@ lbl_fn_80684514_0000917C:
     blr
 }
 
-asm void fn_80684600(void)
+asm void atoi(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -11187,20 +11178,20 @@ asm void fn_80684600(void)
     bl fn_80683BB0
     lwz r0, 0x10(r1)
     cmpwi r0, 0x0
-    bne lbl_fn_80684600_00009210
+    bne lbl_atoi_00009210
     lwz r4, 0xc(r1)
     cmpwi r4, 0x0
-    bne lbl_fn_80684600_000091FC
+    bne lbl_atoi_000091FC
     subi r0, r31, 0x1
     cmplw r3, r0
-    bgt lbl_fn_80684600_00009210
-lbl_fn_80684600_000091FC:
+    bgt lbl_atoi_00009210
+lbl_atoi_000091FC:
     cmpwi r4, 0x0
-    beq lbl_fn_80684600_00009238
+    beq lbl_atoi_00009238
     lis r0, 0x8000
     cmplw r3, r0
-    ble lbl_fn_80684600_00009238
-lbl_fn_80684600_00009210:
+    ble lbl_atoi_00009238
+lbl_atoi_00009210:
     lwz r5, 0xc(r1)
     li r0, 0x22
     lis r3, 0x8000
@@ -11210,12 +11201,12 @@ lbl_fn_80684600_00009210:
     or r3, r4, r5
     srwi r3, r3, 31
     add r3, r3, r0
-    b lbl_fn_80684600_00009244
-lbl_fn_80684600_00009238:
+    b lbl_atoi_00009244
+lbl_atoi_00009238:
     cmpwi r4, 0x0
-    beq lbl_fn_80684600_00009244
+    beq lbl_atoi_00009244
     neg r3, r3
-lbl_fn_80684600_00009244:
+lbl_atoi_00009244:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
     mtlr r0
@@ -11223,58 +11214,39 @@ lbl_fn_80684600_00009244:
     blr
 }
 
-asm void fn_806846C4(void)
+void* wmemcpy(void* dest, const void* src, u32 n)
 {
-    nofralloc
-    slwi r5, r5, 1
-    b memcpy
+    return ((void* (*)(void*, const void*, u32))memcpy)(dest, src, n * 2);
 }
 
-asm void fn_806846CC(void)
+void* wmemmove(void* dest, const void* src, u32 n)
 {
-    nofralloc
-    slwi r5, r5, 1
-    b memmove
+    return ((void* (*)(void*, const void*, u32))memmove)(dest, src, n * 2);
 }
 
-asm void fn_806846D4(void)
+u16* wmemchr(const u16* s, u16 c, u32 n)
 {
-    nofralloc
-    mtctr r5
-    cmpwi r5, 0x0
-    beq lbl_fn_806846D4_00009288
-lbl_fn_806846D4_00009274:
-    lhz r0, 0x0(r3)
-    cmplw r0, r4
-    beqlr
-    addi r3, r3, 0x2
-    bdnz lbl_fn_806846D4_00009274
-lbl_fn_806846D4_00009288:
-    li r3, 0x0
-    blr
+    for (; n != 0; s++, n--) {
+        if (*s == c) {
+            return (u16*)s;
+        }
+    }
+    return 0;
 }
 
-asm void fn_806846FC(void)
+int wmemcmp(const u16* s1, const u16* s2, u32 n)
 {
-    nofralloc
-    li r0, 0x0
-    mtctr r5
-    cmpwi r5, 0x0
-    beq lbl_fn_806846FC_000092BC
-lbl_fn_806846FC_000092A0:
-    lhz r5, 0x0(r4)
-    lhz r0, 0x0(r3)
-    subf. r0, r5, r0
-    bne lbl_fn_806846FC_000092BC
-    addi r3, r3, 0x2
-    addi r4, r4, 0x2
-    bdnz lbl_fn_806846FC_000092A0
-lbl_fn_806846FC_000092BC:
-    mr r3, r0
-    blr
+    int diff = 0;
+    for (; n != 0; s1++, s2++, n--) {
+        diff = *s1 - *s2;
+        if (diff != 0) {
+            break;
+        }
+    }
+    return diff;
 }
 
-asm void fn_80684730(void)
+asm void wcscmp(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -11297,7 +11269,7 @@ asm void fn_80684730(void)
     stb r6, 0xc(r1)
     stw r6, 0x10(r1)
     stw r6, 0x14(r1)
-    bne lbl_fn_80684730_0000933C
+    bne lbl_wcscmp_0000933C
     sth r0, 0xe(r1)
     addi r3, r31, 0x2
     lwz r4, 0x8(r1)
@@ -11306,96 +11278,96 @@ asm void fn_80684730(void)
     stw r0, 0x4(r5)
     stw r6, 0x8(r5)
     stw r6, 0xc(r5)
-    b lbl_fn_80684730_00009838
-lbl_fn_80684730_0000933C:
+    b lbl_wcscmp_00009838
+lbl_wcscmp_0000933C:
     li r3, 0x2
-lbl_fn_80684730_00009340:
+lbl_wcscmp_00009340:
     cmpwi r0, 0x2d
     li r5, 0x1
-    beq lbl_fn_80684730_00009370
+    beq lbl_wcscmp_00009370
     cmpwi r0, 0x2b
-    beq lbl_fn_80684730_00009378
+    beq lbl_wcscmp_00009378
     cmpwi r0, 0x20
-    beq lbl_fn_80684730_00009380
+    beq lbl_wcscmp_00009380
     cmpwi r0, 0x23
-    beq lbl_fn_80684730_00009394
+    beq lbl_wcscmp_00009394
     cmpwi r0, 0x30
-    beq lbl_fn_80684730_0000939C
-    b lbl_fn_80684730_000093B0
-lbl_fn_80684730_00009370:
+    beq lbl_wcscmp_0000939C
+    b lbl_wcscmp_000093B0
+lbl_wcscmp_00009370:
     stb r6, 0x8(r1)
-    b lbl_fn_80684730_000093B4
-lbl_fn_80684730_00009378:
+    b lbl_wcscmp_000093B4
+lbl_wcscmp_00009378:
     stb r7, 0x9(r1)
-    b lbl_fn_80684730_000093B4
-lbl_fn_80684730_00009380:
+    b lbl_wcscmp_000093B4
+lbl_wcscmp_00009380:
     lbz r4, 0x9(r1)
     cmplwi r4, 0x1
-    beq lbl_fn_80684730_000093B4
+    beq lbl_wcscmp_000093B4
     stb r3, 0x9(r1)
-    b lbl_fn_80684730_000093B4
-lbl_fn_80684730_00009394:
+    b lbl_wcscmp_000093B4
+lbl_wcscmp_00009394:
     stb r7, 0xb(r1)
-    b lbl_fn_80684730_000093B4
-lbl_fn_80684730_0000939C:
+    b lbl_wcscmp_000093B4
+lbl_wcscmp_0000939C:
     lbz r4, 0x8(r1)
     cmpwi r4, 0x0
-    beq lbl_fn_80684730_000093B4
+    beq lbl_wcscmp_000093B4
     stb r3, 0x8(r1)
-    b lbl_fn_80684730_000093B4
-lbl_fn_80684730_000093B0:
+    b lbl_wcscmp_000093B4
+lbl_wcscmp_000093B0:
     li r5, 0x0
-lbl_fn_80684730_000093B4:
+lbl_wcscmp_000093B4:
     cmpwi r5, 0x0
-    beq lbl_fn_80684730_000093C4
+    beq lbl_wcscmp_000093C4
     lhzu r0, 0x2(r31)
-    b lbl_fn_80684730_00009340
-lbl_fn_80684730_000093C4:
+    b lbl_wcscmp_00009340
+lbl_wcscmp_000093C4:
     cmplwi r0, 0x2a
-    bne lbl_fn_80684730_00009400
+    bne lbl_wcscmp_00009400
     mr r3, r29
     li r4, 0x1
     bl __va_arg
     lwz r0, 0x0(r3)
     stw r0, 0x10(r1)
     cmpwi r0, 0x0
-    bge lbl_fn_80684730_000093F8
+    bge lbl_wcscmp_000093F8
     neg r0, r0
     li r3, 0x0
     stb r3, 0x8(r1)
     stw r0, 0x10(r1)
-lbl_fn_80684730_000093F8:
+lbl_wcscmp_000093F8:
     lhzu r0, 0x2(r31)
-    b lbl_fn_80684730_00009450
-lbl_fn_80684730_00009400:
+    b lbl_wcscmp_00009450
+lbl_wcscmp_00009400:
     lis r3, lbl_807BB380@ha
     addi r3, r3, lbl_807BB380@l
     lwz r5, 0x38(r3)
-    b lbl_fn_80684730_00009428
-lbl_fn_80684730_00009410:
+    b lbl_wcscmp_00009428
+lbl_wcscmp_00009410:
     lwz r3, 0x10(r1)
     mulli r3, r3, 0xa
     add r3, r0, r3
     lhzu r0, 0x2(r31)
     subi r3, r3, 0x30
     stw r3, 0x10(r1)
-lbl_fn_80684730_00009428:
+lbl_wcscmp_00009428:
     cmplwi r0, 0x100
-    bge lbl_fn_80684730_00009444
+    bge lbl_wcscmp_00009444
     lwz r4, 0x14(r5)
     clrlslwi r3, r0, 16, 1
     lhzx r3, r4, r3
     rlwinm r3, r3, 0, 28, 28
-    b lbl_fn_80684730_00009448
-lbl_fn_80684730_00009444:
+    b lbl_wcscmp_00009448
+lbl_wcscmp_00009444:
     li r3, 0x0
-lbl_fn_80684730_00009448:
+lbl_wcscmp_00009448:
     cmpwi r3, 0x0
-    bne lbl_fn_80684730_00009410
-lbl_fn_80684730_00009450:
+    bne lbl_wcscmp_00009410
+lbl_wcscmp_00009450:
     lwz r6, 0x10(r1)
     cmpwi r6, 0x1fd
-    ble lbl_fn_80684730_0000948C
+    ble lbl_wcscmp_0000948C
     lis r3, 0x1
     lwz r5, 0x8(r1)
     subi r0, r3, 0x1
@@ -11407,117 +11379,117 @@ lbl_fn_80684730_00009450:
     stw r4, 0x4(r30)
     stw r6, 0x8(r30)
     stw r0, 0xc(r30)
-    b lbl_fn_80684730_00009838
-lbl_fn_80684730_0000948C:
+    b lbl_wcscmp_00009838
+lbl_wcscmp_0000948C:
     cmplwi r0, 0x2e
-    bne lbl_fn_80684730_00009524
+    bne lbl_wcscmp_00009524
     lhzu r0, 0x2(r31)
     li r3, 0x1
     stb r3, 0xa(r1)
     cmplwi r0, 0x2a
-    bne lbl_fn_80684730_000094D4
+    bne lbl_wcscmp_000094D4
     mr r3, r29
     li r4, 0x1
     bl __va_arg
     lwz r0, 0x0(r3)
     stw r0, 0x14(r1)
     cmpwi r0, 0x0
-    bge lbl_fn_80684730_000094CC
+    bge lbl_wcscmp_000094CC
     li r0, 0x0
     stb r0, 0xa(r1)
-lbl_fn_80684730_000094CC:
+lbl_wcscmp_000094CC:
     lhzu r0, 0x2(r31)
-    b lbl_fn_80684730_00009524
-lbl_fn_80684730_000094D4:
+    b lbl_wcscmp_00009524
+lbl_wcscmp_000094D4:
     lis r3, lbl_807BB380@ha
     addi r3, r3, lbl_807BB380@l
     lwz r5, 0x38(r3)
-    b lbl_fn_80684730_000094FC
-lbl_fn_80684730_000094E4:
+    b lbl_wcscmp_000094FC
+lbl_wcscmp_000094E4:
     lwz r3, 0x14(r1)
     mulli r3, r3, 0xa
     add r3, r0, r3
     lhzu r0, 0x2(r31)
     subi r3, r3, 0x30
     stw r3, 0x14(r1)
-lbl_fn_80684730_000094FC:
+lbl_wcscmp_000094FC:
     cmplwi r0, 0x100
-    bge lbl_fn_80684730_00009518
+    bge lbl_wcscmp_00009518
     lwz r4, 0x14(r5)
     clrlslwi r3, r0, 16, 1
     lhzx r3, r4, r3
     rlwinm r3, r3, 0, 28, 28
-    b lbl_fn_80684730_0000951C
-lbl_fn_80684730_00009518:
+    b lbl_wcscmp_0000951C
+lbl_wcscmp_00009518:
     li r3, 0x0
-lbl_fn_80684730_0000951C:
+lbl_wcscmp_0000951C:
     cmpwi r3, 0x0
-    bne lbl_fn_80684730_000094E4
-lbl_fn_80684730_00009524:
+    bne lbl_wcscmp_000094E4
+lbl_wcscmp_00009524:
     cmpwi r0, 0x68
     li r5, 0x1
-    beq lbl_fn_80684730_0000955C
+    beq lbl_wcscmp_0000955C
     cmpwi r0, 0x6c
-    beq lbl_fn_80684730_00009584
+    beq lbl_wcscmp_00009584
     cmpwi r0, 0x4c
-    beq lbl_fn_80684730_000095AC
+    beq lbl_wcscmp_000095AC
     cmpwi r0, 0x6a
-    beq lbl_fn_80684730_000095B8
+    beq lbl_wcscmp_000095B8
     cmpwi r0, 0x74
-    beq lbl_fn_80684730_000095C4
+    beq lbl_wcscmp_000095C4
     cmpwi r0, 0x7a
-    beq lbl_fn_80684730_000095D0
-    b lbl_fn_80684730_000095DC
-lbl_fn_80684730_0000955C:
+    beq lbl_wcscmp_000095D0
+    b lbl_wcscmp_000095DC
+lbl_wcscmp_0000955C:
     lhz r3, 0x2(r31)
     li r4, 0x2
     stb r4, 0xc(r1)
     cmplwi r3, 0x68
-    bne lbl_fn_80684730_000095E0
+    bne lbl_wcscmp_000095E0
     li r0, 0x1
     stb r0, 0xc(r1)
     mr r0, r3
     addi r31, r31, 0x2
-    b lbl_fn_80684730_000095E0
-lbl_fn_80684730_00009584:
+    b lbl_wcscmp_000095E0
+lbl_wcscmp_00009584:
     lhz r3, 0x2(r31)
     li r4, 0x3
     stb r4, 0xc(r1)
     cmplwi r3, 0x6c
-    bne lbl_fn_80684730_000095E0
+    bne lbl_wcscmp_000095E0
     li r0, 0x4
     stb r0, 0xc(r1)
     mr r0, r3
     addi r31, r31, 0x2
-    b lbl_fn_80684730_000095E0
-lbl_fn_80684730_000095AC:
+    b lbl_wcscmp_000095E0
+lbl_wcscmp_000095AC:
     li r3, 0x9
     stb r3, 0xc(r1)
-    b lbl_fn_80684730_000095E0
-lbl_fn_80684730_000095B8:
+    b lbl_wcscmp_000095E0
+lbl_wcscmp_000095B8:
     li r3, 0x6
     stb r3, 0xc(r1)
-    b lbl_fn_80684730_000095E0
-lbl_fn_80684730_000095C4:
+    b lbl_wcscmp_000095E0
+lbl_wcscmp_000095C4:
     li r3, 0x8
     stb r3, 0xc(r1)
-    b lbl_fn_80684730_000095E0
-lbl_fn_80684730_000095D0:
+    b lbl_wcscmp_000095E0
+lbl_wcscmp_000095D0:
     li r3, 0x7
     stb r3, 0xc(r1)
-    b lbl_fn_80684730_000095E0
-lbl_fn_80684730_000095DC:
+    b lbl_wcscmp_000095E0
+lbl_wcscmp_000095DC:
     li r5, 0x0
-lbl_fn_80684730_000095E0:
+lbl_wcscmp_000095E0:
     cmpwi r5, 0x0
-    beq lbl_fn_80684730_000095EC
+    beq lbl_wcscmp_000095EC
     lhzu r0, 0x2(r31)
-lbl_fn_80684730_000095EC:
+lbl_wcscmp_000095EC:
     clrlwi r3, r0, 16
     sth r0, 0xe(r1)
     subi r0, r3, 0x41
     cmplwi r0, 0x37
-    bgt lbl_fn_80684730_00009808
+    bgt lbl_wcscmp_00009808
     lis r3, jumptable_807BB868@ha
     slwi r0, r0, 2
     addi r3, r3, jumptable_807BB868@l
@@ -11526,95 +11498,95 @@ lbl_fn_80684730_000095EC:
     bctr
     lbz r0, 0xc(r1)
     cmplwi r0, 0x9
-    bne lbl_fn_80684730_0000962C
+    bne lbl_wcscmp_0000962C
     li r0, 0x4
     stb r0, 0xc(r1)
-lbl_fn_80684730_0000962C:
+lbl_wcscmp_0000962C:
     lbz r0, 0xa(r1)
     cmpwi r0, 0x0
-    bne lbl_fn_80684730_00009644
+    bne lbl_wcscmp_00009644
     li r0, 0x1
     stw r0, 0x14(r1)
-    b lbl_fn_80684730_00009814
-lbl_fn_80684730_00009644:
+    b lbl_wcscmp_00009814
+lbl_wcscmp_00009644:
     lbz r0, 0x8(r1)
     cmplwi r0, 0x2
-    bne lbl_fn_80684730_00009814
+    bne lbl_wcscmp_00009814
     li r0, 0x1
     stb r0, 0x8(r1)
-    b lbl_fn_80684730_00009814
+    b lbl_wcscmp_00009814
     lbz r3, 0xc(r1)
     addi r0, r3, 0xfa
     clrlwi r0, r0, 24
     cmplwi r0, 0x2
-    ble lbl_fn_80684730_00009680
+    ble lbl_wcscmp_00009680
     cmplwi r3, 0x2
-    beq lbl_fn_80684730_00009680
+    beq lbl_wcscmp_00009680
     cmplwi r3, 0x4
-    bne lbl_fn_80684730_00009690
-lbl_fn_80684730_00009680:
+    bne lbl_wcscmp_00009690
+lbl_wcscmp_00009680:
     lis r3, 0x1
     subi r0, r3, 0x1
     sth r0, 0xe(r1)
-    b lbl_fn_80684730_00009814
-lbl_fn_80684730_00009690:
+    b lbl_wcscmp_00009814
+lbl_wcscmp_00009690:
     lbz r0, 0xa(r1)
     cmpwi r0, 0x0
-    bne lbl_fn_80684730_00009814
+    bne lbl_wcscmp_00009814
     li r0, 0x6
     stw r0, 0x14(r1)
-    b lbl_fn_80684730_00009814
+    b lbl_wcscmp_00009814
     lbz r0, 0xa(r1)
     cmpwi r0, 0x0
-    bne lbl_fn_80684730_000096BC
+    bne lbl_wcscmp_000096BC
     li r0, 0xd
     stw r0, 0x14(r1)
-lbl_fn_80684730_000096BC:
+lbl_wcscmp_000096BC:
     lbz r3, 0xc(r1)
     addi r0, r3, 0xfa
     clrlwi r0, r0, 24
     cmplwi r0, 0x2
-    ble lbl_fn_80684730_000096E8
+    ble lbl_wcscmp_000096E8
     addi r0, r3, 0xff
     clrlwi r0, r0, 24
     cmplwi r0, 0x1
-    ble lbl_fn_80684730_000096E8
+    ble lbl_wcscmp_000096E8
     cmplwi r3, 0x4
-    bne lbl_fn_80684730_00009814
-lbl_fn_80684730_000096E8:
+    bne lbl_wcscmp_00009814
+lbl_wcscmp_000096E8:
     lis r3, 0x1
     subi r0, r3, 0x1
     sth r0, 0xe(r1)
-    b lbl_fn_80684730_00009814
+    b lbl_wcscmp_00009814
     lwz r0, 0x14(r1)
     cmpwi r0, 0x0
-    bne lbl_fn_80684730_0000970C
+    bne lbl_wcscmp_0000970C
     li r0, 0x1
     stw r0, 0x14(r1)
-lbl_fn_80684730_0000970C:
+lbl_wcscmp_0000970C:
     lbz r3, 0xc(r1)
     addi r0, r3, 0xfa
     clrlwi r0, r0, 24
     cmplwi r0, 0x2
-    ble lbl_fn_80684730_00009738
+    ble lbl_wcscmp_00009738
     addi r0, r3, 0xff
     clrlwi r0, r0, 24
     cmplwi r0, 0x1
-    ble lbl_fn_80684730_00009738
+    ble lbl_wcscmp_00009738
     cmplwi r3, 0x4
-    bne lbl_fn_80684730_00009748
-lbl_fn_80684730_00009738:
+    bne lbl_wcscmp_00009748
+lbl_wcscmp_00009738:
     lis r3, 0x1
     subi r0, r3, 0x1
     sth r0, 0xe(r1)
-    b lbl_fn_80684730_00009814
-lbl_fn_80684730_00009748:
+    b lbl_wcscmp_00009814
+lbl_wcscmp_00009748:
     lbz r0, 0xa(r1)
     cmpwi r0, 0x0
-    bne lbl_fn_80684730_00009814
+    bne lbl_wcscmp_00009814
     li r0, 0x6
     stw r0, 0x14(r1)
-    b lbl_fn_80684730_00009814
+    b lbl_wcscmp_00009814
     li r5, 0x3
     li r4, 0x1
     li r3, 0x78
@@ -11623,48 +11595,48 @@ lbl_fn_80684730_00009748:
     stb r4, 0xb(r1)
     sth r3, 0xe(r1)
     stw r0, 0x14(r1)
-    b lbl_fn_80684730_00009814
+    b lbl_wcscmp_00009814
     lbz r3, 0xc(r1)
     cmplwi r3, 0x3
-    bne lbl_fn_80684730_0000979C
+    bne lbl_wcscmp_0000979C
     li r0, 0x5
     stb r0, 0xc(r1)
-    b lbl_fn_80684730_00009814
-lbl_fn_80684730_0000979C:
+    b lbl_wcscmp_00009814
+lbl_wcscmp_0000979C:
     lbz r0, 0xa(r1)
     cmpwi r0, 0x0
-    bne lbl_fn_80684730_000097B0
+    bne lbl_wcscmp_000097B0
     cmpwi r3, 0x0
-    beq lbl_fn_80684730_00009814
-lbl_fn_80684730_000097B0:
+    beq lbl_wcscmp_00009814
+lbl_wcscmp_000097B0:
     lis r3, 0x1
     subi r0, r3, 0x1
     sth r0, 0xe(r1)
-    b lbl_fn_80684730_00009814
+    b lbl_wcscmp_00009814
     lbz r0, 0xc(r1)
     cmplwi r0, 0x3
-    bne lbl_fn_80684730_000097D8
+    bne lbl_wcscmp_000097D8
     li r0, 0x5
     stb r0, 0xc(r1)
-    b lbl_fn_80684730_00009814
-lbl_fn_80684730_000097D8:
+    b lbl_wcscmp_00009814
+lbl_wcscmp_000097D8:
     cmpwi r0, 0x0
-    beq lbl_fn_80684730_00009814
+    beq lbl_wcscmp_00009814
     lis r3, 0x1
     subi r0, r3, 0x1
     sth r0, 0xe(r1)
-    b lbl_fn_80684730_00009814
+    b lbl_wcscmp_00009814
     lbz r0, 0xc(r1)
     cmplwi r0, 0x9
-    bne lbl_fn_80684730_00009814
+    bne lbl_wcscmp_00009814
     li r0, 0x4
     stb r0, 0xc(r1)
-    b lbl_fn_80684730_00009814
-lbl_fn_80684730_00009808:
+    b lbl_wcscmp_00009814
+lbl_wcscmp_00009808:
     lis r3, 0x1
     subi r0, r3, 0x1
     sth r0, 0xe(r1)
-lbl_fn_80684730_00009814:
+lbl_wcscmp_00009814:
     lwz r6, 0x8(r1)
     addi r3, r31, 0x2
     lwz r5, 0xc(r1)
@@ -11674,7 +11646,7 @@ lbl_fn_80684730_00009814:
     stw r5, 0x4(r30)
     stw r4, 0x8(r30)
     stw r0, 0xc(r30)
-lbl_fn_80684730_00009838:
+lbl_wcscmp_00009838:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
     lwz r30, 0x28(r1)
@@ -13094,7 +13066,7 @@ lbl_fn_80685ECC_0000AB3C:
     mr r3, r29
     mr r4, r22
     addi r5, r1, 0x70
-    bl fn_80684730
+    bl wcscmp
     lhz r4, 0x76(r1)
     mr r30, r3
     subi r0, r4, 0x25
@@ -13409,7 +13381,7 @@ lbl_fn_80685ECC_0000AFAC:
     mr r3, r25
     li r4, 0x0
     mr r5, r24
-    bl fn_806846D4
+    bl wmemchr
     cmpwi r3, 0x0
     beq lbl_fn_80685ECC_0000B234
     subf r3, r25, r3
@@ -13735,7 +13707,7 @@ lbl_fn_80686858_0000B420:
     slwi r0, r6, 1
     mr r5, r31
     add r3, r3, r0
-    bl fn_806846C4
+    bl wmemcpy
     lwz r0, 0x8(r30)
     add r0, r0, r31
     stw r0, 0x8(r30)
@@ -13747,7 +13719,7 @@ lbl_fn_80686858_0000B420:
     blr
 }
 
-asm void fn_806868C4(void)
+asm void swprintf(void)
 {
     nofralloc
     stwu r1, -0x90(r1)
@@ -13759,7 +13731,7 @@ asm void fn_806868C4(void)
     mr r29, r4
     stw r28, 0x80(r1)
     mr r28, r3
-    bne cr1, lbl_fn_806868C4_0000B4A0
+    bne cr1, lbl_swprintf_0000B4A0
     stfd f1, 0x28(r1)
     stfd f2, 0x30(r1)
     stfd f3, 0x38(r1)
@@ -13768,7 +13740,7 @@ asm void fn_806868C4(void)
     stfd f6, 0x50(r1)
     stfd f7, 0x58(r1)
     stfd f8, 0x60(r1)
-lbl_fn_806868C4_0000B4A0:
+lbl_swprintf_0000B4A0:
     addi r12, r1, 0x98
     addi r0, r1, 0x8
     lis r30, 0x300
@@ -13795,18 +13767,18 @@ lbl_fn_806868C4_0000B4A0:
     stw r31, 0x70(r1)
     bl fn_80685ECC
     cmpwi r3, 0x0
-    blt lbl_fn_806868C4_0000B530
+    blt lbl_swprintf_0000B530
     cmplw r3, r29
-    bge lbl_fn_806868C4_0000B520
+    bge lbl_swprintf_0000B520
     slwi r0, r3, 1
     sthx r31, r28, r0
-    b lbl_fn_806868C4_0000B530
-lbl_fn_806868C4_0000B520:
+    b lbl_swprintf_0000B530
+lbl_swprintf_0000B520:
     slwi r0, r29, 1
     li r3, -0x1
     add r4, r28, r0
     sth r31, -0x2(r4)
-lbl_fn_806868C4_0000B530:
+lbl_swprintf_0000B530:
     lwz r0, 0x94(r1)
     lwz r31, 0x8c(r1)
     lwz r30, 0x88(r1)
@@ -13817,7 +13789,7 @@ lbl_fn_806868C4_0000B530:
     blr
 }
 
-asm void fn_806869BC(void)
+asm void vswprintf(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -13838,18 +13810,18 @@ asm void fn_806869BC(void)
     stw r31, 0x10(r1)
     bl fn_80685ECC
     cmpwi r3, 0x0
-    blt lbl_fn_806869BC_0000B5C0
+    blt lbl_vswprintf_0000B5C0
     cmplw r3, r30
-    bge lbl_fn_806869BC_0000B5B0
+    bge lbl_vswprintf_0000B5B0
     slwi r0, r3, 1
     sthx r31, r29, r0
-    b lbl_fn_806869BC_0000B5C0
-lbl_fn_806869BC_0000B5B0:
+    b lbl_vswprintf_0000B5C0
+lbl_vswprintf_0000B5B0:
     slwi r0, r30, 1
     li r3, -0x1
     add r4, r29, r0
     sth r31, -0x2(r4)
-lbl_fn_806869BC_0000B5C0:
+lbl_vswprintf_0000B5C0:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
     lwz r30, 0x28(r1)
@@ -14240,28 +14212,16 @@ lbl_fn_80686DD4_0000BA18:
     blr
 }
 
-asm void fn_80686EA4(void)
+void abort(void)
 {
-    nofralloc
-    stwu r1, -0x10(r1)
-    mflr r0
-    li r3, 0x1
-    stw r0, 0x14(r1)
-    bl fn_80682204
-    li r0, 0x1
-    stw r0, lbl_80880358
-    li r3, 0x1
-    bl exit
-    lwz r0, 0x14(r1)
-    mtlr r0
-    addi r1, r1, 0x10
-    blr
+    ((void (*)(int))fn_80682204)(1);
+    lbl_80880358 = 1;
+    exit(1);
 }
 
-asm void fn_80686ED8(void)
+int atexit(void (*func)(void))
 {
-    nofralloc
-    b __register_atexit
+    return __register_atexit(func);
 }
 
 asm void __msl_runtime_constraint_violation_s(void)

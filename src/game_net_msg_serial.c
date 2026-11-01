@@ -7,11 +7,11 @@ extern void fn_800A5920(void);
 extern void fn_800A59F0(void);
 extern void fn_800A5AA4(void);
 extern void fn_800DD3FC(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_80239798(void);
-extern void fn_80239DAC(void);
-extern void fn_8023A8B4(void);
-extern void fn_80370174(void);
+extern void res_findResourceSlot(void);
+extern void res_registerResource(void);
+extern void world_getGlobalFlag(void);
 extern void fn_8037D4C0(void);
 extern void fn_804AC83C(void);
 extern void fn_804ACD10(void);
@@ -1368,10 +1368,10 @@ lbl_fn_804FB678_000010DC:
     mr r4, r31
     li r5, 0x0
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     mr r3, r31
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80887570
     addis r4, r31, 0x1
     lfs f1, lbl_80887590
@@ -1397,7 +1397,7 @@ lbl_fn_804FB678_000010DC:
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r3, lbl_8087F448
     cmpwi r3, 0x0
     beq lbl_fn_804FB678_00001188
@@ -1429,7 +1429,7 @@ asm void fn_804FB96C(void)
     bne lbl_fn_804FB96C_000012E8
     lwz r3, 0x5e0(r3)
     li r4, 0x25
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x1
     bne lbl_fn_804FB96C_000011DC
     li r3, 0x0

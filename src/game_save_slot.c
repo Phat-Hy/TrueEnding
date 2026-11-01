@@ -4,14 +4,14 @@
 /* External function declarations */
 extern void dtor_80084684(void);
 extern void fn_8006F548(void);
-extern void fn_80084320(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
-extern void fn_800D2338(void);
-extern void fn_800D246C(void);
-extern void fn_800DC6B4(void);
+extern void mem_alloc(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
+extern void atn_Task_unlink(void);
+extern void atn_Task_setActive(void);
+extern void str_findChar(void);
 extern void fn_800DD3FC(void);
-extern void fn_801ED928(void);
+extern void net_player_interpolateState(void);
 extern void fn_801EEF74(void);
 extern void fn_801EF9B4(void);
 extern void fn_801EFA78(void);
@@ -29,11 +29,11 @@ extern void fn_801FEDBC(void);
 extern void fn_801FEE08(void);
 extern void fn_801FEEFC(void);
 extern void fn_801FEF40(void);
-extern void fn_801FFA04(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
-extern void fn_80473E8C(void);
-extern void fn_80473F50(void);
+extern void player_clock_updateIntervals(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
+extern void atn_LoadHandle_destructor(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
@@ -56,7 +56,7 @@ extern u32 lbl_80882C94;
 
 /* Function declarations */
 void fn_801F4230(void);
-void fn_801F42A8(void);
+void saveSlot_updateLoadState(void);
 void fn_801F43E8(void);
 void fn_801F4484(void);
 void fn_801F4514(void);
@@ -73,7 +73,7 @@ void fn_801F4CB4(void);
 void fn_801F4D80(void);
 void fn_801F4DDC(void);
 void fn_801F4E30(void);
-void fn_801F4E8C(void);
+void saveSlot_readSummary(void);
 void fn_801F4F08(void);
 void fn_801F4F84(void);
 void fn_801F4FF4(void);
@@ -101,14 +101,14 @@ asm void fn_801F4230(void)
     addic. r3, r3, 0xf0
     beq lbl_fn_801F4230_00000034
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_801F4230_00000034:
     addi r3, r30, 0x48
     li r4, -0x1
     bl fn_801EEF74
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r31, 0x0
     ble lbl_fn_801F4230_0000005C
     mr r3, r30
@@ -123,7 +123,7 @@ lbl_fn_801F4230_0000005C:
     blr
 }
 
-asm void fn_801F42A8(void)
+asm void saveSlot_updateLoadState(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -134,80 +134,80 @@ asm void fn_801F42A8(void)
     mr r30, r3
     lwz r0, 0xf8(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_801F42A8_000000B8
+    beq lbl_saveSlot_updateLoadState_000000B8
     cmpwi r0, 0x1
-    beq lbl_fn_801F42A8_000000C4
+    beq lbl_saveSlot_updateLoadState_000000C4
     cmpwi r0, 0x2
-    beq lbl_fn_801F42A8_00000174
+    beq lbl_saveSlot_updateLoadState_00000174
     cmpwi r0, 0x3
-    beq lbl_fn_801F42A8_00000194
-    b lbl_fn_801F42A8_0000019C
-lbl_fn_801F42A8_000000B8:
+    beq lbl_saveSlot_updateLoadState_00000194
+    b lbl_saveSlot_updateLoadState_0000019C
+lbl_saveSlot_updateLoadState_000000B8:
     li r0, 0x1
     stw r0, 0xf8(r3)
-    b lbl_fn_801F42A8_0000019C
-lbl_fn_801F42A8_000000C4:
+    b lbl_saveSlot_updateLoadState_0000019C
+lbl_saveSlot_updateLoadState_000000C4:
     addi r3, r3, 0xf0
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
-    bne lbl_fn_801F42A8_0000019C
+    bne lbl_saveSlot_updateLoadState_0000019C
     lwz r3, lbl_8087F138
     addi r3, r3, 0x168
     bl fn_801F362C
     cmpwi r3, 0x0
-    bne lbl_fn_801F42A8_0000019C
+    bne lbl_saveSlot_updateLoadState_0000019C
     addi r3, r30, 0xf0
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
-    beq lbl_fn_801F42A8_00000164
+    beq lbl_saveSlot_updateLoadState_00000164
     lwz r0, 0xfc(r30)
     addi r3, r30, 0xf0
     oris r0, r0, 0x800
     stw r0, 0xfc(r30)
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r31, r3
     addi r3, r30, 0xf0
-    bl fn_80470580
+    bl boss_getOffset54
     lwz r6, lbl_8087F138
     mr r4, r31
     addi r5, r30, 0x48
     li r7, 0x1
     addi r6, r6, 0x168
-    bl fn_801FFA04
+    bl player_clock_updateIntervals
     addi r3, r30, 0x48
     bl fn_801EFB00
     addi r3, r30, 0xf0
     bl fn_80473F88
     lwz r0, 0xfc(r30)
     srawi. r0, r0, 31
-    beq lbl_fn_801F42A8_00000158
+    beq lbl_saveSlot_updateLoadState_00000158
     li r0, 0x3
     stw r0, 0xf8(r30)
-    b lbl_fn_801F42A8_0000019C
-lbl_fn_801F42A8_00000158:
+    b lbl_saveSlot_updateLoadState_0000019C
+lbl_saveSlot_updateLoadState_00000158:
     li r0, 0x2
     stw r0, 0xf8(r30)
-    b lbl_fn_801F42A8_0000019C
-lbl_fn_801F42A8_00000164:
+    b lbl_saveSlot_updateLoadState_0000019C
+lbl_saveSlot_updateLoadState_00000164:
     li r0, 0x4
     stw r0, 0xf8(r30)
     li r3, 0x1
-    b lbl_fn_801F42A8_000001A0
-lbl_fn_801F42A8_00000174:
+    b lbl_saveSlot_updateLoadState_000001A0
+lbl_saveSlot_updateLoadState_00000174:
     addi r3, r3, 0x48
     bl fn_801EF9B4
     cmpwi r3, 0x0
-    bne lbl_fn_801F42A8_0000019C
+    bne lbl_saveSlot_updateLoadState_0000019C
     li r0, 0x3
     stw r0, 0xf8(r30)
     li r3, 0x1
-    b lbl_fn_801F42A8_000001A0
-lbl_fn_801F42A8_00000194:
+    b lbl_saveSlot_updateLoadState_000001A0
+lbl_saveSlot_updateLoadState_00000194:
     li r3, 0x1
-    b lbl_fn_801F42A8_000001A0
-lbl_fn_801F42A8_0000019C:
+    b lbl_saveSlot_updateLoadState_000001A0
+lbl_saveSlot_updateLoadState_0000019C:
     li r3, 0x0
-lbl_fn_801F42A8_000001A0:
+lbl_saveSlot_updateLoadState_000001A0:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -479,7 +479,7 @@ asm void fn_801F4728(void)
     mr r29, r3
     mr r3, r30
     lfs f31, 0x0(r5)
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r29, 0x58
@@ -487,7 +487,7 @@ asm void fn_801F4728(void)
     bl fn_801FED24
     lfs f31, 0x4(r31)
     mr r3, r30
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r29, 0x58
@@ -495,7 +495,7 @@ asm void fn_801F4728(void)
     bl fn_801FED24
     lfs f31, 0x8(r31)
     mr r3, r30
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r29, 0x58
@@ -503,7 +503,7 @@ asm void fn_801F4728(void)
     bl fn_801FED24
     lfs f31, 0xc(r31)
     mr r3, r30
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r29, 0x58
@@ -511,7 +511,7 @@ asm void fn_801F4728(void)
     bl fn_801FED24
     lfs f31, 0x10(r31)
     mr r3, r30
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r29, 0x58
@@ -544,7 +544,7 @@ asm void fn_801F4818(void)
     mr r29, r3
     mr r3, r30
     lfs f31, 0x0(r5)
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r29, 0x58
@@ -552,7 +552,7 @@ asm void fn_801F4818(void)
     bl fn_801FED24
     lfs f31, 0x4(r31)
     mr r3, r30
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r29, 0x58
@@ -560,7 +560,7 @@ asm void fn_801F4818(void)
     bl fn_801FED24
     lfs f31, 0x10(r31)
     mr r3, r30
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r29, 0x58
@@ -593,7 +593,7 @@ asm void fn_801F48C8(void)
     mr r29, r3
     mr r3, r30
     lfs f31, 0x0(r5)
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r29, 0x58
@@ -601,7 +601,7 @@ asm void fn_801F48C8(void)
     bl fn_801FED70
     lfs f31, 0x4(r31)
     mr r3, r30
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r29, 0x58
@@ -609,7 +609,7 @@ asm void fn_801F48C8(void)
     bl fn_801FED70
     lfs f31, 0x8(r31)
     mr r3, r30
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r29, 0x58
@@ -617,7 +617,7 @@ asm void fn_801F48C8(void)
     bl fn_801FED70
     lfs f31, 0xc(r31)
     mr r3, r30
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r29, 0x58
@@ -651,7 +651,7 @@ asm void fn_801F4998(void)
     mr r3, r29
     stw r0, 0x8(r1)
     stw r0, 0x10(r1)
-    bl fn_800DC6B4
+    bl str_findChar
     srwi r0, r30, 24
     stw r0, 0xc(r1)
     lis r31, lbl_8073E408@ha
@@ -663,7 +663,7 @@ asm void fn_801F4998(void)
     fsubs f1, f0, f1
     bl fn_801FEDBC
     mr r3, r29
-    bl fn_800DC6B4
+    bl str_findChar
     extrwi r0, r30, 8, 8
     stw r0, 0x14(r1)
     mr r4, r3
@@ -674,7 +674,7 @@ asm void fn_801F4998(void)
     fsubs f1, f0, f1
     bl fn_801FEDBC
     mr r3, r29
-    bl fn_800DC6B4
+    bl str_findChar
     extrwi r0, r30, 8, 16
     stw r0, 0xc(r1)
     mr r4, r3
@@ -685,7 +685,7 @@ asm void fn_801F4998(void)
     fsubs f1, f0, f1
     bl fn_801FEDBC
     mr r3, r29
-    bl fn_800DC6B4
+    bl str_findChar
     clrlwi r0, r30, 24
     stw r0, 0x14(r1)
     mr r4, r3
@@ -722,21 +722,21 @@ asm void fn_801F4AA0(void)
     stw r30, 0x10(r1)
     mr r30, r3
     mr r3, r31
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f29
     mr r4, r3
     addi r3, r30, 0x58
     li r5, 0x1
     bl fn_801FEDBC
     mr r3, r31
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f30
     mr r4, r3
     addi r3, r30, 0x58
     li r5, 0x2
     bl fn_801FEDBC
     mr r3, r31
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r30, 0x58
@@ -771,7 +771,7 @@ asm void fn_801F4B4C(void)
     mr r3, r30
     lfs f0, 0x0(r5)
     fmuls f31, f1, f0
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r29, 0x58
@@ -781,7 +781,7 @@ asm void fn_801F4B4C(void)
     mr r3, r30
     lfs f0, 0x4(r31)
     fmuls f31, f1, f0
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r29, 0x58
@@ -791,7 +791,7 @@ asm void fn_801F4B4C(void)
     mr r3, r30
     lfs f0, 0x8(r31)
     fmuls f31, f1, f0
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r29, 0x58
@@ -836,7 +836,7 @@ lbl_fn_801F4C14_00000A38:
     lwz r31, 0x10(r1)
 lbl_fn_801F4C14_00000A3C:
     mr r3, r30
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r5, r31
     addi r3, r29, 0x58
@@ -901,7 +901,7 @@ lbl_fn_801F4CB4_00000B08:
     crclr 6
     bl fn_800DD3FC
     mr r3, r30
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     addi r3, r29, 0x58
     addi r5, r1, 0x48
@@ -926,7 +926,7 @@ asm void fn_801F4D80(void)
     stw r30, 0x8(r1)
     mr r30, r3
     mr r3, r4
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     addi r3, r30, 0x48
     bl fn_801EFA78
@@ -955,7 +955,7 @@ asm void fn_801F4DDC(void)
     stw r31, 0x14(r1)
     mr r31, r3
     mr r3, r4
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     addi r3, r31, 0x48
     bl fn_801EFA78
@@ -982,7 +982,7 @@ asm void fn_801F4E30(void)
     stw r30, 0x8(r1)
     mr r30, r3
     mr r3, r4
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     addi r3, r30, 0x48
     bl fn_801EFA78
@@ -1000,7 +1000,7 @@ lbl_fn_801F4E30_00000C44:
     blr
 }
 
-asm void fn_801F4E8C(void)
+asm void saveSlot_readSummary(void)
 {
     nofralloc
     stwu r1, -0x40(r1)
@@ -1019,7 +1019,7 @@ asm void fn_801F4E8C(void)
     addi r3, r6, 0x48
     bl fn_801EFA78
     cmpwi r3, 0x0
-    beq lbl_fn_801F4E8C_00000CC4
+    beq lbl_saveSlot_readSummary_00000CC4
     lfs f0, lbl_80882C80
     li r0, 0x0
     stfs f0, 0x8(r1)
@@ -1028,8 +1028,8 @@ asm void fn_801F4E8C(void)
     addi r6, r1, 0x8
     stw r0, 0xc(r1)
     addi r7, r1, 0x20
-    bl fn_801ED928
-lbl_fn_801F4E8C_00000CC4:
+    bl net_player_interpolateState
+lbl_saveSlot_readSummary_00000CC4:
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     mtlr r0
@@ -1065,7 +1065,7 @@ asm void fn_801F4F08(void)
     addi r6, r1, 0x8
     stw r0, 0xc(r1)
     addi r7, r1, 0x10
-    bl fn_801ED928
+    bl net_player_interpolateState
 lbl_fn_801F4F08_00000D40:
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)
@@ -1096,7 +1096,7 @@ asm void fn_801F4F84(void)
     mr r5, r29
     mr r6, r30
     mr r7, r31
-    bl fn_801ED928
+    bl net_player_interpolateState
 lbl_fn_801F4F84_00000DA4:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1128,12 +1128,12 @@ asm void fn_801F4FF4(void)
     li r4, 0x8
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_801F4FF4_00000F6C
     mr r4, r28
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_80782CF0@ha
     addi r3, r3, lbl_80782CF0@l
     stw r3, 0x0(r31)
@@ -1145,7 +1145,7 @@ asm void fn_801F4FF4(void)
     mr r6, r5
     li r4, 0x1
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_801F4FF4_00000E60
     li r0, 0x0
@@ -1155,7 +1155,7 @@ lbl_fn_801F4FF4_00000E60:
 lbl_fn_801F4FF4_00000E64:
     lwz r30, lbl_8087F148
     mr r3, r29
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r0, 0x0(r30)
     mr r5, r30
     li r4, 0x0
@@ -1185,7 +1185,7 @@ lbl_fn_801F4FF4_00000EBC:
     bl fn_801F3FF8
     stw r3, 0xc(r1)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r0, 0x0(r30)
     li r3, 0x1
     stw r3, 0x10(r1)
@@ -1266,7 +1266,7 @@ asm void fn_801F51C8(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_801F51C8_00001008
     li r0, 0x0
@@ -1293,7 +1293,7 @@ lbl_fn_801F51C8_0000102C:
     subic. r0, r4, 0x1
     stw r0, 0x8(r28)
     bgt lbl_fn_801F51C8_000010C4
-    bl fn_800D2338
+    bl atn_Task_unlink
     addi r0, r31, 0x4
     lis r3, 0x2aab
     subf r0, r0, r28
@@ -1339,7 +1339,7 @@ lbl_fn_801F51C8_000010E8:
     beq lbl_fn_801F51C8_000010FC
     mr r3, r29
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
 lbl_fn_801F51C8_000010FC:
     cmpwi r30, 0x0
     ble lbl_fn_801F51C8_0000110C
@@ -1372,7 +1372,7 @@ asm void fn_801F5360(void)
     bne lbl_fn_801F5360_0000117C
     mr r3, r4
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r4, 0x48(r31)
     li r3, 0x1
     lwz r0, 0x38(r4)
@@ -1595,7 +1595,7 @@ asm void fn_801F5644(void)
     mr r3, r4
     stb r0, 0x8(r1)
     stb r0, 0x9(r1)
-    bl fn_800DC6B4
+    bl str_findChar
     lbz r4, 0x9(r1)
     mr r7, r31
     lbz r0, 0x8(r1)
@@ -1668,7 +1668,7 @@ asm void fn_801F5740(void)
     mr r3, r4
     stb r0, 0x8(r1)
     stb r5, 0x9(r1)
-    bl fn_800DC6B4
+    bl str_findChar
     lbz r4, 0x9(r1)
     mr r7, r31
     lbz r0, 0x8(r1)
@@ -1747,7 +1747,7 @@ asm void fn_801F583C(void)
     stb r6, 0x2c(r1)
     lfs f31, 0x0(r5)
     stb r0, 0x2d(r1)
-    bl fn_800DC6B4
+    bl str_findChar
     lbz r4, 0x2d(r1)
     mr r7, r29
     lbz r0, 0x2c(r1)
@@ -1804,7 +1804,7 @@ lbl_fn_801F583C_00001708:
     mr r3, r30
     lfs f31, 0x4(r31)
     stb r0, 0x21(r1)
-    bl fn_800DC6B4
+    bl str_findChar
     lbz r4, 0x21(r1)
     mr r7, r29
     lbz r0, 0x20(r1)
@@ -1860,7 +1860,7 @@ lbl_fn_801F583C_000017D8:
     lfs f31, 0x8(r31)
     mr r3, r30
     stb r0, 0x15(r1)
-    bl fn_800DC6B4
+    bl str_findChar
     lbz r4, 0x15(r1)
     mr r7, r29
     lbz r0, 0x14(r1)
@@ -1917,7 +1917,7 @@ lbl_fn_801F583C_000018A4:
     mr r3, r30
     lfs f31, 0xc(r31)
     stb r0, 0x9(r1)
-    bl fn_800DC6B4
+    bl str_findChar
     lbz r4, 0x9(r1)
     mr r7, r29
     lbz r0, 0x8(r1)

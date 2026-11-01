@@ -24,17 +24,17 @@ extern void fn_800B3978(void);
 extern void fn_800B64DC(void);
 extern void fn_800BFAC8(void);
 extern void fn_800C0D4C(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9420(void);
-extern void fn_805F9990(void);
-extern void fn_805F99B0(void);
+extern void PSMTXMultVec(void);
+extern void PSMTXMultVecArray(void);
+extern void PSVECDotProduct(void);
+extern void PSVECCrossProduct(void);
 extern void fn_80615E00(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
 extern void fn_8067E23C(void);
 extern void fn_8068A6D8(void);
 extern void fn_8068A918(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 
 /* External data declarations */
 extern u8 lbl_80732E28[];
@@ -760,15 +760,15 @@ lbl_fn_800B47AC_00000970:
     addi r4, r1, 0xc4
     mr r3, r23
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r4, r1, 0xb8
     mr r3, r23
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r4, r1, 0xac
     mr r3, r23
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
 lbl_fn_800B47AC_000009A8:
     lwz r31, lbl_8087EFB4
     addi r3, r1, 0x2c
@@ -804,10 +804,10 @@ lbl_fn_800B47AC_000009A8:
     stfs f0, 0x38(r1)
     stfs f3, 0x3c(r1)
     stfs f7, 0x40(r1)
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     addi r3, r1, 0x44
     addi r4, r1, 0x20
-    bl fn_805F9990
+    bl PSVECDotProduct
     fcmpo cr0, f1, f31
     bge lbl_fn_800B47AC_00000D80
     lwz r3, lbl_8087EFA8
@@ -831,7 +831,7 @@ lbl_fn_800B47AC_00000A7C:
     b lbl_fn_800B47AC_00000A98
 lbl_fn_800B47AC_00000A90:
     fmadds f1, f29, f31, f30
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800B47AC_00000A98:
     mr r17, r3
 lbl_fn_800B47AC_00000A9C:
@@ -849,7 +849,7 @@ lbl_fn_800B47AC_00000AB4:
     b lbl_fn_800B47AC_00000AD0
 lbl_fn_800B47AC_00000AC8:
     fmadds f1, f29, f0, f30
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800B47AC_00000AD0:
     mr r16, r3
 lbl_fn_800B47AC_00000AD4:
@@ -867,7 +867,7 @@ lbl_fn_800B47AC_00000AEC:
     b lbl_fn_800B47AC_00000B08
 lbl_fn_800B47AC_00000B00:
     fmadds f1, f29, f0, f30
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800B47AC_00000B08:
     mr r15, r3
 lbl_fn_800B47AC_00000B0C:
@@ -885,7 +885,7 @@ lbl_fn_800B47AC_00000B24:
     b lbl_fn_800B47AC_00000B40
 lbl_fn_800B47AC_00000B38:
     fmadds f1, f29, f0, f30
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800B47AC_00000B40:
     slwi r0, r17, 16
     slwi r3, r3, 24
@@ -912,7 +912,7 @@ lbl_fn_800B47AC_00000B84:
     b lbl_fn_800B47AC_00000BA0
 lbl_fn_800B47AC_00000B98:
     fmadds f1, f29, f0, f30
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800B47AC_00000BA0:
     mr r17, r3
 lbl_fn_800B47AC_00000BA4:
@@ -930,7 +930,7 @@ lbl_fn_800B47AC_00000BBC:
     b lbl_fn_800B47AC_00000BD8
 lbl_fn_800B47AC_00000BD0:
     fmadds f1, f29, f0, f30
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800B47AC_00000BD8:
     mr r16, r3
 lbl_fn_800B47AC_00000BDC:
@@ -948,7 +948,7 @@ lbl_fn_800B47AC_00000BF4:
     b lbl_fn_800B47AC_00000C10
 lbl_fn_800B47AC_00000C08:
     fmadds f1, f29, f0, f30
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800B47AC_00000C10:
     mr r15, r3
 lbl_fn_800B47AC_00000C14:
@@ -966,7 +966,7 @@ lbl_fn_800B47AC_00000C2C:
     b lbl_fn_800B47AC_00000C48
 lbl_fn_800B47AC_00000C40:
     fmadds f1, f29, f0, f30
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800B47AC_00000C48:
     slwi r0, r17, 16
     slwi r3, r3, 24
@@ -993,7 +993,7 @@ lbl_fn_800B47AC_00000C8C:
     b lbl_fn_800B47AC_00000CA8
 lbl_fn_800B47AC_00000CA0:
     fmadds f1, f29, f0, f30
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800B47AC_00000CA8:
     mr r17, r3
 lbl_fn_800B47AC_00000CAC:
@@ -1011,7 +1011,7 @@ lbl_fn_800B47AC_00000CC4:
     b lbl_fn_800B47AC_00000CE0
 lbl_fn_800B47AC_00000CD8:
     fmadds f1, f29, f0, f30
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800B47AC_00000CE0:
     mr r16, r3
 lbl_fn_800B47AC_00000CE4:
@@ -1029,7 +1029,7 @@ lbl_fn_800B47AC_00000CFC:
     b lbl_fn_800B47AC_00000D18
 lbl_fn_800B47AC_00000D10:
     fmadds f1, f29, f0, f30
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800B47AC_00000D18:
     mr r15, r3
 lbl_fn_800B47AC_00000D1C:
@@ -1047,7 +1047,7 @@ lbl_fn_800B47AC_00000D34:
     b lbl_fn_800B47AC_00000D50
 lbl_fn_800B47AC_00000D48:
     fmadds f1, f29, f0, f30
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800B47AC_00000D50:
     slwi r0, r17, 16
     slwi r3, r3, 24
@@ -1099,7 +1099,7 @@ lbl_fn_800B47AC_00000DF4:
     b lbl_fn_800B47AC_00000E10
 lbl_fn_800B47AC_00000E08:
     fmadds f1, f29, f28, f30
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800B47AC_00000E10:
     mr r17, r3
 lbl_fn_800B47AC_00000E14:
@@ -1117,7 +1117,7 @@ lbl_fn_800B47AC_00000E2C:
     b lbl_fn_800B47AC_00000E48
 lbl_fn_800B47AC_00000E40:
     fmadds f1, f29, f0, f30
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800B47AC_00000E48:
     mr r16, r3
 lbl_fn_800B47AC_00000E4C:
@@ -1135,7 +1135,7 @@ lbl_fn_800B47AC_00000E64:
     b lbl_fn_800B47AC_00000E80
 lbl_fn_800B47AC_00000E78:
     fmadds f1, f29, f0, f30
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800B47AC_00000E80:
     mr r15, r3
 lbl_fn_800B47AC_00000E84:
@@ -1153,7 +1153,7 @@ lbl_fn_800B47AC_00000E9C:
     b lbl_fn_800B47AC_00000EB8
 lbl_fn_800B47AC_00000EB0:
     fmadds f1, f29, f0, f30
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800B47AC_00000EB8:
     slwi r0, r17, 16
     slwi r3, r3, 24
@@ -1180,7 +1180,7 @@ lbl_fn_800B47AC_00000EFC:
     b lbl_fn_800B47AC_00000F18
 lbl_fn_800B47AC_00000F10:
     fmadds f1, f29, f0, f30
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800B47AC_00000F18:
     mr r17, r3
 lbl_fn_800B47AC_00000F1C:
@@ -1198,7 +1198,7 @@ lbl_fn_800B47AC_00000F34:
     b lbl_fn_800B47AC_00000F50
 lbl_fn_800B47AC_00000F48:
     fmadds f1, f29, f0, f30
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800B47AC_00000F50:
     mr r16, r3
 lbl_fn_800B47AC_00000F54:
@@ -1216,7 +1216,7 @@ lbl_fn_800B47AC_00000F6C:
     b lbl_fn_800B47AC_00000F88
 lbl_fn_800B47AC_00000F80:
     fmadds f1, f29, f0, f30
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800B47AC_00000F88:
     mr r15, r3
 lbl_fn_800B47AC_00000F8C:
@@ -1234,7 +1234,7 @@ lbl_fn_800B47AC_00000FA4:
     b lbl_fn_800B47AC_00000FC0
 lbl_fn_800B47AC_00000FB8:
     fmadds f1, f29, f0, f30
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800B47AC_00000FC0:
     slwi r0, r17, 16
     slwi r3, r3, 24
@@ -1261,7 +1261,7 @@ lbl_fn_800B47AC_00001004:
     b lbl_fn_800B47AC_00001020
 lbl_fn_800B47AC_00001018:
     fmadds f1, f29, f0, f30
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800B47AC_00001020:
     mr r15, r3
 lbl_fn_800B47AC_00001024:
@@ -1279,7 +1279,7 @@ lbl_fn_800B47AC_0000103C:
     b lbl_fn_800B47AC_00001058
 lbl_fn_800B47AC_00001050:
     fmadds f1, f29, f0, f30
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800B47AC_00001058:
     mr r16, r3
 lbl_fn_800B47AC_0000105C:
@@ -1297,7 +1297,7 @@ lbl_fn_800B47AC_00001074:
     b lbl_fn_800B47AC_00001090
 lbl_fn_800B47AC_00001088:
     fmadds f1, f29, f0, f30
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800B47AC_00001090:
     mr r17, r3
 lbl_fn_800B47AC_00001094:
@@ -1315,7 +1315,7 @@ lbl_fn_800B47AC_000010AC:
     b lbl_fn_800B47AC_000010C8
 lbl_fn_800B47AC_000010C0:
     fmadds f1, f29, f0, f30
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800B47AC_000010C8:
     slwi r0, r15, 16
     slwi r3, r3, 24
@@ -2022,7 +2022,7 @@ lbl_fn_800B5994_0000199C:
     stfs f2, 0x7c(r1)
     psq_st f1, 0x0(r31), 0, 0
     stfs f2, 0x10c(r1)
-    bl fn_805F9420
+    bl PSMTXMultVecArray
     addi r4, r1, 0x8
     addi r3, r1, 0x14
     psq_l f1, 0x0(r24), 0, 0

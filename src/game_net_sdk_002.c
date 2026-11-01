@@ -12,7 +12,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_8069A15C(void);
 extern void fn_8069A1A8(void);
 extern void fn_8069A574(void);
@@ -617,7 +617,7 @@ asm void fn_8069C7B4(void)
 asm void fn_8069C7B8(void)
 {
     nofralloc
-    b fn_80682428
+    b strcmp
 }
 
 asm void fn_8069C7BC(void)

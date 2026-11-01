@@ -11,7 +11,7 @@ extern void _restgpr_25(void);
 extern void _savegpr_14(void);
 extern void _savegpr_17(void);
 extern void _savegpr_25(void);
-extern void fn_805F93C0(void);
+extern void PSMTXMultVec(void);
 extern void fn_80653EE0(void);
 extern void fn_806583E0(void);
 extern void fn_80658F30(void);
@@ -938,7 +938,7 @@ lbl_fn_80654700_00000AEC:
     lis r3, lbl_80829D38@ha
     mr r5, r4
     addi r3, r3, lbl_80829D38@l
-    bl fn_805F93C0
+    bl PSMTXMultVec
 lbl_fn_80654700_00000B0C:
     lwz r6, 0x68(r30)
     mr r3, r30

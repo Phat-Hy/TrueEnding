@@ -440,10 +440,8 @@ asm void fn_806099F0(void)
     b OSWakeupThread
 }
 
-asm void fn_80609A00(void)
+void fn_80609A00(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_80609A10(void)

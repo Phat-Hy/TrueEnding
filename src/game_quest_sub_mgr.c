@@ -6,8 +6,8 @@ extern void fn_80079044(void);
 extern void fn_800C16B4(void);
 extern void fn_800C2448(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
-extern void fn_800DC6B4(void);
+extern void ref_releaseHandle(void);
+extern void str_findChar(void);
 extern void fn_801FED24(void);
 extern void fn_80373148(void);
 extern void fn_8041D180(void);
@@ -17,7 +17,7 @@ extern void fn_8049003C(void);
 extern void fn_80490098(void);
 extern void fn_80491528(void);
 extern void fn_80541214(void);
-extern void fn_805F98D0(void);
+extern void PSVECNormalize(void);
 
 /* External data declarations */
 extern u8 lbl_80756380[];
@@ -397,7 +397,7 @@ lbl_fn_80481818_000003C0:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r4, 0x48(r31)
     addi r3, r30, 0x27d
     lfs f31, lbl_80887008
@@ -412,7 +412,7 @@ lbl_fn_80481818_000003C0:
     stfs f0, 0x1c(r1)
     stfs f1, 0x10(r1)
     stfs f1, 0x14(r1)
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -422,7 +422,7 @@ lbl_fn_80481818_000003C0:
     addi r3, r30, 0x27d
     lfs f31, 0x1c(r1)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -432,7 +432,7 @@ lbl_fn_80481818_000003C0:
     addi r3, r30, 0x27d
     lfs f31, 0x10(r1)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -442,7 +442,7 @@ lbl_fn_80481818_000003C0:
     addi r3, r30, 0x27d
     lfs f31, 0x14(r1)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -651,7 +651,7 @@ asm void fn_80481B9C(void)
     stfs f2, 0x10(r1)
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0x1c(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f8, lbl_80886F8C
     addi r12, r1, 0x110
     lfs f9, lbl_80886F90

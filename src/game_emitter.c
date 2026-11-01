@@ -8,11 +8,11 @@ extern void dtor_80084684(void);
 extern void fn_80044C50(void);
 extern void fn_80044CCC(void);
 extern void fn_80044E0C(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_8008BBD8(void);
-extern void fn_800D2338(void);
-extern void fn_800D246C(void);
+extern void atn_Task_unlink(void);
+extern void atn_Task_setActive(void);
 extern void fn_800E0B18(void);
 extern void fn_800E3E78(void);
 extern void fn_800E3EA4(void);
@@ -26,10 +26,10 @@ extern void fn_8011D1FC(void);
 extern void fn_8011D21C(void);
 extern void fn_801354B4(void);
 extern void fn_80136138(void);
-extern void fn_8013655C(void);
+extern void boss_updatePhaseState(void);
 extern void fn_80139560(void);
 extern void fn_80145334(void);
-extern void fn_80148B38(void);
+extern void quest_checkCondition(void);
 extern void fn_8014C540(void);
 extern void fn_8014F2B4(void);
 extern void fn_8014FB60(void);
@@ -47,19 +47,19 @@ extern void fn_801A6750(void);
 extern void fn_80210220(void);
 extern void fn_8021446C(void);
 extern void fn_80219344(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_8036DAA8(void);
-extern void fn_80370174(void);
+extern void world_getGlobalFlag(void);
 extern void fn_803EA77C(void);
 extern void fn_80481668(void);
 extern void fn_8059B670(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9750(void);
-extern void fn_805F9920(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
-extern void fn_8068AEA4(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSMTX44Identity(void);
+extern void PSVECSquareMag(void);
+extern void printf(void);
+extern void abort(void);
+extern void std_atan2(void);
 extern void fn_8068B770(void);
 extern void fn_8068BC30(void);
 extern void fn_8068BD60(void);
@@ -545,8 +545,8 @@ lbl_fn_800E2778_000004E0:
     addi r4, r4, 0x58
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_800E2778_0000050C:
     lwz r0, 0x8(r1)
     subf r3, r23, r28
@@ -573,8 +573,8 @@ lbl_fn_800E2778_0000054C:
     addi r4, r4, 0x73
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_800E2778_00000570:
     add r30, r24, r30
     add r0, r23, r26
@@ -593,7 +593,7 @@ lbl_fn_800E2778_000005A0:
     cmplw r27, r0
     blt lbl_fn_800E2778_00000594
     mr r3, r27
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r21, r3
     bne lbl_fn_800E2778_000005DC
@@ -603,8 +603,8 @@ lbl_fn_800E2778_000005A0:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80775AC0@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_800E2778_000005DC:
     cmpwi r23, 0x0
     beq lbl_fn_800E2778_000005F4
@@ -957,7 +957,7 @@ asm void fn_800E2D4C(void)
     cmpwi r0, 0x0
     beq lbl_fn_800E2D4C_00000AB4
     mr r3, r5
-    bl fn_800D2338
+    bl atn_Task_unlink
 lbl_fn_800E2D4C_00000AB4:
     mr r3, r30
     li r4, 0x0
@@ -986,7 +986,7 @@ asm void fn_800E2DD4(void)
     li r31, 0x1
     stw r30, 0x18(r1)
     mr r30, r3
-    bl fn_8013655C
+    bl boss_updatePhaseState
     cmpwi r3, 0x0
     beq lbl_fn_800E2DD4_00000B18
     li r31, 0x0
@@ -1018,7 +1018,7 @@ lbl_fn_800E2DD4_00000B60:
     stw r0, 0x14a8(r30)
     beq lbl_fn_800E2DD4_00000C14
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x1438(r30)
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
@@ -1047,7 +1047,7 @@ lbl_fn_800E2DD4_00000BCC:
     cmpwi r3, 0x0
     beq lbl_fn_800E2DD4_00000C14
     li r4, 0x11b
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     ble lbl_fn_800E2DD4_00000C14
     lwz r3, 0x1438(r30)
@@ -1315,7 +1315,7 @@ lbl_fn_800E2FE0_00000F7C:
     stw r3, 0x638(r30)
     li r3, 0x2c
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_800E2FE0_00000FF0
@@ -1334,7 +1334,7 @@ lbl_fn_800E2FE0_00000FF0:
     cmpwi r0, 0x0
     beq lbl_fn_800E2FE0_00001084
     lwz r3, 0x1488(r30)
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r4, r3
     li r0, 0x0
     lis r7, lbl_807C7030@ha
@@ -1371,7 +1371,7 @@ lbl_fn_800E2FE0_00001084:
     cmpwi r0, 0x0
     beq lbl_fn_800E2FE0_00001300
     lwz r3, 0x1488(r30)
-    bl fn_80219E6C
+    bl task_findEntryById
     lbz r0, lbl_8087F028
     lis r4, lbl_80779AD8@ha
     lwzu r10, lbl_80779AD8@l(r4)
@@ -1579,7 +1579,7 @@ lbl_fn_800E2FE0_00001324:
     stw r3, 0x638(r30)
     li r3, 0x30
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_800E2FE0_000013DC
@@ -1662,7 +1662,7 @@ lbl_fn_800E2FE0_000014E0:
 lbl_fn_800E2FE0_000014E8:
     fmr f2, f3
     lfs f1, 0x164(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x84(r1)
 lbl_fn_800E2FE0_000014FC:
@@ -1670,7 +1670,7 @@ lbl_fn_800E2FE0_000014FC:
     addi r3, r1, 0x258
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_808812DC
     addi r4, r1, 0x74
     lfs f30, 0x260(r1)
@@ -1720,7 +1720,7 @@ lbl_fn_800E2FE0_000014FC:
     stfs f6, 0x2b4(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x7c(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x7c(r1)
     lfs f0, lbl_808812FC
     fabs f3, f2
@@ -1741,7 +1741,7 @@ lbl_fn_800E2FE0_0000160C:
     b lbl_fn_800E2FE0_0000162C
 lbl_fn_800E2FE0_00001618:
     lfs f1, 0x78(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x80(r1)
@@ -2001,9 +2001,9 @@ lbl_fn_800E2FE0_0000198C:
     stfs f4, 0x150(r1)
     stfs f0, 0x14c(r1)
     stfs f6, 0x154(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     mr r3, r30
-    bl fn_80148B38
+    bl quest_checkCondition
 lbl_fn_800E2FE0_000019D0:
     lwz r0, 0x48(r30)
     cmpwi r0, 0x2
@@ -2093,11 +2093,11 @@ lbl_fn_800E2FE0_00001A94:
     stfs f3, 0x138(r1)
     stfs f0, 0x13c(r1)
     lfs f1, 0x538(r30)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x134
     addi r3, r1, 0x228
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f4, 0x13c(r1)
     mr r3, r30
     lfs f3, 0x138(r1)

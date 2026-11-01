@@ -10,16 +10,16 @@ extern void fn_8004B290(void);
 extern void fn_8004B338(void);
 extern void fn_800697D8(void);
 extern void fn_8007708C(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_80084A78(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800897D8(void);
 extern void fn_800CFBA0(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
-extern void fn_800D2338(void);
-extern void fn_800D246C(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
+extern void atn_Task_unlink(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DCA6C(void);
 extern void fn_801F3FF8(void);
@@ -27,20 +27,20 @@ extern void fn_802085E0(void);
 extern void fn_80208694(void);
 extern void fn_8021771C(void);
 extern void fn_8021F09C(void);
-extern void fn_80232B7C(void);
-extern void fn_802377B8(void);
-extern void fn_8023780C(void);
-extern void fn_8023781C(void);
-extern void fn_80237874(void);
-extern void fn_8023A8B4(void);
-extern void fn_80370174(void);
-extern void fn_80370320(void);
+extern void sound_initGlobalInstances(void);
+extern void res_MsgHandle_constructor(void);
+extern void res_MsgHandle_destructor(void);
+extern void res_MsgHandle_unload(void);
+extern void res_MsgHandle_update(void);
+extern void res_registerResource(void);
+extern void world_getGlobalFlag(void);
+extern void world_setGlobalFlag(void);
 extern void fn_803754F0(void);
 extern void fn_803B27F8(void);
 extern void fn_803B8E60(void);
 extern void fn_803BDEE4(void);
 extern void fn_803BE8C0(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_80481668(void);
 extern void fn_804A39EC(void);
 extern void fn_8056B3D8(void);
@@ -49,10 +49,10 @@ extern void fn_80570A18(void);
 extern void fn_80570A44(void);
 extern void fn_805B9F54(void);
 extern void fn_805BC6CC(void);
-extern void fn_80682544(void);
-extern void fn_80684600(void);
+extern void strncmp(void);
+extern void atoi(void);
 extern void fn_806952C4(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -162,11 +162,11 @@ asm void fn_80375B78(void)
     mr r3, r27
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_80375B78_0000009C
     addi r3, r27, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r26, r3, 0x64
     bne lbl_fn_80375B78_0000009C
@@ -175,7 +175,7 @@ asm void fn_80375B78(void)
     cmplwi r3, 0x8
     blt lbl_fn_80375B78_0000009C
     addi r3, r27, 0x6
-    bl fn_80684600
+    bl atoi
     add r26, r26, r3
 lbl_fn_80375B78_0000009C:
     lis r3, lbl_8074DB88@ha
@@ -330,11 +330,11 @@ lbl_fn_80375D0C_00000228:
     mr r3, r23
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_80375D0C_000002DC
     addi r3, r23, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r22, r3, 0x64
     bne lbl_fn_80375D0C_000002DC
@@ -343,7 +343,7 @@ lbl_fn_80375D0C_00000228:
     cmplwi r3, 0x8
     blt lbl_fn_80375D0C_000002DC
     addi r3, r23, 0x6
-    bl fn_80684600
+    bl atoi
     add r22, r22, r3
 lbl_fn_80375D0C_000002DC:
     lis r3, lbl_8074DAF8@ha
@@ -371,11 +371,11 @@ lbl_fn_80375D0C_0000030C:
     mr r3, r22
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_80375D0C_0000036C
     addi r3, r22, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r23, r3, 0x64
     bne lbl_fn_80375D0C_0000036C
@@ -384,7 +384,7 @@ lbl_fn_80375D0C_0000030C:
     cmplwi r3, 0x8
     blt lbl_fn_80375D0C_0000036C
     addi r3, r22, 0x6
-    bl fn_80684600
+    bl atoi
     add r23, r23, r3
 lbl_fn_80375D0C_0000036C:
     lis r4, lbl_8074DA2C@ha
@@ -464,11 +464,11 @@ lbl_fn_80375D0C_00000458:
     mr r3, r22
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_80375D0C_000004B8
     addi r3, r22, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r23, r3, 0x64
     bne lbl_fn_80375D0C_000004B8
@@ -477,7 +477,7 @@ lbl_fn_80375D0C_00000458:
     cmplwi r3, 0x8
     blt lbl_fn_80375D0C_000004B8
     addi r3, r22, 0x6
-    bl fn_80684600
+    bl atoi
     add r23, r23, r3
 lbl_fn_80375D0C_000004B8:
     lis r3, lbl_8074DB70@ha
@@ -846,13 +846,13 @@ lbl_fn_80376324_000008B4:
     beq lbl_fn_80376324_000009D8
     lwz r3, 0x56f0(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     b lbl_fn_80376324_000009D8
 lbl_fn_80376324_000008D4:
     lwz r3, 0x56f0(r30)
     cmpwi r3, 0x0
     beq lbl_fn_80376324_000008F0
-    bl fn_800D2338
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0x56f0(r30)
     stw r0, 0x571c(r30)
@@ -867,19 +867,19 @@ lbl_fn_80376324_00000904:
     bl fn_8056B3D8
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F428
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F408
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x10d8(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F3C0
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F490
     lwz r3, 0x263c(r3)
     lwz r0, 0x38(r3)
@@ -916,7 +916,7 @@ lbl_fn_80376324_00000990:
     li r4, 0x13f
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_80376324_000009D8:
     lwz r0, 0x114(r1)
     lwz r31, 0x10c(r1)
@@ -949,19 +949,19 @@ lbl_fn_80376568_00000A2C:
     bl fn_8056BD38
     lwz r3, lbl_8087F8A0
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F428
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F408
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x10d8(r31)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F3C0
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F490
     lwz r3, 0x263c(r3)
     lwz r0, 0x38(r3)
@@ -984,7 +984,7 @@ lbl_fn_80376568_00000AB8:
     li r30, 0x0
     stw r30, 0x54e4(r31)
     lwz r3, 0x56ec(r31)
-    bl fn_800D2338
+    bl atn_Task_unlink
     stw r30, 0x56ec(r31)
     lwz r3, lbl_8087EEF0
     cmpwi r3, 0x0
@@ -1043,7 +1043,7 @@ asm void fn_803766E4(void)
     cmpwi r0, 0x0
     beq lbl_fn_803766E4_00000B9C
     mr r3, r0
-    bl fn_800D2338
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0x56f0(r31)
 lbl_fn_803766E4_00000B9C:
@@ -1106,7 +1106,7 @@ lbl_fn_80376730_00000C48:
     li r4, 0x8e
     li r6, 0x0
     addi r5, r5, 0x1
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_80376730_00000C74:
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
@@ -1134,10 +1134,10 @@ asm void fn_80376804(void)
     bne lbl_fn_80376804_00000CD8
     lwz r3, 0x48(r3)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F3C0
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
 lbl_fn_80376804_00000CD8:
     lwz r3, 0x54(r31)
     cmpwi r3, 0x0
@@ -1171,7 +1171,7 @@ lbl_fn_80376804_00000D34:
     stw r5, 0x24(r1)
     stw r4, 0x28(r1)
     stw r0, 0x2c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80376804_00000E50
     lwz r0, 0x5c(r31)
@@ -1196,7 +1196,7 @@ lbl_fn_80376804_00000D34:
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r0, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_80376804_00000DDC
     li r0, 0x1
@@ -1211,7 +1211,7 @@ lbl_fn_80376804_00000DDC:
     stw r3, 0x20(r1)
     stw r0, 0x10(r1)
     b lbl_fn_80376804_00000DF0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80376804_00000DF0:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x1c(r1)
@@ -1244,10 +1244,10 @@ lbl_fn_80376804_00000E50:
     bne lbl_fn_80376804_00000E74
     lwz r3, 0x48(r31)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F3C0
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
 lbl_fn_80376804_00000E74:
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)
@@ -1307,7 +1307,7 @@ lbl_fn_80376A0C_00000F18:
 lbl_fn_80376A0C_00000F20:
     mr r3, r29
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r30, 0x0
     ble lbl_fn_80376A0C_00000F3C
     mr r3, r29
@@ -1387,7 +1387,7 @@ asm void fn_80376B68(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80376B68_00001050
     mr r4, r30
@@ -1416,14 +1416,14 @@ asm void fn_80376BE8(void)
     stw r30, 0x58(r1)
     stw r29, 0x54(r1)
     mr r29, r3
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_8078A4B8@ha
     li r30, 0x0
     addi r3, r3, lbl_8078A4B8@l
     stw r3, 0x0(r29)
     addi r3, r29, 0x54
     stw r30, 0x50(r29)
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     stw r30, 0x64(r29)
     addi r3, r29, 0x94
     li r4, 0x0
@@ -1444,14 +1444,14 @@ asm void fn_80376BE8(void)
     bl fn_801F3FF8
     stw r3, 0x48(r29)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r29
     addi r4, r31, 0x1f
     li r5, 0x0
     bl fn_801F3FF8
     stw r3, 0x4c(r29)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F0A8
     lwz r0, 0x194(r3)
     cmpwi r0, 0x0
@@ -1462,13 +1462,13 @@ asm void fn_80376BE8(void)
     bl fn_801F3FF8
     stw r3, 0x50(r29)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
 lbl_fn_80376BE8_0000114C:
     lis r31, lbl_8074DEC0@ha
     addi r3, r29, 0x54
     addi r31, r31, lbl_8074DEC0@l
     addi r4, r31, 0x5b
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r31, r31, 0x69
     addi r30, r1, 0x8
     cmplw r31, r30
@@ -1519,15 +1519,15 @@ asm void fn_80376D40(void)
     addic. r31, r29, 0x54
     beq lbl_fn_80376D40_00001224
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_80376D40_00001224
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80376D40_00001224:
     mr r3, r29
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r30, 0x0
     ble lbl_fn_80376D40_00001240
     mr r3, r29
@@ -1558,12 +1558,12 @@ asm void fn_80376DD8(void)
     cmpwi r3, 0x0
     beq lbl_fn_80376DD8_000016FC
     addi r3, r31, 0x54
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_80376DD8_000016FC
     mr r3, r31
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_808857FC
     li r11, -0x1
     lfs f1, lbl_80885800
@@ -1588,7 +1588,7 @@ asm void fn_80376DD8(void)
     stfs f1, 0xa4(r1)
     stw r11, 0x8(r1)
     stw r0, 0xc(r1)
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r3, 0x48(r31)
     li r4, 0x1
     lfs f1, lbl_808857FC
@@ -1597,7 +1597,7 @@ asm void fn_80376DD8(void)
     bl fn_804A39EC
     lwz r3, 0x4c(r31)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r4, 0x4c(r31)
     li r0, 0x0
     lwz r3, 0x38(r4)
@@ -1608,7 +1608,7 @@ asm void fn_80376DD8(void)
     cmpwi r3, 0x0
     beq lbl_fn_80376DD8_00001388
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x50(r31)
     lfs f0, lbl_808857FC
     lwz r0, 0xfc(r3)
@@ -1961,7 +1961,7 @@ lbl_fn_80377298_00001888:
     addi r0, r3, 0x1
     stw r0, 0x7c(r31)
     lwz r3, lbl_8087F430
-    bl fn_80370174
+    bl world_getGlobalFlag
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi. r0, r0, 5
@@ -1972,7 +1972,7 @@ lbl_fn_80377298_00001888:
 lbl_fn_80377298_000018BC:
     lwz r3, lbl_8087F430
     li r4, 0x122
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     bne lbl_fn_80377298_00001950
     lwz r0, 0x7c(r31)
@@ -2038,7 +2038,7 @@ lbl_fn_80377298_0000199C:
     b lbl_fn_80377298_00001A4C
 lbl_fn_80377298_000019AC:
     li r4, 0x122
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     bne lbl_fn_80377298_00001A18
     lwz r0, 0x7c(r31)

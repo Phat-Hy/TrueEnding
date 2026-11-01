@@ -3,28 +3,28 @@
 
 /* External function declarations */
 extern void fn_8004ED34(void);
-extern void fn_80097C08(void);
-extern void fn_800F8548(void);
-extern void fn_8016E970(void);
+extern void atn_Anim_setLayerAnimation(void);
+extern void system_getNextSequenceId(void);
+extern void actor_setState(void);
 extern void fn_80206B14(void);
 extern void fn_80206BE4(void);
 extern void fn_8020ED84(void);
 extern void fn_8020EF80(void);
-extern void fn_80232B7C(void);
-extern void fn_80239DAC(void);
+extern void sound_initGlobalInstances(void);
+extern void res_findResourceSlot(void);
 extern void fn_8023A108(void);
 extern void fn_8023A254(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void fn_803EA77C(void);
 extern void fn_804439FC(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9750(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
-extern void fn_805F99B0(void);
-extern void fn_80680CF8(void);
-extern void fn_8068AEA4(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSMTX44Identity(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
+extern void PSVECCrossProduct(void);
+extern void rand(void);
+extern void std_atan2(void);
 extern void fn_8068B100(void);
 
 /* External data declarations */
@@ -77,35 +77,35 @@ asm void fn_80350464(void)
     stw r0, 0x14c0(r3)
     stw r0, 0x17e8(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r30)
     mr r4, r30
     li r5, 0x3ea
     li r6, 0x1
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x3e8
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x3ed
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x3ef
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     mr r3, r30
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     li r0, 0xa
     stw r0, 0x58c(r30)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lfs f0, lbl_80885398
     li r0, 0x1
     stw r3, 0x590(r30)
@@ -120,7 +120,7 @@ asm void fn_80350464(void)
     li r7, 0x0
     li r8, 0x1
     stfs f0, 0x2e8(r30)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r7, 0x14b0(r30)
     addi r4, r1, 0x74
     lfs f0, 0x530(r30)
@@ -173,7 +173,7 @@ lbl_fn_80350464_000001A4:
 lbl_fn_80350464_000001AC:
     fmr f2, f5
     lfs f1, 0x8(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x30(r1)
 lbl_fn_80350464_000001C0:
@@ -181,7 +181,7 @@ lbl_fn_80350464_000001C0:
     addi r3, r1, 0xd0
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80885378
     addi r4, r1, 0x38
     lfs f4, 0xd8(r1)
@@ -231,7 +231,7 @@ lbl_fn_80350464_000001C0:
     stfs f13, 0xbc(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_808853D8
     fabs f3, f2
@@ -252,7 +252,7 @@ lbl_fn_80350464_000002D0:
     b lbl_fn_80350464_000002F0
 lbl_fn_80350464_000002DC:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x2c(r1)
@@ -288,7 +288,7 @@ lbl_fn_80350464_000002F0:
     stfs f0, 0x28(r1)
     stfs f2, 0x15fc(r30)
     stfs f6, 0x15f8(r30)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f0, lbl_80885378
     addi r3, r30, 0x1600
     psq_l f1, 0x528(r30), 0, 0
@@ -337,35 +337,35 @@ asm void fn_8035083C(void)
     stw r0, 0x14c0(r3)
     stw r0, 0x17e8(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r30)
     mr r4, r30
     li r5, 0x3ea
     li r6, 0x1
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x3e8
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x3ed
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x3ef
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     mr r3, r30
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     li r0, 0xb
     stw r0, 0x58c(r30)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lfs f0, lbl_80885398
     li r0, 0x1
     stw r3, 0x590(r30)
@@ -380,7 +380,7 @@ asm void fn_8035083C(void)
     li r7, 0x0
     li r8, 0x1
     stfs f0, 0x2e8(r30)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r7, 0x14b0(r30)
     addi r4, r1, 0x74
     lfs f0, 0x530(r30)
@@ -433,7 +433,7 @@ lbl_fn_8035083C_0000057C:
 lbl_fn_8035083C_00000584:
     fmr f2, f5
     lfs f1, 0x8(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x30(r1)
 lbl_fn_8035083C_00000598:
@@ -441,7 +441,7 @@ lbl_fn_8035083C_00000598:
     addi r3, r1, 0xd0
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80885378
     addi r4, r1, 0x38
     lfs f4, 0xd8(r1)
@@ -491,7 +491,7 @@ lbl_fn_8035083C_00000598:
     stfs f13, 0xbc(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_808853D8
     fabs f3, f2
@@ -512,7 +512,7 @@ lbl_fn_8035083C_000006A8:
     b lbl_fn_8035083C_000006C8
 lbl_fn_8035083C_000006B4:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x2c(r1)
@@ -548,7 +548,7 @@ lbl_fn_8035083C_000006C8:
     stfs f0, 0x28(r1)
     stfs f2, 0x15fc(r30)
     stfs f6, 0x15f8(r30)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f0, lbl_80885378
     addi r3, r30, 0x1600
     psq_l f1, 0x528(r30), 0, 0
@@ -584,35 +584,35 @@ asm void fn_80350BF0(void)
     stw r30, 0x14c0(r3)
     stw r30, 0x17e8(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     mr r4, r31
     li r5, 0x3ea
     li r6, 0x1
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x3e8
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x3ed
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x3ef
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     li r0, 0xc
     stw r0, 0x58c(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lfs f0, lbl_80885398
     li r0, 0x1
     stw r3, 0x590(r31)
@@ -627,14 +627,14 @@ asm void fn_80350BF0(void)
     li r7, 0x0
     li r8, 0x1
     stfs f0, 0x2e8(r31)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r0, 0x17e4(r31)
     lfs f0, lbl_808853CC
     stfs f0, 0x2e4(r31)
     stw r0, 0x14b0(r31)
     stw r0, 0xd1c(r31)
     stb r30, 0x17ec(r31)
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -663,7 +663,7 @@ asm void fn_80350BF0(void)
     mr r4, r29
     stfs f2, 0x88(r1)
     psq_st f1, 0x0(r29), 0, 0
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f3, lbl_80885378
     mr r3, r29
     lfs f0, lbl_80885398
@@ -672,7 +672,7 @@ asm void fn_80350BF0(void)
     addi r5, r1, 0x8c
     stfs f0, 0x78(r1)
     stfs f3, 0x7c(r1)
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     lfs f5, 0x94(r1)
     addi r3, r1, 0xa4
     lfs f4, lbl_808853B0
@@ -706,7 +706,7 @@ lbl_fn_80350BF0_00000984:
     mr r4, r29
     stfs f2, 0x4c(r1)
     psq_st f1, 0x0(r29), 0, 0
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f3, lbl_80885378
     mr r3, r29
     lfs f0, lbl_80885398
@@ -715,7 +715,7 @@ lbl_fn_80350BF0_00000984:
     addi r5, r1, 0x50
     stfs f0, 0x3c(r1)
     stfs f3, 0x40(r1)
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     lfs f5, 0x58(r1)
     addi r3, r1, 0x68
     lfs f4, lbl_808853B0
@@ -757,7 +757,7 @@ lbl_fn_80350BF0_00000A28:
 lbl_fn_80350BF0_00000A60:
     addi r3, r31, 0x16a8
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80885378
     li r3, -0x1
     lfs f1, lbl_80885398
@@ -782,7 +782,7 @@ lbl_fn_80350BF0_00000A60:
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r3, lbl_8087F3C0
     addi r4, r31, 0x16a8
     li r5, 0x0
@@ -818,34 +818,34 @@ asm void fn_80350F64(void)
     stw r0, 0x14c0(r3)
     stw r0, 0x17e8(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     mr r4, r31
     li r5, 0x3ea
     li r6, 0x1
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x3e8
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x3ed
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x3ef
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80885398
     li r3, 0x12
     li r0, 0x1
@@ -861,7 +861,7 @@ asm void fn_80350F64(void)
     li r7, 0x0
     li r8, 0x1
     stfs f0, 0x2e8(r31)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r3, lbl_8087F430
     addi r30, r1, 0xbc
     li r4, 0x0
@@ -1010,7 +1010,7 @@ lbl_fn_80350F64_00000E04:
 lbl_fn_80350F64_00000E0C:
     fmr f2, f5
     lfs f1, 0x8(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x30(r1)
 lbl_fn_80350F64_00000E20:
@@ -1018,7 +1018,7 @@ lbl_fn_80350F64_00000E20:
     addi r3, r1, 0x108
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80885378
     addi r4, r1, 0x38
     lfs f4, 0x110(r1)
@@ -1068,7 +1068,7 @@ lbl_fn_80350F64_00000E20:
     stfs f13, 0xf4(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_808853D8
     fabs f3, f2
@@ -1089,7 +1089,7 @@ lbl_fn_80350F64_00000F30:
     b lbl_fn_80350F64_00000F50
 lbl_fn_80350F64_00000F3C:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x2c(r1)
@@ -1125,7 +1125,7 @@ lbl_fn_80350F64_00000F50:
     stfs f0, 0x28(r1)
     stfs f2, 0x15fc(r31)
     stfs f6, 0x15f8(r31)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f0, lbl_80885378
     addi r3, r31, 0x1600
     psq_l f1, 0x528(r31), 0, 0
@@ -1167,31 +1167,31 @@ asm void fn_80351480(void)
     stw r0, 0x14c0(r3)
     stw r0, 0x17e8(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     mr r4, r31
     li r5, 0x3ea
     li r6, 0x1
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x3e8
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x3ed
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x3ef
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f3, lbl_80885398
     li r3, 0x13
     lfs f0, lbl_808854B0
@@ -1208,7 +1208,7 @@ asm void fn_80351480(void)
     li r7, 0x0
     li r8, 0x1
     stfs f0, 0x2e8(r31)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r0, 0x17e4(r31)
     cmpwi r0, 0x0
     beq lbl_fn_80351480_00001118
@@ -1237,7 +1237,7 @@ lbl_fn_80351480_0000113C:
     stfs f5, 0xdc(r1)
     stfs f3, 0xd4(r1)
     stfs f0, 0xd8(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_808854B4
     fcmpo cr0, f1, f0
     bge lbl_fn_80351480_000011D0
@@ -1250,11 +1250,11 @@ lbl_fn_80351480_0000113C:
     stfs f3, 0xc0(r1)
     stfs f0, 0xc4(r1)
     lfs f1, 0x538(r5)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0xbc
     addi r3, r1, 0x150
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r4, r1, 0xbc
     lfs f2, 0xc4(r1)
     addi r3, r1, 0xd4
@@ -1265,7 +1265,7 @@ lbl_fn_80351480_0000113C:
 lbl_fn_80351480_000011D0:
     addi r3, r1, 0xd4
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_80351480_000011DC:
     lfs f0, 0xdc(r1)
     addi r4, r1, 0xc8
@@ -1334,7 +1334,7 @@ lbl_fn_80351480_000012CC:
 lbl_fn_80351480_000012D4:
     fmr f2, f11
     lfs f1, 0x38(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x60(r1)
 lbl_fn_80351480_000012E8:
@@ -1342,7 +1342,7 @@ lbl_fn_80351480_000012E8:
     addi r3, r1, 0x120
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80885378
     addi r4, r1, 0x68
     lfs f4, 0x128(r1)
@@ -1392,7 +1392,7 @@ lbl_fn_80351480_000012E8:
     stfs f13, 0x10c(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x70(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x70(r1)
     lfs f0, lbl_808853D8
     fabs f3, f2
@@ -1413,7 +1413,7 @@ lbl_fn_80351480_000013F8:
     b lbl_fn_80351480_00001418
 lbl_fn_80351480_00001404:
     lfs f1, 0x6c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x5c(r1)
@@ -1449,7 +1449,7 @@ lbl_fn_80351480_00001418:
     stfs f0, 0x58(r1)
     stfs f2, 0x15fc(r31)
     stfs f6, 0x15f8(r31)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f0, lbl_80885378
     addi r5, r31, 0x1600
     psq_l f1, 0x528(r31), 0, 0
@@ -1459,7 +1459,7 @@ lbl_fn_80351480_00001418:
     psq_st f1, 0x0(r5), 0, 0
     stfs f2, 0x1608(r31)
     stfs f0, 0x570(r31)
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80885378
     li r3, -0x1
     lfs f1, lbl_80885398
@@ -1484,7 +1484,7 @@ lbl_fn_80351480_00001418:
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lfs f1, 0x2e8(r31)
     addi r4, r31, 0x16b4
     lwz r3, lbl_8087F3C0
@@ -1517,31 +1517,31 @@ asm void fn_803519C4(void)
     stw r31, 0x14c0(r3)
     stw r31, 0x17e8(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r30)
     mr r4, r30
     li r5, 0x3ea
     li r6, 0x1
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x3e8
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x3ed
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x3ef
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     mr r3, r30
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80885398
     li r3, 0x14
     li r0, 0x1
@@ -1557,7 +1557,7 @@ asm void fn_803519C4(void)
     li r7, 0x0
     li r8, 0x1
     stfs f0, 0x2e8(r30)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     stw r31, 0x1cb8(r30)
     stw r31, 0x1cbc(r30)
     lwz r31, 0xc(r1)
@@ -1595,31 +1595,31 @@ asm void fn_80351AB8(void)
     stw r0, 0x14c0(r3)
     stw r0, 0x17e8(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r28)
     mr r4, r28
     li r5, 0x3ea
     li r6, 0x1
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r28
     li r5, 0x3e8
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r28
     li r5, 0x3ed
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r28
     li r5, 0x3ef
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     mr r3, r28
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     cmpwi r29, 0x2
     li r0, 0xd
     stw r0, 0x58c(r28)
@@ -1636,7 +1636,7 @@ asm void fn_80351AB8(void)
     li r7, 0x0
     stfs f0, 0x2e8(r28)
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f5, 0x52c(r30)
     addi r3, r28, 0x16f8
     lfs f4, 0x52c(r28)
@@ -1657,7 +1657,7 @@ asm void fn_80351AB8(void)
     stfs f2, 0xac(r1)
     stfs f2, 0x1700(r28)
     stfs f0, 0x16fc(r28)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x1700(r28)
     addi r31, r28, 0x16f8
     lfs f0, lbl_808853D8
@@ -1678,7 +1678,7 @@ lbl_fn_80351AB8_000017E8:
     b lbl_fn_80351AB8_00001800
 lbl_fn_80351AB8_000017F0:
     lfs f1, 0x0(r31)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x54(r1)
 lbl_fn_80351AB8_00001800:
@@ -1686,7 +1686,7 @@ lbl_fn_80351AB8_00001800:
     addi r3, r1, 0x160
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80885378
     addi r4, r1, 0x5c
     lfs f4, 0x168(r1)
@@ -1736,7 +1736,7 @@ lbl_fn_80351AB8_00001800:
     stfs f13, 0x70(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x64(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x64(r1)
     lfs f0, lbl_808853D8
     fabs f3, f2
@@ -1757,7 +1757,7 @@ lbl_fn_80351AB8_00001910:
     b lbl_fn_80351AB8_00001930
 lbl_fn_80351AB8_0000191C:
     lfs f1, 0x60(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x50(r1)
@@ -1772,7 +1772,7 @@ lbl_fn_80351AB8_00001930:
     stfs f2, 0x8(r31)
     stfs f2, 0x58(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     b lbl_fn_80351AB8_00001B8C
 lbl_fn_80351AB8_00001960:
     lfs f0, lbl_80885398
@@ -1791,7 +1791,7 @@ lbl_fn_80351AB8_00001988:
     lfs f2, lbl_808853C4
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f5, 0x52c(r30)
     addi r3, r28, 0x16f8
     lfs f4, 0x52c(r28)
@@ -1812,7 +1812,7 @@ lbl_fn_80351AB8_00001988:
     stfs f2, 0xa0(r1)
     stfs f2, 0x1700(r28)
     stfs f0, 0x16fc(r28)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x1700(r28)
     addi r31, r28, 0x16f8
     lfs f0, lbl_808853D8
@@ -1833,7 +1833,7 @@ lbl_fn_80351AB8_00001A2C:
     b lbl_fn_80351AB8_00001A44
 lbl_fn_80351AB8_00001A34:
     lfs f1, 0x0(r31)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0xc(r1)
 lbl_fn_80351AB8_00001A44:
@@ -1841,7 +1841,7 @@ lbl_fn_80351AB8_00001A44:
     addi r3, r1, 0xf0
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80885378
     addi r4, r1, 0x14
     lfs f4, 0xf8(r1)
@@ -1891,7 +1891,7 @@ lbl_fn_80351AB8_00001A44:
     stfs f13, 0x28(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x1c(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x1c(r1)
     lfs f0, lbl_808853D8
     fabs f3, f2
@@ -1912,7 +1912,7 @@ lbl_fn_80351AB8_00001B54:
     b lbl_fn_80351AB8_00001B74
 lbl_fn_80351AB8_00001B60:
     lfs f1, 0x18(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x8(r1)

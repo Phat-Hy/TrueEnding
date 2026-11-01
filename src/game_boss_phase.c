@@ -9,20 +9,20 @@ extern void dtor_80084684(void);
 extern void fn_8000D430(void);
 extern void fn_8000D7DC(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8003EFB0(void);
 extern void fn_8004B290(void);
 extern void fn_8004B338(void);
-extern void fn_80056E40(void);
-extern void fn_8005B9CC(void);
+extern void atn_ColliBase_destructor(void);
+extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void fn_8006A004(void);
 extern void fn_8006AD24(void);
 extern void fn_8006B0C8(void);
 extern void fn_8006D008(void);
-extern void fn_80084320(void);
-extern void fn_80084C24(void);
+extern void mem_alloc(void);
+extern void mem_getAllocSize(void);
 extern void fn_800897D8(void);
 extern void fn_800899DC(void);
 extern void fn_8008AD4C(void);
@@ -30,20 +30,20 @@ extern void fn_8008B130(void);
 extern void fn_8008B140(void);
 extern void fn_8008BBD8(void);
 extern void fn_80091CFC(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_80092EC8(void);
 extern void fn_80092F1C(void);
 extern void fn_80095D44(void);
 extern void fn_800971D4(void);
 extern void fn_80097510(void);
-extern void fn_80097A88(void);
-extern void fn_80097C08(void);
+extern void atn_Anim_applyLayerTransform(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097D40(void);
 extern void fn_80097E80(void);
 extern void fn_80099E9C(void);
-extern void fn_800CB3A0(void);
-extern void fn_800D1E9C(void);
-extern void fn_800DC288(void);
+extern void ref_releaseHandle(void);
+extern void atn_Task_destructor(void);
+extern void str_skipWhitespace(void);
 extern void fn_800F29D0(void);
 extern void fn_8011D394(void);
 extern void fn_8011D424(void);
@@ -68,20 +68,20 @@ extern void fn_8014FF9C(void);
 extern void fn_8020EE8C(void);
 extern void fn_802180A8(void);
 extern void fn_80219558(void);
-extern void fn_802377B8(void);
-extern void fn_8023780C(void);
-extern void fn_8023781C(void);
-extern void fn_80237874(void);
+extern void res_MsgHandle_constructor(void);
+extern void res_MsgHandle_destructor(void);
+extern void res_MsgHandle_unload(void);
+extern void res_MsgHandle_update(void);
 extern void fn_80363284(void);
 extern void fn_8036354C(void);
 extern void fn_80363960(void);
 extern void fn_8036823C(void);
 extern void fn_803EBBCC(void);
 extern void fn_8044D208(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
-extern void fn_80473E8C(void);
-extern void fn_80473F50(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
+extern void atn_LoadHandle_destructor(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_804776F4(void);
 extern void fn_805634D4(void);
 extern void fn_805638C0(void);
@@ -89,12 +89,12 @@ extern void fn_80563A20(void);
 extern void fn_80564060(void);
 extern void fn_80566014(void);
 extern void fn_805663FC(void);
-extern void fn_80680CF8(void);
-extern void fn_80682428(void);
-extern void fn_806827C4(void);
-extern void fn_80684600(void);
+extern void rand(void);
+extern void strcmp(void);
+extern void strstr(void);
+extern void atoi(void);
 extern void fn_806959D8(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern void fn_80695B00(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -132,18 +132,18 @@ extern u32 lbl_80881994;
 extern u32 lbl_80881998;
 
 /* Function declarations */
-void fn_8013606C(void);
+void atn_LH_MotionCommandData_destructor(void);
 void fn_801360C4(void);
 void fn_801360D8(void);
 void fn_80136138(void);
 void fn_80136544(void);
-void fn_8013655C(void);
+void boss_updatePhaseState(void);
 void fn_801370B8(void);
 void fn_801370C8(void);
 void fn_801370F4(void);
 void fn_801371AC(void);
 
-asm void fn_8013606C(void)
+asm void atn_LH_MotionCommandData_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -154,14 +154,14 @@ asm void fn_8013606C(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_8013606C_0000003C
+    beq lbl_atn_LH_MotionCommandData_destructor_0000003C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
     cmpwi r31, 0x0
-    ble lbl_fn_8013606C_0000003C
+    ble lbl_atn_LH_MotionCommandData_destructor_0000003C
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8013606C_0000003C:
+lbl_atn_LH_MotionCommandData_destructor_0000003C:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -196,7 +196,7 @@ asm void fn_801360D8(void)
     lwz r3, 0x8(r3)
     cmpwi r3, 0x0
     beq lbl_fn_801360D8_000000A0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801360D8_000000A0:
     cmpwi r31, 0x0
     ble lbl_fn_801360D8_000000B0
@@ -364,7 +364,7 @@ lbl_fn_80136138_000002C0:
     addic. r3, r27, 0x3ec
     beq lbl_fn_80136138_000002E0
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80136138_000002E0:
     addi r3, r27, 0x4
     li r4, -0x1
@@ -388,13 +388,13 @@ lbl_fn_80136138_000002FC:
     bl fn_801352F8
     addi r3, r30, 0x1414
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addic. r0, r30, 0x1400
     beq lbl_fn_80136138_0000034C
     lwz r3, 0x1408(r30)
     cmpwi r3, 0x0
     beq lbl_fn_80136138_0000034C
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80136138_0000034C:
     addi r3, r30, 0x1220
     li r4, -0x1
@@ -405,11 +405,11 @@ lbl_fn_80136138_0000034C:
     cmpwi r27, 0x0
     beq lbl_fn_80136138_0000038C
     mr r3, r27
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r27, 0x4
     beq lbl_fn_80136138_00000384
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80136138_00000384:
     mr r3, r27
     bl dtor_80084684
@@ -453,12 +453,12 @@ lbl_fn_80136138_000003F8:
     beq lbl_fn_80136138_00000424
     beq lbl_fn_80136138_00000424
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80136138_00000424:
     addic. r3, r30, 0x5b8
     beq lbl_fn_80136138_00000434
     li r4, 0x0
-    bl fn_80056E40
+    bl atn_ColliBase_destructor
 lbl_fn_80136138_00000434:
     addi r3, r30, 0xb0
     li r4, -0x1
@@ -466,22 +466,22 @@ lbl_fn_80136138_00000434:
     addic. r3, r30, 0xa4
     beq lbl_fn_80136138_00000450
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80136138_00000450:
     addic. r3, r30, 0x98
     beq lbl_fn_80136138_00000460
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80136138_00000460:
     addic. r3, r30, 0x8c
     beq lbl_fn_80136138_00000470
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80136138_00000470:
     addic. r3, r30, 0x84
     beq lbl_fn_80136138_00000480
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80136138_00000480:
     addic. r0, r30, 0x54
     beq lbl_fn_80136138_000004A4
@@ -495,7 +495,7 @@ lbl_fn_80136138_00000480:
 lbl_fn_80136138_000004A4:
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r31, 0x0
     ble lbl_fn_80136138_000004C0
     mr r3, r30
@@ -520,7 +520,7 @@ asm void fn_80136544(void)
     bctr
 }
 
-asm void fn_8013655C(void)
+asm void boss_updatePhaseState(void)
 {
     nofralloc
     stwu r1, -0x190(r1)
@@ -532,54 +532,54 @@ asm void fn_8013655C(void)
     mr r30, r3
     li r31, 0x0
     cmpwi r0, 0x1
-    beq lbl_fn_8013655C_00000524
+    beq lbl_boss_updatePhaseState_00000524
     cmpwi r0, 0x2
-    beq lbl_fn_8013655C_00000650
-    b lbl_fn_8013655C_00001030
-lbl_fn_8013655C_00000524:
+    beq lbl_boss_updatePhaseState_00000650
+    b lbl_boss_updatePhaseState_00001030
+lbl_boss_updatePhaseState_00000524:
     addi r3, r3, 0x84
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
-    beq lbl_fn_8013655C_00000538
+    beq lbl_boss_updatePhaseState_00000538
     li r31, 0x1
-lbl_fn_8013655C_00000538:
+lbl_boss_updatePhaseState_00000538:
     addi r3, r30, 0xa4
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
-    beq lbl_fn_8013655C_0000054C
+    beq lbl_boss_updatePhaseState_0000054C
     li r31, 0x1
-lbl_fn_8013655C_0000054C:
+lbl_boss_updatePhaseState_0000054C:
     cmpwi r31, 0x0
-    bne lbl_fn_8013655C_00001030
+    bne lbl_boss_updatePhaseState_00001030
     mr r3, r30
     bl fn_801371AC
     mr r3, r30
     bl fn_80138528
     lwz r0, 0x5c(r30)
     cmpwi r0, 0x0
-    beq lbl_fn_8013655C_00000648
+    beq lbl_boss_updatePhaseState_00000648
     li r28, 0x0
     li r27, 0x0
-lbl_fn_8013655C_00000578:
+lbl_boss_updatePhaseState_00000578:
     lwz r0, 0x5c(r30)
     add r3, r0, r27
     lwz r5, 0x108(r3)
     cmpwi r5, 0x0
-    ble lbl_fn_8013655C_0000059C
+    ble lbl_boss_updatePhaseState_0000059C
     mr r3, r30
     mr r4, r28
     li r6, 0x0
     bl fn_8014FF9C
-lbl_fn_8013655C_0000059C:
+lbl_boss_updatePhaseState_0000059C:
     addi r28, r28, 0x1
     addi r27, r27, 0x4
     cmpwi r28, 0x5
-    blt lbl_fn_8013655C_00000578
+    blt lbl_boss_updatePhaseState_00000578
     li r0, 0x2
     li r7, 0x0
     li r6, 0x0
     mtctr r0
-lbl_fn_8013655C_000005BC:
+lbl_boss_updatePhaseState_000005BC:
     lwz r0, 0xaa0(r30)
     lwz r4, 0x5c(r30)
     slwi r0, r0, 3
@@ -590,10 +590,10 @@ lbl_fn_8013655C_000005BC:
     lwz r0, 0xec(r4)
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
-    beq lbl_fn_8013655C_000005F0
+    beq lbl_boss_updatePhaseState_000005F0
     stw r3, 0x0(r5)
     stw r0, 0x4(r5)
-lbl_fn_8013655C_000005F0:
+lbl_boss_updatePhaseState_000005F0:
     lwz r3, 0xaa0(r30)
     addi r6, r6, 0x8
     lwz r4, 0x5c(r30)
@@ -607,103 +607,103 @@ lbl_fn_8013655C_000005F0:
     lwz r0, 0xec(r4)
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
-    beq lbl_fn_8013655C_00000630
+    beq lbl_boss_updatePhaseState_00000630
     stw r3, 0x0(r5)
     stw r0, 0x4(r5)
-lbl_fn_8013655C_00000630:
+lbl_boss_updatePhaseState_00000630:
     lwz r3, 0xaa0(r30)
     addi r6, r6, 0x8
     addi r7, r7, 0x1
     addi r0, r3, 0x1
     stw r0, 0xaa0(r30)
-    bdnz lbl_fn_8013655C_000005BC
-lbl_fn_8013655C_00000648:
+    bdnz lbl_boss_updatePhaseState_000005BC
+lbl_boss_updatePhaseState_00000648:
     li r0, 0x2
     stw r0, 0xac(r30)
-lbl_fn_8013655C_00000650:
+lbl_boss_updatePhaseState_00000650:
     addi r3, r30, 0xb0
     bl fn_8008B140
     cmpwi r3, 0x0
-    beq lbl_fn_8013655C_00000664
+    beq lbl_boss_updatePhaseState_00000664
     li r31, 0x1
-lbl_fn_8013655C_00000664:
+lbl_boss_updatePhaseState_00000664:
     addi r3, r30, 0x8c
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
-    beq lbl_fn_8013655C_00000678
+    beq lbl_boss_updatePhaseState_00000678
     li r31, 0x1
-lbl_fn_8013655C_00000678:
+lbl_boss_updatePhaseState_00000678:
     addi r3, r30, 0x98
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
-    beq lbl_fn_8013655C_0000068C
+    beq lbl_boss_updatePhaseState_0000068C
     li r31, 0x1
-lbl_fn_8013655C_0000068C:
+lbl_boss_updatePhaseState_0000068C:
     mr r27, r30
     li r28, 0x0
     li r29, 0x0
-    b lbl_fn_8013655C_000006CC
-lbl_fn_8013655C_0000069C:
+    b lbl_boss_updatePhaseState_000006CC
+lbl_boss_updatePhaseState_0000069C:
     lwz r3, 0x654(r27)
     cmpwi r3, 0x0
-    beq lbl_fn_8013655C_000006C4
+    beq lbl_boss_updatePhaseState_000006C4
     lwz r12, 0x0(r3)
     lwz r12, 0xc(r12)
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    beq lbl_fn_8013655C_000006C4
+    beq lbl_boss_updatePhaseState_000006C4
     li r28, 0x1
-lbl_fn_8013655C_000006C4:
+lbl_boss_updatePhaseState_000006C4:
     addi r27, r27, 0x4
     addi r29, r29, 0x1
-lbl_fn_8013655C_000006CC:
+lbl_boss_updatePhaseState_000006CC:
     lwz r0, 0x650(r30)
     cmplw r29, r0
-    blt lbl_fn_8013655C_0000069C
+    blt lbl_boss_updatePhaseState_0000069C
     cmpwi r28, 0x0
-    beq lbl_fn_8013655C_000006E4
+    beq lbl_boss_updatePhaseState_000006E4
     li r31, 0x1
-lbl_fn_8013655C_000006E4:
+lbl_boss_updatePhaseState_000006E4:
     addi r27, r30, 0x680
     li r29, 0x0
     li r28, 0x0
-lbl_fn_8013655C_000006F0:
+lbl_boss_updatePhaseState_000006F0:
     lwz r3, 0x0(r27)
     cmpwi r3, 0x0
-    beq lbl_fn_8013655C_0000070C
+    beq lbl_boss_updatePhaseState_0000070C
     bl fn_80564060
     cmpwi r3, 0x0
-    beq lbl_fn_8013655C_0000070C
+    beq lbl_boss_updatePhaseState_0000070C
     li r29, 0x1
-lbl_fn_8013655C_0000070C:
+lbl_boss_updatePhaseState_0000070C:
     addi r28, r28, 0x1
     addi r27, r27, 0x4
     cmplwi r28, 0x8
-    blt lbl_fn_8013655C_000006F0
+    blt lbl_boss_updatePhaseState_000006F0
     mr r27, r30
     li r28, 0x0
-    b lbl_fn_8013655C_00000744
-lbl_fn_8013655C_00000728:
+    b lbl_boss_updatePhaseState_00000744
+lbl_boss_updatePhaseState_00000728:
     lwz r3, 0x6a8(r27)
     bl fn_8036354C
     cmpwi r3, 0x0
-    beq lbl_fn_8013655C_0000073C
+    beq lbl_boss_updatePhaseState_0000073C
     li r29, 0x1
-lbl_fn_8013655C_0000073C:
+lbl_boss_updatePhaseState_0000073C:
     addi r27, r27, 0x4
     addi r28, r28, 0x1
-lbl_fn_8013655C_00000744:
+lbl_boss_updatePhaseState_00000744:
     lwz r0, 0x6a4(r30)
     cmplw r28, r0
-    blt lbl_fn_8013655C_00000728
+    blt lbl_boss_updatePhaseState_00000728
     cmpwi r29, 0x0
-    beq lbl_fn_8013655C_0000075C
+    beq lbl_boss_updatePhaseState_0000075C
     li r31, 0x1
-lbl_fn_8013655C_0000075C:
+lbl_boss_updatePhaseState_0000075C:
     lwz r0, 0x121c(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_8013655C_00000788
+    bne lbl_boss_updatePhaseState_00000788
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x154(r1)
@@ -711,8 +711,8 @@ lbl_fn_8013655C_0000075C:
     lwz r0, 0x8(r5)
     stw r3, 0x158(r1)
     stw r0, 0x15c(r1)
-    b lbl_fn_8013655C_000007A4
-lbl_fn_8013655C_00000788:
+    b lbl_boss_updatePhaseState_000007A4
+lbl_boss_updatePhaseState_00000788:
     lis r5, lbl_8077A720@ha
     lwzu r4, lbl_8077A720@l(r5)
     stw r4, 0x154(r1)
@@ -720,7 +720,7 @@ lbl_fn_8013655C_00000788:
     lwz r0, 0x8(r5)
     stw r3, 0x158(r1)
     stw r0, 0x15c(r1)
-lbl_fn_8013655C_000007A4:
+lbl_boss_updatePhaseState_000007A4:
     lwz r5, 0x154(r1)
     addi r3, r1, 0x120
     lwz r4, 0x158(r1)
@@ -728,79 +728,79 @@ lbl_fn_8013655C_000007A4:
     stw r5, 0x120(r1)
     stw r4, 0x124(r1)
     stw r0, 0x128(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8013655C_000007E0
+    beq lbl_boss_updatePhaseState_000007E0
     lwz r3, 0x121c(r30)
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
-    beq lbl_fn_8013655C_000007E0
+    beq lbl_boss_updatePhaseState_000007E0
     li r31, 0x1
-lbl_fn_8013655C_000007E0:
+lbl_boss_updatePhaseState_000007E0:
     addi r3, r30, 0x1220
     bl fn_801210C4
     cmpwi r3, 0x0
-    beq lbl_fn_8013655C_000007F4
+    beq lbl_boss_updatePhaseState_000007F4
     li r31, 0x1
-lbl_fn_8013655C_000007F4:
+lbl_boss_updatePhaseState_000007F4:
     cmpwi r31, 0x0
-    bne lbl_fn_8013655C_00001030
+    bne lbl_boss_updatePhaseState_00001030
     addi r3, r30, 0x8c
     addi r4, r30, 0xb0
     bl fn_804776F4
     lwz r0, 0x54c(r30)
     rlwinm r0, r0, 0, 17, 17
     cmplwi r0, 0x4000
-    beq lbl_fn_8013655C_00000824
+    beq lbl_boss_updatePhaseState_00000824
     addi r3, r30, 0x98
     addi r4, r30, 0xb0
     bl fn_804776F4
-lbl_fn_8013655C_00000824:
+lbl_boss_updatePhaseState_00000824:
     lwz r0, 0x48(r30)
     cmpwi r0, 0x0
-    beq lbl_fn_8013655C_0000083C
+    beq lbl_boss_updatePhaseState_0000083C
     lwz r0, lbl_8087FA20
     cmpwi r0, 0x0
-    bne lbl_fn_8013655C_0000089C
-lbl_fn_8013655C_0000083C:
+    bne lbl_boss_updatePhaseState_0000089C
+lbl_boss_updatePhaseState_0000083C:
     li r3, 0x1fc
     li r4, 0x6
     la r5, lbl_8087D9F4
     la r6, lbl_8087D9F0
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r28, r3
-    beq lbl_fn_8013655C_00000878
+    beq lbl_boss_updatePhaseState_00000878
     li r0, 0x0
     stw r0, 0x0(r3)
     li r4, 0x0
     li r5, 0x0
     addi r3, r3, 0x8
     bl fn_8004B290
-lbl_fn_8013655C_00000878:
+lbl_boss_updatePhaseState_00000878:
     lwz r27, 0x2b8(r30)
     cmpwi r27, 0x0
     stw r28, 0x2b8(r30)
-    beq lbl_fn_8013655C_0000089C
+    beq lbl_boss_updatePhaseState_0000089C
     addi r3, r27, 0x8
     li r4, -0x1
     bl fn_8004B338
     mr r3, r27
     bl dtor_80084684
-lbl_fn_8013655C_0000089C:
+lbl_boss_updatePhaseState_0000089C:
     addi r29, r30, 0x680
     li r28, 0x0
-lbl_fn_8013655C_000008A4:
+lbl_boss_updatePhaseState_000008A4:
     lwz r3, 0x0(r29)
     cmpwi r3, 0x0
-    beq lbl_fn_8013655C_000008B4
+    beq lbl_boss_updatePhaseState_000008B4
     bl fn_80566014
-lbl_fn_8013655C_000008B4:
+lbl_boss_updatePhaseState_000008B4:
     addi r28, r28, 0x1
     addi r29, r29, 0x4
     cmplwi r28, 0x8
-    blt lbl_fn_8013655C_000008A4
+    blt lbl_boss_updatePhaseState_000008A4
     mr r3, r30
     bl fn_80137FC0
     mr r3, r30
@@ -855,7 +855,7 @@ lbl_fn_8013655C_000008B4:
     stw r8, 0xc4(r1)
     stw r7, 0xc8(r1)
     stw r30, 0xcc(r1)
-    bne lbl_fn_8013655C_000009F8
+    bne lbl_boss_updatePhaseState_000009F8
     lis r6, lbl_807C7B20@ha
     lis r4, fn_801370C8@ha
     lis r3, fn_801370F4@ha
@@ -878,7 +878,7 @@ lbl_fn_8013655C_000008B4:
     stw r4, 0x4(r5)
     stw r3, lbl_807C7B20@l(r6)
     stb r0, lbl_8087F088
-lbl_fn_8013655C_000009F8:
+lbl_boss_updatePhaseState_000009F8:
     lwz r6, 0x30(r1)
     addi r3, r1, 0xb0
     lwz r5, 0x34(r1)
@@ -895,7 +895,7 @@ lbl_fn_8013655C_000009F8:
     crclr 6
     bl fn_8008BBD8
     cmpwi r3, 0x0
-    bne lbl_fn_8013655C_00000A7C
+    bne lbl_boss_updatePhaseState_00000A7C
     addic. r0, r1, 0x144
     lwz r5, 0xb0(r1)
     lwz r4, 0xb4(r1)
@@ -905,47 +905,47 @@ lbl_fn_8013655C_000009F8:
     stw r4, 0xa4(r1)
     stw r3, 0xa8(r1)
     stw r0, 0xac(r1)
-    beq lbl_fn_8013655C_00000A74
+    beq lbl_boss_updatePhaseState_00000A74
     stw r5, 0x144(r1)
     stw r4, 0x148(r1)
     stw r3, 0x14c(r1)
     stw r0, 0x150(r1)
-lbl_fn_8013655C_00000A74:
+lbl_boss_updatePhaseState_00000A74:
     li r0, 0x1
-    b lbl_fn_8013655C_00000A80
-lbl_fn_8013655C_00000A7C:
+    b lbl_boss_updatePhaseState_00000A80
+lbl_boss_updatePhaseState_00000A7C:
     li r0, 0x0
-lbl_fn_8013655C_00000A80:
+lbl_boss_updatePhaseState_00000A80:
     cmpwi r0, 0x0
-    beq lbl_fn_8013655C_00000A98
+    beq lbl_boss_updatePhaseState_00000A98
     lis r3, lbl_807C7B20@ha
     addi r3, r3, lbl_807C7B20@l
     stw r3, 0x140(r1)
-    b lbl_fn_8013655C_00000AA0
-lbl_fn_8013655C_00000A98:
+    b lbl_boss_updatePhaseState_00000AA0
+lbl_boss_updatePhaseState_00000A98:
     li r0, 0x0
     stw r0, 0x140(r1)
-lbl_fn_8013655C_00000AA0:
+lbl_boss_updatePhaseState_00000AA0:
     addi r3, r30, 0xb0
     addi r4, r1, 0x140
     bl fn_800F29D0
     addic. r3, r1, 0x140
-    beq lbl_fn_8013655C_00000AE8
+    beq lbl_boss_updatePhaseState_00000AE8
     lwz r4, 0x140(r1)
     cmpwi r4, 0x0
-    beq lbl_fn_8013655C_00000AE8
+    beq lbl_boss_updatePhaseState_00000AE8
     lwz r12, 0x0(r4)
     cmpwi r12, 0x0
-    beq lbl_fn_8013655C_00000AE0
+    beq lbl_boss_updatePhaseState_00000AE0
     addi r3, r3, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8013655C_00000AE0:
+lbl_boss_updatePhaseState_00000AE0:
     li r0, 0x0
     stw r0, 0x140(r1)
-lbl_fn_8013655C_00000AE8:
+lbl_boss_updatePhaseState_00000AE8:
     lis r29, lbl_80737A9C@ha
     addi r3, r30, 0xb0
     addi r29, r29, lbl_80737A9C@l
@@ -983,14 +983,14 @@ lbl_fn_8013655C_00000AE8:
     bl fn_80091CFC
     lwz r0, 0x12a8(r30)
     extrwi. r0, r0, 1, 4
-    beq lbl_fn_8013655C_00000B8C
+    beq lbl_boss_updatePhaseState_00000B8C
     addi r3, r30, 0xb0
     addi r4, r29, 0xad
     bl fn_80091CFC
-lbl_fn_8013655C_00000B8C:
+lbl_boss_updatePhaseState_00000B8C:
     lwz r4, 0x50(r30)
     cmpwi r4, 0x1
-    beq lbl_fn_8013655C_00000BB8
+    beq lbl_boss_updatePhaseState_00000BB8
     lis r3, 0x1062
     addi r0, r3, 0x4dd3
     mulhw r0, r0, r4
@@ -998,51 +998,51 @@ lbl_fn_8013655C_00000B8C:
     srwi r3, r0, 31
     add r0, r0, r3
     cmpwi r0, 0x64
-    bne lbl_fn_8013655C_00000BC4
-lbl_fn_8013655C_00000BB8:
+    bne lbl_boss_updatePhaseState_00000BC4
+lbl_boss_updatePhaseState_00000BB8:
     lwz r0, 0x12a8(r30)
     oris r0, r0, 0x200
     stw r0, 0x12a8(r30)
-lbl_fn_8013655C_00000BC4:
+lbl_boss_updatePhaseState_00000BC4:
     lis r29, lbl_80737A9C@ha
     addi r3, r30, 0xb0
     addi r29, r29, lbl_80737A9C@l
     li r5, 0x0
     addi r4, r29, 0xb4
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     stw r3, 0x524(r30)
     addi r3, r30, 0xb0
     addi r4, r29, 0x5b
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     lwz r0, 0x160(r30)
     stw r3, 0x520(r30)
     cmpwi r0, 0x0
-    bge lbl_fn_8013655C_00000C20
+    bge lbl_boss_updatePhaseState_00000C20
     addi r3, r30, 0xb0
     addi r4, r29, 0x60
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     mr r4, r3
     addi r3, r30, 0xb0
     li r5, -0x1
     bl fn_80095D44
-lbl_fn_8013655C_00000C20:
+lbl_boss_updatePhaseState_00000C20:
     addi r3, r30, 0xb0
     bl fn_8008B130
     lis r29, lbl_80737A9C@ha
     addi r29, r29, lbl_80737A9C@l
     addi r4, r29, 0xbe
-    bl fn_806827C4
+    bl strstr
     cmpwi r3, 0x0
-    bne lbl_fn_8013655C_00000C58
+    bne lbl_boss_updatePhaseState_00000C58
     addi r3, r30, 0xb0
     bl fn_8008B130
     addi r4, r29, 0xc3
-    bl fn_806827C4
+    bl strstr
     cmpwi r3, 0x0
-    beq lbl_fn_8013655C_00000C74
-lbl_fn_8013655C_00000C58:
+    beq lbl_boss_updatePhaseState_00000C74
+lbl_boss_updatePhaseState_00000C58:
     lis r5, lbl_80737A9C@ha
     lfs f1, lbl_8088198C
     addi r5, r5, lbl_80737A9C@l
@@ -1050,11 +1050,11 @@ lbl_fn_8013655C_00000C58:
     addi r4, r5, 0x60
     addi r5, r5, 0xc8
     bl fn_80099E9C
-lbl_fn_8013655C_00000C74:
+lbl_boss_updatePhaseState_00000C74:
     lwz r3, 0x50(r30)
     subis r0, r3, 0xa
     cmplwi r0, 0xae77
-    bne lbl_fn_8013655C_00000CA0
+    bne lbl_boss_updatePhaseState_00000CA0
     lis r5, lbl_80737A9C@ha
     lfs f1, lbl_80881990
     addi r5, r5, lbl_80737A9C@l
@@ -1062,7 +1062,7 @@ lbl_fn_8013655C_00000C74:
     addi r4, r5, 0x60
     addi r5, r5, 0xce
     bl fn_80099E9C
-lbl_fn_8013655C_00000CA0:
+lbl_boss_updatePhaseState_00000CA0:
     mr r4, r30
     addi r3, r30, 0x10d8
     bl fn_801298EC
@@ -1074,17 +1074,17 @@ lbl_fn_8013655C_00000CA0:
     bl fn_80121114
     mr r28, r30
     li r27, 0x0
-    b lbl_fn_8013655C_00000CE4
-lbl_fn_8013655C_00000CD0:
+    b lbl_boss_updatePhaseState_00000CE4
+lbl_boss_updatePhaseState_00000CD0:
     lwz r3, 0x6a8(r28)
     addi r4, r30, 0xb0
     bl fn_80363960
     addi r28, r28, 0x4
     addi r27, r27, 0x1
-lbl_fn_8013655C_00000CE4:
+lbl_boss_updatePhaseState_00000CE4:
     lwz r0, 0x6a4(r30)
     cmplw r27, r0
-    blt lbl_fn_8013655C_00000CD0
+    blt lbl_boss_updatePhaseState_00000CD0
     lwz r5, 0x484(r30)
     addi r3, r30, 0xb0
     lfs f1, lbl_80881964
@@ -1093,11 +1093,11 @@ lbl_fn_8013655C_00000CE4:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r0, 0x12c0(r30)
     cmpwi r0, 0x0
-    ble lbl_fn_8013655C_00000D8C
-    bl fn_80680CF8
+    ble lbl_boss_updatePhaseState_00000D8C
+    bl rand
     lis r5, 0x4178
     lis r4, 0x4330
     addi r0, r5, 0x749f
@@ -1124,7 +1124,7 @@ lbl_fn_8013655C_00000CE4:
     fdivs f3, f4, f3
     fmuls f0, f0, f3
     stfs f0, 0x2e4(r30)
-lbl_fn_8013655C_00000D8C:
+lbl_boss_updatePhaseState_00000D8C:
     addi r3, r30, 0xb0
     li r4, 0x1
     bl fn_80097E80
@@ -1134,44 +1134,44 @@ lbl_fn_8013655C_00000D8C:
     addi r4, r1, 0x12c
     bl fn_8000D430
     addic. r3, r1, 0x12c
-    beq lbl_fn_8013655C_00000DE8
+    beq lbl_boss_updatePhaseState_00000DE8
     lwz r4, 0x12c(r1)
     cmpwi r4, 0x0
-    beq lbl_fn_8013655C_00000DE8
+    beq lbl_boss_updatePhaseState_00000DE8
     lwz r12, 0x0(r4)
     cmpwi r12, 0x0
-    beq lbl_fn_8013655C_00000DE0
+    beq lbl_boss_updatePhaseState_00000DE0
     addi r3, r3, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8013655C_00000DE0:
+lbl_boss_updatePhaseState_00000DE0:
     li r0, 0x0
     stw r0, 0x12c(r1)
-lbl_fn_8013655C_00000DE8:
+lbl_boss_updatePhaseState_00000DE8:
     addi r3, r30, 0xb0
     bl fn_80097510
     lwz r0, 0x2bc(r30)
     extlwi r0, r0, 2, 26
     srawi. r0, r0, 31
-    beq lbl_fn_8013655C_00000E34
+    beq lbl_boss_updatePhaseState_00000E34
     lwz r0, 0x2bc(r30)
     addi r29, r30, 0x680
     li r28, 0x0
     ori r0, r0, 0x10
     stw r0, 0x2bc(r30)
-lbl_fn_8013655C_00000E14:
+lbl_boss_updatePhaseState_00000E14:
     lwz r3, 0x0(r29)
     cmpwi r3, 0x0
-    beq lbl_fn_8013655C_00000E24
+    beq lbl_boss_updatePhaseState_00000E24
     bl fn_805663FC
-lbl_fn_8013655C_00000E24:
+lbl_boss_updatePhaseState_00000E24:
     addi r28, r28, 0x1
     addi r29, r29, 0x4
     cmplwi r28, 0x8
-    blt lbl_fn_8013655C_00000E14
-lbl_fn_8013655C_00000E34:
+    blt lbl_boss_updatePhaseState_00000E14
+lbl_boss_updatePhaseState_00000E34:
     lfs f0, 0x538(r30)
     addi r4, r30, 0x13b8
     lfs f2, 0x530(r30)
@@ -1197,108 +1197,108 @@ lbl_fn_8013655C_00000E34:
     li r4, 0x1dc
     bl fn_80097D40
     cmpwi r3, 0x0
-    bne lbl_fn_8013655C_00000EA8
+    bne lbl_boss_updatePhaseState_00000EA8
     lwz r0, 0x7ec(r30)
     ori r0, r0, 0x80
     stw r0, 0x7ec(r30)
-lbl_fn_8013655C_00000EA8:
+lbl_boss_updatePhaseState_00000EA8:
     lwz r3, 0x5c(r30)
     lwz r0, 0x9c(r3)
     rlwinm r3, r0, 0, 15, 15
     subis r0, r3, 0x1
     cmplwi r0, 0x0
-    bne lbl_fn_8013655C_00000ECC
+    bne lbl_boss_updatePhaseState_00000ECC
     lwz r0, 0x7ec(r30)
     ori r0, r0, 0x4
     stw r0, 0x7ec(r30)
-lbl_fn_8013655C_00000ECC:
+lbl_boss_updatePhaseState_00000ECC:
     addi r3, r30, 0xb0
     li r4, 0x45
     bl fn_80097D40
     cmpwi r3, 0x0
-    bne lbl_fn_8013655C_00000EEC
+    bne lbl_boss_updatePhaseState_00000EEC
     lwz r0, 0xc10(r30)
     ori r0, r0, 0x2
     stw r0, 0xc10(r30)
-lbl_fn_8013655C_00000EEC:
+lbl_boss_updatePhaseState_00000EEC:
     addi r3, r30, 0xb0
     li r4, 0x1dd
     bl fn_80097D40
     cmpwi r3, 0x0
-    bne lbl_fn_8013655C_00000F0C
+    bne lbl_boss_updatePhaseState_00000F0C
     lwz r0, 0xc10(r30)
     ori r0, r0, 0x4
     stw r0, 0xc10(r30)
-lbl_fn_8013655C_00000F0C:
+lbl_boss_updatePhaseState_00000F0C:
     addi r3, r30, 0xb0
     li r4, 0x46
     bl fn_80097D40
     cmpwi r3, 0x0
-    bne lbl_fn_8013655C_00000F2C
+    bne lbl_boss_updatePhaseState_00000F2C
     lwz r0, 0xc10(r30)
     ori r0, r0, 0x80
     stw r0, 0xc10(r30)
-lbl_fn_8013655C_00000F2C:
+lbl_boss_updatePhaseState_00000F2C:
     addi r3, r30, 0xb0
     li r4, 0x68
     bl fn_80097D40
     cmpwi r3, 0x0
-    bne lbl_fn_8013655C_00000F4C
+    bne lbl_boss_updatePhaseState_00000F4C
     lwz r0, 0xc10(r30)
     ori r0, r0, 0x20
     stw r0, 0xc10(r30)
-lbl_fn_8013655C_00000F4C:
+lbl_boss_updatePhaseState_00000F4C:
     addi r3, r30, 0xb0
     li r4, 0x1de
     bl fn_80097D40
     cmpwi r3, 0x0
-    bne lbl_fn_8013655C_00000F6C
+    bne lbl_boss_updatePhaseState_00000F6C
     lwz r0, 0xc10(r30)
     ori r0, r0, 0x2000
     stw r0, 0xc10(r30)
-lbl_fn_8013655C_00000F6C:
+lbl_boss_updatePhaseState_00000F6C:
     lwz r0, 0x137c(r30)
     rlwinm r0, r0, 0, 28, 28
     cmplwi r0, 0x8
-    bne lbl_fn_8013655C_00000F88
+    bne lbl_boss_updatePhaseState_00000F88
     lwz r0, 0xb4(r30)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0xb4(r30)
-lbl_fn_8013655C_00000F88:
+lbl_boss_updatePhaseState_00000F88:
     lwz r0, 0x12a4(r30)
     extrwi r0, r0, 1, 9
     cmplwi r0, 0x1
-    beq lbl_fn_8013655C_00000FAC
+    beq lbl_boss_updatePhaseState_00000FAC
     addi r3, r30, 0xb0
     li r4, 0x8e
     bl fn_80097D40
     cmpwi r3, 0x0
-    bne lbl_fn_8013655C_00000FB8
-lbl_fn_8013655C_00000FAC:
+    bne lbl_boss_updatePhaseState_00000FB8
+lbl_boss_updatePhaseState_00000FAC:
     lwz r0, 0x54c(r30)
     oris r0, r0, 0x100
     stw r0, 0x54c(r30)
-lbl_fn_8013655C_00000FB8:
+lbl_boss_updatePhaseState_00000FB8:
     lwz r3, 0x50(r30)
     subis r0, r3, 0x3
     cmplwi r0, 0x18f9
-    bne lbl_fn_8013655C_00000FE0
+    bne lbl_boss_updatePhaseState_00000FE0
     lwz r0, 0x7ec(r30)
     ori r0, r0, 0x1
     oris r0, r0, 0x40
     ori r0, r0, 0x100
     oris r0, r0, 0x1
     stw r0, 0x7ec(r30)
-lbl_fn_8013655C_00000FE0:
+lbl_boss_updatePhaseState_00000FE0:
     addi r3, r30, 0xb0
     li r4, 0x5d
     bl fn_80097D40
     cmpwi r3, 0x0
-    bne lbl_fn_8013655C_00001000
+    bne lbl_boss_updatePhaseState_00001000
     lwz r0, 0x54c(r30)
     oris r0, r0, 0x400
     stw r0, 0x54c(r30)
-lbl_fn_8013655C_00001000:
+lbl_boss_updatePhaseState_00001000:
     addi r3, r30, 0x7d4
     bl fn_8012B3E8
     addi r3, r30, 0x7d4
@@ -1311,7 +1311,7 @@ lbl_fn_8013655C_00001000:
     bl fn_8014FD30
     li r0, 0x3
     stw r0, 0xac(r30)
-lbl_fn_8013655C_00001030:
+lbl_boss_updatePhaseState_00001030:
     addi r11, r1, 0x190
     mr r3, r31
     bl _restgpr_27
@@ -1383,7 +1383,7 @@ lbl_fn_801370F4_000010F0:
     lis r3, lbl_8077C458@ha
     lwz r4, lbl_8077C458@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_801370F4_00001120
@@ -1410,10 +1410,10 @@ asm void fn_801371AC(void)
     stmw r16, 0xeb0(r1)
     mr r17, r3
     addi r3, r3, 0x84
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r19, r3
     addi r3, r17, 0x84
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r16, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -1466,22 +1466,22 @@ lbl_fn_801371AC_000011EC:
     li r31, 0x1
 lbl_fn_801371AC_0000122C:
     addi r3, r1, 0x870
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lbz r0, 0x0(r3)
     mr r16, r3
     cmpwi r0, 0x3b
     beq lbl_fn_801371AC_00001AE8
     addi r4, r28, 0xd4
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_801371AC_0000130C
     addi r3, r1, 0x870
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r1, 0x670
     bl strcpy
     addi r3, r1, 0x870
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r1, 0x770
     bl strcpy
@@ -1490,7 +1490,7 @@ lbl_fn_801371AC_0000122C:
 lbl_fn_801371AC_00001284:
     lwz r4, 0x0(r18)
     addi r3, r1, 0x670
-    bl fn_806827C4
+    bl strstr
     cmpwi r3, 0x0
     beq lbl_fn_801371AC_000012B0
     slwi r0, r16, 3
@@ -1507,7 +1507,7 @@ lbl_fn_801371AC_000012B0:
 lbl_fn_801371AC_000012C0:
     addi r3, r1, 0x770
     addi r4, r28, 0x24
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_801371AC_000012E8
     addi r3, r17, 0xb0
@@ -1529,22 +1529,22 @@ lbl_fn_801371AC_000012F8:
 lbl_fn_801371AC_0000130C:
     mr r3, r16
     addi r4, r28, 0xda
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_801371AC_00001388
     addi r3, r1, 0x870
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r1, 0x270
     bl strcpy
     addi r3, r1, 0x770
     addi r4, r28, 0x24
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_801371AC_00001368
     addi r3, r1, 0x870
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     addi r3, r17, 0xb0
     addi r4, r1, 0x270
     li r5, 0x0
@@ -1552,8 +1552,8 @@ lbl_fn_801371AC_0000130C:
     b lbl_fn_801371AC_00001AE8
 lbl_fn_801371AC_00001368:
     addi r3, r1, 0x870
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     addi r3, r17, 0xb0
     addi r4, r1, 0x270
     addi r5, r1, 0x770
@@ -1562,7 +1562,7 @@ lbl_fn_801371AC_00001368:
 lbl_fn_801371AC_00001388:
     mr r3, r16
     addi r4, r28, 0xe4
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_801371AC_0000143C
     lwz r3, lbl_8087F430
@@ -1582,18 +1582,18 @@ lbl_fn_801371AC_000013CC:
     cmpwi r0, 0x0
     bne lbl_fn_801371AC_00001AE8
     addi r3, r1, 0x870
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r1, 0x170
     bl strcpy
     addi r3, r1, 0x770
     addi r4, r28, 0x24
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_801371AC_0000141C
     addi r3, r1, 0x870
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     addi r3, r17, 0xb0
     addi r4, r1, 0x170
     li r5, 0x0
@@ -1601,8 +1601,8 @@ lbl_fn_801371AC_000013CC:
     b lbl_fn_801371AC_00001AE8
 lbl_fn_801371AC_0000141C:
     addi r3, r1, 0x870
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     addi r3, r17, 0xb0
     addi r4, r1, 0x170
     addi r5, r1, 0x770
@@ -1611,7 +1611,7 @@ lbl_fn_801371AC_0000141C:
 lbl_fn_801371AC_0000143C:
     mr r3, r16
     addi r4, r28, 0xf5
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_801371AC_000014F0
     lwz r3, lbl_8087F430
@@ -1631,18 +1631,18 @@ lbl_fn_801371AC_00001480:
     cmpwi r0, 0x0
     beq lbl_fn_801371AC_00001AE8
     addi r3, r1, 0x870
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r1, 0x70
     bl strcpy
     addi r3, r1, 0x770
     addi r4, r28, 0x24
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_801371AC_000014D0
     addi r3, r1, 0x870
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     addi r3, r17, 0xb0
     addi r4, r1, 0x70
     li r5, 0x0
@@ -1650,8 +1650,8 @@ lbl_fn_801371AC_00001480:
     b lbl_fn_801371AC_00001AE8
 lbl_fn_801371AC_000014D0:
     addi r3, r1, 0x870
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     addi r3, r17, 0xb0
     addi r4, r1, 0x70
     addi r5, r1, 0x770
@@ -1660,11 +1660,11 @@ lbl_fn_801371AC_000014D0:
 lbl_fn_801371AC_000014F0:
     mr r3, r16
     addi r4, r28, 0x104
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_801371AC_00001528
     addi r3, r1, 0x870
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r1, 0x570
     bl strcpy
@@ -1675,30 +1675,30 @@ lbl_fn_801371AC_000014F0:
 lbl_fn_801371AC_00001528:
     mr r3, r16
     addi r4, r28, 0x10f
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_801371AC_00001570
     addi r3, r1, 0x870
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r1, 0x470
     bl strcpy
     addi r3, r1, 0x870
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_802180A8
     mr r4, r3
     addi r3, r17, 0xb0
     addi r5, r1, 0x470
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
     b lbl_fn_801371AC_00001AE8
 lbl_fn_801371AC_00001570:
     mr r3, r16
     addi r4, r28, 0x116
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_801371AC_000017B4
     addi r3, r1, 0x870
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     stw r29, 0x60(r1)
     mr r16, r3
     stw r29, 0x64(r1)
@@ -1716,7 +1716,7 @@ lbl_fn_801371AC_00001570:
     addi r8, r1, 0x28
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r16, r28, 0x121
     stw r29, 0x48(r1)
     mr r3, r16
@@ -1735,7 +1735,7 @@ lbl_fn_801371AC_00001570:
     addi r8, r1, 0x20
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r3, r25
     mr r4, r24
     bl fn_8006AD24
@@ -1817,7 +1817,7 @@ lbl_fn_801371AC_0000172C:
     addi r3, r1, 0x60
     addi r8, r1, 0x18
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_801371AC_00001748:
     lwz r0, 0x30(r1)
     srwi. r0, r0, 31
@@ -1853,7 +1853,7 @@ lbl_fn_801371AC_0000178C:
 lbl_fn_801371AC_000017B4:
     mr r3, r16
     addi r4, r28, 0x148
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_801371AC_0000180C
     lwz r3, 0x60(r17)
@@ -1861,12 +1861,12 @@ lbl_fn_801371AC_000017B4:
     beq lbl_fn_801371AC_000017E8
     lwz r3, 0x18(r3)
     addi r4, r28, 0x24
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_801371AC_00001AE8
 lbl_fn_801371AC_000017E8:
     addi r3, r1, 0x870
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lwz r12, 0x98(r17)
     mr r4, r3
     addi r3, r17, 0x98
@@ -1877,7 +1877,7 @@ lbl_fn_801371AC_000017E8:
 lbl_fn_801371AC_0000180C:
     mr r3, r16
     addi r4, r28, 0x156
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_801371AC_00001890
     addi r5, r28, 0x24
@@ -1885,36 +1885,36 @@ lbl_fn_801371AC_0000180C:
     mr r6, r5
     li r4, 0x1
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_801371AC_00001844
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
 lbl_fn_801371AC_00001844:
     lwz r16, 0x121c(r17)
     cmpwi r16, 0x0
     stw r3, 0x121c(r17)
     beq lbl_fn_801371AC_00001874
     mr r3, r16
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r16, 0x4
     beq lbl_fn_801371AC_0000186C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_801371AC_0000186C:
     mr r3, r16
     bl dtor_80084684
 lbl_fn_801371AC_00001874:
     lwz r16, 0x121c(r17)
     addi r3, r1, 0x870
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     mr r3, r16
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     b lbl_fn_801371AC_00001AE8
 lbl_fn_801371AC_00001890:
     mr r3, r16
     addi r4, r28, 0x15a
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_801371AC_000018F4
     addi r5, r28, 0x24
@@ -1922,7 +1922,7 @@ lbl_fn_801371AC_00001890:
     mr r6, r5
     li r4, 0x1
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_801371AC_000018CC
     addi r4, r1, 0x870
@@ -1942,15 +1942,15 @@ lbl_fn_801371AC_000018E4:
 lbl_fn_801371AC_000018F4:
     mr r3, r16
     addi r4, r28, 0x160
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_801371AC_00001AE8
     addi r3, r1, 0x870
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_8020EE8C
     mr r18, r3
     addi r3, r1, 0x870
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     cmplw r3, r30
     mr r16, r3
     beq lbl_fn_801371AC_00001944
@@ -1962,8 +1962,8 @@ lbl_fn_801371AC_000018F4:
     bl memcpy
 lbl_fn_801371AC_00001944:
     addi r3, r1, 0x870
-    bl fn_8005B9CC
-    bl fn_80684600
+    bl talk_formatQuotedString
+    bl atoi
     lwz r0, lbl_8087F4F0
     cmpwi cr1, r0, 0x0
     beq cr1, lbl_fn_801371AC_000019E8
@@ -2010,7 +2010,7 @@ lbl_fn_801371AC_000019E8:
     mr r6, r5
     li r4, 0x0
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r22, r3
     beq lbl_fn_801371AC_00001A38
@@ -2044,7 +2044,7 @@ lbl_fn_801371AC_00001A38:
     add r7, r7, r16
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x54(r1)
     mr r3, r22
     srwi. r0, r0, 31

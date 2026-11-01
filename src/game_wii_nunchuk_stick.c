@@ -10,13 +10,13 @@ extern void _savegpr_25(void);
 extern void fn_800112E0(void);
 extern void fn_8001296C(void);
 extern void fn_80013558(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_8009290C(void);
 extern void fn_80093D98(void);
 extern void fn_80093E90(void);
 extern void fn_80094958(void);
 extern void fn_80094B6C(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_80112918(void);
 extern void fn_801129B4(void);
 extern void fn_80112F5C(void);
@@ -34,12 +34,12 @@ extern void fn_805381A4(void);
 extern void fn_805381CC(void);
 extern void fn_80538DC8(void);
 extern void fn_80541BDC(void);
-extern void fn_805F93C0(void);
+extern void PSMTXMultVec(void);
 extern void fn_8068B770(void);
 extern void fn_8068BC30(void);
 extern void fn_8068BD60(void);
 extern void fn_8068C240(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 
 /* External data declarations */
 extern u8 lbl_8075E858[];
@@ -539,7 +539,7 @@ lbl_fn_80559B30_000006AC:
     lfs f1, lbl_80887E68
     lfs f0, lbl_80887E50
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80559B30_000006BC:
     mr r24, r3
 lbl_fn_80559B30_000006C0:
@@ -561,7 +561,7 @@ lbl_fn_80559B30_000006F4:
     lfs f1, lbl_80887E68
     lfs f0, lbl_80887E50
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80559B30_00000704:
     mr r28, r3
 lbl_fn_80559B30_00000708:
@@ -583,7 +583,7 @@ lbl_fn_80559B30_0000073C:
     lfs f1, lbl_80887E68
     lfs f0, lbl_80887E50
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80559B30_0000074C:
     mr r25, r3
 lbl_fn_80559B30_00000750:
@@ -605,7 +605,7 @@ lbl_fn_80559B30_00000784:
     lfs f1, lbl_80887E68
     lfs f0, lbl_80887E50
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80559B30_00000794:
     slwi r3, r3, 24
     slwi r0, r24, 16
@@ -652,7 +652,7 @@ lbl_fn_80559B30_000007B8:
     stfs f1, 0xb0(r1)
     fdivs f0, f0, f4
     stfs f0, 0xb4(r1)
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r26
     bl fn_80093E90
@@ -1235,7 +1235,7 @@ lbl_fn_8055A4A0_00000F18:
     mr r25, r3
     mr r4, r27
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_8055A4A0_00000FC0
     li r6, 0x0
@@ -1264,7 +1264,7 @@ lbl_fn_8055A4A0_00000FCC:
     stfs f0, 0x1c4(r1)
     stfs f0, 0x1d4(r1)
     stfs f0, 0x1e4(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r3, r1, 0xe0
     lfs f2, 0xe8(r1)
     psq_l f1, 0x0(r3), 0, 0

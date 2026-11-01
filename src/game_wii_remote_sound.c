@@ -13,14 +13,14 @@ extern void fn_8001296C(void);
 extern void fn_80012CBC(void);
 extern void fn_80012CE4(void);
 extern void fn_80012D0C(void);
-extern void fn_800846FC(void);
-extern void fn_80084C24(void);
-extern void fn_80092814(void);
+extern void mem_realloc(void);
+extern void mem_getAllocSize(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_800928B0(void);
 extern void fn_80093F1C(void);
 extern void fn_80094420(void);
 extern void fn_800948F0(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_8048B3B8(void);
 extern void fn_8048BD04(void);
 extern void fn_8048C884(void);
@@ -30,15 +30,15 @@ extern void fn_80538C18(void);
 extern void fn_80538DC8(void);
 extern void fn_80541BDC(void);
 extern void fn_80544294(void);
-extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9750(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
-extern void fn_805F9940(void);
-extern void fn_8068AEA4(void);
-extern void fn_80695720(void);
+extern void PSMTXConcat(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSMTX44Identity(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
+extern void PSVECMag(void);
+extern void std_atan2(void);
+extern void runtime_registerStaticObject(void);
 
 /* External data declarations */
 extern u8 lbl_8075E850[];
@@ -147,13 +147,13 @@ lbl_fn_805553D8_000000C4:
     la r6, lbl_8087D6DC
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8000FAE4@ha
     mr r7, r23
     addi r4, r4, fn_8000FAE4@l
     li r5, 0x0
     li r6, 0x2c
-    bl fn_80695720
+    bl runtime_registerStaticObject
     mr r24, r3
     b lbl_fn_805553D8_00000134
 lbl_fn_805553D8_00000130:
@@ -247,7 +247,7 @@ lbl_fn_805553D8_00000270:
     cmpwi r3, 0x0
     beq lbl_fn_805553D8_00000284
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_805553D8_00000284:
     stw r24, 0x10(r1)
     li r5, 0x0
@@ -345,12 +345,12 @@ lbl_fn_805553D8_000003C4:
     la r5, lbl_8087D810
     la r6, lbl_8087D80C
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     addi r4, r31, fn_8000FAE4@l
     li r5, 0x0
     li r6, 0x2c
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x10(r1)
     mr r27, r3
     cmpwi r0, 0x0
@@ -440,7 +440,7 @@ lbl_fn_805553D8_0000053C:
     cmpwi r3, 0x0
     beq lbl_fn_805553D8_00000550
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_805553D8_00000550:
     stw r27, 0x10(r1)
     stw r29, 0xc(r1)
@@ -458,12 +458,12 @@ lbl_fn_805553D8_0000055C:
     la r6, lbl_8087D80C
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r7, r30
     addi r4, r31, fn_8000FAE4@l
     li r5, 0x0
     li r6, 0x2c
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x10(r1)
     mr r27, r3
     cmpwi r0, 0x0
@@ -553,7 +553,7 @@ lbl_fn_805553D8_000006E4:
     cmpwi r3, 0x0
     beq lbl_fn_805553D8_000006F8
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_805553D8_000006F8:
     stw r27, 0x10(r1)
     stw r30, 0xc(r1)
@@ -596,7 +596,7 @@ lbl_fn_805553D8_00000760:
     beq lbl_fn_805553D8_00000794
     beq lbl_fn_805553D8_00000794
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_805553D8_00000794:
     addi r11, r1, 0x40
     li r3, 0x0
@@ -846,7 +846,7 @@ lbl_fn_80555B88_00000AC8:
     lis r3, lbl_8075EB60@ha
     addi r3, r3, lbl_8075EB60@l
     addi r3, r3, 0x24
-    bl fn_800DC6B4
+    bl str_findChar
     mr r31, r3
     mr r3, r30
     bl fn_8001296C
@@ -878,7 +878,7 @@ lbl_fn_80555B88_00000B2C:
     stfs f2, 0x16c(r1)
 lbl_fn_80555B88_00000B60:
     addi r3, r1, 0x170
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80887E30
     fcmpu cr0, f0, f1
     beq lbl_fn_80555B88_00000DF4
@@ -908,11 +908,11 @@ lbl_fn_80555B88_00000B60:
     beq lbl_fn_80555B88_00000C24
     addi r3, r1, 0x298
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r27
     addi r4, r1, 0x298
     addi r5, r1, 0x268
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x268
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -933,11 +933,11 @@ lbl_fn_80555B88_00000C24:
     beq lbl_fn_80555B88_00000C84
     addi r3, r1, 0x2f8
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r27
     addi r4, r1, 0x2f8
     addi r5, r1, 0x2c8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x2c8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -958,11 +958,11 @@ lbl_fn_80555B88_00000C84:
     beq lbl_fn_80555B88_00000CE4
     addi r3, r1, 0x358
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r27
     addi r4, r1, 0x358
     addi r5, r1, 0x328
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x328
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -980,7 +980,7 @@ lbl_fn_80555B88_00000CE4:
     addi r4, r1, 0x158
     addi r3, r1, 0x388
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f9, lbl_80887E64
     addi r3, r1, 0x164
     lfs f7, 0x15c(r1)
@@ -1109,13 +1109,13 @@ lbl_fn_80555B88_00000E78:
     stfs f8, 0x130(r1)
     stfs f0, 0x128(r1)
     stfs f7, 0x12c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, lbl_80887E30
     fcmpo cr0, f1, f0
     ble lbl_fn_80555B88_000012A4
     addi r3, r1, 0x128
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x130(r1)
     addi r3, r1, 0x128
     lfs f0, lbl_80887E3C
@@ -1141,7 +1141,7 @@ lbl_fn_80555B88_00000F40:
 lbl_fn_80555B88_00000F48:
     frsp f2, f2
     lfs f1, 0x11c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x90(r1)
 lbl_fn_80555B88_00000F5C:
@@ -1149,7 +1149,7 @@ lbl_fn_80555B88_00000F5C:
     addi r3, r1, 0x1f8
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f7, lbl_80887E30
     addi r4, r1, 0x80
     lfs f26, 0x200(r1)
@@ -1199,7 +1199,7 @@ lbl_fn_80555B88_00000F5C:
     stfs f10, 0x254(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x88(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x88(r1)
     lfs f0, lbl_80887E3C
     fabs f7, f2
@@ -1220,7 +1220,7 @@ lbl_fn_80555B88_0000106C:
     b lbl_fn_80555B88_0000108C
 lbl_fn_80555B88_00001078:
     lfs f1, 0x84(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x8c(r1)
@@ -1259,7 +1259,7 @@ lbl_fn_80555B88_000010F8:
 lbl_fn_80555B88_00001100:
     frsp f2, f2
     lfs f1, 0x110(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_80555B88_00001114:
@@ -1267,7 +1267,7 @@ lbl_fn_80555B88_00001114:
     addi r3, r1, 0x188
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f7, lbl_80887E30
     addi r4, r1, 0x38
     lfs f31, 0x190(r1)
@@ -1317,7 +1317,7 @@ lbl_fn_80555B88_00001114:
     stfs f10, 0x1e4(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_80887E3C
     fabs f7, f2
@@ -1338,7 +1338,7 @@ lbl_fn_80555B88_00001224:
     b lbl_fn_80555B88_00001244
 lbl_fn_80555B88_00001230:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -1389,7 +1389,7 @@ lbl_fn_80555B88_000012BC:
     stfs f7, 0xfc(r1)
     stfs f0, 0xf8(r1)
     stfs f8, 0x100(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, lbl_80887E30
     fmr f26, f1
     fcmpo cr0, f1, f0
@@ -1397,7 +1397,7 @@ lbl_fn_80555B88_000012BC:
     fmuls f26, f1, f31
     addi r3, r1, 0xf8
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_80555B88_00001318:
     lfs f8, 0x100(r1)
     addi r4, r1, 0xa4
@@ -1532,7 +1532,7 @@ lbl_fn_805567A8_000014A4:
     mr r30, r3
     mr r4, r29
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_805567A8_00001500
     li r28, 0x0
@@ -1550,7 +1550,7 @@ lbl_fn_805567A8_0000150C:
     mr r29, r3
     mr r4, r30
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_805567A8_00001540
     li r4, 0x0
@@ -1591,7 +1591,7 @@ lbl_fn_805567A8_0000154C:
     stfs f12, 0x20(r1)
     stfs f0, 0x24(r1)
     stfs f11, 0x28(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fcmpo cr0, f1, f31
     cror eq, lt, eq
     bne lbl_fn_805567A8_000015F0
@@ -2128,13 +2128,13 @@ lbl_fn_80556C08_00001D04:
     la r5, lbl_8087E674
     la r6, lbl_8087E670
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80544294@ha
     li r5, 0x0
     addi r4, r4, fn_80544294@l
     li r6, 0x10
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x120(r30)
     mr r26, r3
     cmpwi r0, 0x0
@@ -2214,7 +2214,7 @@ lbl_fn_80556C08_00001E5C:
     cmpwi r3, 0x0
     beq lbl_fn_80556C08_00001E70
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80556C08_00001E70:
     stw r26, 0x120(r30)
     stw r25, 0x11c(r30)
@@ -2232,13 +2232,13 @@ lbl_fn_80556C08_00001E7C:
     la r5, lbl_8087E674
     la r6, lbl_8087E670
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80544294@ha
     mr r7, r25
     addi r4, r4, fn_80544294@l
     li r5, 0x0
     li r6, 0x10
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x120(r30)
     mr r26, r3
     cmpwi r0, 0x0
@@ -2318,7 +2318,7 @@ lbl_fn_80556C08_00001FE0:
     cmpwi r3, 0x0
     beq lbl_fn_80556C08_00001FF4
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80556C08_00001FF4:
     stw r26, 0x120(r30)
     stw r25, 0x11c(r30)
@@ -2380,13 +2380,13 @@ lbl_fn_80556C08_000020A8:
     la r5, lbl_8087E674
     la r6, lbl_8087E670
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80544294@ha
     li r5, 0x0
     addi r4, r4, fn_80544294@l
     li r6, 0x10
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x12c(r30)
     mr r26, r3
     cmpwi r0, 0x0
@@ -2466,7 +2466,7 @@ lbl_fn_80556C08_00002200:
     cmpwi r3, 0x0
     beq lbl_fn_80556C08_00002214
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80556C08_00002214:
     stw r26, 0x12c(r30)
     stw r25, 0x128(r30)
@@ -2484,13 +2484,13 @@ lbl_fn_80556C08_00002220:
     la r5, lbl_8087E674
     la r6, lbl_8087E670
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80544294@ha
     mr r7, r25
     addi r4, r4, fn_80544294@l
     li r5, 0x0
     li r6, 0x10
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x12c(r30)
     mr r26, r3
     cmpwi r0, 0x0
@@ -2570,7 +2570,7 @@ lbl_fn_80556C08_00002384:
     cmpwi r3, 0x0
     beq lbl_fn_80556C08_00002398
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80556C08_00002398:
     stw r26, 0x12c(r30)
     stw r25, 0x128(r30)
@@ -2671,7 +2671,7 @@ lbl_fn_80556C08_00002498:
     stfs f0, 0x7c(r1)
     stfs f4, 0x80(r1)
     stfs f9, 0x84(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, lbl_80887E30
     fmr f30, f1
     fcmpo cr0, f1, f0
@@ -2679,7 +2679,7 @@ lbl_fn_80556C08_00002498:
     fmuls f30, f1, f31
     addi r3, r1, 0x88
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_80556C08_00002520:
     lfs f4, 0x90(r1)
     addi r4, r1, 0x4c

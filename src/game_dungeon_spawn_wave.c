@@ -14,7 +14,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void fn_80049B74(void);
 extern void fn_80049CDC(void);
-extern void fn_8005B9CC(void);
+extern void talk_formatQuotedString(void);
 extern void fn_800697D8(void);
 extern void fn_8006AA20(void);
 extern void fn_8007FAF0(void);
@@ -23,17 +23,17 @@ extern void fn_8009385C(void);
 extern void fn_800C93D4(void);
 extern void fn_800CA7D4(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB404(void);
 extern void fn_800CB4EC(void);
 extern void fn_800CB58C(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800CB6F8(void);
 extern void fn_800CFDA0(void);
 extern void fn_800CFDC8(void);
 extern void fn_800D0AB0(void);
-extern void fn_800DC288(void);
-extern void fn_800DC6B4(void);
+extern void str_skipWhitespace(void);
+extern void str_findChar(void);
 extern void fn_8021FFB0(void);
 extern void fn_803CC6B4(void);
 extern void fn_803E3BE8(void);
@@ -103,9 +103,9 @@ extern void fn_8043A770(void);
 extern void fn_8043A850(void);
 extern void fn_8043B778(void);
 extern void fn_8043D594(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -178,7 +178,7 @@ asm void fn_803EAA7C(void)
     beq lbl_fn_803EAA7C_00000060
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803EAA7C_0000017C
 lbl_fn_803EAA7C_00000060:
     lwz r3, lbl_8087F490
@@ -202,14 +202,14 @@ lbl_fn_803EAA7C_0000009C:
     bne lbl_fn_803EAA7C_000000B4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803EAA7C_0000017C
 lbl_fn_803EAA7C_000000B4:
     cmpwi r28, 0x0
     bne lbl_fn_803EAA7C_000000CC
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803EAA7C_0000017C
 lbl_fn_803EAA7C_000000CC:
     lwz r31, 0x7c(r28)
@@ -223,7 +223,7 @@ lbl_fn_803EAA7C_000000CC:
 lbl_fn_803EAA7C_000000EC:
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803EAA7C_0000017C
 lbl_fn_803EAA7C_000000FC:
     lwz r3, lbl_8087F430
@@ -251,7 +251,7 @@ lbl_fn_803EAA7C_00000140:
     bne lbl_fn_803EAA7C_00000158
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803EAA7C_0000017C
 lbl_fn_803EAA7C_00000158:
     fmr f1, f31
@@ -262,7 +262,7 @@ lbl_fn_803EAA7C_00000158:
     addi r3, r1, 0x8
     li r4, -0x1
     stw r28, 0x2658(r5)
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_803EAA7C_0000017C:
     lwz r0, 0x34(r1)
     psq_l f31, 0x28(r1), 0, 0
@@ -330,7 +330,7 @@ lbl_fn_803EAC3C_00000230:
     li r4, 0x0
     li r5, 0x0
     mr r3, r30
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x18(r30)
     cmpwi r3, 0x0
     beq lbl_fn_803EAC3C_00000280
@@ -616,7 +616,7 @@ lbl_fn_803EB038_00000630:
 lbl_fn_803EB038_00000638:
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r4, 0x18(r31)
     cmpwi r4, 0x0
     beq lbl_fn_803EB038_0000067C
@@ -734,7 +734,7 @@ lbl_fn_803EB234_000007D4:
     cmpwi r3, 0x0
     bne lbl_fn_803EB234_000007F4
     addi r3, r31, 0x10
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_803EB234_000007FC
 lbl_fn_803EB234_000007F4:
@@ -874,7 +874,7 @@ lbl_fn_803EB394_00000970:
     mr r3, r25
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x18(r25)
     cmpwi r3, 0x0
     beq lbl_fn_803EB394_000009D4
@@ -946,7 +946,7 @@ lbl_fn_803EB4A8_00000A90:
     mr r3, r24
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x18(r24)
     cmpwi r3, 0x0
     beq lbl_fn_803EB4A8_00000AD0
@@ -993,7 +993,7 @@ lbl_fn_803EB4A8_00000B30:
     mr r3, r27
     li r4, 0xa
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     cmpwi r31, 0x0
     bne lbl_fn_803EB4A8_00000B94
     lwz r3, 0x18(r27)
@@ -1098,7 +1098,7 @@ lbl_fn_803EB668_00000C94:
     mr r3, r27
     li r4, 0x5
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r4, 0x18(r27)
     cmpwi r4, 0x0
     beq lbl_fn_803EB668_00000CE8
@@ -1208,7 +1208,7 @@ lbl_fn_803EB7E4_00000E28:
     mr r3, r30
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x18(r30)
     cmpwi r3, 0x0
     beq lbl_fn_803EB7E4_00000E68
@@ -1402,7 +1402,7 @@ lbl_fn_803EBAC8_000010AC:
     mr r3, r26
     mr r4, r24
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x18(r26)
     cmpwi r3, 0x0
     beq lbl_fn_803EBAC8_000010EC
@@ -1505,7 +1505,7 @@ asm void fn_803EBC44(void)
     mr r3, r30
     stw r0, 0x20(r1)
     stw r0, 0x28(r1)
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     mr r3, r31
     bl fn_80092954
@@ -1513,12 +1513,12 @@ asm void fn_803EBC44(void)
     stw r3, 0x0(r29)
     beq lbl_fn_803EBC44_000012D4
     mr r3, r30
-    bl fn_8005B9CC
-    bl fn_80684600
+    bl talk_formatQuotedString
+    bl atoi
     stw r3, 0x4(r29)
     mr r3, r30
-    bl fn_8005B9CC
-    bl fn_80684600
+    bl talk_formatQuotedString
+    bl atoi
     stw r3, 0x8(r29)
     lis r4, lbl_80751DB0@ha
     lwz r5, 0x0(r29)
@@ -1552,8 +1552,8 @@ asm void fn_803EBC44(void)
     fdivs f1, f1, f4
     stfs f0, 0xc(r29)
     stfs f1, 0x18(r1)
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     stfs f1, 0x10(r29)
     lwz r3, 0x0(r29)
     lbz r0, 0x4d(r3)
@@ -1807,12 +1807,12 @@ asm void fn_803EC0A4(void)
     stw r30, 0x8(r1)
     mr r30, r3
     mr r3, r31
-    bl fn_8005B9CC
-    bl fn_800DC6B4
+    bl talk_formatQuotedString
+    bl str_findChar
     stw r3, 0x0(r30)
     mr r3, r31
-    bl fn_8005B9CC
-    bl fn_80684600
+    bl talk_formatQuotedString
+    bl atoi
     stw r3, 0x4(r30)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

@@ -5,21 +5,21 @@
 extern void _restgpr_24(void);
 extern void _savegpr_24(void);
 extern void fn_8000D114(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000D9F8(void);
 extern void fn_8001047C(void);
 extern void fn_80012C88(void);
 extern void fn_80013410(void);
 extern void fn_8004B338(void);
-extern void fn_8004B378(void);
+extern void item_useConsumable(void);
 extern void fn_8004BF64(void);
 extern void fn_8008B964(void);
 extern void fn_800A97C4(void);
 extern void fn_800C16B4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB58C(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800F52F0(void);
 extern void fn_800F7260(void);
 extern void fn_800F7FF0(void);
@@ -43,7 +43,7 @@ extern void fn_802F0990(void);
 extern void fn_80366DAC(void);
 extern void fn_80366E08(void);
 extern void fn_8036E624(void);
-extern void fn_80370174(void);
+extern void world_getGlobalFlag(void);
 extern void fn_8037529C(void);
 extern void fn_8037F688(void);
 extern void fn_80383728(void);
@@ -155,7 +155,7 @@ asm void fn_8052C10C(void)
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addi r3, r31, 0x1224
     bl fn_803CF734
     addi r3, r31, 0x1268
@@ -202,13 +202,13 @@ lbl_fn_8052C10C_000000C4:
 lbl_fn_8052C10C_00000104:
     bl fn_80121F00
     li r4, 0x124
-    bl fn_80370174
+    bl world_getGlobalFlag
     mr r30, r3
     b lbl_fn_8052C10C_000001B8
 lbl_fn_8052C10C_00000118:
     bl fn_80121F00
     li r4, 0x125
-    bl fn_80370174
+    bl world_getGlobalFlag
     mr r30, r3
     bl fn_80121F00
     bl fn_8052C650
@@ -217,7 +217,7 @@ lbl_fn_8052C10C_00000118:
     bgt lbl_fn_8052C10C_000001B8
     bl fn_80121F00
     li r4, 0x764
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x1
     bge lbl_fn_8052C10C_000001B8
     li r30, 0x1
@@ -225,31 +225,31 @@ lbl_fn_8052C10C_00000118:
 lbl_fn_8052C10C_00000158:
     bl fn_80121F00
     li r4, 0x126
-    bl fn_80370174
+    bl world_getGlobalFlag
     mr r30, r3
     b lbl_fn_8052C10C_000001B8
 lbl_fn_8052C10C_0000016C:
     bl fn_80121F00
     li r4, 0x127
-    bl fn_80370174
+    bl world_getGlobalFlag
     mr r30, r3
     b lbl_fn_8052C10C_000001B8
 lbl_fn_8052C10C_00000180:
     bl fn_80121F00
     li r4, 0x128
-    bl fn_80370174
+    bl world_getGlobalFlag
     mr r30, r3
     b lbl_fn_8052C10C_000001B8
 lbl_fn_8052C10C_00000194:
     bl fn_80121F00
     li r4, 0x12a
-    bl fn_80370174
+    bl world_getGlobalFlag
     mr r30, r3
     b lbl_fn_8052C10C_000001B8
 lbl_fn_8052C10C_000001A8:
     bl fn_80121F00
     li r4, 0x129
-    bl fn_80370174
+    bl world_getGlobalFlag
     mr r30, r3
 lbl_fn_8052C10C_000001B8:
     add r3, r28, r27
@@ -426,14 +426,14 @@ lbl_fn_8052C10C_00000408:
     bl fn_8052C68C
     addi r3, r31, 0x11fc
     addi r4, r1, 0x3c
-    bl fn_8000D124
+    bl vec3_copy
     lfs f1, lbl_80887AB0
     mr r4, r25
     addi r3, r1, 0x30
     bl fn_8052C6A8
     addi r3, r31, 0x1208
     addi r4, r1, 0x30
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r1, 0x24
     addi r4, r31, 0x11fc
     addi r5, r1, 0x54
@@ -452,7 +452,7 @@ lbl_fn_8052C10C_00000408:
     addi r3, r31, 0x6c
     bl fn_8037F688
     addi r3, r31, 0x6c
-    bl fn_8004B378
+    bl item_useConsumable
     bl fn_8008B964
     addi r4, r31, 0x6c
     bl fn_80116BD4
@@ -821,7 +821,7 @@ lbl_fn_8052C9C8_00000910:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8052C9C8_00000968
 lbl_fn_8052C9C8_00000934:
     bl fn_8052CA70
@@ -1440,7 +1440,7 @@ lbl_fn_8052CA70_00000E14:
     addi r3, r30, 0x1340
     li r4, 0xa
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
 lbl_fn_8052CA70_000012B8:
     li r0, 0x0
     stw r0, 0x5c(r30)
@@ -1534,7 +1534,7 @@ asm void fn_8052D46C(void)
     bl fn_80013410
     addi r3, r1, 0x188
     addi r4, r1, 0x140
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r1, 0x188
     bl fn_800F7FF0
     addi r3, r1, 0x134
@@ -1543,7 +1543,7 @@ asm void fn_8052D46C(void)
     bl fn_80013410
     addi r3, r1, 0x188
     addi r4, r1, 0x134
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r1, 0x188
     bl fn_800F7FF0
     addi r3, r1, 0x1e8
@@ -1555,7 +1555,7 @@ asm void fn_8052D46C(void)
     addi r4, r1, 0x188
     bl fn_80112960
     addi r3, r1, 0x1e8
-    bl fn_8004B378
+    bl item_useConsumable
     bl fn_8008B964
     addi r4, r1, 0x1e8
     bl fn_8052C6D0
@@ -1596,12 +1596,12 @@ lbl_fn_8052D46C_0000148C:
     bl fn_80113CCC
     mr r4, r3
     addi r3, r31, 0x11fc
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r31, 0x6c
     bl fn_80112958
     mr r4, r3
     addi r3, r31, 0x1208
-    bl fn_8000D124
+    bl vec3_copy
     b lbl_fn_8052D46C_00001978
 lbl_fn_8052D46C_000014E4:
     lwz r0, 0x12ac(r31)
@@ -1618,14 +1618,14 @@ lbl_fn_8052D46C_000014E4:
     bl fn_8052DADC
     addi r3, r31, 0x12ec
     addi r4, r1, 0x11c
-    bl fn_8000D124
+    bl vec3_copy
     lfs f1, 0x12d0(r31)
     addi r3, r1, 0x110
     addi r4, r31, 0x12b0
     bl fn_8052DADC
     addi r3, r31, 0x12f8
     addi r4, r1, 0x110
-    bl fn_8000D124
+    bl vec3_copy
     b lbl_fn_8052D46C_00001580
 lbl_fn_8052D46C_00001540:
     lfs f1, lbl_80887B14
@@ -1635,7 +1635,7 @@ lbl_fn_8052D46C_00001540:
     bl fn_800F7260
     addi r3, r31, 0x12ec
     addi r4, r1, 0x104
-    bl fn_8000D124
+    bl vec3_copy
     lfs f1, lbl_80887B14
     addi r3, r1, 0xf8
     addi r4, r31, 0x12f8
@@ -1643,7 +1643,7 @@ lbl_fn_8052D46C_00001540:
     bl fn_800F7260
     addi r3, r31, 0x12f8
     addi r4, r1, 0xf8
-    bl fn_8000D124
+    bl vec3_copy
 lbl_fn_8052D46C_00001580:
     lwz r0, 0x11f8(r31)
     cmpwi r0, 0x0
@@ -1742,14 +1742,14 @@ lbl_fn_8052D46C_000016A0:
     bl fn_8052C68C
     addi r3, r31, 0x11fc
     addi r4, r1, 0x8c
-    bl fn_8000D124
+    bl vec3_copy
     lfs f1, 0x458(r31)
     mr r4, r30
     addi r3, r1, 0x80
     bl fn_8052C6A8
     addi r3, r31, 0x1208
     addi r4, r1, 0x80
-    bl fn_8000D124
+    bl vec3_copy
     lwz r0, 0x136c(r31)
     li r3, 0x0
     cmpwi r0, 0x0
@@ -1934,13 +1934,13 @@ lbl_fn_8052D46C_00001978:
     addi r3, r31, 0x1340
     li r4, 0x14
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
 lbl_fn_8052D46C_000019A8:
     lfs f1, 0x1214(r31)
     addi r3, r31, 0x6c
     bl fn_8037F688
     addi r3, r31, 0x6c
-    bl fn_8004B378
+    bl item_useConsumable
     bl fn_8008B964
     addi r4, r31, 0x6c
     bl fn_80116BD4

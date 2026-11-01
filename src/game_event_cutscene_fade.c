@@ -7,13 +7,13 @@ extern void dtor_80084684(void);
 extern void fn_8004ADF4(void);
 extern void fn_8004B1EC(void);
 extern void fn_8004B338(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_800897D8(void);
 extern void fn_800CB480(void);
-extern void fn_800D1E9C(void);
-extern void fn_800D2338(void);
-extern void fn_800D5808(void);
+extern void atn_Task_destructor(void);
+extern void atn_Task_unlink(void);
+extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_801011B8(void);
 extern void fn_8020F130(void);
 extern void fn_8020F71C(void);
@@ -38,8 +38,8 @@ extern void fn_8054FB14(void);
 extern void fn_8054FBCC(void);
 extern void fn_80576034(void);
 extern void fn_8059C330(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 extern void fn_806959D8(void);
 extern void fn_80695A50(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -374,8 +374,8 @@ lbl_fn_8047DF70_00000404:
     lwz r3, 0x40(r31)
     cmpwi r3, 0x0
     beq lbl_fn_8047DF70_0000042C
-    lis r4, fn_800D5808@ha
-    addi r4, r4, fn_800D5808@l
+    lis r4, atn_LH_Texture_destructAndFree@ha
+    addi r4, r4, atn_LH_Texture_destructAndFree@l
     bl fn_80695A50
 lbl_fn_8047DF70_0000042C:
     li r0, 0x0
@@ -652,7 +652,7 @@ lbl_fn_8047DF70_000007C0:
 lbl_fn_8047DF70_000007F0:
     mr r3, r29
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r30, 0x0
     ble lbl_fn_8047DF70_0000080C
     mr r3, r29
@@ -684,7 +684,7 @@ asm void fn_8047E4BC(void)
     addi r5, r5, 0x1c7
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8047E4BC_00000874
     mr r4, r31
@@ -713,7 +713,7 @@ asm void fn_8047E528(void)
     b lbl_fn_8047E528_000008BC
 lbl_fn_8047E528_000008B0:
     lwz r3, 0x0(r31)
-    bl fn_800D2338
+    bl atn_Task_unlink
     addi r31, r31, 0x4
 lbl_fn_8047E528_000008BC:
     lwz r4, 0x68(r30)
@@ -835,8 +835,8 @@ lbl_fn_8047E5DC_00000A2C:
     addi r3, r3, __files@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8047E5DC_00000A5C:
     li r5, 0x0
     addi r4, r28, 0x6c
@@ -862,8 +862,8 @@ lbl_fn_8047E5DC_00000A5C:
     addi r4, r4, 0x1c8
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8047E5DC_00000AC4:
     lis r3, 0x1555
     addi r0, r3, 0x5555
@@ -918,11 +918,11 @@ lbl_fn_8047E5DC_00000B58:
     addi r4, r4, 0x1c8
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8047E5DC_00000B8C:
     slwi r3, r31, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_8047E5DC_00000BC0
@@ -932,8 +932,8 @@ lbl_fn_8047E5DC_00000B8C:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8047E5DC_00000BC0:
     lwz r0, 0x18(r1)
     stw r27, 0x14(r1)
@@ -1151,7 +1151,7 @@ lbl_fn_8047EA34_00000E8C:
 lbl_fn_8047EA34_00000E94:
     addi r26, r27, 0xbc
     li r3, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_8047EA34_00000ECC
@@ -1161,8 +1161,8 @@ lbl_fn_8047EA34_00000E94:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_807901BC@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8047EA34_00000ECC:
     addic. r3, r30, 0x8
     addi r0, r27, 0xbc

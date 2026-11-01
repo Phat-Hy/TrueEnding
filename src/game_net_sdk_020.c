@@ -9,7 +9,7 @@ extern void _restgpr_25(void);
 extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void fn_806809C0(void);
-extern void fn_80682544(void);
+extern void strncmp(void);
 extern void fn_806A420C(void);
 extern void fn_806A4264(void);
 extern void fn_806A7130(void);
@@ -1900,7 +1900,7 @@ lbl_fn_806C9E60_000017E8:
     rotlwi r0, r6, 16
     sth r7, 0x12(r1)
     stw r0, 0x18(r1)
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     beq lbl_fn_806C9E60_00001874
     addi r4, r31, 0x2750

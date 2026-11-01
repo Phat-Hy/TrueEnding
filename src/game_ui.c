@@ -16,7 +16,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8003DEE0(void);
 extern void fn_8004ED34(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800EFC64(void);
 extern void fn_800FB1BC(void);
 extern void fn_80108F38(void);
@@ -43,18 +43,18 @@ extern void fn_801789D8(void);
 extern void fn_80179D44(void);
 extern void fn_8017AC24(void);
 extern void fn_80187CC0(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_8021A684(void);
 extern void fn_8021A9CC(void);
-extern void fn_80370174(void);
+extern void world_getGlobalFlag(void);
 extern void fn_803750E4(void);
 extern void fn_8044D6E0(void);
 extern void fn_804EB4B0(void);
 extern void fn_804EB7C8(void);
 extern void fn_804EB818(void);
 extern void fn_8059B670(void);
-extern void fn_805F98D0(void);
-extern void fn_80680CF8(void);
+extern void PSVECNormalize(void);
+extern void rand(void);
 
 /* External data declarations */
 extern u8 lbl_80730C68[];
@@ -478,7 +478,7 @@ lbl_fn_8003EA3C_00000488:
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8003EA3C_000004BC
     bl fn_8012B0B0
@@ -855,7 +855,7 @@ asm void fn_8003F030(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8003F030_00000A10
     bl fn_8012B0B0
@@ -881,7 +881,7 @@ lbl_fn_8003F030_00000A38:
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8003F030_00000A6C
     bl fn_8012B0B0
@@ -897,7 +897,7 @@ lbl_fn_8003F030_00000A70:
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8003F030_00000AA4
     bl fn_8012B0B0
@@ -987,7 +987,7 @@ lbl_fn_8003F1E4_00000BA4:
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8003F1E4_00000BD8
     bl fn_8012B0B0
@@ -1149,7 +1149,7 @@ lbl_fn_8003F440_00000DFC:
     lwz r3, 0x0(r30)
     cmpwi r3, 0x0
     ble lbl_fn_8003F440_00000E34
-    bl fn_80219E6C
+    bl task_findEntryById
     cmpwi r3, 0x0
     beq lbl_fn_8003F440_00000E34
     lwz r0, 0xbc(r3)
@@ -1229,7 +1229,7 @@ asm void fn_8003F538(void)
     lwz r29, 0x3c(r1)
     add r29, r29, r3
     ble lbl_fn_8003F538_00000F3C
-    bl fn_80680CF8
+    bl rand
     lwz r4, 0x18(r23)
     divw r0, r3, r4
     mullw r0, r0, r4
@@ -1407,7 +1407,7 @@ lbl_fn_8003F538_00001170:
     lwz r31, 0x3c(r1)
     add r31, r31, r3
     ble lbl_fn_8003F538_000011B8
-    bl fn_80680CF8
+    bl rand
     lwz r4, 0x20(r23)
     divw r0, r3, r4
     mullw r0, r0, r4
@@ -2409,7 +2409,7 @@ lbl_fn_80040588_00001F9C:
     cmpwi r3, 0x0
     beq lbl_fn_80040588_00001FC0
     li r4, 0x11b
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     ble lbl_fn_80040588_00001FC0
     lfs f0, lbl_808807D8
@@ -2809,7 +2809,7 @@ asm void fn_80040B44(void)
     stw r0, 0x1c(r3)
     lwz r0, 0xc(r6)
     extrwi r30, r0, 1, 26
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x51ec
     rlwinm r31, r24, 0, 26, 26
     subi r4, r4, 0x7ae1
@@ -2920,7 +2920,7 @@ lbl_fn_80040B44_00002674:
 lbl_fn_80040B44_00002694:
     addi r7, r7, 0x1
     bdnz lbl_fn_80040B44_00002598
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r19
     addi r4, r1, 0x30
     mullw r0, r0, r19
@@ -3048,7 +3048,7 @@ lbl_fn_80040B44_0000285C:
 lbl_fn_80040B44_00002860:
     lwz r31, 0x1c(r21)
     lwz r24, 0x20(r21)
-    bl fn_80680CF8
+    bl rand
     addi r5, r24, 0x1
     srwi r0, r24, 31
     divw r4, r3, r5
@@ -3500,7 +3500,7 @@ lbl_fn_800413EC_00002E90:
     li r4, 0xc
     bl fn_80134134
     mr r29, r3
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x51ec
     lwz r4, 0x0(r29)
     subi r0, r5, 0x7ae1
@@ -3532,7 +3532,7 @@ lbl_fn_800413EC_00002EEC:
     stfs f5, 0x34(r1)
     stfs f3, 0x2c(r1)
     stfs f0, 0x30(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x530(r28)
     addi r25, r1, 0x20
     psq_l f1, 0x528(r28), 0, 0
@@ -3598,7 +3598,7 @@ lbl_fn_800413EC_0000301C:
 lbl_fn_800413EC_00003020:
     fadds f31, f31, f0
 lbl_fn_800413EC_00003024:
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lis r0, 0x4330
     addi r5, r4, 0x749f
@@ -3645,7 +3645,7 @@ lbl_fn_800413EC_000030B0:
     bl fn_8016ADF4
     cmpwi r3, 0x0
     beq lbl_fn_800413EC_00003110
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x5555
     addi r0, r4, 0x5556
     mulhw r4, r0, r3
@@ -3774,7 +3774,7 @@ lbl_fn_800417E8_00003278:
     li r4, 0xc
     bl fn_80134134
     mr r27, r3
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x51ec
     lwz r4, 0x0(r27)
     subi r0, r5, 0x7ae1
@@ -3797,7 +3797,7 @@ lbl_fn_800417E8_000032D4:
     beq lbl_fn_800417E8_000032F0
     lfs f31, lbl_808807C8
 lbl_fn_800417E8_000032F0:
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lis r0, 0x4330
     addi r5, r4, 0x749f

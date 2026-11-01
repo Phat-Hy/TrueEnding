@@ -22,7 +22,7 @@ extern void fn_805E3670(void);
 extern void fn_80607DD0(void);
 extern void fn_80608020(void);
 extern void fn_806080A0(void);
-extern void fn_8068AEB0(void);
+extern void std_pow(void);
 
 /* External data declarations */
 extern u8 lbl_80764648[];
@@ -1683,7 +1683,7 @@ lbl_fn_805E2990_000015E8:
     fsubs f2, f1, f2
     lfd f1, 0x0(r31)
     fdivs f2, f2, f0
-    bl fn_8068AEB0
+    bl std_pow
     frsp f1, f1
     lfs f0, 0xc(r31)
     fmuls f0, f0, f1
@@ -1710,7 +1710,7 @@ lbl_fn_805E2990_00001634:
     fmuls f2, f3, f2
     fadds f2, f4, f2
     fdivs f2, f2, f0
-    bl fn_8068AEB0
+    bl std_pow
     frsp f1, f1
     lfs f0, 0xc(r31)
     fmuls f0, f0, f1
@@ -1766,7 +1766,7 @@ lbl_fn_805E2990_00001720:
     fsubs f2, f1, f2
     lfd f1, 0x0(r31)
     fdivs f2, f2, f0
-    bl fn_8068AEB0
+    bl std_pow
     frsp f1, f1
     lfs f0, 0xc(r31)
     fmuls f0, f0, f1
@@ -1793,7 +1793,7 @@ lbl_fn_805E2990_0000176C:
     fmuls f2, f3, f2
     fadds f2, f4, f2
     fdivs f2, f2, f0
-    bl fn_8068AEB0
+    bl std_pow
     frsp f1, f1
     lfs f0, 0xc(r31)
     fmuls f0, f0, f1

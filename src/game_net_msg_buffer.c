@@ -10,21 +10,21 @@ extern void dtor_80084684(void);
 extern void fn_8003EFB0(void);
 extern void fn_800827E0(void);
 extern void fn_80083AD4(void);
-extern void fn_800D246C(void);
+extern void atn_Task_setActive(void);
 extern void fn_800E2FE0(void);
 extern void fn_800EE5AC(void);
-extern void fn_8013655C(void);
+extern void boss_updatePhaseState(void);
 extern void fn_80139560(void);
 extern void fn_80145334(void);
-extern void fn_80149A30(void);
+extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_8015EB2C(void);
 extern void fn_80176ACC(void);
 extern void fn_8035B78C(void);
 extern void fn_8050128C(void);
 extern void fn_80508F0C(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 
 /* External data declarations */
 extern u8 lbl_80759E48[];
@@ -332,7 +332,7 @@ asm void fn_804FC584(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_8013655C
+    bl boss_updatePhaseState
     cntlzw r0, r3
     srwi r3, r0, 5
     lwz r0, 0x14(r1)
@@ -464,7 +464,7 @@ lbl_fn_804FC5AC_00000508:
     li r4, 0x1
     clrrwi r0, r0, 1
     stw r0, 0x5c0(r31)
-    bl fn_800D246C
+    bl atn_Task_setActive
     li r0, 0x1
     stw r0, 0x14b4(r31)
     stw r0, 0x1450(r31)
@@ -506,7 +506,7 @@ lbl_fn_804FC5AC_0000057C:
 asm void fn_804FC7E0(void)
 {
     nofralloc
-    b fn_80149A30
+    b dialog_renderWindow
 }
 
 asm void fn_804FC7E4(void)
@@ -603,8 +603,8 @@ asm void fn_804FC8D0(void)
     addi r4, r4, lbl_80759E48@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804FC8D0_000006D8:
     lis r3, 0x6
     addi r0, r3, 0x6334

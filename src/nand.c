@@ -11,10 +11,10 @@ extern void fn_8061AD30(void);
 extern void fn_8061AE90(void);
 extern void fn_8061AFD0(void);
 extern void fn_8061B0B0(void);
-extern void fn_8061B180(void);
-extern void fn_8061B290(void);
-extern void fn_8061B4D0(void);
-extern void fn_8061B5D0(void);
+extern void ISFS_Rename(void);
+extern void ISFS_RenameAsync(void);
+extern void ISFS_CreateFile(void);
+extern void ISFS_CreateFileAsync(void);
 extern void fn_8061B860(void);
 extern void fn_8061B930(void);
 extern void fn_8061B940(void);
@@ -27,7 +27,7 @@ extern void fn_806210B0(void);
 extern void fn_806212F0(void);
 extern void fn_80621D30(void);
 extern void fn_806823B0(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void nandConvertErrorCode(void);
 extern void nandGenerateAbsPath(void);
 extern void nandIsInitialized(void);
@@ -71,7 +71,7 @@ void fn_8061F2F0(void);
 void fn_8061F360(void);
 void fn_8061F3D0(void);
 void fn_8061F460(void);
-void fn_8061F470(void);
+const char* msg_getStringPointer(const void* wrapper);
 
 asm void fn_8061E130(void)
 {
@@ -145,7 +145,7 @@ lbl_fn_8061E130_000000CC:
     mr r9, r29
     addi r3, r1, 0x18
     addi r8, r8, fn_80621D30@l
-    bl fn_8061B5D0
+    bl ISFS_CreateFileAsync
     b lbl_fn_8061E130_00000128
 lbl_fn_8061E130_00000110:
     lwz r5, 0x10(r1)
@@ -153,7 +153,7 @@ lbl_fn_8061E130_00000110:
     lwz r6, 0xc(r1)
     addi r3, r1, 0x18
     lwz r7, 0x8(r1)
-    bl fn_8061B4D0
+    bl ISFS_CreateFile
 lbl_fn_8061E130_00000128:
     addi r11, r1, 0x70
     bl _restgpr_26
@@ -1030,7 +1030,7 @@ asm void fn_8061ED60(void)
     bl nandGenerateAbsPath
     addi r3, r1, 0x18
     la r4, lbl_8087E8D8
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8061ED60_00000D40
     addi r3, r1, 0x18
@@ -1068,12 +1068,12 @@ lbl_fn_8061ED60_00000D88:
     addi r3, r1, 0x58
     addi r4, r1, 0x18
     addi r5, r5, fn_80621D30@l
-    bl fn_8061B290
+    bl ISFS_RenameAsync
     b lbl_fn_8061ED60_00000DB8
 lbl_fn_8061ED60_00000DAC:
     addi r3, r1, 0x58
     addi r4, r1, 0x18
-    bl fn_8061B180
+    bl ISFS_Rename
 lbl_fn_8061ED60_00000DB8:
     lwz r0, 0xb4(r1)
     lwz r31, 0xac(r1)
@@ -1483,9 +1483,7 @@ asm void fn_8061F460(void)
     blr
 }
 
-asm void fn_8061F470(void)
+const char* msg_getStringPointer(const void* wrapper)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(const char**)wrapper;
 }

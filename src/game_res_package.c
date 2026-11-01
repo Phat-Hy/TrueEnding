@@ -10,20 +10,20 @@ extern void dtor_80084684(void);
 extern void fn_8000D430(void);
 extern void fn_8004B290(void);
 extern void fn_8004B338(void);
-extern void fn_8004B378(void);
+extern void item_useConsumable(void);
 extern void fn_80071D68(void);
 extern void fn_800760BC(void);
 extern void fn_800760D0(void);
 extern void fn_8007642C(void);
 extern void fn_80076FF8(void);
 extern void fn_8007A7BC(void);
-extern void fn_80084320(void);
-extern void fn_80084C24(void);
+extern void mem_alloc(void);
+extern void mem_getAllocSize(void);
 extern void fn_8008B130(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_80094BD8(void);
 extern void fn_80095F10(void);
-extern void fn_80097C08(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097E80(void);
 extern void fn_800BDB58(void);
 extern void fn_8011D320(void);
@@ -31,18 +31,18 @@ extern void fn_8011EE58(void);
 extern void fn_8011EF14(void);
 extern void fn_801354B4(void);
 extern void fn_80136544(void);
-extern void fn_8013655C(void);
-extern void fn_80148B38(void);
+extern void boss_updatePhaseState(void);
+extern void quest_checkCondition(void);
 extern void fn_80219558(void);
-extern void fn_80473E8C(void);
-extern void fn_80473F18(void);
-extern void fn_805F90D0(void);
-extern void fn_805F9940(void);
-extern void fn_80680CF8(void);
-extern void fn_806827C4(void);
+extern void atn_LoadHandle_destructor(void);
+extern void atn_LoadHandle_getName(void);
+extern void PSMTXTrans(void);
+extern void PSVECMag(void);
+extern void rand(void);
+extern void strstr(void);
 extern void fn_806958E0(void);
 extern void fn_80695A50(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 
 /* External data declarations */
 extern u8 lbl_80742D7C[];
@@ -158,7 +158,7 @@ lbl_fn_8022526C_00000038:
     cmpwi r0, 0x5
     bne lbl_fn_8022526C_00000100
     addi r3, r30, 0x84
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     mr r4, r3
     mr r3, r29
     bl fn_80136544
@@ -169,7 +169,7 @@ lbl_fn_8022526C_00000100:
     stfs f1, 0x1434(r29)
     stfs f1, 0x1438(r29)
     stfs f0, 0x143c(r29)
-    bl fn_8004B378
+    bl item_useConsumable
     li r0, 0x1
     stw r0, 0x1624(r29)
     addi r3, r29, 0x1840
@@ -223,7 +223,7 @@ asm void fn_802253E4(void)
     beq lbl_fn_802253E4_000001CC
     beq lbl_fn_802253E4_000001CC
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_802253E4_000001CC:
     addic. r0, r31, 0x8
     beq lbl_fn_802253E4_000001F8
@@ -242,7 +242,7 @@ lbl_fn_802253E4_000001F8:
     beq lbl_fn_802253E4_0000020C
     mr r3, r31
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_802253E4_0000020C:
     mr r3, r31
     bl dtor_80084684
@@ -307,7 +307,7 @@ asm void fn_802254B0(void)
     stfs f31, 0x48(r1)
     stfs f9, 0x4c(r1)
     stfs f0, 0x50(r1)
-    bl fn_8004B378
+    bl item_useConsumable
     lwz r0, 0x8(r1)
     addi r3, r1, 0x10
     stw r0, 0x162c(r31)
@@ -572,7 +572,7 @@ lbl_fn_8022589C_000006B4:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8022589C_000006F0
     lwz r3, 0x1840(r28)
@@ -594,7 +594,7 @@ lbl_fn_8022589C_000006F0:
     cmpwi r26, 0x7
     blt lbl_fn_8022589C_00000664
     mr r3, r23
-    bl fn_8013655C
+    bl boss_updatePhaseState
     cmpwi r3, 0x0
     bne lbl_fn_8022589C_000009F8
     cmpwi r27, 0x0
@@ -604,7 +604,7 @@ lbl_fn_8022589C_000006F0:
     la r5, lbl_8087D9F4
     la r6, lbl_8087D9F0
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r22, r3
     beq lbl_fn_8022589C_00000774
@@ -633,7 +633,7 @@ lbl_fn_8022589C_00000798:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r3, lbl_8087F0A8
     lwz r0, 0x1134(r3)
     cmpwi r0, 0x0
@@ -740,7 +740,7 @@ lbl_fn_8022589C_00000910:
     addi r4, r4, lbl_80742D7C@l
     li r5, 0x0
     addi r4, r4, 0x1
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     stw r3, 0x1824(r23)
     bge lbl_fn_8022589C_00000948
@@ -779,7 +779,7 @@ lbl_fn_8022589C_000009AC:
     mr r3, r23
     li r4, 0x0
     bl fn_80225C80
-    bl fn_80680CF8
+    bl rand
     lis r4, 0xb60b
     lfs f0, lbl_8088302C
     addi r0, r4, 0x60b7
@@ -834,7 +834,7 @@ lbl_fn_80225C80_00000A5C:
     lis r31, lbl_80742D7C@ha
     addi r31, r31, lbl_80742D7C@l
     addi r4, r31, 0x6
-    bl fn_806827C4
+    bl strstr
     cmpwi r3, 0x0
     beq lbl_fn_80225C80_00000A94
     cmpwi r28, 0x0
@@ -847,7 +847,7 @@ lbl_fn_80225C80_00000A94:
     addi r3, r27, 0xb0
     bl fn_8008B130
     addi r4, r31, 0xd
-    bl fn_806827C4
+    bl strstr
     cmpwi r3, 0x0
     beq lbl_fn_80225C80_00000AC0
     lfs f1, lbl_80883044
@@ -950,7 +950,7 @@ lbl_fn_80225DDC_00000BD8:
     addi r3, r1, 0x80
     lfs f2, 0x14(r4)
     lfs f3, 0x18(r4)
-    bl fn_805F90D0
+    bl PSMTXTrans
     addi r4, r1, 0x80
     addi r3, r1, 0x14
     psq_l f1, 0x0(r4), 0, 0
@@ -971,7 +971,7 @@ lbl_fn_80225DDC_00000BD8:
     stfs f0, 0x14(r1)
     stfs f7, 0x18(r1)
     stfs f8, 0x1c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f8, 0xa4(r1)
     fmr f30, f1
     lfs f7, 0x94(r1)
@@ -980,7 +980,7 @@ lbl_fn_80225DDC_00000BD8:
     stfs f0, 0x20(r1)
     stfs f7, 0x24(r1)
     stfs f8, 0x28(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f8, 0xa0(r1)
     fmr f31, f1
     lfs f7, 0x90(r1)
@@ -989,7 +989,7 @@ lbl_fn_80225DDC_00000BD8:
     stfs f0, 0x2c(r1)
     stfs f7, 0x30(r1)
     stfs f8, 0x34(r1)
-    bl fn_805F9940
+    bl PSVECMag
     frsp f7, f31
     stfs f1, 0x8(r1)
     frsp f0, f30
@@ -1043,7 +1043,7 @@ lbl_fn_80225DDC_00000CF8:
     lfs f4, lbl_80883068
     lfs f5, lbl_8088306C
     bl fn_8011EE58
-    bl fn_80680CF8
+    bl rand
     lis r4, 0xb60b
     addi r0, r4, 0x60b7
     mulhw r0, r0, r3
@@ -1083,7 +1083,7 @@ lbl_fn_80225DDC_00000DC4:
 lbl_fn_80225DDC_00000DCC:
     lfs f1, lbl_80883028
     mr r3, r31
-    bl fn_80148B38
+    bl quest_checkCondition
     lwz r0, 0x524(r31)
     cmpwi r0, 0x0
     lwz r3, lbl_8087EEE0
@@ -1168,7 +1168,7 @@ lbl_fn_80225DDC_00000EA4:
     stfs f2, 0x4c(r1)
     psq_st f1, 0x0(r5), 0, 0
     stfs f2, 0x143c(r31)
-    bl fn_8004B378
+    bl item_useConsumable
     lfs f8, 0x1820(r31)
     lfs f0, lbl_80883070
     fcmpo cr0, f8, f0
@@ -1844,7 +1844,7 @@ asm void fn_80226B48(void)
     mr r30, r3
     mr r31, r4
     addi r3, r3, 0x142c
-    bl fn_8004B378
+    bl item_useConsumable
     lwz r3, lbl_8087EEE0
     li r4, 0x0
     li r5, 0x0

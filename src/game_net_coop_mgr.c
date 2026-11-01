@@ -8,28 +8,28 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80076FF8(void);
-extern void fn_80084320(void);
-extern void fn_800874C8(void);
-extern void fn_8008771C(void);
+extern void mem_alloc(void);
+extern void route_findNextWaypoint(void);
+extern void route_interpolatePath(void);
 extern void fn_80087BB4(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void fn_800A555C(void);
 extern void fn_800A55AC(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB518(void);
-extern void fn_800CB5C8(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
-extern void fn_800D246C(void);
+extern void morph_updateMesh(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_80117228(void);
 extern void fn_80124B60(void);
 extern void fn_801F3FF8(void);
-extern void fn_801F4E8C(void);
+extern void saveSlot_readSummary(void);
 extern void fn_801F64D0(void);
 extern void fn_801F6C10(void);
 extern void fn_801FECE0(void);
@@ -38,12 +38,12 @@ extern void fn_80202A6C(void);
 extern void fn_80211480(void);
 extern void fn_802179B4(void);
 extern void fn_802179BC(void);
-extern void fn_80370174(void);
-extern void fn_80370320(void);
+extern void world_getGlobalFlag(void);
+extern void world_setGlobalFlag(void);
 extern void fn_804A3BD4(void);
 extern void fn_805114D8(void);
 extern void fn_805115D4(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -129,7 +129,7 @@ asm void fn_804A2078(void)
     li r5, 0x0
     stw r0, lbl_8087F578
     addi r3, r3, 0x23c
-    bl fn_800CB5C8
+    bl morph_updateMesh
     addic. r0, r30, 0x244
     beq lbl_fn_804A2078_0000006C
     lwz r4, 0x244(r30)
@@ -142,10 +142,10 @@ asm void fn_804A2078(void)
 lbl_fn_804A2078_0000006C:
     addi r3, r30, 0x23c
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r31, 0x0
     ble lbl_fn_804A2078_00000094
     mr r3, r30
@@ -180,12 +180,12 @@ asm void fn_804A2128(void)
 lbl_fn_804A2128_000000E8:
     bl fn_802179B4
     mr r30, r3
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
     mulli r30, r0, 0x3a
-    bl fn_80680CF8
+    bl rand
     mulhw r0, r29, r3
     lwz r4, 0x4(r28)
     li r6, 0x1
@@ -197,7 +197,7 @@ lbl_fn_804A2128_000000E8:
     subf r0, r0, r3
     lwz r3, lbl_8087F430
     add r5, r0, r30
-    bl fn_80370320
+    bl world_setGlobalFlag
     addi r28, r28, 0x10
     addi r27, r27, 0x1
 lbl_fn_804A2128_00000140:
@@ -233,7 +233,7 @@ lbl_fn_804A2128_00000188:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_808871B4
     mr r3, r28
     lfs f2, lbl_808871B8
@@ -242,7 +242,7 @@ lbl_fn_804A2128_00000188:
     addi r5, r31, 0x50
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r28
     addi r4, r29, 0x17
     addi r5, r31, 0x54
@@ -251,7 +251,7 @@ lbl_fn_804A2128_00000188:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     addi r11, r1, 0x20
     li r3, 0x1
     bl _restgpr_27
@@ -284,11 +284,11 @@ lbl_fn_804A2294_00000244:
     li r4, 0x5a
     li r5, 0x0
     addi r3, r3, 0x23c
-    bl fn_800CB5C8
+    bl morph_updateMesh
 lbl_fn_804A2294_0000026C:
     lwz r3, lbl_8087F430
     li r4, 0xfa
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x1
     beq lbl_fn_804A2294_000002AC
     lwz r3, lbl_8087F430
@@ -336,7 +336,7 @@ asm void fn_804A233C(void)
 lbl_fn_804A233C_000002FC:
     lwz r3, lbl_8087F430
     lwz r4, 0x4(r28)
-    bl fn_80370174
+    bl world_getGlobalFlag
     addi r5, r3, 0x1
     mulhw r0, r29, r5
     add r0, r0, r5
@@ -348,7 +348,7 @@ lbl_fn_804A233C_000002FC:
     bne lbl_fn_804A233C_00000348
     bl fn_802179B4
     mr r30, r3
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -357,7 +357,7 @@ lbl_fn_804A233C_00000348:
     lwz r3, lbl_8087F430
     li r6, 0x0
     lwz r4, 0x4(r28)
-    bl fn_80370320
+    bl world_setGlobalFlag
     addi r28, r28, 0x10
     addi r27, r27, 0x1
 lbl_fn_804A233C_00000360:
@@ -397,7 +397,7 @@ lbl_fn_804A233C_000003CC:
     addi r3, r31, 0x23c
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lis r4, lbl_807570D4@ha
     lfs f1, lbl_808871B0
     addi r4, r4, lbl_807570D4@l
@@ -411,7 +411,7 @@ lbl_fn_804A233C_000003CC:
     bl fn_800CB440
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addi r3, r31, 0x23c
     li r4, 0x3c
     bl fn_800CB518
@@ -508,7 +508,7 @@ lbl_fn_804A251C_00000534:
     cmpwi r4, 0x0
     beq lbl_fn_804A251C_0000063C
     lwz r4, 0x4(r4)
-    bl fn_80370174
+    bl world_getGlobalFlag
     lis r4, 0x8d3e
     mr r6, r3
     subi r0, r4, 0x34f7
@@ -597,7 +597,7 @@ asm void fn_804A26DC(void)
     li r4, 0xfb
     stw r0, 0x14(r1)
     lwz r3, lbl_8087F430
-    bl fn_80370174
+    bl world_getGlobalFlag
     lis r4, 0x2e8c
     subi r0, r4, 0x5d17
     mulhw r0, r0, r3
@@ -659,11 +659,11 @@ lbl_fn_804A2724_00000734:
     cmpwi r30, 0x0
     beq lbl_fn_804A2724_0000076C
     lwz r4, 0x8(r30)
-    bl fn_80370174
+    bl world_getGlobalFlag
     mr r31, r3
     lwz r3, lbl_8087F430
     lwz r4, 0xc(r30)
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     bgt lbl_fn_804A2724_00000764
     li r3, 0x0
@@ -730,7 +730,7 @@ lbl_fn_804A2800_00000814:
     cmpwi r30, 0x0
     beq lbl_fn_804A2800_0000086C
     lwz r4, 0x8(r30)
-    bl fn_80370174
+    bl world_getGlobalFlag
     mr r31, r3
     mr r3, r27
     mr r4, r28
@@ -740,15 +740,15 @@ lbl_fn_804A2800_00000814:
     lwz r4, 0x8(r30)
     li r6, 0x0
     add r5, r31, r0
-    bl fn_80370320
+    bl world_setGlobalFlag
     lwz r3, lbl_8087F430
     lwz r4, 0xc(r30)
-    bl fn_80370174
+    bl world_getGlobalFlag
     add r5, r3, r29
     lwz r3, lbl_8087F430
     lwz r4, 0xc(r30)
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_804A2800_0000086C:
     lmw r27, 0xc(r1)
     lwz r0, 0x24(r1)
@@ -806,12 +806,12 @@ lbl_fn_804A28F8_00000908:
     lwz r4, 0x8(r31)
     li r5, 0x0
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     lwz r3, lbl_8087F430
     li r5, 0x0
     lwz r4, 0xc(r31)
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_804A28F8_00000934:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -840,7 +840,7 @@ asm void fn_804A29C4(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_804A29C4_000009A0
     mr r4, r31
@@ -865,7 +865,7 @@ asm void fn_804A2A34(void)
     addi r11, r1, 0x20
     bl _savegpr_26
     mr r31, r3
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_807907DC@ha
     li r29, 0x0
     addi r3, r3, lbl_807907DC@l
@@ -903,7 +903,7 @@ lbl_fn_804A2A34_000009F4:
     bl fn_801F3FF8
     stw r3, 0x50(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     stw r30, 0x54(r31)
     mr r3, r31
     addi r4, r29, 0x1d
@@ -911,7 +911,7 @@ lbl_fn_804A2A34_000009F4:
     bl fn_801F3FF8
     stw r3, 0x58(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     stw r30, 0x5c(r31)
     mr r3, r31
     addi r4, r29, 0x1
@@ -919,7 +919,7 @@ lbl_fn_804A2A34_000009F4:
     bl fn_801F3FF8
     stw r3, 0x60(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     stw r30, 0x64(r31)
     mr r3, r31
     addi r4, r29, 0x3a
@@ -927,14 +927,14 @@ lbl_fn_804A2A34_000009F4:
     bl fn_801F3FF8
     stw r3, 0x6c(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r31
     addi r4, r29, 0x57
     li r5, 0x1
     bl fn_801F3FF8
     stw r3, 0x70(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     li r0, -0x1
     stw r30, 0x68(r31)
     li r27, 0x0
@@ -948,7 +948,7 @@ lbl_fn_804A2A34_00000AFC:
     bl fn_80202A6C
     stw r3, 0x78(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     addi r27, r27, 0x1
     addi r28, r28, 0x4
     cmpwi r27, 0x4
@@ -965,7 +965,7 @@ lbl_fn_804A2A34_00000B40:
     add r5, r31, r28
     li r4, 0x1
     stw r3, 0x8c(r5)
-    bl fn_800D246C
+    bl atn_Task_setActive
     addi r27, r27, 0x1
     addi r28, r28, 0x4
     cmpwi r27, 0x4
@@ -983,7 +983,7 @@ lbl_fn_804A2A34_00000B40:
     bl fn_801F3FF8
     stw r3, 0x1c8(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     stw r29, 0x9c(r31)
     li r26, 0x0
     li r28, 0x0
@@ -997,14 +997,14 @@ lbl_fn_804A2A34_00000BB4:
     bl fn_801F3FF8
     stw r3, 0x1d8(r27)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0xbd
     li r5, 0x0
     bl fn_801F3FF8
     stw r3, 0x1e0(r27)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     addi r26, r26, 0x1
     addi r28, r28, 0x4
     cmpwi r26, 0x2
@@ -1048,7 +1048,7 @@ lbl_fn_804A2C98_00000C58:
 lbl_fn_804A2C98_00000C7C:
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r31, 0x0
     ble lbl_fn_804A2C98_00000C98
     mr r3, r30
@@ -1125,7 +1125,7 @@ lbl_fn_804A2D2C_00000D60:
 lbl_fn_804A2D2C_00000D90:
     lwz r3, 0x8c(r29)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x8c(r29)
     addi r30, r30, 0x1
     cmpwi r30, 0x4
@@ -1214,7 +1214,7 @@ lbl_fn_804A2D2C_00000E80:
     addi r5, r31, 0x1fc
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     li r3, 0x1
     b lbl_fn_804A2D2C_00000F00
 lbl_fn_804A2D2C_00000EFC:
@@ -1544,7 +1544,7 @@ lbl_fn_804A3228_00001380:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_804A3228_000013A8:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1646,16 +1646,16 @@ lbl_fn_804A3438_00001478:
     bl sprintf
     lwz r29, 0x6c(r31)
     addi r3, r1, 0x20
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r29
     addi r3, r1, 0x8
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lwz r4, 0x70(r31)
     addi r3, r30, 0x128
     lfs f31, 0x8(r1)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -1665,7 +1665,7 @@ lbl_fn_804A3438_00001478:
     addi r3, r30, 0x128
     lfs f31, 0xc(r1)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -1675,7 +1675,7 @@ lbl_fn_804A3438_00001478:
     addi r3, r30, 0x128
     lfs f31, 0x18(r1)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -1685,7 +1685,7 @@ lbl_fn_804A3438_00001478:
     addi r3, r30, 0x133
     lfs f31, 0x10(r1)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -1694,7 +1694,7 @@ lbl_fn_804A3438_00001478:
     addi r3, r30, 0x139
     lfs f31, 0x14(r1)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -1848,7 +1848,7 @@ lbl_fn_804A3438_000017C0:
     lfs f31, 0x1fc(r31)
     addi r3, r3, 0x13f
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -1860,7 +1860,7 @@ lbl_fn_804A3438_00001814:
     addi r3, r3, lbl_807573D0@l
     addi r3, r3, 0x13f
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_808871D0
     mr r4, r3
     mr r3, r29
@@ -1970,7 +1970,7 @@ asm void fn_804A39EC(void)
     mr r30, r3
     beq lbl_fn_804A39EC_000019D0
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r0, 0xfc(r30)
     lis r3, fn_804A3BD4@ha
     rlwimi r0, r31, 28, 3, 3
@@ -2007,7 +2007,7 @@ asm void fn_804A3A68(void)
     mr r30, r3
     beq lbl_fn_804A3A68_00001A58
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     neg r0, r31
     stfs f31, 0x54(r30)
     or r0, r0, r31

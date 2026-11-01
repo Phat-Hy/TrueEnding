@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_8005C448(void);
+extern void talk_executeCommand(void);
 extern void fn_80373148(void);
 extern void fn_8048B3B0(void);
 
@@ -67,10 +67,10 @@ asm void fn_8048D3A4(void)
     beq lbl_fn_8048D3A4_000000A0
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8048D3A4_000000A0:
@@ -81,10 +81,10 @@ lbl_fn_8048D3A4_000000A0:
     beq lbl_fn_8048D3A4_000000D4
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8048D3A4_000000D4:
@@ -103,10 +103,10 @@ lbl_fn_8048D3A4_000000DC:
     beq lbl_fn_8048D3A4_00000124
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8048D3A4_00000124:
@@ -117,10 +117,10 @@ lbl_fn_8048D3A4_00000124:
     beq lbl_fn_8048D3A4_00000158
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8048D3A4_00000158:
@@ -147,10 +147,10 @@ lbl_fn_8048D3A4_00000168:
     beq lbl_fn_8048D3A4_000001C4
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8048D3A4_000001C4:
@@ -161,10 +161,10 @@ lbl_fn_8048D3A4_000001C4:
     beq lbl_fn_8048D3A4_000001F8
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8048D3A4_000001F8:
@@ -183,10 +183,10 @@ lbl_fn_8048D3A4_00000200:
     beq lbl_fn_8048D3A4_00000248
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8048D3A4_00000248:
@@ -197,10 +197,10 @@ lbl_fn_8048D3A4_00000248:
     beq lbl_fn_8048D3A4_0000027C
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8048D3A4_0000027C:
@@ -235,10 +235,10 @@ lbl_fn_8048D3A4_00000294:
     beq lbl_fn_8048D3A4_00000304
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8048D3A4_00000304:
@@ -249,10 +249,10 @@ lbl_fn_8048D3A4_00000304:
     beq lbl_fn_8048D3A4_00000338
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8048D3A4_00000338:
@@ -271,10 +271,10 @@ lbl_fn_8048D3A4_00000340:
     beq lbl_fn_8048D3A4_00000388
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8048D3A4_00000388:
@@ -285,10 +285,10 @@ lbl_fn_8048D3A4_00000388:
     beq lbl_fn_8048D3A4_000003BC
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8048D3A4_000003BC:
@@ -315,10 +315,10 @@ lbl_fn_8048D3A4_000003CC:
     beq lbl_fn_8048D3A4_00000428
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8048D3A4_00000428:
@@ -329,10 +329,10 @@ lbl_fn_8048D3A4_00000428:
     beq lbl_fn_8048D3A4_0000045C
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8048D3A4_0000045C:
@@ -351,10 +351,10 @@ lbl_fn_8048D3A4_00000464:
     beq lbl_fn_8048D3A4_000004AC
     addi r3, r27, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
 lbl_fn_8048D3A4_000004AC:
@@ -365,10 +365,10 @@ lbl_fn_8048D3A4_000004AC:
     beq lbl_fn_8048D3A4_000004E0
     addi r3, r27, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
 lbl_fn_8048D3A4_000004E0:
@@ -417,10 +417,10 @@ lbl_fn_8048D3A4_00000510:
     beq lbl_fn_8048D3A4_00000598
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048D3A4_00000598:
@@ -431,10 +431,10 @@ lbl_fn_8048D3A4_00000598:
     beq lbl_fn_8048D3A4_000005CC
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048D3A4_000005CC:
@@ -453,10 +453,10 @@ lbl_fn_8048D3A4_000005D4:
     beq lbl_fn_8048D3A4_0000061C
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048D3A4_0000061C:
@@ -467,10 +467,10 @@ lbl_fn_8048D3A4_0000061C:
     beq lbl_fn_8048D3A4_00000650
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048D3A4_00000650:
@@ -497,10 +497,10 @@ lbl_fn_8048D3A4_00000660:
     beq lbl_fn_8048D3A4_000006BC
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048D3A4_000006BC:
@@ -511,10 +511,10 @@ lbl_fn_8048D3A4_000006BC:
     beq lbl_fn_8048D3A4_000006F0
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048D3A4_000006F0:
@@ -533,10 +533,10 @@ lbl_fn_8048D3A4_000006F8:
     beq lbl_fn_8048D3A4_00000740
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048D3A4_00000740:
@@ -547,10 +547,10 @@ lbl_fn_8048D3A4_00000740:
     beq lbl_fn_8048D3A4_00000774
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048D3A4_00000774:
@@ -585,10 +585,10 @@ lbl_fn_8048D3A4_0000078C:
     beq lbl_fn_8048D3A4_000007FC
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048D3A4_000007FC:
@@ -599,10 +599,10 @@ lbl_fn_8048D3A4_000007FC:
     beq lbl_fn_8048D3A4_00000830
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048D3A4_00000830:
@@ -621,10 +621,10 @@ lbl_fn_8048D3A4_00000838:
     beq lbl_fn_8048D3A4_00000880
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048D3A4_00000880:
@@ -635,10 +635,10 @@ lbl_fn_8048D3A4_00000880:
     beq lbl_fn_8048D3A4_000008B4
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048D3A4_000008B4:
@@ -665,10 +665,10 @@ lbl_fn_8048D3A4_000008C4:
     beq lbl_fn_8048D3A4_00000920
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048D3A4_00000920:
@@ -679,10 +679,10 @@ lbl_fn_8048D3A4_00000920:
     beq lbl_fn_8048D3A4_00000954
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048D3A4_00000954:
@@ -701,10 +701,10 @@ lbl_fn_8048D3A4_0000095C:
     beq lbl_fn_8048D3A4_000009A4
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048D3A4_000009A4:
@@ -715,10 +715,10 @@ lbl_fn_8048D3A4_000009A4:
     beq lbl_fn_8048D3A4_000009D8
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048D3A4_000009D8:
@@ -824,10 +824,10 @@ asm void fn_8048DE54(void)
     beq lbl_fn_8048DE54_00000B50
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8048DE54_00000B50:
@@ -838,10 +838,10 @@ lbl_fn_8048DE54_00000B50:
     beq lbl_fn_8048DE54_00000B84
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8048DE54_00000B84:
@@ -860,10 +860,10 @@ lbl_fn_8048DE54_00000B8C:
     beq lbl_fn_8048DE54_00000BD4
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8048DE54_00000BD4:
@@ -874,10 +874,10 @@ lbl_fn_8048DE54_00000BD4:
     beq lbl_fn_8048DE54_00000C08
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8048DE54_00000C08:
@@ -904,10 +904,10 @@ lbl_fn_8048DE54_00000C18:
     beq lbl_fn_8048DE54_00000C74
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8048DE54_00000C74:
@@ -918,10 +918,10 @@ lbl_fn_8048DE54_00000C74:
     beq lbl_fn_8048DE54_00000CA8
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8048DE54_00000CA8:
@@ -940,10 +940,10 @@ lbl_fn_8048DE54_00000CB0:
     beq lbl_fn_8048DE54_00000CF8
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8048DE54_00000CF8:
@@ -954,10 +954,10 @@ lbl_fn_8048DE54_00000CF8:
     beq lbl_fn_8048DE54_00000D2C
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8048DE54_00000D2C:
@@ -992,10 +992,10 @@ lbl_fn_8048DE54_00000D44:
     beq lbl_fn_8048DE54_00000DB4
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8048DE54_00000DB4:
@@ -1006,10 +1006,10 @@ lbl_fn_8048DE54_00000DB4:
     beq lbl_fn_8048DE54_00000DE8
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8048DE54_00000DE8:
@@ -1028,10 +1028,10 @@ lbl_fn_8048DE54_00000DF0:
     beq lbl_fn_8048DE54_00000E38
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8048DE54_00000E38:
@@ -1042,10 +1042,10 @@ lbl_fn_8048DE54_00000E38:
     beq lbl_fn_8048DE54_00000E6C
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8048DE54_00000E6C:
@@ -1072,10 +1072,10 @@ lbl_fn_8048DE54_00000E7C:
     beq lbl_fn_8048DE54_00000ED8
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8048DE54_00000ED8:
@@ -1086,10 +1086,10 @@ lbl_fn_8048DE54_00000ED8:
     beq lbl_fn_8048DE54_00000F0C
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8048DE54_00000F0C:
@@ -1108,10 +1108,10 @@ lbl_fn_8048DE54_00000F14:
     beq lbl_fn_8048DE54_00000F5C
     addi r3, r27, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
 lbl_fn_8048DE54_00000F5C:
@@ -1122,10 +1122,10 @@ lbl_fn_8048DE54_00000F5C:
     beq lbl_fn_8048DE54_00000F90
     addi r3, r27, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
 lbl_fn_8048DE54_00000F90:
@@ -1174,10 +1174,10 @@ lbl_fn_8048DE54_00000FC0:
     beq lbl_fn_8048DE54_00001048
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048DE54_00001048:
@@ -1188,10 +1188,10 @@ lbl_fn_8048DE54_00001048:
     beq lbl_fn_8048DE54_0000107C
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048DE54_0000107C:
@@ -1210,10 +1210,10 @@ lbl_fn_8048DE54_00001084:
     beq lbl_fn_8048DE54_000010CC
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048DE54_000010CC:
@@ -1224,10 +1224,10 @@ lbl_fn_8048DE54_000010CC:
     beq lbl_fn_8048DE54_00001100
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048DE54_00001100:
@@ -1254,10 +1254,10 @@ lbl_fn_8048DE54_00001110:
     beq lbl_fn_8048DE54_0000116C
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048DE54_0000116C:
@@ -1268,10 +1268,10 @@ lbl_fn_8048DE54_0000116C:
     beq lbl_fn_8048DE54_000011A0
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048DE54_000011A0:
@@ -1290,10 +1290,10 @@ lbl_fn_8048DE54_000011A8:
     beq lbl_fn_8048DE54_000011F0
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048DE54_000011F0:
@@ -1304,10 +1304,10 @@ lbl_fn_8048DE54_000011F0:
     beq lbl_fn_8048DE54_00001224
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048DE54_00001224:
@@ -1342,10 +1342,10 @@ lbl_fn_8048DE54_0000123C:
     beq lbl_fn_8048DE54_000012AC
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048DE54_000012AC:
@@ -1356,10 +1356,10 @@ lbl_fn_8048DE54_000012AC:
     beq lbl_fn_8048DE54_000012E0
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048DE54_000012E0:
@@ -1378,10 +1378,10 @@ lbl_fn_8048DE54_000012E8:
     beq lbl_fn_8048DE54_00001330
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048DE54_00001330:
@@ -1392,10 +1392,10 @@ lbl_fn_8048DE54_00001330:
     beq lbl_fn_8048DE54_00001364
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048DE54_00001364:
@@ -1422,10 +1422,10 @@ lbl_fn_8048DE54_00001374:
     beq lbl_fn_8048DE54_000013D0
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048DE54_000013D0:
@@ -1436,10 +1436,10 @@ lbl_fn_8048DE54_000013D0:
     beq lbl_fn_8048DE54_00001404
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048DE54_00001404:
@@ -1458,10 +1458,10 @@ lbl_fn_8048DE54_0000140C:
     beq lbl_fn_8048DE54_00001454
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048DE54_00001454:
@@ -1472,10 +1472,10 @@ lbl_fn_8048DE54_00001454:
     beq lbl_fn_8048DE54_00001488
     addi r3, r25, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r25
     bl dtor_80084684
 lbl_fn_8048DE54_00001488:

@@ -11,15 +11,15 @@ extern void fn_80049B74(void);
 extern void fn_8004B0E4(void);
 extern void fn_8004B1EC(void);
 extern void fn_800C31F4(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB404(void);
 extern void fn_800CB440(void);
 extern void fn_800CB4A4(void);
 extern void fn_800CB518(void);
 extern void fn_800CB5B4(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800CB654(void);
 extern void fn_800CB668(void);
 extern void fn_800CB688(void);
@@ -27,9 +27,9 @@ extern void fn_8022960C(void);
 extern void fn_803601E4(void);
 extern void fn_803606CC(void);
 extern void fn_80360780(void);
-extern void fn_80370A78(void);
-extern void fn_80370AE4(void);
-extern void fn_80370B78(void);
+extern void world_getLocalFlag(void);
+extern void world_setLocalFlag(void);
+extern void world_startMapTransition(void);
 extern void fn_8037D4C0(void);
 extern void fn_803B3B38(void);
 extern void fn_803B4C24(void);
@@ -133,7 +133,7 @@ lbl_fn_8055F040_0000003C:
 lbl_fn_8055F040_00000058:
     lwz r3, lbl_8087F430
     mr r4, r31
-    bl fn_80370A78
+    bl world_getLocalFlag
     lwz r0, 0x30(r30)
     mr r5, r3
     cmpwi r0, 0x0
@@ -179,7 +179,7 @@ lbl_fn_8055F040_000000E0:
 lbl_fn_8055F040_000000EC:
     lwz r3, lbl_8087F430
     mr r4, r31
-    bl fn_80370AE4
+    bl world_setLocalFlag
 lbl_fn_8055F040_000000F8:
     li r3, 0x0
 lbl_fn_8055F040_000000FC:
@@ -931,13 +931,13 @@ lbl_fn_8055F690_00000AB8:
     addi r5, r1, 0x38
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x34
     addi r4, r1, 0x2c
     bl fn_800CB440
     addi r3, r1, 0x2c
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lfs f2, lbl_80887EB8
     fmr f1, f30
     addi r3, r1, 0x34
@@ -963,7 +963,7 @@ lbl_fn_8055F690_00000B18:
     bl fn_800CB440
     addi r3, r1, 0x28
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_8055F690_00000B40:
     lwz r3, lbl_8087EFE8
     li r0, 0x0
@@ -1001,7 +1001,7 @@ lbl_fn_8055F690_00000BB0:
 lbl_fn_8055F690_00000BB4:
     addi r3, r1, 0x34
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_8055F690_00000BC0:
     stw r27, 0x38(r26)
     b lbl_fn_8055F690_00000CC8
@@ -1038,10 +1038,10 @@ lbl_fn_8055F690_00000C04:
     subi r0, r4, 0x1
     stw r0, 0xa4(r6)
     lwz r4, 0x1c(r26)
-    bl fn_800CB5C8
+    bl morph_updateMesh
     addi r3, r1, 0x30
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8055F690_00000CC8
 lbl_fn_8055F690_00000C50:
     mr r3, r26
@@ -1144,7 +1144,7 @@ lbl_fn_8055FD3C_00000D7C:
     bl fn_800CB5B4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_8055FD3C_00000DAC:
     psq_l f31, 0x28(r1), 0, 0
     li r3, 0x0
@@ -1260,7 +1260,7 @@ lbl_fn_8055FE0C_00000F04:
     mr r3, r29
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r4, lbl_8087EFE8
     li r5, 0x3
     li r0, 0x0
@@ -1285,7 +1285,7 @@ lbl_fn_8055FE0C_00000F58:
     bl fn_800CB440
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087EFE8
     li r4, 0x1
     li r0, 0x0
@@ -1328,7 +1328,7 @@ lbl_fn_8055FE0C_00001000:
     beq lbl_fn_8055FE0C_000010DC
     lwz r4, 0x1c(r30)
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     b lbl_fn_8055FE0C_000010DC
 lbl_fn_8055FE0C_00001018:
     cmpwi r0, 0x2
@@ -1734,7 +1734,7 @@ lbl_fn_805602B0_00001524:
     bl fn_800CB440
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_805602B0_0000159C
 lbl_fn_805602B0_00001554:
     lwz r0, 0x8(r29)
@@ -1756,7 +1756,7 @@ lbl_fn_805602B0_00001574:
     bl fn_800CB440
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_805602B0_0000159C:
     lwz r3, lbl_8087F540
     mr r4, r28
@@ -1795,7 +1795,7 @@ lbl_fn_805602B0_00001618:
     stw r0, 0x38(r28)
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_805602B0_0000172C
 lbl_fn_805602B0_0000162C:
     lwz r0, 0x30(r4)
@@ -1830,10 +1830,10 @@ lbl_fn_805602B0_00001668:
     subi r0, r4, 0x1
     stw r0, 0xa4(r6)
     lwz r4, 0x1c(r28)
-    bl fn_800CB5C8
+    bl morph_updateMesh
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_805602B0_0000172C
 lbl_fn_805602B0_000016B4:
     mr r3, r28
@@ -2324,7 +2324,7 @@ lbl_fn_805609AC_00001CD8:
     lfs f1, lbl_80887EB8
     li r5, 0x0
     li r6, 0x0
-    bl fn_80370B78
+    bl world_startMapTransition
     mr r3, r29
     li r4, 0xb
     bl fn_8053E8CC

@@ -815,7 +815,6 @@ lbl_097c:
 }
 
 
-asm void fn_805FA8C0(void) {
-    nofralloc
-    blr
+void fn_805FA8C0(void)
+{
 }

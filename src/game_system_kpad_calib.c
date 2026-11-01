@@ -11,14 +11,14 @@ extern void fn_8004ED34(void);
 extern void fn_800697D8(void);
 extern void fn_8006A250(void);
 extern void fn_8006A900(void);
-extern void fn_80097C08(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097E80(void);
 extern void fn_800A5B30(void);
-extern void fn_800D2338(void);
-extern void fn_800D246C(void);
+extern void atn_Task_unlink(void);
+extern void atn_Task_setActive(void);
 extern void fn_800F1378(void);
 extern void fn_801346C8(void);
-extern void fn_80148B38(void);
+extern void quest_checkCondition(void);
 extern void fn_8014DEE4(void);
 extern void fn_80154344(void);
 extern void fn_80155DAC(void);
@@ -30,7 +30,7 @@ extern void fn_80216544(void);
 extern void fn_80219160(void);
 extern void fn_80219558(void);
 extern void fn_8021F09C(void);
-extern void fn_8036F268(void);
+extern void world_updateMapTransition(void);
 extern void fn_803701E0(void);
 extern void fn_803743AC(void);
 extern void fn_80374D64(void);
@@ -69,14 +69,14 @@ extern void fn_80570A44(void);
 extern void fn_80570A68(void);
 extern void fn_80572B70(void);
 extern void fn_805AA738(void);
-extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F90D0(void);
-extern void fn_805F9160(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9940(void);
+extern void PSMTXConcat(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXTrans(void);
+extern void PSMTXScale(void);
+extern void PSMTXMultVec(void);
+extern void PSVECMag(void);
 extern void fn_806055A0(void);
-extern void fn_8068AEA8(void);
+extern void std_fmod(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -126,15 +126,15 @@ extern u32 lbl_808857CC;
 extern u32 lbl_808857D0;
 
 /* Function declarations */
-void fn_80370320(void);
-void fn_80370A78(void);
-void fn_80370AE4(void);
-void fn_80370B78(void);
-void fn_80370BD0(void);
-void fn_80370C2C(void);
-void fn_80370C6C(void);
-void fn_80370CD0(void);
-void fn_80370F8C(void);
+void world_setGlobalFlag(void);
+void world_getLocalFlag(void);
+void world_setLocalFlag(void);
+void world_startMapTransition(void);
+void world_reloadMapTransition(void);
+int world_isTransitionFinished(void* world);
+void world_initMapTransitionParams(void);
+void world_startTransitionFade(void);
+void world_advanceChapter(void);
 void fn_80371164(void);
 void fn_803712BC(void);
 void fn_80371320(void);
@@ -144,7 +144,7 @@ void fn_80371674(void);
 void fn_8037177C(void);
 void fn_80371790(void);
 
-asm void fn_80370320(void)
+asm void world_setGlobalFlag(void)
 {
     nofralloc
     stwu r1, -0x120(r1)
@@ -157,10 +157,10 @@ asm void fn_80370320(void)
     mr r27, r4
     mr r28, r5
     mr r30, r6
-    ble lbl_fn_80370320_00000064
+    ble lbl_world_setGlobalFlag_00000064
     lwz r0, lbl_8087EEB8
     cmpwi r0, 0x0
-    beq lbl_fn_80370320_00000740
+    beq lbl_world_setGlobalFlag_00000740
     lis r4, lbl_8074DC1C@ha
     mr r5, r27
     addi r4, r4, lbl_8074DC1C@l
@@ -171,66 +171,66 @@ asm void fn_80370320(void)
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
     bl fn_800697D8
-    b lbl_fn_80370320_00000740
-lbl_fn_80370320_00000064:
+    b lbl_world_setGlobalFlag_00000740
+lbl_world_setGlobalFlag_00000064:
     cmpwi r4, 0x0
-    beq lbl_fn_80370320_00000740
+    beq lbl_world_setGlobalFlag_00000740
     lwz r0, 0x1550(r3)
     cmpwi r0, 0x0
-    ble lbl_fn_80370320_000000AC
+    ble lbl_world_setGlobalFlag_000000AC
     cmpwi r4, 0x88
-    beq lbl_fn_80370320_00000740
+    beq lbl_world_setGlobalFlag_00000740
     cmpwi r4, 0x11e
-    beq lbl_fn_80370320_00000740
+    beq lbl_world_setGlobalFlag_00000740
     cmpwi r4, 0x11f
-    beq lbl_fn_80370320_00000740
+    beq lbl_world_setGlobalFlag_00000740
     cmpwi r4, 0x6
-    beq lbl_fn_80370320_00000740
+    beq lbl_world_setGlobalFlag_00000740
     cmpwi r4, 0xd0
-    beq lbl_fn_80370320_00000740
+    beq lbl_world_setGlobalFlag_00000740
     cmpwi r4, 0x5
-    bne lbl_fn_80370320_000000AC
-    b lbl_fn_80370320_00000740
-lbl_fn_80370320_000000AC:
+    bne lbl_world_setGlobalFlag_000000AC
+    b lbl_world_setGlobalFlag_00000740
+lbl_world_setGlobalFlag_000000AC:
     lwz r6, lbl_8087F0A8
     lwz r0, 0x194(r6)
     cmpwi r0, 0x0
-    beq lbl_fn_80370320_000000D0
+    beq lbl_world_setGlobalFlag_000000D0
     cmpwi r4, 0x11f
-    beq lbl_fn_80370320_00000740
+    beq lbl_world_setGlobalFlag_00000740
     cmpwi r4, 0x6
-    bne lbl_fn_80370320_000000D0
-    b lbl_fn_80370320_00000740
-lbl_fn_80370320_000000D0:
+    bne lbl_world_setGlobalFlag_000000D0
+    b lbl_world_setGlobalFlag_00000740
+lbl_world_setGlobalFlag_000000D0:
     slwi r0, r4, 2
     add r31, r3, r0
     lwz r29, 0x10e4(r31)
     stw r5, 0x10e4(r31)
     lwz r3, 0x10d8(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80370320_0000010C
+    beq lbl_world_setGlobalFlag_0000010C
     lwz r3, 0x134(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80370320_0000010C
+    beq lbl_world_setGlobalFlag_0000010C
     mr r5, r27
     mr r6, r29
     mr r7, r28
     li r4, 0x1
     bl fn_803AB96C
-lbl_fn_80370320_0000010C:
+lbl_world_setGlobalFlag_0000010C:
     cmpwi r30, 0x0
-    bne lbl_fn_80370320_00000740
+    bne lbl_world_setGlobalFlag_00000740
     cmpw r29, r28
-    beq lbl_fn_80370320_000005BC
+    beq lbl_world_setGlobalFlag_000005BC
     lwz r0, lbl_8087F4F0
     cmpwi r0, 0x0
-    beq lbl_fn_80370320_000005BC
+    beq lbl_world_setGlobalFlag_000005BC
     lwz r3, lbl_8087F8A0
     cmpwi r3, 0x0
-    beq lbl_fn_80370320_000005BC
+    beq lbl_world_setGlobalFlag_000005BC
     cmpwi r27, 0x5
     lwz r30, 0x54(r3)
-    bne lbl_fn_80370320_00000168
+    bne lbl_world_setGlobalFlag_00000168
     cntlzw r0, r28
     mr r3, r30
     srwi r5, r0, 5
@@ -241,20 +241,20 @@ lbl_fn_80370320_0000010C:
     srwi r5, r0, 5
     li r4, 0xd
     bl fn_803701E0
-lbl_fn_80370320_00000168:
+lbl_world_setGlobalFlag_00000168:
     cmpwi r27, 0x88
-    bne lbl_fn_80370320_000002D8
+    bne lbl_world_setGlobalFlag_000002D8
     cntlzw r0, r28
     mr r3, r30
     srwi r5, r0, 5
     li r4, 0x9
     bl fn_803701E0
     cmpwi r30, 0x0
-    beq lbl_fn_80370320_000002D8
+    beq lbl_world_setGlobalFlag_000002D8
     lwz r0, 0x9c0(r30)
     rlwinm r0, r0, 0, 22, 22
     cmplwi r0, 0x200
-    bne lbl_fn_80370320_000002D8
+    bne lbl_world_setGlobalFlag_000002D8
     lwz r3, lbl_8087F4F0
     li r5, 0x0
     lfs f0, lbl_8088570C
@@ -334,21 +334,21 @@ lbl_fn_80370320_00000168:
     bl fn_80371790
     mr r3, r26
     bl fn_80374D64
-lbl_fn_80370320_000002D8:
+lbl_world_setGlobalFlag_000002D8:
     cmpwi r27, 0x11e
-    bne lbl_fn_80370320_0000044C
+    bne lbl_world_setGlobalFlag_0000044C
     cntlzw r0, r28
     mr r3, r30
     srwi r5, r0, 5
     li r4, 0x3d
     bl fn_803701E0
     cmpwi r30, 0x0
-    beq lbl_fn_80370320_0000044C
+    beq lbl_world_setGlobalFlag_0000044C
     lwz r0, 0x9c4(r30)
     rlwinm r3, r0, 0, 2, 2
     subis r0, r3, 0x2000
     cmplwi r0, 0x0
-    bne lbl_fn_80370320_0000044C
+    bne lbl_world_setGlobalFlag_0000044C
     lwz r3, lbl_8087F4F0
     li r5, 0x0
     lfs f0, lbl_8088570C
@@ -428,20 +428,20 @@ lbl_fn_80370320_000002D8:
     bl fn_80371790
     mr r3, r26
     bl fn_80374D64
-lbl_fn_80370320_0000044C:
+lbl_world_setGlobalFlag_0000044C:
     cmpwi r27, 0x11f
-    bne lbl_fn_80370320_000005BC
+    bne lbl_world_setGlobalFlag_000005BC
     cntlzw r0, r28
     mr r3, r30
     srwi r5, r0, 5
     li r4, 0x2
     bl fn_803701E0
     cmpwi r30, 0x0
-    beq lbl_fn_80370320_000005BC
+    beq lbl_world_setGlobalFlag_000005BC
     lwz r0, 0x9c0(r30)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    bne lbl_fn_80370320_000005BC
+    bne lbl_world_setGlobalFlag_000005BC
     lwz r3, lbl_8087F4F0
     li r5, 0x0
     lfs f0, lbl_8088570C
@@ -521,47 +521,47 @@ lbl_fn_80370320_0000044C:
     bl fn_80371790
     mr r3, r26
     bl fn_80374D64
-lbl_fn_80370320_000005BC:
+lbl_world_setGlobalFlag_000005BC:
     subi r0, r27, 0x8c
     cmplwi r0, 0xd2
-    ble lbl_fn_80370320_000005D4
+    ble lbl_world_setGlobalFlag_000005D4
     subi r0, r27, 0x1ae
     cmplwi r0, 0x32
-    bgt lbl_fn_80370320_00000680
-lbl_fn_80370320_000005D4:
+    bgt lbl_world_setGlobalFlag_00000680
+lbl_world_setGlobalFlag_000005D4:
     cmpw r29, r28
-    beq lbl_fn_80370320_00000680
+    beq lbl_world_setGlobalFlag_00000680
     cmpwi r28, 0x0
-    beq lbl_fn_80370320_00000680
+    beq lbl_world_setGlobalFlag_00000680
     mr r3, r27
     bl fn_8021F09C
     cmpwi r3, 0x0
-    beq lbl_fn_80370320_00000680
+    beq lbl_world_setGlobalFlag_00000680
     lwz r4, lbl_8087F9C0
     lwz r0, 0x7c(r4)
     cmpwi r0, 0x0
-    bne lbl_fn_80370320_0000060C
+    bne lbl_world_setGlobalFlag_0000060C
     cmpwi r27, 0x1b3
-    bne lbl_fn_80370320_00000680
-lbl_fn_80370320_0000060C:
+    bne lbl_world_setGlobalFlag_00000680
+lbl_world_setGlobalFlag_0000060C:
     lwz r0, 0x1550(r26)
     cmpwi r0, 0x0
-    beq lbl_fn_80370320_00000624
+    beq lbl_world_setGlobalFlag_00000624
     subi r0, r27, 0x1b8
     cmplwi r0, 0x1
-    bgt lbl_fn_80370320_00000680
-lbl_fn_80370320_00000624:
+    bgt lbl_world_setGlobalFlag_00000680
+lbl_world_setGlobalFlag_00000624:
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80370320_00000640
+    beq lbl_world_setGlobalFlag_00000640
     mr r3, r26
     mr r4, r27
     bl fn_80376324
-    b lbl_fn_80370320_00000680
-lbl_fn_80370320_00000640:
+    b lbl_world_setGlobalFlag_00000680
+lbl_world_setGlobalFlag_00000640:
     lwz r0, 0x56f4(r26)
     cmplwi r0, 0x8
-    bge lbl_fn_80370320_00000670
+    bge lbl_world_setGlobalFlag_00000670
     lwz r3, 0x5718(r26)
     lwz r0, 0x56f4(r26)
     add r0, r3, r0
@@ -571,68 +571,68 @@ lbl_fn_80370320_00000640:
     lwz r3, 0x56f4(r26)
     addi r0, r3, 0x1
     stw r0, 0x56f4(r26)
-lbl_fn_80370320_00000670:
+lbl_world_setGlobalFlag_00000670:
     lwz r3, lbl_8087F490
     mr r5, r27
     li r4, 0x1
     bl fn_803E43B8
-lbl_fn_80370320_00000680:
+lbl_world_setGlobalFlag_00000680:
     cmpwi r27, 0xac
-    bne lbl_fn_80370320_000006A0
+    bne lbl_world_setGlobalFlag_000006A0
     cmpwi r28, 0x0
-    beq lbl_fn_80370320_000006A0
+    beq lbl_world_setGlobalFlag_000006A0
     lwz r3, lbl_8087F490
     li r4, 0x1
     li r5, -0x1
     bl fn_803E4434
-lbl_fn_80370320_000006A0:
+lbl_world_setGlobalFlag_000006A0:
     cmpwi r27, 0x6d
-    bne lbl_fn_80370320_000006B8
+    bne lbl_world_setGlobalFlag_000006B8
     cmpwi r28, 0x0
-    beq lbl_fn_80370320_000006B8
+    beq lbl_world_setGlobalFlag_000006B8
     lwz r3, lbl_8087F120
     bl fn_801E97DC
-lbl_fn_80370320_000006B8:
+lbl_world_setGlobalFlag_000006B8:
     cmpwi r27, 0x25
-    bne lbl_fn_80370320_00000740
+    bne lbl_world_setGlobalFlag_00000740
     cmpwi r28, 0x0
-    bne lbl_fn_80370320_00000740
+    bne lbl_world_setGlobalFlag_00000740
     cmpwi r29, 0x0
-    beq lbl_fn_80370320_00000740
+    beq lbl_world_setGlobalFlag_00000740
     lwz r3, lbl_8087F8A0
     cmpwi r3, 0x0
-    beq lbl_fn_80370320_000006E4
+    beq lbl_world_setGlobalFlag_000006E4
     lwz r26, 0x48(r3)
-    b lbl_fn_80370320_000006E8
-lbl_fn_80370320_000006E4:
+    b lbl_world_setGlobalFlag_000006E8
+lbl_world_setGlobalFlag_000006E4:
     li r26, 0x0
-lbl_fn_80370320_000006E8:
+lbl_world_setGlobalFlag_000006E8:
     cmpwi r26, 0x0
-    beq lbl_fn_80370320_00000740
+    beq lbl_world_setGlobalFlag_00000740
     stw r29, 0x10e4(r31)
     li r3, 0x0
     lwz r0, 0x12a4(r26)
     srwi. r0, r0, 31
-    beq lbl_fn_80370320_00000714
+    beq lbl_world_setGlobalFlag_00000714
     lwz r0, 0xc48(r26)
     cmpwi r0, 0x0
-    beq lbl_fn_80370320_00000714
+    beq lbl_world_setGlobalFlag_00000714
     li r3, 0x1
-lbl_fn_80370320_00000714:
+lbl_world_setGlobalFlag_00000714:
     cmpwi r3, 0x0
-    beq lbl_fn_80370320_00000724
+    beq lbl_world_setGlobalFlag_00000724
     mr r3, r26
     bl fn_80154344
-lbl_fn_80370320_00000724:
+lbl_world_setGlobalFlag_00000724:
     lwz r0, 0x12a4(r26)
     extrwi. r0, r0, 1, 25
-    beq lbl_fn_80370320_0000073C
+    beq lbl_world_setGlobalFlag_0000073C
     mr r3, r26
     li r4, 0x0
     bl fn_80155DAC
-lbl_fn_80370320_0000073C:
+lbl_world_setGlobalFlag_0000073C:
     stw r28, 0x10e4(r31)
-lbl_fn_80370320_00000740:
+lbl_world_setGlobalFlag_00000740:
     addi r11, r1, 0x120
     bl _restgpr_26
     lwz r0, 0x124(r1)
@@ -641,17 +641,17 @@ lbl_fn_80370320_00000740:
     blr
 }
 
-asm void fn_80370A78(void)
+asm void world_getLocalFlag(void)
 {
     nofralloc
     stwu r1, -0x110(r1)
     mflr r0
     cmplwi r4, 0xff
     stw r0, 0x114(r1)
-    ble lbl_fn_80370A78_000007A8
+    ble lbl_world_getLocalFlag_000007A8
     lwz r0, lbl_8087EEB8
     cmpwi r0, 0x0
-    beq lbl_fn_80370A78_000007A0
+    beq lbl_world_getLocalFlag_000007A0
     lis r6, lbl_8074DC1C@ha
     mr r5, r4
     addi r6, r6, lbl_8074DC1C@l
@@ -662,21 +662,21 @@ asm void fn_80370A78(void)
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
     bl fn_800697D8
-lbl_fn_80370A78_000007A0:
+lbl_world_getLocalFlag_000007A0:
     li r3, 0x0
-    b lbl_fn_80370A78_000007B4
-lbl_fn_80370A78_000007A8:
+    b lbl_world_getLocalFlag_000007B4
+lbl_world_getLocalFlag_000007A8:
     slwi r0, r4, 2
     add r3, r3, r0
     lwz r3, 0x50e4(r3)
-lbl_fn_80370A78_000007B4:
+lbl_world_getLocalFlag_000007B4:
     lwz r0, 0x114(r1)
     mtlr r0
     addi r1, r1, 0x110
     blr
 }
 
-asm void fn_80370AE4(void)
+asm void world_setLocalFlag(void)
 {
     nofralloc
     stwu r1, -0x110(r1)
@@ -684,10 +684,10 @@ asm void fn_80370AE4(void)
     cmplwi r4, 0xff
     mr r7, r5
     stw r0, 0x114(r1)
-    ble lbl_fn_80370AE4_00000814
+    ble lbl_world_setLocalFlag_00000814
     lwz r0, lbl_8087EEB8
     cmpwi r0, 0x0
-    beq lbl_fn_80370AE4_00000848
+    beq lbl_world_setLocalFlag_00000848
     lis r6, lbl_8074DC1C@ha
     mr r5, r4
     addi r6, r6, lbl_8074DC1C@l
@@ -698,29 +698,29 @@ asm void fn_80370AE4(void)
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
     bl fn_800697D8
-    b lbl_fn_80370AE4_00000848
-lbl_fn_80370AE4_00000814:
+    b lbl_world_setLocalFlag_00000848
+lbl_world_setLocalFlag_00000814:
     slwi r0, r4, 2
     add r8, r3, r0
     lwz r6, 0x50e4(r8)
     stw r5, 0x50e4(r8)
     lwz r3, 0x10d8(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80370AE4_00000848
+    beq lbl_world_setLocalFlag_00000848
     lwz r3, 0x134(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80370AE4_00000848
+    beq lbl_world_setLocalFlag_00000848
     mr r5, r4
     li r4, 0x0
     bl fn_803AB96C
-lbl_fn_80370AE4_00000848:
+lbl_world_setLocalFlag_00000848:
     lwz r0, 0x114(r1)
     mtlr r0
     addi r1, r1, 0x110
     blr
 }
 
-asm void fn_80370B78(void)
+asm void world_startMapTransition(void)
 {
     nofralloc
     lwz r9, 0x5620(r3)
@@ -747,7 +747,7 @@ asm void fn_80370B78(void)
     blr
 }
 
-asm void fn_80370BD0(void)
+asm void world_reloadMapTransition(void)
 {
     nofralloc
     lwz r9, 0x5620(r3)
@@ -775,29 +775,16 @@ asm void fn_80370BD0(void)
     blr
 }
 
-asm void fn_80370C2C(void)
+int world_isTransitionFinished(void* world)
 {
-    nofralloc
-    lwz r4, 0x5620(r3)
-    lwz r0, 0x48(r4)
-    cmpwi r0, 0x0
-    beq lbl_fn_80370C2C_00000944
-    lwz r3, 0x58(r4)
-    lwz r0, 0x54(r4)
-    lwz r4, 0x4c(r4)
-    add r0, r3, r0
-    xor r0, r4, r0
-    srawi r3, r0, 1
-    and r0, r0, r4
-    subf r0, r0, r3
-    srwi r3, r0, 31
-    blr
-lbl_fn_80370C2C_00000944:
-    li r3, 0x1
-    blr
+    u32* sub = *(u32**)((char*)world + 0x5620);
+    if (sub[0x48 / 4] != 0) {
+        return (s32)(sub[0x58 / 4] + sub[0x54 / 4]) < (s32)sub[0x4c / 4];
+    }
+    return 1;
 }
 
-asm void fn_80370C6C(void)
+asm void world_initMapTransitionParams(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -809,11 +796,11 @@ asm void fn_80370C6C(void)
     lwz r4, 0x64(r4)
     lwz r0, 0x48(r4)
     cmpwi r0, 0x3
-    beq lbl_fn_80370C6C_0000099C
+    beq lbl_world_initMapTransitionParams_0000099C
     cmpwi r0, 0x4
-    bne lbl_fn_80370C6C_00000980
-    b lbl_fn_80370C6C_0000099C
-lbl_fn_80370C6C_00000980:
+    bne lbl_world_initMapTransitionParams_00000980
+    b lbl_world_initMapTransitionParams_0000099C
+lbl_world_initMapTransitionParams_00000980:
     lwz r4, 0x5624(r3)
     li r0, 0x12
     stw r0, 0x78(r4)
@@ -821,7 +808,7 @@ lbl_fn_80370C6C_00000980:
     bl fn_8006A900
     li r0, 0x1
     stw r0, 0x566c(r31)
-lbl_fn_80370C6C_0000099C:
+lbl_world_initMapTransitionParams_0000099C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -829,7 +816,7 @@ lbl_fn_80370C6C_0000099C:
     blr
 }
 
-asm void fn_80370CD0(void)
+asm void world_startTransitionFade(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -840,7 +827,7 @@ asm void fn_80370CD0(void)
     stw r30, 0x8(r1)
     lwz r0, lbl_8087F448
     cmpwi r0, 0x0
-    beq lbl_fn_80370CD0_000009F0
+    beq lbl_world_startTransitionFade_000009F0
     lfs f1, lbl_8088570C
     mr r3, r0
     li r4, 0x0
@@ -848,37 +835,37 @@ asm void fn_80370CD0(void)
     li r6, 0x1
     li r7, 0x0
     bl fn_8037D4C0
-lbl_fn_80370CD0_000009F0:
+lbl_world_startTransitionFade_000009F0:
     lwz r3, lbl_8087FA20
     cmpwi r3, 0x0
-    beq lbl_fn_80370CD0_00000A14
+    beq lbl_world_startTransitionFade_00000A14
     lwz r3, 0x258(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80370CD0_00000A14
+    beq lbl_world_startTransitionFade_00000A14
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
-lbl_fn_80370CD0_00000A14:
+lbl_world_startTransitionFade_00000A14:
     lwz r0, lbl_8087F498
     cmpwi r0, 0x0
-    beq lbl_fn_80370CD0_00000A80
+    beq lbl_world_startTransitionFade_00000A80
     lwz r0, 0x5638(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_80370CD0_00000A80
+    bne lbl_world_startTransitionFade_00000A80
     lwz r3, lbl_8087F8A0
     cmpwi r3, 0x0
-    beq lbl_fn_80370CD0_00000A80
+    beq lbl_world_startTransitionFade_00000A80
     lwz r30, 0x48(r3)
     cmpwi r30, 0x0
-    beq lbl_fn_80370CD0_00000A80
+    beq lbl_world_startTransitionFade_00000A80
     lwz r3, 0x50(r30)
     bl fn_80219558
     cmpwi r3, 0x0
-    bne lbl_fn_80370CD0_00000A80
+    bne lbl_world_startTransitionFade_00000A80
     lwz r0, 0x7e0(r30)
     rlwinm r0, r0, 0, 26, 26
     cmplwi r0, 0x20
-    bne lbl_fn_80370CD0_00000A80
+    bne lbl_world_startTransitionFade_00000A80
     lwz r3, lbl_8087F498
     li r4, 0x0
     lfs f1, lbl_80885708
@@ -886,30 +873,30 @@ lbl_fn_80370CD0_00000A14:
     lfs f2, lbl_8088572C
     li r6, 0x0
     bl fn_803EA77C
-lbl_fn_80370CD0_00000A80:
+lbl_world_startTransitionFade_00000A80:
     lwz r3, lbl_8087F8A0
     li r0, 0x0
     lwz r3, 0x48(r3)
-    b lbl_fn_80370CD0_00000A98
-lbl_fn_80370CD0_00000A90:
+    b lbl_world_startTransitionFade_00000A98
+lbl_world_startTransitionFade_00000A90:
     stw r0, 0xd18(r3)
     lwz r3, 0x14ac(r3)
-lbl_fn_80370CD0_00000A98:
+lbl_world_startTransitionFade_00000A98:
     cmpwi r3, 0x0
-    bne lbl_fn_80370CD0_00000A90
+    bne lbl_world_startTransitionFade_00000A90
     lwz r3, lbl_8087F408
     li r0, 0x0
     lwz r3, 0x48(r3)
-    b lbl_fn_80370CD0_00000AB8
-lbl_fn_80370CD0_00000AB0:
+    b lbl_world_startTransitionFade_00000AB8
+lbl_world_startTransitionFade_00000AB0:
     stw r0, 0xd18(r3)
     lwz r3, 0x14ac(r3)
-lbl_fn_80370CD0_00000AB8:
+lbl_world_startTransitionFade_00000AB8:
     cmpwi r3, 0x0
-    bne lbl_fn_80370CD0_00000AB0
+    bne lbl_world_startTransitionFade_00000AB0
     lwz r0, 0x54e4(r31)
     cmpwi r0, 0x8
-    bne lbl_fn_80370CD0_00000AF0
+    bne lbl_world_startTransitionFade_00000AF0
     lwz r3, lbl_8087F540
     li r4, 0x1
     lwz r0, 0x38(r3)
@@ -919,7 +906,7 @@ lbl_fn_80370CD0_00000AB8:
     bl fn_8048169C
     lwz r3, lbl_8087F540
     bl fn_8047E528
-lbl_fn_80370CD0_00000AF0:
+lbl_world_startTransitionFade_00000AF0:
     lwz r3, lbl_8087F490
     li r4, 0x1
     lwz r0, 0x38(r3)
@@ -945,40 +932,40 @@ lbl_fn_80370CD0_00000AF0:
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, lbl_8087F8A0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F408
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F890
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F9E8
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, 0x10d8(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_80370CD0_00000B98
+    beq lbl_world_startTransitionFade_00000B98
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
-lbl_fn_80370CD0_00000B98:
+lbl_world_startTransitionFade_00000B98:
     lwz r3, 0x56f0(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_80370CD0_00000BB0
-    bl fn_800D2338
+    beq lbl_world_startTransitionFade_00000BB0
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0x56f0(r31)
-lbl_fn_80370CD0_00000BB0:
+lbl_world_startTransitionFade_00000BB0:
     lwz r0, 0x1430(r31)
     li r3, 0x0
     stw r3, 0x56f4(r31)
     li r4, 0x0
     cmpwi r0, 0x0
     stw r3, 0x571c(r31)
-    beq lbl_fn_80370CD0_00000BD0
+    beq lbl_world_startTransitionFade_00000BD0
     li r4, 0x1
-lbl_fn_80370CD0_00000BD0:
+lbl_world_startTransitionFade_00000BD0:
     mr r3, r31
     bl fn_80376B68
     lwz r4, 0x5624(r31)
@@ -1020,7 +1007,7 @@ lbl_fn_80370CD0_00000BD0:
     blr
 }
 
-asm void fn_80370F8C(void)
+asm void world_advanceChapter(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1033,21 +1020,21 @@ asm void fn_80370F8C(void)
     mr r30, r5
     stw r29, 0x14(r1)
     mr r29, r3
-    beq lbl_fn_80370F8C_00000CA4
+    beq lbl_world_advanceChapter_00000CA4
     lwz r4, 0x154c(r3)
     addi r0, r4, 0x1
     stw r0, 0x574c(r3)
-lbl_fn_80370F8C_00000CA4:
+lbl_world_advanceChapter_00000CA4:
     lwz r3, lbl_8087FA20
     cmpwi r3, 0x0
-    beq lbl_fn_80370F8C_00000CC8
+    beq lbl_world_advanceChapter_00000CC8
     lwz r3, 0x258(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80370F8C_00000CC8
+    beq lbl_world_advanceChapter_00000CC8
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
-lbl_fn_80370F8C_00000CC8:
+lbl_world_advanceChapter_00000CC8:
     lwz r3, lbl_8087F490
     li r4, 0x1
     lwz r0, 0x38(r3)
@@ -1062,13 +1049,13 @@ lbl_fn_80370F8C_00000CC8:
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
     lwz r3, lbl_8087F8A0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F408
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F890
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F9E8
     li r4, 0x1
     lwz r0, 0x38(r3)
@@ -1083,14 +1070,14 @@ lbl_fn_80370F8C_00000CC8:
     bl fn_803B6C88
     lwz r3, lbl_8087F9F8
     cmpwi r3, 0x0
-    beq lbl_fn_80370F8C_00000D70
+    beq lbl_world_advanceChapter_00000D70
     lwz r0, 0xa70(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80370F8C_00000D70
+    beq lbl_world_advanceChapter_00000D70
     bl fn_805AA738
     lwz r3, lbl_8087F430
     bl fn_803743AC
-lbl_fn_80370F8C_00000D70:
+lbl_world_advanceChapter_00000D70:
     lwz r3, lbl_8087F540
     li r4, 0x0
     lfs f1, lbl_80885708
@@ -1103,9 +1090,9 @@ lbl_fn_80370F8C_00000D70:
     lwz r3, lbl_8087F448
     bl fn_8037D4C0
     cmpwi r31, 0x0
-    bne lbl_fn_80370F8C_00000E10
+    bne lbl_world_advanceChapter_00000E10
     cmpwi r30, 0x0
-    beq lbl_fn_80370F8C_00000DDC
+    beq lbl_world_advanceChapter_00000DDC
     li r0, 0x0
     stw r0, 0x8(r1)
     mr r9, r30
@@ -1116,9 +1103,9 @@ lbl_fn_80370F8C_00000D70:
     li r7, 0x0
     li r8, 0x1
     li r10, 0x12
-    bl fn_8036F268
-    b lbl_fn_80370F8C_00000E28
-lbl_fn_80370F8C_00000DDC:
+    bl world_updateMapTransition
+    b lbl_world_advanceChapter_00000E28
+lbl_world_advanceChapter_00000DDC:
     li r0, 0x0
     stw r0, 0x8(r1)
     li r4, 0x0
@@ -1130,16 +1117,16 @@ lbl_fn_80370F8C_00000DDC:
     addi r9, r8, 0xb8
     li r8, 0x1
     li r10, 0x12
-    bl fn_8036F268
-    b lbl_fn_80370F8C_00000E28
-lbl_fn_80370F8C_00000E10:
+    bl world_updateMapTransition
+    b lbl_world_advanceChapter_00000E28
+lbl_world_advanceChapter_00000E10:
     lwz r3, 0x10d8(r29)
     cmpwi r3, 0x0
-    beq lbl_fn_80370F8C_00000E28
+    beq lbl_world_advanceChapter_00000E28
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
-lbl_fn_80370F8C_00000E28:
+lbl_world_advanceChapter_00000E28:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -1244,7 +1231,7 @@ lbl_fn_80371164_00000F74:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x12
-    bl fn_8036F268
+    bl world_updateMapTransition
 lbl_fn_80371164_00000F84:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1276,7 +1263,7 @@ asm void fn_803712BC(void)
     lwz r3, lbl_8087F9AC
     bl fn_80572B70
     mr r3, r31
-    bl fn_800D2338
+    bl atn_Task_unlink
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -1350,7 +1337,7 @@ lbl_fn_80371334_000010A0:
     lwz r3, 0x56f0(r31)
     cmpwi r3, 0x0
     beq lbl_fn_80371334_000010E8
-    bl fn_800D2338
+    bl atn_Task_unlink
     stw r30, 0x56f0(r31)
 lbl_fn_80371334_000010E8:
     lwz r3, lbl_8087F9E8
@@ -1970,11 +1957,11 @@ lbl_fn_80371790_000019B8:
     stfs f28, 0x5c(r1)
     stfs f28, 0x60(r1)
     stfs f29, 0x64(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x5c
     addi r3, r1, 0x2a8
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f8, 0x64(r1)
     mr r5, r27
     lfs f7, 0x60(r1)
@@ -2006,7 +1993,7 @@ lbl_fn_80371790_000019B8:
     lfs f0, 0x78(r1)
     lfd f2, lbl_8074DBF0@l(r29)
     fadds f1, f31, f0
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f0, f1
     fcmpo cr0, f0, f22
     ble lbl_fn_80371790_00001A90
@@ -2117,7 +2104,7 @@ lbl_fn_80371790_00001BC8:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     b lbl_fn_80371790_00001C9C
 lbl_fn_80371790_00001C0C:
     lwz r3, 0x5c(r20)
@@ -2132,7 +2119,7 @@ lbl_fn_80371790_00001C0C:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     b lbl_fn_80371790_00001C9C
 lbl_fn_80371790_00001C44:
     lwz r0, 0x50(r20)
@@ -2146,7 +2133,7 @@ lbl_fn_80371790_00001C44:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     b lbl_fn_80371790_00001C9C
 lbl_fn_80371790_00001C78:
     lfs f1, lbl_80885708
@@ -2157,7 +2144,7 @@ lbl_fn_80371790_00001C78:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
 lbl_fn_80371790_00001C9C:
     li r0, 0x1
     stw r0, 0x3fc(r20)
@@ -2167,7 +2154,7 @@ lbl_fn_80371790_00001C9C:
     lfs f1, 0x80(r1)
     lfs f2, 0x84(r1)
     lfs f3, 0x88(r1)
-    bl fn_805F90D0
+    bl PSMTXTrans
     lfs f1, 0x78(r1)
     stfs f28, 0x15c(r1)
     fcmpu cr0, f28, f1
@@ -2185,11 +2172,11 @@ lbl_fn_80371790_00001C9C:
     beq lbl_fn_80371790_00001D4C
     addi r3, r1, 0x220
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r23
     addi r4, r1, 0x220
     addi r5, r1, 0x250
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x250
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -2209,11 +2196,11 @@ lbl_fn_80371790_00001D4C:
     beq lbl_fn_80371790_00001DA4
     addi r3, r1, 0x1c0
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r23
     addi r4, r1, 0x1c0
     addi r5, r1, 0x1f0
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r14), 0, 0
     psq_l f2, 0x8(r14), 0, 0
     psq_l f3, 0x10(r14), 0, 0
@@ -2232,11 +2219,11 @@ lbl_fn_80371790_00001DA4:
     beq lbl_fn_80371790_00001DFC
     addi r3, r1, 0x160
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r23
     addi r4, r1, 0x160
     addi r5, r1, 0x190
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r24), 0, 0
     psq_l f2, 0x8(r24), 0, 0
     psq_l f3, 0x10(r24), 0, 0
@@ -2253,7 +2240,7 @@ lbl_fn_80371790_00001DFC:
     mr r3, r25
     mr r4, r23
     addi r5, r1, 0x100
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r4, r1, 0x100
     addi r3, r1, 0x100
     psq_l f1, 0x0(r3), 0, 0
@@ -2272,11 +2259,11 @@ lbl_fn_80371790_00001DFC:
     lfs f1, 0x540(r20)
     lfs f2, 0x544(r20)
     lfs f3, 0x548(r20)
-    bl fn_805F9160
+    bl PSMTXScale
     addi r3, r1, 0x300
     addi r4, r1, 0xd0
     addi r5, r1, 0xa0
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f2, 0x8(r22), 0, 0
     addi r3, r1, 0x14
     psq_l f3, 0x10(r22), 0, 0
@@ -2302,7 +2289,7 @@ lbl_fn_80371790_00001DFC:
     stfs f0, 0x14(r1)
     stfs f7, 0x18(r1)
     stfs f8, 0x1c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f8, 0x324(r1)
     fmr f25, f1
     lfs f7, 0x314(r1)
@@ -2311,7 +2298,7 @@ lbl_fn_80371790_00001DFC:
     stfs f0, 0x20(r1)
     stfs f7, 0x24(r1)
     stfs f8, 0x28(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f8, 0x320(r1)
     fmr f26, f1
     lfs f7, 0x310(r1)
@@ -2320,7 +2307,7 @@ lbl_fn_80371790_00001DFC:
     stfs f0, 0x2c(r1)
     stfs f7, 0x30(r1)
     stfs f8, 0x34(r1)
-    bl fn_805F9940
+    bl PSVECMag
     frsp f7, f26
     stfs f1, 0x8(r1)
     frsp f0, f25
@@ -2374,7 +2361,7 @@ lbl_fn_80371790_00001FC0:
 lbl_fn_80371790_00001FC8:
     lfs f1, lbl_8088572C
     mr r3, r20
-    bl fn_80148B38
+    bl quest_checkCondition
     stfs f28, 0x2e4(r20)
     mr r4, r20
     mr r7, r17
@@ -2487,7 +2474,7 @@ lbl_fn_80371790_0000204C:
     bne lbl_fn_80371790_0000218C
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     b lbl_fn_80371790_0000219C
 lbl_fn_80371790_0000218C:
     lwz r3, lbl_8087F8A0
@@ -2497,14 +2484,14 @@ lbl_fn_80371790_0000218C:
 lbl_fn_80371790_0000219C:
     lwz r3, lbl_8087F428
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F408
     li r4, 0x1
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, 0x10d8(r15)
-    bl fn_800D246C
+    bl atn_Task_setActive
 lbl_fn_80371790_000021C4:
     li r0, 0x8b8
     addi r11, r1, 0x820

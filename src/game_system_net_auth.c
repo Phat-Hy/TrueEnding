@@ -6,12 +6,12 @@ extern void _restgpr_14(void);
 extern void _restgpr_27(void);
 extern void _savegpr_14(void);
 extern void _savegpr_27(void);
-extern void fn_80092814(void);
-extern void fn_800D246C(void);
+extern void atn_Model_findBoneIndex(void);
+extern void atn_Task_setActive(void);
 extern void fn_8012D8B8(void);
 extern void fn_80145334(void);
 extern void fn_80154654(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_801765D8(void);
 extern void fn_80176ACC(void);
 extern void fn_801781B0(void);
@@ -648,7 +648,7 @@ lbl_fn_803972A8_000007B8:
     li r0, 0x0
     li r4, 0x0
     stw r0, 0x58c(r22)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r0, 0x12a4(r22)
     extrwi. r0, r0, 1, 6
     beq lbl_fn_803972A8_000007FC
@@ -1329,7 +1329,7 @@ lbl_fn_80397BEC_000010FC:
     li r0, 0x0
     li r4, 0x0
     stw r0, 0x58c(r22)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r0, 0x12a4(r22)
     extrwi. r0, r0, 1, 6
     beq lbl_fn_80397BEC_00001140
@@ -1599,7 +1599,7 @@ asm void fn_80398704(void)
     li r5, 0x0
     mr r3, r27
     addi r4, r4, 0x69
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80398704_000014C8
     li r4, 0x0
@@ -1625,7 +1625,7 @@ lbl_fn_80398704_000014FC:
     addi r4, r4, lbl_8074F8CC@l
     li r5, 0x0
     addi r4, r4, 0x6e
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80398704_00001524
     li r4, 0x0
@@ -1662,7 +1662,7 @@ lbl_fn_80398704_00001584:
     addi r4, r4, lbl_8074F8CC@l
     li r5, 0x0
     addi r4, r4, 0x73
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80398704_000015AC
     li r4, 0x0
@@ -2100,7 +2100,7 @@ lbl_fn_80398704_00001C08:
     cmpwi r0, 0x0
     beq lbl_fn_80398704_00001C44
     li r4, 0x1
-    bl fn_8016E970
+    bl actor_setState
     li r0, 0x0
     stw r0, 0xd0(r28)
 lbl_fn_80398704_00001C44:

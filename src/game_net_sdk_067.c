@@ -11,7 +11,7 @@ extern void _savegpr_16(void);
 extern void _savegpr_20(void);
 extern void _savegpr_21(void);
 extern void dtor_80084684(void);
-extern void fn_806869BC(void);
+extern void vswprintf(void);
 extern void fn_80695B00(void);
 extern void fn_807267D0(void);
 extern void fn_80726B50(void);
@@ -269,7 +269,7 @@ lbl_fn_8072A9C0_000002B0:
     mr r3, r15
     mr r5, r16
     addi r6, r31, 0x68
-    bl fn_806869BC
+    bl vswprintf
     lwz r4, lbl_8087EE44
     subi r0, r4, 0x1
     cmpw r3, r0
@@ -407,7 +407,7 @@ lbl_fn_8072ABD0_000004C0:
     mr r3, r15
     mr r5, r16
     addi r6, r31, 0x68
-    bl fn_806869BC
+    bl vswprintf
     lwz r4, lbl_8087EE44
     subi r0, r4, 0x1
     cmpw r3, r0
@@ -539,7 +539,7 @@ lbl_fn_8072ADE0_000006BC:
     lwz r4, lbl_8087EE44
     mr r3, r15
     addi r6, r31, 0x68
-    bl fn_806869BC
+    bl vswprintf
     lwz r4, lbl_8087EE44
     subi r0, r4, 0x1
     cmpw r3, r0
@@ -643,7 +643,7 @@ lbl_fn_8072AFC0_00000828:
 lbl_fn_8072AFC0_00000840:
     lwz r4, lbl_8087EE44
     mr r3, r15
-    bl fn_806869BC
+    bl vswprintf
     lwz r4, lbl_8087EE44
     subi r0, r4, 0x1
     cmpw r3, r0
@@ -1024,7 +1024,7 @@ lbl_fn_8072B500_00000DEC:
     mr r3, r29
     mr r5, r28
     addi r6, r31, 0x68
-    bl fn_806869BC
+    bl vswprintf
     lwz r4, lbl_8087EE44
     subi r0, r4, 0x1
     cmpw r3, r0
@@ -1143,7 +1143,7 @@ lbl_fn_8072B720_00000FB0:
     lwz r4, lbl_8087EE44
     mr r3, r29
     mr r5, r7
-    bl fn_806869BC
+    bl vswprintf
     lwz r4, lbl_8087EE44
     subi r0, r4, 0x1
     cmpw r3, r0
@@ -1369,7 +1369,7 @@ lbl_fn_8072BA20_00001304:
     mr r3, r30
     mr r5, r29
     addi r6, r31, 0x68
-    bl fn_806869BC
+    bl vswprintf
     lwz r6, lbl_8087EE44
     mr r5, r3
     mr r3, r28
@@ -1421,7 +1421,7 @@ lbl_fn_8072BB30_000013B8:
     lwz r4, lbl_8087EE44
     mr r3, r30
     mr r5, r7
-    bl fn_806869BC
+    bl vswprintf
     lwz r6, lbl_8087EE44
     mr r5, r3
     mr r3, r29
@@ -1454,7 +1454,7 @@ asm void fn_8072BBE0(void)
 asm void fn_8072BBF0(void)
 {
     nofralloc
-    b fn_806869BC
+    b vswprintf
 }
 
 asm void fn_8072BC00(void)

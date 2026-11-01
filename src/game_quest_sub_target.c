@@ -13,10 +13,10 @@ extern void fn_80079044(void);
 extern void fn_800790D0(void);
 extern void fn_80079210(void);
 extern void fn_8007A154(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_800C16B4(void);
 extern void fn_800C1990(void);
-extern void fn_800D246C(void);
+extern void atn_Task_setActive(void);
 extern void fn_80373148(void);
 extern void fn_8041D180(void);
 extern void fn_8041D198(void);
@@ -24,8 +24,8 @@ extern void fn_80482DF4(void);
 extern void fn_80482E28(void);
 extern void fn_80482E4C(void);
 extern void fn_80491528(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 extern void memmove(void);
 
 /* External data declarations */
@@ -137,8 +137,8 @@ lbl_fn_80485964_000000F4:
     addi r4, r4, 0x1c8
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80485964_00000134:
     lis r3, 0x1555
     addi r0, r3, 0x5555
@@ -188,8 +188,8 @@ lbl_fn_80485964_0000018C:
     addi r4, r4, 0x1c8
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80485964_000001F4:
     lis r3, 0x1555
     addi r0, r3, 0x5555
@@ -244,11 +244,11 @@ lbl_fn_80485964_00000288:
     addi r4, r4, 0x1c8
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80485964_000002BC:
     slwi r3, r31, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_80485964_000002F0
@@ -258,8 +258,8 @@ lbl_fn_80485964_000002BC:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80485964_000002F0:
     stw r30, 0x5c(r1)
     lwz r0, 0x60(r1)
@@ -438,8 +438,8 @@ lbl_fn_80485964_0000056C:
     addi r4, r4, 0x1c8
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80485964_000005B0:
     lis r3, 0x141
     addi r0, r3, 0x4141
@@ -490,8 +490,8 @@ lbl_fn_80485964_00000608:
     addi r4, r4, 0x1c8
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80485964_00000674:
     lis r3, 0x141
     addi r0, r3, 0x4141
@@ -546,11 +546,11 @@ lbl_fn_80485964_00000708:
     addi r4, r4, 0x1c8
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80485964_0000073C:
     mulli r3, r27, 0x44
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r26, r3
     bne lbl_fn_80485964_00000770
@@ -560,8 +560,8 @@ lbl_fn_80485964_0000073C:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077927C@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80485964_00000770:
     lwz r5, 0x4(r30)
     addi r7, r1, 0x78
@@ -769,8 +769,8 @@ lbl_fn_804862C4_00000A38:
     addi r4, r4, 0x1c8
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804862C4_00000A78:
     lis r3, 0x1555
     addi r0, r3, 0x5555
@@ -820,8 +820,8 @@ lbl_fn_804862C4_00000AD0:
     addi r4, r4, 0x1c8
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804862C4_00000B38:
     lis r3, 0x1555
     addi r0, r3, 0x5555
@@ -876,11 +876,11 @@ lbl_fn_804862C4_00000BCC:
     addi r4, r4, 0x1c8
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804862C4_00000C00:
     slwi r3, r27, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_804862C4_00000C34
@@ -890,8 +890,8 @@ lbl_fn_804862C4_00000C00:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804862C4_00000C34:
     stw r31, 0x5c(r1)
     lwz r0, 0x60(r1)
@@ -1067,8 +1067,8 @@ lbl_fn_804862C4_00000EA4:
     addi r4, r4, 0x1c8
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804862C4_00000EE8:
     lis r3, 0x141
     addi r0, r3, 0x4141
@@ -1119,8 +1119,8 @@ lbl_fn_804862C4_00000F40:
     addi r4, r4, 0x1c8
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804862C4_00000FAC:
     lis r3, 0x141
     addi r0, r3, 0x4141
@@ -1175,11 +1175,11 @@ lbl_fn_804862C4_00001040:
     addi r4, r4, 0x1c8
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804862C4_00001074:
     mulli r3, r28, 0x44
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_804862C4_000010A8
@@ -1189,8 +1189,8 @@ lbl_fn_804862C4_00001074:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077927C@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804862C4_000010A8:
     lwz r5, 0x4(r30)
     addi r7, r1, 0x78
@@ -1754,7 +1754,7 @@ asm void fn_80487184(void)
     bl fn_8006A5A8
     stw r3, 0x1a9c(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x1a9c(r31)
     li r0, 0x12
     stw r0, 0x78(r3)
@@ -1842,7 +1842,7 @@ lbl_fn_80487184_0000197C:
 lbl_fn_80487184_00001998:
     lwz r3, 0x1a7c(r31)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x1a7c(r31)
     li r4, 0x0
     lwz r0, 0x38(r3)
@@ -1853,7 +1853,7 @@ lbl_fn_80487184_00001998:
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r3)
     lwz r3, 0x1a80(r31)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x1a80(r31)
     li r4, 0x0
     lwz r0, 0x38(r3)
@@ -1864,13 +1864,13 @@ lbl_fn_80487184_00001998:
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r3)
     lwz r3, 0x1aa8(r31)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x1aa8(r31)
     li r0, 0x0
     li r4, 0x0
     stw r0, 0x48(r3)
     lwz r3, 0x23ac(r31)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x23ac(r31)
     li r4, 0x0
     lwz r0, 0x38(r3)
@@ -1881,7 +1881,7 @@ lbl_fn_80487184_00001998:
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r3)
     lwz r3, 0x23b0(r31)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x23b0(r31)
     li r4, 0x0
     lwz r0, 0x38(r3)
@@ -1892,7 +1892,7 @@ lbl_fn_80487184_00001998:
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r3)
     lwz r3, 0x48(r31)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x48(r31)
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
@@ -1905,7 +1905,7 @@ lbl_fn_80487184_00001998:
     cmpwi r3, 0x0
     beq lbl_fn_80487184_00001ABC
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r4, 0x1a9c(r31)
     li r0, 0x1
     lwz r3, 0x38(r4)
@@ -1916,7 +1916,7 @@ lbl_fn_80487184_00001998:
 lbl_fn_80487184_00001ABC:
     lwz r3, 0x241c(r31)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x241c(r31)
     li r4, 0x0
     lwz r0, 0xfc(r3)
@@ -1927,7 +1927,7 @@ lbl_fn_80487184_00001ABC:
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, 0x2438(r31)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r4, 0x2438(r31)
     li r3, 0x1
     lwz r0, 0xfc(r4)

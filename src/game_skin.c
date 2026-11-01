@@ -31,13 +31,13 @@ extern void fn_8007C144(void);
 extern void fn_8007E9EC(void);
 extern void fn_80081C34(void);
 extern void fn_80081D00(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
-extern void fn_800846FC(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
+extern void mem_realloc(void);
 extern void fn_80084A78(void);
-extern void fn_80084C24(void);
-extern void fn_800874C8(void);
-extern void fn_8008771C(void);
+extern void mem_getAllocSize(void);
+extern void route_findNextWaypoint(void);
+extern void route_interpolatePath(void);
 extern void fn_8008937C(void);
 extern void fn_800C507C(void);
 extern void fn_800C8780(void);
@@ -48,22 +48,22 @@ extern void fn_800CA2FC(void);
 extern void fn_800CA7D4(void);
 extern void fn_800CB360(void);
 extern void fn_800CB36C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB404(void);
 extern void fn_800CFDA0(void);
 extern void fn_800D0AB0(void);
 extern void fn_800D0C1C(void);
 extern void fn_800D19FC(void);
 extern void fn_800D1C60(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
 extern void fn_800D3F28(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800DCA6C(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 extern void fn_806952C4(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695B00(void);
 extern void fn_80709AD0(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -119,11 +119,11 @@ void fn_800C31E4(void);
 void fn_800C31EC(void);
 void fn_800C31F4(void);
 void fn_800C32E0(void);
-void fn_800C344C(void);
+void skin_applyWeights(void);
 void fn_800C3610(void);
 void fn_800C36B8(void);
 void fn_800C3718(void);
-void fn_800C3720(void);
+void skin_updateWeights(void);
 void fn_800C37D8(void);
 void fn_800C37E0(void);
 void fn_800C37E4(void);
@@ -138,8 +138,8 @@ void fn_800C3FB0(void);
 void fn_800C3FF0(void);
 void fn_800C411C(void);
 void fn_800C41B4(void);
-void fn_800C41D0(void);
-void fn_800C442C(void);
+void atn_Skin_init(void);
+void skin_initLink(s32* link);
 void fn_800C4444(void);
 void fn_800C4894(void);
 void fn_800C49F0(void);
@@ -324,7 +324,7 @@ lbl_fn_800C31F4_000001DC:
     bl fn_800CB36C
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_800C31F4_00000228
 lbl_fn_800C31F4_000001F8:
     lwz r3, lbl_8087EE90
@@ -338,7 +338,7 @@ lbl_fn_800C31F4_000001F8:
     bl fn_800C32E0
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_800C31F4_00000228:
     lwz r0, 0x34(r1)
     lfd f31, 0x28(r1)
@@ -454,7 +454,7 @@ lbl_fn_800C32E0_00000398:
     blr
 }
 
-asm void fn_800C344C(void)
+asm void skin_applyWeights(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -474,23 +474,23 @@ asm void fn_800C344C(void)
     lwz r3, lbl_8087EE90
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_800C344C_0000055C
+    beq lbl_skin_applyWeights_0000055C
     lwz r0, lbl_8087EFE8
     cmpwi r0, 0x0
-    beq lbl_fn_800C344C_0000055C
+    beq lbl_skin_applyWeights_0000055C
     cmpwi r27, 0x0
     li r31, 0x0
-    beq lbl_fn_800C344C_0000042C
+    beq lbl_skin_applyWeights_0000042C
     mr r3, r27
     bl strlen
     cmpwi r3, 0x0
-    beq lbl_fn_800C344C_0000042C
+    beq lbl_skin_applyWeights_0000042C
     li r31, 0x1
-lbl_fn_800C344C_0000042C:
+lbl_skin_applyWeights_0000042C:
     cmpwi r31, 0x0
-    bne lbl_fn_800C344C_00000438
-    b lbl_fn_800C344C_0000055C
-lbl_fn_800C344C_00000438:
+    bne lbl_skin_applyWeights_00000438
+    b lbl_skin_applyWeights_0000055C
+lbl_skin_applyWeights_00000438:
     lwz r3, lbl_8087EE90
     mr r4, r27
     bl fn_80049B74
@@ -499,15 +499,15 @@ lbl_fn_800C344C_00000438:
     bl fn_800D0AB0
     cmpwi r3, 0x0
     mr r31, r3
-    bne lbl_fn_800C344C_00000460
-    b lbl_fn_800C344C_0000055C
-lbl_fn_800C344C_00000460:
+    bne lbl_skin_applyWeights_00000460
+    b lbl_skin_applyWeights_0000055C
+lbl_skin_applyWeights_00000460:
     cmpwi r30, 0x0
     lwz r3, lbl_8087EFE8
     li r4, 0x1
-    blt lbl_fn_800C344C_00000474
+    blt lbl_skin_applyWeights_00000474
     mr r4, r30
-lbl_fn_800C344C_00000474:
+lbl_skin_applyWeights_00000474:
     bl fn_800CFDA0
     stw r3, 0xa8(r31)
     mr r3, r31
@@ -516,17 +516,17 @@ lbl_fn_800C344C_00000474:
     lwz r3, lbl_8087EFE8
     lwz r0, 0x34a0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_800C344C_000004AC
+    beq lbl_skin_applyWeights_000004AC
     mr r3, r31
     mr r4, r27
     mr r5, r28
     bl fn_800C8BA4
-    b lbl_fn_800C344C_000004B8
-lbl_fn_800C344C_000004AC:
+    b lbl_skin_applyWeights_000004B8
+lbl_skin_applyWeights_000004AC:
     mr r3, r31
     mr r4, r27
     bl fn_800C8780
-lbl_fn_800C344C_000004B8:
+lbl_skin_applyWeights_000004B8:
     fmr f1, f31
     mr r3, r31
     li r4, 0x0
@@ -540,13 +540,13 @@ lbl_fn_800C344C_000004B8:
     mr r4, r27
     bl fn_80049C3C
     cmpwi r3, 0x0
-    beq lbl_fn_800C344C_00000504
+    beq lbl_skin_applyWeights_00000504
     lfs f1, lbl_8088113C
     mr r3, r31
     fmr f2, f1
     fmr f3, f1
     bl fn_800CA2FC
-lbl_fn_800C344C_00000504:
+lbl_skin_applyWeights_00000504:
     lwz r3, lbl_8087EE90
     mr r4, r31
     bl fn_80049E44
@@ -555,14 +555,14 @@ lbl_fn_800C344C_00000504:
     mr r4, r31
     bl fn_800D0C1C
     cmpwi r3, 0x0
-    bne lbl_fn_800C344C_00000540
+    bne lbl_skin_applyWeights_00000540
     lwz r3, 0x4(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_800C344C_0000055C
+    beq lbl_skin_applyWeights_0000055C
     li r4, 0x0
     bl fn_80709AD0
-    b lbl_fn_800C344C_0000055C
-lbl_fn_800C344C_00000540:
+    b lbl_skin_applyWeights_0000055C
+lbl_skin_applyWeights_00000540:
     fmr f1, f31
     lwz r3, lbl_8087EFE8
     mr r4, r31
@@ -570,7 +570,7 @@ lbl_fn_800C344C_00000540:
     mr r3, r26
     mr r4, r31
     bl fn_800CB404
-lbl_fn_800C344C_0000055C:
+lbl_skin_applyWeights_0000055C:
     addi r11, r1, 0x20
     psq_l f31, 0x28(r1), 0, 0
     lfd f31, 0x20(r1)
@@ -601,12 +601,12 @@ asm void fn_800C3610(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_800C3610_000005FC
     mr r4, r29
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_807792C0@ha
     li r0, 0x0
     addi r3, r3, lbl_807792C0@l
@@ -646,7 +646,7 @@ asm void fn_800C36B8(void)
     li r0, 0x0
     stw r0, lbl_8087EFC0
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r31, 0x0
     ble lbl_fn_800C36B8_00000668
     mr r3, r30
@@ -668,7 +668,7 @@ asm void fn_800C3718(void)
     blr
 }
 
-asm void fn_800C3720(void)
+asm void skin_updateWeights(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -679,29 +679,29 @@ asm void fn_800C3720(void)
     mr r30, r3
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_800C3720_0000072C
+    bne lbl_skin_updateWeights_0000072C
     lwz r31, 0x54(r3)
     cmpwi r31, 0x0
-    bne lbl_fn_800C3720_000006F4
+    bne lbl_skin_updateWeights_000006F4
     lwz r3, 0x4c(r3)
     lwz r4, 0x50(r30)
     bl fn_800C3E84
     cmpwi r3, 0x0
-    beq lbl_fn_800C3720_000006E0
+    beq lbl_skin_updateWeights_000006E0
     li r0, 0x0
     stw r0, 0x50(r30)
     mr r31, r3
-    b lbl_fn_800C3720_000006FC
-lbl_fn_800C3720_000006E0:
+    b lbl_skin_updateWeights_000006FC
+lbl_skin_updateWeights_000006E0:
     lwz r3, 0x4c(r30)
     li r4, 0x0
     bl fn_800C3FB0
     mr r31, r3
-    b lbl_fn_800C3720_000006FC
-lbl_fn_800C3720_000006F4:
+    b lbl_skin_updateWeights_000006FC
+lbl_skin_updateWeights_000006F4:
     li r0, 0x0
     stw r0, 0x54(r3)
-lbl_fn_800C3720_000006FC:
+lbl_skin_updateWeights_000006FC:
     lwz r12, 0x0(r31)
     mr r3, r31
     mr r4, r30
@@ -714,7 +714,7 @@ lbl_fn_800C3720_000006FC:
     mr r3, r30
     stw r0, 0x58(r30)
     bl fn_800D3F28
-lbl_fn_800C3720_0000072C:
+lbl_skin_updateWeights_0000072C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -787,7 +787,7 @@ asm void fn_800C3834(void)
     li r3, 0x200
     stw r0, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_800C3834_00000810
@@ -797,8 +797,8 @@ asm void fn_800C3834(void)
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_800C3834_00000810:
     lwz r0, 0x8(r31)
     li r4, 0x80
@@ -884,7 +884,7 @@ asm void fn_800C3990(void)
     li r3, 0x5c
     mr r6, r5
     li r4, 0x1
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_800C3990_00000A14
@@ -969,8 +969,8 @@ lbl_fn_800C3990_00000A50:
     addi r4, r4, lbl_8073385C@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_800C3990_00000A84:
     li r5, 0x0
     addi r4, r29, 0xc
@@ -995,8 +995,8 @@ lbl_fn_800C3990_00000A84:
     addi r4, r4, lbl_8073385C@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_800C3990_00000AE8:
     lis r3, 0x1555
     addi r0, r3, 0x5555
@@ -1050,11 +1050,11 @@ lbl_fn_800C3990_00000B7C:
     addi r4, r4, lbl_8073385C@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_800C3990_00000BAC:
     slwi r3, r28, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_800C3990_00000BE0
@@ -1064,8 +1064,8 @@ lbl_fn_800C3990_00000BAC:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_800C3990_00000BE0:
     lwz r0, 0x18(r1)
     stw r31, 0x14(r1)
@@ -1362,7 +1362,7 @@ asm void fn_800C3FF0(void)
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r0, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_800C3FF0_00000FF8
     li r0, 0x1
@@ -1377,7 +1377,7 @@ lbl_fn_800C3FF0_00000FF8:
     stw r3, 0x20(r1)
     stw r0, 0x10(r1)
     b lbl_fn_800C3FF0_0000100C
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800C3FF0_0000100C:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x1c(r1)
@@ -1471,7 +1471,7 @@ asm void fn_800C41B4(void)
     blr
 }
 
-asm void fn_800C41D0(void)
+asm void atn_Skin_init(void)
 {
     nofralloc
     stwu r1, -0x140(r1)
@@ -1486,63 +1486,63 @@ asm void fn_800C41D0(void)
     stw r0, 0x8(r3)
     stw r0, 0xc(r3)
     stw r5, 0x10(r3)
-    b lbl_fn_800C41D0_0000117C
-    beq lbl_fn_800C41D0_0000117C
+    b lbl_atn_Skin_init_0000117C
+    beq lbl_atn_Skin_init_0000117C
     li r3, -0x10
-    bl fn_80084C24
-lbl_fn_800C41D0_0000117C:
+    bl mem_getAllocSize
+lbl_atn_Skin_init_0000117C:
     cmpwi r28, 0x0
     stw r28, 0x0(r31)
-    beq lbl_fn_800C41D0_000011C4
+    beq lbl_atn_Skin_init_000011C4
     mulli r3, r28, 0xc
     li r4, 0x6
     la r5, lbl_8087D928
     la r6, lbl_8087D924
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
-    lis r4, fn_800C442C@ha
+    bl mem_realloc
+    lis r4, skin_initLink@ha
     mr r7, r28
-    addi r4, r4, fn_800C442C@l
+    addi r4, r4, skin_initLink@l
     li r5, 0x0
     li r6, 0xc
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r31)
-    b lbl_fn_800C41D0_000011CC
-lbl_fn_800C41D0_000011C4:
+    b lbl_atn_Skin_init_000011CC
+lbl_atn_Skin_init_000011C4:
     li r0, 0x0
     stw r0, 0x4(r31)
-lbl_fn_800C41D0_000011CC:
+lbl_atn_Skin_init_000011CC:
     lwz r3, 0xc(r31)
     lwz r4, 0x10(r31)
     cmpwi r3, 0x0
     lwz r28, 0xa48(r4)
-    beq lbl_fn_800C41D0_000011E4
-    bl fn_80084C24
-lbl_fn_800C41D0_000011E4:
+    beq lbl_atn_Skin_init_000011E4
+    bl mem_getAllocSize
+lbl_atn_Skin_init_000011E4:
     cmpwi r28, 0x0
     stw r28, 0x8(r31)
-    beq lbl_fn_800C41D0_00001210
+    beq lbl_atn_Skin_init_00001210
     slwi r3, r28, 2
     li r4, 0x6
     la r5, lbl_8087D6EC
     la r6, lbl_8087D6E8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0xc(r31)
-    b lbl_fn_800C41D0_00001218
-lbl_fn_800C41D0_00001210:
+    b lbl_atn_Skin_init_00001218
+lbl_atn_Skin_init_00001210:
     li r0, 0x0
     stw r0, 0xc(r31)
-lbl_fn_800C41D0_00001218:
+lbl_atn_Skin_init_00001218:
     lis r28, lbl_80733880@ha
     li r24, 0x0
     li r26, 0x0
     li r25, 0x0
     addi r30, r28, lbl_80733880@l
     li r29, 0x0
-    b lbl_fn_800C41D0_00001328
-lbl_fn_800C41D0_00001234:
+    b lbl_atn_Skin_init_00001328
+lbl_atn_Skin_init_00001234:
     lwz r3, 0x10(r31)
     lwz r3, 0xa4c(r3)
     lwzx r27, r3, r26
@@ -1550,7 +1550,7 @@ lbl_fn_800C41D0_00001234:
     bl fn_8007B078
     cmpwi r3, -0x1
     mr r23, r3
-    bne lbl_fn_800C41D0_00001280
+    bne lbl_atn_Skin_init_00001280
     lwz r5, 0x10(r31)
     mr r6, r27
     addi r3, r1, 0x18
@@ -1562,7 +1562,7 @@ lbl_fn_800C41D0_00001234:
     addi r4, r1, 0x18
     lwz r3, lbl_8087EEB8
     bl fn_800697D8
-lbl_fn_800C41D0_00001280:
+lbl_atn_Skin_init_00001280:
     stw r23, 0xc(r1)
     mr r3, r23
     stw r29, 0x14(r1)
@@ -1570,20 +1570,20 @@ lbl_fn_800C41D0_00001280:
     bl fn_80081C34
     cmpwi r3, 0x0
     mr r23, r3
-    beq lbl_fn_800C41D0_000012FC
+    beq lbl_atn_Skin_init_000012FC
     addi r5, r30, 0x26
     li r3, 0x18
     mr r6, r5
     li r4, 0x6
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r27, r3
-    beq lbl_fn_800C41D0_000012D0
+    beq lbl_atn_Skin_init_000012D0
     li r4, -0x1
     bl fn_8007AA30
     mr r27, r3
-lbl_fn_800C41D0_000012D0:
+lbl_atn_Skin_init_000012D0:
     stw r27, 0x14(r1)
     mr r3, r27
     lwz r4, 0x10(r31)
@@ -1595,7 +1595,7 @@ lbl_fn_800C41D0_000012D0:
     bl fn_8007C018
     mr r3, r27
     bl fn_8007B100
-lbl_fn_800C41D0_000012FC:
+lbl_atn_Skin_init_000012FC:
     lwz r3, 0x4(r31)
     addi r26, r26, 0x4
     lwz r0, 0xc(r1)
@@ -1607,10 +1607,10 @@ lbl_fn_800C41D0_000012FC:
     lwz r0, 0x14(r1)
     stw r3, 0x4(r4)
     stw r0, 0x8(r4)
-lbl_fn_800C41D0_00001328:
+lbl_atn_Skin_init_00001328:
     lwz r0, 0x0(r31)
     cmplw r24, r0
-    blt lbl_fn_800C41D0_00001234
+    blt lbl_atn_Skin_init_00001234
     mulli r0, r0, 0xc
     lwz r3, 0x4(r31)
     addi r5, r1, 0x8
@@ -1618,8 +1618,8 @@ lbl_fn_800C41D0_00001328:
     bl fn_800C4444
     li r6, 0x0
     li r5, 0x0
-    b lbl_fn_800C41D0_00001374
-lbl_fn_800C41D0_00001354:
+    b lbl_atn_Skin_init_00001374
+lbl_atn_Skin_init_00001354:
     lwz r0, 0x4(r31)
     lwz r4, 0xc(r31)
     add r3, r0, r5
@@ -1628,10 +1628,10 @@ lbl_fn_800C41D0_00001354:
     slwi r0, r0, 2
     stwx r6, r4, r0
     addi r6, r6, 0x1
-lbl_fn_800C41D0_00001374:
+lbl_atn_Skin_init_00001374:
     lwz r0, 0x0(r31)
     cmplw r6, r0
-    blt lbl_fn_800C41D0_00001354
+    blt lbl_atn_Skin_init_00001354
     mr r3, r31
     lmw r23, 0x11c(r1)
     lwz r0, 0x144(r1)
@@ -1640,15 +1640,11 @@ lbl_fn_800C41D0_00001374:
     blr
 }
 
-asm void fn_800C442C(void)
+void skin_initLink(s32* link)
 {
-    nofralloc
-    li r4, -0x1
-    li r0, 0x0
-    stw r4, 0x0(r3)
-    stw r4, 0x4(r3)
-    stw r0, 0x8(r3)
-    blr
+    link[0] = -1;
+    link[1] = -1;
+    link[2] = 0;
 }
 
 asm void fn_800C4444(void)
@@ -2076,7 +2072,7 @@ asm void fn_800C49F0(void)
     lwz r3, 0xc(r3)
     cmpwi r3, 0x0
     beq lbl_fn_800C49F0_00001998
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800C49F0_00001998:
     li r0, 0x0
     stw r0, 0xc(r30)
@@ -2089,7 +2085,7 @@ lbl_fn_800C49F0_000019A4:
     beq lbl_fn_800C49F0_000019C4
     beq lbl_fn_800C49F0_000019C4
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800C49F0_000019C4:
     li r0, 0x0
     stw r0, 0x4(r30)
@@ -2127,7 +2123,7 @@ asm void fn_800C4A90(void)
     li r3, 0x54
     stw r29, 0x24(r1)
     stw r28, 0x20(r1)
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_800C4A90_00001A54
@@ -2137,11 +2133,11 @@ asm void fn_800C4A90(void)
 lbl_fn_800C4A90_00001A54:
     lwz r3, 0x10(r30)
     lwz r3, 0x10(r3)
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x0(r31)
     lwz r3, 0x10(r30)
     lwz r3, 0x10(r3)
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x4(r31)
     lis r3, lbl_80733880@ha
     addi r3, r3, lbl_80733880@l
@@ -2235,14 +2231,14 @@ lbl_fn_800C4A90_00001A54:
     lwz r29, 0xe4(r3)
     mulli r3, r29, 0x18
     addi r3, r3, 0x10
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8007E9EC@ha
     lis r5, fn_8007AA64@ha
     mr r7, r29
     li r6, 0x18
     addi r4, r4, fn_8007E9EC@l
     addi r5, r5, fn_8007AA64@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0xc(r31)
     li r28, 0x0
     li r29, 0x0
@@ -2482,7 +2478,7 @@ asm void fn_800C4F70(void)
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     li r29, 0x0
     li r31, 0x0
     b lbl_fn_800C4F70_00001F8C
@@ -2499,7 +2495,7 @@ lbl_fn_800C4F70_00001F50:
     li r7, 0x0
     lfs f3, lbl_8088114C
     lwz r4, 0x10(r4)
-    bl fn_8008771C
+    bl route_interpolatePath
     addi r31, r31, 0x8
     addi r29, r29, 0x1
 lbl_fn_800C4F70_00001F8C:

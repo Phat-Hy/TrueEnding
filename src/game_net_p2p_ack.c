@@ -4,17 +4,17 @@
 /* External function declarations */
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
-extern void fn_80013F78(void);
-extern void fn_80084320(void);
-extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void actor_dispatchMessage(void);
+extern void mem_alloc(void);
+extern void mem_realloc(void);
+extern void mem_getAllocSize(void);
 extern void fn_80087E9C(void);
 extern void fn_8008937C(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_800A55AC(void);
-extern void fn_800CB3A0(void);
-extern void fn_800D246C(void);
-extern void fn_800DC6B4(void);
+extern void ref_releaseHandle(void);
+extern void atn_Task_setActive(void);
+extern void str_findChar(void);
 extern void fn_800EF73C(void);
 extern void fn_80117228(void);
 extern void fn_8012B028(void);
@@ -27,8 +27,8 @@ extern void fn_801FECE0(void);
 extern void fn_80202118(void);
 extern void fn_80202D00(void);
 extern void fn_8021946C(void);
-extern void fn_802377B8(void);
-extern void fn_8023780C(void);
+extern void res_MsgHandle_constructor(void);
+extern void res_MsgHandle_destructor(void);
 extern void fn_804A4EEC(void);
 extern void fn_804A5160(void);
 extern void fn_804A660C(void);
@@ -36,10 +36,10 @@ extern void fn_804A71F0(void);
 extern void fn_8050F940(void);
 extern void fn_80512A38(void);
 extern void fn_80530D8C(void);
-extern void fn_805F89F0(void);
-extern void fn_805F9160(void);
-extern void fn_805F9940(void);
-extern void fn_80695720(void);
+extern void PSMTXConcat(void);
+extern void PSMTXScale(void);
+extern void PSVECMag(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
 extern u32 strlen(const char* str);
 
@@ -244,7 +244,7 @@ lbl_fn_80510FBC_00000208:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80510FBC_0000023C:
     lmw r27, 0x1c(r1)
     lwz r0, 0x34(r1)
@@ -417,7 +417,7 @@ asm void fn_805113EC(void)
     mr r29, r3
     beq lbl_fn_805113EC_000004F8
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r0, 0x104(r29)
     rlwimi r0, r30, 23, 8, 8
     stw r0, 0x104(r29)
@@ -482,7 +482,7 @@ asm void fn_805114D8(void)
     mr r29, r3
     beq lbl_fn_805114D8_000005F4
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r0, 0x104(r29)
     rlwimi r0, r30, 23, 8, 8
     stw r0, 0x104(r29)
@@ -549,7 +549,7 @@ asm void fn_805115D4(void)
     mr r30, r3
     beq lbl_fn_805115D4_0000068C
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r0, 0xfc(r30)
     lis r5, fn_8051166C@ha
     lis r4, fn_80511708@ha
@@ -744,7 +744,7 @@ lbl_fn_805117C0_00000884:
     bl fn_80202118
     mr r31, r3
     mr r3, r29
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r31, 0x58
@@ -793,7 +793,7 @@ lbl_fn_805118B8_00000940:
     addi r4, r4, lbl_8075B2B8@l
     li r5, 0x0
     addi r4, r4, 0x3
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_805118B8_00000968
     li r4, 0x0
@@ -826,7 +826,7 @@ lbl_fn_805118B8_000009BC:
     addi r4, r1, 0x8
     addi r3, r3, 0x30
     mr r5, r4
-    bl fn_805F89F0
+    bl PSMTXConcat
     lwz r3, lbl_8087F580
     mr r4, r26
     lfs f1, 0x0(r29)
@@ -873,7 +873,7 @@ lbl_fn_805119CC_00000A54:
     addi r4, r4, lbl_8075B2B8@l
     li r5, 0x0
     addi r4, r4, 0x3
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_805119CC_00000A7C
     li r4, 0x0
@@ -906,7 +906,7 @@ lbl_fn_805119CC_00000AD0:
     addi r4, r1, 0x8
     addi r3, r3, 0x30
     mr r5, r4
-    bl fn_805F89F0
+    bl PSMTXConcat
     lwz r3, lbl_8087F580
     mr r4, r26
     lfs f1, 0x0(r29)
@@ -1003,7 +1003,7 @@ lbl_fn_80511AE0_00000C18:
     li r6, 0x0
     bl fn_801F4CB4
     addi r3, r28, 0x42
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_808877D0
     mr r4, r3
     addi r3, r29, 0x58
@@ -1041,7 +1041,7 @@ lbl_fn_80511AE0_00000CB8:
     addi r3, r3, lbl_8075B2B8@l
     fdivs f31, f0, f2
     addi r3, r3, 0x42
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r29, 0x58
@@ -1055,7 +1055,7 @@ lbl_fn_80511AE0_00000CE0:
     li r6, 0x0
     bl fn_801F4CB4
     addi r3, r28, 0x4f
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f30
     mr r4, r3
     addi r3, r29, 0x58
@@ -1084,7 +1084,7 @@ lbl_fn_80511AE0_00000D54:
     lis r28, lbl_8075B2B8@ha
     addi r28, r28, lbl_8075B2B8@l
     addi r3, r28, 0x57
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r29, 0x58
@@ -1095,7 +1095,7 @@ lbl_fn_80511AE0_00000D54:
     bl fn_8021946C
     mr r30, r3
     addi r3, r28, 0x5e
-    bl fn_800DC6B4
+    bl str_findChar
     neg r0, r30
     lis r5, lbl_8075B2B0@ha
     or r0, r0, r30
@@ -1366,7 +1366,7 @@ lbl_fn_8051202C_00001108:
     mr r3, r26
     mr r4, r31
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_8051202C_00001128
     li r0, 0x0
@@ -1385,7 +1385,7 @@ lbl_fn_8051202C_00001134:
 lbl_fn_8051202C_0000114C:
     mr r3, r28
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r0, 0x38(r28)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r28)
@@ -1401,7 +1401,7 @@ lbl_fn_8051202C_00001180:
     mr r3, r26
     mr r4, r31
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_8051202C_000011A0
     li r3, 0x0
@@ -1428,7 +1428,7 @@ lbl_fn_8051202C_000011AC:
     psq_st f5, 0x20(r26), 0, 0
     lwz r3, 0x8(r27)
     addi r3, r3, 0x30
-    bl fn_805F89F0
+    bl PSMTXConcat
     lfs f0, lbl_808877CC
     addi r3, r1, 0x50
     lfs f7, 0x118(r1)
@@ -1440,7 +1440,7 @@ lbl_fn_8051202C_000011AC:
     stfs f9, 0x50(r1)
     stfs f8, 0x54(r1)
     stfs f7, 0x58(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x114(r1)
     fmr f31, f1
     lfs f7, 0x104(r1)
@@ -1449,7 +1449,7 @@ lbl_fn_8051202C_000011AC:
     stfs f8, 0x44(r1)
     stfs f7, 0x48(r1)
     stfs f0, 0x4c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x110(r1)
     fmr f30, f1
     lfs f7, 0x100(r1)
@@ -1458,7 +1458,7 @@ lbl_fn_8051202C_000011AC:
     stfs f8, 0x38(r1)
     stfs f7, 0x3c(r1)
     stfs f0, 0x40(r1)
-    bl fn_805F9940
+    bl PSVECMag
     frsp f8, f31
     lfs f9, lbl_808877D0
     frsp f7, f30
@@ -1473,11 +1473,11 @@ lbl_fn_8051202C_000011AC:
     stfs f2, 0x30(r1)
     fdivs f1, f9, f0
     stfs f1, 0x2c(r1)
-    bl fn_805F9160
+    bl PSMTXScale
     mr r3, r26
     addi r4, r1, 0x90
     addi r5, r1, 0xc0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xc0
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1509,7 +1509,7 @@ lbl_fn_8051202C_00001320:
     mr r3, r26
     mr r4, r31
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_8051202C_00001340
     li r3, 0x0
@@ -1535,7 +1535,7 @@ lbl_fn_8051202C_0000134C:
     psq_st f5, 0x20(r4), 0, 0
     lwz r3, 0x8(r27)
     addi r3, r3, 0x30
-    bl fn_805F89F0
+    bl PSMTXConcat
     lfs f8, 0x11c(r1)
     addi r3, r1, 0x5c
     lfs f0, 0x8(r29)
@@ -1567,7 +1567,7 @@ lbl_fn_8051202C_000013EC:
     stfs f8, 0x20(r1)
     stfs f7, 0x24(r1)
     stfs f0, 0x28(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x54(r26)
     fmr f30, f1
     lfs f7, 0x44(r26)
@@ -1576,7 +1576,7 @@ lbl_fn_8051202C_000013EC:
     stfs f8, 0x14(r1)
     stfs f7, 0x18(r1)
     stfs f0, 0x1c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x50(r26)
     fmr f31, f1
     lfs f7, 0x40(r26)
@@ -1585,7 +1585,7 @@ lbl_fn_8051202C_000013EC:
     stfs f8, 0x8(r1)
     stfs f7, 0xc(r1)
     stfs f0, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     frsp f11, f1
     lfs f10, 0x0(r30)
     frsp f9, f31
@@ -1665,7 +1665,7 @@ lbl_fn_80512478_00001554:
     mr r3, r26
     mr r4, r31
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80512478_00001574
     li r0, 0x0
@@ -1684,7 +1684,7 @@ lbl_fn_80512478_00001580:
 lbl_fn_80512478_00001598:
     mr r3, r28
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r0, 0x38(r28)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r28)
@@ -1700,7 +1700,7 @@ lbl_fn_80512478_000015CC:
     mr r3, r26
     mr r4, r31
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80512478_000015EC
     li r3, 0x0
@@ -1727,7 +1727,7 @@ lbl_fn_80512478_000015F8:
     psq_st f5, 0x20(r26), 0, 0
     lwz r3, 0x8(r27)
     addi r3, r3, 0x30
-    bl fn_805F89F0
+    bl PSMTXConcat
     lfs f0, lbl_808877CC
     addi r3, r1, 0x50
     lfs f7, 0x118(r1)
@@ -1739,7 +1739,7 @@ lbl_fn_80512478_000015F8:
     stfs f9, 0x50(r1)
     stfs f8, 0x54(r1)
     stfs f7, 0x58(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x114(r1)
     fmr f31, f1
     lfs f7, 0x104(r1)
@@ -1748,7 +1748,7 @@ lbl_fn_80512478_000015F8:
     stfs f8, 0x44(r1)
     stfs f7, 0x48(r1)
     stfs f0, 0x4c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x110(r1)
     fmr f30, f1
     lfs f7, 0x100(r1)
@@ -1757,7 +1757,7 @@ lbl_fn_80512478_000015F8:
     stfs f8, 0x38(r1)
     stfs f7, 0x3c(r1)
     stfs f0, 0x40(r1)
-    bl fn_805F9940
+    bl PSVECMag
     frsp f8, f31
     lfs f9, lbl_808877D0
     frsp f7, f30
@@ -1772,11 +1772,11 @@ lbl_fn_80512478_000015F8:
     stfs f2, 0x30(r1)
     fdivs f1, f9, f0
     stfs f1, 0x2c(r1)
-    bl fn_805F9160
+    bl PSMTXScale
     mr r3, r26
     addi r4, r1, 0x90
     addi r5, r1, 0xc0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xc0
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1808,7 +1808,7 @@ lbl_fn_80512478_0000176C:
     mr r3, r26
     mr r4, r31
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80512478_0000178C
     li r3, 0x0
@@ -1834,7 +1834,7 @@ lbl_fn_80512478_00001798:
     psq_st f5, 0x20(r4), 0, 0
     lwz r3, 0x8(r27)
     addi r3, r3, 0x30
-    bl fn_805F89F0
+    bl PSMTXConcat
     lfs f8, 0x11c(r1)
     addi r3, r1, 0x5c
     lfs f0, 0x8(r29)
@@ -1866,7 +1866,7 @@ lbl_fn_80512478_00001838:
     stfs f8, 0x20(r1)
     stfs f7, 0x24(r1)
     stfs f0, 0x28(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x54(r26)
     fmr f30, f1
     lfs f7, 0x44(r26)
@@ -1875,7 +1875,7 @@ lbl_fn_80512478_00001838:
     stfs f8, 0x14(r1)
     stfs f7, 0x18(r1)
     stfs f0, 0x1c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x50(r26)
     fmr f31, f1
     lfs f7, 0x40(r26)
@@ -1884,7 +1884,7 @@ lbl_fn_80512478_00001838:
     stfs f8, 0x8(r1)
     stfs f7, 0xc(r1)
     stfs f0, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     frsp f11, f1
     lfs f10, 0x0(r30)
     frsp f9, f31
@@ -1932,21 +1932,21 @@ asm void fn_805128C4(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_805128C4_00001A54
     mr r4, r29
     bl fn_8050F940
     lis r3, lbl_80793320@ha
-    lis r4, fn_802377B8@ha
+    lis r4, res_MsgHandle_constructor@ha
     addi r3, r3, lbl_80793320@l
     stw r3, 0x0(r30)
     li r0, 0x0
     lis r5, fn_800EF73C@ha
     stw r0, 0xd4(r30)
     addi r3, r30, 0xd8
-    addi r4, r4, fn_802377B8@l
+    addi r4, r4, res_MsgHandle_constructor@l
     addi r5, r5, fn_800EF73C@l
     li r6, 0xc
     li r7, 0x8
@@ -1973,7 +1973,7 @@ lbl_fn_805128C4_000019B4:
     add r7, r31, r0
     addi r8, r1, 0xc
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     li r0, 0xd
     stw r0, 0x4c(r30)
     cmpwi r0, 0x0
@@ -1984,25 +1984,25 @@ lbl_fn_805128C4_000019B4:
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80512A38@ha
     li r5, 0x0
     addi r4, r4, fn_80512A38@l
     li r6, 0x40
     li r7, 0xd
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0xd4(r30)
     cmpwi r4, 0x0
     stw r3, 0xd4(r30)
     beq lbl_fn_805128C4_00001A40
     subi r3, r4, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_805128C4_00001A40:
     lis r4, lbl_8075B510@ha
     addi r3, r30, 0xd8
     addi r4, r4, lbl_8075B510@l
     addi r4, r4, 0xb
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
 lbl_fn_805128C4_00001A54:
     mr r3, r30
     b lbl_fn_805128C4_00001A60

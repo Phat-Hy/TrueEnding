@@ -13,11 +13,11 @@ extern void fn_8000D9F8(void);
 extern void fn_8001047C(void);
 extern void fn_80011034(void);
 extern void fn_80011220(void);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void fn_80013410(void);
 extern void fn_80057A64(void);
 extern void fn_800697D8(void);
-extern void fn_800D2338(void);
+extern void atn_Task_unlink(void);
 extern void fn_800EC204(void);
 extern void fn_800F7FF0(void);
 extern void fn_801162A0(void);
@@ -33,7 +33,7 @@ extern void fn_8013C38C(void);
 extern void fn_8013C404(void);
 extern void fn_8013C42C(void);
 extern void fn_8013C504(void);
-extern void fn_8014C0B4(void);
+extern void dialog_setScriptSlot(void);
 extern void fn_8014C468(void);
 extern void fn_80161570(void);
 extern void fn_80164DCC(void);
@@ -73,8 +73,8 @@ extern void fn_8047EFD8(void);
 extern void fn_8047F364(void);
 extern void fn_8047F420(void);
 extern void fn_80572B70(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -1000,7 +1000,7 @@ lbl_fn_803A24A4_00000BA0:
     addi r4, r4, 0x13e
     bl fn_80572B70
     lwz r3, lbl_8087F430
-    bl fn_800D2338
+    bl atn_Task_unlink
 lbl_fn_803A24A4_00000C2C:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1235,7 +1235,7 @@ lbl_fn_803A26F4_00000F54:
     mr r4, r3
     mr r5, r23
     addi r3, r1, 0xe0
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0xe0
     bl fn_801162A0
     bl fn_80011220
@@ -1273,7 +1273,7 @@ lbl_fn_803A26F4_00000F98:
     mr r4, r3
     mr r5, r23
     addi r3, r1, 0xd4
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0xd4
     bl fn_801162A0
     bl fn_80011220
@@ -1429,7 +1429,7 @@ lbl_fn_803A26F4_0000121C:
     mr r5, r3
     addi r3, r1, 0xa4
     addi r4, r23, 0x4
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0xa4
     bl fn_801162A0
     bl fn_80011220
@@ -1493,7 +1493,7 @@ lbl_fn_803A26F4_00001304:
     mr r5, r3
     addi r3, r1, 0x8c
     addi r4, r23, 0x4
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x8c
     bl fn_801162A0
     bl fn_80011220
@@ -1683,7 +1683,7 @@ lbl_fn_803A2E20_00001550:
     stfs f4, 0x24(r1)
     stfs f0, 0x20(r1)
     stfs f6, 0x28(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80885B30
     fcmpo cr0, f1, f0
     bge lbl_fn_803A2E20_000018E8
@@ -1792,7 +1792,7 @@ lbl_fn_803A2E20_00001704:
     stfs f4, 0x48(r1)
     stfs f0, 0x44(r1)
     stfs f6, 0x4c(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fabs f3, f1
     lfs f0, lbl_80885B24
     frsp f3, f3
@@ -1800,7 +1800,7 @@ lbl_fn_803A2E20_00001704:
     blt lbl_fn_803A2E20_0000175C
     addi r3, r1, 0x44
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_803A2E20_0000175C:
     lfs f4, 0x44(r1)
     addi r4, r1, 0x14
@@ -2020,7 +2020,7 @@ lbl_fn_803A330C_00001A44:
     mr r3, r5
     addi r5, r4, 0xd5
     li r4, 0x0
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
 lbl_fn_803A330C_00001A54:
     lwz r4, 0x0(r31)
     lis r3, lbl_8074ED24@ha

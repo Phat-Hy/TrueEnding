@@ -6,9 +6,9 @@ extern void __files(void);
 extern void _restgpr_23(void);
 extern void _savegpr_23(void);
 extern void dtor_80084684(void);
-extern void fn_800844D8(void);
-extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_free(void);
+extern void mem_realloc(void);
+extern void mem_getAllocSize(void);
 extern void fn_80229DF0(void);
 extern void fn_80229F4C(void);
 extern void fn_80229FF0(void);
@@ -19,9 +19,9 @@ extern void fn_8023793C(void);
 extern void fn_80237C88(void);
 extern void fn_80238148(void);
 extern void fn_802381D8(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
-extern void fn_80695720(void);
+extern void printf(void);
+extern void abort(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 
 /* External data declarations */
@@ -35,20 +35,20 @@ extern u8 lbl_807C80C8[];
 extern u32 lbl_8087DBE4;
 extern u32 lbl_8087DBF0;
 extern u32 lbl_8087DBF4;
-extern u32 lbl_808830D0;
-extern u32 lbl_808830D4;
+extern const float lbl_808830D0;
+extern const float lbl_808830D4;
 
 /* Function declarations */
 void fn_8022AB18(void);
 void fn_8022ADB8(void);
 void fn_8022ADD4(void);
-void fn_8022B114(void);
+void texCache_freeBlock(void);
 void fn_8022B848(void);
 void fn_8022B84C(void);
-void fn_8022B850(void);
+void texCache_allocateSlot(void);
 void fn_8022BDB4(void);
-void fn_8022BE1C(void);
-void fn_8022BE8C(void);
+void tex_initDescriptor(void);
+void tex_initDefaultTransform(float* rect);
 void fn_8022BEAC(void);
 void fn_8022C2A0(void);
 void fn_8022C3F0(void);
@@ -99,7 +99,7 @@ lbl_fn_8022AB18_00000078:
     li r31, 0x1000
     b lbl_fn_8022AB18_000000A8
 lbl_fn_8022AB18_000000A4:
-    bl fn_80686EA4
+    bl abort
 lbl_fn_8022AB18_000000A8:
     cmplwi r29, 0x1f8
     ble lbl_fn_8022AB18_0000027C
@@ -289,7 +289,7 @@ lbl_fn_8022ADD4_0000033C:
     stw r4, 0xc(r5)
     b lbl_fn_8022ADD4_00000358
 lbl_fn_8022ADD4_00000354:
-    bl fn_80686EA4
+    bl abort
 lbl_fn_8022ADD4_00000358:
     slwi r4, r29, 3
     addi r3, r30, 0x8
@@ -350,7 +350,7 @@ lbl_fn_8022ADD4_00000420:
     stw r4, 0xc(r7)
     b lbl_fn_8022ADD4_0000043C
 lbl_fn_8022ADD4_00000438:
-    bl fn_80686EA4
+    bl abort
 lbl_fn_8022ADD4_0000043C:
     slwi r3, r28, 3
     ori r0, r30, 0x3
@@ -385,7 +385,7 @@ lbl_fn_8022ADD4_000004A0:
     mr r25, r3
     b lbl_fn_8022ADD4_000004BC
 lbl_fn_8022ADD4_000004B8:
-    bl fn_80686EA4
+    bl abort
 lbl_fn_8022ADD4_000004BC:
     stw r27, 0x8(r26)
     stw r27, 0xc(r25)
@@ -479,7 +479,7 @@ lbl_fn_8022ADD4_000005E8:
     blr
 }
 
-asm void fn_8022B114(void)
+asm void texCache_freeBlock(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -488,170 +488,170 @@ asm void fn_8022B114(void)
     stw r0, 0x34(r1)
     stmw r25, 0x14(r1)
     mr r26, r3
-    beq lbl_fn_8022B114_00000D1C
+    beq lbl_texCache_freeBlock_00000D1C
     lwz r25, 0x10(r3)
     subi r29, r4, 0x8
     cmplw r29, r25
-    blt lbl_fn_8022B114_00000D18
+    blt lbl_texCache_freeBlock_00000D18
     lwz r4, 0x4(r29)
     rlwinm. r0, r4, 0, 30, 30
-    beq lbl_fn_8022B114_00000D18
+    beq lbl_texCache_freeBlock_00000D18
     clrlwi. r0, r4, 31
     clrrwi r31, r4, 2
     add r30, r29, r31
-    bne lbl_fn_8022B114_00000874
+    bne lbl_texCache_freeBlock_00000874
     lwz r4, 0x0(r29)
     subf r29, r4, r29
     add r31, r31, r4
     cmplw r29, r25
-    blt lbl_fn_8022B114_00000D18
+    blt lbl_texCache_freeBlock_00000D18
     lwz r0, 0x14(r3)
     cmplw r29, r0
-    beq lbl_fn_8022B114_00000844
+    beq lbl_texCache_freeBlock_00000844
     srwi r5, r4, 3
     cmplwi r5, 0x20
-    bge lbl_fn_8022B114_000006D4
+    bge lbl_texCache_freeBlock_000006D4
     lwz r4, 0x8(r29)
     lwz r6, 0xc(r29)
     cmplw r4, r6
-    bne lbl_fn_8022B114_00000698
+    bne lbl_texCache_freeBlock_00000698
     li r0, 0x1
     lwz r4, 0x0(r3)
     slw r0, r0, r5
     andc r0, r4, r0
     stw r0, 0x0(r3)
-    b lbl_fn_8022B114_00000874
-lbl_fn_8022B114_00000698:
+    b lbl_texCache_freeBlock_00000874
+lbl_texCache_freeBlock_00000698:
     slwi r0, r5, 3
     add r3, r3, r0
     addi r0, r3, 0x24
     cmplw r4, r0
-    beq lbl_fn_8022B114_000006B4
+    beq lbl_texCache_freeBlock_000006B4
     cmplw r4, r25
-    blt lbl_fn_8022B114_000006D0
-lbl_fn_8022B114_000006B4:
+    blt lbl_texCache_freeBlock_000006D0
+lbl_texCache_freeBlock_000006B4:
     cmplw r6, r0
-    beq lbl_fn_8022B114_000006C4
+    beq lbl_texCache_freeBlock_000006C4
     cmplw r6, r25
-    blt lbl_fn_8022B114_000006D0
-lbl_fn_8022B114_000006C4:
+    blt lbl_texCache_freeBlock_000006D0
+lbl_texCache_freeBlock_000006C4:
     stw r6, 0xc(r4)
     stw r4, 0x8(r6)
-    b lbl_fn_8022B114_00000874
-lbl_fn_8022B114_000006D0:
-    bl fn_80686EA4
-lbl_fn_8022B114_000006D4:
+    b lbl_texCache_freeBlock_00000874
+lbl_texCache_freeBlock_000006D0:
+    bl abort
+lbl_texCache_freeBlock_000006D4:
     lwz r27, 0xc(r29)
     lwz r28, 0x18(r29)
     cmplw r27, r29
-    beq lbl_fn_8022B114_00000700
+    beq lbl_texCache_freeBlock_00000700
     lwz r3, 0x8(r29)
     cmplw r3, r25
-    blt lbl_fn_8022B114_000006FC
+    blt lbl_texCache_freeBlock_000006FC
     stw r27, 0xc(r3)
     stw r3, 0x8(r27)
-    b lbl_fn_8022B114_00000764
-lbl_fn_8022B114_000006FC:
-    bl fn_80686EA4
-lbl_fn_8022B114_00000700:
+    b lbl_texCache_freeBlock_00000764
+lbl_texCache_freeBlock_000006FC:
+    bl abort
+lbl_texCache_freeBlock_00000700:
     lwz r27, 0x14(r29)
     addi r3, r29, 0x14
     cmpwi r27, 0x0
-    bne lbl_fn_8022B114_0000072C
+    bne lbl_texCache_freeBlock_0000072C
     lwz r27, 0x10(r29)
     addi r3, r29, 0x10
     cmpwi r27, 0x0
-    beq lbl_fn_8022B114_00000764
-    b lbl_fn_8022B114_0000072C
-lbl_fn_8022B114_00000724:
+    beq lbl_texCache_freeBlock_00000764
+    b lbl_texCache_freeBlock_0000072C
+lbl_texCache_freeBlock_00000724:
     mr r3, r4
     lwz r27, 0x0(r4)
-lbl_fn_8022B114_0000072C:
+lbl_texCache_freeBlock_0000072C:
     lwz r0, 0x14(r27)
     addi r4, r27, 0x14
     cmpwi r0, 0x0
-    bne lbl_fn_8022B114_00000724
+    bne lbl_texCache_freeBlock_00000724
     lwz r0, 0x10(r27)
     addi r4, r27, 0x10
     cmpwi r0, 0x0
-    bne lbl_fn_8022B114_00000724
+    bne lbl_texCache_freeBlock_00000724
     cmplw r3, r25
-    blt lbl_fn_8022B114_00000760
+    blt lbl_texCache_freeBlock_00000760
     li r0, 0x0
     stw r0, 0x0(r3)
-    b lbl_fn_8022B114_00000764
-lbl_fn_8022B114_00000760:
-    bl fn_80686EA4
-lbl_fn_8022B114_00000764:
+    b lbl_texCache_freeBlock_00000764
+lbl_texCache_freeBlock_00000760:
+    bl abort
+lbl_texCache_freeBlock_00000764:
     cmpwi r28, 0x0
-    beq lbl_fn_8022B114_00000874
+    beq lbl_texCache_freeBlock_00000874
     lwz r0, 0x1c(r29)
     slwi r0, r0, 2
     add r3, r26, r0
     lwz r0, 0x12c(r3)
     cmplw r29, r0
-    bne lbl_fn_8022B114_000007AC
+    bne lbl_texCache_freeBlock_000007AC
     cmpwi r27, 0x0
     stw r27, 0x12c(r3)
-    bne lbl_fn_8022B114_000007D8
+    bne lbl_texCache_freeBlock_000007D8
     lwz r0, 0x1c(r29)
     li r3, 0x1
     lwz r4, 0x4(r26)
     slw r0, r3, r0
     andc r0, r4, r0
     stw r0, 0x4(r26)
-    b lbl_fn_8022B114_000007D8
-lbl_fn_8022B114_000007AC:
+    b lbl_texCache_freeBlock_000007D8
+lbl_texCache_freeBlock_000007AC:
     lwz r0, 0x10(r26)
     cmplw r28, r0
-    blt lbl_fn_8022B114_000007D4
+    blt lbl_texCache_freeBlock_000007D4
     lwz r0, 0x10(r28)
     cmplw r0, r29
-    bne lbl_fn_8022B114_000007CC
+    bne lbl_texCache_freeBlock_000007CC
     stw r27, 0x10(r28)
-    b lbl_fn_8022B114_000007D8
-lbl_fn_8022B114_000007CC:
+    b lbl_texCache_freeBlock_000007D8
+lbl_texCache_freeBlock_000007CC:
     stw r27, 0x14(r28)
-    b lbl_fn_8022B114_000007D8
-lbl_fn_8022B114_000007D4:
-    bl fn_80686EA4
-lbl_fn_8022B114_000007D8:
+    b lbl_texCache_freeBlock_000007D8
+lbl_texCache_freeBlock_000007D4:
+    bl abort
+lbl_texCache_freeBlock_000007D8:
     cmpwi r27, 0x0
-    beq lbl_fn_8022B114_00000874
+    beq lbl_texCache_freeBlock_00000874
     lwz r0, 0x10(r26)
     cmplw r27, r0
-    blt lbl_fn_8022B114_00000840
+    blt lbl_texCache_freeBlock_00000840
     stw r28, 0x18(r27)
     lwz r3, 0x10(r29)
     cmpwi r3, 0x0
-    beq lbl_fn_8022B114_00000818
+    beq lbl_texCache_freeBlock_00000818
     lwz r0, 0x10(r26)
     cmplw r3, r0
-    blt lbl_fn_8022B114_00000814
+    blt lbl_texCache_freeBlock_00000814
     stw r3, 0x10(r27)
     stw r27, 0x18(r3)
-    b lbl_fn_8022B114_00000818
-lbl_fn_8022B114_00000814:
-    bl fn_80686EA4
-lbl_fn_8022B114_00000818:
+    b lbl_texCache_freeBlock_00000818
+lbl_texCache_freeBlock_00000814:
+    bl abort
+lbl_texCache_freeBlock_00000818:
     lwz r3, 0x14(r29)
     cmpwi r3, 0x0
-    beq lbl_fn_8022B114_00000874
+    beq lbl_texCache_freeBlock_00000874
     lwz r0, 0x10(r26)
     cmplw r3, r0
-    blt lbl_fn_8022B114_0000083C
+    blt lbl_texCache_freeBlock_0000083C
     stw r3, 0x14(r27)
     stw r27, 0x18(r3)
-    b lbl_fn_8022B114_00000874
-lbl_fn_8022B114_0000083C:
-    bl fn_80686EA4
-lbl_fn_8022B114_00000840:
-    bl fn_80686EA4
-lbl_fn_8022B114_00000844:
+    b lbl_texCache_freeBlock_00000874
+lbl_texCache_freeBlock_0000083C:
+    bl abort
+lbl_texCache_freeBlock_00000840:
+    bl abort
+lbl_texCache_freeBlock_00000844:
     lwz r0, 0x4(r30)
     clrlwi r0, r0, 30
     cmplwi r0, 0x3
-    bne lbl_fn_8022B114_00000874
+    bne lbl_texCache_freeBlock_00000874
     stw r31, 0x8(r26)
     ori r0, r31, 0x1
     lwz r3, 0x4(r30)
@@ -659,18 +659,18 @@ lbl_fn_8022B114_00000844:
     stw r3, 0x4(r30)
     stw r0, 0x4(r29)
     stwx r31, r29, r31
-    b lbl_fn_8022B114_00000D1C
-lbl_fn_8022B114_00000874:
+    b lbl_texCache_freeBlock_00000D1C
+lbl_texCache_freeBlock_00000874:
     cmplw r29, r30
-    bge lbl_fn_8022B114_00000D18
+    bge lbl_texCache_freeBlock_00000D18
     lwz r3, 0x4(r30)
     clrlwi. r0, r3, 31
-    beq lbl_fn_8022B114_00000D18
+    beq lbl_texCache_freeBlock_00000D18
     rlwinm. r0, r3, 0, 30, 30
-    bne lbl_fn_8022B114_00000B2C
+    bne lbl_texCache_freeBlock_00000B2C
     lwz r0, 0x18(r26)
     cmplw r30, r0
-    bne lbl_fn_8022B114_000008E8
+    bne lbl_texCache_freeBlock_000008E8
     lwz r0, 0xc(r26)
     stw r29, 0x18(r26)
     add r3, r0, r31
@@ -679,22 +679,22 @@ lbl_fn_8022B114_00000874:
     stw r0, 0x4(r29)
     lwz r0, 0x14(r26)
     cmplw r29, r0
-    bne lbl_fn_8022B114_000008CC
+    bne lbl_texCache_freeBlock_000008CC
     li r0, 0x0
     stw r0, 0x14(r26)
     stw r0, 0x8(r26)
-lbl_fn_8022B114_000008CC:
+lbl_texCache_freeBlock_000008CC:
     lwz r0, 0x1c(r26)
     cmplw r3, r0
-    ble lbl_fn_8022B114_00000D1C
+    ble lbl_texCache_freeBlock_00000D1C
     mr r3, r26
     li r4, 0x0
     bl fn_80229FF0
-    b lbl_fn_8022B114_00000D1C
-lbl_fn_8022B114_000008E8:
+    b lbl_texCache_freeBlock_00000D1C
+lbl_texCache_freeBlock_000008E8:
     lwz r0, 0x14(r26)
     cmplw r30, r0
-    bne lbl_fn_8022B114_00000914
+    bne lbl_texCache_freeBlock_00000914
     lwz r0, 0x8(r26)
     stw r29, 0x14(r26)
     add r3, r0, r31
@@ -702,172 +702,172 @@ lbl_fn_8022B114_000008E8:
     ori r0, r3, 0x1
     stw r0, 0x4(r29)
     stwx r3, r29, r3
-    b lbl_fn_8022B114_00000D1C
-lbl_fn_8022B114_00000914:
+    b lbl_texCache_freeBlock_00000D1C
+lbl_texCache_freeBlock_00000914:
     srwi r4, r3, 3
     clrrwi r0, r3, 2
     cmplwi r4, 0x20
     add r31, r31, r0
-    bge lbl_fn_8022B114_00000994
+    bge lbl_texCache_freeBlock_00000994
     lwz r5, 0x8(r30)
     lwz r6, 0xc(r30)
     cmplw r5, r6
-    bne lbl_fn_8022B114_00000950
+    bne lbl_texCache_freeBlock_00000950
     li r0, 0x1
     lwz r3, 0x0(r26)
     slw r0, r0, r4
     andc r0, r3, r0
     stw r0, 0x0(r26)
-    b lbl_fn_8022B114_00000B0C
-lbl_fn_8022B114_00000950:
+    b lbl_texCache_freeBlock_00000B0C
+lbl_texCache_freeBlock_00000950:
     slwi r0, r4, 3
     add r3, r26, r0
     addi r3, r3, 0x24
     cmplw r5, r3
-    beq lbl_fn_8022B114_00000970
+    beq lbl_texCache_freeBlock_00000970
     lwz r0, 0x10(r26)
     cmplw r5, r0
-    blt lbl_fn_8022B114_00000990
-lbl_fn_8022B114_00000970:
+    blt lbl_texCache_freeBlock_00000990
+lbl_texCache_freeBlock_00000970:
     cmplw r6, r3
-    beq lbl_fn_8022B114_00000984
+    beq lbl_texCache_freeBlock_00000984
     lwz r0, 0x10(r26)
     cmplw r6, r0
-    blt lbl_fn_8022B114_00000990
-lbl_fn_8022B114_00000984:
+    blt lbl_texCache_freeBlock_00000990
+lbl_texCache_freeBlock_00000984:
     stw r6, 0xc(r5)
     stw r5, 0x8(r6)
-    b lbl_fn_8022B114_00000B0C
-lbl_fn_8022B114_00000990:
-    bl fn_80686EA4
-lbl_fn_8022B114_00000994:
+    b lbl_texCache_freeBlock_00000B0C
+lbl_texCache_freeBlock_00000990:
+    bl abort
+lbl_texCache_freeBlock_00000994:
     lwz r28, 0xc(r30)
     lwz r27, 0x18(r30)
     cmplw r28, r30
-    beq lbl_fn_8022B114_000009C4
+    beq lbl_texCache_freeBlock_000009C4
     lwz r3, 0x8(r30)
     lwz r0, 0x10(r26)
     cmplw r3, r0
-    blt lbl_fn_8022B114_000009C0
+    blt lbl_texCache_freeBlock_000009C0
     stw r28, 0xc(r3)
     stw r3, 0x8(r28)
-    b lbl_fn_8022B114_00000A2C
-lbl_fn_8022B114_000009C0:
-    bl fn_80686EA4
-lbl_fn_8022B114_000009C4:
+    b lbl_texCache_freeBlock_00000A2C
+lbl_texCache_freeBlock_000009C0:
+    bl abort
+lbl_texCache_freeBlock_000009C4:
     lwz r28, 0x14(r30)
     addi r3, r30, 0x14
     cmpwi r28, 0x0
-    bne lbl_fn_8022B114_000009F0
+    bne lbl_texCache_freeBlock_000009F0
     lwz r28, 0x10(r30)
     addi r3, r30, 0x10
     cmpwi r28, 0x0
-    beq lbl_fn_8022B114_00000A2C
-    b lbl_fn_8022B114_000009F0
-lbl_fn_8022B114_000009E8:
+    beq lbl_texCache_freeBlock_00000A2C
+    b lbl_texCache_freeBlock_000009F0
+lbl_texCache_freeBlock_000009E8:
     mr r3, r4
     lwz r28, 0x0(r4)
-lbl_fn_8022B114_000009F0:
+lbl_texCache_freeBlock_000009F0:
     lwz r0, 0x14(r28)
     addi r4, r28, 0x14
     cmpwi r0, 0x0
-    bne lbl_fn_8022B114_000009E8
+    bne lbl_texCache_freeBlock_000009E8
     lwz r0, 0x10(r28)
     addi r4, r28, 0x10
     cmpwi r0, 0x0
-    bne lbl_fn_8022B114_000009E8
+    bne lbl_texCache_freeBlock_000009E8
     lwz r0, 0x10(r26)
     cmplw r3, r0
-    blt lbl_fn_8022B114_00000A28
+    blt lbl_texCache_freeBlock_00000A28
     li r0, 0x0
     stw r0, 0x0(r3)
-    b lbl_fn_8022B114_00000A2C
-lbl_fn_8022B114_00000A28:
-    bl fn_80686EA4
-lbl_fn_8022B114_00000A2C:
+    b lbl_texCache_freeBlock_00000A2C
+lbl_texCache_freeBlock_00000A28:
+    bl abort
+lbl_texCache_freeBlock_00000A2C:
     cmpwi r27, 0x0
-    beq lbl_fn_8022B114_00000B0C
+    beq lbl_texCache_freeBlock_00000B0C
     lwz r0, 0x1c(r30)
     slwi r0, r0, 2
     add r3, r26, r0
     lwz r0, 0x12c(r3)
     cmplw r30, r0
-    bne lbl_fn_8022B114_00000A74
+    bne lbl_texCache_freeBlock_00000A74
     cmpwi r28, 0x0
     stw r28, 0x12c(r3)
-    bne lbl_fn_8022B114_00000AA0
+    bne lbl_texCache_freeBlock_00000AA0
     lwz r0, 0x1c(r30)
     li r3, 0x1
     lwz r4, 0x4(r26)
     slw r0, r3, r0
     andc r0, r4, r0
     stw r0, 0x4(r26)
-    b lbl_fn_8022B114_00000AA0
-lbl_fn_8022B114_00000A74:
+    b lbl_texCache_freeBlock_00000AA0
+lbl_texCache_freeBlock_00000A74:
     lwz r0, 0x10(r26)
     cmplw r27, r0
-    blt lbl_fn_8022B114_00000A9C
+    blt lbl_texCache_freeBlock_00000A9C
     lwz r0, 0x10(r27)
     cmplw r0, r30
-    bne lbl_fn_8022B114_00000A94
+    bne lbl_texCache_freeBlock_00000A94
     stw r28, 0x10(r27)
-    b lbl_fn_8022B114_00000AA0
-lbl_fn_8022B114_00000A94:
+    b lbl_texCache_freeBlock_00000AA0
+lbl_texCache_freeBlock_00000A94:
     stw r28, 0x14(r27)
-    b lbl_fn_8022B114_00000AA0
-lbl_fn_8022B114_00000A9C:
-    bl fn_80686EA4
-lbl_fn_8022B114_00000AA0:
+    b lbl_texCache_freeBlock_00000AA0
+lbl_texCache_freeBlock_00000A9C:
+    bl abort
+lbl_texCache_freeBlock_00000AA0:
     cmpwi r28, 0x0
-    beq lbl_fn_8022B114_00000B0C
+    beq lbl_texCache_freeBlock_00000B0C
     lwz r0, 0x10(r26)
     cmplw r28, r0
-    blt lbl_fn_8022B114_00000B08
+    blt lbl_texCache_freeBlock_00000B08
     stw r27, 0x18(r28)
     lwz r3, 0x10(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_8022B114_00000AE0
+    beq lbl_texCache_freeBlock_00000AE0
     lwz r0, 0x10(r26)
     cmplw r3, r0
-    blt lbl_fn_8022B114_00000ADC
+    blt lbl_texCache_freeBlock_00000ADC
     stw r3, 0x10(r28)
     stw r28, 0x18(r3)
-    b lbl_fn_8022B114_00000AE0
-lbl_fn_8022B114_00000ADC:
-    bl fn_80686EA4
-lbl_fn_8022B114_00000AE0:
+    b lbl_texCache_freeBlock_00000AE0
+lbl_texCache_freeBlock_00000ADC:
+    bl abort
+lbl_texCache_freeBlock_00000AE0:
     lwz r3, 0x14(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_8022B114_00000B0C
+    beq lbl_texCache_freeBlock_00000B0C
     lwz r0, 0x10(r26)
     cmplw r3, r0
-    blt lbl_fn_8022B114_00000B04
+    blt lbl_texCache_freeBlock_00000B04
     stw r3, 0x14(r28)
     stw r28, 0x18(r3)
-    b lbl_fn_8022B114_00000B0C
-lbl_fn_8022B114_00000B04:
-    bl fn_80686EA4
-lbl_fn_8022B114_00000B08:
-    bl fn_80686EA4
-lbl_fn_8022B114_00000B0C:
+    b lbl_texCache_freeBlock_00000B0C
+lbl_texCache_freeBlock_00000B04:
+    bl abort
+lbl_texCache_freeBlock_00000B08:
+    bl abort
+lbl_texCache_freeBlock_00000B0C:
     ori r0, r31, 0x1
     stw r0, 0x4(r29)
     stwx r31, r29, r31
     lwz r0, 0x14(r26)
     cmplw r29, r0
-    bne lbl_fn_8022B114_00000B40
+    bne lbl_texCache_freeBlock_00000B40
     stw r31, 0x8(r26)
-    b lbl_fn_8022B114_00000D1C
-lbl_fn_8022B114_00000B2C:
+    b lbl_texCache_freeBlock_00000D1C
+lbl_texCache_freeBlock_00000B2C:
     clrrwi r0, r3, 1
     stw r0, 0x4(r30)
     ori r0, r31, 0x1
     stw r0, 0x4(r29)
     stwx r31, r29, r31
-lbl_fn_8022B114_00000B40:
+lbl_texCache_freeBlock_00000B40:
     srwi r4, r31, 3
     cmplwi r4, 0x20
-    bge lbl_fn_8022B114_00000BAC
+    bge lbl_texCache_freeBlock_00000BAC
     li r0, 0x1
     lwz r3, 0x0(r26)
     slw r5, r0, r4
@@ -876,36 +876,36 @@ lbl_fn_8022B114_00000B40:
     addi r25, r4, 0x24
     and. r0, r3, r5
     mr r27, r25
-    bne lbl_fn_8022B114_00000B7C
+    bne lbl_texCache_freeBlock_00000B7C
     or r0, r3, r5
     stw r0, 0x0(r26)
-    b lbl_fn_8022B114_00000B98
-lbl_fn_8022B114_00000B7C:
+    b lbl_texCache_freeBlock_00000B98
+lbl_texCache_freeBlock_00000B7C:
     lwz r3, 0x8(r25)
     lwz r0, 0x10(r26)
     cmplw r3, r0
-    blt lbl_fn_8022B114_00000B94
+    blt lbl_texCache_freeBlock_00000B94
     mr r27, r3
-    b lbl_fn_8022B114_00000B98
-lbl_fn_8022B114_00000B94:
-    bl fn_80686EA4
-lbl_fn_8022B114_00000B98:
+    b lbl_texCache_freeBlock_00000B98
+lbl_texCache_freeBlock_00000B94:
+    bl abort
+lbl_texCache_freeBlock_00000B98:
     stw r29, 0x8(r25)
     stw r29, 0xc(r27)
     stw r27, 0x8(r29)
     stw r25, 0xc(r29)
-    b lbl_fn_8022B114_00000D1C
-lbl_fn_8022B114_00000BAC:
+    b lbl_texCache_freeBlock_00000D1C
+lbl_texCache_freeBlock_00000BAC:
     srwi. r3, r31, 8
-    bne lbl_fn_8022B114_00000BBC
+    bne lbl_texCache_freeBlock_00000BBC
     li r7, 0x0
-    b lbl_fn_8022B114_00000C18
-lbl_fn_8022B114_00000BBC:
+    b lbl_texCache_freeBlock_00000C18
+lbl_texCache_freeBlock_00000BBC:
     cmplwi r3, 0xffff
-    ble lbl_fn_8022B114_00000BCC
+    ble lbl_texCache_freeBlock_00000BCC
     li r7, 0x1f
-    b lbl_fn_8022B114_00000C18
-lbl_fn_8022B114_00000BCC:
+    b lbl_texCache_freeBlock_00000C18
+lbl_texCache_freeBlock_00000BCC:
     subi r0, r3, 0x100
     rlwinm r4, r0, 16, 28, 28
     slw r3, r3, r4
@@ -925,7 +925,7 @@ lbl_fn_8022B114_00000BCC:
     slwi r3, r3, 1
     clrlwi r0, r0, 31
     add r7, r3, r0
-lbl_fn_8022B114_00000C18:
+lbl_texCache_freeBlock_00000C18:
     stw r7, 0x1c(r29)
     li r3, 0x0
     li r0, 0x1
@@ -937,15 +937,15 @@ lbl_fn_8022B114_00000C18:
     addi r6, r4, 0x12c
     lwz r3, 0x4(r26)
     and. r0, r3, r5
-    bne lbl_fn_8022B114_00000C64
+    bne lbl_texCache_freeBlock_00000C64
     or r0, r3, r5
     stw r0, 0x4(r26)
     stw r29, 0x0(r6)
     stw r6, 0x18(r29)
     stw r29, 0xc(r29)
     stw r29, 0x8(r29)
-    b lbl_fn_8022B114_00000D1C
-lbl_fn_8022B114_00000C64:
+    b lbl_texCache_freeBlock_00000D1C
+lbl_texCache_freeBlock_00000C64:
     subi r3, r7, 0x1f
     subfic r0, r7, 0x1f
     nor r0, r3, r0
@@ -956,49 +956,49 @@ lbl_fn_8022B114_00000C64:
     subfic r0, r0, 0x1f
     andc r0, r0, r4
     slw r4, r31, r0
-lbl_fn_8022B114_00000C8C:
+lbl_texCache_freeBlock_00000C8C:
     lwz r0, 0x4(r25)
     clrrwi r0, r0, 2
     cmplw r0, r31
-    beq lbl_fn_8022B114_00000CE0
+    beq lbl_texCache_freeBlock_00000CE0
     rlwinm r0, r4, 3, 29, 29
     slwi r4, r4, 1
     add r3, r25, r0
     lwzu r0, 0x10(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8022B114_00000CBC
+    beq lbl_texCache_freeBlock_00000CBC
     mr r25, r0
-    b lbl_fn_8022B114_00000C8C
-lbl_fn_8022B114_00000CBC:
+    b lbl_texCache_freeBlock_00000C8C
+lbl_texCache_freeBlock_00000CBC:
     lwz r0, 0x10(r26)
     cmplw r3, r0
-    blt lbl_fn_8022B114_00000CDC
+    blt lbl_texCache_freeBlock_00000CDC
     stw r29, 0x0(r3)
     stw r25, 0x18(r29)
     stw r29, 0xc(r29)
     stw r29, 0x8(r29)
-    b lbl_fn_8022B114_00000D1C
-lbl_fn_8022B114_00000CDC:
-    bl fn_80686EA4
-lbl_fn_8022B114_00000CE0:
+    b lbl_texCache_freeBlock_00000D1C
+lbl_texCache_freeBlock_00000CDC:
+    bl abort
+lbl_texCache_freeBlock_00000CE0:
     lwz r0, 0x10(r26)
     lwz r3, 0x8(r25)
     cmplw r25, r0
-    blt lbl_fn_8022B114_00000D14
+    blt lbl_texCache_freeBlock_00000D14
     cmplw r3, r0
-    blt lbl_fn_8022B114_00000D14
+    blt lbl_texCache_freeBlock_00000D14
     stw r29, 0xc(r3)
     li r0, 0x0
     stw r29, 0x8(r25)
     stw r3, 0x8(r29)
     stw r25, 0xc(r29)
     stw r0, 0x18(r29)
-    b lbl_fn_8022B114_00000D1C
-lbl_fn_8022B114_00000D14:
-    bl fn_80686EA4
-lbl_fn_8022B114_00000D18:
-    bl fn_80686EA4
-lbl_fn_8022B114_00000D1C:
+    b lbl_texCache_freeBlock_00000D1C
+lbl_texCache_freeBlock_00000D14:
+    bl abort
+lbl_texCache_freeBlock_00000D18:
+    bl abort
+lbl_texCache_freeBlock_00000D1C:
     lmw r25, 0x14(r1)
     lwz r0, 0x34(r1)
     mtlr r0
@@ -1018,7 +1018,7 @@ asm void fn_8022B84C(void)
     b fn_80229DF0
 }
 
-asm void fn_8022B850(void)
+asm void texCache_allocateSlot(void)
 {
     nofralloc
     stwu r1, -0x40(r1)
@@ -1037,13 +1037,13 @@ asm void fn_8022B850(void)
     addi r3, r7, 0x10
     li r4, 0x7
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8022BDB4@ha
     mr r7, r31
     addi r4, r4, fn_8022BDB4@l
     li r5, 0x0
     li r6, 0xe0
-    bl fn_80695720
+    bl runtime_registerStaticObject
     mulli r7, r27, 0x1b8
     stw r3, 0x4(r29)
     addi r5, r30, lbl_80742F80@l
@@ -1052,13 +1052,13 @@ asm void fn_8022B850(void)
     addi r3, r7, 0x10
     mr r6, r5
     li r7, 0x0
-    bl fn_800846FC
-    lis r4, fn_8022BE1C@ha
+    bl mem_realloc
+    lis r4, tex_initDescriptor@ha
     mr r7, r27
-    addi r4, r4, fn_8022BE1C@l
+    addi r4, r4, tex_initDescriptor@l
     li r5, 0x0
     li r6, 0x1b8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     mulli r7, r28, 0x94
     stw r3, 0x14(r29)
     addi r5, r30, lbl_80742F80@l
@@ -1067,33 +1067,33 @@ asm void fn_8022B850(void)
     addi r3, r7, 0x10
     mr r6, r5
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80238148@ha
     lis r5, fn_802381D8@ha
     mr r7, r28
     li r6, 0x94
     addi r4, r4, fn_80238148@l
     addi r5, r5, fn_802381D8@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x2c(r29)
     stw r3, 0x24(r29)
     cmplwi r0, 0x40
-    bne lbl_fn_8022B850_00000E2C
+    bne lbl_texCache_allocateSlot_00000E2C
     lwz r0, 0x30(r29)
     cmplwi r0, 0x120
-    beq lbl_fn_8022B850_000011C0
-lbl_fn_8022B850_00000E2C:
+    beq lbl_texCache_allocateSlot_000011C0
+lbl_texCache_allocateSlot_00000E2C:
     lwz r4, 0x38(r29)
     li r3, 0x40
     li r0, 0x120
     stw r3, 0x2c(r29)
     cmpwi r4, 0x0
     stw r0, 0x30(r29)
-    beq lbl_fn_8022B850_00000E54
-    beq lbl_fn_8022B850_00000E54
+    beq lbl_texCache_allocateSlot_00000E54
+    beq lbl_texCache_allocateSlot_00000E54
     subi r3, r4, 0x10
-    bl fn_80084C24
-lbl_fn_8022B850_00000E54:
+    bl mem_getAllocSize
+lbl_texCache_allocateSlot_00000E54:
     li r0, 0x4800
     stw r0, 0x34(r29)
     mulli r3, r0, 0x14
@@ -1102,28 +1102,28 @@ lbl_fn_8022B850_00000E54:
     la r6, lbl_8087DBF0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
-    lis r4, fn_8022BE8C@ha
+    bl mem_realloc
+    lis r4, tex_initDefaultTransform@ha
     li r5, 0x0
-    addi r4, r4, fn_8022BE8C@l
+    addi r4, r4, tex_initDefaultTransform@l
     li r6, 0x14
     li r7, 0x4800
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x38(r29)
-    b lbl_fn_8022B850_00000E9C
+    b lbl_texCache_allocateSlot_00000E9C
     stw r0, 0x38(r29)
-lbl_fn_8022B850_00000E9C:
+lbl_texCache_allocateSlot_00000E9C:
     lwz r4, 0x40(r29)
     cmplwi r4, 0x120
-    bge lbl_fn_8022B850_000011B0
+    bge lbl_texCache_allocateSlot_000011B0
     lwz r5, 0x44(r29)
     subfic r30, r4, 0x120
     cmplw r30, r5
-    bgt lbl_fn_8022B850_00000EC4
+    bgt lbl_texCache_allocateSlot_00000EC4
     subf r0, r30, r5
     cmplw r4, r0
-    ble lbl_fn_8022B850_00000F34
-lbl_fn_8022B850_00000EC4:
+    ble lbl_texCache_allocateSlot_00000F34
+lbl_texCache_allocateSlot_00000EC4:
     lwz r4, 0x40(r29)
     lis r3, 0x4000
     lwz r31, 0x44(r29)
@@ -1132,7 +1132,7 @@ lbl_fn_8022B850_00000EC4:
     subf r3, r5, r3
     subf r0, r31, r0
     cmplw r3, r0
-    ble lbl_fn_8022B850_00000F0C
+    ble lbl_texCache_allocateSlot_00000F0C
     lis r4, lbl_80742F80@ha
     lis r3, __files@ha
     addi r4, r4, lbl_80742F80@l
@@ -1140,21 +1140,21 @@ lbl_fn_8022B850_00000EC4:
     addi r4, r4, 0x1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
-lbl_fn_8022B850_00000F0C:
+    bl printf
+    bl abort
+lbl_texCache_allocateSlot_00000F0C:
     lis r3, 0x1555
     addi r0, r3, 0x5555
     cmplw r31, r0
-    bge lbl_fn_8022B850_00000F20
-    b lbl_fn_8022B850_00000F5C
-lbl_fn_8022B850_00000F20:
+    bge lbl_texCache_allocateSlot_00000F20
+    b lbl_texCache_allocateSlot_00000F5C
+lbl_texCache_allocateSlot_00000F20:
     lis r3, 0x2aab
     subi r0, r3, 0x5556
     cmplw r31, r0
-    bge lbl_fn_8022B850_00000F5C
-    b lbl_fn_8022B850_00000F5C
-lbl_fn_8022B850_00000F34:
+    bge lbl_texCache_allocateSlot_00000F5C
+    b lbl_texCache_allocateSlot_00000F5C
+lbl_texCache_allocateSlot_00000F34:
     lwz r3, 0x3c(r29)
     slwi r0, r4, 2
     slwi r5, r30, 2
@@ -1164,8 +1164,8 @@ lbl_fn_8022B850_00000F34:
     lwz r0, 0x40(r29)
     add r0, r0, r30
     stw r0, 0x40(r29)
-    b lbl_fn_8022B850_000011C0
-lbl_fn_8022B850_00000F5C:
+    b lbl_texCache_allocateSlot_000011C0
+lbl_texCache_allocateSlot_00000F5C:
     li r5, 0x0
     addi r4, r29, 0x44
     lis r3, 0x4000
@@ -1182,7 +1182,7 @@ lbl_fn_8022B850_00000F5C:
     subf r0, r31, r0
     cmplw r3, r0
     stw r3, 0x8(r1)
-    ble lbl_fn_8022B850_00000FC4
+    ble lbl_texCache_allocateSlot_00000FC4
     lis r4, lbl_80742F80@ha
     lis r3, __files@ha
     addi r4, r4, lbl_80742F80@l
@@ -1190,13 +1190,13 @@ lbl_fn_8022B850_00000F5C:
     addi r4, r4, 0x1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
-lbl_fn_8022B850_00000FC4:
+    bl printf
+    bl abort
+lbl_texCache_allocateSlot_00000FC4:
     lis r3, 0x1555
     addi r0, r3, 0x5555
     cmplw r31, r0
-    bge lbl_fn_8022B850_00001014
+    bge lbl_texCache_allocateSlot_00001014
     addi r5, r31, 0x1
     lis r3, 0xcccd
     slwi r4, r5, 2
@@ -1208,37 +1208,37 @@ lbl_fn_8022B850_00000FC4:
     srwi r4, r4, 2
     stw r4, 0x10(r1)
     cmplw r4, r0
-    bge lbl_fn_8022B850_00001008
+    bge lbl_texCache_allocateSlot_00001008
     addi r3, r1, 0x8
-lbl_fn_8022B850_00001008:
+lbl_texCache_allocateSlot_00001008:
     lwz r0, 0x0(r3)
     add r28, r31, r0
-    b lbl_fn_8022B850_00001058
-lbl_fn_8022B850_00001014:
+    b lbl_texCache_allocateSlot_00001058
+lbl_texCache_allocateSlot_00001014:
     lis r3, 0x2aab
     subi r0, r3, 0x5556
     cmplw r31, r0
-    bge lbl_fn_8022B850_00001050
+    bge lbl_texCache_allocateSlot_00001050
     addi r3, r31, 0x1
     lwz r0, 0x8(r1)
     srwi r3, r3, 1
     stw r3, 0xc(r1)
     cmplw r3, r0
     addi r3, r1, 0xc
-    bge lbl_fn_8022B850_00001044
+    bge lbl_texCache_allocateSlot_00001044
     addi r3, r1, 0x8
-lbl_fn_8022B850_00001044:
+lbl_texCache_allocateSlot_00001044:
     lwz r0, 0x0(r3)
     add r28, r31, r0
-    b lbl_fn_8022B850_00001058
-lbl_fn_8022B850_00001050:
+    b lbl_texCache_allocateSlot_00001058
+lbl_texCache_allocateSlot_00001050:
     lis r3, 0x4000
     subi r28, r3, 0x1
-lbl_fn_8022B850_00001058:
+lbl_texCache_allocateSlot_00001058:
     lis r3, 0x4000
     subi r0, r3, 0x1
     cmplw r28, r0
-    ble lbl_fn_8022B850_0000108C
+    ble lbl_texCache_allocateSlot_0000108C
     lis r4, lbl_80742F80@ha
     lis r3, __files@ha
     addi r4, r4, lbl_80742F80@l
@@ -1246,23 +1246,23 @@ lbl_fn_8022B850_00001058:
     addi r4, r4, 0x1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
-lbl_fn_8022B850_0000108C:
+    bl printf
+    bl abort
+lbl_texCache_allocateSlot_0000108C:
     slwi r3, r28, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r31, r3
-    bne lbl_fn_8022B850_000010C0
+    bne lbl_texCache_allocateSlot_000010C0
     lis r3, __files@ha
     lis r4, lbl_80775A88@ha
     addi r3, r3, __files@l
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
-lbl_fn_8022B850_000010C0:
+    bl printf
+    bl abort
+lbl_texCache_allocateSlot_000010C0:
     lwz r0, 0x18(r1)
     slwi r5, r30, 2
     stw r31, 0x14(r1)
@@ -1316,19 +1316,19 @@ lbl_fn_8022B850_000010C0:
     lwz r0, 0x18(r1)
     stw r0, 0x40(r29)
     stw r4, 0x18(r1)
-    beq lbl_fn_8022B850_000011C0
+    beq lbl_texCache_allocateSlot_000011C0
     lwz r3, 0x14(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_8022B850_000011C0
+    beq lbl_texCache_allocateSlot_000011C0
     stw r4, 0x18(r1)
     bl dtor_80084684
-    b lbl_fn_8022B850_000011C0
-lbl_fn_8022B850_000011B0:
-    ble lbl_fn_8022B850_000011C0
+    b lbl_texCache_allocateSlot_000011C0
+lbl_texCache_allocateSlot_000011B0:
+    ble lbl_texCache_allocateSlot_000011C0
     subi r0, r4, 0x120
     subf r0, r0, r4
     stw r0, 0x40(r29)
-lbl_fn_8022B850_000011C0:
+lbl_texCache_allocateSlot_000011C0:
     lwz r5, 0x4(r29)
     addi r3, r29, 0xc
     lwz r7, 0x0(r29)
@@ -1340,13 +1340,13 @@ lbl_fn_8022B850_000011C0:
     lis r8, 0x6666
     li r5, 0x1
     li r4, 0x0
-    b lbl_fn_8022B850_00001268
-lbl_fn_8022B850_000011F0:
+    b lbl_texCache_allocateSlot_00001268
+lbl_texCache_allocateSlot_000011F0:
     lwz r0, 0x14(r29)
     add r9, r0, r11
     lwz r7, 0x1a8(r9)
     cmpwi r7, 0x0
-    beq lbl_fn_8022B850_00001244
+    beq lbl_texCache_allocateSlot_00001244
     lwz r3, 0x38(r29)
     addi r6, r8, 0x6667
     lwz r0, 0x2c(r29)
@@ -1363,7 +1363,7 @@ lbl_fn_8022B850_000011F0:
     slw r0, r5, r0
     andc r0, r3, r0
     stwx r0, r7, r6
-lbl_fn_8022B850_00001244:
+lbl_texCache_allocateSlot_00001244:
     stw r4, 0x1a8(r9)
     addi r10, r10, 0x1
     stw r4, 0x1b4(r9)
@@ -1373,10 +1373,10 @@ lbl_fn_8022B850_00001244:
     add r3, r0, r11
     addi r11, r11, 0x1b8
     stw r4, 0x8(r3)
-lbl_fn_8022B850_00001268:
+lbl_texCache_allocateSlot_00001268:
     lwz r7, 0x10(r29)
     cmpw r10, r7
-    blt lbl_fn_8022B850_000011F0
+    blt lbl_texCache_allocateSlot_000011F0
     lwz r5, 0x14(r29)
     addi r3, r29, 0x1c
     addi r4, r29, 0x18
@@ -1420,7 +1420,7 @@ asm void fn_8022BDB4(void)
     blr
 }
 
-asm void fn_8022BE1C(void)
+asm void tex_initDescriptor(void)
 {
     nofralloc
     lfs f1, lbl_808830D0
@@ -1453,17 +1453,13 @@ asm void fn_8022BE1C(void)
     blr
 }
 
-asm void fn_8022BE8C(void)
+void tex_initDefaultTransform(float* rect)
 {
-    nofralloc
-    lfs f1, lbl_808830D0
-    lfs f0, lbl_808830D4
-    stfs f1, 0x0(r3)
-    stfs f1, 0x4(r3)
-    stfs f1, 0x8(r3)
-    stfs f1, 0xc(r3)
-    stfs f0, 0x10(r3)
-    blr
+    rect[0] = lbl_808830D0;
+    rect[1] = lbl_808830D0;
+    rect[2] = lbl_808830D0;
+    rect[3] = lbl_808830D0;
+    rect[4] = lbl_808830D4;
 }
 
 asm void fn_8022BEAC(void)
@@ -1493,7 +1489,7 @@ lbl_fn_8022BEAC_000013D0:
     beq lbl_fn_8022BEAC_000013F4
     beq lbl_fn_8022BEAC_000013F4
     subi r3, r5, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8022BEAC_000013F4:
     slwi. r28, r30, 6
     stw r28, 0x34(r29)
@@ -1504,13 +1500,13 @@ lbl_fn_8022BEAC_000013F4:
     la r6, lbl_8087DBF0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
-    lis r4, fn_8022BE8C@ha
+    bl mem_realloc
+    lis r4, tex_initDefaultTransform@ha
     mr r7, r28
-    addi r4, r4, fn_8022BE8C@l
+    addi r4, r4, tex_initDefaultTransform@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x38(r29)
     b lbl_fn_8022BEAC_00001444
 lbl_fn_8022BEAC_0000143C:
@@ -1544,8 +1540,8 @@ lbl_fn_8022BEAC_0000146C:
     addi r4, r4, 0x1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8022BEAC_000014B4:
     lis r3, 0x1555
     addi r0, r3, 0x5555
@@ -1594,8 +1590,8 @@ lbl_fn_8022BEAC_00001504:
     addi r4, r4, 0x1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8022BEAC_0000156C:
     lis r3, 0x1555
     addi r0, r3, 0x5555
@@ -1650,11 +1646,11 @@ lbl_fn_8022BEAC_00001600:
     addi r4, r4, 0x1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8022BEAC_00001634:
     slwi r3, r31, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r28, r3
     bne lbl_fn_8022BEAC_00001668
@@ -1664,8 +1660,8 @@ lbl_fn_8022BEAC_00001634:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8022BEAC_00001668:
     lwz r0, 0x18(r1)
     slwi r5, r30, 2
@@ -1757,7 +1753,7 @@ asm void fn_8022C2A0(void)
     beq lbl_fn_8022C2A0_000017C4
     beq lbl_fn_8022C2A0_000017B8
     subi r3, r4, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8022C2A0_000017B8:
     li r0, 0x0
     stw r0, 0x4(r31)
@@ -1814,7 +1810,7 @@ lbl_fn_8022C2A0_00001868:
     cmpwi r3, 0x0
     beq lbl_fn_8022C2A0_00001888
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8022C2A0_00001888:
     li r0, 0x0
     stw r0, 0x14(r31)

@@ -4,19 +4,19 @@
 /* External function declarations */
 extern void DCInvalidateRange(void);
 extern void dtor_80084684(void);
-extern void fn_80013F78(void);
-extern void fn_8005B9CC(void);
+extern void actor_dispatchMessage(void);
+extern void talk_formatQuotedString(void);
 extern void fn_800638B0(void);
 extern void fn_80063D3C(void);
 extern void fn_800827E0(void);
 extern void fn_800839EC(void);
-extern void fn_80084320(void);
-extern void fn_80084C24(void);
-extern void fn_8008771C(void);
+extern void mem_alloc(void);
+extern void mem_getAllocSize(void);
+extern void route_interpolatePath(void);
 extern void fn_80087858(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_800A9E54(void);
 extern void fn_800AA6C4(void);
 extern void fn_800AA8DC(void);
@@ -29,22 +29,22 @@ extern void fn_800AEE9C(void);
 extern void fn_800AEF4C(void);
 extern void fn_800AEF68(void);
 extern void fn_800AFE40(void);
-extern void fn_800B089C(void);
+extern void graphic_initViewportTransform(void);
 extern void fn_800B0A48(void);
 extern void fn_800B1554(void);
 extern void fn_800B1598(void);
 extern void fn_800BDB58(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
 extern void fn_800D3FA4(void);
-extern void fn_800D5808(void);
+extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
-extern void fn_805F93C0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
-extern void fn_805F9990(void);
-extern void fn_805F99B0(void);
+extern void str_skipWhitespace(void);
+extern void PSMTXMultVec(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
+extern void PSVECDotProduct(void);
+extern void PSVECCrossProduct(void);
 extern void fn_80615E00(void);
 extern void fn_806959D8(void);
 extern u32 strlen(const char* str);
@@ -207,7 +207,7 @@ lbl_fn_800A81F8_00000054:
     stfs f0, 0x68(r1)
     stfs f3, 0x6c(r1)
     stfs f4, 0x70(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f3, lbl_80880CD4
     addi r3, r1, 0x68
     lfs f0, lbl_80880CEC
@@ -216,16 +216,16 @@ lbl_fn_800A81F8_00000054:
     addi r5, r1, 0x5c
     stfs f0, 0x18(r1)
     stfs f3, 0x1c(r1)
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     addi r3, r1, 0x5c
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80880CF0
     fcmpo cr0, f1, f0
     ble lbl_fn_800A81F8_00000218
     addi r3, r1, 0x5c
     addi r4, r1, 0x68
     addi r5, r1, 0x50
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     addi r3, r1, 0x50
     addi r31, r1, 0x44
     psq_l f1, 0x0(r3), 0, 0
@@ -234,7 +234,7 @@ lbl_fn_800A81F8_00000054:
     mr r4, r31
     psq_st f1, 0x0(r31), 0, 0
     stfs f2, 0x4c(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f3, lbl_80880CD4
     mr r4, r31
     lfs f0, lbl_80880CEC
@@ -242,7 +242,7 @@ lbl_fn_800A81F8_00000054:
     stfs f3, 0x8(r1)
     stfs f0, 0xc(r1)
     stfs f3, 0x10(r1)
-    bl fn_805F9990
+    bl PSVECDotProduct
     fmuls f5, f31, f1
     lfs f0, 0x4c(r1)
     lfs f3, 0x48(r1)
@@ -366,7 +366,7 @@ lbl_fn_800A8468_000002FC:
     stfs f4, 0x10(r1)
     psq_st f1, 0x0(r30), 0, 0
     stfs f2, 0x1c(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     psq_l f1, 0x0(r30), 0, 0
     lis r3, lbl_807C7030@ha
     lfs f2, 0x1c(r1)
@@ -399,7 +399,7 @@ asm void fn_800A85CC(void)
     mr r28, r3
     stw r4, 0x64(r3)
     mr r3, r29
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lwz r0, 0x6c(r28)
     mr r31, r3
     srwi. r0, r0, 31
@@ -421,7 +421,7 @@ lbl_fn_800A85CC_00000424:
     add r7, r31, r0
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x6c(r28)
     lwz r3, 0x64(r28)
     srwi. r0, r0, 31
@@ -432,46 +432,46 @@ lbl_fn_800A85CC_0000046C:
     lwz r4, 0x74(r28)
 lbl_fn_800A85CC_00000470:
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     stw r3, 0x38(r28)
     mr r3, r29
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     lwz r3, 0x64(r28)
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     stw r3, 0x3c(r28)
     mr r3, r29
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC12C
     stw r3, 0x40(r28)
     mr r3, r29
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     lfs f0, lbl_80880CF8
     mr r3, r29
     fmuls f0, f0, f1
     stfs f0, 0x48(r28)
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     lfs f0, lbl_80880CF8
     mr r3, r29
     fmuls f0, f0, f1
     stfs f0, 0x54(r28)
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     lfs f0, lbl_80880CF8
     mr r3, r29
     fmuls f0, f0, f1
     stfs f0, 0x4c(r28)
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     lfs f0, lbl_80880CF8
     mr r3, r29
     fmuls f0, f0, f1
     stfs f0, 0x58(r28)
-    bl fn_8005B9CC
-    bl fn_800DC288
+    bl talk_formatQuotedString
+    bl str_skipWhitespace
     lfs f0, lbl_80880CD8
     li r3, 0x1
     stfs f1, 0x60(r28)
@@ -574,7 +574,7 @@ lbl_fn_800A8740_000005B0:
     mr r5, r4
     stfs f0, 0xb4(r1)
     stfs f0, 0xb8(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f9, 0xb8(r1)
     addi r4, r1, 0x8c
     lfs f8, lbl_80880CFC
@@ -618,7 +618,7 @@ lbl_fn_800A8740_000005B0:
     mr r5, r4
     stfs f0, 0xb4(r1)
     stfs f7, 0xb8(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f9, 0xb8(r1)
     lis r6, 0xff01
     lfs f8, lbl_80880CFC
@@ -663,7 +663,7 @@ lbl_fn_800A8740_000005B0:
     mr r5, r4
     stfs f7, 0xb4(r1)
     stfs f0, 0xb8(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f9, 0xb8(r1)
     lis r6, 0xff00
     lfs f8, lbl_80880CFC
@@ -795,7 +795,7 @@ lbl_fn_800A8A80_000008C4:
     addi r5, r28, 0x60
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -956,7 +956,7 @@ lbl_fn_800A8CB8_00000B4C:
     stfs f27, 0x5c(r1)
     stfs f28, 0x60(r1)
     stfs f29, 0x64(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f6, 0x1c(r30)
     addi r31, r1, 0x50
     lfs f3, 0x1c(r29)
@@ -982,18 +982,18 @@ lbl_fn_800A8CB8_00000B4C:
     stfs f2, 0x34(r1)
     psq_st f1, 0x0(r31), 0, 0
     stfs f2, 0x58(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     mr r3, r31
     mr r4, r31
-    bl fn_805F98D0
+    bl PSVECNormalize
     mr r4, r31
     addi r3, r1, 0x5c
     addi r5, r1, 0x44
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     addi r3, r1, 0x44
     addi r4, r1, 0x5c
     addi r5, r1, 0x8
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     addi r4, r1, 0x8
     lfs f2, 0x10(r1)
     addi r3, r1, 0x44
@@ -1017,11 +1017,11 @@ lbl_fn_800A8CB8_00000CD8:
     bne lbl_fn_800A8CB8_00000CEC
     addi r3, r1, 0x44
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_800A8CB8_00000CEC:
     addi r3, r1, 0x50
     addi r4, r1, 0x44
-    bl fn_805F9990
+    bl PSVECDotProduct
     fmuls f5, f31, f1
     lfs f4, 0x44(r1)
     lfs f3, 0x48(r1)
@@ -1125,12 +1125,12 @@ asm void fn_800A8FF0(void)
     stw r29, 0x14(r1)
     mr r29, r3
     li r3, 0x780
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_800A8FF0_00000EE0
     mr r4, r29
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_80778C68@ha
     addi r3, r3, lbl_80778C68@l
     stw r3, 0x0(r30)
@@ -1165,7 +1165,7 @@ asm void fn_800A8FF0(void)
     addi r3, r30, 0x33c
     bl fn_800ABD84
     addi r3, r30, 0x340
-    bl fn_800B089C
+    bl graphic_initViewportTransform
     addi r3, r30, 0x428
     bl fn_800AD0F0
     li r0, 0xe
@@ -1343,7 +1343,7 @@ asm void fn_800A9294(void)
     beq lbl_fn_800A9294_000010DC
     li r4, -0x1
     addi r3, r3, 0x38
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     cmpwi r31, 0x0
     ble lbl_fn_800A9294_000010DC
     mr r3, r30
@@ -1394,10 +1394,10 @@ asm void fn_800A9330(void)
     beq lbl_fn_800A9330_000011B0
     li r4, -0x1
     addi r3, r3, 0xb8
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addi r3, r30, 0x88
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addic. r0, r30, 0x80
     beq lbl_fn_800A9330_000011A0
     lwz r3, 0x84(r30)
@@ -1405,7 +1405,7 @@ asm void fn_800A9330(void)
     beq lbl_fn_800A9330_00001194
     beq lbl_fn_800A9330_00001194
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800A9330_00001194:
     li r0, 0x0
     stw r0, 0x84(r30)
@@ -1439,19 +1439,19 @@ asm void fn_800A93C4(void)
     beq lbl_fn_800A93C4_0000123C
     li r4, -0x1
     addi r3, r3, 0x320
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addi r3, r30, 0x2f0
     li r4, -0x1
-    bl fn_800D5808
-    lis r4, fn_800D5808@ha
+    bl atn_LH_Texture_destructAndFree
+    lis r4, atn_LH_Texture_destructAndFree@ha
     addi r3, r30, 0x170
-    addi r4, r4, fn_800D5808@l
+    addi r4, r4, atn_LH_Texture_destructAndFree@l
     li r5, 0x30
     li r6, 0x8
     bl fn_806959D8
     addi r3, r30, 0x138
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     cmpwi r31, 0x0
     ble lbl_fn_800A93C4_0000123C
     mr r3, r30
@@ -1483,28 +1483,28 @@ asm void fn_800A9450(void)
     beq lbl_fn_800A9450_000012C4
     addi r3, r31, 0x320
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addi r3, r31, 0x2f0
     li r4, -0x1
-    bl fn_800D5808
-    lis r4, fn_800D5808@ha
+    bl atn_LH_Texture_destructAndFree
+    lis r4, atn_LH_Texture_destructAndFree@ha
     addi r3, r31, 0x170
-    addi r4, r4, fn_800D5808@l
+    addi r4, r4, atn_LH_Texture_destructAndFree@l
     li r5, 0x30
     li r6, 0x8
     bl fn_806959D8
     addi r3, r31, 0x138
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
 lbl_fn_800A9450_000012C4:
     addic. r31, r29, 0x340
     beq lbl_fn_800A9450_00001310
     addi r3, r31, 0xb8
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addi r3, r31, 0x88
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addic. r0, r31, 0x80
     beq lbl_fn_800A9450_00001310
     lwz r3, 0x84(r31)
@@ -1512,7 +1512,7 @@ lbl_fn_800A9450_000012C4:
     beq lbl_fn_800A9450_00001304
     beq lbl_fn_800A9450_00001304
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800A9450_00001304:
     li r0, 0x0
     stw r0, 0x84(r31)
@@ -1522,11 +1522,11 @@ lbl_fn_800A9450_00001310:
     beq lbl_fn_800A9450_00001324
     addi r3, r3, 0x38
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
 lbl_fn_800A9450_00001324:
     mr r3, r29
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r30, 0x0
     ble lbl_fn_800A9450_00001340
     mr r3, r29
