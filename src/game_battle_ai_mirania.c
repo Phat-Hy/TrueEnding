@@ -45,7 +45,7 @@ extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void fn_80680CF8(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80684600(void);
 
 /* External data declarations */
@@ -639,7 +639,7 @@ lbl_fn_80438EF8_000007B4:
     cmpwi r0, 0x3b
     beq lbl_fn_80438EF8_000009F4
     addi r4, r30, 0x1
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80438EF8_00000908
     stfs f30, 0x18(r1)
@@ -721,7 +721,7 @@ lbl_fn_80438EF8_000008F8:
 lbl_fn_80438EF8_00000908:
     mr r3, r28
     addi r4, r30, 0x5
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80438EF8_000009A0
     addi r3, r1, 0x6c
@@ -760,7 +760,7 @@ lbl_fn_80438EF8_00000908:
 lbl_fn_80438EF8_000009A0:
     mr r3, r28
     addi r4, r30, 0xb
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80438EF8_000009CC
     addi r3, r1, 0x6c
@@ -772,7 +772,7 @@ lbl_fn_80438EF8_000009A0:
 lbl_fn_80438EF8_000009CC:
     mr r3, r28
     addi r4, r30, 0xf
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80438EF8_000009F4
     addi r3, r1, 0x6c

@@ -14,7 +14,7 @@ extern void dtor_80084684(void);
 extern void fn_80044E98(void);
 extern void fn_80044FBC(void);
 extern void fn_8004ED34(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_800C344C(void);
 extern void fn_800CB3A0(void);
 extern void fn_80105510(void);
@@ -645,7 +645,7 @@ lbl_fn_8010A4A8_000007B0:
     stfs f0, 0x90(r1)
     li r5, 0x0
     stfs f1, 0x94(r1)
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_8010A4A8_000007F0
     li r0, 0x0

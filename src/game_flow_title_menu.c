@@ -6,7 +6,7 @@ extern void _restgpr_20(void);
 extern void _restgpr_23(void);
 extern void _savegpr_20(void);
 extern void _savegpr_23(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800C3094(void);
 extern void fn_800C3124(void);
 extern void atn_Task_unlink(void);
@@ -1536,7 +1536,7 @@ lbl_fn_804DE888_000012AC:
     la r5, lbl_8087E178
     la r6, lbl_8087E174
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r21, r3
     beq lbl_fn_804DE888_00001394

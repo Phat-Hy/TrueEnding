@@ -14,9 +14,9 @@ extern void fn_8006BA30(void);
 extern void fn_8006BD78(void);
 extern void fn_8006F684(void);
 extern void fn_800763C0(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void atn_LH_Texture_release(void);
@@ -38,8 +38,8 @@ extern void fn_805FA710(void);
 extern void fn_805FA770(void);
 extern void fn_80614790(void);
 extern void fn_806823B0(void);
-extern void fn_80682428(void);
-extern void fn_806827C4(void);
+extern void strcmp(void);
+extern void strstr(void);
 extern void fn_80686A48(void);
 extern void fn_8068A918(void);
 extern void fn_806958E0(void);
@@ -141,7 +141,7 @@ lbl_fn_8006C300_000000A8:
     lwz r3, 0xc(r3)
 lbl_fn_8006C300_000000AC:
     mr r4, r30
-    bl fn_806827C4
+    bl strstr
     cmpwi r3, 0x0
     beq lbl_fn_8006C300_000000C4
     mr r29, r28
@@ -249,7 +249,7 @@ lbl_fn_8006C3F0_00000218:
     lwz r17, 0x14(r1)
     addi r4, r20, 0x34
     mr r3, r17
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_8006C3F0_00000158
     lwz r0, 0x10(r1)
@@ -283,7 +283,7 @@ lbl_fn_8006C3F0_00000270:
     mr r6, r5
     li r4, 0x1
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     stw r3, 0x0(r26)
     beq lbl_fn_8006C3F0_00000364
@@ -299,7 +299,7 @@ lbl_fn_8006C3F0_000002D0:
     beq lbl_fn_8006C3F0_00000314
     mr r3, r24
     addi r4, r20, 0x3f
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_8006C3F0_00000314
     mr r3, r17
@@ -309,7 +309,7 @@ lbl_fn_8006C3F0_000002D0:
     bl strlen
     mr r4, r24
     subf r3, r3, r18
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8006C3F0_00000158
 lbl_fn_8006C3F0_00000314:
@@ -472,7 +472,7 @@ asm void fn_8006C7FC(void)
     li r7, 0x0
     addi r3, r6, 0x4aa4
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8006C7FC_00000544
     bl fn_8006C8F8
@@ -632,7 +632,7 @@ asm void fn_8006CA20(void)
     lwz r3, 0x18(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8006CA20_00000754
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8006CA20_00000754:
     cmpwi r31, 0x0
     ble lbl_fn_8006CA20_00000764
@@ -1153,7 +1153,7 @@ lbl_fn_8006D0C8_00000E60:
     lwz r3, 0xb78(r29)
     cmpwi r3, 0x0
     beq lbl_fn_8006D0C8_00000E78
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8006D0C8_00000E78:
     stw r20, 0xb78(r29)
     mr r5, r27

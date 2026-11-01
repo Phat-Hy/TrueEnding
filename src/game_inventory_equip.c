@@ -4,8 +4,8 @@
 /* External function declarations */
 extern void fn_800185B4(void);
 extern void fn_80044E0C(void);
-extern void fn_80084320(void);
-extern void fn_80097C08(void);
+extern void mem_alloc(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800C344C(void);
 extern void fn_800CB3A0(void);
 extern void fn_801059F8(void);
@@ -674,7 +674,7 @@ asm void fn_80154EC4(void)
     mr r6, r5
     li r3, 0x1c
     li r4, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80154EC4_00000834
@@ -880,7 +880,7 @@ asm void fn_801551AC(void)
     stw r29, 0x54(r1)
     mr r29, r3
     li r3, 0x18
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_801551AC_00000B14
@@ -1088,7 +1088,7 @@ asm void fn_80155494(void)
     stw r28, 0x50(r1)
     mr r28, r4
     li r4, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80155494_00000E0C
@@ -1299,7 +1299,7 @@ asm void fn_80155790(void)
     stw r28, 0x50(r1)
     mr r28, r4
     li r4, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80155790_00001104
@@ -1507,7 +1507,7 @@ asm void fn_80155A88(void)
     mr r6, r5
     li r3, 0x24
     li r4, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80155A88_000013F8
@@ -1754,7 +1754,7 @@ lbl_fn_80155DAC_000016E4:
     li r8, 0x1
     lfs f2, lbl_80881994
     addi r3, r3, 0xb0
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f1, lbl_8088196C
     lfs f0, lbl_80881A74
     stfs f1, 0x2e8(r31)
@@ -1775,7 +1775,7 @@ lbl_fn_80155DAC_0000175C:
     li r8, 0x1
     lfs f2, lbl_80881994
     addi r3, r3, 0xb0
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f1, lbl_8088196C
     lfs f0, lbl_80881B1C
     stfs f1, 0x2e8(r31)
@@ -1858,7 +1858,7 @@ lbl_fn_80155DAC_0000188C:
     li r7, 0x0
     lfs f2, lbl_80881994
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80881964
     stfs f0, 0x2e8(r31)
     b lbl_fn_80155DAC_00001914
@@ -1875,7 +1875,7 @@ lbl_fn_80155DAC_000018D8:
     li r7, 0x0
     lfs f2, lbl_80881994
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80881964
     stfs f0, 0x2e8(r31)
 lbl_fn_80155DAC_00001914:

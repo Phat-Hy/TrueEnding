@@ -16,7 +16,7 @@ extern void fn_800D0DB0(void);
 extern void fn_800D0F34(void);
 extern void fn_800D10B8(void);
 extern void fn_800D123C(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80709AD0(void);
 
 /* External data declarations */
@@ -110,7 +110,7 @@ lbl_fn_800CF5D0_0000007C:
     lis r3, lbl_80779690@ha
     lwz r4, lbl_80779690@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_800CF5D0_000000AC
@@ -384,7 +384,7 @@ lbl_fn_800CF970_00000424:
     lis r3, lbl_80779688@ha
     lwz r4, lbl_80779688@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_800CF970_00000454
@@ -1003,7 +1003,7 @@ lbl_fn_800D0198_00000C3C:
     lis r3, lbl_80779680@ha
     lwz r4, lbl_80779680@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_800D0198_00000C6C
@@ -1488,7 +1488,7 @@ lbl_fn_800D07FC_00001298:
     lis r3, lbl_80779678@ha
     lwz r4, lbl_80779678@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_800D07FC_000012C8

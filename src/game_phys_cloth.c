@@ -10,9 +10,9 @@ extern void fn_800128FC(void);
 extern void fn_80046EE0(void);
 extern void fn_80047B54(void);
 extern void fn_800499D0(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_8008A4E0(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_800A555C(void);
 extern void fn_800C37FC(void);
 extern void atn_Task_constructor(void);
@@ -209,7 +209,7 @@ asm void fn_8010D854(void)
     li r5, 0x0
     addi r31, r3, 0xb0
     mr r3, r31
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_8010D854_0000015C
     li r4, 0x0
@@ -1602,7 +1602,7 @@ asm void fn_8010EB58(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_8010EB58_0000144C

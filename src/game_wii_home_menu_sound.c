@@ -8,7 +8,7 @@ extern void _savegpr_22(void);
 extern void dtor_80084684(void);
 extern void fn_8006A0F4(void);
 extern void fn_8006A250(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800A4228(void);
 extern void fn_800A555C(void);
 extern void fn_800A5920(void);
@@ -804,7 +804,7 @@ asm void fn_80571630(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80571630_0000099C
     mr r4, r29

@@ -106,7 +106,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void fn_80680CF8(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80684600(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
@@ -869,7 +869,7 @@ lbl_fn_8032E3DC_000009EC:
     cmpwi r0, 0x0
     beq lbl_fn_8032E3DC_00000E74
     addi r4, r31, 0xdf
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8032E3DC_00000A38
     addi r3, r1, 0x38
@@ -881,7 +881,7 @@ lbl_fn_8032E3DC_000009EC:
 lbl_fn_8032E3DC_00000A38:
     mr r3, r25
     addi r4, r31, 0xec
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8032E3DC_00000A64
     addi r3, r1, 0x38
@@ -893,7 +893,7 @@ lbl_fn_8032E3DC_00000A38:
 lbl_fn_8032E3DC_00000A64:
     mr r3, r25
     addi r4, r31, 0xf9
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8032E3DC_00000A90
     addi r3, r1, 0x38
@@ -905,7 +905,7 @@ lbl_fn_8032E3DC_00000A64:
 lbl_fn_8032E3DC_00000A90:
     mr r3, r25
     addi r4, r31, 0x103
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8032E3DC_00000ABC
     addi r3, r1, 0x38
@@ -917,7 +917,7 @@ lbl_fn_8032E3DC_00000A90:
 lbl_fn_8032E3DC_00000ABC:
     mr r3, r25
     addi r4, r31, 0x112
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8032E3DC_00000AE8
     addi r3, r1, 0x38
@@ -929,7 +929,7 @@ lbl_fn_8032E3DC_00000ABC:
 lbl_fn_8032E3DC_00000AE8:
     mr r3, r25
     addi r4, r31, 0x123
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8032E3DC_00000B14
     addi r3, r1, 0x38
@@ -941,7 +941,7 @@ lbl_fn_8032E3DC_00000AE8:
 lbl_fn_8032E3DC_00000B14:
     mr r3, r25
     addi r4, r31, 0x131
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8032E3DC_00000B40
     addi r3, r1, 0x38
@@ -953,7 +953,7 @@ lbl_fn_8032E3DC_00000B14:
 lbl_fn_8032E3DC_00000B40:
     mr r3, r25
     addi r4, r31, 0x46
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8032E3DC_00000B68
     addi r3, r1, 0x38
@@ -964,7 +964,7 @@ lbl_fn_8032E3DC_00000B40:
 lbl_fn_8032E3DC_00000B68:
     mr r3, r25
     addi r4, r31, 0x50
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8032E3DC_00000B90
     addi r3, r1, 0x38
@@ -975,7 +975,7 @@ lbl_fn_8032E3DC_00000B68:
 lbl_fn_8032E3DC_00000B90:
     mr r3, r25
     addi r4, r31, 0x62
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8032E3DC_00000BB8
     addi r3, r1, 0x38
@@ -986,7 +986,7 @@ lbl_fn_8032E3DC_00000B90:
 lbl_fn_8032E3DC_00000BB8:
     mr r3, r25
     addi r4, r31, 0x7d
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8032E3DC_00000BE0
     addi r3, r1, 0x38
@@ -997,7 +997,7 @@ lbl_fn_8032E3DC_00000BB8:
 lbl_fn_8032E3DC_00000BE0:
     mr r3, r25
     addi r4, r31, 0x144
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8032E3DC_00000C74
     addi r3, r1, 0x38
@@ -1036,7 +1036,7 @@ lbl_fn_8032E3DC_00000C64:
 lbl_fn_8032E3DC_00000C74:
     mr r3, r25
     addi r4, r31, 0x14a
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8032E3DC_00000D80
     lwz r0, 0x1614(r28)
@@ -1106,7 +1106,7 @@ lbl_fn_8032E3DC_00000D5C:
 lbl_fn_8032E3DC_00000D80:
     mr r3, r25
     addi r4, r31, 0x150
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8032E3DC_00000E74
     addi r3, r1, 0x38

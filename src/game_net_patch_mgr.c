@@ -8,9 +8,9 @@ extern void _restgpr_27(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
-extern void fn_80084C24(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
+extern void mem_getAllocSize(void);
 extern void fn_800DC880(void);
 extern void fn_800DCA6C(void);
 extern void fn_8053770C(void);
@@ -621,7 +621,7 @@ lbl_fn_8053A410_0000079C:
     lwz r3, 0x4(r30)
     cmpwi r3, 0x0
     beq lbl_fn_8053A410_000007C4
-    bl fn_80084C24
+    bl mem_getAllocSize
     li r0, 0x0
     stw r0, 0x4(r30)
 lbl_fn_8053A410_000007C4:
@@ -672,7 +672,7 @@ asm void fn_8053A514(void)
     mr r26, r4
     li r3, 0x40
     li r4, 0x4
-    bl fn_80084320
+    bl mem_alloc
     cmpwi cr1, r3, 0x0
     mr r25, r3
     beq cr1, lbl_fn_8053A514_00000874
@@ -685,7 +685,7 @@ lbl_fn_8053A514_00000874:
     stw r25, 0x28(r1)
     li r3, 0x10
     stw r0, 0x2c(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi cr6, r3, 0x0
     beq cr6, lbl_fn_8053A514_000008AC
     li r0, 0x1
@@ -895,7 +895,7 @@ lbl_fn_8053A514_00000B48:
     bl fn_80686EA4
 lbl_fn_8053A514_00000B7C:
     slwi r3, r30, 3
-    bl fn_800844D8
+    bl mem_free
     cmpwi cr6, r3, 0x0
     mr r31, r3
     bne cr6, lbl_fn_8053A514_00000BB0
@@ -1376,7 +1376,7 @@ lbl_fn_8053AD54_000011B8:
     lwz r3, 0x4(r30)
     cmpwi cr1, r3, 0x0
     beq cr1, lbl_fn_8053AD54_000011E0
-    bl fn_80084C24
+    bl mem_getAllocSize
     li r0, 0x0
     stw r0, 0x4(r30)
 lbl_fn_8053AD54_000011E0:
@@ -1521,7 +1521,7 @@ lbl_fn_8053B034_00001388:
     li r4, 0x4
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi cr1, r3, 0x0
     mr r25, r3
     beq cr1, lbl_fn_8053B034_000013C0
@@ -1534,7 +1534,7 @@ lbl_fn_8053B034_000013C0:
     stw r25, 0x28(r1)
     li r3, 0x10
     stw r0, 0x2c(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi cr6, r3, 0x0
     beq cr6, lbl_fn_8053B034_000013F8
     li r0, 0x1
@@ -1744,7 +1744,7 @@ lbl_fn_8053B034_00001694:
     bl fn_80686EA4
 lbl_fn_8053B034_000016C8:
     slwi r3, r30, 3
-    bl fn_800844D8
+    bl mem_free
     cmpwi cr6, r3, 0x0
     mr r31, r3
     bne cr6, lbl_fn_8053B034_000016FC

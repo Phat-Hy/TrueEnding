@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void fn_800185B4(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_80097D40(void);
 extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
@@ -249,7 +249,7 @@ asm void fn_801603CC(void)
     stw r28, 0x58(r1)
     mr r28, r4
     li r4, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_801603CC_000002D8
@@ -466,7 +466,7 @@ asm void fn_801606DC(void)
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_801606DC_000005E0
@@ -655,7 +655,7 @@ lbl_fn_801606DC_00000854:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_801606DC_00000898
@@ -847,7 +847,7 @@ lbl_fn_801606DC_00000B0C:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_801606DC_00000B60
@@ -1057,7 +1057,7 @@ asm void fn_80160F54(void)
     stw r28, 0x58(r1)
     mr r28, r4
     li r4, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80160F54_00000E58
@@ -1271,7 +1271,7 @@ asm void fn_8016125C(void)
     li r3, 0x1c
     li r4, 0x0
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8016125C_00001178
@@ -1489,7 +1489,7 @@ asm void fn_80161570(void)
     li r3, 0x18
     li r4, 0x0
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80161570_00001484
@@ -1701,7 +1701,7 @@ asm void fn_80161880(void)
     li r3, 0xc
     li r4, 0x0
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80161880_0000177C

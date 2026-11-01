@@ -11,8 +11,8 @@ extern void fn_80011034(void);
 extern void fn_80013338(void);
 extern void fn_80013410(void);
 extern void fn_8004ED34(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_800C344C(void);
 extern void fn_800CB360(void);
 extern void fn_800CB3A0(void);
@@ -1408,7 +1408,7 @@ lbl_fn_8031D6DC_000012AC:
     psq_l f1, 0x0(r30), 0, 0
     psq_st f1, 0x1c(r28), 0, 0
     stfs f2, 0x24(r28)
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     lfs f2, 0x18(r28)
@@ -1824,7 +1824,7 @@ lbl_fn_8031D6DC_000018F4:
     bl fn_80686EA4
 lbl_fn_8031D6DC_00001928:
     slwi r3, r31, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_8031D6DC_0000195C

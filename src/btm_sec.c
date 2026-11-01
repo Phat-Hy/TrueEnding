@@ -111,7 +111,7 @@ extern void fn_8064FDD0(void);
 extern void fn_806514D8(void);
 extern void fn_8067E23C(void);
 extern void fn_8068236C(void);
-extern void fn_80682544(void);
+extern void strncmp(void);
 
 /* External data declarations */
 extern u8 lbl_807B4B80[];
@@ -343,13 +343,13 @@ lbl_fn_806373C8_000001A8:
     mr r3, r21
     addi r4, r30, 0x10
     li r5, 0x15
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     beq lbl_fn_806373C8_00000208
     mr r3, r21
     addi r4, r30, 0x26
     li r5, 0x15
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_806373C8_00000220
 lbl_fn_806373C8_00000208:

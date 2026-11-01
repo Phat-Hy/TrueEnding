@@ -30,8 +30,8 @@ extern void fn_80072E08(void);
 extern void fn_800827E0(void);
 extern void fn_800838B8(void);
 extern void fn_800839EC(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void PSMTX44Inverse(void);
 extern void PSMTX44Copy(void);
 extern void PSVECDotProduct(void);
@@ -827,7 +827,7 @@ lbl_fn_8006F72C_00000904:
     cmplw r27, r0
     blt lbl_fn_8006F72C_000008F8
     slwi r3, r27, 1
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_8006F72C_00000940
@@ -2614,7 +2614,7 @@ asm void fn_80071220(void)
     li r4, 0x6
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80071220_00002318
     bl fn_80071274

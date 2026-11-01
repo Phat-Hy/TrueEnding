@@ -15,7 +15,7 @@ extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void fn_8006B0C8(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B138(void);
 extern void fn_80092F1C(void);
@@ -40,7 +40,7 @@ extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_80476884(void);
 extern void fn_804768B4(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_8072D210(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -167,7 +167,7 @@ lbl_fn_800A005C_00000130:
     bl fn_8005B9CC
     mr r26, r3
     addi r4, r29, 0x15
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_800A005C_000001A8
     addi r3, r1, 0x430
@@ -198,7 +198,7 @@ lbl_fn_800A005C_00000174:
 lbl_fn_800A005C_000001A8:
     mr r3, r26
     addi r4, r29, 0x1c
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_800A005C_00000260
     addi r3, r1, 0x430
@@ -220,7 +220,7 @@ lbl_fn_800A005C_000001E8:
     bl fn_8005B9CC
     mr r26, r3
     addi r4, r28, lbl_807326D8@l
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_800A005C_00000220
     addi r3, r30, 0x10
@@ -250,7 +250,7 @@ lbl_fn_800A005C_00000240:
 lbl_fn_800A005C_00000260:
     mr r3, r26
     addi r4, r29, 0x28
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_800A005C_000002FC
     addi r3, r1, 0x430
@@ -950,7 +950,7 @@ lbl_fn_800A0A68_00000B8C:
     stw r0, 0x1c(r29)
     bgt lbl_fn_800A0A68_00000C20
     lwz r3, 0x18(r29)
-    bl fn_80084C24
+    bl mem_getAllocSize
     lwz r0, 0xc(r31)
     mr r25, r29
     cmplw r29, r0
@@ -1397,7 +1397,7 @@ lbl_fn_800A1060_0000117C:
     stw r0, 0x1c(r29)
     bgt lbl_fn_800A1060_00001210
     lwz r3, 0x18(r29)
-    bl fn_80084C24
+    bl mem_getAllocSize
     lwz r0, 0xc(r31)
     mr r27, r29
     cmplw r29, r0

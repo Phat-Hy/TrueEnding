@@ -18,10 +18,10 @@ extern void fn_800827E0(void);
 extern void fn_800839EC(void);
 extern void fn_80083F50(void);
 extern void fn_80084110(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_800846FC(void);
 extern void fn_80084A78(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void atn_Reticle_updateDraw(void);
 extern void fn_800BC468(void);
 extern void fn_800BC618(void);
@@ -362,7 +362,7 @@ lbl_atn_Model_updateAnimation_000003D4:
     bdnz lbl_atn_Model_updateAnimation_000003D4
 lbl_atn_Model_updateAnimation_000003EC:
     lwz r3, 0x80(r1)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_atn_Model_updateAnimation_000003F4:
     stw r28, 0x80(r1)
     stw r29, 0x7c(r1)
@@ -455,7 +455,7 @@ lbl_atn_Model_updateAnimation_00000524:
     bdnz lbl_atn_Model_updateAnimation_00000524
 lbl_atn_Model_updateAnimation_0000053C:
     lwz r3, 0x80(r1)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_atn_Model_updateAnimation_00000544:
     stw r28, 0x80(r1)
     stw r31, 0x7c(r1)
@@ -539,7 +539,7 @@ lbl_atn_Model_updateAnimation_00000658:
     bdnz lbl_atn_Model_updateAnimation_00000658
 lbl_atn_Model_updateAnimation_00000670:
     lwz r3, 0x80(r1)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_atn_Model_updateAnimation_00000678:
     stw r28, 0x80(r1)
     stw r29, 0x7c(r1)
@@ -598,7 +598,7 @@ lbl_atn_Model_updateAnimation_00000724:
     lwz r3, 0x80(r1)
     cmpwi r3, 0x0
     beq lbl_atn_Model_updateAnimation_00000744
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_atn_Model_updateAnimation_00000744:
     lwz r3, lbl_8087EFA8
     lwz r0, 0x1c(r3)
@@ -865,7 +865,7 @@ lbl_atn_Model_updateAnimation_00000A84:
     stw r3, 0x38(r1)
     li r3, 0x10
     stw r0, 0x3c(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_atn_Model_updateAnimation_00000B4C
     li r0, 0x1
@@ -880,7 +880,7 @@ lbl_atn_Model_updateAnimation_00000B4C:
     stw r3, 0x74(r1)
     stw r0, 0x38(r1)
     b lbl_atn_Model_updateAnimation_00000B60
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_atn_Model_updateAnimation_00000B60:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x70(r1)
@@ -1237,7 +1237,7 @@ lbl_atn_Model_updateAnimation_00001030:
     stw r3, 0x30(r1)
     li r3, 0x10
     stw r0, 0x34(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_atn_Model_updateAnimation_000010C8
     li r0, 0x1
@@ -1252,7 +1252,7 @@ lbl_atn_Model_updateAnimation_000010C8:
     stw r3, 0x68(r1)
     stw r0, 0x30(r1)
     b lbl_atn_Model_updateAnimation_000010DC
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_atn_Model_updateAnimation_000010DC:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x64(r1)
@@ -1317,7 +1317,7 @@ lbl_atn_Model_updateAnimation_0000113C:
     stw r3, 0x28(r1)
     li r3, 0x10
     stw r0, 0x2c(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_atn_Model_updateAnimation_000011F8
     li r0, 0x1
@@ -1332,7 +1332,7 @@ lbl_atn_Model_updateAnimation_000011F8:
     stw r3, 0x5c(r1)
     stw r0, 0x28(r1)
     b lbl_atn_Model_updateAnimation_0000120C
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_atn_Model_updateAnimation_0000120C:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x58(r1)
@@ -1385,7 +1385,7 @@ lbl_atn_Model_updateAnimation_0000126C:
     stw r3, 0x20(r1)
     li r3, 0x10
     stw r0, 0x24(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_atn_Model_updateAnimation_000012F8
     li r0, 0x1
@@ -1400,7 +1400,7 @@ lbl_atn_Model_updateAnimation_000012F8:
     stw r3, 0x50(r1)
     stw r0, 0x20(r1)
     b lbl_atn_Model_updateAnimation_0000130C
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_atn_Model_updateAnimation_0000130C:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x4c(r1)

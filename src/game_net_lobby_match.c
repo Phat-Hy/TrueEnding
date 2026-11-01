@@ -18,7 +18,7 @@ extern void fn_80045A24(void);
 extern void fn_8005B9CC(void);
 extern void fn_8006B174(void);
 extern void fn_800709F4(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_8008771C(void);
 extern void fn_80087858(void);
 extern void fn_8008937C(void);
@@ -26,7 +26,7 @@ extern void fn_8008AD4C(void);
 extern void fn_8008B130(void);
 extern void fn_8008B140(void);
 extern void fn_8008CD60(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
 extern void fn_800B1B28(void);
@@ -42,8 +42,8 @@ extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
 extern void PSMTXScale(void);
 extern void PSVECMag(void);
-extern void fn_80682428(void);
-extern void fn_806827C4(void);
+extern void strcmp(void);
+extern void strstr(void);
 extern void fn_8068AD58(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -311,7 +311,7 @@ asm void fn_8049B9B8(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_8049B9B8_00000300
@@ -441,12 +441,12 @@ asm void fn_8049BB4C(void)
 lbl_fn_8049BB4C_00000448:
     mr r3, r25
     addi r4, r26, lbl_80756CD8@l
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_8049BB4C_00000814
     mr r3, r25
     addi r4, r30, 0x1
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049BB4C_00000480
     lwz r0, 0x54(r27)
@@ -456,7 +456,7 @@ lbl_fn_8049BB4C_00000448:
 lbl_fn_8049BB4C_00000480:
     mr r3, r25
     addi r4, r30, 0x8
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049BB4C_000004A4
     lwz r0, 0x54(r27)
@@ -466,7 +466,7 @@ lbl_fn_8049BB4C_00000480:
 lbl_fn_8049BB4C_000004A4:
     mr r3, r25
     addi r4, r30, 0x12
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049BB4C_000004C8
     lwz r0, 0x54(r27)
@@ -476,7 +476,7 @@ lbl_fn_8049BB4C_000004A4:
 lbl_fn_8049BB4C_000004C8:
     mr r3, r25
     addi r4, r30, 0x1c
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049BB4C_000004EC
     lwz r0, 0x54(r27)
@@ -486,7 +486,7 @@ lbl_fn_8049BB4C_000004C8:
 lbl_fn_8049BB4C_000004EC:
     mr r3, r25
     addi r4, r30, 0x2c
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049BB4C_00000510
     lwz r0, 0x54(r27)
@@ -496,7 +496,7 @@ lbl_fn_8049BB4C_000004EC:
 lbl_fn_8049BB4C_00000510:
     mr r3, r25
     addi r4, r30, 0x39
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049BB4C_00000534
     lwz r0, 0x54(r27)
@@ -506,7 +506,7 @@ lbl_fn_8049BB4C_00000510:
 lbl_fn_8049BB4C_00000534:
     mr r3, r25
     addi r4, r30, 0x43
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049BB4C_00000554
     stw r31, 0x420(r27)
@@ -515,7 +515,7 @@ lbl_fn_8049BB4C_00000534:
 lbl_fn_8049BB4C_00000554:
     mr r3, r25
     addi r4, r30, 0x51
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049BB4C_00000580
     stw r31, 0x420(r27)
@@ -527,7 +527,7 @@ lbl_fn_8049BB4C_00000554:
 lbl_fn_8049BB4C_00000580:
     mr r3, r25
     addi r4, r30, 0x61
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049BB4C_000005A0
     stw r31, 0x428(r27)
@@ -536,7 +536,7 @@ lbl_fn_8049BB4C_00000580:
 lbl_fn_8049BB4C_000005A0:
     mr r3, r25
     addi r4, r30, 0x6f
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049BB4C_000005C4
     lwz r0, 0x54(r27)
@@ -546,7 +546,7 @@ lbl_fn_8049BB4C_000005A0:
 lbl_fn_8049BB4C_000005C4:
     mr r3, r25
     addi r4, r30, 0x77
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049BB4C_000005E8
     lwz r0, 0x54(r27)
@@ -556,7 +556,7 @@ lbl_fn_8049BB4C_000005C4:
 lbl_fn_8049BB4C_000005E8:
     mr r3, r25
     addi r4, r30, 0x7f
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049BB4C_0000060C
     lwz r0, 0x54(r27)
@@ -566,7 +566,7 @@ lbl_fn_8049BB4C_000005E8:
 lbl_fn_8049BB4C_0000060C:
     mr r3, r25
     addi r4, r30, 0x8d
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049BB4C_00000630
     lwz r0, 0x54(r27)
@@ -576,7 +576,7 @@ lbl_fn_8049BB4C_0000060C:
 lbl_fn_8049BB4C_00000630:
     mr r3, r25
     addi r4, r30, 0x9b
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049BB4C_00000654
     lwz r0, 0x54(r27)
@@ -586,7 +586,7 @@ lbl_fn_8049BB4C_00000630:
 lbl_fn_8049BB4C_00000654:
     mr r3, r25
     addi r4, r30, 0xac
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049BB4C_00000678
     lwz r0, 0x54(r27)
@@ -596,7 +596,7 @@ lbl_fn_8049BB4C_00000654:
 lbl_fn_8049BB4C_00000678:
     mr r3, r25
     addi r4, r30, 0xc1
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049BB4C_000006C0
     mr r3, r28
@@ -615,7 +615,7 @@ lbl_fn_8049BB4C_00000678:
 lbl_fn_8049BB4C_000006C0:
     mr r3, r25
     addi r4, r30, 0xca
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049BB4C_00000708
     mr r3, r28
@@ -634,7 +634,7 @@ lbl_fn_8049BB4C_000006C0:
 lbl_fn_8049BB4C_00000708:
     mr r3, r25
     addi r4, r30, 0xd3
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049BB4C_00000750
     mr r3, r28
@@ -653,7 +653,7 @@ lbl_fn_8049BB4C_00000708:
 lbl_fn_8049BB4C_00000750:
     mr r3, r25
     addi r4, r30, 0xd9
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049BB4C_00000778
     mr r3, r28
@@ -664,7 +664,7 @@ lbl_fn_8049BB4C_00000750:
 lbl_fn_8049BB4C_00000778:
     mr r3, r25
     addi r4, r30, 0xe2
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049BB4C_0000083C
     mr r3, r28
@@ -709,7 +709,7 @@ lbl_fn_8049BB4C_00000814:
     beq lbl_fn_8049BB4C_0000083C
     mr r4, r25
     addi r3, r26, lbl_80756CD8@l
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049BB4C_00000448
 lbl_fn_8049BB4C_0000083C:
@@ -721,7 +721,7 @@ lbl_fn_8049BB4C_0000083C:
     lis r4, lbl_80756CD8@ha
     addi r4, r4, lbl_80756CD8@l
     addi r4, r4, 0xe6
-    bl fn_806827C4
+    bl strstr
     cmpwi r3, 0x0
     beq lbl_fn_8049BB4C_00000878
     lfs f0, lbl_80887118
@@ -1390,7 +1390,7 @@ asm void fn_8049C8DC(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8049C8DC_000011C4
     mr r4, r29
@@ -1449,7 +1449,7 @@ asm void fn_8049C960(void)
 lbl_fn_8049C960_00001264:
     mr r3, r29
     addi r4, r30, 0x1
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049C960_000012D0
     mr r3, r28
@@ -1482,7 +1482,7 @@ lbl_fn_8049C960_000012D0:
     beq lbl_fn_8049C960_000012F8
     mr r4, r29
     addi r3, r31, lbl_80756E38@l
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049C960_00001264
 lbl_fn_8049C960_000012F8:
@@ -1608,12 +1608,12 @@ asm void fn_8049CBE0(void)
     addi r31, r31, lbl_80756E38@l
     li r5, 0x0
     addi r4, r31, 0x26
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     stw r3, 0x46c(r30)
     addi r3, r30, 0x50
     addi r4, r31, 0x2d
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     stw r3, 0x470(r30)
     li r3, 0x1
     b lbl_fn_8049CBE0_000014C4
@@ -1750,7 +1750,7 @@ asm void fn_8049CDBC(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8049CDBC_000016A4
     mr r4, r29
@@ -1802,7 +1802,7 @@ asm void fn_8049CE40(void)
 lbl_fn_8049CE40_00001728:
     mr r3, r23
     addi r4, r29, 0x1
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049CE40_00001744
     stw r30, 0x50(r21)
@@ -1810,7 +1810,7 @@ lbl_fn_8049CE40_00001728:
 lbl_fn_8049CE40_00001744:
     mr r3, r23
     addi r4, r29, 0x4
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049CE40_000017BC
     mr r3, r22
@@ -1841,7 +1841,7 @@ lbl_fn_8049CE40_00001744:
 lbl_fn_8049CE40_000017BC:
     mr r3, r23
     addi r4, r29, 0xa
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049CE40_00001818
     mr r3, r22
@@ -1865,7 +1865,7 @@ lbl_fn_8049CE40_000017BC:
 lbl_fn_8049CE40_00001818:
     mr r3, r23
     addi r4, r29, 0xe
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049CE40_0000186C
     mr r3, r22
@@ -1889,7 +1889,7 @@ lbl_fn_8049CE40_00001864:
 lbl_fn_8049CE40_0000186C:
     mr r3, r23
     addi r4, r29, 0x14
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049CE40_00001894
     mr r3, r22
@@ -1900,7 +1900,7 @@ lbl_fn_8049CE40_0000186C:
 lbl_fn_8049CE40_00001894:
     mr r3, r23
     addi r4, r29, 0x19
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049CE40_000018D0
     mr r3, r22
@@ -1916,7 +1916,7 @@ lbl_fn_8049CE40_00001894:
 lbl_fn_8049CE40_000018D0:
     mr r3, r23
     addi r4, r29, 0x1f
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049CE40_000018F8
     mr r3, r22
@@ -1927,7 +1927,7 @@ lbl_fn_8049CE40_000018D0:
 lbl_fn_8049CE40_000018F8:
     mr r3, r23
     addi r4, r29, 0x26
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049CE40_00001920
     mr r3, r22
@@ -1938,7 +1938,7 @@ lbl_fn_8049CE40_000018F8:
 lbl_fn_8049CE40_00001920:
     mr r3, r23
     addi r4, r29, 0x2e
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049CE40_000019D8
     mr r3, r22
@@ -1990,7 +1990,7 @@ lbl_fn_8049CE40_000019D8:
     beq lbl_fn_8049CE40_00001A00
     mr r4, r23
     addi r3, r31, lbl_80756E80@l
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049CE40_00001728
 lbl_fn_8049CE40_00001A00:

@@ -9,7 +9,7 @@ extern void _restgpr_22(void);
 extern void _savegpr_14(void);
 extern void _savegpr_22(void);
 extern void dtor_80084684(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void atn_Task_setActive(void);
 extern void fn_801539E0(void);
 extern void fn_8015495C(void);
@@ -371,7 +371,7 @@ lbl_fn_804E9C68_000003D8:
     bl fn_80686EA4
 lbl_fn_804E9C68_00000404:
     mulli r3, r20, 0xb4
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r19, r3
     bne lbl_fn_804E9C68_00000438

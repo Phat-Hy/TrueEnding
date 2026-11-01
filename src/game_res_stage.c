@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void dtor_80084684(void);
 extern void fn_80013F78(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_800E1D5C(void);
 extern void fn_802407CC(void);
 extern void fn_802411B8(void);
@@ -86,7 +86,7 @@ lbl_fn_8023F5E0_00000088:
     bne lbl_fn_8023F5E0_00000108
 lbl_fn_8023F5E0_000000AC:
     li r3, 0x18
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_8023F5E0_000000D4
@@ -315,7 +315,7 @@ lbl_fn_8023F5E0_000003B4:
     bne lbl_fn_8023F5E0_00000434
 lbl_fn_8023F5E0_000003D8:
     li r3, 0x18
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_8023F5E0_00000400
@@ -682,7 +682,7 @@ lbl_fn_8023FD90_00000884:
     bne lbl_fn_8023FD90_00000904
 lbl_fn_8023FD90_000008A8:
     li r3, 0x18
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_8023FD90_000008D0
@@ -744,7 +744,7 @@ lbl_fn_8023FD90_00000964:
     bne lbl_fn_8023FD90_000009E4
 lbl_fn_8023FD90_00000988:
     li r3, 0x18
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_8023FD90_000009B0

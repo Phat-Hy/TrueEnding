@@ -27,7 +27,7 @@ extern void fn_8008A76C(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
 extern void fn_800902C0(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_80092954(void);
 extern void fn_80094D88(void);
 extern void fn_800DC12C(void);
@@ -89,8 +89,8 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
-extern void fn_80682428(void);
-extern void fn_80682544(void);
+extern void strcmp(void);
+extern void strncmp(void);
 extern void fn_80684600(void);
 extern void fn_8068AEA4(void);
 extern void fn_806958E0(void);
@@ -205,7 +205,7 @@ asm void fn_80315654(void)
     stfs f9, 0x38(r1)
     stfs f0, 0x3c(r1)
     stfs f10, 0x40(r1)
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80315654_000000C0
     li r5, 0x0
@@ -1100,7 +1100,7 @@ lbl_fn_803161F8_00000DD4:
     bl fn_8004212C
     addi r4, r29, 0x2d
     li r5, 0x8
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_803161F8_00000E14
     addi r3, r1, 0x98
@@ -1117,7 +1117,7 @@ lbl_fn_803161F8_00000E14:
     bl fn_8004212C
     addi r4, r29, 0x36
     li r5, 0x7
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_803161F8_00000E4C
     addi r3, r1, 0x98
@@ -1406,7 +1406,7 @@ lbl_fn_803165EC_00001240:
     bl fn_8005B3CC
     mr r27, r3
     addi r4, r29, 0xe8
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803165EC_00001274
     addi r3, r1, 0x18
@@ -1418,7 +1418,7 @@ lbl_fn_803165EC_00001240:
 lbl_fn_803165EC_00001274:
     mr r3, r27
     addi r4, r29, 0xf0
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803165EC_000012A0
     addi r3, r1, 0x18
@@ -1430,7 +1430,7 @@ lbl_fn_803165EC_00001274:
 lbl_fn_803165EC_000012A0:
     mr r3, r27
     addi r4, r29, 0xb8
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803165EC_000012C8
     addi r3, r1, 0x18
@@ -1441,7 +1441,7 @@ lbl_fn_803165EC_000012A0:
 lbl_fn_803165EC_000012C8:
     mr r3, r27
     addi r4, r29, 0xae
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803165EC_000012EC
     addi r3, r1, 0x18

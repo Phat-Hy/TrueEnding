@@ -6,9 +6,9 @@ extern void __files(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_8008CD60(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_800C31F4(void);
 extern void fn_800C344C(void);
 extern void fn_800CB3A0(void);
@@ -256,7 +256,7 @@ lbl_fn_80317188_00000200:
     li r5, 0x0
     mr r3, r28
     addi r4, r4, 0x105
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80317188_00000280
     li r4, 0x0
@@ -781,7 +781,7 @@ lbl_fn_803176D0_000009B4:
     bl fn_80686EA4
 lbl_fn_803176D0_000009D4:
     slwi r3, r18, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r25, r3
     bne lbl_fn_803176D0_000009FC
@@ -972,7 +972,7 @@ lbl_fn_803176D0_00000C74:
     bl fn_80686EA4
 lbl_fn_803176D0_00000C94:
     slwi r3, r19, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r21, r3
     bne lbl_fn_803176D0_00000CC0
@@ -1188,7 +1188,7 @@ asm void fn_80317EF8(void)
     mr r3, r27
     li r5, 0x0
     addi r4, r4, 0x105
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80317EF8_00000F9C
     li r4, 0x0
@@ -1333,7 +1333,7 @@ lbl_fn_80317EF8_00001154:
     li r5, 0x0
     mr r3, r29
     addi r4, r4, 0x105
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80317EF8_000011C0
     li r4, 0x0
@@ -1394,7 +1394,7 @@ lbl_fn_80317EF8_00001270:
     mr r3, r29
     li r5, 0x0
     addi r4, r4, 0x105
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80317EF8_000012A0
     li r4, 0x0
@@ -1682,7 +1682,7 @@ asm void fn_80318648(void)
     stw r29, 0x24(r1)
     mr r29, r3
     mr r3, r31
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80318648_000016D4
     li r4, 0x0
@@ -1757,7 +1757,7 @@ asm void fn_80318720(void)
     stfs f0, 0xc(r1)
     li r5, 0x0
     stfs f0, 0x1c(r1)
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80318720_000017DC
     li r4, 0x0

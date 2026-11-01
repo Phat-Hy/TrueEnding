@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800A555C(void);
 extern void fn_800CB3A0(void);
 extern void atn_Task_setActive(void);
@@ -929,7 +929,7 @@ lbl_fn_8058BE7C_00000B78:
     mr r6, r5
     li r4, 0x6
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8058BE7C_00000C28
     li r0, 0x1
@@ -999,7 +999,7 @@ lbl_fn_8058BE7C_00000C6C:
     mr r6, r5
     li r4, 0x6
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8058BE7C_00000D34
     li r0, 0x1
@@ -1084,7 +1084,7 @@ lbl_fn_8058BE7C_00000D78:
     mr r6, r5
     li r4, 0x6
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8058BE7C_00000E7C
     li r0, 0x1
@@ -1154,7 +1154,7 @@ lbl_fn_8058BE7C_00000EC0:
     mr r6, r5
     li r4, 0x6
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8058BE7C_00000F88
     li r0, 0x1

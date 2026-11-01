@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_8016E970(void);
 extern void fn_801B7EB4(void);
 extern void fn_801B805C(void);
@@ -52,7 +52,7 @@ asm void fn_80161B70(void)
     mr r6, r5
     li r3, 0x20
     li r4, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80161B70_00000064
@@ -258,7 +258,7 @@ asm void fn_80161E58(void)
     stw r29, 0x54(r1)
     mr r29, r3
     li r3, 0x40
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80161E58_00000344
@@ -464,7 +464,7 @@ asm void fn_80162140(void)
     mr r6, r5
     li r3, 0x40
     li r4, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80162140_00000634
@@ -672,7 +672,7 @@ asm void fn_80162428(void)
     stw r28, 0x50(r1)
     mr r28, r4
     li r4, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80162428_00000920
@@ -880,7 +880,7 @@ asm void fn_80162720(void)
     mr r6, r5
     li r3, 0x30
     li r4, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80162720_00000C14
@@ -1086,7 +1086,7 @@ asm void fn_80162A08(void)
     mr r6, r5
     li r3, 0x50
     li r4, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80162A08_00000EFC
@@ -1294,7 +1294,7 @@ asm void fn_80162CF0(void)
     addi r31, r31, lbl_8077A720@l
     li r3, 0x40
     li r4, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80162CF0_000011F0
@@ -1502,7 +1502,7 @@ asm void fn_80162FE8(void)
     mr r6, r5
     li r3, 0x40
     li r4, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80162FE8_000014DC
@@ -1708,7 +1708,7 @@ asm void fn_801632D0(void)
     mr r6, r5
     li r3, 0x40
     li r4, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_801632D0_000017C4

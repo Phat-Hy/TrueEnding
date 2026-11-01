@@ -7,9 +7,9 @@ extern void _savegpr_24(void);
 extern void dtor_80084684(void);
 extern void fn_8004B20C(void);
 extern void fn_8006BA30(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_8008BBD8(void);
 extern void fn_800C622C(void);
 extern void fn_800C62B4(void);
@@ -43,7 +43,7 @@ extern void fn_80504194(void);
 extern void fn_805043C0(void);
 extern void fn_805045EC(void);
 extern void fn_80504818(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_806959D8(void);
 extern void fn_80695B00(void);
 
@@ -135,7 +135,7 @@ asm void fn_80502100(void)
     stw r31, 0xc(r1)
     mr r31, r3
     li r3, 0x378
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80502100_00000040
     mr r4, r31
@@ -266,7 +266,7 @@ lbl_fn_80502154_000001DC:
     stw r0, 0x36c(r31)
     li r7, 0x0
     stw r0, 0x370(r31)
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_80502154_00000224
@@ -342,7 +342,7 @@ lbl_fn_80502368_00000304:
     addic. r0, r29, 0x60
     beq lbl_fn_80502368_00000314
     lwz r3, 0x60(r29)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80502368_00000314:
     addic. r0, r29, 0x54
     beq lbl_fn_80502368_00000324
@@ -411,7 +411,7 @@ lbl_fn_80502460_000003A0:
     mr r0, r3
     lwz r3, 0x60(r31)
     stw r0, 0x60(r31)
-    bl fn_80084C24
+    bl mem_getAllocSize
     lwz r5, 0x74(r30)
     addi r4, r1, 0x110
     lwz r3, 0x58(r31)
@@ -441,7 +441,7 @@ lbl_fn_80502460_00000430:
     mr r0, r3
     lwz r3, 0x60(r31)
     stw r0, 0x60(r31)
-    bl fn_80084C24
+    bl mem_getAllocSize
     lwz r3, 0x60(r31)
     lwz r4, 0x70(r30)
     lwz r5, 0x74(r30)
@@ -758,7 +758,7 @@ asm void fn_80502978(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80502978_000008C4
     mr r4, r31
@@ -1407,7 +1407,7 @@ lbl_fn_80503298_00001200:
     lis r3, lbl_80792D00@ha
     lwz r4, lbl_80792D00@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_80503298_00001230
@@ -1582,7 +1582,7 @@ lbl_fn_805034DC_00001444:
     lis r3, lbl_80792D08@ha
     lwz r4, lbl_80792D08@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_805034DC_00001474
@@ -1757,7 +1757,7 @@ lbl_fn_80503720_00001688:
     lis r3, lbl_80792D10@ha
     lwz r4, lbl_80792D10@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_80503720_000016B8
@@ -1932,7 +1932,7 @@ lbl_fn_80503964_000018CC:
     lis r3, lbl_80792D18@ha
     lwz r4, lbl_80792D18@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_80503964_000018FC

@@ -20,8 +20,8 @@ extern void fn_800874C8(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
-extern void fn_80097C08(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_setLayerAnimation(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
 extern void fn_800CB3A0(void);
 extern void fn_800F7FA0(void);
@@ -154,7 +154,7 @@ lbl_fn_803041C8_00000050:
     bne lbl_fn_803041C8_00000104
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_80884AF4
     addi r3, r31, 0xb0
     li r4, 0x0
@@ -173,7 +173,7 @@ lbl_fn_803041C8_00000108:
     li r4, 0x0
     fmadds f0, f1, f2, f0
     stfs f0, 0x52c(r31)
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fmr f31, f1
     addi r3, r31, 0xb0
     li r4, 0x0
@@ -200,7 +200,7 @@ lbl_fn_803041C8_00000108:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     addi r3, r1, 0x44
     addi r4, r1, 0x110
     addi r5, r31, 0x528
@@ -472,7 +472,7 @@ asm void fn_80304718(void)
     lfs f31, 0x2e4(r3)
     li r4, 0x0
     addi r3, r3, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f31, f1
     cror eq, gt, eq
     bne lbl_fn_80304718_00000660
@@ -489,7 +489,7 @@ asm void fn_80304718(void)
     stfs f0, 0x2e8(r31)
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     mr r3, r31
     li r4, 0x131
     bl fn_80232B7C
@@ -562,7 +562,7 @@ lbl_fn_80304718_000006DC:
     lfs f31, 0x2e4(r3)
     li r4, 0x0
     addi r3, r3, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f31, f1
     ble lbl_fn_80304718_0000073C
     lwz r0, 0x15c8(r31)
@@ -661,11 +661,11 @@ lbl_fn_80304718_00000818:
     stfs f0, 0x2e8(r31)
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
 lbl_fn_80304718_00000870:
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_80884A5C
     addi r3, r31, 0xb0
     lfs f2, lbl_80884A8C
@@ -677,7 +677,7 @@ lbl_fn_80304718_00000870:
     stfs f0, 0x538(r31)
     lwz r5, lbl_8087F430
     lwz r30, 0x10d8(r5)
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f2, lbl_80884ABC
     li r4, 0x0
     lfs f0, lbl_80884A20

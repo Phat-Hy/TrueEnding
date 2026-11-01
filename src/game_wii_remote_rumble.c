@@ -27,7 +27,7 @@ extern void fn_80012C88(void);
 extern void fn_80013338(void);
 extern void fn_80013410(void);
 extern void fn_80057A68(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void atn_Matrix_copy_2(void);
 extern void atn_Matrix_copy(void);
 extern void fn_800928B0(void);
@@ -1770,7 +1770,7 @@ lbl_fn_80552464_000015F4:
     bl fn_80686EA4
 lbl_fn_80552464_00001648:
     mulli r3, r25, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r24, r3
     bne lbl_fn_80552464_0000167C
@@ -2334,7 +2334,7 @@ lbl_fn_80552464_00001DE0:
     bl fn_80686EA4
 lbl_fn_80552464_00001E34:
     mulli r3, r25, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r24, r3
     bne lbl_fn_80552464_00001E68

@@ -19,7 +19,7 @@ extern void gx_applyRenderState(void);
 extern void fn_800763FC(void);
 extern void gx_setRenderStateParam(void);
 extern void fn_800848B4(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800874C8(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
@@ -1949,7 +1949,7 @@ asm void fn_800B3C3C(void)
     li r30, 0x0
 lbl_fn_800B3C3C_000018B8:
     lwz r3, 0x14(r31)
-    bl fn_80084C24
+    bl mem_getAllocSize
     addi r30, r30, 0x1
     addi r31, r31, 0x4
     cmpwi r30, 0x5

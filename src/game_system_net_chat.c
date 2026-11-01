@@ -10,7 +10,7 @@ extern void _savegpr_22(void);
 extern void _savegpr_27(void);
 extern void fn_8003EA3C(void);
 extern void fn_800697D8(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_8009373C(void);
 extern void fn_80093B88(void);
 extern void fn_800A555C(void);
@@ -66,7 +66,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
 extern void fn_80680CF8(void);
-extern void fn_80682544(void);
+extern void strncmp(void);
 extern void fn_80684600(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -1457,7 +1457,7 @@ lbl_fn_803A4568_000011F8:
     addi r4, r4, lbl_8074F8CC@l
     li r5, 0x3
     addi r4, r4, 0x144
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_803A4568_0000131C
     addi r3, r1, 0xb
@@ -1496,7 +1496,7 @@ lbl_fn_803A4568_000012B4:
     mr r3, r28
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     blt lbl_fn_803A4568_000012F4
     mr r3, r28
@@ -1567,7 +1567,7 @@ asm void fn_803A47A4(void)
     addi r4, r4, lbl_8074F8CC@l
     li r5, 0xc
     addi r4, r4, 0x164
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_803A47A4_000013DC
     lwz r4, lbl_8087F430

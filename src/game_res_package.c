@@ -17,13 +17,13 @@ extern void fn_800760D0(void);
 extern void fn_8007642C(void);
 extern void fn_80076FF8(void);
 extern void fn_8007A7BC(void);
-extern void fn_80084320(void);
-extern void fn_80084C24(void);
+extern void mem_alloc(void);
+extern void mem_getAllocSize(void);
 extern void fn_8008B130(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_80094BD8(void);
 extern void fn_80095F10(void);
-extern void fn_80097C08(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097E80(void);
 extern void fn_800BDB58(void);
 extern void fn_8011D320(void);
@@ -39,7 +39,7 @@ extern void atn_LoadHandle_getName(void);
 extern void PSMTXTrans(void);
 extern void PSVECMag(void);
 extern void fn_80680CF8(void);
-extern void fn_806827C4(void);
+extern void strstr(void);
 extern void fn_806958E0(void);
 extern void fn_80695A50(void);
 extern void fn_80695AD0(void);
@@ -223,7 +223,7 @@ asm void fn_802253E4(void)
     beq lbl_fn_802253E4_000001CC
     beq lbl_fn_802253E4_000001CC
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_802253E4_000001CC:
     addic. r0, r31, 0x8
     beq lbl_fn_802253E4_000001F8
@@ -604,7 +604,7 @@ lbl_fn_8022589C_000006F0:
     la r5, lbl_8087D9F4
     la r6, lbl_8087D9F0
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r22, r3
     beq lbl_fn_8022589C_00000774
@@ -633,7 +633,7 @@ lbl_fn_8022589C_00000798:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r3, lbl_8087F0A8
     lwz r0, 0x1134(r3)
     cmpwi r0, 0x0
@@ -740,7 +740,7 @@ lbl_fn_8022589C_00000910:
     addi r4, r4, lbl_80742D7C@l
     li r5, 0x0
     addi r4, r4, 0x1
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     stw r3, 0x1824(r23)
     bge lbl_fn_8022589C_00000948
@@ -834,7 +834,7 @@ lbl_fn_80225C80_00000A5C:
     lis r31, lbl_80742D7C@ha
     addi r31, r31, lbl_80742D7C@l
     addi r4, r31, 0x6
-    bl fn_806827C4
+    bl strstr
     cmpwi r3, 0x0
     beq lbl_fn_80225C80_00000A94
     cmpwi r28, 0x0
@@ -847,7 +847,7 @@ lbl_fn_80225C80_00000A94:
     addi r3, r27, 0xb0
     bl fn_8008B130
     addi r4, r31, 0xd
-    bl fn_806827C4
+    bl strstr
     cmpwi r3, 0x0
     beq lbl_fn_80225C80_00000AC0
     lfs f1, lbl_80883044

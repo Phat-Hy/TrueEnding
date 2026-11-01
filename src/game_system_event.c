@@ -15,7 +15,7 @@ extern void fn_8006BB6C(void);
 extern void fn_800827E0(void);
 extern void fn_800839EC(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800DC288(void);
 extern void fn_800DD3FC(void);
 extern void fn_80206B14(void);
@@ -34,7 +34,7 @@ extern void fn_80219F84(void);
 extern void fn_8021A4E0(void);
 extern void fn_8021A5F8(void);
 extern void world_getGlobalFlag(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80684600(void);
 extern void fn_80686A64(void);
 extern void fn_80686AF0(void);
@@ -137,7 +137,7 @@ asm void event_processScriptAction(void)
     bl fn_8005B3CC
     addi r4, r19, lbl_8073FA60@l
     addi r4, r4, 0x15
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_event_processScriptAction_000000DC
     addi r3, r1, 0x14
@@ -158,7 +158,7 @@ lbl_event_processScriptAction_00000100:
     addi r3, r1, 0x14
     bl fn_8005B3CC
     addi r4, r19, 0x1d
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_event_processScriptAction_00000124
     lwz r3, lbl_8087F224
@@ -291,7 +291,7 @@ lbl_event_processScriptAction_000001E0:
 lbl_event_processScriptAction_0000030C:
     lwz r4, 0x0(r17)
     mr r3, r25
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_event_processScriptAction_00000324
     b lbl_event_processScriptAction_00000338
@@ -311,7 +311,7 @@ lbl_event_processScriptAction_00000338:
 lbl_event_processScriptAction_00000350:
     lwz r4, 0x0(r17)
     mr r3, r18
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_event_processScriptAction_00000368
     b lbl_event_processScriptAction_0000037C
@@ -625,7 +625,7 @@ asm void fn_80211244(void)
     lwz r3, lbl_8087F22C
     cmpwi r3, 0x0
     beq lbl_fn_80211244_000007C0
-    bl fn_80084C24
+    bl mem_getAllocSize
     li r0, 0x0
     stw r0, lbl_8087F22C
 lbl_fn_80211244_000007C0:

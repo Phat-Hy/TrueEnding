@@ -34,7 +34,7 @@ extern void fn_8057EF44(void);
 extern void fn_8057F158(void);
 extern void fn_8057F19C(void);
 extern void fn_8057F1B8(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 
 /* External data declarations */
 extern u8 jumptable_80793598[];
@@ -513,7 +513,7 @@ asm void fn_80524DA0(void)
 lbl_fn_80524DA0_000005D0:
     lwz r3, 0x4(r29)
     addi r4, r31, 0x35b
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80524DA0_000005EC
     lwz r3, 0x50(r26)

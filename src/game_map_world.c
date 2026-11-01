@@ -3,10 +3,10 @@
 
 /* External function declarations */
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
-extern void fn_80092814(void);
+extern void mem_getAllocSize(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_80096218(void);
-extern void fn_80097C08(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097CCC(void);
 extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
@@ -865,13 +865,13 @@ asm void fn_8017A33C(void)
     li r7, 0x0
     li r8, 0x1
     addi r3, r3, 0xb0
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lis r4, lbl_80737A9C@ha
     addi r3, r30, 0xb0
     addi r4, r4, lbl_80737A9C@l
     li r5, 0x0
     addi r4, r4, 0x6c
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_8017A33C_000009F8
     li r4, 0x0
@@ -1732,7 +1732,7 @@ lbl_fn_8017AD44_00001588:
     bdnz lbl_fn_8017AD44_00001588
 lbl_fn_8017AD44_000015A0:
     lwz r3, 0x8(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8017AD44_000015A8:
     li r0, 0x8
     stw r29, 0x8(r28)
@@ -1826,7 +1826,7 @@ lbl_fn_8017AD44_000016E4:
     bdnz lbl_fn_8017AD44_000016E4
 lbl_fn_8017AD44_000016FC:
     lwz r3, 0x8(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8017AD44_00001704:
     stw r30, 0x8(r28)
     stw r29, 0x4(r28)
@@ -1931,7 +1931,7 @@ asm void fn_8017B1C4(void)
     stw r30, 0x1404(r3)
     beq lbl_fn_8017B1C4_00001858
     mr r3, r5
-    bl fn_80084C24
+    bl mem_getAllocSize
     stw r30, 0x1408(r28)
 lbl_fn_8017B1C4_00001858:
     lwz r31, 0x0(r29)
@@ -2022,7 +2022,7 @@ lbl_fn_8017B1C4_00001980:
     bdnz lbl_fn_8017B1C4_00001980
 lbl_fn_8017B1C4_00001998:
     lwz r3, 0x1408(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8017B1C4_000019A0:
     stw r30, 0x1408(r28)
     li r6, 0x0

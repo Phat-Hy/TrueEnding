@@ -48,8 +48,8 @@ extern void fn_805AA738(void);
 extern void fn_805B8114(void);
 extern void fn_805F89F0(void);
 extern void PSMTXScale(void);
-extern void fn_80682428(void);
-extern void fn_80682544(void);
+extern void strcmp(void);
+extern void strncmp(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -126,7 +126,7 @@ lbl_fn_8051EC54_0000003C:
     addi r3, r28, 0x19fc
     addi r4, r29, 0x211
     li r5, 0x1
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     beq lbl_fn_8051EC54_000000C0
     addi r3, r1, 0x18
@@ -758,7 +758,7 @@ lbl_fn_8051F13C_00000954:
     addi r3, r3, 0x19fc
     addi r4, r30, 0x211
     li r5, 0x1
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     beq lbl_fn_8051F13C_000009D4
     addi r3, r1, 0xc8
@@ -2050,7 +2050,7 @@ lbl_fn_80520638_00001B08:
     bl fn_8005B3CC
     addi r4, r29, 0x2db
     li r5, 0x1
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     beq lbl_fn_80520638_00001E7C
     addi r3, r1, 0xb0
@@ -2083,7 +2083,7 @@ lbl_fn_80520638_00001B08:
 lbl_fn_80520638_00001BAC:
     lwz r3, 0x0(r21)
     mr r4, r24
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80520638_00001BC4
     b lbl_fn_80520638_00001BD8

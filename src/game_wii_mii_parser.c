@@ -13,12 +13,12 @@ extern void fn_80011220(void);
 extern void fn_800133B0(void);
 extern void fn_80063484(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800897D8(void);
 extern void fn_8008BBD8(void);
 extern void fn_8008CD60(void);
 extern void fn_80091CFC(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_800928B0(void);
 extern void fn_80094F98(void);
 extern void fn_800C258C(void);
@@ -71,7 +71,7 @@ extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void fn_80680CF8(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80695B00(void);
 
 /* External data declarations */
@@ -228,7 +228,7 @@ asm void fn_80566014(void)
     lwz r29, 0x44(r4)
     cmpwi r3, 0x0
     beq lbl_fn_80566014_00000110
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80566014_00000110:
     cmpwi r29, 0x0
     stw r29, 0x3f8(r26)
@@ -657,7 +657,7 @@ lbl_fn_80566560_0000069C:
     addi r3, r31, 0xb0
     addi r4, r4, lbl_8075FE30@l
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     blt lbl_fn_80566560_00000730
     lwz r0, 0x524(r31)
@@ -1074,7 +1074,7 @@ lbl_fn_80566B5C_00000C8C:
     lis r3, lbl_807956E0@ha
     lwz r4, lbl_807956E0@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_80566B5C_00000CBC
@@ -1145,7 +1145,7 @@ lbl_fn_80566C40_00000D70:
     lis r3, lbl_807956E8@ha
     lwz r4, lbl_807956E8@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_80566C40_00000DA0

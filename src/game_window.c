@@ -6,7 +6,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800904E0(void);
 extern void fn_8009ADA4(void);
 extern void fn_800A693C(void);
@@ -348,7 +348,7 @@ asm void fn_800A6F88(void)
     lwz r3, 0x0(r3)
     cmpwi r3, 0x0
     beq lbl_fn_800A6F88_000003F0
-    bl fn_80084C24
+    bl mem_getAllocSize
     li r0, 0x0
     stw r0, 0x0(r30)
 lbl_fn_800A6F88_000003F0:
@@ -388,7 +388,7 @@ lbl_fn_800A6FF0_00000454:
     lwz r3, 0x0(r3)
     cmpwi r3, 0x0
     beq lbl_fn_800A6FF0_0000046C
-    bl fn_80084C24
+    bl mem_getAllocSize
     li r0, 0x0
     stw r0, 0x0(r31)
 lbl_fn_800A6FF0_0000046C:

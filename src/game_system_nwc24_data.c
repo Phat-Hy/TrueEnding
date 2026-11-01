@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void item_useConsumable(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_80116BD4(void);
 extern void fn_80178088(void);
 extern void fn_8037EF48(void);
@@ -418,7 +418,7 @@ asm void fn_8038952C(void)
     mr r29, r3
     mr r3, r31
     addi r4, r4, 0x1eb
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_8038952C_00000518
     li r5, 0x0

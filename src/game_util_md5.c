@@ -14,7 +14,7 @@ extern void fn_805FA4E0(void);
 extern void fn_805FA5D0(void);
 extern void fn_8068236C(void);
 extern void fn_806823DC(void);
-extern void fn_806825B4(void);
+extern void strrchr(void);
 extern void fn_8070C650(void);
 extern void fn_8070C740(void);
 extern void fn_8070C770(void);
@@ -1077,7 +1077,7 @@ lbl_fn_8059E3B8_00000964:
     beq lbl_fn_8059E3B8_00000A98
     mr r3, r31
     li r4, 0x2f
-    bl fn_806825B4
+    bl strrchr
     cmpwi r3, 0x0
     beq lbl_fn_8059E3B8_000009C8
     lis r4, lbl_80762660@ha

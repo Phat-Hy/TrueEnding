@@ -17,8 +17,8 @@ extern void fn_8008771C(void);
 extern void fn_80087994(void);
 extern void fn_80088FAC(void);
 extern void fn_8008937C(void);
-extern void fn_80097C08(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_setLayerAnimation(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
 extern void fn_800CB3A0(void);
 extern void atn_Task_setActive(void);
@@ -60,8 +60,8 @@ extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
-extern void fn_80682428(void);
-extern void fn_80682544(void);
+extern void strcmp(void);
+extern void strncmp(void);
 extern void fn_8068AEA4(void);
 extern void fn_806958E0(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -1332,7 +1332,7 @@ lbl_fn_80255458_00001008:
     bne lbl_fn_80255458_000012D8
     li r4, 0x0
     addi r3, r3, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f30, f1
     ble lbl_fn_80255458_00001360
     lis r4, lbl_80743C94@ha
@@ -1505,7 +1505,7 @@ lbl_fn_80255458_0000128C:
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_80255458_000012C8
@@ -1520,7 +1520,7 @@ lbl_fn_80255458_000012C8:
 lbl_fn_80255458_000012D8:
     li r4, 0x0
     addi r3, r3, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f30, f1
     ble lbl_fn_80255458_00001360
     lwz r0, 0x14cc(r31)
@@ -1534,7 +1534,7 @@ lbl_fn_80255458_000012FC:
     bne lbl_fn_80255458_00001360
     li r4, 0x0
     addi r3, r3, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f30, f1
     cror eq, gt, eq
     bne lbl_fn_80255458_00001360
@@ -1549,7 +1549,7 @@ lbl_fn_80255458_000012FC:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     b lbl_fn_80255458_00001360
 lbl_fn_80255458_00001358:
     bl fn_805A4258
@@ -1816,13 +1816,13 @@ lbl_fn_802558B0_0000172C:
     mr r26, r3
     beq lbl_fn_802558B0_000017C4
     addi r4, r27, 0x2b
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_802558B0_000017C4
     mr r3, r26
     addi r4, r27, 0x2c
     li r5, 0x8
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_802558B0_000017B4
     lwz r0, 0x7c(r1)

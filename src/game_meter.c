@@ -6,8 +6,8 @@ extern void OSGetTick(void);
 extern void __files(void);
 extern void dtor_80084684(void);
 extern void fn_8003E120(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_80680770(void);
 extern void fn_80686EA4(void);
 
@@ -143,7 +143,7 @@ asm void fn_800A1A3C(void)
     bl fn_80686EA4
 lbl_fn_800A1A3C_00000160:
     li r3, 0x28
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_800A1A3C_00000194
@@ -345,7 +345,7 @@ asm void fn_800A1CE4(void)
     bl fn_80686EA4
 lbl_fn_800A1CE4_00000408:
     li r3, 0x20
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_800A1CE4_0000043C
@@ -1045,7 +1045,7 @@ asm void fn_800A2664(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_800A2664_00000FCC

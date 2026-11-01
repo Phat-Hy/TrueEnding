@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_800C344C(void);
 extern void fn_800CB3A0(void);
 extern void fn_800F8548(void);
@@ -1543,7 +1543,7 @@ lbl_fn_80110858_0000156C:
     mr r3, r27
     li r5, 0x0
     addi r4, r4, lbl_807366A8@l
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80110858_000015B4
     li r5, 0x0

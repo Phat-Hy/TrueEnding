@@ -12,9 +12,9 @@ extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_80013F78(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
 extern void fn_80087BB4(void);
@@ -722,7 +722,7 @@ asm void fn_8051B924(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8051B924_0000080C
     mr r4, r31
@@ -992,7 +992,7 @@ lbl_fn_8051B988_00000B20:
     stw r30, 0x1910(r31)
     beq lbl_fn_8051B988_00000BE0
     subi r3, r5, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8051B988_00000BE0:
     lfs f29, lbl_80887904
     addi r3, r1, 0xa0
@@ -1186,7 +1186,7 @@ lbl_fn_8051B988_00000E34:
     stw r3, 0x1910(r31)
     beq lbl_fn_8051B988_00000EDC
     subi r3, r4, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8051B988_00000EDC:
     lis r6, lbl_8075BD88@ha
     lwz r5, 0x1910(r31)
@@ -1366,9 +1366,9 @@ asm void fn_8051C2AC(void)
     cmpwi r0, 0x0
     beq lbl_fn_8051C2AC_000011A0
     mr r3, r0
-    bl fn_80084C24
+    bl mem_getAllocSize
     lwz r3, 0x1990(r29)
-    bl fn_80084C24
+    bl mem_getAllocSize
     li r0, 0x0
     stw r0, 0x198c(r29)
     stw r0, 0x1990(r29)
@@ -1415,7 +1415,7 @@ lbl_fn_8051C2AC_00001220:
     cmpwi r3, 0x0
     beq lbl_fn_8051C2AC_0000123C
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8051C2AC_0000123C:
     mr r3, r29
     li r4, 0x0
@@ -1709,7 +1709,7 @@ lbl_fn_8051C754_0000161C:
     stw r3, 0x50(r24)
     beq lbl_fn_8051C754_00001698
     subi r3, r4, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8051C754_00001698:
     lwz r0, 0x4c(r24)
     lis r21, lbl_8075BF40@ha
@@ -2200,9 +2200,9 @@ lbl_fn_8051CA78_00001CEC:
     lwz r3, 0x198c(r31)
     cmpwi r3, 0x0
     beq lbl_fn_8051CA78_00001DE0
-    bl fn_80084C24
+    bl mem_getAllocSize
     lwz r3, 0x1990(r31)
-    bl fn_80084C24
+    bl mem_getAllocSize
     li r0, 0x0
     stw r0, 0x198c(r31)
     stw r0, 0x1990(r31)

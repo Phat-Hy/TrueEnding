@@ -7,8 +7,8 @@ extern void _restgpr_26(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void fn_8004ED34(void);
-extern void fn_80092814(void);
-extern void fn_80097D7C(void);
+extern void atn_Model_findBoneIndex(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C31F4(void);
 extern void fn_800CB3A0(void);
 extern void fn_801092C8(void);
@@ -661,7 +661,7 @@ lbl_fn_803A7124_00000724:
     mr r3, r26
     li r5, 0x0
     addi r4, r4, 0x69
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_803A7124_0000075C
     li r3, 0x0
@@ -687,7 +687,7 @@ lbl_fn_803A7124_00000790:
     addi r4, r4, lbl_8074F8CC@l
     li r5, 0x0
     addi r4, r4, 0x6e
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_803A7124_000007B8
     li r3, 0x0
@@ -724,7 +724,7 @@ lbl_fn_803A7124_00000818:
     addi r4, r4, lbl_8074F8CC@l
     li r5, 0x0
     addi r4, r4, 0x73
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_803A7124_00000840
     li r3, 0x0
@@ -814,7 +814,7 @@ lbl_fn_803A7124_0000094C:
     mr r3, r26
     li r5, 0x0
     addi r4, r4, 0x69
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_803A7124_00000984
     li r3, 0x0
@@ -840,7 +840,7 @@ lbl_fn_803A7124_000009B8:
     addi r4, r4, lbl_8074F8CC@l
     li r5, 0x0
     addi r4, r4, 0x6e
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_803A7124_000009E0
     li r3, 0x0
@@ -877,7 +877,7 @@ lbl_fn_803A7124_00000A40:
     addi r4, r4, lbl_8074F8CC@l
     li r5, 0x0
     addi r4, r4, 0x73
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_803A7124_00000A68
     li r3, 0x0
@@ -968,7 +968,7 @@ lbl_fn_803A7124_00000B78:
     mr r3, r26
     li r5, 0x0
     addi r4, r4, 0x69
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_803A7124_00000BB0
     li r3, 0x0
@@ -994,7 +994,7 @@ lbl_fn_803A7124_00000BE4:
     addi r4, r4, lbl_8074F8CC@l
     li r5, 0x0
     addi r4, r4, 0x6e
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_803A7124_00000C0C
     li r3, 0x0
@@ -1031,7 +1031,7 @@ lbl_fn_803A7124_00000C6C:
     addi r4, r4, lbl_8074F8CC@l
     li r5, 0x0
     addi r4, r4, 0x73
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_803A7124_00000C94
     li r3, 0x0
@@ -2749,7 +2749,7 @@ lbl_fn_803A8470_0000242C:
     lfs f31, 0x2e4(r31)
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f31, f1
     blt lbl_fn_803A8470_000024C8
 lbl_fn_803A8470_00002464:

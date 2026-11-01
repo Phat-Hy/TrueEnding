@@ -14,7 +14,7 @@ extern void fn_8067D8CC(void);
 extern void fn_8067DD0C(void);
 extern void fn_8067DED4(void);
 extern void fn_8067DED8(void);
-extern void fn_80682544(void);
+extern void strncmp(void);
 extern void fn_806A4F3C(void);
 extern void fn_806A5094(void);
 extern void fn_806A515C(void);
@@ -1146,7 +1146,7 @@ lbl_fn_806F35B0_00000DE8:
     addi r3, r3, lbl_807C5790@l
     lwz r4, 0x14(r30)
     li r5, 0x8
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     beq lbl_fn_806F35B0_00000E14
     stw r31, 0x198(r30)
@@ -1283,7 +1283,7 @@ lbl_fn_806F3810_00000FC4:
     lwz r3, 0x14(r3)
     addi r4, r4, lbl_807C57A0@l
     li r5, 0x8
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_806F3810_00000FF0
     li r3, 0x0

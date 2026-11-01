@@ -26,7 +26,7 @@ extern void fn_8001C260(void);
 extern void fn_8001C26C(void);
 extern void fn_8003E918(void);
 extern void fn_80051E90(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800EE794(void);
 extern void fn_80102A40(void);
 extern void fn_8010C948(void);
@@ -79,7 +79,7 @@ extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
 extern void fn_80680CF8(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_8068A850(void);
 extern void fn_806952C4(void);
 
@@ -3718,7 +3718,7 @@ asm void fn_8001A34C(void)
     mr r31, r3
     lwz r3, 0x0(r4)
     lwz r4, lbl_80775BC0@l(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_8001A34C_0000325C
@@ -3738,7 +3738,7 @@ asm void fn_8001A39C(void)
 {
     nofralloc
     lwz r3, 0xc(r3)
-    b fn_80084C24
+    b mem_getAllocSize
 }
 
 asm void dtor_8001A3A4(void)
@@ -3756,7 +3756,7 @@ asm void dtor_8001A3A4(void)
     lwz r3, 0x0(r3)
     cmpwi r3, 0x0
     beq lbl_dtor_8001A3A4_000032B0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_dtor_8001A3A4_000032B0:
     cmpwi r31, 0x0
     ble lbl_dtor_8001A3A4_000032C0

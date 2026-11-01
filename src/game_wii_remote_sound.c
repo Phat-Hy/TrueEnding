@@ -14,8 +14,8 @@ extern void fn_80012CBC(void);
 extern void fn_80012CE4(void);
 extern void fn_80012D0C(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
-extern void fn_80092814(void);
+extern void mem_getAllocSize(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_800928B0(void);
 extern void fn_80093F1C(void);
 extern void fn_80094420(void);
@@ -247,7 +247,7 @@ lbl_fn_805553D8_00000270:
     cmpwi r3, 0x0
     beq lbl_fn_805553D8_00000284
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_805553D8_00000284:
     stw r24, 0x10(r1)
     li r5, 0x0
@@ -440,7 +440,7 @@ lbl_fn_805553D8_0000053C:
     cmpwi r3, 0x0
     beq lbl_fn_805553D8_00000550
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_805553D8_00000550:
     stw r27, 0x10(r1)
     stw r29, 0xc(r1)
@@ -553,7 +553,7 @@ lbl_fn_805553D8_000006E4:
     cmpwi r3, 0x0
     beq lbl_fn_805553D8_000006F8
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_805553D8_000006F8:
     stw r27, 0x10(r1)
     stw r30, 0xc(r1)
@@ -596,7 +596,7 @@ lbl_fn_805553D8_00000760:
     beq lbl_fn_805553D8_00000794
     beq lbl_fn_805553D8_00000794
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_805553D8_00000794:
     addi r11, r1, 0x40
     li r3, 0x0
@@ -1532,7 +1532,7 @@ lbl_fn_805567A8_000014A4:
     mr r30, r3
     mr r4, r29
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_805567A8_00001500
     li r28, 0x0
@@ -1550,7 +1550,7 @@ lbl_fn_805567A8_0000150C:
     mr r29, r3
     mr r4, r30
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_805567A8_00001540
     li r4, 0x0
@@ -2214,7 +2214,7 @@ lbl_fn_80556C08_00001E5C:
     cmpwi r3, 0x0
     beq lbl_fn_80556C08_00001E70
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80556C08_00001E70:
     stw r26, 0x120(r30)
     stw r25, 0x11c(r30)
@@ -2318,7 +2318,7 @@ lbl_fn_80556C08_00001FE0:
     cmpwi r3, 0x0
     beq lbl_fn_80556C08_00001FF4
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80556C08_00001FF4:
     stw r26, 0x120(r30)
     stw r25, 0x11c(r30)
@@ -2466,7 +2466,7 @@ lbl_fn_80556C08_00002200:
     cmpwi r3, 0x0
     beq lbl_fn_80556C08_00002214
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80556C08_00002214:
     stw r26, 0x12c(r30)
     stw r25, 0x128(r30)
@@ -2570,7 +2570,7 @@ lbl_fn_80556C08_00002384:
     cmpwi r3, 0x0
     beq lbl_fn_80556C08_00002398
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80556C08_00002398:
     stw r26, 0x12c(r30)
     stw r25, 0x128(r30)

@@ -16,13 +16,13 @@ extern void fn_8006A250(void);
 extern void fn_8007708C(void);
 extern void fn_800827E0(void);
 extern void fn_800838B8(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_800874C8(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
-extern void fn_80097C08(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800CB360(void);
 extern void fn_800CDF84(void);
 extern void atn_Task_constructor(void);
@@ -386,7 +386,7 @@ lbl_fn_804CF198_00000260:
     mr r4, r7
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lbz r0, 0x8(r29)
     lis r5, lbl_80759740@ha
     lhz r3, 0x2(r29)
@@ -1884,7 +1884,7 @@ lbl_fn_804D0328_00001758:
     la r5, lbl_8087E190
     la r6, lbl_8087E18C
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_fn_804D0328_0000179C
@@ -1905,7 +1905,7 @@ lbl_fn_804D0328_000017A0:
     la r5, lbl_8087E188
     la r6, lbl_8087E184
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_fn_804D0328_00001928
@@ -1926,7 +1926,7 @@ lbl_fn_804D0328_000017A0:
     stw r30, 0x10(r3)
     stw r8, 0x0(r3)
     li r3, 0x1c
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_804D0328_00001918
@@ -2022,7 +2022,7 @@ lbl_fn_804D0328_0000194C:
     la r5, lbl_8087E180
     la r6, lbl_8087E17C
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_804D0328_000019BC
     li r4, 0x0
@@ -2306,7 +2306,7 @@ lbl_fn_804D0328_00001D8C:
     bl fn_80686EA4
 lbl_fn_804D0328_00001DBC:
     slwi r3, r28, 3
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_804D0328_00001DF0

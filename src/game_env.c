@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void fn_8000D844(void);
 extern void fn_8000E18C(void);
 extern void fn_8006F72C(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void atn_Task_destructor(void);
 extern void fn_800D94E4(void);
 extern void fn_800D9880(void);
@@ -548,7 +548,7 @@ lbl_fn_800DAD6C_00000694:
     bl fn_80686EA4
 lbl_fn_800DAD6C_000006C8:
     mulli r3, r30, 0x48
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_800DAD6C_000006FC
@@ -917,7 +917,7 @@ lbl_fn_800DB3EC_00000BD0:
     bl fn_80686EA4
 lbl_fn_800DB3EC_00000C04:
     slwi r3, r31, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r28, r3
     bne lbl_fn_800DB3EC_00000C38
@@ -1042,7 +1042,7 @@ asm void fn_800DB6E0(void)
     bl fn_80686EA4
 lbl_fn_800DB6E0_00000DD8:
     slwi r3, r26, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r25, r3
     bne lbl_fn_800DB6E0_00000E0C
@@ -1176,7 +1176,7 @@ lbl_fn_800DB6E0_00000F90:
     bl fn_80686EA4
 lbl_fn_800DB6E0_00000FC4:
     mulli r3, r26, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r24, r3
     bne lbl_fn_800DB6E0_00000FF8
@@ -1227,7 +1227,7 @@ lbl_fn_800DB6E0_00000FF8:
     bl fn_80686EA4
 lbl_fn_800DB6E0_00001088:
     slwi r3, r24, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r26, r3
     bne lbl_fn_800DB6E0_000010B0
@@ -1677,7 +1677,7 @@ lbl_fn_800DBF68_00001658:
 lbl_fn_800DBF68_00001678:
     ble cr1, lbl_fn_800DBF68_000016B4
     slwi r3, r30, 1
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r26, r3
     bne lbl_fn_800DBF68_000016F0
@@ -1692,7 +1692,7 @@ lbl_fn_800DBF68_00001678:
     b lbl_fn_800DBF68_000016F0
 lbl_fn_800DBF68_000016B4:
     slwi r3, r30, 1
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r26, r3
     bne lbl_fn_800DBF68_000016E8

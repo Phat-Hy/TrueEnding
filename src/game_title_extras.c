@@ -7,8 +7,8 @@ extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void dtor_80084684(void);
 extern void fn_8006F72C(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_800A555C(void);
 extern void fn_800C31F4(void);
 extern void atn_Task_constructor(void);
@@ -958,7 +958,7 @@ lbl_fn_803B4C38_00000C40:
     bl fn_80686EA4
 lbl_fn_803B4C38_00000C60:
     mulli r3, r16, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r17, r3
     bne lbl_fn_803B4C38_00000C88
@@ -1346,7 +1346,7 @@ asm void fn_803B5470(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_803B5470_00001254
@@ -1374,7 +1374,7 @@ asm void fn_803B5470(void)
     mr r6, r5
     li r4, 0x1
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_803B5470_00001250
     mr r4, r29

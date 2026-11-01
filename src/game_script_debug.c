@@ -11,11 +11,11 @@ extern void fn_8005B3CC(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006AFF8(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800897D8(void);
-extern void fn_80092814(void);
-extern void fn_80097C08(void);
-extern void fn_80097D7C(void);
+extern void atn_Model_findBoneIndex(void);
+extern void atn_Anim_setLayerAnimation(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
 extern void fn_800CB3A0(void);
 extern void atn_Task_setActive(void);
@@ -86,8 +86,8 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_80682428(void);
-extern void fn_80682544(void);
+extern void strcmp(void);
+extern void strncmp(void);
 extern void fn_80684600(void);
 extern void fn_8068AEA4(void);
 extern u32 strlen(const char* str);
@@ -394,13 +394,13 @@ lbl_fn_80250A24_000003AC:
     mr r26, r3
     beq lbl_fn_80250A24_00000444
     addi r4, r28, 0x2b
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_80250A24_00000444
     mr r3, r26
     addi r4, r28, 0x2c
     li r5, 0x8
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_80250A24_00000434
     lwz r0, 0x2c(r1)
@@ -679,7 +679,7 @@ lbl_fn_80250ECC_000007B4:
     bl fn_8005B3CC
     mr r28, r3
     addi r4, r29, 0x76
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80250ECC_00000830
     addi r3, r1, 0x8
@@ -713,7 +713,7 @@ lbl_fn_80250ECC_00000820:
 lbl_fn_80250ECC_00000830:
     mr r3, r28
     addi r4, r29, 0x80
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80250ECC_000008A4
     addi r3, r1, 0x8
@@ -747,7 +747,7 @@ lbl_fn_80250ECC_00000894:
 lbl_fn_80250ECC_000008A4:
     mr r3, r28
     addi r4, r29, 0x8a
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80250ECC_000008F4
     addi r3, r1, 0x8
@@ -769,7 +769,7 @@ lbl_fn_80250ECC_000008E4:
 lbl_fn_80250ECC_000008F4:
     mr r3, r28
     addi r4, r29, 0x99
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80250ECC_00000928
     addi r3, r1, 0x8
@@ -1557,7 +1557,7 @@ lbl_fn_80251344_0000144C:
     addi r5, r5, 0x2b
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r22, r3
     beq lbl_fn_80251344_000014D4
@@ -1581,7 +1581,7 @@ lbl_fn_80251344_0000144C:
     addi r23, r3, 0xb0
     mr r3, r23
     stfs f0, 0x24c(r23)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80883358
     stfs f0, 0x238(r23)
 lbl_fn_80251344_000014D4:
@@ -1637,7 +1637,7 @@ lbl_fn_80251344_00001538:
     stfs f0, 0x2e8(r29)
     li r7, 0x1
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r0, 0x14fc(r29)
     cmpwi r0, 0x0
     beq lbl_fn_80251344_00001618
@@ -1785,7 +1785,7 @@ lbl_fn_80251344_0000179C:
     lfs f28, 0x2e4(r29)
     addi r3, r29, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f28, f1
     cror eq, gt, eq
     bne lbl_fn_80251344_00001F44
@@ -2007,7 +2007,7 @@ lbl_fn_80251344_00001AE4:
     lfs f28, 0x2e4(r29)
     addi r3, r29, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f28, f1
     cror eq, gt, eq
     bne lbl_fn_80251344_00001F44
@@ -2160,7 +2160,7 @@ lbl_fn_80251344_00001D20:
     lfs f28, 0x2e4(r29)
     addi r3, r29, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f28, f1
     cror eq, gt, eq
     bne lbl_fn_80251344_00001D68
@@ -2201,7 +2201,7 @@ lbl_fn_80251344_00001D68:
     li r5, 0x0
     mr r3, r23
     addi r4, r4, 0xf3
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80251344_00001DE0
     li r4, 0x0
@@ -2275,7 +2275,7 @@ lbl_fn_80251344_00001ED4:
     lfs f28, 0x2e4(r29)
     addi r3, r29, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f28, f1
     cror eq, gt, eq
     bne lbl_fn_80251344_00001F44

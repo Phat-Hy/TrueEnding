@@ -9,9 +9,9 @@ extern void _savegpr_19(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_80013F78(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800A56A8(void);
 extern void fn_800CB3A0(void);
 extern void atn_Task_setActive(void);
@@ -1515,7 +1515,7 @@ asm void fn_80521E20(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80521E20_00001368
     mr r4, r31
@@ -1627,7 +1627,7 @@ lbl_fn_80521E84_00001460:
     stw r3, 0x50(r31)
     beq lbl_fn_80521E84_000014EC
     subi r3, r4, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80521E84_000014EC:
     lis r6, lbl_8075C300@ha
     lwz r4, 0x4c(r31)
@@ -1677,7 +1677,7 @@ lbl_fn_80521E84_00001520:
     stw r3, 0xf8(r31)
     beq lbl_fn_80521E84_000015AC
     subi r3, r4, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80521E84_000015AC:
     mr r6, r31
     addi r3, r31, 0xf0
@@ -1712,7 +1712,7 @@ lbl_fn_80521E84_000015AC:
     stw r3, 0x104(r31)
     beq lbl_fn_80521E84_00001634
     subi r3, r4, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80521E84_00001634:
     mr r6, r31
     addi r3, r31, 0xfc
@@ -1752,7 +1752,7 @@ lbl_fn_80521E84_00001634:
     stw r3, 0x110(r31)
     beq lbl_fn_80521E84_000016D0
     subi r3, r4, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80521E84_000016D0:
     mr r6, r31
     addi r3, r31, 0x108
@@ -1812,7 +1812,7 @@ lbl_fn_80521E84_000016D0:
     stw r3, 0x11c(r31)
     beq lbl_fn_80521E84_000017BC
     subi r3, r4, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80521E84_000017BC:
     mr r6, r31
     addi r3, r31, 0x114
@@ -1857,7 +1857,7 @@ lbl_fn_80521E84_000017BC:
     stw r3, 0x128(r31)
     beq lbl_fn_80521E84_0000186C
     subi r3, r4, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80521E84_0000186C:
     mr r6, r31
     addi r3, r31, 0x120
@@ -1927,7 +1927,7 @@ lbl_fn_80521E84_0000186C:
     stw r3, 0x134(r31)
     beq lbl_fn_80521E84_00001980
     subi r3, r4, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80521E84_00001980:
     mr r6, r31
     addi r3, r31, 0x12c

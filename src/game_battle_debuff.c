@@ -7,7 +7,7 @@ extern void _savegpr_27(void);
 extern void fn_80044C50(void);
 extern void fn_80044CCC(void);
 extern void fn_80044E0C(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800C31F4(void);
 extern void fn_800CB3A0(void);
 extern void fn_801059F8(void);
@@ -120,7 +120,7 @@ asm void fn_8016D454(void)
     stw r29, 0x5c(r1)
     mr r29, r3
     li r3, 0x1c
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8016D454_000000C4
@@ -333,7 +333,7 @@ asm void fn_8016D74C(void)
     mr r6, r5
     li r3, 0x44
     li r4, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8016D74C_000003D0

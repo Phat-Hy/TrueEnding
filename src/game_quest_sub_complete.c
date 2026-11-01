@@ -5,7 +5,7 @@
 extern void __files(void);
 extern void dtor_80084684(void);
 extern void fn_8005C448(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_80489D08(void);
 extern void fn_80680770(void);
 extern void fn_80686EA4(void);
@@ -225,7 +225,7 @@ lbl_fn_8048B048_00000268:
     bl fn_80686EA4
 lbl_fn_8048B048_0000029C:
     slwi r3, r31, 4
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_8048B048_000002D0
@@ -472,7 +472,7 @@ lbl_fn_8048B3B8_000005D8:
     bl fn_80686EA4
 lbl_fn_8048B3B8_0000060C:
     slwi r3, r31, 4
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_8048B3B8_00000640

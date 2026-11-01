@@ -9,8 +9,8 @@ extern void _savegpr_17(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80084320(void);
-extern void fn_80092814(void);
+extern void mem_alloc(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_800BFAC8(void);
 extern void fn_800CB3A0(void);
 extern void atn_Task_constructor(void);
@@ -583,7 +583,7 @@ asm void fn_804B4C50(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_804B4C50_00000624
     mr r4, r31
@@ -1705,7 +1705,7 @@ lbl_fn_804B5B10_000015EC:
     addi r4, r27, 0x145
     mr r3, r25
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_804B5B10_00001618
     li r3, 0x0
@@ -1884,7 +1884,7 @@ lbl_fn_804B5B10_00001860:
     li r5, 0x0
     addi r17, r3, 0xb0
     mr r3, r17
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_804B5B10_000018B0
     li r3, 0x0

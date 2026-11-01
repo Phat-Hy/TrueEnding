@@ -43,7 +43,7 @@ extern void fn_805430A4(void);
 extern void fn_805430C0(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 
 /* External data declarations */
 extern u8 lbl_8075EC98[];
@@ -129,7 +129,7 @@ lbl_fn_8055D004_00000068:
     lis r3, lbl_80794DC0@ha
     lwz r4, lbl_80794DC0@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_8055D004_00000098

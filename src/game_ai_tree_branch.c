@@ -19,12 +19,12 @@ extern void fn_8005B3CC(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006AFF8(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_800897D8(void);
-extern void fn_80092814(void);
-extern void fn_80097C08(void);
-extern void fn_80097D7C(void);
+extern void atn_Model_findBoneIndex(void);
+extern void atn_Anim_setLayerAnimation(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
 extern void fn_800CB3A0(void);
 extern void atn_Task_setActive(void);
@@ -71,8 +71,8 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
 extern void fn_80680770(void);
-extern void fn_80682428(void);
-extern void fn_80682544(void);
+extern void strcmp(void);
+extern void strncmp(void);
 extern void fn_80684600(void);
 extern void fn_80686EA4(void);
 extern void fn_8068B100(void);
@@ -173,7 +173,7 @@ asm void fn_8025941C(void)
     stfs f0, 0x2e8(r30)
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r0, 0x1680(r30)
     addi r4, r30, 0x1684
     li r3, 0x0
@@ -1131,13 +1131,13 @@ lbl_fn_8025A060_00000E7C:
     mr r26, r3
     beq lbl_fn_8025A060_00000F14
     addi r4, r28, 0x2b
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_8025A060_00000F14
     mr r3, r26
     addi r4, r28, 0x2c
     li r5, 0x8
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_8025A060_00000F04
     lwz r0, 0x2c(r1)
@@ -1212,7 +1212,7 @@ lbl_fn_8025A060_00000F40:
     mr r6, r5
     li r4, 0x1
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8025A060_00000FD0
     bl fn_802377B8
@@ -1514,7 +1514,7 @@ lbl_fn_8025A67C_000013EC:
     bl fn_8005B3CC
     mr r17, r3
     addi r4, r25, 0xa3
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8025A67C_0000141C
     addi r3, r1, 0x44
@@ -1525,7 +1525,7 @@ lbl_fn_8025A67C_000013EC:
 lbl_fn_8025A67C_0000141C:
     mr r3, r17
     addi r4, r25, 0xae
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8025A67C_00001444
     addi r3, r1, 0x44
@@ -1536,7 +1536,7 @@ lbl_fn_8025A67C_0000141C:
 lbl_fn_8025A67C_00001444:
     mr r3, r17
     addi r4, r25, 0xbe
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8025A67C_0000173C
 lbl_fn_8025A67C_00001458:
@@ -1682,7 +1682,7 @@ lbl_fn_8025A67C_00001630:
     bl fn_80686EA4
 lbl_fn_8025A67C_00001650:
     slwi r3, r19, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_8025A67C_00001678
@@ -1745,7 +1745,7 @@ lbl_fn_8025A67C_00001730:
 lbl_fn_8025A67C_0000173C:
     mr r3, r17
     addi r4, r25, 0xdd
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8025A67C_000017AC
     addi r3, r1, 0x44
@@ -1955,7 +1955,7 @@ lbl_fn_8025ACA0_00001A20:
     lfs f28, 0x2e4(r31)
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f28, f1
     cror eq, gt, eq
     bne lbl_fn_8025ACA0_00001FCC
@@ -1983,7 +1983,7 @@ lbl_fn_8025ACA0_00001A84:
     lfs f28, 0x2e4(r31)
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f28, f1
     cror eq, gt, eq
     bne lbl_fn_8025ACA0_00001FCC
@@ -1994,7 +1994,7 @@ lbl_fn_8025ACA0_00001AAC:
     lfs f28, 0x2e4(r31)
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f28, f1
     cror eq, gt, eq
     bne lbl_fn_8025ACA0_00001FCC
@@ -2033,7 +2033,7 @@ lbl_fn_8025ACA0_00001AAC:
     stfs f0, 0x2e8(r31)
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     b lbl_fn_8025ACA0_00001FCC
 lbl_fn_8025ACA0_00001B5C:
     li r30, 0x0
@@ -2169,7 +2169,7 @@ lbl_fn_8025ACA0_00001D28:
 lbl_fn_8025ACA0_00001D4C:
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f28, f1
     cror eq, gt, eq
     bne lbl_fn_8025ACA0_00001FCC
@@ -2286,7 +2286,7 @@ lbl_fn_8025ACA0_00001E78:
     stfs f0, 0x2e8(r31)
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     mr r3, r31
     li r4, 0x65
     bl fn_80232B7C
@@ -2412,7 +2412,7 @@ lbl_fn_8025ACA0_000020B4:
     addi r4, r4, lbl_80743F78@l
     li r5, 0x0
     addi r4, r4, 0xef
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_8025ACA0_000020F8
     li r5, 0x0

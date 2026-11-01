@@ -13,7 +13,7 @@ extern void fn_80013F78(void);
 extern void fn_80060D58(void);
 extern void fn_8006F72C(void);
 extern void fn_8006FA4C(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800C31F4(void);
 extern void fn_800C7F08(void);
 extern void atn_Task_constructor(void);
@@ -49,7 +49,7 @@ extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_804A3AF0(void);
 extern void fn_804A3B60(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80686A48(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
@@ -1065,7 +1065,7 @@ asm void fn_8011770C(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8011770C_00000C2C
@@ -1226,7 +1226,7 @@ asm void fn_80117914(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80117914_00000E88
@@ -1756,7 +1756,7 @@ lbl_fn_80117FE4_000014E4:
     beq lbl_fn_80117FE4_0000164C
     lwz r3, 0x70(r3)
     addi r4, r30, 0x3d
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_80117FE4_0000164C
     addi r22, r30, 0x20e

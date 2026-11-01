@@ -20,8 +20,8 @@ extern void fn_800616C0(void);
 extern void fn_80061824(void);
 extern void fn_8006EF48(void);
 extern void fn_8006F2F0(void);
-extern void fn_800844D8(void);
-extern void fn_80084C24(void);
+extern void mem_free(void);
+extern void mem_getAllocSize(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
 extern void fn_800DC6B4(void);
@@ -34,9 +34,9 @@ extern void fn_8047059C(void);
 extern void fn_80473F88(void);
 extern void fn_804A0F58(void);
 extern void fn_80680770(void);
-extern void fn_80682428(void);
-extern void fn_80682544(void);
-extern void fn_806826A0(void);
+extern void strcmp(void);
+extern void strncmp(void);
+extern void strtok(void);
 extern void fn_80686EA4(void);
 extern void fn_80695D84(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -756,7 +756,7 @@ lbl_spectateView_renderInterface_0000099C:
     bl fn_8005B3CC
     mr r16, r3
     addi r4, r22, 0x286
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_000009EC
     addi r3, r1, 0x50
@@ -775,7 +775,7 @@ lbl_spectateView_renderInterface_0000099C:
 lbl_spectateView_renderInterface_000009EC:
     mr r3, r16
     addi r4, r22, 0x28f
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000A34
     addi r3, r1, 0x50
@@ -794,7 +794,7 @@ lbl_spectateView_renderInterface_000009EC:
 lbl_spectateView_renderInterface_00000A34:
     mr r3, r16
     addi r4, r22, 0x298
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000A60
     addi r3, r1, 0x50
@@ -806,7 +806,7 @@ lbl_spectateView_renderInterface_00000A34:
 lbl_spectateView_renderInterface_00000A60:
     mr r3, r16
     addi r4, r22, 0x2a1
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000A88
     addi r3, r1, 0x50
@@ -817,7 +817,7 @@ lbl_spectateView_renderInterface_00000A60:
 lbl_spectateView_renderInterface_00000A88:
     mr r3, r16
     addi r4, r22, 0x2af
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000AD0
     addi r3, r1, 0x50
@@ -836,7 +836,7 @@ lbl_spectateView_renderInterface_00000A88:
 lbl_spectateView_renderInterface_00000AD0:
     mr r3, r16
     addi r4, r22, 0x2b6
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000B18
     addi r3, r1, 0x50
@@ -855,7 +855,7 @@ lbl_spectateView_renderInterface_00000AD0:
 lbl_spectateView_renderInterface_00000B18:
     mr r3, r16
     addi r4, r22, 0x2bd
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000B44
     addi r3, r1, 0x50
@@ -867,7 +867,7 @@ lbl_spectateView_renderInterface_00000B18:
 lbl_spectateView_renderInterface_00000B44:
     mr r3, r16
     addi r4, r22, 0x2c4
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000B6C
     addi r3, r1, 0x50
@@ -878,7 +878,7 @@ lbl_spectateView_renderInterface_00000B44:
 lbl_spectateView_renderInterface_00000B6C:
     mr r3, r16
     addi r4, r22, 0x2d0
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000BB4
     addi r3, r1, 0x50
@@ -897,7 +897,7 @@ lbl_spectateView_renderInterface_00000B6C:
 lbl_spectateView_renderInterface_00000BB4:
     mr r3, r16
     addi r4, r22, 0x2d8
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000BFC
     addi r3, r1, 0x50
@@ -916,7 +916,7 @@ lbl_spectateView_renderInterface_00000BB4:
 lbl_spectateView_renderInterface_00000BFC:
     mr r3, r16
     addi r4, r22, 0x2e0
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000C28
     addi r3, r1, 0x50
@@ -928,7 +928,7 @@ lbl_spectateView_renderInterface_00000BFC:
 lbl_spectateView_renderInterface_00000C28:
     mr r3, r16
     addi r4, r22, 0x2e8
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000C50
     addi r3, r1, 0x50
@@ -939,13 +939,13 @@ lbl_spectateView_renderInterface_00000C28:
 lbl_spectateView_renderInterface_00000C50:
     mr r3, r16
     addi r4, r22, 0x2f4
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000C8C
     addi r3, r1, 0x50
     bl fn_8005B3CC
     addi r4, r22, 0x2f8
-    bl fn_806826A0
+    bl strtok
     mr r5, r3
     addi r3, r15, 0x4a0
     addi r4, r22, 0x2fa
@@ -955,7 +955,7 @@ lbl_spectateView_renderInterface_00000C50:
 lbl_spectateView_renderInterface_00000C8C:
     mr r3, r16
     addi r4, r22, 0x306
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000CD0
     addi r3, r1, 0x50
@@ -974,13 +974,13 @@ lbl_spectateView_renderInterface_00000CBC:
 lbl_spectateView_renderInterface_00000CD0:
     mr r3, r16
     addi r4, r22, 0x31b
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000D20
     addi r3, r1, 0x50
     bl fn_8005B3CC
     addi r4, r22, 0x2f8
-    bl fn_806826A0
+    bl strtok
     lwz r4, lbl_8087F0A8
     lwz r0, 0x15c(r4)
     cmpwi r0, 0x0
@@ -996,13 +996,13 @@ lbl_spectateView_renderInterface_00000D08:
 lbl_spectateView_renderInterface_00000D20:
     mr r3, r16
     addi r4, r22, 0x341
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000D64
     addi r3, r1, 0x50
     bl fn_8005B3CC
     addi r4, r22, 0x34b
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     addi r3, r1, 0x50
     srwi r0, r0, 5
@@ -1014,7 +1014,7 @@ lbl_spectateView_renderInterface_00000D20:
 lbl_spectateView_renderInterface_00000D64:
     mr r3, r16
     addi r4, r22, 0x350
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_0000104C
     addi r3, r1, 0x50
@@ -1022,7 +1022,7 @@ lbl_spectateView_renderInterface_00000D64:
     mr r19, r3
     addi r4, r22, 0x358
     li r5, 0x2
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_000012DC
     addi r3, r19, 0x2
@@ -1136,7 +1136,7 @@ lbl_spectateView_renderInterface_00000F0C:
     bl fn_80686EA4
 lbl_spectateView_renderInterface_00000F2C:
     slwi r3, r20, 4
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r19, r3
     bne lbl_spectateView_renderInterface_00000F58
@@ -1214,7 +1214,7 @@ lbl_spectateView_renderInterface_00001004:
 lbl_spectateView_renderInterface_0000104C:
     mr r3, r16
     addi r4, r22, 0x36f
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_000012DC
     addi r3, r1, 0x50
@@ -1319,7 +1319,7 @@ lbl_spectateView_renderInterface_000011B0:
     bl fn_80686EA4
 lbl_spectateView_renderInterface_000011D0:
     slwi r3, r16, 3
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r19, r3
     bne lbl_spectateView_renderInterface_000011FC
@@ -1458,7 +1458,7 @@ asm void fn_80537784(void)
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_80537784_000013D0
-    bl fn_80084C24
+    bl mem_getAllocSize
     li r0, 0x0
     stw r0, 0x4(r30)
 lbl_fn_80537784_000013D0:
@@ -1656,7 +1656,7 @@ lbl_fn_805377F4_00001650:
     bl fn_80686EA4
 lbl_fn_805377F4_00001680:
     slwi r3, r27, 3
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_805377F4_000016B4
@@ -1887,7 +1887,7 @@ lbl_fn_805377F4_0000199C:
     bl fn_80686EA4
 lbl_fn_805377F4_000019CC:
     slwi r3, r27, 3
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_805377F4_00001A00
@@ -2073,7 +2073,7 @@ lbl_fn_805377F4_00001C4C:
     bl fn_80686EA4
 lbl_fn_805377F4_00001C7C:
     slwi r3, r27, 3
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_805377F4_00001CB0

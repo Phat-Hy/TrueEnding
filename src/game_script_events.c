@@ -4,8 +4,8 @@
 /* External function declarations */
 extern void fn_80094958(void);
 extern void fn_80094B6C(void);
-extern void fn_80097C08(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_setLayerAnimation(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
 extern void fn_800CB3A0(void);
 extern void fn_800F8C6C(void);
@@ -343,7 +343,7 @@ lbl_fn_8024B4F0_0000035C:
     lfs f30, 0x2e4(r31)
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f30, f1
     cror eq, gt, eq
     bne lbl_fn_8024B4F0_0000095C
@@ -374,7 +374,7 @@ lbl_fn_8024B4F0_0000035C:
     lfs f30, 0x2e4(r31)
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f30, f1
     cror eq, gt, eq
     bne lbl_fn_8024B4F0_000004FC
@@ -1830,7 +1830,7 @@ lbl_fn_8024CD24_000018B0:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_8088326C
     stfs f0, 0x2e8(r28)
     b lbl_fn_8024CD24_00001C00
@@ -1873,7 +1873,7 @@ lbl_fn_8024CD24_000018E0:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     b lbl_fn_8024CD24_00001BF8
 lbl_fn_8024CD24_00001980:
     lfd f1, 0xa8(r31)
@@ -2024,7 +2024,7 @@ lbl_fn_8024CD24_00001B80:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     b lbl_fn_8024CD24_00001BF8
 lbl_fn_8024CD24_00001BB0:
     lfs f2, lbl_808832C4
@@ -2034,7 +2034,7 @@ lbl_fn_8024CD24_00001BB0:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     b lbl_fn_8024CD24_00001BF8
 lbl_fn_8024CD24_00001BD4:
     lfs f1, lbl_80883268
@@ -2045,7 +2045,7 @@ lbl_fn_8024CD24_00001BD4:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
 lbl_fn_8024CD24_00001BF8:
     lfs f0, lbl_8088326C
     stfs f0, 0x2e8(r28)

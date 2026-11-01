@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -45,7 +45,7 @@ asm void fn_8008826C(void)
     mr r6, r5
     li r4, 0xe
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_8008826C_000000D0
@@ -87,7 +87,7 @@ lbl_fn_8008826C_000000D0:
     li r7, 0x0
     mr r6, r5
     addi r26, r8, 0x24
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r25, r3
     beq lbl_fn_8008826C_00000174
@@ -148,7 +148,7 @@ lbl_fn_8008826C_000001BC:
     li r7, 0x0
     mr r6, r5
     addi r25, r8, 0x26
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r26, r3
     beq lbl_fn_8008826C_0000025C
@@ -210,7 +210,7 @@ lbl_fn_8008826C_000002A4:
     li r7, 0x0
     mr r6, r5
     addi r25, r8, 0x28
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r26, r3
     beq lbl_fn_8008826C_00000344
@@ -272,7 +272,7 @@ lbl_fn_8008826C_0000038C:
     li r7, 0x0
     mr r6, r5
     addi r25, r8, 0x2a
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r26, r3
     beq lbl_fn_8008826C_0000042C
@@ -372,7 +372,7 @@ asm void fn_80088724(void)
     mr r6, r5
     li r4, 0xe
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_80088724_00000588
@@ -414,7 +414,7 @@ lbl_fn_80088724_00000588:
     li r7, 0x0
     mr r6, r5
     addi r26, r8, 0x24
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r25, r3
     beq lbl_fn_80088724_0000062C
@@ -475,7 +475,7 @@ lbl_fn_80088724_00000674:
     li r7, 0x0
     mr r6, r5
     addi r25, r8, 0x26
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r26, r3
     beq lbl_fn_80088724_00000714
@@ -537,7 +537,7 @@ lbl_fn_80088724_0000075C:
     li r7, 0x0
     mr r6, r5
     addi r25, r8, 0x28
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r26, r3
     beq lbl_fn_80088724_000007FC
@@ -637,7 +637,7 @@ asm void fn_80088AF4(void)
     mr r6, r5
     li r4, 0xe
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_80088AF4_00000958
@@ -679,7 +679,7 @@ lbl_fn_80088AF4_00000958:
     li r7, 0x0
     mr r6, r5
     addi r26, r8, 0x2c
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r25, r3
     beq lbl_fn_80088AF4_000009FC
@@ -740,7 +740,7 @@ lbl_fn_80088AF4_00000A44:
     li r7, 0x0
     mr r6, r5
     addi r25, r8, 0x2e
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r26, r3
     beq lbl_fn_80088AF4_00000AE4
@@ -802,7 +802,7 @@ lbl_fn_80088AF4_00000B2C:
     li r7, 0x0
     mr r6, r5
     addi r25, r8, 0x30
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r26, r3
     beq lbl_fn_80088AF4_00000BCC
@@ -864,7 +864,7 @@ lbl_fn_80088AF4_00000C14:
     li r7, 0x0
     mr r6, r5
     addi r25, r8, 0x32
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r26, r3
     beq lbl_fn_80088AF4_00000CB4
@@ -964,7 +964,7 @@ asm void fn_80088FAC(void)
     mr r6, r5
     li r4, 0xe
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_80088FAC_00000E10
@@ -1006,7 +1006,7 @@ lbl_fn_80088FAC_00000E10:
     li r7, 0x0
     mr r6, r5
     addi r26, r8, 0x2c
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r25, r3
     beq lbl_fn_80088FAC_00000EB4
@@ -1067,7 +1067,7 @@ lbl_fn_80088FAC_00000EFC:
     li r7, 0x0
     mr r6, r5
     addi r25, r8, 0x2e
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r26, r3
     beq lbl_fn_80088FAC_00000F9C
@@ -1129,7 +1129,7 @@ lbl_fn_80088FAC_00000FE4:
     li r7, 0x0
     mr r6, r5
     addi r25, r8, 0x30
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r26, r3
     beq lbl_fn_80088FAC_00001084

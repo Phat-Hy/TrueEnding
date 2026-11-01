@@ -9,7 +9,7 @@ extern void _savegpr_27(void);
 extern void fn_80017064(void);
 extern void fn_80044E0C(void);
 extern void fn_8004ED34(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_80097D40(void);
 extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
@@ -1504,7 +1504,7 @@ lbl_fn_801720AC_00001254:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_801720AC_00001428
@@ -1953,7 +1953,7 @@ lbl_fn_801725EC_00001A50:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_801725EC_00001A8C
@@ -2139,7 +2139,7 @@ lbl_fn_801725EC_00001CFC:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_801725EC_00001D34

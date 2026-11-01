@@ -4,15 +4,15 @@
 /* External function declarations */
 extern void __files(void);
 extern void dtor_80084684(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_8008BBD8(void);
-extern void fn_80092814(void);
-extern void fn_80097C08(void);
+extern void atn_Model_findBoneIndex(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097CCC(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C31F4(void);
 extern void fn_800C344C(void);
 extern void fn_800CB3A0(void);
@@ -48,7 +48,7 @@ extern void world_setLocalFlag(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void fn_80680770(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80686EA4(void);
 extern void fn_80695720(void);
 extern void fn_80695B00(void);
@@ -295,7 +295,7 @@ lbl_fn_802D8B7C_00000258:
     lfs f31, 0x2e4(r31)
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f31, f1
     cror eq, gt, eq
     bne lbl_fn_802D8B7C_000004F4
@@ -387,7 +387,7 @@ lbl_fn_802D8B7C_00000258:
     stfs f0, 0x2e8(r31)
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r3, lbl_8087F430
     li r4, 0x5b
     li r5, 0x1
@@ -669,7 +669,7 @@ asm void fn_802D92E4(void)
     psq_st f1, 0x0(r6), 0, 0
     stfs f2, 0x38(r1)
     stfs f0, 0x3c(r1)
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_802D92E4_000007F0
     li r5, 0x0
@@ -811,7 +811,7 @@ lbl_fn_802D92E4_000009E4:
     cmpwi r3, 0x0
     beq lbl_fn_802D92E4_000009F8
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_802D92E4_000009F8:
     stw r29, 0x62c(r31)
     stw r30, 0x628(r31)
@@ -925,7 +925,7 @@ lbl_fn_802D92E4_00000B90:
     cmpwi r3, 0x0
     beq lbl_fn_802D92E4_00000BA4
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_802D92E4_00000BA4:
     stw r29, 0x62c(r31)
     stw r30, 0x628(r31)
@@ -973,7 +973,7 @@ asm void fn_802D977C(void)
     addi r4, r4, lbl_80747654@l
     addi r3, r3, 0xb0
     addi r4, r4, 0x2a0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_802D977C_00000C58
     li r4, 0x0
@@ -1026,7 +1026,7 @@ asm void fn_802D9834(void)
     lfs f0, 0x5b0(r3)
     stfs f0, 0x620(r3)
     addi r3, r3, 0xb0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_802D9834_00000D0C
     li r6, 0x0
@@ -1162,7 +1162,7 @@ asm void fn_802D99D8(void)
     li r7, 0x0
     li r3, 0x44
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_802D99D8_00000F0C
     psq_l f1, 0x528(r29), 0, 0
@@ -1233,7 +1233,7 @@ lbl_fn_802D99D8_00000F8C:
     stw r5, 0x3c(r1)
     stw r4, 0x40(r1)
     stw r0, 0x44(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_802D99D8_00001024
@@ -1324,7 +1324,7 @@ lbl_fn_802D9C40_0000110C:
     bne lbl_fn_802D9C40_00001184
     lwz r31, 0x0(r3)
     li r3, 0x14
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_802D9C40_0000114C
@@ -1365,7 +1365,7 @@ lbl_fn_802D9C40_000011A0:
     lis r3, lbl_80786E18@ha
     lwz r4, lbl_80786E18@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_802D9C40_000011CC
@@ -1400,7 +1400,7 @@ asm void fn_802D9D5C(void)
     stw r30, 0x178(r1)
     mr r30, r3
     addi r3, r3, 0xb0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_802D9D5C_00001234
     li r5, 0x0
@@ -1583,7 +1583,7 @@ asm void fn_802DA01C(void)
     stw r30, 0x18(r1)
     mr r30, r3
     addi r3, r31, 0xb0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_802DA01C_000014F4
     li r3, 0x0
@@ -1633,7 +1633,7 @@ asm void fn_802DA0C8(void)
     stw r30, 0x18(r1)
     mr r30, r3
     addi r3, r31, 0xb0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_802DA0C8_000015A0
     li r3, 0x0
@@ -1864,7 +1864,7 @@ lbl_fn_802DA174_00001864:
     stfs f0, 0x2e8(r31)
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     mr r3, r31
     bl fn_802DC014
 lbl_fn_802DA174_000018E4:
@@ -1988,7 +1988,7 @@ lbl_fn_802DA174_00001A24:
     stfs f0, 0x2e8(r31)
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     mr r3, r31
     li r4, 0x64
     bl fn_80232B7C

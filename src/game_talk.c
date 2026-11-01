@@ -7,7 +7,7 @@ extern void _savegpr_21(void);
 extern void dtor_80084684(void);
 extern void fn_8005691C(void);
 extern void fn_8005C594(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 
 /* External data declarations */
 extern u8 lbl_8073113C[];
@@ -1450,7 +1450,7 @@ asm void atn_SinusCurve_destructor(void)
     stw r28, 0x10(r1)
     mr r28, r3
     li r3, 0x18
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_atn_SinusCurve_destructor_00001268
     lfs f0, 0xc(r28)

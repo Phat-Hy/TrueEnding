@@ -7,11 +7,11 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8004ED34(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_8008BBD8(void);
-extern void fn_80097C08(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_setLayerAnimation(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
 extern void fn_800CB360(void);
 extern void fn_800CB3A0(void);
@@ -34,7 +34,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void fn_80680770(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80686EA4(void);
 extern void fn_8068AEA4(void);
 extern void fn_80695B00(void);
@@ -155,7 +155,7 @@ lbl_fn_8019A580_00000090:
     li r7, 0x0
     li r8, 0x1
     stfs f0, 0x238(r3)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r6, 0x4(r31)
     addi r3, r31, 0x18
     lfs f3, 0x14(r31)
@@ -588,7 +588,7 @@ asm void fn_8019AC60(void)
     stw r29, 0x74(r1)
     mr r29, r4
     li r4, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8019AC60_00000784
@@ -613,7 +613,7 @@ asm void fn_8019AC60(void)
     stw r0, 0x34c(r3)
     stfs f0, 0x24c(r3)
     stfs f0, 0x238(r3)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
 lbl_fn_8019AC60_00000784:
     lis r3, lbl_8077DD2C@ha
     lwzu r5, lbl_8077DD2C@l(r3)
@@ -675,7 +675,7 @@ lbl_fn_8019AC60_00000808:
     stw r5, 0x30(r1)
     stw r4, 0x34(r1)
     stw r0, 0x38(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_8019AC60_000008A0
@@ -765,7 +765,7 @@ lbl_fn_8019AECC_00000984:
     bne lbl_fn_8019AECC_000009FC
     lwz r31, 0x0(r3)
     li r3, 0x14
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_8019AECC_000009C4
@@ -806,7 +806,7 @@ lbl_fn_8019AECC_00000A18:
     lis r3, lbl_8077DDE0@ha
     lwz r4, lbl_8077DDE0@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_8019AECC_00000A44
@@ -854,7 +854,7 @@ asm void fn_8019AFE8(void)
     stw r0, 0x34c(r3)
     stfs f0, 0x24c(r3)
     stfs f0, 0x238(r3)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -877,7 +877,7 @@ asm void fn_8019B068(void)
     lwz r5, 0x4(r3)
     lfs f31, 0x2e4(r5)
     addi r3, r5, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f31, f1
     cror eq, gt, eq
     bne lbl_fn_8019B068_00000B2C
@@ -973,7 +973,7 @@ lbl_fn_8019B0F0_00000C0C:
     stw r5, 0x30(r1)
     stw r4, 0x34(r1)
     stw r0, 0x38(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_8019B0F0_00000CA4
@@ -1252,7 +1252,7 @@ lbl_fn_8019B29C_00001014:
     stw r0, 0x3fc(r3)
     mr r3, r29
     stfs f0, 0x24c(r29)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80881FBC
     mr r3, r30
     stfs f0, 0x238(r29)
@@ -1446,7 +1446,7 @@ lbl_fn_8019B6A8_000012F0:
     addi r29, r3, 0xb0
     lfs f30, 0x2e4(r3)
     mr r3, r29
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f30, f1
     cror eq, gt, eq
     bne lbl_fn_8019B6A8_00001458
@@ -1462,7 +1462,7 @@ lbl_fn_8019B6A8_000012F0:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f1, lbl_80881FBC
     li r0, 0x75
     stfs f1, 0x238(r29)
@@ -1565,7 +1565,7 @@ asm void fn_8019BA1C(void)
     stw r30, 0x68(r1)
     mr r30, r4
     li r4, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8019BA1C_000014E8
     lwz r4, 0x4(r30)
@@ -1631,7 +1631,7 @@ lbl_fn_8019BA1C_0000156C:
     stw r5, 0x30(r1)
     stw r4, 0x34(r1)
     stw r0, 0x38(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_8019BA1C_00001604
@@ -1720,7 +1720,7 @@ lbl_fn_8019BC2C_000016E4:
     bne lbl_fn_8019BC2C_0000175C
     lwz r31, 0x0(r3)
     li r3, 0x14
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_8019BC2C_00001724
@@ -1761,7 +1761,7 @@ lbl_fn_8019BC2C_00001778:
     lis r3, lbl_8077DDD0@ha
     lwz r4, lbl_8077DDD0@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_8019BC2C_000017A4
@@ -1816,7 +1816,7 @@ asm void fn_8019BD48(void)
     addi r31, r3, 0xb0
     mr r3, r31
     stfs f1, 0x24c(r31)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f1, lbl_80881FBC
     stfs f1, 0x238(r31)
     lwz r3, lbl_8087F498
@@ -1852,7 +1852,7 @@ asm void fn_8019BE14(void)
     lwz r5, 0x4(r3)
     lfs f31, 0x2e4(r5)
     addi r3, r5, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f31, f1
     cror eq, gt, eq
     bne lbl_fn_8019BE14_000018E8
@@ -1915,7 +1915,7 @@ asm void fn_8019BE9C(void)
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80881FBC
     stfs f0, 0x238(r30)
     stw r31, 0x8(r29)
@@ -1935,7 +1935,7 @@ lbl_fn_8019BE9C_000019A0:
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80881FBC
     li r0, 0x0
     stfs f0, 0x238(r30)

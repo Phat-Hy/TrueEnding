@@ -17,7 +17,7 @@ extern void item_useConsumable(void);
 extern void fn_8004D388(void);
 extern void fn_8004ED34(void);
 extern void fn_80057A68(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A56A8(void);
 extern void fn_800A58D0(void);
 extern void fn_800F72CC(void);
@@ -1288,7 +1288,7 @@ lbl_fn_803884B8_00001118:
     lfs f28, 0x2e4(r30)
     addi r3, r30, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_80885A6C
     lfs f3, lbl_80885A04
     fmuls f0, f0, f28
@@ -1300,7 +1300,7 @@ lbl_fn_803884B8_00001144:
     lfs f28, 0x2e4(r30)
     addi r3, r30, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_80885A6C
     fmuls f0, f0, f28
     fdivs f3, f0, f1
@@ -1332,7 +1332,7 @@ lbl_fn_803884B8_000011B0:
 lbl_fn_803884B8_000011B4:
     addi r3, r30, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f4, lbl_80885914
     lfs f0, lbl_80885A44
     fsubs f3, f1, f4
@@ -1354,7 +1354,7 @@ lbl_fn_803884B8_000011FC:
 lbl_fn_803884B8_00001200:
     addi r3, r30, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f3, lbl_80885914
     lfs f0, lbl_80885A44
     fsubs f3, f1, f3
@@ -1367,7 +1367,7 @@ lbl_fn_803884B8_00001220:
     li r4, 0x0
     fadds f0, f0, f5
     fmuls f30, f28, f0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_80885A6C
     lfs f3, lbl_80885A04
     fmuls f0, f0, f27
@@ -1379,7 +1379,7 @@ lbl_fn_803884B8_00001258:
     lfs f27, 0x2e4(r30)
     addi r3, r30, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_80885A6C
     fmuls f0, f0, f27
     fdivs f3, f0, f1
@@ -1392,7 +1392,7 @@ lbl_fn_803884B8_00001284:
     lfs f27, 0x2e4(r30)
     addi r3, r30, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_80885A44
     lfs f3, lbl_80885A04
     fmuls f0, f0, f27
@@ -1404,7 +1404,7 @@ lbl_fn_803884B8_000012B0:
     lfs f27, 0x2e4(r30)
     addi r3, r30, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_80885A44
     fmuls f0, f0, f27
     fdivs f3, f0, f1

@@ -3,9 +3,9 @@
 
 /* External function declarations */
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
-extern void fn_80092814(void);
-extern void fn_80097C08(void);
+extern void mem_getAllocSize(void);
+extern void atn_Model_findBoneIndex(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097CCC(void);
 extern void fn_800F8548(void);
 extern void fn_80148990(void);
@@ -613,7 +613,7 @@ lbl_fn_802D2844_000007F4:
     cmpwi r3, 0x0
     beq lbl_fn_802D2844_00000808
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_802D2844_00000808:
     stw r29, 0x62c(r31)
     stw r30, 0x628(r31)
@@ -727,7 +727,7 @@ lbl_fn_802D2844_000009A0:
     cmpwi r3, 0x0
     beq lbl_fn_802D2844_000009B4
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_802D2844_000009B4:
     stw r29, 0x62c(r31)
     stw r30, 0x628(r31)
@@ -752,7 +752,7 @@ lbl_fn_802D2844_000009BC:
     lwz r6, 0x624(r31)
     addi r0, r6, 0x1
     stw r0, 0x624(r31)
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_802D2844_00000A20
     li r5, 0x0
@@ -898,7 +898,7 @@ lbl_fn_802D2844_00000C24:
     cmpwi r3, 0x0
     beq lbl_fn_802D2844_00000C38
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_802D2844_00000C38:
     stw r29, 0x62c(r31)
     stw r30, 0x628(r31)
@@ -1012,7 +1012,7 @@ lbl_fn_802D2844_00000DD0:
     cmpwi r3, 0x0
     beq lbl_fn_802D2844_00000DE4
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_802D2844_00000DE4:
     stw r29, 0x62c(r31)
     stw r30, 0x628(r31)
@@ -1085,7 +1085,7 @@ asm void fn_802D30DC(void)
     stfs f2, 0x28(r1)
     fadds f0, f0, f3
     stfs f0, 0x8(r6)
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_802D30DC_00000EFC
     li r4, 0x0
@@ -1201,7 +1201,7 @@ asm void fn_802D32C8(void)
     addi r4, r4, lbl_807470A4@l
     li r5, 0x0
     addi r4, r4, 0x2e3
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_802D32C8_00001098
     li r4, 0x0
@@ -1317,7 +1317,7 @@ lbl_fn_802D3370_00001148:
     li r7, 0x0
     stfs f0, 0x2e8(r31)
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r3, lbl_8087F430
     li r4, 0x32
     li r5, 0x3
@@ -1366,7 +1366,7 @@ lbl_fn_802D3370_00001268:
     stfs f0, 0x2e8(r31)
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     stw r29, 0x15e8(r31)
     stw r29, 0x15ec(r31)
 lbl_fn_802D3370_000012F0:
@@ -1467,7 +1467,7 @@ lbl_fn_802D3370_00001380:
     li r7, 0x0
     stfs f0, 0x2e8(r31)
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r3, lbl_8087F430
     li r4, 0x32
     li r5, 0x3
@@ -1517,7 +1517,7 @@ lbl_fn_802D3370_000014A0:
     stfs f0, 0x2e8(r31)
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     stw r29, 0x15e8(r31)
     stw r29, 0x15ec(r31)
 lbl_fn_802D3370_0000152C:
@@ -1613,7 +1613,7 @@ lbl_fn_802D3370_000015A8:
     li r7, 0x0
     stfs f0, 0x2e8(r31)
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r3, lbl_8087F430
     li r4, 0x32
     li r5, 0x3
@@ -1662,7 +1662,7 @@ lbl_fn_802D3370_000016C8:
     li r7, 0x0
     stfs f0, 0x2e8(r31)
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     stw r29, 0x15e8(r31)
     stw r29, 0x15ec(r31)
 lbl_fn_802D3370_00001750:
@@ -1763,7 +1763,7 @@ lbl_fn_802D3370_000017E0:
     li r7, 0x0
     stfs f0, 0x2e8(r31)
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r3, lbl_8087F430
     li r4, 0x32
     li r5, 0x3
@@ -1812,7 +1812,7 @@ lbl_fn_802D3370_00001900:
     li r7, 0x0
     stfs f0, 0x2e8(r31)
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     stw r30, 0x15e8(r31)
     stw r30, 0x15ec(r31)
 lbl_fn_802D3370_00001988:

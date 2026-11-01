@@ -5,13 +5,13 @@
 extern void dtor_80084684(void);
 extern void fn_8000D430(void);
 extern void fn_800119B8(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
 extern void fn_8008CD60(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
-extern void fn_80097C08(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097CCC(void);
 extern void fn_80097E80(void);
 extern void fn_800BFAC8(void);
@@ -307,7 +307,7 @@ asm void fn_801E7FF8(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_801E7FF8_000002E8
     mr r4, r29
@@ -487,7 +487,7 @@ asm void fn_801E8244(void)
     stfs f1, 0x2e8(r3)
     lwz r3, 0x48(r31)
     addi r3, r3, 0xb0
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r30, 0x48(r31)
     addi r3, r1, 0x14
     psq_l f2, 0x58(r31), 0, 0
@@ -1600,7 +1600,7 @@ asm void fn_801E9218(void)
     stfs f0, 0x2e8(r3)
     lwz r3, 0x48(r29)
     addi r3, r3, 0xb0
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
 lbl_fn_801E9218_00001540:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1655,7 +1655,7 @@ asm void fn_801E92D4(void)
     li r7, 0x1
     li r8, 0x1
     addi r3, r3, 0xb0
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
 lbl_fn_801E92D4_00001604:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
@@ -1685,7 +1685,7 @@ asm void fn_801E9398(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_801E9398_000016C8

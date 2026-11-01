@@ -24,7 +24,7 @@ extern void fn_8001BEB0(void);
 extern void fn_8001BF44(void);
 extern void fn_8001BF58(void);
 extern void fn_8001BF64(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_8067E23C(void);
 extern void fn_80680770(void);
 extern void fn_80680CF8(void);
@@ -4999,7 +4999,7 @@ asm void fn_8003DD50(void)
     bl fn_80686EA4
 lbl_fn_8003DD50_00004458:
     li r3, 0x1c
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r26, r3
     bne lbl_fn_8003DD50_0000448C

@@ -16,7 +16,7 @@ extern void fn_8000D124(void);
 extern void fn_8000D844(void);
 extern void fn_8001047C(void);
 extern void fn_8004D388(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_800EC204(void);
 extern void fn_80121F00(void);
 extern void fn_8013C504(void);
@@ -824,7 +824,7 @@ lbl_fn_8032AC1C_00000A40:
     bl fn_80686EA4
 lbl_fn_8032AC1C_00000A74:
     mulli r3, r28, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_8032AC1C_00000AA8
@@ -1312,7 +1312,7 @@ lbl_fn_8032B314_0000114C:
     bl fn_80686EA4
 lbl_fn_8032B314_00001180:
     slwi r3, r31, 4
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r28, r3
     bne lbl_fn_8032B314_000011B4
@@ -1461,7 +1461,7 @@ asm void fn_8032B6F8(void)
 lbl_fn_8032B6F8_00001394:
     slwi r30, r29, 2
     mr r3, r30
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_8032B6F8_000013CC
@@ -1531,7 +1531,7 @@ asm void fn_8032B7F0(void)
 lbl_fn_8032B7F0_0000148C:
     slwi r26, r28, 2
     mr r3, r26
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_8032B7F0_000014C4
@@ -1579,7 +1579,7 @@ lbl_fn_8032B7F0_000014F0:
 lbl_fn_8032B7F0_00001540:
     slwi r26, r28, 2
     mr r3, r26
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_8032B7F0_00001578
@@ -1627,7 +1627,7 @@ lbl_fn_8032B7F0_000015A4:
 lbl_fn_8032B7F0_000015F4:
     slwi r26, r28, 2
     mr r3, r26
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_8032B7F0_0000162C

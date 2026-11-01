@@ -6,7 +6,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void item_useConsumable(void);
 extern void fn_8004ED34(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_80116BD4(void);
 extern void world_getGlobalFlag(void);
 extern void fn_8038E540(void);
@@ -358,7 +358,7 @@ lbl_fn_8038B148_00000410:
     mr r3, r29
     addi r4, r4, 0x1eb
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_8038B148_00000444
     li r4, 0x0
@@ -531,7 +531,7 @@ lbl_fn_8038B148_000005CC:
     stw r6, 0x838(r30)
     stw r0, 0x83c(r30)
     stw r6, 0x808(r30)
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_8038B148_000006D8
     li r5, 0x0

@@ -8,7 +8,7 @@ extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_80680770(void);
 extern void fn_80686EA4(void);
 extern u32 strlen(const char* str);
@@ -328,7 +328,7 @@ lbl_fn_80577E00_000003E4:
     bl fn_80686EA4
 lbl_fn_80577E00_00000418:
     slwi r3, r28, 5
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r26, r3
     bne lbl_fn_80577E00_0000044C
@@ -868,7 +868,7 @@ lbl_fn_8057854C_00000B98:
     bl fn_80686EA4
 lbl_fn_8057854C_00000BCC:
     mulli r3, r28, 0x28
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_8057854C_00000C00
@@ -1603,7 +1603,7 @@ lbl_fn_80578F58_0000160C:
     bl fn_80686EA4
 lbl_fn_80578F58_00001640:
     mulli r3, r28, 0x48
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r26, r3
     bne lbl_fn_80578F58_00001674

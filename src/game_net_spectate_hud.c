@@ -12,7 +12,7 @@ extern void entry_callCtors(void);
 extern void fn_80010374(void);
 extern void fn_80011964(void);
 extern void fn_80012A1C(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_800928B0(void);
 extern void fn_80539CF0(void);
 extern void fn_8053A16C(void);
@@ -1660,7 +1660,7 @@ lbl_fn_805393FC_000014A0:
     bl fn_80686EA4
 lbl_fn_805393FC_000014D0:
     slwi r3, r31, 3
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_805393FC_00001504

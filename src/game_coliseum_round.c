@@ -9,8 +9,8 @@ extern void dtor_80084684(void);
 extern void fn_8000DB1C(void);
 extern void fn_80042108(void);
 extern void fn_8007A154(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_8008B964(void);
 extern void fn_800C16B4(void);
 extern void fn_800C2448(void);
@@ -1244,7 +1244,7 @@ asm void fn_8048FE88(void)
     la r5, lbl_8087E0A4
     la r6, lbl_8087E0A0
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8048FE88_00001058
     mr r4, r31
@@ -1517,7 +1517,7 @@ lbl_fn_80490098_0000133C:
     bl fn_80686EA4
 lbl_fn_80490098_00001370:
     mulli r3, r31, 0x194
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_80490098_000013A4

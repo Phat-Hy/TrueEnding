@@ -6,7 +6,7 @@ extern void __register_global_object(void);
 extern void dtor_80084684(void);
 extern void fn_80013F78(void);
 extern void fn_8004FF58(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
@@ -1163,7 +1163,7 @@ asm void fn_80201E78(void)
     li r4, 0x8
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80201E78_00001010
     mr r4, r29

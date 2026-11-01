@@ -5,13 +5,13 @@
 extern void __files(void);
 extern void dtor_80084684(void);
 extern void fn_80053BD0(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_8008BBD8(void);
-extern void fn_80092814(void);
-extern void fn_80097C08(void);
+extern void atn_Model_findBoneIndex(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097CCC(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_801539E0(void);
 extern void fn_80155DAC(void);
 extern void fn_80178018(void);
@@ -175,7 +175,7 @@ lbl_fn_801C5A04_000000B8:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     b lbl_fn_801C5A04_000001F0
 lbl_fn_801C5A04_00000120:
     lwz r5, 0x4(r31)
@@ -205,7 +205,7 @@ lbl_fn_801C5A04_00000120:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     b lbl_fn_801C5A04_000001F0
 lbl_fn_801C5A04_00000194:
     fmr f1, f0
@@ -216,7 +216,7 @@ lbl_fn_801C5A04_00000194:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, 0x10(r31)
     addi r3, r1, 0x14
     lfs f3, 0xc(r31)
@@ -509,7 +509,7 @@ lbl_fn_801C5C50_000005E4:
     lfs f30, 0x234(r30)
     mr r3, r30
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f30, f1
     cror eq, gt, eq
     bne lbl_fn_801C5C50_00000608
@@ -712,7 +712,7 @@ lbl_fn_801C61EC_00000898:
     lwz r5, 0x488(r3)
     mr r3, r29
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     li r0, 0x1
     stw r0, 0x34c(r29)
     lfs f0, lbl_808827B0
@@ -721,7 +721,7 @@ lbl_fn_801C61EC_00000898:
     li r4, 0x0
     lfs f0, lbl_80882820
     stfs f0, 0x238(r29)
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     stfs f1, 0x234(r29)
     addi r3, r1, 0x60
     lfs f3, lbl_808827AC
@@ -861,7 +861,7 @@ lbl_fn_801C6464_00000AFC:
     li r4, 0x0
     fabs f0, f0
     frsp f30, f0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fdivs f4, f1, f30
     lfs f3, lbl_80882824
     lfs f0, 0x30(r30)
@@ -878,7 +878,7 @@ lbl_fn_801C6464_00000AFC:
     lfs f2, lbl_808827B8
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     li r0, 0x1
     stw r0, 0x34c(r29)
     lfs f0, lbl_808827B0
@@ -1150,7 +1150,7 @@ lbl_fn_801C6464_00000E8C:
     lfs f2, lbl_808827B8
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     li r0, 0x1
     stw r0, 0x34c(r29)
     lfs f0, lbl_8088282C
@@ -1431,7 +1431,7 @@ asm void fn_801C6CDC(void)
     addi r5, r5, 0x30
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_801C6CDC_00001360
     lwz r4, 0x4(r30)
@@ -1497,7 +1497,7 @@ lbl_fn_801C6CDC_000013E4:
     stw r5, 0x30(r1)
     stw r4, 0x34(r1)
     stw r0, 0x38(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_801C6CDC_0000147C
@@ -1720,7 +1720,7 @@ asm void fn_801C706C(void)
     stfs f0, 0x2e8(r9)
     lwz r3, 0x8(r3)
     addi r3, r3, 0xb0
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r3, 0x8(r30)
     lis r4, lbl_8073B8E8@ha
     lwz r6, 0xc(r30)
@@ -1732,7 +1732,7 @@ asm void fn_801C706C(void)
     stfs f2, 0x18(r30)
     mr r3, r31
     psq_st f1, 0x10(r30), 0, 0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_801C706C_00001758
     li r5, 0x0
@@ -1788,7 +1788,7 @@ asm void fn_801C71A8(void)
     lwz r5, 0x8(r3)
     lfs f31, 0x2e4(r5)
     addi r3, r5, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f31, f1
     bge lbl_fn_801C71A8_00001954
     lwz r3, 0x8(r31)
@@ -1800,7 +1800,7 @@ asm void fn_801C71A8(void)
     b lbl_fn_801C71A8_0000183C
 lbl_fn_801C71A8_00001830:
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fdivs f31, f30, f1
 lbl_fn_801C71A8_0000183C:
     lfs f3, 0x24(r31)

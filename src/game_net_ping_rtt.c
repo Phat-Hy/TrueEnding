@@ -13,10 +13,10 @@ extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013F78(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_80087E9C(void);
 extern void fn_80088FAC(void);
 extern void fn_8008937C(void);
@@ -349,7 +349,7 @@ lbl_fn_80516008_000002E4:
     bl fn_80686EA4
 lbl_fn_80516008_00000304:
     slwi r3, r16, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r26, r3
     bne lbl_fn_80516008_0000032C
@@ -911,7 +911,7 @@ asm void fn_805169FC(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805169FC_00000B20
     mr r4, r31
@@ -1002,7 +1002,7 @@ lbl_fn_80516A60_00000BB8:
     stw r3, 0x50(r31)
     beq lbl_fn_80516A60_00000C50
     subi r3, r4, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80516A60_00000C50:
     lis r6, lbl_8075BAD0@ha
     lwz r4, 0x4c(r31)

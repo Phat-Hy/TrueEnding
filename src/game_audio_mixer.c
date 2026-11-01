@@ -6,9 +6,9 @@ extern void fn_80040B40(void);
 extern void fn_8004D314(void);
 extern void fn_8004ED34(void);
 extern void fn_80092954(void);
-extern void fn_80097C08(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097CCC(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800CB5C8(void);
 extern void fn_800F8548(void);
 extern void fn_800F8C6C(void);
@@ -1055,7 +1055,7 @@ lbl_fn_802F8A60_00000D74:
     li r7, 0x1
     li r8, 0x1
     stfs f1, 0x2e8(r31)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     mr r3, r31
     li r4, 0xc8
     bl fn_80232B7C
@@ -1155,7 +1155,7 @@ lbl_fn_802F8CA4_00000EE0:
     stfs f0, 0x2e8(r31)
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f3, 0x8(r29)
     addi r3, r31, 0xb0
     lfs f0, 0x8(r30)
@@ -1170,7 +1170,7 @@ lbl_fn_802F8CA4_00000EE0:
     fadds f0, f3, f0
     stfs f4, 0xc(r1)
     stfs f0, 0x8(r1)
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fctiwz f0, f1
     lis r4, 0x4330
     lis r3, lbl_80748760@ha
@@ -1787,7 +1787,7 @@ lbl_fn_802F93F0_00001814:
     stfs f0, 0x2e8(r31)
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r3, 0x1530(r31)
     cmpwi r3, 0x0
     beq lbl_fn_802F93F0_000018AC
@@ -1854,7 +1854,7 @@ lbl_fn_802F93F0_0000190C:
     stfs f0, 0x2e8(r31)
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
 lbl_fn_802F93F0_00001990:
     lwz r0, 0x44(r1)
     psq_l f31, 0x38(r1), 0, 0

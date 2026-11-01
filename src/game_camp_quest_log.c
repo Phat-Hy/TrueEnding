@@ -18,7 +18,7 @@ extern void fn_800422CC(void);
 extern void fn_8005B3CC(void);
 extern void fn_8005B5F8(void);
 extern void fn_800827E0(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_80089ACC(void);
 extern void fn_8008AD4C(void);
 extern void lockon_updateTarget(void);
@@ -655,7 +655,7 @@ lbl_fn_803C3894_00000658:
     li r3, 0x3d0
     li r4, 0xc
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r19, r3
     beq lbl_fn_803C3894_000006AC

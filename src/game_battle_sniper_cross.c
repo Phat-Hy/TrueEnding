@@ -12,7 +12,7 @@ extern void fn_80057F28(void);
 extern void fn_8005B9CC(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
 extern void lockon_updateTarget(void);
@@ -53,7 +53,7 @@ extern void fn_805F89F0(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXScale(void);
 extern void PSVECMag(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern u32 strlen(const char* str);
@@ -231,7 +231,7 @@ asm void fn_803F69E4(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_803F69E4_000001E4
@@ -585,7 +585,7 @@ lbl_fn_803F6E0C_00000600:
     cmpwi r0, 0x3b
     beq lbl_fn_803F6E0C_0000080C
     addi r4, r30, 0x1
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803F6E0C_00000684
     mr r5, r30
@@ -593,7 +593,7 @@ lbl_fn_803F6E0C_00000600:
     li r3, 0x3d0
     li r4, 0xc
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_803F6E0C_00000654
     li r4, 0x8
@@ -615,7 +615,7 @@ lbl_fn_803F6E0C_00000654:
 lbl_fn_803F6E0C_00000684:
     mr r3, r28
     addi r4, r30, 0x7
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803F6E0C_000006D4
     addi r28, r31, 0xf8
@@ -638,7 +638,7 @@ lbl_fn_803F6E0C_000006C0:
 lbl_fn_803F6E0C_000006D4:
     mr r3, r28
     addi r4, r30, 0xb
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803F6E0C_00000724
     addi r28, r31, 0x104
@@ -661,7 +661,7 @@ lbl_fn_803F6E0C_00000710:
 lbl_fn_803F6E0C_00000724:
     mr r3, r28
     addi r4, r30, 0xf
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803F6E0C_00000780
     addi r28, r31, 0x110
@@ -687,7 +687,7 @@ lbl_fn_803F6E0C_0000076C:
 lbl_fn_803F6E0C_00000780:
     mr r3, r28
     addi r4, r30, 0x12
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803F6E0C_000007D4
     addi r3, r1, 0x8
@@ -695,7 +695,7 @@ lbl_fn_803F6E0C_00000780:
     b lbl_fn_803F6E0C_000007C4
 lbl_fn_803F6E0C_000007A0:
     addi r4, r30, 0x17
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803F6E0C_000007BC
     lwz r0, 0x16c(r31)
@@ -712,13 +712,13 @@ lbl_fn_803F6E0C_000007C4:
 lbl_fn_803F6E0C_000007D4:
     mr r3, r28
     addi r4, r30, 0x23
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803F6E0C_0000080C
     addi r3, r1, 0x8
     bl fn_8005B9CC
     addi r4, r30, 0x28
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     li r0, 0x1
     bne lbl_fn_803F6E0C_00000808
@@ -1006,7 +1006,7 @@ asm void fn_803F744C(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_803F744C_00000C00
     mr r4, r29
@@ -1044,7 +1044,7 @@ asm void fn_803F74D0(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_803F74D0_00000C7C
     lwz r5, 0x18(r31)

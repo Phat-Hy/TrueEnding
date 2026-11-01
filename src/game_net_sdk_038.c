@@ -16,7 +16,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_80680CF8(void);
 extern void fn_80680D18(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80684600(void);
 extern void fn_806A420C(void);
 extern void fn_806A4264(void);
@@ -1625,7 +1625,7 @@ lbl_fn_806EFB80_00001418:
     lis r4, lbl_807C5158@ha
     mr r3, r27
     addi r4, r4, lbl_807C5158@l
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_806EFB80_0000146C
     mr r3, r27

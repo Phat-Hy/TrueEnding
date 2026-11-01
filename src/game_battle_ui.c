@@ -5,7 +5,7 @@
 extern void _restgpr_23(void);
 extern void _savegpr_23(void);
 extern void fn_8004ED34(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_80134208(void);
 extern void fn_801346C8(void);
 extern void fn_8016E970(void);
@@ -487,7 +487,7 @@ lbl_fn_80172EFC_000005E0:
     stfs f0, 0x84(r1)
     li r7, 0x0
     stw r0, 0x13ac(r27)
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80172EFC_00000640
@@ -920,7 +920,7 @@ lbl_fn_8017380C_00000B1C:
     stfs f3, 0x60(r1)
     li r7, 0x0
     stw r30, 0x13ac(r29)
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8017380C_00000C8C
@@ -1108,7 +1108,7 @@ lbl_fn_8017380C_00000F00:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8017380C_00000F68
@@ -1722,7 +1722,7 @@ lbl_fn_80174104_000017E8:
     psq_st f1, 0x0(r30), 0, 0
     li r7, 0x0
     stfs f2, 0xf4(r1)
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80174104_00001844

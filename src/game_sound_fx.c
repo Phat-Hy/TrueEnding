@@ -20,7 +20,7 @@ extern void fn_8005B3CC(void);
 extern void fn_8008B140(void);
 extern void fn_80097510(void);
 extern void fn_80097A20(void);
-extern void fn_80097C08(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097D40(void);
 extern void fn_800C344C(void);
 extern void fn_800CB3A0(void);
@@ -95,7 +95,7 @@ extern void fn_8054D798(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
-extern void fn_80682544(void);
+extern void strncmp(void);
 extern void fn_80684600(void);
 extern void fn_806868C4(void);
 
@@ -1536,7 +1536,7 @@ asm void fn_800EBD00(void)
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     li r31, 0x0
 lbl_fn_800EBD00_00001398:
     mr r4, r31
@@ -1705,7 +1705,7 @@ lbl_fn_800EBF1C_000015C0:
     bl fn_8004212C
     addi r4, r29, 0x85
     li r5, 0x5
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_800EBF1C_000016A0
     addi r3, r1, 0x98
@@ -1762,7 +1762,7 @@ lbl_fn_800EBF1C_000016A0:
     bl fn_8004212C
     addi r4, r29, 0x8b
     li r5, 0xd
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_800EBF1C_0000172C
     addi r3, r1, 0x98
@@ -1798,7 +1798,7 @@ lbl_fn_800EBF1C_0000172C:
     bl fn_8004212C
     addi r4, r29, 0x99
     li r5, 0xe
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_800EBF1C_000017B0
     addi r3, r1, 0x98

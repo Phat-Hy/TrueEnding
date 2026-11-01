@@ -2,9 +2,9 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_80097C08(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097D40(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
 extern void fn_800CB3A0(void);
 extern void fn_80106878(void);
@@ -166,7 +166,7 @@ lbl_fn_8018B090_0000012C:
     lfs f29, 0x234(r30)
     mr r3, r30
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_80881F00
     fsubs f0, f1, f0
     fcmpo cr0, f29, f0
@@ -454,7 +454,7 @@ lbl_fn_8018B48C_00000524:
     lfs f2, lbl_80881F10
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     psq_l f31, 0x28(r1), 0, 0
     mr r3, r30
     lfd f31, 0x20(r1)
@@ -485,7 +485,7 @@ asm void fn_8018B610(void)
     stfs f0, 0x8(r3)
     mr r3, r31
     lfs f31, 0x2e4(r6)
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f31, f1
     ble lbl_fn_8018B610_000005F0
     lfs f1, lbl_80881ED4
@@ -496,7 +496,7 @@ asm void fn_8018B610(void)
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
 lbl_fn_8018B610_000005F0:
     psq_l f31, 0x18(r1), 0, 0
     li r3, 0x0
@@ -569,7 +569,7 @@ asm void fn_8018B6A0(void)
     stfs f0, 0x238(r3)
     lwz r5, 0x4(r31)
     lwz r5, 0x4d8(r5)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r4, 0x4(r31)
     addi r30, r1, 0x14
     lfs f0, 0x24(r31)
@@ -907,7 +907,7 @@ asm void fn_8018BB7C(void)
     stfs f0, 0x238(r3)
     lwz r5, 0x4(r31)
     lwz r5, 0x4e0(r5)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r4, 0x4(r31)
     addi r30, r1, 0x14
     lfs f0, 0x8(r29)
@@ -1283,7 +1283,7 @@ asm void fn_8018C0EC(void)
     stw r0, 0x34c(r3)
     stfs f0, 0x24c(r3)
     stfs f0, 0x238(r3)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r4, 0x4(r31)
     addi r30, r1, 0x14
     lfs f0, 0x8(r29)
@@ -1654,7 +1654,7 @@ asm void fn_8018C6B8(void)
     addi r30, r3, 0xb0
     mr r3, r30
     stfs f0, 0x24c(r30)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r12, 0x0(r31)
     mr r3, r31
     lwz r12, 0x60(r12)

@@ -7,8 +7,8 @@ extern void dtor_80084684(void);
 extern void fn_8004ADF4(void);
 extern void fn_8004B1EC(void);
 extern void fn_8004B338(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_800897D8(void);
 extern void fn_800CB480(void);
 extern void atn_Task_destructor(void);
@@ -684,7 +684,7 @@ asm void fn_8047E4BC(void)
     addi r5, r5, 0x1c7
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8047E4BC_00000874
     mr r4, r31
@@ -922,7 +922,7 @@ lbl_fn_8047E5DC_00000B58:
     bl fn_80686EA4
 lbl_fn_8047E5DC_00000B8C:
     slwi r3, r31, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_8047E5DC_00000BC0
@@ -1151,7 +1151,7 @@ lbl_fn_8047EA34_00000E8C:
 lbl_fn_8047EA34_00000E94:
     addi r26, r27, 0xbc
     li r3, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_8047EA34_00000ECC

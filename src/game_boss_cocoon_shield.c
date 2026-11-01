@@ -29,8 +29,8 @@ extern void fn_8006F420(void);
 extern void fn_8006F72C(void);
 extern void fn_800827E0(void);
 extern void fn_800839EC(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_800846FC(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void fn_800D5908(void);
@@ -59,7 +59,7 @@ extern void fn_80625110(void);
 extern void CXUncompressAny(void);
 extern void fn_80680770(void);
 extern void fn_806823B0(void);
-extern void fn_806827C4(void);
+extern void strstr(void);
 extern void fn_80686A48(void);
 extern void fn_80686EA4(void);
 extern void fn_80695720(void);
@@ -721,7 +721,7 @@ lbl_fn_8046BF88_00000818:
     bne lbl_fn_8046BF88_000008A4
     addi r3, r26, 0x6
     addi r4, r27, 0x1
-    bl fn_806827C4
+    bl strstr
     cmpwi r3, 0x0
     bne lbl_fn_8046BF88_000008A4
     stb r31, 0x5(r26)
@@ -864,7 +864,7 @@ asm void fn_8046C1C8(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8046C1C8_00000AE0
@@ -1080,7 +1080,7 @@ lbl_atn_Arc_decompressChunk_00000D60:
     stw r18, 0x114(r1)
     li r3, 0x54
     lwz r30, 0x4040(r22)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r20, r3
     bne lbl_atn_Arc_decompressChunk_00000D9C
@@ -1175,7 +1175,7 @@ lbl_atn_Arc_decompressChunk_00000EB4:
     li r4, 0x2
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_atn_Arc_decompressChunk_00000F0C
@@ -1315,7 +1315,7 @@ lbl_atn_Arc_decompressChunk_000010B0:
     stw r27, 0x20(r30)
     clrrwi r18, r0, 5
     addi r4, r21, 0x1
-    bl fn_806827C4
+    bl strstr
     neg r0, r3
     or r0, r0, r3
     srwi r0, r0, 31
@@ -1361,7 +1361,7 @@ lbl_atn_Arc_decompressChunk_0000115C:
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r20, r3
     beq lbl_atn_Arc_decompressChunk_000011F4
@@ -1500,7 +1500,7 @@ lbl_atn_Arc_decompressChunk_000012DC:
 lbl_atn_Arc_decompressChunk_00001378:
     addi r19, r29, 0x4
     li r3, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r20, r3
     bne lbl_atn_Arc_decompressChunk_000013B0

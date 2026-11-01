@@ -9,7 +9,7 @@ extern void fn_80041C0C(void);
 extern void fn_80042740(void);
 extern void fn_800846FC(void);
 extern void fn_800928B0(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A555C(void);
 extern void fn_800A5584(void);
 extern void fn_800A55AC(void);
@@ -44,7 +44,7 @@ extern void fn_804768B4(void);
 extern void fn_80476CE4(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
-extern void fn_80682544(void);
+extern void strncmp(void);
 extern void fn_80695720(void);
 extern void fn_80695A50(void);
 extern u32 strlen(const char* str);
@@ -658,7 +658,7 @@ lbl_fn_8012133C_000006D8:
     mulli r0, r4, 0x30
     add r5, r23, r0
     lfs f24, 0x234(r5)
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lwz r0, 0x8(r15)
     fmr f25, f1
     lwz r3, lbl_8087EFA8
@@ -1176,7 +1176,7 @@ lbl_fn_8012133C_00000E24:
     mr r3, r18
     addi r4, r30, 0x14
     li r5, 0xc
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_8012133C_00000E88
     addi r18, r30, 0x21
@@ -1185,7 +1185,7 @@ lbl_fn_8012133C_00000E88:
     mr r3, r18
     addi r4, r30, 0x3b
     li r5, 0xc
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_8012133C_00000EA4
     addi r18, r30, 0x2e

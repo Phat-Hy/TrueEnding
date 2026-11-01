@@ -16,7 +16,7 @@ extern void fn_80012A1C(void);
 extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
 extern void fn_8003E4A4(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800DC880(void);
 extern void fn_800DC980(void);
 extern void fn_800F7250(void);
@@ -1983,7 +1983,7 @@ asm void fn_802251F8(void)
     li r4, 0x4
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_802251F8_00001984
     mr r4, r30

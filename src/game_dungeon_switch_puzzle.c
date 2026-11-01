@@ -10,7 +10,7 @@ extern void _savegpr_19(void);
 extern void _savegpr_22(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_800A58D0(void);
 extern void fn_800BFAC8(void);
 extern void fn_800DC6B4(void);
@@ -208,7 +208,7 @@ lbl_fn_803E2110_00000190:
     bl fn_80686EA4
 lbl_fn_803E2110_000001C4:
     slwi r3, r31, 3
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_803E2110_000001F8

@@ -14,9 +14,9 @@ extern void fn_8005BFCC(void);
 extern void fn_8005C1F8(void);
 extern void fn_8006BA8C(void);
 extern void fn_8006BB6C(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800DC12C(void);
 extern void fn_80204958(void);
 extern void fn_80204E54(void);
@@ -67,8 +67,8 @@ extern void fn_8046DC5C(void);
 extern void fn_8046DD20(void);
 extern void fn_80680770(void);
 extern void fn_8068236C(void);
-extern void fn_80682428(void);
-extern void fn_80682544(void);
+extern void strcmp(void);
+extern void strncmp(void);
 extern void fn_80684600(void);
 extern void fn_80686A48(void);
 extern void fn_80686A64(void);
@@ -800,7 +800,7 @@ lbl_weaponEffect_loadCSV_00000880:
     mr r3, r23
     addi r4, r26, 0x1
     li r5, 0x2
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_weaponEffect_loadCSV_000008E4
     stw r25, 0x10(r1)
@@ -809,7 +809,7 @@ lbl_weaponEffect_loadCSV_000008E4:
     mr r3, r23
     addi r4, r26, 0x4
     li r5, 0x2
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_weaponEffect_loadCSV_00000904
     stw r27, 0x10(r1)
@@ -1166,7 +1166,7 @@ lbl_fn_80207310_00000DB0:
     bl fn_80686EA4
 lbl_fn_80207310_00000DD0:
     slwi r3, r15, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r22, r3
     bne lbl_fn_80207310_00000DF8
@@ -1233,7 +1233,7 @@ lbl_fn_80207310_00000EC8:
     lwz r15, 0x1c(r1)
     cmpwi r3, 0x0
     beq lbl_fn_80207310_00000EDC
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80207310_00000EDC:
     cmpwi r15, 0x0
     stw r15, 0x4(r28)
@@ -1317,7 +1317,7 @@ asm void fn_80207808(void)
     lwz r3, 0x8(r3)
     cmpwi r3, 0x0
     beq lbl_fn_80207808_00000FE8
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80207808_00000FE8:
     li r0, 0x0
     stw r0, 0x8(r30)
@@ -1945,7 +1945,7 @@ lbl_fn_8020805C_00001850:
     addi r4, r31, lbl_8073EA88@l
     li r5, 0x2
     stw r0, 0x0(r30)
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_8020805C_000018A4
     li r0, 0x2
@@ -1962,7 +1962,7 @@ lbl_fn_8020805C_000018A4:
     mr r3, r27
     addi r4, r4, 0x3
     li r5, 0x2
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_8020805C_000018D4
     li r0, 0x1
@@ -2043,13 +2043,13 @@ lbl_fn_80208144_000019B4:
     cmpwi r0, 0x23
     beq lbl_fn_80208144_00001A34
     addi r4, r28, 0x6
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80208144_00001A34
     addi r3, r1, 0x70
     bl fn_8005B3CC
     addi r4, r28, 0x6
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_80208144_00001A34
     addi r3, r1, 0x70
@@ -2134,13 +2134,13 @@ lbl_fn_80208144_00001B14:
     cmpwi r0, 0x23
     beq lbl_fn_80208144_00001CC4
     addi r4, r29, 0x6
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80208144_00001CC4
     addi r3, r1, 0x70
     bl fn_8005B3CC
     addi r4, r29, 0x6
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_80208144_00001CC4
     stw r30, 0x10(r1)

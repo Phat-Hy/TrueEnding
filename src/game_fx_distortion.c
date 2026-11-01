@@ -4,8 +4,8 @@
 /* External function declarations */
 extern void _restgpr_20(void);
 extern void _savegpr_20(void);
-extern void fn_80092814(void);
-extern void fn_80097C08(void);
+extern void atn_Model_findBoneIndex(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800DD3FC(void);
 extern void fn_800F8548(void);
 extern void fn_800F8574(void);
@@ -113,7 +113,7 @@ asm void fn_8028FB30(void)
     li r7, 0x0
     li r8, 0x1
     stfs f0, 0x2e8(r30)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r4, lbl_8087F1E4
     addi r3, r1, 0x8
     lwz r4, 0x334(r4)
@@ -181,7 +181,7 @@ asm void fn_8028FC28(void)
     li r7, 0x0
     li r8, 0x1
     stfs f0, 0x2e8(r30)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     addi r5, r30, 0x1978
     lfs f2, 0x1980(r30)
     addi r4, r1, 0x2c
@@ -287,7 +287,7 @@ asm void fn_8028FDB0(void)
     li r7, 0x0
     li r8, 0x1
     stfs f0, 0x2e8(r30)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r6, 0x14b0(r30)
     addi r3, r1, 0x5c
     addi r5, r1, 0x68
@@ -628,7 +628,7 @@ lbl_fn_80290088_000007E4:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     b lbl_fn_80290088_00000848
 lbl_fn_80290088_00000828:
     lfs f2, lbl_80883AA0
@@ -638,7 +638,7 @@ lbl_fn_80290088_00000828:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
 lbl_fn_80290088_00000848:
     lfs f0, 0x538(r30)
     addi r3, r1, 0xb0
@@ -816,7 +816,7 @@ asm void fn_8029055C(void)
     stw r31, 0x3fc(r29)
     stfs f3, 0x2fc(r29)
     stfs f0, 0x2e8(r29)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     li r3, 0x0
     li r4, 0x0
     bl fn_80232B7C
@@ -1207,7 +1207,7 @@ lbl_fn_80290AB4_0000108C:
     mr r3, r23
     addi r4, r29, 0x339
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80290AB4_000010AC
     li r5, 0x0
@@ -1229,7 +1229,7 @@ lbl_fn_80290AB4_000010B8:
     stfs f20, 0x14(r1)
     stfs f20, 0x18(r1)
     stfs f21, 0x1c(r1)
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80290AB4_000010FC
     li r6, 0x0
@@ -1526,7 +1526,7 @@ asm void fn_8029101C(void)
     li r5, 0x0
     mr r3, r29
     addi r4, r4, 0x33f
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_8029101C_00001550
     li r5, 0x0
@@ -1559,7 +1559,7 @@ lbl_fn_8029101C_0000155C:
     stfs f0, 0x1d4(r1)
     stfs f0, 0x1e4(r1)
     stfs f0, 0x1f4(r1)
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_8029101C_000015CC
     li r4, 0x0
@@ -1815,7 +1815,7 @@ asm void fn_80291440(void)
     stfs f1, 0x8(r1)
     stfs f0, 0xc(r1)
     stfs f1, 0x10(r1)
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80291440_00001968
     li r3, 0x0

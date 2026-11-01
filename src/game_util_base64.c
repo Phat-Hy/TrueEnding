@@ -12,7 +12,7 @@ extern void dtor_80084684(void);
 extern void fn_8004B0E4(void);
 extern void fn_8004B158(void);
 extern void fn_8004B1EC(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800CA798(void);
 extern void fn_800CAC48(void);
 extern void fn_800CB480(void);
@@ -1331,7 +1331,7 @@ asm void fn_805A2244(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_805A2244_00001160

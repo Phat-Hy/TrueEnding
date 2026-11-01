@@ -28,8 +28,8 @@ extern void fn_800763FC(void);
 extern void gx_setRenderStateParam(void);
 extern void fn_80076FF8(void);
 extern void fn_8007FAF0(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_80089ACC(void);
 extern void fn_8008B964(void);
 extern void fn_80093D98(void);
@@ -953,7 +953,7 @@ asm void fn_804AC430(void)
     stw r31, 0xc(r1)
     mr r31, r3
     li r3, 0x78
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_804AC430_00000A44
     mr r4, r31
@@ -2108,7 +2108,7 @@ lbl_fn_804AD1EC_00001A20:
     bl fn_80686EA4
 lbl_fn_804AD1EC_00001A40:
     mulli r3, r16, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r17, r3
     bne lbl_fn_804AD1EC_00001A68

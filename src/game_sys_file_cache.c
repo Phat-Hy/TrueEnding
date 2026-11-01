@@ -17,16 +17,16 @@ extern void fn_8005B9AC(void);
 extern void fn_8006A004(void);
 extern void fn_8006B53C(void);
 extern void fn_8006F5E8(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800DC1DC(void);
 extern void fn_800DC6B4(void);
 extern void fn_8046DC5C(void);
 extern void fn_8046DD20(void);
 extern void fn_80680770(void);
 extern void fn_80680CF8(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80684600(void);
 extern void fn_806846C4(void);
 extern void fn_80686A48(void);
@@ -873,13 +873,13 @@ lbl_fn_8021F47C_00000A48:
     cmpwi r0, 0x23
     beq lbl_fn_8021F47C_00000B14
     addi r4, r23, lbl_80742860@l
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8021F47C_00000B14
     addi r3, r1, 0x5c
     bl fn_8005B3CC
     addi r4, r23, lbl_80742860@l
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_8021F47C_00000B14
     lwz r22, 0x58(r1)
@@ -975,14 +975,14 @@ lbl_fn_8021F47C_00000BC0:
     cmpwi r0, 0x23
     beq lbl_fn_8021F47C_00000E70
     addi r4, r27, lbl_80742860@l
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8021F47C_00000E70
     addi r3, r1, 0x5c
     bl fn_8005B3CC
     mr r18, r3
     addi r4, r27, lbl_80742860@l
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_8021F47C_00000E70
     lwz r0, lbl_8087F350
@@ -1263,7 +1263,7 @@ lbl_fn_8021F47C_00000FCC:
     lwz r3, 0x58(r1)
     cmpwi r3, 0x0
     beq lbl_fn_8021F47C_00000FDC
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8021F47C_00000FDC:
     lmw r18, 0x698(r1)
     lwz r0, 0x6d4(r1)
@@ -1670,7 +1670,7 @@ asm void fn_8021FFD8(void)
     bl fn_80686EA4
 lbl_fn_8021FFD8_0000152C:
     li r3, 0x14
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_8021FFD8_00001560
@@ -1840,7 +1840,7 @@ lbl_fn_80220168_00001714:
     bl fn_80686EA4
 lbl_fn_80220168_00001768:
     mulli r3, r20, 0x14
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r17, r3
     bne lbl_fn_80220168_0000179C
@@ -1899,7 +1899,7 @@ lbl_fn_80220168_000017E0:
     bl fn_80686EA4
 lbl_fn_80220168_00001848:
     mulli r3, r17, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r25, r3
     bne lbl_fn_80220168_00001870

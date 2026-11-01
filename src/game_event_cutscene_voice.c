@@ -9,7 +9,7 @@ extern void fn_80042108(void);
 extern void fn_8004AD9C(void);
 extern void fn_8006A250(void);
 extern void fn_80079044(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800874C8(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
@@ -39,7 +39,7 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void fn_805F9D20(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_8068AEA4(void);
 extern void fn_806958E0(void);
 extern void fn_80695B00(void);
@@ -184,7 +184,7 @@ lbl_fn_8047B5CC_000000A0:
     lis r3, lbl_80790090@ha
     lwz r4, lbl_80790090@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_8047B5CC_000000D0
@@ -255,7 +255,7 @@ lbl_fn_8047B6B0_00000184:
     lis r3, lbl_80790098@ha
     lwz r4, lbl_80790098@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_8047B6B0_000001B4
@@ -2622,7 +2622,7 @@ lbl_fn_8047CF7C_000020F0:
     la r5, lbl_8087E0B4
     la r6, lbl_8087E0B0
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_fn_8047CF7C_00002238
@@ -2642,7 +2642,7 @@ lbl_fn_8047CF7C_0000223C:
     la r5, lbl_8087E0AC
     la r6, lbl_8087E0A8
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_fn_8047CF7C_00002280

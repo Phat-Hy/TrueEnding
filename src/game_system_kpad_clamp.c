@@ -18,7 +18,7 @@ extern void fn_80043D58(void);
 extern void fn_8004ED34(void);
 extern void fn_80057A64(void);
 extern void fn_80057A68(void);
-extern void fn_80097C08(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097E80(void);
 extern void fn_800C31F4(void);
 extern void fn_800CB3A0(void);
@@ -721,7 +721,7 @@ lbl_fn_803729B4_00000724:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     b lbl_fn_803729B4_000007C8
 lbl_fn_803729B4_00000790:
     mr r3, r26
@@ -737,7 +737,7 @@ lbl_fn_803729B4_00000790:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
 lbl_fn_803729B4_000007C8:
     mr r3, r26
     bl fn_8000DD0C

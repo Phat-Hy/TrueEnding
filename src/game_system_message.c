@@ -9,7 +9,7 @@ extern void fn_8005B3CC(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_80206B14(void);
 extern void fn_80206B68(void);
 extern void fn_80206B70(void);
@@ -25,7 +25,7 @@ extern void fn_80211480(void);
 extern void fn_80216AFC(void);
 extern void fn_8046DC5C(void);
 extern void fn_8046DD20(void);
-extern void fn_80682544(void);
+extern void strncmp(void);
 extern void fn_80684600(void);
 extern void fn_80695720(void);
 extern void strchr(void);
@@ -849,14 +849,14 @@ lbl_fn_80212F68_00000AE4:
     mr r3, r27
     addi r4, r29, lbl_8073FA9C@l
     li r5, 0x2
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     beq lbl_fn_80212F68_00000B28
     addi r4, r29, lbl_8073FA9C@l
     mr r3, r27
     addi r4, r4, 0x3
     li r5, 0x2
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_80212F68_00000B5C
 lbl_fn_80212F68_00000B28:
@@ -883,13 +883,13 @@ lbl_fn_80212F68_00000B5C:
     addi r29, r29, lbl_8073FA9C@l
     li r5, 0x2
     addi r4, r29, 0x6
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     beq lbl_fn_80212F68_00000BA4
     mr r3, r27
     addi r4, r29, 0x9
     li r5, 0x2
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_80212F68_00000BD8
 lbl_fn_80212F68_00000BA4:
@@ -1210,7 +1210,7 @@ lbl_fn_802130BC_0000103C:
     cmpwi r3, 0x0
     beq lbl_fn_802130BC_00001050
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_802130BC_00001050:
     stw r25, 0x14(r30)
     stw r29, 0x10(r30)
@@ -1369,7 +1369,7 @@ lbl_fn_802130BC_0000129C:
     cmpwi r3, 0x0
     beq lbl_fn_802130BC_000012B0
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_802130BC_000012B0:
     stw r24, 0x14(r30)
     stw r25, 0x10(r30)
@@ -1569,7 +1569,7 @@ lbl_fn_802137DC_00001584:
     cmpwi r3, 0x0
     beq lbl_fn_802137DC_00001598
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_802137DC_00001598:
     li r4, 0x2
     li r0, 0x0
@@ -1616,7 +1616,7 @@ asm void fn_80213A98(void)
     beq lbl_fn_80213A98_00001628
     beq lbl_fn_80213A98_00001628
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80213A98_00001628:
     cmpwi r31, 0x0
     ble lbl_fn_80213A98_00001638

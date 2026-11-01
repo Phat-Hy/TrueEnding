@@ -5,12 +5,12 @@
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void fn_80013F78(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_80087E9C(void);
 extern void fn_8008937C(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_800A55AC(void);
 extern void fn_800CB3A0(void);
 extern void atn_Task_setActive(void);
@@ -793,7 +793,7 @@ lbl_fn_805118B8_00000940:
     addi r4, r4, lbl_8075B2B8@l
     li r5, 0x0
     addi r4, r4, 0x3
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_805118B8_00000968
     li r4, 0x0
@@ -873,7 +873,7 @@ lbl_fn_805119CC_00000A54:
     addi r4, r4, lbl_8075B2B8@l
     li r5, 0x0
     addi r4, r4, 0x3
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_805119CC_00000A7C
     li r4, 0x0
@@ -1366,7 +1366,7 @@ lbl_fn_8051202C_00001108:
     mr r3, r26
     mr r4, r31
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_8051202C_00001128
     li r0, 0x0
@@ -1401,7 +1401,7 @@ lbl_fn_8051202C_00001180:
     mr r3, r26
     mr r4, r31
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_8051202C_000011A0
     li r3, 0x0
@@ -1509,7 +1509,7 @@ lbl_fn_8051202C_00001320:
     mr r3, r26
     mr r4, r31
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_8051202C_00001340
     li r3, 0x0
@@ -1665,7 +1665,7 @@ lbl_fn_80512478_00001554:
     mr r3, r26
     mr r4, r31
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80512478_00001574
     li r0, 0x0
@@ -1700,7 +1700,7 @@ lbl_fn_80512478_000015CC:
     mr r3, r26
     mr r4, r31
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80512478_000015EC
     li r3, 0x0
@@ -1808,7 +1808,7 @@ lbl_fn_80512478_0000176C:
     mr r3, r26
     mr r4, r31
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80512478_0000178C
     li r3, 0x0
@@ -1932,7 +1932,7 @@ asm void fn_805128C4(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_805128C4_00001A54
@@ -1996,7 +1996,7 @@ lbl_fn_805128C4_000019B4:
     stw r3, 0xd4(r30)
     beq lbl_fn_805128C4_00001A40
     subi r3, r4, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_805128C4_00001A40:
     lis r4, lbl_8075B510@ha
     addi r3, r30, 0xd8

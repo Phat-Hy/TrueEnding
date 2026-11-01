@@ -45,7 +45,7 @@ extern void fn_806077F0(void);
 extern void fn_806078A0(void);
 extern void fn_806078E0(void);
 extern void fn_806820D4(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80683B54(void);
 extern void fn_80684600(void);
 extern u32 strlen(const char* str);
@@ -1540,7 +1540,7 @@ lbl_fn_805B7B28_0000133C:
     bl fn_8005B9CC
     mr r25, r3
     addi r4, r29, 0x29
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_805B7B28_000013B4
     addi r3, r1, 0x118
@@ -1571,7 +1571,7 @@ lbl_fn_805B7B28_00001380:
 lbl_fn_805B7B28_000013B4:
     mr r3, r25
     addi r4, r29, 0x2e
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_805B7B28_00001424
     addi r3, r1, 0x118
@@ -1602,7 +1602,7 @@ lbl_fn_805B7B28_000013F0:
 lbl_fn_805B7B28_00001424:
     mr r3, r25
     addi r4, r29, 0x36
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_805B7B28_00001470
     addi r3, r1, 0x118
@@ -1622,7 +1622,7 @@ lbl_fn_805B7B28_00001424:
 lbl_fn_805B7B28_00001470:
     mr r3, r25
     addi r4, r29, 0x3b
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_805B7B28_000014C4
     addi r3, r1, 0x118
@@ -1644,7 +1644,7 @@ lbl_fn_805B7B28_00001470:
 lbl_fn_805B7B28_000014C4:
     mr r3, r25
     addi r4, r29, 0x42
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_805B7B28_00001658
     addi r3, r1, 0x118
@@ -1681,7 +1681,7 @@ lbl_fn_805B7B28_00001514:
     mr r25, r3
     mr r3, r29
     mr r4, r25
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_805B7B28_00001514
     mr r4, r30
@@ -1749,7 +1749,7 @@ lbl_fn_805B7B28_0000160C:
 lbl_fn_805B7B28_00001658:
     mr r3, r25
     addi r4, r29, 0x55
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_805B7B28_000017E8
     addi r3, r1, 0x118
@@ -1786,7 +1786,7 @@ lbl_fn_805B7B28_000016A8:
     mr r25, r3
     mr r3, r29
     mr r4, r25
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_805B7B28_000016A8
     mr r4, r31

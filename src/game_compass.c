@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void DCZeroRange(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_80089ACC(void);
 extern void fn_8008B964(void);
 extern void atn_Matrix_copy(void);
@@ -55,7 +55,7 @@ void fn_80091CFC(void);
 void fn_800920B8(void);
 void fn_8009246C(void);
 void fn_80092768(void);
-void fn_80092814(void);
+void atn_Model_findBoneIndex(void);
 void fn_800928B0(void);
 void fn_8009290C(void);
 void fn_80092954(void);
@@ -1040,7 +1040,7 @@ lbl_fn_80091CFC_00000E10:
     bdnz lbl_fn_80091CFC_00000E10
 lbl_fn_80091CFC_00000E28:
     lwz r3, 0xd4(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80091CFC_00000E30:
     li r0, 0x8
     stw r31, 0xd4(r28)
@@ -1134,7 +1134,7 @@ lbl_fn_80091CFC_00000F6C:
     bdnz lbl_fn_80091CFC_00000F6C
 lbl_fn_80091CFC_00000F84:
     lwz r3, 0xd4(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80091CFC_00000F8C:
     stw r30, 0xd4(r28)
     stw r31, 0xd0(r28)
@@ -1305,7 +1305,7 @@ lbl_fn_800920B8_000011C4:
     bdnz lbl_fn_800920B8_000011C4
 lbl_fn_800920B8_000011DC:
     lwz r3, 0xd4(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800920B8_000011E4:
     li r0, 0x8
     stw r29, 0xd4(r28)
@@ -1399,7 +1399,7 @@ lbl_fn_800920B8_00001320:
     bdnz lbl_fn_800920B8_00001320
 lbl_fn_800920B8_00001338:
     lwz r3, 0xd4(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800920B8_00001340:
     stw r30, 0xd4(r28)
     stw r29, 0xd0(r28)
@@ -1705,7 +1705,7 @@ lbl_fn_80092768_0000172C:
     blr
 }
 
-asm void fn_80092814(void)
+asm void atn_Model_findBoneIndex(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1721,30 +1721,30 @@ asm void fn_80092814(void)
     add r4, r30, r0
     lwz r5, 0x16c(r4)
     cmpwi r5, 0x0
-    bne lbl_fn_80092814_00001780
+    bne lbl_atn_Model_findBoneIndex_00001780
     li r6, -0x1
-    b lbl_fn_80092814_000017C0
-lbl_fn_80092814_00001780:
+    b lbl_atn_Model_findBoneIndex_000017C0
+lbl_atn_Model_findBoneIndex_00001780:
     lwz r0, 0x44(r5)
     li r6, 0x0
     li r7, 0x0
     mtctr r0
     cmpwi r0, 0x0
-    ble lbl_fn_80092814_000017BC
-lbl_fn_80092814_00001798:
+    ble lbl_atn_Model_findBoneIndex_000017BC
+lbl_atn_Model_findBoneIndex_00001798:
     lwz r4, 0x48(r5)
     lwzx r4, r4, r7
     lwz r0, 0x14(r4)
     cmplw r3, r0
-    bne lbl_fn_80092814_000017B0
-    b lbl_fn_80092814_000017C0
-lbl_fn_80092814_000017B0:
+    bne lbl_atn_Model_findBoneIndex_000017B0
+    b lbl_atn_Model_findBoneIndex_000017C0
+lbl_atn_Model_findBoneIndex_000017B0:
     addi r7, r7, 0x4
     addi r6, r6, 0x1
-    bdnz lbl_fn_80092814_00001798
-lbl_fn_80092814_000017BC:
+    bdnz lbl_atn_Model_findBoneIndex_00001798
+lbl_atn_Model_findBoneIndex_000017BC:
     li r6, -0x1
-lbl_fn_80092814_000017C0:
+lbl_atn_Model_findBoneIndex_000017C0:
     lwz r31, 0xc(r1)
     mr r3, r6
     lwz r30, 0x8(r1)

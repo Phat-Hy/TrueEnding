@@ -9,12 +9,12 @@ extern void fn_800638B0(void);
 extern void fn_80063D3C(void);
 extern void fn_8007708C(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800897D8(void);
-extern void fn_80092814(void);
-extern void fn_80097C08(void);
+extern void atn_Model_findBoneIndex(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097CCC(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800CB3A0(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DD3FC(void);
@@ -467,7 +467,7 @@ lbl_fn_802FD328_00000470:
     lfs f30, 0x2e4(r31)
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f30, f1
     cror eq, gt, eq
     bne lbl_fn_802FD328_00000514
@@ -529,7 +529,7 @@ lbl_fn_802FD328_00000570:
     lfs f30, 0x2e4(r31)
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f30, f1
     cror eq, gt, eq
     bne lbl_fn_802FD328_00000604
@@ -718,7 +718,7 @@ lbl_fn_802FD328_00000810:
     stfs f0, 0x2e8(r31)
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r4, 0x14ec(r31)
     cmpwi r4, 0x0
     beq lbl_fn_802FD328_00000A80
@@ -895,7 +895,7 @@ lbl_fn_802FD328_00000AAC:
     stfs f0, 0x2e8(r31)
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     addi r3, r1, 0x310
     li r4, 0x0
     li r5, 0x200
@@ -959,7 +959,7 @@ lbl_fn_802FD328_00000B9C:
     stfs f0, 0x2e8(r31)
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     addi r3, r1, 0x110
     li r4, 0x0
     li r5, 0x200
@@ -1527,7 +1527,7 @@ lbl_fn_802FDDAC_000013F0:
     stfs f0, 0x32c(r3)
     stfs f0, 0x318(r3)
     addi r3, r3, 0xb0
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     b lbl_fn_802FDDAC_00001484
 lbl_fn_802FDDAC_0000145C:
     lfs f4, 0x10(r4)
@@ -1643,7 +1643,7 @@ lbl_fn_802FE3E4_0000155C:
     stfs f0, 0x2e8(r30)
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80884A20
     li r4, 0xd0
     stb r31, 0x1684(r30)
@@ -1699,7 +1699,7 @@ lbl_fn_802FE3E4_00001640:
     stfs f0, 0x2e8(r30)
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80884A20
     li r4, 0xd0
     stb r31, 0x1684(r30)
@@ -1875,7 +1875,7 @@ lbl_fn_802FE630_00001958:
     cmpwi r3, 0x0
     beq lbl_fn_802FE630_0000196C
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_802FE630_0000196C:
     stw r29, 0x62c(r31)
     stw r30, 0x628(r31)
@@ -1989,7 +1989,7 @@ lbl_fn_802FE630_00001B04:
     cmpwi r3, 0x0
     beq lbl_fn_802FE630_00001B18
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_802FE630_00001B18:
     stw r29, 0x62c(r31)
     stw r30, 0x628(r31)
@@ -2016,7 +2016,7 @@ lbl_fn_802FE630_00001B20:
     addi r0, r6, 0x1
     stw r0, 0x624(r31)
     stfs f0, 0x48(r1)
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_802FE630_00001B8C
     li r6, 0x0
@@ -2156,7 +2156,7 @@ lbl_fn_802FE630_00001D78:
     cmpwi r3, 0x0
     beq lbl_fn_802FE630_00001D8C
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_802FE630_00001D8C:
     stw r29, 0x62c(r31)
     stw r30, 0x628(r31)
@@ -2270,7 +2270,7 @@ lbl_fn_802FE630_00001F24:
     cmpwi r3, 0x0
     beq lbl_fn_802FE630_00001F38
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_802FE630_00001F38:
     stw r29, 0x62c(r31)
     stw r30, 0x628(r31)
@@ -2299,7 +2299,7 @@ lbl_fn_802FE630_00001F40:
     addi r0, r6, 0x1
     stw r0, 0x624(r31)
     stfs f0, 0x48(r1)
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_802FE630_00001FB4
     li r6, 0x0
@@ -2440,7 +2440,7 @@ lbl_fn_802FE630_000021A4:
     cmpwi r3, 0x0
     beq lbl_fn_802FE630_000021B8
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_802FE630_000021B8:
     stw r29, 0x62c(r31)
     stw r30, 0x628(r31)
@@ -2554,7 +2554,7 @@ lbl_fn_802FE630_00002350:
     cmpwi r3, 0x0
     beq lbl_fn_802FE630_00002364
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_802FE630_00002364:
     stw r29, 0x62c(r31)
     stw r30, 0x628(r31)

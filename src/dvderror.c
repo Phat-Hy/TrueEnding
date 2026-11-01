@@ -26,7 +26,7 @@ extern s32 fn_80602A10(void*);
 extern OSTime OSGetTime(void);
 extern void __div2i(void);
 extern s32 fn_806028A0(void*);
-extern s32 fn_80682544(const void*, const void*, u32);
+extern s32 strncmp(const void*, const void*, u32);
 
 /* Function declarations */
 void fn_805FF800(void);
@@ -747,7 +747,7 @@ asm void fn_80600190(void)
     extsb. r0, r0
     beq lbl_fn_80600190_9dc
     li r5, 0x4
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     beq lbl_fn_80600190_9dc
     li r3, 0x0
@@ -762,7 +762,7 @@ lbl_fn_80600190_9dc:
     addi r3, r30, 0x4
     addi r4, r31, 0x4
     li r5, 0x2
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     beq lbl_fn_80600190_a14
 lbl_fn_80600190_a0c:

@@ -23,7 +23,7 @@ extern void fn_8004B338(void);
 extern void item_useConsumable(void);
 extern void fn_80071088(void);
 extern void fn_80079994(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void atn_Model_setupMeshMaterial(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
@@ -5629,7 +5629,7 @@ lbl_fn_80076C44_00004EB4:
     li r4, 0x6
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80076C44_00005158
     li r0, 0x3

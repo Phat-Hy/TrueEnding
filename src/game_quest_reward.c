@@ -13,8 +13,8 @@ extern void fn_800133B0(void);
 extern void fn_80013404(void);
 extern void fn_80057A68(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
-extern void fn_80092814(void);
+extern void mem_getAllocSize(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_80094E2C(void);
 extern void fn_8010F668(void);
 extern void fn_8012A288(void);
@@ -38,7 +38,7 @@ extern void fn_80565B9C(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXQuat(void);
 extern void PSMTXMultVec(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80695720(void);
 
 /* External data declarations */
@@ -488,7 +488,7 @@ lbl_fn_80147B04_000004F8:
     addi r4, r4, lbl_80737A9C@l
     li r5, 0x0
     addi r4, r4, 0x32d
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80147B04_00000538
     li r30, 0x0
@@ -503,7 +503,7 @@ lbl_fn_80147B04_00000544:
     addi r4, r4, lbl_80737A9C@l
     li r5, 0x0
     addi r4, r4, 0x335
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80147B04_0000056C
     li r29, 0x0
@@ -518,7 +518,7 @@ lbl_fn_80147B04_00000578:
     addi r4, r4, lbl_80737A9C@l
     li r5, 0x0
     addi r4, r4, 0x60
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80147B04_000005A0
     li r5, 0x0
@@ -707,7 +707,7 @@ lbl_fn_80147B04_0000083C:
     addi r4, r4, lbl_80737A9C@l
     li r5, 0x0
     addi r4, r4, 0x60
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80147B04_00000874
     li r3, 0x0
@@ -804,7 +804,7 @@ asm void fn_80148340(void)
     beq lbl_fn_80148340_000009B0
     beq lbl_fn_80148340_000009A8
     subi r3, r4, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80148340_000009A8:
     li r0, 0x0
     stw r0, 0x62c(r31)
@@ -914,7 +914,7 @@ lbl_fn_80148340_00000B30:
     cmpwi r3, 0x0
     beq lbl_fn_80148340_00000B44
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80148340_00000B44:
     stw r29, 0x62c(r31)
     stw r30, 0x628(r31)
@@ -1075,7 +1075,7 @@ lbl_fn_80148340_00000D8C:
     cmpwi r3, 0x0
     beq lbl_fn_80148340_00000DA0
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80148340_00000DA0:
     stw r29, 0x62c(r31)
     stw r30, 0x628(r31)
@@ -1189,7 +1189,7 @@ lbl_fn_80148340_00000F38:
     cmpwi r3, 0x0
     beq lbl_fn_80148340_00000F4C
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80148340_00000F4C:
     stw r29, 0x62c(r31)
     stw r30, 0x628(r31)
@@ -1300,7 +1300,7 @@ lbl_fn_801489CC_000010A0:
     addi r4, r4, lbl_80737A9C@l
     addi r3, r3, 0xb0
     addi r4, r4, 0x60
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_801489CC_000010E0
     li r4, 0x0
@@ -1379,7 +1379,7 @@ lbl_quest_checkCondition_000011B4:
 lbl_quest_checkCondition_000011C0:
     li r5, 0x0
     addi r3, r3, 0xb0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_quest_checkCondition_000011DC
     li r0, 0x0
@@ -1495,7 +1495,7 @@ asm void fn_80148CC4(void)
     addi r29, r29, lbl_80737A9C@l
     mr r3, r28
     addi r4, r29, 0x5b
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80148CC4_0000149C
     lwz r3, 0x648(r30)
@@ -1582,7 +1582,7 @@ lbl_fn_80148CC4_00001478:
 lbl_fn_80148CC4_0000149C:
     mr r3, r28
     addi r4, r29, 0x6c
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80148CC4_000015A8
     lwz r3, 0x12a4(r30)
@@ -1654,7 +1654,7 @@ lbl_fn_80148CC4_0000154C:
 lbl_fn_80148CC4_000015A8:
     mr r3, r28
     addi r4, r29, 0x60
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80148CC4_000016D8
     lwz r0, 0x12a4(r30)
@@ -1736,12 +1736,12 @@ lbl_fn_80148CC4_000016AC:
 lbl_fn_80148CC4_000016D8:
     mr r3, r28
     addi r4, r29, 0x72
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_80148CC4_00001700
     mr r3, r28
     addi r4, r29, 0x80
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80148CC4_000019B0
 lbl_fn_80148CC4_00001700:
@@ -1780,7 +1780,7 @@ lbl_fn_80148CC4_00001770:
     addi r4, r4, lbl_80737A9C@l
     lwz r3, 0x10(r27)
     addi r4, r4, 0x80
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80148CC4_000017D4
     lfs f0, lbl_8088196C
@@ -1839,7 +1839,7 @@ lbl_fn_80148CC4_00001850:
     lwz r3, 0x10(r27)
     addi r4, r4, lbl_80737A9C@l
     addi r4, r4, 0x80
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80148CC4_00001BE8
     addi r3, r1, 0xe8
@@ -1912,7 +1912,7 @@ lbl_fn_80148CC4_00001958:
     addi r4, r4, lbl_80737A9C@l
     lwz r3, 0x10(r27)
     addi r4, r4, 0x80
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80148CC4_00001984
     fneg f1, f30
@@ -1933,7 +1933,7 @@ lbl_fn_80148CC4_00001984:
 lbl_fn_80148CC4_000019B0:
     mr r3, r28
     addi r4, r29, 0xad
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80148CC4_00001BE8
     lwz r3, 0x12a8(r30)
@@ -1944,12 +1944,12 @@ lbl_fn_80148CC4_000019B0:
     addi r3, r30, 0xb0
     addi r4, r29, 0x5b
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     mr r28, r3
     addi r3, r30, 0xb0
     addi r4, r29, 0x56
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r28, 0x0
     mr r29, r3
     blt lbl_fn_80148CC4_00001BE8

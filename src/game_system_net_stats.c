@@ -8,7 +8,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_80043B34(void);
 extern void fn_80043BDC(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800DC6B4(void);
 extern void fn_80109828(void);
 extern void fn_8011F8F4(void);
@@ -227,7 +227,7 @@ lbl_fn_803A5118_00000118:
     addi r3, r29, 0xb0
     stfs f0, 0x2ec(r29)
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     stfs f1, 0x2e4(r29)
     mr r3, r29
     bl fn_80145334

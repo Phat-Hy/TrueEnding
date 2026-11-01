@@ -49,7 +49,7 @@ extern void fn_8059B0F4(void);
 extern void fn_8059B1B8(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80695B00(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -185,7 +185,7 @@ lbl_fn_800F2BE4_00000094:
     lis r3, lbl_80779D98@ha
     lwz r4, lbl_80779D98@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_800F2BE4_000000C4

@@ -12,9 +12,9 @@ extern void fn_8004203C(void);
 extern void fn_8004212C(void);
 extern void fn_8005B3CC(void);
 extern void fn_8005B5F8(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_80089AD4(void);
 extern void fn_8008B140(void);
 extern void atn_Task_constructor(void);
@@ -45,7 +45,7 @@ extern void fn_80547E18(void);
 extern void fn_8054A644(void);
 extern void fn_8054A660(void);
 extern void fn_80680770(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80684600(void);
 extern void fn_80686EA4(void);
 extern void fn_80695720(void);
@@ -865,7 +865,7 @@ asm void fn_8011FF78(void)
 lbl_fn_8011FF78_0000082C:
     lwz r4, 0x0(r31)
     mr r3, r28
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8011FF78_00000848
     mr r3, r30
@@ -1361,7 +1361,7 @@ lbl_fn_801204A8_00000F30:
     cmpwi r3, 0x0
     beq lbl_fn_801204A8_00000F44
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801204A8_00000F44:
     stw r31, 0x8(r29)
     stw r30, 0x0(r29)
@@ -1613,7 +1613,7 @@ lbl_fn_801207D4_00001240:
     bl fn_80686EA4
 lbl_fn_801207D4_00001270:
     mulli r3, r28, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_801207D4_000012A4

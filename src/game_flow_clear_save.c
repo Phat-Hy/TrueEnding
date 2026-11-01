@@ -90,7 +90,7 @@ extern void fn_8050F8B4(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void fn_8067CE80(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80695B28(void);
 extern void fn_806A8E40(void);
 extern void fn_806B0E30(void);
@@ -458,7 +458,7 @@ lbl_fn_804EDB10_00000444:
     mr r22, r3
     mr r3, r23
     mr r4, r22
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_804EDB10_0000054C
     lwz r0, 0xe8(r30)
@@ -470,7 +470,7 @@ lbl_fn_804EDB10_00000478:
     lwz r3, 0xf0(r30)
 lbl_fn_804EDB10_0000047C:
     mr r4, r22
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_804EDB10_0000054C
     b lbl_fn_804EDB10_000004E4

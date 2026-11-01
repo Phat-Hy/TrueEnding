@@ -14,9 +14,9 @@ extern void fn_8004ECC0(void);
 extern void fn_8004ED34(void);
 extern void fn_80057A64(void);
 extern void fn_80063D3C(void);
-extern void fn_80097C08(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097D40(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void atn_Anim_getDuration(void);
 extern void fn_800C344C(void);
 extern void fn_800CB3A0(void);
@@ -58,7 +58,7 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 extern void fn_80695AD0(void);
@@ -292,7 +292,7 @@ lbl_fn_804628B4_000001DC:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80886D8C
     stfs f0, 0x2e8(r31)
     b lbl_fn_804628B4_000003E4
@@ -308,7 +308,7 @@ lbl_fn_804628B4_00000270:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     stfs f30, 0x2e8(r31)
     b lbl_fn_804628B4_000003E4
 lbl_fn_804628B4_000002A8:
@@ -320,7 +320,7 @@ lbl_fn_804628B4_000002A8:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     stfs f29, 0x2e8(r31)
     b lbl_fn_804628B4_000003E4
 lbl_fn_804628B4_000002D4:
@@ -346,7 +346,7 @@ lbl_fn_804628B4_00000304:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f2, lbl_80886D8C
     stfs f28, 0x2fc(r31)
     fsubs f1, f2, f31
@@ -372,7 +372,7 @@ lbl_fn_804628B4_00000364:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f1, lbl_80886D8C
     lfs f0, lbl_80886D60
     fsubs f31, f31, f1
@@ -395,7 +395,7 @@ lbl_fn_804628B4_000003B8:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     stfs f29, 0x348(r31)
     stfs f31, 0x35c(r31)
 lbl_fn_804628B4_000003E4:
@@ -436,7 +436,7 @@ asm void fn_80462CCC(void)
     addi r31, r31, lbl_80755188@l
     mr r3, r30
     addi r4, r31, 0xb1
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80462CCC_000004EC
     lwz r0, 0x648(r28)
@@ -473,7 +473,7 @@ asm void fn_80462CCC(void)
 lbl_fn_80462CCC_000004EC:
     mr r3, r30
     addi r4, r31, 0xb6
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80462CCC_000006C8
     lwz r0, 0x55c(r28)
@@ -596,7 +596,7 @@ lbl_fn_80462CCC_0000069C:
 lbl_fn_80462CCC_000006C8:
     mr r3, r30
     addi r4, r31, 0xbc
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80462CCC_000008A0
     lwz r0, 0x55c(r28)
@@ -1097,7 +1097,7 @@ lbl_fn_80463610_00000DE0:
     lfs f30, 0x2e4(r3)
     li r4, 0x0
     addi r3, r3, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f30, f1
     cror eq, gt, eq
     bne lbl_fn_80463610_00000FC8
@@ -1114,7 +1114,7 @@ lbl_fn_80463610_00000DE0:
     stfs f0, 0x2e8(r31)
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r8, lbl_8087F430
     lis r4, lbl_80755188@ha
     addi r4, r4, lbl_80755188@l
@@ -1157,7 +1157,7 @@ lbl_fn_80463610_00000E98:
 lbl_fn_80463610_00000ECC:
     li r4, 0x0
     addi r3, r3, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f30, f1
     cror eq, gt, eq
     bne lbl_fn_80463610_00000FC8
@@ -1251,7 +1251,7 @@ asm void fn_804638A4(void)
     mr r29, r3
     lfs f30, 0x2e4(r3)
     addi r3, r3, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f30, f1
     cror eq, gt, eq
     bne lbl_fn_804638A4_0000109C
@@ -1534,7 +1534,7 @@ lbl_fn_80463C58_000013FC:
     li r7, 0x0
     stfs f1, 0x2e8(r31)
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     li r0, 0x0
     stw r0, 0x54(r1)
     lfs f6, lbl_80886D60
@@ -1606,7 +1606,7 @@ asm void fn_80463DCC(void)
     mr r30, r3
     lfs f31, 0x2e4(r3)
     addi r3, r3, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f31, f1
     cror eq, gt, eq
     bne lbl_fn_80463DCC_0000164C
@@ -1675,7 +1675,7 @@ lbl_fn_80463DCC_000015FC:
     li r7, 0x0
     stfs f0, 0x2e8(r30)
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
 lbl_fn_80463DCC_0000164C:
     lwz r0, 0x24(r1)
     psq_l f31, 0x18(r1), 0, 0

@@ -10,7 +10,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_22(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_805D2E00(void);
 extern void fn_805D9D10(void);
 extern void fn_805D9D80(void);
@@ -1017,7 +1017,7 @@ lbl_fn_805C0980_00000C14:
     b lbl_fn_805C0980_00000C48
 lbl_fn_805C0980_00000C24:
     li r3, 0x10
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_805C0980_00000C3C
     stw r31, 0x0(r3)
@@ -1599,7 +1599,7 @@ lbl_fn_805C10E0_000013B4:
     b lbl_fn_805C10E0_00001430
 lbl_fn_805C10E0_000013CC:
     li r3, 0x30
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_805C10E0_00001410
@@ -1617,7 +1617,7 @@ lbl_fn_805C10E0_000013CC:
     stw r24, 0x2c(r29)
 lbl_fn_805C10E0_00001410:
     li r3, 0x10
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_805C10E0_0000142C
     subi r0, r27, 0x4

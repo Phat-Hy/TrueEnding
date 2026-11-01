@@ -8,7 +8,7 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_80548760(void);
 extern void fn_8057DB18(void);
 extern void fn_8057DC3C(void);
@@ -239,7 +239,7 @@ lbl_fn_805797C0_0000029C:
     bl fn_80686EA4
 lbl_fn_805797C0_000002D0:
     mulli r3, r28, 0x1c
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r26, r3
     bne lbl_fn_805797C0_00000304
@@ -749,7 +749,7 @@ lbl_fn_80579EF8_000009E0:
     bl fn_80686EA4
 lbl_fn_80579EF8_00000A14:
     slwi r3, r28, 5
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r26, r3
     bne lbl_fn_80579EF8_00000A48
@@ -1258,7 +1258,7 @@ lbl_fn_8057A644_00001120:
     bl fn_80686EA4
 lbl_fn_8057A644_00001154:
     mulli r3, r28, 0x1c
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r26, r3
     bne lbl_fn_8057A644_00001188
@@ -1975,7 +1975,7 @@ lbl_fn_8057B0D8_00001B4C:
     bl fn_80686EA4
 lbl_fn_8057B0D8_00001B80:
     slwi r3, r28, 4
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_8057B0D8_00001BB4

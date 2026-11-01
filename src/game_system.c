@@ -24,20 +24,20 @@ extern void fn_8000DDA0(void);
 extern void fn_8000DE3C(void);
 extern void fn_8000DE44(void);
 extern void fn_800697D8(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_8008B140(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_800929C0(void);
 extern void fn_8009373C(void);
 extern void fn_80093E90(void);
 extern void fn_80094420(void);
 extern void fn_80097A20(void);
-extern void fn_80097C08(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097CCC(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
@@ -240,7 +240,7 @@ lbl_fn_8000E18C_00000180:
     bl fn_80686EA4
 lbl_fn_8000E18C_000001B0:
     slwi r3, r31, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r28, r3
     bne lbl_fn_8000E18C_000001E4
@@ -533,7 +533,7 @@ lbl_fn_8000E6B0_00000594:
     la r6, lbl_8087D6CC
     li r7, 0x0
     lwz r30, 0x24(r8)
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_8000E6B0_00000608
@@ -1464,7 +1464,7 @@ lbl_fn_8000F1EC_000011BC:
     beq lbl_fn_8000F1EC_00001240
     beq lbl_fn_8000F1EC_00001238
     subi r3, r7, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8000F1EC_00001238:
     li r0, 0x0
     stw r0, 0x2c(r29)
@@ -1578,7 +1578,7 @@ lbl_fn_8000F1EC_000013C8:
     cmpwi r3, 0x0
     beq lbl_fn_8000F1EC_000013DC
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8000F1EC_000013DC:
     stw r17, 0x2c(r29)
     li r5, 0x0
@@ -1744,7 +1744,7 @@ lbl_fn_8000F1EC_00001618:
     bl fn_80686EA4
 lbl_fn_8000F1EC_00001638:
     slwi r3, r16, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r23, r3
     bne lbl_fn_8000F1EC_00001660
@@ -2116,7 +2116,7 @@ lbl_fn_8000FAE8_00001B50:
     li r7, 0x0
     lwz r5, 0x484(r5)
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
 lbl_fn_8000FAE8_00001B8C:
     addi r28, r28, 0x1
     stfs f31, 0x240(r29)
@@ -2143,10 +2143,10 @@ lbl_fn_8000FAE8_00001BBC:
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     mr r3, r30
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     stfs f1, 0x234(r30)
 lbl_fn_8000FAE8_00001C00:
     lfs f1, lbl_80880668
@@ -2321,7 +2321,7 @@ lbl_fn_8000FAE8_00001E3C:
     addi r29, r3, 0xb0
     mr r3, r29
     addi r4, r4, 0x55
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_8000FAE8_00001E94
     li r0, 0x0

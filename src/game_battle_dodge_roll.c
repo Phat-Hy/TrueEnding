@@ -13,15 +13,15 @@ extern void fn_800588FC(void);
 extern void fn_8005B9CC(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
 extern void fn_8008CD60(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_80092F1C(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_8009E5A0(void);
 extern void fn_8009E690(void);
 extern void hud_updateTargetReticle(void);
@@ -53,7 +53,7 @@ extern void fn_805F89F0(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXScale(void);
 extern void PSMTXMultVec(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80684600(void);
 extern void fn_8068AEA8(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -182,7 +182,7 @@ lbl_fn_80414328_000000C4:
     cmpwi r0, 0x3b
     beq lbl_fn_80414328_0000026C
     addi r4, r31, 0x1
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80414328_0000010C
     li r25, 0x0
@@ -196,7 +196,7 @@ lbl_fn_80414328_000000C4:
 lbl_fn_80414328_0000010C:
     mr r3, r22
     addi r4, r31, 0x18
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80414328_00000174
     addi r3, r1, 0x8
@@ -206,7 +206,7 @@ lbl_fn_80414328_0000010C:
     mr r4, r3
     mr r3, r30
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80414328_00000150
     li r0, 0x0
@@ -225,7 +225,7 @@ lbl_fn_80414328_0000015C:
 lbl_fn_80414328_00000174:
     mr r3, r22
     addi r4, r31, 0x80
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80414328_000001C0
     addi r3, r1, 0x8
@@ -245,7 +245,7 @@ lbl_fn_80414328_00000174:
 lbl_fn_80414328_000001C0:
     mr r3, r22
     addi r4, r31, 0x8e
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80414328_00000208
     addi r3, r1, 0x8
@@ -264,7 +264,7 @@ lbl_fn_80414328_000001C0:
 lbl_fn_80414328_00000208:
     mr r3, r22
     addi r4, r31, 0x64
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80414328_0000023C
     mulli r0, r25, 0x1c
@@ -278,7 +278,7 @@ lbl_fn_80414328_00000208:
 lbl_fn_80414328_0000023C:
     mr r3, r22
     addi r4, r31, 0x6d
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80414328_0000026C
     lwz r3, 0x2308(r26)
@@ -434,7 +434,7 @@ asm void fn_804146E4(void)
     cmpwi r0, 0x0
     beq lbl_fn_804146E4_000004D0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     stfs f1, 0x234(r31)
     mr r3, r30
     lwz r12, 0x0(r30)
@@ -561,7 +561,7 @@ lbl_fn_8041482C_000005C8:
     psq_l f1, 0x0(r8), 0, 0
     psq_st f1, 0x534(r31), 0, 0
     stfs f2, 0x53c(r31)
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_8041482C_0000062C
@@ -710,7 +710,7 @@ asm void fn_80414AC4(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_80414AC4_00000834
@@ -889,7 +889,7 @@ lbl_fn_80414C9C_00000A24:
     cmpwi r0, 0x3b
     beq lbl_fn_80414C9C_00000B04
     addi r4, r31, 0x1
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80414C9C_00000A68
     addi r3, r1, 0x108
@@ -902,7 +902,7 @@ lbl_fn_80414C9C_00000A24:
 lbl_fn_80414C9C_00000A68:
     mr r3, r30
     addi r4, r31, 0x7
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80414C9C_00000AB0
     addi r3, r1, 0x108
@@ -921,7 +921,7 @@ lbl_fn_80414C9C_00000A68:
 lbl_fn_80414C9C_00000AB0:
     mr r3, r30
     addi r4, r31, 0x11
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80414C9C_00000ADC
     addi r3, r1, 0x108
@@ -933,7 +933,7 @@ lbl_fn_80414C9C_00000AB0:
 lbl_fn_80414C9C_00000ADC:
     mr r3, r30
     addi r4, r31, 0x1e
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80414C9C_00000B04
     addi r3, r1, 0x108
@@ -1279,7 +1279,7 @@ asm void fn_8041524C(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8041524C_00001030
@@ -1362,7 +1362,7 @@ asm void fn_8041537C(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8041537C_00001160
@@ -1823,7 +1823,7 @@ lbl_fn_80415974_000016FC:
     cmpwi r0, 0x3b
     beq lbl_fn_80415974_00001760
     addi r4, r31, 0x16
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80415974_00001760
     addi r3, r1, 0x8

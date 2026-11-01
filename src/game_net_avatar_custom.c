@@ -13,9 +13,9 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8000D9E8(void);
 extern void fn_80013F78(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_8009EE30(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
@@ -74,7 +74,7 @@ extern void fn_80528A94(void);
 extern void fn_80528BF4(void);
 extern void fn_8054A340(void);
 extern void fn_805BA358(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80695720(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -427,7 +427,7 @@ asm void fn_80526660(void)
     stw r0, 0x4(r3)
     stw r0, 0x8(r3)
     b lbl_fn_80526660_00000438
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80526660_00000438:
     lwz r0, 0x14(r1)
     mtlr r0
@@ -604,7 +604,7 @@ asm void fn_805268CC(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805268CC_000006D0
     mr r4, r31
@@ -731,7 +731,7 @@ lbl_fn_80526930_000007EC:
     stw r3, 0x50(r31)
     beq lbl_fn_80526930_00000880
     subi r3, r4, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80526930_00000880:
     lis r6, lbl_8075CCF0@ha
     lwz r4, 0x4c(r31)
@@ -1640,7 +1640,7 @@ asm void fn_8052770C(void)
 lbl_fn_8052770C_00001508:
     lwz r3, 0x4(r29)
     addi r4, r31, 0xb9
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8052770C_00001524
     lwz r3, 0x50(r26)

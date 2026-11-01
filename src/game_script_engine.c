@@ -5,7 +5,7 @@
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_800E1D5C(void);
 extern void fn_800E2778(void);
 extern void fn_802428D8(void);
@@ -199,7 +199,7 @@ lbl_fn_802407CC_000001D8:
     bne lbl_fn_802407CC_00000258
 lbl_fn_802407CC_000001FC:
     li r3, 0x18
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_802407CC_00000224
@@ -244,7 +244,7 @@ lbl_fn_802407CC_00000274:
 lbl_fn_802407CC_00000298:
     lwz r31, 0x50(r1)
     li r3, 0x30
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_fn_802407CC_00000458
@@ -910,7 +910,7 @@ lbl_fn_802411B8_00000B84:
     bne lbl_fn_802411B8_00000C04
 lbl_fn_802411B8_00000BA8:
     li r3, 0x18
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_802411B8_00000BD0
@@ -955,7 +955,7 @@ lbl_fn_802411B8_00000C20:
 lbl_fn_802411B8_00000C44:
     lwz r31, 0xa0(r1)
     li r3, 0x30
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_802411B8_00000E04
@@ -1718,7 +1718,7 @@ lbl_fn_80241CB8_00001684:
     bne lbl_fn_80241CB8_00001704
 lbl_fn_80241CB8_000016A8:
     li r3, 0x18
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_80241CB8_000016D0
@@ -1763,7 +1763,7 @@ lbl_fn_80241CB8_00001720:
 lbl_fn_80241CB8_00001744:
     lwz r30, 0x90(r1)
     li r3, 0x30
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_80241CB8_00001904

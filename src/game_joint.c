@@ -9,8 +9,8 @@ extern void _savegpr_14(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void fn_8007708C(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_8008937C(void);
 extern void atn_Skin_init(void);
 extern void fn_800C4A90(void);
@@ -273,7 +273,7 @@ lbl_fn_800C507C_00000288:
     bl fn_80686EA4
 lbl_fn_800C507C_000002BC:
     slwi r3, r26, 3
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r25, r3
     bne lbl_fn_800C507C_000002F0
@@ -498,7 +498,7 @@ asm void fn_800C5644(void)
     li r4, 0x6
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r22, r3
     beq lbl_fn_800C5644_00000EC4
@@ -532,7 +532,7 @@ lbl_fn_800C5644_00000660:
     li r3, 0x8
     li r4, 0x6
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r20, r3
     beq lbl_fn_800C5644_00000690
@@ -640,7 +640,7 @@ lbl_fn_800C5644_000007D4:
     bl fn_80686EA4
 lbl_fn_800C5644_000007FC:
     slwi r3, r17, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r15, r3
     bne lbl_fn_800C5644_0000082C
@@ -722,7 +722,7 @@ lbl_fn_800C5644_00000920:
     lwzx r17, r4, r30
     li r4, 0x6
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r15, r3
     beq lbl_fn_800C5644_0000095C
@@ -829,7 +829,7 @@ lbl_fn_800C5644_00000A94:
     bl fn_80686EA4
 lbl_fn_800C5644_00000ABC:
     slwi r3, r17, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r18, r3
     bne lbl_fn_800C5644_00000AEC
@@ -931,7 +931,7 @@ lbl_fn_800C5644_00000C34:
     mr r6, r5
     li r4, 0x6
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_fn_800C5644_00000C60
@@ -1034,7 +1034,7 @@ lbl_fn_800C5644_00000D98:
     bl fn_80686EA4
 lbl_fn_800C5644_00000DB8:
     slwi r3, r25, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r26, r3
     bne lbl_fn_800C5644_00000DE0

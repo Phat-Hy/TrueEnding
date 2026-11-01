@@ -19,7 +19,7 @@ extern void fn_800827E0(void);
 extern void fn_800839EC(void);
 extern void fn_80083AD4(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800A96AC(void);
 extern void layout_drawPane(void);
 extern void fn_800AE568(void);
@@ -1918,7 +1918,7 @@ asm void graphic_initViewportTransform(void)
     beq lbl_graphic_initViewportTransform_00001A0C
     beq lbl_graphic_initViewportTransform_00001A0C
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_graphic_initViewportTransform_00001A0C:
     li r0, 0x100
     stw r0, 0x80(r30)

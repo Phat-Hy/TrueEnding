@@ -10,7 +10,7 @@ extern void fn_8003EA3C(void);
 extern void fn_8003F1E4(void);
 extern void fn_8004ED34(void);
 extern void fn_80063484(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_800A56A8(void);
 extern void fn_800E62AC(void);
 extern void fn_800E7650(void);
@@ -73,7 +73,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_8068AEA8(void);
 extern void fn_80695B00(void);
 
@@ -179,7 +179,7 @@ lbl_fn_800E3EA4_00000094:
     lis r3, lbl_80779B60@ha
     lwz r4, lbl_80779B60@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_800E3EA4_000000C4
@@ -1495,7 +1495,7 @@ lbl_fn_800E4278_00001360:
     stfs f3, 0xc4(r1)
     stfs f0, 0xc8(r1)
     stfs f3, 0xcc(r1)
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_800E4278_000013B0
     b lbl_fn_800E4278_000013BC
@@ -1512,7 +1512,7 @@ lbl_fn_800E4278_000013BC:
     li r5, 0x0
     mr r3, r24
     addi r4, r4, 0x1
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_800E4278_000013F0
     li r3, 0x0

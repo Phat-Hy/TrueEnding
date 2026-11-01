@@ -14,10 +14,10 @@ extern void fn_8005BCE8(void);
 extern void fn_80069BF4(void);
 extern void atn_normalizePath(char* str);
 extern void fn_8006B404(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_80097A9C(void);
 extern void fn_800A03A0(void);
 extern void fn_800A03E4(void);
@@ -44,9 +44,9 @@ extern void atn_LoadHandle_destructor(void);
 extern void fn_80473F88(void);
 extern void fn_80680770(void);
 extern void fn_806823B0(void);
-extern void fn_80682428(void);
-extern void fn_806825B4(void);
-extern void fn_806827C4(void);
+extern void strcmp(void);
+extern void strrchr(void);
+extern void strstr(void);
 extern void fn_80686EA4(void);
 extern void fn_80695720(void);
 extern void fn_80695A50(void);
@@ -137,7 +137,7 @@ asm void fn_80475E14(void)
     stw r28, 0x110(r1)
     mr r28, r3
     mr r3, r29
-    bl fn_806827C4
+    bl strstr
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_80475E14_00000098
@@ -159,12 +159,12 @@ asm void fn_80475E14(void)
 lbl_fn_80475E14_00000098:
     addi r31, r31, lbl_80755F30@l
     addi r4, r31, 0x2
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_80475E14_000000EC
     mr r3, r30
     addi r4, r31, 0x9
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_80475E14_000000EC
     subf r30, r29, r30
@@ -256,7 +256,7 @@ lbl_fn_80475F20_000001D4:
     addi r5, r5, 0x11
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80475F20_00000250
@@ -286,7 +286,7 @@ lbl_fn_80475F20_00000250:
     beq lbl_fn_80475F20_000002F0
     addi r28, r31, 0x3ed0
     li r3, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_80475F20_0000029C
@@ -647,12 +647,12 @@ lbl_fn_80476220_000006B4:
     stw r3, 0x5c(r30)
     mr r3, r31
     li r4, 0x5c
-    bl fn_806825B4
+    bl strrchr
     cmpwi r3, 0x0
     bne lbl_fn_80476220_000006F0
     mr r3, r31
     li r4, 0x2f
-    bl fn_806825B4
+    bl strrchr
     cmpwi r3, 0x0
     bne lbl_fn_80476220_000006E8
     b lbl_fn_80476220_000006F4
@@ -858,7 +858,7 @@ lbl_fn_804766B0_00000964:
     addi r5, r5, 0x1b
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_804766B0_000009A4
@@ -873,7 +873,7 @@ lbl_fn_804766B0_000009A4:
     beq lbl_fn_804766B0_00000A44
     addi r28, r31, 0x3ed0
     li r3, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_804766B0_000009F0
@@ -1025,7 +1025,7 @@ lbl_atn_LoadMotionCommandData_slot0_00000B84:
     beq lbl_atn_LoadMotionCommandData_slot0_00000BA4
     beq lbl_atn_LoadMotionCommandData_slot0_00000BA4
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_atn_LoadMotionCommandData_slot0_00000BA4:
     mr r3, r29
     li r4, 0x0
@@ -1178,7 +1178,7 @@ lbl_fn_80476AC8_00000D7C:
     li r4, 0x2
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80476AC8_00000E04
@@ -1212,7 +1212,7 @@ lbl_fn_80476AC8_00000E04:
     beq lbl_fn_80476AC8_00000EA4
     addi r28, r31, 0x3ed0
     li r3, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_80476AC8_00000E50
@@ -1490,7 +1490,7 @@ lbl_fn_80476ED4_000011AC:
     cmpwi r0, 0x3b
     beq lbl_fn_80476ED4_00001504
     addi r4, r20, lbl_80756030@l
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80476ED4_000014C4
     stb r17, 0x38(r1)
@@ -1614,7 +1614,7 @@ lbl_fn_80476ED4_00001364:
     bl fn_80686EA4
 lbl_fn_80476ED4_00001384:
     mulli r3, r24, 0x104
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r16, r3
     bne lbl_fn_80476ED4_000013AC
@@ -1703,7 +1703,7 @@ lbl_fn_80476ED4_00001474:
 lbl_fn_80476ED4_000014C4:
     mr r3, r16
     addi r4, r21, 0x1b
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80476ED4_00001504
     lwz r0, 0x70(r30)
@@ -1900,7 +1900,7 @@ lbl_fn_8047749C_00001750:
     addi r5, r5, 0x20
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8047749C_000017B4
@@ -1924,7 +1924,7 @@ lbl_fn_8047749C_000017B4:
     beq lbl_fn_8047749C_00001854
     addi r28, r31, 0x3ed0
     li r3, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_8047749C_00001800
@@ -2084,7 +2084,7 @@ lbl_atn_LoadScene_constructor_000019D0:
     beq lbl_atn_LoadScene_constructor_000019F0
     beq lbl_atn_LoadScene_constructor_000019F0
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_atn_LoadScene_constructor_000019F0:
     li r0, 0x0
     stw r0, 0x64(r30)

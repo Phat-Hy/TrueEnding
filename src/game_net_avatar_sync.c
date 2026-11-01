@@ -14,9 +14,9 @@ extern void dtor_80084684(void);
 extern void fn_80013F78(void);
 extern void fn_8006A250(void);
 extern void fn_8006EF48(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_80087E9C(void);
 extern void fn_8008937C(void);
 extern void fn_8009EE30(void);
@@ -1246,7 +1246,7 @@ asm void fn_8052911C(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8052911C_00000EC0
     mr r4, r31
@@ -1330,7 +1330,7 @@ lbl_fn_80529180_00000F3C:
     stw r3, 0x50(r31)
     beq lbl_fn_80529180_00000FD4
     subi r3, r4, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80529180_00000FD4:
     lis r6, lbl_8075D0F4@ha
     lwz r4, 0x4c(r31)

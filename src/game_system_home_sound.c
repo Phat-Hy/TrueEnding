@@ -21,11 +21,11 @@ extern void fn_8007192C(void);
 extern void gx_syncFrameFifo(void);
 extern void fn_80071D60(void);
 extern void fn_80075DEC(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800846FC(void);
 extern void fn_80089EE4(void);
 extern void fn_8008CD60(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_800928B0(void);
 extern void fn_80093F58(void);
 extern void fn_80097D9C(void);
@@ -75,7 +75,7 @@ extern void fn_80618290(void);
 extern void GXLoadPosMtxImm(void);
 extern void GXSetCurrentMtx(void);
 extern void GXLoadTexMtxImm(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80695AD0(void);
 extern void fn_80695D84(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -196,7 +196,7 @@ lbl_fn_803637D4_000000B0:
     cmpwi r0, 0x3b
     beq lbl_fn_803637D4_00000160
     addi r4, r31, 0x1e
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803637D4_0000010C
     addi r3, r1, 0x34
@@ -215,7 +215,7 @@ lbl_fn_803637D4_000000B0:
 lbl_fn_803637D4_0000010C:
     mr r3, r30
     addi r4, r31, 0x24
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803637D4_00000134
     addi r3, r1, 0x34
@@ -226,7 +226,7 @@ lbl_fn_803637D4_0000010C:
 lbl_fn_803637D4_00000134:
     mr r3, r30
     addi r4, r31, 0x33
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803637D4_00000160
     addi r3, r1, 0x8
@@ -402,7 +402,7 @@ lbl_fn_803639A0_00000378:
     addi r4, r4, 0x3d
     li r31, 0x0
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     mulli r0, r3, 0x2c
     stwx r31, r30, r0
 lbl_fn_803639A0_000003C0:
@@ -525,7 +525,7 @@ asm void fn_80363CE4(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80363CE4_00000550
     bl fn_80363D38

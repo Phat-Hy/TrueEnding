@@ -13,7 +13,7 @@ extern void _savegpr_27(void);
 extern void fn_8067E23C(void);
 extern void fn_806809C0(void);
 extern void fn_8068236C(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_8068446C(void);
 extern void fn_806A7110(void);
 extern void fn_806A7130(void);
@@ -1913,7 +1913,7 @@ lbl_fn_806B3220_00001864:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_806B3220_000019D8
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_806B3220_000019D8
     li r3, 0x0
@@ -2219,7 +2219,7 @@ lbl_fn_806B3680_00001CC4:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_806B3680_00001E38
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_806B3680_00001E38
     li r3, 0x0

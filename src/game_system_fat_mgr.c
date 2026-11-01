@@ -33,7 +33,7 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80684600(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
@@ -199,7 +199,7 @@ lbl_fn_8037E12C_0000014C:
     addi r4, r29, lbl_8074E210@l
     li r22, -0x1
     li r27, -0x1
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8037E12C_0000018C
     li r22, -0x1
@@ -207,7 +207,7 @@ lbl_fn_8037E12C_0000014C:
 lbl_fn_8037E12C_0000018C:
     mr r3, r23
     addi r4, r30, 0x4
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8037E12C_000001A4
     li r22, 0x1
@@ -218,7 +218,7 @@ lbl_fn_8037E12C_000001A4:
     bl fn_8005B3CC
     mr r23, r3
     addi r4, r30, 0xa
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8037E12C_000001D0
     li r27, 0x0
@@ -226,7 +226,7 @@ lbl_fn_8037E12C_000001A4:
 lbl_fn_8037E12C_000001D0:
     mr r3, r23
     addi r4, r30, 0x12
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8037E12C_000001EC
     li r27, 0x2
@@ -234,7 +234,7 @@ lbl_fn_8037E12C_000001D0:
 lbl_fn_8037E12C_000001EC:
     mr r3, r23
     addi r4, r30, 0x17
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8037E12C_00000208
     li r27, 0x3
@@ -242,7 +242,7 @@ lbl_fn_8037E12C_000001EC:
 lbl_fn_8037E12C_00000208:
     mr r3, r23
     addi r4, r30, 0x1d
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8037E12C_00000224
     li r27, 0x4
@@ -250,7 +250,7 @@ lbl_fn_8037E12C_00000208:
 lbl_fn_8037E12C_00000224:
     mr r3, r23
     addi r4, r30, 0x24
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8037E12C_00000240
     li r27, 0x1
@@ -258,7 +258,7 @@ lbl_fn_8037E12C_00000224:
 lbl_fn_8037E12C_00000240:
     mr r3, r23
     addi r4, r30, 0x2c
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8037E12C_0000025C
     li r27, 0x5
@@ -266,7 +266,7 @@ lbl_fn_8037E12C_00000240:
 lbl_fn_8037E12C_0000025C:
     mr r3, r23
     addi r4, r30, 0x32
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8037E12C_00000278
     li r27, 0x6
@@ -274,7 +274,7 @@ lbl_fn_8037E12C_0000025C:
 lbl_fn_8037E12C_00000278:
     mr r3, r23
     addi r4, r30, 0x3b
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8037E12C_00000294
     li r27, 0x8
@@ -282,7 +282,7 @@ lbl_fn_8037E12C_00000278:
 lbl_fn_8037E12C_00000294:
     mr r3, r23
     addi r4, r30, 0x41
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8037E12C_000002B0
     li r27, 0x9
@@ -290,7 +290,7 @@ lbl_fn_8037E12C_00000294:
 lbl_fn_8037E12C_000002B0:
     mr r3, r23
     addi r4, r30, 0x4b
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8037E12C_000002CC
     li r27, 0xa
@@ -298,7 +298,7 @@ lbl_fn_8037E12C_000002B0:
 lbl_fn_8037E12C_000002CC:
     mr r3, r23
     addi r4, r30, 0x4f
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8037E12C_000002E4
     li r27, 0xb

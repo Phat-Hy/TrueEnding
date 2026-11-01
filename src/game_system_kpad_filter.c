@@ -67,7 +67,7 @@ extern void fn_8059D26C(void);
 extern void fn_805AA4E8(void);
 extern void fn_805ADC04(void);
 extern void fn_805ADC14(void);
-extern void fn_80682544(void);
+extern void strncmp(void);
 extern void fn_80684600(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -1536,7 +1536,7 @@ lbl_fn_803752F4_000013C0:
     addi r31, r31, lbl_8074DC1C@l
     li r5, 0x2
     addi r4, r31, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_803752F4_00001528
     addi r3, r29, 0x2
@@ -1546,7 +1546,7 @@ lbl_fn_803752F4_000013C0:
     mr r3, r29
     li r31, -0x1
     li r5, 0x2
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_803752F4_00001438
     addi r3, r29, 0x2
@@ -1734,7 +1734,7 @@ lbl_fn_803754F0_000015FC:
     mr r3, r25
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_803754F0_000016B0
     addi r3, r25, 0x2
@@ -1775,7 +1775,7 @@ lbl_fn_803754F0_000016E0:
     mr r3, r24
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_803754F0_00001740
     addi r3, r24, 0x2
@@ -1868,7 +1868,7 @@ lbl_fn_803754F0_0000182C:
     mr r3, r27
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_803754F0_0000188C
     addi r3, r27, 0x2
@@ -1964,7 +1964,7 @@ asm void fn_8037587C(void)
     mr r3, r27
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_8037587C_000019D4
     addi r3, r27, 0x2
@@ -2005,7 +2005,7 @@ lbl_fn_8037587C_00001A04:
     mr r3, r26
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_8037587C_00001A64
     addi r3, r26, 0x2
@@ -2098,7 +2098,7 @@ lbl_fn_8037587C_00001B50:
     mr r3, r26
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_8037587C_00001BB0
     addi r3, r26, 0x2

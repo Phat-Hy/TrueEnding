@@ -15,7 +15,7 @@ extern void fn_8006A900(void);
 extern void fn_8006AA20(void);
 extern void fn_8006D0C8(void);
 extern void fn_8007708C(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_8009246C(void);
 extern void fn_800A555C(void);
 extern void fn_800AFEBC(void);
@@ -157,7 +157,7 @@ extern void fn_805BA358(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECMag(void);
-extern void fn_80682544(void);
+extern void strncmp(void);
 extern void fn_80684600(void);
 extern void fn_8068A918(void);
 extern void fn_8068AEA8(void);
@@ -1088,7 +1088,7 @@ lbl_world_Manager_draw_00000B94:
     mr r3, r25
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_world_Manager_draw_00000C4C
     addi r3, r25, 0x2
@@ -1129,7 +1129,7 @@ lbl_world_Manager_draw_00000C7C:
     mr r3, r25
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_world_Manager_draw_00000CDC
     addi r3, r25, 0x2
@@ -1349,7 +1349,7 @@ lbl_world_Manager_draw_00000F04:
     mr r3, r25
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_world_Manager_draw_00001008
     addi r3, r25, 0x2
@@ -1390,7 +1390,7 @@ lbl_world_Manager_draw_00001038:
     mr r3, r25
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_world_Manager_draw_00001098
     addi r3, r25, 0x2
@@ -1715,7 +1715,7 @@ lbl_world_Manager_draw_000014E4:
     mr r3, r25
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_world_Manager_draw_00001568
     addi r3, r25, 0x2
@@ -1756,7 +1756,7 @@ lbl_world_Manager_draw_00001598:
     mr r3, r25
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_world_Manager_draw_000015F8
     addi r3, r25, 0x2
@@ -2099,7 +2099,7 @@ lbl_world_Manager_draw_00001A30:
     mr r3, r24
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_world_Manager_draw_00001AE4
     addi r3, r24, 0x2
@@ -2140,7 +2140,7 @@ lbl_world_Manager_draw_00001B14:
     mr r3, r24
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_world_Manager_draw_00001B74
     addi r3, r24, 0x2
@@ -2233,7 +2233,7 @@ lbl_world_Manager_draw_00001C60:
     mr r3, r24
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_world_Manager_draw_00001CC0
     addi r3, r24, 0x2
@@ -2321,7 +2321,7 @@ lbl_world_Manager_draw_00001D8C:
     cmpwi r3, 0x0
     stw r29, 0x5548(r28)
     beq lbl_world_Manager_draw_00001DB8
-    bl fn_80084C24
+    bl mem_getAllocSize
     stw r29, 0x554c(r28)
 lbl_world_Manager_draw_00001DB8:
     lwz r3, 0x5558(r28)
@@ -2330,7 +2330,7 @@ lbl_world_Manager_draw_00001DB8:
     cmpwi r3, 0x0
     stw r29, 0x5554(r28)
     beq lbl_world_Manager_draw_00001DD8
-    bl fn_80084C24
+    bl mem_getAllocSize
     stw r29, 0x5558(r28)
 lbl_world_Manager_draw_00001DD8:
     addi r3, r28, 0x550c

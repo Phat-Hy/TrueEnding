@@ -15,8 +15,8 @@ extern void fn_8004B338(void);
 extern void fn_800697D8(void);
 extern void fn_8006A250(void);
 extern void fn_8006A5A8(void);
-extern void fn_80084320(void);
-extern void fn_80084C24(void);
+extern void mem_alloc(void);
+extern void mem_getAllocSize(void);
 extern void fn_800897D8(void);
 extern void fn_800A5B30(void);
 extern void fn_800AFEBC(void);
@@ -309,7 +309,7 @@ asm void fn_80365464(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_80365464_000001AC
@@ -519,7 +519,7 @@ asm void fn_80365708(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80365708_00000460
     addi r5, r31, lbl_807C8458@l
@@ -553,7 +553,7 @@ lbl_fn_80365708_00000468:
     stw r8, 0x20(r1)
     stw r8, 0x28(r1)
     stw r10, 0x24(r1)
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80365708_000004DC
     mr r4, r29
@@ -596,7 +596,7 @@ lbl_fn_80365708_00000544:
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80365708_00000574
     mr r4, r29
@@ -699,7 +699,7 @@ asm void world_Manager_constructor(void)
     stw r27, 0x5564(r29)
     stw r27, 0x5568(r29)
     stb r27, 0x556c(r29)
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_world_Manager_constructor_000006EC
     bl fn_8056B38C
@@ -772,7 +772,7 @@ lbl_world_Manager_constructor_000006EC:
     stw r0, 0x561c(r29)
     stw r26, 0x5620(r29)
     stw r26, 0x5624(r29)
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r0, r3
     beq lbl_world_Manager_constructor_00000814
@@ -885,7 +885,7 @@ lbl_world_Manager_constructor_00000994:
     mr r6, r5
     addi r3, r28, 0x3560
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r25, r3
     beq lbl_world_Manager_constructor_000009CC
@@ -984,7 +984,7 @@ lbl_world_Manager_constructor_00000ADC:
     la r5, lbl_8087DCDC
     la r6, lbl_8087DCD8
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r25, r3
     beq lbl_world_Manager_constructor_00000B6C
@@ -1397,7 +1397,7 @@ lbl_fn_803663A4_000010E4:
     lwz r3, 0x4(r30)
     cmpwi r3, 0x0
     beq lbl_fn_803663A4_000010FC
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803663A4_000010FC:
     li r0, 0x0
     stw r0, 0x4(r30)
@@ -1941,14 +1941,14 @@ lbl_world_Manager_destructor_000018F0:
     lwz r3, 0x4c(r25)
     cmpwi r3, 0x0
     beq lbl_world_Manager_destructor_00001910
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_world_Manager_destructor_00001910:
     addic. r0, r25, 0x38
     beq lbl_world_Manager_destructor_00001928
     lwz r3, 0x40(r25)
     cmpwi r3, 0x0
     beq lbl_world_Manager_destructor_00001928
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_world_Manager_destructor_00001928:
     cmpwi r25, 0x0
     beq lbl_world_Manager_destructor_0000193C
@@ -1981,7 +1981,7 @@ lbl_world_Manager_destructor_00001980:
     lwz r3, 0x4(r25)
     cmpwi r3, 0x0
     beq lbl_world_Manager_destructor_00001998
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_world_Manager_destructor_00001998:
     li r0, 0x0
     stw r0, 0x4(r25)

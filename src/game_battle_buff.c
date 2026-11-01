@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_80097D40(void);
 extern void fn_8016E970(void);
 extern void fn_80192908(void);
@@ -58,7 +58,7 @@ asm void fn_8016B8D4(void)
     li r3, 0x3c
     li r4, 0x0
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8016B8D4_00000074
@@ -275,7 +275,7 @@ asm void fn_8016BBCC(void)
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8016BBCC_00000384
@@ -483,7 +483,7 @@ asm void fn_8016BEDC(void)
     li r3, 0x28
     li r4, 0x0
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8016BEDC_00000684
@@ -697,7 +697,7 @@ asm void fn_8016C1E0(void)
     stw r28, 0x50(r1)
     mr r28, r4
     li r4, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8016C1E0_00000974
@@ -906,7 +906,7 @@ asm void fn_8016C4D8(void)
     li r3, 0x44
     li r4, 0x0
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8016C4D8_00000C7C
@@ -1119,7 +1119,7 @@ asm void fn_8016C7D8(void)
     stw r28, 0x50(r1)
     mr r28, r4
     li r4, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8016C7D8_00000F6C
@@ -1327,7 +1327,7 @@ asm void fn_8016CAD0(void)
     stw r29, 0x54(r1)
     mr r29, r3
     li r3, 0x8
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8016CAD0_00001258
@@ -1533,7 +1533,7 @@ asm void fn_8016CDB8(void)
     mr r6, r5
     li r3, 0x1c
     li r4, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8016CDB8_00001548
@@ -1766,7 +1766,7 @@ lbl_fn_8016D0A0_00001858:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8016D0A0_00001894

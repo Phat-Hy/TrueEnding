@@ -13,7 +13,7 @@ extern void dtor_80084684(void);
 extern void fn_80017EB0(void);
 extern void fn_8003E120(void);
 extern void fn_800697D8(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_800FDE60(void);
 extern void fn_80102890(void);
 extern void fn_80102A40(void);
@@ -1891,7 +1891,7 @@ asm void fn_805B3124(void)
     bl fn_80686EA4
 lbl_fn_805B3124_00001864:
     li r3, 0x14
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_805B3124_00001898

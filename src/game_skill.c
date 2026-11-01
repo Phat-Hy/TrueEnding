@@ -16,7 +16,7 @@ extern void dtor_80084684(void);
 extern void fn_8005ED68(void);
 extern void fn_8006F2F0(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800BDB58(void);
 extern void atn_LH_Texture_update(void);
 extern void atn_LoadHandle_getStatus(void);
@@ -544,7 +544,7 @@ asm void fn_800616C0(void)
     bl fn_800846FC
     mr r31, r3
     li r3, 0x0
-    bl fn_80084C24
+    bl mem_getAllocSize
     mr r30, r31
 lbl_fn_800616C0_000006DC:
     lwz r3, lbl_8087EEC8
@@ -570,7 +570,7 @@ lbl_fn_800616C0_000006DC:
     lis r10, 0xff00
     bl fn_80061824
     mr r3, r31
-    bl fn_80084C24
+    bl mem_getAllocSize
     addi r11, r1, 0x30
     psq_l f31, 0x88(r1), 0, 0
     lfd f31, 0x80(r1)

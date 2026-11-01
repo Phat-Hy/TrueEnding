@@ -5,9 +5,9 @@
 extern void _restgpr_19(void);
 extern void _savegpr_19(void);
 extern void dtor_80084684(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_80084A78(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800874C8(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
@@ -130,7 +130,7 @@ lbl_fn_800D0DB0_00000098:
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r23, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_800D0DB0_000000F4
     stw r24, 0x4(r3)
@@ -143,7 +143,7 @@ lbl_fn_800D0DB0_000000F4:
     stw r20, 0x10(r1)
     beq lbl_fn_800D0DB0_0000010C
     li r3, 0x0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800D0DB0_0000010C:
     lwz r3, 0x1c(r1)
     addi r4, r21, lbl_80775BC8@l
@@ -242,7 +242,7 @@ lbl_fn_800D0F34_0000021C:
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r23, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_800D0F34_00000278
     stw r24, 0x4(r3)
@@ -255,7 +255,7 @@ lbl_fn_800D0F34_00000278:
     stw r20, 0x10(r1)
     beq lbl_fn_800D0F34_00000290
     li r3, 0x0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800D0F34_00000290:
     lwz r3, 0x1c(r1)
     addi r4, r21, lbl_80775BC8@l
@@ -354,7 +354,7 @@ lbl_fn_800D10B8_000003A0:
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r23, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_800D10B8_000003FC
     stw r24, 0x4(r3)
@@ -367,7 +367,7 @@ lbl_fn_800D10B8_000003FC:
     stw r20, 0x10(r1)
     beq lbl_fn_800D10B8_00000414
     li r3, 0x0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800D10B8_00000414:
     lwz r3, 0x1c(r1)
     addi r4, r21, lbl_80775BC8@l
@@ -502,7 +502,7 @@ lbl_fn_800D123C_00000594:
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r18, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_800D123C_000005F0
     stw r19, 0x4(r3)
@@ -515,7 +515,7 @@ lbl_fn_800D123C_000005F0:
     stw r30, 0x10(r1)
     beq lbl_fn_800D123C_00000608
     li r3, 0x0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800D123C_00000608:
     lwz r3, 0x1c(r1)
     addi r4, r31, lbl_80775BC8@l

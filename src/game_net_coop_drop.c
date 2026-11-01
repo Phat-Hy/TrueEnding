@@ -22,7 +22,7 @@ extern void fn_801FECE0(void);
 extern void world_getGlobalFlag(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80695D84(void);
 
 /* External data declarations */
@@ -641,7 +641,7 @@ lbl_fn_804AA490_00000750:
     bl fn_8005B3CC
     mr r20, r3
     addi r4, r30, 0x18e
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_804AA490_000009B4
     addi r3, r1, 0xb4
@@ -794,7 +794,7 @@ lbl_fn_804AA490_0000097C:
     bl fn_8005B3CC
     mr r19, r3
     addi r4, r21, lbl_8075765C@l
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_804AA490_00000D04
     mr r3, r19
@@ -804,7 +804,7 @@ lbl_fn_804AA490_0000097C:
 lbl_fn_804AA490_000009B4:
     mr r3, r20
     addi r4, r30, 0x197
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_804AA490_00000AC8
     addi r3, r1, 0xb4
@@ -874,7 +874,7 @@ lbl_fn_804AA490_000009B4:
 lbl_fn_804AA490_00000AC8:
     mr r3, r20
     addi r4, r30, 0x19d
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_804AA490_00000B6C
     addi r3, r1, 0xb4
@@ -916,7 +916,7 @@ lbl_fn_804AA490_00000AC8:
 lbl_fn_804AA490_00000B6C:
     mr r3, r20
     addi r4, r30, 0x1a3
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_804AA490_00000C10
     addi r3, r1, 0xb4
@@ -958,7 +958,7 @@ lbl_fn_804AA490_00000B6C:
 lbl_fn_804AA490_00000C10:
     mr r3, r20
     addi r4, r30, 0x1a9
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_804AA490_00000C9C
     addi r3, r1, 0xb4
@@ -995,7 +995,7 @@ lbl_fn_804AA490_00000C8C:
 lbl_fn_804AA490_00000C9C:
     mr r3, r20
     addi r4, r30, 0x1b2
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_804AA490_00000D04
     addi r3, r1, 0xb4

@@ -17,7 +17,7 @@ extern void fn_80051A88(void);
 extern void fn_80051CD8(void);
 extern void fn_80060D58(void);
 extern void fn_800616C0(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
 extern void world_getLocalFlag(void);
@@ -2003,7 +2003,7 @@ lbl_fn_8039BF04_00001A78:
     bl fn_80686EA4
 lbl_fn_8039BF04_00001AAC:
     mulli r3, r21, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r23, r3
     bne lbl_fn_8039BF04_00001AE0

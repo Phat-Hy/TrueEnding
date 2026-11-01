@@ -14,7 +14,7 @@ extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
 extern void fn_8006A250(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_800846FC(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
@@ -49,7 +49,7 @@ extern void fn_8052EEC0(void);
 extern void fn_8052F890(void);
 extern void fn_80531814(void);
 extern void fn_80680770(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_806846C4(void);
 extern void fn_80686A48(void);
 extern void fn_80686AF0(void);
@@ -827,7 +827,7 @@ lbl_fn_805303D4_00000A84:
     bl fn_8005B3CC
     mr r30, r3
     addi r4, r31, 0x11b
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_805303D4_00000AB4
     addi r3, r1, 0x8
@@ -838,7 +838,7 @@ lbl_fn_805303D4_00000A84:
 lbl_fn_805303D4_00000AB4:
     mr r3, r30
     addi r4, r31, 0x121
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_805303D4_00000B0C
     addi r3, r1, 0x8
@@ -861,7 +861,7 @@ lbl_fn_805303D4_00000AB4:
 lbl_fn_805303D4_00000B0C:
     mr r3, r30
     addi r4, r31, 0x127
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_805303D4_00000B34
     addi r3, r1, 0x8
@@ -872,7 +872,7 @@ lbl_fn_805303D4_00000B0C:
 lbl_fn_805303D4_00000B34:
     mr r3, r30
     addi r4, r31, 0x12d
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_805303D4_00000B58
     addi r3, r1, 0x8
@@ -1184,7 +1184,7 @@ lbl_fn_805305D4_00000FB8:
     bl fn_80686EA4
 lbl_fn_805305D4_00000FD8:
     mulli r3, r24, 0x64
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r17, r3
     bne lbl_fn_805305D4_00001000

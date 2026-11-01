@@ -12,8 +12,8 @@ extern void fn_8004ED34(void);
 extern void fn_8005B3CC(void);
 extern void fn_8005B6E8(void);
 extern void fn_800616C0(void);
-extern void fn_800844D8(void);
-extern void fn_80097C08(void);
+extern void mem_free(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800BFAC8(void);
 extern void fn_800C31F4(void);
 extern void fn_800CB3A0(void);
@@ -46,7 +46,7 @@ extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void fn_80680770(void);
 extern void fn_80680CF8(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80686EA4(void);
 extern void fn_8068AE9C(void);
 extern void fn_8068AEA4(void);
@@ -286,7 +286,7 @@ lbl_fn_801805A4_00000254:
     bl fn_80686EA4
 lbl_fn_801805A4_00000274:
     slwi r3, r18, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_801805A4_0000029C
@@ -360,7 +360,7 @@ lbl_fn_801805A4_00000384:
     beq lbl_fn_801805A4_000003A0
     mr r4, r18
     addi r3, r20, 0x14
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_801805A4_00000124
 lbl_fn_801805A4_000003A0:
@@ -1410,7 +1410,7 @@ lbl_fn_8018161C_000011AC:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80881BF8
     stfs f0, 0x2e8(r30)
     b lbl_fn_8018161C_00001494

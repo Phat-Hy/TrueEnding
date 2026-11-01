@@ -6,10 +6,10 @@ extern void __files(void);
 extern void dtor_80084684(void);
 extern void atn_normalizePath(char* str);
 extern void fn_8006B404(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_80084A78(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800DC6B4(void);
 extern void fn_800DCA6C(void);
 extern void atn_Arc_decompressChunk(void);
@@ -113,7 +113,7 @@ lbl_fn_80470604_000000AC:
     li r4, 0x2
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_80470604_000000E8
@@ -128,7 +128,7 @@ lbl_fn_80470604_000000E8:
     beq lbl_fn_80470604_00000188
     addi r28, r31, 0x3ed0
     li r3, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_80470604_00000134
@@ -1332,7 +1332,7 @@ lbl_fn_804714B0_00000F90:
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r28, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_804714B0_00001014
     stw r29, 0x4(r3)
@@ -1345,7 +1345,7 @@ lbl_fn_804714B0_00001014:
     stw r25, 0x10(r1)
     beq lbl_fn_804714B0_0000102C
     li r3, 0x0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_804714B0_0000102C:
     lwz r3, 0x1c(r1)
     addi r4, r26, lbl_80775BC8@l

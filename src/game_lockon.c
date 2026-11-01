@@ -13,9 +13,9 @@ extern void fn_80013F78(void);
 extern void fn_80070B60(void);
 extern void fn_80070C98(void);
 extern void fn_80080048(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void* area_refresh(void*);
 extern void fn_8008A4E0(void);
 extern void atn_AABB_getMax(void);
@@ -502,7 +502,7 @@ lbl_atn_Lockon_updateTargetTextures_000005D0:
     la r5, lbl_8087D780
     la r6, lbl_8087D77C
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_atn_Lockon_updateTargetTextures_00000634
     stfs f27, 0x0(r3)
@@ -523,7 +523,7 @@ lbl_atn_Lockon_updateTargetTextures_00000638:
     la r5, lbl_8087D780
     la r6, lbl_8087D77C
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_atn_Lockon_updateTargetTextures_00000680
     stfs f27, 0x0(r3)
@@ -545,7 +545,7 @@ lbl_atn_Lockon_updateTargetTextures_00000684:
     la r5, lbl_8087D780
     la r6, lbl_8087D77C
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_atn_Lockon_updateTargetTextures_000006D0
     stfs f27, 0x0(r3)
@@ -567,7 +567,7 @@ lbl_atn_Lockon_updateTargetTextures_000006D4:
     la r5, lbl_8087D780
     la r6, lbl_8087D77C
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_atn_Lockon_updateTargetTextures_00000720
     stfs f27, 0x0(r3)
@@ -638,7 +638,7 @@ asm void fn_80095750(void)
     li r3, 0x18
     mr r6, r5
     li r4, 0x6
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_80095750_00000818
@@ -769,7 +769,7 @@ lbl_fn_80095750_000009BC:
     bdnz lbl_fn_80095750_000009BC
 lbl_fn_80095750_000009D4:
     lwz r3, 0x1ec(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80095750_000009DC:
     li r0, 0x8
     stw r29, 0x1ec(r28)
@@ -863,7 +863,7 @@ lbl_fn_80095750_00000B18:
     bdnz lbl_fn_80095750_00000B18
 lbl_fn_80095750_00000B30:
     lwz r3, 0x1ec(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80095750_00000B38:
     stw r30, 0x1ec(r28)
     stw r29, 0x1e8(r28)
@@ -1502,7 +1502,7 @@ lbl_fn_80096218_000013F0:
     bdnz lbl_fn_80096218_000013F0
 lbl_fn_80096218_0000140C:
     lwz r3, 0x8(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80096218_00001414:
     stw r24, 0x8(r28)
     stw r25, 0x4(r28)
@@ -1596,7 +1596,7 @@ lbl_fn_80096218_0000154C:
     bdnz lbl_fn_80096218_0000154C
 lbl_fn_80096218_00001568:
     lwz r3, 0x8(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80096218_00001570:
     stw r30, 0x8(r28)
     stw r24, 0x4(r28)
@@ -1710,7 +1710,7 @@ lbl_fn_80096218_000016F4:
     bdnz lbl_fn_80096218_000016F4
 lbl_fn_80096218_0000170C:
     lwz r3, 0x8(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80096218_00001714:
     li r0, 0x8
     stw r24, 0x8(r28)
@@ -1804,7 +1804,7 @@ lbl_fn_80096218_00001850:
     bdnz lbl_fn_80096218_00001850
 lbl_fn_80096218_00001868:
     lwz r3, 0x8(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80096218_00001870:
     stw r24, 0x8(r28)
     stw r26, 0x4(r28)
@@ -1925,7 +1925,7 @@ lbl_fn_80096218_00001A08:
     bdnz lbl_fn_80096218_00001A08
 lbl_fn_80096218_00001A24:
     lwz r3, 0x8(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80096218_00001A2C:
     stw r23, 0x8(r28)
     stw r26, 0x4(r28)
@@ -2019,7 +2019,7 @@ lbl_fn_80096218_00001B64:
     bdnz lbl_fn_80096218_00001B64
 lbl_fn_80096218_00001B80:
     lwz r3, 0x8(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80096218_00001B88:
     stw r24, 0x8(r28)
     stw r23, 0x4(r28)
@@ -2146,7 +2146,7 @@ lbl_fn_80096218_00001D30:
     bdnz lbl_fn_80096218_00001D30
 lbl_fn_80096218_00001D4C:
     lwz r3, 0x8(r29)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80096218_00001D54:
     stw r23, 0x8(r29)
     stw r30, 0x4(r29)
@@ -2240,7 +2240,7 @@ lbl_fn_80096218_00001E8C:
     bdnz lbl_fn_80096218_00001E8C
 lbl_fn_80096218_00001EA8:
     lwz r3, 0x8(r29)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80096218_00001EB0:
     stw r23, 0x8(r29)
     stw r24, 0x4(r29)

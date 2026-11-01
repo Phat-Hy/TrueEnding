@@ -52,8 +52,8 @@ extern void fn_806265C0(void);
 extern void fn_8065F510(void);
 extern void fn_8065F520(void);
 extern void fn_8068236C(void);
-extern void fn_80682428(void);
-extern void fn_80682544(void);
+extern void strcmp(void);
+extern void strncmp(void);
 extern void fn_8068B104(void);
 
 /* External data declarations */
@@ -313,7 +313,7 @@ asm void fn_805CC3E0(void)
 lbl_fn_805CC3E0_000002A0:
     lwz r4, 0x0(r31)
     mr r3, r28
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_805CC3E0_000002BC
     mr r29, r27
@@ -331,7 +331,7 @@ lbl_fn_805CC3E0_000002CC:
 lbl_fn_805CC3E0_000002D8:
     lwz r4, 0x0(r31)
     mr r3, r28
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_805CC3E0_000002F4
     add r29, r27, r30
@@ -1774,7 +1774,7 @@ asm void fn_805CD7C0(void)
 lbl_fn_805CD7C0_00001678:
     mr r3, r29
     addi r4, r31, 0x8
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_805CD7C0_00001694
     lwz r3, 0x88(r31)
@@ -1924,7 +1924,7 @@ asm void fn_805CD9B0(void)
     mflr r0
     li r5, 0x10
     stw r0, 0x14(r1)
-    bl fn_80682544
+    bl strncmp
     cntlzw r0, r3
     srwi r3, r0, 5
     lwz r0, 0x14(r1)
@@ -1940,7 +1940,7 @@ asm void fn_805CD9E0(void)
     mflr r0
     li r5, 0x14
     stw r0, 0x14(r1)
-    bl fn_80682544
+    bl strncmp
     cntlzw r0, r3
     srwi r3, r0, 5
     lwz r0, 0x14(r1)

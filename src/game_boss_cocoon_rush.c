@@ -14,8 +14,8 @@ extern void fn_8006AD24(void);
 extern void fn_8006B0C8(void);
 extern void fn_8006B404(void);
 extern void fn_8006D008(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_8008A4E0(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
@@ -45,7 +45,7 @@ extern void PSMTXScale(void);
 extern void PSMTXMultVec(void);
 extern void PSVECMag(void);
 extern void fn_80680770(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80686EA4(void);
 extern u32 strlen(const char* str);
 
@@ -901,7 +901,7 @@ lbl_fn_80472A9C_00000B1C:
     li r4, 0x2
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80472A9C_00000B7C
@@ -925,7 +925,7 @@ lbl_fn_80472A9C_00000B7C:
     beq lbl_fn_80472A9C_00000C1C
     addi r28, r31, 0x3ed0
     li r3, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_80472A9C_00000BC8
@@ -1150,7 +1150,7 @@ lbl_fn_80472DCC_00000E4C:
     li r4, 0x2
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80472DCC_00000E98
@@ -1169,7 +1169,7 @@ lbl_fn_80472DCC_00000E98:
     beq lbl_fn_80472DCC_00000F38
     addi r28, r31, 0x3ed0
     li r3, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_80472DCC_00000EE4
@@ -1646,7 +1646,7 @@ lbl_atn_LoadEffect_destructor_000014E0:
     mr r6, r5
     li r4, 0x7
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r26, r3
     beq lbl_atn_LoadEffect_destructor_0000151C
@@ -1656,7 +1656,7 @@ lbl_atn_LoadEffect_destructor_000014E0:
 lbl_atn_LoadEffect_destructor_0000151C:
     addi r3, r18, 0x80
     addi r4, r28, 0x2
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_atn_LoadEffect_destructor_000015B4
     mr r5, r28
@@ -1721,7 +1721,7 @@ lbl_atn_LoadEffect_destructor_000015E4:
     mr r6, r5
     li r4, 0x7
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r26, r3
     beq lbl_atn_LoadEffect_destructor_0000161C
@@ -1859,7 +1859,7 @@ lbl_atn_LoadEffect_destructor_000017D4:
     mr r6, r5
     li r4, 0x7
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r18, r3
     beq lbl_atn_LoadEffect_destructor_00001800
@@ -2010,7 +2010,7 @@ lbl_fn_8047392C_000019AC:
     addi r5, r5, 0x2
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8047392C_00001A0C
@@ -2033,7 +2033,7 @@ lbl_fn_8047392C_00001A0C:
     beq lbl_fn_8047392C_00001AAC
     addi r28, r31, 0x3ed0
     li r3, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_8047392C_00001A58

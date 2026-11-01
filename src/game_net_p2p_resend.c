@@ -11,9 +11,9 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8004B338(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800C1FB4(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
@@ -34,7 +34,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void fn_80680770(void);
-extern void fn_806827C4(void);
+extern void strstr(void);
 extern void fn_80686EA4(void);
 extern void fn_8068AEA4(void);
 extern void fn_80695720(void);
@@ -130,7 +130,7 @@ asm void fn_80512A88(void)
     cmpwi r3, 0x0
     beq lbl_fn_80512A88_000000A8
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80512A88_000000A8:
     mr r3, r30
     li r4, 0x0
@@ -191,7 +191,7 @@ lbl_fn_80512B48_00000138:
 lbl_fn_80512B48_00000158:
     lwz r4, lbl_808877E0
     mr r3, r30
-    bl fn_806827C4
+    bl strstr
     cmpwi r3, 0x0
     beq lbl_fn_80512B48_00000200
     li r28, 0x0
@@ -1441,7 +1441,7 @@ asm void fn_80513D38(void)
     bl fn_80686EA4
 lbl_fn_80513D38_0000138C:
     mulli r3, r27, 0x44
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r28, r3
     bne lbl_fn_80513D38_000013C0
@@ -1552,7 +1552,7 @@ asm void fn_80513EC8(void)
     bl fn_80686EA4
 lbl_fn_80513EC8_0000151C:
     mulli r3, r27, 0x1f4
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r28, r3
     bne lbl_fn_80513EC8_00001550

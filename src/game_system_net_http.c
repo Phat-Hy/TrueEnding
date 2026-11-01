@@ -12,7 +12,7 @@ extern void fn_80063D3C(void);
 extern void fn_8006AA20(void);
 extern void fn_8006B2D8(void);
 extern void fn_8006CA80(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_8008B964(void);
 extern void fn_800C31F4(void);
 extern void atn_Task_constructor(void);
@@ -1560,7 +1560,7 @@ asm void fn_80393610(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80393610_000015BC
     mr r4, r28

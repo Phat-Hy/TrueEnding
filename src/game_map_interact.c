@@ -16,7 +16,7 @@ extern void fn_80042740(void);
 extern void fn_8004ED34(void);
 extern void fn_80079044(void);
 extern void fn_800790D0(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_800846FC(void);
 extern void fn_800928B0(void);
 extern void fn_80094F98(void);
@@ -56,7 +56,7 @@ extern void fn_8023A8B4(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_80680770(void);
 extern void fn_80680CF8(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80686EA4(void);
 extern void fn_80695720(void);
 extern void fn_806958E0(void);
@@ -506,7 +506,7 @@ lbl_fn_80183D00_00000458:
     lis r3, lbl_8073821C@ha
     addi r3, r3, lbl_8073821C@l
     mr r4, r29
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_80183D00_000004C0
     mr r4, r29
@@ -1980,7 +1980,7 @@ lbl_fn_80185188_00001934:
     bl fn_80686EA4
 lbl_fn_80185188_00001964:
     mulli r3, r31, 0x44
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r28, r3
     bne lbl_fn_80185188_00001998

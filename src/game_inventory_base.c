@@ -6,7 +6,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void fn_8003EA3C(void);
 extern void fn_80041A28(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_8010CD3C(void);
 extern void fn_8010CF28(void);
 extern void fn_8011D21C(void);
@@ -1103,7 +1103,7 @@ lbl_fn_80151448_00000E14:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_80151448_00000E50
@@ -1486,7 +1486,7 @@ lbl_fn_80151448_0000139C:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_80151448_000013D8

@@ -9,7 +9,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_23(void);
 extern void _savegpr_25(void);
 extern void fn_80043BF4(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_800C31F4(void);
 extern void fn_800CB3A0(void);
 extern void fn_800DC6B4(void);
@@ -61,7 +61,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void fn_80680CF8(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_8068A850(void);
 
 /* External data declarations */
@@ -808,7 +808,7 @@ lbl_fn_800FDF14_000009F8:
     li r5, 0x0
     mr r3, r24
     addi r4, r4, 0x1
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_800FDF14_00000A44
     li r24, 0x0
@@ -840,7 +840,7 @@ lbl_fn_800FDF14_00000A8C:
 lbl_fn_800FDF14_00000A94:
     lwz r3, 0x10(r23)
     lwz r4, 0x0(r22)
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_800FDF14_00000AB0
     li r0, 0x1

@@ -13,16 +13,16 @@ extern void dtor_80084684(void);
 extern void fn_80041C0C(void);
 extern void fn_80042740(void);
 extern void fn_8005BCE8(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800874C8(void);
 extern void fn_8008771C(void);
 extern void fn_80087E9C(void);
 extern void fn_8008937C(void);
 extern void fn_800928B0(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C31F4(void);
 extern void fn_800C344C(void);
 extern void fn_800CB360(void);
@@ -464,7 +464,7 @@ lbl_fn_803EFE64_000003EC:
     bl fn_80686EA4
 lbl_fn_803EFE64_00000420:
     mulli r3, r28, 0x28
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_803EFE64_00000454
@@ -598,7 +598,7 @@ asm void fn_803F0280(void)
     beq lbl_fn_803F0280_00000614
     beq lbl_fn_803F0280_00000614
     subi r3, r6, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803F0280_00000614:
     cmpwi r30, 0x0
     stw r30, 0x0(r29)
@@ -1051,7 +1051,7 @@ lbl_fn_803F0764_00000B60:
     mr r20, r3
     lfs f26, 0x234(r3)
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lwz r3, lbl_8087EFA8
     fmr f27, f1
     lfs f3, 0x238(r20)
@@ -1835,7 +1835,7 @@ asm void fn_803F1310(void)
     addi r5, r5, 0x58
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_803F1310_00001708

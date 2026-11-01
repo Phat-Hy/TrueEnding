@@ -6,9 +6,9 @@ extern void __files(void);
 extern void _restgpr_23(void);
 extern void _savegpr_23(void);
 extern void dtor_80084684(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_80229DF0(void);
 extern void fn_80229F4C(void);
 extern void fn_80229FF0(void);
@@ -1092,7 +1092,7 @@ lbl_texCache_allocateSlot_00000E2C:
     beq lbl_texCache_allocateSlot_00000E54
     beq lbl_texCache_allocateSlot_00000E54
     subi r3, r4, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_texCache_allocateSlot_00000E54:
     li r0, 0x4800
     stw r0, 0x34(r29)
@@ -1250,7 +1250,7 @@ lbl_texCache_allocateSlot_00001058:
     bl fn_80686EA4
 lbl_texCache_allocateSlot_0000108C:
     slwi r3, r28, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_texCache_allocateSlot_000010C0
@@ -1489,7 +1489,7 @@ lbl_fn_8022BEAC_000013D0:
     beq lbl_fn_8022BEAC_000013F4
     beq lbl_fn_8022BEAC_000013F4
     subi r3, r5, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8022BEAC_000013F4:
     slwi. r28, r30, 6
     stw r28, 0x34(r29)
@@ -1650,7 +1650,7 @@ lbl_fn_8022BEAC_00001600:
     bl fn_80686EA4
 lbl_fn_8022BEAC_00001634:
     slwi r3, r31, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r28, r3
     bne lbl_fn_8022BEAC_00001668
@@ -1753,7 +1753,7 @@ asm void fn_8022C2A0(void)
     beq lbl_fn_8022C2A0_000017C4
     beq lbl_fn_8022C2A0_000017B8
     subi r3, r4, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8022C2A0_000017B8:
     li r0, 0x0
     stw r0, 0x4(r31)
@@ -1810,7 +1810,7 @@ lbl_fn_8022C2A0_00001868:
     cmpwi r3, 0x0
     beq lbl_fn_8022C2A0_00001888
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8022C2A0_00001888:
     li r0, 0x0
     stw r0, 0x14(r31)

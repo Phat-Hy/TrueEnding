@@ -9,7 +9,7 @@ extern void _savegpr_22(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void quest_checkCondition(void);
 extern void fn_8014DEE4(void);
 extern void fn_8014EEC4(void);
@@ -26,7 +26,7 @@ extern void PSMTXTrans(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 
@@ -116,7 +116,7 @@ lbl_fn_8056B2E4_00000078:
     lis r3, lbl_80795820@ha
     lwz r4, lbl_80795820@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_8056B2E4_000000A8
@@ -398,7 +398,7 @@ lbl_fn_8056B55C_00000408:
     mr r3, r31
     addi r4, r4, 0xb
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     mulli r0, r3, 0x2c
     add r5, r27, r0
     lfs f0, 0x4(r5)
@@ -1970,7 +1970,7 @@ lbl_fn_8056CB24_000019D0:
     mr r3, r31
     addi r4, r4, 0xb
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     mulli r0, r3, 0x2c
     add r5, r27, r0
     lfs f0, 0x4(r5)

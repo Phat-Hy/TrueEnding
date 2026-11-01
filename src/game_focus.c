@@ -4,9 +4,9 @@
 /* External function declarations */
 extern void _restgpr_14(void);
 extern void _savegpr_14(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_80084A78(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_80098948(void);
 extern void fn_800A0548(void);
 extern void atn_Anim_getDuration(void);
@@ -852,7 +852,7 @@ lbl_fn_800991D0_00000B2C:
     stw r3, 0x88(r1)
     li r3, 0x10
     stw r0, 0x8c(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_800991D0_00000BD4
     li r0, 0x1
@@ -868,7 +868,7 @@ lbl_fn_800991D0_00000BD4:
     stw r30, 0x88(r1)
     beq lbl_fn_800991D0_00000BEC
     li r3, 0x0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800991D0_00000BEC:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x94(r1)
@@ -1853,7 +1853,7 @@ lbl_fn_8009A5CC_00001938:
     stw r3, 0x40(r1)
     li r3, 0x10
     stw r0, 0x44(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_8009A5CC_000019C8
     li r0, 0x1
@@ -1869,7 +1869,7 @@ lbl_fn_8009A5CC_000019C8:
     stw r14, 0x40(r1)
     beq lbl_fn_8009A5CC_000019E0
     li r3, 0x0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8009A5CC_000019E0:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x54(r1)
@@ -2542,7 +2542,7 @@ lbl_fn_8009ADA4_00002350:
     stw r3, 0x68(r1)
     li r3, 0x10
     stw r0, 0x6c(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_8009ADA4_000023E4
     li r0, 0x1
@@ -2557,7 +2557,7 @@ lbl_fn_8009ADA4_000023E4:
     stw r3, 0x94(r1)
     stw r0, 0x68(r1)
     b lbl_fn_8009ADA4_000023F8
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8009ADA4_000023F8:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x90(r1)
@@ -2715,7 +2715,7 @@ lbl_fn_8009ADA4_000025B8:
     stw r3, 0x60(r1)
     li r3, 0x10
     stw r0, 0x64(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_8009ADA4_00002670
     li r0, 0x1
@@ -2730,7 +2730,7 @@ lbl_fn_8009ADA4_00002670:
     stw r3, 0x88(r1)
     stw r0, 0x60(r1)
     b lbl_fn_8009ADA4_00002684
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8009ADA4_00002684:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x84(r1)

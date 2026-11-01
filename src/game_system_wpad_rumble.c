@@ -53,7 +53,7 @@ extern void atn_LoadHandle_isLoading(void);
 extern void fn_80547984(void);
 extern void fn_80547B58(void);
 extern void fn_80549F18(void);
-extern void fn_80682544(void);
+extern void strncmp(void);
 extern void fn_80684600(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -428,7 +428,7 @@ lbl_world_Manager_update_00000404:
     mr r3, r28
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_world_Manager_update_00000488
     addi r3, r28, 0x2
@@ -469,7 +469,7 @@ lbl_world_Manager_update_000004B8:
     mr r3, r27
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_world_Manager_update_00000518
     addi r3, r27, 0x2
@@ -850,7 +850,7 @@ lbl_world_Manager_update_00000A08:
     mr r3, r28
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_world_Manager_update_00000A8C
     addi r3, r28, 0x2
@@ -891,7 +891,7 @@ lbl_world_Manager_update_00000ABC:
     mr r3, r28
     li r5, 0x2
     addi r4, r4, 0xc9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_world_Manager_update_00000B1C
     addi r3, r28, 0x2

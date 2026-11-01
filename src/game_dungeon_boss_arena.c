@@ -19,11 +19,11 @@ extern void fn_8005B5F8(void);
 extern void fn_8005B9CC(void);
 extern void fn_8005BBF8(void);
 extern void fn_8006AA20(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_800846FC(void);
 extern void fn_80084A78(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void fn_8008BBD8(void);
@@ -95,8 +95,8 @@ extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_8049D5DC(void);
-extern void fn_80682428(void);
-extern void fn_80682544(void);
+extern void strcmp(void);
+extern void strncmp(void);
 extern void fn_80684600(void);
 extern void fn_806952C4(void);
 extern void fn_80695720(void);
@@ -285,7 +285,7 @@ asm void fn_803EDFBC(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_803EDFBC_000000EC
     mr r4, r31
@@ -347,7 +347,7 @@ lbl_fn_803EE024_00000198:
     cmpwi r0, 0x0
     beq lbl_fn_803EE024_000001B0
     mr r3, r0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803EE024_000001B0:
     li r0, 0x44
     stw r0, 0x78(r31)
@@ -393,7 +393,7 @@ asm void fn_803EE124(void)
     lwz r3, 0x7c(r3)
     cmpwi r3, 0x0
     beq lbl_fn_803EE124_0000024C
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803EE124_0000024C:
     li r0, 0x0
     stw r0, 0x7c(r30)
@@ -1174,7 +1174,7 @@ asm void fn_803EEB78(void)
     li r3, 0x68
     li r4, 0x1
     la r5, lbl_8087DF04
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_803EEB78_00000CEC
@@ -1335,7 +1335,7 @@ lbl_fn_803EED58_00000EA4:
     lis r3, lbl_8078CA70@ha
     lwz r4, lbl_8078CA70@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_803EED58_00000ED4
@@ -1478,7 +1478,7 @@ lbl_fn_803EEEDC_00001070:
     bl fn_8005B3CC
     mr r17, r3
     addi r4, r23, lbl_8078CB38@l
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803EEEDC_00001134
     addi r3, r1, 0x280
@@ -1786,7 +1786,7 @@ asm void fn_803EF3B0(void)
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r0, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_803EF3B0_00001530
     li r0, 0x1
@@ -1801,7 +1801,7 @@ lbl_fn_803EF3B0_00001530:
     stw r3, 0x20(r1)
     stw r0, 0x10(r1)
     b lbl_fn_803EF3B0_00001544
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803EF3B0_00001544:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x1c(r1)
@@ -1907,7 +1907,7 @@ asm void fn_803EF590(void)
     b lbl_fn_803EF590_000016C0
 lbl_fn_803EF590_000016A0:
     mr r3, r29
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803EF590_000016B8
     mr r3, r30
@@ -2025,7 +2025,7 @@ lbl_fn_803EF64C_0000180C:
     beq lbl_fn_803EF64C_0000182C
     beq lbl_fn_803EF64C_0000182C
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803EF64C_0000182C:
     li r0, 0x0
     stw r0, 0x4(r30)
@@ -2073,7 +2073,7 @@ lbl_fn_803EF780_000018A4:
     beq lbl_fn_803EF780_00001B14
     addi r4, r28, lbl_80752084@l
     li r5, 0x6
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_803EF780_000019E0
     addi r3, r1, 0x48
@@ -2151,7 +2151,7 @@ lbl_fn_803EF780_00001948:
 lbl_fn_803EF780_000019E0:
     mr r3, r25
     addi r4, r26, 0x7
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803EF780_00001AC8
     addi r3, r1, 0x70
@@ -2195,12 +2195,12 @@ lbl_fn_803EF780_00001A78:
     cmpwi r0, 0x3b
     beq lbl_fn_803EF780_00001AB4
     addi r4, r26, 0xa
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_803EF780_00001B14
     mr r3, r25
     addi r4, r26, 0x10
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_803EF780_00001B14
 lbl_fn_803EF780_00001AB4:
@@ -2212,7 +2212,7 @@ lbl_fn_803EF780_00001AB4:
 lbl_fn_803EF780_00001AC8:
     mr r3, r25
     addi r4, r26, 0x10
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803EF780_00001B14
     b lbl_fn_803EF780_00001B04
@@ -2223,7 +2223,7 @@ lbl_fn_803EF780_00001AE0:
     cmpwi r0, 0x3b
     beq lbl_fn_803EF780_00001B04
     addi r4, r26, 0xa
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_803EF780_00001B14
 lbl_fn_803EF780_00001B04:

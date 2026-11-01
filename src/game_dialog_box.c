@@ -11,7 +11,7 @@ extern void fn_80063D3C(void);
 extern void fn_8006EF48(void);
 extern void fn_8006F2F0(void);
 extern void fn_8008CD60(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_8009373C(void);
 extern void fn_80094F98(void);
 extern void fn_800BFAC8(void);
@@ -609,7 +609,7 @@ lbl_dialog_renderWindow_000006D8:
     stfs f2, 0x1c0(r1)
     li r5, 0x0
     psq_st f1, 0x0(r6), 0, 0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_dialog_renderWindow_00000720
     li r31, 0x0
@@ -624,7 +624,7 @@ lbl_dialog_renderWindow_0000072C:
     addi r4, r4, lbl_80737A9C@l
     li r5, 0x0
     addi r4, r4, 0x5b
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_dialog_renderWindow_00000754
     li r30, 0x0
@@ -639,7 +639,7 @@ lbl_dialog_renderWindow_00000760:
     addi r4, r4, lbl_80737A9C@l
     li r5, 0x0
     addi r4, r4, 0x60
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_dialog_renderWindow_00000788
     li r29, 0x0
@@ -654,7 +654,7 @@ lbl_dialog_renderWindow_00000794:
     addi r4, r4, lbl_80737A9C@l
     li r5, 0x0
     addi r4, r4, 0x72
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_dialog_renderWindow_000007BC
     li r28, 0x0
@@ -669,7 +669,7 @@ lbl_dialog_renderWindow_000007C8:
     addi r4, r4, lbl_80737A9C@l
     li r5, 0x0
     addi r4, r4, 0x368
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_dialog_renderWindow_000007F0
     li r27, 0x0
@@ -684,7 +684,7 @@ lbl_dialog_renderWindow_000007FC:
     addi r4, r4, lbl_80737A9C@l
     li r5, 0x0
     addi r4, r4, 0x80
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_dialog_renderWindow_00000824
     li r26, 0x0
@@ -699,7 +699,7 @@ lbl_dialog_renderWindow_00000830:
     addi r4, r4, lbl_80737A9C@l
     li r5, 0x0
     addi r4, r4, 0x373
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_dialog_renderWindow_00000858
     li r25, 0x0

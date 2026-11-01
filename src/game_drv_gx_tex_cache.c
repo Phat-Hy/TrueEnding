@@ -101,7 +101,7 @@ extern void fn_80625C90(void);
 extern void fn_806263E0(void);
 extern void fn_8065F520(void);
 extern void fn_806823B0(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_8068AEAC(void);
 extern char* strcpy(char* dest, const char* src);
 
@@ -1686,17 +1686,17 @@ lbl_fn_805C4690_000014D8:
     addi r22, r24, 0xb0
     addi r4, r28, 0xb38
     mr r3, r22
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_805C4690_00001518
     mr r3, r22
     addi r4, r28, 0xb40
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_805C4690_00001518
     mr r3, r22
     addi r4, r28, 0xb48
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_805C4690_00001528
 lbl_fn_805C4690_00001518:

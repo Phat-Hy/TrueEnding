@@ -28,7 +28,7 @@ extern void fn_80625910(void);
 extern void fn_80661B60(void);
 extern void fn_80663330(void);
 extern void fn_806633C0(void);
-extern void fn_80682544(void);
+extern void strncmp(void);
 extern void fn_80709700(void);
 extern void fn_807097C0(void);
 extern void fn_8070C650(void);
@@ -2228,7 +2228,7 @@ lbl_fn_807116B0_00001C34:
     mr r3, r24
     mr r5, r27
     addi r4, r31, 0x10
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_807116B0_00001C70
     lwz r0, 0x8(r31)

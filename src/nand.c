@@ -27,7 +27,7 @@ extern void fn_806210B0(void);
 extern void fn_806212F0(void);
 extern void fn_80621D30(void);
 extern void fn_806823B0(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void nandConvertErrorCode(void);
 extern void nandGenerateAbsPath(void);
 extern void nandIsInitialized(void);
@@ -1030,7 +1030,7 @@ asm void fn_8061ED60(void)
     bl nandGenerateAbsPath
     addi r3, r1, 0x18
     la r4, lbl_8087E8D8
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8061ED60_00000D40
     addi r3, r1, 0x18

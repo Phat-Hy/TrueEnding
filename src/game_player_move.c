@@ -36,7 +36,7 @@ extern void fn_801FEE08(void);
 extern void fn_8021771C(void);
 extern void fn_803BEAB4(void);
 extern void fn_803BEB54(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80686A48(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -1358,7 +1358,7 @@ lbl_fn_8011B018_000011BC:
     beq lbl_fn_8011B018_000013E4
     lwz r3, 0x70(r3)
     addi r4, r31, 0x3d
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_8011B018_000013E4
     li r0, 0x0

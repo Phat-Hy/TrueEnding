@@ -17,10 +17,10 @@ extern void fn_8005B3CC(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006AFF8(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_800C344C(void);
 extern void fn_800CB360(void);
 extern void fn_800CB3A0(void);
@@ -63,8 +63,8 @@ extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_805A3C58(void);
 extern void fn_80680770(void);
-extern void fn_80682428(void);
-extern void fn_80682544(void);
+extern void strcmp(void);
+extern void strncmp(void);
 extern void fn_80686EA4(void);
 extern u32 strlen(const char* str);
 
@@ -191,7 +191,7 @@ asm void fn_802DDC3C(void)
     addi r3, r4, 0xb0
     addi r4, r5, lbl_80786F88@l
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_802DDC3C_000000CC
     li r3, 0x0
@@ -274,7 +274,7 @@ asm void fn_802DDD1C(void)
 lbl_fn_802DDD1C_000001A0:
     mr r3, r28
     mr r4, r31
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802DDD1C_000001CC
     mulli r0, r29, 0x44
@@ -500,13 +500,13 @@ lbl_fn_802DDDB8_000004F4:
     mr r26, r3
     beq lbl_fn_802DDDB8_0000058C
     addi r4, r28, 0x2b
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_802DDDB8_0000058C
     mr r3, r26
     addi r4, r28, 0x2c
     li r5, 0x8
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_802DDDB8_0000057C
     lwz r0, 0x2c(r1)
@@ -700,7 +700,7 @@ lbl_fn_802DE27C_000007E0:
     bl fn_8005B3CC
     mr r28, r3
     addi r4, r30, 0xcb
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802DE27C_00000864
 lbl_fn_802DE27C_000007FC:
@@ -734,7 +734,7 @@ lbl_fn_802DE27C_00000834:
 lbl_fn_802DE27C_00000864:
     mr r3, r28
     addi r4, r30, 0xd8
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802DE27C_000008B0
     stw r29, 0x14(r1)
@@ -756,7 +756,7 @@ lbl_fn_802DE27C_000008A0:
 lbl_fn_802DE27C_000008B0:
     mr r3, r28
     addi r4, r30, 0xe2
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802DE27C_0000090C
 lbl_fn_802DE27C_000008C4:
@@ -782,7 +782,7 @@ lbl_fn_802DE27C_00000900:
 lbl_fn_802DE27C_0000090C:
     mr r3, r28
     addi r4, r30, 0xed
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802DE27C_00000968
 lbl_fn_802DE27C_00000920:
@@ -808,7 +808,7 @@ lbl_fn_802DE27C_0000095C:
 lbl_fn_802DE27C_00000968:
     mr r3, r28
     addi r4, r30, 0xfd
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802DE27C_000009C8
 lbl_fn_802DE27C_0000097C:
@@ -835,7 +835,7 @@ lbl_fn_802DE27C_000009BC:
 lbl_fn_802DE27C_000009C8:
     mr r3, r28
     addi r4, r30, 0x10d
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802DE27C_00000A58
     b lbl_fn_802DE27C_00000A44
@@ -850,7 +850,7 @@ lbl_fn_802DE27C_000009E0:
     cmpwi r0, 0x23
     beq lbl_fn_802DE27C_00000A44
     addi r4, r30, 0x119
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_802DE27C_00000B84
     mr r3, r28
@@ -874,7 +874,7 @@ lbl_fn_802DE27C_00000A44:
 lbl_fn_802DE27C_00000A58:
     mr r3, r28
     addi r4, r30, 0x126
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802DE27C_00000A9C
     addi r3, r1, 0x28
@@ -892,7 +892,7 @@ lbl_fn_802DE27C_00000A58:
 lbl_fn_802DE27C_00000A9C:
     mr r3, r28
     addi r4, r30, 0x133
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802DE27C_00000AC4
     addi r3, r1, 0x28
@@ -903,7 +903,7 @@ lbl_fn_802DE27C_00000A9C:
 lbl_fn_802DE27C_00000AC4:
     mr r3, r28
     addi r4, r30, 0x143
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802DE27C_00000AEC
     addi r3, r1, 0x28
@@ -914,7 +914,7 @@ lbl_fn_802DE27C_00000AC4:
 lbl_fn_802DE27C_00000AEC:
     mr r3, r28
     addi r4, r30, 0x152
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802DE27C_00000B14
     addi r3, r1, 0x28
@@ -925,7 +925,7 @@ lbl_fn_802DE27C_00000AEC:
 lbl_fn_802DE27C_00000B14:
     mr r3, r28
     addi r4, r30, 0x15f
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802DE27C_00000B5C
     addi r3, r1, 0x28
@@ -944,7 +944,7 @@ lbl_fn_802DE27C_00000B14:
 lbl_fn_802DE27C_00000B5C:
     mr r3, r28
     addi r4, r30, 0x16e
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802DE27C_00000B84
     addi r3, r1, 0x28
@@ -1140,7 +1140,7 @@ lbl_fn_802DE80C_00000DE4:
     bl fn_80686EA4
 lbl_fn_802DE80C_00000E18:
     slwi r3, r31, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r28, r3
     bne lbl_fn_802DE80C_00000E4C
@@ -1348,7 +1348,7 @@ lbl_fn_802DEB00_000010E4:
     bl fn_80686EA4
 lbl_fn_802DEB00_00001118:
     slwi r3, r28, 3
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_802DEB00_0000114C

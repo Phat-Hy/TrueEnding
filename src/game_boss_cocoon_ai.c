@@ -8,8 +8,8 @@ extern void _savegpr_17(void);
 extern void dtor_80084684(void);
 extern void fn_8000D430(void);
 extern void fn_80013338(void);
-extern void fn_800844D8(void);
-extern void fn_80092814(void);
+extern void mem_free(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_80094958(void);
 extern void fn_80094B6C(void);
 extern void fn_80097E80(void);
@@ -287,7 +287,7 @@ lbl_fn_80453E20_00000220:
     bl fn_80686EA4
 lbl_fn_80453E20_00000254:
     mulli r3, r28, 0x18
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_80453E20_00000288
@@ -2056,7 +2056,7 @@ lbl_fn_80455638_00001AE0:
     li r5, 0x0
     addi r23, r3, 0xb0
     mr r3, r23
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80455638_00001BE0
     li r5, 0x0

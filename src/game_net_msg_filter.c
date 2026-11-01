@@ -6,7 +6,7 @@ extern void __files(void);
 extern void __register_global_object(void);
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_800DC6B4(void);
 extern void fn_8050E630(void);
 extern void fn_80680770(void);
@@ -1180,7 +1180,7 @@ asm void fn_804FF3D4(void)
     bl fn_80686EA4
 lbl_fn_804FF3D4_00001144:
     mulli r3, r30, 0xd5c
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_804FF3D4_00001178

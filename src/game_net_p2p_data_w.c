@@ -5,8 +5,8 @@
 extern void _restgpr_21(void);
 extern void _savegpr_21(void);
 extern void dtor_80084684(void);
-extern void fn_80084C24(void);
-extern void fn_80092814(void);
+extern void mem_getAllocSize(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_8009EE30(void);
 extern void fn_800A03E4(void);
 extern void fn_800A0548(void);
@@ -34,8 +34,8 @@ extern void PSMTXScale(void);
 extern void PSMTXQuat(void);
 extern void PSMTXMultVec(void);
 extern void PSVECMag(void);
-extern void fn_80682428(void);
-extern void fn_806827C4(void);
+extern void strcmp(void);
+extern void strstr(void);
 extern void fn_80695A50(void);
 extern void fn_806ABCF0(void);
 extern void fn_806CF0E0(void);
@@ -470,7 +470,7 @@ asm void fn_8050F940(void)
     stw r31, 0x50(r28)
     beq lbl_fn_8050F940_00000498
     subi r3, r4, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8050F940_00000498:
     lwz r3, 0x54(r28)
     li r0, 0x0
@@ -527,7 +527,7 @@ lbl_fn_8050FA80_0000053C:
     cmpwi r3, 0x0
     beq lbl_fn_8050FA80_00000558
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8050FA80_00000558:
     mr r3, r30
     li r4, 0x0
@@ -567,7 +567,7 @@ asm void fn_8050FB3C(void)
 lbl_fn_8050FB3C_000005CC:
     lwz r3, 0x4(r29)
     addi r4, r30, 0x1
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8050FB3C_000005E8
     stw r31, 0x0(r28)
@@ -625,7 +625,7 @@ lbl_fn_8050FC08_00000688:
     lwz r28, 0x4(r30)
     addi r4, r31, 0x1
     mr r3, r28
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_8050FC08_000006B8
     mr r3, r29
@@ -734,7 +734,7 @@ lbl_fn_8050FD3C_000007C4:
 lbl_fn_8050FD3C_000007E4:
     mr r3, r28
     mr r4, r26
-    bl fn_806827C4
+    bl strstr
     cmpwi r3, 0x0
     beq lbl_fn_8050FD3C_0000080C
     mr r3, r22
@@ -838,7 +838,7 @@ lbl_p2p_sendDataPacket_00000934:
     mr r3, r22
     addi r4, r31, 0x3
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_p2p_sendDataPacket_00000954
     li r0, 0x0
@@ -862,7 +862,7 @@ lbl_p2p_sendDataPacket_00000984:
     mr r3, r22
     addi r4, r31, 0x3
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_p2p_sendDataPacket_000009A4
     li r3, 0x0
@@ -1214,7 +1214,7 @@ lbl_fn_80510130_00000DD4:
     stfs f0, 0xe8(r1)
     stfs f0, 0xd4(r1)
     stfs f0, 0xc0(r1)
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80510130_00000E80
     li r0, 0x0
@@ -1229,7 +1229,7 @@ lbl_fn_80510130_00000E8C:
     mr r3, r30
     mr r4, r31
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80510130_00000EB4
     li r3, 0x0
@@ -1470,7 +1470,7 @@ lbl_fn_80510724_000011F4:
     mr r3, r30
     mr r4, r29
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80510724_00001214
     li r0, 0x0
@@ -1494,7 +1494,7 @@ lbl_fn_80510724_00001244:
     mr r3, r30
     mr r4, r29
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80510724_00001264
     li r3, 0x0

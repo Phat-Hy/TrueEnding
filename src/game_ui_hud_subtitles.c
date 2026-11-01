@@ -8,9 +8,9 @@ extern void _savegpr_22(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013F78(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_80087E9C(void);
 extern void fn_8008937C(void);
 extern void fn_800A03A0(void);
@@ -392,7 +392,7 @@ asm void fn_801CFD68(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_801CFD68_0000035C
     mr r4, r31
@@ -715,7 +715,7 @@ lbl_fn_801CFDCC_00000768:
     stw r3, 0x50(r29)
     beq lbl_fn_801CFDCC_000007F4
     subi r3, r4, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801CFDCC_000007F4:
     lis r5, lbl_8073C56C@ha
     li r3, 0x454

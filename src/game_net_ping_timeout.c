@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void __files(void);
 extern void dtor_80084684(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_8011728C(void);
 extern void fn_80211480(void);
 extern void fn_802114E0(void);
@@ -338,7 +338,7 @@ lbl_fn_80517B40_000003A8:
     bl fn_80686EA4
 lbl_fn_80517B40_000003D8:
     mulli r3, r25, 0x18
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r24, r3
     bne lbl_fn_80517B40_0000040C
@@ -576,7 +576,7 @@ lbl_fn_80517B40_0000071C:
     bl fn_80686EA4
 lbl_fn_80517B40_0000074C:
     mulli r3, r24, 0x18
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r25, r3
     bne lbl_fn_80517B40_00000780

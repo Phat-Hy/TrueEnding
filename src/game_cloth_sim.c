@@ -12,10 +12,10 @@ extern void fn_80051B70(void);
 extern void fn_8005B3CC(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_800CB360(void);
 extern void fn_800CB3A0(void);
 extern void fn_800CB5C8(void);
@@ -56,7 +56,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void fn_80680770(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80684600(void);
 extern void fn_80686EA4(void);
 extern void fn_8068A850(void);
@@ -479,7 +479,7 @@ lbl_fn_802799C0_000004A4:
     bl fn_8005B3CC
     mr r16, r3
     addi r4, r21, 0x16
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802799C0_000004D4
     addi r3, r1, 0x48
@@ -490,7 +490,7 @@ lbl_fn_802799C0_000004A4:
 lbl_fn_802799C0_000004D4:
     mr r3, r16
     addi r4, r21, 0x21
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802799C0_000004FC
     addi r3, r1, 0x48
@@ -501,7 +501,7 @@ lbl_fn_802799C0_000004D4:
 lbl_fn_802799C0_000004FC:
     mr r3, r16
     addi r4, r21, 0x2a
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802799C0_00000540
     addi r3, r1, 0x48
@@ -519,7 +519,7 @@ lbl_fn_802799C0_000004FC:
 lbl_fn_802799C0_00000540:
     mr r3, r16
     addi r4, r21, 0x35
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802799C0_00000568
     addi r3, r1, 0x48
@@ -530,7 +530,7 @@ lbl_fn_802799C0_00000540:
 lbl_fn_802799C0_00000568:
     mr r3, r16
     addi r4, r21, 0x3e
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802799C0_00000590
     addi r3, r1, 0x48
@@ -541,7 +541,7 @@ lbl_fn_802799C0_00000568:
 lbl_fn_802799C0_00000590:
     mr r3, r16
     addi r4, r21, 0x47
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802799C0_000005B8
     addi r3, r1, 0x48
@@ -552,7 +552,7 @@ lbl_fn_802799C0_00000590:
 lbl_fn_802799C0_000005B8:
     mr r3, r16
     addi r4, r21, 0x51
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802799C0_000005E0
     addi r3, r1, 0x48
@@ -563,7 +563,7 @@ lbl_fn_802799C0_000005B8:
 lbl_fn_802799C0_000005E0:
     mr r3, r16
     addi r4, r21, 0x5b
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802799C0_00000608
     addi r3, r1, 0x48
@@ -574,7 +574,7 @@ lbl_fn_802799C0_000005E0:
 lbl_fn_802799C0_00000608:
     mr r3, r16
     addi r4, r21, 0x64
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802799C0_00000630
     addi r3, r1, 0x48
@@ -585,7 +585,7 @@ lbl_fn_802799C0_00000608:
 lbl_fn_802799C0_00000630:
     mr r3, r16
     addi r4, r21, 0x6f
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802799C0_00000658
     addi r3, r1, 0x48
@@ -596,7 +596,7 @@ lbl_fn_802799C0_00000630:
 lbl_fn_802799C0_00000658:
     mr r3, r16
     addi r4, r21, 0x7a
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802799C0_00000680
     addi r3, r1, 0x48
@@ -607,7 +607,7 @@ lbl_fn_802799C0_00000658:
 lbl_fn_802799C0_00000680:
     mr r3, r16
     addi r4, r21, 0x86
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802799C0_000006A8
     addi r3, r1, 0x48
@@ -618,7 +618,7 @@ lbl_fn_802799C0_00000680:
 lbl_fn_802799C0_000006A8:
     mr r3, r16
     addi r4, r21, 0x95
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802799C0_000006D0
     addi r3, r1, 0x48
@@ -629,7 +629,7 @@ lbl_fn_802799C0_000006A8:
 lbl_fn_802799C0_000006D0:
     mr r3, r16
     addi r4, r21, 0xa5
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802799C0_00000744
     addi r3, r1, 0x48
@@ -663,7 +663,7 @@ lbl_fn_802799C0_0000073C:
 lbl_fn_802799C0_00000744:
     mr r3, r16
     addi r4, r21, 0xb2
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802799C0_000009EC
 lbl_fn_802799C0_00000758:
@@ -787,7 +787,7 @@ lbl_fn_802799C0_000008E0:
     bl fn_80686EA4
 lbl_fn_802799C0_00000900:
     slwi r3, r27, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r17, r3
     bne lbl_fn_802799C0_00000928
@@ -850,7 +850,7 @@ lbl_fn_802799C0_000009E0:
 lbl_fn_802799C0_000009EC:
     mr r3, r16
     addi r4, r21, 0xd2
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802799C0_00000C54
 lbl_fn_802799C0_00000A00:
@@ -955,7 +955,7 @@ lbl_fn_802799C0_00000B4C:
     bl fn_80686EA4
 lbl_fn_802799C0_00000B6C:
     slwi r3, r17, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r28, r3
     bne lbl_fn_802799C0_00000B94
@@ -1186,7 +1186,7 @@ lbl_fn_8027A478_00000E94:
     addi r19, r3, 0xb0
     fmuls f29, f30, f0
     mr r3, r19
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_8027A478_00000ED8
     li r5, 0x0
@@ -1205,7 +1205,7 @@ lbl_fn_8027A478_00000EE4:
     stfs f8, 0x78(r1)
     stfs f7, 0x7c(r1)
     stfs f0, 0x80(r1)
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_8027A478_00000F1C
     li r5, 0x0

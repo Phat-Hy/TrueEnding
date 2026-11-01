@@ -14,9 +14,9 @@ extern void fn_80060D58(void);
 extern void fn_800610A4(void);
 extern void fn_80061824(void);
 extern void fn_8006F420(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800C6E60(void);
 extern void fn_800C6ED8(void);
 extern void fn_800C7568(void);
@@ -46,7 +46,7 @@ extern void fn_804D147C(void);
 extern void fn_8050541C(void);
 extern void fn_805072C8(void);
 extern void fn_80680CF8(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80684600(void);
 extern void fn_806846C4(void);
 extern void fn_80686A48(void);
@@ -769,7 +769,7 @@ asm void fn_80505DD4(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_80505DD4_00000970
@@ -831,7 +831,7 @@ asm void fn_80505EA4(void)
     stw r31, lbl_8087F86C
     cmpwi r3, 0x0
     beq lbl_fn_80505EA4_000009E0
-    bl fn_80084C24
+    bl mem_getAllocSize
     stw r31, lbl_8087F868
 lbl_fn_80505EA4_000009E0:
     addic. r3, r29, 0xa10
@@ -1094,14 +1094,14 @@ lbl_fn_805061CC_00000D5C:
     cmpwi r0, 0x3b
     beq lbl_fn_805061CC_00000FF8
     addi r4, r29, lbl_8075B038@l
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_805061CC_00000FF8
     addi r3, r1, 0x10c
     bl fn_8005B3CC
     mr r25, r3
     addi r4, r30, 0x6
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_805061CC_00000E40
     mr r25, r28
@@ -1115,7 +1115,7 @@ lbl_fn_805061CC_00000DAC:
     cmpwi r0, 0x3b
     beq lbl_fn_805061CC_00000E2C
     addi r4, r30, 0xa
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_805061CC_00000FF8
     cmpwi r24, 0x6
@@ -1153,7 +1153,7 @@ lbl_fn_805061CC_00000E2C:
 lbl_fn_805061CC_00000E40:
     mr r3, r25
     addi r4, r30, 0xe
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_805061CC_00000EF8
     mr r26, r28
@@ -1167,7 +1167,7 @@ lbl_fn_805061CC_00000E64:
     cmpwi r0, 0x3b
     beq lbl_fn_805061CC_00000EE4
     addi r4, r30, 0xa
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_805061CC_00000FF8
     cmpwi r24, 0x6
@@ -1220,7 +1220,7 @@ lbl_fn_805061CC_00000F20:
     cmpwi r0, 0x3b
     beq lbl_fn_805061CC_00000F80
     addi r4, r30, 0xa
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_805061CC_00000F90
     cmpwi r24, 0x20

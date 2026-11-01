@@ -22,8 +22,8 @@ extern void fn_800629F0(void);
 extern void fn_80063764(void);
 extern void fn_80063D3C(void);
 extern void fn_8006AC08(void);
-extern void fn_80084320(void);
-extern void fn_80084C24(void);
+extern void mem_alloc(void);
+extern void mem_getAllocSize(void);
 extern void fn_800874C8(void);
 extern void fn_8008771C(void);
 extern void fn_80087E9C(void);
@@ -58,7 +58,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void fn_8067E23C(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80684600(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
@@ -146,7 +146,7 @@ asm void fn_80361CA4(void)
     lwz r3, 0x68(r3)
     cmpwi r3, 0x0
     beq lbl_fn_80361CA4_0000003C
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80361CA4_0000003C:
     li r0, 0x0
     stw r0, 0x68(r30)
@@ -563,7 +563,7 @@ asm void fn_80362278(void)
     stw r29, 0x14(r1)
     mr r29, r3
     li r3, 0x78
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_80362278_00000680
@@ -873,7 +873,7 @@ asm void fn_803626A8(void)
     stw r29, 0x14(r1)
     mr r29, r3
     li r3, 0xa8
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_803626A8_00000AB0
@@ -1308,7 +1308,7 @@ asm void fn_80362CC4(void)
     stw r29, 0x14(r1)
     mr r29, r3
     li r3, 0x68
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_80362CC4_000010CC
@@ -1873,7 +1873,7 @@ lbl_fn_80363284_000017DC:
     lis r4, lbl_8074B780@ha
     addi r4, r4, lbl_8074B780@l
     addi r4, r4, 0x4
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_80363284_00001848
     addi r3, r30, 0x10
@@ -1893,7 +1893,7 @@ lbl_fn_80363284_00001848:
     lis r4, lbl_8074B780@ha
     addi r4, r4, lbl_8074B780@l
     addi r4, r4, 0x4
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_80363284_00001884
     addi r3, r30, 0x10
@@ -2018,7 +2018,7 @@ lbl_fn_803635E8_000019F4:
     cmpwi r0, 0x3b
     beq lbl_fn_803635E8_00001B04
     addi r4, r31, 0x5
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803635E8_00001A80
     addi r3, r1, 0x308
@@ -2033,7 +2033,7 @@ lbl_fn_803635E8_000019F4:
     bl strcpy
     addi r3, r1, 0x108
     addi r4, r31, 0x4
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803635E8_00001A6C
     addi r3, r29, 0x4
@@ -2050,7 +2050,7 @@ lbl_fn_803635E8_00001A6C:
 lbl_fn_803635E8_00001A80:
     mr r3, r30
     addi r4, r31, 0xb
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803635E8_00001AB0
     lwz r3, 0x3dc(r29)
@@ -2063,7 +2063,7 @@ lbl_fn_803635E8_00001A80:
 lbl_fn_803635E8_00001AB0:
     mr r3, r30
     addi r4, r31, 0x17
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803635E8_00001B04
     lwz r0, 0x8(r29)

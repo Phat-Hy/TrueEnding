@@ -22,10 +22,10 @@ extern void fn_80043014(void);
 extern void fn_8005B3CC(void);
 extern void fn_8006B0C8(void);
 extern void fn_8006D008(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_8009EE30(void);
 extern void fn_800DC288(void);
 extern void fn_800E0AA8(void);
@@ -58,7 +58,7 @@ extern void PSMTXScale(void);
 extern void PSMTXMultVec(void);
 extern void fn_80680770(void);
 extern void fn_80680CF8(void);
-extern void fn_80682544(void);
+extern void strncmp(void);
 extern void fn_80684600(void);
 extern void fn_80686EA4(void);
 extern void fn_80695720(void);
@@ -353,7 +353,7 @@ lbl_fn_804985E4_00000334:
     li r5, 0x2
     lwz r22, 0x0(r3)
     mr r3, r22
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_804985E4_000005AC
     addi r3, r22, 0x2
@@ -511,7 +511,7 @@ lbl_fn_804985E4_000005AC:
     mr r3, r22
     addi r4, r28, 0x40
     li r5, 0x2
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_804985E4_000005D0
     addi r3, r1, 0x9c
@@ -598,7 +598,7 @@ lbl_fn_804985E4_000006F0:
     mr r6, r5
     li r4, 0x6
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r22, r3
     beq lbl_fn_804985E4_00000740
@@ -1214,7 +1214,7 @@ lbl_fn_80499080_00000EC0:
     bl fn_80686EA4
 lbl_fn_80499080_00000EF4:
     slwi r3, r28, 3
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_80499080_00000F28
@@ -1428,7 +1428,7 @@ lbl_fn_80499390_000011C4:
     bl fn_80686EA4
 lbl_fn_80499390_000011F8:
     slwi r3, r31, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r28, r3
     bne lbl_fn_80499390_0000122C
@@ -1541,7 +1541,7 @@ asm void fn_8049969C(void)
     cmpwi r0, 0x0
     beq lbl_fn_8049969C_00001380
     mr r3, r0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8049969C_00001380:
     cmpwi r30, 0x0
     stw r30, 0x0(r29)

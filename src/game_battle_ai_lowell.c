@@ -13,7 +13,7 @@ extern void fn_80051CD8(void);
 extern void fn_8005B9CC(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800874C8(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
@@ -22,9 +22,9 @@ extern void fn_8008937C(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
 extern void fn_8008CD60(void);
-extern void fn_80097C08(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097CCC(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A4228(void);
 extern void fn_800BFAC8(void);
 extern void fn_800C31F4(void);
@@ -82,7 +82,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void fn_80680CF8(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 
@@ -689,7 +689,7 @@ lbl_fn_804366A0_0000074C:
     cmpwi r0, 0x3b
     beq lbl_fn_804366A0_000007DC
     addi r4, r31, 0xe
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_804366A0_000007A0
     addi r3, r1, 0x8
@@ -706,7 +706,7 @@ lbl_fn_804366A0_0000074C:
 lbl_fn_804366A0_000007A0:
     mr r3, r28
     addi r4, r31, 0x14
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_804366A0_000007DC
     cmpwi r29, 0x3
@@ -1202,7 +1202,7 @@ asm void fn_80436E34(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80436E34_00000E9C
     mr r4, r29
@@ -2359,7 +2359,7 @@ lbl_fn_804375C0_00001EDC:
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     stfs f27, 0x378(r17)
 lbl_fn_804375C0_00001F3C:
     fcmpo cr0, f30, f28
@@ -2919,7 +2919,7 @@ lbl_fn_804375C0_00002754:
     lfs f21, 0x2c4(r14)
     mr r3, r14
     li r4, 0x3
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f21, f1
     cror eq, gt, eq
     beq lbl_fn_804375C0_00002784

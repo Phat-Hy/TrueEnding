@@ -13,8 +13,8 @@ extern void fn_80056DB8(void);
 extern void fn_800697D8(void);
 extern void fn_8006AD24(void);
 extern void fn_8007A75C(void);
-extern void fn_80084320(void);
-extern void fn_80084C24(void);
+extern void mem_alloc(void);
+extern void mem_getAllocSize(void);
 extern void lockon_updateTarget(void);
 extern void fn_800CB360(void);
 extern void atn_Task_constructor(void);
@@ -48,7 +48,7 @@ extern void fn_804444E8(void);
 extern void fn_804446BC(void);
 extern void atn_LoadHandle_constructor(void);
 extern void fn_80680CF8(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -1630,7 +1630,7 @@ lbl_fn_801354B4_000014D4:
     beq lbl_fn_801354B4_00001574
     beq lbl_fn_801354B4_0000156C
     subi r3, r4, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801354B4_0000156C:
     li r0, 0x0
     stw r0, 0x62c(r29)
@@ -1656,7 +1656,7 @@ lbl_fn_801354B4_00001574:
     lwz r3, 0x1c(r3)
     addi r30, r30, lbl_80737A9C@l
     addi r4, r30, 0x24
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_801354B4_0000172C
     li r0, 0x0
@@ -1892,7 +1892,7 @@ lbl_fn_801354B4_000018B4:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_801354B4_0000195C
     mr r4, r29

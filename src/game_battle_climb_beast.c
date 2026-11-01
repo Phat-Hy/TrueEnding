@@ -26,11 +26,11 @@ extern void fn_80057A64(void);
 extern void fn_8005B9CC(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
 extern void atn_Matrix_copy_2(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_80092F1C(void);
 extern void lockon_updateTarget(void);
 extern void fn_800C344C(void);
@@ -95,7 +95,7 @@ extern void fn_8047059C(void);
 extern void fn_804EB1B0(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80684600(void);
 extern char* strcpy(char* dest, const char* src);
 
@@ -273,7 +273,7 @@ asm void fn_803F9F34(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_803F9F34_0000017C
     mr r4, r30
@@ -522,7 +522,7 @@ lbl_fn_803FA214_000004B0:
     cmpwi r0, 0x3b
     beq lbl_fn_803FA214_00000590
     addi r4, r31, 0x1
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803FA214_000004F4
     addi r3, r1, 0x108
@@ -535,7 +535,7 @@ lbl_fn_803FA214_000004B0:
 lbl_fn_803FA214_000004F4:
     mr r3, r30
     addi r4, r31, 0x7
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803FA214_0000053C
     addi r3, r1, 0x108
@@ -554,7 +554,7 @@ lbl_fn_803FA214_000004F4:
 lbl_fn_803FA214_0000053C:
     mr r3, r30
     addi r4, r31, 0x11
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803FA214_00000590
     addi r3, r1, 0x108
@@ -645,7 +645,7 @@ lbl_fn_803FA3D0_00000674:
     cmpwi r0, 0x3b
     beq lbl_fn_803FA3D0_000006FC
     addi r4, r30, 0x15
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803FA3D0_000006D8
     addi r3, r1, 0x8
@@ -666,7 +666,7 @@ lbl_fn_803FA3D0_00000674:
 lbl_fn_803FA3D0_000006D8:
     mr r3, r29
     addi r4, r30, 0x23
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803FA3D0_000006FC
     addi r3, r1, 0x8
@@ -1331,7 +1331,7 @@ asm void fn_803FAE38(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_803FAE38_00001050
     li r3, 0x0

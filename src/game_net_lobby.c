@@ -11,9 +11,9 @@ extern void fn_80061824(void);
 extern void fn_80062C8C(void);
 extern void fn_80063764(void);
 extern void fn_8006F2F0(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800874C8(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
@@ -1055,7 +1055,7 @@ asm void fn_801EA4B0(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_801EA4B0_00000D34
     mr r4, r29
@@ -1156,7 +1156,7 @@ lbl_fn_801EA534_00000E74:
     cmpwi r3, 0x0
     lwz r28, 0x0(r4)
     beq lbl_fn_801EA534_00000E8C
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801EA534_00000E8C:
     cmpwi r28, 0x0
     stw r28, 0x84(r30)
@@ -1326,7 +1326,7 @@ lbl_fn_801EA874_000010E8:
     lwz r3, 0x88(r30)
     cmpwi r3, 0x0
     beq lbl_fn_801EA874_00001100
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801EA874_00001100:
     li r0, 0x0
     stw r0, 0x88(r30)

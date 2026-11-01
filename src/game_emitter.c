@@ -8,8 +8,8 @@ extern void dtor_80084684(void);
 extern void fn_80044C50(void);
 extern void fn_80044CCC(void);
 extern void fn_80044E0C(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_8008BBD8(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
@@ -593,7 +593,7 @@ lbl_fn_800E2778_000005A0:
     cmplw r27, r0
     blt lbl_fn_800E2778_00000594
     mr r3, r27
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r21, r3
     bne lbl_fn_800E2778_000005DC
@@ -1315,7 +1315,7 @@ lbl_fn_800E2FE0_00000F7C:
     stw r3, 0x638(r30)
     li r3, 0x2c
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_800E2FE0_00000FF0
@@ -1579,7 +1579,7 @@ lbl_fn_800E2FE0_00001324:
     stw r3, 0x638(r30)
     li r3, 0x30
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_800E2FE0_000013DC

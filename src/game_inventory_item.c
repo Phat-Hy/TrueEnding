@@ -7,7 +7,7 @@ extern void _savegpr_26(void);
 extern void fn_80044E0C(void);
 extern void fn_8004ED34(void);
 extern void fn_80050A1C(void);
-extern void fn_80097C08(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800C344C(void);
 extern void fn_800CB3A0(void);
 extern void fn_801059F8(void);
@@ -932,7 +932,7 @@ lbl_fn_80153698_00000BCC:
     lfs f2, lbl_80881994
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     b lbl_fn_80153698_00000C1C
 lbl_fn_80153698_00000BE8:
     extrwi. r0, r3, 1, 2
@@ -949,7 +949,7 @@ lbl_fn_80153698_00000C04:
     lfs f2, lbl_80881994
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
 lbl_fn_80153698_00000C1C:
     lis r4, lbl_80737490@ha
     lfs f1, lbl_80881964
@@ -1596,7 +1596,7 @@ lbl_fn_80153FD8_00001538:
     lfs f2, lbl_80881994
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     b lbl_fn_80153FD8_000015CC
 lbl_fn_80153FD8_00001554:
     lwz r3, 0x12a4(r31)
@@ -1616,7 +1616,7 @@ lbl_fn_80153FD8_0000157C:
     lfs f2, lbl_80881994
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     b lbl_fn_80153FD8_000015CC
 lbl_fn_80153FD8_00001598:
     extrwi. r0, r3, 1, 2
@@ -1633,7 +1633,7 @@ lbl_fn_80153FD8_000015B4:
     lfs f2, lbl_80881994
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
 lbl_fn_80153FD8_000015CC:
     lis r4, lbl_80737490@ha
     lfs f1, lbl_80881964

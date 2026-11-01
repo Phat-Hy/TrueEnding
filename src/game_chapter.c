@@ -14,7 +14,7 @@ extern void gx_applyRenderState(void);
 extern void fn_800763C0(void);
 extern void gx_setRenderStateParam(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800874C8(void);
 extern void fn_8008771C(void);
 extern void fn_80088AF4(void);
@@ -233,7 +233,7 @@ lbl_fn_80077160_00000198:
     beq lbl_fn_80077160_000001E4
     beq lbl_fn_80077160_000001E4
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80077160_000001E4:
     cmpwi r24, 0x0
     stw r24, 0x18(r31)
@@ -403,7 +403,7 @@ lbl_atn_LensFlare_destructor_0000040C:
     beq lbl_atn_LensFlare_destructor_00000444
     beq lbl_atn_LensFlare_destructor_00000444
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_atn_LensFlare_destructor_00000444:
     li r0, 0x0
     stw r0, 0x1c(r30)

@@ -8,10 +8,10 @@ extern void _restgpr_26(void);
 extern void _savegpr_14(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_800844D8(void);
-extern void fn_80097C08(void);
+extern void mem_free(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097CCC(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C31F4(void);
 extern void fn_800C344C(void);
 extern void fn_800CB3A0(void);
@@ -119,7 +119,7 @@ asm void fn_802DC1C0(void)
     stfs f0, 0x2e8(r29)
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lis r4, lbl_80747654@ha
     lfs f1, lbl_80884600
     addi r4, r4, lbl_80747654@l
@@ -259,7 +259,7 @@ asm void fn_802DC3D0(void)
     stfs f0, 0x2e8(r28)
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lis r4, lbl_80747654@ha
     lfs f1, lbl_80884600
     addi r4, r4, lbl_80747654@l
@@ -438,10 +438,10 @@ asm void fn_802DC618(void)
     li r7, 0x0
     stfs f0, 0x2e8(r28)
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     addi r3, r28, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     stfs f1, 0x2e4(r28)
     li r30, 0x0
     li r31, 0x0
@@ -804,7 +804,7 @@ lbl_fn_802DCA34_00000A2C:
     bl fn_80686EA4
 lbl_fn_802DCA34_00000A4C:
     slwi r3, r29, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r21, r3
     bne lbl_fn_802DCA34_00000A74
@@ -1000,7 +1000,7 @@ lbl_fn_802DCA34_00000D04:
     bl fn_80686EA4
 lbl_fn_802DCA34_00000D24:
     slwi r3, r27, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r28, r3
     bne lbl_fn_802DCA34_00000D50
@@ -1393,7 +1393,7 @@ lbl_fn_802DD1B4_00001290:
     bl fn_80686EA4
 lbl_fn_802DD1B4_000012B0:
     slwi r3, r30, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r20, r3
     bne lbl_fn_802DD1B4_000012D8
@@ -1597,7 +1597,7 @@ lbl_fn_802DD1B4_00001584:
     bl fn_80686EA4
 lbl_fn_802DD1B4_000015A4:
     slwi r3, r19, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r21, r3
     bne lbl_fn_802DD1B4_000015CC

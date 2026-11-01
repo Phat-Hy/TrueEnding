@@ -17,9 +17,9 @@ extern void fn_8001047C(void);
 extern void fn_80013338(void);
 extern void fn_8006EF48(void);
 extern void fn_8006F72C(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800BFAC8(void);
 extern void fn_800DBF68(void);
 extern void fn_800DC6B4(void);
@@ -253,7 +253,7 @@ lbl_fn_805AB1DC_00000198:
     bdnz lbl_fn_805AB1DC_00000198
 lbl_fn_805AB1DC_000001B0:
     lwz r3, 0x8(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_805AB1DC_000001B8:
     li r0, 0x8
     stw r30, 0x8(r28)
@@ -347,7 +347,7 @@ lbl_fn_805AB1DC_000002F4:
     bdnz lbl_fn_805AB1DC_000002F4
 lbl_fn_805AB1DC_0000030C:
     lwz r3, 0x8(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_805AB1DC_00000314:
     stw r31, 0x8(r28)
     stw r30, 0x4(r28)
@@ -473,7 +473,7 @@ lbl_fn_805AB50C_000004B4:
     bdnz lbl_fn_805AB50C_000004B4
 lbl_fn_805AB50C_000004CC:
     lwz r3, 0x8(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_805AB50C_000004D4:
     li r0, 0x8
     stw r31, 0x8(r28)
@@ -567,7 +567,7 @@ lbl_fn_805AB50C_00000610:
     bdnz lbl_fn_805AB50C_00000610
 lbl_fn_805AB50C_00000628:
     lwz r3, 0x8(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_805AB50C_00000630:
     stw r30, 0x8(r28)
     stw r31, 0x4(r28)
@@ -993,7 +993,7 @@ asm void fn_805ABD8C(void)
     lwz r3, 0x8(r3)
     cmpwi r3, 0x0
     beq lbl_fn_805ABD8C_00000C0C
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_805ABD8C_00000C0C:
     cmpwi r31, 0x0
     ble lbl_fn_805ABD8C_00000C1C
@@ -2523,7 +2523,7 @@ lbl_fn_805AC75C_000021C8:
     bl fn_80686EA4
 lbl_fn_805AC75C_000021E8:
     mulli r3, r17, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r18, r3
     bne lbl_fn_805AC75C_00002214
@@ -2823,7 +2823,7 @@ lbl_fn_805AC75C_00002620:
     bl fn_80686EA4
 lbl_fn_805AC75C_00002640:
     mulli r3, r27, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_805AC75C_00002668

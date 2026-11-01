@@ -13,7 +13,7 @@ extern void fn_80079044(void);
 extern void fn_800790D0(void);
 extern void fn_80079210(void);
 extern void fn_8007A154(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_800C16B4(void);
 extern void fn_800C1990(void);
 extern void atn_Task_setActive(void);
@@ -248,7 +248,7 @@ lbl_fn_80485964_00000288:
     bl fn_80686EA4
 lbl_fn_80485964_000002BC:
     slwi r3, r31, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_80485964_000002F0
@@ -550,7 +550,7 @@ lbl_fn_80485964_00000708:
     bl fn_80686EA4
 lbl_fn_80485964_0000073C:
     mulli r3, r27, 0x44
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r26, r3
     bne lbl_fn_80485964_00000770
@@ -880,7 +880,7 @@ lbl_fn_804862C4_00000BCC:
     bl fn_80686EA4
 lbl_fn_804862C4_00000C00:
     slwi r3, r27, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_804862C4_00000C34
@@ -1179,7 +1179,7 @@ lbl_fn_804862C4_00001040:
     bl fn_80686EA4
 lbl_fn_804862C4_00001074:
     mulli r3, r28, 0x44
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_804862C4_000010A8

@@ -10,9 +10,9 @@ extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void fn_80069758(void);
 extern void fn_8006AA20(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800874C8(void);
 extern void fn_8008771C(void);
 extern void fn_80087858(void);
@@ -22,12 +22,12 @@ extern void fn_80088724(void);
 extern void fn_8008937C(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
 extern void fn_80097A88(void);
-extern void fn_80097C08(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_setLayerAnimation(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C31F4(void);
 extern void fn_800CB360(void);
 extern void fn_800CB3A0(void);
@@ -61,7 +61,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void fn_80680CF8(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80684600(void);
 extern void fn_80695720(void);
 extern void fn_806958E0(void);
@@ -388,7 +388,7 @@ lbl_fn_8042FAC4_0000037C:
     lfs f31, 0x708(r31)
     addi r3, r31, 0x4d4
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f31, f1
     cror eq, gt, eq
     bne lbl_fn_8042FAC4_000003DC
@@ -470,7 +470,7 @@ asm void fn_8042FDBC(void)
     addi r4, r4, 0x1
     li r5, 0x0
     addi r3, r3, 0x4d4
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_8042FDBC_000004C8
     li r23, 0x0
@@ -931,7 +931,7 @@ lbl_fn_80430428_00000B5C:
     cmpwi r0, 0x3b
     beq lbl_fn_80430428_00000D44
     addi r4, r29, 0x7
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80430428_00000BB0
     addi r3, r1, 0x108
@@ -948,7 +948,7 @@ lbl_fn_80430428_00000B5C:
 lbl_fn_80430428_00000BB0:
     mr r3, r27
     addi r4, r29, 0x14
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80430428_00000BF0
     addi r3, r1, 0x108
@@ -965,7 +965,7 @@ lbl_fn_80430428_00000BB0:
 lbl_fn_80430428_00000BF0:
     mr r3, r27
     addi r4, r29, 0x20
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80430428_00000C38
     addi r3, r1, 0x108
@@ -984,12 +984,12 @@ lbl_fn_80430428_00000BF0:
 lbl_fn_80430428_00000C38:
     mr r3, r27
     addi r4, r29, 0x27
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_80430428_00000D44
     mr r3, r27
     addi r4, r29, 0x34
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80430428_00000C68
     addi r26, r26, 0x1
@@ -997,7 +997,7 @@ lbl_fn_80430428_00000C38:
 lbl_fn_80430428_00000C68:
     mr r3, r27
     addi r4, r29, 0x3d
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80430428_00000C84
     addi r25, r25, 0x1
@@ -1005,7 +1005,7 @@ lbl_fn_80430428_00000C68:
 lbl_fn_80430428_00000C84:
     mr r3, r27
     addi r4, r29, 0x45
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80430428_00000D44
     addi r3, r1, 0x108
@@ -1024,7 +1024,7 @@ lbl_fn_80430428_00000C84:
     cmpwi r0, 0x0
     beq lbl_fn_80430428_00000CDC
     mr r3, r0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80430428_00000CDC:
     cmpwi r30, 0x0
     stw r30, 0x8b4(r31)
@@ -1066,7 +1066,7 @@ lbl_fn_80430428_00000D44:
     beq lbl_fn_80430428_00000D6C
     beq lbl_fn_80430428_00000D6C
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80430428_00000D6C:
     cmpwi r26, 0x0
     stw r26, 0x8a4(r31)
@@ -1095,7 +1095,7 @@ lbl_fn_80430428_00000DBC:
     beq lbl_fn_80430428_00000DD4
     beq lbl_fn_80430428_00000DD4
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80430428_00000DD4:
     cmpwi r25, 0x0
     stw r25, 0x8ac(r31)
@@ -1181,7 +1181,7 @@ lbl_fn_804307B4_00000EE8:
     cmpwi r0, 0x3b
     beq lbl_fn_804307B4_00000F58
     addi r4, r31, 0x34
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_804307B4_00000F2C
     lwz r0, 0x8a8(r27)
@@ -1194,7 +1194,7 @@ lbl_fn_804307B4_00000EE8:
 lbl_fn_804307B4_00000F2C:
     mr r3, r28
     addi r4, r31, 0x3d
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_804307B4_00000F58
     lwz r0, 0x8b0(r27)
@@ -1247,7 +1247,7 @@ lbl_fn_804308F8_00000FC8:
     li r7, 0x1
     li r8, 0x1
     addi r3, r3, 0x4d4
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     mr r3, r31
     addi r4, r31, 0x4d4
     bl fn_803ED5D0
@@ -1291,7 +1291,7 @@ lbl_fn_804308F8_0000106C:
     li r7, 0x1
     li r8, 0x1
     addi r3, r3, 0x4d4
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f1, lbl_80886820
     lis r4, lbl_80753FB8@ha
     stfs f1, 0x70c(r31)
@@ -1333,10 +1333,10 @@ lbl_fn_804308F8_00001108:
     li r7, 0x1
     li r8, 0x1
     addi r3, r3, 0x4d4
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     addi r3, r31, 0x4d4
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     stfs f1, 0x708(r31)
     mr r3, r31
     lwz r12, 0x0(r31)
@@ -1724,7 +1724,7 @@ asm void fn_80430FC0(void)
     lwz r3, 0x8b8(r3)
     cmpwi r3, 0x0
     beq lbl_fn_80430FC0_00001680
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80430FC0_00001680:
     li r0, 0x0
     stw r0, 0x8b8(r30)
@@ -1737,7 +1737,7 @@ lbl_fn_80430FC0_0000168C:
     beq lbl_fn_80430FC0_000016AC
     beq lbl_fn_80430FC0_000016AC
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80430FC0_000016AC:
     li r0, 0x0
     stw r0, 0x8b0(r30)
@@ -1750,7 +1750,7 @@ lbl_fn_80430FC0_000016B8:
     beq lbl_fn_80430FC0_000016D8
     beq lbl_fn_80430FC0_000016D8
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80430FC0_000016D8:
     li r0, 0x0
     stw r0, 0x8a8(r30)
@@ -1825,7 +1825,7 @@ lbl_fn_804310B0_000017C0:
     addi r5, r5, 0xf
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_804310B0_00001800
     mr r4, r28

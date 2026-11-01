@@ -6,8 +6,8 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void fn_80041A28(void);
 extern void fn_8004ED34(void);
-extern void fn_80084320(void);
-extern void fn_80097D7C(void);
+extern void mem_alloc(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
 extern void fn_800CB3A0(void);
 extern void fn_800F8548(void);
@@ -664,7 +664,7 @@ lbl_fn_8035C8CC_000007E4:
     li r7, 0x0
     stw r8, 0x14b8(r3)
     li r3, 0x10
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_8035C8CC_0000085C
@@ -887,7 +887,7 @@ lbl_fn_8035CF78_00000B50:
     lfs f31, 0x2e4(r31)
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_80885640
     fsubs f0, f1, f0
     fcmpo cr0, f31, f0

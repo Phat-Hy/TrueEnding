@@ -54,8 +54,8 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_80682428(void);
-extern void fn_806827C4(void);
+extern void strcmp(void);
+extern void strstr(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -297,7 +297,7 @@ asm void fn_803EC7A0(void)
 lbl_fn_803EC7A0_00000270:
     mr r3, r26
     addi r4, r27, 0x12
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803EC7A0_0000028C
     stw r31, 0xa4(r28)
@@ -305,7 +305,7 @@ lbl_fn_803EC7A0_00000270:
 lbl_fn_803EC7A0_0000028C:
     mr r3, r26
     addi r4, r27, 0x1a
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803EC7A0_000002B0
     lwz r0, 0x4(r29)
@@ -315,7 +315,7 @@ lbl_fn_803EC7A0_0000028C:
 lbl_fn_803EC7A0_000002B0:
     mr r3, r26
     addi r4, r27, 0x22
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803EC7A0_000002D4
     lwz r0, 0x4(r29)
@@ -325,7 +325,7 @@ lbl_fn_803EC7A0_000002B0:
 lbl_fn_803EC7A0_000002D4:
     mr r3, r26
     addi r4, r27, 0x30
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803EC7A0_000002F8
     lwz r0, 0x4(r29)
@@ -335,7 +335,7 @@ lbl_fn_803EC7A0_000002D4:
 lbl_fn_803EC7A0_000002F8:
     mr r3, r26
     addi r4, r27, 0x42
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803EC7A0_0000031C
     lwz r0, 0x4(r29)
@@ -345,7 +345,7 @@ lbl_fn_803EC7A0_000002F8:
 lbl_fn_803EC7A0_0000031C:
     mr r3, r26
     addi r4, r27, 0x52
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803EC7A0_00000340
     lwz r0, 0x4(r29)
@@ -355,7 +355,7 @@ lbl_fn_803EC7A0_0000031C:
 lbl_fn_803EC7A0_00000340:
     mr r3, r26
     addi r4, r27, 0x66
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803EC7A0_00000360
     lwz r0, 0x4(r29)
@@ -370,7 +370,7 @@ lbl_fn_803EC7A0_0000036C:
     beq lbl_fn_803EC7A0_00000388
     mr r4, r26
     addi r3, r27, 0x6f
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803EC7A0_00000270
 lbl_fn_803EC7A0_00000388:
@@ -1752,7 +1752,7 @@ lbl_fn_803EDB18_00001654:
     mr r3, r31
     bl fn_8008B130
     mr r4, r29
-    bl fn_806827C4
+    bl strstr
     cmpwi r3, 0x0
     beq lbl_fn_803EDB18_0000175C
     lfs f0, 0x8(r22)

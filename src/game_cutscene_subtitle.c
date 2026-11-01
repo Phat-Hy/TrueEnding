@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void fn_80041A28(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800CB3A0(void);
 extern void fn_800CB440(void);
 extern void fn_800CB58C(void);
@@ -986,7 +986,7 @@ lbl_fn_80330218_00000C78:
     lfs f29, 0x2e4(r31)
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_808850DC
     fsubs f0, f1, f0
     fcmpo cr0, f29, f0

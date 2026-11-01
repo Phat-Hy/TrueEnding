@@ -5,7 +5,7 @@
 extern void _restgpr_25(void);
 extern void _savegpr_25(void);
 extern void fn_8004ECC0(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_8016E970(void);
 extern void fn_80189CB4(void);
 extern void fn_8018A8CC(void);
@@ -278,7 +278,7 @@ lbl_fn_801562A0_00000320:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_801562A0_0000035C
@@ -532,7 +532,7 @@ lbl_fn_801562A0_000006D4:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_801562A0_00000714
@@ -720,7 +720,7 @@ lbl_fn_801562A0_00000988:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_801562A0_000009C8
@@ -999,7 +999,7 @@ lbl_fn_801562A0_00000D44:
     psq_l f1, 0x0(r8), 0, 0
     psq_st f1, 0x0(r27), 0, 0
     stfs f2, 0x130(r1)
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_801562A0_00000DE4
@@ -1187,7 +1187,7 @@ lbl_fn_801562A0_00001058:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_801562A0_00001094
@@ -1467,7 +1467,7 @@ lbl_fn_80157444_00001454:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80157444_00001490
@@ -1746,7 +1746,7 @@ lbl_fn_8015783C_0000184C:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8015783C_00001888

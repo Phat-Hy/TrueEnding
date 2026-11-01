@@ -8,11 +8,11 @@ extern void fn_8001047C(void);
 extern void fn_80011034(void);
 extern void fn_80017064(void);
 extern void fn_80057A68(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_80084A78(void);
-extern void fn_80084C24(void);
-extern void fn_80097C08(void);
+extern void mem_getAllocSize(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800C61C0(void);
 extern void fn_800C622C(void);
 extern void fn_800C7CA8(void);
@@ -237,7 +237,7 @@ lbl_fn_80139560_00000160:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_80139560_000001B0
@@ -366,7 +366,7 @@ lbl_fn_80139560_000002D4:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f1, lbl_80881964
     addi r3, r31, 0xb0
     li r4, 0x0
@@ -1272,7 +1272,7 @@ lbl_fn_8013A258_00000E08:
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r0, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_8013A258_00000EAC
     li r0, 0x1
@@ -1287,7 +1287,7 @@ lbl_fn_8013A258_00000EAC:
     stw r3, 0x20(r1)
     stw r0, 0x10(r1)
     b lbl_fn_8013A258_00000EC0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8013A258_00000EC0:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x1c(r1)

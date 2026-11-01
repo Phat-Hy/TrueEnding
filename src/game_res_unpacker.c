@@ -9,7 +9,7 @@ extern void fn_80012054(void);
 extern void fn_800128FC(void);
 extern void fn_80012934(void);
 extern void fn_8005E7F4(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800A555C(void);
 extern void fn_800C31F4(void);
 extern void fn_800CB3A0(void);
@@ -1072,7 +1072,7 @@ asm void fn_80229D20(void)
     beq lbl_fn_80229D20_00000D90
     beq lbl_fn_80229D20_00000D90
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80229D20_00000D90:
     li r0, 0x0
     stw r0, 0x194(r29)
@@ -1086,7 +1086,7 @@ lbl_fn_80229D20_00000D9C:
     beq lbl_fn_80229D20_00000DC0
     beq lbl_fn_80229D20_00000DC0
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80229D20_00000DC0:
     li r0, 0x0
     stw r0, 0x4(r31)

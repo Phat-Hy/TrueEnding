@@ -3,9 +3,9 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_80084A78(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800C411C(void);
 extern void fn_800DCA6C(void);
 extern void fn_80365708(void);
@@ -24,7 +24,7 @@ extern void fn_805738BC(void);
 extern void fn_80573B18(void);
 extern void fn_80573F44(void);
 extern void fn_80574178(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_806952C4(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -193,7 +193,7 @@ lbl_fn_805746B0_000001A8:
     lis r3, lbl_80796710@ha
     lwz r4, lbl_80796710@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_805746B0_000001D0
@@ -537,7 +537,7 @@ asm void fn_80574AF0(void)
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r0, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_80574AF0_000006A8
     li r0, 0x1
@@ -552,7 +552,7 @@ lbl_fn_80574AF0_000006A8:
     stw r3, 0x20(r1)
     stw r0, 0x10(r1)
     b lbl_fn_80574AF0_000006BC
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80574AF0_000006BC:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x1c(r1)
@@ -671,7 +671,7 @@ asm void power_handleShutdownEvent(void)
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r0, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_power_handleShutdownEvent_000008A0
     li r0, 0x1
@@ -686,7 +686,7 @@ lbl_power_handleShutdownEvent_000008A0:
     stw r3, 0x20(r1)
     stw r0, 0x10(r1)
     b lbl_power_handleShutdownEvent_000008B4
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_power_handleShutdownEvent_000008B4:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x1c(r1)
@@ -775,7 +775,7 @@ asm void power_handleResetEvent(void)
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r0, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_power_handleResetEvent_00000A20
     li r0, 0x1
@@ -790,7 +790,7 @@ lbl_power_handleResetEvent_00000A20:
     stw r3, 0x20(r1)
     stw r0, 0x10(r1)
     b lbl_power_handleResetEvent_00000A34
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_power_handleResetEvent_00000A34:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x1c(r1)

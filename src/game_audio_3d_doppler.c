@@ -13,7 +13,7 @@ extern void fn_80057A64(void);
 extern void fn_80057A68(void);
 extern void fn_80063484(void);
 extern void atn_Matrix_copy(void);
-extern void fn_80097C08(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800EB7A0(void);
 extern void fn_800EC1F4(void);
 extern void fn_800F8548(void);
@@ -84,7 +84,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void fn_80680CF8(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
 extern void fn_8068AEA4(void);
@@ -219,7 +219,7 @@ lbl_fn_803234F4_00000094:
     lis r3, lbl_80788BC0@ha
     lwz r4, lbl_80788BC0@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_803234F4_000000C4
@@ -290,7 +290,7 @@ lbl_fn_803235D8_00000178:
     lis r3, lbl_80788BC8@ha
     lwz r4, lbl_80788BC8@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_803235D8_000001A8
@@ -1014,7 +1014,7 @@ lbl_fn_80323E50_00000B40:
     li r7, 0x0
     stfs f0, 0x2e8(r30)
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     stw r31, 0x15f4(r30)
     addi r4, r30, 0xb0
     lwz r3, lbl_8087F048
@@ -1068,7 +1068,7 @@ lbl_fn_80323E50_00000BE4:
     li r7, 0x0
     li r8, 0x1
     stfs f0, 0x2e8(r30)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r3, 0x1598(r30)
     cmpwi r3, 0x0
     beq lbl_fn_80323E50_00000CA4

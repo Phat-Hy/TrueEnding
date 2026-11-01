@@ -13,7 +13,7 @@ extern void _savegpr_22(void);
 extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800928B0(void);
 extern void fn_800BDB58(void);
 extern void fn_8022BEAC(void);
@@ -49,7 +49,7 @@ extern void atn_LoadHandle_getName(void);
 extern void fn_805F89F0(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
-extern void fn_806827C4(void);
+extern void strstr(void);
 extern void fn_80695720(void);
 
 /* External data declarations */
@@ -870,7 +870,7 @@ asm void fn_8023A5A8(void)
     beq lbl_fn_8023A5A8_00000A20
     beq lbl_fn_8023A5A8_00000A18
     subi r3, r4, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8023A5A8_00000A18:
     li r0, 0x0
     stw r0, 0xe0(r31)
@@ -984,7 +984,7 @@ lbl_fn_8023A680_00000B0C:
     lis r4, lbl_8074308C@ha
     addi r4, r4, lbl_8074308C@l
     addi r4, r4, 0xd
-    bl fn_806827C4
+    bl strstr
     cmpwi r3, 0x0
     beq lbl_fn_8023A680_00000B7C
     ori r29, r29, 0x18
@@ -1294,7 +1294,7 @@ lbl_fn_8023A8B4_00000FCC:
     cmpwi r3, 0x0
     beq lbl_fn_8023A8B4_00000FE0
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8023A8B4_00000FE0:
     stw r30, 0xe0(r24)
     stw r31, 0xdc(r24)
@@ -1392,7 +1392,7 @@ lbl_fn_8023A8B4_00001140:
     cmpwi r3, 0x0
     beq lbl_fn_8023A8B4_00001154
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8023A8B4_00001154:
     stw r30, 0xe0(r24)
     stw r31, 0xdc(r24)

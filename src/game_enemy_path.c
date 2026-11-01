@@ -22,14 +22,14 @@ extern void fn_800133B0(void);
 extern void fn_80013404(void);
 extern void fn_80057A64(void);
 extern void fn_80057A68(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_800F7260(void);
 extern void fn_800F7FF0(void);
 extern void fn_801125F8(void);
 extern void fn_8016EB48(void);
 extern void fn_805F89F0(void);
 extern void PSMTXRotRad(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 
 /* External data declarations */
 extern u8 lbl_80737200[];
@@ -638,7 +638,7 @@ asm void fn_801298EC(void)
     addi r3, r4, 0xb0
     addi r4, r5, lbl_80737200@l
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     stw r3, 0x30(r31)
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -695,7 +695,7 @@ asm void fn_80129978(void)
     mr r4, r5
     mr r3, r30
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80129978_0000088C
     li r3, 0x0
@@ -1054,13 +1054,13 @@ lbl_fn_80129A6C_00000D58:
     li r5, 0x0
     addi r29, r4, lbl_80737200@l
     addi r4, r29, 0x5
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     stw r3, 0x8(r1)
     lwz r3, 0x0(r31)
     bl fn_8000DD0C
     addi r4, r29, 0xb
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     stw r3, 0xc(r1)
     addi r27, r1, 0x8
     addi r28, r1, 0x100
@@ -1367,7 +1367,7 @@ asm void fn_8012A288(void)
     addi r29, r29, lbl_80737200@l
     mr r3, r28
     addi r4, r29, 0x11
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8012A288_00001330
     psq_l f1, 0x0(r31), 0, 0
@@ -1481,7 +1481,7 @@ lbl_fn_8012A288_00001330:
     blt lbl_fn_8012A288_000014F0
     mr r3, r28
     mr r4, r29
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8012A288_000014F0
     psq_l f1, 0x0(r31), 0, 0
@@ -1596,7 +1596,7 @@ lbl_fn_8012A288_000014F0:
     mr r3, r28
     addi r4, r4, lbl_80737200@l
     addi r4, r4, 0x16
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8012A288_00001630
     psq_l f1, 0x0(r31), 0, 0
@@ -1677,7 +1677,7 @@ lbl_fn_8012A288_00001630:
     mr r3, r28
     addi r4, r4, lbl_80737200@l
     addi r4, r4, 0x1d
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8012A288_00001770
     psq_l f1, 0x0(r31), 0, 0
@@ -1760,7 +1760,7 @@ lbl_fn_8012A288_00001770:
     addi r29, r29, lbl_80737200@l
     mr r3, r27
     addi r4, r29, 0x5
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8012A288_000018FC
     psq_l f1, 0x0(r31), 0, 0
@@ -1855,7 +1855,7 @@ lbl_fn_8012A288_00001884:
 lbl_fn_8012A288_000018FC:
     mr r3, r27
     addi r4, r29, 0xb
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8012A288_00001A70
     psq_l f1, 0x0(r31), 0, 0

@@ -59,7 +59,7 @@ extern void GXLoadPosMtxImm(void);
 extern void GXSetCurrentMtx(void);
 extern void fn_80618570(void);
 extern void fn_806185C0(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 
 /* External data declarations */
 extern u8 lbl_80763DC8[];
@@ -779,7 +779,7 @@ lbl_fn_805B5714_000009D8:
     lis r4, lbl_80763DE0@ha
     addi r3, r29, 0x3c
     addi r4, r4, lbl_80763DE0@l
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_805B5714_00000A10
     mr r3, r29

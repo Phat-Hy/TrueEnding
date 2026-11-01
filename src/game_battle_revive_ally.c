@@ -20,7 +20,7 @@ extern void fn_80092A4C(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
 extern void fn_80097A88(void);
-extern void fn_80097C08(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097E80(void);
 extern void fn_800CB360(void);
 extern void fn_800CB3A0(void);
@@ -37,7 +37,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void fn_80680CF8(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80684600(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
@@ -162,7 +162,7 @@ lbl_fn_804038D0_000000B4:
     cmpwi r0, 0x3b
     beq lbl_fn_804038D0_00000180
     addi r4, r30, 0x1
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_804038D0_00000100
     addi r3, r1, 0x308
@@ -177,7 +177,7 @@ lbl_fn_804038D0_000000B4:
 lbl_fn_804038D0_00000100:
     mr r3, r28
     addi r4, r30, 0x7
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_804038D0_0000015C
     addi r3, r1, 0x308
@@ -201,7 +201,7 @@ lbl_fn_804038D0_00000100:
 lbl_fn_804038D0_0000015C:
     mr r3, r28
     addi r4, r30, 0xe
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_804038D0_00000180
     addi r3, r1, 0x308
@@ -615,7 +615,7 @@ asm void fn_80403BFC(void)
     lwz r0, 0x10c(r29)
     add r3, r0, r30
     addi r3, r3, 0x10
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
 lbl_fn_80403BFC_0000075C:
     addi r11, r1, 0xb0
     psq_l f31, 0xe8(r1), 0, 0
@@ -1228,7 +1228,7 @@ lbl_fn_804048CC_0000104C:
     li r7, 0x0
     li r8, 0x1
     addi r3, r3, 0x4
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80886200
     mr r3, r31
     stfs f0, 0x23c(r31)
@@ -1243,7 +1243,7 @@ lbl_fn_804048CC_00001084:
     li r7, 0x0
     li r8, 0x1
     addi r3, r3, 0x4
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80886200
     mr r3, r31
     stfs f0, 0x23c(r31)
@@ -1696,7 +1696,7 @@ asm void fn_80404E70(void)
     li r8, 0x1
     stfs f0, 0x23c(r30)
     stfs f1, 0x238(r30)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r0, 0x8(r30)
     ori r0, r0, 0x100
     rlwinm r0, r0, 0, 29, 27
@@ -1770,7 +1770,7 @@ lbl_fn_804050C0_00001838:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80886214
     li r0, 0x1
     stfs f0, 0x23c(r30)
@@ -1785,7 +1785,7 @@ lbl_fn_804050C0_00001870:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80886204
     li r0, 0x1
     stfs f0, 0x23c(r30)

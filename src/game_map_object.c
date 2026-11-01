@@ -7,7 +7,7 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_8004ED34(void);
 extern void fn_80063764(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_8011F91C(void);
@@ -291,7 +291,7 @@ asm void fn_801823A8(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_801823A8_000002C8
     mr r4, r31
@@ -1897,7 +1897,7 @@ asm void fn_801839FC(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_801839FC_00001958

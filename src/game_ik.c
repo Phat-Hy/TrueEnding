@@ -9,9 +9,9 @@ extern void fn_80049B74(void);
 extern void fn_80049CDC(void);
 extern void fn_80049E3C(void);
 extern void fn_800697D8(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_80084A78(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800A555C(void);
 extern void fn_800A5584(void);
 extern void fn_800A55AC(void);
@@ -165,7 +165,7 @@ lbl_fn_800C6CD4_0000005C:
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r18, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_800C6CD4_000000E0
     stw r19, 0x4(r3)
@@ -178,7 +178,7 @@ lbl_fn_800C6CD4_000000E0:
     stw r30, 0x10(r1)
     beq lbl_fn_800C6CD4_000000F8
     li r3, 0x0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800C6CD4_000000F8:
     lwz r3, 0x1c(r1)
     addi r4, r31, lbl_80775BC8@l
@@ -873,7 +873,7 @@ lbl_fn_800C7568_0000092C:
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r0, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_800C7568_000009EC
     li r0, 0x1
@@ -888,7 +888,7 @@ lbl_fn_800C7568_000009EC:
     stw r3, 0x20(r1)
     stw r0, 0x10(r1)
     b lbl_fn_800C7568_00000A00
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800C7568_00000A00:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x1c(r1)
@@ -1193,7 +1193,7 @@ asm void fn_800C7A30(void)
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r0, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_800C7A30_00000E04
     li r0, 0x1
@@ -1208,7 +1208,7 @@ lbl_fn_800C7A30_00000E04:
     stw r3, 0x20(r1)
     stw r0, 0x10(r1)
     b lbl_fn_800C7A30_00000E18
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800C7A30_00000E18:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x1c(r1)
@@ -1285,7 +1285,7 @@ asm void fn_800C7B78(void)
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r0, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_800C7B78_00000F40
     li r0, 0x1
@@ -1300,7 +1300,7 @@ lbl_fn_800C7B78_00000F40:
     stw r3, 0x20(r1)
     stw r0, 0x10(r1)
     b lbl_fn_800C7B78_00000F54
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800C7B78_00000F54:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x1c(r1)
@@ -1372,7 +1372,7 @@ asm void fn_800C7CA8(void)
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r0, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_fn_800C7CA8_00001068
     li r0, 0x1
@@ -1387,7 +1387,7 @@ lbl_fn_800C7CA8_00001068:
     stw r3, 0x20(r1)
     stw r0, 0x10(r1)
     b lbl_fn_800C7CA8_0000107C
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800C7CA8_0000107C:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x1c(r1)

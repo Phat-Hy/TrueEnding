@@ -10,7 +10,7 @@ extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void fn_80060D58(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
@@ -42,7 +42,7 @@ extern void fn_804FA8EC(void);
 extern void fn_805075C8(void);
 extern void fn_8050F5AC(void);
 extern void fn_8050F668(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80684600(void);
 extern void fn_80686AF0(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -1683,7 +1683,7 @@ lbl_fn_804B4304_0000171C:
     lwz r3, 0xb4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_804B4304_00001734
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_804B4304_00001734:
     li r0, 0x0
     stw r0, 0xb4(r30)
@@ -1806,7 +1806,7 @@ lbl_fn_804B4400_0000189C:
     bl fn_8005B3CC
     mr r24, r3
     addi r4, r30, 0x548
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_804B4400_000018F8
     clrlslwi r0, r27, 24, 16
@@ -1817,7 +1817,7 @@ lbl_fn_804B4400_0000189C:
 lbl_fn_804B4400_000018F8:
     mr r3, r24
     addi r4, r30, 0x54d
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_804B4400_00001920
     clrlslwi r0, r27, 24, 16
@@ -1828,7 +1828,7 @@ lbl_fn_804B4400_000018F8:
 lbl_fn_804B4400_00001920:
     mr r3, r24
     addi r4, r30, 0x555
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_804B4400_0000194C
     clrlslwi r0, r27, 24, 16
@@ -1846,7 +1846,7 @@ lbl_fn_804B4400_0000194C:
     bl fn_8005B3CC
     mr r27, r3
     addi r4, r30, 0x55b
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_804B4400_0000189C
 lbl_fn_804B4400_00001978:
@@ -1860,7 +1860,7 @@ lbl_fn_804B4400_00001978:
     cmpwi r0, 0x0
     beq lbl_fn_804B4400_000019A4
     mr r3, r0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_804B4400_000019A4:
     cmpwi r24, 0x0
     stw r24, 0xb0(r31)

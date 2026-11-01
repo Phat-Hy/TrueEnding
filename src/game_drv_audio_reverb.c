@@ -33,12 +33,12 @@ extern void fn_8006B2D8(void);
 extern void fn_8006BA30(void);
 extern void fn_8006BA38(void);
 extern void fn_8006D008(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_8008B964(void);
 extern void atn_Matrix_copy(void);
 extern void atn_Matrix_concat(void);
 extern void fn_80097A20(void);
-extern void fn_80097C08(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097E80(void);
 extern void fn_800A03E4(void);
 extern void fn_800C31F4(void);
@@ -104,7 +104,7 @@ extern void PSMTX44Identity(void);
 extern void fn_805F9AB0(void);
 extern void fn_805F9D20(void);
 extern void fn_8067E23C(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80684600(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
@@ -592,7 +592,7 @@ lbl_fn_805BAC18_00000420:
     addi r5, r5, 0xea
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r3, 0x50(r29)
     bl fn_8000DD0C
     lfs f1, 0x14(r31)
@@ -1257,7 +1257,7 @@ lbl_fn_805BB658_00000EB0:
     stfs f0, 0x4a4(r26)
     bl fn_8005B3CC
     addi r4, r28, lbl_80763F38@l
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_805BB658_0000142C
     stw r25, 0xa8(r1)
@@ -1526,7 +1526,7 @@ lbl_fn_805BB658_000012D4:
     mr r6, r5
     li r4, 0x6
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805BB658_00001310
     lwz r0, 0x9c(r1)

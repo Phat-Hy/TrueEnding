@@ -15,16 +15,16 @@ extern void fn_800588FC(void);
 extern void fn_8005B9CC(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
 extern void fn_80092F1C(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
 extern void fn_80097A88(void);
-extern void fn_80097C08(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097D40(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C1720(void);
 extern void fn_800DC288(void);
 extern void fn_800EF73C(void);
@@ -54,7 +54,7 @@ extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void fn_80680CF8(void);
 extern void fn_8068236C(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80684600(void);
 extern void fn_8068A850(void);
 extern void fn_806958E0(void);
@@ -469,7 +469,7 @@ asm void fn_8041B970(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_8041B970_0000051C
@@ -1005,7 +1005,7 @@ asm void fn_8041C09C(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_8041C09C_00000C60
@@ -1347,7 +1347,7 @@ lbl_fn_8041C3B0_000010C0:
     lfs f31, 0x328(r31)
     addi r3, r31, 0xf4
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f31, f1
     cror eq, gt, eq
     bne lbl_fn_8041C3B0_000011B4
@@ -1542,7 +1542,7 @@ lbl_fn_8041C784_0000135C:
     cmpwi r0, 0x3b
     beq lbl_fn_8041C784_00001498
     addi r4, r31, 0x1
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8041C784_000013B0
     addi r3, r1, 0x108
@@ -1559,7 +1559,7 @@ lbl_fn_8041C784_0000135C:
 lbl_fn_8041C784_000013B0:
     mr r3, r30
     addi r4, r31, 0x7
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8041C784_000013F8
     addi r3, r1, 0x108
@@ -1578,7 +1578,7 @@ lbl_fn_8041C784_000013B0:
 lbl_fn_8041C784_000013F8:
     mr r3, r30
     addi r4, r31, 0x11
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8041C784_0000143C
     addi r3, r1, 0x108
@@ -1596,7 +1596,7 @@ lbl_fn_8041C784_000013F8:
 lbl_fn_8041C784_0000143C:
     mr r3, r30
     addi r4, r31, 0x18
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8041C784_00001498
     addi r3, r1, 0x108
@@ -1671,7 +1671,7 @@ lbl_fn_8041C99C_00001518:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_8088654C
     stfs f0, 0x32c(r31)
     b lbl_fn_8041C99C_00001588
@@ -1684,7 +1684,7 @@ lbl_fn_8041C99C_0000155C:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80886548
     stfs f0, 0x32c(r31)
 lbl_fn_8041C99C_00001588:
@@ -1736,7 +1736,7 @@ lbl_fn_8041C99C_00001620:
     li r7, 0x1
     li r8, 0x1
     addi r3, r3, 0xf4
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r3, 0x4cc(r31)
     lwz r0, 0x554(r31)
     lfs f0, lbl_8088654C
@@ -1755,10 +1755,10 @@ lbl_fn_8041C99C_00001668:
     li r7, 0x1
     li r8, 0x1
     addi r3, r3, 0xf4
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     addi r3, r31, 0xf4
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lwz r4, 0x4cc(r31)
     mr r3, r31
     lwz r0, 0x554(r31)
@@ -1808,10 +1808,10 @@ lbl_fn_8041C99C_00001734:
     li r7, 0x1
     li r8, 0x1
     addi r3, r3, 0xf4
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     addi r3, r31, 0xf4
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lwz r3, 0x4cc(r31)
     lwz r0, 0x554(r31)
     lfs f0, lbl_80886554
@@ -1927,7 +1927,7 @@ asm void fn_8041CD54(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8041CD54_000018E4
     mr r4, r29

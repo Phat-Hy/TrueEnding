@@ -22,7 +22,7 @@ extern void fn_806282C0(void);
 extern void fn_806282D0(void);
 extern void fn_80628300(void);
 extern void fn_806820D4(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 
 /* External data declarations */
 extern u8 lbl_80764C00[];
@@ -578,7 +578,7 @@ asm void fn_80624F00(void)
 lbl_fn_80624F00_000005B8:
     addi r3, r30, 0x1
     addi r4, r1, 0x8
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80624F00_000005D4
     mr r3, r31
@@ -675,7 +675,7 @@ asm void fn_80625040(void)
 lbl_fn_80625040_000006F8:
     addi r3, r30, 0x1
     addi r4, r1, 0x8
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80625040_00000714
     mr r3, r31

@@ -6,7 +6,7 @@ extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void fn_8003E950(void);
 extern void fn_8006F72C(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_800BFAC8(void);
 extern void fn_800C31F4(void);
 extern void fn_800CB3A0(void);
@@ -869,7 +869,7 @@ lbl_fn_803D83A8_00000B10:
     li r5, 0x0
     addi r4, r3, 0x10c1
     mr r3, r18
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_803D83A8_00000B40
     li r5, 0x0
@@ -1843,7 +1843,7 @@ lbl_fn_803D83A8_00001978:
     addi r4, r19, 0x10c1
     mr r3, r21
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_803D83A8_000019BC
     li r3, 0x0
@@ -2015,7 +2015,7 @@ lbl_fn_803D83A8_00001BF0:
     li r5, 0x0
     mr r3, r14
     addi r4, r4, 0x120f
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_803D83A8_00001C24
     li r3, 0x0

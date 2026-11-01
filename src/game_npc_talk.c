@@ -12,7 +12,7 @@ extern void fn_8004D388(void);
 extern void fn_8004ECC0(void);
 extern void fn_8004ED34(void);
 extern void fn_8006B174(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_8008B130(void);
 extern void fn_80125474(void);
 extern void fn_8016E970(void);
@@ -1282,7 +1282,7 @@ lbl_fn_8013CB68_00001080:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r23, r3
     beq lbl_fn_8013CB68_000010D4
@@ -2038,7 +2038,7 @@ lbl_fn_8013CB68_00001A14:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r23, r3
     beq lbl_fn_8013CB68_00001B74
@@ -2292,7 +2292,7 @@ lbl_fn_8013CB68_00001DE8:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r23, r3
     beq lbl_fn_8013CB68_00001F30
@@ -2530,7 +2530,7 @@ lbl_fn_8013CB68_000021F8:
     li r7, 0x0
     mr r6, r5
     srwi r26, r0, 5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r23, r3
     beq lbl_fn_8013CB68_0000229C
@@ -2742,7 +2742,7 @@ lbl_fn_8013CB68_0000250C:
     li r4, 0x0
     stfs f3, 0x260(r1)
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r23, r3
     beq lbl_fn_8013CB68_000025B0
@@ -2955,7 +2955,7 @@ lbl_fn_8013CB68_00002824:
     li r4, 0x0
     stfs f3, 0x254(r1)
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r23, r3
     beq lbl_fn_8013CB68_000028C8
@@ -3194,7 +3194,7 @@ lbl_fn_8013CB68_00002B3C:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r23, r3
     beq lbl_fn_8013CB68_00002C48
@@ -3784,7 +3784,7 @@ lbl_fn_8013CB68_00003498:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r23, r3
     beq lbl_fn_8013CB68_000034D4

@@ -12,9 +12,9 @@ extern void fn_8000DD0C(void);
 extern void fn_8004203C(void);
 extern void fn_8005B3CC(void);
 extern void fn_8005B5F8(void);
-extern void fn_800844D8(void);
-extern void fn_80097C08(void);
-extern void fn_80097D7C(void);
+extern void mem_free(void);
+extern void atn_Anim_setLayerAnimation(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_80099E9C(void);
 extern void fn_800C31F4(void);
 extern void fn_800CB3A0(void);
@@ -110,7 +110,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void fn_80680770(void);
 extern void fn_80680CF8(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80684600(void);
 extern void fn_80686EA4(void);
 extern void fn_8068B100(void);
@@ -344,7 +344,7 @@ lbl_fn_803458EC_00000210:
     bl fn_80686EA4
 lbl_fn_803458EC_00000230:
     slwi r3, r18, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_803458EC_00000258
@@ -565,7 +565,7 @@ lbl_fn_80345BA8_00000570:
     bl fn_8005B3CC
     mr r30, r3
     addi r4, r31, 0x19c
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_000005B0
     addi r3, r1, 0x10
@@ -580,7 +580,7 @@ lbl_fn_80345BA8_00000570:
 lbl_fn_80345BA8_000005B0:
     mr r3, r30
     addi r4, r31, 0x1a4
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_000005D8
     addi r3, r1, 0x10
@@ -591,7 +591,7 @@ lbl_fn_80345BA8_000005B0:
 lbl_fn_80345BA8_000005D8:
     mr r3, r30
     addi r4, r31, 0x1b8
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_00000600
     addi r3, r1, 0x10
@@ -602,7 +602,7 @@ lbl_fn_80345BA8_000005D8:
 lbl_fn_80345BA8_00000600:
     mr r3, r30
     addi r4, r31, 0x1c7
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_00000628
     addi r3, r1, 0x10
@@ -613,7 +613,7 @@ lbl_fn_80345BA8_00000600:
 lbl_fn_80345BA8_00000628:
     mr r3, r30
     addi r4, r31, 0x1db
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_00000650
     addi r3, r1, 0x10
@@ -624,7 +624,7 @@ lbl_fn_80345BA8_00000628:
 lbl_fn_80345BA8_00000650:
     mr r3, r30
     addi r4, r31, 0x1e5
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_00000678
     addi r3, r1, 0x10
@@ -635,7 +635,7 @@ lbl_fn_80345BA8_00000650:
 lbl_fn_80345BA8_00000678:
     mr r3, r30
     addi r4, r31, 0x1f8
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_000006A0
     addi r3, r1, 0x10
@@ -646,7 +646,7 @@ lbl_fn_80345BA8_00000678:
 lbl_fn_80345BA8_000006A0:
     mr r3, r30
     addi r4, r31, 0x20b
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_000006C8
     addi r3, r1, 0x10
@@ -657,7 +657,7 @@ lbl_fn_80345BA8_000006A0:
 lbl_fn_80345BA8_000006C8:
     mr r3, r30
     addi r4, r31, 0x21e
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_000006F0
     addi r3, r1, 0x10
@@ -668,7 +668,7 @@ lbl_fn_80345BA8_000006C8:
 lbl_fn_80345BA8_000006F0:
     mr r3, r30
     addi r4, r31, 0x22d
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_00000718
     addi r3, r1, 0x10
@@ -679,7 +679,7 @@ lbl_fn_80345BA8_000006F0:
 lbl_fn_80345BA8_00000718:
     mr r3, r30
     addi r4, r31, 0x238
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_00000740
     addi r3, r1, 0x10
@@ -690,7 +690,7 @@ lbl_fn_80345BA8_00000718:
 lbl_fn_80345BA8_00000740:
     mr r3, r30
     addi r4, r31, 0x244
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_00000768
     addi r3, r1, 0x10
@@ -701,7 +701,7 @@ lbl_fn_80345BA8_00000740:
 lbl_fn_80345BA8_00000768:
     mr r3, r30
     addi r4, r31, 0x24e
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_0000078C
     addi r3, r29, 0x1560
@@ -711,7 +711,7 @@ lbl_fn_80345BA8_00000768:
 lbl_fn_80345BA8_0000078C:
     mr r3, r30
     addi r4, r31, 0x263
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_000007B0
     addi r3, r29, 0x156c
@@ -721,7 +721,7 @@ lbl_fn_80345BA8_0000078C:
 lbl_fn_80345BA8_000007B0:
     mr r3, r30
     addi r4, r31, 0x279
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_000007D4
     addi r3, r29, 0x1578
@@ -731,7 +731,7 @@ lbl_fn_80345BA8_000007B0:
 lbl_fn_80345BA8_000007D4:
     mr r3, r30
     addi r4, r31, 0x28d
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_000007F8
     addi r3, r29, 0x1584
@@ -741,7 +741,7 @@ lbl_fn_80345BA8_000007D4:
 lbl_fn_80345BA8_000007F8:
     mr r3, r30
     addi r4, r31, 0x2a2
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_0000081C
     addi r3, r29, 0x1590
@@ -751,7 +751,7 @@ lbl_fn_80345BA8_000007F8:
 lbl_fn_80345BA8_0000081C:
     mr r3, r30
     addi r4, r31, 0x2b8
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_00000840
     addi r3, r29, 0x159c
@@ -761,7 +761,7 @@ lbl_fn_80345BA8_0000081C:
 lbl_fn_80345BA8_00000840:
     mr r3, r30
     addi r4, r31, 0x2cc
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_00000864
     addi r3, r29, 0x15a8
@@ -771,7 +771,7 @@ lbl_fn_80345BA8_00000840:
 lbl_fn_80345BA8_00000864:
     mr r3, r30
     addi r4, r31, 0x2e1
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_00000888
     addi r3, r29, 0x15b4
@@ -781,7 +781,7 @@ lbl_fn_80345BA8_00000864:
 lbl_fn_80345BA8_00000888:
     mr r3, r30
     addi r4, r31, 0x2f7
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_000008AC
     addi r3, r29, 0x15c0
@@ -791,7 +791,7 @@ lbl_fn_80345BA8_00000888:
 lbl_fn_80345BA8_000008AC:
     mr r3, r30
     addi r4, r31, 0x30b
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_000008D8
     addi r3, r1, 0x10
@@ -803,7 +803,7 @@ lbl_fn_80345BA8_000008AC:
 lbl_fn_80345BA8_000008D8:
     mr r3, r30
     addi r4, r31, 0x318
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_00000904
     addi r3, r1, 0x10
@@ -815,7 +815,7 @@ lbl_fn_80345BA8_000008D8:
 lbl_fn_80345BA8_00000904:
     mr r3, r30
     addi r4, r31, 0x32c
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_00000944
     addi r3, r1, 0x10
@@ -832,7 +832,7 @@ lbl_fn_80345BA8_00000904:
 lbl_fn_80345BA8_00000944:
     mr r3, r30
     addi r4, r31, 0x33a
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_00000970
     addi r3, r1, 0x10
@@ -844,7 +844,7 @@ lbl_fn_80345BA8_00000944:
 lbl_fn_80345BA8_00000970:
     mr r3, r30
     addi r4, r31, 0x347
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_0000099C
     addi r3, r1, 0x10
@@ -856,7 +856,7 @@ lbl_fn_80345BA8_00000970:
 lbl_fn_80345BA8_0000099C:
     mr r3, r30
     addi r4, r31, 0x355
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_000009DC
     addi r3, r1, 0x10
@@ -873,7 +873,7 @@ lbl_fn_80345BA8_0000099C:
 lbl_fn_80345BA8_000009DC:
     mr r3, r30
     addi r4, r31, 0x361
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_00000A08
     addi r3, r1, 0x10
@@ -885,7 +885,7 @@ lbl_fn_80345BA8_000009DC:
 lbl_fn_80345BA8_00000A08:
     mr r3, r30
     addi r4, r31, 0x36c
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_00000A34
     addi r3, r1, 0x10
@@ -897,7 +897,7 @@ lbl_fn_80345BA8_00000A08:
 lbl_fn_80345BA8_00000A34:
     mr r3, r30
     addi r4, r31, 0x37b
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_00000A60
     addi r3, r1, 0x10
@@ -909,7 +909,7 @@ lbl_fn_80345BA8_00000A34:
 lbl_fn_80345BA8_00000A60:
     mr r3, r30
     addi r4, r31, 0x386
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_00000A8C
     addi r3, r1, 0x10
@@ -921,7 +921,7 @@ lbl_fn_80345BA8_00000A60:
 lbl_fn_80345BA8_00000A8C:
     mr r3, r30
     addi r4, r31, 0x393
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_00000AC8
     mr r30, r29
@@ -994,7 +994,7 @@ asm void fn_80346384(void)
     bl fn_8016E4C4
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fmr f31, f1
     addi r3, r31, 0xb0
     li r4, 0x0
@@ -1544,7 +1544,7 @@ lbl_fn_80346A34_0000129C:
     li r7, 0x0
     li r8, 0x1
     stfs f0, 0x2e8(r31)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     stw r30, 0x14bc(r31)
     li r4, 0xc9
     lwz r3, lbl_8087F430
@@ -1627,7 +1627,7 @@ lbl_fn_80346A34_000013E8:
     li r7, 0x0
     li r8, 0x1
     stfs f0, 0x2e8(r31)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lbz r0, 0x180b(r31)
     cmpwi r0, 0x0
     beq lbl_fn_80346A34_000014D4

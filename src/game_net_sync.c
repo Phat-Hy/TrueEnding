@@ -16,10 +16,10 @@ extern void fn_80016C10(void);
 extern void fn_80017064(void);
 extern void fn_80019254(void);
 extern void fn_8004ECC0(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800897D8(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -301,7 +301,7 @@ lbl_fn_801EB188_0000027C:
     bl fn_80686EA4
 lbl_fn_801EB188_0000029C:
     slwi r3, r15, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r24, r3
     bne lbl_fn_801EB188_000002C4
@@ -670,7 +670,7 @@ asm void fn_801EB93C(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_801EB93C_00000808
     mr r4, r30
@@ -767,7 +767,7 @@ lbl_fn_801EB9B0_00000930:
     beq lbl_fn_801EB9B0_00000948
     beq lbl_fn_801EB9B0_00000948
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801EB9B0_00000948:
     cmpwi r25, 0x0
     stw r25, 0x162c(r19)
@@ -989,7 +989,7 @@ lbl_fn_801EBD80_00000C48:
     beq lbl_fn_801EBD80_00000C68
     beq lbl_fn_801EBD80_00000C68
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801EBD80_00000C68:
     li r0, 0x0
     stw r0, 0x1630(r30)
@@ -1767,7 +1767,7 @@ lbl_fn_801EC784_00001760:
     bdnz lbl_fn_801EC784_00001760
 lbl_fn_801EC784_00001778:
     lwz r3, 0x24(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801EC784_00001780:
     stw r30, 0x24(r28)
     li r0, 0x8
@@ -1861,7 +1861,7 @@ lbl_fn_801EC784_000018BC:
     bdnz lbl_fn_801EC784_000018BC
 lbl_fn_801EC784_000018D4:
     lwz r3, 0x24(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801EC784_000018DC:
     stw r29, 0x24(r28)
     stw r30, 0x20(r28)
@@ -1966,7 +1966,7 @@ lbl_fn_801EC784_00001A40:
     bdnz lbl_fn_801EC784_00001A40
 lbl_fn_801EC784_00001A58:
     lwz r3, 0x3c(r30)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801EC784_00001A60:
     stw r29, 0x3c(r30)
     li r0, 0x8
@@ -2060,7 +2060,7 @@ lbl_fn_801EC784_00001B9C:
     bdnz lbl_fn_801EC784_00001B9C
 lbl_fn_801EC784_00001BB4:
     lwz r3, 0x3c(r30)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801EC784_00001BBC:
     stw r28, 0x3c(r30)
     stw r29, 0x38(r30)
@@ -2165,7 +2165,7 @@ lbl_fn_801EC784_00001D20:
     bdnz lbl_fn_801EC784_00001D20
 lbl_fn_801EC784_00001D38:
     lwz r3, 0x18(r30)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801EC784_00001D40:
     stw r28, 0x18(r30)
     li r0, 0x8
@@ -2259,7 +2259,7 @@ lbl_fn_801EC784_00001E7C:
     bdnz lbl_fn_801EC784_00001E7C
 lbl_fn_801EC784_00001E94:
     lwz r3, 0x18(r30)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801EC784_00001E9C:
     stw r29, 0x18(r30)
     stw r28, 0x14(r30)
@@ -2364,7 +2364,7 @@ lbl_fn_801EC784_00002000:
     bdnz lbl_fn_801EC784_00002000
 lbl_fn_801EC784_00002018:
     lwz r3, 0x54(r30)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801EC784_00002020:
     stw r28, 0x54(r30)
     li r0, 0x8
@@ -2458,7 +2458,7 @@ lbl_fn_801EC784_0000215C:
     bdnz lbl_fn_801EC784_0000215C
 lbl_fn_801EC784_00002174:
     lwz r3, 0x54(r30)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801EC784_0000217C:
     stw r29, 0x54(r30)
     stw r28, 0x50(r30)
@@ -2563,7 +2563,7 @@ lbl_fn_801EC784_000022E0:
     bdnz lbl_fn_801EC784_000022E0
 lbl_fn_801EC784_000022F8:
     lwz r3, 0x3c(r30)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801EC784_00002300:
     stw r28, 0x3c(r30)
     li r0, 0x8
@@ -2657,7 +2657,7 @@ lbl_fn_801EC784_0000243C:
     bdnz lbl_fn_801EC784_0000243C
 lbl_fn_801EC784_00002454:
     lwz r3, 0x3c(r30)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801EC784_0000245C:
     stw r29, 0x3c(r30)
     stw r28, 0x38(r30)
@@ -2762,7 +2762,7 @@ lbl_fn_801EC784_000025C0:
     bdnz lbl_fn_801EC784_000025C0
 lbl_fn_801EC784_000025D8:
     lwz r3, 0x18(r30)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801EC784_000025E0:
     stw r28, 0x18(r30)
     li r0, 0x8
@@ -2856,7 +2856,7 @@ lbl_fn_801EC784_0000271C:
     bdnz lbl_fn_801EC784_0000271C
 lbl_fn_801EC784_00002734:
     lwz r3, 0x18(r30)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801EC784_0000273C:
     stw r29, 0x18(r30)
     stw r28, 0x14(r30)

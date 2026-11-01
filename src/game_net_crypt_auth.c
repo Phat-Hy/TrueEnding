@@ -8,8 +8,8 @@ extern void _restgpr_27(void);
 extern void _savegpr_18(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_800A555C(void);
 extern void fn_800A55AC(void);
 extern void fn_800C31F4(void);
@@ -651,7 +651,7 @@ asm void fn_804B6988(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_804B6988_000007D0
     mr r4, r31
@@ -1190,7 +1190,7 @@ lbl_fn_804B6F08_00000F08:
     bl fn_80686EA4
 lbl_fn_804B6F08_00000F28:
     slwi r3, r18, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_804B6F08_00000F50

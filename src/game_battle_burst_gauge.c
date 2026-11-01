@@ -10,7 +10,7 @@ extern void fn_8005B9CC(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800874C8(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
@@ -39,7 +39,7 @@ extern void fn_80473F88(void);
 extern void fn_805F89F0(void);
 extern void PSMTXRotRad(void);
 extern void fn_80680CF8(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
 extern void fn_80695720(void);
@@ -755,7 +755,7 @@ lbl_fn_803FF834_0000096C:
     cmpwi r0, 0x3b
     beq lbl_fn_803FF834_000009A8
     addi r4, r31, 0x38
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_803FF834_000009A8
     addi r3, r1, 0x8
@@ -1276,7 +1276,7 @@ lbl_fn_803FFF40_000010A8:
     stw r3, 0x98(r31)
     beq lbl_fn_803FFF40_00001104
     subi r3, r4, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803FFF40_00001104:
     lwz r3, 0x4(r31)
     li r5, 0x0

@@ -6,8 +6,8 @@ extern void _restgpr_19(void);
 extern void _savegpr_19(void);
 extern void dtor_80084684(void);
 extern void fn_8007A530(void);
-extern void fn_80084320(void);
-extern void fn_80084C24(void);
+extern void mem_alloc(void);
+extern void mem_getAllocSize(void);
 extern void fn_800CA144(void);
 extern void fn_800CB360(void);
 extern void fn_800CB3A0(void);
@@ -1087,7 +1087,7 @@ asm void fn_803E836C(void)
     li r4, 0xa
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_803E836C_0000120C
@@ -1372,7 +1372,7 @@ lbl_fn_803E877C_00001348:
     beq lbl_fn_803E877C_0000136C
     beq lbl_fn_803E877C_0000136C
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_803E877C_0000136C:
     li r0, 0x0
     stw r0, 0x4(r31)

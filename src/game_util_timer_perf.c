@@ -9,11 +9,11 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8003EFB0(void);
 extern void fn_80051B70(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_8008771C(void);
 extern void fn_80087E9C(void);
 extern void fn_80088724(void);
-extern void fn_80097C08(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800BFAC8(void);
 extern void fn_800C31F4(void);
 extern void fn_800CB3A0(void);
@@ -102,7 +102,7 @@ extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_8068AE9C(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
@@ -532,7 +532,7 @@ asm void fn_805A4F20(void)
     stfs f0, 0x2fc(r3)
     li r8, 0x1
     addi r3, r3, 0xb0
-    b fn_80097C08
+    b atn_Anim_setLayerAnimation
 }
 
 asm void fn_805A4F5C(void)
@@ -820,7 +820,7 @@ asm void fn_805A52F8(void)
 lbl_fn_805A52F8_00000940:
     lwz r4, 0x0(r31)
     mr r3, r28
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_805A52F8_0000095C
     mr r30, r29
@@ -875,7 +875,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -888,7 +888,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -901,7 +901,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -914,7 +914,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -927,7 +927,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -940,7 +940,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -953,7 +953,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -966,7 +966,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -979,7 +979,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -992,7 +992,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1005,7 +1005,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1018,7 +1018,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1031,7 +1031,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1044,7 +1044,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1057,7 +1057,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1070,7 +1070,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1083,7 +1083,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1096,7 +1096,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1109,7 +1109,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1122,7 +1122,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1135,7 +1135,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1148,7 +1148,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1161,7 +1161,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1174,7 +1174,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1187,7 +1187,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1200,7 +1200,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1213,7 +1213,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1226,7 +1226,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1239,7 +1239,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1252,7 +1252,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1265,7 +1265,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1278,7 +1278,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1291,7 +1291,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1304,7 +1304,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1317,7 +1317,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1330,7 +1330,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1343,7 +1343,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1356,7 +1356,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1369,7 +1369,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1382,7 +1382,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1395,7 +1395,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1408,7 +1408,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1421,7 +1421,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1434,7 +1434,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1447,7 +1447,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1460,7 +1460,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1473,7 +1473,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1486,7 +1486,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1499,7 +1499,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1512,7 +1512,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1525,7 +1525,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1538,7 +1538,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1551,7 +1551,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1564,7 +1564,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1577,7 +1577,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1590,7 +1590,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1603,7 +1603,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1616,7 +1616,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1629,7 +1629,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1642,7 +1642,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1655,7 +1655,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1668,7 +1668,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1681,7 +1681,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1694,7 +1694,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1707,7 +1707,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1720,7 +1720,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1733,7 +1733,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1746,7 +1746,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1759,7 +1759,7 @@ asm void fn_805A5378(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_000017F0
     mr r4, r28
@@ -1799,7 +1799,7 @@ asm void fn_805A620C(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_805A620C_00001874
     mr r4, r31

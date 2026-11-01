@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_8004ED34(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800F52F8(void);
 extern void fn_800F84C8(void);
 extern void fn_800F8524(void);
@@ -1254,7 +1254,7 @@ lbl_fn_8038F52C_0000109C:
     mr r3, r30
     bl fn_800F84C8
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     addi r3, r1, 0x1cc
     addi r4, r29, 0x51c
     bl fn_8037E964
@@ -1439,7 +1439,7 @@ lbl_fn_8038F52C_00001268:
     mr r3, r30
     bl fn_800F84C8
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fmr f31, f1
     addi r3, r1, 0x118
     addi r4, r29, 0x51c
@@ -2012,7 +2012,7 @@ lbl_fn_8038F52C_00001B80:
     mr r3, r30
     bl fn_800F84C8
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_8088597C
     mr r3, r30
     fsubs f30, f1, f0
@@ -2024,7 +2024,7 @@ lbl_fn_8038F52C_00001B80:
     mr r3, r30
     bl fn_800F84C8
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_8088597C
     mr r3, r30
     fsubs f30, f1, f0
@@ -2042,7 +2042,7 @@ lbl_fn_8038F52C_00001C48:
     mr r3, r30
     bl fn_800F84C8
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_8088597C
     mr r3, r30
     fsubs f30, f1, f0

@@ -9,8 +9,8 @@ extern void _savegpr_26(void);
 extern void fn_800185B4(void);
 extern void fn_80044E0C(void);
 extern void fn_8004ED34(void);
-extern void fn_80084320(void);
-extern void fn_80097D7C(void);
+extern void mem_alloc(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_8014C228(void);
 extern void fn_8014DEE4(void);
 extern void fn_80153B44(void);
@@ -91,7 +91,7 @@ asm void fn_8015E4B0(void)
     mr r6, r5
     li r3, 0x18
     li r4, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8015E4B0_00000064
@@ -301,7 +301,7 @@ asm void fn_8015E7A0(void)
     li r3, 0x40
     li r4, 0x0
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8015E7A0_00000360
@@ -559,7 +559,7 @@ lbl_fn_8015EB2C_000006C8:
     lfs f31, 0x2e4(r3)
     li r4, 0x0
     addi r3, r3, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f31, f1
     cror eq, gt, eq
     mfcr r3
@@ -570,7 +570,7 @@ lbl_fn_8015EB2C_000006F8:
     li r4, 0x0
     lfs f30, 0x2e4(r3)
     addi r3, r3, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fsubs f0, f1, f31
     fcmpo cr0, f30, f0
     cror eq, gt, eq
@@ -616,7 +616,7 @@ lbl_fn_8015EB2C_00000784:
     lfs f30, 0x2e4(r3)
     li r4, 0x0
     addi r3, r3, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f30, f1
     cror eq, gt, eq
     mfcr r3
@@ -627,7 +627,7 @@ lbl_fn_8015EB2C_000007C4:
     li r4, 0x0
     lfs f31, 0x2e4(r3)
     addi r3, r3, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fsubs f0, f1, f30
     fcmpo cr0, f31, f0
     cror eq, gt, eq
@@ -666,7 +666,7 @@ asm void fn_8015ECC4(void)
     stw r29, 0x54(r1)
     mr r29, r3
     li r3, 0x8
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8015ECC4_00000870
@@ -879,7 +879,7 @@ asm void fn_8015EFAC(void)
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8015EFAC_00000B78
@@ -1066,7 +1066,7 @@ lbl_fn_8015EFAC_00000DEC:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8015EFAC_00000E28
@@ -1706,7 +1706,7 @@ lbl_fn_8015F568_0000170C:
     li r3, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8015F568_00001770
@@ -1896,7 +1896,7 @@ lbl_fn_8015F568_000019E4:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8015F568_00001A38

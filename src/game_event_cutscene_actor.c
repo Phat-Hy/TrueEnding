@@ -28,11 +28,11 @@ extern void fn_80071220(void);
 extern void fn_800713D4(void);
 extern void fn_80071D60(void);
 extern void fn_800827E0(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_800846FC(void);
 extern void fn_80084A78(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_80089620(void);
 extern void fn_8008BBD8(void);
 extern void font_calcTextExtents(void);
@@ -89,7 +89,7 @@ extern void archive_mountCheckStatus(void);
 extern void fn_805A6D14(void);
 extern void OSInitMutex(void);
 extern void VISetNextFrameBuffer(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_806846C4(void);
 extern void fn_806846FC(void);
 extern void fn_80686A48(void);
@@ -730,7 +730,7 @@ lbl_main_0000078C:
     stw r3, 0x10(r1)
     li r3, 0x10
     stw r27, 0x14(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     beq lbl_main_000007F0
     stw r28, 0x4(r3)
@@ -743,7 +743,7 @@ lbl_main_000007F0:
     stw r24, 0x10(r1)
     beq lbl_main_00000808
     li r3, 0x0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_main_00000808:
     lwz r3, 0x1c(r1)
     addi r4, r25, lbl_80775BC8@l
@@ -1215,7 +1215,7 @@ lbl_fn_8047A424_00000E64:
     lis r3, lbl_80790060@ha
     lwz r4, lbl_80790060@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_8047A424_00000E8C
@@ -1289,7 +1289,7 @@ lbl_taskManager_initSystem_00000F34:
     li r7, 0x0
     li r4, 0x1
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_taskManager_initSystem_00000F8C
     li r4, 0x0
@@ -1311,7 +1311,7 @@ lbl_taskManager_initSystem_00000F8C:
     la r5, lbl_8087E07C
     la r6, lbl_8087E078
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_taskManager_initSystem_00000FE8
     li r0, 0x0
@@ -1627,7 +1627,7 @@ lbl_taskManager_initSystem_000013F4:
     mr r6, r5
     li r4, 0x1
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_taskManager_initSystem_00001464
     bl fn_805A6B58

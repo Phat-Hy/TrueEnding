@@ -14,15 +14,15 @@ extern void fn_800588FC(void);
 extern void fn_8005B9CC(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
 extern void fn_80092F1C(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
 extern void fn_80097A88(void);
-extern void fn_80097C08(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_setLayerAnimation(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_8009EE30(void);
 extern void fn_800A04A0(void);
 extern void atn_Anim_getDuration(void);
@@ -57,7 +57,7 @@ extern void fn_805F8CA0(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECMag(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern char* strcpy(char* dest, const char* src);
@@ -181,7 +181,7 @@ lbl_fn_8042A98C_000000AC:
     cmpwi r0, 0x3b
     beq lbl_fn_8042A98C_000000C8
     addi r4, r31, 0x1
-    bl fn_80682428
+    bl strcmp
 lbl_fn_8042A98C_000000C8:
     addi r3, r1, 0x8
     bl fn_8005BBF8
@@ -601,7 +601,7 @@ asm void fn_8042AFE4(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8042AFE4_00000708
@@ -934,7 +934,7 @@ lbl_fn_8042B3BC_00000AE8:
     cmpwi r0, 0x3b
     beq lbl_fn_8042B3BC_00000B90
     addi r4, r31, 0x1
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8042B3BC_00000B40
     addi r29, r29, 0x1
@@ -953,7 +953,7 @@ lbl_fn_8042B3BC_00000B20:
 lbl_fn_8042B3BC_00000B40:
     mr r3, r30
     addi r4, r31, 0x5
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8042B3BC_00000B90
     slwi r0, r29, 2
@@ -1021,7 +1021,7 @@ asm void fn_8042B56C(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_8042B56C_00000CC0
@@ -1221,7 +1221,7 @@ lbl_fn_8042B77C_00000E54:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f8, lbl_80886734
     li r6, 0x0
     lfs f0, lbl_80886738
@@ -1387,7 +1387,7 @@ lbl_fn_8042B90C_00001104:
 lbl_fn_8042B90C_00001140:
     addi r3, r31, 0xf4
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, 0x558(r31)
     lfs f7, lbl_80886738
     fdivs f8, f29, f0
@@ -1756,7 +1756,7 @@ lbl_fn_8042BF38_0000165C:
     cmpwi r0, 0x3b
     beq lbl_fn_8042BF38_000017BC
     addi r4, r31, 0x1
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8042BF38_000016B0
     addi r3, r1, 0x108
@@ -1773,7 +1773,7 @@ lbl_fn_8042BF38_0000165C:
 lbl_fn_8042BF38_000016B0:
     mr r3, r30
     addi r4, r31, 0x7
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8042BF38_000016F8
     addi r3, r1, 0x108
@@ -1792,7 +1792,7 @@ lbl_fn_8042BF38_000016B0:
 lbl_fn_8042BF38_000016F8:
     mr r3, r30
     addi r4, r31, 0x11
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8042BF38_00001740
     addi r3, r1, 0x108
@@ -1811,7 +1811,7 @@ lbl_fn_8042BF38_000016F8:
 lbl_fn_8042BF38_00001740:
     mr r3, r30
     addi r4, r31, 0x18
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8042BF38_0000176C
     addi r3, r1, 0x108
@@ -1823,7 +1823,7 @@ lbl_fn_8042BF38_00001740:
 lbl_fn_8042BF38_0000176C:
     mr r3, r30
     addi r4, r31, 0x25
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8042BF38_00001798
     addi r3, r1, 0x108
@@ -1835,7 +1835,7 @@ lbl_fn_8042BF38_0000176C:
 lbl_fn_8042BF38_00001798:
     mr r3, r30
     addi r4, r31, 0x29
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8042BF38_000017BC
     addi r3, r1, 0x108
@@ -1946,7 +1946,7 @@ asm void fn_8042C21C(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_8042C21C_00001954

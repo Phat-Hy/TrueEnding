@@ -14,9 +14,9 @@ extern void dtor_80084684(void);
 extern void fn_8005B9CC(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_8009E5A0(void);
 extern void hud_updateTargetReticle(void);
 extern void fn_8009EB20(void);
@@ -38,7 +38,7 @@ extern void PSMTXScale(void);
 extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
 extern void fn_80680CF8(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80684600(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
@@ -372,7 +372,7 @@ asm void fn_80400728(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_80400728_0000040C
@@ -464,7 +464,7 @@ lbl_fn_80400818_000004AC:
     beq lbl_fn_80400818_000004D8
     beq lbl_fn_80400818_000004D8
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80400818_000004D8:
     li r0, 0x0
     stw r0, 0x130(r28)
@@ -1259,7 +1259,7 @@ lbl_fn_8040134C_00001040:
     cmpwi r0, 0x3b
     beq lbl_fn_8040134C_00001124
     addi r4, r29, 0x1
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8040134C_00001090
     addi r3, r1, 0x108
@@ -1275,7 +1275,7 @@ lbl_fn_8040134C_00001040:
 lbl_fn_8040134C_00001090:
     mr r3, r27
     addi r4, r29, 0x10
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8040134C_00001124
     addi r3, r1, 0x108
@@ -1324,7 +1324,7 @@ lbl_fn_8040134C_00001124:
     beq lbl_fn_8040134C_00001150
     beq lbl_fn_8040134C_00001150
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8040134C_00001150:
     cmpwi r29, 0x0
     stw r29, 0x12c(r31)
@@ -1358,7 +1358,7 @@ lbl_fn_8040134C_000011B0:
     mr r6, r5
     li r4, 0xc
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_8040134C_000011EC

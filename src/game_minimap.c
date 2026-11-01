@@ -15,7 +15,7 @@ extern void fn_800816A8(void);
 extern void fn_800827E0(void);
 extern void fn_800838B8(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800902C0(void);
 extern void atn_Model_updateMatrices(void);
 extern void fn_80095300(void);
@@ -176,7 +176,7 @@ asm void fn_8008C950(void)
     beq lbl_fn_8008C950_00000170
     beq lbl_fn_8008C950_00000170
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8008C950_00000170:
     cmpwi r29, 0x0
     stw r29, 0x38(r30)
@@ -243,7 +243,7 @@ lbl_fn_8008C950_0000020C:
     lwz r29, 0x44(r3)
     beq lbl_fn_8008C950_0000026C
     mr r3, r0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8008C950_0000026C:
     cmpwi r29, 0x0
     stw r29, 0xe4(r30)
@@ -265,7 +265,7 @@ lbl_fn_8008C950_000002A0:
     cmpwi r3, 0x0
     lwz r29, 0x44(r4)
     beq lbl_fn_8008C950_000002B8
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8008C950_000002B8:
     cmpwi r29, 0x0
     stw r29, 0xec(r30)

@@ -12,7 +12,7 @@ extern void fn_8005B6E8(void);
 extern void fn_8005B9CC(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800874C8(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
@@ -20,13 +20,13 @@ extern void fn_80088724(void);
 extern void fn_8008937C(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_80092F1C(void);
 extern void fn_80094F98(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
 extern void fn_80097A88(void);
-extern void fn_80097C08(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800C122C(void);
 extern void fn_800C2C20(void);
 extern void fn_800C344C(void);
@@ -64,7 +64,7 @@ extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern char* strcpy(char* dest, const char* src);
 
 /* External data declarations */
@@ -254,7 +254,7 @@ lbl_fn_8042E064_00000144:
     cmpwi r0, 0x3b
     beq lbl_fn_8042E064_000002C0
     addi r4, r31, 0x1
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8042E064_00000198
     addi r3, r1, 0x8
@@ -271,7 +271,7 @@ lbl_fn_8042E064_00000144:
 lbl_fn_8042E064_00000198:
     mr r3, r30
     addi r4, r31, 0x7
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8042E064_00000240
     addi r3, r1, 0x8
@@ -314,7 +314,7 @@ lbl_fn_8042E064_00000198:
 lbl_fn_8042E064_00000240:
     mr r3, r30
     addi r4, r31, 0x11
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8042E064_00000284
     addi r30, r28, 0x88c
@@ -333,7 +333,7 @@ lbl_fn_8042E064_0000025C:
 lbl_fn_8042E064_00000284:
     mr r3, r30
     addi r4, r31, 0x1f
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8042E064_000002C0
     mr r30, r28
@@ -452,7 +452,7 @@ asm void fn_8042E36C(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_8042E36C_0000047C
@@ -962,7 +962,7 @@ lbl_fn_8042E9F4_00000AD0:
     cmpwi r0, 0x3b
     beq lbl_fn_8042E9F4_00000BDC
     addi r4, r31, 0x1
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8042E9F4_00000B24
     addi r3, r1, 0x108
@@ -979,7 +979,7 @@ lbl_fn_8042E9F4_00000AD0:
 lbl_fn_8042E9F4_00000B24:
     mr r3, r30
     addi r4, r31, 0x7
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8042E9F4_00000B6C
     addi r3, r1, 0x108
@@ -998,7 +998,7 @@ lbl_fn_8042E9F4_00000B24:
 lbl_fn_8042E9F4_00000B6C:
     mr r3, r30
     addi r4, r31, 0x11
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8042E9F4_00000B98
     addi r3, r1, 0x108
@@ -1010,7 +1010,7 @@ lbl_fn_8042E9F4_00000B6C:
 lbl_fn_8042E9F4_00000B98:
     mr r3, r30
     addi r4, r31, 0x15
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8042E9F4_00000BDC
     addi r3, r1, 0x108
@@ -1096,7 +1096,7 @@ lbl_fn_8042EBDC_00000CC0:
     cmpwi r0, 0x3b
     beq lbl_fn_8042EBDC_00000DF0
     addi r4, r30, 0x1c
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8042EBDC_00000D7C
     addi r3, r1, 0x8
@@ -1139,7 +1139,7 @@ lbl_fn_8042EBDC_00000CC0:
 lbl_fn_8042EBDC_00000D7C:
     mr r3, r29
     addi r4, r30, 0x26
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8042EBDC_00000DF0
     stw r31, 0x878(r28)
@@ -1164,7 +1164,7 @@ lbl_fn_8042EBDC_00000D7C:
     mr r4, r3
     addi r3, r28, 0xf4
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     stw r3, 0x87c(r28)
 lbl_fn_8042EBDC_00000DF0:
     addi r3, r1, 0x8
@@ -1218,7 +1218,7 @@ lbl_fn_8042EDF4_00000E60:
     stfs f0, 0x32c(r3)
     li r8, 0x1
     addi r3, r3, 0xf4
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_808867D8
     li r0, -0x1
     lfs f1, lbl_808867E0
@@ -1401,7 +1401,7 @@ asm void fn_8042F0B4(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8042F0B4_0000113C
     mr r4, r30
@@ -1953,7 +1953,7 @@ asm void fn_8042F7EC(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8042F7EC_00001874
     mr r4, r30

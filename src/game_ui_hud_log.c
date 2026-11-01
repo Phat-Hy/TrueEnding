@@ -6,7 +6,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_80013F78(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_8008B130(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
@@ -34,7 +34,7 @@ extern void fn_8044D184(void);
 extern void fn_8044D490(void);
 extern void fn_805634D4(void);
 extern void fn_805638C0(void);
-extern void fn_806827C4(void);
+extern void strstr(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -1128,7 +1128,7 @@ lbl_fn_801CEA98_00000E5C:
     mr r6, r5
     li r4, 0x6
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_801CEA98_00000ED8
     li r0, 0x1
@@ -1390,7 +1390,7 @@ lbl_fn_801CEA98_00001234:
     addi r3, r30, 0xb0
     bl fn_8008B130
     mr r4, r19
-    bl fn_806827C4
+    bl strstr
     cmpwi r3, 0x0
     beq lbl_fn_801CEA98_000012DC
     lwz r3, lbl_8087F4F0
@@ -1402,7 +1402,7 @@ lbl_fn_801CEA98_00001234:
     li r3, 0x43c
     li r4, 0x6
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_801CEA98_000012A4
     stw r21, 0x8(r1)
@@ -1467,7 +1467,7 @@ lbl_fn_801CEA98_00001348:
     addi r3, r30, 0xb0
     bl fn_8008B130
     mr r4, r19
-    bl fn_806827C4
+    bl strstr
     cmpwi r3, 0x0
     beq lbl_fn_801CEA98_000013F0
     lwz r3, lbl_8087F4F0
@@ -1479,7 +1479,7 @@ lbl_fn_801CEA98_00001348:
     li r3, 0x43c
     li r4, 0x6
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_801CEA98_000013B8
     stw r22, 0x8(r1)
@@ -1537,7 +1537,7 @@ lbl_fn_801CEA98_00001444:
     addi r3, r30, 0xb0
     bl fn_8008B130
     mr r4, r19
-    bl fn_806827C4
+    bl strstr
     cmpwi r3, 0x0
     beq lbl_fn_801CEA98_000014EC
     lwz r3, lbl_8087F4F0
@@ -1549,7 +1549,7 @@ lbl_fn_801CEA98_00001444:
     li r3, 0x43c
     li r4, 0x6
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_801CEA98_000014B4
     stw r22, 0x8(r1)
@@ -2000,7 +2000,7 @@ lbl_fn_801CF3C0_00001AA0:
     addi r3, r29, 0xb0
     bl fn_8008B130
     mr r4, r23
-    bl fn_806827C4
+    bl strstr
     cmpwi r3, 0x0
     beq lbl_fn_801CF3C0_00001B30
     lwz r23, 0x674(r29)
@@ -2063,7 +2063,7 @@ lbl_fn_801CF3C0_00001B80:
     addi r3, r29, 0xb0
     bl fn_8008B130
     mr r4, r23
-    bl fn_806827C4
+    bl strstr
     cmpwi r3, 0x0
     beq lbl_fn_801CF3C0_00001C10
     lwz r23, 0x674(r29)

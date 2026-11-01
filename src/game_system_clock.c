@@ -11,9 +11,9 @@ extern void dtor_80084684(void);
 extern void fn_80041B8C(void);
 extern void fn_80061E2C(void);
 extern void fn_8006F72C(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800A6E8C(void);
 extern void fn_800D8BB4(void);
 extern void fn_800F8348(void);
@@ -1027,7 +1027,7 @@ lbl_player_clock_updateIntervals_00000CD8:
     lwz r3, 0x84(r30)
     cmpwi r3, 0x0
     beq lbl_player_clock_updateIntervals_00000D2C
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_player_clock_updateIntervals_00000D2C:
     cmpwi r24, 0x0
     stw r24, 0x80(r30)
@@ -1059,7 +1059,7 @@ lbl_player_clock_updateIntervals_00000D60:
     beq lbl_player_clock_updateIntervals_00000DA0
     beq lbl_player_clock_updateIntervals_00000DA0
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_player_clock_updateIntervals_00000DA0:
     cmpwi r24, 0x0
     stw r24, 0x68(r30)
@@ -1098,7 +1098,7 @@ lbl_player_clock_updateIntervals_00000DF0:
     beq lbl_player_clock_updateIntervals_00000E30
     beq lbl_player_clock_updateIntervals_00000E30
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_player_clock_updateIntervals_00000E30:
     cmpwi r24, 0x0
     stw r24, 0x70(r30)
@@ -1177,7 +1177,7 @@ lbl_player_clock_updateIntervals_00000F14:
     beq lbl_player_clock_updateIntervals_00000F54
     beq lbl_player_clock_updateIntervals_00000F54
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_player_clock_updateIntervals_00000F54:
     cmpwi r24, 0x0
     stw r24, 0x88(r30)
@@ -1599,7 +1599,7 @@ lbl_player_clock_updateIntervals_00001544:
     bl fn_80686EA4
 lbl_player_clock_updateIntervals_00001574:
     slwi r3, r24, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r25, r3
     bne lbl_player_clock_updateIntervals_000015A8
@@ -1916,7 +1916,7 @@ lbl_player_clock_updateIntervals_000019E4:
     lwz r3, 0x130(r26)
     cmpwi r3, 0x0
     beq lbl_player_clock_updateIntervals_00001A40
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_player_clock_updateIntervals_00001A40:
     cmpwi r29, 0x0
     stw r29, 0x12c(r26)
@@ -2059,7 +2059,7 @@ lbl_player_clock_updateIntervals_00001C20:
     bdnz lbl_player_clock_updateIntervals_00001C20
 lbl_player_clock_updateIntervals_00001C3C:
     lwz r3, 0x18(r30)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_player_clock_updateIntervals_00001C44:
     stw r26, 0x18(r30)
     stw r29, 0x14(r30)
@@ -2153,7 +2153,7 @@ lbl_player_clock_updateIntervals_00001D7C:
     bdnz lbl_player_clock_updateIntervals_00001D7C
 lbl_player_clock_updateIntervals_00001D98:
     lwz r3, 0x18(r30)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_player_clock_updateIntervals_00001DA0:
     stw r27, 0x18(r30)
     stw r26, 0x14(r30)

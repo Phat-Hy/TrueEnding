@@ -14,7 +14,7 @@ extern void fn_800458F4(void);
 extern void fn_8006B174(void);
 extern void fn_8006B2D8(void);
 extern void fn_80070C98(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800874C8(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
@@ -532,7 +532,7 @@ asm void fn_8049D68C(void)
     addi r5, r5, 0x5a
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8049D68C_00000548
     mr r4, r30
@@ -575,7 +575,7 @@ asm void fn_8049D704(void)
     addi r5, r5, 0x5a
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8049D704_00000620
     mr r4, r28
@@ -592,7 +592,7 @@ lbl_fn_8049D704_000005DC:
     addi r5, r5, 0x5a
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8049D704_00000620
     mr r4, r28

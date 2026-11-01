@@ -12,7 +12,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_8000D430(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800874C8(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
@@ -22,8 +22,8 @@ extern void fn_8008937C(void);
 extern void fn_8008B140(void);
 extern void fn_80092A4C(void);
 extern void fn_800971D4(void);
-extern void fn_80097C08(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_setLayerAnimation(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_80097E80(void);
 extern void fn_80158CA4(void);
 extern void world_getLocalFlag(void);
@@ -876,7 +876,7 @@ asm void fn_80402978(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_80402978_00000BC8
@@ -1217,7 +1217,7 @@ lbl_fn_80402BD0_00000F78:
     lwz r0, 0x10c(r23)
     add r3, r0, r11
     addi r3, r3, 0x10
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
 lbl_fn_80402BD0_0000101C:
     lwz r3, lbl_8087F430
     li r4, 0x0
@@ -1622,12 +1622,12 @@ lbl_fn_80403308_0000158C:
     lwz r0, 0x10c(r18)
     add r3, r0, r17
     addi r3, r3, 0x10
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r0, 0x10c(r18)
     li r4, 0x0
     add r3, r0, r17
     addi r3, r3, 0x10
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lwz r0, 0x10c(r18)
     add r3, r0, r17
     stfs f1, 0x244(r3)

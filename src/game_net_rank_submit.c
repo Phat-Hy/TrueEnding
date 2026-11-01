@@ -13,8 +13,8 @@ extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
 extern void fn_8006F5E8(void);
-extern void fn_80084C24(void);
-extern void fn_80092814(void);
+extern void mem_getAllocSize(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_8009EE30(void);
 extern void fn_800A58D0(void);
 extern void atn_Task_setActive(void);
@@ -119,7 +119,7 @@ asm void fn_805226A8(void)
     cmpwi r3, 0x0
     beq lbl_fn_805226A8_00000040
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_805226A8_00000040:
     cmpwi r31, 0x0
     ble lbl_fn_805226A8_00000050
@@ -1888,7 +1888,7 @@ lbl_fn_805233FC_00001934:
     addi r4, r4, lbl_8075C6C4@l
     li r5, 0x0
     addi r4, r4, 0x263
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_805233FC_0000195C
     li r4, 0x0

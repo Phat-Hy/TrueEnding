@@ -7,12 +7,12 @@ extern void _restgpr_27(void);
 extern void _savegpr_21(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800846FC(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
 extern void fn_80097A88(void);
-extern void fn_80097C08(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800C344C(void);
 extern void fn_800CB360(void);
 extern void fn_800CB3A0(void);
@@ -108,7 +108,7 @@ asm void fn_8040BE88(void)
     li r7, 0x0
     li r8, 0x1
     addi r3, r3, 0x4
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80886340
     li r0, 0x1
     stfs f0, 0x23c(r30)
@@ -1422,7 +1422,7 @@ asm void fn_8040D1D0(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8040D1D0_000013A4
     mr r4, r30

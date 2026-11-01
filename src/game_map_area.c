@@ -17,7 +17,7 @@ extern void fn_80050A1C(void);
 extern void fn_8005B3CC(void);
 extern void fn_8005B6E8(void);
 extern void fn_800697D8(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_80094BD8(void);
 extern void fn_800DC12C(void);
 extern void fn_801059F8(void);
@@ -44,7 +44,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void fn_80680770(void);
 extern void fn_80680CF8(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80686EA4(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
@@ -2019,7 +2019,7 @@ lbl_fn_8017CB9C_00001AA8:
     bl fn_80686EA4
 lbl_fn_8017CB9C_00001AC8:
     slwi r3, r25, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r17, r3
     bne lbl_fn_8017CB9C_00001AF0
@@ -2093,7 +2093,7 @@ lbl_fn_8017CB9C_00001BD8:
     beq lbl_fn_8017CB9C_00001BF4
     mr r4, r17
     addi r3, r29, 0x14
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_8017CB9C_00001918
 lbl_fn_8017CB9C_00001BF4:

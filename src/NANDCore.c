@@ -27,8 +27,8 @@ extern void fn_8061BC10(void);
 extern void fn_80620EF0(void);
 extern void fn_80620FD0(void);
 extern void fn_8068236C(void);
-extern void fn_80682428(void);
-extern void fn_80682544(void);
+extern void strcmp(void);
+extern void strncmp(void);
 extern void fn_80686A80(void);
 extern void fn_80686AF0(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -113,7 +113,7 @@ lbl_nandConvertPath_00000044:
     bl fn_80620FD0
     addi r3, r1, 0x188
     la r4, lbl_8087E904
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_nandConvertPath_0000007C
     mr r3, r29
@@ -124,7 +124,7 @@ lbl_nandConvertPath_00000044:
 lbl_nandConvertPath_0000007C:
     addi r3, r1, 0x188
     la r4, lbl_8087E908
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_nandConvertPath_000000B0
     mr r4, r30
@@ -141,7 +141,7 @@ lbl_nandConvertPath_000000B0:
     beq lbl_nandConvertPath_00000114
     mr r3, r30
     la r4, lbl_8087E8FC
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_nandConvertPath_000000E8
     addi r3, r1, 0x8
@@ -198,7 +198,7 @@ asm void nandIsPrivatePath(void)
     li r5, 0x8
     stw r0, 0x14(r1)
     addi r4, r4, lbl_807B1070@l
-    bl fn_80682544
+    bl strncmp
     cntlzw r0, r3
     srwi r3, r0, 5
     lwz r0, 0x14(r1)
@@ -218,7 +218,7 @@ asm void fn_806212F0(void)
     addi r4, r4, lbl_807B107C@l
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_806212F0_000001E0
     lbz r0, 0x9(r31)
@@ -713,7 +713,7 @@ lbl_fn_806218E0_0000084C:
     addi r3, r30, 0x34
     addi r4, r4, lbl_807B1070@l
     li r5, 0x8
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_806218E0_00000878
     li r0, 0x1
@@ -801,7 +801,7 @@ lbl_fn_806218E0_00000988:
     addi r3, r1, 0x10
     addi r4, r4, lbl_807B1070@l
     li r5, 0x8
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_806218E0_000009B4
     li r0, 0x1
@@ -1061,7 +1061,7 @@ lbl_fn_80621D70_00000CF8:
     addi r3, r28, 0x34
     addi r4, r4, lbl_807B107C@l
     li r5, 0x9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_80621D70_00000D30
     lbz r0, 0x3d(r28)
@@ -1153,7 +1153,7 @@ lbl_fn_80621D70_00000E44:
     addi r3, r1, 0x10
     addi r4, r4, lbl_807B107C@l
     li r5, 0x9
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_80621D70_00000E7C
     lbz r0, 0x19(r1)

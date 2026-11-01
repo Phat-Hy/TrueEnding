@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_80394068(void);
 extern void fn_80686EA4(void);
 extern void fn_80697BB8(void);
@@ -617,7 +617,7 @@ lbl_fn_80695A50_0000062C:
     blt lbl_fn_80695A50_00000610
 lbl_fn_80695A50_00000634:
     subi r3, r26, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80695A50_0000063C:
     lmw r26, 0x8(r1)
     lwz r0, 0x24(r1)

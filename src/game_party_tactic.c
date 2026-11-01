@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800C344C(void);
 extern void fn_800CB3A0(void);
 extern void fn_800F8548(void);
@@ -80,7 +80,7 @@ asm void fn_801635B8(void)
     mr r6, r5
     li r3, 0x40
     li r4, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_801635B8_00000064
@@ -286,7 +286,7 @@ asm void fn_801638A0(void)
     mr r6, r5
     li r3, 0x34
     li r4, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_801638A0_0000034C
@@ -492,7 +492,7 @@ asm void fn_80163B88(void)
     mr r6, r5
     li r3, 0x40
     li r4, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80163B88_00000634
@@ -700,7 +700,7 @@ asm void fn_80163E70(void)
     stw r28, 0x50(r1)
     mr r28, r4
     li r4, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80163E70_00000920
@@ -908,7 +908,7 @@ asm void fn_80164168(void)
     mr r6, r5
     li r3, 0x1c
     li r4, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80164168_00000C18
@@ -1155,7 +1155,7 @@ asm void fn_801644D4(void)
     mr r6, r5
     li r3, 0x18
     li r4, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_801644D4_00000F80
@@ -1361,7 +1361,7 @@ asm void fn_801647BC(void)
     stw r29, 0x54(r1)
     mr r29, r3
     li r3, 0xc
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_801647BC_00001260

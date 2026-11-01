@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
 extern void fn_800616C0(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_801207CC(void);
 extern void fn_80220168(void);
 extern void fn_80221FA4(void);
@@ -423,7 +423,7 @@ lbl_fn_80220660_000004A0:
     bl fn_80686EA4
 lbl_fn_80220660_000004D0:
     mulli r3, r31, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r25, r3
     bne lbl_fn_80220660_00000504
@@ -541,7 +541,7 @@ asm void fn_80220AE4(void)
     bl fn_80686EA4
 lbl_fn_80220AE4_00000678:
     mulli r3, r24, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r23, r3
     bne lbl_fn_80220AE4_000006AC
@@ -704,7 +704,7 @@ lbl_fn_80220AE4_00000894:
     bl fn_80686EA4
 lbl_fn_80220AE4_000008C4:
     mulli r3, r21, 0x14
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r18, r3
     bne lbl_fn_80220AE4_000008F8
@@ -760,7 +760,7 @@ lbl_fn_80220AE4_000008F8:
     bl fn_80686EA4
 lbl_fn_80220AE4_0000099C:
     mulli r3, r18, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r25, r3
     bne lbl_fn_80220AE4_000009C4
@@ -867,7 +867,7 @@ lbl_fn_80220AE4_00000AB8:
     bl fn_80686EA4
 lbl_fn_80220AE4_00000B24:
     mulli r3, r18, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r23, r3
     bne lbl_fn_80220AE4_00000B4C
@@ -1095,7 +1095,7 @@ asm void fn_802212C4(void)
     bl fn_80686EA4
 lbl_fn_802212C4_00000E38:
     mulli r3, r25, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r26, r3
     bne lbl_fn_802212C4_00000E6C
@@ -1496,7 +1496,7 @@ lbl_fn_802214F8_00001378:
     bl fn_80686EA4
 lbl_fn_802214F8_000013A8:
     mulli r3, r25, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_802214F8_000013DC

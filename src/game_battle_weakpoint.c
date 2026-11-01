@@ -8,9 +8,9 @@ extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void fn_8003EFB0(void);
 extern void fn_8003F030(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800971D4(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800CB3A0(void);
 extern void fn_800CB5C8(void);
 extern void atn_Task_setActive(void);
@@ -729,7 +729,7 @@ asm void fn_803FBFA8(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_803FBFA8_00000930
@@ -1418,7 +1418,7 @@ asm void fn_803FC8D8(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_803FC8D8_000011E4
@@ -1746,7 +1746,7 @@ lbl_fn_803FCAB0_000015B0:
     li r4, 0x0
     addi r3, r3, 0xb0
     lfs f31, 0x234(r3)
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f31, f1
     cror eq, gt, eq
     bne lbl_fn_803FCAB0_000018F4
@@ -1890,7 +1890,7 @@ lbl_fn_803FCAB0_00001808:
     li r4, 0x0
     addi r3, r3, 0xb0
     lfs f31, 0x234(r3)
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f31, f1
     cror eq, gt, eq
     bne lbl_fn_803FCAB0_000018F4
@@ -1918,7 +1918,7 @@ lbl_fn_803FCAB0_00001888:
     li r4, 0x0
     addi r3, r3, 0xb0
     lfs f31, 0x234(r3)
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f31, f1
     cror eq, gt, eq
     bne lbl_fn_803FCAB0_000018F4
@@ -1930,7 +1930,7 @@ lbl_fn_803FCAB0_00001888:
     li r4, 0x0
     addi r3, r3, 0xb0
     lfs f31, 0x234(r3)
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f31, f1
     cror eq, gt, eq
     bne lbl_fn_803FCAB0_000018F4

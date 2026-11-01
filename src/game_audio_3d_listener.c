@@ -11,13 +11,13 @@ extern void fn_8000D3A4(void);
 extern void fn_80011034(void);
 extern void fn_80013338(void);
 extern void fn_80063484(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_800897D8(void);
 extern void fn_8008BBD8(void);
 extern void atn_Matrix_copy(void);
 extern void fn_80091CFC(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_80094958(void);
 extern void fn_80094B6C(void);
 extern void fn_800CB6E4(void);
@@ -53,7 +53,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void fn_80680770(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80686EA4(void);
 extern void fn_8068AD58(void);
 extern void fn_8068AEA4(void);
@@ -169,7 +169,7 @@ asm void fn_8031E078(void)
     mr r6, r5
     li r4, 0x1
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     lfs f2, 0x18(r29)
@@ -585,7 +585,7 @@ lbl_fn_8031E078_00000674:
     bl fn_80686EA4
 lbl_fn_8031E078_000006A8:
     slwi r3, r31, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r28, r3
     bne lbl_fn_8031E078_000006DC
@@ -1034,7 +1034,7 @@ lbl_fn_8031ECDC_00000D0C:
     addi r3, r31, 0xb0
     addi r4, r4, lbl_80749A70@l
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     blt lbl_fn_8031ECDC_00000D94
     lwz r0, 0x524(r31)
@@ -1581,7 +1581,7 @@ lbl_fn_8031F4B8_000014C0:
     lis r3, lbl_80788A00@ha
     lwz r4, lbl_80788A00@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_8031F4B8_000014F0
@@ -1652,7 +1652,7 @@ lbl_fn_8031F59C_000015A4:
     lis r3, lbl_80788A08@ha
     lwz r4, lbl_80788A08@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_8031F59C_000015D4

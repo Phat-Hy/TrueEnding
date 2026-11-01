@@ -9,7 +9,7 @@ extern void _savegpr_27(void);
 extern void item_useConsumable(void);
 extern void fn_8004D388(void);
 extern void fn_8004ED34(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_80116BD4(void);
 extern void fn_80178088(void);
 extern void fn_8037F9AC(void);
@@ -1363,7 +1363,7 @@ lbl_fn_8038DBE4_0000135C:
     li r5, 0x0
     mr r3, r30
     addi r4, r4, 0x1eb
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_8038DBE4_00001388
     li r5, 0x0

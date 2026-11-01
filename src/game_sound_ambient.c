@@ -6,7 +6,7 @@ extern void __files(void);
 extern void _restgpr_22(void);
 extern void _savegpr_22(void);
 extern void dtor_80084684(void);
-extern void fn_800844D8(void);
+extern void mem_free(void);
 extern void fn_800A555C(void);
 extern void fn_800CB3A0(void);
 extern void fn_800DD3FC(void);
@@ -1130,7 +1130,7 @@ lbl_fn_801D94D0_00000EB8:
     bl fn_80686EA4
 lbl_fn_801D94D0_00000EE4:
     mulli r3, r24, 0x18
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r23, r3
     bne lbl_fn_801D94D0_00000F18

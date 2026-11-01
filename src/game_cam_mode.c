@@ -42,7 +42,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void fn_80680CF8(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_8068AEA4(void);
 extern void fn_80695720(void);
 extern void fn_80695A50(void);
@@ -1655,7 +1655,7 @@ asm void cam_initStickBindings(void)
     addi r30, r5, 0x4
     mr r3, r30
     addi r4, r4, lbl_80735428@l
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_cam_initStickBindings_00001460
     mr r4, r30
@@ -1667,7 +1667,7 @@ lbl_cam_initStickBindings_00001460:
     addi r4, r4, lbl_80735428@l
     addi r30, r3, 0x24
     mr r3, r30
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_cam_initStickBindings_0000148C
     mr r4, r30
@@ -1679,7 +1679,7 @@ lbl_cam_initStickBindings_0000148C:
     addi r4, r4, lbl_80735428@l
     addi r30, r3, 0x44
     mr r3, r30
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_cam_initStickBindings_000014B8
     mr r4, r30
@@ -1691,7 +1691,7 @@ lbl_cam_initStickBindings_000014B8:
     addi r4, r4, lbl_80735428@l
     addi r30, r3, 0x64
     mr r3, r30
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_cam_initStickBindings_000014E4
     mr r4, r30
@@ -1703,7 +1703,7 @@ lbl_cam_initStickBindings_000014E4:
     addi r4, r30, lbl_80735428@l
     addi r29, r3, 0xe4
     mr r3, r29
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_cam_initStickBindings_00001534
     addi r4, r30, lbl_80735428@l
@@ -1724,7 +1724,7 @@ lbl_cam_initStickBindings_00001534:
     addi r4, r30, lbl_80735428@l
     addi r29, r3, 0x104
     mr r3, r29
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_cam_initStickBindings_00001584
     addi r4, r30, lbl_80735428@l

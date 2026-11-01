@@ -19,7 +19,7 @@ extern void fn_805381A4(void);
 extern void fn_805381CC(void);
 extern void fn_80541214(void);
 extern void fn_8055D004(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80695B00(void);
 
 /* External data declarations */
@@ -1937,7 +1937,7 @@ lbl_fn_8055CF20_000019A0:
     lis r3, lbl_80794DB8@ha
     lwz r4, lbl_80794DB8@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_8055CF20_000019D0

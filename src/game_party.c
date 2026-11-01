@@ -10,9 +10,9 @@ extern void fn_8006C858(void);
 extern void fn_8006CABC(void);
 extern void fn_80083F50(void);
 extern void fn_80084110(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D594C(void);
@@ -443,7 +443,7 @@ asm void atn_SinusCurve_evaluate(void)
     stw r28, 0x10(r1)
     mr r28, r3
     li r3, 0x18
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_atn_SinusCurve_evaluate_00000580
     lfs f1, 0x14(r28)
@@ -589,7 +589,7 @@ asm void atn_CosinusCurve_destructor(void)
     stw r28, 0x10(r1)
     mr r28, r3
     li r3, 0x18
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_atn_CosinusCurve_destructor_0000077C
     lfs f1, 0x10(r28)
@@ -737,7 +737,7 @@ asm void atn_CosinusCurve_evaluate(void)
     stw r28, 0x10(r1)
     mr r28, r3
     li r3, 0x18
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_atn_CosinusCurve_evaluate_00000974
     lfs f1, 0x10(r28)
@@ -884,7 +884,7 @@ asm void atn_ConstantCurve_destructor(void)
     stw r28, 0x10(r1)
     mr r28, r3
     li r3, 0x14
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_atn_ConstantCurve_destructor_00000B64
     lfs f1, 0xc(r28)
@@ -1029,7 +1029,7 @@ asm void atn_ConstantCurve_evaluate(void)
     stw r28, 0x10(r1)
     mr r28, r3
     li r3, 0x10
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_atn_ConstantCurve_evaluate_00000D4C
     li r0, 0x0
@@ -1172,7 +1172,7 @@ asm void atn_Polynomial1Curve_destructor(void)
     stw r28, 0x10(r1)
     mr r28, r3
     li r3, 0x18
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_atn_Polynomial1Curve_destructor_00000F4C
     lfs f2, 0x10(r28)
@@ -1321,7 +1321,7 @@ asm void atn_Polynomial1Curve_evaluate(void)
     stw r28, 0x10(r1)
     mr r28, r3
     li r3, 0x10
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_atn_Polynomial1Curve_evaluate_00001134
     lfs f0, 0xc(r28)
@@ -1464,7 +1464,7 @@ asm void atn_Polynomial2Curve_destructor(void)
     stw r28, 0x10(r1)
     mr r28, r3
     li r3, 0x10
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_atn_Polynomial2Curve_destructor_0000131C
     li r0, 0x0
@@ -1607,7 +1607,7 @@ asm void atn_Polynomial2Curve_evaluate(void)
     stw r28, 0x10(r1)
     mr r28, r3
     li r3, 0x14
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_atn_Polynomial2Curve_evaluate_00001514
     lfs f2, 0x10(r28)
@@ -1880,7 +1880,7 @@ asm void party_initTextures(void)
     li r4, 0x6
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_party_initTextures_00001884
@@ -1953,7 +1953,7 @@ asm void atn_DrawHelper_destructor(void)
     lwz r3, 0x4(r30)
     cmpwi r3, 0x0
     beq lbl_atn_DrawHelper_destructor_00001918
-    bl fn_80084C24
+    bl mem_getAllocSize
     li r0, 0x0
     stw r0, 0x4(r30)
     stw r0, 0x8(r30)

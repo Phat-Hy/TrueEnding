@@ -14,12 +14,12 @@ extern void fn_8004ED34(void);
 extern void atn_ColliBase_destructor(void);
 extern void atn_ColliCapsule_destructor(void);
 extern void fn_8007708C(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800874C8(void);
 extern void fn_8008771C(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
-extern void fn_80097C08(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800A555C(void);
 extern void fn_800C3094(void);
 extern void fn_800C3124(void);
@@ -182,7 +182,7 @@ lbl_fn_80467F50_00000044:
     stfs f0, 0x2e8(r31)
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x3e8
@@ -1310,7 +1310,7 @@ asm void fn_80468F54(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80468F54_00001050
     mr r4, r31

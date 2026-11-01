@@ -15,7 +15,7 @@ extern void _savegpr_27(void);
 extern void fn_8067E23C(void);
 extern void fn_80680CF8(void);
 extern void fn_806820D4(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_806A420C(void);
 extern void fn_806A4260(void);
 extern void fn_806A426C(void);
@@ -1550,12 +1550,12 @@ asm void fn_806F1D80(void)
     stw r30, 0x8(r1)
     mr r30, r3
     lwz r4, 0x7c(r31)
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_806F1D80_0000151C
     lwz r4, 0x80(r31)
     mr r3, r30
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_806F1D80_00001524
 lbl_fn_806F1D80_0000151C:

@@ -4,8 +4,8 @@
 /* External function declarations */
 extern void fn_80044E0C(void);
 extern void fn_8004ED34(void);
-extern void fn_80084320(void);
-extern void fn_80097D7C(void);
+extern void mem_alloc(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
 extern void fn_8011BEB8(void);
@@ -155,7 +155,7 @@ lbl_fn_80157C34_00000130:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80157C34_0000016C
@@ -394,7 +394,7 @@ lbl_fn_8015802C_00000490:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8015802C_000004DC
@@ -751,7 +751,7 @@ lbl_fn_8015802C_00000980:
     li r7, 0x0
     stfs f0, 0xfbc(r29)
     stw r8, 0x58c(r29)
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8015802C_000009DC
@@ -967,7 +967,7 @@ lbl_fn_801588A0_00000CAC:
     addi r5, r5, 0x24
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_801588A0_00000CF0
@@ -1185,7 +1185,7 @@ lbl_fn_80158BB4_00000FC4:
     lfs f31, 0x2e4(r3)
     li r4, 0x0
     addi r3, r3, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_80881978
     fsubs f0, f1, f0
     fcmpo cr0, f31, f0
@@ -1197,7 +1197,7 @@ lbl_fn_80158BB4_00000FFC:
     lfs f31, 0x2e4(r3)
     li r4, 0x0
     addi r3, r3, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f31, f1
     cror eq, gt, eq
     mfcr r3
@@ -1207,7 +1207,7 @@ lbl_fn_80158BB4_00001020:
     lfs f31, 0x2e4(r3)
     li r4, 0x0
     addi r3, r3, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_808819C0
     fsubs f0, f1, f0
     fcmpo cr0, f31, f0
@@ -1438,7 +1438,7 @@ asm void fn_80158EF0(void)
     stw r28, 0x50(r1)
     mr r28, r4
     li r4, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80158EF0_00001324
@@ -1703,7 +1703,7 @@ asm void fn_801591E8(void)
     stfs f1, 0x30(r1)
     li r7, 0x0
     stw r30, 0x13ac(r29)
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_801591E8_000016FC

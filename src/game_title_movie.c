@@ -11,8 +11,8 @@ extern void _savegpr_27(void);
 extern void fn_8004ED34(void);
 extern void fn_800697D8(void);
 extern void fn_8008B978(void);
-extern void fn_80092814(void);
-extern void fn_80097D7C(void);
+extern void atn_Model_findBoneIndex(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C31F4(void);
 extern void fn_800CB3A0(void);
 extern void fn_8011F8F4(void);
@@ -1472,7 +1472,7 @@ lbl_fn_803A9DBC_000012C4:
     lfs f31, 0x2e4(r30)
     addi r3, r30, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f31, f1
     blt lbl_fn_803A9DBC_00001330
 lbl_fn_803A9DBC_000012FC:
@@ -1714,7 +1714,7 @@ lbl_fn_803AA5E4_000015E0:
     mr r3, r26
     addi r4, r1, 0x208
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     mr r29, r3
     bge lbl_fn_803AA5E4_00001678

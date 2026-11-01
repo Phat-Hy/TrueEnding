@@ -6,8 +6,8 @@ extern void __files(void);
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_800CB3A0(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
@@ -880,7 +880,7 @@ lbl_fn_805849EC_00000A5C:
     bl fn_80686EA4
 lbl_fn_805849EC_00000A90:
     slwi r3, r31, 3
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r24, r3
     bne lbl_fn_805849EC_00000AC4
@@ -1190,7 +1190,7 @@ asm void fn_80584FE8(void)
     mr r6, r5
     addi r3, r3, 0x5c98
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80584FE8_00000EE4
     mr r4, r28

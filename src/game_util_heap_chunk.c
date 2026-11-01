@@ -12,8 +12,8 @@ extern void fn_8005B3CC(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006F72C(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_800A555C(void);
 extern void fn_800CB3A0(void);
 extern void atn_Task_setActive(void);
@@ -88,8 +88,8 @@ extern void fn_805880F4(void);
 extern void fn_805883DC(void);
 extern void fn_8067CE80(void);
 extern void fn_80680770(void);
-extern void fn_80682428(void);
-extern void fn_80682544(void);
+extern void strcmp(void);
+extern void strncmp(void);
 extern void fn_80684600(void);
 extern void fn_80686A48(void);
 extern void fn_80686EA4(void);
@@ -1372,7 +1372,7 @@ asm void fn_80586DB4(void)
     mr r6, r5
     addi r3, r3, 0x5bc8
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80586DB4_000011AC
     mr r4, r29
@@ -2013,12 +2013,12 @@ lbl_fn_80587628_00001A88:
     mr r18, r3
     addi r4, r23, 0xda
     li r5, 0x1
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     beq lbl_fn_80587628_00001EE0
     mr r3, r18
     addi r4, r23, 0xdc
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80587628_00001AD0
     addi r3, r1, 0x4c
@@ -2029,7 +2029,7 @@ lbl_fn_80587628_00001A88:
 lbl_fn_80587628_00001AD0:
     mr r3, r18
     addi r4, r23, 0xe6
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80587628_00001AF8
     addi r3, r1, 0x4c
@@ -2202,7 +2202,7 @@ lbl_fn_80587628_00001D24:
     bl fn_80686EA4
 lbl_fn_80587628_00001D44:
     mulli r3, r18, 0x24
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_80587628_00001D6C

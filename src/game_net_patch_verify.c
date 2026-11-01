@@ -8,9 +8,9 @@ extern void fn_8000D124(void);
 extern void fn_80042740(void);
 extern void fn_80057A64(void);
 extern void fn_8006CA80(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
-extern void fn_80084C24(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
+extern void mem_getAllocSize(void);
 extern void fn_800CB360(void);
 extern void fn_800CB3A0(void);
 extern void atn_Task_constructor(void);
@@ -124,7 +124,7 @@ asm void fn_8053B7B8(void)
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8053B7B8_00000048
-    bl fn_80084C24
+    bl mem_getAllocSize
     li r0, 0x0
     stw r0, 0x4(r30)
 lbl_fn_8053B7B8_00000048:
@@ -157,7 +157,7 @@ asm void fn_8053B82C(void)
     mr r26, r4
     li r3, 0x24
     li r4, 0x4
-    bl fn_80084320
+    bl mem_alloc
     cmpwi cr1, r3, 0x0
     mr r25, r3
     beq cr1, lbl_fn_8053B82C_000000C4
@@ -170,7 +170,7 @@ lbl_fn_8053B82C_000000C4:
     stw r25, 0x28(r1)
     li r3, 0x10
     stw r0, 0x2c(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi cr6, r3, 0x0
     beq cr6, lbl_fn_8053B82C_000000FC
     li r0, 0x1
@@ -380,7 +380,7 @@ lbl_fn_8053B82C_00000398:
     bl fn_80686EA4
 lbl_fn_8053B82C_000003CC:
     slwi r3, r30, 3
-    bl fn_800844D8
+    bl mem_free
     cmpwi cr6, r3, 0x0
     mr r31, r3
     bne cr6, lbl_fn_8053B82C_00000400
@@ -771,7 +771,7 @@ lbl_fn_8053BF84_00000920:
     lwz r3, 0x4(r30)
     cmpwi cr1, r3, 0x0
     beq cr1, lbl_fn_8053BF84_00000948
-    bl fn_80084C24
+    bl mem_getAllocSize
     li r0, 0x0
     stw r0, 0x4(r30)
 lbl_fn_8053BF84_00000948:
@@ -1070,7 +1070,7 @@ lbl_fn_8053C20C_00000CDC:
     lwz r3, 0x4(r30)
     cmpwi cr1, r3, 0x0
     beq cr1, lbl_fn_8053C20C_00000D04
-    bl fn_80084C24
+    bl mem_getAllocSize
     li r0, 0x0
     stw r0, 0x4(r30)
 lbl_fn_8053C20C_00000D04:
@@ -1303,7 +1303,7 @@ asm void fn_8053C78C(void)
     stmw r25, 0x54(r1)
     mr r29, r3
     li r3, 0x20
-    bl fn_80084320
+    bl mem_alloc
     cmpwi cr1, r3, 0x0
     mr r25, r3
     beq cr1, lbl_fn_8053C78C_0000101C
@@ -1315,7 +1315,7 @@ lbl_fn_8053C78C_0000101C:
     stw r25, 0x28(r1)
     li r3, 0x10
     stw r0, 0x2c(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi cr6, r3, 0x0
     beq cr6, lbl_fn_8053C78C_00001054
     li r0, 0x1
@@ -1525,7 +1525,7 @@ lbl_fn_8053C78C_000012F0:
     bl fn_80686EA4
 lbl_fn_8053C78C_00001324:
     slwi r3, r30, 3
-    bl fn_800844D8
+    bl mem_free
     cmpwi cr6, r3, 0x0
     mr r31, r3
     bne cr6, lbl_fn_8053C78C_00001358

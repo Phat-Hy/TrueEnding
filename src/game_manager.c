@@ -18,13 +18,13 @@ extern void fn_8000D124(void);
 extern void fn_8000D3A4(void);
 extern void fn_8000D430(void);
 extern void fn_8000DD0C(void);
-extern void fn_800844D8(void);
-extern s32 fn_80092814(void*, u32, int);
+extern void mem_free(void);
+extern s32 atn_Model_findBoneIndex(void*, u32, int);
 extern void fn_800928B0(void);
 extern void fn_800929C0(void);
 extern void fn_80094958(void);
 extern void fn_80097A9C(void);
-extern void fn_80097C08(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097CCC(void);
 extern void fn_80097D40(void);
 extern void atn_Task_destructor(void);
@@ -1995,7 +1995,7 @@ lbl_fn_800119C0_000019F8:
     mr r6, r27
     mr r8, r30
     li r7, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     add r3, r24, r25
     cmpwi r28, 0x0
     stfs f30, 0x238(r3)
@@ -2105,7 +2105,7 @@ lbl_fn_800119C0_00001B64:
     li r4, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     xoris r3, r28, 0x8000
     lis r0, 0x4330
     lis r4, lbl_8072F898@ha
@@ -2208,7 +2208,7 @@ lbl_fn_800119C0_00001CBC:
     li r4, 0x0
     lfs f2, lbl_80880678
     li r7, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     cmpwi r28, 0x0
     stfs f30, 0x238(r25)
     bne lbl_fn_800119C0_00001D1C
@@ -2466,7 +2466,7 @@ lbl_fn_80012054_0000202C:
     li r7, 0x1
     lfs f2, lbl_80880678
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     cmpwi r29, 0x0
     stfs f30, 0x238(r30)
     bne lbl_fn_80012054_0000207C
@@ -2661,7 +2661,7 @@ lbl_fn_80012294_000022D8:
     lfs f2, lbl_80880678
     li r7, 0x1
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     b lbl_fn_80012294_00002408
 lbl_fn_80012294_000022F4:
     cmpwi r4, 0x0
@@ -2741,7 +2741,7 @@ lbl_fn_80012294_00002398:
     nor r0, r5, r0
     srawi r0, r0, 31
     andc r5, r9, r0
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
 lbl_fn_80012294_00002408:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -3828,7 +3828,7 @@ lbl_fn_80012D34_00003198:
 
 void* atn_Model_getBoneMatrix(void* model, u32 bone_id)
 {
-    s32 idx = fn_80092814(model, bone_id, 0);
+    s32 idx = atn_Model_findBoneIndex(model, bone_id, 0);
     if (idx < 0) {
         return NULL;
     } else {
@@ -4194,7 +4194,7 @@ lbl_fn_80013558_00003650:
     bl fn_80686EA4
 lbl_fn_80013558_0000367C:
     slwi r3, r18, 4
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r21, r3
     bne lbl_fn_80013558_000036B0
@@ -4389,7 +4389,7 @@ lbl_fn_80013558_00003920:
     bl fn_80686EA4
 lbl_fn_80013558_0000394C:
     slwi r3, r17, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r21, r3
     bne lbl_fn_80013558_00003980

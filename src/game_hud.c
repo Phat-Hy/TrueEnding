@@ -18,8 +18,8 @@ extern void fn_8006B174(void);
 extern void fn_80070B60(void);
 extern void fn_80079ECC(void);
 extern void fn_8007A36C(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_800846FC(void);
 extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
@@ -1746,7 +1746,7 @@ lbl_fn_8009F788_00001710:
     li r4, 0x6
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8009F788_00001874
@@ -2017,7 +2017,7 @@ lbl_fn_8009F788_00001AEC:
     bl fn_80686EA4
 lbl_fn_8009F788_00001B20:
     slwi r3, r24, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r25, r3
     bne lbl_fn_8009F788_00001B54

@@ -5,10 +5,10 @@
 extern void _restgpr_20(void);
 extern void _savegpr_20(void);
 extern void fn_8004ED34(void);
-extern void fn_80092814(void);
-extern void fn_80097C08(void);
+extern void atn_Model_findBoneIndex(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097CCC(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C3118(void);
 extern void fn_800C344C(void);
 extern void fn_800CB3A0(void);
@@ -115,7 +115,7 @@ asm void fn_8027641C(void)
     mr r31, r3
     lfs f31, 0x2e4(r3)
     addi r3, r3, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f31, f1
     cror eq, gt, eq
     bne lbl_fn_8027641C_0000004C
@@ -147,7 +147,7 @@ asm void fn_80276484(void)
     mr r31, r3
     lfs f31, 0x2e4(r3)
     addi r3, r3, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f31, f1
     cror eq, gt, eq
     bne lbl_fn_80276484_00000128
@@ -275,7 +275,7 @@ asm void fn_80276648(void)
     mr r31, r3
     lfs f31, 0x2e4(r3)
     addi r3, r3, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f31, f1
     cror eq, gt, eq
     bne lbl_fn_80276648_00000280
@@ -541,7 +541,7 @@ asm void fn_80276944(void)
     stfs f0, 0x2e8(r30)
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r3, 0x18ec(r30)
     cmpwi r3, 0x0
     beq lbl_fn_80276944_00000614
@@ -673,7 +673,7 @@ asm void fn_80276B3C(void)
     stfs f0, 0x2e8(r31)
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
 lbl_fn_80276B3C_000007C4:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -725,7 +725,7 @@ asm void fn_80276BF4(void)
     stfs f0, 0x2e8(r31)
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
 lbl_fn_80276BF4_0000087C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -762,10 +762,10 @@ asm void fn_80276CAC(void)
     li r7, 0x0
     li r8, 0x1
     stfs f0, 0x2fc(r31)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_808838A8
     mr r3, r31
     fdivs f0, f1, f0
@@ -883,7 +883,7 @@ asm void fn_80276E44(void)
     li r8, 0x1
     stfs f0, 0x2fc(r31)
     stfs f0, 0x2e8(r31)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r0, 0x1528(r31)
     stw r0, 0x18f0(r31)
     lwz r31, 0xc(r1)
@@ -927,7 +927,7 @@ asm void fn_80276ECC(void)
     li r8, 0x1
     stfs f0, 0x2fc(r30)
     stfs f0, 0x2e8(r30)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r5, 0x18ec(r30)
     addi r3, r1, 0xc8
     lfs f0, 0x530(r30)
@@ -1277,7 +1277,7 @@ asm void fn_802773F8(void)
     li r8, 0x1
     stfs f0, 0x2fc(r31)
     stfs f0, 0x2e8(r31)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -1501,7 +1501,7 @@ lbl_fn_80277478_00001304:
     li r7, 0x0
     stfs f0, 0x2e8(r29)
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     li r3, 0x1
 lbl_fn_80277478_00001384:
     lwz r0, 0x114(r1)
@@ -1545,7 +1545,7 @@ asm void fn_802777CC(void)
     li r7, 0x0
     li r8, 0x1
     stfs f0, 0x2fc(r31)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80883860
     stfs f0, 0x2e8(r31)
     lwz r31, 0xc(r1)
@@ -1670,7 +1670,7 @@ asm void fn_80277968(void)
     li r7, 0x1
     li r8, 0x1
     stfs f1, 0x2e8(r30)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     mr r3, r30
     li r4, 0xc8
     bl fn_80232B7C
@@ -1727,7 +1727,7 @@ asm void fn_80277A88(void)
     mr r31, r3
     lfs f31, 0x2e4(r3)
     addi r3, r3, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f31, f1
     cror eq, gt, eq
     bne lbl_fn_80277A88_000016B8
@@ -1780,7 +1780,7 @@ asm void fn_80277AF0(void)
     li r7, 0x0
     li r8, 0x1
     stfs f0, 0x2e8(r31)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -1842,7 +1842,7 @@ lbl_fn_80277BC0_00001804:
     lwzx r4, r26, r31
     addi r3, r20, 0xb0
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80277BC0_00001824
     li r3, 0x0

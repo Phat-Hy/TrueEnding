@@ -22,8 +22,8 @@ extern void fn_8008771C(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
-extern void fn_80092814(void);
-extern void fn_80097C08(void);
+extern void atn_Model_findBoneIndex(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Task_setActive(void);
 extern void fn_800EC254(void);
 extern void fn_800EC2C4(void);
@@ -77,7 +77,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_80682544(void);
+extern void strncmp(void);
 extern void fn_8068AE9C(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
@@ -240,7 +240,7 @@ asm void fn_80343B0C(void)
     li r7, 0x0
     li r8, 0x1
     stfs f0, 0x2e8(r31)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r3, lbl_8087F430
     addi r30, r1, 0xbc
     li r4, 0x0
@@ -595,7 +595,7 @@ asm void fn_80344060(void)
     li r7, 0x0
     li r8, 0x1
     stfs f0, 0x2e8(r30)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     stb r31, 0x1628(r30)
     lwz r3, lbl_8087F498
     cmpwi r3, 0x0
@@ -797,7 +797,7 @@ asm void fn_8034441C(void)
     stfs f0, 0x2fc(r3)
     li r8, 0x1
     addi r3, r3, 0xb0
-    b fn_80097C08
+    b atn_Anim_setLayerAnimation
 }
 
 asm void fn_80344454(void)
@@ -853,7 +853,7 @@ lbl_fn_80344454_000009E4:
     addi r4, r31, 0x32c
     addi r3, r27, 0xb0
     li r5, 0x0
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80344454_00000A1C
     li r3, 0x0
@@ -1453,7 +1453,7 @@ asm void fn_80344C1C(void)
     li r7, 0x0
     li r8, 0x1
     stfs f0, 0x2e8(r30)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     li r3, 0x0
     li r4, 0x0
     bl fn_80232B7C
@@ -1523,7 +1523,7 @@ asm void fn_80344DF4(void)
     stw r31, 0x3fc(r30)
     li r8, 0x1
     stfs f0, 0x2fc(r30)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80885300
     stfs f0, 0x2e8(r30)
     lwz r31, 0xc(r1)
@@ -2050,7 +2050,7 @@ lbl_fn_80345384_00001ADC:
     bl fn_8004212C
     addi r4, r29, 0x33
     li r5, 0x8
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_80345384_00001B18
     addi r3, r1, 0x98

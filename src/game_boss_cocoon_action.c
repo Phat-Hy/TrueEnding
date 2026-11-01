@@ -25,7 +25,7 @@ extern void fn_80061824(void);
 extern void fn_8006AFF8(void);
 extern void fn_8006CA80(void);
 extern void fn_8006EF48(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
@@ -99,7 +99,7 @@ extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80682544(void);
+extern void strncmp(void);
 extern void fn_80695A50(void);
 
 /* External data declarations */
@@ -413,7 +413,7 @@ lbl_fn_80452600_00000300:
     stw r31, 0x48(r3)
     beq lbl_fn_80452600_00000344
     mr r3, r0
-    bl fn_80084C24
+    bl mem_getAllocSize
     stw r31, 0x4c(r29)
 lbl_fn_80452600_00000344:
     lwz r3, 0x50(r29)
@@ -511,7 +511,7 @@ lbl_fn_80452710_00000488:
     bl fn_8004212C
     addi r4, r30, 0x2d
     li r5, 0x8
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_80452710_000004C4
     addi r3, r1, 0x98
@@ -1187,7 +1187,7 @@ lbl_fn_80452F14_00000E24:
     bl fn_8004212C
     addi r4, r30, 0x2d
     li r5, 0x8
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_80452F14_00000E60
     addi r3, r1, 0x98

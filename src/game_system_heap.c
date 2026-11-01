@@ -7,7 +7,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8006F72C(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800A6BD4(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
@@ -772,7 +772,7 @@ lbl_fn_801F9860_000009E4:
     bdnz lbl_fn_801F9860_000009E4
 lbl_fn_801F9860_000009FC:
     lwz r3, 0x30(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801F9860_00000A04:
     stw r30, 0x30(r28)
     li r0, 0x8
@@ -866,7 +866,7 @@ lbl_fn_801F9860_00000B40:
     bdnz lbl_fn_801F9860_00000B40
 lbl_fn_801F9860_00000B58:
     lwz r3, 0x30(r28)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801F9860_00000B60:
     stw r29, 0x30(r28)
     stw r30, 0x2c(r28)
@@ -971,7 +971,7 @@ lbl_fn_801F9860_00000CC4:
     bdnz lbl_fn_801F9860_00000CC4
 lbl_fn_801F9860_00000CDC:
     lwz r3, 0x30(r30)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801F9860_00000CE4:
     stw r29, 0x30(r30)
     li r0, 0x8
@@ -1065,7 +1065,7 @@ lbl_fn_801F9860_00000E20:
     bdnz lbl_fn_801F9860_00000E20
 lbl_fn_801F9860_00000E38:
     lwz r3, 0x30(r30)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_801F9860_00000E40:
     stw r28, 0x30(r30)
     stw r29, 0x2c(r30)

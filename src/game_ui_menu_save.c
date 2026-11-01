@@ -9,10 +9,10 @@ extern void fn_800185B4(void);
 extern void fn_80018608(void);
 extern void fn_8003EA3C(void);
 extern void fn_8003F030(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_8008BBD8(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800DC6B4(void);
 extern void fn_800F8548(void);
 extern void fn_800F8574(void);
@@ -1739,7 +1739,7 @@ lbl_fn_801BE630_000017D8:
     lfs f21, 0x234(r20)
     mr r3, r20
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f21, f1
     cror eq, gt, eq
     bne lbl_fn_801BE630_0000187C
@@ -1834,7 +1834,7 @@ asm void fn_801BFF28(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_801BFF28_00001974
@@ -1909,7 +1909,7 @@ lbl_fn_801BFF28_000019F8:
     stw r5, 0x30(r1)
     stw r4, 0x34(r1)
     stw r0, 0x38(r1)
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_801BFF28_00001A90

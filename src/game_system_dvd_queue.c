@@ -9,8 +9,8 @@ extern void _savegpr_25(void);
 extern void fn_8000D430(void);
 extern void item_useConsumable(void);
 extern void fn_8004ED34(void);
-extern void fn_80097C08(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_setLayerAnimation(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_80097E80(void);
 extern void fn_800A56A8(void);
 extern void fn_8012111C(void);
@@ -2627,7 +2627,7 @@ lbl_fn_803792F0_000025B0:
     stw r3, 0x3a8(r28)
     addi r3, r3, 0xb0
     lfs f20, 0x234(r3)
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f20, f1
     cror eq, gt, eq
     bne lbl_fn_803792F0_000026A0
@@ -2643,7 +2643,7 @@ lbl_fn_803792F0_000025B0:
     lfs f2, lbl_8088584C
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     b lbl_fn_803792F0_000026A0
 lbl_fn_803792F0_0000260C:
     lwz r4, 0x3a8(r28)
@@ -2659,7 +2659,7 @@ lbl_fn_803792F0_0000260C:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     b lbl_fn_803792F0_000026A0
 lbl_fn_803792F0_00002648:
     lwz r0, 0x50(r4)
@@ -2673,7 +2673,7 @@ lbl_fn_803792F0_00002648:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     b lbl_fn_803792F0_000026A0
 lbl_fn_803792F0_0000267C:
     lfs f1, lbl_80885848
@@ -2684,7 +2684,7 @@ lbl_fn_803792F0_0000267C:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
 lbl_fn_803792F0_000026A0:
     lwz r3, 0x3a8(r28)
     addi r3, r3, 0x1220
@@ -3235,7 +3235,7 @@ lbl_fn_803792F0_00002EDC:
     li r4, 0x0
     lfs f20, 0x2e4(r31)
     addi r3, r31, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f20, f1
     cror eq, gt, eq
     bne lbl_fn_803792F0_00002F20
@@ -3247,7 +3247,7 @@ lbl_fn_803792F0_00002EDC:
     li r6, 0x1
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
 lbl_fn_803792F0_00002F20:
     addi r3, r31, 0x1220
     bl fn_8012111C

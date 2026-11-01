@@ -7,9 +7,9 @@ extern void _restgpr_27(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800C344C(void);
 extern void fn_800CB3A0(void);
 extern void atn_Task_constructor(void);
@@ -897,7 +897,7 @@ asm void fn_8044D9BC(void)
     la r5, lbl_8087E024
     la r6, lbl_8087E020
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r20, r3
     beq lbl_fn_8044D9BC_00000A00
@@ -922,7 +922,7 @@ lbl_fn_8044D9BC_00000A04:
     lwz r3, 0x4c(r20)
     cmpwi r3, 0x0
     beq lbl_fn_8044D9BC_00000A30
-    bl fn_80084C24
+    bl mem_getAllocSize
     stw r19, 0x4c(r20)
 lbl_fn_8044D9BC_00000A30:
     lwz r3, 0x50(r20)
@@ -1262,7 +1262,7 @@ lbl_fn_8044D9BC_00000EA4:
     la r5, lbl_8087E01C
     la r6, lbl_8087E018
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r20, r3
     beq lbl_fn_8044D9BC_00001068
@@ -1403,7 +1403,7 @@ asm void fn_8044E0A8(void)
     stw r31, 0x48(r3)
     beq lbl_fn_8044E0A8_000010D4
     mr r3, r0
-    bl fn_80084C24
+    bl mem_getAllocSize
     stw r31, 0x4c(r29)
 lbl_fn_8044E0A8_000010D4:
     lwz r3, 0x50(r29)

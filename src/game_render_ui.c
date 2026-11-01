@@ -14,7 +14,7 @@ extern void gx_applyRenderState(void);
 extern void fn_800763FC(void);
 extern void gx_setRenderStateParam(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800A96AC(void);
 extern void fn_800B0A70(void);
 extern void fn_800B23C4(void);
@@ -1178,7 +1178,7 @@ asm void fn_800B1BAC(void)
     beq lbl_fn_800B1BAC_00000F1C
     beq lbl_fn_800B1BAC_00000F1C
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800B1BAC_00000F1C:
     cmpwi r31, 0x0
     ble lbl_fn_800B1BAC_00000F2C
@@ -1694,7 +1694,7 @@ lbl_fn_800B2180_0000167C:
     cmpwi r3, 0x0
     beq lbl_fn_800B2180_00001690
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_800B2180_00001690:
     stw r30, 0x10(r28)
     li r29, 0x0

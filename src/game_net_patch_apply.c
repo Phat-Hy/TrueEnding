@@ -9,9 +9,9 @@ extern void fn_8000F1EC(void);
 extern void fn_8001282C(void);
 extern void atn_LH_Binary_destructor(void);
 extern void fn_80041C0C(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800CB3A0(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
@@ -1234,7 +1234,7 @@ lbl_fn_8053E054_00000DC4:
     beq lbl_fn_8053E054_00000DE4
     beq lbl_fn_8053E054_00000DE4
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8053E054_00000DE4:
     addic. r0, r31, 0x118
     beq lbl_fn_8053E054_00000E04
@@ -1243,7 +1243,7 @@ lbl_fn_8053E054_00000DE4:
     beq lbl_fn_8053E054_00000E04
     beq lbl_fn_8053E054_00000E04
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8053E054_00000E04:
     addic. r3, r31, 0xac
     beq lbl_fn_8053E054_00000E34
@@ -1336,7 +1336,7 @@ lbl_fn_8053E054_00000F3C:
     beq lbl_fn_8053E054_00000F5C
     beq lbl_fn_8053E054_00000F5C
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8053E054_00000F5C:
     cmpwi r31, 0x0
     beq lbl_fn_8053E054_00000F80
@@ -1505,7 +1505,7 @@ asm void fn_8053E520(void)
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8053E520_00001170
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8053E520_00001170:
     cmpwi r31, 0x0
     li r0, 0x0
@@ -1601,7 +1601,7 @@ asm void fn_8053E65C(void)
     cmpwi r0, 0x0
     beq lbl_fn_8053E65C_000012B0
     mr r3, r0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_8053E65C_000012B0:
     cmpwi r30, 0x0
     stw r30, 0x0(r29)
@@ -1746,7 +1746,7 @@ asm void fn_8053E870(void)
     stw r31, 0xc(r1)
     mr r31, r3
     li r3, 0x2c8
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8053E870_000014CC
     mr r4, r31

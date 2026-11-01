@@ -12,7 +12,7 @@ extern void fn_805A03A4(void);
 extern void OSInitMutex(void);
 extern void OSLockMutex(void);
 extern void OSUnlockMutex(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern void fn_80709AD0(void);
@@ -1904,7 +1904,7 @@ lbl_fn_80717340_000016F0:
     add r4, r0, r4
 lbl_fn_80717340_000016F4:
     mr r3, r30
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80717340_0000170C
     lwz r3, 0x10(r31)

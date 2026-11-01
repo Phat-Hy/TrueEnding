@@ -4,8 +4,8 @@
 /* External function declarations */
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
-extern void fn_80097C08(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_setLayerAnimation(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800F8548(void);
 extern void fn_800F8574(void);
 extern void fn_8016E970(void);
@@ -104,7 +104,7 @@ asm void fn_8033F7FC(void)
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f7, lbl_80885238
     addi r3, r1, 0x268
     lfs f0, lbl_80885260
@@ -239,7 +239,7 @@ lbl_fn_8033F7FC_000002BC:
     fsubs f0, f0, f7
     stfs f0, 0xfb8(r3)
     addi r3, r3, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f20, f1
     cror eq, gt, eq
     bne lbl_fn_8033F7FC_00000A4C
@@ -251,7 +251,7 @@ lbl_fn_8033F7FC_000002BC:
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r3, 0x14b4(r31)
     addi r0, r3, 0x1
     stw r0, 0x14b4(r31)
@@ -286,7 +286,7 @@ lbl_fn_8033F7FC_00000334:
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f7, lbl_80885238
     addi r3, r1, 0x1d8
     lfs f0, lbl_80885260
@@ -612,7 +612,7 @@ lbl_fn_8033F7FC_00000894:
     lfs f20, 0x2e4(r3)
     li r4, 0x0
     addi r3, r3, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_80885260
     fsubs f0, f1, f0
     fcmpo cr0, f20, f0
@@ -634,12 +634,12 @@ lbl_fn_8033F7FC_00000894:
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     b lbl_fn_8033F7FC_00000A4C
 lbl_fn_8033F7FC_00000908:
     li r4, 0x0
     addi r3, r3, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lfs f0, lbl_808852C0
     lfs f7, 0x52c(r31)
     fdivs f8, f0, f1
@@ -653,7 +653,7 @@ lbl_fn_8033F7FC_00000938:
     lfs f20, 0x2e4(r31)
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f20, f1
     cror eq, gt, eq
     bne lbl_fn_8033F7FC_00000A4C
@@ -716,7 +716,7 @@ lbl_fn_8033F7FC_00000938:
     li r7, 0x0
     li r8, 0x1
     stfs f0, 0x2e8(r31)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80885238
     stfs f0, 0x52c(r31)
 lbl_fn_8033F7FC_00000A4C:

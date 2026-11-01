@@ -17,8 +17,8 @@ extern void fn_8005B3CC(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006AFF8(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_800846FC(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
@@ -47,8 +47,8 @@ extern void fn_80239D1C(void);
 extern void fn_8035B694(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_80682428(void);
-extern void fn_80682544(void);
+extern void strcmp(void);
+extern void strncmp(void);
 extern void fn_8068B770(void);
 extern void fn_8068BC30(void);
 extern void fn_8068BD60(void);
@@ -308,7 +308,7 @@ lbl_fn_80242A8C_00000248:
 lbl_fn_80242A8C_0000026C:
     lwz r19, 0x18(r1)
     li r3, 0x30
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r20, r3
     beq lbl_fn_80242A8C_0000042C
@@ -705,7 +705,7 @@ lbl_fn_80242FF4_000007AC:
 lbl_fn_80242FF4_000007D0:
     lwz r30, 0x18(r1)
     li r3, 0x30
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_80242FF4_00000990
@@ -2191,13 +2191,13 @@ lbl_fn_80244228_00001B9C:
     mr r26, r3
     beq lbl_fn_80244228_00001C34
     addi r4, r30, 0x2b
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_80244228_00001C34
     mr r3, r26
     addi r4, r30, 0x2c
     li r5, 0x8
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_80244228_00001C24
     lwz r0, 0x2c(r1)
@@ -2260,7 +2260,7 @@ lbl_fn_80244228_00001C60:
     mr r6, r5
     li r4, 0x1
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80244228_00001CC0
     bl fn_802377B8

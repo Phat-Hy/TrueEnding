@@ -30,7 +30,7 @@ extern void fn_8064281C(void);
 extern void fn_806428EC(void);
 extern void fn_80642990(void);
 extern void fn_8067E23C(void);
-extern void fn_80682544(void);
+extern void strncmp(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -1120,7 +1120,7 @@ lbl_fn_8063C300_00000D20:
     mr r5, r3
     addi r3, r30, 0x8
     addi r4, r29, 0x4
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_8063C300_00000D60
     lwz r4, 0x30(r31)

@@ -16,14 +16,14 @@ extern void fn_8005B9CC(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void fn_80070C98(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
 extern void fn_80097A88(void);
-extern void fn_80097C08(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_setLayerAnimation(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_8009EE30(void);
 extern void fn_802180A8(void);
 extern void fn_80232B7C(void);
@@ -45,7 +45,7 @@ extern void fn_8047059C(void);
 extern void fn_805F89F0(void);
 extern void PSMTXRotRad(void);
 extern void PSVECMag(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_8068A850(void);
 extern void fn_80695720(void);
 extern char* strcpy(char* dest, const char* src);
@@ -222,7 +222,7 @@ lbl_fn_804239D4_0000019C:
     cmpwi r0, 0x3b
     beq lbl_fn_804239D4_000002CC
     addi r4, r31, 0x1
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_804239D4_000001F0
     addi r3, r1, 0x108
@@ -239,7 +239,7 @@ lbl_fn_804239D4_0000019C:
 lbl_fn_804239D4_000001F0:
     mr r3, r30
     addi r4, r31, 0xe
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_804239D4_00000230
     addi r3, r1, 0x108
@@ -256,7 +256,7 @@ lbl_fn_804239D4_000001F0:
 lbl_fn_804239D4_00000230:
     mr r3, r30
     addi r4, r31, 0x1a
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_804239D4_00000278
     addi r3, r1, 0x108
@@ -275,7 +275,7 @@ lbl_fn_804239D4_00000230:
 lbl_fn_804239D4_00000278:
     mr r3, r30
     addi r4, r31, 0x21
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_804239D4_000002A4
     addi r3, r1, 0x108
@@ -287,7 +287,7 @@ lbl_fn_804239D4_00000278:
 lbl_fn_804239D4_000002A4:
     mr r3, r30
     addi r4, r31, 0x2e
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_804239D4_000002CC
     addi r3, r1, 0x108
@@ -343,7 +343,7 @@ lbl_fn_80423BE0_0000034C:
     li r7, 0x1
     li r8, 0x1
     addi r3, r3, 0x4c4
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     mr r3, r31
     addi r4, r31, 0xf4
     li r5, 0x1
@@ -398,7 +398,7 @@ lbl_fn_80423BE0_00000424:
     li r7, 0x1
     li r8, 0x1
     addi r3, r3, 0x4c4
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r0, 0x89c(r31)
     mr r4, r31
     lfs f0, lbl_8088665C
@@ -419,10 +419,10 @@ lbl_fn_80423BE0_00000474:
     li r7, 0x1
     li r8, 0x1
     addi r3, r3, 0x4c4
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     addi r3, r31, 0x4c4
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lwz r0, 0x89c(r31)
     mr r4, r31
     stfs f1, 0x6f8(r31)
@@ -474,10 +474,10 @@ lbl_fn_80423BE0_00000548:
     li r7, 0x1
     li r8, 0x1
     addi r3, r3, 0x4c4
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     addi r3, r31, 0x4c4
     li r4, 0x0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     lwz r0, 0x89c(r31)
     mr r4, r31
     lfs f0, lbl_80886664
@@ -583,7 +583,7 @@ asm void fn_80423F64(void)
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_80423F64_0000085C
@@ -749,7 +749,7 @@ lbl_fn_80424170_000008F0:
     beq lbl_fn_80424170_00000920
     beq lbl_fn_80424170_00000920
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80424170_00000920:
     li r0, 0x0
     stw r0, 0x11c(r28)
@@ -838,7 +838,7 @@ lbl_fn_80424254_00000A20:
     beq lbl_fn_80424254_00000A40
     beq lbl_fn_80424254_00000A40
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80424254_00000A40:
     cmpwi r26, 0x0
     stw r26, 0x118(r31)

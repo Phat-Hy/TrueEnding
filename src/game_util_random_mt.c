@@ -12,7 +12,7 @@ extern void fn_8004B1EC(void);
 extern void fn_8005B3CC(void);
 extern void fn_80069BF4(void);
 extern void fn_8006A004(void);
-extern void fn_80097D7C(void);
+extern void atn_Anim_getLayerDuration(void);
 extern void fn_800CAA88(void);
 extern void fn_800CB58C(void);
 extern void fn_800D089C(void);
@@ -45,7 +45,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_806827C4(void);
+extern void strstr(void);
 extern void fn_80684600(void);
 extern void fn_8068A850(void);
 extern void fn_8068AEA4(void);
@@ -1144,7 +1144,7 @@ lbl_fn_805A3D6C_00000DC8:
     lis r29, lbl_807632A0@ha
     mr r3, r5
     addi r4, r29, lbl_807632A0@l
-    bl fn_806827C4
+    bl strstr
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_805A3D6C_00000F70
@@ -1395,7 +1395,7 @@ asm void fn_805A40BC(void)
     lfs f31, 0x2e4(r3)
     li r4, 0x0
     addi r3, r3, 0xb0
-    bl fn_80097D7C
+    bl atn_Anim_getLayerDuration
     fcmpo cr0, f31, f1
     bge lbl_fn_805A40BC_00001140
     lbz r0, 0x2f4(r31)

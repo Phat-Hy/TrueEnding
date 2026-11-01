@@ -19,10 +19,10 @@ extern void atn_normalizePath(char* str);
 extern void fn_8006B404(void);
 extern void fn_80079044(void);
 extern void fn_80079090(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800C31F4(void);
 extern void fn_800CB3A0(void);
 extern void atn_Task_constructor(void);
@@ -404,7 +404,7 @@ lbl_fn_804778DC_000003CC:
     beq lbl_fn_804778DC_000003F4
     beq lbl_fn_804778DC_000003F4
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_804778DC_000003F4:
     cmpwi r14, 0x0
     stw r14, 0x60(r15)
@@ -583,7 +583,7 @@ lbl_fn_80477DB8_00000638:
     li r4, 0x2
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80477DB8_00000690
@@ -605,7 +605,7 @@ lbl_fn_80477DB8_00000690:
     beq lbl_fn_80477DB8_00000730
     addi r28, r31, 0x3ed0
     li r3, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_80477DB8_000006DC
@@ -940,7 +940,7 @@ lbl_fn_80478204_00000A84:
     li r4, 0x2
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80478204_00000AC8
@@ -957,7 +957,7 @@ lbl_fn_80478204_00000AC8:
     beq lbl_fn_80478204_00000B68
     addi r28, r31, 0x3ed0
     li r3, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_80478204_00000B14
@@ -1071,7 +1071,7 @@ asm void atn_LoadXsca_destructor(void)
     li r4, 0x6
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_atn_LoadXsca_destructor_00000C7C
     lwz r4, 0x54(r31)
@@ -1172,7 +1172,7 @@ lbl_fn_80478518_00000D98:
     li r4, 0x2
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80478518_00000DE4
@@ -1191,7 +1191,7 @@ lbl_fn_80478518_00000DE4:
     beq lbl_fn_80478518_00000E84
     addi r28, r31, 0x3ed0
     li r3, 0xc
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_80478518_00000E30
@@ -1280,7 +1280,7 @@ asm void fn_80478714(void)
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_80478714_00000F80

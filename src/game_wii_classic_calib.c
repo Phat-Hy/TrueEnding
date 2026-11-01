@@ -12,9 +12,9 @@ extern void fn_8004B338(void);
 extern void fn_8005B9CC(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
-extern void fn_80084320(void);
+extern void mem_alloc(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_8008B140(void);
 extern void fn_8008BBD8(void);
 extern void fn_80096218(void);
@@ -48,7 +48,7 @@ extern void fn_80541524(void);
 extern void fn_80564344(void);
 extern void fn_80565068(void);
 extern void fn_80680CF8(void);
-extern void fn_80682428(void);
+extern void strcmp(void);
 extern void fn_80686A48(void);
 extern void fn_80686A64(void);
 extern void fn_806959D8(void);
@@ -349,7 +349,7 @@ lbl_fn_80562ACC_00000278:
     lis r3, lbl_80794F88@ha
     lwz r4, lbl_80794F88@l(r3)
     lwz r3, 0x0(r5)
-    bl fn_80682428
+    bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_80562ACC_000002A8
@@ -1502,7 +1502,7 @@ lbl_fn_805638C0_00001100:
     lwz r3, 0x3fc(r28)
     cmpwi r3, 0x0
     beq lbl_fn_805638C0_00001118
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_805638C0_00001118:
     li r0, 0x0
     stw r0, 0x3fc(r28)
@@ -1654,7 +1654,7 @@ lbl_fn_80563A64_0000130C:
     bdnz lbl_fn_80563A64_0000130C
 lbl_fn_80563A64_00001324:
     lwz r3, 0x8(r31)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80563A64_0000132C:
     li r0, 0x8
     stw r28, 0x8(r31)
@@ -1748,7 +1748,7 @@ lbl_fn_80563A64_00001468:
     bdnz lbl_fn_80563A64_00001468
 lbl_fn_80563A64_00001480:
     lwz r3, 0x8(r31)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80563A64_00001488:
     stw r29, 0x8(r31)
     stw r28, 0x4(r31)
@@ -1854,7 +1854,7 @@ lbl_fn_80563A64_000015F0:
     bdnz lbl_fn_80563A64_000015F0
 lbl_fn_80563A64_00001608:
     lwz r3, 0x8(r31)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80563A64_00001610:
     li r0, 0x8
     stw r28, 0x8(r31)
@@ -1948,7 +1948,7 @@ lbl_fn_80563A64_0000174C:
     bdnz lbl_fn_80563A64_0000174C
 lbl_fn_80563A64_00001764:
     lwz r3, 0x8(r31)
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80563A64_0000176C:
     stw r28, 0x8(r31)
     stw r29, 0x4(r31)
@@ -2024,7 +2024,7 @@ lbl_fn_80564060_00001848:
     la r5, lbl_8087D9F4
     la r6, lbl_8087D9F0
     li r7, 0x0
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_80564060_0000188C
@@ -2116,7 +2116,7 @@ lbl_fn_80564194_00001994:
     cmpwi r0, 0x3b
     beq lbl_fn_80564194_00001A58
     addi r4, r29, 0x18
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80564194_00001A58
     addi r3, r1, 0x208

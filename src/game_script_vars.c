@@ -7,10 +7,10 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80056DB8(void);
-extern void fn_80084320(void);
-extern void fn_800844D8(void);
-extern void fn_80092814(void);
-extern void fn_80097C08(void);
+extern void mem_alloc(void);
+extern void mem_free(void);
+extern void atn_Model_findBoneIndex(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800E2DD4(void);
 extern void fn_800E2FE0(void);
 extern void fn_800F8548(void);
@@ -1083,7 +1083,7 @@ asm void fn_80248854(void)
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f1, lbl_808831EC
     li r0, -0x1
     stfs f1, 0x2e8(r27)
@@ -1291,7 +1291,7 @@ lbl_fn_80248A4C_0000108C:
     bl fn_80686EA4
 lbl_fn_80248A4C_000010C0:
     slwi r3, r29, 2
-    bl fn_800844D8
+    bl mem_free
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_80248A4C_000010F4
@@ -1374,7 +1374,7 @@ lbl_fn_80248A4C_000011D8:
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_808831EC
     li r0, 0x2
     stfs f0, 0x2e8(r30)
@@ -1463,7 +1463,7 @@ asm void fn_80248F08(void)
     oris r0, r0, 0x1
     ori r0, r0, 0x50
     stw r0, 0x7ec(r31)
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_80248F08_00001358
     li r3, 0x0
@@ -1640,7 +1640,7 @@ lbl_fn_80249004_00001598:
     addi r5, r5, 0x5
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_80249004_000015E4
@@ -1852,7 +1852,7 @@ lbl_fn_80249394_00001834:
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80883234
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1890,7 +1890,7 @@ lbl_fn_80249394_000018FC:
     addi r5, r5, 0x5
     li r7, 0x0
     mr r6, r5
-    bl fn_80084320
+    bl mem_alloc
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_80249394_0000195C

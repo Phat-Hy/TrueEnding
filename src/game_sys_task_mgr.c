@@ -12,7 +12,7 @@ extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
 extern void fn_8006F420(void);
 extern void fn_800846FC(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC1DC(void);
 extern void fn_800DC288(void);
@@ -23,8 +23,8 @@ extern void fn_80208B70(void);
 extern void fn_8046DC5C(void);
 extern void fn_8046DD20(void);
 extern void fn_8068236C(void);
-extern void fn_80682428(void);
-extern void fn_80682544(void);
+extern void strcmp(void);
+extern void strncmp(void);
 extern void fn_80684600(void);
 extern void fn_80686A80(void);
 extern void fn_80686AF0(void);
@@ -610,7 +610,7 @@ asm void fn_80216A2C(void)
     beq lbl_fn_80216A2C_00000628
     beq lbl_fn_80216A2C_00000628
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80216A2C_00000628:
     cmpwi r31, 0x0
     ble lbl_fn_80216A2C_00000638
@@ -643,7 +643,7 @@ asm void fn_80216A94(void)
     beq lbl_fn_80216A94_00000690
     beq lbl_fn_80216A94_00000690
     subi r3, r3, 0x10
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_80216A94_00000690:
     cmpwi r31, 0x0
     ble lbl_fn_80216A94_000006A0
@@ -681,7 +681,7 @@ lbl_fn_80216AFC_000006EC:
     addi r4, r31, lbl_8073FBF0@l
     li r5, 0x2
     stw r30, 0x8(r1)
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_80216AFC_00000750
     stw r30, 0x0(r27)
@@ -705,7 +705,7 @@ lbl_fn_80216AFC_00000750:
     mr r3, r26
     addi r4, r31, 0x3
     li r5, 0x2
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_80216AFC_000007B0
     li r0, 0x1
@@ -729,7 +729,7 @@ lbl_fn_80216AFC_000007B0:
     mr r3, r26
     addi r4, r31, 0x6
     li r5, 0x2
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_80216AFC_0000080C
     li r0, 0x2
@@ -753,7 +753,7 @@ lbl_fn_80216AFC_0000080C:
     mr r3, r26
     addi r4, r31, 0x9
     li r5, 0x2
-    bl fn_80682544
+    bl strncmp
     cmpwi r3, 0x0
     bne lbl_fn_80216AFC_00000868
     li r0, 0x3
@@ -868,7 +868,7 @@ lbl_fn_80216CD0_00000974:
     bl fn_8006F420
     addi r3, r1, 0x38
     addi r4, r29, 0xc
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_80216CD0_00000AFC
     addi r3, r1, 0x38
@@ -1019,7 +1019,7 @@ lbl_fn_80216CD0_00000BBC:
     bl fn_8006F420
     addi r3, r1, 0x38
     addi r4, r29, 0xc
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_80216CD0_00000D70
     lwz r0, lbl_8087F270
@@ -1164,7 +1164,7 @@ lbl_fn_80216CD0_00000E28:
     addi r3, r1, 0x6ac
     bl fn_8005B3CC
     addi r4, r29, 0xc
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80216CD0_00000EE4
     addi r3, r1, 0x6ac
@@ -1182,7 +1182,7 @@ lbl_fn_80216CD0_00000E28:
 lbl_fn_80216CD0_00000E70:
     lwz r3, 0x0(r28)
     addi r4, r1, 0x18
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80216CD0_00000E88
     b lbl_fn_80216CD0_00000E9C
@@ -1265,7 +1265,7 @@ lbl_fn_80216CD0_00000FA0:
     bl fn_8005B3CC
     mr r24, r3
     addi r4, r29, 0xc
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     beq lbl_fn_80216CD0_00001074
     mr r3, r24
@@ -1441,7 +1441,7 @@ lbl_fn_802174F4_000011EC:
 lbl_fn_802174F4_00001208:
     lwz r3, 0x0(r27)
     mr r4, r30
-    bl fn_80682428
+    bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_802174F4_00001220
     b lbl_fn_802174F4_00001234

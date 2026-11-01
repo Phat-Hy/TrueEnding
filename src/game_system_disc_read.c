@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void fn_8004ED34(void);
-extern void fn_80097C08(void);
+extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800F8548(void);
 extern void fn_8016E970(void);
 extern void fn_80206B14(void);
@@ -120,7 +120,7 @@ asm void fn_80350464(void)
     li r7, 0x0
     li r8, 0x1
     stfs f0, 0x2e8(r30)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r7, 0x14b0(r30)
     addi r4, r1, 0x74
     lfs f0, 0x530(r30)
@@ -380,7 +380,7 @@ asm void fn_8035083C(void)
     li r7, 0x0
     li r8, 0x1
     stfs f0, 0x2e8(r30)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r7, 0x14b0(r30)
     addi r4, r1, 0x74
     lfs f0, 0x530(r30)
@@ -627,7 +627,7 @@ asm void fn_80350BF0(void)
     li r7, 0x0
     li r8, 0x1
     stfs f0, 0x2e8(r31)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r0, 0x17e4(r31)
     lfs f0, lbl_808853CC
     stfs f0, 0x2e4(r31)
@@ -861,7 +861,7 @@ asm void fn_80350F64(void)
     li r7, 0x0
     li r8, 0x1
     stfs f0, 0x2e8(r31)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r3, lbl_8087F430
     addi r30, r1, 0xbc
     li r4, 0x0
@@ -1208,7 +1208,7 @@ asm void fn_80351480(void)
     li r7, 0x0
     li r8, 0x1
     stfs f0, 0x2e8(r31)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lwz r0, 0x17e4(r31)
     cmpwi r0, 0x0
     beq lbl_fn_80351480_00001118
@@ -1557,7 +1557,7 @@ asm void fn_803519C4(void)
     li r7, 0x0
     li r8, 0x1
     stfs f0, 0x2e8(r30)
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     stw r31, 0x1cb8(r30)
     stw r31, 0x1cbc(r30)
     lwz r31, 0xc(r1)
@@ -1636,7 +1636,7 @@ asm void fn_80351AB8(void)
     li r7, 0x0
     stfs f0, 0x2e8(r28)
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f5, 0x52c(r30)
     addi r3, r28, 0x16f8
     lfs f4, 0x52c(r28)
@@ -1791,7 +1791,7 @@ lbl_fn_80351AB8_00001988:
     lfs f2, lbl_808853C4
     li r7, 0x0
     li r8, 0x1
-    bl fn_80097C08
+    bl atn_Anim_setLayerAnimation
     lfs f5, 0x52c(r30)
     addi r3, r28, 0x16f8
     lfs f4, 0x52c(r28)

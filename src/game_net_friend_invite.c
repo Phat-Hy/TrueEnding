@@ -16,7 +16,7 @@ extern void fn_80049654(void);
 extern void fn_8004B338(void);
 extern void fn_800827E0(void);
 extern void fn_80083AD4(void);
-extern void fn_80084C24(void);
+extern void mem_getAllocSize(void);
 extern void fn_800897D8(void);
 extern void fn_80089ACC(void);
 extern void fn_800A555C(void);
@@ -1532,7 +1532,7 @@ lbl_fn_804D201C_00000F9C:
     lwz r3, 0xfc(r26)
     cmpwi r3, 0x0
     beq lbl_fn_804D201C_00000FB4
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_804D201C_00000FB4:
     li r0, 0x0
     lis r4, fn_804D1414@ha
@@ -1549,7 +1549,7 @@ lbl_fn_804D201C_00000FD4:
     lwz r3, 0x4(r26)
     cmpwi r3, 0x0
     beq lbl_fn_804D201C_00000FF0
-    bl fn_80084C24
+    bl mem_getAllocSize
 lbl_fn_804D201C_00000FF0:
     li r0, 0x0
     stw r0, 0x4(r26)

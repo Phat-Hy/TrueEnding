@@ -9,7 +9,7 @@ extern void fn_80013338(void);
 extern void fn_800133B0(void);
 extern void fn_80013404(void);
 extern void fn_80063D3C(void);
-extern void fn_80092814(void);
+extern void atn_Model_findBoneIndex(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
 extern void fn_801092C8(void);
@@ -127,7 +127,7 @@ asm void fn_802FF2E4(void)
     lfs f0, 0x16ec(r3)
     addi r3, r3, 0xb0
     stfs f0, 0x24(r6)
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_802FF2E4_000000B8
     li r4, 0x0
@@ -163,7 +163,7 @@ lbl_fn_802FF2E4_000000C4:
     lwz r6, 0x62c(r31)
     fmuls f0, f3, f0
     stfs f0, 0x38(r6)
-    bl fn_80092814
+    bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
     bge lbl_fn_802FF2E4_00000140
     li r4, 0x0
