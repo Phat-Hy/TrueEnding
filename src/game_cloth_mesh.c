@@ -48,8 +48,8 @@ extern void fn_80278218(void);
 extern void fn_8027851C(void);
 extern void fn_80279054(void);
 extern void fn_8035B694(void);
-extern void fn_80370A78(void);
-extern void fn_80370AE4(void);
+extern void world_getLocalFlag(void);
+extern void world_setLocalFlag(void);
 extern void fn_80473E74(void);
 extern void fn_805F8E70(void);
 extern void fn_805F93C0(void);
@@ -987,42 +987,42 @@ lbl_fn_8027B8C8_00000C2C:
     lwz r3, lbl_8087F430
     li r31, -0x1
     li r4, 0xe6
-    bl fn_80370A78
+    bl world_getLocalFlag
     cmpwi r3, 0x0
     bne lbl_fn_8027B8C8_00000C9C
     lwz r3, lbl_8087F430
     li r4, 0xe6
     li r5, 0x1
-    bl fn_80370AE4
+    bl world_setLocalFlag
     b lbl_fn_8027B8C8_00000CEC
 lbl_fn_8027B8C8_00000C9C:
     lwz r3, lbl_8087F430
     li r4, 0xea
     li r5, 0x1
-    bl fn_80370AE4
+    bl world_setLocalFlag
     b lbl_fn_8027B8C8_00000CEC
 lbl_fn_8027B8C8_00000CB0:
     lwz r31, 0x58(r3)
     li r4, 0xe7
     lwz r3, lbl_8087F430
-    bl fn_80370A78
+    bl world_getLocalFlag
     cmpwi r3, 0x0
     bne lbl_fn_8027B8C8_00000CDC
     lwz r3, lbl_8087F430
     li r4, 0xe7
     li r5, 0x1
-    bl fn_80370AE4
+    bl world_setLocalFlag
     b lbl_fn_8027B8C8_00000CEC
 lbl_fn_8027B8C8_00000CDC:
     lwz r3, lbl_8087F430
     li r4, 0xeb
     li r5, 0x1
-    bl fn_80370AE4
+    bl world_setLocalFlag
 lbl_fn_8027B8C8_00000CEC:
     lwz r3, lbl_8087F430
     mr r5, r31
     li r4, 0x79
-    bl fn_80370AE4
+    bl world_setLocalFlag
     lwz r0, 0x1e4(r1)
     psq_l f31, 0x1d8(r1), 0, 0
     lfd f31, 0x1d0(r1)
@@ -1662,24 +1662,24 @@ lbl_fn_8027C38C_00001560:
     bne lbl_fn_8027C38C_00001654
     lwz r3, lbl_8087F430
     li r4, 0xe8
-    bl fn_80370A78
+    bl world_getLocalFlag
     cmpwi r3, 0x0
     bne lbl_fn_8027C38C_00001678
     lwz r3, lbl_8087F430
     li r4, 0xe8
     li r5, 0x1
-    bl fn_80370AE4
+    bl world_setLocalFlag
     b lbl_fn_8027C38C_00001678
 lbl_fn_8027C38C_00001654:
     lwz r3, lbl_8087F430
     li r4, 0xe9
-    bl fn_80370A78
+    bl world_getLocalFlag
     cmpwi r3, 0x0
     bne lbl_fn_8027C38C_00001678
     lwz r3, lbl_8087F430
     li r4, 0xe9
     li r5, 0x1
-    bl fn_80370AE4
+    bl world_setLocalFlag
 lbl_fn_8027C38C_00001678:
     addi r31, r31, 0x1
     addi r29, r29, 0x4

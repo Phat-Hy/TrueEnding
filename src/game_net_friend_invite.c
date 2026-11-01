@@ -73,7 +73,7 @@ extern void fn_80364E7C(void);
 extern void fn_8036503C(void);
 extern void fn_80365320(void);
 extern void fn_8036635C(void);
-extern void fn_80370AE4(void);
+extern void world_setLocalFlag(void);
 extern void fn_8037308C(void);
 extern void fn_80373118(void);
 extern void fn_80373148(void);
@@ -4374,7 +4374,7 @@ lbl_fn_804D25D4_000038A4:
     mulli r5, r3, 0x1e
     lwz r3, 0x5e0(r24)
     li r4, 0xff
-    bl fn_80370AE4
+    bl world_setLocalFlag
 lbl_fn_804D25D4_000038F0:
     mr r3, r24
     bl fn_804D63D4

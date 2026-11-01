@@ -33,9 +33,9 @@ extern void fn_80219E6C(void);
 extern void fn_80232B7C(void);
 extern void fn_80239DAC(void);
 extern void fn_8023A8B4(void);
-extern void fn_80370320(void);
-extern void fn_80370A78(void);
-extern void fn_80370AE4(void);
+extern void world_setGlobalFlag(void);
+extern void world_getLocalFlag(void);
+extern void world_setLocalFlag(void);
 extern void fn_803E3384(void);
 extern void fn_804438E0(void);
 extern void fn_8044D104(void);
@@ -515,13 +515,13 @@ lbl_fn_8026CC28_000005A4:
     beq lbl_fn_8026CC28_000005F4
     lwz r3, lbl_8087F430
     li r4, 0xee
-    bl fn_80370A78
+    bl world_getLocalFlag
     cmpwi r3, 0x0
     bne lbl_fn_8026CC28_000005F4
     lwz r3, lbl_8087F430
     li r4, 0xee
     li r5, 0x1
-    bl fn_80370AE4
+    bl world_setLocalFlag
 lbl_fn_8026CC28_000005F4:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -2896,13 +2896,13 @@ lbl_fn_8026DB8C_000028A8:
     beq lbl_fn_8026DB8C_00002A08
     lwz r3, lbl_8087F430
     li r4, 0xf1
-    bl fn_80370A78
+    bl world_getLocalFlag
     cmpwi r3, 0x0
     bne lbl_fn_8026DB8C_000028E4
     lwz r3, lbl_8087F430
     li r4, 0xf1
     li r5, 0x1
-    bl fn_80370AE4
+    bl world_setLocalFlag
 lbl_fn_8026DB8C_000028E4:
     li r0, 0x3
     stw r0, 0x1660(r28)
@@ -2980,17 +2980,17 @@ lbl_fn_8026DB8C_000029E8:
     li r4, 0x396
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_8026DB8C_00002A08:
     lwz r3, lbl_8087F430
     li r4, 0xed
-    bl fn_80370A78
+    bl world_getLocalFlag
     cmpwi r3, 0x0
     bne lbl_fn_8026DB8C_00002B38
     lwz r3, lbl_8087F430
     li r4, 0xed
     li r5, 0x1
-    bl fn_80370AE4
+    bl world_setLocalFlag
     b lbl_fn_8026DB8C_00002B38
 lbl_fn_8026DB8C_00002A30:
     lwz r0, 0x163c(r3)
@@ -3000,7 +3000,7 @@ lbl_fn_8026DB8C_00002A30:
     li r4, 0x396
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_8026DB8C_00002A50:
     lwz r3, lbl_8087F8A0
     lwz r29, 0x48(r3)
@@ -3061,7 +3061,7 @@ lbl_fn_8026DB8C_00002B0C:
     li r4, 0x396
     li r5, 0x0
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     li r0, 0x0
     stw r0, 0x1644(r28)
 lbl_fn_8026DB8C_00002B38:

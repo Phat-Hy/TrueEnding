@@ -26,7 +26,7 @@ extern void fn_80097C08(void);
 extern void fn_80097D7C(void);
 extern void fn_80097E80(void);
 extern void fn_80158CA4(void);
-extern void fn_80370A78(void);
+extern void world_getLocalFlag(void);
 extern void fn_803EC568(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC758(void);
@@ -1221,7 +1221,7 @@ lbl_fn_80402BD0_00000F78:
 lbl_fn_80402BD0_0000101C:
     lwz r3, lbl_8087F430
     li r4, 0x0
-    bl fn_80370A78
+    bl world_getLocalFlag
     cmpwi r3, 0x1
     bne lbl_fn_80402BD0_00001054
     lbz r0, 0xf8(r23)

@@ -23,7 +23,7 @@ extern void fn_80219558(void);
 extern void fn_8036554C(void);
 extern void fn_8036EA6C(void);
 extern void fn_8036EE0C(void);
-extern void fn_80370320(void);
+extern void world_setGlobalFlag(void);
 extern void fn_80378610(void);
 extern void fn_803786FC(void);
 extern void fn_80378CCC(void);
@@ -1809,7 +1809,7 @@ asm void fn_8036E6D4(void)
     li r4, 0x394
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_8036E6D4_0000177C:
     mr r3, r28
     li r4, 0x3
@@ -1935,7 +1935,7 @@ asm void fn_8036E89C(void)
     li r4, 0x394
     li r5, 0x0
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_8036E89C_0000192C:
     mr r3, r31
     bl fn_8036EE0C

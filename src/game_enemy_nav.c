@@ -17,7 +17,7 @@ extern void fn_8012D628(void);
 extern void fn_8012D714(void);
 extern void fn_8020FCE8(void);
 extern void fn_80219558(void);
-extern void fn_80370174(void);
+extern void world_getGlobalFlag(void);
 extern void fn_80375B78(void);
 extern void fn_8068AEB0(void);
 
@@ -1199,7 +1199,7 @@ lbl_fn_8012B988_00001058:
     cmpwi r3, 0x0
     beq lbl_fn_8012B988_00001100
     li r4, 0x11a
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     ble lbl_fn_8012B988_00001100
     xoris r0, r3, 0x8000

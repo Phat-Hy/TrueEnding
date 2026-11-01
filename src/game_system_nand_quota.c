@@ -15,8 +15,8 @@ extern void fn_800F8548(void);
 extern void fn_8016E970(void);
 extern void fn_80239DAC(void);
 extern void fn_80350BF0(void);
-extern void fn_80370A78(void);
-extern void fn_80370AE4(void);
+extern void world_getLocalFlag(void);
+extern void world_setLocalFlag(void);
 extern void fn_80392D2C(void);
 extern void fn_804786F8(void);
 extern void fn_805BDCC0(void);
@@ -1701,13 +1701,13 @@ lbl_fn_8034DE90_000017B8:
     bne lbl_fn_8034DE90_0000181C
     lwz r3, lbl_8087F430
     li r4, 0x88
-    bl fn_80370A78
+    bl world_getLocalFlag
     cmpwi r3, 0x0
     bne lbl_fn_8034DE90_0000181C
     lwz r3, lbl_8087F430
     li r4, 0x88
     li r5, 0x1
-    bl fn_80370AE4
+    bl world_setLocalFlag
 lbl_fn_8034DE90_0000181C:
     cmpwi r31, 0x0
     bne lbl_fn_8034DE90_00001840

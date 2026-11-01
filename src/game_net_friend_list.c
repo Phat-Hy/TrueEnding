@@ -59,7 +59,7 @@ extern void fn_802377B8(void);
 extern void fn_8023780C(void);
 extern void fn_80239798(void);
 extern void fn_80239DAC(void);
-extern void fn_80370AE4(void);
+extern void world_setLocalFlag(void);
 extern void fn_8037C8C4(void);
 extern void fn_803E836C(void);
 extern void fn_80473E74(void);
@@ -1448,7 +1448,7 @@ asm void fn_804D00B8(void)
     beqlr
     mr r3, r0
     mr r4, r6
-    b fn_80370AE4
+    b world_setLocalFlag
     blr
 }
 

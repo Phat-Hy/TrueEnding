@@ -30,7 +30,7 @@ extern void fn_80360B00(void);
 extern void fn_8036CFA4(void);
 extern void fn_8036D2D0(void);
 extern void fn_8036FC58(void);
-extern void fn_80370320(void);
+extern void world_setGlobalFlag(void);
 extern void fn_8037C69C(void);
 extern void fn_8037EF30(void);
 extern void fn_80389838(void);
@@ -1953,7 +1953,7 @@ lbl_fn_8036CC90_00001A70:
     li r4, 0xac
     li r5, 0x0
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     lwz r6, lbl_8087F8A0
     li r4, 0x0
     lfs f2, lbl_8088570C

@@ -26,8 +26,8 @@ extern void fn_8021AF50(void);
 extern void fn_80232B7C(void);
 extern void fn_80239DAC(void);
 extern void fn_8023A680(void);
-extern void fn_80370174(void);
-extern void fn_80370320(void);
+extern void world_getGlobalFlag(void);
+extern void world_setGlobalFlag(void);
 extern void fn_803D7850(void);
 extern void fn_803E2410(void);
 extern void fn_803E4A5C(void);
@@ -128,14 +128,14 @@ asm void fn_803D83A8(void)
     beq lbl_fn_803D83A8_00002728
     lwz r3, lbl_8087F430
     li r4, 0x6a
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x1
     bne lbl_fn_803D83A8_000000BC
     lwz r3, lbl_8087F430
     li r4, 0x6a
     li r5, 0x0
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_803D83A8_000000BC:
     lwz r3, 0x10f8(r15)
     lwz r0, 0x38(r3)
@@ -150,14 +150,14 @@ lbl_fn_803D83A8_000000BC:
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
     lwz r3, lbl_8087F430
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     bne lbl_fn_803D83A8_00000110
     lwz r3, lbl_8087F430
     li r4, 0x6a
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_803D83A8_00000110:
     li r0, 0x8
     li r3, 0x0

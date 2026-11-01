@@ -52,8 +52,8 @@ extern void fn_802A7910(void);
 extern void fn_802A7964(void);
 extern void fn_8030B74C(void);
 extern void fn_8030B92C(void);
-extern void fn_80370A78(void);
-extern void fn_80370AE4(void);
+extern void world_getLocalFlag(void);
+extern void world_setLocalFlag(void);
 extern void fn_803C17FC(void);
 extern void fn_805A3C58(void);
 extern void fn_805A3D6C(void);
@@ -441,7 +441,7 @@ lbl_fn_8030C490_00000448:
     bl fn_80121F00
     li r4, 0xd0
     li r5, 0x1
-    bl fn_80370AE4
+    bl world_setLocalFlag
 lbl_fn_8030C490_000004B4:
     lwz r0, 0x14e0(r30)
     cmpwi r0, 0x3c
@@ -577,7 +577,7 @@ lbl_fn_8030C490_0000069C:
     bne lbl_fn_8030C490_00000668
     bl fn_80121F00
     lwz r4, 0x1518(r30)
-    bl fn_80370A78
+    bl world_getLocalFlag
     cmpwi r3, 0x1
     bne lbl_fn_8030C490_0000077C
     lwz r0, 0x1504(r30)
@@ -633,7 +633,7 @@ lbl_fn_8030C490_00000760:
 lbl_fn_8030C490_0000077C:
     bl fn_80121F00
     lwz r4, 0x1518(r30)
-    bl fn_80370A78
+    bl world_getLocalFlag
     cmpwi r3, 0x2
     bne lbl_fn_8030C490_000007E8
     lwz r0, 0x1500(r30)
@@ -664,7 +664,7 @@ lbl_fn_8030C490_000007E8:
     bl fn_80121F00
     lwz r4, 0x1520(r30)
     li r5, 0x1
-    bl fn_80370AE4
+    bl world_setLocalFlag
     li r0, 0x0
     stb r0, 0x14e4(r30)
     stw r0, 0x14b8(r30)
@@ -1020,7 +1020,7 @@ lbl_fn_8030CBC0_00000CC8:
     lwz r3, lbl_8087F430
     li r5, 0x0
     lwz r4, 0x1514(r31)
-    bl fn_80370AE4
+    bl world_setLocalFlag
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x64
@@ -1152,7 +1152,7 @@ lbl_fn_8030CF84_00000F10:
 lbl_fn_8030CF84_00000F14:
     lwz r3, lbl_8087F430
     lwz r4, 0x1518(r31)
-    bl fn_80370AE4
+    bl world_setLocalFlag
     li r0, 0x0
     stb r0, 0x150d(r31)
     stw r0, 0x14ec(r31)

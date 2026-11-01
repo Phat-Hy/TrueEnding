@@ -15,7 +15,7 @@ extern void fn_8014C228(void);
 extern void fn_8014DEE4(void);
 extern void fn_80171F3C(void);
 extern void fn_80179D44(void);
-extern void fn_80370174(void);
+extern void world_getGlobalFlag(void);
 extern void fn_805F99B0(void);
 
 /* External data declarations */
@@ -551,7 +551,7 @@ lbl_fn_8013C564_00000520:
     beq lbl_fn_8013C564_0000072C
     lwz r3, lbl_8087F430
     li r4, 0x25
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x1
     blt lbl_fn_8013C564_00000584
     lwz r3, 0x648(r29)

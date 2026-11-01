@@ -43,7 +43,7 @@ extern void fn_80211480(void);
 extern void fn_8021DE88(void);
 extern void fn_8021DECC(void);
 extern void fn_8023781C(void);
-extern void fn_80370320(void);
+extern void world_setGlobalFlag(void);
 extern void fn_803750E4(void);
 extern void fn_803CC6B4(void);
 extern void fn_803E3BE8(void);
@@ -1768,7 +1768,7 @@ asm void fn_804329BC(void)
     mulli r0, r0, 0x29c
     add r4, r31, r0
     lwz r4, 0x78c(r4)
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_804329BC_00001760:
     lwz r0, 0x30a0(r31)
     cmpwi r0, 0x0
@@ -1814,7 +1814,7 @@ lbl_fn_804329BC_00001790:
     mulli r0, r0, 0x29c
     add r4, r31, r0
     lwz r4, 0x790(r4)
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_804329BC_0000180C:
     lwz r0, 0x30a0(r31)
     cmpwi r0, 0x0
@@ -1841,7 +1841,7 @@ lbl_fn_804329BC_0000183C:
     mulli r0, r0, 0x29c
     add r4, r31, r0
     lwz r4, 0x78c(r4)
-    bl fn_80370320
+    bl world_setGlobalFlag
     b lbl_fn_804329BC_0000190C
 lbl_fn_804329BC_00001870:
     cmpwi r0, 0x4
@@ -1855,7 +1855,7 @@ lbl_fn_804329BC_00001870:
     mulli r0, r0, 0x29c
     add r4, r31, r0
     lwz r4, 0x790(r4)
-    bl fn_80370320
+    bl world_setGlobalFlag
     b lbl_fn_804329BC_0000190C
 lbl_fn_804329BC_000018A4:
     lwz r0, 0x4dc(r3)
@@ -1870,7 +1870,7 @@ lbl_fn_804329BC_000018A4:
     mulli r0, r0, 0x29c
     add r4, r31, r0
     lwz r4, 0x78c(r4)
-    bl fn_80370320
+    bl world_setGlobalFlag
     b lbl_fn_804329BC_0000190C
 lbl_fn_804329BC_000018DC:
     cmpwi r0, 0x4
@@ -1884,7 +1884,7 @@ lbl_fn_804329BC_000018DC:
     mulli r0, r0, 0x29c
     add r4, r31, r0
     lwz r4, 0x790(r4)
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_804329BC_0000190C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

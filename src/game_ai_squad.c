@@ -46,7 +46,7 @@ extern void fn_8026CDB4(void);
 extern void fn_8026D058(void);
 extern void fn_8026D0F8(void);
 extern void fn_8026F9BC(void);
-extern void fn_80370AE4(void);
+extern void world_setLocalFlag(void);
 extern void fn_8059C330(void);
 extern void fn_805F8E70(void);
 extern void fn_805F93C0(void);
@@ -1677,7 +1677,7 @@ asm void fn_8026A7AC(void)
     clrrwi r0, r0, 1
     stw r0, 0x5c0(r31)
     lwz r3, lbl_8087F430
-    bl fn_80370AE4
+    bl world_setLocalFlag
 lbl_fn_8026A7AC_000016A4:
     lwz r0, 0x24(r1)
     psq_l f31, 0x18(r1), 0, 0

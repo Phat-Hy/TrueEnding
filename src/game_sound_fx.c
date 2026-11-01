@@ -77,10 +77,10 @@ extern void fn_8017CB2C(void);
 extern void fn_802185F4(void);
 extern void fn_80219558(void);
 extern void fn_80219E6C(void);
-extern void fn_80370174(void);
-extern void fn_80370A78(void);
-extern void fn_80370AE4(void);
-extern void fn_80370C6C(void);
+extern void world_getGlobalFlag(void);
+extern void world_getLocalFlag(void);
+extern void world_setLocalFlag(void);
+extern void world_initMapTransitionParams(void);
 extern void fn_803750E4(void);
 extern void fn_803754F0(void);
 extern void fn_80375D0C(void);
@@ -340,11 +340,11 @@ lbl_fn_800EA9D4_000002A0:
     bl atn_Task_setActive
     lwz r3, lbl_8087F430
     li r4, 0x66
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     bne lbl_fn_800EA9D4_000002F8
     lwz r3, lbl_8087F430
-    bl fn_80370C6C
+    bl world_initMapTransitionParams
     b lbl_fn_800EA9D4_000002F8
 lbl_fn_800EA9D4_000002E4:
     li r0, 0x1e
@@ -409,7 +409,7 @@ lbl_fn_800EACEC_0000039C:
     cmpwi r3, 0x0
     beq lbl_fn_800EACEC_000003C4
     li r4, 0xac
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     bne lbl_fn_800EACEC_000003D0
 lbl_fn_800EACEC_000003C4:
@@ -461,7 +461,7 @@ lbl_fn_800EACEC_00000408:
     cmpwi r3, 0x0
     beq lbl_fn_800EACEC_000004E0
     li r4, 0x5
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     bne lbl_fn_800EACEC_000004E0
     lwz r3, lbl_8087F430
@@ -685,7 +685,7 @@ lbl_fn_800EAFD4_000006F0:
 lbl_fn_800EAFD4_00000784:
     lwz r3, lbl_8087F430
     li r4, 0x38a
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x1
     bne lbl_fn_800EAFD4_000007E0
     lwz r3, 0x0(r31)
@@ -696,7 +696,7 @@ lbl_fn_800EAFD4_00000784:
     bne lbl_fn_800EAFD4_000007E0
     lwz r3, lbl_8087F430
     li r4, 0xfa
-    bl fn_80370A78
+    bl world_getLocalFlag
     cmpwi r3, 0x0
     bne lbl_fn_800EAFD4_000007E0
     lwz r29, lbl_8087F430
@@ -705,7 +705,7 @@ lbl_fn_800EAFD4_00000784:
     mr r5, r3
     mr r3, r29
     li r4, 0xfa
-    bl fn_80370AE4
+    bl world_setLocalFlag
 lbl_fn_800EAFD4_000007E0:
     lwz r0, 0x48(r30)
     cmpwi r0, 0x2

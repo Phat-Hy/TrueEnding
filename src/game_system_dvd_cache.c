@@ -33,8 +33,8 @@ extern void fn_8023780C(void);
 extern void fn_8023781C(void);
 extern void fn_80237874(void);
 extern void fn_8023A8B4(void);
-extern void fn_80370174(void);
-extern void fn_80370320(void);
+extern void world_getGlobalFlag(void);
+extern void world_setGlobalFlag(void);
 extern void fn_803754F0(void);
 extern void fn_803B27F8(void);
 extern void fn_803B8E60(void);
@@ -916,7 +916,7 @@ lbl_fn_80376324_00000990:
     li r4, 0x13f
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_80376324_000009D8:
     lwz r0, 0x114(r1)
     lwz r31, 0x10c(r1)
@@ -1106,7 +1106,7 @@ lbl_fn_80376730_00000C48:
     li r4, 0x8e
     li r6, 0x0
     addi r5, r5, 0x1
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_80376730_00000C74:
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
@@ -1961,7 +1961,7 @@ lbl_fn_80377298_00001888:
     addi r0, r3, 0x1
     stw r0, 0x7c(r31)
     lwz r3, lbl_8087F430
-    bl fn_80370174
+    bl world_getGlobalFlag
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi. r0, r0, 5
@@ -1972,7 +1972,7 @@ lbl_fn_80377298_00001888:
 lbl_fn_80377298_000018BC:
     lwz r3, lbl_8087F430
     li r4, 0x122
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     bne lbl_fn_80377298_00001950
     lwz r0, 0x7c(r31)
@@ -2038,7 +2038,7 @@ lbl_fn_80377298_0000199C:
     b lbl_fn_80377298_00001A4C
 lbl_fn_80377298_000019AC:
     li r4, 0x122
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     bne lbl_fn_80377298_00001A18
     lwz r0, 0x7c(r31)

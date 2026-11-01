@@ -22,7 +22,7 @@ extern void fn_80117228(void);
 extern void fn_801F4D80(void);
 extern void fn_80202118(void);
 extern void fn_80239DAC(void);
-extern void fn_8036F268(void);
+extern void world_updateMapTransition(void);
 extern void fn_8036FB4C(void);
 extern void fn_80373148(void);
 extern void fn_803743AC(void);
@@ -1615,7 +1615,7 @@ lbl_fn_8052009C_0000153C:
     lwz r5, 0x10(r31)
     lwz r6, 0x14(r31)
     lwz r7, 0x18(r31)
-    bl fn_8036F268
+    bl world_updateMapTransition
     lwz r3, lbl_8087F430
     lwz r3, 0x10d8(r3)
     cmpwi r3, 0x0

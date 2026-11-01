@@ -32,7 +32,7 @@ extern void fn_8036097C(void);
 extern void fn_80360A2C(void);
 extern void fn_8036562C(void);
 extern void fn_8036CA60(void);
-extern void fn_80370320(void);
+extern void world_setGlobalFlag(void);
 extern void fn_8037EF30(void);
 extern void fn_803AB96C(void);
 extern void fn_803B3CA8(void);
@@ -366,7 +366,7 @@ lbl_fn_80366E54_00000344:
     mr r3, r30
     lwz r5, 0x8(r27)
     li r6, 0x1
-    bl fn_80370320
+    bl world_setGlobalFlag
     b lbl_fn_80366E54_000003DC
 lbl_fn_80366E54_00000370:
     lwz r5, 0x4(r27)
@@ -776,7 +776,7 @@ lbl_fn_80366E54_000008F4:
     li r4, 0x11f
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_80366E54_00000938:
     lwz r3, lbl_8087F490
     bl fn_803D164C

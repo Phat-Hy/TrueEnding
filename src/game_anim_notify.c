@@ -27,8 +27,8 @@ extern void fn_80239DAC(void);
 extern void fn_8023A8B4(void);
 extern void fn_80277DC4(void);
 extern void fn_802790A0(void);
-extern void fn_80370AE4(void);
-extern void fn_80370C6C(void);
+extern void world_setLocalFlag(void);
+extern void world_initMapTransitionParams(void);
 extern void fn_8054A340(void);
 extern void fn_805F8E70(void);
 extern void fn_805F9750(void);
@@ -1228,13 +1228,13 @@ lbl_fn_80276ECC_00000F40:
 lbl_fn_80276ECC_00000F94:
     lwz r5, 0x58(r5)
 lbl_fn_80276ECC_00000F98:
-    bl fn_80370AE4
+    bl world_setLocalFlag
     lwz r3, 0x18ec(r30)
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
     bne lbl_fn_80276ECC_00000FB4
     lwz r3, lbl_8087F430
-    bl fn_80370C6C
+    bl world_initMapTransitionParams
 lbl_fn_80276ECC_00000FB4:
     lwz r0, 0x1e4(r1)
     psq_l f31, 0x1d8(r1), 0, 0

@@ -13,7 +13,7 @@ extern void fn_800C3990(void);
 extern void fn_800C411C(void);
 extern void fn_8010EB58(void);
 extern void fn_80365708(void);
-extern void fn_80370320(void);
+extern void world_setGlobalFlag(void);
 extern void fn_803B27F8(void);
 extern void fn_803B29A8(void);
 extern void fn_804D0328(void);
@@ -162,17 +162,17 @@ asm void fn_80572860(void)
     li r6, 0x0
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_80370320
+    bl world_setGlobalFlag
     mr r3, r31
     li r4, 0x72b
     li r5, 0x64
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     mr r3, r31
     li r4, 0x71e
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

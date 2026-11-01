@@ -25,9 +25,9 @@ extern void fn_801FED24(void);
 extern void fn_801FEE08(void);
 extern void fn_80211480(void);
 extern void fn_80219E6C(void);
-extern void fn_80370B78(void);
-extern void fn_80370BD0(void);
-extern void fn_80370C2C(void);
+extern void world_startMapTransition(void);
+extern void world_reloadMapTransition(void);
+extern void world_isTransitionFinished(void);
 extern void fn_803E746C(void);
 extern void fn_80444CF8(void);
 extern void fn_804DA47C(void);
@@ -983,7 +983,7 @@ lbl_fn_803E644C_00000BD4:
     b lbl_fn_803E644C_00000C14
 lbl_fn_803E644C_00000BF8:
     lwz r3, lbl_8087F430
-    bl fn_80370C2C
+    bl world_isTransitionFinished
     cmpwi r3, 0x0
     bne lbl_fn_803E644C_00000C10
     li r3, 0x1
@@ -1070,7 +1070,7 @@ lbl_fn_803E656C_00000CC8:
     lfs f1, lbl_80885EE4
     li r4, 0x1e
     li r5, 0x0
-    b fn_80370BD0
+    b world_reloadMapTransition
     blr
 }
 
@@ -1114,7 +1114,7 @@ lbl_fn_803E65F8_00000D6C:
     lis r4, 0xff00
     li r5, 0x1e
     li r6, 0x0
-    b fn_80370B78
+    b world_startMapTransition
     blr
 }
 

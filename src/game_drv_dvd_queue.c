@@ -23,10 +23,10 @@ extern void fn_8014FCC4(void);
 extern void fn_8014FCE8(void);
 extern void fn_8014FD0C(void);
 extern void fn_8016FDCC(void);
-extern void fn_80370174(void);
-extern void fn_80370320(void);
-extern void fn_80370A78(void);
-extern void fn_80370AE4(void);
+extern void world_getGlobalFlag(void);
+extern void world_setGlobalFlag(void);
+extern void world_getLocalFlag(void);
+extern void world_setLocalFlag(void);
 extern void fn_805AE5EC(void);
 extern void fn_805AEB38(void);
 extern void fn_805AED78(void);
@@ -206,13 +206,13 @@ asm void fn_805B1AA0(void)
 lbl_fn_805B1AA0_000001B4:
     lwz r3, lbl_8087F430
     lwz r4, 0x0(r4)
-    bl fn_80370A78
+    bl world_getLocalFlag
     mr r30, r3
     b lbl_fn_805B1AA0_000001E0
 lbl_fn_805B1AA0_000001C8:
     lwz r3, lbl_8087F430
     lwz r4, 0x0(r4)
-    bl fn_80370174
+    bl world_getGlobalFlag
     mr r30, r3
     b lbl_fn_805B1AA0_000001E0
     b lbl_fn_805B1AA0_00000354
@@ -233,12 +233,12 @@ lbl_fn_805B1AA0_00000208:
 lbl_fn_805B1AA0_00000210:
     lwz r3, lbl_8087F430
     lwz r4, 0x4(r31)
-    bl fn_80370A78
+    bl world_getLocalFlag
     b lbl_fn_805B1AA0_00000238
 lbl_fn_805B1AA0_00000220:
     lwz r3, lbl_8087F430
     lwz r4, 0x4(r31)
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_805B1AA0_00000238
 lbl_fn_805B1AA0_00000230:
     bl fn_80680CF8
@@ -310,14 +310,14 @@ lbl_fn_805B1AA0_0000032C:
     lwz r3, lbl_8087F430
     mr r5, r30
     lwz r4, 0x0(r31)
-    bl fn_80370AE4
+    bl world_setLocalFlag
     b lbl_fn_805B1AA0_00000354
 lbl_fn_805B1AA0_00000340:
     lwz r3, lbl_8087F430
     mr r5, r30
     lwz r4, 0x0(r31)
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_805B1AA0_00000354:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -635,13 +635,13 @@ lbl_fn_805B202C_00000774:
 lbl_fn_805B202C_0000077C:
     lwz r3, lbl_8087F430
     lwz r4, 0x0(r4)
-    bl fn_80370A78
+    bl world_getLocalFlag
     mr r31, r3
     b lbl_fn_805B202C_000007AC
 lbl_fn_805B202C_00000790:
     lwz r3, lbl_8087F430
     lwz r4, 0x0(r4)
-    bl fn_80370174
+    bl world_getGlobalFlag
     mr r31, r3
     b lbl_fn_805B202C_000007AC
 lbl_fn_805B202C_000007A4:
@@ -966,13 +966,13 @@ lbl_fn_805B2290_00000BF4:
 lbl_fn_805B2290_00000C0C:
     lwz r3, lbl_8087F430
     lwz r4, 0x0(r31)
-    bl fn_80370AE4
+    bl world_setLocalFlag
     b lbl_fn_805B2290_00000C2C
 lbl_fn_805B2290_00000C1C:
     lwz r3, lbl_8087F430
     li r6, 0x0
     lwz r4, 0x0(r31)
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_805B2290_00000C2C:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)

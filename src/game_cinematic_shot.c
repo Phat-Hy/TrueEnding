@@ -35,9 +35,9 @@ extern void fn_8023A108(void);
 extern void fn_8023A8B4(void);
 extern void fn_803383E4(void);
 extern void fn_80344DF4(void);
-extern void fn_80370AE4(void);
-extern void fn_80370B78(void);
-extern void fn_80370BD0(void);
+extern void world_setLocalFlag(void);
+extern void world_startMapTransition(void);
+extern void world_reloadMapTransition(void);
 extern void fn_805A4258(void);
 extern void fn_805A49E8(void);
 extern void fn_805A4A20(void);
@@ -568,7 +568,7 @@ lbl_fn_80336518_000006A8:
     lwz r3, lbl_8087F430
     li r4, 0xcf
     li r5, 0x1
-    bl fn_80370AE4
+    bl world_setLocalFlag
     mr r3, r31
     bl fn_801765D8
 lbl_fn_80336518_000006E4:
@@ -1616,7 +1616,7 @@ lbl_fn_80336C8C_00001618:
     lwz r3, lbl_8087F430
     li r4, 0xce
     li r5, 0x1
-    bl fn_80370AE4
+    bl world_setLocalFlag
     lwz r3, 0x1540(r30)
     bl fn_80344DF4
     lwz r5, 0x1540(r30)
@@ -1710,7 +1710,7 @@ lbl_fn_80336C8C_00001760:
     li r4, -0x1
     li r5, 0x14
     li r6, 0x0
-    bl fn_80370B78
+    bl world_startMapTransition
     lwz r3, 0x14bc(r30)
     addi r0, r3, 0x1
     stw r0, 0x14bc(r30)
@@ -1734,7 +1734,7 @@ lbl_fn_80336C8C_000017AC:
     li r4, 0x3c
     lfs f1, lbl_80885218
     li r5, 0x5
-    bl fn_80370BD0
+    bl world_reloadMapTransition
     lwz r3, 0x14bc(r30)
     addi r0, r3, 0x1
     stw r0, 0x14bc(r30)

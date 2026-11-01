@@ -27,7 +27,7 @@ extern void fn_801240B4(void);
 extern void fn_801248DC(void);
 extern void fn_80124BE4(void);
 extern void fn_8017C974(void);
-extern void fn_80370174(void);
+extern void world_getGlobalFlag(void);
 
 /* External data declarations */
 extern u8 jumptable_8077A228[];
@@ -953,7 +953,7 @@ lbl_fn_80122C70_00000BB0:
     cmpwi r3, 0x0
     beq lbl_fn_80122C70_00000C04
     li r4, 0xd0
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     beq lbl_fn_80122C70_00000C04
     li r31, 0x0
@@ -969,7 +969,7 @@ lbl_fn_80122C70_00000C18:
     cmpwi r3, 0x0
     beq lbl_fn_80122C70_00000C3C
     li r4, 0xd0
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     beq lbl_fn_80122C70_00000C3C
     li r31, 0x0

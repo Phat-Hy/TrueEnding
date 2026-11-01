@@ -28,10 +28,10 @@ extern void fn_80170F20(void);
 extern void fn_80171DB0(void);
 extern void fn_8021ECD0(void);
 extern void fn_8035E858(void);
-extern void fn_80370174(void);
-extern void fn_80370320(void);
-extern void fn_80370B78(void);
-extern void fn_80370BD0(void);
+extern void world_getGlobalFlag(void);
+extern void world_setGlobalFlag(void);
+extern void world_startMapTransition(void);
+extern void world_reloadMapTransition(void);
 extern void fn_803712BC(void);
 extern void fn_80373148(void);
 extern void fn_8037D4C0(void);
@@ -234,7 +234,7 @@ lbl_fn_803A914C_00000198:
     lfs f1, lbl_80885B74
     li r6, 0x5
     subi r5, r5, 0x5
-    bl fn_80370B78
+    bl world_startMapTransition
 lbl_fn_803A914C_000001CC:
     lwz r0, 0x10(r30)
     rlwinm r0, r0, 0, 27, 27
@@ -480,7 +480,7 @@ lbl_fn_803A956C_00000504:
     lwz r4, 0xc0(r27)
     li r5, 0x0
     lfs f1, lbl_80885BD4
-    bl fn_80370BD0
+    bl world_reloadMapTransition
 lbl_fn_803A956C_0000052C:
     lwz r3, 0xb8(r27)
     li r0, 0x0
@@ -737,7 +737,7 @@ lbl_fn_803A98EC_00000888:
     lfs f1, lbl_80885B74
     li r6, 0x5
     subi r5, r5, 0x5
-    bl fn_80370B78
+    bl world_startMapTransition
 lbl_fn_803A98EC_000008BC:
     lwz r0, 0x14(r29)
     rlwinm r0, r0, 0, 29, 29
@@ -745,13 +745,13 @@ lbl_fn_803A98EC_000008BC:
     bne lbl_fn_803A98EC_000008F0
     lwz r3, lbl_8087F430
     li r4, 0x3
-    bl fn_80370174
+    bl world_getGlobalFlag
     stw r3, 0xc4(r27)
     li r4, 0x3
     li r5, 0x1
     li r6, 0x0
     lwz r3, lbl_8087F430
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_803A98EC_000008F0:
     lwz r0, 0x14(r29)
     rlwinm r0, r0, 0, 28, 28
@@ -880,7 +880,7 @@ lbl_fn_803A98EC_00000A8C:
     lwz r5, 0xc4(r27)
     li r4, 0x3
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_803A98EC_00000AB8:
     lwz r0, 0x14(r29)
     rlwinm r0, r0, 0, 28, 28
@@ -1556,7 +1556,7 @@ lbl_fn_803A9DBC_000013F8:
     beq lbl_fn_803A9DBC_00001424
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_803A9DBC_00001424:
     lwz r0, 0x20(r27)
     rlwinm r0, r0, 0, 28, 28

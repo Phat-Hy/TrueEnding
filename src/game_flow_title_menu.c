@@ -22,7 +22,7 @@ extern void fn_8023780C(void);
 extern void fn_8023781C(void);
 extern void fn_8035B694(void);
 extern void fn_80365708(void);
-extern void fn_80370AE4(void);
+extern void world_setLocalFlag(void);
 extern void fn_80374964(void);
 extern void fn_8037624C(void);
 extern void fn_804AE3BC(void);
@@ -1263,7 +1263,7 @@ asm void fn_804DE888(void)
     add r0, r0, r5
     mulli r0, r0, 0xa
     subf r5, r0, r6
-    bl fn_80370AE4
+    bl world_setLocalFlag
     lwz r0, 0x598(r24)
     addi r7, r23, 0x6667
     lwz r3, 0x5e0(r24)
@@ -1278,7 +1278,7 @@ asm void fn_804DE888(void)
     add r0, r0, r5
     mulli r0, r0, 0xa
     subf r5, r0, r6
-    bl fn_80370AE4
+    bl world_setLocalFlag
     lis r3, 0x51ec
     lwz r4, 0x598(r24)
     subi r3, r3, 0x7ae1
@@ -1295,11 +1295,11 @@ asm void fn_804DE888(void)
     add r0, r0, r5
     mulli r0, r0, 0xa
     subf r5, r0, r6
-    bl fn_80370AE4
+    bl world_setLocalFlag
     lwz r3, 0x5e0(r24)
     li r4, 0xff
     li r5, 0x0
-    bl fn_80370AE4
+    bl world_setLocalFlag
     lwz r4, lbl_8087F9C0
     li r23, 0x0
     addis r3, r24, 0x1

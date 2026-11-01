@@ -8,12 +8,12 @@ extern void fn_80145334(void);
 extern void fn_801539E0(void);
 extern void fn_8016E970(void);
 extern void fn_8036554C(void);
-extern void fn_8036F268(void);
-extern void fn_80370174(void);
-extern void fn_80370A78(void);
-extern void fn_80370B78(void);
-extern void fn_80370BD0(void);
-extern void fn_80370C6C(void);
+extern void world_updateMapTransition(void);
+extern void world_getGlobalFlag(void);
+extern void world_getLocalFlag(void);
+extern void world_startMapTransition(void);
+extern void world_reloadMapTransition(void);
+extern void world_initMapTransitionParams(void);
 extern void fn_8037D3E8(void);
 extern void fn_8037EF30(void);
 extern void fn_803935FC(void);
@@ -108,11 +108,11 @@ lbl_fn_8039C7F0_00000078:
     cmpwi r4, 0x1
     bne lbl_fn_8039C7F0_0000008C
     mr r4, r5
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_8039C7F0_00000094
 lbl_fn_8039C7F0_0000008C:
     mr r4, r5
-    bl fn_80370A78
+    bl world_getLocalFlag
 lbl_fn_8039C7F0_00000094:
     mr r31, r3
 lbl_fn_8039C7F0_00000098:
@@ -125,13 +125,13 @@ lbl_fn_8039C7F0_000000AC:
     cmpwi r29, 0x2
     bne lbl_fn_8039C7F0_000000C0
     mr r4, r30
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_8039C7F0_000000F4
 lbl_fn_8039C7F0_000000C0:
     cmpwi r29, 0x1
     bne lbl_fn_8039C7F0_000000D4
     mr r4, r30
-    bl fn_80370A78
+    bl world_getLocalFlag
     b lbl_fn_8039C7F0_000000F4
 lbl_fn_8039C7F0_000000D4:
     cmpwi r29, 0x3
@@ -156,11 +156,11 @@ lbl_fn_8039C7F0_00000110:
     cmpwi r4, 0x1
     bne lbl_fn_8039C7F0_00000124
     mr r4, r5
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_8039C7F0_0000012C
 lbl_fn_8039C7F0_00000124:
     mr r4, r5
-    bl fn_80370A78
+    bl world_getLocalFlag
 lbl_fn_8039C7F0_0000012C:
     mr r31, r3
 lbl_fn_8039C7F0_00000130:
@@ -173,13 +173,13 @@ lbl_fn_8039C7F0_00000144:
     cmpwi r29, 0x2
     bne lbl_fn_8039C7F0_00000158
     mr r4, r30
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_8039C7F0_0000018C
 lbl_fn_8039C7F0_00000158:
     cmpwi r29, 0x1
     bne lbl_fn_8039C7F0_0000016C
     mr r4, r30
-    bl fn_80370A78
+    bl world_getLocalFlag
     b lbl_fn_8039C7F0_0000018C
 lbl_fn_8039C7F0_0000016C:
     cmpwi r29, 0x3
@@ -205,11 +205,11 @@ lbl_fn_8039C7F0_000001AC:
     cmpwi r4, 0x1
     bne lbl_fn_8039C7F0_000001C0
     mr r4, r5
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_8039C7F0_000001C8
 lbl_fn_8039C7F0_000001C0:
     mr r4, r5
-    bl fn_80370A78
+    bl world_getLocalFlag
 lbl_fn_8039C7F0_000001C8:
     mr r31, r3
 lbl_fn_8039C7F0_000001CC:
@@ -222,13 +222,13 @@ lbl_fn_8039C7F0_000001E0:
     cmpwi r29, 0x2
     bne lbl_fn_8039C7F0_000001F4
     mr r4, r30
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_8039C7F0_00000228
 lbl_fn_8039C7F0_000001F4:
     cmpwi r29, 0x1
     bne lbl_fn_8039C7F0_00000208
     mr r4, r30
-    bl fn_80370A78
+    bl world_getLocalFlag
     b lbl_fn_8039C7F0_00000228
 lbl_fn_8039C7F0_00000208:
     cmpwi r29, 0x3
@@ -255,11 +255,11 @@ lbl_fn_8039C7F0_0000024C:
     cmpwi r4, 0x1
     bne lbl_fn_8039C7F0_00000260
     mr r4, r5
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_8039C7F0_00000268
 lbl_fn_8039C7F0_00000260:
     mr r4, r5
-    bl fn_80370A78
+    bl world_getLocalFlag
 lbl_fn_8039C7F0_00000268:
     mr r31, r3
 lbl_fn_8039C7F0_0000026C:
@@ -272,13 +272,13 @@ lbl_fn_8039C7F0_00000280:
     cmpwi r29, 0x2
     bne lbl_fn_8039C7F0_00000294
     mr r4, r30
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_8039C7F0_000002C8
 lbl_fn_8039C7F0_00000294:
     cmpwi r29, 0x1
     bne lbl_fn_8039C7F0_000002A8
     mr r4, r30
-    bl fn_80370A78
+    bl world_getLocalFlag
     b lbl_fn_8039C7F0_000002C8
 lbl_fn_8039C7F0_000002A8:
     cmpwi r29, 0x3
@@ -304,11 +304,11 @@ lbl_fn_8039C7F0_000002E8:
     cmpwi r4, 0x1
     bne lbl_fn_8039C7F0_000002FC
     mr r4, r5
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_8039C7F0_00000304
 lbl_fn_8039C7F0_000002FC:
     mr r4, r5
-    bl fn_80370A78
+    bl world_getLocalFlag
 lbl_fn_8039C7F0_00000304:
     mr r31, r3
 lbl_fn_8039C7F0_00000308:
@@ -321,13 +321,13 @@ lbl_fn_8039C7F0_0000031C:
     cmpwi r29, 0x2
     bne lbl_fn_8039C7F0_00000330
     mr r4, r30
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_8039C7F0_00000364
 lbl_fn_8039C7F0_00000330:
     cmpwi r29, 0x1
     bne lbl_fn_8039C7F0_00000344
     mr r4, r30
-    bl fn_80370A78
+    bl world_getLocalFlag
     b lbl_fn_8039C7F0_00000364
 lbl_fn_8039C7F0_00000344:
     cmpwi r29, 0x3
@@ -354,11 +354,11 @@ lbl_fn_8039C7F0_00000388:
     cmpwi r4, 0x1
     bne lbl_fn_8039C7F0_0000039C
     mr r4, r5
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_8039C7F0_000003A4
 lbl_fn_8039C7F0_0000039C:
     mr r4, r5
-    bl fn_80370A78
+    bl world_getLocalFlag
 lbl_fn_8039C7F0_000003A4:
     mr r31, r3
 lbl_fn_8039C7F0_000003A8:
@@ -371,13 +371,13 @@ lbl_fn_8039C7F0_000003BC:
     cmpwi r29, 0x2
     bne lbl_fn_8039C7F0_000003D0
     mr r4, r30
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_8039C7F0_00000404
 lbl_fn_8039C7F0_000003D0:
     cmpwi r29, 0x1
     bne lbl_fn_8039C7F0_000003E4
     mr r4, r30
-    bl fn_80370A78
+    bl world_getLocalFlag
     b lbl_fn_8039C7F0_00000404
 lbl_fn_8039C7F0_000003E4:
     cmpwi r29, 0x3
@@ -1007,7 +1007,7 @@ lbl_fn_8039D3E0_00000C34:
     lwz r3, lbl_8087F430
     lwz r5, 0x10(r5)
     lfs f1, lbl_80885B74
-    bl fn_80370B78
+    bl world_startMapTransition
     b lbl_fn_8039D3E0_00000C98
 lbl_fn_8039D3E0_00000C50:
     lwz r4, 0xc(r5)
@@ -1015,21 +1015,21 @@ lbl_fn_8039D3E0_00000C50:
     lwz r3, lbl_8087F430
     lwz r5, 0x10(r5)
     lfs f1, lbl_80885B14
-    bl fn_80370B78
+    bl world_startMapTransition
     b lbl_fn_8039D3E0_00000C98
 lbl_fn_8039D3E0_00000C6C:
     lwz r4, 0x10(r5)
     li r5, 0x0
     lwz r3, lbl_8087F430
     lfs f1, lbl_80885B74
-    bl fn_80370BD0
+    bl world_reloadMapTransition
     b lbl_fn_8039D3E0_00000C98
 lbl_fn_8039D3E0_00000C84:
     lwz r4, 0x10(r5)
     li r5, 0x0
     lwz r3, lbl_8087F430
     lfs f1, lbl_80885B14
-    bl fn_80370BD0
+    bl world_reloadMapTransition
 lbl_fn_8039D3E0_00000C98:
     lwz r4, 0x0(r31)
     lis r3, lbl_8074ED24@ha
@@ -1386,7 +1386,7 @@ asm void fn_8039D930(void)
     lwz r5, 0xc(r5)
     lwz r3, lbl_8087F430
     lwz r8, 0x18(r8)
-    bl fn_8036F268
+    bl world_updateMapTransition
     li r0, 0x1
     stw r31, 0x0(r30)
     stw r0, 0x4(r30)
@@ -1417,7 +1417,7 @@ asm void fn_8039D9B0(void)
     stw r31, 0xc(r1)
     mr r31, r4
     lwz r3, lbl_8087F430
-    bl fn_80370C6C
+    bl world_initMapTransitionParams
     lwz r3, lbl_8087F8A0
     li r4, 0x0
     lwz r3, 0x48(r3)

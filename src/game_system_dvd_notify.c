@@ -36,8 +36,8 @@ extern void fn_80207EE8(void);
 extern void fn_80207F34(void);
 extern void fn_803605EC(void);
 extern void fn_80360848(void);
-extern void fn_80370174(void);
-extern void fn_80370320(void);
+extern void world_getGlobalFlag(void);
+extern void world_setGlobalFlag(void);
 extern void fn_80373148(void);
 extern void fn_8037E9E0(void);
 extern void fn_803CE074(void);
@@ -1375,11 +1375,11 @@ asm void fn_8037D758(void)
 lbl_fn_8037D758_000010FC:
     mr r3, r4
     li r4, 0x38f
-    bl fn_80370174
+    bl world_getGlobalFlag
     mr r31, r3
     lwz r3, lbl_8087F430
     li r4, 0x390
-    bl fn_80370174
+    bl world_getGlobalFlag
     xoris r3, r3, 0x8000
     lis r0, 0x4330
     lis r4, lbl_8074DFF0@ha
@@ -1441,7 +1441,7 @@ lbl_fn_8037D808_000011DC:
     mr r3, r6
     li r4, 0x38f
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     lfs f0, lbl_808858E0
     li r4, 0x390
     lwz r3, lbl_8087F430
@@ -1450,7 +1450,7 @@ lbl_fn_8037D808_000011DC:
     fctiwz f0, f0
     stfd f0, 0x8(r1)
     lwz r5, 0xc(r1)
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_8037D808_00001210:
     lwz r0, 0x24(r1)
     psq_l f31, 0x18(r1), 0, 0

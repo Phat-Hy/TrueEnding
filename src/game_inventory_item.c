@@ -42,8 +42,8 @@ extern void fn_8021A8D0(void);
 extern void fn_8021A918(void);
 extern void fn_8023A02C(void);
 extern void fn_8023A098(void);
-extern void fn_80370174(void);
-extern void fn_80370320(void);
+extern void world_getGlobalFlag(void);
+extern void world_setGlobalFlag(void);
 extern void fn_805F8E70(void);
 extern void fn_805F93C0(void);
 extern void fn_805F98D0(void);
@@ -170,7 +170,7 @@ lbl_fn_80152D10_0000010C:
     beq lbl_fn_80152D10_00000190
     lwz r3, lbl_8087F430
     li r4, 0x25
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x1
     blt lbl_fn_80152D10_00000170
     lwz r3, 0x648(r31)
@@ -976,19 +976,19 @@ lbl_fn_80153698_00000C68:
     bne lbl_fn_80153698_00000CB0
     lwz r3, lbl_8087F430
     li r4, 0xed
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     bne lbl_fn_80153698_00000CB0
     lwz r3, lbl_8087F430
     li r4, 0xea
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x1
     bne lbl_fn_80153698_00000CB0
     lwz r3, lbl_8087F430
     li r4, 0xed
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_80153698_00000CB0:
     lwz r0, 0xa4(r1)
     lwz r31, 0x9c(r1)
@@ -1062,7 +1062,7 @@ lbl_fn_801539E0_00000D9C:
     beq lbl_fn_801539E0_00000E20
     lwz r3, lbl_8087F430
     li r4, 0x25
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x1
     blt lbl_fn_801539E0_00000E00
     lwz r3, 0x648(r31)
@@ -1477,12 +1477,12 @@ lbl_fn_80153FD8_00001370:
     bge lbl_fn_80153FD8_000013B8
     lwz r3, lbl_8087F430
     li r4, 0x25
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x1
     beq lbl_fn_80153FD8_000013B8
     lwz r3, lbl_8087F430
     li r4, 0x25
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x2
     bne lbl_fn_80153FD8_000013CC
     bl fn_8013539C
@@ -1714,7 +1714,7 @@ lbl_fn_80154344_000016CC:
     beq lbl_fn_80154344_00001750
     lwz r3, lbl_8087F430
     li r4, 0x25
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x1
     blt lbl_fn_80154344_00001730
     lwz r3, 0x648(r31)

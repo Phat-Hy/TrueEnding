@@ -16,8 +16,8 @@ extern void atn_LH_Texture_constructor(void);
 extern void fn_800D5808(void);
 extern void fn_80237518(void);
 extern void fn_802375C4(void);
-extern void fn_80370174(void);
-extern void fn_80370320(void);
+extern void world_getGlobalFlag(void);
+extern void world_setGlobalFlag(void);
 extern void fn_80373148(void);
 extern void fn_803761E4(void);
 extern void fn_803761EC(void);
@@ -545,11 +545,11 @@ asm void fn_803CE768(void)
     stw r3, 0x4c(r31)
     li r4, 0x385
     lwz r3, lbl_8087F430
-    bl fn_80370174
+    bl world_getGlobalFlag
     stw r3, 0x50(r31)
     li r4, 0x386
     lwz r3, lbl_8087F430
-    bl fn_80370174
+    bl world_getGlobalFlag
     clrlwi r4, r3, 16
     srwi r3, r3, 16
     neg r0, r4
@@ -583,7 +583,7 @@ asm void fn_803CE7E0(void)
     li r4, 0x385
     lwz r5, 0x50(r31)
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     lwz r0, 0x54(r31)
     li r4, 0x386
     lwz r7, 0x48(r31)
@@ -591,7 +591,7 @@ asm void fn_803CE7E0(void)
     clrlwi r5, r0, 16
     lwz r3, lbl_8087F430
     rlwimi r5, r7, 16, 0, 15
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_803CE7E0_000005C8:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

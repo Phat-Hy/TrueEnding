@@ -44,7 +44,7 @@ extern void fn_80239D58(void);
 extern void fn_80239DAC(void);
 extern void fn_8023A680(void);
 extern void fn_8023A8B4(void);
-extern void fn_80370320(void);
+extern void world_setGlobalFlag(void);
 extern void fn_80373148(void);
 extern void fn_803E6890(void);
 extern void fn_80473E8C(void);
@@ -1714,7 +1714,7 @@ lbl_fn_8059B32C_00001604:
     mr r5, r29
     li r4, 0xc7
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_8059B32C_0000162C:
     addi r11, r1, 0x30
     bl _restgpr_26

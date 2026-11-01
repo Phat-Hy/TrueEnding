@@ -21,7 +21,7 @@ extern void fn_8014C228(void);
 extern void fn_8014DEE4(void);
 extern void fn_8016E970(void);
 extern void fn_801718F8(void);
-extern void fn_80370174(void);
+extern void world_getGlobalFlag(void);
 extern void fn_803C17FC(void);
 extern void fn_803C1840(void);
 extern void fn_805F8E70(void);
@@ -532,7 +532,7 @@ lbl_fn_8016F824_00000608:
     beq lbl_fn_8016F824_0000068C
     lwz r3, lbl_8087F430
     li r4, 0x25
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x1
     blt lbl_fn_8016F824_0000066C
     lwz r3, 0x648(r30)
@@ -942,7 +942,7 @@ lbl_fn_8016FDCC_00000BD8:
     beq lbl_fn_8016FDCC_00000C5C
     lwz r3, lbl_8087F430
     li r4, 0x25
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x1
     blt lbl_fn_8016FDCC_00000C3C
     lwz r3, 0x648(r30)
@@ -1403,7 +1403,7 @@ lbl_fn_8017039C_00001264:
     beq lbl_fn_8017039C_000012E8
     lwz r3, lbl_8087F430
     li r4, 0x25
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x1
     blt lbl_fn_8017039C_000012C8
     lwz r3, 0x648(r30)
@@ -1790,7 +1790,7 @@ lbl_fn_80170A20_000017E0:
     beq lbl_fn_80170A20_00001864
     lwz r3, lbl_8087F430
     li r4, 0x25
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x1
     blt lbl_fn_80170A20_00001844
     lwz r3, 0x648(r31)

@@ -38,7 +38,7 @@ extern void fn_8021771C(void);
 extern void fn_80219544(void);
 extern void fn_80334B38(void);
 extern void fn_80365464(void);
-extern void fn_80370B78(void);
+extern void world_startMapTransition(void);
 extern void fn_80373148(void);
 extern void fn_8037C8C4(void);
 extern void fn_803BEBAC(void);
@@ -402,7 +402,7 @@ asm void fn_8047F994(void)
     lfs f1, lbl_80886F8C
     li r5, 0x0
     li r6, 0x0
-    bl fn_80370B78
+    bl world_startMapTransition
     lwz r3, 0x70(r31)
     li r4, 0xb
     bl fn_8053E8CC

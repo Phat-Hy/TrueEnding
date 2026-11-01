@@ -28,7 +28,7 @@ extern void fn_80219E6C(void);
 extern void fn_802CC19C(void);
 extern void fn_802CC4C8(void);
 extern void fn_802CC834(void);
-extern void fn_80370AE4(void);
+extern void world_setLocalFlag(void);
 extern void fn_805F8E70(void);
 extern void fn_805F93C0(void);
 extern void fn_805F9750(void);
@@ -1008,7 +1008,7 @@ lbl_fn_802C9BF8_00000CD4:
     stfs f2, 0x53c(r31)
     psq_st f1, 0x0(r29), 0, 0
     lwz r3, lbl_8087F430
-    bl fn_80370AE4
+    bl world_setLocalFlag
 lbl_fn_802C9BF8_00000D0C:
     lwz r0, 0x424(r1)
     psq_l f31, 0x418(r1), 0, 0

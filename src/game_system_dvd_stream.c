@@ -32,8 +32,8 @@ extern void fn_801F4E8C(void);
 extern void fn_801FECE0(void);
 extern void fn_801FED24(void);
 extern void fn_801FEE08(void);
-extern void fn_80370320(void);
-extern void fn_80370F8C(void);
+extern void world_setGlobalFlag(void);
+extern void world_advanceChapter(void);
 extern void fn_80377298(void);
 extern void fn_80389838(void);
 extern void fn_803903E0(void);
@@ -170,7 +170,7 @@ lbl_fn_803775DC_0000008C:
     lwz r5, lbl_8087F460
     li r4, 0x0
     li r6, 0x0
-    bl fn_80370F8C
+    bl world_advanceChapter
     b lbl_fn_803775DC_0000011C
 lbl_fn_803775DC_000000AC:
     lwz r3, lbl_8087F430
@@ -188,7 +188,7 @@ lbl_fn_803775DC_000000CC:
     lwz r5, lbl_8087F460
     li r4, 0x1
     li r6, 0x0
-    bl fn_80370F8C
+    bl world_advanceChapter
     b lbl_fn_803775DC_0000011C
 lbl_fn_803775DC_000000EC:
     lwz r3, lbl_8087F430
@@ -197,12 +197,12 @@ lbl_fn_803775DC_000000EC:
     li r4, 0x1b
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     lwz r3, lbl_8087F430
     li r4, 0x0
     li r5, 0x0
     li r6, 0x1
-    bl fn_80370F8C
+    bl world_advanceChapter
 lbl_fn_803775DC_0000011C:
     mr r3, r29
     bl atn_Task_unlink

@@ -33,7 +33,7 @@ extern void fn_80219558(void);
 extern void fn_80232B7C(void);
 extern void fn_8023A8B4(void);
 extern void fn_8036554C(void);
-extern void fn_80370320(void);
+extern void world_setGlobalFlag(void);
 extern void fn_80375184(void);
 extern void fn_80389838(void);
 extern void fn_805A4A20(void);
@@ -389,7 +389,7 @@ lbl_fn_802D57B8_00000394:
     stfs f4, 0x16c(r1)
     stfs f3, 0x170(r1)
     stw r0, 0x150(r1)
-    bl fn_80370320
+    bl world_setGlobalFlag
     lfs f4, 0xd4(r1)
     addi r3, r1, 0xa8
     lfs f0, 0x530(r31)

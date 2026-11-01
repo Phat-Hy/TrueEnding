@@ -78,8 +78,8 @@ extern void fn_8036E170(void);
 extern void fn_8036E494(void);
 extern void fn_8036EE0C(void);
 extern void fn_8036FD4C(void);
-extern void fn_80370320(void);
-extern void fn_80370CD0(void);
+extern void world_setGlobalFlag(void);
+extern void world_startTransitionFade(void);
 extern void fn_803727DC(void);
 extern void fn_803731E8(void);
 extern void fn_803737C0(void);
@@ -1970,7 +1970,7 @@ lbl_fn_80368280_000018B4:
     li r4, 0xc
     stw r27, 0x5638(r28)
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     lwz r0, 0x5668(r28)
     stw r27, 0x5630(r28)
     cmpwi r0, 0x0
@@ -2291,7 +2291,7 @@ lbl_fn_80368280_00001D24:
     li r4, 0x1c0
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_80368280_00001D4C:
     lwz r5, 0x5544(r28)
     li r0, 0x0
@@ -2433,7 +2433,7 @@ lbl_fn_80368280_00001F28:
     li r0, 0x0
     stw r0, 0x566c(r28)
     mr r3, r28
-    bl fn_80370CD0
+    bl world_startTransitionFade
     b lbl_fn_80368280_000031A0
 lbl_fn_80368280_00001F48:
     lwz r3, lbl_8087F0A8
@@ -2638,7 +2638,7 @@ lbl_fn_80368280_000021C4:
     mr r3, r28
     mr r5, r25
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     b lbl_fn_80368280_000022B8
 lbl_fn_80368280_00002244:
     lwz r5, 0x5758(r28)
@@ -3630,7 +3630,7 @@ lbl_fn_80368280_000030A8:
     mr r3, r28
     li r4, 0x86
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_80368280_000030CC:
     lwz r3, 0x54e4(r28)
     lwz r0, 0x54e8(r28)

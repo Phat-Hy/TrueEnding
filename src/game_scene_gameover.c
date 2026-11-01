@@ -21,7 +21,7 @@ extern void fn_801539E0(void);
 extern void fn_8015495C(void);
 extern void fn_80178078(void);
 extern void fn_80179D44(void);
-extern void fn_80370174(void);
+extern void world_getGlobalFlag(void);
 extern void fn_803C11A4(void);
 extern void fn_803C1560(void);
 extern void fn_803EA77C(void);
@@ -1452,7 +1452,7 @@ lbl_fn_801B3098_00001208:
     beq lbl_fn_801B3098_00001A78
     lwz r3, lbl_8087F430
     li r4, 0x12b
-    bl fn_80370174
+    bl world_getGlobalFlag
     cmpwi r3, 0x0
     bne lbl_fn_801B3098_00001A78
     lwz r4, 0x4(r29)

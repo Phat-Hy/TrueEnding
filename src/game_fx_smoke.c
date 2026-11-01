@@ -43,8 +43,8 @@ extern void fn_8029AC1C(void);
 extern void fn_8029AF6C(void);
 extern void fn_8029B24C(void);
 extern void fn_8029BE7C(void);
-extern void fn_80370A78(void);
-extern void fn_80370AE4(void);
+extern void world_getLocalFlag(void);
+extern void world_setLocalFlag(void);
 extern void fn_805F98D0(void);
 extern void fn_80680770(void);
 extern void fn_80680CF8(void);
@@ -830,13 +830,13 @@ lbl_fn_80297474_00000A8C:
     bge lbl_fn_80297474_00000AD4
     lwz r3, lbl_8087F430
     li r4, 0x97
-    bl fn_80370A78
+    bl world_getLocalFlag
     cmpwi r3, 0x0
     bne lbl_fn_80297474_00000DB0
     lwz r3, lbl_8087F430
     li r4, 0x97
     li r5, 0x1
-    bl fn_80370AE4
+    bl world_setLocalFlag
     b lbl_fn_80297474_00000DB0
 lbl_fn_80297474_00000AD4:
     lfs f1, 0x2e4(r31)

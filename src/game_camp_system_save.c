@@ -12,9 +12,9 @@ extern void fn_80084C24(void);
 extern void fn_8011F91C(void);
 extern void fn_8011FC10(void);
 extern void fn_8021ECD0(void);
-extern void fn_80370174(void);
-extern void fn_80370320(void);
-extern void fn_80370A78(void);
+extern void world_getGlobalFlag(void);
+extern void world_setGlobalFlag(void);
+extern void world_getLocalFlag(void);
 extern void fn_803BF898(void);
 extern void fn_803EC16C(void);
 extern void fn_803EC374(void);
@@ -1596,7 +1596,7 @@ asm void fn_803CA604(void)
     mr r3, r4
     li r23, 0x1
     li r4, 0x392
-    bl fn_80370174
+    bl world_getGlobalFlag
     lwz r4, 0x64(r20)
     clrlwi r0, r3, 28
     lwz r17, 0x50(r4)
@@ -1657,20 +1657,20 @@ lbl_fn_803CA604_00001434:
     beq lbl_fn_803CA604_00001478
     lwz r3, lbl_8087F430
     li r4, 0x392
-    bl fn_80370174
+    bl world_getGlobalFlag
     clrlwi r5, r17, 28
     li r4, 0x392
     rlwimi r5, r3, 4, 0, 27
     lwz r3, lbl_8087F430
     li r6, 0x1
-    bl fn_80370320
+    bl world_setGlobalFlag
     b lbl_fn_803CA604_00001478
 lbl_fn_803CA604_00001464:
     mr r3, r4
     li r4, 0x392
     li r5, 0x0
     li r6, 0x1
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_803CA604_00001478:
     lwz r0, 0xe4(r20)
     li r17, 0x0
@@ -1864,7 +1864,7 @@ lbl_fn_803CA604_00001588:
     lwz r4, 0xc(r31)
     li r5, 0x0
     li r6, 0x1
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_803CA604_0000175C:
     addi r22, r22, 0x1
     addi r18, r18, 0x48
@@ -1921,12 +1921,12 @@ lbl_fn_803CAABC_000017F0:
     bne lbl_fn_803CAABC_00001824
     lwz r3, lbl_8087F430
     lwz r4, 0x30(r29)
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_803CAABC_00001830
 lbl_fn_803CAABC_00001824:
     lwz r3, lbl_8087F430
     lwz r4, 0x30(r29)
-    bl fn_80370A78
+    bl world_getLocalFlag
 lbl_fn_803CAABC_00001830:
     lwz r0, 0x34(r29)
     subf r0, r3, r0
@@ -2049,12 +2049,12 @@ lbl_fn_803CAABC_000019AC:
     bne lbl_fn_803CAABC_000019E0
     lwz r3, lbl_8087F430
     lwz r4, 0x24(r29)
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_803CAABC_000019EC
 lbl_fn_803CAABC_000019E0:
     lwz r3, lbl_8087F430
     lwz r4, 0x24(r29)
-    bl fn_80370A78
+    bl world_getLocalFlag
 lbl_fn_803CAABC_000019EC:
     lwz r0, 0x28(r29)
     subf r0, r3, r0
@@ -2083,12 +2083,12 @@ lbl_fn_803CAABC_00001A20:
     bne lbl_fn_803CAABC_00001A54
     lwz r3, lbl_8087F430
     lwz r4, 0x24(r31)
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_803CAABC_00001A60
 lbl_fn_803CAABC_00001A54:
     lwz r3, lbl_8087F430
     lwz r4, 0x24(r31)
-    bl fn_80370A78
+    bl world_getLocalFlag
 lbl_fn_803CAABC_00001A60:
     lwz r0, 0x28(r31)
     subf r0, r3, r0
@@ -2142,12 +2142,12 @@ lbl_fn_803CAABC_00001AEC:
     bne lbl_fn_803CAABC_00001B20
     lwz r3, lbl_8087F430
     lwz r4, 0x68(r31)
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_803CAABC_00001B2C
 lbl_fn_803CAABC_00001B20:
     lwz r3, lbl_8087F430
     lwz r4, 0x68(r31)
-    bl fn_80370A78
+    bl world_getLocalFlag
 lbl_fn_803CAABC_00001B2C:
     lwz r0, 0x6c(r31)
     subf r0, r3, r0

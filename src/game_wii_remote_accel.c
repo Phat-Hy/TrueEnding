@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void fn_8010DB54(void);
 extern void fn_802291BC(void);
 extern void fn_802297AC(void);
-extern void fn_80370B78(void);
+extern void world_startMapTransition(void);
 extern void fn_8047F6E4(void);
 extern void fn_8047F850(void);
 extern void fn_8047F88C(void);
@@ -1824,7 +1824,7 @@ lbl_fn_80550258_00001668:
     lfs f1, lbl_80887E20
     li r5, 0x0
     li r6, 0x0
-    bl fn_80370B78
+    bl world_startMapTransition
     mr r3, r15
     li r4, 0xb
     bl fn_8053E8CC

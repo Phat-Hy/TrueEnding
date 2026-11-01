@@ -29,10 +29,10 @@ extern void fn_80183774(void);
 extern void fn_80219558(void);
 extern void fn_8036DAF4(void);
 extern void fn_80370094(void);
-extern void fn_80370174(void);
-extern void fn_80370320(void);
-extern void fn_80370A78(void);
-extern void fn_80370AE4(void);
+extern void world_getGlobalFlag(void);
+extern void world_setGlobalFlag(void);
+extern void world_getLocalFlag(void);
+extern void world_setLocalFlag(void);
 extern void fn_80373148(void);
 extern void fn_8039BC0C(void);
 extern void fn_803ACD50(void);
@@ -258,7 +258,7 @@ asm void fn_803B9804(void)
 lbl_fn_803B9804_00000208:
     mr r3, r26
     mr r4, r27
-    bl fn_80370174
+    bl world_getGlobalFlag
     addi r27, r27, 0x1
     stwu r3, 0x4(r25)
     cmpwi r27, 0x1000
@@ -268,7 +268,7 @@ lbl_fn_803B9804_00000208:
 lbl_fn_803B9804_0000022C:
     mr r3, r26
     mr r4, r27
-    bl fn_80370A78
+    bl world_getLocalFlag
     addi r27, r27, 0x1
     stw r3, 0x4004(r25)
     cmpwi r27, 0x100
@@ -602,7 +602,7 @@ asm void fn_803B9C98(void)
     li r4, 0x11b
     li r5, 0x0
     li r6, 0x1
-    bl fn_80370320
+    bl world_setGlobalFlag
     mr r31, r28
     li r29, 0x0
 lbl_fn_803B9C98_000006C8:
@@ -612,14 +612,14 @@ lbl_fn_803B9C98_000006C8:
     mr r4, r29
     li r5, 0x1
     li r6, 0x1
-    bl fn_80370320
+    bl world_setGlobalFlag
     b lbl_fn_803B9C98_000006FC
 lbl_fn_803B9C98_000006E8:
     lwz r5, 0x4(r31)
     mr r3, r30
     mr r4, r29
     li r6, 0x1
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_803B9C98_000006FC:
     addi r29, r29, 0x1
     addi r31, r31, 0x4
@@ -662,7 +662,7 @@ lbl_fn_803B9D78_00000774:
     lwz r5, 0x4004(r25)
     mr r3, r30
     mr r4, r24
-    bl fn_80370AE4
+    bl world_setLocalFlag
     addi r24, r24, 0x1
     addi r25, r25, 0x4
     cmpwi r24, 0x100
@@ -832,14 +832,14 @@ lbl_fn_803B9D78_000009C0:
     beq lbl_fn_803B9D78_00000A00
     mr r3, r30
     li r4, 0x397
-    bl fn_80370174
+    bl world_getGlobalFlag
     mr r4, r3
     mr r3, r24
     bl fn_80183618
     lwz r26, lbl_8087F098
     mr r3, r30
     li r4, 0x398
-    bl fn_80370174
+    bl world_getGlobalFlag
     mr r4, r3
     mr r3, r26
     bl fn_80183774

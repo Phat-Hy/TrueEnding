@@ -28,9 +28,9 @@ extern void fn_801539E0(void);
 extern void fn_80183930(void);
 extern void fn_80219558(void);
 extern void fn_8036554C(void);
-extern void fn_80370174(void);
-extern void fn_80370A78(void);
-extern void fn_80370BD0(void);
+extern void world_getGlobalFlag(void);
+extern void world_getLocalFlag(void);
+extern void world_reloadMapTransition(void);
 extern void fn_80371334(void);
 extern void fn_80373148(void);
 extern void fn_8039BF04(void);
@@ -157,14 +157,14 @@ lbl_fn_8039FBFC_00000050:
     cmpwi r0, 0x2
     bne lbl_fn_8039FBFC_00000068
     mr r4, r31
-    bl fn_80370174
+    bl world_getGlobalFlag
     mr r31, r3
     b lbl_fn_8039FBFC_0000009C
 lbl_fn_8039FBFC_00000068:
     cmpwi r0, 0x1
     bne lbl_fn_8039FBFC_00000080
     mr r4, r31
-    bl fn_80370A78
+    bl world_getLocalFlag
     mr r31, r3
     b lbl_fn_8039FBFC_0000009C
 lbl_fn_8039FBFC_00000080:
@@ -1592,13 +1592,13 @@ lbl_fn_803A0F4C_000013D4:
     cmpwi r0, 0x2
     bne lbl_fn_803A0F4C_000013E8
     mr r4, r29
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_803A0F4C_0000141C
 lbl_fn_803A0F4C_000013E8:
     cmpwi r0, 0x1
     bne lbl_fn_803A0F4C_000013FC
     mr r4, r29
-    bl fn_80370A78
+    bl world_getLocalFlag
     b lbl_fn_803A0F4C_0000141C
 lbl_fn_803A0F4C_000013FC:
     cmpwi r0, 0x3
@@ -1625,13 +1625,13 @@ lbl_fn_803A0F4C_00001440:
     cmpwi r0, 0x2
     bne lbl_fn_803A0F4C_00001454
     mr r4, r29
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_803A0F4C_00001488
 lbl_fn_803A0F4C_00001454:
     cmpwi r0, 0x1
     bne lbl_fn_803A0F4C_00001468
     mr r4, r29
-    bl fn_80370A78
+    bl world_getLocalFlag
     b lbl_fn_803A0F4C_00001488
 lbl_fn_803A0F4C_00001468:
     cmpwi r0, 0x3
@@ -1665,14 +1665,14 @@ lbl_fn_803A0F4C_000014C8:
     cmpwi r0, 0x2
     bne lbl_fn_803A0F4C_000014E0
     mr r4, r29
-    bl fn_80370174
+    bl world_getGlobalFlag
     mr r29, r3
     b lbl_fn_803A0F4C_00001514
 lbl_fn_803A0F4C_000014E0:
     cmpwi r0, 0x1
     bne lbl_fn_803A0F4C_000014F8
     mr r4, r29
-    bl fn_80370A78
+    bl world_getLocalFlag
     mr r29, r3
     b lbl_fn_803A0F4C_00001514
 lbl_fn_803A0F4C_000014F8:
@@ -2257,7 +2257,7 @@ lbl_fn_803A11D8_00001D30:
     bne lbl_fn_803A11D8_00001D58
     li r5, 0xf
 lbl_fn_803A11D8_00001D58:
-    bl fn_80370BD0
+    bl world_reloadMapTransition
 lbl_fn_803A11D8_00001D5C:
     psq_l f31, 0x178(r1), 0, 0
     mr r3, r30

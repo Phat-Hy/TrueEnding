@@ -52,7 +52,7 @@ extern void fn_8032ABA4(void);
 extern void fn_8032AC1C(void);
 extern void fn_8032AF90(void);
 extern void fn_8035B78C(void);
-extern void fn_80370AE4(void);
+extern void world_setLocalFlag(void);
 extern void fn_80469AB8(void);
 extern void fn_80469C64(void);
 extern void fn_80469D60(void);
@@ -162,7 +162,7 @@ asm void fn_80467F50(void)
     beq lbl_fn_80467F50_00000044
     li r4, 0x8c
     li r5, 0x0
-    bl fn_80370AE4
+    bl world_setLocalFlag
 lbl_fn_80467F50_00000044:
     li r0, 0x13
     stw r0, 0x58c(r31)

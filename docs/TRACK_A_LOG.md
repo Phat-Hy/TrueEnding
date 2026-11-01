@@ -23,6 +23,36 @@ Next:     the 3-5 functions worth naming or decompiling next
 
 <!-- newest first -->
 
+### 2026-11-01 — Batch 3: World & Chapter Transition Engine Renames (12 functions)
+
+Numbers:  progress before -> after: 99.30 % -> 99.30 % (7,425,512 / 7,477,608 bytes, 18,054 / 18,155 functions)
+Named:
+- fn_80370174 -> world_getGlobalFlag (evidence: checks global flag index 0..4095; asserts "GetGlobalFlag:Index Out Of Bounds! %d" at lbl_8074DC1C)
+- fn_80370320 -> world_setGlobalFlag (evidence: sets global flag index 0..4095; asserts "SetGlobalFlag:Index Out Of Bounds! %d")
+- fn_80370A78 -> world_getLocalFlag (evidence: checks local flag index 0..255; asserts "GetLocalFlag:Index Out Of Bounds! %d")
+- fn_80370AE4 -> world_setLocalFlag (evidence: sets local flag index 0..255; asserts "SetLocalFlag:Index Out Of Bounds! %d")
+- fn_80370B78 -> world_startMapTransition (evidence: sets +0x54F0 = 1 in WorldManager, called by game_title_movie.c New Game handler and cutscene skip)
+- fn_80370BD0 -> world_reloadMapTransition (evidence: sets +0x54F0 = 2 in WorldManager for reload/retry transitions)
+- fn_80370C2C -> world_isTransitionFinished (evidence: queries transition completion status from +0x5620)
+- fn_80370C6C -> world_initMapTransitionParams (evidence: initializes transition parameters at +0x5624)
+- fn_80370CD0 -> world_startTransitionFade (evidence: triggers fade out/in sequence during map switch)
+- fn_80370F8C -> world_advanceChapter (evidence: clears subtask flags, advances chapter index at +0x574C)
+- fn_8036F268 -> world_updateMapTransition (evidence: master transition state machine; reads +0x54F0, writes +0x5538 = 1 at +0x360 when transition requested)
+- fn_803658B8 -> world_Manager_constructor (evidence: constructor for 0x5778-byte WorldManager singleton at lbl_8087F430; clears +0x54F0, +0x5538, +0x574C)
+Decompiled: none in this unit
+Notes:
+- Directly resolves the Chapter-1 field stall investigation in Track B dossier §5c.37:
+  - The object at `lbl_8087F430` is `WorldManager` (`0x5778` bytes).
+  - Offset `+0x54F0` is the transition trigger state (0 = idle, 1 = start transition, 2 = reload).
+  - `world_updateMapTransition` (`fn_8036F268`) evaluates `+0x54F0` at `+0x360` (`0x8036F5C8`). When `+0x54F0 == 1`, it writes `1` to `+0x5538` (`stw r3, 0x5538(r31)`), which was identified by Track B as the exact write leading to the Gurgan Cave stall.
+  - Global flags (`world_getGlobalFlag` / `world_setGlobalFlag`) manage cross-chapter progression (0..4095), while local flags (`world_getLocalFlag` / `world_setLocalFlag`) manage map-local quest/door states (0..255).
+- All call sites and local labels across 242 source files updated without mismatch or regression.
+Next:
+1. `atn_TaskBase_isValid` (`fn_800D56C4`, 96 B) and `atn_Task_initCookie` (`fn_800D5714`, 36 B) -> decompile to C in `src/game_depth.c`.
+2. `fn_800D7278` (1252 B): character texture bake (EFB copy + `GXDrawDone` + readback).
+3. Batch 4 renames in `atn::LH_` layout, scene, and display list loaders.
+
+
 ### 2026-11-01 — Batch 2: atn::Task & atn::LH_ Resource Subsystem Renames (17 functions)
 
 Numbers:  progress before -> after: 99.30 % -> 99.30 % (7,425,512 / 7,477,608 bytes, 18,054 / 18,155 functions)

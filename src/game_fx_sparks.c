@@ -15,9 +15,9 @@ extern void fn_800F8548(void);
 extern void fn_800FAB80(void);
 extern void fn_8016E970(void);
 extern void fn_80239DAC(void);
-extern void fn_80370320(void);
-extern void fn_80370AE4(void);
-extern void fn_80370B78(void);
+extern void world_setGlobalFlag(void);
+extern void world_setLocalFlag(void);
+extern void world_startMapTransition(void);
 extern void fn_805F89F0(void);
 extern void fn_805F8E70(void);
 extern void fn_805F93C0(void);
@@ -377,7 +377,7 @@ lbl_fn_8029A0A8_00000388:
     stw r0, 0xb0(r1)
     stfs f4, 0xb4(r1)
     stfs f3, 0xb8(r1)
-    bl fn_80370AE4
+    bl world_setLocalFlag
     lwz r3, 0x14b4(r31)
     addi r0, r3, 0x1
     stw r0, 0x14b4(r31)
@@ -396,7 +396,7 @@ lbl_fn_8029A0A8_0000046C:
     lfs f1, lbl_80883CDC
     li r5, 0xa
     li r6, 0x0
-    bl fn_80370B78
+    bl world_startMapTransition
     lfs f30, lbl_80883CE0
     b lbl_fn_8029A0A8_00000628
 lbl_fn_8029A0A8_000004AC:
@@ -503,7 +503,7 @@ lbl_fn_8029A0A8_00000628:
     li r6, 0x0
     stfs f30, 0x3a4(r3)
     lwz r3, lbl_8087F430
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_8029A0A8_00000644:
     lwz r0, 0xf4(r1)
     psq_l f31, 0xe8(r1), 0, 0
@@ -585,7 +585,7 @@ asm void fn_8029A580(void)
     li r4, 0x38d
     li r5, 0x0
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_8029A580_00000760:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)

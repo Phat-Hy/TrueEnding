@@ -29,10 +29,10 @@ extern void fn_80183588(void);
 extern void fn_80183618(void);
 extern void fn_80183774(void);
 extern void fn_801EB8C0(void);
-extern void fn_80370174(void);
-extern void fn_80370320(void);
-extern void fn_80370A78(void);
-extern void fn_80370AE4(void);
+extern void world_getGlobalFlag(void);
+extern void world_setGlobalFlag(void);
+extern void world_getLocalFlag(void);
+extern void world_setLocalFlag(void);
 extern void fn_803748E0(void);
 extern void fn_8037EF30(void);
 extern void fn_8039BF04(void);
@@ -945,11 +945,11 @@ lbl_fn_803A5A8C_00000B3C:
     bne lbl_fn_803A5A8C_00000B74
     mr r5, r31
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     b lbl_fn_803A5A8C_00000B7C
 lbl_fn_803A5A8C_00000B74:
     mr r5, r31
-    bl fn_80370AE4
+    bl world_setLocalFlag
 lbl_fn_803A5A8C_00000B7C:
     li r0, 0x1
     stw r0, 0xf0(r28)
@@ -994,14 +994,14 @@ lbl_fn_803A5CDC_00000C00:
     cmpwi r0, 0x2
     bne lbl_fn_803A5CDC_00000C18
     mr r4, r29
-    bl fn_80370174
+    bl world_getGlobalFlag
     mr r29, r3
     b lbl_fn_803A5CDC_00000C4C
 lbl_fn_803A5CDC_00000C18:
     cmpwi r0, 0x1
     bne lbl_fn_803A5CDC_00000C30
     mr r4, r29
-    bl fn_80370A78
+    bl world_getLocalFlag
     mr r29, r3
     b lbl_fn_803A5CDC_00000C4C
 lbl_fn_803A5CDC_00000C30:
@@ -1534,14 +1534,14 @@ lbl_fn_803A6410_00001338:
     cmpwi r0, 0x2
     bne lbl_fn_803A6410_00001350
     mr r4, r31
-    bl fn_80370174
+    bl world_getGlobalFlag
     mr r31, r3
     b lbl_fn_803A6410_00001384
 lbl_fn_803A6410_00001350:
     cmpwi r0, 0x1
     bne lbl_fn_803A6410_00001368
     mr r4, r31
-    bl fn_80370A78
+    bl world_getLocalFlag
     mr r31, r3
     b lbl_fn_803A6410_00001384
 lbl_fn_803A6410_00001368:
@@ -1564,13 +1564,13 @@ lbl_fn_803A6410_000013A0:
     cmpwi r0, 0x2
     bne lbl_fn_803A6410_000013B4
     mr r4, r28
-    bl fn_80370174
+    bl world_getGlobalFlag
     b lbl_fn_803A6410_000013E8
 lbl_fn_803A6410_000013B4:
     cmpwi r0, 0x1
     bne lbl_fn_803A6410_000013C8
     mr r4, r28
-    bl fn_80370A78
+    bl world_getLocalFlag
     b lbl_fn_803A6410_000013E8
 lbl_fn_803A6410_000013C8:
     cmpwi r0, 0x3
@@ -1874,7 +1874,7 @@ lbl_fn_803A68B8_000017D8:
     bne lbl_fn_803A68B8_000017F4
     mr r3, r6
     mr r4, r31
-    bl fn_80370174
+    bl world_getGlobalFlag
     mr r31, r3
     b lbl_fn_803A68B8_0000182C
 lbl_fn_803A68B8_000017F4:
@@ -1882,7 +1882,7 @@ lbl_fn_803A68B8_000017F4:
     bne lbl_fn_803A68B8_00001810
     mr r3, r6
     mr r4, r31
-    bl fn_80370A78
+    bl world_getLocalFlag
     mr r31, r3
     b lbl_fn_803A68B8_0000182C
 lbl_fn_803A68B8_00001810:

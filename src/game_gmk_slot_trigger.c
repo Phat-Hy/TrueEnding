@@ -9,7 +9,7 @@ extern void _savegpr_26(void);
 extern void fn_8013354C(void);
 extern void fn_8016E484(void);
 extern void fn_80219558(void);
-extern void fn_80370174(void);
+extern void world_getGlobalFlag(void);
 extern void fn_80375D0C(void);
 extern void fn_804491F4(void);
 extern void fn_8044B44C(void);
@@ -287,7 +287,7 @@ lbl_fn_80449448_0000036C:
     cmpwi r3, 0x0
     beq lbl_fn_80449448_0000038C
     li r4, 0x123
-    bl fn_80370174
+    bl world_getGlobalFlag
     cntlzw r0, r3
     srwi r0, r0, 5
     b lbl_fn_80449448_00000390

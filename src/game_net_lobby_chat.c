@@ -20,8 +20,8 @@ extern void atn_Task_constructor(void);
 extern void fn_800DC6B4(void);
 extern void fn_802114D8(void);
 extern void fn_802114E0(void);
-extern void fn_80370174(void);
-extern void fn_80370320(void);
+extern void world_getGlobalFlag(void);
+extern void world_setGlobalFlag(void);
 extern void fn_8049D1A4(void);
 extern void fn_8049E480(void);
 extern void fn_8067E23C(void);
@@ -1638,11 +1638,11 @@ asm void fn_804A1C4C(void)
     beq lbl_fn_804A1C4C_00001700
     mr r3, r0
     li r4, 0x387
-    bl fn_80370174
+    bl world_getGlobalFlag
     mr r31, r3
     lwz r3, lbl_8087F430
     li r4, 0x388
-    bl fn_80370174
+    bl world_getGlobalFlag
     srwi r4, r3, 16
     clrlwi r0, r3, 16
     lis r3, 0x4330
@@ -1674,7 +1674,7 @@ asm void fn_804A1C4C(void)
 lbl_fn_804A1C4C_000016E8:
     lwz r3, lbl_8087F430
     li r4, 0x38b
-    bl fn_80370174
+    bl world_getGlobalFlag
     lwz r4, lbl_8087EFB4
     lwz r4, 0x10(r4)
     stw r3, 0x4(r4)
@@ -1715,19 +1715,19 @@ asm void fn_804A1D2C(void)
     stfd f0, 0x8(r1)
     lwz r0, 0xc(r1)
     or r31, r7, r0
-    bl fn_80370320
+    bl world_setGlobalFlag
     lwz r3, lbl_8087F430
     mr r5, r31
     li r4, 0x388
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     lwz r5, lbl_8087EFB4
     li r4, 0x38b
     lwz r3, lbl_8087F430
     li r6, 0x0
     lwz r5, 0x10(r5)
     lwz r5, 0x4(r5)
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_804A1D2C_000017B0:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

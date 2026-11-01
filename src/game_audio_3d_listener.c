@@ -44,7 +44,7 @@ extern void fn_8031FAA4(void);
 extern void fn_8031FE4C(void);
 extern void fn_8035B694(void);
 extern void fn_8035B78C(void);
-extern void fn_80370AE4(void);
+extern void world_setLocalFlag(void);
 extern void fn_805F89F0(void);
 extern void fn_805F8E70(void);
 extern void fn_805F90D0(void);
@@ -1703,7 +1703,7 @@ lbl_fn_8031F654_00001638:
     lwz r3, lbl_8087F430
     li r4, 0x3c
     li r5, 0x1
-    bl fn_80370AE4
+    bl world_setLocalFlag
 lbl_fn_8031F654_00001668:
     lwz r3, lbl_8087F8A0
     addi r4, r1, 0x14

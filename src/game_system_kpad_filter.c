@@ -40,7 +40,7 @@ extern void fn_80219E6C(void);
 extern void fn_8021CF08(void);
 extern void fn_802328DC(void);
 extern void fn_8023A60C(void);
-extern void fn_80370320(void);
+extern void world_setGlobalFlag(void);
 extern void fn_80371790(void);
 extern void fn_803731E8(void);
 extern void fn_80378CAC(void);
@@ -1153,7 +1153,7 @@ lbl_fn_80374D64_00000E48:
     li r4, 0xa3
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     b lbl_fn_80374D64_000010E0
     lwz r0, 0x1374(r26)
     cmpwi r0, 0x0
@@ -1162,7 +1162,7 @@ lbl_fn_80374D64_00000E48:
     li r4, 0xa4
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     b lbl_fn_80374D64_000010E0
     lwz r0, 0x13dc(r26)
     cmpwi r0, 0x0
@@ -1171,7 +1171,7 @@ lbl_fn_80374D64_00000E48:
     li r4, 0xbe
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     b lbl_fn_80374D64_000010E0
     lwz r0, 0x1468(r26)
     cmpwi r0, 0x0
@@ -1180,7 +1180,7 @@ lbl_fn_80374D64_00000E48:
     li r4, 0xe1
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     b lbl_fn_80374D64_000010E0
     lwz r0, 0x1358(r26)
     cmpwi r0, 0x0
@@ -1189,7 +1189,7 @@ lbl_fn_80374D64_00000E48:
     li r4, 0x9d
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     b lbl_fn_80374D64_000010E0
     lwz r0, 0x1458(r26)
     cmpwi r0, 0x0
@@ -1198,7 +1198,7 @@ lbl_fn_80374D64_00000E48:
     li r4, 0xdd
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     b lbl_fn_80374D64_000010E0
     lwz r0, 0x145c(r26)
     cmpwi r0, 0x0
@@ -1207,7 +1207,7 @@ lbl_fn_80374D64_00000E48:
     li r4, 0xde
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     b lbl_fn_80374D64_000010E0
     lwz r0, 0x146c(r26)
     cmpwi r0, 0x0
@@ -1216,7 +1216,7 @@ lbl_fn_80374D64_00000E48:
     li r4, 0xe2
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     b lbl_fn_80374D64_000010E0
     lwz r0, 0x1594(r26)
     cmpwi r0, 0x0
@@ -1225,7 +1225,7 @@ lbl_fn_80374D64_00000E48:
     li r4, 0x12c
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     b lbl_fn_80374D64_000010E0
     cmpwi r30, 0x5
     bne lbl_fn_80374D64_00000FF8
@@ -1236,7 +1236,7 @@ lbl_fn_80374D64_00000E48:
     li r4, 0x12d
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     b lbl_fn_80374D64_000010E0
 lbl_fn_80374D64_00000FF8:
     cmpwi r27, 0x39
@@ -1248,7 +1248,7 @@ lbl_fn_80374D64_00000FF8:
     li r4, 0x12e
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     b lbl_fn_80374D64_000010E0
 lbl_fn_80374D64_00001024:
     cmpwi r27, 0x17
@@ -1260,7 +1260,7 @@ lbl_fn_80374D64_00001024:
     li r4, 0x12f
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     b lbl_fn_80374D64_000010E0
 lbl_fn_80374D64_00001050:
     cmpwi r27, 0x32
@@ -1272,7 +1272,7 @@ lbl_fn_80374D64_00001050:
     li r4, 0x130
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     b lbl_fn_80374D64_000010E0
 lbl_fn_80374D64_0000107C:
     cmpwi r27, 0x1a
@@ -1286,7 +1286,7 @@ lbl_fn_80374D64_0000107C:
     li r4, 0x131
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     b lbl_fn_80374D64_000010E0
 lbl_fn_80374D64_000010B0:
     cmpwi r27, 0x3e
@@ -1301,7 +1301,7 @@ lbl_fn_80374D64_000010C0:
     li r4, 0x14e
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_80374D64_000010E0:
     addi r27, r27, 0x1
     addi r25, r25, 0x4
@@ -1320,7 +1320,7 @@ lbl_fn_80374D64_000010E0:
     li r4, 0xa7
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
     b lbl_fn_80374D64_0000114C
 lbl_fn_80374D64_0000112C:
     lwz r0, 0x1470(r26)
@@ -1330,7 +1330,7 @@ lbl_fn_80374D64_0000112C:
     li r4, 0xe3
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_80374D64_0000114C:
     lwz r28, 0x14ac(r28)
 lbl_fn_80374D64_00001150:
@@ -1383,7 +1383,7 @@ lbl_fn_803750E4_000011D8:
     mr r4, r31
     li r5, 0x1
     li r6, 0x0
-    bl fn_80370320
+    bl world_setGlobalFlag
 lbl_fn_803750E4_000011F4:
     lwz r0, 0x114(r1)
     lwz r31, 0x10c(r1)
