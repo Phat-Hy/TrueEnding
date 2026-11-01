@@ -16,9 +16,9 @@ extern void dtor_80084684(void);
 extern void fn_8003E4A4(void);
 extern void fn_8004212C(void);
 extern void fn_80043EAC(void);
-extern void fn_80044134(void);
-extern void fn_8004424C(void);
-extern void fn_80044BB0(void);
+extern void Arms_destructor(void);
+extern void Arms_execute(void);
+extern void Arms_slot3(void);
 extern void fn_80057A64(void);
 extern void fn_8005B9CC(void);
 extern void fn_8005BBF8(void);
@@ -3483,7 +3483,7 @@ asm void fn_8043F0F4(void)
 lbl_fn_8043F0F4_00002E0C:
     mr r3, r30
     li r4, 0x0
-    bl fn_80044134
+    bl Arms_destructor
     cmpwi r31, 0x0
     ble lbl_fn_8043F0F4_00002E28
     mr r3, r30
@@ -3508,7 +3508,7 @@ asm void fn_8043F178(void)
     li r31, 0x0
     stw r30, 0x28(r1)
     mr r30, r3
-    bl fn_8004424C
+    bl Arms_execute
     cmpwi r3, 0x0
     beq lbl_fn_8043F178_00002E70
     li r31, 0x1
@@ -3793,7 +3793,7 @@ lbl_fn_8043F24C_00003250:
     bl fn_8008CD60
 lbl_fn_8043F24C_00003258:
     mr r3, r31
-    bl fn_80044BB0
+    bl Arms_slot3
 lbl_fn_8043F24C_00003260:
     lwz r0, 0x134(r1)
     psq_l f31, 0x128(r1), 0, 0

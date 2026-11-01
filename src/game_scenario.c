@@ -93,8 +93,8 @@ extern u32 lbl_80880B94;
 extern u32 lbl_80880B98;
 
 /* Function declarations */
-void fn_80079038(void);
-void fn_80079040(void);
+void atn_LensFlare_slot3(void);
+void atn_LensFlare_slot4(void);
 void fn_80079044(void);
 void fn_80079090(void);
 void fn_800790D0(void);
@@ -121,14 +121,14 @@ void fn_8007AA30(void);
 void fn_8007AA64(void);
 void fn_8007AB38(void);
 
-asm void fn_80079038(void)
+asm void atn_LensFlare_slot3(void)
 {
     nofralloc
     li r3, 0x1
     blr
 }
 
-asm void fn_80079040(void)
+asm void atn_LensFlare_slot4(void)
 {
     nofralloc
     blr

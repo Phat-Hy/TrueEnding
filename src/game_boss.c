@@ -94,20 +94,20 @@ void fn_80069BF4(void);
 void fn_80069D48(void);
 void fn_80069E50(void);
 void fn_8006A004(void);
-void fn_8006A09C(void);
+void atn_FadeCommon_destructor(void);
 void fn_8006A0F4(void);
 void fn_8006A204(void);
 void fn_8006A250(void);
-void fn_8006A318(void);
-void fn_8006A374(void);
+void atn_FadeColor_destructor(void);
+void atn_FadeColor_draw(void);
 void fn_8006A5A8(void);
-void fn_8006A6BC(void);
-void fn_8006A72C(void);
-void fn_8006A734(void);
+void atn_FadeCapture_destructor(void);
+void atn_FadeCapture_execute(void);
+void atn_FadeCapture_draw(void);
 void fn_8006A900(void);
-void fn_8006A940(void);
-void fn_8006A944(void);
-void fn_8006A94C(void);
+void atn_Fade_slot2(void);
+void atn_Fade_slot1(void);
+void atn_FadeCommon_draw(void);
 void fn_8006A950(void);
 void fn_8006A9A4(void);
 void fn_8006AA20(void);
@@ -131,7 +131,7 @@ void fn_8006BA74(void);
 void fn_8006BA8C(void);
 void fn_8006BB6C(void);
 void fn_8006BBCC(void);
-void fn_8006BC64(void);
+void atn_FileList_destructor(void);
 void fn_8006BD78(void);
 
 asm void fn_80068DB0(void)
@@ -1512,7 +1512,7 @@ lbl_fn_8006A004_000012E4:
     blr
 }
 
-asm void fn_8006A09C(void)
+asm void atn_FadeCommon_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1523,14 +1523,14 @@ asm void fn_8006A09C(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_8006A09C_00001328
+    beq lbl_atn_FadeCommon_destructor_00001328
     li r4, 0x0
     bl atn_Task_destructor
     cmpwi r31, 0x0
-    ble lbl_fn_8006A09C_00001328
+    ble lbl_atn_FadeCommon_destructor_00001328
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8006A09C_00001328:
+lbl_atn_FadeCommon_destructor_00001328:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1703,7 +1703,7 @@ lbl_fn_8006A250_0000154C:
     blr
 }
 
-asm void fn_8006A318(void)
+asm void atn_FadeColor_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1714,16 +1714,16 @@ asm void fn_8006A318(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_8006A318_000015A8
-    beq lbl_fn_8006A318_00001598
+    beq lbl_atn_FadeColor_destructor_000015A8
+    beq lbl_atn_FadeColor_destructor_00001598
     li r4, 0x0
     bl atn_Task_destructor
-lbl_fn_8006A318_00001598:
+lbl_atn_FadeColor_destructor_00001598:
     cmpwi r31, 0x0
-    ble lbl_fn_8006A318_000015A8
+    ble lbl_atn_FadeColor_destructor_000015A8
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8006A318_000015A8:
+lbl_atn_FadeColor_destructor_000015A8:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1733,7 +1733,7 @@ lbl_fn_8006A318_000015A8:
     blr
 }
 
-asm void fn_8006A374(void)
+asm void atn_FadeColor_draw(void)
 {
     nofralloc
     stwu r1, -0x40(r1)
@@ -1749,21 +1749,21 @@ asm void fn_8006A374(void)
     mr r31, r3
     cmpwi r0, 0x0
     stw r4, 0x10(r1)
-    beq lbl_fn_8006A374_000017D8
+    beq lbl_atn_FadeColor_draw_000017D8
     lwz r4, 0x58(r3)
     lwz r5, 0x4c(r3)
     cmpw r5, r4
-    bge lbl_fn_8006A374_00001614
+    bge lbl_atn_FadeColor_draw_00001614
     lwz r4, 0x6c(r3)
-    b lbl_fn_8006A374_00001760
-lbl_fn_8006A374_00001614:
+    b lbl_atn_FadeColor_draw_00001760
+lbl_atn_FadeColor_draw_00001614:
     lwz r6, 0x54(r3)
     add r0, r6, r4
     cmpw r5, r0
-    blt lbl_fn_8006A374_0000162C
+    blt lbl_atn_FadeColor_draw_0000162C
     lwz r4, 0x70(r3)
-    b lbl_fn_8006A374_00001760
-lbl_fn_8006A374_0000162C:
+    b lbl_atn_FadeColor_draw_00001760
+lbl_atn_FadeColor_draw_0000162C:
     subf r4, r4, r5
     xoris r0, r6, 0x8000
     stw r0, 0x14(r1)
@@ -1841,14 +1841,14 @@ lbl_fn_8006A374_0000162C:
     fmadds f1, f3, f1, f0
     bl fn_80695D84
     or r4, r27, r3
-lbl_fn_8006A374_00001760:
+lbl_atn_FadeColor_draw_00001760:
     lwz r0, 0x78(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_8006A374_00001778
+    beq lbl_atn_FadeColor_draw_00001778
     lwz r3, lbl_8087EEB0
     li r0, 0x13
     stw r0, 0xa0(r3)
-lbl_fn_8006A374_00001778:
+lbl_atn_FadeColor_draw_00001778:
     lwz r6, lbl_8087EEE0
     lis r5, lbl_80731408@ha
     lfs f1, lbl_80880A10
@@ -1869,11 +1869,11 @@ lbl_fn_8006A374_00001778:
     bl fn_80060D58
     lwz r0, 0x78(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_8006A374_000017D8
+    beq lbl_atn_FadeColor_draw_000017D8
     lwz r3, lbl_8087EEB0
     li r0, 0x12
     stw r0, 0xa0(r3)
-lbl_fn_8006A374_000017D8:
+lbl_atn_FadeColor_draw_000017D8:
     addi r11, r1, 0x30
     psq_l f31, 0x38(r1), 0, 0
     lfd f31, 0x30(r1)
@@ -1960,7 +1960,7 @@ lbl_fn_8006A5A8_000018F0:
     blr
 }
 
-asm void fn_8006A6BC(void)
+asm void atn_FadeCapture_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1971,21 +1971,21 @@ asm void fn_8006A6BC(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_8006A6BC_00001960
+    beq lbl_atn_FadeCapture_destructor_00001960
     li r4, -0x1
     addi r3, r3, 0x7c
     bl fn_800D5808
     cmpwi r30, 0x0
-    beq lbl_fn_8006A6BC_00001950
+    beq lbl_atn_FadeCapture_destructor_00001950
     mr r3, r30
     li r4, 0x0
     bl atn_Task_destructor
-lbl_fn_8006A6BC_00001950:
+lbl_atn_FadeCapture_destructor_00001950:
     cmpwi r31, 0x0
-    ble lbl_fn_8006A6BC_00001960
+    ble lbl_atn_FadeCapture_destructor_00001960
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8006A6BC_00001960:
+lbl_atn_FadeCapture_destructor_00001960:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1995,14 +1995,14 @@ lbl_fn_8006A6BC_00001960:
     blr
 }
 
-asm void fn_8006A72C(void)
+asm void atn_FadeCapture_execute(void)
 {
     nofralloc
     li r3, 0x1
     blr
 }
 
-asm void fn_8006A734(void)
+asm void atn_FadeCapture_draw(void)
 {
     nofralloc
     stwu r1, -0x40(r1)
@@ -2018,21 +2018,21 @@ asm void fn_8006A734(void)
     mr r31, r3
     cmpwi r0, 0x0
     stw r4, 0x10(r1)
-    beq lbl_fn_8006A734_00001B30
+    beq lbl_atn_FadeCapture_draw_00001B30
     lwz r4, 0x58(r3)
     lwz r5, 0x4c(r3)
     cmpw r5, r4
-    bge lbl_fn_8006A734_000019D4
+    bge lbl_atn_FadeCapture_draw_000019D4
     lwz r4, 0x6c(r3)
-    b lbl_fn_8006A734_00001B20
-lbl_fn_8006A734_000019D4:
+    b lbl_atn_FadeCapture_draw_00001B20
+lbl_atn_FadeCapture_draw_000019D4:
     lwz r6, 0x54(r3)
     add r0, r6, r4
     cmpw r5, r0
-    blt lbl_fn_8006A734_000019EC
+    blt lbl_atn_FadeCapture_draw_000019EC
     lwz r4, 0x70(r3)
-    b lbl_fn_8006A734_00001B20
-lbl_fn_8006A734_000019EC:
+    b lbl_atn_FadeCapture_draw_00001B20
+lbl_atn_FadeCapture_draw_000019EC:
     subf r4, r4, r5
     xoris r0, r6, 0x8000
     stw r0, 0x14(r1)
@@ -2110,12 +2110,12 @@ lbl_fn_8006A734_000019EC:
     fmadds f1, f3, f1, f0
     bl fn_80695D84
     or r4, r27, r3
-lbl_fn_8006A734_00001B20:
+lbl_atn_FadeCapture_draw_00001B20:
     lwz r3, lbl_8087EEB0
     addi r5, r31, 0x7c
     lfs f1, 0x74(r31)
     bl fn_8005ED6C
-lbl_fn_8006A734_00001B30:
+lbl_atn_FadeCapture_draw_00001B30:
     addi r11, r1, 0x30
     psq_l f31, 0x38(r1), 0, 0
     lfd f31, 0x30(r1)
@@ -2147,20 +2147,20 @@ asm void fn_8006A900(void)
     blr
 }
 
-asm void fn_8006A940(void)
+asm void atn_Fade_slot2(void)
 {
     nofralloc
     b fn_8006A0F4
 }
 
-asm void fn_8006A944(void)
+asm void atn_Fade_slot1(void)
 {
     nofralloc
     li r3, 0x1
     blr
 }
 
-asm void fn_8006A94C(void)
+asm void atn_FadeCommon_draw(void)
 {
     nofralloc
     blr
@@ -3643,7 +3643,7 @@ lbl_fn_8006BBCC_00002E8C:
     blr
 }
 
-asm void fn_8006BC64(void)
+asm void atn_FileList_destructor(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -3653,7 +3653,7 @@ asm void fn_8006BC64(void)
     stmw r27, 0xc(r1)
     mr r30, r3
     mr r31, r4
-    beq lbl_fn_8006BC64_00002FB0
+    beq lbl_atn_FileList_destructor_00002FB0
     lwz r28, 0xc(r3)
     lis r7, lbl_80777BC0@ha
     lwz r5, 0x8(r3)
@@ -3665,58 +3665,58 @@ asm void fn_8006BC64(void)
     add r29, r5, r4
     stw r6, 0x4(r3)
     stw r0, 0xc(r3)
-    b lbl_fn_8006BC64_00002F2C
-lbl_fn_8006BC64_00002F04:
+    b lbl_atn_FileList_destructor_00002F2C
+lbl_atn_FileList_destructor_00002F04:
     subic. r29, r29, 0x10
-    beq lbl_fn_8006BC64_00002F28
+    beq lbl_atn_FileList_destructor_00002F28
     addic. r0, r29, 0x4
-    beq lbl_fn_8006BC64_00002F28
+    beq lbl_atn_FileList_destructor_00002F28
     lwz r0, 0x4(r29)
     srwi. r0, r0, 31
-    beq lbl_fn_8006BC64_00002F28
+    beq lbl_atn_FileList_destructor_00002F28
     lwz r3, 0xc(r29)
     bl dtor_80084684
-lbl_fn_8006BC64_00002F28:
+lbl_atn_FileList_destructor_00002F28:
     subi r28, r28, 0x1
-lbl_fn_8006BC64_00002F2C:
+lbl_atn_FileList_destructor_00002F2C:
     cmpwi r28, 0x0
-    bne lbl_fn_8006BC64_00002F04
+    bne lbl_atn_FileList_destructor_00002F04
     addic. r28, r30, 0x8
-    beq lbl_fn_8006BC64_00002FA0
-    beq lbl_fn_8006BC64_00002FA0
-    beq lbl_fn_8006BC64_00002FA0
+    beq lbl_atn_FileList_destructor_00002FA0
+    beq lbl_atn_FileList_destructor_00002FA0
+    beq lbl_atn_FileList_destructor_00002FA0
     lwz r4, 0x0(r28)
     cmpwi r4, 0x0
-    beq lbl_fn_8006BC64_00002FA0
+    beq lbl_atn_FileList_destructor_00002FA0
     lwz r27, 0x4(r28)
     slwi r3, r27, 4
     subf r0, r27, r27
     stw r0, 0x4(r28)
     add r29, r4, r3
-    b lbl_fn_8006BC64_00002F90
-lbl_fn_8006BC64_00002F68:
+    b lbl_atn_FileList_destructor_00002F90
+lbl_atn_FileList_destructor_00002F68:
     subic. r29, r29, 0x10
-    beq lbl_fn_8006BC64_00002F8C
+    beq lbl_atn_FileList_destructor_00002F8C
     addic. r0, r29, 0x4
-    beq lbl_fn_8006BC64_00002F8C
+    beq lbl_atn_FileList_destructor_00002F8C
     lwz r0, 0x4(r29)
     srwi. r0, r0, 31
-    beq lbl_fn_8006BC64_00002F8C
+    beq lbl_atn_FileList_destructor_00002F8C
     lwz r3, 0xc(r29)
     bl dtor_80084684
-lbl_fn_8006BC64_00002F8C:
+lbl_atn_FileList_destructor_00002F8C:
     subi r27, r27, 0x1
-lbl_fn_8006BC64_00002F90:
+lbl_atn_FileList_destructor_00002F90:
     cmpwi r27, 0x0
-    bne lbl_fn_8006BC64_00002F68
+    bne lbl_atn_FileList_destructor_00002F68
     lwz r3, 0x0(r28)
     bl dtor_80084684
-lbl_fn_8006BC64_00002FA0:
+lbl_atn_FileList_destructor_00002FA0:
     cmpwi r31, 0x0
-    ble lbl_fn_8006BC64_00002FB0
+    ble lbl_atn_FileList_destructor_00002FB0
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8006BC64_00002FB0:
+lbl_atn_FileList_destructor_00002FB0:
     mr r3, r30
     lmw r27, 0xc(r1)
     lwz r0, 0x24(r1)

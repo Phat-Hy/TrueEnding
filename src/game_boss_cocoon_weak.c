@@ -10,7 +10,7 @@ extern void fn_80013F78(void);
 extern void fn_8006A9A4(void);
 extern void fn_8006B174(void);
 extern void fn_8006BBCC(void);
-extern void fn_8006BC64(void);
+extern void atn_FileList_destructor(void);
 extern void fn_8006C300(void);
 extern void fn_8006C3F0(void);
 extern void fn_8006D008(void);
@@ -235,7 +235,7 @@ lbl_fn_8046D1EC_000001CC:
     bl strcpy
     addi r3, r1, 0x54
     li r4, -0x1
-    bl fn_8006BC64
+    bl atn_FileList_destructor
     lwz r0, 0x48(r1)
     srwi. r0, r0, 31
     beq lbl_fn_8046D1EC_00000628
@@ -245,7 +245,7 @@ lbl_fn_8046D1EC_000001CC:
 lbl_fn_8046D1EC_000001F4:
     addi r3, r1, 0x54
     li r4, -0x1
-    bl fn_8006BC64
+    bl atn_FileList_destructor
     lwz r0, 0x48(r1)
     srwi. r0, r0, 31
     beq lbl_fn_8046D1EC_00000214

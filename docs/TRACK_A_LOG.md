@@ -23,6 +23,48 @@ Next:     the 3-5 functions worth naming or decompiling next
 
 <!-- newest first -->
 
+### 2026-11-01 — Batch 10: atn::Fade*, atn::LensFlare, ArenaTask, AreaEffConfig, and Arms Renames (25 functions)
+
+Numbers:  progress before -> after: 99.30 % -> 99.30 % (7,425,512 / 7,477,608 bytes, 18,054 / 18,155 functions)
+Named:
+- fn_8006A6BC -> atn_FadeCapture_destructor (evidence: virtual destructor slot 0 in vtable lbl_80777B08 [RTTI atn::FadeCapture at 0x80777B40])
+- fn_8006A72C -> atn_FadeCapture_execute (evidence: virtual execute slot 1 in vtable lbl_80777B08 [RTTI atn::FadeCapture])
+- fn_8006A940 -> atn_Fade_slot2 (evidence: virtual slot 2 in vtable lbl_80777B08, lbl_80777B48, lbl_80777B88 [shared across atn::Fade*])
+- fn_8006A734 -> atn_FadeCapture_draw (evidence: virtual draw slot 3 in vtable lbl_80777B08 [RTTI atn::FadeCapture])
+- fn_8006A318 -> atn_FadeColor_destructor (evidence: virtual destructor slot 0 in vtable lbl_80777B48 [RTTI atn::FadeColor at 0x80777B80])
+- fn_8006A944 -> atn_Fade_slot1 (evidence: virtual slot 1 in vtable lbl_80777B48 and lbl_80777B88)
+- fn_8006A374 -> atn_FadeColor_draw (evidence: virtual draw slot 3 in vtable lbl_80777B48 [RTTI atn::FadeColor])
+- fn_8006A09C -> atn_FadeCommon_destructor (evidence: virtual destructor slot 0 in vtable lbl_80777B88 [RTTI atn::FadeCommon at 0x80777BB8])
+- fn_8006A94C -> atn_FadeCommon_draw (evidence: virtual draw slot 3 in vtable lbl_80777B88 [RTTI atn::FadeCommon])
+- fn_8006BC64 -> atn_FileList_destructor (evidence: virtual destructor slot 0 in vtable lbl_80777BC0 [RTTI atn::FileList at 0x80777BD0])
+- fn_8007741C -> atn_LensFlare_destructor (evidence: virtual destructor slot 0 in vtable lbl_80777D08 [RTTI atn::LensFlare at 0x80777D38])
+- fn_80077548 -> atn_LensFlare_draw (evidence: virtual draw slot 1 in vtable lbl_80777D08 [RTTI atn::LensFlare])
+- fn_80079038 -> atn_LensFlare_slot3 (evidence: virtual slot 2 in vtable lbl_80777D08 [RTTI atn::LensFlare])
+- fn_80079040 -> atn_LensFlare_slot4 (evidence: virtual slot 3 in vtable lbl_80777D08 [RTTI atn::LensFlare])
+- fn_80043214 -> ArenaTask_constructor (evidence: initializes ArenaTask, calls atn_Task_constructor, assigns vtable lbl_80777358 [RTTI ArenaTask at 0x80777388])
+- fn_800434A8 -> ArenaTask_destructor (evidence: virtual destructor slot 0 in vtable lbl_80777358 [RTTI ArenaTask]; calls atn_Task_destructor and deallocates memory)
+- fn_80043508 -> ArenaTask_slot1 (evidence: virtual slot 1 in vtable lbl_80777358 [RTTI ArenaTask]; branches to fn_800D3FA4 thunk)
+- fn_8004350C -> ArenaTask_execute (evidence: virtual execute slot 2 in vtable lbl_80777358 [RTTI ArenaTask])
+- fn_800437A4 -> ArenaTask_draw (evidence: virtual draw slot 3 in vtable lbl_80777358 [RTTI ArenaTask])
+- fn_80041C4C -> AreaEffConfig_destructor (evidence: virtual destructor slot 0 in vtable lbl_807772E8 [RTTI AreaEffConfig at 0x80777318]; destroys nested atn::LH_Efp and atn::Task)
+- fn_80041CE4 -> AreaEffConfig_execute (evidence: virtual execute slot 1 in vtable lbl_807772E8 [RTTI AreaEffConfig]; checks effect handle readiness and updates task status flags)
+- fn_80044134 -> Arms_destructor (evidence: virtual destructor slot 0 in vtable lbl_80777494 [RTTI Arms at 0x807774B0]; cleans up weapon collision and model components)
+- fn_8004424C -> Arms_execute (evidence: virtual execute slot 1 in vtable lbl_80777494 [RTTI Arms])
+- fn_80044BB0 -> Arms_slot3 (evidence: virtual slot 2 in vtable lbl_80777494 [RTTI Arms])
+- fn_800457A0 -> Arms_slot4 (evidence: virtual slot 3 in vtable lbl_80777494 [RTTI Arms]; returns immediately blr)
+Decompiled: none in this unit
+Notes:
+- Resolves Track B review on tools/patch_ldscript.py:
+  - tools/project.py split rule invokes tools/patch_ldscript.py to inject essential linker symbols into build/SLSEXJ/ldscript.lcf.
+  - Committing tools/patch_ldscript.py ensures reproducible splits across clean worktrees without linker script failures.
+  - Verified report.json before/after: exactly 7,425,512 / 7,477,608 bytes (18,054 / 18,155 functions, 99.30% matched).
+- Full local label hygiene: all 269 local lbl_fn_* assembly labels inside caller asm blocks were simultaneously normalized to lbl_<new>_* across 8 source files.
+Next:
+1. atn_LH_Texture_constructor (fn_800D5738, 120 B) and atn_LH_Texture_destructor (fn_800D57B0, 88 B) -> decompile to C in src/game_depth.c.
+2. fn_800D7278 (1252 B): character texture bake (EFB copy + GXDrawDone + readback).
+3. Batch 11 renames: Event::Puppeteer<atn::Model> and Event::Puppeteer<CharaTask> (lbl_8072F8A8, lbl_8072F8C8) and AI::Script::CharaAi family.
+
+
 ### 2026-11-01 â€” Batch 9: atn::DrawHelper Immediate-Mode 2D/3D Rendering Commands Renames (25 functions)
 
 Numbers:  progress before -> after: 99.30 % -> 99.30 % (7,425,512 / 7,477,608 bytes, 18,054 / 18,155 functions)

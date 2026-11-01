@@ -87,10 +87,10 @@ void fn_80077058(void);
 void fn_8007708C(void);
 void fn_80077160(void);
 void fn_80077418(void);
-void fn_8007741C(void);
+void atn_LensFlare_destructor(void);
 void fn_800774D4(void);
 void fn_80077534(void);
-void fn_80077548(void);
+void atn_LensFlare_draw(void);
 void fn_8007786C(void);
 void fn_80078938(void);
 
@@ -368,7 +368,7 @@ asm void fn_80077418(void)
     blr
 }
 
-asm void fn_8007741C(void)
+asm void atn_LensFlare_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -379,17 +379,17 @@ asm void fn_8007741C(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_8007741C_00000460
+    beq lbl_atn_LensFlare_destructor_00000460
     addic. r0, r3, 0x140
-    beq lbl_fn_8007741C_0000040C
+    beq lbl_atn_LensFlare_destructor_0000040C
     lwz r4, 0x140(r3)
     cmpwi r4, 0x0
-    beq lbl_fn_8007741C_0000040C
+    beq lbl_atn_LensFlare_destructor_0000040C
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
-    beq lbl_fn_8007741C_0000040C
+    beq lbl_atn_LensFlare_destructor_0000040C
     bl fn_800897D8
-lbl_fn_8007741C_0000040C:
+lbl_atn_LensFlare_destructor_0000040C:
     lis r4, fn_800D5808@ha
     addi r3, r30, 0x20
     addi r4, r4, fn_800D5808@l
@@ -397,23 +397,23 @@ lbl_fn_8007741C_0000040C:
     li r6, 0x6
     bl fn_806959D8
     addic. r0, r30, 0x18
-    beq lbl_fn_8007741C_00000450
+    beq lbl_atn_LensFlare_destructor_00000450
     lwz r3, 0x1c(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_8007741C_00000444
-    beq lbl_fn_8007741C_00000444
+    beq lbl_atn_LensFlare_destructor_00000444
+    beq lbl_atn_LensFlare_destructor_00000444
     subi r3, r3, 0x10
     bl fn_80084C24
-lbl_fn_8007741C_00000444:
+lbl_atn_LensFlare_destructor_00000444:
     li r0, 0x0
     stw r0, 0x1c(r30)
     stw r0, 0x18(r30)
-lbl_fn_8007741C_00000450:
+lbl_atn_LensFlare_destructor_00000450:
     cmpwi r31, 0x0
-    ble lbl_fn_8007741C_00000460
+    ble lbl_atn_LensFlare_destructor_00000460
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8007741C_00000460:
+lbl_atn_LensFlare_destructor_00000460:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -463,7 +463,7 @@ asm void fn_80077534(void)
     b fn_800BDB58
 }
 
-asm void fn_80077548(void)
+asm void atn_LensFlare_draw(void)
 {
     nofralloc
     stwu r1, -0xd0(r1)
@@ -480,7 +480,7 @@ asm void fn_80077548(void)
     bl fn_800BDB40
     lwz r0, 0x4(r30)
     cmpwi r0, 0x1
-    bne lbl_fn_80077548_000005B8
+    bne lbl_atn_LensFlare_draw_000005B8
     lwz r3, 0x2fc(r31)
     li r4, 0x0
     bl fn_800C2448
@@ -516,7 +516,7 @@ asm void fn_80077548(void)
     stfs f2, 0x4c(r1)
     psq_st f1, 0x8(r30), 0, 0
     stfs f2, 0x10(r30)
-lbl_fn_80077548_000005B8:
+lbl_atn_LensFlare_draw_000005B8:
     psq_l f1, 0x8(r30), 0, 0
     addi r4, r1, 0x50
     lfs f2, 0x10(r30)
@@ -527,7 +527,7 @@ lbl_fn_80077548_000005B8:
     stfs f0, 0x5c(r1)
     bl fn_8004FF58
     cmpwi r3, 0x0
-    beq lbl_fn_80077548_000007F4
+    beq lbl_atn_LensFlare_draw_000007F4
     lfs f5, 0x5c(r1)
     addi r31, r1, 0x88
     lfs f4, 0x58(r1)
@@ -568,7 +568,7 @@ lbl_fn_80077548_000005B8:
     lfs f0, lbl_80880AD4
     fmr f31, f1
     fcmpu cr0, f0, f1
-    beq lbl_fn_80077548_000007F4
+    beq lbl_atn_LensFlare_draw_000007F4
     mr r4, r31
     addi r3, r1, 0x70
     bl fn_8006FEBC
@@ -598,58 +598,58 @@ lbl_fn_80077548_000005B8:
     stw r3, 0xa8(r1)
     lfd f0, 0xa8(r1)
     fsubs f9, f0, f3
-    bge lbl_fn_80077548_00000704
-    b lbl_fn_80077548_00000714
-lbl_fn_80077548_00000704:
+    bge lbl_atn_LensFlare_draw_00000704
+    b lbl_atn_LensFlare_draw_00000714
+lbl_atn_LensFlare_draw_00000704:
     fcmpo cr0, f6, f5
-    ble lbl_fn_80077548_00000710
+    ble lbl_atn_LensFlare_draw_00000710
     fmr f6, f5
-lbl_fn_80077548_00000710:
+lbl_atn_LensFlare_draw_00000710:
     fmr f4, f6
-lbl_fn_80077548_00000714:
+lbl_atn_LensFlare_draw_00000714:
     lfs f0, 0x74(r1)
     lfs f3, lbl_8087D744
     stfs f4, 0x70(r1)
     fcmpo cr0, f0, f3
-    bge lbl_fn_80077548_0000072C
-    b lbl_fn_80077548_0000073C
-lbl_fn_80077548_0000072C:
+    bge lbl_atn_LensFlare_draw_0000072C
+    b lbl_atn_LensFlare_draw_0000073C
+lbl_atn_LensFlare_draw_0000072C:
     fcmpo cr0, f0, f9
-    ble lbl_fn_80077548_00000738
+    ble lbl_atn_LensFlare_draw_00000738
     fmr f0, f9
-lbl_fn_80077548_00000738:
+lbl_atn_LensFlare_draw_00000738:
     fmr f3, f0
-lbl_fn_80077548_0000073C:
+lbl_atn_LensFlare_draw_0000073C:
     lfs f0, 0x7c(r1)
     lfs f4, lbl_8087D748
     stfs f3, 0x74(r1)
     fcmpo cr0, f0, f4
-    bge lbl_fn_80077548_00000754
-    b lbl_fn_80077548_00000768
-lbl_fn_80077548_00000754:
+    bge lbl_atn_LensFlare_draw_00000754
+    b lbl_atn_LensFlare_draw_00000768
+lbl_atn_LensFlare_draw_00000754:
     fcmpo cr0, f0, f5
-    ble lbl_fn_80077548_00000760
-    b lbl_fn_80077548_00000764
-lbl_fn_80077548_00000760:
+    ble lbl_atn_LensFlare_draw_00000760
+    b lbl_atn_LensFlare_draw_00000764
+lbl_atn_LensFlare_draw_00000760:
     fmr f5, f0
-lbl_fn_80077548_00000764:
+lbl_atn_LensFlare_draw_00000764:
     fmr f4, f5
-lbl_fn_80077548_00000768:
+lbl_atn_LensFlare_draw_00000768:
     lfs f0, 0x80(r1)
     lfs f7, lbl_8087D74C
     stfs f4, 0x7c(r1)
     fcmpo cr0, f0, f7
-    bge lbl_fn_80077548_00000780
-    b lbl_fn_80077548_00000794
-lbl_fn_80077548_00000780:
+    bge lbl_atn_LensFlare_draw_00000780
+    b lbl_atn_LensFlare_draw_00000794
+lbl_atn_LensFlare_draw_00000780:
     fcmpo cr0, f0, f9
-    ble lbl_fn_80077548_0000078C
-    b lbl_fn_80077548_00000790
-lbl_fn_80077548_0000078C:
+    ble lbl_atn_LensFlare_draw_0000078C
+    b lbl_atn_LensFlare_draw_00000790
+lbl_atn_LensFlare_draw_0000078C:
     fmr f9, f0
-lbl_fn_80077548_00000790:
+lbl_atn_LensFlare_draw_00000790:
     fmr f7, f9
-lbl_fn_80077548_00000794:
+lbl_atn_LensFlare_draw_00000794:
     frsp f0, f7
     lfs f3, 0x74(r1)
     lfs f6, 0x70(r1)
@@ -665,19 +665,19 @@ lbl_fn_80077548_00000794:
     fsubs f0, f0, f4
     fsubs f0, f3, f0
     fcmpo cr0, f0, f1
-    bge lbl_fn_80077548_000007D8
-    b lbl_fn_80077548_000007EC
-lbl_fn_80077548_000007D8:
+    bge lbl_atn_LensFlare_draw_000007D8
+    b lbl_atn_LensFlare_draw_000007EC
+lbl_atn_LensFlare_draw_000007D8:
     lfs f1, lbl_8087D754
     fcmpo cr0, f0, f1
-    ble lbl_fn_80077548_000007E8
-    b lbl_fn_80077548_000007EC
-lbl_fn_80077548_000007E8:
+    ble lbl_atn_LensFlare_draw_000007E8
+    b lbl_atn_LensFlare_draw_000007EC
+lbl_atn_LensFlare_draw_000007E8:
     fmr f1, f0
-lbl_fn_80077548_000007EC:
+lbl_atn_LensFlare_draw_000007EC:
     mr r3, r30
     bl fn_80078938
-lbl_fn_80077548_000007F4:
+lbl_atn_LensFlare_draw_000007F4:
     lwz r0, 0xd4(r1)
     psq_l f31, 0xc8(r1), 0, 0
     lfd f31, 0xc0(r1)

@@ -12,8 +12,8 @@ extern void fn_800184F4(void);
 extern void fn_80018608(void);
 extern void fn_8003E918(void);
 extern void fn_80043EAC(void);
-extern void fn_80044134(void);
-extern void fn_8004424C(void);
+extern void Arms_destructor(void);
+extern void Arms_execute(void);
 extern void fn_8005DFC8(void);
 extern void fn_80061824(void);
 extern void fn_8006EF48(void);
@@ -658,7 +658,7 @@ asm void fn_805A6AC0(void)
     mr r30, r3
     beq lbl_fn_805A6AC0_000006F8
     li r4, 0x0
-    bl fn_80044134
+    bl Arms_destructor
     cmpwi r31, 0x0
     ble lbl_fn_805A6AC0_000006F8
     mr r3, r30
@@ -681,7 +681,7 @@ asm void fn_805A6B18(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     li r31, 0x0
-    bl fn_8004424C
+    bl Arms_execute
     cmpwi r3, 0x0
     beq lbl_fn_805A6B18_00000738
     li r31, 0x1
