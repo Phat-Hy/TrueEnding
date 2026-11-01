@@ -39,7 +39,7 @@ extern void fn_80615190(void);
 extern void GXCopyTex(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
-extern void fn_80617DA0(void);
+extern void GXSetZCompLoc(void);
 extern void fn_80618570(void);
 
 /* External data declarations */
@@ -2157,7 +2157,7 @@ lbl_fn_800B8F40_00001F64:
     lwz r3, lbl_8087EEE0
     bl fn_80075DEC
     li r3, 0x1
-    bl fn_80617DA0
+    bl GXSetZCompLoc
     lwz r3, lbl_8087EFB4
     lwz r0, 0x74(r31)
     stw r0, 0x104(r3)

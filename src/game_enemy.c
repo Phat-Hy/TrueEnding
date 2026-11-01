@@ -13,7 +13,7 @@ extern void fn_8006D7B0(void);
 extern void fn_8006F17C(void);
 extern void fn_80072914(void);
 extern void fn_80074EC8(void);
-extern void fn_800761A8(void);
+extern void gx_applyRenderState(void);
 extern void fn_800763FC(void);
 extern void fn_80076760(void);
 extern void fn_80076BE4(void);
@@ -162,7 +162,7 @@ asm void atn_ComDrawLine_execute(void)
     li r7, 0x0
     bl fn_80613520
     lwz r3, lbl_8087EEE0
-    bl fn_800761A8
+    bl gx_applyRenderState
     lwz r0, 0x14(r31)
     li r4, 0x0
     lwz r3, 0xc(r31)
@@ -234,7 +234,7 @@ lbl_atn_ComDrawLine_execute_000001A4:
     li r7, 0x0
     bl fn_80613520
     lwz r3, lbl_8087EEE0
-    bl fn_800761A8
+    bl gx_applyRenderState
     lwz r0, 0x14(r31)
     li r4, 0x0
     lwz r3, 0xc(r31)
@@ -429,7 +429,7 @@ lbl_atn_ComDrawTexture_execute_000004DC:
     bl fn_80613520
 lbl_atn_ComDrawTexture_execute_00000524:
     lwz r3, lbl_8087EEE0
-    bl fn_800761A8
+    bl gx_applyRenderState
     li r3, 0x80
     li r4, 0x0
     li r5, 0x4
@@ -529,7 +529,7 @@ asm void atn_ComDrawTextureAdd_execute(void)
     stw r28, 0x40(r1)
     mr r28, r4
     lwz r3, lbl_8087EEE0
-    bl fn_800761A8
+    bl gx_applyRenderState
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x1
@@ -832,7 +832,7 @@ asm void atn_ComDrawTextureMask_execute(void)
     stw r28, 0x40(r1)
     mr r28, r4
     lwz r3, lbl_8087EEE0
-    bl fn_800761A8
+    bl gx_applyRenderState
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x2
@@ -1118,7 +1118,7 @@ lbl_atn_ComDrawTextureMask_execute_00000ED8:
     bl fn_80613520
 lbl_atn_ComDrawTextureMask_execute_00000F38:
     lwz r3, lbl_8087EEE0
-    bl fn_800761A8
+    bl gx_applyRenderState
     li r3, 0x80
     li r4, 0x0
     li r5, 0x4
@@ -1705,7 +1705,7 @@ lbl_atn_ComDrawTextureMono_execute_000017E8:
     bl fn_80613520
 lbl_atn_ComDrawTextureMono_execute_00001830:
     lwz r3, lbl_8087EEE0
-    bl fn_800761A8
+    bl gx_applyRenderState
     li r3, 0x80
     li r4, 0x0
     li r5, 0x4
@@ -1848,7 +1848,7 @@ asm void atn_ComDrawTextureMaskMono_execute(void)
     stw r0, 0x108(r1)
     lwz r3, lbl_8087EEE0
     stw r0, 0x110(r1)
-    bl fn_800761A8
+    bl gx_applyRenderState
     lis r7, lbl_80731140@ha
     lwzu r4, lbl_80731140@l(r7)
     stw r4, 0x28(r1)
@@ -2393,7 +2393,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00002244:
     bl fn_80613520
 lbl_atn_ComDrawTextureMaskMono_execute_000022A4:
     lwz r3, lbl_8087EEE0
-    bl fn_800761A8
+    bl gx_applyRenderState
     li r3, 0x80
     li r4, 0x0
     li r5, 0x4
@@ -3610,7 +3610,7 @@ lbl_atn_ComDrawD3TextureMask_execute_00003424:
     li r7, 0x0
     bl fn_80613520
     lwz r3, lbl_8087EEE0
-    bl fn_800761A8
+    bl gx_applyRenderState
     lwz r0, 0x14(r31)
     li r4, 0x0
     lwz r3, 0xc(r31)
@@ -3674,7 +3674,7 @@ asm void atn_ComDrawWindow_execute(void)
     mr r30, r3
     lwz r3, lbl_8087EEE0
     mr r29, r4
-    bl fn_800761A8
+    bl gx_applyRenderState
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x2
@@ -3975,7 +3975,7 @@ lbl_atn_ComDrawWindow_execute_00003A08:
     bl fn_800763FC
 lbl_atn_ComDrawWindow_execute_00003A10:
     lwz r3, lbl_8087EEE0
-    bl fn_800761A8
+    bl gx_applyRenderState
     li r3, 0x80
     li r4, 0x0
     li r5, 0x4

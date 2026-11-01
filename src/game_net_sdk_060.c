@@ -21,8 +21,8 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_805F3130(void);
-extern void fn_805F3210(void);
+extern void OSLockMutex(void);
+extern void OSUnlockMutex(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern void fn_80705450(void);
@@ -1277,12 +1277,12 @@ asm void fn_8071CE70(void)
     lwz r30, 0xe2c(r29)
     addi r31, r30, 0x10
     mr r3, r31
-    bl fn_805F3130
+    bl OSLockMutex
     lwz r0, 0x4(r30)
     cmpwi r0, 0x0
     bne lbl_fn_8071CE70_00000F38
     mr r3, r31
-    bl fn_805F3210
+    bl OSUnlockMutex
     b lbl_fn_8071CE70_00000F70
 lbl_fn_8071CE70_00000F38:
     addi r3, r30, 0x4
@@ -1298,7 +1298,7 @@ lbl_fn_8071CE70_00000F38:
     mr r4, r29
     bl fn_8070F130
     mr r3, r31
-    bl fn_805F3210
+    bl OSUnlockMutex
 lbl_fn_8071CE70_00000F70:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1363,7 +1363,7 @@ lbl_fn_8071CF70_00001034:
     lwz r30, 0xe2c(r3)
     addi r31, r30, 0x10
     mr r3, r31
-    bl fn_805F3130
+    bl OSLockMutex
     addi r28, r28, 0xf0
     addi r3, r30, 0x4
     mr r4, r28
@@ -1396,7 +1396,7 @@ lbl_fn_8071CF70_00001098:
     addi r4, r1, 0x8
     bl fn_807252A0
     mr r3, r31
-    bl fn_805F3210
+    bl OSUnlockMutex
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

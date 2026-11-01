@@ -70,7 +70,7 @@ extern void fn_80617340(void);
 extern void fn_80617880(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
-extern void fn_80617E00(void);
+extern void GXSetZMode(void);
 extern void fn_80618290(void);
 extern void GXLoadPosMtxImm(void);
 extern void GXSetCurrentMtx(void);
@@ -1643,7 +1643,7 @@ lbl_fn_80364BE8_0000149C:
     li r3, 0x1
     li r4, 0x7
     li r5, 0x1
-    bl fn_80617E00
+    bl GXSetZMode
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x1

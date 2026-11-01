@@ -32,7 +32,7 @@ void fn_80616610(void);
 void fn_80616640(void);
 void GXInitTexCacheRegion(void);
 void GXInitTlutRegion(void);
-void fn_806167B0(void);
+void GXDrawDone(void);
 void fn_80616800(void);
 void fn_80616820(void);
 void fn_80616840(void);
@@ -378,7 +378,7 @@ asm void GXInitTlutRegion(void)
     blr
 }
 
-asm void fn_806167B0(void)
+asm void GXDrawDone(void)
 {
     nofralloc
     stwu r1, -0x10(r1)

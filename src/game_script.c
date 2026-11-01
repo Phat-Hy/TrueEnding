@@ -44,13 +44,13 @@ extern void fn_806050D0(void);
 extern void fn_80605140(void);
 extern void fn_806052C0(void);
 extern void fn_80607120(void);
-extern void fn_80612A60(void);
-extern void fn_80612AF0(void);
+extern void GXGetFifoStatus(void);
+extern void GXGetFifoCount(void);
 extern void fn_80612B10(void);
 extern void fn_80612B60(void);
 extern void fn_80612E70(void);
 extern void fn_80613950(void);
-extern void fn_80613C60(void);
+extern void GXFlush(void);
 extern void fn_80613FF0(void);
 extern void fn_80614190(void);
 extern void fn_80614B20(void);
@@ -66,10 +66,10 @@ extern void fn_80615400(void);
 extern void GXCopyDisp(void);
 extern void GXCopyTex(void);
 extern void fn_80616400(void);
-extern void fn_806167B0(void);
-extern void fn_80617DA0(void);
-extern void fn_80617E00(void);
-extern void fn_80617E70(void);
+extern void GXDrawDone(void);
+extern void GXSetZCompLoc(void);
+extern void GXSetZMode(void);
+extern void GXSetBlendMode(void);
 extern void fn_80618290(void);
 extern void fn_80618570(void);
 extern void fn_806185C0(void);
@@ -3040,12 +3040,12 @@ lbl_fn_800713D4_000026B4:
     beq lbl_fn_800713D4_00002930
     li r3, 0x2
     li r4, 0x0
-    bl fn_80617E70
+    bl GXSetBlendMode
     b lbl_fn_800713D4_0000293C
 lbl_fn_800713D4_00002930:
     li r3, 0x0
     li r4, 0x0
-    bl fn_80617E70
+    bl GXSetBlendMode
 lbl_fn_800713D4_0000293C:
     lwz r3, 0x74(r30)
     li r4, 0x1
@@ -3205,7 +3205,7 @@ lbl_fn_8007192C_00002A24:
     mr r6, r28
     bl fn_806185C0
     bl fn_80613950
-    bl fn_806167B0
+    bl GXDrawDone
     addi r11, r1, 0x40
     bl _restgpr_27
     lwz r0, 0x44(r1)
@@ -3225,16 +3225,16 @@ asm void fn_80071AFC(void)
     stmw r27, 0x1c(r1)
     mr r27, r3
     li r3, 0x1
-    bl fn_80617E00
+    bl GXSetZMode
     li r3, 0x1
-    bl fn_80617DA0
-    bl fn_80613C60
+    bl GXSetZCompLoc
+    bl GXFlush
     lwz r3, 0x50(r27)
-    bl fn_80612A60
+    bl GXGetFifoStatus
     lwz r3, 0x50(r27)
     addi r4, r1, 0xc
     addi r5, r1, 0x8
-    bl fn_80612AF0
+    bl GXGetFifoCount
     lwz r31, 0x8(r1)
     lhz r30, lbl_8087D738
     lwz r29, 0x78(r27)
@@ -3332,7 +3332,7 @@ lbl_fn_80071AFC_00002CD0:
     lwz r3, 0x78(r27)
     li r4, 0x1
     bl GXCopyDisp
-    bl fn_80613C60
+    bl GXFlush
     lhz r3, lbl_8087D738
     addi r0, r3, 0x1
     sth r0, lbl_8087D738

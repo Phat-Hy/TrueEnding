@@ -14,8 +14,8 @@ extern void OSRestoreInterrupts(void);
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void fn_805E96D0(void);
-extern void fn_805F3130(void);
-extern void fn_805F3210(void);
+extern void OSLockMutex(void);
+extern void OSUnlockMutex(void);
 extern void fn_80619A00(void);
 extern void fn_80619AB0(void);
 
@@ -58,7 +58,7 @@ asm void fn_8061A010(void)
     rlwinm. r0, r0, 0, 29, 29
     beq lbl_fn_8061A010_00000030
     addi r3, r3, 0x20
-    bl fn_805F3130
+    bl OSLockMutex
 lbl_fn_8061A010_00000030:
     cmpwi r31, 0x0
     lwz r3, 0x44(r30)
@@ -90,7 +90,7 @@ lbl_fn_8061A010_00000084:
     rlwinm. r0, r0, 0, 29, 29
     beq lbl_fn_8061A010_00000098
     addi r3, r30, 0x20
-    bl fn_805F3210
+    bl OSUnlockMutex
 lbl_fn_8061A010_00000098:
     mr r3, r31
     lwz r31, 0xc(r1)

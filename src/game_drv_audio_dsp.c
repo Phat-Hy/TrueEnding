@@ -35,7 +35,7 @@ extern void fn_80615400(void);
 extern void fn_80615D20(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
-extern void fn_806167B0(void);
+extern void GXDrawDone(void);
 extern void fn_80617340(void);
 extern void fn_806173E0(void);
 extern void fn_80617420(void);
@@ -50,10 +50,10 @@ extern void fn_80617730(void);
 extern void fn_80617880(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
-extern void fn_80617DA0(void);
-extern void fn_80617DD0(void);
-extern void fn_80617E00(void);
-extern void fn_80617E70(void);
+extern void GXSetZCompLoc(void);
+extern void GXSetDither(void);
+extern void GXSetZMode(void);
+extern void GXSetBlendMode(void);
 extern void fn_80618290(void);
 extern void GXLoadPosMtxImm(void);
 extern void GXSetCurrentMtx(void);
@@ -114,7 +114,7 @@ asm void fn_805B4DF4(void)
     li r4, 0x7
     stw r0, 0x14(r1)
     li r5, 0x0
-    bl fn_80617E00
+    bl GXSetZMode
     li r3, 0x0
     li r4, 0x1
     li r5, 0x0
@@ -196,7 +196,7 @@ asm void fn_805B4F0C(void)
     lhz r29, 0x6(r3)
     li r3, 0x0
     stw r0, 0x98(r1)
-    bl fn_80617E70
+    bl GXSetBlendMode
     xoris r0, r29, 0x8000
     stw r0, 0x94(r1)
     xoris r0, r30, 0x8000
@@ -245,16 +245,16 @@ asm void fn_805B4F0C(void)
     li r3, 0x1
     li r4, 0x7
     li r5, 0x0
-    bl fn_80617E00
+    bl GXSetZMode
     li r3, 0x0
     li r4, 0x1
     li r5, 0x0
     li r6, 0x0
     bl fn_80617D50
     li r3, 0x1
-    bl fn_80617DA0
+    bl GXSetZCompLoc
     li r3, 0x0
-    bl fn_80617DD0
+    bl GXSetDither
     li r3, 0x0
     bl fn_80615400
     li r3, 0x0
@@ -275,7 +275,7 @@ asm void fn_805B4F0C(void)
     li r7, 0x0
     li r8, 0x7d
     bl fn_80613960
-    bl fn_806167B0
+    bl GXDrawDone
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1

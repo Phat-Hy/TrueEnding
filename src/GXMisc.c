@@ -14,7 +14,7 @@ extern void fn_805EAA00(void);
 extern void __GXInitRevisionBits(void);
 extern void fn_80612A50(void);
 extern void fn_80612CD0(void);
-extern void fn_80614510(void);
+extern void __GXSetDirtyState(void);
 
 /* External SDA symbols */
 extern u32 __GXData;
@@ -27,7 +27,7 @@ extern u8 lbl_808800B0[8];
 
 /* Function declarations */
 void GXSetMisc(void);
-void fn_80613C60(void);
+void GXFlush(void);
 void fn_80613CC0(void);
 void fn_80613E30(void);
 void fn_80613FF0(void);
@@ -88,7 +88,7 @@ lbl_GXSetMisc_00000068:
     blr
 }
 
-asm void fn_80613C60(void)
+asm void GXFlush(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -97,9 +97,9 @@ asm void fn_80613C60(void)
     stw r0, 0x14(r1)
     lwz r0, 0x5fc(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80613C60_000000A0
-    bl fn_80614510
-lbl_fn_80613C60_000000A0:
+    beq lbl_GXFlush_000000A0
+    bl __GXSetDirtyState
+lbl_GXFlush_000000A0:
     lis r3, 0xcc01
     li r0, 0x0
     stw r0, -0x8000(r3)
@@ -319,7 +319,7 @@ lbl_fn_80613E30_00000378:
     li r0, 0x0
     stw r0, 0x5fc(r31)
     b lbl_fn_80613E30_000003C0
-    bl fn_80614510
+    bl __GXSetDirtyState
 lbl_fn_80613E30_000003C0:
     lis r3, 0xcc01
     li r0, 0x0
@@ -367,7 +367,7 @@ asm void fn_80613FF0(void)
     lwz r0, 0x5fc(r30)
     cmpwi r0, 0x0
     beq lbl_fn_80613FF0_00000470
-    bl fn_80614510
+    bl __GXSetDirtyState
 lbl_fn_80613FF0_00000470:
     lis r3, 0xcc01
     li r31, 0x0
@@ -421,7 +421,7 @@ asm void fn_806140C0(void)
     lwz r0, 0x5fc(r29)
     cmpwi r0, 0x0
     beq lbl_fn_806140C0_0000052C
-    bl fn_80614510
+    bl __GXSetDirtyState
 lbl_fn_806140C0_0000052C:
     lis r3, 0xcc01
     li r31, 0x0

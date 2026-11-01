@@ -15,7 +15,7 @@ extern void fn_80071D74(void);
 extern void fn_80071E04(void);
 extern void fn_80075DEC(void);
 extern void fn_80075F58(void);
-extern void fn_800761A8(void);
+extern void gx_applyRenderState(void);
 extern void fn_800763FC(void);
 extern void fn_80076760(void);
 extern void fn_800848B4(void);
@@ -52,7 +52,7 @@ extern void fn_80617340(void);
 extern void fn_80617880(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
-extern void fn_80617DA0(void);
+extern void GXSetZCompLoc(void);
 extern void fn_80680CF8(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
@@ -1293,7 +1293,7 @@ asm void fn_800B33A8(void)
     li r5, 0x1
     bl fn_80076760
     mr r3, r31
-    bl fn_800761A8
+    bl gx_applyRenderState
     lwz r4, 0x14(r30)
     li r0, 0x0
     lwz r3, lbl_8087EFB4
@@ -1510,7 +1510,7 @@ asm void fn_800B365C(void)
     li r5, 0x1
     bl fn_80076760
     mr r3, r31
-    bl fn_800761A8
+    bl gx_applyRenderState
     lwz r4, 0x14(r30)
     li r3, 0x0
     lwz r5, lbl_8087EFB4
@@ -1537,7 +1537,7 @@ asm void fn_800B365C(void)
     li r5, 0x1
     bl fn_80076760
     mr r3, r31
-    bl fn_800761A8
+    bl gx_applyRenderState
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1589,7 +1589,7 @@ asm void fn_800B3770(void)
     li r5, 0x1
     bl fn_80076760
     mr r3, r30
-    bl fn_800761A8
+    bl gx_applyRenderState
     lwz r5, 0x14(r31)
     li r0, 0x0
     lwz r4, lbl_8087EFB4
@@ -1597,7 +1597,7 @@ asm void fn_800B3770(void)
     clrlwi r5, r5, 31
     stw r5, 0x954(r4)
     stw r0, 0x18(r31)
-    bl fn_80617DA0
+    bl GXSetZCompLoc
     lwz r5, lbl_8087EEE0
     li r3, 0x0
     li r4, 0x0
@@ -1616,7 +1616,7 @@ asm void fn_800B3770(void)
     lwz r3, 0x79c(r3)
     bl GXCopyTex
     li r3, 0x1
-    bl fn_80617DA0
+    bl GXSetZCompLoc
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

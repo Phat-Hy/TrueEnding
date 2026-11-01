@@ -26,7 +26,7 @@ extern void __GXSetIndirectMask(void);
 extern void __GXSetTmemConfig(void);
 extern void fn_806134E0(void);
 extern void fn_806136C0(void);
-extern void fn_80613910(void);
+extern void GXSetArray(void);
 extern void fn_80613950(void);
 extern void fn_80613960(void);
 extern void fn_80613BB0(void);
@@ -59,7 +59,7 @@ extern void fn_80615D20(void);
 extern void fn_80615D50(void);
 extern void fn_80615FF0(void);
 extern void fn_806165B0(void);
-extern void fn_806167B0(void);
+extern void GXDrawDone(void);
 extern void fn_80616800(void);
 extern void fn_80616820(void);
 extern void fn_80617030(void);
@@ -77,13 +77,13 @@ extern void GXSetNumTevStages(void);
 extern void fn_80617A10(void);
 extern void fn_80617C40(void);
 extern void fn_80617D50(void);
-extern void fn_80617DA0(void);
-extern void fn_80617DD0(void);
-extern void fn_80617E00(void);
-extern void fn_80617E40(void);
-extern void fn_80617E70(void);
-extern void fn_80617F20(void);
-extern void fn_80617F50(void);
+extern void GXSetZCompLoc(void);
+extern void GXSetDither(void);
+extern void GXSetZMode(void);
+extern void GXSetColorUpdate(void);
+extern void GXSetBlendMode(void);
+extern void GXSetAlphaUpdate(void);
+extern void GXSetDstAlpha(void);
 extern void fn_80617F80(void);
 extern void fn_80617FC0(void);
 extern void fn_80618300(void);
@@ -668,7 +668,7 @@ lbl___GXInitGX_000007E0:
     lwz r4, __GXData
     mr r3, r31
     li r5, 0x0
-    bl fn_80613910
+    bl GXSetArray
     addi r31, r31, 0x1
     cmplwi r31, 0x18
     ble lbl___GXInitGX_000007E0
@@ -813,7 +813,7 @@ lbl___GXInitGX_00000800:
     addi r4, r1, 0xc
     li r3, 0x5
     bl fn_80615C40
-    bl fn_806167B0
+    bl GXDrawDone
     lis r3, fn_80611060@ha
     addi r3, r3, fn_80611060@l
     bl fn_80616800
@@ -1030,23 +1030,23 @@ lbl___GXInitGX_00000CE4:
     li r6, 0x0
     bl fn_80617D50
     li r3, 0x1
-    bl fn_80617DA0
+    bl GXSetZCompLoc
     li r3, 0x1
-    bl fn_80617DD0
+    bl GXSetDither
     li r3, 0x1
     li r4, 0x3
     li r5, 0x1
-    bl fn_80617E00
+    bl GXSetZMode
     li r3, 0x1
-    bl fn_80617E40
+    bl GXSetColorUpdate
     li r3, 0x1
-    bl fn_80617F20
+    bl GXSetAlphaUpdate
     li r3, 0x0
     li r4, 0x0
-    bl fn_80617F50
+    bl GXSetDstAlpha
     li r3, 0x0
     li r4, 0x0
-    bl fn_80617E70
+    bl GXSetBlendMode
     li r3, 0x1
     li r4, 0x1
     bl fn_80617F80

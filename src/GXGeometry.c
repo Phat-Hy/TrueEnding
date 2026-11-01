@@ -18,7 +18,7 @@ extern void fn_806186A0(void);
 extern u32 __GXData;
 
 /* Function declarations */
-void fn_80614510(void);
+void __GXSetDirtyState(void);
 void fn_80614790(void);
 void fn_806148E0(void);
 void fn_806149C0(void);
@@ -29,7 +29,7 @@ void fn_80614AB0(void);
 void fn_80614AF0(void);
 void fn_80614B20(void);
 
-asm void fn_80614510(void)
+asm void __GXSetDirtyState(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -40,15 +40,15 @@ asm void fn_80614510(void)
     stw r30, 0x8(r1)
     lwz r30, 0x5fc(r31)
     clrlwi. r0, r30, 31
-    beq lbl_fn_80614510_00000028
+    beq lbl___GXSetDirtyState_00000028
     bl fn_806169C0
-lbl_fn_80614510_00000028:
+lbl___GXSetDirtyState_00000028:
     rlwinm. r0, r30, 0, 30, 30
-    beq lbl_fn_80614510_00000034
+    beq lbl___GXSetDirtyState_00000034
     bl fn_806172D0
-lbl_fn_80614510_00000034:
+lbl___GXSetDirtyState_00000034:
     rlwinm. r0, r30, 0, 29, 29
-    beq lbl_fn_80614510_0000005C
+    beq lbl___GXSetDirtyState_0000005C
     lis r4, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r4)
@@ -57,25 +57,25 @@ lbl_fn_80614510_00000034:
     lwz r3, 0x254(r5)
     stw r3, -0x8000(r4)
     sth r0, 0x2(r5)
-lbl_fn_80614510_0000005C:
+lbl___GXSetDirtyState_0000005C:
     rlwinm. r0, r30, 0, 28, 28
-    beq lbl_fn_80614510_00000068
+    beq lbl___GXSetDirtyState_00000068
     bl fn_80613300
-lbl_fn_80614510_00000068:
+lbl___GXSetDirtyState_00000068:
     rlwinm. r0, r30, 0, 27, 27
-    beq lbl_fn_80614510_00000074
+    beq lbl___GXSetDirtyState_00000074
     bl fn_80613890
-lbl_fn_80614510_00000074:
+lbl___GXSetDirtyState_00000074:
     rlwinm. r0, r30, 0, 27, 28
-    beq lbl_fn_80614510_00000080
+    beq lbl___GXSetDirtyState_00000080
     bl fn_806133B0
-lbl_fn_80614510_00000080:
+lbl___GXSetDirtyState_00000080:
     clrrwi. r30, r30, 8
-    beq lbl_fn_80614510_00000260
+    beq lbl___GXSetDirtyState_00000260
     rlwinm. r4, r30, 0, 20, 23
-    beq lbl_fn_80614510_00000120
+    beq lbl___GXSetDirtyState_00000120
     rlwinm. r0, r4, 0, 23, 23
-    beq lbl_fn_80614510_000000B4
+    beq lbl___GXSetDirtyState_000000B4
     lis r3, 0xcc01
     li r0, 0x10
     stb r0, -0x8000(r3)
@@ -83,9 +83,9 @@ lbl_fn_80614510_00000080:
     stw r0, -0x8000(r3)
     lwz r0, 0xa8(r31)
     stw r0, -0x8000(r3)
-lbl_fn_80614510_000000B4:
+lbl___GXSetDirtyState_000000B4:
     rlwinm. r0, r4, 0, 22, 22
-    beq lbl_fn_80614510_000000D8
+    beq lbl___GXSetDirtyState_000000D8
     lis r3, 0xcc01
     li r0, 0x10
     stb r0, -0x8000(r3)
@@ -93,9 +93,9 @@ lbl_fn_80614510_000000B4:
     stw r0, -0x8000(r3)
     lwz r0, 0xac(r31)
     stw r0, -0x8000(r3)
-lbl_fn_80614510_000000D8:
+lbl___GXSetDirtyState_000000D8:
     rlwinm. r0, r4, 0, 21, 21
-    beq lbl_fn_80614510_000000FC
+    beq lbl___GXSetDirtyState_000000FC
     lis r3, 0xcc01
     li r0, 0x10
     stb r0, -0x8000(r3)
@@ -103,9 +103,9 @@ lbl_fn_80614510_000000D8:
     stw r0, -0x8000(r3)
     lwz r0, 0xb0(r31)
     stw r0, -0x8000(r3)
-lbl_fn_80614510_000000FC:
+lbl___GXSetDirtyState_000000FC:
     rlwinm. r0, r4, 0, 20, 20
-    beq lbl_fn_80614510_00000120
+    beq lbl___GXSetDirtyState_00000120
     lis r3, 0xcc01
     li r0, 0x10
     stb r0, -0x8000(r3)
@@ -113,13 +113,13 @@ lbl_fn_80614510_000000FC:
     stw r0, -0x8000(r3)
     lwz r0, 0xb4(r31)
     stw r0, -0x8000(r3)
-lbl_fn_80614510_00000120:
+lbl___GXSetDirtyState_00000120:
     rlwinm r7, r30, 0, 7, 7
     rlwimi. r7, r30, 0, 16, 19
-    beq lbl_fn_80614510_0000019C
+    beq lbl___GXSetDirtyState_0000019C
     rlwinm. r0, r7, 0, 7, 7
     li r6, 0x100e
-    beq lbl_fn_80614510_00000158
+    beq lbl___GXSetDirtyState_00000158
     lwz r5, 0x254(r31)
     lis r3, 0xcc01
     li r4, 0x10
@@ -128,33 +128,33 @@ lbl_fn_80614510_00000120:
     extrwi r4, r5, 3, 25
     stw r0, -0x8000(r3)
     stw r4, -0x8000(r3)
-lbl_fn_80614510_00000158:
+lbl___GXSetDirtyState_00000158:
     mr r5, r31
     extrwi r7, r7, 4, 16
     li r4, 0x10
     lis r3, 0xcc01
-    b lbl_fn_80614510_00000194
+    b lbl___GXSetDirtyState_00000194
     nop
-lbl_fn_80614510_00000170:
+lbl___GXSetDirtyState_00000170:
     clrlwi. r0, r7, 31
-    beq lbl_fn_80614510_00000188
+    beq lbl___GXSetDirtyState_00000188
     stb r4, -0x8000(r3)
     stw r6, -0x8000(r3)
     lwz r0, 0xb8(r5)
     stw r0, -0x8000(r3)
-lbl_fn_80614510_00000188:
+lbl___GXSetDirtyState_00000188:
     srwi r7, r7, 1
     addi r5, r5, 0x4
     addi r6, r6, 0x1
-lbl_fn_80614510_00000194:
+lbl___GXSetDirtyState_00000194:
     cmpwi r7, 0x0
-    bne lbl_fn_80614510_00000170
-lbl_fn_80614510_0000019C:
+    bne lbl___GXSetDirtyState_00000170
+lbl___GXSetDirtyState_0000019C:
     andis. r8, r30, 0x2ff
-    beq lbl_fn_80614510_00000228
+    beq lbl___GXSetDirtyState_00000228
     rlwinm. r0, r8, 0, 6, 6
     li r6, 0x1040
-    beq lbl_fn_80614510_000001D0
+    beq lbl___GXSetDirtyState_000001D0
     lwz r5, 0x254(r31)
     lis r3, 0xcc01
     li r4, 0x10
@@ -163,17 +163,17 @@ lbl_fn_80614510_0000019C:
     clrlwi r4, r5, 28
     stw r0, -0x8000(r3)
     stw r4, -0x8000(r3)
-lbl_fn_80614510_000001D0:
+lbl___GXSetDirtyState_000001D0:
     mr r7, r31
     extrwi r8, r8, 8, 8
     li r4, 0x10
     lis r3, 0xcc01
-    b lbl_fn_80614510_00000220
+    b lbl___GXSetDirtyState_00000220
     nop
-lbl_fn_80614510_000001E8:
+lbl___GXSetDirtyState_000001E8:
     clrlwi. r0, r8, 31
     addi r5, r6, 0x10
-    beq lbl_fn_80614510_00000214
+    beq lbl___GXSetDirtyState_00000214
     stb r4, -0x8000(r3)
     stw r6, -0x8000(r3)
     lwz r0, 0xc8(r7)
@@ -182,32 +182,32 @@ lbl_fn_80614510_000001E8:
     stw r5, -0x8000(r3)
     lwz r0, 0xe8(r7)
     stw r0, -0x8000(r3)
-lbl_fn_80614510_00000214:
+lbl___GXSetDirtyState_00000214:
     srwi r8, r8, 1
     addi r6, r6, 0x1
     addi r7, r7, 0x4
-lbl_fn_80614510_00000220:
+lbl___GXSetDirtyState_00000220:
     cmpwi r8, 0x0
-    bne lbl_fn_80614510_000001E8
-lbl_fn_80614510_00000228:
+    bne lbl___GXSetDirtyState_000001E8
+lbl___GXSetDirtyState_00000228:
     rlwinm. r0, r30, 0, 5, 5
-    beq lbl_fn_80614510_00000240
+    beq lbl___GXSetDirtyState_00000240
     li r3, 0x0
     bl fn_806186A0
     li r3, 0x5
     bl fn_806186A0
-lbl_fn_80614510_00000240:
+lbl___GXSetDirtyState_00000240:
     rlwinm. r0, r30, 0, 3, 3
-    beq lbl_fn_80614510_0000024C
+    beq lbl___GXSetDirtyState_0000024C
     bl fn_806184E0
-lbl_fn_80614510_0000024C:
+lbl___GXSetDirtyState_0000024C:
     rlwinm. r0, r30, 0, 4, 4
-    beq lbl_fn_80614510_00000258
+    beq lbl___GXSetDirtyState_00000258
     bl fn_80618240
-lbl_fn_80614510_00000258:
+lbl___GXSetDirtyState_00000258:
     li r0, 0x1
     sth r0, 0x2(r31)
-lbl_fn_80614510_00000260:
+lbl___GXSetDirtyState_00000260:
     li r0, 0x0
     stw r0, 0x5fc(r31)
     lwz r31, 0xc(r1)
@@ -235,7 +235,7 @@ asm void fn_80614790(void)
     lwz r0, 0x5fc(r31)
     cmpwi r0, 0x0
     beq lbl_fn_80614790_000002BC
-    bl fn_80614510
+    bl __GXSetDirtyState
 lbl_fn_80614790_000002BC:
     lwz r0, 0x0(r31)
     cmpwi r0, 0x0

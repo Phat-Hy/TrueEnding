@@ -39,7 +39,7 @@ extern void fn_80616250(void);
 extern void fn_806163C0(void);
 extern void fn_806163E0(void);
 extern void fn_80616400(void);
-extern void fn_806167B0(void);
+extern void GXDrawDone(void);
 extern void fn_80616E80(void);
 extern void fn_80616EF0(void);
 extern void fn_80617030(void);
@@ -1024,7 +1024,7 @@ lbl_fn_800AD834_00000D04:
     mr r15, r18
 lbl_fn_800AD834_00000D20:
     bl fn_80614190
-    bl fn_806167B0
+    bl GXDrawDone
     li r3, 0x1
     bl fn_80613BB0
     li r3, 0x0
@@ -1150,7 +1150,7 @@ lbl_fn_800AD834_00000EEC:
     bge lbl_fn_800AD834_00000D04
 lbl_fn_800AD834_00000F00:
     bl fn_80614190
-    bl fn_806167B0
+    bl GXDrawDone
     mr r3, r26
     bl fn_800AD648
     li r3, 0x2
@@ -1274,7 +1274,7 @@ lbl_fn_800AD834_00000F00:
     li r4, 0x1
     bl GXCopyTex
     bl fn_80614190
-    bl fn_806167B0
+    bl GXDrawDone
     li r3, 0x3
     bl fn_80613BB0
     li r3, 0x0
@@ -1585,7 +1585,7 @@ lbl_fn_800AE568_00001584:
     addi r4, r4, lbl_80732C9C@l
     bl fn_800D594C
 lbl_fn_800AE568_000015A0:
-    bl fn_806167B0
+    bl GXDrawDone
     xoris r0, r29, 0x8000
     stw r0, 0x9c(r1)
     xoris r0, r30, 0x8000
@@ -1965,7 +1965,7 @@ lbl_fn_800AE568_000017F8:
     li r4, 0x0
     bl GXCopyTex
     bl fn_80614190
-    bl fn_806167B0
+    bl GXDrawDone
     li r3, 0x1
     bl fn_80617220
     li r3, 0x2

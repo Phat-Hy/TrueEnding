@@ -2,7 +2,7 @@
 
 /* External functions referenced */
 extern void __GXFlushTextureState(void);
-extern void fn_80614510(void);
+extern void __GXSetDirtyState(void);
 extern void fn_806148E0(void);
 extern void fn_80695D84(void);
 
@@ -42,13 +42,13 @@ void GXSetNumTevStages(void);
 void fn_80617A10(void);
 void fn_80617C40(void);
 void fn_80617D50(void);
-void fn_80617DA0(void);
-void fn_80617DD0(void);
-void fn_80617E00(void);
-void fn_80617E40(void);
-void fn_80617E70(void);
-void fn_80617F20(void);
-void fn_80617F50(void);
+void GXSetZCompLoc(void);
+void GXSetDither(void);
+void GXSetZMode(void);
+void GXSetColorUpdate(void);
+void GXSetBlendMode(void);
+void GXSetAlphaUpdate(void);
+void GXSetDstAlpha(void);
 void fn_80617F80(void);
 void fn_80617FC0(void);
 void fn_80618030(void);
@@ -613,7 +613,7 @@ asm void fn_80617D50(void)
     blr
 }
 
-asm void fn_80617DA0(void)
+asm void GXSetZCompLoc(void)
 {
     nofralloc
     lwz r7, __GXData
@@ -629,7 +629,7 @@ asm void fn_80617DA0(void)
     blr
 }
 
-asm void fn_80617DD0(void)
+asm void GXSetDither(void)
 {
     nofralloc
     lwz r7, __GXData
@@ -645,7 +645,7 @@ asm void fn_80617DD0(void)
     blr
 }
 
-asm void fn_80617E00(void)
+asm void GXSetZMode(void)
 {
     nofralloc
     lwz r9, __GXData
@@ -663,7 +663,7 @@ asm void fn_80617E00(void)
     blr
 }
 
-asm void fn_80617E40(void)
+asm void GXSetColorUpdate(void)
 {
     nofralloc
     lwz r7, __GXData
@@ -680,7 +680,7 @@ asm void fn_80617E40(void)
     blr
 }
 
-asm void fn_80617E70(void)
+asm void GXSetBlendMode(void)
 {
     nofralloc
     lwz r9, __GXData
@@ -694,7 +694,7 @@ asm void fn_80617E70(void)
     rlwimi r5, r4, 3, 26, 28
     stw r5, 0x22c(r9)
     cmplw r8, r5
-    beq lbl_fn_80617E70_00000884
+    beq lbl_GXSetBlendMode_00000884
     lis r5, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r5)
@@ -708,10 +708,10 @@ asm void fn_80617E70(void)
     lwz r0, 0x5fc(r9)
     ori r0, r0, 0x4
     stw r0, 0x5fc(r9)
-lbl_fn_80617E70_00000884:
+lbl_GXSetBlendMode_00000884:
     lwzx r0, r6, r7
     cmplwi r0, 0x4
-    bne lbl_fn_80617E70_000008BC
+    bne lbl_GXSetBlendMode_000008BC
     subi r0, r3, 0x4
     lwz r4, 0x224(r9)
     rlwimi r4, r0, 9, 21, 22
@@ -723,13 +723,13 @@ lbl_fn_80617E70_00000884:
     stb r0, -0x8000(r3)
     lwz r0, 0x224(r9)
     stw r0, -0x8000(r3)
-lbl_fn_80617E70_000008BC:
+lbl_GXSetBlendMode_000008BC:
     li r0, 0x0
     sth r0, 0x2(r9)
     blr
 }
 
-asm void fn_80617F20(void)
+asm void GXSetAlphaUpdate(void)
 {
     nofralloc
     lwz r7, __GXData
@@ -745,7 +745,7 @@ asm void fn_80617F20(void)
     blr
 }
 
-asm void fn_80617F50(void)
+asm void GXSetDstAlpha(void)
 {
     nofralloc
     lwz r8, __GXData
@@ -828,7 +828,7 @@ asm void fn_80618030(void)
     lwz r0, 0x5fc(r31)
     cmpwi r0, 0x0
     beq lbl_fn_80618030_00000A14
-    bl fn_80614510
+    bl __GXSetDirtyState
 lbl_fn_80618030_00000A14:
     lwz r0, 0x0(r31)
     cmpwi r0, 0x0

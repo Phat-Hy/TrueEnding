@@ -22,7 +22,7 @@ void fn_806134E0(void);
 void fn_80613520(void);
 void fn_806136C0(void);
 void fn_80613890(void);
-void fn_80613910(void);
+void GXSetArray(void);
 void fn_80613950(void);
 void fn_80613960(void);
 void fn_80613BB0(void);
@@ -760,13 +760,13 @@ lbl_fn_80613890_00000A6C:
     blr
 }
 
-asm void fn_80613910(void)
+asm void GXSetArray(void)
 {
     nofralloc
     cmpwi r3, 0x19
-    bne lbl_fn_80613910_00000A9C
+    bne lbl_GXSetArray_00000A9C
     li r3, 0xa
-lbl_fn_80613910_00000A9C:
+lbl_GXSetArray_00000A9C:
     lis r6, 0xcc01
     subi r8, r3, 0x9
     li r7, 0x8

@@ -62,7 +62,7 @@ extern void fn_805E4080(void);
 extern void fn_805F2670(void);
 extern void fn_805F27A0(void);
 extern void fn_805F2880(void);
-extern void fn_805F30F0(void);
+extern void OSInitMutex(void);
 extern void fn_805F8980(void);
 extern void fn_806078D0(void);
 extern void fn_80607900(void);
@@ -87,8 +87,8 @@ extern void fn_806177B0(void);
 extern void fn_80617880(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
-extern void fn_80617DD0(void);
-extern void fn_80617E00(void);
+extern void GXSetDither(void);
+extern void GXSetZMode(void);
 extern void GXLoadPosMtxImm(void);
 extern void GXSetCurrentMtx(void);
 extern void fn_80619920(void);
@@ -1198,11 +1198,11 @@ asm void fn_805C3FE0(void)
     li r6, 0x5
     bl fn_80617D50
     li r3, 0x0
-    bl fn_80617DD0
+    bl GXSetDither
     li r3, 0x0
     li r4, 0x7
     li r5, 0x0
-    bl fn_80617E00
+    bl GXSetZMode
     li r3, 0x0
     bl fn_80615400
     li r3, 0x0
@@ -1284,7 +1284,7 @@ lbl_fn_805C41A0_00000F1C:
     bl OSCreateAlarm
     lis r3, lbl_807CA150@ha
     addi r3, r3, lbl_807CA150@l
-    bl fn_805F30F0
+    bl OSInitMutex
     lwz r31, 0x1c(r1)
     mr r3, r28
     lwz r30, 0x18(r1)

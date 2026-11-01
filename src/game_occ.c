@@ -22,7 +22,7 @@ extern void fn_800DC6B4(void);
 extern void fn_80478198(void);
 extern void fn_80613960(void);
 extern void fn_80613BB0(void);
-extern void fn_80613C60(void);
+extern void GXFlush(void);
 extern void fn_806140C0(void);
 extern void fn_80614190(void);
 extern void GXSetTexCopySrc(void);
@@ -33,7 +33,7 @@ extern void fn_80615E00(void);
 extern void fn_806163C0(void);
 extern void fn_806163E0(void);
 extern void fn_80616400(void);
-extern void fn_806167B0(void);
+extern void GXDrawDone(void);
 extern void fn_80617200(void);
 extern void fn_80617220(void);
 extern void fn_806173E0(void);
@@ -48,7 +48,7 @@ extern void fn_80617730(void);
 extern void fn_80617880(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
-extern void fn_80617E00(void);
+extern void GXSetZMode(void);
 
 /* External data declarations */
 extern u8 lbl_80734740[];
@@ -140,7 +140,7 @@ asm void fn_800D6E48(void)
     mr r28, r3
     mr r4, r30
     bl DCInvalidateRange
-    bl fn_806167B0
+    bl GXDrawDone
     mullw r4, r26, r27
     li r20, 0x0
     cmpwi cr1, r4, 0x0
@@ -490,7 +490,7 @@ lbl_tex_bakeCharacterTexture_000005A4:
     li r29, 0x0
     b lbl_tex_bakeCharacterTexture_0000061C
 lbl_tex_bakeCharacterTexture_000005B8:
-    bl fn_806167B0
+    bl GXDrawDone
     bl fn_80614190
     cmpwi r17, 0x0
     bne lbl_tex_bakeCharacterTexture_000005E4
@@ -549,9 +549,9 @@ lbl_tex_bakeCharacterTexture_00000684:
     mr r3, r22
     li r4, 0x1
     bl GXCopyTex
-    bl fn_806167B0
+    bl GXDrawDone
     bl fn_80614190
-    bl fn_80613C60
+    bl GXFlush
     bl fn_806140C0
     mr r5, r21
     clrlwi r3, r24, 16
@@ -1076,7 +1076,7 @@ asm void fn_800D775C(void)
     li r3, 0x0
     li r4, 0x3
     li r5, 0x0
-    bl fn_80617E00
+    bl GXSetZMode
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -1215,7 +1215,7 @@ asm void fn_800D7D00(void)
     li r3, 0x0
     li r4, 0x3
     li r5, 0x0
-    bl fn_80617E00
+    bl GXSetZMode
     li r3, 0x0
     li r4, 0x4
     li r5, 0x5
@@ -1336,7 +1336,7 @@ asm void fn_800D7F18(void)
     li r3, 0x0
     li r4, 0x3
     li r5, 0x0
-    bl fn_80617E00
+    bl GXSetZMode
     li r3, 0x0
     li r4, 0x4
     li r5, 0x5

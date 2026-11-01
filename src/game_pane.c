@@ -37,7 +37,7 @@ extern void fn_80615D50(void);
 extern void fn_80615E00(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
-extern void fn_806167B0(void);
+extern void GXDrawDone(void);
 extern void fn_80616EF0(void);
 extern void fn_80617030(void);
 extern void fn_80617130(void);
@@ -149,7 +149,7 @@ asm void fn_800AB774(void)
     stw r9, 0x38(r1)
     stw r3, 0x3c(r1)
     stw r0, 0x40(r1)
-    bl fn_806167B0
+    bl GXDrawDone
     lwz r3, lbl_8087EEE0
     mr r6, r29
     mr r7, r30
@@ -494,7 +494,7 @@ lbl_fn_800AB774_00000514:
     li r4, 0x0
     bl GXCopyTex
     bl fn_80614190
-    bl fn_806167B0
+    bl GXDrawDone
     addi r11, r1, 0x190
     psq_l f31, 0x1c8(r1), 0, 0
     lfd f31, 0x1c0(r1)
@@ -1205,7 +1205,7 @@ asm void fn_800AC6DC(void)
     li r8, 0x0
     bl fn_80616250
     bl fn_80614190
-    bl fn_806167B0
+    bl GXDrawDone
     lwz r3, lbl_8087EFB4
     li r4, 0x0
     bl fn_800C0508

@@ -60,7 +60,7 @@ extern void fn_805F98D0(void);
 extern void fn_805F9940(void);
 extern void fn_805F9990(void);
 extern void fn_805F99B0(void);
-extern void fn_80617DA0(void);
+extern void GXSetZCompLoc(void);
 extern void fn_80658240(void);
 extern void fn_80660CF0(void);
 extern void fn_806823B0(void);
@@ -1501,7 +1501,7 @@ asm void fn_804413D4(void)
     lwz r31, lbl_8087EEE0
     stw r0, 0x88(r1)
     stw r0, 0x90(r1)
-    bl fn_80617DA0
+    bl GXSetZCompLoc
     lwz r0, 0x44(r31)
     cmpwi r0, 0x0
     bne lbl_fn_804413D4_000012B8

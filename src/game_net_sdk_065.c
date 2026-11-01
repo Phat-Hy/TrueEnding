@@ -13,7 +13,7 @@ extern void _savegpr_15(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_805F3210(void);
+extern void OSUnlockMutex(void);
 extern void fn_805F3350(void);
 extern void fn_80612E80(void);
 extern void fn_806134E0(void);
@@ -201,7 +201,7 @@ lbl_fn_807265A0_0000012C:
     lis r4, lbl_8087D678@ha
     mr r30, r3
     addi r3, r4, lbl_8087D678@l
-    bl fn_805F3210
+    bl OSUnlockMutex
     la r3, lbl_80880560
     bl OSWakeupThread
     mr r3, r30
@@ -264,7 +264,7 @@ lbl_fn_80726680_0000020C:
     lis r4, lbl_8087D678@ha
     mr r30, r3
     addi r3, r4, lbl_8087D678@l
-    bl fn_805F3210
+    bl OSUnlockMutex
     la r3, lbl_80880560
     bl OSWakeupThread
     mr r3, r30

@@ -30,7 +30,7 @@ extern void GXCopyTex(void);
 extern void fn_80616250(void);
 extern void fn_806163C0(void);
 extern void fn_806163E0(void);
-extern void fn_80617E00(void);
+extern void GXSetZMode(void);
 extern void fn_8068A6D8(void);
 extern void fn_8068A918(void);
 extern void fn_806958E0(void);
@@ -754,7 +754,7 @@ asm void fn_800B6A00(void)
     li r3, 0x1
     li r4, 0x3
     li r5, 0x1
-    bl fn_80617E00
+    bl GXSetZMode
     mr r5, r30
     mr r6, r31
     li r3, 0x0

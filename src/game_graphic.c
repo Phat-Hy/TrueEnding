@@ -46,7 +46,7 @@ extern void fn_80615D50(void);
 extern void fn_80615E00(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
-extern void fn_806167B0(void);
+extern void GXDrawDone(void);
 extern void fn_80616EF0(void);
 extern void fn_80617030(void);
 extern void fn_80617130(void);
@@ -64,7 +64,7 @@ extern void GXSetTevSwapMode(void);
 extern void fn_80617880(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
-extern void fn_80617E00(void);
+extern void GXSetZMode(void);
 extern void GXLoadTexMtxImm(void);
 extern void fn_8068AEB0(void);
 extern void fn_80695720(void);
@@ -553,13 +553,13 @@ asm void fn_800AF544(void)
     stw r0, 0x60(r1)
     li r4, 0x3
     li r5, 0x0
-    bl fn_80617E00
+    bl GXSetZMode
     lfs f1, 0x74(r24)
     lfs f0, lbl_80880E20
     lwz r29, 0x4(r24)
     fcmpo cr0, f1, f0
     blt lbl_fn_800AF544_00000EC0
-    bl fn_806167B0
+    bl GXDrawDone
     lwz r4, lbl_8087EEE0
     li r23, 0x1
     lwz r0, 0x14(r29)
@@ -2013,7 +2013,7 @@ asm void fn_800B0A70(void)
     stw r29, 0x74(r1)
     stw r28, 0x70(r1)
     mr r28, r3
-    bl fn_806167B0
+    bl GXDrawDone
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x1

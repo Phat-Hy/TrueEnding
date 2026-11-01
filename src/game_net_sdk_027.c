@@ -15,9 +15,9 @@ extern void _restgpr_27(void);
 extern void _savegpr_23(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
-extern void fn_805F30F0(void);
-extern void fn_805F3130(void);
-extern void fn_805F3210(void);
+extern void OSInitMutex(void);
+extern void OSLockMutex(void);
+extern void OSUnlockMutex(void);
 extern void fn_8067AEC4(void);
 extern void fn_8067AF64(void);
 extern void fn_8067B094(void);
@@ -1546,19 +1546,19 @@ lbl_fn_806D8A90_00001270:
 asm void fn_806D8AF0(void)
 {
     nofralloc
-    b fn_805F30F0
+    b OSInitMutex
 }
 
 asm void fn_806D8B00(void)
 {
     nofralloc
-    b fn_805F3130
+    b OSLockMutex
 }
 
 asm void fn_806D8B10(void)
 {
     nofralloc
-    b fn_805F3210
+    b OSUnlockMutex
 }
 
 asm void fn_806D8B20(void)

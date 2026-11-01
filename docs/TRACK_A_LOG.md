@@ -582,3 +582,43 @@ Architecture Telemetry for Track B:
      - Calls `fn_80207F80` (the 48 subsystem initializers in sequence, already decompiled to C).
 Prototypes swept: Updated extern declarations in `src/game_coliseum_reward.c` and `src/game_event_cutscene_actor.c`.
 Next:     Decompile next subroutines of `taskManager_initSystem` or field transition `fn_8036F268`.
+
+## Session 2026-11-01 - Batch 12: High-yield queue naming (950k+ probe hits)
+Subject:  track-a: Batch 12 - name 27 high-yield queue routines (covers 950k+ probe hits) progress 99.30% -> 99.30%
+Scope:    Rename 27 top-ranking routines hit by Track B instruments across 62 files.
+Checklist:
+  1. symbols.txt: Renamed 27 functions in place.
+  2. All src/ references updated across 62 files.
+  3. Local labels lbl_fn_* -> lbl_<newName>_* normalized.
+  4. External prototypes swept across all translation units.
+  5. report.json clean, ninja passed (orig/main.dol: OK).
+Self-check: git diff -U0 -- src/ for 'asm void': -27 / +27 (balanced).
+Names applied:
+  - atn_Arc_loadEntry (fn_8046C2D4, 296 B, 790,554 probe hits)
+  - atn_Arc_decompressEntry (fn_8046BBF0, 756 B, 110,445 probe hits)
+  - atn_Arc_getFileEntry (fn_8046FD1C, 16 B)
+  - atn_Arc_findFile (fn_8046FBB0, 364 B, 291 probe hits)
+  - atn_Model_loadNodeMatrices (fn_8009B9E8, 436 B, 259 probe hits)
+  - atn_Model_loadTexMatrices (fn_8009BB9C, 928 B, 237 probe hits)
+  - atn_Model_setupMeshMaterial (fn_8009BF3C, 1484 B, 248 probe hits)
+  - gx_applyRenderState (fn_800761A8, 536 B, 248 probe hits)
+  - atn_HUD_projectWorldPoints (fn_8009F4AC, 476 B, 246 probe hits)
+  - cmpr_encodeBlock (fn_80069060, 552 B, 163 probe hits)
+  - cmpr_encodeTexture (fn_80069288, 468 B, 156 probe hits)
+  - GXDrawDone (fn_806167B0, 72 B, 9 probe hits)
+  - GXFlush (fn_80613C60, 92 B, 7,588 probe hits)
+  -__GXSetDirtyState (fn_80614510, 640 B, 4,303 probe hits)
+  - GXSetArray (fn_80613910, 64 B, 2,686 probe hits)
+  - OSInitMutex (fn_805F30F0, 56 B)
+  - OSLockMutex (fn_805F3130, 220 B)
+  - OSUnlockMutex (fn_805F3210, 200 B, 22,924 probe hits)
+  - GXSetZCompLoc (fn_80617DA0, 44 B)
+  - GXSetDither (fn_80617DD0, 44 B)
+  - GXSetZMode (fn_80617E00, 52 B)
+  - GXSetColorUpdate (fn_80617E40, 48 B)
+  - GXSetBlendMode (fn_80617E70, 240 B)
+  - GXSetAlphaUpdate (fn_80617F20, 48 B)
+  - GXSetDstAlpha (fn_80617F50, 48 B)
+  - GXGetFifoStatus (fn_80612A60, 144 B)
+  - GXGetFifoCount (fn_80612AF0, 20 B)
+Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.

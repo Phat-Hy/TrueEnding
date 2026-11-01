@@ -10,7 +10,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_25(void);
 extern void fn_80071E04(void);
 extern void fn_80072914(void);
-extern void fn_800761A8(void);
+extern void gx_applyRenderState(void);
 extern void fn_800763C0(void);
 extern void fn_80076760(void);
 extern void fn_80076A28(void);
@@ -1815,7 +1815,7 @@ lbl_fn_80235BF8_00001790:
     stfs f0, 0xb0(r1)
     bl fn_80616EF0
     lwz r3, lbl_8087EEE0
-    bl fn_800761A8
+    bl gx_applyRenderState
     lwz r0, 0x18(r16)
     li r3, 0x98
     li r4, 0x0
@@ -2129,7 +2129,7 @@ lbl_fn_80235BF8_00001CC0:
     stfs f1, 0x4c(r1)
     fdivs f0, f0, f26
     stfs f0, 0x48(r1)
-    bl fn_800761A8
+    bl gx_applyRenderState
     lwz r0, 0x18(r17)
     li r3, 0x98
     li r4, 0x0

@@ -8,7 +8,7 @@ extern void OSGetCurrentThread(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_805F3210(void);
+extern void OSUnlockMutex(void);
 extern void fn_8061C8A0(void);
 extern void fn_806954D4(void);
 extern void fn_806954E0(void);
@@ -1809,7 +1809,7 @@ lbl_fn_80697D34_00001810:
 lbl_fn_80697D34_00001818:
     lis r3, lbl_808330E0@ha
     addi r3, r3, lbl_808330E0@l
-    bl fn_805F3210
+    bl OSUnlockMutex
     mr r3, r31
 lbl_fn_80697D34_00001828:
     lwz r0, 0x24(r1)
@@ -1907,7 +1907,7 @@ lbl_fn_80697E2C_00001954:
 lbl_fn_80697E2C_0000196C:
     lis r3, lbl_808330E0@ha
     addi r3, r3, lbl_808330E0@l
-    bl fn_805F3210
+    bl OSUnlockMutex
     mr r3, r30
 lbl_fn_80697E2C_0000197C:
     lwz r0, 0x24(r1)
@@ -1985,7 +1985,7 @@ lbl_fn_80697F84_00001A60:
     li r29, -0x1
 lbl_fn_80697F84_00001A74:
     addi r3, r30, 0x0
-    bl fn_805F3210
+    bl OSUnlockMutex
     mr r3, r29
 lbl_fn_80697F84_00001A80:
     lwz r0, 0x24(r1)

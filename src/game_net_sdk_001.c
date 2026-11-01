@@ -23,9 +23,9 @@ extern void _savegpr_27(void);
 extern void fn_805F2670(void);
 extern void fn_805F26D0(void);
 extern void fn_805F27A0(void);
-extern void fn_805F30F0(void);
-extern void fn_805F3130(void);
-extern void fn_805F3210(void);
+extern void OSInitMutex(void);
+extern void OSLockMutex(void);
+extern void OSUnlockMutex(void);
 extern void fn_806806A4(void);
 extern void fn_80697E2C(void);
 extern void fn_8069C10C(void);
@@ -851,7 +851,7 @@ asm void fn_8069A9C4(void)
     lwz r0, 0x18(r3)
     cmpwi r0, 0x0
     bne lbl_fn_8069A9C4_00000920
-    bl fn_805F30F0
+    bl OSInitMutex
     li r0, 0x1
     stw r0, 0x18(r31)
 lbl_fn_8069A9C4_00000920:
@@ -871,13 +871,13 @@ asm void fn_8069AA04(void)
 asm void fn_8069AA08(void)
 {
     nofralloc
-    b fn_805F3130
+    b OSLockMutex
 }
 
 asm void fn_8069AA0C(void)
 {
     nofralloc
-    b fn_805F3210
+    b OSUnlockMutex
 }
 
 asm void fn_8069AA10(void)

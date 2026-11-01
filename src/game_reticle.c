@@ -12,7 +12,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void fn_80074EC8(void);
-extern void fn_800761A8(void);
+extern void gx_applyRenderState(void);
 extern void fn_800763C0(void);
 extern void fn_8007642C(void);
 extern void fn_80076760(void);
@@ -43,7 +43,7 @@ extern void fn_80478198(void);
 extern void fn_805F89F0(void);
 extern void fn_805F8DA0(void);
 extern void fn_805F9940(void);
-extern void fn_80613910(void);
+extern void GXSetArray(void);
 extern void fn_80613960(void);
 extern void fn_80613BB0(void);
 extern void fn_80615B60(void);
@@ -120,9 +120,9 @@ extern u32 lbl_80880C68;
 /* Function declarations */
 void fn_8009B938(void);
 void atn_Model_drawSubNodes(void);
-void fn_8009B9E8(void);
-void fn_8009BB9C(void);
-void fn_8009BF3C(void);
+void atn_Model_loadNodeMatrices(void);
+void atn_Model_loadTexMatrices(void);
+void atn_Model_setupMeshMaterial(void);
 void fn_8009C508(void);
 void fn_8009C688(void);
 void fn_8009C84C(void);
@@ -187,7 +187,7 @@ lbl_atn_Model_drawSubNodes_00000088:
     blr
 }
 
-asm void fn_8009B9E8(void)
+asm void atn_Model_loadNodeMatrices(void)
 {
     nofralloc
     stwu r1, -0xa0(r1)
@@ -200,7 +200,7 @@ asm void fn_8009B9E8(void)
     lwz r0, 0x14(r4)
     mr r31, r6
     cmpwi r0, -0x1
-    beq lbl_fn_8009B9E8_00000130
+    beq lbl_atn_Model_loadNodeMatrices_00000130
     mulli r0, r0, 0x30
     li r4, 0x0
     add r31, r6, r0
@@ -221,58 +221,58 @@ asm void fn_8009B9E8(void)
     bl GXLoadPosMtxImm
     li r3, 0x0
     bl GXSetCurrentMtx
-    b lbl_fn_8009B9E8_00000244
-lbl_fn_8009B9E8_00000130:
+    b lbl_atn_Model_loadNodeMatrices_00000244
+lbl_atn_Model_loadNodeMatrices_00000130:
     lbz r0, lbl_8087EF28
     cmpwi r0, 0x0
-    bne lbl_fn_8009B9E8_00000148
+    bne lbl_atn_Model_loadNodeMatrices_00000148
     lbz r0, lbl_8087EFB0
     cmpwi r0, 0x0
-    bne lbl_fn_8009B9E8_00000158
-lbl_fn_8009B9E8_00000148:
+    bne lbl_atn_Model_loadNodeMatrices_00000158
+lbl_atn_Model_loadNodeMatrices_00000148:
     lwz r3, lbl_8087EFA8
     lwz r0, 0x234(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8009B9E8_000001B0
-lbl_fn_8009B9E8_00000158:
+    beq lbl_atn_Model_loadNodeMatrices_000001B0
+lbl_atn_Model_loadNodeMatrices_00000158:
     mr r26, r5
     mr r27, r7
     li r29, 0x0
     li r28, 0x0
-lbl_fn_8009B9E8_00000168:
+lbl_atn_Model_loadNodeMatrices_00000168:
     lwz r3, 0x10(r26)
     cmpwi r3, -0x1
-    beq lbl_fn_8009B9E8_00000244
+    beq lbl_atn_Model_loadNodeMatrices_00000244
     lwz r0, 0x0(r27)
     cmpw r3, r0
-    beq lbl_fn_8009B9E8_00000194
+    beq lbl_atn_Model_loadNodeMatrices_00000194
     mulli r0, r3, 0x30
     stw r3, 0x0(r27)
     mr r4, r28
     add r3, r31, r0
     bl GXLoadPosMtxImm
-lbl_fn_8009B9E8_00000194:
+lbl_atn_Model_loadNodeMatrices_00000194:
     addi r29, r29, 0x1
     addi r27, r27, 0x4
     cmpwi r29, 0xa
     addi r28, r28, 0x3
     addi r26, r26, 0x4
-    blt lbl_fn_8009B9E8_00000168
-    b lbl_fn_8009B9E8_00000244
-lbl_fn_8009B9E8_000001B0:
+    blt lbl_atn_Model_loadNodeMatrices_00000168
+    b lbl_atn_Model_loadNodeMatrices_00000244
+lbl_atn_Model_loadNodeMatrices_000001B0:
     lfs f31, lbl_80880C48
     mr r29, r5
     mr r28, r7
     li r25, 0x0
     li r27, 0x0
-lbl_fn_8009B9E8_000001C4:
+lbl_atn_Model_loadNodeMatrices_000001C4:
     lwz r3, 0x10(r29)
     addi r26, r27, 0x1e
     cmpwi r3, -0x1
-    beq lbl_fn_8009B9E8_00000244
+    beq lbl_atn_Model_loadNodeMatrices_00000244
     lwz r0, 0x0(r28)
     cmpw r3, r0
-    beq lbl_fn_8009B9E8_0000022C
+    beq lbl_atn_Model_loadNodeMatrices_0000022C
     mulli r0, r3, 0x30
     stw r3, 0x0(r28)
     mr r4, r27
@@ -292,14 +292,14 @@ lbl_fn_8009B9E8_000001C4:
     addi r3, r1, 0x8
     li r5, 0x0
     bl GXLoadTexMtxImm
-lbl_fn_8009B9E8_0000022C:
+lbl_atn_Model_loadNodeMatrices_0000022C:
     addi r25, r25, 0x1
     addi r28, r28, 0x4
     cmpwi r25, 0xa
     addi r27, r27, 0x3
     addi r29, r29, 0x4
-    blt lbl_fn_8009B9E8_000001C4
-lbl_fn_8009B9E8_00000244:
+    blt lbl_atn_Model_loadNodeMatrices_000001C4
+lbl_atn_Model_loadNodeMatrices_00000244:
     addi r11, r1, 0x90
     psq_l f31, 0x98(r1), 0, 0
     lfd f31, 0x90(r1)
@@ -310,7 +310,7 @@ lbl_fn_8009B9E8_00000244:
     blr
 }
 
-asm void fn_8009BB9C(void)
+asm void atn_Model_loadTexMatrices(void)
 {
     nofralloc
     stwu r1, -0x170(r1)
@@ -345,8 +345,8 @@ asm void fn_8009BB9C(void)
     li r31, 0x40
     li r30, 0x0
     li r24, 0x0
-    b lbl_fn_8009BB9C_000005A0
-lbl_fn_8009BB9C_000002E8:
+    b lbl_atn_Model_loadTexMatrices_000005A0
+lbl_atn_Model_loadTexMatrices_000002E8:
     lwz r6, 0x8(r25)
     li r8, 0x0
     lwz r4, 0xf8(r22)
@@ -361,71 +361,71 @@ lbl_fn_8009BB9C_000002E8:
     lbz r3, 0x4a(r25)
     lwzx r4, r6, r0
     add r7, r6, r0
-    b lbl_fn_8009BB9C_0000032C
-lbl_fn_8009BB9C_00000324:
+    b lbl_atn_Model_loadTexMatrices_0000032C
+lbl_atn_Model_loadTexMatrices_00000324:
     addi r5, r5, 0x18
     addi r8, r8, 0x1
-lbl_fn_8009BB9C_0000032C:
+lbl_atn_Model_loadTexMatrices_0000032C:
     cmpw r8, r3
-    bge lbl_fn_8009BB9C_0000034C
+    bge lbl_atn_Model_loadTexMatrices_0000034C
     lwz r0, 0xc(r25)
     add r6, r0, r5
     lbz r0, 0x10(r6)
     extsb r0, r0
     cmpw r0, r4
-    blt lbl_fn_8009BB9C_00000324
-lbl_fn_8009BB9C_0000034C:
+    blt lbl_atn_Model_loadTexMatrices_00000324
+lbl_atn_Model_loadTexMatrices_0000034C:
     cmpw r8, r3
-    bge lbl_fn_8009BB9C_00000374
+    bge lbl_atn_Model_loadTexMatrices_00000374
     mulli r0, r8, 0x18
     lwz r3, 0xc(r25)
     add r3, r3, r0
     lbz r0, 0x10(r3)
     extsb r0, r0
     cmpw r4, r0
-    bne lbl_fn_8009BB9C_00000374
-    b lbl_fn_8009BB9C_00000378
-lbl_fn_8009BB9C_00000374:
+    bne lbl_atn_Model_loadTexMatrices_00000374
+    b lbl_atn_Model_loadTexMatrices_00000378
+lbl_atn_Model_loadTexMatrices_00000374:
     lwz r3, 0x8(r7)
-lbl_fn_8009BB9C_00000378:
+lbl_atn_Model_loadTexMatrices_00000378:
     lwz r3, 0x8(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_8009BB9C_0000038C
+    beq lbl_atn_Model_loadTexMatrices_0000038C
     lfs f29, 0x0(r3)
-    b lbl_fn_8009BB9C_00000390
-lbl_fn_8009BB9C_0000038C:
+    b lbl_atn_Model_loadTexMatrices_00000390
+lbl_atn_Model_loadTexMatrices_0000038C:
     lfs f29, lbl_80880B88
-lbl_fn_8009BB9C_00000390:
+lbl_atn_Model_loadTexMatrices_00000390:
     cmpwi r3, 0x0
-    beq lbl_fn_8009BB9C_000003A0
+    beq lbl_atn_Model_loadTexMatrices_000003A0
     lfs f28, 0x4(r3)
-    b lbl_fn_8009BB9C_000003A4
-lbl_fn_8009BB9C_000003A0:
+    b lbl_atn_Model_loadTexMatrices_000003A4
+lbl_atn_Model_loadTexMatrices_000003A0:
     lfs f28, lbl_80880B8C
-lbl_fn_8009BB9C_000003A4:
+lbl_atn_Model_loadTexMatrices_000003A4:
     cmpwi r3, 0x0
-    beq lbl_fn_8009BB9C_000003B4
+    beq lbl_atn_Model_loadTexMatrices_000003B4
     lfs f27, 0xc(r3)
-    b lbl_fn_8009BB9C_000003B8
-lbl_fn_8009BB9C_000003B4:
+    b lbl_atn_Model_loadTexMatrices_000003B8
+lbl_atn_Model_loadTexMatrices_000003B4:
     lfs f27, lbl_80880B94
-lbl_fn_8009BB9C_000003B8:
+lbl_atn_Model_loadTexMatrices_000003B8:
     cmpwi r3, 0x0
-    beq lbl_fn_8009BB9C_000003C8
+    beq lbl_atn_Model_loadTexMatrices_000003C8
     lfs f26, 0x10(r3)
-    b lbl_fn_8009BB9C_000003CC
-lbl_fn_8009BB9C_000003C8:
+    b lbl_atn_Model_loadTexMatrices_000003CC
+lbl_atn_Model_loadTexMatrices_000003C8:
     lfs f26, lbl_80880B98
-lbl_fn_8009BB9C_000003CC:
+lbl_atn_Model_loadTexMatrices_000003CC:
     cmpwi r3, 0x0
-    beq lbl_fn_8009BB9C_000003DC
+    beq lbl_atn_Model_loadTexMatrices_000003DC
     lfs f25, 0x8(r3)
-    b lbl_fn_8009BB9C_000003E0
-lbl_fn_8009BB9C_000003DC:
+    b lbl_atn_Model_loadTexMatrices_000003E0
+lbl_atn_Model_loadTexMatrices_000003DC:
     lfs f25, lbl_80880B90
-lbl_fn_8009BB9C_000003E0:
+lbl_atn_Model_loadTexMatrices_000003E0:
     fcmpu cr0, f30, f25
-    beq lbl_fn_8009BB9C_00000420
+    beq lbl_atn_Model_loadTexMatrices_00000420
     fmr f1, f25
     bl fn_8068A850
     frsp f24, f1
@@ -439,8 +439,8 @@ lbl_fn_8009BB9C_000003E0:
     fmr f5, f27
     fmr f6, f26
     bl fn_800D5C84
-    b lbl_fn_8009BB9C_00000460
-lbl_fn_8009BB9C_00000420:
+    b lbl_atn_Model_loadTexMatrices_00000460
+lbl_atn_Model_loadTexMatrices_00000420:
     fneg f7, f27
     stfs f29, 0x98(r1)
     fsubs f0, f26, f31
@@ -457,7 +457,7 @@ lbl_fn_8009BB9C_00000420:
     stfs f30, 0xbc(r1)
     stfs f31, 0xc0(r1)
     stfs f30, 0xc4(r1)
-lbl_fn_8009BB9C_00000460:
+lbl_atn_Model_loadTexMatrices_00000460:
     lwz r5, 0x10(r29)
     lwz r4, 0x14(r26)
     subi r0, r5, 0x1
@@ -465,28 +465,28 @@ lbl_fn_8009BB9C_00000460:
     cmplwi r0, 0x3
     cntlzw r3, r3
     srwi r0, r3, 5
-    ble lbl_fn_8009BB9C_000004BC
+    ble lbl_atn_Model_loadTexMatrices_000004BC
     cmpwi r5, 0x0
-    bne lbl_fn_8009BB9C_00000598
+    bne lbl_atn_Model_loadTexMatrices_00000598
     cmpwi r0, 0x0
-    bne lbl_fn_8009BB9C_000004A4
+    bne lbl_atn_Model_loadTexMatrices_000004A4
     lwz r4, 0x18(r28)
     addi r3, r1, 0x98
     li r5, 0x1
     bl GXLoadTexMtxImm
-    b lbl_fn_8009BB9C_00000598
-lbl_fn_8009BB9C_000004A4:
+    b lbl_atn_Model_loadTexMatrices_00000598
+lbl_atn_Model_loadTexMatrices_000004A4:
     mr r4, r31
     addi r3, r1, 0x98
     li r5, 0x0
     bl GXLoadTexMtxImm
     addi r31, r31, 0x3
-    b lbl_fn_8009BB9C_00000598
-lbl_fn_8009BB9C_000004BC:
+    b lbl_atn_Model_loadTexMatrices_00000598
+lbl_atn_Model_loadTexMatrices_000004BC:
     cmpwi r0, 0x0
-    bne lbl_fn_8009BB9C_00000538
+    bne lbl_atn_Model_loadTexMatrices_00000538
     cmpwi r5, 0x4
-    beq lbl_fn_8009BB9C_00000524
+    beq lbl_atn_Model_loadTexMatrices_00000524
     mulli r0, r4, 0x30
     mr r3, r23
     li r5, 0x0
@@ -508,14 +508,14 @@ lbl_fn_8009BB9C_000004BC:
     stfs f30, 0x94(r1)
     lwz r4, 0x18(r28)
     bl GXLoadTexMtxImm
-    b lbl_fn_8009BB9C_00000538
-lbl_fn_8009BB9C_00000524:
+    b lbl_atn_Model_loadTexMatrices_00000538
+lbl_atn_Model_loadTexMatrices_00000524:
     mulli r0, r4, 0x30
     lwz r4, 0x18(r28)
     li r5, 0x0
     add r3, r27, r0
     bl GXLoadTexMtxImm
-lbl_fn_8009BB9C_00000538:
+lbl_atn_Model_loadTexMatrices_00000538:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x38
     lwz r5, 0x10(r29)
@@ -540,13 +540,13 @@ lbl_fn_8009BB9C_00000538:
     li r5, 0x0
     bl GXLoadTexMtxImm
     addi r31, r31, 0x3
-lbl_fn_8009BB9C_00000598:
+lbl_atn_Model_loadTexMatrices_00000598:
     addi r30, r30, 0x1
     addi r24, r24, 0x4
-lbl_fn_8009BB9C_000005A0:
+lbl_atn_Model_loadTexMatrices_000005A0:
     lwz r0, 0xec(r22)
     cmpw r30, r0
-    blt lbl_fn_8009BB9C_000002E8
+    blt lbl_atn_Model_loadTexMatrices_000002E8
     addi r11, r1, 0xf0
     psq_l f31, 0x168(r1), 0, 0
     lfd f31, 0x160(r1)
@@ -571,7 +571,7 @@ lbl_fn_8009BB9C_000005A0:
     blr
 }
 
-asm void fn_8009BF3C(void)
+asm void atn_Model_setupMeshMaterial(void)
 {
     nofralloc
     stwu r1, -0xe0(r1)
@@ -588,29 +588,29 @@ asm void fn_8009BF3C(void)
     stw r28, 0xd0(r1)
     stw r0, 0xa0(r1)
     stw r0, 0xa8(r1)
-    bne lbl_fn_8009BF3C_0000064C
+    bne lbl_atn_Model_setupMeshMaterial_0000064C
     li r0, 0x0
     stw r0, lbl_8087EF2C
-    b lbl_fn_8009BF3C_00000BB0
-lbl_fn_8009BF3C_0000064C:
+    b lbl_atn_Model_setupMeshMaterial_00000BB0
+lbl_atn_Model_setupMeshMaterial_0000064C:
     lwz r0, 0x14(r4)
     extrwi. r0, r0, 1, 20
-    beq lbl_fn_8009BF3C_00000668
+    beq lbl_atn_Model_setupMeshMaterial_00000668
     lwz r3, lbl_8087EFB4
     addi r4, r5, 0x3c
     bl fn_800C06B0
-    b lbl_fn_8009BF3C_00000670
-lbl_fn_8009BF3C_00000668:
+    b lbl_atn_Model_setupMeshMaterial_00000670
+lbl_atn_Model_setupMeshMaterial_00000668:
     lwz r3, lbl_8087EFB4
     bl fn_800C08B0
-lbl_fn_8009BF3C_00000670:
+lbl_atn_Model_setupMeshMaterial_00000670:
     lwz r0, lbl_8087EF2C
     cmplw r29, r0
-    bne lbl_fn_8009BF3C_0000088C
+    bne lbl_atn_Model_setupMeshMaterial_0000088C
     lwz r3, lbl_8087EFA8
     lwz r0, 0x3a0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8009BF3C_0000088C
+    beq lbl_atn_Model_setupMeshMaterial_0000088C
     mr r3, r29
     bl fn_8009DCE0
     lwz r0, 0x18(r29)
@@ -680,20 +680,20 @@ lbl_fn_8009BF3C_00000670:
     bl fn_80615C40
     lbz r0, 0x4e(r29)
     cmpwi r0, 0x1
-    bne lbl_fn_8009BF3C_000007BC
+    bne lbl_atn_Model_setupMeshMaterial_000007BC
     lwz r0, 0x48(r1)
     addi r4, r1, 0x58
     stw r0, 0x58(r1)
     li r3, 0x1
     bl fn_806175F0
-    b lbl_fn_8009BF3C_000007D0
-lbl_fn_8009BF3C_000007BC:
+    b lbl_atn_Model_setupMeshMaterial_000007D0
+lbl_atn_Model_setupMeshMaterial_000007BC:
     lwz r0, lbl_80880C50
     addi r4, r1, 0x5c
     stw r0, 0x5c(r1)
     li r3, 0x1
     bl fn_806175F0
-lbl_fn_8009BF3C_000007D0:
+lbl_atn_Model_setupMeshMaterial_000007D0:
     lfs f12, lbl_80880C58
     addi r4, r1, 0x60
     lfs f0, 0x1c(r30)
@@ -731,7 +731,7 @@ lbl_fn_8009BF3C_000007D0:
     bl fn_80615B60
     lbz r0, 0x4c(r29)
     extsb. r0, r0
-    beq lbl_fn_8009BF3C_00000BB0
+    beq lbl_atn_Model_setupMeshMaterial_00000BB0
     lwz r29, lbl_8087EEE0
     mr r3, r30
     li r4, 0x0
@@ -740,8 +740,8 @@ lbl_fn_8009BF3C_000007D0:
     mr r3, r29
     li r4, 0x0
     bl fn_8007642C
-    b lbl_fn_8009BF3C_00000BB0
-lbl_fn_8009BF3C_0000088C:
+    b lbl_atn_Model_setupMeshMaterial_00000BB0
+lbl_atn_Model_setupMeshMaterial_0000088C:
     lwz r5, 0x8(r29)
     addi r4, r1, 0x30
     lwz r0, 0x20(r29)
@@ -850,20 +850,20 @@ lbl_fn_8009BF3C_0000088C:
     bl fn_80615C40
     lbz r0, 0x4e(r29)
     cmpwi r0, 0x1
-    bne lbl_fn_8009BF3C_00000A58
+    bne lbl_atn_Model_setupMeshMaterial_00000A58
     lwz r0, 0x8(r1)
     addi r4, r1, 0x18
     stw r0, 0x18(r1)
     li r3, 0x1
     bl fn_806175F0
-    b lbl_fn_8009BF3C_00000A6C
-lbl_fn_8009BF3C_00000A58:
+    b lbl_atn_Model_setupMeshMaterial_00000A6C
+lbl_atn_Model_setupMeshMaterial_00000A58:
     lwz r0, lbl_80880C54
     addi r4, r1, 0x1c
     stw r0, 0x1c(r1)
     li r3, 0x1
     bl fn_806175F0
-lbl_fn_8009BF3C_00000A6C:
+lbl_atn_Model_setupMeshMaterial_00000A6C:
     lfs f12, lbl_80880C58
     addi r4, r1, 0x20
     lfs f0, 0x1c(r30)
@@ -901,7 +901,7 @@ lbl_fn_8009BF3C_00000A6C:
     bl fn_80615B60
     lbz r0, 0x4c(r29)
     extsb. r0, r0
-    beq lbl_fn_8009BF3C_00000B24
+    beq lbl_atn_Model_setupMeshMaterial_00000B24
     lwz r28, lbl_8087EEE0
     mr r3, r30
     li r4, 0x0
@@ -910,7 +910,7 @@ lbl_fn_8009BF3C_00000A6C:
     mr r3, r28
     li r4, 0x0
     bl fn_8007642C
-lbl_fn_8009BF3C_00000B24:
+lbl_atn_Model_setupMeshMaterial_00000B24:
     mr r3, r29
     bl fn_8009C508
     mr r3, r29
@@ -935,19 +935,19 @@ lbl_fn_8009BF3C_00000B24:
     lwz r3, lbl_8087EFB4
     lwz r0, 0x2f8(r3)
     cmpwi r0, 0x4
-    bne lbl_fn_8009BF3C_00000BA8
+    bne lbl_atn_Model_setupMeshMaterial_00000BA8
     lwz r0, 0x14(r29)
     extrwi r0, r0, 1, 19
     cmpwi r0, 0x1
-    bne lbl_fn_8009BF3C_00000BA8
+    bne lbl_atn_Model_setupMeshMaterial_00000BA8
     mr r3, r28
     li r4, 0x6
     li r5, 0x2
     bl fn_80076760
-lbl_fn_8009BF3C_00000BA8:
+lbl_atn_Model_setupMeshMaterial_00000BA8:
     lwz r3, lbl_8087EEE0
-    bl fn_800761A8
-lbl_fn_8009BF3C_00000BB0:
+    bl gx_applyRenderState
+lbl_atn_Model_setupMeshMaterial_00000BB0:
     lwz r0, 0xe4(r1)
     lwz r31, 0xdc(r1)
     lwz r30, 0xd8(r1)
@@ -1647,7 +1647,7 @@ lbl_fn_8009CC28_000014AC:
     li r5, 0x40
     bl fn_80076760
     mr r3, r29
-    bl fn_800761A8
+    bl gx_applyRenderState
     mr r3, r31
     li r4, 0x3
     bl fn_80080528
@@ -1826,7 +1826,7 @@ lbl_fn_8009CC28_000017B4:
     li r5, 0x0
     bl fn_80076760
     mr r3, r29
-    bl fn_800761A8
+    bl gx_applyRenderState
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
@@ -2826,7 +2826,7 @@ lbl_fn_8009DE60_000025D0:
     mr r4, r29
     mr r5, r25
     addi r6, r23, 0x24
-    bl fn_8009BF3C
+    bl atn_Model_setupMeshMaterial
     rlwinm r0, r30, 0, 26, 26
     cmpwi r0, 0x20
     bne lbl_fn_8009DE60_0000263C
@@ -2848,7 +2848,7 @@ lbl_fn_8009DE60_000025D0:
     li r5, 0xc0
     bl fn_80076760
     mr r3, r22
-    bl fn_800761A8
+    bl gx_applyRenderState
 lbl_fn_8009DE60_0000263C:
     lwz r0, 0x20(r28)
     lwz r6, 0x20(r23)
@@ -2903,7 +2903,7 @@ lbl_fn_8009DE60_000026E4:
     lwz r3, 0x0(r26)
     lwz r4, 0x4(r26)
     clrlwi r5, r0, 24
-    bl fn_80613910
+    bl GXSetArray
     addi r26, r26, 0xc
 lbl_fn_8009DE60_000026FC:
     lwz r0, 0x0(r26)
@@ -2919,7 +2919,7 @@ lbl_fn_8009DE60_000026FC:
     mr r3, r29
     mr r4, r28
     mr r5, r24
-    bl fn_8009BB9C
+    bl atn_Model_loadTexMatrices
 lbl_fn_8009DE60_00002734:
     lbz r0, lbl_8087EF29
     li r3, -0x1
@@ -2953,7 +2953,7 @@ lbl_fn_8009DE60_00002734:
     li r5, 0x1
     bl fn_80076760
     mr r3, r22
-    bl fn_800761A8
+    bl gx_applyRenderState
     li r26, 0x0
     li r25, 0x0
     b lbl_fn_8009DE60_000027FC
@@ -2965,7 +2965,7 @@ lbl_fn_8009DE60_000027C4:
     lwzx r27, r5, r25
     addi r7, r1, 0x8
     mr r5, r27
-    bl fn_8009B9E8
+    bl atn_Model_loadNodeMatrices
     lwz r4, 0x38(r27)
     lwz r3, 0x14(r4)
     lwz r4, 0x10(r4)
@@ -2980,7 +2980,7 @@ lbl_fn_8009DE60_000027FC:
     addi r4, r29, 0x14
     bl fn_80076A28
     mr r3, r22
-    bl fn_800761A8
+    bl gx_applyRenderState
     b lbl_fn_8009DE60_00002870
 lbl_fn_8009DE60_00002820:
     li r22, 0x0
@@ -2994,7 +2994,7 @@ lbl_fn_8009DE60_0000282C:
     lwzx r26, r5, r25
     addi r7, r1, 0x8
     mr r5, r26
-    bl fn_8009B9E8
+    bl atn_Model_loadNodeMatrices
     lwz r4, 0x38(r26)
     lwz r3, 0x14(r4)
     lwz r4, 0x10(r4)

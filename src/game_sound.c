@@ -73,8 +73,8 @@ extern void fn_8059EF94(void);
 extern void fn_8059F100(void);
 extern void fn_8059F878(void);
 extern void fn_805A1C04(void);
-extern void fn_805F3130(void);
-extern void fn_805F3210(void);
+extern void OSLockMutex(void);
+extern void OSUnlockMutex(void);
 extern void fn_805FA4E0(void);
 extern void fn_80607900(void);
 extern void fn_80607D70(void);
@@ -2166,12 +2166,12 @@ asm void fn_80047B54(void)
     beq lbl_fn_80047B54_00001A08
     addi r30, r3, 0x304
     mr r3, r30
-    bl fn_805F3130
+    bl OSLockMutex
     addi r3, r28, 0x31c
     bl fn_8070DC10
     mr r31, r3
     mr r3, r30
-    bl fn_805F3210
+    bl OSUnlockMutex
     cmplw r29, r31
     beq lbl_fn_80047B54_00001A58
     addi r3, r28, 0x300
@@ -2895,12 +2895,12 @@ lbl_fn_8004829C_00002310:
     bl fn_80717840
     addi r22, r28, 0x2d0
     mr r3, r22
-    bl fn_805F3130
+    bl OSLockMutex
     addi r3, r28, 0x2e8
     bl fn_8070DC00
     mr r21, r3
     mr r3, r22
-    bl fn_805F3210
+    bl OSUnlockMutex
     stw r21, 0x48(r1)
     lwz r0, 0x3a8(r28)
     cmpwi r0, 0x0
@@ -3333,12 +3333,12 @@ lbl_fn_800489F4_00002928:
     bl fn_80717840
     addi r31, r29, 0x304
     mr r3, r31
-    bl fn_805F3130
+    bl OSLockMutex
     addi r3, r29, 0x31c
     bl fn_8070DC00
     mr r30, r3
     mr r3, r31
-    bl fn_805F3210
+    bl OSUnlockMutex
     stw r30, 0x30(r1)
     lwz r0, 0x39c(r29)
     cmpwi r0, 0x0
@@ -4085,12 +4085,12 @@ lbl_fn_8004937C_000033FC:
     bne lbl_fn_8004937C_000033E8
     addi r29, r31, 0x304
     mr r3, r29
-    bl fn_805F3130
+    bl OSLockMutex
     addi r3, r31, 0x31c
     bl fn_8070DC00
     mr r30, r3
     mr r3, r29
-    bl fn_805F3210
+    bl OSUnlockMutex
     cmpw r28, r30
     bge lbl_fn_8004937C_00003438
     mr r4, r28
@@ -4263,12 +4263,12 @@ lbl_fn_800496C0_000035B4:
     addi r29, r31, 0x304
     stw r3, 0x50(r28)
     mr r3, r29
-    bl fn_805F3130
+    bl OSLockMutex
     addi r3, r31, 0x31c
     bl fn_8070DC00
     mr r30, r3
     mr r3, r29
-    bl fn_805F3210
+    bl OSUnlockMutex
     li r0, 0x1
     stw r30, 0x28(r28)
     li r3, 0x1

@@ -24,7 +24,7 @@ extern void fn_8004B378(void);
 extern void fn_80071088(void);
 extern void fn_80079994(void);
 extern void fn_80084320(void);
-extern void fn_8009BF3C(void);
+extern void atn_Model_setupMeshMaterial(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D594C(void);
@@ -68,7 +68,7 @@ extern void fn_80615C40(void);
 extern void fn_80615D20(void);
 extern void fn_80615D50(void);
 extern void fn_806165B0(void);
-extern void fn_806167B0(void);
+extern void GXDrawDone(void);
 extern void fn_80616800(void);
 extern void fn_80616840(void);
 extern void fn_806168C0(void);
@@ -94,12 +94,12 @@ extern void GXSetNumTevStages(void);
 extern void fn_80617A10(void);
 extern void fn_80617C40(void);
 extern void fn_80617D50(void);
-extern void fn_80617DA0(void);
-extern void fn_80617DD0(void);
-extern void fn_80617E00(void);
-extern void fn_80617E40(void);
-extern void fn_80617F20(void);
-extern void fn_80617F50(void);
+extern void GXSetZCompLoc(void);
+extern void GXSetDither(void);
+extern void GXSetZMode(void);
+extern void GXSetColorUpdate(void);
+extern void GXSetAlphaUpdate(void);
+extern void GXSetDstAlpha(void);
 extern void GXLoadPosMtxImm(void);
 extern void GXLoadNrmMtxImm3x3(void);
 extern void GXSetCurrentMtx(void);
@@ -186,7 +186,7 @@ void fn_800760BC(void);
 void fn_800760D0(void);
 void fn_800760E8(void);
 void fn_80076174(void);
-void fn_800761A8(void);
+void gx_applyRenderState(void);
 void fn_800763C0(void);
 void fn_800763FC(void);
 void fn_8007642C(void);
@@ -302,7 +302,7 @@ asm void fn_80071E04(void)
     stfs f0, 0x24(r1)
     stfs f0, 0x28(r1)
     stfs f0, 0x2c(r1)
-    bl fn_8009BF3C
+    bl atn_Model_setupMeshMaterial
     stw r30, 0x80(r29)
     li r3, 0x0
     li r4, 0x1
@@ -638,7 +638,7 @@ asm void fn_80071E04(void)
     stw r0, 0xc(r1)
     li r3, 0x5
     bl fn_80615C40
-    bl fn_806167B0
+    bl GXDrawDone
     lwz r3, lbl_8087EFA8
     lwz r0, 0x3a8(r3)
     cmpwi r0, 0x1
@@ -878,20 +878,20 @@ lbl_fn_80071E04_000009C4:
     li r6, 0x0
     bl fn_80617D50
     li r3, 0x1
-    bl fn_80617DA0
+    bl GXSetZCompLoc
     li r3, 0x1
-    bl fn_80617DD0
+    bl GXSetDither
     li r3, 0x1
     li r4, 0x3
     li r5, 0x1
-    bl fn_80617E00
+    bl GXSetZMode
     li r3, 0x1
-    bl fn_80617E40
+    bl GXSetColorUpdate
     li r3, 0x0
-    bl fn_80617F20
+    bl GXSetAlphaUpdate
     li r3, 0x0
     li r4, 0x0
-    bl fn_80617F50
+    bl GXSetDstAlpha
     lwz r3, 0xd0(r29)
     li r6, 0x4
     lwz r0, 0xd8(r29)
@@ -912,7 +912,7 @@ lbl_fn_80071E04_000009C4:
     rlwimi r0, r4, 7, 22, 24
     ori r0, r0, 0x70
     stw r0, 0xd0(r29)
-    bl fn_800761A8
+    bl gx_applyRenderState
     addi r11, r1, 0x90
     bl _restgpr_26
     lwz r0, 0x94(r1)
@@ -4849,7 +4849,7 @@ lbl_fn_80076174_00004390:
     b fn_80615210
 }
 
-asm void fn_800761A8(void)
+asm void gx_applyRenderState(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -4864,33 +4864,33 @@ asm void fn_800761A8(void)
     li r29, 0x1
     addi r31, r4, 0xc8
     addi r26, r4, 0xf0
-lbl_fn_800761A8_000043D4:
+lbl_gx_applyRenderState_000043D4:
     lwz r3, 0xd8(r27)
     slw r0, r29, r28
     srwi r3, r3, 20
     and. r0, r3, r0
-    beq lbl_fn_800761A8_00004588
+    beq lbl_gx_applyRenderState_00004588
     cmpwi r28, 0x7
-    beq lbl_fn_800761A8_00004588
-    bge lbl_fn_800761A8_00004414
+    beq lbl_gx_applyRenderState_00004588
+    bge lbl_gx_applyRenderState_00004414
     cmpwi r28, 0x3
-    bge lbl_fn_800761A8_00004408
+    bge lbl_gx_applyRenderState_00004408
     cmpwi r28, 0x0
-    bge lbl_fn_800761A8_00004424
-    b lbl_fn_800761A8_00004588
-lbl_fn_800761A8_00004408:
+    bge lbl_gx_applyRenderState_00004424
+    b lbl_gx_applyRenderState_00004588
+lbl_gx_applyRenderState_00004408:
     cmpwi r28, 0x6
-    bge lbl_fn_800761A8_00004514
-    b lbl_fn_800761A8_000044A4
-lbl_fn_800761A8_00004414:
+    bge lbl_gx_applyRenderState_00004514
+    b lbl_gx_applyRenderState_000044A4
+lbl_gx_applyRenderState_00004414:
     cmpwi r28, 0xb
-    beq lbl_fn_800761A8_00004570
-    bge lbl_fn_800761A8_00004588
-    b lbl_fn_800761A8_00004528
-lbl_fn_800761A8_00004424:
+    beq lbl_gx_applyRenderState_00004570
+    bge lbl_gx_applyRenderState_00004588
+    b lbl_gx_applyRenderState_00004528
+lbl_gx_applyRenderState_00004424:
     lwz r3, 0xd0(r27)
     srwi. r0, r3, 31
-    beq lbl_fn_800761A8_00004458
+    beq lbl_gx_applyRenderState_00004458
     rlwinm r0, r3, 6, 27, 29
     extrwi r4, r3, 8, 4
     lwzx r3, r30, r0
@@ -4899,9 +4899,9 @@ lbl_fn_800761A8_00004424:
     li r7, 0x0
     bl fn_806177B0
     li r3, 0x0
-    bl fn_80617E40
-    b lbl_fn_800761A8_00004478
-lbl_fn_800761A8_00004458:
+    bl GXSetColorUpdate
+    b lbl_gx_applyRenderState_00004478
+lbl_gx_applyRenderState_00004458:
     li r3, 0x7
     li r4, 0x0
     li r5, 0x0
@@ -4909,8 +4909,8 @@ lbl_fn_800761A8_00004458:
     li r7, 0x0
     bl fn_806177B0
     li r3, 0x1
-    bl fn_80617E40
-lbl_fn_800761A8_00004478:
+    bl GXSetColorUpdate
+lbl_gx_applyRenderState_00004478:
     lwz r3, 0xd8(r27)
     rlwinm r0, r3, 12, 20, 30
     rlwimi r3, r0, 20, 0, 11
@@ -4921,11 +4921,11 @@ lbl_fn_800761A8_00004478:
     rlwinm r0, r0, 0, 30, 28
     rlwimi r3, r0, 20, 0, 11
     stw r3, 0xd8(r27)
-    b lbl_fn_800761A8_00004588
-lbl_fn_800761A8_000044A4:
+    b lbl_gx_applyRenderState_00004588
+lbl_gx_applyRenderState_000044A4:
     lwz r4, 0xd0(r27)
     extrwi. r0, r4, 1, 12
-    beq lbl_fn_800761A8_000044D0
+    beq lbl_gx_applyRenderState_000044D0
     rlwinm r0, r4, 21, 27, 29
     rlwinm r3, r4, 18, 27, 29
     lwzx r4, r31, r3
@@ -4933,14 +4933,14 @@ lbl_fn_800761A8_000044A4:
     lwzx r5, r31, r0
     li r6, 0xf
     bl fn_80617D50
-    b lbl_fn_800761A8_000044E4
-lbl_fn_800761A8_000044D0:
+    b lbl_gx_applyRenderState_000044E4
+lbl_gx_applyRenderState_000044D0:
     li r3, 0x0
     li r4, 0x4
     li r5, 0x5
     li r6, 0xf
     bl fn_80617D50
-lbl_fn_800761A8_000044E4:
+lbl_gx_applyRenderState_000044E4:
     lwz r3, 0xd8(r27)
     srwi r0, r3, 20
     rlwinm r0, r0, 0, 29, 27
@@ -4952,20 +4952,20 @@ lbl_fn_800761A8_000044E4:
     rlwinm r0, r0, 0, 27, 25
     rlwimi r3, r0, 20, 0, 11
     stw r3, 0xd8(r27)
-    b lbl_fn_800761A8_00004588
-lbl_fn_800761A8_00004514:
+    b lbl_gx_applyRenderState_00004588
+lbl_gx_applyRenderState_00004514:
     lwz r0, 0xd0(r27)
     rlwinm r0, r0, 22, 29, 29
     lwzx r3, r26, r0
     bl fn_80614A80
-    b lbl_fn_800761A8_00004588
-lbl_fn_800761A8_00004528:
+    b lbl_gx_applyRenderState_00004588
+lbl_gx_applyRenderState_00004528:
     lwz r5, 0xd0(r27)
     rlwinm r0, r5, 27, 27, 29
     extrwi r3, r5, 1, 21
     lwzx r4, r30, r0
     extrwi r5, r5, 1, 25
-    bl fn_80617E00
+    bl GXSetZMode
     lwz r3, 0xd8(r27)
     srwi r0, r3, 20
     rlwinm r0, r0, 0, 24, 22
@@ -4977,18 +4977,18 @@ lbl_fn_800761A8_00004528:
     rlwinm r0, r0, 0, 22, 20
     rlwimi r3, r0, 20, 0, 11
     stw r3, 0xd8(r27)
-    b lbl_fn_800761A8_00004588
-lbl_fn_800761A8_00004570:
+    b lbl_gx_applyRenderState_00004588
+lbl_gx_applyRenderState_00004570:
     lwz r0, 0xd0(r27)
     extrwi r3, r0, 1, 27
-    bl fn_80617DD0
+    bl GXSetDither
     lwz r0, 0xd0(r27)
     extrwi r3, r0, 1, 26
-    bl fn_80617DA0
-lbl_fn_800761A8_00004588:
+    bl GXSetZCompLoc
+lbl_gx_applyRenderState_00004588:
     addi r28, r28, 0x1
     cmpwi r28, 0xc
-    blt lbl_fn_800761A8_000043D4
+    blt lbl_gx_applyRenderState_000043D4
     lwz r0, 0xd8(r27)
     lwz r3, 0xd0(r27)
     clrlwi r0, r0, 12

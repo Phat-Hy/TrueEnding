@@ -7,9 +7,10 @@ and the distinct routines are ranked by how often they appear.
 ## Why this file exists
 
 Measured 2026-11-01: **137 distinct routines appear in Track B's probe logs. 36 carry human names, 101 are still
-`fn_`/`lbl_`.** The first naming batch was aimed at the 12 routines behind a single 64-PC audit, and it took those
-from **0 of 12 named to 12 of 12** — which is why `TLS_READ_WATCH`, `StoreWatch` and the per-frame status line now
-read `atn_Model_updateMatrices+0x…` instead of hex.
+`fn_`/`lbl_`.**
+
+Batch 11 named 29 top queue routines (~3,582 logged hits).
+Batch 12 named 27 critical routines covering over **950,000 logged hits**, resolving 21 of the original top 30 routines plus top archive loaders and GX/OS primitives (`atn_Arc_loadEntry` 790,554 hits, `atn_Arc_decompressEntry` 110,445 hits, `OSUnlockMutex` 22,924 hits, `GXFlush` 7,588 hits, `__GXSetDirtyState` 4,303 hits, `GXSetArray` 2,686 hits).
 
 A bulk rename over a subsystem Track B never instruments buys nothing for the port; a rename over this list buys
 readable logs immediately. So: **prefer this queue over an alphabetical or subsystem sweep**, and alternate one
@@ -19,48 +20,27 @@ then `fn_8036F268`, then `fn_800D7278`).
 The names are not cosmetic. `recomp/tls_sym.c` parses this map and every probe prints `name+0xOFFSET`; a name that
 appears in this table is a name the port's diagnostics will use on its next run.
 
-## Regenerate it
+## Top 20 remaining unnamed routines in Track B probe logs
 
-~40 lines of Python: parse `symbols.txt` for `type:function` extents, scan the logs for the five PC patterns,
-bisect each address into its function, count. Re-run after every batch — a name that leaves this table is the
-visible measure of that batch's value to Track B.
-
-## The queue — top 30 unnamed routines by how often Track B's instruments hit them
-
-| function | address | size | hits in Track B's logs |
-|---|---|---|---|
-| `fn_806255E0` | `0x806255E0` | 332 B | 970 |
-| `fn_80615560` | `0x80615560` | 344 B | 609 |
-| `fn_800954DC` | `0x800954DC` | 628 B | 440 |
-| `fn_80083614` | `0x80083614` | 332 B | 391 |
-| `fn_80206F44` | `0x80206F44` | 780 B | 375 |
-| `fn_8046FBB0` | `0x8046FBB0` | 364 B | 291 |
-| `fn_8009B9E8` | `0x8009B9E8` | 436 B | 259 |
-| `fn_8009BF3C` | `0x8009BF3C` | 1484 B | 248 |
-| `fn_800761A8` | `0x800761A8` | 536 B | 248 |
-| `fn_8009F4AC` | `0x8009F4AC` | 476 B | 246 |
-| `fn_806179E0` | `0x806179E0` | 36 B | 240 |
-| `fn_8009BB9C` | `0x8009BB9C` | 928 B | 237 |
-| `fn_800D59B8` | `0x800D59B8` | 132 B | 235 |
-| `fn_8008CD1C` | `0x8008CD1C` | 52 B | 234 |
-| `fn_80617650` | `0x80617650` | 80 B | 233 |
-| `fn_80618350` | `0x80618350` | 80 B | 230 |
-| `fn_80069060` | `0x80069060` | 552 B | 163 |
-| `fn_80069288` | `0x80069288` | 468 B | 156 |
-| `fn_80074EC8` | `0x80074EC8` | 3876 B | 22 |
-| `fn_8009DE60` | `0x8009DE60` | 900 B | 21 |
-| `fn_80236938` | `0x80236938` | 588 B | 13 |
-| `fn_80234CD8` | `0x80234CD8` | 3216 B | 12 |
-| `fn_800A981C` | `0x800A981C` | 1592 B | 10 |
-| `fn_806183A0` | `0x806183A0` | 88 B | 9 |
-| `fn_806167B0` | `0x806167B0` | 72 B | 9 |
-| `fn_80618420` | `0x80618420` | 180 B | 7 |
-| `fn_80076760` | `0x80076760` | 712 B | 7 |
-| `fn_80071E04` | `0x80071E04` | 2832 B | 6 |
-| `fn_8006A950` | `0x8006A950` | 84 B | 5 |
-| `fn_80613960` | `0x80613960` | 580 B | 5 |
-
-**How to read it.** `fn_806255E0` (970 hits) is the routine Track B's logs mention most; `0x806xxxxx` is SDK-level,
-so a name there is cheap and immediately visible in every log. The `0x8009xxxx` / `0x8008xxxx` cluster is the
-field/HUD path, and `0x8046xxxx` / `0x8047xxxx` are the task/book/library units Track A has been working through.
-The first five names alone would cover **2 785** of the logged hits.
+| function | address | size | hits in Track B's logs | source file |
+|---|---|---|---|---|
+| `fn_80071AFC` | `0x80071AFC` | 612 B | 101,909 | `src/game_script.c` |
+| `fn_801F42A8` | `0x801F42A8` | 320 B | 88,678 | `src/game_save_slot.c` |
+| `fn_800EF588` | `0x800EF588` | 308 B | 44,322 | `src/game_cam_mode.c` |
+| `fn_800BDBC8` | `0x800BDBC8` | 4,392 B | 15,038 | `src/game_menu_layout.c` |
+| `fn_8006D7B0` | `0x8006D7B0` | 6,040 B | 14,800 | `src/game_boss.c` |
+| `fn_80149A30` | `0x80149A30` | 9,088 B | 14,772 | `src/game_actor_ai.c` |
+| `fn_80711530` | `0x80711530` | 248 B | 14,112 | `src/game_net_sdk_054.c` |
+| `fn_80473FCC` | `0x80473FCC` | 500 B | 13,018 | `src/game_boss_cocoon_laser_aim.c` |
+| `fn_800C41D0` | `0x800C41D0` | 604 B | 10,260 | `src/game_joint.c` |
+| `fn_800D2494` | `0x800D2494` | 528 B | 8,883 | `src/game_event_cutscene_actor.c` |
+| `fn_80074EC8` | `0x80074EC8` | 3,876 B | 8,702 | `src/game_sequence.c` |
+| `fn_8022B114` | `0x8022B114` | 1,844 B | 7,535 | `src/game_save_header.c` |
+| `fn_8050FE48` | `0x8050FE48` | 568 B | 6,798 | `src/game_coliseum_ui.c` |
+| `fn_801F9FB0` | `0x801F9FB0` | 13,696 B | 6,632 | `src/game_save_load.c` |
+| `fn_800F26D4` | `0x800F26D4` | 764 B | 6,200 | `src/game_cam_action.c` |
+| `fn_80534074` | `0x80534074` | 9,092 B | 4,752 | `src/game_sys_event_state.c` |
+| `fn_800B3464` | `0x800B3464` | 92 B | 3,674 | `src/game_character.c` |
+| `fn_8005B710` | `0x8005B710` | 488 B | 3,459 | `src/game_item_drop.c` |
+| `fn_8061B3A0` | `0x8061B3A0` | 292 B | 3,399 | `src/isfs.c` |
+| `fn_8009DE60` | `0x8009DE60` | 900 B | 3,282 | `src/game_reticle.c` |

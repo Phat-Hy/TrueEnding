@@ -9,7 +9,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_23(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_800761A8(void);
+extern void gx_applyRenderState(void);
 extern void fn_80076760(void);
 extern void fn_80076A28(void);
 extern void fn_800B5994(void);
@@ -1007,7 +1007,7 @@ asm void fn_800BFCB4(void)
     li r5, 0x0
     bl fn_80076760
     lwz r3, lbl_8087EEE0
-    bl fn_800761A8
+    bl gx_applyRenderState
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1

@@ -7,8 +7,8 @@ extern void fn_80082BE0(void);
 extern void fn_80082CAC(void);
 extern void fn_80084E50(void);
 extern void fn_80084FA0(void);
-extern void fn_805F3130(void);
-extern void fn_805F3210(void);
+extern void OSLockMutex(void);
+extern void OSUnlockMutex(void);
 
 /* External data declarations */
 extern u8 lbl_80732048[];
@@ -56,7 +56,7 @@ lbl_fn_800832AC_00000038:
     cmpwi r27, 0x0
     beq lbl_fn_800832AC_00000048
     mr r3, r27
-    bl fn_805F3130
+    bl OSLockMutex
 lbl_fn_800832AC_00000048:
     cmpwi r25, 0xd
     bne lbl_fn_800832AC_00000094
@@ -74,7 +74,7 @@ lbl_fn_800832AC_00000048:
     mr r28, r3
     beq lbl_fn_800832AC_0000008C
     mr r3, r27
-    bl fn_805F3210
+    bl OSUnlockMutex
 lbl_fn_800832AC_0000008C:
     mr r3, r28
     b lbl_fn_800832AC_00000354
@@ -95,7 +95,7 @@ lbl_fn_800832AC_00000094:
     mr r26, r3
     beq lbl_fn_800832AC_000000D8
     mr r3, r27
-    bl fn_805F3210
+    bl OSUnlockMutex
 lbl_fn_800832AC_000000D8:
     mr r3, r26
     b lbl_fn_800832AC_00000354
@@ -124,7 +124,7 @@ lbl_fn_800832AC_000000E0:
     cmpwi r27, 0x0
     beq lbl_fn_800832AC_00000144
     mr r3, r27
-    bl fn_805F3210
+    bl OSUnlockMutex
 lbl_fn_800832AC_00000144:
     mr r3, r26
     b lbl_fn_800832AC_00000354
@@ -149,7 +149,7 @@ lbl_fn_800832AC_0000014C:
     cmpwi r27, 0x0
     beq lbl_fn_800832AC_000001A0
     mr r3, r27
-    bl fn_805F3210
+    bl OSUnlockMutex
 lbl_fn_800832AC_000001A0:
     mr r3, r26
     b lbl_fn_800832AC_00000354
@@ -177,7 +177,7 @@ lbl_fn_800832AC_000001A8:
     cmpwi r27, 0x0
     beq lbl_fn_800832AC_00000208
     mr r3, r27
-    bl fn_805F3210
+    bl OSUnlockMutex
 lbl_fn_800832AC_00000208:
     mr r3, r26
     b lbl_fn_800832AC_00000354
@@ -264,7 +264,7 @@ lbl_fn_800832AC_00000340:
     cmpwi r27, 0x0
     beq lbl_fn_800832AC_00000350
     mr r3, r27
-    bl fn_805F3210
+    bl OSUnlockMutex
 lbl_fn_800832AC_00000350:
     mr r3, r26
 lbl_fn_800832AC_00000354:
@@ -502,7 +502,7 @@ lbl_fn_800838B8_00000648:
     cmpwi r31, 0x0
     beq lbl_fn_800838B8_00000658
     mr r3, r31
-    bl fn_805F3130
+    bl OSLockMutex
 lbl_fn_800838B8_00000658:
     cmpwi r28, 0x9
     bne lbl_fn_800838B8_00000688
@@ -560,7 +560,7 @@ lbl_fn_800838B8_00000718:
     cmpwi r31, 0x0
     beq lbl_fn_800838B8_00000728
     mr r3, r31
-    bl fn_805F3210
+    bl OSUnlockMutex
 lbl_fn_800838B8_00000728:
     mr r3, r30
     lmw r25, 0x14(r1)
@@ -594,7 +594,7 @@ lbl_fn_800839EC_00000780:
     cmpwi r31, 0x0
     beq lbl_fn_800839EC_00000790
     mr r3, r31
-    bl fn_805F3130
+    bl OSLockMutex
 lbl_fn_800839EC_00000790:
     lwz r12, 0x150(r24)
     addi r3, r24, 0x150
@@ -622,7 +622,7 @@ lbl_fn_800839EC_000007E8:
     cmpwi r31, 0x0
     beq lbl_fn_800839EC_000007F8
     mr r3, r31
-    bl fn_805F3210
+    bl OSUnlockMutex
 lbl_fn_800839EC_000007F8:
     cmpwi r29, 0x0
     beq lbl_fn_800839EC_00000810
@@ -665,7 +665,7 @@ lbl_fn_80083AD4_0000086C:
     cmpwi r30, 0x0
     beq lbl_fn_80083AD4_0000087C
     mr r3, r30
-    bl fn_805F3130
+    bl OSLockMutex
 lbl_fn_80083AD4_0000087C:
     lwz r12, 0x38(r28)
     addi r3, r28, 0x38
@@ -858,7 +858,7 @@ lbl_fn_80083AD4_00000B34:
     cmpwi r30, 0x0
     beq lbl_fn_80083AD4_00000B44
     mr r3, r30
-    bl fn_805F3210
+    bl OSUnlockMutex
 lbl_fn_80083AD4_00000B44:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

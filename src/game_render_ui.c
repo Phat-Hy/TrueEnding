@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void fn_8005DF90(void);
 extern void fn_80075DEC(void);
 extern void fn_80075F58(void);
-extern void fn_800761A8(void);
+extern void gx_applyRenderState(void);
 extern void fn_800763FC(void);
 extern void fn_80076760(void);
 extern void fn_800846FC(void);
@@ -47,7 +47,7 @@ extern void fn_80615D20(void);
 extern void fn_80615D50(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
-extern void fn_806167B0(void);
+extern void GXDrawDone(void);
 extern void fn_80616EF0(void);
 extern void fn_80617030(void);
 extern void fn_80617130(void);
@@ -148,7 +148,7 @@ asm void fn_800B0CD4(void)
     psq_st f28, 0x108(r1), 0, 0
     stw r31, 0xfc(r1)
     mr r31, r3
-    bl fn_806167B0
+    bl GXDrawDone
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x1
@@ -463,7 +463,7 @@ lbl_fn_800B105C_000003C0:
     li r4, 0x1
     bl GXCopyTex
     bl fn_80614190
-    bl fn_806167B0
+    bl GXDrawDone
     li r3, 0x0
     li r4, 0x1
     li r5, 0x0
@@ -1247,7 +1247,7 @@ asm void fn_800B1C44(void)
     li r5, 0x0
     bl fn_80076760
     mr r3, r29
-    bl fn_800761A8
+    bl gx_applyRenderState
     bl fn_806134E0
     li r3, 0x0
     li r4, 0x9

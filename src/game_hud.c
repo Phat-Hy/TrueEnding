@@ -81,7 +81,7 @@ void fn_8009EC2C(void);
 void fn_8009EE30(void);
 void fn_8009F444(void);
 void fn_8009F448(void);
-void fn_8009F4AC(void);
+void atn_HUD_projectWorldPoints(void);
 void fn_8009F688(void);
 void fn_8009F690(void);
 void fn_8009F694(void);
@@ -1375,7 +1375,7 @@ lbl_fn_8009EE30_00001238:
 asm void fn_8009F444(void)
 {
     nofralloc
-    b fn_8009F4AC
+    b atn_HUD_projectWorldPoints
 }
 
 asm void fn_8009F448(void)
@@ -1410,7 +1410,7 @@ lbl_fn_8009F448_000012B8:
     blr
 }
 
-asm void fn_8009F4AC(void)
+asm void atn_HUD_projectWorldPoints(void)
 {
     nofralloc
     stwu r1, -0xc0(r1)
@@ -1436,11 +1436,11 @@ asm void fn_8009F4AC(void)
     lwz r0, 0x6c(r3)
     rlwinm r0, r0, 0, 21, 21
     cmpwi r0, 0x400
-    bne lbl_fn_8009F4AC_00001380
+    bne lbl_atn_HUD_projectWorldPoints_00001380
     lwz r3, lbl_8087EFB4
     lwz r0, 0x2f8(r3)
     cmpwi r0, 0x4
-    bne lbl_fn_8009F4AC_00001380
+    bne lbl_atn_HUD_projectWorldPoints_00001380
     lwz r3, 0x2fc(r3)
     mr r4, r29
     addi r5, r1, 0x40
@@ -1459,12 +1459,12 @@ asm void fn_8009F4AC(void)
     psq_st f4, 0x18(r29), 0, 0
     psq_st f5, 0x20(r29), 0, 0
     psq_st f6, 0x28(r29), 0, 0
-lbl_fn_8009F4AC_00001380:
+lbl_atn_HUD_projectWorldPoints_00001380:
     lwz r29, 0x3c(r31)
     li r27, 0x0
     li r28, 0x0
-    b lbl_fn_8009F4AC_0000142C
-lbl_fn_8009F4AC_00001390:
+    b lbl_atn_HUD_projectWorldPoints_0000142C
+lbl_atn_HUD_projectWorldPoints_00001390:
     add r4, r29, r28
     lwz r0, lbl_8087EF40
     psq_l f2, 0x8(r4), 0, 0
@@ -1482,15 +1482,15 @@ lbl_fn_8009F4AC_00001390:
     psq_st f6, 0x28(r3), 0, 0
     lwz r0, 0x80(r30)
     cmpwi r0, 0x0
-    beq lbl_fn_8009F4AC_000013E0
+    beq lbl_atn_HUD_projectWorldPoints_000013E0
     add r4, r0, r28
-    b lbl_fn_8009F4AC_000013F0
-lbl_fn_8009F4AC_000013E0:
+    b lbl_atn_HUD_projectWorldPoints_000013F0
+lbl_atn_HUD_projectWorldPoints_000013E0:
     addi r3, r1, 0x70
     addi r5, r1, 0x10
     bl fn_805F89F0
     addi r4, r1, 0x10
-lbl_fn_8009F4AC_000013F0:
+lbl_atn_HUD_projectWorldPoints_000013F0:
     psq_l f2, 0x8(r4), 0, 0
     add r3, r29, r28
     psq_l f3, 0x10(r4), 0, 0
@@ -1506,10 +1506,10 @@ lbl_fn_8009F4AC_000013F0:
     psq_st f4, 0x18(r3), 0, 0
     psq_st f5, 0x20(r3), 0, 0
     psq_st f6, 0x28(r3), 0, 0
-lbl_fn_8009F4AC_0000142C:
+lbl_atn_HUD_projectWorldPoints_0000142C:
     lwz r0, 0x38(r31)
     cmplw r27, r0
-    blt lbl_fn_8009F4AC_00001390
+    blt lbl_atn_HUD_projectWorldPoints_00001390
     lwz r0, 0x50(r31)
     mr r3, r31
     lwz r4, lbl_8087EFB4
@@ -1521,17 +1521,17 @@ lbl_fn_8009F4AC_0000142C:
     lwz r3, 0x4(r30)
     addi r0, r3, 0x10
     cmplw r31, r0
-    bne lbl_fn_8009F4AC_0000148C
+    bne lbl_atn_HUD_projectWorldPoints_0000148C
     lwz r4, 0x7c(r30)
     cmpwi r4, 0x0
-    beq lbl_fn_8009F4AC_0000148C
+    beq lbl_atn_HUD_projectWorldPoints_0000148C
     addi r5, r1, 0x8
     psq_l f1, 0x74(r30), 0, 0
     psq_st f1, 0x0(r5), 0, 0
     mr r3, r31
     lfs f1, 0x70(r30)
     bl atn_Lockon_updateTargetTextures
-lbl_fn_8009F4AC_0000148C:
+lbl_atn_HUD_projectWorldPoints_0000148C:
     addi r11, r1, 0xc0
     bl _restgpr_27
     lwz r0, 0xc4(r1)

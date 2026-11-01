@@ -37,8 +37,8 @@ void GXSetCPUFifo(void);
 void GXSetGPFifo(void);
 void fn_80612950(void);
 void fn_80612A50(void);
-void fn_80612A60(void);
-void fn_80612AF0(void);
+void GXGetFifoStatus(void);
+void GXGetFifoCount(void);
 void fn_80612B10(void);
 void fn_80612B60(void);
 void fn_80612C00(void);
@@ -547,7 +547,7 @@ asm void fn_80612A50(void)
     blr
 }
 
-asm void fn_80612A60(void)
+asm void GXGetFifoStatus(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -557,10 +557,10 @@ asm void fn_80612A60(void)
     mr r31, r3
     lbz r0, lbl_80880080
     cmpwi r0, 0x0
-    bne lbl_fn_80612A60_00000738
+    bne lbl_GXGetFifoStatus_00000738
     li r3, 0x0
-    b lbl_fn_80612A60_0000078C
-lbl_fn_80612A60_00000738:
+    b lbl_GXGetFifoStatus_0000078C
+lbl_GXGetFifoStatus_00000738:
     bl fn_80612950
     lis r5, lbl_807E75E4@ha
     lwzu r4, lbl_807E75E4@l(r5)
@@ -582,7 +582,7 @@ lbl_fn_80612A60_00000738:
     stw r4, 0x18(r31)
     lwz r0, 0x20(r5)
     stw r0, 0x20(r31)
-lbl_fn_80612A60_0000078C:
+lbl_GXGetFifoStatus_0000078C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -590,7 +590,7 @@ lbl_fn_80612A60_0000078C:
     blr
 }
 
-asm void fn_80612AF0(void)
+asm void GXGetFifoCount(void)
 {
     nofralloc
     lwz r0, 0x14(r3)

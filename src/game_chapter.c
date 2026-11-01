@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void fn_8004FF58(void);
 extern void fn_8006FEBC(void);
 extern void fn_80072914(void);
-extern void fn_800761A8(void);
+extern void gx_applyRenderState(void);
 extern void fn_800763C0(void);
 extern void fn_80076760(void);
 extern void fn_800846FC(void);
@@ -2264,7 +2264,7 @@ asm void fn_80078938(void)
     stfs f2, 0x64(r1)
     psq_st f1, 0x0(r5), 0, 0
     stfs f2, 0x190(r1)
-    bl fn_800761A8
+    bl gx_applyRenderState
     lfs f27, lbl_80880AF4
     li r28, 0x0
     lfs f28, lbl_80880AD0

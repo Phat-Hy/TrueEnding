@@ -87,7 +87,7 @@ extern void fn_805A6B58(void);
 extern void fn_805A6BD8(void);
 extern void fn_805A6BDC(void);
 extern void fn_805A6D14(void);
-extern void fn_805F30F0(void);
+extern void OSInitMutex(void);
 extern void fn_80603AA0(void);
 extern void fn_80682428(void);
 extern void fn_806846C4(void);
@@ -1257,7 +1257,7 @@ asm void taskManager_initSystem(void)
     mtspr GQR5, r3
     bl fn_800827E0
     addi r3, r3, 0x1b4
-    bl fn_805F30F0
+    bl OSInitMutex
     bl DVDInit
     bl fn_80603AA0
     bl NWC24SuspendScheduler

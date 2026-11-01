@@ -79,8 +79,8 @@ extern u32 lbl_80880A10;
 
 /* Function declarations */
 void fn_80068DB0(void);
-void fn_80069060(void);
-void fn_80069288(void);
+void cmpr_encodeBlock(void);
+void cmpr_encodeTexture(void);
 void fn_8006945C(void);
 void fn_8006969C(void);
 void fn_800696B4(void);
@@ -315,7 +315,7 @@ lbl_fn_80068DB0_000001CC:
     blr
 }
 
-asm void fn_80069060(void)
+asm void cmpr_encodeBlock(void)
 {
     nofralloc
     stwu r1, -0x50(r1)
@@ -352,13 +352,13 @@ asm void fn_80069060(void)
     stb r26, 0x1f(r1)
     stb r6, 0x20(r1)
     mtctr r10
-lbl_fn_80069060_00000338:
+lbl_cmpr_encodeBlock_00000338:
     lbz r6, 0x3(r7)
     cmplwi r6, 0x7f
-    bge lbl_fn_80069060_0000034C
+    bge lbl_cmpr_encodeBlock_0000034C
     stb r28, 0x0(r5)
-    b lbl_fn_80069060_000003F8
-lbl_fn_80069060_0000034C:
+    b lbl_cmpr_encodeBlock_000003F8
+lbl_cmpr_encodeBlock_0000034C:
     lbz r30, 0x2(r7)
     li r6, 0x0
     lbz r10, 0x1d(r1)
@@ -384,10 +384,10 @@ lbl_fn_80069060_0000034C:
     add r26, r27, r26
     add r10, r11, r10
     cmpw r10, r26
-    bge lbl_fn_80069060_000003BC
+    bge lbl_cmpr_encodeBlock_000003BC
     li r6, 0x1
     mr r26, r10
-lbl_fn_80069060_000003BC:
+lbl_cmpr_encodeBlock_000003BC:
     lbz r11, 0x1e(r1)
     lbz r10, 0x20(r1)
     lbz r12, 0x1f(r1)
@@ -400,14 +400,14 @@ lbl_fn_80069060_000003BC:
     add r10, r12, r10
     add r10, r11, r10
     cmpw r10, r26
-    bge lbl_fn_80069060_000003F4
+    bge lbl_cmpr_encodeBlock_000003F4
     li r6, 0x2
-lbl_fn_80069060_000003F4:
+lbl_cmpr_encodeBlock_000003F4:
     stb r6, 0x0(r5)
-lbl_fn_80069060_000003F8:
+lbl_cmpr_encodeBlock_000003F8:
     addi r7, r7, 0x4
     addi r5, r5, 0x1
-    bdnz lbl_fn_80069060_00000338
+    bdnz lbl_cmpr_encodeBlock_00000338
     lbz r7, 0x11(r1)
     extrwi r5, r3, 8, 16
     lbz r6, 0x9(r1)
@@ -463,7 +463,7 @@ lbl_fn_80069060_000003F8:
     blr
 }
 
-asm void fn_80069288(void)
+asm void cmpr_encodeTexture(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -482,60 +482,60 @@ asm void fn_80069288(void)
     stb r7, 0x9(r1)
     stb r6, 0xa(r1)
     mtctr r5
-lbl_fn_80069288_00000518:
+lbl_cmpr_encodeTexture_00000518:
     lbz r7, 0xc(r1)
     lbz r5, 0x0(r9)
     cmplw r5, r7
-    bge lbl_fn_80069288_0000052C
+    bge lbl_cmpr_encodeTexture_0000052C
     mr r7, r5
-lbl_fn_80069288_0000052C:
+lbl_cmpr_encodeTexture_0000052C:
     lbz r6, 0xd(r1)
     lbz r5, 0x1(r9)
     stb r7, 0xc(r1)
     cmplw r5, r6
-    bge lbl_fn_80069288_00000544
+    bge lbl_cmpr_encodeTexture_00000544
     mr r6, r5
-lbl_fn_80069288_00000544:
+lbl_cmpr_encodeTexture_00000544:
     lbz r7, 0xe(r1)
     lbz r5, 0x2(r9)
     stb r6, 0xd(r1)
     cmplw r5, r7
-    bge lbl_fn_80069288_0000055C
+    bge lbl_cmpr_encodeTexture_0000055C
     mr r7, r5
-lbl_fn_80069288_0000055C:
+lbl_cmpr_encodeTexture_0000055C:
     lbz r8, 0x8(r1)
     lbz r5, 0x0(r9)
     stb r7, 0xe(r1)
     cmplw r5, r8
-    ble lbl_fn_80069288_00000574
+    ble lbl_cmpr_encodeTexture_00000574
     mr r8, r5
-lbl_fn_80069288_00000574:
+lbl_cmpr_encodeTexture_00000574:
     lbz r6, 0x9(r1)
     lbz r5, 0x1(r9)
     stb r8, 0x8(r1)
     cmplw r5, r6
-    ble lbl_fn_80069288_0000058C
+    ble lbl_cmpr_encodeTexture_0000058C
     mr r6, r5
-lbl_fn_80069288_0000058C:
+lbl_cmpr_encodeTexture_0000058C:
     lbz r7, 0xa(r1)
     lbz r5, 0x2(r9)
     stb r6, 0x9(r1)
     cmplw r5, r7
-    ble lbl_fn_80069288_000005A4
+    ble lbl_cmpr_encodeTexture_000005A4
     mr r7, r5
-lbl_fn_80069288_000005A4:
+lbl_cmpr_encodeTexture_000005A4:
     cmpwi r0, 0x0
     stb r7, 0xa(r1)
     li r0, 0x0
-    bne lbl_fn_80069288_000005C0
+    bne lbl_cmpr_encodeTexture_000005C0
     lbz r5, 0x3(r9)
     cmplwi r5, 0x7f
-    bge lbl_fn_80069288_000005C4
-lbl_fn_80069288_000005C0:
+    bge lbl_cmpr_encodeTexture_000005C4
+lbl_cmpr_encodeTexture_000005C0:
     li r0, 0x1
-lbl_fn_80069288_000005C4:
+lbl_cmpr_encodeTexture_000005C4:
     addi r9, r9, 0x4
-    bdnz lbl_fn_80069288_00000518
+    bdnz lbl_cmpr_encodeTexture_00000518
     lbz r6, 0xc(r1)
     lbz r5, 0x8(r1)
     rlwinm r8, r6, 8, 16, 20
@@ -550,7 +550,7 @@ lbl_fn_80069288_000005C4:
     rlwimi r12, r6, 29, 27, 31
     cmplw r8, r12
     mr r11, r8
-    ble lbl_fn_80069288_00000644
+    ble lbl_cmpr_encodeTexture_00000644
     mr r11, r12
     mr r12, r8
     lbz r9, 0xc(r1)
@@ -565,25 +565,25 @@ lbl_fn_80069288_000005C4:
     stb r9, 0x8(r1)
     stb r8, 0x9(r1)
     stb r10, 0xa(r1)
-    b lbl_fn_80069288_00000658
-lbl_fn_80069288_00000644:
+    b lbl_cmpr_encodeTexture_00000658
+lbl_cmpr_encodeTexture_00000644:
     clrlwi r6, r8, 16
     clrlwi r5, r12, 16
     cmplw r6, r5
-    bne lbl_fn_80069288_00000658
+    bne lbl_cmpr_encodeTexture_00000658
     li r0, 0x1
-lbl_fn_80069288_00000658:
+lbl_cmpr_encodeTexture_00000658:
     cmpwi r0, 0x0
-    beq lbl_fn_80069288_00000680
+    beq lbl_cmpr_encodeTexture_00000680
     mr r7, r3
     mr r8, r4
     clrlwi r3, r11, 16
     clrlwi r4, r12, 16
     addi r5, r1, 0xc
     addi r6, r1, 0x8
-    bl fn_80069060
-    b lbl_fn_80069288_0000069C
-lbl_fn_80069288_00000680:
+    bl cmpr_encodeBlock
+    b lbl_cmpr_encodeTexture_0000069C
+lbl_cmpr_encodeTexture_00000680:
     mr r7, r3
     mr r8, r4
     clrlwi r3, r11, 16
@@ -591,7 +591,7 @@ lbl_fn_80069288_00000680:
     addi r5, r1, 0xc
     addi r6, r1, 0x8
     bl fn_80068DB0
-lbl_fn_80069288_0000069C:
+lbl_cmpr_encodeTexture_0000069C:
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10
@@ -733,7 +733,7 @@ lbl_fn_8006945C_00000708:
     bdnz lbl_fn_8006945C_00000708
     mr r4, r31
     addi r3, r1, 0x8
-    bl fn_80069288
+    bl cmpr_encodeTexture
     addi r31, r31, 0x8
     addi r26, r26, 0x10
     addi r21, r21, 0x1

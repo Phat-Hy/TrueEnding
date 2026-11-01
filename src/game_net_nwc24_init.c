@@ -21,9 +21,9 @@ extern void _savegpr_20(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_805F30F0(void);
-extern void fn_805F3130(void);
-extern void fn_805F3210(void);
+extern void OSInitMutex(void);
+extern void OSLockMutex(void);
+extern void OSUnlockMutex(void);
 extern void fn_8061C8A0(void);
 
 /* External data declarations */
@@ -154,7 +154,7 @@ lbl_fn_80698088_000000E8:
     li r30, -0x1
 lbl_fn_80698088_000000FC:
     addi r3, r31, 0x0
-    bl fn_805F3210
+    bl OSUnlockMutex
     mr r3, r30
 lbl_fn_80698088_00000108:
     lwz r0, 0x24(r1)
@@ -257,7 +257,7 @@ lbl_fn_806981B0_00000244:
 lbl_fn_806981B0_00000258:
     lis r3, lbl_808330E0@ha
     addi r3, r3, lbl_808330E0@l
-    bl fn_805F3210
+    bl OSUnlockMutex
     cmpwi r29, 0x0
     beq lbl_fn_806981B0_00000270
     stw r27, 0x0(r29)
@@ -386,7 +386,7 @@ lbl_fn_8069832C_00000400:
     li r30, -0x1
 lbl_fn_8069832C_00000414:
     addi r3, r31, 0x0
-    bl fn_805F3210
+    bl OSUnlockMutex
     mr r3, r30
 lbl_fn_8069832C_00000420:
     addi r11, r1, 0x20
@@ -416,7 +416,7 @@ asm void fn_806984C0(void)
     lwz r3, lbl_8087ED38
     bl OSRegisterVersion
     addi r3, r31, 0x0
-    bl fn_805F30F0
+    bl OSInitMutex
     bl IPCGetBufferLo
     addi r0, r3, 0x1f
     clrrwi r29, r0, 5
@@ -454,7 +454,7 @@ lbl_fn_806984C0_000004FC:
     mr r3, r30
     bl OSRestoreInterrupts
     addi r3, r31, 0x0
-    bl fn_805F3130
+    bl OSLockMutex
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

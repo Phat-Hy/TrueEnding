@@ -76,8 +76,8 @@ void fn_8046F834(void);
 void fn_8046F8B8(void);
 void fn_8046F96C(void);
 void fn_8046FA18(void);
-void fn_8046FBB0(void);
-void fn_8046FD1C(void);
+void atn_Arc_findFile(void);
+void atn_Arc_getFileEntry(void);
 void fn_8046FD2C(void);
 void fn_8046FD7C(void);
 void fn_80470198(void);
@@ -771,7 +771,7 @@ asm void fn_8046F4D4(void)
 lbl_fn_8046F4D4_00000938:
     lwz r3, 0x8(r31)
     mr r4, r29
-    bl fn_8046FBB0
+    bl atn_Arc_findFile
     cmpwi r3, -0x1
     beq lbl_fn_8046F4D4_00000954
     li r3, 0x1
@@ -1282,7 +1282,7 @@ lbl_fn_8046FA18_00000FD8:
     blr
 }
 
-asm void fn_8046FBB0(void)
+asm void atn_Arc_findFile(void)
 {
     nofralloc
     stwu r1, -0x110(r1)
@@ -1292,59 +1292,59 @@ asm void fn_8046FBB0(void)
     stw r31, 0x10c(r1)
     mr r31, r3
     cmpwi r0, 0x0
-    beq lbl_fn_8046FBB0_00001018
+    beq lbl_atn_Arc_findFile_00001018
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_8046FBB0_00001020
-lbl_fn_8046FBB0_00001018:
+    bne lbl_atn_Arc_findFile_00001020
+lbl_atn_Arc_findFile_00001018:
     li r3, -0x1
-    b lbl_fn_8046FBB0_00001144
-lbl_fn_8046FBB0_00001020:
+    b lbl_atn_Arc_findFile_00001144
+lbl_atn_Arc_findFile_00001020:
     lbz r0, 0x0(r4)
     addi r7, r1, 0x8
     extsb r0, r0
     cmpwi r0, 0x2f
-    beq lbl_fn_8046FBB0_0000103C
+    beq lbl_atn_Arc_findFile_0000103C
     cmpwi r0, 0x5c
-    bne lbl_fn_8046FBB0_00001040
-lbl_fn_8046FBB0_0000103C:
+    bne lbl_atn_Arc_findFile_00001040
+lbl_atn_Arc_findFile_0000103C:
     addi r4, r4, 0x1
-lbl_fn_8046FBB0_00001040:
+lbl_atn_Arc_findFile_00001040:
     lis r5, lbl_807BB380@ha
     li r6, 0x2f
     addi r5, r5, lbl_807BB380@l
-    b lbl_fn_8046FBB0_000010A8
-lbl_fn_8046FBB0_00001050:
+    b lbl_atn_Arc_findFile_000010A8
+lbl_atn_Arc_findFile_00001050:
     extsb r0, r3
     cmpwi r0, 0x5c
-    bne lbl_fn_8046FBB0_0000106C
+    bne lbl_atn_Arc_findFile_0000106C
     stb r6, 0x0(r7)
     addi r7, r7, 0x1
     addi r4, r4, 0x1
-    b lbl_fn_8046FBB0_000010A8
-lbl_fn_8046FBB0_0000106C:
+    b lbl_atn_Arc_findFile_000010A8
+lbl_atn_Arc_findFile_0000106C:
     lbz r0, 0x0(r4)
     li r3, 0x1
     addi r4, r4, 0x1
     extsb r0, r0
     cmplwi r0, 0xff
-    bgt lbl_fn_8046FBB0_00001088
+    bgt lbl_atn_Arc_findFile_00001088
     li r3, 0x0
-lbl_fn_8046FBB0_00001088:
+lbl_atn_Arc_findFile_00001088:
     cmpwi r3, 0x0
-    beq lbl_fn_8046FBB0_00001094
-    b lbl_fn_8046FBB0_000010A0
-lbl_fn_8046FBB0_00001094:
+    beq lbl_atn_Arc_findFile_00001094
+    b lbl_atn_Arc_findFile_000010A0
+lbl_atn_Arc_findFile_00001094:
     lwz r3, 0x38(r5)
     lwz r3, 0x10(r3)
     lbzx r0, r3, r0
-lbl_fn_8046FBB0_000010A0:
+lbl_atn_Arc_findFile_000010A0:
     stb r0, 0x0(r7)
     addi r7, r7, 0x1
-lbl_fn_8046FBB0_000010A8:
+lbl_atn_Arc_findFile_000010A8:
     lbz r3, 0x0(r4)
     extsb. r0, r3
-    bne lbl_fn_8046FBB0_00001050
+    bne lbl_atn_Arc_findFile_00001050
     li r0, 0x0
     stb r0, 0x0(r7)
     addi r3, r1, 0x8
@@ -1355,38 +1355,38 @@ lbl_fn_8046FBB0_000010A8:
     srwi r0, r6, 31
     add r0, r0, r6
     srawi r8, r0, 1
-lbl_fn_8046FBB0_000010DC:
+lbl_atn_Arc_findFile_000010DC:
     add r8, r8, r7
     slwi r0, r8, 4
     lwzx r0, r5, r0
     cmplw r0, r3
-    bne lbl_fn_8046FBB0_000010F8
+    bne lbl_atn_Arc_findFile_000010F8
     mr r3, r8
-    b lbl_fn_8046FBB0_00001144
-lbl_fn_8046FBB0_000010F8:
-    bge lbl_fn_8046FBB0_00001100
+    b lbl_atn_Arc_findFile_00001144
+lbl_atn_Arc_findFile_000010F8:
+    bge lbl_atn_Arc_findFile_00001100
     mr r7, r8
-lbl_fn_8046FBB0_00001100:
+lbl_atn_Arc_findFile_00001100:
     cmplw r0, r3
-    blt lbl_fn_8046FBB0_0000110C
+    blt lbl_atn_Arc_findFile_0000110C
     mr r6, r8
-lbl_fn_8046FBB0_0000110C:
+lbl_atn_Arc_findFile_0000110C:
     subf r4, r7, r6
     srwi r0, r4, 31
     add r0, r0, r4
     srawi. r8, r0, 1
-    bgt lbl_fn_8046FBB0_000010DC
-    bne lbl_fn_8046FBB0_00001140
+    bgt lbl_atn_Arc_findFile_000010DC
+    bne lbl_atn_Arc_findFile_00001140
     lwz r4, 0x4(r31)
     slwi r0, r8, 4
     lwzx r0, r4, r0
     cmplw r3, r0
-    bne lbl_fn_8046FBB0_00001140
+    bne lbl_atn_Arc_findFile_00001140
     li r3, 0x0
-    b lbl_fn_8046FBB0_00001144
-lbl_fn_8046FBB0_00001140:
+    b lbl_atn_Arc_findFile_00001144
+lbl_atn_Arc_findFile_00001140:
     li r3, -0x1
-lbl_fn_8046FBB0_00001144:
+lbl_atn_Arc_findFile_00001144:
     lwz r0, 0x114(r1)
     lwz r31, 0x10c(r1)
     mtlr r0
@@ -1394,7 +1394,7 @@ lbl_fn_8046FBB0_00001144:
     blr
 }
 
-asm void fn_8046FD1C(void)
+asm void atn_Arc_getFileEntry(void)
 {
     nofralloc
     lwz r3, 0x4(r3)

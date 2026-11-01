@@ -15,9 +15,9 @@ extern void _savegpr_22(void);
 extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
-extern void fn_805F30F0(void);
-extern void fn_805F3130(void);
-extern void fn_805F3210(void);
+extern void OSInitMutex(void);
+extern void OSLockMutex(void);
+extern void OSUnlockMutex(void);
 extern void fn_8061C8A0(void);
 extern void fn_8061D080(void);
 extern void fn_80698A2C(void);
@@ -1806,19 +1806,19 @@ lbl_fn_806A5BC0_00001738:
 asm void fn_806A5C88(void)
 {
     nofralloc
-    b fn_805F30F0
+    b OSInitMutex
 }
 
 asm void fn_806A5C8C(void)
 {
     nofralloc
-    b fn_805F3130
+    b OSLockMutex
 }
 
 asm void fn_806A5C90(void)
 {
     nofralloc
-    b fn_805F3210
+    b OSUnlockMutex
 }
 
 asm void fn_806A5CA0(void)

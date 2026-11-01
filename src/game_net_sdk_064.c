@@ -21,7 +21,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_805EE150(void);
-extern void fn_805F30F0(void);
+extern void OSInitMutex(void);
 extern void fn_805F8980(void);
 extern void fn_805F95A0(void);
 extern void fn_805FA200(void);
@@ -2485,7 +2485,7 @@ asm void fn_807263E0(void)
     bne lbl_fn_807263E0_00001F50
     lis r3, lbl_8087D678@ha
     addi r3, r3, lbl_8087D678@l
-    bl fn_805F30F0
+    bl OSInitMutex
     la r3, lbl_80880560
     bl OSInitThreadQueue
     li r0, 0x1
@@ -2524,7 +2524,7 @@ asm void fn_80726470(void)
     bne lbl_fn_80726470_00001FE0
     lis r3, lbl_8087D678@ha
     addi r3, r3, lbl_8087D678@l
-    bl fn_805F30F0
+    bl OSInitMutex
     la r3, lbl_80880560
     bl OSInitThreadQueue
     li r0, 0x1

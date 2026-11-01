@@ -39,9 +39,9 @@ void fn_805F2E90(void);
 void BATConfig(void);
 void fn_805F2FD0(void);
 void __OSInitMemoryProtection(void);
-void fn_805F30F0(void);
-void fn_805F3130(void);
-void fn_805F3210(void);
+void OSInitMutex(void);
+void OSLockMutex(void);
+void OSUnlockMutex(void);
 
 asm void OSGetPhysicalMem2Size(void)
 {
@@ -593,7 +593,7 @@ lbl___OSInitMemoryProtection_00000784:
     blr
 }
 
-asm void fn_805F30F0(void)
+asm void OSInitMutex(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -612,7 +612,7 @@ asm void fn_805F30F0(void)
     blr
 }
 
-asm void fn_805F3130(void)
+asm void OSLockMutex(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -628,35 +628,35 @@ asm void fn_805F3130(void)
     bl OSGetCurrentThread
     mr r30, r3
     li r31, 0x0
-lbl_fn_805F3130_00000814:
+lbl_OSLockMutex_00000814:
     lwz r0, 0x8(r28)
     cmpwi r0, 0x0
-    bne lbl_fn_805F3130_0000085C
+    bne lbl_OSLockMutex_0000085C
     lwz r3, 0xc(r28)
     stw r30, 0x8(r28)
     addi r0, r3, 0x1
     stw r0, 0xc(r28)
     lwz r3, 0x2f8(r30)
     cmpwi r3, 0x0
-    bne lbl_fn_805F3130_00000844
+    bne lbl_OSLockMutex_00000844
     stw r28, 0x2f4(r30)
-    b lbl_fn_805F3130_00000848
-lbl_fn_805F3130_00000844:
+    b lbl_OSLockMutex_00000848
+lbl_OSLockMutex_00000844:
     stw r28, 0x10(r3)
-lbl_fn_805F3130_00000848:
+lbl_OSLockMutex_00000848:
     li r0, 0x0
     stw r3, 0x14(r28)
     stw r0, 0x10(r28)
     stw r28, 0x2f8(r30)
-    b lbl_fn_805F3130_00000894
-lbl_fn_805F3130_0000085C:
+    b lbl_OSLockMutex_00000894
+lbl_OSLockMutex_0000085C:
     cmplw r0, r30
-    bne lbl_fn_805F3130_00000874
+    bne lbl_OSLockMutex_00000874
     lwz r3, 0xc(r28)
     addi r0, r3, 0x1
     stw r0, 0xc(r28)
-    b lbl_fn_805F3130_00000894
-lbl_fn_805F3130_00000874:
+    b lbl_OSLockMutex_00000894
+lbl_OSLockMutex_00000874:
     stw r28, 0x2f0(r30)
     lwz r3, 0x8(r28)
     lwz r4, 0x2d0(r30)
@@ -664,8 +664,8 @@ lbl_fn_805F3130_00000874:
     mr r3, r28
     bl OSSleepThread
     stw r31, 0x2f0(r30)
-    b lbl_fn_805F3130_00000814
-lbl_fn_805F3130_00000894:
+    b lbl_OSLockMutex_00000814
+lbl_OSLockMutex_00000894:
     mr r3, r29
     bl OSRestoreInterrupts
     lwz r0, 0x24(r1)
@@ -678,7 +678,7 @@ lbl_fn_805F3130_00000894:
     blr
 }
 
-asm void fn_805F3210(void)
+asm void OSUnlockMutex(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -694,40 +694,40 @@ asm void fn_805F3210(void)
     lwz r0, 0x8(r29)
     mr r30, r3
     cmplw r0, r3
-    bne lbl_fn_805F3210_00000964
+    bne lbl_OSUnlockMutex_00000964
     lwz r0, 0xc(r29)
     subic. r0, r0, 0x1
     stw r0, 0xc(r29)
-    bne lbl_fn_805F3210_00000964
+    bne lbl_OSUnlockMutex_00000964
     lwz r4, 0x10(r29)
     lwz r5, 0x14(r29)
     cmpwi r4, 0x0
-    bne lbl_fn_805F3210_00000920
+    bne lbl_OSUnlockMutex_00000920
     stw r5, 0x2f8(r3)
-    b lbl_fn_805F3210_00000924
-lbl_fn_805F3210_00000920:
+    b lbl_OSUnlockMutex_00000924
+lbl_OSUnlockMutex_00000920:
     stw r5, 0x14(r4)
-lbl_fn_805F3210_00000924:
+lbl_OSUnlockMutex_00000924:
     cmpwi r5, 0x0
-    bne lbl_fn_805F3210_00000934
+    bne lbl_OSUnlockMutex_00000934
     stw r4, 0x2f4(r3)
-    b lbl_fn_805F3210_00000938
-lbl_fn_805F3210_00000934:
+    b lbl_OSUnlockMutex_00000938
+lbl_OSUnlockMutex_00000934:
     stw r4, 0x10(r5)
-lbl_fn_805F3210_00000938:
+lbl_OSUnlockMutex_00000938:
     li r0, 0x0
     stw r0, 0x8(r29)
     lwz r4, 0x2d0(r3)
     lwz r0, 0x2d4(r3)
     cmpw r4, r0
-    bge lbl_fn_805F3210_0000095C
+    bge lbl_OSUnlockMutex_0000095C
     mr r3, r30
     bl __OSGetEffectivePriority
     stw r3, 0x2d0(r30)
-lbl_fn_805F3210_0000095C:
+lbl_OSUnlockMutex_0000095C:
     mr r3, r29
     bl OSWakeupThread
-lbl_fn_805F3210_00000964:
+lbl_OSUnlockMutex_00000964:
     mr r3, r31
     bl OSRestoreInterrupts
     lwz r0, 0x24(r1)

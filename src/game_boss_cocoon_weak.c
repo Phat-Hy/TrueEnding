@@ -27,7 +27,7 @@ extern void fn_800D3FA4(void);
 extern void fn_800DC6B4(void);
 extern void fn_801FECE0(void);
 extern void fn_8046C1C8(void);
-extern void fn_8046C2D4(void);
+extern void atn_Arc_loadEntry(void);
 extern void fn_8046CBB0(void);
 extern void fn_8046CBBC(void);
 extern void fn_8046EBC4(void);
@@ -1104,7 +1104,7 @@ lbl_atn_Loader_execute_00000D84:
     lwz r5, 0xc(r30)
     addi r6, r30, 0x10
     lwz r7, 0x50(r30)
-    bl fn_8046C2D4
+    bl atn_Arc_loadEntry
     lwz r4, 0x0(r30)
     mr r3, r30
     lwz r26, 0x4(r30)
