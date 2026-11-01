@@ -30,7 +30,7 @@ extern void fn_801781B0(void);
 extern void task_findEntryById(void);
 extern void fn_80310314(void);
 extern void fn_80375184(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void fn_8044D6AC(void);
 extern void fn_805A40BC(void);
 extern void fn_805A4258(void);
@@ -1142,7 +1142,7 @@ lbl_fn_803123D0_00000E6C:
     li r6, 0x0
     lfs f1, lbl_80884CA4
     lfs f2, lbl_80884CDC
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_803123D0_00000F54:
     lwz r3, 0x14e4(r29)
     cmpwi r3, 0x0
@@ -1701,7 +1701,7 @@ lbl_fn_8031319C_000016C0:
     lfs f1, lbl_80884CA4
     li r6, 0x0
     lfs f2, lbl_80884CDC
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_8031319C_00001704:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

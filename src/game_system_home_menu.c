@@ -37,7 +37,7 @@ extern void node_destroy(void);
 extern void fn_80089ACC(void);
 extern void motion_updateFogAdj(void);
 extern void fn_800C31EC(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB480(void);
 extern void fn_800CB538(void);
@@ -361,7 +361,7 @@ asm void fn_8035DFB8(void)
     stfs f1, 0x188(r31)
     stw r29, 0x18c(r31)
     stfs f0, 0x190(r31)
-    bl fn_800CB360
+    bl morph_reset
     lis r3, lbl_8074B538@ha
     cmpwi r29, 0x0
     addi r3, r3, lbl_8074B538@l

@@ -9,7 +9,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void collision_testLineSegment(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void fn_8008B978(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -1727,7 +1727,7 @@ lbl_fn_803AA5E4_000015E0:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x108
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_803AA5E4_00001678:
     lwz r0, 0x38(r27)
     cmpwi r29, 0x0
@@ -1768,7 +1768,7 @@ lbl_fn_803AA5E4_000016E0:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_803AA5E4_00001708:
     lwz r4, 0x0(r31)
     lis r3, lbl_8074ED24@ha

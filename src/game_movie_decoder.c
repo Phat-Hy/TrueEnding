@@ -8,11 +8,11 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void fn_80126214(void);
 extern void fn_8013A258(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void sound_initGlobalInstances(void);
@@ -1254,7 +1254,7 @@ lbl_fn_8033C490_00001050:
     li r10, 0x0
     bl res_Shader_bindParams
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r4, r31
     lwz r5, 0x14d0(r31)
@@ -1265,7 +1265,7 @@ lbl_fn_8033C490_00001050:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     lis r4, lbl_8074A4C0@ha
     lfs f1, lbl_80885260
     addi r4, r4, lbl_8074A4C0@l

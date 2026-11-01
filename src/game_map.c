@@ -7,7 +7,7 @@ extern void _savegpr_20(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void fn_8006B0C8(void);
 extern void fn_8006B174(void);
 extern void fn_8007C144(void);
@@ -263,7 +263,7 @@ lbl_map_processTrigger_00000200:
     stb r0, 0x187(r1)
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x88
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_map_processTrigger_0000025C:
     lwz r0, 0x20c(r21)
     li r3, 0x8
@@ -1006,7 +1006,7 @@ asm void fn_8008BD10(void)
     stb r0, 0x527(r1)
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x428
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_8008BD10_00000C44:
     lwz r3, 0x148(r26)
     cmpwi r3, 0x0
@@ -1120,7 +1120,7 @@ lbl_fn_8008BD10_00000D70:
     stb r0, 0x427(r1)
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x328
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_8008BD10_00000DD8:
     addi r3, r26, 0x164
     bl fn_80476204
@@ -1216,7 +1216,7 @@ lbl_fn_8008BD10_00000EEC:
     stb r31, 0x327(r1)
     addi r4, r1, 0x228
     lwz r3, lbl_8087EEB8
-    bl fn_800697D8
+    bl boss_recordDamage
     lwz r3, lbl_8087EFE0
     addi r4, r23, 0xa0
     bl fn_800C5F5C
@@ -1240,7 +1240,7 @@ lbl_fn_8008BD10_00000F48:
     stb r31, 0x227(r1)
     addi r4, r1, 0x128
     lwz r3, lbl_8087EEB8
-    bl fn_800697D8
+    bl boss_recordDamage
     lwz r3, lbl_8087EFE0
     addi r4, r23, 0xe6
     bl fn_800C5F5C
@@ -1315,7 +1315,7 @@ lbl_fn_8008BD10_00001054:
     stb r0, 0x127(r1)
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x28
-    bl fn_800697D8
+    bl boss_recordDamage
     lwz r3, 0x140(r26)
     addi r27, r26, 0x164
     lwz r4, 0x16c(r26)
@@ -1764,7 +1764,7 @@ lbl_fn_8008C62C_000016B4:
     stb r19, 0x127(r1)
     addi r4, r1, 0x28
     lwz r3, lbl_8087EEB8
-    bl fn_800697D8
+    bl boss_recordDamage
     li r6, -0x4
 lbl_fn_8008C62C_000016C8:
     lwz r3, 0x110(r29)

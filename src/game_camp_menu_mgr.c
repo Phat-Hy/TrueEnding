@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void str_assignBuffer(void);
 extern void mem_alloc(void);
 extern void msg_getMessageById(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void morph_updateMesh(void);
@@ -146,7 +146,7 @@ asm void fn_803B6190(void)
     stfs f0, 0x60(r30)
     stw r0, 0x64(r30)
     stfs f0, 0x68(r30)
-    bl fn_800CB360
+    bl morph_reset
     stb r31, 0x70(r30)
     mr r3, r30
     lwz r4, lbl_80885C1C

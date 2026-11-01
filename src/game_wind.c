@@ -17,7 +17,7 @@ extern void scissor_clipFrustum(void);
 extern void fn_8010CA34(void);
 extern void fn_80134134(void);
 extern void fn_80139560(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void fn_80153B44(void);
 extern void fn_801562A0(void);
 extern void fn_80158BB4(void);
@@ -1784,7 +1784,7 @@ lbl_fn_800E9ED8_00001868:
     cmpwi r0, 0x0
     beq lbl_fn_800E9ED8_00001A08
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r31
     lwz r7, 0x638(r31)

@@ -32,7 +32,7 @@ extern void fn_802E554C(void);
 extern void fn_802E55B0(void);
 extern void world_setGlobalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -1502,7 +1502,7 @@ lbl_fn_802E3EE8_000013CC:
     lfs f1, lbl_80884720
     li r6, 0x0
     lfs f2, lbl_808846F4
-    bl fn_803EA77C
+    bl chest_spawnLoot
     b lbl_fn_802E3EE8_000014D4
 lbl_fn_802E3EE8_000013F4:
     li r0, 0x0

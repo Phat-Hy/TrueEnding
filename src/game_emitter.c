@@ -50,7 +50,7 @@ extern void fn_80219344(void);
 extern void task_findEntryById(void);
 extern void fn_8036DAA8(void);
 extern void world_getGlobalFlag(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void fn_80481668(void);
 extern void fn_8059B670(void);
 extern void PSMTXRotRad(void);
@@ -1521,7 +1521,7 @@ lbl_fn_800E2FE0_000012DC:
     lfs f2, lbl_808812E8
     li r5, 0x20
     li r6, 0x0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_800E2FE0_00001300:
     lwz r0, 0x12a8(r30)
     oris r0, r0, 0x1

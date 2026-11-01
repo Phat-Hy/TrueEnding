@@ -21,7 +21,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
 extern void fn_800902C0(void);
@@ -493,7 +493,7 @@ lbl_fn_8049A09C_00000540:
     li r5, 0x0
     oris r0, r0, 0x800
     stw r0, 0x340(r29)
-    bl fn_8008AD4C
+    bl area_updateZoneState
 lbl_fn_8049A09C_0000056C:
     lwz r3, lbl_8087F0A8
     lwz r0, 0x5b4(r3)
@@ -590,7 +590,7 @@ lbl_fn_8049A09C_000006C0:
     lwz r3, 0x324(r29)
     addi r4, r1, 0x60
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
 lbl_fn_8049A09C_000006D0:
     mr r3, r30
     bl talk_formatQuotedString

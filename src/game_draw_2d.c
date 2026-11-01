@@ -51,7 +51,7 @@ extern void fn_80617220(void);
 extern void fn_80617340(void);
 extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
-extern void fn_80617D50(void);
+extern void GXSetTevAlphaIn(void);
 extern void GXSetZCompLoc(void);
 extern void rand(void);
 extern void std_sin(void);
@@ -1095,7 +1095,7 @@ asm void fn_800B2EA0(void)
     li r4, 0x1
     li r5, 0x0
     li r6, 0x3
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     lwz r3, lbl_8087EEE0
     bl fn_80075DEC
     lwz r3, lbl_8087EFB4

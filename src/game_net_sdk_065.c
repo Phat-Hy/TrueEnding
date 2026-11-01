@@ -40,7 +40,7 @@ extern void fn_806177F0(void);
 extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80617A10(void);
-extern void fn_80617D50(void);
+extern void GXSetTevAlphaIn(void);
 extern void fn_80725FF0(void);
 extern void fn_80726070(void);
 extern void fn_807260C0(void);
@@ -681,7 +681,7 @@ lbl_fn_80726B90_00000758:
     li r4, 0x4
     li r5, 0x5
     li r6, 0xf
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
@@ -810,7 +810,7 @@ lbl_fn_80726B90_00000954:
     li r4, 0x4
     li r5, 0x5
     li r6, 0xf
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
@@ -916,7 +916,7 @@ lbl_fn_80726B90_00000AF4:
     li r4, 0x4
     li r5, 0x5
     li r6, 0xf
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
@@ -1022,7 +1022,7 @@ lbl_fn_80726B90_00000C94:
     li r4, 0x4
     li r5, 0x5
     li r6, 0xf
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
@@ -1128,7 +1128,7 @@ lbl_fn_80726B90_00000E34:
     li r4, 0x4
     li r5, 0x5
     li r6, 0xf
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
@@ -1718,7 +1718,7 @@ lbl_fn_80727B60_000016A4:
     li r4, 0x4
     li r5, 0x5
     li r6, 0xf
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     li r3, 0x2
     bl GXSetNumTevStages
     li r3, 0x0

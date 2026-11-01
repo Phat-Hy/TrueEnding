@@ -17,7 +17,7 @@ extern void fn_80155DAC(void);
 extern void debuff_clearStatus(void);
 extern void fn_801750FC(void);
 extern void fn_801B2EDC(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -366,7 +366,7 @@ lbl_fn_80198C08_00000408:
     lfs f1, lbl_80881FBC
     li r6, 0x0
     lfs f2, lbl_80881FF4
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_80198C08_0000042C:
     psq_l f31, 0x138(r1), 0, 0
     mr r3, r31

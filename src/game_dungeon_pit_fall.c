@@ -9,7 +9,7 @@ extern void fn_8007A530(void);
 extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800CA144(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB480(void);
 extern void fn_800CB4EC(void);
@@ -1293,7 +1293,7 @@ asm void fn_803E8698(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     mr r29, r3
-    bl fn_800CB360
+    bl morph_reset
     li r31, 0x0
     addi r30, r29, 0x10
     li r0, 0x1e

@@ -21,7 +21,7 @@ extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092F1C(void);
@@ -34,7 +34,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void str_skipWhitespace(void);
 extern void fn_8011F8F4(void);
 extern void skill_findNodeById(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void quest_checkCondition(void);
 extern void fn_802180A8(void);
 extern void task_mapIdToQueue(void);
@@ -1199,7 +1199,7 @@ lbl_fn_804131A4_00000DF4:
     psq_l f1, 0x0(r30), 0, 0
     psq_st f1, 0x528(r23), 0, 0
     stfs f2, 0x530(r23)
-    bl fn_80144710
+    bl quest_evaluateConditions
     stw r26, 0x54(r1)
     addi r3, r23, 0xb0
     addi r4, r1, 0x54
@@ -1700,7 +1700,7 @@ lbl_fn_80413BD4_00001530:
     mr r4, r3
     mr r3, r18
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     mr r3, r31
     mr r4, r18
     addi r5, r1, 0x108

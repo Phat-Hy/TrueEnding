@@ -24,7 +24,7 @@ extern void node_createNamedChild(void);
 extern void node_destroy(void);
 extern void fn_80092954(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
@@ -1044,7 +1044,7 @@ asm void fn_802A4BBC(void)
     addi r3, r29, 0x152c
     bl res_MsgHandle_constructor
     addi r3, r29, 0x1538
-    bl fn_800CB360
+    bl morph_reset
     lfs f0, lbl_80883E44
     addi r3, r29, 0x1654
     lfs f2, lbl_80883E3C

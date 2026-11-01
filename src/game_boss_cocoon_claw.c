@@ -8,12 +8,12 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
 extern void fn_80107A68(void);
 extern void fn_80108C10(void);
 extern void fn_8012DF7C(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void fn_80148B0C(void);
 extern void fn_8015B238(void);
 extern void actor_setState(void);
@@ -524,7 +524,7 @@ lbl_fn_80464608_00000634:
     psq_st f1, 0x0(r30), 0, 0
     psq_st f1, 0x534(r31), 0, 0
     stfs f2, 0x53c(r31)
-    bl fn_80144710
+    bl quest_evaluateConditions
     li r3, 0x5b4
     bl task_findEntryById
     mr r30, r3
@@ -749,7 +749,7 @@ lbl_fn_80464CF0_00000888:
 lbl_fn_80464CF0_000009AC:
     bne lbl_fn_80464CF0_00000A04
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     li r0, 0x0
     stw r0, 0x1574(r31)
     lfs f31, 0x538(r31)
@@ -1918,7 +1918,7 @@ lbl_fn_80465B88_0000194C:
     lwz r3, lbl_8087F048
     fdivs f0, f31, f0
     stfs f0, 0x1fc(r1)
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_80465B88_00001C8C
 lbl_fn_80465B88_00001ADC:
     cmpwi r0, 0x2

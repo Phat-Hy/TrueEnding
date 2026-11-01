@@ -76,7 +76,7 @@ extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80617A10(void);
 extern void fn_80617C40(void);
-extern void fn_80617D50(void);
+extern void GXSetTevAlphaIn(void);
 extern void GXSetZCompLoc(void);
 extern void GXSetDither(void);
 extern void GXSetZMode(void);
@@ -1028,7 +1028,7 @@ lbl___GXInitGX_00000CE4:
     li r4, 0x4
     li r5, 0x5
     li r6, 0x0
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     li r3, 0x1
     bl GXSetZCompLoc
     li r3, 0x1

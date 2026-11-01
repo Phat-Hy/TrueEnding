@@ -16,7 +16,7 @@ extern void fn_8006B174(void);
 extern void fn_8006B2D8(void);
 extern void fn_8006D008(void);
 extern void mem_alloc(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void fn_8008B130(void);
 extern void fn_80091C10(void);
 extern void atn_Model_findBoneIndex(void);
@@ -639,7 +639,7 @@ lbl_fn_80564344_00000784:
     lwz r4, 0xd0(r1)
 lbl_fn_80564344_00000788:
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     b lbl_fn_80564344_00000940
 lbl_fn_80564344_00000794:
     cmpwi r27, 0x0
@@ -658,7 +658,7 @@ lbl_fn_80564344_000007A8:
 lbl_fn_80564344_000007C0:
     lwz r4, 0xd0(r1)
 lbl_fn_80564344_000007C4:
-    bl fn_8008AD4C
+    bl area_updateZoneState
     b lbl_fn_80564344_00000940
 lbl_fn_80564344_000007CC:
     mr r3, r20

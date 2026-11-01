@@ -16,7 +16,7 @@ extern void route_createSegment(void);
 extern void route_createWaypoint(void);
 extern void fn_80088724(void);
 extern void node_createNamedChild(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -273,7 +273,7 @@ lbl_fn_804089A0_000001CC:
     mr r4, r3
     addi r3, r31, 0xf4
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     b lbl_fn_804089A0_000003A8
 lbl_fn_804089A0_000001E8:
     mr r3, r29
@@ -286,7 +286,7 @@ lbl_fn_804089A0_000001E8:
     mr r4, r3
     addi r3, r31, 0x4c4
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     b lbl_fn_804089A0_000003A8
 lbl_fn_804089A0_00000218:
     mr r3, r29

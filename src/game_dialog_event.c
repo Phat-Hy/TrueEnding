@@ -42,7 +42,7 @@ extern void fn_80140518(void);
 extern void fn_8014052C(void);
 extern void fn_80148334(void);
 extern void dialog_setScriptSlot(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_801511C4(void);
 extern void fn_80151204(void);
 extern void fn_80151210(void);
@@ -253,7 +253,7 @@ lbl_fn_8014F960_00000180:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_8014F960_000001A0:
     cmpwi r28, 0x0
     beq lbl_fn_8014F960_00000250
@@ -1408,7 +1408,7 @@ lbl_fn_8015076C_00001138:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_8015076C_00001158:
     bl equip_getGlobalManager
     li r4, 0x67

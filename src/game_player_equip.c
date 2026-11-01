@@ -16,7 +16,7 @@ extern void msg_getMessageString(void);
 extern void fn_800A55D4(void);
 extern void fn_800A58D0(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void morph_updateMesh(void);
@@ -313,7 +313,7 @@ asm void fn_80120F5C(void)
     addi r3, r29, 0x28
     stw r31, 0x20(r29)
     stw r31, 0x24(r29)
-    bl fn_800CB360
+    bl morph_reset
     stw r31, 0x2c(r29)
     mr r3, r29
     stw r31, 0x30(r29)
@@ -1150,7 +1150,7 @@ lbl_fn_8012133C_00000E04:
 lbl_fn_8012133C_00000E24:
     addi r3, r1, 0x20
     li r19, 0x0
-    bl fn_800CB360
+    bl morph_reset
     fcmpo cr0, f23, f31
     cror eq, lt, eq
     bne lbl_fn_8012133C_00000FD0

@@ -16,7 +16,7 @@ extern void talk_copySpeakerName(void);
 extern void fn_8006B0C8(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void fn_8008B138(void);
 extern void fn_80092F1C(void);
 extern void fn_800A1934(void);
@@ -226,7 +226,7 @@ lbl_fn_800A005C_000001E8:
     addi r3, r30, 0x10
     addi r4, r1, 0x330
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     b lbl_fn_800A005C_000002FC
 lbl_fn_800A005C_00000220:
     lwz r0, 0x24(r1)
@@ -245,7 +245,7 @@ lbl_fn_800A005C_00000240:
     addi r3, r30, 0x10
     addi r4, r1, 0x330
     addi r5, r1, 0x230
-    bl fn_8008AD4C
+    bl area_updateZoneState
     b lbl_fn_800A005C_000002FC
 lbl_fn_800A005C_00000260:
     mr r3, r26

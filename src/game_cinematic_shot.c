@@ -20,11 +20,11 @@ extern void fn_80126214(void);
 extern void fn_80127D8C(void);
 extern void fn_8013A258(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void fn_80158CA4(void);
 extern void fn_8016E4C4(void);
 extern void actor_setState(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80178208(void);
 extern void actor_getMovementFlags(void);
 extern void fn_801AFAC0(void);
@@ -570,7 +570,7 @@ lbl_fn_80336518_000006A8:
     li r5, 0x1
     bl world_setLocalFlag
     mr r3, r31
-    bl fn_801765D8
+    bl battle_awardExp
 lbl_fn_80336518_000006E4:
     lwz r12, 0x0(r31)
     mr r3, r31
@@ -1929,7 +1929,7 @@ lbl_fn_80336C8C_00001A58:
     stw r3, 0x590(r30)
 lbl_fn_80336C8C_00001ACC:
     mr r3, r30
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r0, 0x560(r30)
     cmpwi r0, 0x8d
     bne lbl_fn_80336C8C_00001C30

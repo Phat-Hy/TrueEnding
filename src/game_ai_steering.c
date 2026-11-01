@@ -19,13 +19,13 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_setActive(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
 extern void fn_80126214(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013A258(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void fn_80158BB4(void);
 extern void actor_setState(void);
 extern void assert_formatLocation(void);
@@ -43,7 +43,7 @@ extern void fn_8026580C(void);
 extern void fn_8035B694(void);
 extern void fn_8035B78C(void);
 extern void world_setLocalFlag(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -663,7 +663,7 @@ lbl_fn_8026442C_00000788:
     bl task_findEntryById
     mr r31, r3
     mr r3, r30
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r8, 0x590(r30)
     mr r6, r30
     lwz r3, lbl_8087F048
@@ -937,7 +937,7 @@ lbl_fn_8026474C_00000AF8:
     lfs f2, lbl_80883630
     li r5, 0x19
     li r6, 0x0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_8026474C_00000BC0:
     lwz r0, 0x34(r1)
     psq_l f31, 0x28(r1), 0, 0
@@ -1175,7 +1175,7 @@ lbl_fn_802648CC_00000EB8:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     lfs f0, lbl_80883600
     stfs f0, 0xfb8(r30)
 lbl_fn_802648CC_00000F34:
@@ -1245,7 +1245,7 @@ lbl_fn_80264C88_00000FEC:
     bl task_findEntryById
     mr r31, r3
     mr r3, r30
-    bl fn_80144710
+    bl quest_evaluateConditions
     li r0, 0x1
     stb r0, 0x59f(r30)
     lwz r8, 0x590(r30)

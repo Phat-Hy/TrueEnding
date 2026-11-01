@@ -16,7 +16,7 @@ extern void fn_80011220(void);
 extern void vec3_sub(void);
 extern void vec3_add(void);
 extern void mission_updateStub(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void atn_Task_unlink(void);
 extern void fn_800EC204(void);
 extern void fn_800F7FF0(void);
@@ -365,7 +365,7 @@ lbl_fn_803A1B20_0000033C:
     cmpwi r3, 0x0
     beq lbl_fn_803A1B20_0000039C
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
     b lbl_fn_803A1B20_0000039C
 lbl_fn_803A1B20_00000370:
     lwz r4, 0x8(r28)

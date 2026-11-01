@@ -29,11 +29,11 @@ extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
 extern void fn_800EDFE8(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
 extern void fn_8012DB04(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void fn_80151448(void);
@@ -1241,7 +1241,7 @@ lbl_fn_8045883C_00000F94:
     bl task_findEntryById
     mr r30, r3
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r31
     lwz r8, 0x590(r31)
@@ -1353,7 +1353,7 @@ lbl_fn_8045883C_000010E8:
     li r8, 0x0
     li r9, 0x24
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_8045883C_000014E4
 lbl_fn_8045883C_00001180:
     lfs f31, 0x2e4(r3)

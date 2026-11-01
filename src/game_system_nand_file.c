@@ -22,7 +22,7 @@ extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_800F8524(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
 extern void fn_801010A0(void);
 extern void fn_8010B250(void);
@@ -1207,7 +1207,7 @@ lbl_fn_80349BA0_00000F58:
     lfs f2, lbl_80885398
     li r9, 0x104
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     addi r30, r30, 0x1
     cmpwi r30, 0x8
     blt lbl_fn_80349BA0_00000D94

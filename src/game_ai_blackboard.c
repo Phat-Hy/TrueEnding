@@ -17,7 +17,7 @@ extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void fn_80139560(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void equip_applyToCharacter(void);
@@ -1215,7 +1215,7 @@ lbl_fn_8025DE7C_00000F5C:
     stw r3, 0x590(r31)
 lbl_fn_8025DE7C_00000FD0:
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r31
     lwz r7, 0x638(r31)

@@ -29,7 +29,7 @@ extern void route_interpolatePath(void);
 extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void lockon_updateTarget(void);
 extern void atn_Anim_applyLayerTransform(void);
@@ -1863,7 +1863,7 @@ lbl_fn_80363284_000017DC:
     mr r4, r31
     addi r3, r29, 0x4
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     mr r3, r30
     bl talk_formatQuotedString
     bl str_findChar
@@ -2039,13 +2039,13 @@ lbl_fn_803635E8_000019F4:
     addi r3, r29, 0x4
     addi r4, r1, 0x208
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     b lbl_fn_803635E8_00001B04
 lbl_fn_803635E8_00001A6C:
     addi r3, r29, 0x4
     addi r4, r1, 0x208
     addi r5, r1, 0x108
-    bl fn_8008AD4C
+    bl area_updateZoneState
     b lbl_fn_803635E8_00001B04
 lbl_fn_803635E8_00001A80:
     mr r3, r30

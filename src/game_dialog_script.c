@@ -35,7 +35,7 @@ extern void fn_8012F188(void);
 extern void fn_8013322C(void);
 extern void fn_801333A4(void);
 extern void fn_80134168(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_8014FD30(void);
 extern void fn_801533C8(void);
 extern void fn_8015EB2C(void);
@@ -1146,7 +1146,7 @@ lbl_dialog_updateScriptState_00000EB4:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_dialog_updateScriptState_00000ED4:
     lwz r0, 0x12a4(r28)
     extrwi. r0, r0, 1, 26
@@ -1361,7 +1361,7 @@ lbl_dialog_updateScriptState_000011B8:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_dialog_updateScriptState_000011D8:
     lwz r0, 0x12a4(r28)
     extrwi. r0, r0, 1, 26

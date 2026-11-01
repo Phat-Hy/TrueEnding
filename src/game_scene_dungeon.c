@@ -17,7 +17,7 @@ extern void fn_801446F0(void);
 extern void fn_801539E0(void);
 extern void fn_80155DAC(void);
 extern void fn_803C18DC(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -155,7 +155,7 @@ lbl_fn_801AB6B8_000000D8:
     li r6, 0x0
     lfs f1, lbl_808822A0
     lfs f2, lbl_808822AC
-    bl fn_803EA77C
+    bl chest_spawnLoot
     b lbl_fn_801AB6B8_00000308
 lbl_fn_801AB6B8_000000F8:
     li r0, 0x1
@@ -254,7 +254,7 @@ lbl_fn_801AB6B8_00000240:
     li r6, 0x0
     lfs f1, lbl_808822A0
     lfs f2, lbl_808822AC
-    bl fn_803EA77C
+    bl chest_spawnLoot
     b lbl_fn_801AB6B8_000002F0
 lbl_fn_801AB6B8_00000260:
     lwz r4, 0x4(r30)
@@ -1458,7 +1458,7 @@ lbl_fn_801AC434_00001338:
     li r6, 0x0
     lfs f1, lbl_808822F0
     lfs f2, lbl_80882310
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801AC434_00001390:
     psq_l f31, 0x228(r1), 0, 0
     mr r3, r27
@@ -2031,7 +2031,7 @@ lbl_fn_801ACF4C_00001B4C:
     li r6, 0x0
     lfs f1, lbl_808822F0
     lfs f2, lbl_80882310
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801ACF4C_00001BC8:
     psq_l f31, 0x148(r1), 0, 0
     mr r3, r28

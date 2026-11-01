@@ -23,7 +23,7 @@ extern void fn_8000DD98(void);
 extern void fn_8000DDA0(void);
 extern void fn_8000DE3C(void);
 extern void fn_8000DE44(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
@@ -46,9 +46,9 @@ extern void fn_8011EDE0(void);
 extern void fn_80129A48(void);
 extern void fn_8012AC40(void);
 extern void fn_801446F0(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void quest_checkCondition(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_8014EEC4(void);
 extern void fn_8014F4FC(void);
 extern void fn_8014FAD0(void);
@@ -61,7 +61,7 @@ extern void fn_8016E5F0(void);
 extern void actor_setState(void);
 extern void fn_8016EB48(void);
 extern void fn_801750FC(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80176ACC(void);
 extern void fn_80176DFC(void);
 extern void fn_80178208(void);
@@ -474,7 +474,7 @@ lbl_fn_8000E5D0_000004C8:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_8000E5D0_00000508:
     li r0, 0x0
     stw r0, 0x20(r31)
@@ -1927,7 +1927,7 @@ lbl_fn_8000F1EC_000018D0:
     li r4, 0x0
     bl fn_8017AC44
     lwz r3, 0x13fc(r15)
-    bl fn_801765D8
+    bl battle_awardExp
 lbl_fn_8000F1EC_000018F8:
     li r0, -0x1
     stw r0, 0x58(r29)
@@ -2231,7 +2231,7 @@ lbl_fn_8000FAE8_00001D20:
     li r5, 0x0
     li r6, 0x0
     lwz r3, 0x48(r3)
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_8000FAE8_00001D34:
     lwz r3, 0x4(r31)
     lwz r0, 0x98(r3)
@@ -2251,7 +2251,7 @@ lbl_fn_8000FAE8_00001D34:
     stfs f2, 0x53c(r3)
     lwz r3, 0x1c(r31)
     lwz r3, 0x48(r3)
-    bl fn_80144710
+    bl quest_evaluateConditions
     li r0, 0x0
     stw r0, 0x24(r1)
     addi r4, r1, 0x24

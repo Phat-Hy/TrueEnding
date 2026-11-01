@@ -18,7 +18,7 @@ extern void fn_801092C8(void);
 extern void fn_80126214(void);
 extern void fn_8012D8B8(void);
 extern void fn_80139560(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
@@ -265,7 +265,7 @@ asm void fn_80247DA4(void)
     stfs f2, 0x1c(r1)
     psq_st f1, 0x528(r3), 0, 0
     stfs f2, 0x530(r3)
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, 0x14cc(r31)
     cmpwi r3, 0x0
     ble lbl_fn_80247DA4_00000204

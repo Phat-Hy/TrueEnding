@@ -16,7 +16,7 @@ extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void fn_800928B0(void);
 extern void fn_8009E5A0(void);
 extern void fn_8009EB20(void);
@@ -763,7 +763,7 @@ lbl_fn_803FF834_0000096C:
     mr r4, r3
     addi r3, r29, 0xf4
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
 lbl_fn_803FF834_000009A8:
     addi r3, r1, 0x8
     bl talk_parseQuotes

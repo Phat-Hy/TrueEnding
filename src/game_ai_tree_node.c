@@ -14,7 +14,7 @@ extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void wcs_vformat(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80109828(void);
 extern void fn_80139560(void);
@@ -1458,7 +1458,7 @@ lbl_fn_80258A50_000013A8:
     lfd f0, 0x138(r1)
     fsubs f0, f0, f30
     stfs f0, 0xe0(r1)
-    bl fn_800F8574
+    bl viewport_updateCulling
     addi r21, r21, 0x1
     cmpw r21, r22
     blt lbl_fn_80258A50_000011FC

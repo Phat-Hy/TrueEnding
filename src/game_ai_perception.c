@@ -22,7 +22,7 @@ extern void node_createNamedChild(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Task_setActive(void);
 extern void wcs_vformat(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void fn_80109828(void);
 extern void fn_8013322C(void);
 extern void fn_80134674(void);
@@ -528,7 +528,7 @@ lbl_fn_8025EAE4_0000059C:
     stfs f16, 0x1f0(r1)
     fsubs f0, f0, f22
     stfs f0, 0x1f4(r1)
-    bl fn_800F8574
+    bl viewport_updateCulling
     addi r22, r22, 0x1
 lbl_fn_8025EAE4_000005F4:
     lwz r21, 0x14ac(r21)

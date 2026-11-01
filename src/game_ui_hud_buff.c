@@ -29,7 +29,7 @@ extern void quest_updateFlow(void);
 extern void quest_checkCondition(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_8014FAD0(void);
 extern void fn_80150178(void);
 extern void fn_801CE148(void);
@@ -249,7 +249,7 @@ lbl_fn_801CC4F4_00000158:
     mr r3, r31
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_801CC4F4_00000184:
     lwz r0, 0x54c(r31)
     addi r3, r1, 0x5c
@@ -407,7 +407,7 @@ lbl_fn_801CC4F4_000003AC:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_801CC4F4_000003D8:
     lwz r0, 0x54c(r31)
     mr r29, r31
@@ -635,7 +635,7 @@ lbl_fn_801CC4F4_00000708:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_801CC4F4_00000734:
     lwz r0, 0x54c(r31)
     mr r28, r31

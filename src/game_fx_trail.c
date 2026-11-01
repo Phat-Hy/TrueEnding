@@ -24,7 +24,7 @@ extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_800F8524(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80108C10(void);
 extern void fn_80109828(void);
@@ -279,7 +279,7 @@ lbl_fn_8028C834_000001A8:
     li r8, 0x0
     li r9, 0x100
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     li r0, 0x2
     stw r0, 0x14b4(r31)
     b lbl_fn_8028C834_000002E4
@@ -1536,7 +1536,7 @@ lbl_fn_8028D5C8_000013DC:
     stfs f0, 0xd8(r1)
     lwz r4, 0x1630(r30)
     lwz r5, 0x14d8(r30)
-    bl fn_800F8574
+    bl viewport_updateCulling
     li r3, 0x0
     li r4, 0x0
     bl sound_initGlobalInstances

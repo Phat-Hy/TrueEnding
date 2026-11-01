@@ -44,7 +44,7 @@ extern void GXSetTevSwapModeTable(void);
 extern void fn_806177B0(void);
 extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
-extern void fn_80617D50(void);
+extern void GXSetTevAlphaIn(void);
 extern void fn_8061A0F0(void);
 extern void fn_8061A100(void);
 extern void fn_80653DA0(void);
@@ -869,7 +869,7 @@ asm void fn_805CE550(void)
     li r4, 0x4
     li r5, 0x5
     li r6, 0xf
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     li r3, 0x6
     li r4, 0x0
     bl fn_806149C0

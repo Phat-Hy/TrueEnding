@@ -31,7 +31,7 @@ extern void fn_80139550(void);
 extern void npc_getPosition(void);
 extern void fn_8013C480(void);
 extern void fn_8013C504(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void quest_checkCondition(void);
 extern void dialog_updateScriptState(void);
@@ -1321,7 +1321,7 @@ lbl_fn_80346384_00000FE0:
     lbz r0, 0x17ec(r31)
     cmpwi r0, 0x0
     bne lbl_fn_80346384_00001078
-    bl fn_80144710
+    bl quest_evaluateConditions
     addi r3, r1, 0x8
     li r4, 0x0
     bl fn_80317034

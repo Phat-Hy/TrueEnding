@@ -9,7 +9,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void fn_80178208(void);
@@ -1459,7 +1459,7 @@ lbl_fn_80327EF0_00001388:
     cror eq, lt, eq
     bne lbl_fn_80327EF0_000013E4
     mr r3, r29
-    bl fn_80144710
+    bl quest_evaluateConditions
     li r3, 0x672
     bl task_findEntryById
     mr r7, r3
@@ -1628,7 +1628,7 @@ lbl_fn_80328270_00001608:
     cror eq, lt, eq
     bne lbl_fn_80328270_000016C0
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     li r3, 0x673
     bl task_findEntryById
     li r0, -0x1
@@ -1821,7 +1821,7 @@ lbl_fn_8032853C_000018D4:
     cror eq, lt, eq
     bne lbl_fn_8032853C_00001A48
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     li r3, 0x673
     bl task_findEntryById
     li r0, -0x1

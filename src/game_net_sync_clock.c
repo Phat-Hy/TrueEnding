@@ -8,7 +8,7 @@ extern void _savegpr_16(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void mem_alloc(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -544,7 +544,7 @@ asm void fn_804C87E0(void)
     stw r28, 0x168(r29)
     stw r28, 0x16c(r29)
     stfs f0, 0x170(r29)
-    bl fn_800CB360
+    bl morph_reset
     lis r4, lbl_80759374@ha
     stw r28, 0x178(r29)
     addi r4, r4, lbl_80759374@l

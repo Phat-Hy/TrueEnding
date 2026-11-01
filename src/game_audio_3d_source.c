@@ -15,7 +15,7 @@ extern void fn_8012539C(void);
 extern void fn_80126214(void);
 extern void fn_80134270(void);
 extern void fn_8013A258(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void fn_80151448(void);
 extern void fn_80158BB4(void);
 extern void fn_80158CA4(void);
@@ -605,7 +605,7 @@ lbl_fn_8031FE4C_000006B4:
     cmpwi r0, 0x0
     beq lbl_fn_8031FE4C_0000080C
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     li r3, 0x687
     bl task_findEntryById
     mr r30, r3

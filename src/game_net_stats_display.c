@@ -22,7 +22,7 @@ extern void fn_80105BD8(void);
 extern void fn_8012D8B8(void);
 extern void fn_8012DB04(void);
 extern void fn_80139560(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
@@ -978,7 +978,7 @@ lbl_fn_8054622C_00000BC0:
     lfs f0, lbl_80887D04
     fadds f0, f3, f0
     stfs f0, 0x52c(r31)
-    bl fn_80144710
+    bl quest_evaluateConditions
     addi r3, r31, 0x7d4
     bl fn_8012D8B8
     lfs f0, 0x14ec(r31)
@@ -1672,7 +1672,7 @@ lbl_fn_80546B88_00001628:
     psq_st f1, 0x0(r17), 0, 0
     psq_st f1, 0x534(r18), 0, 0
     stfs f2, 0x53c(r18)
-    bl fn_80144710
+    bl quest_evaluateConditions
     mr r3, r18
     bl quest_updateFlow
     psq_l f1, 0x528(r18), 0, 0

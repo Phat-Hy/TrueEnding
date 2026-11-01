@@ -11,7 +11,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void atn_Model_findBoneIndex(void);
 extern void quest_checkCondition(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_8014EEC4(void);
 extern void fn_8016E484(void);
 extern void fn_8036554C(void);
@@ -995,7 +995,7 @@ lbl_fn_8056BD38_00000BDC:
     lwz r3, 0x0(r29)
     li r5, 0x1
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
     b lbl_fn_8056BD38_00000C88
 lbl_fn_8056BD38_00000C7C:
     lwz r3, 0x0(r29)

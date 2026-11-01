@@ -29,7 +29,7 @@ extern void fn_8012DD70(void);
 extern void fn_8013322C(void);
 extern void fn_8013539C(void);
 extern void fn_8014C228(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_8015487C(void);
 extern void fn_80154C08(void);
 extern void fn_80164DCC(void);
@@ -201,7 +201,7 @@ lbl_fn_80152D10_00000170:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_80152D10_00000190:
     lwz r0, 0x12a4(r31)
     extrwi. r0, r0, 1, 26
@@ -1093,7 +1093,7 @@ lbl_fn_801539E0_00000E00:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_801539E0_00000E20:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -1493,7 +1493,7 @@ lbl_fn_80153FD8_000013B8:
     li r4, 0x1
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_80153FD8_000013CC:
     lwz r0, 0xc48(r31)
     li r3, 0x1
@@ -1745,7 +1745,7 @@ lbl_fn_80154344_00001730:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_80154344_00001750:
     lwz r3, lbl_8087F3C0
     mr r4, r31

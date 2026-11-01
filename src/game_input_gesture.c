@@ -35,7 +35,7 @@ extern void fn_80151448(void);
 extern void equip_applyToCharacter(void);
 extern void actor_setState(void);
 extern void fn_8017039C(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80176ACC(void);
 extern void fn_801781B0(void);
 extern void sound_initGlobalInstances(void);
@@ -1889,7 +1889,7 @@ lbl_fn_802EEBA8_00001874:
     lwz r3, 0x14e8(r31)
     cmpwi r3, 0x0
     beq lbl_fn_802EEBA8_00001918
-    bl fn_801765D8
+    bl battle_awardExp
     lwz r3, 0x14e8(r31)
     mr r29, r31
     lwz r30, 0x3fc(r31)

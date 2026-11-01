@@ -29,7 +29,7 @@ extern void mem_getAllocSize(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void fn_8008B978(void);
 extern void lockon_updateTarget(void);
@@ -1230,7 +1230,7 @@ lbl_fn_80452F14_00000E68:
     addi r29, r29, lbl_807549D0@l
     li r5, 0x0
     addi r4, r29, 0x36
-    bl fn_8008AD4C
+    bl area_updateZoneState
     addi r3, r31, 0x14ec
     addi r5, r29, 0x56
     li r4, 0x13f

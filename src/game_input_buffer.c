@@ -16,7 +16,7 @@ extern void fn_80126214(void);
 extern void fn_8012DB04(void);
 extern void fn_8013A258(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void dialog_renderWindow(void);
 extern void fn_80151448(void);
 extern void actor_setState(void);
@@ -1437,7 +1437,7 @@ lbl_fn_802EAF68_0000132C:
     li r31, 0x1
 lbl_fn_802EAF68_00001378:
     mr r3, r30
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r30
     lwz r7, 0x150c(r30)

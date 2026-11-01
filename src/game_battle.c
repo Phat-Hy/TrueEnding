@@ -58,7 +58,7 @@ extern void fn_80134134(void);
 extern void fn_80134270(void);
 extern void fn_80134290(void);
 extern void fn_801342B0(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_8014EEC4(void);
 extern void fn_8016F3D0(void);
 extern void actor_getMovementFlags(void);
@@ -571,7 +571,7 @@ lbl_fn_80017128_000004D4:
     mr r3, r27
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
     b lbl_fn_80017128_00000628
 lbl_fn_80017128_0000061C:
     mr r3, r27

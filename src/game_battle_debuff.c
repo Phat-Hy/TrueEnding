@@ -18,7 +18,7 @@ extern void fn_8011BEB8(void);
 extern void fn_8012DB04(void);
 extern void fn_8013A21C(void);
 extern void fn_8014C228(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_801A2CEC(void);
 extern void fn_801C8F10(void);
 extern void task_mapIdToQueue(void);
@@ -1012,7 +1012,7 @@ lbl_fn_8016DF3C_00000CD0:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_8016DF3C_00000CF0:
     lwz r0, 0x12a4(r30)
     extrwi. r0, r0, 1, 26
@@ -1193,7 +1193,7 @@ lbl_fn_8016DF3C_00000F50:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_8016DF3C_00000F70:
     lwz r0, 0x12a4(r30)
     extrwi. r0, r0, 1, 26
@@ -2322,7 +2322,7 @@ lbl_fn_8016EB48_00001ED8:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_8016EB48_00001EF8:
     cmpwi r29, 0x0
     bne lbl_fn_8016EB48_00001F18

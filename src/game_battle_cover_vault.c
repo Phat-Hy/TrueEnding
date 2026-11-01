@@ -15,7 +15,7 @@ extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void fn_80063D3C(void);
 extern void mem_alloc(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void fn_80092F1C(void);
 extern void atn_Anim_applyLayerTransform(void);
@@ -550,7 +550,7 @@ lbl_fn_803F8890_00000624:
     mr r4, r3
     addi r3, r28, 0xf4
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     mr r3, r28
     addi r4, r28, 0xf4
     addi r5, r1, 0x108

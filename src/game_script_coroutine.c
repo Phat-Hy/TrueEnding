@@ -12,7 +12,7 @@ extern void fn_8015F568(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void fn_80176548(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void sound_initGlobalInstances(void);
 extern void res_registerResource(void);
 extern void fn_8024F9B8(void);
@@ -1530,7 +1530,7 @@ asm void fn_8024E690(void)
     cror eq, gt, eq
     bne lbl_fn_8024E690_000016A8
     mr r3, r31
-    bl fn_801765D8
+    bl battle_awardExp
     b lbl_fn_8024E690_000016A8
 lbl_fn_8024E690_000015C0:
     lfs f31, 0x2e4(r3)
@@ -1586,7 +1586,7 @@ lbl_fn_8024E690_00001684:
     ori r0, r4, 0x8000
     stw r0, 0x12a4(r31)
     mr r3, r31
-    bl fn_801765D8
+    bl battle_awardExp
     mr r3, r31
     bl fn_800EE360
     b lbl_fn_8024E690_000016A8

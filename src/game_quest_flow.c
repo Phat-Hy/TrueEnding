@@ -33,7 +33,7 @@ extern void fn_80129A48(void);
 extern void fn_80129A6C(void);
 extern void fn_80147A18(void);
 extern void quest_checkCondition(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_80154C08(void);
 extern void fn_80164D24(void);
 extern void fn_80175B18(void);
@@ -130,7 +130,7 @@ extern u32 lbl_80881AA8;
 /* Function declarations */
 void fn_801446E8(void);
 void fn_801446F0(void);
-void fn_80144710(void);
+void quest_evaluateConditions(void);
 void fn_80144ED4(void);
 void fn_80144F4C(void);
 void quest_updateFlow(void);
@@ -155,7 +155,7 @@ asm void fn_801446F0(void)
     blr
 }
 
-asm void fn_80144710(void)
+asm void quest_evaluateConditions(void)
 {
     nofralloc
     stwu r1, -0x450(r1)
@@ -179,7 +179,7 @@ asm void fn_80144710(void)
     stw r29, 0x3e4(r1)
     lwz r5, 0xf1c(r3)
     cmpwi r5, 0x0
-    beq lbl_fn_80144710_00000320
+    beq lbl_quest_evaluateConditions_00000320
     psq_l f1, 0x0(r5), 0, 0
     addi r30, r1, 0xbc
     psq_l f2, 0x8(r5), 0, 0
@@ -233,24 +233,24 @@ asm void fn_80144710(void)
     psq_st f1, 0x0(r29), 0, 0
     stfs f2, 0xa0(r1)
     fcmpo cr0, f8, f0
-    bge lbl_fn_80144710_00000178
+    bge lbl_quest_evaluateConditions_00000178
     lfs f0, 0x98(r1)
     fcmpo cr0, f0, f7
-    ble lbl_fn_80144710_0000016C
+    ble lbl_quest_evaluateConditions_0000016C
     lfs f0, lbl_808819C8
-    b lbl_fn_80144710_00000170
-lbl_fn_80144710_0000016C:
+    b lbl_quest_evaluateConditions_00000170
+lbl_quest_evaluateConditions_0000016C:
     lfs f0, lbl_808819CC
-lbl_fn_80144710_00000170:
+lbl_quest_evaluateConditions_00000170:
     stfs f0, 0x90(r1)
-    b lbl_fn_80144710_0000018C
-lbl_fn_80144710_00000178:
+    b lbl_quest_evaluateConditions_0000018C
+lbl_quest_evaluateConditions_00000178:
     frsp f2, f2
     lfs f1, 0x98(r1)
     bl std_atan2
     frsp f0, f1
     stfs f0, 0x90(r1)
-lbl_fn_80144710_0000018C:
+lbl_quest_evaluateConditions_0000018C:
     lfs f0, 0x90(r1)
     addi r3, r1, 0x308
     li r4, 0x79
@@ -311,26 +311,26 @@ lbl_fn_80144710_0000018C:
     fabs f7, f2
     frsp f7, f7
     fcmpo cr0, f7, f0
-    bge lbl_fn_80144710_000002A8
+    bge lbl_quest_evaluateConditions_000002A8
     lfs f7, 0x84(r1)
     lfs f0, lbl_8088196C
     fcmpo cr0, f7, f0
-    ble lbl_fn_80144710_00000298
+    ble lbl_quest_evaluateConditions_00000298
     lfs f0, lbl_808819C8
-    b lbl_fn_80144710_0000029C
-lbl_fn_80144710_00000298:
+    b lbl_quest_evaluateConditions_0000029C
+lbl_quest_evaluateConditions_00000298:
     lfs f0, lbl_808819CC
-lbl_fn_80144710_0000029C:
+lbl_quest_evaluateConditions_0000029C:
     fneg f0, f0
     stfs f0, 0x8c(r1)
-    b lbl_fn_80144710_000002BC
-lbl_fn_80144710_000002A8:
+    b lbl_quest_evaluateConditions_000002BC
+lbl_quest_evaluateConditions_000002A8:
     lfs f1, 0x84(r1)
     bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x8c(r1)
-lbl_fn_80144710_000002BC:
+lbl_quest_evaluateConditions_000002BC:
     lfs f0, lbl_8088196C
     addi r3, r1, 0x8c
     psq_l f1, 0x0(r3), 0, 0
@@ -355,40 +355,40 @@ lbl_fn_80144710_000002BC:
     psq_st f4, 0x18(r3), 0, 0
     psq_st f5, 0x20(r3), 0, 0
     psq_st f6, 0x28(r3), 0, 0
-    b lbl_fn_80144710_000006B4
-lbl_fn_80144710_00000320:
+    b lbl_quest_evaluateConditions_000006B4
+lbl_quest_evaluateConditions_00000320:
     lfs f0, 0x52c(r3)
     stfs f0, 0x1c(r1)
     lwz r0, 0x1c(r1)
     rlwinm r4, r0, 0, 1, 8
     subis r0, r4, 0x7f80
     cmplwi r0, 0x0
-    beq lbl_fn_80144710_00000374
+    beq lbl_quest_evaluateConditions_00000374
     lfs f0, 0x528(r3)
     stfs f0, 0x18(r1)
     lwz r0, 0x18(r1)
     rlwinm r4, r0, 0, 1, 8
     subis r0, r4, 0x7f80
     cmplwi r0, 0x0
-    beq lbl_fn_80144710_00000374
+    beq lbl_quest_evaluateConditions_00000374
     lfs f2, 0x530(r3)
     stfs f2, 0x14(r1)
     lwz r0, 0x14(r1)
     rlwinm r4, r0, 0, 1, 8
     subis r0, r4, 0x7f80
     cmplwi r0, 0x0
-    bne lbl_fn_80144710_00000388
-lbl_fn_80144710_00000374:
+    bne lbl_quest_evaluateConditions_00000388
+lbl_quest_evaluateConditions_00000374:
     psq_l f1, 0x550(r3), 0, 0
     lfs f2, 0x558(r3)
     psq_st f1, 0x528(r3), 0, 0
     stfs f2, 0x530(r3)
-    b lbl_fn_80144710_00000394
-lbl_fn_80144710_00000388:
+    b lbl_quest_evaluateConditions_00000394
+lbl_quest_evaluateConditions_00000388:
     psq_l f1, 0x528(r3), 0, 0
     psq_st f1, 0x550(r3), 0, 0
     stfs f2, 0x558(r3)
-lbl_fn_80144710_00000394:
+lbl_quest_evaluateConditions_00000394:
     lfs f1, 0x528(r31)
     addi r3, r1, 0x378
     lfs f2, 0x52c(r31)
@@ -414,27 +414,27 @@ lbl_fn_80144710_00000394:
     rlwinm r3, r0, 0, 1, 8
     subis r0, r3, 0x7f80
     cmplwi r0, 0x0
-    beq lbl_fn_80144710_00000434
+    beq lbl_quest_evaluateConditions_00000434
     lfs f0, 0x534(r31)
     stfs f0, 0xc(r1)
     lwz r0, 0xc(r1)
     rlwinm r3, r0, 0, 1, 8
     subis r0, r3, 0x7f80
     cmplwi r0, 0x0
-    beq lbl_fn_80144710_00000434
+    beq lbl_quest_evaluateConditions_00000434
     lfs f0, 0x53c(r31)
     stfs f0, 0x8(r1)
     lwz r0, 0x8(r1)
     rlwinm r3, r0, 0, 1, 8
     subis r0, r3, 0x7f80
     cmplwi r0, 0x0
-    bne lbl_fn_80144710_00000444
-lbl_fn_80144710_00000434:
+    bne lbl_quest_evaluateConditions_00000444
+lbl_quest_evaluateConditions_00000434:
     lfs f0, lbl_8088196C
     stfs f0, 0x534(r31)
     stfs f0, 0x538(r31)
     stfs f0, 0x53c(r31)
-lbl_fn_80144710_00000444:
+lbl_quest_evaluateConditions_00000444:
     lfs f7, lbl_8088196C
     addi r29, r1, 0x3a8
     lfs f0, lbl_80881964
@@ -453,7 +453,7 @@ lbl_fn_80144710_00000444:
     stfs f0, 0x1b8(r1)
     lfs f1, 0x538(r31)
     fcmpu cr0, f7, f1
-    beq lbl_fn_80144710_000004E0
+    beq lbl_quest_evaluateConditions_000004E0
     addi r3, r1, 0x2a8
     li r4, 0x79
     bl PSMTXRotRad
@@ -474,11 +474,11 @@ lbl_fn_80144710_00000444:
     psq_st f4, 0x18(r30), 0, 0
     psq_st f5, 0x20(r30), 0, 0
     psq_st f6, 0x28(r30), 0, 0
-lbl_fn_80144710_000004E0:
+lbl_quest_evaluateConditions_000004E0:
     lfs f0, lbl_8088196C
     lfs f1, 0x534(r31)
     fcmpu cr0, f0, f1
-    beq lbl_fn_80144710_00000540
+    beq lbl_quest_evaluateConditions_00000540
     addi r3, r1, 0x248
     li r4, 0x78
     bl PSMTXRotRad
@@ -499,11 +499,11 @@ lbl_fn_80144710_000004E0:
     psq_st f4, 0x18(r30), 0, 0
     psq_st f5, 0x20(r30), 0, 0
     psq_st f6, 0x28(r30), 0, 0
-lbl_fn_80144710_00000540:
+lbl_quest_evaluateConditions_00000540:
     lfs f0, lbl_8088196C
     lfs f1, 0x53c(r31)
     fcmpu cr0, f0, f1
-    beq lbl_fn_80144710_000005A0
+    beq lbl_quest_evaluateConditions_000005A0
     addi r3, r1, 0x1e8
     li r4, 0x7a
     bl PSMTXRotRad
@@ -524,7 +524,7 @@ lbl_fn_80144710_00000540:
     psq_st f4, 0x18(r30), 0, 0
     psq_st f5, 0x20(r30), 0, 0
     psq_st f6, 0x28(r30), 0, 0
-lbl_fn_80144710_000005A0:
+lbl_quest_evaluateConditions_000005A0:
     mr r3, r29
     mr r4, r30
     addi r5, r1, 0x188
@@ -545,10 +545,10 @@ lbl_fn_80144710_000005A0:
     lwz r0, 0x958(r31)
     rlwinm r0, r0, 0, 25, 25
     cmplwi r0, 0x40
-    bne lbl_fn_80144710_00000658
+    bne lbl_quest_evaluateConditions_00000658
     lwz r0, 0x55c(r31)
     cmpwi r0, 0x8
-    beq lbl_fn_80144710_00000658
+    beq lbl_quest_evaluateConditions_00000658
     lfs f1, lbl_80881A0C
     addi r3, r1, 0x158
     li r4, 0x7a
@@ -571,7 +571,7 @@ lbl_fn_80144710_000005A0:
     psq_st f4, 0x18(r4), 0, 0
     psq_st f5, 0x20(r4), 0, 0
     psq_st f6, 0x28(r4), 0, 0
-lbl_fn_80144710_00000658:
+lbl_quest_evaluateConditions_00000658:
     lfs f1, 0x540(r31)
     addi r3, r1, 0xf8
     lfs f2, 0x544(r31)
@@ -595,7 +595,7 @@ lbl_fn_80144710_00000658:
     psq_st f4, 0x18(r4), 0, 0
     psq_st f5, 0x20(r4), 0, 0
     psq_st f6, 0x28(r4), 0, 0
-lbl_fn_80144710_000006B4:
+lbl_quest_evaluateConditions_000006B4:
     addi r4, r1, 0x3a8
     addi r3, r1, 0x2c
     psq_l f1, 0x0(r4), 0, 0
@@ -641,24 +641,24 @@ lbl_fn_80144710_000006B4:
     stfs f31, 0x24(r1)
     fcmpo cr0, f7, f0
     stfs f30, 0x28(r1)
-    ble lbl_fn_80144710_00000770
-    b lbl_fn_80144710_00000774
-lbl_fn_80144710_00000770:
+    ble lbl_quest_evaluateConditions_00000770
+    b lbl_quest_evaluateConditions_00000774
+lbl_quest_evaluateConditions_00000770:
     fmr f7, f0
-lbl_fn_80144710_00000774:
+lbl_quest_evaluateConditions_00000774:
     lfs f8, 0x20(r1)
     fcmpo cr0, f8, f7
-    ble lbl_fn_80144710_00000784
-    b lbl_fn_80144710_0000079C
-lbl_fn_80144710_00000784:
+    ble lbl_quest_evaluateConditions_00000784
+    b lbl_quest_evaluateConditions_0000079C
+lbl_quest_evaluateConditions_00000784:
     lfs f8, 0x24(r1)
     lfs f0, 0x28(r1)
     fcmpo cr0, f8, f0
-    ble lbl_fn_80144710_00000798
-    b lbl_fn_80144710_0000079C
-lbl_fn_80144710_00000798:
+    ble lbl_quest_evaluateConditions_00000798
+    b lbl_quest_evaluateConditions_0000079C
+lbl_quest_evaluateConditions_00000798:
     fmr f8, f0
-lbl_fn_80144710_0000079C:
+lbl_quest_evaluateConditions_0000079C:
     stfs f8, 0x104(r31)
     psq_l f31, 0x448(r1), 0, 0
     lfd f31, 0x440(r1)
@@ -1961,7 +1961,7 @@ lbl_quest_updateFlow_00001A28:
     psq_st f5, 0x20(r27), 0, 0
     bl PSMTXInverse
     mr r3, r26
-    bl fn_80144710
+    bl quest_evaluateConditions
     mr r4, r27
     addi r3, r26, 0xb0
     bl fn_8009076C
@@ -2132,7 +2132,7 @@ lbl_quest_updateFlow_00001C60:
     psq_st f6, 0x28(r3), 0, 0
     bl PSMTXInverse
     mr r3, r26
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r0, 0x55c(r26)
     lwz r27, 0x100(r26)
     cmpwi r0, 0x8
@@ -3023,7 +3023,7 @@ lbl_quest_updateFlow_000029A8:
     stw r0, 0x0(r29)
 lbl_quest_updateFlow_000029E4:
     mr r3, r26
-    bl fn_80144710
+    bl quest_evaluateConditions
 lbl_quest_updateFlow_000029EC:
     cmpwi r31, 0x0
     beq lbl_quest_updateFlow_00002AA0
@@ -3521,7 +3521,7 @@ lbl_quest_updateFlow_000030E8:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_quest_updateFlow_00003108:
     lwz r0, 0x12a8(r26)
     rlwinm r0, r0, 0, 11, 9
@@ -3570,7 +3570,7 @@ lbl_quest_updateFlow_00003194:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_quest_updateFlow_000031B4:
     lbz r0, lbl_8087EE74
     extsb. r0, r0

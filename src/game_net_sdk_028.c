@@ -23,7 +23,7 @@ extern void fn_806D5BE0(void);
 extern void fn_806D5C90(void);
 extern void fn_806D5E60(void);
 extern void fn_806D63A0(void);
-extern void fn_806D7A90(void);
+extern void net_socketConnect(void);
 extern void net_socketClose(void);
 extern void fn_806D8F10(void);
 extern void fn_806D8F30(void);
@@ -948,7 +948,7 @@ lbl_fn_806DA330_00000B44:
     b lbl_fn_806DA330_00000BCC
 lbl_fn_806DA330_00000B70:
     mr r3, r30
-    bl fn_806D7A90
+    bl net_socketConnect
     mr r29, r3
     mr r4, r25
     li r5, 0x10
@@ -2499,7 +2499,7 @@ asm void fn_806DB810(void)
     mr r28, r5
     mr r29, r6
     li r3, 0x638
-    bl fn_806D7A90
+    bl net_socketConnect
     cmpwi r3, 0x0
     stw r3, 0x8(r1)
     bne lbl_fn_806DB810_00001FC8

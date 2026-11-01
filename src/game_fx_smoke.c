@@ -25,7 +25,7 @@ extern void fn_800E0AA8(void);
 extern void fn_800E0AB0(void);
 extern void fn_800F7FF0(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80109828(void);
 extern void npc_getPosition(void);
@@ -695,7 +695,7 @@ lbl_fn_80297114_00000820:
     lfs f2, lbl_80883BF0
     li r10, 0x0
     lwz r3, lbl_8087F048
-    bl fn_800F8574
+    bl viewport_updateCulling
 lbl_fn_80297114_000008C8:
     lwz r0, 0x264(r1)
     psq_l f31, 0x258(r1), 0, 0

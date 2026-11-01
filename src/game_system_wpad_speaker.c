@@ -21,7 +21,7 @@ extern void fn_800E426C(void);
 extern void fn_800E4278(void);
 extern void magic_dispatchActionCommand(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_8016EB48(void);
 extern void fn_801E9EA4(void);
 extern void thread_findAndNotify(void);
@@ -1680,7 +1680,7 @@ lbl_fn_8036CA60_000016C0:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_8036CA60_000016E4:
     lwz r28, 0x14ac(r28)
 lbl_fn_8036CA60_000016E8:
@@ -1698,7 +1698,7 @@ lbl_fn_8036CA60_000016FC:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_8036CA60_00001720:
     lwz r28, 0x14ac(r28)
 lbl_fn_8036CA60_00001724:

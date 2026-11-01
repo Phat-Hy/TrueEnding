@@ -12,7 +12,7 @@ extern void fn_800CB58C(void);
 extern void morph_updateMesh(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void fn_80155A88(void);
 extern void fn_801562A0(void);
 extern void fn_8015783C(void);
@@ -1059,7 +1059,7 @@ lbl_fn_80330218_00000D88:
     cmpwi r0, 0x0
     beq lbl_fn_80330218_0000173C
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r31
     lwz r7, 0x638(r31)

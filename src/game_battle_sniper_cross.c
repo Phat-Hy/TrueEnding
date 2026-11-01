@@ -13,13 +13,13 @@ extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
 extern void fn_8009EE30(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void morph_updateMesh(void);
@@ -253,7 +253,7 @@ asm void fn_803F69E4(void)
     li r7, 0x2
     bl __construct_new_array
     addi r3, r30, 0x168
-    bl fn_800CB360
+    bl morph_reset
     li r0, 0x1
     stw r0, 0x170(r30)
     stw r31, 0x174(r30)
@@ -606,7 +606,7 @@ lbl_fn_803F6E0C_00000654:
     mr r4, r3
     lwz r3, 0x174(r31)
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     lwz r4, 0x174(r31)
     mr r3, r31
     addi r5, r1, 0x8

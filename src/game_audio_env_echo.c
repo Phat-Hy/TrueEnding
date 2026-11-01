@@ -24,7 +24,7 @@ extern void fn_800F80A8(void);
 extern void fn_800F80B8(void);
 extern void fn_800F8290(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void fn_800FBA9C(void);
 extern void fn_8013A194(void);
 extern void npc_getPosition(void);
@@ -35,7 +35,7 @@ extern void fn_80158CA4(void);
 extern void fn_80158E1C(void);
 extern void actor_setState(void);
 extern void fn_80176548(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80239D58(void);
 extern void res_findResourceSlot(void);
@@ -586,7 +586,7 @@ asm void fn_80319090(void)
     stw r4, 0x5c0(r31)
     ori r0, r0, 0x8000
     stw r0, 0x12a4(r31)
-    bl fn_801765D8
+    bl battle_awardExp
     b lbl_fn_80319090_00000788
 lbl_fn_80319090_000006BC:
     li r0, 0x0
@@ -1063,7 +1063,7 @@ lbl_fn_8031958C_00000D38:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
 lbl_fn_8031958C_00000D8C:
     addi r3, r1, 0x180
     bl fn_80140500

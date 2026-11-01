@@ -11,7 +11,7 @@ extern void talk_setSpeakerName(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void morph_updateMesh(void);
 extern void str_parseInt(void);
 extern void fn_800EB7A0(void);
@@ -24,7 +24,7 @@ extern void debuff_clearStatus(void);
 extern void fn_8016E864(void);
 extern void actor_setState(void);
 extern void fn_8017039C(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80178A6C(void);
 extern void fn_8020A81C(void);
 extern void sound_initGlobalInstances(void);
@@ -169,7 +169,7 @@ lbl_fn_802FB39C_00000104:
     ori r0, r4, 0x8000
     stw r0, 0x12a4(r30)
     mr r3, r30
-    bl fn_801765D8
+    bl battle_awardExp
     mr r3, r30
     bl fn_800EE360
     b lbl_fn_802FB39C_000002E8
@@ -1584,7 +1584,7 @@ asm void fn_802FC850(void)
     addi r3, r30, 0x15a0
     bl res_MsgHandle_constructor
     addi r3, r30, 0x15ac
-    bl fn_800CB360
+    bl morph_reset
     li r0, 0x1
     li r6, 0x3e8
     lis r4, fn_802FCF14@ha

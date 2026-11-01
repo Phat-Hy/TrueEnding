@@ -44,7 +44,7 @@ extern void dialog_renderWindow(void);
 extern void fn_801513D0(void);
 extern void fn_80151448(void);
 extern void actor_setState(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_update(void);
 extern void res_registerResource(void);
@@ -300,7 +300,7 @@ lbl_fn_8030A848_00000248:
     li r0, 0x0
     stw r0, 0xd18(r3)
     lwz r3, 0x1500(r30)
-    bl fn_801765D8
+    bl battle_awardExp
 lbl_fn_8030A848_00000298:
     lwz r3, 0x1504(r30)
     cmpwi r3, 0x0
@@ -308,7 +308,7 @@ lbl_fn_8030A848_00000298:
     li r0, 0x0
     stw r0, 0xd18(r3)
     lwz r3, 0x1504(r30)
-    bl fn_801765D8
+    bl battle_awardExp
 lbl_fn_8030A848_000002B4:
     lwz r3, 0x1508(r30)
     cmpwi r3, 0x0
@@ -316,7 +316,7 @@ lbl_fn_8030A848_000002B4:
     li r0, 0x0
     stw r0, 0xd18(r3)
     lwz r3, 0x1508(r30)
-    bl fn_801765D8
+    bl battle_awardExp
 lbl_fn_8030A848_000002D0:
     li r0, 0x1
     stw r0, 0xd18(r30)
@@ -362,11 +362,11 @@ lbl_fn_8030A848_00000320:
     li r31, 0x0
     stw r31, 0xd18(r3)
     lwz r3, 0x1504(r30)
-    bl fn_801765D8
+    bl battle_awardExp
     lwz r3, 0x1508(r30)
     stw r31, 0xd18(r3)
     lwz r3, 0x1508(r30)
-    bl fn_801765D8
+    bl battle_awardExp
     lis r4, lbl_80748FE8@ha
     addi r3, r30, 0xb0
     addi r4, r4, lbl_80748FE8@l
@@ -446,7 +446,7 @@ lbl_fn_8030A848_00000478:
     li r0, 0x0
     stw r0, 0xd18(r3)
     lwz r3, 0x1500(r30)
-    bl fn_801765D8
+    bl battle_awardExp
     lis r4, lbl_80748FE8@ha
     addi r3, r30, 0xb0
     addi r4, r4, lbl_80748FE8@l

@@ -21,7 +21,7 @@ extern void str_findChar(void);
 extern void system_getNextSequenceId(void);
 extern void fn_801031D0(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void quest_ctorRewardItem(void);
 extern void quest_checkCondition(void);
@@ -880,7 +880,7 @@ lbl_fn_802C7F10_00000A98:
     lwz r3, 0x14d0(r31)
     cmpwi r3, 0x0
     beq lbl_fn_802C7F10_00000B24
-    bl fn_80144710
+    bl quest_evaluateConditions
     li r0, 0x0
     stw r0, 0x40(r1)
     addi r4, r1, 0x40

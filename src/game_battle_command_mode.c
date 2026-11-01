@@ -16,7 +16,7 @@ extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
 extern void lockon_updateTarget(void);
@@ -25,7 +25,7 @@ extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB518(void);
@@ -943,7 +943,7 @@ asm void fn_80405E48(void)
     stw r31, 0x608(r29)
     stw r31, 0x60c(r29)
     stw r30, 0x630(r29)
-    bl fn_800CB360
+    bl morph_reset
     lwz r3, 0x60c(r29)
     stw r31, 0x638(r29)
     lwz r4, 0x630(r29)
@@ -1092,7 +1092,7 @@ lbl_fn_80406038_00000D9C:
     lwz r0, 0x60c(r26)
     add r3, r0, r24
     addi r3, r3, 0x4
-    bl fn_8008AD4C
+    bl area_updateZoneState
     mr r22, r26
     addi r21, r26, 0x1f5
     li r27, 0x0
@@ -1706,7 +1706,7 @@ asm void fn_804068B8(void)
     addi r3, r31, 0x934
     bl res_MsgHandle_constructor
     addi r3, r31, 0x940
-    bl fn_800CB360
+    bl morph_reset
     lwz r0, 0x89c(r31)
     li r7, 0x0
     lfs f1, lbl_80886258

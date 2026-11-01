@@ -17,7 +17,7 @@ extern void actor_setState(void);
 extern void fn_8017039C(void);
 extern void fn_80170A20(void);
 extern void fn_80176548(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void sound_initGlobalInstances(void);
 extern void res_registerResource(void);
 extern void fn_802F33A0(void);
@@ -1382,7 +1382,7 @@ lbl_fn_802F58A0_00001304:
     ori r0, r4, 0x8000
     stw r0, 0x12a4(r31)
     mr r3, r31
-    bl fn_801765D8
+    bl battle_awardExp
     b lbl_fn_802F58A0_00001320
 lbl_fn_802F58A0_00001318:
     li r0, 0x1e
@@ -1468,7 +1468,7 @@ lbl_fn_802F59D8_0000143C:
     ori r0, r4, 0x8000
     stw r0, 0x12a4(r31)
     mr r3, r31
-    bl fn_801765D8
+    bl battle_awardExp
     mr r3, r31
     bl fn_800EE360
     b lbl_fn_802F59D8_00001514

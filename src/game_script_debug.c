@@ -23,7 +23,7 @@ extern void str_parseInt(void);
 extern void fn_800E9ED8(void);
 extern void fn_800EFC64(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
 extern void fn_8011F91C(void);
@@ -2252,7 +2252,7 @@ lbl_fn_80251344_00001E30:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_80251344_00001F44
 lbl_fn_80251344_00001E94:
     mr r3, r29

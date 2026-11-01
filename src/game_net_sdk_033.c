@@ -27,7 +27,7 @@ extern void fn_806D64B0(void);
 extern void fn_806D6560(void);
 extern void fn_806D6610(void);
 extern void fn_806D6720(void);
-extern void fn_806D7A90(void);
+extern void net_socketConnect(void);
 extern void fn_806D7AA0(void);
 extern void net_socketClose(void);
 extern void fn_806D7AE0(void);
@@ -281,7 +281,7 @@ lbl_fn_806E4240_000001DC:
     stw r0, 0x3c(r1)
     beq lbl_fn_806E4240_00000374
     li r3, 0xc
-    bl fn_806D7A90
+    bl net_socketConnect
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_806E4240_00000220
@@ -321,7 +321,7 @@ lbl_fn_806E4240_00000274:
     stw r0, 0x24(r1)
     beq lbl_fn_806E4240_00000374
     li r3, 0xc
-    bl fn_806D7A90
+    bl net_socketConnect
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_806E4240_000002B8
@@ -445,7 +445,7 @@ lbl_fn_806E4600_00000408:
     cmpwi r0, 0x68
     bne lbl_fn_806E4600_00000488
     li r3, 0x10
-    bl fn_806D7A90
+    bl net_socketConnect
     lwz r9, 0x8(r30)
     mr r5, r3
     lwz r8, 0x4(r30)
@@ -741,7 +741,7 @@ asm void fn_806E4A30(void)
     mr r28, r4
     lwz r30, 0x0(r3)
     li r3, 0x50
-    bl fn_806D7A90
+    bl net_socketConnect
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_806E4A30_00000840
@@ -1622,7 +1622,7 @@ lbl_fn_806E5570_0000140C:
     stw r0, 0x14(r1)
     beq lbl_fn_806E5570_00001494
     li r3, 0x8
-    bl fn_806D7A90
+    bl net_socketConnect
     cmpwi r3, 0x0
     bne lbl_fn_806E5570_00001454
     mr r3, r28
@@ -1799,7 +1799,7 @@ lbl_fn_806E5840_00001694:
     stw r0, 0x14(r1)
     beq lbl_fn_806E5840_00001714
     li r3, 0x8
-    bl fn_806D7A90
+    bl net_socketConnect
     cmpwi r3, 0x0
     bne lbl_fn_806E5840_000016D0
     mr r3, r27
@@ -2307,7 +2307,7 @@ asm void fn_806E5F90(void)
     mr r28, r4
     addi r30, r30, lbl_807C3C98@l
     li r3, 0x1001
-    bl fn_806D7A90
+    bl net_socketConnect
     cmpwi r3, 0x0
     stw r3, 0x8(r29)
     bne lbl_fn_806E5F90_00001DB4
@@ -2432,7 +2432,7 @@ asm void fn_806E6160(void)
     stw r28, 0x10(r1)
     mr r28, r3
     li r3, 0x1a0
-    bl fn_806D7A90
+    bl net_socketConnect
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_806E6160_00001F80
@@ -2459,7 +2459,7 @@ lbl_fn_806E6160_00001F80:
     stw r31, 0x20(r30)
     stw r31, 0x24(r30)
     stw r0, 0x1c(r30)
-    bl fn_806D7A90
+    bl net_socketConnect
     cmpwi r3, 0x0
     stw r3, 0x18(r30)
     bne lbl_fn_806E6160_00001FE8

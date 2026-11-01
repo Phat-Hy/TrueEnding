@@ -13,7 +13,7 @@ extern void fn_800588FC(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80094F98(void);
@@ -1152,7 +1152,7 @@ lbl_fn_803F5C2C_00000F40:
     mr r4, r3
     addi r3, r31, 0xf4
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     mr r3, r31
     addi r4, r31, 0xf4
     addi r5, r1, 0x108

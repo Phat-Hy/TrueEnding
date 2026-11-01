@@ -81,7 +81,7 @@ extern void fn_80616250(void);
 extern void fn_80617340(void);
 extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
-extern void fn_80617D50(void);
+extern void GXSetTevAlphaIn(void);
 extern void printf(void);
 extern void wcslen(void);
 extern void abort(void);
@@ -312,7 +312,7 @@ lbl_fn_804ABA2C_00000144:
     li r4, 0x1
     li r5, 0x0
     li r6, 0x3
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4

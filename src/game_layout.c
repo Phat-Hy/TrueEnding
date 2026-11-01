@@ -38,7 +38,7 @@ extern void GXSetTevSwapMode(void);
 extern void GXSetTevSwapModeTable(void);
 extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
-extern void fn_80617D50(void);
+extern void GXSetTevAlphaIn(void);
 extern void GXLoadTexMtxImm(void);
 extern void std_sin(void);
 extern void std_cos(void);
@@ -476,7 +476,7 @@ lbl_layout_drawPane_0000054C:
     li r4, 0x4
     li r5, 0x1
     li r6, 0x3
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     lwz r3, lbl_8087EFB4
     bl fn_800BFB70
     clrlwi r5, r28, 16
@@ -681,7 +681,7 @@ asm void fn_800A9E64(void)
     li r4, 0x1
     li r5, 0x0
     li r6, 0x3
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     lwz r3, lbl_8087EEE0
     addi r4, r1, 0x50
     li r5, 0x0
@@ -733,7 +733,7 @@ asm void fn_800A9E64(void)
     li r4, 0x1
     li r5, 0x0
     li r6, 0x3
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     lwz r3, lbl_8087EEE0
     addi r4, r22, 0x4
     li r5, 0x0
@@ -827,7 +827,7 @@ lbl_fn_800A9E64_00000A28:
     li r4, 0x2
     li r5, 0x0
     li r6, 0x3
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     lwz r3, lbl_8087EFB4
     bl fn_800BFB70
     addi r23, r23, 0x1
@@ -839,7 +839,7 @@ lbl_fn_800A9E64_00000A28:
     li r4, 0x1
     li r5, 0x0
     li r6, 0x3
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     clrlwi r5, r25, 16
     clrlwi r6, r24, 16
     li r3, 0x0
@@ -904,7 +904,7 @@ lbl_fn_800A9E64_00000A28:
     li r4, 0x1
     li r5, 0x0
     li r6, 0x3
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     li r3, 0x1
     bl GXClearVtxDesc
     li r3, 0x1
@@ -954,7 +954,7 @@ lbl_fn_800A9E64_00000A28:
     li r4, 0x1
     li r5, 0x1
     li r6, 0x3
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     lwz r3, lbl_8087EFA8
     addi r4, r22, 0x4
     lfs f0, lbl_80880D2C
@@ -992,7 +992,7 @@ lbl_fn_800A9E64_00000D84:
     li r4, 0x1
     li r5, 0x0
     li r6, 0x3
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     lwz r3, lbl_8087EFA8
     lwz r0, 0x58(r3)
     cmpwi r0, 0x0
@@ -2152,7 +2152,7 @@ lbl_fn_800AAE2C_00001978:
     li r4, 0x4
     li r5, 0x1
     li r6, 0x3
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     lwz r3, lbl_8087EFB4
     bl fn_800BFB70
     li r3, 0x0

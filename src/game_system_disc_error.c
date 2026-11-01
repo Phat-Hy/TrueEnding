@@ -24,7 +24,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_800E2DD4(void);
 extern void fn_800E2FE0(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
 extern void fn_8010A308(void);
 extern void quest_updateFlow(void);
@@ -1766,7 +1766,7 @@ lbl_fn_80354EE4_0000152C:
     stfs f4, 0x68(r1)
     stfs f3, 0x6c(r1)
     stfs f0, 0x70(r1)
-    bl fn_800F8574
+    bl viewport_updateCulling
 lbl_fn_80354EE4_00001678:
     lfs f30, 0x2e4(r31)
     addi r3, r31, 0xb0

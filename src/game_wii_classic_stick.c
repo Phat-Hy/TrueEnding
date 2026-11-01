@@ -12,7 +12,7 @@ extern void fn_8004B0E4(void);
 extern void fn_8004B1EC(void);
 extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB404(void);
 extern void fn_800CB440(void);
@@ -902,7 +902,7 @@ lbl_fn_8055F690_00000A54:
     stw r0, 0x34d0(r3)
 lbl_fn_8055F690_00000A60:
     addi r3, r1, 0x34
-    bl fn_800CB360
+    bl morph_reset
     lwz r0, 0x8(r31)
     srwi. r0, r0, 31
     bne lbl_fn_8055F690_00000A7C
@@ -1027,7 +1027,7 @@ lbl_fn_8055F690_00000C04:
     cmpwi r3, 0x0
     beq lbl_fn_8055F690_00000CC8
     addi r3, r1, 0x30
-    bl fn_800CB360
+    bl morph_reset
     lwz r4, 0x38(r26)
     addi r3, r1, 0x30
     bl fn_800CB404
@@ -1110,7 +1110,7 @@ asm void fn_8055FD3C(void)
     cmpwi r0, 0x0
     beq lbl_fn_8055FD3C_00000DAC
     addi r3, r1, 0x8
-    bl fn_800CB360
+    bl morph_reset
     lwz r4, 0x38(r31)
     addi r3, r1, 0x8
     bl fn_800CB404
@@ -1662,7 +1662,7 @@ lbl_fn_805602B0_00001440:
     lfs f31, lbl_80887EB8
 lbl_fn_805602B0_00001454:
     addi r3, r1, 0x14
-    bl fn_800CB360
+    bl morph_reset
     lwz r0, 0x30(r28)
     cmpwi r0, 0x2
     ble lbl_fn_805602B0_00001474
@@ -1819,7 +1819,7 @@ lbl_fn_805602B0_00001668:
     cmpwi r3, 0x0
     beq lbl_fn_805602B0_0000172C
     addi r3, r1, 0x10
-    bl fn_800CB360
+    bl morph_reset
     lwz r4, 0x38(r28)
     addi r3, r1, 0x10
     bl fn_800CB404

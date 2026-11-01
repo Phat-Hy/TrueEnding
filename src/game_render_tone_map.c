@@ -12,16 +12,16 @@ extern void fn_80094958(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void fn_8012DB04(void);
 extern void fn_8013A258(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void fn_80176548(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void actor_getMovementFlags(void);
 extern void task_findEntryById(void);
 extern void fn_802BC4EC(void);
@@ -1518,7 +1518,7 @@ asm void fn_802BDFF8(void)
     lwz r0, 0x12a4(r31)
     ori r0, r0, 0x8000
     stw r0, 0x12a4(r31)
-    bl fn_801765D8
+    bl battle_awardExp
 lbl_fn_802BDFF8_000013A4:
     lwz r0, 0x24(r1)
     psq_l f31, 0x18(r1), 0, 0
@@ -1614,7 +1614,7 @@ lbl_fn_802BE180_000014B8:
     bl task_findEntryById
     mr r31, r3
     mr r3, r30
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r30
     lwz r8, 0x590(r30)
@@ -1861,7 +1861,7 @@ lbl_fn_802BE2A0_0000184C:
     bl task_findEntryById
     mr r31, r3
     mr r3, r30
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r8, 0x590(r30)
     mr r6, r30
     lwz r3, lbl_8087F048
@@ -2110,7 +2110,7 @@ lbl_fn_802BE7EC_00001B8C:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_802BE7EC_00001C68
 lbl_fn_802BE7EC_00001C24:
     lfs f31, 0x2e4(r3)

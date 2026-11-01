@@ -52,7 +52,7 @@ extern void GXSetTevSwapModeTable(void);
 extern void fn_806177B0(void);
 extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
-extern void fn_80617D50(void);
+extern void GXSetTevAlphaIn(void);
 extern void GXLoadTexMtxImm(void);
 extern void fn_8061A100(void);
 extern void strncpy(void);
@@ -1411,14 +1411,14 @@ lbl_fn_805D1A40_000012A4:
     lbz r4, 0x1(r6)
     lbz r5, 0x2(r6)
     lbz r6, 0x3(r6)
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     b lbl_fn_805D1A40_0000131C
 lbl_fn_805D1A40_00001308:
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
     li r6, 0xf
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
 lbl_fn_805D1A40_0000131C:
     cmpwi r29, 0x0
     li r3, 0x0

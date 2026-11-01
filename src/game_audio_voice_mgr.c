@@ -15,10 +15,10 @@ extern void wcs_vformat(void);
 extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80109828(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void fn_8016E4C4(void);
 extern void actor_setState(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_8017A300(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -1043,7 +1043,7 @@ lbl_fn_803012AC_00000DB8:
     lwz r0, 0x12a4(r30)
     ori r0, r0, 0x8000
     stw r0, 0x12a4(r30)
-    bl fn_801765D8
+    bl battle_awardExp
     mr r3, r30
     bl fn_800EE360
     b lbl_fn_803012AC_00001010
@@ -1191,7 +1191,7 @@ lbl_fn_803012AC_00000FFC:
     mr r3, r30
     stfs f0, 0x534(r30)
     stfs f0, 0x53c(r30)
-    bl fn_80144710
+    bl quest_evaluateConditions
 lbl_fn_803012AC_00001010:
     lbz r0, 0x1684(r30)
     slwi r0, r0, 3

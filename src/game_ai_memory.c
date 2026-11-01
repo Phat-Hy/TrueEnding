@@ -10,12 +10,12 @@ extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_setActive(void);
 extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80134674(void);
 extern void fn_80139560(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_setScriptSlot(void);
 extern void dialog_updateScriptState(void);
@@ -283,7 +283,7 @@ lbl_fn_802604E0_0000024C:
     stw r3, 0x590(r31)
 lbl_fn_802604E0_000002C0:
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r31
     lwz r7, 0x638(r31)
@@ -1728,7 +1728,7 @@ lbl_fn_80261A50_00001724:
     addi r8, r1, 0x50
     li r9, 0x24
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
 lbl_fn_80261A50_0000181C:
     lwz r31, 0x14ac(r31)
 lbl_fn_80261A50_00001820:

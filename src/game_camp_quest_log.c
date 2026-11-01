@@ -20,7 +20,7 @@ extern void talk_scanQuotedString(void);
 extern void dungeon_initGlobalContext(void);
 extern void mem_alloc(void);
 extern void fn_80089ACC(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void lockon_updateTarget(void);
 extern void str_skipWhitespace(void);
 extern void fn_800E0AA8(void);
@@ -677,7 +677,7 @@ lbl_fn_803C3894_000006AC:
     lwz r3, 0x4(r3)
     mr r4, r19
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
 lbl_fn_803C3894_000006E4:
     addi r18, r18, 0x1
 lbl_fn_803C3894_000006E8:

@@ -51,7 +51,7 @@ extern void fn_803750E4(void);
 extern void fn_80376238(void);
 extern void fn_803E2110(void);
 extern void fn_803E5E64(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void fn_80444020(void);
 extern void fn_8047961C(void);
 extern void PSMTXConcat(void);
@@ -2466,7 +2466,7 @@ lbl_fn_800FDF14_00002164:
     li r5, 0x1c
     lfs f2, lbl_8088148C
     li r6, 0xf
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_800FDF14_000021CC:
     lwz r3, lbl_8087F4A0
     li r30, 0x3

@@ -19,7 +19,7 @@ extern void net_bufferGetElement(void);
 extern void fn_806D5C90(void);
 extern void fn_806D64B0(void);
 extern void fn_806D6610(void);
-extern void fn_806D7A90(void);
+extern void net_socketConnect(void);
 extern void net_socketClose(void);
 extern void fn_806D7B30(void);
 extern void fn_806D7B70(void);
@@ -270,7 +270,7 @@ asm void fn_806F6CA0(void)
     addi r30, r30, lbl_807C5A08@l
     li r31, 0x1
     li r3, 0x1000
-    bl fn_806D7A90
+    bl net_socketConnect
     cmpwi r3, 0x0
     mr r28, r3
     bne lbl_fn_806F6CA0_000002C4
@@ -535,7 +535,7 @@ lbl_fn_806F6CA0_0000062C:
     bl strlen
     add r3, r3, r27
     addi r3, r3, 0xe
-    bl fn_806D7A90
+    bl net_socketConnect
     cmpwi r3, 0x0
     stw r3, 0x130(r25)
     bne lbl_fn_806F6CA0_00000678
@@ -722,7 +722,7 @@ asm void fn_806F72F0(void)
     stw r26, 0x8(r1)
     mr r27, r3
     li r3, 0x2000
-    bl fn_806D7A90
+    bl net_socketConnect
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_806F72F0_00000918
@@ -1295,7 +1295,7 @@ lbl_fn_806F77F0_00001074:
     bl strlen
     add r3, r3, r31
     addi r3, r3, 0x1
-    bl fn_806D7A90
+    bl net_socketConnect
     mr r31, r3
     mr r4, r29
     bl strcpy
@@ -2010,7 +2010,7 @@ lbl_fn_806F8330_00001984:
     bl strlen
     add r3, r3, r31
     addi r3, r3, 0x1
-    bl fn_806D7A90
+    bl net_socketConnect
     mr r31, r3
     mr r4, r29
     bl strcpy

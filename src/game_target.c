@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void fn_8000FAE4(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void fn_80069BF4(void);
 extern void fn_8006B174(void);
 extern void fn_8007FAF0(void);
@@ -677,7 +677,7 @@ lbl_fn_80093158_000007E0:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x80
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_80093158_0000081C:
     addi r27, r27, 0x4
     addi r24, r24, 0x1

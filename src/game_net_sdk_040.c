@@ -28,7 +28,7 @@ extern void fn_806D5850(void);
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
-extern void fn_806D7A90(void);
+extern void net_socketConnect(void);
 extern void fn_806D7AA0(void);
 extern void net_socketClose(void);
 extern void fn_806D7B30(void);
@@ -590,7 +590,7 @@ lbl_fn_806F2E70_0000063C:
     b lbl_fn_806F2E70_000006B4
 lbl_fn_806F2E70_00000654:
     li r3, 0x1d0
-    bl fn_806D7A90
+    bl net_socketConnect
     lwz r4, lbl_80862128@l(r30)
     stwx r3, r4, r29
     lwz r3, lbl_80862128@l(r30)
@@ -1343,7 +1343,7 @@ asm void fn_806F3940(void)
     stw r29, 0x14(r1)
     mr r29, r3
     li r3, 0x10
-    bl fn_806D7A90
+    bl net_socketConnect
     cmpwi r3, 0x0
     stw r3, 0x0(r30)
     bne lbl_fn_806F3940_000010C8

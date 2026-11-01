@@ -40,7 +40,7 @@ extern void GXSetTevSwapModeTable(void);
 extern void fn_806177B0(void);
 extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
-extern void fn_80617D50(void);
+extern void GXSetTevAlphaIn(void);
 extern void GXLoadPosMtxImm(void);
 extern void GXSetCurrentMtx(void);
 extern void wcslen(void);
@@ -119,7 +119,7 @@ asm void atn_ComDrawLine_execute(void)
     li r4, 0x4
     li r5, 0x5
     li r6, 0x0
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
@@ -375,7 +375,7 @@ lbl_atn_ComDrawTexture_execute_0000042C:
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
@@ -631,7 +631,7 @@ lbl_atn_ComDrawTextureAdd_execute_00000800:
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     b lbl_atn_ComDrawTextureAdd_execute_000008B0
 lbl_atn_ComDrawTextureAdd_execute_00000824:
     lbz r3, 0x10(r31)
@@ -641,7 +641,7 @@ lbl_atn_ComDrawTextureAdd_execute_00000824:
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     b lbl_atn_ComDrawTextureAdd_execute_000008B0
 lbl_atn_ComDrawTextureAdd_execute_00000848:
     lbz r3, 0x10(r31)
@@ -651,7 +651,7 @@ lbl_atn_ComDrawTextureAdd_execute_00000848:
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     b lbl_atn_ComDrawTextureAdd_execute_000008B0
 lbl_atn_ComDrawTextureAdd_execute_0000086C:
     lbz r3, 0x10(r31)
@@ -661,7 +661,7 @@ lbl_atn_ComDrawTextureAdd_execute_0000086C:
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     b lbl_atn_ComDrawTextureAdd_execute_000008B0
 lbl_atn_ComDrawTextureAdd_execute_00000890:
     lbz r3, 0x10(r31)
@@ -671,7 +671,7 @@ lbl_atn_ComDrawTextureAdd_execute_00000890:
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
 lbl_atn_ComDrawTextureAdd_execute_000008B0:
     bl fn_806134E0
     li r3, 0x9
@@ -808,7 +808,7 @@ lbl_atn_ComDrawTextureAdd_execute_00000A5C:
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)
     lwz r30, 0x48(r1)
@@ -1020,35 +1020,35 @@ lbl_atn_ComDrawTextureMask_execute_00000DC0:
     li r4, 0x4
     li r5, 0x5
     li r6, 0x0
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     b lbl_atn_ComDrawTextureMask_execute_00000E34
 lbl_atn_ComDrawTextureMask_execute_00000DD8:
     li r3, 0x1
     li r4, 0x4
     li r5, 0x1
     li r6, 0x0
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     b lbl_atn_ComDrawTextureMask_execute_00000E34
 lbl_atn_ComDrawTextureMask_execute_00000DF0:
     li r3, 0x1
     li r4, 0x3
     li r5, 0x1
     li r6, 0x0
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     b lbl_atn_ComDrawTextureMask_execute_00000E34
 lbl_atn_ComDrawTextureMask_execute_00000E08:
     li r3, 0x1
     li r4, 0x0
     li r5, 0x5
     li r6, 0x0
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     b lbl_atn_ComDrawTextureMask_execute_00000E34
 lbl_atn_ComDrawTextureMask_execute_00000E20:
     li r3, 0x1
     li r4, 0x0
     li r5, 0x3
     li r6, 0x0
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
 lbl_atn_ComDrawTextureMask_execute_00000E34:
     bl fn_806134E0
     li r3, 0x9
@@ -1175,7 +1175,7 @@ lbl_atn_ComDrawTextureMask_execute_00000FA8:
     li r4, 0x4
     li r5, 0x5
     li r6, 0x0
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)
     lwz r30, 0x48(r1)
@@ -1317,7 +1317,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     li r4, 0x4
     li r5, 0x5
     li r6, 0x0
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     lfs f4, lbl_808809E0
     addi r4, r1, 0x20
     lfs f0, 0x88(r1)
@@ -2324,7 +2324,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00002184:
     li r4, 0x4
     li r5, 0x5
     li r6, 0x0
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
@@ -2623,7 +2623,7 @@ lbl_atn_ComDrawFont_execute_000025F0:
     li r4, 0x4
     li r5, 0x1
     li r6, 0x0
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     b lbl_atn_ComDrawFont_execute_00002640
 lbl_atn_ComDrawFont_execute_00002620:
     mr r3, r31
@@ -2633,7 +2633,7 @@ lbl_atn_ComDrawFont_execute_00002620:
     li r4, 0x4
     li r5, 0x5
     li r6, 0x0
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
 lbl_atn_ComDrawFont_execute_00002640:
     bl fn_806134E0
     li r3, 0x9
@@ -2768,7 +2768,7 @@ lbl_atn_ComDrawFont_execute_0000278C:
     li r4, 0x4
     li r5, 0x5
     li r6, 0x0
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
 lbl_atn_ComDrawFont_execute_00002844:
     addi r11, r1, 0x50
     bl _restgpr_27
@@ -3002,7 +3002,7 @@ lbl_atn_ComDrawFontSideFade_execute_00002B88:
     li r4, 0x4
     li r5, 0x1
     li r6, 0x0
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     b lbl_atn_ComDrawFontSideFade_execute_00002BD8
 lbl_atn_ComDrawFontSideFade_execute_00002BB8:
     mr r3, r29
@@ -3012,7 +3012,7 @@ lbl_atn_ComDrawFontSideFade_execute_00002BB8:
     li r4, 0x4
     li r5, 0x5
     li r6, 0x0
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
 lbl_atn_ComDrawFontSideFade_execute_00002BD8:
     bl fn_806134E0
     li r3, 0x9
@@ -3162,7 +3162,7 @@ lbl_atn_ComDrawFontSideFade_execute_00002D8C:
     li r4, 0x4
     li r5, 0x5
     li r6, 0x0
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
 lbl_atn_ComDrawFontSideFade_execute_00002E10:
     addi r11, r1, 0x70
     psq_l f31, 0xc8(r1), 0, 0
@@ -3840,35 +3840,35 @@ lbl_atn_ComDrawWindow_execute_00003820:
     li r4, 0x4
     li r5, 0x5
     li r6, 0x0
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     b lbl_atn_ComDrawWindow_execute_00003894
 lbl_atn_ComDrawWindow_execute_00003838:
     li r3, 0x1
     li r4, 0x4
     li r5, 0x1
     li r6, 0x0
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     b lbl_atn_ComDrawWindow_execute_00003894
 lbl_atn_ComDrawWindow_execute_00003850:
     li r3, 0x1
     li r4, 0x3
     li r5, 0x1
     li r6, 0x0
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     b lbl_atn_ComDrawWindow_execute_00003894
 lbl_atn_ComDrawWindow_execute_00003868:
     li r3, 0x1
     li r4, 0x0
     li r5, 0x5
     li r6, 0x0
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     b lbl_atn_ComDrawWindow_execute_00003894
 lbl_atn_ComDrawWindow_execute_00003880:
     li r3, 0x1
     li r4, 0x0
     li r5, 0x3
     li r6, 0x0
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
 lbl_atn_ComDrawWindow_execute_00003894:
     bl fn_806134E0
     li r3, 0x9
@@ -4034,7 +4034,7 @@ lbl_atn_ComDrawWindow_execute_00003A78:
     li r4, 0x4
     li r5, 0x5
     li r6, 0x0
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     addi r11, r1, 0x50
     bl _restgpr_27
     lwz r0, 0x54(r1)

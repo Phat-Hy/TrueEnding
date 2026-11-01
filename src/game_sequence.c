@@ -93,7 +93,7 @@ extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80617A10(void);
 extern void fn_80617C40(void);
-extern void fn_80617D50(void);
+extern void GXSetTevAlphaIn(void);
 extern void GXSetZCompLoc(void);
 extern void GXSetDither(void);
 extern void GXSetZMode(void);
@@ -876,7 +876,7 @@ lbl_gx_drawScreenQuad_000009C4:
     li r4, 0x4
     li r5, 0x5
     li r6, 0x0
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     li r3, 0x1
     bl GXSetZCompLoc
     li r3, 0x1
@@ -4932,14 +4932,14 @@ lbl_gx_applyRenderState_000044A4:
     li r3, 0x1
     lwzx r5, r31, r0
     li r6, 0xf
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     b lbl_gx_applyRenderState_000044E4
 lbl_gx_applyRenderState_000044D0:
     li r3, 0x0
     li r4, 0x4
     li r5, 0x5
     li r6, 0xf
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
 lbl_gx_applyRenderState_000044E4:
     lwz r3, 0xd8(r27)
     srwi r0, r3, 20

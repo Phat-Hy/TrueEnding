@@ -17,7 +17,7 @@ extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092A00(void);
@@ -1503,7 +1503,7 @@ lbl_fn_803F2CD0_00001354:
     mr r4, r3
     addi r3, r29, 0x65c
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     mr r3, r29
     addi r4, r29, 0x65c
     addi r5, r1, 0x108
@@ -1539,7 +1539,7 @@ lbl_fn_803F2CD0_000013F0:
     mr r4, r3
     addi r3, r29, 0x28c
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     mr r3, r29
     addi r4, r29, 0x28c
     addi r5, r1, 0x108

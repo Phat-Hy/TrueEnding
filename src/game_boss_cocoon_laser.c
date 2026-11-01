@@ -11,7 +11,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
 extern void fn_8013A258(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void actor_setState(void);
 extern void sound_initGlobalInstances(void);
 extern void res_registerResource(void);
@@ -1617,7 +1617,7 @@ lbl_fn_8045C83C_0000166C:
     psq_st f1, 0x0(r30), 0, 0
     psq_st f1, 0x534(r28), 0, 0
     stfs f2, 0x53c(r28)
-    bl fn_80144710
+    bl quest_evaluateConditions
     li r0, 0x0
     stw r0, 0x5c(r1)
     addi r3, r28, 0xb0

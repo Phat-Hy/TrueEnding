@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -1096,7 +1096,7 @@ lbl_fn_80239030_00000E94:
     lis r4, lbl_80742FE0@ha
     addi r4, r4, lbl_80742FE0@l
     addi r4, r4, 0x1
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_80239030_00000EB8:
     lwz r0, 0x4(r26)
     stw r0, 0x3c(r27)

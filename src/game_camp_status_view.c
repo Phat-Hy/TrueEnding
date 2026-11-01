@@ -16,7 +16,7 @@ extern void fn_8012B988(void);
 extern void fn_8012D8B8(void);
 extern void fn_80133B30(void);
 extern void quest_updateFlow(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_8014EEC4(void);
 extern void fn_80153698(void);
 extern void fn_8015E7A0(void);
@@ -1493,7 +1493,7 @@ lbl_fn_803BA620_000012E0:
     nor r0, r4, r0
     srawi r0, r0, 31
     andc r4, r8, r0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
     b lbl_fn_803BA620_00001324
 lbl_fn_803BA620_00001318:
     mr r3, r29

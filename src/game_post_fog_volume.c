@@ -16,7 +16,7 @@ extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void mem_free(void);
 extern void node_destroy(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
@@ -493,7 +493,7 @@ asm void fn_802D7480(void)
     addi r3, r30, 0x1588
     stw r28, 0x1580(r30)
     stw r0, 0x1584(r30)
-    bl fn_800CB360
+    bl morph_reset
     addi r3, r30, 0x158c
     bl res_MsgHandle_constructor
     addi r3, r30, 0x1598

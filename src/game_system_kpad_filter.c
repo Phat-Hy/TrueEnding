@@ -8,7 +8,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void fn_80016FB4(void);
 extern void fn_8003EA3C(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CFA28(void);
@@ -1368,7 +1368,7 @@ asm void fn_803750E4(void)
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_803750E4_000011C4:
     li r0, 0x0
     b lbl_fn_803750E4_000011D8
@@ -1615,7 +1615,7 @@ lbl_fn_803752F4_000014C0:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_803752F4_000014FC:
     li r5, 0x0
     b lbl_fn_803752F4_00001510
@@ -1844,7 +1844,7 @@ lbl_fn_803754F0_000017C8:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_803754F0_00001804:
     li r5, 0x0
     b lbl_fn_803754F0_00001818
@@ -2074,7 +2074,7 @@ lbl_fn_8037587C_00001AEC:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_8037587C_00001B28:
     li r5, 0x0
     b lbl_fn_8037587C_00001B3C

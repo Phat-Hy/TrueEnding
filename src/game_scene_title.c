@@ -27,7 +27,7 @@ extern void actor_getMovementFlags(void);
 extern void task_findEntryById(void);
 extern void kpad_getClampData(void);
 extern void fn_803CC1A4(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXRotAxis(void);
 extern void PSMTXMultVec(void);
@@ -1536,7 +1536,7 @@ lbl_fn_801A59F4_00001408:
     li r6, 0x0
     lfs f1, lbl_80882188
     lfs f2, lbl_8088218C
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801A59F4_00001464:
     mr r3, r30
     lwz r31, 0x2c(r1)
@@ -2071,7 +2071,7 @@ lbl_fn_801A5E90_00001BF4:
     lfs f1, lbl_80882188
     li r6, 0x0
     lfs f2, lbl_8088218C
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801A5E90_00001C18:
     psq_l f31, 0x1c8(r1), 0, 0
     mr r3, r31

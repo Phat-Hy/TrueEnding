@@ -5,9 +5,9 @@
 extern void fn_8008B978(void);
 extern void fn_8012DD70(void);
 extern void quest_updateFlow(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_80153698(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80206B14(void);
 extern void assert_generateId(void);
 extern void fn_8020ED84(void);
@@ -73,13 +73,13 @@ lbl_fn_803BB0E0_00000024:
     addi r3, r30, 0x7d4
     bl fn_8012DD70
     mr r3, r30
-    bl fn_801765D8
+    bl battle_awardExp
 lbl_fn_803BB0E0_00000064:
     lbz r4, 0x3(r31)
     mr r3, r30
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
     lhz r0, 0x0(r31)
     rlwinm r0, r0, 0, 29, 29
     cmpwi r0, 0x4

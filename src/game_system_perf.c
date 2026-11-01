@@ -12,7 +12,7 @@ extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_8008A00C(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void lockon_updateTarget(void);
 extern void fn_800A03A0(void);
@@ -1423,7 +1423,7 @@ lbl_fn_80203C7C_0000126C:
     lwz r4, 0x10(r31)
 lbl_fn_80203C7C_00001270:
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

@@ -12,7 +12,7 @@ extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_8014C228(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_80153B44(void);
 extern void fn_80164DCC(void);
 extern void actor_setState(void);
@@ -1499,7 +1499,7 @@ lbl_fn_8015F568_00001434:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_8015F568_00001454:
     cmpwi r30, 0x0
     beq lbl_fn_8015F568_00001CA8

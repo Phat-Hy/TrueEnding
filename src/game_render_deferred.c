@@ -17,14 +17,14 @@ extern void ref_releaseHandle(void);
 extern void fn_800EE360(void);
 extern void fn_800F7FD8(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
 extern void fn_8012A1B8(void);
 extern void npc_getPosition(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80178A6C(void);
 extern void sound_initGlobalInstances(void);
 extern void res_Resource_destructor(void);
@@ -637,7 +637,7 @@ lbl_fn_802B6104_0000078C:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_802B6104_00000998
 lbl_fn_802B6104_000007B0:
     xoris r0, r0, 0x8000
@@ -702,7 +702,7 @@ lbl_fn_802B6104_00000884:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_802B6104_00000998
 lbl_fn_802B6104_000008A8:
     addi r4, r1, 0x7c
@@ -848,7 +848,7 @@ lbl_fn_802B6758_00000AB4:
     ori r0, r5, 0x8000
     stw r0, 0x12a4(r31)
     mr r3, r31
-    bl fn_801765D8
+    bl battle_awardExp
     mr r3, r31
     bl fn_800EE360
     b lbl_fn_802B6758_00000B68

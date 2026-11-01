@@ -22,7 +22,7 @@ extern void route_createSegment(void);
 extern void node_createNamedChild(void);
 extern void atn_Model_findBoneIndex(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void str_parseInt(void);
@@ -352,7 +352,7 @@ asm void fn_802DDDB8(void)
     stw r29, 0x1554(r30)
     stw r29, 0x1558(r30)
     stw r0, 0x155c(r30)
-    bl fn_800CB360
+    bl morph_reset
     addi r3, r30, 0x1564
     bl res_MsgHandle_constructor
     addi r3, r30, 0x1570

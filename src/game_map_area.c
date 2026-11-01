@@ -16,7 +16,7 @@ extern void collision_testLineSegment(void);
 extern void fn_80050A1C(void);
 extern void talk_parseQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void mem_free(void);
 extern void fn_80094BD8(void);
 extern void str_parseInt(void);
@@ -30,7 +30,7 @@ extern void fn_801255C8(void);
 extern void fn_80128818(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8014C228(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void actor_setState(void);
 extern void fn_8017039C(void);
 extern void fn_801718F8(void);
@@ -340,7 +340,7 @@ lbl_fn_8017B434_00000290:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x158
-    bl fn_800697D8
+    bl boss_recordDamage
     b lbl_fn_8017B434_0000086C
 lbl_fn_8017B434_00000314:
     lwz r3, lbl_8087F430
@@ -455,7 +455,7 @@ lbl_fn_8017B434_00000494:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_8017B434_000004B4:
     lwz r0, 0x12a4(r29)
     extrwi. r0, r0, 1, 26
@@ -715,7 +715,7 @@ lbl_fn_8017B434_000007EC:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x58
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_8017B434_0000086C:
     addi r11, r1, 0x290
     psq_l f31, 0x298(r1), 0, 0

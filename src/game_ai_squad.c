@@ -11,11 +11,11 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80108C10(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void fn_80148B0C(void);
 extern void fn_80155D70(void);
 extern void fn_8015CF98(void);
@@ -192,7 +192,7 @@ lbl_fn_80269168_000000F0:
     bl task_findEntryById
     mr r31, r3
     mr r3, r30
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r30
     lwz r8, 0x590(r30)
@@ -473,7 +473,7 @@ lbl_fn_802692B4_00000408:
     addi r8, r1, 0x98
     li r9, 0x2006
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
 lbl_fn_802692B4_00000524:
     addi r21, r21, 0x1
 lbl_fn_802692B4_00000528:
@@ -1193,7 +1193,7 @@ lbl_fn_8026A010_00000FA4:
     bl task_findEntryById
     mr r30, r3
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r8, 0x590(r31)
     mr r6, r31
     lwz r3, lbl_8087F048
@@ -1251,7 +1251,7 @@ lbl_fn_8026A010_00001070:
     bl task_findEntryById
     mr r30, r3
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r8, 0x590(r31)
     mr r6, r31
     lwz r3, lbl_8087F048
@@ -1610,7 +1610,7 @@ lbl_fn_8026A628_000015B0:
     bl task_findEntryById
     mr r31, r3
     mr r3, r30
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r30
     lwz r8, 0x590(r30)

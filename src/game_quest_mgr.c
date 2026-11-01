@@ -13,7 +13,7 @@ extern void mem_alloc(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80125474(void);
 extern void fn_8014C228(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_80153698(void);
 extern void actor_setState(void);
 extern void fn_801720AC(void);
@@ -1588,7 +1588,7 @@ lbl_fn_80141674_00001544:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_80141674_00001564:
     mr r3, r31
     addi r4, r1, 0x290
@@ -2413,7 +2413,7 @@ lbl_fn_80141674_00002164:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_80141674_00002184:
     lwz r0, 0x3d4(r1)
     psq_l f31, 0x3c8(r1), 0, 0

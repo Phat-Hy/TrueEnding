@@ -34,7 +34,7 @@ extern void task_findEntryById(void);
 extern void fn_8021FD7C(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -671,7 +671,7 @@ lbl_fn_801B77DC_00000764:
     lfs f1, lbl_808824F0
     li r6, 0x0
     lfs f2, lbl_808824FC
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801B77DC_00000788:
     lwz r3, 0x8(r31)
     bl task_findEntryById
@@ -1269,7 +1269,7 @@ asm void fn_801B805C(void)
     li r6, 0x0
     lfs f1, lbl_80882518
     lfs f2, lbl_8088253C
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801B805C_00001008:
     mr r3, r31
     lwz r31, 0x7c(r1)
@@ -1574,7 +1574,7 @@ lbl_fn_801B8360_00001410:
     li r6, 0x0
     lfs f1, lbl_80882518
     lfs f2, lbl_8088253C
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801B8360_00001480:
     psq_l f31, 0x108(r1), 0, 0
     mr r3, r31
@@ -1807,7 +1807,7 @@ lbl_fn_801B86CC_0000177C:
     li r6, 0x0
     lfs f1, lbl_80882518
     lfs f2, lbl_8088253C
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801B86CC_000017EC:
     lwz r0, lbl_8087F498
     cmpwi r0, 0x0
@@ -1824,7 +1824,7 @@ lbl_fn_801B86CC_000017EC:
     li r6, 0x2d
     lfs f1, lbl_80882518
     lfs f2, lbl_8088253C
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801B86CC_0000182C:
     lwz r3, 0x4(r31)
     lwz r0, 0x48(r3)

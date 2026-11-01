@@ -35,7 +35,7 @@ extern void equip_applyToCharacter(void);
 extern void fn_8015E7A0(void);
 extern void fn_8015EB2C(void);
 extern void fn_8016EB48(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80178208(void);
 extern void fn_8017C904(void);
 extern void fn_8019A3F4(void);
@@ -1061,7 +1061,7 @@ asm void fn_8024A1E0(void)
     stw r0, 0x12a4(r30)
     lwz r0, 0x98(r4)
     stw r0, 0x14b0(r30)
-    bl fn_801765D8
+    bl battle_awardExp
     b lbl_fn_8024A1E0_00000F00
 lbl_fn_8024A1E0_00000D58:
     lwz r0, 0x55c(r30)
@@ -1275,7 +1275,7 @@ lbl_fn_8024A4A0_0000103C:
     mr r3, r31
     lwz r0, 0x98(r4)
     stw r0, 0x14b0(r31)
-    bl fn_801765D8
+    bl battle_awardExp
     mr r3, r31
     bl fn_800EE360
 lbl_fn_8024A4A0_00001060:

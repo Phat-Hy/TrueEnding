@@ -36,7 +36,7 @@ extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_8017039C(void);
 extern void fn_80170A20(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80178A6C(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -171,7 +171,7 @@ lbl_fn_802E1054_0000003C:
     mr r3, r31
     ori r0, r0, 0x8000
     stw r0, 0x12a4(r31)
-    bl fn_801765D8
+    bl battle_awardExp
 lbl_fn_802E1054_00000070:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

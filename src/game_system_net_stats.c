@@ -19,7 +19,7 @@ extern void quest_updateFlow(void);
 extern void fn_8015E7A0(void);
 extern void fn_80171420(void);
 extern void fn_80171DB0(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_8018059C(void);
 extern void fn_8018120C(void);
 extern void fn_80181284(void);
@@ -190,7 +190,7 @@ lbl_fn_803A5118_000000D0:
     b lbl_fn_803A5118_0000022C
 lbl_fn_803A5118_0000010C:
     mr r3, r29
-    bl fn_801765D8
+    bl battle_awardExp
     b lbl_fn_803A5118_0000022C
 lbl_fn_803A5118_00000118:
     lwz r0, 0x38(r29)

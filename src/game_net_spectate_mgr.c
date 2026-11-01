@@ -16,7 +16,7 @@ extern void fn_8004B338(void);
 extern void fn_8005E7F4(void);
 extern void fn_80060D58(void);
 extern void skill_calcTrajectory(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void fn_8006A250(void);
 extern void fn_8006A5A8(void);
 extern void script_executeOpcode(void);
@@ -2434,7 +2434,7 @@ lbl_spectateManager_update_00002108:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x50
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_spectateManager_update_00002160:
     addi r26, r26, 0x10
     addi r31, r31, 0x1

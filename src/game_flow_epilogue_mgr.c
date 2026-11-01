@@ -11,7 +11,7 @@ extern void ui_destroyWidget(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB58C(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_803E9B7C(void);
 extern void fn_803EBA54(void);
 extern void fn_803FC65C(void);
@@ -1667,7 +1667,7 @@ lbl_fn_804E9364_00001444:
     rlwinm r0, r4, 0, 29, 29
     cmplwi r0, 0x4
     beq lbl_fn_804E9364_00001470
-    bl fn_801765D8
+    bl battle_awardExp
 lbl_fn_804E9364_00001470:
     lwz r4, lbl_8087F628
     addis r3, r4, 0x1

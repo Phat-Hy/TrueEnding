@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void fn_8004B20C(void);
 extern void fn_8004B290(void);
 extern void fn_8004B338(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void fn_8007708C(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -215,7 +215,7 @@ lbl_fn_80375B78_000000E4:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_80375B78_00000124:
     li r31, 0x0
     b lbl_fn_80375B78_0000015C
@@ -440,7 +440,7 @@ lbl_fn_80375D0C_000003F4:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_80375D0C_00000430:
     li r5, 0x0
     b lbl_fn_80375D0C_00000444
@@ -825,7 +825,7 @@ lbl_fn_80376324_00000830:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_80376324_0000088C:
     li r0, 0x0
     b lbl_fn_80376324_000008A0

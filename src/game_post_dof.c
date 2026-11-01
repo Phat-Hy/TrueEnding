@@ -28,7 +28,7 @@ extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_8020A81C(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -1428,7 +1428,7 @@ lbl_fn_802C1208_00001220:
     bl skill_findNodeById
     cmpwi r3, 0x0
     beq lbl_fn_802C1208_00001238
-    bl fn_801765D8
+    bl battle_awardExp
 lbl_fn_802C1208_00001238:
     addi r31, r31, 0x1
     addi r28, r28, 0x4

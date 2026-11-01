@@ -19,7 +19,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800F7FF0(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void npc_getPosition(void);
@@ -721,7 +721,7 @@ lbl_fn_8029F738_00000870:
     lfs f2, lbl_80883D30
     li r10, 0x0
     lwz r3, lbl_8087F048
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_8029F738_00000958
 lbl_fn_8029F738_000008F8:
     lwz r4, 0x14fc(r31)

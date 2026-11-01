@@ -8,7 +8,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_21(void);
 extern void _savegpr_23(void);
 extern void _savegpr_26(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void mem_alloc(void);
 extern void fn_8008CD60(void);
 extern void atn_Task_setActive(void);
@@ -19,7 +19,7 @@ extern void fn_8010F26C(void);
 extern void fn_8010F41C(void);
 extern void quest_checkCondition(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_8014EEC4(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80239C14(void);
@@ -280,7 +280,7 @@ lbl_fn_8056F404_000002A4:
     lwz r3, lbl_8087EEB8
     addi r4, r4, lbl_8075FF7C@l
     addi r4, r4, 0x15
-    b fn_800697D8
+    b boss_recordDamage
     blr
 }
 
@@ -893,7 +893,7 @@ lbl_fn_8056FC28_00000AA4:
     lwz r3, 0x0(r27)
     li r5, 0x1
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
     b lbl_fn_8056FC28_00000B50
 lbl_fn_8056FC28_00000B44:
     lwz r3, 0x0(r27)

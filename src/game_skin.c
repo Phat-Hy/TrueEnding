@@ -20,7 +20,7 @@ extern void fn_80049B74(void);
 extern void fn_80049C3C(void);
 extern void fn_80049D74(void);
 extern void fn_80049E44(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void fn_8007AA30(void);
 extern void fn_8007AA64(void);
 extern void fn_8007AB38(void);
@@ -46,7 +46,7 @@ extern void fn_800C9010(void);
 extern void fn_800CA0AC(void);
 extern void fn_800CA2FC(void);
 extern void fn_800CA7D4(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void fn_800CB36C(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB404(void);
@@ -299,7 +299,7 @@ asm void skin_playAnimationByName(void)
     stw r28, 0x18(r1)
     mr r28, r3
     addi r3, r1, 0x8
-    bl fn_800CB360
+    bl morph_reset
     lwz r3, lbl_8087EE90
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0
@@ -366,7 +366,7 @@ asm void fn_800C32E0(void)
     mr r28, r4
     mr r29, r5
     mr r30, r6
-    bl fn_800CB360
+    bl morph_reset
     lwz r3, lbl_8087EE90
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0
@@ -470,7 +470,7 @@ asm void skin_applyWeights(void)
     mr r28, r5
     mr r29, r6
     mr r30, r7
-    bl fn_800CB360
+    bl morph_reset
     lwz r3, lbl_8087EE90
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0
@@ -1561,7 +1561,7 @@ lbl_atn_Skin_init_00001234:
     stb r29, 0x117(r1)
     addi r4, r1, 0x18
     lwz r3, lbl_8087EEB8
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_atn_Skin_init_00001280:
     stw r23, 0xc(r1)
     mr r3, r23

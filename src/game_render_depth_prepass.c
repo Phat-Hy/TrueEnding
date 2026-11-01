@@ -26,7 +26,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB58C(void);
@@ -535,7 +535,7 @@ asm void fn_802B23E8(void)
     addi r3, r30, 0x153c
     bl res_MsgHandle_constructor
     addi r3, r30, 0x1548
-    bl fn_800CB360
+    bl morph_reset
     lfs f1, lbl_80884024
     addi r27, r30, 0x1698
     lfs f0, lbl_80884028

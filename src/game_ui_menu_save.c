@@ -15,7 +15,7 @@ extern void map_debugLog(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void str_findChar(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
 extern void fn_800FB4B0(void);
 extern void fn_801070C8(void);
@@ -43,7 +43,7 @@ extern void world_setGlobalFlag(void);
 extern void fn_803750E4(void);
 extern void fn_80375184(void);
 extern void fn_803761AC(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void fn_8054A340(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXRotAxis(void);
@@ -998,7 +998,7 @@ lbl_fn_801BE630_00000CDC:
     addi r6, r1, 0x220
     addi r7, r1, 0x1f0
     li r8, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     addi r17, r17, 0x1
     addi r16, r16, 0xf
     cmpwi r17, 0x4
@@ -1042,7 +1042,7 @@ lbl_fn_801BE630_00000D1C:
     fdivs f0, f21, f0
     stfs f0, 0x514(r1)
     lwz r4, 0x4(r31)
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_801BE630_0000158C
 lbl_fn_801BE630_00000DB4:
     lwz r3, lbl_8087F048
@@ -1055,7 +1055,7 @@ lbl_fn_801BE630_00000DB4:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_801BE630_0000158C
 lbl_fn_801BE630_00000DE4:
     cmpwi r0, 0x8
@@ -1284,7 +1284,7 @@ lbl_fn_801BE630_00001034:
     lfs f2, lbl_808825E8
     li r9, 0x2
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     addi r17, r17, 0x1
     addi r16, r16, 0x4
 lbl_fn_801BE630_00001144:
@@ -1360,7 +1360,7 @@ lbl_fn_801BE630_000011E8:
     lwz r0, 0x14(r31)
     stw r0, 0x4b8(r1)
     lwz r4, 0x4(r31)
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_801BE630_0000158C
 lbl_fn_801BE630_00001260:
     lwz r0, 0x4(r19)
@@ -1689,7 +1689,7 @@ lbl_fn_801BE630_00001708:
     li r5, 0x1e
     lfs f2, lbl_80882608
     li r6, 0x1e
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801BE630_00001734:
     mr r3, r19
     bl fn_8021A8D0

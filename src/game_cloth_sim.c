@@ -16,7 +16,7 @@ extern void mem_free(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
@@ -235,7 +235,7 @@ asm void fn_80279860(void)
     stw r0, 0x19b0(r30)
     bl res_MsgHandle_constructor
     addi r3, r30, 0x19c0
-    bl fn_800CB360
+    bl morph_reset
     lfs f3, lbl_808838D0
     li r0, 0x1c2
     lfs f2, lbl_808838D4

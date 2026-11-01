@@ -32,7 +32,7 @@ extern void boss_updatePhaseState(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_801781B0(void);
 extern void fn_80178A6C(void);
 extern void task_findEntryById(void);
@@ -289,7 +289,7 @@ lbl_fn_802EB9F8_00000264:
     mr r3, r31
     ori r0, r0, 0x8000
     stw r0, 0x12a4(r31)
-    bl fn_801765D8
+    bl battle_awardExp
     mr r3, r31
     bl fn_800EE360
     b lbl_fn_802EB9F8_0000028C

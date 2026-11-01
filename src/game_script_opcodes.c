@@ -42,7 +42,7 @@ extern void fn_80151448(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80178208(void);
 extern void fn_80178A6C(void);
 extern void fn_801A03E0(void);
@@ -1204,7 +1204,7 @@ lbl_fn_80245340_00000EC8:
     mr r3, r31
     ori r0, r0, 0x8000
     stw r0, 0x12a4(r31)
-    bl fn_801765D8
+    bl battle_awardExp
     lwz r0, 0x14b8(r31)
     cmpwi r0, 0x2
     beq lbl_fn_80245340_000011FC

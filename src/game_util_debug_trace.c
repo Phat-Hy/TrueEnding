@@ -12,7 +12,7 @@ extern void mem_free(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void morph_updateMesh(void);
@@ -360,7 +360,7 @@ asm void fn_80598878(void)
     stfs f0, 0x28(r3)
     stw r31, 0x60(r3)
     addi r3, r3, 0x64
-    bl fn_800CB360
+    bl morph_reset
     stw r31, 0x68(r30)
     addi r3, r30, 0x80
     stw r31, 0x7c(r30)

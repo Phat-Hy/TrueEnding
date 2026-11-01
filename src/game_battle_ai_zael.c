@@ -20,7 +20,7 @@ extern void route_createSegment(void);
 extern void route_createWaypoint(void);
 extern void fn_80088724(void);
 extern void node_createNamedChild(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void atn_Model_findBoneIndex(void);
 extern void lockon_updateTarget(void);
@@ -29,7 +29,7 @@ extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void bloom_processPasses(void);
 extern void str_skipWhitespace(void);
@@ -939,7 +939,7 @@ lbl_fn_80430428_00000B5C:
     mr r4, r3
     addi r3, r31, 0x104
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     mr r3, r31
     addi r4, r31, 0x104
     addi r5, r1, 0x108
@@ -956,7 +956,7 @@ lbl_fn_80430428_00000BB0:
     mr r4, r3
     addi r3, r31, 0x4d4
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     mr r3, r31
     addi r4, r31, 0x4d4
     addi r5, r1, 0x108
@@ -1899,7 +1899,7 @@ asm void fn_8043119C(void)
     stb r31, 0x3078(r30)
     stw r31, 0x3098(r30)
     stw r31, 0x309c(r30)
-    bl fn_800CB360
+    bl morph_reset
     li r3, 0x6
     li r0, 0x2
     stw r3, 0xe8(r30)

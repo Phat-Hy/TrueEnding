@@ -10,7 +10,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
 extern void fn_801010A0(void);
 extern void fn_8010EE78(void);
@@ -1747,7 +1747,7 @@ lbl_fn_802B596C_00001780:
     lfs f2, lbl_80884034
     stfs f0, 0x48(r1)
     lwz r5, 0x1688(r31)
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_802B596C_000019C8
 lbl_fn_802B596C_000017E8:
     xoris r0, r0, 0x8000
@@ -1805,7 +1805,7 @@ lbl_fn_802B596C_000017E8:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_802B596C_000019C8
 lbl_fn_802B596C_000018CC:
     addi r4, r1, 0x58

@@ -43,7 +43,7 @@ extern void dialog_updateScriptState(void);
 extern void fn_801513D0(void);
 extern void fn_8015E4B0(void);
 extern void actor_setState(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
@@ -1967,7 +1967,7 @@ lbl_fn_8025ACA0_00001A20:
     stw r4, 0x5c0(r31)
     ori r0, r0, 0x8000
     stw r0, 0x12a4(r31)
-    bl fn_801765D8
+    bl battle_awardExp
     mr r3, r31
     bl fn_800EE360
     b lbl_fn_8025ACA0_00001FCC

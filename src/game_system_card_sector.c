@@ -9,7 +9,7 @@ extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80126214(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -549,7 +549,7 @@ lbl_fn_80358A5C_000006C8:
     cror eq, lt, eq
     bne lbl_fn_80358A5C_00001EE8
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r31
     lwz r7, 0x155c(r31)

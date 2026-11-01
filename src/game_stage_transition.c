@@ -13,7 +13,7 @@ extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void morph_updateMesh(void);
@@ -29,7 +29,7 @@ extern void debuff_clearStatus(void);
 extern void actor_getMovementFlags(void);
 extern void fn_801905AC(void);
 extern void fn_801905DC(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
@@ -1049,7 +1049,7 @@ asm void fn_8019B29C(void)
     stw r5, 0xc(r3)
     stw r0, 0x1c(r3)
     addi r3, r3, 0x20
-    bl fn_800CB360
+    bl morph_reset
     stw r28, 0x24(r30)
     lwz r3, 0x4(r30)
     lwz r0, 0x58c(r3)
@@ -1826,7 +1826,7 @@ asm void fn_8019BD48(void)
     mr r4, r30
     li r5, 0xa
     li r6, 0x1e
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_8019BD48_00001874:
     lwz r31, 0x1c(r1)
     mr r3, r29

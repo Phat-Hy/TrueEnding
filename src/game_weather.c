@@ -18,7 +18,7 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800E8FB8(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
 extern void fn_800FFE68(void);
 extern void fn_801004FC(void);
@@ -1471,7 +1471,7 @@ lbl_fn_800E7F04_00001200:
     addi r8, r1, 0xb8
     li r9, 0x2006
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_800E7F04_0000134C
 lbl_fn_800E7F04_00001310:
     lwz r23, lbl_8087F048
@@ -1488,7 +1488,7 @@ lbl_fn_800E7F04_00001310:
     li r8, 0x0
     li r9, 0x2
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
 lbl_fn_800E7F04_0000134C:
     addi r18, r18, 0x1
 lbl_fn_800E7F04_00001350:

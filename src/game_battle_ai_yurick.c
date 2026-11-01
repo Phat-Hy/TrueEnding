@@ -23,7 +23,7 @@ extern void fn_80088724(void);
 extern void node_createNamedChild(void);
 extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void fn_800902C0(void);
 extern void atn_Model_findBoneIndex(void);
@@ -1527,7 +1527,7 @@ asm void fn_8043B7E8(void)
     stfs f0, 0x10(r1)
     psq_st f1, 0x90(r30), 0, 0
     stfs f2, 0x98(r30)
-    bl fn_8008AD4C
+    bl area_updateZoneState
     lfs f0, lbl_8088699C
     mr r3, r30
     stfs f0, 0x1a4(r30)

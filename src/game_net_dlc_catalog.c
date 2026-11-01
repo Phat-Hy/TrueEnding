@@ -31,7 +31,7 @@ extern void fn_8011F7FC(void);
 extern void fn_801546F4(void);
 extern void fn_8016DF3C(void);
 extern void fn_8016EB48(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80176ACC(void);
 extern void save_validateHeader(void);
 extern void fn_801F4484(void);
@@ -551,7 +551,7 @@ lbl_fn_8054A0A0_00000508:
     cmpwi r31, 0x0
     bne lbl_fn_8054A0A0_00000550
     lwz r3, 0x48(r29)
-    bl fn_801765D8
+    bl battle_awardExp
 lbl_fn_8054A0A0_00000550:
     lwz r0, 0x50(r30)
     cmpwi r0, 0x1

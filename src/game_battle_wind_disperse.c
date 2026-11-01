@@ -13,7 +13,7 @@ extern void fn_800C16C0(void);
 extern void fn_800C18BC(void);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_8011FE3C(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void equip_applyToCharacter(void);
 extern void actor_setState(void);
 extern void fn_8016EB48(void);
@@ -456,7 +456,7 @@ lbl_fn_8041EE28_00000470:
     stfs f2, 0x53c(r5)
     bl fn_8041F6A4
     lwz r3, 0x11c(r31)
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, 0x11c(r31)
     li r4, 0x1
     lfs f0, lbl_80886598

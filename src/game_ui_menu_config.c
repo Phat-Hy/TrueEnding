@@ -30,7 +30,7 @@ extern void task_findEntryById(void);
 extern void fn_8021FD7C(void);
 extern void fn_8036DAA8(void);
 extern void fn_803E2110(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void fn_805ADCC4(void);
 extern void fn_805ADD84(void);
 extern void PSMTXRotRad(void);
@@ -2112,7 +2112,7 @@ lbl_fn_801BE10C_00001CBC:
     lfs f1, lbl_808825E8
     li r6, 0x0
     lfs f2, lbl_80882608
-    bl fn_803EA77C
+    bl chest_spawnLoot
     b lbl_fn_801BE10C_00001D08
 lbl_fn_801BE10C_00001CE4:
     lwz r3, lbl_8087F498
@@ -2123,7 +2123,7 @@ lbl_fn_801BE10C_00001CE4:
     lfs f1, lbl_808825E8
     li r6, 0x0
     lfs f2, lbl_80882608
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801BE10C_00001D08:
     lwz r31, 0x13c(r1)
     mr r3, r29

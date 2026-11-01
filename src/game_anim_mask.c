@@ -17,19 +17,19 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void morph_updateMesh(void);
 extern void fn_800EB7A0(void);
 extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_8016F824(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80178A6C(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -394,7 +394,7 @@ lbl_fn_80271104_00000398:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
 lbl_fn_80271104_0000041C:
     lwz r0, 0xa4(r1)
     psq_l f31, 0x98(r1), 0, 0
@@ -600,7 +600,7 @@ lbl_fn_80271654_000006E8:
     ori r0, r4, 0x8000
     stw r0, 0x12a4(r31)
     mr r3, r31
-    bl fn_801765D8
+    bl battle_awardExp
     mr r3, r31
     bl fn_800EE360
     b lbl_fn_80271654_0000070C
@@ -1794,7 +1794,7 @@ asm void fn_8027278C(void)
     addi r3, r28, 0x18f4
     stw r31, 0x18ec(r28)
     stw r31, 0x18f0(r28)
-    bl fn_800CB360
+    bl morph_reset
     lfs f0, lbl_80883820
     addi r3, r28, 0x1914
     stfs f0, 0x18f8(r28)

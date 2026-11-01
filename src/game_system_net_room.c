@@ -8,7 +8,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_80017E90(void);
 extern void fn_80017EB0(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_800FDE60(void);
@@ -22,7 +22,7 @@ extern void fn_8012B988(void);
 extern void fn_8012D8B8(void);
 extern void fn_801333E4(void);
 extern void fn_80133B30(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_8014EEC4(void);
 extern void fn_801539E0(void);
 extern void fn_80183930(void);
@@ -297,7 +297,7 @@ lbl_fn_8039FBFC_00000240:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
     b lbl_fn_8039FBFC_00000428
 lbl_fn_8039FBFC_0000027C:
     mr r3, r30
@@ -441,7 +441,7 @@ asm void fn_803A0040(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
     b lbl_fn_803A0040_000004CC
 lbl_fn_803A0040_00000494:
     lwz r0, 0x12a4(r31)
@@ -498,7 +498,7 @@ lbl_fn_803A0040_00000504:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
     b lbl_fn_803A0040_0000059C
 lbl_fn_803A0040_00000564:
     lwz r0, 0x12a4(r27)
@@ -560,7 +560,7 @@ lbl_fn_803A0040_000005E4:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
     b lbl_fn_803A0040_0000067C
 lbl_fn_803A0040_00000644:
     lwz r0, 0x12a4(r28)
@@ -1043,7 +1043,7 @@ lbl_fn_803A064C_00000C3C:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_803A064C_00000CA0:
     lwz r4, 0x0(r30)
     lis r3, lbl_8074ED24@ha

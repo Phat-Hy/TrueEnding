@@ -38,7 +38,7 @@ extern void boss_updatePhaseState(void);
 extern void fn_80139F4C(void);
 extern void fn_80139F58(void);
 extern void fn_8013A258(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void quest_checkCondition(void);
 extern void dialog_renderWindow(void);
@@ -1627,7 +1627,7 @@ lbl_fn_80566FB8_00001420:
     cmpwi r0, 0x0
     beq lbl_fn_80566FB8_000014D8
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r31
     lwz r7, 0x638(r31)

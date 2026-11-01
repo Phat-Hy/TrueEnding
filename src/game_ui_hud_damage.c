@@ -33,7 +33,7 @@ extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void fn_8035B694(void);
 extern void fn_8035B78C(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void PSMTXRotRad(void);
@@ -1004,7 +1004,7 @@ lbl_fn_801CB434_00000BD4:
     li r6, 0x0
     lfs f1, lbl_80882930
     lfs f2, lbl_80882968
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801CB434_00000C50:
     psq_l f31, 0xf8(r1), 0, 0
     mr r3, r30

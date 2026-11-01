@@ -30,7 +30,7 @@ extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
 extern void fn_80092F1C(void);
@@ -925,7 +925,7 @@ lbl_fn_804167FC_00000A6C:
     mr r4, r3
     addi r3, r29, 0xf4
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     b lbl_fn_804167FC_00000AF4
 lbl_fn_804167FC_00000AB0:
     mr r3, r30
@@ -1693,7 +1693,7 @@ lbl_fn_8041726C_000014D4:
     mr r4, r3
     addi r3, r31, 0xfc
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     b lbl_fn_8041726C_000016CC
 lbl_fn_8041726C_00001518:
     mr r3, r29
@@ -1710,7 +1710,7 @@ lbl_fn_8041726C_00001540:
     mr r3, r29
     mr r4, r28
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     addi r27, r27, 0x1
     addi r29, r29, 0x3ec
     cmplwi r27, 0x8

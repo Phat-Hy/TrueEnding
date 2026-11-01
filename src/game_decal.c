@@ -33,7 +33,7 @@ extern void fn_801237F0(void);
 extern void fn_801240B4(void);
 extern void fn_80134134(void);
 extern void fn_80139560(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void fn_80155790(void);
 extern void fn_80155DAC(void);
 extern void fn_80158BB4(void);
@@ -643,7 +643,7 @@ lbl_fn_800E589C_00000754:
     cmpwi r0, 0x0
     beq lbl_fn_800E589C_00000838
     mr r3, r30
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r0, 0x12a4(r30)
     mr r6, r30
     lwz r3, lbl_8087F048

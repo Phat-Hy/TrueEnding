@@ -25,7 +25,7 @@ extern void fn_8010CB2C(void);
 extern void fn_8012D8B8(void);
 extern void fn_8013322C(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void equip_applyToCharacter(void);
@@ -33,7 +33,7 @@ extern void fn_801603CC(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_8017547C(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80176ACC(void);
 extern void fn_80178A6C(void);
 extern void task_mapIdToQueue(void);
@@ -341,7 +341,7 @@ asm void fn_80246508(void)
     stw r4, 0x5c0(r31)
     ori r0, r0, 0x8000
     stw r0, 0x12a4(r31)
-    bl fn_801765D8
+    bl battle_awardExp
     lwz r0, 0x14b8(r31)
     cmpwi r0, 0x2
     beq lbl_fn_80246508_00000334
@@ -1722,7 +1722,7 @@ asm void fn_802478C4(void)
     stfs f2, 0x10(r1)
     psq_st f1, 0x528(r31), 0, 0
     stfs f2, 0x530(r31)
-    bl fn_80144710
+    bl quest_evaluateConditions
     li r0, 0x0
     stw r0, 0x58c(r31)
     mr r3, r31

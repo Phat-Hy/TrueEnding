@@ -24,7 +24,7 @@ extern void node_destroy(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
@@ -34,7 +34,7 @@ extern void fn_800EB7A0(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void equip_applyToCharacter(void);
@@ -994,7 +994,7 @@ asm void fn_80282AE8(void)
     addi r3, r30, 0x14d8
     stw r29, 0x14b0(r30)
     stw r29, 0x14b4(r30)
-    bl fn_800CB360
+    bl morph_reset
     addi r3, r30, 0x14dc
     bl res_MsgHandle_constructor
     lfs f1, lbl_808839E8
@@ -1006,7 +1006,7 @@ asm void fn_80282AE8(void)
     stw r0, 0x14ec(r30)
     stfs f1, 0x14f0(r30)
     stfs f0, 0x14f8(r30)
-    bl fn_800CB360
+    bl morph_reset
     addi r3, r30, 0x1520
     bl res_MsgHandle_constructor
     lfs f1, lbl_808839F8
@@ -1970,7 +1970,7 @@ lbl_fn_802837F4_00001A2C:
     cror eq, lt, eq
     bne lbl_fn_802837F4_00001D48
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r30, 0x590(r31)
     li r3, 0x3f3
     bl task_findEntryById

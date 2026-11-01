@@ -23,7 +23,7 @@ extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void fn_80092954(void);
 extern void lockon_updateTarget(void);
@@ -1385,7 +1385,7 @@ lbl_fn_804A7F18_00001074:
     addi r3, r30, 0x208
     addi r4, r31, 0x105
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     mr r3, r30
     addi r4, r31, 0x11c
     li r5, 0x0

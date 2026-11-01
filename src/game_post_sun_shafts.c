@@ -29,7 +29,7 @@ extern void boss_updatePhaseState(void);
 extern void fn_8013A258(void);
 extern void fn_8013C504(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void fn_8016E484(void);
@@ -1183,7 +1183,7 @@ lbl_fn_802D0B84_00000EE8:
     bne lbl_fn_802D0B84_00001004
 lbl_fn_802D0B84_00000F0C:
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     psq_l f1, 0x528(r31), 0, 0
     addi r7, r1, 0xdc
     lfs f2, 0x530(r31)

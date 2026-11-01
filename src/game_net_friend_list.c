@@ -23,7 +23,7 @@ extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void fn_800CDF84(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_unlink(void);
@@ -47,7 +47,7 @@ extern void fn_80107FC8(void);
 extern void fn_8013310C(void);
 extern void fn_80133130(void);
 extern void fn_8013322C(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_8014EEC4(void);
 extern void fn_80155DAC(void);
 extern void fn_80160324(void);
@@ -723,7 +723,7 @@ lbl_fn_804CF640_0000071C:
     mr r3, r31
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_804CF640_00000730:
     lhz r4, 0x4(r30)
     mr r3, r31
@@ -1824,11 +1824,11 @@ lbl_fn_804D0328_00001618:
     bl atn_LoadHandle_constructor
     stw r30, 0x0(r27)
     addi r3, r29, 0x2b70
-    bl fn_800CB360
+    bl morph_reset
     addi r3, r29, 0x2b74
-    bl fn_800CB360
+    bl morph_reset
     addi r3, r29, 0x2b78
-    bl fn_800CB360
+    bl morph_reset
     lis r4, fn_804D16FC@ha
     lis r5, fn_804D1FDC@ha
     stw r31, 0x2b88(r29)

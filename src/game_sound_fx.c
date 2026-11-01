@@ -55,7 +55,7 @@ extern void fn_80137B78(void);
 extern void fn_801388B8(void);
 extern void fn_80139560(void);
 extern void fn_801446F0(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_8014EEC4(void);
 extern void fn_801539E0(void);
 extern void equip_applyToCharacter(void);
@@ -70,7 +70,7 @@ extern void fn_80165C5C(void);
 extern void fn_8016DC14(void);
 extern void fn_8016F634(void);
 extern void fn_80175AEC(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_8017A33C(void);
 extern void fn_8017AC44(void);
 extern void fn_8017CB2C(void);
@@ -568,7 +568,7 @@ lbl_fn_800EAECC_000005D8:
     mr r3, r31
     ori r0, r0, 0x8000
     stw r0, 0x12a4(r31)
-    bl fn_801765D8
+    bl battle_awardExp
 lbl_fn_800EAECC_000005EC:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1325,7 +1325,7 @@ asm void fn_800EBA5C(void)
     stw r31, 0x2c(r1)
     mr r31, r3
     stw r30, 0x28(r1)
-    bl fn_801765D8
+    bl battle_awardExp
     mr r3, r31
     bl fn_801446F0
     lwz r0, 0x12a4(r31)
@@ -1560,7 +1560,7 @@ lbl_fn_800EBD00_000013D4:
     li r5, 0x0
     li r6, 0x0
     lwz r3, 0x48(r3)
-    bl fn_8014DEE4
+    bl dialog_selectChoice
     li r31, 0x0
 lbl_fn_800EBD00_000013F0:
     mr r4, r31

@@ -29,7 +29,7 @@ extern void fn_800C3184(void);
 extern void fn_800C31E4(void);
 extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB480(void);
@@ -259,7 +259,7 @@ asm void fn_8035FCB4(void)
     addi r3, r3, 0x8
     bl memset
     addi r3, r31, 0x58
-    bl fn_800CB360
+    bl morph_reset
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)

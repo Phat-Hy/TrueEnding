@@ -42,11 +42,11 @@ extern void fn_800EDFE8(void);
 extern void fn_800EE360(void);
 extern void fn_800F52F0(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
 extern void magic_dispatchActionCommand(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
@@ -56,7 +56,7 @@ extern void debuff_clearStatus(void);
 extern void fn_8016DDB0(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80178A6C(void);
 extern void fn_8020A780(void);
 extern void fn_8020A81C(void);
@@ -437,7 +437,7 @@ lbl_fn_802CCE94_00000410:
     mr r3, r31
     ori r0, r0, 0x8000
     stw r0, 0x12a4(r31)
-    bl fn_801765D8
+    bl battle_awardExp
     mr r3, r31
     bl fn_800EE360
     b lbl_fn_802CCE94_00000438
@@ -1272,7 +1272,7 @@ lbl_fn_802CD73C_00000F94:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_802CD73C_00001478
 lbl_fn_802CD73C_00001040:
     cmpwi r0, 0x2
@@ -1392,7 +1392,7 @@ lbl_fn_802CD73C_00001154:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_802CD73C_00001478
 lbl_fn_802CD73C_00001200:
     mr r3, r31
@@ -1427,7 +1427,7 @@ lbl_fn_802CD73C_00001250:
     cror eq, lt, eq
     bne lbl_fn_802CD73C_000012AC
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, 0x1510(r31)
     bl task_findEntryById
     mr r7, r3

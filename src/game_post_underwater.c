@@ -27,7 +27,7 @@ extern void fn_8012DF7C(void);
 extern void fn_80148B0C(void);
 extern void fn_8015E7A0(void);
 extern void actor_setState(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -1673,7 +1673,7 @@ asm void fn_802DBE04(void)
     mr r3, r31
     ori r0, r0, 0x8000
     stw r0, 0x12a4(r31)
-    bl fn_801765D8
+    bl battle_awardExp
 lbl_fn_802DBE04_00001744:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

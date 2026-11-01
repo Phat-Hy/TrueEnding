@@ -25,7 +25,7 @@ extern void route_createSegment(void);
 extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CFD18(void);
 extern void str_skipWhitespace(void);
@@ -514,7 +514,7 @@ asm void fn_8032DEA0(void)
     stw r29, 0x15a4(r31)
     stw r0, 0x15a8(r31)
     stw r29, 0x15ac(r31)
-    bl fn_800CB360
+    bl morph_reset
     lis r4, fn_8021A4CC@ha
     lis r5, dtor_80013D60@ha
     stw r29, 0x15b4(r31)

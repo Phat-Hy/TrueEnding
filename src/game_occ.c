@@ -47,7 +47,7 @@ extern void GXSetTevSwapMode(void);
 extern void GXSetTevSwapModeTable(void);
 extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
-extern void fn_80617D50(void);
+extern void GXSetTevAlphaIn(void);
 extern void GXSetZMode(void);
 
 /* External data declarations */
@@ -1081,7 +1081,7 @@ asm void fn_800D775C(void)
     li r4, 0x4
     li r5, 0x5
     li r6, 0x3
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     lwz r3, lbl_8087EFB4
     bl fn_800BFB70
     lwz r0, 0x74(r1)
@@ -1220,7 +1220,7 @@ asm void fn_800D7D00(void)
     li r4, 0x4
     li r5, 0x5
     li r6, 0x3
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     lwz r3, lbl_8087EFB4
     bl fn_800BFB70
     lwz r0, 0x44(r1)
@@ -1341,7 +1341,7 @@ asm void fn_800D7F18(void)
     li r4, 0x4
     li r5, 0x5
     li r6, 0x3
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     lwz r3, lbl_8087EFB4
     bl fn_800BFB70
     li r3, 0x0

@@ -9,7 +9,7 @@ extern void _savegpr_24(void);
 extern void dtor_80084684(void);
 extern void fn_80017060(void);
 extern void fn_80047B54(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void fn_8006A250(void);
 extern void fn_8006A900(void);
 extern void fn_8006AA20(void);
@@ -1198,7 +1198,7 @@ lbl_world_Manager_draw_00000D64:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x520
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_world_Manager_draw_00000DA0:
     li r5, 0x0
     b lbl_world_Manager_draw_00000DB4
@@ -1459,7 +1459,7 @@ lbl_world_Manager_draw_00001120:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x420
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_world_Manager_draw_0000115C:
     li r5, 0x0
     b lbl_world_Manager_draw_00001170
@@ -1825,7 +1825,7 @@ lbl_world_Manager_draw_00001680:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x320
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_world_Manager_draw_000016BC:
     li r5, 0x0
     b lbl_world_Manager_draw_000016D0
@@ -2209,7 +2209,7 @@ lbl_world_Manager_draw_00001BFC:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x220
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_world_Manager_draw_00001C38:
     li r5, 0x0
     b lbl_world_Manager_draw_00001C4C
@@ -2655,7 +2655,7 @@ lbl_world_Manager_draw_00002244:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x120
-    bl fn_800697D8
+    bl boss_recordDamage
     b lbl_world_Manager_draw_000022B8
 lbl_world_Manager_draw_00002284:
     slwi r0, r5, 2

@@ -6,7 +6,7 @@ extern void dtor_80084684(void);
 extern void fn_8000D430(void);
 extern void fn_800119B8(void);
 extern void mem_alloc(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
 extern void lockon_updateTarget(void);
@@ -410,7 +410,7 @@ lbl_fn_801E807C_0000042C:
     addi r4, r4, lbl_8073CB8C@l
     li r5, 0x0
     addi r4, r4, 0x1d
-    bl fn_8008AD4C
+    bl area_updateZoneState
     lwz r31, 0x1c(r1)
     mr r3, r29
     lwz r30, 0x18(r1)

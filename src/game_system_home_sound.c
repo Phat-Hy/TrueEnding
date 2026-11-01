@@ -69,7 +69,7 @@ extern void fn_806165B0(void);
 extern void fn_80617340(void);
 extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
-extern void fn_80617D50(void);
+extern void GXSetTevAlphaIn(void);
 extern void GXSetZMode(void);
 extern void fn_80618290(void);
 extern void GXLoadPosMtxImm(void);
@@ -1660,7 +1660,7 @@ lbl_fn_80364BE8_0000149C:
     li r4, 0x1
     li r5, 0x1
     li r6, 0x0
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1

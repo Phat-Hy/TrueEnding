@@ -55,7 +55,7 @@ extern void fn_8013C554(void);
 extern void fn_801404F8(void);
 extern void fn_801479D8(void);
 extern void quest_checkCondition(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_80151210(void);
 extern void fn_801539E0(void);
 extern void fn_80155DAC(void);
@@ -709,7 +709,7 @@ lbl_fn_803729B4_00000724:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
     cmpwi r27, 0x0
     bne lbl_fn_803729B4_00000790
     mr r3, r26

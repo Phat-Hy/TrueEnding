@@ -20,7 +20,7 @@ extern void fn_80178208(void);
 extern void fn_80192758(void);
 extern void fn_801B2EDC(void);
 extern void fn_801B618C(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void fn_8054770C(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -567,7 +567,7 @@ lbl_fn_801B4394_000005F8:
     lfs f1, lbl_80882484
     li r6, 0x0
     lfs f2, lbl_8088248C
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801B4394_00000654:
     lwz r31, 0x1c(r1)
     mr r3, r28

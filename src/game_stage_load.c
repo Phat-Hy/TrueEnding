@@ -10,7 +10,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_80108C10(void);
 extern void magic_dispatchActionCommand(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void fn_801539E0(void);
 extern void fn_80155DAC(void);
 extern void debuff_clearStatus(void);
@@ -1096,7 +1096,7 @@ lbl_fn_80197DC8_00000E74:
     stfs f2, 0x53c(r3)
     psq_st f1, 0x0(r30), 0, 0
     lwz r3, 0x4(r29)
-    bl fn_80144710
+    bl quest_evaluateConditions
 lbl_fn_80197DC8_00000EA4:
     lwz r3, 0x4(r29)
     li r0, 0x0
@@ -1303,7 +1303,7 @@ lbl_fn_801980B4_00001178:
     stfs f2, 0x53c(r3)
     psq_st f1, 0x0(r30), 0, 0
     lwz r3, 0x4(r29)
-    bl fn_80144710
+    bl quest_evaluateConditions
 lbl_fn_801980B4_000011A8:
     lwz r3, 0x4(r29)
     li r4, 0x0
@@ -1615,7 +1615,7 @@ lbl_fn_80198528_000015EC:
     stfs f2, 0x53c(r3)
     psq_st f1, 0x0(r30), 0, 0
     lwz r3, 0x4(r29)
-    bl fn_80144710
+    bl quest_evaluateConditions
 lbl_fn_80198528_0000161C:
     lwz r3, 0x4(r29)
     li r4, 0x0

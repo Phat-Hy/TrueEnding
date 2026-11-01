@@ -8,7 +8,7 @@ extern void fn_80092954(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
@@ -21,7 +21,7 @@ extern void boss_updatePhaseState(void);
 extern void fn_8013A258(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_801426A4(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
@@ -753,7 +753,7 @@ asm void fn_8026FC0C(void)
     addi r3, r31, 0x1530
     bl res_MsgHandle_constructor
     addi r3, r31, 0x153c
-    bl fn_800CB360
+    bl morph_reset
     lis r6, lbl_807448D8@ha
     lis r4, lbl_807C8350@ha
     lwz r5, lbl_8087F430
@@ -1085,7 +1085,7 @@ lbl_fn_8026FFE4_00000D98:
     cror eq, lt, eq
     bne lbl_fn_8026FFE4_00001144
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r30, 0x590(r31)
     li r3, 0x3f3
     bl task_findEntryById

@@ -11,7 +11,7 @@ extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void morph_updateMesh(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void fn_8012DB04(void);
 extern void fn_801426A4(void);
 extern void fn_80148B0C(void);
@@ -557,7 +557,7 @@ lbl_fn_802F97B8_000006B4:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
 lbl_fn_802F97B8_00000724:
     lfs f7, 0x2e4(r31)
     lfs f0, lbl_808849F8

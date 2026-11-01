@@ -19,7 +19,7 @@ extern void node_destroy(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB58C(void);
@@ -37,7 +37,7 @@ extern void fn_8016E4C4(void);
 extern void actor_setState(void);
 extern void fn_8017039C(void);
 extern void fn_80170A20(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -146,7 +146,7 @@ lbl_fn_802E8250_00000068:
     ori r0, r4, 0x8000
     stw r0, 0x12a4(r31)
     mr r3, r31
-    bl fn_801765D8
+    bl battle_awardExp
     b lbl_fn_802E8250_00000084
 lbl_fn_802E8250_0000007C:
     li r0, 0x1e
@@ -421,9 +421,9 @@ asm void fn_802E8580(void)
     addi r3, r29, 0x1594
     bl res_MsgHandle_constructor
     addi r3, r29, 0x15a0
-    bl fn_800CB360
+    bl morph_reset
     addi r3, r29, 0x15a4
-    bl fn_800CB360
+    bl morph_reset
     lwz r0, 0x12a4(r29)
     lis r3, lbl_80747F70@ha
     lfs f0, lbl_808847A8

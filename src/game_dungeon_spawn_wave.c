@@ -15,14 +15,14 @@ extern void _savegpr_25(void);
 extern void fn_80049B74(void);
 extern void fn_80049CDC(void);
 extern void talk_formatQuotedString(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void fn_8006AA20(void);
 extern void fn_8007FAF0(void);
 extern void fn_80092954(void);
 extern void fn_8009385C(void);
 extern void fn_800C93D4(void);
 extern void fn_800CA7D4(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB404(void);
 extern void fn_800CB4EC(void);
@@ -169,7 +169,7 @@ asm void fn_803EAA7C(void)
     mr r29, r5
     stw r28, 0x10(r1)
     mr r28, r4
-    bl fn_800CB360
+    bl morph_reset
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_803EAA7C_00000060
@@ -1203,7 +1203,7 @@ lbl_fn_803EB7E4_00000DB4:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_803EB7E4_00000E28:
     mr r3, r30
     li r4, 0x0

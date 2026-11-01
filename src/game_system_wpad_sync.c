@@ -12,7 +12,7 @@ extern void fn_8004895C(void);
 extern void fn_80049654(void);
 extern void fn_800498D4(void);
 extern void fn_8004B338(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void fn_8006A250(void);
 extern void fn_8006A5A8(void);
 extern void mem_alloc(void);
@@ -22,7 +22,7 @@ extern void fn_800A5B30(void);
 extern void fn_800AFEBC(void);
 extern void fn_800C16B4(void);
 extern void fn_800C289C(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CDF84(void);
 extern void fn_800CE368(void);
@@ -710,7 +710,7 @@ lbl_world_Manager_constructor_000006EC:
     stw r26, 0x5590(r29)
     stw r26, 0x5594(r29)
     stw r26, 0x5598(r29)
-    bl fn_800CB360
+    bl morph_reset
     lfs f0, lbl_8088570C
     li r0, 0x2
     lfs f3, lbl_80885708
@@ -1226,7 +1226,7 @@ lbl_world_Manager_constructor_00000DCC:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x50
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_world_Manager_constructor_00000EB8:
     lwz r4, 0x10d0(r29)
     cmpwi r4, 0x0
@@ -1249,7 +1249,7 @@ lbl_world_Manager_constructor_00000ED4:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x50
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_world_Manager_constructor_00000F0C:
     li r4, 0x1
     stw r25, 0x10d0(r29)

@@ -7,7 +7,7 @@ extern void _restgpr_24(void);
 extern void _restgpr_25(void);
 extern void _savegpr_24(void);
 extern void _savegpr_25(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void fn_8006D0C8(void);
 extern void fn_8006D3F8(void);
 extern void fn_800A6BDC(void);
@@ -382,7 +382,7 @@ lbl_world_Manager_update_00000370:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x208
-    bl fn_800697D8
+    bl boss_recordDamage
     b lbl_world_Manager_update_000003DC
 lbl_world_Manager_update_000003AC:
     slwi r0, r5, 2
@@ -538,7 +538,7 @@ lbl_world_Manager_update_000005A0:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x108
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_world_Manager_update_000005DC:
     li r5, 0x0
     b lbl_world_Manager_update_000005F0
@@ -960,7 +960,7 @@ lbl_world_Manager_update_00000BA4:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_world_Manager_update_00000BE0:
     li r5, 0x0
     b lbl_world_Manager_update_00000BF4

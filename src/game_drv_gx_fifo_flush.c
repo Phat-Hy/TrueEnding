@@ -31,7 +31,7 @@ extern void fn_80615D50(void);
 extern void fn_80617340(void);
 extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
-extern void fn_80617D50(void);
+extern void GXSetTevAlphaIn(void);
 extern void GXLoadPosMtxImm(void);
 extern void fn_8061A0F0(void);
 extern void fn_8061A100(void);
@@ -620,7 +620,7 @@ asm void fn_805C03A0(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0x5
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     lis r4, lbl_80764140@ha
     addi r3, r1, 0x8
     lfs f1, lbl_80764140@l(r4)

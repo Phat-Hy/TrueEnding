@@ -22,7 +22,7 @@ extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
 extern void fn_806D5C90(void);
-extern void fn_806D7A90(void);
+extern void net_socketConnect(void);
 extern void fn_806D7AA0(void);
 extern void net_socketClose(void);
 extern void fn_806D7B30(void);
@@ -703,7 +703,7 @@ lbl_fn_806F9160_000008B8:
     b lbl_fn_806F9160_00000930
 lbl_fn_806F9160_00000908:
     addi r3, r14, 0x100
-    bl fn_806D7A90
+    bl net_socketConnect
     mr r20, r3
     mr r5, r15
     addi r4, r1, 0x90

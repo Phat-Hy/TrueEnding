@@ -11,7 +11,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void fn_8007AA64(void);
 extern void fn_8007B100(void);
 extern void fn_8007C0D4(void);
@@ -1581,7 +1581,7 @@ lbl_fn_80081080_000013D8:
     stb r0, 0x107(r1)
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_80081080_0000141C:
     mr r3, r31
     bl str_findChar

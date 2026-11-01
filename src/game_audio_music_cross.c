@@ -24,7 +24,7 @@ extern void fn_800EB7A0(void);
 extern void fn_800EC204(void);
 extern void fn_800F530C(void);
 extern void fn_800F72CC(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void fn_8010A308(void);
 extern void fn_8010F668(void);
 extern void equip_getGlobalManager(void);
@@ -506,7 +506,7 @@ lbl_fn_8030C490_0000053C:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     lwz r3, 0x14d4(r30)
     li r0, 0x0
     stw r0, 0x14d0(r30)

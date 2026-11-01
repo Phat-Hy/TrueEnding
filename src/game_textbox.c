@@ -56,7 +56,7 @@ extern void GXSetTevSwapMode(void);
 extern void GXSetTevSwapModeTable(void);
 extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
-extern void fn_80617D50(void);
+extern void GXSetTevAlphaIn(void);
 extern void GXLoadTexMtxImm(void);
 extern void std_pow(void);
 extern void __construct_new_array(void);
@@ -689,7 +689,7 @@ asm void fn_800AD834(void)
     li r5, 0x1
     lwz r31, 0x40(r6)
     li r6, 0x3
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     lfs f1, 0xc(r26)
     srwi r0, r15, 31
     lfs f0, lbl_80880DD0
@@ -1163,7 +1163,7 @@ lbl_fn_800AD834_00000F00:
     li r4, 0x1
     li r5, 0x0
     li r6, 0x3
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     lwz r3, lbl_8087EEE0
     addi r4, r26, 0x320
     li r5, 0x0
@@ -1285,7 +1285,7 @@ lbl_fn_800AD834_00000F00:
     li r4, 0x1
     li r5, 0x0
     li r6, 0x3
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     lwz r4, lbl_8087EFB4
     li r5, 0x0
     lwz r3, lbl_8087EEE0
@@ -1410,7 +1410,7 @@ lbl_fn_800AD834_00000F00:
     li r4, 0x4
     li r5, 0x1
     li r6, 0x3
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     lwz r3, lbl_8087EFB4
     bl fn_800BFB70
     lwz r3, lbl_8087EFA8
@@ -1942,7 +1942,7 @@ lbl_fn_800AE568_000017F8:
     li r4, 0x4
     li r5, 0x1
     li r6, 0x3
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     lwz r3, lbl_8087EEE0
     mr r6, r29
     mr r7, r30

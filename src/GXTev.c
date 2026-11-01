@@ -41,7 +41,7 @@ void GXSetTevOrder(void);
 void GXSetNumTevStages(void);
 void fn_80617A10(void);
 void fn_80617C40(void);
-void fn_80617D50(void);
+void GXSetTevAlphaIn(void);
 void GXSetZCompLoc(void);
 void GXSetDither(void);
 void GXSetZMode(void);
@@ -588,7 +588,7 @@ lbl_fn_80617C40_000006C8:
     blr
 }
 
-asm void fn_80617D50(void)
+asm void GXSetTevAlphaIn(void)
 {
     nofralloc
     lwz r10, __GXData

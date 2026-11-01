@@ -23,7 +23,7 @@ extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
@@ -977,7 +977,7 @@ asm void fn_802F6E64(void)
     addi r3, r30, 0x14d8
     stw r29, 0x14b0(r30)
     stw r29, 0x14b4(r30)
-    bl fn_800CB360
+    bl morph_reset
     addi r3, r30, 0x14dc
     bl res_MsgHandle_constructor
     lfs f1, lbl_80884970
@@ -989,7 +989,7 @@ asm void fn_802F6E64(void)
     stw r0, 0x14ec(r30)
     stfs f1, 0x14f0(r30)
     stfs f0, 0x14f8(r30)
-    bl fn_800CB360
+    bl morph_reset
     addi r3, r30, 0x1520
     bl res_MsgHandle_constructor
     lfs f0, lbl_80884994

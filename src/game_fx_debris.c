@@ -23,7 +23,7 @@ extern void fn_800DB3EC(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800EC204(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
@@ -588,7 +588,7 @@ lbl_fn_8029BE7C_0000069C:
     lfs f0, 0x1678(r29)
     fmuls f0, f27, f0
     stfs f0, 0x370(r1)
-    bl fn_800F8574
+    bl viewport_updateCulling
     addi r31, r31, 0x1
 lbl_fn_8029BE7C_00000710:
     lwz r30, 0x14ac(r30)

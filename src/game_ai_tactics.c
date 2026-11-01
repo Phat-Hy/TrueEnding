@@ -14,11 +14,11 @@ extern void atn_Anim_getLayerDuration(void);
 extern void str_findChar(void);
 extern void fn_800F52F0(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
 extern void npc_getPosition(void);
 extern void fn_8014052C(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void fn_80176548(void);
@@ -1183,7 +1183,7 @@ lbl_fn_802684C0_00000EF4:
     bl task_findEntryById
     mr r31, r3
     mr r3, r30
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r30
     lwz r8, 0x590(r30)
@@ -1539,7 +1539,7 @@ lbl_fn_8026860C_00001374:
     addi r8, r1, 0x118
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     lwz r3, lbl_8087F8A0
     li r7, 0x0
     lwz r8, 0x48(r3)
@@ -1622,7 +1622,7 @@ lbl_fn_8026860C_00001504:
     addi r8, r1, 0x118
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_8026860C_000015D0
 lbl_fn_8026860C_00001560:
     lwz r30, lbl_8087F048
@@ -1638,7 +1638,7 @@ lbl_fn_8026860C_00001560:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     lwz r30, lbl_8087F048
     li r3, 0x60f
     bl task_findEntryById
@@ -1652,7 +1652,7 @@ lbl_fn_8026860C_00001560:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
 lbl_fn_8026860C_000015D0:
     lwz r0, 0x174(r1)
     psq_l f31, 0x168(r1), 0, 0
@@ -1735,7 +1735,7 @@ lbl_fn_80268CB4_000016E8:
     bl task_findEntryById
     mr r30, r3
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r8, 0x590(r31)
     mr r6, r31
     lwz r3, lbl_8087F048
@@ -1773,7 +1773,7 @@ lbl_fn_80268CB4_00001778:
     bl task_findEntryById
     mr r30, r3
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r8, 0x590(r31)
     mr r6, r31
     lwz r3, lbl_8087F048
@@ -1811,7 +1811,7 @@ lbl_fn_80268CB4_00001808:
     bl task_findEntryById
     mr r30, r3
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r8, 0x590(r31)
     mr r6, r31
     lwz r3, lbl_8087F048

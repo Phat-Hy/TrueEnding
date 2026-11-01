@@ -27,7 +27,7 @@ extern void fn_80151448(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80178A6C(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
@@ -45,7 +45,7 @@ extern void fn_80264C88(void);
 extern void fn_8035B694(void);
 extern void fn_8035B78C(void);
 extern void fn_803C1560(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
@@ -1273,7 +1273,7 @@ lbl_fn_80262FB4_00001010:
     stw r4, 0x5c0(r31)
     ori r0, r0, 0x8000
     stw r0, 0x12a4(r31)
-    bl fn_801765D8
+    bl battle_awardExp
     mr r3, r31
     bl fn_800EE360
     b lbl_fn_80262FB4_00001488
@@ -1814,7 +1814,7 @@ lbl_fn_80263580_000017B4:
     lfs f2, lbl_80883630
     li r5, 0x0
     li r6, 0x0
-    bl fn_803EA77C
+    bl chest_spawnLoot
     b lbl_fn_80263580_00001840
 lbl_fn_80263580_00001838:
     li r0, 0x1

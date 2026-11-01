@@ -15,7 +15,7 @@ extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void fn_80069758(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void mem_alloc(void);
 extern void map_processTrigger(void);
 extern void fn_800971D4(void);
@@ -36,7 +36,7 @@ extern void fn_80136544(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80176ACC(void);
 extern void fn_8017C974(void);
 extern void event_findEntryById(void);
@@ -409,7 +409,7 @@ lbl_fn_80431458_000003B0:
     lwz r3, 0x780(r27)
     bl atn_Task_setActive
     lwz r3, 0x780(r27)
-    bl fn_801765D8
+    bl battle_awardExp
     lwz r3, 0x784(r27)
     cmpwi r3, 0x0
     beq lbl_fn_80431458_0000040C
@@ -646,7 +646,7 @@ lbl_fn_80431774_00000720:
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
     beq lbl_fn_80431774_00000740
-    bl fn_801765D8
+    bl battle_awardExp
 lbl_fn_80431774_00000740:
     lwz r3, 0x784(r28)
     cmpwi r3, 0x0
@@ -1027,7 +1027,7 @@ lbl_fn_80431774_00000CC8:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x490
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_80431774_00000CF0:
     lwz r0, 0x4f0(r30)
     lwz r3, lbl_8087F430

@@ -36,7 +36,7 @@ extern void fn_8019C8A8(void);
 extern void fn_8019C94C(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void atn_LoadHandle_getName(void);
 extern void fn_804DA694(void);
 extern void PSMTXRotRad(void);
@@ -730,7 +730,7 @@ lbl_fn_801AD34C_00000878:
     lfs f2, lbl_80882310
     li r5, 0xa
     li r6, 0x0
-    bl fn_803EA77C
+    bl chest_spawnLoot
     lwz r3, 0x4(r27)
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
@@ -761,7 +761,7 @@ lbl_fn_801AD34C_00000900:
     li r5, 0x8
     lfs f2, lbl_80882310
     li r6, 0x0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801AD34C_00000934:
     psq_l f31, 0x178(r1), 0, 0
     mr r3, r27

@@ -32,7 +32,7 @@ extern void fn_806177F0(void);
 extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80617A10(void);
-extern void fn_80617D50(void);
+extern void GXSetTevAlphaIn(void);
 
 /* External data declarations */
 extern u8 lbl_80764608[];
@@ -898,7 +898,7 @@ lbl_fn_805D9830_00000A00:
     li r4, 0x4
     li r5, 0x5
     li r6, 0xf
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     li r3, 0x2
     bl GXSetNumTevStages
     li r3, 0x0

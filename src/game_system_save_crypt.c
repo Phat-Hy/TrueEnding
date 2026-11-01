@@ -69,7 +69,7 @@ extern void fn_8035B78C(void);
 extern void world_setGlobalFlag(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void atn_LoadHandle_destructor(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -605,7 +605,7 @@ asm void fn_80344060(void)
     lfs f2, lbl_8088525C
     li r5, 0x2
     li r6, 0x0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_80344060_00000688:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

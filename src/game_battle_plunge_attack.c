@@ -15,7 +15,7 @@ extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
 extern void atn_Model_findBoneIndex(void);
@@ -26,7 +26,7 @@ extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void str_skipWhitespace(void);
 extern void cam_destroyMsgHandle(void);
@@ -661,7 +661,7 @@ asm void fn_804114B4(void)
     li r7, 0x2
     bl __construct_new_array
     addi r3, r30, 0x684
-    bl fn_800CB360
+    bl morph_reset
     li r0, 0x0
     stw r0, 0x688(r30)
     mr r3, r30
@@ -859,7 +859,7 @@ lbl_fn_80411720_000009F0:
     mr r4, r3
     addi r3, r29, 0xf4
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     b lbl_fn_80411720_00000BC8
 lbl_fn_80411720_00000A34:
     mr r3, r30

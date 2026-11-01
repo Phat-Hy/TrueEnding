@@ -22,7 +22,7 @@ extern void route_createSegment(void);
 extern void route_createWaypoint(void);
 extern void fn_80088724(void);
 extern void node_createNamedChild(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
 extern void fn_80092A4C(void);
@@ -1149,7 +1149,7 @@ lbl_fn_8042813C_00000DD4:
     lwz r0, 0x5f8(r31)
     add r3, r0, r29
     addi r3, r3, 0x54
-    bl fn_8008AD4C
+    bl area_updateZoneState
     addi r28, r31, 0x1f4
     addi r27, r31, 0x3f4
     li r25, 0x0

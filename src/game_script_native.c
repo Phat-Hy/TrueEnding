@@ -18,7 +18,7 @@ extern void fn_80126214(void);
 extern void fn_8013322C(void);
 extern void fn_8013A258(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void fn_801489CC(void);
 extern void dialog_renderWindow(void);
 extern void fn_80151448(void);
@@ -29,7 +29,7 @@ extern void fn_8015E4B0(void);
 extern void fn_801656A4(void);
 extern void fn_8016E4C4(void);
 extern void actor_setState(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void actor_getMovementFlags(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -1047,7 +1047,7 @@ lbl_fn_80253684_00000D98:
     ori r0, r4, 0x8000
     stw r0, 0x12a4(r31)
     mr r3, r31
-    bl fn_801765D8
+    bl battle_awardExp
     b lbl_fn_80253684_00000E9C
 lbl_fn_80253684_00000DAC:
     lfs f2, 0x2e4(r31)
@@ -1367,7 +1367,7 @@ lbl_fn_80253884_0000122C:
     cmpwi r3, 0x0
     beq lbl_fn_80253884_0000129C
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r0, 0x560(r31)
     cmpwi r0, 0xa
     bne lbl_fn_80253884_0000126C

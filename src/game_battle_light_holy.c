@@ -18,7 +18,7 @@ extern void fn_80087BB4(void);
 extern void route_createWaypoint(void);
 extern void fn_80088724(void);
 extern void node_createNamedChild(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
@@ -26,7 +26,7 @@ extern void fn_800C1814(void);
 extern void fn_800C1990(void);
 extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB688(void);
@@ -836,7 +836,7 @@ lbl_fn_80420D0C_000009A0:
     mr r4, r3
     addi r3, r28, 0xf4
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     mr r3, r28
     addi r4, r28, 0xf4
     addi r5, r1, 0x8
@@ -1788,7 +1788,7 @@ asm void fn_80421AB8(void)
     stw r30, 0xf4(r31)
     bl res_MsgHandle_constructor
     addi r3, r31, 0x104
-    bl fn_800CB360
+    bl morph_reset
     addi r3, r31, 0x108
     bl res_MsgHandle_constructor
     addi r3, r31, 0x114

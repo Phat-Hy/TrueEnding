@@ -23,7 +23,7 @@ extern void fn_80392CE0(void);
 extern void fn_803933F4(void);
 extern void fn_803E41AC(void);
 extern void fn_803E43A4(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void fn_804A5E40(void);
 extern void fn_805BDCC0(void);
 extern void fn_805BF1EC(void);
@@ -2735,7 +2735,7 @@ lbl_fn_803792F0_0000271C:
     lfs f1, lbl_80885848
     li r6, 0xf
     lfs f2, lbl_808858C8
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_803792F0_00002760:
     lwz r3, 0x358(r28)
     cmpw r3, r30
@@ -3293,7 +3293,7 @@ lbl_fn_803792F0_00002F80:
     lfs f2, lbl_808858C8
     li r5, 0x28
     li r6, 0xf
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_803792F0_00002FCC:
     addi r26, r26, 0x20
     addi r27, r27, 0x1

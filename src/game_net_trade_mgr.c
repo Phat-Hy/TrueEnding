@@ -28,7 +28,7 @@ extern void fn_800A56A8(void);
 extern void fn_800BC2E0(void);
 extern void fn_800C1A1C(void);
 extern void fn_800C1FB4(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CFBA0(void);
 extern void atn_Task_constructor(void);
@@ -407,7 +407,7 @@ asm void fn_8052A8F0(void)
     bl fn_8006CA80
     stw r31, 0x133c(r29)
     addi r3, r29, 0x1340
-    bl fn_800CB360
+    bl morph_reset
     addi r3, r29, 0x1344
     bl fn_8006CA80
     addi r3, r29, 0x134c

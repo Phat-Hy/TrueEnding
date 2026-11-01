@@ -14,7 +14,7 @@ extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_8012DB04(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void fn_8016DDB0(void);
@@ -1796,7 +1796,7 @@ lbl_fn_8045E780_000018E0:
     bl task_findEntryById
     mr r31, r3
     mr r3, r30
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r30
     lwz r8, 0x590(r30)

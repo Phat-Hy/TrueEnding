@@ -19,7 +19,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void morph_updateMesh(void);
@@ -1907,7 +1907,7 @@ asm void fn_8027C990(void)
     stfs f0, 0x159c(r29)
     stfs f0, 0x15a0(r29)
     stfs f0, 0x15a4(r29)
-    bl fn_800CB360
+    bl morph_reset
     lwz r7, 0x12a4(r29)
     li r5, 0x3
     lwz r0, 0x958(r29)

@@ -9,12 +9,12 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB518(void);
@@ -1463,7 +1463,7 @@ asm void fn_8040D244(void)
     stw r31, 0x60c(r29)
     stw r30, 0x630(r29)
     stw r31, 0x634(r29)
-    bl fn_800CB360
+    bl morph_reset
     lfs f0, lbl_80886318
     lwz r3, 0x60c(r29)
     stfs f0, 0x63c(r29)
@@ -1611,7 +1611,7 @@ lbl_fn_8040D434_000015FC:
     lwz r0, 0x60c(r26)
     add r3, r0, r24
     addi r3, r3, 0x4
-    bl fn_8008AD4C
+    bl area_updateZoneState
     mr r22, r26
     addi r21, r26, 0x1f5
     li r27, 0x0

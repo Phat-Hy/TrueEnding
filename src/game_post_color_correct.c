@@ -10,7 +10,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void quest_ctorRewardItem(void);
 extern void equip_applyToCharacter(void);
 extern void fn_80158BB4(void);
@@ -19,7 +19,7 @@ extern void actor_setState(void);
 extern void fn_8016F824(void);
 extern void fn_80170A20(void);
 extern void fn_80176548(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80178A6C(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -488,7 +488,7 @@ lbl_fn_802C42D4_00000578:
     mr r31, r3
 lbl_fn_802C42D4_00000584:
     mr r3, r30
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r30
     lwz r8, 0x590(r30)
@@ -689,7 +689,7 @@ lbl_fn_802C4480_00000868:
     mr r31, r3
 lbl_fn_802C4480_00000874:
     mr r3, r30
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r30
     lwz r8, 0x590(r30)
@@ -769,7 +769,7 @@ lbl_fn_802C46BC_00000958:
     stw r5, 0x1608(r30)
     stw r4, 0x1654(r30)
     stw r0, 0x12a4(r30)
-    bl fn_801765D8
+    bl battle_awardExp
     lwz r3, lbl_8087F430
     li r4, 0xf9
     li r5, 0x1

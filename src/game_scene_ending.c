@@ -17,7 +17,7 @@ extern void actor_getMovementFlags(void);
 extern void fn_801A4E08(void);
 extern void fn_8036DAF4(void);
 extern void fn_803C1560(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
@@ -484,7 +484,7 @@ lbl_fn_801B0D88_00000554:
     li r6, 0x0
     lfs f1, lbl_808823B0
     lfs f2, lbl_808823C0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801B0D88_00000594:
     mr r3, r31
     lwz r31, 0xc(r1)
@@ -1326,7 +1326,7 @@ asm void fn_801B19E4(void)
     li r5, 0xc
     lfs f2, lbl_808823C0
     li r6, 0x0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801B19E4_00001170:
     mr r3, r30
     lwz r31, 0xc(r1)
@@ -1874,7 +1874,7 @@ lbl_fn_801B1F4C_00001938:
     lfs f1, lbl_808823B0
     li r6, 0x0
     lfs f2, lbl_808823C0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801B1F4C_0000195C:
     psq_l f31, 0x118(r1), 0, 0
     mr r3, r29

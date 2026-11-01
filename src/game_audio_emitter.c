@@ -24,7 +24,7 @@ extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void fn_80109828(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void quest_ctorRewardItem(void);
 extern void dialog_updateScriptState(void);
@@ -498,7 +498,7 @@ lbl_fn_802FD328_00000514:
     cror eq, lt, eq
     bne lbl_fn_802FD328_00000570
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     li r3, 0x64a
     bl task_findEntryById
     mr r7, r3
@@ -560,7 +560,7 @@ lbl_fn_802FD328_00000604:
     cror eq, lt, eq
     bne lbl_fn_802FD328_00000660
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     li r3, 0x64b
     bl task_findEntryById
     mr r7, r3

@@ -48,7 +48,7 @@ extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
 extern void res_registerResource(void);
 extern void fn_8035B78C(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
@@ -2046,7 +2046,7 @@ lbl_fn_80335988_00001A4C:
     mr r4, r31
     li r5, 0x2
     li r6, 0x0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_80335988_00001B08:
     lwz r0, 0x264(r1)
     psq_l f31, 0x258(r1), 0, 0

@@ -13,7 +13,7 @@ extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void fn_80134168(void);
 extern void fn_801539E0(void);
 extern void fn_80154344(void);
@@ -27,7 +27,7 @@ extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -777,7 +777,7 @@ lbl_fn_801C7918_0000090C:
     lfs f2, lbl_80882848
     lis r9, 0xa0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     lwz r27, lbl_8087F430
     li r4, 0xcf7
     mr r3, r27
@@ -801,7 +801,7 @@ lbl_fn_801C7918_00000974:
     lfs f2, lbl_80882848
     li r9, 0x40
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_801C7918_00000AC8
 lbl_fn_801C7918_000009A8:
     lwz r4, 0x4(r28)
@@ -817,7 +817,7 @@ lbl_fn_801C7918_000009A8:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     lfs f1, lbl_80882860
     addi r3, r1, 0x60
     li r4, 0x79
@@ -841,7 +841,7 @@ lbl_fn_801C7918_000009A8:
     li r9, 0x0
     lfs f2, lbl_80882848
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     lfs f1, lbl_80882864
     addi r3, r1, 0x30
     li r4, 0x79
@@ -865,7 +865,7 @@ lbl_fn_801C7918_000009A8:
     li r9, 0x0
     lfs f2, lbl_80882848
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_801C7918_00000AC8
 lbl_fn_801C7918_00000AA4:
     lwz r3, lbl_8087F048
@@ -876,7 +876,7 @@ lbl_fn_801C7918_00000AA4:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
 lbl_fn_801C7918_00000AC8:
     lwz r5, lbl_8087F610
     lwz r3, 0x4(r28)
@@ -1532,7 +1532,7 @@ lbl_fn_801C82F8_000013C8:
     li r5, 0x11
     lfs f2, lbl_80882894
     li r6, 0x0
-    bl fn_803EA77C
+    bl chest_spawnLoot
     b lbl_fn_801C82F8_00001454
 lbl_fn_801C82F8_00001438:
     cmpwi r29, 0x3
@@ -1541,7 +1541,7 @@ lbl_fn_801C82F8_00001438:
     li r5, 0x10
     lfs f2, lbl_80882894
     li r6, 0x0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801C82F8_00001454:
     psq_l f31, 0x1d8(r1), 0, 0
     mr r3, r28
@@ -1739,7 +1739,7 @@ lbl_fn_801C8938_0000164C:
     li r6, 0x0
     lfs f1, lbl_80882888
     lfs f2, lbl_80882894
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801C8938_00001728:
     lwz r0, lbl_8087F498
     cmpwi r0, 0x0
@@ -1756,7 +1756,7 @@ lbl_fn_801C8938_00001728:
     li r6, 0x2d
     lfs f1, lbl_80882888
     lfs f2, lbl_80882894
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801C8938_00001768:
     lwz r3, 0x4(r31)
     lwz r0, 0x48(r3)

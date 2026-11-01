@@ -29,7 +29,7 @@ extern void fn_8015BDD8(void);
 extern void fn_8015E7A0(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80178A6C(void);
 extern void task_findEntryById(void);
 extern void fn_802CCFD8(void);
@@ -1176,7 +1176,7 @@ lbl_fn_802CC0F4_00000F84:
     mr r3, r31
     clrrwi r0, r4, 1
     stw r0, 0x5c0(r31)
-    bl fn_801765D8
+    bl battle_awardExp
     mr r3, r31
     bl fn_800EE360
     b lbl_fn_802CC0F4_00000FB4

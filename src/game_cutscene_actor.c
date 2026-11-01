@@ -15,7 +15,7 @@ extern void clip_calculateFrustum(void);
 extern void fn_800FBA9C(void);
 extern void fn_800FBE70(void);
 extern void fn_80107A68(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void fn_80158E1C(void);
 extern void fn_8015AF40(void);
 extern void fn_8015B238(void);
@@ -786,7 +786,7 @@ lbl_fn_80328C6C_000009BC:
     cror eq, lt, eq
     bne lbl_fn_80328C6C_00000A40
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     li r3, 0x674
     bl task_findEntryById
     mr r7, r3
@@ -864,7 +864,7 @@ lbl_fn_8032932C_00000AD0:
     cror eq, lt, eq
     bne lbl_fn_8032932C_00000B5C
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     li r3, 0x674
     bl task_findEntryById
     mr r7, r3
@@ -1045,7 +1045,7 @@ lbl_fn_8032943C_00000D9C:
     fadds f0, f3, f0
     stfs f4, 0x52c(r30)
     stfs f0, 0x530(r30)
-    bl fn_80144710
+    bl quest_evaluateConditions
     li r3, 0x674
     bl task_findEntryById
     mr r7, r3

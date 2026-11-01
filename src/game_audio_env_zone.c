@@ -14,7 +14,7 @@ extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void morph_updateMesh(void);
@@ -1207,7 +1207,7 @@ asm void fn_8031D4F4(void)
     stw r0, 0x30(r3)
     stw r0, 0x34(r3)
     addi r3, r3, 0x38
-    bl fn_800CB360
+    bl morph_reset
     lwz r0, 0x2c(r31)
     mr r3, r31
     subf r0, r0, r0

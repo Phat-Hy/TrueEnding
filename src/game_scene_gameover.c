@@ -24,7 +24,7 @@ extern void actor_getMovementFlags(void);
 extern void world_getGlobalFlag(void);
 extern void fn_803C11A4(void);
 extern void fn_803C1560(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
@@ -1246,7 +1246,7 @@ asm void fn_801B3098(void)
     li r6, 0x0
     lfs f1, lbl_80882428
     lfs f2, lbl_8088243C
-    bl fn_803EA77C
+    bl chest_spawnLoot
     b lbl_fn_801B3098_00000F54
 lbl_fn_801B3098_00000F0C:
     addi r4, r1, 0x224
@@ -1335,7 +1335,7 @@ lbl_fn_801B3098_00000FD8:
     li r6, 0x0
     lfs f1, lbl_80882428
     lfs f2, lbl_8088243C
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801B3098_00001060:
     li r0, 0x1
     stb r0, 0x2d(r29)

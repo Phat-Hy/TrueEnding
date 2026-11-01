@@ -25,7 +25,7 @@ extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
 extern void node_destroy(void);
 extern void fn_800899DC(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void fn_8008B130(void);
 extern void map_processTrigger(void);
 extern void map_debugLog(void);
@@ -62,7 +62,7 @@ extern void fn_80137E68(void);
 extern void fn_80137FC0(void);
 extern void fn_80138528(void);
 extern void fn_8014C228(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_8014FD30(void);
 extern void fn_8014FF9C(void);
 extern void fn_8020EE8C(void);
@@ -289,7 +289,7 @@ lbl_fn_80136138_000001BC:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_80136138_000001DC:
     lbz r0, lbl_8087EE74
     extsb. r0, r0
@@ -1513,13 +1513,13 @@ lbl_fn_801371AC_000012C0:
     addi r3, r17, 0xb0
     addi r4, r1, 0x670
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     b lbl_fn_801371AC_000012F8
 lbl_fn_801371AC_000012E8:
     addi r3, r17, 0xb0
     addi r4, r1, 0x670
     addi r5, r1, 0x770
-    bl fn_8008AD4C
+    bl area_updateZoneState
 lbl_fn_801371AC_000012F8:
     mr r3, r17
     addi r4, r17, 0xb0

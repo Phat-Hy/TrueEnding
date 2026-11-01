@@ -11,7 +11,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void fn_8015ECC4(void);
@@ -2119,7 +2119,7 @@ lbl_fn_8034C714_00001C74:
     li r8, 0x0
     lis r9, 0x100
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     addi r27, r27, 0x1
     cmpwi r27, 0x4
     blt lbl_fn_8034C714_00001C74

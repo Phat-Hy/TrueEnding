@@ -47,7 +47,7 @@ extern void fn_8012B988(void);
 extern void fn_8012D8B8(void);
 extern void fn_80139F4C(void);
 extern void fn_8013C504(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_8016E4C4(void);
 extern void fn_80176ACC(void);
 extern void fn_8017A300(void);
@@ -4231,7 +4231,7 @@ lbl_fn_804D25D4_0000367C:
     li r5, 0x0
     li r6, 0x0
     lwz r3, 0x0(r30)
-    bl fn_8014DEE4
+    bl dialog_selectChoice
     lwz r3, 0x0(r30)
     bl fn_803CFC58
     cmpwi r3, 0x0

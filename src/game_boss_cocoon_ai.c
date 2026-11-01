@@ -21,7 +21,7 @@ extern void fn_80108C10(void);
 extern void fn_801162A0(void);
 extern void fn_8012DF7C(void);
 extern void npc_getPosition(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void fn_80148B0C(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
@@ -1581,7 +1581,7 @@ lbl_fn_80454F08_00001420:
     stfs f2, 0x548(r30)
 lbl_fn_80454F08_000014D4:
     mr r3, r30
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r5, 0x100(r30)
     li r0, 0x0
     lwz r4, 0x2bc(r30)

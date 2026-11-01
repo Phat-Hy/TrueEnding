@@ -64,7 +64,7 @@ extern void GXSetTevKColorSel(void);
 extern void GXSetTevKAlphaSel(void);
 extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
-extern void fn_80617D50(void);
+extern void GXSetTevAlphaIn(void);
 extern void GXLoadPosMtxImm(void);
 extern void GXLoadNrmMtxImm3x3(void);
 extern void GXSetCurrentMtx(void);
@@ -254,7 +254,7 @@ lbl_fn_800B0CD4_000000F0:
     li r4, 0x4
     li r5, 0x5
     li r6, 0x3
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     lwz r3, 0x54(r31)
     lfs f6, lbl_80880E60
     lfs f3, 0x20(r3)
@@ -349,7 +349,7 @@ lbl_fn_800B0CD4_000000F0:
     li r4, 0x1
     li r5, 0x0
     li r6, 0x3
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     lwz r0, 0x144(r1)
     psq_l f31, 0x138(r1), 0, 0
     lfd f31, 0x130(r1)
@@ -468,7 +468,7 @@ lbl_fn_800B105C_000003C0:
     li r4, 0x1
     li r5, 0x0
     li r6, 0x3
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     li r3, 0x1
     bl GXClearVtxDesc
     li r3, 0x1
@@ -661,7 +661,7 @@ lbl_fn_800B105C_000007B0:
     li r4, 0x1
     li r5, 0x0
     li r6, 0x3
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     lwz r3, lbl_8087EFA8
     lwz r0, 0x2b0(r3)
     cmpwi r0, 0x0
@@ -1474,7 +1474,7 @@ lbl_fn_800B1C44_00001320:
     li r4, 0x4
     li r5, 0x5
     li r6, 0x3
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     lwz r0, lbl_8087D878
     cmpwi r0, 0x0
     bne lbl_fn_800B1C44_000013D0

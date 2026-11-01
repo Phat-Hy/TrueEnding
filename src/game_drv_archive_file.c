@@ -14,7 +14,7 @@ extern void fn_800A55D4(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void fn_8012D180(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_80160170(void);
 extern void fn_80160324(void);
 extern void fn_8016F3D0(void);
@@ -924,7 +924,7 @@ lbl_fn_805AA018_00000BF4:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
     b lbl_fn_805AA018_00000CB0
 lbl_fn_805AA018_00000C20:
     cmpwi r30, 0xa
@@ -936,7 +936,7 @@ lbl_fn_805AA018_00000C20:
     li r4, 0x1
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
     b lbl_fn_805AA018_00000CB0
 lbl_fn_805AA018_00000C4C:
     lwz r3, 0x5c(r31)
@@ -952,7 +952,7 @@ lbl_fn_805AA018_00000C4C:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
     b lbl_fn_805AA018_00000CB0
 lbl_fn_805AA018_00000C88:
     cmpwi r30, 0xa
@@ -964,7 +964,7 @@ lbl_fn_805AA018_00000C88:
     li r4, 0x1
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_805AA018_00000CB0:
     addi r3, r31, 0x7d4
     bl fn_8012D180

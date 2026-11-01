@@ -25,7 +25,7 @@ extern void fn_800928B0(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void fn_800CB36C(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
@@ -765,11 +765,11 @@ lbl_fn_803F0488_00000820:
     la r6, lbl_8087DF18
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_800CB360@ha
+    lis r4, morph_reset@ha
     lis r5, ref_releaseHandle@ha
     mr r7, r30
     li r6, 0x4
-    addi r4, r4, fn_800CB360@l
+    addi r4, r4, morph_reset@l
     addi r5, r5, ref_releaseHandle@l
     bl runtime_registerStaticObject
     stw r3, 0x4(r29)
@@ -1887,7 +1887,7 @@ asm void fn_803F13D4(void)
     stw r0, 0x4(r3)
     stw r0, 0x8(r3)
     addi r3, r3, 0xc
-    bl fn_800CB360
+    bl morph_reset
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -2026,7 +2026,7 @@ lbl_fn_803F1508_00001910:
     addi r3, r1, 0x3c
     stw r24, 0x34(r1)
     stw r24, 0x38(r1)
-    bl fn_800CB360
+    bl morph_reset
     stw r22, 0x30(r1)
     lwz r0, 0x5c(r26)
     slwi r0, r0, 4
@@ -2099,7 +2099,7 @@ lbl_fn_803F1508_00001A00:
     cmpw r3, r0
     bgt lbl_fn_803F1508_00001D48
     addi r3, r1, 0x10
-    bl fn_800CB360
+    bl morph_reset
     addi r3, r28, 0x10
     li r4, 0x7
     li r5, 0x0

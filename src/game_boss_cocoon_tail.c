@@ -29,10 +29,10 @@ extern void fn_8012A288(void);
 extern void npc_getPosition(void);
 extern void fn_8013C480(void);
 extern void fn_801404F8(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void task_findEntryById(void);
 extern void res_findResourceSlot(void);
 extern void fn_80279788(void);
@@ -1187,7 +1187,7 @@ lbl_fn_80463610_00000ECC:
     stw r5, 0x1740(r31)
     stw r4, 0x17b0(r31)
     stw r0, 0x12a4(r31)
-    bl fn_801765D8
+    bl battle_awardExp
     lwz r3, lbl_8087F408
     lfs f30, lbl_80886D60
     lwz r30, 0x48(r3)
@@ -1464,7 +1464,7 @@ lbl_fn_804638A4_0000131C:
     cror eq, lt, eq
     bne lbl_fn_804638A4_00001378
     mr r3, r29
-    bl fn_80144710
+    bl quest_evaluateConditions
     li r3, 0x5b4
     bl task_findEntryById
     mr r7, r3
@@ -2129,7 +2129,7 @@ lbl_fn_80463F20_00001CA0:
     psq_st f1, 0x0(r30), 0, 0
     psq_st f1, 0x534(r31), 0, 0
     stfs f2, 0x53c(r31)
-    bl fn_80144710
+    bl quest_evaluateConditions
     li r3, 0x5b4
     bl task_findEntryById
     mr r30, r3

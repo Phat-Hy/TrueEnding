@@ -8,7 +8,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void wcs_vformat(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void fn_80109828(void);
 extern void actor_setState(void);
 extern void sound_initGlobalInstances(void);
@@ -1461,7 +1461,7 @@ lbl_fn_80290AB4_000013FC:
     lfs f0, 0x19a0(r20)
     fmuls f0, f26, f0
     stfs f0, 0x1f0(r1)
-    bl fn_800F8574
+    bl viewport_updateCulling
     addi r22, r22, 0x1
 lbl_fn_80290AB4_00001460:
     lwz r21, 0x14ac(r21)
@@ -1724,7 +1724,7 @@ lbl_fn_8029101C_0000177C:
     fmuls f0, f0, f7
     stfs f0, 0x1b0(r1)
     lwz r5, 0x14e4(r30)
-    bl fn_800F8574
+    bl viewport_updateCulling
 lbl_fn_8029101C_0000183C:
     lwz r0, 0x224(r1)
     psq_l f31, 0x218(r1), 0, 0

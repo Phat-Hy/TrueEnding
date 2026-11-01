@@ -9,7 +9,7 @@ extern void _savegpr_20(void);
 extern void _savegpr_22(void);
 extern void _savegpr_27(void);
 extern void fn_8003EA3C(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_8009373C(void);
 extern void fn_80093B88(void);
@@ -1490,7 +1490,7 @@ lbl_fn_803A4568_00001288:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x128
-    bl fn_800697D8
+    bl boss_recordDamage
     b lbl_fn_803A4568_0000131C
 lbl_fn_803A4568_000012B4:
     mr r3, r28
@@ -1519,7 +1519,7 @@ lbl_fn_803A4568_000012F4:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x28
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_803A4568_0000131C:
     lwz r4, 0x0(r31)
     lis r3, lbl_8074ED24@ha

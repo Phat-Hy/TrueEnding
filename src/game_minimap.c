@@ -7,7 +7,7 @@ extern void _savegpr_26(void);
 extern void fn_8004FF58(void);
 extern void fn_80063764(void);
 extern void fn_80063D3C(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void fn_8006FEBC(void);
 extern void fn_80080048(void);
 extern void fn_80080528(void);
@@ -218,7 +218,7 @@ lbl_fn_8008C950_000001BC:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x70
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_8008C950_0000020C:
     lwz r3, 0x8(r31)
     lwz r3, 0x38(r3)

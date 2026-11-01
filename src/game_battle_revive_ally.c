@@ -14,7 +14,7 @@ extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void mem_realloc(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void fn_8009076C(void);
 extern void fn_80092A4C(void);
 extern void lockon_updateTarget(void);
@@ -22,7 +22,7 @@ extern void fn_800971D4(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097E80(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_80402A40(void);
 extern void fn_804052EC(void);
@@ -253,7 +253,7 @@ lbl_fn_804038D0_0000020C:
     li r5, 0x0
     add r3, r0, r30
     addi r3, r3, 0x10
-    bl fn_8008AD4C
+    bl area_updateZoneState
     lwz r0, 0x10c(r31)
     addi r5, r1, 0x108
     li r4, 0x0
@@ -1146,7 +1146,7 @@ asm void fn_804047A4(void)
     stb r4, 0x425(r31)
     stw r0, 0x428(r31)
     stw r4, 0x42c(r31)
-    bl fn_800CB360
+    bl morph_reset
     lfs f0, lbl_808861F4
     li r0, 0x1
     stfs f0, 0x434(r31)

@@ -8,7 +8,7 @@ extern void fn_80049B2C(void);
 extern void fn_80049B74(void);
 extern void fn_80049CDC(void);
 extern void fn_80049E3C(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void mem_free(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
@@ -2189,7 +2189,7 @@ lbl_fn_800C8780_00001B74:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x128
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_800C8780_00001B98:
     lwz r3, 0xa8(r30)
     li r0, 0x0
@@ -2415,7 +2415,7 @@ lbl_fn_800C8780_00001E78:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x28
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_800C8780_00001EB4:
     lwz r0, 0x244(r1)
     lwz r31, 0x23c(r1)

@@ -16,7 +16,7 @@ extern void npc_updateTalkInteraction(void);
 extern void fn_801446F0(void);
 extern void fn_802097C4(void);
 extern void task_findEntryById(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void fn_80441E8C(void);
 extern void atn_LoadHandle_getName(void);
 extern void PSMTXRotRad(void);
@@ -195,7 +195,7 @@ lbl_fn_8018CAEC_00000118:
     li r6, 0x0
     lfs f1, lbl_80881EC4
     lfs f2, lbl_80881EB0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_8018CAEC_0000017C:
     mr r3, r31
     lwz r31, 0xc(r1)
@@ -520,7 +520,7 @@ lbl_fn_8018CEF8_000005D4:
     li r6, 0x0
     lfs f1, lbl_80881EC4
     lfs f2, lbl_80881EB0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_8018CEF8_00000630:
     lis r3, lbl_80738F68@ha
     lwz r5, 0x4(r31)
@@ -996,7 +996,7 @@ lbl_fn_8018D4AC_00000CBC:
     li r6, 0x0
     lfs f1, lbl_80881EC4
     lfs f2, lbl_80881EB0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_8018D4AC_00000CFC:
     lis r3, lbl_80738F68@ha
     lwz r5, 0x4(r30)
@@ -1354,7 +1354,7 @@ asm void fn_8018DAE4(void)
     li r6, 0x0
     lfs f1, lbl_80881EC4
     lfs f2, lbl_80881EB0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_8018DAE4_00001238:
     mr r3, r31
     lwz r31, 0x6c(r1)

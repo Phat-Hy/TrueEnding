@@ -22,7 +22,7 @@ extern void mem_alloc(void);
 extern void route_interpolatePath(void);
 extern void fn_80087858(void);
 extern void node_createNamedChild(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void fn_8008B130(void);
 extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
@@ -336,7 +336,7 @@ asm void fn_8049B9B8(void)
     mr r4, r3
     addi r3, r31, 0x50
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     lwz r12, 0x0(r31)
     mr r3, r31
     mr r4, r30
@@ -388,7 +388,7 @@ asm void fn_8049BAAC(void)
     mr r4, r3
     addi r3, r30, 0x50
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31

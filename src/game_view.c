@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void mem_alloc(void);
 extern void node_destroy(void);
 extern void fn_8008A76C(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void map_debugLog(void);
 extern void fn_80091CFC(void);
 extern void atn_Task_constructor(void);
@@ -792,7 +792,7 @@ lbl_fn_800F1430_00000A74:
     mr r4, r27
     subi r3, r3, 0x45ac
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     add r3, r31, r26
     addi r28, r28, 0x1
     addis r3, r3, 0x1

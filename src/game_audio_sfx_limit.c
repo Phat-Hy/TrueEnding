@@ -24,7 +24,7 @@ extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
 extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void fn_800902C0(void);
 extern void atn_Model_findBoneIndex(void);
@@ -1181,7 +1181,7 @@ lbl_fn_803161F8_00000F0C:
     addi r4, r30, 0x8c
     addi r3, r3, 0x1648
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     addi r28, r28, 0x1
     addi r29, r29, 0x214
     cmpwi r28, 0x3

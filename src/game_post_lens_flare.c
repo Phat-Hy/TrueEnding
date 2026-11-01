@@ -18,7 +18,7 @@ extern void quest_ctorRewardItem(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80178A6C(void);
 extern void fn_8017A300(void);
 extern void sound_initGlobalInstances(void);
@@ -1586,7 +1586,7 @@ lbl_fn_802CF9AC_000015A8:
     mr r3, r31
     ori r0, r0, 0x8000
     stw r0, 0x12a4(r31)
-    bl fn_801765D8
+    bl battle_awardExp
     mr r3, r31
     bl fn_800EE360
 lbl_fn_802CF9AC_000015C4:

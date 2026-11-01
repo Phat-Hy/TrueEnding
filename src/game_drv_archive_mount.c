@@ -24,7 +24,7 @@ extern void msg_getMessageById(void);
 extern void fn_800A55FC(void);
 extern void fn_800A5920(void);
 extern void skin_playAnimationByName(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void morph_updateMesh(void);
@@ -1294,7 +1294,7 @@ lbl_fn_805A715C_00000F8C:
     bdnz lbl_fn_805A715C_00000F8C
 lbl_fn_805A715C_00000FA0:
     addi r3, r30, 0x16c0
-    bl fn_800CB360
+    bl morph_reset
     lis r29, lbl_807639F8@ha
     mr r3, r30
     addi r29, r29, lbl_807639F8@l
