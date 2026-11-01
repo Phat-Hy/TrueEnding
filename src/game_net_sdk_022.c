@@ -114,9 +114,9 @@ void fn_806CED40(void);
 void fn_806CEED0(void);
 void fn_806CF030(void);
 void fn_806CF090(void);
-void fn_806CF0A0(void);
+void *fn_806CF0A0(void *obj);
 void fn_806CF0B0(void);
-void fn_806CF0D0(void);
+void fn_806CF0D0(void *obj, void *val);
 void fn_806CF0E0(void);
 void fn_806CF130(void);
 void fn_806CF160(void);
@@ -2255,11 +2255,9 @@ asm void fn_806CF090(void)
     blr
 }
 
-asm void fn_806CF0A0(void)
+void *fn_806CF0A0(void *obj)
 {
-    nofralloc
-    lwz r3, 0x8(r3)
-    blr
+    return *(void **)((char *)obj + 8);
 }
 
 asm void fn_806CF0B0(void)
@@ -2276,11 +2274,9 @@ lbl_fn_806CF0B0_00001D0C:
     blr
 }
 
-asm void fn_806CF0D0(void)
+void fn_806CF0D0(void *obj, void *val)
 {
-    nofralloc
-    stw r4, 0x8(r3)
-    blr
+    *(void **)((char *)obj + 8) = val;
 }
 
 asm void fn_806CF0E0(void)

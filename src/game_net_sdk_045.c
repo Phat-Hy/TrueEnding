@@ -85,7 +85,7 @@ void fn_806FDBC0(void);
 void fn_806FDCA0(void);
 void fn_806FDD20(void);
 void fn_806FDFB0(void);
-void fn_806FE060(void);
+void fn_806FE060(void *obj, void *val);
 void fn_806FE070(void);
 void fn_806FE090(void);
 void fn_806FE0F0(void);
@@ -106,15 +106,15 @@ void fn_806FEA20(void);
 void fn_806FEAA0(void);
 void fn_806FEBD0(void);
 void fn_806FEC60(void);
-void fn_806FEC90(void);
+void *fn_806FEC90(void *obj);
 void fn_806FECA0(void);
-void fn_806FECB0(void);
+u16 fn_806FECB0(void *obj);
 void fn_806FECC0(void);
 void fn_806FECD0(void);
-void fn_806FED00(void);
+void *fn_806FED00(void *obj);
 void fn_806FED10(void);
-void fn_806FED20(void);
-void fn_806FED30(void);
+void fn_806FED20(void *obj, void *val);
+void *fn_806FED30(void *obj);
 void fn_806FED40(void);
 void fn_806FEF30(void);
 
@@ -1300,11 +1300,9 @@ lbl_fn_806FDFB0_00001068:
     blr
 }
 
-asm void fn_806FE060(void)
+void fn_806FE060(void *obj, void *val)
 {
-    nofralloc
-    stw r4, 0x28(r3)
-    blr
+    *(void **)((char *)obj + 0x28) = val;
 }
 
 asm void fn_806FE070(void)
@@ -2235,11 +2233,9 @@ asm void fn_806FEC60(void)
     blr
 }
 
-asm void fn_806FEC90(void)
+void *fn_806FEC90(void *obj)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(void **)(obj);
 }
 
 asm void fn_806FECA0(void)
@@ -2249,11 +2245,9 @@ asm void fn_806FECA0(void)
     b fn_806A4264
 }
 
-asm void fn_806FECB0(void)
+u16 fn_806FECB0(void *obj)
 {
-    nofralloc
-    lhz r3, 0x4(r3)
-    blr
+    return *(u16 *)((char *)obj + 4);
 }
 
 asm void fn_806FECC0(void)
@@ -2280,11 +2274,9 @@ asm void fn_806FECD0(void)
     blr
 }
 
-asm void fn_806FED00(void)
+void *fn_806FED00(void *obj)
 {
-    nofralloc
-    lwz r3, 0x8(r3)
-    blr
+    return *(void **)((char *)obj + 8);
 }
 
 asm void fn_806FED10(void)
@@ -2294,18 +2286,14 @@ asm void fn_806FED10(void)
     b fn_806A4264
 }
 
-asm void fn_806FED20(void)
+void fn_806FED20(void *obj, void *val)
 {
-    nofralloc
-    stw r4, 0x24(r3)
-    blr
+    *(void **)((char *)obj + 0x24) = val;
 }
 
-asm void fn_806FED30(void)
+void *fn_806FED30(void *obj)
 {
-    nofralloc
-    lwz r3, 0x24(r3)
-    blr
+    return *(void **)((char *)obj + 0x24);
 }
 
 asm void fn_806FED40(void)

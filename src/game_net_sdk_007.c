@@ -115,7 +115,7 @@ extern u32 lbl_80880484;
 /* Function declarations */
 void pad_03_806A6568_text(void);
 void fn_806A6570(void);
-void fn_806A6580(void);
+u32 fn_806A6580(void);
 void fn_806A6590(void);
 void fn_806A65A0(void);
 void fn_806A65E0(void);
@@ -177,11 +177,9 @@ asm void fn_806A6570(void)
     blr
 }
 
-asm void fn_806A6580(void)
+u32 fn_806A6580(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_806A6590(void)

@@ -106,8 +106,8 @@ void fn_806DA660(void);
 void fn_806DA700(void);
 void fn_806DA750(void);
 void fn_806DA7D0(void);
-void fn_806DA860(void);
-void fn_806DA870(void);
+void *fn_806DA860(void *obj);
+void *fn_806DA870(void *obj);
 void fn_806DA880(void);
 void fn_806DA8B0(void);
 void fn_806DA8D0(void);
@@ -1277,18 +1277,14 @@ lbl_fn_806DA7D0_00000FB4:
     blr
 }
 
-asm void fn_806DA860(void)
+void *fn_806DA860(void *obj)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(void **)(obj);
 }
 
-asm void fn_806DA870(void)
+void *fn_806DA870(void *obj)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(void **)((char *)obj + 4);
 }
 
 asm void fn_806DA880(void)

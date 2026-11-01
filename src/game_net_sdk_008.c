@@ -62,7 +62,7 @@ void fn_806A8FA0(void);
 void fn_806A8FB0(void);
 void fn_806A8FC0(void);
 void fn_806A8FD0(void);
-void fn_806A8FE0(void);
+u32 fn_806A8FE0(void);
 void fn_806A8FF0(void);
 void fn_806A9000(void);
 void fn_806A9170(void);
@@ -261,11 +261,9 @@ void fn_806A8FC0(void) {
 void fn_806A8FD0(void) {
 }
 
-asm void fn_806A8FE0(void)
+u32 fn_806A8FE0(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 void fn_806A8FF0(void) {

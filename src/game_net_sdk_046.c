@@ -99,11 +99,11 @@ void fn_806FF3B0(void);
 void fn_806FF3F0(void);
 void fn_806FF460(void);
 void fn_806FF490(void);
-void fn_806FF560(void);
+void fn_806FF560(void *obj, u8 val);
 void fn_806FF570(void);
-void fn_806FF580(void);
-void fn_806FF590(void);
-void fn_806FF5A0(void);
+void fn_806FF580(void *obj, void *val);
+void fn_806FF590(void *obj, u8 val);
+u8 fn_806FF5A0(void *obj);
 void fn_806FF5B0(void);
 void fn_806FF5D0(void);
 void fn_806FF820(void);
@@ -121,7 +121,7 @@ void fn_806FFE50(void);
 void fn_806FFEA0(void);
 void fn_806FFEB0(void);
 void fn_806FFEC0(void);
-void fn_806FFF50(void);
+void *fn_806FFF50(void *obj);
 void fn_806FFF60(void);
 void fn_80700100(void);
 void fn_80700190(void);
@@ -459,11 +459,9 @@ lbl_fn_806FF490_00000414:
     blr
 }
 
-asm void fn_806FF560(void)
+void fn_806FF560(void *obj, u8 val)
 {
-    nofralloc
-    stb r4, 0x15(r3)
-    blr
+    *(u8 *)((char *)obj + 0x15) = val;
 }
 
 asm void fn_806FF570(void)
@@ -474,25 +472,19 @@ asm void fn_806FF570(void)
     blr
 }
 
-asm void fn_806FF580(void)
+void fn_806FF580(void *obj, void *val)
 {
-    nofralloc
-    stw r4, 0x10(r3)
-    blr
+    *(void **)((char *)obj + 0x10) = val;
 }
 
-asm void fn_806FF590(void)
+void fn_806FF590(void *obj, u8 val)
 {
-    nofralloc
-    stb r4, 0x14(r3)
-    blr
+    *(u8 *)((char *)obj + 0x14) = val;
 }
 
-asm void fn_806FF5A0(void)
+u8 fn_806FF5A0(void *obj)
 {
-    nofralloc
-    lbz r3, 0x14(r3)
-    blr
+    return *(u8 *)((char *)obj + 0x14);
 }
 
 asm void fn_806FF5B0(void)
@@ -1212,11 +1204,9 @@ lbl_fn_806FFEC0_00000DD8:
     blr
 }
 
-asm void fn_806FFF50(void)
+void *fn_806FFF50(void *obj)
 {
-    nofralloc
-    lwz r3, 0x704(r3)
-    blr
+    return *(void **)((char *)obj + 0x704);
 }
 
 asm void fn_806FFF60(void)

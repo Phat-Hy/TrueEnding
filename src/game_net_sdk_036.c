@@ -84,17 +84,17 @@ void fn_806EAC00(void);
 void fn_806EAC20(void);
 void fn_806EAC30(void);
 void fn_806EAC50(void);
-void fn_806EAC90(void);
-void fn_806EACA0(void);
-void fn_806EACB0(void);
-void fn_806EACC0(void);
+void *fn_806EAC90(void *obj);
+u16 fn_806EACA0(void *obj);
+void *fn_806EACB0(void *obj);
+u16 fn_806EACC0(void *obj);
 void fn_806EACD0(void);
-void fn_806EACE0(void);
+void *fn_806EACE0(void *obj);
 void fn_806EACF0(void);
-void fn_806EAD00(void);
-void fn_806EAD10(void);
-void fn_806EAD20(void);
-void fn_806EAD30(void);
+void *fn_806EAD00(void *obj);
+void fn_806EAD10(void *obj, void *val);
+void fn_806EAD20(void *obj, void *val);
+void *fn_806EAD30(void *obj);
 void fn_806EAD40(void);
 void fn_806EAE70(void);
 void fn_806EB1B0(void);
@@ -577,32 +577,24 @@ lbl_fn_806EAC50_000005E4:
     blr
 }
 
-asm void fn_806EAC90(void)
+void *fn_806EAC90(void *obj)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(void **)(obj);
 }
 
-asm void fn_806EACA0(void)
+u16 fn_806EACA0(void *obj)
 {
-    nofralloc
-    lhz r3, 0x4(r3)
-    blr
+    return *(u16 *)((char *)obj + 4);
 }
 
-asm void fn_806EACB0(void)
+void *fn_806EACB0(void *obj)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(void **)((char *)obj + 4);
 }
 
-asm void fn_806EACC0(void)
+u16 fn_806EACC0(void *obj)
 {
-    nofralloc
-    lhz r3, 0x8(r3)
-    blr
+    return *(u16 *)((char *)obj + 8);
 }
 
 asm void fn_806EACD0(void)
@@ -614,11 +606,9 @@ asm void fn_806EACD0(void)
     blr
 }
 
-asm void fn_806EACE0(void)
+void *fn_806EACE0(void *obj)
 {
-    nofralloc
-    lwz r3, 0x54(r3)
-    blr
+    return *(void **)((char *)obj + 0x54);
 }
 
 asm void fn_806EACF0(void)
@@ -630,32 +620,24 @@ asm void fn_806EACF0(void)
     blr
 }
 
-asm void fn_806EAD00(void)
+void *fn_806EAD00(void *obj)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(void **)(obj);
 }
 
-asm void fn_806EAD10(void)
+void fn_806EAD10(void *obj, void *val)
 {
-    nofralloc
-    stw r4, 0x30(r3)
-    blr
+    *(void **)((char *)obj + 0x30) = val;
 }
 
-asm void fn_806EAD20(void)
+void fn_806EAD20(void *obj, void *val)
 {
-    nofralloc
-    stw r4, 0x40(r3)
-    blr
+    *(void **)((char *)obj + 0x40) = val;
 }
 
-asm void fn_806EAD30(void)
+void *fn_806EAD30(void *obj)
 {
-    nofralloc
-    lwz r3, 0x40(r3)
-    blr
+    return *(void **)((char *)obj + 0x40);
 }
 
 asm void fn_806EAD40(void)

@@ -105,8 +105,8 @@ void fn_806F3A20(void);
 void fn_806F3A90(void);
 void fn_806F3B30(void);
 void fn_806F3BA0(void);
-void fn_806F3C20(void);
-void fn_806F3C30(void);
+u32 fn_806F3C20(void);
+u32 fn_806F3C30(void);
 void fn_806F3C40(void);
 void fn_806F3D00(void);
 void fn_806F3EE0(void);
@@ -1558,18 +1558,14 @@ lbl_fn_806F3BA0_00001358:
     blr
 }
 
-asm void fn_806F3C20(void)
+u32 fn_806F3C20(void)
 {
-    nofralloc
-    li r3, 0x3
-    blr
+    return 3;
 }
 
-asm void fn_806F3C30(void)
+u32 fn_806F3C30(void)
 {
-    nofralloc
-    li r3, 0x3
-    blr
+    return 3;
 }
 
 asm void fn_806F3C40(void)

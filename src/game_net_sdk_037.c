@@ -88,7 +88,7 @@ void fn_806EE240(void);
 void fn_806EE250(void);
 void fn_806EE2A0(void);
 void fn_806EE4E0(void);
-void fn_806EE550(void);
+void fn_806EE550(void *obj, void *val);
 void fn_806EE560(void);
 
 asm void pad_03_806EC77C_text(void)
@@ -2259,11 +2259,9 @@ lbl_fn_806EE4E0_00001DB4:
     blr
 }
 
-asm void fn_806EE550(void)
+void fn_806EE550(void *obj, void *val)
 {
-    nofralloc
-    stw r4, 0x20(r3)
-    blr
+    *(void **)((char *)obj + 0x20) = val;
 }
 
 asm void fn_806EE560(void)

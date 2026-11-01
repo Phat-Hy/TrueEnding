@@ -100,7 +100,7 @@ void fn_806DE3A0(void);
 void net_sendString(void);
 void fn_806DE4E0(void);
 void fn_806DE550(void);
-void fn_806DE660(void);
+u32 fn_806DE660(void);
 void fn_806DE670(void);
 void fn_806DE790(void);
 void fn_806DE7F0(void);
@@ -988,11 +988,9 @@ lbl_fn_806DE550_00000C10:
     blr
 }
 
-asm void fn_806DE660(void)
+u32 fn_806DE660(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_806DE670(void)

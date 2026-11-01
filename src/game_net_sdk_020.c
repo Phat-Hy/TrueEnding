@@ -83,7 +83,7 @@ void fn_806C8DB0(void);
 void fn_806C9670(void);
 void fn_806C9680(void);
 void fn_806C9690(void);
-void fn_806C9790(void);
+u32 fn_806C9790(void);
 void fn_806C97A0(void);
 void fn_806C9810(void);
 void fn_806C9880(void);
@@ -1353,11 +1353,9 @@ lbl_fn_806C9690_00001060:
     blr
 }
 
-asm void fn_806C9790(void)
+u32 fn_806C9790(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_806C97A0(void)
