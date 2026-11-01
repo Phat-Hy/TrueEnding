@@ -14,7 +14,7 @@ extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
 extern void fn_801010A0(void);
 extern void fn_8010EE78(void);
-extern void fn_8013A258(void);
+extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_80158BB4(void);
 extern void actor_setState(void);
@@ -277,7 +277,7 @@ lbl_fn_802B43C8_000002A0:
 lbl_fn_802B43C8_000002A8:
     cmpwi r0, 0x6
     bne lbl_fn_802B43C8_000002B8
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_802B43C8_00000368
 lbl_fn_802B43C8_000002B8:
     lwz r3, 0x16a0(r31)

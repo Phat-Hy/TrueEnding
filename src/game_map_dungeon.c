@@ -22,7 +22,7 @@ extern void fn_80129A48(void);
 extern void fn_80139560(void);
 extern void fn_8015E7A0(void);
 extern void fn_80161570(void);
-extern void fn_8016EB48(void);
+extern void battle_applyStatusEffect(void);
 extern void fn_80182874(void);
 extern void fn_80183860(void);
 extern void world_getGlobalFlag(void);
@@ -609,7 +609,7 @@ asm void fn_8017F118(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
     mr r3, r31
     li r4, 0x1
     bl fn_8017F4A0
@@ -629,7 +629,7 @@ lbl_fn_8017F118_000007B4:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
     li r0, 0x1
     stw r0, 0x14fc(r31)
     mr r3, r31

@@ -7,7 +7,7 @@ extern void _restgpr_23(void);
 extern void _savegpr_14(void);
 extern void _savegpr_23(void);
 extern void dtor_80084684(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void collision_testLineSegment(void);
 extern void fn_80056DB8(void);
 extern void atn_ColliBase_destructor(void);
@@ -27,7 +27,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_80092F1C(void);
 extern void fn_80095D44(void);
 extern void lockon_updateTarget(void);
-extern void fn_800971D4(void);
+extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -36,7 +36,7 @@ extern void fn_8011F8F4(void);
 extern void skill_findNodeById(void);
 extern void quest_evaluateConditions(void);
 extern void quest_checkCondition(void);
-extern void fn_802180A8(void);
+extern void task_lookupTagIndex(void);
 extern void task_mapIdToQueue(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
@@ -364,12 +364,12 @@ asm void fn_80412B80(void)
     li r30, 0x0
     addi r3, r3, lbl_8078D8B0@l
     lis r4, fn_80412E94@ha
-    lis r5, fn_800971D4@ha
+    lis r5, cursor_Object_constructor@ha
     stw r3, 0x0(r31)
     addi r3, r31, 0xfc
     addi r4, r4, fn_80412E94@l
     stw r30, 0xf4(r31)
-    addi r5, r5, fn_800971D4@l
+    addi r5, r5, cursor_Object_constructor@l
     li r6, 0x3d0
     li r7, 0x8
     stw r30, 0xf8(r31)
@@ -674,9 +674,9 @@ asm void fn_80412F28(void)
     li r5, 0xc
     li r6, 0x8
     bl __destroy_new_array
-    lis r4, fn_800971D4@ha
+    lis r4, cursor_Object_constructor@ha
     addi r3, r30, 0xfc
-    addi r4, r4, fn_800971D4@l
+    addi r4, r4, cursor_Object_constructor@l
     li r5, 0x3d0
     li r6, 0x8
     bl __destroy_new_array
@@ -1203,7 +1203,7 @@ lbl_fn_804131A4_00000DF4:
     stw r26, 0x54(r1)
     addi r3, r23, 0xb0
     addi r4, r1, 0x54
-    bl fn_8000D430
+    bl scene_traverseNode
     cmpwi r31, 0x0
     beq lbl_fn_804131A4_00000ED8
     lwz r3, 0x54(r1)
@@ -1742,7 +1742,7 @@ lbl_fn_80413BD4_000015D8:
     add r18, r31, r28
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_802180A8
+    bl task_lookupTagIndex
     mr r4, r3
     stw r3, 0x1f9c(r18)
     add r3, r31, r30

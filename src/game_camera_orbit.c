@@ -13,7 +13,7 @@ extern void actor_dispatchMessage(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_8006AFF8(void);
+extern void boss_initActionStream(void);
 extern void mem_free(void);
 extern void node_destroy(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -35,8 +35,8 @@ extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void fn_8016E4C4(void);
 extern void actor_setState(void);
-extern void fn_8017039C(void);
-extern void fn_80170A20(void);
+extern void battle_resolveAggroHierarchy(void);
+extern void battle_updateTargetAggro(void);
 extern void battle_awardExp(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_constructor(void);
@@ -579,7 +579,7 @@ lbl_fn_802E8580_0000067C:
     addi r3, r1, 0x20
     addi r4, r1, 0x38
     addi r5, r1, 0x2c
-    bl fn_8006AFF8
+    bl boss_initActionStream
     lwz r0, 0x20(r1)
     addi r3, r29, 0x14d4
     srwi. r0, r0, 31
@@ -1962,14 +1962,14 @@ lbl_fn_802E9590_00001A24:
     slwi r0, r0, 2
     lwzx r4, r4, r0
     lwz r4, 0x0(r4)
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
     b lbl_fn_802E9590_00001A84
 lbl_fn_802E9590_00001A70:
     lwz r4, 0x14f4(r31)
     mr r3, r31
     lfs f1, lbl_808847D4
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
 lbl_fn_802E9590_00001A84:
     mr r3, r31
     bl fn_802EA490

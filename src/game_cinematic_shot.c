@@ -18,7 +18,7 @@ extern void clip_calculateFrustum(void);
 extern void fn_800FBA9C(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80127D8C(void);
-extern void fn_8013A258(void);
+extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_evaluateConditions(void);
 extern void fn_80158CA4(void);
@@ -2049,7 +2049,7 @@ lbl_fn_80336C8C_00001C30:
     bl fn_805A4A20
 lbl_fn_80336C8C_00001C90:
     mr r3, r30
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_80336C8C_00001E8C
 lbl_fn_80336C8C_00001C9C:
     cmpwi r4, 0x6
@@ -2172,7 +2172,7 @@ lbl_fn_80336C8C_00001E50:
     stw r0, 0x14cc(r3)
 lbl_fn_80336C8C_00001E5C:
     mr r3, r30
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_80336C8C_00001E8C
 lbl_fn_80336C8C_00001E68:
     bl fn_805A4258

@@ -11,7 +11,7 @@ extern void fn_800457A4(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_8006AFF8(void);
+extern void boss_initActionStream(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
@@ -23,7 +23,7 @@ extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
 extern void enemy_updateCombatBehavior(void);
 extern void boss_updatePhaseState(void);
-extern void fn_8013A258(void);
+extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_evaluateConditions(void);
 extern void fn_80158BB4(void);
@@ -316,7 +316,7 @@ lbl_fn_80263CF0_000002B8:
     b lbl_fn_80263CF0_000002E8
 lbl_fn_80263CF0_000002DC:
     mr r3, r29
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_80263CF0_00000300
 lbl_fn_80263CF0_000002E8:
     fmr f1, f31
@@ -1516,7 +1516,7 @@ lbl_fn_80264DB4_00001420:
     addi r3, r1, 0x20
     addi r4, r1, 0x38
     addi r5, r1, 0x2c
-    bl fn_8006AFF8
+    bl boss_initActionStream
     lwz r0, 0x20(r1)
     addi r3, r30, 0x14b0
     srwi. r0, r0, 31

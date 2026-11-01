@@ -6,7 +6,7 @@ extern void _restgpr_14(void);
 extern void _restgpr_26(void);
 extern void _savegpr_14(void);
 extern void _savegpr_26(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void collision_testLineSegment(void);
 extern void boss_recordDamage(void);
 extern void fn_8006A250(void);
@@ -23,7 +23,7 @@ extern void dialog_selectChoice(void);
 extern void fn_80154344(void);
 extern void inventory_calcTotalStats(void);
 extern void debuff_clearStatus(void);
-extern void fn_8016EB48(void);
+extern void battle_applyStatusEffect(void);
 extern void actor_getMovementFlags(void);
 extern void fn_801E97DC(void);
 extern void fn_80216544(void);
@@ -1472,7 +1472,7 @@ lbl_fn_80371334_000012A8:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
     lwz r4, 0x870(r31)
     addi r3, r31, 0x6c
     bl fn_80389838
@@ -2340,7 +2340,7 @@ lbl_fn_80371790_00001F64:
     addi r3, r20, 0xb0
     stw r0, 0x8c(r1)
     addi r4, r1, 0x8c
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r0, r1, 0x8c
     beq lbl_fn_80371790_00001FC8
     lwz r3, 0x8c(r1)

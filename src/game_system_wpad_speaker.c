@@ -22,7 +22,7 @@ extern void fn_800E4278(void);
 extern void magic_dispatchActionCommand(void);
 extern void dialog_renderWindow(void);
 extern void dialog_selectChoice(void);
-extern void fn_8016EB48(void);
+extern void battle_applyStatusEffect(void);
 extern void fn_801E9EA4(void);
 extern void thread_findAndNotify(void);
 extern void fn_8035E7CC(void);
@@ -1507,7 +1507,7 @@ lbl_world_Manager_postUpdate_00001414:
     psq_st f1, 0x534(r3), 0, 0
     stfs f0, 0x24(r1)
     stfs f2, 0x53c(r3)
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
     lfs f1, lbl_80885744
     addi r3, r27, 0x6c
     li r4, 0x1
@@ -1582,7 +1582,7 @@ lbl_world_Manager_postUpdate_00001414:
     psq_l f1, 0x0(r7), 0, 0
     psq_st f1, 0x534(r31), 0, 0
     stfs f2, 0x53c(r31)
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
     b lbl_world_Manager_postUpdate_000015BC
 lbl_world_Manager_postUpdate_00001594:
     cmpwi r0, 0x5

@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void talk_formatQuotedString(void);
@@ -2085,7 +2085,7 @@ lbl_fn_80565B9C_00001B78:
     addi r3, r30, 0x24
     addi r4, r1, 0x68
     stw r0, 0x68(r1)
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x68
     beq lbl_fn_80565B9C_00001BCC
     lwz r4, 0x68(r1)

@@ -12,7 +12,7 @@ extern void _savegpr_16(void);
 extern void _savegpr_19(void);
 extern void _savegpr_20(void);
 extern void _savegpr_21(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void atn_Model_findBoneIndex(void);
 extern void motion_updateFogAdj(void);
 extern void ref_releaseHandle(void);
@@ -640,7 +640,7 @@ lbl_fn_803AE718_00000718:
     stfs f0, 0x38(r1)
     stfs f1, 0x3c(r1)
     stfs f2, 0x40(r1)
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     beq lbl_fn_803AE718_000007FC
     lwz r3, lbl_8087F430
@@ -876,7 +876,7 @@ lbl_fn_803AEA24_00000AA4:
     li r4, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     beq lbl_fn_803AEA24_00000B40
     lwz r3, lbl_8087F430
@@ -2628,7 +2628,7 @@ lbl_fn_803AF83C_000023F0:
     li r4, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     bne lbl_fn_803AF83C_00002430
     li r0, 0x1

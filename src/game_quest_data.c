@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void fn_8004D314(void);
 extern void collision_queryGeometry(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -551,7 +551,7 @@ lbl_fn_801426A4_000006A4:
     addi r6, r1, 0x114
     addi r8, r29, 0x5b8
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     beq lbl_fn_801426A4_000006E0
     lfs f0, 0x100(r1)

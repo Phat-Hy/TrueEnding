@@ -20,7 +20,7 @@ extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
 extern void str_initFromCStr(void);
 extern void str_getData(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void fn_80051B14(void);
 extern void fn_80051B70(void);
 extern void atn_ColliBase_destructor(void);
@@ -29,7 +29,7 @@ extern void atn_ColliCapsule_destructor(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_8006AFF8(void);
+extern void boss_initActionStream(void);
 extern void fn_8006CA80(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
@@ -68,7 +68,7 @@ extern void dialog_updateScriptState(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void fn_8020A780(void);
 extern void res_MsgHandle_ctor(void);
 extern void res_Resource_unload(void);
@@ -215,7 +215,7 @@ asm void fn_8045ECC4(void)
     mtctr r12
     bctrl
     mr r3, r30
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r30
     li r4, 0x0
     li r5, 0x1
@@ -552,7 +552,7 @@ lbl_fn_8045EDEC_00000554:
     lis r7, 0x8000
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_8045EDEC_00000644
@@ -684,7 +684,7 @@ lbl_fn_8045EDEC_00000754:
     lis r7, 0x8000
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_8045EDEC_000007D8
@@ -1346,7 +1346,7 @@ lbl_fn_8045FAB0_00001040:
     addi r3, r1, 0x8
     addi r4, r1, 0x2c
     addi r5, r1, 0x20
-    bl fn_8006AFF8
+    bl boss_initActionStream
     addi r3, r1, 0x8
     bl str_getData
     lwz r12, 0x14b0(r28)

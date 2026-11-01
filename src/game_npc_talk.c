@@ -9,7 +9,7 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8004D314(void);
 extern void collision_queryGeometry(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void collision_testLineSegment(void);
 extern void fn_8006B174(void);
 extern void mem_alloc(void);
@@ -668,7 +668,7 @@ lbl_npc_updateTalkInteraction_000007D4:
     addi r6, r1, 0x3bc
     addi r8, r27, 0x5b8
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     beq lbl_npc_updateTalkInteraction_00000814
     lfs f0, 0x3a8(r1)
@@ -693,7 +693,7 @@ lbl_npc_updateTalkInteraction_00000814:
     addi r6, r1, 0x3bc
     addi r8, r27, 0x5b8
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     beq lbl_npc_updateTalkInteraction_00000870
     lfs f0, 0x3a8(r1)

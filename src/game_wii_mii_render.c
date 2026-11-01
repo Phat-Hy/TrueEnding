@@ -6,7 +6,7 @@ extern void _restgpr_26(void);
 extern void _restgpr_27(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void map_debugLog(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80097E80(void);
@@ -2062,7 +2062,7 @@ lbl_fn_8056A9E8_00001CA0:
     stw r0, 0x104(r1)
     mr r3, r26
     addi r4, r1, 0x104
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x104
     beq lbl_fn_8056A9E8_00001CF0
     lwz r4, 0x104(r1)

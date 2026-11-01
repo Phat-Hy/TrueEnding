@@ -30,7 +30,7 @@ extern void fn_80133130(void);
 extern void actor_testBitFlag(void);
 extern void fn_80133EE8(void);
 extern void fn_8013A194(void);
-extern void fn_8013A258(void);
+extern void npc_initScriptContext(void);
 extern void quest_updateFlow(void);
 extern void fn_801495E8(void);
 extern void fn_80149624(void);
@@ -43,9 +43,9 @@ extern void fn_8015E4B0(void);
 extern void fn_8016D454(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
-extern void fn_8016EB48(void);
+extern void battle_applyStatusEffect(void);
 extern void fn_80176548(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void fn_802657FC(void);
 extern void fn_80266154(void);
 extern void fn_802A4094(void);
@@ -1044,7 +1044,7 @@ lbl_fn_80323E50_00000BE4:
     mtctr r12
     bctrl
     mr r3, r30
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r30
     li r4, 0x0
     li r5, 0x1
@@ -1075,7 +1075,7 @@ lbl_fn_80323E50_00000BE4:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
 lbl_fn_80323E50_00000CA4:
     mr r3, r30
     bl fn_800EB7A0
@@ -1664,7 +1664,7 @@ lbl_fn_803241E8_000014E8:
 lbl_fn_803241E8_0000150C:
     cmpwi r4, 0x6
     bne lbl_fn_803241E8_0000151C
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_803241E8_00001534
 lbl_fn_803241E8_0000151C:
     fmr f1, f31

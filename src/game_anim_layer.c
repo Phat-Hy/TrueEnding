@@ -18,7 +18,7 @@ extern void clip_calculateFrustum(void);
 extern void fn_80108F38(void);
 extern void enemy_updateCombatBehavior(void);
 extern void boss_updatePhaseState(void);
-extern void fn_8013A258(void);
+extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_801426A4(void);
 extern void quest_evaluateConditions(void);
@@ -27,7 +27,7 @@ extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
 extern void actor_setState(void);
-extern void fn_80170A20(void);
+extern void battle_updateTargetAggro(void);
 extern void fn_801781B0(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -1315,7 +1315,7 @@ lbl_fn_8026FFE4_00001108:
     mr r3, r31
     lfs f1, lbl_808837B8
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
 lbl_fn_8026FFE4_0000113C:
     mr r3, r31
     bl fn_80270B8C
@@ -2093,7 +2093,7 @@ lbl_fn_80270B8C_00001C4C:
 lbl_fn_80270B8C_00001C88:
     cmpwi r0, 0x6
     bne lbl_fn_80270B8C_00001C98
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_80270B8C_00001CAC
 lbl_fn_80270B8C_00001C98:
     lfs f0, 0x568(r3)

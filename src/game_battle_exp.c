@@ -16,7 +16,7 @@ extern void fn_80121E14(void);
 extern void fn_80135384(void);
 extern void actor_setState(void);
 extern void fn_80177EB8(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -532,7 +532,7 @@ lbl_battle_awardExp_000005DC:
     mtctr r12
     bctrl
     mr r3, r30
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     lwz r7, 0xd1c(r30)
     cmpwi r7, 0x0
     beq lbl_battle_awardExp_000006D8

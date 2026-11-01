@@ -6,7 +6,7 @@ extern void __register_global_object(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80013D60(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void fn_8000EC88(void);
 extern void str_initFromCStr(void);
 extern void fn_8003EA3C(void);
@@ -1385,7 +1385,7 @@ lbl_fn_800EBA5C_0000110C:
     addi r3, r31, 0xb0
     addi r4, r1, 0x8
     stw r30, 0x8(r1)
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x8
     beq lbl_fn_800EBA5C_000011C0
     lwz r4, 0x8(r1)

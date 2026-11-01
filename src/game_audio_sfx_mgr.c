@@ -33,7 +33,7 @@ extern void fn_8015AC48(void);
 extern void fn_8016E4C4(void);
 extern void actor_setState(void);
 extern void battle_canTargetActor(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -2062,7 +2062,7 @@ lbl_fn_80311364_00001AC4:
     stfs f0, 0x2e4(r27)
     bl fn_80097E80
     b lbl_fn_80311364_00001CEC
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     lwz r25, 0x151c(r27)
     cmpwi r25, 0x0
     beq lbl_fn_80311364_00001BF4

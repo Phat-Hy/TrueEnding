@@ -4,13 +4,13 @@
 /* External function declarations */
 extern void _restgpr_23(void);
 extern void _savegpr_23(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80094958(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
-extern void fn_8013A258(void);
+extern void npc_initScriptContext(void);
 extern void quest_evaluateConditions(void);
 extern void actor_setState(void);
 extern void sound_initGlobalInstances(void);
@@ -880,7 +880,7 @@ lbl_fn_8045B82C_00000B88:
     cmpwi r0, 0x6
     bne lbl_fn_8045B82C_00000B9C
     mr r3, r31
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_8045B82C_00000BB4
 lbl_fn_8045B82C_00000B9C:
     lfs f0, 0x568(r31)
@@ -1622,7 +1622,7 @@ lbl_fn_8045C83C_0000166C:
     stw r0, 0x5c(r1)
     addi r3, r28, 0xb0
     addi r4, r1, 0x5c
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x5c
     beq lbl_fn_8045C83C_000016E8
     lwz r4, 0x5c(r1)

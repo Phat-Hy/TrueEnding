@@ -10,8 +10,8 @@ extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
 extern void fn_801426A4(void);
 extern void actor_setState(void);
-extern void fn_8017039C(void);
-extern void fn_80170A20(void);
+extern void battle_resolveAggroHierarchy(void);
+extern void battle_updateTargetAggro(void);
 extern void battle_awardExp(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -596,7 +596,7 @@ lbl_fn_80285B7C_00000788:
     mr r3, r31
     lfs f1, lbl_80883A1C
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
 lbl_fn_80285B7C_000007B4:
     mr r3, r31
     bl fn_802847CC
@@ -1415,7 +1415,7 @@ lbl_fn_802868A0_00001360:
     mr r3, r30
     li r5, 0x0
     lwz r4, 0x0(r4)
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
 lbl_fn_802868A0_0000138C:
     mr r3, r30
     bl fn_802847CC

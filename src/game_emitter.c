@@ -38,7 +38,7 @@ extern void fn_8015E7A0(void);
 extern void fn_801603CC(void);
 extern void fn_80161570(void);
 extern void fn_80164B00(void);
-extern void fn_80170A20(void);
+extern void battle_updateTargetAggro(void);
 extern void fn_80178208(void);
 extern void fn_80179A34(void);
 extern void fn_80179AB4(void);
@@ -1549,7 +1549,7 @@ lbl_fn_800E2FE0_00001324:
     lfs f1, lbl_808812EC
     li r5, 0x0
     lwz r4, 0x48(r4)
-    bl fn_80170A20
+    bl battle_updateTargetAggro
     li r0, 0x0
     sth r0, 0x1470(r30)
     b lbl_fn_800E2FE0_000016E0

@@ -16,7 +16,7 @@ extern void atn_ColliBase_destructor(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_8006AFF8(void);
+extern void boss_initActionStream(void);
 extern void chapter_updateProgression(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
@@ -34,7 +34,7 @@ extern void boss_updatePhaseState(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void actor_getMovementFlags(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_ctor(void);
@@ -489,7 +489,7 @@ asm void fn_802A4478(void)
     mtctr r12
     bctrl
     mr r3, r28
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r28
     li r4, 0x0
     li r5, 0x1
@@ -1259,7 +1259,7 @@ lbl_fn_802A4BBC_00000F2C:
     addi r3, r1, 0x20
     addi r4, r1, 0x38
     addi r5, r1, 0x2c
-    bl fn_8006AFF8
+    bl boss_initActionStream
     lwz r0, 0x20(r1)
     addi r3, r29, 0x1844
     srwi. r0, r0, 31

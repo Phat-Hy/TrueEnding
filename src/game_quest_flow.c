@@ -5,7 +5,7 @@
 extern void __register_global_object(void);
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void ui_destroyWidget(void);
 extern void fn_8004B290(void);
 extern void sound_releaseChannel(void);
@@ -3043,7 +3043,7 @@ lbl_quest_updateFlow_00002A20:
     stw r0, 0x27c(r1)
     addi r3, r26, 0xb0
     addi r4, r1, 0x27c
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x27c
     beq lbl_quest_updateFlow_00002A70
     lwz r4, 0x27c(r1)

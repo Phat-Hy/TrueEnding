@@ -27,7 +27,7 @@ extern void bloom_processPasses(void);
 extern void cam_destroyMsgHandle(void);
 extern void fn_80161570(void);
 extern void save_createWorkerTask(void);
-extern void fn_802180A8(void);
+extern void task_lookupTagIndex(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -301,7 +301,7 @@ lbl_fn_804089A0_00000218:
     bl strcpy
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_802180A8
+    bl task_lookupTagIndex
     mr r4, r3
     addi r3, r31, 0xf4
     addi r5, r1, 0x8

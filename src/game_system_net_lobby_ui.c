@@ -38,10 +38,10 @@ extern void fn_8014C468(void);
 extern void fn_80161570(void);
 extern void fn_80164DCC(void);
 extern void fn_8016E484(void);
-extern void fn_8016EB48(void);
+extern void battle_applyStatusEffect(void);
 extern void fn_8016F634(void);
-extern void fn_8017039C(void);
-extern void fn_80170A20(void);
+extern void battle_resolveAggroHierarchy(void);
+extern void battle_updateTargetAggro(void);
 extern void fn_80170F20(void);
 extern void fn_80171DB0(void);
 extern void fn_8017C9A0(void);
@@ -49,7 +49,7 @@ extern void fn_80183948(void);
 extern void fn_801C0738(void);
 extern void fn_8020F130(void);
 extern void fn_8020F71C(void);
-extern void fn_802180A8(void);
+extern void task_lookupTagIndex(void);
 extern void fn_80267B20(void);
 extern void fn_803396EC(void);
 extern void fn_8036B438(void);
@@ -795,7 +795,7 @@ lbl_fn_803A2210_00000930:
     li r5, 0x20
     bl memcpy
     addi r3, r1, 0x8
-    bl fn_802180A8
+    bl task_lookupTagIndex
     lfs f1, lbl_80885B14
     mr r4, r3
     mr r3, r31
@@ -1125,7 +1125,7 @@ asm void fn_803A26F4(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
 lbl_fn_803A26F4_00000DD8:
     lwz r0, 0x10(r26)
     cmplwi r0, 0x7
@@ -1224,7 +1224,7 @@ lbl_fn_803A26F4_00000F34:
     mr r3, r31
     mr r4, r22
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
     b lbl_fn_803A26F4_000013B0
 lbl_fn_803A26F4_00000F54:
     mr r3, r22
@@ -1369,7 +1369,7 @@ lbl_fn_803A26F4_00001158:
     lwz r4, 0x28(r26)
     mr r3, r31
     li r5, 0x0
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
     b lbl_fn_803A26F4_000013B0
 lbl_fn_803A26F4_00001174:
     bl equip_getGlobalManager

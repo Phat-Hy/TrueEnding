@@ -18,7 +18,7 @@ extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
 extern void fn_8011BF3C(void);
 extern void enemy_updateCombatBehavior(void);
-extern void fn_8013A258(void);
+extern void npc_initScriptContext(void);
 extern void quest_ctorRewardItem(void);
 extern void dialog_renderWindow(void);
 extern void inventory_applyItemStats(void);
@@ -1600,7 +1600,7 @@ lbl_fn_80461838_00001504:
 lbl_fn_80461838_00001544:
     cmpwi r4, 0x6
     bne lbl_fn_80461838_00001554
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_80461838_0000156C
 lbl_fn_80461838_00001554:
     fmr f1, f31

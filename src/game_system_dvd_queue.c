@@ -6,7 +6,7 @@ extern void _restgpr_20(void);
 extern void _restgpr_25(void);
 extern void _savegpr_20(void);
 extern void _savegpr_25(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void item_useConsumable(void);
 extern void collision_testLineSegment(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -2701,7 +2701,7 @@ lbl_fn_803792F0_000026A0:
     addi r4, r1, 0x544
     lwz r3, 0x3a8(r28)
     addi r3, r3, 0xb0
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x544
     beq lbl_fn_803792F0_0000271C
     lwz r4, 0x544(r1)
@@ -3258,7 +3258,7 @@ lbl_fn_803792F0_00002F20:
     stw r30, 0x530(r1)
     addi r3, r31, 0xb0
     addi r4, r1, 0x530
-    bl fn_8000D430
+    bl scene_traverseNode
     cmpwi r25, 0x0
     beq lbl_fn_803792F0_00002F80
     lwz r3, 0x530(r1)

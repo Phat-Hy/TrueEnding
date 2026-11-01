@@ -47,7 +47,7 @@ extern void magic_dispatchActionCommand(void);
 extern void fn_80123C7C(void);
 extern void fn_801240B4(void);
 extern void fn_8012AFE8(void);
-extern void fn_8016EB48(void);
+extern void battle_applyStatusEffect(void);
 extern void fn_8017AD44(void);
 extern void fn_80182890(void);
 extern void fn_80183774(void);
@@ -1695,7 +1695,7 @@ lbl_world_Manager_draw_00001330:
     psq_st f1, 0x534(r24), 0, 0
     stfs f0, 0x30(r1)
     stfs f2, 0x53c(r24)
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
 lbl_world_Manager_draw_000014E4:
     lwz r5, 0x551c(r28)
     li r30, 0x0
@@ -2032,7 +2032,7 @@ lbl_world_Manager_draw_00001970:
     psq_st f1, 0x534(r3), 0, 0
     stfs f2, 0x53c(r3)
     stfs f0, 0x24(r1)
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
 lbl_world_Manager_draw_000019C0:
     lwz r0, 0x5694(r28)
     li r3, 0x0

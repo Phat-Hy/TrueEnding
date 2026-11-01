@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_25(void);
 extern void _savegpr_25(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void mem_alloc(void);
 extern void actor_setState(void);
 extern void fn_80189CB4(void);
@@ -938,7 +938,7 @@ lbl_fn_801562A0_00000C3C:
     stfs f5, 0x13c(r1)
     stfs f3, 0x144(r1)
     stfs f0, 0x138(r1)
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     beq lbl_fn_801562A0_00000D44
     lfs f3, 0x144(r1)
@@ -955,7 +955,7 @@ lbl_fn_801562A0_00000C3C:
     li r8, 0x0
     stfs f0, 0x138(r1)
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     bne lbl_fn_801562A0_00000D44
     lwz r3, lbl_8087F430

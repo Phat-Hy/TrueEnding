@@ -28,7 +28,7 @@ extern void fn_800D5908(void);
 extern void atn_LH_Texture_update(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_802180A8(void);
+extern void task_lookupTagIndex(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
@@ -1171,7 +1171,7 @@ lbl_fn_803F5C2C_00000F94:
     bl strcpy
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_802180A8
+    bl task_lookupTagIndex
     mr r4, r3
     addi r3, r31, 0xf4
     addi r5, r1, 0x8
@@ -1233,7 +1233,7 @@ lbl_fn_803F5C2C_0000105C:
 lbl_fn_803F5C2C_000010A4:
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_802180A8
+    bl task_lookupTagIndex
     addi r27, r27, 0x1
     stw r3, 0x610(r28)
     cmpwi r27, 0x3
@@ -1285,7 +1285,7 @@ lbl_fn_803F5C2C_00001118:
 lbl_fn_803F5C2C_00001160:
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_802180A8
+    bl task_lookupTagIndex
     addi r27, r27, 0x1
     stw r3, 0x670(r28)
     cmpwi r27, 0x3
@@ -1337,7 +1337,7 @@ lbl_fn_803F5C2C_000011D4:
 lbl_fn_803F5C2C_0000121C:
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_802180A8
+    bl task_lookupTagIndex
     addi r27, r27, 0x1
     stw r3, 0x640(r28)
     cmpwi r27, 0x3

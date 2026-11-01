@@ -82,7 +82,7 @@ extern u32 lbl_80880C30;
 extern u32 lbl_80880C34;
 
 /* Function declarations */
-void fn_800971D4(void);
+void cursor_Object_constructor(void);
 void fn_800973C0(void);
 void fn_80097510(void);
 void fn_8009757C(void);
@@ -107,7 +107,7 @@ void fn_80098C90(void);
 void fn_80098DD8(void);
 void fn_80099010(void);
 
-asm void fn_800971D4(void)
+asm void cursor_Object_constructor(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -120,126 +120,126 @@ asm void fn_800971D4(void)
     mr r30, r3
     stw r29, 0x14(r1)
     stw r28, 0x10(r1)
-    beq lbl_fn_800971D4_000001C8
+    beq lbl_cursor_Object_constructor_000001C8
     lis r4, lbl_80778888@ha
     li r28, 0x0
     addi r4, r4, lbl_80778888@l
     stw r4, 0x0(r3)
     li r29, 0x0
-    b lbl_fn_800971D4_00000070
-lbl_fn_800971D4_00000044:
+    b lbl_cursor_Object_constructor_00000070
+lbl_cursor_Object_constructor_00000044:
     add r3, r30, r29
     lwz r3, 0x388(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_800971D4_00000068
+    beq lbl_cursor_Object_constructor_00000068
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_800971D4_00000068:
+lbl_cursor_Object_constructor_00000068:
     addi r29, r29, 0x4
     addi r28, r28, 0x1
-lbl_fn_800971D4_00000070:
+lbl_cursor_Object_constructor_00000070:
     lwz r0, 0x384(r30)
     cmplw r28, r0
-    blt lbl_fn_800971D4_00000044
+    blt lbl_cursor_Object_constructor_00000044
     addic. r29, r30, 0x370
-    beq lbl_fn_800971D4_000000BC
-    beq lbl_fn_800971D4_000000BC
+    beq lbl_cursor_Object_constructor_000000BC
+    beq lbl_cursor_Object_constructor_000000BC
     lwz r3, 0x0(r29)
     cmpwi r3, 0x0
-    beq lbl_fn_800971D4_000000BC
+    beq lbl_cursor_Object_constructor_000000BC
     lwz r12, 0x0(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_800971D4_000000B4
+    beq lbl_cursor_Object_constructor_000000B4
     addi r3, r29, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_800971D4_000000B4:
+lbl_cursor_Object_constructor_000000B4:
     li r0, 0x0
     stw r0, 0x0(r29)
-lbl_fn_800971D4_000000BC:
+lbl_cursor_Object_constructor_000000BC:
     addic. r29, r30, 0x35c
-    beq lbl_fn_800971D4_000000FC
-    beq lbl_fn_800971D4_000000FC
+    beq lbl_cursor_Object_constructor_000000FC
+    beq lbl_cursor_Object_constructor_000000FC
     lwz r3, 0x0(r29)
     cmpwi r3, 0x0
-    beq lbl_fn_800971D4_000000FC
+    beq lbl_cursor_Object_constructor_000000FC
     lwz r12, 0x0(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_800971D4_000000F4
+    beq lbl_cursor_Object_constructor_000000F4
     addi r3, r29, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_800971D4_000000F4:
+lbl_cursor_Object_constructor_000000F4:
     li r0, 0x0
     stw r0, 0x0(r29)
-lbl_fn_800971D4_000000FC:
+lbl_cursor_Object_constructor_000000FC:
     addic. r0, r30, 0x354
-    beq lbl_fn_800971D4_00000128
+    beq lbl_cursor_Object_constructor_00000128
     lwz r3, 0x358(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_800971D4_0000011C
+    beq lbl_cursor_Object_constructor_0000011C
     lis r4, fn_80097180@ha
     addi r4, r4, fn_80097180@l
     bl __destroy_arr
-lbl_fn_800971D4_0000011C:
+lbl_cursor_Object_constructor_0000011C:
     li r0, 0x0
     stw r0, 0x358(r30)
     stw r0, 0x354(r30)
-lbl_fn_800971D4_00000128:
+lbl_cursor_Object_constructor_00000128:
     addic. r0, r30, 0x224
-    beq lbl_fn_800971D4_00000154
+    beq lbl_cursor_Object_constructor_00000154
     lwz r3, 0x228(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_800971D4_00000148
+    beq lbl_cursor_Object_constructor_00000148
     lis r4, fn_800970CC@ha
     addi r4, r4, fn_800970CC@l
     bl __destroy_arr
-lbl_fn_800971D4_00000148:
+lbl_cursor_Object_constructor_00000148:
     li r0, 0x0
     stw r0, 0x228(r30)
     stw r0, 0x224(r30)
-lbl_fn_800971D4_00000154:
+lbl_cursor_Object_constructor_00000154:
     addic. r0, r30, 0x21c
-    beq lbl_fn_800971D4_00000180
+    beq lbl_cursor_Object_constructor_00000180
     lwz r3, 0x220(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_800971D4_00000174
-    beq lbl_fn_800971D4_00000174
+    beq lbl_cursor_Object_constructor_00000174
+    beq lbl_cursor_Object_constructor_00000174
     subi r3, r3, 0x10
     bl mem_getAllocSize
-lbl_fn_800971D4_00000174:
+lbl_cursor_Object_constructor_00000174:
     li r0, 0x0
     stw r0, 0x220(r30)
     stw r0, 0x21c(r30)
-lbl_fn_800971D4_00000180:
+lbl_cursor_Object_constructor_00000180:
     addic. r0, r30, 0x214
-    beq lbl_fn_800971D4_000001AC
+    beq lbl_cursor_Object_constructor_000001AC
     lwz r3, 0x218(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_800971D4_000001A0
-    beq lbl_fn_800971D4_000001A0
+    beq lbl_cursor_Object_constructor_000001A0
+    beq lbl_cursor_Object_constructor_000001A0
     subi r3, r3, 0x10
     bl mem_getAllocSize
-lbl_fn_800971D4_000001A0:
+lbl_cursor_Object_constructor_000001A0:
     li r0, 0x0
     stw r0, 0x218(r30)
     stw r0, 0x214(r30)
-lbl_fn_800971D4_000001AC:
+lbl_cursor_Object_constructor_000001AC:
     mr r3, r30
     li r4, 0x0
     bl fn_8008A76C
     cmpwi r31, 0x0
-    ble lbl_fn_800971D4_000001C8
+    ble lbl_cursor_Object_constructor_000001C8
     mr r3, r30
     bl dtor_80084684
-lbl_fn_800971D4_000001C8:
+lbl_cursor_Object_constructor_000001C8:
     mr r3, r30
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

@@ -14,7 +14,7 @@ extern void atn_ColliBase_destructor(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_8006AFF8(void);
+extern void boss_initActionStream(void);
 extern void mem_alloc(void);
 extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
@@ -34,7 +34,7 @@ extern void fn_80152D10(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015E7A0(void);
 extern void fn_8015EB2C(void);
-extern void fn_8016EB48(void);
+extern void battle_applyStatusEffect(void);
 extern void battle_awardExp(void);
 extern void fn_80178208(void);
 extern void fn_8017C904(void);
@@ -148,7 +148,7 @@ asm void fn_80249588(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
     lwz r0, 0x14fc(r31)
     cmpwi r0, 0x0
     beq lbl_fn_80249588_000001CC
@@ -249,7 +249,7 @@ lbl_fn_80249588_000001AC:
     stw r0, 0x58c(r3)
     mr r3, r31
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
 lbl_fn_80249588_000001CC:
     lfs f30, 0x2e4(r31)
     addi r3, r31, 0xb0
@@ -530,7 +530,7 @@ lbl_fn_80249588_000005B8:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
     b lbl_fn_80249588_00000660
 lbl_fn_80249588_000005F4:
     li r0, 0x0
@@ -538,7 +538,7 @@ lbl_fn_80249588_000005F4:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
     lwz r0, 0x14fc(r31)
     cmpwi r0, 0x0
     beq lbl_fn_80249588_00000660
@@ -1555,7 +1555,7 @@ lbl_fn_8024A650_00001460:
     addi r3, r1, 0x20
     addi r4, r1, 0x38
     addi r5, r1, 0x2c
-    bl fn_8006AFF8
+    bl boss_initActionStream
     lwz r0, 0x20(r1)
     addi r3, r29, 0x1588
     srwi. r0, r0, 31

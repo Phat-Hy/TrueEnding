@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_23(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void fn_8004B290(void);
 extern void sound_releaseChannel(void);
 extern void fn_80063484(void);
@@ -347,7 +347,7 @@ lbl_fn_801CC4F4_00000278:
     stw r0, 0xbc(r1)
     addi r3, r31, 0xb0
     addi r4, r1, 0xbc
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0xbc
     beq lbl_fn_801CC4F4_00000330
     lwz r4, 0xbc(r1)

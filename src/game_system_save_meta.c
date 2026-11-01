@@ -5,7 +5,7 @@
 extern void __files(void);
 extern void dtor_80084684(void);
 extern void fn_8000D3A8(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void scene_transformPoint(void);
 extern void fn_8000DCF4(void);
 extern void fn_8000DD0C(void);
@@ -1322,7 +1322,7 @@ lbl_fn_80346384_00000FE0:
     lwz r3, 0x17e4(r31)
     bl fn_8000DD0C
     addi r4, r1, 0x8
-    bl fn_8000D430
+    bl scene_traverseNode
     addi r3, r1, 0x8
     li r4, -0x1
     bl fn_8000D3A8

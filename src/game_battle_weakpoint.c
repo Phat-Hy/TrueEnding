@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void ui_destroyWidget(void);
 extern void fn_8003F030(void);
 extern void mem_alloc(void);
-extern void fn_800971D4(void);
+extern void cursor_Object_constructor(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
@@ -691,7 +691,7 @@ lbl_fn_803FBEEC_000007B8:
 lbl_fn_803FBEEC_000007D8:
     addi r3, r29, 0xf4
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     mr r3, r29
     li r4, 0x0
     bl task_destroyWorker

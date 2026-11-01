@@ -34,7 +34,7 @@ extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
 extern void equip_applyToCharacter(void);
 extern void actor_setState(void);
-extern void fn_8017039C(void);
+extern void battle_resolveAggroHierarchy(void);
 extern void battle_awardExp(void);
 extern void fn_80176ACC(void);
 extern void fn_801781B0(void);
@@ -1402,7 +1402,7 @@ lbl_fn_802EE20C_000011C8:
     slwi r0, r0, 2
     lwzx r4, r4, r0
     lwz r4, 0x0(r4)
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
 lbl_fn_802EE20C_000011E8:
     lwz r0, 0x194(r1)
     psq_l f31, 0x188(r1), 0, 0

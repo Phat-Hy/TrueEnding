@@ -11,7 +11,7 @@ extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void quest_evaluateConditions(void);
 extern void actor_setState(void);
-extern void fn_80170A20(void);
+extern void battle_updateTargetAggro(void);
 extern void fn_80178208(void);
 extern void fn_80197528(void);
 extern void task_findEntryById(void);
@@ -1195,7 +1195,7 @@ asm void fn_80327E1C(void)
     lwz r4, 0x14bc(r3)
     li r5, 0x0
     lfs f1, lbl_80884FF4
-    bl fn_80170A20
+    bl battle_updateTargetAggro
 lbl_fn_80327E1C_00000FFC:
     mr r3, r31
     bl fn_803241E8

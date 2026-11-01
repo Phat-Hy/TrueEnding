@@ -24,7 +24,7 @@ extern void fn_800DBCC8(void);
 extern void fn_80122330(void);
 extern void fn_80124C6C(void);
 extern void inventory_calcTotalStats(void);
-extern void fn_8016EB48(void);
+extern void battle_applyStatusEffect(void);
 extern void fn_801750FC(void);
 extern void save_parseSlotStats(void);
 extern void fn_80227F78(void);
@@ -131,7 +131,7 @@ lbl_fn_80228FD8_0000004C:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
 lbl_fn_80228FD8_00000080:
     mr r3, r29
     bl fn_800128FC

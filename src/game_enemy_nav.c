@@ -5,7 +5,7 @@
 extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void dtor_80084684(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createWaypoint(void);
@@ -141,7 +141,7 @@ asm void fn_8012AC64(void)
     addi r4, r1, 0x8
     lwz r3, 0x0(r31)
     addi r3, r3, 0xb0
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x8
     beq lbl_fn_8012AC64_00000124
     lwz r4, 0x8(r1)

@@ -9,7 +9,7 @@ extern void _savegpr_23(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void fn_80056DB8(void);
 extern void atn_ColliBase_destructor(void);
 extern void talk_formatQuotedString(void);
@@ -28,13 +28,13 @@ extern void fn_8008CD60(void);
 extern void fn_80092A4C(void);
 extern void fn_80094F98(void);
 extern void lockon_updateTarget(void);
-extern void fn_800971D4(void);
+extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_80097E80(void);
 extern void str_skipWhitespace(void);
-extern void fn_802180A8(void);
+extern void task_lookupTagIndex(void);
 extern void craft_forgeUpgradeWeapon(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
@@ -491,7 +491,7 @@ asm void fn_80427804(void)
     beq lbl_fn_80427804_000004B0
     li r4, -0x1
     addi r3, r3, 0x54
-    bl fn_800971D4
+    bl cursor_Object_constructor
     addic. r3, r30, 0x4
     beq lbl_fn_80427804_000004A0
     li r4, 0x0
@@ -882,7 +882,7 @@ lbl_fn_80427870_00000A30:
     addi r3, r31, 0x54
     addi r4, r1, 0xc0
     stw r0, 0xc0(r1)
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0xc0
     beq lbl_fn_80427870_00000A84
     lwz r4, 0xc0(r1)
@@ -1157,7 +1157,7 @@ lbl_fn_8042813C_00000E00:
     lwz r0, 0x5f8(r31)
     mr r3, r27
     add r30, r0, r29
-    bl fn_802180A8
+    bl task_lookupTagIndex
     mr r4, r3
     mr r5, r28
     addi r3, r30, 0x54

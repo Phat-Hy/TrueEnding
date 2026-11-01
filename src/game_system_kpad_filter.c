@@ -27,9 +27,9 @@ extern void fn_801546F4(void);
 extern void fn_80164DCC(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
-extern void fn_8016EB48(void);
+extern void battle_applyStatusEffect(void);
 extern void fn_801750FC(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void fn_801E97DC(void);
 extern void thread_findAndNotify(void);
 extern void fn_802085E0(void);
@@ -1046,7 +1046,7 @@ lbl_fn_80374964_00000CF0:
     mtctr r12
     bctrl
     mr r3, r31
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     lwz r3, 0x58c(r31)
     subi r0, r3, 0x3
     cmplwi r0, 0x1
@@ -1055,7 +1055,7 @@ lbl_fn_80374964_00000CF0:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
 lbl_fn_80374964_00000D50:
     lwz r0, 0x55c(r31)
     cmpwi r0, 0x6

@@ -28,7 +28,7 @@ extern void fn_80158CA4(void);
 extern void fn_80161880(void);
 extern void fn_8016D74C(void);
 extern void actor_setState(void);
-extern void fn_80170A20(void);
+extern void battle_updateTargetAggro(void);
 extern void fn_80178208(void);
 extern void actor_getMovementFlags(void);
 extern void sound_initGlobalInstances(void);
@@ -848,7 +848,7 @@ lbl_fn_8035CE58_00000AD0:
     mr r3, r30
     lfs f1, lbl_8088563C
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
 lbl_fn_8035CE58_00000AE4:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

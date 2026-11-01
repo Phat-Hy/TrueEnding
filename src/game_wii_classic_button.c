@@ -9,7 +9,7 @@ extern void _savegpr_27(void);
 extern void fn_80010374(void);
 extern void fn_8001260C(void);
 extern void fn_8001296C(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void map_debugLog(void);
 extern void fn_800928B0(void);
 extern void msg_getMessageById(void);
@@ -1091,7 +1091,7 @@ lbl_fn_8056173C_00000CD8:
     addi r6, r25, 0xdc
     li r7, 0x0
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     mr r26, r3
     lwz r3, lbl_8087EE98
     mr r8, r23
@@ -1100,7 +1100,7 @@ lbl_fn_8056173C_00000CD8:
     addi r6, r25, 0xd0
     li r7, 0x0
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r26, 0x0
     bne lbl_fn_8056173C_00000D34
     cmpwi r3, 0x0

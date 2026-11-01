@@ -25,12 +25,12 @@ extern void dialog_updateScriptState(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015EB2C(void);
 extern void debuff_clearStatus(void);
-extern void fn_8016EB48(void);
-extern void fn_80170A20(void);
+extern void battle_applyStatusEffect(void);
+extern void battle_updateTargetAggro(void);
 extern void fn_80170F20(void);
 extern void fn_80175A38(void);
 extern void fn_80178208(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void fn_8019AFE8(void);
 extern void task_mapIdToQueue(void);
 extern void res_registerResource(void);
@@ -1144,7 +1144,7 @@ asm void fn_80248A4C(void)
     mtctr r12
     bctrl
     mr r3, r30
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r30
     li r4, 0x0
     li r5, 0x1
@@ -1618,7 +1618,7 @@ lbl_fn_80249004_00001490:
     mr r3, r30
     lfs f1, lbl_80883220
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
     li r0, 0x0
     stw r0, 0x1504(r30)
     mr r3, r30
@@ -1879,7 +1879,7 @@ lbl_fn_80249394_000018FC:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
     lwz r0, 0x14fc(r31)
     cmpwi r0, 0x0
     beq lbl_fn_80249394_0000196C

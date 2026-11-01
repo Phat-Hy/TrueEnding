@@ -16,7 +16,7 @@ extern void fn_8010607C(void);
 extern void fn_8010608C(void);
 extern void fn_8010652C(void);
 extern void actor_setState(void);
-extern void fn_8016EB48(void);
+extern void battle_applyStatusEffect(void);
 extern void fn_8019BFF0(void);
 extern void fn_801B529C(void);
 extern void fn_801B73F0(void);
@@ -1810,7 +1810,7 @@ lbl_fn_80164DCC_00001858:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
 lbl_fn_80164DCC_00001884:
     lwz r3, 0x12a4(r30)
     li r0, 0x1

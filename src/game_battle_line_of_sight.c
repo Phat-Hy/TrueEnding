@@ -8,16 +8,16 @@ extern void _restgpr_27(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void ui_destroyWidget(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void fn_8009076C(void);
 extern void fn_80092A4C(void);
 extern void lockon_updateTarget(void);
-extern void fn_800971D4(void);
+extern void cursor_Object_constructor(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097E80(void);
 extern void motion_updateFogAdj(void);
@@ -933,7 +933,7 @@ lbl_fn_8040AB64_00000A88:
     stfs f3, 0x40(r1)
     stfs f4, 0x44(r1)
     stfs f7, 0x48(r1)
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     beq lbl_fn_8040AB64_00000B38
     addi r3, r1, 0x4c
@@ -1517,7 +1517,7 @@ asm void fn_8040B60C(void)
     beq lbl_fn_8040B60C_00001320
     li r4, -0x1
     addi r3, r3, 0x4
-    bl fn_800971D4
+    bl cursor_Object_constructor
     cmpwi r31, 0x0
     ble lbl_fn_8040B60C_00001320
     mr r3, r30
@@ -1819,7 +1819,7 @@ lbl_fn_8040B668_0000174C:
     stw r0, 0x74(r1)
     addi r3, r31, 0x4
     addi r4, r1, 0x74
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x74
     beq lbl_fn_8040B668_000018E4
     lwz r4, 0x74(r1)

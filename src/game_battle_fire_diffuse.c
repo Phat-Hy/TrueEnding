@@ -9,7 +9,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void fn_80041C0C(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
@@ -1771,7 +1771,7 @@ lbl_fn_8041E480_000016CC:
     addi r4, r1, 0x80
     stw r29, 0x80(r1)
     lwz r3, 0x4(r24)
-    bl fn_8000D430
+    bl scene_traverseNode
     cmpwi r27, 0x0
     beq lbl_fn_8041E480_0000180C
     lwz r3, 0x80(r1)

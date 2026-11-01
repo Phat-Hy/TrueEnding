@@ -26,7 +26,7 @@ extern void fn_80158EF0(void);
 extern void fn_8015F568(void);
 extern void fn_80165C5C(void);
 extern void fn_8016E484(void);
-extern void fn_8016EB48(void);
+extern void battle_applyStatusEffect(void);
 extern void fn_8016F67C(void);
 extern void fn_801725EC(void);
 extern void fn_8017C9AC(void);
@@ -1652,7 +1652,7 @@ lbl_fn_800E9ED8_0000165C:
     li r4, 0x1
     li r5, 0x1
     li r6, 0x1
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
 lbl_fn_800E9ED8_000016B0:
     lwz r0, 0x2dc(r31)
     lwz r30, lbl_8087F0A8

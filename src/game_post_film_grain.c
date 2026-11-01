@@ -15,7 +15,7 @@ extern void fn_80108C10(void);
 extern void fn_80109828(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_8012DF7C(void);
-extern void fn_8013A258(void);
+extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_evaluateConditions(void);
 extern void fn_80148B0C(void);
@@ -398,7 +398,7 @@ lbl_fn_802C9880_00000428:
 lbl_fn_802C9880_00000440:
     cmpwi r0, 0x6
     bne lbl_fn_802C9880_00000450
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_802C9880_0000046C
 lbl_fn_802C9880_00000450:
     lfs f0, 0x568(r29)

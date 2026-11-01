@@ -25,7 +25,7 @@ extern void fn_80178864(void);
 extern void fn_801789D8(void);
 extern void fn_80192758(void);
 extern void fn_8020924C(void);
-extern void fn_802180A8(void);
+extern void task_lookupTagIndex(void);
 extern void fn_80219544(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_constructor(void);
@@ -1796,11 +1796,11 @@ lbl_fn_801CC0AC_000016B0:
     bl atn_LoadHandle_constructor
     lwz r0, 0x54c(r29)
     lis r3, lbl_8078FEF0@ha
-    lis r5, fn_802180A8@ha
+    lis r5, task_lookupTagIndex@ha
     lis r30, lbl_8073BC30@ha
     addi r3, r3, lbl_8078FEF0@l
     ori r0, r0, 0x2000
-    addi r5, r5, fn_802180A8@l
+    addi r5, r5, task_lookupTagIndex@l
     stw r3, 0x0(r27)
     addi r3, r29, 0x14bc
     addi r4, r30, lbl_8073BC30@l

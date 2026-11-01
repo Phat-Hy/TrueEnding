@@ -62,7 +62,7 @@ extern void dialog_selectChoice(void);
 extern void fn_8014EEC4(void);
 extern void battle_canTargetActor(void);
 extern void actor_getMovementFlags(void);
-extern void fn_802180A8(void);
+extern void task_lookupTagIndex(void);
 extern void task_findEntryById(void);
 extern void fn_8021A984(void);
 extern void world_getGlobalFlag(void);
@@ -4928,7 +4928,7 @@ lbl_battle_getCharacterState_000040B4:
     bl fn_8011CA08
     b lbl_battle_getCharacterState_0000435C
     lwz r3, 0x0(r4)
-    bl fn_802180A8
+    bl task_lookupTagIndex
     lwz r6, 0x0(r29)
     mr r5, r3
     mr r3, r31
@@ -4936,10 +4936,10 @@ lbl_battle_getCharacterState_000040B4:
     bl fn_8011CC30
     b lbl_battle_getCharacterState_0000435C
     lwz r3, 0x0(r4)
-    bl fn_802180A8
+    bl task_lookupTagIndex
     mr r28, r3
     lwz r3, 0x0(r29)
-    bl fn_802180A8
+    bl task_lookupTagIndex
     lwz r7, 0x0(r26)
     mr r6, r3
     mr r3, r31
@@ -4948,13 +4948,13 @@ lbl_battle_getCharacterState_000040B4:
     bl fn_8011CCA0
     b lbl_battle_getCharacterState_0000435C
     lwz r3, 0x0(r4)
-    bl fn_802180A8
+    bl task_lookupTagIndex
     mr r28, r3
     lwz r3, 0x0(r29)
-    bl fn_802180A8
+    bl task_lookupTagIndex
     mr r29, r3
     lwz r3, 0x0(r26)
-    bl fn_802180A8
+    bl task_lookupTagIndex
     lwz r8, 0x0(r27)
     mr r7, r3
     mr r3, r31

@@ -15,7 +15,7 @@ extern void dtor_80084684(void);
 extern void fn_80016C10(void);
 extern void fn_80017064(void);
 extern void fn_80019254(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
@@ -471,7 +471,7 @@ lbl_fn_801EB188_00000398:
     addi r4, r1, 0x2c
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     beq lbl_fn_801EB188_00000554
     lfs f0, 0x30(r1)
@@ -492,7 +492,7 @@ lbl_fn_801EB188_00000554:
     addi r4, r1, 0x2c
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     beq lbl_fn_801EB188_000005A0
     lfs f0, 0x30(r1)

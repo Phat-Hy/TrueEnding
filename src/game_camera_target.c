@@ -34,10 +34,10 @@ extern void dialog_updateScriptState(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
-extern void fn_8017039C(void);
-extern void fn_80170A20(void);
+extern void battle_resolveAggroHierarchy(void);
+extern void battle_updateTargetAggro(void);
 extern void battle_awardExp(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
@@ -657,7 +657,7 @@ asm void fn_802E177C(void)
     mtctr r12
     bctrl
     mr r3, r28
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r28
     li r4, 0x0
     li r5, 0x1
@@ -2166,7 +2166,7 @@ lbl_fn_802E289C_00001C8C:
     lfs f1, lbl_80884718
     mr r3, r31
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
     b lbl_fn_802E289C_00001CBC
 lbl_fn_802E289C_00001CA0:
     lwz r3, 0x14e8(r31)
@@ -2175,7 +2175,7 @@ lbl_fn_802E289C_00001CA0:
     lwz r4, 0x0(r3)
     mr r3, r31
     li r5, 0x0
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
 lbl_fn_802E289C_00001CBC:
     mr r3, r31
     bl fn_802E37DC

@@ -11,7 +11,7 @@ extern void fn_80129670(void);
 extern void fn_80153698(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
-extern void fn_8016EB48(void);
+extern void battle_applyStatusEffect(void);
 extern void actor_getMovementFlags(void);
 extern void fn_8036DAF4(void);
 extern void fn_803C11A4(void);
@@ -1200,7 +1200,7 @@ lbl_enemy_updateCombatBehavior_00000FC8:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
 lbl_enemy_updateCombatBehavior_00000FE0:
     li r0, 0x1
     stw r0, 0x2c(r31)
@@ -1600,7 +1600,7 @@ lbl_enemy_updateCombatBehavior_00001594:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
 lbl_enemy_updateCombatBehavior_000015AC:
     li r0, 0x1
     stw r0, 0x2c(r31)
@@ -1785,7 +1785,7 @@ lbl_enemy_updateCombatBehavior_0000184C:
     li r4, 0x1
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
 lbl_enemy_updateCombatBehavior_00001864:
     li r0, 0x1
     stw r0, 0x2c(r31)
@@ -1939,7 +1939,7 @@ lbl_enemy_updateCombatBehavior_00001A78:
     li r4, 0x1
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
 lbl_enemy_updateCombatBehavior_00001A90:
     li r0, 0x1
     stw r0, 0x2c(r31)
@@ -2088,7 +2088,7 @@ lbl_enemy_updateCombatBehavior_00001C90:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
 lbl_enemy_updateCombatBehavior_00001CA8:
     li r0, 0x1
     stw r0, 0x2c(r31)
@@ -2244,7 +2244,7 @@ lbl_enemy_updateCombatBehavior_00001ED8:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
 lbl_enemy_updateCombatBehavior_00001EF0:
     li r0, 0x1
     stw r0, 0x2c(r31)
@@ -2394,7 +2394,7 @@ lbl_enemy_updateCombatBehavior_00002100:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
 lbl_enemy_updateCombatBehavior_00002118:
     li r0, 0x1
     stw r0, 0x2c(r31)
@@ -2606,7 +2606,7 @@ lbl_enemy_updateCombatBehavior_00002428:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
 lbl_enemy_updateCombatBehavior_00002440:
     li r0, 0x1
     stw r0, 0x2c(r31)

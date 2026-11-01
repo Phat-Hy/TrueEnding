@@ -34,7 +34,7 @@ extern void fn_8015487C(void);
 extern void fn_80154C08(void);
 extern void fn_80164DCC(void);
 extern void actor_setState(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void actor_getMovementFlags(void);
 extern void fn_80204E04(void);
 extern void fn_8021A888(void);
@@ -105,7 +105,7 @@ asm void fn_80152D10(void)
     mtctr r12
     bctrl
     mr r3, r31
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     li r0, 0x2
     stw r0, 0x58c(r31)
     addi r3, r31, 0x7d4

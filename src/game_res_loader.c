@@ -40,7 +40,7 @@ extern void fn_80136138(void);
 extern void fn_80179A34(void);
 extern void fn_80179AB4(void);
 extern void save_validateHeader(void);
-extern void fn_802180A8(void);
+extern void task_lookupTagIndex(void);
 extern void fn_802251F8(void);
 extern void fn_802253E4(void);
 extern void fn_80225C80(void);
@@ -525,7 +525,7 @@ lbl_fn_80227434_000005A4:
 lbl_fn_80227434_000005B8:
     lwz r3, 0x40(r1)
 lbl_fn_80227434_000005BC:
-    bl fn_802180A8
+    bl task_lookupTagIndex
     lwz r0, 0x38(r1)
     mr r24, r3
     srwi. r0, r0, 31

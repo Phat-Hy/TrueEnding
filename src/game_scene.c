@@ -64,7 +64,7 @@ void fn_8000D1A0(void);
 void fn_8000D1A8(void);
 f32 vec3_mag(const void *v);
 void fn_8000D3A8(void);
-void fn_8000D430(void);
+void scene_traverseNode(void);
 void fn_8000D4D4(void);
 void fn_8000D528(void);
 void fn_8000D760(void);
@@ -620,7 +620,7 @@ lbl_fn_8000D1A8_00000748:
     stw r0, 0x38(r1)
     addi r4, r1, 0x38
     lwz r3, 0x48(r30)
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x38
     beq lbl_fn_8000D1A8_000007A4
     lwz r4, 0x38(r1)
@@ -700,7 +700,7 @@ lbl_fn_8000D3A8_00000844:
     blr
 }
 
-asm void fn_8000D430(void)
+asm void scene_traverseNode(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -712,7 +712,7 @@ asm void fn_8000D430(void)
     stw r0, 0x8(r1)
     lwz r6, 0x0(r4)
     cmpwi r6, 0x0
-    beq lbl_fn_8000D430_000008A4
+    beq lbl_scene_traverseNode_000008A4
     stw r6, 0x8(r1)
     addi r3, r4, 0x4
     addi r4, r1, 0xc
@@ -720,28 +720,28 @@ asm void fn_8000D430(void)
     lwz r12, 0x0(r6)
     mtctr r12
     bctrl
-lbl_fn_8000D430_000008A4:
+lbl_scene_traverseNode_000008A4:
     lwz r4, 0x220(r31)
     mr r3, r31
     addi r5, r1, 0x8
     bl fn_800902C0
     addic. r3, r1, 0x8
-    beq lbl_fn_8000D430_000008F0
+    beq lbl_scene_traverseNode_000008F0
     lwz r4, 0x8(r1)
     cmpwi r4, 0x0
-    beq lbl_fn_8000D430_000008F0
+    beq lbl_scene_traverseNode_000008F0
     lwz r12, 0x0(r4)
     cmpwi r12, 0x0
-    beq lbl_fn_8000D430_000008E8
+    beq lbl_scene_traverseNode_000008E8
     addi r3, r3, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8000D430_000008E8:
+lbl_scene_traverseNode_000008E8:
     li r0, 0x0
     stw r0, 0x8(r1)
-lbl_fn_8000D430_000008F0:
+lbl_scene_traverseNode_000008F0:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
     mtlr r0

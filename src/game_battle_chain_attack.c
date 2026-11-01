@@ -25,7 +25,7 @@ extern void fn_800F29D0(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8016D3F8(void);
 extern void actor_setState(void);
-extern void fn_8016EB48(void);
+extern void battle_applyStatusEffect(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -885,7 +885,7 @@ lbl_fn_803FD328_00000B60:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
 lbl_fn_803FD328_00000B74:
     lwz r3, 0xf8(r25)
     lhz r0, 0xd38(r3)

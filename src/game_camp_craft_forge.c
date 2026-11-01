@@ -12,7 +12,7 @@ extern void _savegpr_22(void);
 extern void _savegpr_23(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void fn_80016888(void);
 extern void fn_80043A24(void);
 extern void collision_testLineSegment(void);
@@ -2026,7 +2026,7 @@ lbl_fn_803C1950_00001A64:
     addi r4, r1, 0x38
     stw r29, 0x38(r1)
     lwz r3, 0x4(r22)
-    bl fn_8000D430
+    bl scene_traverseNode
     cmpwi r23, 0x0
     beq lbl_fn_803C1950_00001AB0
     lwz r3, 0x38(r1)

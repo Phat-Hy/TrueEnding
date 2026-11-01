@@ -6,7 +6,7 @@ extern void __files(void);
 extern void _restgpr_17(void);
 extern void _savegpr_17(void);
 extern void dtor_80084684(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void vec3_sub(void);
 extern void mem_free(void);
 extern void atn_Model_findBoneIndex(void);
@@ -1311,7 +1311,7 @@ lbl_fn_80454D4C_000010B8:
     stw r31, 0x38(r1)
     addi r3, r30, 0x14ec
     addi r4, r1, 0x38
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x38
     beq lbl_fn_80454D4C_0000112C
     lwz r4, 0x38(r1)
@@ -1591,7 +1591,7 @@ lbl_fn_80454F08_000014D4:
     addi r4, r1, 0x5c
     stw r0, 0x100(r30)
     stw r0, 0x5c(r1)
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x5c
     beq lbl_fn_80454F08_00001540
     lwz r4, 0x5c(r1)

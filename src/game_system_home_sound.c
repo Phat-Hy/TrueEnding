@@ -8,7 +8,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_22(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void fn_8004A2CC(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
@@ -410,7 +410,7 @@ lbl_fn_803639A0_000003C0:
     stw r0, 0x38(r1)
     addi r3, r29, 0x4
     addi r4, r1, 0x38
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x38
     beq lbl_fn_803639A0_00000410
     lwz r4, 0x38(r1)

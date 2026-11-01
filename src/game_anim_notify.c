@@ -19,9 +19,9 @@ extern void fn_8015C3A8(void);
 extern void fn_8015C6A0(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
-extern void fn_8017039C(void);
+extern void battle_resolveAggroHierarchy(void);
 extern void fn_801781B0(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -513,7 +513,7 @@ asm void fn_80276944(void)
     mtctr r12
     bctrl
     mr r3, r30
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r30
     li r4, 0x0
     li r5, 0x1
@@ -1576,7 +1576,7 @@ asm void fn_80277850(void)
     mr r3, r31
     li r5, 0x2
     stw r0, 0x14f8(r31)
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -1613,7 +1613,7 @@ asm void fn_802778B0(void)
     lwz r4, 0x0(r3)
     mr r3, r31
     li r5, 0x2
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
     b lbl_fn_802778B0_00001538
 lbl_fn_802778B0_00001504:
     lwz r12, 0x0(r31)

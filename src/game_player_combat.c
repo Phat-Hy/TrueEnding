@@ -28,7 +28,7 @@ extern void atn_Task_constructor(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void fn_8011D320(void);
-extern void fn_802180A8(void);
+extern void task_lookupTagIndex(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -1287,7 +1287,7 @@ lbl_fn_8011EF14_000010D0:
     add r19, r0, r31
     addi r31, r31, 0x10
     bl talk_formatQuotedString
-    bl fn_802180A8
+    bl task_lookupTagIndex
     cmpwi r3, 0x0
     stw r3, 0x0(r19)
     blt lbl_fn_8011EF14_0000147C

@@ -22,7 +22,7 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void skill_calcTrajectory(void);
-extern void fn_8006AFF8(void);
+extern void boss_initActionStream(void);
 extern void fn_8006CA80(void);
 extern void script_executeOpcode(void);
 extern void mem_getAllocSize(void);
@@ -33,7 +33,7 @@ extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void fn_8008B978(void);
 extern void lockon_updateTarget(void);
-extern void fn_800971D4(void);
+extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void motion_updateFogAdj(void);
 extern void atn_Task_destructor(void);
@@ -543,7 +543,7 @@ lbl_fn_80452710_000004CC:
     addi r3, r1, 0x8
     addi r4, r1, 0x2c
     addi r5, r1, 0x20
-    bl fn_8006AFF8
+    bl boss_initActionStream
     addi r3, r1, 0x8
     bl str_getData
     lwz r12, 0x14b0(r28)
@@ -1213,7 +1213,7 @@ lbl_fn_80452F14_00000E68:
     addi r3, r1, 0x8
     addi r4, r1, 0x2c
     addi r5, r1, 0x20
-    bl fn_8006AFF8
+    bl boss_initActionStream
     addi r3, r1, 0x8
     bl str_getData
     lwz r12, 0x14b0(r31)
@@ -1564,7 +1564,7 @@ lbl_fn_80453570_00001364:
 lbl_fn_80453570_00001384:
     addi r3, r29, 0x14ec
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     addic. r3, r29, 0x14b0
     beq lbl_fn_80453570_000013A0
     li r4, 0x0

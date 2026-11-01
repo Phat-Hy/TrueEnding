@@ -21,7 +21,7 @@ extern void fn_8008CD60(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092F1C(void);
 extern void lockon_updateTarget(void);
-extern void fn_800971D4(void);
+extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -39,8 +39,8 @@ extern void fn_8016A20C(void);
 extern void fn_8016A504(void);
 extern void fn_8016A7EC(void);
 extern void fn_8016A814(void);
-extern void fn_8016EB48(void);
-extern void fn_802180A8(void);
+extern void battle_applyStatusEffect(void);
+extern void task_lookupTagIndex(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
@@ -534,7 +534,7 @@ lbl_fn_804112B0_000005B4:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
 lbl_fn_804112B0_000005D0:
     lfs f1, lbl_808863D4
     addi r3, r30, 0xf4
@@ -728,7 +728,7 @@ lbl_fn_8041158C_00000848:
 lbl_fn_8041158C_00000854:
     addi r3, r29, 0xf4
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     mr r3, r29
     li r4, 0x0
     bl task_destroyWorker
@@ -893,7 +893,7 @@ lbl_fn_80411720_00000A7C:
     bl strcpy
     addi r3, r1, 0x208
     bl talk_formatQuotedString
-    bl fn_802180A8
+    bl task_lookupTagIndex
     mr r4, r3
     addi r3, r29, 0xf4
     addi r5, r1, 0x8

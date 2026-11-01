@@ -27,9 +27,9 @@ extern void atn_Anim_getDuration(void);
 extern void fn_800A08E0(void);
 extern void str_skipWhitespace(void);
 extern void equip_applyToCharacter(void);
-extern void fn_8016EB48(void);
+extern void battle_applyStatusEffect(void);
 extern void fn_80170F20(void);
-extern void fn_802180A8(void);
+extern void task_lookupTagIndex(void);
 extern void kpad_getClampData(void);
 extern void fn_803CD958(void);
 extern void task_createWorker(void);
@@ -639,7 +639,7 @@ lbl_fn_8042952C_000007C8:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
 lbl_fn_8042952C_000007D8:
     lwz r3, 0xf8(r28)
     lhz r0, 0xd38(r3)
@@ -1761,7 +1761,7 @@ lbl_fn_8042A360_00001654:
     bl fn_800A03E4
     addi r3, r1, 0x4c
     bl talk_formatQuotedString
-    bl fn_802180A8
+    bl task_lookupTagIndex
     stw r3, 0x174(r19)
     addi r3, r1, 0x4c
     bl talk_formatQuotedString

@@ -19,7 +19,7 @@ extern void map_processTrigger(void);
 extern void map_debugLog(void);
 extern void fn_80096218(void);
 extern void lockon_updateTarget(void);
-extern void fn_800971D4(void);
+extern void cursor_Object_constructor(void);
 extern void fn_800C16B4(void);
 extern void fn_800DBC1C(void);
 extern void fn_800DC3C8(void);
@@ -1510,7 +1510,7 @@ lbl_fn_805638C0_00001118:
 lbl_fn_805638C0_00001124:
     addi r3, r28, 0x24
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     cmpwi r29, 0x0
     ble lbl_fn_805638C0_00001140
     mr r3, r28

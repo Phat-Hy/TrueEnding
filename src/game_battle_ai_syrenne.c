@@ -9,7 +9,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_23(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void fn_80051B70(void);
 extern void fn_80051CD8(void);
 extern void mem_alloc(void);
@@ -627,7 +627,7 @@ lbl_fn_804348C4_00000794:
     li r4, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_804348C4_000008B4
@@ -769,7 +769,7 @@ lbl_fn_804348C4_000009C4:
     li r4, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_804348C4_00000A4C
@@ -1584,7 +1584,7 @@ lbl_fn_80435908_000015A8:
     li r4, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_80435908_000015F8

@@ -11,7 +11,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80045A24(void);
@@ -28,7 +28,7 @@ extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
 extern void atn_Model_findBoneIndex(void);
 extern void lockon_updateTarget(void);
-extern void fn_800971D4(void);
+extern void cursor_Object_constructor(void);
 extern void fn_800B1B28(void);
 extern void fn_800C16B4(void);
 extern void atn_Task_destructor(void);
@@ -925,7 +925,7 @@ lbl_fn_8049BB4C_00000B54:
     addi r3, r27, 0x50
     addi r4, r1, 0x5c
     stw r0, 0x5c(r1)
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x5c
     beq lbl_fn_8049BB4C_00000BA8
     lwz r4, 0x5c(r1)
@@ -969,7 +969,7 @@ asm void fn_8049C350(void)
     beq lbl_fn_8049C350_00000C24
     li r4, -0x1
     addi r3, r3, 0x50
-    bl fn_800971D4
+    bl cursor_Object_constructor
     cmpwi r30, 0x0
     beq lbl_fn_8049C350_00000C14
     mr r3, r30
@@ -1006,7 +1006,7 @@ asm void fn_8049C3C0(void)
     stw r0, 0x8(r1)
     addi r3, r31, 0x50
     addi r4, r1, 0x8
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x8
     beq lbl_fn_8049C3C0_00000CB4
     lwz r4, 0x8(r1)
@@ -1154,7 +1154,7 @@ lbl_fn_8049C458_00000E6C:
     addi r3, r31, 0x50
     addi r4, r1, 0x48
     stw r0, 0x48(r1)
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x48
     beq lbl_fn_8049C458_00000EC0
     lwz r4, 0x48(r1)

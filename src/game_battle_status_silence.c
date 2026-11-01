@@ -25,7 +25,7 @@ extern void map_processTrigger(void);
 extern void fn_80092954(void);
 extern void fn_80092F1C(void);
 extern void lockon_updateTarget(void);
-extern void fn_800971D4(void);
+extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void skin_applyWeights(void);
@@ -42,7 +42,7 @@ extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_80176548(void);
-extern void fn_802180A8(void);
+extern void task_lookupTagIndex(void);
 extern void kpad_getClampData(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
@@ -174,7 +174,7 @@ asm void fn_8042C30C(void)
 lbl_fn_8042C30C_00000034:
     addi r3, r30, 0xf4
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     mr r3, r30
     li r4, 0x0
     bl task_destroyWorker
@@ -784,7 +784,7 @@ lbl_fn_8042CA54_00000894:
     bl strcpy
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_802180A8
+    bl task_lookupTagIndex
     mr r4, r3
     addi r3, r29, 0xf4
     addi r5, r1, 0x8
@@ -1684,7 +1684,7 @@ asm void fn_8042D748(void)
 lbl_fn_8042D748_00001470:
     addi r3, r30, 0xf4
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     mr r3, r30
     li r4, 0x0
     bl task_destroyWorker

@@ -9,16 +9,16 @@ extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void enemy_updateCombatBehavior(void);
-extern void fn_8013A258(void);
+extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_ctorRewardItem(void);
 extern void inventory_applyItemStats(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
-extern void fn_8017039C(void);
-extern void fn_80170A20(void);
-extern void fn_80178A6C(void);
+extern void battle_resolveAggroHierarchy(void);
+extern void battle_updateTargetAggro(void);
+extern void battle_updateActorStatus(void);
 extern void sound_initGlobalInstances(void);
 extern void res_registerResource(void);
 extern void PSMTXRotRad(void);
@@ -419,7 +419,7 @@ lbl_fn_802E683C_00000514:
     cmpwi r0, 0x6
     bne lbl_fn_802E683C_00000528
     mr r3, r31
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_802E683C_00000544
 lbl_fn_802E683C_00000528:
     lfs f0, 0x568(r31)
@@ -483,7 +483,7 @@ lbl_fn_802E683C_000005F8:
     lfs f1, lbl_80884794
     mr r3, r31
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
     b lbl_fn_802E683C_00000628
 lbl_fn_802E683C_0000060C:
     lwz r3, 0x1504(r3)
@@ -492,7 +492,7 @@ lbl_fn_802E683C_0000060C:
     lwz r4, 0x0(r3)
     mr r3, r31
     li r5, 0x0
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
 lbl_fn_802E683C_00000628:
     psq_l f1, 0x534(r31), 0, 0
     addi r3, r1, 0x74
@@ -649,7 +649,7 @@ lbl_fn_802E683C_00000864:
     cmpwi r0, 0x6
     bne lbl_fn_802E683C_00000878
     mr r3, r31
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_802E683C_00000894
 lbl_fn_802E683C_00000878:
     lfs f0, 0x568(r31)
@@ -1778,7 +1778,7 @@ asm void fn_802E8084(void)
     mtctr r12
     bctrl
     mr r3, r29
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r29
     li r4, 0x0
     li r5, 0x1

@@ -10,11 +10,11 @@ extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void enemy_updateCombatBehavior(void);
-extern void fn_8013A258(void);
+extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_evaluateConditions(void);
 extern void actor_setState(void);
-extern void fn_80170A20(void);
+extern void battle_updateTargetAggro(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_Shader_bindParams(void);
@@ -467,7 +467,7 @@ lbl_fn_8033C000_00000568:
 lbl_fn_8033C000_00000580:
     cmpwi r0, 0x6
     bne lbl_fn_8033C000_00000590
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_8033C000_000005B4
 lbl_fn_8033C000_00000590:
     lfs f0, 0x568(r29)
@@ -555,7 +555,7 @@ asm void fn_8033C3D8(void)
     mr r3, r31
     lfs f1, lbl_808852A8
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
     b lbl_fn_8033C3D8_000006D8
 lbl_fn_8033C3D8_000006BC:
     li r4, 0x3
@@ -564,7 +564,7 @@ lbl_fn_8033C3D8_000006BC:
     mr r3, r31
     lfs f1, lbl_808852A8
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
 lbl_fn_8033C3D8_000006D8:
     lis r4, lbl_807C7030@ha
     mr r3, r31

@@ -49,7 +49,7 @@ extern void fn_801513D0(void);
 extern void fn_8015E7A0(void);
 extern void fn_8016D74C(void);
 extern void actor_setState(void);
-extern void fn_80170A20(void);
+extern void battle_updateTargetAggro(void);
 extern void actor_getMovementFlags(void);
 extern void task_findEntryById(void);
 extern void fn_8021A4CC(void);
@@ -1705,7 +1705,7 @@ lbl_fn_8032EF38_000015AC:
     mr r3, r31
     lfs f1, lbl_80885094
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
     b lbl_fn_8032EF38_00001634
 lbl_fn_8032EF38_000015CC:
     lwz r0, 0x58c(r3)

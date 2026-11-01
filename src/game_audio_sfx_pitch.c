@@ -64,7 +64,7 @@ extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
 extern void fn_80164168(void);
 extern void actor_setState(void);
-extern void fn_8016EB48(void);
+extern void battle_applyStatusEffect(void);
 extern void fn_8016F4D8(void);
 extern void fn_8016F530(void);
 extern void fn_8016F5EC(void);
@@ -937,7 +937,7 @@ asm void fn_80313FE8(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
     lwz r0, 0x15f0(r31)
     mr r4, r31
     stw r0, 0x15f4(r31)

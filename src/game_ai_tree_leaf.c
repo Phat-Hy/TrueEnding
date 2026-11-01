@@ -11,7 +11,7 @@ extern void collision_testLineSegment(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_8006AFF8(void);
+extern void boss_initActionStream(void);
 extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
@@ -33,7 +33,7 @@ extern void fn_80109828(void);
 extern void enemy_updateCombatBehavior(void);
 extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
-extern void fn_8013A258(void);
+extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void dialog_renderWindow(void);
 extern void inventory_applyItemStats(void);
@@ -43,7 +43,7 @@ extern void fn_801603CC(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_80178208(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void fn_801C02F4(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -360,7 +360,7 @@ lbl_fn_8025B7DC_000002F0:
     mtctr r12
     bctrl
     mr r3, r30
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r30
     li r4, 0x0
     li r5, 0x1
@@ -609,7 +609,7 @@ lbl_fn_8025B9EC_000006DC:
     cmpwi r0, 0x6
     bne lbl_fn_8025B9EC_000006F0
     mr r3, r29
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_8025B9EC_0000070C
 lbl_fn_8025B9EC_000006F0:
     lfs f0, 0x568(r29)
@@ -1692,7 +1692,7 @@ lbl_fn_8025C998_00001690:
     addi r3, r1, 0x20
     addi r4, r1, 0x38
     addi r5, r1, 0x2c
-    bl fn_8006AFF8
+    bl boss_initActionStream
     lwz r0, 0x20(r1)
     addi r3, r30, 0x14b0
     srwi. r0, r0, 31

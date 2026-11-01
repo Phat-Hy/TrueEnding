@@ -33,7 +33,7 @@ extern void map_processTrigger(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092F1C(void);
 extern void lockon_updateTarget(void);
-extern void fn_800971D4(void);
+extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerTrack(void);
@@ -43,7 +43,7 @@ extern void str_findChar(void);
 extern void cam_destroyMsgHandle(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
-extern void fn_802180A8(void);
+extern void task_lookupTagIndex(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
@@ -1183,10 +1183,10 @@ lbl_fn_80426260_00000E4C:
 lbl_fn_80426260_00000E58:
     addi r3, r29, 0x4c4
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     addi r3, r29, 0xf4
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     mr r3, r29
     li r4, 0x0
     bl task_destroyWorker
@@ -1815,7 +1815,7 @@ lbl_fn_804269E0_000016E0:
     bl strcpy
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_802180A8
+    bl task_lookupTagIndex
     lwz r0, 0x894(r28)
     cmpwi r0, 0x0
     beq lbl_fn_804269E0_00001734

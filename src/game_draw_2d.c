@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_24(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void fn_800500FC(void);
 extern void fn_800502A8(void);
 extern void fn_80071D68(void);
@@ -357,7 +357,7 @@ asm void fn_800B257C(void)
     stfs f4, 0x50(r1)
     stfs f8, 0x54(r1)
     stfs f3, 0x58(r1)
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     bne lbl_fn_800B257C_00000364
     lfs f0, 0x34(r29)

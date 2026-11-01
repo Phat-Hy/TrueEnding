@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void mem_alloc(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -16,7 +16,7 @@ extern void fn_8011FE3C(void);
 extern void quest_evaluateConditions(void);
 extern void equip_applyToCharacter(void);
 extern void actor_setState(void);
-extern void fn_8016EB48(void);
+extern void battle_applyStatusEffect(void);
 extern void fn_80170F20(void);
 extern void craft_forgeUpgradeWeapon(void);
 extern void fn_803CD958(void);
@@ -473,7 +473,7 @@ lbl_fn_8041EE28_00000470:
     addi r4, r1, 0x8
     lwz r3, 0x11c(r31)
     addi r3, r3, 0xb0
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x8
     beq lbl_fn_8041EE28_00000560
     lwz r4, 0x8(r1)
@@ -536,7 +536,7 @@ asm void fn_8041EF90(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
     lwz r3, 0x120(r31)
     li r0, 0x1
     lwz r4, 0x48(r3)
@@ -1032,7 +1032,7 @@ asm void fn_8041F6A4(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
     lwz r4, 0x120(r31)
     li r0, 0x1
     lwz r3, 0x48(r4)
@@ -1485,7 +1485,7 @@ lbl_fn_8041F6A4_0000101C:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
     lwz r4, 0x120(r31)
     li r0, 0x1
     lwz r3, 0x48(r4)

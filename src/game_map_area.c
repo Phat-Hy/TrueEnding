@@ -32,7 +32,7 @@ extern void boss_updatePhaseState(void);
 extern void fn_8014C228(void);
 extern void dialog_selectChoice(void);
 extern void actor_setState(void);
-extern void fn_8017039C(void);
+extern void battle_resolveAggroHierarchy(void);
 extern void fn_801718F8(void);
 extern void entity_Instance_constructor(void);
 extern void world_getGlobalFlag(void);
@@ -281,7 +281,7 @@ lbl_fn_8017B434_00000200:
     beq lbl_fn_8017B434_00000238
     mr r4, r31
     li r5, 0x8
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
     b lbl_fn_8017B434_0000086C
 lbl_fn_8017B434_00000238:
     lwz r3, lbl_8087F430

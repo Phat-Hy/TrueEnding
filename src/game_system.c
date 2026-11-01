@@ -10,7 +10,7 @@ extern void _savegpr_15(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void fn_8000D8C0(void);
 extern void scene_transformPoint(void);
 extern void fn_8000D9F0(void);
@@ -59,7 +59,7 @@ extern void fn_80164DCC(void);
 extern void fn_8016E4C4(void);
 extern void fn_8016E5F0(void);
 extern void actor_setState(void);
-extern void fn_8016EB48(void);
+extern void battle_applyStatusEffect(void);
 extern void fn_801750FC(void);
 extern void battle_awardExp(void);
 extern void fn_80176ACC(void);
@@ -2088,7 +2088,7 @@ lbl_fn_8000FAE8_00001AD4:
     li r5, 0x1
     li r6, 0x1
     lwz r3, 0x48(r3)
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
     b lbl_fn_8000FAE8_00001B38
 lbl_fn_8000FAE8_00001B2C:
     lwz r3, 0x1c(r31)
@@ -2258,7 +2258,7 @@ lbl_fn_8000FAE8_00001D34:
     lwz r3, 0x1c(r31)
     lwz r3, 0x48(r3)
     addi r3, r3, 0xb0
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x24
     beq lbl_fn_8000FAE8_00001DD8
     lwz r4, 0x24(r1)

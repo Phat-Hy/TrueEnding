@@ -3,14 +3,14 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void fn_800119B8(void);
 extern void mem_alloc(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
 extern void lockon_updateTarget(void);
-extern void fn_800971D4(void);
+extern void cursor_Object_constructor(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void fn_80097E80(void);
@@ -435,7 +435,7 @@ asm void fn_801E81DC(void)
     beq lbl_fn_801E81DC_000004B0
     li r4, -0x1
     addi r3, r3, 0xa4
-    bl fn_800971D4
+    bl cursor_Object_constructor
     mr r3, r30
     li r4, 0x0
     bl atn_Task_destructor
@@ -581,7 +581,7 @@ lbl_fn_801E8244_00000634:
     addi r4, r1, 0x50
     lwz r3, 0x48(r31)
     addi r3, r3, 0xb0
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x50
     beq lbl_fn_801E8244_000006EC
     lwz r4, 0x50(r1)
@@ -989,7 +989,7 @@ lbl_fn_801E8534_00000C80:
     addi r4, r1, 0x160
     lwz r3, 0x48(r31)
     addi r3, r3, 0xb0
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x160
     beq lbl_fn_801E8534_00000D00
     lwz r4, 0x160(r1)
@@ -1098,7 +1098,7 @@ lbl_fn_801E8534_00000E44:
     addi r3, r31, 0xa4
     addi r4, r1, 0x14c
     stw r0, 0x14c(r1)
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x14c
     beq lbl_fn_801E8534_00000E98
     lwz r4, 0x14c(r1)
@@ -1307,7 +1307,7 @@ lbl_fn_801E8534_0000115C:
     addi r3, r31, 0xa4
     addi r4, r1, 0x138
     stw r0, 0x138(r1)
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x138
     beq lbl_fn_801E8534_000011B0
     lwz r4, 0x138(r1)

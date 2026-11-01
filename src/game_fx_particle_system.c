@@ -16,7 +16,7 @@ extern void collision_testLineSegment(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_8006AFF8(void);
+extern void boss_initActionStream(void);
 extern void mem_free(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
@@ -41,9 +41,9 @@ extern void equip_applyToCharacter(void);
 extern void fn_80158BB4(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
-extern void fn_8017039C(void);
-extern void fn_80170A20(void);
-extern void fn_80178A6C(void);
+extern void battle_resolveAggroHierarchy(void);
+extern void battle_updateTargetAggro(void);
+extern void battle_updateActorStatus(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -166,7 +166,7 @@ asm void fn_80281ED8(void)
     li r5, 0x2
     stw r0, 0x58c(r30)
     stw r4, 0x1504(r30)
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
     lfs f3, lbl_8088394C
     li r0, 0x1
     lfs f0, lbl_808839AC
@@ -636,7 +636,7 @@ lbl_fn_80281F88_0000070C:
     lwzx r4, r4, r0
     lwz r4, 0x0(r4)
     stw r4, 0x1504(r30)
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
     stw r29, 0x14d8(r30)
     lwz r3, lbl_8087F048
     bl system_getNextSequenceId
@@ -937,7 +937,7 @@ lbl_fn_802829DC_00000B44:
     mtctr r12
     bctrl
     mr r3, r31
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r31
     li r4, 0x0
     li r5, 0x1
@@ -1166,7 +1166,7 @@ lbl_fn_80282AE8_00000EE0:
     addi r3, r1, 0x20
     addi r4, r1, 0x38
     addi r5, r1, 0x2c
-    bl fn_8006AFF8
+    bl boss_initActionStream
     lwz r0, 0x20(r1)
     addi r3, r30, 0x15bc
     srwi. r0, r0, 31
@@ -2162,7 +2162,7 @@ lbl_fn_802837F4_00001D0C:
     mr r3, r31
     lfs f1, lbl_80883A1C
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
 lbl_fn_802837F4_00001D38:
     mr r3, r31
     bl fn_802847CC

@@ -14,7 +14,7 @@ extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void vec3_mag(void);
 extern void fn_8000D3A8(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void scene_transformPoint(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
@@ -35,7 +35,7 @@ extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
 extern void fn_80092F1C(void);
 extern void lockon_updateTarget(void);
-extern void fn_800971D4(void);
+extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -827,7 +827,7 @@ asm void fn_80416764(void)
     beq lbl_fn_80416764_00000970
     li r4, -0x1
     addi r3, r3, 0xf4
-    bl fn_800971D4
+    bl cursor_Object_constructor
     mr r3, r30
     li r4, 0x0
     bl task_destroyWorker
@@ -1523,7 +1523,7 @@ asm void fn_804170D8(void)
     mr r30, r3
     beq lbl_fn_804170D8_000012D4
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     cmpwi r31, 0x0
     ble lbl_fn_804170D8_000012D4
     mr r3, r30
@@ -1588,7 +1588,7 @@ lbl_fn_80417130_00001384:
     bl __destroy_new_array
     addi r3, r29, 0xfc
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     mr r3, r29
     li r4, 0x0
     bl task_destroyWorker
@@ -2130,7 +2130,7 @@ lbl_fn_8041766C_00001AE4:
     bl fn_80317034
     mr r3, r26
     addi r4, r1, 0x104
-    bl fn_8000D430
+    bl scene_traverseNode
     addi r3, r1, 0x104
     li r4, -0x1
     bl fn_8000D3A8
@@ -2146,7 +2146,7 @@ lbl_fn_8041766C_00001B3C:
     bl fn_80317034
     mr r3, r26
     addi r4, r1, 0xf0
-    bl fn_8000D430
+    bl scene_traverseNode
     addi r3, r1, 0xf0
     li r4, -0x1
     bl fn_8000D3A8
@@ -2432,7 +2432,7 @@ lbl_fn_8041766C_00001EF8:
     bl fn_80317034
     mr r3, r25
     addi r4, r1, 0xdc
-    bl fn_8000D430
+    bl scene_traverseNode
     addi r3, r1, 0xdc
     li r4, -0x1
     bl fn_8000D3A8

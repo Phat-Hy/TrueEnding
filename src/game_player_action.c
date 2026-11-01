@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void fn_80018240(void);
 extern void fn_80018BAC(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
@@ -1306,7 +1306,7 @@ lbl_fn_8011C4AC_00000FF0:
     lfs f2, 0x608(r10)
     stfs f2, 0x10(r1)
     psq_st f1, 0x0(r6), 0, 0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     beq lbl_fn_8011C4AC_0000107C
     li r0, 0x0

@@ -30,7 +30,7 @@ extern void enemy_updateCombatBehavior(void);
 extern void fn_8012F034(void);
 extern void actor_testBitFlag(void);
 extern void fn_80139F4C(void);
-extern void fn_8013A258(void);
+extern void npc_initScriptContext(void);
 extern void npc_getPosition(void);
 extern void fn_8013C3B4(void);
 extern void npc_updateTalkInteraction(void);
@@ -2313,7 +2313,7 @@ lbl_fn_80267134_00001E2C:
 lbl_fn_80267134_00001E58:
     cmpwi r0, 0x6
     bne lbl_fn_80267134_00001E68
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_80267134_00001E84
 lbl_fn_80267134_00001E68:
     lfs f0, 0x568(r31)

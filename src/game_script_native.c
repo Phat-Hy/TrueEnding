@@ -16,7 +16,7 @@ extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void enemy_updateCombatBehavior(void);
 extern void actor_testBitFlag(void);
-extern void fn_8013A258(void);
+extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_evaluateConditions(void);
 extern void fn_801489CC(void);
@@ -841,7 +841,7 @@ lbl_fn_802531F4_00000A70:
     b lbl_fn_802531F4_00000AA8
 lbl_fn_802531F4_00000A9C:
     bne cr1, lbl_fn_802531F4_00000AA8
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_802531F4_00000AC0
 lbl_fn_802531F4_00000AA8:
     fmr f1, f31
@@ -1349,7 +1349,7 @@ lbl_fn_80253884_00001200:
     cmpwi r0, 0x6
     bne lbl_fn_80253884_00001214
     mr r3, r31
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_80253884_0000122C
 lbl_fn_80253884_00001214:
     fmr f1, f31

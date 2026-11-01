@@ -27,7 +27,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_80092954(void);
 extern void fn_80095D44(void);
 extern void lockon_updateTarget(void);
-extern void fn_800971D4(void);
+extern void cursor_Object_constructor(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -1729,7 +1729,7 @@ lbl_fn_803F4948_00001654:
 lbl_fn_803F4948_00001660:
     addi r3, r29, 0xf4
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     mr r3, r29
     li r4, 0x0
     bl task_destroyWorker

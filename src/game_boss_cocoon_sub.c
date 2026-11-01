@@ -20,7 +20,7 @@ extern void debuff_clearStatus(void);
 extern void fn_8016DDB0(void);
 extern void actor_setState(void);
 extern void fn_80178208(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void fn_80196428(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -1847,7 +1847,7 @@ asm void fn_8045EB60(void)
     mtctr r12
     bctrl
     mr r3, r30
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r30
     li r4, 0x0
     li r5, 0x1

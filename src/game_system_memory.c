@@ -48,7 +48,7 @@ extern void fn_8020A59C(void);
 extern void fn_8020A5D4(void);
 extern void fn_8020A780(void);
 extern void fn_8020A808(void);
-extern void fn_802180A8(void);
+extern void task_lookupTagIndex(void);
 extern void fn_80219544(void);
 extern void fn_8046DC5C(void);
 extern void fn_8046DD20(void);
@@ -1340,7 +1340,7 @@ lbl_fn_80209300_00001010:
     b lbl_fn_80209300_00001040
 lbl_fn_80209300_00001034:
     mr r3, r21
-    bl fn_802180A8
+    bl task_lookupTagIndex
     stw r3, 0x38(r25)
 lbl_fn_80209300_00001040:
     addi r22, r22, 0x1
@@ -1360,7 +1360,7 @@ lbl_fn_80209300_00001054:
     b lbl_fn_80209300_00001084
 lbl_fn_80209300_00001078:
     mr r3, r22
-    bl fn_802180A8
+    bl task_lookupTagIndex
     stw r3, 0x48(r23)
 lbl_fn_80209300_00001084:
     addi r21, r21, 0x1

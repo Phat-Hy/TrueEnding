@@ -15,7 +15,7 @@ extern void scissor_clipFrustum(void);
 extern void fn_80108F38(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_8012DB04(void);
-extern void fn_8013A258(void);
+extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_801426A4(void);
 extern void quest_updateFlow(void);
@@ -24,8 +24,8 @@ extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
 extern void fn_80158BB4(void);
 extern void actor_setState(void);
-extern void fn_8017039C(void);
-extern void fn_80170A20(void);
+extern void battle_resolveAggroHierarchy(void);
+extern void battle_updateTargetAggro(void);
 extern void fn_801781B0(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -362,7 +362,7 @@ lbl_fn_802F7E0C_000003A0:
     mr r3, r31
     li r5, 0x8
     lwz r4, 0x0(r4)
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
     b lbl_fn_802F7E0C_0000040C
 lbl_fn_802F7E0C_000003DC:
     lfs f3, lbl_808849AC
@@ -378,7 +378,7 @@ lbl_fn_802F7E0C_00000400:
     fmr f1, f0
 lbl_fn_802F7E0C_00000404:
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
 lbl_fn_802F7E0C_0000040C:
     mr r3, r31
     bl fn_802F8EBC
@@ -1569,7 +1569,7 @@ lbl_fn_802F8EBC_00001568:
     cmpwi r0, 0x6
     bne lbl_fn_802F8EBC_0000157C
     mr r3, r29
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_802F8EBC_000015A8
 lbl_fn_802F8EBC_0000157C:
     psq_l f1, 0x534(r29), 0, 0

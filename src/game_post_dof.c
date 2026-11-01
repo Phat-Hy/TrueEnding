@@ -27,7 +27,7 @@ extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void actor_setState(void);
-extern void fn_80170A20(void);
+extern void battle_updateTargetAggro(void);
 extern void battle_awardExp(void);
 extern void fn_8020A81C(void);
 extern void task_findEntryById(void);
@@ -2104,7 +2104,7 @@ lbl_fn_802C1208_00001C18:
     mr r3, r30
     lfs f1, lbl_808842B0
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
     b lbl_fn_802C1208_00001C88
 lbl_fn_802C1208_00001C68:
     mr r3, r30
@@ -2114,7 +2114,7 @@ lbl_fn_802C1208_00001C68:
     mr r3, r30
     lfs f1, lbl_808842B0
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
 lbl_fn_802C1208_00001C88:
     mr r3, r30
     bl fn_802C2BCC

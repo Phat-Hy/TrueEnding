@@ -18,15 +18,15 @@ extern void equip_getGlobalManager(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80127D8C(void);
 extern void fn_8012DD70(void);
-extern void fn_8013A258(void);
+extern void npc_initScriptContext(void);
 extern void npc_getPosition(void);
 extern void fn_8013C504(void);
 extern void npc_updateTalkInteraction(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
-extern void fn_8017039C(void);
-extern void fn_80170A20(void);
+extern void battle_resolveAggroHierarchy(void);
+extern void battle_updateTargetAggro(void);
 extern void fn_801C3910(void);
 extern void task_findEntryById(void);
 extern void fn_802A36B0(void);
@@ -966,7 +966,7 @@ lbl_fn_802FF800_00000C8C:
     cmpwi r0, 0x6
     bne lbl_fn_802FF800_00000CA0
     mr r3, r30
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_802FF800_00000CD4
 lbl_fn_802FF800_00000CA0:
     fmr f1, f31
@@ -1379,7 +1379,7 @@ lbl_fn_802FFFF8_00001270:
     mr r3, r29
     lfs f1, lbl_80884A78
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
     b lbl_fn_802FFFF8_000012CC
 lbl_fn_802FFFF8_00001290:
     cmpwi r30, 0x2
@@ -1388,7 +1388,7 @@ lbl_fn_802FFFF8_00001290:
     mr r3, r29
     li r5, 0x0
     lwz r4, 0x0(r4)
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
     b lbl_fn_802FFFF8_000012CC
 lbl_fn_802FFFF8_000012B0:
     cmpwi r30, 0x3
@@ -1397,7 +1397,7 @@ lbl_fn_802FFFF8_000012B0:
     mr r3, r29
     li r5, 0x0
     lwz r4, 0x0(r4)
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
 lbl_fn_802FFFF8_000012CC:
     cmpwi r28, 0x0
     ble lbl_fn_802FFFF8_000012E0

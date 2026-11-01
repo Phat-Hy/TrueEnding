@@ -16,10 +16,10 @@ extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void fn_8012DB04(void);
-extern void fn_8013A258(void);
+extern void npc_initScriptContext(void);
 extern void quest_evaluateConditions(void);
 extern void actor_setState(void);
-extern void fn_80170A20(void);
+extern void battle_updateTargetAggro(void);
 extern void fn_80176548(void);
 extern void battle_awardExp(void);
 extern void actor_getMovementFlags(void);
@@ -620,7 +620,7 @@ lbl_fn_802BD118_000006E0:
     cmpwi r0, 0x6
     bne lbl_fn_802BD118_000006F4
     mr r3, r30
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_802BD118_0000070C
 lbl_fn_802BD118_000006F4:
     lfs f0, 0x568(r30)
@@ -1447,7 +1447,7 @@ asm void fn_802BDFA0(void)
     mr r3, r31
     lfs f1, lbl_80884238
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
 lbl_fn_802BDFA0_000012A0:
     mr r3, r31
     bl fn_802BD118

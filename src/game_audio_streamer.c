@@ -23,9 +23,9 @@ extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void fn_8016E864(void);
 extern void actor_setState(void);
-extern void fn_8017039C(void);
+extern void battle_resolveAggroHierarchy(void);
 extern void battle_awardExp(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void fn_8020A81C(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_ctor(void);
@@ -1088,7 +1088,7 @@ asm void fn_802FC188(void)
     mtctr r12
     bctrl
     mr r3, r31
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r31
     li r4, 0x0
     li r5, 0x1
@@ -1454,7 +1454,7 @@ lbl_fn_802FC2E0_00001384:
     mr r3, r29
     mr r4, r31
     li r5, 0x8
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
     b lbl_fn_802FC2E0_0000141C
 lbl_fn_802FC2E0_000013B0:
     lwz r3, 0x14f4(r29)

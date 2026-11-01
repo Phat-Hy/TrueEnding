@@ -14,14 +14,14 @@ extern void scissor_clipFrustum(void);
 extern void fn_80108F38(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_8012DB04(void);
-extern void fn_8013A258(void);
+extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_evaluateConditions(void);
 extern void dialog_renderWindow(void);
 extern void inventory_applyItemStats(void);
 extern void actor_setState(void);
-extern void fn_8017039C(void);
-extern void fn_80170A20(void);
+extern void battle_resolveAggroHierarchy(void);
+extern void battle_updateTargetAggro(void);
 extern void fn_801781B0(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -916,7 +916,7 @@ lbl_fn_802EA490_00000BDC:
 lbl_fn_802EA490_00000BF4:
     cmpwi r0, 0x6
     bne lbl_fn_802EA490_00000C04
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_802EA490_00000C20
 lbl_fn_802EA490_00000C04:
     lfs f0, 0x568(r31)
@@ -1091,7 +1091,7 @@ lbl_fn_802EA994_00000E74:
     slwi r0, r0, 2
     lwzx r4, r4, r0
     lwz r4, 0x0(r4)
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
 lbl_fn_802EA994_00000E94:
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
@@ -1125,14 +1125,14 @@ asm void fn_802EABE4(void)
     slwi r0, r0, 2
     lwzx r4, r4, r0
     lwz r4, 0x0(r4)
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
     b lbl_fn_802EABE4_00000F1C
 lbl_fn_802EABE4_00000F08:
     lwz r4, 0x14f4(r31)
     mr r3, r31
     lfs f1, lbl_808847D4
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
 lbl_fn_802EABE4_00000F1C:
     mr r3, r31
     bl fn_802EA490

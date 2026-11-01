@@ -53,7 +53,7 @@ extern void equip_getGlobalManager(void);
 extern void fn_8017CB2C(void);
 extern void fn_80205BE8(void);
 extern void fn_80216AFC(void);
-extern void fn_802180A8(void);
+extern void task_lookupTagIndex(void);
 extern void res_Resource_destructor(void);
 extern void res_Resource_unload(void);
 extern void res_MsgHandle_destructor(void);
@@ -2070,7 +2070,7 @@ lbl_fn_803EF780_000018A4:
     bl fn_803EFD60
     addi r3, r1, 0x70
     bl talk_formatQuotedString
-    bl fn_802180A8
+    bl task_lookupTagIndex
     stw r3, 0x48(r1)
     addi r3, r1, 0x70
     bl talk_formatQuotedString

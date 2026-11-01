@@ -7,7 +7,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -529,7 +529,7 @@ lbl_fn_801AB9E4_000005F4:
     stfs f0, 0x80(r1)
     stfs f3, 0x84(r1)
     stfs f4, 0x88(r1)
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     beq lbl_fn_801AB9E4_00000684
     addi r4, r1, 0xe0

@@ -21,14 +21,14 @@ extern void fn_800EE360(void);
 extern void scissor_clipFrustum(void);
 extern void fn_80109828(void);
 extern void enemy_updateCombatBehavior(void);
-extern void fn_8013A258(void);
+extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_801426A4(void);
 extern void fn_8015C0C0(void);
 extern void fn_8015C6A0(void);
 extern void fn_8015EFAC(void);
 extern void actor_setState(void);
-extern void fn_80170A20(void);
+extern void battle_updateTargetAggro(void);
 extern void battle_awardExp(void);
 extern void fn_80176ACC(void);
 extern void task_findEntryById(void);
@@ -423,7 +423,7 @@ lbl_fn_802747D0_000004A8:
 lbl_fn_802747D0_000004C4:
     cmpwi r0, 0x6
     bne lbl_fn_802747D0_000004D4
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_802747D0_000004E8
 lbl_fn_802747D0_000004D4:
     lfs f0, 0x568(r3)
@@ -605,7 +605,7 @@ lbl_fn_80274E7C_00000718:
     mr r3, r31
     lfs f1, lbl_80883874
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
 lbl_fn_80274E7C_0000075C:
     lwz r12, 0x0(r31)
     mr r3, r31

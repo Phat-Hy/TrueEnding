@@ -26,8 +26,8 @@ extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
 extern void actor_setState(void);
-extern void fn_8017039C(void);
-extern void fn_80170A20(void);
+extern void battle_resolveAggroHierarchy(void);
+extern void battle_updateTargetAggro(void);
 extern void fn_801781B0(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -1267,7 +1267,7 @@ lbl_fn_8027D838_00001034:
     li r5, 0x2
     lwz r4, 0x14f4(r4)
     stw r4, 0x1504(r31)
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
     lwz r3, 0x14f0(r31)
     addi r0, r3, 0x1
     stw r0, 0x14f0(r31)
@@ -1384,7 +1384,7 @@ lbl_fn_8027D838_00001224:
     mr r3, r31
     lfs f1, lbl_80883970
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
 lbl_fn_8027D838_00001258:
     mr r3, r31
     bl fn_8027EB14

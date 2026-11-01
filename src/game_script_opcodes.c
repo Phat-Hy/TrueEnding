@@ -32,7 +32,7 @@ extern void equip_getGlobalManager(void);
 extern void enemy_updateCombatBehavior(void);
 extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
-extern void fn_8013A258(void);
+extern void npc_initScriptContext(void);
 extern void fn_8013C504(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_updateFlow(void);
@@ -44,7 +44,7 @@ extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
 extern void fn_80178208(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void fn_801A03E0(void);
 extern void fn_801C02F4(void);
 extern void thread_findAndNotifySlot(void);
@@ -1726,7 +1726,7 @@ lbl_fn_80245BBC_000015A0:
     mtctr r12
     bctrl
     mr r3, r31
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r31
     li r4, 0x0
     li r5, 0x1
@@ -1795,7 +1795,7 @@ lbl_fn_80245BBC_00001758:
     mtctr r12
     bctrl
     mr r3, r27
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r27
     li r4, 0x0
     li r5, 0x1
@@ -2059,7 +2059,7 @@ lbl_fn_80245F14_00001B64:
     cmpwi r0, 0x6
     bne lbl_fn_80245F14_00001B78
     mr r3, r29
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_80245F14_00001B94
 lbl_fn_80245F14_00001B78:
     lfs f0, 0x568(r29)

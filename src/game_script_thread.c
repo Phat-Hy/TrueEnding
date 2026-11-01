@@ -30,7 +30,7 @@ extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_80176ACC(void);
 extern void fn_80178208(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void actor_getMovementFlags(void);
 extern void fn_801C02F4(void);
 extern void sound_initGlobalInstances(void);
@@ -1194,7 +1194,7 @@ lbl_fn_8024FCDC_00000FA8:
     mtctr r12
     bctrl
     mr r3, r29
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r29
     li r4, 0x0
     li r5, 0x1
@@ -1280,7 +1280,7 @@ asm void fn_8024FE18(void)
     mtctr r12
     bctrl
     mr r3, r29
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r29
     li r4, 0x0
     li r5, 0x1

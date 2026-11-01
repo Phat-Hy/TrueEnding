@@ -17,7 +17,7 @@ extern void fn_80057A68(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_8006AFF8(void);
+extern void boss_initActionStream(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800DB3EC(void);
 extern void str_parseInt(void);
@@ -1283,7 +1283,7 @@ lbl_fn_8029CB00_00001074:
     addi r3, r1, 0x20
     addi r4, r1, 0x38
     addi r5, r1, 0x2c
-    bl fn_8006AFF8
+    bl boss_initActionStream
     lwz r0, 0x20(r1)
     addi r3, r29, 0x167c
     srwi. r0, r0, 31

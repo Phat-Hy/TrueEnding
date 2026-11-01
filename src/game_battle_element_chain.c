@@ -9,7 +9,7 @@ extern void _savegpr_16(void);
 extern void _savegpr_17(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void fn_80058078(void);
 extern void fn_800580BC(void);
 extern void talk_formatQuotedString(void);
@@ -25,7 +25,7 @@ extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_8009EE30(void);
-extern void fn_802180A8(void);
+extern void task_lookupTagIndex(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
@@ -266,7 +266,7 @@ lbl_fn_804239D4_00000230:
     bl strcpy
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_802180A8
+    bl task_lookupTagIndex
     mr r4, r3
     addi r3, r29, 0x4c4
     addi r5, r1, 0x8
@@ -1982,7 +1982,7 @@ lbl_fn_80424FB4_00001A84:
     addi r4, r1, 0x98
     stw r27, 0x98(r1)
     lwz r3, 0x4(r17)
-    bl fn_8000D430
+    bl scene_traverseNode
     cmpwi r20, 0x0
     beq lbl_fn_80424FB4_00001B5C
     lwz r3, 0x98(r1)

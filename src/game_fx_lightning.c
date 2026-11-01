@@ -15,7 +15,7 @@ extern void dialog_updateScriptState(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void fn_8028A1F8(void);
 extern void fn_802A2070(void);
 extern void fn_802A239C(void);
@@ -638,7 +638,7 @@ asm void fn_8029DEF8(void)
     mtctr r12
     bctrl
     mr r3, r29
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r29
     li r4, 0x0
     li r5, 0x1

@@ -16,7 +16,7 @@ extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void fn_80108F38(void);
 extern void enemy_updateCombatBehavior(void);
-extern void fn_8013A258(void);
+extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_801426A4(void);
 extern void fn_80148B0C(void);
@@ -1115,7 +1115,7 @@ lbl_fn_802847CC_00000ED8:
 lbl_fn_802847CC_00000EF4:
     cmpwi r0, 0x6
     bne lbl_fn_802847CC_00000F04
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_802847CC_00000F2C
 lbl_fn_802847CC_00000F04:
     psq_l f1, 0x534(r3), 0, 0

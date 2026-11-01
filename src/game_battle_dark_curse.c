@@ -16,7 +16,7 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void node_createNamedChild(void);
 extern void lockon_updateTarget(void);
-extern void fn_800971D4(void);
+extern void cursor_Object_constructor(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C16B4(void);
 extern void fn_800C16C0(void);
@@ -1793,10 +1793,10 @@ lbl_fn_80423434_00001640:
 lbl_fn_80423434_0000164C:
     addi r3, r29, 0x4c4
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     addi r3, r29, 0xf4
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     mr r3, r29
     li r4, 0x0
     bl task_destroyWorker

@@ -34,7 +34,7 @@ extern void equip_applyToCharacter(void);
 extern void fn_801644D4(void);
 extern void fn_80176ACC(void);
 extern void fn_8017CB2C(void);
-extern void fn_802180A8(void);
+extern void task_lookupTagIndex(void);
 extern void sound_initGlobalInstances(void);
 extern void res_Resource_unload(void);
 extern void res_MsgHandle_isLoading(void);
@@ -589,7 +589,7 @@ lbl_fn_803F8890_000006C4:
     bl strcpy
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_802180A8
+    bl task_lookupTagIndex
     stw r3, 0x970(r28)
     mr r4, r3
     addi r3, r28, 0xf4

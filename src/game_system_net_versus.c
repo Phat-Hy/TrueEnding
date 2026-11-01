@@ -17,7 +17,7 @@ extern void inventory_calcTotalStats(void);
 extern void actor_setState(void);
 extern void fn_8016F824(void);
 extern void fn_8016FDCC(void);
-extern void fn_8017039C(void);
+extern void battle_resolveAggroHierarchy(void);
 extern void fn_80370094(void);
 extern void world_setGlobalFlag(void);
 extern void fn_803935FC(void);
@@ -1209,7 +1209,7 @@ lbl_fn_8039F08C_00000F60:
     lwz r4, 0xc(r25)
     mr r3, r30
     li r5, 0x0
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
 lbl_fn_8039F08C_00000F70:
     lwz r0, 0x18(r25)
     cmpwi r0, 0x0

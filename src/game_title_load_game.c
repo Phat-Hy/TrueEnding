@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_14(void);
 extern void _savegpr_14(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void motion_updateFogAdj(void);
 extern void ref_releaseHandle(void);
 extern void magic_dispatchActionCommand(void);
@@ -993,7 +993,7 @@ lbl_fn_803B0808_00000D78:
     li r4, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     bne lbl_fn_803B0808_00000DB8
     li r0, 0x1
@@ -2081,7 +2081,7 @@ lbl_fn_803B17C4_00001D34:
     li r4, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     bne lbl_fn_803B17C4_00001D74
     li r0, 0x1
