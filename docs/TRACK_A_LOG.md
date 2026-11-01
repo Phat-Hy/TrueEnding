@@ -23,6 +23,27 @@ Next:     the 3-5 functions worth naming or decompiling next
 
 <!-- newest first -->
 
+### 2026-11-01 — Unit A2: C Decompilation of atn_TaskBase_isValid and atn_Task_initCookie
+
+Numbers:  progress before -> after: 99.30 % -> 99.30 % (7,425,512 / 7,477,608 bytes, 18,054 / 18,155 functions)
+Named:    none in this unit
+Decompiled:
+- atn_Task_initCookie (36 B) -> C in src/game_depth.c (match: 100 %, 9/9 instructions)
+- atn_TaskBase_isValid (96 B) -> C in src/game_depth.c (match: 100 %, 20/20 instructions)
+Notes:
+- **atn_Task_initCookie (36 B)**:
+  - Deliverable: decompiled to C in `src/game_depth.c`, 100% byte match.
+  - Plain-English description: Seeds the global 64-bit task cookie `lbl_807C75D0` from rodata seed `lbl_80734628`.
+- **atn_TaskBase_isValid (96 B)**:
+  - Deliverable: decompiled to C in `src/game_depth.c`, 100% byte match.
+  - Plain-English description: Validates any `atn::Task` pointer before executing or linking. Returns 0 (`FALSE`) if `task == NULL`, if `task->cookie` (`+0x8`) does not match the active session cookie in `lbl_807C75D0`, or if `task->taskId` (`+0x10`) is 0. Returns 1 (`TRUE`) only when all three validity checks pass.
+  - Track B payoff: Explains how the engine detects destroyed, stale, or dangling task handles during task tree execution without dereferencing corrupted virtual dispatch tables. In native PC recompilation, this guards task callbacks from use-after-free conditions.
+Next:
+1. `atn_LH_Texture_constructor` (`fn_800D5738`, 120 B) and `atn_LH_Texture_destructor` (`fn_800D57B0`, 88 B) -> decompile to C in `src/game_depth.c`.
+2. `fn_800D7278` (1252 B): character texture bake (EFB copy + `GXDrawDone` + readback).
+3. Batch 4 renames in `atn::LH_` layout, scene, and display list loaders.
+
+
 ### 2026-11-01 — Batch 3: World & Chapter Transition Engine Renames (12 functions)
 
 Numbers:  progress before -> after: 99.30 % -> 99.30 % (7,425,512 / 7,477,608 bytes, 18,054 / 18,155 functions)

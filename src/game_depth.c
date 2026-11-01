@@ -65,7 +65,14 @@ extern u32 lbl_80881200;
 extern u32 lbl_80881204;
 
 /* Function declarations */
-void atn_TaskBase_isValid(void);
+typedef struct atn_TaskBase {
+    void* vtable;
+    u32 unk4;
+    u64 cookie;
+    u64 taskId;
+} atn_TaskBase;
+
+BOOL atn_TaskBase_isValid(atn_TaskBase* task);
 void atn_Task_initCookie(void);
 void atn_LH_Texture_constructor(void);
 void atn_LH_Texture_destructor(void);
@@ -89,44 +96,19 @@ void fn_800D6B60(void);
 void fn_800D6BA0(void);
 void fn_800D6BE0(void);
 
-asm void atn_TaskBase_isValid(void)
+BOOL atn_TaskBase_isValid(atn_TaskBase* task)
 {
-    nofralloc
-    cmpwi r3, 0x0
-    beq lbl_atn_TaskBase_isValid_00000048
-    lis r5, lbl_807C75D0@ha
-    lwz r6, 0x8(r3)
-    addi r4, r5, lbl_807C75D0@l
-    lwz r0, lbl_807C75D0@l(r5)
-    lwz r5, 0xc(r3)
-    lwz r4, 0x4(r4)
-    xor r0, r6, r0
-    xor r4, r5, r4
-    or. r0, r4, r0
-    bne lbl_atn_TaskBase_isValid_00000048
-    lwz r0, 0x10(r3)
-    lwz r3, 0x14(r3)
-    or. r0, r3, r0
-    beq lbl_atn_TaskBase_isValid_00000048
-    li r3, 0x1
-    blr
-lbl_atn_TaskBase_isValid_00000048:
-    li r3, 0x0
-    blr
+    if (task && task->cookie == *(u64*)lbl_807C75D0) {
+        if (task->taskId != 0) {
+            return 1;
+        }
+    }
+    return 0;
 }
 
-asm void atn_Task_initCookie(void)
+void atn_Task_initCookie(void)
 {
-    nofralloc
-    lis r3, lbl_80734628@ha
-    lis r4, lbl_807C75D0@ha
-    addi r5, r3, lbl_80734628@l
-    lwz r0, lbl_80734628@l(r3)
-    addi r3, r4, lbl_807C75D0@l
-    lwz r5, 0x4(r5)
-    stw r5, 0x4(r3)
-    stw r0, lbl_807C75D0@l(r4)
-    blr
+    *(u64*)lbl_807C75D0 = *(u64*)lbl_80734628;
 }
 
 asm void atn_LH_Texture_constructor(void)
