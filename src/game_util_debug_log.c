@@ -45,7 +45,7 @@ extern void res_findResourceSlot(void);
 extern void fn_8023A680(void);
 extern void res_registerResource(void);
 extern void world_setGlobalFlag(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_803E6890(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_80491DF8(void);
@@ -63,8 +63,8 @@ extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void fn_8068A850(void);
 extern void std_atan2(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 
 /* External data declarations */
 extern u8 lbl_80762118[];
@@ -895,7 +895,7 @@ lbl_fn_8059A29C_00000AF0:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_8059A29C_00000B0C
-    bl fn_80373148
+    bl kpad_getClampData
     b lbl_fn_8059A29C_00000B10
 lbl_fn_8059A29C_00000B0C:
     li r3, 0x0
@@ -1021,7 +1021,7 @@ asm void fn_8059AC0C(void)
     addi r5, r5, fn_80598904@l
     li r6, 0x140
     li r7, 0x20
-    bl fn_806958E0
+    bl __construct_new_array
     li r31, 0x0
     stw r31, 0x2848(r30)
     addi r3, r30, 0x284c
@@ -1223,7 +1223,7 @@ lbl_fn_8059AD10_00000F64:
     addi r4, r4, fn_80598904@l
     li r5, 0x140
     li r6, 0x20
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r29
     li r4, 0x0
     bl atn_Task_destructor

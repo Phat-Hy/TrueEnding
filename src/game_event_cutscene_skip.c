@@ -39,7 +39,7 @@ extern void fn_80219544(void);
 extern void fn_80334B38(void);
 extern void fn_80365464(void);
 extern void world_startMapTransition(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_8037C8C4(void);
 extern void fn_803BEBAC(void);
 extern void fn_803C3894(void);
@@ -1146,7 +1146,7 @@ lbl_fn_80480438_00000DA0:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_80480438_00000DB0
-    b fn_80373148
+    b kpad_getClampData
 lbl_fn_80480438_00000DB0:
     li r3, 0x0
     blr

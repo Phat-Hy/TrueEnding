@@ -12,7 +12,7 @@ extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DBF68(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_8016DAB0(void);
 extern void save_validateHeader(void);
 extern void fn_801F4CB4(void);
@@ -562,7 +562,7 @@ lbl_fn_803E5E64_00000654:
     la r4, lbl_808813D0
 lbl_fn_803E5E64_00000658:
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_803E5E64_000008F8
 lbl_fn_803E5E64_00000664:
     lwz r4, lbl_8087F1E4
@@ -575,7 +575,7 @@ lbl_fn_803E5E64_0000067C:
     la r4, lbl_808813D0
 lbl_fn_803E5E64_00000680:
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_803E5E64_000008F8
     cmpwi r4, 0x0
     beq lbl_fn_803E5E64_000006BC
@@ -589,7 +589,7 @@ lbl_fn_803E5E64_000006AC:
     la r4, lbl_808813D0
 lbl_fn_803E5E64_000006B0:
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_803E5E64_000008F8
 lbl_fn_803E5E64_000006BC:
     lwz r4, lbl_8087F1E4
@@ -602,7 +602,7 @@ lbl_fn_803E5E64_000006D4:
     la r4, lbl_808813D0
 lbl_fn_803E5E64_000006D8:
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_803E5E64_000008F8
     cmpwi r4, 0x0
     beq lbl_fn_803E5E64_00000714
@@ -616,7 +616,7 @@ lbl_fn_803E5E64_00000704:
     la r4, lbl_808813D0
 lbl_fn_803E5E64_00000708:
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_803E5E64_000008F8
 lbl_fn_803E5E64_00000714:
     lwz r4, lbl_8087F1E4
@@ -629,7 +629,7 @@ lbl_fn_803E5E64_0000072C:
     la r4, lbl_808813D0
 lbl_fn_803E5E64_00000730:
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_803E5E64_000008F8
     cmpwi r4, 0x0
     beq lbl_fn_803E5E64_0000076C
@@ -643,7 +643,7 @@ lbl_fn_803E5E64_0000075C:
     la r4, lbl_808813D0
 lbl_fn_803E5E64_00000760:
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_803E5E64_000008F8
 lbl_fn_803E5E64_0000076C:
     lwz r4, lbl_8087F1E4
@@ -656,7 +656,7 @@ lbl_fn_803E5E64_00000784:
     la r4, lbl_808813D0
 lbl_fn_803E5E64_00000788:
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_803E5E64_000008F8
     cmpwi r4, 0x0
     beq lbl_fn_803E5E64_000007C4
@@ -670,7 +670,7 @@ lbl_fn_803E5E64_000007B4:
     la r4, lbl_808813D0
 lbl_fn_803E5E64_000007B8:
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_803E5E64_000008F8
 lbl_fn_803E5E64_000007C4:
     lwz r4, lbl_8087F1E4
@@ -683,7 +683,7 @@ lbl_fn_803E5E64_000007DC:
     la r4, lbl_808813D0
 lbl_fn_803E5E64_000007E0:
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_803E5E64_000008F8
     cmpwi r4, 0x0
     beq lbl_fn_803E5E64_0000081C
@@ -697,7 +697,7 @@ lbl_fn_803E5E64_0000080C:
     la r4, lbl_808813D0
 lbl_fn_803E5E64_00000810:
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_803E5E64_000008F8
 lbl_fn_803E5E64_0000081C:
     lwz r4, lbl_8087F1E4
@@ -710,7 +710,7 @@ lbl_fn_803E5E64_00000834:
     la r4, lbl_808813D0
 lbl_fn_803E5E64_00000838:
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_803E5E64_000008F8
     lwz r4, lbl_8087F1E4
     addi r3, r1, 0x8
@@ -722,7 +722,7 @@ lbl_fn_803E5E64_0000085C:
     la r4, lbl_808813D0
 lbl_fn_803E5E64_00000860:
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_803E5E64_000008F8
     lwz r4, lbl_8087F1E4
     addi r3, r1, 0x8
@@ -734,7 +734,7 @@ lbl_fn_803E5E64_00000884:
     la r4, lbl_808813D0
 lbl_fn_803E5E64_00000888:
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_803E5E64_000008F8
     lwz r4, lbl_8087F1E4
     addi r3, r1, 0x8
@@ -756,7 +756,7 @@ lbl_fn_803E5E64_000008B0:
     fsubs f1, f1, f2
     fdivs f1, f1, f0
     crset 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_803E5E64_000008F8
 lbl_fn_803E5E64_000008E4:
     mr r4, r27

@@ -18,7 +18,7 @@ extern void fn_8006F420(void);
 extern void fn_8006F72C(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
@@ -28,7 +28,7 @@ extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void atn_LH_Texture_update(void);
-extern void fn_800DC1DC(void);
+extern void wcs_parseInt(void);
 extern void str_findChar(void);
 extern void fn_800DFB40(void);
 extern void fn_800E0908(void);
@@ -61,7 +61,7 @@ extern void printf(void);
 extern void wcslen(void);
 extern void wcscpy(void);
 extern void abort(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -455,7 +455,7 @@ lbl_fn_80469D60_000004B4:
     beq lbl_fn_80469D60_00000844
     cmplwi r0, 0x23
     beq lbl_fn_80469D60_00000844
-    bl fn_800DC1DC
+    bl wcs_parseInt
     cmpwi r3, 0x0
     stw r3, 0x28(r1)
     mr r4, r3
@@ -983,7 +983,7 @@ asm void task_Book_constructor(void)
     lis r4, fn_8046A514@ha
     mr r3, r0
     addi r4, r4, fn_8046A514@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_task_Book_constructor_00000C50:
     addic. r0, r30, 0x98
     li r0, 0x0
@@ -995,7 +995,7 @@ lbl_task_Book_constructor_00000C50:
     lis r4, fn_8046A514@ha
     li r3, 0x0
     addi r4, r4, fn_8046A514@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_task_Book_constructor_00000C7C:
     li r0, 0x0
     stw r0, 0x9c(r30)
@@ -1505,7 +1505,7 @@ asm void fn_8046ACDC(void)
     mr r30, r3
     lwz r31, lbl_8087EF70
     mr r3, r31
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_8046ACDC_000013B4
     lis r4, lbl_80755310@ha
@@ -1530,13 +1530,13 @@ lbl_fn_8046ACDC_000013B4:
     mr r3, r31
     li r4, 0x0
     li r5, 0x18
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     bne lbl_fn_8046ACDC_000013E4
     mr r3, r31
     li r4, 0x0
     li r5, 0x3
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_8046ACDC_00001440
 lbl_fn_8046ACDC_000013E4:
@@ -1567,13 +1567,13 @@ lbl_fn_8046ACDC_00001440:
     mr r3, r31
     li r4, 0x0
     li r5, 0x17
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     bne lbl_fn_8046ACDC_00001470
     mr r3, r31
     li r4, 0x0
     li r5, 0x2
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_8046ACDC_000014C0
 lbl_fn_8046ACDC_00001470:

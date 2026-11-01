@@ -22,7 +22,7 @@ extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_80375184(void);
 extern void fn_80376150(void);
 extern void fn_803CC718(void);
@@ -1230,16 +1230,16 @@ lbl_fn_80176E30_00000FD4:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_80176E30_00001034
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_80176E30_00001034
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x48(r3)
     cmpwi r0, 0x2
     bne lbl_fn_80176E30_00001034
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x4c(r3)
     cmpwi r0, 0xd
     bne lbl_fn_80176E30_00001034

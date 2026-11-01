@@ -75,7 +75,7 @@ extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
 extern void strcmp(void);
 extern void std_fmod(void);
-extern void fn_80695B00(void);
+extern void __ptmf_scall(void);
 
 /* External data declarations */
 extern u8 lbl_80735258[];
@@ -134,7 +134,7 @@ asm void fn_800E3E78(void)
     mr r12, r3
     stw r0, 0x14(r1)
     lwz r3, 0xc(r3)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0

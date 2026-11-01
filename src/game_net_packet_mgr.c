@@ -12,12 +12,12 @@ extern void fn_800827E0(void);
 extern void fn_80083AD4(void);
 extern void mem_alloc(void);
 extern void fn_800A2664(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
 extern void save_validateHeader(void);
 extern void saveSlot_readSummary(void);
@@ -34,7 +34,7 @@ extern void fn_8068B770(void);
 extern void fn_8068BC30(void);
 extern void fn_8068BD60(void);
 extern void fn_8068C240(void);
-extern void fn_806958E0(void);
+extern void __construct_new_array(void);
 extern void fn_806B3C20(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -252,7 +252,7 @@ lbl_fn_804AD8CC_0000020C:
     li r29, 0x0
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_804AD8CC_00000278
     lwz r0, 0x4c(r31)
@@ -274,7 +274,7 @@ lbl_fn_804AD8CC_00000278:
     mr r3, r30
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_804AD8CC_000002BC
     lwz r0, 0x4c(r31)
@@ -1382,7 +1382,7 @@ asm void fn_804AE888(void)
     stw r28, 0x268(r31)
     stw r28, 0x26c(r31)
     stw r8, 0x270(r31)
-    bl fn_806958E0
+    bl __construct_new_array
     lis r6, lbl_80790B18@ha
     stw r28, 0xbd4(r31)
     addi r6, r6, lbl_80790B18@l
@@ -1393,7 +1393,7 @@ asm void fn_804AE888(void)
     li r6, 0x50
     stw r28, 0xbd8(r31)
     li r7, 0x1e
-    bl fn_806958E0
+    bl __construct_new_array
     lis r6, lbl_80790AF0@ha
     stw r28, 0x1540(r31)
     addi r6, r6, lbl_80790AF0@l
@@ -1404,7 +1404,7 @@ asm void fn_804AE888(void)
     li r6, 0x50
     stw r28, 0x1544(r31)
     li r7, 0x41
-    bl fn_806958E0
+    bl __construct_new_array
     stw r28, 0x299c(r31)
     lis r4, lbl_80757B7C@ha
     lfs f0, lbl_80887308
@@ -1932,7 +1932,7 @@ lbl_fn_804AE888_00001984:
     stw r29, 0x48(r3)
     crclr 6
     addi r3, r3, 0x8
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r27, r27, 0x1
 lbl_fn_804AE888_000019C0:
     lwz r12, 0x8(r28)

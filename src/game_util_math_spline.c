@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_25(void);
 extern void _savegpr_25(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_8011728C(void);
 extern void fn_801173A8(void);
 extern void fn_80206B9C(void);
@@ -811,7 +811,7 @@ lbl_fn_805828B4_00000AC8:
     addi r3, r1, 0x88
     addi r4, r4, 0x12
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x88
     li r4, 0x2b
     bl wcschr
@@ -826,7 +826,7 @@ lbl_fn_805828B4_00000B00:
     addi r3, r1, 0x8
     addi r4, r4, 0x12
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x8
     li r4, 0x2b
     bl wcschr
@@ -1389,7 +1389,7 @@ lbl_fn_805830D8_000012F0:
     addi r3, r1, 0x380
     addi r4, r4, 0x12
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x380
     li r4, 0x2b
     bl wcschr
@@ -1404,7 +1404,7 @@ lbl_fn_805830D8_00001328:
     addi r3, r1, 0x400
     addi r4, r4, 0x12
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x400
     li r4, 0x2b
     bl wcschr
@@ -1603,7 +1603,7 @@ lbl_fn_805830D8_00001600:
     addi r3, r1, 0x280
     addi r4, r4, 0x12
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x280
     li r4, 0x2b
     bl wcschr
@@ -1618,7 +1618,7 @@ lbl_fn_805830D8_00001638:
     addi r3, r1, 0x300
     addi r4, r4, 0x12
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x300
     li r4, 0x2b
     bl wcschr
@@ -1941,7 +1941,7 @@ lbl_fn_805830D8_00001AF8:
     addi r3, r1, 0x120
     addi r4, r4, 0x12
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x120
     li r4, 0x2b
     bl wcschr
@@ -1956,7 +1956,7 @@ lbl_fn_805830D8_00001B30:
     addi r3, r1, 0x1a0
     addi r4, r4, 0x12
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x1a0
     li r4, 0x2b
     bl wcschr

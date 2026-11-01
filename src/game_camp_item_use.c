@@ -48,9 +48,9 @@ extern void fn_8049D704(void);
 extern void fn_805A2244(void);
 extern void fn_805A2408(void);
 extern void strcmp(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
-extern void fn_80695A50(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
+extern void __destroy_arr(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -251,7 +251,7 @@ asm void fn_803BEC40(void)
     addi r5, r5, atn_LH_Binary_destructor@l
     li r6, 0x8
     li r7, 0x3
-    bl fn_806958E0
+    bl __construct_new_array
     addi r22, r17, 0x12c
     stw r21, 0x68(r17)
     mr r3, r22
@@ -340,7 +340,7 @@ asm void fn_803BEC40(void)
     stw r21, 0x18c(r17)
     stw r21, 0x190(r17)
     stw r21, 0x994(r17)
-    bl fn_806958E0
+    bl __construct_new_array
     stw r21, 0x9b0(r17)
     mr r4, r18
     mr r5, r19
@@ -1234,7 +1234,7 @@ lbl_fn_803BF9D4_00000FA0:
     beq lbl_fn_803BF9D4_00000FC4
     lis r4, fn_803BF898@ha
     addi r4, r4, fn_803BF898@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803BF9D4_00000FC4:
     lwz r3, 0xb0(r30)
     li r0, 0x0
@@ -1368,7 +1368,7 @@ lbl_fn_803BF9D4_0000118C:
     addi r4, r4, fn_80117E34@l
     li r5, 0x4
     li r6, 0x6
-    bl fn_806959D8
+    bl __destroy_new_array
     addic. r3, r30, 0x994
     beq lbl_fn_803BF9D4_000011B0
     bl fn_80470528
@@ -1496,7 +1496,7 @@ lbl_fn_803BF9D4_00001334:
     beq lbl_fn_803BF9D4_00001354
     lis r4, fn_80366364@ha
     addi r4, r4, fn_80366364@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803BF9D4_00001354:
     li r0, 0x0
     stw r0, 0xc(r29)
@@ -1585,7 +1585,7 @@ lbl_fn_803BF9D4_00001460:
     beq lbl_fn_803BF9D4_00001480
     lis r4, fn_803BF960@ha
     addi r4, r4, fn_803BF960@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803BF9D4_00001480:
     li r0, 0x0
     stw r0, 0xf0(r30)
@@ -1598,7 +1598,7 @@ lbl_fn_803BF9D4_0000148C:
     beq lbl_fn_803BF9D4_000014AC
     lis r4, fn_803BF8EC@ha
     addi r4, r4, fn_803BF8EC@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803BF9D4_000014AC:
     li r0, 0x0
     stw r0, 0xe8(r30)
@@ -1698,7 +1698,7 @@ lbl_fn_803BF9D4_000015DC:
     beq lbl_fn_803BF9D4_000015FC
     lis r4, fn_803BF898@ha
     addi r4, r4, fn_803BF898@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803BF9D4_000015FC:
     li r0, 0x0
     stw r0, 0xa4(r30)
@@ -1724,7 +1724,7 @@ lbl_fn_803BF9D4_00001634:
     beq lbl_fn_803BF9D4_00001654
     lis r4, fn_803BF824@ha
     addi r4, r4, fn_803BF824@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803BF9D4_00001654:
     li r0, 0x0
     stw r0, 0x94(r30)
@@ -1737,7 +1737,7 @@ lbl_fn_803BF9D4_00001660:
     beq lbl_fn_803BF9D4_00001680
     lis r4, fn_803BF824@ha
     addi r4, r4, fn_803BF824@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803BF9D4_00001680:
     li r0, 0x0
     stw r0, 0x8c(r30)
@@ -1750,7 +1750,7 @@ lbl_fn_803BF9D4_0000168C:
     beq lbl_fn_803BF9D4_000016AC
     lis r4, fn_803BF824@ha
     addi r4, r4, fn_803BF824@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803BF9D4_000016AC:
     li r0, 0x0
     stw r0, 0x84(r30)
@@ -1774,7 +1774,7 @@ lbl_fn_803BF9D4_000016E4:
     addi r4, r4, atn_LH_Binary_destructor@l
     li r5, 0x8
     li r6, 0x3
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
     bl atn_Task_destructor

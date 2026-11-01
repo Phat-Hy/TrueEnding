@@ -30,7 +30,7 @@ extern void fn_8015495C(void);
 extern void fn_8016EB48(void);
 extern void fn_80170F20(void);
 extern void fn_802180A8(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_803CD958(void);
 extern void fn_803EC568(void);
 extern void fn_803EC69C(void);
@@ -50,8 +50,8 @@ extern void strstr(void);
 extern void atoi(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -768,7 +768,7 @@ asm void fn_804296DC(void)
     li r7, 0x7
     stw r31, 0xf8(r29)
     stw r0, 0xfc(r29)
-    bl fn_806958E0
+    bl __construct_new_array
     addi r3, r29, 0x240
     bl fn_800A08E0
     lfs f0, lbl_80886720
@@ -904,7 +904,7 @@ lbl_fn_80429868_00000B30:
     addi r4, r4, fn_800970CC@l
     li r5, 0xc
     li r6, 0x7
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r27
     li r4, 0x0
     bl fn_803EC69C
@@ -935,7 +935,7 @@ asm void fn_80429964(void)
     cmpwi r0, 0x0
     beq lbl_fn_80429964_00000BB0
     mr r3, r0
-    bl fn_80373148
+    bl kpad_getClampData
     mr r21, r3
 lbl_fn_80429964_00000BB0:
     mr r3, r31

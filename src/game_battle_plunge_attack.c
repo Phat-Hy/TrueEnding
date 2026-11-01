@@ -68,8 +68,8 @@ extern void PSVECNormalize(void);
 extern void strcmp(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern char* strcpy(char* dest, const char* src);
 
 /* External data declarations */
@@ -648,7 +648,7 @@ asm void fn_804114B4(void)
     addi r4, r4, fn_80057F28@l
     addi r5, r5, atn_ColliObject_destructor@l
     li r7, 0x2
-    bl fn_806958E0
+    bl __construct_new_array
     stw r31, 0x65c(r30)
     addi r3, r30, 0x660
     bl res_MsgHandle_constructor
@@ -659,7 +659,7 @@ asm void fn_804114B4(void)
     addi r4, r4, res_MsgHandle_constructor@l
     addi r5, r5, fn_800EF73C@l
     li r7, 0x2
-    bl fn_806958E0
+    bl __construct_new_array
     addi r3, r30, 0x684
     bl fn_800CB360
     li r0, 0x0
@@ -699,7 +699,7 @@ asm void fn_8041158C(void)
     addi r4, r4, fn_800EF73C@l
     li r5, 0xc
     li r6, 0x2
-    bl fn_806959D8
+    bl __destroy_new_array
     addic. r31, r29, 0x660
     beq lbl_fn_8041158C_00000818
     mr r3, r31
@@ -714,7 +714,7 @@ lbl_fn_8041158C_00000818:
     addi r4, r4, atn_ColliObject_destructor@l
     li r5, 0x88
     li r6, 0x2
-    bl fn_806959D8
+    bl __destroy_new_array
     addic. r31, r29, 0x4c4
     beq lbl_fn_8041158C_00000854
     addic. r3, r31, 0x3c

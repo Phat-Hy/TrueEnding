@@ -14,7 +14,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void save_validateHeader(void);
 extern void fn_801F4CB4(void);
 extern void thread_findAndNotify(void);
@@ -41,8 +41,8 @@ extern void fn_804EA5E0(void);
 extern void fn_804EB874(void);
 extern void fn_8050A638(void);
 extern void fn_8050BA6C(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern void fn_806A8E40(void);
 extern void fn_806A8E70(void);
 extern void fn_806B0DE0(void);
@@ -169,7 +169,7 @@ asm void fn_804BBC28(void)
     addi r5, r5, fn_804BC330@l
     li r6, 0x22c
     li r7, 0x6
-    bl fn_806958E0
+    bl __construct_new_array
     lis r3, 0x8000
     lis r4, lbl_807588DC@ha
     li r7, 0x0
@@ -720,7 +720,7 @@ lbl_fn_804BC390_000008A8:
     addi r4, r4, fn_804BC330@l
     li r5, 0x22c
     li r6, 0x6
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
     bl atn_Task_destructor
@@ -1033,7 +1033,7 @@ lbl_fn_804BC628_00000CB4:
     srwi r5, r0, 31
     add r5, r0, r5
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r4, 0x4c(r28)
     addi r3, r31, 0x2a6
     addi r24, r4, 0x58
@@ -1315,7 +1315,7 @@ lbl_fn_804BC628_00001114:
     la r4, lbl_808813D0
 lbl_fn_804BC628_00001118:
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F588
     addi r4, r1, 0x50
     li r5, 0x0

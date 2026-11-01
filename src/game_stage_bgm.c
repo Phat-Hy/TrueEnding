@@ -65,7 +65,7 @@ extern void PSVECDotProduct(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
-extern void fn_80695B00(void);
+extern void __ptmf_scall(void);
 extern void fn_806A8E40(void);
 extern void fn_806B0E30(void);
 
@@ -469,7 +469,7 @@ asm void fn_8019F79C(void)
     lwz r12, 0x0(r3)
     lwz r3, 0xc(r12)
     lwz r4, 0x10(r12)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0

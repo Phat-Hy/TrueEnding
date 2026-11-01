@@ -78,8 +78,8 @@ extern void rand(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern char* strcpy(char* dest, const char* src);
 
 /* External data declarations */
@@ -1112,7 +1112,7 @@ asm void fn_8042618C(void)
     addi r4, r4, res_MsgHandle_constructor@l
     addi r5, r5, fn_800EF73C@l
     li r7, 0x5
-    bl fn_806958E0
+    bl __construct_new_array
     lfs f0, lbl_808866A0
     mr r3, r30
     stw r31, 0x98c(r30)
@@ -1169,7 +1169,7 @@ lbl_fn_80426260_00000E1C:
     addi r4, r4, fn_800EF73C@l
     li r5, 0xc
     li r6, 0x5
-    bl fn_806959D8
+    bl __destroy_new_array
     addic. r31, r29, 0x898
     beq lbl_fn_80426260_00000E58
     addic. r3, r31, 0x3c

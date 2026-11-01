@@ -8,7 +8,7 @@ extern void _savegpr_17(void);
 extern void dtor_80084684(void);
 extern void fn_80063484(void);
 extern void mem_free(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800BFAC8(void);
 extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
@@ -1898,7 +1898,7 @@ lbl_fn_8054746C_0000196C:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_8054746C_000019E8
     mr r3, r31

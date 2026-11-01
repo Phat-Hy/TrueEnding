@@ -31,7 +31,7 @@ extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void world_getGlobalFlag(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_803761BC(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
@@ -45,7 +45,7 @@ extern void rand(void);
 extern void strcmp(void);
 extern void std_atan2(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 extern void vec3_isNonZero(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -1285,11 +1285,11 @@ asm void fn_800EEFDC(void)
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_800EEFDC_00001058
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_800EEFDC_00001058
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x48(r3)
     cmpwi r0, 0x2
     bne lbl_fn_800EEFDC_00001058
@@ -1766,7 +1766,7 @@ asm void camera_setMode(void)
     lis r4, fn_800EF7F8@ha
     mr r3, r0
     addi r4, r4, fn_800EF7F8@l
-    bl fn_80695A50
+    bl __destroy_arr
     li r0, 0x0
     stw r0, lbl_8087F030
     stw r0, lbl_8087F034

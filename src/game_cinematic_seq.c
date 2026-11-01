@@ -14,7 +14,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800E854C(void);
 extern void system_getNextSequenceId(void);
@@ -646,7 +646,7 @@ lbl_fn_80334FDC_000006A4:
     lwz r30, lbl_8087F8A0
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r4, r3
     mr r3, r30
     bl fn_8011F91C
@@ -773,7 +773,7 @@ lbl_fn_80334FDC_00000884:
     bne lbl_fn_80334FDC_000008AC
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1508(r29)
     b lbl_fn_80334FDC_00000970
 lbl_fn_80334FDC_000008AC:

@@ -5,7 +5,7 @@
 extern void _restgpr_18(void);
 extern void _savegpr_18(void);
 extern void fn_8003EA3C(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_80108C10(void);
 extern void fn_801092C8(void);
 extern void fn_80206B14(void);
@@ -30,7 +30,7 @@ extern void task_findEntryById(void);
 extern void fn_8021E444(void);
 extern void fn_8021E5A4(void);
 extern void world_getGlobalFlag(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_803750E4(void);
 extern void fn_80445F44(void);
 extern void fn_804490E0(void);
@@ -1677,7 +1677,7 @@ lbl_fn_80444CF8_00001520:
 lbl_fn_80444CF8_00001524:
     lwz r5, 0x8(r31)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_80444CF8_0000166C
 lbl_fn_80444CF8_00001534:
     lwz r3, 0x4(r31)
@@ -1705,7 +1705,7 @@ lbl_fn_80444CF8_00001580:
     la r4, lbl_808813D0
 lbl_fn_80444CF8_00001584:
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_80444CF8_0000166C
 lbl_fn_80444CF8_00001590:
     lwz r3, 0x4(r31)
@@ -1723,7 +1723,7 @@ lbl_fn_80444CF8_000015B8:
 lbl_fn_80444CF8_000015BC:
     lwz r5, 0x8(r31)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_80444CF8_0000166C
 lbl_fn_80444CF8_000015CC:
     lwz r0, 0x4(r31)
@@ -1743,7 +1743,7 @@ lbl_fn_80444CF8_000015F8:
 lbl_fn_80444CF8_000015FC:
     mr r5, r29
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_80444CF8_0000166C
 lbl_fn_80444CF8_0000160C:
     cmpwi r29, 0x1
@@ -1759,7 +1759,7 @@ lbl_fn_80444CF8_0000162C:
 lbl_fn_80444CF8_00001630:
     lwz r5, 0x8(r31)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_80444CF8_0000166C
 lbl_fn_80444CF8_00001640:
     lwz r4, lbl_8087F1E4
@@ -1774,7 +1774,7 @@ lbl_fn_80444CF8_0000165C:
     lwz r5, 0x8(r31)
     mr r6, r29
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
 lbl_fn_80444CF8_0000166C:
     li r3, 0x1
 lbl_fn_80444CF8_00001670:
@@ -2081,11 +2081,11 @@ lbl_fn_80445130_00001AA8:
     cmpwi r3, 0x0
     li r21, -0x1
     beq lbl_fn_80445130_00001AE8
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_80445130_00001B10
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r19, 0x48(r3)
     lwz r20, 0x4c(r3)
     lwz r21, 0x50(r3)
@@ -2166,11 +2166,11 @@ lbl_fn_80445130_00001BE0:
     cmpwi r3, 0x0
     li r20, -0x1
     beq lbl_fn_80445130_00001C20
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_80445130_00001C48
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r25, 0x48(r3)
     lwz r21, 0x4c(r3)
     lwz r20, 0x50(r3)
@@ -2244,11 +2244,11 @@ lbl_fn_80445130_00001CF8:
     cmpwi r3, 0x0
     li r20, -0x1
     beq lbl_fn_80445130_00001D38
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_80445130_00001D60
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r25, 0x48(r3)
     lwz r21, 0x4c(r3)
     lwz r20, 0x50(r3)
@@ -2429,11 +2429,11 @@ lbl_fn_80445130_00001FA4:
     cmpwi r3, 0x0
     li r20, -0x1
     beq lbl_fn_80445130_00001FE4
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_80445130_0000200C
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r22, 0x48(r3)
     lwz r21, 0x4c(r3)
     lwz r20, 0x50(r3)
@@ -2513,11 +2513,11 @@ lbl_fn_80445130_000020D8:
     cmpwi r3, 0x0
     li r20, -0x1
     beq lbl_fn_80445130_00002118
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_80445130_00002140
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r18, 0x48(r3)
     lwz r21, 0x4c(r3)
     lwz r20, 0x50(r3)
@@ -2591,11 +2591,11 @@ lbl_fn_80445130_000021F0:
     cmpwi r3, 0x0
     li r19, -0x1
     beq lbl_fn_80445130_00002230
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_80445130_00002258
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r21, 0x48(r3)
     lwz r20, 0x4c(r3)
     lwz r19, 0x50(r3)
@@ -2672,11 +2672,11 @@ lbl_fn_80445130_00002310:
     li r19, -0x1
     lwz r18, 0x4(r22)
     beq lbl_fn_80445130_00002354
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_80445130_0000237C
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r21, 0x48(r3)
     lwz r20, 0x4c(r3)
     lwz r19, 0x50(r3)

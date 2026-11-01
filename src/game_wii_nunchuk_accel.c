@@ -20,7 +20,7 @@ extern void spectate_getRootNode(void);
 extern void fn_80541214(void);
 extern void fn_8055D004(void);
 extern void strcmp(void);
-extern void fn_80695B00(void);
+extern void __ptmf_scall(void);
 
 /* External data declarations */
 extern u8 lbl_8075EC98[];
@@ -1892,7 +1892,7 @@ asm void fn_8055CEF4(void)
     mr r12, r3
     stw r0, 0x14(r1)
     lwz r3, 0xc(r3)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0
@@ -1963,7 +1963,7 @@ asm void fn_8055CFD8(void)
     mr r12, r3
     stw r0, 0x14(r1)
     lwz r3, 0xc(r3)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0

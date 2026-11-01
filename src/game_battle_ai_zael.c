@@ -64,7 +64,7 @@ extern void rand(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806958E0(void);
+extern void __construct_new_array(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
 
@@ -1877,7 +1877,7 @@ asm void fn_8043119C(void)
     li r7, 0x10
     stw r31, 0x4f0(r30)
     stw r31, 0x4f4(r30)
-    bl fn_806958E0
+    bl __construct_new_array
     lfs f0, lbl_80886868
     addi r3, r30, 0x30a0
     stw r31, 0x2eb8(r30)
@@ -1932,7 +1932,7 @@ asm void fn_80431294(void)
     stb r31, 0x0(r3)
     stb r31, 0x80(r3)
     addi r3, r3, 0x100
-    bl fn_806958E0
+    bl __construct_new_array
     li r0, -0x1
     stw r0, 0x280(r30)
     mr r3, r30

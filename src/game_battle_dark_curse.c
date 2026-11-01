@@ -27,7 +27,7 @@ extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void morph_updateMesh(void);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_8011F91C(void);
 extern void fn_8011FC10(void);
@@ -59,7 +59,7 @@ extern void PSVECSquareMag(void);
 extern void strcmp(void);
 extern void fn_8068AD58(void);
 extern void std_fmod(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -930,7 +930,7 @@ lbl_fn_804227A4_00000A9C:
     beq lbl_fn_804227A4_00000AC4
     lis r4, atn_LH_Texture_destructAndFree@ha
     addi r4, r4, atn_LH_Texture_destructAndFree@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_804227A4_00000AC4:
     li r0, 0x0
     stw r0, 0x40(r29)
@@ -1478,7 +1478,7 @@ lbl_fn_80422F78_00001214:
     bne lbl_fn_80422F78_0000127C
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     subic. r0, r3, 0x2
     blt lbl_fn_80422F78_0000127C
     cmpwi r0, 0x5

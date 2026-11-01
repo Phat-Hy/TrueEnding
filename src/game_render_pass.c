@@ -27,7 +27,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
 extern void boss_updatePhaseState(void);
@@ -86,7 +86,7 @@ extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
 extern void fn_8068B100(void);
-extern void fn_806959D8(void);
+extern void __destroy_new_array(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -978,7 +978,7 @@ lbl_fn_802A4A04_00000AD4:
     addi r4, r4, fn_8000D760@l
     li r5, 0xc
     li r6, 0x6
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
     bl fn_805A3D00
@@ -1565,7 +1565,7 @@ lbl_fn_802A51F4_0000134C:
     bne lbl_fn_802A51F4_0000137C
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x164c(r30)
     b lbl_fn_802A51F4_000017B8
 lbl_fn_802A51F4_0000137C:
@@ -1576,7 +1576,7 @@ lbl_fn_802A51F4_0000137C:
     bne lbl_fn_802A51F4_000013A4
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1660(r30)
     b lbl_fn_802A51F4_000017B8
 lbl_fn_802A51F4_000013A4:
@@ -1587,7 +1587,7 @@ lbl_fn_802A51F4_000013A4:
     bne lbl_fn_802A51F4_000013CC
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x14bc(r30)
     b lbl_fn_802A51F4_000017B8
 lbl_fn_802A51F4_000013CC:
@@ -1598,7 +1598,7 @@ lbl_fn_802A51F4_000013CC:
     bne lbl_fn_802A51F4_000013F4
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1650(r30)
     b lbl_fn_802A51F4_000017B8
 lbl_fn_802A51F4_000013F4:
@@ -1610,7 +1610,7 @@ lbl_fn_802A51F4_000013F4:
 lbl_fn_802A51F4_00001408:
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r4, lbl_8087F430
     li r5, 0x0
     li r6, 0x0
@@ -1659,7 +1659,7 @@ lbl_fn_802A51F4_00001498:
 lbl_fn_802A51F4_000014AC:
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r4, lbl_8087F430
     li r5, 0x0
     li r6, 0x0
@@ -1805,7 +1805,7 @@ lbl_fn_802A51F4_000016A4:
     bne lbl_fn_802A51F4_000016CC
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1680(r30)
     b lbl_fn_802A51F4_000017B8
 lbl_fn_802A51F4_000016CC:
@@ -1816,7 +1816,7 @@ lbl_fn_802A51F4_000016CC:
     bne lbl_fn_802A51F4_000016F4
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1684(r30)
     b lbl_fn_802A51F4_000017B8
 lbl_fn_802A51F4_000016F4:
@@ -1827,7 +1827,7 @@ lbl_fn_802A51F4_000016F4:
     bne lbl_fn_802A51F4_0000171C
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1688(r30)
     b lbl_fn_802A51F4_000017B8
 lbl_fn_802A51F4_0000171C:
@@ -1860,7 +1860,7 @@ lbl_fn_802A51F4_0000176C:
     bne lbl_fn_802A51F4_00001794
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x14e4(r30)
     b lbl_fn_802A51F4_000017B8
 lbl_fn_802A51F4_00001794:
@@ -1871,7 +1871,7 @@ lbl_fn_802A51F4_00001794:
     bne lbl_fn_802A51F4_000017B8
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x14ec(r30)
 lbl_fn_802A51F4_000017B8:
     addi r3, r1, 0x20

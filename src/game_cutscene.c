@@ -20,13 +20,13 @@ extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void memcmp(void);
 extern void strncmp(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -388,7 +388,7 @@ lbl_fn_8007C46C_00000484:
     lis r4, fn_8007AA64@ha
     lwz r3, 0x108(r1)
     addi r4, r4, fn_8007AA64@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8007C46C_0000049C:
     li r0, 0x8
     stw r21, 0x108(r1)
@@ -567,7 +567,7 @@ lbl_fn_8007C46C_00000700:
     lis r4, fn_8007AA64@ha
     lwz r3, 0x108(r1)
     addi r4, r4, fn_8007AA64@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8007C46C_00000718:
     stw r21, 0x108(r1)
     stw r22, 0x104(r1)
@@ -2313,7 +2313,7 @@ lbl_fn_8007C46C_00001FF4:
     addi r5, r1, 0x9c
     bl fn_8007A994
     mr r16, r3
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x44(r15)
 lbl_fn_8007C46C_00002028:
     lwz r17, lbl_80880B84
@@ -2683,7 +2683,7 @@ lbl_fn_8007C46C_0000252C:
     beq lbl_fn_8007C46C_00002544
     lis r4, fn_8007AA64@ha
     addi r4, r4, fn_8007AA64@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8007C46C_00002544:
     psq_l f31, 0x628(r1), 0, 0
     mr r3, r16

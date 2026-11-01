@@ -17,7 +17,7 @@ extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_800EB7A0(void);
 extern void atn_LH_Xsca_destructor(void);
 extern void system_getNextSequenceId(void);
@@ -65,7 +65,7 @@ extern void PSVECDotProduct(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806959D8(void);
+extern void __destroy_new_array(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -168,7 +168,7 @@ lbl_fn_802FCF50_00000088:
     addi r4, r4, atn_LH_Xsca_destructor@l
     li r5, 0x8
     li r6, 0x2
-    bl fn_806959D8
+    bl __destroy_new_array
     addi r3, r29, 0x15ac
     li r4, -0x1
     bl ref_releaseHandle
@@ -912,7 +912,7 @@ lbl_fn_802FD328_00000B50:
     addi r3, r1, 0x310
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x310
     bl fn_80109828
@@ -976,7 +976,7 @@ lbl_fn_802FD328_00000C40:
     addi r3, r1, 0x110
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x110
     bl fn_80109828

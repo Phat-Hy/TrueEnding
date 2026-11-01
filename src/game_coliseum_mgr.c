@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void dtor_80084684(void);
 extern void talk_executeCommand(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_8048B3B0(void);
 
 /* External data declarations */
@@ -1646,17 +1646,17 @@ lbl_fn_8048E9E0_00001684:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_8048E9E0_000016D4
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_8048E9E0_000016D4
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r3, 0x38(r3)
     lbz r0, 0x2404(r31)
     rlwimi r0, r3, 4, 25, 25
     stb r0, 0x2404(r31)
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
@@ -1831,13 +1831,13 @@ lbl_fn_8048EC7C_00001910:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_8048EC7C_00001968
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_8048EC7C_00001968
     lbz r0, 0x2404(r31)
     lwz r3, lbl_8087F430
     extrwi r30, r0, 1, 25
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r30, 0x0
     beq lbl_fn_8048EC7C_0000195C
     lwz r0, 0x38(r3)

@@ -8,12 +8,12 @@ extern void _restgpr_26(void);
 extern void _savegpr_21(void);
 extern void _savegpr_22(void);
 extern void _savegpr_26(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800A55AC(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CFBA0(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_80116FC0(void);
 extern void fn_80117214(void);
 extern void actor_spawnActorWithId(void);
@@ -1139,7 +1139,7 @@ lbl_fn_801D80BC_00000E84:
     li r4, 0x0
     li r5, 0x4
     mr r3, r28
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801D80BC_00001144
     lwz r0, 0x1b98(r31)
@@ -1325,7 +1325,7 @@ lbl_fn_801D80BC_00001144:
     mr r3, r28
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801D80BC_000011C8
     addi r3, r1, 0x8
@@ -1416,7 +1416,7 @@ lbl_fn_801D8560_0000128C:
     li r4, 0x0
     li r5, 0x4
     mr r3, r25
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801D8560_00001610
     lwz r0, 0x1e4(r26)
@@ -1522,7 +1522,7 @@ lbl_fn_801D8560_00001408:
     lwz r5, 0x4(r26)
     addi r3, r1, 0x48
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F580
     addi r4, r1, 0x48
     bl fn_804A4300
@@ -1657,7 +1657,7 @@ lbl_fn_801D8560_00001610:
     mr r3, r25
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801D8560_00001674
     addi r3, r1, 0x14
@@ -1683,7 +1683,7 @@ lbl_fn_801D8560_00001674:
     mr r3, r25
     li r4, 0x0
     li r5, 0xd
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801D8560_000017B4
     lwz r0, 0x1e4(r26)
@@ -1768,7 +1768,7 @@ lbl_fn_801D8560_000017B4:
     mr r3, r25
     li r4, 0x0
     li r5, 0xc
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801D8560_000018F4
     lwz r0, 0x1e4(r26)

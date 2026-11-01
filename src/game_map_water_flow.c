@@ -11,7 +11,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_801028E4(void);
 extern void fn_801077A8(void);
 extern void fn_80107850(void);
@@ -46,7 +46,7 @@ extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
 extern void std_atan2(void);
-extern void fn_80695B00(void);
+extern void __ptmf_scall(void);
 
 /* External data declarations */
 extern u8 lbl_80739130[];
@@ -194,7 +194,7 @@ lbl_fn_8018FF6C_000000E8:
 lbl_fn_8018FF6C_000000EC:
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x10
     bl fn_80109828
@@ -579,7 +579,7 @@ asm void fn_801905AC(void)
     lwz r12, 0x0(r3)
     lwz r3, 0xc(r12)
     lwz r4, 0x10(r12)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0
@@ -679,7 +679,7 @@ asm void fn_801906F8(void)
     lwz r12, 0x0(r3)
     lwz r3, 0xc(r12)
     lwz r4, 0x10(r12)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0
@@ -1138,7 +1138,7 @@ asm void fn_80190D34(void)
     lwz r12, 0x0(r3)
     lwz r3, 0xc(r12)
     lwz r4, 0x10(r12)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0

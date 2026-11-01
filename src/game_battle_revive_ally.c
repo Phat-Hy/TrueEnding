@@ -43,7 +43,7 @@ extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
 extern void fn_8068B100(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -219,7 +219,7 @@ lbl_fn_804038D0_00000180:
     beq lbl_fn_804038D0_000001AC
     lis r4, fn_80402A40@ha
     addi r4, r4, fn_80402A40@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_804038D0_000001AC:
     cmpwi r29, 0x0
     stw r29, 0x108(r31)

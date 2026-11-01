@@ -25,7 +25,7 @@ extern void fn_80178864(void);
 extern void fn_801789D8(void);
 extern void fn_80179D44(void);
 extern void task_findEntryById(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_803CC1A4(void);
 extern void fn_803EA77C(void);
 extern void PSMTXRotRad(void);
@@ -43,7 +43,7 @@ extern void strcmp(void);
 extern void abort(void);
 extern void std_atan2(void);
 extern void fn_8068B100(void);
-extern void fn_80695B00(void);
+extern void __ptmf_scall(void);
 
 /* External data declarations */
 extern u8 lbl_8073A170[];
@@ -121,7 +121,7 @@ asm void fn_801A471C(void)
     lwz r12, 0x0(r3)
     lwz r3, 0xc(r12)
     lwz r4, 0x10(r12)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0
@@ -221,7 +221,7 @@ asm void fn_801A4868(void)
     lwz r12, 0x0(r3)
     lwz r3, 0xc(r12)
     lwz r4, 0x10(r12)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0
@@ -321,7 +321,7 @@ asm void fn_801A49B4(void)
     lwz r12, 0x0(r3)
     lwz r3, 0xc(r12)
     lwz r4, 0x10(r12)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0
@@ -1359,12 +1359,12 @@ lbl_fn_801A4E08_000011B4:
     cmpwi r0, 0x0
     beq lbl_fn_801A4E08_00001270
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x4c(r3)
     cmpwi r0, 0x1
     bne lbl_fn_801A4E08_00001270
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x50(r3)
     cmpwi r0, 0x5
     bne lbl_fn_801A4E08_00001270

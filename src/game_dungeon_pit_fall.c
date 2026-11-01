@@ -30,8 +30,8 @@ extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -1103,7 +1103,7 @@ asm void fn_803E836C(void)
     addi r5, r5, fn_803E877C@l
     li r6, 0x30
     li r7, 0x4
-    bl fn_806958E0
+    bl __construct_new_array
     li r4, 0x1
     stw r4, 0x10c(r31)
     li r3, 0x0
@@ -1270,7 +1270,7 @@ lbl_fn_803E836C_000011E4:
     addi r5, r5, fn_803E8908@l
     li r6, 0xe0
     li r7, 0x20
-    bl fn_806958E0
+    bl __construct_new_array
 lbl_fn_803E836C_0000120C:
     stw r31, lbl_8087F498
 lbl_fn_803E836C_00001210:
@@ -1522,14 +1522,14 @@ lbl_fn_803E8948_00001510:
     addi r4, r4, fn_803E8908@l
     li r5, 0xe0
     li r6, 0x20
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_803E8948_0000156C:
     lis r4, fn_803E877C@ha
     addi r3, r27, 0x48
     addi r4, r4, fn_803E877C@l
     li r5, 0x30
     li r6, 0x4
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r27
     li r4, 0x0
     bl atn_Task_destructor

@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void fn_8006F72C(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800C31F4(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -443,7 +443,7 @@ lbl_fn_803B4564_000004B8:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x17
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_803B4564_00000528
     lwz r0, 0x64(r31)
@@ -460,7 +460,7 @@ lbl_fn_803B4564_00000528:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x18
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_803B4564_00000568
     lwz r0, 0x68(r31)
@@ -477,7 +477,7 @@ lbl_fn_803B4564_00000568:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x1a
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_803B4564_000005A8
     lwz r0, 0x6c(r31)
@@ -494,7 +494,7 @@ lbl_fn_803B4564_000005A8:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x19
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_803B4564_00000630
     lwz r0, 0x70(r31)
@@ -1718,7 +1718,7 @@ asm void fn_803B5950(void)
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    b fn_800A555C
+    b msg_getMessageById
 lbl_fn_803B5950_00001684:
     li r3, 0x0
     blr

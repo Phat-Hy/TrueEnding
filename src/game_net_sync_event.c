@@ -10,7 +10,7 @@ extern void fn_80061824(void);
 extern void fn_80061AE4(void);
 extern void fn_8006EF48(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_801F4C14(void);
 extern void fn_801F4CB4(void);
 extern void saveSlot_readSummary(void);
@@ -233,7 +233,7 @@ lbl_fn_804CB74C_00000264:
     la r4, lbl_808813D0
 lbl_fn_804CB74C_00000268:
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F580
     addi r4, r1, 0xb0
     li r5, 0x0

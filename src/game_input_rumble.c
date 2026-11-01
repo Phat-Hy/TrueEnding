@@ -23,12 +23,12 @@ extern void fn_800897D8(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800C31F4(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
@@ -1550,7 +1550,7 @@ lbl_fn_802F1A2C_00001320:
 lbl_fn_802F1A2C_00001334:
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r4, lbl_8087F430
     mr r23, r3
     li r5, 0x0
@@ -2481,7 +2481,7 @@ lbl_fn_802F2294_0000209C:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_802F2294_00002170
     mr r3, r30

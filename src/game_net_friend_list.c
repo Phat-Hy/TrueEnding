@@ -86,7 +86,7 @@ extern void fn_8050E514(void);
 extern void printf(void);
 extern void wcscpy(void);
 extern void abort(void);
-extern void fn_806958E0(void);
+extern void __construct_new_array(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -1802,7 +1802,7 @@ lbl_fn_804D0328_00001618:
     addi r4, r4, fn_804D1400@l
     addi r5, r5, fn_804D1414@l
     li r7, 0x15
-    bl fn_806958E0
+    bl __construct_new_array
     addi r28, r29, 0x2b50
     li r31, 0x0
     stw r31, 0xfc(r27)
@@ -1837,7 +1837,7 @@ lbl_fn_804D0328_00001618:
     addi r5, r5, fn_804D1FDC@l
     li r6, 0xd5c
     li r7, 0x8
-    bl fn_806958E0
+    bl __construct_new_array
     addis r3, r29, 0x1
     subi r3, r3, 0x694c
     bl res_MsgHandle_constructor

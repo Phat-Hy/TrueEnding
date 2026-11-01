@@ -39,7 +39,7 @@ extern void fn_8068AD58(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 
 /* External data declarations */
 extern u8 lbl_80752AC8[];
@@ -1476,7 +1476,7 @@ asm void fn_8040D244(void)
     beq lbl_fn_8040D244_00001444
     lis r4, fn_8040B60C@ha
     addi r4, r4, fn_8040B60C@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8040D244_00001444:
     cmpwi r31, 0x0
     stw r31, 0x608(r29)
@@ -1557,7 +1557,7 @@ asm void fn_8040D3A0(void)
     beq lbl_fn_8040D3A0_00001568
     lis r4, fn_8040B60C@ha
     addi r4, r4, fn_8040B60C@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8040D3A0_00001568:
     li r0, 0x0
     stw r0, 0x60c(r30)

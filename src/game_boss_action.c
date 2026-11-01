@@ -32,7 +32,7 @@ extern void fn_80095D44(void);
 extern void fn_800973C0(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800EC254(void);
 extern void fn_800EC2C4(void);
@@ -472,7 +472,7 @@ lbl_fn_80137FC0_00000520:
     bl strcpy
     addi r3, r1, 0x2a0
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r5, r3
     addi r3, r31, 0xb0
     addi r4, r1, 0x1a0

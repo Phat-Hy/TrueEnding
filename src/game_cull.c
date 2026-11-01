@@ -44,8 +44,8 @@ extern void wcslen(void);
 extern void wcscpy(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern void runtime_clampDouble(void);
 
 /* External data declarations */
@@ -632,7 +632,7 @@ asm void fn_800D8C14(void)
     addi r4, r4, atn_LH_Texture_constructor@l
     addi r5, r5, atn_LH_Texture_destructAndFree@l
     li r7, 0x6
-    bl fn_806958E0
+    bl __construct_new_array
     addi r3, r30, 0x2e8
     bl atn_LH_Texture_constructor
     addi r3, r30, 0x318
@@ -811,7 +811,7 @@ lbl_fn_800D8E84_000008AC:
     addi r4, r4, atn_LH_Texture_destructAndFree@l
     li r5, 0x30
     li r6, 0x6
-    bl fn_806959D8
+    bl __destroy_new_array
     addi r3, r30, 0x198
     li r4, -0x1
     bl atn_LH_Texture_destructAndFree

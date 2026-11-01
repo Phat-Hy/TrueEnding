@@ -15,7 +15,7 @@ extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void fn_8011FFF8(void);
@@ -901,7 +901,7 @@ asm void fn_802188B4(void)
     mr r20, r3
     mr r21, r4
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     lis r24, lbl_807423B8@ha
     stw r3, 0x0(r21)
     li r22, 0x0
@@ -964,7 +964,7 @@ lbl_fn_802188B4_00000B78:
     b lbl_fn_802188B4_00000BB0
 lbl_fn_802188B4_00000B98:
     mr r3, r23
-    bl fn_800DC12C
+    bl str_parseInt
     cmpwi r3, 0x0
     ble lbl_fn_802188B4_00000BB0
     stw r31, 0x4(r21)

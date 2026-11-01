@@ -28,7 +28,7 @@ struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct 
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
 extern void atn_LH_Texture_update(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800DC3CC(void);
 extern void fn_80453DBC(void);
@@ -55,7 +55,7 @@ extern void wcslen(void);
 extern void wcscmp(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 extern char* strcpy(char* dest, const char* src);
 
 /* External data declarations */
@@ -979,71 +979,71 @@ lbl_fn_805305D4_00000C9C:
     bl strcpy
     addi r3, r1, 0x8c
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x28(r1)
     addi r3, r1, 0x8c
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x4c(r1)
     addi r3, r1, 0x8c
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x50(r1)
     addi r3, r1, 0x8c
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x54(r1)
     addi r3, r1, 0x8c
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x58(r1)
     addi r3, r1, 0x8c
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x5c(r1)
     addi r3, r1, 0x8c
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x60(r1)
     addi r3, r1, 0x8c
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x64(r1)
     addi r3, r1, 0x8c
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x68(r1)
     addi r3, r1, 0x8c
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x6c(r1)
     addi r3, r1, 0x8c
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x70(r1)
     addi r3, r1, 0x8c
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x74(r1)
     addi r3, r1, 0x8c
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x78(r1)
     addi r3, r1, 0x8c
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x7c(r1)
     addi r3, r1, 0x8c
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x80(r1)
     addi r3, r1, 0x8c
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x84(r1)
     addi r3, r1, 0x8c
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r17, 0x4(r20)
     lwz r4, 0x8(r20)
     stw r3, 0x88(r1)
@@ -1806,7 +1806,7 @@ lbl_fn_8053121C_00001880:
     beq lbl_fn_8053121C_000018A0
     lis r4, fn_805311DC@ha
     addi r4, r4, fn_805311DC@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8053121C_000018A0:
     li r0, 0x0
     stw r0, 0x70(r30)
@@ -1998,7 +1998,7 @@ lbl_fn_80531398_00001AD4:
     beq lbl_fn_80531398_00001B38
     lis r4, fn_805311DC@ha
     addi r4, r4, fn_805311DC@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80531398_00001B38:
     cmpwi r23, 0x0
     stw r23, 0x6c(r26)

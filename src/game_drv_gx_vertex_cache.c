@@ -27,7 +27,7 @@ extern void fn_805DAD10(void);
 extern void fn_805DAD20(void);
 extern void fn_805DF630(void);
 extern void fn_80607DD0(void);
-extern void fn_80695B00(void);
+extern void __ptmf_scall(void);
 
 /* External data declarations */
 extern u8 lbl_80764630[];
@@ -218,7 +218,7 @@ asm void fn_805DFB50(void)
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     stw r29, 0x40(r1)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lis r4, lbl_80764630@ha
     lis r5, lbl_80764640@ha
@@ -490,7 +490,7 @@ lbl_fn_805DFB50_000005C4:
 lbl_fn_805DFB50_00000630:
     addi r3, r1, 0x40
     addi r12, r1, 0x44
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     mr r26, r3
 lbl_fn_805DFB50_00000644:

@@ -37,7 +37,7 @@ extern void fn_800BFAC8(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void fn_802180A8(void);
@@ -1897,7 +1897,7 @@ lbl_fn_80363284_00001848:
     cmpwi r3, 0x0
     beq lbl_fn_80363284_00001884
     addi r3, r30, 0x10
-    bl fn_800DC12C
+    bl str_parseInt
     neg r4, r3
     lwz r0, 0x3dc(r29)
     or r3, r4, r3

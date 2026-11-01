@@ -16,7 +16,7 @@ extern void mem_getAllocSize(void);
 extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_8011F91C(void);
@@ -35,8 +35,8 @@ extern void fn_805AEAC4(void);
 extern void fn_805B202C(void);
 extern void fn_805B2564(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -150,7 +150,7 @@ asm void fn_805B342C(void)
     li r5, 0x8
     li r6, 0x3
     addi r3, r3, 0x80
-    bl fn_806959D8
+    bl __destroy_new_array
     addic. r3, r30, 0x78
     beq lbl_fn_805B342C_000000C4
     li r4, 0x0
@@ -256,7 +256,7 @@ asm void fn_805B3518(void)
     addi r5, r5, atn_LH_Binary_destructor@l
     li r6, 0x8
     li r7, 0x3
-    bl fn_806958E0
+    bl __construct_new_array
     stw r30, lbl_8087FA04
     lwz r0, 0x64(r28)
     cmpwi r0, 0x0
@@ -1225,7 +1225,7 @@ asm void fn_805B41A8(void)
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x2
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_805B41A8_00000E88
     lwz r3, 0x6c(r29)
@@ -1240,7 +1240,7 @@ lbl_fn_805B41A8_00000E88:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x3
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_805B41A8_00000EC0
     lwz r3, 0x6c(r29)

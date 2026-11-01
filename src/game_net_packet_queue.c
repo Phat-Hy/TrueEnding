@@ -13,7 +13,7 @@ extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_80116FC0(void);
 extern void fn_801F4AA0(void);
 extern void fn_801FEC74(void);
@@ -52,7 +52,7 @@ extern void fn_80624D40(void);
 extern void wmemcpy(void);
 extern void wcslen(void);
 extern void wcsncmp(void);
-extern void fn_806959D8(void);
+extern void __destroy_new_array(void);
 
 /* External data declarations */
 extern u8 jumptable_80790930[];
@@ -122,7 +122,7 @@ asm void fn_804AF1BC(void)
     stw r5, 0x48(r3)
     crclr 6
     addi r3, r3, 0x8
-    bl fn_800DD3FC
+    bl wcs_vformat
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -152,7 +152,7 @@ asm void fn_804AF210(void)
     stw r5, 0x48(r3)
     crclr 6
     addi r3, r3, 0x8
-    bl fn_800DD3FC
+    bl wcs_vformat
     cmpwi r31, 0x0
     ble lbl_fn_804AF210_000000B0
     mr r3, r30
@@ -204,7 +204,7 @@ lbl_fn_804AF288_00000130:
     addi r4, r4, fn_804AF210@l
     li r5, 0x50
     li r6, 0x41
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_804AF288_00000150:
     addic. r3, r30, 0xbd4
     beq lbl_fn_804AF288_00000170
@@ -213,7 +213,7 @@ lbl_fn_804AF288_00000150:
     addi r4, r4, fn_804AF210@l
     li r5, 0x50
     li r6, 0x1e
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_804AF288_00000170:
     addic. r3, r30, 0x268
     beq lbl_fn_804AF288_00000190
@@ -222,7 +222,7 @@ lbl_fn_804AF288_00000170:
     addi r4, r4, fn_804AF210@l
     li r5, 0x50
     li r6, 0x1e
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_804AF288_00000190:
     mr r3, r30
     li r4, 0x0
@@ -1099,7 +1099,7 @@ lbl_fn_804AF520_00000DBC:
     addi r3, r1, 0x110
     addi r4, r4, lbl_80790B70@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r4, 0x64(r30)
     addi r3, r26, 0x381
     addi r24, r4, 0x58
@@ -1575,7 +1575,7 @@ lbl_fn_804AF520_000014D0:
     stw r27, 0x48(r3)
     crclr 6
     addi r3, r3, 0x8
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r24, r24, 0x1
 lbl_fn_804AF520_0000150C:
     lwz r12, 0x8(r25)
@@ -1626,7 +1626,7 @@ lbl_fn_804AF520_00001554:
     lwz r4, 0x1c(r26)
     crclr 6
     addi r3, r3, 0x8
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r12, 0x8(r24)
     mr r3, r24
     mr r4, r25

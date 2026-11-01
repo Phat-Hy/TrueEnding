@@ -10,7 +10,7 @@ extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800E854C(void);
 extern void fn_800EE4D8(void);
@@ -828,7 +828,7 @@ lbl_fn_80355DD8_000009E8:
     bne lbl_fn_80355DD8_00000A10
     addi r3, r1, 0x1c
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x151c(r31)
     b lbl_fn_80355DD8_00000C5C
 lbl_fn_80355DD8_00000A10:
@@ -839,7 +839,7 @@ lbl_fn_80355DD8_00000A10:
     bne lbl_fn_80355DD8_00000A38
     addi r3, r1, 0x1c
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1520(r31)
     b lbl_fn_80355DD8_00000C5C
 lbl_fn_80355DD8_00000A38:

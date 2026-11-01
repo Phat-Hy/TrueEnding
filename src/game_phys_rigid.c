@@ -34,7 +34,7 @@ extern void fn_80239D58(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void world_getGlobalFlag(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_803750E4(void);
 extern void fn_80375184(void);
 extern void fn_80376210(void);
@@ -389,11 +389,11 @@ lbl_fn_8010A308_00000424:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_8010A308_00000454
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_8010A308_00000454
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x48(r3)
     cmpwi r0, 0x1
     bne lbl_fn_8010A308_00000454

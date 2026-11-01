@@ -82,8 +82,8 @@ extern void fn_8068AE9C(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void fn_8068B100(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 
 /* External data declarations */
 extern u8 lbl_8074A490[];
@@ -1868,7 +1868,7 @@ lbl_fn_8034515C_00001824:
     addi r4, r4, fn_8000D760@l
     li r5, 0xc
     li r6, 0x9
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r29
     li r4, 0x0
     bl fn_8035B78C
@@ -1920,7 +1920,7 @@ asm void fn_80345384(void)
     stw r28, 0x1550(r31)
     li r6, 0xc
     li r7, 0x9
-    bl fn_806958E0
+    bl __construct_new_array
     stw r28, 0x15cc(r31)
     addi r3, r31, 0x15dc
     stw r28, 0x15d0(r31)

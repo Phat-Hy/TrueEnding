@@ -20,7 +20,7 @@ extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
 extern void world_getLocalFlag(void);
 extern void fn_80371164(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_803754F0(void);
 extern void fn_80375D0C(void);
 extern void fn_8039BF04(void);
@@ -246,7 +246,7 @@ asm void fn_803AAC60(void)
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_803AAC60_00000228
-    bl fn_80373148
+    bl kpad_getClampData
     b lbl_fn_803AAC60_0000022C
 lbl_fn_803AAC60_00000228:
     li r3, 0x0
@@ -275,7 +275,7 @@ lbl_fn_803AAC60_0000022C:
     fdivs f31, f31, f0
 lbl_fn_803AAC60_00000284:
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     fmr f2, f31
     lfs f1, 0xc(r30)
     mr r4, r31

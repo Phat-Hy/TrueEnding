@@ -35,7 +35,7 @@ extern void mem_realloc(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void fn_800D5908(void);
 extern void fn_800DBF68(void);
-extern void fn_800DC1DC(void);
+extern void wcs_parseInt(void);
 extern void fn_800E19AC(void);
 extern void fn_8020A3E4(void);
 extern void fn_8046A514(void);
@@ -63,7 +63,7 @@ extern void strstr(void);
 extern void wcslen(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -117,7 +117,7 @@ asm void fn_8046B798(void)
     lis r4, fn_8046A514@ha
     mr r3, r0
     addi r4, r4, fn_8046A514@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8046B798_00000038:
     li r0, 0x0
     stw r0, 0x9c(r25)
@@ -182,7 +182,7 @@ lbl_fn_8046B798_000000FC:
     beq lbl_fn_8046B798_00000124
     lis r4, fn_8046A514@ha
     addi r4, r4, fn_8046A514@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8046B798_00000124:
     cmpwi r24, 0x0
     stw r24, 0x98(r25)
@@ -234,15 +234,15 @@ lbl_fn_8046B798_000001B4:
     beq lbl_fn_8046B798_000003A4
     lwz r0, 0x9c(r25)
     add r28, r0, r27
-    bl fn_800DC1DC
+    bl wcs_parseInt
     stw r3, 0x0(r28)
     addi r3, r1, 0x130
     bl talk_parseDialogue
-    bl fn_800DC1DC
+    bl wcs_parseInt
     stw r3, 0x4(r28)
     addi r3, r1, 0x130
     bl talk_parseDialogue
-    bl fn_800DC1DC
+    bl wcs_parseInt
     stw r3, 0x8(r28)
     addi r3, r1, 0x30
     li r4, 0x0

@@ -104,8 +104,8 @@ extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void strcmp(void);
 extern void fn_8068AE9C(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -1839,7 +1839,7 @@ asm void fn_805A6270(void)
     li r7, 0x2
     stw r0, 0x4c(r27)
     stw r0, 0x50(r27)
-    bl fn_806958E0
+    bl __construct_new_array
     bl SCGetLanguage
     lis r4, lbl_807637FC@ha
     clrlwi r30, r3, 24
@@ -1914,7 +1914,7 @@ lbl_arms_destructorBase_000019CC:
     addi r4, r4, atn_LH_Texture_destructAndFree@l
     li r6, 0x2
     addi r3, r3, 0x54
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
     bl atn_Task_destructor

@@ -62,7 +62,7 @@ extern void strncmp(void);
 extern void atoi(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -1594,7 +1594,7 @@ asm void fn_80499734(void)
     lis r4, fn_8049707C@ha
     mr r3, r0
     addi r4, r4, fn_8049707C@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80499734_00001420:
     cmpwi r30, 0x0
     stw r30, 0x0(r29)

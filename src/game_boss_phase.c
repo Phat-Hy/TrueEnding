@@ -93,9 +93,9 @@ extern void rand(void);
 extern void strcmp(void);
 extern void strstr(void);
 extern void atoi(void);
-extern void fn_806959D8(void);
+extern void __destroy_new_array(void);
 extern void vec3_isNonZero(void);
-extern void fn_80695B00(void);
+extern void __ptmf_scall(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -421,13 +421,13 @@ lbl_fn_80136138_0000038C:
     addi r4, r4, fn_8000D7DC@l
     li r5, 0xc
     li r6, 0x2
-    bl fn_806959D8
+    bl __destroy_new_array
     lis r4, fn_8011D394@ha
     addi r3, r27, 0x4
     addi r4, r4, fn_8011D394@l
     li r5, 0x20
     li r6, 0x2
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_80136138_000003C4:
     addi r3, r30, 0x10d8
     li r4, -0x1
@@ -1338,7 +1338,7 @@ asm void fn_801370C8(void)
     mr r12, r3
     stw r0, 0x14(r1)
     lwz r3, 0xc(r3)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0

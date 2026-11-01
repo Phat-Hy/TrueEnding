@@ -183,7 +183,7 @@ void fn_8037309C(void);
 void fn_80373100(void);
 void fn_80373108(void);
 void fn_80373118(void);
-void fn_80373148(void);
+void kpad_getClampData(void);
 void fn_80373164(void);
 void fn_803731E8(void);
 void fn_803737C0(void);
@@ -1044,15 +1044,15 @@ asm void fn_80373118(void)
     blr
 }
 
-asm void fn_80373148(void)
+asm void kpad_getClampData(void)
 {
     nofralloc
     lwz r3, 0x10d8(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80373148_00000BE8
+    beq lbl_kpad_getClampData_00000BE8
     lwz r3, 0x64(r3)
     blr
-lbl_fn_80373148_00000BE8:
+lbl_kpad_getClampData_00000BE8:
     li r3, 0x0
     blr
 }

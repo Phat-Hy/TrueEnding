@@ -53,7 +53,7 @@ extern void fn_8068AE9C(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void fn_8068B100(void);
-extern void fn_80695B00(void);
+extern void __ptmf_scall(void);
 
 /* External data declarations */
 extern u8 lbl_8074A8D8[];
@@ -1344,7 +1344,7 @@ asm void fn_80353224(void)
     lwz r12, 0x0(r3)
     lwz r3, 0xc(r12)
     lwz r4, 0x10(r12)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0

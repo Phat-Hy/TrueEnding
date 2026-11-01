@@ -10,8 +10,8 @@ extern void mem_alloc(void);
 extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB688(void);
-extern void fn_800DC1DC(void);
-extern void fn_800DD3FC(void);
+extern void wcs_parseInt(void);
+extern void wcs_vformat(void);
 extern void fn_8017A450(void);
 extern void fn_803E6BF0(void);
 extern void PSMTXRotRad(void);
@@ -312,7 +312,7 @@ lbl_fn_8054D798_000000B8:
     bne lbl_fn_8054D798_000000F8
     lwz r18, lbl_8087F490
     mr r3, r21
-    bl fn_800DC1DC
+    bl wcs_parseInt
     mr r5, r3
     mr r3, r18
     mr r4, r27
@@ -631,7 +631,7 @@ lbl_fn_8054D798_000004E4:
     addi r3, r1, 0xc0
     addi r4, r4, 0x12
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r21, r1, 0xc0
     addi r20, r1, 0x2c
     cmplw r21, r20

@@ -49,7 +49,7 @@ extern void strrchr(void);
 extern void strstr(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -998,7 +998,7 @@ asm void atn_LoadMotionCommandData_slot0(void)
     beq lbl_atn_LoadMotionCommandData_slot0_00000B44
     lis r4, fn_80041C0C@ha
     addi r4, r4, fn_80041C0C@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_atn_LoadMotionCommandData_slot0_00000B44:
     addic. r0, r31, 0x18
     beq lbl_atn_LoadMotionCommandData_slot0_00000B64
@@ -1007,7 +1007,7 @@ lbl_atn_LoadMotionCommandData_slot0_00000B44:
     beq lbl_atn_LoadMotionCommandData_slot0_00000B64
     lis r4, fn_800EF73C@ha
     addi r4, r4, fn_800EF73C@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_atn_LoadMotionCommandData_slot0_00000B64:
     addic. r0, r31, 0xc
     beq lbl_atn_LoadMotionCommandData_slot0_00000B84
@@ -1016,7 +1016,7 @@ lbl_atn_LoadMotionCommandData_slot0_00000B64:
     beq lbl_atn_LoadMotionCommandData_slot0_00000B84
     lis r4, fn_802375C4@ha
     addi r4, r4, fn_802375C4@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_atn_LoadMotionCommandData_slot0_00000B84:
     cmpwi r31, 0x0
     beq lbl_atn_LoadMotionCommandData_slot0_00000BA4
@@ -1338,7 +1338,7 @@ lbl_atn_LoadMotionCommandData_constructor_00000F9C:
     beq lbl_atn_LoadMotionCommandData_constructor_00000FBC
     lis r4, fn_80476D00@ha
     addi r4, r4, fn_80476D00@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_atn_LoadMotionCommandData_constructor_00000FBC:
     li r0, 0x0
     stw r0, 0x60(r30)
@@ -1728,7 +1728,7 @@ lbl_fn_80476ED4_00001504:
     beq lbl_fn_80476ED4_00001530
     lis r4, fn_80476D00@ha
     addi r4, r4, fn_80476D00@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80476ED4_00001530:
     cmpwi r16, 0x0
     stw r16, 0x5c(r30)
@@ -2071,7 +2071,7 @@ asm void atn_LoadScene_constructor(void)
     beq lbl_atn_LoadScene_constructor_000019C4
     lis r4, fn_8004B338@ha
     addi r4, r4, fn_8004B338@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_atn_LoadScene_constructor_000019C4:
     li r0, 0x0
     stw r0, 0x6c(r30)

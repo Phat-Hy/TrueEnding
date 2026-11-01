@@ -18,7 +18,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A2D20(void);
 extern void fn_800BFAC8(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void fn_800EB7A0(void);
@@ -333,7 +333,7 @@ lbl_fn_80244898_000002C4:
     bne lbl_fn_80244898_000002F4
     addi r3, r1, 0x118
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x14bc(r28)
     b lbl_fn_80244898_0000051C
 lbl_fn_80244898_000002F4:
@@ -356,7 +356,7 @@ lbl_fn_80244898_0000031C:
 lbl_fn_80244898_00000330:
     addi r3, r1, 0x118
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r31, r3
     bl fn_80121F00
     bl fn_8013C504
@@ -381,7 +381,7 @@ lbl_fn_80244898_00000374:
 lbl_fn_80244898_00000388:
     addi r3, r1, 0x118
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r31, r3
     bl fn_80121F00
     bl fn_8013C504
@@ -406,7 +406,7 @@ lbl_fn_80244898_000003CC:
 lbl_fn_80244898_000003E0:
     addi r3, r1, 0x118
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r31, r3
     bl fn_801A03E0
     mr r4, r31
@@ -458,7 +458,7 @@ lbl_fn_80244898_00000488:
 lbl_fn_80244898_0000049C:
     addi r3, r1, 0x118
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r31, r3
     bl fn_801A03E0
     mr r4, r31
@@ -484,7 +484,7 @@ lbl_fn_80244898_000004DC:
 lbl_fn_80244898_000004F8:
     addi r3, r1, 0x118
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     bl task_findEntryById
     addi r29, r29, 0x1
     stw r3, 0x1520(r31)

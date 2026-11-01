@@ -26,7 +26,7 @@ extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800DD8A8(void);
 extern void fn_801092C8(void);
@@ -69,7 +69,7 @@ extern void strcmp(void);
 extern void atoi(void);
 extern void wcscpy(void);
 extern void fn_8068B2A0(void);
-extern void fn_806959D8(void);
+extern void __destroy_new_array(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -147,7 +147,7 @@ asm void fn_80431320(void)
     addi r4, r4, fn_80069758@l
     li r6, 0x3
     addi r3, r3, 0x100
-    bl fn_806959D8
+    bl __destroy_new_array
     cmpwi r31, 0x0
     ble lbl_fn_80431320_00000058
     mr r3, r30
@@ -190,7 +190,7 @@ asm void fn_80431388(void)
     addi r4, r4, fn_80431320@l
     li r5, 0x29c
     li r6, 0x10
-    bl fn_806959D8
+    bl __destroy_new_array
     addic. r31, r29, 0x4c4
     beq lbl_fn_80431388_000000FC
     mr r3, r31
@@ -1452,7 +1452,7 @@ lbl_fn_8043239C_000012F4:
     bne lbl_fn_8043239C_00001320
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mulli r0, r3, 0x1e
     stw r0, 0x304c(r29)
     b lbl_fn_8043239C_000013AC
@@ -1464,7 +1464,7 @@ lbl_fn_8043239C_00001320:
     bne lbl_fn_8043239C_0000134C
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mulli r0, r3, 0x1e
     stw r0, 0x3058(r29)
     b lbl_fn_8043239C_000013AC
@@ -1491,7 +1491,7 @@ lbl_fn_8043239C_00001384:
     bne lbl_fn_8043239C_000013AC
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mulli r0, r3, 0x1e
     stw r0, 0x3050(r29)
 lbl_fn_8043239C_000013AC:

@@ -24,8 +24,8 @@ extern void fn_8061C8A0(void);
 extern void fn_8061D4C0(void);
 extern void printf(void);
 extern void abort(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -987,7 +987,7 @@ lbl_fn_805BEEC8_00000C08:
     addi r4, r4, fn_805BEFD0@l
     addi r5, r5, fn_805BEFE8@l
     li r7, 0xd
-    bl fn_806958E0
+    bl __construct_new_array
     lwz r31, 0x1c(r1)
     mr r3, r29
     lwz r30, 0x18(r1)
@@ -1143,7 +1143,7 @@ asm void fn_805BF168(void)
     addi r4, r4, fn_805BEFE8@l
     li r6, 0xd
     addi r3, r3, 0x24
-    bl fn_806959D8
+    bl __destroy_new_array
     addic. r0, r30, 0x18
     beq lbl_fn_805BF168_00000E40
     lwz r0, 0x18(r30)

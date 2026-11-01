@@ -18,7 +18,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void save_validateHeader(void);
 extern void fn_801F4728(void);
 extern void fn_801F4998(void);
@@ -962,7 +962,7 @@ lbl_fn_804B50C0_00000B0C:
     stw r28, 0x20(r1)
     stw r28, 0x24(r1)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r4, 0x4c(r31)
     lis r30, lbl_80758150@ha
     addi r30, r30, lbl_80758150@l
@@ -981,7 +981,7 @@ lbl_fn_804B50C0_00000B0C:
     stw r28, 0x10(r1)
     stw r28, 0x14(r1)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r4, 0x4c(r31)
     addi r3, r30, 0xf5
     addi r27, r4, 0x58

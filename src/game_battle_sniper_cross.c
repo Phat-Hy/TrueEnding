@@ -54,8 +54,8 @@ extern void PSMTXRotRad(void);
 extern void PSMTXScale(void);
 extern void PSVECMag(void);
 extern void strcmp(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -251,7 +251,7 @@ asm void fn_803F69E4(void)
     addi r5, r5, fn_803F6B04@l
     li r6, 0x38
     li r7, 0x2
-    bl fn_806958E0
+    bl __construct_new_array
     addi r3, r30, 0x168
     bl fn_800CB360
     li r0, 0x1
@@ -372,7 +372,7 @@ lbl_fn_803F6B88_00000338:
     addi r4, r4, fn_803F6B04@l
     li r5, 0x38
     li r6, 0x2
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
     bl fn_803EC69C

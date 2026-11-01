@@ -10,7 +10,7 @@ extern void fn_80061824(void);
 extern void fn_8006EF48(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_801F4728(void);
 extern void fn_801F4CB4(void);
 extern void saveSlot_readSummary(void);
@@ -784,7 +784,7 @@ lbl_fn_804C6E20_00000A14:
     la r5, lbl_808813D0
 lbl_fn_804C6E20_00000A18:
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lfs f31, lbl_808874C8
     addi r4, r1, 0x8
     lfs f29, lbl_808874C0
@@ -1401,7 +1401,7 @@ lbl_fn_804C76EC_0000130C:
     addi r3, r1, 0xb0
     addi r4, r23, 0x10
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F610
     mr r4, r30
     bl fn_804EB484
@@ -1608,7 +1608,7 @@ lbl_fn_804C7C34_00001614:
     mr r4, r31
     addi r3, r1, 0x48
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r4, 0xc8(r29)
     lis r3, lbl_80758E44@ha
     addi r3, r3, lbl_80758E44@l
@@ -1844,7 +1844,7 @@ lbl_fn_804C7D7C_00001944:
     addi r4, r14, 0x18
     neg r5, r5
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r4, 0x80(r31)
     addi r3, r23, 0x408
     addi r21, r4, 0x58

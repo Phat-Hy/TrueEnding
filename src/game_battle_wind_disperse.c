@@ -33,7 +33,7 @@ extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
 extern void rand(void);
 extern void std_fmod(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 
 /* External data declarations */
 extern u8 jumptable_8078DF88[];
@@ -1679,7 +1679,7 @@ lbl_fn_8042000C_00001644:
     beq lbl_fn_8042000C_00001674
     lis r4, atn_LH_Texture_destructAndFree@ha
     addi r4, r4, atn_LH_Texture_destructAndFree@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8042000C_00001674:
     li r0, 0x0
     stw r0, 0x40(r31)

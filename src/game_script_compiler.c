@@ -63,7 +63,7 @@ extern void PSVECSquareMag(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void std_atan2(void);
-extern void fn_806958E0(void);
+extern void __construct_new_array(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -1631,7 +1631,7 @@ asm void fn_802558B0(void)
     stw r29, 0x14fc(r30)
     stw r28, 0x1500(r30)
     stw r28, 0x1510(r30)
-    bl fn_806958E0
+    bl __construct_new_array
     stw r28, 0x15ec(r30)
     addi r3, r30, 0x15f8
     stw r28, 0x15f0(r30)

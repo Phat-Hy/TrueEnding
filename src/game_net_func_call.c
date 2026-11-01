@@ -44,8 +44,8 @@ extern void fn_805043C0(void);
 extern void fn_805045EC(void);
 extern void fn_80504818(void);
 extern void strcmp(void);
-extern void fn_806959D8(void);
-extern void fn_80695B00(void);
+extern void __destroy_new_array(void);
+extern void __ptmf_scall(void);
 
 /* External data declarations */
 extern u8 lbl_8075A980[];
@@ -321,7 +321,7 @@ asm void fn_80502368(void)
     addi r4, r4, fn_80119ECC@l
     li r5, 0x2d4
     li r6, 0x1c
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_80502368_000002D0:
     addic. r3, r31, 0x539c
     beq lbl_fn_80502368_000002EC
@@ -329,7 +329,7 @@ lbl_fn_80502368_000002D0:
     li r5, 0x240
     addi r4, r4, fn_8012AFE8@l
     li r6, 0x7
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_80502368_000002EC:
     mr r3, r31
     bl dtor_80084684
@@ -1362,7 +1362,7 @@ asm void fn_8050326C(void)
     mr r12, r3
     stw r0, 0x14(r1)
     lwz r3, 0xc(r3)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0
@@ -1537,7 +1537,7 @@ asm void fn_805034B0(void)
     mr r12, r3
     stw r0, 0x14(r1)
     lwz r3, 0xc(r3)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0
@@ -1712,7 +1712,7 @@ asm void fn_805036F4(void)
     mr r12, r3
     stw r0, 0x14(r1)
     lwz r3, 0xc(r3)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0
@@ -1887,7 +1887,7 @@ asm void fn_80503938(void)
     mr r12, r3
     stw r0, 0x14(r1)
     lwz r3, 0xc(r3)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0

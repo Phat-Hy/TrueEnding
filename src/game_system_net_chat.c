@@ -13,7 +13,7 @@ extern void fn_800697D8(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_8009373C(void);
 extern void fn_80093B88(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CFD18(void);
@@ -43,7 +43,7 @@ extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void world_getGlobalFlag(void);
 extern void world_getLocalFlag(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_80374710(void);
 extern void fn_803748E0(void);
 extern void fn_80374964(void);
@@ -656,7 +656,7 @@ lbl_fn_803A3AB4_0000071C:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_803A3AB4_00000774
     lis r4, lbl_8074EF78@ha
@@ -708,7 +708,7 @@ asm void fn_803A3BF4(void)
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_803A3BF4_000007E8
-    bl fn_80373148
+    bl kpad_getClampData
     mr r31, r3
     b lbl_fn_803A3BF4_000007EC
 lbl_fn_803A3BF4_000007E8:

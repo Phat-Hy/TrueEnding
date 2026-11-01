@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_14(void);
 extern void _savegpr_14(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void assert_formatLocation(void);
 extern void fn_8020EFEC(void);
 extern void event_findEntryById(void);
@@ -1394,7 +1394,7 @@ lbl_fn_80591D8C_0000139C:
     addi r3, r1, 0x88
     addi r4, r4, lbl_80796ACC@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x88
     li r4, 0x2b
     bl wcschr
@@ -1408,7 +1408,7 @@ lbl_fn_80591D8C_000013E4:
     addi r3, r1, 0x8
     addi r4, r4, lbl_80796ACC@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x8
     li r4, 0x2b
     bl wcschr
@@ -1876,7 +1876,7 @@ lbl_fn_80592468_00001A7C:
     addi r3, r1, 0x368
     addi r4, r4, lbl_80796ACC@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x368
     li r4, 0x2b
     bl wcschr
@@ -1890,7 +1890,7 @@ lbl_fn_80592468_00001AC4:
     addi r3, r1, 0x3e8
     addi r4, r4, lbl_80796ACC@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x3e8
     li r4, 0x2b
     bl wcschr
@@ -1981,7 +1981,7 @@ lbl_fn_80592468_00001BFC:
     addi r3, r1, 0x268
     addi r4, r4, lbl_80796ACC@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x268
     li r4, 0x2b
     bl wcschr
@@ -1995,7 +1995,7 @@ lbl_fn_80592468_00001C44:
     addi r3, r1, 0x2e8
     addi r4, r4, lbl_80796ACC@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x2e8
     li r4, 0x2b
     bl wcschr
@@ -2207,7 +2207,7 @@ lbl_fn_80592468_00001F58:
     addi r3, r1, 0x110
     addi r4, r4, lbl_80796ACC@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x110
     li r4, 0x2b
     bl wcschr
@@ -2221,7 +2221,7 @@ lbl_fn_80592468_00001FA0:
     addi r3, r1, 0x190
     addi r4, r4, lbl_80796ACC@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x190
     li r4, 0x2b
     bl wcschr

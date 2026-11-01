@@ -40,7 +40,7 @@ extern void vsprintf(void);
 extern void strncpy(void);
 extern void strstr(void);
 extern void abort(void);
-extern void fn_806958E0(void);
+extern void __construct_new_array(void);
 extern void runtime_clampDouble(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -802,7 +802,7 @@ asm void fn_800696C8(void)
     addi r5, r5, fn_80069798@l
     li r7, 0x40
     addi r3, r3, 0x4
-    bl fn_806958E0
+    bl __construct_new_array
 lbl_fn_800696C8_00000984:
     stw r31, lbl_8087EEB8
 lbl_fn_800696C8_00000988:

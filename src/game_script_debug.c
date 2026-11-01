@@ -19,7 +19,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void fn_800E9ED8(void);
 extern void fn_800EFC64(void);
 extern void system_getNextSequenceId(void);
@@ -684,7 +684,7 @@ lbl_fn_80250ECC_000007B4:
     bne lbl_fn_80250ECC_00000830
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r0, 0x78(r31)
     li r4, 0x0
     li r5, 0x0
@@ -718,7 +718,7 @@ lbl_fn_80250ECC_00000830:
     bne lbl_fn_80250ECC_000008A4
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r0, 0x78(r31)
     li r4, 0x0
     li r5, 0x0

@@ -44,7 +44,7 @@ extern void strcmp(void);
 extern void abort(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_80695B00(void);
+extern void __ptmf_scall(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -461,7 +461,7 @@ asm void fn_801CAFB4(void)
     lwz r12, 0x0(r3)
     lwz r3, 0xc(r12)
     lwz r4, 0x10(r12)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0
@@ -561,7 +561,7 @@ asm void fn_801CB100(void)
     lwz r12, 0x0(r3)
     lwz r3, 0xc(r12)
     lwz r4, 0x10(r12)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0
@@ -1535,7 +1535,7 @@ asm void fn_801CBE84(void)
     lwz r3, 0xc(r12)
     addi r4, r12, 0x10
     lbz r5, 0x1c(r12)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0

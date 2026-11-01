@@ -11,7 +11,7 @@ extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80109828(void);
@@ -139,7 +139,7 @@ lbl_fn_80300654_000000B4:
     lwz r5, 0x60(r30)
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x8
     bl fn_80109828
@@ -392,7 +392,7 @@ lbl_fn_803009F4_00000454:
     lwz r5, 0x60(r31)
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x8
     bl fn_80109828
@@ -565,7 +565,7 @@ lbl_fn_80300AD8_000006E0:
     lwz r5, 0x60(r30)
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x188
     bl fn_80109828
@@ -855,7 +855,7 @@ lbl_fn_803010BC_00000B28:
     lwz r5, 0x60(r31)
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x8
     bl fn_80109828
@@ -871,7 +871,7 @@ lbl_fn_803010BC_00000B60:
     lwz r5, 0x60(r31)
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x8
     bl fn_80109828
@@ -1785,7 +1785,7 @@ lbl_fn_80301DDC_00001910:
     lwz r5, 0x60(r31)
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x3b8
     bl fn_80109828

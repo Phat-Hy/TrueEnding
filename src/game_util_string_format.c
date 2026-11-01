@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_14(void);
 extern void _savegpr_14(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void assert_formatLocation(void);
 extern void event_findEntryById(void);
 extern void fn_80595F7C(void);
@@ -105,7 +105,7 @@ lbl_fn_80593030_000000F4:
     addi r3, r1, 0xe8
     addi r4, r30, lbl_80796ACC@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0xe8
     li r4, 0x2b
     bl wcschr
@@ -117,7 +117,7 @@ lbl_fn_80593030_00000134:
     addi r3, r1, 0x68
     addi r4, r30, lbl_80796ACC@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x68
     li r4, 0x2b
     bl wcschr

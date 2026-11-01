@@ -11,7 +11,7 @@ extern void fn_80045510(void);
 extern void fn_800C31F4(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_800EFBC4(void);
 extern void fn_800EFE3C(void);
 extern void fn_801092C8(void);
@@ -1351,7 +1351,7 @@ lbl_fn_8010CF28_000010B4:
     lwz r6, 0x8(r6)
     lwz r7, 0x18(r1)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_8010CF28_000010F4
 lbl_fn_8010CF28_000010CC:
     lwz r4, lbl_8087F1E4
@@ -1365,7 +1365,7 @@ lbl_fn_8010CF28_000010E4:
 lbl_fn_8010CF28_000010E8:
     lwz r5, 0x1c(r1)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
 lbl_fn_8010CF28_000010F4:
     lwz r3, lbl_8087F0A8
     lwz r0, 0x6c(r3)

@@ -6,7 +6,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void mem_alloc(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
@@ -1459,7 +1459,7 @@ asm void fn_8058C750(void)
     stw r0, 0x6078(r6)
     lwz r30, lbl_8087EF70
     mr r3, r30
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_8058C750_00001584
     addis r3, r31, 0x2
@@ -1593,7 +1593,7 @@ lbl_fn_8058C750_00001584:
     mr r3, r30
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_8058C750_00001628
     lwz r3, lbl_8087F430
@@ -1709,7 +1709,7 @@ lbl_fn_8058CA48_00001700:
     stw r6, 0x6098(r3)
     lwz r30, lbl_8087EF70
     mr r3, r30
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_8058CA48_00001834
     addis r4, r31, 0x2
@@ -1778,7 +1778,7 @@ lbl_fn_8058CA48_00001834:
     mr r3, r30
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_8058CA48_00001880
     addi r3, r1, 0x10
@@ -1798,7 +1798,7 @@ lbl_fn_8058CA48_00001880:
     mr r3, r30
     li r4, 0x0
     li r5, 0xc
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_8058CA48_000019E4
     addis r4, r31, 0x2
@@ -1889,7 +1889,7 @@ lbl_fn_8058CA48_000019E4:
     mr r3, r30
     li r4, 0x0
     li r5, 0xd
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_8058CA48_00001B44
     addis r4, r31, 0x2

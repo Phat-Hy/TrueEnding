@@ -20,7 +20,7 @@ extern void fn_8006F5E8(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800DC1DC(void);
+extern void wcs_parseInt(void);
 extern void str_findChar(void);
 extern void fn_8046DC5C(void);
 extern void fn_8046DD20(void);
@@ -32,8 +32,8 @@ extern void wmemcpy(void);
 extern void wcslen(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -378,11 +378,11 @@ lbl_fn_8021ED08_000003C8:
     beq lbl_fn_8021ED08_000004F8
     lwz r0, lbl_8087F340
     add r28, r0, r31
-    bl fn_800DC1DC
+    bl wcs_parseInt
     stw r3, 0x0(r28)
     addi r3, r1, 0x18
     bl talk_parseDialogue
-    bl fn_800DC1DC
+    bl wcs_parseInt
     stw r3, 0x4(r28)
     addi r3, r1, 0x18
     lwz r27, lbl_8087EEC8
@@ -425,7 +425,7 @@ lbl_fn_8021ED08_00000458:
 lbl_fn_8021ED08_00000488:
     addi r3, r1, 0x18
     bl talk_parseDialogue
-    bl fn_800DC1DC
+    bl wcs_parseInt
     stw r3, 0xa8(r28)
     addi r3, r1, 0x18
     lwz r27, lbl_8087EEC8
@@ -1287,7 +1287,7 @@ asm void fn_8021FAF4(void)
     mr r31, r3
     li r7, 0x2b
     addi r3, r3, 0x4
-    bl fn_806958E0
+    bl __construct_new_array
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -1346,7 +1346,7 @@ asm void fn_8021FB98(void)
     addi r4, r4, fn_8021FB58@l
     li r6, 0x2b
     addi r3, r3, 0x4
-    bl fn_806959D8
+    bl __destroy_new_array
     cmpwi r31, 0x0
     ble lbl_fn_8021FB98_000010E0
     mr r3, r30

@@ -100,7 +100,7 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void strncmp(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 
 /* External data declarations */
 extern u8 lbl_807548FC[];
@@ -421,7 +421,7 @@ lbl_fn_80452600_00000344:
     beq lbl_fn_80452600_00000364
     lis r4, fn_8044E158@ha
     addi r4, r4, fn_8044E158@l
-    bl fn_80695A50
+    bl __destroy_arr
     li r0, 0x0
     stw r0, 0x50(r29)
 lbl_fn_80452600_00000364:

@@ -36,7 +36,7 @@ extern void fn_800C1A1C(void);
 extern void fn_800C2448(void);
 extern void fn_800C2E30(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void PSVECNormalize(void);
 extern void fn_806052C0(void);
@@ -981,7 +981,7 @@ lbl_fn_800BBFE8_00000C58:
     stfs f1, 0x4c(r29)
     mr r3, r30
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     li r0, 0x0
     stw r0, 0x44(r29)
     lwz r31, 0x1c(r1)

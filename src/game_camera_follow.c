@@ -12,7 +12,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
@@ -1271,7 +1271,7 @@ lbl_fn_802E5CD0_0000108C:
     bne lbl_fn_802E5CD0_000010FC
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r4, lbl_8087F430
     li r5, 0x0
     li r6, 0x0

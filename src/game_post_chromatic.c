@@ -26,7 +26,7 @@ extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D8BB4(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800EB7A0(void);
 extern void fn_800EC254(void);
@@ -852,7 +852,7 @@ lbl_fn_802CD3BC_000009EC:
     bne lbl_fn_802CD3BC_00000A1C
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1510(r31)
     b lbl_fn_802CD3BC_00000B60
 lbl_fn_802CD3BC_00000A1C:
@@ -863,7 +863,7 @@ lbl_fn_802CD3BC_00000A1C:
     bne lbl_fn_802CD3BC_00000A44
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1514(r31)
     b lbl_fn_802CD3BC_00000B60
 lbl_fn_802CD3BC_00000A44:
@@ -896,7 +896,7 @@ lbl_fn_802CD3BC_00000A94:
     bne lbl_fn_802CD3BC_00000ABC
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1520(r31)
     b lbl_fn_802CD3BC_00000B60
 lbl_fn_802CD3BC_00000ABC:
@@ -907,7 +907,7 @@ lbl_fn_802CD3BC_00000ABC:
     bne lbl_fn_802CD3BC_00000AE4
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1524(r31)
     b lbl_fn_802CD3BC_00000B60
 lbl_fn_802CD3BC_00000AE4:
@@ -918,7 +918,7 @@ lbl_fn_802CD3BC_00000AE4:
     bne lbl_fn_802CD3BC_00000B0C
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x150c(r31)
     b lbl_fn_802CD3BC_00000B60
 lbl_fn_802CD3BC_00000B0C:
@@ -940,7 +940,7 @@ lbl_fn_802CD3BC_00000B34:
     bne lbl_fn_802CD3BC_00000B60
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     cntlzw r0, r3
     srwi r0, r0, 5
     stb r0, 0x1548(r31)

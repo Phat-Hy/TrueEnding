@@ -39,9 +39,9 @@ extern void fn_805113EC(void);
 extern void fn_805114D8(void);
 extern void fn_805115D4(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
-extern void fn_80695A50(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
+extern void __destroy_arr(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -428,7 +428,7 @@ asm void fn_801CFDCC(void)
     addi r5, r5, fn_801D08E8@l
     li r6, 0xc
     li r7, 0x2
-    bl fn_806958E0
+    bl __construct_new_array
     addi r5, r29, 0xd08
     addi r3, r29, 0x10f8
     cmplw r5, r3
@@ -735,7 +735,7 @@ lbl_fn_801CFDCC_000007F4:
     addi r4, r26, fn_801D0960@l
     stw r3, 0x54(r29)
     mr r3, r0
-    bl fn_80695A50
+    bl __destroy_arr
     lis r6, lbl_8073C01C@ha
     lwz r5, 0x50(r29)
     mr r3, r29
@@ -1325,7 +1325,7 @@ lbl_fn_801D09C0_00001090:
     addi r4, r4, fn_801D08E8@l
     li r5, 0xc
     li r6, 0x2
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
     bl fn_801CD184

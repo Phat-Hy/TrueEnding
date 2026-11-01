@@ -89,7 +89,7 @@ extern void fn_80339F84(void);
 extern void fn_8035B694(void);
 extern void fn_8035B78C(void);
 extern void world_setLocalFlag(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_803E3050(void);
 extern void fn_804617A4(void);
 extern void fn_80463174(void);
@@ -123,9 +123,9 @@ extern void PSVECMag(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void strncmp(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
-extern void fn_80695B00(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
+extern void __ptmf_scall(void);
 
 /* External data declarations */
 extern u8 jumptable_8078F934[];
@@ -1140,7 +1140,7 @@ lbl_fn_8045F9A0_00000D68:
     addi r4, r4, atn_ColliCapsule_destructor@l
     li r5, 0x58
     li r6, 0xb
-    bl fn_806959D8
+    bl __destroy_new_array
     addic. r31, r29, 0x14f0
     beq lbl_fn_8045F9A0_00000DA0
     mr r3, r31
@@ -1248,7 +1248,7 @@ asm void fn_8045FAB0(void)
     addi r4, r4, fn_802AC550@l
     addi r5, r5, atn_ColliCapsule_destructor@l
     li r7, 0x5
-    bl fn_806958E0
+    bl __construct_new_array
     addi r3, r28, 0x1790
     bl res_MsgHandle_constructor
     addi r3, r28, 0x179c
@@ -1774,7 +1774,7 @@ asm void fn_80460374(void)
     mr r12, r3
     stw r0, 0x14(r1)
     lwz r3, 0xc(r3)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0
@@ -2042,7 +2042,7 @@ lbl_fn_80460458_00001A64:
     bl fn_80129978
 lbl_fn_80460458_00001A90:
     bl fn_80121F00
-    bl fn_80373148
+    bl kpad_getClampData
     mr r30, r3
     bl fn_80121F00
     bl magic_getOffset6C

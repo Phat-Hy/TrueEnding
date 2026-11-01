@@ -13,7 +13,7 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void morph_updateMesh(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_800EB7A0(void);
 extern void fn_800F7FD8(void);
 extern void system_getNextSequenceId(void);
@@ -45,7 +45,7 @@ extern void PSVECNormalize(void);
 extern void rand(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_806958E0(void);
+extern void __construct_new_array(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -674,7 +674,7 @@ lbl_fn_802AB354_00000824:
     lwz r5, 0x60(r31)
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x8
     bl fn_80109828
@@ -737,7 +737,7 @@ lbl_fn_802AB42C_00000904:
     lwz r5, 0x60(r30)
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x8
     bl fn_80109828
@@ -909,7 +909,7 @@ lbl_fn_802AB5E8_00000B84:
     lwz r5, 0x60(r31)
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x38
     bl fn_80109828
@@ -1024,7 +1024,7 @@ lbl_fn_802AB794_00000D2C:
     addi r3, r1, 0x38
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x38
     bl fn_80109828
@@ -1173,7 +1173,7 @@ lbl_fn_802AB97C_00000F64:
     lwz r5, 0x60(r31)
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x58
     bl fn_80109828
@@ -1792,7 +1792,7 @@ asm void fn_802AC364(void)
     stw r31, 0x1558(r29)
     stw r31, 0x155c(r29)
     stw r31, 0x1560(r29)
-    bl fn_806958E0
+    bl __construct_new_array
     li r0, 0x1
     stw r31, 0x1a34(r29)
     addi r3, r29, 0x1a54

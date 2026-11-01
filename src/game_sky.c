@@ -81,8 +81,8 @@ extern u32 lbl_80881288;
 extern u32 lbl_80881290;
 
 /* Function declarations */
-void fn_800DC12C(void);
-void fn_800DC1DC(void);
+void str_parseInt(void);
+void wcs_parseInt(void);
 void str_skipWhitespace(void);
 void fn_800DC3C8(void);
 void fn_800DC3CC(void);
@@ -108,115 +108,115 @@ void fn_800DD1E0(void);
 void fn_800DD1E4(void);
 void fn_800DD1EC(void);
 void fn_800DD2A8(void);
-void fn_800DD3FC(void);
+void wcs_vformat(void);
 
-asm void fn_800DC12C(void)
+asm void str_parseInt(void)
 {
     nofralloc
-    b lbl_fn_800DC12C_00000004
-lbl_fn_800DC12C_00000004:
+    b lbl_str_parseInt_00000004
+lbl_str_parseInt_00000004:
     cmpwi r3, 0x0
-    bne lbl_fn_800DC12C_0000001C
+    bne lbl_str_parseInt_0000001C
     li r3, 0x0
     blr
-    b lbl_fn_800DC12C_0000001C
-lbl_fn_800DC12C_00000018:
+    b lbl_str_parseInt_0000001C
+lbl_str_parseInt_00000018:
     addi r3, r3, 0x1
-lbl_fn_800DC12C_0000001C:
+lbl_str_parseInt_0000001C:
     lbz r5, 0x0(r3)
     extsb r4, r5
     cmpwi r4, 0x20
-    beq lbl_fn_800DC12C_00000018
+    beq lbl_str_parseInt_00000018
     subi r0, r5, 0x30
     li r6, 0x0
     clrlwi r0, r0, 24
     cmplwi r0, 0x9
-    ble lbl_fn_800DC12C_00000058
+    ble lbl_str_parseInt_00000058
     cmpwi r4, 0x2d
-    beq lbl_fn_800DC12C_00000058
+    beq lbl_str_parseInt_00000058
     cmpwi r4, 0x2e
-    beq lbl_fn_800DC12C_00000058
+    beq lbl_str_parseInt_00000058
     li r3, 0x0
     blr
-lbl_fn_800DC12C_00000058:
+lbl_str_parseInt_00000058:
     extsb r0, r5
     li r5, 0x0
     cmpwi r0, 0x2d
     li r7, 0x1
-    bne lbl_fn_800DC12C_00000074
+    bne lbl_str_parseInt_00000074
     li r7, -0x1
     li r6, 0x1
-lbl_fn_800DC12C_00000074:
+lbl_str_parseInt_00000074:
     add r3, r3, r6
-    b lbl_fn_800DC12C_00000094
-lbl_fn_800DC12C_0000007C:
+    b lbl_str_parseInt_00000094
+lbl_str_parseInt_0000007C:
     lbz r0, 0x0(r3)
     mulli r5, r5, 0xa
     addi r3, r3, 0x1
     extsb r0, r0
     add r4, r0, r5
     subi r5, r4, 0x30
-lbl_fn_800DC12C_00000094:
+lbl_str_parseInt_00000094:
     lbz r4, 0x0(r3)
     subi r0, r4, 0x30
     clrlwi r0, r0, 24
     cmplwi r0, 0x9
-    ble lbl_fn_800DC12C_0000007C
+    ble lbl_str_parseInt_0000007C
     mullw r3, r5, r7
     blr
 }
 
-asm void fn_800DC1DC(void)
+asm void wcs_parseInt(void)
 {
     nofralloc
-    b lbl_fn_800DC1DC_000000B4
-lbl_fn_800DC1DC_000000B4:
+    b lbl_wcs_parseInt_000000B4
+lbl_wcs_parseInt_000000B4:
     cmpwi r3, 0x0
-    bne lbl_fn_800DC1DC_000000CC
+    bne lbl_wcs_parseInt_000000CC
     li r3, 0x0
     blr
-    b lbl_fn_800DC1DC_000000CC
-lbl_fn_800DC1DC_000000C8:
+    b lbl_wcs_parseInt_000000CC
+lbl_wcs_parseInt_000000C8:
     addi r3, r3, 0x2
-lbl_fn_800DC1DC_000000CC:
+lbl_wcs_parseInt_000000CC:
     lhz r5, 0x0(r3)
     cmplwi r5, 0x20
-    beq lbl_fn_800DC1DC_000000C8
+    beq lbl_wcs_parseInt_000000C8
     addis r4, r5, 0x1
     li r6, 0x0
     subi r0, r4, 0x30
     clrlwi r0, r0, 16
     cmplwi r0, 0x9
-    ble lbl_fn_800DC1DC_00000108
+    ble lbl_wcs_parseInt_00000108
     cmplwi r5, 0x2d
-    beq lbl_fn_800DC1DC_00000108
+    beq lbl_wcs_parseInt_00000108
     cmplwi r5, 0x2e
-    beq lbl_fn_800DC1DC_00000108
+    beq lbl_wcs_parseInt_00000108
     li r3, 0x0
     blr
-lbl_fn_800DC1DC_00000108:
+lbl_wcs_parseInt_00000108:
     cmplwi r5, 0x2d
     li r7, 0x0
     li r8, 0x1
-    bne lbl_fn_800DC1DC_00000120
+    bne lbl_wcs_parseInt_00000120
     li r8, -0x1
     li r6, 0x1
-lbl_fn_800DC1DC_00000120:
+lbl_wcs_parseInt_00000120:
     slwi r4, r6, 1
-    b lbl_fn_800DC1DC_0000013C
-lbl_fn_800DC1DC_00000128:
+    b lbl_wcs_parseInt_0000013C
+lbl_wcs_parseInt_00000128:
     mulli r7, r7, 0xa
     lhzx r0, r3, r4
     addi r4, r4, 0x2
     add r5, r0, r7
     subi r7, r5, 0x30
-lbl_fn_800DC1DC_0000013C:
+lbl_wcs_parseInt_0000013C:
     lhzx r5, r3, r4
     addis r5, r5, 0x1
     subi r0, r5, 0x30
     clrlwi r0, r0, 16
     cmplwi r0, 0x9
-    ble lbl_fn_800DC1DC_00000128
+    ble lbl_wcs_parseInt_00000128
     mullw r3, r7, r8
     blr
 }
@@ -1403,7 +1403,7 @@ asm void fn_800DD1EC(void)
     bl wcslen
     mr r31, r3
     mr r3, r29
-    bl fn_800DC1DC
+    bl wcs_parseInt
     cmpw r3, r31
     ble lbl_fn_800DD1EC_0000115C
     lhz r4, 0x0(r29)
@@ -1488,7 +1488,7 @@ lbl_fn_800DD2A8_000011F4:
     cmpwi r3, 0x0
     beq lbl_fn_800DD2A8_00001218
     addi r3, r3, 0x2
-    bl fn_800DC1DC
+    bl wcs_parseInt
     mr r28, r3
     b lbl_fn_800DD2A8_0000121C
 lbl_fn_800DD2A8_00001218:
@@ -1498,7 +1498,7 @@ lbl_fn_800DD2A8_0000121C:
     cmplwi r0, 0x2e
     beq lbl_fn_800DD2A8_00001234
     mr r3, r30
-    bl fn_800DC1DC
+    bl wcs_parseInt
     b lbl_fn_800DD2A8_00001238
 lbl_fn_800DD2A8_00001234:
     mr r3, r29
@@ -1548,7 +1548,7 @@ lbl_fn_800DD2A8_000012B8:
     blr
 }
 
-asm void fn_800DD3FC(void)
+asm void wcs_vformat(void)
 {
     nofralloc
     stwu r1, -0x1f0(r1)
@@ -1561,7 +1561,7 @@ asm void fn_800DD3FC(void)
     psq_st f30, 0x1d8(r1), 0, 0
     bl _savegpr_16
     mr r17, r3
-    bne cr1, lbl_fn_800DD3FC_0000131C
+    bne cr1, lbl_wcs_vformat_0000131C
     stfd f1, 0x28(r1)
     stfd f2, 0x30(r1)
     stfd f3, 0x38(r1)
@@ -1570,7 +1570,7 @@ asm void fn_800DD3FC(void)
     stfd f6, 0x50(r1)
     stfd f7, 0x58(r1)
     stfd f8, 0x60(r1)
-lbl_fn_800DD3FC_0000131C:
+lbl_wcs_vformat_0000131C:
     lis r11, lbl_80734DC0@ha
     addi r12, r1, 0x1f8
     addi r0, r1, 0x8
@@ -1595,16 +1595,16 @@ lbl_fn_800DD3FC_0000131C:
     stw r16, 0x68(r1)
     stw r12, 0x6c(r1)
     stw r0, 0x70(r1)
-    b lbl_fn_800DD3FC_00001730
-lbl_fn_800DD3FC_00001380:
+    b lbl_wcs_vformat_00001730
+lbl_wcs_vformat_00001380:
     cmplwi r0, 0x25
-    beq lbl_fn_800DD3FC_0000139C
+    beq lbl_wcs_vformat_0000139C
     lhz r0, 0x0(r22)
     addi r22, r22, 0x2
     sth r0, 0x0(r21)
     addi r21, r21, 0x2
-    b lbl_fn_800DD3FC_00001730
-lbl_fn_800DD3FC_0000139C:
+    b lbl_wcs_vformat_00001730
+lbl_wcs_vformat_0000139C:
     addi r23, r1, 0x78
     li r24, 0x0
     li r20, 0x0
@@ -1612,65 +1612,65 @@ lbl_fn_800DD3FC_0000139C:
     li r18, 0x0
     li r16, 0x0
     addi r22, r22, 0x2
-    b lbl_fn_800DD3FC_00001704
-lbl_fn_800DD3FC_000013BC:
+    b lbl_wcs_vformat_00001704
+lbl_wcs_vformat_000013BC:
     lhz r0, 0x0(r22)
     cmpwi r0, 0x62
-    beq lbl_fn_800DD3FC_000014A0
-    bge lbl_fn_800DD3FC_00001414
+    beq lbl_wcs_vformat_000014A0
+    bge lbl_wcs_vformat_00001414
     cmpwi r0, 0x2b
-    beq lbl_fn_800DD3FC_000016CC
-    bge lbl_fn_800DD3FC_000013F0
+    beq lbl_wcs_vformat_000016CC
+    bge lbl_wcs_vformat_000013F0
     cmpwi r0, 0x25
-    beq lbl_fn_800DD3FC_0000145C
-    bge lbl_fn_800DD3FC_000016FC
+    beq lbl_wcs_vformat_0000145C
+    bge lbl_wcs_vformat_000016FC
     cmpwi r0, 0x20
-    beq lbl_fn_800DD3FC_000016E4
-    b lbl_fn_800DD3FC_000016FC
-lbl_fn_800DD3FC_000013F0:
+    beq lbl_wcs_vformat_000016E4
+    b lbl_wcs_vformat_000016FC
+lbl_wcs_vformat_000013F0:
     cmpwi r0, 0x2f
-    beq lbl_fn_800DD3FC_000016FC
-    bge lbl_fn_800DD3FC_00001408
+    beq lbl_wcs_vformat_000016FC
+    bge lbl_wcs_vformat_00001408
     cmpwi r0, 0x2e
-    bge lbl_fn_800DD3FC_000016B4
-    b lbl_fn_800DD3FC_000016FC
-lbl_fn_800DD3FC_00001408:
+    bge lbl_wcs_vformat_000016B4
+    b lbl_wcs_vformat_000016FC
+lbl_wcs_vformat_00001408:
     cmpwi r0, 0x3a
-    bge lbl_fn_800DD3FC_000016FC
-    b lbl_fn_800DD3FC_000016B4
-lbl_fn_800DD3FC_00001414:
+    bge lbl_wcs_vformat_000016FC
+    b lbl_wcs_vformat_000016B4
+lbl_wcs_vformat_00001414:
     cmpwi r0, 0x6f
-    beq lbl_fn_800DD3FC_000014DC
-    bge lbl_fn_800DD3FC_00001444
+    beq lbl_wcs_vformat_000014DC
+    bge lbl_wcs_vformat_00001444
     cmpwi r0, 0x65
-    beq lbl_fn_800DD3FC_000016FC
-    bge lbl_fn_800DD3FC_00001438
+    beq lbl_wcs_vformat_000016FC
+    bge lbl_wcs_vformat_00001438
     cmpwi r0, 0x64
-    bge lbl_fn_800DD3FC_00001554
-    b lbl_fn_800DD3FC_00001480
-lbl_fn_800DD3FC_00001438:
+    bge lbl_wcs_vformat_00001554
+    b lbl_wcs_vformat_00001480
+lbl_wcs_vformat_00001438:
     cmpwi r0, 0x67
-    bge lbl_fn_800DD3FC_000016FC
-    b lbl_fn_800DD3FC_000015E8
-lbl_fn_800DD3FC_00001444:
+    bge lbl_wcs_vformat_000016FC
+    b lbl_wcs_vformat_000015E8
+lbl_wcs_vformat_00001444:
     cmpwi r0, 0x78
-    beq lbl_fn_800DD3FC_00001518
-    bge lbl_fn_800DD3FC_000016FC
+    beq lbl_wcs_vformat_00001518
+    bge lbl_wcs_vformat_000016FC
     cmpwi r0, 0x73
-    beq lbl_fn_800DD3FC_0000146C
-    b lbl_fn_800DD3FC_000016FC
-lbl_fn_800DD3FC_0000145C:
+    beq lbl_wcs_vformat_0000146C
+    b lbl_wcs_vformat_000016FC
+lbl_wcs_vformat_0000145C:
     sth r27, 0xf8(r1)
     addi r24, r1, 0xf8
     sth r31, 0xfa(r1)
-    b lbl_fn_800DD3FC_00001704
-lbl_fn_800DD3FC_0000146C:
+    b lbl_wcs_vformat_00001704
+lbl_wcs_vformat_0000146C:
     addi r3, r1, 0x68
     li r4, 0x1
     bl __va_arg
     lwz r24, 0x0(r3)
-    b lbl_fn_800DD3FC_00001704
-lbl_fn_800DD3FC_00001480:
+    b lbl_wcs_vformat_00001704
+lbl_wcs_vformat_00001480:
     addi r3, r1, 0x68
     li r4, 0x1
     bl __va_arg
@@ -1678,8 +1678,8 @@ lbl_fn_800DD3FC_00001480:
     addi r24, r1, 0xf8
     sth r0, 0xf8(r1)
     sth r31, 0xfa(r1)
-    b lbl_fn_800DD3FC_00001704
-lbl_fn_800DD3FC_000014A0:
+    b lbl_wcs_vformat_00001704
+lbl_wcs_vformat_000014A0:
     addi r3, r1, 0x68
     li r4, 0x1
     bl __va_arg
@@ -1689,13 +1689,13 @@ lbl_fn_800DD3FC_000014A0:
     bl fn_8068B2A0
     cmpwi r18, 0x0
     mr r24, r3
-    ble lbl_fn_800DD3FC_00001704
+    ble lbl_wcs_vformat_00001704
     mr r4, r3
     addi r3, r1, 0x78
     bl fn_800DD1EC
     mr r24, r3
-    b lbl_fn_800DD3FC_00001704
-lbl_fn_800DD3FC_000014DC:
+    b lbl_wcs_vformat_00001704
+lbl_wcs_vformat_000014DC:
     addi r3, r1, 0x68
     li r4, 0x1
     bl __va_arg
@@ -1705,13 +1705,13 @@ lbl_fn_800DD3FC_000014DC:
     bl fn_8068B2A0
     cmpwi r18, 0x0
     mr r24, r3
-    ble lbl_fn_800DD3FC_00001704
+    ble lbl_wcs_vformat_00001704
     mr r4, r3
     addi r3, r1, 0x78
     bl fn_800DD1EC
     mr r24, r3
-    b lbl_fn_800DD3FC_00001704
-lbl_fn_800DD3FC_00001518:
+    b lbl_wcs_vformat_00001704
+lbl_wcs_vformat_00001518:
     addi r3, r1, 0x68
     li r4, 0x1
     bl __va_arg
@@ -1721,13 +1721,13 @@ lbl_fn_800DD3FC_00001518:
     bl fn_8068B2A0
     cmpwi r18, 0x0
     mr r24, r3
-    ble lbl_fn_800DD3FC_00001704
+    ble lbl_wcs_vformat_00001704
     mr r4, r3
     addi r3, r1, 0x78
     bl fn_800DD1EC
     mr r24, r3
-    b lbl_fn_800DD3FC_00001704
-lbl_fn_800DD3FC_00001554:
+    b lbl_wcs_vformat_00001704
+lbl_wcs_vformat_00001554:
     addi r3, r1, 0x68
     li r4, 0x1
     bl __va_arg
@@ -1738,7 +1738,7 @@ lbl_fn_800DD3FC_00001554:
     bl fn_8068B2A0
     cmpwi r18, 0x0
     mr r24, r3
-    ble lbl_fn_800DD3FC_000015A0
+    ble lbl_wcs_vformat_000015A0
     mr r4, r3
     addi r3, r1, 0x78
     bl fn_800DD1EC
@@ -1747,28 +1747,28 @@ lbl_fn_800DD3FC_00001554:
     li r5, 0x80
     bl memcpy
     addi r24, r1, 0xf8
-lbl_fn_800DD3FC_000015A0:
+lbl_wcs_vformat_000015A0:
     cmpwi r20, 0x0
-    bne lbl_fn_800DD3FC_000015B0
+    bne lbl_wcs_vformat_000015B0
     cmpwi r19, 0x0
-    beq lbl_fn_800DD3FC_00001704
-lbl_fn_800DD3FC_000015B0:
+    beq lbl_wcs_vformat_00001704
+lbl_wcs_vformat_000015B0:
     cmpwi r25, 0x0
-    blt lbl_fn_800DD3FC_00001704
+    blt lbl_wcs_vformat_00001704
     addi r3, r1, 0xfa
     addi r4, r1, 0xf8
     li r5, 0x7e
     bl memmove
     cmpwi r20, 0x0
     li r0, 0x20
-    beq lbl_fn_800DD3FC_000015D8
+    beq lbl_wcs_vformat_000015D8
     li r0, 0x2b
-lbl_fn_800DD3FC_000015D8:
+lbl_wcs_vformat_000015D8:
     sth r0, 0xf8(r1)
     li r20, 0x0
     li r19, 0x0
-    b lbl_fn_800DD3FC_00001704
-lbl_fn_800DD3FC_000015E8:
+    b lbl_wcs_vformat_00001704
+lbl_wcs_vformat_000015E8:
     addi r3, r1, 0x68
     li r4, 0x3
     bl __va_arg
@@ -1790,9 +1790,9 @@ lbl_fn_800DD3FC_000015E8:
     stfd f0, 0x188(r1)
     lwz r25, 0x18c(r1)
     cmpwi r25, 0x0
-    ble lbl_fn_800DD3FC_00001644
+    ble lbl_wcs_vformat_00001644
     addi r25, r25, 0x5
-lbl_fn_800DD3FC_00001644:
+lbl_wcs_vformat_00001644:
     addi r4, r1, 0xf8
     li r5, 0xa
     bl fn_8068B2A0
@@ -1803,9 +1803,9 @@ lbl_fn_800DD3FC_00001644:
     subi r0, r3, 0x2
     li r4, 0x2e
     cmplwi r0, 0x3
-    bgt lbl_fn_800DD3FC_00001674
+    bgt lbl_wcs_vformat_00001674
     li r4, 0x2c
-lbl_fn_800DD3FC_00001674:
+lbl_wcs_vformat_00001674:
     slwi r3, r29, 1
     addi r0, r29, 0x1
     sthx r4, r24, r3
@@ -1816,56 +1816,56 @@ lbl_fn_800DD3FC_00001674:
     bl fn_8068B2A0
     cmpwi r18, 0x0
     mr r24, r26
-    ble lbl_fn_800DD3FC_00001704
+    ble lbl_wcs_vformat_00001704
     mr r4, r26
     addi r3, r1, 0x78
     bl fn_800DD2A8
     mr r24, r3
-    b lbl_fn_800DD3FC_00001704
-lbl_fn_800DD3FC_000016B4:
+    b lbl_wcs_vformat_00001704
+lbl_wcs_vformat_000016B4:
     sthx r0, r30, r16
     addi r22, r22, 0x2
     addi r18, r18, 0x1
     addi r16, r16, 0x2
     sthu r31, 0x2(r23)
-    b lbl_fn_800DD3FC_00001704
-lbl_fn_800DD3FC_000016CC:
+    b lbl_wcs_vformat_00001704
+lbl_wcs_vformat_000016CC:
     lhz r0, -0x2(r22)
     cmplwi r0, 0x25
-    bne lbl_fn_800DD3FC_000016DC
+    bne lbl_wcs_vformat_000016DC
     li r20, 0x1
-lbl_fn_800DD3FC_000016DC:
+lbl_wcs_vformat_000016DC:
     addi r22, r22, 0x2
-    b lbl_fn_800DD3FC_00001704
-lbl_fn_800DD3FC_000016E4:
+    b lbl_wcs_vformat_00001704
+lbl_wcs_vformat_000016E4:
     lhz r0, -0x2(r22)
     cmplwi r0, 0x25
-    bne lbl_fn_800DD3FC_000016F4
+    bne lbl_wcs_vformat_000016F4
     li r19, 0x1
-lbl_fn_800DD3FC_000016F4:
+lbl_wcs_vformat_000016F4:
     addi r22, r22, 0x2
-    b lbl_fn_800DD3FC_00001704
-lbl_fn_800DD3FC_000016FC:
+    b lbl_wcs_vformat_00001704
+lbl_wcs_vformat_000016FC:
     sth r31, 0xf8(r1)
     addi r24, r1, 0xf8
-lbl_fn_800DD3FC_00001704:
+lbl_wcs_vformat_00001704:
     cmpwi r24, 0x0
-    beq lbl_fn_800DD3FC_000013BC
+    beq lbl_wcs_vformat_000013BC
     addi r22, r22, 0x2
-    b lbl_fn_800DD3FC_00001724
-lbl_fn_800DD3FC_00001714:
+    b lbl_wcs_vformat_00001724
+lbl_wcs_vformat_00001714:
     lhz r0, 0x0(r24)
     addi r24, r24, 0x2
     sth r0, 0x0(r21)
     addi r21, r21, 0x2
-lbl_fn_800DD3FC_00001724:
+lbl_wcs_vformat_00001724:
     lhz r0, 0x0(r24)
     cmpwi r0, 0x0
-    bne lbl_fn_800DD3FC_00001714
-lbl_fn_800DD3FC_00001730:
+    bne lbl_wcs_vformat_00001714
+lbl_wcs_vformat_00001730:
     lhz r0, 0x0(r22)
     cmpwi r0, 0x0
-    bne lbl_fn_800DD3FC_00001380
+    bne lbl_wcs_vformat_00001380
     subf r3, r17, r21
     li r4, 0x0
     sth r4, 0x0(r21)

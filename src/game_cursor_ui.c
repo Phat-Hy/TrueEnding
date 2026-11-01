@@ -38,7 +38,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_800D3FA4(void);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
@@ -46,7 +46,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
 extern void fn_80615E00(void);
-extern void fn_806959D8(void);
+extern void __destroy_new_array(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -443,7 +443,7 @@ lbl_fn_800A85CC_00000470:
     stw r3, 0x3c(r28)
     mr r3, r29
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x40(r28)
     mr r3, r29
     bl talk_formatQuotedString
@@ -1448,7 +1448,7 @@ asm void fn_800A93C4(void)
     addi r4, r4, atn_LH_Texture_destructAndFree@l
     li r5, 0x30
     li r6, 0x8
-    bl fn_806959D8
+    bl __destroy_new_array
     addi r3, r30, 0x138
     li r4, -0x1
     bl atn_LH_Texture_destructAndFree
@@ -1492,7 +1492,7 @@ asm void fn_800A9450(void)
     addi r4, r4, atn_LH_Texture_destructAndFree@l
     li r5, 0x30
     li r6, 0x8
-    bl fn_806959D8
+    bl __destroy_new_array
     addi r3, r31, 0x138
     li r4, -0x1
     bl atn_LH_Texture_destructAndFree

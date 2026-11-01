@@ -14,7 +14,7 @@ extern void route_interpolatePath(void);
 extern void fn_80087BB4(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800A55AC(void);
 extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
@@ -1436,13 +1436,13 @@ asm void fn_804A3228(void)
     mr r3, r30
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     bne lbl_fn_804A3228_00001234
     mr r3, r30
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_804A3228_000013A8
 lbl_fn_804A3228_00001234:
@@ -1464,13 +1464,13 @@ lbl_fn_804A3228_00001240:
     mr r3, r30
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     bne lbl_fn_804A3228_0000129C
     mr r3, r30
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_804A3228_000013A8
 lbl_fn_804A3228_0000129C:
@@ -1492,7 +1492,7 @@ lbl_fn_804A3228_000012A8:
     mr r3, r30
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_804A3228_000012F8
     li r0, 0x1
@@ -1502,7 +1502,7 @@ lbl_fn_804A3228_000012F8:
     mr r3, r30
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_804A3228_00001320
     li r0, 0x1

@@ -27,7 +27,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
 extern void rand(void);
-extern void fn_806958E0(void);
+extern void __construct_new_array(void);
 
 /* External data declarations */
 extern u8 lbl_80763C28[];
@@ -658,7 +658,7 @@ asm void fn_805AE250(void)
     addi r4, r4, fn_80219EC4@l
     li r6, 0xd0
     li r7, 0x6
-    b fn_806958E0
+    b __construct_new_array
 }
 
 asm void fn_805AE270(void)

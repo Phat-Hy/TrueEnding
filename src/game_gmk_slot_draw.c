@@ -13,7 +13,7 @@ extern void fn_802114D8(void);
 extern void fn_802114E0(void);
 extern void fn_80213B78(void);
 extern void world_getGlobalFlag(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_80444564(void);
 extern void fn_80444EFC(void);
 extern void fn_804479B8(void);
@@ -81,11 +81,11 @@ lbl_fn_80445F44_00000060:
     li r21, -0x1
     beq lbl_fn_80445F44_000000D0
     mr r3, r0
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_80445F44_000000F8
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r19, 0x48(r3)
     lwz r20, 0x4c(r3)
     lwz r21, 0x50(r3)

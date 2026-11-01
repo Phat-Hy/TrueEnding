@@ -40,8 +40,8 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void rand(void);
 extern void fn_8068B100(void);
-extern void fn_80695A50(void);
-extern void fn_80695B00(void);
+extern void __destroy_arr(void);
+extern void __ptmf_scall(void);
 
 /* External data declarations */
 extern u8 lbl_807527C0[];
@@ -963,7 +963,7 @@ asm void fn_80402A9C(void)
     beq lbl_fn_80402A9C_00000C90
     lis r4, fn_80402A40@ha
     addi r4, r4, fn_80402A40@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80402A9C_00000C90:
     li r0, 0x0
     stw r0, 0x10c(r30)
@@ -1066,7 +1066,7 @@ lbl_fn_80402BD0_00000DC4:
     mr r3, r23
     mr r4, r20
     add r12, r0, r22
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     addi r20, r20, 0x1
     addi r22, r22, 0x42c

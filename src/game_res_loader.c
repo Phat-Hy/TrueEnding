@@ -51,8 +51,8 @@ extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void wcslen(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806959D8(void);
-extern void fn_80695A50(void);
+extern void __destroy_new_array(void);
+extern void __destroy_arr(void);
 extern void vec3_isNonZero(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -832,7 +832,7 @@ lbl_fn_80227D2C_000009E0:
     beq lbl_fn_80227D2C_00000A00
     lis r4, fn_8011D320@ha
     addi r4, r4, fn_8011D320@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80227D2C_00000A00:
     li r0, 0x0
     stw r0, 0xc(r24)
@@ -902,7 +902,7 @@ lbl_fn_80227D2C_00000ADC:
     beq lbl_fn_80227D2C_00000AFC
     lis r4, fn_8011D320@ha
     addi r4, r4, fn_8011D320@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80227D2C_00000AFC:
     li r0, 0x0
     stw r0, 0xc(r25)
@@ -998,7 +998,7 @@ lbl_fn_80227FC0_00000BE4:
     addi r4, r4, fn_802253E4@l
     li r5, 0x4
     li r6, 0x70
-    bl fn_806959D8
+    bl __destroy_new_array
     addic. r3, r29, 0x1624
     beq lbl_fn_80227FC0_00000C10
     addi r3, r3, 0x8

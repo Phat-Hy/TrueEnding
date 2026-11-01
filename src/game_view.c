@@ -40,8 +40,8 @@ extern void fn_80478714(void);
 extern void fn_80548D58(void);
 extern void fn_8054A6EC(void);
 extern void fn_8059AB9C(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 
 /* External data declarations */
 extern u8 lbl_80736040[];
@@ -171,7 +171,7 @@ asm void fn_800F1430(void)
     li r6, 0xa0
     li r7, 0x100
     stw r26, 0x14c(r31)
-    bl fn_806958E0
+    bl __construct_new_array
     addis r3, r31, 0x1
     lis r4, fn_80441590@ha
     lis r5, fn_800F1EE0@ha
@@ -180,7 +180,7 @@ asm void fn_800F1430(void)
     li r7, 0x20
     addi r5, r5, fn_800F1EE0@l
     subi r3, r3, 0x5eb0
-    bl fn_806958E0
+    bl __construct_new_array
     addis r3, r31, 0x1
     lis r4, fn_8010D808@ha
     lis r5, fn_800F1F38@ha
@@ -189,7 +189,7 @@ asm void fn_800F1430(void)
     li r7, 0x8
     addi r5, r5, fn_800F1F38@l
     subi r3, r3, 0x45b0
-    bl fn_806958E0
+    bl __construct_new_array
     addis r3, r31, 0x1
     stw r26, -0x34cc(r3)
     subi r3, r3, 0x3484
@@ -222,7 +222,7 @@ lbl_fn_800F1430_000001B4:
     li r7, 0x48
     addi r5, r5, fn_80108150@l
     subi r3, r3, 0x3410
-    bl fn_806958E0
+    bl __construct_new_array
     addis r3, r31, 0x3
     li r26, 0x0
     li r0, 0x28
@@ -249,7 +249,7 @@ lbl_fn_800F1430_000001B4:
     li r7, 0x15
     addi r5, r30, fn_802375C4@l
     addi r3, r3, 0x63f0
-    bl fn_806958E0
+    bl __construct_new_array
     addis r3, r31, 0x3
     addi r3, r3, 0x64ec
     bl res_MsgHandle_constructor
@@ -261,28 +261,28 @@ lbl_fn_800F1430_000001B4:
     li r7, 0x3
     addi r5, r28, fn_800EF73C@l
     addi r3, r3, 0x64f8
-    bl fn_806958E0
+    bl __construct_new_array
     addis r3, r31, 0x3
     addi r4, r27, fn_80237518@l
     addi r5, r30, fn_802375C4@l
     li r6, 0xc
     li r7, 0x5
     addi r3, r3, 0x651c
-    bl fn_806958E0
+    bl __construct_new_array
     addis r3, r31, 0x3
     addi r4, r27, fn_80237518@l
     addi r5, r30, fn_802375C4@l
     li r6, 0xc
     li r7, 0x5
     addi r3, r3, 0x6558
-    bl fn_806958E0
+    bl __construct_new_array
     addis r3, r31, 0x3
     addi r4, r27, fn_80237518@l
     addi r5, r30, fn_802375C4@l
     li r6, 0xc
     li r7, 0x3
     addi r3, r3, 0x6594
-    bl fn_806958E0
+    bl __construct_new_array
     addis r3, r31, 0x3
     addi r3, r3, 0x65b8
     bl res_MsgHandle_constructor
@@ -301,14 +301,14 @@ lbl_fn_800F1430_000001B4:
     li r6, 0xc
     li r7, 0x7
     addi r3, r3, 0x65e8
-    bl fn_806958E0
+    bl __construct_new_array
     addis r3, r31, 0x3
     addi r4, r29, res_MsgHandle_constructor@l
     addi r5, r28, fn_800EF73C@l
     li r6, 0xc
     li r7, 0x1f
     addi r3, r3, 0x663c
-    bl fn_806958E0
+    bl __construct_new_array
     addis r3, r31, 0x3
     li r0, 0x2
     addi r7, r3, 0x21c0
@@ -476,7 +476,7 @@ lbl_fn_800F1430_00000448:
     li r7, 0x3
     addi r5, r29, fn_800EF73C@l
     subi r3, r3, 0x74f4
-    bl fn_806958E0
+    bl __construct_new_array
     addis r3, r31, 0x4
     subi r3, r3, 0x74d0
     bl res_MsgHandle_constructor
@@ -498,14 +498,14 @@ lbl_fn_800F1430_00000448:
     li r6, 0xc
     li r7, 0x3
     subi r3, r3, 0x7494
-    bl fn_806958E0
+    bl __construct_new_array
     addis r3, r31, 0x4
     addi r4, r30, res_MsgHandle_constructor@l
     addi r5, r29, fn_800EF73C@l
     li r6, 0xc
     li r7, 0x3
     subi r3, r3, 0x7470
-    bl fn_806958E0
+    bl __construct_new_array
     addis r3, r31, 0x4
     subi r3, r3, 0x744c
     bl res_MsgHandle_constructor
@@ -759,7 +759,7 @@ lbl_fn_800F1430_000009A0:
     stfs f0, -0x1d04(r30)
     stw r29, -0x1d00(r30)
     stw r29, -0x1cec(r30)
-    bl fn_806958E0
+    bl __construct_new_array
     addis r4, r31, 0x4
     lfs f4, lbl_808814B0
     lfs f3, lbl_808814AC
@@ -929,7 +929,7 @@ asm void fn_800F1F94(void)
     li r5, 0xc
     li r6, 0x6
     subi r3, r3, 0x1cb8
-    bl fn_806959D8
+    bl __destroy_new_array
     addis r29, r30, 0x4
     subic. r29, r29, 0x7398
     beq lbl_fn_800F1F94_00000C8C
@@ -1096,13 +1096,13 @@ lbl_fn_800F1F94_00000EA8:
     li r5, 0xc
     li r6, 0x3
     subi r3, r3, 0x7470
-    bl fn_806959D8
+    bl __destroy_new_array
     addis r3, r30, 0x4
     addi r4, r29, fn_800EF73C@l
     li r5, 0xc
     li r6, 0x3
     subi r3, r3, 0x7494
-    bl fn_806959D8
+    bl __destroy_new_array
     addis r29, r30, 0x4
     subic. r29, r29, 0x74a0
     beq lbl_fn_800F1F94_00000F00
@@ -1159,7 +1159,7 @@ lbl_fn_800F1F94_00000F90:
     li r5, 0xc
     li r6, 0x3
     subi r3, r3, 0x74f4
-    bl fn_806959D8
+    bl __destroy_new_array
     addis r29, r30, 0x4
     subic. r29, r29, 0x7500
     beq lbl_fn_800F1F94_00000FD0
@@ -1235,13 +1235,13 @@ lbl_fn_800F1F94_000010A8:
     li r5, 0xc
     li r6, 0x1f
     addi r3, r3, 0x663c
-    bl fn_806959D8
+    bl __destroy_new_array
     addis r3, r30, 0x3
     addi r4, r29, fn_800EF73C@l
     li r5, 0xc
     li r6, 0x7
     addi r3, r3, 0x65e8
-    bl fn_806959D8
+    bl __destroy_new_array
     addis r29, r30, 0x3
     addic. r29, r29, 0x65dc
     beq lbl_fn_800F1F94_00001100
@@ -1288,26 +1288,26 @@ lbl_fn_800F1F94_0000116C:
     li r5, 0xc
     li r6, 0x3
     addi r3, r3, 0x6594
-    bl fn_806959D8
+    bl __destroy_new_array
     addis r3, r30, 0x3
     addi r4, r29, fn_802375C4@l
     li r5, 0xc
     li r6, 0x5
     addi r3, r3, 0x6558
-    bl fn_806959D8
+    bl __destroy_new_array
     addis r3, r30, 0x3
     addi r4, r29, fn_802375C4@l
     li r5, 0xc
     li r6, 0x5
     addi r3, r3, 0x651c
-    bl fn_806959D8
+    bl __destroy_new_array
     addis r3, r30, 0x3
     lis r4, fn_800EF73C@ha
     addi r4, r4, fn_800EF73C@l
     li r5, 0xc
     li r6, 0x3
     addi r3, r3, 0x64f8
-    bl fn_806959D8
+    bl __destroy_new_array
     addis r29, r30, 0x3
     addic. r29, r29, 0x64ec
     beq lbl_fn_800F1F94_000011F8
@@ -1324,7 +1324,7 @@ lbl_fn_800F1F94_000011F8:
     li r5, 0xc
     li r6, 0x15
     addi r3, r3, 0x63f0
-    bl fn_806959D8
+    bl __destroy_new_array
     addis r29, r30, 0x3
     addic. r29, r29, 0x63e4
     beq lbl_fn_800F1F94_00001238
@@ -1371,7 +1371,7 @@ lbl_fn_800F1F94_000012A4:
     li r5, 0x934
     li r6, 0x48
     subi r3, r3, 0x3410
-    bl fn_806959D8
+    bl __destroy_new_array
     addis r3, r30, 0x1
     li r4, -0x1
     subi r3, r3, 0x3484
@@ -1382,20 +1382,20 @@ lbl_fn_800F1F94_000012A4:
     li r5, 0x21c
     li r6, 0x8
     subi r3, r3, 0x45b0
-    bl fn_806959D8
+    bl __destroy_new_array
     addis r3, r30, 0x1
     lis r4, fn_800F1EE0@ha
     addi r4, r4, fn_800F1EE0@l
     li r5, 0xc8
     li r6, 0x20
     subi r3, r3, 0x5eb0
-    bl fn_806959D8
+    bl __destroy_new_array
     lis r4, fn_8010EE38@ha
     addi r3, r30, 0x150
     addi r4, r4, fn_8010EE38@l
     li r5, 0xa0
     li r6, 0x100
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
     bl atn_Task_destructor

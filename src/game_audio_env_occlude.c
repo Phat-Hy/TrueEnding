@@ -87,7 +87,7 @@ extern void atoi(void);
 extern void abort(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_806959D8(void);
+extern void __destroy_new_array(void);
 extern void memmove(void);
 
 /* External data declarations */
@@ -946,7 +946,7 @@ lbl_fn_8031AF88_00000B50:
     addi r4, r4, fn_8008A76C@l
     li r5, 0x214
     li r6, 0x3
-    bl fn_806959D8
+    bl __destroy_new_array
     addi r3, r29, 0x15a8
     li r4, -0x1
     bl fn_802375C4

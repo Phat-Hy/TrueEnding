@@ -43,9 +43,9 @@ extern void fn_805DDEC0(void);
 extern void fn_8061A0F0(void);
 extern void fn_8061A100(void);
 extern void wcslen(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
-extern void fn_80695B00(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
+extern void __ptmf_scall(void);
 
 /* External data declarations */
 extern u8 lbl_807645B0[];
@@ -170,7 +170,7 @@ lbl_fn_805D4E70_000000F4:
     stfs f2, 0x2c(r1)
     stfs f1, 0x30(r1)
     stfs f0, 0x34(r1)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lis r5, lbl_807645B0@ha
     lis r4, lbl_807645B8@ha
@@ -331,7 +331,7 @@ lbl_fn_805D4E70_00000354:
     lwz r30, 0x38(r1)
     addi r3, r1, 0x38
     addi r12, r1, 0x3c
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lfs f3, 0x0(r24)
     mr r29, r3
@@ -714,7 +714,7 @@ asm void fn_805D56B0(void)
     addi r5, r5, fn_805CD940@l
     li r6, 0x4
     li r7, 0x4
-    bl fn_806958E0
+    bl __construct_new_array
     addi r3, r26, 0x10
     bl fn_805CDA80
     lfs f0, 0x4c(r24)
@@ -910,7 +910,7 @@ lbl_fn_805D58C0_00000B38:
     li r5, 0x4
     addi r4, r4, fn_805CD940@l
     li r6, 0x4
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_805D58C0_00000B5C:
     mr r3, r27
     li r4, 0x0

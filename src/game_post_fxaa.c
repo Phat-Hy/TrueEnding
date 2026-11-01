@@ -24,7 +24,7 @@ extern void fn_802D57B8(void);
 extern void fn_802D6004(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_805A49E8(void);
 extern void fn_805A4A20(void);
 extern void rand(void);
@@ -254,7 +254,7 @@ lbl_fn_802D22A0_000002C0:
     ble lbl_fn_802D22A0_0000031C
     lwz r3, lbl_8087F430
     li r29, 0x1
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x4c(r3)
     cmpwi r0, 0x3
     bne lbl_fn_802D22A0_0000031C

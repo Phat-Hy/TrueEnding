@@ -29,7 +29,7 @@ extern void fn_8017A5D8(void);
 extern void fn_80210220(void);
 extern void fn_80219558(void);
 extern void world_getGlobalFlag(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_803C1884(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -2381,14 +2381,14 @@ lbl_fn_80103FD4_00001F18:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_80103FD4_00002124
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_80103FD4_00002124
     lwz r0, lbl_8087F8A0
     cmpwi r0, 0x0
     beq lbl_fn_80103FD4_00002124
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x48(r3)
     cmpwi r0, 0x2
     bne lbl_fn_80103FD4_00002124

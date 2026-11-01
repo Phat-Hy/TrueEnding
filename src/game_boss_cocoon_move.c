@@ -13,7 +13,7 @@ extern void fn_801F6D7C(void);
 extern void fn_801F791C(void);
 extern void fn_801F837C(void);
 extern void fn_80213E60(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_8044E88C(void);
 extern void fn_80450590(void);
 
@@ -433,11 +433,11 @@ lbl_fn_8044EEC0_00000524:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_8044EEC0_00000560
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_8044EEC0_00000560
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     mr r6, r3
     lwz r3, 0x20(r31)
     lwz r4, 0x48(r6)
@@ -482,11 +482,11 @@ lbl_fn_8044EEC0_000005C8:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_8044EEC0_00000604
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_8044EEC0_00000604
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     mr r6, r3
     lwz r3, 0x20(r31)
     lwz r4, 0x48(r6)
@@ -898,11 +898,11 @@ lbl_fn_8044F434_00000B58:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_8044F434_00000B94
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_8044F434_00000B94
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     mr r6, r3
     lwz r3, 0x20(r31)
     lwz r4, 0x48(r6)
@@ -1058,11 +1058,11 @@ lbl_fn_8044F434_00000D88:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_8044F434_00000DC4
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_8044F434_00000DC4
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     mr r6, r3
     lwz r3, 0x20(r31)
     lwz r4, 0x48(r6)
@@ -1417,11 +1417,11 @@ lbl_fn_8044F96C_00001254:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_8044F96C_00001290
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_8044F96C_00001290
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     mr r6, r3
     lwz r3, 0x20(r29)
     lwz r4, 0x48(r6)
@@ -1471,11 +1471,11 @@ lbl_fn_8044F96C_00001310:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_8044F96C_0000134C
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_8044F96C_0000134C
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     mr r6, r3
     lwz r3, 0x20(r29)
     lwz r4, 0x48(r6)
@@ -1522,11 +1522,11 @@ lbl_fn_8044F96C_000013BC:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_8044F96C_000013F8
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_8044F96C_000013F8
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     mr r6, r3
     lwz r3, 0x20(r29)
     lwz r4, 0x48(r6)
@@ -1702,11 +1702,11 @@ lbl_fn_8044F96C_00001634:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_8044F96C_00001670
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_8044F96C_00001670
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     mr r6, r3
     lwz r3, 0x20(r29)
     lwz r4, 0x48(r6)
@@ -1837,11 +1837,11 @@ lbl_fn_8044F96C_00001804:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_8044F96C_00001840
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_8044F96C_00001840
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     mr r6, r3
     lwz r3, 0x20(r29)
     lwz r4, 0x48(r6)
@@ -1902,11 +1902,11 @@ lbl_fn_8044F96C_000018E0:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_8044F96C_0000191C
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_8044F96C_0000191C
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     mr r6, r3
     lwz r3, 0x20(r29)
     lwz r4, 0x48(r6)
@@ -2035,11 +2035,11 @@ lbl_fn_8044F96C_00001AAC:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_8044F96C_00001AE8
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_8044F96C_00001AE8
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     mr r6, r3
     lwz r3, 0x20(r29)
     lwz r4, 0x48(r6)

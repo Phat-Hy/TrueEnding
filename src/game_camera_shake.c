@@ -18,7 +18,7 @@ extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_800EB7A0(void);
 extern void system_getNextSequenceId(void);
 extern void fn_801077A8(void);
@@ -211,7 +211,7 @@ lbl_fn_802DC1C0_000001D8:
     lwz r5, 0x60(r29)
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x68
     bl fn_80109828
@@ -1105,7 +1105,7 @@ lbl_fn_802DCA34_00000E9C:
     lwz r5, 0x60(r14)
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x60
     bl fn_80109828
@@ -1143,7 +1143,7 @@ lbl_fn_802DCA34_00000F20:
     lwz r5, 0x60(r14)
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x60
     bl fn_80109828
@@ -1773,7 +1773,7 @@ lbl_fn_802DD1B4_00001834:
     lwz r5, 0x60(r15)
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0xa0
     bl fn_80109828
@@ -1886,7 +1886,7 @@ lbl_fn_802DDA90_000019C0:
     lwz r5, 0x60(r27)
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x8
     bl fn_80109828

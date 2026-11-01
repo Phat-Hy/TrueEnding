@@ -18,7 +18,7 @@ extern void atn_Matrix_copy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_800F72CC(void);
 extern void fn_800F7FA0(void);
 extern void fn_800F7FA8(void);
@@ -227,7 +227,7 @@ lbl_fn_8028C834_00000154:
     addi r3, r1, 0x30
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x30
     bl fn_80109828

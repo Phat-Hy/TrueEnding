@@ -43,7 +43,7 @@ extern void fn_80145334(void);
 extern void dialog_renderWindow(void);
 extern void fn_80176548(void);
 extern void fn_802180A8(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_803EC568(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC758(void);
@@ -1722,7 +1722,7 @@ asm void fn_8042D7C0(void)
     subi r0, r5, 0x1
     mulli r0, r0, 0x144
     add r24, r4, r0
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_8042D7C0_00001590
     lwz r23, 0x70(r3)

@@ -24,7 +24,7 @@ extern void atn_Task_destructor(void);
 extern void fn_800D3FA4(void);
 extern void str_findChar(void);
 extern void fn_800DCA6C(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_804962B0(void);
@@ -1404,7 +1404,7 @@ lbl_fn_804918A4_000011C8:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_804918A4_00001348
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_804918A4_00001348
     lwz r0, 0x108(r3)

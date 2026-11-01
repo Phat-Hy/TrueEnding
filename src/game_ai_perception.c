@@ -21,7 +21,7 @@ extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_800F8574(void);
 extern void fn_80109828(void);
 extern void fn_8013322C(void);
@@ -610,7 +610,7 @@ lbl_fn_8025F07C_000006FC:
     addi r3, r1, 0xe8
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0xe8
     bl fn_80109828
@@ -888,7 +888,7 @@ lbl_fn_8025F45C_00000AF4:
     addi r3, r1, 0x30
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x30
     bl fn_80109828

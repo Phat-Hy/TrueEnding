@@ -45,7 +45,7 @@ extern void strcmp(void);
 extern void abort(void);
 extern void fn_806952C4(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -134,7 +134,7 @@ asm void atn_LoadEfp_constructor(void)
     beq lbl_atn_LoadEfp_constructor_00000058
     lis r4, fn_80243758@ha
     addi r4, r4, fn_80243758@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_atn_LoadEfp_constructor_00000058:
     li r0, 0x0
     stw r0, 0x4(r31)

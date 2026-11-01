@@ -6,7 +6,7 @@ extern void __register_global_object(void);
 extern void fn_800A5920(void);
 extern void fn_800A59F0(void);
 extern void fn_800A5AA4(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80239798(void);
 extern void res_findResourceSlot(void);
@@ -584,7 +584,7 @@ lbl_fn_804FAD4C_00000648:
     mr r4, r31
     addi r3, r1, 0x18
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r31, r1, 0x18
     b lbl_fn_804FAD4C_000006FC
 lbl_fn_804FAD4C_00000678:
@@ -614,7 +614,7 @@ lbl_fn_804FAD4C_000006D0:
     la r4, lbl_808813D0
 lbl_fn_804FAD4C_000006D4:
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_804FAD4C_000006F8
 lbl_fn_804FAD4C_000006E0:
     la r4, lbl_8087E1C4
@@ -622,7 +622,7 @@ lbl_fn_804FAD4C_000006E0:
     addi r3, r1, 0x18
     addi r4, r4, 0x266
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
 lbl_fn_804FAD4C_000006F8:
     addi r31, r1, 0x18
 lbl_fn_804FAD4C_000006FC:

@@ -89,7 +89,7 @@ extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_80695B00(void);
+extern void __ptmf_scall(void);
 
 /* External data declarations */
 extern u8 jumptable_80788B58[];
@@ -174,7 +174,7 @@ asm void fn_803234C8(void)
     mr r12, r3
     stw r0, 0x14(r1)
     lwz r3, 0xc(r3)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0
@@ -245,7 +245,7 @@ asm void fn_803235AC(void)
     mr r12, r3
     stw r0, 0x14(r1)
     lwz r3, 0xc(r3)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0

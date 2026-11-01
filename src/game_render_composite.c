@@ -67,7 +67,7 @@ extern void printf(void);
 extern void strncmp(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806958E0(void);
+extern void __construct_new_array(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -1332,7 +1332,7 @@ asm void fn_802BA92C(void)
     addi r4, r4, fn_802AC550@l
     addi r5, r5, atn_ColliCapsule_destructor@l
     li r7, 0xb
-    bl fn_806958E0
+    bl __construct_new_array
     lfs f0, lbl_8088417C
     li r4, 0x384
     li r0, 0x4650

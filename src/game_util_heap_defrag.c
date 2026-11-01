@@ -10,12 +10,12 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void mem_alloc(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
 extern void save_validateHeader(void);
 extern void saveSlot_readSummary(void);
@@ -257,7 +257,7 @@ asm void fn_80587D14(void)
     stw r0, 0x5bb0(r3)
     lwz r31, lbl_8087EF70
     mr r3, r31
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80587D14_0000026C
     addis r3, r30, 0x2
@@ -299,7 +299,7 @@ lbl_fn_80587D14_0000026C:
     mr r3, r31
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80587D14_000002B4
     addi r3, r1, 0x8
@@ -344,7 +344,7 @@ asm void fn_80587E40(void)
     stw r0, 0x5bb8(r6)
     lwz r31, lbl_8087EF70
     mr r3, r31
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80587E40_00000430
     addis r4, r29, 0x2
@@ -374,7 +374,7 @@ lbl_fn_80587E40_00000378:
 lbl_fn_80587E40_0000037C:
     lwz r5, 0x8(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addis r3, r29, 0x2
     lis r5, lbl_80761914@ha
     lwz r4, 0x5b68(r3)
@@ -423,7 +423,7 @@ lbl_fn_80587E40_00000430:
     mr r3, r31
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80587E40_00000478
     addi r3, r1, 0x8
@@ -1896,7 +1896,7 @@ asm void fn_80589450(void)
     stw r0, 0x5c1c(r3)
     lwz r31, lbl_8087EF70
     mr r3, r31
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80589450_000019E4
     addis r3, r30, 0x2
@@ -1954,7 +1954,7 @@ lbl_fn_80589450_000019E4:
     mr r3, r31
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80589450_00001A2C
     addi r3, r1, 0x8

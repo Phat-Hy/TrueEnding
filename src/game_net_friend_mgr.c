@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void fn_8006EF48(void);
 extern void mem_alloc(void);
 extern void fn_800A4450(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800A55AC(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
@@ -16,7 +16,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
 extern void save_validateHeader(void);
 extern void fn_801F4728(void);
@@ -1489,7 +1489,7 @@ lbl_fn_804CE2EC_000012A0:
     mr r3, r30
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_804CE2EC_000012D8
     addi r3, r1, 0xc
@@ -1504,7 +1504,7 @@ lbl_fn_804CE2EC_000012D8:
     mr r3, r30
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_804CE2EC_0000130C
     addi r3, r1, 0x8
@@ -1607,7 +1607,7 @@ lbl_fn_804CE61C_00001438:
     mr r3, r29
     li r4, 0x0
     li r5, 0xc
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_804CE61C_00001474
     addi r3, r1, 0x8
@@ -1705,12 +1705,12 @@ lbl_fn_804CE82C_00001584:
     addi r3, r1, 0x208
     addi r4, r27, lbl_80790F70@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     mr r5, r30
     addi r3, r1, 0x8
     addi r4, r27, lbl_80790F70@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_804CE82C_000016D4
 lbl_fn_804CE82C_000015C4:
     cmpwi r4, 0x1
@@ -1736,7 +1736,7 @@ lbl_fn_804CE82C_00001604:
 lbl_fn_804CE82C_00001608:
     addi r3, r1, 0x208
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     cmpwi r30, 0x0
     bne lbl_fn_804CE82C_00001638
     lwz r3, lbl_8087F86C
@@ -1758,7 +1758,7 @@ lbl_fn_804CE82C_0000164C:
 lbl_fn_804CE82C_00001650:
     addi r3, r1, 0x8
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_804CE82C_000016D4
 lbl_fn_804CE82C_00001660:
     lwz r0, 0x78(r3)
@@ -1778,7 +1778,7 @@ lbl_fn_804CE82C_00001688:
     addi r6, r6, lbl_807595E0@l
     lwzx r5, r6, r0
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r4, lbl_8087F86C
     addi r3, r1, 0x8
     lwz r4, 0x71c(r4)
@@ -1793,7 +1793,7 @@ lbl_fn_804CE82C_000016BC:
     addi r5, r5, lbl_807595E0@l
     lwzx r5, r5, r0
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
 lbl_fn_804CE82C_000016D4:
     slwi r0, r29, 2
     add r29, r28, r0

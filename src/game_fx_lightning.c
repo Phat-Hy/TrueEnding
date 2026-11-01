@@ -24,7 +24,7 @@ extern void fn_802A3D80(void);
 extern void fn_802A42CC(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_804A04AC(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
@@ -296,7 +296,7 @@ lbl_fn_8029D7AC_000002E0:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_8029D7AC_0000031C
-    bl fn_80373148
+    bl kpad_getClampData
     mr r30, r3
     b lbl_fn_8029D7AC_00000320
 lbl_fn_8029D7AC_0000031C:

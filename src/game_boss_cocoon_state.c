@@ -23,7 +23,7 @@ extern void event_findEntryById(void);
 extern void fn_8021150C(void);
 extern void fn_80213E60(void);
 extern void fn_80219558(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_803750E4(void);
 extern void fn_804439FC(void);
 extern void fn_8044F434(void);
@@ -31,9 +31,9 @@ extern void fn_8044F96C(void);
 extern void fn_80450590(void);
 extern void rand(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
-extern void fn_80695A50(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
+extern void __destroy_arr(void);
 
 /* External data declarations */
 extern u8 lbl_80754848[];
@@ -708,7 +708,7 @@ asm void fn_8044D710(void)
     stw r30, 0x20(r3)
     stw r30, 0x24(r3)
     addi r3, r3, 0x2c
-    bl fn_806958E0
+    bl __construct_new_array
     lwz r0, 0xec(r31)
     lwz r3, 0x0(r31)
     oris r0, r0, 0xf800
@@ -865,7 +865,7 @@ lbl_fn_8044D884_00000950:
     addi r4, r4, fn_8010A828@l
     li r6, 0x3
     addi r3, r3, 0x2c
-    bl fn_806959D8
+    bl __destroy_new_array
     cmpwi r31, 0x0
     ble lbl_fn_8044D884_00000978
     mr r3, r30
@@ -930,7 +930,7 @@ lbl_fn_8044D9BC_00000A30:
     beq lbl_fn_8044D9BC_00000A50
     lis r4, fn_8044E158@ha
     addi r4, r4, fn_8044E158@l
-    bl fn_80695A50
+    bl __destroy_arr
     li r0, 0x0
     stw r0, 0x50(r20)
 lbl_fn_8044D9BC_00000A50:
@@ -1411,7 +1411,7 @@ lbl_fn_8044E0A8_000010D4:
     beq lbl_fn_8044E0A8_000010F4
     lis r4, fn_8044E158@ha
     addi r4, r4, fn_8044E158@l
-    bl fn_80695A50
+    bl __destroy_arr
     li r0, 0x0
     stw r0, 0x50(r29)
 lbl_fn_8044E0A8_000010F4:
@@ -1757,11 +1757,11 @@ lbl_fn_8044E418_00001548:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_8044E418_00001584
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_8044E418_00001584
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     mr r6, r3
     lwz r3, 0x20(r31)
     lwz r4, 0x48(r6)
@@ -1961,11 +1961,11 @@ lbl_fn_8044E644_00001800:
     subi r0, r4, 0x65d8
     cmpw r5, r0
     blt lbl_fn_8044E644_0000184C
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_8044E644_0000184C
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x48(r3)
     cmpwi r0, 0x2
     bne lbl_fn_8044E644_0000184C

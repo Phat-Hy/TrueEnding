@@ -44,7 +44,7 @@ extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_803EBC44(void);
 extern void fn_803EC0A4(void);
 extern void fn_803EC568(void);
@@ -63,8 +63,8 @@ extern void PSVECSquareMag(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void fn_8068B100(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -358,11 +358,11 @@ lbl_fn_803F33A4_00000334:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_803F33A4_00000458
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_803F33A4_00000458
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r4, 0x10(r1)
     lwz r0, 0x48(r3)
     cmpw r4, r0
@@ -1592,7 +1592,7 @@ asm void fn_803F47A0(void)
     stw r31, 0x5f4(r29)
     stw r30, 0x608(r29)
     stw r30, 0x60c(r29)
-    bl fn_806958E0
+    bl __construct_new_array
     addi r3, r29, 0x6a0
     bl atn_LH_Texture_constructor
     stw r30, 0x6d0(r29)
@@ -1631,7 +1631,7 @@ asm void fn_803F4894(void)
     mr r31, r3
     li r7, 0x3
     addi r3, r3, 0xc
-    bl fn_806958E0
+    bl __construct_new_array
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -1657,7 +1657,7 @@ asm void fn_803F48E0(void)
     addi r4, r4, fn_800EF73C@l
     li r6, 0x3
     addi r3, r3, 0xc
-    bl fn_806959D8
+    bl __destroy_new_array
     cmpwi r31, 0x0
     ble lbl_fn_803F48E0_00001588
     mr r3, r30
@@ -1704,7 +1704,7 @@ lbl_fn_803F4948_000015F4:
     addi r4, r4, fn_803F48E0@l
     li r5, 0x30
     li r6, 0x3
-    bl fn_806959D8
+    bl __destroy_new_array
     addic. r31, r29, 0x54c
     beq lbl_fn_803F4948_0000163C
     addic. r3, r31, 0x3c

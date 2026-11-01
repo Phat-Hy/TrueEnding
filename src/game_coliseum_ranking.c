@@ -79,7 +79,7 @@ extern void strcmp(void);
 extern void strstr(void);
 extern void fn_80683B54(void);
 extern void atoi(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 extern void runtime_clampDouble(void);
 extern u32 strlen(const char* str);
 
@@ -1661,7 +1661,7 @@ lbl_fn_804970D4_00001318:
     beq lbl_fn_804970D4_00001338
     lis r4, fn_8049707C@ha
     addi r4, r4, fn_8049707C@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_804970D4_00001338:
     li r0, 0x0
     stw r0, 0x64(r26)

@@ -83,8 +83,8 @@ extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 
 /* External data declarations */
 extern u8 lbl_807541F0[];
@@ -1278,7 +1278,7 @@ lbl_fn_80436EB8_00000F70:
     addi r4, r4, fn_80437054@l
     addi r5, r5, fn_8043711C@l
     li r7, 0x8
-    bl fn_806958E0
+    bl __construct_new_array
     lfs f0, lbl_80886904
     li r30, 0x0
     li r9, 0x5
@@ -1498,7 +1498,7 @@ lbl_fn_8043723C_00001290:
     addi r4, r4, fn_8043711C@l
     li r5, 0x188
     li r6, 0x8
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r29
     li r4, 0x0
     bl fn_803EC69C

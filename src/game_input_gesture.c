@@ -21,7 +21,7 @@ extern void fn_800CB58C(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB6E4(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void fn_801028E4(void);
 extern void fn_80108F38(void);
 extern void fn_8011FC10(void);
@@ -1478,7 +1478,7 @@ asm void fn_802EE604(void)
     cmpwi r3, 0x0
     beq lbl_fn_802EE604_000012F0
     addi r3, r3, 0x5
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x14e4(r30)
 lbl_fn_802EE604_000012F0:
     lis r4, lbl_80748488@ha

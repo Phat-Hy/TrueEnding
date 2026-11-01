@@ -36,7 +36,7 @@ extern void fn_80239D58(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A1F4(void);
 extern void res_registerResource(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_803EC568(void);
 extern void fn_803EC758(void);
 extern void fn_803EC91C(void);
@@ -62,7 +62,7 @@ extern void PSVECSquareMag(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void atoi(void);
-extern void fn_806958E0(void);
+extern void __construct_new_array(void);
 extern void fn_806A8E40(void);
 extern void fn_806B0E30(void);
 extern char* strcpy(char* dest, const char* src);
@@ -973,7 +973,7 @@ asm void fn_80409438(void)
     addi r5, r5, fn_800EF73C@l
     li r6, 0xc
     li r7, 0x7
-    bl fn_806958E0
+    bl __construct_new_array
     addi r3, r31, 0x148
     bl res_MsgHandle_constructor
     lfs f1, lbl_808862C0
@@ -1228,11 +1228,11 @@ lbl_fn_804096D4_00000EF4:
     lfs f29, lbl_808862CC
     li r19, 0x0
     beq lbl_fn_804096D4_00000F74
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_804096D4_00000F74
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x48(r3)
     cmpwi r0, 0x1
     bne lbl_fn_804096D4_00000F74

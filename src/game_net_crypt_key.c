@@ -15,7 +15,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_80116FC0(void);
 extern void fn_801F4728(void);
 extern void fn_801F4998(void);
@@ -1235,7 +1235,7 @@ lbl_fn_804B3C78_000010A8:
     mr r4, r3
     addi r3, r1, 0x208
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_804B3C78_00001134
 lbl_fn_804B3C78_000010E0:
     cmpwi r4, 0x2
@@ -1247,7 +1247,7 @@ lbl_fn_804B3C78_000010E0:
     mr r4, r3
     addi r3, r1, 0x208
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_804B3C78_00001134
 lbl_fn_804B3C78_0000110C:
     cmpwi r4, 0x1
@@ -1259,7 +1259,7 @@ lbl_fn_804B3C78_0000110C:
     mr r4, r3
     addi r3, r1, 0x208
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
 lbl_fn_804B3C78_00001134:
     cmpwi r30, 0x0
     bne lbl_fn_804B3C78_00001160
@@ -1270,7 +1270,7 @@ lbl_fn_804B3C78_00001134:
     mr r4, r3
     addi r3, r1, 0x8
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_804B3C78_000011B4
 lbl_fn_804B3C78_00001160:
     cmpwi r30, 0x2
@@ -1282,7 +1282,7 @@ lbl_fn_804B3C78_00001160:
     mr r4, r3
     addi r3, r1, 0x8
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_804B3C78_000011B4
 lbl_fn_804B3C78_0000118C:
     cmpwi r30, 0x1
@@ -1294,7 +1294,7 @@ lbl_fn_804B3C78_0000118C:
     mr r4, r3
     addi r3, r1, 0x8
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
 lbl_fn_804B3C78_000011B4:
     cmpwi r29, 0x0
     bne lbl_fn_804B3C78_00001240

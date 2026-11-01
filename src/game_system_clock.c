@@ -43,7 +43,7 @@ extern void printf(void);
 extern void wcslen(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 extern void runtime_clampDouble(void);
 
 /* External data declarations */
@@ -1137,7 +1137,7 @@ lbl_player_clock_updateIntervals_00000E80:
     beq lbl_player_clock_updateIntervals_00000EC0
     lis r4, fn_801EEF04@ha
     addi r4, r4, fn_801EEF04@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_player_clock_updateIntervals_00000EC0:
     cmpwi r24, 0x0
     stw r24, 0x78(r30)

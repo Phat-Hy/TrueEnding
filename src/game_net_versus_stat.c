@@ -6,12 +6,12 @@ extern void _restgpr_26(void);
 extern void _restgpr_27(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800A55AC(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_801F4CB4(void);
@@ -608,7 +608,7 @@ lbl_fn_804BDD68_000006DC:
     srwi r5, r0, 31
     add r5, r0, r5
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r4, 0x4c(r31)
     addi r3, r30, 0x2a6
     addi r26, r4, 0x58
@@ -794,7 +794,7 @@ lbl_fn_804BE330_000009C4:
     mr r3, r31
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_804BE330_000009FC
     addi r3, r1, 0x10
@@ -809,7 +809,7 @@ lbl_fn_804BE330_000009FC:
     mr r3, r31
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_804BE330_00000A30
     addi r3, r1, 0xc
@@ -1878,7 +1878,7 @@ lbl_fn_804BEDB8_000018B0:
     mr r3, r31
     li r4, 0x0
     li r5, 0x2
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_804BEDB8_000018E4
     lwz r3, lbl_8087F610
@@ -1888,7 +1888,7 @@ lbl_fn_804BEDB8_000018E4:
     mr r3, r31
     li r4, 0x0
     li r5, 0x3
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_804BEDB8_00001908
     lwz r3, lbl_8087F610

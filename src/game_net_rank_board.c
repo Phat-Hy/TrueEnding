@@ -13,18 +13,18 @@ extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006A900(void);
 extern void fn_8009EE30(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB5B4(void);
 extern void atn_Task_unlink(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_801F4D80(void);
 extern void profile_getMetricValue(void);
 extern void res_findResourceSlot(void);
 extern void world_updateMapTransition(void);
 extern void fn_8036FB4C(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_803743AC(void);
 extern void fn_8037587C(void);
 extern void boss_getOffset54(void);
@@ -1132,7 +1132,7 @@ lbl_fn_8051F7D4_00000EC4:
     li r4, 0x0
     li r5, 0x6
     lwz r3, lbl_8087EF70
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_8051F7D4_00000F18
     addi r3, r1, 0x10
@@ -1295,7 +1295,7 @@ asm void fn_8051FD24(void)
     mr r3, r30
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_8051FD24_00001190
     lwz r3, 0x48(r31)
@@ -1337,7 +1337,7 @@ lbl_fn_8051FD24_00001190:
     mr r3, r30
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_8051FD24_000012F4
     lwz r0, 0x3ed0(r31)
@@ -1583,7 +1583,7 @@ lbl_fn_8052009C_000014CC:
     li r0, 0x12
     stw r0, 0x563c(r3)
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x48(r3)
     cmpwi r0, 0x1
     bne lbl_fn_8052009C_00001518
@@ -1643,7 +1643,7 @@ asm void fn_805201F0(void)
     stw r30, 0x28(r1)
     mr r30, r3
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r5, 0x48(r3)
     li r0, 0xcd
     lwz r6, 0x4c(r3)
@@ -2055,7 +2055,7 @@ lbl_fn_80520638_00001B08:
     beq lbl_fn_80520638_00001E7C
     addi r3, r1, 0xb0
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1c(r1)
     addi r3, r1, 0xb0
     bl talk_parseQuotedString
@@ -2063,17 +2063,17 @@ lbl_fn_80520638_00001B08:
     bl talk_parseQuotedString
     addi r3, r1, 0xb0
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x24(r1)
     addi r3, r1, 0xb0
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x28(r1)
     addi r3, r1, 0xb0
     bl talk_parseQuotedString
     addi r3, r1, 0xb0
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x20(r1)
     addi r3, r1, 0xb0
     bl talk_parseQuotedString
@@ -2097,7 +2097,7 @@ lbl_fn_80520638_00001BD8:
     stw r26, 0x2c(r1)
     addi r3, r1, 0xb0
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x30(r1)
     addi r3, r1, 0xb0
     bl talk_parseQuotedString
@@ -2169,7 +2169,7 @@ lbl_fn_80520638_00001CC4:
 lbl_fn_80520638_00001CDC:
     lwz r3, 0x18(r1)
 lbl_fn_80520638_00001CE0:
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r0, 0x10(r1)
     stw r3, 0x6c(r26)
     srwi. r0, r0, 31
@@ -2180,7 +2180,7 @@ lbl_fn_80520638_00001CFC:
     lwz r3, 0x18(r1)
 lbl_fn_80520638_00001D00:
     addi r3, r3, 0x2
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x70(r26)
 lbl_fn_80520638_00001D0C:
     addi r24, r24, 0x1

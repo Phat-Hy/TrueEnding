@@ -25,7 +25,7 @@ extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
 extern void fn_800DBF68(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_80119030(void);
 extern void fn_8011B018(void);
 extern void fn_8011B8D4(void);
@@ -51,9 +51,9 @@ extern void fn_804A3AF0(void);
 extern void fn_804A3B60(void);
 extern void strcmp(void);
 extern void wcslen(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
-extern void fn_80695A50(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
+extern void __destroy_arr(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -644,7 +644,7 @@ lbl_fn_801170C8_0000063C:
     mr r5, r31
     addi r3, r30, lbl_807C78F0@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r30, lbl_807C78F0@l
     lmw r26, 0x18(r1)
     lwz r0, 0x34(r1)
@@ -1133,7 +1133,7 @@ lbl_fn_801177E8_00000C88:
     lis r4, fn_80117E88@ha
     mr r3, r0
     addi r4, r4, fn_80117E88@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_801177E8_00000CB8:
     addic. r0, r30, 0x4c0
     li r0, 0x0
@@ -1145,7 +1145,7 @@ lbl_fn_801177E8_00000CB8:
     lis r4, fn_80117E88@ha
     li r3, 0x0
     addi r4, r4, fn_80117E88@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_801177E8_00000CE4:
     li r0, 0x0
     stw r0, 0x4c4(r30)
@@ -1165,7 +1165,7 @@ lbl_fn_801177E8_00000D0C:
     addi r4, r4, atn_LH_Texture_destructAndFree@l
     li r5, 0x30
     li r6, 0x11
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
     bl atn_Task_destructor
@@ -1315,7 +1315,7 @@ lbl_fn_80117A48_00000EE8:
     lis r4, fn_80117E88@ha
     mr r3, r0
     addi r4, r4, fn_80117E88@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80117A48_00000F18:
     addic. r0, r30, 0x4c0
     li r0, 0x0
@@ -1327,7 +1327,7 @@ lbl_fn_80117A48_00000F18:
     lis r4, fn_80117E88@ha
     li r3, 0x0
     addi r4, r4, fn_80117E88@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80117A48_00000F44:
     li r0, 0x0
     stw r0, 0x4c4(r30)
@@ -1347,7 +1347,7 @@ lbl_fn_80117A48_00000F6C:
     addi r4, r4, atn_LH_Texture_destructAndFree@l
     li r5, 0x30
     li r6, 0x11
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
     bl atn_Task_destructor
@@ -1405,7 +1405,7 @@ asm void fn_80117B54(void)
     stw r29, 0x16c(r31)
     stw r29, 0x170(r31)
     stw r29, 0x174(r31)
-    bl fn_806958E0
+    bl __construct_new_array
     addi r30, r31, 0x4b8
     stw r29, 0x4ac(r31)
     mr r3, r30
@@ -1639,7 +1639,7 @@ asm void fn_80117EF4(void)
     lis r4, fn_80117E88@ha
     mr r3, r0
     addi r4, r4, fn_80117E88@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80117EF4_000013A8:
     addic. r0, r30, 0x4c0
     li r0, 0x0
@@ -1651,7 +1651,7 @@ lbl_fn_80117EF4_000013A8:
     lis r4, fn_80117E88@ha
     li r3, 0x0
     addi r4, r4, fn_80117E88@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80117EF4_000013D4:
     li r0, 0x0
     stw r0, 0x4c4(r30)
@@ -1671,7 +1671,7 @@ lbl_fn_80117EF4_000013FC:
     addi r4, r4, atn_LH_Texture_destructAndFree@l
     li r5, 0x30
     li r6, 0x11
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
     bl atn_Task_destructor

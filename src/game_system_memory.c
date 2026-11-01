@@ -25,8 +25,8 @@ extern void fn_8006F420(void);
 extern void fn_8006F72C(void);
 extern void mem_realloc(void);
 extern void fn_800DBF68(void);
-extern void fn_800DC12C(void);
-extern void fn_800DC1DC(void);
+extern void str_parseInt(void);
+extern void wcs_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void fn_800EC254(void);
@@ -892,7 +892,7 @@ lbl_fn_80208BE8_0000094C:
     mr r28, r3
     addi r3, r1, 0x130
     bl talk_parseDialogue
-    bl fn_800DC1DC
+    bl wcs_parseInt
     stw r3, 0x2c(r27)
     addi r30, r30, 0x30
 lbl_fn_80208BE8_00000A64:
@@ -988,10 +988,10 @@ asm void fn_80209120(void)
     cmplwi r3, 0x7
     ble lbl_fn_80209120_00000BB4
     addi r3, r30, 0x2
-    bl fn_800DC12C
+    bl str_parseInt
     mulli r31, r3, 0x64
     addi r3, r30, 0x7
-    bl fn_800DC12C
+    bl str_parseInt
     add r31, r31, r3
 lbl_fn_80209120_00000BB4:
     mr r3, r31
@@ -1019,10 +1019,10 @@ asm void fn_80209184(void)
     cmplwi r3, 0x7
     ble lbl_fn_80209184_00000C18
     addi r3, r30, 0x4
-    bl fn_800DC1DC
+    bl wcs_parseInt
     mulli r31, r3, 0x64
     addi r3, r30, 0xe
-    bl fn_800DC1DC
+    bl wcs_parseInt
     add r31, r31, r3
 lbl_fn_80209184_00000C18:
     mr r3, r31

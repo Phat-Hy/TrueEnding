@@ -15,7 +15,7 @@ extern void fn_80076FF8(void);
 extern void mem_getAllocSize(void);
 extern void fn_800897D8(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
@@ -1584,7 +1584,7 @@ lbl_fn_801CD648_000013F0:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x9
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801CD648_00001498
     lfs f4, 0xe0(r31)

@@ -63,7 +63,7 @@ extern void strcmp(void);
 extern void strstr(void);
 extern void atoi(void);
 extern void abort(void);
-extern void fn_806958E0(void);
+extern void __construct_new_array(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -605,7 +605,7 @@ asm void fn_8032C52C(void)
     addi r5, r5, atn_ColliObject_destructor@l
     li r6, 0x88
     li r7, 0x2
-    bl fn_806958E0
+    bl __construct_new_array
     lis r4, res_MsgHandle_constructor@ha
     lis r5, fn_800EF73C@ha
     addi r3, r31, 0x15c0
@@ -613,7 +613,7 @@ asm void fn_8032C52C(void)
     addi r4, r4, res_MsgHandle_constructor@l
     addi r5, r5, fn_800EF73C@l
     li r7, 0x4
-    bl fn_806958E0
+    bl __construct_new_array
     addi r3, r31, 0x15f0
     bl res_MsgHandle_constructor
     addi r3, r31, 0x15fc

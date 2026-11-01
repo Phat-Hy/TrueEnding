@@ -16,7 +16,7 @@ extern void fn_8006F2F0(void);
 extern void fn_8008CD60(void);
 extern void fn_800BFAC8(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_80103484(void);
 extern void fn_8016F3D0(void);
 extern void thread_findAndNotify(void);
@@ -2083,7 +2083,7 @@ lbl_fn_800F5314_00001CF8:
     lwz r5, 0x4(r6)
     lwz r6, 0x8(r6)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lfs f3, lbl_80881478
     addi r4, r1, 0x7b8
     lfs f4, lbl_808814F4

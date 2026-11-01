@@ -14,7 +14,7 @@ extern void atn_LH_Texture_destructAndFree(void);
 extern void atn_LH_Texture_release(void);
 extern void fn_800DBF68(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_801EC158(void);
 extern void fn_801EC6C0(void);
 extern void fn_801EC784(void);
@@ -212,7 +212,7 @@ asm void fn_801F91DC(void)
     addi r3, r1, 0x30
     addi r4, r4, lbl_80782D50@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_801F91DC_0000027C
 lbl_fn_801F91DC_00000240:
     bge lbl_fn_801F91DC_00000264
@@ -222,7 +222,7 @@ lbl_fn_801F91DC_00000240:
     neg r5, r6
     addi r4, r4, 0xe
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_801F91DC_0000027C
 lbl_fn_801F91DC_00000264:
     lis r4, lbl_80782D50@ha
@@ -230,13 +230,13 @@ lbl_fn_801F91DC_00000264:
     addi r4, r4, lbl_80782D50@l
     addi r4, r4, 0x1e
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
 lbl_fn_801F91DC_0000027C:
     mr r5, r30
     addi r3, r1, 0x70
     addi r4, r1, 0x30
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     li r0, 0x0
     stw r0, 0x24(r1)
     mr r3, r29

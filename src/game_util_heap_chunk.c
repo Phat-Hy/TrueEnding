@@ -14,12 +14,12 @@ extern void fn_8005B6E8(void);
 extern void fn_8006F72C(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DBF68(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_findChar(void);
 extern void fn_80116FC0(void);
 extern void actor_spawnActorWithId(void);
@@ -207,7 +207,7 @@ asm void fn_80585D0C(void)
     stw r0, 0x5c8c(r3)
     lwz r31, lbl_8087EF70
     mr r3, r31
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80585D0C_000001B4
     lwz r0, 0x4c(r30)
@@ -270,7 +270,7 @@ lbl_fn_80585D0C_000001B4:
     mr r3, r31
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80585D0C_000001FC
     addi r3, r1, 0x8
@@ -314,7 +314,7 @@ asm void fn_80585E84(void)
     stw r0, 0x5c94(r6)
     lwz r31, lbl_8087EF70
     mr r3, r31
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80585E84_00000308
     addis r4, r30, 0x2
@@ -363,7 +363,7 @@ lbl_fn_80585E84_00000308:
     mr r3, r31
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80585E84_00000350
     addi r3, r1, 0x8
@@ -401,7 +401,7 @@ asm void fn_80585FD8(void)
     li r4, 0x0
     li r5, 0x4
     mr r3, r31
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80585FD8_00000424
     addis r4, r30, 0x2
@@ -441,7 +441,7 @@ lbl_fn_80585FD8_00000424:
     mr r3, r31
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80585FD8_0000046C
     addi r3, r1, 0x8
@@ -1736,13 +1736,13 @@ lbl_fn_80587250_00001698:
     li r4, 0x0
     li r5, 0x4
     mr r3, r31
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     bne lbl_fn_80587250_000016CC
     mr r3, r31
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80587250_000016FC
 lbl_fn_80587250_000016CC:
@@ -2039,7 +2039,7 @@ lbl_fn_80587628_00001AD0:
     b lbl_fn_80587628_00001EE0
 lbl_fn_80587628_00001AF8:
     mr r3, r18
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x28(r1)
     bl event_findEntryById
     cmpwi r3, 0x0
@@ -2049,11 +2049,11 @@ lbl_fn_80587628_00001AF8:
 lbl_fn_80587628_00001B18:
     addi r3, r1, 0x4c
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x4(r18)
     addi r3, r1, 0x4c
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     addi r27, r27, 0x1
     stw r3, 0x10(r18)
     cmpwi r27, 0x3

@@ -16,11 +16,11 @@ extern void mem_free(void);
 extern void route_interpolatePath(void);
 extern void fn_8008937C(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80145334(void);
@@ -472,7 +472,7 @@ lbl_fn_802AC8E8_00000550:
     bne lbl_fn_802AC8E8_00000578
     addi r3, r1, 0x44
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1514(r29)
     b lbl_fn_802AC8E8_00000718
 lbl_fn_802AC8E8_00000578:
@@ -483,7 +483,7 @@ lbl_fn_802AC8E8_00000578:
     bne lbl_fn_802AC8E8_000005A0
     addi r3, r1, 0x44
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1518(r29)
     b lbl_fn_802AC8E8_00000718
 lbl_fn_802AC8E8_000005A0:
@@ -494,7 +494,7 @@ lbl_fn_802AC8E8_000005A0:
     bne lbl_fn_802AC8E8_000005C8
     addi r3, r1, 0x44
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x151c(r29)
     b lbl_fn_802AC8E8_00000718
 lbl_fn_802AC8E8_000005C8:
@@ -1795,7 +1795,7 @@ lbl_fn_802AD930_000017E4:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_802AD930_000018E4
     li r7, 0x5

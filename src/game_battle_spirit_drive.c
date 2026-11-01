@@ -43,7 +43,7 @@ extern void atoi(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695B00(void);
+extern void __ptmf_scall(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -571,7 +571,7 @@ lbl_fn_8040099C_0000060C:
     lis r4, lbl_80752798@ha
     addi r4, r4, lbl_80752798@l
     add r12, r4, r0
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
 lbl_fn_8040099C_00000638:
     lfs f7, 0x10c(r31)

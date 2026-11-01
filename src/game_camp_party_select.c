@@ -23,7 +23,7 @@ extern void fn_800A49C4(void);
 extern void fn_800A4BE4(void);
 extern void fn_800A4D00(void);
 extern void fn_800A4E08(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800A55AC(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -52,8 +52,8 @@ extern void fn_80621CD0(void);
 extern void wmemcpy(void);
 extern void wcslen(void);
 extern void wcscmp(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
 
@@ -212,7 +212,7 @@ lbl_fn_803B7AD0_00000104:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_803B7AD0_000001BC
     lwz r0, 0x48(r31)
@@ -261,7 +261,7 @@ lbl_fn_803B7AD0_000001BC:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_803B7AD0_0000033C
     li r0, 0x3
@@ -289,7 +289,7 @@ lbl_fn_803B7AD0_00000220:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_803B7AD0_000002BC
     lwz r0, 0xd68(r31)
@@ -330,7 +330,7 @@ lbl_fn_803B7AD0_000002BC:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_803B7AD0_0000033C
     li r0, 0x1
@@ -1784,7 +1784,7 @@ asm void fn_803B9044(void)
     addi r5, r5, atn_LH_Binary_destructor@l
     li r6, 0x8
     li r7, 0x8
-    bl fn_806958E0
+    bl __construct_new_array
     stw r30, 0xc0(r29)
     mr r3, r27
     lwz r4, lbl_80885C98
@@ -1825,7 +1825,7 @@ asm void fn_803B9140(void)
     li r5, 0x8
     li r6, 0x8
     addi r3, r3, 0x60
-    bl fn_806959D8
+    bl __destroy_new_array
     addic. r3, r30, 0x58
     beq lbl_fn_803B9140_000016C4
     li r4, 0x0

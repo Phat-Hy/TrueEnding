@@ -16,7 +16,7 @@ extern void fn_800A4450(void);
 extern void fn_800A55AC(void);
 extern void ref_releaseHandle(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_80116FC0(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_8011BBD0(void);
@@ -276,7 +276,7 @@ lbl_fn_80119F0C_000002B0:
     addi r4, r4, 0x28
     addi r6, r6, 0x1
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_80119F0C_00000330
 lbl_fn_80119F0C_000002DC:
     lwz r6, 0x18(r30)
@@ -288,7 +288,7 @@ lbl_fn_80119F0C_000002DC:
     addi r4, r4, 0x3a
     addi r6, r6, 0x1
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_80119F0C_00000330
 lbl_fn_80119F0C_00000308:
     lwz r6, 0x18(r30)
@@ -300,7 +300,7 @@ lbl_fn_80119F0C_00000308:
     addi r4, r4, 0x4c
     addi r6, r6, 0x1
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
 lbl_fn_80119F0C_00000330:
     lis r28, lbl_8077A0B0@ha
     lwz r6, 0x10(r30)
@@ -310,7 +310,7 @@ lbl_fn_80119F0C_00000330:
     addi r5, r1, 0x18
     addi r4, r28, 0x5e
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r4, 0x5c(r29)
     lis r31, lbl_80736B10@ha
     addi r31, r31, lbl_80736B10@l
@@ -365,7 +365,7 @@ lbl_fn_80119F0C_00000330:
     subf r6, r6, r11
     subf r7, r0, r10
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r4, 0x5c(r29)
     addi r3, r31, 0x2d9
     addi r27, r4, 0x58
@@ -1342,7 +1342,7 @@ lbl_fn_8011B018_000011BC:
     subf r6, r6, r11
     subf r7, r0, r10
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r31, 0x373
     bl str_findChar
     mr r4, r3

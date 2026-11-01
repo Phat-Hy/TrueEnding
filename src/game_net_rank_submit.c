@@ -51,8 +51,8 @@ extern void PSMTXConcat(void);
 extern void wmemcpy(void);
 extern void wcslen(void);
 extern void wcsncmp(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -152,7 +152,7 @@ asm void fn_80522714(void)
     li r7, 0x4
     stb r0, 0x0(r3)
     addi r3, r3, 0x10
-    bl fn_806958E0
+    bl __construct_new_array
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -178,7 +178,7 @@ asm void fn_80522768(void)
     addi r4, r4, fn_8010A828@l
     li r6, 0x4
     addi r3, r3, 0x10
-    bl fn_806959D8
+    bl __destroy_new_array
     cmpwi r31, 0x0
     ble lbl_fn_80522768_0000010C
     mr r3, r30
@@ -213,7 +213,7 @@ asm void fn_805227D0(void)
     addi r4, r4, fn_80522768@l
     li r5, 0x110
     li r6, 0x12
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_805227D0_00000170:
     addic. r3, r30, 0x184
     beq lbl_fn_805227D0_00000180
@@ -225,7 +225,7 @@ lbl_fn_805227D0_00000180:
     addi r4, r4, fn_805226A8@l
     li r5, 0xc
     li r6, 0x6
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
     bl fn_8050FA80
@@ -345,7 +345,7 @@ asm void fn_8052293C(void)
     addi r5, r5, fn_8010A828@l
     li r6, 0x40
     li r7, 0x4
-    bl fn_806958E0
+    bl __construct_new_array
     addi r3, r23, 0x184
     bl boss_getOffset50
     srwi r24, r3, 1

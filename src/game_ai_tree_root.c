@@ -25,7 +25,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void system_getNextSequenceId(void);
 extern void fn_801028E4(void);
 extern void fn_8011FC10(void);
@@ -64,7 +64,7 @@ extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806959D8(void);
+extern void __destroy_new_array(void);
 
 /* External data declarations */
 extern u8 jumptable_80784678[];
@@ -275,7 +275,7 @@ lbl_fn_80256014_00000214:
     addi r4, r4, fn_80255F68@l
     li r5, 0x34
     li r6, 0x4
-    bl fn_806959D8
+    bl __destroy_new_array
     addic. r0, r29, 0x14bc
     beq lbl_fn_80256014_0000024C
     lwz r3, 0x14c4(r29)
@@ -772,7 +772,7 @@ lbl_fn_80256384_00000904:
     addi r3, r1, 0x38
     addi r24, r4, 0x151c
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r0, 0x78(r25)
     li r4, 0x0
     li r5, 0x0
@@ -797,7 +797,7 @@ lbl_fn_80256384_0000097C:
     stw r0, 0x0(r24)
     addi r3, r1, 0x38
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r0, 0x78(r25)
     li r4, 0x0
     li r5, 0x0

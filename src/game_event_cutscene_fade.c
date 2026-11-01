@@ -40,8 +40,8 @@ extern void fn_80576034(void);
 extern void fn_8059C330(void);
 extern void printf(void);
 extern void abort(void);
-extern void fn_806959D8(void);
-extern void fn_80695A50(void);
+extern void __destroy_new_array(void);
+extern void __destroy_arr(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -376,7 +376,7 @@ lbl_fn_8047DF70_00000404:
     beq lbl_fn_8047DF70_0000042C
     lis r4, atn_LH_Texture_destructAndFree@ha
     addi r4, r4, atn_LH_Texture_destructAndFree@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8047DF70_0000042C:
     li r0, 0x0
     stw r0, 0x40(r31)
@@ -609,7 +609,7 @@ lbl_fn_8047DF70_00000748:
     addi r4, r4, fn_8047DC98@l
     li r5, 0x65c
     li r6, 0x4
-    bl fn_806959D8
+    bl __destroy_new_array
     addic. r23, r29, 0xb8
     beq lbl_fn_8047DF70_000007C0
     beq lbl_fn_8047DF70_000007C0

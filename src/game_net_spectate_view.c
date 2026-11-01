@@ -22,7 +22,7 @@ extern void fn_8006EF48(void);
 extern void fn_8006F2F0(void);
 extern void mem_free(void);
 extern void mem_getAllocSize(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void fn_801F4728(void);
@@ -1026,21 +1026,21 @@ lbl_spectateView_renderInterface_00000D64:
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_000012DC
     addi r3, r19, 0x2
-    bl fn_800DC12C
+    bl str_parseInt
     mulli r16, r3, 0x3e8
     addi r3, r19, 0x6
-    bl fn_800DC12C
+    bl str_parseInt
     add r16, r3, r16
     addi r3, r19, 0xa
-    bl fn_800DC12C
+    bl str_parseInt
     mr r23, r3
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r24, r3
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r5, 0x2d4(r15)
     mr r25, r3
     lwz r4, 0x2d8(r15)
@@ -1219,7 +1219,7 @@ lbl_spectateView_renderInterface_0000104C:
     bne lbl_spectateView_renderInterface_000012DC
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x20(r1)
     addi r3, r1, 0x50
     bl talk_parseQuotedString

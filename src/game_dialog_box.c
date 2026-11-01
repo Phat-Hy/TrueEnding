@@ -15,7 +15,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_8009373C(void);
 extern void fn_80094F98(void);
 extern void fn_800BFAC8(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_8010A4A8(void);
 extern void fn_8011D21C(void);
 extern void fn_801333A4(void);
@@ -1974,7 +1974,7 @@ lbl_dialog_renderWindow_00001ADC:
     addi r4, r25, 0x1f6
     lwz r7, 0x8(r27)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lfs f3, lbl_8088196C
     fmr f2, f30
     lfs f4, lbl_80881A88
@@ -2018,7 +2018,7 @@ lbl_dialog_renderWindow_00001B88:
     addi r4, r26, 0x228
     addi r5, r1, 0x3f8
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lfs f3, lbl_8088196C
     fmr f2, f30
     lfs f4, lbl_80881A88

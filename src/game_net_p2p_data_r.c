@@ -14,7 +14,7 @@ extern void fn_800838B8(void);
 extern void fn_800A5218(void);
 extern void fn_800DBF68(void);
 extern void fn_800DC500(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void net_getPacketManager(void);
 extern void fn_805089E4(void);
 extern void fn_8050B7F0(void);
@@ -1179,7 +1179,7 @@ lbl_fn_8050E8CC_00000DD8:
     addi r4, r31, lbl_807931B4@l
     addi r5, r29, 0x1
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r29, r29, 0x1
     addi r30, r30, 0x20
     cmpwi r29, 0x20
@@ -1570,7 +1570,7 @@ lbl_fn_8050EBCC_000012D4:
     lwz r0, 0x2c(r1)
     stw r0, 0x48(r7)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     slwi r0, r28, 4
     addi r4, r1, 0x8
     add r3, r29, r0
@@ -2065,7 +2065,7 @@ asm void fn_8050F474(void)
     addi r3, r1, 0x10
     addi r4, r8, 0xc8
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_8050F474_000019CC
 lbl_fn_8050F474_000019B4:
     lis r4, lbl_807931B4@ha
@@ -2073,7 +2073,7 @@ lbl_fn_8050F474_000019B4:
     addi r4, r4, lbl_807931B4@l
     addi r4, r4, 0xe6
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
 lbl_fn_8050F474_000019CC:
     li r0, 0x0
     stw r0, 0x0(r27)

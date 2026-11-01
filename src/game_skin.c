@@ -64,7 +64,7 @@ extern void printf(void);
 extern void abort(void);
 extern void fn_806952C4(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695B00(void);
+extern void __ptmf_scall(void);
 extern void fn_80709AD0(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
@@ -1283,7 +1283,7 @@ lbl_fn_800C3E84_00000EB8:
     stw r28, 0x8(r1)
     stw r29, 0xc(r1)
     stw r30, 0x10(r1)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     cmplw r3, r26
     bne lbl_fn_800C3E84_00000EB4

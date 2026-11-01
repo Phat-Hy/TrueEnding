@@ -23,7 +23,7 @@ extern void fn_800D0DB0(void);
 extern void fn_800D0F34(void);
 extern void fn_800D10B8(void);
 extern void fn_800D1430(void);
-extern void fn_806958E0(void);
+extern void __construct_new_array(void);
 
 /* External data declarations */
 extern u8 lbl_80734440[];
@@ -1535,7 +1535,7 @@ asm void fn_800CCBF8(void)
     stw r6, 0x0(r3)
     li r6, 0x14c
     addi r3, r3, 0x4
-    bl fn_806958E0
+    bl __construct_new_array
     addi r3, r30, 0x2984
     bl fn_800C7DC4
     addi r6, r30, 0x2a30
@@ -2085,7 +2085,7 @@ lbl_fn_800CCBF8_00001BE0:
     stw r31, 0x34d8(r30)
     stw r31, 0x34dc(r30)
     stw r31, 0x34e0(r30)
-    bl fn_806958E0
+    bl __construct_new_array
     stw r31, 0x46e4(r30)
     lwz r3, lbl_8087EE90
     bl fn_800499D0

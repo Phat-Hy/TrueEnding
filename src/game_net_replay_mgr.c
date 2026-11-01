@@ -6,7 +6,7 @@ extern void _restgpr_24(void);
 extern void _savegpr_24(void);
 extern void dtor_80084684(void);
 extern void mem_alloc(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800A55AC(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
@@ -15,7 +15,7 @@ extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_80124BFC(void);
 extern void save_validateHeader(void);
@@ -450,7 +450,7 @@ lbl_fn_804C2D5C_00000504:
     stw r0, 0xa4(r5)
     stw r30, 0xa8(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     cmpwi r30, 0x0
     bne lbl_fn_804C2D5C_00000590
     add r3, r27, r31
@@ -2047,7 +2047,7 @@ lbl_fn_804C4150_00001AC4:
     beq lbl_fn_804C4150_00001AE0
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     b lbl_fn_804C4150_00001AE4
 lbl_fn_804C4150_00001AE0:
     li r3, 0x0
@@ -2073,7 +2073,7 @@ lbl_fn_804C4150_00001B20:
     beq lbl_fn_804C4150_00001B3C
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     b lbl_fn_804C4150_00001B40
 lbl_fn_804C4150_00001B3C:
     li r3, 0x0

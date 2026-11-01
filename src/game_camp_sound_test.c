@@ -12,7 +12,7 @@ extern void fn_803BF824(void);
 extern void fn_803BF8EC(void);
 extern void fn_803BF960(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 
 /* External data declarations */
 
@@ -142,7 +142,7 @@ asm void fn_803C7964(void)
     lis r4, fn_803BF824@ha
     mr r3, r0
     addi r4, r4, fn_803BF824@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803C7964_00000048:
     cmpwi r30, 0x0
     stw r30, 0x0(r29)
@@ -324,7 +324,7 @@ lbl_fn_803C7A24_000002A8:
     lis r4, fn_803BF824@ha
     mr r3, r28
     addi r4, r4, fn_803BF824@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803C7A24_000002C0:
     addi r11, r1, 0x30
     bl _restgpr_22
@@ -1089,7 +1089,7 @@ asm void fn_803C856C(void)
     lis r4, fn_803BF8EC@ha
     mr r3, r0
     addi r4, r4, fn_803BF8EC@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803C856C_00000C50:
     cmpwi r30, 0x0
     stw r30, 0x0(r29)
@@ -1259,7 +1259,7 @@ lbl_fn_803C862C_00000E84:
     lis r4, fn_803BF8EC@ha
     mr r3, r28
     addi r4, r4, fn_803BF8EC@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803C862C_00000E9C:
     addi r11, r1, 0x30
     bl _restgpr_23
@@ -1336,7 +1336,7 @@ asm void fn_803C88A0(void)
     lis r4, fn_803BF960@ha
     mr r3, r0
     addi r4, r4, fn_803BF960@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803C88A0_00000F84:
     cmpwi r30, 0x0
     stw r30, 0x0(r29)
@@ -1492,7 +1492,7 @@ lbl_fn_803C8960_00001180:
     lis r4, fn_803BF960@ha
     mr r3, r31
     addi r4, r4, fn_803BF960@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803C8960_00001198:
     addi r11, r1, 0x30
     bl _restgpr_23

@@ -40,7 +40,7 @@ extern void fn_80476130(void);
 extern void PSMTXMultVec(void);
 extern void memcmp(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 extern void vec3_isNonZero(void);
 extern u32 strlen(const char* str);
 
@@ -2383,7 +2383,7 @@ lbl_lockon_updateTarget_00002004:
     beq lbl_lockon_updateTarget_000020C4
     lis r4, fn_800970CC@ha
     addi r4, r4, fn_800970CC@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_lockon_updateTarget_000020C4:
     cmpwi r30, 0x0
     stw r30, 0x224(r31)

@@ -14,7 +14,7 @@ extern void fn_8005E3E4(void);
 extern void fn_8005E7F4(void);
 extern void fn_80076FF8(void);
 extern void fn_800BDB58(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void fn_801F4728(void);
@@ -798,7 +798,7 @@ lbl_fn_804AA490_0000097C:
     cmpwi r3, 0x0
     beq lbl_fn_804AA490_00000D04
     mr r3, r19
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x838(r20)
     b lbl_fn_804AA490_00000D04
 lbl_fn_804AA490_000009B4:

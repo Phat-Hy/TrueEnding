@@ -10,7 +10,7 @@ extern void fn_8004ECC0(void);
 extern void fn_8004ED34(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_800EB7A0(void);
 extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
@@ -831,7 +831,7 @@ lbl_fn_802CB8A0_00000A8C:
     addi r3, r1, 0x260
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x260
     bl fn_80109828

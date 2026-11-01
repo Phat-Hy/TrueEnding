@@ -89,7 +89,7 @@ extern void strcmp(void);
 extern void swprintf(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 extern void vec3_isNonZero(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
@@ -348,7 +348,7 @@ asm void fn_80041B90(void)
     beq lbl_fn_80041B90_00000184
     lis r4, fn_80041C0C@ha
     addi r4, r4, fn_80041C0C@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80041B90_00000184:
     li r0, 0x0
     stw r0, 0x1c(r30)
@@ -409,7 +409,7 @@ asm void AreaEffConfig_destructor(void)
     beq lbl_AreaEffConfig_destructor_00000240
     lis r4, fn_80041B90@ha
     addi r4, r4, fn_80041B90@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_AreaEffConfig_destructor_00000240:
     li r0, 0x0
     stw r0, 0x54(r30)
@@ -809,7 +809,7 @@ lbl_fn_8004215C_00000760:
     cmpwi r3, 0x0
     beq lbl_fn_8004215C_00000784
     addi r4, r30, fn_80041C0C@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8004215C_00000784:
     stw r31, 0x1c(r29)
     stw r31, 0x18(r29)
@@ -1194,7 +1194,7 @@ asm void fn_8004269C(void)
     lis r4, fn_80041C0C@ha
     mr r3, r0
     addi r4, r4, fn_80041C0C@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8004269C_00000C84:
     cmpwi r31, 0x0
     stw r31, 0x0(r30)
@@ -1317,7 +1317,7 @@ asm void fn_800427C8(void)
     stw r0, 0x18(r27)
     stw r0, 0x1c(r27)
     b lbl_fn_800427C8_00000DFC
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_800427C8_00000DFC:
     cmpwi r23, 0x0
     stw r23, 0x18(r27)
@@ -1516,7 +1516,7 @@ lbl_fn_800427C8_00001050:
     beq lbl_fn_800427C8_000010D4
     addi r4, r25, fn_80041C0C@l
     li r3, 0x0
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_800427C8_000010D4:
     cmpwi r23, 0x0
     stw r23, 0x18(r30)
@@ -1601,7 +1601,7 @@ lbl_fn_800427C8_000011AC:
     beq lbl_fn_800427C8_00001208
     addi r4, r27, fn_80041C0C@l
     li r3, 0x0
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_800427C8_00001208:
     cmpwi r23, 0x0
     stw r23, 0x18(r30)
@@ -1687,7 +1687,7 @@ lbl_fn_800427C8_00001318:
     cmpwi r3, 0x0
     beq lbl_fn_800427C8_0000133C
     addi r4, r30, fn_80041C0C@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_800427C8_0000133C:
     stw r29, 0x1c(r26)
     stw r29, 0x18(r26)
@@ -1714,7 +1714,7 @@ lbl_fn_800427C8_00001378:
     cmpwi r3, 0x0
     beq lbl_fn_800427C8_0000139C
     addi r4, r28, fn_80041C0C@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_800427C8_0000139C:
     stw r29, 0x1c(r25)
     stw r29, 0x18(r25)
@@ -1757,7 +1757,7 @@ asm void fn_80042E28(void)
     lis r4, fn_80041B90@ha
     mr r3, r0
     addi r4, r4, fn_80041B90@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80042E28_00001410:
     cmpwi r31, 0x0
     stw r31, 0x0(r30)
@@ -1836,7 +1836,7 @@ asm void fn_80042EEC(void)
     lis r4, fn_80041C0C@ha
     mr r3, r10
     addi r4, r4, fn_80041C0C@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80042EEC_00001504:
     cmpwi r28, 0x0
     stw r28, 0x18(r30)

@@ -10,7 +10,7 @@ extern void fn_800128FC(void);
 extern void fn_80012934(void);
 extern void fn_8005E7F4(void);
 extern void mem_getAllocSize(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_destructor(void);
@@ -414,7 +414,7 @@ asm void fn_80229414(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     lwz r3, lbl_8087EF70
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     bne lbl_fn_80229414_00000480
     lwz r3, lbl_8087F540

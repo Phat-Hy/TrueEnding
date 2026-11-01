@@ -95,7 +95,7 @@ extern void wmemcmp(void);
 extern void wcslen(void);
 extern void fn_806952C4(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -2086,7 +2086,7 @@ lbl_cutscene_actor_updatePose_00001B0C:
     lis r4, fn_800C622C@ha
     lwz r3, 0x8(r30)
     addi r4, r4, fn_800C622C@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_cutscene_actor_updatePose_00001B1C:
     li r0, 0x8
     stw r26, 0x8(r30)
@@ -2259,7 +2259,7 @@ lbl_cutscene_actor_updatePose_00001D78:
     lis r4, fn_800C622C@ha
     lwz r3, 0x8(r30)
     addi r4, r4, fn_800C622C@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_cutscene_actor_updatePose_00001D88:
     stw r23, 0x8(r30)
     stw r24, 0x4(r30)

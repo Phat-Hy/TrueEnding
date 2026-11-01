@@ -26,7 +26,7 @@ extern void PSVECNormalize(void);
 extern void rand(void);
 extern void fn_8068A850(void);
 extern void std_atan2(void);
-extern void fn_806958E0(void);
+extern void __construct_new_array(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -1605,7 +1605,7 @@ asm void fn_803936A4(void)
     addi r5, r5, atn_LH_Binary_destructor@l
     li r6, 0x8
     li r7, 0x3
-    bl fn_806958E0
+    bl __construct_new_array
     li r23, 0x0
     addi r7, r21, 0x80
     addi r0, r21, 0x13c

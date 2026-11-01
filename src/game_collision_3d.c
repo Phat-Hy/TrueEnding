@@ -6,7 +6,7 @@ extern void _restgpr_21(void);
 extern void _savegpr_21(void);
 extern void fn_8010B180(void);
 extern void fn_801789D8(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
@@ -161,17 +161,17 @@ lbl_fn_800FFE68_000001B0:
     bne lbl_fn_800FFE68_000003EC
 lbl_fn_800FFE68_000001E0:
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_800FFE68_00000294
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r21, 0x48(r3)
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r26, 0x4c(r3)
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r21, 0x2
     lwz r0, 0x50(r3)
     bne lbl_fn_800FFE68_0000024C

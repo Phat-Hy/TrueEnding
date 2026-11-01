@@ -24,7 +24,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_800D3FA4(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_801E9544(void);
 extern void fn_801EB188(void);
 extern void fn_801EB7C4(void);
@@ -513,7 +513,7 @@ lbl_fn_801E9B84_00000558:
     srwi r6, r0, 31
     add r6, r0, r6
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_801E9B84_000005C8
 lbl_fn_801E9B84_000005AC:
     lis r4, lbl_807829C8@ha
@@ -522,7 +522,7 @@ lbl_fn_801E9B84_000005AC:
     addi r3, r1, 0x180
     addi r4, r4, 0x10
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
 lbl_fn_801E9B84_000005C8:
     lwz r0, lbl_8087F610
     cmpwi r0, 0x0
@@ -568,7 +568,7 @@ lbl_fn_801E9B84_00000644:
     addi r3, r1, 0x180
     addi r4, r4, 0x10
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
 lbl_fn_801E9B84_00000670:
     lwz r4, 0x48(r30)
     addi r3, r1, 0x140

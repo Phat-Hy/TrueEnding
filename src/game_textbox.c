@@ -59,7 +59,7 @@ extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
 extern void GXLoadTexMtxImm(void);
 extern void std_pow(void);
-extern void fn_806958E0(void);
+extern void __construct_new_array(void);
 
 /* External data declarations */
 extern u8 lbl_80732C08[];
@@ -141,7 +141,7 @@ asm void fn_800AD0F0(void)
     addi r5, r5, atn_LH_Texture_destructAndFree@l
     li r6, 0x30
     li r7, 0x8
-    bl fn_806958E0
+    bl __construct_new_array
     addi r3, r31, 0x2f0
     bl atn_LH_Texture_constructor
     addi r3, r31, 0x320

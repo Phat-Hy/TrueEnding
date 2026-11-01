@@ -32,7 +32,7 @@ extern void fn_8009373C(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_80099E9C(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800EC254(void);
 extern void fn_800EC2C4(void);
@@ -131,7 +131,7 @@ extern void fn_8035B694(void);
 extern void world_setGlobalFlag(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
@@ -147,7 +147,7 @@ extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
 extern void abort(void);
-extern void fn_806958E0(void);
+extern void __construct_new_array(void);
 
 /* External data declarations */
 extern u8 jumptable_80789330[];
@@ -576,7 +576,7 @@ asm void fn_803388A4(void)
     stw r28, 0x14c4(r31)
     stb r28, 0x14c8(r31)
     stw r28, 0x14d8(r31)
-    bl fn_806958E0
+    bl __construct_new_array
     stw r28, 0x1558(r31)
     addi r3, r31, 0x1568
     stw r28, 0x155c(r31)
@@ -876,7 +876,7 @@ asm void fn_80338D14(void)
 lbl_fn_80338D14_00000974:
     mr r3, r21
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     cmpwi r3, 0x0
     mr r23, r3
     beq lbl_fn_80338D14_00000BD8
@@ -1198,7 +1198,7 @@ lbl_fn_80338FD0_00000E18:
     bne lbl_fn_80338FD0_00000E40
     addi r3, r1, 0x10
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x176c(r31)
     b lbl_fn_80338FD0_00001290
 lbl_fn_80338FD0_00000E40:
@@ -1209,7 +1209,7 @@ lbl_fn_80338FD0_00000E40:
     bne lbl_fn_80338FD0_00000E68
     addi r3, r1, 0x10
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x16c4(r31)
     b lbl_fn_80338FD0_00001290
 lbl_fn_80338FD0_00000E68:
@@ -1220,7 +1220,7 @@ lbl_fn_80338FD0_00000E68:
     bne lbl_fn_80338FD0_00000E90
     addi r3, r1, 0x10
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x16cc(r31)
     b lbl_fn_80338FD0_00001290
 lbl_fn_80338FD0_00000E90:
@@ -1231,7 +1231,7 @@ lbl_fn_80338FD0_00000E90:
     bne lbl_fn_80338FD0_00000EB8
     addi r3, r1, 0x10
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x16a4(r31)
     b lbl_fn_80338FD0_00001290
 lbl_fn_80338FD0_00000EB8:
@@ -1242,7 +1242,7 @@ lbl_fn_80338FD0_00000EB8:
     bne lbl_fn_80338FD0_00000EE0
     addi r3, r1, 0x10
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x16a8(r31)
     b lbl_fn_80338FD0_00001290
 lbl_fn_80338FD0_00000EE0:
@@ -1253,7 +1253,7 @@ lbl_fn_80338FD0_00000EE0:
     bne lbl_fn_80338FD0_00000F08
     addi r3, r1, 0x10
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1770(r31)
     b lbl_fn_80338FD0_00001290
 lbl_fn_80338FD0_00000F08:
@@ -1275,7 +1275,7 @@ lbl_fn_80338FD0_00000F30:
     bne lbl_fn_80338FD0_00000F58
     addi r3, r1, 0x10
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1778(r31)
     b lbl_fn_80338FD0_00001290
 lbl_fn_80338FD0_00000F58:
@@ -1498,7 +1498,7 @@ lbl_fn_80338FD0_00001254:
 lbl_fn_80338FD0_0000126C:
     addi r3, r1, 0x10
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     cmpwi r3, 0x0
     beq lbl_fn_80338FD0_00001290
     bl task_findEntryById
@@ -2031,7 +2031,7 @@ lbl_fn_80339760_000019E4:
     mr r3, r31
     bl fn_80339F74
     bl fn_80121F00
-    bl fn_80373148
+    bl kpad_getClampData
     mr r28, r3
     bl fn_8000D9E8
     bl fn_8000DCF4

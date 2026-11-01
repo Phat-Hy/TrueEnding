@@ -17,7 +17,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800BFAC8(void);
 extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void fn_80125474(void);
 extern void fn_801255C8(void);
 extern void fn_80126214(void);
@@ -193,7 +193,7 @@ asm void fn_801805A4(void)
     b lbl_fn_801805A4_00000384
 lbl_fn_801805A4_00000124:
     mr r3, r18
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r5, 0x14b8(r21)
     mr r24, r3
     lwz r4, 0x14bc(r21)

@@ -28,9 +28,9 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80102EAC(void);
@@ -1519,7 +1519,7 @@ lbl_fn_8025A67C_000013EC:
     bne lbl_fn_8025A67C_0000141C
     addi r3, r1, 0x44
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x14b8(r18)
     b lbl_fn_8025A67C_000017AC
 lbl_fn_8025A67C_0000141C:
@@ -1542,7 +1542,7 @@ lbl_fn_8025A67C_00001444:
 lbl_fn_8025A67C_00001458:
     addi r3, r1, 0x44
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r4, lbl_8087F430
     mr r23, r3
     li r5, 0x0
@@ -2161,7 +2161,7 @@ lbl_fn_8025ACA0_00001D28:
     addi r3, r1, 0xc0
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0xc0
     bl fn_80109828

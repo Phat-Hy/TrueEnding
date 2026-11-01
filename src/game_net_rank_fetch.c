@@ -33,7 +33,7 @@ extern void res_findResourceSlot(void);
 extern void fn_8023A680(void);
 extern void res_registerResource(void);
 extern void world_getGlobalFlag(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_80375184(void);
 extern void atn_LoadHandle_constructor(void);
 extern void fn_8050F940(void);
@@ -49,7 +49,7 @@ extern void fn_805266C0(void);
 extern void fn_80530D8C(void);
 extern void PSVECNormalize(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806958E0(void);
+extern void __construct_new_array(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -244,7 +244,7 @@ lbl_fn_80520B08_000001F0:
     cmpw r22, r3
     blt lbl_fn_80520B08_00000048
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x48(r3)
     lwz r3, 0x4c(r3)
     cmpwi r0, 0x2
@@ -1558,7 +1558,7 @@ asm void fn_80521E84(void)
     stw r29, 0xdc(r31)
     stw r29, 0xe0(r31)
     stw r29, 0xe8(r31)
-    bl fn_806958E0
+    bl __construct_new_array
     lfs f0, lbl_808879F0
     addi r30, r31, 0x184
     stfs f0, 0x180(r31)
@@ -1575,7 +1575,7 @@ asm void fn_80521E84(void)
     stw r29, 0x18c(r31)
     li r6, 0x110
     li r7, 0x12
-    bl fn_806958E0
+    bl __construct_new_array
     lwz r0, 0x98(r31)
     lis r3, lbl_8075C6C4@ha
     lfs f0, lbl_808879F0

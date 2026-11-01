@@ -28,7 +28,7 @@ extern void fn_800C2B24(void);
 extern void fn_800C2C20(void);
 extern void fn_800D3FA4(void);
 extern void fn_800D5908(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
@@ -806,11 +806,11 @@ lbl_fn_8049248C_000009F4:
     bne lbl_fn_8049248C_00000ABC
     mr r3, r16
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r18, r3
     mr r3, r16
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r17, r3
     mr r3, r15
     mr r4, r18
@@ -988,7 +988,7 @@ lbl_fn_8049248C_00000C38:
     beq lbl_fn_8049248C_00000D04
     mr r3, r16
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r14, r3
     mr r3, r16
     bl talk_formatQuotedString

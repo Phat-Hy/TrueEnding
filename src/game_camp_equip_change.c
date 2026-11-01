@@ -19,7 +19,7 @@ extern void fn_8021150C(void);
 extern void fn_80219558(void);
 extern void fn_803608A4(void);
 extern void fn_803608A8(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_8037D758(void);
 extern void fn_8037D808(void);
 extern void fn_803B9804(void);
@@ -42,7 +42,7 @@ extern void fn_804A1D2C(void);
 extern void fn_8054A340(void);
 extern void fn_8057F19C(void);
 extern void fn_8057F1B8(void);
-extern void fn_806958E0(void);
+extern void __construct_new_array(void);
 
 /* External data declarations */
 
@@ -893,7 +893,7 @@ lbl_fn_803BDB60_00000B60:
     addi r4, r4, fn_8012AE50@l
     addi r5, r5, fn_8012AFE8@l
     li r7, 0x7
-    bl fn_806958E0
+    bl __construct_new_array
     addi r5, r31, 0x638c
     addi r7, r31, 0x6e60
     cmplw r5, r7
@@ -1049,7 +1049,7 @@ lbl_fn_803BDB60_00000D60:
     addi r4, r4, fn_803BB3C0@l
     addi r5, r5, fn_80119ECC@l
     li r7, 0x1c
-    bl fn_806958E0
+    bl __construct_new_array
     addis r3, r31, 0x1
     li r4, 0x0
     addi r3, r3, 0x3434
@@ -1087,11 +1087,11 @@ lbl_fn_803BDEE4_00000E28:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_803BDEE4_00000E4C
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_803BDEE4_00000E4C
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     bl fn_804A1D2C
 lbl_fn_803BDEE4_00000E4C:
     lwz r3, lbl_8087F418
@@ -1597,11 +1597,11 @@ asm void fn_803BE670(void)
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_803BE670_000015AC
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_803BE670_000015AC
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     bl fn_804A1C4C
 lbl_fn_803BE670_000015AC:
     lwz r0, 0x14(r1)

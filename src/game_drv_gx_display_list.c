@@ -22,7 +22,7 @@ extern void fn_805DFA30(void);
 extern void fn_805DFB50(void);
 extern void vswprintf(void);
 extern void wcslen(void);
-extern void fn_80695B00(void);
+extern void __ptmf_scall(void);
 
 /* External data declarations */
 extern u8 lbl_80764630[];
@@ -1853,7 +1853,7 @@ lbl_fn_805DF630_00001998:
     addi r3, r1, 0x28
     addi r12, r1, 0x2c
     stw r29, 0x28(r1)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lis r5, lbl_80764630@ha
     lis r4, lbl_80764638@ha
@@ -1994,7 +1994,7 @@ lbl_fn_805DF630_00001B84:
 lbl_fn_805DF630_00001B88:
     addi r3, r1, 0x28
     addi r12, r1, 0x2c
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     mr r25, r3
 lbl_fn_805DF630_00001B9C:

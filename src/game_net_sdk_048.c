@@ -29,8 +29,8 @@ extern void fn_80609650(void);
 extern void fn_80609660(void);
 extern void fn_80609D00(void);
 extern void strncmp(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern void fn_806A426C(void);
 extern void fn_806A4270(void);
 extern void fn_806D5850(void);
@@ -713,7 +713,7 @@ lbl_fn_80703D00_00000810:
     addi r5, r5, fn_80703F30@l
     li r7, 0x3
     addi r3, r3, 0xb4
-    bl fn_806958E0
+    bl __construct_new_array
     lfs f0, lbl_8088900C
     li r0, 0x0
     stw r0, 0x34(r31)
@@ -856,7 +856,7 @@ asm void fn_80704000(void)
     addi r4, r4, fn_80703F30@l
     li r6, 0x3
     addi r3, r3, 0xb4
-    bl fn_806959D8
+    bl __destroy_new_array
     addic. r3, r30, 0x8
     beq lbl_fn_80704000_00000A40
     li r4, 0x0

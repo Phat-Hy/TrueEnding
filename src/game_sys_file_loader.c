@@ -19,8 +19,8 @@ extern void rand(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -680,7 +680,7 @@ asm void fn_8021D4C4(void)
     stw r0, 0x4(r3)
     stw r0, 0x8(r3)
     addi r3, r3, 0xc
-    bl fn_806958E0
+    bl __construct_new_array
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -706,7 +706,7 @@ asm void fn_8021D520(void)
     li r7, 0x8
     stw r0, 0x0(r3)
     addi r3, r3, 0x4
-    bl fn_806958E0
+    bl __construct_new_array
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -744,7 +744,7 @@ asm void fn_8021D58C(void)
     addi r4, r4, fn_8021CF4C@l
     li r6, 0x8
     addi r3, r3, 0x4
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_8021D58C_00000908:
     cmpwi r31, 0x0
     ble lbl_fn_8021D58C_00000918
@@ -778,7 +778,7 @@ asm void fn_8021D5F8(void)
     stw r0, 0x0(r3)
     stw r0, 0x4(r3)
     addi r3, r3, 0x8
-    bl fn_806958E0
+    bl __construct_new_array
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -804,7 +804,7 @@ asm void fn_8021D650(void)
     addi r4, r4, fn_8021D58C@l
     li r6, 0x5
     addi r3, r3, 0xc
-    bl fn_806959D8
+    bl __destroy_new_array
     cmpwi r31, 0x0
     ble lbl_fn_8021D650_000009D8
     mr r3, r30
@@ -836,7 +836,7 @@ asm void fn_8021D6B8(void)
     addi r4, r4, fn_8021D58C@l
     li r6, 0x5
     addi r3, r3, 0x8
-    bl fn_806959D8
+    bl __destroy_new_array
     cmpwi r31, 0x0
     ble lbl_fn_8021D6B8_00000A40
     mr r3, r30

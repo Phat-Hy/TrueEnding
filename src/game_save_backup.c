@@ -11,7 +11,7 @@ extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DBF68(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void net_player_interpolateState(void);
 extern void fn_801EFA78(void);
 extern void save_validateHeader(void);
@@ -27,8 +27,8 @@ extern void fn_801FEDBC(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_801FEEFC(void);
 extern void wcslen(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 
 /* External data declarations */
 extern u8 lbl_8073E480[];
@@ -1225,7 +1225,7 @@ asm void fn_801F8598(void)
     addi r3, r1, 0x30
     addi r4, r4, lbl_80782D50@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_801F8598_0000108C
 lbl_fn_801F8598_00001050:
     bge lbl_fn_801F8598_00001074
@@ -1235,7 +1235,7 @@ lbl_fn_801F8598_00001050:
     neg r5, r6
     addi r4, r4, 0xe
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_801F8598_0000108C
 lbl_fn_801F8598_00001074:
     lis r4, lbl_80782D50@ha
@@ -1243,13 +1243,13 @@ lbl_fn_801F8598_00001074:
     addi r4, r4, lbl_80782D50@l
     addi r4, r4, 0x1e
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
 lbl_fn_801F8598_0000108C:
     mr r5, r30
     addi r3, r1, 0x70
     addi r4, r1, 0x30
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     li r0, 0x0
     stw r0, 0x24(r1)
     mr r3, r29
@@ -1621,7 +1621,7 @@ lbl_fn_801F8994_0000155C:
     stfs f0, 0x54(r31)
     stw r0, 0x58(r31)
     stw r0, 0xbc(r31)
-    bl fn_806958E0
+    bl __construct_new_array
 lbl_fn_801F8994_000015AC:
     mr r3, r31
     b lbl_fn_801F8994_000015B8
@@ -1731,7 +1731,7 @@ lbl_fn_801F8B68_00001704:
     addi r4, r4, fn_801F9488@l
     li r5, 0x10
     li r6, 0x2
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_801F8B68_00001728:
     cmpwi r29, 0x0
     beq lbl_fn_801F8B68_0000173C

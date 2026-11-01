@@ -13,8 +13,8 @@ extern void OSInitMutex(void);
 extern void OSLockMutex(void);
 extern void OSUnlockMutex(void);
 extern void strcmp(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern void fn_80709AD0(void);
 extern void fn_8070A050(void);
 extern void fn_8070AF70(void);
@@ -416,7 +416,7 @@ asm void fn_80716070(void)
     addi r4, r6, fn_8070CEB0@l
     li r6, 0x10
     addi r3, r3, 0x8
-    bl fn_806958E0
+    bl __construct_new_array
     lfs f1, lbl_80889258
     li r29, 0x0
     lfs f0, lbl_8088925C
@@ -482,7 +482,7 @@ lbl_fn_80716130_00000414:
     addi r4, r4, fn_8070CED0@l
     li r5, 0x10
     li r6, 0x4
-    bl fn_806959D8
+    bl __destroy_new_array
     cmpwi r29, 0x0
     ble lbl_fn_80716130_0000045C
     mr r3, r28
@@ -2593,7 +2593,7 @@ lbl_fn_80717D10_00001FF4:
     addi r4, r4, fn_80717A20@l
     addi r5, r5, fn_80717A40@l
     li r7, 0x80
-    bl fn_806958E0
+    bl __construct_new_array
     lis r4, fn_80717EA0@ha
     lis r5, lbl_808632C0@ha
     addi r4, r4, fn_80717EA0@l

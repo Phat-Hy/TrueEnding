@@ -17,7 +17,7 @@ extern void mem_realloc(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800DCA70(void);
 extern void fn_800EC654(void);
@@ -1540,7 +1540,7 @@ lbl_fn_80204E54_00001414:
     bl talk_parseQuotedString
     addi r3, r1, 0x13c
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     cmpwi r26, 0x0
     stw r3, 0x12c(r16)
     addi r20, r20, 0x130

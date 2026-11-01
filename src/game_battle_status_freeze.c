@@ -59,7 +59,7 @@ extern void strcmp(void);
 extern void swprintf(void);
 extern void std_atan2(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 extern char* strcpy(char* dest, const char* src);
 
 /* External data declarations */
@@ -1001,7 +1001,7 @@ asm void fn_80427F28(void)
     lwz r31, 0x20(r31)
     stw r31, 0x5fc(r30)
     b lbl_fn_80427F28_00000BE8
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80427F28_00000BE8:
     cmpwi r31, 0x0
     stw r31, 0x5f4(r30)
@@ -1100,7 +1100,7 @@ asm void fn_804280B4(void)
     beq lbl_fn_804280B4_00000D54
     lis r4, fn_80427804@ha
     addi r4, r4, fn_80427804@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_804280B4_00000D54:
     li r0, 0x0
     stw r0, 0x5f8(r30)

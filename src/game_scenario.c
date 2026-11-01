@@ -20,7 +20,7 @@ extern void fn_80087E9C(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void atn_Curve_evaluate(void);
 extern void PSMTXMultVec(void);
@@ -1674,7 +1674,7 @@ asm void fn_8007A530(void)
     bl fn_8005BCE8
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r4, 0x4(r31)
     mr r28, r3
     cmpwi r4, 0x0
@@ -1707,7 +1707,7 @@ lbl_fn_8007A530_000015F8:
 lbl_fn_8007A530_00001600:
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     lis r28, lbl_80731900@ha
     stw r3, 0x8(r31)
     addi r29, r28, lbl_80731900@l

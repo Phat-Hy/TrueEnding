@@ -7,9 +7,9 @@ extern void _restgpr_22(void);
 extern void _savegpr_22(void);
 extern void dtor_80084684(void);
 extern void mem_free(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_80116FC0(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_801CF334(void);
@@ -116,7 +116,7 @@ lbl_fn_801D8CC4_00000080:
     li r4, 0x0
     li r5, 0x4
     mr r3, r28
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801D8CC4_00000334
     mr r3, r31
@@ -214,7 +214,7 @@ lbl_fn_801D8CC4_000001E0:
     lwz r5, 0x4(r31)
     addi r3, r1, 0x70
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F580
     addi r4, r1, 0x70
     bl fn_804A4300
@@ -300,7 +300,7 @@ lbl_fn_801D8CC4_00000334:
     mr r3, r28
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801D8CC4_00000398
     addi r3, r1, 0x14
@@ -326,7 +326,7 @@ lbl_fn_801D8CC4_00000398:
     mr r3, r28
     li r4, 0x0
     li r5, 0xd
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801D8CC4_00000460
     lwz r0, 0xb50(r31)
@@ -378,7 +378,7 @@ lbl_fn_801D8CC4_00000460:
     mr r3, r28
     li r4, 0x0
     li r5, 0xc
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801D8CC4_00000528
     lwz r0, 0xb50(r31)
@@ -477,7 +477,7 @@ asm void fn_801D924C(void)
     mr r30, r3
     lwz r31, lbl_8087EF70
     mr r3, r31
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801D924C_0000063C
     lwz r0, 0x1bbc(r30)
@@ -518,7 +518,7 @@ lbl_fn_801D924C_0000063C:
     mr r3, r31
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801D924C_00000688
     addi r3, r1, 0x8

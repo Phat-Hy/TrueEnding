@@ -13,7 +13,7 @@ extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800CB360(void);
 extern void morph_updateMesh(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void fn_800EB7A0(void);
 extern void fn_800EE360(void);
 extern void atn_LH_Xsca_destructor(void);
@@ -44,7 +44,7 @@ extern void strncmp(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void fn_8068B100(void);
-extern void fn_806958E0(void);
+extern void __construct_new_array(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -1607,7 +1607,7 @@ asm void fn_802FC850(void)
     stb r28, 0x1668(r30)
     stb r28, 0x1669(r30)
     stb r28, 0x166a(r30)
-    bl fn_806958E0
+    bl __construct_new_array
     lfs f11, lbl_80884A28
     li r10, 0xf
     lfs f5, lbl_80884A40
@@ -1762,7 +1762,7 @@ lbl_fn_802FC850_000017E4:
     cmpwi r3, 0x0
     bne lbl_fn_802FC850_00001830
     addi r3, r28, 0x6
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1500(r30)
     b lbl_fn_802FC850_000017E4
 lbl_fn_802FC850_00001830:
@@ -1773,7 +1773,7 @@ lbl_fn_802FC850_00001830:
     cmpwi r3, 0x0
     bne lbl_fn_802FC850_00001858
     addi r3, r28, 0x6
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1504(r30)
     b lbl_fn_802FC850_000017E4
 lbl_fn_802FC850_00001858:
@@ -1784,7 +1784,7 @@ lbl_fn_802FC850_00001858:
     cmpwi r3, 0x0
     bne lbl_fn_802FC850_000017E4
     addi r3, r28, 0x6
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1508(r30)
     b lbl_fn_802FC850_000017E4
 lbl_fn_802FC850_00001880:

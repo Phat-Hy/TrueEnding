@@ -68,7 +68,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void std_atan2(void);
-extern void fn_806959D8(void);
+extern void __destroy_new_array(void);
 
 /* External data declarations */
 extern u8 jumptable_807866C0[];
@@ -972,7 +972,7 @@ lbl_fn_802C0B68_00000B7C:
     addi r4, r4, atn_ColliCapsule_destructor@l
     li r5, 0x58
     li r6, 0xb
-    bl fn_806959D8
+    bl __destroy_new_array
     addic. r3, r29, 0x14d4
     beq lbl_fn_802C0B68_00000BA4
     li r4, 0x0

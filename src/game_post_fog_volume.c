@@ -18,7 +18,7 @@ extern void mem_free(void);
 extern void fn_800897D8(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800E0AA8(void);
 extern void fn_800E0AB0(void);
@@ -56,7 +56,7 @@ extern void printf(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void abort(void);
-extern void fn_806959D8(void);
+extern void __destroy_new_array(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -263,7 +263,7 @@ lbl_fn_802D710C_000001E0:
     addi r4, r4, fn_800EF73C@l
     li r5, 0xc
     li r6, 0x2
-    bl fn_806959D8
+    bl __destroy_new_array
     addic. r29, r30, 0x15d8
     beq lbl_fn_802D710C_00000218
     mr r3, r29
@@ -1237,7 +1237,7 @@ lbl_fn_802D7E80_00000FDC:
 lbl_fn_802D7E80_00000FF8:
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r28, r3
     bl fn_80121F00
     bl fn_8013C504
@@ -1271,7 +1271,7 @@ lbl_fn_802D7E80_00001060:
 lbl_fn_802D7E80_00001074:
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r28, r3
     bl fn_80121F00
     bl fn_8013C504
@@ -1297,7 +1297,7 @@ lbl_fn_802D7E80_000010B8:
 lbl_fn_802D7E80_000010D0:
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     cmpwi r3, 0x0
     stw r3, 0x10(r1)
     beq lbl_fn_802D7E80_000010F4
@@ -1318,7 +1318,7 @@ lbl_fn_802D7E80_00001104:
 lbl_fn_802D7E80_00001118:
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r28, r3
     bl fn_801A03E0
     mr r4, r28
@@ -1353,7 +1353,7 @@ lbl_fn_802D7E80_00001180:
 lbl_fn_802D7E80_00001194:
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r28, r3
     bl fn_801A03E0
     mr r4, r28
@@ -1396,7 +1396,7 @@ lbl_fn_802D7E80_000011EC:
     ble lbl_fn_802D7E80_00001250
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x24(r1)
     addi r3, r31, 0x168c
     addi r4, r1, 0x20
@@ -1415,7 +1415,7 @@ lbl_fn_802D7E80_00001264:
     bne lbl_fn_802D7E80_000012A8
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r28, r3
     bl fn_80121F00
     bl fn_8013C504
@@ -1433,7 +1433,7 @@ lbl_fn_802D7E80_000012A8:
     bne lbl_fn_802D7E80_000012D0
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x14f8(r31)
     b lbl_fn_802D7E80_00001410
 lbl_fn_802D7E80_000012D0:
@@ -1444,7 +1444,7 @@ lbl_fn_802D7E80_000012D0:
     bne lbl_fn_802D7E80_000012F8
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1584(r31)
     b lbl_fn_802D7E80_00001410
 lbl_fn_802D7E80_000012F8:
@@ -1455,7 +1455,7 @@ lbl_fn_802D7E80_000012F8:
     bne lbl_fn_802D7E80_00001320
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1608(r31)
     b lbl_fn_802D7E80_00001410
 lbl_fn_802D7E80_00001320:
@@ -1466,7 +1466,7 @@ lbl_fn_802D7E80_00001320:
     bne lbl_fn_802D7E80_00001348
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1604(r31)
     b lbl_fn_802D7E80_00001410
 lbl_fn_802D7E80_00001348:

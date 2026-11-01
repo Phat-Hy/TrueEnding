@@ -29,7 +29,7 @@ extern void fn_805BF414(void);
 extern void printf(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 
 /* External data declarations */
 extern u8 jumptable_8079380C[];
@@ -1860,7 +1860,7 @@ asm void fn_8052F890(void)
     lis r4, atn_LH_Texture_destructAndFree@ha
     mr r3, r5
     addi r4, r4, atn_LH_Texture_destructAndFree@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8052F890_00001A74:
     cmpwi r28, 0x0
     stw r28, 0x3c(r26)

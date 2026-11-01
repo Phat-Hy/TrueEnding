@@ -59,9 +59,9 @@ extern void printf(void);
 extern void atoi(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
-extern void fn_80695A50(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
+extern void __destroy_arr(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -649,7 +649,7 @@ asm void fn_803F0328(void)
     lis r4, fn_802375C4@ha
     mr r3, r0
     addi r4, r4, fn_802375C4@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803F0328_000006C0:
     cmpwi r30, 0x0
     stw r30, 0x0(r29)
@@ -701,7 +701,7 @@ asm void fn_803F03D8(void)
     lis r4, fn_800EF73C@ha
     mr r3, r0
     addi r4, r4, fn_800EF73C@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803F03D8_00000770:
     cmpwi r30, 0x0
     stw r30, 0x0(r29)
@@ -753,7 +753,7 @@ asm void fn_803F0488(void)
     lis r4, ref_releaseHandle@ha
     mr r3, r0
     addi r4, r4, ref_releaseHandle@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803F0488_00000820:
     cmpwi r30, 0x0
     stw r30, 0x0(r29)
@@ -805,7 +805,7 @@ asm void fn_803F0538(void)
     lis r4, fn_80041C0C@ha
     mr r3, r0
     addi r4, r4, fn_80041C0C@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803F0538_000008D0:
     cmpwi r30, 0x0
     stw r30, 0x0(r29)
@@ -1859,7 +1859,7 @@ asm void fn_803F1310(void)
     stw r0, 0x54(r31)
     stw r8, 0x58(r31)
     stw r8, 0x5c(r31)
-    bl fn_806958E0
+    bl __construct_new_array
 lbl_fn_803F1310_00001708:
     mr r3, r31
     b lbl_fn_803F1310_00001714
@@ -1950,7 +1950,7 @@ asm void fn_803F1474(void)
     addi r4, r4, fn_803F1418@l
     li r5, 0x10
     li r6, 0x10
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_803F1474_00001828:
     mr r3, r30
     li r4, 0x0

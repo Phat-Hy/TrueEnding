@@ -93,8 +93,8 @@ extern void fn_805A70F4(void);
 extern void PSVECNormalize(void);
 extern void fn_80605540(void);
 extern void fn_806055A0(void);
-extern void fn_806959D8(void);
-extern void fn_80695A50(void);
+extern void __destroy_new_array(void);
+extern void __destroy_arr(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -573,7 +573,7 @@ lbl_fn_80365708_000004DC:
     addi r4, r4, fn_80119ECC@l
     li r5, 0x2d4
     li r6, 0x1c
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_80365708_00000514:
     addic. r3, r31, 0x539c
     beq lbl_fn_80365708_00000530
@@ -581,7 +581,7 @@ lbl_fn_80365708_00000514:
     li r5, 0x240
     addi r4, r4, fn_8012AFE8@l
     li r6, 0x7
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_80365708_00000530:
     mr r3, r31
     bl dtor_80084684
@@ -1386,7 +1386,7 @@ lbl_fn_803663A4_000010B8:
     beq lbl_fn_803663A4_000010D8
     lis r4, fn_80366364@ha
     addi r4, r4, fn_80366364@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803663A4_000010D8:
     li r0, 0x0
     stw r0, 0xc(r30)
@@ -1469,7 +1469,7 @@ lbl_world_Manager_destructor_000011C4:
     addi r4, r4, fn_8012AFE8@l
     li r5, 0x240
     li r6, 0x7
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r25
     bl dtor_80084684
 lbl_world_Manager_destructor_000011F4:
@@ -1970,7 +1970,7 @@ lbl_world_Manager_destructor_00001954:
     beq lbl_world_Manager_destructor_00001974
     lis r4, fn_80366364@ha
     addi r4, r4, fn_80366364@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_world_Manager_destructor_00001974:
     li r0, 0x0
     stw r0, 0xc(r25)

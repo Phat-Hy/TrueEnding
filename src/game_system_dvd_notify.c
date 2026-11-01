@@ -38,15 +38,15 @@ extern void fn_803605EC(void);
 extern void fn_80360848(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_8037E9E0(void);
 extern void fn_803CE074(void);
 extern void fn_803CE0B4(void);
 extern void fn_803CE160(void);
 extern void fn_803CE278(void);
 extern void fn_805A38F4(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -270,11 +270,11 @@ lbl_fn_8037C71C_000001A4:
     cmpw r31, r0
     blt lbl_fn_8037C71C_00000214
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_8037C71C_000001F8
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x48(r3)
     cmpwi r0, 0x1
     bne lbl_fn_8037C71C_000001F8
@@ -364,7 +364,7 @@ asm void fn_8037C934(void)
     addi r5, r5, fn_8004ADF4@l
     li r6, 0x14
     li r7, 0x2
-    bl fn_806958E0
+    bl __construct_new_array
     lfs f1, lbl_808858D8
     addi r4, r30, 0x4c
     lfs f0, lbl_808858DC
@@ -445,7 +445,7 @@ lbl_fn_8037CA24_000003D4:
     addi r4, r4, fn_8004ADF4@l
     li r5, 0x14
     li r6, 0x2
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r28
     li r4, 0x0
     bl atn_Task_destructor
@@ -1310,7 +1310,7 @@ asm void fn_8037D684(void)
     cmpwi r0, 0x0
     beq lbl_fn_8037D684_000010AC
     mr r3, r0
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     bne lbl_fn_8037D684_00001038
     b lbl_fn_8037D684_000010AC
@@ -1322,7 +1322,7 @@ lbl_fn_8037D684_00001038:
     cmpwi r0, 0x0
     ble lbl_fn_8037D684_000010AC
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x48(r3)
     cmpw r30, r0
     bne lbl_fn_8037D684_00001070

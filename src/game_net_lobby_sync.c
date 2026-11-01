@@ -26,7 +26,7 @@ extern void fn_800C2C20(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_8037E12C(void);
 extern void fn_80389884(void);
@@ -44,7 +44,7 @@ extern void fn_804A0BCC(void);
 extern void fn_804A0F80(void);
 extern void PSVECNormalize(void);
 extern void strcmp(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 
 /* External data declarations */
 extern u8 lbl_80756EC8[];
@@ -917,7 +917,7 @@ lbl_fn_8049F4F4_00000BE4:
     beq lbl_fn_8049F4F4_00000C0C
     lis r4, atn_LH_Texture_destructAndFree@ha
     addi r4, r4, atn_LH_Texture_destructAndFree@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8049F4F4_00000C0C:
     stw r31, 0x1f0(r1)
     stw r31, 0x1ec(r1)
@@ -1061,7 +1061,7 @@ lbl_fn_8049F4F4_00000DE8:
     beq lbl_fn_8049F4F4_00000EC0
     mr r3, r22
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r15, r3
     mr r3, r22
     bl talk_formatQuotedString
@@ -1206,11 +1206,11 @@ lbl_fn_8049F4F4_00001018:
     stfs f1, 0x40(r27)
     mr r3, r22
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x68(r26)
     mr r3, r22
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     addi r24, r24, 0x1
     stw r3, 0x74(r26)
     cmpwi r24, 0x3

@@ -26,7 +26,7 @@ extern void fn_800C122C(void);
 extern void fn_800C2C20(void);
 extern void fn_800D5908(void);
 extern void atn_LH_Texture_update(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_802180A8(void);
 extern void sound_initGlobalInstances(void);
@@ -1375,7 +1375,7 @@ lbl_fn_803F5C2C_00001290:
     bne lbl_fn_803F5C2C_000012B8
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x608(r31)
     b lbl_fn_803F5C2C_0000132C
 lbl_fn_803F5C2C_000012B8:

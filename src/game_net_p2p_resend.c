@@ -38,8 +38,8 @@ extern void strstr(void);
 extern void abort(void);
 extern void std_atan2(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806959D8(void);
-extern void fn_80695A50(void);
+extern void __destroy_new_array(void);
+extern void __destroy_arr(void);
 
 /* External data declarations */
 extern u8 lbl_8075B32C[];
@@ -123,7 +123,7 @@ asm void fn_80512A88(void)
     addi r4, r4, fn_800EF73C@l
     li r6, 0x8
     addi r3, r3, 0xd8
-    bl fn_806959D8
+    bl __destroy_new_array
     addic. r0, r30, 0xd4
     beq lbl_fn_80512A88_000000A8
     lwz r3, 0xd4(r30)
@@ -1772,7 +1772,7 @@ asm void fn_8051421C(void)
     stw r0, 0x3c(r3)
     stw r0, 0x40(r3)
     b lbl_fn_8051421C_00001868
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8051421C_00001868:
     cmpwi r28, 0x0
     stw r28, 0x3c(r26)

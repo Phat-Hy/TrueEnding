@@ -21,7 +21,7 @@ extern void fn_80087E9C(void);
 extern void fn_8008937C(void);
 extern void fn_8009EE30(void);
 extern void fn_800A4450(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800A55AC(void);
 extern void fn_800A58D0(void);
 extern void ref_releaseHandle(void);
@@ -29,7 +29,7 @@ extern void fn_800CFBA0(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_80116FC0(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_80117914(void);
@@ -94,7 +94,7 @@ extern void fn_80572B70(void);
 extern void fn_805AA738(void);
 extern void fn_805B9F54(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806959D8(void);
+extern void __destroy_new_array(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -533,7 +533,7 @@ lbl_fn_80528698_000004B8:
     mr r3, r29
     li r4, 0x0
     li r5, 0xb
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80528698_00000530
     lwz r4, 0x118(r30)
@@ -559,7 +559,7 @@ lbl_fn_80528698_00000530:
     mr r3, r29
     li r4, 0x0
     li r5, 0xa
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80528698_000005F8
     lwz r4, 0x84(r30)
@@ -586,7 +586,7 @@ lbl_fn_80528698_00000598:
     mr r3, r29
     li r4, 0x0
     li r5, 0x6
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80528698_000005F8
     lwz r4, 0x118(r30)
@@ -701,7 +701,7 @@ asm void fn_805289AC(void)
     li r4, 0x0
     li r5, 0x5
     mr r3, r31
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_805289AC_00000760
     lwz r3, 0x48(r30)
@@ -718,7 +718,7 @@ lbl_fn_805289AC_00000760:
     mr r3, r31
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_805289AC_000007D0
     lwz r0, 0x118(r30)
@@ -802,7 +802,7 @@ lbl_fn_80528A94_00000890:
     mr r3, r30
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80528A94_000008F0
     cmpwi r31, 0x0
@@ -828,7 +828,7 @@ lbl_fn_80528A94_000008F0:
     mr r3, r30
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80528A94_0000092C
     mr r3, r29
@@ -1779,7 +1779,7 @@ lbl_fn_80529528_000015A8:
     subf r7, r0, r7
     subf r6, r6, r8
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lis r27, lbl_8075D1A0@ha
     addi r27, r27, lbl_8075D1A0@l
     addi r3, r27, 0xbd
@@ -2233,7 +2233,7 @@ lbl_fn_80529C74_00001C44:
     addi r4, r4, fn_80119ECC@l
     li r5, 0x2d4
     li r6, 0x1c
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_80529C74_00001C94:
     addic. r3, r29, 0x539c
     beq lbl_fn_80529C74_00001CB0
@@ -2241,7 +2241,7 @@ lbl_fn_80529C74_00001C94:
     li r5, 0x240
     addi r4, r4, fn_8012AFE8@l
     li r6, 0x7
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_80529C74_00001CB0:
     mr r3, r29
     bl dtor_80084684
@@ -2435,7 +2435,7 @@ lbl_fn_80529C74_00001F3C:
     li r4, 0x0
     li r5, 0x4
     mr r3, r31
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80529C74_000020D0
     lwz r0, 0x1bc(r30)
@@ -2537,7 +2537,7 @@ lbl_fn_80529C74_000020D0:
     mr r3, r31
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80529C74_00002398
     li r0, 0x0
@@ -2621,7 +2621,7 @@ lbl_fn_80529C74_000021E0:
     li r4, 0x0
     li r5, 0x4
     mr r3, r29
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80529C74_00002378
     lwz r0, 0x80(r30)
@@ -2714,7 +2714,7 @@ lbl_fn_80529C74_00002378:
     mr r3, r29
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80529C74_00002398
     lwz r3, 0x48(r30)

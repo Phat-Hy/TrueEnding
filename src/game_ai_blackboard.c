@@ -12,7 +12,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
@@ -181,7 +181,7 @@ lbl_fn_8025CFF4_00000128:
     bne lbl_fn_8025CFF4_00000194
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r0, 0x78(r28)
     li r4, 0x0
     li r5, 0x0
@@ -213,7 +213,7 @@ lbl_fn_8025CFF4_00000194:
     bne lbl_fn_8025CFF4_00000200
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r0, 0x78(r28)
     li r4, 0x0
     li r5, 0x0

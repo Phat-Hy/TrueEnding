@@ -33,7 +33,7 @@ extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_8039BC0C(void);
 extern void fn_803ACD50(void);
 extern void fn_803AD148(void);
@@ -51,7 +51,7 @@ extern void PSMTXMultVec(void);
 extern void fn_80622180(void);
 extern void memcmp(void);
 extern void rand(void);
-extern void fn_806958E0(void);
+extern void __construct_new_array(void);
 
 /* External data declarations */
 extern u8 lbl_807500A8[];
@@ -275,7 +275,7 @@ lbl_fn_803B9804_0000022C:
     addi r25, r25, 0x4
     blt lbl_fn_803B9804_0000022C
     mr r3, r26
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x48(r3)
     mr r27, r24
     stb r0, 0x4d0c(r24)
@@ -1609,7 +1609,7 @@ asm void fn_803BAA90(void)
     stw r31, 0xc(r1)
     mr r31, r3
     li r7, 0x7
-    bl fn_806958E0
+    bl __construct_new_array
     li r0, 0x0
     stw r0, 0xfc0(r31)
     mr r3, r31

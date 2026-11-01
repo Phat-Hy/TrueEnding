@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_801173A8(void);
 extern void fn_80206B9C(void);
 extern void assert_formatLocation(void);
@@ -603,7 +603,7 @@ lbl_fn_8051994C_00000784:
     addi r3, r1, 0x88
     addi r4, r4, lbl_807934F4@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x88
     li r4, 0x2b
     bl wcschr
@@ -617,7 +617,7 @@ lbl_fn_8051994C_000007B8:
     addi r3, r1, 0x8
     addi r4, r4, lbl_807934F4@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x8
     li r4, 0x2b
     bl wcschr
@@ -1189,7 +1189,7 @@ lbl_fn_8051A19C_00000FE0:
     addi r3, r1, 0x268
     addi r4, r4, lbl_807934F4@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x268
     li r4, 0x2b
     bl wcschr
@@ -1203,7 +1203,7 @@ lbl_fn_8051A19C_00001014:
     addi r3, r1, 0x2e8
     addi r4, r4, lbl_807934F4@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x2e8
     li r4, 0x2b
     bl wcschr
@@ -1400,7 +1400,7 @@ lbl_fn_8051A19C_000012E4:
     addi r3, r1, 0x168
     addi r4, r4, lbl_807934F4@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x168
     li r4, 0x2b
     bl wcschr
@@ -1414,7 +1414,7 @@ lbl_fn_8051A19C_00001318:
     addi r3, r1, 0x1e8
     addi r4, r4, lbl_807934F4@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x1e8
     li r4, 0x2b
     bl wcschr
@@ -1659,7 +1659,7 @@ lbl_fn_8051A19C_000016A0:
     addi r3, r1, 0x68
     addi r4, r4, lbl_807934F4@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x68
     li r4, 0x2b
     bl wcschr
@@ -1673,7 +1673,7 @@ lbl_fn_8051A19C_000016D4:
     addi r3, r1, 0xe8
     addi r4, r4, lbl_807934F4@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0xe8
     li r4, 0x2b
     bl wcschr
@@ -2016,7 +2016,7 @@ lbl_fn_8051AD58_00001BC8:
     addi r3, r1, 0xa0
     addi r4, r30, lbl_807934F4@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0xa0
     li r4, 0x2b
     bl wcschr
@@ -2028,7 +2028,7 @@ lbl_fn_8051AD58_00001BF4:
     addi r3, r1, 0x20
     addi r4, r30, lbl_807934F4@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x20
     li r4, 0x2b
     bl wcschr

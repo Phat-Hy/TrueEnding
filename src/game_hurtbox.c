@@ -6,7 +6,7 @@ extern void _restgpr_22(void);
 extern void _restgpr_27(void);
 extern void _savegpr_22(void);
 extern void _savegpr_27(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_800FFE68(void);
 extern void fn_8016F3D0(void);
 extern void assert_formatLocation(void);
@@ -14,7 +14,7 @@ extern void event_findEntryById(void);
 extern void task_findEntryById(void);
 extern void fn_8021AF50(void);
 extern void fn_8021BE98(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_8047961C(void);
 extern void fn_804EB7C8(void);
 extern void fn_804EB818(void);
@@ -282,16 +282,16 @@ lbl_fn_80108A5C_000002C4:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_80108A5C_00000308
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_80108A5C_00000308
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x4c(r3)
     cmpwi r0, 0x3f
     bne lbl_fn_80108A5C_00000308
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x50(r3)
     cmpwi r0, 0x2
     bne lbl_fn_80108A5C_00000308
@@ -901,7 +901,7 @@ lbl_fn_801092C8_00000B10:
     lwz r5, 0x8(r5)
     mr r6, r29
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_801092C8_00000F44
 lbl_fn_801092C8_00000B24:
     lwz r4, lbl_8087F1E4
@@ -915,7 +915,7 @@ lbl_fn_801092C8_00000B3C:
 lbl_fn_801092C8_00000B40:
     mr r5, r28
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_801092C8_00000F44
     mr r3, r28
     li r31, 0x1
@@ -950,7 +950,7 @@ lbl_fn_801092C8_00000BB8:
 lbl_fn_801092C8_00000BBC:
     mr r6, r29
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_801092C8_00000F44
 lbl_fn_801092C8_00000BCC:
     lwz r4, lbl_8087F1E4
@@ -964,7 +964,7 @@ lbl_fn_801092C8_00000BE4:
 lbl_fn_801092C8_00000BE8:
     mr r5, r28
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_801092C8_00000F44
     lwz r0, 0x0(r30)
     addi r3, r1, 0x8
@@ -981,7 +981,7 @@ lbl_fn_801092C8_00000C20:
 lbl_fn_801092C8_00000C24:
     mr r5, r28
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_801092C8_00000F44
     lwz r0, 0x0(r30)
     addi r3, r1, 0x8
@@ -996,7 +996,7 @@ lbl_fn_801092C8_00000C58:
     la r4, lbl_808813D0
 lbl_fn_801092C8_00000C5C:
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_801092C8_00000F44
     lwz r0, 0x0(r30)
     addi r3, r1, 0x8
@@ -1012,7 +1012,7 @@ lbl_fn_801092C8_00000C90:
     la r4, lbl_808813D0
 lbl_fn_801092C8_00000C94:
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_801092C8_00000F44
     b lbl_fn_801092C8_00000F5C
     lwz r0, 0x0(r30)
@@ -1030,7 +1030,7 @@ lbl_fn_801092C8_00000CCC:
 lbl_fn_801092C8_00000CD0:
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_801092C8_00000F44
     mr r3, r28
     bl task_findEntryById
@@ -1057,7 +1057,7 @@ lbl_fn_801092C8_00000D30:
     lwz r5, 0x4(r5)
     lwz r6, 0x8(r6)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_801092C8_00000F44
 lbl_fn_801092C8_00000D44:
     lwz r4, lbl_8087F1E4
@@ -1071,7 +1071,7 @@ lbl_fn_801092C8_00000D5C:
 lbl_fn_801092C8_00000D60:
     mr r5, r28
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_801092C8_00000F44
     mr r3, r28
     bl fn_8021AF50
@@ -1103,7 +1103,7 @@ lbl_fn_801092C8_00000DCC:
 lbl_fn_801092C8_00000DD0:
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_801092C8_00000F44
 lbl_fn_801092C8_00000DE0:
     lwz r4, lbl_8087F1E4
@@ -1117,7 +1117,7 @@ lbl_fn_801092C8_00000DF8:
 lbl_fn_801092C8_00000DFC:
     mr r5, r28
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_801092C8_00000F44
     cmpwi r27, 0x0
     beq lbl_fn_801092C8_00000F44
@@ -1139,7 +1139,7 @@ lbl_fn_801092C8_00000E48:
     lwz r5, 0x4(r5)
     mr r6, r28
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_801092C8_00000F44
     lwz r0, 0x0(r30)
     addi r3, r1, 0x8
@@ -1156,7 +1156,7 @@ lbl_fn_801092C8_00000E84:
     mr r5, r28
     mr r6, r29
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_801092C8_00000F44
     lwz r0, 0x0(r30)
     addi r3, r1, 0x8
@@ -1174,7 +1174,7 @@ lbl_fn_801092C8_00000EC4:
     lwz r5, 0x4(r5)
     mr r6, r28
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_801092C8_00000F44
     mr r3, r28
     bl fn_8021AF50
@@ -1206,7 +1206,7 @@ lbl_fn_801092C8_00000F34:
 lbl_fn_801092C8_00000F38:
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
 lbl_fn_801092C8_00000F44:
     lwz r3, lbl_8087F528
     mr r7, r31
@@ -1290,7 +1290,7 @@ lbl_fn_80109864_00001014:
     addi r6, r1, 0x8
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
 lbl_fn_80109864_00001054:
     lhz r0, 0x208(r1)
     cmpwi r0, 0x0
