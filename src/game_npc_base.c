@@ -98,26 +98,26 @@ void fn_80139EBC(void);
 void fn_80139ED0(void);
 void fn_80139EDC(void);
 void fn_80139EE8(void);
-void fn_80139EF4(void);
-void fn_80139EFC(void);
+u32 fn_80139EF4(void);
+u32 fn_80139EFC(void *p);
 void fn_80139F04(void);
-void fn_80139F24(void);
+void fn_80139F24(void *p, u32 val);
 void fn_80139F2C(void);
 void fn_80139F3C(void);
 void fn_80139F4C(void);
-void fn_80139F58(void);
+void *fn_80139F58(void *p);
 void fn_80139F60(void);
 void mtx_rotYRad(void);
-void fn_8013A144(void);
-void fn_8013A150(void);
+u32 fn_8013A144(void *p);
+u32 fn_8013A150(void *p);
 void fn_8013A158(void);
 void fn_8013A16C(void);
-void fn_8013A184(void);
-void fn_8013A18C(void);
+u32 fn_8013A184(void *p);
+u32 fn_8013A18C(void *p);
 u32 npc_getGlobalManager(void);
 void fn_8013A19C(void *p, u32 val);
 void fn_8013A1A8(void);
-void fn_8013A214(void);
+u32 fn_8013A214(void *p);
 void fn_8013A21C(void);
 void fn_8013A248(void);
 void npc_initScriptContext(void);
@@ -833,18 +833,14 @@ asm void fn_80139EE8(void)
     blr
 }
 
-asm void fn_80139EF4(void)
+u32 fn_80139EF4(void)
 {
-    nofralloc
-    lwz r3, lbl_8087EE68
-    blr
+    return lbl_8087EE68;
 }
 
-asm void fn_80139EFC(void)
+u32 fn_80139EFC(void *p)
 {
-    nofralloc
-    lwz r3, 0xc54(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0xc54);
 }
 
 asm void fn_80139F04(void)
@@ -860,11 +856,9 @@ asm void fn_80139F04(void)
     blr
 }
 
-asm void fn_80139F24(void)
+void fn_80139F24(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x34c(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x34c) = val;
 }
 
 asm void fn_80139F2C(void)
@@ -893,11 +887,9 @@ asm void fn_80139F4C(void)
     blr
 }
 
-asm void fn_80139F58(void)
+void *fn_80139F58(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x58
-    blr
+    return (u8 *)p + 0x58;
 }
 
 asm void fn_80139F60(void)
@@ -1039,19 +1031,14 @@ asm void mtx_rotYRad(void)
     b PSMTXRotRad
 }
 
-asm void fn_8013A144(void)
+u32 fn_8013A144(void *p)
 {
-    nofralloc
-    lwz r0, 0x20(r3)
-    clrlwi r3, r0, 31
-    blr
+    return *(u32 *)((u8 *)p + 0x20) & 1;
 }
 
-asm void fn_8013A150(void)
+u32 fn_8013A150(void *p)
 {
-    nofralloc
-    lwz r3, 0x564(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x564);
 }
 
 asm void fn_8013A158(void)
@@ -1075,18 +1062,14 @@ asm void fn_8013A16C(void)
     blr
 }
 
-asm void fn_8013A184(void)
+u32 fn_8013A184(void *p)
 {
-    nofralloc
-    lwz r3, 0x54(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x54);
 }
 
-asm void fn_8013A18C(void)
+u32 fn_8013A18C(void *p)
 {
-    nofralloc
-    lwz r3, 0x9c(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x9c);
 }
 
 u32 npc_getGlobalManager(void)
@@ -1133,11 +1116,9 @@ lbl_fn_8013A1A8_00000CA4:
     blr
 }
 
-asm void fn_8013A214(void)
+u32 fn_8013A214(void *p)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(u32 *)p;
 }
 
 asm void fn_8013A21C(void)

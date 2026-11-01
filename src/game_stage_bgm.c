@@ -133,15 +133,15 @@ void fn_8019FBE0(void);
 void fn_8019FC6C(void);
 void fn_8019FE4C(void);
 void fn_8019FEC4(void);
-void bgm_getGlobalManager(void);
+u32 bgm_getGlobalManager(void);
 void vec3_dot(void);
-void fn_801A03EC(void);
+u32 fn_801A03EC(void *p);
 void fn_801A03F4(void);
-void fn_801A0400(void);
-void fn_801A0408(void);
-void fn_801A0410(void);
-void fn_801A0418(void);
-void fn_801A0420(void);
+u32 fn_801A0400(void *p);
+u32 fn_801A0408(void *p);
+u32 fn_801A0410(void *p);
+u8 fn_801A0418(void *p);
+u32 fn_801A0420(void *p);
 void fn_801A0428(void);
 void fn_801A0468(void);
 void fn_801A04A8(void);
@@ -1328,11 +1328,9 @@ lbl_fn_8019FEC4_00001008:
     blr
 }
 
-asm void bgm_getGlobalManager(void)
+u32 bgm_getGlobalManager(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F408
-    blr
+    return lbl_8087F408;
 }
 
 asm void vec3_dot(void)
@@ -1341,11 +1339,9 @@ asm void vec3_dot(void)
     b PSVECDotProduct
 }
 
-asm void fn_801A03EC(void)
+u32 fn_801A03EC(void *p)
 {
-    nofralloc
-    lwz r3, 0x14ac(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x14ac);
 }
 
 asm void fn_801A03F4(void)
@@ -1356,39 +1352,29 @@ asm void fn_801A03F4(void)
     blr
 }
 
-asm void fn_801A0400(void)
+u32 fn_801A0400(void *p)
 {
-    nofralloc
-    lwz r3, 0xc(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0xc);
 }
 
-asm void fn_801A0408(void)
+u32 fn_801A0408(void *p)
 {
-    nofralloc
-    lwz r3, 0x48(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x48);
 }
 
-asm void fn_801A0410(void)
+u32 fn_801A0410(void *p)
 {
-    nofralloc
-    lwz r3, 0xc(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0xc);
 }
 
-asm void fn_801A0418(void)
+u8 fn_801A0418(void *p)
 {
-    nofralloc
-    lbz r3, 0x38(r3)
-    blr
+    return *(u8 *)((u8 *)p + 0x38);
 }
 
-asm void fn_801A0420(void)
+u32 fn_801A0420(void *p)
 {
-    nofralloc
-    lwz r3, 0x28(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x28);
 }
 
 asm void fn_801A0428(void)
