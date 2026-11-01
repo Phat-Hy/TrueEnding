@@ -90,10 +90,8 @@ asm void fn_805A96C4(void)
     blr
 }
 
-asm void fn_805A96D4(void)
+void fn_805A96D4(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_805A96D8(void)

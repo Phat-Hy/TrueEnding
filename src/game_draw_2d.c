@@ -135,10 +135,8 @@ void fn_800B3C3C(void);
 void fn_800B3CC8(void);
 void fn_800B3F40(void);
 
-asm void fn_800B23C4(void)
+void fn_800B23C4(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_800B23C8(void)
@@ -844,10 +842,8 @@ asm void fn_800B2E18(void)
     b fn_800502A8
 }
 
-asm void fn_800B2E28(void)
+void fn_800B2E28(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_800B2E2C(void)
@@ -1118,10 +1114,8 @@ asm void fn_800B2EA0(void)
     blr
 }
 
-asm void fn_800B3208(void)
+void fn_800B3208(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_800B320C(void)
@@ -1136,10 +1130,8 @@ asm void fn_800B320C(void)
     b route_createSegment
 }
 
-asm void fn_800B3228(void)
+void fn_800B3228(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_800B322C(void)
@@ -1429,10 +1421,8 @@ asm void fn_800B34C0(void)
     blr
 }
 
-asm void fn_800B35F4(void)
+void fn_800B35F4(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_800B35F8(void)
@@ -1465,16 +1455,12 @@ lbl_fn_800B35F8_00001270:
     blr
 }
 
-asm void fn_800B3654(void)
+void fn_800B3654(void)
 {
-    nofralloc
-    blr
 }
 
-asm void fn_800B3658(void)
+void fn_800B3658(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_800B365C(void)
@@ -1625,16 +1611,12 @@ asm void fn_800B3770(void)
     blr
 }
 
-asm void fn_800B3870(void)
+void fn_800B3870(void)
 {
-    nofralloc
-    blr
 }
 
-asm void fn_800B3874(void)
+void fn_800B3874(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_800B3878(void)

@@ -694,10 +694,8 @@ lbl_fn_805A6B18_00000738:
     blr
 }
 
-asm void fn_805A6B54(void)
+void fn_805A6B54(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_805A6B58(void)
@@ -737,10 +735,8 @@ asm void fn_805A6B58(void)
     blr
 }
 
-asm void fn_805A6BD8(void)
+void fn_805A6BD8(void)
 {
-    nofralloc
-    blr
 }
 
 asm void archive_mountCheckStatus(void)

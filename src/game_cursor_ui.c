@@ -486,10 +486,8 @@ lbl_fn_800A85CC_00000470:
     blr
 }
 
-asm void fn_800A873C(void)
+void fn_800A873C(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_800A8740(void)
@@ -1188,10 +1186,8 @@ asm void fn_800A90FC(void)
     b fn_800D3FA4
 }
 
-asm void fn_800A9100(void)
+void fn_800A9100(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_800A9104(void)
@@ -1750,10 +1746,8 @@ asm void fn_800A97C4(void)
     blr
 }
 
-asm void fn_800A97FC(void)
+void fn_800A97FC(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_800A9800(void)
@@ -1772,8 +1766,6 @@ asm void fn_800A9808(void)
     blr
 }
 
-asm void fn_800A9818(void)
+void fn_800A9818(void)
 {
-    nofralloc
-    blr
 }
