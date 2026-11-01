@@ -17,7 +17,7 @@ extern void fn_80087858(void);
 extern void route_createSegment(void);
 extern void fn_80087BB4(void);
 extern void route_createWaypoint(void);
-extern void fn_80088FAC(void);
+extern void zone_formatEventString(void);
 extern void node_createNamedChild(void);
 extern void skeleton_getBoneByIndex(void);
 extern void fn_801222D4(void);
@@ -313,7 +313,7 @@ lbl_fn_801856B8_000002D8:
     addi r5, r28, 0xc
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f1, lbl_80881CFC
     mr r3, r31
     lfs f2, lbl_80881D2C
@@ -322,7 +322,7 @@ lbl_fn_801856B8_000002D8:
     addi r5, r28, 0x1c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f1, lbl_80881CFC
     mr r3, r31
     lfs f2, lbl_80881D2C
@@ -331,7 +331,7 @@ lbl_fn_801856B8_000002D8:
     addi r5, r27, 0xc
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f1, lbl_80881CFC
     mr r3, r31
     lfs f2, lbl_80881D2C
@@ -340,7 +340,7 @@ lbl_fn_801856B8_000002D8:
     addi r5, r27, 0x1c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     mr r3, r31
     addi r4, r30, 0x91
     bl node_createNamedChild

@@ -23,8 +23,8 @@ extern void map_debugLog(void);
 extern void fn_800C3094(void);
 extern void fn_800CB480(void);
 extern void fn_800CF680(void);
-extern void fn_800D0180(void);
-extern void fn_800D0198(void);
+extern void shadow_dispatchCallback(void);
+extern void shadow_initProjectionContext(void);
 extern void fn_800D0DB0(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
@@ -528,12 +528,12 @@ lbl_fn_8047FAD0_000004D4:
     stw r0, 0x20(r1)
     bne lbl_fn_8047FAD0_00000524
     lis r6, lbl_807C75C0@ha
-    lis r4, fn_800D0180@ha
-    lis r3, fn_800D0198@ha
+    lis r4, shadow_dispatchCallback@ha
+    lis r3, shadow_initProjectionContext@ha
     li r0, 0x1
-    addi r3, r3, fn_800D0198@l
+    addi r3, r3, shadow_initProjectionContext@l
     addi r5, r6, lbl_807C75C0@l
-    addi r4, r4, fn_800D0180@l
+    addi r4, r4, shadow_dispatchCallback@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C75C0@l(r6)
     stb r0, lbl_8087EFEE

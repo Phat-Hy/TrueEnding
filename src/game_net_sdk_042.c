@@ -18,7 +18,7 @@ extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5C90(void);
 extern void fn_806D64B0(void);
-extern void fn_806D6610(void);
+extern void net_invokeChannelCallback(void);
 extern void net_socketConnect(void);
 extern void net_socketClose(void);
 extern void fn_806D7B30(void);
@@ -962,7 +962,7 @@ lbl_fn_806F7560_00000C3C:
     stw r29, 0x8(r1)
     addi r4, r1, 0x8
     lwz r3, 0x0(r28)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     bne lbl_fn_806F7560_00000C5C
     li r3, 0x0
@@ -1003,7 +1003,7 @@ lbl_fn_806F76C0_00000CC4:
     stw r4, 0x8(r1)
     addi r4, r1, 0x8
     lwz r3, 0x0(r3)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_806F76C0_00000CE8
@@ -1099,7 +1099,7 @@ lbl_fn_806F77F0_00000E04:
     stw r4, 0x20(r1)
     addi r4, r1, 0x20
     lwz r3, 0x0(r3)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi cr1, r3, 0x0
     mr r30, r3
     bne cr1, lbl_fn_806F77F0_00000E28
@@ -1269,7 +1269,7 @@ lbl_fn_806F77F0_0000102C:
     stw r29, 0x8(r1)
     addi r4, r1, 0x8
     lwz r3, 0x0(r31)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_806F77F0_00001050
@@ -1388,7 +1388,7 @@ lbl_fn_806F7BB0_000011B4:
     stw r4, 0x8(r1)
     addi r4, r1, 0x8
     lwz r3, 0x0(r3)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi cr1, r3, 0x0
     mr r31, r3
     bne cr1, lbl_fn_806F7BB0_000011D8
@@ -1586,7 +1586,7 @@ lbl_fn_806F7E30_00001434:
     stw r4, 0x8(r1)
     addi r4, r1, 0x8
     lwz r3, 0x0(r3)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi cr1, r3, 0x0
     mr r31, r3
     bne cr1, lbl_fn_806F7E30_00001458
@@ -1784,7 +1784,7 @@ lbl_fn_806F80B0_000016B4:
     stw r4, 0x8(r1)
     addi r4, r1, 0x8
     lwz r3, 0x0(r3)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi cr1, r3, 0x0
     mr r31, r3
     bne cr1, lbl_fn_806F80B0_000016D8
@@ -1984,7 +1984,7 @@ lbl_fn_806F8330_0000193C:
     stw r4, 0x8(r1)
     addi r4, r1, 0x8
     lwz r3, 0x0(r3)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_806F8330_00001960
@@ -2104,7 +2104,7 @@ lbl_fn_806F84C0_00001AC8:
     stw r4, 0x8(r1)
     addi r4, r1, 0x8
     lwz r3, 0x0(r3)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi cr1, r3, 0x0
     mr r31, r3
     bne cr1, lbl_fn_806F84C0_00001AEC

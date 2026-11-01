@@ -46,7 +46,7 @@ extern void fn_806A0DA4(void);
 extern void fn_806A0DAC(void);
 extern void fn_806A0E44(void);
 extern void fn_806A117C(void);
-extern void fn_806A11D4(void);
+extern void net_initSubsystem(void);
 extern void fn_806A123C(void);
 extern void fn_806A1240(void);
 extern void fn_806A1248(void);
@@ -151,7 +151,7 @@ asm void fn_8069A100(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_806A11D4
+    bl net_initSubsystem
     lwz r12, 0x7c4(r3)
     cmpwi r12, 0x0
     beq lbl_fn_8069A100_00000070
@@ -179,7 +179,7 @@ asm void fn_8069A15C(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_806A11D4
+    bl net_initSubsystem
     lwz r12, 0x7c8(r3)
     cmpwi r12, 0x0
     beq lbl_fn_8069A15C_000000BC
@@ -258,7 +258,7 @@ asm void fn_8069A1B8(void)
     bl fn_806A1288
     li r0, -0x1
     stw r0, 0x7d0(r29)
-    bl fn_806A11D4
+    bl net_initSubsystem
     lwz r12, 0x7c4(r3)
     cmpwi r12, 0x0
     beq lbl_fn_8069A1B8_000001AC
@@ -286,7 +286,7 @@ lbl_fn_8069A1B8_000001CC:
     li r0, 0x9
     stw r0, 0x7d8(r29)
     lwz r30, 0x7e0(r29)
-    bl fn_806A11D4
+    bl net_initSubsystem
     lwz r12, 0x7c8(r3)
     cmpwi r12, 0x0
     beq lbl_fn_8069A1B8_0000020C
@@ -351,7 +351,7 @@ asm void fn_8069A348(void)
     mr r4, r30
     bl fn_8069AAA4
     lwz r31, 0x7e0(r30)
-    bl fn_806A11D4
+    bl net_initSubsystem
     lwz r12, 0x7c8(r3)
     cmpwi r12, 0x0
     beq lbl_fn_8069A348_000002EC

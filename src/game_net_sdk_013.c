@@ -47,7 +47,7 @@ extern void fn_806C1430(void);
 extern void fn_806C3ED0(void);
 extern void fn_806C4B30(void);
 extern void fn_806C57F0(void);
-extern void fn_806C5C10(void);
+extern void net_logConnectionEvent(void);
 extern void net_formatSessionLog(void);
 extern void fn_806C6180(void);
 extern void fn_806C6750(void);
@@ -1296,7 +1296,7 @@ lbl_fn_806B4940_000010D0:
     li r3, 0x6
     li r5, 0x0
     bl net_sendSessionCommand
-    bl fn_806C5C10
+    bl net_logConnectionEvent
     cmpwi r3, 0x0
     bne lbl_fn_806B4940_0000121C
     lis r4, lbl_80860898@ha
@@ -2027,7 +2027,7 @@ lbl_fn_806B4D20_00001BC0:
     li r3, 0x5
     li r5, 0x0
     bl net_sendSessionCommand
-    bl fn_806C5C10
+    bl net_logConnectionEvent
     cmpwi r3, 0x0
     bne lbl_fn_806B4D20_00001D5C
     lis r3, lbl_80860898@ha
@@ -2116,7 +2116,7 @@ lbl_fn_806B4D20_00001D20:
     bl net_formatSessionLog
     b lbl_fn_806B4D20_00001D58
 lbl_fn_806B4D20_00001D54:
-    bl fn_806C5C10
+    bl net_logConnectionEvent
 lbl_fn_806B4D20_00001D58:
     cmpwi r3, 0x0
 lbl_fn_806B4D20_00001D5C:
@@ -2574,7 +2574,7 @@ lbl_fn_806B5860_000023F4:
     bl net_formatSessionLog
     b lbl_fn_806B5860_0000241C
 lbl_fn_806B5860_00002418:
-    bl fn_806C5C10
+    bl net_logConnectionEvent
 lbl_fn_806B5860_0000241C:
     cmpwi r3, 0x0
     beq lbl_fn_806B5860_000024A8
@@ -2653,7 +2653,7 @@ lbl_fn_806B5860_000024A8:
     bl net_formatSessionLog
     b lbl_fn_806B5860_00002544
 lbl_fn_806B5860_00002540:
-    bl fn_806C5C10
+    bl net_logConnectionEvent
 lbl_fn_806B5860_00002544:
     cmpwi r3, 0x0
     beq lbl_fn_806B5860_0000419C
@@ -2956,7 +2956,7 @@ lbl_fn_806B5860_00002994:
     bl net_formatSessionLog
     b lbl_fn_806B5860_000029CC
 lbl_fn_806B5860_000029C8:
-    bl fn_806C5C10
+    bl net_logConnectionEvent
 lbl_fn_806B5860_000029CC:
     cmpwi r3, 0x0
     beq lbl_fn_806B5860_0000419C
@@ -3229,7 +3229,7 @@ lbl_fn_806B5860_00002DAC:
     bl net_formatSessionLog
     b lbl_fn_806B5860_00002DE4
 lbl_fn_806B5860_00002DE0:
-    bl fn_806C5C10
+    bl net_logConnectionEvent
 lbl_fn_806B5860_00002DE4:
     cmpwi r3, 0x0
     bne lbl_fn_806B5860_00004934
@@ -4748,7 +4748,7 @@ lbl_fn_806B5860_00004330:
     bl net_formatSessionLog
     b lbl_fn_806B5860_00004420
 lbl_fn_806B5860_0000441C:
-    bl fn_806C5C10
+    bl net_logConnectionEvent
 lbl_fn_806B5860_00004420:
     cmpwi r3, 0x0
     beq lbl_fn_806B5860_00004450

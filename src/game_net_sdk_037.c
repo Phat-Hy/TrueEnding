@@ -21,7 +21,7 @@ extern void fn_806D5930(void);
 extern void fn_806D62F0(void);
 extern void fn_806D63A0(void);
 extern void fn_806D64B0(void);
-extern void fn_806D6610(void);
+extern void net_invokeChannelCallback(void);
 extern void net_socketConnect(void);
 extern void net_socketClose(void);
 extern void fn_806D7AE0(void);
@@ -2055,7 +2055,7 @@ asm void fn_806EE250(void)
     sth r5, 0x14(r1)
     stw r0, 0x8(r1)
     lwz r3, 0xc(r3)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     beq lbl_fn_806EE250_00001B0C
     lwz r3, 0x0(r3)
@@ -2284,7 +2284,7 @@ asm void fn_806EE560(void)
     sth r6, 0xbc(r1)
     stw r0, 0xc(r1)
     lwz r3, 0xc(r3)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     beq lbl_fn_806EE560_00001E38
     lwz r31, 0x0(r3)
@@ -2380,7 +2380,7 @@ lbl_fn_806EE560_00001E48:
     sth r30, 0x1c(r1)
     stw r0, 0x8(r1)
     lwz r3, 0xc(r27)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     beq lbl_fn_806EE560_00001FB0
     lwz r31, 0x0(r3)

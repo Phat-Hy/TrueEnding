@@ -15,7 +15,7 @@ extern void boss_initActionStream(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_80088FAC(void);
+extern void zone_formatEventString(void);
 extern void node_createNamedChild(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -1940,7 +1940,7 @@ lbl_fn_802558B0_0000183C:
     addi r5, r30, 0x16c0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f1, lbl_808833E0
     mr r3, r26
     lfs f2, lbl_808833F4
@@ -1949,7 +1949,7 @@ lbl_fn_802558B0_0000183C:
     addi r5, r30, 0x16d0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f1, lbl_808833E0
     mr r3, r26
     lfs f2, lbl_808833F4
@@ -1958,7 +1958,7 @@ lbl_fn_802558B0_0000183C:
     addi r5, r30, 0x16f0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f1, lbl_808833E0
     mr r3, r26
     lfs f2, lbl_808833F4
@@ -1967,7 +1967,7 @@ lbl_fn_802558B0_0000183C:
     addi r5, r30, 0x1700
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     addi r3, r30, 0x15f8
     addi r4, r31, 0xb8
     bl res_MsgHandle_destructor

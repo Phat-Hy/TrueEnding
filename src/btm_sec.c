@@ -180,7 +180,7 @@ void fn_80639F90(void);
 void fn_8063A0AC(void);
 void fn_8063A18C(void);
 void fn_8063A1C0(void);
-void fn_8063A778(void);
+void btm_sec_dispatchCallback(void);
 void fn_8063A904(void);
 void fn_8063A9E0(void);
 void fn_8063AA6C(void);
@@ -4057,7 +4057,7 @@ lbl_fn_8063A1C0_000034E4:
     blr
 }
 
-asm void fn_8063A778(void)
+asm void btm_sec_dispatchCallback(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -4068,43 +4068,43 @@ asm void fn_8063A778(void)
     mr r31, r3
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
-    beq lbl_fn_8063A778_0000354C
+    beq lbl_btm_sec_dispatchCallback_0000354C
     lis r3, lbl_8081FAF0@ha
     addi r3, r3, lbl_8081FAF0@l
     lhz r0, 0x6c(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8063A778_0000354C
+    beq lbl_btm_sec_dispatchCallback_0000354C
     mr r4, r31
     addi r3, r3, 0x64
     bl fn_80627180
     li r31, 0x0
-lbl_fn_8063A778_0000354C:
+lbl_btm_sec_dispatchCallback_0000354C:
     lis r4, lbl_8081FAF0@ha
     addi r4, r4, lbl_8081FAF0@l
     lhz r0, 0x80(r4)
     cmpwi r0, 0x0
-    bne lbl_fn_8063A778_00003580
+    bne lbl_btm_sec_dispatchCallback_00003580
     lis r3, lbl_80820018@ha
     addi r3, r3, lbl_80820018@l
     lbz r0, 0x64e(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_8063A778_00003580
+    bne lbl_btm_sec_dispatchCallback_00003580
     lhz r3, 0x6c(r4)
     addi r0, r3, 0x1
     sth r0, 0x80(r4)
-lbl_fn_8063A778_00003580:
+lbl_btm_sec_dispatchCallback_00003580:
     lis r3, lbl_8081FAF0@ha
     addi r30, r3, lbl_8081FAF0@l
-    b lbl_fn_8063A778_0000364C
-lbl_fn_8063A778_0000358C:
+    b lbl_btm_sec_dispatchCallback_0000364C
+lbl_btm_sec_dispatchCallback_0000358C:
     cmpwi r31, 0x0
-    bne lbl_fn_8063A778_000035A0
+    bne lbl_btm_sec_dispatchCallback_000035A0
     addi r3, r30, 0x64
     bl fn_80627400
     mr r31, r3
-lbl_fn_8063A778_000035A0:
+lbl_btm_sec_dispatchCallback_000035A0:
     cmpwi r31, 0x0
-    beq lbl_fn_8063A778_00003658
+    beq lbl_btm_sec_dispatchCallback_00003658
     lhz r0, 0x4(r31)
     add r3, r31, r0
     lbz r0, 0x9(r3)
@@ -4113,14 +4113,14 @@ lbl_fn_8063A778_000035A0:
     add r0, r3, r0
     clrlwi r0, r0, 16
     cmplwi r0, 0xc03
-    beq lbl_fn_8063A778_00003630
+    beq lbl_btm_sec_dispatchCallback_00003630
     cmplwi r0, 0xc35
-    beq lbl_fn_8063A778_00003630
+    beq lbl_btm_sec_dispatchCallback_00003630
     li r3, 0x2
     bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r29, r3
-    beq lbl_fn_8063A778_00003630
+    beq lbl_btm_sec_dispatchCallback_00003630
     mr r4, r31
     li r5, 0x8
     bl memcpy
@@ -4139,7 +4139,7 @@ lbl_fn_8063A778_000035A0:
     li r4, 0x3c
     li r5, 0x8
     bl bta_sys_sendmsg
-lbl_fn_8063A778_00003630:
+lbl_btm_sec_dispatchCallback_00003630:
     lhz r5, 0x80(r30)
     mr r3, r31
     li r4, 0x2000
@@ -4147,19 +4147,19 @@ lbl_fn_8063A778_00003630:
     sth r0, 0x80(r30)
     bl fn_80629650
     li r31, 0x0
-lbl_fn_8063A778_0000364C:
+lbl_btm_sec_dispatchCallback_0000364C:
     lhz r0, 0x80(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_8063A778_0000358C
-lbl_fn_8063A778_00003658:
+    bne lbl_btm_sec_dispatchCallback_0000358C
+lbl_btm_sec_dispatchCallback_00003658:
     cmpwi r31, 0x0
-    beq lbl_fn_8063A778_00003674
+    beq lbl_btm_sec_dispatchCallback_00003674
     lis r3, lbl_8081FAF0@ha
     mr r4, r31
     addi r3, r3, lbl_8081FAF0@l
     addi r3, r3, 0x64
     bl fn_80627180
-lbl_fn_8063A778_00003674:
+lbl_btm_sec_dispatchCallback_00003674:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -4584,7 +4584,7 @@ lbl_fn_8063ADA4_00003C0C:
     clrlwi r5, r0, 16
     bl fn_8063AC4C
     li r3, 0x0
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
 lbl_fn_8063ADA4_00003C28:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -4817,7 +4817,7 @@ lbl_fn_8063B0BC_00003F30:
     bl scapi_cleanupContext
 lbl_fn_8063B0BC_00003F50:
     li r3, 0x0
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     addi r11, r1, 0x20
     bl _restgpr_27
     lwz r0, 0x24(r1)
@@ -4915,7 +4915,7 @@ lbl_fn_8063B1E4_00004094:
     li r3, 0x2
     bl fn_80633AE8
     li r3, 0x0
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
 lbl_fn_8063B1E4_000040AC:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

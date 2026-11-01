@@ -5,7 +5,7 @@
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_80088FAC(void);
+extern void zone_formatEventString(void);
 extern void node_createNamedChild(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
@@ -119,7 +119,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r30, 0x0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f2, lbl_80885D60
     mr r3, r29
     lfs f1, lbl_80885D58
@@ -128,7 +128,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r30, 0x10
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f2, lbl_80885D60
     mr r3, r29
     lfs f1, lbl_80885D58
@@ -137,7 +137,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r30, 0x20
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f2, lbl_80885D60
     mr r3, r29
     lfs f1, lbl_80885D58
@@ -146,7 +146,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r30, 0x30
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f2, lbl_80885D60
     mr r3, r29
     lfs f1, lbl_80885D58
@@ -155,7 +155,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r30, 0x40
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f2, lbl_80885D60
     mr r3, r29
     lfs f1, lbl_80885D58
@@ -164,7 +164,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r30, 0x50
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f2, lbl_80885D60
     mr r3, r29
     lfs f1, lbl_80885D58
@@ -173,7 +173,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r30, 0x60
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f2, lbl_80885D60
     mr r3, r29
     lfs f1, lbl_80885D58
@@ -182,7 +182,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r30, 0x70
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f2, lbl_80885D60
     mr r3, r29
     lfs f1, lbl_80885D58
@@ -191,7 +191,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r30, 0x80
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f2, lbl_80885D60
     mr r3, r29
     lfs f1, lbl_80885D58
@@ -200,7 +200,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r30, 0x90
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f2, lbl_80885D60
     mr r3, r29
     lfs f1, lbl_80885D58
@@ -209,7 +209,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r30, 0xb0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f2, lbl_80885D60
     mr r3, r29
     lfs f1, lbl_80885D58
@@ -218,7 +218,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r30, 0xa0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f2, lbl_80885D60
     mr r3, r29
     lfs f1, lbl_80885D58
@@ -227,7 +227,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r30, 0xc0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f2, lbl_80885D60
     mr r3, r29
     lfs f1, lbl_80885D58
@@ -236,7 +236,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r30, 0xd0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f2, lbl_80885D60
     mr r3, r29
     lfs f1, lbl_80885D58
@@ -245,7 +245,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r30, 0xe0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f2, lbl_80885D60
     mr r3, r29
     lfs f1, lbl_80885D58
@@ -254,7 +254,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r30, 0xf0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     mr r3, r29
     addi r4, r31, 0xc0
     bl node_createNamedChild
@@ -266,7 +266,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r28, 0x2698
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f2, lbl_80885D60
     mr r3, r30
     lfs f1, lbl_80885D58
@@ -275,7 +275,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r28, 0x26a8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f2, lbl_80885D60
     mr r3, r30
     lfs f1, lbl_80885D58
@@ -284,7 +284,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r28, 0x2678
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f2, lbl_80885D60
     mr r3, r30
     lfs f1, lbl_80885D58
@@ -293,7 +293,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r28, 0x2688
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f2, lbl_80885D60
     mr r3, r30
     lfs f1, lbl_80885D58
@@ -302,7 +302,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r28, 0x26b8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f2, lbl_80885D60
     mr r3, r30
     lfs f1, lbl_80885D58
@@ -311,7 +311,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r28, 0x26c8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f2, lbl_80885D60
     mr r3, r30
     lfs f1, lbl_80885D58
@@ -320,7 +320,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r28, 0x26d8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f2, lbl_80885D60
     mr r3, r30
     lfs f1, lbl_80885D58
@@ -329,7 +329,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r28, 0x26e8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f2, lbl_80885D60
     mr r3, r30
     lfs f1, lbl_80885D58
@@ -338,7 +338,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r28, 0x26f8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f2, lbl_80885D60
     mr r3, r30
     lfs f1, lbl_80885D58
@@ -347,7 +347,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r28, 0x2708
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f2, lbl_80885D60
     mr r3, r30
     lfs f1, lbl_80885D58
@@ -356,7 +356,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r28, 0x2718
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     mr r3, r29
     addi r4, r31, 0x129
     addi r5, r28, 0xd78
@@ -389,7 +389,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r28, 0x288c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f2, lbl_80885D60
     mr r3, r29
     lfs f1, lbl_80885D58
@@ -398,7 +398,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r28, 0x289c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f1, lbl_80885D58
     mr r3, r29
     lfs f2, lbl_80885D60

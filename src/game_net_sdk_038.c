@@ -28,7 +28,7 @@ extern void net_bufferGetElement(void);
 extern void fn_806D5C90(void);
 extern void fn_806D63A0(void);
 extern void fn_806D6560(void);
-extern void fn_806D6610(void);
+extern void net_invokeChannelCallback(void);
 extern void fn_806D6720(void);
 extern void net_socketConnect(void);
 extern void net_socketClose(void);
@@ -308,7 +308,7 @@ lbl_fn_806EE8B0_0000026C:
     sth r31, 0x24(r1)
     stw r0, 0x10(r1)
     lwz r3, 0xc(r29)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     mr. r4, r3
     mr r3, r29
     beq lbl_fn_806EE8B0_000002A8

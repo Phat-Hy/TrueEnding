@@ -18,7 +18,7 @@ extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_createWaypoint(void);
-extern void fn_80088FAC(void);
+extern void zone_formatEventString(void);
 extern void node_createNamedChild(void);
 extern void hud_drawTargetMarker(void);
 extern void msg_getMessageById(void);
@@ -743,7 +743,7 @@ lbl_fn_80516740_0000084C:
     addi r5, r29, 0x15c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f1, lbl_80887848
     mr r3, r30
     lfs f2, lbl_80887840
@@ -752,7 +752,7 @@ lbl_fn_80516740_0000084C:
     addi r5, r29, 0x16c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f1, lbl_80887848
     mr r3, r30
     lfs f2, lbl_80887840
@@ -761,7 +761,7 @@ lbl_fn_80516740_0000084C:
     addi r5, r29, 0x17c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f1, lbl_80887848
     mr r3, r30
     lfs f2, lbl_80887840
@@ -770,7 +770,7 @@ lbl_fn_80516740_0000084C:
     addi r5, r29, 0x18c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f1, lbl_808878A4
     mr r3, r30
     lfs f2, lbl_808878A8

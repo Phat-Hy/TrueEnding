@@ -30,7 +30,7 @@ extern void fn_806D62F0(void);
 extern void fn_806D63A0(void);
 extern void fn_806D6420(void);
 extern void fn_806D64B0(void);
-extern void fn_806D6610(void);
+extern void net_invokeChannelCallback(void);
 extern void net_socketClose(void);
 extern void fn_806D7AE0(void);
 extern void fn_806D7B30(void);
@@ -2056,7 +2056,7 @@ lbl_fn_806FEA20_00001A74:
     stw r4, 0x8(r1)
     addi r4, r1, 0x8
     lwz r3, 0x18(r3)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     beq lbl_fn_806FEA20_00001AA0
     lwz r31, 0x4(r3)
@@ -2112,7 +2112,7 @@ lbl_fn_806FEAA0_00001B30:
     stw r31, 0x8(r1)
     addi r4, r1, 0x8
     lwz r3, 0x18(r29)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     beq lbl_fn_806FEAA0_00001B5C
     lwz r31, 0x4(r3)
@@ -2189,7 +2189,7 @@ lbl_fn_806FEBD0_00001C24:
     stw r4, 0x8(r1)
     addi r4, r1, 0x8
     lwz r3, 0x18(r3)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     beq lbl_fn_806FEBD0_00001C50
     lwz r31, 0x4(r3)

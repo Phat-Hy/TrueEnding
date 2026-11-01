@@ -14,7 +14,7 @@ extern void magic_castSpellCircle(void);
 extern void boss_initActionStream(void);
 extern void gmk_LoadHandle_constructor(void);
 extern void route_createSegment(void);
-extern void fn_80088FAC(void);
+extern void zone_formatEventString(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
@@ -796,7 +796,7 @@ lbl_fn_802CD3BC_000008F4:
     addi r5, r31, 0x14fc
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lwz r0, 0x7ec(r31)
     addi r3, r31, 0x14b0
     lwz r4, 0x5c(r31)

@@ -22,7 +22,7 @@ extern void bta_sys_traceDebug(void);
 extern void fn_8063450C(void);
 extern void fn_8063472C(void);
 extern void fn_806347E4(void);
-extern void fn_8063A778(void);
+extern void btm_sec_dispatchCallback(void);
 extern void fn_80642310(void);
 extern void fn_806425D4(void);
 extern void fn_80642764(void);
@@ -1428,7 +1428,7 @@ lbl_fn_8063C72C_00001124:
     stb r0, 0xd(r3)
     stb r30, 0xe(r3)
     stb r31, 0xf(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063C72C_00001174:
     lwz r0, 0x24(r1)
@@ -1462,7 +1462,7 @@ lbl_fn_8063C7D4_000011B4:
     stb r4, 0x8(r3)
     stb r0, 0x9(r3)
     stb r5, 0xa(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063C7D4_000011E0:
     lwz r0, 0x14(r1)
@@ -1515,7 +1515,7 @@ lbl_fn_8063C834_00001230:
     stb r0, 0x11(r3)
     stb r30, 0x12(r3)
     stb r31, 0x13(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063C834_00001298:
     addi r11, r1, 0x20
@@ -1578,7 +1578,7 @@ lbl_fn_8063C8F4_000012F4:
     stb r30, 0x15(r3)
     stb r0, 0x16(r3)
     stb r31, 0x17(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063C8F4_00001378:
     addi r11, r1, 0x20
@@ -1619,7 +1619,7 @@ lbl_fn_8063C9D4_000013C4:
     stb r30, 0xb(r3)
     stb r0, 0xc(r3)
     stb r31, 0xd(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063C9D4_00001400:
     lwz r0, 0x14(r1)
@@ -1661,7 +1661,7 @@ lbl_fn_8063CA5C_0000144C:
     stb r4, 0xc(r3)
     stb r31, 0xd(r3)
     stb r0, 0xe(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063CA5C_0000148C:
     lwz r0, 0x14(r1)
@@ -1698,7 +1698,7 @@ asm void fn_8063CAE8(void)
     lbz r0, 0x0(r4)
     stb r0, 0x10(r3)
     stb r5, 0x11(r3)
-    b fn_8063A778
+    b btm_sec_dispatchCallback
 }
 
 asm void fn_8063CB48(void)
@@ -1726,7 +1726,7 @@ asm void fn_8063CB48(void)
     lbz r0, 0x0(r4)
     stb r0, 0x10(r3)
     stb r5, 0x11(r3)
-    b fn_8063A778
+    b btm_sec_dispatchCallback
 }
 
 asm void fn_8063CBA4(void)
@@ -1829,7 +1829,7 @@ lbl_fn_8063CBA4_00001594:
     stb r0, 0x1f(r3)
     lbzx r0, r31, r4
     stb r0, 0x20(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063CBA4_000016E8:
     addi r11, r1, 0x30
@@ -1877,7 +1877,7 @@ lbl_fn_8063CD44_0000172C:
     stb r0, 0xf(r3)
     lbz r0, 0x0(r31)
     stb r0, 0x10(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063CD44_0000178C:
     lwz r0, 0x14(r1)
@@ -2012,7 +2012,7 @@ lbl_fn_8063CDE4_00001954:
     addi r4, r4, 0x1
     bdnz lbl_fn_8063CDE4_00001954
 lbl_fn_8063CDE4_00001960:
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063CDE4_00001968:
     lwz r0, 0x24(r1)
@@ -2061,7 +2061,7 @@ lbl_fn_8063CFC8_000019B0:
     stb r0, 0xf(r3)
     lbz r0, 0x0(r31)
     stb r0, 0x10(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063CFC8_00001A10:
     lwz r0, 0x14(r1)
@@ -2103,7 +2103,7 @@ lbl_fn_8063D068_00001A58:
     stb r4, 0xc(r3)
     stb r31, 0xd(r3)
     stb r0, 0xe(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063D068_00001A9C:
     lwz r0, 0x14(r1)
@@ -2142,7 +2142,7 @@ lbl_fn_8063D0F8_00001AE0:
     stb r4, 0xa(r3)
     stb r31, 0xb(r3)
     stb r0, 0xc(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063D0F8_00001B1C:
     lwz r0, 0x14(r1)
@@ -2183,7 +2183,7 @@ lbl_fn_8063D174_00001B64:
     stb r30, 0xb(r3)
     stb r0, 0xc(r3)
     stb r31, 0xd(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063D174_00001BA4:
     lwz r0, 0x14(r1)
@@ -2242,7 +2242,7 @@ lbl_fn_8063D200_00001C00:
     stb r30, 0x12(r3)
     stb r31, 0x13(r3)
     stb r0, 0x14(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063D200_00001C74:
     lwz r0, 0x24(r1)
@@ -2292,7 +2292,7 @@ lbl_fn_8063D2D8_00001CC0:
     stb r0, 0xf(r3)
     lbz r0, 0x0(r31)
     stb r0, 0x10(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063D2D8_00001D20:
     lwz r0, 0x14(r1)
@@ -2330,7 +2330,7 @@ lbl_fn_8063D378_00001D60:
     stb r4, 0xa(r3)
     stb r31, 0xb(r3)
     stb r0, 0xc(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063D378_00001D9C:
     lwz r0, 0x14(r1)
@@ -2368,7 +2368,7 @@ lbl_fn_8063D3F4_00001DDC:
     stb r4, 0xa(r3)
     stb r31, 0xb(r3)
     stb r0, 0xc(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063D3F4_00001E18:
     lwz r0, 0x14(r1)
@@ -2406,7 +2406,7 @@ lbl_fn_8063D470_00001E58:
     stb r4, 0xa(r3)
     stb r31, 0xb(r3)
     stb r0, 0xc(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063D470_00001E94:
     lwz r0, 0x14(r1)
@@ -2475,7 +2475,7 @@ lbl_fn_8063D4EC_00001EF0:
     stb r30, 0x19(r3)
     stb r31, 0x1a(r3)
     stb r0, 0x1b(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063D4EC_00001F8C:
     addi r11, r1, 0x30
@@ -2540,7 +2540,7 @@ asm void fn_8063D5E8(void)
     stb r9, 0x1d(r3)
     stb r10, 0x1e(r3)
     stb r0, 0x1f(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     addi r11, r1, 0x30
     bl _restgpr_25
     lwz r0, 0x34(r1)
@@ -2575,7 +2575,7 @@ asm void fn_8063D6D0(void)
     lbz r0, 0x0(r4)
     stb r0, 0x10(r3)
     stb r5, 0x11(r3)
-    b fn_8063A778
+    b btm_sec_dispatchCallback
 }
 
 asm void fn_8063D730(void)
@@ -2618,7 +2618,7 @@ lbl_fn_8063D730_00002130:
     stb r4, 0xe(r3)
     stb r31, 0xf(r3)
     stb r0, 0x10(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063D730_00002184:
     lwz r0, 0x24(r1)
@@ -2677,7 +2677,7 @@ lbl_fn_8063D7E4_000021E8:
     stb r4, 0x12(r3)
     stb r31, 0x13(r3)
     stb r0, 0x14(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063D7E4_00002254:
     addi r11, r1, 0x20
@@ -2718,7 +2718,7 @@ lbl_fn_8063D8B0_000022A0:
     stb r4, 0xa(r3)
     stb r31, 0xb(r3)
     stb r0, 0xc(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063D8B0_000022DC:
     lwz r0, 0x14(r1)
@@ -2768,7 +2768,7 @@ lbl_fn_8063D934_00002334:
     stb r4, 0xe(r3)
     stb r31, 0xf(r3)
     stb r0, 0x10(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063D934_00002388:
     lwz r0, 0x24(r1)
@@ -2810,7 +2810,7 @@ lbl_fn_8063D9E8_000023D8:
     stb r4, 0xa(r3)
     stb r31, 0xb(r3)
     stb r0, 0xc(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063D9E8_00002414:
     lwz r0, 0x14(r1)
@@ -2860,7 +2860,7 @@ lbl_fn_8063DA6C_0000245C:
     lbz r0, 0x0(r30)
     stb r0, 0x10(r3)
     stb r31, 0x11(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063DA6C_000024C0:
     lwz r0, 0x14(r1)
@@ -2904,7 +2904,7 @@ lbl_fn_8063DB1C_0000250C:
     stb r4, 0xc(r3)
     stb r31, 0xd(r3)
     stb r0, 0xe(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063DB1C_00002554:
     lwz r0, 0x14(r1)
@@ -2936,7 +2936,7 @@ lbl_fn_8063DBB0_00002590:
     stb r5, 0x8(r3)
     stb r0, 0x9(r3)
     stb r4, 0xa(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063DBB0_000025B8:
     lwz r0, 0x14(r1)
@@ -3066,7 +3066,7 @@ lbl_fn_8063DC0C_0000276C:
     stb r0, 0xa(r3)
     stb r4, 0xb(r3)
 lbl_fn_8063DC0C_00002780:
-    b fn_8063A778
+    b btm_sec_dispatchCallback
 }
 
 asm void fn_8063DDC8(void)
@@ -3095,7 +3095,7 @@ lbl_fn_8063DDC8_000027B0:
     stb r4, 0x9(r3)
     stb r0, 0xa(r3)
     stb r31, 0xb(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063DDC8_000027E4:
     lwz r0, 0x14(r1)
@@ -3131,7 +3131,7 @@ asm void fn_8063DE3C(void)
     lbz r0, 0x0(r4)
     stb r0, 0x10(r3)
     stb r5, 0x11(r3)
-    b fn_8063A778
+    b btm_sec_dispatchCallback
 }
 
 asm void fn_8063DE9C(void)
@@ -3245,7 +3245,7 @@ lbl_fn_8063DE9C_000028BC:
     addi r7, r7, 0x16
     bdnz lbl_fn_8063DE9C_000028BC
 lbl_fn_8063DE9C_000029FC:
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     addi r11, r1, 0x30
     bl _restgpr_22
     lwz r0, 0x34(r1)
@@ -3294,7 +3294,7 @@ lbl_fn_8063E05C_00002A4C:
     lbz r0, 0x0(r30)
     stb r0, 0x10(r3)
     stb r31, 0x11(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063E05C_00002AB0:
     lwz r0, 0x14(r1)
@@ -3386,7 +3386,7 @@ lbl_fn_8063E10C_00002BD4:
     bdnz lbl_fn_8063E10C_00002BD4
 lbl_fn_8063E10C_00002BE8:
     mr r3, r31
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -3411,7 +3411,7 @@ asm void fn_8063E24C(void)
     stb r5, 0xa(r3)
     stb r4, 0xb(r3)
     stb r0, 0xc(r3)
-    b fn_8063A778
+    b btm_sec_dispatchCallback
 }
 
 asm void fn_8063E284(void)
@@ -3428,7 +3428,7 @@ asm void fn_8063E284(void)
     stb r5, 0x9(r3)
     stb r0, 0xa(r3)
     stb r4, 0xb(r3)
-    b fn_8063A778
+    b btm_sec_dispatchCallback
 }
 
 asm void fn_8063E2B4(void)
@@ -3450,7 +3450,7 @@ asm void fn_8063E2B4(void)
     stb r6, 0xc(r3)
     stb r5, 0xd(r3)
     stb r0, 0xe(r3)
-    b fn_8063A778
+    b btm_sec_dispatchCallback
 }
 
 asm void fn_8063E2F8(void)
@@ -3472,7 +3472,7 @@ asm void fn_8063E2F8(void)
     stb r6, 0xc(r3)
     stb r5, 0xd(r3)
     stb r0, 0xe(r3)
-    b fn_8063A778
+    b btm_sec_dispatchCallback
 }
 
 asm void fn_8063E33C(void)
@@ -3501,7 +3501,7 @@ lbl_fn_8063E33C_00002D24:
     stb r4, 0x9(r3)
     stb r0, 0xa(r3)
     stb r31, 0xb(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063E33C_00002D58:
     lwz r0, 0x14(r1)
@@ -3537,7 +3537,7 @@ lbl_fn_8063E3B0_00002D98:
     stb r4, 0x9(r3)
     stb r0, 0xa(r3)
     stb r31, 0xb(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063E3B0_00002DCC:
     lwz r0, 0x14(r1)
@@ -3566,7 +3566,7 @@ asm void fn_8063E424(void)
     stb r0, 0xc(r3)
     lbz r0, 0x0(r4)
     stb r0, 0xd(r3)
-    b fn_8063A778
+    b btm_sec_dispatchCallback
 }
 
 asm void fn_8063E468(void)
@@ -3588,7 +3588,7 @@ asm void fn_8063E468(void)
     stb r6, 0xc(r3)
     stb r5, 0xd(r3)
     stb r0, 0xe(r3)
-    b fn_8063A778
+    b btm_sec_dispatchCallback
 }
 
 asm void fn_8063E4AC(void)
@@ -3632,7 +3632,7 @@ lbl_fn_8063E4AC_00002EAC:
     stb r4, 0xf(r3)
     stb r31, 0x10(r3)
     stb r0, 0x11(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063E4AC_00002F04:
     lwz r0, 0x24(r1)
@@ -3678,7 +3678,7 @@ lbl_fn_8063E568_00002F58:
     stb r4, 0xc(r3)
     stb r31, 0xd(r3)
     stb r0, 0xe(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063E568_00002FA0:
     lwz r0, 0x14(r1)
@@ -3721,7 +3721,7 @@ lbl_fn_8063E5FC_00003000:
     addi r6, r6, 0x3
     bdnz lbl_fn_8063E5FC_00003000
 lbl_fn_8063E5FC_00003024:
-    b fn_8063A778
+    b btm_sec_dispatchCallback
 }
 
 asm void fn_8063E66C(void)
@@ -3746,7 +3746,7 @@ lbl_fn_8063E66C_0000304C:
     stb r4, 0x8(r3)
     stb r0, 0x9(r3)
     stb r5, 0xa(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063E66C_00003078:
     lwz r0, 0x14(r1)
@@ -3776,7 +3776,7 @@ lbl_fn_8063E6CC_000030AC:
     stb r5, 0x8(r3)
     stb r0, 0x9(r3)
     stb r4, 0xa(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063E6CC_000030D4:
     lwz r0, 0x14(r1)
@@ -3797,7 +3797,7 @@ asm void fn_8063E728(void)
     stb r4, 0x8(r3)
     stb r0, 0x9(r3)
     stb r5, 0xa(r3)
-    b fn_8063A778
+    b btm_sec_dispatchCallback
 }
 
 asm void fn_8063E750(void)
@@ -3822,7 +3822,7 @@ lbl_fn_8063E750_00003130:
     stb r4, 0x8(r3)
     stb r0, 0x9(r3)
     stb r5, 0xa(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063E750_0000315C:
     lwz r0, 0x14(r1)
@@ -3859,7 +3859,7 @@ lbl_fn_8063E7B0_00003198:
     stb r4, 0xa(r3)
     stb r31, 0xb(r3)
     stb r0, 0xc(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063E7B0_000031D4:
     lwz r0, 0x14(r1)
@@ -3896,7 +3896,7 @@ lbl_fn_8063E82C_00003214:
     stb r4, 0xa(r3)
     stb r31, 0xb(r3)
     stb r0, 0xc(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063E82C_0000324C:
     lwz r0, 0x14(r1)
@@ -4176,7 +4176,7 @@ lbl_fn_8063E8A4_0000360C:
     stb r0, 0x13(r3)
     lbz r0, 0x11(r1)
     stb r0, 0x14(r3)
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     li r3, 0x1
 lbl_fn_8063E8A4_00003664:
     lwz r0, 0x34(r1)
@@ -4202,7 +4202,7 @@ asm void fn_8063ECC4(void)
     stb r5, 0x9(r3)
     stb r0, 0xa(r3)
     stb r4, 0xb(r3)
-    b fn_8063A778
+    b btm_sec_dispatchCallback
 }
 
 asm void fn_8063ECF4(void)
@@ -4219,7 +4219,7 @@ asm void fn_8063ECF4(void)
     stb r5, 0x9(r3)
     stb r0, 0xa(r3)
     stb r4, 0xb(r3)
-    b fn_8063A778
+    b btm_sec_dispatchCallback
 }
 
 asm void fn_8063ED24(void)
@@ -4236,7 +4236,7 @@ asm void fn_8063ED24(void)
     stb r5, 0x9(r3)
     stb r0, 0xa(r3)
     stb r4, 0xb(r3)
-    b fn_8063A778
+    b btm_sec_dispatchCallback
 }
 
 asm void fn_8063ED54(void)
@@ -4307,5 +4307,5 @@ lbl_fn_8063ED54_000037EC:
     addi r9, r9, 0x1
     bdnz lbl_fn_8063ED54_000037EC
 lbl_fn_8063ED54_00003800:
-    b fn_8063A778
+    b btm_sec_dispatchCallback
 }

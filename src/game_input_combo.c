@@ -16,7 +16,7 @@ extern void mem_free(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_80088FAC(void);
+extern void zone_formatEventString(void);
 extern void node_createNamedChild(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -961,7 +961,7 @@ lbl_fn_802EC38C_00000BD0:
     addi r5, r29, 0x15c4
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f1, lbl_808847B0
     mr r3, r30
     lfs f2, lbl_808847E0

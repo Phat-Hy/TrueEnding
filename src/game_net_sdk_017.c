@@ -36,7 +36,7 @@ extern void fn_806C2880(void);
 extern void fn_806C2F70(void);
 extern void fn_806C3270(void);
 extern void fn_806C3ED0(void);
-extern void fn_806C5C10(void);
+extern void net_logConnectionEvent(void);
 extern void net_formatSessionLog(void);
 extern void fn_806CB550(void);
 extern void fn_806CCDB0(void);
@@ -1439,7 +1439,7 @@ lbl_fn_806C0C20_000012D8:
     bl net_formatSessionLog
     b lbl_fn_806C0C20_00001310
 lbl_fn_806C0C20_0000130C:
-    bl fn_806C5C10
+    bl net_logConnectionEvent
 lbl_fn_806C0C20_00001310:
     cmpwi r3, 0x0
     beq lbl_fn_806C0C20_0000150C
@@ -1785,7 +1785,7 @@ lbl_fn_806C10C0_000017D0:
     bl net_formatSessionLog
     b lbl_fn_806C10C0_00001808
 lbl_fn_806C10C0_00001804:
-    bl fn_806C5C10
+    bl net_logConnectionEvent
 lbl_fn_806C10C0_00001808:
     cmpwi r3, 0x0
     beq lbl_fn_806C10C0_00001818
@@ -2820,7 +2820,7 @@ lbl_fn_806C1AC0_0000268C:
     b lbl_fn_806C1AC0_00002744
 lbl_fn_806C1AC0_0000273C:
     mr r3, r26
-    bl fn_806C5C10
+    bl net_logConnectionEvent
 lbl_fn_806C1AC0_00002744:
     cmpwi r3, 0x0
     bne lbl_fn_806C1AC0_00002CD0
@@ -2967,7 +2967,7 @@ lbl_fn_806C1AC0_00002920:
     li r3, -0x1
     li r5, 0x0
     bl net_sendSessionCommand
-    bl fn_806C5C10
+    bl net_logConnectionEvent
     cmpwi r3, 0x0
     bne lbl_fn_806C1AC0_00002CD0
     lis r3, lbl_80860898@ha

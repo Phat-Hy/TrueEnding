@@ -50,8 +50,8 @@ void fn_800CFDA0(void);
 void fn_800CFDC8(void);
 void fn_800CFDF0(void);
 void fn_800CFFB8(void);
-void fn_800D0180(void);
-void fn_800D0198(void);
+void shadow_dispatchCallback(void);
+void shadow_initProjectionContext(void);
 void fn_800D0240(void);
 void fn_800D03AC(void);
 void fn_800D0518(void);
@@ -754,12 +754,12 @@ lbl_fn_800CFDF0_000008D8:
     stw r4, 0x20(r1)
     bne lbl_fn_800CFDF0_00000930
     lis r6, lbl_807C75C0@ha
-    lis r4, fn_800D0180@ha
-    lis r3, fn_800D0198@ha
+    lis r4, shadow_dispatchCallback@ha
+    lis r3, shadow_initProjectionContext@ha
     li r0, 0x1
-    addi r3, r3, fn_800D0198@l
+    addi r3, r3, shadow_initProjectionContext@l
     addi r5, r6, lbl_807C75C0@l
-    addi r4, r4, fn_800D0180@l
+    addi r4, r4, shadow_dispatchCallback@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C75C0@l(r6)
     stb r0, lbl_8087EFEE
@@ -887,12 +887,12 @@ lbl_fn_800CFFB8_00000AA0:
     stw r4, 0x20(r1)
     bne lbl_fn_800CFFB8_00000AF8
     lis r6, lbl_807C75C0@ha
-    lis r4, fn_800D0180@ha
-    lis r3, fn_800D0198@ha
+    lis r4, shadow_dispatchCallback@ha
+    lis r3, shadow_initProjectionContext@ha
     li r0, 0x1
-    addi r3, r3, fn_800D0198@l
+    addi r3, r3, shadow_initProjectionContext@l
     addi r5, r6, lbl_807C75C0@l
-    addi r4, r4, fn_800D0180@l
+    addi r4, r4, shadow_dispatchCallback@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C75C0@l(r6)
     stb r0, lbl_8087EFEE
@@ -959,7 +959,7 @@ lbl_fn_800CFFB8_00000BB4:
     blr
 }
 
-asm void fn_800D0180(void)
+asm void shadow_dispatchCallback(void)
 {
     nofralloc
     mr r5, r3
@@ -970,7 +970,7 @@ asm void fn_800D0180(void)
     bctr
 }
 
-asm void fn_800D0198(void)
+asm void shadow_initProjectionContext(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -981,24 +981,24 @@ asm void fn_800D0198(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bne lbl_fn_800D0198_00000C18
+    bne lbl_shadow_initProjectionContext_00000C18
     lis r3, lbl_80779680@ha
     addi r3, r3, lbl_80779680@l
     stw r3, 0x0(r4)
-    b lbl_fn_800D0198_00000C74
-lbl_fn_800D0198_00000C18:
+    b lbl_shadow_initProjectionContext_00000C74
+lbl_shadow_initProjectionContext_00000C18:
     cmpwi r5, 0x0
-    bne lbl_fn_800D0198_00000C3C
+    bne lbl_shadow_initProjectionContext_00000C3C
     cmpwi r4, 0x0
-    beq lbl_fn_800D0198_00000C74
+    beq lbl_shadow_initProjectionContext_00000C74
     lwz r0, 0x0(r3)
     stw r0, 0x0(r4)
     lwz r0, 0x4(r3)
     stw r0, 0x4(r4)
-    b lbl_fn_800D0198_00000C74
-lbl_fn_800D0198_00000C3C:
+    b lbl_shadow_initProjectionContext_00000C74
+lbl_shadow_initProjectionContext_00000C3C:
     cmpwi r5, 0x1
-    beq lbl_fn_800D0198_00000C74
+    beq lbl_shadow_initProjectionContext_00000C74
     lwz r5, 0x0(r4)
     lis r3, lbl_80779680@ha
     lwz r4, lbl_80779680@l(r3)
@@ -1006,13 +1006,13 @@ lbl_fn_800D0198_00000C3C:
     bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
-    beq lbl_fn_800D0198_00000C6C
+    beq lbl_shadow_initProjectionContext_00000C6C
     stw r30, 0x0(r31)
-    b lbl_fn_800D0198_00000C74
-lbl_fn_800D0198_00000C6C:
+    b lbl_shadow_initProjectionContext_00000C74
+lbl_shadow_initProjectionContext_00000C6C:
     li r0, 0x0
     stw r0, 0x0(r31)
-lbl_fn_800D0198_00000C74:
+lbl_shadow_initProjectionContext_00000C74:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1056,12 +1056,12 @@ lbl_fn_800D0240_00000CCC:
     stw r3, 0x20(r1)
     bne lbl_fn_800D0240_00000D24
     lis r6, lbl_807C75C0@ha
-    lis r4, fn_800D0180@ha
-    lis r3, fn_800D0198@ha
+    lis r4, shadow_dispatchCallback@ha
+    lis r3, shadow_initProjectionContext@ha
     li r0, 0x1
-    addi r3, r3, fn_800D0198@l
+    addi r3, r3, shadow_initProjectionContext@l
     addi r5, r6, lbl_807C75C0@l
-    addi r4, r4, fn_800D0180@l
+    addi r4, r4, shadow_dispatchCallback@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C75C0@l(r6)
     stb r0, lbl_8087EFEE
@@ -1163,12 +1163,12 @@ lbl_fn_800D03AC_00000E38:
     stw r3, 0x20(r1)
     bne lbl_fn_800D03AC_00000E90
     lis r6, lbl_807C75C0@ha
-    lis r4, fn_800D0180@ha
-    lis r3, fn_800D0198@ha
+    lis r4, shadow_dispatchCallback@ha
+    lis r3, shadow_initProjectionContext@ha
     li r0, 0x1
-    addi r3, r3, fn_800D0198@l
+    addi r3, r3, shadow_initProjectionContext@l
     addi r5, r6, lbl_807C75C0@l
-    addi r4, r4, fn_800D0180@l
+    addi r4, r4, shadow_dispatchCallback@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C75C0@l(r6)
     stb r0, lbl_8087EFEE
@@ -1270,12 +1270,12 @@ lbl_fn_800D0518_00000FA4:
     stw r3, 0x20(r1)
     bne lbl_fn_800D0518_00000FFC
     lis r6, lbl_807C75C0@ha
-    lis r4, fn_800D0180@ha
-    lis r3, fn_800D0198@ha
+    lis r4, shadow_dispatchCallback@ha
+    lis r3, shadow_initProjectionContext@ha
     li r0, 0x1
-    addi r3, r3, fn_800D0198@l
+    addi r3, r3, shadow_initProjectionContext@l
     addi r5, r6, lbl_807C75C0@l
-    addi r4, r4, fn_800D0180@l
+    addi r4, r4, shadow_dispatchCallback@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C75C0@l(r6)
     stb r0, lbl_8087EFEE
@@ -1595,12 +1595,12 @@ asm void fn_800D0974(void)
     stw r6, 0x20(r1)
     bne lbl_fn_800D0974_00001428
     lis r6, lbl_807C75C0@ha
-    lis r4, fn_800D0180@ha
-    lis r3, fn_800D0198@ha
+    lis r4, shadow_dispatchCallback@ha
+    lis r3, shadow_initProjectionContext@ha
     li r0, 0x1
-    addi r3, r3, fn_800D0198@l
+    addi r3, r3, shadow_initProjectionContext@l
     addi r5, r6, lbl_807C75C0@l
-    addi r4, r4, fn_800D0180@l
+    addi r4, r4, shadow_dispatchCallback@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C75C0@l(r6)
     stb r0, lbl_8087EFEE

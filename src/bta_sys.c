@@ -47,7 +47,7 @@ extern void fn_80633C38(void);
 extern void fn_80635694(void);
 extern void fn_80636DF4(void);
 extern void fn_8063A1C0(void);
-extern void fn_8063A778(void);
+extern void btm_sec_dispatchCallback(void);
 extern void fn_8063B1E4(void);
 extern void fn_8063B41C(void);
 extern void fn_8063B448(void);
@@ -1698,7 +1698,7 @@ lbl_fn_80629AA0_000014CC:
     b lbl_fn_80629AA0_00001554
 lbl_fn_80629AA0_000014E0:
     mr r3, r27
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     b lbl_fn_80629AA0_00001554
 lbl_fn_80629AA0_000014EC:
     li r26, 0x0

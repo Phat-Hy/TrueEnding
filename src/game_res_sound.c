@@ -12,7 +12,7 @@ extern void fn_8022C9C8(void);
 extern void fn_8022D790(void);
 extern void fn_802301EC(void);
 extern void fn_80230F3C(void);
-extern void fn_8023329C(void);
+extern void effect_evalKeyframeCurve(void);
 extern void fn_80238560(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
@@ -465,7 +465,7 @@ lbl_fn_8023193C_00000598:
     mr r5, r29
     mr r6, r31
     li r3, 0xf
-    bl fn_8023329C
+    bl effect_evalKeyframeCurve
     stfs f1, 0xa4(r26)
     fmr f1, f30
     lfs f2, 0x124(r26)
@@ -473,7 +473,7 @@ lbl_fn_8023193C_00000598:
     mr r5, r29
     mr r6, r31
     li r3, 0x10
-    bl fn_8023329C
+    bl effect_evalKeyframeCurve
     stfs f1, 0xa8(r26)
     fmr f1, f30
     lfs f2, 0x128(r26)
@@ -481,7 +481,7 @@ lbl_fn_8023193C_00000598:
     mr r5, r29
     mr r6, r31
     li r3, 0x11
-    bl fn_8023329C
+    bl effect_evalKeyframeCurve
     stfs f1, 0xac(r26)
     b lbl_fn_8023193C_0000067C
 lbl_fn_8023193C_0000061C:
@@ -618,7 +618,7 @@ lbl_fn_8023193C_000007E4:
     mr r5, r29
     li r3, 0x12
     li r6, 0x0
-    bl fn_8023329C
+    bl effect_evalKeyframeCurve
     frsp f3, f1
     lfs f0, 0xa8(r24)
     fmuls f0, f3, f0
@@ -661,7 +661,7 @@ lbl_fn_8023193C_0000087C:
     mr r5, r29
     mr r6, r23
     li r3, 0x13
-    bl fn_8023329C
+    bl effect_evalKeyframeCurve
     stfs f1, 0xd0(r26)
     fmr f1, f30
     lfs f2, 0x134(r26)
@@ -669,7 +669,7 @@ lbl_fn_8023193C_0000087C:
     mr r5, r29
     mr r6, r23
     li r3, 0x14
-    bl fn_8023329C
+    bl effect_evalKeyframeCurve
     stfs f1, 0xd4(r26)
     fmr f1, f30
     lfs f2, 0x138(r26)
@@ -677,7 +677,7 @@ lbl_fn_8023193C_0000087C:
     mr r5, r29
     mr r6, r23
     li r3, 0x15
-    bl fn_8023329C
+    bl effect_evalKeyframeCurve
     stfs f1, 0xd8(r26)
     b lbl_fn_8023193C_0000096C
 lbl_fn_8023193C_00000900:
@@ -742,7 +742,7 @@ lbl_fn_8023193C_000009B0:
     mr r5, r29
     mr r6, r23
     li r3, 0x7
-    bl fn_8023329C
+    bl effect_evalKeyframeCurve
     stfs f1, 0x98(r26)
     fmr f1, f30
     lfs f2, 0x104(r26)
@@ -750,7 +750,7 @@ lbl_fn_8023193C_000009B0:
     mr r5, r29
     mr r6, r23
     li r3, 0x8
-    bl fn_8023329C
+    bl effect_evalKeyframeCurve
     stfs f1, 0x9c(r26)
     fmr f1, f30
     lfs f2, 0x108(r26)
@@ -758,7 +758,7 @@ lbl_fn_8023193C_000009B0:
     mr r5, r29
     mr r6, r23
     li r3, 0x9
-    bl fn_8023329C
+    bl effect_evalKeyframeCurve
     frsp f0, f1
     lfs f5, 0xa8(r24)
     lfs f4, 0x98(r26)
@@ -1065,7 +1065,7 @@ lbl_fn_8023193C_00000E6C:
     mr r5, r29
     mr r6, r23
     li r3, 0x0
-    bl fn_8023329C
+    bl effect_evalKeyframeCurve
     stfs f1, 0xb0(r26)
     fmr f1, f30
     lfs f2, 0xe8(r26)
@@ -1073,7 +1073,7 @@ lbl_fn_8023193C_00000E6C:
     mr r5, r29
     mr r6, r23
     li r3, 0x1
-    bl fn_8023329C
+    bl effect_evalKeyframeCurve
     stfs f1, 0xb4(r26)
     fmr f1, f30
     lfs f2, 0xec(r26)
@@ -1081,7 +1081,7 @@ lbl_fn_8023193C_00000E6C:
     mr r5, r29
     mr r6, r23
     li r3, 0x2
-    bl fn_8023329C
+    bl effect_evalKeyframeCurve
     frsp f0, f1
     lfs f5, 0xa8(r24)
     lfs f4, 0xb0(r26)
@@ -1231,7 +1231,7 @@ lbl_fn_8023193C_00001108:
     mr r5, r29
     mr r6, r23
     li r3, 0x6
-    bl fn_8023329C
+    bl effect_evalKeyframeCurve
     stfs f1, 0xc8(r26)
     b lbl_fn_8023193C_000011AC
 lbl_fn_8023193C_0000112C:
@@ -1241,7 +1241,7 @@ lbl_fn_8023193C_0000112C:
     mr r5, r29
     mr r6, r23
     li r3, 0x6
-    bl fn_8023329C
+    bl effect_evalKeyframeCurve
     stfs f1, 0xc8(r26)
     fmr f1, f30
     lfs f2, 0xf0(r26)
@@ -1249,7 +1249,7 @@ lbl_fn_8023193C_0000112C:
     mr r5, r29
     mr r6, r23
     li r3, 0x3
-    bl fn_8023329C
+    bl effect_evalKeyframeCurve
     stfs f1, 0xbc(r26)
     fmr f1, f30
     lfs f2, 0xf4(r26)
@@ -1257,7 +1257,7 @@ lbl_fn_8023193C_0000112C:
     mr r5, r29
     mr r6, r23
     li r3, 0x4
-    bl fn_8023329C
+    bl effect_evalKeyframeCurve
     stfs f1, 0xc0(r26)
     fmr f1, f30
     lfs f2, 0xf8(r26)
@@ -1265,7 +1265,7 @@ lbl_fn_8023193C_0000112C:
     mr r5, r29
     mr r6, r23
     li r3, 0x5
-    bl fn_8023329C
+    bl effect_evalKeyframeCurve
     stfs f1, 0xc4(r26)
 lbl_fn_8023193C_000011AC:
     lwz r0, 0x90(r25)
@@ -1342,7 +1342,7 @@ lbl_fn_8023193C_00001280:
     mr r5, r29
     li r3, 0xa
     li r6, 0x0
-    bl fn_8023329C
+    bl effect_evalKeyframeCurve
     stfs f1, 0xdc(r26)
     fmr f1, f30
     lfs f2, lbl_808830D0
@@ -1350,7 +1350,7 @@ lbl_fn_8023193C_00001280:
     mr r5, r29
     li r3, 0xb
     li r6, 0x0
-    bl fn_8023329C
+    bl effect_evalKeyframeCurve
     stfs f1, 0xe0(r26)
 lbl_fn_8023193C_000012D8:
     lwz r0, 0x4c(r25)
