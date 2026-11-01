@@ -18,7 +18,7 @@ extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void str_parseInt(void);
 extern void str_findChar(void);
 extern void actor_findSpawnTemplate(void);
@@ -666,7 +666,7 @@ lbl_fn_80586220_000006A8:
     mr r20, r3
     mr r3, r23
     mr r4, r20
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lbz r3, 0x14(r1)
     slwi r0, r20, 1
     stb r3, 0x10(r1)

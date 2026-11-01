@@ -21,7 +21,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_setActive(void);
 extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013A258(void);
 extern void npc_updateTalkInteraction(void);
@@ -164,7 +164,7 @@ asm void fn_80263CF0(void)
     cmpwi r0, 0x7
     bne lbl_fn_80263CF0_000002B8
     addi r3, r29, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r29, 0x1088
     addi r31, r1, 0x68
     psq_l f1, 0x0(r4), 0, 0

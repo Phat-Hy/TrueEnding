@@ -10,7 +10,7 @@ extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void fn_8016DAB0(void);
@@ -1614,7 +1614,7 @@ asm void fn_803E6CBC(void)
     mr r31, r3
     mr r3, r29
     mr r4, r31
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lbz r3, 0x8(r1)
     slwi r0, r31, 1
     stb r3, 0xc(r1)

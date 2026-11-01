@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
-extern void fn_80044E0C(void);
+extern void menu_renderLayout(void);
 extern void fn_80051A88(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
@@ -1122,13 +1122,13 @@ lbl_dialog_updateScriptState_00000E50:
     cmpwi r3, 0x0
     beq lbl_dialog_updateScriptState_00000E80
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_dialog_updateScriptState_00000E80:
     lwz r3, 0x64c(r28)
     cmpwi r3, 0x0
     beq lbl_dialog_updateScriptState_00000E94
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_dialog_updateScriptState_00000E94:
     li r0, 0x0
     li r3, -0x1
@@ -1337,13 +1337,13 @@ lbl_dialog_updateScriptState_00001154:
     cmpwi r3, 0x0
     beq lbl_dialog_updateScriptState_00001184
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_dialog_updateScriptState_00001184:
     lwz r3, 0x64c(r28)
     cmpwi r3, 0x0
     beq lbl_dialog_updateScriptState_00001198
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_dialog_updateScriptState_00001198:
     li r0, 0x0
     li r3, -0x1

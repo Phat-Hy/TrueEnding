@@ -29,7 +29,7 @@ extern void fn_8011D1FC(void);
 extern void fn_8011D21C(void);
 extern void equip_getGlobalManager(void);
 extern void magic_dispatchActionCommand(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_8013537C(void);
 extern void fn_801370B8(void);
 extern void fn_80138E1C(void);
@@ -89,7 +89,7 @@ extern u32 lbl_808819C8;
 extern u32 lbl_808819CC;
 
 /* Function declarations */
-void fn_80139550(void);
+void npc_updateDialogueTarget(void);
 void fn_80139560(void);
 void fn_80139E90(void);
 void fn_80139E9C(void);
@@ -122,7 +122,7 @@ void fn_8013A21C(void);
 void fn_8013A248(void);
 void fn_8013A258(void);
 
-asm void fn_80139550(void)
+asm void npc_updateDialogueTarget(void)
 {
     nofralloc
     mulli r0, r4, 0x30
@@ -435,7 +435,7 @@ lbl_fn_80139560_00000438:
     b lbl_fn_80139560_00000700
 lbl_fn_80139560_00000468:
     addi r3, r31, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r3, r31, 0x1030
     bl fn_80139F58
     mr r4, r3

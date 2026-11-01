@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_80044E0C(void);
+extern void menu_renderLayout(void);
 extern void mem_alloc(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
@@ -566,13 +566,13 @@ lbl_fn_80167038_00000710:
     cmpwi r3, 0x0
     beq lbl_fn_80167038_00000740
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_80167038_00000740:
     lwz r3, 0x64c(r31)
     cmpwi r3, 0x0
     beq lbl_fn_80167038_00000754
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_80167038_00000754:
     li r0, 0x0
     li r3, -0x1
@@ -998,13 +998,13 @@ lbl_fn_80167640_00000D18:
     cmpwi r3, 0x0
     beq lbl_fn_80167640_00000D48
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_80167640_00000D48:
     lwz r3, 0x64c(r31)
     cmpwi r3, 0x0
     beq lbl_fn_80167640_00000D5C
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_80167640_00000D5C:
     li r0, 0x0
     li r3, -0x1

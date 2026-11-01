@@ -59,7 +59,7 @@ extern void dialog_selectChoice(void);
 extern void fn_8014EEC4(void);
 extern void inventory_unequipItem(void);
 extern void equip_applyToCharacter(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void fn_801561E4(void);
 extern void fn_801562A0(void);
 extern void fn_8015783C(void);
@@ -1339,7 +1339,7 @@ lbl_fn_800EBA5C_000010C0:
     beq lbl_fn_800EBA5C_000010D8
     mr r3, r31
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_800EBA5C_000010D8:
     lwz r0, 0x54c(r31)
     rlwinm r0, r0, 0, 18, 18

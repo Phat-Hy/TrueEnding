@@ -23,7 +23,7 @@ extern void fn_80107A68(void);
 extern void fn_80108378(void);
 extern void fn_801125F8(void);
 extern void fn_8011BF3C(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_80129978(void);
 extern void fn_80129A48(void);
 extern void fn_80133130(void);
@@ -1176,7 +1176,7 @@ lbl_fn_803241E8_00000DCC:
     b lbl_fn_803241E8_0000151C
 lbl_fn_803241E8_00000DF0:
     addi r3, r3, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r31, 0x1088
     addi r29, r1, 0x134
     psq_l f1, 0x0(r4), 0, 0

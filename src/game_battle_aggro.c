@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void fn_80017064(void);
-extern void fn_80044E0C(void);
+extern void menu_renderLayout(void);
 extern void fn_8004ECC0(void);
 extern void boss_recordDamage(void);
 extern void fn_801059F8(void);
@@ -539,13 +539,13 @@ lbl_fn_8016F824_00000608:
     cmpwi r3, 0x0
     beq lbl_fn_8016F824_00000638
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016F824_00000638:
     lwz r3, 0x64c(r30)
     cmpwi r3, 0x0
     beq lbl_fn_8016F824_0000064C
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016F824_0000064C:
     li r0, 0x0
     li r3, -0x1
@@ -949,13 +949,13 @@ lbl_fn_8016FDCC_00000BD8:
     cmpwi r3, 0x0
     beq lbl_fn_8016FDCC_00000C08
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016FDCC_00000C08:
     lwz r3, 0x64c(r30)
     cmpwi r3, 0x0
     beq lbl_fn_8016FDCC_00000C1C
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016FDCC_00000C1C:
     li r0, 0x0
     li r3, -0x1
@@ -1410,13 +1410,13 @@ lbl_fn_8017039C_00001264:
     cmpwi r3, 0x0
     beq lbl_fn_8017039C_00001294
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8017039C_00001294:
     lwz r3, 0x64c(r30)
     cmpwi r3, 0x0
     beq lbl_fn_8017039C_000012A8
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8017039C_000012A8:
     li r0, 0x0
     li r3, -0x1
@@ -1797,13 +1797,13 @@ lbl_fn_80170A20_000017E0:
     cmpwi r3, 0x0
     beq lbl_fn_80170A20_00001810
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_80170A20_00001810:
     lwz r3, 0x64c(r31)
     cmpwi r3, 0x0
     beq lbl_fn_80170A20_00001824
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_80170A20_00001824:
     li r0, 0x0
     li r3, -0x1

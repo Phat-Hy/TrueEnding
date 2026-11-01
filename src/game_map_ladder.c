@@ -23,7 +23,7 @@ extern void fn_8013322C(void);
 extern void npc_updateTalkInteraction(void);
 extern void inventory_unequipItem(void);
 extern void fn_80154344(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void fn_80164DCC(void);
 extern void debuff_clearStatus(void);
 extern void fn_801AD34C(void);
@@ -879,7 +879,7 @@ lbl_fn_8018EEC4_000009DC:
     extrwi. r0, r0, 1, 25
     beq lbl_fn_8018EEC4_000009F4
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_8018EEC4_000009F4:
     lwz r3, 0x4(r30)
     li r4, 0x1
@@ -1638,7 +1638,7 @@ lbl_fn_8018F970_00001460:
     extrwi. r0, r0, 1, 25
     beq lbl_fn_8018F970_00001478
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_8018F970_00001478:
     lwz r3, 0x4(r31)
     li r0, 0x1

@@ -13,7 +13,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_801255C8(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_80128508(void);
 extern void fn_80128A30(void);
 extern void fn_80129954(void);
@@ -1535,7 +1535,7 @@ asm void fn_8017FED0(void)
     stw r29, 0x1c4(r1)
     addi r29, r3, 0xc64
     mr r3, r29
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     psq_l f1, 0x58(r29), 0, 0
     addi r30, r1, 0xd4
     lfs f2, 0x60(r29)

@@ -16,7 +16,7 @@ extern void fn_8013310C(void);
 extern void fn_8013322C(void);
 extern void fn_801446F0(void);
 extern void inventory_unequipItem(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void debuff_clearStatus(void);
 extern void fn_80188A70(void);
 extern void fn_80188AA0(void);
@@ -438,7 +438,7 @@ lbl_fn_80191D30_00000454:
     extrwi. r0, r0, 1, 25
     beq lbl_fn_80191D30_0000046C
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_80191D30_0000046C:
     lwz r3, 0x4(r30)
     li r0, 0x1

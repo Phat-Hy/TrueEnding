@@ -9,7 +9,7 @@ extern void _savegpr_26(void);
 extern void fn_8003E918(void);
 extern void str_assignBuffer(void);
 extern void ref_releaseHandle(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void fn_800FDE60(void);
 extern void fn_801333E4(void);
 extern void fn_8016F824(void);
@@ -115,7 +115,7 @@ lbl_fn_805ADB2C_00000064:
 lbl_fn_805ADB2C_0000006C:
     mr r3, r27
     add r4, r31, r30
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lbz r3, 0x14(r1)
     slwi r0, r31, 1
     stb r3, 0x10(r1)

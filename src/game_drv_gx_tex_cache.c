@@ -75,7 +75,7 @@ extern void GXClearVtxDesc(void);
 extern void fn_80614A80(void);
 extern void fn_80615400(void);
 extern void GXInitLightDistAttn(void);
-extern void fn_80615D50(void);
+extern void GXInitLightSpot(void);
 extern void fn_80617200(void);
 extern void GXSetTevColorIn(void);
 extern void fn_80617420(void);
@@ -1140,7 +1140,7 @@ asm void fn_805C3FE0(void)
     li r7, 0x0
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x5
     li r4, 0x0
     li r5, 0x0
@@ -1148,7 +1148,7 @@ asm void fn_805C3FE0(void)
     li r7, 0x0
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x0
     bl GXClearVtxDesc
     li r3, 0x1

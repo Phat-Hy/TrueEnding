@@ -16,7 +16,7 @@ extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void fn_800FBA9C(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_80127D8C(void);
 extern void fn_8013A258(void);
 extern void npc_updateTalkInteraction(void);
@@ -659,7 +659,7 @@ asm void fn_80336C8C(void)
     stw r0, 0x14cc(r3)
     b lbl_fn_80336C8C_00001E70
     addi r3, r3, 0xc64
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     lwz r0, 0xc90(r30)
     cmpwi r0, 0x0
     beq lbl_fn_80336C8C_00000840
@@ -868,7 +868,7 @@ lbl_fn_80336C8C_00000AF8:
     bl res_findResourceSlot
     b lbl_fn_80336C8C_00001E70
     addi r3, r3, 0xc64
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     lwz r0, 0xc90(r30)
     cmpwi r0, 0x0
     beq lbl_fn_80336C8C_00000B50

@@ -9,7 +9,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void save_validateHeader(void);
@@ -383,7 +383,7 @@ lbl_fn_801F5E9C_00000464:
     stw r0, 0x8(r30)
     stw r0, 0xc(r30)
     lwz r4, 0x28(r1)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x28(r1)
     addi r3, r30, 0x4
     lbz r4, 0x10(r1)
@@ -571,7 +571,7 @@ lbl_fn_801F60B8_000006FC:
     stw r0, 0x8(r30)
     stw r0, 0xc(r30)
     lwz r4, 0x28(r1)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x28(r1)
     addi r3, r30, 0x4
     lbz r4, 0x14(r1)

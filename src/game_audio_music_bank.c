@@ -16,7 +16,7 @@ extern void fn_800133B0(void);
 extern void vec3_add(void);
 extern void skill_calculateDamage(void);
 extern void fn_80063764(void);
-extern void fn_8007708C(void);
+extern void chapter_updateProgression(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
@@ -496,7 +496,7 @@ lbl_fn_8030A848_00000538:
     beq lbl_fn_8030A848_00000570
     addi r4, r3, 0x34
     li r5, 0x4b
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8030A848_00000570
     li r31, 0x1
@@ -514,7 +514,7 @@ lbl_fn_8030A848_00000584:
     beq lbl_fn_8030A848_000005B0
     addi r4, r3, 0x34
     li r5, 0x4c
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8030A848_000005B0
     li r31, 0x1
@@ -684,7 +684,7 @@ lbl_fn_8030A848_000007FC:
     beq lbl_fn_8030A848_00000828
     addi r4, r3, 0x34
     li r5, 0x4d
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8030A848_00000828
     li r30, 0x1

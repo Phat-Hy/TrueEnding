@@ -8,7 +8,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_21(void);
 extern void _savegpr_22(void);
 extern void _savegpr_27(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void fn_8005DF90(void);
 extern void fn_80063764(void);
@@ -1365,7 +1365,7 @@ lbl_fn_800B79E4_00001390:
     blt lbl_fn_800B79E4_00001390
     addi r3, r1, 0x2bc
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     lwz r6, lbl_8087EFB4
     lwz r0, 0x268(r30)
     stw r0, 0x318(r6)

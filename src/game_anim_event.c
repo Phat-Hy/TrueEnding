@@ -20,7 +20,7 @@ extern void fn_800EB7A0(void);
 extern void fn_800EE360(void);
 extern void scissor_clipFrustum(void);
 extern void fn_80109828(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_8013A258(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_801426A4(void);
@@ -124,7 +124,7 @@ asm void fn_802747D0(void)
     cmpwi r0, 0x7
     bne lbl_fn_802747D0_000004C4
     addi r3, r3, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r29, 0x1088
     addi r31, r1, 0xbc
     psq_l f1, 0x0(r4), 0, 0

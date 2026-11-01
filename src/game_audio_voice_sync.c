@@ -28,7 +28,7 @@ extern void fn_80103F60(void);
 extern void fn_80108378(void);
 extern void skill_findNodeById(void);
 extern void fn_801255C8(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_80128930(void);
 extern void fn_8012D8B8(void);
 extern void boss_updatePhaseState(void);
@@ -2005,7 +2005,7 @@ lbl_fn_803073C4_00001A38:
     stw r0, 0x14cc(r3)
     b lbl_fn_803073C4_000030E0
     addi r3, r3, 0xc64
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     lwz r0, 0xc90(r24)
     cmpwi r0, 0x0
     beq lbl_fn_803073C4_00001A70

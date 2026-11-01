@@ -12,7 +12,7 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB688(void);
 extern void inventory_unequipItem(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void actor_getMovementFlags(void);
 extern void fn_8017C9AC(void);
 extern void fn_8018059C(void);
@@ -1266,7 +1266,7 @@ asm void fn_801C48B4(void)
     stw r0, 0x560(r4)
     li r4, 0x0
     lwz r3, 0x4(r3)
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31

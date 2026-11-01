@@ -36,7 +36,7 @@ extern void fn_801346C8(void);
 extern void fn_80152D10(void);
 extern void inventory_unequipItem(void);
 extern void fn_80155790(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void fn_801562A0(void);
 extern void fn_80157444(void);
 extern void fn_8015783C(void);
@@ -407,7 +407,7 @@ lbl_fn_800E73EC_000003A0:
     bne lbl_fn_800E73EC_0000058C
     mr r3, r27
     li r4, 0x1
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
     b lbl_fn_800E73EC_0000058C
 lbl_fn_800E73EC_000003E0:
     lwz r3, lbl_8087F0A8
@@ -619,7 +619,7 @@ lbl_fn_800E7650_000006A4:
     bne lbl_fn_800E7650_00000974
     mr r3, r29
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
     b lbl_fn_800E7650_00000974
 lbl_fn_800E7650_000006E4:
     extrwi. r0, r5, 1, 27
@@ -796,7 +796,7 @@ lbl_fn_800E7650_00000950:
     beq lbl_fn_800E7650_00000974
     mr r3, r29
     li r4, 0x1
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_800E7650_00000974:
     lwz r3, lbl_8087F0A8
     li r4, 0x17

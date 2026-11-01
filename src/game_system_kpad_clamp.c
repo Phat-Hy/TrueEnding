@@ -58,7 +58,7 @@ extern void quest_checkCondition(void);
 extern void dialog_selectChoice(void);
 extern void fn_80151210(void);
 extern void inventory_unequipItem(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void fn_801750FC(void);
 extern void fn_80178A6C(void);
 extern void fn_801C0738(void);
@@ -679,7 +679,7 @@ lbl_fn_803729B4_000006D0:
     beq lbl_fn_803729B4_000006EC
     mr r3, r26
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_803729B4_000006EC:
     mr r3, r26
     bl fn_80267B20

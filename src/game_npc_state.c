@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_80044E0C(void);
+extern void menu_renderLayout(void);
 extern void collision_testLineSegment(void);
 extern void fn_8010CA3C(void);
 extern void fn_801279E8(void);
@@ -558,13 +558,13 @@ lbl_fn_8013C564_00000520:
     cmpwi r3, 0x0
     beq lbl_fn_8013C564_00000550
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8013C564_00000550:
     lwz r3, 0x64c(r29)
     cmpwi r3, 0x0
     beq lbl_fn_8013C564_00000564
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8013C564_00000564:
     li r0, 0x0
     li r3, -0x1

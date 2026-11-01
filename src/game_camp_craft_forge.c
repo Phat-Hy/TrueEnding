@@ -114,7 +114,7 @@ void fn_803C0F48(void);
 void fn_803C1194(void);
 void fn_803C11A4(void);
 void fn_803C1338(void);
-void fn_803C1560(void);
+void craft_forgeUpgradeWeapon(void);
 void fn_803C17FC(void);
 void fn_803C1840(void);
 void fn_803C1884(void);
@@ -1534,7 +1534,7 @@ lbl_fn_803C1338_00001248:
     blr
 }
 
-asm void fn_803C1560(void)
+asm void craft_forgeUpgradeWeapon(void)
 {
     nofralloc
     stwu r1, -0xe0(r1)
@@ -1569,25 +1569,25 @@ asm void fn_803C1560(void)
     stfs f0, 0x80(r1)
     stfs f0, 0x84(r1)
     stw r23, 0x88(r1)
-    b lbl_fn_803C1560_0000152C
-lbl_fn_803C1560_00001434:
+    b lbl_craft_forgeUpgradeWeapon_0000152C
+lbl_craft_forgeUpgradeWeapon_00001434:
     lwz r0, 0x9c(r24)
     add r22, r0, r23
     lwz r0, 0x2c(r22)
     cmpwi r0, 0x0
-    beq lbl_fn_803C1560_00001524
+    beq lbl_craft_forgeUpgradeWeapon_00001524
     cmpwi r27, 0x0
-    ble lbl_fn_803C1560_0000145C
+    ble lbl_craft_forgeUpgradeWeapon_0000145C
     lwz r0, 0x20(r22)
     cmpw r0, r27
-    bne lbl_fn_803C1560_00001524
-lbl_fn_803C1560_0000145C:
+    bne lbl_craft_forgeUpgradeWeapon_00001524
+lbl_craft_forgeUpgradeWeapon_0000145C:
     lwz r0, 0x28(r22)
     cmpw r0, r28
-    bne lbl_fn_803C1560_00001524
+    bne lbl_craft_forgeUpgradeWeapon_00001524
     lfs f0, 0x14(r22)
     fcmpo cr0, f0, f30
-    blt lbl_fn_803C1560_00001524
+    blt lbl_craft_forgeUpgradeWeapon_00001524
     lfs f3, 0x8(r22)
     addi r3, r1, 0x20
     lfs f0, 0x4(r25)
@@ -1607,7 +1607,7 @@ lbl_fn_803C1560_0000145C:
     fmadds f3, f31, f31, f1
     lfsux f0, r3, r0
     fcmpo cr0, f0, f3
-    ble lbl_fn_803C1560_00001524
+    ble lbl_craft_forgeUpgradeWeapon_00001524
     stfs f3, 0x0(r3)
     addi r0, r30, 0x1
     psq_l f1, 0x4(r22), 0, 0
@@ -1620,27 +1620,27 @@ lbl_fn_803C1560_0000145C:
     lfs f3, 0x38(r1)
     lfs f0, 0x50(r1)
     fcmpo cr0, f0, f3
-    ble lbl_fn_803C1560_00001500
+    ble lbl_craft_forgeUpgradeWeapon_00001500
     fmr f3, f0
     li r31, 0x1
-lbl_fn_803C1560_00001500:
+lbl_craft_forgeUpgradeWeapon_00001500:
     lfs f0, 0x68(r1)
     fcmpo cr0, f0, f3
-    ble lbl_fn_803C1560_00001514
+    ble lbl_craft_forgeUpgradeWeapon_00001514
     fmr f3, f0
     li r31, 0x2
-lbl_fn_803C1560_00001514:
+lbl_craft_forgeUpgradeWeapon_00001514:
     lfs f0, 0x80(r1)
     fcmpo cr0, f0, f3
-    ble lbl_fn_803C1560_00001524
+    ble lbl_craft_forgeUpgradeWeapon_00001524
     li r31, 0x3
-lbl_fn_803C1560_00001524:
+lbl_craft_forgeUpgradeWeapon_00001524:
     addi r30, r30, 0x1
     addi r23, r23, 0x30
-lbl_fn_803C1560_0000152C:
+lbl_craft_forgeUpgradeWeapon_0000152C:
     lwz r0, 0x74(r24)
     cmpw r30, r0
-    blt lbl_fn_803C1560_00001434
+    blt lbl_craft_forgeUpgradeWeapon_00001434
     lfs f3, lbl_80885CBC
     oris r23, r26, 0x8000
     lfs f0, lbl_80885CDC
@@ -1651,15 +1651,15 @@ lbl_fn_803C1560_0000152C:
     li r26, 0x0
     stfs f0, 0x30(r1)
     stfs f3, 0x34(r1)
-lbl_fn_803C1560_00001560:
+lbl_craft_forgeUpgradeWeapon_00001560:
     lwz r0, 0x8(r22)
     cmpwi r0, 0x0
-    beq lbl_fn_803C1560_00001604
+    beq lbl_craft_forgeUpgradeWeapon_00001604
     lfs f0, 0x0(r22)
     fcmpo cr0, f31, f0
-    ble lbl_fn_803C1560_00001604
+    ble lbl_craft_forgeUpgradeWeapon_00001604
     cmpwi r29, 0x0
-    beq lbl_fn_803C1560_000015FC
+    beq lbl_craft_forgeUpgradeWeapon_000015FC
     lfs f3, 0x14(r22)
     mr r7, r23
     lfs f4, 0x34(r1)
@@ -1690,19 +1690,19 @@ lbl_fn_803C1560_00001560:
     stfs f6, 0x1c(r1)
     bl collision_testLineSegment
     cmpwi r3, 0x0
-    bne lbl_fn_803C1560_00001604
-lbl_fn_803C1560_000015FC:
+    bne lbl_craft_forgeUpgradeWeapon_00001604
+lbl_craft_forgeUpgradeWeapon_000015FC:
     lfs f31, 0x0(r22)
     lwz r24, 0x8(r22)
-lbl_fn_803C1560_00001604:
+lbl_craft_forgeUpgradeWeapon_00001604:
     addi r26, r26, 0x1
     addi r22, r22, 0x18
     cmpwi r26, 0x4
-    blt lbl_fn_803C1560_00001560
+    blt lbl_craft_forgeUpgradeWeapon_00001560
     cmpwi r24, 0x0
-    bne lbl_fn_803C1560_00001620
+    bne lbl_craft_forgeUpgradeWeapon_00001620
     lwz r24, 0x40(r1)
-lbl_fn_803C1560_00001620:
+lbl_craft_forgeUpgradeWeapon_00001620:
     psq_l f31, 0xd8(r1), 0, 0
     mr r3, r24
     lfd f31, 0xd0(r1)

@@ -20,7 +20,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void clip_calculateFrustum(void);
-extern void fn_80139550(void);
+extern void npc_updateDialogueTarget(void);
 extern void fn_80139F2C(void);
 extern void fn_80139F3C(void);
 extern void fn_8013A194(void);
@@ -2009,7 +2009,7 @@ lbl_fn_802AF7D8_00001A8C:
     b lbl_fn_802AF7D8_00002478
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80883F80
     fcmpo cr0, f1, f0
     cror eq, lt, eq
@@ -2027,7 +2027,7 @@ lbl_fn_802AF7D8_00001B30:
     fmr f29, f1
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fcmpo cr0, f1, f29
     cror eq, gt, eq
     bne lbl_fn_802AF7D8_00001B64
@@ -2037,14 +2037,14 @@ lbl_fn_802AF7D8_00001B30:
 lbl_fn_802AF7D8_00001B64:
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80883F84
     fcmpo cr0, f1, f0
     cror eq, gt, eq
     bne lbl_fn_802AF7D8_00001BF4
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80883F88
     fcmpo cr0, f1, f0
     cror eq, lt, eq
@@ -2074,14 +2074,14 @@ lbl_fn_802AF7D8_00001B64:
 lbl_fn_802AF7D8_00001BF4:
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80883F8C
     fcmpo cr0, f1, f0
     cror eq, gt, eq
     bne lbl_fn_802AF7D8_00001C48
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80883F90
     fcmpo cr0, f1, f0
     cror eq, lt, eq
@@ -2105,7 +2105,7 @@ lbl_fn_802AF7D8_00001C48:
     fmr f29, f1
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fcmpo cr0, f1, f29
     cror eq, gt, eq
     bne lbl_fn_802AF7D8_00001C90
@@ -2115,14 +2115,14 @@ lbl_fn_802AF7D8_00001C48:
 lbl_fn_802AF7D8_00001C90:
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80883F98
     fcmpo cr0, f1, f0
     cror eq, gt, eq
     bne lbl_fn_802AF7D8_00001D04
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80883F9C
     fcmpo cr0, f1, f0
     cror eq, lt, eq
@@ -2145,7 +2145,7 @@ lbl_fn_802AF7D8_00001C90:
 lbl_fn_802AF7D8_00001D04:
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80883F9C
     fcmpo cr0, f1, f0
     cror eq, gt, eq
@@ -2157,14 +2157,14 @@ lbl_fn_802AF7D8_00001D04:
 lbl_fn_802AF7D8_00001D30:
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80883FA4
     fcmpo cr0, f1, f0
     cror eq, gt, eq
     bne lbl_fn_802AF7D8_00001E78
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80883FA8
     fcmpo cr0, f1, f0
     cror eq, lt, eq
@@ -2240,14 +2240,14 @@ lbl_fn_802AF7D8_00001D30:
 lbl_fn_802AF7D8_00001E78:
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80883FAC
     fcmpo cr0, f1, f0
     cror eq, gt, eq
     bne lbl_fn_802AF7D8_00001F08
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80883F84
     fcmpo cr0, f1, f0
     cror eq, lt, eq
@@ -2277,7 +2277,7 @@ lbl_fn_802AF7D8_00001E78:
 lbl_fn_802AF7D8_00001F08:
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80883FB0
     fcmpo cr0, f1, f0
     cror eq, gt, eq
@@ -2287,7 +2287,7 @@ lbl_fn_802AF7D8_00001F08:
 lbl_fn_802AF7D8_00001F2C:
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f2, lbl_80883F84
     fcmpo cr0, f1, f2
     cror eq, lt, eq
@@ -2299,14 +2299,14 @@ lbl_fn_802AF7D8_00001F2C:
 lbl_fn_802AF7D8_00001F58:
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80883FB8
     fcmpo cr0, f1, f0
     cror eq, gt, eq
     bne lbl_fn_802AF7D8_00002478
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80883FBC
     fcmpo cr0, f1, f0
     cror eq, lt, eq
@@ -2332,7 +2332,7 @@ lbl_fn_802AF7D8_00001FC8:
     fmr f29, f1
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fcmpo cr0, f1, f29
     cror eq, gt, eq
     bne lbl_fn_802AF7D8_00002478
@@ -2429,7 +2429,7 @@ lbl_fn_802AF7D8_00002134:
     fmr f29, f1
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fcmpo cr0, f1, f29
     cror eq, gt, eq
     bne lbl_fn_802AF7D8_00002478
@@ -2454,7 +2454,7 @@ lbl_fn_802AF7D8_00002134:
 lbl_fn_802AF7D8_000021A4:
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80883FC0
     fcmpo cr0, f1, f0
     ble lbl_fn_802AF7D8_00002478
@@ -2485,7 +2485,7 @@ lbl_fn_802AF7D8_00002208:
     fmr f29, f1
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fcmpo cr0, f1, f29
     cror eq, gt, eq
     bne lbl_fn_802AF7D8_00002268
@@ -2506,7 +2506,7 @@ lbl_fn_802AF7D8_00002208:
 lbl_fn_802AF7D8_00002268:
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f2, lbl_80883FAC
     fcmpo cr0, f1, f2
     bge lbl_fn_802AF7D8_00002294
@@ -2522,7 +2522,7 @@ lbl_fn_802AF7D8_00002294:
     fmr f29, f1
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fcmpo cr0, f1, f29
     cror eq, lt, eq
     bne lbl_fn_802AF7D8_00002478
@@ -2559,7 +2559,7 @@ lbl_fn_802AF7D8_00002320:
     fmr f29, f1
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fcmpo cr0, f1, f29
     cror eq, gt, eq
     bne lbl_fn_802AF7D8_00002478
@@ -2577,7 +2577,7 @@ lbl_fn_802AF7D8_00002320:
 lbl_fn_802AF7D8_00002374:
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80883FCC
     fcmpo cr0, f1, f0
     ble lbl_fn_802AF7D8_000023B0
@@ -2593,13 +2593,13 @@ lbl_fn_802AF7D8_00002374:
 lbl_fn_802AF7D8_000023B0:
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80883FD0
     fcmpo cr0, f1, f0
     ble lbl_fn_802AF7D8_00002478
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80883FCC
     fcmpo cr0, f1, f0
     bge lbl_fn_802AF7D8_00002478
@@ -2615,7 +2615,7 @@ lbl_fn_802AF7D8_000023B0:
     fmr f29, f1
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fcmpo cr0, f1, f29
     cror eq, gt, eq
     bne lbl_fn_802AF7D8_0000242C
@@ -2630,7 +2630,7 @@ lbl_fn_802AF7D8_0000242C:
     bne lbl_fn_802AF7D8_00002478
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f2, lbl_80883FD4
     fcmpo cr0, f1, f2
     bge lbl_fn_802AF7D8_00002478

@@ -10,7 +10,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -583,7 +583,7 @@ lbl_fn_80513024_0000068C:
     bl fn_800C1FB4
     mr r3, r29
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     b lbl_fn_80513024_00000744
 lbl_fn_80513024_000006DC:
     lwz r3, 0xd4(r3)

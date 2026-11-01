@@ -26,7 +26,7 @@ extern void system_getNextSequenceId(void);
 extern void fn_801162A0(void);
 extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_8012F034(void);
 extern void fn_8013322C(void);
 extern void fn_80139F4C(void);
@@ -1998,7 +1998,7 @@ asm void fn_80267134(void)
     cmpwi r0, 0x1
     bne lbl_fn_80267134_00001BE8
     addi r3, r3, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r31, 0x1088
     lfs f2, 0x1090(r31)
     psq_l f1, 0x0(r4), 0, 0

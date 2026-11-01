@@ -9,7 +9,7 @@ extern void _savegpr_23(void);
 extern void dtor_80084684(void);
 extern void fn_8000D430(void);
 extern void fn_8004B290(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void fn_8005E3E4(void);
 extern void fn_8005E7F4(void);
@@ -1469,7 +1469,7 @@ asm void fn_804A83E4(void)
 lbl_fn_804A83E4_00001248:
     addi r3, r30, 0x640
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     addi r3, r30, 0x208
     li r4, -0x1
     bl fn_800971D4

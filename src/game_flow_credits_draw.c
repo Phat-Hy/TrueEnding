@@ -27,7 +27,7 @@ extern void fn_804E8BF8(void);
 extern void fn_804EAEE4(void);
 extern void fn_8050128C(void);
 extern void fn_8050DDE0(void);
-extern void fn_8050E098(void);
+extern void net_p2p_readPayload(void);
 extern void fn_8054D798(void);
 extern void rand(void);
 extern void net_getSocket(void);
@@ -1512,7 +1512,7 @@ lbl_fn_804EB938_000012E0:
     addi r6, r1, 0x174
     li r4, -0x1
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     b lbl_fn_804EB938_00002000
     lwz r4, 0x0(r5)
     mr r3, r27
@@ -1577,7 +1577,7 @@ lbl_fn_804EB938_000013A4:
     li r4, -0x1
     li r5, 0x1023
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     b lbl_fn_804EB938_00002000
     lbz r0, lbl_8087F5F8
     li r4, 0x2
@@ -1615,7 +1615,7 @@ lbl_fn_804EB938_0000149C:
     li r4, -0x1
     li r5, 0x1031
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     b lbl_fn_804EB938_00002000
     lbz r0, lbl_8087F5F8
     li r4, 0x2
@@ -1667,7 +1667,7 @@ lbl_fn_804EB938_00001568:
     li r4, -0x1
     li r5, 0x103f
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     b lbl_fn_804EB938_00002000
     lwz r0, 0x24(r5)
     cmpwi r0, 0x0
@@ -1719,7 +1719,7 @@ lbl_fn_804EB938_000015D8:
     li r4, -0x1
     li r5, 0x1024
     li r7, 0x0
-    bl fn_8050E098
+    bl net_p2p_readPayload
     b lbl_fn_804EB938_00002000
 lbl_fn_804EB938_0000165C:
     lbz r0, lbl_8087F5F8
@@ -1794,7 +1794,7 @@ lbl_fn_804EB938_00001698:
     li r4, -0x1
     li r5, 0x1025
     li r7, 0x0
-    bl fn_8050E098
+    bl net_p2p_readPayload
     b lbl_fn_804EB938_00002000
     lbz r0, lbl_8087F5F8
     li r4, 0x2
@@ -1846,7 +1846,7 @@ lbl_fn_804EB938_000017BC:
     li r4, -0x1
     li r5, 0x102e
     li r7, 0x0
-    bl fn_8050E098
+    bl net_p2p_readPayload
     b lbl_fn_804EB938_00002000
     lwz r3, 0x0(r5)
     li r23, 0x0
@@ -1922,7 +1922,7 @@ lbl_fn_804EB938_000018DC:
     mr r6, r24
     mr r7, r23
     li r4, -0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     b lbl_fn_804EB938_00002000
     lbz r0, lbl_8087F5F8
     li r4, 0x2
@@ -2029,7 +2029,7 @@ lbl_fn_804EB938_00001AB0:
     li r4, -0x1
     li r5, 0x1027
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     b lbl_fn_804EB938_00002000
 lbl_fn_804EB938_00001AF0:
     lwz r4, lbl_8087F628
@@ -2146,7 +2146,7 @@ lbl_fn_804EB938_00001C50:
     li r4, -0x1
     li r5, 0x1027
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     lwz r4, lbl_8087F628
     addis r3, r4, 0x1
     lbz r0, -0x3deb(r3)
@@ -2266,7 +2266,7 @@ lbl_fn_804EB938_00001DF8:
     li r4, -0x1
     li r5, 0x1027
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     b lbl_fn_804EB938_00002000
 lbl_fn_804EB938_00001E14:
     lwz r4, lbl_8087F628
@@ -2383,7 +2383,7 @@ lbl_fn_804EB938_00001F74:
     li r4, -0x1
     li r5, 0x1027
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     lwz r4, lbl_8087F628
     addis r3, r4, 0x1
     lbz r0, -0x3deb(r3)
@@ -2412,7 +2412,7 @@ lbl_fn_804EB938_00001FE8:
     li r4, -0x1
     li r5, 0x1027
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
 lbl_fn_804EB938_00002000:
     addi r11, r1, 0x230
     bl _restgpr_23

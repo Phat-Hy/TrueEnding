@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_80044E0C(void);
+extern void menu_renderLayout(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -644,13 +644,13 @@ lbl_fn_8015802C_0000081C:
     cmpwi r3, 0x0
     beq lbl_fn_8015802C_0000084C
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8015802C_0000084C:
     lwz r3, 0x64c(r29)
     cmpwi r3, 0x0
     beq lbl_fn_8015802C_00000860
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8015802C_00000860:
     li r0, 0x0
     li r3, -0x1

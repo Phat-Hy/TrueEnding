@@ -7,7 +7,7 @@ extern void skill_calculateDamage(void);
 extern void fn_80063200(void);
 extern void fn_800638B0(void);
 extern void fn_80063D3C(void);
-extern void fn_8007708C(void);
+extern void chapter_updateProgression(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void node_destroy(void);
@@ -666,7 +666,7 @@ lbl_fn_802FD328_00000784:
     beq lbl_fn_802FD328_000007D4
     addi r4, r3, 0x34
     li r5, 0x50
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_802FD328_000007D4
     li r30, 0x1
@@ -683,7 +683,7 @@ lbl_fn_802FD328_000007E4:
     beq lbl_fn_802FD328_00000810
     addi r4, r3, 0x34
     li r5, 0x4d
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_802FD328_00000810
     li r30, 0x1
@@ -860,7 +860,7 @@ lbl_fn_802FD328_00000A80:
     beq lbl_fn_802FD328_00000AAC
     addi r4, r3, 0x34
     li r5, 0x4c
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_802FD328_00000AAC
     li r30, 0x1
@@ -924,7 +924,7 @@ lbl_fn_802FD328_00000B70:
     beq lbl_fn_802FD328_00000B9C
     addi r4, r3, 0x34
     li r5, 0x4a
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_802FD328_00000B9C
     li r30, 0x1
@@ -988,7 +988,7 @@ lbl_fn_802FD328_00000C60:
     beq lbl_fn_802FD328_00000C8C
     addi r4, r3, 0x34
     li r5, 0x48
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_802FD328_00000C8C
     li r30, 0x1

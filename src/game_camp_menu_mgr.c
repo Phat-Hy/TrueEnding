@@ -16,7 +16,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void fn_800DFB40(void);
 extern void fn_800E0908(void);
 extern void fn_80124B60(void);
@@ -1276,7 +1276,7 @@ lbl_fn_803B710C_00001070:
     mr r28, r3
     mr r3, r31
     mr r4, r28
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lbz r3, 0x2c(r1)
     slwi r0, r28, 1
     stb r3, 0x28(r1)

@@ -32,7 +32,7 @@ extern void fn_801125F8(void);
 extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
 extern void fn_8012AFE8(void);
-extern void fn_80139550(void);
+extern void npc_updateDialogueTarget(void);
 extern void fn_80139F24(void);
 extern void fn_80139F3C(void);
 extern void fn_8013A194(void);
@@ -357,7 +357,7 @@ asm void fn_8028CB38(void)
     beq lbl_fn_8028CB38_00000758
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80883B38
     fcmpo cr0, f1, f0
     cror eq, gt, eq
@@ -438,7 +438,7 @@ lbl_fn_8028CB38_00000464:
     fmr f31, f1
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fcmpo cr0, f1, f31
     ble lbl_fn_8028CB38_00000498
     mr r3, r31
@@ -446,14 +446,14 @@ lbl_fn_8028CB38_00000464:
 lbl_fn_8028CB38_00000498:
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80883B40
     fcmpo cr0, f0, f1
     cror eq, lt, eq
     bne lbl_fn_8028CB38_00000548
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80883B44
     fcmpo cr0, f1, f0
     bge lbl_fn_8028CB38_00000548
@@ -506,7 +506,7 @@ lbl_fn_8028CB38_00000574:
     beq lbl_fn_8028CB38_00000758
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f4, lbl_80883B40
     addi r3, r1, 0x84
     lfs f2, lbl_80883AC0

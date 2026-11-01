@@ -8,7 +8,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_22(void);
 extern void dtor_80084684(void);
 extern void fn_8004B290(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
@@ -2041,7 +2041,7 @@ lbl_fn_80564060_0000188C:
     beq lbl_fn_80564060_000018B0
     addi r3, r30, 0x8
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     mr r3, r30
     bl dtor_80084684
 lbl_fn_80564060_000018B0:

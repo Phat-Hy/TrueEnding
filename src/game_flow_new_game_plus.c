@@ -44,7 +44,7 @@ extern void fn_803E9B7C(void);
 extern void net_getPacketManager(void);
 extern void net_voiceCodec_destroy(void);
 extern void fn_804E8BF8(void);
-extern void fn_8050E098(void);
+extern void net_p2p_readPayload(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -1686,7 +1686,7 @@ lbl_fn_804EFF78_00001654:
     li r5, 0x1011
     li r7, 0x1
     clrlwi r4, r0, 28
-    bl fn_8050E098
+    bl net_p2p_readPayload
 lbl_fn_804EFF78_00001694:
     addi r11, r1, 0x380
     bl _restgpr_25

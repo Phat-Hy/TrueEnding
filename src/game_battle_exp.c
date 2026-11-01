@@ -8,7 +8,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_21(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
-extern void fn_80044E0C(void);
+extern void menu_renderLayout(void);
 extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
 extern void fn_801092C8(void);
@@ -290,13 +290,13 @@ asm void battle_awardExp(void)
     cmpwi r3, 0x0
     beq lbl_battle_awardExp_000002B4
     li r4, 0x0
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_battle_awardExp_000002B4:
     lwz r3, 0x64c(r30)
     cmpwi r3, 0x0
     beq lbl_battle_awardExp_000002C8
     li r4, 0x0
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_battle_awardExp_000002C8:
     lwz r0, 0xf80(r30)
     cmpwi r0, 0x0

@@ -15,7 +15,7 @@ extern void fn_800E2DD4(void);
 extern void fn_800E2FE0(void);
 extern void system_getNextSequenceId(void);
 extern void fn_801092C8(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_8012D8B8(void);
 extern void fn_80139560(void);
 extern void quest_evaluateConditions(void);
@@ -518,7 +518,7 @@ lbl_fn_80247FB0_00000560:
     addi r3, r3, 0x1030
     stfs f2, 0x88(r1)
     psq_st f1, 0x0(r4), 0, 0
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r31, 0x1088
     addi r30, r1, 0x74
     psq_l f1, 0x0(r4), 0, 0

@@ -23,7 +23,7 @@ extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_8012F440(void);
 extern void fn_8013A258(void);
 extern void npc_updateTalkInteraction(void);
@@ -228,7 +228,7 @@ asm void fn_8027B21C(void)
     cmpwi r0, 0x7
     bne lbl_fn_8027B21C_000005C8
     addi r3, r3, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r29, 0x1088
     addi r31, r1, 0xbc
     psq_l f1, 0x0(r4), 0, 0

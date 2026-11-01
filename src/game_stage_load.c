@@ -12,7 +12,7 @@ extern void fn_80108C10(void);
 extern void magic_dispatchActionCommand(void);
 extern void quest_evaluateConditions(void);
 extern void inventory_unequipItem(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void debuff_clearStatus(void);
 extern void fn_80176548(void);
 extern void fn_80188A70(void);
@@ -341,7 +341,7 @@ asm void fn_80197528(void)
     extrwi. r0, r0, 1, 25
     beq lbl_fn_80197528_000003CC
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_80197528_000003CC:
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)
@@ -597,7 +597,7 @@ asm void fn_801978C0(void)
     extrwi. r0, r0, 1, 25
     beq lbl_fn_801978C0_0000076C
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_801978C0_0000076C:
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)

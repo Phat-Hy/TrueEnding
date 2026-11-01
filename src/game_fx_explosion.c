@@ -25,7 +25,7 @@ extern void fn_8029A674(void);
 extern void fn_8029A788(void);
 extern void fn_8029B59C(void);
 extern void fn_8029C564(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void std_atan2(void);
@@ -1470,7 +1470,7 @@ lbl_fn_80296268_000013D8:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     subi r0, r3, 0x1
     lwz r4, 0x153c(r31)
     mulli r0, r0, 0x30
@@ -1574,7 +1574,7 @@ lbl_fn_80296268_0000154C:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     subi r0, r3, 0x1
     lwz r4, 0x153c(r31)
     mulli r0, r0, 0x30
@@ -1968,7 +1968,7 @@ lbl_fn_80296268_00001B20:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     subi r0, r3, 0x1
     lwz r3, 0x153c(r31)
     mulli r0, r0, 0x30

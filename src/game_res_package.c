@@ -9,7 +9,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8000D430(void);
 extern void fn_8004B290(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void fn_80071D68(void);
 extern void fn_800760BC(void);
@@ -508,7 +508,7 @@ lbl_fn_802254B0_000005E4:
     blt lbl_fn_802254B0_000005C0
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     lwz r0, 0x244(r1)
     psq_l f31, 0x238(r1), 0, 0
     lfd f31, 0x230(r1)
@@ -621,7 +621,7 @@ lbl_fn_8022589C_00000774:
     beq lbl_fn_8022589C_00000798
     addi r3, r24, 0x8
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     mr r3, r24
     bl dtor_80084684
 lbl_fn_8022589C_00000798:
@@ -1811,7 +1811,7 @@ lbl_fn_80226320_00001870:
     blt lbl_fn_80226320_00001870
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     addi r11, r1, 0x220
     bl _restgpr_27
     lwz r0, 0x224(r1)
@@ -2416,7 +2416,7 @@ lbl_fn_80226B48_00002170:
     bl fn_80071D68
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     addi r11, r1, 0x240
     bl _restgpr_27
     lwz r0, 0x244(r1)

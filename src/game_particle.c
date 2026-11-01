@@ -7,7 +7,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void str_assignBuffer(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void fn_800E2778(void);
 extern void printf(void);
 extern void abort(void);
@@ -93,7 +93,7 @@ lbl_fn_800E0908_00000084:
     li r4, 0x0
 lbl_fn_800E0908_00000088:
     mr r3, r30
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x1c(r1)
     stw r0, 0x14(r1)
     lwz r0, 0x0(r28)

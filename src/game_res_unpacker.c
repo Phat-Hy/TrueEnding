@@ -23,7 +23,7 @@ extern void fn_800DBC1C(void);
 extern void fn_800DBCC8(void);
 extern void fn_80122330(void);
 extern void fn_80124C6C(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void fn_8016EB48(void);
 extern void fn_801750FC(void);
 extern void save_parseSlotStats(void);
@@ -141,7 +141,7 @@ lbl_fn_80228FD8_00000080:
     mr r3, r29
     bl fn_800128FC
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_80228FD8_000000A4:
     mr r3, r29
     bl fn_800128FC

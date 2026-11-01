@@ -11,7 +11,7 @@ extern void fn_8000FAE4(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80016F48(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
@@ -1649,7 +1649,7 @@ lbl_fn_8008A76C_00001444:
     beq lbl_fn_8008A76C_0000146C
     addi r3, r29, 0x8
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     mr r3, r29
     bl dtor_80084684
 lbl_fn_8008A76C_0000146C:

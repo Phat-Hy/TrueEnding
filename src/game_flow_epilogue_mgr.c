@@ -21,7 +21,7 @@ extern void net_voiceCodec_destroy(void);
 extern void fn_804E9C68(void);
 extern void fn_804F50E0(void);
 extern void fn_8050128C(void);
-extern void fn_8050E098(void);
+extern void net_p2p_readPayload(void);
 extern void net_getSocket(void);
 extern void net_getMyAid(void);
 extern void fn_806B1250(void);
@@ -774,7 +774,7 @@ lbl_fn_804E82C8_00000884:
     li r4, -0x1
     li r5, 0x1030
     li r7, 0x0
-    bl fn_8050E098
+    bl net_p2p_readPayload
     lwz r4, lbl_8087F628
     addis r3, r4, 0x1
     lbz r0, -0x3deb(r3)
@@ -854,7 +854,7 @@ lbl_fn_804E82C8_000009A0:
     li r4, -0x1
     li r5, 0x103e
     li r7, 0x0
-    bl fn_8050E098
+    bl net_p2p_readPayload
     li r3, 0x1
 lbl_fn_804E82C8_000009D8:
     addi r11, r1, 0xb0
@@ -964,7 +964,7 @@ lbl_fn_804E8A84_00000B0C:
     li r4, -0x1
     li r5, 0x103e
     li r7, 0x0
-    bl fn_8050E098
+    bl net_p2p_readPayload
     li r3, 0x1
 lbl_fn_804E8A84_00000B4C:
     lwz r0, 0x24(r1)
@@ -1541,7 +1541,7 @@ lbl_fn_804E8BF8_0000127C:
     li r4, -0x1
     li r5, 0x103e
     li r7, 0x0
-    bl fn_8050E098
+    bl net_p2p_readPayload
     li r3, 0x1
     b lbl_fn_804E8BF8_000012BC
 lbl_fn_804E8BF8_000012B8:

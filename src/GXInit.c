@@ -56,7 +56,7 @@ extern void fn_806156C0(void);
 extern void fn_80615B60(void);
 extern void fn_80615C40(void);
 extern void GXInitLightDistAttn(void);
-extern void fn_80615D50(void);
+extern void GXInitLightSpot(void);
 extern void fn_80615FF0(void);
 extern void fn_806165B0(void);
 extern void GXDrawDone(void);
@@ -788,7 +788,7 @@ lbl___GXInitGX_00000800:
     li r7, 0x0
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     stw r30, 0x18(r1)
     addi r4, r1, 0x18
     li r3, 0x4
@@ -804,7 +804,7 @@ lbl___GXInitGX_00000800:
     li r7, 0x0
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     stw r30, 0x10(r1)
     addi r4, r1, 0x10
     li r3, 0x5

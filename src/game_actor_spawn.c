@@ -23,7 +23,7 @@ extern void bloom_processPasses(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void fn_80119030(void);
@@ -1014,7 +1014,7 @@ asm void fn_801175EC(void)
     mr r28, r3
     mr r3, r29
     mr r4, r28
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lbz r3, 0xc(r1)
     slwi r0, r28, 1
     stb r3, 0x8(r1)

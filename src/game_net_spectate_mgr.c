@@ -12,7 +12,7 @@ extern void fn_8004ADF4(void);
 extern void fn_8004AE84(void);
 extern void fn_8004B0E4(void);
 extern void fn_8004B290(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void fn_8005E7F4(void);
 extern void fn_80060D58(void);
 extern void skill_calcTrajectory(void);
@@ -1440,7 +1440,7 @@ lbl_spectateManager_init_00001248:
     bl fn_8004ADF4
     addi r3, r30, 0x64
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     mr r3, r30
     li r4, 0x0
     bl atn_Task_destructor

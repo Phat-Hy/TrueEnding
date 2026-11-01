@@ -35,7 +35,7 @@ extern void fn_8025F07C(void);
 extern void fn_8025F35C(void);
 extern void fn_8025F45C(void);
 extern void fn_8025F754(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void PSMTXRotRad(void);
@@ -1356,7 +1356,7 @@ asm void fn_8025E100(void)
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     lwz r4, lbl_8087F430
     subi r0, r3, 0x1
     mulli r0, r0, 0x30

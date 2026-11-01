@@ -15,7 +15,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void fn_800DFB40(void);
 extern void fn_800E0000(void);
 extern void fn_800E0908(void);
@@ -769,7 +769,7 @@ asm void fn_803B4C38(void)
     mr r18, r3
     mr r3, r17
     mr r4, r18
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lbz r3, 0x24(r1)
     slwi r0, r18, 1
     stb r3, 0x20(r1)
@@ -829,7 +829,7 @@ lbl_fn_803B4C38_00000A6C:
     mr r16, r3
     mr r3, r20
     mr r4, r16
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     slwi r0, r16, 1
     stb r22, 0x18(r1)
     mr r3, r20
@@ -862,7 +862,7 @@ lbl_fn_803B4C38_00000AF8:
     stw r30, 0x4(r16)
     stw r30, 0x8(r16)
     lwz r4, 0x38(r1)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x38(r1)
     mr r3, r16
     lbz r4, 0xc(r1)
@@ -993,7 +993,7 @@ lbl_fn_803B4C38_00000CD4:
     stw r30, 0x4(r16)
     stw r30, 0x8(r16)
     lwz r4, 0x38(r1)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x38(r1)
     mr r3, r16
     lbz r4, 0x10(r1)
@@ -1777,7 +1777,7 @@ lbl_fn_803B5974_0000171C:
     mr r28, r3
     mr r3, r31
     mr r4, r28
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lbz r3, 0x2c(r1)
     slwi r0, r28, 1
     stb r3, 0x28(r1)

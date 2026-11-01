@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void mem_alloc(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -987,7 +987,7 @@ lbl_fn_8045D3A4_00000BEC:
 lbl_fn_8045D3A4_00000D14:
     addi r3, r1, 0x238
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     lwz r0, 0x454(r1)
     psq_l f31, 0x448(r1), 0, 0
     lfd f31, 0x440(r1)

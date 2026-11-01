@@ -42,7 +42,7 @@ extern void res_findResourceSlot(void);
 extern void entity_Instance_constructor(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
@@ -1246,7 +1246,7 @@ lbl_fn_8025F8C8_00000FD4:
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     lwz r4, lbl_8087F430
     subi r0, r3, 0x1
     mulli r0, r0, 0x30

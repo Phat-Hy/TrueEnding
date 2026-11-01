@@ -17,7 +17,7 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
-extern void fn_8007708C(void);
+extern void chapter_updateProgression(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
@@ -74,7 +74,7 @@ extern void fn_802A7970(void);
 extern void entity_Instance_constructor(void);
 extern void entity_Instance_destructor(void);
 extern void fn_8037D4C0(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
@@ -318,7 +318,7 @@ lbl_fn_802A4194_000001B0:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     subi r0, r3, 0x1
     lwz r4, 0x9c(r29)
     mulli r0, r0, 0x30
@@ -420,7 +420,7 @@ lbl_fn_802A42CC_00000318:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     subi r0, r3, 0x1
     lwz r4, 0x156c(r31)
     mulli r0, r0, 0x30
@@ -822,7 +822,7 @@ asm void fn_802A4968(void)
     mulli r0, r4, 0x1a
     add r4, r3, r0
     addi r4, r4, 0x34
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_802A4968_00000910
     li r31, 0x1

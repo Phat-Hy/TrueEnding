@@ -87,7 +87,7 @@ extern void fn_803727D4(void);
 extern void fn_8037529C(void);
 extern void fn_8037F688(void);
 extern void fn_80392A04(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void fn_803CFC58(void);
 extern void fn_803CFC64(void);
 extern void fn_803D2134(void);
@@ -1963,7 +1963,7 @@ asm void fn_805BC1C4(void)
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     subi r0, r3, 0x1
     lwz r4, 0x5b0(r30)
     mulli r0, r0, 0x30

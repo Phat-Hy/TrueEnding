@@ -88,7 +88,7 @@ extern void fn_802180A8(void);
 extern void task_findEntryById(void);
 extern void fn_8021A984(void);
 extern void world_getGlobalFlag(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void fn_80599C94(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
@@ -263,7 +263,7 @@ asm void fn_8001B5B4(void)
     li r5, 0x0
     li r7, 0x0
     li r8, 0x1
-    b fn_803C1560
+    b craft_forgeUpgradeWeapon
 }
 
 asm void fn_8001B5DC(void)

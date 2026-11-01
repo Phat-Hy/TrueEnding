@@ -37,7 +37,7 @@ extern void res_MsgHandle_update(void);
 extern void fn_80244CCC(void);
 extern void fn_80288390(void);
 extern void fn_80288E30(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
@@ -698,7 +698,7 @@ lbl_fn_8029C564_0000084C:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     subi r0, r3, 0x1
     lwz r4, 0x9c(r29)
     mulli r0, r0, 0x30

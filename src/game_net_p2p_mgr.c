@@ -8,7 +8,7 @@ extern void OSWakeupThread(void);
 extern void __register_global_object(void);
 extern void net_voiceCodec_destroy(void);
 extern void fn_8050DDE0(void);
-extern void fn_8050E098(void);
+extern void net_p2p_readPayload(void);
 extern void fn_8050EAE8(void);
 extern void fn_8050EAEC(void);
 extern void fn_8050EB8C(void);
@@ -883,7 +883,7 @@ lbl_fn_8050B01C_00000A1C:
     li r7, 0x1
     sth r0, 0xa(r1)
     stb r31, 0xc(r1)
-    bl fn_8050E098
+    bl net_p2p_readPayload
     lwz r3, lbl_8087F62C
     li r4, -0x1
     li r5, 0x1
@@ -2033,7 +2033,7 @@ lbl_fn_8050BDC8_000018C8:
     lwz r8, 0x30(r31)
     stw r8, 0x3c(r1)
     stw r0, 0x18(r1)
-    bl fn_8050E098
+    bl net_p2p_readPayload
     li r3, 0x1
 lbl_fn_8050BDC8_0000196C:
     lwz r0, 0x54(r1)

@@ -13,7 +13,7 @@ extern void mem_free(void);
 extern void atn_Task_setActive(void);
 extern void inventory_unequipItem(void);
 extern void equip_applyToCharacter(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void actor_setState(void);
 extern void battle_canTargetActor(void);
 extern void net_getPacketManager(void);
@@ -21,7 +21,7 @@ extern void net_voiceCodec_destroy(void);
 extern void fn_804FC7E4(void);
 extern void fn_8050BA6C(void);
 extern void fn_8050DDE0(void);
-extern void fn_8050E098(void);
+extern void net_p2p_readPayload(void);
 extern void PSVECSquareMag(void);
 extern void printf(void);
 extern void rand(void);
@@ -652,7 +652,7 @@ lbl_fn_804E9C68_00000824:
     beq lbl_fn_804E9C68_0000083C
     mr r3, r16
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_804E9C68_0000083C:
     lwz r0, 0x146c(r16)
     cmplwi r0, 0x28
@@ -739,7 +739,7 @@ lbl_fn_804EA538_00000930:
     li r4, -0x1
     li r5, 0x1001
     li r7, 0x0
-    bl fn_8050E098
+    bl net_p2p_readPayload
 lbl_fn_804EA538_0000095C:
     stw r31, 0x55c(r30)
     lwz r31, 0x1c(r1)
@@ -807,7 +807,7 @@ lbl_fn_804EA60C_00000A04:
     li r4, -0x1
     li r5, 0x1002
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
 lbl_fn_804EA60C_00000A30:
     stw r31, 0x564(r30)
     lwz r31, 0x1c(r1)
@@ -856,7 +856,7 @@ lbl_fn_804EA6B4_00000AAC:
     li r4, -0x1
     li r5, 0x1033
     li r7, 0x0
-    bl fn_8050E098
+    bl net_p2p_readPayload
 lbl_fn_804EA6B4_00000AD8:
     extsb r0, r31
     stw r0, 0x5a0(r30)
@@ -909,7 +909,7 @@ lbl_fn_804EA760_00000B64:
     li r4, -0x1
     li r5, 0x1003
     li r7, 0x0
-    bl fn_8050E098
+    bl net_p2p_readPayload
 lbl_fn_804EA760_00000B90:
     stw r31, 0x568(r30)
     lwz r31, 0x1c(r1)
@@ -958,7 +958,7 @@ lbl_fn_804EA814_00000C0C:
     li r4, -0x1
     li r5, 0x103c
     li r7, 0x0
-    bl fn_8050E098
+    bl net_p2p_readPayload
 lbl_fn_804EA814_00000C38:
     stw r31, 0x5a8(r30)
     lwz r31, 0x1c(r1)
@@ -983,7 +983,7 @@ asm void fn_804EA8BC(void)
     li r5, 0x1013
     li r6, 0x0
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     bl net_getPacketManager
     li r4, -0x1
     li r5, 0x1

@@ -21,7 +21,7 @@ extern void fn_801346C8(void);
 extern void quest_checkCondition(void);
 extern void dialog_selectChoice(void);
 extern void fn_80154344(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void debuff_clearStatus(void);
 extern void fn_8016EB48(void);
 extern void actor_getMovementFlags(void);
@@ -48,7 +48,7 @@ extern void fn_803AB96C(void);
 extern void fn_803B57B0(void);
 extern void fn_803B57EC(void);
 extern void fn_803B6C88(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void fn_803E43B8(void);
 extern void fn_803E4434(void);
 extern void chest_spawnLoot(void);
@@ -629,7 +629,7 @@ lbl_world_setGlobalFlag_00000724:
     beq lbl_world_setGlobalFlag_0000073C
     mr r3, r26
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_world_setGlobalFlag_0000073C:
     stw r28, 0x10e4(r31)
 lbl_world_setGlobalFlag_00000740:
@@ -1927,7 +1927,7 @@ lbl_fn_80371790_00001954:
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     subi r0, r3, 0x1
     lwz r3, 0x10d8(r15)
     mulli r0, r0, 0x30

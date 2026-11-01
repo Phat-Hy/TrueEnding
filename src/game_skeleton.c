@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void fn_800795DC(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
@@ -1135,7 +1135,7 @@ lbl_fn_800C1FB4_00000E50:
     subi r30, r30, 0x1f4
     li r4, -0x1
     mr r3, r30
-    bl fn_8004B338
+    bl sound_releaseChannel
     subi r29, r29, 0x1
 lbl_fn_800C1FB4_00000E64:
     cmpwi r29, 0x0

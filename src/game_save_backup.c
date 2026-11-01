@@ -9,7 +9,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void net_player_interpolateState(void);
@@ -1172,7 +1172,7 @@ lbl_save_findEntryByName_00000F7C:
     stw r0, 0x8(r30)
     stw r0, 0xc(r30)
     lwz r4, 0x28(r1)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x28(r1)
     addi r3, r30, 0x4
     lbz r4, 0x10(r1)
@@ -1360,7 +1360,7 @@ lbl_fn_801F8598_00001214:
     stw r0, 0x8(r30)
     stw r0, 0xc(r30)
     lwz r4, 0x28(r1)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x28(r1)
     addi r3, r30, 0x4
     lbz r4, 0x14(r1)

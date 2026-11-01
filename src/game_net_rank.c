@@ -24,7 +24,7 @@ struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct 
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
 extern void atn_LH_Texture_update(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void str_findChar(void);
 extern void fn_800E0908(void);
 extern void fn_801EC158(void);
@@ -1060,7 +1060,7 @@ lbl_fn_801F19D0_00000CAC:
     mr r3, r28
     stw r0, 0x4(r28)
     stw r0, 0x8(r28)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x4(r30)
     mr r3, r28
     lbz r4, 0x1c(r1)
@@ -1219,7 +1219,7 @@ lbl_fn_801F19D0_00000EF8:
     lwz r4, 0x4(r30)
     stw r0, 0x4(r27)
     stw r0, 0x8(r27)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x4(r30)
     mr r3, r27
     lbz r4, 0x8(r1)
@@ -1267,7 +1267,7 @@ lbl_fn_801F19D0_00000FA8:
     stw r28, 0x4(r31)
     stw r28, 0x8(r31)
     lwz r4, 0x4(r27)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lbz r0, 0x10(r1)
     mr r3, r31
     stb r0, 0x14(r1)
@@ -1765,7 +1765,7 @@ lbl_fn_801F2398_000016A0:
     mr r28, r3
     mr r3, r29
     mr r4, r28
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lbz r3, 0x14(r1)
     slwi r0, r28, 1
     stb r3, 0x10(r1)
@@ -1890,7 +1890,7 @@ lbl_fn_801F25E0_000018A8:
     mr r3, r31
     stw r0, 0x18(r1)
     lwz r4, 0x4(r5)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lbz r0, 0xc(r1)
     mr r3, r31
     stb r0, 0x8(r1)

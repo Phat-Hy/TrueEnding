@@ -15,7 +15,7 @@ extern void morph_updateMesh(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void fn_80108F38(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_8013A258(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_801426A4(void);
@@ -825,7 +825,7 @@ asm void fn_802847CC(void)
     cmpwi r0, 0x7
     bne lbl_fn_802847CC_00000EF4
     addi r3, r3, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r29, 0x1088
     addi r31, r1, 0xbc
     psq_l f1, 0x0(r4), 0, 0

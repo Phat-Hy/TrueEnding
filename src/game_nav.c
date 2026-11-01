@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void fn_80060D58(void);
 extern void skill_calculateDamage(void);
-extern void fn_8007708C(void);
+extern void chapter_updateProgression(void);
 extern void fn_806820D4(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -46,7 +46,7 @@ asm void fn_8008510C(void)
     mr r3, r4
     addi r4, r4, 0x9c
     li r5, 0x30
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8008510C_00000048
     li r30, 0x1
@@ -62,7 +62,7 @@ lbl_fn_8008510C_00000048:
     subi r0, r4, 0xed0
     addi r4, r3, 0x9c
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8008510C_00000084
     li r30, 0x1
@@ -88,7 +88,7 @@ lbl_fn_8008510C_000000B4:
     beq lbl_fn_8008510C_000000E0
     addi r4, r3, 0x9c
     li r5, 0x31
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8008510C_000000E0
     li r30, 0x1
@@ -104,7 +104,7 @@ lbl_fn_8008510C_000000E0:
     subi r0, r4, 0xecf
     addi r4, r3, 0x9c
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8008510C_0000011C
     li r30, 0x1
@@ -130,7 +130,7 @@ lbl_fn_8008510C_0000014C:
     beq lbl_fn_8008510C_00000178
     addi r4, r3, 0x9c
     li r5, 0x32
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8008510C_00000178
     li r30, 0x1
@@ -146,7 +146,7 @@ lbl_fn_8008510C_00000178:
     subi r0, r4, 0xece
     addi r4, r3, 0x9c
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8008510C_000001B4
     li r30, 0x1
@@ -172,7 +172,7 @@ lbl_fn_8008510C_000001E4:
     beq lbl_fn_8008510C_00000210
     addi r4, r3, 0x9c
     li r5, 0x33
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8008510C_00000210
     li r30, 0x1
@@ -188,7 +188,7 @@ lbl_fn_8008510C_00000210:
     subi r0, r4, 0xecd
     addi r4, r3, 0x9c
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8008510C_0000024C
     li r30, 0x1
@@ -214,7 +214,7 @@ lbl_fn_8008510C_0000027C:
     beq lbl_fn_8008510C_000002A8
     addi r4, r3, 0x9c
     li r5, 0x34
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8008510C_000002A8
     li r30, 0x1
@@ -230,7 +230,7 @@ lbl_fn_8008510C_000002A8:
     subi r0, r4, 0xecc
     addi r4, r3, 0x9c
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8008510C_000002E4
     li r30, 0x1
@@ -256,7 +256,7 @@ lbl_fn_8008510C_00000314:
     beq lbl_fn_8008510C_00000340
     addi r4, r3, 0x9c
     li r5, 0x35
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8008510C_00000340
     li r30, 0x1
@@ -272,7 +272,7 @@ lbl_fn_8008510C_00000340:
     subi r0, r4, 0xecb
     addi r4, r3, 0x9c
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8008510C_0000037C
     li r30, 0x1
@@ -298,7 +298,7 @@ lbl_fn_8008510C_000003AC:
     beq lbl_fn_8008510C_000003D8
     addi r4, r3, 0x9c
     li r5, 0x36
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8008510C_000003D8
     li r30, 0x1
@@ -314,7 +314,7 @@ lbl_fn_8008510C_000003D8:
     subi r0, r4, 0xeca
     addi r4, r3, 0x9c
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8008510C_00000414
     li r30, 0x1
@@ -340,7 +340,7 @@ lbl_fn_8008510C_00000444:
     beq lbl_fn_8008510C_00000470
     addi r4, r3, 0x9c
     li r5, 0x37
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8008510C_00000470
     li r30, 0x1
@@ -356,7 +356,7 @@ lbl_fn_8008510C_00000470:
     subi r0, r4, 0xec9
     addi r4, r3, 0x9c
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8008510C_000004AC
     li r30, 0x1
@@ -382,7 +382,7 @@ lbl_fn_8008510C_000004DC:
     beq lbl_fn_8008510C_00000508
     addi r4, r3, 0x9c
     li r5, 0x38
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8008510C_00000508
     li r30, 0x1
@@ -398,7 +398,7 @@ lbl_fn_8008510C_00000508:
     subi r0, r4, 0xec8
     addi r4, r3, 0x9c
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8008510C_00000544
     li r30, 0x1
@@ -424,7 +424,7 @@ lbl_fn_8008510C_00000574:
     beq lbl_fn_8008510C_000005A0
     addi r4, r3, 0x9c
     li r5, 0x39
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8008510C_000005A0
     li r30, 0x1
@@ -440,7 +440,7 @@ lbl_fn_8008510C_000005A0:
     subi r0, r4, 0xec7
     addi r4, r3, 0x9c
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8008510C_000005DC
     li r30, 0x1
@@ -466,7 +466,7 @@ lbl_fn_8008510C_0000060C:
     beq lbl_fn_8008510C_00000638
     addi r4, r3, 0x9c
     li r5, 0x2e
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8008510C_00000638
     li r30, 0x1
@@ -482,7 +482,7 @@ lbl_fn_8008510C_00000638:
     subi r0, r4, 0xed2
     addi r4, r3, 0x9c
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8008510C_00000674
     li r30, 0x1
@@ -508,7 +508,7 @@ lbl_fn_8008510C_000006A4:
     beq lbl_fn_8008510C_000006D0
     addi r4, r3, 0x9c
     li r5, 0x2d
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8008510C_000006D0
     li r30, 0x1
@@ -524,7 +524,7 @@ lbl_fn_8008510C_000006D0:
     subi r0, r4, 0xed3
     addi r4, r3, 0x9c
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8008510C_0000070C
     li r30, 0x1
@@ -552,7 +552,7 @@ lbl_fn_8008510C_0000073C:
     subi r0, r4, 0xe52
     addi r4, r3, 0x9c
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8008510C_00000770
     li r30, 0x1
@@ -568,7 +568,7 @@ lbl_fn_8008510C_00000770:
     subi r0, r4, 0xe38
     addi r4, r3, 0x9c
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8008510C_000007AC
     li r30, 0x1
@@ -822,7 +822,7 @@ asm void fn_80085BE8(void)
     mr r3, r4
     addi r4, r4, 0x9c
     li r5, 0x30
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_00000B24
     li r30, 0x1
@@ -838,7 +838,7 @@ lbl_fn_80085BE8_00000B24:
     subi r0, r4, 0xed0
     addi r4, r3, 0x9c
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_00000B60
     li r30, 0x1
@@ -861,7 +861,7 @@ lbl_fn_80085BE8_00000B84:
     beq lbl_fn_80085BE8_00000BB0
     addi r4, r3, 0x9c
     li r5, 0x31
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_00000BB0
     li r30, 0x1
@@ -877,7 +877,7 @@ lbl_fn_80085BE8_00000BB0:
     subi r0, r4, 0xecf
     addi r4, r3, 0x9c
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_00000BEC
     li r30, 0x1
@@ -900,7 +900,7 @@ lbl_fn_80085BE8_00000C10:
     beq lbl_fn_80085BE8_00000C3C
     addi r4, r3, 0x9c
     li r5, 0x32
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_00000C3C
     li r30, 0x1
@@ -916,7 +916,7 @@ lbl_fn_80085BE8_00000C3C:
     subi r0, r4, 0xece
     addi r4, r3, 0x9c
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_00000C78
     li r30, 0x1
@@ -939,7 +939,7 @@ lbl_fn_80085BE8_00000C9C:
     beq lbl_fn_80085BE8_00000CC8
     addi r4, r3, 0x9c
     li r5, 0x33
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_00000CC8
     li r30, 0x1
@@ -955,7 +955,7 @@ lbl_fn_80085BE8_00000CC8:
     subi r0, r4, 0xecd
     addi r4, r3, 0x9c
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_00000D04
     li r30, 0x1
@@ -978,7 +978,7 @@ lbl_fn_80085BE8_00000D28:
     beq lbl_fn_80085BE8_00000D54
     addi r4, r3, 0x9c
     li r5, 0x34
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_00000D54
     li r30, 0x1
@@ -994,7 +994,7 @@ lbl_fn_80085BE8_00000D54:
     subi r0, r4, 0xecc
     addi r4, r3, 0x9c
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_00000D90
     li r30, 0x1
@@ -1017,7 +1017,7 @@ lbl_fn_80085BE8_00000DB4:
     beq lbl_fn_80085BE8_00000DE0
     addi r4, r3, 0x9c
     li r5, 0x35
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_00000DE0
     li r30, 0x1
@@ -1033,7 +1033,7 @@ lbl_fn_80085BE8_00000DE0:
     subi r0, r4, 0xecb
     addi r4, r3, 0x9c
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_00000E1C
     li r30, 0x1
@@ -1056,7 +1056,7 @@ lbl_fn_80085BE8_00000E40:
     beq lbl_fn_80085BE8_00000E6C
     addi r4, r3, 0x9c
     li r5, 0x36
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_00000E6C
     li r30, 0x1
@@ -1072,7 +1072,7 @@ lbl_fn_80085BE8_00000E6C:
     subi r0, r4, 0xeca
     addi r4, r3, 0x9c
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_00000EA8
     li r30, 0x1
@@ -1095,7 +1095,7 @@ lbl_fn_80085BE8_00000ECC:
     beq lbl_fn_80085BE8_00000EF8
     addi r4, r3, 0x9c
     li r5, 0x37
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_00000EF8
     li r30, 0x1
@@ -1111,7 +1111,7 @@ lbl_fn_80085BE8_00000EF8:
     subi r0, r4, 0xec9
     addi r4, r3, 0x9c
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_00000F34
     li r30, 0x1
@@ -1134,7 +1134,7 @@ lbl_fn_80085BE8_00000F58:
     beq lbl_fn_80085BE8_00000F84
     addi r4, r3, 0x9c
     li r5, 0x38
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_00000F84
     li r30, 0x1
@@ -1150,7 +1150,7 @@ lbl_fn_80085BE8_00000F84:
     subi r0, r4, 0xec8
     addi r4, r3, 0x9c
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_00000FC0
     li r30, 0x1
@@ -1173,7 +1173,7 @@ lbl_fn_80085BE8_00000FE4:
     beq lbl_fn_80085BE8_00001010
     addi r4, r3, 0x9c
     li r5, 0x39
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_00001010
     li r30, 0x1
@@ -1189,7 +1189,7 @@ lbl_fn_80085BE8_00001010:
     subi r0, r4, 0xec7
     addi r4, r3, 0x9c
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_0000104C
     li r30, 0x1
@@ -1212,7 +1212,7 @@ lbl_fn_80085BE8_00001070:
     beq lbl_fn_80085BE8_0000109C
     addi r4, r3, 0x9c
     li r5, 0x41
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_0000109C
     li r30, 0x1
@@ -1226,7 +1226,7 @@ lbl_fn_80085BE8_0000109C:
     beq lbl_fn_80085BE8_000010D0
     addi r4, r3, 0x9c
     li r5, 0x61
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_000010D0
     li r30, 0x1
@@ -1249,7 +1249,7 @@ lbl_fn_80085BE8_000010F4:
     beq lbl_fn_80085BE8_00001120
     addi r4, r3, 0x9c
     li r5, 0x42
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_00001120
     li r30, 0x1
@@ -1263,7 +1263,7 @@ lbl_fn_80085BE8_00001120:
     beq lbl_fn_80085BE8_00001154
     addi r4, r3, 0x9c
     li r5, 0x62
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_00001154
     li r30, 0x1
@@ -1286,7 +1286,7 @@ lbl_fn_80085BE8_00001178:
     beq lbl_fn_80085BE8_000011A4
     addi r4, r3, 0x9c
     li r5, 0x43
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_000011A4
     li r30, 0x1
@@ -1300,7 +1300,7 @@ lbl_fn_80085BE8_000011A4:
     beq lbl_fn_80085BE8_000011D8
     addi r4, r3, 0x9c
     li r5, 0x63
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_000011D8
     li r30, 0x1
@@ -1323,7 +1323,7 @@ lbl_fn_80085BE8_000011FC:
     beq lbl_fn_80085BE8_00001228
     addi r4, r3, 0x9c
     li r5, 0x44
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_00001228
     li r30, 0x1
@@ -1337,7 +1337,7 @@ lbl_fn_80085BE8_00001228:
     beq lbl_fn_80085BE8_0000125C
     addi r4, r3, 0x9c
     li r5, 0x64
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_0000125C
     li r30, 0x1
@@ -1360,7 +1360,7 @@ lbl_fn_80085BE8_00001280:
     beq lbl_fn_80085BE8_000012AC
     addi r4, r3, 0x9c
     li r5, 0x45
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_000012AC
     li r30, 0x1
@@ -1374,7 +1374,7 @@ lbl_fn_80085BE8_000012AC:
     beq lbl_fn_80085BE8_000012E0
     addi r4, r3, 0x9c
     li r5, 0x65
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_000012E0
     li r30, 0x1
@@ -1397,7 +1397,7 @@ lbl_fn_80085BE8_00001304:
     beq lbl_fn_80085BE8_00001330
     addi r4, r3, 0x9c
     li r5, 0x46
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_00001330
     li r30, 0x1
@@ -1411,7 +1411,7 @@ lbl_fn_80085BE8_00001330:
     beq lbl_fn_80085BE8_00001364
     addi r4, r3, 0x9c
     li r5, 0x66
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_00001364
     li r30, 0x1
@@ -1436,7 +1436,7 @@ lbl_fn_80085BE8_00001388:
     subi r0, r4, 0xe52
     addi r4, r3, 0x9c
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_000013BC
     li r30, 0x1
@@ -1452,7 +1452,7 @@ lbl_fn_80085BE8_000013BC:
     subi r0, r4, 0xe38
     addi r4, r3, 0x9c
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80085BE8_000013F8
     li r30, 0x1

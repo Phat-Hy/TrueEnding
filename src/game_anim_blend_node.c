@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
-extern void fn_80044E0C(void);
+extern void menu_renderLayout(void);
 extern void collision_testLineSegment(void);
 extern void fn_800902C0(void);
 extern void atn_Model_findBoneIndex(void);
@@ -2919,7 +2919,7 @@ lbl_fn_8026DB8C_000028E4:
     lwz r27, 0x654(r30)
     li r4, 0x1
     mr r3, r27
-    bl fn_80044E0C
+    bl menu_renderLayout
     lwz r0, 0x1624(r28)
     mr r3, r30
     stw r0, 0x654(r30)
@@ -3024,7 +3024,7 @@ lbl_fn_8026DB8C_00002A78:
     lwz r27, 0x654(r29)
     li r4, 0x1
     mr r3, r27
-    bl fn_80044E0C
+    bl menu_renderLayout
     lwz r0, 0x1624(r28)
     mr r3, r29
     stw r0, 0x654(r29)

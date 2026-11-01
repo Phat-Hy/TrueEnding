@@ -15,7 +15,7 @@ extern void fn_80108378(void);
 extern void fn_801092C8(void);
 extern void fn_801125F8(void);
 extern void equip_getGlobalManager(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_80127D8C(void);
 extern void fn_8012DD70(void);
 extern void fn_8013A258(void);
@@ -511,7 +511,7 @@ asm void fn_802FF800(void)
     cmpwi r0, 0x7
     bne lbl_fn_802FF800_00000A60
     addi r3, r30, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r30, 0x1088
     lfs f2, 0x1090(r30)
     psq_l f1, 0x0(r4), 0, 0

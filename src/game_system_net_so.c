@@ -17,7 +17,7 @@ extern void fn_801156D8(void);
 extern void fn_80116BAC(void);
 extern void equip_getGlobalManager(void);
 extern void fn_801240B4(void);
-extern void fn_80139550(void);
+extern void npc_updateDialogueTarget(void);
 extern void fn_80139F2C(void);
 extern void fn_8013C3A8(void);
 extern void fn_8013C504(void);
@@ -1250,7 +1250,7 @@ lbl_fn_8038F52C_0000109C:
     mr r3, r30
     bl fn_800F84C8
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     mr r3, r30
     bl fn_800F84C8
     li r4, 0x0
@@ -1434,7 +1434,7 @@ lbl_fn_8038F52C_00001268:
     mr r3, r30
     bl fn_800F84C8
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fmr f30, f1
     mr r3, r30
     bl fn_800F84C8
@@ -1914,7 +1914,7 @@ lbl_fn_8038F52C_00001974:
     mr r3, r30
     bl fn_800F84C8
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80885ABC
     fcmpo cr0, f1, f0
     bge lbl_fn_8038F52C_00001A98
@@ -1927,14 +1927,14 @@ lbl_fn_8038F52C_00001A98:
     mr r3, r30
     bl fn_800F84C8
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80885AC0
     fcmpo cr0, f1, f0
     ble lbl_fn_8038F52C_00001B1C
     mr r3, r30
     bl fn_800F84C8
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80885AC0
     lfs f2, lbl_808858F0
     fsubs f3, f1, f0
@@ -1948,7 +1948,7 @@ lbl_fn_8038F52C_00001AE8:
     mr r3, r30
     bl fn_800F84C8
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80885AC0
     lfs f2, lbl_808858F0
     fsubs f1, f1, f0
@@ -1963,7 +1963,7 @@ lbl_fn_8038F52C_00001B1C:
     mr r3, r30
     bl fn_800F84C8
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80885ABC
     lfs f2, lbl_80885A54
     fsubs f3, f1, f0
@@ -1977,7 +1977,7 @@ lbl_fn_8038F52C_00001B50:
     mr r3, r30
     bl fn_800F84C8
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80885ABC
     lfs f2, lbl_80885A54
     fsubs f1, f1, f0
@@ -2018,7 +2018,7 @@ lbl_fn_8038F52C_00001B80:
     fsubs f30, f1, f0
     bl fn_800F84C8
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fcmpo cr0, f1, f30
     ble lbl_fn_8038F52C_00001C98
     mr r3, r30
@@ -2030,7 +2030,7 @@ lbl_fn_8038F52C_00001B80:
     fsubs f30, f1, f0
     bl fn_800F84C8
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fsubs f2, f1, f30
     lfs f0, lbl_80885A34
     lfs f1, lbl_808858F8
@@ -2048,7 +2048,7 @@ lbl_fn_8038F52C_00001C48:
     fsubs f30, f1, f0
     bl fn_800F84C8
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fsubs f1, f1, f30
     lfs f0, lbl_80885A34
     fmuls f1, f1, f0

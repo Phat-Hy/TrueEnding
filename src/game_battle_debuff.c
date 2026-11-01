@@ -6,7 +6,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void fn_80044C50(void);
 extern void fn_80044CCC(void);
-extern void fn_80044E0C(void);
+extern void menu_renderLayout(void);
 extern void mem_alloc(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
@@ -988,13 +988,13 @@ lbl_fn_8016DF3C_00000C6C:
     cmpwi r3, 0x0
     beq lbl_fn_8016DF3C_00000C9C
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016DF3C_00000C9C:
     lwz r3, 0x64c(r30)
     cmpwi r3, 0x0
     beq lbl_fn_8016DF3C_00000CB0
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016DF3C_00000CB0:
     li r0, 0x0
     li r3, -0x1
@@ -1169,13 +1169,13 @@ lbl_fn_8016DF3C_00000EEC:
     cmpwi r3, 0x0
     beq lbl_fn_8016DF3C_00000F1C
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016DF3C_00000F1C:
     lwz r3, 0x64c(r30)
     cmpwi r3, 0x0
     beq lbl_fn_8016DF3C_00000F30
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016DF3C_00000F30:
     li r0, 0x0
     li r3, -0x1
@@ -1350,13 +1350,13 @@ lbl_fn_8016E4C4_00001164:
     cmpwi r3, 0x0
     beq lbl_fn_8016E4C4_00001178
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016E4C4_00001178:
     lwz r3, 0x64c(r29)
     cmpwi r3, 0x0
     beq lbl_fn_8016E4C4_0000118C
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016E4C4_0000118C:
     addi r30, r29, 0x680
     li r31, 0x0
@@ -1437,13 +1437,13 @@ lbl_fn_8016E5F0_00001290:
     cmpwi r3, 0x0
     beq lbl_fn_8016E5F0_000012A4
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016E5F0_000012A4:
     lwz r3, 0x64c(r29)
     cmpwi r3, 0x0
     beq lbl_fn_8016E5F0_000012B8
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016E5F0_000012B8:
     addi r30, r29, 0x680
     li r31, 0x0
@@ -1505,13 +1505,13 @@ lbl_fn_8016E71C_00001374:
     cmpwi r3, 0x0
     beq lbl_fn_8016E71C_00001388
     mr r4, r30
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016E71C_00001388:
     lwz r3, 0x64c(r29)
     cmpwi r3, 0x0
     beq lbl_fn_8016E71C_0000139C
     mr r4, r30
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016E71C_0000139C:
     addi r30, r29, 0x680
     li r31, 0x0
@@ -2298,13 +2298,13 @@ lbl_fn_8016EB48_00001E74:
     cmpwi r3, 0x0
     beq lbl_fn_8016EB48_00001EA4
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016EB48_00001EA4:
     lwz r3, 0x64c(r27)
     cmpwi r3, 0x0
     beq lbl_fn_8016EB48_00001EB8
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016EB48_00001EB8:
     li r0, 0x0
     li r3, -0x1

@@ -8,7 +8,7 @@ extern void _restgpr_25(void);
 extern void _savegpr_14(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
-extern void fn_8007708C(void);
+extern void chapter_updateProgression(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void node_createNamedChild(void);
@@ -1273,7 +1273,7 @@ asm void fn_800C6128(void)
     beq lbl_fn_800C6128_000010FC
     mr r3, r4
     addi r4, r4, 0x34
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_800C6128_000010FC
     li r31, 0x1

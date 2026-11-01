@@ -13,7 +13,7 @@ extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void atn_ColliBase_destructor(void);
 extern void atn_ColliCapsule_destructor(void);
-extern void fn_8007708C(void);
+extern void chapter_updateProgression(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
@@ -1682,7 +1682,7 @@ asm void fn_80469494(void)
     mr r3, r4
     addi r4, r4, 0x34
     li r5, 0x34
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80469494_00001594
     li r31, 0x1

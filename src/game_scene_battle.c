@@ -25,7 +25,7 @@ extern void fn_80107208(void);
 extern void npc_updateTalkInteraction(void);
 extern void inventory_unequipItem(void);
 extern void equip_applyToCharacter(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void fn_80176DFC(void);
 extern void actor_getMovementFlags(void);
 extern void fn_80188F08(void);
@@ -350,7 +350,7 @@ lbl_fn_801AD34C_00000364:
     extrwi. r0, r0, 1, 25
     beq lbl_fn_801AD34C_0000037C
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_801AD34C_0000037C:
     li r0, 0x1
     stw r0, 0x34c(r30)

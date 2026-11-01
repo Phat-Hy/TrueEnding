@@ -28,7 +28,7 @@ extern void fn_80103F60(void);
 extern void fn_80108378(void);
 extern void fn_8011F91C(void);
 extern void skill_findNodeById(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_8012B3E8(void);
 extern void fn_8012B988(void);
 extern void fn_80133130(void);
@@ -1805,7 +1805,7 @@ lbl_fn_80251344_000017D8:
     cmpwi r0, 0x7
     bne lbl_fn_80251344_00001A10
     addi r3, r29, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r29, 0x1088
     addi r22, r1, 0xf8
     psq_l f1, 0x0(r4), 0, 0

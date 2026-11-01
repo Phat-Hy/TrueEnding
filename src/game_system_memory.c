@@ -24,7 +24,7 @@ extern void fn_8006BB6C(void);
 extern void fn_8006F420(void);
 extern void str_assignBuffer(void);
 extern void mem_realloc(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void str_parseInt(void);
 extern void wcs_parseInt(void);
 extern void str_skipWhitespace(void);
@@ -404,7 +404,7 @@ lbl_fn_802088A4_00000338:
     mr r30, r3
     mr r3, r31
     mr r4, r30
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lbz r3, 0xc(r1)
     slwi r0, r30, 1
     stb r3, 0x8(r1)
@@ -522,7 +522,7 @@ lbl_fn_80208A3C_000004CC:
     mr r28, r3
     mr r3, r29
     mr r4, r28
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lbz r3, 0x8(r1)
     slwi r0, r28, 1
     stb r3, 0xc(r1)

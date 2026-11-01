@@ -7,7 +7,7 @@ extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_evaluateConditions(void);
 extern void sound_initGlobalInstances(void);
@@ -374,7 +374,7 @@ lbl_fn_80358A5C_0000042C:
     lfs f28, lbl_808855B0
 lbl_fn_80358A5C_0000045C:
     addi r3, r3, 0xc64
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     lwz r0, 0xc90(r31)
     cmpwi r0, 0x0
     beq lbl_fn_80358A5C_0000047C

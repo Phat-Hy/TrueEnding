@@ -30,7 +30,7 @@ extern void clip_calculateFrustum(void);
 extern void fn_801125F8(void);
 extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
-extern void fn_80139550(void);
+extern void npc_updateDialogueTarget(void);
 extern void fn_80139F24(void);
 extern void fn_80139F3C(void);
 extern void fn_8013A194(void);
@@ -147,7 +147,7 @@ lbl_fn_803041C8_00000050:
     li r4, 0x0
     lfs f0, 0x14(r5)
     stfs f0, 0x538(r31)
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80884AF0
     fcmpo cr0, f1, f0
     cror eq, gt, eq
@@ -159,7 +159,7 @@ lbl_fn_803041C8_00000050:
     addi r3, r31, 0xb0
     li r4, 0x0
     fsubs f31, f1, f0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80884AF4
     fsubs f0, f1, f0
     fdivs f2, f0, f31
@@ -177,7 +177,7 @@ lbl_fn_803041C8_00000108:
     fmr f31, f1
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fcmpo cr0, f1, f31
     cror eq, gt, eq
     bne lbl_fn_803041C8_00000530

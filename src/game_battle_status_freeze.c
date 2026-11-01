@@ -35,7 +35,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_80097E80(void);
 extern void str_skipWhitespace(void);
 extern void fn_802180A8(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
@@ -2030,7 +2030,7 @@ lbl_fn_80428C68_000019FC:
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     stw r3, 0x10c(r31)
     mr r3, r31
     li r4, 0x0

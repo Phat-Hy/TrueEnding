@@ -13,7 +13,7 @@ extern void dtor_80084684(void);
 extern void vec3_set(void);
 extern void fn_8000DD14(void);
 extern void fn_8000DD98(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void fn_8005ED68(void);
 extern void atn_ComDrawTextureMask_execute(void);
@@ -41,7 +41,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void str_findChar(void);
 extern void fn_800E0000(void);
 extern void fn_800F7258(void);
@@ -460,7 +460,7 @@ lbl_fn_804ABA2C_00000144:
     bl fn_80071D68
     addi r3, r1, 0x140
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
 lbl_fn_804ABA2C_00000490:
     addi r11, r1, 0x360
     psq_l f31, 0x378(r1), 0, 0
@@ -844,10 +844,10 @@ lbl_fn_804ABF84_00000908:
     bl fn_80071D68
     addi r3, r1, 0x38
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     addi r3, r1, 0x22c
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     addi r11, r1, 0x440
     psq_l f31, 0x458(r1), 0, 0
     lfd f31, 0x450(r1)
@@ -1976,7 +1976,7 @@ lbl_fn_804AD1EC_0000184C:
     mr r16, r3
     mr r3, r20
     mr r4, r16
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     slwi r0, r16, 1
     stb r23, 0x18(r1)
     mr r3, r20
@@ -2009,7 +2009,7 @@ lbl_fn_804AD1EC_000018D8:
     stw r22, 0x4(r16)
     stw r22, 0x8(r16)
     lwz r4, 0x30(r1)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x30(r1)
     mr r3, r16
     lbz r4, 0xc(r1)
@@ -2140,7 +2140,7 @@ lbl_fn_804AD1EC_00001AB4:
     stw r22, 0x4(r16)
     stw r22, 0x8(r16)
     lwz r4, 0x30(r1)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x30(r1)
     mr r3, r16
     lbz r4, 0x10(r1)

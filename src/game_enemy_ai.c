@@ -16,7 +16,7 @@ extern void fn_8016EB48(void);
 extern void actor_getMovementFlags(void);
 extern void fn_803C11A4(void);
 extern void fn_803C1338(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void fn_803CD958(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -624,7 +624,7 @@ lbl_fn_80128090_000007A8:
     addi r4, r28, 0x4
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     mr r4, r3
     mr r3, r31
     mr r5, r26
@@ -670,7 +670,7 @@ lbl_fn_80128090_0000084C:
     addi r4, r27, 0x528
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     mr r4, r3
     mr r3, r31
     mr r5, r26
@@ -727,7 +727,7 @@ lbl_fn_80128090_00000924:
     mr r4, r27
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     mr r4, r3
     mr r3, r31
     mr r5, r26
@@ -778,7 +778,7 @@ lbl_fn_80128090_000009DC:
     addi r4, r27, 0x528
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     mr r4, r3
     mr r3, r31
     mr r5, r26
@@ -824,7 +824,7 @@ lbl_fn_80128090_00000A88:
     addi r4, r27, 0x528
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     mr r4, r3
     mr r3, r31
     mr r5, r26
@@ -892,7 +892,7 @@ lbl_fn_80128508_00000B70:
     mr r4, r31
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     cmpwi r3, 0x0
     ble lbl_fn_80128508_00000CF0
     li r0, 0x0
@@ -1035,7 +1035,7 @@ lbl_fn_801286F0_00000D58:
     addi r4, r30, 0x4
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     mr r4, r3
     mr r3, r25
     mr r5, r27
@@ -1128,7 +1128,7 @@ lbl_fn_80128818_00000ECC:
     addi r4, r30, 0x4
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     mr r4, r3
     mr r3, r26
     mr r5, r28
@@ -1192,7 +1192,7 @@ lbl_fn_80128930_00000FAC:
     addi r4, r28, 0x528
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     mr r4, r3
     mr r3, r27
     mr r5, r29
@@ -1267,7 +1267,7 @@ lbl_fn_80128A30_000010A4:
     mr r4, r28
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     mr r4, r3
     mr r3, r27
     mr r5, r29
@@ -1340,7 +1340,7 @@ lbl_fn_80128B20_000011A8:
     addi r4, r28, 0x528
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     mr r4, r3
     mr r3, r27
     mr r5, r29
@@ -1408,7 +1408,7 @@ lbl_fn_80128C08_00001290:
     addi r4, r28, 0x528
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     mr r4, r3
     mr r3, r27
     mr r5, r29

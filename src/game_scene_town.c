@@ -12,7 +12,7 @@ extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void inventory_unequipItem(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void debuff_clearStatus(void);
 extern void fn_80188A70(void);
 extern void fn_80188AA0(void);
@@ -1355,7 +1355,7 @@ asm void fn_801AAB64(void)
     extrwi. r0, r0, 1, 25
     beq lbl_fn_801AAB64_0000114C
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_801AAB64_0000114C:
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)

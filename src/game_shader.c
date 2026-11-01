@@ -5,7 +5,7 @@
 extern void _restgpr_25(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
@@ -98,10 +98,10 @@ asm void fn_800B955C(void)
     beq lbl_fn_800B955C_0000004C
     li r4, -0x1
     addi r3, r3, 0x268
-    bl fn_8004B338
+    bl sound_releaseChannel
     addi r3, r30, 0x74
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     cmpwi r31, 0x0
     ble lbl_fn_800B955C_0000004C
     mr r3, r30

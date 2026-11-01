@@ -15,7 +15,7 @@ extern void mem_free(void);
 extern void msg_getMessageString(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void str_findChar(void);
 extern void fn_800E0000(void);
 extern void actor_spawnActorWithId(void);
@@ -226,7 +226,7 @@ lbl_fn_804A3C24_000001C4:
     mr r17, r3
     mr r3, r21
     mr r4, r17
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     slwi r0, r17, 1
     stb r24, 0x18(r1)
     mr r3, r21
@@ -259,7 +259,7 @@ lbl_fn_804A3C24_00000250:
     stw r23, 0x4(r17)
     stw r23, 0x8(r17)
     lwz r4, 0x30(r1)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x30(r1)
     mr r3, r17
     lbz r4, 0xc(r1)
@@ -391,7 +391,7 @@ lbl_fn_804A3C24_00000430:
     stw r23, 0x4(r17)
     stw r23, 0x8(r17)
     lwz r4, 0x30(r1)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x30(r1)
     mr r3, r17
     lbz r4, 0x10(r1)

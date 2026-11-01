@@ -27,7 +27,7 @@ extern void scissor_clipFrustum(void);
 extern void fn_801010A0(void);
 extern void fn_8010B250(void);
 extern void fn_8010EE78(void);
-extern void fn_80139550(void);
+extern void npc_updateDialogueTarget(void);
 extern void fn_8013A194(void);
 extern void fn_8014052C(void);
 extern void actor_setState(void);
@@ -137,7 +137,7 @@ asm void fn_80348FF4(void)
     bl fn_80352938
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80885400
     fcmpo cr0, f1, f0
     cror eq, gt, eq
@@ -171,7 +171,7 @@ lbl_fn_80348FF4_000000B4:
     bne lbl_fn_80348FF4_000001AC
     li r4, 0x0
     addi r3, r3, 0xb0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80885404
     fcmpo cr0, f1, f0
     cror eq, gt, eq
@@ -234,7 +234,7 @@ lbl_fn_80348FF4_000001AC:
     bne lbl_fn_80348FF4_000003DC
     li r4, 0x0
     addi r3, r3, 0xb0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80885408
     fcmpo cr0, f1, f0
     cror eq, lt, eq
@@ -294,7 +294,7 @@ lbl_fn_80348FF4_000001AC:
 lbl_fn_80348FF4_000002A0:
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_808853F8
     lfs f2, lbl_808853B0
     fsubs f1, f1, f0
@@ -306,7 +306,7 @@ lbl_fn_80348FF4_000002A0:
 lbl_fn_80348FF4_000002CC:
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f2, lbl_808853F8
     lfs f0, lbl_808853B0
     fsubs f1, f1, f2
@@ -319,7 +319,7 @@ lbl_fn_80348FF4_000002E8:
 lbl_fn_80348FF4_000002F8:
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f2, lbl_808853F8
     lfs f0, lbl_808853B0
     fsubs f2, f1, f2
@@ -331,7 +331,7 @@ lbl_fn_80348FF4_000002F8:
 lbl_fn_80348FF4_00000324:
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f2, lbl_808853F8
     lfs f0, lbl_808853B0
     fsubs f1, f1, f2
@@ -384,7 +384,7 @@ lbl_fn_80348FF4_000003DC:
     fmr f31, f1
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fcmpo cr0, f1, f31
     cror eq, gt, eq
     bne lbl_fn_80348FF4_0000040C

@@ -12,7 +12,7 @@ extern void fn_800EB49C(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void fn_8012539C(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_80134270(void);
 extern void fn_8013A258(void);
 extern void quest_evaluateConditions(void);
@@ -831,7 +831,7 @@ lbl_fn_803202E0_000009DC:
     b lbl_fn_803202E0_00000C38
 lbl_fn_803202E0_00000A10:
     addi r3, r30, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r30, 0x1088
     addi r29, r1, 0x80
     psq_l f1, 0x0(r4), 0, 0

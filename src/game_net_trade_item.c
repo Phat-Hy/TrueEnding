@@ -11,7 +11,7 @@ extern void fn_8000D9F8(void);
 extern void vec3_assign(void);
 extern void fn_80012C88(void);
 extern void vec3_add(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void fn_8004BF64(void);
 extern void fn_8008B964(void);
@@ -1946,7 +1946,7 @@ lbl_fn_8052D46C_000019A8:
     bl fn_80116BD4
     addi r3, r1, 0x1e8
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     lwz r0, 0x3f4(r1)
     lwz r31, 0x3ec(r1)
     lwz r30, 0x3e8(r1)

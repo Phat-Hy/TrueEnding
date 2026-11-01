@@ -6,7 +6,7 @@ extern void fn_8004ECC0(void);
 extern void fn_80094958(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void system_getNextSequenceId(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_8013A258(void);
 extern void npc_updateTalkInteraction(void);
 extern void inventory_applyItemStats(void);
@@ -963,7 +963,7 @@ asm void fn_802C2BCC(void)
     cmpwi r0, 0x7
     bne lbl_fn_802C2BCC_000010F4
     addi r3, r3, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r29, 0x1088
     addi r31, r1, 0xe0
     psq_l f1, 0x0(r4), 0, 0

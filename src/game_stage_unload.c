@@ -13,7 +13,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_8012476C(void);
 extern void fn_801426A4(void);
 extern void inventory_unequipItem(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void debuff_clearStatus(void);
 extern void fn_801750FC(void);
 extern void fn_801B2EDC(void);
@@ -123,7 +123,7 @@ asm void fn_80198C08(void)
     extrwi. r0, r0, 1, 25
     beq lbl_fn_80198C08_00000094
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_80198C08_00000094:
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)
@@ -1793,7 +1793,7 @@ lbl_fn_8019A3F4_0000184C:
     extrwi. r0, r0, 1, 25
     beq lbl_fn_8019A3F4_00001864
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_8019A3F4_00001864:
     lwz r3, 0x4(r30)
     li r0, 0x1

@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
-extern void fn_80044E0C(void);
+extern void menu_renderLayout(void);
 extern void fn_8004D314(void);
 extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
@@ -1564,13 +1564,13 @@ lbl_fn_80141674_000014E0:
     cmpwi r3, 0x0
     beq lbl_fn_80141674_00001510
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_80141674_00001510:
     lwz r3, 0x64c(r31)
     cmpwi r3, 0x0
     beq lbl_fn_80141674_00001524
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_80141674_00001524:
     li r0, 0x0
     li r3, -0x1
@@ -2389,13 +2389,13 @@ lbl_fn_80141674_00002100:
     cmpwi r3, 0x0
     beq lbl_fn_80141674_00002130
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_80141674_00002130:
     lwz r3, 0x64c(r31)
     cmpwi r3, 0x0
     beq lbl_fn_80141674_00002144
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_80141674_00002144:
     li r0, 0x0
     li r3, -0x1

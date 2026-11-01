@@ -29,7 +29,7 @@ extern void clip_calculateFrustum(void);
 extern void fn_80105BD8(void);
 extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_8013322C(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013A258(void);
@@ -1915,7 +1915,7 @@ asm void fn_80245F14(void)
     cmpwi r0, 0x7
     bne lbl_fn_80245F14_00001B64
     addi r3, r29, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r29, 0x1088
     addi r31, r1, 0x68
     psq_l f1, 0x0(r4), 0, 0

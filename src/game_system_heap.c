@@ -12,7 +12,7 @@ extern void fn_800A6BD4(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void atn_LH_Texture_release(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void fn_801EC158(void);
@@ -347,7 +347,7 @@ lbl_fn_801F91DC_00000404:
     stw r0, 0x8(r30)
     stw r0, 0xc(r30)
     lwz r4, 0x28(r1)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x28(r1)
     addi r3, r30, 0x4
     lbz r4, 0x14(r1)

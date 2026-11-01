@@ -14,7 +14,7 @@ extern void fn_800E8630(void);
 extern void fn_800EB7A0(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_8013322C(void);
 extern void fn_8013A258(void);
 extern void npc_updateTalkInteraction(void);
@@ -699,7 +699,7 @@ asm void fn_802531F4(void)
     psq_st f1, 0x0(r4), 0, 0
     bne lbl_fn_802531F4_00000A9C
     addi r3, r3, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r29, 0x1088
     addi r31, r1, 0x4c
     psq_l f1, 0x0(r4), 0, 0
@@ -1205,7 +1205,7 @@ lbl_fn_80253884_00000FC8:
     cmpwi r0, 0x7
     bne lbl_fn_80253884_00001200
     addi r3, r31, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r31, 0x1088
     addi r30, r1, 0x14
     psq_l f1, 0x0(r4), 0, 0

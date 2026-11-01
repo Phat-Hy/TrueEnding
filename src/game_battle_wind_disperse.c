@@ -18,7 +18,7 @@ extern void equip_applyToCharacter(void);
 extern void actor_setState(void);
 extern void fn_8016EB48(void);
 extern void fn_80170F20(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void fn_803CD958(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
@@ -381,7 +381,7 @@ lbl_fn_8041ECBC_000003AC:
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     li r4, 0x0
     stw r3, 0x100(r30)
     li r0, 0x2

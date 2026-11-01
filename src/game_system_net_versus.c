@@ -13,7 +13,7 @@ extern void fn_8011F91C(void);
 extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void fn_80154654(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void actor_setState(void);
 extern void fn_8016F824(void);
 extern void fn_8016FDCC(void);
@@ -636,7 +636,7 @@ asm void fn_8039E9D4(void)
     stw r0, 0x12a8(r3)
     lwz r3, lbl_8087F8A0
     lwz r3, 0x48(r3)
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
     lwz r4, 0x0(r31)
     lis r3, lbl_8074ED24@ha
     li r0, 0x0
@@ -672,7 +672,7 @@ asm void fn_8039EA50(void)
     stw r0, 0x12a8(r3)
     lwz r3, lbl_8087F8A0
     lwz r3, 0x48(r3)
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
     lwz r4, 0x0(r31)
     lis r3, lbl_8074ED24@ha
     li r0, 0x0

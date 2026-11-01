@@ -22,7 +22,7 @@ extern void npc_updateTalkInteraction(void);
 extern void fn_801446F0(void);
 extern void inventory_unequipItem(void);
 extern void equip_applyToCharacter(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void fn_80164DCC(void);
 extern void debuff_clearStatus(void);
 extern void actor_getMovementFlags(void);
@@ -1149,7 +1149,7 @@ lbl_fn_801AFAC0_00000E50:
     extrwi. r0, r0, 1, 25
     beq lbl_fn_801AFAC0_00000E68
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_801AFAC0_00000E68:
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)
@@ -1999,7 +1999,7 @@ lbl_fn_801B0854_000019AC:
     extrwi. r0, r0, 1, 25
     beq lbl_fn_801B0854_000019C4
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_801B0854_000019C4:
     mr r3, r30
     lwz r31, 0xc(r1)

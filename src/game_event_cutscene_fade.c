@@ -6,7 +6,7 @@ extern void __files(void);
 extern void dtor_80084684(void);
 extern void fn_8004ADF4(void);
 extern void fn_8004B1EC(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void node_destroy(void);
@@ -96,7 +96,7 @@ asm void fn_8047DC98(void)
     beq lbl_fn_8047DC98_000002B4
     li r4, -0x1
     addi r3, r3, 0x444
-    bl fn_8004B338
+    bl sound_releaseChannel
     addic. r29, r30, 0x320
     beq lbl_fn_8047DC98_00000168
     addic. r28, r29, 0x34
@@ -265,7 +265,7 @@ lbl_fn_8047DC98_00000274:
 lbl_fn_8047DC98_00000298:
     mr r3, r30
     li r4, 0x0
-    bl fn_8004B338
+    bl sound_releaseChannel
     cmpwi r31, 0x0
     ble lbl_fn_8047DC98_000002B4
     mr r3, r30

@@ -15,7 +15,7 @@ extern void fn_8004B0E4(void);
 extern void fn_8004B158(void);
 extern void fn_8004B1EC(void);
 extern void fn_8004B290(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void fn_80076FF8(void);
 extern void mem_alloc(void);
 extern void node_destroy(void);
@@ -1715,7 +1715,7 @@ asm void fn_8037DC68(void)
     beq lbl_fn_8037DC68_00001654
     li r4, -0x1
     addi r3, r3, 0xa20
-    bl fn_8004B338
+    bl sound_releaseChannel
     addic. r0, r30, 0x7ec
     beq lbl_fn_8037DC68_0000162C
     lwz r4, 0x7ec(r30)
@@ -1728,10 +1728,10 @@ asm void fn_8037DC68(void)
 lbl_fn_8037DC68_0000162C:
     addi r3, r30, 0x1f4
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     mr r3, r30
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     cmpwi r31, 0x0
     ble lbl_fn_8037DC68_00001654
     mr r3, r30

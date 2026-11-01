@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void fn_8004B290(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void fn_80058078(void);
 extern void fn_800580BC(void);
@@ -647,7 +647,7 @@ lbl_fn_803F53E0_000006F0:
     li r4, -0x1
     rlwinm r0, r0, 0, 13, 11
     stw r0, 0xf8(r31)
-    bl fn_8004B338
+    bl sound_releaseChannel
     b lbl_fn_803F53E0_00000CF8
 lbl_fn_803F53E0_00000824:
     lwz r4, lbl_8087EFB4
@@ -743,7 +743,7 @@ lbl_fn_803F53E0_00000980:
     li r4, -0x1
     rlwinm r0, r0, 0, 13, 11
     stw r0, 0xf8(r31)
-    bl fn_8004B338
+    bl sound_releaseChannel
     b lbl_fn_803F53E0_00000CF8
 lbl_fn_803F53E0_0000099C:
     lfs f9, 0x54(r1)
@@ -955,7 +955,7 @@ lbl_fn_803F53E0_00000C8C:
     bl fn_80095F10
     addi r3, r1, 0xe0
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     b lbl_fn_803F53E0_00000CEC
 lbl_fn_803F53E0_00000CE0:
     lwz r0, 0xf8(r31)
@@ -964,7 +964,7 @@ lbl_fn_803F53E0_00000CE0:
 lbl_fn_803F53E0_00000CEC:
     addi r3, r1, 0x2d4
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
 lbl_fn_803F53E0_00000CF8:
     addi r11, r1, 0x4e0
     psq_l f31, 0x538(r1), 0, 0

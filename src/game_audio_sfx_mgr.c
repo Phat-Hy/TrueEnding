@@ -40,7 +40,7 @@ extern void res_registerResource(void);
 extern void fn_80312EF8(void);
 extern void fn_803132D0(void);
 extern void fn_803C11A4(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void fn_803CD958(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -630,7 +630,7 @@ lbl_fn_803104D4_00000728:
     li r5, 0x0
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     cmpwi r3, 0x0
     ble lbl_fn_803104D4_00000940
     lwz r0, 0x151c(r25)

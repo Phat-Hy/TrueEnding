@@ -13,7 +13,7 @@ extern void morph_updateMesh(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void fn_80108F38(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_8012DB04(void);
 extern void fn_8013A258(void);
 extern void npc_updateTalkInteraction(void);
@@ -1275,7 +1275,7 @@ lbl_fn_802F8EBC_0000110C:
     cmpwi r0, 0x7
     bne lbl_fn_802F8EBC_00001568
     addi r3, r29, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r29, 0x1088
     addi r31, r1, 0xbc
     psq_l f1, 0x0(r4), 0, 0

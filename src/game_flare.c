@@ -35,7 +35,7 @@ extern void fn_80154344(void);
 extern void fn_80154EC4(void);
 extern void fn_801551AC(void);
 extern void fn_80155790(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void fn_80166544(void);
 extern void fn_80166A54(void);
 extern void fn_8016DC14(void);
@@ -600,7 +600,7 @@ lbl_fn_800E4278_0000066C:
     beq lbl_fn_800E4278_00000684
     mr r3, r22
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_800E4278_00000684:
     lwz r3, 0x648(r22)
     cmpwi r3, 0x0
@@ -1875,7 +1875,7 @@ lbl_fn_800E4278_000018E8:
     bne lbl_fn_800E4278_000019FC
     mr r3, r22
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
     b lbl_fn_800E4278_000019FC
 lbl_fn_800E4278_0000191C:
     srwi. r0, r3, 31
@@ -1915,7 +1915,7 @@ lbl_fn_800E4278_00001964:
     bl actor_setState
     mr r3, r22
     li r4, 0x1
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
     b lbl_fn_800E4278_000019FC
 lbl_fn_800E4278_000019B4:
     lwz r0, 0x12a4(r22)
@@ -1923,7 +1923,7 @@ lbl_fn_800E4278_000019B4:
     bne lbl_fn_800E4278_000019FC
     mr r3, r22
     li r4, 0x1
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
     b lbl_fn_800E4278_000019FC
 lbl_fn_800E4278_000019D0:
     lwz r0, 0x55c(r22)

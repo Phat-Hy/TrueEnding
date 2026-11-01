@@ -36,7 +36,7 @@ extern void fn_8011BF3C(void);
 extern void equip_getGlobalManager(void);
 extern void f32_abs(void);
 extern void fn_801255C8(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_80127D8C(void);
 extern void fn_80128818(void);
 extern void fn_80128930(void);
@@ -45,7 +45,7 @@ extern void fn_80135338(void);
 extern void fn_80135380(void);
 extern void fn_801370B8(void);
 extern void fn_80138E1C(void);
-extern void fn_80139550(void);
+extern void npc_updateDialogueTarget(void);
 extern void fn_80139ED0(void);
 extern void fn_80139EF4(void);
 extern void fn_80139F24(void);
@@ -351,7 +351,7 @@ lbl_fn_8013A4E8_00000328:
     li r3, 0x1
     b lbl_fn_8013A4E8_00001E7C
     mr r3, r31
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     mr r3, r31
     bl fn_8013C3F4
     cmpwi r3, 0x0
@@ -701,7 +701,7 @@ lbl_fn_8013A4E8_00000818:
     cmpwi r0, 0x0
     bne lbl_fn_8013A4E8_000008F0
     mr r3, r31
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     lwz r3, 0x4(r31)
     lwz r0, 0x8(r31)
     cmpw r3, r0
@@ -1220,7 +1220,7 @@ lbl_fn_8013A4E8_00000F74:
     bl fn_8013C470
 lbl_fn_8013A4E8_00000FA4:
     mr r3, r31
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     mr r3, r31
     bl fn_80139F58
     mr r4, r3
@@ -1423,7 +1423,7 @@ lbl_fn_8013A4E8_0000127C:
     cmpwi r0, 0x1
     bne lbl_fn_8013A4E8_00001300
     mr r3, r31
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     mr r3, r31
     bl fn_80139F58
     mr r4, r3
@@ -1478,7 +1478,7 @@ lbl_fn_8013A4E8_00001300:
     bl vec3_mag
     fmr f31, f1
     mr r3, r31
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     mr r3, r31
     bl fn_80139F58
     mr r4, r3
@@ -1590,7 +1590,7 @@ lbl_fn_8013A4E8_000014D0:
     cmpwi r3, 0x0
     beq lbl_fn_8013A4E8_00001574
     mr r3, r31
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     mr r3, r31
     bl fn_80139F58
     mr r4, r3
@@ -1718,7 +1718,7 @@ lbl_fn_8013A4E8_000016CC:
     cmpwi r0, 0x1
     bne lbl_fn_8013A4E8_00001E78
     mr r3, r31
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     mr r3, r31
     bl fn_80139F58
     mr r4, r3
@@ -1791,7 +1791,7 @@ lbl_fn_8013A4E8_000017E4:
     cmpwi r0, 0x1
     bne lbl_fn_8013A4E8_00001E78
     mr r3, r31
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     mr r3, r31
     bl fn_80139F58
     mr r4, r3
@@ -2037,7 +2037,7 @@ lbl_fn_8013A4E8_00001B54:
     bl fn_8013C470
 lbl_fn_8013A4E8_00001B84:
     mr r3, r31
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     mr r3, r31
     bl fn_80139F58
     mr r4, r3
@@ -2180,7 +2180,7 @@ lbl_fn_8013A4E8_00001D8C:
     fmr f31, f1
     addi r3, r27, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fcmpo cr0, f1, f31
     cror eq, gt, eq
     bne lbl_fn_8013A4E8_00001E78

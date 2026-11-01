@@ -26,7 +26,7 @@ extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_unload(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void fn_803CD958(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
@@ -1527,7 +1527,7 @@ lbl_fn_803FC9DC_000012E0:
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     stw r3, 0x10c(r31)
     mr r3, r31
     li r4, 0x0

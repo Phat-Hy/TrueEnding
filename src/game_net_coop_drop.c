@@ -6,7 +6,7 @@ extern void _restgpr_19(void);
 extern void _restgpr_26(void);
 extern void _savegpr_19(void);
 extern void _savegpr_26(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -1862,7 +1862,7 @@ lbl_fn_804AB060_00001910:
     blt lbl_fn_804AB060_00001910
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     lwz r0, 0x214(r1)
     lwz r31, 0x20c(r1)
     mtlr r0

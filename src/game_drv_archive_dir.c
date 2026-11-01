@@ -21,7 +21,7 @@ extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void motion_updateFogAdj(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void fn_800F52F0(void);
@@ -2392,7 +2392,7 @@ lbl_fn_805AC75C_00001FC8:
     mr r17, r3
     mr r3, r22
     mr r4, r17
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     addi r6, r1, 0x158
     lbz r3, 0x34(r1)
     stb r3, 0x30(r1)
@@ -2427,7 +2427,7 @@ lbl_fn_805AC75C_00002080:
     stw r23, 0x4(r17)
     stw r23, 0x8(r17)
     lwz r4, 0x6c(r1)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x6c(r1)
     mr r3, r17
     lbz r4, 0x24(r1)
@@ -2559,7 +2559,7 @@ lbl_fn_805AC75C_00002260:
     stw r23, 0x4(r17)
     stw r23, 0x8(r17)
     lwz r4, 0x6c(r1)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x6c(r1)
     mr r3, r17
     lbz r4, 0x28(r1)
@@ -2694,7 +2694,7 @@ lbl_fn_805AC75C_0000244C:
     mr r27, r3
     mr r3, r26
     mr r4, r27
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     slwi r0, r27, 1
     stb r24, 0x18(r1)
     mr r3, r26
@@ -2727,7 +2727,7 @@ lbl_fn_805AC75C_000024D8:
     stw r16, 0x4(r27)
     stw r16, 0x8(r27)
     lwz r4, 0x60(r1)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x60(r1)
     mr r3, r27
     lbz r4, 0xc(r1)
@@ -2858,7 +2858,7 @@ lbl_fn_805AC75C_000026B4:
     stw r16, 0x4(r27)
     stw r16, 0x8(r27)
     lwz r4, 0x60(r1)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x60(r1)
     mr r3, r27
     lbz r4, 0x10(r1)

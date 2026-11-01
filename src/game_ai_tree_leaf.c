@@ -30,7 +30,7 @@ extern void fn_800EB7A0(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80109828(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_8013322C(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013A258(void);
@@ -465,7 +465,7 @@ asm void fn_8025B9EC(void)
     cmpwi r0, 0x7
     bne lbl_fn_8025B9EC_000006DC
     addi r3, r29, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r29, 0x1088
     addi r31, r1, 0x68
     psq_l f1, 0x0(r4), 0, 0

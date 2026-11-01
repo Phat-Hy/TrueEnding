@@ -18,7 +18,7 @@ extern void morph_updateWeights(void);
 extern void fn_80105AB0(void);
 extern void fn_801446F0(void);
 extern void inventory_unequipItem(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void debuff_clearStatus(void);
 extern void fn_80178018(void);
 extern void fn_80178078(void);
@@ -536,7 +536,7 @@ asm void fn_801BB1C8(void)
     extrwi. r0, r0, 1, 25
     beq lbl_fn_801BB1C8_000005DC
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_801BB1C8_000005DC:
     lwz r3, 0x4(r28)
     li r0, 0x1
@@ -1731,7 +1731,7 @@ lbl_fn_801BC288_000016F4:
     extrwi. r0, r0, 1, 25
     beq lbl_fn_801BC288_0000170C
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_801BC288_0000170C:
     lwz r3, 0x4(r31)
     bl debuff_clearStatus
@@ -1949,7 +1949,7 @@ asm void fn_801BC5B8(void)
     extrwi. r0, r0, 1, 25
     beq lbl_fn_801BC5B8_000019E8
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_801BC5B8_000019E8:
     li r0, 0x1
     stw r0, 0x34c(r26)

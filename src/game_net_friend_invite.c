@@ -13,7 +13,7 @@ extern void fn_8000DCF4(void);
 extern void ui_destroyWidget(void);
 extern void fn_8004895C(void);
 extern void fn_80049654(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void dungeon_initGlobalContext(void);
 extern void fn_80083AD4(void);
 extern void mem_getAllocSize(void);
@@ -316,7 +316,7 @@ extern void fn_8050CF20(void);
 extern void fn_8050CF94(void);
 extern void fn_8050DDE0(void);
 extern void fn_8050DE60(void);
-extern void fn_8050E098(void);
+extern void net_p2p_readPayload(void);
 extern void fn_8050E61C(void);
 extern void fn_8050EAEC(void);
 extern void fn_8050EB30(void);
@@ -1469,7 +1469,7 @@ lbl_fn_804D201C_00000EC8:
     addis r3, r30, 0x1
     li r4, -0x1
     subi r3, r3, 0x688c
-    bl fn_8004B338
+    bl sound_releaseChannel
     addis r3, r30, 0x1
     li r4, -0x1
     subi r3, r3, 0x6940
@@ -3651,7 +3651,7 @@ lbl_fn_804D25D4_00002E0C:
     li r5, 0x1010
     li r6, 0x0
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     b lbl_fn_804D25D4_00004898
 lbl_fn_804D25D4_00002E44:
     mr r3, r24
@@ -3714,7 +3714,7 @@ lbl_fn_804D25D4_00002ED8:
     li r5, 0x1044
     li r6, 0x0
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     bl net_getFriendManager
     bl net_getFriendManager
     bl fn_804D622C
@@ -3820,7 +3820,7 @@ lbl_fn_804D25D4_00003054:
     li r5, 0x1045
     li r6, 0x0
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     bl net_getFriendManager
     bl net_getPacketManager
     li r4, -0x1
@@ -4276,7 +4276,7 @@ lbl_fn_804D25D4_000036EC:
     mr r6, r20
     li r5, 0x1046
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     bl fn_800F7F90
     lbz r4, 0xcc(r26)
     li r5, 0x96
@@ -4508,7 +4508,7 @@ lbl_fn_804D25D4_00003A9C:
     li r5, 0x1042
     li r6, 0x0
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     bl net_getFriendManager
     bl net_getFriendManager
     bl fn_804D622C
@@ -4618,7 +4618,7 @@ lbl_fn_804D25D4_00003C54:
     li r4, -0x1
     li r5, 0x1043
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     bl net_getFriendManager
     bl net_getPacketManager
     li r4, -0x1

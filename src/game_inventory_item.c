@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
-extern void fn_80044E0C(void);
+extern void menu_renderLayout(void);
 extern void collision_testLineSegment(void);
 extern void fn_80050A1C(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -177,13 +177,13 @@ lbl_fn_80152D10_0000010C:
     cmpwi r3, 0x0
     beq lbl_fn_80152D10_0000013C
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_80152D10_0000013C:
     lwz r3, 0x64c(r31)
     cmpwi r3, 0x0
     beq lbl_fn_80152D10_00000150
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_80152D10_00000150:
     li r0, 0x0
     li r3, -0x1
@@ -1069,13 +1069,13 @@ lbl_inventory_unequipItem_00000D9C:
     cmpwi r3, 0x0
     beq lbl_inventory_unequipItem_00000DCC
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_inventory_unequipItem_00000DCC:
     lwz r3, 0x64c(r31)
     cmpwi r3, 0x0
     beq lbl_inventory_unequipItem_00000DE0
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_inventory_unequipItem_00000DE0:
     li r0, 0x0
     li r3, -0x1
@@ -1721,13 +1721,13 @@ lbl_fn_80154344_000016CC:
     cmpwi r3, 0x0
     beq lbl_fn_80154344_000016FC
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_80154344_000016FC:
     lwz r3, 0x64c(r31)
     cmpwi r3, 0x0
     beq lbl_fn_80154344_00001710
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_80154344_00001710:
     li r0, 0x0
     li r3, -0x1

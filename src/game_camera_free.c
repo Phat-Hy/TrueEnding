@@ -8,7 +8,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_8013A258(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_ctorRewardItem(void);
@@ -275,7 +275,7 @@ lbl_fn_802E683C_000002D8:
     cmpwi r0, 0x7
     bne lbl_fn_802E683C_00000514
     addi r3, r31, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r31, 0x1088
     addi r30, r1, 0xe0
     psq_l f1, 0x0(r4), 0, 0
@@ -505,7 +505,7 @@ lbl_fn_802E683C_00000628:
     cmpwi r0, 0x7
     bne lbl_fn_802E683C_00000864
     addi r3, r31, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r31, 0x1088
     addi r29, r1, 0x68
     psq_l f1, 0x0(r4), 0, 0

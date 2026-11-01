@@ -8,7 +8,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void ui_destroyWidget(void);
 extern void fn_8004B290(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
 extern void fn_800588FC(void);
@@ -1803,7 +1803,7 @@ lbl_fn_803F4A4C_00001754:
     beq lbl_fn_803F4A4C_00001778
     addi r3, r30, 0x8
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     mr r3, r30
     bl dtor_80084684
 lbl_fn_803F4A4C_00001778:

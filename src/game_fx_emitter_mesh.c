@@ -42,7 +42,7 @@ extern void fn_8028EF20(void);
 extern void fn_8028F1D0(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void fn_8059B670(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
@@ -315,7 +315,7 @@ lbl_fn_80288E38_00000244:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     subi r0, r3, 0x1
     lwz r3, 0x9c(r29)
     mulli r0, r0, 0x30

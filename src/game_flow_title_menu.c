@@ -37,7 +37,7 @@ extern void fn_805012C8(void);
 extern void fn_80509B50(void);
 extern void fn_8050BA6C(void);
 extern void fn_8050DDE0(void);
-extern void fn_8050E098(void);
+extern void net_p2p_readPayload(void);
 extern void rand(void);
 extern void net_getSocket(void);
 extern void fn_806A8E70(void);
@@ -405,7 +405,7 @@ lbl_fn_804DDD54_0000041C:
     li r5, 0x1047
     li r6, 0x0
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     bl net_getPacketManager
     li r4, -0x1
     li r5, 0x1

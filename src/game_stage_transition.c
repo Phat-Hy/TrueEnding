@@ -23,7 +23,7 @@ extern void clip_calculateFrustum(void);
 extern void fn_8012476C(void);
 extern void npc_updateTalkInteraction(void);
 extern void inventory_unequipItem(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void fn_80164DCC(void);
 extern void debuff_clearStatus(void);
 extern void actor_getMovementFlags(void);
@@ -139,7 +139,7 @@ lbl_fn_8019A580_00000078:
     extrwi. r0, r0, 1, 25
     beq lbl_fn_8019A580_00000090
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_8019A580_00000090:
     lwz r3, 0x4(r31)
     li r0, 0x1
@@ -1081,7 +1081,7 @@ lbl_fn_8019B29C_00000DDC:
     extrwi. r0, r0, 1, 25
     beq lbl_fn_8019B29C_00000DF4
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_8019B29C_00000DF4:
     lwz r6, 0x4(r30)
     addi r3, r30, 0x10

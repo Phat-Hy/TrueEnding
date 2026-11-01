@@ -39,7 +39,7 @@ extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void inventory_unequipItem(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void fn_80158BB4(void);
 extern void fn_80164DCC(void);
 extern void fn_8016C1E0(void);
@@ -864,7 +864,7 @@ lbl_fn_802F1240_00000950:
     beq lbl_fn_802F1240_00000968
     mr r3, r31
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_802F1240_00000968:
     lwz r0, 0x139c(r31)
     cmpwi r0, 0x0

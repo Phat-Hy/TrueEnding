@@ -17,7 +17,7 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
 extern void fn_8011BF3C(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_8013A258(void);
 extern void quest_ctorRewardItem(void);
 extern void dialog_renderWindow(void);
@@ -1126,7 +1126,7 @@ lbl_fn_80461838_00000E54:
     cmpwi r4, 0x7
     bne lbl_fn_80461838_00001084
     addi r3, r3, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r31, 0x1088
     addi r29, r1, 0x134
     psq_l f1, 0x0(r4), 0, 0

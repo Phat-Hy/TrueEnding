@@ -54,7 +54,7 @@ extern void fn_80129978(void);
 extern void fn_80129A48(void);
 extern void fn_8012D180(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80139550(void);
+extern void npc_updateDialogueTarget(void);
 extern void fn_80139F3C(void);
 extern void npc_getPosition(void);
 extern void fn_8013C480(void);
@@ -1602,7 +1602,7 @@ asm void fn_80339760(void)
     beq lbl_fn_80339760_00001514
     li r4, 0x0
     addi r3, r3, 0xb0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80885250
     fcmpo cr0, f1, f0
     bge lbl_fn_80339760_000013E0
@@ -1646,7 +1646,7 @@ lbl_fn_80339760_0000143C:
     bl fn_8016E4C4
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80885258
     fcmpo cr0, f1, f0
     cror eq, gt, eq
@@ -1676,7 +1676,7 @@ lbl_fn_80339760_000014BC:
     fmr f31, f1
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fcmpo cr0, f1, f31
     cror eq, gt, eq
     bne lbl_fn_80339760_00001500

@@ -58,7 +58,7 @@ extern void fn_800F80B8(void);
 extern void fn_80116E64(void);
 extern void equip_getGlobalManager(void);
 extern void fn_8012A190(void);
-extern void fn_80139550(void);
+extern void npc_updateDialogueTarget(void);
 extern void fn_80139F3C(void);
 extern void fn_8013A13C(void);
 extern void npc_getPosition(void);
@@ -2156,7 +2156,7 @@ lbl_fn_8041766C_00001B3C:
     fmr f28, f1
     mr r3, r26
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fcmpo cr0, f1, f28
     cror eq, gt, eq
     bne lbl_fn_8041766C_00001C3C

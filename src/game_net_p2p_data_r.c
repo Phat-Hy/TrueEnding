@@ -12,7 +12,7 @@ extern void str_assignBuffer(void);
 extern void dungeon_initGlobalContext(void);
 extern void town_synchronizedDispatch(void);
 extern void fn_800A5218(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void fn_800DC500(void);
 extern void wcs_vformat(void);
 extern void net_getPacketManager(void);
@@ -71,7 +71,7 @@ void fn_8050DDE0(void);
 void fn_8050DE38(void);
 void fn_8050DE60(void);
 void fn_8050DEAC(void);
-void fn_8050E098(void);
+void net_p2p_readPayload(void);
 void fn_8050E414(void);
 void fn_8050E514(void);
 void fn_8050E534(void);
@@ -514,7 +514,7 @@ lbl_fn_8050DEAC_00000504:
     blr
 }
 
-asm void fn_8050E098(void)
+asm void net_p2p_readPayload(void)
 {
     nofralloc
     stwu r1, -0x60(r1)
@@ -539,30 +539,30 @@ asm void fn_8050E098(void)
     bctrl
     cmpwi r3, 0x0
     mr r20, r3
-    bne lbl_fn_8050E098_00000584
+    bne lbl_net_p2p_readPayload_00000584
     li r3, 0x0
-    b lbl_fn_8050E098_00000888
-lbl_fn_8050E098_00000584:
+    b lbl_net_p2p_readPayload_00000888
+lbl_net_p2p_readPayload_00000584:
     lwz r22, 0xc(r15)
     addi r14, r15, 0x8
-    b lbl_fn_8050E098_0000087C
-lbl_fn_8050E098_00000590:
+    b lbl_net_p2p_readPayload_0000087C
+lbl_net_p2p_readPayload_00000590:
     lbz r0, 0x20(r22)
     cmplwi r0, 0x1
-    bne lbl_fn_8050E098_00000878
+    bne lbl_net_p2p_readPayload_00000878
     cmpwi r16, -0x1
-    beq lbl_fn_8050E098_000005B0
+    beq lbl_net_p2p_readPayload_000005B0
     lwz r0, 0x24(r22)
     cmplw r16, r0
-    bne lbl_fn_8050E098_00000878
-lbl_fn_8050E098_000005B0:
+    bne lbl_net_p2p_readPayload_00000878
+lbl_net_p2p_readPayload_000005B0:
     cmpwi r18, 0x0
-    bne lbl_fn_8050E098_000005C0
+    bne lbl_net_p2p_readPayload_000005C0
     addi r29, r22, 0x40
-    b lbl_fn_8050E098_000005C4
-lbl_fn_8050E098_000005C0:
+    b lbl_net_p2p_readPayload_000005C4
+lbl_net_p2p_readPayload_000005C0:
     addi r29, r22, 0x4c0
-lbl_fn_8050E098_000005C4:
+lbl_net_p2p_readPayload_000005C4:
     lwz r12, 0x0(r20)
     mr r3, r20
     lwz r12, 0x8(r12)
@@ -576,14 +576,14 @@ lbl_fn_8050E098_000005C4:
     sthx r0, r4, r3
     lwz r19, 0x4(r29)
     cmpwi r19, 0x0
-    beq lbl_fn_8050E098_0000077C
+    beq lbl_net_p2p_readPayload_0000077C
     lwz r12, 0x0(r20)
     mr r3, r20
     lwz r12, 0x18(r12)
     mtctr r12
     bctrl
     cmplwi r3, 0x1
-    bne lbl_fn_8050E098_0000077C
+    bne lbl_net_p2p_readPayload_0000077C
     lwz r12, 0x0(r20)
     mr r3, r20
     lwz r28, 0x4(r29)
@@ -594,11 +594,11 @@ lbl_fn_8050E098_000005C4:
     stw r31, 0x8(r1)
     clrlwi r23, r3, 24
     li r24, 0x0
-lbl_fn_8050E098_00000640:
+lbl_net_p2p_readPayload_00000640:
     lwz r21, 0x8(r1)
     subf r0, r31, r21
     cmpw r0, r28
-    bge lbl_fn_8050E098_00000754
+    bge lbl_net_p2p_readPayload_00000754
     bl net_getPacketManager
     lwz r4, 0x8(r1)
     mr r26, r3
@@ -610,18 +610,18 @@ lbl_fn_8050E098_00000640:
     bctrl
     cmpwi r3, 0x0
     mr r27, r3
-    bne lbl_fn_8050E098_0000069C
+    bne lbl_net_p2p_readPayload_0000069C
     lwz r12, 0x0(r26)
     mr r3, r26
     lwz r12, 0xc(r12)
     mtctr r12
     bctrl
     mr r25, r3
-    b lbl_fn_8050E098_000006FC
-lbl_fn_8050E098_0000069C:
+    b lbl_net_p2p_readPayload_000006FC
+lbl_net_p2p_readPayload_0000069C:
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
-    bne lbl_fn_8050E098_000006CC
+    bne lbl_net_p2p_readPayload_000006CC
     bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
@@ -631,7 +631,7 @@ lbl_fn_8050E098_0000069C:
     li r9, 0x0
     bl town_synchronizedDispatch
     stw r3, lbl_8087F600
-lbl_fn_8050E098_000006CC:
+lbl_net_p2p_readPayload_000006CC:
     lwz r5, 0x8(r1)
     mr r3, r27
     addi r6, r1, 0x8
@@ -644,7 +644,7 @@ lbl_fn_8050E098_000006CC:
     lwz r12, 0x14(r12)
     mtctr r12
     bctrl
-lbl_fn_8050E098_000006FC:
+lbl_net_p2p_readPayload_000006FC:
     bl net_getPacketManager
     lwz r12, 0x0(r3)
     lwz r12, 0xc(r12)
@@ -653,9 +653,9 @@ lbl_fn_8050E098_000006FC:
     clrlwi r3, r3, 24
     clrlwi r0, r25, 24
     cmplw r0, r3
-    beq lbl_fn_8050E098_00000754
+    beq lbl_net_p2p_readPayload_00000754
     cmpw r0, r23
-    bne lbl_fn_8050E098_00000640
+    bne lbl_net_p2p_readPayload_00000640
     lwz r12, 0x0(r20)
     mr r3, r20
     mr r4, r21
@@ -664,23 +664,23 @@ lbl_fn_8050E098_000006FC:
     mtctr r12
     bctrl
     cmplwi r3, 0x1
-    bne lbl_fn_8050E098_00000640
+    bne lbl_net_p2p_readPayload_00000640
     li r24, 0x1
     stw r21, 0x8(r1)
-lbl_fn_8050E098_00000754:
+lbl_net_p2p_readPayload_00000754:
     cmpwi r24, 0x0
-    bne lbl_fn_8050E098_00000764
+    bne lbl_net_p2p_readPayload_00000764
     li r23, -0x1
-    b lbl_fn_8050E098_00000770
-lbl_fn_8050E098_00000764:
+    b lbl_net_p2p_readPayload_00000770
+lbl_net_p2p_readPayload_00000764:
     lwz r0, 0x8(r1)
     addi r3, r29, 0x20
     subf r23, r3, r0
-lbl_fn_8050E098_00000770:
+lbl_net_p2p_readPayload_00000770:
     cmpwi r23, -0x1
-    beq lbl_fn_8050E098_0000077C
+    beq lbl_net_p2p_readPayload_0000077C
     mr r19, r23
-lbl_fn_8050E098_0000077C:
+lbl_net_p2p_readPayload_0000077C:
     lwz r12, 0x0(r20)
     mr r3, r20
     lwz r12, 0xc(r12)
@@ -700,17 +700,17 @@ lbl_fn_8050E098_0000077C:
     mr r21, r3
     addi r0, r4, 0x5
     cmpwi r0, 0x3df
-    blt lbl_fn_8050E098_000007EC
+    blt lbl_net_p2p_readPayload_000007EC
     lwz r19, 0x24(r22)
-lbl_fn_8050E098_000007D0:
+lbl_net_p2p_readPayload_000007D0:
     mr r3, r15
     mr r4, r18
     mr r5, r19
     bl fn_8050DC5C
     cmpwi r3, 0x0
-    bne lbl_fn_8050E098_000007D0
+    bne lbl_net_p2p_readPayload_000007D0
     li r19, 0x0
-lbl_fn_8050E098_000007EC:
+lbl_net_p2p_readPayload_000007EC:
     lwz r12, 0x0(r20)
     add r4, r29, r19
     mr r3, r20
@@ -734,7 +734,7 @@ lbl_fn_8050E098_000007EC:
     mtctr r12
     bctrl
     cmpwi r23, -0x1
-    bne lbl_fn_8050E098_00000878
+    bne lbl_net_p2p_readPayload_00000878
     lwz r0, 0x4(r29)
     mr r3, r15
     add r4, r21, r0
@@ -746,13 +746,13 @@ lbl_fn_8050E098_000007EC:
     bctrl
     add r4, r19, r21
     stb r3, 0x4(r4)
-lbl_fn_8050E098_00000878:
+lbl_net_p2p_readPayload_00000878:
     lwz r22, 0x4(r22)
-lbl_fn_8050E098_0000087C:
+lbl_net_p2p_readPayload_0000087C:
     cmplw r22, r14
-    bne lbl_fn_8050E098_00000590
+    bne lbl_net_p2p_readPayload_00000590
     li r3, 0x1
-lbl_fn_8050E098_00000888:
+lbl_net_p2p_readPayload_00000888:
     lmw r14, 0x18(r1)
     lwz r0, 0x64(r1)
     mtlr r0
@@ -1234,7 +1234,7 @@ lbl_fn_8050E998_00000E64:
     mr r27, r3
     mr r3, r28
     mr r4, r27
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lbz r3, 0xc(r1)
     slwi r0, r27, 1
     stb r3, 0x8(r1)
@@ -1720,7 +1720,7 @@ lbl_fn_8050EFD0_000014EC:
     mr r29, r3
     mr r3, r31
     mr r4, r29
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lbz r3, 0x8(r1)
     slwi r0, r29, 1
     stb r3, 0xc(r1)
@@ -1818,7 +1818,7 @@ asm void fn_8050F19C(void)
     mr r29, r3
     mr r3, r30
     mr r4, r29
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lbz r3, 0x14(r1)
     slwi r0, r29, 1
     stb r3, 0x10(r1)
@@ -2084,7 +2084,7 @@ lbl_fn_8050F474_000019CC:
     mr r30, r3
     mr r3, r27
     mr r4, r30
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     addi r6, r1, 0x10
     lbz r3, 0xc(r1)
     stb r3, 0x8(r1)

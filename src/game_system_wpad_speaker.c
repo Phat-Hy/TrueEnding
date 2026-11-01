@@ -37,7 +37,7 @@ extern void fn_80389838(void);
 extern void fn_8038F52C(void);
 extern void fn_8039328C(void);
 extern void fn_803C0F48(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void fn_803D2A6C(void);
 extern void fn_803D83A8(void);
 extern void fn_803DAB4C(void);
@@ -1556,7 +1556,7 @@ lbl_world_Manager_postUpdate_00001414:
     stfs f4, 0x2c(r1)
     stfs f0, 0x28(r1)
     lwz r3, 0x10d8(r27)
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     cmpwi r3, 0x0
     beq lbl_world_Manager_postUpdate_000015BC
     subi r0, r3, 0x1

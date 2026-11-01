@@ -30,12 +30,12 @@ extern void system_getNextSequenceId(void);
 extern void fn_801162A0(void);
 extern void skill_findNodeById(void);
 extern void fn_801255C8(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_80128930(void);
 extern void fn_8012F440(void);
 extern void fn_8013310C(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80139550(void);
+extern void npc_updateDialogueTarget(void);
 extern void fn_80139F58(void);
 extern void fn_8013A194(void);
 extern void npc_getPosition(void);
@@ -2090,7 +2090,7 @@ lbl_fn_8030F564_00001B4C:
     cmpwi r0, 0x1
     bne lbl_fn_8030F564_00001BF0
     addi r3, r30, 0xc64
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r3, r30, 0xc64
     bl fn_80139F58
     mr r4, r3
@@ -2146,7 +2146,7 @@ lbl_fn_8030F564_00001C08:
     stw r0, 0x14cc(r30)
     b lbl_fn_8030F564_00002180
     addi r3, r30, 0xc64
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r3, r30, 0xc64
     bl fn_80139F58
     mr r4, r3
@@ -2181,7 +2181,7 @@ lbl_fn_8030F564_00001C78:
     beq lbl_fn_8030F564_00001DFC
     addi r3, r30, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lwz r4, 0x58c(r30)
     fmr f29, f1
     lwz r3, 0xd1c(r30)
@@ -2264,7 +2264,7 @@ lbl_fn_8030F564_00001DC4:
     fmr f29, f1
     addi r3, r30, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fcmpo cr0, f1, f29
     cror eq, gt, eq
     bne lbl_fn_8030F564_00002180
@@ -2279,7 +2279,7 @@ lbl_fn_8030F564_00001DFC:
     b lbl_fn_8030F564_00002180
     addi r3, r30, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lwz r4, 0x58c(r30)
     fmr f29, f1
     addi r3, r1, 0xe0
@@ -2441,7 +2441,7 @@ lbl_fn_8030F564_00002054:
     fmr f29, f1
     addi r3, r30, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fcmpo cr0, f1, f29
     cror eq, gt, eq
     bne lbl_fn_8030F564_00002180
@@ -2451,7 +2451,7 @@ lbl_fn_8030F564_00002054:
     b lbl_fn_8030F564_00002180
     addi r3, r30, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lwz r0, 0x14bc(r30)
     fmr f29, f1
     cmpwi r0, 0x0

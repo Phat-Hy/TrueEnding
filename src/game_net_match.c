@@ -10,7 +10,7 @@ extern void fn_8006144C(void);
 extern void str_assignBuffer(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void fn_801EC158(void);
 extern void fn_801EC6C0(void);
 extern void net_player_interpolateState(void);
@@ -1585,7 +1585,7 @@ lbl_fn_801F0758_00001464:
     stw r0, 0x8(r3)
     mr r3, r30
     lwz r4, 0x8(r31)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lbz r0, 0x2c(r1)
     mr r3, r30
     stb r0, 0x28(r1)
@@ -1635,7 +1635,7 @@ lbl_fn_801F0758_00001518:
     stw r0, 0x8(r3)
     mr r3, r30
     lwz r4, 0x8(r31)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lbz r0, 0x24(r1)
     mr r3, r30
     stb r0, 0x20(r1)
@@ -1764,7 +1764,7 @@ lbl_fn_801F0758_000016E0:
     stw r0, 0x4(r30)
     stw r0, 0x8(r30)
     lwz r4, 0x34(r1)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x34(r1)
     mr r3, r30
     lbz r4, 0xc(r1)

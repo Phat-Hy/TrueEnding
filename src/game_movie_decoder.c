@@ -9,7 +9,7 @@ extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_8013A258(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_evaluateConditions(void);
@@ -290,7 +290,7 @@ asm void fn_8033C000(void)
     cmpwi r0, 0x7
     bne lbl_fn_8033C000_00000580
     addi r3, r3, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r3, r29, 0x1088
     lfs f0, lbl_80885290
     psq_l f1, 0x0(r3), 0, 0

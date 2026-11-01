@@ -13,7 +13,7 @@ extern void clip_calculateFrustum(void);
 extern void fn_80105BD8(void);
 extern void fn_80108C10(void);
 extern void fn_80109828(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_8012DF7C(void);
 extern void fn_8013A258(void);
 extern void npc_updateTalkInteraction(void);
@@ -213,7 +213,7 @@ asm void fn_802C9880(void)
     cmpwi r0, 0x7
     bne lbl_fn_802C9880_00000440
     addi r3, r3, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r3, r29, 0x1088
     lfs f2, 0x1090(r29)
     psq_l f1, 0x0(r3), 0, 0

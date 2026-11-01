@@ -27,7 +27,7 @@ extern void fn_8050C12C(void);
 extern void fn_8050C16C(void);
 extern void fn_8050C7F4(void);
 extern void fn_8050DDE0(void);
-extern void fn_8050E098(void);
+extern void net_p2p_readPayload(void);
 extern void fn_80624D40(void);
 extern void fn_80698828(void);
 extern void net_getSocket(void);
@@ -270,7 +270,7 @@ lbl_fn_804FA94C_0000022C:
     clrlwi r4, r31, 24
     li r5, 0x1039
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     cmplwi r29, 0x1
     bne lbl_fn_804FA94C_00000294
     lwz r4, lbl_8087F628
@@ -344,7 +344,7 @@ lbl_fn_804FAA80_00000310:
     li r4, -0x1
     li r5, 0x1008
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     cmplwi r29, 0x1
     bne lbl_fn_804FAA80_0000035C
     bl net_getPacketManager
@@ -481,7 +481,7 @@ lbl_fn_804FAB44_00000500:
     clrlwi r4, r29, 24
     li r5, 0x1036
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     cmplwi r30, 0x1
     bne lbl_fn_804FAB44_00000568
     lwz r4, lbl_8087F628

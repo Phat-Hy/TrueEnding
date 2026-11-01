@@ -44,7 +44,7 @@ extern void GXCopyTex(void);
 extern void fn_80615B60(void);
 extern void fn_80615C40(void);
 extern void GXInitLightDistAttn(void);
-extern void fn_80615D50(void);
+extern void GXInitLightSpot(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
 extern void GXDrawDone(void);
@@ -162,7 +162,7 @@ asm void fn_800B0CD4(void)
     li r7, 0x0
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x1
     bl GXClearVtxDesc
     li r3, 0x0
@@ -490,7 +490,7 @@ lbl_fn_800B105C_000003C0:
     li r7, 0x1
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x1
     bl fn_80617200
     li r3, 0x4
@@ -500,7 +500,7 @@ lbl_fn_800B105C_000003C0:
     li r7, 0x0
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x2
     bl GXClearVtxDesc
     li r3, 0x0
@@ -1267,7 +1267,7 @@ asm void fn_800B1C44(void)
     li r7, 0x1
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     lfs f10, lbl_80880EF4
     addi r4, r1, 0x1c
     lfs f0, 0x20(r31)

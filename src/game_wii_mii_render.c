@@ -12,7 +12,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_80097E80(void);
 extern void fn_800F29D0(void);
 extern void fn_8011BF3C(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_80127D8C(void);
 extern void fn_8016F4D8(void);
 extern void fn_8016F530(void);
@@ -83,7 +83,7 @@ asm void fn_805693D0(void)
     mr r28, r4
     mr r29, r5
     mr r3, r30
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     lwz r0, 0x2c(r30)
     cmpwi r0, 0x0
     beq lbl_fn_805693D0_00000054
@@ -955,7 +955,7 @@ asm void fn_8056A040(void)
     cmpwi r0, 0x0
     bne lbl_fn_8056A040_00000F1C
     mr r3, r27
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     lwz r3, 0x4(r27)
     lwz r0, 0x8(r27)
     cmpw r3, r0

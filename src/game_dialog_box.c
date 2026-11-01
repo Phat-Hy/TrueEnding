@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_24(void);
 extern void _savegpr_24(void);
-extern void fn_80044E0C(void);
+extern void menu_renderLayout(void);
 extern void fn_80050A1C(void);
 extern void skill_calcTrajectory(void);
 extern void fn_80063D3C(void);
@@ -1314,13 +1314,13 @@ lbl_dialog_renderWindow_00001118:
     cmpwi r3, 0x0
     beq lbl_dialog_renderWindow_0000112C
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_dialog_renderWindow_0000112C:
     lwz r3, 0x64c(r24)
     cmpwi r3, 0x0
     beq lbl_dialog_renderWindow_00001140
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_dialog_renderWindow_00001140:
     lwz r0, 0x1208(r24)
     cntlzw r0, r0

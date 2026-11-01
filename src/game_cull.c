@@ -34,7 +34,7 @@ extern void fn_800D82BC(void);
 extern void fn_800D8448(void);
 extern void fn_800D8458(void);
 extern void fn_800D8568(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void fn_800DC3C8(void);
 extern void fn_80478198(void);
 extern void fn_806163C0(void);
@@ -1866,7 +1866,7 @@ lbl_fn_800D9960_000016CC:
     mr r15, r3
     addi r3, r1, 0x74
     mr r4, r15
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x2a0(r1)
     slwi r4, r15, 1
     stb r0, 0x20(r1)
@@ -1918,7 +1918,7 @@ lbl_fn_800D9960_00001774:
     mr r15, r3
     addi r3, r1, 0x68
     mr r4, r15
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r6, 0x29c(r1)
     slwi r4, r15, 1
     lwz r0, 0x2a8(r1)
@@ -1968,7 +1968,7 @@ lbl_fn_800D9960_00001810:
     mr r16, r3
     addi r3, r1, 0x4c
     mr r4, r16
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     slwi r0, r16, 1
     stb r29, 0x10(r1)
     mr r6, r25

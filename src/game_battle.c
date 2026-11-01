@@ -66,7 +66,7 @@ extern void fn_802180A8(void);
 extern void task_findEntryById(void);
 extern void fn_8021A984(void);
 extern void world_getGlobalFlag(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void fn_803CD958(void);
 extern void fn_80599C94(void);
 extern void fn_80599D64(void);
@@ -292,7 +292,7 @@ lbl_fn_80017128_00000194:
     mr r7, r25
     addi r4, r27, 0x528
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     stw r3, 0xc(r30)
 lbl_fn_80017128_000001D0:
     bl fn_8001C260
@@ -769,7 +769,7 @@ lbl_fn_8001794C_000008A0:
     mr r7, r25
     addi r4, r28, 0x528
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     stw r3, 0xc(r29)
 lbl_fn_8001794C_000008DC:
     bl fn_8001C260
@@ -2202,7 +2202,7 @@ asm void fn_80018D5C(void)
     mr r8, r10
     li r6, 0x0
     li r7, 0x0
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     subi r0, r3, 0x1
     mr r31, r3
     mulli r0, r0, 0x30
@@ -2552,7 +2552,7 @@ asm void fn_80019254(void)
     li r6, 0x0
     li r7, 0x0
     li r8, 0x0
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     mr r20, r3
 lbl_fn_80019254_000021D0:
     subi r0, r20, 0x1

@@ -7,7 +7,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80041C0C(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
@@ -2069,8 +2069,8 @@ asm void atn_LoadScene_constructor(void)
     lwz r3, 0x6c(r3)
     cmpwi r3, 0x0
     beq lbl_atn_LoadScene_constructor_000019C4
-    lis r4, fn_8004B338@ha
-    addi r4, r4, fn_8004B338@l
+    lis r4, sound_releaseChannel@ha
+    addi r4, r4, sound_releaseChannel@l
     bl __destroy_arr
 lbl_atn_LoadScene_constructor_000019C4:
     li r0, 0x0

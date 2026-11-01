@@ -19,7 +19,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8004B290(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void fn_80071088(void);
 extern void fn_80079994(void);
@@ -66,7 +66,7 @@ extern void fn_80615AE0(void);
 extern void fn_80615B60(void);
 extern void fn_80615C40(void);
 extern void GXInitLightDistAttn(void);
-extern void fn_80615D50(void);
+extern void GXInitLightSpot(void);
 extern void fn_806165B0(void);
 extern void GXDrawDone(void);
 extern void fn_80616800(void);
@@ -611,7 +611,7 @@ asm void gx_drawScreenQuad(void)
     li r7, 0x0
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     stw r30, 0x18(r1)
     addi r4, r1, 0x18
     li r3, 0x4
@@ -628,7 +628,7 @@ asm void gx_drawScreenQuad(void)
     li r7, 0x0
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     stw r30, 0x10(r1)
     addi r4, r1, 0x10
     li r3, 0x5
@@ -1932,7 +1932,7 @@ lbl_fn_80073194_00001860:
     psq_st f4, 0x18(r5), 0, 0
     psq_st f5, 0x20(r5), 0, 0
     psq_st f6, 0x28(r5), 0, 0
-    bl fn_8004B338
+    bl sound_releaseChannel
 lbl_fn_80073194_000019B8:
     mr r4, r28
     addi r3, r1, 0x2e0

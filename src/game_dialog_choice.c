@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void __register_global_object(void);
 extern void ui_destroyWidget(void);
-extern void fn_80044E0C(void);
+extern void menu_renderLayout(void);
 extern void fn_800457A4(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_getLayerTrack(void);
@@ -111,13 +111,13 @@ lbl_dialog_selectChoice_000000B8:
     cmpwi r3, 0x0
     beq lbl_dialog_selectChoice_000000CC
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_dialog_selectChoice_000000CC:
     lwz r3, 0x64c(r30)
     cmpwi r3, 0x0
     beq lbl_dialog_selectChoice_000000E0
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_dialog_selectChoice_000000E0:
     slwi r0, r28, 2
     stw r28, 0x674(r30)
@@ -1142,13 +1142,13 @@ asm void fn_8014EEC4(void)
     beq lbl_fn_8014EEC4_00001014
     mr r3, r0
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8014EEC4_00001014:
     lwz r3, 0x64c(r30)
     cmpwi r3, 0x0
     beq lbl_fn_8014EEC4_00001028
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8014EEC4_00001028:
     cmpwi r31, 0x0
     li r0, 0x0

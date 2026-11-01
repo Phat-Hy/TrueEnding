@@ -27,7 +27,7 @@ extern void fn_8011F91C(void);
 extern void equip_getGlobalManager(void);
 extern void fn_8013322C(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80139550(void);
+extern void npc_updateDialogueTarget(void);
 extern void npc_getPosition(void);
 extern void fn_8013C480(void);
 extern void fn_8013C504(void);
@@ -978,7 +978,7 @@ asm void fn_80346384(void)
     beq lbl_fn_80346384_00000BDC
     li r4, 0x0
     addi r3, r3, 0xb0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80885390
     fcmpo cr0, f1, f0
     cror eq, gt, eq
@@ -992,7 +992,7 @@ asm void fn_80346384(void)
     fmr f31, f1
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fcmpo cr0, f1, f31
     cror eq, gt, eq
     bne lbl_fn_80346384_00000BC8

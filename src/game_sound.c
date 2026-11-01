@@ -240,7 +240,7 @@ void fn_8004B158(void);
 void fn_8004B1EC(void);
 void fn_8004B20C(void);
 void fn_8004B290(void);
-void fn_8004B338(void);
+void sound_releaseChannel(void);
 
 void fn_800461FC(void)
 {
@@ -6322,7 +6322,7 @@ asm void fn_8004B290(void)
     blr
 }
 
-asm void fn_8004B338(void)
+asm void sound_releaseChannel(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -6331,11 +6331,11 @@ asm void fn_8004B338(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    beq lbl_fn_8004B338_00005164
+    beq lbl_sound_releaseChannel_00005164
     cmpwi r4, 0x0
-    ble lbl_fn_8004B338_00005164
+    ble lbl_sound_releaseChannel_00005164
     bl dtor_80084684
-lbl_fn_8004B338_00005164:
+lbl_sound_releaseChannel_00005164:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)

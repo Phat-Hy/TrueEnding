@@ -12,7 +12,7 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void ui_destroyWidget(void);
 extern void fn_8004B290(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void atn_ColliBase_destructor(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
@@ -785,7 +785,7 @@ lbl_boss_updatePhaseState_00000878:
     beq lbl_boss_updatePhaseState_0000089C
     addi r3, r27, 0x8
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     mr r3, r27
     bl dtor_80084684
 lbl_boss_updatePhaseState_0000089C:
