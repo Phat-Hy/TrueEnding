@@ -33,8 +33,8 @@ extern void fn_800D87C4(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
 extern void fn_800DC6B4(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_80473EFC(void);
 extern void fn_80473F88(void);
 extern void fn_80682428(void);
@@ -840,7 +840,7 @@ asm void fn_80089C28(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lfs f0, lbl_80880BF8
     lis r4, lbl_8078FE00@ha
     li r0, 0x0
@@ -880,7 +880,7 @@ asm void fn_80089C8C(void)
     mr r30, r3
     beq lbl_fn_80089C8C_0000094C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
     cmpwi r31, 0x0
     ble lbl_fn_80089C8C_0000094C
     mr r3, r30
@@ -923,7 +923,7 @@ lbl_fn_80089CE4_000009B4:
     beq lbl_fn_80089CE4_000009C8
     mr r3, r30
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80089CE4_000009C8:
     cmpwi r31, 0x0
     ble lbl_fn_80089CE4_000009D8
@@ -1515,7 +1515,7 @@ asm void fn_8008A4E0(void)
     stw r31, 0xf4(r3)
     stw r31, 0xf8(r3)
     mr r3, r30
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r3, lbl_8078FDA8@ha
     lis r4, fn_80089C7C@ha
     addi r3, r3, lbl_8078FDA8@l
@@ -1555,7 +1555,7 @@ asm void fn_8008A4E0(void)
     bl fn_806958E0
     addi r30, r29, 0x1c4
     mr r3, r30
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lwz r3, 0x20c(r29)
     li r0, -0x1
     li r4, 0x1
@@ -1617,7 +1617,7 @@ asm void fn_8008A714(void)
     mr r30, r3
     beq lbl_fn_8008A714_000013D4
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
     cmpwi r31, 0x0
     ble lbl_fn_8008A714_000013D4
     mr r3, r30
@@ -1694,7 +1694,7 @@ lbl_fn_8008A76C_000014B8:
     beq lbl_fn_8008A76C_000014CC
     mr r3, r29
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_8008A76C_000014CC:
     lis r4, fn_80089CE4@ha
     addi r3, r30, 0x164
@@ -1771,7 +1771,7 @@ lbl_fn_8008A76C_000015C4:
     addic. r3, r30, 0xfc
     beq lbl_fn_8008A76C_000015D4
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_8008A76C_000015D4:
     addic. r0, r30, 0xf4
     beq lbl_fn_8008A76C_000015F8

@@ -33,8 +33,8 @@ extern void fn_800BDB58(void);
 extern void fn_800C0A50(void);
 extern void fn_800C122C(void);
 extern void fn_800DC6B4(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_80473F50(void);
 extern void fn_80473F88(void);
 extern void fn_80475DF8(void);
@@ -1751,7 +1751,7 @@ lbl_fn_8009F788_00001710:
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8009F788_00001874
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r3, lbl_8078FBB0@ha
     li r24, 0x0
     addi r3, r3, lbl_8078FBB0@l
@@ -2142,7 +2142,7 @@ lbl_fn_8009FE24_00001CB0:
     beq lbl_fn_8009FE24_00001CEC
     mr r3, r24
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_8009FE24_00001CEC:
     mr r3, r24
     bl dtor_80084684

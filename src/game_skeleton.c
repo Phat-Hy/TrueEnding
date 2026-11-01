@@ -21,8 +21,8 @@ extern void fn_800D5908(void);
 extern void fn_800D59B8(void);
 extern void fn_800DCA6C(void);
 extern void atn_Curve_evaluate(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_80473EFC(void);
 extern void fn_80473F50(void);
 extern void fn_80477FA4(void);
@@ -98,7 +98,7 @@ void fn_800C1814(void);
 void fn_800C18BC(void);
 void fn_800C1990(void);
 void fn_800C1A1C(void);
-void fn_800C1F5C(void);
+void atn_LH_Scene_destructor(void);
 void fn_800C1FB4(void);
 void fn_800C2108(void);
 void fn_800C2274(void);
@@ -733,7 +733,7 @@ asm void fn_800C1A1C(void)
     stw r29, 0x114(r1)
     stw r28, 0x110(r1)
     mr r28, r3
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lfs f0, lbl_808810D0
     lis r3, lbl_8078FF60@ha
     li r30, 0x0
@@ -1049,7 +1049,7 @@ asm void fn_800C1A1C(void)
     blr
 }
 
-asm void fn_800C1F5C(void)
+asm void atn_LH_Scene_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1060,14 +1060,14 @@ asm void fn_800C1F5C(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_800C1F5C_00000D6C
+    beq lbl_atn_LH_Scene_destructor_00000D6C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
     cmpwi r31, 0x0
-    ble lbl_fn_800C1F5C_00000D6C
+    ble lbl_atn_LH_Scene_destructor_00000D6C
     mr r3, r30
     bl dtor_80084684
-lbl_fn_800C1F5C_00000D6C:
+lbl_atn_LH_Scene_destructor_00000D6C:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1162,7 +1162,7 @@ lbl_fn_800C1FB4_00000EA0:
     beq lbl_fn_800C1FB4_00000EB4
     mr r3, r27
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800C1FB4_00000EB4:
     cmpwi r28, 0x0
     ble lbl_fn_800C1FB4_00000EC4

@@ -97,7 +97,7 @@ extern void fn_80453E20(void);
 extern void fn_8045817C(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_80473F50(void);
 extern void fn_80682544(void);
 extern void fn_80695A50(void);
@@ -603,7 +603,7 @@ lbl_fn_80452908_000005E0:
     addic. r3, r30, 0x14b0
     beq lbl_fn_80452908_000005F0
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80452908_000005F0:
     mr r3, r30
     li r4, 0x0
@@ -1488,7 +1488,7 @@ lbl_fn_80453570_0000124C:
     addic. r3, r31, 0x4
     beq lbl_fn_80453570_0000126C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80453570_0000126C:
     addic. r31, r29, 0x252c
     beq lbl_fn_80453570_0000128C
@@ -1497,7 +1497,7 @@ lbl_fn_80453570_0000126C:
     addic. r3, r31, 0x4
     beq lbl_fn_80453570_0000128C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80453570_0000128C:
     addic. r4, r29, 0x19a0
     beq lbl_fn_80453570_000012B8
@@ -1521,7 +1521,7 @@ lbl_fn_80453570_000012B8:
     addic. r3, r31, 0x4
     beq lbl_fn_80453570_000012E4
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80453570_000012E4:
     addic. r31, r29, 0x195c
     beq lbl_fn_80453570_00001304
@@ -1530,7 +1530,7 @@ lbl_fn_80453570_000012E4:
     addic. r3, r31, 0x4
     beq lbl_fn_80453570_00001304
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80453570_00001304:
     addic. r31, r29, 0x1950
     beq lbl_fn_80453570_00001324
@@ -1539,7 +1539,7 @@ lbl_fn_80453570_00001304:
     addic. r3, r31, 0x4
     beq lbl_fn_80453570_00001324
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80453570_00001324:
     addic. r31, r29, 0x1940
     beq lbl_fn_80453570_00001344
@@ -1548,7 +1548,7 @@ lbl_fn_80453570_00001324:
     addic. r3, r31, 0x4
     beq lbl_fn_80453570_00001344
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80453570_00001344:
     addic. r31, r29, 0x1934
     beq lbl_fn_80453570_00001364
@@ -1557,7 +1557,7 @@ lbl_fn_80453570_00001344:
     addic. r3, r31, 0x4
     beq lbl_fn_80453570_00001364
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80453570_00001364:
     addic. r31, r29, 0x1928
     beq lbl_fn_80453570_00001384
@@ -1566,7 +1566,7 @@ lbl_fn_80453570_00001364:
     addic. r3, r31, 0x4
     beq lbl_fn_80453570_00001384
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80453570_00001384:
     addi r3, r29, 0x14ec
     li r4, -0x1
@@ -1574,7 +1574,7 @@ lbl_fn_80453570_00001384:
     addic. r3, r29, 0x14b0
     beq lbl_fn_80453570_000013A0
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80453570_000013A0:
     mr r3, r29
     li r4, 0x0

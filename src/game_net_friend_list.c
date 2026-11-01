@@ -62,7 +62,7 @@ extern void fn_80239DAC(void);
 extern void world_setLocalFlag(void);
 extern void fn_8037C8C4(void);
 extern void fn_803E836C(void);
-extern void fn_80473E74(void);
+extern void atn_LoadHandle_constructor(void);
 extern void fn_80490EB8(void);
 extern void fn_804AC430(void);
 extern void fn_804AE820(void);
@@ -1807,21 +1807,21 @@ lbl_fn_804D0328_00001618:
     li r31, 0x0
     stw r31, 0xfc(r27)
     mr r3, r28
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r30, lbl_8078FBB0@ha
     addi r27, r29, 0x2b58
     addi r30, r30, lbl_8078FBB0@l
     stw r30, 0x0(r28)
     mr r3, r27
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     addi r28, r29, 0x2b60
     stw r30, 0x0(r27)
     mr r3, r28
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     addi r27, r29, 0x2b68
     stw r30, 0x0(r28)
     mr r3, r27
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     stw r30, 0x0(r27)
     addi r3, r29, 0x2b70
     bl fn_800CB360

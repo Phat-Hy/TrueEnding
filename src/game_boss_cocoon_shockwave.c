@@ -88,8 +88,8 @@ void fn_80473BC0(void);
 void fn_80473C20(void);
 void fn_80473C3C(void);
 void fn_80473C88(void);
-void fn_80473E74(void);
-void fn_80473E8C(void);
+void atn_LoadHandle_constructor(void);
+void atn_LoadHandle_destructor(void);
 void fn_80473EFC(void);
 void fn_80473F18(void);
 void fn_80473F34(void);
@@ -364,7 +364,7 @@ lbl_fn_80473C88_00000330:
     blr
 }
 
-asm void fn_80473E74(void)
+asm void atn_LoadHandle_constructor(void)
 {
     nofralloc
     lis r4, lbl_8078FD70@ha
@@ -375,7 +375,7 @@ asm void fn_80473E74(void)
     blr
 }
 
-asm void fn_80473E8C(void)
+asm void atn_LoadHandle_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -386,21 +386,21 @@ asm void fn_80473E8C(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_80473E8C_000003C0
+    beq lbl_atn_LoadHandle_destructor_000003C0
     lwz r0, 0x4(r3)
     lis r4, lbl_8078FD70@ha
     addi r4, r4, lbl_8078FD70@l
     stw r4, 0x0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80473E8C_000003B0
+    beq lbl_atn_LoadHandle_destructor_000003B0
     mr r3, r0
     bl fn_804730E4
-lbl_fn_80473E8C_000003B0:
+lbl_atn_LoadHandle_destructor_000003B0:
     cmpwi r31, 0x0
-    ble lbl_fn_80473E8C_000003C0
+    ble lbl_atn_LoadHandle_destructor_000003C0
     mr r3, r30
     bl dtor_80084684
-lbl_fn_80473E8C_000003C0:
+lbl_atn_LoadHandle_destructor_000003C0:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

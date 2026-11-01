@@ -76,8 +76,8 @@ extern void world_getGlobalFlag(void);
 extern void world_getLocalFlag(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_80473F50(void);
 extern void fn_80473F88(void);
 extern void fn_805A38F4(void);
@@ -163,7 +163,7 @@ lbl_fn_8035DE10_0000004C:
     addic. r3, r31, 0x4
     beq lbl_fn_8035DE10_0000006C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_8035DE10_0000006C:
     addic. r31, r29, 0x1504
     beq lbl_fn_8035DE10_0000008C
@@ -172,7 +172,7 @@ lbl_fn_8035DE10_0000006C:
     addic. r3, r31, 0x4
     beq lbl_fn_8035DE10_0000008C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_8035DE10_0000008C:
     addic. r31, r29, 0x14f8
     beq lbl_fn_8035DE10_000000AC
@@ -181,12 +181,12 @@ lbl_fn_8035DE10_0000008C:
     addic. r3, r31, 0x4
     beq lbl_fn_8035DE10_000000AC
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_8035DE10_000000AC:
     addic. r3, r29, 0x14b0
     beq lbl_fn_8035DE10_000000BC
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_8035DE10_000000BC:
     mr r3, r29
     li r4, 0x0
@@ -279,7 +279,7 @@ asm void fn_8035DFB8(void)
     addi r3, r3, lbl_80789CB8@l
     stw r3, 0x0(r31)
     mr r3, r30
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r3, lbl_8078FBB0@ha
     li r29, 0x0
     addi r3, r3, lbl_8078FBB0@l
@@ -625,7 +625,7 @@ lbl_fn_8035E314_000006B4:
     addic. r3, r30, 0x48
     beq lbl_fn_8035E314_000006C4
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_8035E314_000006C4:
     mr r3, r30
     li r4, 0x0

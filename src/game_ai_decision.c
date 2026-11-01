@@ -48,8 +48,8 @@ extern void fn_803C1560(void);
 extern void fn_803EA77C(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_80473F50(void);
 extern void fn_805F8E70(void);
 extern void fn_805F93C0(void);
@@ -683,7 +683,7 @@ lbl_fn_80262840_000007E4:
     addic. r3, r31, 0x4
     beq lbl_fn_80262840_00000804
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80262840_00000804:
     addic. r31, r29, 0x152c
     beq lbl_fn_80262840_00000824
@@ -692,7 +692,7 @@ lbl_fn_80262840_00000804:
     addic. r3, r31, 0x4
     beq lbl_fn_80262840_00000824
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80262840_00000824:
     addic. r31, r29, 0x1520
     beq lbl_fn_80262840_00000844
@@ -701,12 +701,12 @@ lbl_fn_80262840_00000824:
     addic. r3, r31, 0x4
     beq lbl_fn_80262840_00000844
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80262840_00000844:
     addic. r3, r29, 0x14b0
     beq lbl_fn_80262840_00000854
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80262840_00000854:
     mr r3, r29
     li r4, 0x0
@@ -742,7 +742,7 @@ asm void fn_80262938(void)
     addi r3, r3, lbl_80784BF8@l
     stw r3, 0x0(r30)
     mr r3, r28
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r3, lbl_8078FBB0@ha
     li r29, 0x0
     addi r3, r3, lbl_8078FBB0@l
@@ -965,12 +965,12 @@ lbl_fn_80262C40_00000BE4:
     addic. r3, r31, 0x4
     beq lbl_fn_80262C40_00000C04
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80262C40_00000C04:
     addic. r3, r29, 0x14b0
     beq lbl_fn_80262C40_00000C14
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80262C40_00000C14:
     mr r3, r29
     li r4, 0x0

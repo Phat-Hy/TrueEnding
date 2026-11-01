@@ -34,8 +34,8 @@ extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_803BB3C0(void);
 extern void fn_804439FC(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_805F89F0(void);
 extern void fn_805F8E70(void);
 extern void fn_805F93C0(void);
@@ -1328,7 +1328,7 @@ asm void fn_80442F68(void)
     subic. r3, r3, 0x2500
     beq lbl_fn_80442F68_00001148
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80442F68_00001148:
     addis r3, r31, 0x1
     lis r4, fn_80119ECC@ha
@@ -1537,7 +1537,7 @@ lbl_fn_80442FF4_00001400:
     cmplw r22, r25
     blt lbl_fn_80442FF4_00001400
     mr r3, r25
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r3, lbl_8078FBB0@ha
     addis r6, r23, 0x1
     li r22, 0x0

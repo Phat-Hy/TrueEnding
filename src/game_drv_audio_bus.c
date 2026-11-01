@@ -22,8 +22,8 @@ extern void atn_Task_destructor(void);
 extern void fn_8011F91C(void);
 extern void fn_8011FC10(void);
 extern void fn_8011FE3C(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_805AE270(void);
 extern void fn_805AE3C8(void);
 extern void fn_805AE458(void);
@@ -154,12 +154,12 @@ asm void fn_805B342C(void)
     addic. r3, r30, 0x78
     beq lbl_fn_805B342C_000000C4
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_805B342C_000000C4:
     addic. r3, r30, 0x70
     beq lbl_fn_805B342C_000000D4
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_805B342C_000000D4:
     addic. r0, r30, 0x64
     beq lbl_fn_805B342C_000000F8
@@ -241,13 +241,13 @@ asm void fn_805B3518(void)
     stw r30, 0x64(r28)
     stw r30, 0x68(r28)
     stw r30, 0x6c(r28)
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r31, lbl_8078FBB0@ha
     addi r27, r28, 0x78
     addi r31, r31, lbl_8078FBB0@l
     stw r31, 0x0(r26)
     mr r3, r27
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r4, fn_8006CA80@ha
     lis r5, fn_80014798@ha
     stw r31, 0x0(r27)

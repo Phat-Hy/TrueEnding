@@ -36,8 +36,8 @@ extern void fn_8023A680(void);
 extern void fn_8023A8B4(void);
 extern void world_getGlobalFlag(void);
 extern void fn_80373148(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_80473F50(void);
 extern void fn_804741C0(void);
 extern void fn_804768B4(void);
@@ -89,7 +89,7 @@ void fn_80120E38(void);
 void fn_80120E48(void);
 void fn_80120F4C(void);
 void fn_80120F5C(void);
-void fn_80120FF0(void);
+void atn_LH_Model_destructor(void);
 void fn_80121048(void);
 void fn_801210B4(void);
 void fn_801210C4(void);
@@ -311,7 +311,7 @@ asm void fn_80120F5C(void)
     stb r0, 0x11(r3)
     stb r0, 0x12(r3)
     mr r3, r30
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r4, lbl_8078FEA0@ha
     lis r3, fn_8011FFF8@ha
     addi r4, r4, lbl_8078FEA0@l
@@ -334,7 +334,7 @@ asm void fn_80120F5C(void)
     blr
 }
 
-asm void fn_80120FF0(void)
+asm void atn_LH_Model_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -345,14 +345,14 @@ asm void fn_80120FF0(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_80120FF0_00000308
+    beq lbl_atn_LH_Model_destructor_00000308
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
     cmpwi r31, 0x0
-    ble lbl_fn_80120FF0_00000308
+    ble lbl_atn_LH_Model_destructor_00000308
     mr r3, r30
     bl dtor_80084684
-lbl_fn_80120FF0_00000308:
+lbl_atn_LH_Model_destructor_00000308:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -380,7 +380,7 @@ asm void fn_80121048(void)
     addic. r3, r30, 0x14
     beq lbl_fn_80121048_00000364
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80121048_00000364:
     cmpwi r31, 0x0
     ble lbl_fn_80121048_00000374

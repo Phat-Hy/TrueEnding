@@ -102,9 +102,9 @@ extern u32 lbl_80886F5C;
 extern u32 lbl_80886F60;
 
 /* Function declarations */
-void fn_8047782C(void);
+void atn_LoadScene_destructor(void);
 void fn_804778DC(void);
-void fn_80477D60(void);
+void atn_LH_Scene_onNotify(void);
 void fn_80477DAC(void);
 void fn_80477DB8(void);
 void fn_80477FA4(void);
@@ -113,15 +113,15 @@ void fn_80477FDC(void);
 void fn_80477FF8(void);
 void fn_80478014(void);
 void fn_80478034(void);
-void fn_80478054(void);
-void fn_804780AC(void);
+void atn_LoadTexture_constructor(void);
+void atn_LoadTexture_destructor(void);
 void fn_80478158(void);
 void fn_80478198(void);
-void fn_804781B8(void);
+void atn_LH_Texture_onNotify(void);
 void fn_80478204(void);
-void fn_804783DC(void);
-void fn_8047845C(void);
-void fn_804784CC(void);
+void atn_LoadXsca_constructor(void);
+void atn_LoadXsca_destructor(void);
+void atn_LH_Xsca_onNotify(void);
 void fn_80478518(void);
 void fn_804786F8(void);
 void fn_80478714(void);
@@ -132,7 +132,7 @@ void fn_804788B4(void);
 void fn_804788BC(void);
 void fn_80478A70(void);
 
-asm void fn_8047782C(void)
+asm void atn_LoadScene_destructor(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -142,7 +142,7 @@ asm void fn_8047782C(void)
     mr r31, r3
     lbz r0, 0x4(r3)
     cmplwi r0, 0x2
-    bne lbl_fn_8047782C_0000009C
+    bne lbl_atn_LoadScene_destructor_0000009C
     li r4, 0x3
     bl fn_80473104
     addi r3, r1, 0x8
@@ -156,27 +156,27 @@ asm void fn_8047782C(void)
     lwz r5, 0x50(r31)
     bl fn_804714B0
     addic. r3, r1, 0xc
-    beq lbl_fn_8047782C_0000008C
+    beq lbl_atn_LoadScene_destructor_0000008C
     lwz r4, 0xc(r1)
     cmpwi r4, 0x0
-    beq lbl_fn_8047782C_0000008C
+    beq lbl_atn_LoadScene_destructor_0000008C
     lwz r12, 0x0(r4)
     cmpwi r12, 0x0
-    beq lbl_fn_8047782C_00000084
+    beq lbl_atn_LoadScene_destructor_00000084
     addi r3, r3, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047782C_00000084:
+lbl_atn_LoadScene_destructor_00000084:
     li r0, 0x0
     stw r0, 0xc(r1)
-lbl_fn_8047782C_0000008C:
+lbl_atn_LoadScene_destructor_0000008C:
     lwz r4, 0x54(r31)
     mr r3, r31
     addi r4, r4, 0x10
     bl fn_804778DC
-lbl_fn_8047782C_0000009C:
+lbl_atn_LoadScene_destructor_0000009C:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
     mtlr r0
@@ -492,7 +492,7 @@ lbl_fn_804778DC_000004F8:
     blr
 }
 
-asm void fn_80477D60(void)
+asm void atn_LH_Scene_onNotify(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -743,7 +743,7 @@ lbl_fn_80478034_00000820:
     blr
 }
 
-asm void fn_80478054(void)
+asm void atn_LoadTexture_constructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -754,14 +754,14 @@ asm void fn_80478054(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_80478054_00000864
+    beq lbl_atn_LoadTexture_constructor_00000864
     li r4, 0x0
     bl fn_8047304C
     cmpwi r31, 0x0
-    ble lbl_fn_80478054_00000864
+    ble lbl_atn_LoadTexture_constructor_00000864
     mr r3, r30
     bl dtor_80084684
-lbl_fn_80478054_00000864:
+lbl_atn_LoadTexture_constructor_00000864:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -771,7 +771,7 @@ lbl_fn_80478054_00000864:
     blr
 }
 
-asm void fn_804780AC(void)
+asm void atn_LoadTexture_destructor(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -781,7 +781,7 @@ asm void fn_804780AC(void)
     mr r31, r3
     lbz r0, 0x4(r3)
     cmplwi r0, 0x2
-    bne lbl_fn_804780AC_00000918
+    bne lbl_atn_LoadTexture_destructor_00000918
     li r4, 0x3
     bl fn_80473104
     addi r3, r1, 0x8
@@ -795,26 +795,26 @@ asm void fn_804780AC(void)
     lwz r5, 0x50(r31)
     bl fn_804714B0
     addic. r3, r1, 0xc
-    beq lbl_fn_804780AC_0000090C
+    beq lbl_atn_LoadTexture_destructor_0000090C
     lwz r4, 0xc(r1)
     cmpwi r4, 0x0
-    beq lbl_fn_804780AC_0000090C
+    beq lbl_atn_LoadTexture_destructor_0000090C
     lwz r12, 0x0(r4)
     cmpwi r12, 0x0
-    beq lbl_fn_804780AC_00000904
+    beq lbl_atn_LoadTexture_destructor_00000904
     addi r3, r3, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_804780AC_00000904:
+lbl_atn_LoadTexture_destructor_00000904:
     li r0, 0x0
     stw r0, 0xc(r1)
-lbl_fn_804780AC_0000090C:
+lbl_atn_LoadTexture_destructor_0000090C:
     lwz r3, 0x54(r31)
     lwz r4, 0x50(r31)
     bl DCFlushRange
-lbl_fn_804780AC_00000918:
+lbl_atn_LoadTexture_destructor_00000918:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
     mtlr r0
@@ -857,7 +857,7 @@ lbl_fn_80478198_00000984:
     blr
 }
 
-asm void fn_804781B8(void)
+asm void atn_LH_Texture_onNotify(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1015,7 +1015,7 @@ lbl_fn_80478204_00000B8C:
     blr
 }
 
-asm void fn_804783DC(void)
+asm void atn_LoadXsca_constructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1026,25 +1026,25 @@ asm void fn_804783DC(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_804783DC_00000C14
+    beq lbl_atn_LoadXsca_constructor_00000C14
     lwz r0, 0x5c(r3)
     lis r4, lbl_8078FFD8@ha
     addi r4, r4, lbl_8078FFD8@l
     stw r4, 0x0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_804783DC_00000BF8
+    beq lbl_atn_LoadXsca_constructor_00000BF8
     mr r3, r0
     li r4, 0x1
     bl fn_805BDD78
-lbl_fn_804783DC_00000BF8:
+lbl_atn_LoadXsca_constructor_00000BF8:
     mr r3, r30
     li r4, 0x0
     bl fn_8047304C
     cmpwi r31, 0x0
-    ble lbl_fn_804783DC_00000C14
+    ble lbl_atn_LoadXsca_constructor_00000C14
     mr r3, r30
     bl dtor_80084684
-lbl_fn_804783DC_00000C14:
+lbl_atn_LoadXsca_constructor_00000C14:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1054,7 +1054,7 @@ lbl_fn_804783DC_00000C14:
     blr
 }
 
-asm void fn_8047845C(void)
+asm void atn_LoadXsca_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1064,7 +1064,7 @@ asm void fn_8047845C(void)
     mr r31, r3
     lbz r0, 0x4(r3)
     cmplwi r0, 0x2
-    bne lbl_fn_8047845C_00000C8C
+    bne lbl_atn_LoadXsca_destructor_00000C8C
     lis r5, lbl_807560D0@ha
     li r3, 0x20
     addi r5, r5, lbl_807560D0@l
@@ -1073,15 +1073,15 @@ asm void fn_8047845C(void)
     li r7, 0x0
     bl fn_80084320
     cmpwi r3, 0x0
-    beq lbl_fn_8047845C_00000C7C
+    beq lbl_atn_LoadXsca_destructor_00000C7C
     lwz r4, 0x54(r31)
     bl fn_805BDD20
-lbl_fn_8047845C_00000C7C:
+lbl_atn_LoadXsca_destructor_00000C7C:
     stw r3, 0x5c(r31)
     mr r3, r31
     li r4, 0x3
     bl fn_80473104
-lbl_fn_8047845C_00000C8C:
+lbl_atn_LoadXsca_destructor_00000C8C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -1089,7 +1089,7 @@ lbl_fn_8047845C_00000C8C:
     blr
 }
 
-asm void fn_804784CC(void)
+asm void atn_LH_Xsca_onNotify(void)
 {
     nofralloc
     stwu r1, -0x10(r1)

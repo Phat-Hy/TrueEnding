@@ -20,8 +20,8 @@ extern void fn_80083AD4(void);
 extern void fn_800C2418(void);
 extern void fn_800C2448(void);
 extern void fn_800C2520(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_80473EFC(void);
 extern void fn_80473F50(void);
 extern void fn_80473F88(void);
@@ -122,7 +122,7 @@ asm void atn_LH_Texture_constructor(void)
     stw r30, 0x8(r1)
     mr r30, r3
     mr r3, r31
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r3, lbl_8078FFB0@ha
     li r0, 0x0
     addi r3, r3, lbl_8078FFB0@l
@@ -159,7 +159,7 @@ asm void atn_LH_Texture_destructor(void)
     mr r30, r3
     beq lbl_atn_LH_Texture_destructor_00000128
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
     cmpwi r31, 0x0
     ble lbl_atn_LH_Texture_destructor_00000128
     mr r3, r30
@@ -203,7 +203,7 @@ lbl_fn_800D5808_0000019C:
     addic. r3, r28, 0x20
     beq lbl_fn_800D5808_000001AC
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800D5808_000001AC:
     cmpwi r29, 0x0
     ble lbl_fn_800D5808_000001BC

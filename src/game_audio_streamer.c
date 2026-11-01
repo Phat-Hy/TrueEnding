@@ -16,7 +16,7 @@ extern void fn_800CB5C8(void);
 extern void fn_800DC12C(void);
 extern void fn_800EB7A0(void);
 extern void fn_800EE360(void);
-extern void fn_800EF7A0(void);
+extern void atn_LH_Xsca_destructor(void);
 extern void fn_800F8548(void);
 extern void fn_8013CB68(void);
 extern void fn_8015495C(void);
@@ -1588,11 +1588,11 @@ asm void fn_802FC850(void)
     li r0, 0x1
     li r6, 0x3e8
     lis r4, fn_802FCF14@ha
-    lis r5, fn_800EF7A0@ha
+    lis r5, atn_LH_Xsca_destructor@ha
     stw r6, 0x15b4(r30)
     addi r3, r30, 0x1674
     addi r4, r4, fn_802FCF14@l
-    addi r5, r5, fn_800EF7A0@l
+    addi r5, r5, atn_LH_Xsca_destructor@l
     stw r28, 0x15b0(r30)
     li r6, 0x8
     li r7, 0x2

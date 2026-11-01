@@ -54,7 +54,7 @@ extern void fn_802D5020(void);
 extern void fn_80373148(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
-extern void fn_80473E74(void);
+extern void atn_LoadHandle_constructor(void);
 extern void fn_80473F50(void);
 extern void fn_804A04AC(void);
 extern void fn_805A3C58(void);
@@ -373,7 +373,7 @@ asm void fn_802D0038(void)
     stw r28, 0x1644(r30)
     stw r28, 0x1648(r30)
     stw r28, 0x164c(r30)
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lwz r4, 0x12a4(r30)
     li r5, -0x1
     lfs f0, lbl_80884564

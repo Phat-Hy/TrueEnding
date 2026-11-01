@@ -23,6 +23,43 @@ Next:     the 3-5 functions worth naming or decompiling next
 
 <!-- newest first -->
 
+### 2026-11-01 — Batch 4: atn::Load* & atn::LH_* Resource Subsystem Renames (20 functions)
+
+Numbers:  progress before -> after: 99.30 % -> 99.30 % (7,425,512 / 7,477,608 bytes, 18,054 / 18,155 functions)
+Named:
+- fn_80473E74 -> atn_LoadHandle_constructor (evidence: base atn::LoadHandle constructor; assigns vtable lbl_8078FD70 [atn::LoadHandle], zeroes mRefCount at +0x4)
+- fn_80473E8C -> atn_LoadHandle_destructor (evidence: virtual destructor slot 0 in vtable lbl_8078FD70 [atn::LoadHandle])
+- fn_8046F5B4 -> atn_Load_formatSize (evidence: virtual debug size formatter in slot 2 of atn::Load* vtables; formats "size=%d" from +0x50 via sprintf)
+- fn_80478054 -> atn_LoadTexture_constructor (evidence: constructor for atn::LoadTexture; assigns vtable lbl_8078FF88 [atn::LoadTexture])
+- fn_804780AC -> atn_LoadTexture_destructor (evidence: virtual destructor slot 0 in vtable lbl_8078FF88 [atn::LoadTexture])
+- fn_804781B8 -> atn_LH_Texture_onNotify (evidence: virtual notify callback slot 1 in vtable lbl_8078FFB0 [atn::LH_Texture])
+- fn_804783DC -> atn_LoadXsca_constructor (evidence: constructor for atn::LoadXsca; assigns vtable lbl_8078FFD8 [atn::LoadXsca])
+- fn_8047845C -> atn_LoadXsca_destructor (evidence: virtual destructor slot 0 in vtable lbl_8078FFD8 [atn::LoadXsca])
+- fn_800EF7A0 -> atn_LH_Xsca_destructor (evidence: virtual destructor slot 0 in vtable lbl_80790000 [atn::LH_Xsca])
+- fn_804784CC -> atn_LH_Xsca_onNotify (evidence: virtual notify callback slot 1 in vtable lbl_80790000 [atn::LH_Xsca])
+- fn_80477778 -> atn_LoadScene_constructor (evidence: constructor for atn::LoadScene; assigns vtable lbl_8078FF38 [atn::LoadScene])
+- fn_8047782C -> atn_LoadScene_destructor (evidence: virtual destructor slot 0 in vtable lbl_8078FF38 [atn::LoadScene])
+- fn_800C1F5C -> atn_LH_Scene_destructor (evidence: virtual destructor slot 0 in vtable lbl_8078FF60 [atn::LH_Scene])
+- fn_80477D60 -> atn_LH_Scene_onNotify (evidence: virtual notify callback slot 1 in vtable lbl_8078FF60 [atn::LH_Scene])
+- fn_80476D64 -> atn_LoadMotionCommandData_constructor (evidence: constructor for atn::LoadMotionCommandData; assigns vtable lbl_8078FEC8 [atn::LoadMotionCommandData])
+- fn_80476DF8 -> atn_LoadMotionCommandData_destructor (evidence: virtual destructor slot 0 in vtable lbl_8078FEC8 [atn::LoadMotionCommandData])
+- fn_8013606C -> atn_LH_MotionCommandData_destructor (evidence: virtual destructor slot 0 in vtable lbl_8078FEF0 [atn::LH_MotionCommandData])
+- fn_80477448 -> atn_LH_MotionCommandData_onNotify (evidence: virtual notify callback slot 1 in vtable lbl_8078FEF0 [atn::LH_MotionCommandData])
+- fn_80120FF0 -> atn_LH_Model_destructor (evidence: virtual destructor slot 0 in vtable lbl_8078FEA0 [atn::LH_Model])
+- fn_80476A74 -> atn_LH_Model_onNotify (evidence: virtual notify callback slot 1 in vtable lbl_8078FEA0 [atn::LH_Model])
+Decompiled: none in this unit
+Notes:
+- Decodes the asynchronous asset-loading lifecycle of `atn::` across textures, scenes, skeletal models, motions, and collision metadata:
+  - Base class `atn::LoadHandle` (`fn_80473E74`, `fn_80473E8C`) coordinates handle reference counting and resource ownership.
+  - Derived handles (`atn::LH_*`) implement two virtual methods: slot 0 (scalar deleting destructor) and slot 1 (`onNotify`, which triggers when asynchronous background disc/package reads complete).
+  - Derived loaders (`atn::Load*`) implement async load pipeline tasks with common formatters (`atn_Load_formatSize` printing `"size=%d"`).
+- All 13 local `lbl_fn_*` assembly labels inside calling asm blocks were simultaneously normalized to `lbl_atn_*` across 150 source files.
+Next:
+1. `atn_LH_Texture_constructor` (`fn_800D5738`, 120 B) and `atn_LH_Texture_destructor` (`fn_800D57B0`, 88 B) -> decompile to C in `src/game_depth.c`.
+2. `fn_800D7278` (1252 B): character texture bake (EFB copy + `GXDrawDone` + readback).
+3. Batch 5 renames in `atn::LH_` collision, particle (`atn::LH_Efp`), and material loaders (`atn::LH_Material`).
+
+
 ### 2026-11-01 — Unit A2: C Decompilation of atn_TaskBase_isValid and atn_Task_initCookie
 
 Numbers:  progress before -> after: 99.30 % -> 99.30 % (7,425,512 / 7,477,608 bytes, 18,054 / 18,155 functions)

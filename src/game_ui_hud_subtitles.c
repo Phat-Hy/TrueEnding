@@ -31,7 +31,7 @@ extern void fn_8020BDE0(void);
 extern void fn_8020BE10(void);
 extern void fn_8020ED84(void);
 extern void world_getGlobalFlag(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_8050FB3C(void);
 extern void fn_8050FC08(void);
 extern void fn_8050FD3C(void);
@@ -1220,7 +1220,7 @@ asm void fn_801D0960(void)
     beq lbl_fn_801D0960_00000F38
     beq lbl_fn_801D0960_00000F38
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_801D0960_00000F38:
     cmpwi r31, 0x0
     ble lbl_fn_801D0960_00000F48

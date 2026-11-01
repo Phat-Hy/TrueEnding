@@ -36,7 +36,7 @@ extern void fn_800C7B78(void);
 extern void fn_800C7CA8(void);
 extern void fn_800DC6B4(void);
 extern void fn_800DF154(void);
-extern void fn_80473E74(void);
+extern void atn_LoadHandle_constructor(void);
 extern void fn_80473FCC(void);
 extern void fn_80475DF8(void);
 extern void fn_80680770(void);
@@ -536,7 +536,7 @@ lbl_fn_800C5644_00000660:
     cmpwi r3, 0x0
     mr r20, r3
     beq lbl_fn_800C5644_00000690
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     stw r14, 0x0(r20)
 lbl_fn_800C5644_00000690:
     mr r3, r20

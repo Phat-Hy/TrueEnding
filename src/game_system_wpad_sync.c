@@ -72,8 +72,8 @@ extern void fn_8047043C(void);
 extern void fn_80470528(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_80473F88(void);
 extern void fn_8047E4BC(void);
 extern void fn_80490EB8(void);
@@ -669,13 +669,13 @@ asm void world_Manager_constructor(void)
     stw r27, 0x54f8(r29)
     stw r27, 0x54fc(r29)
     stw r27, 0x5500(r29)
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r26, lbl_8078FBB0@ha
     addi r25, r29, 0x550c
     addi r26, r26, lbl_8078FBB0@l
     stw r26, 0x0(r28)
     mr r3, r25
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r5, lbl_8074DC1C@ha
     stw r26, 0x0(r25)
     addi r5, r5, lbl_8074DC1C@l
@@ -828,7 +828,7 @@ lbl_world_Manager_constructor_00000814:
     stw r26, 0x56d0(r29)
     stw r26, 0x56d4(r29)
     stw r26, 0x56d8(r29)
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r3, lbl_80790000@ha
     stw r26, 0x56e4(r29)
     addi r3, r3, lbl_80790000@l
@@ -1377,7 +1377,7 @@ asm void fn_803663A4(void)
     addic. r3, r3, 0x10
     beq lbl_fn_803663A4_000010B8
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_803663A4_000010B8:
     addic. r0, r30, 0x8
     beq lbl_fn_803663A4_000010E4
@@ -1914,7 +1914,7 @@ lbl_fn_80366454_00001894:
     addic. r3, r28, 0x56dc
     beq lbl_fn_80366454_000018B4
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80366454_000018B4:
     addic. r3, r28, 0x5690
     beq lbl_fn_80366454_000018C0
@@ -1954,14 +1954,14 @@ lbl_fn_80366454_00001928:
     beq lbl_fn_80366454_0000193C
     mr r3, r25
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80366454_0000193C:
     addic. r25, r28, 0x54f4
     beq lbl_fn_80366454_000019A4
     addic. r3, r25, 0x10
     beq lbl_fn_80366454_00001954
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80366454_00001954:
     addic. r0, r25, 0x8
     beq lbl_fn_80366454_00001980

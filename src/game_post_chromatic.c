@@ -78,7 +78,7 @@ extern void world_getLocalFlag(void);
 extern void fn_803E3384(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_80473F50(void);
 extern void fn_805F98D0(void);
 extern void fn_805F9940(void);
@@ -695,7 +695,7 @@ lbl_fn_802CD2E4_000007B4:
     addic. r3, r31, 0x4
     beq lbl_fn_802CD2E4_000007D4
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_802CD2E4_000007D4:
     addic. r31, r29, 0x1528
     beq lbl_fn_802CD2E4_000007F4
@@ -704,12 +704,12 @@ lbl_fn_802CD2E4_000007D4:
     addic. r3, r31, 0x4
     beq lbl_fn_802CD2E4_000007F4
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_802CD2E4_000007F4:
     addic. r3, r29, 0x14b0
     beq lbl_fn_802CD2E4_00000804
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_802CD2E4_00000804:
     mr r3, r29
     li r4, 0x0

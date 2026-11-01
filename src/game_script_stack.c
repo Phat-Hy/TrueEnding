@@ -50,7 +50,7 @@ extern void fn_8024845C(void);
 extern void fn_8035B694(void);
 extern void fn_8035B78C(void);
 extern void world_setLocalFlag(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_805F8E70(void);
 extern void fn_805F93C0(void);
 extern void fn_805F9750(void);
@@ -1606,7 +1606,7 @@ asm void fn_80247748(void)
     addic. r3, r31, 0x4
     beq lbl_fn_80247748_0000154C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80247748_0000154C:
     addic. r4, r29, 0x14bc
     beq lbl_fn_80247748_0000157C

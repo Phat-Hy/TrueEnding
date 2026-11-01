@@ -63,8 +63,8 @@ extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_80473F50(void);
 extern void fn_8059C6E0(void);
 extern void fn_805F8E70(void);
@@ -996,7 +996,7 @@ asm void fn_8025A060(void)
     addi r3, r3, lbl_807847E0@l
     stw r3, 0x0(r30)
     mr r3, r28
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r3, lbl_8078FBB0@ha
     li r29, 0x0
     addi r3, r3, lbl_8078FBB0@l
@@ -1226,7 +1226,7 @@ lbl_fn_8025A060_00000FD0:
     addic. r3, r26, 0x4
     beq lbl_fn_8025A060_00000FF8
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_8025A060_00000FF8:
     mr r3, r26
     bl dtor_80084684
@@ -1305,7 +1305,7 @@ lbl_fn_8025A4A4_000010E4:
     addic. r3, r31, 0x4
     beq lbl_fn_8025A4A4_00001104
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_8025A4A4_00001104:
     addic. r31, r29, 0x1568
     beq lbl_fn_8025A4A4_00001124
@@ -1314,7 +1314,7 @@ lbl_fn_8025A4A4_00001104:
     addic. r3, r31, 0x4
     beq lbl_fn_8025A4A4_00001124
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_8025A4A4_00001124:
     addic. r31, r29, 0x155c
     beq lbl_fn_8025A4A4_00001144
@@ -1323,7 +1323,7 @@ lbl_fn_8025A4A4_00001124:
     addic. r3, r31, 0x4
     beq lbl_fn_8025A4A4_00001144
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_8025A4A4_00001144:
     addic. r31, r29, 0x1548
     beq lbl_fn_8025A4A4_00001164
@@ -1332,7 +1332,7 @@ lbl_fn_8025A4A4_00001144:
     addic. r3, r31, 0x4
     beq lbl_fn_8025A4A4_00001164
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_8025A4A4_00001164:
     addic. r31, r29, 0x153c
     beq lbl_fn_8025A4A4_00001184
@@ -1341,7 +1341,7 @@ lbl_fn_8025A4A4_00001164:
     addic. r3, r31, 0x4
     beq lbl_fn_8025A4A4_00001184
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_8025A4A4_00001184:
     addic. r31, r29, 0x1530
     beq lbl_fn_8025A4A4_000011A4
@@ -1350,7 +1350,7 @@ lbl_fn_8025A4A4_00001184:
     addic. r3, r31, 0x4
     beq lbl_fn_8025A4A4_000011A4
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_8025A4A4_000011A4:
     addic. r31, r29, 0x1524
     beq lbl_fn_8025A4A4_000011C4
@@ -1359,7 +1359,7 @@ lbl_fn_8025A4A4_000011A4:
     addic. r3, r31, 0x4
     beq lbl_fn_8025A4A4_000011C4
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_8025A4A4_000011C4:
     addic. r31, r29, 0x1518
     beq lbl_fn_8025A4A4_000011E4
@@ -1368,7 +1368,7 @@ lbl_fn_8025A4A4_000011C4:
     addic. r3, r31, 0x4
     beq lbl_fn_8025A4A4_000011E4
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_8025A4A4_000011E4:
     addic. r4, r29, 0x14c0
     beq lbl_fn_8025A4A4_00001214
@@ -1386,7 +1386,7 @@ lbl_fn_8025A4A4_00001214:
     addic. r3, r29, 0x14b0
     beq lbl_fn_8025A4A4_00001224
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_8025A4A4_00001224:
     mr r3, r29
     li r4, 0x0

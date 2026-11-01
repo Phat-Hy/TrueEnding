@@ -38,7 +38,7 @@ extern void fn_803EC91C(void);
 extern void fn_803ECBD4(void);
 extern void fn_803EDB18(void);
 extern void fn_803FFC50(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_805F9920(void);
 extern void fn_80680CF8(void);
 extern void fn_80682428(void);
@@ -1549,7 +1549,7 @@ asm void fn_803FE798(void)
     addic. r3, r31, 0x4
     beq lbl_fn_803FE798_000014B8
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_803FE798_000014B8:
     addi r3, r29, 0xf4
     li r4, -0x1

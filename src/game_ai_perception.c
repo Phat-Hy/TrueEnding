@@ -45,7 +45,7 @@ extern void world_setLocalFlag(void);
 extern void fn_803C1560(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
-extern void fn_80473E74(void);
+extern void atn_LoadHandle_constructor(void);
 extern void fn_80473F50(void);
 extern void fn_805F89F0(void);
 extern void fn_805F8E70(void);
@@ -1563,7 +1563,7 @@ asm void fn_8025FE60(void)
     addi r3, r3, lbl_80784AC8@l
     stw r3, 0x0(r30)
     mr r3, r28
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lfs f0, lbl_80883578
     lis r3, lbl_8078FBB0@ha
     li r29, 0x0

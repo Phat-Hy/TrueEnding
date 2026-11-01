@@ -40,7 +40,7 @@ extern void fn_803E5E64(void);
 extern void fn_804439FC(void);
 extern void fn_80444020(void);
 extern void fn_80444CF8(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_80473F18(void);
 extern void fn_80473F50(void);
 extern void fn_80473F88(void);
@@ -72,7 +72,7 @@ extern u32 lbl_808813C8;
 extern u32 lbl_808813CC;
 
 /* Function declarations */
-void fn_800EF7A0(void);
+void atn_LH_Xsca_destructor(void);
 void fn_800EF7F8(void);
 void fn_800EF8DC(void);
 void fn_800EF91C(void);
@@ -93,7 +93,7 @@ void fn_800F03C4(void);
 void fn_800F0BC0(void);
 void fn_800F0D14(void);
 
-asm void fn_800EF7A0(void)
+asm void atn_LH_Xsca_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -104,14 +104,14 @@ asm void fn_800EF7A0(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_800EF7A0_0000003C
+    beq lbl_atn_LH_Xsca_destructor_0000003C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
     cmpwi r31, 0x0
-    ble lbl_fn_800EF7A0_0000003C
+    ble lbl_atn_LH_Xsca_destructor_0000003C
     mr r3, r30
     bl dtor_80084684
-lbl_fn_800EF7A0_0000003C:
+lbl_atn_LH_Xsca_destructor_0000003C:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -137,12 +137,12 @@ asm void fn_800EF7F8(void)
     addic. r3, r3, 0x3c
     beq lbl_fn_800EF7F8_00000090
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800EF7F8_00000090:
     addic. r3, r29, 0x34
     beq lbl_fn_800EF7F8_000000A0
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800EF7F8_000000A0:
     addic. r31, r29, 0x28
     beq lbl_fn_800EF7F8_000000C0
@@ -151,7 +151,7 @@ lbl_fn_800EF7F8_000000A0:
     addic. r3, r31, 0x4
     beq lbl_fn_800EF7F8_000000C0
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800EF7F8_000000C0:
     addi r3, r29, 0x1c
     li r4, -0x1
@@ -163,7 +163,7 @@ lbl_fn_800EF7F8_000000C0:
     addic. r3, r31, 0x4
     beq lbl_fn_800EF7F8_000000EC
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800EF7F8_000000EC:
     addic. r31, r29, 0x4
     beq lbl_fn_800EF7F8_0000010C
@@ -172,7 +172,7 @@ lbl_fn_800EF7F8_000000EC:
     addic. r3, r31, 0x4
     beq lbl_fn_800EF7F8_0000010C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800EF7F8_0000010C:
     cmpwi r30, 0x0
     ble lbl_fn_800EF7F8_0000011C

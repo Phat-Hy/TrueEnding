@@ -34,7 +34,7 @@ extern void fn_80237874(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void atn_Curve_evaluate(void);
-extern void fn_80473E74(void);
+extern void atn_LoadHandle_constructor(void);
 extern void fn_80473F18(void);
 extern void fn_80473F50(void);
 extern void fn_80473F88(void);
@@ -321,7 +321,7 @@ asm void fn_800A03A0(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r3, lbl_8078FE50@ha
     li r0, 0x0
     addi r3, r3, lbl_8078FE50@l

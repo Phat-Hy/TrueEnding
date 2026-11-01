@@ -73,8 +73,8 @@ extern void fn_80373148(void);
 extern void fn_803C1560(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_80473F50(void);
 extern void fn_804A04AC(void);
 extern void fn_8054A340(void);
@@ -528,7 +528,7 @@ asm void fn_80293738(void)
     stfs f0, 0x1648(r29)
     stfs f0, 0x164c(r29)
     stfs f0, 0x1650(r29)
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lwz r0, 0x12a4(r29)
     li r5, 0x23
     lfs f2, lbl_80883BF0
@@ -769,7 +769,7 @@ lbl_fn_80293BC8_000008AC:
     addic. r3, r30, 0x1660
     beq lbl_fn_80293BC8_000008BC
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80293BC8_000008BC:
     addic. r29, r30, 0x162c
     beq lbl_fn_80293BC8_000008DC
@@ -778,7 +778,7 @@ lbl_fn_80293BC8_000008BC:
     addic. r3, r29, 0x4
     beq lbl_fn_80293BC8_000008DC
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80293BC8_000008DC:
     addic. r4, r30, 0x161c
     beq lbl_fn_80293BC8_0000090C
@@ -813,7 +813,7 @@ lbl_fn_80293BC8_0000093C:
     addic. r3, r29, 0x4
     beq lbl_fn_80293BC8_0000095C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80293BC8_0000095C:
     addic. r29, r30, 0x15e4
     beq lbl_fn_80293BC8_0000097C
@@ -822,7 +822,7 @@ lbl_fn_80293BC8_0000095C:
     addic. r3, r29, 0x4
     beq lbl_fn_80293BC8_0000097C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80293BC8_0000097C:
     addic. r4, r30, 0x15d4
     beq lbl_fn_80293BC8_000009A8
@@ -843,7 +843,7 @@ lbl_fn_80293BC8_000009A8:
     addic. r3, r29, 0x4
     beq lbl_fn_80293BC8_000009C8
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80293BC8_000009C8:
     addic. r29, r30, 0x15bc
     beq lbl_fn_80293BC8_000009E8
@@ -852,7 +852,7 @@ lbl_fn_80293BC8_000009C8:
     addic. r3, r29, 0x4
     beq lbl_fn_80293BC8_000009E8
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80293BC8_000009E8:
     addic. r4, r30, 0x15a8
     beq lbl_fn_80293BC8_00000A14

@@ -42,8 +42,8 @@ extern void fn_800DD3FC(void);
 extern void fn_801F3FF8(void);
 extern void fn_80211480(void);
 extern void world_getGlobalFlag(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_80473F50(void);
 extern void fn_804A9EB4(void);
 extern void fn_804AA490(void);
@@ -1138,7 +1138,7 @@ asm void fn_804A7F18(void)
     mr r3, r28
     stw r0, 0x48(r30)
     stw r29, 0x4c(r30)
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r4, lbl_8078FBB0@ha
     addi r3, r30, 0x58
     addi r4, r4, lbl_8078FBB0@l
@@ -1503,7 +1503,7 @@ lbl_fn_804A83E4_00001248:
     addic. r3, r30, 0x50
     beq lbl_fn_804A83E4_000012DC
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_804A83E4_000012DC:
     mr r3, r30
     li r4, 0x0

@@ -73,8 +73,8 @@ extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_80473F50(void);
 extern void fn_805991E4(void);
 extern void fn_8059A268(void);
@@ -289,7 +289,7 @@ asm void fn_80250A24(void)
     stw r29, 0x14fc(r30)
     stw r29, 0x1500(r30)
     stw r29, 0x1504(r30)
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lwz r4, 0x12a4(r30)
     lis r7, lbl_8078FBB0@ha
     lwz r0, 0x12a8(r30)
@@ -523,7 +523,7 @@ lbl_fn_80250D90_0000057C:
     addic. r3, r29, 0x1508
     beq lbl_fn_80250D90_0000058C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80250D90_0000058C:
     addic. r31, r29, 0x14ec
     beq lbl_fn_80250D90_000005AC
@@ -532,7 +532,7 @@ lbl_fn_80250D90_0000058C:
     addic. r3, r31, 0x4
     beq lbl_fn_80250D90_000005AC
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80250D90_000005AC:
     addic. r31, r29, 0x14e0
     beq lbl_fn_80250D90_000005CC
@@ -541,7 +541,7 @@ lbl_fn_80250D90_000005AC:
     addic. r3, r31, 0x4
     beq lbl_fn_80250D90_000005CC
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80250D90_000005CC:
     addic. r31, r29, 0x14d4
     beq lbl_fn_80250D90_000005EC
@@ -550,7 +550,7 @@ lbl_fn_80250D90_000005CC:
     addic. r3, r31, 0x4
     beq lbl_fn_80250D90_000005EC
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80250D90_000005EC:
     addic. r31, r29, 0x14c8
     beq lbl_fn_80250D90_0000060C
@@ -559,7 +559,7 @@ lbl_fn_80250D90_000005EC:
     addic. r3, r31, 0x4
     beq lbl_fn_80250D90_0000060C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80250D90_0000060C:
     mr r3, r29
     li r4, 0x0

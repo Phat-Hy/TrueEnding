@@ -39,8 +39,8 @@ extern void fn_8021771C(void);
 extern void fn_8037DD00(void);
 extern void fn_803EE5AC(void);
 extern void fn_80470528(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_80473F18(void);
 extern void fn_80473F50(void);
 extern void fn_80473F88(void);
@@ -635,17 +635,17 @@ asm void fn_8049D7E4(void)
     stw r30, 0x4c(r26)
     stw r30, 0x50(r26)
     stw r30, 0x54(r26)
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r31, lbl_8078FBB0@ha
     addi r28, r26, 0x60
     addi r31, r31, lbl_8078FBB0@l
     stw r31, 0x0(r29)
     mr r3, r28
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     addi r29, r26, 0x68
     stw r31, 0x0(r28)
     mr r3, r29
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lfs f3, lbl_80887160
     lis r3, lbl_80790000@ha
     lfs f0, lbl_80887164
@@ -743,17 +743,17 @@ asm void fn_8049D974(void)
     stw r30, 0x4c(r28)
     stw r31, 0x50(r28)
     stw r26, 0x54(r28)
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r27, lbl_8078FBB0@ha
     addi r24, r28, 0x60
     addi r27, r27, lbl_8078FBB0@l
     stw r27, 0x0(r25)
     mr r3, r24
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     addi r25, r28, 0x68
     stw r27, 0x0(r24)
     mr r3, r25
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lfs f3, lbl_80887160
     lis r3, lbl_80790000@ha
     lfs f0, lbl_80887164
@@ -1078,17 +1078,17 @@ lbl_fn_8049DDD8_00000CD8:
     addic. r3, r30, 0x68
     beq lbl_fn_8049DDD8_00000CE8
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_8049DDD8_00000CE8:
     addic. r3, r30, 0x60
     beq lbl_fn_8049DDD8_00000CF8
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_8049DDD8_00000CF8:
     addic. r3, r30, 0x58
     beq lbl_fn_8049DDD8_00000D08
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_8049DDD8_00000D08:
     mr r3, r30
     li r4, 0x0

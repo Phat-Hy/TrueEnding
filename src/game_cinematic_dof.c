@@ -134,7 +134,7 @@ extern void world_setLocalFlag(void);
 extern void fn_80373148(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_80473F50(void);
 extern void fn_804A04AC(void);
 extern void fn_8054A340(void);
@@ -516,7 +516,7 @@ lbl_fn_803387DC_00000444:
     addic. r3, r31, 0x4
     beq lbl_fn_803387DC_00000464
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_803387DC_00000464:
     addic. r31, r29, 0x1528
     beq lbl_fn_803387DC_00000484
@@ -525,7 +525,7 @@ lbl_fn_803387DC_00000464:
     addic. r3, r31, 0x4
     beq lbl_fn_803387DC_00000484
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_803387DC_00000484:
     mr r3, r29
     li r4, 0x0

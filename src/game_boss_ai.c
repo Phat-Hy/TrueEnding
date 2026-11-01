@@ -46,7 +46,7 @@ extern void fn_8036823C(void);
 extern void world_getGlobalFlag(void);
 extern void fn_804444E8(void);
 extern void fn_804446BC(void);
-extern void fn_80473E74(void);
+extern void atn_LoadHandle_constructor(void);
 extern void fn_80680CF8(void);
 extern void fn_80682428(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -1160,13 +1160,13 @@ asm void fn_801354B4(void)
     stw r25, 0x64(r29)
     stw r25, 0x7c(r29)
     stw r25, 0x80(r29)
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r28, lbl_8078FBB0@ha
     addi r24, r29, 0x8c
     addi r28, r28, lbl_8078FBB0@l
     stw r28, 0x0(r26)
     mr r3, r24
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r27, lbl_8078FEF0@ha
     lis r26, fn_802180A8@ha
     addi r27, r27, lbl_8078FEF0@l
@@ -1175,12 +1175,12 @@ asm void fn_801354B4(void)
     stw r27, 0x0(r24)
     mr r3, r23
     stw r26, 0x8(r24)
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     addi r24, r29, 0xa4
     stw r27, 0x0(r23)
     mr r3, r24
     stw r26, 0x8(r23)
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     cmpwi r31, 0x1
     stw r28, 0x0(r24)
     stw r25, 0xac(r29)

@@ -80,7 +80,7 @@ extern void fn_803EBBCC(void);
 extern void fn_8044D208(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_80473F50(void);
 extern void fn_804776F4(void);
 extern void fn_805634D4(void);
@@ -132,7 +132,7 @@ extern u32 lbl_80881994;
 extern u32 lbl_80881998;
 
 /* Function declarations */
-void fn_8013606C(void);
+void atn_LH_MotionCommandData_destructor(void);
 void fn_801360C4(void);
 void fn_801360D8(void);
 void fn_80136138(void);
@@ -143,7 +143,7 @@ void fn_801370C8(void);
 void fn_801370F4(void);
 void fn_801371AC(void);
 
-asm void fn_8013606C(void)
+asm void atn_LH_MotionCommandData_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -154,14 +154,14 @@ asm void fn_8013606C(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_8013606C_0000003C
+    beq lbl_atn_LH_MotionCommandData_destructor_0000003C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
     cmpwi r31, 0x0
-    ble lbl_fn_8013606C_0000003C
+    ble lbl_atn_LH_MotionCommandData_destructor_0000003C
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8013606C_0000003C:
+lbl_atn_LH_MotionCommandData_destructor_0000003C:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -364,7 +364,7 @@ lbl_fn_80136138_000002C0:
     addic. r3, r27, 0x3ec
     beq lbl_fn_80136138_000002E0
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80136138_000002E0:
     addi r3, r27, 0x4
     li r4, -0x1
@@ -409,7 +409,7 @@ lbl_fn_80136138_0000034C:
     addic. r3, r27, 0x4
     beq lbl_fn_80136138_00000384
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80136138_00000384:
     mr r3, r27
     bl dtor_80084684
@@ -466,22 +466,22 @@ lbl_fn_80136138_00000434:
     addic. r3, r30, 0xa4
     beq lbl_fn_80136138_00000450
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80136138_00000450:
     addic. r3, r30, 0x98
     beq lbl_fn_80136138_00000460
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80136138_00000460:
     addic. r3, r30, 0x8c
     beq lbl_fn_80136138_00000470
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80136138_00000470:
     addic. r3, r30, 0x84
     beq lbl_fn_80136138_00000480
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80136138_00000480:
     addic. r0, r30, 0x54
     beq lbl_fn_80136138_000004A4
@@ -1899,7 +1899,7 @@ lbl_fn_801371AC_00001844:
     addic. r3, r16, 0x4
     beq lbl_fn_801371AC_0000186C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_801371AC_0000186C:
     mr r3, r16
     bl dtor_80084684

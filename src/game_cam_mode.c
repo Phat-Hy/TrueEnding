@@ -33,8 +33,8 @@ extern void fn_8023781C(void);
 extern void world_getGlobalFlag(void);
 extern void fn_80373148(void);
 extern void fn_803761BC(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_804EB1B0(void);
 extern void fn_805F8E70(void);
 extern void fn_805F9750(void);
@@ -1857,13 +1857,13 @@ asm void fn_800EF6BC(void)
     bl fn_802377B8
     addi r29, r27, 0x34
     mr r3, r29
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r31, lbl_80790000@ha
     addi r28, r27, 0x3c
     addi r31, r31, lbl_80790000@l
     stw r31, 0x0(r29)
     mr r3, r28
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     stw r31, 0x0(r28)
     mr r3, r27
     stw r30, 0x44(r27)
@@ -1890,7 +1890,7 @@ asm void fn_800EF73C(void)
     addic. r3, r30, 0x4
     beq lbl_fn_800EF73C_0000178C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800EF73C_0000178C:
     cmpwi r31, 0x0
     ble lbl_fn_800EF73C_0000179C

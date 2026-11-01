@@ -34,7 +34,7 @@ extern void fn_800D87A4(void);
 extern void fn_800D87B0(void);
 extern void fn_800D8808(void);
 extern void fn_800DC6B4(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_80473F34(void);
 extern void fn_80476130(void);
 extern void fn_805F93C0(void);
@@ -2431,7 +2431,7 @@ asm void fn_800970CC(void)
     beq lbl_fn_800970CC_00002174
     beq lbl_fn_800970CC_00002164
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_800970CC_00002164:
     cmpwi r31, 0x0
     ble lbl_fn_800970CC_00002174
@@ -2460,7 +2460,7 @@ asm void fn_80097128(void)
     mr r30, r3
     beq lbl_fn_80097128_000021CC
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
     cmpwi r31, 0x0
     ble lbl_fn_80097128_000021CC
     mr r3, r30

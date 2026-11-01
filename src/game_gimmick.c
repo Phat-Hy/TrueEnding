@@ -27,8 +27,8 @@ extern void fn_800DC978(void);
 extern void fn_8046F544(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_80473F50(void);
 extern void fn_80473F88(void);
 extern void fn_80473FCC(void);
@@ -500,7 +500,7 @@ asm void fn_8006C858(void)
     addic. r3, r3, 0x3260
     beq lbl_fn_8006C858_0000058C
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_8006C858_0000058C:
     lis r4, fn_80014798@ha
     addi r3, r31, 0x10a0
@@ -568,7 +568,7 @@ asm void fn_8006C8F8(void)
     addis r31, r30, 0x3
     addi r31, r31, 0x3260
     mr r3, r31
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r3, lbl_8078FBB0@ha
     addis r6, r30, 0x3
     lfs f1, lbl_80880A38
@@ -656,7 +656,7 @@ asm void fn_8006CA80(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r4, lbl_8078FBB0@ha
     mr r3, r31
     addi r4, r4, lbl_8078FBB0@l
@@ -933,7 +933,7 @@ lbl_fn_8006CABC_00000AF8:
     bl dtor_80084684
 lbl_fn_8006CABC_00000B5C:
     addi r3, r1, 0x40
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lwz r0, 0x90(r1)
     addi r3, r1, 0x40
     stw r31, 0x40(r1)
@@ -959,7 +959,7 @@ lbl_fn_8006CABC_00000B84:
     bl fn_8006D54C
     addi r3, r1, 0x40
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
     addi r17, r17, 0x1
     addi r20, r20, 0x30
     cmpwi r17, 0x4
@@ -1004,7 +1004,7 @@ lbl_fn_8006CABC_00000C34:
     li r5, 0x0
     bl fn_80013F78
     addi r3, r1, 0x38
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lwz r0, 0x48(r1)
     lis r3, lbl_8078FBB0@ha
     addi r3, r3, lbl_8078FBB0@l
@@ -1029,7 +1029,7 @@ lbl_fn_8006CABC_00000C94:
     bl fn_8006F684
     addi r3, r1, 0x38
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
     lwz r0, 0x48(r1)
     srwi. r0, r0, 31
     beq lbl_fn_8006CABC_00000CDC

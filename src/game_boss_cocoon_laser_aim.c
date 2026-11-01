@@ -25,7 +25,7 @@ extern void fn_801FED24(void);
 extern void fn_80470604(void);
 extern void fn_804730D4(void);
 extern void fn_804730E4(void);
-extern void fn_80473E74(void);
+extern void atn_LoadHandle_constructor(void);
 extern void fn_80473EFC(void);
 extern void fn_80473F50(void);
 extern void fn_80473F88(void);
@@ -70,7 +70,7 @@ void fn_8046F2C4(void);
 void fn_8046F460(void);
 void fn_8046F4D4(void);
 void fn_8046F544(void);
-void fn_8046F5B4(void);
+void atn_Load_formatSize(void);
 void fn_8046F5CC(void);
 void fn_8046F834(void);
 void fn_8046F8B8(void);
@@ -827,7 +827,7 @@ lbl_fn_8046F544_000009D0:
     blr
 }
 
-asm void fn_8046F5B4(void)
+asm void atn_Load_formatSize(void)
 {
     nofralloc
     lwz r5, 0x50(r3)
@@ -1179,19 +1179,19 @@ asm void fn_8046FA18(void)
     mr r24, r5
     mr r31, r6
     mr r3, r28
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lis r27, lbl_8078FBB0@ha
     addi r26, r29, 0x10
     addi r27, r27, lbl_8078FBB0@l
     stw r27, 0x0(r28)
     mr r3, r26
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     addi r25, r29, 0x1c
     li r28, 0x0
     stw r27, 0x0(r26)
     mr r3, r25
     stw r28, 0x18(r29)
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lbz r0, 0x0(r30)
     stw r27, 0x0(r25)
     cmpwi r0, 0x2f

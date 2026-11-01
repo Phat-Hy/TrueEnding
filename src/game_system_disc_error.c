@@ -45,8 +45,8 @@ extern void fn_8035B694(void);
 extern void fn_8035B78C(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
-extern void fn_80473E74(void);
-extern void fn_80473E8C(void);
+extern void atn_LoadHandle_constructor(void);
+extern void atn_LoadHandle_destructor(void);
 extern void fn_80473F50(void);
 extern void fn_805F8E70(void);
 extern void fn_805F93C0(void);
@@ -704,12 +704,12 @@ lbl_fn_80354398_00000748:
     addic. r3, r31, 0x4
     beq lbl_fn_80354398_00000768
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80354398_00000768:
     addic. r3, r29, 0x180c
     beq lbl_fn_80354398_00000778
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80354398_00000778:
     addi r3, r29, 0x17d8
     li r4, -0x1
@@ -717,12 +717,12 @@ lbl_fn_80354398_00000778:
     addic. r3, r29, 0x170c
     beq lbl_fn_80354398_00000794
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80354398_00000794:
     addic. r3, r29, 0x1704
     beq lbl_fn_80354398_000007A4
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80354398_000007A4:
     addic. r31, r29, 0x16cc
     beq lbl_fn_80354398_000007C4
@@ -731,7 +731,7 @@ lbl_fn_80354398_000007A4:
     addic. r3, r31, 0x4
     beq lbl_fn_80354398_000007C4
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80354398_000007C4:
     addic. r31, r29, 0x16c0
     beq lbl_fn_80354398_000007E4
@@ -740,7 +740,7 @@ lbl_fn_80354398_000007C4:
     addic. r3, r31, 0x4
     beq lbl_fn_80354398_000007E4
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80354398_000007E4:
     addic. r31, r29, 0x16b4
     beq lbl_fn_80354398_00000804
@@ -749,7 +749,7 @@ lbl_fn_80354398_000007E4:
     addic. r3, r31, 0x4
     beq lbl_fn_80354398_00000804
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80354398_00000804:
     addic. r31, r29, 0x16a8
     beq lbl_fn_80354398_00000824
@@ -758,7 +758,7 @@ lbl_fn_80354398_00000804:
     addic. r3, r31, 0x4
     beq lbl_fn_80354398_00000824
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80354398_00000824:
     addic. r31, r29, 0x169c
     beq lbl_fn_80354398_00000844
@@ -767,7 +767,7 @@ lbl_fn_80354398_00000824:
     addic. r3, r31, 0x4
     beq lbl_fn_80354398_00000844
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80354398_00000844:
     addic. r31, r29, 0x1690
     beq lbl_fn_80354398_00000864
@@ -776,7 +776,7 @@ lbl_fn_80354398_00000844:
     addic. r3, r31, 0x4
     beq lbl_fn_80354398_00000864
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80354398_00000864:
     addi r3, r29, 0x1648
     li r4, -0x1
@@ -788,7 +788,7 @@ lbl_fn_80354398_00000864:
     addic. r3, r31, 0x4
     beq lbl_fn_80354398_00000890
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80354398_00000890:
     addic. r31, r29, 0x1630
     beq lbl_fn_80354398_000008B0
@@ -797,7 +797,7 @@ lbl_fn_80354398_00000890:
     addic. r3, r31, 0x4
     beq lbl_fn_80354398_000008B0
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80354398_000008B0:
     addic. r31, r29, 0x1624
     beq lbl_fn_80354398_000008D0
@@ -806,7 +806,7 @@ lbl_fn_80354398_000008B0:
     addic. r3, r31, 0x4
     beq lbl_fn_80354398_000008D0
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80354398_000008D0:
     addic. r31, r29, 0x1618
     beq lbl_fn_80354398_000008F0
@@ -815,7 +815,7 @@ lbl_fn_80354398_000008D0:
     addic. r3, r31, 0x4
     beq lbl_fn_80354398_000008F0
     li r4, 0x0
-    bl fn_80473E8C
+    bl atn_LoadHandle_destructor
 lbl_fn_80354398_000008F0:
     lis r4, fn_8000D760@ha
     addi r3, r29, 0x1560
@@ -858,7 +858,7 @@ asm void fn_803545E0(void)
     addi r3, r3, lbl_807896B8@l
     stw r3, 0x0(r31)
     mr r3, r30
-    bl fn_80473E74
+    bl atn_LoadHandle_constructor
     lfs f0, lbl_808854D8
     lis r5, lbl_8078FBB0@ha
     addi r5, r5, lbl_8078FBB0@l
