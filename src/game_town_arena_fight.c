@@ -58,7 +58,7 @@ extern void fn_80139ED0(void);
 extern void fn_80139EFC(void);
 extern void fn_80139F4C(void);
 extern void fn_80139F60(void);
-extern void fn_8013A13C(void);
+extern void mtx_rotYRad(void);
 extern void fn_8013A158(void);
 extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
@@ -66,7 +66,7 @@ extern void fn_8013C3A8(void);
 extern void fn_8013C42C(void);
 extern void fn_8013C43C(void);
 extern void fn_8013C458(void);
-extern void fn_8013C480(void);
+extern void npc_isInteractionReady(void);
 extern void npc_getDialogController(void);
 extern void fn_80140518(void);
 extern void quest_initMarkerCoords(void);
@@ -75,7 +75,7 @@ extern void fn_80151210(void);
 extern void fn_801799BC(void);
 extern void fn_80179FA8(void);
 extern void fn_80198C00(void);
-extern void fn_801A03E0(void);
+extern void bgm_getGlobalManager(void);
 extern void fn_801A03E8(void);
 extern void fn_801A03EC(void);
 extern void fn_801A0408(void);
@@ -929,7 +929,7 @@ lbl_fn_803D2A6C_00000930:
     bl fn_80179FA8
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000B60
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     bl fn_801A0408
     stw r3, 0x18(r1)
     lfs f31, lbl_80885E0C
@@ -949,7 +949,7 @@ lbl_fn_803D2A6C_0000096C:
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00000B4C
     lwz r3, 0x18(r1)
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000B4C
     lwz r3, 0x18(r1)
@@ -1516,13 +1516,13 @@ lbl_fn_803D2A6C_0000118C:
     bl vec3_assign
     addi r3, r1, 0x608
     bl fn_803D7280
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     bl fn_801A0408
     mr r20, r3
     b lbl_fn_803D2A6C_0000126C
 lbl_fn_803D2A6C_000011F0:
     mr r3, r20
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00001260
     addi r3, r1, 0x41c
@@ -1863,7 +1863,7 @@ lbl_fn_803D2A6C_00001698:
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000016F4
     mr r3, r19
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_0000181C
 lbl_fn_803D2A6C_000016F4:
@@ -2215,7 +2215,7 @@ lbl_fn_803D2A6C_00001BEC:
     cmpwi r3, 0x6
     beq lbl_fn_803D2A6C_00001E2C
     li r18, 0x0
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     bl fn_801A0408
     lis r5, lbl_80750650@ha
     lis r4, lbl_807506A0@ha
@@ -3116,7 +3116,7 @@ lbl_fn_803D2A6C_000028C4:
     bl fn_803D7110
     lfs f1, 0x378(r1)
     addi r3, r1, 0x508
-    bl fn_8013A13C
+    bl mtx_rotYRad
     mr r3, r26
     addi r4, r1, 0x508
     bl fn_803D7124
@@ -3161,7 +3161,7 @@ lbl_fn_803D2A6C_000029B8:
     bl fn_803D7110
     lfs f1, 0x378(r1)
     addi r3, r1, 0x4d8
-    bl fn_8013A13C
+    bl mtx_rotYRad
     mr r3, r27
     addi r4, r1, 0x4d8
     bl fn_803D7124
@@ -3666,7 +3666,7 @@ lbl_fn_803D2A6C_000030EC:
     stw r18, 0x4b0(r1)
     stfs f26, 0x4d4(r1)
     stw r18, 0x4b4(r1)
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     bl fn_801A0408
     lfs f27, lbl_80885E2C
     mr r19, r3
@@ -3680,7 +3680,7 @@ lbl_fn_803D2A6C_00003150:
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00003368
     mr r3, r19
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00003368
     mr r3, r19
@@ -3841,7 +3841,7 @@ lbl_fn_803D2A6C_00003398:
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00003580
     mr r3, r19
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00003580
     mr r3, r19
@@ -4298,7 +4298,7 @@ lbl_fn_803D2A6C_00003A4C:
     bl fn_800F7F90
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00003C94
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     bl fn_801A0408
     lis r4, lbl_807506A0@ha
     slwi r0, r18, 2

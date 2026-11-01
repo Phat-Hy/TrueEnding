@@ -51,7 +51,7 @@ extern void fn_8037F688(void);
 extern void fn_803BF818(void);
 extern void fn_803D6E3C(void);
 extern void fn_803D71C4(void);
-extern void fn_8046ECDC(void);
+extern void boss_updateLaserAimMatrix(void);
 extern void fn_80470364(void);
 extern void boss_releaseLaserTarget(void);
 extern void atn_LoadHandle_destructor(void);
@@ -940,7 +940,7 @@ asm void fn_8052B190(void)
     mr r25, r3
     bl fn_8020A3E4
     li r4, 0x0
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     lwz r0, 0x60(r25)
     cmpwi r0, 0x0
     bne lbl_fn_8052B190_00000B60

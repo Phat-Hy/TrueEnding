@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void boss_decodePhaseBitfield(void);
-extern void fn_8006B2D8(void);
+extern void boss_parseStateCondition(void);
 extern void mem_alloc(void);
 extern void map_getArchiveName(void);
 extern void skeleton_getBoneByIndex(void);
@@ -150,7 +150,7 @@ lbl_fn_804A06B4_000000CC:
     bl boss_decodePhaseBitfield
     addi r3, r1, 0xa0
     addi r4, r1, 0x70
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0x70(r1)
     srwi. r0, r0, 31
     beq lbl_fn_804A06B4_00000148
@@ -202,7 +202,7 @@ lbl_fn_804A06B4_0000017C:
     bl boss_decodePhaseBitfield
     addi r3, r1, 0x94
     addi r4, r1, 0x58
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0x58(r1)
     srwi. r0, r0, 31
     beq lbl_fn_804A06B4_0000020C
@@ -351,7 +351,7 @@ lbl_fn_804A06B4_00000388:
     bl boss_decodePhaseBitfield
     addi r3, r1, 0x88
     addi r4, r1, 0x40
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0x40(r1)
     srwi. r0, r0, 31
     beq lbl_fn_804A06B4_00000408
@@ -544,7 +544,7 @@ lbl_fn_804A0BCC_000005FC:
     bl boss_decodePhaseBitfield
     addi r3, r1, 0x54
     addi r4, r1, 0x30
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0x30(r1)
     srwi. r0, r0, 31
     beq lbl_fn_804A0BCC_0000068C
@@ -610,7 +610,7 @@ lbl_fn_804A0BCC_000006F8:
     bl boss_decodePhaseBitfield
     addi r3, r1, 0x48
     addi r4, r1, 0x18
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0x18(r1)
     srwi. r0, r0, 31
     beq lbl_fn_804A0BCC_00000778

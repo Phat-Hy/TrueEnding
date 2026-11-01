@@ -35,7 +35,7 @@ extern void fn_803BEAB4(void);
 extern void fn_803CE3B8(void);
 extern void fn_803CE408(void);
 extern void fn_803CE448(void);
-extern void fn_8046ECDC(void);
+extern void boss_updateLaserAimMatrix(void);
 extern void fn_8046EED8(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -1312,7 +1312,7 @@ lbl_fn_803B87A8_00000FBC:
     bge lbl_fn_803B87A8_00000FD8
     lwz r3, lbl_8087F518
     li r4, 0x0
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
 lbl_fn_803B87A8_00000FD8:
     li r3, 0x1
 lbl_fn_803B87A8_00000FDC:

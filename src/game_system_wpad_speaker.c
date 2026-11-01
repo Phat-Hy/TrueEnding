@@ -42,7 +42,7 @@ extern void fn_803D2A6C(void);
 extern void fn_803D83A8(void);
 extern void fn_803DAB4C(void);
 extern void fn_803E4478(void);
-extern void fn_8046ECDC(void);
+extern void boss_updateLaserAimMatrix(void);
 extern void fn_80541214(void);
 extern void dlc_findItemInCatalog(void);
 extern void fn_8056BF90(void);
@@ -1455,7 +1455,7 @@ lbl_world_Manager_postUpdate_000011D8:
     b lbl_world_Manager_postUpdate_000015C8
     lwz r3, lbl_8087F518
     li r4, 0x1
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     lwz r3, 0x5620(r27)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28

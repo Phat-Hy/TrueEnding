@@ -19,7 +19,7 @@ extern void fn_801533C8(void);
 extern void fn_80154E38(void);
 extern void fn_8016F368(void);
 extern void battle_canTargetActor(void);
-extern void fn_801789D8(void);
+extern void battle_evalDropTable(void);
 extern void fn_8017A228(void);
 extern void fn_8017AC24(void);
 extern void fn_8021A7A0(void);
@@ -896,7 +896,7 @@ lbl_fn_800FC410_00000C20:
     mr r3, r27
     li r4, 0x0
     lis r5, 0x40
-    bl fn_801789D8
+    bl battle_evalDropTable
     cmpwi r3, 0x0
     beq lbl_fn_800FC410_00000C7C
     cmpwi r31, 0x4
@@ -1466,7 +1466,7 @@ lbl_fn_800FCD24_00001470:
     mr r3, r25
     li r4, 0x0
     lis r5, 0x40
-    bl fn_801789D8
+    bl battle_evalDropTable
     cmpwi r3, 0x0
     beq lbl_fn_800FCD24_000014EC
     cmpwi r22, 0x4

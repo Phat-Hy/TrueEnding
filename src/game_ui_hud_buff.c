@@ -47,7 +47,7 @@ extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A02C(void);
 extern void res_registerResource(void);
-extern void fn_8046ECDC(void);
+extern void boss_updateLaserAimMatrix(void);
 extern void fn_8046EED8(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_804776F4(void);
@@ -1113,7 +1113,7 @@ asm void fn_801CD210(void)
     beq lbl_fn_801CD210_00000F74
     lwz r3, lbl_8087F518
     li r4, 0x0
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     li r0, 0x3
     stw r0, 0xa88(r31)
     mr r30, r31

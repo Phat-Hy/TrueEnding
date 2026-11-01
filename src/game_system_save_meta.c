@@ -29,7 +29,7 @@ extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
 extern void npc_updateDialogueTarget(void);
 extern void npc_getPosition(void);
-extern void fn_8013C480(void);
+extern void npc_isInteractionReady(void);
 extern void npc_getDialogController(void);
 extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
@@ -1091,7 +1091,7 @@ lbl_fn_80346384_00000CFC:
     cmpwi r3, 0x53
     bne lbl_fn_80346384_00000D24
     mr r3, r30
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_80346384_00000D24
     mr r3, r30

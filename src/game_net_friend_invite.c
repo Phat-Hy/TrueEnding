@@ -86,7 +86,7 @@ extern void fn_803D6E1C(void);
 extern void fn_803D6E70(void);
 extern void fn_803D7100(void);
 extern void fn_803EFDAC(void);
-extern void fn_8046ECDC(void);
+extern void boss_updateLaserAimMatrix(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
@@ -2335,7 +2335,7 @@ lbl_fn_804D25D4_00001A8C:
     b lbl_fn_804D25D4_00004898
     bl fn_8020A3E4
     li r4, 0x0
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     bl net_getFriendManager
     bl fn_804D16E8
     bl fn_804D24AC
@@ -2504,7 +2504,7 @@ lbl_fn_804D25D4_00001D78:
 lbl_fn_804D25D4_00001DA0:
     bl fn_8020A3E4
     li r4, 0x0
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     b lbl_fn_804D25D4_00004898
     bl fn_804D16D0
     bl fn_804D6148
@@ -3374,7 +3374,7 @@ lbl_fn_804D25D4_00002A3C:
     bne lbl_fn_804D25D4_00002A5C
     bl fn_8020A3E4
     li r4, 0x0
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
 lbl_fn_804D25D4_00002A5C:
     mr r3, r24
     bl fn_804E9364
@@ -3452,7 +3452,7 @@ lbl_fn_804D25D4_00002B58:
     b lbl_fn_804D25D4_00004898
     bl fn_8020A3E4
     li r4, 0x0
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     mr r3, r24
     bl fn_804E9364
     mr r3, r24
@@ -3665,7 +3665,7 @@ lbl_fn_804D25D4_00002E68:
     b lbl_fn_804D25D4_00004898
     bl fn_8020A3E4
     li r4, 0x0
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     bl fn_804D16D0
     li r4, 0xf
     bl fn_804AF520
@@ -3723,7 +3723,7 @@ lbl_fn_804D25D4_00002F50:
     b lbl_fn_804D25D4_00004898
     bl fn_8020A3E4
     li r4, 0x0
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     mr r3, r24
     bl fn_804E9364
     mr r3, r24

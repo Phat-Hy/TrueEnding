@@ -26,7 +26,7 @@ extern void npc_getGlobalManager(void);
 extern void quest_ctorRewardItem(void);
 extern void actor_setState(void);
 extern void actor_getMovementFlags(void);
-extern void fn_801A03E0(void);
+extern void bgm_getGlobalManager(void);
 extern void fn_801A03EC(void);
 extern void fn_801A0408(void);
 extern void task_findEntryById(void);
@@ -658,7 +658,7 @@ lbl_fn_802BB92C_000007B0:
 lbl_fn_802BB92C_000007D4:
     cmpwi r3, 0x0
     bne lbl_fn_802BB92C_00000798
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     bl fn_801A0408
     stw r3, 0x8(r1)
     lfs f31, lbl_808841A0
@@ -739,7 +739,7 @@ lbl_fn_802BB92C_000008D4:
 lbl_fn_802BB92C_000008F8:
     cmpwi r31, 0x0
     bne lbl_fn_802BB92C_000008D4
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     bl fn_801A0408
     lfs f31, lbl_8088417C
     mr r31, r3

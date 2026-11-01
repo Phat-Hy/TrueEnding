@@ -13,7 +13,7 @@ extern void fn_800502A8(void);
 extern void fn_80071D68(void);
 extern void fn_80071D74(void);
 extern void gx_drawScreenQuad(void);
-extern void fn_80075DEC(void);
+extern void seq_stepPlaybackTimer(void);
 extern void fn_80075F58(void);
 extern void gx_applyRenderState(void);
 extern void fn_800763FC(void);
@@ -1097,7 +1097,7 @@ asm void fn_800B2EA0(void)
     li r6, 0x3
     bl GXSetTevAlphaIn
     lwz r3, lbl_8087EEE0
-    bl fn_80075DEC
+    bl seq_stepPlaybackTimer
     lwz r3, lbl_8087EFB4
     bl fn_800BFB70
     mr r3, r27

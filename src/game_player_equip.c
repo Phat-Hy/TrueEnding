@@ -21,7 +21,7 @@ extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB6B0(void);
-extern void fn_800CB6E4(void);
+extern void morph_dispatchTargetUpdate(void);
 extern void str_findChar(void);
 extern void cam_destroyMsgHandle(void);
 extern void fn_8011FFF8(void);
@@ -574,7 +574,7 @@ lbl_fn_8012111C_000005C0:
     stfs f2, 0xc(r1)
     stfs f1, 0x10(r1)
     stfs f0, 0x14(r1)
-    bl fn_800CB6E4
+    bl morph_dispatchTargetUpdate
 lbl_fn_8012111C_000005FC:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)

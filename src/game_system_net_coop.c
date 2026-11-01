@@ -23,7 +23,7 @@ extern void fn_803B57B0(void);
 extern void fn_803B5830(void);
 extern void fn_803B5950(void);
 extern void fn_803CC6B4(void);
-extern void fn_8046ECDC(void);
+extern void boss_updateLaserAimMatrix(void);
 extern void fn_8047F580(void);
 extern void rand(void);
 extern void __ptmf_scall(void);
@@ -964,7 +964,7 @@ lbl_fn_8039D274_00000B7C:
 lbl_fn_8039D274_00000BB0:
     lwz r3, lbl_8087F518
     li r4, 0x0
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
 lbl_fn_8039D274_00000BBC:
     lwz r0, 0x0(r31)
     lis r3, lbl_8074ED24@ha

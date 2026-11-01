@@ -28,10 +28,10 @@ extern void fn_80129978(void);
 extern void path_resetWaypointVelocity(void);
 extern void fn_8012A190(void);
 extern void npc_updateDialogueTarget(void);
-extern void fn_8013A13C(void);
+extern void mtx_rotYRad(void);
 extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
-extern void fn_8013C480(void);
+extern void npc_isInteractionReady(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_getGlobalManager(void);
 extern void fn_80140500(void);
@@ -1632,7 +1632,7 @@ lbl_fn_802F0328_0000158C:
 lbl_fn_802F0328_000015E0:
     fneg f1, f29
 lbl_fn_802F0328_000015E4:
-    bl fn_8013A13C
+    bl mtx_rotYRad
     addi r3, r31, 0x14d8
     addi r4, r1, 0x98
     bl mtx_multVec
@@ -1648,7 +1648,7 @@ lbl_fn_802F0328_000015E4:
     cmpwi r0, 0xa
     bne lbl_fn_802F0328_00001708
     lwz r3, 0x14d4(r31)
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_802F0328_00001648
     lwz r3, 0x14d4(r31)

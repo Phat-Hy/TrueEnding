@@ -106,7 +106,7 @@ void fn_800CB688(void);
 void fn_800CB69C(void);
 void fn_800CB6B0(void);
 void fn_800CB6C4(void);
-void fn_800CB6E4(void);
+void morph_dispatchTargetUpdate(void);
 void fn_800CB6F8(void);
 void fn_800CB714(void);
 void fn_800CB718(void);
@@ -1648,7 +1648,7 @@ lbl_fn_800CB6C4_000012AC:
     blr
 }
 
-asm void fn_800CB6E4(void)
+asm void morph_dispatchTargetUpdate(void)
 {
     nofralloc
     lwz r3, 0x0(r3)

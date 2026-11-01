@@ -43,7 +43,7 @@ extern void fn_803EB234(void);
 extern void fn_803EB394(void);
 extern void fn_803EB4A8(void);
 extern void fn_803EBC04(void);
-extern void fn_8046ECDC(void);
+extern void boss_updateLaserAimMatrix(void);
 extern void wcslen(void);
 extern u32 strlen(const char* str);
 
@@ -1928,7 +1928,7 @@ asm void fn_803B7A60(void)
     stw r31, 0xc(r1)
     mr r31, r3
     lwz r3, lbl_8087F518
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     lwz r3, 0xd70(r31)
     cmpwi r3, 0x0
     beq lbl_fn_803B7A60_00001974

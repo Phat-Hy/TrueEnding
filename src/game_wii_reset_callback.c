@@ -7,7 +7,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void boss_decodePhaseBitfield(void);
-extern void fn_8006B2D8(void);
+extern void boss_parseStateCondition(void);
 extern void fn_8006BB6C(void);
 extern void fn_8006D008(void);
 extern void mem_free(void);
@@ -228,7 +228,7 @@ lbl_fn_80576034_000001C8:
     bl boss_decodePhaseBitfield
     addi r3, r1, 0x1c
     addi r4, r1, 0x28
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lis r5, lbl_80760D70@ha
     addi r3, r1, 0x10
     addi r5, r5, lbl_80760D70@l

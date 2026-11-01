@@ -19,7 +19,7 @@ extern void proj_getMatrix(void);
 extern void fn_8012476C(void);
 extern void path_getFollowerNode(void);
 extern void fn_80139F4C(void);
-extern void fn_8013A13C(void);
+extern void mtx_rotYRad(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
 extern void party_initFormationSlots(void);
@@ -946,7 +946,7 @@ asm void fn_801B6494(void)
     bl path_getFollowerNode
     lfs f1, 0x4(r3)
     addi r3, r1, 0x100
-    bl fn_8013A13C
+    bl mtx_rotYRad
     addi r3, r1, 0x50
     addi r4, r1, 0x100
     bl mtx_multVec
@@ -985,7 +985,7 @@ lbl_fn_801B6494_00000CC8:
     bl path_getFollowerNode
     lfs f1, 0x4(r3)
     addi r3, r1, 0xa8
-    bl fn_8013A13C
+    bl mtx_rotYRad
     addi r3, r1, 0x44
     addi r4, r1, 0xa8
     bl mtx_multVec

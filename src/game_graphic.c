@@ -12,7 +12,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_8005DF90(void);
 extern void fn_800610A4(void);
-extern void fn_80075DEC(void);
+extern void seq_stepPlaybackTimer(void);
 extern void fn_80075F58(void);
 extern void fn_800763FC(void);
 extern void dungeon_initGlobalContext(void);
@@ -823,7 +823,7 @@ lbl_fn_800AF544_00000A10:
     bl GXCopyTex
     bl fn_80614190
     lwz r3, lbl_8087EEE0
-    bl fn_80075DEC
+    bl seq_stepPlaybackTimer
     lfs f1, lbl_80880E0C
     mr r4, r22
     lfs f2, lbl_80880E10
@@ -1685,7 +1685,7 @@ lbl_fn_800AFFEC_000014D0:
     addi r4, r4, 0x74c
     bl fn_800763FC
     lwz r3, lbl_8087EEE0
-    bl fn_80075DEC
+    bl seq_stepPlaybackTimer
     li r3, 0x1
     li r4, 0x4
     li r5, 0x0
@@ -2141,7 +2141,7 @@ lbl_fn_800B0A70_00001D1C:
     cmplw r29, r0
     blt lbl_fn_800B0A70_00001C88
     lwz r3, lbl_8087EEE0
-    bl fn_80075DEC
+    bl seq_stepPlaybackTimer
     li r3, 0x0
     li r4, 0x1
     li r5, 0x0

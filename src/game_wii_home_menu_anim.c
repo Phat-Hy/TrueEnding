@@ -20,7 +20,7 @@ extern void fn_8010F41C(void);
 extern void quest_checkCondition(void);
 extern void dialog_renderWindow(void);
 extern void dialog_selectChoice(void);
-extern void fn_8014EEC4(void);
+extern void dialog_activateChoiceWindow(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80239C14(void);
 extern void fn_80239C20(void);
@@ -898,7 +898,7 @@ lbl_fn_8056FC28_00000AA4:
 lbl_fn_8056FC28_00000B44:
     lwz r3, 0x0(r27)
     li r4, 0x1
-    bl fn_8014EEC4
+    bl dialog_activateChoiceWindow
 lbl_fn_8056FC28_00000B50:
     fmr f1, f30
     lwz r3, 0x0(r27)

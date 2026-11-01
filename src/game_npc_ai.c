@@ -52,7 +52,7 @@ extern void fn_80139F24(void);
 extern void fn_80139F2C(void);
 extern void fn_80139F3C(void);
 extern void fn_80139F58(void);
-extern void fn_8013A13C(void);
+extern void mtx_rotYRad(void);
 extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_8013C394(void);
@@ -73,7 +73,7 @@ extern void fn_8013C458(void);
 extern void fn_8013C460(void);
 extern void fn_8013C470(void);
 extern void fn_8013C478(void);
-extern void fn_8013C480(void);
+extern void npc_isInteractionReady(void);
 extern void npc_getDialogController(void);
 extern void fn_8013C50C(void);
 extern void fn_8013C514(void);
@@ -1266,7 +1266,7 @@ lbl_fn_8013A4E8_0000103C:
     lwz r3, 0xd24(r27)
     cmpwi r3, 0x0
     beq lbl_fn_8013A4E8_00001060
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     bne lbl_fn_8013A4E8_0000106C
 lbl_fn_8013A4E8_00001060:
@@ -1331,7 +1331,7 @@ lbl_fn_8013A4E8_000010F8:
     bl phys_scaleGravity
     fmuls f1, f1, f31
     addi r3, r1, 0x390
-    bl fn_8013A13C
+    bl mtx_rotYRad
     addi r3, r1, 0x2d0
     addi r4, r1, 0x390
     bl mtx_multVec
@@ -1465,7 +1465,7 @@ lbl_fn_8013A4E8_00001300:
     lwz r3, 0xd64(r27)
     cmpwi r3, 0x0
     beq lbl_fn_8013A4E8_000014B8
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_8013A4E8_000014B8
     lwz r3, 0xd64(r27)
@@ -1586,7 +1586,7 @@ lbl_fn_8013A4E8_000014D0:
     lwz r3, 0xd64(r27)
     cmpwi r3, 0x0
     beq lbl_fn_8013A4E8_00001574
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_8013A4E8_00001574
     mr r3, r31

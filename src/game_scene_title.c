@@ -22,7 +22,7 @@ extern void quest_resetObjectiveBounds(void);
 extern void inventory_unequipItem(void);
 extern void debuff_clearStatus(void);
 extern void fn_80178864(void);
-extern void fn_801789D8(void);
+extern void battle_evalDropTable(void);
 extern void actor_getMovementFlags(void);
 extern void task_findEntryById(void);
 extern void kpad_getClampData(void);
@@ -1682,7 +1682,7 @@ lbl_fn_801A5BDC_00001518:
     lwz r3, 0x4(r30)
     li r4, 0x1395
     li r5, 0x0
-    bl fn_801789D8
+    bl battle_evalDropTable
     cmpwi r3, 0x0
     beq lbl_fn_801A5BDC_0000168C
     lwz r3, 0x4(r30)

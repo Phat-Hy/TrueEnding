@@ -26,7 +26,7 @@ extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void skill_calcTrajectory(void);
-extern void fn_8006B2D8(void);
+extern void boss_parseStateCondition(void);
 extern void script_executeOpcode(void);
 extern void fn_80070A70(void);
 extern void fn_80070C98(void);
@@ -3100,7 +3100,7 @@ asm void fn_80043EAC(void)
     bl actor_dispatchMessage
     mr r4, r28
     addi r3, r1, 0x1c
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0x10(r1)
     srwi. r0, r0, 31
     beq lbl_fn_80043EAC_000025E0

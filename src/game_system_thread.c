@@ -7,7 +7,7 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80069BF4(void);
 extern void boss_decodePhaseBitfield(void);
-extern void fn_8006B2D8(void);
+extern void boss_parseStateCondition(void);
 extern void str_assignBuffer(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -208,7 +208,7 @@ lbl_fn_801FD5A0_000001C4:
 lbl_fn_801FD5A0_000001D8:
     addi r3, r1, 0x4c
     addi r4, r1, 0x64
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0x64(r1)
     srwi. r3, r0, 31
     bne lbl_fn_801FD5A0_00000214
@@ -545,7 +545,7 @@ lbl_fn_801FDA20_00000658:
 lbl_fn_801FDA20_0000066C:
     addi r3, r1, 0x4c
     addi r4, r1, 0x64
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0x64(r1)
     srwi. r3, r0, 31
     bne lbl_fn_801FDA20_000006A8

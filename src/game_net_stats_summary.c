@@ -16,7 +16,7 @@ extern void fn_8004B0E4(void);
 extern void fn_80069BF4(void);
 extern void boss_dispatchActionTransition(void);
 extern void boss_triggerEventSequence(void);
-extern void fn_8006B2D8(void);
+extern void boss_parseStateCondition(void);
 extern void fn_8006D008(void);
 extern void script_executeOpcode(void);
 extern void dungeon_initGlobalContext(void);
@@ -942,7 +942,7 @@ lbl_fn_8053F81C_00000B80:
     bne lbl_fn_8053F81C_00000C64
     addi r3, r1, 0x68
     addi r4, r24, 0x68
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lis r5, lbl_8075E148@ha
     addi r3, r1, 0x5c
     addi r5, r5, lbl_8075E148@l
@@ -1092,7 +1092,7 @@ lbl_fn_8053F81C_00000D80:
 lbl_fn_8053F81C_00000D98:
     addi r3, r1, 0x2c
     addi r4, r24, 0x68
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lis r5, lbl_8075E148@ha
     addi r3, r1, 0x20
     addi r5, r5, lbl_8075E148@l

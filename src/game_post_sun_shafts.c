@@ -34,7 +34,7 @@ extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void task_isValidQueueRange(void);
 extern void actor_setState(void);
-extern void fn_801A03E0(void);
+extern void bgm_getGlobalManager(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_ctor(void);
 extern void res_Resource_unload(void);
@@ -791,7 +791,7 @@ lbl_fn_802D0594_00000980:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r30, r3
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     mr r4, r30
     bl skill_findNodeById
     cmpwi r3, 0x0

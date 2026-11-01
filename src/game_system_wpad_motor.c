@@ -116,7 +116,7 @@ extern void fn_803E32EC(void);
 extern void fn_803E4478(void);
 extern void fn_803E454C(void);
 extern void fn_8044D028(void);
-extern void fn_8046ECDC(void);
+extern void boss_updateLaserAimMatrix(void);
 extern void fn_8046F8B8(void);
 extern void fn_8046F96C(void);
 extern void fn_80470364(void);
@@ -1254,7 +1254,7 @@ lbl_world_Manager_draw_00000E54:
 lbl_world_Manager_draw_00000E5C:
     lwz r3, lbl_8087F518
     li r4, 0x1
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     b lbl_world_Manager_draw_000031A0
     lwz r5, 0x5514(r3)
     lwz r4, 0x551c(r3)
@@ -1303,11 +1303,11 @@ lbl_world_Manager_draw_00000F04:
     stw r0, 0x5538(r28)
     li r4, 0x1
     lwz r3, lbl_8087F518
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     b lbl_world_Manager_draw_000031A0
     lwz r3, lbl_8087F518
     li r4, 0x1
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     lwz r3, lbl_8087F048
     bl fn_800F3490
     cmpwi r3, 0x0
@@ -1327,7 +1327,7 @@ lbl_world_Manager_draw_00000F04:
     b lbl_world_Manager_draw_000031A0
     lwz r3, lbl_8087F518
     li r4, 0x1
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     lwz r0, 0x553c(r28)
     cmpwi r0, 0x0
     beq lbl_world_Manager_draw_0000118C

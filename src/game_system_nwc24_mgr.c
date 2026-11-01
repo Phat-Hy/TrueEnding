@@ -38,7 +38,7 @@ extern void actor_calcSpawnTransform(void);
 extern void magic_dispatchActionCommand(void);
 extern void player_evaluateStatusCondition(void);
 extern void path_getFollowerNode(void);
-extern void fn_8013A13C(void);
+extern void mtx_rotYRad(void);
 extern void fn_8013C3B4(void);
 extern void quest_getGlobalManager(void);
 extern void fn_80140500(void);
@@ -318,7 +318,7 @@ lbl_fn_80382A1C_000001E4:
     lfs f0, 0x12c(r1)
     addi r3, r1, 0x1f8
     fneg f1, f0
-    bl fn_8013A13C
+    bl mtx_rotYRad
     addi r3, r1, 0x104
     addi r4, r1, 0x1f8
     bl mtx_multVec
@@ -327,7 +327,7 @@ lbl_fn_80382A1C_000001E4:
     lfs f0, 0x12c(r1)
     fmadds f1, f29, f1, f0
     stfs f1, 0x12c(r1)
-    bl fn_8013A13C
+    bl mtx_rotYRad
     addi r3, r1, 0x104
     addi r4, r1, 0x1c8
     bl mtx_multVec

@@ -20,7 +20,7 @@ extern void fn_80091CFC(void);
 extern void atn_Model_findBoneIndex(void);
 extern void target_registerCandidate(void);
 extern void fn_80094B6C(void);
-extern void fn_800CB6E4(void);
+extern void morph_dispatchTargetUpdate(void);
 extern void atn_Task_setActive(void);
 extern void fn_800F29D0(void);
 extern void viewport_getGlobalContext(void);
@@ -854,7 +854,7 @@ lbl_fn_8031E8BC_00000A7C:
 lbl_fn_8031E8BC_00000A98:
     mr r4, r30
     addi r3, r29, 0x38
-    bl fn_800CB6E4
+    bl morph_dispatchTargetUpdate
     mr r4, r30
     addi r3, r29, 0x10
     bl vec3_copy

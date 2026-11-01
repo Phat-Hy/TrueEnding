@@ -12,7 +12,7 @@ extern void dtor_80084684(void);
 extern void atn_Model_findBoneIndex(void);
 extern void quest_checkCondition(void);
 extern void dialog_selectChoice(void);
-extern void fn_8014EEC4(void);
+extern void dialog_activateChoiceWindow(void);
 extern void task_isValidQueueRange(void);
 extern void wpad_getActiveDevice(void);
 extern void fn_8056A9E8(void);
@@ -1000,7 +1000,7 @@ lbl_fn_8056BD38_00000BDC:
 lbl_fn_8056BD38_00000C7C:
     lwz r3, 0x0(r29)
     li r4, 0x1
-    bl fn_8014EEC4
+    bl dialog_activateChoiceWindow
 lbl_fn_8056BD38_00000C88:
     fmr f1, f31
     lwz r3, 0x0(r29)

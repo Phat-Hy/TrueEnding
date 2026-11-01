@@ -30,7 +30,7 @@ extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
 extern void fn_800CB518(void);
 extern void morph_updateMesh(void);
-extern void fn_800CB6E4(void);
+extern void morph_dispatchTargetUpdate(void);
 extern void task_lookupTagIndex(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_unload(void);
@@ -570,7 +570,7 @@ lbl_fn_804058A4_0000060C:
     stfs f0, 0x3dc(r3)
     beq lbl_fn_804058A4_00000668
     addi r3, r3, 0x430
-    bl fn_800CB6E4
+    bl morph_dispatchTargetUpdate
 lbl_fn_804058A4_00000668:
     lfs f0, 0x3dc(r30)
     addi r31, r1, 0x2c
@@ -1951,7 +1951,7 @@ lbl_fn_80406ACC_00001980:
     beq lbl_fn_80406ACC_00001998
     addi r3, r31, 0x940
     addi r4, r31, 0x6c
-    bl fn_800CB6E4
+    bl morph_dispatchTargetUpdate
 lbl_fn_80406ACC_00001998:
     lwz r0, 0x54(r31)
     cmpwi r0, 0x3

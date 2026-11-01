@@ -10,7 +10,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8006945C(void);
 extern void gx_drawScreenQuad(void);
-extern void fn_80075DEC(void);
+extern void seq_stepPlaybackTimer(void);
 extern void fn_80075F58(void);
 extern void fn_800763FC(void);
 extern void model_updateBoneTransforms(void);
@@ -692,7 +692,7 @@ lbl_tex_bakeCharacterTexture_00000884:
     mr r4, r18
     bl DCFlushRange
     lwz r3, lbl_8087EEE0
-    bl fn_80075DEC
+    bl seq_stepPlaybackTimer
     li r16, 0x0
     li r14, 0x0
     b lbl_tex_bakeCharacterTexture_000008E0

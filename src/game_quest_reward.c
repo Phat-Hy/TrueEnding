@@ -20,7 +20,7 @@ extern void fn_8010F668(void);
 extern void fn_8012A288(void);
 extern void fn_80139F2C(void);
 extern void fn_80139F60(void);
-extern void fn_8013A13C(void);
+extern void mtx_rotYRad(void);
 extern void fn_8013C394(void);
 extern void fn_8013C43C(void);
 extern void quest_initMarkerCoords(void);
@@ -1508,7 +1508,7 @@ asm void fn_80148CC4(void)
     lfs f1, 0x584(r30)
     lfs f0, 0x580(r30)
     fnmsubs f1, f2, f1, f0
-    bl fn_8013A13C
+    bl mtx_rotYRad
     mr r3, r31
     addi r4, r1, 0x280
     bl fn_801495E8
@@ -1616,7 +1616,7 @@ lbl_fn_80148CC4_00001510:
     bl fn_8010F668
     fmr f1, f31
     addi r3, r1, 0x250
-    bl fn_8013A13C
+    bl mtx_rotYRad
     mr r3, r31
     addi r4, r1, 0x250
     bl fn_801495E8
@@ -1640,7 +1640,7 @@ lbl_fn_80148CC4_0000154C:
     lfs f1, 0x580(r30)
     lfs f0, 0x584(r30)
     fmadds f1, f2, f1, f0
-    bl fn_8013A13C
+    bl mtx_rotYRad
     mr r3, r31
     addi r4, r1, 0x220
     bl fn_801495E8
@@ -1687,7 +1687,7 @@ lbl_fn_80148CC4_0000161C:
     bl fn_8010F668
     fmr f1, f31
     addi r3, r1, 0x1f0
-    bl fn_8013A13C
+    bl mtx_rotYRad
     mr r3, r31
     addi r4, r1, 0x1f0
     bl fn_801495E8

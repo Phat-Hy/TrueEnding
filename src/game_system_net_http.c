@@ -10,7 +10,7 @@ extern void item_useConsumable(void);
 extern void skill_calculateDamage(void);
 extern void magic_castSpellCircle(void);
 extern void boss_triggerEventSequence(void);
-extern void fn_8006B2D8(void);
+extern void boss_parseStateCondition(void);
 extern void gmk_LoadHandle_constructor(void);
 extern void mem_alloc(void);
 extern void sys_getMainManager(void);
@@ -1822,7 +1822,7 @@ lbl_fn_803936A4_0000190C:
     bl actor_dispatchMessage
     addi r3, r1, 0x54
     addi r4, r1, 0x48
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0x48(r1)
     srwi. r0, r0, 31
     beq lbl_fn_803936A4_00001970

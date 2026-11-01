@@ -19,7 +19,7 @@ extern void fn_80103600(void);
 extern void fn_80107850(void);
 extern void hurtbox_testCollisionLayer(void);
 extern void hurtbox_dispatchHitEvent(void);
-extern void fn_8012DF7C(void);
+extern void enemy_calcAttackTrajectory(void);
 extern void quest_getRewardItemSlot(void);
 extern void party_configureMemberSlot(void);
 extern void fn_80160170(void);
@@ -1089,7 +1089,7 @@ lbl_fn_802D4628_00000E34:
     stw r4, 0x13c(r1)
     addi r0, r7, 0x1
     subf r26, r0, r26
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
     lwz r12, 0x0(r20)
     mr r4, r20
     addi r3, r1, 0xd4
@@ -1278,7 +1278,7 @@ lbl_fn_802D4628_000010C8:
     stfs f4, 0x11c(r1)
     stfs f3, 0x120(r1)
     stfs f0, 0x124(r1)
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
     lwz r3, lbl_8087F048
     mr r5, r22
     mr r7, r24

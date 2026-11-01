@@ -14,7 +14,7 @@ extern void enemy_updateNavSteering(void);
 extern void fn_80134774(void);
 extern void dialog_selectChoice(void);
 extern void fn_8014EE48(void);
-extern void fn_8014EEC4(void);
+extern void dialog_activateChoiceWindow(void);
 extern void fn_8014F5D4(void);
 extern void fn_8014FAD0(void);
 extern void fn_801CDD9C(void);
@@ -1721,7 +1721,7 @@ lbl_fn_801CF3C0_000016D0:
     lwz r24, 0x674(r27)
     mr r3, r27
     li r4, 0x1
-    bl fn_8014EEC4
+    bl dialog_activateChoiceWindow
     lwz r5, 0x78(r31)
     mr r3, r27
     lwz r6, 0x80(r31)
@@ -2003,7 +2003,7 @@ lbl_fn_801CF3C0_00001AA0:
     lwz r23, 0x674(r29)
     mr r3, r29
     li r4, 0x1
-    bl fn_8014EEC4
+    bl dialog_activateChoiceWindow
     lwz r5, 0x78(r31)
     mr r3, r29
     lwz r6, 0x80(r31)
@@ -2066,7 +2066,7 @@ lbl_fn_801CF3C0_00001B80:
     lwz r23, 0x674(r29)
     mr r3, r29
     li r4, 0x1
-    bl fn_8014EEC4
+    bl dialog_activateChoiceWindow
     lwz r5, 0x78(r31)
     mr r3, r29
     lwz r6, 0x80(r31)

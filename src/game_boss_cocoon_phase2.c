@@ -60,7 +60,7 @@ extern void fn_80129978(void);
 extern void path_resetWaypointVelocity(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80139F2C(void);
-extern void fn_8013A13C(void);
+extern void mtx_rotYRad(void);
 extern void quest_updateFlow(void);
 extern void fn_801479E4(void);
 extern void fn_801495E8(void);
@@ -2229,7 +2229,7 @@ lbl_fn_80460458_00001CF4:
     bl fn_8010F668
     lfs f1, lbl_80886D78
     addi r3, r1, 0x98
-    bl fn_8013A13C
+    bl mtx_rotYRad
     addi r3, r31, 0x1578
     addi r4, r1, 0x98
     bl fn_801495E8

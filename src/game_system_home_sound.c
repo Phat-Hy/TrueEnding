@@ -20,7 +20,7 @@ extern void fn_8006F2F0(void);
 extern void fn_8007192C(void);
 extern void gx_syncFrameFifo(void);
 extern void fn_80071D60(void);
-extern void fn_80075DEC(void);
+extern void seq_stepPlaybackTimer(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void fn_80089EE4(void);
@@ -1430,7 +1430,7 @@ lbl_dvd_initFatalErrorScreen_000011E8:
     stw r0, 0x48(r30)
     bl fn_8007192C
     mr r3, r30
-    bl fn_80075DEC
+    bl seq_stepPlaybackTimer
     lis r3, lbl_8074D8B8@ha
     lis r31, lbl_8074CCD0@ha
     lis r24, lbl_8074D8C0@ha

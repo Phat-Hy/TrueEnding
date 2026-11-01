@@ -10,7 +10,7 @@ extern void mission_updateStub(void);
 extern void fn_8005DFC8(void);
 extern void fn_8006FEBC(void);
 extern void gx_drawScreenQuad(void);
-extern void fn_80075DEC(void);
+extern void seq_stepPlaybackTimer(void);
 extern void fn_80075F58(void);
 extern void fn_80076174(void);
 extern void fn_800A9788(void);
@@ -769,7 +769,7 @@ asm void fn_800B6A00(void)
     mr r3, r28
     bl fn_800B3454
     lwz r3, lbl_8087EEE0
-    bl fn_80075DEC
+    bl seq_stepPlaybackTimer
     lwz r3, lbl_8087EFA8
     lwz r0, 0x308(r3)
     cmpwi r0, 0x0

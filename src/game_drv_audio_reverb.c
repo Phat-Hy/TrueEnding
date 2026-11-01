@@ -29,7 +29,7 @@ extern void fn_8006AC08(void);
 extern void fn_8006AD24(void);
 extern void fn_8006AF38(void);
 extern void boss_initActionStream(void);
-extern void fn_8006B2D8(void);
+extern void boss_parseStateCondition(void);
 extern void fn_8006BA30(void);
 extern void fn_8006BA38(void);
 extern void fn_8006D008(void);
@@ -1283,7 +1283,7 @@ lbl_fn_805BB658_00000EB0:
     beq lbl_fn_805BB658_000012D4
     mr r4, r23
     addi r3, r1, 0x90
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0x90(r1)
     srwi. r0, r0, 31
     bne lbl_fn_805BB658_00000FE8

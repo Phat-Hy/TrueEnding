@@ -19,7 +19,7 @@ extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
 extern void morph_hasActiveWeight(void);
 extern void morph_updateMesh(void);
-extern void fn_800CB6E4(void);
+extern void morph_dispatchTargetUpdate(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void fn_801028E4(void);
@@ -418,10 +418,10 @@ lbl_fn_802ED3F0_000003A4:
 lbl_fn_802ED3F0_00000400:
     addi r3, r31, 0x15a0
     addi r4, r31, 0x528
-    bl fn_800CB6E4
+    bl morph_dispatchTargetUpdate
     addi r3, r31, 0x15a4
     addi r4, r31, 0x528
-    bl fn_800CB6E4
+    bl morph_dispatchTargetUpdate
 lbl_fn_802ED3F0_00000418:
     mr r3, r31
     bl dialog_updateScriptState

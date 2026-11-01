@@ -60,12 +60,12 @@ extern void equip_getGlobalManager(void);
 extern void fn_8012A190(void);
 extern void npc_updateDialogueTarget(void);
 extern void fn_80139F3C(void);
-extern void fn_8013A13C(void);
+extern void mtx_rotYRad(void);
 extern void npc_getPosition(void);
 extern void npc_getDialogController(void);
 extern void quest_getGlobalManager(void);
 extern void fn_80140500(void);
-extern void fn_801A03E0(void);
+extern void bgm_getGlobalManager(void);
 extern void fn_801A03E8(void);
 extern void fn_801A03F4(void);
 extern void task_findEntryById(void);
@@ -2249,7 +2249,7 @@ lbl_fn_8041766C_00001CD8:
     lwz r0, 0x2c(r3)
     cmpwi r0, 0x2
     bne lbl_fn_8041766C_00001D04
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     mr r4, r3
     addi r3, r1, 0x1a8
     bl fn_80417FF8
@@ -2324,7 +2324,7 @@ lbl_fn_8041766C_00001D5C:
     fsubs f2, f2, f3
     fdivs f1, f2, f1
     fmuls f1, f0, f1
-    bl fn_8013A13C
+    bl mtx_rotYRad
     addi r3, r1, 0x74
     addi r4, r1, 0x118
     bl mtx_multVec

@@ -38,7 +38,7 @@ extern void fn_8012ABF4(void);
 extern void fn_8012AC18(void);
 extern void fn_8012AC40(void);
 extern void dialog_selectChoice(void);
-extern void fn_8014EEC4(void);
+extern void dialog_activateChoiceWindow(void);
 extern void fn_8016E5F0(void);
 extern void fn_80176DFC(void);
 extern void fn_802096A8(void);
@@ -3019,7 +3019,7 @@ lbl_fn_8001282C_00002724:
     cmpwi r0, 0x0
     beqlr
     li r4, 0x0
-    b fn_8014EEC4
+    b dialog_activateChoiceWindow
 lbl_fn_8001282C_00002748:
     cmpwi r5, -0x1
     beq lbl_fn_8001282C_00002788

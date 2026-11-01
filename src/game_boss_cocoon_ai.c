@@ -19,7 +19,7 @@ extern void system_getNextSequenceId(void);
 extern void fn_80101340(void);
 extern void hurtbox_testCollisionLayer(void);
 extern void vec3_sqMag(void);
-extern void fn_8012DF7C(void);
+extern void enemy_calcAttackTrajectory(void);
 extern void npc_getPosition(void);
 extern void quest_evaluateConditions(void);
 extern void quest_getRewardItemSlot(void);
@@ -2002,7 +2002,7 @@ lbl_fn_80455638_00001AE0:
     stw r4, 0xcc(r1)
     lwz r3, 0x0(r23)
     addi r3, r3, 0x7d4
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
     lwz r3, 0x0(r23)
     mr r6, r20
     stfs f28, 0x6c(r1)
@@ -2281,7 +2281,7 @@ lbl_fn_80455638_00001DFC:
     stfs f4, 0x84(r1)
     stfs f3, 0x88(r1)
     stfs f0, 0x8c(r1)
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
     lwz r3, lbl_8087F048
     mr r5, r17
     mr r6, r20

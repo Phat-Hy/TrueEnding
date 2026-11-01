@@ -17,7 +17,7 @@ extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
-extern void fn_800CB6E4(void);
+extern void morph_dispatchTargetUpdate(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_8012476C(void);
@@ -1521,7 +1521,7 @@ lbl_fn_8019B6A8_00001448:
     lwz r4, 0x4(r31)
     addi r3, r31, 0x20
     addi r4, r4, 0x528
-    bl fn_800CB6E4
+    bl morph_dispatchTargetUpdate
 lbl_fn_8019B6A8_00001458:
     li r3, 0x0
 lbl_fn_8019B6A8_0000145C:

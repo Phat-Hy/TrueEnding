@@ -7,7 +7,7 @@ extern void _restgpr_25(void);
 extern void _savegpr_19(void);
 extern void _savegpr_25(void);
 extern void fn_8005DF90(void);
-extern void fn_80075DEC(void);
+extern void seq_stepPlaybackTimer(void);
 extern void fn_80075F58(void);
 extern void fn_800763FC(void);
 extern void fn_800A96AC(void);
@@ -949,7 +949,7 @@ lbl_fn_800A9E64_00000A28:
     lwz r3, lbl_8087EFB4
     bl fn_800BFB70
     lwz r3, lbl_8087EEE0
-    bl fn_80075DEC
+    bl seq_stepPlaybackTimer
     li r3, 0x1
     li r4, 0x1
     li r5, 0x1

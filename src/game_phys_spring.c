@@ -22,7 +22,7 @@ extern void fn_80134168(void);
 extern void fn_801346C8(void);
 extern void fn_8015E1B8(void);
 extern void battle_canTargetActor(void);
-extern void fn_801789D8(void);
+extern void battle_evalDropTable(void);
 extern void event_findEntryById(void);
 extern void task_mapIdToQueue(void);
 extern void fn_8021E48C(void);
@@ -966,7 +966,7 @@ lbl_fn_8010CB2C_00000B8C:
     mr r3, r30
     li r4, 0x4fbf
     li r5, 0x0
-    bl fn_801789D8
+    bl battle_evalDropTable
     cmpwi r3, 0x0
     beq lbl_fn_8010CB2C_00000BAC
     lfs f0, lbl_80881510

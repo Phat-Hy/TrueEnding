@@ -31,7 +31,7 @@ extern void inventory_applyItemStats(void);
 extern void fn_8015C6A0(void);
 extern void party_initFormationSlots(void);
 extern void actor_setState(void);
-extern void fn_801789D8(void);
+extern void battle_evalDropTable(void);
 extern void fn_8021A888(void);
 extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
@@ -1416,14 +1416,14 @@ lbl_fn_8027A478_00001238:
     li r4, 0x9c
     li r5, 0x0
     lwzx r3, r3, r19
-    bl fn_801789D8
+    bl battle_evalDropTable
     cmpwi r3, 0x0
     bne lbl_fn_8027A478_00001288
     lwz r3, 0x1908(r21)
     li r4, 0xa0
     li r5, 0x0
     lwzx r3, r3, r19
-    bl fn_801789D8
+    bl battle_evalDropTable
     cmpwi r3, 0x0
     bne lbl_fn_8027A478_00001288
     lwz r3, 0x1908(r21)

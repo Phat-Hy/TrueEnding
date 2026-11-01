@@ -16,7 +16,7 @@ extern void fn_800CB4EC(void);
 extern void fn_800CB504(void);
 extern void morph_hasActiveWeight(void);
 extern void morph_updateMesh(void);
-extern void fn_800CB6E4(void);
+extern void morph_dispatchTargetUpdate(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void bloom_processPasses(void);
@@ -1805,7 +1805,7 @@ lbl_fn_803E8A50_00001940:
     cmpwi r3, 0x0
     beq lbl_fn_803E8A50_00001960
     addi r4, r4, 0x528
-    bl fn_800CB6E4
+    bl morph_dispatchTargetUpdate
 lbl_fn_803E8A50_00001960:
     lwz r3, 0x1c(r20)
     li r21, 0x0

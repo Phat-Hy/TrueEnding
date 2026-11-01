@@ -62,7 +62,7 @@ extern void fn_803CE44C(void);
 extern void fn_803EDFBC(void);
 extern void fn_803EEE10(void);
 extern void fn_80453DBC(void);
-extern void fn_8046ECDC(void);
+extern void boss_updateLaserAimMatrix(void);
 extern void fn_8047043C(void);
 extern void boss_releaseLaserTarget(void);
 extern void atn_LoadHandle_constructor(void);
@@ -1470,7 +1470,7 @@ asm void spectateManager_update(void)
     mr r30, r3
     lwz r3, lbl_8087F518
     li r4, 0x0
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     lwz r4, 0x2a8(r30)
     cmpwi r4, 0x0
     bne lbl_spectateManager_update_000015F4

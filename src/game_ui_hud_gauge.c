@@ -34,7 +34,7 @@ extern void viewport_getNextSequenceId(void);
 extern void fn_801156BC(void);
 extern void fn_80116E6C(void);
 extern void path_getFollowerNode(void);
-extern void fn_8013A13C(void);
+extern void mtx_rotYRad(void);
 extern void fn_8013C3B4(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_initMarkerCoords(void);
@@ -2036,7 +2036,7 @@ lbl_fn_801C346C_00001A68:
     bl vec3_set
     lfs f1, 0xf0(r1)
     addi r3, r1, 0x138
-    bl fn_8013A13C
+    bl mtx_rotYRad
     addi r3, r1, 0xe0
     addi r4, r1, 0x138
     bl mtx_multVec
@@ -2206,7 +2206,7 @@ lbl_fn_801C346C_00001CF4:
     bl vec3_initValues
     fmr f1, f28
     addi r3, r1, 0x108
-    bl fn_8013A13C
+    bl mtx_rotYRad
     addi r3, r1, 0xe0
     addi r4, r1, 0x108
     bl mtx_multVec

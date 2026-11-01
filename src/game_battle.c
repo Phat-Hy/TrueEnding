@@ -59,7 +59,7 @@ extern void fn_80134270(void);
 extern void fn_80134290(void);
 extern void fn_801342B0(void);
 extern void dialog_selectChoice(void);
-extern void fn_8014EEC4(void);
+extern void dialog_activateChoiceWindow(void);
 extern void battle_canTargetActor(void);
 extern void actor_getMovementFlags(void);
 extern void task_lookupTagIndex(void);
@@ -576,7 +576,7 @@ lbl_fn_80017128_000004D4:
 lbl_fn_80017128_0000061C:
     mr r3, r27
     li r4, 0x0
-    bl fn_8014EEC4
+    bl dialog_activateChoiceWindow
 lbl_fn_80017128_00000628:
     lwz r4, 0x10(r28)
     lis r3, lbl_8072FC70@ha

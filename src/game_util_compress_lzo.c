@@ -42,7 +42,7 @@ extern void fn_80444564(void);
 extern void fn_8044D500(void);
 extern void fn_8044D560(void);
 extern void fn_8044D6AC(void);
-extern void fn_8046ECDC(void);
+extern void boss_updateLaserAimMatrix(void);
 extern void fn_8046EED8(void);
 extern void fn_804A55FC(void);
 extern void fn_80564060(void);
@@ -127,7 +127,7 @@ asm void fn_8058CF64(void)
     beq lbl_fn_8058CF64_00000188
     lwz r3, lbl_8087F518
     li r4, 0x0
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     mr r31, r30
     addis r29, r30, 0x2
     li r28, 0x0

@@ -118,7 +118,7 @@ void fn_8006AF38(void);
 void boss_initActionStream(void);
 void fn_8006B0C8(void);
 void boss_decodePhaseBitfield(void);
-void fn_8006B2D8(void);
+void boss_parseStateCondition(void);
 void fn_8006B404(void);
 void fn_8006B46C(void);
 void fn_8006B53C(void);
@@ -2889,7 +2889,7 @@ lbl_boss_decodePhaseBitfield_00002510:
     blr
 }
 
-asm void fn_8006B2D8(void)
+asm void boss_parseStateCondition(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -2902,57 +2902,57 @@ asm void fn_8006B2D8(void)
     mr r30, r3
     lwz r0, 0x0(r4)
     srwi. r7, r0, 31
-    bne lbl_fn_8006B2D8_00002564
+    bne lbl_boss_parseStateCondition_00002564
     lbz r0, 0x0(r4)
     addi r6, r4, 0x1
     clrlwi r5, r0, 25
-    b lbl_fn_8006B2D8_0000256C
-lbl_fn_8006B2D8_00002564:
+    b lbl_boss_parseStateCondition_0000256C
+lbl_boss_parseStateCondition_00002564:
     lwz r6, 0x8(r4)
     lwz r5, 0x4(r4)
-lbl_fn_8006B2D8_0000256C:
+lbl_boss_parseStateCondition_0000256C:
     cmpwi r5, 0x0
-    beq lbl_fn_8006B2D8_000025B0
+    beq lbl_boss_parseStateCondition_000025B0
     subi r5, r5, 0x1
     li r0, -0x1
     cmplw r5, r0
-    bge lbl_fn_8006B2D8_00002588
+    bge lbl_boss_parseStateCondition_00002588
     mr r8, r5
-lbl_fn_8006B2D8_00002588:
+lbl_boss_parseStateCondition_00002588:
     add r5, r6, r8
-lbl_fn_8006B2D8_0000258C:
+lbl_boss_parseStateCondition_0000258C:
     lbz r0, 0x0(r5)
     cmpwi r0, 0x2e
-    bne lbl_fn_8006B2D8_000025A0
+    bne lbl_boss_parseStateCondition_000025A0
     subf r6, r6, r5
-    b lbl_fn_8006B2D8_000025B4
-lbl_fn_8006B2D8_000025A0:
+    b lbl_boss_parseStateCondition_000025B4
+lbl_boss_parseStateCondition_000025A0:
     cmplw r5, r6
-    ble lbl_fn_8006B2D8_000025B0
+    ble lbl_boss_parseStateCondition_000025B0
     subi r5, r5, 0x1
-    b lbl_fn_8006B2D8_0000258C
-lbl_fn_8006B2D8_000025B0:
+    b lbl_boss_parseStateCondition_0000258C
+lbl_boss_parseStateCondition_000025B0:
     li r6, -0x1
-lbl_fn_8006B2D8_000025B4:
+lbl_boss_parseStateCondition_000025B4:
     addis r0, r6, 0x1
     cmplwi r0, 0xffff
-    beq lbl_fn_8006B2D8_000025D4
+    beq lbl_boss_parseStateCondition_000025D4
     mr r3, r30
     mr r4, r31
     li r5, 0x0
     bl fn_80069BF4
-    b lbl_fn_8006B2D8_0000263C
-lbl_fn_8006B2D8_000025D4:
+    b lbl_boss_parseStateCondition_0000263C
+lbl_boss_parseStateCondition_000025D4:
     cmpwi r7, 0x0
-    bne lbl_fn_8006B2D8_000025F8
+    bne lbl_boss_parseStateCondition_000025F8
     lwz r5, 0x0(r4)
     lwz r0, 0x4(r4)
     stw r0, 0x4(r3)
     stw r5, 0x0(r3)
     lwz r0, 0x8(r4)
     stw r0, 0x8(r3)
-    b lbl_fn_8006B2D8_0000263C
-lbl_fn_8006B2D8_000025F8:
+    b lbl_boss_parseStateCondition_0000263C
+lbl_boss_parseStateCondition_000025F8:
     li r0, 0x0
     stw r0, 0x0(r3)
     stw r0, 0x4(r3)
@@ -2970,7 +2970,7 @@ lbl_fn_8006B2D8_000025F8:
     lwz r0, 0x4(r31)
     add r7, r6, r0
     bl actor_dispatchMessage
-lbl_fn_8006B2D8_0000263C:
+lbl_boss_parseStateCondition_0000263C:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

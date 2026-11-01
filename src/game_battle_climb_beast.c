@@ -38,7 +38,7 @@ extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
-extern void fn_800CB6E4(void);
+extern void morph_dispatchTargetUpdate(void);
 extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void str_skipWhitespace(void);
@@ -54,14 +54,14 @@ extern void equip_getGlobalManager(void);
 extern void fn_8013A18C(void);
 extern void npc_getPosition(void);
 extern void fn_8013C3B4(void);
-extern void fn_8013C480(void);
+extern void npc_isInteractionReady(void);
 extern void quest_getGlobalManager(void);
 extern void fn_80140500(void);
 extern void fn_80144ED4(void);
 extern void fn_80148334(void);
 extern void fn_801750FC(void);
 extern void fn_80198C00(void);
-extern void fn_801A03E0(void);
+extern void bgm_getGlobalManager(void);
 extern void fn_801A03E8(void);
 extern void fn_801A03EC(void);
 extern void fn_801A0408(void);
@@ -841,7 +841,7 @@ lbl_fn_803FA5C8_00000924:
     beq lbl_fn_803FA5C8_00000944
     addi r3, r31, 0x518
     addi r4, r31, 0x6c
-    bl fn_800CB6E4
+    bl morph_dispatchTargetUpdate
     b lbl_fn_803FA5C8_0000098C
 lbl_fn_803FA5C8_00000944:
     lwz r0, 0x4d0(r31)
@@ -1193,7 +1193,7 @@ lbl_fn_803FA5C8_00000E58:
     b lbl_fn_803FA5C8_00000EDC
 lbl_fn_803FA5C8_00000E6C:
     mr r3, r30
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_803FA5C8_00000ED0
     mr r3, r30
@@ -1224,14 +1224,14 @@ lbl_fn_803FA5C8_00000ED0:
 lbl_fn_803FA5C8_00000EDC:
     cmpwi r30, 0x0
     bne lbl_fn_803FA5C8_00000E6C
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     bl fn_801A0408
     lfs f31, lbl_80886060
     mr r30, r3
     b lbl_fn_803FA5C8_00000F68
 lbl_fn_803FA5C8_00000EF8:
     mr r3, r30
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_803FA5C8_00000F5C
     mr r3, r30

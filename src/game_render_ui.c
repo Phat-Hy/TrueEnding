@@ -8,7 +8,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8005DF90(void);
-extern void fn_80075DEC(void);
+extern void seq_stepPlaybackTimer(void);
 extern void fn_80075F58(void);
 extern void gx_applyRenderState(void);
 extern void fn_800763FC(void);
@@ -344,7 +344,7 @@ lbl_fn_800B0CD4_000000F0:
     stfs f0, 0x5c(r1)
     bl fn_800BFCB4
     lwz r3, lbl_8087EEE0
-    bl fn_80075DEC
+    bl seq_stepPlaybackTimer
     li r3, 0x0
     li r4, 0x1
     li r5, 0x0
@@ -654,7 +654,7 @@ lbl_fn_800B105C_000007B0:
     li r3, 0x1
     bl fn_80616EF0
     lwz r3, lbl_8087EEE0
-    bl fn_80075DEC
+    bl seq_stepPlaybackTimer
     lwz r3, lbl_8087EFB4
     bl fn_800BFB70
     li r3, 0x0

@@ -19,7 +19,7 @@ extern void fn_8006FE08(void);
 extern void fn_80070C98(void);
 extern void fn_80071D74(void);
 extern void gx_drawScreenQuad(void);
-extern void fn_80075DEC(void);
+extern void seq_stepPlaybackTimer(void);
 extern void gx_setRenderStateParam(void);
 extern void fn_800A96AC(void);
 extern void fn_800B6C70(void);
@@ -2155,7 +2155,7 @@ lbl_fn_800B8F40_00001F64:
     li r0, 0x0
     stb r0, lbl_8087EFB0
     lwz r3, lbl_8087EEE0
-    bl fn_80075DEC
+    bl seq_stepPlaybackTimer
     li r3, 0x1
     bl GXSetZCompLoc
     lwz r3, lbl_8087EFB4

@@ -16,7 +16,7 @@ extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
-extern void fn_800CB6E4(void);
+extern void morph_dispatchTargetUpdate(void);
 extern void sky_renderStub(void);
 extern void fn_800EFC64(void);
 extern void fn_800EFE3C(void);
@@ -1552,7 +1552,7 @@ lbl_fn_80599458_0000148C:
     lfs f2, 0x53c(r5)
     stfs f2, 0x24(r30)
     psq_st f1, 0x1c(r30), 0, 0
-    bl fn_800CB6E4
+    bl morph_dispatchTargetUpdate
 lbl_fn_80599458_000014D4:
     lwz r5, 0x8(r30)
     cmpwi r5, 0x0
@@ -1571,7 +1571,7 @@ lbl_fn_80599458_000014D4:
     lfs f2, 0x53c(r5)
     stfs f2, 0x24(r30)
     psq_st f1, 0x1c(r30), 0, 0
-    bl fn_800CB6E4
+    bl morph_dispatchTargetUpdate
     b lbl_fn_80599458_00001530
 lbl_fn_80599458_00001520:
     cmpwi r0, 0x2

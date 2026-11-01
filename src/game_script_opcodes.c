@@ -45,7 +45,7 @@ extern void actor_setState(void);
 extern void battle_awardExp(void);
 extern void battle_generateLootDrops(void);
 extern void battle_updateActorStatus(void);
-extern void fn_801A03E0(void);
+extern void bgm_getGlobalManager(void);
 extern void fn_801C02F4(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
@@ -408,7 +408,7 @@ lbl_fn_80244898_000003E0:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r31, r3
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     mr r4, r31
     bl skill_findNodeById
     cmpwi r3, 0x0
@@ -460,7 +460,7 @@ lbl_fn_80244898_0000049C:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r31, r3
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     mr r4, r31
     bl skill_findNodeById
     cmpwi r3, 0x0

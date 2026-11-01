@@ -10,7 +10,7 @@ extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_8012476C(void);
-extern void fn_8012DF7C(void);
+extern void enemy_calcAttackTrajectory(void);
 extern void npc_updateTalkInteraction(void);
 extern void inventory_calcTotalStats(void);
 extern void debuff_clearStatus(void);
@@ -269,7 +269,7 @@ lbl_fn_801A7E8C_00000230:
     fctiwz f0, f0
     stfd f0, 0x68(r1)
     lwz r4, 0x6c(r1)
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
 lbl_fn_801A7E8C_000002A0:
     li r3, 0x0
 lbl_fn_801A7E8C_000002A4:

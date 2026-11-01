@@ -31,9 +31,9 @@ extern void viewport_getNextSequenceId(void);
 extern void fn_80139EFC(void);
 extern void fn_80139F4C(void);
 extern void fn_8013A16C(void);
-extern void fn_8013C480(void);
+extern void npc_isInteractionReady(void);
 extern void battle_calcAABBCenter(void);
-extern void fn_801A03E0(void);
+extern void bgm_getGlobalManager(void);
 extern void fn_801A03EC(void);
 extern void fn_801A0408(void);
 extern void fn_801F4818(void);
@@ -828,10 +828,10 @@ lbl_fn_805AB82C_000009B8:
 lbl_fn_805AB82C_000009D8:
     cmpwi r26, 0x1
     bne lbl_fn_805AB82C_00000A7C
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_805AB82C_000009F8
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     bl fn_801A0408
     b lbl_fn_805AB82C_000009FC
 lbl_fn_805AB82C_000009F8:
@@ -841,7 +841,7 @@ lbl_fn_805AB82C_000009FC:
     b lbl_fn_805AB82C_00000A74
 lbl_fn_805AB82C_00000A04:
     mr r3, r28
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_805AB82C_00000A68
     mr r3, r28

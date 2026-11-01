@@ -46,7 +46,7 @@ extern void fn_80139F3C(void);
 extern void fn_8013A158(void);
 extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
-extern void fn_8013C480(void);
+extern void npc_isInteractionReady(void);
 extern void quest_getGlobalManager(void);
 extern void fn_80140500(void);
 extern void quest_initMarkerCoords(void);
@@ -133,7 +133,7 @@ void fn_8019FBE0(void);
 void fn_8019FC6C(void);
 void fn_8019FE4C(void);
 void fn_8019FEC4(void);
-void fn_801A03E0(void);
+void bgm_getGlobalManager(void);
 void fn_801A03E8(void);
 void fn_801A03EC(void);
 void fn_801A03F4(void);
@@ -1088,7 +1088,7 @@ lbl_fn_8019FEC4_00000BC4:
     bl mtx_multVec
     lfs f29, lbl_8088211C
     li r30, 0x0
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     bl fn_801A0408
     lfs f30, lbl_80881FCC
     mr r31, r3
@@ -1096,7 +1096,7 @@ lbl_fn_8019FEC4_00000BC4:
     b lbl_fn_8019FEC4_00000D5C
 lbl_fn_8019FEC4_00000CEC:
     mr r3, r31
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_8019FEC4_00000D50
     mr r3, r31
@@ -1246,7 +1246,7 @@ lbl_fn_8019FEC4_00000E78:
     cmpwi r3, 0x0
     beq lbl_fn_8019FEC4_00000F7C
     mr r3, r30
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_8019FEC4_00000F7C
     bl npc_getGlobalManager
@@ -1328,7 +1328,7 @@ lbl_fn_8019FEC4_00001008:
     blr
 }
 
-asm void fn_801A03E0(void)
+asm void bgm_getGlobalManager(void)
 {
     nofralloc
     lwz r3, lbl_8087F408

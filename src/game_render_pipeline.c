@@ -25,12 +25,12 @@ extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
 extern void phys_scaleGravity(void);
-extern void fn_8013A13C(void);
+extern void mtx_rotYRad(void);
 extern void npc_getGlobalManager(void);
-extern void fn_8013C480(void);
+extern void npc_isInteractionReady(void);
 extern void actor_setState(void);
 extern void battle_canTargetActor(void);
-extern void fn_801A03E0(void);
+extern void bgm_getGlobalManager(void);
 extern void fn_801A03EC(void);
 extern void fn_801A0408(void);
 extern void fn_80244674(void);
@@ -1873,7 +1873,7 @@ lbl_fn_802A3D80_00001968:
     stw r3, 0x10(r1)
     b lbl_fn_802A3D80_0000199C
 lbl_fn_802A3D80_00001978:
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_802A3D80_00001990
     addi r3, r1, 0x38
@@ -1886,12 +1886,12 @@ lbl_fn_802A3D80_00001990:
 lbl_fn_802A3D80_0000199C:
     cmpwi r3, 0x0
     bne lbl_fn_802A3D80_00001978
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     bl fn_801A0408
     stw r3, 0xc(r1)
     b lbl_fn_802A3D80_00001A00
 lbl_fn_802A3D80_000019B4:
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_802A3D80_000019F4
     lwz r3, 0xc(r1)
@@ -1974,7 +1974,7 @@ lbl_fn_802A3D80_00001A34:
     lfs f1, lbl_80883E18
     bl phys_scaleGravity
     addi r3, r1, 0xa8
-    bl fn_8013A13C
+    bl mtx_rotYRad
     addi r3, r1, 0x14
     addi r4, r1, 0xa8
     bl mtx_multVec

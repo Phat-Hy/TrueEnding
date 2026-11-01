@@ -22,7 +22,7 @@ extern void fn_800FB4B0(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void fn_80178864(void);
-extern void fn_801789D8(void);
+extern void battle_evalDropTable(void);
 extern void fn_80192758(void);
 extern void mem_findBlockById(void);
 extern void task_lookupTagIndex(void);
@@ -1184,7 +1184,7 @@ lbl_fn_801CB76C_00000DCC:
     lwz r3, 0x4(r30)
     li r4, 0x1395
     li r5, 0x0
-    bl fn_801789D8
+    bl battle_evalDropTable
     cmpwi r3, 0x0
     beq lbl_fn_801CB76C_00000F04
     lwz r3, 0x4(r30)

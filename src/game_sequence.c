@@ -180,7 +180,7 @@ void fn_800742C8(void);
 void fn_800748D8(void);
 void fn_80074B24(void);
 void gx_beginQuadBatch(void);
-void fn_80075DEC(void);
+void seq_stepPlaybackTimer(void);
 void fn_80075F58(void);
 void fn_800760BC(void);
 void fn_800760D0(void);
@@ -4573,7 +4573,7 @@ lbl_gx_beginQuadBatch_00003FD4:
     blr
 }
 
-asm void fn_80075DEC(void)
+asm void seq_stepPlaybackTimer(void)
 {
     nofralloc
     stwu r1, -0x30(r1)

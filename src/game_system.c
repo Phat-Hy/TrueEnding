@@ -49,7 +49,7 @@ extern void quest_resetObjectiveBounds(void);
 extern void quest_evaluateConditions(void);
 extern void quest_checkCondition(void);
 extern void dialog_selectChoice(void);
-extern void fn_8014EEC4(void);
+extern void dialog_activateChoiceWindow(void);
 extern void fn_8014F4FC(void);
 extern void fn_8014FAD0(void);
 extern void fn_80150178(void);
@@ -2224,7 +2224,7 @@ lbl_fn_8000FAE8_00001CDC:
     lwz r3, 0x1c(r31)
     li r4, 0x0
     lwz r3, 0x48(r3)
-    bl fn_8014EEC4
+    bl dialog_activateChoiceWindow
     b lbl_fn_8000FAE8_00001D34
 lbl_fn_8000FAE8_00001D20:
     lwz r3, 0x1c(r31)

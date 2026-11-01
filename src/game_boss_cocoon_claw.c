@@ -12,7 +12,7 @@ extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
 extern void fn_80107A68(void);
 extern void hurtbox_testCollisionLayer(void);
-extern void fn_8012DF7C(void);
+extern void enemy_calcAttackTrajectory(void);
 extern void quest_evaluateConditions(void);
 extern void quest_getRewardItemSlot(void);
 extern void fn_8015B238(void);
@@ -1031,7 +1031,7 @@ lbl_fn_80465294_00000D68:
     stw r30, 0x50(r1)
     stw r4, 0x3c(r1)
     stw r0, 0x38(r1)
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
     lwz r7, 0x1574(r31)
     mr r6, r31
     lfs f6, lbl_80886D60
@@ -1081,7 +1081,7 @@ lbl_fn_80465294_00000D68:
     stfs f4, 0x2c(r1)
     stfs f3, 0x30(r1)
     stfs f0, 0x34(r1)
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
     lwz r3, lbl_8087F048
     mr r5, r30
     mr r6, r31

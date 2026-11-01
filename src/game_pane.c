@@ -12,7 +12,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void fn_8005DF90(void);
 extern void fn_8005DFC8(void);
-extern void fn_80075DEC(void);
+extern void seq_stepPlaybackTimer(void);
 extern void fn_80075F58(void);
 extern void fn_800763FC(void);
 extern void dungeon_initGlobalContext(void);
@@ -1004,7 +1004,7 @@ lbl_fn_800ABD94_00000BC0:
     li r6, 0x3
     bl GXSetTevAlphaIn
     lwz r3, lbl_8087EEE0
-    bl fn_80075DEC
+    bl seq_stepPlaybackTimer
     lwz r3, lbl_8087EFB4
     bl fn_800BFB70
     li r3, 0x0
@@ -1425,7 +1425,7 @@ asm void fn_800AC6DC(void)
     bl GXSetTevColorIn
 lbl_fn_800AC6DC_000013DC:
     lwz r3, lbl_8087EEE0
-    bl fn_80075DEC
+    bl seq_stepPlaybackTimer
     lwz r3, lbl_8087EFB4
     bl fn_800BFB70
     lwz r3, lbl_8087EFA8

@@ -56,7 +56,7 @@ extern void fn_801388B8(void);
 extern void npc_calcTargetDistance(void);
 extern void quest_resetObjectiveBounds(void);
 extern void dialog_selectChoice(void);
-extern void fn_8014EEC4(void);
+extern void dialog_activateChoiceWindow(void);
 extern void inventory_unequipItem(void);
 extern void equip_applyToCharacter(void);
 extern void inventory_calcTotalStats(void);
@@ -1525,7 +1525,7 @@ asm void fn_800EBD00(void)
     lwz r3, lbl_8087F8A0
     li r4, 0x0
     lwz r3, 0x48(r3)
-    bl fn_8014EEC4
+    bl dialog_activateChoiceWindow
     li r0, 0x1
     stw r0, 0x3fc(r29)
     lfs f1, lbl_808812D8

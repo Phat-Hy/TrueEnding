@@ -19,7 +19,7 @@ extern void talk_parseDialogueTokens(void);
 extern void talk_copyUtf16String(void);
 extern void boss_initActionStream(void);
 extern void fn_8006B0C8(void);
-extern void fn_8006B2D8(void);
+extern void boss_parseStateCondition(void);
 extern void fn_8006BA8C(void);
 extern void fn_8006BB6C(void);
 extern void fn_8006D008(void);
@@ -1570,7 +1570,7 @@ lbl_fn_8020CC64_0000133C:
     bl actor_dispatchMessage
     mr r4, r27
     addi r3, r1, 0x80
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0x68(r1)
     srwi. r0, r0, 31
     beq lbl_fn_8020CC64_000013EC

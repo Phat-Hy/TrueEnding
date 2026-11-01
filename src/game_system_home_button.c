@@ -38,7 +38,7 @@ extern void fn_800CB5B4(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB69C(void);
 extern void fn_800CB6B0(void);
-extern void fn_800CB6E4(void);
+extern void morph_dispatchTargetUpdate(void);
 extern void fn_800CB6F8(void);
 extern void fn_800CFDC8(void);
 extern void fn_800D03AC(void);
@@ -883,7 +883,7 @@ asm void fn_8036055C(void)
     add r4, r3, r0
     addi r3, r4, 0x58
     addi r4, r4, 0x30
-    b fn_800CB6E4
+    b morph_dispatchTargetUpdate
 }
 
 asm void fn_80360574(void)
@@ -900,7 +900,7 @@ asm void fn_80360574(void)
     addi r30, r31, 0x58
     mr r3, r30
     addi r4, r31, 0x30
-    bl fn_800CB6E4
+    bl morph_dispatchTargetUpdate
     lfs f1, 0x3c(r31)
     mr r3, r30
     li r4, 0x1

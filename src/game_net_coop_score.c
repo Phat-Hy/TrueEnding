@@ -21,7 +21,7 @@ extern void str_assignBuffer(void);
 extern void fn_80071D68(void);
 extern void fn_80071D74(void);
 extern void gx_drawScreenQuad(void);
-extern void fn_80075DEC(void);
+extern void seq_stepPlaybackTimer(void);
 extern void fn_800760BC(void);
 extern void fn_800760D0(void);
 extern void fn_800763FC(void);
@@ -251,7 +251,7 @@ lbl_fn_804ABA2C_00000048:
     bctrl
 lbl_fn_804ABA2C_00000144:
     bl fn_803D71C4
-    bl fn_80075DEC
+    bl seq_stepPlaybackTimer
     bl fn_803D71C4
     bl fn_800760D0
     bl fn_804ABF20
@@ -817,7 +817,7 @@ lbl_fn_804ABF84_00000908:
     cmplw r28, r3
     blt lbl_fn_804ABF84_00000898
     bl fn_803D71C4
-    bl fn_80075DEC
+    bl seq_stepPlaybackTimer
     bl fn_803D71C4
     bl fn_800760D0
     mr r3, r30

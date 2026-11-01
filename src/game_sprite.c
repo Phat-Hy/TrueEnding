@@ -16,7 +16,7 @@ extern void fn_800610A4(void);
 extern void magic_updateCircleArea(void);
 extern void fn_8006FE08(void);
 extern void fn_800704DC(void);
-extern void fn_80075DEC(void);
+extern void seq_stepPlaybackTimer(void);
 extern void fn_80075F58(void);
 extern void dungeon_initGlobalContext(void);
 extern void town_registerInteractionPoint(void);
@@ -174,7 +174,7 @@ lbl_fn_800B4134_0000010C:
     cmpwi r29, 0x4
     blt lbl_fn_800B4134_0000010C
     lwz r3, lbl_8087EEE0
-    bl fn_80075DEC
+    bl seq_stepPlaybackTimer
     lwz r3, lbl_8087EFA8
     lwz r0, 0x1dc(r3)
     cmpwi r0, 0x0

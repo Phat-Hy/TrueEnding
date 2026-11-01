@@ -107,7 +107,7 @@ void fn_80139F3C(void);
 void fn_80139F4C(void);
 void fn_80139F58(void);
 void fn_80139F60(void);
-void fn_8013A13C(void);
+void mtx_rotYRad(void);
 void fn_8013A144(void);
 void fn_8013A150(void);
 void fn_8013A158(void);
@@ -1032,7 +1032,7 @@ lbl_fn_80139F60_00000BB0:
     blr
 }
 
-asm void fn_8013A13C(void)
+asm void mtx_rotYRad(void)
 {
     nofralloc
     li r4, 0x79

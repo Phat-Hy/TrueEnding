@@ -47,7 +47,7 @@ extern void enemy_updateAnimTimer(void);
 extern void fn_801370B8(void);
 extern void fn_80139F24(void);
 extern void fn_80139F3C(void);
-extern void fn_8013A13C(void);
+extern void mtx_rotYRad(void);
 extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_8013C3A8(void);
@@ -589,7 +589,7 @@ lbl_fn_803729B4_00000564:
     bl vec3_set
     lfs f1, 0x78(r1)
     addi r3, r1, 0xf8
-    bl fn_8013A13C
+    bl mtx_rotYRad
     addi r3, r1, 0x5c
     addi r4, r1, 0xf8
     bl mtx_multVec

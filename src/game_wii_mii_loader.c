@@ -13,7 +13,7 @@ extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void fn_80069BF4(void);
 extern void boss_decodePhaseBitfield(void);
-extern void fn_8006B2D8(void);
+extern void boss_parseStateCondition(void);
 extern void fn_8006D008(void);
 extern void mem_alloc(void);
 extern void area_updateZoneState(void);
@@ -212,7 +212,7 @@ lbl_fn_80564344_00000180:
     bl boss_decodePhaseBitfield
     addi r3, r1, 0x98
     addi r4, r1, 0xa4
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0xc8(r1)
     srwi r0, r0, 31
     cntlzw r0, r0
@@ -348,7 +348,7 @@ lbl_fn_80564344_00000390:
     bl boss_decodePhaseBitfield
     addi r3, r1, 0x80
     addi r4, r1, 0x8c
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0xbc(r1)
     srwi r0, r0, 31
     cntlzw r0, r0
@@ -902,7 +902,7 @@ lbl_fn_80564344_00000A6C:
     bl boss_decodePhaseBitfield
     addi r3, r1, 0x68
     addi r4, r1, 0x74
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0xb0(r1)
     srwi r0, r0, 31
     cntlzw r0, r0

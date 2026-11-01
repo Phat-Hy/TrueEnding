@@ -47,7 +47,7 @@ extern void fn_803D2194(void);
 extern void fn_8044386C(void);
 extern void fn_8044D0DC(void);
 extern void fn_8044D184(void);
-extern void fn_8046ECDC(void);
+extern void boss_updateLaserAimMatrix(void);
 extern void boss_releaseLaserTarget(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80547984(void);
@@ -221,7 +221,7 @@ asm void world_Manager_update(void)
 lbl_world_Manager_update_00000150:
     lwz r3, lbl_8087F518
     li r4, 0x1
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     lwz r0, 0x10dc(r30)
     cmpwi r0, 0x0
     bne lbl_world_Manager_update_0000068C

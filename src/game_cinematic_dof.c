@@ -57,14 +57,14 @@ extern void boss_updatePhaseState(void);
 extern void npc_updateDialogueTarget(void);
 extern void fn_80139F3C(void);
 extern void npc_getPosition(void);
-extern void fn_8013C480(void);
+extern void npc_isInteractionReady(void);
 extern void npc_getDialogController(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void fn_8015ECC4(void);
 extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
-extern void fn_801A03E0(void);
+extern void bgm_getGlobalManager(void);
 extern void str_appendString(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_ctor(void);
@@ -1481,7 +1481,7 @@ lbl_fn_80338FD0_0000121C:
     bl talk_parseQuotedString
     bl atoi
     mr r30, r3
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     mr r4, r30
     bl skill_findNodeById
     stw r3, 0x1758(r31)
@@ -1762,7 +1762,7 @@ lbl_fn_80339760_00001600:
     cmpwi r3, 0x53
     bne lbl_fn_80339760_00001628
     mr r3, r29
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_80339760_00001628
     mr r3, r29

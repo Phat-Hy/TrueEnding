@@ -41,7 +41,7 @@ extern void fn_801156BC(void);
 extern void fn_801162A4(void);
 extern void fn_80116E64(void);
 extern void fn_8012A1E0(void);
-extern void fn_8013A13C(void);
+extern void mtx_rotYRad(void);
 extern void fn_80221F54(void);
 extern void fn_80244CAC(void);
 extern void fn_802A7964(void);
@@ -426,7 +426,7 @@ lbl_fn_80487490_0000040C:
     bl vec3_toEulerAngles
     lfs f1, 0x64(r1)
     addi r3, r1, 0x108
-    bl fn_8013A13C
+    bl mtx_rotYRad
     addi r3, r1, 0x54
     addi r4, r1, 0x84
     addi r5, r1, 0x78

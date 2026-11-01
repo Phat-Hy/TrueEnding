@@ -24,7 +24,7 @@ extern void hurtbox_processHitDamage(void);
 extern void fn_8010CA2C(void);
 extern void fn_8010CD3C(void);
 extern void fn_8012B0B0(void);
-extern void fn_8012DF7C(void);
+extern void enemy_calcAttackTrajectory(void);
 extern void fn_8012E534(void);
 extern void fn_80133B30(void);
 extern void fn_80133BD8(void);
@@ -39,7 +39,7 @@ extern void fn_80156120(void);
 extern void fn_8016ADF4(void);
 extern void task_isValidQueueRange(void);
 extern void battle_calcAABBCenter(void);
-extern void fn_801789D8(void);
+extern void battle_evalDropTable(void);
 extern void actor_getMovementFlags(void);
 extern void fn_8017AC24(void);
 extern void fn_80187CC0(void);
@@ -3075,7 +3075,7 @@ lbl_fn_80040B44_00002860:
     mr r5, r29
     mr r6, r21
     neg r4, r31
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
 lbl_fn_80040B44_000028D8:
     neg r4, r31
     li r3, 0x0
@@ -3242,7 +3242,7 @@ lbl_fn_80040B44_00002B20:
     mr r4, r27
     mr r5, r29
     mr r6, r21
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
 lbl_fn_80040B44_00002B3C:
     neg r0, r28
     stw r27, 0x4(r20)
@@ -3486,7 +3486,7 @@ lbl_fn_800413EC_00002E74:
     mr r3, r27
     li r4, 0x1789
     li r5, 0x0
-    bl fn_801789D8
+    bl battle_evalDropTable
     cmpwi r3, 0x0
     beq lbl_fn_800413EC_00002E90
     lfs f31, lbl_808807C8
@@ -3792,7 +3792,7 @@ lbl_fn_800417E8_000032D4:
     mr r3, r29
     li r4, 0x1789
     li r5, 0x0
-    bl fn_801789D8
+    bl battle_evalDropTable
     cmpwi r3, 0x0
     beq lbl_fn_800417E8_000032F0
     lfs f31, lbl_808807C8

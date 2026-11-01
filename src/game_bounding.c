@@ -24,7 +24,7 @@ extern void fn_80109864(void);
 extern void fn_8010B180(void);
 extern void fn_8010B250(void);
 extern void fn_8010B398(void);
-extern void fn_8012DF7C(void);
+extern void enemy_calcAttackTrajectory(void);
 extern void fn_8012F034(void);
 extern void fn_8012F188(void);
 extern void fn_8012F440(void);
@@ -36,7 +36,7 @@ extern void fn_80134168(void);
 extern void quest_getRewardItemSlot(void);
 extern void fn_801533C8(void);
 extern void battle_canTargetActor(void);
-extern void fn_801789D8(void);
+extern void battle_evalDropTable(void);
 extern void fn_801799BC(void);
 extern void fn_8017A5D8(void);
 extern void thread_findAndNotify(void);
@@ -537,7 +537,7 @@ lbl_fn_800FDB20_000005DC:
     mr r3, r25
     li r4, 0x0
     lis r5, 0x40
-    bl fn_801789D8
+    bl battle_evalDropTable
     cmpwi r3, 0x0
     beq lbl_fn_800FDB20_000006A8
     cmpwi r26, 0x4
@@ -887,7 +887,7 @@ lbl_fn_800FDF14_00000B40:
     mr r3, r28
     li r4, 0x4f60
     li r5, 0x0
-    bl fn_801789D8
+    bl battle_evalDropTable
     cmpwi r3, 0x0
     beq lbl_fn_800FDF14_00000B70
     lwz r3, 0xc(r26)
@@ -1512,7 +1512,7 @@ lbl_fn_800FDF14_000013A4:
     lwz r0, 0x3e4(r1)
     neg r4, r0
     stw r4, 0x13c(r1)
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
     lwz r0, 0x90(r26)
     cmpwi r0, 0x0
     beq lbl_fn_800FDF14_000014E0
@@ -1600,7 +1600,7 @@ lbl_fn_800FDF14_000014E0:
     mr r4, r27
     stw r7, 0x118(r1)
     stw r27, 0x11c(r1)
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
     lwz r3, lbl_8087F0A8
     lwz r0, 0x470(r3)
     cmpwi r0, 0x0
@@ -1724,7 +1724,7 @@ lbl_fn_800FDF14_00001720:
     lwz r4, 0x3e4(r1)
     subf r4, r4, r0
     stw r4, 0xfc(r1)
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
     lwz r4, 0x40(r26)
     mr r3, r28
     bl quest_getRewardItemSlot
@@ -1985,7 +1985,7 @@ lbl_fn_800FDF14_00001B14:
     lwz r4, 0xdc(r1)
     li r6, 0x0
     addi r3, r21, 0x7d4
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
     lwz r0, 0x90(r26)
     cmpwi r0, 0x0
     beq lbl_fn_800FDF14_00001BCC

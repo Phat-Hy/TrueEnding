@@ -23,7 +23,7 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_8010653C(void);
-extern void fn_8012DF7C(void);
+extern void enemy_calcAttackTrajectory(void);
 extern void fn_8012F440(void);
 extern void fn_80133EE8(void);
 extern void boss_updatePhaseState(void);
@@ -685,7 +685,7 @@ lbl_fn_80254B98_00000730:
     addi r3, r30, 0x7d4
     li r4, 0x0
     li r5, 0x4
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
 lbl_fn_80254B98_00000744:
     lis r4, lbl_807C7030@ha
     li r5, 0x0

@@ -14,7 +14,7 @@ extern void fn_8004318C(void);
 extern void fn_800431F4(void);
 extern void boss_triggerEventSequence(void);
 extern void fn_8006AD24(void);
-extern void fn_8006B2D8(void);
+extern void boss_parseStateCondition(void);
 extern void gmk_LoadHandle_constructor(void);
 extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
@@ -616,7 +616,7 @@ lbl_fn_803BEC40_0000071C:
     bl actor_dispatchMessage
     addi r3, r1, 0xa4
     addi r4, r1, 0x80
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0x80(r1)
     srwi. r0, r0, 31
     beq lbl_fn_803BEC40_00000784

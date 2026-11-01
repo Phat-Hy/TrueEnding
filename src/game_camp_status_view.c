@@ -17,7 +17,7 @@ extern void enemy_updateAnimTimer(void);
 extern void fn_80133B30(void);
 extern void quest_updateFlow(void);
 extern void dialog_selectChoice(void);
-extern void fn_8014EEC4(void);
+extern void dialog_activateChoiceWindow(void);
 extern void fn_80153698(void);
 extern void party_configureMemberSlot(void);
 extern void fn_8016F824(void);
@@ -1498,7 +1498,7 @@ lbl_fn_803BA620_000012E0:
 lbl_fn_803BA620_00001318:
     mr r3, r29
     li r4, 0x0
-    bl fn_8014EEC4
+    bl dialog_activateChoiceWindow
 lbl_fn_803BA620_00001324:
     lhz r0, 0x0(r30)
     rlwinm r0, r0, 0, 29, 29

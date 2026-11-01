@@ -28,7 +28,7 @@ extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
 extern void npc_getDialogController(void);
-extern void fn_801A03E0(void);
+extern void bgm_getGlobalManager(void);
 extern void fn_8020A81C(void);
 extern void res_MsgHandle_ctor(void);
 extern void res_Resource_destructor(void);
@@ -1308,7 +1308,7 @@ lbl_fn_802D7E80_00001118:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r28, r3
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     mr r4, r28
     bl skill_findNodeById
     cmpwi r3, 0x0
@@ -1343,7 +1343,7 @@ lbl_fn_802D7E80_00001194:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r28, r3
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     mr r4, r28
     bl skill_findNodeById
     cmpwi r3, 0x0

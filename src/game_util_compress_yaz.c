@@ -13,7 +13,7 @@ extern void bloom_processPasses(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_801347C8(void);
 extern void dialog_selectChoice(void);
-extern void fn_8014EEC4(void);
+extern void dialog_activateChoiceWindow(void);
 extern void fn_8014F5D4(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
@@ -1228,7 +1228,7 @@ lbl_fn_8058BE7C_00000FF8:
     lwz r23, 0x674(r21)
     mr r3, r21
     li r4, 0x1
-    bl fn_8014EEC4
+    bl dialog_activateChoiceWindow
     lwz r5, 0x78(r22)
     mr r3, r21
     lwz r6, 0x80(r22)

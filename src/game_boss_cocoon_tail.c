@@ -27,7 +27,7 @@ extern void fn_80107A68(void);
 extern void path_getFollowerNode(void);
 extern void fn_8012A288(void);
 extern void npc_getPosition(void);
-extern void fn_8013C480(void);
+extern void npc_isInteractionReady(void);
 extern void quest_getGlobalManager(void);
 extern void quest_evaluateConditions(void);
 extern void actor_setState(void);
@@ -910,7 +910,7 @@ lbl_fn_80463174_00000B5C:
     lwz r3, 0x1554(r31)
     cmpwi r3, 0x0
     beq lbl_fn_80463174_00000B7C
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     bne lbl_fn_80463174_00000B8C
 lbl_fn_80463174_00000B7C:

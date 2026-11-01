@@ -24,7 +24,7 @@ extern void actor_setState(void);
 extern void battle_canTargetActor(void);
 extern void fn_8016F4D8(void);
 extern void fn_8016F5EC(void);
-extern void fn_801789D8(void);
+extern void battle_evalDropTable(void);
 extern void fn_8017A5D8(void);
 extern void fn_80210220(void);
 extern void task_mapIdToQueue(void);
@@ -2346,7 +2346,7 @@ lbl_fn_80103FD4_00001EC0:
     lwz r3, 0x0(r28)
     li r4, 0x0
     lis r5, 0x400
-    bl fn_801789D8
+    bl battle_evalDropTable
     cmpwi r3, 0x0
     beq lbl_fn_80103FD4_00001EF0
     lwz r3, 0x80c(r15)

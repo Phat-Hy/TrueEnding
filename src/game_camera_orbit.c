@@ -24,7 +24,7 @@ extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
 extern void morph_hasActiveWeight(void);
 extern void morph_updateMesh(void);
-extern void fn_800CB6E4(void);
+extern void morph_dispatchTargetUpdate(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void system_getNextSequenceId(void);
@@ -1622,10 +1622,10 @@ lbl_fn_802E9590_00001508:
 lbl_fn_802E9590_00001564:
     addi r3, r31, 0x15a0
     addi r4, r31, 0x528
-    bl fn_800CB6E4
+    bl morph_dispatchTargetUpdate
     addi r3, r31, 0x15a4
     addi r4, r31, 0x528
-    bl fn_800CB6E4
+    bl morph_dispatchTargetUpdate
 lbl_fn_802E9590_0000157C:
     lwz r0, 0x14f4(r31)
     cmpwi r0, 0x0

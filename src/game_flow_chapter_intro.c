@@ -15,7 +15,7 @@ extern void fn_80051C78(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
 extern void morph_hasActiveWeight(void);
-extern void fn_8014EEC4(void);
+extern void dialog_activateChoiceWindow(void);
 extern void fn_8015EB2C(void);
 extern void fn_8015EFAC(void);
 extern void battle_canTargetActor(void);
@@ -1656,7 +1656,7 @@ lbl_fn_804E4EB4_000014F4:
     ori r0, r0, 0x4
     stw r0, 0x54c(r3)
     lwz r3, 0x0(r23)
-    bl fn_8014EEC4
+    bl dialog_activateChoiceWindow
     lwz r3, 0x0(r23)
     li r4, 0x1
     stw r28, 0xd18(r3)

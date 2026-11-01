@@ -58,7 +58,7 @@ void fn_8013C458(void);
 void fn_8013C460(void);
 void fn_8013C470(void);
 void fn_8013C478(void);
-void fn_8013C480(void);
+void npc_isInteractionReady(void);
 void *npc_getDialogController(const void *p);
 f32 fn_8013C50C(const void *p);
 void fn_8013C514(void);
@@ -221,7 +221,7 @@ asm void fn_8013C478(void)
     blr
 }
 
-asm void fn_8013C480(void)
+asm void npc_isInteractionReady(void)
 {
     nofralloc
     lwz r7, 0x38(r3)
@@ -230,35 +230,35 @@ asm void fn_8013C480(void)
     li r6, 0x0
     rlwinm r0, r7, 0, 29, 29
     cmplwi r0, 0x4
-    beq lbl_fn_8013C480_00000120
+    beq lbl_npc_isInteractionReady_00000120
     clrlwi r0, r7, 31
     cmplwi r0, 0x1
-    beq lbl_fn_8013C480_00000120
+    beq lbl_npc_isInteractionReady_00000120
     li r6, 0x1
-lbl_fn_8013C480_00000120:
+lbl_npc_isInteractionReady_00000120:
     cmpwi r6, 0x0
-    beq lbl_fn_8013C480_0000013C
+    beq lbl_npc_isInteractionReady_0000013C
     lwz r0, 0x7e0(r3)
     rlwinm r0, r0, 0, 26, 26
     cmplwi r0, 0x20
-    beq lbl_fn_8013C480_0000013C
+    beq lbl_npc_isInteractionReady_0000013C
     li r4, 0x1
-lbl_fn_8013C480_0000013C:
+lbl_npc_isInteractionReady_0000013C:
     cmpwi r4, 0x0
-    beq lbl_fn_8013C480_00000170
+    beq lbl_npc_isInteractionReady_00000170
     lwz r0, 0x55c(r3)
     li r4, 0x0
     cmpwi r0, 0x6
-    bne lbl_fn_8013C480_00000164
+    bne lbl_npc_isInteractionReady_00000164
     lwz r0, 0x560(r3)
     cmpwi r0, 0x1c
-    bne lbl_fn_8013C480_00000164
+    bne lbl_npc_isInteractionReady_00000164
     li r4, 0x1
-lbl_fn_8013C480_00000164:
+lbl_npc_isInteractionReady_00000164:
     cmpwi r4, 0x0
-    bne lbl_fn_8013C480_00000170
+    bne lbl_npc_isInteractionReady_00000170
     li r5, 0x1
-lbl_fn_8013C480_00000170:
+lbl_npc_isInteractionReady_00000170:
     mr r3, r5
     blr
 }

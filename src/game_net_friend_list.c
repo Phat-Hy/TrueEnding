@@ -48,7 +48,7 @@ extern void fn_8013310C(void);
 extern void fn_80133130(void);
 extern void actor_testBitFlag(void);
 extern void dialog_selectChoice(void);
-extern void fn_8014EEC4(void);
+extern void dialog_activateChoiceWindow(void);
 extern void inventory_calcTotalStats(void);
 extern void fn_80160324(void);
 extern void actor_setState(void);
@@ -714,7 +714,7 @@ lbl_fn_804CF640_000006F4:
     bne lbl_fn_804CF640_0000071C
     mr r3, r31
     li r4, 0x0
-    bl fn_8014EEC4
+    bl dialog_activateChoiceWindow
     b lbl_fn_804CF640_00000730
 lbl_fn_804CF640_0000071C:
     mr r4, r5

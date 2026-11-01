@@ -32,7 +32,7 @@ extern void vec3_sqMag(void);
 extern void fn_80116BA4(void);
 extern void actor_calcSpawnTransform(void);
 extern void player_evaluateStatusCondition(void);
-extern void fn_8013A13C(void);
+extern void mtx_rotYRad(void);
 extern void fn_8013C3B4(void);
 extern void fn_80178088(void);
 extern void fn_801A03E8(void);
@@ -534,7 +534,7 @@ lbl_fn_80387910_000004D8:
     lfs f0, 0x8a0(r29)
     addi r3, r1, 0x168
     fneg f1, f0
-    bl fn_8013A13C
+    bl mtx_rotYRad
     addi r3, r1, 0xe0
     addi r4, r1, 0x168
     bl mtx_multVec

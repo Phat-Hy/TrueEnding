@@ -23,7 +23,7 @@ extern void enemy_updateAnimTimer(void);
 extern void fn_801333E4(void);
 extern void fn_80133B30(void);
 extern void dialog_selectChoice(void);
-extern void fn_8014EEC4(void);
+extern void dialog_activateChoiceWindow(void);
 extern void inventory_unequipItem(void);
 extern void fn_80183930(void);
 extern void task_mapIdToQueue(void);
@@ -302,7 +302,7 @@ lbl_fn_8039FBFC_00000240:
 lbl_fn_8039FBFC_0000027C:
     mr r3, r30
     li r4, 0x0
-    bl fn_8014EEC4
+    bl dialog_activateChoiceWindow
     b lbl_fn_8039FBFC_00000428
     lwz r0, 0x48(r30)
     cmpwi r0, 0x2
@@ -459,7 +459,7 @@ lbl_fn_803A0040_000004AC:
 lbl_fn_803A0040_000004C0:
     mr r3, r31
     li r4, 0x0
-    bl fn_8014EEC4
+    bl dialog_activateChoiceWindow
 lbl_fn_803A0040_000004CC:
     lwz r4, 0xc(r30)
     lis r0, 0x4330
@@ -516,7 +516,7 @@ lbl_fn_803A0040_0000057C:
 lbl_fn_803A0040_00000590:
     mr r3, r27
     li r4, 0x0
-    bl fn_8014EEC4
+    bl dialog_activateChoiceWindow
 lbl_fn_803A0040_0000059C:
     lwz r27, 0x14ac(r27)
 lbl_fn_803A0040_000005A0:
@@ -578,7 +578,7 @@ lbl_fn_803A0040_0000065C:
 lbl_fn_803A0040_00000670:
     mr r3, r28
     li r4, 0x0
-    bl fn_8014EEC4
+    bl dialog_activateChoiceWindow
 lbl_fn_803A0040_0000067C:
     lwz r28, 0x14ac(r28)
 lbl_fn_803A0040_00000680:

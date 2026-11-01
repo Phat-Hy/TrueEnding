@@ -41,7 +41,7 @@ extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_8013C3F4(void);
 extern void fn_8013C478(void);
-extern void fn_8013C480(void);
+extern void npc_isInteractionReady(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_initMarkerCoords(void);
 extern void fn_80140588(void);
@@ -2135,7 +2135,7 @@ lbl_fn_8030F564_00001BF0:
     lwz r3, 0x14d4(r30)
     cmpwi r3, 0x0
     beq lbl_fn_8030F564_00001C08
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     bne lbl_fn_8030F564_00002180
 lbl_fn_8030F564_00001C08:

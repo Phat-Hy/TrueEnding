@@ -12,7 +12,7 @@ extern void actor_dispatchMessage(void);
 extern void fn_800458D4(void);
 extern void fn_800458F4(void);
 extern void boss_decodePhaseBitfield(void);
-extern void fn_8006B2D8(void);
+extern void boss_parseStateCondition(void);
 extern void fn_80070C98(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
@@ -1626,7 +1626,7 @@ lbl_fn_8049E480_00001408:
     bl boss_decodePhaseBitfield
     addi r3, r1, 0xb4
     addi r4, r1, 0x84
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0x84(r1)
     srwi. r0, r0, 31
     beq lbl_fn_8049E480_00001490
@@ -1766,7 +1766,7 @@ lbl_fn_8049E480_000015F0:
     bl boss_decodePhaseBitfield
     addi r3, r1, 0xa8
     addi r4, r1, 0x6c
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0x6c(r1)
     srwi. r0, r0, 31
     beq lbl_fn_8049E480_00001670
@@ -1905,7 +1905,7 @@ lbl_fn_8049E480_000017C8:
     bl boss_decodePhaseBitfield
     addi r3, r1, 0x9c
     addi r4, r1, 0x54
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0x54(r1)
     srwi. r0, r0, 31
     beq lbl_fn_8049E480_0000184C
