@@ -960,10 +960,7 @@ lbl_fn_8059A29C_00000B90:
     blr
 }
 
-asm void fn_8059AB98(void)
-{
-    nofralloc
-    blr
+void fn_8059AB98(void) {
 }
 
 asm void fn_8059AB9C(void)

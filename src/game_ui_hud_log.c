@@ -285,10 +285,7 @@ lbl_fn_801CDE14_00000314:
     blr
 }
 
-asm void fn_801CE144(void)
-{
-    nofralloc
-    blr
+void fn_801CE144(void) {
 }
 
 asm void fn_801CE148(void)

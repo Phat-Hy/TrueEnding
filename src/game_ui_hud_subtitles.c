@@ -260,34 +260,19 @@ asm void fn_801CFC30(void)
     blr
 }
 
-asm void fn_801CFC38(void)
-{
-    nofralloc
-    blr
+void fn_801CFC38(void) {
 }
 
-asm void fn_801CFC3C(void)
-{
-    nofralloc
-    blr
+void fn_801CFC3C(void) {
 }
 
-asm void fn_801CFC40(void)
-{
-    nofralloc
-    blr
+void fn_801CFC40(void) {
 }
 
-asm void fn_801CFC44(void)
-{
-    nofralloc
-    blr
+void fn_801CFC44(void) {
 }
 
-asm void fn_801CFC48(void)
-{
-    nofralloc
-    blr
+void fn_801CFC48(void) {
 }
 
 asm void fn_801CFC4C(void)
@@ -297,10 +282,7 @@ asm void fn_801CFC4C(void)
     blr
 }
 
-asm void fn_801CFC54(void)
-{
-    nofralloc
-    blr
+void fn_801CFC54(void) {
 }
 
 asm void fn_801CFC58(void)

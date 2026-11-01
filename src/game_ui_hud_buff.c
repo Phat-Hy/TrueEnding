@@ -738,10 +738,7 @@ lbl_fn_801CCC8C_00000888:
     blr
 }
 
-asm void fn_801CCCFC(void)
-{
-    nofralloc
-    blr
+void fn_801CCCFC(void) {
 }
 
 asm void fn_801CCD00(void)
@@ -1403,10 +1400,7 @@ lbl_fn_801CD5A4_000011D0:
     blr
 }
 
-asm void fn_801CD644(void)
-{
-    nofralloc
-    blr
+void fn_801CD644(void) {
 }
 
 asm void fn_801CD648(void)
@@ -1921,10 +1915,7 @@ lbl_fn_801CDD2C_00001900:
     blr
 }
 
-asm void fn_801CDD98(void)
-{
-    nofralloc
-    blr
+void fn_801CDD98(void) {
 }
 
 asm void fn_801CDD9C(void)

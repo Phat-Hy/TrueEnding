@@ -273,10 +273,7 @@ asm void fn_803D6EDC(void)
     blr
 }
 
-asm void fn_803D6EEC(void)
-{
-    nofralloc
-    blr
+void fn_803D6EEC(void) {
 }
 
 asm void fn_803D6EF0(void)

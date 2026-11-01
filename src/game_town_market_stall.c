@@ -250,10 +250,7 @@ asm void fn_803CE408(void)
     blr
 }
 
-asm void fn_803CE448(void)
-{
-    nofralloc
-    blr
+void fn_803CE448(void) {
 }
 
 asm void fn_803CE44C(void)
@@ -437,10 +434,7 @@ lbl_fn_803CE5DC_000003F8:
     blr
 }
 
-asm void fn_803CE684(void)
-{
-    nofralloc
-    blr
+void fn_803CE684(void) {
 }
 
 asm void fn_803CE688(void)

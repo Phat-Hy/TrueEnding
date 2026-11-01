@@ -198,10 +198,7 @@ asm void fn_803458C0(void)
     blr
 }
 
-asm void fn_803458CC(void)
-{
-    nofralloc
-    blr
+void fn_803458CC(void) {
 }
 
 asm void fn_803458D0(void)
@@ -212,10 +209,7 @@ asm void fn_803458D0(void)
     blr
 }
 
-asm void fn_803458DC(void)
-{
-    nofralloc
-    blr
+void fn_803458DC(void) {
 }
 
 asm void fn_803458E0(void)

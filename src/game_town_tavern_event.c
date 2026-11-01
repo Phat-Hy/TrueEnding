@@ -70,10 +70,7 @@ asm void fn_803CFC6C(void)
     blr
 }
 
-asm void fn_803CFC74(void)
-{
-    nofralloc
-    blr
+void fn_803CFC74(void) {
 }
 
 asm void fn_803CFC78(void)
