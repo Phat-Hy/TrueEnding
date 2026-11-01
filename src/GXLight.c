@@ -41,10 +41,10 @@ extern f32 lbl_808887AC;
 void fn_80615700(void);
 void fn_80615720(void);
 void fn_806158C0(void);
-void fn_80615990(void);
+void fn_80615990(void *light, f32 x, f32 y, f32 z);
 void fn_806159A0(void);
 void fn_806159C0(void);
-void fn_80615AD0(void);
+void fn_80615AD0(void *dest, const void *src);
 void fn_80615AE0(void);
 void fn_80615B60(void);
 void fn_80615C40(void);
@@ -249,13 +249,12 @@ lbl_fn_806158C0_00000274:
     blr
 }
 
-asm void fn_80615990(void)
+void fn_80615990(void *light, f32 x, f32 y, f32 z)
 {
-    nofralloc
-    stfs f1, 0x28(r3)
-    stfs f2, 0x2c(r3)
-    stfs f3, 0x30(r3)
-    blr
+    f32 *p = (f32 *)((char *)light + 0x28);
+    p[0] = x;
+    p[1] = y;
+    p[2] = z;
 }
 
 asm void fn_806159A0(void)
@@ -343,12 +342,9 @@ lbl_fn_806159C0_00000354:
     blr
 }
 
-asm void fn_80615AD0(void)
+void fn_80615AD0(void *dest, const void *src)
 {
-    nofralloc
-    lwz r0, 0x0(r4)
-    stw r0, 0xc(r3)
-    blr
+    *(u32 *)((char *)dest + 0xc) = *(const u32 *)src;
 }
 
 asm void fn_80615AE0(void)

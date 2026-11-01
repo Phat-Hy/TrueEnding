@@ -49,7 +49,7 @@ extern void PSMTXRotAxis(void);
 extern void PSMTXQuat(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
-extern void PSVECSquareMag(void);
+extern f32 PSVECSquareMag(const void *v);
 extern void PSVECMag(void);
 extern void PSVECCrossProduct(void);
 extern void fn_805F99F0(void);
@@ -103,7 +103,7 @@ void fn_801156E0(void);
 void fn_801156F8(void);
 void fn_80115704(void);
 void fn_801157DC(void);
-void fn_801162A0(void);
+f32 fn_801162A0(const void *v);
 void fn_801162A4(void);
 
 asm void fn_801151A4(void)
@@ -1308,10 +1308,9 @@ lbl_fn_801157DC_000010C8:
     blr
 }
 
-asm void fn_801162A0(void)
+f32 fn_801162A0(const void *v)
 {
-    nofralloc
-    b PSVECSquareMag
+    return PSVECSquareMag(v);
 }
 
 asm void fn_801162A4(void)

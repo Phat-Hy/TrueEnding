@@ -16,16 +16,16 @@ extern u8 lbl_8087E8B0[8];
 extern f64 lbl_808887B0;
 
 /* Function declarations */
-void fn_80616380(void);
-void fn_80616390(void);
-void fn_806163A0(void);
+void fn_80616380(void *obj, void *val);
+void fn_80616390(void *obj, u32 val);
+u32 fn_806163A0(const void *obj);
 void fn_806163B0(void);
 void fn_806163C0(void);
 void fn_806163E0(void);
-void fn_80616400(void);
-void fn_80616410(void);
-void fn_80616420(void);
-void fn_80616430(void);
+void *fn_80616400(const void *obj);
+u32 fn_80616410(const void *obj);
+u32 fn_80616420(const void *obj);
+u32 fn_80616430(const void *obj);
 void fn_80616440(void);
 void fn_806165B0(void);
 void fn_80616610(void);
@@ -51,25 +51,19 @@ void fn_806172D0(void);
 void __GXSetIndirectMask(void);
 void __GXFlushTextureState(void);
 
-asm void fn_80616380(void)
+void fn_80616380(void *obj, void *val)
 {
-    nofralloc
-    stw r4, 0x18(r3)
-    blr
+    *(void **)((char *)obj + 0x18) = val;
 }
 
-asm void fn_80616390(void)
+void fn_80616390(void *obj, u32 val)
 {
-    nofralloc
-    stw r4, 0x10(r3)
-    blr
+    *(u32 *)((char *)obj + 0x10) = val;
 }
 
-asm void fn_806163A0(void)
+u32 fn_806163A0(const void *obj)
 {
-    nofralloc
-    lwz r3, 0x10(r3)
-    blr
+    return *(const u32 *)((const char *)obj + 0x10);
 }
 
 asm void fn_806163B0(void)
@@ -100,35 +94,24 @@ asm void fn_806163E0(void)
     blr
 }
 
-asm void fn_80616400(void)
+void *fn_80616400(const void *obj)
 {
-    nofralloc
-    lwz r3, 0x14(r3)
-    blr
+    return *(void **)((const char *)obj + 0x14);
 }
 
-asm void fn_80616410(void)
+u32 fn_80616410(const void *obj)
 {
-    nofralloc
-    lwz r0, 0x0(r3)
-    clrlwi r3, r0, 30
-    blr
+    return *(const u32 *)obj & 3;
 }
 
-asm void fn_80616420(void)
+u32 fn_80616420(const void *obj)
 {
-    nofralloc
-    lwz r0, 0x0(r3)
-    extrwi r3, r0, 2, 28
-    blr
+    return (*(const u32 *)obj >> 2) & 3;
 }
 
-asm void fn_80616430(void)
+u32 fn_80616430(const void *obj)
 {
-    nofralloc
-    lbz r0, 0x1f(r3)
-    clrlwi r3, r0, 31
-    blr
+    return *(const u8 *)((const char *)obj + 0x1f) & 1;
 }
 
 asm void fn_80616440(void)

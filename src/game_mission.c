@@ -67,7 +67,7 @@ extern u32 lbl_80880980;
 
 /* Function declarations */
 void mission_updateStub(void);
-void fn_80057A68(void);
+void fn_80057A68(f32 *v, f32 x, f32 y, f32 z);
 void fn_80057A78(void);
 void atn_ColliBox_testRay(void);
 void atn_ColliBox_testSphere(void);
@@ -110,13 +110,11 @@ void mission_updateStub(void)
 {
 }
 
-asm void fn_80057A68(void)
+void fn_80057A68(f32 *v, f32 x, f32 y, f32 z)
 {
-    nofralloc
-    stfs f1, 0x0(r3)
-    stfs f2, 0x4(r3)
-    stfs f3, 0x8(r3)
-    blr
+    v[0] = x;
+    v[1] = y;
+    v[2] = z;
 }
 
 asm void fn_80057A78(void)

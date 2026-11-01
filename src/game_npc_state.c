@@ -39,7 +39,7 @@ extern u32 lbl_80881A04;
 extern u32 lbl_80881A08;
 
 /* Function declarations */
-void npc_getPosition(void);
+void *npc_getPosition(void *npc);
 void fn_8013C394(void);
 void fn_8013C3A8(void);
 void fn_8013C3B4(void);
@@ -67,11 +67,9 @@ void fn_8013C544(void);
 void fn_8013C554(void);
 void fn_8013C564(void);
 
-asm void npc_getPosition(void)
+void *npc_getPosition(void *npc)
 {
-    nofralloc
-    addi r3, r3, 0x528
-    blr
+    return (char *)npc + 0x528;
 }
 
 asm void fn_8013C394(void)

@@ -26,7 +26,7 @@ extern void fn_803CC5E4(void);
 extern void fn_8047FF70(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
-extern void PSVECMag(void);
+extern f32 PSVECMag(const void *v);
 extern void printf(void);
 extern void abort(void);
 extern u32 strlen(const char* str);
@@ -62,7 +62,7 @@ void vec3_copy(void);
 void fn_8000D138(void);
 void fn_8000D1A0(void);
 void fn_8000D1A8(void);
-void vec3_mag(void);
+f32 vec3_mag(const void *v);
 void fn_8000D3A8(void);
 void fn_8000D430(void);
 void fn_8000D4D4(void);
@@ -653,10 +653,9 @@ lbl_fn_8000D1A8_000007AC:
     blr
 }
 
-asm void vec3_mag(void)
+f32 vec3_mag(const void *v)
 {
-    nofralloc
-    b PSVECMag
+    return PSVECMag(v);
 }
 
 asm void fn_8000D3A8(void)
