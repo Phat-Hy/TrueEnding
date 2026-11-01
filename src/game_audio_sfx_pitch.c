@@ -903,10 +903,9 @@ void fn_80313FC0(void)
 {
 }
 
-asm void fn_80313FC4(void)
+void fn_80313FC4(void)
 {
-    nofralloc
-    b dialog_renderWindow
+    dialog_renderWindow();
 }
 
 asm void fn_80313FC8(void)

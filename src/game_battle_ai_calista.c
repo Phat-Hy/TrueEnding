@@ -110,7 +110,7 @@ void fn_80431458(void);
 void fn_80431760(void);
 void fn_80431774(void);
 void fn_80432390(void);
-void fn_80432394(void);
+u32 fn_80432394(void);
 void fn_8043239C(void);
 void fn_80432728(void);
 void fn_80432840(void);
@@ -1274,11 +1274,9 @@ void fn_80432390(void)
 {
 }
 
-asm void fn_80432394(void)
+u32 fn_80432394(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8043239C(void)
@@ -1909,16 +1907,14 @@ lbl_fn_80432C38_00001944:
     blr
 }
 
-asm void fn_80432C60(void)
+void fn_80432C60(void)
 {
-    nofralloc
-    b dialog_renderWindow
+    dialog_renderWindow();
 }
 
-asm void fn_80432C64(void)
+void fn_80432C64(void)
 {
-    nofralloc
-    b quest_updateFlow
+    quest_updateFlow();
 }
 
 asm void fn_80432C68(void)

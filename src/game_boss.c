@@ -102,11 +102,11 @@ void atn_FadeColor_destructor(void);
 void atn_FadeColor_draw(void);
 void fn_8006A5A8(void);
 void atn_FadeCapture_destructor(void);
-void atn_FadeCapture_execute(void);
+u32 atn_FadeCapture_execute(void);
 void atn_FadeCapture_draw(void);
 void fn_8006A900(void);
 void atn_Fade_slot2(void);
-void atn_Fade_slot1(void);
+u32 atn_Fade_slot1(void);
 void atn_FadeCommon_draw(void);
 void atn_normalizePath(char* str);
 void fn_8006A9A4(void);
@@ -1995,11 +1995,9 @@ lbl_atn_FadeCapture_destructor_00001960:
     blr
 }
 
-asm void atn_FadeCapture_execute(void)
+u32 atn_FadeCapture_execute(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void atn_FadeCapture_draw(void)
@@ -2147,17 +2145,14 @@ asm void fn_8006A900(void)
     blr
 }
 
-asm void atn_Fade_slot2(void)
+void atn_Fade_slot2(void)
 {
-    nofralloc
-    b fn_8006A0F4
+    fn_8006A0F4();
 }
 
-asm void atn_Fade_slot1(void)
+u32 atn_Fade_slot1(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 void atn_FadeCommon_draw(void)

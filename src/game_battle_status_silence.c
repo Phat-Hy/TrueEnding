@@ -1524,16 +1524,14 @@ lbl_fn_8042D488_000011E0:
     blr
 }
 
-asm void fn_8042D5A0(void)
+void fn_8042D5A0(void)
 {
-    nofralloc
-    b dialog_renderWindow
+    dialog_renderWindow();
 }
 
-asm void fn_8042D5A4(void)
+void fn_8042D5A4(void)
 {
-    nofralloc
-    b quest_updateFlow
+    quest_updateFlow();
 }
 
 asm void fn_8042D5A8(void)

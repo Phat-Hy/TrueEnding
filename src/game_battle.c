@@ -130,7 +130,7 @@ extern u32 lbl_80880774;
 
 /* Function declarations */
 void fn_80017128(void);
-void fn_80017944(void);
+u32 fn_80017944(void);
 void fn_8001794C(void);
 void fn_80017E90(void);
 void fn_80017EB0(void);
@@ -150,7 +150,7 @@ void fn_80019254(void);
 void fn_800197A4(void);
 void fn_80019E88(void);
 void dtor_8001A228(void);
-void fn_8001A268(void);
+void *fn_8001A268(void *obj);
 void fn_8001A270(void);
 void fn_8001A2DC(void);
 void fn_8001A34C(void);
@@ -712,11 +712,9 @@ lbl_fn_80017128_000007E4:
     blr
 }
 
-asm void fn_80017944(void)
+u32 fn_80017944(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8001794C(void)
@@ -3631,11 +3629,9 @@ lbl_dtor_8001A228_00003128:
     blr
 }
 
-asm void fn_8001A268(void)
+void *fn_8001A268(void *obj)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(void **)((char *)obj + 4);
 }
 
 asm void fn_8001A270(void)

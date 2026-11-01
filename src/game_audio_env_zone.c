@@ -99,10 +99,9 @@ void fn_8031D4F4(void);
 void fn_8031D57C(void);
 void fn_8031D6DC(void);
 
-asm void fn_8031C530(void)
+void fn_8031C530(void)
 {
-    nofralloc
-    b dialog_renderWindow
+    dialog_renderWindow();
 }
 
 asm void fn_8031C534(void)

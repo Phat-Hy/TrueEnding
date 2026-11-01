@@ -116,8 +116,8 @@ extern u32 lbl_80886E3C;
 void fn_804628B4(void);
 void fn_80462CCC(void);
 void fn_80463174(void);
-void fn_804635A4(void);
-void fn_804635AC(void);
+void *fn_804635A4(void *obj);
+void *fn_804635AC(void *obj);
 void fn_804635B4(void);
 void fn_80463610(void);
 void fn_804638A4(void);
@@ -1014,18 +1014,14 @@ lbl_fn_80463174_00000CB8:
     blr
 }
 
-asm void fn_804635A4(void)
+void *fn_804635A4(void *obj)
 {
-    nofralloc
-    lwz r3, 0x48(r3)
-    blr
+    return *(void **)((char *)obj + 0x48);
 }
 
-asm void fn_804635AC(void)
+void *fn_804635AC(void *obj)
 {
-    nofralloc
-    lwz r3, 0x4c(r3)
-    blr
+    return *(void **)((char *)obj + 0x4c);
 }
 
 asm void fn_804635B4(void)

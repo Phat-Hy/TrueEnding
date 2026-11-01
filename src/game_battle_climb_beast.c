@@ -148,7 +148,7 @@ void fn_803FA5C8(void);
 void fn_803FADF4(void);
 void fn_803FAE08(void);
 void fn_803FAE38(void);
-void fn_803FAE84(void);
+void fn_803FAE84(void *obj, u8 val);
 void fn_803FAE8C(void);
 void fn_803FAEB4(void);
 void fn_803FAEFC(void);
@@ -1348,11 +1348,9 @@ lbl_fn_803FAE38_0000105C:
     blr
 }
 
-asm void fn_803FAE84(void)
+void fn_803FAE84(void *obj, u8 val)
 {
-    nofralloc
-    stb r4, 0x520(r3)
-    blr
+    *(u8 *)((char *)obj + 0x520) = val;
 }
 
 asm void fn_803FAE8C(void)

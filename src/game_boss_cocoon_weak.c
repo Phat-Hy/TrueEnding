@@ -71,7 +71,7 @@ extern u32 lbl_80886ED4;
 
 /* Function declarations */
 void fn_8046D19C(void);
-void fn_8046D1C4(void);
+void *fn_8046D1C4(void *obj);
 void fn_8046D1CC(void);
 void fn_8046D1EC(void);
 void fn_8046D7D8(void);
@@ -103,11 +103,9 @@ lbl_fn_8046D19C_00000020:
     blr
 }
 
-asm void fn_8046D1C4(void)
+void *fn_8046D1C4(void *obj)
 {
-    nofralloc
-    addi r3, r3, 0x4010
-    blr
+    return (char *)obj + 0x4010;
 }
 
 asm void fn_8046D1CC(void)
@@ -960,10 +958,9 @@ lbl_fn_8046DD20_00000BAC:
     blr
 }
 
-asm void atn_Loader_destructor(void)
+void atn_Loader_destructor(void)
 {
-    nofralloc
-    b bloom_processPasses
+    bloom_processPasses();
 }
 
 asm void atn_Loader_execute(void)

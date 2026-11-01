@@ -101,7 +101,7 @@ void fn_8040F994(void);
 void fn_8040F9C0(void);
 void fn_8040F9EC(void);
 void fn_8040FAA4(void);
-void fn_8040FAB8(void);
+void *fn_8040FAB8(void *obj);
 void fn_8040FAC0(void);
 void fn_8040FB44(void);
 void fn_8040FC30(void);
@@ -114,7 +114,7 @@ void fn_80410358(void);
 void fn_8041044C(void);
 void fn_80410698(void);
 void fn_804109AC(void);
-void fn_80410A60(void);
+void *fn_80410A60(void *obj);
 void fn_80410A68(void);
 void fn_80410B38(void);
 void fn_80410BA0(void);
@@ -633,11 +633,9 @@ asm void fn_8040FAA4(void)
     blr
 }
 
-asm void fn_8040FAB8(void)
+void *fn_8040FAB8(void *obj)
 {
-    nofralloc
-    addi r3, r3, 0xf4
-    blr
+    return (char *)obj + 0xf4;
 }
 
 asm void fn_8040FAC0(void)
@@ -1758,11 +1756,9 @@ lbl_fn_804109AC_00001680:
     blr
 }
 
-asm void fn_80410A60(void)
+void *fn_80410A60(void *obj)
 {
-    nofralloc
-    addi r3, r3, 0xf4
-    blr
+    return (char *)obj + 0xf4;
 }
 
 asm void fn_80410A68(void)

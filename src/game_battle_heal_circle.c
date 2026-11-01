@@ -113,7 +113,7 @@ void fn_803F4698(void);
 void fn_803F46DC(void);
 void fn_803F46F8(void);
 void fn_803F4700(void);
-void fn_803F4714(void);
+void *fn_803F4714(void *obj);
 void fn_803F471C(void);
 void fn_803F47A0(void);
 void fn_803F4894(void);
@@ -1503,11 +1503,9 @@ asm void fn_803F4700(void)
     blr
 }
 
-asm void fn_803F4714(void)
+void *fn_803F4714(void *obj)
 {
-    nofralloc
-    addi r3, r3, 0x214
-    blr
+    return (char *)obj + 0x214;
 }
 
 asm void fn_803F471C(void)

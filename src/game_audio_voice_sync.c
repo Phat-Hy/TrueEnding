@@ -942,10 +942,9 @@ lbl_fn_8030646C_00000B18:
     blr
 }
 
-asm void fn_803066F0(void)
+void fn_803066F0(void)
 {
-    nofralloc
-    b dialog_renderWindow
+    dialog_renderWindow();
 }
 
 asm void fn_803066F4(void)

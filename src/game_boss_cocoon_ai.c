@@ -98,14 +98,14 @@ extern u32 lbl_80886BD4;
 extern u32 lbl_80886BD8;
 
 /* Function declarations */
-void fn_80453DB4(void);
+void *fn_80453DB4(void *obj);
 void fn_80453DBC(void);
 void fn_80453E20(void);
 void fn_804541A0(void);
 void fn_80454514(void);
 void fn_80454538(void);
 void fn_80454554(void);
-void fn_80454564(void);
+void *fn_80454564(void *obj);
 void fn_8045456C(void);
 void fn_804549E8(void);
 void fn_804549F8(void);
@@ -115,11 +115,9 @@ void fn_80454F08(void);
 void fn_8045531C(void);
 void fn_80455638(void);
 
-asm void fn_80453DB4(void)
+void *fn_80453DB4(void *obj)
 {
-    nofralloc
-    addi r3, r3, 0x54
-    blr
+    return (char *)obj + 0x54;
 }
 
 asm void fn_80453DBC(void)
@@ -679,11 +677,9 @@ asm void fn_80454554(void)
     blr
 }
 
-asm void fn_80454564(void)
+void *fn_80454564(void *obj)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(void **)((char *)obj + 4);
 }
 
 asm void fn_8045456C(void)

@@ -185,7 +185,7 @@ void fn_8043D940(void);
 void fn_8043D9F8(void);
 void fn_8043DB84(void);
 void fn_8043DC9C(void);
-void fn_8043DD70(void);
+u32 fn_8043DD70(void);
 void fn_8043DD78(void);
 void fn_8043E07C(void);
 void fn_8043E0E8(void);
@@ -203,7 +203,7 @@ void fn_8043F0F4(void);
 void fn_8043F178(void);
 void fn_8043F244(void);
 void fn_8043F24C(void);
-void fn_8043F5BC(void);
+void *fn_8043F5BC(void *obj);
 void fn_8043F5C4(void);
 void fn_8043F63C(void);
 void fn_8043F694(void);
@@ -2071,11 +2071,9 @@ lbl_fn_8043DC9C_00001A14:
     blr
 }
 
-asm void fn_8043DD70(void)
+u32 fn_8043DD70(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8043DD78(void)
@@ -3807,11 +3805,9 @@ lbl_fn_8043F24C_00003260:
     blr
 }
 
-asm void fn_8043F5BC(void)
+void *fn_8043F5BC(void *obj)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(void **)(obj);
 }
 
 asm void fn_8043F5C4(void)

@@ -108,7 +108,7 @@ extern u32 lbl_80886504;
 
 /* Function declarations */
 void fn_80417E88(void);
-void fn_80417F14(void);
+void *fn_80417F14(void *obj);
 void fn_80417F1C(void);
 void fn_80417F40(void);
 void fn_80417FF8(void);
@@ -131,7 +131,7 @@ void fn_804188A0(void);
 void fn_80418BC4(void);
 void fn_80418BE4(void);
 void fn_80418C4C(void);
-void fn_80418EA4(void);
+void *fn_80418EA4(void *obj);
 void fn_80418EAC(void);
 void fn_80418F30(void);
 void fn_80419010(void);
@@ -180,11 +180,9 @@ asm void fn_80417E88(void)
     blr
 }
 
-asm void fn_80417F14(void)
+void *fn_80417F14(void *obj)
 {
-    nofralloc
-    addi r3, r3, 0x40
-    blr
+    return (char *)obj + 0x40;
 }
 
 asm void fn_80417F1C(void)
@@ -1344,11 +1342,9 @@ lbl_fn_80418C4C_00000F48:
     blr
 }
 
-asm void fn_80418EA4(void)
+void *fn_80418EA4(void *obj)
 {
-    nofralloc
-    addi r3, r3, 0xf4
-    blr
+    return (char *)obj + 0xf4;
 }
 
 asm void fn_80418EAC(void)

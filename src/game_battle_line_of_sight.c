@@ -127,7 +127,7 @@ void fn_8040A32C(void);
 void fn_8040A994(void);
 void fn_8040AA10(void);
 void fn_8040AB64(void);
-void fn_8040B1F8(void);
+void fn_8040B1F8(void *obj, void *val);
 void fn_8040B200(void);
 void fn_8040B394(void);
 void fn_8040B4B4(void);
@@ -1193,11 +1193,9 @@ lbl_fn_8040AB64_00000EB4:
     blr
 }
 
-asm void fn_8040B1F8(void)
+void fn_8040B1F8(void *obj, void *val)
 {
-    nofralloc
-    stw r4, 0x154(r3)
-    blr
+    *(void **)((char *)obj + 0x154) = val;
 }
 
 asm void fn_8040B200(void)

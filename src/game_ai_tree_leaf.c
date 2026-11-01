@@ -125,10 +125,9 @@ void fn_8025C998(void);
 void fn_8025CDE0(void);
 void fn_8025CEF8(void);
 
-asm void fn_8025B5D4(void)
+void fn_8025B5D4(void)
 {
-    nofralloc
-    b dialog_renderWindow
+    dialog_renderWindow();
 }
 
 asm void fn_8025B5D8(void)

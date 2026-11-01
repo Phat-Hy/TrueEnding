@@ -97,9 +97,9 @@ void fn_8046CBB0(void);
 void fn_8046CBBC(void);
 void fn_8046CBC0(void);
 void fn_8046CC90(void);
-void fn_8046D184(void);
-void fn_8046D18C(void);
-void fn_8046D194(void);
+void *fn_8046D184(void *obj);
+void *fn_8046D18C(void *obj);
+void *fn_8046D194(void *obj);
 
 asm void fn_8046B798(void)
 {
@@ -1965,23 +1965,17 @@ lbl_fn_8046CC90_000019D0:
     blr
 }
 
-asm void fn_8046D184(void)
+void *fn_8046D184(void *obj)
 {
-    nofralloc
-    lwz r3, 0x400c(r3)
-    blr
+    return *(void **)((char *)obj + 0x400c);
 }
 
-asm void fn_8046D18C(void)
+void *fn_8046D18C(void *obj)
 {
-    nofralloc
-    lwz r3, 0x4008(r3)
-    blr
+    return *(void **)((char *)obj + 0x4008);
 }
 
-asm void fn_8046D194(void)
+void *fn_8046D194(void *obj)
 {
-    nofralloc
-    addi r3, r3, 0x3f08
-    blr
+    return (char *)obj + 0x3f08;
 }
