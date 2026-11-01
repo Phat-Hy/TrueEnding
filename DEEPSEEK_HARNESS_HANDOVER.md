@@ -36,6 +36,16 @@
 > **§5c.46 AP-BD is now answered by AP-BI's matrix**, and its "read a live-vs-layer number and you are reading
 > the half-frame" warning still holds for every comparison that is not a same-run, same-frame pair:
 >
+> **THE COMPOSITE HALF IS WHERE THE REMAINING DIFFERENCE IS, AND AP-BK HAS NOW EXCLUDED THE COPIES (read it before
+> touching the tail).** The tail is 16 copies on frame 2801 (640x448 -> 320x224 -> 160x112 -> 80x56 -> 40x28 -> the
+> XFB display copy); the layer's per-copy means and aurora's readback of two of those copies agree to **+5.0 % /
+> -13.5 %** (106.0/74.75 against 111.34/64.67 mean byte), and the sizes the quads sample are passed faithfully
+> (`TLS_AURORA_TEXBIND`, new). Texture identity is falsified **properly**: `TLS_AURORA_TEXOBJID=1` leaves the
+> composite frame identical to the last digit (luma 86.98, gradient 20.889 both ways) on a replay of 113 525 draws,
+> where AP-BG's original test ran on a truncated feed of 203. What is left is aurora-side: the odd frame draws
+> **5 819** primitives against the geometry frame's 22 553, and aurora logs **`STUB: display copy is not
+> implemented`** for the XFB display copies the guest uses to put the composite on screen. Start there.
+>
 > **THE FEED MODEL IS FIXED (AP-BJ): READ IT BEFORE ANY FURTHER LIVE MEASUREMENT.** AP-BC's accumulate rule is
 > gone as a default — `gx_pipeline_end_frame` now takes a three-valued boundary (1 = present with an XFB copy,
 > 2 = present without one, 0 = flush) and the aurora feed closes on **every present**, i.e. one aurora frame per
