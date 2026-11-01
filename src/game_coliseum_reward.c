@@ -44,7 +44,7 @@ extern void fn_801856A4(void);
 extern void fn_803EFCA8(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
-extern void fn_8047C770(void);
+extern void* fn_8047C770(void* obj);
 extern void fn_8047C850(void);
 extern void fn_804848C4(void);
 extern void fn_804923AC(void);

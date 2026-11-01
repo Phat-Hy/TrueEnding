@@ -531,3 +531,54 @@ Named:
 Decompiled: none in this unit (renames only)
 Notes:    All 29 symbols directly selected from Track B's probe log hit ranking in docs/TRACK_A_QUEUE.md. Covers 3,582 logged probe hits. Normalized local labels in 18 files. Zero build errors or byte differences across all 1,025 compilation units.
 Next:     Conversion of A2 targets or high-frequency SDK helpers to matching C.
+
+### 2026-11-01 - Unit A2: Decompiled 5 Task/Event functions (44 B) to 100.0% matching C
+
+Numbers:  progress before -> after: 99.30 % -> 99.30 % (7,425,512 / 7,477,608 bytes, 18,054 / 18,155 functions)
+Self-check: git diff -U0 -- src/ for `asm void`: -5 / +0 (net 5 C conversions)
+Decompiled:
+- `atn_TaskEntry_zeroInit` (`fn_8047B594`, 12 B, 100.0% match in `src/game_event_cutscene_voice.c`):
+  ```c
+  void atn_TaskEntry_zeroInit(void* obj) {
+      *(u32*)obj = 0;
+  }
+  ```
+  Default constructor / element zero-init for `TaskEntry` slots within `atn::Vector<TaskEntry>` array allocated by `taskManager_addTask` (`fn_8047AEBC`).
+- `fn_8047C770` (8 B, 100.0% match in `src/game_event_cutscene_voice.c`):
+  ```c
+  void* fn_8047C770(void* obj) {
+      return (char*)obj + 0x3c;
+  }
+  ```
+- `fn_8047C778` (8 B, 100.0% match in `src/game_event_cutscene_voice.c`):
+  ```c
+  void* fn_8047C778(void* obj) {
+      return (char*)obj + 0x2c;
+  }
+  ```
+- `fn_8047C780` (8 B, 100.0% match in `src/game_event_cutscene_voice.c`):
+  ```c
+  void* fn_8047C780(void* obj) {
+      return (char*)obj + 0x198;
+  }
+  ```
+- `fn_8047C7D4` (8 B, 100.0% match in `src/game_event_cutscene_voice.c`):
+  ```c
+  void* fn_8047C7D4(void* obj) {
+      return (char*)obj + 0x238;
+  }
+  ```
+Architecture Telemetry for Track B:
+- Fully deciphered `taskManager_initSystem` (`0x8047A4C8`, 2548 B) and `g_TaskManager` (`0x8087EE94`):
+  1. `g_TaskManager` is a standard 12-byte dynamic array/vector (`+0x0` data pointer, `+0x4` size, `+0x8` capacity), allocated as 12 bytes via `fn_80084320` and initialized to 3 zero words.
+  2. Boot sequence executes stages marked by string table `lbl_8075626C`:
+     - Stage 0: `OSInit()`, sets GQR2..GQR5 quantization registers, initializes DVD and language.
+     - Stage 0.1: Allocates task manager instance and initial task at `lbl_8087F530`.
+     - Stage 0.2: Reads `/config.ini`.
+     - Registers Task 1 (descriptor `lbl_807C8AA8`) via `taskManager_addTask` (`fn_8047AEBC`), which allocates capacity for 8 entries (176 bytes = 0xB0) initialized with `atn_TaskEntry_zeroInit`.
+     - Registers Task 2 (descriptor `lbl_807C8AA0`).
+     - Preloads `/preload/boot.pk`.
+     - Configures fonts.
+     - Calls `fn_80207F80` (the 48 subsystem initializers in sequence, already decompiled to C).
+Prototypes swept: Updated extern declarations in `src/game_coliseum_reward.c` and `src/game_event_cutscene_actor.c`.
+Next:     Decompile next subroutines of `taskManager_initSystem` or field transition `fn_8036F268`.

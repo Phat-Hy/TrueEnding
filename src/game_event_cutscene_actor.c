@@ -73,7 +73,7 @@ extern void fn_8046F014(void);
 extern void fn_8046F2C4(void);
 extern void fn_8047043C(void);
 extern void fn_80470528(void);
-extern void fn_8047B594(void);
+extern void atn_TaskEntry_zeroInit(void* obj);
 extern void fn_8047B5A0(void);
 extern void fn_8047B5CC(void);
 extern void fn_8047B684(void);
@@ -1933,9 +1933,9 @@ lbl_fn_8047AEBC_000018D0:
     la r6, lbl_8087E080
     li r7, 0x0
     bl fn_800846FC
-    lis r4, fn_8047B594@ha
+    lis r4, atn_TaskEntry_zeroInit@ha
     lis r5, fn_800C622C@ha
-    addi r4, r4, fn_8047B594@l
+    addi r4, r4, atn_TaskEntry_zeroInit@l
     li r6, 0x14
     addi r5, r5, fn_800C622C@l
     li r7, 0x8
@@ -2106,11 +2106,11 @@ lbl_fn_8047AEBC_00001B2C:
     addi r3, r3, 0x10
     li r7, 0x0
     bl fn_800846FC
-    lis r4, fn_8047B594@ha
+    lis r4, atn_TaskEntry_zeroInit@ha
     lis r5, fn_800C622C@ha
     mr r7, r24
     li r6, 0x14
-    addi r4, r4, fn_8047B594@l
+    addi r4, r4, atn_TaskEntry_zeroInit@l
     addi r5, r5, fn_800C622C@l
     bl fn_80695720
     lwz r0, 0x8(r30)

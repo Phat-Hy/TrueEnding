@@ -96,7 +96,7 @@ extern u32 lbl_80886FEC;
 extern u32 lbl_80886FF0;
 
 /* Function declarations */
-void fn_8047B594(void);
+void atn_TaskEntry_zeroInit(void* obj);
 void fn_8047B5A0(void);
 void fn_8047B5CC(void);
 void fn_8047B684(void);
@@ -105,11 +105,11 @@ void fn_8047B768(void);
 void fn_8047BBBC(void);
 void fn_8047BFF4(void);
 void fn_8047C1D8(void);
-void fn_8047C770(void);
-void fn_8047C778(void);
-void fn_8047C780(void);
+void* fn_8047C770(void* obj);
+void* fn_8047C778(void* obj);
+void* fn_8047C780(void* obj);
 void fn_8047C788(void);
-void fn_8047C7D4(void);
+void* fn_8047C7D4(void* obj);
 void fn_8047C7DC(void);
 void fn_8047C7FC(void);
 void fn_8047C848(void);
@@ -126,12 +126,9 @@ void fn_8047CEBC(void);
 void fn_8047CF48(void);
 void fn_8047CF7C(void);
 
-asm void fn_8047B594(void)
+void atn_TaskEntry_zeroInit(void* obj)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    blr
+    *(u32*)obj = 0;
 }
 
 asm void fn_8047B5A0(void)
@@ -1485,25 +1482,19 @@ lbl_fn_8047C1D8_00001078:
     blr
 }
 
-asm void fn_8047C770(void)
+void* fn_8047C770(void* obj)
 {
-    nofralloc
-    addi r3, r3, 0x3c
-    blr
+    return (char*)obj + 0x3c;
 }
 
-asm void fn_8047C778(void)
+void* fn_8047C778(void* obj)
 {
-    nofralloc
-    addi r3, r3, 0x2c
-    blr
+    return (char*)obj + 0x2c;
 }
 
-asm void fn_8047C780(void)
+void* fn_8047C780(void* obj)
 {
-    nofralloc
-    addi r3, r3, 0x198
-    blr
+    return (char*)obj + 0x198;
 }
 
 asm void fn_8047C788(void)
@@ -1530,11 +1521,9 @@ asm void fn_8047C788(void)
     blr
 }
 
-asm void fn_8047C7D4(void)
+void* fn_8047C7D4(void* obj)
 {
-    nofralloc
-    addi r3, r3, 0x238
-    blr
+    return (char*)obj + 0x238;
 }
 
 asm void fn_8047C7DC(void)
