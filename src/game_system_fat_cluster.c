@@ -11,7 +11,7 @@ extern void msg_lookupFormattedEntry(void);
 extern void msg_formatWindowLayout(void);
 extern void msg_isWindowActive(void);
 extern void actor_calcSpawnTransform(void);
-extern void fn_8015EB2C(void);
+extern void party_evalFormationState(void);
 extern void fn_80178088(void);
 extern void fn_8037F830(void);
 extern void fn_80387DE4(void);
@@ -1743,7 +1743,7 @@ lbl_fn_8037F9AC_00001798:
     cmpwi r0, 0x2
     bne lbl_fn_8037F9AC_000017F0
     mr r3, r30
-    bl fn_8015EB2C
+    bl party_evalFormationState
     cmpwi r3, 0x0
     beq lbl_fn_8037F9AC_000017F0
     lwz r3, lbl_8087EF70

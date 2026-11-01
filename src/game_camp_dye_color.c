@@ -22,7 +22,7 @@ extern void world_getGlobalFlag(void);
 extern void world_getLocalFlag(void);
 extern void dvd_showDiskErrorDialog(void);
 extern void fn_803CCDAC(void);
-extern void fn_803CD958(void);
+extern void crowd_selectWaypointByWeight(void);
 extern void fn_804A04AC(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -983,7 +983,7 @@ lbl_fn_803C221C_00000C70:
     lwzx r18, r28, r0
 lbl_fn_803C221C_00000CC8:
     mr r4, r19
-    bl fn_803CD958
+    bl crowd_selectWaypointByWeight
     clrlwi r3, r3, 16
     addi r0, r19, 0x1
     cmplw r0, r3

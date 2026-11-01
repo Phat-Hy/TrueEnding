@@ -21,7 +21,7 @@ extern void shop_canPurchaseItem(void);
 extern void shop_loadCatalogItem(void);
 extern void party_initFormationSlots(void);
 extern void party_configureMemberSlot(void);
-extern void fn_8015EB2C(void);
+extern void party_evalFormationState(void);
 extern void actor_setState(void);
 extern void battle_applyStatusEffect(void);
 extern void battle_resolveAggroHierarchy(void);
@@ -668,7 +668,7 @@ lbl_fn_8031FE4C_00000784:
     b lbl_fn_8031FE4C_0000080C
 lbl_fn_8031FE4C_000007C4:
     mr r3, r31
-    bl fn_8015EB2C
+    bl party_evalFormationState
     cmpwi r3, 0x0
     bne lbl_fn_8031FE4C_000007E0
     mr r3, r31

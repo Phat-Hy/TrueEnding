@@ -6,7 +6,7 @@ extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void item_testLineOfSight(void);
 extern void collision_testLineSegment(void);
-extern void fn_80051B70(void);
+extern void player_stepMovement(void);
 extern void motion_updateFogAdj(void);
 extern void ref_releaseHandle(void);
 extern void magic_dispatchActionCommand(void);
@@ -929,7 +929,7 @@ lbl_fn_80399734_00000BD4:
     psq_st f1, 0x0(r5), 0, 0
     stfs f2, 0x168(r1)
     stfs f0, 0x16c(r1)
-    bl fn_80051B70
+    bl player_stepMovement
     cmpwi r3, 0x0
     beq lbl_fn_80399734_0000187C
     addi r3, r1, 0x220
@@ -1122,7 +1122,7 @@ lbl_fn_80399734_00000EAC:
     psq_st f1, 0x0(r5), 0, 0
     stfs f2, 0x148(r1)
     stfs f0, 0x14c(r1)
-    bl fn_80051B70
+    bl player_stepMovement
     cmpwi r3, 0x0
     beq lbl_fn_80399734_00001198
     addi r3, r1, 0x208
@@ -1466,7 +1466,7 @@ lbl_fn_80399734_00001220:
     fadds f7, f8, f30
     stfs f0, 0x24(r1)
     stfs f7, 0x20(r1)
-    bl fn_80051B70
+    bl player_stepMovement
     cmpwi r3, 0x0
     beq lbl_fn_80399734_000016C4
     lfs f2, 0x1f8(r1)

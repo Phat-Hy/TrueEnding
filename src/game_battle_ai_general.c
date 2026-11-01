@@ -47,7 +47,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_800E0AA8(void);
+extern void particle_getEmitterContext(void);
 extern void fn_8011D424(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
@@ -2273,7 +2273,7 @@ lbl_fn_8043DD78_00001CEC:
     addi r30, r30, 0x1
 lbl_fn_8043DD78_00001D1C:
     addi r3, r29, 0x124
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     cmplw r30, r3
     blt lbl_fn_8043DD78_00001CEC
     lwz r0, 0x784(r1)

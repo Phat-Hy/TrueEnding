@@ -27,7 +27,7 @@ extern void fn_80107BE8(void);
 extern void fn_80107CA8(void);
 extern void fn_8010C00C(void);
 extern void fn_8011BEB8(void);
-extern void fn_8012476C(void);
+extern void player_testStatusCondition(void);
 extern void fn_8012AD20(void);
 extern void enemy_updateNavSteering(void);
 extern void fn_8012E540(void);
@@ -38,7 +38,7 @@ extern void fn_80134168(void);
 extern void dialog_selectChoice(void);
 extern void fn_8014FD30(void);
 extern void fn_801533C8(void);
-extern void fn_8015EB2C(void);
+extern void party_evalFormationState(void);
 extern void actor_setState(void);
 extern void fn_80178BFC(void);
 extern void fn_801840D8(void);
@@ -1018,7 +1018,7 @@ lbl_dialog_updateScriptState_00000CD8:
     li r4, 0x22
     lwz r3, lbl_8087F0A8
     addi r3, r3, 0x48c
-    bl fn_8012476C
+    bl player_testStatusCondition
     cmpwi r3, 0x0
     beq lbl_dialog_updateScriptState_00000D10
     lwz r3, 0xf84(r28)
@@ -2145,7 +2145,7 @@ lbl_dialog_updateScriptState_00001D14:
     cmpwi r4, 0x0
     beq lbl_dialog_updateScriptState_00001EA8
     mr r3, r29
-    bl fn_8015EB2C
+    bl party_evalFormationState
     cmpwi r3, 0x0
     beq lbl_dialog_updateScriptState_00001EA8
     lwz r0, 0x55c(r29)
@@ -2304,7 +2304,7 @@ lbl_dialog_updateScriptState_00001F4C:
     cmpwi r4, 0x0
     beq lbl_dialog_updateScriptState_000020E0
     mr r3, r29
-    bl fn_8015EB2C
+    bl party_evalFormationState
     cmpwi r3, 0x0
     beq lbl_dialog_updateScriptState_000020E0
     lwz r0, 0x55c(r29)

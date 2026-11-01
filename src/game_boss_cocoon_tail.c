@@ -8,7 +8,7 @@ extern void vec3_copy(void);
 extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011220(void);
+extern void math_fabsf(void);
 extern void vec3_sub(void);
 extern void item_testLineOfSight(void);
 extern void collision_testLineSegment(void);
@@ -838,7 +838,7 @@ lbl_fn_80463174_000009CC:
     fsubs f1, f0, f29
     bl fn_802A7964
     bl fn_802A7910
-    bl fn_80011220
+    bl math_fabsf
     fcmpo cr0, f1, f31
     cror eq, lt, eq
     bne lbl_fn_80463174_00000A88
@@ -941,7 +941,7 @@ lbl_fn_80463174_00000B8C:
     fsubs f1, f0, f31
     bl fn_802A7964
     bl fn_802A7910
-    bl fn_80011220
+    bl math_fabsf
     lfs f0, lbl_80886E10
     fcmpo cr0, f1, f0
     cror eq, lt, eq

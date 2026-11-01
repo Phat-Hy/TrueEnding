@@ -12,7 +12,7 @@ extern void vec3_set(void);
 extern void fn_8000D9F8(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011220(void);
+extern void math_fabsf(void);
 extern void vec3_sub(void);
 extern void vec3_add(void);
 extern void mission_updateStub(void);
@@ -1238,7 +1238,7 @@ lbl_fn_803A26F4_00000F54:
     bl vec3_sub
     addi r3, r1, 0xe0
     bl vec3_sqMag
-    bl fn_80011220
+    bl math_fabsf
     lfs f0, lbl_80885B24
     fcmpo cr0, f1, f0
     blt lbl_fn_803A26F4_00000F98
@@ -1276,7 +1276,7 @@ lbl_fn_803A26F4_00000F98:
     bl vec3_sub
     addi r3, r1, 0xd4
     bl vec3_sqMag
-    bl fn_80011220
+    bl math_fabsf
     lfs f0, lbl_80885B24
     fcmpo cr0, f1, f0
     blt lbl_fn_803A26F4_0000102C
@@ -1432,7 +1432,7 @@ lbl_fn_803A26F4_0000121C:
     bl vec3_sub
     addi r3, r1, 0xa4
     bl vec3_sqMag
-    bl fn_80011220
+    bl math_fabsf
     lfs f0, lbl_80885B24
     fcmpo cr0, f1, f0
     blt lbl_fn_803A26F4_0000125C
@@ -1496,7 +1496,7 @@ lbl_fn_803A26F4_00001304:
     bl vec3_sub
     addi r3, r1, 0x8c
     bl vec3_sqMag
-    bl fn_80011220
+    bl math_fabsf
     lfs f0, lbl_80885B24
     fcmpo cr0, f1, f0
     blt lbl_fn_803A26F4_00001344

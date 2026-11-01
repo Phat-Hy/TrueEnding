@@ -15,7 +15,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_80089ACC(void);
 extern void str_skipWhitespace(void);
-extern void fn_800E0AA8(void);
+extern void particle_getEmitterContext(void);
 extern void cam_testTargetVisibility(void);
 extern void cam_registerTarget(void);
 extern void cam_initTrajectoryParams(void);
@@ -1867,7 +1867,7 @@ lbl_fn_803C74E0_00001770:
     li r4, -0x1
     bl cam_setLookAtTarget
     addi r3, r1, 0xc
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     mr r23, r3
     mr r3, r25
     mr r4, r28
@@ -1903,7 +1903,7 @@ lbl_fn_803C74E0_00001800:
     addi r21, r21, 0x1
 lbl_fn_803C74E0_00001830:
     addi r3, r1, 0xc
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     cmplw r21, r3
     blt lbl_fn_803C74E0_000017E0
     mr r3, r26

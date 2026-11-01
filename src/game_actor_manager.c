@@ -9,7 +9,7 @@ extern void fn_8000DB1C(void);
 extern void vec3_assign(void);
 extern void fn_800109E0(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011220(void);
+extern void math_fabsf(void);
 extern void vec3_sub(void);
 extern void math_wrapAngle(void);
 extern void vec3_add(void);
@@ -1506,7 +1506,7 @@ lbl_fn_801162A4_000013C8:
 lbl_fn_801162A4_000013CC:
     frsp f1, f2
     stfs f2, 0x14(r1)
-    bl fn_80011220
+    bl math_fabsf
     lfs f0, lbl_808816D4
     fcmpo cr0, f1, f0
     ble lbl_fn_801162A4_00001440
@@ -1593,7 +1593,7 @@ lbl_fn_801162A4_00001500:
 lbl_fn_801162A4_00001504:
     frsp f1, f2
     stfs f2, 0x10(r1)
-    bl fn_80011220
+    bl math_fabsf
     lfs f0, lbl_808816D4
     fcmpo cr0, f1, f0
     ble lbl_fn_801162A4_00001578

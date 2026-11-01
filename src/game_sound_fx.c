@@ -64,7 +64,7 @@ extern void fn_801561E4(void);
 extern void fn_801562A0(void);
 extern void fn_8015783C(void);
 extern void party_configureMemberSlot(void);
-extern void fn_8015EB2C(void);
+extern void party_evalFormationState(void);
 extern void party_evalTacticCondition(void);
 extern void fn_80165C5C(void);
 extern void fn_8016DC14(void);
@@ -152,7 +152,7 @@ asm void fn_800EA9D4(void)
     stw r30, 0x38(r1)
     stw r29, 0x34(r1)
     stw r28, 0x30(r1)
-    bl fn_8015EB2C
+    bl party_evalFormationState
     cmpwi r3, 0x0
     bne lbl_fn_800EA9D4_00000040
     mr r3, r31
@@ -373,7 +373,7 @@ asm void fn_800EACEC(void)
     stw r31, 0x2c(r1)
     mr r31, r3
     stw r30, 0x28(r1)
-    bl fn_8015EB2C
+    bl party_evalFormationState
     cmpwi r3, 0x0
     bne lbl_fn_800EACEC_00000350
     mr r3, r31

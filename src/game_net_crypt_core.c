@@ -8,7 +8,7 @@ extern void _savegpr_22(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void script_executeOpcode(void);
-extern void fn_800A4450(void);
+extern void font_getGlyphEntryByIndex(void);
 extern void msg_getMessageById(void);
 extern void msg_getMessageString(void);
 extern void ref_releaseHandle(void);
@@ -24,7 +24,7 @@ extern void fn_801F4998(void);
 extern void fn_801F4AA0(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801FEC08(void);
-extern void fn_801FEC74(void);
+extern void thread_findQueueTaskByName(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void fn_804A436C(void);
@@ -530,12 +530,12 @@ asm void fn_804B1528(void)
     addi r29, r4, 0x2ec
     addi r3, r30, 0x58
     addi r4, r4, 0x2fa
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     mr r4, r3
     addi r3, r1, 0x40
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x40(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31
@@ -573,12 +573,12 @@ lbl_fn_804B1528_000006A0:
     addi r30, r4, 0x3a3
     addi r3, r29, 0x58
     addi r4, r4, 0x3ae
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     mr r4, r3
     addi r3, r1, 0x34
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x34(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31
@@ -616,12 +616,12 @@ lbl_fn_804B1528_00000740:
     addi r30, r4, 0x3c8
     addi r3, r29, 0x58
     addi r4, r4, 0x3d3
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     mr r4, r3
     addi r3, r1, 0x28
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x28(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31
@@ -659,12 +659,12 @@ lbl_fn_804B1528_000007E0:
     addi r30, r4, 0x3e1
     addi r3, r29, 0x58
     addi r4, r4, 0x3ec
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     mr r4, r3
     addi r3, r1, 0x1c
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x1c(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31
@@ -702,12 +702,12 @@ lbl_fn_804B1528_00000880:
     addi r30, r4, 0x352
     addi r3, r29, 0x58
     addi r4, r4, 0x35d
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     mr r4, r3
     addi r3, r1, 0x10
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x10(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31
@@ -787,12 +787,12 @@ lbl_fn_804B1528_000009D4:
     addi r4, r4, lbl_80757B7C@l
     addi r4, r4, 0x3fa
     addi r3, r3, 0x58
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     mr r4, r3
     addi r3, r1, 0x4c
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x4c(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31

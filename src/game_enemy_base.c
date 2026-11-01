@@ -17,7 +17,7 @@ extern void fn_8036DAF4(void);
 extern void fn_803C11A4(void);
 extern void fn_803C1338(void);
 extern void craft_forgeUpgradeWeapon(void);
-extern void fn_803CD958(void);
+extern void crowd_selectWaypointByWeight(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
@@ -1403,7 +1403,7 @@ lbl_enemy_updateCombatBehavior_000012B4:
     slwi r0, r0, 3
     subi r4, r3, 0x1
     add r3, r5, r0
-    bl fn_803CD958
+    bl crowd_selectWaypointByWeight
     clrlwi. r5, r3, 16
     stw r5, 0x4(r31)
     ble lbl_enemy_updateCombatBehavior_00001418

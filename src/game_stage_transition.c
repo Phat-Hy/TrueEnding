@@ -20,7 +20,7 @@ extern void morph_updateMesh(void);
 extern void morph_dispatchTargetUpdate(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
-extern void fn_8012476C(void);
+extern void player_testStatusCondition(void);
 extern void npc_updateTalkInteraction(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
@@ -1501,7 +1501,7 @@ lbl_fn_8019B6A8_000013DC:
     stw r0, 0x728(r3)
     lwz r3, lbl_8087F0A8
     addi r3, r3, 0x48c
-    bl fn_8012476C
+    bl player_testStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_8019B6A8_00001424
     lwz r3, 0x1c(r31)

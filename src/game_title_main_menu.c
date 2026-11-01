@@ -17,7 +17,7 @@ extern void actor_dispatchMessage(void);
 extern void fn_8003E120(void);
 extern void item_testLineOfSight(void);
 extern void fn_80051A88(void);
-extern void fn_80051B70(void);
+extern void player_stepMovement(void);
 extern void fn_80051BC4(void);
 extern void fn_80051CD8(void);
 extern void mem_free(void);
@@ -458,7 +458,7 @@ lbl_fn_803AC708_00000518:
     psq_st f1, 0x0(r31), 0, 0
     lfs f0, 0x14(r5)
     stfs f0, 0x2c(r1)
-    bl fn_80051B70
+    bl player_stepMovement
     cmpwi r3, 0x0
     beq lbl_fn_803AC708_00000570
     li r3, 0x1

@@ -56,7 +56,7 @@ extern void fn_8030CF84(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_803C17FC(void);
-extern void fn_803CD958(void);
+extern void crowd_selectWaypointByWeight(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -1441,7 +1441,7 @@ asm void fn_8030B92C(void)
     lwz r3, 0xa4(r3)
     slwi r0, r0, 3
     add r3, r3, r0
-    bl fn_803CD958
+    bl crowd_selectWaypointByWeight
     clrlwi. r30, r3, 16
     bne lbl_fn_8030B92C_00001328
     mr r30, r26
@@ -1453,7 +1453,7 @@ lbl_fn_8030B92C_00001328:
     lwz r3, 0x10d8(r3)
     lwz r3, 0xa4(r3)
     add r3, r3, r0
-    bl fn_803CD958
+    bl crowd_selectWaypointByWeight
     clrlwi. r4, r3, 16
     bne lbl_fn_8030B92C_00001354
     mr r4, r26

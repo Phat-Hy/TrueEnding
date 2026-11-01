@@ -14,7 +14,7 @@ extern void script_executeOpcode(void);
 extern void str_assignBuffer(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800A4450(void);
+extern void font_getGlyphEntryByIndex(void);
 extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
@@ -33,7 +33,7 @@ extern void save_writeBackupSlot(void);
 extern void fn_801F7DF0(void);
 extern void save_findEntryByName(void);
 extern void save_formatSlotString(void);
-extern void fn_801FEC74(void);
+extern void thread_findQueueTaskByName(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
@@ -769,12 +769,12 @@ lbl_fn_80589DE4_00000944:
     addi r4, r4, lbl_80761AB0@l
     addi r4, r4, 0x143
     addi r3, r3, 0x58
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     mr r4, r3
     addi r3, r1, 0x14
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x14(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31
@@ -815,12 +815,12 @@ lbl_fn_80589DE4_000009BC:
     addi r4, r28, 0x159
     lwz r3, 0x5b6c(r3)
     addi r3, r3, 0x58
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     mr r4, r3
     addi r3, r1, 0x8
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x8(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31
@@ -1026,12 +1026,12 @@ lbl_fn_8058A0F4_00000C54:
     addi r4, r29, 0x185
     lwz r3, 0x5b9c(r3)
     addi r3, r3, 0x58
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     mr r4, r3
     addi r3, r1, 0x10
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x10(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31

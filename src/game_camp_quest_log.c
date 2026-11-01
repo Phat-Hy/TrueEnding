@@ -23,7 +23,7 @@ extern void fn_80089ACC(void);
 extern void area_updateZoneState(void);
 extern void lockon_updateTarget(void);
 extern void str_skipWhitespace(void);
-extern void fn_800E0AA8(void);
+extern void particle_getEmitterContext(void);
 extern void cam_testTargetVisibility(void);
 extern void cam_registerTarget(void);
 extern void cam_initTrajectoryParams(void);
@@ -1404,7 +1404,7 @@ lbl_fn_803C3894_00001180:
     li r4, -0x1
     bl cam_setLookAtTarget
     addi r3, r1, 0xb8
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     mr r4, r3
     addi r3, r21, 0x24
     addi r6, r25, 0x24f
@@ -1433,7 +1433,7 @@ lbl_fn_803C3894_00001200:
     addi r18, r18, 0x1
 lbl_fn_803C3894_00001224:
     addi r3, r1, 0xb8
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     cmplw r18, r3
     blt lbl_fn_803C3894_000011E0
     addi r3, r1, 0x2b0
@@ -1606,7 +1606,7 @@ lbl_fn_803C3894_00001480:
     li r4, -0x1
     bl cam_setLookAtTarget
     addi r3, r1, 0xa0
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     mr r4, r3
     addi r3, r18, 0x18
     addi r6, r25, 0x24f
@@ -1635,7 +1635,7 @@ lbl_fn_803C3894_00001500:
     addi r21, r21, 0x1
 lbl_fn_803C3894_00001524:
     addi r3, r1, 0xa0
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     cmplw r21, r3
     blt lbl_fn_803C3894_000014E0
     addi r3, r1, 0x2b0

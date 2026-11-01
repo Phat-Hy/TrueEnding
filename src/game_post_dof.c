@@ -20,7 +20,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80107A68(void);
-extern void fn_80108F38(void);
+extern void hurtbox_testCollisionFlags(void);
 extern void skill_findNodeById(void);
 extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
@@ -879,7 +879,7 @@ lbl_fn_802C07F8_00000A2C:
     mr r3, r27
     addi r4, r1, 0x38
     li r5, 0x4000
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
 lbl_fn_802C07F8_00000A70:
     lbz r3, 0xc(r31)
     lbz r0, 0xd(r31)

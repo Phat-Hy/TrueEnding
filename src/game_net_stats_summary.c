@@ -21,7 +21,7 @@ extern void fn_8006D008(void);
 extern void script_executeOpcode(void);
 extern void dungeon_initGlobalContext(void);
 extern void fn_80084F84(void);
-extern void fn_800A4450(void);
+extern void font_getGlyphEntryByIndex(void);
 extern void fn_800C3094(void);
 extern void fn_800C310C(void);
 extern void fn_800C3124(void);
@@ -31,7 +31,7 @@ extern void str_findChar(void);
 extern void magic_dispatchActionCommand(void);
 extern void boss_updatePhaseState(void);
 extern void save_validateHeader(void);
-extern void fn_801FEC74(void);
+extern void thread_findQueueTaskByName(void);
 extern void thread_findAndNotify(void);
 extern void fn_80204230(void);
 extern void fn_8020F130(void);
@@ -386,12 +386,12 @@ lbl_fn_8053F1B8_000003B4:
     lwz r30, 0x18(r4)
     addi r4, r3, 0x1b
     addi r3, r30, 0x58
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     mr r4, r3
     addi r3, r1, 0x8
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x8(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31

@@ -8,7 +8,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void ui_destroyWidget(void);
-extern void fn_80051B70(void);
+extern void player_stepMovement(void);
 extern void mem_alloc(void);
 extern void route_interpolatePath(void);
 extern void route_createWaypoint(void);
@@ -421,7 +421,7 @@ lbl_fn_805A4A58_000000F4:
     fadds f7, f9, f7
     stfs f0, 0x14(r1)
     stfs f7, 0x10(r1)
-    bl fn_80051B70
+    bl player_stepMovement
     cmpwi r3, 0x0
     beq lbl_fn_805A4A58_00000488
     lfs f1, 0xd4(r1)

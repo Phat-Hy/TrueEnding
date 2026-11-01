@@ -79,7 +79,7 @@ extern void fn_804F4F68(void);
 extern void fn_804F4FC8(void);
 extern void fn_804F50C8(void);
 extern void fn_804FC0D8(void);
-extern void fn_8050128C(void);
+extern void net_isMessageStateActive(void);
 extern void fn_8050DDE0(void);
 extern void net_p2p_readPayload(void);
 extern void fn_8050E414(void);
@@ -1570,7 +1570,7 @@ lbl_fn_804EE9F4_00001338:
 lbl_fn_804EE9F4_0000137C:
     lha r4, 0x4(r31)
     addi r3, r30, 0xdc
-    bl fn_8050128C
+    bl net_isMessageStateActive
     lbz r0, 0x6(r31)
     stw r0, 0xe0(r30)
     lwz r3, 0xd0(r30)

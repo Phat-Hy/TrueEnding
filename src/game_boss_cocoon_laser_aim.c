@@ -14,12 +14,12 @@ extern void fn_8006BD78(void);
 extern void script_executeOpcode(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800A4450(void);
+extern void font_getGlyphEntryByIndex(void);
 extern void fn_800A5B38(void);
 extern void str_findChar(void);
 extern void save_validateHeader(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801FEC74(void);
+extern void thread_findQueueTaskByName(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void fn_80470604(void);
@@ -208,7 +208,7 @@ asm void boss_updateLaserAimMatrix(void)
     lwz r3, 0x3ee0(r31)
     addi r4, r30, 0x18b
     addi r3, r3, 0x58
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_boss_updateLaserAimMatrix_00000228
@@ -223,7 +223,7 @@ asm void boss_updateLaserAimMatrix(void)
     addi r3, r1, 0x8
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x8(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31

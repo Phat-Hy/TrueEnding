@@ -25,7 +25,7 @@ extern void net_voiceCodec_destroy(void);
 extern void fn_804E82C8(void);
 extern void fn_804E8BF8(void);
 extern void fn_804EAEE4(void);
-extern void fn_8050128C(void);
+extern void net_isMessageStateActive(void);
 extern void fn_8050DDE0(void);
 extern void net_p2p_readPayload(void);
 extern void fn_8054D798(void);
@@ -1083,7 +1083,7 @@ lbl_fn_804EB938_00000D2C:
     andc r0, r0, r4
     srawi r0, r0, 31
     and r4, r4, r0
-    bl fn_8050128C
+    bl net_isMessageStateActive
     lwz r0, 0x540(r25)
     cmpwi r0, 0x2
     beq lbl_fn_804EB938_00000E88

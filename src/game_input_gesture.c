@@ -23,7 +23,7 @@ extern void morph_dispatchTargetUpdate(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void fn_801028E4(void);
-extern void fn_80108F38(void);
+extern void hurtbox_testCollisionFlags(void);
 extern void skill_findNodeById(void);
 extern void path_resetWaypointVelocity(void);
 extern void fn_80129A6C(void);
@@ -1108,7 +1108,7 @@ lbl_fn_802EDFE4_00000CF4:
     mr r3, r29
     addi r4, r1, 0x60
     li r5, 0x80
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
 lbl_fn_802EDFE4_00000D9C:
     lwz r0, 0x0(r31)
     cmpwi r0, 0xf

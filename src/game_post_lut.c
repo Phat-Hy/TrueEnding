@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void collision_testLineSegment(void);
-extern void fn_80051B70(void);
+extern void player_stepMovement(void);
 extern void magic_updateCircleArea(void);
 extern void atn_Model_findBoneIndex(void);
 extern void motion_updateFogAdj(void);
@@ -439,7 +439,7 @@ lbl_fn_802C5F5C_000002C0:
     fmuls f7, f8, f11
     stfs f9, 0x14(r1)
     stfs f7, 0x10(r1)
-    bl fn_80051B70
+    bl player_stepMovement
     cmpwi r3, 0x0
     beq lbl_fn_802C5F5C_0000067C
     lfs f1, 0xd4(r1)

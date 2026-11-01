@@ -35,7 +35,7 @@ extern void cam_updateLookAtMatrix(void);
 extern void cam_evalLookAtMatrix(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
-extern void fn_80108F38(void);
+extern void hurtbox_testCollisionFlags(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void quest_ctorRewardItem(void);
@@ -1992,7 +1992,7 @@ lbl_fn_802BB104_000019F0:
     mr r3, r27
     addi r4, r1, 0x10
     li r5, 0x4000
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
 lbl_fn_802BB104_00001AA8:
     addi r11, r1, 0x60
     bl _restgpr_26

@@ -32,7 +32,7 @@ extern void str_skipWhitespace(void);
 extern void cam_destroyMsgHandle(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
-extern void fn_8012476C(void);
+extern void player_testStatusCondition(void);
 extern void inventory_unequipItem(void);
 extern void fn_80169F04(void);
 extern void fn_8016A20C(void);
@@ -318,7 +318,7 @@ lbl_fn_80410E84_000002B8:
     lwz r3, lbl_8087F0A8
     li r4, 0x22
     addi r3, r3, 0x48c
-    bl fn_8012476C
+    bl player_testStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_80410E84_000002DC
     lwz r3, 0x4c8(r31)

@@ -22,7 +22,7 @@ extern void str_findChar(void);
 extern void fn_801F0758(void);
 extern void save_validateHeader(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801FEC74(void);
+extern void thread_findQueueTaskByName(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void fn_8061E370(void);
@@ -89,7 +89,7 @@ void fn_800A2D60(void);
 void fn_800A2DE0(void);
 void fn_800A4228(void);
 void fn_800A4244(void);
-void fn_800A4450(void);
+void font_getGlyphEntryByIndex(void);
 void fn_800A4460(void);
 void fn_800A4494(void);
 void fn_800A45D0(void);
@@ -1857,7 +1857,7 @@ lbl_fn_800A4244_00001A38:
     addi r30, r30, lbl_807327B4@l
     addi r4, r30, 0x2f
     addi r3, r3, 0x58
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_800A4244_00001B10
@@ -1873,7 +1873,7 @@ lbl_fn_800A4244_00001A38:
     addi r3, r1, 0x8
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x8(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31
@@ -1920,7 +1920,7 @@ lbl_fn_800A4244_00001B10:
     blr
 }
 
-asm void fn_800A4450(void)
+asm void font_getGlyphEntryByIndex(void)
 {
     nofralloc
     slwi r0, r6, 3

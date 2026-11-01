@@ -28,7 +28,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void hud_drawTargetMarker(void);
 extern void str_skipWhitespace(void);
-extern void fn_800E0AA8(void);
+extern void particle_getEmitterContext(void);
 extern void fn_800F80A8(void);
 extern void phys_scaleGravity(void);
 extern void fn_8012044C(void);
@@ -667,7 +667,7 @@ lbl_fn_804985E4_000007F8:
     blt lbl_fn_804985E4_0000061C
 lbl_fn_804985E4_00000808:
     addi r3, r1, 0x9c
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     lis r5, lbl_80756A8C@ha
     mr r4, r3
     addi r23, r5, lbl_80756A8C@l
@@ -843,7 +843,7 @@ lbl_fn_804985E4_00000AA4:
     addi r24, r24, 0x1
 lbl_fn_804985E4_00000AB8:
     addi r3, r1, 0x9c
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     cmplw r24, r3
     blt lbl_fn_804985E4_00000840
     addi r3, r1, 0x6c

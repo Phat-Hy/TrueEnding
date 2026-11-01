@@ -5,7 +5,7 @@
 extern void vec3_copy(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011220(void);
+extern void math_fabsf(void);
 extern void mtx_multVec(void);
 extern void vec3_sub(void);
 extern void math_wrapAngle(void);
@@ -1515,7 +1515,7 @@ lbl_fn_802F0328_0000140C:
     bl vec3_sub
     addi r3, r1, 0x74
     bl vec3_sqMag
-    bl fn_80011220
+    bl math_fabsf
     lfs f0, lbl_80884864
     fcmpo cr0, f1, f0
     blt lbl_fn_802F0328_00001448
@@ -1601,7 +1601,7 @@ lbl_fn_802F0328_00001548:
     addi r3, r1, 0x5c
     stfs f0, 0x60(r1)
     bl vec3_sqMag
-    bl fn_80011220
+    bl math_fabsf
     lfs f0, lbl_80884864
     fcmpo cr0, f1, f0
     blt lbl_fn_802F0328_0000158C

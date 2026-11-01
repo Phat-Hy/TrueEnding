@@ -67,7 +67,7 @@ extern u32 lbl_80881B28;
 /* Function declarations */
 void party_initFormationSlots(void);
 void party_configureMemberSlot(void);
-void fn_8015EB2C(void);
+void party_evalFormationState(void);
 void fn_8015ECC4(void);
 void fn_8015EFAC(void);
 void fn_8015F568(void);
@@ -529,7 +529,7 @@ lbl_party_configureMemberSlot_00000664:
     blr
 }
 
-asm void fn_8015EB2C(void)
+asm void party_evalFormationState(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -541,21 +541,21 @@ asm void fn_8015EB2C(void)
     psq_st f30, 0x18(r1), 0, 0
     lwz r0, 0x55c(r3)
     cmpwi r0, 0x6
-    beq lbl_fn_8015EB2C_000006AC
+    beq lbl_party_evalFormationState_000006AC
     li r3, 0x1
-    b lbl_fn_8015EB2C_000007F4
-lbl_fn_8015EB2C_000006AC:
+    b lbl_party_evalFormationState_000007F4
+lbl_party_evalFormationState_000006AC:
     lwz r4, 0x12a4(r3)
     extrwi. r0, r4, 1, 29
-    beq lbl_fn_8015EB2C_00000724
+    beq lbl_party_evalFormationState_00000724
     extrwi. r0, r4, 1, 6
-    beq lbl_fn_8015EB2C_000006C8
+    beq lbl_party_evalFormationState_000006C8
     li r3, 0x1
-    b lbl_fn_8015EB2C_000007F4
-lbl_fn_8015EB2C_000006C8:
+    b lbl_party_evalFormationState_000007F4
+lbl_party_evalFormationState_000006C8:
     lbz r0, 0x2f4(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_8015EB2C_000006F8
+    bne lbl_party_evalFormationState_000006F8
     lfs f31, 0x2e4(r3)
     li r4, 0x0
     addi r3, r3, 0xb0
@@ -564,8 +564,8 @@ lbl_fn_8015EB2C_000006C8:
     cror eq, gt, eq
     mfcr r3
     extrwi r3, r3, 1, 2
-    b lbl_fn_8015EB2C_000007F4
-lbl_fn_8015EB2C_000006F8:
+    b lbl_party_evalFormationState_000007F4
+lbl_party_evalFormationState_000006F8:
     lfs f31, 0x2e8(r3)
     li r4, 0x0
     lfs f30, 0x2e4(r3)
@@ -576,43 +576,43 @@ lbl_fn_8015EB2C_000006F8:
     cror eq, gt, eq
     mfcr r3
     extrwi r3, r3, 1, 2
-    b lbl_fn_8015EB2C_000007F4
-lbl_fn_8015EB2C_00000724:
+    b lbl_party_evalFormationState_000007F4
+lbl_party_evalFormationState_00000724:
     lwz r0, 0xf80(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8015EB2C_00000784
+    beq lbl_party_evalFormationState_00000784
     lwz r4, 0x560(r3)
     cmpwi r4, 0x43
-    bne lbl_fn_8015EB2C_00000748
+    bne lbl_party_evalFormationState_00000748
     mr r3, r0
     bl fn_80196C68
-    b lbl_fn_8015EB2C_000007F4
-lbl_fn_8015EB2C_00000748:
+    b lbl_party_evalFormationState_000007F4
+lbl_party_evalFormationState_00000748:
     cmpwi r4, 0x17
-    bne lbl_fn_8015EB2C_0000075C
+    bne lbl_party_evalFormationState_0000075C
     mr r3, r0
     bl fn_801AE41C
-    b lbl_fn_8015EB2C_000007F4
-lbl_fn_8015EB2C_0000075C:
+    b lbl_party_evalFormationState_000007F4
+lbl_party_evalFormationState_0000075C:
     cmpwi r4, 0x3b
-    bne lbl_fn_8015EB2C_00000770
+    bne lbl_party_evalFormationState_00000770
     mr r3, r0
     bl fn_801AF81C
-    b lbl_fn_8015EB2C_000007F4
-lbl_fn_8015EB2C_00000770:
+    b lbl_party_evalFormationState_000007F4
+lbl_party_evalFormationState_00000770:
     cmpwi r4, 0x8e
-    bne lbl_fn_8015EB2C_00000784
+    bne lbl_party_evalFormationState_00000784
     mr r3, r0
     bl fn_801B0260
-    b lbl_fn_8015EB2C_000007F4
-lbl_fn_8015EB2C_00000784:
+    b lbl_party_evalFormationState_000007F4
+lbl_party_evalFormationState_00000784:
     lfs f1, 0x578(r3)
     lfs f0, lbl_80881B24
     fcmpo cr0, f1, f0
-    ble lbl_fn_8015EB2C_000007F0
+    ble lbl_party_evalFormationState_000007F0
     lbz r0, 0x2f4(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_8015EB2C_000007C4
+    bne lbl_party_evalFormationState_000007C4
     lfs f30, 0x2e4(r3)
     li r4, 0x0
     addi r3, r3, 0xb0
@@ -621,8 +621,8 @@ lbl_fn_8015EB2C_00000784:
     cror eq, gt, eq
     mfcr r3
     extrwi r3, r3, 1, 2
-    b lbl_fn_8015EB2C_000007F4
-lbl_fn_8015EB2C_000007C4:
+    b lbl_party_evalFormationState_000007F4
+lbl_party_evalFormationState_000007C4:
     lfs f30, 0x2e8(r3)
     li r4, 0x0
     lfs f31, 0x2e4(r3)
@@ -633,10 +633,10 @@ lbl_fn_8015EB2C_000007C4:
     cror eq, gt, eq
     mfcr r3
     extrwi r3, r3, 1, 2
-    b lbl_fn_8015EB2C_000007F4
-lbl_fn_8015EB2C_000007F0:
+    b lbl_party_evalFormationState_000007F4
+lbl_party_evalFormationState_000007F0:
     li r3, 0x0
-lbl_fn_8015EB2C_000007F4:
+lbl_party_evalFormationState_000007F4:
     lwz r0, 0x34(r1)
     psq_l f31, 0x28(r1), 0, 0
     lfd f31, 0x20(r1)

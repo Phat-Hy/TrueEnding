@@ -42,7 +42,7 @@ extern void fn_801FEA1C(void);
 extern void fn_801FEB1C(void);
 extern void fn_803C11A4(void);
 extern void craft_forgeUpgradeWeapon(void);
-extern void fn_803CD958(void);
+extern void crowd_selectWaypointByWeight(void);
 extern void fn_803EAC3C(void);
 extern void fn_80547C2C(void);
 extern void PSVECNormalize(void);
@@ -1083,7 +1083,7 @@ lbl_fn_801EBE38_00000D44:
     slwi r0, r0, 3
     subi r4, r3, 0x1
     add r3, r5, r0
-    bl fn_803CD958
+    bl crowd_selectWaypointByWeight
     clrlwi r5, r3, 16
     mr r4, r24
     addi r3, r1, 0x5c
@@ -1145,7 +1145,7 @@ lbl_fn_801EBE38_00000E2C:
     slwi r0, r0, 3
     subi r4, r3, 0x1
     add r3, r5, r0
-    bl fn_803CD958
+    bl crowd_selectWaypointByWeight
     clrlwi r5, r3, 16
     stw r5, 0x4(r25)
     mr r4, r24

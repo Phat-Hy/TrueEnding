@@ -9,7 +9,7 @@ extern void _savegpr_26(void);
 extern void fn_80010374(void);
 extern void fn_8001296C(void);
 extern void fn_80012AC4(void);
-extern void fn_80051B70(void);
+extern void player_stepMovement(void);
 extern void msg_getMessageById(void);
 extern void fn_800A5584(void);
 extern void msg_lookupFormattedEntry(void);
@@ -2060,7 +2060,7 @@ lbl_fn_8055E724_00001948:
     stfs f4, 0xac(r1)
     stfs f3, 0xb0(r1)
     stfs f0, 0xb4(r1)
-    bl fn_80051B70
+    bl player_stepMovement
     cmpwi r3, 0x0
     bne lbl_fn_8055E724_00001A90
     lwz r3, lbl_8087F540

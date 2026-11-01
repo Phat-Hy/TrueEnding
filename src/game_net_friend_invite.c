@@ -286,7 +286,7 @@ extern void fn_804FB66C(void);
 extern void fn_804FB678(void);
 extern void fn_804FB96C(void);
 extern void fn_804FC0D8(void);
-extern void fn_8050128C(void);
+extern void net_isMessageStateActive(void);
 extern void fn_80502100(void);
 extern void fn_8050270C(void);
 extern void fn_8050284C(void);
@@ -1192,7 +1192,7 @@ lbl_fn_804D16FC_00000AF4:
     stw r30, 0xd40(r31)
     stw r30, 0xd44(r31)
     stb r0, 0xcc(r31)
-    bl fn_8050128C
+    bl net_isMessageStateActive
     stw r29, 0xd0(r31)
     mr r3, r31
     stw r29, 0xb0(r31)
@@ -1225,7 +1225,7 @@ asm void fn_804D1F70(void)
     mr r31, r3
     stb r0, 0xcc(r3)
     addi r3, r3, 0xdc
-    bl fn_8050128C
+    bl net_isMessageStateActive
     li r3, 0x0
     li r0, -0x1
     stw r3, 0xd0(r31)

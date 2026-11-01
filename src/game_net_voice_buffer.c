@@ -26,7 +26,7 @@ extern void fn_804DD3F4(void);
 extern void fn_804DF4BC(void);
 extern void fn_804E4B48(void);
 extern void fn_804FB224(void);
-extern void fn_8050128C(void);
+extern void net_isMessageStateActive(void);
 extern void fn_80509B24(void);
 extern void fn_8050F8B4(void);
 extern void fn_8054D798(void);
@@ -1754,7 +1754,7 @@ lbl_fn_804DB1C8_00001644:
     andc r0, r0, r4
     srawi r0, r0, 31
     and r4, r4, r0
-    bl fn_8050128C
+    bl net_isMessageStateActive
     lwz r0, 0x540(r29)
     cmpwi r0, 0x2
     beq lbl_fn_804DB1C8_000017A0

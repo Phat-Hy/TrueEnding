@@ -12,7 +12,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void script_executeOpcode(void);
-extern void fn_800A4450(void);
+extern void font_getGlyphEntryByIndex(void);
 extern void str_findChar(void);
 extern void actor_findSpawnTemplate(void);
 extern void fn_80124C6C(void);
@@ -257,7 +257,7 @@ lbl_fn_804A5824_00000294:
     addi r4, r27, 0x134
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x8(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31

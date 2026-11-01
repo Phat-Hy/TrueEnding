@@ -43,7 +43,7 @@ void fn_80050E18(void);
 void fn_80051684(void);
 void fn_80051A88(void);
 void fn_80051B14(void);
-void fn_80051B70(void);
+void player_stepMovement(void);
 void fn_80051BC4(void);
 void fn_80051C10(void);
 void fn_80051C78(void);
@@ -2007,7 +2007,7 @@ asm void fn_80051B14(void)
     blr
 }
 
-asm void fn_80051B70(void)
+asm void player_stepMovement(void)
 {
     nofralloc
     stwu r1, -0x10(r1)

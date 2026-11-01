@@ -19,7 +19,7 @@ extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void fn_800EFC64(void);
 extern void fn_800FB1BC(void);
-extern void fn_80108F38(void);
+extern void hurtbox_testCollisionFlags(void);
 extern void hurtbox_processHitDamage(void);
 extern void fn_8010CA2C(void);
 extern void fn_8010CD3C(void);
@@ -2950,7 +2950,7 @@ lbl_fn_80040B44_000026B8:
     mr r3, r26
     addi r4, r1, 0x8
     li r5, 0x20
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
 lbl_fn_80040B44_00002714:
     mr r3, r22
     li r4, 0x11

@@ -15,7 +15,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skill_findNodeById(void);
 extern void magic_dispatchActionCommand(void);
-extern void fn_8012476C(void);
+extern void player_testStatusCondition(void);
 extern void quest_resetObjectiveBounds(void);
 extern void fn_80154344(void);
 extern void inventory_calcTotalStats(void);
@@ -1514,7 +1514,7 @@ lbl_fn_801A2414_00001384:
     lwz r3, lbl_8087F0A8
     li r4, 0x22
     addi r3, r3, 0x48c
-    bl fn_8012476C
+    bl player_testStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_801A2414_000013C0
     lwz r3, 0xc(r31)

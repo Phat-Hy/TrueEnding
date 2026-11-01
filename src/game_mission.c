@@ -11,7 +11,7 @@ extern void fn_8004CB70(void);
 extern void fn_8004CBB0(void);
 extern void fn_800502A8(void);
 extern void fn_80051A88(void);
-extern void fn_80051B70(void);
+extern void player_stepMovement(void);
 extern void fn_80051C10(void);
 extern void fn_80051CD8(void);
 extern void fn_80051E90(void);
@@ -710,7 +710,7 @@ asm void atn_ColliObject_testSphere(void)
     mr r31, r8
     mr r3, r29
     addi r4, r26, 0x78
-    bl fn_80051B70
+    bl player_stepMovement
     cmpwi r3, 0x0
     bne lbl_atn_ColliObject_testSphere_0000081C
     li r3, 0x0
@@ -2281,7 +2281,7 @@ asm void fn_80059784(void)
 lbl_fn_80059784_00001D8C:
     mr r3, r28
     mr r4, r8
-    bl fn_80051B70
+    bl player_stepMovement
     cmpwi r3, 0x0
     bne lbl_fn_80059784_00001DA8
     li r3, 0x0

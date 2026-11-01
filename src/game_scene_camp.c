@@ -9,7 +9,7 @@ extern void mem_free(void);
 extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_8012476C(void);
+extern void player_testStatusCondition(void);
 extern void enemy_calcAttackTrajectory(void);
 extern void npc_updateTalkInteraction(void);
 extern void inventory_calcTotalStats(void);
@@ -213,7 +213,7 @@ lbl_fn_801A7E8C_000001A8:
     stw r0, 0x728(r3)
     lwz r3, lbl_8087F0A8
     addi r3, r3, 0x48c
-    bl fn_8012476C
+    bl player_testStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_801A7E8C_000001E4
     lwz r3, 0x14(r31)

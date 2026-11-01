@@ -14,7 +14,7 @@ extern void fn_80107FC8(void);
 extern void hurtbox_testCollisionLayer(void);
 extern void hurtbox_processHitDamage(void);
 extern void fn_8010CCD0(void);
-extern void fn_8012476C(void);
+extern void player_testStatusCondition(void);
 extern void fn_8012F440(void);
 extern void party_configureMemberSlot(void);
 extern void fn_80166544(void);
@@ -959,7 +959,7 @@ lbl_fn_8012E540_00000C18:
     lwz r3, lbl_8087F0A8
     li r4, 0x22
     addi r3, r3, 0x48c
-    bl fn_8012476C
+    bl player_testStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_8012E540_00000C88
     rlwinm r0, r26, 0, 24, 24

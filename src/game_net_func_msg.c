@@ -477,7 +477,7 @@ void fn_80501060(void);
 void fn_80501068(void);
 void fn_805010C4(void);
 void fn_805011D0(void);
-void fn_8050128C(void);
+void net_isMessageStateActive(void);
 void fn_805012C8(void);
 void fn_80501434(void);
 void fn_80501494(void);
@@ -2545,23 +2545,23 @@ lbl_fn_805011D0_00001470:
     blr
 }
 
-asm void fn_8050128C(void)
+asm void net_isMessageStateActive(void)
 {
     nofralloc
     lwz r6, lbl_8087F610
     cmpwi r6, 0x0
-    beq lbl_fn_8050128C_000014B8
+    beq lbl_net_isMessageStateActive_000014B8
     lwz r5, 0x4fc(r6)
     subi r0, r5, 0x1e
     cntlzw r0, r0
     srwi r0, r0, 5
     cmpwi r0, 0x1
-    bne lbl_fn_8050128C_000014B8
+    bne lbl_net_isMessageStateActive_000014B8
     lwz r5, 0x50c(r6)
     subi r0, r5, 0x3
     cmplwi r0, 0x1
     blelr
-lbl_fn_8050128C_000014B8:
+lbl_net_isMessageStateActive_000014B8:
     stw r4, 0x0(r3)
     blr
 }

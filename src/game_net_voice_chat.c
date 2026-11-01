@@ -14,7 +14,7 @@ extern void fn_804FC9C4(void);
 extern void fn_804FCA38(void);
 extern void fn_804FE2E0(void);
 extern void fn_804FF3D4(void);
-extern void fn_8050128C(void);
+extern void net_isMessageStateActive(void);
 extern void fn_8050CDAC(void);
 extern void printf(void);
 extern void abort(void);
@@ -1527,7 +1527,7 @@ lbl_fn_804D668C_00000F80:
     stw r26, 0xd5c(r1)
     stw r26, 0xd60(r1)
     stb r28, 0xe8(r1)
-    bl fn_8050128C
+    bl net_isMessageStateActive
     cmpwi r21, 0x0
     stw r27, 0xec(r1)
     stw r27, 0xcc(r1)

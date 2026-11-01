@@ -41,7 +41,7 @@ extern void fn_80312EF8(void);
 extern void fn_803132D0(void);
 extern void fn_803C11A4(void);
 extern void craft_forgeUpgradeWeapon(void);
-extern void fn_803CD958(void);
+extern void crowd_selectWaypointByWeight(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -659,7 +659,7 @@ lbl_fn_803104D4_000007A0:
     lwz r0, 0xa4(r28)
     subi r4, r31, 0x1
     add r3, r0, r29
-    bl fn_803CD958
+    bl crowd_selectWaypointByWeight
     clrlwi r0, r3, 16
     cmpw r31, r0
     bne lbl_fn_803104D4_000007FC
@@ -724,7 +724,7 @@ lbl_fn_803104D4_00000878:
     subi r0, r3, 0x1
     slwi r0, r0, 3
     add r3, r5, r0
-    bl fn_803CD958
+    bl crowd_selectWaypointByWeight
     clrlwi r0, r3, 16
     cmpw r26, r0
     bne lbl_fn_803104D4_000008CC

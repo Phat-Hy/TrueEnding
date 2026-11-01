@@ -23,7 +23,7 @@ extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
 extern void equip_applyToCharacter(void);
-extern void fn_8015EB2C(void);
+extern void party_evalFormationState(void);
 extern void debuff_clearStatus(void);
 extern void battle_applyStatusEffect(void);
 extern void battle_updateTargetAggro(void);
@@ -321,7 +321,7 @@ lbl_fn_80247DA4_00000278:
     cmplwi r0, 0x20
     bne lbl_fn_80247DA4_000002C4
     mr r3, r29
-    bl fn_8015EB2C
+    bl party_evalFormationState
     cmpwi r3, 0x0
     beq lbl_fn_80247DA4_000002C4
     mr r30, r29

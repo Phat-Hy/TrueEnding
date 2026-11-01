@@ -13,7 +13,7 @@ extern void target_findEntryByName(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800E0AA8(void);
+extern void particle_getEmitterContext(void);
 extern void system_getNextSequenceId(void);
 extern void actor_testBitFlag(void);
 extern void npc_getPosition(void);
@@ -811,7 +811,7 @@ lbl_fn_8033A7A0_000009EC:
     mulli r0, r0, 0x24
     add r3, r30, r0
     addi r3, r3, 0x14ec
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     subi r0, r3, 0x1
     cmpw r31, r0
     bge lbl_fn_8033A7A0_00000A24
@@ -821,7 +821,7 @@ lbl_fn_8033A7A0_00000A24:
     mulli r0, r0, 0x24
     add r3, r30, r0
     addi r3, r3, 0x14ec
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     subi r31, r3, 0x1
 lbl_fn_8033A7A0_00000A3C:
     lwz r0, 0x1558(r30)
@@ -836,7 +836,7 @@ lbl_fn_8033A7A0_00000A3C:
     mulli r0, r0, 0x24
     add r3, r30, r0
     addi r3, r3, 0x14ec
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     lwz r4, 0x155c(r30)
     addi r4, r4, 0x1
     divwu r0, r4, r3
@@ -854,7 +854,7 @@ lbl_fn_8033A7A0_00000A8C:
     mulli r0, r0, 0x24
     add r3, r30, r0
     addi r3, r3, 0x14f8
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     subi r0, r3, 0x1
     cmpw r31, r0
     bge lbl_fn_8033A7A0_00000AC4
@@ -864,7 +864,7 @@ lbl_fn_8033A7A0_00000AC4:
     mulli r0, r0, 0x24
     add r3, r30, r0
     addi r3, r3, 0x14f8
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     subi r31, r3, 0x1
 lbl_fn_8033A7A0_00000ADC:
     lwz r0, 0x1558(r30)
@@ -879,7 +879,7 @@ lbl_fn_8033A7A0_00000ADC:
     mulli r0, r0, 0x24
     add r3, r30, r0
     addi r3, r3, 0x14f8
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     lwz r4, 0x1560(r30)
     addi r4, r4, 0x1
     divwu r0, r4, r3
@@ -893,7 +893,7 @@ lbl_fn_8033A7A0_00000B2C:
     mulli r0, r0, 0x24
     add r3, r30, r0
     addi r3, r3, 0x1504
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     subi r0, r3, 0x1
     cmpw r31, r0
     bge lbl_fn_8033A7A0_00000B54
@@ -903,7 +903,7 @@ lbl_fn_8033A7A0_00000B54:
     mulli r0, r0, 0x24
     add r3, r30, r0
     addi r3, r3, 0x1504
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     subi r31, r3, 0x1
 lbl_fn_8033A7A0_00000B6C:
     lwz r0, 0x1558(r30)
@@ -918,7 +918,7 @@ lbl_fn_8033A7A0_00000B6C:
     mulli r0, r0, 0x24
     add r3, r30, r0
     addi r3, r3, 0x1504
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     lwz r4, 0x1564(r30)
     addi r4, r4, 0x1
     divwu r0, r4, r3

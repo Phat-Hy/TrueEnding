@@ -8,7 +8,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void item_testLineOfSight(void);
-extern void fn_80051B70(void);
+extern void player_stepMovement(void);
 extern void fn_80051CD8(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
@@ -2272,7 +2272,7 @@ lbl_fn_804375C0_00001BE0:
     bne lbl_fn_804375C0_00001F3C
     mr r4, r23
     addi r3, r1, 0x188
-    bl fn_80051B70
+    bl player_stepMovement
     cmpwi r3, 0x0
     beq lbl_fn_804375C0_00001F3C
     lfs f2, 0x190(r1)

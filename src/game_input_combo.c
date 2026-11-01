@@ -27,7 +27,7 @@ extern void sound_playSpatialEffect(void);
 extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
-extern void fn_80108F38(void);
+extern void hurtbox_testCollisionFlags(void);
 extern void boss_updatePhaseState(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
@@ -837,7 +837,7 @@ asm void fn_802EC160(void)
     mr r3, r31
     addi r4, r1, 0x38
     li r5, 0x80
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)
     lwz r30, 0x48(r1)

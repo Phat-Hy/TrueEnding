@@ -28,7 +28,7 @@ extern void morph_updateMesh(void);
 extern void fn_800CFA28(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
-extern void fn_800E0AA8(void);
+extern void particle_getEmitterContext(void);
 extern void cam_findTargetIndex(void);
 extern void fn_800EFE3C(void);
 extern void proj_getMatrix(void);
@@ -871,7 +871,7 @@ lbl_fn_803729B4_000008B8:
     addi r27, r27, 0x1
 lbl_fn_803729B4_000009B4:
     addi r3, r1, 0x44
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     cmplw r27, r3
     blt lbl_fn_803729B4_00000694
     addi r3, r30, 0x56dc

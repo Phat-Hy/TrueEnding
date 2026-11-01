@@ -32,7 +32,7 @@ extern void fn_804DCA58(void);
 extern void fn_804DD1AC(void);
 extern void fn_804DD578(void);
 extern void fn_804E9364(void);
-extern void fn_8050128C(void);
+extern void net_isMessageStateActive(void);
 extern void fn_805012C8(void);
 extern void fn_80509B50(void);
 extern void fn_8050BA6C(void);
@@ -1512,7 +1512,7 @@ lbl_fn_804DE888_000012AC:
     bne lbl_fn_804DE888_00001528
     addi r3, r29, 0xdc
     li r4, 0x0
-    bl fn_8050128C
+    bl net_isMessageStateActive
     stw r31, 0xe0(r29)
     cmplw r29, r26
     stw r31, 0xe4(r29)

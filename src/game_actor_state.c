@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void equip_calcTotalStatBonuses(void);
 extern void fn_80061AE4(void);
 extern void script_executeOpcode(void);
-extern void fn_800A4450(void);
+extern void font_getGlyphEntryByIndex(void);
 extern void msg_getMessageById(void);
 extern void msg_lookupFormattedEntry(void);
 extern void msg_isWindowActive(void);
@@ -28,7 +28,7 @@ extern void fn_8011B570(void);
 extern void fn_8011BBD0(void);
 extern void fn_8012AFE8(void);
 extern void fn_801F4F84(void);
-extern void fn_801FEC74(void);
+extern void thread_findQueueTaskByName(void);
 extern void thread_findAndNotify(void);
 extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
@@ -526,12 +526,12 @@ lbl_fn_801189B4_00000598:
     addi r4, r27, 0x25a
     lfs f29, lbl_8088176C
     addi r3, r3, 0x58
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     mr r4, r3
     addi r3, r1, 0x20
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x20(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31

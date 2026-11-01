@@ -11,7 +11,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
-extern void fn_80108F38(void);
+extern void hurtbox_testCollisionFlags(void);
 extern void enemy_updateCombatBehavior(void);
 extern void enemy_evalAnimTrack(void);
 extern void npc_initScriptContext(void);
@@ -428,7 +428,7 @@ lbl_fn_802E9FC8_000003FC:
     mr r3, r30
     addi r4, r1, 0x10
     li r5, 0x80
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
     b lbl_fn_802E9FC8_00000514
 lbl_fn_802E9FC8_000004F8:
     lwz r0, 0x1530(r3)

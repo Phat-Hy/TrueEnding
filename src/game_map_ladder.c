@@ -17,7 +17,7 @@ extern void fn_80101524(void);
 extern void fn_801076D0(void);
 extern void fn_80107798(void);
 extern void fn_80107860(void);
-extern void fn_8012476C(void);
+extern void player_testStatusCondition(void);
 extern void fn_8013310C(void);
 extern void actor_testBitFlag(void);
 extern void npc_updateTalkInteraction(void);
@@ -957,7 +957,7 @@ asm void fn_8018F090(void)
     lwz r3, lbl_8087F0A8
     li r4, 0x22
     addi r3, r3, 0x48c
-    bl fn_8012476C
+    bl player_testStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_8018F090_00000B70
     lfs f3, 0x18(r31)

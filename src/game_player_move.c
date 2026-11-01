@@ -12,7 +12,7 @@ extern void actor_dispatchMessage(void);
 extern void fn_8006BA30(void);
 extern void script_executeOpcode(void);
 extern void str_assignBuffer(void);
-extern void fn_800A4450(void);
+extern void font_getGlyphEntryByIndex(void);
 extern void msg_getMessageString(void);
 extern void ref_releaseHandle(void);
 extern void str_findChar(void);
@@ -29,7 +29,7 @@ extern void fn_801F4D80(void);
 extern void saveSlot_readSummary(void);
 extern void save_verifyBlockCrc(void);
 extern void save_calculateBlockCrc(void);
-extern void fn_801FEC74(void);
+extern void thread_findQueueTaskByName(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
@@ -164,14 +164,14 @@ lbl_fn_80119F0C_00000088:
     lwz r3, 0x5c(r29)
     addi r4, r28, 0x29f
     addi r3, r3, 0x58
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     cmpwi r3, 0x0
     beq lbl_fn_80119F0C_000001D4
     mr r4, r3
     addi r3, r1, 0x8
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x8(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31

@@ -24,7 +24,7 @@ extern void enemy_updateCombatBehavior(void);
 extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void inventory_applyItemStats(void);
-extern void fn_8015EB2C(void);
+extern void party_evalFormationState(void);
 extern void battle_canTargetActor(void);
 extern void fn_80171DB0(void);
 extern void fn_8017B3C0(void);
@@ -1403,7 +1403,7 @@ lbl_fn_805A40BC_00001140:
     cmpwi r0, 0x6
     bne lbl_fn_805A40BC_0000117C
     mr r3, r31
-    bl fn_8015EB2C
+    bl party_evalFormationState
     cmpwi r3, 0x0
     bne lbl_fn_805A40BC_0000117C
 lbl_fn_805A40BC_0000115C:

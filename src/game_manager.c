@@ -84,7 +84,7 @@ void fn_80010490(void);
 void fn_800109E0(void);
 void fn_80010B68(void);
 void vec3_toEulerAngles(void);
-void fn_80011220(void);
+void math_fabsf(void);
 void fn_8001122C(void);
 void fn_800112E0(void);
 void mtx_multVec(void *v, const void *m);
@@ -1328,7 +1328,7 @@ lbl_vec3_toEulerAngles_000010C8:
     blr
 }
 
-asm void fn_80011220(void)
+asm void math_fabsf(void)
 {
     nofralloc
     fabs f0, f1
@@ -3528,7 +3528,7 @@ lbl_fn_80012D34_00002C80:
     beq lbl_fn_80012D34_00002DA8
 lbl_fn_80012D34_00002D94:
     fmr f1, f29
-    bl fn_80011220
+    bl math_fabsf
     lfs f0, lbl_80880680
     fcmpo cr0, f1, f0
     bge lbl_fn_80012D34_00002DB8

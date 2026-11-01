@@ -15,7 +15,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_800E0AA8(void);
+extern void particle_getEmitterContext(void);
 extern void fn_800E0AB0(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
@@ -693,7 +693,7 @@ lbl_fn_802BB92C_0000083C:
     cmpwi r3, 0x0
     bne lbl_fn_802BB92C_00000898
     addi r3, r1, 0x10
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     mr r31, r3
     bl rand
     divwu r0, r3, r31

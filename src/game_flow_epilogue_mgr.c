@@ -20,7 +20,7 @@ extern void fn_804C54FC(void);
 extern void net_voiceCodec_destroy(void);
 extern void fn_804E9C68(void);
 extern void fn_804F50E0(void);
-extern void fn_8050128C(void);
+extern void net_isMessageStateActive(void);
 extern void net_p2p_readPayload(void);
 extern void net_getSocket(void);
 extern void net_getMyAid(void);
@@ -1634,7 +1634,7 @@ lbl_fn_804E9364_000013D0:
     stb r14, 0xcc(r31)
     addi r3, r31, 0xdc
     li r4, 0x0
-    bl fn_8050128C
+    bl net_isMessageStateActive
     lwz r0, 0xd4(r1)
     li r3, 0x0
     stw r0, 0xb0(r31)

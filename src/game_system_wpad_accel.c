@@ -15,7 +15,7 @@ extern void fn_800EFB78(void);
 extern void fn_8011BF3C(void);
 extern void fn_80154344(void);
 extern void inventory_calcTotalStats(void);
-extern void fn_8015EB2C(void);
+extern void party_evalFormationState(void);
 extern void fn_8016D0A0(void);
 extern void fn_80175AEC(void);
 extern void fn_8017C974(void);
@@ -1190,7 +1190,7 @@ lbl_fn_8036DDD4_00000ED8:
     cmplwi r0, 0x20
     bne lbl_fn_8036DDD4_00000F24
     mr r3, r30
-    bl fn_8015EB2C
+    bl party_evalFormationState
     cmpwi r3, 0x0
     beq lbl_fn_8036DDD4_0000109C
 lbl_fn_8036DDD4_00000F24:

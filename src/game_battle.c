@@ -67,7 +67,7 @@ extern void task_findEntryById(void);
 extern void fn_8021A984(void);
 extern void world_getGlobalFlag(void);
 extern void craft_forgeUpgradeWeapon(void);
-extern void fn_803CD958(void);
+extern void crowd_selectWaypointByWeight(void);
 extern void fn_80599C94(void);
 extern void fn_80599D64(void);
 extern void fn_805AA018(void);
@@ -2288,7 +2288,7 @@ lbl_fn_80018D5C_00001DC0:
     lwz r3, 0xa4(r28)
     slwi r0, r0, 3
     add r3, r3, r0
-    bl fn_803CD958
+    bl crowd_selectWaypointByWeight
     clrlwi. r0, r3, 16
     ble lbl_fn_80018D5C_00001EE8
     lwz r0, 0x1c(r27)
@@ -2642,7 +2642,7 @@ lbl_fn_80019254_000022E0:
     lwz r3, 0xa4(r29)
     slwi r0, r0, 3
     add r3, r3, r0
-    bl fn_803CD958
+    bl crowd_selectWaypointByWeight
     clrlwi. r0, r3, 16
     ble lbl_fn_80019254_00002408
     lwz r0, 0x1c(r28)

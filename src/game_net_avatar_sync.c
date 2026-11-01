@@ -20,7 +20,7 @@ extern void mem_getAllocSize(void);
 extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
 extern void hud_drawTargetMarker(void);
-extern void fn_800A4450(void);
+extern void font_getGlyphEntryByIndex(void);
 extern void msg_getMessageById(void);
 extern void msg_getMessageString(void);
 extern void msg_isWindowActive(void);
@@ -43,7 +43,7 @@ extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
 extern void save_calculateBlockCrc(void);
 extern void save_findEntryByName(void);
-extern void fn_801FEC74(void);
+extern void thread_findQueueTaskByName(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
@@ -2577,12 +2577,12 @@ lbl_fn_80529C74_00002148:
     addi r4, r4, lbl_8075D1A0@l
     addi r3, r3, 0x58
     addi r4, r4, 0x11c
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     mr r4, r3
     addi r3, r1, 0x3c
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x3c(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31

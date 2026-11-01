@@ -31,7 +31,7 @@ extern void battle_applyStatusEffect(void);
 extern void fn_80170F20(void);
 extern void task_lookupTagIndex(void);
 extern void kpad_getClampData(void);
-extern void fn_803CD958(void);
+extern void crowd_selectWaypointByWeight(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
 extern void task_updateWorker(void);
@@ -489,7 +489,7 @@ lbl_fn_8042917C_00000578:
     slwi r0, r0, 3
     subi r4, r3, 0x1
     add r3, r5, r0
-    bl fn_803CD958
+    bl crowd_selectWaypointByWeight
     clrlwi. r0, r3, 16
     ble lbl_fn_8042917C_000006EC
     lwz r4, 0x114(r27)

@@ -8,7 +8,7 @@ extern void _restgpr_19(void);
 extern void _savegpr_16(void);
 extern void _savegpr_19(void);
 extern void dtor_80084684(void);
-extern void fn_80051B70(void);
+extern void player_stepMovement(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -1201,7 +1201,7 @@ lbl_fn_80273970_00000F3C:
     psq_st f1, 0x0(r25), 0, 0
     stfs f2, 0x40(r1)
     stfs f29, 0x44(r1)
-    bl fn_80051B70
+    bl player_stepMovement
     cmpwi r3, 0x0
     beq lbl_fn_80273970_00000FB4
     li r23, 0x1

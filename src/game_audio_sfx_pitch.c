@@ -9,7 +9,7 @@ extern void vec3_copy(void);
 extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011220(void);
+extern void math_fabsf(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
 extern void math_wrapAngle(void);
@@ -2232,7 +2232,7 @@ lbl_fn_80314BD8_00001D4C:
     bl vec3_sub
     addi r3, r1, 0x134
     bl vec3_sqMag
-    bl fn_80011220
+    bl math_fabsf
     lfs f0, lbl_80884D50
     fcmpo cr0, f1, f0
     blt lbl_fn_80314BD8_00001D9C

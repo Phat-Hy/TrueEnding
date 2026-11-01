@@ -11,7 +11,7 @@ extern void map_debugLog(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_8012476C(void);
+extern void player_testStatusCondition(void);
 extern void fn_8013310C(void);
 extern void actor_testBitFlag(void);
 extern void quest_resetObjectiveBounds(void);
@@ -528,7 +528,7 @@ asm void fn_80191EA4(void)
     lwz r3, lbl_8087F0A8
     li r4, 0x22
     addi r3, r3, 0x48c
-    bl fn_8012476C
+    bl player_testStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_80191EA4_000005C4
     lwz r3, lbl_8087EFA8
@@ -1355,7 +1355,7 @@ lbl_fn_80192948_0000107C:
     stw r28, 0x728(r3)
     lwz r3, lbl_8087F0A8
     addi r3, r3, 0x48c
-    bl fn_8012476C
+    bl player_testStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_80192948_000010C4
     lwz r3, 0x10(r29)

@@ -28,7 +28,7 @@ extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
 extern void equip_applyToCharacter(void);
-extern void fn_8015EB2C(void);
+extern void party_evalFormationState(void);
 extern void party_updateMemberCoords(void);
 extern void fn_8016AB0C(void);
 extern void fn_8016DDB0(void);
@@ -718,7 +718,7 @@ lbl_fn_8054622C_00000858:
     bl dialog_updateScriptState
     b lbl_fn_8054622C_00000C94
 lbl_fn_8054622C_00000884:
-    bl fn_8015EB2C
+    bl party_evalFormationState
     cmpwi r3, 0x0
     bne lbl_fn_8054622C_000008B8
     lwz r12, 0x0(r31)

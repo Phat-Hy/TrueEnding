@@ -22,7 +22,7 @@ extern void fn_80139F2C(void);
 extern void fn_8013C3A8(void);
 extern void npc_getDialogController(void);
 extern void fn_801479D8(void);
-extern void fn_8015EB2C(void);
+extern void party_evalFormationState(void);
 extern void fn_80267B20(void);
 extern void fn_80267B28(void);
 extern void fn_8032EC94(void);
@@ -1341,7 +1341,7 @@ lbl_fn_8038F52C_000011D0:
     cmpwi r3, 0x2
     bne lbl_fn_8038F52C_00001268
     mr r3, r30
-    bl fn_8015EB2C
+    bl party_evalFormationState
     cmpwi r3, 0x0
     bne lbl_fn_8038F52C_00001DE4
 lbl_fn_8038F52C_00001268:

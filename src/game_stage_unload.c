@@ -10,7 +10,7 @@ extern void map_debugLog(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_8012476C(void);
+extern void player_testStatusCondition(void);
 extern void quest_evaluateMilestoneData(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
@@ -497,7 +497,7 @@ lbl_fn_8019905C_000005D4:
     stw r0, 0x728(r3)
     lwz r3, lbl_8087F0A8
     addi r3, r3, 0x48c
-    bl fn_8012476C
+    bl player_testStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_8019905C_00000628
     lwz r3, 0x28(r30)

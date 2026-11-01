@@ -38,7 +38,7 @@ extern u32 lbl_80881850;
 /* Function declarations */
 void fn_80123C7C(void);
 void player_evaluateStatusCondition(void);
-void fn_8012476C(void);
+void player_testStatusCondition(void);
 void fn_801248DC(void);
 void fn_80124B60(void);
 void fn_80124BE4(void);
@@ -861,53 +861,53 @@ lbl_player_evaluateStatusCondition_00000AD8:
     blr
 }
 
-asm void fn_8012476C(void)
+asm void player_testStatusCondition(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
     mflr r0
     cmpwi r4, 0x22
     stw r0, 0x14(r1)
-    bne lbl_fn_8012476C_00000C4C
+    bne lbl_player_testStatusCondition_00000C4C
     lwz r3, lbl_8087F9C0
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_8012476C_00000BB0
+    bne lbl_player_testStatusCondition_00000BB0
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_8012476C_00000B78
+    beq lbl_player_testStatusCondition_00000B78
     lwz r0, 0x54e4(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_8012476C_00000B78
+    bne lbl_player_testStatusCondition_00000B78
     lwz r3, lbl_8087F9F8
     cmpwi r3, 0x0
-    beq lbl_fn_8012476C_00000B78
+    beq lbl_player_testStatusCondition_00000B78
     lwz r0, 0xa70(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_8012476C_00000B78
+    bne lbl_player_testStatusCondition_00000B78
     lwz r3, lbl_8087F8A0
     cmpwi r3, 0x0
-    beq lbl_fn_8012476C_00000B58
+    beq lbl_player_testStatusCondition_00000B58
     lwz r3, 0x48(r3)
-    b lbl_fn_8012476C_00000B5C
-lbl_fn_8012476C_00000B58:
+    b lbl_player_testStatusCondition_00000B5C
+lbl_player_testStatusCondition_00000B58:
     li r3, 0x0
-lbl_fn_8012476C_00000B5C:
+lbl_player_testStatusCondition_00000B5C:
     cmpwi r3, 0x0
-    beq lbl_fn_8012476C_00000B78
+    beq lbl_player_testStatusCondition_00000B78
     bl fn_8017C974
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
-    b lbl_fn_8012476C_00000B7C
-lbl_fn_8012476C_00000B78:
+    b lbl_player_testStatusCondition_00000B7C
+lbl_player_testStatusCondition_00000B78:
     li r0, 0x0
-lbl_fn_8012476C_00000B7C:
+lbl_player_testStatusCondition_00000B7C:
     cmpwi r0, 0x0
-    beq lbl_fn_8012476C_00000B8C
+    beq lbl_player_testStatusCondition_00000B8C
     li r3, 0x0
-    b lbl_fn_8012476C_00000C50
-lbl_fn_8012476C_00000B8C:
+    b lbl_player_testStatusCondition_00000C50
+lbl_player_testStatusCondition_00000B8C:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     lfs f1, lbl_80881830
@@ -916,43 +916,43 @@ lbl_fn_8012476C_00000B8C:
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
-    b lbl_fn_8012476C_00000C50
-lbl_fn_8012476C_00000BB0:
+    b lbl_player_testStatusCondition_00000C50
+lbl_player_testStatusCondition_00000BB0:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_8012476C_00000C14
+    beq lbl_player_testStatusCondition_00000C14
     lwz r0, 0x54e4(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_8012476C_00000C14
+    bne lbl_player_testStatusCondition_00000C14
     lwz r3, lbl_8087F9F8
     cmpwi r3, 0x0
-    beq lbl_fn_8012476C_00000C14
+    beq lbl_player_testStatusCondition_00000C14
     lwz r0, 0xa70(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_8012476C_00000C14
+    bne lbl_player_testStatusCondition_00000C14
     lwz r3, lbl_8087F8A0
     cmpwi r3, 0x0
-    beq lbl_fn_8012476C_00000BF4
+    beq lbl_player_testStatusCondition_00000BF4
     lwz r3, 0x48(r3)
-    b lbl_fn_8012476C_00000BF8
-lbl_fn_8012476C_00000BF4:
+    b lbl_player_testStatusCondition_00000BF8
+lbl_player_testStatusCondition_00000BF4:
     li r3, 0x0
-lbl_fn_8012476C_00000BF8:
+lbl_player_testStatusCondition_00000BF8:
     cmpwi r3, 0x0
-    beq lbl_fn_8012476C_00000C14
+    beq lbl_player_testStatusCondition_00000C14
     bl fn_8017C974
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
-    b lbl_fn_8012476C_00000C18
-lbl_fn_8012476C_00000C14:
+    b lbl_player_testStatusCondition_00000C18
+lbl_player_testStatusCondition_00000C14:
     li r0, 0x0
-lbl_fn_8012476C_00000C18:
+lbl_player_testStatusCondition_00000C18:
     cmpwi r0, 0x0
-    beq lbl_fn_8012476C_00000C28
+    beq lbl_player_testStatusCondition_00000C28
     li r3, 0x0
-    b lbl_fn_8012476C_00000C50
-lbl_fn_8012476C_00000C28:
+    b lbl_player_testStatusCondition_00000C50
+lbl_player_testStatusCondition_00000C28:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     lfs f1, lbl_80881830
@@ -961,10 +961,10 @@ lbl_fn_8012476C_00000C28:
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
-    b lbl_fn_8012476C_00000C50
-lbl_fn_8012476C_00000C4C:
+    b lbl_player_testStatusCondition_00000C50
+lbl_player_testStatusCondition_00000C4C:
     li r3, 0x0
-lbl_fn_8012476C_00000C50:
+lbl_player_testStatusCondition_00000C50:
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10

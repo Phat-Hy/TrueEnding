@@ -16,7 +16,7 @@ extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void proj_getMatrix(void);
-extern void fn_8012476C(void);
+extern void player_testStatusCondition(void);
 extern void path_getFollowerNode(void);
 extern void fn_80139F4C(void);
 extern void mtx_rotYRad(void);
@@ -794,7 +794,7 @@ asm void fn_801B6278(void)
     lwz r3, lbl_8087F0A8
     li r4, 0x22
     addi r3, r3, 0x48c
-    bl fn_8012476C
+    bl player_testStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_801B6278_00000A80
     lwz r3, 0xc(r31)

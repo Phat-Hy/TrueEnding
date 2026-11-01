@@ -13,7 +13,7 @@ extern void fn_800C3118(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
-extern void fn_80108F38(void);
+extern void hurtbox_testCollisionFlags(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015C3A8(void);
 extern void fn_8015C6A0(void);
@@ -1705,7 +1705,7 @@ asm void fn_80277968(void)
     mr r3, r31
     addi r4, r1, 0x38
     li r5, 0x80
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)
     lwz r30, 0x48(r1)

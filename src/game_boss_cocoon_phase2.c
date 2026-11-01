@@ -14,7 +14,7 @@ extern void vec3_copy(void);
 extern void scene_getRootNode(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011220(void);
+extern void math_fabsf(void);
 extern void vec3_addAssign(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
@@ -22,7 +22,7 @@ extern void str_initFromCStr(void);
 extern void str_getData(void);
 extern void item_testLineOfSight(void);
 extern void fn_80051B14(void);
-extern void fn_80051B70(void);
+extern void player_stepMovement(void);
 extern void atn_ColliBase_destructor(void);
 extern void mission_updateStub(void);
 extern void atn_ColliCapsule_destructor(void);
@@ -480,7 +480,7 @@ lbl_fn_8045EDEC_000001C8:
     fmuls f7, f8, f11
     stfs f9, 0xc(r1)
     stfs f7, 0x8(r1)
-    bl fn_80051B70
+    bl player_stepMovement
     cmpwi r3, 0x0
     beq lbl_fn_8045EDEC_00000644
     lfs f2, 0x1d0(r1)
@@ -2194,12 +2194,12 @@ lbl_fn_80460458_00001CAC:
     fadds f1, f1, f2
     fsubs f31, f1, f0
     fmr f1, f31
-    bl fn_80011220
+    bl math_fabsf
     lfs f0, lbl_8087F500
     fcmpo cr0, f1, f0
     ble lbl_fn_80460458_00001CF4
     fmr f1, f31
-    bl fn_80011220
+    bl math_fabsf
     fdivs f1, f31, f1
     lfs f0, lbl_8087F500
     fmuls f31, f0, f1

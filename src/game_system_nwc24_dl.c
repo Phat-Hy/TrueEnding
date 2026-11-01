@@ -8,7 +8,7 @@ extern void item_useConsumable(void);
 extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void fn_80050900(void);
-extern void fn_80051B70(void);
+extern void player_stepMovement(void);
 extern void msg_formatWindowLayout(void);
 extern void msg_isWindowActive(void);
 extern void fn_801002DC(void);
@@ -1589,7 +1589,7 @@ lbl_fn_80385B48_00001648:
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x290(r1)
     stfs f0, 0x294(r1)
-    bl fn_80051B70
+    bl player_stepMovement
     cmpwi r3, 0x0
     beq lbl_fn_80385B48_000018DC
     lfs f7, lbl_808858E8

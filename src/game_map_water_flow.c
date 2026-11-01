@@ -21,7 +21,7 @@ extern void fn_80107A78(void);
 extern void fn_80107FD8(void);
 extern void fn_80108080(void);
 extern void hurtbox_dispatchHitEvent(void);
-extern void fn_8012476C(void);
+extern void player_testStatusCondition(void);
 extern void fn_8013310C(void);
 extern void fn_80133130(void);
 extern void actor_testBitFlag(void);
@@ -1799,7 +1799,7 @@ asm void fn_8019163C(void)
     lwz r3, lbl_8087F0A8
     li r4, 0x22
     addi r3, r3, 0x48c
-    bl fn_8012476C
+    bl player_testStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_8019163C_00001758
     lwz r3, lbl_8087EFA8

@@ -15,7 +15,7 @@ extern void battle_canTargetActor(void);
 extern void net_getPacketManager(void);
 extern void net_voiceCodec_destroy(void);
 extern void fn_804FB224(void);
-extern void fn_8050128C(void);
+extern void net_isMessageStateActive(void);
 extern void fn_80502874(void);
 extern void fn_80509CB0(void);
 extern void fn_80509DA4(void);
@@ -154,7 +154,7 @@ lbl_fn_804DBD0C_000000C8:
     add r27, r0, r31
     stb r28, 0xcc(r27)
     addi r3, r27, 0xdc
-    bl fn_8050128C
+    bl net_isMessageStateActive
     stw r29, 0xd0(r27)
     addi r26, r26, 0x1
     addi r31, r31, 0xd5c

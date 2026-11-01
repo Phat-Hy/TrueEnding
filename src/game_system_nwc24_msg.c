@@ -8,7 +8,7 @@ extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void fn_800109E0(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011220(void);
+extern void math_fabsf(void);
 extern void mtx_multVec(void);
 extern void vec3_addAssign(void);
 extern void vec3_sub(void);
@@ -407,7 +407,7 @@ asm void fn_80387910(void)
     addi r5, r29, 0x4c0
     bl fn_8037F830
     lfs f1, 0x4b8(r29)
-    bl fn_80011220
+    bl math_fabsf
     lfs f0, lbl_808859C8
     fcmpo cr0, f1, f0
     bge lbl_fn_80387910_00000454
@@ -435,7 +435,7 @@ lbl_fn_80387910_00000454:
     addi r3, r1, 0x104
     stfs f0, 0x108(r1)
     bl vec3_sqMag
-    bl fn_80011220
+    bl math_fabsf
     lfs f0, lbl_808859C8
     fcmpo cr0, f1, f0
     bge lbl_fn_80387910_000004D0
@@ -593,7 +593,7 @@ lbl_fn_80387910_000006E4:
     addi r3, r1, 0x104
     stfs f0, 0x114(r1)
     bl vec3_sqMag
-    bl fn_80011220
+    bl math_fabsf
     lfs f0, lbl_808859C8
     fcmpo cr0, f1, f0
     bge lbl_fn_80387910_00000730

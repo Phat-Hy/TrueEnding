@@ -7,7 +7,7 @@ extern void _savegpr_23(void);
 extern void dtor_80084684(void);
 extern void equip_calcTotalStatBonuses(void);
 extern void script_executeOpcode(void);
-extern void fn_800A4450(void);
+extern void font_getGlyphEntryByIndex(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
@@ -16,7 +16,7 @@ extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void actor_findSpawnTemplate(void);
 extern void fn_801F4AA0(void);
-extern void fn_801FEC74(void);
+extern void thread_findQueueTaskByName(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_804A29C4(void);
@@ -299,14 +299,14 @@ lbl_fn_804AF384_00000210:
     lwz r3, 0x70(r29)
     addi r4, r31, 0x2de
     addi r3, r3, 0x58
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     cmpwi r3, 0x0
     beq lbl_fn_804AF384_000002FC
     mr r4, r3
     addi r3, r1, 0x8
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x8(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31
@@ -461,12 +461,12 @@ lbl_fn_804AF520_000004CC:
     addi r26, r4, 0x2ec
     addi r3, r23, 0x58
     addi r4, r4, 0x2fa
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     mr r4, r3
     addi r3, r1, 0x5c
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x5c(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31
@@ -504,12 +504,12 @@ lbl_fn_804AF520_00000544:
     addi r26, r4, 0x300
     addi r3, r23, 0x58
     addi r4, r4, 0x311
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     mr r4, r3
     addi r3, r1, 0x50
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x50(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31
@@ -547,12 +547,12 @@ lbl_fn_804AF520_000005E4:
     addi r26, r4, 0x31a
     addi r3, r23, 0x58
     addi r4, r4, 0x328
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     mr r4, r3
     addi r3, r1, 0x44
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x44(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31
@@ -590,12 +590,12 @@ lbl_fn_804AF520_00000684:
     addi r26, r4, 0x339
     addi r3, r23, 0x58
     addi r4, r4, 0x344
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     mr r4, r3
     addi r3, r1, 0x38
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x38(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31
@@ -633,12 +633,12 @@ lbl_fn_804AF520_00000724:
     addi r26, r4, 0x352
     addi r3, r23, 0x58
     addi r4, r4, 0x35d
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     mr r4, r3
     addi r3, r1, 0x2c
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x2c(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31
@@ -1140,12 +1140,12 @@ lbl_fn_804AF520_00000E80:
     addi r26, r4, 0x2ec
     addi r3, r23, 0x58
     addi r4, r4, 0x2fa
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     mr r4, r3
     addi r3, r1, 0x20
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x20(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31
@@ -1183,12 +1183,12 @@ lbl_fn_804AF520_00000F0C:
     addi r26, r4, 0x3a3
     addi r3, r23, 0x58
     addi r4, r4, 0x3ae
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     mr r4, r3
     addi r3, r1, 0x14
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x14(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31
@@ -1226,12 +1226,12 @@ lbl_fn_804AF520_00000FAC:
     addi r26, r4, 0x352
     addi r3, r23, 0x58
     addi r4, r4, 0x35d
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     mr r4, r3
     addi r3, r1, 0x8
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x8(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31

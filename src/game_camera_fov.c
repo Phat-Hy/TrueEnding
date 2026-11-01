@@ -27,7 +27,7 @@ extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_800E0AA8(void);
+extern void particle_getEmitterContext(void);
 extern void fn_800E0AB0(void);
 extern void cam_findTargetIndex(void);
 extern void system_getNextSequenceId(void);
@@ -976,7 +976,7 @@ lbl_fn_802DE27C_00000BB4:
     addi r28, r28, 0x1
 lbl_fn_802DE27C_00000BD0:
     addi r3, r31, 0x1624
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     cmplw r28, r3
     blt lbl_fn_802DE27C_00000BB4
     mr r3, r31

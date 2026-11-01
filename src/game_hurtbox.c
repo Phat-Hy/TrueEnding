@@ -55,7 +55,7 @@ void fn_8010895C(void);
 void fn_80108A54(void);
 void fn_80108A5C(void);
 void hurtbox_testCollisionLayer(void);
-void fn_80108F38(void);
+void hurtbox_testCollisionFlags(void);
 void hurtbox_processHitDamage(void);
 void hurtbox_dispatchHitEvent(void);
 void fn_80109864(void);
@@ -544,7 +544,7 @@ lbl_hurtbox_testCollisionLayer_0000066C:
     blr
 }
 
-asm void fn_80108F38(void)
+asm void hurtbox_testCollisionFlags(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -554,255 +554,255 @@ asm void fn_80108F38(void)
     stw r0, 0x24(r1)
     li r7, 0x0
     li r4, 0x3
-    beq lbl_fn_80108F38_00000968
-    bge lbl_fn_80108F38_0000071C
+    beq lbl_hurtbox_testCollisionFlags_00000968
+    bge lbl_hurtbox_testCollisionFlags_0000071C
     cmpwi r5, 0x20
-    beq lbl_fn_80108F38_00000834
-    bge lbl_fn_80108F38_000006EC
+    beq lbl_hurtbox_testCollisionFlags_00000834
+    bge lbl_hurtbox_testCollisionFlags_000006EC
     cmpwi r5, 0x4
-    beq lbl_fn_80108F38_000007FC
-    bge lbl_fn_80108F38_000006D4
+    beq lbl_hurtbox_testCollisionFlags_000007FC
+    bge lbl_hurtbox_testCollisionFlags_000006D4
     cmpwi r5, 0x2
-    beq lbl_fn_80108F38_000007E0
-    bge lbl_fn_80108F38_000009BC
+    beq lbl_hurtbox_testCollisionFlags_000007E0
+    bge lbl_hurtbox_testCollisionFlags_000009BC
     cmpwi r5, 0x1
-    bge lbl_fn_80108F38_000007A8
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_000006D4:
+    bge lbl_hurtbox_testCollisionFlags_000007A8
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_000006D4:
     cmpwi r5, 0x10
-    beq lbl_fn_80108F38_00000818
-    bge lbl_fn_80108F38_000009BC
+    beq lbl_hurtbox_testCollisionFlags_00000818
+    bge lbl_hurtbox_testCollisionFlags_000009BC
     cmpwi r5, 0x8
-    beq lbl_fn_80108F38_00000930
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_000006EC:
+    beq lbl_hurtbox_testCollisionFlags_00000930
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_000006EC:
     cmpwi r5, 0x100
-    beq lbl_fn_80108F38_00000888
-    bge lbl_fn_80108F38_00000710
+    beq lbl_hurtbox_testCollisionFlags_00000888
+    bge lbl_hurtbox_testCollisionFlags_00000710
     cmpwi r5, 0x80
-    beq lbl_fn_80108F38_0000086C
-    bge lbl_fn_80108F38_000009BC
+    beq lbl_hurtbox_testCollisionFlags_0000086C
+    bge lbl_hurtbox_testCollisionFlags_000009BC
     cmpwi r5, 0x40
-    beq lbl_fn_80108F38_00000850
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_00000710:
+    beq lbl_hurtbox_testCollisionFlags_00000850
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_00000710:
     cmpwi r5, 0x200
-    beq lbl_fn_80108F38_00000930
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_0000071C:
+    beq lbl_hurtbox_testCollisionFlags_00000930
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_0000071C:
     lis r0, 0x8
     cmpw r5, r0
-    beq lbl_fn_80108F38_00000914
-    bge lbl_fn_80108F38_00000768
+    beq lbl_hurtbox_testCollisionFlags_00000914
+    bge lbl_hurtbox_testCollisionFlags_00000768
     lis r3, 0x1
     cmpw r5, r3
-    beq lbl_fn_80108F38_000008DC
-    bge lbl_fn_80108F38_00000758
+    beq lbl_hurtbox_testCollisionFlags_000008DC
+    bge lbl_hurtbox_testCollisionFlags_00000758
     addi r0, r3, -0x8000
     cmpw r5, r0
-    beq lbl_fn_80108F38_000008C0
-    bge lbl_fn_80108F38_000009BC
+    beq lbl_hurtbox_testCollisionFlags_000008C0
+    bge lbl_hurtbox_testCollisionFlags_000009BC
     cmpwi r5, 0x4000
-    beq lbl_fn_80108F38_000008A4
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_00000758:
+    beq lbl_hurtbox_testCollisionFlags_000008A4
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_00000758:
     lis r0, 0x4
     cmpw r5, r0
-    beq lbl_fn_80108F38_000008F8
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_00000768:
+    beq lbl_hurtbox_testCollisionFlags_000008F8
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_00000768:
     lis r0, 0x100
     cmpw r5, r0
-    beq lbl_fn_80108F38_00000984
-    bge lbl_fn_80108F38_00000798
+    beq lbl_hurtbox_testCollisionFlags_00000984
+    bge lbl_hurtbox_testCollisionFlags_00000798
     lis r0, 0x80
     cmpw r5, r0
-    beq lbl_fn_80108F38_0000094C
-    bge lbl_fn_80108F38_000009BC
+    beq lbl_hurtbox_testCollisionFlags_0000094C
+    bge lbl_hurtbox_testCollisionFlags_000009BC
     lis r0, 0x40
     cmpw r5, r0
-    beq lbl_fn_80108F38_000007C4
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_00000798:
+    beq lbl_hurtbox_testCollisionFlags_000007C4
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_00000798:
     lis r0, 0x200
     cmpw r5, r0
-    beq lbl_fn_80108F38_000009A0
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_000007A8:
+    beq lbl_hurtbox_testCollisionFlags_000009A0
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_000007A8:
     lwz r3, lbl_8087F1E4
     lwz r7, 0x104(r3)
     cmpwi r7, 0x0
-    beq lbl_fn_80108F38_000007BC
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_000007BC:
+    beq lbl_hurtbox_testCollisionFlags_000007BC
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_000007BC:
     la r7, lbl_808813D0
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_000007C4:
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_000007C4:
     lwz r3, lbl_8087F1E4
     lwz r7, 0x184(r3)
     cmpwi r7, 0x0
-    beq lbl_fn_80108F38_000007D8
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_000007D8:
+    beq lbl_hurtbox_testCollisionFlags_000007D8
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_000007D8:
     la r7, lbl_808813D0
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_000007E0:
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_000007E0:
     lwz r3, lbl_8087F1E4
     lwz r7, 0x10c(r3)
     cmpwi r7, 0x0
-    beq lbl_fn_80108F38_000007F4
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_000007F4:
+    beq lbl_hurtbox_testCollisionFlags_000007F4
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_000007F4:
     la r7, lbl_808813D0
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_000007FC:
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_000007FC:
     lwz r3, lbl_8087F1E4
     lwz r7, 0x114(r3)
     cmpwi r7, 0x0
-    beq lbl_fn_80108F38_00000810
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_00000810:
+    beq lbl_hurtbox_testCollisionFlags_00000810
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_00000810:
     la r7, lbl_808813D0
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_00000818:
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_00000818:
     lwz r3, lbl_8087F1E4
     lwz r7, 0x11c(r3)
     cmpwi r7, 0x0
-    beq lbl_fn_80108F38_0000082C
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_0000082C:
+    beq lbl_hurtbox_testCollisionFlags_0000082C
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_0000082C:
     la r7, lbl_808813D0
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_00000834:
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_00000834:
     lwz r3, lbl_8087F1E4
     lwz r7, 0x124(r3)
     cmpwi r7, 0x0
-    beq lbl_fn_80108F38_00000848
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_00000848:
+    beq lbl_hurtbox_testCollisionFlags_00000848
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_00000848:
     la r7, lbl_808813D0
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_00000850:
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_00000850:
     lwz r3, lbl_8087F1E4
     lwz r7, 0x12c(r3)
     cmpwi r7, 0x0
-    beq lbl_fn_80108F38_00000864
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_00000864:
+    beq lbl_hurtbox_testCollisionFlags_00000864
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_00000864:
     la r7, lbl_808813D0
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_0000086C:
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_0000086C:
     lwz r3, lbl_8087F1E4
     lwz r7, 0x134(r3)
     cmpwi r7, 0x0
-    beq lbl_fn_80108F38_00000880
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_00000880:
+    beq lbl_hurtbox_testCollisionFlags_00000880
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_00000880:
     la r7, lbl_808813D0
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_00000888:
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_00000888:
     lwz r3, lbl_8087F1E4
     lwz r7, 0x13c(r3)
     cmpwi r7, 0x0
-    beq lbl_fn_80108F38_0000089C
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_0000089C:
+    beq lbl_hurtbox_testCollisionFlags_0000089C
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_0000089C:
     la r7, lbl_808813D0
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_000008A4:
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_000008A4:
     lwz r3, lbl_8087F1E4
     lwz r7, 0x144(r3)
     cmpwi r7, 0x0
-    beq lbl_fn_80108F38_000008B8
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_000008B8:
+    beq lbl_hurtbox_testCollisionFlags_000008B8
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_000008B8:
     la r7, lbl_808813D0
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_000008C0:
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_000008C0:
     lwz r3, lbl_8087F1E4
     lwz r7, 0x14c(r3)
     cmpwi r7, 0x0
-    beq lbl_fn_80108F38_000008D4
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_000008D4:
+    beq lbl_hurtbox_testCollisionFlags_000008D4
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_000008D4:
     la r7, lbl_808813D0
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_000008DC:
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_000008DC:
     lwz r3, lbl_8087F1E4
     lwz r7, 0x154(r3)
     cmpwi r7, 0x0
-    beq lbl_fn_80108F38_000008F0
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_000008F0:
+    beq lbl_hurtbox_testCollisionFlags_000008F0
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_000008F0:
     la r7, lbl_808813D0
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_000008F8:
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_000008F8:
     lwz r3, lbl_8087F1E4
     lwz r7, 0x15c(r3)
     cmpwi r7, 0x0
-    beq lbl_fn_80108F38_0000090C
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_0000090C:
+    beq lbl_hurtbox_testCollisionFlags_0000090C
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_0000090C:
     la r7, lbl_808813D0
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_00000914:
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_00000914:
     lwz r3, lbl_8087F1E4
     lwz r7, 0x1dc(r3)
     cmpwi r7, 0x0
-    beq lbl_fn_80108F38_00000928
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_00000928:
+    beq lbl_hurtbox_testCollisionFlags_00000928
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_00000928:
     la r7, lbl_808813D0
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_00000930:
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_00000930:
     lwz r3, lbl_8087F1E4
     lwz r7, 0x16c(r3)
     cmpwi r7, 0x0
-    beq lbl_fn_80108F38_00000944
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_00000944:
+    beq lbl_hurtbox_testCollisionFlags_00000944
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_00000944:
     la r7, lbl_808813D0
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_0000094C:
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_0000094C:
     lwz r3, lbl_8087F1E4
     lwz r7, 0x174(r3)
     cmpwi r7, 0x0
-    beq lbl_fn_80108F38_00000960
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_00000960:
+    beq lbl_hurtbox_testCollisionFlags_00000960
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_00000960:
     la r7, lbl_808813D0
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_00000968:
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_00000968:
     lwz r3, lbl_8087F1E4
     lwz r7, 0x17c(r3)
     cmpwi r7, 0x0
-    beq lbl_fn_80108F38_0000097C
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_0000097C:
+    beq lbl_hurtbox_testCollisionFlags_0000097C
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_0000097C:
     la r7, lbl_808813D0
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_00000984:
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_00000984:
     lwz r3, lbl_8087F1E4
     lwz r7, 0x18c(r3)
     cmpwi r7, 0x0
-    beq lbl_fn_80108F38_00000998
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_00000998:
+    beq lbl_hurtbox_testCollisionFlags_00000998
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_00000998:
     la r7, lbl_808813D0
-    b lbl_fn_80108F38_000009BC
-lbl_fn_80108F38_000009A0:
+    b lbl_hurtbox_testCollisionFlags_000009BC
+lbl_hurtbox_testCollisionFlags_000009A0:
     lwz r3, lbl_8087F1E4
     lwz r7, 0x194(r3)
     cmpwi r7, 0x0
-    beq lbl_fn_80108F38_000009B4
-    b lbl_fn_80108F38_000009B8
-lbl_fn_80108F38_000009B4:
+    beq lbl_hurtbox_testCollisionFlags_000009B4
+    b lbl_hurtbox_testCollisionFlags_000009B8
+lbl_hurtbox_testCollisionFlags_000009B4:
     la r7, lbl_808813D0
-lbl_fn_80108F38_000009B8:
+lbl_hurtbox_testCollisionFlags_000009B8:
     li r4, 0x4
-lbl_fn_80108F38_000009BC:
+lbl_hurtbox_testCollisionFlags_000009BC:
     cmpwi r7, 0x0
-    beq lbl_fn_80108F38_00000A00
+    beq lbl_hurtbox_testCollisionFlags_00000A00
     li r5, 0x0
     stw r5, 0x8(r1)
     li r3, 0x1
@@ -818,7 +818,7 @@ lbl_fn_80108F38_000009BC:
     stw r0, 0x18(r1)
     lwz r3, lbl_8087F8A8
     bl fn_8054D798
-lbl_fn_80108F38_00000A00:
+lbl_hurtbox_testCollisionFlags_00000A00:
     lwz r0, 0x24(r1)
     mtlr r0
     addi r1, r1, 0x20

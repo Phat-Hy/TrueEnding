@@ -8,7 +8,7 @@ extern void vec3_copy(void);
 extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011220(void);
+extern void math_fabsf(void);
 extern void vec3_sub(void);
 extern void vec3_add(void);
 extern void fn_80013484(void);
@@ -1925,7 +1925,7 @@ lbl_fn_803267E8_00001A74:
     fsubs f1, f0, f31
     bl fn_802A7964
     bl fn_802A7910
-    bl fn_80011220
+    bl math_fabsf
     lfs f0, lbl_80884FD0
     fcmpo cr0, f1, f0
     cror eq, lt, eq

@@ -19,7 +19,7 @@ extern void net_voiceCodec_destroy(void);
 extern void fn_804F6E98(void);
 extern void fn_804F7A54(void);
 extern void fn_804FB224(void);
-extern void fn_8050128C(void);
+extern void net_isMessageStateActive(void);
 extern void net_p2p_readPayload(void);
 extern void wcslen(void);
 extern void net_getSocket(void);
@@ -226,7 +226,7 @@ lbl_fn_804F4E44_00000210:
     beq lbl_fn_804F4E44_00000224
     lha r4, 0x0(r30)
     addi r3, r3, 0xdc
-    bl fn_8050128C
+    bl net_isMessageStateActive
 lbl_fn_804F4E44_00000224:
     addi r28, r28, 0x1
     addi r31, r31, 0xd5c

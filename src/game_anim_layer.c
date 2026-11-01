@@ -15,7 +15,7 @@ extern void atn_Task_setActive(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
-extern void fn_80108F38(void);
+extern void hurtbox_testCollisionFlags(void);
 extern void enemy_updateCombatBehavior(void);
 extern void boss_updatePhaseState(void);
 extern void npc_initScriptContext(void);
@@ -1770,7 +1770,7 @@ lbl_fn_802709E0_000016E4:
     mr r3, r31
     addi r4, r1, 0x10
     li r5, 0x80
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
 lbl_fn_802709E0_000017E8:
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)

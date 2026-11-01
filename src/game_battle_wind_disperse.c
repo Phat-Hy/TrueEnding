@@ -19,7 +19,7 @@ extern void actor_setState(void);
 extern void battle_applyStatusEffect(void);
 extern void fn_80170F20(void);
 extern void craft_forgeUpgradeWeapon(void);
-extern void fn_803CD958(void);
+extern void crowd_selectWaypointByWeight(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
 extern void task_updateWorker(void);
@@ -959,7 +959,7 @@ lbl_fn_8041F434_00000BB8:
     subi r4, r3, 0x1
     lwz r3, 0xa4(r5)
     add r3, r3, r0
-    bl fn_803CD958
+    bl crowd_selectWaypointByWeight
     clrlwi. r0, r3, 16
     ble lbl_fn_8041F434_00000C48
     lfs f1, 0x530(r30)

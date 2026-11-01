@@ -10,7 +10,7 @@ extern void _savegpr_23(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void item_testLineOfSight(void);
-extern void fn_80051B70(void);
+extern void player_stepMovement(void);
 extern void fn_80051CD8(void);
 extern void mem_alloc(void);
 extern void fn_8008A4E0(void);
@@ -554,7 +554,7 @@ lbl_fn_804348C4_000003EC:
     fadds f7, f9, f7
     stfs f0, 0x34(r1)
     stfs f7, 0x30(r1)
-    bl fn_80051B70
+    bl player_stepMovement
     cmpwi r3, 0x0
     beq lbl_fn_804348C4_000008B4
     lfs f2, 0x188(r1)

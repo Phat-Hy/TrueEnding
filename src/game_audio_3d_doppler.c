@@ -6,7 +6,7 @@ extern void vec3_copy(void);
 extern void scene_getRootNode(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011220(void);
+extern void math_fabsf(void);
 extern void vec3_sub(void);
 extern void collision_queryGeometry(void);
 extern void mission_updateStub(void);
@@ -634,11 +634,11 @@ lbl_fn_80323690_0000064C:
     bl phys_scaleGravity
     fmr f31, f1
     fmr f1, f30
-    bl fn_80011220
+    bl math_fabsf
     fcmpo cr0, f1, f31
     ble lbl_fn_80323690_000006A0
     fmr f1, f30
-    bl fn_80011220
+    bl math_fabsf
     fdivs f0, f30, f1
     fmuls f30, f31, f0
 lbl_fn_80323690_000006A0:

@@ -20,7 +20,7 @@ extern void mem_free(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800E0AA8(void);
+extern void particle_getEmitterContext(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
@@ -1916,7 +1916,7 @@ lbl_fn_802A3D80_00001A00:
     bne lbl_fn_802A3D80_000019B4
 lbl_fn_802A3D80_00001A08:
     addi r3, r1, 0x38
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     lis r3, lbl_80745C50@ha
     lis r30, lbl_80745C70@ha
     lfs f29, lbl_80883D6C
@@ -2023,7 +2023,7 @@ lbl_fn_802A3D80_00001A34:
     addi r29, r29, 0x1
 lbl_fn_802A3D80_00001BAC:
     addi r3, r1, 0x38
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     cmplw r29, r3
     blt lbl_fn_802A3D80_00001A34
     addi r3, r1, 0x38

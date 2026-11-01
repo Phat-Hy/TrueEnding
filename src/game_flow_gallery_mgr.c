@@ -16,7 +16,7 @@ extern void fn_804CF640(void);
 extern void fn_804EE4F4(void);
 extern void fn_805010C4(void);
 extern void fn_805011D0(void);
-extern void fn_8050128C(void);
+extern void net_isMessageStateActive(void);
 extern void fn_8050A730(void);
 extern void fn_8050A964(void);
 extern void fn_8050A984(void);
@@ -1153,7 +1153,7 @@ lbl_fn_804F225C_00000E90:
 lbl_fn_804F225C_00000EE8:
     lha r4, 0x4(r31)
     addi r3, r30, 0xdc
-    bl fn_8050128C
+    bl net_isMessageStateActive
     lbz r0, 0x6(r31)
     stw r0, 0xe0(r30)
     lbz r0, 0x7(r31)
