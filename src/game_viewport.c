@@ -90,7 +90,7 @@ extern u32 lbl_80881530;
 extern u32 lbl_80881534;
 
 /* Function declarations */
-void fn_800F7250(void);
+u32 fn_800F7250(void);
 void *fn_800F7258(void *p);
 void fn_800F7260(void);
 void vec3_scale(f32 *dest, const f32 *src, f32 scale);
@@ -99,7 +99,7 @@ void fn_800F7F60(void);
 void fn_800F7F80(void);
 u32 viewport_getFlag(void);
 void fn_800F7F98(void *p, u32 val);
-void viewport_getGlobalContext(void);
+u32 viewport_getGlobalContext(void);
 void fn_800F7FA8(void);
 u32 fn_800F7FB4(const void *p);
 void fn_800F7FBC(void);
@@ -116,20 +116,18 @@ void fn_800F831C(void);
 void fn_800F833C(void);
 void fn_800F8348(void);
 void fn_800F84BC(void);
-void fn_800F84C8(void);
-void fn_800F84D0(void);
+void *fn_800F84C8(void *p);
+void fn_800F84D0(void *p, void *val);
 void fn_800F84D8(void);
 void math_lerpf(void);
-void fn_800F8538(void);
+void *fn_800F8538(void *p, s32 idx);
 void fn_800F8544(void);
 s32 system_getNextSequenceId(s32* obj);
 void viewport_updateCulling(void);
 
-asm void fn_800F7250(void)
+u32 fn_800F7250(void)
 {
-    nofralloc
-    lwz r3, lbl_8087EEB0
-    blr
+    return lbl_8087EEB0;
 }
 
 void *fn_800F7258(void *p)
@@ -1055,11 +1053,9 @@ void fn_800F7F98(void *p, u32 val)
     *(u32 *)((char *)p + 0xd0) = val;
 }
 
-asm void viewport_getGlobalContext(void)
+u32 viewport_getGlobalContext(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F3C0
-    blr
+    return lbl_8087F3C0;
 }
 
 asm void fn_800F7FA8(void)
@@ -1484,18 +1480,14 @@ asm void fn_800F84BC(void)
     blr
 }
 
-asm void fn_800F84C8(void)
+void *fn_800F84C8(void *p)
 {
-    nofralloc
-    addi r3, r3, 0xb0
-    blr
+    return (u8 *)p + 0xb0;
 }
 
-asm void fn_800F84D0(void)
+void fn_800F84D0(void *p, void *val)
 {
-    nofralloc
-    stw r4, 0xb8(r3)
-    blr
+    *(void **)((u8 *)p + 0xb8) = val;
 }
 
 asm void fn_800F84D8(void)
@@ -1532,12 +1524,9 @@ asm void math_lerpf(void)
     blr
 }
 
-asm void fn_800F8538(void)
+void *fn_800F8538(void *p, s32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0x78
-    add r3, r3, r0
-    blr
+    return (u8 *)p + idx * 0x78;
 }
 
 void fn_800F8544(void) {

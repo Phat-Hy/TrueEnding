@@ -115,16 +115,16 @@ extern u32 lbl_808856AC;
 extern u32 lbl_808856B0;
 
 /* Function declarations */
-void fn_8035FBF8(void);
-void fn_8035FC00(void);
-void fn_8035FC08(void);
+void *fn_8035FBF8(void *p);
+u32 fn_8035FC00(void);
+void fn_8035FC08(void *p, void *val);
 void fn_8035FC10(void);
 void fn_8035FCB4(void);
 void fn_8035FD40(void);
 void fn_8035FDE4(void);
 void fn_8035FE88(void);
-void fn_8035FF24(void);
-void fn_8035FF34(void);
+void fn_8035FF24(void *p);
+void *fn_8035FF34(void *p, s32 idx);
 void fn_8035FF44(void);
 void fn_8035FF94(void);
 void fn_803601E4(void);
@@ -158,25 +158,19 @@ void fn_803612F4(void);
 void fn_80361414(void);
 void fn_803614E8(void);
 
-asm void fn_8035FBF8(void)
+void *fn_8035FBF8(void *p)
 {
-    nofralloc
-    lwz r3, 0x7c(r3)
-    blr
+    return *(void **)((u8 *)p + 0x7c);
 }
 
-asm void fn_8035FC00(void)
+u32 fn_8035FC00(void)
 {
-    nofralloc
-    lwz r3, lbl_8087EE90
-    blr
+    return lbl_8087EE90;
 }
 
-asm void fn_8035FC08(void)
+void fn_8035FC08(void *p, void *val)
 {
-    nofralloc
-    stw r4, 0x64(r3)
-    blr
+    *(void **)((u8 *)p + 0x64) = val;
 }
 
 asm void fn_8035FC10(void)
@@ -410,22 +404,15 @@ lbl_fn_8035FE88_00000314:
     blr
 }
 
-asm void fn_8035FF24(void)
+void fn_8035FF24(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    stw r0, 0x4(r3)
-    blr
+    *(u32 *)p = 0;
+    *((u32 *)p + 1) = 0;
 }
 
-asm void fn_8035FF34(void)
+void *fn_8035FF34(void *p, s32 idx)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    slwi r0, r4, 3
-    add r3, r3, r0
-    blr
+    return (u8 *)*(void **)((u8 *)p + 4) + (idx << 3);
 }
 
 asm void fn_8035FF44(void)

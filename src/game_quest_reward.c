@@ -75,15 +75,15 @@ extern u32 lbl_80881AD0;
 extern u32 lbl_80881AD4;
 
 /* Function declarations */
-void fn_801479D8(void);
+u32 fn_801479D8(void *p);
 void fn_801479E4(void);
-void fn_80147A00(void);
+void *fn_80147A00(void *p);
 void fn_80147A08(void);
 void fn_80147A0C(void);
-void fn_80147A10(void);
+u32 fn_80147A10(void);
 void fn_80147A18(void);
 void fn_80147B04(void);
-void fn_80148334(void);
+u32 fn_80148334(void *p);
 void fn_80148340(void);
 void quest_ctorRewardItem(void);
 void fn_801489CC(void);
@@ -91,12 +91,9 @@ void quest_getRewardItemSlot(void);
 void quest_checkCondition(void);
 void fn_80148CC4(void);
 
-asm void fn_801479D8(void)
+u32 fn_801479D8(void *p)
 {
-    nofralloc
-    lwz r0, 0x12a4(r3)
-    extrwi r3, r0, 1, 25
-    blr
+    return (*(u32 *)((u8 *)p + 0x12a4) >> 6) & 1;
 }
 
 asm void fn_801479E4(void)
@@ -111,11 +108,9 @@ asm void fn_801479E4(void)
     blr
 }
 
-asm void fn_80147A00(void)
+void *fn_80147A00(void *p)
 {
-    nofralloc
-    lwz r3, 0x220(r3)
-    blr
+    return *(void **)((u8 *)p + 0x220);
 }
 
 asm void fn_80147A08(void)
@@ -127,11 +122,9 @@ asm void fn_80147A08(void)
 void fn_80147A0C(void) {
 }
 
-asm void fn_80147A10(void)
+u32 fn_80147A10(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_80147A18(void)
@@ -775,12 +768,9 @@ lbl_fn_80147B04_00000938:
     blr
 }
 
-asm void fn_80148334(void)
+u32 fn_80148334(void *p)
 {
-    nofralloc
-    lwz r0, 0x12a4(r3)
-    extrwi r3, r0, 1, 29
-    blr
+    return (*(u32 *)((u8 *)p + 0x12a4) >> 2) & 1;
 }
 
 asm void fn_80148340(void)

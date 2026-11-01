@@ -73,9 +73,9 @@ extern u32 lbl_80888A58;
 
 /* Function declarations */
 void gdev_cc_initialize(void);
-void gdev_cc_shutdown(void);
+u32 gdev_cc_shutdown(void);
 void gdev_cc_open(void);
-void gdev_cc_close(void);
+u32 gdev_cc_close(void);
 void gdev_cc_read(void);
 void gdev_cc_write(void);
 void gdev_cc_pre_continue(void);
@@ -128,7 +128,7 @@ void TRKInitializeEndian(void);
 void fn_80676328(void);
 void TRKGetInput(void);
 void fn_80676420(void);
-void TRKInitializeSerialHandler(void);
+u32 TRKInitializeSerialHandler(void);
 u32 fn_80676468(void);
 void fn_80676470(void);
 void fn_8067648C(void);
@@ -245,11 +245,9 @@ asm void gdev_cc_initialize(void)
     blr
 }
 
-asm void gdev_cc_shutdown(void)
+u32 gdev_cc_shutdown(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void gdev_cc_open(void)
@@ -267,11 +265,9 @@ lbl_gdev_cc_open_00000058:
     blr
 }
 
-asm void gdev_cc_close(void)
+u32 gdev_cc_close(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void gdev_cc_read(void)
@@ -1944,11 +1940,9 @@ asm void fn_80676420(void)
     blr
 }
 
-asm void TRKInitializeSerialHandler(void)
+u32 TRKInitializeSerialHandler(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 u32 fn_80676468(void)

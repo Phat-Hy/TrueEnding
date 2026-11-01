@@ -220,7 +220,7 @@ void fn_80673CB0(void);
 void fn_80673D10(void);
 void fn_80673D70(void);
 void fn_80673DD0(void);
-void fn_80673E10(void);
+void *fn_80673E10(void);
 void fn_80673E20(void);
 void fn_80673EA0(void);
 void fn_80673F00(void);
@@ -232,7 +232,7 @@ void fn_80673FD0(void);
 void fn_806743E0(void);
 void fn_80674410(void);
 void fn_80674420(void);
-void fn_80674430(void);
+u32 fn_80674430(void);
 void fn_80674438(void);
 void fn_8067445C(void);
 void fn_80674480(void);
@@ -6322,12 +6322,9 @@ asm void fn_80673DD0(void)
     blr
 }
 
-asm void fn_80673E10(void)
+void *fn_80673E10(void)
 {
-    nofralloc
-    lis r3, lbl_8082E658@ha
-    addi r3, r3, lbl_8082E658@l
-    blr
+    return (void *)lbl_8082E658;
 }
 
 asm void fn_80673E20(void)
@@ -6774,11 +6771,9 @@ void fn_80674410(void) {
 void fn_80674420(void) {
 }
 
-asm void fn_80674430(void)
+u32 fn_80674430(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_80674438(void)

@@ -91,20 +91,20 @@ extern u32 lbl_808819CC;
 /* Function declarations */
 void npc_updateDialogueTarget(void);
 void npc_calcTargetDistance(void);
-void fn_80139E90(void);
+u32 fn_80139E90(void *p);
 void fn_80139E9C(void);
-void fn_80139EB0(void);
+u32 fn_80139EB0(void *p);
 void fn_80139EBC(void);
-void fn_80139ED0(void);
-void fn_80139EDC(void);
-void fn_80139EE8(void);
+u32 fn_80139ED0(void *p);
+u32 fn_80139EDC(void *p);
+u32 fn_80139EE8(void *p);
 u32 fn_80139EF4(void);
 u32 fn_80139EFC(void *p);
 void fn_80139F04(void);
 void fn_80139F24(void *p, u32 val);
 u32 fn_80139F2C(void *p, u32 idx);
 void fn_80139F3C(void *p, u32 idx, f32 val);
-void fn_80139F4C(void);
+u32 fn_80139F4C(void *p);
 void *fn_80139F58(void *p);
 void fn_80139F60(void);
 void mtx_rotYRad(void);
@@ -773,12 +773,9 @@ lbl_npc_calcTargetDistance_00000924:
     blr
 }
 
-asm void fn_80139E90(void)
+u32 fn_80139E90(void *p)
 {
-    nofralloc
-    lwz r0, 0x12a4(r3)
-    extrwi r3, r0, 1, 4
-    blr
+    return (*(u32 *)((u8 *)p + 0x12a4) >> 27) & 1;
 }
 
 asm void fn_80139E9C(void)
@@ -791,12 +788,9 @@ asm void fn_80139E9C(void)
     blr
 }
 
-asm void fn_80139EB0(void)
+u32 fn_80139EB0(void *p)
 {
-    nofralloc
-    lwz r0, 0x12a4(r3)
-    extrwi r3, r0, 1, 28
-    blr
+    return (*(u32 *)((u8 *)p + 0x12a4) >> 3) & 1;
 }
 
 asm void fn_80139EBC(void)
@@ -809,28 +803,19 @@ asm void fn_80139EBC(void)
     blr
 }
 
-asm void fn_80139ED0(void)
+u32 fn_80139ED0(void *p)
 {
-    nofralloc
-    lwz r0, 0x12a4(r3)
-    extrwi r3, r0, 1, 26
-    blr
+    return (*(u32 *)((u8 *)p + 0x12a4) >> 5) & 1;
 }
 
-asm void fn_80139EDC(void)
+u32 fn_80139EDC(void *p)
 {
-    nofralloc
-    lwz r0, 0x12a4(r3)
-    extrwi r3, r0, 1, 27
-    blr
+    return (*(u32 *)((u8 *)p + 0x12a4) >> 4) & 1;
 }
 
-asm void fn_80139EE8(void)
+u32 fn_80139EE8(void *p)
 {
-    nofralloc
-    lwz r0, 0x54c(r3)
-    extrwi r3, r0, 1, 25
-    blr
+    return (*(u32 *)((u8 *)p + 0x54c) >> 6) & 1;
 }
 
 u32 fn_80139EF4(void)
@@ -871,12 +856,9 @@ void fn_80139F3C(void *p, u32 idx, f32 val)
     *(f32 *)((u8 *)p + idx * 0x30 + 0x238) = val;
 }
 
-asm void fn_80139F4C(void)
+u32 fn_80139F4C(void *p)
 {
-    nofralloc
-    lwz r0, 0xc(r3)
-    extrwi r3, r0, 1, 26
-    blr
+    return (*(u32 *)((u8 *)p + 0xc) >> 5) & 1;
 }
 
 void *fn_80139F58(void *p)

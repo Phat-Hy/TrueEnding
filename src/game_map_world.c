@@ -77,9 +77,9 @@ void fn_80179EBC(void);
 void fn_80179F98(void);
 void fn_80179FA8(void);
 void fn_8017A160(void);
-void fn_8017A220(void);
+u32 fn_8017A220(void);
 void fn_8017A228(void);
-void fn_8017A2F8(void);
+s32 fn_8017A2F8(void);
 void fn_8017A300(void);
 void fn_8017A33C(void);
 void fn_8017A450(void);
@@ -90,7 +90,7 @@ void fn_8017ABD4(void);
 void fn_8017AC08(void);
 void fn_8017AC24(void);
 void fn_8017AC2C(void);
-void fn_8017AC3C(void);
+void fn_8017AC3C(void *p, void *val);
 void fn_8017AC44(void);
 void fn_8017AD44(void);
 void fn_8017B0F8(void);
@@ -748,11 +748,9 @@ lbl_fn_8017A160_00000850:
     blr
 }
 
-asm void fn_8017A220(void)
+u32 fn_8017A220(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8017A228(void)
@@ -816,11 +814,9 @@ lbl_fn_8017A228_00000924:
     blr
 }
 
-asm void fn_8017A2F8(void)
+s32 fn_8017A2F8(void)
 {
-    nofralloc
-    li r3, -0x1
-    blr
+    return -1;
 }
 
 asm void fn_8017A300(void)
@@ -1505,11 +1501,9 @@ asm void fn_8017AC2C(void)
     b fn_80106680
 }
 
-asm void fn_8017AC3C(void)
+void fn_8017AC3C(void *p, void *val)
 {
-    nofralloc
-    stw r4, 0x13fc(r3)
-    blr
+    *(void **)((u8 *)p + 0x13fc) = val;
 }
 
 asm void fn_8017AC44(void)
