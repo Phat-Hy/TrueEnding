@@ -23,8 +23,8 @@ extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
 extern void atn_Curve_evaluate(void);
-extern void fn_805F93C0(void);
-extern void fn_805F98D0(void);
+extern void PSMTXMultVec(void);
+extern void PSVECNormalize(void);
 extern void fn_80615700(void);
 extern void fn_80615720(void);
 extern void fn_806158C0(void);
@@ -201,7 +201,7 @@ asm void fn_800790D0(void)
     mr r3, r31
     psq_st f1, 0x0(r31), 0, 0
     stfs f2, 0x1c(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f5, 0x8(r29)
     addi r3, r1, 0x8
     lfs f4, lbl_80880B08
@@ -393,7 +393,7 @@ asm void fn_80079280(void)
     stfs f2, 0x48(r1)
     psq_st f1, 0x0(r29), 0, 0
     stfs f2, 0x54(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     addi r3, r1, 0x64
     frsp f2, f28
     psq_l f1, 0x0(r3), 0, 0
@@ -887,7 +887,7 @@ lbl_fn_80079994_00000A74:
     addi r4, r1, 0x34
     mr r3, r31
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f1, 0x34(r1)
     mr r3, r30
     lfs f2, 0x38(r1)

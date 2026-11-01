@@ -40,10 +40,10 @@ extern void fn_80450778(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9920(void);
-extern void fn_805F9990(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSVECSquareMag(void);
+extern void PSVECDotProduct(void);
 extern void fn_80680CF8(void);
 extern void fn_80682428(void);
 extern void fn_80684600(void);
@@ -130,11 +130,11 @@ lbl_fn_80438814_00000078:
     stfs f30, 0x10c(r22)
     stfs f29, 0x110(r22)
     lfs f1, 0x104(r22)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r22, 0x108
     addi r3, r1, 0x80
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f0, 0x114(r22)
     addi r26, r22, 0x12c
     lfs f7, 0x118(r22)
@@ -160,7 +160,7 @@ lbl_fn_80438814_00000078:
     stfs f29, 0x140(r22)
     stfs f29, 0x12c(r22)
     lfs f1, 0x104(r22)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r26
     addi r4, r1, 0xb0
     addi r5, r1, 0xe0
@@ -1077,7 +1077,7 @@ asm void fn_80439574(void)
     lfs f23, 0x1c(r5)
     lfs f22, 0x20(r5)
     lfs f21, 0x24(r5)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     li r0, 0x1
     stw r0, 0x0(r26)
     lwz r0, 0xef8(r25)
@@ -1159,7 +1159,7 @@ lbl_fn_80439574_00000E9C:
     stfs f0, 0x38(r1)
     stfs f3, 0x3c(r1)
     stfs f10, 0x40(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fabs f3, f1
     lfs f0, lbl_80886920
     fmr f24, f1
@@ -1186,7 +1186,7 @@ lbl_fn_80439574_00000F70:
     fsubs f0, f3, f0
     stfs f4, 0x48(r1)
     stfs f0, 0x44(r1)
-    bl fn_805F9990
+    bl PSVECDotProduct
     fneg f0, f1
     lfs f3, lbl_80886900
     fdivs f5, f0, f24
@@ -1354,7 +1354,7 @@ lbl_fn_80439574_000010EC:
     fdivs f0, f0, f25
     fmsubs f0, f23, f0, f30
     stfs f0, 0xb0(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r3, r1, 0x128
     lfsux f5, r3, r24
     lfs f4, 0xb0(r1)

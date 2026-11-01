@@ -26,9 +26,9 @@ extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_80373148(void);
 extern void fn_804A04AC(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9750(void);
-extern void fn_805F9940(void);
+extern void PSMTXRotRad(void);
+extern void PSMTX44Identity(void);
+extern void PSVECMag(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 
@@ -453,7 +453,7 @@ lbl_fn_8029DBE0_00000500:
     addi r3, r1, 0x68
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80883D28
     addi r4, r1, 0x38
     lfs f29, 0x70(r1)
@@ -503,7 +503,7 @@ lbl_fn_8029DBE0_00000500:
     stfs f6, 0xc4(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_80883D44
     fabs f3, f2
@@ -1406,7 +1406,7 @@ lbl_fn_8029E950_00001270:
     stfs f4, 0x18(r1)
     stfs f0, 0x14(r1)
     stfs f6, 0x1c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lwz r0, 0x14e4(r31)
     cmpwi r0, 0x0
     bne lbl_fn_8029E950_00001300

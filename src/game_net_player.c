@@ -9,8 +9,8 @@ extern void fn_800A6BD4(void);
 extern void fn_801FDE94(void);
 extern void fn_801FDEE4(void);
 extern void fn_801FE89C(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
 extern void fn_80695A50(void);
 
 /* External data declarations */
@@ -163,11 +163,11 @@ asm void net_player_interpolateState(void)
     stfs f3, 0x10(r1)
     stfs f4, 0x14(r1)
     stfs f2, 0x18(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x10
     addi r3, r1, 0x60
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0x10(r1)
     stfs f2, 0x0(r29)
     lfs f1, 0x14(r1)

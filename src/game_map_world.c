@@ -33,8 +33,8 @@ extern void fn_80418318(void);
 extern void fn_804188A0(void);
 extern void atn_LoadHandle_getData(void);
 extern void fn_80563A64(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
 extern void fn_80684600(void);
 extern void fn_80686A64(void);
 extern void fn_80695AD0(void);
@@ -1542,19 +1542,19 @@ asm void fn_8017AC44(void)
     stfs f0, 0x10(r1)
     lfs f1, 0x538(r3)
     addi r3, r1, 0x18
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x8
     addi r3, r1, 0x18
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f1, lbl_808819CC
     addi r3, r1, 0x48
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x8
     addi r3, r1, 0x48
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f4, 0x8(r1)
     addi r3, r1, 0x8
     lfs f5, lbl_808819F8

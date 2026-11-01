@@ -117,9 +117,9 @@ extern void fn_8047059C(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_804A04AC(void);
-extern void fn_805F93C0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9940(void);
+extern void PSMTXMultVec(void);
+extern void PSVECNormalize(void);
+extern void PSVECMag(void);
 extern void fn_80680CF8(void);
 extern void fn_80682428(void);
 extern void fn_80682544(void);
@@ -338,7 +338,7 @@ lbl_fn_8045EDEC_000001C8:
     fsubs f0, f8, f7
     stfs f9, 0x1d4(r1)
     stfs f0, 0x1d8(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f8, 0x1d4(r1)
     addi r4, r1, 0xe0
     lfs f11, lbl_80886D4C
@@ -377,7 +377,7 @@ lbl_fn_8045EDEC_000001C8:
     stfs f10, 0x38(r1)
     stfs f0, 0x30(r1)
     stfs f8, 0x34(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f7, 0xec(r1)
     addi r27, r1, 0x200
     lfs f0, lbl_80886C34
@@ -407,11 +407,11 @@ lbl_fn_8045EDEC_000001C8:
     stfs f0, 0x20c(r1)
     stfs f0, 0x21c(r1)
     stfs f0, 0x22c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r4, r1, 0xb4
     mr r3, r27
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f7, 0xe8(r1)
     addi r3, r1, 0x78
     lfs f0, 0xc8(r1)
@@ -506,7 +506,7 @@ lbl_fn_8045EDEC_000001C8:
     stfs f8, 0x28(r1)
     stfs f0, 0x24(r1)
     stfs f10, 0x2c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fabs f7, f1
     lfs f0, lbl_80886C6C
     fmr f31, f1
@@ -527,7 +527,7 @@ lbl_fn_8045EDEC_000001C8:
     fsubs f0, f7, f0
     stfs f8, 0x1c0(r1)
     stfs f0, 0x1c4(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     fsubs f9, f31, f30
     lfs f8, 0x1bc(r1)
     lfs f7, 0x1c0(r1)
@@ -638,7 +638,7 @@ lbl_fn_8045EDEC_00000644:
     stfs f8, 0x1c(r1)
     stfs f0, 0x18(r1)
     stfs f10, 0x20(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fabs f7, f1
     lfs f0, lbl_80886C6C
     fmr f31, f1
@@ -659,7 +659,7 @@ lbl_fn_8045EDEC_00000644:
     fsubs f0, f7, f0
     stfs f8, 0x1a8(r1)
     stfs f0, 0x1ac(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     fsubs f9, f31, f30
     lfs f8, 0x1a4(r1)
     lfs f7, 0x1a8(r1)

@@ -61,7 +61,7 @@ extern void fn_8052EEC0(void);
 extern void fn_8052F890(void);
 extern void fn_805715C8(void);
 extern void fn_80572B70(void);
-extern void fn_805F9920(void);
+extern void PSVECSquareMag(void);
 
 /* External data declarations */
 extern u8 jumptable_80793950[];
@@ -2700,7 +2700,7 @@ lbl_spectateCamera_update_00002468:
     stfs f0, 0x120(r1)
     stfs f10, 0x124(r1)
     stfs f18, 0x128(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80887C1C
     fcmpo cr0, f1, f0
     bge lbl_spectateCamera_update_00002670

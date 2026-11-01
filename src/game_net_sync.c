@@ -45,8 +45,8 @@ extern void fn_803C1560(void);
 extern void fn_803CD958(void);
 extern void fn_803EAC3C(void);
 extern void fn_80547C2C(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
 extern void fn_80680770(void);
 extern void fn_80680CF8(void);
 extern void fn_80686EA4(void);
@@ -164,7 +164,7 @@ lbl_fn_801EB188_00000064:
     stfs f4, 0x18(r1)
     stfs f0, 0x14(r1)
     stfs f6, 0x1c(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, 0x5c(r28)
     fmuls f3, f0, f0
     fcmpo cr0, f1, f3
@@ -1112,7 +1112,7 @@ lbl_fn_801EBE38_00000D44:
     psq_l f1, 0x0(r29), 0, 0
     psq_st f1, 0x0(r30), 0, 0
     stfs f2, 0x58(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x58(r1)
     psq_l f1, 0x0(r30), 0, 0
     psq_st f1, 0x24(r25), 0, 0
@@ -1138,7 +1138,7 @@ lbl_fn_801EBE38_00000E2C:
     stfs f4, 0x3c(r1)
     stfs f0, 0x38(r1)
     stfs f5, 0x40(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f31
     bge lbl_fn_801EBE38_00000F24
     lwz r4, 0x4(r25)
@@ -1175,7 +1175,7 @@ lbl_fn_801EBE38_00000E2C:
     psq_l f1, 0x0(r26), 0, 0
     psq_st f1, 0x0(r27), 0, 0
     stfs f2, 0x28(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x28(r1)
     psq_l f1, 0x0(r27), 0, 0
     psq_st f1, 0x24(r25), 0, 0

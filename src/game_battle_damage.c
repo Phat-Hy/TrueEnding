@@ -22,9 +22,9 @@ extern void fn_801B46E8(void);
 extern void fn_801B4D34(void);
 extern void fn_801C3DCC(void);
 extern void world_getGlobalFlag(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9990(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSVECDotProduct(void);
 extern void fn_80695AD0(void);
 
 /* External data declarations */
@@ -1240,14 +1240,14 @@ lbl_fn_8016ADF4_00001074:
     stfs f1, 0xc(r1)
     stfs f0, 0x10(r1)
     lfs f1, 0x538(r30)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x8
     addi r3, r1, 0x20
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r3, r1, 0x14
     addi r4, r1, 0x8
-    bl fn_805F9990
+    bl PSVECDotProduct
     lfs f0, lbl_808819A8
     fcmpo cr0, f1, f0
     mfcr r0

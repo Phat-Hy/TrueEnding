@@ -47,8 +47,8 @@ extern void fn_8058DB14(void);
 extern void fn_8059A29C(void);
 extern void fn_8059D3B4(void);
 extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9920(void);
+extern void PSMTXRotRad(void);
+extern void PSVECSquareMag(void);
 extern void fn_806952C4(void);
 extern void fn_80695AD0(void);
 extern char* strcpy(char* dest, const char* src);
@@ -676,7 +676,7 @@ lbl_fn_805989A8_00000788:
     beq lbl_fn_805989A8_00000854
     addi r3, r1, 0x60
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x60
     addi r5, r1, 0x30
@@ -701,7 +701,7 @@ lbl_fn_805989A8_00000854:
     beq lbl_fn_805989A8_000008B4
     addi r3, r1, 0xc0
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0xc0
     addi r5, r1, 0x90
@@ -726,7 +726,7 @@ lbl_fn_805989A8_000008B4:
     beq lbl_fn_805989A8_00000914
     addi r3, r1, 0x120
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x120
     addi r5, r1, 0xf0
@@ -1612,7 +1612,7 @@ lbl_fn_80599458_00001530:
     beq lbl_fn_80599458_000015FC
     addi r3, r1, 0xd8
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0xd8
     addi r5, r1, 0xa8
@@ -1637,7 +1637,7 @@ lbl_fn_80599458_000015FC:
     beq lbl_fn_80599458_0000165C
     addi r3, r1, 0x138
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x138
     addi r5, r1, 0x108
@@ -1662,7 +1662,7 @@ lbl_fn_80599458_0000165C:
     beq lbl_fn_80599458_000016BC
     addi r3, r1, 0x198
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x198
     addi r5, r1, 0x168
@@ -1945,7 +1945,7 @@ lbl_fn_80599D64_00001A04:
     lfs f1, 0x5c(r30)
     lfs f0, 0x28(r30)
     fmuls f31, f1, f0
-    bl fn_805F9920
+    bl PSVECSquareMag
     fmuls f0, f31, f31
     fcmpo cr0, f1, f0
     cror eq, lt, eq

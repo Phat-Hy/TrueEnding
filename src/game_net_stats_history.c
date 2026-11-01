@@ -22,8 +22,8 @@ extern void fn_8053AC8C(void);
 extern void fn_8053AFBC(void);
 extern void fn_80542688(void);
 extern void fn_805428AC(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
 extern void fn_80680770(void);
 extern void fn_80684600(void);
 extern void fn_80686A48(void);
@@ -1424,11 +1424,11 @@ asm void fn_80541BDC(void)
     li r4, 0x79
     stfs f0, 0x4(r3)
     addi r3, r1, 0x8
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r4, r30
     mr r5, r30
     addi r3, r1, 0x8
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f3, 0x0(r30)
     lfs f0, 0xa8(r31)
     lfs f5, 0x4(r30)
@@ -1465,11 +1465,11 @@ asm void fn_80541C98(void)
     fmr f1, f0
     stfs f2, 0x8(r3)
     addi r3, r1, 0x8
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r4, r31
     mr r5, r31
     addi r3, r1, 0x8
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     mtlr r0

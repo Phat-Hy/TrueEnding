@@ -37,8 +37,8 @@ extern void world_setGlobalFlag(void);
 extern void fn_80375184(void);
 extern void fn_80389838(void);
 extern void fn_805A4A20(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9750(void);
+extern void PSMTXRotRad(void);
+extern void PSMTX44Identity(void);
 extern void fn_80680770(void);
 extern void fn_80680CF8(void);
 extern void fn_80686EA4(void);
@@ -432,7 +432,7 @@ lbl_fn_802D57B8_0000052C:
     addi r3, r1, 0xe0
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80884564
     addi r4, r1, 0x40
     lfs f30, 0xe8(r1)
@@ -482,7 +482,7 @@ lbl_fn_802D57B8_0000052C:
     stfs f6, 0x13c(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x48(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x48(r1)
     lfs f0, lbl_808845A8
     fabs f3, f2

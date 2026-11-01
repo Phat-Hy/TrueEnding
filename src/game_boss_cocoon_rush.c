@@ -39,11 +39,11 @@ extern void fn_8046F834(void);
 extern void atn_Curve_evalHermite(void);
 extern void fn_80473F88(void);
 extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F90D0(void);
-extern void fn_805F9160(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9940(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXTrans(void);
+extern void PSMTXScale(void);
+extern void PSMTXMultVec(void);
+extern void PSVECMag(void);
 extern void fn_80680770(void);
 extern void fn_80682428(void);
 extern void fn_80686EA4(void);
@@ -473,7 +473,7 @@ lbl_fn_80472424_000004A4:
     stfs f1, 0x38(r1)
     stfs f2, 0x3c(r1)
     stfs f3, 0x40(r1)
-    bl fn_805F90D0
+    bl PSMTXTrans
     mr r3, r29
     addi r4, r1, 0x290
     addi r5, r1, 0x2c0
@@ -516,7 +516,7 @@ lbl_fn_80472424_00000554:
     beq lbl_fn_80472424_000005FC
     addi r3, r1, 0x1a0
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r24
     addi r4, r1, 0x1a0
     addi r5, r1, 0x170
@@ -539,7 +539,7 @@ lbl_fn_80472424_000005FC:
     beq lbl_fn_80472424_00000654
     addi r3, r1, 0x200
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r24
     addi r4, r1, 0x200
     addi r5, r1, 0x1d0
@@ -562,7 +562,7 @@ lbl_fn_80472424_00000654:
     beq lbl_fn_80472424_000006AC
     addi r3, r1, 0x260
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r24
     addi r4, r1, 0x260
     addi r5, r1, 0x230
@@ -607,7 +607,7 @@ lbl_fn_80472424_000006EC:
     stfs f1, 0x20(r1)
     stfs f2, 0x24(r1)
     stfs f3, 0x28(r1)
-    bl fn_805F9160
+    bl PSMTXScale
     addi r3, r1, 0x2f0
     addi r4, r1, 0xb0
     addi r5, r1, 0xe0
@@ -640,7 +640,7 @@ lbl_fn_80472424_00000788:
     cmpwi r19, 0x0
     beq lbl_fn_80472424_00000988
     addi r3, r1, 0xa0
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0xc(r19)
     fmuls f7, f28, f1
     stfs f0, 0x80(r1)
@@ -652,7 +652,7 @@ lbl_fn_80472424_00000788:
     fmuls f25, f29, f7
     lfs f0, 0x14(r19)
     stfs f0, 0x88(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f0, 0x18(r19)
     psq_l f1, 0x0(r21), 0, 0
     fmuls f0, f0, f25
@@ -706,7 +706,7 @@ lbl_fn_80472424_00000814:
     stfs f7, 0x5c(r1)
     stfs f9, 0x60(r1)
     stfs f11, 0x64(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f7, 0x98(r1)
     fmr f31, f1
     lfs f0, 0x7c(r1)
@@ -721,7 +721,7 @@ lbl_fn_80472424_00000814:
     fsubs f0, f7, f0
     stfs f8, 0x6c(r1)
     stfs f0, 0x68(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f7, 0x9c(r1)
     lfs f0, 0x6c(r15)
     fadds f7, f7, f1
@@ -741,7 +741,7 @@ lbl_fn_80472424_00000814:
     fsubs f0, f7, f0
     stfs f8, 0x54(r1)
     stfs f0, 0x50(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x9c(r1)
     fadds f0, f0, f1
     b lbl_fn_80472424_00000974
@@ -759,7 +759,7 @@ lbl_fn_80472424_00000934:
     fsubs f0, f7, f0
     stfs f8, 0x48(r1)
     stfs f0, 0x44(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x6c(r15)
     fadds f0, f0, f1
 lbl_fn_80472424_00000974:

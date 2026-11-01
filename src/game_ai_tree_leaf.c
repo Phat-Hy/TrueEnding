@@ -61,11 +61,11 @@ extern void world_setLocalFlag(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9750(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
-extern void fn_805F9940(void);
+extern void PSMTXRotRad(void);
+extern void PSMTX44Identity(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
+extern void PSVECMag(void);
 extern void fn_80680CF8(void);
 extern void fn_80682428(void);
 extern void fn_80682544(void);
@@ -460,7 +460,7 @@ asm void fn_8025B9EC(void)
     stfs f4, 0x78(r1)
     stfs f0, 0x74(r1)
     stfs f6, 0x7c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x7
     bne lbl_fn_8025B9EC_000006DC
@@ -473,7 +473,7 @@ asm void fn_8025B9EC(void)
     lfs f2, 0x1090(r29)
     stfs f2, 0x70(r1)
     psq_st f1, 0x0(r31), 0, 0
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, lbl_808834D0
     fmr f31, f1
     fcmpo cr0, f1, f0
@@ -485,7 +485,7 @@ asm void fn_8025B9EC(void)
     psq_st f1, 0x0(r30), 0, 0
     mr r4, r30
     stfs f2, 0x58(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x58(r1)
     addi r31, r1, 0x5c
     psq_l f1, 0x0(r30), 0, 0
@@ -518,7 +518,7 @@ lbl_fn_8025B9EC_00000580:
     addi r3, r1, 0x98
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_808834A8
     addi r4, r1, 0x38
     lfs f28, 0xa0(r1)
@@ -568,7 +568,7 @@ lbl_fn_8025B9EC_00000580:
     stfs f6, 0xf4(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_808834BC
     fabs f3, f2
@@ -1397,7 +1397,7 @@ lbl_fn_8025C7A8_00001220:
     stfs f4, 0x18(r1)
     stfs f0, 0x14(r1)
     stfs f6, 0x1c(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     subi r0, r25, 0x1
     lwz r3, 0x14c0(r29)
     slwi r27, r0, 2
@@ -1416,7 +1416,7 @@ lbl_fn_8025C7A8_00001220:
     stfs f4, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f6, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f31, f1
     ble lbl_fn_8025C7A8_000012C8
     lwz r4, 0x14c0(r29)

@@ -76,7 +76,7 @@ extern void fn_80530178(void);
 extern void fn_805303D4(void);
 extern void fn_805305D4(void);
 extern void fn_80530DB8(void);
-extern void fn_805F98D0(void);
+extern void PSVECNormalize(void);
 
 /* External data declarations */
 extern u8 jumptable_807937E8[];
@@ -762,7 +762,7 @@ asm void fn_8052ACDC(void)
     stfs f9, 0x1c(r1)
     psq_st f1, 0x0(r31), 0, 0
     stfs f2, 0x10(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     psq_l f1, 0x0(r31), 0, 0
     addi r3, r30, 0x67c
     lfs f2, 0x10(r1)

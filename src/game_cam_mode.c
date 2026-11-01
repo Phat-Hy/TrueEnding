@@ -36,11 +36,11 @@ extern void fn_803761BC(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_804EB1B0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9750(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
-extern void fn_805F9940(void);
+extern void PSMTXRotRad(void);
+extern void PSMTX44Identity(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
+extern void PSVECMag(void);
 extern void fn_80680CF8(void);
 extern void fn_80682428(void);
 extern void fn_8068AEA4(void);
@@ -805,7 +805,7 @@ lbl_fn_800EE794_000008B0:
     stfs f4, 0x60(r1)
     stfs f0, 0x5c(r1)
     stfs f6, 0x64(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f30
     bge lbl_fn_800EE794_0000093C
     fmr f30, f1
@@ -907,7 +907,7 @@ lbl_fn_800EE794_00000A50:
     stfs f4, 0x54(r1)
     stfs f0, 0x50(r1)
     stfs f6, 0x58(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f30
     bge lbl_fn_800EE794_00000AAC
     fmr f30, f1
@@ -979,7 +979,7 @@ lbl_fn_800EE794_00000B40:
     stfs f4, 0x48(r1)
     stfs f0, 0x44(r1)
     stfs f6, 0x4c(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f30
     bge lbl_fn_800EE794_00000BB4
     fmr f30, f1
@@ -1021,12 +1021,12 @@ lbl_fn_800EE794_00000C04:
     stfs f5, 0x88(r1)
     stfs f3, 0x80(r1)
     stfs f0, 0x84(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fcmpo cr0, f1, f30
     ble lbl_fn_800EE794_00000FC8
     addi r3, r1, 0x80
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f0, lbl_808812DC
     li r29, 0x0
     li r3, 0x1
@@ -1361,7 +1361,7 @@ lbl_fn_800EF080_00001118:
     addi r3, r1, 0x60
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_808812DC
     addi r4, r1, 0x38
     lfs f30, 0x68(r1)
@@ -1411,7 +1411,7 @@ lbl_fn_800EF080_00001118:
     stfs f6, 0xbc(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_808812FC
     fabs f3, f2

@@ -39,11 +39,11 @@ extern void fn_8042AB58(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void atn_LoadHandle_getName(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
-extern void fn_805F9990(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
+extern void PSVECDotProduct(void);
 extern void fn_80680770(void);
 extern void fn_80682428(void);
 extern void fn_806827C4(void);
@@ -130,7 +130,7 @@ asm void fn_80428DE8(void)
     stfs f2, 0x3c(r1)
     stfs f0, 0x38(r1)
     stfs f4, 0x40(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80886704
     fcmpo cr0, f1, f0
     mfcr r0
@@ -197,7 +197,7 @@ lbl_fn_80428DE8_00000128:
     stfs f2, 0x24(r1)
     stfs f0, 0x20(r1)
     stfs f4, 0x28(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lwz r4, 0x118(r31)
     fmr f31, f1
     lfs f0, 0x530(r30)
@@ -213,7 +213,7 @@ lbl_fn_80428DE8_00000128:
     stfs f2, 0x30(r1)
     stfs f0, 0x2c(r1)
     stfs f4, 0x34(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f31, f1
     cror eq, lt, eq
     mfcr r0
@@ -283,7 +283,7 @@ lbl_fn_80428DE8_00000280:
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lwz r4, 0x118(r31)
     fmr f31, f1
     lfs f0, 0x530(r30)
@@ -299,7 +299,7 @@ lbl_fn_80428DE8_00000280:
     stfs f2, 0x18(r1)
     stfs f0, 0x14(r1)
     stfs f4, 0x1c(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f31, f1
     cror eq, lt, eq
     mfcr r3
@@ -506,7 +506,7 @@ lbl_fn_8042917C_00000578:
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lwz r4, 0x118(r27)
     fmr f26, f1
     lfs f0, 0x530(r29)
@@ -522,7 +522,7 @@ lbl_fn_8042917C_00000578:
     stfs f2, 0x18(r1)
     stfs f0, 0x14(r1)
     stfs f4, 0x1c(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f26, f1
     cror eq, lt, eq
     mfcr r0
@@ -544,7 +544,7 @@ lbl_fn_8042917C_00000578:
     stfs f4, 0x34(r1)
     stfs f0, 0x2c(r1)
     stfs f2, 0x30(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f27
     fmr f26, f1
     bge lbl_fn_8042917C_000006EC
@@ -552,21 +552,21 @@ lbl_fn_8042917C_00000578:
     ble lbl_fn_8042917C_000006EC
     addi r3, r1, 0x2c
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     stfs f28, 0x20(r1)
     addi r3, r1, 0x38
     li r4, 0x79
     stfs f28, 0x24(r1)
     stfs f29, 0x28(r1)
     lfs f1, 0x538(r29)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x20
     addi r3, r1, 0x38
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r3, r1, 0x2c
     addi r4, r1, 0x20
-    bl fn_805F9990
+    bl PSVECDotProduct
     fcmpo cr0, f1, f30
     ble lbl_fn_8042917C_000006EC
     fmr f31, f26

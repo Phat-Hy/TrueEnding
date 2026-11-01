@@ -53,10 +53,10 @@ extern void world_getGlobalFlag(void);
 extern void fn_803EA77C(void);
 extern void fn_80481668(void);
 extern void fn_8059B670(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9750(void);
-extern void fn_805F9920(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSMTX44Identity(void);
+extern void PSVECSquareMag(void);
 extern void fn_80680770(void);
 extern void fn_80686EA4(void);
 extern void fn_8068AEA4(void);
@@ -1670,7 +1670,7 @@ lbl_fn_800E2FE0_000014FC:
     addi r3, r1, 0x258
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_808812DC
     addi r4, r1, 0x74
     lfs f30, 0x260(r1)
@@ -1720,7 +1720,7 @@ lbl_fn_800E2FE0_000014FC:
     stfs f6, 0x2b4(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x7c(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x7c(r1)
     lfs f0, lbl_808812FC
     fabs f3, f2
@@ -2001,7 +2001,7 @@ lbl_fn_800E2FE0_0000198C:
     stfs f4, 0x150(r1)
     stfs f0, 0x14c(r1)
     stfs f6, 0x154(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     mr r3, r30
     bl quest_checkCondition
 lbl_fn_800E2FE0_000019D0:
@@ -2093,11 +2093,11 @@ lbl_fn_800E2FE0_00001A94:
     stfs f3, 0x138(r1)
     stfs f0, 0x13c(r1)
     lfs f1, 0x538(r30)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x134
     addi r3, r1, 0x228
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f4, 0x13c(r1)
     mr r3, r30
     lfs f3, 0x138(r1)

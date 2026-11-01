@@ -49,7 +49,7 @@ extern void atn_LoadHandle_destructor(void);
 extern void fn_805991E4(void);
 extern void fn_8059B670(void);
 extern void fn_805F89F0(void);
-extern void fn_805F90D0(void);
+extern void PSMTXTrans(void);
 extern void fn_80682428(void);
 extern void fn_80684600(void);
 extern void fn_8068AD58(void);
@@ -1450,7 +1450,7 @@ lbl_fn_8041044C_000011FC:
     add r26, r3, r0
     addi r3, r1, 0x28
     stfs f31, 0x20(r1)
-    bl fn_805F90D0
+    bl PSMTXTrans
     psq_l f2, 0x8(r28), 0, 0
     mr r4, r26
     psq_l f3, 0x10(r28), 0, 0

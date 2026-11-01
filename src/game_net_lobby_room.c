@@ -57,7 +57,7 @@ extern void fn_80490E38(void);
 extern void fn_80490EA0(void);
 extern void fn_804962B0(void);
 extern void fn_804963A4(void);
-extern void fn_805F9420(void);
+extern void PSMTXMultVecArray(void);
 extern void fn_80680CF8(void);
 extern void fn_80682428(void);
 extern void fn_806827C4(void);
@@ -1316,7 +1316,7 @@ lbl_fn_8049AC18_00000F78:
     stfs f10, 0x7c(r1)
     psq_st f1, 0x0(r26), 0, 0
     stfs f2, 0x184(r1)
-    bl fn_805F9420
+    bl PSMTXMultVecArray
     psq_l f1, 0x0(r19), 0, 0
     mr r5, r20
     lfs f2, 0x130(r1)

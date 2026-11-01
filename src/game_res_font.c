@@ -30,7 +30,7 @@ extern void msg_drawText(void);
 extern void fn_80238560(void);
 extern void fn_805F8C50(void);
 extern void fn_805F8CA0(void);
-extern void fn_805F9940(void);
+extern void PSVECMag(void);
 extern void fn_80612E80(void);
 extern void fn_806134E0(void);
 extern void fn_80613520(void);
@@ -507,7 +507,7 @@ lbl_font_renderString_000004BC:
     stfs f0, 0x20(r1)
     stfs f7, 0x24(r1)
     stfs f8, 0x28(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f8, 0x34(r27)
     fmr f30, f1
     lfs f7, 0x24(r27)
@@ -516,7 +516,7 @@ lbl_font_renderString_000004BC:
     stfs f0, 0x2c(r1)
     stfs f7, 0x30(r1)
     stfs f8, 0x34(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f8, 0x30(r27)
     fmr f31, f1
     lfs f7, 0x20(r27)
@@ -525,7 +525,7 @@ lbl_font_renderString_000004BC:
     stfs f0, 0x38(r1)
     stfs f7, 0x3c(r1)
     stfs f8, 0x40(r1)
-    bl fn_805F9940
+    bl PSVECMag
     frsp f7, f31
     stfs f1, 0x14(r1)
     frsp f0, f30

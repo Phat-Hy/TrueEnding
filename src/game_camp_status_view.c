@@ -46,8 +46,8 @@ extern void fn_804A0BCC(void);
 extern void fn_804A0E90(void);
 extern void fn_8054A0A0(void);
 extern void fn_8054A340(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
 extern void fn_80622180(void);
 extern void fn_8067E23C(void);
 extern void fn_80680CF8(void);
@@ -1463,11 +1463,11 @@ lbl_fn_803BA620_00001214:
     stfs f29, 0xc(r1)
     stfs f30, 0x10(r1)
     lfs f1, 0x538(r29)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x8
     addi r3, r1, 0x20
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f4, 0x10(r1)
     mr r3, r29
     lfs f3, 0xc(r1)

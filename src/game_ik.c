@@ -16,9 +16,9 @@ extern void fn_800A555C(void);
 extern void fn_800A5584(void);
 extern void fn_800A55AC(void);
 extern void fn_800DCA6C(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9240(void);
-extern void fn_805F93C0(void);
+extern void PSMTXRotRad(void);
+extern void C_MTXLookAt(void);
+extern void PSMTXMultVec(void);
 extern void fn_80686A48(void);
 extern void fn_806952C4(void);
 extern void fn_80695AD0(void);
@@ -1539,11 +1539,11 @@ asm void fn_800C7F08(void)
     stfs f0, 0x28(r1)
     lfs f1, 0x80(r3)
     addi r3, r1, 0x60
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x20
     addi r3, r1, 0x60
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f7, lbl_80881168
     addi r3, r1, 0x30
     lfs f0, lbl_8088116C
@@ -1565,7 +1565,7 @@ asm void fn_800C7F08(void)
     stfs f10, 0x1c(r1)
     stfs f0, 0x14(r1)
     stfs f8, 0x18(r1)
-    bl fn_805F9240
+    bl C_MTXLookAt
     addi r5, r1, 0x30
     addi r4, r1, 0x90
     psq_l f1, 0x0(r5), 0, 0

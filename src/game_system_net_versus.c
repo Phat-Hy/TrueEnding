@@ -30,7 +30,7 @@ extern void fn_803B57EC(void);
 extern void fn_803B583C(void);
 extern void fn_803B58D8(void);
 extern void fn_803CC6B4(void);
-extern void fn_805F9940(void);
+extern void PSVECMag(void);
 extern void fn_80680770(void);
 extern void fn_80686EA4(void);
 extern void memmove(void);
@@ -1856,7 +1856,7 @@ lbl_fn_8039F9A4_00001844:
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fctiwz f0, f1
     stfd f0, 0x18(r1)
     lwz r8, 0x1c(r1)

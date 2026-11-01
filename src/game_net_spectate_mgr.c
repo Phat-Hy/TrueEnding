@@ -82,7 +82,7 @@ extern void fn_8052EEC0(void);
 extern void fn_8052F890(void);
 extern void fn_80533BE0(void);
 extern void spectateView_renderInterface(void);
-extern void fn_805F98D0(void);
+extern void PSVECNormalize(void);
 extern void fn_806163C0(void);
 extern void fn_806163E0(void);
 extern void fn_80695D84(void);
@@ -1028,7 +1028,7 @@ asm void fn_80531F48(void)
     stfs f9, 0x88(r1)
     psq_st f1, 0x0(r27), 0, 0
     stfs f2, 0x94(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     psq_l f1, 0x0(r27), 0, 0
     addi r3, r26, 0x488
     lfs f2, 0x94(r1)

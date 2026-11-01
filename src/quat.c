@@ -6,7 +6,7 @@ extern f32 lbl_80888588;
 extern f32 lbl_8088858C;
 extern u32 lbl_80764798[];
 
-extern void fn_805F98D0(void);
+extern void PSVECNormalize(void);
 extern void fn_8068AD58(void);
 extern void fn_8068A850(void);
 extern void fn_8068B100(void);
@@ -87,7 +87,7 @@ asm void fn_805F9AB0(void) {
     mr r31, r3
     mr r3, r4
     addi r4, r1, 0x8
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f0, lbl_80888588
     fmuls f30, f0, f30
     fmr f1, f30

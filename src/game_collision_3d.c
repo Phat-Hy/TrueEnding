@@ -7,11 +7,11 @@ extern void _savegpr_21(void);
 extern void fn_8010B180(void);
 extern void fn_801789D8(void);
 extern void fn_80373148(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9940(void);
-extern void fn_805F9990(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSVECNormalize(void);
+extern void PSVECMag(void);
+extern void PSVECDotProduct(void);
 extern void fn_8068A850(void);
 
 /* External data declarations */
@@ -91,11 +91,11 @@ lbl_fn_800FFE68_00000094:
     stfs f3, 0x2c(r1)
     stfs f3, 0x30(r1)
     stfs f0, 0x34(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x2c
     addi r3, r1, 0x38
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r3, r1, 0x20
     psq_l f1, 0x528(r23), 0, 0
     psq_st f1, 0x0(r3), 0, 0
@@ -240,7 +240,7 @@ lbl_fn_800FFE68_000002C4:
     fsubs f0, f3, f0
     stfs f4, 0x18(r1)
     stfs f0, 0x14(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fcmpu cr0, f22, f1
     fmr f21, f1
     bne lbl_fn_800FFE68_0000032C
@@ -279,10 +279,10 @@ lbl_fn_800FFE68_00000364:
 lbl_fn_800FFE68_00000398:
     addi r3, r1, 0x14
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     addi r3, r1, 0x14
     addi r4, r1, 0x2c
-    bl fn_805F9990
+    bl PSVECDotProduct
     fcmpo cr0, f1, f28
     ble lbl_fn_800FFE68_000003D8
     fcmpo cr0, f21, f26

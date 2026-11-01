@@ -47,7 +47,7 @@ extern void fn_80571630(void);
 extern void fn_805AA738(void);
 extern void fn_805B8114(void);
 extern void fn_805F89F0(void);
-extern void fn_805F9160(void);
+extern void PSMTXScale(void);
 extern void fn_80682428(void);
 extern void fn_80682544(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -392,7 +392,7 @@ lbl_fn_8051EF24_000003C8:
     stfs f31, 0x14(r1)
     stfs f31, 0x18(r1)
     stfs f31, 0x1c(r1)
-    bl fn_805F9160
+    bl PSMTXScale
     mr r3, r28
     addi r4, r1, 0x50
     addi r5, r1, 0x80
@@ -839,7 +839,7 @@ lbl_fn_8051F13C_00000A58:
     stfs f30, 0x14(r1)
     stfs f30, 0x18(r1)
     stfs f30, 0x1c(r1)
-    bl fn_805F9160
+    bl PSMTXScale
     mr r3, r27
     addi r4, r1, 0x68
     addi r5, r1, 0x98

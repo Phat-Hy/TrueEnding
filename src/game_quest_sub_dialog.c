@@ -26,7 +26,7 @@ extern void fn_80541214(void);
 extern void fn_80541538(void);
 extern void fn_80543064(void);
 extern void fn_805A38F4(void);
-extern void fn_805F9940(void);
+extern void PSVECMag(void);
 extern void fn_80680770(void);
 extern void fn_80686EA4(void);
 
@@ -2109,7 +2109,7 @@ lbl_fn_8048A968_000019FC:
     stfs f8, 0x8(r1)
     stfs f14, 0xc(r1)
     stfs f11, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     addi r31, r31, 0x1
     fadds f31, f31, f1
     psq_l f1, 0x0(r21), 0, 0

@@ -39,10 +39,10 @@ extern void fn_80472D64(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_805F93C0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9940(void);
-extern void fn_805F99B0(void);
+extern void PSMTXMultVec(void);
+extern void PSVECNormalize(void);
+extern void PSVECMag(void);
+extern void PSVECCrossProduct(void);
 extern void fn_80614790(void);
 
 /* External data declarations */
@@ -171,7 +171,7 @@ asm void fn_80057A78(void)
     stfs f0, 0x20(r1)
     stfs f3, 0x24(r1)
     stfs f9, 0x28(r1)
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     addi r4, r1, 0x14
     lfs f2, 0x1c(r1)
     psq_l f1, 0x0(r4), 0, 0
@@ -179,7 +179,7 @@ asm void fn_80057A78(void)
     psq_st f1, 0x0(r3), 0, 0
     mr r4, r3
     stfs f2, 0x2c(r28)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f5, 0x8(r30)
     addi r3, r1, 0x8
     lfs f4, 0x8(r31)
@@ -206,7 +206,7 @@ asm void fn_80057A78(void)
     stfs f0, 0x8(r1)
     stfs f3, 0xc(r1)
     stfs f9, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     stfs f1, 0x3c(r28)
     lwz r31, 0x4c(r1)
     lwz r30, 0x48(r1)
@@ -423,7 +423,7 @@ asm void atn_ColliBox_getAABB(void)
     stfs f2, 0x10(r1)
     psq_st f1, 0x0(r5), 0, 0
     stfs f2, 0x28(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f9, 0x1c(r31)
     frsp f0, f1
     lfs f3, lbl_80880964
@@ -994,7 +994,7 @@ lbl_fn_800584D8_00000B24:
     stfs f31, 0xbc(r1)
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0x4c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     frsp f7, f29
     lfs f0, 0x4c(r1)
     frsp f9, f28
@@ -1018,7 +1018,7 @@ lbl_fn_800584D8_00000B24:
     lfs f2, 0x7c(r1)
     psq_st f1, 0x0(r25), 0, 0
     stfs f2, 0x34(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     frsp f7, f29
     lfs f0, 0x34(r1)
     frsp f9, f28
@@ -1042,7 +1042,7 @@ lbl_fn_800584D8_00000B24:
     lfs f2, 0x70(r1)
     psq_st f1, 0x0(r22), 0, 0
     stfs f2, 0x1c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     frsp f7, f29
     lfs f0, 0x1c(r1)
     frsp f9, f28
@@ -1203,7 +1203,7 @@ asm void fn_800588FC(void)
     lfs f0, 0xc(r3)
     addi r3, r31, 0x48
     stfs f0, 0x84(r31)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f0, 0x70(r31)
     addi r3, r1, 0x20
     lfs f3, 0x60(r31)
@@ -1211,7 +1211,7 @@ asm void fn_800588FC(void)
     stfs f4, 0x20(r1)
     stfs f3, 0x24(r1)
     stfs f0, 0x28(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x6c(r31)
     fmr f30, f1
     lfs f3, 0x5c(r31)
@@ -1220,7 +1220,7 @@ asm void fn_800588FC(void)
     stfs f4, 0x14(r1)
     stfs f3, 0x18(r1)
     stfs f0, 0x1c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x68(r31)
     fmr f31, f1
     lfs f3, 0x58(r31)
@@ -1229,12 +1229,12 @@ asm void fn_800588FC(void)
     stfs f4, 0x8(r1)
     stfs f3, 0xc(r1)
     stfs f0, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     stfs f31, 0x30(r1)
     addi r3, r1, 0x2c
     stfs f1, 0x2c(r1)
     stfs f30, 0x34(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x84(r31)
     fmuls f0, f0, f1
     stfs f0, 0x84(r31)
@@ -2320,7 +2320,7 @@ lbl_fn_80059784_00001DF8:
     stfs f2, 0x1c(r1)
     mr r5, r17
     psq_st f1, 0x0(r17), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     psq_l f1, 0x0(r17), 0, 0
     mr r3, r30
     lfs f2, 0x1c(r1)
@@ -2332,7 +2332,7 @@ lbl_fn_80059784_00001DF8:
     lfs f2, 0x14(r24)
     stfs f2, 0x28(r1)
     psq_st f1, 0x0(r19), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     psq_l f1, 0x0(r19), 0, 0
     mr r3, r30
     lfs f2, 0x28(r1)
@@ -2344,7 +2344,7 @@ lbl_fn_80059784_00001DF8:
     lfs f2, 0x20(r24)
     stfs f2, 0x34(r1)
     psq_st f1, 0x0(r20), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     psq_l f1, 0x0(r20), 0, 0
     mr r3, r30
     lfs f2, 0x34(r1)
@@ -2356,7 +2356,7 @@ lbl_fn_80059784_00001DF8:
     lfs f2, 0x38(r24)
     stfs f2, 0x40(r1)
     psq_st f1, 0x0(r21), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     psq_l f1, 0x0(r21), 0, 0
     mr r3, r22
     lfs f2, 0x40(r1)
@@ -2383,10 +2383,10 @@ lbl_fn_80059784_00001DF8:
     lfs f2, 0x2c(r24)
     stfs f2, 0x10(r1)
     psq_st f1, 0x0(r23), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     mr r3, r23
     mr r4, r23
-    bl fn_805F98D0
+    bl PSVECNormalize
     psq_l f1, 0x0(r23), 0, 0
     lfs f2, 0x10(r1)
     psq_st f1, 0x24(r18), 0, 0

@@ -48,8 +48,8 @@ extern void fn_80300DF4(void);
 extern void fn_80301200(void);
 extern void world_setLocalFlag(void);
 extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
 extern void fn_80695D84(void);
 
 /* External data declarations */
@@ -708,11 +708,11 @@ lbl_fn_80304718_00000908:
     lfs f1, 0x14(r3)
     addi r3, r1, 0x70
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x60
     addi r3, r1, 0x70
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f1, 0x528(r31)
     lfs f0, 0x60(r1)
     lfs f2, 0x52c(r31)
@@ -1137,7 +1137,7 @@ lbl_fn_80304FC0_00000E88:
     beq lbl_fn_80304FC0_00000F48
     addi r3, r1, 0x308
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x308
     addi r5, r1, 0x2d8
@@ -1162,7 +1162,7 @@ lbl_fn_80304FC0_00000F48:
     beq lbl_fn_80304FC0_00000FA8
     addi r3, r1, 0x368
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x368
     addi r5, r1, 0x338
@@ -1187,7 +1187,7 @@ lbl_fn_80304FC0_00000FA8:
     beq lbl_fn_80304FC0_00001008
     addi r3, r1, 0x3c8
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x3c8
     addi r5, r1, 0x398
@@ -1209,7 +1209,7 @@ lbl_fn_80304FC0_00001008:
     addi r4, r1, 0x88
     addi r3, r1, 0x458
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0x53c(r31)
     addi r3, r1, 0x64
     psq_l f1, 0x534(r31), 0, 0
@@ -1239,7 +1239,7 @@ lbl_fn_80304FC0_00001008:
     frsp f1, f2
     addi r3, r1, 0x1e8
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x1e8
     addi r5, r1, 0x1b8
@@ -1264,7 +1264,7 @@ lbl_fn_80304FC0_000010D4:
     beq lbl_fn_80304FC0_00001134
     addi r3, r1, 0x248
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x248
     addi r5, r1, 0x218
@@ -1289,7 +1289,7 @@ lbl_fn_80304FC0_00001134:
     beq lbl_fn_80304FC0_00001194
     addi r3, r1, 0x2a8
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x2a8
     addi r5, r1, 0x278
@@ -1311,7 +1311,7 @@ lbl_fn_80304FC0_00001194:
     addi r4, r1, 0x7c
     addi r3, r1, 0x428
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0x53c(r31)
     addi r3, r1, 0x58
     psq_l f1, 0x534(r31), 0, 0
@@ -1341,7 +1341,7 @@ lbl_fn_80304FC0_00001194:
     frsp f1, f2
     addi r3, r1, 0xc8
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0xc8
     addi r5, r1, 0x98
@@ -1366,7 +1366,7 @@ lbl_fn_80304FC0_00001260:
     beq lbl_fn_80304FC0_000012C0
     addi r3, r1, 0x128
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x128
     addi r5, r1, 0xf8
@@ -1391,7 +1391,7 @@ lbl_fn_80304FC0_000012C0:
     beq lbl_fn_80304FC0_00001320
     addi r3, r1, 0x188
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x188
     addi r5, r1, 0x158
@@ -1413,7 +1413,7 @@ lbl_fn_80304FC0_00001320:
     addi r4, r1, 0x70
     addi r3, r1, 0x3f8
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lwz r4, 0x15bc(r31)
     lis r0, 0x4330
     lis r3, lbl_80748A00@ha

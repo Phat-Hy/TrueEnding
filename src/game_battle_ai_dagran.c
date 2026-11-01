@@ -38,7 +38,7 @@ extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
+extern void PSMTXRotRad(void);
 extern void fn_80682428(void);
 extern void fn_80684600(void);
 extern void fn_80695720(void);
@@ -425,7 +425,7 @@ lbl_fn_80432FF8_00000434:
     stfs f31, 0xb0(r1)
     stfs f31, 0x9c(r1)
     lfs f1, 0xc(r17)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x60
     addi r5, r1, 0x30
@@ -608,7 +608,7 @@ lbl_fn_8043329C_000006B4:
     stfs f31, 0x94(r1)
     stfs f31, 0x80(r1)
     lfs f1, 0xc(r23)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r3, r1, 0x80
     addi r4, r1, 0x50
     addi r5, r1, 0x20

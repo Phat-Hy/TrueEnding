@@ -32,9 +32,9 @@ struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct 
 extern void fn_800D594C(void);
 extern void fn_805F8C50(void);
 extern void fn_805F8CA0(void);
-extern void fn_805F93C0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9990(void);
+extern void PSMTXMultVec(void);
+extern void PSVECNormalize(void);
+extern void PSVECDotProduct(void);
 extern void __GXSetVtxDesc(void);
 extern void fn_80613BB0(void);
 extern void fn_80614190(void);
@@ -227,7 +227,7 @@ lbl_fn_800AEF68_00000148:
     psq_st f1, 0x0(r3), 0, 0
     mr r4, r3
     stfs f2, 0x64(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f9, 0x64(r1)
     addi r5, r1, 0x74
     lfs f8, lbl_80880E1C
@@ -294,7 +294,7 @@ lbl_fn_800AEF68_000001CC:
     psq_l f1, 0x0(r6), 0, 0
     psq_st f1, 0x0(r29), 0, 0
     stfs f2, 0xc4(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lwz r5, lbl_8087EFB4
     addi r28, r1, 0x44
     addi r6, r1, 0x20
@@ -315,7 +315,7 @@ lbl_fn_800AEF68_000001CC:
     psq_l f1, 0x0(r6), 0, 0
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0x4c(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     addi r27, r1, 0xb0
     psq_l f1, 0x0(r28), 0, 0
     lfs f2, 0x4c(r1)
@@ -323,10 +323,10 @@ lbl_fn_800AEF68_000001CC:
     psq_st f1, 0x0(r27), 0, 0
     mr r4, r27
     stfs f2, 0xb8(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     mr r3, r29
     mr r4, r27
-    bl fn_805F9990
+    bl PSVECDotProduct
     lis r3, lbl_80732C80@ha
     lfd f0, lbl_80732C80@l(r3)
     fcmpo cr0, f1, f0
@@ -442,7 +442,7 @@ lbl_fn_800AEF68_0000043C:
 lbl_fn_800AEF68_0000046C:
     addi r3, r1, 0xa4
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     lwz r5, lbl_8087EFB4
     addi r27, r1, 0x100
     lfs f0, lbl_80880E10
@@ -475,7 +475,7 @@ lbl_fn_800AEF68_0000046C:
     mr r5, r4
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0xa0(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f7, 0x9c(r1)
     addi r3, r1, 0x10
     lfs f0, 0x98(r1)

@@ -37,7 +37,7 @@ extern void fn_800DC6B4(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getData(void);
 extern void fn_80476130(void);
-extern void fn_805F93C0(void);
+extern void PSMTXMultVec(void);
 extern void fn_8067E23C(void);
 extern void fn_80695720(void);
 extern void fn_80695A50(void);
@@ -267,7 +267,7 @@ lbl_fn_80094F98_00000288:
     stfs f2, 0x10(r1)
     mr r4, r31
     psq_st f1, 0x0(r31), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     psq_l f1, 0x0(r31), 0, 0
     lfs f2, 0x10(r1)
     stfs f2, 0x8(r29)

@@ -29,8 +29,8 @@ extern void fn_80547EA4(void);
 extern void fn_80548570(void);
 extern void fn_80548760(void);
 extern void fn_8059A000(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
 extern void fn_80680770(void);
 extern void fn_80686EA4(void);
 extern void memmove(void);
@@ -860,11 +860,11 @@ lbl_fn_80112A00_00000A28:
     lfs f1, 0xc(r1)
     addi r3, r1, 0x48
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r4, r31
     mr r5, r31
     addi r3, r1, 0x48
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f3, 0x40(r1)
     lfs f0, 0x34(r1)
     lfs f5, 0x3c(r1)

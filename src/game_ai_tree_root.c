@@ -58,8 +58,8 @@ extern void fn_8047059C(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
 extern void fn_80682428(void);
 extern void fn_80682544(void);
 extern void fn_80684600(void);
@@ -1322,11 +1322,11 @@ lbl_fn_80256C04_000010CC:
     stfs f28, 0x44(r1)
     stfs f0, 0x38(r1)
     stfs f2, 0x2fc(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r4, r14
     mr r5, r14
     addi r3, r1, 0x288
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lis r3, lbl_807C8328@ha
     stfs f28, 0x28(r1)
     lfs f0, lbl_807C8328@l(r3)
@@ -1342,11 +1342,11 @@ lbl_fn_80256C04_000010CC:
     frsp f2, f0
     stfs f0, 0x2c(r1)
     stfs f2, 0x308(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r4, r26
     mr r5, r26
     addi r3, r1, 0x258
-    bl fn_805F93C0
+    bl PSMTXMultVec
     stfs f28, 0x90(r1)
     add r27, r18, r31
     li r16, 0x0
@@ -1410,7 +1410,7 @@ lbl_fn_80256C04_000011AC:
     frsp f1, f2
     addi r3, r1, 0x138
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r23
     addi r4, r1, 0x138
     addi r5, r1, 0x108
@@ -1433,7 +1433,7 @@ lbl_fn_80256C04_000012CC:
     beq lbl_fn_80256C04_00001324
     addi r3, r1, 0x198
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r23
     addi r4, r1, 0x198
     addi r5, r1, 0x168
@@ -1456,7 +1456,7 @@ lbl_fn_80256C04_00001324:
     beq lbl_fn_80256C04_0000137C
     addi r3, r1, 0x1f8
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r23
     addi r4, r1, 0x1f8
     addi r5, r1, 0x1c8
@@ -1671,11 +1671,11 @@ lbl_fn_80256C04_0000163C:
     stfs f7, 0x10(r1)
     stfs f0, 0x14(r1)
     lfs f1, 0x538(r16)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0xc
     addi r3, r1, 0xd8
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f8, 0x14(r1)
     mr r3, r16
     lfs f7, 0x10(r1)

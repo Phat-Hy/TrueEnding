@@ -35,12 +35,12 @@ extern void fn_80232B7C(void);
 extern void fn_8023A8B4(void);
 extern void fn_80491D50(void);
 extern void fn_8059B670(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
-extern void fn_805F9940(void);
-extern void fn_805F9990(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
+extern void PSVECMag(void);
+extern void PSVECDotProduct(void);
 extern void fn_8068AE9C(void);
 extern void fn_8068B100(void);
 
@@ -728,7 +728,7 @@ lbl_fn_800FAB80_000008A8:
     fsubs f0, f3, f0
     stfs f4, 0x20(r1)
     stfs f0, 0x1c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lwz r12, 0x0(r25)
     fmr f31, f1
     mr r3, r25
@@ -1289,7 +1289,7 @@ lbl_fn_800FB4B0_000010C8:
     fsubs f0, f1, f0
     stfs f2, 0x5c(r1)
     stfs f0, 0x58(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fmuls f0, f31, f31
     fcmpo cr0, f1, f0
     bge lbl_fn_800FB4B0_000011E4
@@ -1411,7 +1411,7 @@ lbl_fn_800FB4B0_00001290:
     fsubs f0, f1, f0
     stfs f2, 0x3c(r1)
     stfs f0, 0x38(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fmuls f0, f31, f31
     fcmpo cr0, f1, f0
     bge lbl_fn_800FB4B0_000013AC
@@ -1772,7 +1772,7 @@ lbl_fn_800FBA9C_00001784:
     addi r3, r1, 0x14
     stfs f30, 0x18(r1)
     stfs f2, 0x1c(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fmuls f0, f23, f23
     fmr f22, f1
     fcmpo cr0, f1, f0
@@ -1793,7 +1793,7 @@ lbl_fn_800FBA9C_00001824:
     bne lbl_fn_800FBA9C_000018C0
     addi r3, r1, 0x2c
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     stfs f30, 0x20(r1)
     addi r3, r1, 0x38
     li r4, 0x79
@@ -1801,14 +1801,14 @@ lbl_fn_800FBA9C_00001824:
     stfs f31, 0x28(r1)
     lfs f0, 0x538(r29)
     fadds f1, f25, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x20
     addi r3, r1, 0x38
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r3, r1, 0x2c
     addi r4, r1, 0x20
-    bl fn_805F9990
+    bl PSVECDotProduct
     fmr f23, f1
     bl fn_8068AE9C
     frsp f1, f1
@@ -1842,7 +1842,7 @@ lbl_fn_800FBA9C_000018C0:
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f29
     bge lbl_fn_800FBA9C_00001908
     mr r27, r26

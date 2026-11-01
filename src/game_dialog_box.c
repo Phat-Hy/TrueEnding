@@ -27,8 +27,8 @@ extern void fn_80481654(void);
 extern void fn_804918A4(void);
 extern void fn_80565F38(void);
 extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9920(void);
+extern void PSMTXRotRad(void);
+extern void PSVECSquareMag(void);
 extern void fn_805F99F0(void);
 extern void fn_805F9A50(void);
 extern void fn_806868C4(void);
@@ -123,7 +123,7 @@ asm void fn_80149624(void)
     stw r31, 0x6c(r1)
     mr r31, r3
     addi r3, r1, 0x8
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x8
     addi r5, r1, 0x38
@@ -189,7 +189,7 @@ asm void fn_801496A8(void)
     fmr f1, f0
     addi r3, r1, 0xd8
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0xd8
     addi r5, r1, 0x108
@@ -214,7 +214,7 @@ lbl_fn_801496A8_00000180:
     beq lbl_fn_801496A8_000001E0
     addi r3, r1, 0x78
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x78
     addi r5, r1, 0xa8
@@ -239,7 +239,7 @@ lbl_fn_801496A8_000001E0:
     beq lbl_fn_801496A8_00000240
     addi r3, r1, 0x18
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x18
     addi r5, r1, 0x48
@@ -461,7 +461,7 @@ asm void dialog_renderWindow(void)
     stfs f4, 0xf8(r1)
     stfs f0, 0xf4(r1)
     stfs f6, 0xfc(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lwz r0, 0x55c(r24)
     fmr f31, f1
     cmpwi r0, 0x8
@@ -752,7 +752,7 @@ lbl_dialog_renderWindow_00000864:
     stfs f0, 0xb8(r1)
     stfs f4, 0xbc(r1)
     stfs f7, 0xc0(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, 0x1b4(r1)
     fmuls f0, f0, f0
     fcmpo cr0, f1, f0

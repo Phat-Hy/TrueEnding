@@ -16,9 +16,9 @@ extern void fn_801F465C(void);
 extern void fn_801FD5A0(void);
 extern void fn_801FDA20(void);
 extern void fn_805F89F0(void);
-extern void fn_805F90D0(void);
-extern void fn_805F9160(void);
-extern void fn_805F93C0(void);
+extern void PSMTXTrans(void);
+extern void PSMTXScale(void);
+extern void PSMTXMultVec(void);
 extern void fn_8068B100(void);
 extern void fn_8068B770(void);
 extern void fn_8068BC30(void);
@@ -1506,7 +1506,7 @@ lbl_fn_80202260_00001420:
     stfs f8, 0x98(r31)
     stfs f7, 0xa8(r31)
     stfs f0, 0xb8(r31)
-    bl fn_805F9160
+    bl PSMTXScale
     mr r3, r29
     addi r4, r1, 0x30
     addi r5, r1, 0x60
@@ -1668,7 +1668,7 @@ asm void fn_80202460(void)
     stfs f1, 0x44(r1)
     stfs f2, 0x48(r1)
     stfs f1, 0x4c(r1)
-    bl fn_805F9160
+    bl PSMTXScale
     fneg f8, f30
     addi r4, r1, 0x200
     lfs f7, lbl_80882CF0
@@ -1696,7 +1696,7 @@ asm void fn_80202460(void)
     stfs f0, 0x38(r1)
     stfs f8, 0x3c(r1)
     stfs f9, 0x40(r1)
-    bl fn_805F90D0
+    bl PSMTXTrans
     mr r3, r29
     addi r4, r1, 0x110
     addi r5, r1, 0x140
@@ -1723,7 +1723,7 @@ lbl_fn_80202460_000017AC:
     stfs f1, 0x2c(r1)
     stfs f2, 0x30(r1)
     stfs f1, 0x34(r1)
-    bl fn_805F9160
+    bl PSMTXScale
     addi r4, r1, 0x1d0
     addi r3, r1, 0x260
     psq_l f1, 0x0(r4), 0, 0
@@ -1754,7 +1754,7 @@ lbl_fn_80202460_00001804:
     stfs f1, 0x20(r1)
     stfs f2, 0x24(r1)
     stfs f1, 0x28(r1)
-    bl fn_805F9160
+    bl PSMTXScale
     fneg f8, f30
     addi r4, r1, 0x1a0
     lfs f7, lbl_80882CF0
@@ -1782,7 +1782,7 @@ lbl_fn_80202460_00001804:
     stfs f0, 0x14(r1)
     stfs f8, 0x18(r1)
     stfs f9, 0x1c(r1)
-    bl fn_805F90D0
+    bl PSMTXTrans
     mr r3, r29
     addi r4, r1, 0xb0
     addi r5, r1, 0xe0
@@ -1809,7 +1809,7 @@ lbl_fn_80202460_000018FC:
     stfs f1, 0x8(r1)
     stfs f2, 0xc(r1)
     stfs f1, 0x10(r1)
-    bl fn_805F9160
+    bl PSMTXScale
     addi r4, r1, 0x170
     addi r3, r1, 0x260
     psq_l f1, 0x0(r4), 0, 0
@@ -1841,7 +1841,7 @@ lbl_fn_80202460_00001954:
     stfs f2, 0xa0(r1)
     psq_st f1, 0x0(r29), 0, 0
     stfs f2, 0xac(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f0, lbl_80882CD8
     addi r28, r1, 0x8c
     lfs f7, lbl_80882CE0
@@ -1861,7 +1861,7 @@ lbl_fn_80202460_00001954:
     stfs f0, 0x88(r1)
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0x94(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f7, lbl_80882CD8
     addi r29, r1, 0x74
     lfs f0, lbl_80882CE0
@@ -1881,7 +1881,7 @@ lbl_fn_80202460_00001954:
     stfs f7, 0x70(r1)
     psq_st f1, 0x0(r29), 0, 0
     stfs f2, 0x7c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f7, lbl_80882CE0
     addi r28, r1, 0x5c
     lfs f0, lbl_80882CD8
@@ -1901,7 +1901,7 @@ lbl_fn_80202460_00001954:
     stfs f0, 0x58(r1)
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0x64(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0x64(r1)
     li r0, 0xd
     psq_l f1, 0x0(r28), 0, 0

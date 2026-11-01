@@ -52,11 +52,11 @@ extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
-extern void fn_805F9990(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
+extern void PSVECDotProduct(void);
 extern void fn_80680770(void);
 extern void fn_80682428(void);
 extern void fn_80684600(void);
@@ -940,7 +940,7 @@ lbl_fn_8027D838_00000B8C:
     stfs f4, 0x54(r1)
     stfs f0, 0x50(r1)
     stfs f6, 0x58(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f31
     bge lbl_fn_8027D838_00000BDC
     fmr f31, f1
@@ -1205,7 +1205,7 @@ lbl_fn_8027D838_00000F84:
     stfs f5, 0x24(r1)
     stfs f3, 0x1c(r1)
     stfs f0, 0x20(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_8088396C
     fcmpo cr0, f1, f0
     bge lbl_fn_8027D838_00000FD8
@@ -1254,7 +1254,7 @@ lbl_fn_8027D838_00001034:
     stfs f5, 0x18(r1)
     stfs f3, 0x10(r1)
     stfs f0, 0x14(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_8088396C
     fcmpo cr0, f1, f0
     bge lbl_fn_8027D838_000010C0
@@ -1415,11 +1415,11 @@ lbl_fn_8027D838_00001260:
     stfs f3, 0x60(r1)
     stfs f0, 0x64(r1)
     lfs f1, 0x538(r31)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x5c
     addi r3, r1, 0x90
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f5, lbl_80883964
     lfs f0, 0x60(r1)
     lfs f3, 0x5c(r1)
@@ -1716,11 +1716,11 @@ lbl_fn_8027E410_00001700:
     stfs f0, 0x10(r1)
     lfs f1, 0x538(r3)
     addi r3, r1, 0x20
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x8
     addi r3, r1, 0x20
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f3, 0x24(r31)
     addi r3, r1, 0x14
     lfs f0, 0x530(r30)
@@ -1735,7 +1735,7 @@ lbl_fn_8027E410_00001700:
     stfs f4, 0x18(r1)
     stfs f0, 0x14(r1)
     stfs f6, 0x1c(r1)
-    bl fn_805F9990
+    bl PSVECDotProduct
     lwz r3, 0x58c(r30)
     fmr f31, f1
     subi r0, r3, 0x4
@@ -1785,7 +1785,7 @@ lbl_fn_8027E410_00001800:
     stfs f0, 0x18(r31)
 lbl_fn_8027E410_00001834:
     addi r3, r31, 0x10
-    bl fn_805F9920
+    bl PSVECSquareMag
     fabs f3, f1
     lfs f0, lbl_80883980
     frsp f3, f3
@@ -1797,7 +1797,7 @@ lbl_fn_8027E410_00001834:
     bne lbl_fn_8027E410_00001894
     addi r3, r31, 0x10
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f4, 0x10(r31)
     lfs f5, lbl_80883984
     lfs f3, 0x14(r31)

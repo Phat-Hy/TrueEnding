@@ -17,7 +17,7 @@ extern void fn_8022C9C8(void);
 extern void font_loadGlyphMetrics(void);
 extern void fn_802371BC(void);
 extern void fn_80237DA8(void);
-extern void fn_805F93C0(void);
+extern void PSMTXMultVec(void);
 extern void fn_80695720(void);
 
 /* External data declarations */
@@ -353,7 +353,7 @@ asm void fn_80238588(void)
     addi r3, r1, 0x18
     stfs f0, 0x4c(r1)
     stfs f0, 0x48(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f7, 0x0(r29)
     lis r0, 0x4330
     lfs f0, 0x8(r1)

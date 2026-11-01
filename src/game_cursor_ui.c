@@ -40,11 +40,11 @@ extern void fn_800D3FA4(void);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
-extern void fn_805F93C0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
-extern void fn_805F9990(void);
-extern void fn_805F99B0(void);
+extern void PSMTXMultVec(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
+extern void PSVECDotProduct(void);
+extern void PSVECCrossProduct(void);
 extern void fn_80615E00(void);
 extern void fn_806959D8(void);
 extern u32 strlen(const char* str);
@@ -207,7 +207,7 @@ lbl_fn_800A81F8_00000054:
     stfs f0, 0x68(r1)
     stfs f3, 0x6c(r1)
     stfs f4, 0x70(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f3, lbl_80880CD4
     addi r3, r1, 0x68
     lfs f0, lbl_80880CEC
@@ -216,16 +216,16 @@ lbl_fn_800A81F8_00000054:
     addi r5, r1, 0x5c
     stfs f0, 0x18(r1)
     stfs f3, 0x1c(r1)
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     addi r3, r1, 0x5c
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80880CF0
     fcmpo cr0, f1, f0
     ble lbl_fn_800A81F8_00000218
     addi r3, r1, 0x5c
     addi r4, r1, 0x68
     addi r5, r1, 0x50
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     addi r3, r1, 0x50
     addi r31, r1, 0x44
     psq_l f1, 0x0(r3), 0, 0
@@ -234,7 +234,7 @@ lbl_fn_800A81F8_00000054:
     mr r4, r31
     psq_st f1, 0x0(r31), 0, 0
     stfs f2, 0x4c(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f3, lbl_80880CD4
     mr r4, r31
     lfs f0, lbl_80880CEC
@@ -242,7 +242,7 @@ lbl_fn_800A81F8_00000054:
     stfs f3, 0x8(r1)
     stfs f0, 0xc(r1)
     stfs f3, 0x10(r1)
-    bl fn_805F9990
+    bl PSVECDotProduct
     fmuls f5, f31, f1
     lfs f0, 0x4c(r1)
     lfs f3, 0x48(r1)
@@ -366,7 +366,7 @@ lbl_fn_800A8468_000002FC:
     stfs f4, 0x10(r1)
     psq_st f1, 0x0(r30), 0, 0
     stfs f2, 0x1c(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     psq_l f1, 0x0(r30), 0, 0
     lis r3, lbl_807C7030@ha
     lfs f2, 0x1c(r1)
@@ -574,7 +574,7 @@ lbl_fn_800A8740_000005B0:
     mr r5, r4
     stfs f0, 0xb4(r1)
     stfs f0, 0xb8(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f9, 0xb8(r1)
     addi r4, r1, 0x8c
     lfs f8, lbl_80880CFC
@@ -618,7 +618,7 @@ lbl_fn_800A8740_000005B0:
     mr r5, r4
     stfs f0, 0xb4(r1)
     stfs f7, 0xb8(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f9, 0xb8(r1)
     lis r6, 0xff01
     lfs f8, lbl_80880CFC
@@ -663,7 +663,7 @@ lbl_fn_800A8740_000005B0:
     mr r5, r4
     stfs f7, 0xb4(r1)
     stfs f0, 0xb8(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f9, 0xb8(r1)
     lis r6, 0xff00
     lfs f8, lbl_80880CFC
@@ -956,7 +956,7 @@ lbl_fn_800A8CB8_00000B4C:
     stfs f27, 0x5c(r1)
     stfs f28, 0x60(r1)
     stfs f29, 0x64(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f6, 0x1c(r30)
     addi r31, r1, 0x50
     lfs f3, 0x1c(r29)
@@ -982,18 +982,18 @@ lbl_fn_800A8CB8_00000B4C:
     stfs f2, 0x34(r1)
     psq_st f1, 0x0(r31), 0, 0
     stfs f2, 0x58(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     mr r3, r31
     mr r4, r31
-    bl fn_805F98D0
+    bl PSVECNormalize
     mr r4, r31
     addi r3, r1, 0x5c
     addi r5, r1, 0x44
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     addi r3, r1, 0x44
     addi r4, r1, 0x5c
     addi r5, r1, 0x8
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     addi r4, r1, 0x8
     lfs f2, 0x10(r1)
     addi r3, r1, 0x44
@@ -1017,11 +1017,11 @@ lbl_fn_800A8CB8_00000CD8:
     bne lbl_fn_800A8CB8_00000CEC
     addi r3, r1, 0x44
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_800A8CB8_00000CEC:
     addi r3, r1, 0x50
     addi r4, r1, 0x44
-    bl fn_805F9990
+    bl PSVECDotProduct
     fmuls f5, f31, f1
     lfs f4, 0x44(r1)
     lfs f3, 0x48(r1)

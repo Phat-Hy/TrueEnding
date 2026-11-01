@@ -45,7 +45,7 @@ extern void fn_8029B24C(void);
 extern void fn_8029BE7C(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_805F98D0(void);
+extern void PSVECNormalize(void);
 extern void fn_80680770(void);
 extern void fn_80680CF8(void);
 extern void fn_80686EA4(void);
@@ -681,7 +681,7 @@ lbl_fn_80297114_00000820:
     stfs f6, 0x1c(r1)
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x10(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f1, lbl_80883BE8
     mr r4, r31
     lfs f0, lbl_80883C70

@@ -37,7 +37,7 @@ extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
+extern void PSMTXRotRad(void);
 extern void fn_80680CF8(void);
 extern void fn_80682428(void);
 extern void fn_8068A850(void);
@@ -130,7 +130,7 @@ asm void fn_803FEF78(void)
 lbl_fn_803FEF78_00000080:
     addi r3, r1, 0x248
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x248
     addi r5, r1, 0x278
@@ -152,7 +152,7 @@ lbl_fn_803FEF78_00000080:
 lbl_fn_803FEF78_000000D4:
     addi r3, r1, 0x2a8
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x2a8
     addi r5, r1, 0x2d8
@@ -174,7 +174,7 @@ lbl_fn_803FEF78_000000D4:
 lbl_fn_803FEF78_00000128:
     addi r3, r1, 0x308
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x308
     addi r5, r1, 0x338
@@ -197,7 +197,7 @@ lbl_fn_803FEF78_0000017C:
     fneg f1, f1
     addi r3, r1, 0x368
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x368
     addi r5, r1, 0x398
@@ -220,7 +220,7 @@ lbl_fn_803FEF78_000001D4:
     fneg f1, f1
     addi r3, r1, 0x3c8
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x3c8
     addi r5, r1, 0x3f8
@@ -243,7 +243,7 @@ lbl_fn_803FEF78_0000022C:
     fneg f1, f1
     addi r3, r1, 0x428
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x428
     addi r5, r1, 0x458
@@ -282,7 +282,7 @@ lbl_fn_803FEF78_00000284:
 lbl_fn_803FEF78_000002C4:
     addi r3, r1, 0x8
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x8
     addi r5, r1, 0x38
@@ -304,7 +304,7 @@ lbl_fn_803FEF78_000002C4:
 lbl_fn_803FEF78_00000318:
     addi r3, r1, 0x68
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x68
     addi r5, r1, 0x98
@@ -326,7 +326,7 @@ lbl_fn_803FEF78_00000318:
 lbl_fn_803FEF78_0000036C:
     addi r3, r1, 0xc8
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0xc8
     addi r5, r1, 0xf8
@@ -349,7 +349,7 @@ lbl_fn_803FEF78_000003C0:
     fneg f1, f1
     addi r3, r1, 0x128
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x128
     addi r5, r1, 0x158
@@ -372,7 +372,7 @@ lbl_fn_803FEF78_00000418:
     fneg f1, f1
     addi r3, r1, 0x188
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x188
     addi r5, r1, 0x1b8
@@ -395,7 +395,7 @@ lbl_fn_803FEF78_00000470:
     fneg f1, f1
     addi r3, r1, 0x1e8
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x1e8
     addi r5, r1, 0x218
@@ -433,40 +433,40 @@ lbl_fn_803FEF78_000004C4:
 lbl_fn_803FEF78_00000504:
     addi r3, r1, 0x548
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x548
     b lbl_fn_803FEF78_000005C4
 lbl_fn_803FEF78_00000518:
     addi r3, r1, 0x548
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x548
     b lbl_fn_803FEF78_000005C4
 lbl_fn_803FEF78_0000052C:
     addi r3, r1, 0x548
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x548
     b lbl_fn_803FEF78_000005C4
 lbl_fn_803FEF78_00000540:
     fneg f1, f1
     addi r3, r1, 0x548
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x548
     b lbl_fn_803FEF78_000005C4
 lbl_fn_803FEF78_00000558:
     fneg f1, f1
     addi r3, r1, 0x548
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x548
     b lbl_fn_803FEF78_000005C4
 lbl_fn_803FEF78_00000570:
     fneg f1, f1
     addi r3, r1, 0x548
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x548
     b lbl_fn_803FEF78_000005C4
 lbl_fn_803FEF78_00000588:
@@ -523,40 +523,40 @@ lbl_fn_803FEF78_00000608:
 lbl_fn_803FEF78_00000648:
     addi r3, r1, 0x4e8
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x4e8
     b lbl_fn_803FEF78_00000708
 lbl_fn_803FEF78_0000065C:
     addi r3, r1, 0x4e8
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x4e8
     b lbl_fn_803FEF78_00000708
 lbl_fn_803FEF78_00000670:
     addi r3, r1, 0x4e8
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x4e8
     b lbl_fn_803FEF78_00000708
 lbl_fn_803FEF78_00000684:
     fneg f1, f1
     addi r3, r1, 0x4e8
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x4e8
     b lbl_fn_803FEF78_00000708
 lbl_fn_803FEF78_0000069C:
     fneg f1, f1
     addi r3, r1, 0x4e8
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x4e8
     b lbl_fn_803FEF78_00000708
 lbl_fn_803FEF78_000006B4:
     fneg f1, f1
     addi r3, r1, 0x4e8
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x4e8
     b lbl_fn_803FEF78_00000708
 lbl_fn_803FEF78_000006CC:
@@ -611,40 +611,40 @@ lbl_fn_803FEF78_00000708:
 lbl_fn_803FEF78_00000788:
     addi r3, r1, 0x488
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x488
     b lbl_fn_803FEF78_00000848
 lbl_fn_803FEF78_0000079C:
     addi r3, r1, 0x488
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x488
     b lbl_fn_803FEF78_00000848
 lbl_fn_803FEF78_000007B0:
     addi r3, r1, 0x488
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x488
     b lbl_fn_803FEF78_00000848
 lbl_fn_803FEF78_000007C4:
     fneg f1, f1
     addi r3, r1, 0x488
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x488
     b lbl_fn_803FEF78_00000848
 lbl_fn_803FEF78_000007DC:
     fneg f1, f1
     addi r3, r1, 0x488
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x488
     b lbl_fn_803FEF78_00000848
 lbl_fn_803FEF78_000007F4:
     fneg f1, f1
     addi r3, r1, 0x488
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x488
     b lbl_fn_803FEF78_00000848
 lbl_fn_803FEF78_0000080C:

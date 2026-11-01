@@ -26,8 +26,8 @@ extern void fn_8029A788(void);
 extern void fn_8029B59C(void);
 extern void fn_8029C564(void);
 extern void fn_803C1560(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9750(void);
+extern void PSMTXRotRad(void);
+extern void PSMTX44Identity(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 extern void fn_8068B100(void);
@@ -433,7 +433,7 @@ lbl_fn_802953C8_0000053C:
     addi r3, r1, 0x68
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80883BE8
     addi r4, r1, 0x38
     lfs f30, 0x70(r1)
@@ -483,7 +483,7 @@ lbl_fn_802953C8_0000053C:
     stfs f6, 0xc4(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_80883C1C
     fabs f3, f2

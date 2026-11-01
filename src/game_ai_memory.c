@@ -34,11 +34,11 @@ extern void fn_802620A8(void);
 extern void fn_802621D4(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9750(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9940(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSMTX44Identity(void);
+extern void PSVECNormalize(void);
+extern void PSVECMag(void);
 extern void fn_80680CF8(void);
 extern void fn_8068AEA4(void);
 extern void fn_80695AD0(void);
@@ -376,11 +376,11 @@ lbl_fn_802604E0_00000364:
     stfs f3, 0x38(r1)
     stfs f0, 0x3c(r1)
     lfs f1, 0x538(r31)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x34
     addi r3, r1, 0x60
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f0, 0x3c(r1)
     li r29, -0x1
     lfs f5, lbl_80883594
@@ -910,7 +910,7 @@ asm void fn_80261078(void)
     stfs f4, 0xec(r1)
     stfs f0, 0xe8(r1)
     stfs f6, 0xf0(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lwz r3, 0x14c8(r31)
     fmr f31, f1
     lwz r5, 0x7e0(r31)
@@ -1225,7 +1225,7 @@ lbl_fn_80261078_00001084:
     stfs f4, 0x3c(r1)
     stfs f0, 0x38(r1)
     stfs f6, 0x40(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x40(r1)
     addi r3, r1, 0x38
     lfs f0, lbl_80883580
@@ -1259,7 +1259,7 @@ lbl_fn_80261078_00001130:
     addi r3, r1, 0x140
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80883578
     addi r4, r1, 0x5c
     lfs f4, 0x148(r1)
@@ -1309,7 +1309,7 @@ lbl_fn_80261078_00001130:
     stfs f13, 0x12c(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x64(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x64(r1)
     lfs f0, lbl_80883580
     fabs f3, f2
@@ -1687,7 +1687,7 @@ lbl_fn_80261A50_00001724:
     stfs f2, 0x1c(r1)
     psq_st f1, 0x0(r26), 0, 0
     stfs f2, 0x34(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f4, 0x34(r1)
     li r3, 0x5e7
     lfs f3, 0x30(r1)

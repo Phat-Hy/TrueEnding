@@ -53,8 +53,8 @@ extern void fn_8035B78C(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_8059B670(void);
 extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
 extern void fn_80695720(void);
 
 /* External data declarations */
@@ -797,7 +797,7 @@ lbl_fn_802C7F10_00000920:
     stfs f0, 0x1504(r31)
     stfs f0, 0x14f0(r31)
     stfs f0, 0x14dc(r31)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x88
     addi r5, r1, 0x58
@@ -1928,7 +1928,7 @@ asm void fn_802C9388(void)
     beq lbl_fn_802C9388_00001A00
     addi r3, r1, 0xb0
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0xb0
     addi r5, r1, 0x80
@@ -1953,7 +1953,7 @@ lbl_fn_802C9388_00001A00:
     beq lbl_fn_802C9388_00001A60
     addi r3, r1, 0x110
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x110
     addi r5, r1, 0xe0
@@ -1978,7 +1978,7 @@ lbl_fn_802C9388_00001A60:
     beq lbl_fn_802C9388_00001AC0
     addi r3, r1, 0x170
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x170
     addi r5, r1, 0x140
@@ -2000,7 +2000,7 @@ lbl_fn_802C9388_00001AC0:
     addi r4, r1, 0x74
     addi r3, r1, 0x1a0
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f9, 0x52c(r31)
     lis r3, lbl_80746DEC@ha
     lfs f7, 0x5a8(r31)

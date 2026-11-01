@@ -40,8 +40,8 @@ extern void fn_803CC6D0(void);
 extern void fn_803E5E64(void);
 extern void fn_803EEE10(void);
 extern void fn_80444020(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -1246,11 +1246,11 @@ lbl_fn_803A9DBC_00000F70:
     stfs f3, 0x90(r1)
     stfs f0, 0x94(r1)
     lfs f1, 0x7c(r29)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x8c
     addi r3, r1, 0xb8
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f9, 0x94(r1)
     lfs f8, 0x90(r1)
     lfs f7, 0x8c(r1)

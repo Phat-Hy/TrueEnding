@@ -53,7 +53,7 @@ extern void fn_804EB4B0(void);
 extern void fn_804EB7C8(void);
 extern void fn_804EB818(void);
 extern void fn_8059B670(void);
-extern void fn_805F98D0(void);
+extern void PSVECNormalize(void);
 extern void fn_80680CF8(void);
 
 /* External data declarations */
@@ -3532,7 +3532,7 @@ lbl_fn_800413EC_00002EEC:
     stfs f5, 0x34(r1)
     stfs f3, 0x2c(r1)
     stfs f0, 0x30(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x530(r28)
     addi r25, r1, 0x20
     psq_l f1, 0x528(r28), 0, 0

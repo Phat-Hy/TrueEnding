@@ -25,7 +25,7 @@ extern void fn_800D594C(void);
 extern void atn_LH_Texture_update(void);
 extern void fn_800D5B58(void);
 extern void atn_LoadHandle_getStatus(void);
-extern void fn_805F9160(void);
+extern void PSMTXScale(void);
 extern void __GXSetVtxDesc(void);
 extern void fn_80613BB0(void);
 extern void fn_80614190(void);
@@ -1800,7 +1800,7 @@ lbl_fn_800AE568_000017F8:
     stfs f27, 0x10(r1)
     stfs f27, 0x14(r1)
     stfs f3, 0x18(r1)
-    bl fn_805F9160
+    bl PSMTXScale
     lfs f2, lbl_80880E18
     addi r3, r1, 0x68
     lfs f0, lbl_80880E10

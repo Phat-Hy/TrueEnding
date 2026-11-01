@@ -17,7 +17,7 @@ extern void fn_8008826C(void);
 extern void fn_80088AF4(void);
 extern void fn_80088FAC(void);
 extern void fn_8008937C(void);
-extern void fn_805F98D0(void);
+extern void PSVECNormalize(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -264,7 +264,7 @@ asm void fn_800B9618(void)
     stfs f2, 0x5c(r1)
     psq_st f1, 0x0(r25), 0, 0
     stfs f2, 0x50(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     psq_l f1, 0x0(r25), 0, 0
     li r5, 0x2
     lfs f2, 0x50(r1)

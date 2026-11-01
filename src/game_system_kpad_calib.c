@@ -70,11 +70,11 @@ extern void fn_80570A68(void);
 extern void fn_80572B70(void);
 extern void fn_805AA738(void);
 extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F90D0(void);
-extern void fn_805F9160(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9940(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXTrans(void);
+extern void PSMTXScale(void);
+extern void PSMTXMultVec(void);
+extern void PSVECMag(void);
 extern void fn_806055A0(void);
 extern void fn_8068AEA8(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -1957,11 +1957,11 @@ lbl_fn_80371790_000019B8:
     stfs f28, 0x5c(r1)
     stfs f28, 0x60(r1)
     stfs f29, 0x64(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x5c
     addi r3, r1, 0x2a8
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f8, 0x64(r1)
     mr r5, r27
     lfs f7, 0x60(r1)
@@ -2154,7 +2154,7 @@ lbl_fn_80371790_00001C9C:
     lfs f1, 0x80(r1)
     lfs f2, 0x84(r1)
     lfs f3, 0x88(r1)
-    bl fn_805F90D0
+    bl PSMTXTrans
     lfs f1, 0x78(r1)
     stfs f28, 0x15c(r1)
     fcmpu cr0, f28, f1
@@ -2172,7 +2172,7 @@ lbl_fn_80371790_00001C9C:
     beq lbl_fn_80371790_00001D4C
     addi r3, r1, 0x220
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r23
     addi r4, r1, 0x220
     addi r5, r1, 0x250
@@ -2196,7 +2196,7 @@ lbl_fn_80371790_00001D4C:
     beq lbl_fn_80371790_00001DA4
     addi r3, r1, 0x1c0
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r23
     addi r4, r1, 0x1c0
     addi r5, r1, 0x1f0
@@ -2219,7 +2219,7 @@ lbl_fn_80371790_00001DA4:
     beq lbl_fn_80371790_00001DFC
     addi r3, r1, 0x160
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r23
     addi r4, r1, 0x160
     addi r5, r1, 0x190
@@ -2259,7 +2259,7 @@ lbl_fn_80371790_00001DFC:
     lfs f1, 0x540(r20)
     lfs f2, 0x544(r20)
     lfs f3, 0x548(r20)
-    bl fn_805F9160
+    bl PSMTXScale
     addi r3, r1, 0x300
     addi r4, r1, 0xd0
     addi r5, r1, 0xa0
@@ -2289,7 +2289,7 @@ lbl_fn_80371790_00001DFC:
     stfs f0, 0x14(r1)
     stfs f7, 0x18(r1)
     stfs f8, 0x1c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f8, 0x324(r1)
     fmr f25, f1
     lfs f7, 0x314(r1)
@@ -2298,7 +2298,7 @@ lbl_fn_80371790_00001DFC:
     stfs f0, 0x20(r1)
     stfs f7, 0x24(r1)
     stfs f8, 0x28(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f8, 0x320(r1)
     fmr f26, f1
     lfs f7, 0x310(r1)
@@ -2307,7 +2307,7 @@ lbl_fn_80371790_00001DFC:
     stfs f0, 0x2c(r1)
     stfs f7, 0x30(r1)
     stfs f8, 0x34(r1)
-    bl fn_805F9940
+    bl PSVECMag
     frsp f7, f26
     stfs f1, 0x8(r1)
     frsp f0, f25

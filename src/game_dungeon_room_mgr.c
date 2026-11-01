@@ -21,7 +21,7 @@ extern void fn_803E0250(void);
 extern void fn_803E0AB4(void);
 extern void fn_804EB874(void);
 extern void fn_8059A268(void);
-extern void fn_805F9920(void);
+extern void PSVECSquareMag(void);
 
 /* External data declarations */
 extern u8 lbl_80750650[];
@@ -333,7 +333,7 @@ lbl_fn_803DE89C_0000035C:
     stfs f0, 0x14(r1)
     stfs f4, 0x18(r1)
     stfs f7, 0x1c(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fmuls f0, f31, f31
     fcmpo cr0, f1, f0
     bge lbl_fn_803DE89C_000003D4

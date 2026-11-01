@@ -25,8 +25,8 @@ extern void fn_80476130(void);
 extern void fn_805F89F0(void);
 extern void fn_805F8AC0(void);
 extern void fn_805F8CA0(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9940(void);
+extern void PSMTXMultVec(void);
+extern void PSVECMag(void);
 extern void fn_8067E23C(void);
 extern void fn_8068AE24(void);
 
@@ -2082,7 +2082,7 @@ lbl_fn_80092A4C_00001C1C:
     stfs f2, 0x10(r1)
     addi r3, r1, 0x30
     psq_st f1, 0x0(r30), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     psq_l f1, 0x0(r30), 0, 0
     addi r3, r1, 0x14
     lwz r30, lbl_8087EFB4
@@ -2103,7 +2103,7 @@ lbl_fn_80092A4C_00001C1C:
     stfs f0, 0x14(r1)
     stfs f8, 0x18(r1)
     stfs f11, 0x1c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x2c(r1)
     lfs f17, lbl_80880BF8
     fsubs f0, f1, f0

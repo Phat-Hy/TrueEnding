@@ -61,7 +61,7 @@ extern void fn_80239DAC(void);
 extern void fn_804F5B0C(void);
 extern void fn_804F5CA0(void);
 extern void fn_804F5E3C(void);
-extern void fn_805F9990(void);
+extern void PSVECDotProduct(void);
 extern void fn_80680770(void);
 extern void fn_80682428(void);
 extern void fn_80686EA4(void);
@@ -1338,7 +1338,7 @@ asm void fn_801A03E0(void)
 asm void fn_801A03E8(void)
 {
     nofralloc
-    b fn_805F9990
+    b PSVECDotProduct
 }
 
 asm void fn_801A03EC(void)

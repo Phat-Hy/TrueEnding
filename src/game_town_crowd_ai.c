@@ -31,8 +31,8 @@ extern void fn_803AC3D8(void);
 extern void fn_803AC708(void);
 extern void fn_803AC978(void);
 extern void fn_803ACD08(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9920(void);
+extern void PSMTXRotRad(void);
+extern void PSVECSquareMag(void);
 extern void fn_80680770(void);
 extern void fn_80684600(void);
 extern void fn_80686EA4(void);
@@ -527,7 +527,7 @@ lbl_fn_803CCDAC_00000514:
     lfs f1, 0x14(r23)
     addi r3, r1, 0x28
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     psq_l f1, 0x0(r29), 0, 0
     mr r3, r26
     psq_l f2, 0x8(r29), 0, 0
@@ -571,7 +571,7 @@ lbl_fn_803CCDAC_00000514:
     cmpwi r3, 0x0
     beq lbl_fn_803CCDAC_000005F8
     addi r3, r23, 0x18
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f30
     bge lbl_fn_803CCDAC_000005F8
     fmr f30, f1

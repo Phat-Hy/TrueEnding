@@ -66,10 +66,10 @@ extern void fn_80568F14(void);
 extern void fn_805693D0(void);
 extern void fn_80569664(void);
 extern void fn_8056A040(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9920(void);
-extern void fn_805F9940(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSVECSquareMag(void);
+extern void PSVECMag(void);
 extern void fn_80680CF8(void);
 extern void fn_80682428(void);
 extern void fn_80695B00(void);
@@ -1267,7 +1267,7 @@ lbl_fn_80566CF8_00000F04:
     stfs f4, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f6, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     mr r3, r31
     bl quest_checkCondition
 lbl_fn_80566CF8_00000F48:
@@ -1485,11 +1485,11 @@ lbl_fn_80566FB8_0000115C:
     stfs f3, 0x24(r1)
     stfs f0, 0x28(r1)
     lfs f1, 0x538(r31)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x20
     addi r3, r1, 0x68
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lwz r12, 0x0(r31)
     mr r3, r31
     addi r4, r1, 0x20
@@ -1569,11 +1569,11 @@ lbl_fn_80566FB8_000012A8:
     stfs f3, 0xc(r1)
     stfs f0, 0x10(r1)
     lfs f1, 0x538(r31)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x8
     addi r3, r1, 0x38
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lwz r12, 0x0(r31)
     mr r3, r31
     addi r4, r1, 0x8
@@ -1707,7 +1707,7 @@ lbl_fn_80567428_00001528:
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
 lbl_fn_80567428_00001570:
     lwz r0, 0xc58(r30)
     cmpwi r0, 0x0

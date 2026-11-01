@@ -26,10 +26,10 @@ extern void fn_80239DAC(void);
 extern void fn_8032A3D4(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9750(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9940(void);
+extern void PSMTXRotRad(void);
+extern void PSMTX44Identity(void);
+extern void PSVECNormalize(void);
+extern void PSVECMag(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 
@@ -690,7 +690,7 @@ lbl_fn_80328C6C_0000088C:
     addi r3, r1, 0x98
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80884F10
     addi r4, r1, 0x38
     lfs f30, 0xa0(r1)
@@ -740,7 +740,7 @@ lbl_fn_80328C6C_0000088C:
     stfs f6, 0xf4(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_80884F38
     fabs f3, f2
@@ -943,7 +943,7 @@ asm void fn_8032943C(void)
     stfs f4, 0x1c(r1)
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x28(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f0, 0x28(r1)
     addi r6, r1, 0x2c
     lfs f4, lbl_80885020
@@ -1015,7 +1015,7 @@ lbl_fn_8032943C_00000D28:
     stfs f4, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f6, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, lbl_80884F30
     fcmpo cr0, f1, f0
     bge lbl_fn_8032943C_00000D9C
@@ -1741,7 +1741,7 @@ lbl_fn_80329ED8_00001750:
     mr r4, r25
     psq_st f1, 0x0(r25), 0, 0
     stfs f2, 0xa0(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x530(r30)
     mr r5, r23
     psq_l f1, 0x528(r30), 0, 0
@@ -1824,7 +1824,7 @@ lbl_fn_80329ED8_000018C0:
     addi r3, r1, 0xb0
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80884F10
     addi r4, r1, 0x38
     lfs f31, 0xb8(r1)
@@ -1874,7 +1874,7 @@ lbl_fn_80329ED8_000018C0:
     stfs f6, 0x10c(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_80884F38
     fabs f3, f2

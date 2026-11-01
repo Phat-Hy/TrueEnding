@@ -19,10 +19,10 @@ extern void atn_Task_constructor(void);
 extern void fn_80116BD4(void);
 extern void fn_803918EC(void);
 extern void fn_80393BEC(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9750(void);
-extern void fn_805F98D0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSMTX44Identity(void);
+extern void PSVECNormalize(void);
 extern void fn_80680CF8(void);
 extern void fn_8068A850(void);
 extern void fn_8068AEA4(void);
@@ -121,7 +121,7 @@ asm void fn_803920C8(void)
     stfs f5, 0x64(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x88(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     addi r31, r1, 0x74
     bl fn_80680CF8
     lis r28, 0x4178
@@ -243,7 +243,7 @@ lbl_fn_803920C8_00000270:
     addi r3, r1, 0x98
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_808858E8
     addi r4, r1, 0x38
     lfs f30, 0xa0(r1)
@@ -293,7 +293,7 @@ lbl_fn_803920C8_00000270:
     stfs f6, 0xf4(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_808859C8
     fabs f3, f2
@@ -328,11 +328,11 @@ lbl_fn_803920C8_000003A0:
     lfs f1, 0x6c(r1)
     stfs f2, 0x4c(r1)
     stfs f2, 0x70(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x74
     addi r3, r1, 0x108
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f3, 0x8c(r1)
     addi r3, r1, 0x8c
     lfs f0, 0x74(r1)
@@ -1227,7 +1227,7 @@ asm void fn_80392FE8(void)
     stfs f27, 0x8(r1)
     stfs f26, 0xc(r1)
     stfs f25, 0x10(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     addi r3, r1, 0x68
     lfs f2, 0x70(r1)
     psq_l f1, 0x0(r3), 0, 0

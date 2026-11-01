@@ -47,10 +47,10 @@ extern void fn_803EA77C(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9750(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9940(void);
+extern void PSMTXRotRad(void);
+extern void PSMTX44Identity(void);
+extern void PSVECNormalize(void);
+extern void PSVECMag(void);
 extern void fn_80680CF8(void);
 extern void fn_80682428(void);
 extern void fn_80682544(void);
@@ -159,7 +159,7 @@ asm void fn_80263CF0(void)
     stfs f4, 0x78(r1)
     stfs f0, 0x74(r1)
     stfs f6, 0x7c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x7
     bne lbl_fn_80263CF0_000002B8
@@ -172,7 +172,7 @@ asm void fn_80263CF0(void)
     lfs f2, 0x1090(r29)
     stfs f2, 0x70(r1)
     psq_st f1, 0x0(r31), 0, 0
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, lbl_80883638
     fmr f31, f1
     fcmpo cr0, f1, f0
@@ -184,7 +184,7 @@ asm void fn_80263CF0(void)
     psq_st f1, 0x0(r30), 0, 0
     mr r4, r30
     stfs f2, 0x58(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x58(r1)
     addi r31, r1, 0x5c
     psq_l f1, 0x0(r30), 0, 0
@@ -217,7 +217,7 @@ lbl_fn_80263CF0_0000015C:
     addi r3, r1, 0x98
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80883600
     addi r4, r1, 0x38
     lfs f29, 0xa0(r1)
@@ -267,7 +267,7 @@ lbl_fn_80263CF0_0000015C:
     stfs f6, 0xf4(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_8088360C
     fabs f3, f2
@@ -442,7 +442,7 @@ asm void fn_802640FC(void)
     stfs f4, 0x6c(r1)
     stfs f0, 0x68(r1)
     stfs f6, 0x70(r1)
-    bl fn_805F9940
+    bl PSVECMag
     addi r3, r1, 0x68
     addi r30, r1, 0x50
     fmr f31, f1
@@ -452,7 +452,7 @@ asm void fn_802640FC(void)
     psq_st f1, 0x0(r30), 0, 0
     mr r4, r30
     stfs f2, 0x58(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x58(r1)
     addi r29, r1, 0x5c
     psq_l f1, 0x0(r30), 0, 0
@@ -485,7 +485,7 @@ lbl_fn_802640FC_00000520:
     addi r3, r1, 0x80
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80883600
     addi r4, r1, 0x38
     lfs f29, 0x88(r1)
@@ -535,7 +535,7 @@ lbl_fn_802640FC_00000520:
     stfs f6, 0xdc(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_8088360C
     fabs f3, f2
@@ -699,7 +699,7 @@ lbl_fn_8026442C_000007E8:
     stfs f4, 0x54(r1)
     stfs f0, 0x50(r1)
     stfs f6, 0x58(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x58(r1)
     addi r31, r1, 0x50
     lfs f0, lbl_8088360C
@@ -728,7 +728,7 @@ lbl_fn_8026442C_0000089C:
     addi r3, r1, 0xa0
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80883600
     addi r4, r1, 0x14
     lfs f4, 0xa8(r1)
@@ -778,7 +778,7 @@ lbl_fn_8026442C_0000089C:
     stfs f13, 0x8c(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x1c(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x1c(r1)
     lfs f0, lbl_8088360C
     fabs f3, f2
@@ -989,7 +989,7 @@ asm void fn_802648CC(void)
     stfs f4, 0x6c(r1)
     stfs f0, 0x68(r1)
     stfs f7, 0x70(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x70(r1)
     addi r31, r1, 0x68
     lfs f0, lbl_8088360C
@@ -1018,7 +1018,7 @@ lbl_fn_802648CC_00000CC8:
     addi r3, r1, 0xb8
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80883600
     addi r4, r1, 0x14
     lfs f4, 0xc0(r1)
@@ -1068,7 +1068,7 @@ lbl_fn_802648CC_00000CC8:
     stfs f13, 0xa4(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x1c(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x1c(r1)
     lfs f0, lbl_8088360C
     fabs f3, f2
@@ -1164,7 +1164,7 @@ lbl_fn_802648CC_00000EB8:
     stfs f4, 0x58(r1)
     stfs f0, 0x50(r1)
     stfs f3, 0x54(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lwz r3, lbl_8087F048
     mr r4, r30
     lwz r5, 0x638(r30)

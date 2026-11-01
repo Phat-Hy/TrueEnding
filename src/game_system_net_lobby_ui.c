@@ -73,8 +73,8 @@ extern void fn_8047EFD8(void);
 extern void fn_8047F364(void);
 extern void fn_8047F420(void);
 extern void fn_80572B70(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -1683,7 +1683,7 @@ lbl_fn_803A2E20_00001550:
     stfs f4, 0x24(r1)
     stfs f0, 0x20(r1)
     stfs f6, 0x28(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80885B30
     fcmpo cr0, f1, f0
     bge lbl_fn_803A2E20_000018E8
@@ -1792,7 +1792,7 @@ lbl_fn_803A2E20_00001704:
     stfs f4, 0x48(r1)
     stfs f0, 0x44(r1)
     stfs f6, 0x4c(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fabs f3, f1
     lfs f0, lbl_80885B24
     frsp f3, f3
@@ -1800,7 +1800,7 @@ lbl_fn_803A2E20_00001704:
     blt lbl_fn_803A2E20_0000175C
     addi r3, r1, 0x44
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_803A2E20_0000175C:
     lfs f4, 0x44(r1)
     addi r4, r1, 0x14

@@ -36,8 +36,8 @@ extern void quest_checkCondition(void);
 extern void fn_80219558(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getName(void);
-extern void fn_805F90D0(void);
-extern void fn_805F9940(void);
+extern void PSMTXTrans(void);
+extern void PSVECMag(void);
 extern void fn_80680CF8(void);
 extern void fn_806827C4(void);
 extern void fn_806958E0(void);
@@ -950,7 +950,7 @@ lbl_fn_80225DDC_00000BD8:
     addi r3, r1, 0x80
     lfs f2, 0x14(r4)
     lfs f3, 0x18(r4)
-    bl fn_805F90D0
+    bl PSMTXTrans
     addi r4, r1, 0x80
     addi r3, r1, 0x14
     psq_l f1, 0x0(r4), 0, 0
@@ -971,7 +971,7 @@ lbl_fn_80225DDC_00000BD8:
     stfs f0, 0x14(r1)
     stfs f7, 0x18(r1)
     stfs f8, 0x1c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f8, 0xa4(r1)
     fmr f30, f1
     lfs f7, 0x94(r1)
@@ -980,7 +980,7 @@ lbl_fn_80225DDC_00000BD8:
     stfs f0, 0x20(r1)
     stfs f7, 0x24(r1)
     stfs f8, 0x28(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f8, 0xa0(r1)
     fmr f31, f1
     lfs f7, 0x90(r1)
@@ -989,7 +989,7 @@ lbl_fn_80225DDC_00000BD8:
     stfs f0, 0x2c(r1)
     stfs f7, 0x30(r1)
     stfs f8, 0x34(r1)
-    bl fn_805F9940
+    bl PSVECMag
     frsp f7, f31
     stfs f1, 0x8(r1)
     frsp f0, f30

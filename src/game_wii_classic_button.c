@@ -40,7 +40,7 @@ extern void fn_80538B1C(void);
 extern void fn_80538DC8(void);
 extern void fn_80538FD8(void);
 extern void fn_80541BDC(void);
-extern void fn_805F9940(void);
+extern void PSVECMag(void);
 extern void fn_80682428(void);
 extern void fn_80695B00(void);
 
@@ -1019,7 +1019,7 @@ lbl_fn_8056173C_00000BAC:
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fcmpo cr0, f1, f31
     bge lbl_fn_8056173C_00000C10
     fmr f31, f1

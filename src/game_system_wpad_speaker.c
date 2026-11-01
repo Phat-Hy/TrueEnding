@@ -47,8 +47,8 @@ extern void fn_80541214(void);
 extern void fn_8054A340(void);
 extern void fn_8056BF90(void);
 extern void fn_8056F2FC(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -1532,11 +1532,11 @@ lbl_world_Manager_postUpdate_00001414:
     stfs f0, 0x38(r1)
     stfs f3, 0x3c(r1)
     lfs f1, 0x14(r30)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x34
     addi r3, r1, 0x50
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f3, 0xc(r30)
     addi r4, r1, 0x28
     lfs f0, 0x3c(r1)

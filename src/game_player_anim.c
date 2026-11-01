@@ -20,7 +20,7 @@ extern void fn_80171DB0(void);
 extern void fn_8017B3C0(void);
 extern void fn_8017B434(void);
 extern void fn_8017BC4C(void);
-extern void fn_805F9940(void);
+extern void PSVECMag(void);
 extern void fn_805F99F0(void);
 extern void fn_80682428(void);
 extern void fn_806958E0(void);
@@ -309,7 +309,7 @@ lbl_fn_8011CD84_0000030C:
     stfs f4, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f6, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x5b0(r31)
     lfs f3, 0x5b0(r29)
     lfs f4, lbl_808817A4

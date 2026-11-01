@@ -27,8 +27,8 @@ extern void fn_8050FD24(void);
 extern void fn_8051125C(void);
 extern void fn_80521014(void);
 extern void fn_805F89F0(void);
-extern void fn_805F9160(void);
-extern void fn_805F93C0(void);
+extern void PSMTXScale(void);
+extern void PSMTXMultVec(void);
 
 /* External data declarations */
 extern u8 lbl_8075BE80[];
@@ -891,7 +891,7 @@ lbl_fn_8051D868_00000B1C:
     stfs f30, 0x74(r1)
     stfs f30, 0x78(r1)
     stfs f30, 0x7c(r1)
-    bl fn_805F9160
+    bl PSMTXScale
     mr r3, r17
     addi r4, r1, 0x320
     addi r5, r1, 0x350
@@ -1014,7 +1014,7 @@ lbl_fn_8051D868_00000CDC:
     stfs f30, 0x5c(r1)
     stfs f30, 0x60(r1)
     stfs f30, 0x64(r1)
-    bl fn_805F9160
+    bl PSMTXScale
     mr r3, r17
     addi r4, r1, 0x290
     addi r5, r1, 0x2c0
@@ -1269,7 +1269,7 @@ lbl_fn_8051D868_00001078:
     stfs f0, 0x2c(r1)
     stfs f0, 0x30(r1)
     stfs f0, 0x34(r1)
-    bl fn_805F9160
+    bl PSMTXScale
     mr r3, r16
     addi r4, r1, 0x200
     addi r5, r1, 0x230
@@ -1472,7 +1472,7 @@ lbl_fn_8051D868_00001380:
     lwz r3, 0x19e8(r20)
     lwz r3, 0x0(r3)
     addi r3, r3, 0x8c
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x110
     addi r5, r1, 0x1a0

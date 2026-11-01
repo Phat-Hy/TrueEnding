@@ -26,12 +26,12 @@ extern void fn_801C3414(void);
 extern void fn_80219558(void);
 extern void fn_803E2110(void);
 extern void fn_803EA77C(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9750(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
-extern void fn_805F9940(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSMTX44Identity(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
+extern void PSVECMag(void);
 extern void fn_80680CF8(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
@@ -573,11 +573,11 @@ lbl_fn_801BB1C8_000005DC:
     fsubs f0, f3, f0
     stfs f4, 0x60(r1)
     stfs f0, 0x5c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fmr f31, f1
     addi r3, r1, 0x5c
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f0, lbl_80882588
     addi r3, r1, 0x5c
     lfs f2, 0x64(r1)
@@ -622,7 +622,7 @@ lbl_fn_801BB1C8_0000070C:
     addi r3, r1, 0x68
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80882550
     addi r4, r1, 0x38
     lfs f30, 0x70(r1)
@@ -672,7 +672,7 @@ lbl_fn_801BB1C8_0000070C:
     stfs f6, 0xc4(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_8088255C
     fabs f3, f2
@@ -880,7 +880,7 @@ lbl_fn_801BB514_00000A54:
     stfs f0, 0x44(r1)
     stfs f3, 0x48(r1)
     stfs f4, 0x4c(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80882554
     fcmpo cr0, f1, f0
     bge lbl_fn_801BB514_00000AF4
@@ -906,7 +906,7 @@ lbl_fn_801BB514_00000AF4:
     psq_l f1, 0x0(r4), 0, 0
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x4c(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80882554
     fcmpo cr0, f1, f0
     bge lbl_fn_801BB514_00000B58
@@ -955,7 +955,7 @@ lbl_fn_801BB514_00000B74:
     stfs f0, 0x2c(r1)
     stfs f3, 0x30(r1)
     stfs f4, 0x34(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80882554
     fcmpo cr0, f1, f0
     bge lbl_fn_801BB514_00000C08
@@ -1023,11 +1023,11 @@ asm void fn_801BB8BC(void)
     stfs f0, 0x68(r1)
     stfs f0, 0x6c(r1)
     stfs f3, 0x70(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x68
     addi r3, r1, 0x78
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lwz r10, 0x4(r27)
     addi r30, r1, 0x5c
     addi r29, r1, 0x50
@@ -1287,11 +1287,11 @@ asm void fn_801BBC48(void)
     fsubs f0, f3, f0
     stfs f4, 0x60(r1)
     stfs f0, 0x5c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fmr f31, f1
     addi r3, r1, 0x5c
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f0, lbl_80882590
     addi r3, r1, 0x5c
     lfs f2, 0x64(r1)
@@ -1336,7 +1336,7 @@ lbl_fn_801BBC48_0000117C:
     addi r3, r1, 0x68
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80882550
     addi r4, r1, 0x38
     lfs f30, 0x70(r1)
@@ -1386,7 +1386,7 @@ lbl_fn_801BBC48_0000117C:
     stfs f6, 0xc4(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_8088255C
     fabs f3, f2
@@ -1497,7 +1497,7 @@ lbl_fn_801BBF84_00001398:
     stfs f4, 0x18(r1)
     stfs f0, 0x14(r1)
     stfs f6, 0x1c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fcmpo cr0, f1, f31
     bge lbl_fn_801BBF84_000013F8
     fmr f31, f1
@@ -1530,7 +1530,7 @@ lbl_fn_801BBF84_000013F8:
     stfs f0, 0x20(r1)
     stfs f11, 0x24(r1)
     stfs f3, 0x28(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80882554
     fcmpo cr0, f1, f0
     bge lbl_fn_801BBF84_000014A8

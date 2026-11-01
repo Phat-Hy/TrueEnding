@@ -19,12 +19,12 @@ extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_803B3B38(void);
 extern void fn_8045EB60(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9750(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
-extern void fn_805F9940(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSMTX44Identity(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
+extern void PSVECMag(void);
 extern void fn_80686A64(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
@@ -160,7 +160,7 @@ lbl_fn_804596E8_000000D4:
     stfs f2, 0x118(r1)
     stfs f2, 0x130(r1)
     stfs f0, 0x12c(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f4, 0x128(r1)
     lfs f5, lbl_80886C64
     lfs f3, 0x12c(r1)
@@ -212,7 +212,7 @@ lbl_fn_804596E8_00000154:
     mr r4, r3
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x88(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     psq_l f1, 0x0(r30), 0, 0
     addi r4, r1, 0x8c
     psq_st f1, 0x0(r4), 0, 0
@@ -267,7 +267,7 @@ lbl_fn_804596E8_000002B0:
     addi r3, r1, 0x1e8
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80886C34
     addi r4, r1, 0xbc
     lfs f4, 0x1f0(r1)
@@ -317,7 +317,7 @@ lbl_fn_804596E8_000002B0:
     stfs f13, 0x1d4(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0xc4(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0xc4(r1)
     lfs f0, lbl_80886C6C
     fabs f3, f2
@@ -423,7 +423,7 @@ lbl_fn_804596E8_00000478:
     mr r4, r3
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x10(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     psq_l f1, 0x0(r30), 0, 0
     addi r4, r1, 0x14
     psq_st f1, 0x0(r4), 0, 0
@@ -478,7 +478,7 @@ lbl_fn_804596E8_000005D4:
     addi r3, r1, 0x178
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80886C34
     addi r4, r1, 0x44
     lfs f4, 0x180(r1)
@@ -528,7 +528,7 @@ lbl_fn_804596E8_000005D4:
     stfs f13, 0x164(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x4c(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x4c(r1)
     lfs f0, lbl_80886C6C
     fabs f3, f2
@@ -1371,11 +1371,11 @@ lbl_fn_8045A8F0_00001288:
     stfs f27, 0x54(r1)
     stfs f28, 0x58(r1)
     lfs f1, 0x538(r27)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x50
     addi r3, r1, 0x78
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f3, 0x54(r1)
     add r3, r24, r26
     lfs f0, 0x50(r1)
@@ -1602,11 +1602,11 @@ lbl_fn_8045ABB4_000015E0:
     stfs f3, 0xb4(r1)
     stfs f3, 0xb8(r1)
     stfs f0, 0xbc(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0xb4
     addi r3, r1, 0x148
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f0, lbl_80886C9C
     fcmpo cr0, f29, f0
     ble lbl_fn_8045ABB4_00001654
@@ -1735,7 +1735,7 @@ lbl_fn_8045ABB4_000017A8:
     stfs f4, 0x6b8(r31)
     stfs f3, 0x6c0(r31)
     stfs f0, 0x6bc(r31)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, lbl_80886C50
     fcmpo cr0, f1, f0
     bge lbl_fn_8045ABB4_00001800
@@ -1829,7 +1829,7 @@ lbl_fn_8045ABB4_000018E8:
     stfs f0, 0x8c(r1)
     stfs f8, 0x90(r1)
     stfs f7, 0x94(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80886CAC
     fcmpo cr0, f1, f0
     ble lbl_fn_8045ABB4_00001B74
@@ -1843,7 +1843,7 @@ lbl_fn_8045ABB4_000018E8:
     mr r4, r29
     psq_st f1, 0x0(r29), 0, 0
     stfs f2, 0x64(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x64(r1)
     addi r30, r1, 0x68
     psq_l f1, 0x0(r29), 0, 0
@@ -1876,7 +1876,7 @@ lbl_fn_8045ABB4_000019E4:
     addi r3, r1, 0xd8
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80886C34
     addi r4, r1, 0x38
     lfs f30, 0xe0(r1)
@@ -1926,7 +1926,7 @@ lbl_fn_8045ABB4_000019E4:
     stfs f6, 0x134(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_80886C6C
     fabs f3, f2

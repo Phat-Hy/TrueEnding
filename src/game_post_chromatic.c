@@ -80,8 +80,8 @@ extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9940(void);
+extern void PSVECNormalize(void);
+extern void PSVECMag(void);
 extern void fn_80682428(void);
 extern void fn_80682544(void);
 
@@ -1021,7 +1021,7 @@ asm void fn_802CD73C(void)
     stfs f4, 0xcc(r1)
     stfs f0, 0xc8(r1)
     stfs f6, 0xd0(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lbz r0, 0x1549(r31)
     fmr f31, f1
     cmpwi r0, 0x0
@@ -1253,7 +1253,7 @@ lbl_fn_802CD73C_00000F94:
     psq_l f1, 0x0(r5), 0, 0
     psq_st f1, 0x0(r30), 0, 0
     stfs f2, 0x78(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     psq_l f1, 0x0(r30), 0, 0
     addi r4, r31, 0x14cc
     lfs f2, 0x78(r1)
@@ -1373,7 +1373,7 @@ lbl_fn_802CD73C_00001154:
     psq_l f1, 0x0(r5), 0, 0
     psq_st f1, 0x0(r30), 0, 0
     stfs f2, 0x54(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     psq_l f1, 0x0(r30), 0, 0
     addi r4, r31, 0x14cc
     lfs f2, 0x54(r1)

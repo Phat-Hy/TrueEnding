@@ -38,9 +38,9 @@ extern void fn_802DD1B4(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_803EEE10(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9750(void);
-extern void fn_805F98D0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTX44Identity(void);
+extern void PSVECNormalize(void);
 extern void fn_8068AEA4(void);
 
 /* External data declarations */
@@ -662,7 +662,7 @@ lbl_fn_802DAA38_00000878:
     addi r3, r1, 0x160
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f13, 0x168(r1)
     mr r4, r25
     lfs f12, 0x164(r1)
@@ -710,7 +710,7 @@ lbl_fn_802DAA38_00000878:
     stfs f4, 0x1bc(r1)
     psq_st f1, 0x0(r25), 0, 0
     stfs f2, 0x50(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x50(r1)
     fabs f0, f2
     frsp f0, f0
@@ -754,7 +754,7 @@ lbl_fn_802DAA38_00000998:
     stfs f2, 0xd0(r1)
     stfs f2, 0x13c(r1)
     stfs f31, 0x138(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f4, 0x134(r1)
     mr r3, r26
     lfs f3, 0x138(r1)

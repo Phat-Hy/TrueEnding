@@ -54,8 +54,8 @@ extern void world_getGlobalFlag(void);
 extern void atn_LoadHandle_getName(void);
 extern void fn_80481654(void);
 extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F90D0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXTrans(void);
 extern void fn_80680CF8(void);
 extern void fn_80695AD0(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -1539,7 +1539,7 @@ lbl_fn_8014C540_00001428:
     lfs f3, 0x8c(r1)
     fmadds f2, f8, f7, f0
     stfs f2, 0x88(r1)
-    bl fn_805F90D0
+    bl PSMTXTrans
     addi r3, r1, 0x3c0
     addi r27, r28, 0xf20
     psq_l f1, 0x0(r3), 0, 0
@@ -1574,7 +1574,7 @@ lbl_fn_8014C540_00001428:
     beq lbl_fn_8014C540_00001520
     addi r3, r1, 0x330
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r29
     addi r4, r1, 0x330
     addi r5, r1, 0x360
@@ -1599,7 +1599,7 @@ lbl_fn_8014C540_00001520:
     beq lbl_fn_8014C540_00001580
     addi r3, r1, 0x2d0
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r29
     addi r4, r1, 0x2d0
     addi r5, r1, 0x300
@@ -1624,7 +1624,7 @@ lbl_fn_8014C540_00001580:
     beq lbl_fn_8014C540_000015E0
     addi r3, r1, 0x270
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r29
     addi r4, r1, 0x270
     addi r5, r1, 0x2a0
@@ -1702,7 +1702,7 @@ lbl_fn_8014C540_00001698:
     lfs f3, 0x80(r1)
     fmadds f2, f8, f7, f0
     stfs f2, 0x7c(r1)
-    bl fn_805F90D0
+    bl PSMTXTrans
     addi r3, r1, 0x390
     addi r27, r28, 0xf20
     psq_l f1, 0x0(r3), 0, 0
@@ -1737,7 +1737,7 @@ lbl_fn_8014C540_00001698:
     beq lbl_fn_8014C540_00001790
     addi r3, r1, 0x1b0
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r29
     addi r4, r1, 0x1b0
     addi r5, r1, 0x1e0
@@ -1762,7 +1762,7 @@ lbl_fn_8014C540_00001790:
     beq lbl_fn_8014C540_000017F0
     addi r3, r1, 0x150
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r29
     addi r4, r1, 0x150
     addi r5, r1, 0x180
@@ -1787,7 +1787,7 @@ lbl_fn_8014C540_000017F0:
     beq lbl_fn_8014C540_00001850
     addi r3, r1, 0xf0
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r29
     addi r4, r1, 0xf0
     addi r5, r1, 0x120

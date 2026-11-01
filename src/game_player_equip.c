@@ -42,8 +42,8 @@ extern void atn_LoadHandle_isLoading(void);
 extern void fn_804741C0(void);
 extern void fn_804768B4(void);
 extern void fn_80476CE4(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
 extern void fn_80682544(void);
 extern void fn_80695720(void);
 extern void fn_80695A50(void);
@@ -1009,7 +1009,7 @@ lbl_fn_8012133C_00000BFC:
     addi r3, r1, 0xe8
     li r4, 0x79
     lfs f1, 0x538(r5)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     psq_l f1, 0x14(r24), 0, 0
     mr r4, r26
     lfs f2, 0x1c(r24)
@@ -1017,7 +1017,7 @@ lbl_fn_8012133C_00000BFC:
     stfs f2, 0x68(r1)
     addi r3, r1, 0xe8
     psq_st f1, 0x0(r26), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lwz r4, 0x0(r15)
     addi r8, r1, 0x78
     lfs f0, 0x68(r1)
@@ -1233,7 +1233,7 @@ lbl_fn_8012133C_00000F34:
     addi r3, r1, 0xb8
     li r4, 0x79
     lfs f1, 0x538(r5)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     psq_l f1, 0x14(r24), 0, 0
     mr r4, r25
     lfs f2, 0x1c(r24)
@@ -1241,7 +1241,7 @@ lbl_fn_8012133C_00000F34:
     stfs f2, 0x74(r1)
     addi r3, r1, 0xb8
     psq_st f1, 0x0(r25), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lwz r7, 0x0(r15)
     mr r4, r18
     lfs f0, 0x74(r1)

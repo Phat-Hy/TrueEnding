@@ -51,9 +51,9 @@ extern void fn_805F1B50(void);
 extern void fn_805F1D30(void);
 extern void fn_805F8980(void);
 extern void fn_805F89F0(void);
-extern void fn_805F9160(void);
-extern void fn_805F95A0(void);
-extern void fn_805F9940(void);
+extern void PSMTXScale(void);
+extern void PSMTXMultVecArraySR(void);
+extern void PSVECMag(void);
 extern void fn_805FEB00(void);
 extern void fn_805FF120(void);
 extern void fn_80612E80(void);
@@ -313,7 +313,7 @@ lbl_fn_803639A0_00000220:
     lfs f1, 0x3e0(r29)
     lfs f2, 0x3e4(r29)
     lfs f3, 0x3e8(r29)
-    bl fn_805F9160
+    bl PSMTXScale
     mr r3, r31
     addi r4, r1, 0x80
     addi r5, r1, 0x50
@@ -344,7 +344,7 @@ lbl_fn_803639A0_00000220:
     stfs f0, 0x14(r1)
     stfs f7, 0x18(r1)
     stfs f8, 0x1c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f8, 0xd4(r1)
     fmr f30, f1
     lfs f7, 0xc4(r1)
@@ -353,7 +353,7 @@ lbl_fn_803639A0_00000220:
     stfs f0, 0x20(r1)
     stfs f7, 0x24(r1)
     stfs f8, 0x28(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f8, 0xd0(r1)
     fmr f31, f1
     lfs f7, 0xc0(r1)
@@ -362,7 +362,7 @@ lbl_fn_803639A0_00000220:
     stfs f0, 0x2c(r1)
     stfs f7, 0x30(r1)
     stfs f8, 0x34(r1)
-    bl fn_805F9940
+    bl PSVECMag
     frsp f7, f31
     stfs f1, 0x8(r1)
     frsp f0, f30
@@ -1503,7 +1503,7 @@ lbl_dvd_initFatalErrorScreen_00001278:
     fdivs f1, f31, f1
     fsubs f0, f0, f30
     fdivs f2, f31, f0
-    bl fn_805F9160
+    bl PSMTXScale
     addi r3, r1, 0x58
     li r4, 0x1e
     li r5, 0x1
@@ -1629,7 +1629,7 @@ lbl_fn_80364BE8_0000149C:
     stw r4, 0x80(r1)
     lfd f0, 0x80(r1)
     fsubs f4, f0, f4
-    bl fn_805F95A0
+    bl PSMTXMultVecArraySR
     addi r3, r1, 0x38
     li r4, 0x1
     bl fn_80618290

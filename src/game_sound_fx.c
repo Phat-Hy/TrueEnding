@@ -92,9 +92,9 @@ extern void atn_LoadHandle_isLoading(void);
 extern void fn_80477694(void);
 extern void fn_804776F4(void);
 extern void fn_8054D798(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F98D0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSVECNormalize(void);
 extern void fn_80682544(void);
 extern void fn_80684600(void);
 extern void fn_806868C4(void);
@@ -953,11 +953,11 @@ asm void fn_800EB4AC(void)
     stfs f0, 0x94(r1)
     lfs f1, 0x538(r3)
     addi r3, r1, 0x98
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x8c
     addi r3, r1, 0x98
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r29, r1, 0x8c
     lfs f2, 0x94(r1)
     addi r30, r1, 0x68
@@ -1006,7 +1006,7 @@ asm void fn_800EB4AC(void)
     stfs f6, 0x40(r1)
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0x4c(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     psq_l f1, 0x0(r28), 0, 0
     lfs f2, 0x4c(r1)
     psq_st f1, 0x0(r29), 0, 0
@@ -1042,7 +1042,7 @@ lbl_fn_800EB4AC_00000C28:
     stfs f6, 0x28(r1)
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0x34(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     psq_l f1, 0x0(r28), 0, 0
     addi r28, r1, 0x14
     lfs f2, 0x34(r1)
@@ -1066,7 +1066,7 @@ lbl_fn_800EB4AC_00000C28:
     psq_l f1, 0x0(r5), 0, 0
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0x1c(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     psq_l f1, 0x0(r28), 0, 0
     lfs f2, 0x1c(r1)
     psq_st f1, 0x0(r30), 0, 0

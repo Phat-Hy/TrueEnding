@@ -32,7 +32,7 @@ extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void taskManager_updateTasks(void);
-extern void fn_805F93C0(void);
+extern void PSMTXMultVec(void);
 extern void fn_805F9EF0(void);
 extern void fn_805FA710(void);
 extern void fn_805FA770(void);
@@ -2041,7 +2041,7 @@ lbl_gimmick_updateAll_00001AAC:
     stfs f18, 0x298(r1)
     psq_st f1, 0x0(r6), 0, 0
     stfs f2, 0x2a4(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     fadds f3, f25, f22
     lfs f2, 0x2a4(r1)
     fadds f0, f26, f23
@@ -2062,7 +2062,7 @@ lbl_gimmick_updateAll_00001AAC:
     stfs f18, 0x280(r1)
     psq_st f1, 0x0(r6), 0, 0
     stfs f2, 0x28c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     fadds f3, f25, f22
     lfs f2, 0x28c(r1)
     fadds f0, f24, f23
@@ -2083,7 +2083,7 @@ lbl_gimmick_updateAll_00001AAC:
     stfs f18, 0x268(r1)
     psq_st f1, 0x0(r6), 0, 0
     stfs f2, 0x274(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     fadds f3, f27, f22
     lfs f2, 0x274(r1)
     fadds f0, f24, f23
@@ -2104,7 +2104,7 @@ lbl_gimmick_updateAll_00001AAC:
     stfs f18, 0x250(r1)
     psq_st f1, 0x0(r6), 0, 0
     stfs f2, 0x25c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     slwi r0, r17, 7
     addi r3, r1, 0x254
     psq_l f1, 0x0(r3), 0, 0
@@ -2358,7 +2358,7 @@ lbl_gimmick_updateAll_00001FAC:
     stfs f18, 0x1f8(r1)
     psq_st f1, 0x0(r6), 0, 0
     stfs f2, 0x204(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     fadds f3, f25, f17
     lfs f2, 0x204(r1)
     fadds f0, f26, f16
@@ -2378,7 +2378,7 @@ lbl_gimmick_updateAll_00001FAC:
     stfs f18, 0x1e0(r1)
     psq_st f1, 0x0(r6), 0, 0
     stfs f2, 0x1ec(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     fadds f3, f25, f17
     lfs f2, 0x1ec(r1)
     fadds f0, f24, f16
@@ -2397,7 +2397,7 @@ lbl_gimmick_updateAll_00001FAC:
     stfs f18, 0x1c8(r1)
     psq_st f1, 0x0(r14), 0, 0
     stfs f2, 0x1d4(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     fadds f3, f27, f17
     lfs f2, 0x1d4(r1)
     fadds f0, f24, f16
@@ -2415,7 +2415,7 @@ lbl_gimmick_updateAll_00001FAC:
     stfs f18, 0x1b0(r1)
     psq_st f1, 0x0(r26), 0, 0
     stfs f2, 0x1bc(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     slwi r0, r17, 7
     psq_l f1, 0x0(r26), 0, 0
     add r4, r29, r0
@@ -2689,7 +2689,7 @@ lbl_gimmick_updateAll_000024A0:
     psq_l f1, 0x0(r6), 0, 0
     psq_st f1, 0x0(r25), 0, 0
     stfs f2, 0x164(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     fadds f3, f25, f16
     lfs f2, 0x164(r1)
     fadds f0, f26, f17
@@ -2707,7 +2707,7 @@ lbl_gimmick_updateAll_000024A0:
     stfs f18, 0x140(r1)
     psq_st f1, 0x0(r23), 0, 0
     stfs f2, 0x14c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     fadds f3, f25, f16
     lfs f2, 0x14c(r1)
     fadds f0, f24, f17
@@ -2725,7 +2725,7 @@ lbl_gimmick_updateAll_000024A0:
     stfs f18, 0x128(r1)
     psq_st f1, 0x0(r21), 0, 0
     stfs f2, 0x134(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     fadds f3, f27, f16
     lfs f2, 0x134(r1)
     fadds f0, f24, f17
@@ -2743,7 +2743,7 @@ lbl_gimmick_updateAll_000024A0:
     stfs f18, 0x110(r1)
     psq_st f1, 0x0(r19), 0, 0
     stfs f2, 0x11c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     slwi r0, r17, 7
     psq_l f1, 0x0(r19), 0, 0
     add r4, r29, r0
@@ -2829,7 +2829,7 @@ lbl_gimmick_updateAll_000026CC:
     addi r3, r3, 0x3268
     psq_st f1, 0x0(r6), 0, 0
     stfs f2, 0xc4(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0xc4(r1)
     addi r3, r1, 0xbc
     stfs f2, 0x2c0(r1)
@@ -2848,7 +2848,7 @@ lbl_gimmick_updateAll_000026CC:
     stfs f18, 0xa0(r1)
     psq_st f1, 0x0(r6), 0, 0
     stfs f2, 0xac(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0xac(r1)
     addi r3, r1, 0xa4
     stfs f2, 0x2cc(r1)
@@ -2867,7 +2867,7 @@ lbl_gimmick_updateAll_000026CC:
     stfs f18, 0x88(r1)
     psq_st f1, 0x0(r6), 0, 0
     stfs f2, 0x94(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0x94(r1)
     addi r3, r1, 0x8c
     stfs f2, 0x2d8(r1)
@@ -2886,7 +2886,7 @@ lbl_gimmick_updateAll_000026CC:
     stfs f18, 0x70(r1)
     psq_st f1, 0x0(r6), 0, 0
     stfs f2, 0x7c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     slwi r0, r17, 7
     addi r3, r1, 0x74
     add r4, r29, r0

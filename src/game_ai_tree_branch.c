@@ -67,9 +67,9 @@ extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_8059C6E0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9920(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSVECSquareMag(void);
 extern void fn_80680770(void);
 extern void fn_80682428(void);
 extern void fn_80682544(void);
@@ -633,11 +633,11 @@ asm void fn_80259AB4(void)
     stfs f5, 0x4c(r1)
     stfs f3, 0x50(r1)
     stfs f5, 0x54(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x4c
     addi r3, r1, 0xa0
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f3, 0x6c(r1)
     addi r3, r1, 0x70
     lfs f0, 0x54(r1)
@@ -666,11 +666,11 @@ asm void fn_80259AB4(void)
     stfs f0, 0x28(r1)
     stfs f3, 0x2c(r1)
     stfs f6, 0x30(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x28
     addi r3, r1, 0x70
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f3, 0x6c(r1)
     mr r4, r30
     lfs f0, 0x30(r1)
@@ -1900,7 +1900,7 @@ lbl_fn_8025ACA0_00001938:
     stfs f4, 0x94(r1)
     stfs f0, 0x8c(r1)
     stfs f3, 0x90(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f31
     bge lbl_fn_8025ACA0_00001980
     addi r29, r29, 0x1

@@ -34,7 +34,7 @@ extern void fn_805381A4(void);
 extern void fn_805381CC(void);
 extern void fn_80538DC8(void);
 extern void fn_80541BDC(void);
-extern void fn_805F93C0(void);
+extern void PSMTXMultVec(void);
 extern void fn_8068B770(void);
 extern void fn_8068BC30(void);
 extern void fn_8068BD60(void);
@@ -1264,7 +1264,7 @@ lbl_fn_8055A4A0_00000FCC:
     stfs f0, 0x1c4(r1)
     stfs f0, 0x1d4(r1)
     stfs f0, 0x1e4(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r3, r1, 0xe0
     lfs f2, 0xe8(r1)
     psq_l f1, 0x0(r3), 0, 0

@@ -53,8 +53,8 @@ extern void fn_804AAD68(void);
 extern void fn_804AAFCC(void);
 extern void fn_8054A0A0(void);
 extern void fn_805B4D94(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
 extern void fn_80680CF8(void);
 
 /* External data declarations */
@@ -204,11 +204,11 @@ lbl_fn_803A5118_00000118:
     stfs f1, 0x24(r1)
     stfs f0, 0x28(r1)
     lfs f1, 0x538(r29)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x20
     addi r3, r1, 0x68
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0x28(r1)
     mr r3, r29
     lfs f1, 0x24(r1)
@@ -244,11 +244,11 @@ lbl_fn_803A5118_000001C0:
     stfs f1, 0xc(r1)
     stfs f0, 0x10(r1)
     lfs f1, 0x538(r29)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x8
     addi r3, r1, 0x38
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0x10(r1)
     mr r3, r29
     lfs f1, 0xc(r1)

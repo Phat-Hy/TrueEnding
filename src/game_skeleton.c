@@ -31,7 +31,7 @@ extern void fn_80477FDC(void);
 extern void fn_80477FF8(void);
 extern void fn_80478014(void);
 extern void fn_80478034(void);
-extern void fn_805F98D0(void);
+extern void PSVECNormalize(void);
 extern void fn_8068AEA8(void);
 extern void fn_806952C4(void);
 extern void fn_80695720(void);
@@ -881,7 +881,7 @@ asm void fn_800C1A1C(void)
     stfs f2, 0x8c(r1)
     psq_st f1, 0x0(r29), 0, 0
     stfs f2, 0x80(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f31, lbl_808810D0
     addi r6, r1, 0x38
     lfs f30, lbl_808810EC
@@ -2213,7 +2213,7 @@ asm void fn_800C2EE0(void)
     mr r31, r3
     addi r3, r3, 0x154
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x15c(r31)
     addi r3, r1, 0x38
     psq_l f1, 0x154(r31), 0, 0

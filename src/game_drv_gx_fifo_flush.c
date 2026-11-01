@@ -17,8 +17,8 @@ extern void fn_805D9D80(void);
 extern void fn_805D9DF0(void);
 extern void fn_805D9E10(void);
 extern void fn_805F8CA0(void);
-extern void fn_805F90D0(void);
-extern void fn_805F93C0(void);
+extern void PSMTXTrans(void);
+extern void PSMTXMultVec(void);
 extern void fn_80612E80(void);
 extern void fn_806134E0(void);
 extern void fn_80613520(void);
@@ -626,7 +626,7 @@ asm void fn_805C03A0(void)
     lfs f1, lbl_80764140@l(r4)
     fmr f2, f1
     fmr f3, f1
-    bl fn_805F90D0
+    bl PSMTXTrans
     addi r3, r1, 0x8
     li r4, 0x0
     bl GXLoadPosMtxImm
@@ -1992,7 +1992,7 @@ lbl_fn_805C1630_000018BC:
     addi r4, r1, 0x8
     addi r5, r1, 0x28
     stfs f0, 0x10(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lwz r4, 0x2c(r30)
     mr r5, r31
     addi r3, r1, 0x18

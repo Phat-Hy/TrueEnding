@@ -62,7 +62,7 @@ extern void fn_80599C94(void);
 extern void fn_805A3C58(void);
 extern void fn_805A3D00(void);
 extern void fn_805A5224(void);
-extern void fn_805F9940(void);
+extern void PSVECMag(void);
 extern void fn_80680770(void);
 extern void fn_80682544(void);
 extern void fn_80686EA4(void);
@@ -456,7 +456,7 @@ lbl_fn_802B9C5C_0000044C:
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f2, 0x5c(r31)
     lfs f0, 0x28(r31)
     fmuls f0, f2, f0

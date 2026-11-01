@@ -90,7 +90,7 @@ extern void fn_8056B398(void);
 extern void fn_8056C39C(void);
 extern void fn_8057EF44(void);
 extern void fn_805A70F4(void);
-extern void fn_805F98D0(void);
+extern void PSVECNormalize(void);
 extern void fn_80605540(void);
 extern void fn_806055A0(void);
 extern void fn_806959D8(void);
@@ -1809,7 +1809,7 @@ lbl_world_Manager_destructor_000012D4:
     stfs f10, 0x10(r1)
     psq_st f1, 0x0(r26), 0, 0
     stfs f2, 0x1c(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x1c(r1)
     mr r0, r31
     psq_l f1, 0x0(r26), 0, 0

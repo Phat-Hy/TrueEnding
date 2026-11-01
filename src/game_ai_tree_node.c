@@ -29,11 +29,11 @@ extern void fn_80239DAC(void);
 extern void fn_8023A8B4(void);
 extern void fn_802598DC(void);
 extern void fn_8025FE30(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9050(void);
-extern void fn_805F93C0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9940(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXRotAxis(void);
+extern void PSMTXMultVec(void);
+extern void PSVECNormalize(void);
+extern void PSVECMag(void);
 extern void fn_80680CF8(void);
 extern void fn_80695720(void);
 
@@ -155,7 +155,7 @@ asm void fn_80257A94(void)
     stfs f3, 0x10(r1)
     stfs f1, 0x8(r1)
     stfs f0, 0xc(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lis r3, lbl_807C8328@ha
     lfs f0, lbl_807C8328@l(r3)
     fcmpo cr0, f1, f0
@@ -832,11 +832,11 @@ lbl_fn_80258368_00000A4C:
     stfs f0, 0x1c(r1)
     lwz r5, 0x154c(r30)
     lfs f1, 0x14(r5)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x14
     addi r3, r1, 0x20
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lwz r3, 0x62c(r31)
     li r0, 0x0
     lfs f0, 0x14(r1)
@@ -917,7 +917,7 @@ lbl_fn_80258574_00000BB0:
     stfs f4, 0x3c(r1)
     stfs f0, 0x38(r1)
     stfs f6, 0x40(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lwz r0, 0x14cc(r31)
     cmpwi r0, 0x0
     beq lbl_fn_80258574_00000C34
@@ -1282,18 +1282,18 @@ lbl_fn_80258A50_00001114:
     stfs f3, 0x24(r1)
     stfs f0, 0x28(r1)
     lfs f1, 0x538(r20)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x20
     addi r3, r1, 0x68
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f3, 0x24(r1)
     addi r3, r1, 0x20
     lfs f0, lbl_808833F4
     mr r4, r3
     fadds f0, f3, f0
     stfs f0, 0x24(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lis r4, lbl_80743D00@ha
     li r0, 0x9
     lis r3, 0x5555
@@ -1341,19 +1341,19 @@ lbl_fn_80258A50_000011FC:
     fdivs f20, f3, f0
     stfs f22, 0x10(r1)
     lfs f1, 0x538(r20)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x8
     addi r3, r1, 0x38
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     fmuls f1, f23, f20
     addi r3, r1, 0x98
     addi r4, r1, 0x8
-    bl fn_805F9050
+    bl PSMTXRotAxis
     mr r4, r27
     mr r5, r27
     addi r3, r1, 0x98
-    bl fn_805F93C0
+    bl PSMTXMultVec
     stw r30, 0xc8(r1)
     cmpwi r21, 0x0
     stfs f21, 0xcc(r1)

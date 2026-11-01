@@ -16,7 +16,7 @@ extern void fn_8014DEE4(void);
 extern void fn_80171F3C(void);
 extern void fn_80179D44(void);
 extern void world_getGlobalFlag(void);
-extern void fn_805F99B0(void);
+extern void PSVECCrossProduct(void);
 
 /* External data declarations */
 extern u8 lbl_80737808[];
@@ -81,7 +81,7 @@ asm void fn_8013C394(void)
     mr r3, r4
     mr r4, r5
     mr r5, r0
-    b fn_805F99B0
+    b PSVECCrossProduct
 }
 
 asm void fn_8013C3A8(void)

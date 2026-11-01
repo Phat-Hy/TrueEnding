@@ -67,8 +67,8 @@ extern void fn_803F3360(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
 extern void fn_80682428(void);
 extern void fn_80684600(void);
 extern void fn_80695720(void);
@@ -1348,7 +1348,7 @@ lbl_fn_804137F4_0000106C:
     lfs f2, 0x8(r5)
     li r4, 0x79
     stfs f2, 0x50(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     psq_l f1, 0x4c(r31), 0, 0
     addi r4, r1, 0x8
     lfs f2, 0x54(r31)
@@ -1356,7 +1356,7 @@ lbl_fn_804137F4_0000106C:
     stfs f2, 0x10(r1)
     addi r3, r1, 0x58
     psq_st f1, 0x0(r4), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f7, 0x50(r1)
     addi r4, r1, 0x14
     lfs f0, 0x10(r1)

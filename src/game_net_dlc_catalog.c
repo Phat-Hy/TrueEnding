@@ -47,8 +47,8 @@ extern void fn_80371320(void);
 extern void fn_80373148(void);
 extern void fn_804EB874(void);
 extern void fn_805AE3C8(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9940(void);
+extern void PSVECNormalize(void);
+extern void PSVECMag(void);
 extern void fn_806846C4(void);
 extern void fn_80686A48(void);
 extern void fn_80686A64(void);
@@ -1998,12 +1998,12 @@ lbl_fn_8054B328_000018A8:
     fsubs f0, f3, f0
     stfs f4, 0x44(r1)
     stfs f0, 0x40(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fcmpo cr0, f1, f15
     ble lbl_fn_8054B328_000019DC
     addi r3, r1, 0x40
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f4, 0x48(r1)
     lfs f0, 0x44(r1)
     lfs f3, 0x40(r1)

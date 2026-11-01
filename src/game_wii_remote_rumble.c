@@ -60,10 +60,10 @@ extern void fn_80541CF4(void);
 extern void fn_8055A404(void);
 extern void fn_805F89F0(void);
 extern void fn_805F8C50(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9750(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9940(void);
+extern void PSMTXRotRad(void);
+extern void PSMTX44Identity(void);
+extern void PSVECNormalize(void);
+extern void PSVECMag(void);
 extern void fn_80680770(void);
 extern void fn_80686EA4(void);
 extern void fn_8068AEA4(void);
@@ -139,7 +139,7 @@ asm void fn_8055110C(void)
     fmr f31, f1
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, lbl_80887E30
     fcmpo cr0, f1, f0
     ble lbl_fn_8055110C_00000080
@@ -149,7 +149,7 @@ asm void fn_8055110C(void)
     mr r4, r31
     lfs f1, 0xb4(r5)
     fmuls f31, f0, f1
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x0(r31)
     lfs f1, 0x4(r31)
     lfs f0, 0x8(r31)
@@ -1158,7 +1158,7 @@ asm void fn_80551EA0(void)
     beq lbl_fn_80551EA0_00000E54
     addi r3, r1, 0xc8
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0xc8
     addi r5, r1, 0xf8
@@ -1183,7 +1183,7 @@ lbl_fn_80551EA0_00000E54:
     beq lbl_fn_80551EA0_00000EB4
     addi r3, r1, 0x68
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x68
     addi r5, r1, 0x98
@@ -1208,7 +1208,7 @@ lbl_fn_80551EA0_00000EB4:
     beq lbl_fn_80551EA0_00000F14
     addi r3, r1, 0x8
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x8
     addi r5, r1, 0x38
@@ -1410,7 +1410,7 @@ lbl_fn_805521DC_00001168:
     addi r3, r1, 0x60
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80887E30
     addi r4, r1, 0x38
     lfs f30, 0x68(r1)
@@ -1460,7 +1460,7 @@ lbl_fn_805521DC_00001168:
     stfs f6, 0xbc(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_80887E3C
     fabs f3, f2
@@ -1526,7 +1526,7 @@ asm void fn_805523E0(void)
     stfs f4, 0x10(r1)
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lwz r0, 0x24(r1)
     mtlr r0
     addi r1, r1, 0x20

@@ -28,8 +28,8 @@ extern void fn_80182788(void);
 extern void fn_80183860(void);
 extern void fn_8035B78C(void);
 extern void fn_804AAFCC(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
 extern void fn_80695D84(void);
 
 /* External data declarations */
@@ -1146,7 +1146,7 @@ lbl_fn_8017D13C_00000E68:
     stfs f2, 0x18(r1)
     stfs f0, 0x14(r1)
     stfs f4, 0x1c(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f2, 0x570(r28)
     lfs f0, lbl_80881B94
     fcmpo cr0, f2, f0
@@ -1308,7 +1308,7 @@ lbl_fn_8017D13C_000010A0:
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f2, 0x570(r28)
     lfs f0, lbl_80881B94
     fcmpo cr0, f2, f0
@@ -1772,7 +1772,7 @@ lbl_fn_8017E650_000016D0:
     stfs f2, 0x40(r1)
     psq_st f1, 0x0(r30), 0, 0
     stfs f2, 0x34(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     b lbl_fn_8017E650_00001750
 lbl_fn_8017E650_00001738:
     lfs f3, lbl_80881B78
@@ -1828,7 +1828,7 @@ lbl_fn_8017E650_000017C8:
     stfs f4, 0x18(r1)
     stfs f0, 0x14(r1)
     stfs f6, 0x1c(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f31
     bge lbl_fn_8017E650_0000198C
     lwz r3, lbl_8087F098
@@ -1919,7 +1919,7 @@ lbl_fn_8017E650_000018F8:
     stfs f4, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f6, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f31
     bge lbl_fn_8017E650_00001980
     li r0, 0x0

@@ -81,7 +81,7 @@ extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_805A38F4(void);
-extern void fn_805F9920(void);
+extern void PSVECSquareMag(void);
 extern void fn_80684600(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
@@ -1156,7 +1156,7 @@ lbl_fn_8035EA2C_00000D64:
     stfs f0, 0x28(r1)
     stfs f3, 0x2c(r1)
     stfs f7, 0x30(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f30, f1
     fmr f29, f1
     ble lbl_fn_8035EA2C_00000E0C

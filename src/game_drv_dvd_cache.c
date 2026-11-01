@@ -11,9 +11,9 @@ extern void fn_8017039C(void);
 extern void fn_805B3124(void);
 extern void fn_805B325C(void);
 extern void fn_805B33BC(void);
-extern void fn_805F9920(void);
-extern void fn_805F9990(void);
-extern void fn_805F99B0(void);
+extern void PSVECSquareMag(void);
+extern void PSVECDotProduct(void);
+extern void PSVECCrossProduct(void);
 extern void fn_80680CF8(void);
 
 /* External data declarations */
@@ -216,7 +216,7 @@ lbl_fn_805AF618_00000244:
     addi r5, r1, 0xd4
     stfs f0, 0xb4(r1)
     stfs f3, 0xb8(r1)
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     lfs f4, 0x100(r1)
     addi r4, r1, 0xa4
     lfs f0, 0x10c(r1)
@@ -359,7 +359,7 @@ lbl_fn_805AF618_000004AC:
     cmpwi r3, 0x0
     bne lbl_fn_805AF618_00000614
     addi r3, r1, 0xe0
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f6, 0x118(r1)
     fmr f28, f1
     lfs f0, 0x530(r26)
@@ -375,7 +375,7 @@ lbl_fn_805AF618_000004AC:
     fsubs f0, f3, f0
     stfs f4, 0x48(r1)
     stfs f0, 0x44(r1)
-    bl fn_805F9990
+    bl PSVECDotProduct
     fneg f0, f1
     lwz r4, 0xcc(r1)
     addi r3, r1, 0xcc
@@ -476,7 +476,7 @@ lbl_fn_805AF618_0000061C:
     b lbl_fn_805AF618_000007C4
 lbl_fn_805AF618_0000065C:
     addi r3, r1, 0xe0
-    bl fn_805F9920
+    bl PSVECSquareMag
     lwz r5, 0x10(r25)
     fmr f25, f1
     addi r3, r1, 0xe0
@@ -490,7 +490,7 @@ lbl_fn_805AF618_0000065C:
     stfs f4, 0x40(r1)
     stfs f0, 0x38(r1)
     stfs f3, 0x3c(r1)
-    bl fn_805F9990
+    bl PSVECDotProduct
     fneg f0, f1
     lwz r4, 0xc0(r1)
     addi r3, r1, 0xc0
@@ -1056,7 +1056,7 @@ lbl_fn_805B01C4_00000DF0:
     addi r5, r1, 0xd4
     stfs f0, 0xb4(r1)
     stfs f3, 0xb8(r1)
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     lfs f4, 0x100(r1)
     addi r4, r1, 0xa4
     lfs f0, 0x10c(r1)
@@ -1199,7 +1199,7 @@ lbl_fn_805B01C4_00001058:
     cmpwi r3, 0x0
     bne lbl_fn_805B01C4_000011C0
     addi r3, r1, 0xe0
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f6, 0x118(r1)
     fmr f28, f1
     lfs f0, 0x530(r26)
@@ -1215,7 +1215,7 @@ lbl_fn_805B01C4_00001058:
     fsubs f0, f3, f0
     stfs f4, 0x48(r1)
     stfs f0, 0x44(r1)
-    bl fn_805F9990
+    bl PSVECDotProduct
     fneg f0, f1
     lwz r4, 0xcc(r1)
     addi r3, r1, 0xcc
@@ -1316,7 +1316,7 @@ lbl_fn_805B01C4_000011C8:
     b lbl_fn_805B01C4_00001370
 lbl_fn_805B01C4_00001208:
     addi r3, r1, 0xe0
-    bl fn_805F9920
+    bl PSVECSquareMag
     lwz r5, 0x10(r25)
     fmr f25, f1
     addi r3, r1, 0xe0
@@ -1330,7 +1330,7 @@ lbl_fn_805B01C4_00001208:
     stfs f4, 0x40(r1)
     stfs f0, 0x38(r1)
     stfs f3, 0x3c(r1)
-    bl fn_805F9990
+    bl PSVECDotProduct
     fneg f0, f1
     lwz r4, 0xc0(r1)
     addi r3, r1, 0xc0
@@ -1896,7 +1896,7 @@ lbl_fn_805B0D70_0000199C:
     addi r5, r1, 0xd4
     stfs f0, 0xb4(r1)
     stfs f3, 0xb8(r1)
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     lfs f4, 0x100(r1)
     addi r4, r1, 0xa4
     lfs f0, 0x10c(r1)
@@ -2039,7 +2039,7 @@ lbl_fn_805B0D70_00001C04:
     cmpwi r3, 0x0
     bne lbl_fn_805B0D70_00001D6C
     addi r3, r1, 0xe0
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f6, 0x118(r1)
     fmr f28, f1
     lfs f0, 0x530(r26)
@@ -2055,7 +2055,7 @@ lbl_fn_805B0D70_00001C04:
     fsubs f0, f3, f0
     stfs f4, 0x48(r1)
     stfs f0, 0x44(r1)
-    bl fn_805F9990
+    bl PSVECDotProduct
     fneg f0, f1
     lwz r4, 0xcc(r1)
     addi r3, r1, 0xcc
@@ -2156,7 +2156,7 @@ lbl_fn_805B0D70_00001D74:
     b lbl_fn_805B0D70_00001F1C
 lbl_fn_805B0D70_00001DB4:
     addi r3, r1, 0xe0
-    bl fn_805F9920
+    bl PSVECSquareMag
     lwz r5, 0x10(r25)
     fmr f25, f1
     addi r3, r1, 0xe0
@@ -2170,7 +2170,7 @@ lbl_fn_805B0D70_00001DB4:
     stfs f4, 0x40(r1)
     stfs f0, 0x38(r1)
     stfs f3, 0x3c(r1)
-    bl fn_805F9990
+    bl PSVECDotProduct
     fneg f0, f1
     lwz r4, 0xc0(r1)
     addi r3, r1, 0xc0

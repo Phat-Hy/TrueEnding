@@ -93,8 +93,8 @@ extern void fn_804093B4(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void fn_804EB1B0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9940(void);
+extern void PSVECNormalize(void);
+extern void PSVECMag(void);
 extern void fn_80682428(void);
 extern void fn_80684600(void);
 extern char* strcpy(char* dest, const char* src);
@@ -1755,7 +1755,7 @@ lbl_fn_803FAF8C_000015DC:
     stfs f4, 0x68(r1)
     stfs f3, 0x60(r1)
     stfs f0, 0x64(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f31, lbl_80886068
     lis r0, 0x4330
     lwz r4, lbl_8087F0A8
@@ -1780,7 +1780,7 @@ lbl_fn_803FAF8C_000015DC:
     fdivs f0, f5, f7
     fmuls f3, f3, f4
     fmsubs f30, f7, f3, f0
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f3, 0x60(r1)
     lis r4, lbl_80752540@ha
     lfs f0, 0x68(r1)

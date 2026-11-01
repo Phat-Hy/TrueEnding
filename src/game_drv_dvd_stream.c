@@ -23,9 +23,9 @@ extern void fn_805AF618(void);
 extern void fn_805B01C4(void);
 extern void fn_805B0D70(void);
 extern void fn_805B38A0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9920(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSVECSquareMag(void);
 extern void fn_80680CF8(void);
 extern void fn_806958E0(void);
 
@@ -1168,11 +1168,11 @@ lbl_fn_805AE868_00000D9C:
     stfs f30, 0xc(r1)
     stfs f31, 0x10(r1)
     lfs f1, 0x538(r28)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x8
     addi r3, r1, 0x20
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0x10(r1)
     mr r5, r28
     lfs f1, 0xc(r1)
@@ -1801,7 +1801,7 @@ lbl_fn_805AEFA0_000015CC:
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f31
     bge lbl_fn_805AEFA0_00001634
     mr r26, r25
@@ -1958,7 +1958,7 @@ lbl_fn_805AF1C8_000017F4:
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f31
     bge lbl_fn_805AF1C8_0000185C
     mr r26, r25
@@ -2115,7 +2115,7 @@ lbl_fn_805AF3F0_00001A1C:
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f31
     bge lbl_fn_805AF3F0_00001A84
     mr r26, r25

@@ -58,10 +58,10 @@ extern void fn_80376254(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9750(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9990(void);
+extern void PSMTXRotRad(void);
+extern void PSMTX44Identity(void);
+extern void PSVECNormalize(void);
+extern void PSVECDotProduct(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 extern void fn_80695720(void);
@@ -767,7 +767,7 @@ lbl_fn_802FD328_0000092C:
     addi r3, r1, 0xe0
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80884A20
     addi r4, r1, 0x34
     lfs f4, 0xe8(r1)
@@ -817,7 +817,7 @@ lbl_fn_802FD328_0000092C:
     stfs f13, 0xcc(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x3c(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x3c(r1)
     lfs f0, lbl_80884A64
     fabs f3, f2
@@ -1234,7 +1234,7 @@ lbl_fn_802FDDAC_00000F98:
     stfs f5, 0xc4(r1)
     stfs f3, 0xbc(r1)
     stfs f0, 0xc0(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lwz r5, 0x1518(r30)
     cmpwi r5, 0x0
     beq lbl_fn_802FDDAC_00001148
@@ -1250,10 +1250,10 @@ lbl_fn_802FDDAC_00000F98:
     stfs f5, 0xb8(r1)
     stfs f3, 0xb0(r1)
     stfs f0, 0xb4(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     addi r3, r1, 0xb0
     addi r4, r1, 0xbc
-    bl fn_805F9990
+    bl PSVECDotProduct
     fabs f3, f1
     lfs f0, lbl_80884A80
     frsp f3, f3
@@ -1317,7 +1317,7 @@ lbl_fn_802FDDAC_000010D8:
     stfs f2, 0xac(r1)
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0xc4(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_802FDDAC_00001148:
     lfs f2, 0xc4(r1)
     addi r3, r1, 0xbc
@@ -1352,7 +1352,7 @@ lbl_fn_802FDDAC_000011AC:
     addi r3, r1, 0xc8
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80884A20
     addi r4, r1, 0x68
     lfs f30, 0xd0(r1)
@@ -1402,7 +1402,7 @@ lbl_fn_802FDDAC_000011AC:
     stfs f6, 0x124(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x70(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x70(r1)
     lfs f0, lbl_80884A64
     fabs f3, f2

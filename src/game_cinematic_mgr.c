@@ -42,11 +42,11 @@ extern void fn_8047059C(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9750(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSMTX44Identity(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
 extern void fn_80682428(void);
 extern void fn_806827C4(void);
 extern void fn_80684600(void);
@@ -200,7 +200,7 @@ asm void fn_80332BE0(void)
     stfs f4, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f6, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fabs f3, f1
     lfs f0, lbl_808850BC
     frsp f3, f3
@@ -208,7 +208,7 @@ asm void fn_80332BE0(void)
     blt lbl_fn_80332BE0_00000134
     addi r3, r1, 0x8
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_80332BE0_00000134:
     lfs f2, 0x10(r1)
     addi r3, r1, 0x8
@@ -243,7 +243,7 @@ lbl_fn_80332BE0_00000198:
     addi r3, r1, 0xa8
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80885078
     addi r4, r1, 0x2c
     lfs f4, 0xb0(r1)
@@ -293,7 +293,7 @@ lbl_fn_80332BE0_00000198:
     stfs f13, 0x94(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x34(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x34(r1)
     lfs f0, lbl_808850BC
     fabs f3, f2
@@ -500,7 +500,7 @@ asm void fn_80333024(void)
     stfs f4, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f6, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fabs f3, f1
     lfs f0, lbl_808850BC
     frsp f3, f3
@@ -508,7 +508,7 @@ asm void fn_80333024(void)
     blt lbl_fn_80333024_00000578
     addi r3, r1, 0x8
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_80333024_00000578:
     lfs f2, 0x10(r1)
     addi r3, r1, 0x8
@@ -543,7 +543,7 @@ lbl_fn_80333024_000005DC:
     addi r3, r1, 0xa8
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80885078
     addi r4, r1, 0x2c
     lfs f4, 0xb0(r1)
@@ -593,7 +593,7 @@ lbl_fn_80333024_000005DC:
     stfs f13, 0x94(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x34(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x34(r1)
     lfs f0, lbl_808850BC
     fabs f3, f2
@@ -1475,7 +1475,7 @@ lbl_fn_80333D68_000012EC:
     addi r3, r1, 0x108
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80885138
     addi r4, r1, 0x1c
     lfs f4, 0x110(r1)
@@ -1525,7 +1525,7 @@ lbl_fn_80333D68_000012EC:
     stfs f13, 0xf4(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x24(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x24(r1)
     lfs f0, lbl_80885144
     fabs f3, f2
@@ -1653,11 +1653,11 @@ lbl_fn_80333D68_0000153C:
     stfs f3, 0x5c(r1)
     stfs f0, 0x60(r1)
     lfs f1, 0x538(r31)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x58
     addi r3, r1, 0x98
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f4, 0x60(r1)
     lfs f5, lbl_80885168
     lfs f3, 0x5c(r1)
@@ -1713,7 +1713,7 @@ lbl_fn_80333D68_0000153C:
     fcmpo cr0, f3, f0
     ble lbl_fn_80333D68_000016B0
     mr r3, r30
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_8088516C
     fcmpo cr0, f1, f0
     bge lbl_fn_80333D68_000016B0
@@ -1829,7 +1829,7 @@ asm void fn_803342EC(void)
     stfs f3, 0x8(r1)
     stfs f0, 0xc(r1)
     stfs f7, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80885178
     fcmpo cr0, f1, f0
     ble lbl_fn_803342EC_00001858
@@ -1934,13 +1934,13 @@ lbl_fn_80334460_00001960:
     stfs f5, 0xc0(r1)
     stfs f3, 0xb8(r1)
     stfs f0, 0xbc(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80885180
     fcmpo cr0, f1, f0
     ble lbl_fn_80334460_000019D4
     addi r3, r1, 0xb8
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_80334460_000019D4:
     lfs f2, 0xc0(r1)
     addi r3, r1, 0xb8
@@ -1975,7 +1975,7 @@ lbl_fn_80334460_00001A38:
     addi r3, r1, 0xc8
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80885138
     addi r4, r1, 0x58
     lfs f30, 0xd0(r1)
@@ -2025,7 +2025,7 @@ lbl_fn_80334460_00001A38:
     stfs f6, 0x124(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x60(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x60(r1)
     lfs f0, lbl_80885144
     fabs f3, f2

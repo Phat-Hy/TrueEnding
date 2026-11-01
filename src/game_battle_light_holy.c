@@ -52,8 +52,8 @@ extern void fn_803F11F8(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
 extern void fn_80680CF8(void);
 extern void fn_80682428(void);
 extern void fn_8068B100(void);
@@ -358,7 +358,7 @@ lbl_fn_8042049C_000002C8:
     addi r3, r1, 0x28
     stfs f29, 0x2c(r1)
     stfs f1, 0x30(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f30
     ble lbl_fn_8042049C_00000364
     stfs f28, 0x10(r1)
@@ -370,7 +370,7 @@ lbl_fn_8042049C_000002C8:
     stfs f31, 0x18(r1)
     psq_st f1, 0x0(r22), 0, 0
     stfs f2, 0x24(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     psq_l f1, 0x0(r22), 0, 0
     lfs f2, 0x24(r1)
     stfs f2, 0x128(r31)
@@ -980,7 +980,7 @@ lbl_fn_80420F88_00000B70:
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, 0x4e4(r31)
     fmuls f0, f0, f0
     fcmpo cr0, f1, f0

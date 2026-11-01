@@ -41,7 +41,7 @@ extern void fn_8049994C(void);
 extern void fn_80499B9C(void);
 extern void fn_80499C48(void);
 extern void fn_8049D68C(void);
-extern void fn_805F9940(void);
+extern void PSVECMag(void);
 extern void fn_80680CF8(void);
 extern void fn_80682428(void);
 extern void fn_80684600(void);
@@ -1724,7 +1724,7 @@ lbl_fn_8041E480_0000156C:
     stfs f7, 0x14(r1)
     stfs f13, 0x18(r1)
     stfs f29, 0x1c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f8, 0xec(r1)
     fmr f29, f1
     lfs f7, 0xdc(r1)
@@ -1733,7 +1733,7 @@ lbl_fn_8041E480_0000156C:
     stfs f0, 0x20(r1)
     stfs f7, 0x24(r1)
     stfs f8, 0x28(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f8, 0xe8(r1)
     fmr f30, f1
     lfs f7, 0xd8(r1)
@@ -1742,7 +1742,7 @@ lbl_fn_8041E480_0000156C:
     stfs f0, 0x2c(r1)
     stfs f7, 0x30(r1)
     stfs f8, 0x34(r1)
-    bl fn_805F9940
+    bl PSVECMag
     frsp f7, f30
     stfs f1, 0x8(r1)
     frsp f0, f29

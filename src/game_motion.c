@@ -15,7 +15,7 @@ extern void fn_80076A28(void);
 extern void fn_800B5994(void);
 extern void fn_800D5F68(void);
 extern void fn_805F8980(void);
-extern void fn_805F95A0(void);
+extern void PSMTXMultVecArraySR(void);
 extern void fn_80612E80(void);
 extern void fn_806134E0(void);
 extern void fn_80613520(void);
@@ -1455,7 +1455,7 @@ lbl_fn_800BFCB4_000011A8:
     fsubs f2, f2, f4
     lfs f6, lbl_8087D908
     fsubs f4, f0, f4
-    bl fn_805F95A0
+    bl PSMTXMultVecArraySR
     addi r3, r1, 0x60
     li r4, 0x1
     bl fn_80618290

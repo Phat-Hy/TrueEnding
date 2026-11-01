@@ -55,8 +55,8 @@ extern void fn_80499B9C(void);
 extern void fn_80499C48(void);
 extern void fn_8049D68C(void);
 extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
 extern void fn_80682428(void);
 extern char* strcpy(char* dest, const char* src);
 
@@ -149,7 +149,7 @@ asm void fn_803F8324(void)
     stfs f7, 0x28(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x1c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f9, 0x20(r1)
     addi r30, r1, 0x150
     lfs f8, 0x14(r1)
@@ -182,7 +182,7 @@ asm void fn_803F8324(void)
     beq lbl_fn_803F8324_0000016C
     addi r3, r1, 0x60
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x60
     addi r5, r1, 0x30
@@ -207,7 +207,7 @@ lbl_fn_803F8324_0000016C:
     beq lbl_fn_803F8324_000001CC
     addi r3, r1, 0xc0
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0xc0
     addi r5, r1, 0x90
@@ -232,7 +232,7 @@ lbl_fn_803F8324_000001CC:
     beq lbl_fn_803F8324_0000022C
     addi r3, r1, 0x120
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x120
     addi r5, r1, 0xf0
@@ -1793,11 +1793,11 @@ lbl_fn_803F9624_0000171C:
     stfs f0, 0x70(r1)
     stfs f0, 0x74(r1)
     lfs f1, 0x14(r5)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x70
     addi r3, r1, 0xa0
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lwz r3, 0xf4(r30)
     addi r4, r1, 0x38
     lfs f0, lbl_80886028

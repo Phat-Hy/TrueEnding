@@ -33,11 +33,11 @@ extern void fn_8047DC98(void);
 extern void fn_8053B02C(void);
 extern void fn_805412AC(void);
 extern void fn_8054E578(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9190(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9750(void);
-extern void fn_805F98D0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXQuat(void);
+extern void PSMTXMultVec(void);
+extern void PSMTX44Identity(void);
+extern void PSVECNormalize(void);
 extern void fn_805F9D20(void);
 extern void fn_80682428(void);
 extern void fn_8068AEA4(void);
@@ -1153,7 +1153,7 @@ lbl_fn_8047C1D8_00000CE0:
     addi r3, r1, 0x180
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80886F8C
     addi r4, r1, 0xb0
     lfs f30, 0x188(r1)
@@ -1203,7 +1203,7 @@ lbl_fn_8047C1D8_00000CE0:
     stfs f6, 0x1dc(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0xb8(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0xb8(r1)
     lfs f0, lbl_80886F80
     fabs f3, f2
@@ -1315,7 +1315,7 @@ lbl_fn_8047C1D8_00000F48:
     addi r3, r1, 0x110
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80886F8C
     addi r4, r1, 0x68
     lfs f30, 0x118(r1)
@@ -1365,7 +1365,7 @@ lbl_fn_8047C1D8_00000F48:
     stfs f6, 0x16c(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x70(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x70(r1)
     lfs f0, lbl_80886F80
     fabs f3, f2
@@ -1462,11 +1462,11 @@ lbl_fn_8047C1D8_00001078:
     stfs f3, 0x0(r29)
     stfs f3, 0x4(r29)
     stfs f0, 0x8(r29)
-    bl fn_805F9190
+    bl PSMTXQuat
     mr r4, r29
     mr r5, r29
     addi r3, r1, 0x1f0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lwz r0, 0x264(r1)
     psq_l f31, 0x258(r1), 0, 0
     lfd f31, 0x250(r1)
@@ -2295,7 +2295,7 @@ asm void fn_8047CF7C(void)
     stfs f2, 0xdc(r1)
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0xd0(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f8, lbl_80886F8C
     addi r7, r1, 0x88
     lfs f9, lbl_80886F90

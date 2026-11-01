@@ -39,7 +39,7 @@ extern void fn_803ECBD4(void);
 extern void fn_803EDB18(void);
 extern void fn_803FFC50(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_805F9920(void);
+extern void PSVECSquareMag(void);
 extern void fn_80680CF8(void);
 extern void fn_80682428(void);
 extern void fn_8068A850(void);
@@ -1904,7 +1904,7 @@ asm void fn_803FEC54(void)
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_808860F8
     fcmpo cr0, f1, f0
     ble lbl_fn_803FEC54_000019F4

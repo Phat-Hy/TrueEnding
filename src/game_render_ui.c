@@ -26,7 +26,7 @@ extern void fn_800C0508(void);
 extern void fn_800C1424(void);
 extern void fn_805F8C50(void);
 extern void fn_805F8CA0(void);
-extern void fn_805F9160(void);
+extern void PSMTXScale(void);
 extern void fn_80612E80(void);
 extern void fn_806134E0(void);
 extern void fn_80613520(void);
@@ -204,7 +204,7 @@ lbl_fn_800B0CD4_000000F0:
     stfs f1, 0x10(r1)
     stfs f2, 0x14(r1)
     stfs f3, 0x18(r1)
-    bl fn_805F9160
+    bl PSMTXScale
     lfs f3, 0x5c(r31)
     addi r3, r1, 0xa0
     lfs f2, 0x58(r31)

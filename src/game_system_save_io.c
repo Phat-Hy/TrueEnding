@@ -11,9 +11,9 @@ extern void fn_8016E970(void);
 extern void fn_80232B7C(void);
 extern void fn_80239DAC(void);
 extern void fn_8023A8B4(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9750(void);
-extern void fn_805F98D0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTX44Identity(void);
+extern void PSVECNormalize(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068B100(void);
 
@@ -330,7 +330,7 @@ lbl_fn_80342004_000003DC:
     stfs f2, 0x30(r1)
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x15dc(r30)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lis r4, lbl_8074A4C0@ha
     lfs f1, lbl_80885260
     addi r4, r4, lbl_8074A4C0@l
@@ -486,7 +486,7 @@ lbl_fn_8034228C_0000066C:
     addi r3, r1, 0xd0
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80885238
     addi r4, r1, 0x38
     lfs f4, 0xd8(r1)
@@ -536,7 +536,7 @@ lbl_fn_8034228C_0000066C:
     stfs f13, 0xbc(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_80885298
     fabs f3, f2
@@ -593,7 +593,7 @@ lbl_fn_8034228C_0000079C:
     stfs f0, 0x28(r1)
     stfs f2, 0x1588(r30)
     stfs f6, 0x1584(r30)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f0, lbl_80885238
     addi r3, r30, 0x158c
     psq_l f1, 0x528(r30), 0, 0
@@ -848,7 +848,7 @@ lbl_fn_80342674_00000BB8:
     addi r3, r1, 0x108
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80885238
     addi r4, r1, 0x38
     lfs f4, 0x110(r1)
@@ -898,7 +898,7 @@ lbl_fn_80342674_00000BB8:
     stfs f13, 0xf4(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_80885298
     fabs f3, f2
@@ -955,7 +955,7 @@ lbl_fn_80342674_00000CE8:
     stfs f0, 0x28(r1)
     stfs f2, 0x1588(r31)
     stfs f6, 0x1584(r31)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f0, lbl_80885238
     addi r3, r31, 0x158c
     psq_l f1, 0x528(r31), 0, 0
@@ -1114,7 +1114,7 @@ lbl_fn_80342BC8_00000FAC:
     addi r3, r1, 0xd0
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80885238
     addi r4, r1, 0x38
     lfs f4, 0xd8(r1)
@@ -1164,7 +1164,7 @@ lbl_fn_80342BC8_00000FAC:
     stfs f13, 0xbc(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_80885298
     fabs f3, f2
@@ -1221,7 +1221,7 @@ lbl_fn_80342BC8_000010DC:
     stfs f0, 0x28(r1)
     stfs f2, 0x1588(r30)
     stfs f6, 0x1584(r30)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f0, lbl_80885238
     addi r3, r30, 0x158c
     psq_l f1, 0x528(r30), 0, 0
@@ -1489,7 +1489,7 @@ lbl_fn_8034315C_00001540:
     addi r3, r1, 0x100
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80885238
     addi r4, r1, 0x68
     lfs f4, 0x108(r1)
@@ -1539,7 +1539,7 @@ lbl_fn_8034315C_00001540:
     stfs f13, 0xec(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x70(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x70(r1)
     lfs f0, lbl_80885298
     fabs f3, f2
@@ -1596,7 +1596,7 @@ lbl_fn_8034315C_00001670:
     stfs f0, 0x58(r1)
     stfs f2, 0x1588(r30)
     stfs f6, 0x1584(r30)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f0, lbl_80885238
     addi r5, r30, 0x158c
     psq_l f1, 0x528(r30), 0, 0
@@ -1879,7 +1879,7 @@ lbl_fn_803435B8_00001AFC:
     addi r3, r1, 0x108
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80885238
     addi r4, r1, 0x38
     lfs f4, 0x110(r1)
@@ -1929,7 +1929,7 @@ lbl_fn_803435B8_00001AFC:
     stfs f13, 0xf4(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_80885298
     fabs f3, f2
@@ -1986,7 +1986,7 @@ lbl_fn_803435B8_00001C2C:
     stfs f0, 0x28(r1)
     stfs f2, 0x1588(r31)
     stfs f6, 0x1584(r31)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f0, lbl_80885238
     addi r3, r31, 0x158c
     psq_l f1, 0x528(r31), 0, 0

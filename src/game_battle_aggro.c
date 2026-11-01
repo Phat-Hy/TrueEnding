@@ -24,8 +24,8 @@ extern void fn_801718F8(void);
 extern void world_getGlobalFlag(void);
 extern void fn_803C17FC(void);
 extern void fn_803C1840(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
 extern void fn_80695AD0(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -340,11 +340,11 @@ asm void fn_8016F67C(void)
     stfs f0, 0x34(r1)
     lfs f1, 0x538(r3)
     addi r3, r1, 0x48
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x2c
     addi r3, r1, 0x48
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f3, lbl_808819B0
     addi r31, r1, 0x20
     lfs f0, 0x620(r30)

@@ -35,7 +35,7 @@ extern void fn_800BFB70(void);
 extern void fn_800C0508(void);
 extern void fn_80476194(void);
 extern void fn_804761B0(void);
-extern void fn_805F95A0(void);
+extern void PSMTXMultVecArraySR(void);
 extern void __GXSetVtxDesc(void);
 extern void fn_80613BB0(void);
 extern void fn_80614190(void);
@@ -1377,7 +1377,7 @@ asm void fn_800B34C0(void)
     stw r4, 0x90(r1)
     lfd f0, 0x90(r1)
     fsubs f4, f0, f9
-    bl fn_805F95A0
+    bl PSMTXMultVecArraySR
     addi r5, r1, 0x8
     addi r4, r1, 0x48
     psq_l f1, 0x0(r5), 0, 0

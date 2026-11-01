@@ -38,7 +38,7 @@ extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_805A4984(void);
-extern void fn_805F9940(void);
+extern void PSVECMag(void);
 extern void fn_80680770(void);
 extern void fn_80682428(void);
 extern void fn_80684600(void);
@@ -1753,7 +1753,7 @@ lbl_fn_802AD930_000016FC:
     stfs f4, 0x1c(r1)
     stfs f0, 0x18(r1)
     stfs f6, 0x20(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, lbl_80883F54
     fcmpo cr0, f1, f0
     bge lbl_fn_802AD930_000018E4

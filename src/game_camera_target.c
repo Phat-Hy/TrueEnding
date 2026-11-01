@@ -62,7 +62,7 @@ extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_804DA490(void);
 extern void fn_805A3D00(void);
-extern void fn_805F9940(void);
+extern void PSVECMag(void);
 extern void fn_80682428(void);
 extern void fn_806827C4(void);
 extern void fn_80684600(void);
@@ -1524,7 +1524,7 @@ asm void fn_802E2360(void)
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f2, lbl_808846F0
     lfs f0, lbl_808846EC
     fsubs f1, f2, f1

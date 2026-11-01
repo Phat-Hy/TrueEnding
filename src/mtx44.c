@@ -1,10 +1,10 @@
 #include "revolution/types.h"
 
-void fn_805F9640(void);
-void fn_805F9750(void);
-void fn_805F97D0(void);
+void PSMTX44Inverse(void);
+void PSMTX44Identity(void);
+void PSMTX44Copy(void);
 
-asm void fn_805F9640(void) {
+asm void PSMTX44Inverse(void) {
     nofralloc
     psq_l f0, 0x0(r3), 0, 0
     psq_l f2, 0x0(r4), 0, 0
@@ -73,7 +73,7 @@ asm void fn_805F9640(void) {
     blr
 }
 
-asm void fn_805F9750(void) {
+asm void PSMTX44Identity(void) {
     nofralloc
     psq_l f0, 0x0(r4), 0, 0
     psq_l f2, 0x30(r3), 0, 0
@@ -107,7 +107,7 @@ asm void fn_805F9750(void) {
     blr
 }
 
-asm void fn_805F97D0(void) {
+asm void PSMTX44Copy(void) {
     nofralloc
     stwu r1, -0x18(r1)
     subi r6, r6, 0x1

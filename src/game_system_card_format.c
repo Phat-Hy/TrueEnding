@@ -48,10 +48,10 @@ extern void fn_805A49E8(void);
 extern void fn_805A5224(void);
 extern void fn_805A5378(void);
 extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9940(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSVECNormalize(void);
+extern void PSVECMag(void);
 extern void fn_80680CF8(void);
 extern void fn_80682428(void);
 extern void fn_80684600(void);
@@ -147,14 +147,14 @@ asm void fn_8035A9F4(void)
     stfs f5, 0x34(r1)
     stfs f3, 0x2c(r1)
     stfs f0, 0x30(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, lbl_808855EC
     fmr f31, f1
     fcmpo cr0, f1, f0
     ble lbl_fn_8035A9F4_00000160
     addi r3, r1, 0x2c
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     li r0, 0x0
     stw r0, 0x6c(r1)
     lfs f0, lbl_808855EC
@@ -382,7 +382,7 @@ lbl_fn_8035ACF0_00000330:
     beq lbl_fn_8035ACF0_000003D8
     addi r3, r1, 0xb8
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0xb8
     addi r5, r1, 0x88
@@ -407,7 +407,7 @@ lbl_fn_8035ACF0_000003D8:
     beq lbl_fn_8035ACF0_00000438
     addi r3, r1, 0x118
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x118
     addi r5, r1, 0xe8
@@ -432,7 +432,7 @@ lbl_fn_8035ACF0_00000438:
     beq lbl_fn_8035ACF0_00000498
     addi r3, r1, 0x178
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x178
     addi r5, r1, 0x148
@@ -454,7 +454,7 @@ lbl_fn_8035ACF0_00000498:
     addi r4, r1, 0x7c
     addi r3, r1, 0x1a8
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     mr r3, r30
     li r4, 0x3e8
     bl fn_80232B7C
@@ -809,7 +809,7 @@ asm void fn_8035B368(void)
     stfs f3, 0x10(r1)
     stfs f1, 0x8(r1)
     stfs f0, 0xc(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     subi r0, r31, 0x9
     cmplwi r0, 0x3
     bgt lbl_fn_8035B368_00000A20
@@ -1442,7 +1442,7 @@ asm void fn_8035BBCC(void)
     stfs f3, 0x10(r1)
     stfs f1, 0x8(r1)
     stfs f0, 0xc(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     subi r0, r31, 0x9
     cmplwi r0, 0x3
     bgt lbl_fn_8035BBCC_00001278

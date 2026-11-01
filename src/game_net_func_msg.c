@@ -30,11 +30,11 @@ extern void fn_80206C50(void);
 extern void fn_8021C6A4(void);
 extern void fn_80450A5C(void);
 extern void fn_804EB874(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
-extern void fn_805F9990(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
+extern void PSVECDotProduct(void);
 extern void fn_8068B770(void);
 extern void fn_8068BC30(void);
 extern void fn_8068BD60(void);
@@ -3249,7 +3249,7 @@ lbl_fn_8050158C_00001894:
     stfs f2, 0x24(r1)
     stfs f0, 0x20(r1)
     stfs f4, 0x28(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fabs f0, f1
     fmr f27, f1
     frsp f0, f0
@@ -3257,7 +3257,7 @@ lbl_fn_8050158C_00001894:
     blt lbl_fn_8050158C_00001928
     addi r3, r1, 0x20
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_8050158C_00001928:
     lwz r0, 0x5c(r24)
     li r3, -0x1
@@ -3335,14 +3335,14 @@ lbl_fn_8050158C_00001A00:
     stfs f25, 0xc(r1)
     stfs f24, 0x10(r1)
     lfs f1, 0x538(r28)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x8
     addi r3, r1, 0x30
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r3, r1, 0x20
     addi r4, r1, 0x8
-    bl fn_805F9990
+    bl PSVECDotProduct
     stfs f1, 0x64(r19)
 lbl_fn_8050158C_00001A5C:
     lwz r20, 0x5c(r20)

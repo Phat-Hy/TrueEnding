@@ -17,9 +17,9 @@ extern void fn_801FED24(void);
 extern void fn_80210220(void);
 extern void fn_80232B7C(void);
 extern void fn_8023A680(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9750(void);
-extern void fn_805F9940(void);
+extern void PSMTXRotRad(void);
+extern void PSMTX44Identity(void);
+extern void PSVECMag(void);
 extern void fn_80680CF8(void);
 extern void fn_8068AEA4(void);
 
@@ -139,7 +139,7 @@ lbl_fn_801018E4_000000E0:
     addi r3, r1, 0x70
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80881478
     addi r4, r1, 0x48
     lfs f30, 0x78(r1)
@@ -189,7 +189,7 @@ lbl_fn_801018E4_000000E0:
     stfs f6, 0xcc(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x50(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x50(r1)
     lfs f0, lbl_808814D4
     fabs f3, f2
@@ -1455,7 +1455,7 @@ lbl_fn_80102A40_0000130C:
     stfs f2, 0x18(r1)
     stfs f0, 0x14(r1)
     stfs f4, 0x1c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f2, 0x34(r31)
     lfs f0, lbl_80881478
     fdivs f2, f1, f2
@@ -1572,7 +1572,7 @@ lbl_fn_80102A40_000014B4:
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x34(r31)
     fdivs f0, f1, f0
     fcmpo cr0, f0, f29

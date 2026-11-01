@@ -41,8 +41,8 @@ extern void fn_80541370(void);
 extern void fn_80541BDC(void);
 extern void fn_805430A4(void);
 extern void fn_805430C0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9940(void);
+extern void PSVECNormalize(void);
+extern void PSVECMag(void);
 extern void fn_80682428(void);
 
 /* External data declarations */
@@ -1961,7 +1961,7 @@ lbl_fn_8055E724_00001810:
     stfs f5, 0x60(r1)
     stfs f3, 0x5c(r1)
     stfs f0, 0x64(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f4, 0x88(r1)
     fmr f31, f1
     lfs f3, 0x70(r1)
@@ -1978,11 +1978,11 @@ lbl_fn_8055E724_00001810:
     stfs f5, 0x54(r1)
     stfs f3, 0x50(r1)
     stfs f0, 0x64(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fcmpo cr0, f31, f1
     ble lbl_fn_8055E724_00001948
     addi r3, r1, 0x50
-    bl fn_805F9940
+    bl PSVECMag
     fmr f31, f1
 lbl_fn_8055E724_00001948:
     lfs f3, lbl_80887EBC
@@ -2041,7 +2041,7 @@ lbl_fn_8055E724_00001948:
     fsubs f0, f4, f3
     stfs f5, 0xac(r1)
     stfs f0, 0xb0(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f4, 0xac(r1)
     mr r3, r29
     lfs f5, lbl_80887EC4

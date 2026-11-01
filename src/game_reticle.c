@@ -42,7 +42,7 @@ extern void fn_80476170(void);
 extern void fn_80478198(void);
 extern void fn_805F89F0(void);
 extern void fn_805F8DA0(void);
-extern void fn_805F9940(void);
+extern void PSVECMag(void);
 extern void GXSetArray(void);
 extern void __GXSetVtxDesc(void);
 extern void fn_80613BB0(void);
@@ -2465,7 +2465,7 @@ lbl_atn_Model_drawMeshNode_00001FA4:
     stfs f2, 0x1c(r1)
     stfs f0, 0x18(r1)
     stfs f4, 0x20(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fmr f31, f1
 lbl_atn_Model_drawMeshNode_000020E4:
     rlwinm. r0, r26, 0, 29, 29

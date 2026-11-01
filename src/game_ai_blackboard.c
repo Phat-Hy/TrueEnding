@@ -38,10 +38,10 @@ extern void fn_8025F754(void);
 extern void fn_803C1560(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9750(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9940(void);
+extern void PSMTXRotRad(void);
+extern void PSMTX44Identity(void);
+extern void PSVECNormalize(void);
+extern void PSVECMag(void);
 extern void fn_80682428(void);
 extern void fn_80684600(void);
 extern void fn_8068AEA4(void);
@@ -781,7 +781,7 @@ asm void fn_8025D90C(void)
     stfs f4, 0xc4(r1)
     stfs f0, 0xc0(r1)
     stfs f6, 0xc8(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lwz r4, 0x151c(r31)
     cmpwi r4, 0x0
     beq lbl_fn_8025D90C_00000E38
@@ -922,7 +922,7 @@ lbl_fn_8025D90C_00000B20:
     stfs f4, 0x3c(r1)
     stfs f0, 0x38(r1)
     stfs f6, 0x40(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x40(r1)
     addi r3, r1, 0x38
     lfs f0, lbl_80883508
@@ -956,7 +956,7 @@ lbl_fn_8025D90C_00000C0C:
     addi r3, r1, 0x118
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_808834F0
     addi r4, r1, 0x5c
     lfs f4, 0x120(r1)
@@ -1006,7 +1006,7 @@ lbl_fn_8025D90C_00000C0C:
     stfs f13, 0x104(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x64(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x64(r1)
     lfs f0, lbl_80883508
     fabs f3, f2
@@ -1411,7 +1411,7 @@ lbl_fn_8025E100_00001298:
     addi r3, r1, 0x108
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_808834F0
     addi r4, r1, 0x90
     lfs f30, 0x110(r1)
@@ -1461,7 +1461,7 @@ lbl_fn_8025E100_00001298:
     stfs f6, 0x164(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x98(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x98(r1)
     lfs f0, lbl_80883508
     fabs f3, f2
@@ -1505,7 +1505,7 @@ lbl_fn_8025E100_000013C8:
     stfs f0, 0xfc(r1)
     stfs f4, 0x104(r1)
     stfs f2, 0x100(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, lbl_80883518
     fcmpo cr0, f1, f0
     ble lbl_fn_8025E100_00001524
@@ -1516,7 +1516,7 @@ lbl_fn_8025E100_000013C8:
     psq_st f1, 0x0(r3), 0, 0
     mr r4, r3
     stfs f2, 0xbc(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f5, 0xbc(r1)
     addi r3, r1, 0xcc
     lfs f4, lbl_80883518

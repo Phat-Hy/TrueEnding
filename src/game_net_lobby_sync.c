@@ -42,7 +42,7 @@ extern void fn_8049D2E4(void);
 extern void fn_804A06B4(void);
 extern void fn_804A0BCC(void);
 extern void fn_804A0F80(void);
-extern void fn_805F98D0(void);
+extern void PSVECNormalize(void);
 extern void fn_80682428(void);
 extern void fn_80695A50(void);
 
@@ -562,7 +562,7 @@ lbl_fn_8049ED90_000002B8:
     stfs f10, 0x10(r1)
     psq_st f1, 0x0(r27), 0, 0
     stfs f2, 0x1c(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x1c(r1)
     addi r3, r1, 0xbc
     psq_l f1, 0x0(r27), 0, 0

@@ -25,8 +25,8 @@ extern void fn_8036554C(void);
 extern void fn_803CC5E4(void);
 extern void fn_8047FF70(void);
 extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9940(void);
+extern void PSMTXRotRad(void);
+extern void PSVECMag(void);
 extern void fn_80680770(void);
 extern void fn_80686EA4(void);
 extern u32 strlen(const char* str);
@@ -191,7 +191,7 @@ lbl_fn_8000CBD8_000000F8:
     beq lbl_fn_8000CBD8_000001B8
     addi r3, r1, 0x170
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x170
     addi r5, r1, 0x140
@@ -216,7 +216,7 @@ lbl_fn_8000CBD8_000001B8:
     beq lbl_fn_8000CBD8_00000218
     addi r3, r1, 0x1d0
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x1d0
     addi r5, r1, 0x1a0
@@ -241,7 +241,7 @@ lbl_fn_8000CBD8_00000218:
     beq lbl_fn_8000CBD8_00000278
     addi r3, r1, 0x230
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x230
     addi r5, r1, 0x200
@@ -313,7 +313,7 @@ lbl_fn_8000CBD8_00000278:
     fmr f1, f0
     addi r3, r1, 0x50
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x50
     addi r5, r1, 0x20
@@ -338,7 +338,7 @@ lbl_fn_8000CBD8_00000394:
     beq lbl_fn_8000CBD8_000003F4
     addi r3, r1, 0xb0
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0xb0
     addi r5, r1, 0x80
@@ -363,7 +363,7 @@ lbl_fn_8000CBD8_000003F4:
     beq lbl_fn_8000CBD8_00000454
     addi r3, r1, 0x110
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x110
     addi r5, r1, 0xe0
@@ -570,7 +570,7 @@ lbl_fn_8000D1A8_00000638:
     stfs f0, 0x14(r1)
     stfs f7, 0x18(r1)
     stfs f8, 0x1c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f8, 0x74(r1)
     fmr f30, f1
     lfs f7, 0x64(r1)
@@ -579,7 +579,7 @@ lbl_fn_8000D1A8_00000638:
     stfs f0, 0x20(r1)
     stfs f7, 0x24(r1)
     stfs f8, 0x28(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f8, 0x70(r1)
     fmr f31, f1
     lfs f7, 0x60(r1)
@@ -588,7 +588,7 @@ lbl_fn_8000D1A8_00000638:
     stfs f0, 0x2c(r1)
     stfs f7, 0x30(r1)
     stfs f8, 0x34(r1)
-    bl fn_805F9940
+    bl PSVECMag
     frsp f7, f31
     stfs f1, 0x8(r1)
     frsp f0, f30
@@ -658,7 +658,7 @@ lbl_fn_8000D1A8_000007AC:
 asm void fn_8000D3A4(void)
 {
     nofralloc
-    b fn_805F9940
+    b PSVECMag
 }
 
 asm void fn_8000D3A8(void)

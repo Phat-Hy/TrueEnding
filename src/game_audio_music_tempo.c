@@ -67,8 +67,8 @@ extern void atn_LoadHandle_isLoading(void);
 extern void fn_805A3D00(void);
 extern void fn_805A4258(void);
 extern void fn_805A4F20(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
 extern void fn_80680CF8(void);
 extern void fn_80682428(void);
 extern void fn_806827C4(void);
@@ -597,13 +597,13 @@ lbl_fn_8030E26C_00000634:
     b lbl_fn_8030E26C_000006B4
 lbl_fn_8030E26C_0000066C:
     addi r3, r4, 0x10
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80884C60
     fcmpo cr0, f1, f0
     ble lbl_fn_8030E26C_000006B4
     addi r3, r31, 0x10
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x10(r31)
     lfs f3, lbl_80884C60
     lfs f1, 0x14(r31)
@@ -1503,7 +1503,7 @@ lbl_fn_8030EA28_000012A4:
     cmpwi r0, 0x0
     beq lbl_fn_8030EA28_00001308
     addi r3, r1, 0x44
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, 0x14e8(r31)
     fmuls f0, f0, f0
     fcmpo cr0, f1, f0
@@ -1601,7 +1601,7 @@ lbl_fn_8030EA28_0000141C:
     srwi. r0, r0, 31
     bne lbl_fn_8030EA28_00001474
     addi r3, r1, 0x38
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, 0x14e8(r31)
     fmuls f0, f0, f0
     fcmpo cr0, f1, f0
@@ -1698,7 +1698,7 @@ lbl_fn_8030EA28_00001588:
     stfs f2, 0x30(r1)
     stfs f0, 0x2c(r1)
     stfs f4, 0x34(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, 0x14e4(r31)
     fmuls f0, f0, f0
     fcmpo cr0, f1, f0

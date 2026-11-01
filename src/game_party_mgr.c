@@ -35,9 +35,9 @@ extern void fn_803750E4(void);
 extern void fn_803761BC(void);
 extern void fn_805ADCC4(void);
 extern void fn_805ADD84(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F99B0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSVECCrossProduct(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
 extern void fn_80695AD0(void);
@@ -1325,11 +1325,11 @@ lbl_fn_8015F568_0000119C:
     stfs f3, 0x78(r1)
     stfs f0, 0x7c(r1)
     lfs f1, 0x538(r27)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x74
     addi r3, r1, 0xb0
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f5, 0x7c(r1)
     lfs f4, lbl_80881B28
     lfs f3, 0x78(r1)
@@ -1358,7 +1358,7 @@ lbl_fn_8015F568_0000121C:
     addi r5, r1, 0x5c
     stfs f0, 0x54(r1)
     stfs f3, 0x58(r1)
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     lfs f5, lbl_808819B0
     addi r26, r1, 0x98
     lfs f0, 0x60(r1)

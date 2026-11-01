@@ -95,9 +95,9 @@ extern void fn_804180BC(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
-extern void fn_805F9990(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
+extern void PSVECDotProduct(void);
 extern void fn_80680CF8(void);
 extern void fn_80682428(void);
 extern void fn_806958E0(void);
@@ -374,17 +374,17 @@ asm void fn_80415F6C(void)
     stfs f6, 0x80(r1)
     stfs f3, 0x84(r1)
     stfs f11, 0x88(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80886438
     fcmpo cr0, f1, f0
     ble lbl_fn_80415F6C_000002E8
     addi r3, r1, 0x80
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_80415F6C_000002E8:
     addi r3, r1, 0x80
     addi r4, r31, 0x17c
-    bl fn_805F9990
+    bl PSVECDotProduct
     lfs f0, 0x88(r1)
     addi r3, r1, 0x2c
     lfs f3, 0x84(r1)
@@ -510,7 +510,7 @@ asm void fn_80416268(void)
     stfs f3, 0x98(r1)
     stfs f0, 0xc(r1)
     stfs f3, 0x1c(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fmuls f3, f31, f31
     lfs f0, lbl_80886464
     fmuls f0, f0, f3
@@ -636,7 +636,7 @@ lbl_fn_80416268_00000690:
     stfs f4, 0x28(r1)
     stfs f0, 0x20(r1)
     stfs f3, 0x24(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f27, f1
     ble lbl_fn_80416268_000006CC
     fmr f27, f1
@@ -691,7 +691,7 @@ lbl_fn_80416268_000006D4:
     stfs f2, 0x34(r1)
     psq_st f1, 0x0(r23), 0, 0
     stfs f2, 0xb8(r1)
-    bl fn_805F9990
+    bl PSVECDotProduct
     lfs f4, 0x24(r19)
     cmpwi r30, 0x1
     lfs f3, 0x20(r19)
@@ -1092,7 +1092,7 @@ lbl_fn_80416AA8_00000C9C:
     stfs f4, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f6, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80886474
     fcmpo cr0, f1, f0
     ble lbl_fn_80416AA8_00000CF0

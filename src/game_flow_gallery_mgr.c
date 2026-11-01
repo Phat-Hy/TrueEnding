@@ -21,8 +21,8 @@ extern void fn_8050A730(void);
 extern void fn_8050A964(void);
 extern void fn_8050A984(void);
 extern void fn_8050E630(void);
-extern void fn_805F9920(void);
-extern void fn_805F9990(void);
+extern void PSVECSquareMag(void);
+extern void PSVECDotProduct(void);
 extern void fn_806A8E40(void);
 extern void fn_806B0E30(void);
 extern void fn_806B1250(void);
@@ -1357,7 +1357,7 @@ lbl_fn_804F2454_00001198:
     lfs f2, 0x14(r31)
     stfs f2, 0x80(r1)
     psq_st f1, 0x0(r28), 0, 0
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_8088761C
     fcmpo cr0, f1, f0
     ble lbl_fn_804F2454_0000120C
@@ -1484,7 +1484,7 @@ lbl_fn_804F2454_0000138C:
     addi r3, r1, 0x6c
     stfs f3, 0x70(r1)
     stfs f0, 0x74(r1)
-    bl fn_805F9990
+    bl PSVECDotProduct
     lfs f0, lbl_80887620
     fcmpo cr0, f1, f0
     ble lbl_fn_804F2454_00001428

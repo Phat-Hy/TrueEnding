@@ -50,9 +50,9 @@ extern void fn_804576D4(void);
 extern void fn_80457C48(void);
 extern void fn_80457E98(void);
 extern void fn_8054D798(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
-extern void fn_805F9940(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
+extern void PSVECMag(void);
 extern void fn_80680770(void);
 extern void fn_80680CF8(void);
 extern void fn_80686EA4(void);
@@ -1255,7 +1255,7 @@ asm void fn_80454D4C(void)
     stfs f0, 0x14(r1)
     stfs f7, 0x18(r1)
     stfs f8, 0x1c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f8, 0x24(r31)
     fmr f30, f1
     lfs f7, 0x14(r31)
@@ -1264,7 +1264,7 @@ asm void fn_80454D4C(void)
     stfs f0, 0x20(r1)
     stfs f7, 0x24(r1)
     stfs f8, 0x28(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f8, 0x20(r31)
     fmr f31, f1
     lfs f7, 0x10(r31)
@@ -1273,7 +1273,7 @@ asm void fn_80454D4C(void)
     stfs f0, 0x2c(r1)
     stfs f7, 0x30(r1)
     stfs f8, 0x34(r1)
-    bl fn_805F9940
+    bl PSVECMag
     frsp f7, f31
     stfs f1, 0x8(r1)
     frsp f0, f30
@@ -2166,7 +2166,7 @@ lbl_fn_80455638_00001D34:
     stfs f4, 0xa4(r1)
     stfs f0, 0x9c(r1)
     stfs f29, 0xa0(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f5, 0x28(r23)
     addi r3, r1, 0x90
     lfs f4, 0xc(r23)
@@ -2177,11 +2177,11 @@ lbl_fn_80455638_00001D34:
     stfs f4, 0x98(r1)
     stfs f0, 0x90(r1)
     stfs f29, 0x94(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f30
     bge lbl_fn_80455638_00001DD8
     addi r3, r1, 0x90
-    bl fn_805F9940
+    bl PSVECMag
     lfs f4, 0x9c(r1)
     lfs f3, 0xa0(r1)
     lfs f0, 0xa4(r1)
@@ -2240,7 +2240,7 @@ lbl_fn_80455638_00001DFC:
     stfs f5, 0x58(r1)
     stfs f0, 0x54(r1)
     stfs f3, 0x5c(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f28
     bge lbl_fn_80455638_00001F6C
     lwz r3, lbl_8087F3C0

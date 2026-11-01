@@ -40,7 +40,7 @@ extern void fn_802B1B50(void);
 extern void fn_805A40BC(void);
 extern void fn_805A4258(void);
 extern void fn_805A4A20(void);
-extern void fn_805F9920(void);
+extern void PSVECSquareMag(void);
 extern void fn_80680CF8(void);
 extern void fn_80695720(void);
 
@@ -1567,7 +1567,7 @@ lbl_fn_802AF264_0000142C:
     fsubs f0, f3, f0
     stfs f4, 0xc(r1)
     stfs f0, 0x8(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80883F70
     fcmpo cr0, f1, f0
     ble lbl_fn_802AF264_000014E4
@@ -1636,7 +1636,7 @@ lbl_fn_802AF264_00001540:
     b lbl_fn_802AF264_000016B8
 lbl_fn_802AF264_0000159C:
     addi r3, r1, 0x2c
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, 0x14fc(r31)
     fmuls f0, f0, f0
     fcmpo cr0, f1, f0

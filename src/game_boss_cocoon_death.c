@@ -64,11 +64,11 @@ extern void atn_LoadHandle_isLoading(void);
 extern void fn_804A39EC(void);
 extern void fn_804A3A68(void);
 extern void fn_804A4494(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9750(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSMTX44Identity(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 extern void fn_806959D8(void);
@@ -311,7 +311,7 @@ lbl_fn_80468038_00000224:
     mr r4, r25
     psq_st f1, 0x0(r25), 0, 0
     stfs f2, 0xa0(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x530(r30)
     mr r5, r23
     psq_l f1, 0x528(r30), 0, 0
@@ -394,7 +394,7 @@ lbl_fn_80468038_00000394:
     addi r3, r1, 0xb0
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80886D60
     addi r4, r1, 0x38
     lfs f31, 0xb8(r1)
@@ -444,7 +444,7 @@ lbl_fn_80468038_00000394:
     stfs f6, 0x10c(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_80886D80
     fabs f3, f2
@@ -626,7 +626,7 @@ lbl_fn_80468534_000006D8:
     fmadds f0, f23, f0, f27
     fsubs f28, f0, f24
     fmr f1, f28
-    bl fn_805F8E70
+    bl PSMTXRotRad
     psq_l f1, 0x0(r28), 0, 0
     mr r4, r29
     lfs f2, 0x40(r1)
@@ -634,7 +634,7 @@ lbl_fn_80468534_000006D8:
     psq_st f1, 0x0(r29), 0, 0
     addi r3, r1, 0x48
     stfs f2, 0x1c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lwz r3, lbl_8087EE98
     mr r6, r29
     lfs f1, 0x620(r22)
@@ -660,7 +660,7 @@ lbl_fn_80468534_000006D8:
     stfs f4, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f6, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f30
     fmr f22, f1
     ble lbl_fn_80468534_000007D4
@@ -857,7 +857,7 @@ lbl_fn_804687B0_00000A18:
     fsubs f0, f3, f0
     stfs f4, 0xc(r1)
     stfs f0, 0x8(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f31
     fmr f0, f1
     ble lbl_fn_804687B0_00000A7C

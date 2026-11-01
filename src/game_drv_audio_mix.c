@@ -40,7 +40,7 @@ extern void fn_805B6508(void);
 extern void fn_805B8DB8(void);
 extern void fn_805B983C(void);
 extern void fn_805B99AC(void);
-extern void fn_805F9920(void);
+extern void PSVECSquareMag(void);
 extern void fn_806077F0(void);
 extern void fn_806078A0(void);
 extern void fn_806078E0(void);
@@ -2053,7 +2053,7 @@ asm void fn_805B8280(void)
     stfs f0, 0xbc(r1)
     stfs f3, 0xc4(r1)
     stfs f5, 0xc0(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_808883FC
     fcmpo cr0, f1, f0
     bge lbl_fn_805B8280_00001B40
@@ -2117,7 +2117,7 @@ lbl_fn_805B8280_00001B40:
     stfs f2, 0x7c(r1)
     stfs f2, 0xc4(r1)
     stfs f4, 0xc0(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80888408
     fcmpo cr0, f1, f0
     bge lbl_fn_805B8280_00001C14
@@ -2170,7 +2170,7 @@ lbl_fn_805B8280_00001C14:
     stfs f2, 0x64(r1)
     stfs f2, 0xc4(r1)
     stfs f4, 0xc0(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80888414
     fcmpo cr0, f1, f0
     bge lbl_fn_805B8280_00001CDC
@@ -2221,7 +2221,7 @@ lbl_fn_805B8280_00001CDC:
     stfs f2, 0x4c(r1)
     stfs f2, 0xc4(r1)
     stfs f4, 0xc0(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_808883FC
     fcmpo cr0, f1, f0
     bge lbl_fn_805B8280_00001DB8
@@ -2277,7 +2277,7 @@ lbl_fn_805B8280_00001DB8:
     stfs f2, 0x34(r1)
     stfs f2, 0xc4(r1)
     stfs f4, 0xc0(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_808883FC
     fcmpo cr0, f1, f0
     bge lbl_fn_805B8280_00001E8C
@@ -2521,7 +2521,7 @@ lbl_fn_805B8280_00002178:
     fsubs f0, f3, f0
     stfs f4, 0x9c(r1)
     stfs f0, 0xa0(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80888434
     fcmpo cr0, f1, f0
     bge lbl_fn_805B8280_00002254
@@ -2577,7 +2577,7 @@ lbl_fn_805B8280_00002254:
     fsubs f0, f3, f0
     stfs f4, 0x90(r1)
     stfs f0, 0x94(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80888440
     fcmpo cr0, f1, f0
     bge lbl_fn_805B8280_00002340

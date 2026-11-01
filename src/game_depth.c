@@ -28,8 +28,8 @@ extern void fn_80473F88(void*);
 extern void taskManager_updateTasks(void);
 extern void fn_80478158(void);
 extern void fn_805F89F0(void);
-extern void fn_805F98D0(void);
-extern void fn_805F99B0(void);
+extern void PSVECNormalize(void);
+extern void PSVECCrossProduct(void);
 extern void fn_80615E00(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
@@ -797,7 +797,7 @@ lbl_fn_800D5F68_00000AF0:
     addi r3, r1, 0xc8
     addi r4, r1, 0xbc
     addi r5, r1, 0x44
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     addi r3, r1, 0x44
     addi r30, r1, 0xb0
     psq_l f1, 0x0(r3), 0, 0
@@ -806,11 +806,11 @@ lbl_fn_800D5F68_00000AF0:
     mr r4, r30
     psq_st f1, 0x0(r30), 0, 0
     stfs f2, 0xb8(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     mr r3, r30
     addi r4, r1, 0xc8
     addi r5, r1, 0x38
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     lfs f0, 0xd0(r1)
     addi r4, r1, 0x38
     lfs f30, lbl_808811E0
@@ -954,7 +954,7 @@ lbl_fn_800D5F68_00000D1C:
     psq_l f1, 0x0(r6), 0, 0
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x94(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f7, 0x98(r1)
     lfs f0, 0x8c(r1)
     lfs f8, 0xa0(r1)
@@ -984,7 +984,7 @@ lbl_fn_800D5F68_00000DC0:
     psq_st f1, 0x0(r3), 0, 0
     mr r4, r3
     stfs f2, 0x7c(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f0, 0x80(r1)
     lfs f8, lbl_808811E0
     fabs f9, f0
@@ -1023,17 +1023,17 @@ lbl_fn_800D5F68_00000E60:
     addi r3, r1, 0x74
     addi r4, r1, 0x68
     addi r5, r1, 0x5c
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     addi r3, r1, 0x5c
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     addi r3, r1, 0x5c
     addi r4, r1, 0x74
     addi r5, r1, 0x50
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     addi r3, r1, 0x50
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f30, lbl_808811E0
     addi r3, r1, 0x288
     lfs f31, 0x5c(r1)

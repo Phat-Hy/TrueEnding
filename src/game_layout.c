@@ -15,7 +15,7 @@ extern void fn_800BFB70(void);
 extern void fn_800BFC18(void);
 extern void fn_800C0508(void);
 extern void fn_800C1424(void);
-extern void fn_805F90D0(void);
+extern void PSMTXTrans(void);
 extern void __GXSetVtxDesc(void);
 extern void fn_80613BB0(void);
 extern void fn_80614190(void);
@@ -295,7 +295,7 @@ lbl_layout_drawPane_0000009C:
     stfs f30, 0x6c(r1)
     stfs f31, 0x70(r1)
     stfs f3, 0x74(r1)
-    bl fn_805F90D0
+    bl PSMTXTrans
     lfs f0, lbl_80880D34
     addi r3, r1, 0x1f0
     lfs f3, lbl_80880D28
@@ -304,7 +304,7 @@ lbl_layout_drawPane_0000009C:
     fmuls f2, f0, f31
     stfs f1, 0x60(r1)
     stfs f2, 0x64(r1)
-    bl fn_805F90D0
+    bl PSMTXTrans
     lfs f0, lbl_80880D38
     addi r3, r1, 0x1c0
     lfs f3, lbl_80880D28
@@ -313,7 +313,7 @@ lbl_layout_drawPane_0000009C:
     fmuls f2, f0, f31
     stfs f1, 0x54(r1)
     stfs f2, 0x58(r1)
-    bl fn_805F90D0
+    bl PSMTXTrans
     lfs f0, lbl_80880D3C
     addi r3, r1, 0x190
     lfs f3, lbl_80880D28
@@ -322,7 +322,7 @@ lbl_layout_drawPane_0000009C:
     fmuls f2, f0, f31
     stfs f1, 0x48(r1)
     stfs f2, 0x4c(r1)
-    bl fn_805F90D0
+    bl PSMTXTrans
     addi r3, r1, 0x250
     li r4, 0x1e
     li r5, 0x1
@@ -367,7 +367,7 @@ lbl_layout_drawPane_000003CC:
     stfs f4, 0x3c(r1)
     stfs f0, 0x40(r1)
     stfs f3, 0x44(r1)
-    bl fn_805F90D0
+    bl PSMTXTrans
     lfs f0, lbl_80880D40
     addi r3, r1, 0x100
     lfs f3, lbl_80880D28
@@ -376,7 +376,7 @@ lbl_layout_drawPane_000003CC:
     fmuls f2, f0, f31
     stfs f1, 0x30(r1)
     stfs f2, 0x34(r1)
-    bl fn_805F90D0
+    bl PSMTXTrans
     lfs f3, lbl_80880D28
     fmr f1, f30
     fmr f2, f31
@@ -384,7 +384,7 @@ lbl_layout_drawPane_000003CC:
     addi r3, r1, 0xd0
     stfs f31, 0x28(r1)
     stfs f3, 0x2c(r1)
-    bl fn_805F90D0
+    bl PSMTXTrans
     lfs f0, lbl_80880D34
     addi r3, r1, 0xa0
     lfs f3, lbl_80880D28
@@ -393,7 +393,7 @@ lbl_layout_drawPane_000003CC:
     fmuls f2, f0, f31
     stfs f1, 0x18(r1)
     stfs f2, 0x1c(r1)
-    bl fn_805F90D0
+    bl PSMTXTrans
     addi r3, r1, 0x160
     li r4, 0x1e
     li r5, 0x1

@@ -18,8 +18,8 @@ extern void world_getLocalFlag(void);
 extern void fn_803BF898(void);
 extern void fn_803EC16C(void);
 extern void fn_803EC374(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
 extern void fn_80680770(void);
 extern void fn_80686EA4(void);
 extern void fn_80695720(void);
@@ -1764,11 +1764,11 @@ lbl_fn_803CA604_00001588:
     fadds f0, f30, f0
     stfs f0, 0x40(r1)
     lfs f1, 0x14(r25)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x38
     addi r3, r1, 0x78
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f3, 0x38(r1)
     mr r3, r16
     lfs f0, 0x4(r25)
@@ -1820,11 +1820,11 @@ lbl_fn_803CA604_00001588:
     lfs f1, 0x14(r25)
     stfs f28, 0x24(r1)
     stfs f29, 0x28(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x14
     addi r3, r1, 0x48
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f3, 0x14(r1)
     addi r0, r17, 0x4dd3
     lfs f0, 0x38(r1)

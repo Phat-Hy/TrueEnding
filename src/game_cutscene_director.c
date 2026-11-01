@@ -50,9 +50,9 @@ extern void fn_8032A894(void);
 extern void fn_8032A9F4(void);
 extern void world_setLocalFlag(void);
 extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9920(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSVECSquareMag(void);
 extern void fn_805F99F0(void);
 extern void fn_805F9AB0(void);
 extern void fn_80680CF8(void);
@@ -247,7 +247,7 @@ lbl_fn_803252E0_000001DC:
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80884FBC
     fcmpo cr0, f1, f0
     ble lbl_fn_803252E0_000002D4
@@ -560,7 +560,7 @@ asm void fn_803258D4(void)
     fnmsubs f1, f8, f7, f0
     stfs f10, 0x24(r1)
     stfs f9, 0x28(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r4, r29
     mr r5, r29
     addi r3, r1, 0x180
@@ -615,7 +615,7 @@ lbl_fn_803258D4_000006C8:
     beq lbl_fn_803258D4_000007B8
     addi r3, r1, 0xf0
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0xf0
     addi r5, r1, 0x120
@@ -640,7 +640,7 @@ lbl_fn_803258D4_000007B8:
     beq lbl_fn_803258D4_00000818
     addi r3, r1, 0x90
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x90
     addi r5, r1, 0xc0
@@ -665,7 +665,7 @@ lbl_fn_803258D4_00000818:
     beq lbl_fn_803258D4_00000878
     addi r3, r1, 0x30
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x30
     addi r5, r1, 0x60
@@ -742,7 +742,7 @@ asm void fn_80325BA0(void)
     beq lbl_fn_80325BA0_00000990
     addi r3, r1, 0x90
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x90
     addi r5, r1, 0x60
@@ -767,7 +767,7 @@ lbl_fn_80325BA0_00000990:
     beq lbl_fn_80325BA0_000009F0
     addi r3, r1, 0xf0
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0xf0
     addi r5, r1, 0xc0
@@ -792,7 +792,7 @@ lbl_fn_80325BA0_000009F0:
     beq lbl_fn_80325BA0_00000A50
     addi r3, r1, 0x150
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x150
     addi r5, r1, 0x120
@@ -814,7 +814,7 @@ lbl_fn_80325BA0_00000A50:
     addi r4, r1, 0x50
     addi r3, r1, 0x180
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f9, 0x52c(r31)
     lis r4, lbl_80749D10@ha
     lfs f7, 0x5a8(r31)

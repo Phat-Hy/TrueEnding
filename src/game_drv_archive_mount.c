@@ -64,8 +64,8 @@ extern void fn_805AC75C(void);
 extern void fn_805ADDD8(void);
 extern void fn_805ADF54(void);
 extern void fn_805AE18C(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9750(void);
+extern void PSMTXRotRad(void);
+extern void PSMTX44Identity(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 extern void fn_8068B100(void);
@@ -878,7 +878,7 @@ lbl_fn_805A6D24_000009A0:
     addi r3, r1, 0x60
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_808882F4
     addi r4, r1, 0x38
     lfs f30, 0x68(r1)
@@ -928,7 +928,7 @@ lbl_fn_805A6D24_000009A0:
     stfs f6, 0xbc(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_808882E8
     fabs f3, f2

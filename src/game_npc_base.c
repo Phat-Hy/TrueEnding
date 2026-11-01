@@ -49,8 +49,8 @@ extern void fn_8017C974(void);
 extern void fn_801A1BE4(void);
 extern void fn_80219E6C(void);
 extern void world_getGlobalFlag(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9750(void);
+extern void PSMTXRotRad(void);
+extern void PSMTX44Identity(void);
 extern void fn_8068AEA4(void);
 extern void fn_806952C4(void);
 extern void fn_80695AD0(void);
@@ -939,7 +939,7 @@ lbl_fn_80139F60_00000A80:
     addi r3, r1, 0x50
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_8088196C
     addi r4, r1, 0x38
     lfs f30, 0x58(r1)
@@ -989,7 +989,7 @@ lbl_fn_80139F60_00000A80:
     stfs f6, 0x34(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x40(r1)
     lfs f0, lbl_808819C4
     fabs f3, f2
@@ -1036,7 +1036,7 @@ asm void fn_8013A13C(void)
 {
     nofralloc
     li r4, 0x79
-    b fn_805F8E70
+    b PSMTXRotRad
 }
 
 asm void fn_8013A144(void)

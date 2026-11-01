@@ -23,7 +23,7 @@ extern void dtor_80084684(void);
 extern void fn_805EE150(void);
 extern void OSInitMutex(void);
 extern void fn_805F8980(void);
-extern void fn_805F95A0(void);
+extern void PSMTXMultVecArraySR(void);
 extern void fn_805FA200(void);
 extern void fn_805FA390(void);
 extern void fn_805FA4E0(void);
@@ -487,7 +487,7 @@ asm void fn_80724920(void)
     stw r0, 0x84(r1)
     lfd f0, 0x80(r1)
     fsubs f2, f0, f2
-    bl fn_805F95A0
+    bl PSMTXMultVecArraySR
     addi r3, r1, 0x38
     li r4, 0x1
     bl fn_80618290

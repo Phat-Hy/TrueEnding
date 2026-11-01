@@ -31,9 +31,9 @@ extern void atn_LoadHandle_destructor(void);
 extern void fn_805A3D00(void);
 extern void fn_805A49E8(void);
 extern void fn_805A5224(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9750(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSMTX44Identity(void);
 extern void fn_80680770(void);
 extern void fn_80682428(void);
 extern void fn_80682544(void);
@@ -863,11 +863,11 @@ lbl_fn_803097AC_00000AE8:
     stfs f0, 0x10(r1)
     lfs f1, 0x538(r3)
     addi r3, r1, 0x38
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x8
     addi r3, r1, 0x38
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f4, 0x10(r1)
     addi r4, r1, 0x2c
     lfs f0, 0xc(r1)
@@ -984,7 +984,7 @@ lbl_fn_803098D0_00000CB8:
     addi r3, r1, 0x108
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80884B20
     addi r4, r1, 0x34
     lfs f4, 0x110(r1)
@@ -1034,7 +1034,7 @@ lbl_fn_803098D0_00000CB8:
     stfs f13, 0x48(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x3c(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x3c(r1)
     lfs f0, lbl_80884B40
     fabs f3, f2

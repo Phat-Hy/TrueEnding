@@ -32,9 +32,9 @@ extern void fn_800838B8(void);
 extern void fn_800839EC(void);
 extern void fn_80084320(void);
 extern void fn_800844D8(void);
-extern void fn_805F9640(void);
-extern void fn_805F97D0(void);
-extern void fn_805F9990(void);
+extern void PSMTX44Inverse(void);
+extern void PSMTX44Copy(void);
+extern void PSVECDotProduct(void);
 extern void fn_806036E0(void);
 extern void fn_80603730(void);
 extern void fn_80603FF0(void);
@@ -1119,11 +1119,11 @@ lbl_fn_8006FAB0_00000D20:
     mr r4, r27
     add r19, r19, r24
     mr r3, r19
-    bl fn_805F9990
+    bl PSVECDotProduct
     fmr f27, f1
     mr r3, r19
     mr r4, r26
-    bl fn_805F9990
+    bl PSVECDotProduct
     lfs f0, 0xc(r19)
     fadds f3, f0, f1
     fabs f0, f3
@@ -1172,7 +1172,7 @@ lbl_fn_8006FAB0_00000DEC:
     beq lbl_fn_8006FAB0_00000E1C
     mr r3, r19
     addi r4, r1, 0x68
-    bl fn_805F9990
+    bl PSVECDotProduct
     lfs f0, 0xc(r19)
     fadds f0, f0, f1
     fadd f0, f29, f0
@@ -1359,7 +1359,7 @@ asm void fn_8006FEBC(void)
     stfs f10, 0x12c(r1)
     stfs f11, 0x13c(r1)
     stfs f12, 0x14c(r1)
-    bl fn_805F9640
+    bl PSMTX44Inverse
     lfs f24, 0x10(r22)
     addi r5, r1, 0x20
     lfs f13, 0xc(r22)
@@ -1437,7 +1437,7 @@ asm void fn_8006FEBC(void)
     stfs f10, 0x7c(r1)
     psq_st f1, 0x0(r31), 0, 0
     stfs f2, 0x1bc(r1)
-    bl fn_805F97D0
+    bl PSMTX44Copy
     addi r4, r1, 0x8
     addi r3, r1, 0x14
     psq_l f1, 0x0(r24), 0, 0
@@ -1781,7 +1781,7 @@ asm void fn_800704DC(void)
     stfs f10, 0x7c(r1)
     psq_st f1, 0x0(r31), 0, 0
     stfs f2, 0xf4(r1)
-    bl fn_805F97D0
+    bl PSMTX44Copy
     addi r4, r1, 0x8
     addi r3, r1, 0x14
     psq_l f1, 0x0(r24), 0, 0

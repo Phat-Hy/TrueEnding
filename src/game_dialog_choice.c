@@ -23,8 +23,8 @@ extern void weapon_getDamageParam(void);
 extern void fn_804EB754(void);
 extern void fn_8059C088(void);
 extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F90D0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXTrans(void);
 
 /* External data declarations */
 extern u8 lbl_80737A9C[];
@@ -977,7 +977,7 @@ lbl_fn_8014DEE4_00000D54:
     beq lbl_fn_8014DEE4_00000E00
     addi r3, r1, 0x80
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x80
     addi r5, r1, 0x50
@@ -1002,7 +1002,7 @@ lbl_fn_8014DEE4_00000E00:
     beq lbl_fn_8014DEE4_00000E60
     addi r3, r1, 0xe0
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0xe0
     addi r5, r1, 0xb0
@@ -1027,7 +1027,7 @@ lbl_fn_8014DEE4_00000E60:
     beq lbl_fn_8014DEE4_00000EC0
     addi r3, r1, 0x140
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x140
     addi r5, r1, 0x110
@@ -1053,7 +1053,7 @@ lbl_fn_8014DEE4_00000EC0:
     stfs f1, 0x14(r1)
     stfs f2, 0x18(r1)
     stfs f1, 0x1c(r1)
-    bl fn_805F90D0
+    bl PSMTXTrans
     addi r3, r1, 0x20
     addi r4, r1, 0x1a0
     addi r5, r1, 0x170
@@ -1292,7 +1292,7 @@ lbl_fn_8014EF48_000011C8:
     beq lbl_fn_8014EF48_00001274
     addi r3, r1, 0x140
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x140
     addi r5, r1, 0x170
@@ -1317,7 +1317,7 @@ lbl_fn_8014EF48_00001274:
     beq lbl_fn_8014EF48_000012D4
     addi r3, r1, 0xe0
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0xe0
     addi r5, r1, 0x110
@@ -1342,7 +1342,7 @@ lbl_fn_8014EF48_000012D4:
     beq lbl_fn_8014EF48_00001334
     addi r3, r1, 0x80
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r30
     addi r4, r1, 0x80
     addi r5, r1, 0xb0
@@ -1368,7 +1368,7 @@ lbl_fn_8014EF48_00001334:
     stfs f1, 0x8(r1)
     stfs f2, 0xc(r1)
     stfs f1, 0x10(r1)
-    bl fn_805F90D0
+    bl PSMTXTrans
     addi r3, r1, 0x1a0
     addi r4, r1, 0x20
     addi r5, r1, 0x50

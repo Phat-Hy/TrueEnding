@@ -20,8 +20,8 @@ extern void fn_80084C24(void);
 extern void fn_800BDB58(void);
 extern void atn_LH_Texture_update(void);
 extern void atn_LoadHandle_getStatus(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
 extern void fn_806163C0(void);
 extern void fn_806163E0(void);
 extern void fn_80686A48(void);
@@ -154,7 +154,7 @@ lbl_fn_800610A4_000000F0:
     stfs f2, 0x70(r1)
     psq_st f1, 0x0(r27), 0, 0
     stfs f2, 0x7c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     fadds f3, f27, f30
     addi r25, r1, 0x5c
     lfs f0, lbl_808809A0
@@ -174,7 +174,7 @@ lbl_fn_800610A4_000000F0:
     stfs f0, 0x58(r1)
     psq_st f1, 0x0(r25), 0, 0
     stfs f2, 0x64(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     fadds f4, f27, f30
     addi r24, r1, 0x44
     fadds f3, f28, f31
@@ -195,7 +195,7 @@ lbl_fn_800610A4_000000F0:
     stfs f0, 0x40(r1)
     psq_st f1, 0x0(r24), 0, 0
     stfs f2, 0x4c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     fadds f3, f28, f31
     addi r23, r1, 0x2c
     lfs f0, lbl_808809A0
@@ -215,7 +215,7 @@ lbl_fn_800610A4_000000F0:
     stfs f0, 0x28(r1)
     psq_st f1, 0x0(r23), 0, 0
     stfs f2, 0x34(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f0, lbl_808809A0
     addi r22, r1, 0x14
     lfs f2, 0x34(r1)
@@ -234,7 +234,7 @@ lbl_fn_800610A4_000000F0:
     stfs f0, 0x10(r1)
     psq_st f1, 0x0(r22), 0, 0
     stfs f2, 0x1c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0x1c(r1)
     addi r3, r1, 0xb0
     psq_l f1, 0x0(r22), 0, 0
@@ -404,7 +404,7 @@ lbl_fn_8006144C_00000498:
     stfs f2, 0x28(r1)
     psq_st f1, 0x0(r27), 0, 0
     stfs f2, 0x34(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f0, lbl_808809A0
     addi r25, r1, 0x14
     lfs f2, 0x34(r1)
@@ -423,7 +423,7 @@ lbl_fn_8006144C_00000498:
     stfs f0, 0x10(r1)
     psq_st f1, 0x0(r25), 0, 0
     stfs f2, 0x1c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0x1c(r1)
     addi r3, r1, 0x44
     psq_l f1, 0x0(r25), 0, 0
@@ -1244,7 +1244,7 @@ lbl_fn_80061E2C_00001090:
     stfs f21, 0xd8(r1)
     psq_st f1, 0x0(r27), 0, 0
     stfs f2, 0xe4(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0xe4(r1)
     addi r6, r1, 0x140
     psq_l f1, 0x0(r27), 0, 0
@@ -1279,7 +1279,7 @@ lbl_fn_80061E2C_00001090:
     stfs f21, 0xb0(r1)
     psq_st f1, 0x0(r25), 0, 0
     stfs f2, 0xbc(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0xbc(r1)
     addi r5, r1, 0x140
     psq_l f1, 0x0(r25), 0, 0
@@ -1316,7 +1316,7 @@ lbl_fn_80061E2C_00001090:
     stfs f21, 0x88(r1)
     psq_st f1, 0x0(r23), 0, 0
     stfs f2, 0x94(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0x94(r1)
     addi r6, r1, 0x140
     psq_l f1, 0x0(r23), 0, 0
@@ -1352,7 +1352,7 @@ lbl_fn_80061E2C_00001090:
     stfs f21, 0x60(r1)
     psq_st f1, 0x0(r21), 0, 0
     stfs f2, 0x6c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0x6c(r1)
     addi r4, r1, 0x220
     psq_l f1, 0x0(r21), 0, 0
@@ -1466,7 +1466,7 @@ lbl_fn_80061E2C_000013FC:
     fmuls f3, f3, f27
     fmuls f1, f29, f0
     stfs f3, 0x4(r5)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r3, r1, 0x1f0
     stfs f30, 0x130(r1)
     add r3, r3, r27
@@ -1547,7 +1547,7 @@ lbl_fn_80061E2C_000014DC:
     psq_st f1, 0x0(r6), 0, 0
     stfs f2, 0x34(r1)
     stfs f2, 0x8(r6)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f0, 0x0(r24)
     mr r4, r22
     mr r5, r22
@@ -1564,7 +1564,7 @@ lbl_fn_80061E2C_000014DC:
     psq_l f1, 0x0(r24), 0, 0
     psq_st f1, 0x0(r22), 0, 0
     stfs f2, 0x28(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r3, r1, 0x160
     psq_l f1, 0x0(r22), 0, 0
     add r3, r3, r30
@@ -1976,7 +1976,7 @@ lbl_fn_800629F0_00001B30:
     mr r3, r30
     mr r4, r26
     mr r5, r26
-    bl fn_805F93C0
+    bl PSMTXMultVec
 lbl_fn_800629F0_00001B48:
     lfs f2, 0x0(r26)
     addi r24, r24, 0x1
@@ -2142,11 +2142,11 @@ lbl_fn_80062C8C_00001D6C:
     stfs f29, 0x10(r1)
     fsubs f3, f3, f30
     fmuls f1, f3, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x8
     addi r3, r1, 0x18
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f4, 0x8(r1)
     addi r0, r26, 0x1
     lfs f3, 0xc(r1)
@@ -2331,7 +2331,7 @@ lbl_fn_80062F7C_00001FEC:
     stfs f5, 0xc(r1)
     stfs f27, 0x10(r1)
     stw r28, 0x3c(r30)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     frsp f28, f25
     lfs f29, 0xc(r1)
     frsp f30, f27
@@ -2341,7 +2341,7 @@ lbl_fn_80062F7C_00002084:
     mr r4, r29
     mr r5, r29
     addi r3, r1, 0x18
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f0, 0x0(r29)
     addi r28, r28, 0x1
     cmplwi r28, 0x4

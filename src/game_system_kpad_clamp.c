@@ -122,8 +122,8 @@ extern void fn_8059C330(void);
 extern void fn_8059D17C(void);
 extern void fn_8059D26C(void);
 extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9160(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXScale(void);
 
 /* External data declarations */
 extern u8 lbl_8074DA10[];
@@ -227,7 +227,7 @@ asm void fn_8037257C(void)
     beq lbl_fn_8037257C_000000C0
     addi r3, r1, 0x38
     li r4, 0x79
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x38
     addi r5, r1, 0x8
@@ -252,7 +252,7 @@ lbl_fn_8037257C_000000C0:
     beq lbl_fn_8037257C_00000120
     addi r3, r1, 0x98
     li r4, 0x78
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0x98
     addi r5, r1, 0x68
@@ -277,7 +277,7 @@ lbl_fn_8037257C_00000120:
     beq lbl_fn_8037257C_00000180
     addi r3, r1, 0xf8
     li r4, 0x7a
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r31
     addi r4, r1, 0xf8
     addi r5, r1, 0xc8
@@ -334,7 +334,7 @@ asm void fn_80372754(void)
     mr r31, r3
     lfs f3, 0x8(r4)
     addi r3, r1, 0x8
-    bl fn_805F9160
+    bl PSMTXScale
     mr r3, r31
     addi r4, r1, 0x8
     addi r5, r1, 0x38

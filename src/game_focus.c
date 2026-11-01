@@ -16,9 +16,9 @@ extern void fn_800DCA6C(void);
 extern void fn_805ED460(void);
 extern void fn_805ED5A0(void);
 extern void fn_805F89F0(void);
-extern void fn_805F9160(void);
-extern void fn_805F9190(void);
-extern void fn_805F93C0(void);
+extern void PSMTXScale(void);
+extern void PSMTXQuat(void);
+extern void PSMTXMultVec(void);
 extern void fn_805F99F0(void);
 extern void fn_806952C4(void);
 extern void fn_80695AD0(void);
@@ -1625,7 +1625,7 @@ lbl_fn_8009A5CC_00001620:
     addi r4, r1, 0xb4
     mr r3, r17
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
 lbl_fn_8009A5CC_00001638:
     psq_l f1, 0x40(r20), 0, 0
     addi r3, r1, 0xa8
@@ -1755,7 +1755,7 @@ lbl_fn_8009A5CC_00001750:
 lbl_fn_8009A5CC_00001820:
     addi r3, r1, 0x120
     addi r4, r1, 0x98
-    bl fn_805F9190
+    bl PSMTXQuat
     lfs f8, 0xb4(r1)
     addi r3, r1, 0x1b0
     lfs f7, 0xb8(r1)
@@ -1921,7 +1921,7 @@ lbl_fn_8009A5CC_00001A88:
     addi r3, r1, 0xf0
     lfs f2, 0x8c(r1)
     lfs f3, 0x90(r1)
-    bl fn_805F9160
+    bl PSMTXScale
     psq_l f1, 0x0(r23), 0, 0
     mr r18, r24
     psq_l f2, 0x8(r23), 0, 0
@@ -2189,7 +2189,7 @@ lbl_fn_8009ADA4_00001E68:
     addi r4, r1, 0x148
     mr r3, r17
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
 lbl_fn_8009ADA4_00001E80:
     cmpwi r27, 0x0
     beq lbl_fn_8009ADA4_000020A0
@@ -2417,7 +2417,7 @@ lbl_fn_8009ADA4_00002120:
 lbl_fn_8009ADA4_000021DC:
     addi r3, r1, 0x1b8
     addi r4, r1, 0x138
-    bl fn_805F9190
+    bl PSMTXQuat
     lfs f8, 0x148(r1)
     addi r3, r1, 0x278
     lfs f7, 0x14c(r1)
@@ -2609,7 +2609,7 @@ lbl_fn_8009ADA4_000024A0:
     addi r3, r1, 0x188
     lfs f2, 0x114(r1)
     lfs f3, 0x118(r1)
-    bl fn_805F9160
+    bl PSMTXScale
     psq_l f1, 0x0(r23), 0, 0
     mr r18, r24
     psq_l f2, 0x8(r23), 0, 0

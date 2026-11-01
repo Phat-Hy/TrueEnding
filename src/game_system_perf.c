@@ -42,10 +42,10 @@ extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_805F89F0(void);
-extern void fn_805F90D0(void);
-extern void fn_805F9160(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9940(void);
+extern void PSMTXTrans(void);
+extern void PSMTXScale(void);
+extern void PSMTXMultVec(void);
+extern void PSVECMag(void);
 extern void fn_806827C4(void);
 extern void fn_8068B100(void);
 extern void fn_80695720(void);
@@ -465,7 +465,7 @@ lbl_fn_80202E48_00000460:
     stfs f8, 0x98(r31)
     stfs f7, 0xa8(r31)
     stfs f0, 0xb8(r31)
-    bl fn_805F9160
+    bl PSMTXScale
     mr r3, r30
     addi r4, r1, 0x60
     addi r5, r1, 0x30
@@ -557,7 +557,7 @@ asm void fn_8020303C(void)
     stfs f8, 0x20(r1)
     stfs f7, 0x24(r1)
     stfs f0, 0x28(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x24(r31)
     fmr f30, f1
     lfs f7, 0x14(r31)
@@ -566,7 +566,7 @@ asm void fn_8020303C(void)
     stfs f8, 0x14(r1)
     stfs f7, 0x18(r1)
     stfs f0, 0x1c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x20(r31)
     fmr f31, f1
     lfs f7, 0x10(r31)
@@ -575,7 +575,7 @@ asm void fn_8020303C(void)
     stfs f8, 0x8(r1)
     stfs f7, 0xc(r1)
     stfs f0, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     stfs f1, 0x38(r1)
     frsp f2, f30
     addi r3, r1, 0x38
@@ -654,7 +654,7 @@ lbl_fn_8020303C_0000076C:
     addi r31, r30, 0xc8
     lfs f2, 0x48(r1)
     addi r3, r1, 0x80
-    bl fn_805F9160
+    bl PSMTXScale
     mr r3, r31
     addi r4, r1, 0x80
     addi r5, r1, 0x50
@@ -714,7 +714,7 @@ asm void fn_80203260(void)
     stfs f7, 0xa8(r3)
     stfs f0, 0xb8(r3)
     addi r3, r1, 0x38
-    bl fn_805F9160
+    bl PSMTXScale
     mr r3, r31
     addi r4, r1, 0x38
     addi r5, r1, 0x8
@@ -830,7 +830,7 @@ asm void fn_80203328(void)
     stfs f1, 0x44(r1)
     stfs f2, 0x48(r1)
     stfs f1, 0x4c(r1)
-    bl fn_805F9160
+    bl PSMTXScale
     fneg f8, f30
     addi r4, r1, 0x200
     lfs f7, lbl_80882D14
@@ -858,7 +858,7 @@ asm void fn_80203328(void)
     stfs f0, 0x38(r1)
     stfs f8, 0x3c(r1)
     stfs f9, 0x40(r1)
-    bl fn_805F90D0
+    bl PSMTXTrans
     mr r3, r29
     addi r4, r1, 0x110
     addi r5, r1, 0x140
@@ -885,7 +885,7 @@ lbl_fn_80203328_00000AD8:
     stfs f1, 0x2c(r1)
     stfs f2, 0x30(r1)
     stfs f1, 0x34(r1)
-    bl fn_805F9160
+    bl PSMTXScale
     addi r4, r1, 0x1d0
     addi r3, r1, 0x260
     psq_l f1, 0x0(r4), 0, 0
@@ -916,7 +916,7 @@ lbl_fn_80203328_00000B30:
     stfs f1, 0x20(r1)
     stfs f2, 0x24(r1)
     stfs f1, 0x28(r1)
-    bl fn_805F9160
+    bl PSMTXScale
     fneg f8, f30
     addi r4, r1, 0x1a0
     lfs f7, lbl_80882D14
@@ -944,7 +944,7 @@ lbl_fn_80203328_00000B30:
     stfs f0, 0x14(r1)
     stfs f8, 0x18(r1)
     stfs f9, 0x1c(r1)
-    bl fn_805F90D0
+    bl PSMTXTrans
     mr r3, r29
     addi r4, r1, 0xb0
     addi r5, r1, 0xe0
@@ -971,7 +971,7 @@ lbl_fn_80203328_00000C28:
     stfs f1, 0x8(r1)
     stfs f2, 0xc(r1)
     stfs f1, 0x10(r1)
-    bl fn_805F9160
+    bl PSMTXScale
     addi r4, r1, 0x170
     addi r3, r1, 0x260
     psq_l f1, 0x0(r4), 0, 0
@@ -1003,7 +1003,7 @@ lbl_fn_80203328_00000C80:
     stfs f2, 0xa0(r1)
     psq_st f1, 0x0(r29), 0, 0
     stfs f2, 0xac(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f0, lbl_80882CF8
     addi r28, r1, 0x8c
     lfs f7, lbl_80882D00
@@ -1023,7 +1023,7 @@ lbl_fn_80203328_00000C80:
     stfs f0, 0x88(r1)
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0x94(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f7, lbl_80882CF8
     addi r29, r1, 0x74
     lfs f0, lbl_80882D00
@@ -1043,7 +1043,7 @@ lbl_fn_80203328_00000C80:
     stfs f7, 0x70(r1)
     psq_st f1, 0x0(r29), 0, 0
     stfs f2, 0x7c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f7, lbl_80882D00
     addi r28, r1, 0x5c
     lfs f0, lbl_80882CF8
@@ -1063,7 +1063,7 @@ lbl_fn_80203328_00000C80:
     stfs f0, 0x58(r1)
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0x64(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0x64(r1)
     li r0, 0xd
     psq_l f1, 0x0(r28), 0, 0

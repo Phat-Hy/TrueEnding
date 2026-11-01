@@ -22,9 +22,9 @@ extern void fn_8009E1E4(void);
 extern void fn_804761CC(void);
 extern void fn_804761E8(void);
 extern void fn_805F89F0(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9420(void);
-extern void fn_805F9940(void);
+extern void PSMTXMultVec(void);
+extern void PSMTXMultVecArray(void);
+extern void PSVECMag(void);
 
 /* External data declarations */
 
@@ -271,7 +271,7 @@ lbl_fn_8008E304_000002D8:
     stfs f2, 0x20(r1)
     addi r3, r1, 0xf8
     psq_st f1, 0x0(r28), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f0, 0xa8(r29)
     lwz r0, 0x2f8(r30)
     fmuls f0, f0, f24
@@ -721,7 +721,7 @@ lbl_fn_8008E818_00000978:
     stfs f2, 0x30(r1)
     addi r3, r1, 0x58
     psq_st f1, 0x0(r24), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     psq_l f1, 0x0(r24), 0, 0
     addi r6, r1, 0x38
     lfs f2, 0x30(r1)
@@ -1002,7 +1002,7 @@ lbl_fn_8008EEDC_00000CBC:
     stfs f10, 0xb0(r1)
     stfs f12, 0xb4(r1)
     stfs f27, 0xb8(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fmuls f11, f31, f1
     mr r4, r30
     mr r5, r30
@@ -1014,7 +1014,7 @@ lbl_fn_8008EEDC_00000CBC:
     lwz r3, 0x3c(r15)
     mulli r0, r0, 0x30
     add r3, r3, r0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     mr r3, r18
     mr r4, r30
     bl fn_8004FF58
@@ -1121,7 +1121,7 @@ lbl_fn_8008EEDC_00000CBC:
     stfs f10, 0x7c(r1)
     psq_st f1, 0x0(r7), 0, 0
     stfs f2, 0x1bc(r1)
-    bl fn_805F9420
+    bl PSMTXMultVecArray
     psq_l f1, 0x0(r21), 0, 0
     mr r5, r22
     lfs f2, 0x168(r1)
@@ -1451,7 +1451,7 @@ asm void fn_8008F5F8(void)
     stfs f30, 0x10(r1)
     psq_st f1, 0x0(r25), 0, 0
     stfs f2, 0xdc(r1)
-    bl fn_805F9420
+    bl PSMTXMultVecArray
     addi r3, r1, 0x74
     addi r4, r1, 0x68
     psq_l f1, 0x0(r23), 0, 0
@@ -1749,7 +1749,7 @@ asm void atn_Model_draw(void)
     stfs f0, 0x50(r1)
     stfs f8, 0x54(r1)
     stfs f10, 0x58(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, lbl_80880C08
     addi r4, r1, 0x1a0
     psq_l f2, 0x10(r26), 0, 0
@@ -1888,7 +1888,7 @@ lbl_atn_Model_draw_00001B14:
     mr r5, r24
     addi r3, r1, 0x1a0
     stfs f2, 0x7c(r1)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0x7c(r1)
     addi r3, r1, 0xe8
     psq_l f1, 0x0(r24), 0, 0
@@ -2040,7 +2040,7 @@ lbl_atn_Model_draw_00001D5C:
     stfs f2, 0x1c(r1)
     addi r3, r1, 0x110
     psq_st f1, 0x0(r25), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f0, 0xa8(r26)
     addi r3, r1, 0xe8
     psq_l f1, 0x0(r25), 0, 0
@@ -2074,7 +2074,7 @@ lbl_atn_Model_draw_00001DD4:
     fsubs f0, f7, f0
     stfs f8, 0xc(r1)
     stfs f0, 0x8(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lwz r3, lbl_8087EFA8
     lfs f0, 0x10c(r3)
     fcmpo cr0, f1, f0

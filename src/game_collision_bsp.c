@@ -31,10 +31,10 @@ extern void fn_80219558(void);
 extern void world_getGlobalFlag(void);
 extern void fn_80373148(void);
 extern void fn_803C1884(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9920(void);
-extern void fn_805F9940(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSVECSquareMag(void);
+extern void PSVECMag(void);
 extern void fn_80680CF8(void);
 
 /* External data declarations */
@@ -1816,7 +1816,7 @@ lbl_fn_80103FD4_0000172C:
     stfs f4, 0x30(r1)
     stfs f0, 0x2c(r1)
     stfs f6, 0x34(r1)
-    bl fn_805F9940
+    bl PSVECMag
     stfs f1, 0x24c(r16)
     lwz r0, 0x12a4(r26)
     extrwi. r0, r0, 1, 3
@@ -2031,11 +2031,11 @@ lbl_fn_80103FD4_00001A3C:
     psq_st f1, 0x0(r17), 0, 0
     fmr f1, f0
     stfs f2, 0x4c(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x38
     addi r3, r1, 0x50
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f5, 0x44(r1)
     addi r3, r1, 0x20
     lfs f0, 0x38(r1)
@@ -2058,7 +2058,7 @@ lbl_fn_80103FD4_00001A3C:
     stfs f8, 0x20(r1)
     stfs f3, 0x24(r1)
     stfs f0, 0x28(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fsubs f0, f1, f28
     fcmpo cr0, f19, f0
     ble lbl_fn_80103FD4_00001AEC
@@ -2456,7 +2456,7 @@ lbl_fn_80103FD4_00002024:
     stfs f4, 0x18(r1)
     stfs f0, 0x14(r1)
     stfs f6, 0x1c(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lwz r4, 0x0(r28)
     fmr f16, f1
     lfs f0, 0x530(r15)
@@ -2472,7 +2472,7 @@ lbl_fn_80103FD4_00002024:
     stfs f4, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f6, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fmuls f0, f31, f1
     fcmpo cr0, f16, f0
     ble lbl_fn_80103FD4_00002124

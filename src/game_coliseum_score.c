@@ -33,8 +33,8 @@ extern void fn_800DC288(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_80494354(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
 extern void fn_8067E23C(void);
 extern void fn_80680770(void);
 extern void fn_80682428(void);
@@ -667,7 +667,7 @@ lbl_fn_8049248C_000007D4:
     addi r3, r1, 0x1a4
     stfs f25, 0x1a8(r1)
     stfs f1, 0x1ac(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f24
     ble lbl_fn_8049248C_00000898
     stfs f26, 0x18c(r1)
@@ -679,7 +679,7 @@ lbl_fn_8049248C_000007D4:
     stfs f22, 0x194(r1)
     psq_st f1, 0x0(r23), 0, 0
     stfs f2, 0x1a0(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lwz r0, 0x70(r15)
     cmpwi r0, 0x0
     beq lbl_fn_8049248C_00000880
@@ -2206,7 +2206,7 @@ lbl_fn_8049248C_00001E4C:
     stfs f2, 0xc4(r1)
     psq_st f1, 0x0(r18), 0, 0
     stfs f2, 0xb8(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     psq_l f1, 0x0(r18), 0, 0
     mr r3, r17
     lfs f2, 0xb8(r1)

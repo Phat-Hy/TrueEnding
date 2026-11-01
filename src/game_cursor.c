@@ -38,9 +38,9 @@ extern void fn_800DCA6C(void);
 extern void atn_LoadHandle_getName(void);
 extern void fn_80473F88(void);
 extern void fn_804741C0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F98D0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSVECNormalize(void);
 extern void fn_805F9D20(void);
 extern void fn_80680CF8(void);
 extern void fn_80682544(void);
@@ -457,11 +457,11 @@ lbl_fn_8009757C_0000041C:
     fsubs f0, f0, f31
     fdivs f0, f0, f29
     fmuls f1, f30, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r4, r31
     mr r5, r31
     addi r3, r1, 0x18
-    bl fn_805F93C0
+    bl PSMTXMultVec
     add r3, r29, r28
     mr r4, r31
     lwz r3, 0x388(r3)
@@ -529,7 +529,7 @@ asm void fn_80097750(void)
     mr r4, r31
     stfs f2, 0x10(r1)
     psq_st f1, 0x0(r31), 0, 0
-    bl fn_805F98D0
+    bl PSVECNormalize
     psq_l f1, 0x0(r31), 0, 0
     lfs f2, 0x10(r1)
     stfs f2, 0x3b0(r29)

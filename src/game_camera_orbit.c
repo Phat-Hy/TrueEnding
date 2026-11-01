@@ -58,9 +58,9 @@ extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_805A3C58(void);
 extern void fn_805A3D00(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9750(void);
-extern void fn_805F98D0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTX44Identity(void);
+extern void PSVECNormalize(void);
 extern void fn_80680770(void);
 extern void fn_80682428(void);
 extern void fn_80682544(void);
@@ -1708,7 +1708,7 @@ lbl_fn_802E9590_0000165C:
     stfs f2, 0x20(r1)
     psq_st f1, 0x0(r29), 0, 0
     stfs f2, 0x38(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x38(r1)
     addi r30, r1, 0x24
     psq_l f1, 0x0(r29), 0, 0
@@ -1741,7 +1741,7 @@ lbl_fn_802E9590_00001718:
     addi r3, r1, 0xc8
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_808847A8
     addi r4, r1, 0x48
     lfs f4, 0xd0(r1)
@@ -1791,7 +1791,7 @@ lbl_fn_802E9590_00001718:
     stfs f13, 0xb4(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x50(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x50(r1)
     lfs f0, lbl_808847BC
     fabs f3, f2

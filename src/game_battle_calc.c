@@ -30,8 +30,8 @@ extern void fn_801AD34C(void);
 extern void fn_801AF264(void);
 extern void fn_801B2EDC(void);
 extern void fn_803750E4(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
 extern void fn_80695AD0(void);
 
 /* External data declarations */
@@ -916,11 +916,11 @@ asm void fn_80168FCC(void)
     stfs f0, 0x34(r1)
     lfs f1, 0x538(r3)
     addi r3, r1, 0x58
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x2c
     addi r3, r1, 0x58
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lwz r12, 0x0(r29)
     mr r3, r29
     lwz r12, 0x44(r12)

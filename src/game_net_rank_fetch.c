@@ -47,7 +47,7 @@ extern void fn_80526660(void);
 extern void fn_80526694(void);
 extern void fn_805266C0(void);
 extern void fn_80530D8C(void);
-extern void fn_805F98D0(void);
+extern void PSVECNormalize(void);
 extern void fn_80695720(void);
 extern void fn_806958E0(void);
 extern u32 strlen(const char* str);
@@ -877,7 +877,7 @@ lbl_fn_805212C0_00000A0C:
 lbl_fn_805212C0_00000AA8:
     addi r3, r1, 0x9c
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f4, 0x9c(r1)
     cmplw r29, r31
     lfs f3, 0xa0(r1)

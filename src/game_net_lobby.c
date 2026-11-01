@@ -39,7 +39,7 @@ extern void fn_80219E6C(void);
 extern void world_getGlobalFlag(void);
 extern void fn_8044441C(void);
 extern void fn_804444E8(void);
-extern void fn_805F9920(void);
+extern void PSVECSquareMag(void);
 extern void fn_80680CF8(void);
 extern void fn_80695D84(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -1469,7 +1469,7 @@ lbl_fn_801EA924_00001284:
     stfs f4, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f6, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f31
     ble lbl_fn_801EA924_0000131C
     lwz r28, lbl_8087F130
@@ -1739,7 +1739,7 @@ lbl_fn_801EAB24_00001658:
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fcmpo cr0, f1, f29
     bge lbl_fn_801EAB24_0000182C
     lwz r4, lbl_8087EFB4

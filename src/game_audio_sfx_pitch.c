@@ -102,7 +102,7 @@ extern void fn_805A4258(void);
 extern void fn_805A4984(void);
 extern void fn_805A4A20(void);
 extern void fn_805A4F20(void);
-extern void fn_805F9920(void);
+extern void PSVECSquareMag(void);
 extern void fn_80682428(void);
 extern void fn_80684600(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -1515,7 +1515,7 @@ lbl_fn_80314384_000012A8:
     stfs f2, 0x24(r1)
     stfs f0, 0x20(r1)
     stfs f4, 0x28(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lwz r3, 0x64(r31)
     lfs f2, lbl_80884D10
     lfs f0, 0x30(r3)
@@ -1559,7 +1559,7 @@ lbl_fn_80314384_0000135C:
     stfs f2, 0x18(r1)
     stfs f0, 0x14(r1)
     stfs f4, 0x1c(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lwz r3, 0x64(r31)
     lfs f2, lbl_80884D14
     lfs f0, 0x30(r3)

@@ -154,9 +154,9 @@ extern void fn_80570A50(void);
 extern void fn_8059C330(void);
 extern void fn_805AA738(void);
 extern void fn_805BA358(void);
-extern void fn_805F8E70(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9940(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXMultVec(void);
+extern void PSVECMag(void);
 extern void fn_80682544(void);
 extern void fn_80684600(void);
 extern void fn_8068A918(void);
@@ -1633,7 +1633,7 @@ lbl_world_Manager_draw_00001330:
     fsubs f0, f3, f0
     stfs f4, 0x38(r1)
     stfs f0, 0x34(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, lbl_8088574C
     fcmpo cr0, f1, f0
     ble lbl_world_Manager_draw_000014E4
@@ -1645,11 +1645,11 @@ lbl_world_Manager_draw_00001330:
     stfs f3, 0x64(r1)
     stfs f0, 0x68(r1)
     stfs f3, 0x6c(r1)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x64
     addi r3, r1, 0xc8
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f3, 0x78(r1)
     addi r4, r1, 0x58
     lfs f0, 0x6c(r1)

@@ -58,7 +58,7 @@ extern void fn_8047059C(void);
 extern void fn_804F5B0C(void);
 extern void fn_804F5CA0(void);
 extern void fn_804F5E3C(void);
-extern void fn_805F9920(void);
+extern void PSVECSquareMag(void);
 extern void fn_80680CF8(void);
 extern void fn_80682428(void);
 extern void fn_80684600(void);
@@ -1255,7 +1255,7 @@ lbl_fn_804096D4_00000F74:
     stfs f4, 0x68(r1)
     stfs f0, 0x64(r1)
     stfs f6, 0x6c(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lwz r3, lbl_8087F430
     fmr f30, f1
     li r0, 0x0
@@ -1298,7 +1298,7 @@ lbl_fn_804096D4_00000FD4:
     stfs f5, 0x60(r1)
     stfs f0, 0x58(r1)
     stfs f4, 0x5c(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fmuls f0, f31, f31
     fcmpo cr0, f1, f0
     bge lbl_fn_804096D4_00001068
@@ -1422,7 +1422,7 @@ lbl_fn_804096D4_00001210:
     cmplwi r0, 0x0
     beq lbl_fn_804096D4_00001338
     addi r3, r31, 0x170
-    bl fn_805F9920
+    bl PSVECSquareMag
     fabs f0, f1
     frsp f0, f0
     fcmpo cr0, f0, f31

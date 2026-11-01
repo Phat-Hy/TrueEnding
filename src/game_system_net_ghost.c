@@ -27,11 +27,11 @@ extern void fn_803ACF88(void);
 extern void fn_803AD3D8(void);
 extern void fn_803E3C78(void);
 extern void fn_805F89F0(void);
-extern void fn_805F8E70(void);
-extern void fn_805F90D0(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9940(void);
-extern void fn_805F9990(void);
+extern void PSMTXRotRad(void);
+extern void PSMTXTrans(void);
+extern void PSMTXMultVec(void);
+extern void PSVECMag(void);
+extern void PSVECDotProduct(void);
 extern void fn_80680770(void);
 extern void fn_80680CF8(void);
 extern void fn_80686EA4(void);
@@ -257,25 +257,25 @@ lbl_fn_8039AB10_00000244:
     stfs f28, 0x4c(r1)
     lfs f0, 0x14(r5)
     fadds f1, f29, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x44
     addi r3, r1, 0x90
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     stfs f27, 0x38(r1)
     addi r3, r1, 0x60
     li r4, 0x79
     stfs f27, 0x3c(r1)
     stfs f28, 0x40(r1)
     lfs f1, 0x538(r29)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     addi r4, r1, 0x38
     addi r3, r1, 0x60
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r3, r1, 0x44
     addi r4, r1, 0x38
-    bl fn_805F9990
+    bl PSVECDotProduct
     fcmpo cr0, f1, f30
     mfcr r0
     extrwi r23, r0, 1, 1
@@ -707,7 +707,7 @@ lbl_fn_8039B2BC_000008B0:
     lfs f1, 0x4(r21)
     lfs f2, 0x8(r21)
     lfs f3, 0xc(r21)
-    bl fn_805F90D0
+    bl PSMTXTrans
     psq_l f1, 0x0(r27), 0, 0
     addi r3, r1, 0xc0
     psq_l f2, 0x8(r27), 0, 0
@@ -723,7 +723,7 @@ lbl_fn_8039B2BC_000008B0:
     psq_st f5, 0x20(r28), 0, 0
     psq_st f6, 0x28(r28), 0, 0
     lfs f1, 0x14(r21)
-    bl fn_805F8E70
+    bl PSMTXRotRad
     mr r3, r28
     addi r4, r1, 0xc0
     addi r5, r1, 0x90
@@ -918,7 +918,7 @@ lbl_fn_8039B2BC_00000B54:
     fsubs f0, f7, f0
     stfs f8, 0xc(r1)
     stfs f0, 0x8(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fsubs f0, f1, f30
     fdivs f0, f0, f27
     stfs f0, 0x8c(r1)
@@ -1228,7 +1228,7 @@ lbl_fn_8039B7B0_00000FB0:
     fsubs f0, f3, f0
     stfs f4, 0xc(r1)
     stfs f0, 0x8(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fsubs f0, f1, f31
     fdivs f0, f0, f28
     stfs f0, 0x9c(r1)

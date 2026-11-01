@@ -30,10 +30,10 @@ extern void fn_8023A254(void);
 extern void fn_8023A8B4(void);
 extern void fn_8033E8D4(void);
 extern void world_setLocalFlag(void);
-extern void fn_805F8E70(void);
-extern void fn_805F9750(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9940(void);
+extern void PSMTXRotRad(void);
+extern void PSMTX44Identity(void);
+extern void PSVECNormalize(void);
+extern void PSVECMag(void);
 extern void fn_80680770(void);
 extern void fn_80680CF8(void);
 extern void fn_80686EA4(void);
@@ -129,7 +129,7 @@ asm void fn_803402C0(void)
     stfs f5, 0x48(r1)
     stfs f0, 0x44(r1)
     stfs f4, 0x4c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fmr f31, f1
     lfs f0, lbl_80885288
     fcmpo cr0, f31, f0
@@ -174,14 +174,14 @@ lbl_fn_803402C0_000000FC:
 lbl_fn_803402C0_0000011C:
     addi r3, r1, 0x44
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     psq_l f1, 0x20(r31), 0, 0
     addi r30, r1, 0x38
     lfs f2, 0x28(r31)
     mr r3, r30
     stfs f2, 0x40(r1)
     psq_st f1, 0x0(r30), 0, 0
-    bl fn_805F9940
+    bl PSVECMag
     lfs f3, 0x78(r31)
     fmr f30, f1
     lfs f0, lbl_80885320
@@ -189,7 +189,7 @@ lbl_fn_803402C0_0000011C:
     ble lbl_fn_803402C0_00000204
     mr r3, r30
     mr r4, r30
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f4, 0x78(r31)
     lfs f3, lbl_80885324
     lfs f0, lbl_80885328
@@ -259,7 +259,7 @@ lbl_fn_803402C0_00000204:
 lbl_fn_803402C0_00000260:
     addi r3, r1, 0x38
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     fcmpo cr0, f30, f31
     ble lbl_fn_803402C0_0000027C
     fmr f3, f31
@@ -757,7 +757,7 @@ lbl_fn_803405C0_000008A8:
     stfs f0, 0x48(r1)
     fadds f0, f2, f0
     stfs f0, 0x54(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lwz r3, lbl_8087F048
     mr r4, r31
     lfs f1, lbl_80885238
@@ -1279,7 +1279,7 @@ lbl_fn_803412AC_0000112C:
     addi r3, r1, 0xb8
     li r4, 0x79
     fneg f1, f0
-    bl fn_805F8E70
+    bl PSMTXRotRad
     lfs f3, lbl_80885238
     addi r4, r1, 0x70
     lfs f30, 0xc0(r1)
@@ -1329,7 +1329,7 @@ lbl_fn_803412AC_0000112C:
     stfs f6, 0x114(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x78(r1)
-    bl fn_805F9750
+    bl PSMTX44Identity
     lfs f2, 0x78(r1)
     lfs f0, lbl_80885298
     fabs f3, f2

@@ -15,7 +15,7 @@ extern void fn_800CA1D4(void);
 extern void fn_800CA2FC(void);
 extern void fn_800CA3D4(void);
 extern void fn_8059E380(void);
-extern void fn_805F9940(void);
+extern void PSVECMag(void);
 extern void fn_80695B00(void);
 extern void fn_80709AD0(void);
 extern void fn_80709F20(void);
@@ -1122,7 +1122,7 @@ asm void fn_800CB0A0(void)
     fsubs f0, f1, f0
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f2, 0x10(r30)
     lfs f0, lbl_80881180
     fcmpo cr0, f2, f0
@@ -1174,7 +1174,7 @@ asm void fn_800CB14C(void)
     fsubs f0, f1, f0
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f2, 0x10(r30)
     lfs f0, lbl_80881180
     fcmpo cr0, f2, f0

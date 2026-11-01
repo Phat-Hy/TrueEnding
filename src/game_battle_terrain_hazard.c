@@ -47,9 +47,9 @@ extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void fn_805F89F0(void);
 extern void fn_805F8CA0(void);
-extern void fn_805F90D0(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9920(void);
+extern void PSMTXTrans(void);
+extern void PSMTXMultVec(void);
+extern void PSVECSquareMag(void);
 extern void fn_80680CF8(void);
 extern void fn_80682428(void);
 extern void fn_8068AC5C(void);
@@ -887,7 +887,7 @@ lbl_fn_804186D8_00000950:
     add r25, r3, r0
     addi r3, r1, 0x28
     stfs f31, 0x20(r1)
-    bl fn_805F90D0
+    bl PSMTXTrans
     psq_l f2, 0x8(r27), 0, 0
     mr r4, r25
     psq_l f3, 0x10(r27), 0, 0
@@ -970,7 +970,7 @@ asm void fn_804188A0(void)
     stfs f2, 0x58(r1)
     mr r5, r4
     psq_st f1, 0x0(r4), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f8, 0x50(r1)
     addi r3, r1, 0x18
     lfs f7, 0x5c(r1)
@@ -1858,7 +1858,7 @@ lbl_fn_8041953C_000016F4:
     stfs f8, 0x60(r1)
     stfs f0, 0x5c(r1)
     stfs f10, 0x64(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lwz r3, lbl_8087F430
     fmr f31, f1
     cmpwi r3, 0x0

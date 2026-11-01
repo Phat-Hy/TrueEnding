@@ -44,7 +44,7 @@ extern void fn_805B8114(void);
 extern void fn_805B8280(void);
 extern void fn_805BA938(void);
 extern void fn_805BB658(void);
-extern void fn_805F9920(void);
+extern void PSVECSquareMag(void);
 extern void fn_80680770(void);
 extern void fn_80686EA4(void);
 extern void fn_806958E0(void);
@@ -579,7 +579,7 @@ lbl_fn_805B8DB8_00000660:
     fsubs f0, f1, f0
     stfs f2, 0x24(r1)
     stfs f0, 0x28(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lfs f0, lbl_80888440
     fcmpo cr0, f1, f0
     bge lbl_fn_805B8DB8_000006C8

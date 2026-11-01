@@ -16,8 +16,8 @@ extern void fn_8059E380(void);
 extern void fn_8059FFD8(void);
 extern void OSLockMutex(void);
 extern void OSUnlockMutex(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9940(void);
+extern void PSMTXMultVec(void);
+extern void PSVECMag(void);
 extern void fn_8068A850(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEB0(void);
@@ -1359,7 +1359,7 @@ asm void fn_80714D00(void)
     ps_sub f0, f2, f1
     mr r3, r8
     psq_st f0, 0x8(r8), 1, 0
-    bl fn_805F9940
+    bl PSVECMag
     lbz r3, 0x1d(r28)
     lis r0, 0x4330
     stw r0, 0x18(r1)
@@ -1453,9 +1453,9 @@ asm void fn_80714E40(void)
     mr r31, r8
     mr r3, r28
     addi r5, r1, 0x8
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r3, r1, 0x8
-    bl fn_805F9940
+    bl PSVECMag
     fmr f25, f1
     lfs f27, 0x20(r27)
     lfs f26, 0x48(r28)
@@ -1557,7 +1557,7 @@ lbl_fn_80714FA0_000013EC:
     psq_l f0, 0x38(r4), 1, 0
     ps_sub f0, f1, f0
     psq_st f0, 0x8(r31), 1, 0
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, lbl_808891E8
     fcmpo cr0, f1, f0
     ble lbl_fn_80714FA0_00001444
@@ -1601,10 +1601,10 @@ lbl_fn_80714FA0_00001444:
     b lbl_fn_80714FA0_000014CC
 lbl_fn_80714FA0_000014B8:
     addi r3, r29, 0xc
-    bl fn_805F9940
+    bl PSVECMag
     fneg f29, f1
     addi r3, r28, 0x3c
-    bl fn_805F9940
+    bl PSVECMag
 lbl_fn_80714FA0_000014CC:
     fmuls f1, f1, f30
     fmuls f29, f29, f30
@@ -1660,7 +1660,7 @@ asm void fn_80715150(void)
     psq_st f0, 0x0(r3), 0, 0
     ps_sub f0, f2, f1
     psq_st f0, 0x8(r3), 1, 0
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x4c(r30)
     lfs f3, lbl_808891E8
     fcmpo cr0, f1, f0
@@ -2054,7 +2054,7 @@ lbl_fn_807156B0_00001AF8:
     stfs f1, 0x8(r1)
     stfs f0, 0xc(r1)
     stfs f2, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     fcmpo cr0, f1, f31
     ble lbl_fn_807156B0_00001B38
     fdivs f2, f31, f1
@@ -2066,7 +2066,7 @@ lbl_fn_807156B0_00001AF8:
     stfs f0, 0x10(r1)
 lbl_fn_807156B0_00001B38:
     addi r3, r1, 0x8
-    bl fn_805F9940
+    bl PSVECMag
     lfs f2, 0x0(r29)
     lfs f0, 0x8(r29)
     fmuls f3, f2, f1
@@ -2085,7 +2085,7 @@ lbl_fn_807156B0_00001B68:
     frsp f0, f1
     addi r3, r1, 0x14
     stfs f0, 0x0(r30)
-    bl fn_805F9940
+    bl PSVECMag
     fdivs f0, f1, f31
     stfs f0, 0x0(r31)
     psq_l f31, 0x48(r1), 0, 0

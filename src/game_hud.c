@@ -39,10 +39,10 @@ extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_80475DF8(void);
 extern void fn_805F89F0(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9420(void);
-extern void fn_805F9940(void);
-extern void fn_805F9990(void);
+extern void PSMTXMultVec(void);
+extern void PSMTXMultVecArray(void);
+extern void PSVECMag(void);
+extern void PSVECDotProduct(void);
 extern void fn_80680770(void);
 extern void fn_80686EA4(void);
 extern void fn_80695720(void);
@@ -159,7 +159,7 @@ asm void fn_8009E1E4(void)
     stfs f4, 0x20(r1)
     stfs f3, 0x24(r1)
     stfs f0, 0x28(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x24(r30)
     fmr f30, f1
     lfs f3, 0x14(r30)
@@ -168,7 +168,7 @@ asm void fn_8009E1E4(void)
     stfs f4, 0x14(r1)
     stfs f3, 0x18(r1)
     stfs f0, 0x1c(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x20(r30)
     fmr f31, f1
     lfs f3, 0x10(r30)
@@ -177,7 +177,7 @@ asm void fn_8009E1E4(void)
     stfs f4, 0x8(r1)
     stfs f3, 0xc(r1)
     stfs f0, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     frsp f3, f31
     stfs f1, 0x38(r1)
     frsp f0, f30
@@ -568,7 +568,7 @@ lbl_hud_updateTargetReticle_00000688:
     mr r5, r29
     addi r3, r3, 0x124
     psq_st f1, 0x0(r29), 0, 0
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lfs f2, 0x20(r1)
     addi r4, r1, 0x28
     psq_l f1, 0x0(r29), 0, 0
@@ -662,7 +662,7 @@ lbl_hud_updateTargetReticle_000007F4:
     addi r29, r3, 0x154
     addi r4, r1, 0x28
     mr r3, r29
-    bl fn_805F9990
+    bl PSVECDotProduct
     lfs f3, 0xc(r29)
     lfs f0, 0x34(r1)
     fadds f3, f3, f1
@@ -778,7 +778,7 @@ asm void fn_8009EB20(void)
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f0, 0x14(r31)
     lfs f2, lbl_80880C78
     fsubs f0, f1, f0
@@ -1005,7 +1005,7 @@ asm void fn_8009EE30(void)
     stfs f12, 0x98(r1)
     stfs f11, 0x9c(r1)
     stfs f10, 0xa0(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f10, 0x24(r23)
     fmr f30, f1
     lfs f11, 0x14(r23)
@@ -1014,7 +1014,7 @@ asm void fn_8009EE30(void)
     stfs f12, 0x8c(r1)
     stfs f11, 0x90(r1)
     stfs f10, 0x94(r1)
-    bl fn_805F9940
+    bl PSVECMag
     lfs f10, 0x20(r23)
     fmr f31, f1
     lfs f11, 0x10(r23)
@@ -1023,7 +1023,7 @@ asm void fn_8009EE30(void)
     stfs f12, 0x80(r1)
     stfs f11, 0x84(r1)
     stfs f10, 0x88(r1)
-    bl fn_805F9940
+    bl PSVECMag
     frsp f11, f31
     stfs f1, 0xbc(r1)
     frsp f10, f30
@@ -1062,7 +1062,7 @@ lbl_fn_8009EE30_00000D5C:
     psq_st f1, 0x0(r4), 0, 0
     lfs f10, 0xb8(r6)
     stfs f10, 0x14(r22)
-    bl fn_805F93C0
+    bl PSMTXMultVec
     lwz r3, 0x4(r22)
     lfs f10, 0x14(r22)
     lfs f11, 0xbc(r3)
@@ -1166,7 +1166,7 @@ lbl_fn_8009EE30_00000D5C:
     stfs f2, 0x7c(r1)
     psq_st f1, 0x0(r31), 0, 0
     stfs f2, 0x154(r1)
-    bl fn_805F9420
+    bl PSMTXMultVecArray
     addi r5, r1, 0x8
     addi r3, r1, 0x14
     psq_l f1, 0x0(r24), 0, 0

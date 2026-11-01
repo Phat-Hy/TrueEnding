@@ -24,10 +24,10 @@ extern void fn_800B3978(void);
 extern void fn_800B64DC(void);
 extern void fn_800BFAC8(void);
 extern void fn_800C0D4C(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9420(void);
-extern void fn_805F9990(void);
-extern void fn_805F99B0(void);
+extern void PSMTXMultVec(void);
+extern void PSMTXMultVecArray(void);
+extern void PSVECDotProduct(void);
+extern void PSVECCrossProduct(void);
 extern void fn_80615E00(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
@@ -760,15 +760,15 @@ lbl_fn_800B47AC_00000970:
     addi r4, r1, 0xc4
     mr r3, r23
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r4, r1, 0xb8
     mr r3, r23
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r4, r1, 0xac
     mr r3, r23
     mr r5, r4
-    bl fn_805F93C0
+    bl PSMTXMultVec
 lbl_fn_800B47AC_000009A8:
     lwz r31, lbl_8087EFB4
     addi r3, r1, 0x2c
@@ -804,10 +804,10 @@ lbl_fn_800B47AC_000009A8:
     stfs f0, 0x38(r1)
     stfs f3, 0x3c(r1)
     stfs f7, 0x40(r1)
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     addi r3, r1, 0x44
     addi r4, r1, 0x20
-    bl fn_805F9990
+    bl PSVECDotProduct
     fcmpo cr0, f1, f31
     bge lbl_fn_800B47AC_00000D80
     lwz r3, lbl_8087EFA8
@@ -2022,7 +2022,7 @@ lbl_fn_800B5994_0000199C:
     stfs f2, 0x7c(r1)
     psq_st f1, 0x0(r31), 0, 0
     stfs f2, 0x10c(r1)
-    bl fn_805F9420
+    bl PSMTXMultVecArray
     addi r4, r1, 0x8
     addi r3, r1, 0x14
     psq_l f1, 0x0(r24), 0, 0

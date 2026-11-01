@@ -27,11 +27,11 @@ extern void fn_800BDB58(void);
 extern void fn_800C1424(void);
 extern void fn_800D5E18(void);
 extern void fn_805F89F0(void);
-extern void fn_805F9240(void);
-extern void fn_805F93C0(void);
-extern void fn_805F9420(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9990(void);
+extern void C_MTXLookAt(void);
+extern void PSMTXMultVec(void);
+extern void PSMTXMultVecArray(void);
+extern void PSVECNormalize(void);
+extern void PSVECDotProduct(void);
 extern void fn_80614190(void);
 extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
@@ -303,7 +303,7 @@ lbl_fn_800B7090_000002BC:
     stfs f11, 0xcc(r1)
     stfs f10, 0xd0(r1)
     stfs f11, 0xd4(r1)
-    bl fn_805F9990
+    bl PSVECDotProduct
     fabs f11, f1
     lfs f10, lbl_80880F88
     frsp f11, f11
@@ -324,7 +324,7 @@ lbl_fn_800B7090_000002BC:
     stfs f10, 0xb4(r1)
     stfs f10, 0xb8(r1)
     stfs f2, 0xbc(r1)
-    bl fn_805F9990
+    bl PSVECDotProduct
     fabs f11, f1
     lfs f10, lbl_80880F88
     frsp f11, f11
@@ -356,7 +356,7 @@ lbl_fn_800B7090_00000410:
     lfs f2, 0x110(r1)
     stfs f2, 0x1c(r22)
     psq_st f1, 0x14(r22), 0, 0
-    bl fn_805F9240
+    bl C_MTXLookAt
     lfs f28, 0x14(r23)
     addi r24, r1, 0x178
     lfs f13, 0x10(r23)
@@ -433,7 +433,7 @@ lbl_fn_800B7090_00000410:
     stfs f2, 0x8c(r1)
     psq_st f1, 0x0(r31), 0, 0
     stfs f2, 0x1d4(r1)
-    bl fn_805F9420
+    bl PSMTXMultVecArray
     addi r4, r1, 0x18
     addi r3, r1, 0x24
     psq_l f1, 0x0(r24), 0, 0
@@ -631,7 +631,7 @@ lbl_fn_800B7090_00000410:
     psq_l f1, 0x0(r5), 0, 0
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x98(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f12, 0x98(r1)
     addi r4, r1, 0xf0
     lfs f10, 0x94(r1)
@@ -908,7 +908,7 @@ lbl_fn_800B79E4_00000C94:
     stfs f2, 0x7c(r1)
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0x88(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f2, 0x88(r1)
     addi r3, r1, 0xb0
     psq_l f1, 0x0(r28), 0, 0
@@ -917,7 +917,7 @@ lbl_fn_800B79E4_00000C94:
 lbl_fn_800B79E4_00000CE4:
     addi r3, r1, 0xb0
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f10, lbl_80880F90
     addi r7, r1, 0x1c8
     lfs f9, lbl_80880F94
@@ -1600,7 +1600,7 @@ lbl_fn_800B79E4_00001758:
     mr r3, r22
     mr r4, r23
     mr r5, r23
-    bl fn_805F93C0
+    bl PSMTXMultVec
     addi r24, r24, 0x1
     addi r23, r23, 0xc
     cmpwi r24, 0x8

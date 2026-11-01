@@ -38,7 +38,7 @@ extern void fn_800C2E30(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
-extern void fn_805F98D0(void);
+extern void PSVECNormalize(void);
 extern void fn_806052C0(void);
 extern void fn_80615E00(void);
 extern void fn_80615FF0(void);
@@ -1737,7 +1737,7 @@ lbl_fn_800BC874_000016C8:
     stfs f2, 0x68(r1)
     psq_st f1, 0x0(r30), 0, 0
     stfs f2, 0x74(r1)
-    bl fn_805F98D0
+    bl PSVECNormalize
     lfs f0, lbl_80881098
     mr r4, r30
     stfs f0, 0x50(r1)

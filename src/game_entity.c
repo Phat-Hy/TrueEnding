@@ -90,10 +90,10 @@ extern void fn_8021A984(void);
 extern void world_getGlobalFlag(void);
 extern void fn_803C1560(void);
 extern void fn_80599C94(void);
-extern void fn_805F98D0(void);
-extern void fn_805F9920(void);
-extern void fn_805F9940(void);
-extern void fn_805F99B0(void);
+extern void PSVECNormalize(void);
+extern void PSVECSquareMag(void);
+extern void PSVECMag(void);
+extern void PSVECCrossProduct(void);
 extern void fn_80680CF8(void);
 extern void fn_8068236C(void);
 
@@ -332,7 +332,7 @@ lbl_fn_8001B634_000001D4:
     stfs f4, 0x10(r1)
     stfs f0, 0xc(r1)
     stfs f6, 0x14(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fabs f3, f1
     lfs f0, lbl_80880768
     frsp f3, f3
@@ -340,7 +340,7 @@ lbl_fn_8001B634_000001D4:
     blt lbl_fn_8001B634_0000023C
     addi r3, r1, 0xc
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_8001B634_0000023C:
     lwz r3, lbl_8087EE68
     mr r6, r31
@@ -399,7 +399,7 @@ lbl_fn_8001B714_000002C0:
     stfs f4, 0x7c(r1)
     stfs f0, 0x78(r1)
     stfs f6, 0x80(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fabs f3, f1
     lfs f0, lbl_80880768
     frsp f3, f3
@@ -407,7 +407,7 @@ lbl_fn_8001B714_000002C0:
     blt lbl_fn_8001B714_00000328
     addi r3, r1, 0x78
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_8001B714_00000328:
     lfs f3, lbl_80880764
     addi r3, r1, 0x54
@@ -417,7 +417,7 @@ lbl_fn_8001B714_00000328:
     addi r5, r1, 0x6c
     stfs f0, 0x58(r1)
     stfs f3, 0x5c(r1)
-    bl fn_805F99B0
+    bl PSVECCrossProduct
     bl fn_80680CF8
     srwi r4, r3, 31
     clrlwi r0, r3, 31
@@ -561,7 +561,7 @@ lbl_fn_8001B984_00000524:
     stfs f4, 0x1c(r1)
     stfs f0, 0x18(r1)
     stfs f6, 0x20(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     fabs f3, f1
     lfs f0, lbl_80880768
     frsp f3, f3
@@ -569,7 +569,7 @@ lbl_fn_8001B984_00000524:
     blt lbl_fn_8001B984_0000058C
     addi r3, r1, 0x18
     mr r4, r3
-    bl fn_805F98D0
+    bl PSVECNormalize
 lbl_fn_8001B984_0000058C:
     lfs f4, 0x20(r1)
     mr r6, r31
@@ -679,7 +679,7 @@ asm void fn_8001BB04(void)
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9940
+    bl PSVECMag
     slwi r0, r29, 3
     fmr f30, f1
     add r3, r28, r0

@@ -64,7 +64,7 @@ extern void fn_80373148(void);
 extern void fn_803E907C(void);
 extern void fn_803E9608(void);
 extern void fn_805A38F4(void);
-extern void fn_805F9920(void);
+extern void PSVECSquareMag(void);
 extern void fn_80680770(void);
 extern void fn_80680CF8(void);
 extern void fn_8068236C(void);
@@ -1742,7 +1742,7 @@ lbl_fn_8036103C_00001494:
     stfs f2, 0xc(r1)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
-    bl fn_805F9920
+    bl PSVECSquareMag
     lwz r3, 0x50(r31)
     lfs f0, 0x38(r3)
     fmuls f0, f0, f0
