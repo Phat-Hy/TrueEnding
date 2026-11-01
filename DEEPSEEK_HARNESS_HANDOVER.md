@@ -2,6 +2,21 @@
 
 ## NEXT SESSION — START HERE
 
+> **§5c.46 AP-BM (the last section) FALSIFIES AP-BL AS THE CAUSE OF THE COMPOSITE DIFFERENCE, with an A/B.** The
+> keying was implemented exactly as AP-BL prescribed (patch `0007-copy-texture-key.patch`) and the exit-criterion
+> replay is **byte-identical** to the pre-fix binary (`7E79ACE9…`, luma 86.98 / gradient 20.889 both times), because
+> on this stream no quad samples a copy destination at a size other than the newest write's: the new
+> `TLS_AURORA_COPYLOG` counts **225 copy-destination binds** on the composite frame, 14 exact, 1 format-only fallback
+> and 1 `stale-at-address`, and that one is a *format* mismatch (`0x90536FE0` bound fmt 3 over its fmt-11 copy). The
+> divergence is one layer down: a new mid-frame probe (`--probe-at-cmd`) shows aurora after draw 5 809 is **exactly
+> the cmd-21-669 state again (56.68 / 13.190)** - it repaints the saved 640x448 copy - while the layer's own copy
+> dumps of the same frame end at **56.02 / 0.675** (a full-screen blur at the same level). Copies, sample sizes,
+> identity (AP-BK) and the layer's upload freshness (this session: three `upload=1` uploads with distinct hashes) are
+> all excluded, so what is left is the composition of draws 5 807/5 808/5 809. **Do not chase 43.16 / 1.123 blind**:
+> measure those three passes on the layer with `TLS_BATCH_DUMP_GUEST=2801` **and the gate's `TLS_INPUT_SCRIPT`** -
+> the first attempt at that this session ran without the script and measured a tutorial page instead of the cave
+> (one run lost, recorded in AP-BM item 6).
+>
 > **FIRST ACTION, BEFORE ANY MEASUREMENT: re-verify the gate on an IDLE host** —
 > `pwsh tools/invariant.ps1 -Log logs_ap\gate.log`. **PASS on attempt 1 means handover frame 1680,
 > content `B4646917…`, popup `22B1CE31…`, save 1 348 992 / 29 344.** If the handover frame is not 1680 the
@@ -16548,3 +16563,60 @@ const GXState::CopyTextureRef* copyRef = copyIt != end ? &copyIt->second : nullp
 So a sampled copy is **its copy texture, not guest memory** - which is the right model, and it also explains why reading the RAM plane (AP-BL's numbers) measures the *last writer* rather than what a draw sees. But `copyTextures` is `absl::flat_hash_map<const void*, CopyTextureRef>` (`lib/gx/gx.hpp:413`): **one entry per destination address**. The tail writes `0x9038D1C0` as 80x56 four times and then as 320x224 inside one frame, and each write replaces the single entry for that address (`GXFrameBuffer.cpp:45`, `texture.cpp:510`). Whatever order the guest uses, the address can only name ONE of those copies at a time, so a quad that binds the address at 80x56 while the entry holds the 320x224 copy samples the wrong one - and the two are different pictures, not different resolutions of the same one (AP-BL: mean byte 69.75 against 113.25).
 
 That makes the fix precise, and smaller than AP-BL's option 1 guessed: **key the copy-texture map by (destination, width, height, format) and match on the bound texobj**, so a sample of an address at a given size resolves to the copy written at that size. The adapter-side alias variant is then unnecessary. Both the live path and the harness go through this one path, so one change fixes both, and its exit criterion is already measured: the composite probe copy's gradient must fall from **20.889** towards the layer's **1.123** (`logs_ap/bk_layer_2801.ppm`), with the geometry frames' 6.20-7.59 diagonal unchanged.
+
+---
+
+### AP-BM. AP-BL'S KEYING IS IMPLEMENTED AND MEASURED **INERT** ON THE EXIT-CRITERION REPLAY (the composite probe is **byte-identical**, SHA `7E79ACE9…`, luma 86.98 / gradient 20.889), and the composite divergence is localised to **draws 5 807 / 5 808 / 5 809**: aurora restores the sharp 640x448 copy written at cmd 21 669 (56.68 / 13.19), while the layer's own chain at the same point is a full-screen blur (56.02 / **0.675**) at the same level
+
+AP-BL located the composite difference in aurora's `copyTextures` map, keyed by the destination pointer alone, and prescribed the key `(destination, width, height, format)`. This section implements that change exactly as prescribed, measures it with a saved pre-fix binary on the same capture, and finds **no picture change at all** - so the mechanism is falsified as the cause of this frame, and the divergence is measured somewhere else: in the three draws that consume the copies.
+
+**1. The gate first, on an idle host with nothing else running.** `logs_ap/gate.log` (`pwsh tools/invariant.ps1`): **PASS attempt 1**, handover **1 680**, content `B4646917…` (luma 36.51), popup `22B1CE31…` (luma 46.18), save **1 348 992 / 29 344**. Nothing else ran beside it.
+
+**2. The change (patch `0007-copy-texture-key.patch`).** `GXState::copyTextures` is now `flat_hash_map<CopyTextureKey, CopyTextureRef>` (`lib/gx/gx.hpp`), written at the same key `resolve_copy_texture` resolves (`texture.cpp`, `GXFrameBuffer.cpp:45`), cleared/erased by destination (`texture.cpp`), sampled by the **bound texobj's** `(data, width, height, format)` (`texture::find_copy_texture(const GXTexObj_&)`), and read back by the **newest write at the address** (`find_copy_texture(const void*)` + a `serial` on each write), because `capture_copies` names only the address. The lookup falls back in one order: exact key, then the same width/height under another format (a palette texture samples an EFB copy as indices; and the tail binds `0x90536FE0` as fmt 3 while the copy wrote fmt 11), then the newest write at the address - **never guest RAM**, which aurora does not write copies into. A new instrument, `TLS_AURORA_COPYLOG=1`, prints every copy write and, for every sampled texture that names a copy destination, whether it resolved by key, by size/format fallback, or to a *different size than the newest write* ("stale-at-address"). The fork's unit tests are updated to the new contract (a destination's every size is live storage until `GXDestroyCopyTex`), including a regression test for the shape of the bug: one address written at 80x56 and 320x224 in one frame, sampling each size independently.
+
+**3. The A/B, byte for byte.** The pre-fix binary was saved as `build2/tls_gx_replay_prefix.exe` before rebuilding, so both sides ran the same capture, same flags, same 8 frames:
+
+| binary | probe PPM SHA-256 | luma | gradient |
+|---|---|---|---|
+| pre-fix (`tls_gx_replay_prefix.exe`) | `7E79ACE923B144B543B6FF5F7A947CC2D0FA7511B48F21D1756DFB152D82C83A` | 86.98 | 20.889 |
+| post-fix (`tls_gx_replay.exe`) | **identical** | 86.98 | 20.889 |
+| the layer's shot of the same frame (`logs_ap/bk_layer_2801.ppm`) | - | 43.16 | 1.123 |
+
+The probe is **byte-identical**, so on this stream no sampled copy changed size. `TLS_AURORA_COPYLOG` says why, with counts: on the composite frame (frame 7) the replay performs **15 copy writes** and **225 binds that name a copy destination**, of which **14 resolve by exact key** and **one** by fallback - and the fallback is a *format* mismatch (`0x90536FE0` bound as 640x448 fmt 3 over a 640x448 fmt 11 copy), which the old address-only map also found. `stale-at-address` is **1**, the same bind. AP-BL's premise - "a quad binds `0x9038D1C0` at 80x56 while the address holds the 320x224 copy" - does not happen in this frame: the 80x56 quads (draws 5 799..5 804) all come *before* the 320x224 write to that address (copy 11, cmd 21 887), and the one draw that does bind the address at 320x224 (5 807, cmd 21 777) is the draw *before* that copy, so it samples the previous frame's 320x224 entry either way. The keying fix is a real bug fix (the map could only name one size of one address) and it stays in as patch `0007`, but it is **not** this frame's cause.
+
+**4. Where the divergence actually is: the consuming draws, measured per draw in aurora.** `--max-cmds` truncates frames, so it can only show the EFB *between* frames; the composite tail rewrites the whole EFB inside four draws, so the adapter grew **`--probe-at-cmd N`**: the probe EFB copy is inserted *inline* after command N of the last replayed frame (`tools/aurora_spike/aurora_replay.cpp`), so one full 8-frame run with the real history yields the EFB at any command. The probe is the byte-verified full-EFB copy the harness already trusts. On the same capture (`logs_ap/bm_efb*.ppm`, one run per cut):
+
+| aurora EFB at | luma | gradient | what it is |
+|---|---|---|---|
+| cmd 21 669 (after draw 5 806) | 56.68 | 13.190 | sharp scene + the additive 80x56 bloom |
+| cmd 21 778 (after 5 807) | 14.13 | 2.722 | **copy 9's clear (cmd 21 678, clear=1) emptied the EFB**; the top-left 320x224 quadrant (the scissor of 5 807) is repainted, the rest is black (`logs_ap/bm_aurora_efb21778.png`) |
+| cmd 21 883 (after 5 808) | 14.12 | 1.421 | same quadrant, smoother |
+| cmd 21 979 (after 5 809) | **56.68** | **13.190** | identical to the cmd-21-669 row: 5 809 repaints the full screen from the 640x448 copy `0x905C3000` taken at 21 669 |
+| cmd 22 059 (after 5 810) | 111.87 | 24.491 | the second full-screen pass (two textures) |
+| end of frame | 86.98 | 20.889 | the submitted composite |
+
+**5. The layer's side of the same three draws.** From the layer's own copy dumps of the same frame (`build/recomp/efbchain_2801_*.ppm`, measured with `tools/aurora_spike/probe_metrics.py`), in stream order:
+
+| layer copy | cmd | destination | luma | gradient |
+|---|---|---|---|---|
+| 0 | 20 834 | `0x905C3000` 640x448 | 32.15 | 9.743 |
+| 8 | 21 669 | `0x905C3000` 640x448 | 42.15 | 8.290 |
+| 12 | 21 986 | `0x905C3000` 640x448 | **56.02** | **0.675** |
+
+So the layer and aurora agree on both *640x448 copy writes* that frame (both sharp, both at the same levels within 1.4x), and they disagree on what happens **between** them: aurora is back on the cmd-21-669 picture after 5 809 (gradient 13.19), the layer's EFB is a full-screen blur (gradient 0.675) at the same level (*`logs_ap/bm_layer_copy12_21986.png`* is a smooth blurred cave; aurora's frame is `logs_ap/bm_aurora_efb2801.png`, a sharp one). That is precisely the AP-BJ addendum's "the layer is a blur, aurora is sharp, 2.1-2.4x brighter", now localised to the three passes that consume the copies rather than to the copies.
+
+**6. What that excludes, and what it leaves.** Excluded this session, with measurements: the copy-map key (§3, byte-identical A/B); the layer sampling a **stale texture upload** of the copy destination - its own bind log (`TLS_TEX_CACHE_LOG=0x905C3000`, cave run, `logs_ap/bm_cave_texbind.log`, guest-2800 shot `B4646917…` = the reference scene) shows **three fresh uploads** of that address in the composite frame with distinct hashes and rising means (`upload=1 hash=369DC4C5 mean=29.0`, then `ECE477C5 mean=39.8`, then `F7CB3CC5 mean=49.1`), i.e. the address's *current* content each time. Already excluded by AP-BK: the copy content (+5.0 % / -13.5 %), the sizes the quads sample, and texture identity. So the composite difference is in **what draws 5 807/5 808/5 809 do with the copies** - the TEV/blend/texcoord composition of three full-screen passes - and that is a layer-side measurement, not an aurora-side one. The next instrument is the layer's own per-batch list for the composite frame (`TLS_BATCH_DUMP_GUEST=2801`) **with the gate's input script**: the first attempt at that in this session ran *without* `TLS_INPUT_SCRIPT` and measured a tutorial page (81 batches of 8x8 CMPR glyphs and 255-mean "copies") instead of the cave - the same trap AP-AO documented for frame numbers, and it cost one run.
+
+**7. What this does not claim.** The exit criterion (composite probe from 86.98 / 20.889 towards the layer's 43.16 / 1.123) is **not** reached. On the evidence above it should not be chased blind either: aurora's chain does exactly what the guest asked - copy the EFB, sample the copy it just made, composite it back - while the layer's chain turns the same three passes into a full-screen blur at the same level. Matching the number without knowing which of the two is faithful to hardware would be re-recording a reference against an unmeasured defect. The honest resolution is one more layer-side measurement (item 6) before any renderer change, and the AP-AZ precedent applies: the title plate was retired by the migration rather than fixed in the layer.
+
+**8. Changes and run log.** This repo: `tools/aurora_spike/aurora_replay.cpp` (`--probe-at-cmd`, inert unless set), `tools/aurora_spike/patches/0007-copy-texture-key.patch` (29 048 bytes, 52 hunks; reverse-applies cleanly), `tools/aurora_spike/probe_metrics.py` (the probe metric), this file. The fork (`G:\Program\aurora-spike\aurora`): `lib/gx/gx.hpp`, `lib/gx/texture.cpp`, `lib/gx/texture.hpp`, `lib/gx/readback.cpp`, `lib/dolphin/gx/GXFrameBuffer.cpp`, `tests/gx_fifo_test.cpp`, `tests/gx_test_stubs.cpp`, `tests/gx_texture_cache_test.cpp`. **0 changes to `src/`**; the runner is untouched by this section (only the harness and the aurora library changed), so the gate above is still the runner's own.
+
+| # | what | result |
+|---|---|---|
+| 1 | gate, idle host, nothing else running | **PASS attempt 1**: handover 1 680, content `B4646917…`, popup `22B1CE31…`, save 1 348 992 / 29 344 (`logs_ap/gate.log`) |
+| 2 | pre-fix harness replay, field capture 2794..2801, `--stop-after 8 --probe-copy` | 113 525 draws / 845 916 vertices; probe 1 146 880 B, mean byte 126.30, **luma 86.98 / gradient 20.889** (`logs_ap/bm_pre_probe.ppm`) |
+| 3 | post-fix harness replay, same flags | **byte-identical** probe (`7E79ACE9…`), luma 86.98 / gradient 20.889 (`logs_ap/bm_post_probe.ppm`, `logs_ap/bm_final_probe.ppm`) |
+| 4 | same replay with `TLS_AURORA_COPYLOG=1` | frame 7: 15 writes, 225 copy-destination binds, key-hit 14, size-fallback 1 (format only), stale-at-address 1 (`logs_ap/bm_post.log`) |
+| 5 | `--probe-at-cmd 21669 / 21778 / 21883 / 21979 / 22059`, one 8-frame run each | 56.68/13.190, 14.13/2.722, 14.12/1.421, 56.68/13.190, 111.87/24.491 (`logs_ap/bm_efb*.ppm`, `logs_ap/bm_efb*.log`) |
+| 6 | layer copy dumps + texture-cache log, cave run with the gate's input script | `0x905C3000` at cmd 20 834 / 21 669 / 21 986 = 32.15/9.743, 42.15/8.290, **56.02/0.675**; three fresh uploads per composite frame (`logs_ap/bm_cave_texbind.log`); guest-2800 shot `B4646917…` |
+| 7 | a first cave-run attempt **without** `TLS_INPUT_SCRIPT` | measured the tutorial page (81 batches, 255-mean "copies", no `B4646917…`) - not evidence; recorded as the AP-AO trap, cost one run |

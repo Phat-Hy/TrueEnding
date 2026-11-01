@@ -157,6 +157,16 @@ uint64_t g_texObjs = 0;       /* GX_AURORA_LOAD_TEXOBJ commands synthesised from
 uint64_t g_wrapFix = 0;       /* reserved GX wrap mode 3 mapped to MIRROR (aurora FATALs on 3) */
 int g_scissorDumps = 0;
 int g_maxCmds = -1;
+/* 5c.46 AP-BM: --probe-at-cmd N inserts the probe EFB copy *inside* the last replayed frame, right
+ * after command N, instead of at the end of it. --max-cmds truncates a frame, so it can only show
+ * the EFB between frames; the composite tail of guest 2801 rewrites the whole EFB in four draws
+ * (5 806 additive upscale, 5 807/5 808 replace into a 320x224 corner, 5 809/5 810 full-screen
+ * replace), and the question "which of them leaves the blur in the layer" needs the EFB at each of
+ * them, in one full 8-frame run with the real history. The probe copy itself is an ordinary EFB copy
+ * into a scratch destination, so the readback path is the byte-verified one. */
+int g_probeAtCmd = -1;
+bool g_probeInserted = false;
+const std::vector<uint8_t>* g_probeCmd = nullptr;
 
 struct CmdTrace {
   uint32_t offset = 0;
@@ -743,6 +753,11 @@ bool rewrite_frame(const uint8_t* in, uint32_t size, uint32_t begin, uint32_t li
     }
     const uint8_t cmd = in[i];
     ++cmds;
+    if (g_probeAtCmd > 0 && cmds == g_probeAtCmd && !g_probeInserted && g_probeCmd != nullptr) {
+      out.insert(out.end(), g_probeCmd->begin(), g_probeCmd->end());
+      g_probeInserted = true;
+      std::printf("[replay] probe copy inserted in-frame after command %d\n", cmds);
+    }
     trace_cmd(i, cmd);
     if (cmd == 0x00) {
       out.push_back(cmd);
@@ -1259,6 +1274,7 @@ int main(int argc, char** argv) {
   uint32_t fbWidth = 640, fbHeight = 480;
   AuroraBackend backend = BACKEND_AUTO;
   int extraFrames = 8, stopAfter = -1, startAt = 0, copyRecord = -1, split = 1;
+int probeAtCmd = -1;
   uint32_t copyDst = 0, copyW = 80, copyH = 56, copyFmt = 6, copySize = 0;
   const char* copyOut = nullptr;
   bool rawStream = false, verbose = false, parseOnly = false, syntheticCopy = false;
@@ -1314,6 +1330,8 @@ int main(int argc, char** argv) {
       syntheticCopy = true;
     } else if (std::strcmp(a, "--max-cmds") == 0 && i + 1 < argc) {
       g_maxCmds = std::atoi(argv[++i]);
+    } else if (std::strcmp(a, "--probe-at-cmd") == 0 && i + 1 < argc) {
+      probeAtCmd = std::atoi(argv[++i]);
     } else if (std::strcmp(a, "--probe-copy") == 0) {
       probeCopy = true;
     } else if (std::strcmp(a, "--ram-poison") == 0) {
@@ -1441,6 +1459,7 @@ int main(int argc, char** argv) {
     copySize = PROBE_COPY_W * PROBE_COPY_H * 4u;
     if (!copyOut) copyOut = "aurora_probe_copy.bin";
     std::printf("[replay] probe copy armed: full EFB 640x448 RGBA8 -> readback key 0x%08X\n", PROBE_COPY_DST);
+    g_probeCmd = &probeCopyCmd;
   }
 
   if (parseOnly) {
@@ -1544,6 +1563,8 @@ int main(int argc, char** argv) {
       const uint32_t total = static_cast<uint32_t>(frameBytes.size());
       const uint32_t budget = split > 1 ? (total + static_cast<uint32_t>(split) - 1) / static_cast<uint32_t>(split)
                                         : total;
+      g_probeInserted = false;
+      g_probeAtCmd = (isLast && probeAtCmd > 0 && g_probeCmd != nullptr) ? probeAtCmd : -1;
       uint32_t off = 0, chunks = 0;
       while (off < total) {
         if (chunks > 0) {
@@ -1572,10 +1593,13 @@ int main(int argc, char** argv) {
                       colorRequestedInFrame ? "yes" : "NO", captureW, captureH);
         }
         if (isLast && probeCopy && !copyRequested) {
-          aurora::gx::fifo::write_data_grow(probeCopyCmd.data(), static_cast<uint32_t>(probeCopyCmd.size()));
+          if (!g_probeInserted) {
+            aurora::gx::fifo::write_data_grow(probeCopyCmd.data(), static_cast<uint32_t>(probeCopyCmd.size()));
+          }
           const AuroraReadbackCopySrc src{2, reinterpret_cast<const void*>(static_cast<uintptr_t>(copyDst))};
           copyRequested = AuroraReadbackCaptureCopies(copyStream, &src, 1) == GX_TRUE;
-          std::printf("[replay] probe copy issued at the end of the last chunk: capture %s (%u bytes expected)\n",
+          std::printf("[replay] probe copy %s: capture %s (%u bytes expected)\n",
+                      g_probeInserted ? "was inserted in-frame" : "issued at the end of the last chunk",
                       copyRequested ? "accepted" : "REJECTED", static_cast<uint32_t>(copyPayload.size()));
         }
         aurora_end_frame();
