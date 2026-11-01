@@ -15,7 +15,7 @@ extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DC6B4(void);
 extern void fn_801F4728(void);
-extern void fn_801F4E8C(void);
+extern void saveSlot_readSummary(void);
 extern void fn_801FED24(void);
 extern void fn_801FEE08(void);
 extern void fn_804A53D4(void);
@@ -1647,7 +1647,7 @@ lbl_fn_80505084_000015C8:
     mr r5, r3
     mr r4, r30
     addi r3, r1, 0x30
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lwz r3, 0x50(r25)
     addi r4, r29, 0xc9
     addi r5, r1, 0x30
@@ -1699,7 +1699,7 @@ lbl_fn_80505084_00001688:
     mr r5, r3
     mr r4, r28
     addi r3, r1, 0x1c
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lwz r3, 0xe8(r26)
     addi r4, r29, 0xed
     addi r5, r1, 0x1c
@@ -1792,7 +1792,7 @@ lbl_fn_80505084_000017E0:
     mr r5, r3
     mr r4, r28
     addi r3, r1, 0x8
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lwz r3, lbl_8087F580
     addi r6, r1, 0x8
     li r4, 0x0

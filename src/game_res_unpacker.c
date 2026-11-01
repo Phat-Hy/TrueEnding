@@ -29,7 +29,7 @@ extern void fn_801750FC(void);
 extern void fn_801F48C8(void);
 extern void fn_80227F78(void);
 extern void fn_8022ADD4(void);
-extern void fn_8022B114(void);
+extern void texCache_freeBlock(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
 extern void fn_80389838(void);
@@ -2071,13 +2071,13 @@ lbl_fn_8022A930_00001AFC:
     cmpwi r4, 0x0
     beq lbl_fn_8022A930_00001B0C
     mr r3, r27
-    bl fn_8022B114
+    bl texCache_freeBlock
 lbl_fn_8022A930_00001B0C:
     cmpwi r30, 0x0
     beq lbl_fn_8022A930_00001B20
     mr r3, r27
     mr r4, r30
-    bl fn_8022B114
+    bl texCache_freeBlock
 lbl_fn_8022A930_00001B20:
     addi r3, r29, 0x8
     b lbl_fn_8022A930_00001B2C

@@ -18,7 +18,7 @@ extern void fn_800A4450(void);
 extern void fn_800A5B38(void);
 extern void fn_800DC6B4(void);
 extern void fn_801F3FF8(void);
-extern void fn_801F4E8C(void);
+extern void saveSlot_readSummary(void);
 extern void fn_801FEC74(void);
 extern void fn_801FECE0(void);
 extern void fn_801FED24(void);
@@ -218,7 +218,7 @@ asm void fn_8046ECDC(void)
     mr r5, r3
     mr r4, r29
     addi r3, r1, 0x14
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     mr r4, r28
     addi r3, r1, 0x8
     li r5, 0x0

@@ -21,7 +21,7 @@ extern void fn_800D3FA4(void);
 extern void fn_800DC6B4(void);
 extern void fn_801F0758(void);
 extern void fn_801F3FF8(void);
-extern void fn_801F4E8C(void);
+extern void saveSlot_readSummary(void);
 extern void fn_801FEC74(void);
 extern void fn_801FECE0(void);
 extern void fn_801FED24(void);
@@ -71,9 +71,9 @@ extern u32 lbl_80880CAC;
 
 /* Function declarations */
 void fn_800A291C(void);
-void fn_800A2978(void);
-void fn_800A29B4(void);
-void fn_800A29F0(void);
+void font_drawTextCenter(void);
+void font_drawTextLeft(void);
+void font_drawTextRight(void);
 void fn_800A2A2C(void);
 void fn_800A2A68(void);
 void fn_800A2AA4(void);
@@ -131,7 +131,7 @@ asm void fn_800A291C(void)
     blr
 }
 
-asm void fn_800A2978(void)
+asm void font_drawTextCenter(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -151,7 +151,7 @@ asm void fn_800A2978(void)
     blr
 }
 
-asm void fn_800A29B4(void)
+asm void font_drawTextLeft(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -171,7 +171,7 @@ asm void fn_800A29B4(void)
     blr
 }
 
-asm void fn_800A29F0(void)
+asm void font_drawTextRight(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -532,12 +532,12 @@ lbl_fn_800A2DE0_00000520:
     addi r3, r3, 0x178
     bl fn_8061F460
     lis r5, 0x1
-    lis r8, fn_800A29F0@ha
+    lis r8, font_drawTextRight@ha
     addi r7, r5, -0x8000
     addi r3, r31, 0x4c
     addi r4, r31, 0x234
     addi r6, r31, 0x2c0
-    addi r8, r8, fn_800A29F0@l
+    addi r8, r8, font_drawTextRight@l
     addi r9, r31, 0x178
     li r5, 0x2
     bl fn_80620220
@@ -650,9 +650,9 @@ lbl_fn_800A2DE0_000006F0:
     mr r4, r31
     addi r3, r31, 0x178
     bl fn_8061F460
-    lis r6, fn_800A29B4@ha
+    lis r6, font_drawTextLeft@ha
     addi r3, r1, 0xd0
-    addi r6, r6, fn_800A29B4@l
+    addi r6, r6, font_drawTextLeft@l
     addi r7, r31, 0x178
     li r4, 0x34
     li r5, 0x0
@@ -744,9 +744,9 @@ lbl_fn_800A2DE0_00000850:
     mr r4, r31
     addi r3, r31, 0x178
     bl fn_8061F460
-    lis r6, fn_800A29B4@ha
+    lis r6, font_drawTextLeft@ha
     addi r3, r1, 0x5d0
-    addi r6, r6, fn_800A29B4@l
+    addi r6, r6, font_drawTextLeft@l
     addi r7, r31, 0x178
     li r4, 0x34
     li r5, 0x0
@@ -774,9 +774,9 @@ lbl_fn_800A2DE0_000008C4:
     mr r4, r31
     addi r3, r3, 0x178
     bl fn_8061F460
-    lis r6, fn_800A29B4@ha
+    lis r6, font_drawTextLeft@ha
     addi r3, r31, 0x4c
-    addi r6, r6, fn_800A29B4@l
+    addi r6, r6, font_drawTextLeft@l
     addi r7, r31, 0x178
     li r4, 0x34
     li r5, 0x0
@@ -1973,7 +1973,7 @@ lbl_fn_800A4244_00001A38:
     mr r5, r3
     mr r4, r30
     addi r3, r1, 0x14
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     mr r4, r29
     addi r3, r1, 0x8
     li r5, 0x0
@@ -2336,11 +2336,11 @@ lbl_fn_800A4794_00001ED8:
     stw r0, 0x15c(r28)
     bl fn_8061F460
     srawi r0, r29, 14
-    lis r6, fn_800A2978@ha
+    lis r6, font_drawTextCenter@ha
     addze r3, r0
     stw r31, 0x164(r28)
     addi r5, r28, 0x164
-    addi r6, r6, fn_800A2978@l
+    addi r6, r6, font_drawTextCenter@l
     addi r3, r3, 0x1
     addi r7, r28, 0x178
     li r4, 0x1
@@ -2495,12 +2495,12 @@ lbl_fn_800A49C4_00002108:
     stw r0, 0x15c(r31)
     bl fn_8061F460
     lis r5, 0x1
-    lis r8, fn_800A29F0@ha
+    lis r8, font_drawTextRight@ha
     addi r7, r5, -0x8000
     addi r3, r31, 0x4c
     addi r4, r31, 0x234
     addi r6, r31, 0x2c0
-    addi r8, r8, fn_800A29F0@l
+    addi r8, r8, font_drawTextRight@l
     addi r9, r31, 0x178
     li r5, 0x1
     bl fn_80620220
@@ -2571,13 +2571,13 @@ lbl_fn_800A4AD4_00002218:
     stw r0, 0x15c(r31)
     bl fn_8061F460
     srawi r0, r27, 14
-    lis r6, fn_800A2978@ha
+    lis r6, font_drawTextCenter@ha
     addze r3, r0
     stw r30, 0x164(r31)
     mr r4, r28
     addi r5, r31, 0x164
     addi r3, r3, 0x1
-    addi r6, r6, fn_800A2978@l
+    addi r6, r6, font_drawTextCenter@l
     addi r7, r31, 0x178
     bl fn_80622260
     mr r4, r3
@@ -2647,12 +2647,12 @@ lbl_fn_800A4BE4_00002328:
     stw r0, 0x15c(r28)
     bl fn_8061F460
     lis r5, 0x1
-    lis r8, fn_800A29F0@ha
+    lis r8, font_drawTextRight@ha
     addi r7, r5, -0x8000
     mr r3, r29
     addi r4, r28, 0x234
     addi r6, r28, 0x2c0
-    addi r8, r8, fn_800A29F0@l
+    addi r8, r8, font_drawTextRight@l
     addi r9, r28, 0x178
     li r5, 0x1
     bl fn_80620220

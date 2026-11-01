@@ -11,7 +11,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
-extern void fn_8005B710(void);
+extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
 extern void fn_80061824(void);
@@ -1339,7 +1339,7 @@ lbl_fn_801F36C8_00001038:
     lis r26, lbl_80782BB0@ha
 lbl_fn_801F36C8_000010A4:
     addi r3, r1, 0x60
-    bl fn_8005B710
+    bl talk_parseDialogue
     lhz r0, 0x0(r3)
     cmplwi r0, 0x23
     beq lbl_fn_801F36C8_00001520
@@ -1354,7 +1354,7 @@ lbl_fn_801F36C8_000010A4:
     bl fn_800DC1DC
     stw r3, 0x30(r1)
     addi r3, r1, 0x60
-    bl fn_8005B710
+    bl talk_parseDialogue
     lwz r0, 0x34(r1)
     mr r22, r3
     srwi. r0, r0, 31

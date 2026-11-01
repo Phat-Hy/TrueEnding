@@ -114,7 +114,7 @@ void fn_800B326C(void);
 void fn_800B3328(void);
 void fn_800B33A8(void);
 void fn_800B3454(void);
-void fn_800B3464(void);
+void atn_HUD_drawNodeList(void);
 void fn_800B34C0(void);
 void fn_800B35F4(void);
 void fn_800B35F8(void);
@@ -1317,7 +1317,7 @@ asm void fn_800B3454(void)
     blr
 }
 
-asm void fn_800B3464(void)
+asm void atn_HUD_drawNodeList(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1327,8 +1327,8 @@ asm void fn_800B3464(void)
     stw r30, 0x8(r1)
     mr r30, r4
     lwz r31, lbl_8087EFB4
-    b lbl_fn_800B3464_000010DC
-lbl_fn_800B3464_000010C0:
+    b lbl_atn_HUD_drawNodeList_000010DC
+lbl_atn_HUD_drawNodeList_000010C0:
     lwz r3, 0x0(r30)
     mr r4, r31
     lwz r12, 0x0(r3)
@@ -1336,9 +1336,9 @@ lbl_fn_800B3464_000010C0:
     mtctr r12
     bctrl
     lwz r30, 0x8(r30)
-lbl_fn_800B3464_000010DC:
+lbl_atn_HUD_drawNodeList_000010DC:
     cmpwi r30, 0x0
-    bne lbl_fn_800B3464_000010C0
+    bne lbl_atn_HUD_drawNodeList_000010C0
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

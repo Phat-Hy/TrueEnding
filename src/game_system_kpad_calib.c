@@ -18,7 +18,7 @@ extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800F1378(void);
 extern void fn_801346C8(void);
-extern void fn_80148B38(void);
+extern void quest_checkCondition(void);
 extern void fn_8014DEE4(void);
 extern void fn_80154344(void);
 extern void fn_80155DAC(void);
@@ -2361,7 +2361,7 @@ lbl_fn_80371790_00001FC0:
 lbl_fn_80371790_00001FC8:
     lfs f1, lbl_8088572C
     mr r3, r20
-    bl fn_80148B38
+    bl quest_checkCondition
     stfs f28, 0x2e4(r20)
     mr r4, r20
     mr r7, r17

@@ -24,7 +24,7 @@ extern void fn_8008937C(void);
 extern void fn_8008C850(void);
 extern void fn_8008C950(void);
 extern void fn_8009303C(void);
-extern void fn_800C41D0(void);
+extern void atn_Skin_init(void);
 extern void fn_800C4E38(void);
 extern void fn_800C4ECC(void);
 extern void fn_800C4F38(void);
@@ -1366,7 +1366,7 @@ lbl_fn_8008BD10_00001104:
     mr r4, r27
     lwz r5, 0x34(r5)
     lwzx r5, r5, r30
-    bl fn_800C41D0
+    bl atn_Skin_init
     mr r22, r3
 lbl_fn_8008BD10_00001140:
     addi r5, r31, 0xa

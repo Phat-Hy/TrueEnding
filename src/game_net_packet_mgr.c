@@ -20,7 +20,7 @@ extern void fn_800DC6B4(void);
 extern void fn_800DD3FC(void);
 extern void fn_80117228(void);
 extern void fn_801F3FF8(void);
-extern void fn_801F4E8C(void);
+extern void saveSlot_readSummary(void);
 extern void atn_LoadHandle_constructor(void);
 extern void fn_804A29C4(void);
 extern void fn_804A436C(void);
@@ -429,7 +429,7 @@ asm void fn_804ADB60(void)
     mr r5, r3
     mr r4, r31
     addi r3, r1, 0x1c
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lfs f4, 0x1c(r1)
     lfs f3, 0x20(r1)
     lfs f2, 0x24(r1)
@@ -457,7 +457,7 @@ lbl_fn_804ADB60_000004E0:
     mr r5, r3
     mr r4, r31
     addi r3, r1, 0x8
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lfs f4, 0x8(r1)
     lfs f3, 0xc(r1)
     lfs f2, 0x10(r1)

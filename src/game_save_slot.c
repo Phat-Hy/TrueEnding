@@ -73,7 +73,7 @@ void fn_801F4CB4(void);
 void fn_801F4D80(void);
 void fn_801F4DDC(void);
 void fn_801F4E30(void);
-void fn_801F4E8C(void);
+void saveSlot_readSummary(void);
 void fn_801F4F08(void);
 void fn_801F4F84(void);
 void fn_801F4FF4(void);
@@ -1000,7 +1000,7 @@ lbl_fn_801F4E30_00000C44:
     blr
 }
 
-asm void fn_801F4E8C(void)
+asm void saveSlot_readSummary(void)
 {
     nofralloc
     stwu r1, -0x40(r1)
@@ -1019,7 +1019,7 @@ asm void fn_801F4E8C(void)
     addi r3, r6, 0x48
     bl fn_801EFA78
     cmpwi r3, 0x0
-    beq lbl_fn_801F4E8C_00000CC4
+    beq lbl_saveSlot_readSummary_00000CC4
     lfs f0, lbl_80882C80
     li r0, 0x0
     stfs f0, 0x8(r1)
@@ -1029,7 +1029,7 @@ asm void fn_801F4E8C(void)
     stw r0, 0xc(r1)
     addi r7, r1, 0x20
     bl fn_801ED928
-lbl_fn_801F4E8C_00000CC4:
+lbl_saveSlot_readSummary_00000CC4:
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     mtlr r0

@@ -18,7 +18,7 @@ extern void fn_80116FC0(void);
 extern void fn_80124C6C(void);
 extern void fn_801EFA78(void);
 extern void fn_801F48C8(void);
-extern void fn_801F4E8C(void);
+extern void saveSlot_readSummary(void);
 extern void fn_801F6C2C(void);
 extern void fn_801F6C80(void);
 extern void fn_801F6D7C(void);
@@ -252,7 +252,7 @@ lbl_fn_804A5824_00000294:
     mr r5, r3
     mr r4, r28
     addi r3, r1, 0x14
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     addi r3, r1, 0x8
     addi r4, r27, 0x134
     li r5, 0x0

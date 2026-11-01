@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void __register_global_object(void);
 extern void dtor_80084684(void);
-extern void fn_8005B710(void);
+extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
 extern void fn_800616C0(void);
@@ -1316,19 +1316,19 @@ lbl_fn_803B35FC_00000F48:
     blt lbl_fn_803B35FC_00000F48
 lbl_fn_803B35FC_00000F5C:
     addi r3, r1, 0x18
-    bl fn_8005B710
+    bl talk_parseDialogue
     bl fn_800DC1DC
     cmpwi r3, 0x1
     beq lbl_fn_803B35FC_00000FA0
     addi r27, r27, 0x1
     addi r3, r1, 0x18
-    bl fn_8005B710
+    bl talk_parseDialogue
     addi r3, r1, 0x18
-    bl fn_8005B710
+    bl talk_parseDialogue
     addi r3, r1, 0x18
-    bl fn_8005B710
+    bl talk_parseDialogue
     addi r3, r1, 0x18
-    bl fn_8005B710
+    bl talk_parseDialogue
     bl fn_80686A48
     add r3, r3, r30
     addi r30, r3, 0x1
@@ -1410,20 +1410,20 @@ lbl_fn_803B35FC_00001090:
     addi r27, r1, 0x8
 lbl_fn_803B35FC_000010A8:
     addi r3, r1, 0x18
-    bl fn_8005B710
+    bl talk_parseDialogue
     bl fn_800DC1DC
     cmpwi r3, 0x1
     beq lbl_fn_803B35FC_000012FC
     lwz r0, 0xc(r28)
     addi r3, r1, 0x18
     add r30, r0, r31
-    bl fn_8005B710
+    bl talk_parseDialogue
     addi r3, r1, 0x18
-    bl fn_8005B710
+    bl talk_parseDialogue
     bl fn_800DC1DC
     stw r3, 0x0(r30)
     addi r3, r1, 0x18
-    bl fn_8005B710
+    bl talk_parseDialogue
     bl fn_800DC1DC
     stw r3, 0x4(r30)
     slwi r0, r29, 1
@@ -1431,7 +1431,7 @@ lbl_fn_803B35FC_000010A8:
     lwz r4, 0x4(r28)
     add r0, r4, r0
     stw r0, 0x8(r30)
-    bl fn_8005B710
+    bl talk_parseDialogue
     mr r4, r3
     lwz r3, 0x8(r30)
     bl fn_80686A64
@@ -1526,7 +1526,7 @@ lbl_fn_803B35FC_0000124C:
 lbl_fn_803B35FC_00001254:
     lwz r26, lbl_8087EEC8
     addi r3, r1, 0x18
-    bl fn_8005B710
+    bl talk_parseDialogue
     mr r5, r3
     mr r3, r26
     addi r4, r1, 0x8
@@ -1537,7 +1537,7 @@ lbl_fn_803B35FC_00001254:
     stw r3, 0xc(r30)
     addi r3, r1, 0x18
     lwz r26, lbl_8087EEC8
-    bl fn_8005B710
+    bl talk_parseDialogue
     mr r5, r3
     mr r3, r26
     addi r4, r1, 0x8
@@ -1555,11 +1555,11 @@ lbl_fn_803B35FC_00001254:
     bl memcpy
 lbl_fn_803B35FC_000012C8:
     addi r3, r1, 0x18
-    bl fn_8005B710
+    bl talk_parseDialogue
     bl fn_800DC1DC
     stw r3, 0x30(r30)
     addi r3, r1, 0x18
-    bl fn_8005B710
+    bl talk_parseDialogue
     bl fn_800DC1DC
     stw r3, 0x34(r30)
     addi r31, r31, 0x38

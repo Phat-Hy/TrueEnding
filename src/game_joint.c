@@ -12,7 +12,7 @@ extern void fn_8007708C(void);
 extern void fn_80084320(void);
 extern void fn_800844D8(void);
 extern void fn_8008937C(void);
-extern void fn_800C41D0(void);
+extern void atn_Skin_init(void);
 extern void fn_800C4A90(void);
 extern void fn_800C4E38(void);
 extern void fn_800C4ECC(void);
@@ -728,7 +728,7 @@ lbl_fn_800C5644_00000920:
     beq lbl_fn_800C5644_0000095C
     mr r4, r20
     mr r5, r17
-    bl fn_800C41D0
+    bl atn_Skin_init
     mr r15, r3
 lbl_fn_800C5644_0000095C:
     lwz r4, 0x4(r22)

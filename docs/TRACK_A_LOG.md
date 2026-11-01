@@ -706,3 +706,29 @@ Analysis for Track B:
 - Essential engine path normalizer called across file archive loading and cutscene loaders.
 - Replaces all backslash separators '\\' with forward slashes '/' in place.
 Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.
+
+## Session 2026-11-01 - Batch 14: High-yield queue naming (69k+ probe hits)
+Subject:  track-a: Batch 14 - name 13 high-yield queue routines (covers 69k+ probe hits) progress 99.30% -> 99.30%
+Scope:    Rename 13 top-ranking routines hit by Track B instruments across 95 files in src/.
+Checklist:
+  1. symbols.txt: Renamed 13 functions in place.
+  2. All src/ references updated across 95 files.
+  3. Local labels lbl_fn_* -> lbl_<newName>_* normalized.
+  4. External prototypes swept across all translation units.
+  5. report.json clean, ninja passed (orig/main.dol: OK).
+Self-check: git diff -U0 -- src/ for 'asm void': -13 / +13 (balanced).
+Names applied:
+  - net_resetAllSockets (fn_80711530, 248 B, 14,210 probe hits)
+  - atn_Skin_init (fn_800C41D0, 604 B, 10,341 probe hits)
+  - atn_Fog_apply (fn_800D2494, 528 B, 8,939 probe hits)
+  - texCache_freeBlock (fn_8022B114, 1844 B, 7,575 probe hits)
+  - camera_isObjectVisible (fn_800F26D4, 764 B, 6,240 probe hits)
+  - GXSetDrawSync (fn_80613FF0, 180 B, 4,704 probe hits)
+  - atn_HUD_drawNodeList (fn_800B3464, 92 B, 3,704 probe hits)
+  - talk_parseDialogue (fn_8005B710, 488 B, 3,459 probe hits)
+  - quest_checkCondition (fn_80148B38, 396 B, 3,252 probe hits)
+  - font_drawTextCenter (fn_800A2978, 60 B, 3,120 probe hits)
+  - font_drawTextLeft (fn_800A29B4, 60 B)
+  - font_drawTextRight (fn_800A29F0, 60 B, 1,580 probe hits)
+  - saveSlot_readSummary (fn_801F4E8C, 124 B, 2,224 probe hits)
+Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.

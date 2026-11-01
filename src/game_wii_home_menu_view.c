@@ -15,7 +15,7 @@ extern void fn_8010EE78(void);
 extern void fn_8010EFC8(void);
 extern void fn_8010F26C(void);
 extern void fn_8010F41C(void);
-extern void fn_80148B38(void);
+extern void quest_checkCondition(void);
 extern void fn_8014DEE4(void);
 extern void fn_8014EEC4(void);
 extern void fn_80232B7C(void);
@@ -1038,7 +1038,7 @@ lbl_fn_8056DAD0_00000D28:
 lbl_fn_8056DAD0_00000D34:
     fmr f1, f25
     lwz r3, 0x0(r25)
-    bl fn_80148B38
+    bl quest_checkCondition
     addi r25, r25, 0x8c
     addi r29, r29, 0x1
 lbl_fn_8056DAD0_00000D48:
@@ -1521,7 +1521,7 @@ lbl_fn_8056DAD0_00001418:
 lbl_fn_8056DAD0_00001424:
     fmr f1, f28
     lwz r3, 0x0(r25)
-    bl fn_80148B38
+    bl quest_checkCondition
     addi r25, r25, 0x8c
     addi r22, r22, 0x1
 lbl_fn_8056DAD0_00001438:

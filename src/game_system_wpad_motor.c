@@ -24,7 +24,7 @@ extern void fn_800CF45C(void);
 extern void fn_800D0240(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D2494(void);
+extern void atn_Fog_apply(void);
 extern void fn_800D3FA4(void);
 extern void fn_800D8448(void);
 extern void fn_800D8458(void);
@@ -3305,7 +3305,7 @@ lbl_fn_80368280_00002BA0:
     b lbl_fn_80368280_00002C1C
 lbl_fn_80368280_00002BF4:
     mr r3, r28
-    bl fn_800D2494
+    bl atn_Fog_apply
     lwz r3, lbl_8087F3C0
     li r4, 0x0
     li r5, 0x0

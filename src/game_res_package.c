@@ -32,7 +32,7 @@ extern void fn_8011EF14(void);
 extern void fn_801354B4(void);
 extern void fn_80136544(void);
 extern void fn_8013655C(void);
-extern void fn_80148B38(void);
+extern void quest_checkCondition(void);
 extern void fn_80219558(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getName(void);
@@ -1083,7 +1083,7 @@ lbl_fn_80225DDC_00000DC4:
 lbl_fn_80225DDC_00000DCC:
     lfs f1, lbl_80883028
     mr r3, r31
-    bl fn_80148B38
+    bl quest_checkCondition
     lwz r0, 0x524(r31)
     cmpwi r0, 0x0
     lwz r3, lbl_8087EEE0

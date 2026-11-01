@@ -38,7 +38,7 @@ extern void atn_Task_setActive(void);
 extern void fn_800DC288(void);
 extern void fn_800DC6B4(void);
 extern void fn_801F3FF8(void);
-extern void fn_801F4E8C(void);
+extern void saveSlot_readSummary(void);
 extern void fn_801FECE0(void);
 extern void fn_801FED24(void);
 extern void fn_801FEE08(void);
@@ -1907,7 +1907,7 @@ asm void fn_8036503C(void)
     mr r5, r3
     mr r4, r29
     addi r3, r1, 0x24
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lfs f4, 0x24(r1)
     lfs f3, 0x28(r1)
     lfs f2, 0x2c(r1)
@@ -1927,7 +1927,7 @@ lbl_fn_8036503C_0000191C:
     mr r5, r3
     mr r4, r29
     addi r3, r1, 0x10
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lfs f4, 0x10(r1)
     lfs f3, 0x14(r1)
     lfs f2, 0x18(r1)

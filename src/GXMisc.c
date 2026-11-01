@@ -30,7 +30,7 @@ void GXSetMisc(void);
 void GXFlush(void);
 void fn_80613CC0(void);
 void fn_80613E30(void);
-void fn_80613FF0(void);
+void GXSetDrawSync(void);
 void fn_806140B0(void);
 void fn_806140C0(void);
 void fn_80614190(void);
@@ -341,7 +341,7 @@ lbl_fn_80613E30_000003EC:
     blr
 }
 
-asm void fn_80613FF0(void)
+asm void GXSetDrawSync(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -366,9 +366,9 @@ asm void fn_80613FF0(void)
     stw r6, -0x8000(r4)
     lwz r0, 0x5fc(r30)
     cmpwi r0, 0x0
-    beq lbl_fn_80613FF0_00000470
+    beq lbl_GXSetDrawSync_00000470
     bl __GXSetDirtyState
-lbl_fn_80613FF0_00000470:
+lbl_GXSetDrawSync_00000470:
     lis r3, 0xcc01
     li r31, 0x0
     stw r31, -0x8000(r3)

@@ -80,7 +80,7 @@ void fn_800F1430(void);
 void fn_800F1EE0(void);
 void fn_800F1F38(void);
 void fn_800F1F94(void);
-void fn_800F26D4(void);
+void camera_isObjectVisible(void);
 void fn_800F29D0(void);
 
 asm void fn_800F1378(void)
@@ -1414,7 +1414,7 @@ lbl_fn_800F1F94_0000133C:
     blr
 }
 
-asm void fn_800F26D4(void)
+asm void camera_isObjectVisible(void)
 {
     nofralloc
     stwu r1, -0xb0(r1)
@@ -1425,23 +1425,23 @@ asm void fn_800F26D4(void)
     li r20, 0x1
     bl fn_800D3FA4
     cmpwi r3, 0x0
-    bne lbl_fn_800F26D4_00001384
+    bne lbl_camera_isObjectVisible_00001384
     li r20, 0x0
-lbl_fn_800F26D4_00001384:
+lbl_camera_isObjectVisible_00001384:
     mr r3, r18
     bl fn_800F3490
     cmpwi r3, 0x0
-    beq lbl_fn_800F26D4_00001398
+    beq lbl_camera_isObjectVisible_00001398
     li r20, 0x0
-lbl_fn_800F26D4_00001398:
+lbl_camera_isObjectVisible_00001398:
     mr r3, r18
     bl fn_800F3B4C
     cmpwi r3, 0x0
-    beq lbl_fn_800F26D4_000013AC
+    beq lbl_camera_isObjectVisible_000013AC
     li r20, 0x0
-lbl_fn_800F26D4_000013AC:
+lbl_camera_isObjectVisible_000013AC:
     cmpwi r20, 0x0
-    beq lbl_fn_800F26D4_00001640
+    beq lbl_camera_isObjectVisible_00001640
     addis r3, r18, 0x1
     li r4, 0x0
     lwz r3, -0x34d0(r3)
@@ -1457,7 +1457,7 @@ lbl_fn_800F26D4_000013AC:
     stw r0, 0x38(r3)
     lwz r3, -0x34a0(r4)
     cmpwi r3, 0x0
-    beq lbl_fn_800F26D4_00001420
+    beq lbl_camera_isObjectVisible_00001420
     li r4, 0x0
     bl atn_Task_setActive
     addis r4, r18, 0x1
@@ -1469,7 +1469,7 @@ lbl_fn_800F26D4_000013AC:
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
-lbl_fn_800F26D4_00001420:
+lbl_camera_isObjectVisible_00001420:
     addis r3, r18, 0x4
     li r4, 0x0
     lwz r3, -0x1d0c(r3)
@@ -1501,11 +1501,11 @@ lbl_fn_800F26D4_00001420:
     li r31, 0x1
     li r26, 0x0
     subi r22, r22, 0x45ac
-lbl_fn_800F26D4_0000149C:
+lbl_camera_isObjectVisible_0000149C:
     lwz r0, 0x20c(r22)
     srawi r0, r0, 24
     cmpwi r0, 0x8
-    bne lbl_fn_800F26D4_00001620
+    bne lbl_camera_isObjectVisible_00001620
     lbz r0, lbl_8087F04C
     lwz r4, 0x0(r25)
     extsb. r0, r0
@@ -1522,11 +1522,11 @@ lbl_fn_800F26D4_0000149C:
     stw r0, 0x48(r1)
     stw r21, 0x4c(r1)
     stw r26, 0x50(r1)
-    bne lbl_fn_800F26D4_000014FC
+    bne lbl_camera_isObjectVisible_000014FC
     stw r29, 0x4(r28)
     stw r30, lbl_807C7850@l(r27)
     stb r31, lbl_8087F04C
-lbl_fn_800F26D4_000014FC:
+lbl_camera_isObjectVisible_000014FC:
     lwz r6, 0x40(r1)
     addi r3, r1, 0x18
     lwz r5, 0x44(r1)
@@ -1539,7 +1539,7 @@ lbl_fn_800F26D4_000014FC:
     crclr 6
     bl fn_8008BBD8
     cmpwi r3, 0x0
-    bne lbl_fn_800F26D4_00001570
+    bne lbl_camera_isObjectVisible_00001570
     lwz r5, 0x18(r1)
     cmpwi r23, 0x0
     lwz r4, 0x1c(r1)
@@ -1549,43 +1549,43 @@ lbl_fn_800F26D4_000014FC:
     stw r4, 0xc(r1)
     stw r3, 0x10(r1)
     stw r0, 0x14(r1)
-    beq lbl_fn_800F26D4_00001568
+    beq lbl_camera_isObjectVisible_00001568
     stw r5, 0x54(r1)
     stw r4, 0x58(r1)
     stw r3, 0x5c(r1)
     stw r0, 0x60(r1)
-lbl_fn_800F26D4_00001568:
+lbl_camera_isObjectVisible_00001568:
     li r0, 0x1
-    b lbl_fn_800F26D4_00001574
-lbl_fn_800F26D4_00001570:
+    b lbl_camera_isObjectVisible_00001574
+lbl_camera_isObjectVisible_00001570:
     li r0, 0x0
-lbl_fn_800F26D4_00001574:
+lbl_camera_isObjectVisible_00001574:
     cmpwi r0, 0x0
-    beq lbl_fn_800F26D4_00001584
+    beq lbl_camera_isObjectVisible_00001584
     stw r28, 0x50(r1)
-    b lbl_fn_800F26D4_00001588
-lbl_fn_800F26D4_00001584:
+    b lbl_camera_isObjectVisible_00001588
+lbl_camera_isObjectVisible_00001584:
     stw r26, 0x50(r1)
-lbl_fn_800F26D4_00001588:
+lbl_camera_isObjectVisible_00001588:
     mr r3, r22
     addi r4, r1, 0x50
     bl fn_800F29D0
     cmpwi r24, 0x0
-    beq lbl_fn_800F26D4_000015CC
+    beq lbl_camera_isObjectVisible_000015CC
     lwz r3, 0x50(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_800F26D4_000015CC
+    beq lbl_camera_isObjectVisible_000015CC
     lwz r12, 0x0(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_800F26D4_000015C8
+    beq lbl_camera_isObjectVisible_000015C8
     addi r3, r24, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_800F26D4_000015C8:
+lbl_camera_isObjectVisible_000015C8:
     stw r26, 0x50(r1)
-lbl_fn_800F26D4_000015CC:
+lbl_camera_isObjectVisible_000015CC:
     mr r3, r22
     addi r4, r17, 0x1
     bl fn_80091CFC
@@ -1607,16 +1607,16 @@ lbl_fn_800F26D4_000015CC:
     mr r3, r22
     addi r4, r17, 0x31
     bl fn_80091CFC
-lbl_fn_800F26D4_00001620:
+lbl_camera_isObjectVisible_00001620:
     addi r19, r19, 0x1
     addi r21, r21, 0x21c
     cmplwi r19, 0x8
     addi r22, r22, 0x21c
-    blt lbl_fn_800F26D4_0000149C
+    blt lbl_camera_isObjectVisible_0000149C
     mr r3, r18
     li r4, 0x1
     bl atn_Task_setActive
-lbl_fn_800F26D4_00001640:
+lbl_camera_isObjectVisible_00001640:
     mr r3, r20
     lmw r17, 0x74(r1)
     lwz r0, 0xb4(r1)

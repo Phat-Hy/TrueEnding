@@ -10,7 +10,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80092814(void);
-extern void fn_80148B38(void);
+extern void quest_checkCondition(void);
 extern void fn_8014DEE4(void);
 extern void fn_8014EEC4(void);
 extern void fn_8016E484(void);
@@ -1004,7 +1004,7 @@ lbl_fn_8056BD38_00000C7C:
 lbl_fn_8056BD38_00000C88:
     fmr f1, f31
     lwz r3, 0x0(r29)
-    bl fn_80148B38
+    bl quest_checkCondition
     addi r29, r29, 0x8c
     addi r28, r28, 0x1
 lbl_fn_8056BD38_00000C9C:

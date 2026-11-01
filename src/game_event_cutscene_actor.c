@@ -53,7 +53,7 @@ extern void fn_800CFDF0(void);
 extern void fn_800CFFB8(void);
 extern void fn_800D0684(void);
 extern void atn_Task_constructor(void);
-extern void fn_800D2494(void);
+extern void atn_Fog_apply(void);
 extern void atn_Task_pause(void);
 extern void fn_800D2D7C(void);
 extern void fn_800DBF68(void);
@@ -628,7 +628,7 @@ lbl_main_00000614:
     cmpwi r0, 0x1
     beq lbl_main_00000654
     lwz r3, lbl_8087F530
-    bl fn_800D2494
+    bl atn_Fog_apply
     lwz r3, lbl_8087EE98
     bl fn_8004D124
 lbl_main_00000654:

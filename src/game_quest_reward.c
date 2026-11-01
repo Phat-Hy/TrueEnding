@@ -88,7 +88,7 @@ void fn_80148340(void);
 void fn_80148990(void);
 void fn_801489CC(void);
 void fn_80148B0C(void);
-void fn_80148B38(void);
+void quest_checkCondition(void);
 void fn_80148CC4(void);
 
 asm void fn_801479D8(void)
@@ -1348,7 +1348,7 @@ lbl_fn_80148B0C_00001158:
     blr
 }
 
-asm void fn_80148B38(void)
+asm void quest_checkCondition(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1360,38 +1360,38 @@ asm void fn_80148B38(void)
     stw r29, 0x14(r1)
     lwz r4, 0x648(r3)
     cmpwi r4, 0x0
-    beq lbl_fn_80148B38_00001268
+    beq lbl_quest_checkCondition_00001268
     lwz r0, 0x4(r4)
     cmpwi r0, 0x1
-    bne lbl_fn_80148B38_000011F0
+    bne lbl_quest_checkCondition_000011F0
     lwz r0, 0x2dc(r3)
     lis r4, lbl_80737A9C@ha
     addi r4, r4, lbl_80737A9C@l
     cmpwi r0, 0x26
     addi r4, r4, 0x34f
-    beq lbl_fn_80148B38_000011B4
+    beq lbl_quest_checkCondition_000011B4
     cmpwi r0, 0x17e
-    bne lbl_fn_80148B38_000011C0
-lbl_fn_80148B38_000011B4:
+    bne lbl_quest_checkCondition_000011C0
+lbl_quest_checkCondition_000011B4:
     lis r4, lbl_80737A9C@ha
     addi r4, r4, lbl_80737A9C@l
     addi r4, r4, 0x35c
-lbl_fn_80148B38_000011C0:
+lbl_quest_checkCondition_000011C0:
     li r5, 0x0
     addi r3, r3, 0xb0
     bl fn_80092814
     cmpwi r3, 0x0
-    bge lbl_fn_80148B38_000011DC
+    bge lbl_quest_checkCondition_000011DC
     li r0, 0x0
-    b lbl_fn_80148B38_000011E8
-lbl_fn_80148B38_000011DC:
+    b lbl_quest_checkCondition_000011E8
+lbl_quest_checkCondition_000011DC:
     mulli r0, r3, 0x30
     lwz r3, 0xec(r31)
     add r0, r3, r0
-lbl_fn_80148B38_000011E8:
+lbl_quest_checkCondition_000011E8:
     lwz r3, 0x648(r31)
     stw r0, 0x224(r3)
-lbl_fn_80148B38_000011F0:
+lbl_quest_checkCondition_000011F0:
     lwz r3, 0x648(r31)
     lfs f0, 0xf0(r31)
     stfs f0, 0x50(r3)
@@ -1408,7 +1408,7 @@ lbl_fn_80148B38_000011F0:
     bctrl
     lwz r3, 0x64c(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_80148B38_00001268
+    beq lbl_quest_checkCondition_00001268
     lfs f0, 0xf0(r31)
     stfs f0, 0x50(r3)
     lfs f0, 0xf4(r31)
@@ -1422,38 +1422,38 @@ lbl_fn_80148B38_000011F0:
     lwz r12, 0x10(r12)
     mtctr r12
     bctrl
-lbl_fn_80148B38_00001268:
+lbl_quest_checkCondition_00001268:
     addi r30, r31, 0x680
     li r29, 0x0
-lbl_fn_80148B38_00001270:
+lbl_quest_checkCondition_00001270:
     lwz r3, 0x0(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_80148B38_00001280
+    beq lbl_quest_checkCondition_00001280
     bl fn_80565B9C
-lbl_fn_80148B38_00001280:
+lbl_quest_checkCondition_00001280:
     addi r29, r29, 0x1
     addi r30, r30, 0x4
     cmplwi r29, 0x8
-    blt lbl_fn_80148B38_00001270
+    blt lbl_quest_checkCondition_00001270
     mr r30, r31
     li r29, 0x0
-    b lbl_fn_80148B38_000012C4
-lbl_fn_80148B38_0000129C:
+    b lbl_quest_checkCondition_000012C4
+lbl_quest_checkCondition_0000129C:
     lwz r3, 0x6a8(r30)
     lwz r0, 0x3dc(r3)
     srawi. r0, r0, 31
-    beq lbl_fn_80148B38_000012BC
+    beq lbl_quest_checkCondition_000012BC
     lwz r12, 0x0(r3)
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_80148B38_000012BC:
+lbl_quest_checkCondition_000012BC:
     addi r30, r30, 0x4
     addi r29, r29, 0x1
-lbl_fn_80148B38_000012C4:
+lbl_quest_checkCondition_000012C4:
     lwz r0, 0x6a4(r31)
     cmplw r29, r0
-    blt lbl_fn_80148B38_0000129C
+    blt lbl_quest_checkCondition_0000129C
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

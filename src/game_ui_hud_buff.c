@@ -26,7 +26,7 @@ extern void fn_8012D8B8(void);
 extern void fn_8013407C(void);
 extern void fn_8013655C(void);
 extern void fn_80145334(void);
-extern void fn_80148B38(void);
+extern void quest_checkCondition(void);
 extern void fn_80149A30(void);
 extern void fn_8014C540(void);
 extern void fn_8014DEE4(void);
@@ -36,7 +36,7 @@ extern void fn_801CE148(void);
 extern void fn_801E91A0(void);
 extern void fn_801E91B4(void);
 extern void fn_801E9218(void);
-extern void fn_801F4E8C(void);
+extern void saveSlot_readSummary(void);
 extern void fn_801F6E78(void);
 extern void fn_80201E78(void);
 extern void fn_80202118(void);
@@ -381,7 +381,7 @@ lbl_fn_801CC4F4_00000330:
     stfs f10, 0xac(r1)
     bl fn_805F9920
     mr r3, r31
-    bl fn_80148B38
+    bl quest_checkCondition
     lwz r12, 0x0(r31)
     mr r3, r31
     lwz r12, 0x20(r12)
@@ -1793,7 +1793,7 @@ lbl_fn_801CDA00_00001620:
     mr r5, r3
     mr r4, r28
     addi r3, r1, 0x64
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lfs f4, 0x64(r1)
     mr r3, r27
     lfs f3, 0x68(r1)
@@ -1854,7 +1854,7 @@ lbl_fn_801CDA00_000017C0:
     mr r5, r3
     mr r4, r28
     addi r3, r1, 0x50
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lfs f4, 0x50(r1)
     mr r3, r23
     lfs f3, 0x54(r1)

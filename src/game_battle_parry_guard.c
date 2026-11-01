@@ -35,7 +35,7 @@ extern void fn_800DC288(void);
 extern void fn_8011F8F4(void);
 extern void fn_8011FC10(void);
 extern void fn_80144710(void);
-extern void fn_80148B38(void);
+extern void quest_checkCondition(void);
 extern void fn_802180A8(void);
 extern void fn_80219558(void);
 extern void fn_80232B7C(void);
@@ -1222,7 +1222,7 @@ lbl_fn_804131A4_00000ED4:
 lbl_fn_804131A4_00000ED8:
     lfs f1, lbl_80886410
     mr r3, r23
-    bl fn_80148B38
+    bl quest_checkCondition
 lbl_fn_804131A4_00000EE4:
     lwz r23, 0x14ac(r23)
 lbl_fn_804131A4_00000EE8:

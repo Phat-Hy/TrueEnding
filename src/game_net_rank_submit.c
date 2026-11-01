@@ -9,7 +9,7 @@ extern void _savegpr_19(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8005B710(void);
+extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
 extern void fn_8006F5E8(void);
@@ -23,7 +23,7 @@ extern void fn_8010A828(void);
 extern void fn_80116EB8(void);
 extern void fn_80116FC0(void);
 extern void fn_801F4728(void);
-extern void fn_801F4E8C(void);
+extern void saveSlot_readSummary(void);
 extern void fn_801F6C2C(void);
 extern void fn_801F6D7C(void);
 extern void fn_801F837C(void);
@@ -372,7 +372,7 @@ lbl_fn_8052293C_0000035C:
     addi r31, r1, 0xe8
 lbl_fn_8052293C_00000384:
     addi r3, r1, 0x128
-    bl fn_8005B710
+    bl talk_parseDialogue
     la r4, lbl_8087E498
     li r5, 0x1
     bl fn_80686B24
@@ -383,7 +383,7 @@ lbl_fn_8052293C_00000384:
     lwz r22, lbl_8087EEC8
     stw r26, 0xc(r1)
     stw r26, 0x10(r1)
-    bl fn_8005B710
+    bl talk_parseDialogue
     mr r5, r3
     mr r3, r22
     mr r4, r25
@@ -407,7 +407,7 @@ lbl_fn_8052293C_000003E0:
     bl memcpy
 lbl_fn_8052293C_00000404:
     addi r3, r1, 0x128
-    bl fn_8005B710
+    bl talk_parseDialogue
     cmplw r3, r28
     mr r22, r3
     beq lbl_fn_8052293C_00000430
@@ -419,7 +419,7 @@ lbl_fn_8052293C_00000404:
     bl fn_806846C4
 lbl_fn_8052293C_00000430:
     addi r3, r1, 0x128
-    bl fn_8005B710
+    bl talk_parseDialogue
     cmplw r3, r29
     mr r22, r3
     beq lbl_fn_8052293C_0000045C
@@ -431,7 +431,7 @@ lbl_fn_8052293C_00000430:
     bl fn_806846C4
 lbl_fn_8052293C_0000045C:
     addi r3, r1, 0x128
-    bl fn_8005B710
+    bl talk_parseDialogue
     cmplw r3, r30
     mr r22, r3
     beq lbl_fn_8052293C_00000488
@@ -443,7 +443,7 @@ lbl_fn_8052293C_0000045C:
     bl fn_806846C4
 lbl_fn_8052293C_00000488:
     addi r3, r1, 0x128
-    bl fn_8005B710
+    bl talk_parseDialogue
     cmplw r3, r31
     mr r22, r3
     beq lbl_fn_8052293C_000004B4
@@ -1605,7 +1605,7 @@ lbl_fn_805233FC_000014D8:
     mr r5, r3
     mr r4, r26
     addi r3, r1, 0x168
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lwz r3, 0x144(r23)
     bl fn_80202118
     addi r4, r29, 0x2a5
@@ -1938,7 +1938,7 @@ lbl_fn_805233FC_000019B0:
     mr r5, r3
     mr r4, r22
     addi r3, r1, 0xf0
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lfs f10, 0xf0(r1)
     mr r3, r25
     lfs f9, 0xf4(r1)
@@ -1976,7 +1976,7 @@ lbl_fn_805233FC_000019B0:
     mr r5, r3
     mr r4, r22
     addi r3, r1, 0x140
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lfs f9, lbl_80887A10
     addi r6, r1, 0x154
     lfs f8, 0x140(r1)
@@ -2033,7 +2033,7 @@ lbl_fn_805233FC_00001B60:
     mr r5, r3
     mr r4, r26
     addi r3, r1, 0x12c
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lwz r3, 0x138(r25)
     bl fn_80202118
     lis r4, lbl_8075C6C4@ha
@@ -2069,7 +2069,7 @@ lbl_fn_805233FC_00001B98:
     mr r5, r3
     mr r4, r22
     addi r3, r1, 0x118
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lwz r3, 0x0(r21)
     subi r0, r3, 0x1
     cmplwi r0, 0x6
@@ -2326,7 +2326,7 @@ lbl_fn_805233FC_00001F68:
     mr r5, r3
     mr r4, r22
     addi r3, r1, 0xc8
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lfs f10, 0xc8(r1)
     addi r4, r26, 0x2a5
     lfs f9, 0xcc(r1)

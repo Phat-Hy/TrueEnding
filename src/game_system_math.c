@@ -14,7 +14,7 @@ extern void fn_80013F78(void);
 extern void fn_8005B3CC(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
-extern void fn_8005B710(void);
+extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
 extern void fn_8006AFF8(void);
@@ -542,14 +542,14 @@ lbl_fn_8020C0BC_0000054C:
     li r24, 0x0
 lbl_fn_8020C0BC_0000057C:
     addi r3, r1, 0xc64
-    bl fn_8005B710
+    bl talk_parseDialogue
     lhz r0, 0x0(r3)
     cmplwi r0, 0x23
     beq lbl_fn_8020C0BC_000005AC
     cmpwi r0, 0x0
     beq lbl_fn_8020C0BC_000005AC
     addi r3, r1, 0xc64
-    bl fn_8005B710
+    bl talk_parseDialogue
     bl fn_80686A48
     add r3, r3, r24
     addi r24, r3, 0x1
@@ -560,14 +560,14 @@ lbl_fn_8020C0BC_000005AC:
     bne lbl_fn_8020C0BC_0000057C
 lbl_fn_8020C0BC_000005BC:
     addi r3, r1, 0x10
-    bl fn_8005B710
+    bl talk_parseDialogue
     lhz r0, 0x0(r3)
     cmplwi r0, 0x23
     beq lbl_fn_8020C0BC_000005EC
     cmpwi r0, 0x0
     beq lbl_fn_8020C0BC_000005EC
     addi r3, r1, 0x10
-    bl fn_8005B710
+    bl talk_parseDialogue
     bl fn_80686A48
     add r3, r3, r24
     addi r24, r3, 0x1
@@ -622,14 +622,14 @@ lbl_fn_8020C0BC_00000678:
     lis r27, lbl_80783008@ha
 lbl_fn_8020C0BC_00000694:
     addi r3, r1, 0xc64
-    bl fn_8005B710
+    bl talk_parseDialogue
     lhz r0, 0x0(r3)
     cmplwi r0, 0x23
     beq lbl_fn_8020C0BC_00000700
     cmpwi r0, 0x0
     beq lbl_fn_8020C0BC_00000700
     addi r3, r1, 0xc64
-    bl fn_8005B710
+    bl talk_parseDialogue
     lwz r0, lbl_8087F1E0
     mr r24, r3
     slwi r25, r31, 1
@@ -658,14 +658,14 @@ lbl_fn_8020C0BC_00000700:
     slwi r26, r23, 3
 lbl_fn_8020C0BC_0000071C:
     addi r3, r1, 0x10
-    bl fn_8005B710
+    bl talk_parseDialogue
     lhz r0, 0x0(r3)
     cmplwi r0, 0x23
     beq lbl_fn_8020C0BC_00000784
     cmpwi r0, 0x0
     beq lbl_fn_8020C0BC_00000784
     addi r3, r1, 0x10
-    bl fn_8005B710
+    bl talk_parseDialogue
     lwz r0, lbl_8087F1E0
     mr r24, r3
     slwi r25, r31, 1

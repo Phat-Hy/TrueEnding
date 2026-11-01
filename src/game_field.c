@@ -12,7 +12,7 @@ extern void fn_8008510C(void);
 extern void fn_800DC12C(void);
 extern void fn_8022AB18(void);
 extern void fn_8022ADB8(void);
-extern void fn_8022B114(void);
+extern void texCache_freeBlock(void);
 extern void fn_8022B848(void);
 extern void fn_8022B84C(void);
 extern u32 strlen(const char* str);
@@ -1110,7 +1110,7 @@ asm void fn_80084F58(void)
     lwz r3, 0x14(r3)
     cmpwi r3, 0x0
     beqlr
-    b fn_8022B114
+    b texCache_freeBlock
     blr
 }
 

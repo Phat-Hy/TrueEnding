@@ -138,7 +138,7 @@ void fn_800C3FB0(void);
 void fn_800C3FF0(void);
 void fn_800C411C(void);
 void fn_800C41B4(void);
-void fn_800C41D0(void);
+void atn_Skin_init(void);
 void fn_800C442C(void);
 void fn_800C4444(void);
 void fn_800C4894(void);
@@ -1471,7 +1471,7 @@ asm void fn_800C41B4(void)
     blr
 }
 
-asm void fn_800C41D0(void)
+asm void atn_Skin_init(void)
 {
     nofralloc
     stwu r1, -0x140(r1)
@@ -1486,14 +1486,14 @@ asm void fn_800C41D0(void)
     stw r0, 0x8(r3)
     stw r0, 0xc(r3)
     stw r5, 0x10(r3)
-    b lbl_fn_800C41D0_0000117C
-    beq lbl_fn_800C41D0_0000117C
+    b lbl_atn_Skin_init_0000117C
+    beq lbl_atn_Skin_init_0000117C
     li r3, -0x10
     bl fn_80084C24
-lbl_fn_800C41D0_0000117C:
+lbl_atn_Skin_init_0000117C:
     cmpwi r28, 0x0
     stw r28, 0x0(r31)
-    beq lbl_fn_800C41D0_000011C4
+    beq lbl_atn_Skin_init_000011C4
     mulli r3, r28, 0xc
     li r4, 0x6
     la r5, lbl_8087D928
@@ -1508,21 +1508,21 @@ lbl_fn_800C41D0_0000117C:
     li r6, 0xc
     bl fn_80695720
     stw r3, 0x4(r31)
-    b lbl_fn_800C41D0_000011CC
-lbl_fn_800C41D0_000011C4:
+    b lbl_atn_Skin_init_000011CC
+lbl_atn_Skin_init_000011C4:
     li r0, 0x0
     stw r0, 0x4(r31)
-lbl_fn_800C41D0_000011CC:
+lbl_atn_Skin_init_000011CC:
     lwz r3, 0xc(r31)
     lwz r4, 0x10(r31)
     cmpwi r3, 0x0
     lwz r28, 0xa48(r4)
-    beq lbl_fn_800C41D0_000011E4
+    beq lbl_atn_Skin_init_000011E4
     bl fn_80084C24
-lbl_fn_800C41D0_000011E4:
+lbl_atn_Skin_init_000011E4:
     cmpwi r28, 0x0
     stw r28, 0x8(r31)
-    beq lbl_fn_800C41D0_00001210
+    beq lbl_atn_Skin_init_00001210
     slwi r3, r28, 2
     li r4, 0x6
     la r5, lbl_8087D6EC
@@ -1530,19 +1530,19 @@ lbl_fn_800C41D0_000011E4:
     li r7, 0x0
     bl fn_800846FC
     stw r3, 0xc(r31)
-    b lbl_fn_800C41D0_00001218
-lbl_fn_800C41D0_00001210:
+    b lbl_atn_Skin_init_00001218
+lbl_atn_Skin_init_00001210:
     li r0, 0x0
     stw r0, 0xc(r31)
-lbl_fn_800C41D0_00001218:
+lbl_atn_Skin_init_00001218:
     lis r28, lbl_80733880@ha
     li r24, 0x0
     li r26, 0x0
     li r25, 0x0
     addi r30, r28, lbl_80733880@l
     li r29, 0x0
-    b lbl_fn_800C41D0_00001328
-lbl_fn_800C41D0_00001234:
+    b lbl_atn_Skin_init_00001328
+lbl_atn_Skin_init_00001234:
     lwz r3, 0x10(r31)
     lwz r3, 0xa4c(r3)
     lwzx r27, r3, r26
@@ -1550,7 +1550,7 @@ lbl_fn_800C41D0_00001234:
     bl fn_8007B078
     cmpwi r3, -0x1
     mr r23, r3
-    bne lbl_fn_800C41D0_00001280
+    bne lbl_atn_Skin_init_00001280
     lwz r5, 0x10(r31)
     mr r6, r27
     addi r3, r1, 0x18
@@ -1562,7 +1562,7 @@ lbl_fn_800C41D0_00001234:
     addi r4, r1, 0x18
     lwz r3, lbl_8087EEB8
     bl fn_800697D8
-lbl_fn_800C41D0_00001280:
+lbl_atn_Skin_init_00001280:
     stw r23, 0xc(r1)
     mr r3, r23
     stw r29, 0x14(r1)
@@ -1570,7 +1570,7 @@ lbl_fn_800C41D0_00001280:
     bl fn_80081C34
     cmpwi r3, 0x0
     mr r23, r3
-    beq lbl_fn_800C41D0_000012FC
+    beq lbl_atn_Skin_init_000012FC
     addi r5, r30, 0x26
     li r3, 0x18
     mr r6, r5
@@ -1579,11 +1579,11 @@ lbl_fn_800C41D0_00001280:
     bl fn_80084320
     cmpwi r3, 0x0
     mr r27, r3
-    beq lbl_fn_800C41D0_000012D0
+    beq lbl_atn_Skin_init_000012D0
     li r4, -0x1
     bl fn_8007AA30
     mr r27, r3
-lbl_fn_800C41D0_000012D0:
+lbl_atn_Skin_init_000012D0:
     stw r27, 0x14(r1)
     mr r3, r27
     lwz r4, 0x10(r31)
@@ -1595,7 +1595,7 @@ lbl_fn_800C41D0_000012D0:
     bl fn_8007C018
     mr r3, r27
     bl fn_8007B100
-lbl_fn_800C41D0_000012FC:
+lbl_atn_Skin_init_000012FC:
     lwz r3, 0x4(r31)
     addi r26, r26, 0x4
     lwz r0, 0xc(r1)
@@ -1607,10 +1607,10 @@ lbl_fn_800C41D0_000012FC:
     lwz r0, 0x14(r1)
     stw r3, 0x4(r4)
     stw r0, 0x8(r4)
-lbl_fn_800C41D0_00001328:
+lbl_atn_Skin_init_00001328:
     lwz r0, 0x0(r31)
     cmplw r24, r0
-    blt lbl_fn_800C41D0_00001234
+    blt lbl_atn_Skin_init_00001234
     mulli r0, r0, 0xc
     lwz r3, 0x4(r31)
     addi r5, r1, 0x8
@@ -1618,8 +1618,8 @@ lbl_fn_800C41D0_00001328:
     bl fn_800C4444
     li r6, 0x0
     li r5, 0x0
-    b lbl_fn_800C41D0_00001374
-lbl_fn_800C41D0_00001354:
+    b lbl_atn_Skin_init_00001374
+lbl_atn_Skin_init_00001354:
     lwz r0, 0x4(r31)
     lwz r4, 0xc(r31)
     add r3, r0, r5
@@ -1628,10 +1628,10 @@ lbl_fn_800C41D0_00001354:
     slwi r0, r0, 2
     stwx r6, r4, r0
     addi r6, r6, 0x1
-lbl_fn_800C41D0_00001374:
+lbl_atn_Skin_init_00001374:
     lwz r0, 0x0(r31)
     cmplw r6, r0
-    blt lbl_fn_800C41D0_00001354
+    blt lbl_atn_Skin_init_00001354
     mr r3, r31
     lmw r23, 0x11c(r1)
     lwz r0, 0x144(r1)

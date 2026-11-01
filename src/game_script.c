@@ -51,7 +51,7 @@ extern void fn_80612B60(void);
 extern void fn_80612E70(void);
 extern void GXInvalidateVtxCache(void);
 extern void GXFlush(void);
-extern void fn_80613FF0(void);
+extern void GXSetDrawSync(void);
 extern void fn_80614190(void);
 extern void fn_80614B20(void);
 extern void GXSetDispCopySrc(void);
@@ -3292,7 +3292,7 @@ lbl_gx_syncFrameFifo_00002C88:
     bl fn_80612B60
 lbl_gx_syncFrameFifo_00002CD0:
     lhz r3, lbl_8087D738
-    bl fn_80613FF0
+    bl GXSetDrawSync
     lwz r8, lbl_8087EFA8
     addi r6, r1, 0x10
     li r3, 0x0

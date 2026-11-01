@@ -14,7 +14,7 @@ extern void fn_800422CC(void);
 extern void fn_8005B3CC(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
-extern void fn_8005B710(void);
+extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
 extern void fn_8006B174(void);
@@ -646,13 +646,13 @@ asm void fn_80208BE8(void)
     b lbl_fn_80208BE8_00000828
 lbl_fn_80208BE8_00000688:
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     la r4, lbl_8087DB28
     bl fn_80686AF0
     cmpwi r3, 0x0
     bne lbl_fn_80208BE8_00000828
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     mr r4, r3
     addi r3, r1, 0x10
     li r5, 0x20
@@ -664,17 +664,17 @@ lbl_fn_80208BE8_00000688:
     beq lbl_fn_80208BE8_00000828
     addi r28, r28, 0x1
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     bl fn_80686A48
     add r4, r3, r29
     addi r3, r1, 0x130
     addi r29, r4, 0x2
-    bl fn_8005B710
+    bl talk_parseDialogue
     bl fn_80686A48
     add r4, r3, r29
     addi r3, r1, 0x130
     addi r29, r4, 0x2
-    bl fn_8005B710
+    bl talk_parseDialogue
     mr r4, r3
     addi r3, r1, 0x30
     li r5, 0x100
@@ -684,7 +684,7 @@ lbl_fn_80208BE8_00000688:
     add r4, r3, r27
     addi r3, r1, 0x130
     addi r27, r4, 0x2
-    bl fn_8005B710
+    bl talk_parseDialogue
     mr r4, r3
     addi r3, r1, 0x30
     li r5, 0x100
@@ -694,7 +694,7 @@ lbl_fn_80208BE8_00000688:
     add r4, r3, r27
     addi r3, r1, 0x130
     addi r27, r4, 0x2
-    bl fn_8005B710
+    bl talk_parseDialogue
     mr r4, r3
     addi r3, r1, 0x30
     li r5, 0x100
@@ -704,7 +704,7 @@ lbl_fn_80208BE8_00000688:
     add r4, r3, r27
     addi r3, r1, 0x130
     addi r27, r4, 0x2
-    bl fn_8005B710
+    bl talk_parseDialogue
     mr r4, r3
     addi r3, r1, 0x30
     li r5, 0x100
@@ -714,7 +714,7 @@ lbl_fn_80208BE8_00000688:
     add r4, r3, r27
     addi r3, r1, 0x130
     addi r27, r4, 0x2
-    bl fn_8005B710
+    bl talk_parseDialogue
     mr r4, r3
     addi r3, r1, 0x30
     li r5, 0x100
@@ -724,7 +724,7 @@ lbl_fn_80208BE8_00000688:
     add r4, r3, r27
     addi r3, r1, 0x130
     addi r27, r4, 0x2
-    bl fn_8005B710
+    bl talk_parseDialogue
     mr r4, r3
     addi r3, r1, 0x30
     li r5, 0x100
@@ -734,13 +734,13 @@ lbl_fn_80208BE8_00000688:
     add r4, r3, r27
     addi r3, r1, 0x130
     addi r27, r4, 0x2
-    bl fn_8005B710
+    bl talk_parseDialogue
     mr r4, r3
     addi r3, r1, 0x30
     li r5, 0x100
     bl fn_802088A4
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     mr r4, r3
     addi r3, r1, 0x30
     li r5, 0x100
@@ -789,13 +789,13 @@ lbl_fn_80208BE8_00000828:
     b lbl_fn_80208BE8_00000A64
 lbl_fn_80208BE8_000008BC:
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     la r4, lbl_8087DB28
     bl fn_80686AF0
     cmpwi r3, 0x0
     bne lbl_fn_80208BE8_00000A64
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     lhz r0, 0x0(r3)
     cmpwi r0, 0x0
     beq lbl_fn_80208BE8_00000A64
@@ -804,7 +804,7 @@ lbl_fn_80208BE8_000008BC:
     bl fn_80209184
     stw r3, 0x0(r27)
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     lwz r5, lbl_8087F1A0
     mr r4, r3
     mr r6, r29
@@ -812,7 +812,7 @@ lbl_fn_80208BE8_000008BC:
     bl fn_802089C4
     mr r29, r3
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     lwz r5, lbl_8087F1A0
     mr r4, r3
     mr r6, r29
@@ -826,7 +826,7 @@ lbl_fn_80208BE8_000008BC:
     stw r0, 0x8(r27)
 lbl_fn_80208BE8_0000094C:
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     lwz r5, lbl_8087F1A4
     mr r4, r3
     mr r6, r28
@@ -834,7 +834,7 @@ lbl_fn_80208BE8_0000094C:
     bl fn_80208A3C
     mr r28, r3
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     lwz r5, lbl_8087F1A4
     mr r4, r3
     mr r6, r28
@@ -842,7 +842,7 @@ lbl_fn_80208BE8_0000094C:
     bl fn_80208A3C
     mr r28, r3
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     lwz r5, lbl_8087F1A4
     mr r4, r3
     mr r6, r28
@@ -850,7 +850,7 @@ lbl_fn_80208BE8_0000094C:
     bl fn_80208A3C
     mr r28, r3
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     lwz r5, lbl_8087F1A4
     mr r4, r3
     mr r6, r28
@@ -858,7 +858,7 @@ lbl_fn_80208BE8_0000094C:
     bl fn_80208A3C
     mr r28, r3
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     lwz r5, lbl_8087F1A4
     mr r4, r3
     mr r6, r28
@@ -866,7 +866,7 @@ lbl_fn_80208BE8_0000094C:
     bl fn_80208A3C
     mr r28, r3
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     lwz r5, lbl_8087F1A4
     mr r4, r3
     mr r6, r28
@@ -874,7 +874,7 @@ lbl_fn_80208BE8_0000094C:
     bl fn_80208A3C
     mr r28, r3
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     mr r4, r3
     addi r3, r1, 0x30
     li r5, 0x40
@@ -883,7 +883,7 @@ lbl_fn_80208BE8_0000094C:
     bl fn_805A52F8
     stw r3, 0x24(r27)
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     lwz r5, lbl_8087F1A4
     mr r4, r3
     mr r6, r28
@@ -891,7 +891,7 @@ lbl_fn_80208BE8_0000094C:
     bl fn_80208A3C
     mr r28, r3
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     bl fn_800DC1DC
     stw r3, 0x2c(r27)
     addi r30, r30, 0x30

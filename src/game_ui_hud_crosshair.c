@@ -49,7 +49,7 @@ extern void fn_801E6EF0(void);
 extern void fn_801E6FC8(void);
 extern void fn_801F4728(void);
 extern void fn_801F48C8(void);
-extern void fn_801F4E8C(void);
+extern void saveSlot_readSummary(void);
 extern void fn_801F6C80(void);
 extern void fn_801FEE08(void);
 extern void fn_80202118(void);
@@ -181,7 +181,7 @@ asm void fn_801D3DF4(void)
     mr r5, r3
     mr r4, r27
     addi r3, r1, 0xac
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lfs f4, 0xac(r1)
     lfs f3, 0xb0(r1)
     lfs f2, 0xb4(r1)
@@ -230,7 +230,7 @@ asm void fn_801D3DF4(void)
     mr r5, r3
     mr r4, r26
     addi r3, r1, 0x98
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lfs f4, 0x98(r1)
     lfs f3, 0x9c(r1)
     lfs f2, 0xa0(r1)
@@ -311,7 +311,7 @@ lbl_fn_801D3DF4_00000258:
     mr r5, r3
     mr r4, r26
     addi r3, r1, 0x84
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lfs f4, 0x84(r1)
     lfs f3, 0x88(r1)
     lfs f2, 0x8c(r1)
@@ -385,7 +385,7 @@ lbl_fn_801D3DF4_00000394:
     mr r5, r3
     mr r4, r26
     addi r3, r1, 0x70
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lfs f4, 0x70(r1)
     lfs f3, 0x74(r1)
     lfs f2, 0x78(r1)
@@ -434,7 +434,7 @@ lbl_fn_801D3DF4_00000494:
     mr r5, r3
     mr r4, r26
     addi r3, r1, 0x5c
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lfs f4, 0x5c(r1)
     slwi r0, r27, 2
     lfs f3, 0x60(r1)
@@ -474,7 +474,7 @@ lbl_fn_801D3DF4_00000494:
     mr r5, r3
     mr r4, r26
     addi r3, r1, 0x48
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lfs f4, 0x48(r1)
     lfs f3, 0x4c(r1)
     lfs f2, 0x50(r1)
@@ -551,7 +551,7 @@ lbl_fn_801D3DF4_00000494:
     mr r5, r3
     mr r4, r26
     addi r3, r1, 0x34
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lfs f4, 0x34(r1)
     addi r6, r1, 0xd4
     lfs f3, 0x38(r1)
@@ -583,7 +583,7 @@ lbl_fn_801D3DF4_00000494:
     mr r5, r3
     mr r4, r26
     addi r3, r1, 0x20
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lfs f4, 0x20(r1)
     addi r6, r1, 0xd4
     lfs f3, 0x24(r1)
@@ -645,7 +645,7 @@ lbl_fn_801D3DF4_00000768:
     mr r5, r3
     mr r4, r26
     addi r3, r1, 0xc0
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lwz r3, 0xb90(r28)
     bl fn_80202118
     addi r4, r31, 0x396

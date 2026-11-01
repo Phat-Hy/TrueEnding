@@ -66,7 +66,7 @@ void atn_Task_destructor(void);
 void atn_Task_unlink(void);
 void atn_Task_destroy(void);
 void atn_Task_setActive(void);
-void fn_800D2494(void);
+void atn_Fog_apply(void);
 
 asm void fn_800D0DB0(void)
 {
@@ -1741,7 +1741,7 @@ lbl_atn_Task_setActive_000016D4:
     blr
 }
 
-asm void fn_800D2494(void)
+asm void atn_Fog_apply(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1753,140 +1753,140 @@ asm void fn_800D2494(void)
     stw r29, 0x14(r1)
     stw r28, 0x10(r1)
     mr r28, r3
-    beq lbl_fn_800D2494_00001710
+    beq lbl_atn_Fog_apply_00001710
     bl atn_TaskBase_isValid
-lbl_fn_800D2494_00001710:
+lbl_atn_Fog_apply_00001710:
     lwz r0, 0x20(r28)
     cmpwi r0, 0x0
-    beq lbl_fn_800D2494_00001728
+    beq lbl_atn_Fog_apply_00001728
     lwz r0, 0x38(r28)
     rlwinm. r0, r0, 0, 27, 27
-    beq lbl_fn_800D2494_000018D4
-lbl_fn_800D2494_00001728:
+    beq lbl_atn_Fog_apply_000018D4
+lbl_atn_Fog_apply_00001728:
     lwz r4, 0x38(r28)
     andis. r3, r4, 0xdead
     addis r0, r3, 0x2153
     cmplwi r0, 0x0
-    beq lbl_fn_800D2494_000018D4
+    beq lbl_atn_Fog_apply_000018D4
     clrlwi r0, r4, 31
     cmplwi r0, 0x1
-    beq lbl_fn_800D2494_00001754
+    beq lbl_atn_Fog_apply_00001754
     mr r3, r28
     bl atn_Task_executeChildren
-    b lbl_fn_800D2494_000018D4
-lbl_fn_800D2494_00001754:
+    b lbl_atn_Fog_apply_000018D4
+lbl_atn_Fog_apply_00001754:
     lwz r31, 0x18(r28)
     cmpwi r31, 0x0
-    beq lbl_fn_800D2494_000018D4
+    beq lbl_atn_Fog_apply_000018D4
     lis r29, 0xdead
-lbl_fn_800D2494_00001764:
+lbl_atn_Fog_apply_00001764:
     lwz r4, 0x38(r31)
     andis. r3, r4, 0xdead
     addis r0, r3, 0x2153
     cmplwi r0, 0x0
-    beq lbl_fn_800D2494_000018C0
+    beq lbl_atn_Fog_apply_000018C0
     rlwinm. r0, r4, 0, 29, 29
-    bne lbl_fn_800D2494_000018C0
+    bne lbl_atn_Fog_apply_000018C0
     rlwinm. r0, r4, 0, 30, 30
-    bne lbl_fn_800D2494_000017B4
+    bne lbl_atn_Fog_apply_000017B4
     lwz r12, 0x0(r31)
     mr r3, r31
     lwz r12, 0xc(r12)
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    beq lbl_fn_800D2494_000017B0
+    beq lbl_atn_Fog_apply_000017B0
     lwz r0, 0x38(r31)
     ori r0, r0, 0x2
     stw r0, 0x38(r31)
-lbl_fn_800D2494_000017B0:
+lbl_atn_Fog_apply_000017B0:
     lwz r4, 0x38(r31)
-lbl_fn_800D2494_000017B4:
+lbl_atn_Fog_apply_000017B4:
     addi r0, r29, 0x4
     and. r0, r4, r0
-    bne lbl_fn_800D2494_000018C0
+    bne lbl_atn_Fog_apply_000018C0
     lwz r30, 0x18(r31)
     cmpwi r30, 0x0
-    beq lbl_fn_800D2494_000018C0
-lbl_fn_800D2494_000017CC:
+    beq lbl_atn_Fog_apply_000018C0
+lbl_atn_Fog_apply_000017CC:
     lwz r4, 0x38(r30)
     andis. r3, r4, 0xdead
     addis r0, r3, 0x2153
     cmplwi r0, 0x0
-    beq lbl_fn_800D2494_000018AC
+    beq lbl_atn_Fog_apply_000018AC
     rlwinm. r0, r4, 0, 29, 29
-    bne lbl_fn_800D2494_000018AC
+    bne lbl_atn_Fog_apply_000018AC
     rlwinm. r0, r4, 0, 30, 30
-    bne lbl_fn_800D2494_0000181C
+    bne lbl_atn_Fog_apply_0000181C
     lwz r12, 0x0(r30)
     mr r3, r30
     lwz r12, 0xc(r12)
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    beq lbl_fn_800D2494_00001818
+    beq lbl_atn_Fog_apply_00001818
     lwz r0, 0x38(r30)
     ori r0, r0, 0x2
     stw r0, 0x38(r30)
-lbl_fn_800D2494_00001818:
+lbl_atn_Fog_apply_00001818:
     lwz r4, 0x38(r30)
-lbl_fn_800D2494_0000181C:
+lbl_atn_Fog_apply_0000181C:
     addi r0, r29, 0x4
     and. r0, r4, r0
-    bne lbl_fn_800D2494_000018AC
+    bne lbl_atn_Fog_apply_000018AC
     lwz r28, 0x18(r30)
     cmpwi r28, 0x0
-    beq lbl_fn_800D2494_000018AC
-lbl_fn_800D2494_00001834:
+    beq lbl_atn_Fog_apply_000018AC
+lbl_atn_Fog_apply_00001834:
     lwz r4, 0x38(r28)
     andis. r3, r4, 0xdead
     addis r0, r3, 0x2153
     cmplwi r0, 0x0
-    beq lbl_fn_800D2494_00001898
+    beq lbl_atn_Fog_apply_00001898
     rlwinm. r0, r4, 0, 29, 29
-    bne lbl_fn_800D2494_00001898
+    bne lbl_atn_Fog_apply_00001898
     rlwinm. r0, r4, 0, 30, 30
-    bne lbl_fn_800D2494_00001884
+    bne lbl_atn_Fog_apply_00001884
     lwz r12, 0x0(r28)
     mr r3, r28
     lwz r12, 0xc(r12)
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    beq lbl_fn_800D2494_00001880
+    beq lbl_atn_Fog_apply_00001880
     lwz r0, 0x38(r28)
     ori r0, r0, 0x2
     stw r0, 0x38(r28)
-lbl_fn_800D2494_00001880:
+lbl_atn_Fog_apply_00001880:
     lwz r4, 0x38(r28)
-lbl_fn_800D2494_00001884:
+lbl_atn_Fog_apply_00001884:
     addi r0, r29, 0x4
     and. r0, r4, r0
-    bne lbl_fn_800D2494_00001898
+    bne lbl_atn_Fog_apply_00001898
     mr r3, r28
     bl fn_800D26A4
-lbl_fn_800D2494_00001898:
+lbl_atn_Fog_apply_00001898:
     cmpwi r28, 0x0
-    beq lbl_fn_800D2494_000018A4
+    beq lbl_atn_Fog_apply_000018A4
     lwz r28, 0x1c(r28)
-lbl_fn_800D2494_000018A4:
+lbl_atn_Fog_apply_000018A4:
     cmpwi r28, 0x0
-    bne lbl_fn_800D2494_00001834
-lbl_fn_800D2494_000018AC:
+    bne lbl_atn_Fog_apply_00001834
+lbl_atn_Fog_apply_000018AC:
     cmpwi r30, 0x0
-    beq lbl_fn_800D2494_000018B8
+    beq lbl_atn_Fog_apply_000018B8
     lwz r30, 0x1c(r30)
-lbl_fn_800D2494_000018B8:
+lbl_atn_Fog_apply_000018B8:
     cmpwi r30, 0x0
-    bne lbl_fn_800D2494_000017CC
-lbl_fn_800D2494_000018C0:
+    bne lbl_atn_Fog_apply_000017CC
+lbl_atn_Fog_apply_000018C0:
     cmpwi r31, 0x0
-    beq lbl_fn_800D2494_000018CC
+    beq lbl_atn_Fog_apply_000018CC
     lwz r31, 0x1c(r31)
-lbl_fn_800D2494_000018CC:
+lbl_atn_Fog_apply_000018CC:
     cmpwi r31, 0x0
-    bne lbl_fn_800D2494_00001764
-lbl_fn_800D2494_000018D4:
+    bne lbl_atn_Fog_apply_00001764
+lbl_atn_Fog_apply_000018D4:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

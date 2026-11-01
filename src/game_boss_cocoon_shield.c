@@ -13,7 +13,7 @@ extern void fn_80013F78(void);
 extern void fn_8003E4A4(void);
 extern void fn_8004212C(void);
 extern void fn_80042218(void);
-extern void fn_8005B710(void);
+extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
 extern void fn_8006A9A4(void);
@@ -165,7 +165,7 @@ lbl_fn_8046B798_000000AC:
     li r24, 0x0
 lbl_fn_8046B798_000000DC:
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     lhz r0, 0x0(r3)
     cmplwi r0, 0x23
     beq lbl_fn_8046B798_000000FC
@@ -226,7 +226,7 @@ lbl_fn_8046B798_00000194:
     li r27, 0x0
 lbl_fn_8046B798_000001B4:
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     lhz r0, 0x0(r3)
     cmplwi r0, 0x23
     beq lbl_fn_8046B798_000003A4
@@ -237,11 +237,11 @@ lbl_fn_8046B798_000001B4:
     bl fn_800DC1DC
     stw r3, 0x0(r28)
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     bl fn_800DC1DC
     stw r3, 0x4(r28)
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     bl fn_800DC1DC
     stw r3, 0x8(r28)
     addi r3, r1, 0x30
@@ -250,7 +250,7 @@ lbl_fn_8046B798_000001B4:
     bl memset
     lwz r24, lbl_8087EEC8
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     mr r5, r3
     mr r3, r24
     addi r4, r1, 0x30
@@ -267,7 +267,7 @@ lbl_fn_8046B798_000001B4:
     bl fn_800D5908
 lbl_fn_8046B798_00000254:
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     lwz r0, 0x3c(r28)
     mr r24, r3
     srwi. r0, r0, 31
@@ -291,7 +291,7 @@ lbl_fn_8046B798_0000027C:
     li r4, 0x0
     bl fn_8006F72C
     addi r3, r1, 0x130
-    bl fn_8005B710
+    bl talk_parseDialogue
     stw r30, 0x20(r1)
     mr r24, r3
     stw r30, 0x24(r1)

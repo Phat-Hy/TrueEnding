@@ -11,7 +11,7 @@ extern void fn_8006EF48(void);
 extern void fn_8009EE30(void);
 extern void fn_800BFAC8(void);
 extern void fn_800DC6B4(void);
-extern void fn_801F4E8C(void);
+extern void saveSlot_readSummary(void);
 extern void fn_801F6C80(void);
 extern void fn_801FECE0(void);
 extern void fn_801FED24(void);
@@ -1461,7 +1461,7 @@ lbl_fn_8051D868_00001380:
     mr r5, r3
     mr r4, r19
     addi r3, r1, 0x1b8
-    bl fn_801F4E8C
+    bl saveSlot_readSummary
     lfs f7, 0x1bc(r1)
     addi r4, r1, 0x1a0
     lfs f0, 0x1b8(r1)
