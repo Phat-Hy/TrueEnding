@@ -84,7 +84,7 @@ extern u32 lbl_8088601C;
 void fn_803F68B4(void);
 void fn_803F699C(void);
 void fn_803F69C8(void);
-void fn_803F69DC(void);
+void *fn_803F69DC(void *p);
 void fn_803F69E4(void);
 void fn_803F6AC4(void);
 void fn_803F6B04(void);
@@ -203,11 +203,9 @@ asm void fn_803F69C8(void)
     blr
 }
 
-asm void fn_803F69DC(void)
+void *fn_803F69DC(void *p)
 {
-    nofralloc
-    addi r3, r3, 0xf4
-    blr
+    return (char *)p + 0xf4;
 }
 
 asm void fn_803F69E4(void)

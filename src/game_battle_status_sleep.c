@@ -125,7 +125,7 @@ void fn_8042C174(void);
 void fn_8042C1A4(void);
 void fn_8042C1FC(void);
 void fn_8042C210(void);
-void fn_8042C214(void);
+void *fn_8042C214(void *p);
 void fn_8042C21C(void);
 
 asm void fn_8042A98C(void)
@@ -1914,11 +1914,9 @@ void fn_8042C210(void)
 {
 }
 
-asm void fn_8042C214(void)
+void *fn_8042C214(void *p)
 {
-    nofralloc
-    addi r3, r3, 0xf4
-    blr
+    return (char *)p + 0xf4;
 }
 
 asm void fn_8042C21C(void)

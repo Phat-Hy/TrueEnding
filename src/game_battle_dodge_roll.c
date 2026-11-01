@@ -94,7 +94,7 @@ void fn_80414328(void);
 void fn_804145B8(void);
 void fn_804145E8(void);
 void fn_804146E4(void);
-void fn_80414824(void);
+u32 fn_80414824(void);
 void fn_8041482C(void);
 void fn_80414974(void);
 void fn_80414994(void);
@@ -111,7 +111,7 @@ void fn_8041502C(void);
 void fn_804150BC(void);
 void fn_804150D4(void);
 void fn_80415214(void);
-void fn_80415244(void);
+void *fn_80415244(void *p);
 void fn_8041524C(void);
 void fn_8041537C(void);
 void fn_804154AC(void);
@@ -483,11 +483,9 @@ lbl_fn_804146E4_000004E4:
     blr
 }
 
-asm void fn_80414824(void)
+u32 fn_80414824(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8041482C(void)
@@ -1253,11 +1251,9 @@ lbl_fn_80415214_00000F14:
     blr
 }
 
-asm void fn_80415244(void)
+void *fn_80415244(void *p)
 {
-    nofralloc
-    addi r3, r3, 0xf4
-    blr
+    return (char *)p + 0xf4;
 }
 
 asm void fn_8041524C(void)

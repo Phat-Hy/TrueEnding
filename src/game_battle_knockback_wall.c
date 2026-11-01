@@ -169,7 +169,7 @@ void fn_80416AA8(void);
 void fn_80416C84(void);
 void fn_80416CB8(void);
 void fn_80416F40(void);
-void fn_80416F6C(void);
+void *fn_80416F6C(void *p);
 void fn_80416F74(void);
 void fn_80417098(void);
 void fn_804170D8(void);
@@ -1401,11 +1401,9 @@ lbl_fn_80416F40_00001124:
     blr
 }
 
-asm void fn_80416F6C(void)
+void *fn_80416F6C(void *p)
 {
-    nofralloc
-    addi r3, r3, 0xf4
-    blr
+    return (char *)p + 0xf4;
 }
 
 asm void fn_80416F74(void)

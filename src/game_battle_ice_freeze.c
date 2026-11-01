@@ -117,7 +117,7 @@ void fn_8041C718(void);
 void fn_8041C784(void);
 void fn_8041C99C(void);
 void fn_8041CC78(void);
-void fn_8041CD1C(void);
+void *fn_8041CD1C(void *p);
 void fn_8041CD24(void);
 void fn_8041CD54(void);
 void fn_8041CDD8(void);
@@ -1877,11 +1877,9 @@ lbl_fn_8041CC78_00001830:
     blr
 }
 
-asm void fn_8041CD1C(void)
+void *fn_8041CD1C(void *p)
 {
-    nofralloc
-    addi r3, r3, 0xf4
-    blr
+    return (char *)p + 0xf4;
 }
 
 asm void fn_8041CD24(void)

@@ -119,7 +119,7 @@ void fn_804211B0(void);
 void fn_80421308(void);
 void fn_8042140C(void);
 void fn_80421438(void);
-void fn_8042144C(void);
+void *fn_8042144C(void *p);
 void fn_80421454(void);
 void fn_804214FC(void);
 void fn_80421554(void);
@@ -1283,11 +1283,9 @@ asm void fn_80421438(void)
     blr
 }
 
-asm void fn_8042144C(void)
+void *fn_8042144C(void *p)
 {
-    nofralloc
-    addi r3, r3, 0xf4
-    blr
+    return (char *)p + 0xf4;
 }
 
 asm void fn_80421454(void)

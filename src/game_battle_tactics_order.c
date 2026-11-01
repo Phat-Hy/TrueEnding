@@ -104,26 +104,26 @@ extern u32 lbl_80885FA8;
 /* Function declarations */
 void fn_803EFCA8(void);
 void fn_803EFD60(void);
-void fn_803EFD9C(void);
-void fn_803EFDA4(void);
-void fn_803EFDAC(void);
+u32 fn_803EFD9C(const void *p);
+u32 fn_803EFDA4(const void *p);
+u32 fn_803EFDAC(const void *p);
 void fn_803EFDB4(void);
 void fn_803EFDD0(void);
 void fn_803EFDE4(void);
-void fn_803EFE5C(void);
+u32 fn_803EFE5C(const void *p);
 void fn_803EFE64(void);
 void fn_803F0280(void);
 void fn_803F0328(void);
 void fn_803F03D8(void);
 void fn_803F0488(void);
 void fn_803F0538(void);
-void fn_803F05E8(void);
+u32 fn_803F05E8(const void *p);
 void fn_803F05F0(void);
-void fn_803F05FC(void);
+u32 fn_803F05FC(const void *p);
 void fn_803F0604(void);
 void fn_803F0614(void);
 void fn_803F0624(void);
-void fn_803F0634(void);
+u32 fn_803F0634(const void *p);
 void fn_803F063C(void);
 void fn_803F0688(void);
 void fn_803F069C(void);
@@ -208,25 +208,19 @@ asm void fn_803EFD60(void)
     blr
 }
 
-asm void fn_803EFD9C(void)
+u32 fn_803EFD9C(const void *p)
 {
-    nofralloc
-    lwz r3, 0x48(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x48);
 }
 
-asm void fn_803EFDA4(void)
+u32 fn_803EFDA4(const void *p)
 {
-    nofralloc
-    lwz r3, 0x4c(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x4c);
 }
 
-asm void fn_803EFDAC(void)
+u32 fn_803EFDAC(const void *p)
 {
-    nofralloc
-    lwz r3, 0x50(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x50);
 }
 
 asm void fn_803EFDB4(void)
@@ -288,11 +282,9 @@ lbl_fn_803EFDE4_00000198:
     blr
 }
 
-asm void fn_803EFE5C(void)
+u32 fn_803EFE5C(const void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x4);
 }
 
 asm void fn_803EFE64(void)
@@ -839,11 +831,9 @@ lbl_fn_803F0538_00000924:
     blr
 }
 
-asm void fn_803F05E8(void)
+u32 fn_803F05E8(const void *p)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(const u32 *)p;
 }
 
 asm void fn_803F05F0(void)
@@ -854,11 +844,9 @@ asm void fn_803F05F0(void)
     blr
 }
 
-asm void fn_803F05FC(void)
+u32 fn_803F05FC(const void *p)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(const u32 *)p;
 }
 
 asm void fn_803F0604(void)
@@ -888,11 +876,9 @@ asm void fn_803F0624(void)
     blr
 }
 
-asm void fn_803F0634(void)
+u32 fn_803F0634(const void *p)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(const u32 *)p;
 }
 
 asm void fn_803F063C(void)

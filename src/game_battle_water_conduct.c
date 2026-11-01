@@ -107,8 +107,8 @@ void fn_8041AFA8(void);
 void fn_8041B018(void);
 void fn_8041B058(void);
 void fn_8041B094(void);
-void fn_8041B27C(void);
-void fn_8041B284(void);
+void *fn_8041B27C(void *p);
+u32 fn_8041B284(const void *p);
 void fn_8041B28C(void);
 
 asm void fn_80419A48(void)
@@ -1832,18 +1832,14 @@ lbl_fn_8041B094_0000180C:
     blr
 }
 
-asm void fn_8041B27C(void)
+void *fn_8041B27C(void *p)
 {
-    nofralloc
-    addi r3, r3, 0xf4
-    blr
+    return (char *)p + 0xf4;
 }
 
-asm void fn_8041B284(void)
+u32 fn_8041B284(const void *p)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(const u32 *)p;
 }
 
 asm void fn_8041B28C(void)

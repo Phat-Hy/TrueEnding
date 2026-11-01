@@ -132,14 +132,14 @@ void fn_8042CC10(void);
 void fn_8042CC40(void);
 void fn_8042CC98(void);
 void fn_8042CCAC(void);
-void fn_8042CE28(void);
+void *fn_8042CE28(void *p);
 void fn_8042CE30(void);
 void fn_8042CEE8(void);
 void fn_8042CF40(void);
 void fn_8042CFB4(void);
 void fn_8042D0DC(void);
 void fn_8042D114(void);
-void fn_8042D138(void);
+u32 fn_8042D138(void);
 void fn_8042D140(void);
 void fn_8042D3EC(void);
 void fn_8042D41C(void);
@@ -962,11 +962,9 @@ lbl_fn_8042CCAC_00000B00:
     blr
 }
 
-asm void fn_8042CE28(void)
+void *fn_8042CE28(void *p)
 {
-    nofralloc
-    addi r3, r3, 0xf4
-    blr
+    return (char *)p + 0xf4;
 }
 
 asm void fn_8042CE30(void)
@@ -1203,11 +1201,9 @@ asm void fn_8042D114(void)
     blr
 }
 
-asm void fn_8042D138(void)
+u32 fn_8042D138(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8042D140(void)

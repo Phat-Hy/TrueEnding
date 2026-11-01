@@ -116,9 +116,9 @@ void fn_8040E31C(void);
 void fn_8040E4E8(void);
 void fn_8040E620(void);
 void fn_8040EB2C(void);
-void fn_8040EBD8(void);
+u32 fn_8040EBD8(const void *p);
 void fn_8040EBE0(void);
-void fn_8040EC28(void);
+void *fn_8040EC28(void *p);
 void fn_8040EC30(void);
 void fn_8040ED00(void);
 void fn_8040EE00(void);
@@ -1380,11 +1380,9 @@ lbl_fn_8040EB2C_0000117C:
     blr
 }
 
-asm void fn_8040EBD8(void)
+u32 fn_8040EBD8(const void *p)
 {
-    nofralloc
-    lwz r3, 0x55c(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x55c);
 }
 
 asm void fn_8040EBE0(void)
@@ -1412,11 +1410,9 @@ lbl_fn_8040EBE0_000011CC:
     blr
 }
 
-asm void fn_8040EC28(void)
+void *fn_8040EC28(void *p)
 {
-    nofralloc
-    addi r3, r3, 0xf4
-    blr
+    return (char *)p + 0xf4;
 }
 
 asm void fn_8040EC30(void)
