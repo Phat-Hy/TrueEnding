@@ -8,7 +8,7 @@ extern void _savegpr_24(void);
 extern void dtor_80084684(void);
 extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80011410(void);
@@ -16,7 +16,7 @@ extern void fn_80012C88(void);
 extern void vec3_sub(void);
 extern void fn_800133B0(void);
 extern void fn_80013404(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void fn_80013484(void);
 extern void collision_testLineSegment(void);
 extern void fn_80057A64(void);
@@ -1981,7 +1981,7 @@ asm void fn_801C346C(void)
     fneg f0, f1
     addi r3, r1, 0xf8
     stfs f0, 0x100(r1)
-    bl fn_8000D3A4
+    bl vec3_mag
     fmr f28, f1
     lwz r3, 0x4(r30)
     bl fn_8012A1B8
@@ -2043,12 +2043,12 @@ lbl_fn_801C346C_00001A68:
     addi r3, r1, 0xd4
     addi r4, r30, 0x8
     addi r5, r1, 0xe0
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0xd4
     addi r4, r30, 0x14
     bl fn_80013484
     addi r3, r1, 0xd4
-    bl fn_8000D3A4
+    bl vec3_mag
     fcmpo cr0, f1, f29
     ble lbl_fn_801C346C_00001AD4
     addi r3, r30, 0x8
@@ -2059,7 +2059,7 @@ lbl_fn_801C346C_00001AD4:
     addi r3, r1, 0x98
     addi r4, r30, 0x8
     addi r5, r1, 0xe0
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0xa4
     addi r4, r1, 0x98
     addi r5, r30, 0x14
@@ -2079,7 +2079,7 @@ lbl_fn_801C346C_00001AD4:
     addi r3, r1, 0x8c
     addi r4, r1, 0x80
     addi r5, r30, 0x14
-    bl fn_80013410
+    bl vec3_add
     addi r3, r30, 0x8
     addi r4, r1, 0x8c
     bl vec3_copy
@@ -2110,7 +2110,7 @@ lbl_fn_801C346C_00001B84:
     addi r4, r1, 0x68
     bl vec3_copy
     addi r3, r1, 0xe0
-    bl fn_8000D3A4
+    bl vec3_mag
     fcmpo cr0, f30, f1
     bge lbl_fn_801C346C_00001BE4
     addi r3, r1, 0xe0
@@ -2122,7 +2122,7 @@ lbl_fn_801C346C_00001B84:
     addi r3, r1, 0x5c
     addi r4, r30, 0x14
     addi r5, r1, 0x50
-    bl fn_80013410
+    bl vec3_add
     addi r3, r30, 0x8
     addi r4, r1, 0x5c
     bl vec3_copy
@@ -2135,7 +2135,7 @@ lbl_fn_801C346C_00001BE4:
     addi r4, r1, 0x44
     bl vec3_copy
     addi r3, r1, 0xe0
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_80882748
     fmr f30, f1
     fcmpo cr0, f1, f0
@@ -2213,7 +2213,7 @@ lbl_fn_801C346C_00001CF4:
     addi r3, r1, 0x14
     addi r4, r30, 0x14
     addi r5, r1, 0xe0
-    bl fn_80013410
+    bl vec3_add
     addi r3, r30, 0x8
     addi r4, r1, 0x14
     bl vec3_copy

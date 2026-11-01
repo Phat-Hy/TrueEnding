@@ -25,7 +25,7 @@ extern void fn_80207C08(void);
 extern void fn_80207C34(void);
 extern void task_findEntryById(void);
 extern void fn_8021A984(void);
-extern void fn_80237518(void);
+extern void res_MsgHandle_ctor(void);
 extern void res_Resource_unload(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -1846,7 +1846,7 @@ asm void fn_800EF6BC(void)
     addi r3, r27, 0x10
     bl res_MsgHandle_constructor
     addi r3, r27, 0x1c
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r27, 0x28
     bl res_MsgHandle_constructor
     addi r29, r27, 0x34

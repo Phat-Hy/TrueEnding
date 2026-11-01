@@ -14,7 +14,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void skill_calcTrajectory(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void str_assignBuffer(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -1890,7 +1890,7 @@ lbl_fn_800D9960_00001738:
     lfs f2, lbl_80881230
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x20(r20)
     cmpwi r0, 0x0
     beq lbl_fn_800D9960_00001760
@@ -2015,7 +2015,7 @@ lbl_fn_800D9960_00001908:
     lfs f2, lbl_80881230
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     fadds f0, f23, f1
     fnmsubs f0, f31, f0, f24
     fadds f20, f22, f0
@@ -2042,7 +2042,7 @@ lbl_fn_800D9960_00001960:
     lfs f2, lbl_80881230
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     stw r30, 0x28c(r1)
     xoris r3, r22, 0x8000
     lwz r0, 0x68(r1)

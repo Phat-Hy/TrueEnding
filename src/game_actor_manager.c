@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void fn_8000DB1C(void);
 extern void vec3_assign(void);
 extern void fn_800109E0(void);
@@ -12,7 +12,7 @@ extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
 extern void vec3_sub(void);
 extern void fn_800133B0(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void item_useConsumable(void);
 extern void fn_8008B964(void);
 extern void fn_800A56A8(void);
@@ -1745,7 +1745,7 @@ lbl_fn_801162A4_000016B4:
     addi r5, r1, 0xe8
     bl vec3_sub
     addi r3, r1, 0xd0
-    bl fn_8000D3A4
+    bl vec3_mag
     fmr f29, f1
     addi r3, r1, 0xc4
     addi r4, r1, 0xd0
@@ -1806,7 +1806,7 @@ lbl_fn_801162A4_000017BC:
     addi r3, r1, 0x58
     addi r4, r1, 0xe8
     addi r5, r1, 0x4c
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0xdc
     addi r4, r1, 0x58
     bl vec3_copy

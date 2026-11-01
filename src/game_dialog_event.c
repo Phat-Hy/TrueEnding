@@ -9,7 +9,7 @@ extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void fn_80013484(void);
 extern void ui_destroyWidget(void);
 extern void fn_80045694(void);
@@ -1433,7 +1433,7 @@ lbl_fn_8015076C_00001158:
     mr r5, r3
     addi r3, r1, 0xf8
     addi r4, r23, 0x528
-    bl fn_80013410
+    bl vec3_add
     lfs f1, lbl_80881B0C
     mr r4, r25
     addi r3, r1, 0x8c
@@ -1446,11 +1446,11 @@ lbl_fn_8015076C_00001158:
     mr r5, r3
     addi r3, r1, 0xa4
     addi r4, r23, 0x528
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0xec
     addi r4, r1, 0xa4
     addi r5, r1, 0x8c
-    bl fn_80013410
+    bl vec3_add
     bl fn_801404F8
     addi r4, r1, 0x198
     addi r5, r1, 0xf8
@@ -1543,7 +1543,7 @@ lbl_fn_8015076C_00001310:
     addi r3, r1, 0xd4
     addi r4, r23, 0x528
     addi r5, r1, 0x50
-    bl fn_80013410
+    bl vec3_add
     mr r4, r23
     addi r3, r1, 0x2c
     bl fn_8014052C
@@ -1554,7 +1554,7 @@ lbl_fn_8015076C_00001310:
     addi r3, r1, 0xc8
     addi r4, r23, 0x528
     addi r5, r1, 0x38
-    bl fn_80013410
+    bl vec3_add
     lfs f1, 0xd8(r1)
     lfs f2, lbl_808819DC
     lfs f0, 0xcc(r1)

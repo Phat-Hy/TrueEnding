@@ -6,7 +6,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void fn_800109E0(void);
 extern void vec3_toEulerAngles(void);
@@ -14,7 +14,7 @@ extern void fn_80011410(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
 extern void fn_800133B0(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void fn_80013484(void);
 extern void item_useConsumable(void);
 extern void fn_8004D388(void);
@@ -205,7 +205,7 @@ asm void fn_80382A1C(void)
     addi r5, r1, 0x188
     bl vec3_sub
     addi r3, r1, 0x170
-    bl fn_8000D3A4
+    bl vec3_mag
     mr r3, r30
     bl fn_80116BA4
     fmr f30, f1
@@ -301,7 +301,7 @@ lbl_fn_80382A1C_000001E4:
     addi r3, r1, 0xd4
     addi r4, r1, 0x11c
     addi r5, r1, 0x17c
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x110
     addi r4, r1, 0xd4
     bl vec3_copy
@@ -334,7 +334,7 @@ lbl_fn_80382A1C_000001E4:
     addi r3, r1, 0xc8
     addi r4, r1, 0x104
     addi r5, r1, 0x17c
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x110
     addi r4, r1, 0xc8
     bl vec3_copy
@@ -346,7 +346,7 @@ lbl_fn_80382A1C_000001E4:
     addi r4, r1, 0xbc
     bl vec3_copy
     addi r3, r1, 0x11c
-    bl fn_8000D3A4
+    bl vec3_mag
     addi r3, r1, 0x11c
     bl fn_800F7FF0
     addi r3, r1, 0x258
@@ -392,7 +392,7 @@ lbl_fn_80382A1C_000001E4:
     addi r3, r1, 0x80
     addi r4, r1, 0x170
     addi r5, r1, 0x17c
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x188
     addi r4, r1, 0x80
     bl vec3_copy
@@ -522,7 +522,7 @@ lbl_fn_80382A1C_0000058C:
     addi r5, r1, 0x188
     bl vec3_sub
     addi r3, r1, 0x20
-    bl fn_8000D3A4
+    bl vec3_mag
     fmr f30, f1
     lfs f1, 0x168(r1)
     bl fn_8037F640
@@ -553,7 +553,7 @@ lbl_fn_80382A1C_0000058C:
     fcmpo cr0, f1, f0
     bge lbl_fn_80382A1C_00000658
     addi r3, r1, 0x11c
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_8088593C
     fcmpo cr0, f1, f0
     ble lbl_fn_80382A1C_00000648

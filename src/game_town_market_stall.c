@@ -14,7 +14,7 @@ extern void atn_Task_destructor(void);
 extern void bloom_processPasses(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_80237518(void);
+extern void res_MsgHandle_ctor(void);
 extern void res_Resource_destructor(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
@@ -927,9 +927,9 @@ lbl_fn_803CE980_000009F0:
     stw r29, 0x114c(r31)
     stw r29, 0x1150(r31)
     stw r29, 0x1154(r31)
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r31, 0x1164
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r4, r31, 0x11f0
     addi r3, r31, 0x1554
     lfs f0, lbl_80885D58
@@ -948,16 +948,16 @@ lbl_fn_803CE980_00000ACC:
     addi r4, r4, 0x7c
     bdnz lbl_fn_803CE980_00000ACC
 lbl_fn_803CE980_00000AD8:
-    lis r29, fn_80237518@ha
+    lis r29, res_MsgHandle_ctor@ha
     lis r30, res_Resource_destructor@ha
     addi r3, r31, 0x1554
     li r6, 0xc
-    addi r4, r29, fn_80237518@l
+    addi r4, r29, res_MsgHandle_ctor@l
     addi r5, r30, res_Resource_destructor@l
     li r7, 0x4
     bl __construct_new_array
     addi r3, r31, 0x1584
-    addi r4, r29, fn_80237518@l
+    addi r4, r29, res_MsgHandle_ctor@l
     addi r5, r30, res_Resource_destructor@l
     li r6, 0xc
     li r7, 0x4

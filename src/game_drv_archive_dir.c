@@ -15,7 +15,7 @@ extern void fn_8000D9F8(void);
 extern void fn_8000DCF4(void);
 extern void vec3_assign(void);
 extern void vec3_sub(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void str_assignBuffer(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
@@ -38,7 +38,7 @@ extern void fn_801A03EC(void);
 extern void fn_801A0408(void);
 extern void fn_801F4818(void);
 extern void fn_801F4AA0(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
 extern void fn_801F72D4(void);
@@ -2026,7 +2026,7 @@ lbl_fn_805AC75C_00001A54:
     fdivs f30, f5, f0
     lwz r5, 0x36c(r1)
     lwz r3, 0x15b0(r15)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r4, 0x15b0(r15)
     addi r3, r17, 0x154
     addi r18, r4, 0x58
@@ -2262,7 +2262,7 @@ lbl_fn_805AC75C_00001DDC:
     lfs f1, 0x138(r1)
     lwz r4, 0x8(r4)
     lfs f2, lbl_808882F4
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r3, 0x15bc(r14)
     addi r4, r17, 0x18d
     bl save_computeCrc32

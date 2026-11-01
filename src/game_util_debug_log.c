@@ -31,10 +31,10 @@ extern void fn_8021A960(void);
 extern void fn_8021A984(void);
 extern void fn_8021A9CC(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237518(void);
+extern void res_MsgHandle_ctor(void);
 extern void res_Resource_destructor(void);
 extern void res_Resource_unload(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void fn_8023772C(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -42,7 +42,7 @@ extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void fn_80239D58(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void world_setGlobalFlag(void);
 extern void kpad_getClampData(void);
@@ -283,7 +283,7 @@ asm void fn_8059A0B8(void)
     lwz r3, lbl_8087F3C0
     fdivs f3, f4, f3
     fmuls f1, f3, f0
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_8059A0B8_00000210:
     lwz r3, lbl_8087F3C0
     li r4, 0x0
@@ -1039,19 +1039,19 @@ asm void fn_8059AC0C(void)
     addi r3, r30, 0x2894
     bl res_MsgHandle_constructor
     addi r3, r30, 0x28a0
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r30, 0x28ac
     bl res_MsgHandle_constructor
     addi r3, r30, 0x28b8
     bl res_MsgHandle_constructor
     addi r3, r30, 0x28c4
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r30, 0x28d0
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r30, 0x28dc
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r30, 0x28e8
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r30, 0x28f4
     bl res_MsgHandle_constructor
     addi r3, r30, 0x2900
@@ -1454,19 +1454,19 @@ lbl_fn_8059B1B8_0000122C:
     cmpwi r3, 0x0
     bne lbl_fn_8059B1B8_00001320
     addi r3, r30, 0x28c4
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_8059B1B8_00001320
     addi r3, r30, 0x28d0
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_8059B1B8_00001320
     addi r3, r30, 0x28dc
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_8059B1B8_00001320
     addi r3, r30, 0x28e8
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_8059B1B8_00001320
     addi r3, r30, 0x28f4
@@ -1489,7 +1489,7 @@ lbl_fn_8059B1B8_00001320:
     li r31, 0x1
 lbl_fn_8059B1B8_00001324:
     addi r3, r30, 0x28a0
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_8059B1B8_00001354
     addi r3, r30, 0x28ac

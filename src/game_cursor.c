@@ -44,7 +44,7 @@ extern void PSVECNormalize(void);
 extern void fn_805F9D20(void);
 extern void rand(void);
 extern void strncmp(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern void runtime_registerStaticObject(void);
 extern void __destroy_arr(void);
 extern void vec3_isNonZero(void);
@@ -1613,7 +1613,7 @@ lbl_fn_80097E80_00001424:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_80097E80_0000146C
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_80097E80_0000146C:
     lwz r6, 0x35c(r24)
     mr r4, r16

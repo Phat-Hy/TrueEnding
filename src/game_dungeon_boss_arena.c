@@ -98,7 +98,7 @@ extern void fn_8049D5DC(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern void runtime_registerStaticObject(void);
 extern void __destroy_arr(void);
 extern void __ptmf_scall(void);
@@ -1810,7 +1810,7 @@ lbl_fn_803EF3B0_00001544:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_803EF3B0_0000158C
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_803EF3B0_0000158C:
     lwz r5, 0x0(r29)
     mr r4, r30

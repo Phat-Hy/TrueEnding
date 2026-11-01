@@ -20,7 +20,7 @@ extern void PSMTXScale(void);
 extern void PSMTXQuat(void);
 extern void PSMTXMultVec(void);
 extern void fn_805F99F0(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern void vec3_isNonZero(void);
 extern void fn_8072D210(void);
 extern char* strcpy(char* dest, const char* src);
@@ -887,7 +887,7 @@ lbl_fn_800991D0_00000BEC:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_800991D0_00000C34
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_800991D0_00000C34:
     lwz r6, 0x370(r15)
     mr r4, r17
@@ -1885,7 +1885,7 @@ lbl_fn_8009A5CC_000019E0:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8009A5CC_00001A28
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8009A5CC_00001A28:
     lwz r6, 0x18(r15)
     mr r5, r20
@@ -2573,7 +2573,7 @@ lbl_fn_8009ADA4_000023F8:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8009ADA4_00002440
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8009ADA4_00002440:
     lwz r6, 0x18(r15)
     mr r5, r19
@@ -2746,7 +2746,7 @@ lbl_fn_8009ADA4_00002684:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8009ADA4_000026CC
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8009ADA4_000026CC:
     lwz r6, 0x2c(r15)
     mr r4, r20

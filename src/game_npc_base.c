@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80017064(void);
@@ -52,7 +52,7 @@ extern void world_getGlobalFlag(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void std_atan2(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern void vec3_isNonZero(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -442,7 +442,7 @@ lbl_fn_80139560_00000468:
     addi r3, r1, 0x60
     bl vec3_assign
     addi r3, r1, 0x60
-    bl fn_8000D3A4
+    bl vec3_mag
     frsp f2, f1
     lfs f0, lbl_808819B8
     stfs f1, 0x14(r1)
@@ -1306,7 +1306,7 @@ lbl_fn_8013A258_00000EC0:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8013A258_00000F08
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8013A258_00000F08:
     lwz r4, 0x3c(r1)
     addi r3, r1, 0x40

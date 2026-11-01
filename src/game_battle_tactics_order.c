@@ -42,13 +42,13 @@ extern void clip_calculateFrustum(void);
 extern void fn_8021823C(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237518(void);
+extern void res_MsgHandle_ctor(void);
 extern void res_Resource_destructor(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_803F1A38(void);
 extern void fn_805A38F4(void);
@@ -661,11 +661,11 @@ lbl_fn_803F0328_000006C0:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80237518@ha
+    lis r4, res_MsgHandle_ctor@ha
     lis r5, res_Resource_destructor@ha
     mr r7, r30
     li r6, 0xc
-    addi r4, r4, fn_80237518@l
+    addi r4, r4, res_MsgHandle_ctor@l
     addi r5, r5, res_Resource_destructor@l
     bl runtime_registerStaticObject
     stw r3, 0x4(r29)
@@ -955,7 +955,7 @@ asm void fn_803F06B0(void)
 lbl_fn_803F06B0_00000A30:
     lwz r0, 0xc(r29)
     add r3, r0, r31
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_803F06B0_00000A4C
     li r3, 0x1
@@ -1186,7 +1186,7 @@ lbl_fn_803F0764_00000D34:
     li r10, 0x0
     stw r29, 0x10(r1)
     lfs f1, 0x1c(r23)
-    bl fn_8023A680
+    bl res_Shader_bindParams
     b lbl_fn_803F0764_00000E1C
 lbl_fn_803F0764_00000D8C:
     lfs f3, 0x74(r16)
@@ -1224,7 +1224,7 @@ lbl_fn_803F0764_00000D8C:
     li r10, 0x0
     stw r29, 0x10(r1)
     lfs f1, 0x1c(r23)
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_803F0764_00000E1C:
     stw r29, 0x24(r23)
     b lbl_fn_803F0764_000013A0

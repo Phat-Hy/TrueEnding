@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void mtx_getTranslation(void);
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000DCF4(void);
 extern void vec3_assign(void);
@@ -1726,7 +1726,7 @@ lbl_fn_80266A24_00001614:
     addi r5, r30, 0x528
     bl vec3_sub
     addi r3, r1, 0x44
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_808836A0
     fcmpo cr0, f1, f0
     bge lbl_fn_80266A24_0000164C

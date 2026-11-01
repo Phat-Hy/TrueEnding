@@ -19,7 +19,7 @@ extern void fn_801F64D0(void);
 extern void fn_801F8994(void);
 extern void fn_80202A6C(void);
 extern void res_Resource_unload(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void fn_8023772C(void);
 extern void fn_803B5470(void);
 extern void fn_803B612C(void);
@@ -1779,11 +1779,11 @@ lbl_fn_803D1574_00001984:
     li r28, 0x0
 lbl_fn_803D1574_00001990:
     mr r3, r31
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_803D1574_000019B0
     mr r3, r30
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_803D1574_000019B4
 lbl_fn_803D1574_000019B0:

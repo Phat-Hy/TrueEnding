@@ -34,14 +34,14 @@ extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void fn_80151448(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237518(void);
+extern void res_MsgHandle_ctor(void);
 extern void res_Resource_unload(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_8035B694(void);
 extern void world_getLocalFlag(void);
@@ -617,7 +617,7 @@ asm void fn_8032C52C(void)
     addi r3, r31, 0x15f0
     bl res_MsgHandle_constructor
     addi r3, r31, 0x15fc
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     li r29, 0x0
     addi r28, r31, 0x161c
     stw r29, 0x1608(r31)
@@ -855,7 +855,7 @@ lbl_fn_8032C850_00000A5C:
     cmpwi r3, 0x0
     bne lbl_fn_8032C850_00000A7C
     addi r3, r29, 0x15fc
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_8032C850_00000A84
 lbl_fn_8032C850_00000A7C:
@@ -1875,7 +1875,7 @@ lbl_fn_8032D5EC_000018C4:
     li r7, 0x0
     li r10, 0x0
     lwz r3, lbl_8087F3C0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     b lbl_fn_8032D5EC_00001C00
 lbl_fn_8032D5EC_0000192C:
     cmpwi r0, 0x2

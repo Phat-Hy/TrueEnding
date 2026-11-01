@@ -5,12 +5,12 @@
 extern void _restgpr_22(void);
 extern void _savegpr_22(void);
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
 extern void vec3_sub(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void fn_80013484(void);
 extern void fn_8004ECC0(void);
 extern void collision_testLineSegment(void);
@@ -1594,7 +1594,7 @@ lbl_fn_803267E8_00001584:
     addi r5, r31, 0x528
     bl vec3_sub
     addi r3, r1, 0x150
-    bl fn_8000D3A4
+    bl vec3_mag
     lwz r0, 0x14cc(r31)
     fmr f30, f1
     cmpwi r0, 0x0
@@ -1661,7 +1661,7 @@ lbl_fn_803267E8_0000163C:
     addi r3, r1, 0x138
     addi r4, r1, 0x144
     addi r5, r1, 0xf0
-    bl fn_80013410
+    bl vec3_add
     bl fn_801404F8
     addi r4, r1, 0x1b8
     addi r5, r1, 0x144
@@ -1687,7 +1687,7 @@ lbl_fn_803267E8_0000163C:
     addi r5, r1, 0x144
     bl vec3_sub
     addi r3, r1, 0xc0
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_80884FCC
     fcmpo cr0, f1, f0
     ble lbl_fn_803267E8_00001770
@@ -1747,7 +1747,7 @@ lbl_fn_803267E8_00001788:
     addi r3, r1, 0x120
     addi r4, r1, 0x12c
     addi r5, r1, 0xa8
-    bl fn_80013410
+    bl vec3_add
     bl fn_801404F8
     addi r4, r1, 0x168
     addi r5, r1, 0x12c
@@ -1773,7 +1773,7 @@ lbl_fn_803267E8_00001788:
     addi r5, r1, 0x12c
     bl vec3_sub
     addi r3, r1, 0x78
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_80884FD0
     fcmpo cr0, f1, f0
     ble lbl_fn_803267E8_00001B58

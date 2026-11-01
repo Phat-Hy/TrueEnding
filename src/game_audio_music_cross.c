@@ -6,13 +6,13 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void mtx_getTranslation(void);
 extern void vec3_set(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80011410(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Matrix_copy_2(void);
@@ -375,7 +375,7 @@ lbl_fn_8030C490_0000037C:
     addi r3, r1, 0xc8
     addi r4, r30, 0x528
     addi r5, r1, 0x20
-    bl fn_80013410
+    bl vec3_add
     lwz r4, 0x1538(r31)
     mr r3, r27
     bl fn_800EC204
@@ -385,7 +385,7 @@ lbl_fn_8030C490_0000037C:
     addi r5, r1, 0xc8
     bl vec3_sub
     addi r3, r1, 0xbc
-    bl fn_8000D3A4
+    bl vec3_mag
     fmr f28, f1
     addi r3, r1, 0x8
     addi r4, r1, 0xbc

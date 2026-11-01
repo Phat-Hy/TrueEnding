@@ -16,7 +16,7 @@ extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
 extern void skill_calcTrajectory(void);
 extern void fn_8006AD24(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void str_assignBuffer(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -911,7 +911,7 @@ lbl_save_updateHeader_00000AA0:
     li r5, 0x1
     lhz r6, 0x12c(r31)
     lfs f2, lbl_80882C5C
-    bl fn_8006EF48
+    bl script_executeOpcode
     fadds f27, f27, f1
     b lbl_save_updateHeader_00000B68
 lbl_save_updateHeader_00000B1C:

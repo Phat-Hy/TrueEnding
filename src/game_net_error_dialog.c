@@ -7,7 +7,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_14(void);
 extern void _savegpr_26(void);
 extern void fn_800629F0(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void fn_8009EE30(void);
 extern void motion_updateFogAdj(void);
 extern void str_findChar(void);
@@ -407,7 +407,7 @@ lbl_fn_8051CF7C_00000468:
     li r5, 0x1
     lfs f2, lbl_80887904
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     stfs f1, 0x1900(r28)
     b lbl_fn_8051CF7C_000004E4
 lbl_fn_8051CF7C_000004B0:

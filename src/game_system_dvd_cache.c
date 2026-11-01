@@ -51,7 +51,7 @@ extern void fn_805B9F54(void);
 extern void fn_805BC6CC(void);
 extern void strncmp(void);
 extern void atoi(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern void vec3_isNonZero(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
@@ -1230,7 +1230,7 @@ lbl_fn_80376804_00000DF0:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_80376804_00000E38
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_80376804_00000E38:
     lwz r5, 0x5c(r31)
     mr r4, r29

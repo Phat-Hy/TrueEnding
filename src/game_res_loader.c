@@ -17,7 +17,7 @@ extern void fn_8004B338(void);
 extern void fn_80069BF4(void);
 extern void fn_8006AA20(void);
 extern void fn_8006B174(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void str_assignBuffer(void);
 extern void fn_8007A748(void);
 extern void mem_alloc(void);
@@ -2010,7 +2010,7 @@ lbl_fn_80228CA0_00001984:
     la r4, lbl_8087DBD8
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     slwi r0, r31, 4
     add r3, r26, r0
     lfs f0, 0xd0(r3)
@@ -2121,7 +2121,7 @@ lbl_fn_80228CA0_00001A90:
     mr r4, r27
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     add r3, r26, r31
     addic. r0, r1, 0x28
     lfs f0, 0xd0(r3)

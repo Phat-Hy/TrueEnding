@@ -25,7 +25,7 @@ extern void magic_dispatchActionCommand(void);
 extern void save_validateHeader(void);
 extern void fn_801F4728(void);
 extern void fn_801F4998(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
@@ -231,7 +231,7 @@ lbl_fn_804B6204_00000164:
     srawi r0, r0, 5
     srwi r5, r0, 31
     add r5, r0, r5
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r4, 0x4c(r30)
     addi r3, r29, 0x1b7
     addi r29, r4, 0x58

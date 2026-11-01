@@ -14,7 +14,7 @@ extern void dtor_80084684(void);
 extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void fn_800109E0(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void str_initFromCStr(void);
 extern void fn_8004203C(void);
 extern void str_getData(void);
@@ -33,7 +33,7 @@ extern void fn_800F80A8(void);
 extern void fn_801125F8(void);
 extern void fn_8012044C(void);
 extern void fn_801495E8(void);
-extern void fn_80237518(void);
+extern void res_MsgHandle_ctor(void);
 extern void res_Resource_unload(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A184(void);
@@ -485,7 +485,7 @@ lbl_fn_804985E4_00000494:
     addi r3, r1, 0x48
     addi r5, r21, 0x124
     addi r4, r4, 0x4
-    bl fn_80013410
+    bl vec3_add
     mr r3, r24
     addi r4, r1, 0x48
     bl fn_80498EAC
@@ -630,7 +630,7 @@ lbl_fn_804985E4_00000740:
     addi r3, r1, 0x3c
     addi r4, r25, 0x4
     addi r5, r21, 0x124
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0xb8
     addi r4, r1, 0x3c
     bl fn_800F80A8
@@ -747,7 +747,7 @@ lbl_fn_804985E4_00000840:
     addi r3, r1, 0x18
     addi r4, r25, 0x4
     addi r5, r21, 0x124
-    bl fn_80013410
+    bl vec3_add
     mr r4, r24
     addi r3, r21, 0x60
     bl fn_80497864
@@ -1630,7 +1630,7 @@ asm void fn_804997E4(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     li r0, 0x0
     stb r0, 0xc(r31)
     mr r3, r31

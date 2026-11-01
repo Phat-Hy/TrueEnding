@@ -62,7 +62,7 @@ void vec3_copy(void);
 void fn_8000D138(void);
 void fn_8000D1A0(void);
 void fn_8000D1A8(void);
-void fn_8000D3A4(void);
+void vec3_mag(void);
 void fn_8000D3A8(void);
 void fn_8000D430(void);
 void fn_8000D4D4(void);
@@ -653,7 +653,7 @@ lbl_fn_8000D1A8_000007AC:
     blr
 }
 
-asm void fn_8000D3A4(void)
+asm void vec3_mag(void)
 {
     nofralloc
     b PSVECMag

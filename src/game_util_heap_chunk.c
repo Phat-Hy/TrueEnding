@@ -26,7 +26,7 @@ extern void actor_spawnActorWithId(void);
 extern void save_validateHeader(void);
 extern void fn_801F4728(void);
 extern void fn_801F48C8(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801F64D0(void);
 extern void save_computeCrc32(void);
@@ -575,7 +575,7 @@ asm void fn_80586220(void)
     lwz r5, lbl_8087F4F0
     lwz r3, 0xd4(r3)
     lwz r5, 0x6000(r5)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     addis r3, r31, 0x2
     lwz r0, 0xf8(r31)
     lwz r3, 0x5c90(r3)
@@ -590,7 +590,7 @@ asm void fn_80586220(void)
     lwz r3, 0xd4(r31)
     addi r4, r15, 0x13a
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
 lbl_fn_80586220_00000648:
     addis r5, r31, 0x2
     lwz r6, 0xf8(r31)

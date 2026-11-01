@@ -28,7 +28,7 @@ extern void dialog_updateScriptState(void);
 extern void actor_setState(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_8029F3AC(void);
 extern void fn_802A4968(void);
@@ -2120,7 +2120,7 @@ lbl_fn_80455638_00001BEC:
     li r9, 0x0
     li r10, 0x0
     lwz r3, lbl_8087F3C0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lfs f1, lbl_80886B78
     addi r3, r1, 0x18
     addi r4, r31, 0x16f

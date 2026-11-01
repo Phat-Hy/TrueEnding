@@ -30,7 +30,7 @@ extern void GXDrawDone(void);
 extern void fn_80617200(void);
 extern void fn_80617220(void);
 extern void fn_80617340(void);
-extern void fn_806173E0(void);
+extern void GXSetTevColorIn(void);
 extern void GXSetTevIndirect(void);
 extern void fn_806175F0(void);
 extern void GXSetTevKColorSel(void);
@@ -435,7 +435,7 @@ lbl_layout_drawPane_00000510:
     li r5, 0x8
     li r6, 0xe
     li r7, 0x0
-    bl fn_806173E0
+    bl GXSetTevColorIn
     b lbl_layout_drawPane_0000054C
 lbl_layout_drawPane_00000534:
     mr r3, r26
@@ -443,7 +443,7 @@ lbl_layout_drawPane_00000534:
     li r5, 0x8
     li r6, 0xe
     li r7, 0xf
-    bl fn_806173E0
+    bl GXSetTevColorIn
 lbl_layout_drawPane_0000054C:
     lwz r4, 0x0(r25)
     mr r3, r26
@@ -772,7 +772,7 @@ lbl_fn_800A9E64_00000A28:
     li r5, 0x8
     li r6, 0xe
     li r7, 0xf
-    bl fn_806173E0
+    bl GXSetTevColorIn
     lwz r5, 0x68(r21)
     li r3, 0x0
     lwz r6, 0x74(r21)
@@ -2056,7 +2056,7 @@ lbl_fn_800AAE2C_00001978:
     li r5, 0xe
     li r6, 0x8
     li r7, 0xf
-    bl fn_806173E0
+    bl GXSetTevColorIn
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -2083,7 +2083,7 @@ lbl_fn_800AAE2C_00001978:
     li r5, 0xe
     li r6, 0x8
     li r7, 0x0
-    bl fn_806173E0
+    bl GXSetTevColorIn
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -2110,7 +2110,7 @@ lbl_fn_800AAE2C_00001978:
     li r5, 0xe
     li r6, 0x8
     li r7, 0x0
-    bl fn_806173E0
+    bl GXSetTevColorIn
     mr r6, r31
     li r3, 0x2
     li r4, 0x0
@@ -2133,7 +2133,7 @@ lbl_fn_800AAE2C_00001978:
     li r5, 0xf
     li r6, 0xf
     li r7, 0x0
-    bl fn_806173E0
+    bl GXSetTevColorIn
     li r3, 0x3
     li r4, 0x0
     li r5, 0x2

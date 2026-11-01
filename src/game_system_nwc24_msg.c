@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void fn_800109E0(void);
 extern void vec3_toEulerAngles(void);
@@ -12,7 +12,7 @@ extern void fn_80011220(void);
 extern void fn_80011410(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void item_useConsumable(void);
 extern void fn_8004D388(void);
 extern void collision_testLineSegment(void);
@@ -450,7 +450,7 @@ lbl_fn_80387910_000004D0:
     bl fn_800F7FF0
 lbl_fn_80387910_000004D8:
     addi r3, r1, 0x110
-    bl fn_8000D3A4
+    bl vec3_mag
     stfs f1, 0x10(r1)
     mr r3, r29
     bl fn_80116BA4
@@ -482,7 +482,7 @@ lbl_fn_80387910_000004D8:
     stfs f0, 0x12c(r1)
     bl vec3_sub
     addi r3, r1, 0xec
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f2, 0x1c8(r1)
     mr r4, r31
     lfs f0, 0x1e4(r1)
@@ -511,7 +511,7 @@ lbl_fn_80387910_000004D8:
     addi r3, r1, 0x98
     addi r4, r1, 0x11c
     addi r5, r1, 0x110
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x128
     addi r4, r1, 0x98
     bl vec3_copy
@@ -607,7 +607,7 @@ lbl_fn_80387910_00000730:
     addi r5, r1, 0x128
     bl vec3_sub
     addi r3, r1, 0x68
-    bl fn_8000D3A4
+    bl vec3_mag
     frsp f2, f1
     lfs f0, lbl_8088593C
     stfs f1, 0x10(r1)

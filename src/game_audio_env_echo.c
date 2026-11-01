@@ -3,12 +3,12 @@
 
 /* External function declarations */
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void fn_8004D388(void);
 extern void collision_testLineSegment(void);
 extern void fn_80051BC4(void);
@@ -39,7 +39,7 @@ extern void fn_801765D8(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80239D58(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void fn_80267B20(void);
 extern void fn_80267B28(void);
 extern void fn_8031A670(void);
@@ -993,7 +993,7 @@ lbl_fn_8031958C_00000BE8:
     addi r3, r1, 0x84
     addi r4, r31, 0x528
     addi r5, r1, 0x78
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x90
     addi r4, r1, 0xe4
     addi r5, r1, 0x84
@@ -1002,7 +1002,7 @@ lbl_fn_8031958C_00000BE8:
     addi r4, r1, 0x90
     bl vec3_copy
     addi r3, r31, 0x155c
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_80884DD0
     addi r3, r31, 0x155c
     fdivs f31, f1, f0
@@ -1017,7 +1017,7 @@ lbl_fn_8031958C_00000BE8:
     addi r3, r1, 0x6c
     addi r4, r31, 0x528
     addi r5, r1, 0x60
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x150
     addi r4, r1, 0x6c
     bl fn_800F80A8
@@ -1077,7 +1077,7 @@ lbl_fn_8031958C_00000D8C:
     addi r3, r1, 0xc0
     addi r4, r1, 0xcc
     addi r5, r1, 0x54
-    bl fn_80013410
+    bl vec3_add
     bl fn_801404F8
     lis r7, 0x8000
     addi r4, r1, 0x180
@@ -1105,7 +1105,7 @@ lbl_fn_8031958C_00000E08:
     addi r3, r1, 0x3c
     addi r4, r31, 0x528
     addi r5, r1, 0x30
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x48
     addi r4, r1, 0xe4
     addi r5, r1, 0x3c
@@ -1114,7 +1114,7 @@ lbl_fn_8031958C_00000E08:
     addi r4, r1, 0x48
     bl vec3_copy
     addi r3, r31, 0x155c
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_80884DD0
     addi r3, r31, 0x155c
     fdivs f31, f1, f0
@@ -1129,7 +1129,7 @@ lbl_fn_8031958C_00000E08:
     addi r3, r1, 0x24
     addi r4, r31, 0x528
     addi r5, r1, 0x18
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x120
     addi r4, r1, 0x24
     bl fn_800F80A8
@@ -1178,7 +1178,7 @@ lbl_fn_8031958C_00000E08:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_8031958C_00000F4C:
     lwz r0, 0x1f4(r1)
     psq_l f31, 0x1e8(r1), 0, 0
@@ -1898,7 +1898,7 @@ lbl_fn_80319C90_000018B0:
     lwz r3, lbl_8087F3C0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     stw r28, 0x8(r1)
     addi r4, r31, 0x15a8
     lfs f1, lbl_80884D78
@@ -1911,7 +1911,7 @@ lbl_fn_80319C90_000018B0:
     li r9, 0x0
     li r10, 0x0
     lwz r3, lbl_8087F3C0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lwz r0, 0x3e4(r1)
     psq_l f31, 0x3d8(r1), 0, 0
     lfd f31, 0x3d0(r1)

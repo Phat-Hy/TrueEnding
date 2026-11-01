@@ -17,7 +17,7 @@ extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_8033E8D4(void);
 extern void PSMTXConcat(void);
@@ -1252,7 +1252,7 @@ lbl_fn_8033C490_00001050:
     lwz r3, lbl_8087F3C0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     mr r3, r31
     bl fn_80144710
     lwz r3, lbl_8087F048

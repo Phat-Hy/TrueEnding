@@ -15,7 +15,7 @@ extern void fn_8021A960(void);
 extern void fn_8021A984(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_80491DF8(void);
 extern void fn_805991E4(void);
@@ -1123,7 +1123,7 @@ lbl_fn_8059CCB0_00000D44:
     stw r0, 0x10(r1)
     li r9, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lwz r3, 0x64c(r28)
     cmpwi r3, 0x0
     beq lbl_fn_8059CCB0_00000ECC
@@ -1210,7 +1210,7 @@ lbl_fn_8059CCB0_00000E88:
     lwz r3, lbl_8087F3C0
     li r10, 0x0
     addi r7, r7, 0x10
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_8059CCB0_00000ECC:
     addi r11, r1, 0x50
     psq_l f31, 0x58(r1), 0, 0

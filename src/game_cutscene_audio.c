@@ -7,11 +7,11 @@ extern void _restgpr_27(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000DCF4(void);
 extern void vec3_sub(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void collision_testLineSegment(void);
@@ -54,10 +54,10 @@ extern void actor_getMovementFlags(void);
 extern void task_findEntryById(void);
 extern void fn_8021A4CC(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237518(void);
+extern void res_MsgHandle_ctor(void);
 extern void res_Resource_destructor(void);
 extern void res_Resource_unload(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -584,7 +584,7 @@ lbl_fn_8032DEA0_0000052C:
     addi r3, r31, 0x17a4
     bl res_MsgHandle_constructor
     addi r3, r31, 0x17b0
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     lwz r0, 0x12a4(r31)
     li r5, 0x1
     lis r30, lbl_80749F88@ha
@@ -758,7 +758,7 @@ asm void fn_8032E2D4(void)
     cmpwi r3, 0x0
     bne lbl_fn_8032E2D4_00000924
     addi r3, r31, 0x17b0
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_8032E2D4_00000924
     li r0, 0x6
@@ -1288,7 +1288,7 @@ lbl_fn_8032E938_00000FC0:
     mr r4, r3
     addi r3, r1, 0x1c
     addi r5, r1, 0x10
-    bl fn_80013410
+    bl vec3_add
     bl fn_8013A194
     bl system_getNextSequenceId
     mr r30, r3
@@ -1760,7 +1760,7 @@ asm void fn_8032F0EC(void)
     addi r5, r31, 0x528
     bl vec3_sub
     addi r3, r1, 0x8
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_80885094
     fcmpo cr0, f1, f0
     bge lbl_fn_8032F0EC_0000170C

@@ -52,10 +52,10 @@ extern void actor_getMovementFlags(void);
 extern void fn_8017A33C(void);
 extern void fn_8017AC3C(void);
 extern void task_findEntryById(void);
-extern void fn_80237518(void);
+extern void res_MsgHandle_ctor(void);
 extern void res_Resource_destructor(void);
 extern void res_Resource_unload(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -1091,7 +1091,7 @@ asm void fn_802F1524(void)
     stw r0, 0x15a0(r30)
     bl res_MsgHandle_constructor
     addi r3, r30, 0x15b8
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r28, r30, 0x15c4
     mr r3, r28
     bl atn_LoadHandle_constructor
@@ -1425,7 +1425,7 @@ lbl_fn_802F1A2C_00001128:
     cmpwi r3, 0x0
     bne lbl_fn_802F1A2C_000018F4
     addi r3, r18, 0x15b8
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_802F1A2C_000018F4
     addi r3, r18, 0x15c4

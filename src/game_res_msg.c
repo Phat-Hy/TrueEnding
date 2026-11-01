@@ -82,11 +82,11 @@ void fn_80236B84(void);
 void fn_80236FFC(void);
 void fn_802371AC(void);
 void fn_802371BC(void);
-void fn_80237518(void);
+void res_MsgHandle_ctor(void);
 void atn_LH_Effect_destructor(void);
 void res_Resource_destructor(void);
 void res_Resource_unload(void);
-void fn_802376D0(void);
+void res_MsgHandle_isLoading(void);
 void fn_8023772C(void);
 void fn_80237784(void);
 void fn_8023779C(void);
@@ -1003,7 +1003,7 @@ lbl_fn_802371BC_00000C94:
     blr
 }
 
-asm void fn_80237518(void)
+asm void res_MsgHandle_ctor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1140,7 +1140,7 @@ lbl_res_Resource_unload_00000E34:
     blr
 }
 
-asm void fn_802376D0(void)
+asm void res_MsgHandle_isLoading(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1151,19 +1151,19 @@ asm void fn_802376D0(void)
     addi r3, r3, 0x4
     bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
-    beq lbl_fn_802376D0_00000E90
+    beq lbl_res_MsgHandle_isLoading_00000E90
     li r3, 0x1
-    b lbl_fn_802376D0_00000EAC
-lbl_fn_802376D0_00000E90:
+    b lbl_res_MsgHandle_isLoading_00000EAC
+lbl_res_MsgHandle_isLoading_00000E90:
     lwz r0, 0x0(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_802376D0_00000EA8
+    bne lbl_res_MsgHandle_isLoading_00000EA8
     addi r3, r31, 0x4
     bl fn_804738C4
     stw r3, 0x0(r31)
-lbl_fn_802376D0_00000EA8:
+lbl_res_MsgHandle_isLoading_00000EA8:
     li r3, 0x0
-lbl_fn_802376D0_00000EAC:
+lbl_res_MsgHandle_isLoading_00000EAC:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

@@ -7,7 +7,7 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_80060D58(void);
 extern void fn_80061AE4(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void fn_800A4450(void);
 extern void msg_getMessageById(void);
 extern void fn_800A55D4(void);
@@ -545,7 +545,7 @@ lbl_fn_801189B4_0000063C:
     lfs f2, lbl_80881748
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x20(r1)
     fmr f31, f1
     srwi. r0, r0, 31
@@ -776,7 +776,7 @@ lbl_fn_801189B4_000008E0:
     li r5, 0x1
     lfs f2, lbl_80881748
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     fcmpo cr0, f30, f1
     ble lbl_fn_801189B4_000009AC
     lfs f0, lbl_80881748

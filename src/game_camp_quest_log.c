@@ -10,7 +10,7 @@ extern void fn_8000D760(void);
 extern void fn_8000E18C(void);
 extern void sys_copyString(void);
 extern void fn_8000ECA8(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void str_initFromCStr(void);
 extern void fn_8004203C(void);
 extern void str_getData(void);
@@ -2544,7 +2544,7 @@ lbl_fn_803C3894_000021F8:
     addi r3, r1, 0x28
     addi r4, r4, 0x4
     addi r5, r19, 0x4
-    bl fn_80013410
+    bl vec3_add
     lfs f1, lbl_80885CCC
     addi r3, r1, 0x34
     addi r4, r1, 0x28
@@ -2715,7 +2715,7 @@ lbl_fn_803C3894_000024D4:
     addi r3, r1, 0x10
     addi r4, r4, 0x4
     addi r5, r19, 0x4
-    bl fn_80013410
+    bl vec3_add
     lfs f1, lbl_80885CCC
     addi r3, r1, 0x1c
     addi r4, r1, 0x10

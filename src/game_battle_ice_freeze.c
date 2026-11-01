@@ -17,7 +17,7 @@ extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void fn_80092F1C(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
@@ -1456,7 +1456,7 @@ asm void fn_8041C718(void)
     stw r31, 0xc(r1)
     mr r31, r3
     addi r3, r3, 0xf4
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_8041C718_0000126C
     li r3, 0x1

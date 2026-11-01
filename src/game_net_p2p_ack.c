@@ -19,7 +19,7 @@ extern void fn_800EF73C(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_8012B028(void);
 extern void fn_80134800(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void fn_801F6C10(void);
 extern void save_computeCrc32(void);
 extern void fn_801F8598(void);
@@ -1001,7 +1001,7 @@ lbl_fn_80511AE0_00000C18:
     mr r3, r29
     addi r4, r28, 0x3c
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     addi r3, r28, 0x42
     bl str_findChar
     lfs f1, lbl_808877D0
@@ -1019,7 +1019,7 @@ lbl_fn_80511AE0_00000C58:
     li r6, 0x0
     stfd f0, 0xe0(r1)
     lwz r5, 0xe4(r1)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r0, 0x94(r1)
     lis r3, lbl_8075B2A8@ha
     lfd f1, lbl_8075B2A8@l(r3)
@@ -1053,7 +1053,7 @@ lbl_fn_80511AE0_00000CE0:
     mr r3, r29
     addi r4, r28, 0x49
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     addi r3, r28, 0x4f
     bl str_findChar
     fmr f1, f30

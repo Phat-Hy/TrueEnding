@@ -8,7 +8,7 @@ extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void fn_80011410(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
@@ -33,7 +33,7 @@ extern void fn_8014052C(void);
 extern void actor_setState(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_80276AE4(void);
 extern void fn_803458DC(void);
@@ -211,7 +211,7 @@ lbl_fn_80348FF4_000000B4:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lfs f1, lbl_80885398
     addi r3, r1, 0x18
     addi r4, r29, 0x3bc
@@ -351,7 +351,7 @@ lbl_fn_80348FF4_00000340:
     addi r3, r1, 0x48
     addi r4, r31, 0x528
     addi r5, r1, 0x28
-    bl fn_80013410
+    bl vec3_add
     addi r3, r31, 0x181c
     bl fn_80349450
     cmpwi r3, 0x0

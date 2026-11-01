@@ -11,7 +11,7 @@ extern void actor_dispatchMessage(void);
 extern void fn_800698DC(void);
 extern void fn_8006AC08(void);
 extern void fn_8006BD78(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_800A4450(void);
@@ -237,7 +237,7 @@ lbl_fn_8046ECDC_000001D0:
     lfs f2, lbl_80886EC0
     li r5, 0x1
     li r6, 0x4
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x8(r1)
     fmr f31, f1
     srwi. r0, r0, 31

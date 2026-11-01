@@ -44,7 +44,7 @@ extern void atn_LH_Texture_update(void);
 extern void str_skipWhitespace(void);
 extern void sound_initGlobalInstances(void);
 extern void res_Resource_destructor(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -52,7 +52,7 @@ extern void res_MsgHandle_update(void);
 extern void fn_80239D58(void);
 extern void fn_8023A02C(void);
 extern void fn_8023A108(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_803EE374(void);
 extern void fn_803FFF40(void);
@@ -2039,7 +2039,7 @@ lbl_fn_80497374_00001864:
 lbl_fn_80497374_00001870:
     lwz r0, 0x64(r30)
     add r3, r0, r27
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_80497374_0000188C
     li r3, 0x0
@@ -2393,7 +2393,7 @@ lbl_fn_80497874_00001CD8:
     fdivs f8, f8, f28
     fmadds f7, f7, f8, f27
     fadds f1, f0, f7
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lwz r0, 0x64(r15)
     add r4, r0, r16
     lwz r0, 0x9c(r4)
@@ -2680,7 +2680,7 @@ lbl_fn_80497874_000020C0:
     fdivs f8, f8, f31
     fmadds f7, f7, f8, f26
     fadds f1, f0, f7
-    bl fn_8023A680
+    bl res_Shader_bindParams
     li r0, 0x0
     stw r0, 0xb8(r17)
     lwz r0, 0x64(r15)

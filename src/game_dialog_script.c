@@ -49,7 +49,7 @@ extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void world_getGlobalFlag(void);
 extern void atn_LoadHandle_getName(void);
 extern void fn_80481654(void);
@@ -1863,7 +1863,7 @@ lbl_dialog_updateScriptState_00001850:
     stw r0, 0x10(r1)
     li r8, 0x0
     li r9, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lwz r0, 0x12a8(r28)
     oris r0, r0, 0x1000
     stw r0, 0x12a8(r28)

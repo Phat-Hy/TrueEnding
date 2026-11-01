@@ -24,7 +24,7 @@ extern void atn_Task_setActive(void);
 extern void str_findChar(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_801F4728(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void thread_findAndNotify(void);
 extern void fn_801FEDBC(void);
@@ -1349,7 +1349,7 @@ asm void fn_804B9014(void)
     mr r5, r4
     addi r4, r18, 0x1c3
     li r6, -0x4
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     mr r3, r16
     mr r4, r19
     li r6, 0x2710
@@ -1364,7 +1364,7 @@ asm void fn_804B9014(void)
     mr r5, r4
     addi r4, r18, 0x1ce
     li r6, -0x4
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     mr r3, r15
     mr r4, r16
     li r6, 0x2710
@@ -1377,7 +1377,7 @@ asm void fn_804B9014(void)
     mr r5, r4
     addi r4, r18, 0x1da
     li r6, -0x4
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r4, 0x254(r17)
     addi r3, r18, 0x1e5
     addi r16, r4, 0x58
@@ -1545,7 +1545,7 @@ lbl_fn_804B9014_000014A8:
     mr r5, r4
     addi r4, r31, 0x1c3
     li r6, -0x4
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     mr r3, r19
     mr r4, r18
     li r6, 0x2710
@@ -1560,7 +1560,7 @@ lbl_fn_804B9014_000014A8:
     mr r5, r4
     addi r4, r31, 0x1ce
     li r6, -0x4
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     mr r3, r15
     mr r4, r16
     li r6, 0x2710
@@ -1573,7 +1573,7 @@ lbl_fn_804B9014_000014A8:
     mr r5, r4
     addi r4, r31, 0x1da
     li r6, -0x4
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r4, 0x258(r23)
     addi r3, r31, 0x1e5
     addi r15, r4, 0x58

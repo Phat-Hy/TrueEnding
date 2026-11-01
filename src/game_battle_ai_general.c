@@ -35,7 +35,7 @@ extern void fn_80088724(void);
 extern void node_createNamedChild(void);
 extern void fn_8008A4E0(void);
 extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
 extern void fn_800902C0(void);
 extern void atn_Model_findBoneIndex(void);
@@ -3544,7 +3544,7 @@ lbl_fn_8043F178_00002EB8:
     cmpwi r3, 0x0
     beq lbl_fn_8043F178_00002EF4
     lwz r3, 0x2a8(r30)
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_8043F178_00002EF4
     li r31, 0x1

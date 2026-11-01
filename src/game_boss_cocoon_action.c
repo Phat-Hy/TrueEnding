@@ -24,13 +24,13 @@ extern void talk_setSpeakerName(void);
 extern void skill_calcTrajectory(void);
 extern void fn_8006AFF8(void);
 extern void fn_8006CA80(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void mem_getAllocSize(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
 extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void fn_8008B978(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
@@ -68,10 +68,10 @@ extern void fn_801CCD00(void);
 extern void fn_8020A780(void);
 extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
-extern void fn_80237518(void);
+extern void res_MsgHandle_ctor(void);
 extern void res_Resource_destructor(void);
 extern void res_Resource_unload(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -898,7 +898,7 @@ lbl_fn_80452B6C_00000A04:
     fmr f1, f30
     lfs f2, lbl_80886B6C
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     fmr f31, f1
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x8
@@ -1084,7 +1084,7 @@ asm void fn_80452F14(void)
     stw r29, 0x1984(r31)
     bl res_MsgHandle_constructor
     addi r3, r31, 0x1994
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r31, 0x19a0
     bl fn_804533D0
     addi r30, r31, 0x19ac
@@ -1605,7 +1605,7 @@ asm void fn_8045374C(void)
     cmpwi r3, 0x0
     bne lbl_fn_8045374C_000018FC
     addi r3, r31, 0x14ec
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     bne lbl_fn_8045374C_000018FC
     addi r3, r31, 0x1928
@@ -1633,7 +1633,7 @@ asm void fn_8045374C(void)
     cmpwi r3, 0x0
     bne lbl_fn_8045374C_000018FC
     addi r3, r31, 0x1994
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_8045374C_000018FC
     addi r3, r31, 0x252c

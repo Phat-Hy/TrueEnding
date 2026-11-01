@@ -9,7 +9,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void mtx_getTranslation(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
@@ -131,7 +131,7 @@ asm void fn_80296B8C(void)
     lfs f0, lbl_80883BE8
     addi r3, r1, 0x14
     stfs f0, 0x18(r1)
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_80883C5C
     fmr f30, f1
     fcmpo cr0, f1, f0

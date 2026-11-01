@@ -37,7 +37,7 @@ extern void fn_80615FF0(void);
 extern void fn_80616250(void);
 extern void GXDrawDone(void);
 extern void fn_80617340(void);
-extern void fn_806173E0(void);
+extern void GXSetTevColorIn(void);
 extern void fn_80617420(void);
 extern void GXSetTevIndirect(void);
 extern void fn_806174C0(void);
@@ -307,7 +307,7 @@ asm void fn_805B4F0C(void)
     li r5, 0x8
     li r6, 0xe
     li r7, 0x2
-    bl fn_806173E0
+    bl GXSetTevColorIn
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -348,7 +348,7 @@ asm void fn_805B4F0C(void)
     li r5, 0x8
     li r6, 0xe
     li r7, 0x0
-    bl fn_806173E0
+    bl GXSetTevColorIn
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -389,7 +389,7 @@ asm void fn_805B4F0C(void)
     li r5, 0x8
     li r6, 0xc
     li r7, 0x0
-    bl fn_806173E0
+    bl GXSetTevColorIn
     li r3, 0x2
     li r4, 0x0
     li r5, 0x0
@@ -424,7 +424,7 @@ asm void fn_805B4F0C(void)
     li r5, 0x0
     li r6, 0xe
     li r7, 0xf
-    bl fn_806173E0
+    bl GXSetTevColorIn
     li r3, 0x3
     li r4, 0x0
     li r5, 0x0

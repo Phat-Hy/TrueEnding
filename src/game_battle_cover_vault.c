@@ -16,7 +16,7 @@ extern void talk_copySpeakerName(void);
 extern void fn_80063D3C(void);
 extern void mem_alloc(void);
 extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void fn_80092F1C(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void fn_80097B34(void);
@@ -37,12 +37,12 @@ extern void fn_8017CB2C(void);
 extern void fn_802180A8(void);
 extern void sound_initGlobalInstances(void);
 extern void res_Resource_unload(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A02C(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_803E598C(void);
 extern void fn_803EC568(void);
@@ -439,7 +439,7 @@ asm void fn_803F87E0(void)
     stw r31, 0xc(r1)
     mr r31, r3
     addi r3, r3, 0xf4
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_803F87E0_000004E8
     li r3, 0x1
@@ -453,7 +453,7 @@ lbl_fn_803F87E0_000004E8:
     b lbl_fn_803F87E0_00000558
 lbl_fn_803F87E0_00000500:
     addi r3, r31, 0x920
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_803F87E0_00000518
     li r3, 0x1
@@ -945,7 +945,7 @@ lbl_fn_803F8E68_00000BA0:
     lwz r3, lbl_8087F3C0
     li r7, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_803F8E68_00000BF4:
     lwz r3, 0x54(r31)
 lbl_fn_803F8E68_00000BF8:
@@ -1149,7 +1149,7 @@ lbl_fn_803F8F30_00000E68:
     stw r0, 0x10(r1)
     li r9, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lwz r3, lbl_8087F8A0
     cmpwi r3, 0x0
     beq lbl_fn_803F8F30_00000EBC

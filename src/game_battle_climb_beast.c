@@ -17,7 +17,7 @@ extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void fn_80013484(void);
 extern void ui_destroyWidget(void);
 extern void fn_8004ECC0(void);
@@ -28,7 +28,7 @@ extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void atn_Matrix_copy_2(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092F1C(void);
@@ -457,7 +457,7 @@ asm void fn_803FA1E4(void)
     mflr r0
     addi r3, r3, 0xf4
     stw r0, 0x14(r1)
-    bl fn_8008B140
+    bl map_processTrigger
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -1082,14 +1082,14 @@ lbl_fn_803FA5C8_00000C08:
     addi r3, r1, 0x6c
     addi r4, r1, 0x60
     addi r5, r1, 0x48
-    bl fn_80013410
+    bl vec3_add
     addi r3, r31, 0x4e4
     addi r4, r1, 0x6c
     bl vec3_copy
     addi r3, r1, 0x3c
     addi r4, r1, 0x194
     addi r5, r1, 0x1b8
-    bl fn_80013410
+    bl vec3_add
     addi r3, r31, 0x6c
     addi r4, r1, 0x3c
     bl vec3_copy

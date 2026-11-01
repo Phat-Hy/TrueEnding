@@ -9,7 +9,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_23(void);
 extern void dtor_80084684(void);
 extern void skill_calcTrajectory(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_800DC3C8(void);
@@ -1141,7 +1141,7 @@ lbl_fn_8054158C_00000E18:
     li r5, 0x1
     lfs f2, lbl_80887CA0
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     fmuls f0, f30, f1
     fmsubs f26, f28, f24, f0
     b lbl_fn_8054158C_00000E68
@@ -1155,7 +1155,7 @@ lbl_fn_8054158C_00000E48:
     li r5, 0x1
     lfs f2, lbl_80887CA0
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     fmsubs f26, f28, f24, f1
 lbl_fn_8054158C_00000E68:
     xoris r0, r31, 0x8000

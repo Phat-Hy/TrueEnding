@@ -30,7 +30,7 @@ extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
 extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void lockon_updateTarget(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void motion_updateFogAdj(void);
@@ -1941,7 +1941,7 @@ lbl_fn_8036354C_000018D4:
     stw r0, 0x3f4(r31)
 lbl_fn_8036354C_000018F4:
     addi r3, r31, 0x4
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     bne lbl_fn_8036354C_0000191C
     mr r3, r31

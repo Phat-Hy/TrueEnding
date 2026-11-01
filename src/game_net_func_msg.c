@@ -22,7 +22,7 @@ extern void fn_8016E4C4(void);
 extern void fn_80176ACC(void);
 extern void save_validateHeader(void);
 extern void fn_801F4AA0(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
@@ -3477,7 +3477,7 @@ lbl_fn_8050158C_00001BC8:
     mr r5, r18
     addi r4, r20, 0x1a
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     li r3, 0x0
     li r4, 0x79
     bl actor_findSpawnTemplate
@@ -3544,7 +3544,7 @@ lbl_fn_8050158C_00001D24:
     addi r4, r20, 0x1a
     neg r5, r18
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     li r3, 0x0
     li r4, 0x72
     bl actor_findSpawnTemplate
@@ -3610,7 +3610,7 @@ lbl_fn_8050158C_00001E2C:
     addi r4, r20, 0x1a
     li r5, 0x0
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     addi r19, r22, 0xa
     addi r3, r20, 0x28
     bl str_findChar
@@ -3673,7 +3673,7 @@ lbl_fn_8050158C_00001F20:
     mr r5, r25
     addi r4, r20, 0x7f
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     li r3, 0x0
     li r4, 0x79
     bl actor_findSpawnTemplate
@@ -3740,7 +3740,7 @@ lbl_fn_8050158C_00002028:
     addi r4, r20, 0x7f
     neg r5, r25
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     li r3, 0x0
     li r4, 0x72
     bl actor_findSpawnTemplate
@@ -3806,7 +3806,7 @@ lbl_fn_8050158C_00002130:
     addi r4, r20, 0x7f
     li r5, 0x0
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     addi r19, r22, 0xa
     addi r3, r20, 0x8d
     bl str_findChar

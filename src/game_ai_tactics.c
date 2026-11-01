@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_sub(void);
 extern void fn_8004D388(void);
@@ -126,7 +126,7 @@ asm void fn_802676BC(void)
     addi r5, r31, 0x528
     bl vec3_sub
     addi r3, r1, 0x14
-    bl fn_8000D3A4
+    bl vec3_mag
     lwz r0, 0x14c0(r31)
     fmr f31, f1
     cmpwi r0, 0x0

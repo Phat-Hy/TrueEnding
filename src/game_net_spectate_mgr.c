@@ -19,7 +19,7 @@ extern void skill_calcTrajectory(void);
 extern void fn_800697D8(void);
 extern void fn_8006A250(void);
 extern void fn_8006A5A8(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void fn_80076FF8(void);
 extern void fn_80079044(void);
 extern void mem_alloc(void);
@@ -462,7 +462,7 @@ lbl_fn_805319C8_000003E8:
     lfs f2, lbl_80887B30
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0xc(r26)
     lfs f20, lbl_80887B30
     cmpwi r0, 0x0

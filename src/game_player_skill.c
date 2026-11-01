@@ -16,7 +16,7 @@ extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_80089AD4(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
@@ -33,7 +33,7 @@ extern void fn_80120E48(void);
 extern void fn_80120F4C(void);
 extern void actor_setState(void);
 extern void fn_80219544(void);
-extern void fn_80237518(void);
+extern void res_MsgHandle_ctor(void);
 extern void res_Resource_destructor(void);
 extern void res_Resource_unload(void);
 extern void res_MsgHandle_destructor(void);
@@ -373,7 +373,7 @@ lbl_fn_8011FA18_000002BC:
     srawi. r0, r0, 31
     beq lbl_fn_8011FA18_000002D4
     addi r3, r30, 0xb0
-    bl fn_8008B140
+    bl map_processTrigger
 lbl_fn_8011FA18_000002D4:
     lwz r0, 0x38(r30)
     rlwinm r0, r0, 0, 29, 29
@@ -591,7 +591,7 @@ lbl_fn_8011FC84_00000528:
     srawi. r0, r0, 31
     beq lbl_fn_8011FC84_00000540
     addi r3, r30, 0xb0
-    bl fn_8008B140
+    bl map_processTrigger
 lbl_fn_8011FC84_00000540:
     lwz r0, 0x38(r30)
     rlwinm r0, r0, 0, 29, 29
@@ -1791,11 +1791,11 @@ asm void fn_80120C30(void)
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80237518@ha
+    lis r4, res_MsgHandle_ctor@ha
     lis r5, res_Resource_destructor@ha
     mr r7, r26
     li r6, 0xc
-    addi r4, r4, fn_80237518@l
+    addi r4, r4, res_MsgHandle_ctor@l
     addi r5, r5, res_Resource_destructor@l
     bl runtime_registerStaticObject
     mr r30, r3

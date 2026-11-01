@@ -30,10 +30,10 @@ extern void fn_80158BB4(void);
 extern void actor_setState(void);
 extern void assert_formatLocation(void);
 extern void task_findEntryById(void);
-extern void fn_80237518(void);
+extern void res_MsgHandle_ctor(void);
 extern void res_Resource_destructor(void);
 extern void res_Resource_unload(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -1371,7 +1371,7 @@ asm void fn_80264DB4(void)
     addi r3, r30, 0x15f4
     bl res_MsgHandle_constructor
     addi r3, r30, 0x1600
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r30, 0x160c
     bl res_MsgHandle_constructor
     addi r3, r30, 0x1618
@@ -1919,7 +1919,7 @@ lbl_fn_802655A8_000018F4:
     cmpwi r3, 0x0
     bne lbl_fn_802655A8_00001AF4
     addi r3, r31, 0x1600
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_802655A8_00001AF4
     addi r3, r31, 0x160c

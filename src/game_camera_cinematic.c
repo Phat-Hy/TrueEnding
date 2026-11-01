@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void vec3_sub(void);
 extern void collision_testLineSegment(void);
 extern void mem_realloc(void);
@@ -1041,7 +1041,7 @@ lbl_fn_802E3B24_00000D30:
     lfs f0, lbl_808846EC
     addi r3, r1, 0x20
     stfs f0, 0x24(r1)
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_80884744
     fcmpo cr0, f1, f0
     bge lbl_fn_802E3B24_00000EC4
@@ -1058,7 +1058,7 @@ lbl_fn_802E3B24_00000D84:
     addi r5, r30, 0x528
     bl vec3_sub
     addi r3, r1, 0x8
-    bl fn_8000D3A4
+    bl vec3_mag
     lwz r0, 0x14c4(r30)
     cmpwi r0, 0xc
     beq lbl_fn_802E3B24_00000DD4
@@ -1121,7 +1121,7 @@ lbl_fn_802E3B24_00000E64:
     lfs f0, lbl_808846EC
     addi r3, r1, 0x14
     stfs f0, 0x18(r1)
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_80884728
     fcmpo cr0, f1, f0
     bge lbl_fn_802E3B24_00000EC4

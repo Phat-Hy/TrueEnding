@@ -24,7 +24,7 @@ extern void fn_80087858(void);
 extern void node_createNamedChild(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B130(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
 extern void atn_Model_findBoneIndex(void);
 extern void lockon_updateTarget(void);
@@ -999,7 +999,7 @@ asm void fn_8049C3C0(void)
     stw r31, 0x2c(r1)
     mr r31, r3
     addi r3, r3, 0x50
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     bne lbl_fn_8049C3C0_00000CBC
     li r0, 0x0
@@ -1597,7 +1597,7 @@ asm void fn_8049CBE0(void)
     stw r30, 0x8(r1)
     mr r30, r3
     addi r3, r3, 0x50
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     bne lbl_fn_8049CBE0_000014C0
     lis r31, lbl_80756E38@ha

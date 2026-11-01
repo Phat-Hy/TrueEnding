@@ -16,7 +16,7 @@ extern void fn_8000D430(void);
 extern void fn_80016888(void);
 extern void fn_80043A24(void);
 extern void collision_testLineSegment(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void fn_8008B978(void);
 extern void fn_800C7F08(void);
 extern void atn_Task_setActive(void);
@@ -427,7 +427,7 @@ lbl_fn_803C01C0_0000041C:
     lwz r0, 0xe0(r31)
     add r3, r0, r29
     lwz r3, 0x4(r3)
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_803C01C0_0000043C
     li r27, 0x0

@@ -30,10 +30,10 @@ extern void boss_updatePhaseState(void);
 extern void fn_8013C504(void);
 extern void fn_801A03E0(void);
 extern void fn_8020A81C(void);
-extern void fn_80237518(void);
+extern void res_MsgHandle_ctor(void);
 extern void res_Resource_destructor(void);
 extern void res_Resource_unload(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -473,7 +473,7 @@ asm void fn_802D7480(void)
     stfs f0, 0x1518(r30)
     stfs f0, 0x151c(r30)
     stfs f0, 0x1520(r30)
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r30, 0x1530
     bl res_MsgHandle_constructor
     addi r3, r30, 0x153c
@@ -1148,7 +1148,7 @@ asm void fn_802D7E80(void)
     cmpwi r3, 0x0
     bne lbl_fn_802D7E80_000014C4
     addi r3, r31, 0x1524
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_802D7E80_000014C4
     addi r3, r31, 0x1530

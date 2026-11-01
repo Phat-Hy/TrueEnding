@@ -12,7 +12,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void fn_8000D3A8(void);
 extern void fn_8000D430(void);
 extern void fn_8000D9E8(void);
@@ -21,7 +21,7 @@ extern void vec3_toEulerAngles(void);
 extern void fn_80011410(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void ui_destroyWidget(void);
 extern void fn_8004CCA0(void);
 extern void collision_testLineSegment(void);
@@ -31,7 +31,7 @@ extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
 extern void fn_80092F1C(void);
 extern void lockon_updateTarget(void);
@@ -852,7 +852,7 @@ asm void fn_804167CC(void)
     mflr r0
     addi r3, r3, 0xf4
     stw r0, 0x14(r1)
-    bl fn_8008B140
+    bl map_processTrigger
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -1841,7 +1841,7 @@ asm void fn_80417530(void)
     stw r28, 0x10(r1)
     mr r28, r3
     addi r3, r3, 0xfc
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_80417530_00001728
     li r29, 0x1
@@ -1850,7 +1850,7 @@ lbl_fn_80417530_00001728:
     li r31, 0x0
 lbl_fn_80417530_00001730:
     mr r3, r30
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_80417530_00001744
     li r29, 0x1
@@ -1986,7 +1986,7 @@ lbl_fn_8041766C_000018C4:
     mr r4, r28
     mr r5, r27
     addi r3, r1, 0xc4
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x1f0
     bl fn_80140500
     bl fn_801404F8
@@ -2350,7 +2350,7 @@ lbl_fn_8041766C_00001D5C:
     lfs f0, lbl_80886498
     addi r3, r1, 0x68
     stfs f0, 0x6c(r1)
-    bl fn_8000D3A4
+    bl vec3_mag
     fdivs f28, f1, f27
     lwz r3, 0xf4(r24)
     lfs f0, 0x84(r1)
@@ -2369,7 +2369,7 @@ lbl_fn_8041766C_00001D5C:
     bl fn_8012A190
     stfs f28, 0x6c(r1)
     addi r3, r1, 0x68
-    bl fn_8000D3A4
+    bl vec3_mag
     fmr f27, f1
     addi r3, r1, 0x68
     bl fn_800F7FF0

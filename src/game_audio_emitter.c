@@ -32,7 +32,7 @@ extern void fn_80151448(void);
 extern void actor_setState(void);
 extern void task_findEntryById(void);
 extern void res_Resource_destructor(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
@@ -301,7 +301,7 @@ lbl_fn_802FD134_0000024C:
     cmpwi r3, 0x0
     bne lbl_fn_802FD134_000002EC
     addi r3, r30, 0x1588
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_802FD134_000002EC
     addi r3, r30, 0x1540

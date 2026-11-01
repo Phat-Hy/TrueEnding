@@ -8,7 +8,7 @@ extern void _restgpr_24(void);
 extern void _savegpr_24(void);
 extern void dtor_80084684(void);
 extern void vec3_set(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void fn_8000DD0C(void);
 extern void vec3_assign(void);
 extern void fn_800109E0(void);
@@ -17,7 +17,7 @@ extern void fn_80011410(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
 extern void fn_800133B0(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void ui_destroyWidget(void);
 extern void collision_testLineSegment(void);
 extern void fn_80057A68(void);
@@ -1106,7 +1106,7 @@ lbl_fn_8019FEC4_00000CEC:
     addi r5, r1, 0xb8
     bl vec3_sub
     addi r3, r1, 0x88
-    bl fn_8000D3A4
+    bl vec3_mag
     fmr f28, f1
     stfs f30, 0x8c(r1)
     addi r3, r1, 0x88
@@ -1217,7 +1217,7 @@ lbl_fn_8019FEC4_00000E78:
     addi r3, r1, 0x58
     addi r4, r1, 0xb8
     addi r5, r1, 0x10
-    bl fn_80013410
+    bl vec3_add
     lwz r3, 0x4(r28)
     bl fn_80198C00
     mr r30, r3

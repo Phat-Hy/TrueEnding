@@ -19,7 +19,7 @@ extern void route_createSegment(void);
 extern void route_createWaypoint(void);
 extern void fn_80088724(void);
 extern void node_createNamedChild(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void fn_80092A4C(void);
 extern void fn_800971D4(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -1009,7 +1009,7 @@ lbl_fn_80402B24_00000D10:
     lwz r0, 0x10c(r29)
     add r3, r0, r31
     addi r3, r3, 0x10
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_80402B24_00000D30
     li r0, 0x1

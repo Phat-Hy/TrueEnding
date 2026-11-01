@@ -93,7 +93,7 @@ extern void strcmp(void);
 extern void wmemcpy(void);
 extern void wmemcmp(void);
 extern void wcslen(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern void runtime_registerStaticObject(void);
 extern void __destroy_arr(void);
 extern char* strcpy(char* dest, const char* src);
@@ -759,7 +759,7 @@ lbl_main_00000808:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_main_00000844
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_main_00000844:
     lwz r4, 0x0(r15)
     addi r3, r15, 0x4

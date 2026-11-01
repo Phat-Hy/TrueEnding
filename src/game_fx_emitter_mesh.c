@@ -23,7 +23,7 @@ extern void fn_80168E60(void);
 extern void actor_setState(void);
 extern void actor_getMovementFlags(void);
 extern void task_findEntryById(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_findResourceSlot(void);
 extern void fn_8028ADF4(void);
 extern void fn_8028B47C(void);
@@ -121,11 +121,11 @@ asm void fn_80288DD8(void)
     li r31, 0x0
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_80288DD8_00000038
     addi r3, r30, 0xc
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_80288DD8_0000003C
 lbl_fn_80288DD8_00000038:

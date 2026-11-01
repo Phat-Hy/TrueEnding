@@ -30,7 +30,7 @@ extern void fn_80108150(void);
 extern void fn_8010D808(void);
 extern void fn_8010ED4C(void);
 extern void fn_8010EE38(void);
-extern void fn_80237518(void);
+extern void res_MsgHandle_ctor(void);
 extern void res_Resource_destructor(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_unload(void);
@@ -242,10 +242,10 @@ lbl_fn_800F1430_000001B4:
     addi r3, r3, 0x63e4
     bl res_MsgHandle_constructor
     addis r3, r31, 0x3
-    lis r27, fn_80237518@ha
+    lis r27, res_MsgHandle_ctor@ha
     lis r30, res_Resource_destructor@ha
     li r6, 0xc
-    addi r4, r27, fn_80237518@l
+    addi r4, r27, res_MsgHandle_ctor@l
     li r7, 0x15
     addi r5, r30, res_Resource_destructor@l
     addi r3, r3, 0x63f0
@@ -263,21 +263,21 @@ lbl_fn_800F1430_000001B4:
     addi r3, r3, 0x64f8
     bl __construct_new_array
     addis r3, r31, 0x3
-    addi r4, r27, fn_80237518@l
+    addi r4, r27, res_MsgHandle_ctor@l
     addi r5, r30, res_Resource_destructor@l
     li r6, 0xc
     li r7, 0x5
     addi r3, r3, 0x651c
     bl __construct_new_array
     addis r3, r31, 0x3
-    addi r4, r27, fn_80237518@l
+    addi r4, r27, res_MsgHandle_ctor@l
     addi r5, r30, res_Resource_destructor@l
     li r6, 0xc
     li r7, 0x5
     addi r3, r3, 0x6558
     bl __construct_new_array
     addis r3, r31, 0x3
-    addi r4, r27, fn_80237518@l
+    addi r4, r27, res_MsgHandle_ctor@l
     addi r5, r30, res_Resource_destructor@l
     li r6, 0xc
     li r7, 0x3
@@ -388,21 +388,21 @@ lbl_fn_800F1430_00000448:
     addis r26, r31, 0x4
     subi r26, r26, 0x7688
     mr r3, r26
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r26, 0xc
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addis r26, r31, 0x4
     subi r26, r26, 0x7670
     mr r3, r26
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r26, 0xc
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addis r26, r31, 0x4
     subi r26, r26, 0x7658
     mr r3, r26
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r26, 0xc
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addis r3, r31, 0x4
     li r0, 0x1
     stw r0, -0x7640(r3)
@@ -410,7 +410,7 @@ lbl_fn_800F1430_00000448:
     bl atn_LH_Texture_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x760c
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addis r3, r31, 0x4
     li r28, 0x0
     lwz r0, -0x7524(r3)

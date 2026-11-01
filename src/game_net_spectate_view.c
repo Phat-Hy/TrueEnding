@@ -18,7 +18,7 @@ extern void talk_setSpeakerName(void);
 extern void fn_8006144C(void);
 extern void skill_calculateDamage(void);
 extern void skill_calcTrajectory(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void fn_8006F2F0(void);
 extern void mem_free(void);
 extern void mem_getAllocSize(void);
@@ -346,7 +346,7 @@ lbl_spectateView_update_00000394:
     mr r4, r29
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r3, lbl_8087EEE0
     lis r28, lbl_8075D550@ha
     lfs f6, lbl_80887BB4
@@ -399,7 +399,7 @@ lbl_spectateView_update_0000046C:
     addi r4, r1, 0xd8
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r5, lbl_8087EEE0
     addi r0, r28, 0x1
     xoris r3, r0, 0x8000

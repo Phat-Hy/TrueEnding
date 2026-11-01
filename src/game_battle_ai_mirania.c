@@ -20,12 +20,12 @@ extern void fn_800CB688(void);
 extern void str_skipWhitespace(void);
 extern void sound_initGlobalInstances(void);
 extern void res_Resource_unload(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
 extern void fn_80239D58(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_8032B314(void);
 extern void fn_8032B6F8(void);
@@ -545,7 +545,7 @@ asm void fn_80438E6C(void)
     cmpwi r3, 0x0
     bne lbl_fn_80438E6C_00000690
     addi r3, r30, 0xf18
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_80438E6C_00000698
 lbl_fn_80438E6C_00000690:
@@ -1835,7 +1835,7 @@ lbl_fn_8043A08C_000018D4:
     li r9, 0x0
     lwz r3, lbl_8087F3C0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     b lbl_fn_8043A08C_00001D00
 lbl_fn_8043A08C_00001948:
     lwz r0, 0x184(r4)

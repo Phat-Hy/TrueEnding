@@ -22,7 +22,7 @@ extern void mem_getAllocSize(void);
 extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
 extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
 extern void fn_800902C0(void);
 extern void fn_80092A4C(void);
@@ -939,7 +939,7 @@ lbl_fn_8049A7D8_00000B7C:
     srawi. r0, r0, 31
     beq lbl_fn_8049A7D8_00000BC4
     lwz r3, 0x324(r31)
-    bl fn_8008B140
+    bl map_processTrigger
     lwz r0, 0x340(r31)
     cntlzw r3, r3
     srwi r3, r3, 5
@@ -981,7 +981,7 @@ lbl_fn_8049A7D8_00000C08:
     li r29, 0x0
     beq lbl_fn_8049A7D8_00000C38
     addi r3, r31, 0x110
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     bne lbl_fn_8049A7D8_00000C38
     li r29, 0x1

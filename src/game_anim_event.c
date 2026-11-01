@@ -33,7 +33,7 @@ extern void fn_801765D8(void);
 extern void fn_80176ACC(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_8027819C(void);
 extern void fn_80278634(void);
@@ -1407,7 +1407,7 @@ lbl_fn_80275228_00001284:
     li r9, 0x0
     li r10, 0x0
     lwz r3, lbl_8087F3C0
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_80275228_000012E0:
     lwz r0, 0x18e8(r22)
     cmplw r24, r0

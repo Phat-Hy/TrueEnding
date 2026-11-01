@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_19(void);
 extern void _savegpr_19(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_sub(void);
 extern void collision_testLineSegment(void);
@@ -939,7 +939,7 @@ asm void fn_8027F504(void)
     addi r5, r31, 0x528
     bl vec3_sub
     addi r3, r1, 0x8
-    bl fn_8000D3A4
+    bl vec3_mag
     lwz r0, 0x14e4(r31)
     cmpwi r0, 0x0
     beq lbl_fn_8027F504_00000C7C

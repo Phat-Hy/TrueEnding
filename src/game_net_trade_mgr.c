@@ -9,7 +9,7 @@ extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void vec3_set(void);
 extern void vec3_assign(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void fn_8004B290(void);
 extern void fn_8004B338(void);
 extern void fn_8006A250(void);
@@ -475,14 +475,14 @@ lbl_fn_8052A8F0_000004C4:
     addi r3, r1, 0x14
     addi r4, r29, 0x11fc
     addi r5, r1, 0x2c
-    bl fn_80013410
+    bl vec3_add
     addi r3, r29, 0x6c
     addi r4, r1, 0x14
     bl fn_80114AA0
     addi r3, r1, 0x8
     addi r4, r29, 0x1208
     addi r5, r1, 0x2c
-    bl fn_80013410
+    bl vec3_add
     addi r3, r29, 0x6c
     addi r4, r1, 0x8
     bl fn_80112960

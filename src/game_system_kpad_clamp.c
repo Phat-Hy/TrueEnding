@@ -13,7 +13,7 @@ extern void vec3_assign(void);
 extern void fn_800109E0(void);
 extern void fn_80011410(void);
 extern void fn_800133B0(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void fn_80043D58(void);
 extern void collision_testLineSegment(void);
 extern void fn_80057A64(void);
@@ -600,7 +600,7 @@ lbl_fn_803729B4_00000564:
     addi r3, r1, 0x50
     addi r4, r1, 0x68
     addi r5, r1, 0x20
-    bl fn_80013410
+    bl vec3_add
     bl fn_801404F8
     addi r5, r1, 0x68
     addi r6, r1, 0x50
@@ -816,7 +816,7 @@ lbl_fn_803729B4_000008B8:
     addi r3, r1, 0x2c
     addi r4, r1, 0x80
     addi r5, r1, 0x14
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x150
     addi r4, r1, 0x2c
     bl fn_800F80A8

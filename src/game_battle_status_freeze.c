@@ -23,7 +23,7 @@ extern void route_createWaypoint(void);
 extern void fn_80088724(void);
 extern void node_createNamedChild(void);
 extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
 extern void fn_80092A4C(void);
 extern void fn_80094F98(void);
@@ -1186,7 +1186,7 @@ lbl_fn_8042813C_00000E68:
     lwz r0, 0x5f8(r31)
     add r3, r0, r30
     addi r3, r3, 0x54
-    bl fn_8008B140
+    bl map_processTrigger
     neg r0, r3
     or r0, r0, r3
     srwi. r0, r0, 31

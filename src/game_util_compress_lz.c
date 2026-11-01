@@ -10,7 +10,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void str_assignBuffer(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -24,7 +24,7 @@ extern void fn_801170C8(void);
 extern void actor_spawnActorWithId(void);
 extern void save_validateHeader(void);
 extern void fn_801F48C8(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801F64D0(void);
 extern void save_computeCrc32(void);
@@ -712,7 +712,7 @@ asm void fn_80589DE4(void)
     lwz r5, lbl_8087F4F0
     lwz r3, 0x5b6c(r8)
     lwz r5, 0x6000(r5)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r3, 0x4(r30)
     bl event_findEntryById
     lwz r0, 0xc(r30)
@@ -761,7 +761,7 @@ lbl_fn_80589DE4_000008E4:
     lwz r3, 0x5b6c(r4)
     addi r4, r28, 0x121
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
 lbl_fn_80589DE4_00000944:
     addis r3, r29, 0x2
     lis r4, lbl_80761AB0@ha
@@ -788,7 +788,7 @@ lbl_fn_80589DE4_00000994:
     lfs f2, lbl_80888134
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x14(r1)
     fmr f31, f1
     srwi. r0, r0, 31
@@ -834,7 +834,7 @@ lbl_fn_80589DE4_00000A40:
     lfs f2, lbl_80888134
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x8(r1)
     fmr f31, f1
     srwi. r0, r0, 31
@@ -1045,7 +1045,7 @@ lbl_fn_8058A0F4_00000D44:
     lfs f2, lbl_80888134
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x10(r1)
     fmr f31, f1
     srwi. r0, r0, 31

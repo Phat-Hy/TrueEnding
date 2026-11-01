@@ -17,7 +17,7 @@ extern void talk_copySpeakerName(void);
 extern void fn_80069758(void);
 extern void fn_800697D8(void);
 extern void mem_alloc(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void fn_800971D4(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -363,7 +363,7 @@ lbl_fn_80431458_00000328:
 lbl_fn_80431458_00000338:
     lwz r3, 0x288(r22)
     addi r3, r3, 0xb0
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_80431458_00000354
     li r21, 0x0

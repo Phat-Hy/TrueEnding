@@ -15,7 +15,7 @@ extern void dtor_80084684(void);
 extern void mtx_getTranslation(void);
 extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void fn_8000D430(void);
 extern void fn_8000DD0C(void);
 extern void mem_free(void);
@@ -124,7 +124,7 @@ void vec3_sub(void);
 void fn_8001336C(void);
 void fn_800133B0(void);
 void fn_80013404(void);
-void fn_80013410(void);
+void vec3_add(void);
 void fn_80013444(void);
 void fn_80013484(void);
 void fn_800134B8(void);
@@ -3488,7 +3488,7 @@ lbl_fn_80012D34_00002C80:
     addi r5, r1, 0xc8
     bl vec3_sub
     addi r3, r1, 0x170
-    bl fn_8000D3A4
+    bl vec3_mag
     fmr f3, f1
     lfs f1, lbl_80880668
     addi r3, r1, 0x164
@@ -3599,7 +3599,7 @@ lbl_fn_80012D34_00002E44:
     addi r3, r1, 0x8c
     addi r4, r1, 0x80
     addi r5, r1, 0x164
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x17c
     addi r4, r1, 0x8c
     bl vec3_copy
@@ -3626,7 +3626,7 @@ lbl_fn_80012D34_00002E84:
     addi r3, r1, 0x74
     addi r4, r1, 0x140
     addi r5, r1, 0x134
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x17c
     addi r4, r1, 0x74
     bl vec3_copy
@@ -3723,7 +3723,7 @@ lbl_fn_80012D34_00003000:
     addi r3, r1, 0x38
     addi r4, r1, 0x2c
     addi r5, r1, 0x128
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x44
     addi r4, r1, 0x38
     addi r5, r1, 0xf8
@@ -3768,7 +3768,7 @@ lbl_fn_80012D34_000030D0:
     mr r4, r28
     mr r5, r30
     addi r3, r1, 0x14
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0xe0
     addi r4, r1, 0x14
     bl vec3_copy
@@ -3800,7 +3800,7 @@ lbl_fn_80012D34_00003120:
     addi r3, r1, 0x8
     addi r4, r1, 0xec
     addi r5, r1, 0xd4
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0xe0
     addi r4, r1, 0x8
     bl vec3_copy
@@ -3912,7 +3912,7 @@ asm void fn_80013404(void)
     blr
 }
 
-asm void fn_80013410(void)
+asm void vec3_add(void)
 {
     nofralloc
     lfs f1, 0x8(r4)

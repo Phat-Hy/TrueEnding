@@ -13,7 +13,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8006A250(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -38,7 +38,7 @@ extern void fn_8012AFE8(void);
 extern void fn_801346C8(void);
 extern void fn_801D082C(void);
 extern void save_validateHeader(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
@@ -1793,7 +1793,7 @@ lbl_fn_80529528_000015A8:
     addi r4, r27, 0xc9
     li r6, 0x0
     lwz r5, 0x6000(r5)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
 lbl_fn_80529528_00001664:
     lwz r3, lbl_8087F430
     bl fn_803754F0
@@ -2596,7 +2596,7 @@ lbl_fn_80529C74_000021B8:
     lfs f2, lbl_80887A8C
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x3c(r1)
     fmr f31, f1
     srwi. r0, r0, 31

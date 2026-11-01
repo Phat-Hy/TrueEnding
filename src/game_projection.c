@@ -11,7 +11,7 @@ extern void fn_80062C8C(void);
 extern void fn_80063484(void);
 extern void fn_80063764(void);
 extern void fn_80063D3C(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void fn_8006F2F0(void);
 extern void fn_8008CD60(void);
 extern void motion_updateFogAdj(void);
@@ -630,7 +630,7 @@ lbl_fn_800F5314_00000798:
     li r5, 0x1
     lfs f2, lbl_80881478
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f6, lbl_80881478
     addi r4, r1, 0x478
     lfs f4, lbl_808814FC

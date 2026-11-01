@@ -21,7 +21,7 @@ extern void fn_801905DC(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern void __ptmf_scall(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -1628,7 +1628,7 @@ lbl_fn_8019D42C_00001548:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8019D42C_00001590
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8019D42C_00001590:
     lwz r4, 0x0(r31)
     addi r3, r31, 0x4
@@ -1690,7 +1690,7 @@ lbl_fn_8019D42C_00001634:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8019D42C_0000167C
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8019D42C_0000167C:
     lwz r4, 0x14(r31)
     addi r3, r31, 0x18

@@ -17,15 +17,15 @@ extern void fn_801598B4(void);
 extern void fn_80159E9C(void);
 extern void fn_8015A184(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237518(void);
+extern void res_MsgHandle_ctor(void);
 extern void res_Resource_destructor(void);
 extern void res_Resource_unload(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void fn_80239D58(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A098(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void fn_80360780(void);
 extern void fn_804AABA8(void);
 extern void fn_804AAD54(void);
@@ -322,12 +322,12 @@ asm void fn_80182418(void)
     lfs f0, lbl_80881C48
     lis r3, lbl_8077CC10@ha
     li r29, 0x0
-    lis r30, fn_80237518@ha
+    lis r30, res_MsgHandle_ctor@ha
     addi r3, r3, lbl_8077CC10@l
     lis r31, res_Resource_destructor@ha
     stw r3, 0x0(r28)
     addi r3, r28, 0xfc
-    addi r4, r30, fn_80237518@l
+    addi r4, r30, res_MsgHandle_ctor@l
     addi r5, r31, res_Resource_destructor@l
     stw r29, 0x48(r28)
     li r6, 0xc
@@ -345,13 +345,13 @@ asm void fn_80182418(void)
     stw r29, 0xf8(r28)
     bl __construct_new_array
     addi r3, r28, 0x114
-    addi r4, r30, fn_80237518@l
+    addi r4, r30, res_MsgHandle_ctor@l
     addi r5, r31, res_Resource_destructor@l
     li r6, 0xc
     li r7, 0x2
     bl __construct_new_array
     addi r3, r28, 0x12c
-    addi r4, r30, fn_80237518@l
+    addi r4, r30, res_MsgHandle_ctor@l
     addi r5, r31, res_Resource_destructor@l
     li r6, 0xc
     li r7, 0x2
@@ -688,27 +688,27 @@ asm void fn_80182918(void)
     stw r30, 0x8(r1)
     mr r30, r3
     addi r3, r3, 0xfc
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_80182918_00000864
     addi r3, r30, 0x114
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_80182918_00000864
     addi r3, r30, 0x108
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_80182918_00000864
     addi r3, r30, 0x120
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_80182918_00000864
     addi r3, r30, 0x12c
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_80182918_00000864
     addi r3, r30, 0x138
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_80182918_00000864
     li r31, 0x1
@@ -1425,7 +1425,7 @@ lbl_fn_801829B4_00001288:
     mulli r0, r0, 0xc
     add r4, r31, r0
     addi r4, r4, 0x12c
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lfs f0, lbl_80881C48
     stfs f0, 0x1b4(r31)
     b lbl_fn_801829B4_000013FC
@@ -1459,7 +1459,7 @@ lbl_fn_801829B4_000012EC:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_801829B4_00001364:
     li r0, 0x0
     stw r0, 0x8(r1)
@@ -1479,7 +1479,7 @@ lbl_fn_801829B4_00001364:
     mulli r0, r0, 0xc
     add r4, r31, r0
     addi r4, r4, 0x114
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lfs f0, lbl_80881C4C
     stfs f0, 0x1b4(r31)
     b lbl_fn_801829B4_000013FC

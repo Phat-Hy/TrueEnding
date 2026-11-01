@@ -21,7 +21,7 @@ extern void fn_80616250(void);
 extern void fn_806165B0(void);
 extern void fn_80617200(void);
 extern void fn_80617220(void);
-extern void fn_806173E0(void);
+extern void GXSetTevColorIn(void);
 extern void fn_80617420(void);
 extern void GXSetTevIndirect(void);
 extern void fn_806174C0(void);
@@ -933,7 +933,7 @@ lbl_fn_805D9830_00000A00:
     li r5, 0x4
     li r6, 0x8
     li r7, 0xf
-    bl fn_806173E0
+    bl GXSetTevColorIn
     li r3, 0x0
     li r4, 0x1
     li r5, 0x2
@@ -964,7 +964,7 @@ lbl_fn_805D9830_00000A00:
     li r5, 0x0
     li r6, 0xa
     li r7, 0xf
-    bl fn_806173E0
+    bl GXSetTevColorIn
     li r3, 0x1
     li r4, 0x7
     li r5, 0x0

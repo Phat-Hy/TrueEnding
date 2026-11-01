@@ -17,7 +17,7 @@ extern void str_getData(void);
 extern void fn_80044BD4(void);
 extern void fn_80044C30(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void fn_80097510(void);
 extern void fn_80097A20(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -1630,7 +1630,7 @@ asm void fn_800EBE84(void)
     cmpwi r0, 0x2
     bne lbl_fn_800EBE84_00001530
     addi r3, r3, 0xb0
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_800EBE84_000014E8
     li r3, 0x1

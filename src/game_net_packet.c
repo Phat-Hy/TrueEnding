@@ -20,7 +20,7 @@ extern void fn_801D4E74(void);
 extern void fn_801DCE88(void);
 extern void fn_801F48C8(void);
 extern void fn_801F4AA0(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801F7590(void);
 extern void save_findEntryByName(void);
@@ -1686,7 +1686,7 @@ lbl_fn_801E75F8_000016D4:
     mr r3, r29
     addi r4, r1, 0x128
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     mr r3, r19
     bl fn_80117200
     mr r5, r3

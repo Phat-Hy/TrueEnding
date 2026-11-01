@@ -34,10 +34,10 @@ extern void fn_800E1D5C(void);
 extern void fn_800E2778(void);
 extern void save_validateHeader(void);
 extern void task_findEntryById(void);
-extern void fn_80237518(void);
+extern void res_MsgHandle_ctor(void);
 extern void res_Resource_destructor(void);
 extern void res_Resource_unload(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void fn_80237784(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -54,7 +54,7 @@ extern void fn_8068BC30(void);
 extern void fn_8068BD60(void);
 extern void fn_8068C240(void);
 extern void fn_806920C0(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern void runtime_registerStaticObject(void);
 extern void __destroy_arr(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -283,7 +283,7 @@ asm void fn_80242A8C(void)
     lwz r3, 0x1c(r1)
     cmpwi r3, 0x0
     beq lbl_fn_80242A8C_00000224
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_80242A8C_00000224:
     li r3, 0x1
     b lbl_fn_80242A8C_00000708
@@ -640,7 +640,7 @@ lbl_fn_80242A8C_000006EC:
     lwz r3, 0x1c(r1)
     cmpwi r3, 0x0
     beq lbl_fn_80242A8C_00000704
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_80242A8C_00000704:
     mr r3, r14
 lbl_fn_80242A8C_00000708:
@@ -680,7 +680,7 @@ asm void fn_80242FF4(void)
     lwz r3, 0x1c(r1)
     cmpwi r3, 0x0
     beq lbl_fn_80242FF4_00000788
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_80242FF4_00000788:
     li r3, 0x1
     b lbl_fn_80242FF4_00000C28
@@ -1020,7 +1020,7 @@ lbl_fn_80242FF4_00000C0C:
     lwz r3, 0x1c(r1)
     cmpwi r3, 0x0
     beq lbl_fn_80242FF4_00000C24
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_80242FF4_00000C24:
     mr r3, r18
 lbl_fn_80242FF4_00000C28:
@@ -1325,7 +1325,7 @@ lbl_fn_80243814_00000F88:
     lwz r0, 0x4(r29)
     add r3, r0, r31
     addi r3, r3, 0x48
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_80243814_00000FA8
     li r3, 0x1
@@ -1930,7 +1930,7 @@ asm void fn_8024405C(void)
     stw r5, 0x40(r3)
     stw r0, 0x44(r3)
     addi r3, r3, 0x48
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)

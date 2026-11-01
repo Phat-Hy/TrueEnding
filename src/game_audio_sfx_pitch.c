@@ -6,7 +6,7 @@ extern void dtor_80084684(void);
 extern void mtx_getTranslation(void);
 extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
@@ -70,10 +70,10 @@ extern void fn_8016F530(void);
 extern void fn_8016F5EC(void);
 extern void fn_80204E04(void);
 extern void task_findEntryById(void);
-extern void fn_80237518(void);
+extern void res_MsgHandle_ctor(void);
 extern void res_Resource_destructor(void);
 extern void res_Resource_unload(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -185,7 +185,7 @@ asm void fn_80313544(void)
     stw r4, 0x0(r31)
     bl res_MsgHandle_constructor
     addi r3, r31, 0x1570
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r31, 0x157c
     bl res_MsgHandle_constructor
     li r30, 0x0
@@ -475,7 +475,7 @@ lbl_fn_8031393C_00000460:
     cmpwi r3, 0x0
     bne lbl_fn_8031393C_00000490
     addi r3, r30, 0x1570
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_8031393C_00000490
     addi r3, r30, 0x157c
@@ -1807,7 +1807,7 @@ asm void fn_80314BD8(void)
     addi r3, r1, 0x194
     bl vec3_assign
     addi r3, r1, 0x194
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_80884D18
     fmr f30, f1
     fcmpo cr0, f1, f0
@@ -1840,7 +1840,7 @@ lbl_fn_80314BD8_00001778:
     addi r5, r30, 0x528
     bl vec3_sub
     addi r3, r1, 0x188
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_80884D18
     fmr f30, f1
     fcmpo cr0, f1, f0
@@ -1906,7 +1906,7 @@ lbl_fn_80314BD8_00001878:
     addi r5, r30, 0x528
     bl vec3_sub
     addi r3, r1, 0x170
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_80884CF0
     fmr f30, f1
     fcmpo cr0, f1, f0
@@ -2341,7 +2341,7 @@ lbl_fn_80314BD8_00001ED0:
     addi r3, r1, 0x128
     bl vec3_assign
     addi r3, r1, 0x128
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_80884D18
     fmr f30, f1
     fcmpo cr0, f1, f0

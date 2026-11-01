@@ -6,7 +6,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
@@ -1994,7 +1994,7 @@ lbl_fn_80567600_00001944:
     addi r3, r1, 0x24
     bl vec3_assign
     addi r3, r1, 0x24
-    bl fn_8000D3A4
+    bl vec3_mag
     frsp f2, f1
     lfs f0, lbl_80887F98
     stfs f1, 0x8(r1)

@@ -82,7 +82,7 @@ extern void fn_806095E0(void);
 extern void fn_80624AB0(void);
 extern void printf(void);
 extern void abort(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern void runtime_registerStaticObject(void);
 extern void fn_80703F90(void);
 extern void fn_80704780(void);
@@ -350,7 +350,7 @@ lbl_sound_updateActiveTasks_00000100:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_sound_updateActiveTasks_0000013C
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_sound_updateActiveTasks_0000013C:
     lwz r4, 0x0(r26)
     addi r3, r26, 0x4

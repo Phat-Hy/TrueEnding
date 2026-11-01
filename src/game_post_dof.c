@@ -32,15 +32,15 @@ extern void fn_801765D8(void);
 extern void fn_8020A81C(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237518(void);
+extern void res_MsgHandle_ctor(void);
 extern void res_Resource_unload(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_802C1FEC(void);
 extern void fn_802C2BCC(void);
@@ -1017,7 +1017,7 @@ asm void fn_802C0C38(void)
     stw r30, 0x14d4(r28)
     stw r30, 0x14d8(r28)
     stw r30, 0x1524(r28)
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r28, 0x1578
     bl res_MsgHandle_constructor
     addi r31, r28, 0x1600
@@ -1051,7 +1051,7 @@ asm void fn_802C0C38(void)
     addi r3, r28, 0x16b0
     bl res_MsgHandle_constructor
     addi r3, r28, 0x16f4
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     lwz r8, 0x12a4(r28)
     lis r31, lbl_80746C90@ha
     lwz r0, 0x958(r28)
@@ -1202,7 +1202,7 @@ asm void fn_802C0F28(void)
     cmpwi r3, 0x0
     bne lbl_fn_802C0F28_00001194
     addi r3, r31, 0x156c
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_802C0F28_00001194
     addi r3, r31, 0x1578
@@ -1218,7 +1218,7 @@ asm void fn_802C0F28(void)
     cmpwi r3, 0x0
     bne lbl_fn_802C0F28_00001194
     addi r3, r31, 0x16f4
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_802C0F28_00001194
     lwz r0, 0x170c(r31)
@@ -1884,7 +1884,7 @@ lbl_fn_802C1208_000017FC:
     stw r0, 0x10(r1)
     li r9, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     b lbl_fn_802C1208_00001C98
     mr r3, r30
     bl fn_802C4480

@@ -20,7 +20,7 @@ extern void PSMTXRotRad(void);
 extern void C_MTXLookAt(void);
 extern void PSMTXMultVec(void);
 extern void wcslen(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern void vec3_isNonZero(void);
 extern void fn_80709AD0(void);
 extern void fn_8070AD40(void);
@@ -194,7 +194,7 @@ lbl_fn_800C6CD4_000000F8:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_800C6CD4_00000134
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_800C6CD4_00000134:
     lwz r3, 0x24a0(r22)
     mr r4, r24
@@ -907,7 +907,7 @@ lbl_fn_800C7568_00000A00:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_800C7568_00000A48
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_800C7568_00000A48:
     mulli r6, r28, 0x380
     lwz r3, 0x2428(r26)
@@ -1224,7 +1224,7 @@ lbl_fn_800C7A30_00000E18:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_800C7A30_00000E60
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_800C7A30_00000E60:
     lwz r3, 0x0(r25)
     mr r4, r26
@@ -1313,7 +1313,7 @@ lbl_fn_800C7B78_00000F54:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_800C7B78_00000F9C
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_800C7B78_00000F9C:
     lwz r3, 0x0(r29)
     mr r4, r30
@@ -1397,7 +1397,7 @@ lbl_fn_800C7CA8_0000107C:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_800C7CA8_000010C4
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_800C7CA8_000010C4:
     lwz r4, 0x0(r30)
     addi r3, r30, 0x4

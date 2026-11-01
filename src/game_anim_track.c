@@ -31,9 +31,9 @@ extern void dialog_updateScriptState(void);
 extern void fn_80151448(void);
 extern void fn_8015C6A0(void);
 extern void actor_setState(void);
-extern void fn_80237518(void);
+extern void res_MsgHandle_ctor(void);
 extern void res_Resource_destructor(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
@@ -119,13 +119,13 @@ asm void fn_80272C6C(void)
     addi r3, r3, 0x8c
     bl res_MsgHandle_constructor
     addi r3, r31, 0x98
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r31, 0xa4
     bl res_MsgHandle_constructor
     addi r3, r31, 0xb0
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r31, 0xbc
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r31, 0xc8
     bl res_MsgHandle_constructor
     addi r3, r31, 0xd4
@@ -374,7 +374,7 @@ lbl_fn_80272FB8_000003A4:
     cmpwi r3, 0x0
     bne lbl_fn_80272FB8_00000424
     mr r3, r17
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_80272FB8_00000424
     mr r3, r18
@@ -382,11 +382,11 @@ lbl_fn_80272FB8_000003A4:
     cmpwi r3, 0x0
     bne lbl_fn_80272FB8_00000424
     mr r3, r19
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_80272FB8_00000424
     mr r3, r20
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_80272FB8_00000424
     mr r3, r21

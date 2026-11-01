@@ -16,7 +16,7 @@ extern void Arms_destructor(void);
 extern void Arms_execute(void);
 extern void fn_8005DFC8(void);
 extern void skill_calcTrajectory(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void dungeon_initGlobalContext(void);
 extern void mem_alloc(void);
 extern void fn_80084F84(void);
@@ -455,7 +455,7 @@ lbl_arms_calcWeaponHitbox_000003FC:
     lfs f2, lbl_808882B4
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     stw r31, 0x1c(r1)
     fsubs f2, f25, f1
     fmuls f1, f30, f31

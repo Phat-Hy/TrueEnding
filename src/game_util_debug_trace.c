@@ -49,7 +49,7 @@ extern void fn_8059D3B4(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSVECSquareMag(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern void vec3_isNonZero(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -1086,7 +1086,7 @@ lbl_fn_805991E4_00000DC8:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_805991E4_00000E10
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_805991E4_00000E10:
     lwz r5, 0x68(r31)
     mr r4, r31

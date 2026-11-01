@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void vec3_copy(void);
 extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -39,7 +39,7 @@ extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80239D58(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_802657FC(void);
 extern void fn_8026607C(void);
@@ -1137,7 +1137,7 @@ asm void fn_8031D350(void)
     addi r3, r1, 0x68
     addi r4, r31, 0x528
     addi r5, r1, 0x2c
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x80
     bl fn_80140500
     bl fn_801404F8
@@ -1915,7 +1915,7 @@ lbl_fn_8031D6DC_00001A3C:
     lwz r3, lbl_8087F3C0
     li r10, 0x0
     lwz r4, 0x8(r28)
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_8031D6DC_00001A94:
     lwz r3, 0x2c(r28)
     lis r4, lbl_8074973C@ha

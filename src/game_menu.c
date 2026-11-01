@@ -27,7 +27,7 @@ extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void skill_calcTrajectory(void);
 extern void fn_8006B2D8(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void fn_80070A70(void);
 extern void fn_80070C98(void);
 extern void mem_alloc(void);
@@ -37,7 +37,7 @@ extern void mem_getAllocSize(void);
 extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
 extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
 extern void fn_800902C0(void);
 extern void atn_Model_findBoneIndex(void);
@@ -2528,7 +2528,7 @@ lbl_ArenaTask_draw_00001DDC:
     addi r4, r1, 0x8
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f3, lbl_80880844
     fmr f4, f31
     lfs f2, lbl_8088084C
@@ -3299,7 +3299,7 @@ lbl_Arms_execute_00002850:
     stw r0, 0x284(r31)
 lbl_Arms_execute_00002868:
     addi r3, r31, 0x10
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_Arms_execute_00002880
     li r3, 0x1

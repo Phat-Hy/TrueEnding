@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
 extern void fn_80063484(void);
@@ -39,7 +39,7 @@ extern void fn_801A03E8(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80239D58(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void fn_8031FAA4(void);
 extern void fn_8031FE4C(void);
 extern void fn_8035B694(void);
@@ -676,7 +676,7 @@ lbl_fn_8031E078_000007BC:
     lwz r3, lbl_8087F3C0
     li r10, 0x0
     lwz r4, 0x8(r29)
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_8031E078_00000814:
     addi r11, r1, 0x340
     psq_l f31, 0x398(r1), 0, 0
@@ -752,7 +752,7 @@ lbl_fn_8031E8BC_000008C0:
     li r9, 0x0
     lwz r4, 0xc(r29)
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_8031E8BC_00000928:
     lwz r5, 0x34(r29)
     mr r4, r30
@@ -760,7 +760,7 @@ lbl_fn_8031E8BC_00000928:
     addi r5, r5, 0x30
     bl vec3_sub
     addi r3, r1, 0x48
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_80884E3C
     fmr f31, f1
     fcmpo cr0, f1, f0

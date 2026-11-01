@@ -13,7 +13,7 @@ extern void vec3_toEulerAngles(void);
 extern void fn_80011410(void);
 extern void vec3_sub(void);
 extern void fn_800133B0(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void skill_calculateDamage(void);
 extern void fn_80063764(void);
 extern void fn_8007708C(void);
@@ -850,7 +850,7 @@ lbl_fn_8030AF10_0000095C:
     addi r3, r1, 0xa0
     addi r4, r31, 0x528
     addi r5, r1, 0x100
-    bl fn_80013410
+    bl vec3_add
     bl fn_800F7250
     lfs f1, lbl_80884BD8
     mr r6, r28
@@ -880,7 +880,7 @@ lbl_fn_8030AF10_0000095C:
     addi r3, r1, 0x80
     addi r4, r31, 0x528
     addi r5, r1, 0xf4
-    bl fn_80013410
+    bl vec3_add
     bl fn_800F7250
     lfs f1, lbl_80884BD8
     mr r6, r28
@@ -898,7 +898,7 @@ lbl_fn_8030AF10_0000095C:
     addi r3, r1, 0x60
     addi r4, r31, 0x528
     addi r5, r1, 0xe8
-    bl fn_80013410
+    bl vec3_add
     bl fn_800F7250
     lfs f1, lbl_80884BD8
     mr r6, r28
@@ -970,7 +970,7 @@ lbl_fn_8030AF10_00000B8C:
     addi r3, r1, 0x34
     addi r4, r4, 0x4
     addi r5, r1, 0xc0
-    bl fn_80013410
+    bl vec3_add
     lwz r4, 0x1538(r26)
     mr r3, r30
     bl fn_800EC204

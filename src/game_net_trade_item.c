@@ -10,7 +10,7 @@ extern void fn_8000D9E8(void);
 extern void fn_8000D9F8(void);
 extern void vec3_assign(void);
 extern void fn_80012C88(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void fn_8004B338(void);
 extern void item_useConsumable(void);
 extern void fn_8004BF64(void);
@@ -437,14 +437,14 @@ lbl_fn_8052C10C_00000408:
     addi r3, r1, 0x24
     addi r4, r31, 0x11fc
     addi r5, r1, 0x54
-    bl fn_80013410
+    bl vec3_add
     addi r3, r31, 0x6c
     addi r4, r1, 0x24
     bl fn_80114AA0
     addi r3, r1, 0x18
     addi r4, r31, 0x1208
     addi r5, r1, 0x54
-    bl fn_80013410
+    bl vec3_add
     addi r3, r31, 0x6c
     addi r4, r1, 0x18
     bl fn_80112960
@@ -1531,7 +1531,7 @@ asm void fn_8052D46C(void)
     addi r3, r1, 0x140
     addi r4, r1, 0x188
     addi r5, r1, 0x194
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x188
     addi r4, r1, 0x140
     bl vec3_copy
@@ -1540,7 +1540,7 @@ asm void fn_8052D46C(void)
     addi r3, r1, 0x134
     addi r4, r1, 0x188
     addi r5, r1, 0x194
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x188
     addi r4, r1, 0x134
     bl vec3_copy
@@ -1695,30 +1695,30 @@ lbl_fn_8052D46C_0000161C:
     addi r3, r1, 0xbc
     addi r4, r31, 0x11fc
     addi r5, r31, 0x12ec
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0xc8
     addi r4, r1, 0xbc
     addi r5, r1, 0x17c
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0xd4
     addi r4, r1, 0xc8
     addi r5, r1, 0x170
-    bl fn_80013410
+    bl vec3_add
     addi r3, r31, 0x6c
     addi r4, r1, 0xd4
     bl fn_80114AA0
     addi r3, r1, 0x98
     addi r4, r31, 0x1208
     addi r5, r31, 0x12f8
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0xa4
     addi r4, r1, 0x98
     addi r5, r1, 0x17c
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0xb0
     addi r4, r1, 0xa4
     addi r5, r1, 0x170
-    bl fn_80013410
+    bl vec3_add
     addi r3, r31, 0x6c
     addi r4, r1, 0xb0
     bl fn_80112960
@@ -1849,30 +1849,30 @@ lbl_fn_8052D46C_00001830:
     addi r3, r1, 0x2c
     addi r4, r31, 0x11fc
     addi r5, r31, 0x12ec
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x38
     addi r4, r1, 0x2c
     addi r5, r1, 0x17c
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x44
     addi r4, r1, 0x38
     addi r5, r1, 0x14c
-    bl fn_80013410
+    bl vec3_add
     addi r3, r31, 0x6c
     addi r4, r1, 0x44
     bl fn_80114AA0
     addi r3, r1, 0x8
     addi r4, r31, 0x1208
     addi r5, r31, 0x12f8
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x14
     addi r4, r1, 0x8
     addi r5, r1, 0x17c
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x20
     addi r4, r1, 0x14
     addi r5, r1, 0x14c
-    bl fn_80013410
+    bl vec3_add
     addi r3, r31, 0x6c
     addi r4, r1, 0x20
     bl fn_80112960

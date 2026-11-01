@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
@@ -756,7 +756,7 @@ asm void fn_80463174(void)
     addi r5, r31, 0x528
     bl vec3_sub
     addi r3, r1, 0x80
-    bl fn_8000D3A4
+    bl vec3_mag
     lwz r0, 0x14c4(r31)
     cmpwi r0, 0x0
     bne lbl_fn_80463174_00000960
@@ -823,7 +823,7 @@ lbl_fn_80463174_000009CC:
     addi r5, r31, 0x528
     bl vec3_sub
     addi r3, r1, 0x68
-    bl fn_8000D3A4
+    bl vec3_mag
     fmr f28, f1
     mr r3, r31
     bl fn_8012A1B8
@@ -926,7 +926,7 @@ lbl_fn_80463174_00000B8C:
     addi r5, r31, 0x528
     bl vec3_sub
     addi r3, r1, 0x80
-    bl fn_8000D3A4
+    bl vec3_mag
     fmr f30, f1
     mr r3, r31
     bl fn_8012A1B8

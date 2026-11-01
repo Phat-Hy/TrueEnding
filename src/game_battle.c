@@ -81,7 +81,7 @@ extern void PSVECCrossProduct(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void std_sin(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 
 /* External data declarations */
 extern u8 jumptable_80775BE8[];
@@ -3656,7 +3656,7 @@ asm void fn_8001A270(void)
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8001A270_00003188
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8001A270_00003188:
     cmpwi r31, 0x0
     ble lbl_fn_8001A270_00003198
@@ -3691,7 +3691,7 @@ asm void fn_8001A2DC(void)
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8001A2DC_000031F8
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8001A2DC_000031F8:
     cmpwi r31, 0x0
     ble lbl_fn_8001A2DC_00003208

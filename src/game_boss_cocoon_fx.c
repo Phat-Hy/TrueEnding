@@ -13,7 +13,7 @@ extern void dtor_80084684(void);
 extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void fn_8006F420(void);
 extern void str_assignBuffer(void);
 extern void mem_alloc(void);
@@ -34,7 +34,7 @@ extern void fn_800DFB40(void);
 extern void fn_800E0908(void);
 extern void save_validateHeader(void);
 extern void fn_801F4728(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void fn_801F4DDC(void);
 extern void fn_801F4E30(void);
 extern void saveSlot_readSummary(void);
@@ -1634,7 +1634,7 @@ lbl_fn_8046AE7C_00001528:
     lfs f2, lbl_80886E88
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r3, 0x50(r24)
     lis r23, lbl_80755394@ha
     fmr f31, f1
@@ -1678,23 +1678,23 @@ lbl_fn_8046AE7C_000015A0:
     lwz r3, 0x50(r24)
     li r6, 0x0
     addi r5, r5, 0x1
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r5, 0x94(r24)
     addi r4, r23, 0x1d4
     lwz r3, 0x50(r24)
     li r6, 0x0
     addi r5, r5, 0x1
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r3, 0x50(r24)
     addi r4, r23, 0x1dc
     lwz r5, 0x98(r24)
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r3, 0x50(r24)
     addi r4, r23, 0x1e4
     lwz r5, 0x98(r24)
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lfs f0, lbl_80886E88
     addi r3, r23, 0x1ef
     stfs f0, 0x78(r1)

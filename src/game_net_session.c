@@ -7,7 +7,7 @@ extern void fn_8000D430(void);
 extern void fn_800119B8(void);
 extern void mem_alloc(void);
 extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
@@ -1028,7 +1028,7 @@ lbl_fn_801E8534_00000D00:
     lwz r3, 0x48(r31)
     bl quest_checkCondition
     addi r3, r31, 0xa4
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     bne lbl_fn_801E8534_00000E98
     psq_l f1, 0x50(r31), 0, 0
@@ -1222,7 +1222,7 @@ lbl_fn_801E8534_00000F7C:
     li r6, 0x2
     bl fn_804A4CE4
     addi r3, r31, 0xa4
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     bne lbl_fn_801E8534_000011B0
     lfs f10, lbl_80882B10
@@ -1457,7 +1457,7 @@ lbl_fn_801E8F9C_00001370:
     blt lbl_fn_801E8F9C_0000132C
 lbl_fn_801E8F9C_00001380:
     addi r3, r31, 0xa4
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     bne lbl_fn_801E8F9C_00001398
     addi r3, r31, 0xa4

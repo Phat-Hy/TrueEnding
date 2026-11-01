@@ -22,7 +22,7 @@ extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092F1C(void);
 extern void fn_80095D44(void);
@@ -1504,7 +1504,7 @@ asm void fn_80413B1C(void)
     li r28, 0x0
 lbl_fn_80413B1C_000012A0:
     mr r3, r31
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_80413B1C_000012B8
     li r3, 0x1

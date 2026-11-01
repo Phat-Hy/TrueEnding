@@ -8,7 +8,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_14(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_800A4450(void);
@@ -634,7 +634,7 @@ lbl_fn_804BA138_0000070C:
     lfs f2, lbl_808873D8
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x8(r1)
     fmr f31, f1
     srwi. r0, r0, 31

@@ -24,7 +24,7 @@ extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_8024D120(void);
 extern void fn_8024E7E4(void);
@@ -1516,7 +1516,7 @@ lbl_fn_8024C46C_00001408:
     lwz r3, lbl_8087F3C0
     li r7, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lwz r0, 0x16bc(r29)
     cmpwi r0, 0x0
     beq lbl_fn_8024C46C_00001758
@@ -1611,7 +1611,7 @@ lbl_fn_8024C46C_0000157C:
     lwz r3, lbl_8087F3C0
     li r7, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lis r4, lbl_8074367C@ha
     lfs f1, lbl_8088326C
     addi r4, r4, lbl_8074367C@l

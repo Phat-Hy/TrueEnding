@@ -44,10 +44,10 @@ extern void perf_getMetricValue(void);
 extern void assert_formatLocation(void);
 extern void event_findEntryById(void);
 extern void fn_8021175C(void);
-extern void fn_80237518(void);
+extern void res_MsgHandle_ctor(void);
 extern void res_Resource_destructor(void);
 extern void res_Resource_unload(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -957,7 +957,7 @@ lbl_fn_8051B988_00000B20:
     addi r3, r31, 0x47e8
     bl res_MsgHandle_constructor
     addi r3, r31, 0x47f4
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     lis r4, lbl_807C9100@ha
     lwz r5, 0x1910(r31)
     addi r4, r4, lbl_807C9100@l
@@ -1872,7 +1872,7 @@ lbl_fn_8051C754_000018CC:
     b lbl_fn_8051C754_000018F8
 lbl_fn_8051C754_000018E4:
     addi r3, r24, 0x47f4
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31

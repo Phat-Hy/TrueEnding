@@ -69,7 +69,7 @@ void fn_801F4998(void);
 void fn_801F4AA0(void);
 void fn_801F4B4C(void);
 void fn_801F4C14(void);
-void fn_801F4CB4(void);
+void save_formatSlotTitle(void);
 void fn_801F4D80(void);
 void fn_801F4DDC(void);
 void fn_801F4E30(void);
@@ -856,7 +856,7 @@ lbl_fn_801F4C14_00000A68:
     blr
 }
 
-asm void fn_801F4CB4(void)
+asm void save_formatSlotTitle(void)
 {
     nofralloc
     stwu r1, -0x260(r1)
@@ -869,16 +869,16 @@ asm void fn_801F4CB4(void)
     mr r30, r4
     stw r29, 0x254(r1)
     mr r29, r3
-    ble lbl_fn_801F4CB4_00000ACC
+    ble lbl_save_formatSlotTitle_00000ACC
     lis r4, lbl_80782C40@ha
     mr r5, r6
     addi r3, r1, 0x8
     addi r4, r4, lbl_80782C40@l
     crclr 6
     bl wcs_vformat
-    b lbl_fn_801F4CB4_00000B08
-lbl_fn_801F4CB4_00000ACC:
-    bge lbl_fn_801F4CB4_00000AF0
+    b lbl_save_formatSlotTitle_00000B08
+lbl_save_formatSlotTitle_00000ACC:
+    bge lbl_save_formatSlotTitle_00000AF0
     lis r4, lbl_80782C40@ha
     addi r3, r1, 0x8
     addi r4, r4, lbl_80782C40@l
@@ -886,15 +886,15 @@ lbl_fn_801F4CB4_00000ACC:
     addi r4, r4, 0xe
     crclr 6
     bl wcs_vformat
-    b lbl_fn_801F4CB4_00000B08
-lbl_fn_801F4CB4_00000AF0:
+    b lbl_save_formatSlotTitle_00000B08
+lbl_save_formatSlotTitle_00000AF0:
     lis r4, lbl_80782C40@ha
     addi r3, r1, 0x8
     addi r4, r4, lbl_80782C40@l
     addi r4, r4, 0x1e
     crclr 6
     bl wcs_vformat
-lbl_fn_801F4CB4_00000B08:
+lbl_save_formatSlotTitle_00000B08:
     mr r5, r31
     addi r3, r1, 0x48
     addi r4, r1, 0x8

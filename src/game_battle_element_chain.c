@@ -20,7 +20,7 @@ extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -136,11 +136,11 @@ asm void fn_80423958(void)
     stw r31, 0xc(r1)
     mr r31, r3
     addi r3, r3, 0xf4
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     bne lbl_fn_80423958_000000A4
     addi r3, r31, 0x4c4
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_80423958_000000AC
 lbl_fn_80423958_000000A4:

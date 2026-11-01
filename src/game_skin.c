@@ -62,7 +62,7 @@ extern void str_findChar(void);
 extern void fn_800DCA6C(void);
 extern void printf(void);
 extern void abort(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern void runtime_registerStaticObject(void);
 extern void __ptmf_scall(void);
 extern void fn_80709AD0(void);
@@ -1396,7 +1396,7 @@ lbl_fn_800C3FF0_0000100C:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_800C3FF0_00001054
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_800C3FF0_00001054:
     lwz r5, 0x48(r29)
     mr r4, r30

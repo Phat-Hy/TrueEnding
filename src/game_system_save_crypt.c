@@ -45,7 +45,7 @@ extern void actor_setState(void);
 extern void save_validateHeader(void);
 extern void fn_8020A780(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237518(void);
+extern void res_MsgHandle_ctor(void);
 extern void res_Resource_destructor(void);
 extern void res_Resource_unload(void);
 extern void res_MsgHandle_constructor(void);
@@ -1938,7 +1938,7 @@ asm void fn_80345384(void)
     addi r3, r31, 0x163c
     bl res_MsgHandle_constructor
     addi r3, r31, 0x1648
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r31, 0x1654
     bl fn_80057A64
     addi r3, r31, 0x1660
@@ -1975,7 +1975,7 @@ lbl_fn_80345384_000019B0:
     cmplw r29, r28
     blt lbl_fn_80345384_000019B0
     mr r3, r28
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     li r28, 0x0
     li r0, 0x96
     li r30, 0xa

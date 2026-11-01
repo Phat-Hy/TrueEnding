@@ -10,7 +10,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void atn_Model_findBoneIndex(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXScale(void);
@@ -768,7 +768,7 @@ lbl_fn_802915F4_00000998:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     b lbl_fn_802915F4_00000AF8
 lbl_fn_802915F4_00000AB0:
     li r0, 0x0
@@ -788,7 +788,7 @@ lbl_fn_802915F4_00000AB0:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_802915F4_00000AF8:
     li r0, 0x0
     stw r0, 0x8(r1)
@@ -806,7 +806,7 @@ lbl_fn_802915F4_00000AF8:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     addi r11, r1, 0x560
     psq_l f31, 0x5b8(r1), 0, 0
     lfd f31, 0x5b0(r1)
@@ -1579,7 +1579,7 @@ lbl_fn_802921F8_00001564:
     li r9, 0x0
     lwz r3, lbl_8087F3C0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lwz r0, 0x544(r1)
     mr r3, r30
     stw r0, 0x8(r1)
@@ -1595,7 +1595,7 @@ lbl_fn_802921F8_00001564:
     li r9, 0x0
     li r10, 0x0
     lwz r3, lbl_8087F3C0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lwz r0, 0x548(r1)
     mr r7, r25
     stw r0, 0x8(r1)
@@ -1610,7 +1610,7 @@ lbl_fn_802921F8_00001564:
     li r9, 0x0
     li r10, 0x0
     lwz r3, lbl_8087F3C0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lwz r3, lbl_8087F3C0
     lwz r0, 0x54c(r1)
     stw r0, 0xd0(r3)

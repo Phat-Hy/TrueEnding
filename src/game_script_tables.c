@@ -43,10 +43,10 @@ extern void fn_8019A580(void);
 extern void fn_8019AFE8(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237518(void);
+extern void res_MsgHandle_ctor(void);
 extern void res_Resource_destructor(void);
 extern void res_Resource_unload(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -1351,9 +1351,9 @@ asm void fn_8024A650(void)
     addi r3, r29, 0x151c
     bl res_MsgHandle_constructor
     addi r3, r29, 0x1528
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r29, 0x1534
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r29, 0x1540
     bl res_MsgHandle_constructor
     addi r3, r29, 0x154c
@@ -1857,11 +1857,11 @@ lbl_fn_8024AD30_000017F8:
     cmpwi r3, 0x0
     bne lbl_fn_8024AD30_00001F3C
     addi r3, r29, 0x1534
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_8024AD30_00001F3C
     addi r3, r29, 0x1528
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_8024AD30_00001F3C
     addi r3, r29, 0x157c

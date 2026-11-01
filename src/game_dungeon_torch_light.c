@@ -15,7 +15,7 @@ extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void fn_8016DAB0(void);
 extern void save_validateHeader(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void fn_801F5644(void);
 extern void fn_801F583C(void);
 extern void fn_801F5BC8(void);
@@ -432,7 +432,7 @@ lbl_fn_803E5C60_00000460:
     addi r5, r5, 0x1
 lbl_fn_803E5C60_00000480:
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     mr r3, r30
     bl fn_8016DAB0
     lwz r0, lbl_8087F494
@@ -463,7 +463,7 @@ lbl_fn_803E5C60_000004D4:
     addi r5, r5, 0x1
 lbl_fn_803E5C60_000004F4:
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lis r30, lbl_807506A0@ha
     lfs f31, 0xc(r1)
     addi r30, r30, lbl_807506A0@l

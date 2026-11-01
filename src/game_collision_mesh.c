@@ -18,7 +18,7 @@ extern void fn_800FFE68(void);
 extern void fn_801055A8(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_8023A614(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -1353,7 +1353,7 @@ lbl_fn_80101434_000011C8:
     li r6, 0x0
     li r7, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     cmpwi r28, 0x0
     beq lbl_fn_80101434_00001230
     lwz r3, lbl_8087F3C0
@@ -1413,7 +1413,7 @@ lbl_fn_80101524_0000129C:
     li r7, 0x0
     li r10, 0x0
     addi r4, r4, 0x6594
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_80101524_000012F4:
     rlwinm. r0, r31, 0, 9, 9
     beq lbl_fn_80101524_0000134C
@@ -1436,7 +1436,7 @@ lbl_fn_80101524_000012F4:
     li r7, 0x0
     li r10, 0x0
     addi r4, r4, 0x65a0
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_80101524_0000134C:
     rlwinm. r0, r31, 0, 25, 25
     beq lbl_fn_80101524_000013A4
@@ -1459,7 +1459,7 @@ lbl_fn_80101524_0000134C:
     li r7, 0x0
     li r10, 0x0
     addi r4, r4, 0x65ac
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_80101524_000013A4:
     rlwinm. r0, r31, 0, 7, 8
     beq lbl_fn_80101524_00001440

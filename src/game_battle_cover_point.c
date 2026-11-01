@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void skin_applyWeights(void);
@@ -1664,7 +1664,7 @@ lbl_fn_8040D434_000016C4:
     cmpwi r0, 0x0
     bne lbl_fn_8040D434_00001810
     addi r3, r29, 0x4
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     bne lbl_fn_8040D434_00001808
     mr r3, r29

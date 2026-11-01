@@ -27,7 +27,7 @@ extern void fn_8012B028(void);
 extern void fn_80134800(void);
 extern void save_validateHeader(void);
 extern void fn_801F4AA0(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801F64D0(void);
 extern void save_computeCrc32(void);
@@ -1855,12 +1855,12 @@ lbl_fn_80572454_000017D0:
     mr r5, r22
     addi r4, r24, 0xa3
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r3, 0x48(r27)
     addi r4, r24, 0xb0
     lwz r5, 0xa8(r27)
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r0, 0xa8(r27)
     cmpw r22, r0
     blt lbl_fn_80572454_00001834

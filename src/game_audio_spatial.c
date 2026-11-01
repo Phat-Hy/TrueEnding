@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void fn_8000D9E8(void);
 extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
@@ -1060,7 +1060,7 @@ lbl_fn_802FFFF8_00000D84:
     lfs f0, lbl_80884A20
     addi r3, r1, 0x5c
     stfs f0, 0x60(r1)
-    bl fn_8000D3A4
+    bl vec3_mag
     lwz r5, 0x1518(r29)
     fmr f28, f1
     addi r3, r1, 0x50
@@ -1165,7 +1165,7 @@ lbl_fn_802FFFF8_00000F44:
     addi r4, r4, 0x4
     bl vec3_sub
     addi r3, r1, 0x14
-    bl fn_8000D3A4
+    bl vec3_mag
     fmr f29, f1
     lwz r3, 0x14ec(r29)
     bl fn_8013C38C
@@ -1175,7 +1175,7 @@ lbl_fn_802FFFF8_00000F44:
     addi r4, r4, 0x4
     bl vec3_sub
     addi r3, r1, 0x8
-    bl fn_8000D3A4
+    bl vec3_mag
     fcmpo cr0, f29, f1
     bge lbl_fn_802FFFF8_00000FF4
     lwz r3, 0x1518(r29)

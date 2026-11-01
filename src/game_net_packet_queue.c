@@ -6,7 +6,7 @@ extern void _restgpr_23(void);
 extern void _savegpr_23(void);
 extern void dtor_80084684(void);
 extern void fn_80060D58(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void fn_800A4450(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
@@ -320,7 +320,7 @@ lbl_fn_804AF384_000002D8:
     lfs f2, lbl_80887308
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x8(r1)
     srwi. r0, r0, 31
     beq lbl_fn_804AF384_000002FC
@@ -480,7 +480,7 @@ lbl_fn_804AF520_0000051C:
     lfs f2, lbl_80887308
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x5c(r1)
     fmr f31, f1
     srwi. r0, r0, 31
@@ -523,7 +523,7 @@ lbl_fn_804AF520_000005BC:
     lfs f2, lbl_80887308
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x50(r1)
     fmr f31, f1
     srwi. r0, r0, 31
@@ -566,7 +566,7 @@ lbl_fn_804AF520_0000065C:
     lfs f2, lbl_80887308
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x44(r1)
     fmr f31, f1
     srwi. r0, r0, 31
@@ -609,7 +609,7 @@ lbl_fn_804AF520_000006FC:
     lfs f2, lbl_80887308
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x38(r1)
     fmr f31, f1
     srwi. r0, r0, 31
@@ -652,7 +652,7 @@ lbl_fn_804AF520_0000079C:
     lfs f2, lbl_80887308
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x2c(r1)
     fmr f31, f1
     srwi. r0, r0, 31
@@ -1159,7 +1159,7 @@ lbl_fn_804AF520_00000EE4:
     lfs f2, lbl_80887308
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x20(r1)
     fmr f31, f1
     srwi. r0, r0, 31
@@ -1202,7 +1202,7 @@ lbl_fn_804AF520_00000F84:
     lfs f2, lbl_80887308
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x14(r1)
     fmr f31, f1
     srwi. r0, r0, 31
@@ -1245,7 +1245,7 @@ lbl_fn_804AF520_00001024:
     lfs f2, lbl_80887308
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x8(r1)
     fmr f31, f1
     srwi. r0, r0, 31

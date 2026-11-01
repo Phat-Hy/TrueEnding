@@ -13,7 +13,7 @@ extern void fn_8004D388(void);
 extern void fn_8004ECC0(void);
 extern void collision_testLineSegment(void);
 extern void fn_8006A250(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void fn_80076FF8(void);
 extern void route_interpolatePath(void);
 extern void fn_80087858(void);
@@ -737,7 +737,7 @@ lbl_fn_803775DC_00000878:
     lfs f2, lbl_808857FC
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     fmr f31, f1
     mr r5, r21
     addi r3, r1, 0x38

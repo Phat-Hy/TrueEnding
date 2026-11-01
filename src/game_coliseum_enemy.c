@@ -35,7 +35,7 @@ extern void PSMTXTrans(void);
 extern void PSMTXScale(void);
 extern void PSVECSquareMag(void);
 extern void strcmp(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -1145,7 +1145,7 @@ lbl_fn_80491528_00000E2C:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_80491528_00000E68
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_80491528_00000E68:
     lwz r6, 0x0(r30)
     mr r4, r21
@@ -1239,7 +1239,7 @@ lbl_fn_80491528_00000F84:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_80491528_00000FC0
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_80491528_00000FC0:
     lwz r6, 0x0(r30)
     mr r4, r20

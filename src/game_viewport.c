@@ -7,7 +7,7 @@ extern void _restgpr_21(void);
 extern void _savegpr_19(void);
 extern void _savegpr_21(void);
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000DCF4(void);
 extern void vec3_assign(void);
@@ -43,7 +43,7 @@ extern void fn_8021A888(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80239D58(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
@@ -339,7 +339,7 @@ lbl_fn_800F72F4_00000254:
     li r9, 0x0
     li r10, 0x0
     subi r4, r4, 0x7670
-    bl fn_8023A680
+    bl res_Shader_bindParams
     bl fn_800F7FA0
     stw r23, 0x8(r1)
     addis r4, r26, 0x4
@@ -353,7 +353,7 @@ lbl_fn_800F72F4_00000254:
     li r9, 0x0
     li r10, 0x0
     subi r4, r4, 0x7664
-    bl fn_8023A680
+    bl res_Shader_bindParams
     mr r3, r27
     bl fn_800F7FB4
     cmpwi r3, 0x12
@@ -379,7 +379,7 @@ lbl_fn_800F72F4_00000338:
     li r9, 0x0
     li r10, 0x0
     subi r4, r4, 0x7670
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_800F72F4_0000037C:
     bl fn_800F7FA0
     li r4, 0x0
@@ -439,7 +439,7 @@ lbl_fn_800F72F4_000003A4:
     addi r4, r1, 0x148
     bl vec3_copy
     addi r3, r1, 0x1a4
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f2, lbl_808814B0
     addi r3, r1, 0x1a4
     lfs f0, lbl_808814C8
@@ -599,7 +599,7 @@ lbl_fn_800F72F4_00000668:
     addi r4, r1, 0xcc
     bl vec3_copy
     addi r3, r1, 0x1a4
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f2, lbl_808814B0
     addi r3, r1, 0x24
     lfs f0, lbl_808814C8
@@ -641,7 +641,7 @@ lbl_fn_800F72F4_00000668:
     addi r5, r1, 0x1f8
     bl vec3_sub
     addi r3, r1, 0xb4
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f2, lbl_808814B0
     lfs f0, lbl_808814C8
     fsubs f1, f1, f2
@@ -885,7 +885,7 @@ lbl_fn_800F72F4_00000A9C:
     addi r5, r1, 0x1c8
     bl vec3_sub
     addi r3, r1, 0x60
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f2, lbl_808814B0
     lfs f0, lbl_808814C8
     fsubs f1, f1, f2
@@ -991,7 +991,7 @@ lbl_fn_800F72F4_00000C1C:
     li r6, 0x5
     li r8, 0x0
     li r9, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     bl fn_800F7FA0
     stw r28, 0x8(r1)
     addi r4, r23, 0xc
@@ -1004,7 +1004,7 @@ lbl_fn_800F72F4_00000C1C:
     stw r26, 0x10(r1)
     li r8, 0x0
     li r9, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     bl fn_800F7FA0
     li r4, 0x0
     bl fn_800F84D0

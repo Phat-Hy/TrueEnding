@@ -9,7 +9,7 @@ extern void _savegpr_24(void);
 extern void dtor_80084684(void);
 extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void fn_8000D3A8(void);
 extern void fn_8000D430(void);
 extern void fn_8000DD0C(void);
@@ -17,7 +17,7 @@ extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80011410(void);
 extern void vec3_sub(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void item_useConsumable(void);
@@ -500,10 +500,10 @@ lbl_fn_805BAC18_00000420:
     addi r5, r1, 0x88
     bl fn_805BB548
     addi r3, r1, 0xa8
-    bl fn_8000D3A4
+    bl vec3_mag
     stfs f1, 0xc(r1)
     addi r3, r1, 0xb4
-    bl fn_8000D3A4
+    bl vec3_mag
     stfs f1, 0x10(r1)
     fmr f1, f31
     addi r3, r1, 0x10
@@ -523,7 +523,7 @@ lbl_fn_805BAC18_00000420:
     addi r3, r1, 0x38
     addi r4, r1, 0xf0
     addi r5, r1, 0xfc
-    bl fn_80013410
+    bl vec3_add
     addi r3, r29, 0x8c
     bl fn_80112958
     fmr f1, f31

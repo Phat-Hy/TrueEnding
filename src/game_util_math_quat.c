@@ -23,7 +23,7 @@ extern void wcs_vformat(void);
 extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_8011728C(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
@@ -294,7 +294,7 @@ asm void fn_805807A8(void)
     lwz r5, lbl_8087F4F0
     lwz r3, 0xd4(r3)
     lwz r5, 0x6000(r5)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r0, 0x32fc(r25)
     lwz r3, 0xdc(r25)
     cmpw r3, r0
@@ -311,14 +311,14 @@ asm void fn_805807A8(void)
     lwz r3, 0xd4(r25)
     addi r4, r21, 0x294
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     b lbl_fn_805807A8_000002E4
 lbl_fn_805807A8_000002D0:
     lwz r3, 0xd4(r25)
     addi r4, r21, 0x294
     li r5, 0x1
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
 lbl_fn_805807A8_000002E4:
     addis r4, r25, 0x2
     lis r3, lbl_807612E4@ha
@@ -990,12 +990,12 @@ lbl_fn_8058100C_00000C14:
     mr r5, r31
     addi r4, r29, 0x313
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r3, 0x90(r30)
     mr r5, r27
     addi r4, r29, 0x31b
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
 lbl_fn_8058100C_00000C44:
     addi r11, r1, 0x50
     psq_l f31, 0x58(r1), 0, 0
@@ -1241,7 +1241,7 @@ lbl_fn_805811E0_00000F5C:
     addi r4, r1, 0x48
     lwzx r5, r28, r22
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     addi r21, r21, 0x1
     addi r23, r23, 0x4
     cmpwi r21, 0x3
@@ -1401,7 +1401,7 @@ asm void fn_80581678(void)
     lwz r3, 0x5b2c(r5)
     li r6, 0x0
     lwz r5, 0x5b24(r5)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     addis r6, r31, 0x2
     lwz r5, 0x5b1c(r6)
     cmpwi r5, 0x0

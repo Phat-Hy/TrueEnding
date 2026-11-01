@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void mem_alloc(void);
 extern void fn_800A4450(void);
 extern void msg_getMessageById(void);
@@ -905,7 +905,7 @@ lbl_fn_804CDBFC_00000A94:
     lfs f2, lbl_80887548
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x8(r1)
     fmr f31, f1
     srwi. r0, r0, 31

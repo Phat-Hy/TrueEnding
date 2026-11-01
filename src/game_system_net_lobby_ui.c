@@ -14,7 +14,7 @@ extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
 extern void vec3_sub(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void fn_80057A64(void);
 extern void fn_800697D8(void);
 extern void atn_Task_unlink(void);
@@ -1164,7 +1164,7 @@ lbl_fn_803A26F4_00000E3C:
     mr r4, r3
     mr r5, r23
     addi r3, r1, 0x74
-    bl fn_80013410
+    bl vec3_add
     mr r3, r31
     addi r4, r1, 0x74
     bl fn_801C0738
@@ -1253,7 +1253,7 @@ lbl_fn_803A26F4_00000F98:
     mr r4, r3
     addi r3, r1, 0x5c
     addi r5, r1, 0xe0
-    bl fn_80013410
+    bl vec3_add
     mr r3, r31
     addi r4, r1, 0x5c
     bl fn_8036B438

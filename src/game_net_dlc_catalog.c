@@ -10,7 +10,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void skill_calcTrajectory(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void mem_alloc(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
@@ -1983,7 +1983,7 @@ lbl_fn_8054B328_000018A8:
     fmuls f0, f0, f3
     stfs f4, 0x4c(r1)
     fmuls f15, f24, f0
-    bl fn_8006EF48
+    bl script_executeOpcode
     frsp f0, f21
     lfs f3, 0x60(r1)
     lfs f5, 0x5c(r1)
@@ -2206,7 +2206,7 @@ lbl_fn_8054B328_00001C48:
     lfs f2, lbl_80887D60
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x10(r19)
     fsubs f17, f17, f15
     lfs f0, 0x58(r1)
@@ -2259,7 +2259,7 @@ lbl_fn_8054B328_00001D28:
     addi r4, r19, 0x20
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f0, 0x58(r1)
     fnmsubs f17, f26, f19, f17
     lfs f6, lbl_80887D60
@@ -2405,7 +2405,7 @@ lbl_fn_8054B328_00001F48:
     lfs f2, lbl_80887D60
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f0, 0x58(r1)
     fsubs f17, f17, f15
     lfs f6, lbl_80887D60
@@ -2498,7 +2498,7 @@ lbl_fn_8054B328_000020A8:
     li r5, 0x1
     fmr f1, f19
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f0, 0x58(r1)
     cmpwi r18, 0x0
     fnmsubs f15, f24, f1, f0
@@ -2830,7 +2830,7 @@ lbl_fn_8054B328_000024B4:
     li r5, 0x1
     lfs f2, lbl_80887D60
     li r6, 0x4
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r4, 0xa0(r19)
     fmr f15, f1
     addi r3, r27, 0x2be
@@ -2875,7 +2875,7 @@ lbl_fn_8054B328_00002664:
     addi r4, r1, 0x70
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f0, 0x58(r1)
     fnmsubs f17, f26, f19, f17
     lfs f6, lbl_80887D60
@@ -3506,7 +3506,7 @@ lbl_fn_8054B328_00003000:
     lfs f1, lbl_80887D74
     li r6, 0x1
     lfs f2, lbl_80887D60
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x10(r1)
     fmr f15, f1
     srwi r0, r0, 31
@@ -3732,7 +3732,7 @@ lbl_fn_8054B328_00003360:
     lfs f2, lbl_80887D60
     li r6, 0x1
     fmr f1, f16
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f0, 0x58(r1)
     fnmsubs f17, f26, f16, f17
     lfs f6, lbl_80887D60
@@ -3855,7 +3855,7 @@ lbl_fn_8054B328_0000351C:
     lfs f2, lbl_80887D60
     li r6, 0x1
     fmr f1, f16
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f0, 0x58(r1)
     fnmsubs f17, f26, f16, f17
     lfs f6, lbl_80887D60
@@ -3968,7 +3968,7 @@ lbl_fn_8054B328_000036CC:
     lfs f2, lbl_80887D60
     li r6, 0x1
     fmr f1, f16
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f0, 0x58(r1)
     fnmsubs f17, f26, f16, f17
     lfs f6, lbl_80887D60
@@ -4029,7 +4029,7 @@ lbl_fn_8054B328_000037BC:
     addi r4, r1, 0x70
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f0, 0x58(r1)
     fnmsubs f17, f26, f19, f17
     lfs f6, lbl_80887D60

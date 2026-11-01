@@ -7,7 +7,7 @@ extern void _savegpr_18(void);
 extern void mtx_getTranslation(void);
 extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000D9F8(void);
 extern void fn_8000DB1C(void);
@@ -18,10 +18,10 @@ extern void vec3_toEulerAngles(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
 extern void fn_80013404(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void fn_80057A64(void);
 extern void fn_80057A68(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void fn_8006FA4C(void);
 extern void fn_8008B964(void);
 extern void fn_800A58D0(void);
@@ -84,7 +84,7 @@ extern void fn_801F33D4(void);
 extern void fn_801F4484(void);
 extern void fn_801F465C(void);
 extern void fn_801F48C8(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void fn_801F6C2C(void);
 extern void save_computeCrc32(void);
 extern void fn_801F6D7C(void);
@@ -1006,7 +1006,7 @@ lbl_fn_803D2A6C_00000A5C:
     addi r3, r1, 0x2b4
     lfs f3, 0x484(r1)
     bl vec3_set
-    bl fn_8000D3A4
+    bl vec3_mag
     fmr f29, f1
     mr r3, r20
     mr r4, r22
@@ -2806,7 +2806,7 @@ lbl_fn_803D2A6C_00002464:
     addi r5, r31, 0x4
     bl vec3_sub
     addi r3, r1, 0x398
-    bl fn_8000D3A4
+    bl vec3_mag
     fmr f25, f1
     addi r3, r1, 0x398
     bl fn_800F7FF0
@@ -3023,7 +3023,7 @@ lbl_fn_803D2A6C_000027AC:
     addi r3, r1, 0x38c
     addi r4, r31, 0x4
     addi r5, r1, 0x168
-    bl fn_80013410
+    bl vec3_add
     stfs f28, 0x39c(r1)
     addi r3, r1, 0x398
     bl fn_800F7FF0
@@ -3044,7 +3044,7 @@ lbl_fn_803D2A6C_000027AC:
     addi r3, r1, 0x150
     addi r4, r1, 0x380
     addi r5, r1, 0x398
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x398
     addi r4, r1, 0x150
     bl vec3_copy
@@ -3053,7 +3053,7 @@ lbl_fn_803D2A6C_000027AC:
     addi r3, r1, 0x144
     addi r4, r1, 0x380
     addi r5, r1, 0x398
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x398
     addi r4, r1, 0x144
     bl vec3_copy
@@ -3299,7 +3299,7 @@ lbl_fn_803D2A6C_00002BA4:
     lfs f2, lbl_80885D58
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lis r23, lbl_807506A0@ha
     fmr f24, f1
     addi r23, r23, lbl_807506A0@l
@@ -3607,12 +3607,12 @@ lbl_fn_803D2A6C_00002FCC:
     addi r4, r23, 0x1181
     lwz r5, 0x0(r25)
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r3, 0x3ec(r24)
     addi r4, r23, 0x1188
     lwz r5, 0x0(r25)
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r3, 0x3ec(r24)
     bl fn_801F4484
     lwz r3, 0x3ec(r24)
@@ -4602,7 +4602,7 @@ lbl_fn_803D2A6C_00003E5C:
     mr r5, r23
     addi r3, r1, 0x90
     addi r4, r1, 0x9c
-    bl fn_80013410
+    bl vec3_add
     addi r4, r1, 0x90
     b lbl_fn_803D2A6C_00003F24
 lbl_fn_803D2A6C_00003EF0:
@@ -4617,7 +4617,7 @@ lbl_fn_803D2A6C_00003EF0:
     mr r4, r3
     mr r5, r23
     addi r3, r1, 0x78
-    bl fn_80013410
+    bl vec3_add
     addi r4, r1, 0x78
 lbl_fn_803D2A6C_00003F24:
     addi r3, r1, 0x2e4
@@ -4766,7 +4766,7 @@ lbl_fn_803D2A6C_0000411C:
     mr r4, r3
     mr r5, r23
     addi r3, r1, 0x2d8
-    bl fn_80013410
+    bl vec3_add
     mr r3, r25
     bl fn_803D71D4
     cmpwi r3, 0x0
@@ -4786,7 +4786,7 @@ lbl_fn_803D2A6C_0000411C:
     mr r4, r3
     mr r5, r23
     addi r3, r1, 0x54
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x2d8
     addi r4, r1, 0x54
     bl vec3_copy
@@ -4849,7 +4849,7 @@ lbl_fn_803D2A6C_00004258:
     mr r4, r3
     mr r5, r23
     addi r3, r1, 0x3c
-    bl fn_80013410
+    bl vec3_add
     bl fn_8008B964
     mr r4, r3
     addi r3, r1, 0x2c0

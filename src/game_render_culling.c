@@ -29,7 +29,7 @@ extern void dialog_updateScriptState(void);
 extern void fn_801588A0(void);
 extern void fn_8020A780(void);
 extern void task_findEntryById(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_update(void);
 extern void fn_802AE954(void);
 extern void world_setGlobalFlag(void);
@@ -134,7 +134,7 @@ lbl_fn_802AC590_00000090:
     b lbl_fn_802AC590_00000380
 lbl_fn_802AC590_000000A8:
     addi r3, r31, 0x1a6c
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_802AC590_000000D8
     addi r3, r31, 0x1a60

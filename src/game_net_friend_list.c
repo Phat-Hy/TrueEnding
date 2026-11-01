@@ -54,7 +54,7 @@ extern void fn_80160324(void);
 extern void actor_setState(void);
 extern void fn_8017C7F8(void);
 extern void task_findEntryById(void);
-extern void fn_80237518(void);
+extern void res_MsgHandle_ctor(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void fn_80239798(void);
@@ -1843,7 +1843,7 @@ lbl_fn_804D0328_00001618:
     bl res_MsgHandle_constructor
     addis r3, r29, 0x1
     subi r3, r3, 0x6940
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addis r3, r29, 0x1
     li r4, 0x0
     li r5, 0x0

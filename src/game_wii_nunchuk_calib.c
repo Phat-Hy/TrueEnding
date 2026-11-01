@@ -23,7 +23,7 @@ extern void fn_8011447C(void);
 extern void thread_findAndNotify(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_804786F8(void);
 extern void fn_8047F6B0(void);
@@ -1275,7 +1275,7 @@ lbl_fn_8055DBF8_00000EC8:
     li r6, 0x5
     lwz r3, lbl_8087F3C0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     b lbl_fn_8055DBF8_0000108C
 lbl_fn_8055DBF8_00000FEC:
     li r0, 0x0
@@ -1293,7 +1293,7 @@ lbl_fn_8055DBF8_00000FEC:
     li r6, 0x0
     li r7, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     b lbl_fn_8055DBF8_0000108C
 lbl_fn_8055DBF8_00001030:
     lwz r25, 0x18(r29)

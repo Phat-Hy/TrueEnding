@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
@@ -26,7 +26,7 @@ extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_80178A6C(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237518(void);
+extern void res_MsgHandle_ctor(void);
 extern void res_Resource_unload(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -1582,7 +1582,7 @@ asm void fn_802AC0E0(void)
     addi r5, r31, 0x528
     bl vec3_sub
     addi r3, r1, 0x20
-    bl fn_8000D3A4
+    bl vec3_mag
     fmr f30, f1
     mr r3, r31
     bl fn_8012A1B8
@@ -1804,7 +1804,7 @@ asm void fn_802AC364(void)
     addi r3, r29, 0x1a60
     bl res_MsgHandle_constructor
     addi r3, r29, 0x1a6c
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r29, 0x1a78
     bl res_MsgHandle_constructor
     lwz r0, 0x12a4(r29)

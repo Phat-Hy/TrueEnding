@@ -18,7 +18,7 @@ extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_80089EE4(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void fn_80097D40(void);
 extern void fn_80098948(void);
 extern void fn_80099010(void);
@@ -1583,7 +1583,7 @@ lbl_fn_8011F6FC_0000151C:
     srawi. r0, r0, 31
     beq lbl_fn_8011F6FC_00001534
     addi r3, r30, 0xb0
-    bl fn_8008B140
+    bl map_processTrigger
 lbl_fn_8011F6FC_00001534:
     lwz r0, 0x38(r30)
     rlwinm r0, r0, 0, 29, 29

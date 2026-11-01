@@ -15,7 +15,7 @@ extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void map_debugLog(void);
 extern void fn_80096218(void);
 extern void lockon_updateTarget(void);
@@ -2011,7 +2011,7 @@ lbl_fn_80564060_00001820:
     stw r0, 0x420(r29)
 lbl_fn_80564060_00001830:
     addi r3, r29, 0x24
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_80564060_00001848
     li r3, 0x1

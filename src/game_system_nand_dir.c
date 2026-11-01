@@ -21,7 +21,7 @@ extern void fn_80192FB4(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A254(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
@@ -1952,7 +1952,7 @@ asm void fn_8034C714(void)
     lwz r3, lbl_8087F3C0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lis r4, lbl_8074AA58@ha
     lfs f1, lbl_80885398
     addi r4, r4, lbl_8074AA58@l

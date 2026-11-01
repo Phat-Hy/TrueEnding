@@ -32,12 +32,12 @@ extern void fn_8015DBC8(void);
 extern void actor_setState(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237518(void);
+extern void res_MsgHandle_ctor(void);
 extern void res_Resource_destructor(void);
 extern void res_Resource_unload(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void fn_802B98B0(void);
 extern void fn_802B9C5C(void);
 extern void kpad_getClampData(void);
@@ -217,7 +217,7 @@ lbl_fn_802B77AC_000000E0:
     cmpwi r3, 0x0
     mr r0, r3
     beq lbl_fn_802B77AC_00000170
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     mr r0, r3
 lbl_fn_802B77AC_00000170:
     lwz r3, 0x1514(r31)
@@ -307,7 +307,7 @@ lbl_fn_802B7970_00000274:
     cmpwi r3, 0x0
     beq lbl_fn_802B7970_000002B4
     lwz r3, 0x1514(r31)
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_802B7970_000002B4
     li r3, 0x0
@@ -1979,7 +1979,7 @@ lbl_fn_802B8AA4_000019B8:
     lwz r3, lbl_8087F3C0
     li r10, 0x0
     lwz r4, 0x1514(r31)
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lwz r12, 0x0(r30)
     mr r4, r30
     addi r3, r1, 0x130

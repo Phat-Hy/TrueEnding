@@ -17,7 +17,7 @@ extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
@@ -1145,7 +1145,7 @@ lbl_fn_80406038_00000E64:
     cmpwi r0, 0x0
     bne lbl_fn_80406038_00000FB0
     addi r3, r29, 0x4
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     bne lbl_fn_80406038_00000FA8
     mr r3, r29

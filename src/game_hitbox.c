@@ -19,7 +19,7 @@ extern void sound_initGlobalInstances(void);
 extern void fn_80239D58(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A184(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void PSVECMag(void);
 extern void rand(void);
@@ -418,7 +418,7 @@ lbl_fn_8010743C_000003FC:
     lwz r3, lbl_8087F3C0
     li r9, 0x0
     subi r4, r4, 0x760c
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_8010743C_0000047C:
     lwz r3, lbl_8087F3C0
     li r0, 0x0

@@ -27,7 +27,7 @@ extern void node_destroy(void);
 extern void fn_800899DC(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B130(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void map_debugLog(void);
 extern void fn_80091CFC(void);
 extern void atn_Model_findBoneIndex(void);
@@ -622,7 +622,7 @@ lbl_boss_updatePhaseState_00000648:
     stw r0, 0xac(r30)
 lbl_boss_updatePhaseState_00000650:
     addi r3, r30, 0xb0
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_boss_updatePhaseState_00000664
     li r31, 0x1

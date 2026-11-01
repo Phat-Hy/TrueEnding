@@ -19,7 +19,7 @@ extern void wcs_vformat(void);
 extern void actor_findSpawnTemplate(void);
 extern void fn_801F4728(void);
 extern void fn_801F4998(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801FEDBC(void);
 extern void thread_dispatchToQueue(void);
@@ -1429,7 +1429,7 @@ lbl_fn_804B3EFC_00001350:
     lwz r5, 0x0(r22)
     addi r4, r31, 0x3ae
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r4, 0x8c(r30)
     addi r3, r31, 0x51e
     addi r21, r4, 0x58
@@ -1454,7 +1454,7 @@ lbl_fn_804B3EFC_00001350:
     addi r4, r31, 0x53a
     lwz r5, 0x4(r22)
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r21, 0x8c(r30)
     cmpwi r21, 0x0
     beq lbl_fn_804B3EFC_00001438
@@ -1478,7 +1478,7 @@ lbl_fn_804B3EFC_00001454:
     addi r4, r31, 0x3ae
     addi r5, r26, 0x1
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r4, 0x8c(r30)
     addi r21, r23, 0x6
     addi r3, r31, 0x51e

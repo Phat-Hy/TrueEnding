@@ -66,7 +66,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECDotProduct(void);
 extern void std_sin(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern void vec3_isNonZero(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -1056,7 +1056,7 @@ lbl_fn_800E62AC_00000CE0:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_800E62AC_00000D28
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_800E62AC_00000D28:
     lwz r4, 0x50(r1)
     addi r3, r1, 0x54

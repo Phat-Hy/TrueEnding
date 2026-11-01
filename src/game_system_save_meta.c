@@ -40,7 +40,7 @@ extern void fn_8015ECC4(void);
 extern void fn_8016E4C4(void);
 extern void actor_setState(void);
 extern void task_findEntryById(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void fn_80244CAC(void);
@@ -444,7 +444,7 @@ asm void fn_80345BA8(void)
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_00000B08
     addi r3, r29, 0x1648
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_00000B08
     addi r3, r29, 0x16cc
@@ -456,7 +456,7 @@ asm void fn_80345BA8(void)
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_00000B08
     addi r3, r29, 0x17d8
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_00000B08
     addi r3, r29, 0x1704

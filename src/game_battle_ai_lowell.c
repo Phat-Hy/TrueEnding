@@ -20,7 +20,7 @@ extern void route_createWaypoint(void);
 extern void fn_80088724(void);
 extern void node_createNamedChild(void);
 extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
@@ -35,7 +35,7 @@ extern void fn_8021D990(void);
 extern void fn_8021D9D4(void);
 extern void fn_8021E4E4(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237518(void);
+extern void res_MsgHandle_ctor(void);
 extern void res_Resource_destructor(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -605,7 +605,7 @@ asm void fn_80436624(void)
     stw r30, 0x8(r1)
     mr r30, r3
     addi r3, r3, 0xf4
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_80436624_00000654
     li r3, 0x1
@@ -1308,7 +1308,7 @@ lbl_fn_80436EB8_00000F70:
     stw r30, 0xf08(r31)
     bl res_MsgHandle_constructor
     addi r3, r31, 0xf18
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     stw r30, 0x54(r31)
     li r29, 0x0
     li r30, 0x0

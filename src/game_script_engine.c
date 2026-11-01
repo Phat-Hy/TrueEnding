@@ -17,7 +17,7 @@ extern void fn_8069293C(void);
 extern void fn_80693884(void);
 extern void fn_806939C8(void);
 extern void fn_80693AB8(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 
 /* External data declarations */
 extern u8 lbl_80743070[];
@@ -682,7 +682,7 @@ lbl_fn_802407CC_0000088C:
     lwz r3, 0x54(r1)
     cmpwi r3, 0x0
     beq lbl_fn_802407CC_000008A4
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_802407CC_000008A4:
     lwz r3, 0x80(r1)
     lhz r0, 0x8c(r1)
@@ -844,7 +844,7 @@ lbl_fn_802407CC_00000AB8:
     lwz r3, 0x54(r1)
     cmpwi r3, 0x0
     beq lbl_fn_802407CC_00000AD0
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_802407CC_00000AD0:
     lwz r3, 0x80(r1)
     lhz r0, 0x8c(r1)
@@ -1253,7 +1253,7 @@ lbl_fn_802411B8_0000104C:
     lwz r3, 0xa4(r1)
     cmpwi r3, 0x0
     beq lbl_fn_802411B8_00001074
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_802411B8_00001074:
     li r3, 0x0
     b lbl_fn_802411B8_0000158C
@@ -1628,7 +1628,7 @@ lbl_fn_802411B8_00001570:
     lwz r3, 0xa4(r1)
     cmpwi r3, 0x0
     beq lbl_fn_802411B8_00001588
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_802411B8_00001588:
     mr r3, r26
 lbl_fn_802411B8_0000158C:
@@ -1989,7 +1989,7 @@ lbl_fn_80241CB8_00001A50:
     lwz r3, 0x94(r1)
     cmpwi r3, 0x0
     beq lbl_fn_80241CB8_00002244
-    bl fn_806952C4
+    bl msl_releaseRefCount
     b lbl_fn_80241CB8_00002244
 lbl_fn_80241CB8_00001A7C:
     fmr f1, f31
@@ -2070,7 +2070,7 @@ lbl_fn_80241CB8_00001B7C:
     lwz r3, 0x94(r1)
     cmpwi r3, 0x0
     beq lbl_fn_80241CB8_00002244
-    bl fn_806952C4
+    bl msl_releaseRefCount
     b lbl_fn_80241CB8_00002244
 lbl_fn_80241CB8_00001B98:
     bne lbl_fn_80241CB8_00001E0C
@@ -2251,7 +2251,7 @@ lbl_fn_80241CB8_00001DF0:
     lwz r3, 0x94(r1)
     cmpwi r3, 0x0
     beq lbl_fn_80241CB8_00002244
-    bl fn_806952C4
+    bl msl_releaseRefCount
     b lbl_fn_80241CB8_00002244
 lbl_fn_80241CB8_00001E0C:
     addi r3, r1, 0xc8
@@ -2490,7 +2490,7 @@ lbl_fn_80241CB8_00002128:
     lwz r3, 0x94(r1)
     cmpwi r3, 0x0
     beq lbl_fn_80241CB8_00002244
-    bl fn_806952C4
+    bl msl_releaseRefCount
     b lbl_fn_80241CB8_00002244
 lbl_fn_80241CB8_00002144:
     lwz r0, 0x0(r25)
@@ -2564,7 +2564,7 @@ lbl_fn_80241CB8_0000222C:
     lwz r3, 0x94(r1)
     cmpwi r3, 0x0
     beq lbl_fn_80241CB8_00002244
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_80241CB8_00002244:
     lfd f31, 0x118(r1)
     lmw r24, 0xf8(r1)

@@ -21,7 +21,7 @@ extern void save_validateHeader(void);
 extern void fn_801F4728(void);
 extern void fn_801F48C8(void);
 extern void fn_801F4C14(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_8020924C(void);
@@ -276,7 +276,7 @@ lbl_fn_804C822C_00000280:
     addi r4, r28, 0x3db
     addi r5, r30, 0x1
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
 lbl_fn_804C822C_00000294:
     lwz r3, lbl_8087F610
     mr r4, r21

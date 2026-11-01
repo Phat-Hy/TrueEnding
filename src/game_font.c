@@ -9,7 +9,7 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8006B0C8(void);
 extern void fn_8006B174(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void dungeon_initGlobalContext(void);
 extern void fn_800838B8(void);
 extern void fn_80083AD4(void);
@@ -1887,7 +1887,7 @@ lbl_fn_800A4244_00001AB4:
     lfs f2, lbl_80880CA0
     li r5, 0x1
     li r6, 0x4
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x8(r1)
     fmr f31, f1
     srwi. r0, r0, 31

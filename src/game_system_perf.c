@@ -13,7 +13,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_8008A00C(void);
 extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void lockon_updateTarget(void);
 extern void fn_800A03A0(void);
 extern void fn_800A03E4(void);
@@ -26,10 +26,10 @@ extern void save_validateHeader(void);
 extern void fn_801F64D0(void);
 extern void fn_801F69A8(void);
 extern void fn_801F6A38(void);
-extern void fn_80237518(void);
+extern void res_MsgHandle_ctor(void);
 extern void res_Resource_destructor(void);
 extern void res_Resource_unload(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void fn_8023772C(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -1467,7 +1467,7 @@ asm void fn_80203D50(void)
     mflr r0
     lwz r3, 0x24(r3)
     stw r0, 0x14(r1)
-    bl fn_8008B140
+    bl map_processTrigger
     cntlzw r0, r3
     srwi r3, r0, 5
     lwz r0, 0x14(r1)
@@ -1532,7 +1532,7 @@ lbl_fn_80203D7C_000013B0:
     bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80203D7C_000013D8
-    bl fn_80237518
+    bl res_MsgHandle_ctor
 lbl_fn_80203D7C_000013D8:
     stw r3, 0x18(r28)
     mr r4, r29
@@ -1622,7 +1622,7 @@ lbl_fn_80203F1C_000014E8:
     cmpwi r0, 0x2
     bne lbl_fn_80203F1C_0000150C
     lwz r3, 0x18(r31)
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_80203F1C_0000150C
     li r3, 0x0

@@ -18,7 +18,7 @@ extern void fn_8006A250(void);
 extern void fn_8006AA20(void);
 extern void fn_8006B2D8(void);
 extern void fn_8006D008(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void dungeon_initGlobalContext(void);
 extern void fn_80084F84(void);
 extern void fn_800A4450(void);
@@ -405,7 +405,7 @@ lbl_fn_8053F1B8_00000424:
     lfs f2, lbl_80887CA0
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x8(r1)
     fmr f31, f1
     srwi. r0, r0, 31

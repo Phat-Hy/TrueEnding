@@ -21,7 +21,7 @@ extern void route_createWaypoint(void);
 extern void fn_80088724(void);
 extern void node_createNamedChild(void);
 extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void fn_80092954(void);
 extern void fn_80092F1C(void);
 extern void lockon_updateTarget(void);
@@ -673,7 +673,7 @@ asm void fn_8042CA24(void)
     mflr r0
     addi r3, r3, 0xf4
     stw r0, 0x14(r1)
-    bl fn_8008B140
+    bl map_processTrigger
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31

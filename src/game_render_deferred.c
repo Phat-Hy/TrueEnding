@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
@@ -1366,7 +1366,7 @@ asm void fn_802B6F80(void)
     addi r5, r31, 0x528
     bl vec3_sub
     addi r3, r1, 0x20
-    bl fn_8000D3A4
+    bl vec3_mag
     fmr f30, f1
     mr r3, r31
     bl fn_8012A1B8

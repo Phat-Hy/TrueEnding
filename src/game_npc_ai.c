@@ -6,13 +6,13 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
 extern void fn_80011410(void);
 extern void vec3_sub(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void fn_80017F18(void);
 extern void fn_80018078(void);
 extern void fn_80018240(void);
@@ -366,7 +366,7 @@ lbl_fn_8013A4E8_00000354:
     addi r3, r1, 0x36c
     bl vec3_assign
     addi r3, r1, 0x36c
-    bl fn_8000D3A4
+    bl vec3_mag
     frsp f2, f1
     lfs f0, lbl_808819B8
     stfs f1, 0x0(r28)
@@ -486,7 +486,7 @@ lbl_fn_8013A4E8_000004F0:
     stfs f0, 0x358(r1)
 lbl_fn_8013A4E8_00000524:
     addi r3, r1, 0x354
-    bl fn_8000D3A4
+    bl vec3_mag
     stfs f1, 0x0(r28)
     lwz r3, 0xd1c(r27)
     bl fn_8013C42C
@@ -569,7 +569,7 @@ lbl_fn_8013A4E8_00000620:
     addi r5, r27, 0x528
     bl vec3_sub
     addi r3, r1, 0x33c
-    bl fn_8000D3A4
+    bl vec3_mag
     frsp f2, f1
     lfs f0, lbl_8088196C
     stfs f1, 0x0(r28)
@@ -719,7 +719,7 @@ lbl_fn_8013A4E8_00000870:
     addi r3, r1, 0x330
     bl vec3_assign
     addi r3, r1, 0x330
-    bl fn_8000D3A4
+    bl vec3_mag
     frsp f2, f1
     lfs f0, lbl_808819B8
     stfs f1, 0x0(r28)
@@ -770,7 +770,7 @@ lbl_fn_8013A4E8_000008F0:
     stfs f0, 0x328(r1)
 lbl_fn_8013A4E8_00000940:
     addi r3, r1, 0x324
-    bl fn_8000D3A4
+    bl vec3_mag
     stfs f1, 0x0(r28)
     lwz r3, 0xd1c(r27)
     bl fn_8013C42C
@@ -1092,7 +1092,7 @@ lbl_fn_8013A4E8_00000DB8:
     bl vec3_copy
 lbl_fn_8013A4E8_00000DD4:
     addi r3, r1, 0x300
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_8088196C
     fmr f31, f1
     fcmpo cr0, f1, f0
@@ -1112,7 +1112,7 @@ lbl_fn_8013A4E8_00000E08:
     addi r3, r1, 0x2f4
     addi r4, r27, 0xd50
     addi r5, r1, 0xd8
-    bl fn_80013410
+    bl vec3_add
     lfs f0, 0x52c(r27)
     addi r3, r1, 0x2e8
     stfs f0, 0x2f8(r1)
@@ -1120,7 +1120,7 @@ lbl_fn_8013A4E8_00000E08:
     addi r5, r27, 0x528
     bl vec3_sub
     addi r3, r1, 0x2e8
-    bl fn_8000D3A4
+    bl vec3_mag
     frsp f2, f1
     lfs f0, lbl_8088196C
     stfs f1, 0x0(r28)
@@ -1232,7 +1232,7 @@ lbl_fn_8013A4E8_00000FA4:
     fcmpo cr0, f1, f0
     ble lbl_fn_8013A4E8_00001000
     addi r3, r1, 0x2dc
-    bl fn_8000D3A4
+    bl vec3_mag
     stfs f1, 0x0(r28)
     addi r3, r1, 0x2dc
     bl fn_800F7FF0
@@ -1436,7 +1436,7 @@ lbl_fn_8013A4E8_0000127C:
     fcmpo cr0, f1, f0
     blt lbl_fn_8013A4E8_000012E4
     addi r3, r1, 0x2c4
-    bl fn_8000D3A4
+    bl vec3_mag
     stfs f1, 0x0(r28)
     addi r3, r1, 0x2c4
     bl fn_800F7FF0
@@ -1475,7 +1475,7 @@ lbl_fn_8013A4E8_00001300:
     addi r5, r27, 0x528
     bl vec3_sub
     addi r3, r1, 0x90
-    bl fn_8000D3A4
+    bl vec3_mag
     fmr f31, f1
     mr r3, r31
     bl fn_80126214
@@ -1490,12 +1490,12 @@ lbl_fn_8013A4E8_00001300:
     fcmpo cr0, f1, f0
     ble lbl_fn_8013A4E8_00001450
     addi r3, r1, 0x2b8
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_80881964
     fcmpo cr0, f1, f0
     bge lbl_fn_8013A4E8_000013A8
     addi r3, r1, 0x2b8
-    bl fn_8000D3A4
+    bl vec3_mag
     b lbl_fn_8013A4E8_000013AC
 lbl_fn_8013A4E8_000013A8:
     fmr f1, f0
@@ -1602,7 +1602,7 @@ lbl_fn_8013A4E8_000014D0:
     fcmpo cr0, f1, f0
     ble lbl_fn_8013A4E8_0000154C
     addi r3, r1, 0x2ac
-    bl fn_8000D3A4
+    bl vec3_mag
     stfs f1, 0x0(r28)
     addi r3, r1, 0x2ac
     bl fn_800F7FF0
@@ -1640,7 +1640,7 @@ lbl_fn_8013A4E8_0000158C:
     addi r5, r27, 0x528
     bl vec3_sub
     addi r3, r1, 0x2a0
-    bl fn_8000D3A4
+    bl vec3_mag
     stfs f1, 0x0(r28)
     frsp f1, f1
     lfs f0, 0xd60(r27)
@@ -1735,7 +1735,7 @@ lbl_fn_8013A4E8_000016CC:
     fcmpo cr0, f1, f0
     ble lbl_fn_8013A4E8_00001744
     addi r3, r1, 0x288
-    bl fn_8000D3A4
+    bl vec3_mag
     stfs f1, 0x0(r28)
     addi r3, r1, 0x288
     bl fn_800F7FF0
@@ -1803,7 +1803,7 @@ lbl_fn_8013A4E8_000017E4:
     fcmpo cr0, f1, f0
     ble lbl_fn_8013A4E8_00001848
     addi r3, r1, 0x270
-    bl fn_8000D3A4
+    bl vec3_mag
     stfs f1, 0x0(r28)
     addi r3, r1, 0x270
     bl fn_800F7FF0
@@ -2068,7 +2068,7 @@ lbl_fn_8013A4E8_00001BC4:
     addi r5, r27, 0x528
     bl vec3_sub
     addi r3, r1, 0xc
-    bl fn_8000D3A4
+    bl vec3_mag
     lwz r3, 0xd68(r27)
     fmr f31, f1
     cmpwi r3, 0x0

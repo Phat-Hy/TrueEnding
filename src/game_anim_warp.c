@@ -7,13 +7,13 @@ extern void _restgpr_24(void);
 extern void _savegpr_19(void);
 extern void _savegpr_24(void);
 extern void mtx_getTranslation(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void fn_8000DD0C(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void fn_8004D124(void);
 extern void collision_testLineSegment(void);
 extern void atn_Matrix_copy_2(void);
@@ -45,7 +45,7 @@ extern void fn_801A03F4(void);
 extern void fn_801A0400(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_8026607C(void);
 extern void fn_80267B20(void);
@@ -1360,7 +1360,7 @@ lbl_fn_80278634_00001144:
     lwz r3, lbl_8087F3C0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lwz r0, 0x5b4(r1)
     psq_l f31, 0x5a8(r1), 0, 0
     lfd f31, 0x5a0(r1)
@@ -1522,7 +1522,7 @@ lbl_fn_802790A0_000013CC:
     li r9, 0x0
     li r10, 0x0
     lwz r3, lbl_8087F3C0
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_802790A0_00001494:
     li r0, 0x0
     stw r0, 0x4(r29)
@@ -1623,7 +1623,7 @@ lbl_fn_80279280_000015E0:
     addi r3, r1, 0xc0
     addi r4, r1, 0xcc
     addi r5, r25, 0x10
-    bl fn_80013410
+    bl vec3_add
     bl fn_80279790
     bl fn_80279788
     mr r29, r3
@@ -1673,7 +1673,7 @@ lbl_fn_80279280_0000160C:
     addi r3, r1, 0x84
     addi r4, r1, 0xb4
     addi r5, r1, 0x48
-    bl fn_80013410
+    bl vec3_add
     lwz r12, 0x0(r29)
     mr r3, r29
     lwz r12, 0x58(r12)
@@ -1685,7 +1685,7 @@ lbl_fn_80279280_0000160C:
     addi r5, r1, 0x9c
     bl vec3_sub
     addi r3, r1, 0x3c
-    bl fn_8000D3A4
+    bl vec3_mag
     fcmpo cr0, f1, f30
     bge lbl_fn_80279280_00001740
     lwz r12, 0x0(r29)
@@ -1840,7 +1840,7 @@ lbl_fn_80279280_000018FC:
     addi r4, r1, 0x6c
     bl vec3_toEulerAngles
     addi r3, r1, 0x6c
-    bl fn_8000D3A4
+    bl vec3_mag
     fdivs f30, f1, f31
     addi r3, r25, 0x58
     bl fn_8010EDFC

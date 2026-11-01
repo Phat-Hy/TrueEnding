@@ -14,7 +14,7 @@ extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
 extern void magic_dispatchActionCommand(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void fn_801FEDBC(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_804A436C(void);
@@ -572,7 +572,7 @@ lbl_fn_804BDD68_00000538:
     lwz r3, 0x4c(r31)
     li r6, 0x0
     lwz r5, 0x5a4(r5)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r4, lbl_8087F610
     lis r3, lbl_80790D74@ha
     addi r3, r3, lbl_80790D74@l

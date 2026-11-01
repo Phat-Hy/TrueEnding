@@ -39,7 +39,7 @@ extern void fn_80617030(void);
 extern void fn_80617130(void);
 extern void fn_80617200(void);
 extern void fn_80617220(void);
-extern void fn_806173E0(void);
+extern void GXSetTevColorIn(void);
 extern void fn_80617420(void);
 extern void GXSetTevIndirect(void);
 extern void fn_806174C0(void);
@@ -913,7 +913,7 @@ lbl_fn_805D1A40_00000B5C:
     extrwi r7, r0, 4, 24
     clrlwi r4, r5, 28
     extrwi r5, r5, 4, 24
-    bl fn_806173E0
+    bl GXSetTevColorIn
     lbz r6, 0x6(r25)
     mr r3, r28
     lbz r0, 0x7(r25)
@@ -996,7 +996,7 @@ lbl_fn_805D1A40_00000CB4:
     li r5, 0x4
     li r6, 0xa
     li r7, 0xf
-    bl fn_806173E0
+    bl GXSetTevColorIn
     li r3, 0x0
     li r4, 0x7
     li r5, 0x2
@@ -1019,7 +1019,7 @@ lbl_fn_805D1A40_00000D10:
     li r5, 0x4
     li r6, 0x8
     li r7, 0xf
-    bl fn_806173E0
+    bl GXSetTevColorIn
     li r3, 0x0
     li r4, 0x1
     li r5, 0x2
@@ -1041,7 +1041,7 @@ lbl_fn_805D1A40_00000D64:
     li r5, 0xf
     li r6, 0xf
     li r7, 0x8
-    bl fn_806173E0
+    bl GXSetTevColorIn
     li r3, 0x0
     li r4, 0x7
     li r5, 0x7
@@ -1058,7 +1058,7 @@ lbl_fn_805D1A40_00000D64:
     li r5, 0x0
     li r6, 0xe
     li r7, 0xf
-    bl fn_806173E0
+    bl GXSetTevColorIn
     li r3, 0x1
     li r4, 0x4
     li r5, 0x0
@@ -1103,7 +1103,7 @@ lbl_fn_805D1A40_00000E6C:
     li r4, 0xf
     li r5, 0x8
     li r6, 0xe
-    bl fn_806173E0
+    bl GXSetTevColorIn
     mr r3, r22
     mr r7, r31
     li r4, 0x7
@@ -1178,7 +1178,7 @@ lbl_fn_805D1A40_00000F68:
     li r5, 0x4
     li r6, 0x0
     li r7, 0xf
-    bl fn_806173E0
+    bl GXSetTevColorIn
     mr r3, r22
     li r4, 0x1
     li r5, 0x2
@@ -1200,7 +1200,7 @@ lbl_fn_805D1A40_00000FB4:
     li r5, 0x0
     li r6, 0xa
     li r7, 0xf
-    bl fn_806173E0
+    bl GXSetTevColorIn
     mr r3, r22
     li r4, 0x7
     li r5, 0x0

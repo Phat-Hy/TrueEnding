@@ -45,7 +45,7 @@ extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void fn_8035B694(void);
 extern void fn_8035B78C(void);
 extern void boss_getOffset54(void);
@@ -576,7 +576,7 @@ lbl_fn_802F66CC_0000061C:
     stw r0, 0x10(r1)
     li r7, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lis r3, lbl_807C7030@ha
     addi r3, r3, lbl_807C7030@l
     psq_l f1, 0x0(r3), 0, 0

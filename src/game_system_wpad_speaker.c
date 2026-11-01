@@ -6,7 +6,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void skill_calcTrajectory(void);
 extern void fn_8006A900(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void fn_8006F2F0(void);
 extern void dungeon_initGlobalContext(void);
 extern void mem_alloc(void);
@@ -467,7 +467,7 @@ lbl_world_Manager_postUpdate_00000484:
     li r5, 0x1
     lfs f2, lbl_8088570C
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f3, lbl_8088570C
     fmr f2, f31
     lfs f0, lbl_80885778
@@ -500,7 +500,7 @@ lbl_world_Manager_postUpdate_00000484:
     li r5, 0x1
     lfs f2, lbl_8088570C
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f3, lbl_8088570C
     fmr f2, f31
     lfs f0, lbl_80885778
@@ -541,7 +541,7 @@ lbl_world_Manager_postUpdate_00000484:
     li r5, 0x1
     lfs f2, lbl_8088570C
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f3, lbl_8088570C
     fmr f2, f31
     lfs f0, lbl_80885778
@@ -610,7 +610,7 @@ lbl_world_Manager_postUpdate_000006E4:
     li r5, 0x1
     lfs f2, lbl_8088570C
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f3, lbl_8088570C
     fmr f2, f31
     lfs f0, lbl_80885778
@@ -657,7 +657,7 @@ lbl_world_Manager_postUpdate_00000750:
     li r5, 0x1
     lfs f2, lbl_8088570C
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f3, lbl_8088570C
     fmr f2, f31
     lfs f0, lbl_80885778
@@ -789,7 +789,7 @@ lbl_world_Manager_postUpdate_00000808:
     li r5, 0x1
     lfs f2, lbl_8088570C
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f6, lbl_8088570C
     fmr f2, f31
     lfs f0, lbl_80885778
@@ -827,7 +827,7 @@ lbl_world_Manager_postUpdate_00000808:
     li r5, 0x1
     lfs f2, lbl_8088570C
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f6, lbl_8088570C
     fmr f2, f31
     lfs f0, lbl_80885778

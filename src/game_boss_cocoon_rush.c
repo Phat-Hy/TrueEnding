@@ -18,7 +18,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_8008A4E0(void);
 extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
@@ -1517,7 +1517,7 @@ lbl_atn_LoadEffect_destructor_00001308:
     cmplwi r0, 0x1
     bne lbl_atn_LoadEffect_destructor_00001344
     mr r3, r21
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_atn_LoadEffect_destructor_00001398
     li r22, 0x1

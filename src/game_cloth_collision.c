@@ -32,7 +32,7 @@ extern void fn_801781B0(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_Resource_destructor(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
@@ -245,7 +245,7 @@ lbl_fn_8027CF28_000001CC:
     cmpwi r3, 0x0
     bne lbl_fn_8027CF28_00000A80
     addi r3, r27, 0x155c
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_8027CF28_00000A80
     addi r3, r27, 0x1568

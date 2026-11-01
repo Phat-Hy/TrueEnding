@@ -29,7 +29,7 @@ extern void route_createWaypoint(void);
 extern void fn_80088724(void);
 extern void node_createNamedChild(void);
 extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092F1C(void);
 extern void lockon_updateTarget(void);
@@ -1652,11 +1652,11 @@ asm void fn_8042693C(void)
     stw r30, 0x8(r1)
     mr r30, r3
     addi r3, r3, 0xf4
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     bne lbl_fn_8042693C_000014DC
     addi r3, r30, 0x4c4
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_8042693C_000014E4
 lbl_fn_8042693C_000014DC:

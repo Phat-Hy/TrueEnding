@@ -6,12 +6,12 @@ extern void _restgpr_20(void);
 extern void _savegpr_20(void);
 extern void dtor_80084684(void);
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
 extern void vec3_sub(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void fn_80057A64(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
@@ -1994,7 +1994,7 @@ lbl_fn_8030F564_000019D0:
     bl vec3_copy
 lbl_fn_8030F564_000019F4:
     addi r3, r1, 0x128
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_80884C5C
     fmr f29, f1
     fcmpo cr0, f1, f0
@@ -2016,7 +2016,7 @@ lbl_fn_8030F564_00001A28:
     mr r4, r3
     addi r3, r1, 0x11c
     addi r5, r1, 0xbc
-    bl fn_80013410
+    bl vec3_add
     lfs f0, 0x52c(r30)
     addi r3, r1, 0x110
     stfs f0, 0x120(r1)
@@ -2024,7 +2024,7 @@ lbl_fn_8030F564_00001A28:
     addi r5, r30, 0x528
     bl vec3_sub
     addi r3, r1, 0x110
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_80884C5C
     fmr f31, f1
     fcmpo cr0, f1, f0
@@ -2102,7 +2102,7 @@ lbl_fn_8030F564_00001B4C:
     fcmpo cr0, f1, f0
     ble lbl_fn_8030F564_00001BB0
     addi r3, r1, 0x104
-    bl fn_8000D3A4
+    bl vec3_mag
     fmr f31, f1
     addi r3, r1, 0x104
     bl fn_800F7FF0
@@ -2153,7 +2153,7 @@ lbl_fn_8030F564_00001C08:
     addi r3, r1, 0xf8
     bl vec3_assign
     addi r3, r1, 0xf8
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_80884C94
     fmr f31, f1
     fcmpo cr0, f1, f0

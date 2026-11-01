@@ -8,7 +8,7 @@ extern void fn_80044E0C(void);
 extern void fn_80050A1C(void);
 extern void skill_calcTrajectory(void);
 extern void fn_80063D3C(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void fn_8006F2F0(void);
 extern void fn_8008CD60(void);
 extern void atn_Model_findBoneIndex(void);
@@ -1537,7 +1537,7 @@ lbl_dialog_renderWindow_00001384:
     li r5, 0x1
     lfs f2, lbl_8088196C
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f3, lbl_8088196C
     fmr f2, f30
     lfs f4, lbl_80881A88
@@ -1573,7 +1573,7 @@ lbl_dialog_renderWindow_00001384:
     li r5, 0x1
     lfs f2, lbl_8088196C
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f3, lbl_8088196C
     fmr f2, f30
     lfs f4, lbl_80881A88
@@ -1613,7 +1613,7 @@ lbl_dialog_renderWindow_00001384:
     li r5, 0x1
     lfs f2, lbl_8088196C
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f3, lbl_8088196C
     fmr f2, f30
     lfs f4, lbl_80881A88
@@ -1647,7 +1647,7 @@ lbl_dialog_renderWindow_00001384:
     li r5, 0x1
     lfs f2, lbl_8088196C
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f3, lbl_8088196C
     fmr f2, f30
     lfs f4, lbl_80881A88
@@ -2240,7 +2240,7 @@ lbl_dialog_renderWindow_00001ECC:
     fmr f1, f31
     lfs f2, lbl_8088196C
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     fmr f30, f1
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x178
@@ -2309,7 +2309,7 @@ lbl_dialog_renderWindow_00001FD4:
     fmr f1, f31
     lfs f2, lbl_8088196C
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     fmr f30, f1
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x160
@@ -2378,7 +2378,7 @@ lbl_dialog_renderWindow_000020DC:
     fmr f1, f31
     lfs f2, lbl_8088196C
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     fmr f30, f1
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x148
@@ -2522,7 +2522,7 @@ lbl_dialog_renderWindow_000022E4:
     mr r4, r25
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     fmr f31, f1
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x130
@@ -2697,7 +2697,7 @@ lbl_dialog_renderWindow_00002540:
     fmadds f3, f4, f5, f3
     fmuls f31, f0, f3
     fmr f1, f31
-    bl fn_8006EF48
+    bl script_executeOpcode
     fmr f30, f1
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x118
@@ -2791,7 +2791,7 @@ lbl_dialog_renderWindow_000026AC:
     fmadds f3, f4, f5, f3
     fmuls f31, f0, f3
     fmr f1, f31
-    bl fn_8006EF48
+    bl script_executeOpcode
     fmr f30, f1
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x100

@@ -29,7 +29,7 @@ extern void fn_800A1F84(void);
 extern void str_skipWhitespace(void);
 extern void fn_800DC500(void);
 extern void str_findChar(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_update(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -747,7 +747,7 @@ asm void fn_800A091C(void)
 lbl_fn_800A091C_000008E8:
     lwz r0, 0x14(r29)
     add r3, r0, r31
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_800A091C_00000904
     li r3, 0x1

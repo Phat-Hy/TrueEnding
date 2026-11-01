@@ -14,7 +14,7 @@ extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80094F98(void);
 extern void fn_80095F10(void);
@@ -1032,7 +1032,7 @@ asm void fn_803F5B48(void)
     stw r28, 0x10(r1)
     mr r28, r3
     addi r3, r3, 0xf4
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_803F5B48_00000DE8
     li r3, 0x1

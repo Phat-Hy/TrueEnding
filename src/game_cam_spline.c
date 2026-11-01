@@ -31,7 +31,7 @@ extern void fn_801F8598(void);
 extern void thread_findAndNotifySlot(void);
 extern void fn_80207C34(void);
 extern void res_Resource_destructor(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void fn_8023772C(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
@@ -241,7 +241,7 @@ lbl_fn_800EF91C_000001C0:
     b lbl_fn_800EF91C_00000234
 lbl_fn_800EF91C_000001D8:
     addi r3, r29, 0x1c
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_800EF91C_000001F0
     li r0, 0x1
@@ -551,7 +551,7 @@ lbl_fn_800EFD04_000005BC:
     cmpwi r31, 0x0
     beq lbl_fn_800EFD04_000005E8
     addi r3, r31, 0x1c
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_800EFD04_000005E8
     lwz r0, 0x1c(r31)

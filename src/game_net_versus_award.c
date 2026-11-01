@@ -10,14 +10,14 @@ extern void _savegpr_23(void);
 extern void _savegpr_25(void);
 extern void skill_calcTrajectory(void);
 extern void fn_80061AE4(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_801F4998(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
@@ -714,7 +714,7 @@ lbl_fn_804C1634_00000834:
     li r5, 0x1
     lfs f2, lbl_808873F8
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     fcmpo cr0, f29, f1
     ble lbl_fn_804C1634_000008BC
     stw r31, 0xa4(r27)
@@ -1453,7 +1453,7 @@ asm void fn_804C2268(void)
     li r6, 0x0
     mr r5, r30
     addi r4, r31, 0x410
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r4, 0x50(r29)
     addi r3, r31, 0x41e
     addi r26, r4, 0x58

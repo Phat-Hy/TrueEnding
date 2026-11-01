@@ -25,7 +25,7 @@ extern void fn_80573B18(void);
 extern void fn_80573F44(void);
 extern void fn_80574178(void);
 extern void strcmp(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -571,7 +571,7 @@ lbl_fn_80574AF0_000006BC:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_80574AF0_00000704
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_80574AF0_00000704:
     lwz r22, 0x68(r1)
     mr r4, r31
@@ -705,7 +705,7 @@ lbl_power_handleShutdownEvent_000008B4:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_power_handleShutdownEvent_000008FC
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_power_handleShutdownEvent_000008FC:
     lwz r29, 0x48(r1)
     mr r4, r31
@@ -809,7 +809,7 @@ lbl_power_handleResetEvent_00000A34:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_power_handleResetEvent_00000A7C
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_power_handleResetEvent_00000A7C:
     lwz r6, 0x48(r28)
     mr r4, r29

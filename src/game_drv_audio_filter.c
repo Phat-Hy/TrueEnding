@@ -15,7 +15,7 @@ extern void talk_setSpeakerName(void);
 extern void fn_8006AA20(void);
 extern void fn_8006AC08(void);
 extern void fn_8006B46C(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void fn_8007708C(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -443,7 +443,7 @@ lbl_fn_805BC9F4_00000420:
     mr r3, r29
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r4, 0xb0(r31)
     fmr f31, f1
     addi r3, r30, 0x97

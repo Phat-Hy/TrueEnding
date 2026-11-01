@@ -14,7 +14,7 @@ extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void fn_8017A300(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void fn_802C4858(void);
 extern void fn_802C4B70(void);
 extern void world_getLocalFlag(void);
@@ -650,7 +650,7 @@ lbl_fn_802C25C4_00000794:
     li r9, 0x0
     stw r29, 0x10(r1)
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     b lbl_fn_802C25C4_00000844
 lbl_fn_802C25C4_000007EC:
     li r0, 0x0
@@ -846,7 +846,7 @@ lbl_fn_802C2944_00000A68:
     li r9, 0x0
     lwz r3, lbl_8087F3C0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     stw r30, 0x15b8(r31)
     b lbl_fn_802C2944_00000AE4
 lbl_fn_802C2944_00000AC4:

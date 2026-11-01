@@ -33,7 +33,7 @@ extern void fn_8015E4B0(void);
 extern void actor_setState(void);
 extern void fn_801789D8(void);
 extern void fn_8021A888(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -342,7 +342,7 @@ lbl_fn_802799C0_00000290:
     cmpwi r3, 0x0
     bne lbl_fn_802799C0_00000310
     mr r3, r17
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_802799C0_00000310
     mr r3, r18
@@ -350,11 +350,11 @@ lbl_fn_802799C0_00000290:
     cmpwi r3, 0x0
     bne lbl_fn_802799C0_00000310
     mr r3, r19
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_802799C0_00000310
     mr r3, r20
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_802799C0_00000310
     mr r3, r21

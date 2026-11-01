@@ -35,7 +35,7 @@ extern void fn_8068B610(void);
 extern void fn_806920C0(void);
 extern void fn_806926D4(void);
 extern void fn_8069293C(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern void runtime_registerStaticObject(void);
 extern void __destroy_new_array(void);
 extern void __destroy_arr(void);
@@ -170,7 +170,7 @@ lbl_fn_80393BEC_00000118:
     lwz r3, 0x14(r1)
     cmpwi r3, 0x0
     beq lbl_fn_80393BEC_00000148
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_80393BEC_00000148:
     stb r31, 0x38(r28)
     lis r3, lbl_80779AA0@ha
@@ -358,7 +358,7 @@ lbl_fn_80393BEC_000003E0:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_80393BEC_00000404
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_80393BEC_00000404:
     cmpwi r28, 0x0
     beq lbl_fn_80393BEC_0000044C
@@ -562,7 +562,7 @@ lbl_fn_80394208_00000678:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_80394208_0000069C
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_80394208_0000069C:
     cmpwi r30, 0x0
     beq lbl_fn_80394208_000006E4

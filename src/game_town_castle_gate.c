@@ -19,7 +19,7 @@ extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
@@ -1926,7 +1926,7 @@ lbl_fn_803D7850_00001490:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     stw r30, 0x8(r1)
     add r3, r27, r26
     lfs f1, lbl_80885D60
@@ -1940,7 +1940,7 @@ lbl_fn_803D7850_00001490:
     li r9, 0x0
     li r10, 0x0
     lwz r3, lbl_8087F3C0
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_803D7850_00001510:
     addi r11, r1, 0x570
     psq_l f31, 0x5d8(r1), 0, 0
