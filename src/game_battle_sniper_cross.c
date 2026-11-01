@@ -7,7 +7,7 @@ extern void _savegpr_14(void);
 extern void dtor_80084684(void);
 extern void fn_8000D430(void);
 extern void fn_80056DB8(void);
-extern void fn_80056E40(void);
+extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
 extern void fn_8005B9CC(void);
 extern void fn_8005BBF8(void);
@@ -1197,12 +1197,12 @@ lbl_fn_803F76D8_00000E6C:
     addic. r3, r29, 0x8d0
     beq lbl_fn_803F76D8_00000E88
     li r4, 0x0
-    bl fn_80056E40
+    bl atn_ColliBase_destructor
 lbl_fn_803F76D8_00000E88:
     addic. r3, r29, 0x554
     beq lbl_fn_803F76D8_00000E98
     li r4, 0x0
-    bl fn_80056E40
+    bl atn_ColliBase_destructor
 lbl_fn_803F76D8_00000E98:
     addic. r31, r29, 0x4c8
     beq lbl_fn_803F76D8_00000EBC
@@ -1213,7 +1213,7 @@ lbl_fn_803F76D8_00000E98:
 lbl_fn_803F76D8_00000EB0:
     mr r3, r31
     li r4, 0x0
-    bl fn_80056E40
+    bl atn_ColliBase_destructor
 lbl_fn_803F76D8_00000EBC:
     addi r3, r29, 0xf4
     li r4, -0x1

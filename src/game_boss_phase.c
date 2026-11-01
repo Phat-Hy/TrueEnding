@@ -13,7 +13,7 @@ extern void fn_80013F78(void);
 extern void fn_8003EFB0(void);
 extern void fn_8004B290(void);
 extern void fn_8004B338(void);
-extern void fn_80056E40(void);
+extern void atn_ColliBase_destructor(void);
 extern void fn_8005B9CC(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
@@ -458,7 +458,7 @@ lbl_fn_80136138_00000424:
     addic. r3, r30, 0x5b8
     beq lbl_fn_80136138_00000434
     li r4, 0x0
-    bl fn_80056E40
+    bl atn_ColliBase_destructor
 lbl_fn_80136138_00000434:
     addi r3, r30, 0xb0
     li r4, -0x1

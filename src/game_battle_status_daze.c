@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void dtor_80084684(void);
 extern void fn_80056DB8(void);
-extern void fn_80056E40(void);
+extern void atn_ColliBase_destructor(void);
 extern void fn_800575BC(void);
 extern void fn_8005B3CC(void);
 extern void fn_8005B5F8(void);
@@ -532,7 +532,7 @@ lbl_fn_8042E47C_000004F0:
     addic. r3, r29, 0x4d0
     beq lbl_fn_8042E47C_00000500
     li r4, 0x0
-    bl fn_80056E40
+    bl atn_ColliBase_destructor
 lbl_fn_8042E47C_00000500:
     addi r3, r29, 0xf4
     li r4, -0x1

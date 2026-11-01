@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void fn_80013F78(void);
 extern void atn_LH_Binary_destructor(void);
 extern void fn_800575BC(void);
-extern void fn_800594DC(void);
+extern void atn_ColliBox_destructor(void);
 extern void fn_80069D48(void);
 extern void fn_800844D8(void);
 extern void fn_800846FC(void);
@@ -1102,8 +1102,8 @@ lbl_fn_80394320_00000DD0:
     lwz r3, 0x108(r30)
     cmpwi r3, 0x0
     beq lbl_fn_80394320_00000DF0
-    lis r4, fn_800594DC@ha
-    addi r4, r4, fn_800594DC@l
+    lis r4, atn_ColliBox_destructor@ha
+    addi r4, r4, atn_ColliBox_destructor@l
     bl fn_80695A50
 lbl_fn_80394320_00000DF0:
     li r0, 0x0
@@ -1471,8 +1471,8 @@ lbl_fn_80394C68_000012CC:
     cmpwi r3, 0x0
     lwz r18, 0xe4(r4)
     beq lbl_fn_80394C68_000012EC
-    lis r4, fn_800594DC@ha
-    addi r4, r4, fn_800594DC@l
+    lis r4, atn_ColliBox_destructor@ha
+    addi r4, r4, atn_ColliBox_destructor@l
     bl fn_80695A50
 lbl_fn_80394C68_000012EC:
     cmpwi r18, 0x0
@@ -1486,11 +1486,11 @@ lbl_fn_80394C68_000012EC:
     li r7, 0x0
     bl fn_800846FC
     lis r4, fn_803957B0@ha
-    lis r5, fn_800594DC@ha
+    lis r5, atn_ColliBox_destructor@ha
     mr r7, r18
     li r6, 0x378
     addi r4, r4, fn_803957B0@l
-    addi r5, r5, fn_800594DC@l
+    addi r5, r5, atn_ColliBox_destructor@l
     bl fn_80695720
     stw r3, 0x108(r25)
     b lbl_fn_80394C68_00001340

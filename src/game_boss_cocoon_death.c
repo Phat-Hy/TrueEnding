@@ -11,8 +11,8 @@ extern void fn_8000D124(void);
 extern void fn_8001047C(void);
 extern void fn_8004D388(void);
 extern void fn_8004ED34(void);
-extern void fn_80056E40(void);
-extern void fn_80059468(void);
+extern void atn_ColliBase_destructor(void);
+extern void atn_ColliCapsule_destructor(void);
 extern void fn_8007708C(void);
 extern void fn_80084320(void);
 extern void fn_800874C8(void);
@@ -1185,7 +1185,7 @@ lbl_fn_80468D48_00000E7C:
     addic. r3, r30, 0x17a8
     beq lbl_fn_80468D48_00000E98
     li r4, 0x0
-    bl fn_80056E40
+    bl atn_ColliBase_destructor
 lbl_fn_80468D48_00000E98:
     addic. r29, r30, 0x179c
     beq lbl_fn_80468D48_00000EB8
@@ -1205,9 +1205,9 @@ lbl_fn_80468D48_00000EB8:
     li r4, 0x0
     bl atn_LoadHandle_destructor
 lbl_fn_80468D48_00000ED8:
-    lis r4, fn_80059468@ha
+    lis r4, atn_ColliCapsule_destructor@ha
     addi r3, r30, 0x15d8
-    addi r4, r4, fn_80059468@l
+    addi r4, r4, atn_ColliCapsule_destructor@l
     li r5, 0x58
     li r6, 0x5
     bl fn_806959D8

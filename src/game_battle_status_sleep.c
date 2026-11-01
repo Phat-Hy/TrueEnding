@@ -6,7 +6,7 @@ extern void _restgpr_22(void);
 extern void _savegpr_22(void);
 extern void dtor_80084684(void);
 extern void fn_80056DB8(void);
-extern void fn_80056E40(void);
+extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
 extern void fn_80058078(void);
 extern void fn_800580BC(void);
@@ -1106,7 +1106,7 @@ lbl_fn_8042B678_00000D34:
 lbl_fn_8042B678_00000D4C:
     mr r3, r31
     li r4, 0x0
-    bl fn_80056E40
+    bl atn_ColliBase_destructor
 lbl_fn_8042B678_00000D58:
     addi r3, r29, 0xf4
     li r4, -0x1

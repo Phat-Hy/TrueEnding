@@ -12,7 +12,7 @@ extern void fn_8000D9E8(void);
 extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
 extern void fn_80056DB8(void);
-extern void fn_80056E40(void);
+extern void atn_ColliBase_destructor(void);
 extern void fn_8005B3CC(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
@@ -1337,27 +1337,27 @@ lbl_fn_802A5054_0000101C:
     addic. r3, r29, 0x17ec
     beq lbl_fn_802A5054_0000102C
     li r4, 0x0
-    bl fn_80056E40
+    bl atn_ColliBase_destructor
 lbl_fn_802A5054_0000102C:
     addic. r3, r29, 0x1794
     beq lbl_fn_802A5054_0000103C
     li r4, 0x0
-    bl fn_80056E40
+    bl atn_ColliBase_destructor
 lbl_fn_802A5054_0000103C:
     addic. r3, r29, 0x173c
     beq lbl_fn_802A5054_0000104C
     li r4, 0x0
-    bl fn_80056E40
+    bl atn_ColliBase_destructor
 lbl_fn_802A5054_0000104C:
     addic. r3, r29, 0x16e4
     beq lbl_fn_802A5054_0000105C
     li r4, 0x0
-    bl fn_80056E40
+    bl atn_ColliBase_destructor
 lbl_fn_802A5054_0000105C:
     addic. r3, r29, 0x168c
     beq lbl_fn_802A5054_0000106C
     li r4, 0x0
-    bl fn_80056E40
+    bl atn_ColliBase_destructor
 lbl_fn_802A5054_0000106C:
     addic. r31, r29, 0x1654
     beq lbl_fn_802A5054_0000108C

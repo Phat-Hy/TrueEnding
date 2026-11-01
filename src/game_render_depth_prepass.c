@@ -9,7 +9,7 @@ extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
 extern void fn_8004D124(void);
 extern void fn_80056DB8(void);
-extern void fn_80059468(void);
+extern void atn_ColliCapsule_destructor(void);
 extern void fn_8005B3CC(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
@@ -433,9 +433,9 @@ lbl_fn_802B21FC_000003D8:
     lwz r3, 0x0(r29)
     bl dtor_80084684
 lbl_fn_802B21FC_000003E8:
-    lis r4, fn_80059468@ha
+    lis r4, atn_ColliCapsule_destructor@ha
     addi r3, r30, 0x1564
-    addi r4, r4, fn_80059468@l
+    addi r4, r4, atn_ColliCapsule_destructor@l
     li r5, 0x58
     li r6, 0xe
     bl fn_806959D8

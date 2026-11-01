@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void fn_8003EFB0(void);
 extern void fn_8004B290(void);
 extern void fn_8004B338(void);
-extern void fn_80056E40(void);
+extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
 extern void fn_800588FC(void);
 extern void fn_8005B9CC(void);
@@ -1714,7 +1714,7 @@ lbl_fn_803F4948_000015F4:
 lbl_fn_803F4948_00001630:
     mr r3, r31
     li r4, 0x0
-    bl fn_80056E40
+    bl atn_ColliBase_destructor
 lbl_fn_803F4948_0000163C:
     addic. r31, r29, 0x4c4
     beq lbl_fn_803F4948_00001660
@@ -1725,7 +1725,7 @@ lbl_fn_803F4948_0000163C:
 lbl_fn_803F4948_00001654:
     mr r3, r31
     li r4, 0x0
-    bl fn_80056E40
+    bl atn_ColliBase_destructor
 lbl_fn_803F4948_00001660:
     addi r3, r29, 0xf4
     li r4, -0x1

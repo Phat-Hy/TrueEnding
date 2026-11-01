@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80056E40(void);
+extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
 extern void fn_80058078(void);
 extern void fn_800580BC(void);
@@ -367,7 +367,7 @@ lbl_fn_8040DD20_0000032C:
 lbl_fn_8040DD20_00000344:
     mr r3, r31
     li r4, 0x0
-    bl fn_80056E40
+    bl atn_ColliBase_destructor
 lbl_fn_8040DD20_00000350:
     addi r3, r29, 0xf4
     li r4, -0x1
@@ -1582,7 +1582,7 @@ lbl_fn_8040EE00_00001400:
 lbl_fn_8040EE00_00001418:
     mr r3, r31
     li r4, 0x0
-    bl fn_80056E40
+    bl atn_ColliBase_destructor
 lbl_fn_8040EE00_00001424:
     addi r3, r29, 0xf4
     li r4, -0x1

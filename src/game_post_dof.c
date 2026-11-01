@@ -9,7 +9,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8003EA3C(void);
 extern void fn_80056DB8(void);
-extern void fn_80059468(void);
+extern void atn_ColliCapsule_destructor(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
@@ -967,9 +967,9 @@ lbl_fn_802C0B68_00000B5C:
     li r4, 0x0
     bl atn_LoadHandle_destructor
 lbl_fn_802C0B68_00000B7C:
-    lis r4, fn_80059468@ha
+    lis r4, atn_ColliCapsule_destructor@ha
     addi r3, r29, 0x1538
-    addi r4, r4, fn_80059468@l
+    addi r4, r4, atn_ColliCapsule_destructor@l
     li r5, 0x58
     li r6, 0xb
     bl fn_806959D8

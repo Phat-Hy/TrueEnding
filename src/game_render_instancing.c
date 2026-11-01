@@ -7,7 +7,7 @@ extern void fn_8001047C(void);
 extern void fn_80011034(void);
 extern void fn_80013338(void);
 extern void fn_8004D124(void);
-extern void fn_80059468(void);
+extern void atn_ColliCapsule_destructor(void);
 extern void fn_80097C08(void);
 extern void fn_800C344C(void);
 extern void fn_800CB3A0(void);
@@ -1764,11 +1764,11 @@ asm void fn_802AC364(void)
     lfs f0, lbl_80883F40
     li r0, 0x3c
     lis r4, fn_802AC550@ha
-    lis r5, fn_80059468@ha
+    lis r5, atn_ColliCapsule_destructor@ha
     stw r3, 0x0(r29)
     addi r3, r29, 0x1564
     addi r4, r4, fn_802AC550@l
-    addi r5, r5, fn_80059468@l
+    addi r5, r5, atn_ColliCapsule_destructor@l
     stw r31, 0x14d4(r29)
     li r6, 0x58
     li r7, 0xe

@@ -23,6 +23,52 @@ Next:     the 3-5 functions worth naming or decompiling next
 
 <!-- newest first -->
 
+### 2026-11-01 — Batch 7: atn::ColliBase, atn::ColliSphere, atn::ColliCapsule, and atn::ColliBox Collision Primitives Renames (24 functions)
+
+Numbers:  progress before -> after: 99.30 % -> 99.30 % (7,425,512 / 7,477,608 bytes, 18,054 / 18,155 functions)
+Named:
+- fn_80056E40 -> atn_ColliBase_destructor (evidence: virtual destructor slot 0 in vtable lbl_807776A0 [atn::ColliBase])
+- fn_8004CF34 -> atn_ColliBase_testRay (evidence: virtual ray intersection test slot 1 in vtable lbl_807776A0 [atn::ColliBase])
+- fn_8004D114 -> atn_ColliBase_testSphere (evidence: virtual sphere intersection test slot 2 in vtable lbl_807776A0 [atn::ColliBase])
+- fn_8004D11C -> atn_ColliBase_testCapsule (evidence: virtual capsule intersection test slot 3 in vtable lbl_807776A0 [atn::ColliBase])
+- fn_8004D310 -> atn_ColliBase_testBox (evidence: virtual box intersection test slot 4 in vtable lbl_807776A0 [atn::ColliBase])
+- fn_8004D254 -> atn_ColliBase_getAABB (evidence: virtual AABB calculation slot 5 in vtable lbl_807776A0 [atn::ColliBase])
+- fn_800593F4 -> atn_ColliSphere_destructor (evidence: virtual destructor slot 0 in vtable lbl_80777668 [atn::ColliSphere])
+- fn_80056F30 -> atn_ColliSphere_testRay (evidence: virtual ray intersection test slot 1 in vtable lbl_80777668 [atn::ColliSphere])
+- fn_80056F9C -> atn_ColliSphere_testSphere (evidence: virtual sphere intersection test slot 2 in vtable lbl_80777668 [atn::ColliSphere])
+- fn_80057008 -> atn_ColliSphere_testCapsule (evidence: virtual capsule intersection test slot 3 in vtable lbl_80777668 [atn::ColliSphere])
+- fn_80057074 -> atn_ColliSphere_testBox (evidence: virtual box intersection test slot 4 in vtable lbl_80777668 [atn::ColliSphere])
+- fn_80057094 -> atn_ColliSphere_getAABB (evidence: virtual AABB calculation slot 5 in vtable lbl_80777668 [atn::ColliSphere])
+- fn_80059468 -> atn_ColliCapsule_destructor (evidence: virtual destructor slot 0 in vtable lbl_80777630 [atn::ColliCapsule])
+- fn_80057124 -> atn_ColliCapsule_testRay (evidence: virtual ray intersection test slot 1 in vtable lbl_80777630 [atn::ColliCapsule])
+- fn_80057280 -> atn_ColliCapsule_testSphere (evidence: virtual sphere intersection test slot 2 in vtable lbl_80777630 [atn::ColliCapsule])
+- fn_800573E4 -> atn_ColliCapsule_testCapsule (evidence: virtual capsule intersection test slot 3 in vtable lbl_80777630 [atn::ColliCapsule])
+- fn_80057450 -> atn_ColliCapsule_testBox (evidence: virtual box intersection test slot 4 in vtable lbl_80777630 [atn::ColliCapsule])
+- fn_80057474 -> atn_ColliCapsule_getAABB (evidence: virtual AABB calculation slot 5 in vtable lbl_80777630 [atn::ColliCapsule])
+- fn_800594DC -> atn_ColliBox_destructor (evidence: virtual destructor slot 0 in vtable lbl_807775F8 [atn::ColliBox])
+- fn_80057BE8 -> atn_ColliBox_testRay (evidence: virtual ray intersection test slot 1 in vtable lbl_807775F8 [atn::ColliBox])
+- fn_80057C94 -> atn_ColliBox_testSphere (evidence: virtual sphere intersection test slot 2 in vtable lbl_807775F8 [atn::ColliBox])
+- fn_80057D40 -> atn_ColliBox_testCapsule (evidence: virtual capsule intersection test slot 3 in vtable lbl_807775F8 [atn::ColliBox])
+- fn_80057DEC -> atn_ColliBox_testBox (evidence: virtual box intersection test slot 4 in vtable lbl_807775F8 [atn::ColliBox])
+- fn_80057E38 -> atn_ColliBox_getAABB (evidence: virtual AABB calculation slot 5 in vtable lbl_807775F8 [atn::ColliBox])
+Decompiled: none in this unit
+Notes:
+- Decodes the complete geometric collision primitive hierarchy in `atn::`:
+  - Base class `atn::ColliBase` establishes a 6-slot virtual interface for geometric testing:
+    - Slot 0: scalar deleting destructor
+    - Slot 1: ray intersection query (`testRay`)
+    - Slot 2: sphere intersection query (`testSphere`)
+    - Slot 3: capsule intersection query (`testCapsule`)
+    - Slot 4: oriented bounding box intersection query (`testBox`)
+    - Slot 5: bounding box extraction (`getAABB`)
+  - Subclasses `atn::ColliSphere`, `atn::ColliCapsule`, and `atn::ColliBox` provide analytic intersection tests used extensively by combat targeting, camera occlusion, and actor movement logic.
+  - All 13 local `lbl_fn_*` assembly labels inside caller asm blocks were simultaneously normalized to `lbl_atn_*` across 2 source files (`src/game_mission.c`, `src/game_path.c`).
+Next:
+1. `atn_LH_Texture_constructor` (`fn_800D5738`, 120 B) and `atn_LH_Texture_destructor` (`fn_800D57B0`, 88 B) -> decompile to C in `src/game_depth.c`.
+2. `fn_800D7278` (1252 B): character texture bake (EFB copy + `GXDrawDone` + readback).
+3. Batch 8 renames in `atn::ColliObject` and `atn::ColliTree`.
+
+
 ### 2026-11-01 — Batch 6: atn::LoadModel, atn::LoadMotion, atn::Loader, BookTask, and LibraryTask Renames (20 functions)
 
 Numbers:  progress before -> after: 99.30 % -> 99.30 % (7,425,512 / 7,477,608 bytes, 18,054 / 18,155 functions)

@@ -7,7 +7,7 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_80041C0C(void);
 extern void fn_80042740(void);
-extern void fn_80056E40(void);
+extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
 extern void fn_80058078(void);
 extern void fn_800580BC(void);
@@ -1064,7 +1064,7 @@ asm void fn_8041C164(void)
 lbl_fn_8041C164_00000CCC:
     mr r3, r31
     li r4, 0x0
-    bl fn_80056E40
+    bl atn_ColliBase_destructor
 lbl_fn_8041C164_00000CD8:
     addic. r31, r29, 0x4c4
     beq lbl_fn_8041C164_00000CFC
@@ -1075,7 +1075,7 @@ lbl_fn_8041C164_00000CD8:
 lbl_fn_8041C164_00000CF0:
     mr r3, r31
     li r4, 0x0
-    bl fn_80056E40
+    bl atn_ColliBase_destructor
 lbl_fn_8041C164_00000CFC:
     addi r3, r29, 0xf4
     li r4, -0x1
