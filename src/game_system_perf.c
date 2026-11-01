@@ -7,7 +7,7 @@ extern void fn_8000FAE4(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8004FF58(void);
-extern void fn_8006AD24(void);
+extern void boss_lookupActionEntry(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -1288,7 +1288,7 @@ lbl_fn_80203A44_0000105C:
     bl actor_dispatchMessage
     mr r4, r28
     addi r3, r1, 0x24
-    bl fn_8006AD24
+    bl boss_lookupActionEntry
     lwz r0, 0x18(r1)
     srwi. r0, r0, 31
     beq lbl_fn_80203A44_000010D8

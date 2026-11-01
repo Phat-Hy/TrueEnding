@@ -21,7 +21,7 @@ extern void atn_Task_unlink(void);
 extern void cam_findTargetIndex(void);
 extern void viewport_getNextSequenceId(void);
 extern void vec3_sqMag(void);
-extern void fn_8011F8F4(void);
+extern void skill_findEntryById(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void skill_findNodeByTag(void);
@@ -758,7 +758,7 @@ lbl_fn_803A2210_000008B0:
 lbl_fn_803A2210_000008C8:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A2210_000008D4:
     mr r31, r3
     b lbl_fn_803A2210_00000930
@@ -859,7 +859,7 @@ lbl_fn_803A2378_00000A10:
 lbl_fn_803A2378_00000A28:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A2378_00000A34:
     mr r5, r3
     b lbl_fn_803A2378_00000A90
@@ -1627,7 +1627,7 @@ lbl_fn_803A2E20_000014C4:
 lbl_fn_803A2E20_000014DC:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A2E20_000014E8:
     mr r31, r3
     b lbl_fn_803A2E20_00001550
@@ -1738,7 +1738,7 @@ lbl_fn_803A2E20_0000165C:
 lbl_fn_803A2E20_00001674:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A2E20_00001680:
     mr r26, r3
     b lbl_fn_803A2E20_000016DC
@@ -1979,7 +1979,7 @@ lbl_fn_803A330C_000019A4:
 lbl_fn_803A330C_000019BC:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A330C_000019C8:
     mr r5, r3
     b lbl_fn_803A330C_00001A24

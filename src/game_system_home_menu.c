@@ -23,7 +23,7 @@ extern void fn_8004AE84(void);
 extern void fn_8004B0E4(void);
 extern void fn_8004B158(void);
 extern void fn_8004B1EC(void);
-extern void fn_80051CD8(void);
+extern void player_transformBoundingSphere(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void skill_calculateDamage(void);
@@ -1167,7 +1167,7 @@ lbl_fn_8035EA2C_00000D64:
     psq_st f1, 0x0(r26), 0, 0
     stfs f2, 0x20(r1)
     stfs f31, 0x24(r1)
-    bl fn_80051CD8
+    bl player_transformBoundingSphere
     cmpwi r3, 0x0
     beq lbl_fn_8035EA2C_00000E0C
     fmr f30, f29

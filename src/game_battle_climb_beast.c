@@ -56,10 +56,10 @@ extern void npc_getPosition(void);
 extern void fn_8013C3B4(void);
 extern void npc_isInteractionReady(void);
 extern void quest_getGlobalManager(void);
-extern void fn_80140500(void);
+extern void quest_resetActiveObjectiveSlots(void);
 extern void fn_80144ED4(void);
 extern void fn_80148334(void);
-extern void fn_801750FC(void);
+extern void battle_calcOutcomeBonus(void);
 extern void fn_80198C00(void);
 extern void bgm_getGlobalManager(void);
 extern void vec3_dot(void);
@@ -1032,7 +1032,7 @@ lbl_fn_803FA5C8_00000BA8:
     oris r30, r30, 0x8000
 lbl_fn_803FA5C8_00000C08:
     addi r3, r1, 0x190
-    bl fn_80140500
+    bl quest_resetActiveObjectiveSlots
     bl quest_getGlobalManager
     lwz r8, 0x4cc(r31)
     mr r7, r30
@@ -1711,7 +1711,7 @@ lbl_fn_803FAF8C_00001560:
     lwz r3, 0x10(r31)
     cmpwi r3, 0x0
     beq lbl_fn_803FAF8C_00001584
-    bl fn_801750FC
+    bl battle_calcOutcomeBonus
 lbl_fn_803FAF8C_00001584:
     psq_l f1, 0x14(r31), 0, 0
     lfs f2, 0x1c(r31)

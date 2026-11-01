@@ -10,7 +10,7 @@ extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB688(void);
+extern void morph_resetTargetWeight(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
 extern void actor_getMovementFlags(void);
@@ -1567,7 +1567,7 @@ lbl_fn_801C48B4_00001380:
     fdivs f5, f6, f5
     fmadds f3, f4, f5, f3
     fsubs f1, f3, f0
-    bl fn_800CB688
+    bl morph_resetTargetWeight
     lwz r0, 0x34(r31)
     cmpwi r0, 0x0
     beq lbl_fn_801C48B4_000015A0

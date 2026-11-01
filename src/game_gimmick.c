@@ -9,7 +9,7 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void atn_LH_Binary_destructor(void);
 extern void boss_triggerEventSequence(void);
-extern void fn_8006AD24(void);
+extern void boss_lookupActionEntry(void);
 extern void fn_8006BA30(void);
 extern void fn_8006BD78(void);
 extern void fn_8006F684(void);
@@ -925,7 +925,7 @@ lbl_fn_8006CABC_00000AF8:
     bl actor_dispatchMessage
     mr r4, r25
     addi r3, r1, 0x90
-    bl fn_8006AD24
+    bl boss_lookupActionEntry
     lwz r0, 0x54(r1)
     srwi. r0, r0, 31
     beq lbl_fn_8006CABC_00000B5C
@@ -1284,7 +1284,7 @@ lbl_fn_8006D0C8_00000FD0:
     bl actor_dispatchMessage
     mr r4, r16
     addi r3, r1, 0x3c
-    bl fn_8006AD24
+    bl boss_lookupActionEntry
     lwz r0, 0x30(r1)
     srwi. r0, r0, 31
     beq lbl_fn_8006D0C8_00001064

@@ -41,7 +41,7 @@ extern void res_Shader_bindParams(void);
 extern void fn_802B98B0(void);
 extern void fn_802B9C5C(void);
 extern void kpad_getClampData(void);
-extern void fn_803EEE10(void);
+extern void dungeon_findArenaNodeByCoords(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -1940,7 +1940,7 @@ lbl_fn_802B8AA4_0000196C:
     beq lbl_fn_802B8AA4_000019B4
     li r4, 0x41b
     li r5, 0x1
-    bl fn_803EEE10
+    bl dungeon_findArenaNodeByCoords
     mr r30, r3
     b lbl_fn_802B8AA4_000019B8
 lbl_fn_802B8AA4_000019B4:

@@ -46,7 +46,7 @@ extern void fn_8016C1E0(void);
 extern void actor_setState(void);
 extern void battle_resolveAggroHierarchy(void);
 extern void battle_updateTargetAggro(void);
-extern void fn_801750FC(void);
+extern void battle_calcOutcomeBonus(void);
 extern void battle_calcExpPosition(void);
 extern void actor_getMovementFlags(void);
 extern void fn_8017A33C(void);
@@ -876,7 +876,7 @@ lbl_fn_802F1240_00000984:
     cmpwi r0, 0x0
     beq lbl_fn_802F1240_00000998
     mr r3, r31
-    bl fn_801750FC
+    bl battle_calcOutcomeBonus
 lbl_fn_802F1240_00000998:
     mr r3, r31
     li r4, 0x0

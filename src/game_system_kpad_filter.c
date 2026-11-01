@@ -28,7 +28,7 @@ extern void party_evalTacticCondition(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void battle_applyStatusEffect(void);
-extern void fn_801750FC(void);
+extern void battle_calcOutcomeBonus(void);
 extern void battle_updateActorStatus(void);
 extern void fn_801E97DC(void);
 extern void thread_findAndNotify(void);
@@ -46,7 +46,7 @@ extern void fn_803731E8(void);
 extern void fn_80378CAC(void);
 extern void fn_80378CCC(void);
 extern void fn_8037D49C(void);
-extern void fn_80389838(void);
+extern void nwc24_transitionDataState(void);
 extern void fn_803903E0(void);
 extern void fn_803CDAE4(void);
 extern void fn_803CDB64(void);
@@ -349,7 +349,7 @@ lbl_fn_80373FC4_00000218:
     psq_st f1, 0x0(r26), 0, 0
     stfs f2, 0x14(r1)
     stw r8, 0x950(r31)
-    bl fn_80389838
+    bl nwc24_transitionDataState
     lfs f0, 0x10(r1)
     mr r4, r27
     addi r3, r31, 0x6c
@@ -647,7 +647,7 @@ asm void fn_80374710(void)
     addi r3, r3, 0x6c
     lwz r5, lbl_8087F8A0
     lwz r31, 0x48(r5)
-    bl fn_80389838
+    bl nwc24_transitionDataState
     psq_l f1, 0x528(r31), 0, 0
     addi r3, r1, 0x8
     lfs f2, 0x530(r31)
@@ -782,7 +782,7 @@ asm void fn_803748E0(void)
     mr r30, r3
     lwz r4, 0x870(r3)
     addi r3, r3, 0x6c
-    bl fn_80389838
+    bl nwc24_transitionDataState
     li r0, 0x0
     stw r0, 0x954(r30)
     cmpwi r31, 0x0
@@ -1067,7 +1067,7 @@ lbl_fn_80374964_00000D50:
     stb r30, 0x4e(r3)
 lbl_fn_80374964_00000D70:
     mr r3, r31
-    bl fn_801750FC
+    bl battle_calcOutcomeBonus
     lwz r0, 0x55c(r31)
     cmpwi r0, 0x6
     bne lbl_fn_80374964_00000D9C

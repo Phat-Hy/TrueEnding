@@ -35,7 +35,7 @@ extern void thread_dispatchToQueue(void);
 extern void world_setGlobalFlag(void);
 extern void world_advanceChapter(void);
 extern void fn_80377298(void);
-extern void fn_80389838(void);
+extern void nwc24_transitionDataState(void);
 extern void fn_803903E0(void);
 extern void fn_80392C94(void);
 extern void fn_80392CE0(void);
@@ -1675,7 +1675,7 @@ lbl_fn_803786FC_000015EC:
     bl fn_80392C94
     lwz r3, 0x368(r30)
     li r4, 0x6
-    bl fn_80389838
+    bl nwc24_transitionDataState
     lwz r3, 0x368(r30)
     mr r4, r29
     lfs f1, lbl_80885868

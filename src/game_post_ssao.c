@@ -37,7 +37,7 @@ extern void fn_802D67F8(void);
 extern void fn_802D7058(void);
 extern void world_setGlobalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_80389838(void);
+extern void nwc24_transitionDataState(void);
 extern void fn_805991E4(void);
 extern void world_setFlagByType(void);
 extern void PSMTXRotRad(void);
@@ -1841,7 +1841,7 @@ lbl_fn_802D52A0_000018C8:
     lwz r3, lbl_8087F430
     addi r3, r3, 0x6c
     lwz r4, 0x804(r3)
-    bl fn_80389838
+    bl nwc24_transitionDataState
     lwz r7, lbl_8087EFA8
     li r0, 0x0
     lfs f0, lbl_8088458C

@@ -10,7 +10,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_27(void);
 extern void fn_8004FF58(void);
 extern void fn_800502A8(void);
-extern void fn_80051CD8(void);
+extern void player_transformBoundingSphere(void);
 extern void fn_800629F0(void);
 extern void fn_80062F7C(void);
 extern void fn_80063200(void);
@@ -446,7 +446,7 @@ lbl_fn_803C2090_0000044C:
     fadds f0, f0, f8
     stfs f31, 0x14(r1)
     stfs f0, 0xc(r1)
-    bl fn_80051CD8
+    bl player_transformBoundingSphere
     cmpwi r3, 0x0
     beq lbl_fn_803C2090_00000530
     addi r3, r23, 0x18

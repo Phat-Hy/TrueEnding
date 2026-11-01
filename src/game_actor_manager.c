@@ -19,7 +19,7 @@ extern void msg_formatWindowLayout(void);
 extern void msg_isWindowActive(void);
 extern void proj_getGlobalManager(void);
 extern void fn_800F7260(void);
-extern void fn_800F8524(void);
+extern void math_lerpf(void);
 extern void fn_8010F6FC(void);
 extern void fn_80112220(void);
 extern void phys_scaleGravity(void);
@@ -1709,7 +1709,7 @@ lbl_fn_801162A4_0000168C:
 lbl_fn_801162A4_000016B4:
     la r3, lbl_8087D980
     la r4, lbl_8087D984
-    bl fn_800F8524
+    bl math_lerpf
     fmr f30, f1
     lfs f1, lbl_80881708
     bl phys_scaleGravity
@@ -1868,7 +1868,7 @@ lbl_fn_801162A4_0000188C:
     fmr f1, f29
     addi r3, r1, 0xc
     addi r4, r1, 0x8
-    bl fn_800F8524
+    bl math_lerpf
     mr r3, r29
     bl fn_80116BB8
 lbl_fn_801162A4_00001924:

@@ -56,7 +56,7 @@ extern void fn_802E177C(void);
 extern void fn_802E1A0C(void);
 extern void fn_802E5B30(void);
 extern void world_setLocalFlag(void);
-extern void fn_803EEE10(void);
+extern void dungeon_findArenaNodeByCoords(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
@@ -1560,7 +1560,7 @@ lbl_fn_802DEE28_000013F4:
     lwz r3, lbl_8087F4A0
     li r4, 0x6dd6
     lwzx r5, r5, r0
-    bl fn_803EEE10
+    bl dungeon_findArenaNodeByCoords
     cmpwi r3, 0x0
     beq lbl_fn_802DEE28_000014F8
     lfs f0, lbl_8088467C
@@ -1596,7 +1596,7 @@ lbl_fn_802DEE28_00001480:
     li r4, 0x6dd6
     lwz r3, lbl_8087F4A0
     lwzx r5, r5, r26
-    bl fn_803EEE10
+    bl dungeon_findArenaNodeByCoords
     cmpwi r3, 0x0
     beq lbl_fn_802DEE28_000014E4
     cmplw r27, r28

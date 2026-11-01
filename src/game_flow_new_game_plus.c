@@ -32,7 +32,7 @@ extern void fn_8015076C(void);
 extern void party_configureMemberSlot(void);
 extern void fn_801681B0(void);
 extern void fn_8016D0A0(void);
-extern void fn_801750FC(void);
+extern void battle_calcOutcomeBonus(void);
 extern void event_findEntryById(void);
 extern void task_findEntryById(void);
 extern void fn_8021A684(void);
@@ -838,7 +838,7 @@ lbl_fn_804EFF78_00000A40:
     addi r25, r25, lbl_807C6BB8@l
     mr r3, r26
     stw r31, 0xc(r25)
-    bl fn_801750FC
+    bl battle_calcOutcomeBonus
     lbz r0, lbl_8087EE74
     extsb. r0, r0
     bne lbl_fn_804EFF78_00000A94

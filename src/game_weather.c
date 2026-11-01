@@ -31,7 +31,7 @@ extern void magic_dispatchActionCommand(void);
 extern void fn_801237F0(void);
 extern void player_evaluateStatusCondition(void);
 extern void fn_8012F3D8(void);
-extern void fn_80134134(void);
+extern void boss_findPartById(void);
 extern void fn_801346C8(void);
 extern void fn_80152D10(void);
 extern void inventory_unequipItem(void);
@@ -927,7 +927,7 @@ asm void fn_800E7BB0(void)
 lbl_fn_800E7BB0_00000B48:
     li r4, 0xd
     addi r3, r3, 0x7d4
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     beq lbl_fn_800E7BB0_00000B64
     li r31, 0x179b
@@ -935,7 +935,7 @@ lbl_fn_800E7BB0_00000B48:
 lbl_fn_800E7BB0_00000B64:
     addi r3, r30, 0x7d4
     li r4, 0x29
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     beq lbl_fn_800E7BB0_00000B80
     li r31, 0x177b

@@ -47,7 +47,7 @@ void player_stepMovement(void);
 void fn_80051BC4(void);
 void fn_80051C10(void);
 void fn_80051C78(void);
-void fn_80051CD8(void);
+void player_transformBoundingSphere(void);
 void fn_80051E90(void);
 void fn_800520F0(void);
 void fn_800523A0(void);
@@ -2117,7 +2117,7 @@ asm void fn_80051C78(void)
     blr
 }
 
-asm void fn_80051CD8(void)
+asm void player_transformBoundingSphere(void)
 {
     nofralloc
     stwu r1, -0x90(r1)
@@ -2186,40 +2186,40 @@ asm void fn_80051CD8(void)
     stfs f8, 0x10(r1)
     psq_st f1, 0x0(r5), 0, 0
     stfs f2, 0x44(r1)
-    ble lbl_fn_80051CD8_00001E94
+    ble lbl_player_transformBoundingSphere_00001E94
     li r3, 0x0
-    b lbl_fn_80051CD8_00001F18
-lbl_fn_80051CD8_00001E94:
+    b lbl_player_transformBoundingSphere_00001F18
+lbl_player_transformBoundingSphere_00001E94:
     lfs f9, 0x24(r1)
     lfs f7, 0x34(r1)
     fadds f0, f9, f10
     fcmpo cr0, f7, f0
-    ble lbl_fn_80051CD8_00001EB0
+    ble lbl_player_transformBoundingSphere_00001EB0
     li r3, 0x0
-    b lbl_fn_80051CD8_00001F18
-lbl_fn_80051CD8_00001EB0:
+    b lbl_player_transformBoundingSphere_00001F18
+lbl_player_transformBoundingSphere_00001EB0:
     lfs f8, 0x28(r1)
     lfs f7, 0x38(r1)
     fadds f0, f8, f10
     fcmpo cr0, f7, f0
-    ble lbl_fn_80051CD8_00001ECC
+    ble lbl_player_transformBoundingSphere_00001ECC
     li r3, 0x0
-    b lbl_fn_80051CD8_00001F18
-lbl_fn_80051CD8_00001ECC:
+    b lbl_player_transformBoundingSphere_00001F18
+lbl_player_transformBoundingSphere_00001ECC:
     fsubs f0, f11, f10
     lfs f7, 0x3c(r1)
     fcmpo cr0, f7, f0
-    bge lbl_fn_80051CD8_00001EE4
+    bge lbl_player_transformBoundingSphere_00001EE4
     li r3, 0x0
-    b lbl_fn_80051CD8_00001F18
-lbl_fn_80051CD8_00001EE4:
+    b lbl_player_transformBoundingSphere_00001F18
+lbl_player_transformBoundingSphere_00001EE4:
     fsubs f0, f9, f10
     lfs f7, 0x40(r1)
     fcmpo cr0, f7, f0
-    bge lbl_fn_80051CD8_00001EFC
+    bge lbl_player_transformBoundingSphere_00001EFC
     li r3, 0x0
-    b lbl_fn_80051CD8_00001F18
-lbl_fn_80051CD8_00001EFC:
+    b lbl_player_transformBoundingSphere_00001F18
+lbl_player_transformBoundingSphere_00001EFC:
     frsp f7, f2
     fsubs f0, f8, f10
     fcmpo cr0, f7, f0
@@ -2227,7 +2227,7 @@ lbl_fn_80051CD8_00001EFC:
     srwi r0, r0, 31
     cntlzw r0, r0
     srwi r3, r0, 5
-lbl_fn_80051CD8_00001F18:
+lbl_player_transformBoundingSphere_00001F18:
     lwz r0, 0x94(r1)
     lwz r31, 0x8c(r1)
     lwz r30, 0x88(r1)

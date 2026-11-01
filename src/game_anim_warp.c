@@ -33,7 +33,7 @@ extern void fn_8010EDFC(void);
 extern void vec3_sqMag(void);
 extern void enemy_updateAnimTimer(void);
 extern void quest_getGlobalManager(void);
-extern void fn_80140500(void);
+extern void quest_resetActiveObjectiveSlots(void);
 extern void quest_updateFlow(void);
 extern void fn_801479E4(void);
 extern void equip_applyToCharacter(void);
@@ -1714,7 +1714,7 @@ lbl_fn_80279280_0000174C:
     cmpwi r29, 0x0
     bne lbl_fn_80279280_0000160C
     addi r3, r1, 0x128
-    bl fn_80140500
+    bl quest_resetActiveObjectiveSlots
     bl quest_getGlobalManager
     lwz r7, 0x1900(r31)
     addi r4, r1, 0x128

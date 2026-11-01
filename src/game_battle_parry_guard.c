@@ -32,7 +32,7 @@ extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void str_skipWhitespace(void);
-extern void fn_8011F8F4(void);
+extern void skill_findEntryById(void);
 extern void skill_findNodeById(void);
 extern void quest_evaluateConditions(void);
 extern void quest_checkCondition(void);
@@ -251,7 +251,7 @@ lbl_fn_80412968_00000178:
 lbl_fn_80412968_00000194:
     lwz r3, lbl_8087F8A0
     mr r4, r30
-    bl fn_8011F8F4
+    bl skill_findEntryById
     cmpwi r3, 0x0
     stw r3, 0x698(r29)
     beq lbl_fn_80412968_00000228

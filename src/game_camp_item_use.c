@@ -13,7 +13,7 @@ extern void atn_LH_Binary_destructor(void);
 extern void fn_8004318C(void);
 extern void fn_800431F4(void);
 extern void boss_triggerEventSequence(void);
-extern void fn_8006AD24(void);
+extern void boss_lookupActionEntry(void);
 extern void boss_parseStateCondition(void);
 extern void gmk_LoadHandle_constructor(void);
 extern void mem_alloc(void);
@@ -782,7 +782,7 @@ lbl_fn_803BEC40_0000090C:
     bl actor_dispatchMessage
     mr r3, r22
     mr r4, r24
-    bl fn_8006AD24
+    bl boss_lookupActionEntry
     lwz r0, 0x68(r1)
     srwi. r0, r0, 31
     beq lbl_fn_803BEC40_000009D8
@@ -849,7 +849,7 @@ lbl_fn_803BEC40_000009F4:
     bl actor_dispatchMessage
     mr r3, r22
     mr r4, r24
-    bl fn_8006AD24
+    bl boss_lookupActionEntry
     lwz r0, 0x5c(r1)
     srwi. r0, r0, 31
     beq lbl_fn_803BEC40_00000AD8

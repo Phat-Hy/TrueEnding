@@ -29,7 +29,7 @@ extern void fn_800FBA9C(void);
 extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void quest_getGlobalManager(void);
-extern void fn_80140500(void);
+extern void quest_resetActiveObjectiveSlots(void);
 extern void quest_initMarkerCoords(void);
 extern void shop_loadCatalogItem(void);
 extern void fn_80158E1C(void);
@@ -1064,7 +1064,7 @@ lbl_fn_8031958C_00000D38:
     bl viewport_updateCulling
 lbl_fn_8031958C_00000D8C:
     addi r3, r1, 0x180
-    bl fn_80140500
+    bl quest_resetActiveObjectiveSlots
     addi r3, r1, 0xcc
     addi r4, r31, 0x528
     bl vec3_assign

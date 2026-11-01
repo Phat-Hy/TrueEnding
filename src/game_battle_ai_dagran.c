@@ -9,7 +9,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_17(void);
 extern void _savegpr_20(void);
 extern void dtor_80084684(void);
-extern void fn_80051CD8(void);
+extern void player_transformBoundingSphere(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
@@ -462,7 +462,7 @@ lbl_fn_80432FF8_00000434:
     stfs f8, 0x1c(r1)
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0x98(r1)
-    bl fn_80051CD8
+    bl player_transformBoundingSphere
     cmpwi r3, 0x0
     beq lbl_fn_80432FF8_00000548
     lwz r0, 0x14(r23)

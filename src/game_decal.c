@@ -31,7 +31,7 @@ extern void fn_8011E81C(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_801237F0(void);
 extern void player_evaluateStatusCondition(void);
-extern void fn_80134134(void);
+extern void boss_findPartById(void);
 extern void npc_calcTargetDistance(void);
 extern void quest_evaluateConditions(void);
 extern void fn_80155790(void);
@@ -1564,7 +1564,7 @@ lbl_fn_800E62AC_00001434:
     beq lbl_fn_800E62AC_000017C8
     addi r3, r25, 0x7d4
     li r4, 0x2e
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     bne lbl_fn_800E62AC_000017C8
     lwz r0, 0x5674(r26)

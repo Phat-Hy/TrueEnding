@@ -9,7 +9,7 @@ extern void _savegpr_23(void);
 extern void mem_alloc(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB688(void);
+extern void morph_resetTargetWeight(void);
 extern void wcs_parseInt(void);
 extern void wcs_vformat(void);
 extern void fn_8017A450(void);
@@ -734,7 +734,7 @@ lbl_fn_8054D798_00000684:
 lbl_fn_8054D798_00000688:
     addi r3, r1, 0x8
     li r4, 0x0
-    bl fn_800CB688
+    bl morph_resetTargetWeight
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

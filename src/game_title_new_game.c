@@ -16,7 +16,7 @@ extern void item_testLineOfSight(void);
 extern void atn_Model_findBoneIndex(void);
 extern void motion_updateFogAdj(void);
 extern void ref_releaseHandle(void);
-extern void fn_8011F8F4(void);
+extern void skill_findEntryById(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void skill_findNodeByTag(void);
@@ -781,7 +781,7 @@ lbl_fn_803AEA24_000009A0:
 lbl_fn_803AEA24_000009B8:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803AEA24_000009C4:
     mr r5, r3
     b lbl_fn_803AEA24_00000A20

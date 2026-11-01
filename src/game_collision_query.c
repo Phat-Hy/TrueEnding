@@ -17,7 +17,7 @@ extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB518(void);
-extern void fn_800CB688(void);
+extern void morph_resetTargetWeight(void);
 extern void fn_800EFBC4(void);
 extern void fn_800EFE3C(void);
 extern void fn_800F72F4(void);
@@ -1164,7 +1164,7 @@ lbl_fn_801061BC_00000EAC:
 lbl_fn_801061BC_00000EB4:
     addi r3, r1, 0x28
     li r4, 0x0
-    bl fn_800CB688
+    bl morph_resetTargetWeight
     addi r3, r1, 0x28
     li r4, 0xa
     bl fn_800CB518

@@ -119,7 +119,7 @@ void fn_800F84BC(void);
 void fn_800F84C8(void);
 void fn_800F84D0(void);
 void fn_800F84D8(void);
-void fn_800F8524(void);
+void math_lerpf(void);
 void fn_800F8538(void);
 void fn_800F8544(void);
 s32 system_getNextSequenceId(s32* obj);
@@ -601,7 +601,7 @@ lbl_fn_800F72F4_00000668:
     fmr f1, f28
     fdivs f0, f2, f0
     stfs f0, 0x24(r1)
-    bl fn_800F8524
+    bl math_lerpf
     stfs f1, 0x24(r1)
     addi r3, r1, 0x1a4
     bl viewport_getNextSequenceId
@@ -1522,7 +1522,7 @@ asm void fn_800F84D8(void)
     blr
 }
 
-asm void fn_800F8524(void)
+asm void math_lerpf(void)
 {
     nofralloc
     lfs f0, 0x0(r4)

@@ -15,7 +15,7 @@ extern void quest_evaluateMilestoneData(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
 extern void debuff_clearStatus(void);
-extern void fn_801750FC(void);
+extern void battle_calcOutcomeBonus(void);
 extern void fn_801B2EDC(void);
 extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
@@ -452,7 +452,7 @@ lbl_fn_8019905C_00000548:
     cmpwi r0, 0x0
     beq lbl_fn_8019905C_000005CC
     lwz r31, 0x1208(r3)
-    bl fn_801750FC
+    bl battle_calcOutcomeBonus
     lfs f0, lbl_80881FCC
     li r6, 0x0
     li r5, 0x6

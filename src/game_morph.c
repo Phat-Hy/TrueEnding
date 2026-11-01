@@ -102,7 +102,7 @@ void morph_updateMesh(void);
 void fn_800CB640(void);
 void fn_800CB654(void);
 void fn_800CB668(void);
-void fn_800CB688(void);
+void morph_resetTargetWeight(void);
 void fn_800CB69C(void);
 void fn_800CB6B0(void);
 void fn_800CB6C4(void);
@@ -1604,7 +1604,7 @@ asm void fn_800CB668(void)
     blr
 }
 
-asm void fn_800CB688(void)
+asm void morph_resetTargetWeight(void)
 {
     nofralloc
     lwz r3, 0x0(r3)

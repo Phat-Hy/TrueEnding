@@ -23,7 +23,7 @@ extern void morph_updateMesh(void);
 extern void proj_getMatrix(void);
 extern void fn_800F7260(void);
 extern void viewport_getNextSequenceId(void);
-extern void fn_800F8524(void);
+extern void math_lerpf(void);
 extern void fn_80112958(void);
 extern void fn_80112960(void);
 extern void fn_80113CCC(void);
@@ -1590,7 +1590,7 @@ lbl_fn_8052D46C_000014E4:
     lfs f1, lbl_80887B14
     addi r3, r31, 0x12d0
     la r4, lbl_8087E4A8
-    bl fn_800F8524
+    bl math_lerpf
     stfs f1, 0x12d0(r31)
     frsp f1, f1
     addi r3, r1, 0x11c

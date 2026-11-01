@@ -16,7 +16,7 @@ extern void clip_calculateFrustum(void);
 extern void fn_800FBA9C(void);
 extern void fn_800FC410(void);
 extern void fn_80133EE8(void);
-extern void fn_80134134(void);
+extern void boss_findPartById(void);
 extern void quest_getRewardItemSlot(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -771,7 +771,7 @@ lbl_scissor_clipFrustum_00000994:
     bne lbl_scissor_clipFrustum_00000A74
     addi r3, r16, 0x7d4
     li r4, 0x28
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     beq lbl_scissor_clipFrustum_00000AD4
 lbl_scissor_clipFrustum_00000A74:
@@ -808,7 +808,7 @@ lbl_scissor_clipFrustum_00000AD4:
     bne lbl_scissor_clipFrustum_00000AFC
     addi r3, r16, 0x7d4
     li r4, 0x2f
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     beq lbl_scissor_clipFrustum_00000B5C
 lbl_scissor_clipFrustum_00000AFC:
@@ -845,7 +845,7 @@ lbl_scissor_clipFrustum_00000B5C:
     bne lbl_scissor_clipFrustum_00000B84
     addi r3, r16, 0x7d4
     li r4, 0x32
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     beq lbl_scissor_clipFrustum_00000D78
 lbl_scissor_clipFrustum_00000B84:

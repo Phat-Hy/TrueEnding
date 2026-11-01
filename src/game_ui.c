@@ -33,7 +33,7 @@ extern void fn_80133EE8(void);
 extern void fn_80133F18(void);
 extern void fn_80133F6C(void);
 extern void fn_80133FBC(void);
-extern void fn_80134134(void);
+extern void boss_findPartById(void);
 extern void fn_80134168(void);
 extern void fn_80156120(void);
 extern void fn_8016ADF4(void);
@@ -1706,7 +1706,7 @@ lbl_fn_8003F538_000015AC:
 lbl_fn_8003F538_000015E8:
     mr r3, r25
     li r4, 0x2d
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     beq lbl_fn_8003F538_00001660
     mr r3, r25
@@ -1739,7 +1739,7 @@ lbl_fn_8003F538_0000162C:
 lbl_fn_8003F538_00001660:
     mr r3, r25
     li r4, 0x45
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     beq lbl_fn_8003F538_00001700
     mr r3, r25
@@ -3493,12 +3493,12 @@ lbl_fn_800413EC_00002E74:
 lbl_fn_800413EC_00002E90:
     addi r3, r27, 0x7d4
     li r4, 0xc
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     beq lbl_fn_800413EC_00002EEC
     addi r3, r27, 0x7d4
     li r4, 0xc
-    bl fn_80134134
+    bl boss_findPartById
     mr r29, r3
     bl rand
     lis r5, 0x51ec
@@ -3767,12 +3767,12 @@ lbl_fn_800417E8_00003230:
 lbl_fn_800417E8_00003278:
     addi r3, r29, 0x7d4
     li r4, 0xc
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     beq lbl_fn_800417E8_000032D4
     addi r3, r29, 0x7d4
     li r4, 0xc
-    bl fn_80134134
+    bl boss_findPartById
     mr r27, r3
     bl rand
     lis r5, 0x51ec

@@ -43,7 +43,7 @@ extern void fn_803786FC(void);
 extern void fn_803792F0(void);
 extern void fn_8037C690(void);
 extern void dvd_showDiskErrorDialog(void);
-extern void fn_80389838(void);
+extern void nwc24_transitionDataState(void);
 extern void fn_803AB96C(void);
 extern void fn_803B57B0(void);
 extern void fn_803B57EC(void);
@@ -1475,7 +1475,7 @@ lbl_fn_80371334_000012A8:
     bl battle_applyStatusEffect
     lwz r4, 0x870(r31)
     addi r3, r31, 0x6c
-    bl fn_80389838
+    bl nwc24_transitionDataState
 lbl_fn_80371334_00001300:
     lwz r3, lbl_8087F4E8
     li r30, 0x0

@@ -5,7 +5,7 @@
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_80051CD8(void);
+extern void player_transformBoundingSphere(void);
 extern void path_Object_constructor(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_800575BC(void);
@@ -475,7 +475,7 @@ lbl_fn_8042C5AC_0000040C:
     addi r4, r31, 0x500
     fsubs f0, f0, f30
     stfs f0, 0x24(r1)
-    bl fn_80051CD8
+    bl player_transformBoundingSphere
     cmpwi r3, 0x0
     beq lbl_fn_8042C5AC_00000490
     li r29, 0x1

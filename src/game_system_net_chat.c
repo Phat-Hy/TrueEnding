@@ -23,7 +23,7 @@ extern void fn_800EFDA0(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void hurtbox_processHitDamage(void);
-extern void fn_8011F8F4(void);
+extern void skill_findEntryById(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void skill_findNodeByTag(void);
@@ -818,7 +818,7 @@ lbl_fn_803A3D20_00000934:
 lbl_fn_803A3D20_0000094C:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A3D20_00000958:
     mr r4, r3
     b lbl_fn_803A3D20_000009C0
@@ -1413,7 +1413,7 @@ lbl_fn_803A4568_00001178:
 lbl_fn_803A4568_00001190:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A4568_0000119C:
     mr r29, r3
     b lbl_fn_803A4568_000011F8
@@ -2116,7 +2116,7 @@ lbl_fn_803A4A7C_00001B64:
 lbl_fn_803A4A7C_00001B7C:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A4A7C_00001B88:
     mr r21, r3
     b lbl_fn_803A4A7C_00001BE4

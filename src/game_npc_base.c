@@ -39,7 +39,7 @@ extern void fn_801698E4(void);
 extern void fn_8016BBCC(void);
 extern void actor_setState(void);
 extern void fn_80171F3C(void);
-extern void fn_801750FC(void);
+extern void battle_calcOutcomeBonus(void);
 extern void fn_80178018(void);
 extern void fn_80178078(void);
 extern void battle_generateLootDrops(void);
@@ -221,7 +221,7 @@ lbl_npc_calcTargetDistance_00000124:
     cmpwi r3, 0x0
     beq lbl_npc_calcTargetDistance_00000160
     mr r3, r31
-    bl fn_801750FC
+    bl battle_calcOutcomeBonus
     b lbl_npc_calcTargetDistance_00000700
 lbl_npc_calcTargetDistance_00000160:
     bl proj_getGlobalManager

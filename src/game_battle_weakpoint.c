@@ -20,7 +20,7 @@ extern void clip_calculateFrustum(void);
 extern void fn_8016D3F8(void);
 extern void fn_80170F20(void);
 extern void fn_80174E04(void);
-extern void fn_801750FC(void);
+extern void battle_calcOutcomeBonus(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_unload(void);
@@ -171,7 +171,7 @@ asm void fn_803FB800(void)
     cmpwi r0, 0x0
     beq lbl_fn_803FB800_00000098
     mr r3, r4
-    b fn_801750FC
+    b battle_calcOutcomeBonus
 lbl_fn_803FB800_00000098:
     mr r3, r4
     mr r4, r5

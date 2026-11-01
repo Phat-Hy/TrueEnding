@@ -40,7 +40,7 @@ extern void fn_800F7F90(void);
 extern void fn_800F7FB4(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_800F84BC(void);
-extern void fn_800F8524(void);
+extern void math_lerpf(void);
 extern void fn_8010D320(void);
 extern void fn_8010F6FC(void);
 extern void phys_scaleGravity(void);
@@ -802,7 +802,7 @@ lbl_fn_803D2A6C_0000076C:
     la r3, lbl_8087DEE8
     la r4, lbl_8087DEEC
     fmuls f1, f0, f1
-    bl fn_800F8524
+    bl math_lerpf
     lfs f2, 0x4c(r24)
     lfs f0, lbl_80885D58
     fsubs f26, f1, f2
@@ -1132,7 +1132,7 @@ lbl_fn_803D2A6C_00000B90:
     addi r3, r1, 0x10
     lfs f1, lbl_80885E28
     addi r4, r1, 0x14
-    bl fn_800F8524
+    bl math_lerpf
     stfs f1, 0x14(r1)
     frsp f1, f1
     addi r4, r21, 0x10b8

@@ -21,7 +21,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D94F8(void);
 extern void fn_800F7260(void);
-extern void fn_800F8524(void);
+extern void math_lerpf(void);
 extern void fn_8010D98C(void);
 extern void fn_80112254(void);
 extern void fn_801856A4(void);
@@ -1866,7 +1866,7 @@ asm void fn_8047CB74(void)
     mr r4, r3
     addi r3, r27, 0x70
     addi r4, r4, 0x24
-    bl fn_800F8524
+    bl math_lerpf
     fmr f31, f1
     mr r3, r28
     bl fn_8047C780

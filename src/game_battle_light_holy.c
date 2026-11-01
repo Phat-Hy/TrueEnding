@@ -29,7 +29,7 @@ extern void skin_applyWeights(void);
 extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
-extern void fn_800CB688(void);
+extern void morph_resetTargetWeight(void);
 extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
@@ -1559,7 +1559,7 @@ lbl_fn_80421628_00001304:
     fdivs f3, f4, f3
     fmsubs f1, f2, f3, f1
     fadds f1, f0, f1
-    bl fn_800CB688
+    bl morph_resetTargetWeight
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

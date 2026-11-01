@@ -35,7 +35,7 @@ extern void res_registerResource(void);
 extern void wpad_getActiveDevice(void);
 extern void world_setGlobalFlag(void);
 extern void kpad_testActiveFlags(void);
-extern void fn_80389838(void);
+extern void nwc24_transitionDataState(void);
 extern void world_setFlagByType(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
@@ -353,7 +353,7 @@ lbl_fn_802D57B8_00000394:
     addi r3, r3, 0x6c
     stfs f0, 0xd8(r1)
     stw r0, 0xdc(r1)
-    bl fn_80389838
+    bl nwc24_transitionDataState
     lwz r10, lbl_8087EFA8
     li r0, 0x1
     lfs f0, lbl_80884558

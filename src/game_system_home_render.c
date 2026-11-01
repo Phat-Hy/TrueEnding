@@ -11,7 +11,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_80051CD8(void);
+extern void player_transformBoundingSphere(void);
 extern void fn_8005454C(void);
 extern void talk_parseQuotedString(void);
 extern void talk_formatQuotedString(void);
@@ -1088,7 +1088,7 @@ asm void fn_80362928(void)
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x58(r1)
     stfs f0, 0x5c(r1)
-    bl fn_80051CD8
+    bl player_transformBoundingSphere
     cmpwi r3, 0x0
     beq lbl_fn_80362928_00000D60
     lwz r3, 0x50(r30)

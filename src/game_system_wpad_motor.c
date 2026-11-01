@@ -93,7 +93,7 @@ extern void fn_8037D3E8(void);
 extern void fn_8037D684(void);
 extern void fat_dispatchFsRequest(void);
 extern void fn_8037F744(void);
-extern void fn_80389838(void);
+extern void nwc24_transitionDataState(void);
 extern void fn_8038F52C(void);
 extern void fn_80390A88(void);
 extern void fn_803933A4(void);
@@ -693,7 +693,7 @@ lbl_world_Manager_draw_00000620:
     stw r0, 0x950(r28)
     addi r3, r28, 0x6c
     li r4, 0x0
-    bl fn_80389838
+    bl nwc24_transitionDataState
 lbl_world_Manager_draw_00000650:
     lwz r3, lbl_8087F048
     li r4, 0x1
@@ -1878,7 +1878,7 @@ lbl_world_Manager_draw_000016E4:
 lbl_world_Manager_draw_00001770:
     lwz r4, 0x870(r28)
     addi r3, r28, 0x6c
-    bl fn_80389838
+    bl nwc24_transitionDataState
     li r4, 0x0
     stw r4, 0x954(r28)
     lwz r3, lbl_8087F8A0

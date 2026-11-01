@@ -33,7 +33,7 @@ extern void fn_8036FC58(void);
 extern void world_setGlobalFlag(void);
 extern void fn_8037C69C(void);
 extern void fat_dispatchFsRequest(void);
-extern void fn_80389838(void);
+extern void nwc24_transitionDataState(void);
 extern void fn_8038F52C(void);
 extern void fn_8039328C(void);
 extern void fn_803C0F48(void);
@@ -1656,7 +1656,7 @@ lbl_fn_8036CA60_00001670:
 lbl_fn_8036CA60_0000167C:
     lwz r4, 0x870(r29)
     addi r3, r29, 0x6c
-    bl fn_80389838
+    bl nwc24_transitionDataState
     lfs f1, lbl_80885744
     addi r3, r29, 0x6c
     li r4, 0x1

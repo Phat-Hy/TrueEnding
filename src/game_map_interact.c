@@ -25,7 +25,7 @@ extern void fn_800C1A1C(void);
 extern void fn_800C1FB4(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB688(void);
+extern void morph_resetTargetWeight(void);
 extern void atn_Task_destructor(void);
 extern void bloom_processPasses(void);
 extern void fn_800D8814(void);
@@ -1117,7 +1117,7 @@ lbl_fn_80184548_00000C50:
     fdivs f5, f6, f5
     fmsubs f3, f4, f5, f3
     fadds f1, f0, f3
-    bl fn_800CB688
+    bl morph_resetTargetWeight
 lbl_fn_80184548_00000CE8:
     addi r3, r1, 0x8
     li r4, -0x1

@@ -71,7 +71,7 @@ void fn_803893A0(void);
 void fn_8038952C(void);
 void fn_80389678(void);
 void fn_803897EC(void);
-void fn_80389838(void);
+void nwc24_transitionDataState(void);
 void fn_80389884(void);
 void fn_80389A00(void);
 void fn_8038A1B8(void);
@@ -614,7 +614,7 @@ asm void fn_803897EC(void)
     blr
 }
 
-asm void fn_80389838(void)
+asm void nwc24_transitionDataState(void)
 {
     nofralloc
     lwz r0, 0x7fc(r3)

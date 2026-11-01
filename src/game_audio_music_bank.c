@@ -31,7 +31,7 @@ extern void fn_800F7250(void);
 extern void vec3_normalize(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_800F8348(void);
-extern void fn_800F8524(void);
+extern void math_lerpf(void);
 extern void vec3_sqMag(void);
 extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
@@ -1372,7 +1372,7 @@ lbl_fn_8030B74C_000011AC:
     fmr f1, f29
     addi r3, r1, 0xc
     addi r4, r1, 0x8
-    bl fn_800F8524
+    bl math_lerpf
     fneg f4, f1
     lfs f1, lbl_80884C14
     lfs f3, 0x15d0(r30)

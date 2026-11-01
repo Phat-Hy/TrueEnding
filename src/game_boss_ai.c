@@ -11,7 +11,7 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void path_Object_constructor(void);
 extern void boss_recordDamage(void);
-extern void fn_8006AD24(void);
+extern void boss_lookupActionEntry(void);
 extern void fn_8007A75C(void);
 extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
@@ -1724,7 +1724,7 @@ lbl_fn_801354B4_0000164C:
     bl actor_dispatchMessage
     mr r4, r24
     addi r3, r1, 0x5c
-    bl fn_8006AD24
+    bl boss_lookupActionEntry
     lwz r0, 0x44(r1)
     srwi. r0, r0, 31
     beq lbl_fn_801354B4_000016F8
@@ -1825,7 +1825,7 @@ lbl_fn_801354B4_000017C8:
     bl actor_dispatchMessage
     mr r4, r24
     addi r3, r1, 0x50
-    bl fn_8006AD24
+    bl boss_lookupActionEntry
     lwz r0, 0x38(r1)
     srwi. r0, r0, 31
     beq lbl_fn_801354B4_00001874

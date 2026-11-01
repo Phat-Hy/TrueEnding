@@ -15,7 +15,7 @@ extern void fn_800EB4AC(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void fn_8010CA34(void);
-extern void fn_80134134(void);
+extern void boss_findPartById(void);
 extern void npc_calcTargetDistance(void);
 extern void quest_evaluateConditions(void);
 extern void fn_80153B44(void);
@@ -34,7 +34,7 @@ extern void fn_801EA01C(void);
 extern void task_findEntryById(void);
 extern void fn_8021AF98(void);
 extern void fn_803748E0(void);
-extern void fn_80389838(void);
+extern void nwc24_transitionDataState(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
@@ -130,7 +130,7 @@ asm void fn_800E8FB8(void)
     mr r31, r3
     addi r3, r30, 0x7d4
     li r4, 0x3d
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_800E8FB8_000000A8
@@ -328,7 +328,7 @@ lbl_fn_800E9110_0000032C:
     lwz r3, lbl_8087F430
     li r4, 0x3
     addi r3, r3, 0x6c
-    bl fn_80389838
+    bl nwc24_transitionDataState
 lbl_fn_800E9110_00000348:
     mr r3, r31
     mr r6, r30

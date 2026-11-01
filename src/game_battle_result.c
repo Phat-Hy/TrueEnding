@@ -66,7 +66,7 @@ extern u32 lbl_80881B50;
 /* Function declarations */
 void fn_801749EC(void);
 void fn_80174E04(void);
-void fn_801750FC(void);
+void battle_calcOutcomeBonus(void);
 void fn_8017518C(void);
 void fn_8017547C(void);
 void fn_80175A38(void);
@@ -573,7 +573,7 @@ lbl_fn_80174E04_000006F0:
     blr
 }
 
-asm void fn_801750FC(void)
+asm void battle_calcOutcomeBonus(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -584,7 +584,7 @@ asm void fn_801750FC(void)
     mr r30, r3
     lwz r4, 0x1208(r3)
     cmpwi r4, 0x0
-    beq lbl_fn_801750FC_00000788
+    beq lbl_battle_calcOutcomeBonus_00000788
     lfs f0, lbl_8088196C
     li r31, 0x0
     stw r3, 0x18(r1)
@@ -606,7 +606,7 @@ asm void fn_801750FC(void)
     li r0, 0xff
     stb r0, 0x520(r3)
     stw r31, 0x1208(r30)
-lbl_fn_801750FC_00000788:
+lbl_battle_calcOutcomeBonus_00000788:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
     lwz r30, 0x28(r1)

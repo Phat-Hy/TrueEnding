@@ -34,7 +34,7 @@ extern void world_getGlobalFlag(void);
 extern void fn_803ABFD4(void);
 extern void fn_803AC088(void);
 extern void fn_803B3B38(void);
-extern void fn_803EEE10(void);
+extern void dungeon_findArenaNodeByCoords(void);
 extern void fn_80435CBC(void);
 extern void fn_8043A530(void);
 extern void PSMTXRotRad(void);
@@ -1902,7 +1902,7 @@ lbl_fn_803CC77C_000019A4:
     lis r4, 0x1
     li r5, 0x1
     subi r4, r4, 0x11b8
-    bl fn_803EEE10
+    bl dungeon_findArenaNodeByCoords
     cmpwi r3, 0x0
     beq lbl_fn_803CC77C_000019D0
     bl fn_80435CBC
@@ -1912,7 +1912,7 @@ lbl_fn_803CC77C_000019D0:
     lwz r3, lbl_8087F4A0
     subi r4, r4, 0x600
     li r5, 0x1
-    bl fn_803EEE10
+    bl dungeon_findArenaNodeByCoords
     cmpwi r3, 0x0
     beq lbl_fn_803CC77C_000019F4
     bl fn_8043A530

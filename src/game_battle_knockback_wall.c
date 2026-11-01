@@ -42,7 +42,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void cursor_applyAnimationTrack(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB688(void);
+extern void morph_resetTargetWeight(void);
 extern void fn_800D8814(void);
 extern void fn_800D8BB4(void);
 extern void str_skipWhitespace(void);
@@ -64,7 +64,7 @@ extern void mtx_rotYRad(void);
 extern void npc_getPosition(void);
 extern void npc_getDialogController(void);
 extern void quest_getGlobalManager(void);
-extern void fn_80140500(void);
+extern void quest_resetActiveObjectiveSlots(void);
 extern void bgm_getGlobalManager(void);
 extern void vec3_dot(void);
 extern void fn_801A03F4(void);
@@ -1986,7 +1986,7 @@ lbl_fn_8041766C_000018C4:
     addi r3, r1, 0xc4
     bl vec3_add
     addi r3, r1, 0x1f0
-    bl fn_80140500
+    bl quest_resetActiveObjectiveSlots
     bl quest_getGlobalManager
     addi r4, r1, 0x1f0
     addi r5, r1, 0xd0
@@ -2100,7 +2100,7 @@ lbl_fn_8041766C_000019F0:
     bl fn_80417E88
     addi r3, r1, 0x8
     li r4, 0x0
-    bl fn_800CB688
+    bl morph_resetTargetWeight
 lbl_fn_8041766C_00001AC8:
     addi r3, r1, 0x8
     li r4, -0x1

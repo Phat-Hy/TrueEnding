@@ -9,7 +9,7 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void item_testLineOfSight(void);
 extern void player_stepMovement(void);
-extern void fn_80051CD8(void);
+extern void player_transformBoundingSphere(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
@@ -1836,7 +1836,7 @@ lbl_fn_804375C0_00001764:
 lbl_fn_804375C0_00001770:
     addi r3, r1, 0x148
     addi r4, r14, 0x28
-    bl fn_80051CD8
+    bl player_transformBoundingSphere
     cmpwi r3, 0x0
     beq lbl_fn_804375C0_0000178C
     stw r14, 0xef8(r15)

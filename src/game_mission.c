@@ -13,7 +13,7 @@ extern void fn_800502A8(void);
 extern void fn_80051A88(void);
 extern void player_stepMovement(void);
 extern void fn_80051C10(void);
-extern void fn_80051CD8(void);
+extern void player_transformBoundingSphere(void);
 extern void fn_80051E90(void);
 extern void fn_800520F0(void);
 extern void fn_800523A0(void);
@@ -229,7 +229,7 @@ asm void atn_ColliBox_testRay(void)
     ble lbl_atn_ColliBox_testRay_00000218
     mr r3, r27
     addi r4, r24, 0x3c
-    bl fn_80051CD8
+    bl player_transformBoundingSphere
     cmpwi r3, 0x0
     beq lbl_atn_ColliBox_testRay_00000218
     addi r30, r24, 0x78

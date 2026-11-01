@@ -17,7 +17,7 @@ extern void fn_800EFE3C(void);
 extern void hurtbox_processHitDamage(void);
 extern void enemy_evalAnimTrack(void);
 extern void fn_80133FBC(void);
-extern void fn_80134134(void);
+extern void boss_findPartById(void);
 extern void fn_80134168(void);
 extern void fn_801346C8(void);
 extern void fn_8015E1B8(void);
@@ -890,7 +890,7 @@ asm void fn_8010CA3C(void)
     fsubs f1, f1, f2
     fdivs f0, f1, f0
     fadds f31, f31, f0
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     beq lbl_fn_8010CA3C_00000AA8
     lfs f0, lbl_808815C0

@@ -11,7 +11,7 @@ extern void fn_80043BDC(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void str_findChar(void);
 extern void hurtbox_dispatchHitEvent(void);
-extern void fn_8011F8F4(void);
+extern void skill_findEntryById(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void skill_findNodeByTag(void);
@@ -144,7 +144,7 @@ lbl_fn_803A5118_00000050:
 lbl_fn_803A5118_00000068:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A5118_00000074:
     mr r29, r3
     b lbl_fn_803A5118_000000D0
@@ -410,7 +410,7 @@ lbl_fn_803A54C0_00000400:
 lbl_fn_803A54C0_00000418:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A54C0_00000424:
     mr r29, r3
     b lbl_fn_803A54C0_0000048C
@@ -528,7 +528,7 @@ lbl_fn_803A5650_0000059C:
 lbl_fn_803A5650_000005B4:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A5650_000005C0:
     mr r28, r3
     b lbl_fn_803A5650_0000061C
@@ -1781,7 +1781,7 @@ lbl_fn_803A6744_0000168C:
 lbl_fn_803A6744_000016A4:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A6744_000016B0:
     mr r6, r3
     b lbl_fn_803A6744_0000170C

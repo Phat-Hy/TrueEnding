@@ -10,7 +10,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8000D844(void);
 extern void item_testLineOfSight(void);
-extern void fn_80051CD8(void);
+extern void player_transformBoundingSphere(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void node_createNamedChild(void);
@@ -2345,7 +2345,7 @@ lbl_fn_80548E74_00001DE0:
     stfs f8, 0x38(r1)
     stfs f2, 0x138(r1)
     stfs f0, 0x134(r1)
-    bl fn_80051CD8
+    bl player_transformBoundingSphere
     cmpwi r3, 0x0
     beq lbl_fn_80548E74_00001EF0
     lwz r3, 0x24(r17)

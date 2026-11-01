@@ -54,7 +54,7 @@ extern void fn_8011CC30(void);
 extern void fn_8011CCA0(void);
 extern void fn_8011CD1C(void);
 extern void skill_findNodeByTag(void);
-extern void fn_80134134(void);
+extern void boss_findPartById(void);
 extern void fn_80134270(void);
 extern void fn_80134290(void);
 extern void fn_801342B0(void);
@@ -4686,7 +4686,7 @@ lbl_battle_getCharacterState_00003EAC:
 lbl_battle_getCharacterState_00003EC0:
     mr r3, r29
     li r4, 0x1a
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     beq lbl_battle_getCharacterState_00003F2C
     xoris r3, r28, 0x8000
@@ -4791,7 +4791,7 @@ lbl_battle_getCharacterState_00004044:
 lbl_battle_getCharacterState_00004048:
     addi r3, r30, 0x7d4
     li r4, 0x1a
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     beq lbl_battle_getCharacterState_000040B4
     xoris r3, r28, 0x8000

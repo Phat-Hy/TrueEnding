@@ -13,7 +13,7 @@ extern void fn_8006D3F8(void);
 extern void fn_800A6BDC(void);
 extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
-extern void fn_8011F8F4(void);
+extern void skill_findEntryById(void);
 extern void fn_8012B3E8(void);
 extern void enemy_updateNavSteering(void);
 extern void enemy_updateAnimTimer(void);
@@ -747,13 +747,13 @@ lbl_world_Manager_update_000008A0:
     beq lbl_world_Manager_update_000008F4
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
     cmpwi r3, 0x0
     beq lbl_world_Manager_update_000008F4
     lwz r27, lbl_8087F8A0
     li r4, 0x1
     mr r3, r27
-    bl fn_8011F8F4
+    bl skill_findEntryById
     lwz r12, 0x0(r3)
     lwz r4, 0x5c(r27)
     lwz r12, 0x30(r12)

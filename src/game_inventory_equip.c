@@ -13,7 +13,7 @@ extern void colli_findStaticSlot(void);
 extern void fn_8011BE54(void);
 extern void fn_8011BEB8(void);
 extern void fn_8012D180(void);
-extern void fn_80134134(void);
+extern void boss_findPartById(void);
 extern void fn_80134208(void);
 extern void fn_80134270(void);
 extern void fn_80134290(void);
@@ -634,7 +634,7 @@ lbl_fn_80154E38_00000774:
     bne lbl_fn_80154E38_000007B0
     li r4, 0x6
     addi r3, r3, 0x7d4
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     bne lbl_fn_80154E38_000007B0
     lwz r0, 0x7e0(r30)

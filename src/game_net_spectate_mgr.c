@@ -60,7 +60,7 @@ extern void fn_803BEAB4(void);
 extern void fn_803CE448(void);
 extern void fn_803CE44C(void);
 extern void fn_803EDFBC(void);
-extern void fn_803EEE10(void);
+extern void dungeon_findArenaNodeByCoords(void);
 extern void fn_80453DBC(void);
 extern void boss_updateLaserAimMatrix(void);
 extern void fn_8047043C(void);
@@ -2403,7 +2403,7 @@ lbl_spectateManager_update_000020D0:
     add r27, r0, r26
     lwzx r4, r26, r0
     lwz r5, 0x4(r27)
-    bl fn_803EEE10
+    bl dungeon_findArenaNodeByCoords
     cmpwi r3, 0x0
     beq lbl_spectateManager_update_00002108
     lwz r12, 0x0(r3)

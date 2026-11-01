@@ -12,7 +12,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void hurtbox_processHitDamage(void);
-extern void fn_8011F8F4(void);
+extern void skill_findEntryById(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void skill_findNodeByTag(void);
@@ -45,7 +45,7 @@ extern void fn_803E644C(void);
 extern void fn_803E64F0(void);
 extern void fn_803E656C(void);
 extern void fn_803E65F8(void);
-extern void fn_803EEE10(void);
+extern void dungeon_findArenaNodeByCoords(void);
 extern void fn_80444020(void);
 extern void fn_8044D6E0(void);
 extern void fn_805A2FD8(void);
@@ -341,7 +341,7 @@ lbl_fn_803A6E24_000002D8:
 lbl_fn_803A6E24_000002F0:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A6E24_000002FC:
     mr r31, r3
     b lbl_fn_803A6E24_00000358
@@ -375,7 +375,7 @@ lbl_fn_803A6E24_00000358:
     lwz r3, lbl_8087F4A0
     lwz r4, 0x10(r30)
     lwz r5, 0x14(r30)
-    bl fn_803EEE10
+    bl dungeon_findArenaNodeByCoords
     cmpwi r3, 0x0
     beq lbl_fn_803A6E24_0000038C
     lwz r12, 0x0(r3)
@@ -452,7 +452,7 @@ lbl_fn_803A6F90_0000044C:
 lbl_fn_803A6F90_00000464:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A6F90_00000470:
     mr r5, r3
     b lbl_fn_803A6F90_000004D8
@@ -1150,7 +1150,7 @@ lbl_fn_803A7954_00000E04:
 lbl_fn_803A7954_00000E1C:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A7954_00000E28:
     mr r29, r3
     b lbl_fn_803A7954_00000E90
@@ -1204,7 +1204,7 @@ lbl_fn_803A7954_00000EC0:
 lbl_fn_803A7954_00000ED8:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A7954_00000EE4:
     mr r28, r3
     b lbl_fn_803A7954_00000F40
@@ -1987,7 +1987,7 @@ lbl_fn_803A8470_0000192C:
 lbl_fn_803A8470_00001944:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A8470_00001950:
     mr r31, r3
     b lbl_fn_803A8470_000019B8
@@ -2024,7 +2024,7 @@ lbl_fn_803A8470_000019B8:
     beq lbl_fn_803A8470_000019D8
     lwz r4, 0x18(r28)
     lwz r5, 0x1c(r28)
-    bl fn_803EEE10
+    bl dungeon_findArenaNodeByCoords
     mr r30, r3
     b lbl_fn_803A8470_000019DC
 lbl_fn_803A8470_000019D8:

@@ -23,7 +23,7 @@ extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void world_setLocalFlag(void);
-extern void fn_803EEE10(void);
+extern void dungeon_findArenaNodeByCoords(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -1577,7 +1577,7 @@ asm void fn_80465B88(void)
     stw r30, 0x218(r1)
     lwz r3, lbl_8087F4A0
     lwz r5, 0x15ac(r31)
-    bl fn_803EEE10
+    bl dungeon_findArenaNodeByCoords
     lwz r12, 0x0(r3)
     mr r30, r3
     lwz r12, 0x5c(r12)

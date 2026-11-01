@@ -32,7 +32,7 @@ extern void morph_updateWeights(void);
 extern void fn_800CB480(void);
 extern void fn_800CB518(void);
 extern void morph_updateMesh(void);
-extern void fn_800CB688(void);
+extern void morph_resetTargetWeight(void);
 extern void fn_800CB6B0(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -2274,7 +2274,7 @@ lbl_fn_803F1508_00001CD4:
     lfs f1, lbl_80885FA8
     addi r3, r1, 0x10
     li r4, 0xf0
-    bl fn_800CB688
+    bl morph_resetTargetWeight
 lbl_fn_803F1508_00001CF4:
     lwz r0, 0x44(r28)
     rlwinm r0, r0, 0, 27, 27
@@ -2283,7 +2283,7 @@ lbl_fn_803F1508_00001CF4:
     lfs f1, lbl_80885FA4
     addi r3, r1, 0x10
     li r4, 0xf0
-    bl fn_800CB688
+    bl morph_resetTargetWeight
 lbl_fn_803F1508_00001D14:
     lwz r3, lbl_8087EFE8
     stw r24, 0x34d0(r3)

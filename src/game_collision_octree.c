@@ -9,7 +9,7 @@ extern void _savegpr_27(void);
 extern void msg_formatWindowLayout(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB688(void);
+extern void morph_resetTargetWeight(void);
 extern void str_findChar(void);
 extern void fn_8017A160(void);
 extern void thread_findAndNotify(void);
@@ -588,7 +588,7 @@ lbl_fn_80101CDC_00000710:
     fmr f1, f31
     addi r3, r1, 0x20
     li r4, 0x0
-    bl fn_800CB688
+    bl morph_resetTargetWeight
     lwz r0, 0x94(r29)
     rlwinm r0, r0, 0, 24, 24
     cmplwi r0, 0x80

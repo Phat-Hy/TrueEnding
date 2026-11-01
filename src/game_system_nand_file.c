@@ -20,7 +20,7 @@ extern void fn_800EFDA0(void);
 extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
-extern void fn_800F8524(void);
+extern void math_lerpf(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
@@ -339,7 +339,7 @@ lbl_fn_80348FF4_00000324:
 lbl_fn_80348FF4_00000340:
     la r3, lbl_8087DC88
     la r4, lbl_8087DC8C
-    bl fn_800F8524
+    bl math_lerpf
     fmr f31, f1
     mr r4, r31
     addi r3, r1, 0x1c

@@ -17,7 +17,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void particle_getEmitterContext(void);
 extern void fn_800E0AB0(void);
 extern void viewport_getNextSequenceId(void);
-extern void fn_800F8524(void);
+extern void math_lerpf(void);
 extern void system_getNextSequenceId(void);
 extern void vec3_sqMag(void);
 extern void equip_getGlobalManager(void);
@@ -266,7 +266,7 @@ lbl_fn_8028AA38_000001EC:
     fmr f1, f29
     addi r3, r1, 0xc
     addi r4, r1, 0x8
-    bl fn_800F8524
+    bl math_lerpf
     lwz r0, 0x58c(r30)
     cmpwi r0, 0x7
     bne lbl_fn_8028AA38_0000029C

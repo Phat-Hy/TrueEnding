@@ -49,7 +49,7 @@ void fn_80133F18(void);
 void fn_80133F6C(void);
 void fn_80133FBC(void);
 void fn_8013407C(void);
-void fn_80134134(void);
+void boss_findPartById(void);
 void fn_80134168(void);
 void fn_801341B8(void);
 void fn_80134208(void);
@@ -1278,22 +1278,22 @@ lbl_fn_8013407C_0000100C:
     blr
 }
 
-asm void fn_80134134(void)
+asm void boss_findPartById(void)
 {
     nofralloc
     lwz r0, 0x380(r3)
     addi r3, r3, 0x384
     mtctr r0
     cmplwi r0, 0x0
-    ble lbl_fn_80134134_00001054
-lbl_fn_80134134_0000103C:
+    ble lbl_boss_findPartById_00001054
+lbl_boss_findPartById_0000103C:
     lwz r5, 0x0(r3)
     lwz r0, 0x0(r5)
     cmpw r0, r4
     beqlr
     addi r3, r3, 0x14
-    bdnz lbl_fn_80134134_0000103C
-lbl_fn_80134134_00001054:
+    bdnz lbl_boss_findPartById_0000103C
+lbl_boss_findPartById_00001054:
     li r3, 0x0
     blr
 }

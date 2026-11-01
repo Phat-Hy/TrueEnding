@@ -34,7 +34,7 @@ extern void npc_getPosition(void);
 extern void npc_isInteractionReady(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_getGlobalManager(void);
-extern void fn_80140500(void);
+extern void quest_resetActiveObjectiveSlots(void);
 extern void quest_resetObjectiveBounds(void);
 extern void dialog_renderWindow(void);
 extern void fn_801533C8(void);
@@ -1776,7 +1776,7 @@ lbl_fn_802F0328_000017C0:
     addi r3, r1, 0x44
     bl fn_8012A190
     addi r3, r1, 0xc8
-    bl fn_80140500
+    bl quest_resetActiveObjectiveSlots
     bl quest_getGlobalManager
     lfs f1, 0x620(r31)
     addi r4, r1, 0xc8

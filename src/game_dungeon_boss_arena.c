@@ -172,7 +172,7 @@ void fn_803EEB78(void);
 void fn_803EEC64(void);
 void fn_803EED2C(void);
 void fn_803EED58(void);
-void fn_803EEE10(void);
+void dungeon_findArenaNodeByCoords(void);
 void fn_803EEE44(void);
 void fn_803EEEDC(void);
 void fn_803EF3B0(void);
@@ -1341,23 +1341,23 @@ lbl_fn_803EED58_00000EDC:
     blr
 }
 
-asm void fn_803EEE10(void)
+asm void dungeon_findArenaNodeByCoords(void)
 {
     nofralloc
     lwz r3, 0x48(r3)
-    b lbl_fn_803EEE10_00000F18
-lbl_fn_803EEE10_00000EFC:
+    b lbl_dungeon_findArenaNodeByCoords_00000F18
+lbl_dungeon_findArenaNodeByCoords_00000EFC:
     lwz r0, 0x48(r3)
     cmpw r4, r0
-    bne lbl_fn_803EEE10_00000F14
+    bne lbl_dungeon_findArenaNodeByCoords_00000F14
     lwz r0, 0x4c(r3)
     cmpw r5, r0
     beqlr
-lbl_fn_803EEE10_00000F14:
+lbl_dungeon_findArenaNodeByCoords_00000F14:
     lwz r3, 0x5c(r3)
-lbl_fn_803EEE10_00000F18:
+lbl_dungeon_findArenaNodeByCoords_00000F18:
     cmpwi r3, 0x0
-    bne lbl_fn_803EEE10_00000EFC
+    bne lbl_dungeon_findArenaNodeByCoords_00000EFC
     li r3, 0x0
     blr
 }

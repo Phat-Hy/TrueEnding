@@ -18,7 +18,7 @@ extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void fn_8006A004(void);
-extern void fn_8006AD24(void);
+extern void boss_lookupActionEntry(void);
 extern void fn_8006B0C8(void);
 extern void fn_8006D008(void);
 extern void mem_alloc(void);
@@ -1738,7 +1738,7 @@ lbl_fn_801371AC_00001570:
     bl actor_dispatchMessage
     mr r3, r25
     mr r4, r24
-    bl fn_8006AD24
+    bl boss_lookupActionEntry
     lwz r0, 0x48(r1)
     srwi. r0, r0, 31
     beq lbl_fn_801371AC_00001640

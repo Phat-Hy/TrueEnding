@@ -31,7 +31,7 @@ extern void fn_8012A288(void);
 extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void quest_getGlobalManager(void);
-extern void fn_80140500(void);
+extern void quest_resetActiveObjectiveSlots(void);
 extern void quest_ctorRewardItem(void);
 extern void fn_802A7910(void);
 extern void fn_802A7964(void);
@@ -1643,7 +1643,7 @@ lbl_fn_803267E8_0000163C:
     cmpwi r0, 0xa
     bge lbl_fn_803267E8_00001770
     addi r3, r1, 0x1b8
-    bl fn_80140500
+    bl quest_resetActiveObjectiveSlots
     addi r3, r1, 0x144
     addi r4, r31, 0x528
     bl vec3_assign
@@ -1729,7 +1729,7 @@ lbl_fn_803267E8_00001788:
     subf. r0, r0, r3
     beq lbl_fn_803267E8_000018C0
     addi r3, r1, 0x168
-    bl fn_80140500
+    bl quest_resetActiveObjectiveSlots
     addi r3, r1, 0x12c
     addi r4, r31, 0x528
     bl vec3_assign

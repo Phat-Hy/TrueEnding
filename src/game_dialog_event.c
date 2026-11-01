@@ -37,7 +37,7 @@ extern void fn_8013A214(void);
 extern void fn_8013A248(void);
 extern void fn_801404E0(void);
 extern void quest_getGlobalManager(void);
-extern void fn_80140500(void);
+extern void quest_resetActiveObjectiveSlots(void);
 extern void fn_80140518(void);
 extern void quest_initMarkerCoords(void);
 extern void fn_80148334(void);
@@ -61,7 +61,7 @@ extern void fn_80168824(void);
 extern void fn_801698E4(void);
 extern void debuff_clearStatus(void);
 extern void fn_8016F5EC(void);
-extern void fn_801750FC(void);
+extern void battle_calcOutcomeBonus(void);
 extern void fn_80175A38(void);
 extern void fn_8017B16C(void);
 extern void time_wrapMilliseconds(void);
@@ -1424,7 +1424,7 @@ lbl_fn_8015076C_00001158:
     cmpwi r3, 0x0
     bne lbl_fn_8015076C_000012D0
     addi r3, r1, 0x198
-    bl fn_80140500
+    bl quest_resetActiveObjectiveSlots
     lfs f1, lbl_8088196C
     addi r3, r1, 0xb0
     lfs f2, lbl_808819F8
@@ -1479,7 +1479,7 @@ lbl_fn_8015076C_00001158:
     cmpwi r0, 0x0
     beq lbl_fn_8015076C_00001270
     mr r3, r23
-    bl fn_801750FC
+    bl battle_calcOutcomeBonus
 lbl_fn_8015076C_00001270:
     addi r3, r1, 0x5c
     addi r4, r1, 0x1c0
@@ -1532,7 +1532,7 @@ lbl_fn_8015076C_00001310:
     addi r4, r23, 0x534
     bl vec3_assign
     addi r3, r1, 0x148
-    bl fn_80140500
+    bl quest_resetActiveObjectiveSlots
     mr r4, r23
     addi r3, r1, 0x44
     bl quest_initMarkerCoords
@@ -1854,7 +1854,7 @@ lbl_fn_8015076C_000017C0:
     cmpwi r29, 0x0
     beq lbl_fn_8015076C_000017D0
     mr r3, r23
-    bl fn_801750FC
+    bl battle_calcOutcomeBonus
 lbl_fn_8015076C_000017D0:
     cmpwi r31, 0x0
     beq lbl_fn_8015076C_000018B8

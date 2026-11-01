@@ -13,7 +13,7 @@ extern void fn_8011D21C(void);
 extern void fn_80133E24(void);
 extern void fn_80133EE8(void);
 extern void fn_80133F6C(void);
-extern void fn_80134134(void);
+extern void boss_findPartById(void);
 extern void fn_80134168(void);
 extern void fn_801346C8(void);
 extern void fn_80150460(void);
@@ -989,7 +989,7 @@ lbl_inventory_applyItemStats_00000C80:
     beq lbl_inventory_applyItemStats_00000CE4
     addi r3, r3, 0x7d4
     li r4, 0x43
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     beq lbl_inventory_applyItemStats_00000CE4
     lwz r3, 0x0(r27)

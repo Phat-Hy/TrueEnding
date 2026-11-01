@@ -22,7 +22,7 @@ extern void fn_800CB5B4(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB654(void);
 extern void fn_800CB668(void);
-extern void fn_800CB688(void);
+extern void morph_resetTargetWeight(void);
 extern void fn_8022960C(void);
 extern void fn_803601E4(void);
 extern void fn_803606CC(void);
@@ -983,7 +983,7 @@ lbl_fn_8055F690_00000B74:
     fmr f1, f29
     addi r3, r1, 0x34
     li r4, 0x0
-    bl fn_800CB688
+    bl morph_resetTargetWeight
     cmpwi r29, 0x0
     beq lbl_fn_8055F690_00000B94
     li r27, 0x0
@@ -1301,7 +1301,7 @@ lbl_fn_8055FE0C_00000FAC:
     fmr f1, f30
     mr r3, r29
     li r4, 0x0
-    bl fn_800CB688
+    bl morph_resetTargetWeight
     b lbl_fn_8055FE0C_000010DC
 lbl_fn_8055FE0C_00000FC0:
     cmpwi r0, 0x1
@@ -1771,7 +1771,7 @@ lbl_fn_805602B0_000015C0:
     fmr f1, f30
     addi r3, r1, 0x14
     li r4, 0x0
-    bl fn_800CB688
+    bl morph_resetTargetWeight
     lwz r3, lbl_8087F540
     lwz r0, 0xc4(r3)
     cmpwi r0, 0x0

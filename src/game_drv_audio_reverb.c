@@ -26,7 +26,7 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void fn_8006AC08(void);
-extern void fn_8006AD24(void);
+extern void boss_lookupActionEntry(void);
 extern void fn_8006AF38(void);
 extern void boss_initActionStream(void);
 extern void boss_parseStateCondition(void);
@@ -51,7 +51,7 @@ extern void fn_800DCA70(void);
 extern void proj_getGlobalManager(void);
 extern void fn_800F7260(void);
 extern void fn_800F80A8(void);
-extern void fn_800F8524(void);
+extern void math_lerpf(void);
 extern void fn_80112958(void);
 extern void fn_80112960(void);
 extern void fn_80113CCC(void);
@@ -508,7 +508,7 @@ lbl_fn_805BAC18_00000420:
     fmr f1, f31
     addi r3, r1, 0x10
     addi r4, r1, 0xc
-    bl fn_800F8524
+    bl math_lerpf
     fmr f3, f1
     lfs f1, lbl_80888454
     addi r3, r1, 0x68
@@ -547,7 +547,7 @@ lbl_fn_805BAC18_00000420:
     fmr f1, f31
     addi r3, r1, 0x8
     addi r4, r31, 0x30
-    bl fn_800F8524
+    bl math_lerpf
     fmr f31, f1
     addi r3, r29, 0x280
     addi r4, r1, 0x108
@@ -1561,7 +1561,7 @@ lbl_fn_805BB658_00001310:
     bl actor_dispatchMessage
     mr r4, r22
     addi r3, r1, 0xa8
-    bl fn_8006AD24
+    bl boss_lookupActionEntry
     mr r5, r3
     addi r3, r1, 0x84
     addi r4, r29, 0x5c

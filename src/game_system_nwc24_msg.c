@@ -22,7 +22,7 @@ extern void msg_formatWindowLayout(void);
 extern void msg_isWindowActive(void);
 extern void vec3_scale(void);
 extern void viewport_getNextSequenceId(void);
-extern void fn_800F8524(void);
+extern void math_lerpf(void);
 extern void fn_8010F6FC(void);
 extern void fn_80112958(void);
 extern void fn_80112960(void);
@@ -619,7 +619,7 @@ lbl_fn_80387910_00000730:
     addi r3, r1, 0x8
     lfs f1, lbl_80885934
     addi r4, r1, 0x10
-    bl fn_800F8524
+    bl math_lerpf
     stfs f1, 0x10(r1)
     mr r4, r29
     addi r3, r1, 0x50
@@ -639,7 +639,7 @@ lbl_fn_80387910_00000730:
     lfs f1, lbl_80885934
     addi r3, r1, 0xc
     addi r4, r1, 0xbc
-    bl fn_800F8524
+    bl math_lerpf
     stfs f1, 0xbc(r1)
     addi r3, r1, 0x138
     addi r4, r1, 0xbc

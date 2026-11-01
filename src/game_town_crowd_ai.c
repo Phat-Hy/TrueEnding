@@ -6,7 +6,7 @@ extern void __files(void);
 extern void _restgpr_21(void);
 extern void _savegpr_21(void);
 extern void dtor_80084684(void);
-extern void fn_80051CD8(void);
+extern void player_transformBoundingSphere(void);
 extern void talk_parseQuotedString(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -567,7 +567,7 @@ lbl_fn_803CCDAC_00000514:
     fadds f0, f0, f8
     stfs f31, 0x14(r1)
     stfs f0, 0xc(r1)
-    bl fn_80051CD8
+    bl player_transformBoundingSphere
     cmpwi r3, 0x0
     beq lbl_fn_803CCDAC_000005F8
     addi r3, r23, 0x18

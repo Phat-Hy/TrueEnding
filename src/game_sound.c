@@ -19,7 +19,7 @@ extern void talk_setSpeakerName(void);
 extern void boss_recordDamage(void);
 extern void fn_8006A9A4(void);
 extern void boss_triggerEventSequence(void);
-extern void fn_8006AD24(void);
+extern void boss_lookupActionEntry(void);
 extern void fn_8006B53C(void);
 extern void fn_8006B594(void);
 extern void fn_8006BA6C(void);
@@ -1522,7 +1522,7 @@ lbl_fn_80046EE0_000010A4:
     bl actor_dispatchMessage
     mr r4, r27
     addi r3, r1, 0x70
-    bl fn_8006AD24
+    bl boss_lookupActionEntry
     lwz r0, 0x40(r1)
     srwi. r0, r0, 31
     beq lbl_fn_80046EE0_00001120

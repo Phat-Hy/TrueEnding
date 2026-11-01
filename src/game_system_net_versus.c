@@ -8,7 +8,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void mem_free(void);
 extern void ref_releaseHandle(void);
-extern void fn_8011F8F4(void);
+extern void skill_findEntryById(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void skill_findNodeByTag(void);
@@ -1139,7 +1139,7 @@ lbl_fn_8039F08C_00000E58:
 lbl_fn_8039F08C_00000E70:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_8039F08C_00000E7C:
     mr r30, r3
     b lbl_fn_8039F08C_00000EE4
@@ -1529,7 +1529,7 @@ lbl_fn_8039F600_000013D8:
 lbl_fn_8039F600_000013F0:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_8039F600_000013FC:
     mr r31, r3
     b lbl_fn_8039F600_00001464
@@ -1708,7 +1708,7 @@ lbl_fn_8039F878_0000164C:
 lbl_fn_8039F878_00001664:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_8039F878_00001670:
     mr r4, r3
     b lbl_fn_8039F878_000016D8

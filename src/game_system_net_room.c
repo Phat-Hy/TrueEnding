@@ -13,7 +13,7 @@ extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_800FDE60(void);
 extern void fn_8011CD84(void);
-extern void fn_8011F8F4(void);
+extern void skill_findEntryById(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void skill_findNodeByTag(void);
@@ -36,7 +36,7 @@ extern void kpad_getClampData(void);
 extern void fn_8039BF04(void);
 extern void fn_803CAABC(void);
 extern void fn_803EBAC8(void);
-extern void fn_803EEE10(void);
+extern void dungeon_findArenaNodeByCoords(void);
 extern void fn_8047EA34(void);
 extern void fn_8047EFD8(void);
 extern void fn_8047F420(void);
@@ -616,7 +616,7 @@ asm void fn_803A02C8(void)
     lwz r4, 0x8(r5)
     lwz r3, lbl_8087F4A0
     lwz r5, 0xc(r5)
-    bl fn_803EEE10
+    bl dungeon_findArenaNodeByCoords
     cmpwi r3, 0x0
     beq lbl_fn_803A02C8_00000768
     lwz r0, 0x14(r31)
@@ -820,7 +820,7 @@ lbl_fn_803A0520_00000978:
 lbl_fn_803A0520_00000990:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A0520_0000099C:
     mr r4, r3
     b lbl_fn_803A0520_00000A04
@@ -911,7 +911,7 @@ lbl_fn_803A064C_00000AB0:
 lbl_fn_803A064C_00000AC8:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A064C_00000AD4:
     mr r31, r3
     b lbl_fn_803A064C_00000C1C
@@ -1096,7 +1096,7 @@ lbl_fn_803A08D4_00000D30:
 lbl_fn_803A08D4_00000D48:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A08D4_00000D54:
     mr r29, r3
     b lbl_fn_803A08D4_00000DBC
@@ -1150,7 +1150,7 @@ lbl_fn_803A08D4_00000DEC:
 lbl_fn_803A08D4_00000E04:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A08D4_00000E10:
     mr r5, r3
     b lbl_fn_803A08D4_00000E6C

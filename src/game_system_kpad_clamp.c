@@ -59,7 +59,7 @@ extern void dialog_selectChoice(void);
 extern void fn_80151210(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
-extern void fn_801750FC(void);
+extern void battle_calcOutcomeBonus(void);
 extern void battle_updateActorStatus(void);
 extern void fn_801C0738(void);
 extern void thread_findAndNotify(void);
@@ -704,7 +704,7 @@ lbl_fn_803729B4_00000724:
     bl fn_80373094
     bl fn_80129A6C
     mr r3, r26
-    bl fn_801750FC
+    bl battle_calcOutcomeBonus
     mr r3, r26
     li r4, 0x0
     li r5, 0x0

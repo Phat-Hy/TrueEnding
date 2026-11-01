@@ -41,7 +41,7 @@ extern void path_getFollowerNode(void);
 extern void mtx_rotYRad(void);
 extern void fn_8013C3B4(void);
 extern void quest_getGlobalManager(void);
-extern void fn_80140500(void);
+extern void quest_resetActiveObjectiveSlots(void);
 extern void fn_80178088(void);
 extern void fn_801C3910(void);
 extern void world_getGlobalFlag(void);
@@ -350,7 +350,7 @@ lbl_fn_80382A1C_000001E4:
     addi r3, r1, 0x11c
     bl viewport_getNextSequenceId
     addi r3, r1, 0x258
-    bl fn_80140500
+    bl quest_resetActiveObjectiveSlots
     addi r3, r1, 0xb0
     addi r4, r1, 0x17c
     addi r5, r1, 0x110

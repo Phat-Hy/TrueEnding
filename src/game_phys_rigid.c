@@ -22,7 +22,7 @@ extern void fn_80109864(void);
 extern void fn_8011D1FC(void);
 extern void fn_80133E24(void);
 extern void fn_80133EE8(void);
-extern void fn_80134134(void);
+extern void boss_findPartById(void);
 extern void fn_80134168(void);
 extern void fn_801341B8(void);
 extern void fn_8014FCE8(void);
@@ -1691,12 +1691,12 @@ lbl_fn_8010B398_000015F8:
 lbl_fn_8010B398_0000160C:
     mr r3, r20
     li r4, 0x30
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     beq lbl_fn_8010B398_00001684
     mr r3, r20
     li r4, 0x30
-    bl fn_80134134
+    bl boss_findPartById
     lwz r0, 0x304(r20)
     lwz r3, 0x0(r3)
     cmplwi r0, 0x6
@@ -1723,12 +1723,12 @@ lbl_fn_8010B398_00001678:
 lbl_fn_8010B398_00001684:
     mr r3, r20
     li r4, 0x3e
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     beq lbl_fn_8010B398_000016FC
     mr r3, r20
     li r4, 0x3e
-    bl fn_80134134
+    bl boss_findPartById
     lwz r0, 0x304(r20)
     lwz r3, 0x0(r3)
     cmplwi r0, 0x6
@@ -1755,7 +1755,7 @@ lbl_fn_8010B398_000016F0:
 lbl_fn_8010B398_000016FC:
     mr r3, r20
     li r4, 0x3f
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     beq lbl_fn_8010B398_000017C4
     cmpwi r28, 0x0
@@ -1784,7 +1784,7 @@ lbl_fn_8010B398_00001758:
 lbl_fn_8010B398_00001760:
     mr r3, r20
     li r4, 0x3f
-    bl fn_80134134
+    bl boss_findPartById
     lwz r0, 0x304(r20)
     lwz r3, 0x0(r3)
     cmplwi r0, 0x6
@@ -1811,7 +1811,7 @@ lbl_fn_8010B398_000017B8:
 lbl_fn_8010B398_000017C4:
     mr r3, r20
     li r4, 0x42
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     beq lbl_fn_8010B398_00001858
     cmpwi r25, 0x0
@@ -1823,7 +1823,7 @@ lbl_fn_8010B398_000017C4:
     bne lbl_fn_8010B398_00001858
     mr r3, r20
     li r4, 0x42
-    bl fn_80134134
+    bl boss_findPartById
     lwz r0, 0x304(r20)
     lwz r3, 0x0(r3)
     cmplwi r0, 0x6
@@ -1850,12 +1850,12 @@ lbl_fn_8010B398_0000184C:
 lbl_fn_8010B398_00001858:
     mr r3, r19
     li r4, 0x40
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     beq lbl_fn_8010B398_0000192C
     mr r3, r19
     li r4, 0x40
-    bl fn_80134134
+    bl boss_findPartById
     mr r22, r3
     mr r3, r19
     li r4, 0x40
@@ -1905,7 +1905,7 @@ lbl_fn_8010B398_00001920:
 lbl_fn_8010B398_0000192C:
     mr r3, r19
     li r4, 0x23
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     beq lbl_fn_8010B398_00001A14
     li r17, 0x0

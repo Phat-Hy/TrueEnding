@@ -50,7 +50,7 @@ extern void enemy_updateAnimTimer(void);
 extern void boss_enablePartStatusFlags(void);
 extern void fn_80133B30(void);
 extern void fn_80133BD8(void);
-extern void fn_80134134(void);
+extern void boss_findPartById(void);
 extern void fn_80137B78(void);
 extern void fn_801388B8(void);
 extern void npc_calcTargetDistance(void);
@@ -1099,7 +1099,7 @@ lbl_fn_800EB4AC_00000D60:
 lbl_fn_800EB4AC_00000D64:
     addi r3, r31, 0x7d4
     li r4, 0x3d
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_800EB4AC_00000D98

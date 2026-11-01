@@ -43,7 +43,7 @@ extern void fn_802E2328(void);
 extern void fn_802E3D60(void);
 extern void fn_802E55B0(void);
 extern void kpad_testActiveFlags(void);
-extern void fn_803EEE10(void);
+extern void dungeon_findArenaNodeByCoords(void);
 extern void printf(void);
 extern void rand(void);
 extern void abort(void);
@@ -320,7 +320,7 @@ lbl_fn_802DC3D0_0000036C:
     lwz r3, lbl_8087F4A0
     li r4, 0x6dd6
     lwzx r5, r5, r0
-    bl fn_803EEE10
+    bl dungeon_findArenaNodeByCoords
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_802DC3D0_000003CC

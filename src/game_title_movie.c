@@ -15,7 +15,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
-extern void fn_8011F8F4(void);
+extern void skill_findEntryById(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void skill_findNodeByTag(void);
@@ -38,7 +38,7 @@ extern void dvd_showDiskErrorDialog(void);
 extern void fn_803935AC(void);
 extern void fn_803CC6D0(void);
 extern void fn_803E5E64(void);
-extern void fn_803EEE10(void);
+extern void dungeon_findArenaNodeByCoords(void);
 extern void fn_80444020(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -963,7 +963,7 @@ lbl_fn_803A9C40_00000BB0:
 lbl_fn_803A9C40_00000BC8:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A9C40_00000BD4:
     mr r28, r3
     b lbl_fn_803A9C40_00000C3C
@@ -1071,7 +1071,7 @@ lbl_fn_803A9DBC_00000D2C:
 lbl_fn_803A9DBC_00000D44:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A9DBC_00000D50:
     mr r30, r3
     b lbl_fn_803A9DBC_00000DB8
@@ -1205,7 +1205,7 @@ lbl_fn_803A9DBC_00000F04:
     lwz r3, lbl_8087F4A0
     cmpwi r3, 0x0
     beq lbl_fn_803A9DBC_00000F1C
-    bl fn_803EEE10
+    bl dungeon_findArenaNodeByCoords
     mr r29, r3
     b lbl_fn_803A9DBC_00000F20
 lbl_fn_803A9DBC_00000F1C:
@@ -1653,7 +1653,7 @@ lbl_fn_803AA5E4_00001548:
 lbl_fn_803AA5E4_00001560:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803AA5E4_0000156C:
     mr r27, r3
     b lbl_fn_803AA5E4_000015C8
@@ -1819,7 +1819,7 @@ lbl_fn_803AA82C_00001790:
 lbl_fn_803AA82C_000017A8:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803AA82C_000017B4:
     mr r5, r3
     b lbl_fn_803AA82C_00001810
@@ -1906,7 +1906,7 @@ lbl_fn_803AA954_000018B8:
 lbl_fn_803AA954_000018D0:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803AA954_000018DC:
     mr r5, r3
     b lbl_fn_803AA954_00001938

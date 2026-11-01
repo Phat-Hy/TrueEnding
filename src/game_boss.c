@@ -113,7 +113,7 @@ void fn_8006A9A4(void);
 void boss_triggerEventSequence(void);
 void fn_8006AB54(void);
 void fn_8006AC08(void);
-void fn_8006AD24(void);
+void boss_lookupActionEntry(void);
 void fn_8006AF38(void);
 void boss_initActionStream(void);
 void fn_8006B0C8(void);
@@ -2450,7 +2450,7 @@ lbl_fn_8006AC08_00001F58:
     blr
 }
 
-asm void fn_8006AD24(void)
+asm void boss_lookupActionEntry(void)
 {
     nofralloc
     stwu r1, -0x50(r1)
@@ -2463,41 +2463,41 @@ asm void fn_8006AD24(void)
     mr r30, r4
     lwz r0, 0x0(r3)
     srwi. r0, r0, 31
-    bne lbl_fn_8006AD24_00001FB0
+    bne lbl_boss_lookupActionEntry_00001FB0
     lbz r0, 0x0(r3)
     addi r4, r3, 0x1
     clrlwi r3, r0, 25
-    b lbl_fn_8006AD24_00001FB8
-lbl_fn_8006AD24_00001FB0:
+    b lbl_boss_lookupActionEntry_00001FB8
+lbl_boss_lookupActionEntry_00001FB0:
     lwz r4, 0x8(r3)
     lwz r3, 0x4(r3)
-lbl_fn_8006AD24_00001FB8:
+lbl_boss_lookupActionEntry_00001FB8:
     cmpwi r3, 0x0
-    beq lbl_fn_8006AD24_00001FFC
+    beq lbl_boss_lookupActionEntry_00001FFC
     subi r3, r3, 0x1
     li r0, -0x1
     cmplw r3, r0
-    bge lbl_fn_8006AD24_00001FD4
+    bge lbl_boss_lookupActionEntry_00001FD4
     mr r5, r3
-lbl_fn_8006AD24_00001FD4:
+lbl_boss_lookupActionEntry_00001FD4:
     add r3, r4, r5
-lbl_fn_8006AD24_00001FD8:
+lbl_boss_lookupActionEntry_00001FD8:
     lbz r0, 0x0(r3)
     cmpwi r0, 0x2e
-    bne lbl_fn_8006AD24_00001FEC
+    bne lbl_boss_lookupActionEntry_00001FEC
     subf r5, r4, r3
-    b lbl_fn_8006AD24_00002000
-lbl_fn_8006AD24_00001FEC:
+    b lbl_boss_lookupActionEntry_00002000
+lbl_boss_lookupActionEntry_00001FEC:
     cmplw r3, r4
-    ble lbl_fn_8006AD24_00001FFC
+    ble lbl_boss_lookupActionEntry_00001FFC
     subi r3, r3, 0x1
-    b lbl_fn_8006AD24_00001FD8
-lbl_fn_8006AD24_00001FFC:
+    b lbl_boss_lookupActionEntry_00001FD8
+lbl_boss_lookupActionEntry_00001FFC:
     li r5, -0x1
-lbl_fn_8006AD24_00002000:
+lbl_boss_lookupActionEntry_00002000:
     addis r0, r5, 0x1
     cmplwi r0, 0xffff
-    beq lbl_fn_8006AD24_000020E4
+    beq lbl_boss_lookupActionEntry_000020E4
     addi r6, r5, 0x1
     mr r4, r31
     addi r3, r1, 0x30
@@ -2509,36 +2509,36 @@ lbl_fn_8006AD24_00002000:
     bl boss_initActionStream
     lwz r0, 0x0(r31)
     srwi. r4, r0, 31
-    bne lbl_fn_8006AD24_00002060
+    bne lbl_boss_lookupActionEntry_00002060
     lwz r3, 0x24(r1)
     srwi. r0, r3, 31
-    bne lbl_fn_8006AD24_00002060
+    bne lbl_boss_lookupActionEntry_00002060
     lwz r0, 0x28(r1)
     stw r0, 0x4(r31)
     stw r3, 0x0(r31)
     lwz r0, 0x2c(r1)
     stw r0, 0x8(r31)
-    b lbl_fn_8006AD24_000020B8
-lbl_fn_8006AD24_00002060:
+    b lbl_boss_lookupActionEntry_000020B8
+lbl_boss_lookupActionEntry_00002060:
     cmpwi r4, 0x0
-    beq lbl_fn_8006AD24_00002070
+    beq lbl_boss_lookupActionEntry_00002070
     lwz r5, 0x4(r31)
-    b lbl_fn_8006AD24_00002078
-lbl_fn_8006AD24_00002070:
+    b lbl_boss_lookupActionEntry_00002078
+lbl_boss_lookupActionEntry_00002070:
     lbz r0, 0x0(r31)
     clrlwi r5, r0, 25
-lbl_fn_8006AD24_00002078:
+lbl_boss_lookupActionEntry_00002078:
     lwz r0, 0x24(r1)
     srwi. r0, r0, 31
-    bne lbl_fn_8006AD24_00002094
+    bne lbl_boss_lookupActionEntry_00002094
     lbz r0, 0x24(r1)
     addi r6, r1, 0x25
     clrlwi r4, r0, 25
-    b lbl_fn_8006AD24_0000209C
-lbl_fn_8006AD24_00002094:
+    b lbl_boss_lookupActionEntry_0000209C
+lbl_boss_lookupActionEntry_00002094:
     lwz r6, 0x2c(r1)
     lwz r4, 0x28(r1)
-lbl_fn_8006AD24_0000209C:
+lbl_boss_lookupActionEntry_0000209C:
     lbz r0, 0x14(r1)
     add r7, r6, r4
     stb r0, 0x10(r1)
@@ -2546,20 +2546,20 @@ lbl_fn_8006AD24_0000209C:
     addi r8, r1, 0x10
     li r4, 0x0
     bl actor_dispatchMessage
-lbl_fn_8006AD24_000020B8:
+lbl_boss_lookupActionEntry_000020B8:
     lwz r0, 0x24(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_8006AD24_000020CC
+    beq lbl_boss_lookupActionEntry_000020CC
     lwz r3, 0x2c(r1)
     bl dtor_80084684
-lbl_fn_8006AD24_000020CC:
+lbl_boss_lookupActionEntry_000020CC:
     lwz r0, 0x30(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_8006AD24_0000216C
+    beq lbl_boss_lookupActionEntry_0000216C
     lwz r3, 0x38(r1)
     bl dtor_80084684
-    b lbl_fn_8006AD24_0000216C
-lbl_fn_8006AD24_000020E4:
+    b lbl_boss_lookupActionEntry_0000216C
+lbl_boss_lookupActionEntry_000020E4:
     lis r4, lbl_8073148C@ha
     mr r5, r30
     addi r4, r4, lbl_8073148C@l
@@ -2568,24 +2568,24 @@ lbl_fn_8006AD24_000020E4:
     bl fn_8006AF38
     lwz r0, 0x0(r31)
     srwi. r0, r0, 31
-    bne lbl_fn_8006AD24_00002114
+    bne lbl_boss_lookupActionEntry_00002114
     lbz r0, 0x0(r31)
     clrlwi r4, r0, 25
-    b lbl_fn_8006AD24_00002118
-lbl_fn_8006AD24_00002114:
+    b lbl_boss_lookupActionEntry_00002118
+lbl_boss_lookupActionEntry_00002114:
     lwz r4, 0x4(r31)
-lbl_fn_8006AD24_00002118:
+lbl_boss_lookupActionEntry_00002118:
     lwz r0, 0x18(r1)
     srwi. r0, r0, 31
-    bne lbl_fn_8006AD24_00002134
+    bne lbl_boss_lookupActionEntry_00002134
     lbz r0, 0x18(r1)
     addi r6, r1, 0x19
     clrlwi r5, r0, 25
-    b lbl_fn_8006AD24_0000213C
-lbl_fn_8006AD24_00002134:
+    b lbl_boss_lookupActionEntry_0000213C
+lbl_boss_lookupActionEntry_00002134:
     lwz r6, 0x20(r1)
     lwz r5, 0x1c(r1)
-lbl_fn_8006AD24_0000213C:
+lbl_boss_lookupActionEntry_0000213C:
     lbz r0, 0xc(r1)
     add r7, r6, r5
     stb r0, 0x8(r1)
@@ -2595,10 +2595,10 @@ lbl_fn_8006AD24_0000213C:
     bl actor_dispatchMessage
     lwz r0, 0x18(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_8006AD24_0000216C
+    beq lbl_boss_lookupActionEntry_0000216C
     lwz r3, 0x20(r1)
     bl dtor_80084684
-lbl_fn_8006AD24_0000216C:
+lbl_boss_lookupActionEntry_0000216C:
     mr r3, r31
     lwz r31, 0x4c(r1)
     lwz r30, 0x48(r1)

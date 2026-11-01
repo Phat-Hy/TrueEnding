@@ -21,7 +21,7 @@ extern void fn_80154344(void);
 extern void inventory_calcTotalStats(void);
 extern void party_evalTacticCondition(void);
 extern void debuff_clearStatus(void);
-extern void fn_801750FC(void);
+extern void battle_calcOutcomeBonus(void);
 extern void fn_8018F81C(void);
 extern void fn_8018F84C(void);
 extern void fn_80191960(void);
@@ -1167,7 +1167,7 @@ lbl_fn_801A1D9C_00000F0C:
     cmpwi r3, 0x0
     beq lbl_fn_801A1D9C_00000F30
     lwz r3, 0x4(r31)
-    bl fn_801750FC
+    bl battle_calcOutcomeBonus
     li r30, 0x1
 lbl_fn_801A1D9C_00000F30:
     lwz r5, 0x4(r31)
@@ -1433,7 +1433,7 @@ lbl_fn_801A2290_0000127C:
     lwz r0, 0x1208(r3)
     cmpwi r0, 0x0
     beq lbl_fn_801A2290_00001290
-    bl fn_801750FC
+    bl battle_calcOutcomeBonus
 lbl_fn_801A2290_00001290:
     lwz r3, 0x4(r30)
     li r4, 0x0

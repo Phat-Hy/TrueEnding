@@ -10,7 +10,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8006AD24(void);
+extern void boss_lookupActionEntry(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void map_debugLog(void);
@@ -1881,7 +1881,7 @@ lbl_fn_801CC0AC_000017B8:
     bl actor_dispatchMessage
     mr r4, r28
     addi r3, r1, 0x2c
-    bl fn_8006AD24
+    bl boss_lookupActionEntry
     lwz r0, 0x20(r1)
     srwi. r0, r0, 31
     beq lbl_fn_801CC0AC_00001864

@@ -15,7 +15,7 @@ extern void talk_parseDialogue(void);
 extern void talk_parseDialogueTokens(void);
 extern void talk_copyUtf16String(void);
 extern void skill_calcTrajectory(void);
-extern void fn_8006AD24(void);
+extern void boss_lookupActionEntry(void);
 extern void script_executeOpcode(void);
 extern void str_assignBuffer(void);
 extern void mem_alloc(void);
@@ -2033,7 +2033,7 @@ asm void fn_801F407C(void)
     bl actor_dispatchMessage
     mr r3, r29
     mr r4, r27
-    bl fn_8006AD24
+    bl boss_lookupActionEntry
     lwz r0, 0x18(r1)
     srwi. r0, r0, 31
     beq lbl_fn_801F407C_00001A6C

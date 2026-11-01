@@ -56,7 +56,7 @@ extern void fn_8013C434(void);
 extern void fn_8013C478(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_getGlobalManager(void);
-extern void fn_80140500(void);
+extern void quest_resetActiveObjectiveSlots(void);
 extern void quest_initMarkerCoords(void);
 extern void fn_80140588(void);
 extern void quest_updateFlow(void);
@@ -2036,7 +2036,7 @@ lbl_fn_80314BD8_000019E8:
     addi r4, r1, 0x68
     bl vec3_copy
     addi r3, r1, 0x1b0
-    bl fn_80140500
+    bl quest_resetActiveObjectiveSlots
     addi r3, r1, 0x158
     addi r4, r30, 0x15f8
     bl vec3_assign

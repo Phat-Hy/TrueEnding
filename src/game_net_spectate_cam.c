@@ -49,7 +49,7 @@ extern void fn_803B9044(void);
 extern void fn_803B9638(void);
 extern void fn_803B97C8(void);
 extern void fn_803CE44C(void);
-extern void fn_803EEE10(void);
+extern void dungeon_findArenaNodeByCoords(void);
 extern void fn_80453DBC(void);
 extern void fn_804741C0(void);
 extern void fn_8047C7FC(void);
@@ -377,7 +377,7 @@ lbl_fn_80533BE0_000003C8:
     add r30, r0, r28
     lwzx r4, r28, r0
     lwz r5, 0x4(r30)
-    bl fn_803EEE10
+    bl dungeon_findArenaNodeByCoords
     cmpwi r3, 0x0
     beq lbl_fn_80533BE0_000003FC
     lwz r12, 0x0(r3)
@@ -414,7 +414,7 @@ lbl_fn_80533BE0_00000450:
     add r29, r0, r28
     lwzx r4, r28, r0
     lwz r5, 0x4(r29)
-    bl fn_803EEE10
+    bl dungeon_findArenaNodeByCoords
     cmpwi r3, 0x0
     beq lbl_fn_80533BE0_000004B0
     lwz r0, 0xc(r29)

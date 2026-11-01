@@ -13,7 +13,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
-extern void fn_800CB688(void);
+extern void morph_resetTargetWeight(void);
 extern void morph_dispatchTargetUpdate(void);
 extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
@@ -1730,7 +1730,7 @@ asm void fn_802AA89C(void)
     lfs f1, lbl_80883E38
     addi r3, r1, 0x10
     li r4, 0x0
-    bl fn_800CB688
+    bl morph_resetTargetWeight
     lwz r12, 0x0(r31)
     mr r3, r31
     li r4, 0x1

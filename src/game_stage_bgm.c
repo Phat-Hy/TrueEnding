@@ -48,7 +48,7 @@ extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void npc_isInteractionReady(void);
 extern void quest_getGlobalManager(void);
-extern void fn_80140500(void);
+extern void quest_resetActiveObjectiveSlots(void);
 extern void quest_initMarkerCoords(void);
 extern void quest_resetObjectiveBounds(void);
 extern void fn_80178018(void);
@@ -1206,7 +1206,7 @@ lbl_fn_8019FEC4_00000E3C:
     bl mtx_multVec
 lbl_fn_8019FEC4_00000E78:
     addi r3, r1, 0x158
-    bl fn_80140500
+    bl quest_resetActiveObjectiveSlots
     addi r3, r1, 0x64
     addi r4, r1, 0xb8
     bl vec3_assign

@@ -60,7 +60,7 @@ extern void debuff_removeStatusEffect(void);
 extern void fn_8016E5F0(void);
 extern void actor_setState(void);
 extern void battle_applyStatusEffect(void);
-extern void fn_801750FC(void);
+extern void battle_calcOutcomeBonus(void);
 extern void battle_awardExp(void);
 extern void battle_activateExpReward(void);
 extern void fn_80176DFC(void);
@@ -1916,7 +1916,7 @@ lbl_fn_8000F1EC_000018A8:
     lwz r0, 0x1208(r3)
     cmpwi r0, 0x0
     beq lbl_fn_8000F1EC_000018D0
-    bl fn_801750FC
+    bl battle_calcOutcomeBonus
 lbl_fn_8000F1EC_000018D0:
     lwz r3, 0x1c(r29)
     lwz r15, 0x48(r3)

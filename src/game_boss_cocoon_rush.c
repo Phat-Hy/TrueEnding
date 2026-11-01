@@ -10,7 +10,7 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_800698DC(void);
 extern void atn_normalizePath(char* str);
-extern void fn_8006AD24(void);
+extern void boss_lookupActionEntry(void);
 extern void fn_8006B0C8(void);
 extern void fn_8006B404(void);
 extern void fn_8006D008(void);
@@ -1845,7 +1845,7 @@ lbl_atn_LoadEffect_destructor_00001758:
     bl actor_dispatchMessage
     mr r4, r25
     addi r3, r1, 0x74
-    bl fn_8006AD24
+    bl boss_lookupActionEntry
     lwz r0, 0x20(r1)
     srwi. r0, r0, 31
     beq lbl_atn_LoadEffect_destructor_000017D4
