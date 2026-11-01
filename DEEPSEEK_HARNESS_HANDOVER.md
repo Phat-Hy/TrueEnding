@@ -16170,3 +16170,14 @@ and the field frame came back **`mean=(10.37, 12.72, 7.09)` — identical to the
 **4. What it narrows, and the next candidate.** Not texture identity. The remaining candidates for "the sampled texel is zero" are: (a) the **texture content** never reaching aurora's upload — the guest's texture bytes are read by aurora through the mapped MEM2 plane, so a wrong address mapping (`image3` decode → cached alias) would sample zeros; (b) the **copy-resolution path** (`resolve_sampled_textures` binding a copy destination's shadow texture) not matching these draws; (c) the **TEV stage's texture coordinate** selecting a texel outside the image. (a) is checkable statically against one emitted texobj: `0x904E6D00` and `0x91884100` are MEM2 addresses, so the next step is to read those texels out of the guest plane in the same run and compare them with what the layer's decoder produces for the same address — the same "content vs sampling" split that closed priority B.
 
 **5. Run log.** DLL rebuild 4 s; run 2 810 frames, exit code 0 in 280 s, feeds whole-frame (203 draws at 2801), readback identical to AP-BF's baseline. Source reverted, DLL rebuilt back, tree clean.
+
+**AP-BG addendum — the colour/alpha-update override is excluded too.** `TLS_AURORA_FORCE_UPDATE=1` (patch 0004's override that keeps colour and alpha updates on regardless of the guest's `GXSetColorUpdate`/`GXSetAlphaUpdate` state) leaves the field readback at **`mean=(10.37,12.72,7.09)`**, identical to the default. So the draws are not being suppressed by an update-enable the guest disabled, and the elimination list for the dark field frame now reads:
+
+| candidate | test | verdict |
+|---|---|---|
+| geometry culled / scissor / viewport / depth | `TLS_AURORA_TEST_WHITE_TEV=1` | **excluded** - frame saturates to **255.00** |
+| raster / material channel | `TLS_AURORA_TEST_MAT_WHITE=1` | **excluded** - unchanged `10.38` |
+| texture-cache identity (`texObjId`/`texDataVersion` = 0) | per-texture identity in the adapter | **excluded** - identical `10.37` (AP-BG) |
+| colour/alpha update enable | `TLS_AURORA_FORCE_UPDATE=1` | **excluded** - identical `10.37` |
+
+which leaves three, in the order they are worth testing: **(a)** the texels aurora actually reads at the emitted address (`image3` decode → cached alias) are not the texture the layer decodes - check by printing the first bytes at an emitted address (`0x91884100`, `0x904E6D00`) from inside the adapter and comparing them with the layer's decode of the same address; **(b)** the copy-resolution path not binding a shadow copy for these draws; **(c)** the TEV stage's texcoord selecting outside the image. (a) is one adapter printf plus one run and is the same "content vs sampling" split that closed priority B - do that first.
