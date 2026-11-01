@@ -23,6 +23,53 @@ Next:     the 3-5 functions worth naming or decompiling next
 
 <!-- newest first -->
 
+### 2026-11-01 — Batch 8: atn::ColliObject, atn::ColliTree, and atn::*Curve Animation Family Renames (31 functions)
+
+Numbers:  progress before -> after: 99.30 % -> 99.30 % (7,425,512 / 7,477,608 bytes, 18,054 / 18,155 functions)
+Named:
+- fn_80059550 -> atn_ColliObject_destructor (evidence: virtual destructor slot 0 in vtable lbl_807775C0 [atn::ColliObject])
+- fn_80058120 -> atn_ColliObject_testRay (evidence: virtual ray intersection test slot 1 in vtable lbl_807775C0 [atn::ColliObject])
+- fn_8005823C -> atn_ColliObject_testSphere (evidence: virtual sphere intersection test slot 2 in vtable lbl_807775C0 [atn::ColliObject])
+- fn_80058358 -> atn_ColliObject_testCapsule (evidence: virtual capsule intersection test slot 3 in vtable lbl_807775C0 [atn::ColliObject])
+- fn_80058474 -> atn_ColliObject_testBox (evidence: virtual box intersection test slot 4 in vtable lbl_807775C0 [atn::ColliObject])
+- fn_8005886C -> atn_ColliObject_getAABB (evidence: virtual AABB calculation slot 5 in vtable lbl_807775C0 [atn::ColliObject])
+- fn_800595D8 -> atn_ColliTree_destructor (evidence: virtual destructor slot 0 in vtable lbl_80777588 [atn::ColliTree])
+- fn_80058C20 -> atn_ColliTree_testRay (evidence: virtual ray intersection test slot 1 in vtable lbl_80777588 [atn::ColliTree])
+- fn_80058D0C -> atn_ColliTree_testSphere (evidence: virtual sphere intersection test slot 2 in vtable lbl_80777588 [atn::ColliTree])
+- fn_80058DF8 -> atn_ColliTree_testCapsule (evidence: virtual capsule intersection test slot 3 in vtable lbl_80777588 [atn::ColliTree])
+- fn_800591D4 -> atn_ColliTree_testBox (evidence: virtual box intersection test slot 4 in vtable lbl_80777588 [atn::ColliTree])
+- fn_8005C248 -> atn_SinusCurve_destructor (evidence: virtual destructor slot 0 in vtable lbl_80777788 [atn::SinusCurve])
+- fn_8005CAA4 -> atn_SinusCurve_evaluate (evidence: virtual evaluation slot 1 in vtable lbl_80777788 [atn::SinusCurve])
+- fn_8005DD1C -> atn_SinusCurve_getDuration (evidence: virtual duration query slot 2 in vtable lbl_80777788 [atn::SinusCurve])
+- fn_8005DD0C -> atn_SinusCurve_getDerivative (evidence: virtual derivative query slot 3 in vtable lbl_80777788 [atn::SinusCurve])
+- fn_8005CC98 -> atn_CosinusCurve_destructor (evidence: virtual destructor slot 0 in vtable lbl_80777758 [atn::CosinusCurve])
+- fn_8005CE94 -> atn_CosinusCurve_evaluate (evidence: virtual evaluation slot 1 in vtable lbl_80777758 [atn::CosinusCurve])
+- fn_8005DCC8 -> atn_CosinusCurve_getDuration (evidence: virtual duration query slot 2 in vtable lbl_80777758 [atn::CosinusCurve])
+- fn_8005DCB8 -> atn_CosinusCurve_getDerivative (evidence: virtual derivative query slot 3 in vtable lbl_80777758 [atn::CosinusCurve])
+- fn_8005D08C -> atn_ConstantCurve_destructor (evidence: virtual destructor slot 0 in vtable lbl_80777728 [atn::ConstantCurve])
+- fn_8005D27C -> atn_ConstantCurve_evaluate (evidence: virtual evaluation slot 1 in vtable lbl_80777728 [atn::ConstantCurve])
+- fn_8005DCB0 -> atn_ConstantCurve_getDuration (evidence: virtual duration query slot 2 in vtable lbl_80777728 [atn::ConstantCurve])
+- fn_8005DCA0 -> atn_ConstantCurve_getDerivative (evidence: virtual derivative query slot 3 in vtable lbl_80777728 [atn::ConstantCurve])
+- fn_8005D464 -> atn_Polynomial1Curve_destructor (evidence: virtual destructor slot 0 in vtable lbl_807776F8 [atn::Polynomial1Curve])
+- fn_8005D664 -> atn_Polynomial1Curve_evaluate (evidence: virtual evaluation slot 1 in vtable lbl_807776F8 [atn::Polynomial1Curve])
+- fn_8005DC90 -> atn_Polynomial1Curve_getDuration (evidence: virtual duration query slot 2 in vtable lbl_807776F8 [atn::Polynomial1Curve])
+- fn_8005DC74 -> atn_Polynomial1Curve_getDerivative (evidence: virtual derivative query slot 3 in vtable lbl_807776F8 [atn::Polynomial1Curve])
+- fn_8005D84C -> atn_Polynomial2Curve_destructor (evidence: virtual destructor slot 0 in vtable lbl_807776C8 [atn::Polynomial2Curve])
+- fn_8005DA34 -> atn_Polynomial2Curve_evaluate (evidence: virtual evaluation slot 1 in vtable lbl_807776C8 [atn::Polynomial2Curve])
+- fn_8005DC54 -> atn_Polynomial2Curve_getDuration (evidence: virtual duration query slot 2 in vtable lbl_807776C8 [atn::Polynomial2Curve])
+- fn_8005DC2C -> atn_Polynomial2Curve_getDerivative (evidence: virtual derivative query slot 3 in vtable lbl_807776C8 [atn::Polynomial2Curve])
+Decompiled: none in this unit
+Notes:
+- Resolves composite collision trees (`atn::ColliTree`), composite collision objects (`atn::ColliObject`), and the entire family of procedural mathematical animation curves (`atn::*Curve`):
+  - `atn::ColliObject` and `atn::ColliTree` aggregate primitive collision tests across meshes and hierarchy nodes.
+  - The `atn::*Curve` hierarchy implements 4 virtual operations: scalar deleting destructor (slot 0), position/value evaluation at float time $t$ (slot 1), time duration query (slot 2), and first derivative / slope computation (slot 3).
+  - All 19 local `lbl_fn_*` assembly labels inside caller asm blocks were simultaneously normalized to `lbl_atn_*` across 3 source files (`src/game_mission.c`, `src/game_party.c`, `src/game_talk.c`).
+Next:
+1. `atn_LH_Texture_constructor` (`fn_800D5738`, 120 B) and `atn_LH_Texture_destructor` (`fn_800D57B0`, 88 B) -> decompile to C in `src/game_depth.c`.
+2. `fn_800D7278` (1252 B): character texture bake (EFB copy + `GXDrawDone` + readback).
+3. Batch 9 renames in `atn::DrawHelper` and `Event::Puppeteer`.
+
+
 ### 2026-11-01 — Batch 7: atn::ColliBase, atn::ColliSphere, atn::ColliCapsule, and atn::ColliBox Collision Primitives Renames (24 functions)
 
 Numbers:  progress before -> after: 99.30 % -> 99.30 % (7,425,512 / 7,477,608 bytes, 18,054 / 18,155 functions)

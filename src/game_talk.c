@@ -34,7 +34,7 @@ void fn_8005BFAC(void);
 void fn_8005BFCC(void);
 void fn_8005C1F8(void);
 void fn_8005C220(void);
-void fn_8005C248(void);
+void atn_SinusCurve_destructor(void);
 void fn_8005C448(void);
 void fn_8005C534(void);
 
@@ -1433,7 +1433,7 @@ asm void fn_8005C220(void)
     blr
 }
 
-asm void fn_8005C248(void)
+asm void atn_SinusCurve_destructor(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1452,7 +1452,7 @@ asm void fn_8005C248(void)
     li r3, 0x18
     bl fn_80084320
     cmpwi r3, 0x0
-    beq lbl_fn_8005C248_00001268
+    beq lbl_atn_SinusCurve_destructor_00001268
     lfs f0, 0xc(r28)
     lis r4, lbl_80777758@ha
     lfs f1, 0x10(r28)
@@ -1467,110 +1467,110 @@ asm void fn_8005C248(void)
     stfs f0, 0xc(r3)
     stfs f1, 0x10(r3)
     stfs f2, 0x14(r3)
-lbl_fn_8005C248_00001268:
+lbl_atn_SinusCurve_destructor_00001268:
     lwz r29, 0x0(r28)
     cmpwi r29, 0x0
     stw r3, 0x0(r28)
-    beq lbl_fn_8005C248_000013C8
+    beq lbl_atn_SinusCurve_destructor_000013C8
     addic. r0, r29, 0x4
-    beq lbl_fn_8005C248_0000131C
+    beq lbl_atn_SinusCurve_destructor_0000131C
     lwz r30, 0x4(r29)
     cmpwi r30, 0x0
-    beq lbl_fn_8005C248_0000131C
+    beq lbl_atn_SinusCurve_destructor_0000131C
     addic. r0, r30, 0x4
-    beq lbl_fn_8005C248_000012D0
+    beq lbl_atn_SinusCurve_destructor_000012D0
     lwz r31, 0x4(r30)
     cmpwi r31, 0x0
-    beq lbl_fn_8005C248_000012D0
+    beq lbl_atn_SinusCurve_destructor_000012D0
     addic. r0, r31, 0x4
-    beq lbl_fn_8005C248_000012B4
+    beq lbl_atn_SinusCurve_destructor_000012B4
     lwz r3, 0x4(r31)
     li r4, 0x1
     bl fn_8005C594
-lbl_fn_8005C248_000012B4:
+lbl_atn_SinusCurve_destructor_000012B4:
     cmpwi r31, 0x0
-    beq lbl_fn_8005C248_000012C8
+    beq lbl_atn_SinusCurve_destructor_000012C8
     lwz r3, 0x0(r31)
     li r4, 0x1
     bl fn_8005C594
-lbl_fn_8005C248_000012C8:
+lbl_atn_SinusCurve_destructor_000012C8:
     mr r3, r31
     bl dtor_80084684
-lbl_fn_8005C248_000012D0:
+lbl_atn_SinusCurve_destructor_000012D0:
     cmpwi r30, 0x0
-    beq lbl_fn_8005C248_00001314
+    beq lbl_atn_SinusCurve_destructor_00001314
     lwz r31, 0x0(r30)
     cmpwi r31, 0x0
-    beq lbl_fn_8005C248_00001314
+    beq lbl_atn_SinusCurve_destructor_00001314
     addic. r0, r31, 0x4
-    beq lbl_fn_8005C248_000012F8
+    beq lbl_atn_SinusCurve_destructor_000012F8
     lwz r3, 0x4(r31)
     li r4, 0x1
     bl fn_8005C594
-lbl_fn_8005C248_000012F8:
+lbl_atn_SinusCurve_destructor_000012F8:
     cmpwi r31, 0x0
-    beq lbl_fn_8005C248_0000130C
+    beq lbl_atn_SinusCurve_destructor_0000130C
     lwz r3, 0x0(r31)
     li r4, 0x1
     bl fn_8005C594
-lbl_fn_8005C248_0000130C:
+lbl_atn_SinusCurve_destructor_0000130C:
     mr r3, r31
     bl dtor_80084684
-lbl_fn_8005C248_00001314:
+lbl_atn_SinusCurve_destructor_00001314:
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8005C248_0000131C:
+lbl_atn_SinusCurve_destructor_0000131C:
     cmpwi r29, 0x0
-    beq lbl_fn_8005C248_000013C0
+    beq lbl_atn_SinusCurve_destructor_000013C0
     lwz r30, 0x0(r29)
     cmpwi r30, 0x0
-    beq lbl_fn_8005C248_000013C0
+    beq lbl_atn_SinusCurve_destructor_000013C0
     addic. r0, r30, 0x4
-    beq lbl_fn_8005C248_00001374
+    beq lbl_atn_SinusCurve_destructor_00001374
     lwz r31, 0x4(r30)
     cmpwi r31, 0x0
-    beq lbl_fn_8005C248_00001374
+    beq lbl_atn_SinusCurve_destructor_00001374
     addic. r0, r31, 0x4
-    beq lbl_fn_8005C248_00001358
+    beq lbl_atn_SinusCurve_destructor_00001358
     lwz r3, 0x4(r31)
     li r4, 0x1
     bl fn_8005C594
-lbl_fn_8005C248_00001358:
+lbl_atn_SinusCurve_destructor_00001358:
     cmpwi r31, 0x0
-    beq lbl_fn_8005C248_0000136C
+    beq lbl_atn_SinusCurve_destructor_0000136C
     lwz r3, 0x0(r31)
     li r4, 0x1
     bl fn_8005C594
-lbl_fn_8005C248_0000136C:
+lbl_atn_SinusCurve_destructor_0000136C:
     mr r3, r31
     bl dtor_80084684
-lbl_fn_8005C248_00001374:
+lbl_atn_SinusCurve_destructor_00001374:
     cmpwi r30, 0x0
-    beq lbl_fn_8005C248_000013B8
+    beq lbl_atn_SinusCurve_destructor_000013B8
     lwz r31, 0x0(r30)
     cmpwi r31, 0x0
-    beq lbl_fn_8005C248_000013B8
+    beq lbl_atn_SinusCurve_destructor_000013B8
     addic. r0, r31, 0x4
-    beq lbl_fn_8005C248_0000139C
+    beq lbl_atn_SinusCurve_destructor_0000139C
     lwz r3, 0x4(r31)
     li r4, 0x1
     bl fn_8005C594
-lbl_fn_8005C248_0000139C:
+lbl_atn_SinusCurve_destructor_0000139C:
     cmpwi r31, 0x0
-    beq lbl_fn_8005C248_000013B0
+    beq lbl_atn_SinusCurve_destructor_000013B0
     lwz r3, 0x0(r31)
     li r4, 0x1
     bl fn_8005C594
-lbl_fn_8005C248_000013B0:
+lbl_atn_SinusCurve_destructor_000013B0:
     mr r3, r31
     bl dtor_80084684
-lbl_fn_8005C248_000013B8:
+lbl_atn_SinusCurve_destructor_000013B8:
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8005C248_000013C0:
+lbl_atn_SinusCurve_destructor_000013C0:
     mr r3, r29
     bl dtor_80084684
-lbl_fn_8005C248_000013C8:
+lbl_atn_SinusCurve_destructor_000013C8:
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
     lwz r3, 0x0(r28)

@@ -10,7 +10,7 @@ extern void fn_80057F28(void);
 extern void fn_80058078(void);
 extern void fn_800580BC(void);
 extern void fn_800588FC(void);
-extern void fn_80059550(void);
+extern void atn_ColliObject_destructor(void);
 extern void fn_8005B9CC(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
@@ -642,11 +642,11 @@ asm void fn_804114B4(void)
     addi r3, r30, 0x4c4
     bl fn_80057F28
     lis r4, fn_80057F28@ha
-    lis r5, fn_80059550@ha
+    lis r5, atn_ColliObject_destructor@ha
     addi r3, r30, 0x54c
     li r6, 0x88
     addi r4, r4, fn_80057F28@l
-    addi r5, r5, fn_80059550@l
+    addi r5, r5, atn_ColliObject_destructor@l
     li r7, 0x2
     bl fn_806958E0
     stw r31, 0x65c(r30)
@@ -709,9 +709,9 @@ asm void fn_8041158C(void)
     li r4, 0x0
     bl atn_LoadHandle_destructor
 lbl_fn_8041158C_00000818:
-    lis r4, fn_80059550@ha
+    lis r4, atn_ColliObject_destructor@ha
     addi r3, r29, 0x54c
-    addi r4, r4, fn_80059550@l
+    addi r4, r4, atn_ColliObject_destructor@l
     li r5, 0x88
     li r6, 0x2
     bl fn_806959D8

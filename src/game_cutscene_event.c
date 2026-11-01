@@ -15,7 +15,7 @@ extern void fn_80057F28(void);
 extern void fn_80058078(void);
 extern void fn_800580BC(void);
 extern void fn_800588FC(void);
-extern void fn_80059550(void);
+extern void atn_ColliObject_destructor(void);
 extern void fn_8005B3CC(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
@@ -598,11 +598,11 @@ asm void fn_8032C52C(void)
     lis r3, lbl_80788D20@ha
     lis r4, fn_80057F28@ha
     addi r3, r3, lbl_80788D20@l
-    lis r5, fn_80059550@ha
+    lis r5, atn_ColliObject_destructor@ha
     stw r3, 0x0(r31)
     addi r3, r31, 0x14b0
     addi r4, r4, fn_80057F28@l
-    addi r5, r5, fn_80059550@l
+    addi r5, r5, atn_ColliObject_destructor@l
     li r6, 0x88
     li r7, 0x2
     bl fn_806958E0
