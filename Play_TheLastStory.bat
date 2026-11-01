@@ -73,4 +73,9 @@ REM was measured at 80-140 ms with vsync and 24 ms without - nearly doubling the
 REM If the machine is 2-5x slower than the numbers above, look for a Defender scan: this session
 REM measured the same binary on the same frames running 2-5x faster before a QuickScan started.
 REM Use TLS_LAYER=1 if fps matters more than the reference picture.
+REM A first playtest saw only a black window: the boot's content is genuinely near-black for ~200
+REM presents, AND (AP-BR section 12) the swap chain was not being flipped at all on frames without an
+REM XFB copy, so the window froze while the back buffer - the thing the gate hashes - was correct. The
+REM present gate now has a starvation fallback (8 presents), so the window updates during boot and the
+REM title appears at guest frame ~300 (present ~364, about 75 s at 5 fps). Give it ~2 minutes.
 start "" "%~dp0build\recomp\tls_runner.exe" --window --minimized --novsync --fps 60 %*

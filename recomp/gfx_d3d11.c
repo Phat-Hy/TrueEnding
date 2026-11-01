@@ -4767,8 +4767,36 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
             const char* e = getenv("TLS_PRESENT_ON_XFB");
             s_on_xfb = (e && atoi(e) == 0) ? 0 : 1;
         }
-        if (!s_on_xfb || s_xfbs_this_frame > 0)
-            IDXGISwapChain_Present(s_d3d11.swap_chain, s_d3d11.vsync ? 1 : 0, 0);
+        /* THE STARVATION FALLBACK (5c.46 AP-BR §12) - a playtest found that the window stays BLACK
+         * for the whole boot, and the probe shows why: `s_xfbs_this_frame` is 0 on every present from
+         * #60 to #480 in BOTH renderers, so the XFB rule above skipped Present on all of them. The
+         * window was never flipped at all, whatever the screenshots said - they read the BACK BUFFER,
+         * which is exactly what the gate asserts and why the gate could never see this.
+         *
+         * The rule's purpose is right (do not show the Chapter-1 geometry half), but it must not be
+         * allowed to starve the window: after `kXfbStarve` presents with no XFB copy, present anyway.
+         * In the field an XFB copy arrives every other present, so the counter never reaches the
+         * limit and the geometry half is still hidden; during boot and the title's fade-in the window
+         * now updates a few times a second instead of freezing until the first XFB copy (which the
+         * dossier places at present ~1444, i.e. minutes of black at 3-6 fps). */
+        const int kXfbStarve = 8;
+        static int s_xfb_starve = 0;
+        int presented = (!s_on_xfb || s_xfbs_this_frame > 0);
+        if (presented) {
+            s_xfb_starve = 0;
+        } else if (++s_xfb_starve >= kXfbStarve) {
+            presented = 1;   /* fallback: the window must not starve */
+            s_xfb_starve = 0;
+        }
+        HRESULT hr = S_OK;
+        if (presented)
+            hr = IDXGISwapChain_Present(s_d3d11.swap_chain, s_d3d11.vsync ? 1 : 0, 0);
+        if (getenv("TLS_PRESENT_PROBE") && (s_d3d11_dump_count % 60) == 0) {
+            printf("[Present] present#%d xfbs=%d presented=%d hr=0x%08lX vsync=%d\n",
+                   s_d3d11_dump_count, s_xfbs_this_frame, presented, (unsigned long)hr,
+                   (int)s_d3d11.vsync);
+            fflush(stdout);
+        }
     }
     /* 1 = present WITH an XFB/scanout copy (a display boundary), 2 = present without one. Both are
      * presents and both end a guest frame; the aurora feed needs them apart because the harness

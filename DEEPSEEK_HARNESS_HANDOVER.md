@@ -17154,4 +17154,35 @@ same presents from both renderers: present 301 luma **0.07 (layer) / 0.16 (auror
 45.10**, 2049 **8.87 / 0.00**, 2864 (= guest 2800) **38.20 aurora (the gate reference) / 57.23 layer with
 this shot list**. At 4-5 fps the ~200 boot presents are **1-2 minutes of near-black before the title**, which
 is exactly what a playtest reports as "only a black screen". Recorded so nobody re-diagnoses it: the port is
-not stuck, it is slow, and the gate's PASS says nothing about either number.
+not stuck, it is slow, and the gate's PASS says nothing about either number. **But the boot content was only
+half the answer - see §12: the window was not being flipped at all.**
+
+**12. THE BLACK WINDOW WAS THE SWAP CHAIN NEVER BEING FLIPPED — the defect class the gate structurally cannot
+see.** `TLS_PRESENT_PROBE=1` (new, gate-scrubbed) prints every 60 presents whether `IDXGISwapChain_Present`
+was called and what it returned. On the shipped binaries, in **both** renderers:
+
+```
+[Present] present#60  xfbs=0 presented=0 hr=0x00000000
+[Present] present#120 xfbs=0 presented=0 hr=0x00000000
+... up to #480: presented=0
+```
+
+`presented=0` means **Present was never called**: the XFB rule (`TLS_PRESENT_ON_XFB`, default on — it exists to
+hide the Chapter-1 geometry half) skips the flip on every frame without an XFB/scanout copy, and
+`s_xfbs_this_frame` is 0 on every present from #60 to #480 in both renderers. So the window held its initial
+black content indefinitely while `d3d11_screenshot_<n>.ppm` kept hashing the correct **back buffer** — which
+is exactly why every gate reference passed while a playtest saw nothing: the screenshot is taken *before*
+Present. `TLS_PRESENT_ON_XFB=0` verified the mechanism (Present called every frame) and exposed the other half
+that made this invisible to every run in this dossier: **hr = `0x087A0001` = `DXGI_STATUS_OCCLUDED`** — a
+minimized window is never composited, so no minimized run could have observed a stale window.
+
+**Fix: a starvation fallback in the present gate** (`recomp/gfx_d3d11.c`, `kXfbStarve = 8`): after 8 presents
+with no XFB copy, present anyway. In the field an XFB copy arrives every other present, so the counter never
+reaches the limit and the geometry half stays hidden exactly as measured before; during boot and the title's
+fade-in the window now updates a few times a second. **Gate re-verified after the change: PASS attempt 1,
+both references byte-identical** (`logs_ap/gate_br6.log`) — the proof that the fix touches only the flip and
+not the picture.
+
+**What a playtest should now see:** a restored window that updates during boot (black content, not a frozen
+window), the title at guest frame ~300 (present ~364, ≈75 s at 5 fps), and New Game leading to the field at
+3-6 fps (§11). Still not playable speed; now at least visible.
