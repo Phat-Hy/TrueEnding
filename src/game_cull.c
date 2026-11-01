@@ -21,7 +21,7 @@ extern void fn_800844D8(void);
 extern void fn_800846FC(void);
 extern void fn_80084C24(void);
 extern void atn_Task_constructor(void);
-extern void atn_LH_Texture_constructor(void);
+struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void fn_800D5808(void);
 extern void fn_800D5908(void);
 extern void fn_800D59B8(void);

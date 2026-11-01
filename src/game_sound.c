@@ -148,7 +148,7 @@ extern u32 lbl_8087EE84;
 extern u32 lbl_8087EE88;
 extern u32 lbl_8087EE8C;
 extern u32 lbl_8087EE90;
-extern u32 lbl_8087EE94;
+extern u32 g_TaskManager;
 extern u32 lbl_8087EEB8;
 extern u32 lbl_8087EFE8;
 extern u32 lbl_8087F518;
@@ -300,7 +300,7 @@ asm void fn_80046228(void)
     mflr r0
     stw r0, 0x64(r1)
     stmw r18, 0x28(r1)
-    lwz r25, lbl_8087EE94
+    lwz r25, g_TaskManager
     cmpwi r25, 0x0
     beq lbl_fn_80046228_00000164
     li r27, 0x0

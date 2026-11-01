@@ -19,7 +19,7 @@ extern void fn_800BC2E0(void);
 extern void fn_800BFB70(void);
 extern void fn_800C0508(void);
 extern void fn_800C0D4C(void);
-extern void atn_LH_Texture_constructor(void);
+struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void fn_800D5808(void);
 extern void fn_800D594C(void);
 extern void fn_800D59B8(void);

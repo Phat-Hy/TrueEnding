@@ -23,6 +23,31 @@ Next:     the 3-5 functions worth naming or decompiling next
 
 <!-- newest first -->
 
+### 2026-11-01 — Unit A2: C Decompilation of atn_LH_Texture and Task Manager Bootstrap Resolution
+
+Numbers:  progress before -> after: 99.30 % -> 99.30 % (7,425,512 / 7,477,608 bytes, 18,054 / 18,155 functions)
+Self-check (asm void): git diff -U0 -- src/ shows -4 / +2 (net conversion: 2 functions converted from asm void to readable C)
+Decompiled (100.0 % byte match):
+- atn_LH_Texture_constructor (120 B, 30 insts) -> readable C in src/game_depth.c (match: 100.0 %, 0 diffs)
+  - Deliverable: Initializes 0x30-byte atn_LH_Texture object. Constructs embedded atn::LoadHandle at +0x20 via atn_LoadHandle_constructor, assigns vtable lbl_8078FFB0 (atn::LH_Texture), zeroes handle refcount/status fields at +0x28..+0x2B, and fills the initial 0x20 bytes with debug sentinel 0xBAD0F00D (lis r4, 0xbad1; subi r4, r4, 0xff3; bl memset).
+- atn_LH_Texture_destructor (88 B, 22 insts) -> readable C in src/game_depth.c (match: 100.0 %, 0 diffs)
+  - Deliverable: Scalar deleting destructor for atn_LH_Texture. Calls atn_LoadHandle_destructor(&this->handle, 0), and if scalar delete flag > 0, frees object heap memory via dtor_80084684.
+- Prototype hygiene: updated forward declarations from void f(void) to proper typed struct signatures across 33 caller translation units.
+Named:
+- fn_8047A4C8 -> taskManager_initSystem (evidence: the real task-manager constructor and main system bootstrapper, 2548 B; called directly from main() at line 470 of src/game_event_cutscene_actor.c. Sets up paired-single GQR2..GQR5, DVDInit, NWC24, SCGetLanguage, logs step strings '0\\n'..'7\\n', and at 0x8047A604 allocates the 12-byte task manager global struct lbl_8087EE94 via addi r3,0,12 -> bl fn_80084320 -> zeroes 3 words -> stw r3,-26668(r13). It is the ONLY writer of lbl_8087EE94 in the DOL)
+- lbl_8087EE94 -> g_TaskManager (evidence: 12-byte task manager queue header in .sbss; r13 - 0x682C = 0x808856C0 - 0x682C = 0x8087EE94. Read by game_event_cutscene_actor.c, game_boss_cocoon_shockwave.c, and game_sound.c)
+- fn_800D7278 -> tex_bakeCharacterTexture (evidence: character texture bake routine, 1252 B in src/game_occ.c; queries texture dimensions via GXGetTexObjWidth/Height/Fmt from atn_LH_Texture at +0xC, executes EFB copy + GXDrawDone + readback to CPU memory)
+Notes on Priority List & Dossier Corrections:
+- fn_802189EC: struck from task manager constructor claim. AP-BE proved __init_registers sets r13 = 0x808856C0, not 0x808852A0 (an exact 0x420 error). It is the player equipment priority CSV loader (/boot/player_weapon_priority.csv, /boot/player_protector_priority.csv, /boot/player_param.csv).
+- fn_80207F80: marked done (220 B, 55/55 instructions, 100% byte match decompiled to C in src/game_system_assert.c).
+- fn_8036F268: marked named as world_updateMapTransition (2276 B, only writer of +0x5538 = 1 at lbl_8087F430 + 0x360).
+- Local label hygiene: all local asm labels for taskManager_initSystem and tex_bakeCharacterTexture normalized to lbl_<new>_* across src/game_event_cutscene_actor.c and src/game_occ.c.
+Next:
+1. Decompile taskManager_initSystem / sub-routines (e.g. fn_8047AEBC task registration helper).
+2. Decompile tex_bakeCharacterTexture helper routines.
+3. Batch 11 renames in Event::Puppeteer<atn::Model> and Event::Puppeteer<CharaTask> (lbl_8072F8A8, lbl_8072F8C8).
+
+
 ### 2026-11-01 — Batch 10: atn::Fade*, atn::LensFlare, ArenaTask, AreaEffConfig, and Arms Renames (25 functions)
 
 Numbers:  progress before -> after: 99.30 % -> 99.30 % (7,425,512 / 7,477,608 bytes, 18,054 / 18,155 functions)

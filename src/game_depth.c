@@ -10,7 +10,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void dtor_80084684(void);
+extern void dtor_80084684(void*);
 extern void fn_8004B290(void);
 extern void fn_8004B338(void);
 extern void fn_8004B378(void);
@@ -20,8 +20,8 @@ extern void fn_80083AD4(void);
 extern void fn_800C2418(void);
 extern void fn_800C2448(void);
 extern void fn_800C2520(void);
-extern void atn_LoadHandle_constructor(void);
-extern void atn_LoadHandle_destructor(void);
+struct atn_LoadHandle; extern void atn_LoadHandle_constructor(void*);
+extern void atn_LoadHandle_destructor(void*, int);
 extern void fn_80473EFC(void);
 extern void fn_80473F50(void);
 extern void fn_80473F88(void);
@@ -74,8 +74,23 @@ typedef struct atn_TaskBase {
 
 BOOL atn_TaskBase_isValid(atn_TaskBase* task);
 void atn_Task_initCookie(void);
-void atn_LH_Texture_constructor(void);
-void atn_LH_Texture_destructor(void);
+typedef struct atn_LoadHandle {
+    void* vtable;
+    u32 field_04;
+} atn_LoadHandle;
+
+typedef struct atn_LH_Texture {
+    u8 raw[0x20];
+    atn_LoadHandle handle;
+    u32 field_28;
+    u8 field_2c;
+    u8 field_2d;
+    u8 field_2e;
+    u8 field_2f;
+} atn_LH_Texture;
+
+atn_LH_Texture* atn_LH_Texture_constructor(atn_LH_Texture* this);
+atn_LoadHandle* atn_LH_Texture_destructor(atn_LoadHandle* handle, int flags);
 void fn_800D5808(void);
 void fn_800D58A4(void);
 void fn_800D5908(void);
@@ -111,67 +126,29 @@ void atn_Task_initCookie(void)
     *(u64*)lbl_807C75D0 = *(u64*)lbl_80734628;
 }
 
-asm void atn_LH_Texture_constructor(void)
+atn_LH_Texture* atn_LH_Texture_constructor(atn_LH_Texture* this)
 {
-    nofralloc
-    stwu r1, -0x10(r1)
-    mflr r0
-    stw r0, 0x14(r1)
-    stw r31, 0xc(r1)
-    addi r31, r3, 0x20
-    stw r30, 0x8(r1)
-    mr r30, r3
-    mr r3, r31
-    bl atn_LoadHandle_constructor
-    lis r3, lbl_8078FFB0@ha
-    li r0, 0x0
-    addi r3, r3, lbl_8078FFB0@l
-    lis r4, 0xbad1
-    stw r3, 0x0(r31)
-    mr r3, r30
-    subi r4, r4, 0xff3
-    li r5, 0x20
-    stw r0, 0x28(r30)
-    stb r0, 0x2c(r30)
-    stb r0, 0x2d(r30)
-    stb r0, 0x2e(r30)
-    stb r0, 0x2f(r30)
-    bl memset
-    mr r3, r30
-    lwz r31, 0xc(r1)
-    lwz r30, 0x8(r1)
-    lwz r0, 0x14(r1)
-    mtlr r0
-    addi r1, r1, 0x10
-    blr
+    atn_LoadHandle* handle = &this->handle;
+    atn_LoadHandle_constructor(handle);
+    handle->vtable = (void*)lbl_8078FFB0;
+    this->field_28 = 0;
+    this->field_2c = 0;
+    this->field_2d = 0;
+    this->field_2e = 0;
+    this->field_2f = 0;
+    memset(this, 0xBAD0F00D, 0x20);
+    return this;
 }
 
-asm void atn_LH_Texture_destructor(void)
+atn_LoadHandle* atn_LH_Texture_destructor(atn_LoadHandle* handle, int flags)
 {
-    nofralloc
-    stwu r1, -0x10(r1)
-    mflr r0
-    cmpwi r3, 0x0
-    stw r0, 0x14(r1)
-    stw r31, 0xc(r1)
-    mr r31, r4
-    stw r30, 0x8(r1)
-    mr r30, r3
-    beq lbl_atn_LH_Texture_destructor_00000128
-    li r4, 0x0
-    bl atn_LoadHandle_destructor
-    cmpwi r31, 0x0
-    ble lbl_atn_LH_Texture_destructor_00000128
-    mr r3, r30
-    bl dtor_80084684
-lbl_atn_LH_Texture_destructor_00000128:
-    mr r3, r30
-    lwz r31, 0xc(r1)
-    lwz r30, 0x8(r1)
-    lwz r0, 0x14(r1)
-    mtlr r0
-    addi r1, r1, 0x10
-    blr
+    if (handle) {
+        atn_LoadHandle_destructor(handle, 0);
+        if (flags > 0) {
+            dtor_80084684(handle);
+        }
+    }
+    return handle;
 }
 
 asm void fn_800D5808(void)

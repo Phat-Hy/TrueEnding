@@ -120,7 +120,7 @@ extern u32 lbl_8087E07C;
 extern u32 lbl_8087E080;
 extern u32 lbl_8087E084;
 extern u32 lbl_8087EE90;
-extern u32 lbl_8087EE94;
+extern u32 g_TaskManager;
 extern u32 lbl_8087EE98;
 extern u32 lbl_8087EEB0;
 extern u32 lbl_8087EEB8;
@@ -161,7 +161,7 @@ void fn_80479EA0(void);
 void fn_8047A158(void);
 void fn_8047A410(void);
 void fn_8047A424(void);
-void fn_8047A4C8(void);
+void taskManager_initSystem(void);
 void fn_8047AEBC(void);
 
 asm void fn_8047961C(void)
@@ -467,7 +467,7 @@ asm void main(void)
     mflr r0
     stw r0, 0xa4(r1)
     stmw r14, 0x58(r1)
-    bl fn_8047A4C8
+    bl taskManager_initSystem
     lis r20, fn_8047A410@ha
     lis r21, fn_8047A424@ha
     lis r23, lbl_80775B60@ha
@@ -707,7 +707,7 @@ lbl_main_000006C0:
     bl fn_80071D60
     lwz r3, lbl_8087F9A0
     bl fn_80570CFC
-    lwz r18, lbl_8087EE94
+    lwz r18, g_TaskManager
     li r16, 0x0
     li r31, 0x0
     b lbl_main_00000860
@@ -1233,7 +1233,7 @@ lbl_fn_8047A424_00000E94:
     blr
 }
 
-asm void fn_8047A4C8(void)
+asm void taskManager_initSystem(void)
 {
     nofralloc
     stwu r1, -0x250(r1)
@@ -1265,13 +1265,13 @@ asm void fn_8047A4C8(void)
     bl SCGetLanguage
     clrlwi r0, r3, 24
     cmplwi r0, 0x6
-    blt lbl_fn_8047A4C8_00000F28
+    blt lbl_taskManager_initSystem_00000F28
     li r3, 0x1
-lbl_fn_8047A4C8_00000F28:
+lbl_taskManager_initSystem_00000F28:
     clrlwi. r0, r3, 24
-    bne lbl_fn_8047A4C8_00000F34
+    bne lbl_taskManager_initSystem_00000F34
     li r3, 0x1
-lbl_fn_8047A4C8_00000F34:
+lbl_taskManager_initSystem_00000F34:
     clrlwi r3, r3, 24
     bl fn_8006BA54
     bl fn_80071220
@@ -1291,10 +1291,10 @@ lbl_fn_8047A4C8_00000F34:
     mr r6, r5
     bl fn_80084320
     cmpwi r3, 0x0
-    beq lbl_fn_8047A4C8_00000F8C
+    beq lbl_taskManager_initSystem_00000F8C
     li r4, 0x0
     bl atn_Task_constructor
-lbl_fn_8047A4C8_00000F8C:
+lbl_taskManager_initSystem_00000F8C:
     stw r3, lbl_8087F530
     bl fn_80089620
     bl fn_800B95C4
@@ -1303,9 +1303,9 @@ lbl_fn_8047A4C8_00000F8C:
     li r0, 0x1
     stw r0, 0x18(r4)
     stw r0, 0x1c(r4)
-    lwz r0, lbl_8087EE94
+    lwz r0, g_TaskManager
     cmpwi r0, 0x0
-    bne lbl_fn_8047A4C8_00000FEC
+    bne lbl_taskManager_initSystem_00000FEC
     li r3, 0xc
     li r4, 0x1
     la r5, lbl_8087E07C
@@ -1313,14 +1313,14 @@ lbl_fn_8047A4C8_00000F8C:
     li r7, 0x0
     bl fn_80084320
     cmpwi r3, 0x0
-    beq lbl_fn_8047A4C8_00000FE8
+    beq lbl_taskManager_initSystem_00000FE8
     li r0, 0x0
     stw r0, 0x0(r3)
     stw r0, 0x4(r3)
     stw r0, 0x8(r3)
-lbl_fn_8047A4C8_00000FE8:
-    stw r3, lbl_8087EE94
-lbl_fn_8047A4C8_00000FEC:
+lbl_taskManager_initSystem_00000FE8:
+    stw r3, g_TaskManager
+lbl_taskManager_initSystem_00000FEC:
     lbz r0, lbl_8087F53A
     lis r4, lbl_80790068@ha
     lwzu r6, lbl_80790068@l(r4)
@@ -1340,7 +1340,7 @@ lbl_fn_8047A4C8_00000FEC:
     stw r4, 0x108(r1)
     stw r7, 0x10c(r1)
     stw r0, 0x228(r1)
-    bne lbl_fn_8047A4C8_00001064
+    bne lbl_taskManager_initSystem_00001064
     lis r7, lbl_807C8AA8@ha
     lis r5, fn_8047B684@ha
     lis r4, fn_8047B6B0@ha
@@ -1351,7 +1351,7 @@ lbl_fn_8047A4C8_00000FEC:
     stw r5, 0x4(r6)
     stw r4, lbl_807C8AA8@l(r7)
     stb r0, lbl_8087F53A
-lbl_fn_8047A4C8_00001064:
+lbl_taskManager_initSystem_00001064:
     lwz r6, 0x100(r1)
     addi r3, r1, 0xa0
     lwz r5, 0x104(r1)
@@ -1364,7 +1364,7 @@ lbl_fn_8047A4C8_00001064:
     crclr 6
     bl fn_8008BBD8
     cmpwi r3, 0x0
-    bne lbl_fn_8047A4C8_000010D8
+    bne lbl_taskManager_initSystem_000010D8
     addic. r0, r1, 0x22c
     lwz r6, 0xa0(r1)
     lwz r5, 0xa4(r1)
@@ -1374,47 +1374,47 @@ lbl_fn_8047A4C8_00001064:
     stw r5, 0x94(r1)
     stw r4, 0x98(r1)
     stw r0, 0x9c(r1)
-    beq lbl_fn_8047A4C8_000010D0
+    beq lbl_taskManager_initSystem_000010D0
     stw r6, 0x22c(r1)
     stw r5, 0x230(r1)
     stw r4, 0x234(r1)
     stw r0, 0x238(r1)
-lbl_fn_8047A4C8_000010D0:
+lbl_taskManager_initSystem_000010D0:
     li r0, 0x1
-    b lbl_fn_8047A4C8_000010DC
-lbl_fn_8047A4C8_000010D8:
+    b lbl_taskManager_initSystem_000010DC
+lbl_taskManager_initSystem_000010D8:
     li r0, 0x0
-lbl_fn_8047A4C8_000010DC:
+lbl_taskManager_initSystem_000010DC:
     cmpwi r0, 0x0
-    beq lbl_fn_8047A4C8_000010F4
+    beq lbl_taskManager_initSystem_000010F4
     lis r4, lbl_807C8AA8@ha
     addi r4, r4, lbl_807C8AA8@l
     stw r4, 0x228(r1)
-    b lbl_fn_8047A4C8_000010FC
-lbl_fn_8047A4C8_000010F4:
+    b lbl_taskManager_initSystem_000010FC
+lbl_taskManager_initSystem_000010F4:
     li r0, 0x0
     stw r0, 0x228(r1)
-lbl_fn_8047A4C8_000010FC:
-    lwz r3, lbl_8087EE94
+lbl_taskManager_initSystem_000010FC:
+    lwz r3, g_TaskManager
     addi r4, r1, 0x228
     bl fn_8047AEBC
     addic. r4, r1, 0x228
-    beq lbl_fn_8047A4C8_00001144
+    beq lbl_taskManager_initSystem_00001144
     lwz r5, 0x228(r1)
     cmpwi r5, 0x0
-    beq lbl_fn_8047A4C8_00001144
+    beq lbl_taskManager_initSystem_00001144
     lwz r12, 0x0(r5)
     cmpwi r12, 0x0
-    beq lbl_fn_8047A4C8_0000113C
+    beq lbl_taskManager_initSystem_0000113C
     addi r3, r4, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047A4C8_0000113C:
+lbl_taskManager_initSystem_0000113C:
     li r0, 0x0
     stw r0, 0x228(r1)
-lbl_fn_8047A4C8_00001144:
+lbl_taskManager_initSystem_00001144:
     lbz r0, lbl_8087F539
     lis r4, lbl_80790074@ha
     lwzu r6, lbl_80790074@l(r4)
@@ -1434,7 +1434,7 @@ lbl_fn_8047A4C8_00001144:
     stw r4, 0xf8(r1)
     stw r7, 0xfc(r1)
     stw r0, 0x214(r1)
-    bne lbl_fn_8047A4C8_000011BC
+    bne lbl_taskManager_initSystem_000011BC
     lis r7, lbl_807C8AA0@ha
     lis r5, fn_8047B5A0@ha
     lis r4, fn_8047B5CC@ha
@@ -1445,7 +1445,7 @@ lbl_fn_8047A4C8_00001144:
     stw r5, 0x4(r6)
     stw r4, lbl_807C8AA0@l(r7)
     stb r0, lbl_8087F539
-lbl_fn_8047A4C8_000011BC:
+lbl_taskManager_initSystem_000011BC:
     lwz r6, 0xf0(r1)
     addi r3, r1, 0x68
     lwz r5, 0xf4(r1)
@@ -1458,7 +1458,7 @@ lbl_fn_8047A4C8_000011BC:
     crclr 6
     bl fn_8008BBD8
     cmpwi r3, 0x0
-    bne lbl_fn_8047A4C8_00001230
+    bne lbl_taskManager_initSystem_00001230
     addic. r0, r1, 0x218
     lwz r6, 0x68(r1)
     lwz r5, 0x6c(r1)
@@ -1468,47 +1468,47 @@ lbl_fn_8047A4C8_000011BC:
     stw r5, 0x5c(r1)
     stw r4, 0x60(r1)
     stw r0, 0x64(r1)
-    beq lbl_fn_8047A4C8_00001228
+    beq lbl_taskManager_initSystem_00001228
     stw r6, 0x218(r1)
     stw r5, 0x21c(r1)
     stw r4, 0x220(r1)
     stw r0, 0x224(r1)
-lbl_fn_8047A4C8_00001228:
+lbl_taskManager_initSystem_00001228:
     li r0, 0x1
-    b lbl_fn_8047A4C8_00001234
-lbl_fn_8047A4C8_00001230:
+    b lbl_taskManager_initSystem_00001234
+lbl_taskManager_initSystem_00001230:
     li r0, 0x0
-lbl_fn_8047A4C8_00001234:
+lbl_taskManager_initSystem_00001234:
     cmpwi r0, 0x0
-    beq lbl_fn_8047A4C8_0000124C
+    beq lbl_taskManager_initSystem_0000124C
     lis r4, lbl_807C8AA0@ha
     addi r4, r4, lbl_807C8AA0@l
     stw r4, 0x214(r1)
-    b lbl_fn_8047A4C8_00001254
-lbl_fn_8047A4C8_0000124C:
+    b lbl_taskManager_initSystem_00001254
+lbl_taskManager_initSystem_0000124C:
     li r0, 0x0
     stw r0, 0x214(r1)
-lbl_fn_8047A4C8_00001254:
-    lwz r3, lbl_8087EE94
+lbl_taskManager_initSystem_00001254:
+    lwz r3, g_TaskManager
     addi r4, r1, 0x214
     bl fn_8047AEBC
     addic. r4, r1, 0x214
-    beq lbl_fn_8047A4C8_0000129C
+    beq lbl_taskManager_initSystem_0000129C
     lwz r5, 0x214(r1)
     cmpwi r5, 0x0
-    beq lbl_fn_8047A4C8_0000129C
+    beq lbl_taskManager_initSystem_0000129C
     lwz r12, 0x0(r5)
     cmpwi r12, 0x0
-    beq lbl_fn_8047A4C8_00001294
+    beq lbl_taskManager_initSystem_00001294
     addi r3, r4, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047A4C8_00001294:
+lbl_taskManager_initSystem_00001294:
     li r0, 0x0
     stw r0, 0x214(r1)
-lbl_fn_8047A4C8_0000129C:
+lbl_taskManager_initSystem_0000129C:
     lbz r0, lbl_8087F539
     lis r4, lbl_80790080@ha
     lwzu r6, lbl_80790080@l(r4)
@@ -1528,7 +1528,7 @@ lbl_fn_8047A4C8_0000129C:
     stw r4, 0xe8(r1)
     stw r7, 0xec(r1)
     stw r0, 0x200(r1)
-    bne lbl_fn_8047A4C8_00001314
+    bne lbl_taskManager_initSystem_00001314
     lis r7, lbl_807C8AA0@ha
     lis r5, fn_8047B5A0@ha
     lis r4, fn_8047B5CC@ha
@@ -1539,7 +1539,7 @@ lbl_fn_8047A4C8_0000129C:
     stw r5, 0x4(r6)
     stw r4, lbl_807C8AA0@l(r7)
     stb r0, lbl_8087F539
-lbl_fn_8047A4C8_00001314:
+lbl_taskManager_initSystem_00001314:
     lwz r6, 0xe0(r1)
     addi r3, r1, 0x30
     lwz r5, 0xe4(r1)
@@ -1552,7 +1552,7 @@ lbl_fn_8047A4C8_00001314:
     crclr 6
     bl fn_8008BBD8
     cmpwi r3, 0x0
-    bne lbl_fn_8047A4C8_00001388
+    bne lbl_taskManager_initSystem_00001388
     addic. r0, r1, 0x204
     lwz r6, 0x30(r1)
     lwz r5, 0x34(r1)
@@ -1562,47 +1562,47 @@ lbl_fn_8047A4C8_00001314:
     stw r5, 0x24(r1)
     stw r4, 0x28(r1)
     stw r0, 0x2c(r1)
-    beq lbl_fn_8047A4C8_00001380
+    beq lbl_taskManager_initSystem_00001380
     stw r6, 0x204(r1)
     stw r5, 0x208(r1)
     stw r4, 0x20c(r1)
     stw r0, 0x210(r1)
-lbl_fn_8047A4C8_00001380:
+lbl_taskManager_initSystem_00001380:
     li r0, 0x1
-    b lbl_fn_8047A4C8_0000138C
-lbl_fn_8047A4C8_00001388:
+    b lbl_taskManager_initSystem_0000138C
+lbl_taskManager_initSystem_00001388:
     li r0, 0x0
-lbl_fn_8047A4C8_0000138C:
+lbl_taskManager_initSystem_0000138C:
     cmpwi r0, 0x0
-    beq lbl_fn_8047A4C8_000013A4
+    beq lbl_taskManager_initSystem_000013A4
     lis r4, lbl_807C8AA0@ha
     addi r4, r4, lbl_807C8AA0@l
     stw r4, 0x200(r1)
-    b lbl_fn_8047A4C8_000013AC
-lbl_fn_8047A4C8_000013A4:
+    b lbl_taskManager_initSystem_000013AC
+lbl_taskManager_initSystem_000013A4:
     li r0, 0x0
     stw r0, 0x200(r1)
-lbl_fn_8047A4C8_000013AC:
-    lwz r3, lbl_8087EE94
+lbl_taskManager_initSystem_000013AC:
+    lwz r3, g_TaskManager
     addi r4, r1, 0x200
     bl fn_8047AEBC
     addic. r4, r1, 0x200
-    beq lbl_fn_8047A4C8_000013F4
+    beq lbl_taskManager_initSystem_000013F4
     lwz r5, 0x200(r1)
     cmpwi r5, 0x0
-    beq lbl_fn_8047A4C8_000013F4
+    beq lbl_taskManager_initSystem_000013F4
     lwz r12, 0x0(r5)
     cmpwi r12, 0x0
-    beq lbl_fn_8047A4C8_000013EC
+    beq lbl_taskManager_initSystem_000013EC
     addi r3, r4, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047A4C8_000013EC:
+lbl_taskManager_initSystem_000013EC:
     li r0, 0x0
     stw r0, 0x200(r1)
-lbl_fn_8047A4C8_000013F4:
+lbl_taskManager_initSystem_000013F4:
     lis r29, lbl_8075626C@ha
     addi r29, r29, lbl_8075626C@l
     addi r3, r29, 0x4
@@ -1629,9 +1629,9 @@ lbl_fn_8047A4C8_000013F4:
     li r7, 0x0
     bl fn_80084320
     cmpwi r3, 0x0
-    beq lbl_fn_8047A4C8_00001464
+    beq lbl_taskManager_initSystem_00001464
     bl fn_805A6B58
-lbl_fn_8047A4C8_00001464:
+lbl_taskManager_initSystem_00001464:
     stw r3, lbl_8087F534
     bl fn_800696C8
     lwz r3, lbl_8087F530
@@ -1705,10 +1705,10 @@ lbl_fn_8047A4C8_00001464:
     bl fn_800BD9C0
     lwz r0, 0xd4(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_8047A4C8_00001594
+    beq lbl_taskManager_initSystem_00001594
     lwz r3, 0xdc(r1)
     bl dtor_80084684
-lbl_fn_8047A4C8_00001594:
+lbl_taskManager_initSystem_00001594:
     bl fn_8005DD60
     lis r4, lbl_8075626C@ha
     li r0, 0x0
@@ -1739,10 +1739,10 @@ lbl_fn_8047A4C8_00001594:
     bl fn_8005DED8
     lwz r0, 0xc8(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_8047A4C8_00001618
+    beq lbl_taskManager_initSystem_00001618
     lwz r3, 0xd0(r1)
     bl dtor_80084684
-lbl_fn_8047A4C8_00001618:
+lbl_taskManager_initSystem_00001618:
     li r3, 0x480
     li r4, 0x200
     li r5, 0x100
@@ -1752,14 +1752,14 @@ lbl_fn_8047A4C8_00001618:
     bl fn_800A5508
     lwz r4, lbl_8087F018
     cmpwi r4, 0x0
-    beq lbl_fn_8047A4C8_00001658
+    beq lbl_taskManager_initSystem_00001658
     li r0, 0x0
     stw r0, 0x40d4(r4)
     lwz r4, lbl_8087F018
     stw r0, 0x40d8(r4)
     lwz r4, lbl_8087F018
     stw r0, 0x40dc(r4)
-lbl_fn_8047A4C8_00001658:
+lbl_taskManager_initSystem_00001658:
     bl fn_800463A8
     bl fn_800CCBA4
     lwz r3, lbl_8087EFE8

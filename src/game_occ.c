@@ -71,7 +71,7 @@ void fn_800D6E48(void);
 void fn_800D71A4(void);
 void fn_800D71D4(void);
 void fn_800D7254(void);
-void fn_800D7278(void);
+void tex_bakeCharacterTexture(void);
 void fn_800D775C(void);
 void fn_800D7D00(void);
 void fn_800D7F18(void);
@@ -381,7 +381,7 @@ asm void fn_800D7254(void)
     b fn_800BDB58
 }
 
-asm void fn_800D7278(void)
+asm void tex_bakeCharacterTexture(void)
 {
     nofralloc
     stwu r1, -0x90(r1)
@@ -396,15 +396,15 @@ asm void fn_800D7278(void)
     lwz r0, 0x28(r3)
     lwz r25, 0x28(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_800D7278_00000470
+    beq lbl_tex_bakeCharacterTexture_00000470
     lbz r31, 0x2f(r3)
     extsb r31, r31
-    b lbl_fn_800D7278_0000047C
-lbl_fn_800D7278_00000470:
+    b lbl_tex_bakeCharacterTexture_0000047C
+lbl_tex_bakeCharacterTexture_00000470:
     addi r3, r3, 0x20
     bl fn_80478198
     mr r31, r3
-lbl_fn_800D7278_0000047C:
+lbl_tex_bakeCharacterTexture_0000047C:
     lwz r3, 0xc(r15)
     bl fn_806163C0
     clrlwi r24, r3, 16
@@ -414,9 +414,9 @@ lbl_fn_800D7278_0000047C:
     mr r22, r25
     clrlwi r23, r3, 16
     cmpwi r26, -0x1
-    bne lbl_fn_800D7278_000004A8
+    bne lbl_tex_bakeCharacterTexture_000004A8
     li r26, 0x6
-lbl_fn_800D7278_000004A8:
+lbl_tex_bakeCharacterTexture_000004A8:
     lwz r3, 0xc(r15)
     bl fn_80616400
     mr r21, r3
@@ -426,22 +426,22 @@ lbl_fn_800D7278_000004A8:
     cmpwi r26, 0x20
     cntlzw r0, r0
     srwi r20, r0, 5
-    bne lbl_fn_800D7278_000004E8
+    bne lbl_tex_bakeCharacterTexture_000004E8
     lwz r3, 0xc(r15)
     bl fn_80616400
     cmpwi r3, 0x0
-    bne lbl_fn_800D7278_000004E8
+    bne lbl_tex_bakeCharacterTexture_000004E8
     li r20, 0x1
-    b lbl_fn_800D7278_00000504
-lbl_fn_800D7278_000004E8:
+    b lbl_tex_bakeCharacterTexture_00000504
+lbl_tex_bakeCharacterTexture_000004E8:
     cmpwi r26, 0x28
-    bne lbl_fn_800D7278_00000504
+    bne lbl_tex_bakeCharacterTexture_00000504
     lwz r3, 0xc(r15)
     bl fn_80616400
     cmpwi r3, 0x1
-    bne lbl_fn_800D7278_00000504
+    bne lbl_tex_bakeCharacterTexture_00000504
     li r20, 0x1
-lbl_fn_800D7278_00000504:
+lbl_tex_bakeCharacterTexture_00000504:
     lwz r4, lbl_8087EEE0
     li r5, 0x13
     lwz r19, 0x79c(r14)
@@ -462,10 +462,10 @@ lbl_fn_800D7278_00000504:
     bl DCInvalidateRange
     addi r30, r1, 0x8
     li r17, 0x0
-    b lbl_fn_800D7278_000006CC
-lbl_fn_800D7278_00000558:
+    b lbl_tex_bakeCharacterTexture_000006CC
+lbl_tex_bakeCharacterTexture_00000558:
     cmpwi r20, 0x0
-    bne lbl_fn_800D7278_000005A4
+    bne lbl_tex_bakeCharacterTexture_000005A4
     clrlwi r3, r24, 16
     clrlwi r4, r23, 16
     li r21, 0x6
@@ -483,32 +483,32 @@ lbl_fn_800D7278_00000558:
     mr r3, r22
     add r19, r19, r0
     bl DCInvalidateRange
-lbl_fn_800D7278_000005A4:
+lbl_tex_bakeCharacterTexture_000005A4:
     slwi r28, r23, 1
     slwi r27, r24, 1
     li r16, 0x0
     li r29, 0x0
-    b lbl_fn_800D7278_0000061C
-lbl_fn_800D7278_000005B8:
+    b lbl_tex_bakeCharacterTexture_0000061C
+lbl_tex_bakeCharacterTexture_000005B8:
     bl fn_806167B0
     bl fn_80614190
     cmpwi r17, 0x0
-    bne lbl_fn_800D7278_000005E4
+    bne lbl_tex_bakeCharacterTexture_000005E4
     lwz r3, lbl_8087EEE0
     mr r6, r24
     mr r7, r23
     li r4, 0x0
     li r5, 0x0
     bl fn_80075F58
-    b lbl_fn_800D7278_000005FC
-lbl_fn_800D7278_000005E4:
+    b lbl_tex_bakeCharacterTexture_000005FC
+lbl_tex_bakeCharacterTexture_000005E4:
     lwz r3, lbl_8087EEE0
     mr r6, r27
     mr r7, r28
     li r4, 0x0
     li r5, 0x0
     bl fn_80075F58
-lbl_fn_800D7278_000005FC:
+lbl_tex_bakeCharacterTexture_000005FC:
     lwz r3, 0x14(r15)
     lwzx r3, r3, r29
     lwz r12, 0x0(r3)
@@ -517,12 +517,12 @@ lbl_fn_800D7278_000005FC:
     bctrl
     addi r29, r29, 0x4
     addi r16, r16, 0x1
-lbl_fn_800D7278_0000061C:
+lbl_tex_bakeCharacterTexture_0000061C:
     lwz r0, 0x18(r15)
     cmplw r16, r0
-    blt lbl_fn_800D7278_000005B8
+    blt lbl_tex_bakeCharacterTexture_000005B8
     cmpwi r17, 0x0
-    bne lbl_fn_800D7278_0000065C
+    bne lbl_tex_bakeCharacterTexture_0000065C
     clrlwi r5, r24, 16
     clrlwi r6, r23, 16
     li r3, 0x0
@@ -533,8 +533,8 @@ lbl_fn_800D7278_0000061C:
     clrlwi r4, r23, 16
     li r6, 0x0
     bl fn_80614D30
-    b lbl_fn_800D7278_00000684
-lbl_fn_800D7278_0000065C:
+    b lbl_tex_bakeCharacterTexture_00000684
+lbl_tex_bakeCharacterTexture_0000065C:
     clrlslwi r5, r24, 17, 1
     clrlslwi r6, r23, 17, 1
     li r3, 0x0
@@ -545,7 +545,7 @@ lbl_fn_800D7278_0000065C:
     clrlwi r4, r23, 16
     li r6, 0x1
     bl fn_80614D30
-lbl_fn_800D7278_00000684:
+lbl_tex_bakeCharacterTexture_00000684:
     mr r3, r22
     li r4, 0x1
     bl fn_80615560
@@ -564,11 +564,11 @@ lbl_fn_800D7278_00000684:
     srawi r23, r23, 1
     addi r30, r30, 0x4
     addi r17, r17, 0x1
-lbl_fn_800D7278_000006CC:
+lbl_tex_bakeCharacterTexture_000006CC:
     cmpw r17, r31
-    blt lbl_fn_800D7278_00000558
+    blt lbl_tex_bakeCharacterTexture_00000558
     cmpwi r20, 0x0
-    bne lbl_fn_800D7278_00000884
+    bne lbl_tex_bakeCharacterTexture_00000884
     lwz r3, 0xc(r15)
     bl fn_806163C0
     clrlwi r20, r3, 16
@@ -578,8 +578,8 @@ lbl_fn_800D7278_000006CC:
     addi r17, r1, 0x8
     li r23, 0x0
     li r24, 0x0
-    b lbl_fn_800D7278_0000087C
-lbl_fn_800D7278_00000704:
+    b lbl_tex_bakeCharacterTexture_0000087C
+lbl_tex_bakeCharacterTexture_00000704:
     lwz r19, 0x0(r17)
     mr r5, r21
     clrlwi r3, r20, 16
@@ -603,7 +603,7 @@ lbl_fn_800D7278_00000704:
     bl fn_800C0FBC
     lwz r3, 0x10(r15)
     cmpwi r3, 0x0
-    beq lbl_fn_800D7278_00000854
+    beq lbl_tex_bakeCharacterTexture_00000854
     bl fn_806163C0
     clrlwi r0, r3, 16
     lwz r3, 0x10(r15)
@@ -637,39 +637,39 @@ lbl_fn_800D7278_00000704:
     srawi r10, r0, 1
     li r5, 0x0
     li r6, 0x0
-    b lbl_fn_800D7278_0000084C
-lbl_fn_800D7278_000007EC:
+    b lbl_tex_bakeCharacterTexture_0000084C
+lbl_tex_bakeCharacterTexture_000007EC:
     add r8, r27, r6
     add r3, r19, r5
     li r12, 0x0
     li r7, 0x0
     mtctr r20
     cmpwi r20, 0x0
-    ble lbl_fn_800D7278_00000840
-lbl_fn_800D7278_00000808:
+    ble lbl_tex_bakeCharacterTexture_00000840
+lbl_tex_bakeCharacterTexture_00000808:
     clrlwi. r0, r12, 31
     srwi r4, r12, 31
     add r0, r4, r12
     srawi r0, r0, 1
     lbzx r0, r8, r0
-    bne lbl_fn_800D7278_00000824
+    bne lbl_tex_bakeCharacterTexture_00000824
     srawi r0, r0, 4
-lbl_fn_800D7278_00000824:
+lbl_tex_bakeCharacterTexture_00000824:
     clrlwi r0, r0, 28
     addi r7, r7, 0x4
     rlwimi r0, r0, 4, 24, 27
     stb r0, 0x0(r3)
     addi r3, r3, 0x4
     addi r12, r12, 0x1
-    bdnz lbl_fn_800D7278_00000808
-lbl_fn_800D7278_00000840:
+    bdnz lbl_tex_bakeCharacterTexture_00000808
+lbl_tex_bakeCharacterTexture_00000840:
     add r5, r5, r9
     add r6, r6, r10
     addi r11, r11, 0x1
-lbl_fn_800D7278_0000084C:
+lbl_tex_bakeCharacterTexture_0000084C:
     cmpw r11, r22
-    blt lbl_fn_800D7278_000007EC
-lbl_fn_800D7278_00000854:
+    blt lbl_tex_bakeCharacterTexture_000007EC
+lbl_tex_bakeCharacterTexture_00000854:
     mr r3, r19
     mr r4, r25
     mr r5, r20
@@ -680,10 +680,10 @@ lbl_fn_800D7278_00000854:
     srawi r22, r22, 1
     addi r17, r17, 0x4
     addi r24, r24, 0x1
-lbl_fn_800D7278_0000087C:
+lbl_tex_bakeCharacterTexture_0000087C:
     cmpw r24, r31
-    blt lbl_fn_800D7278_00000704
-lbl_fn_800D7278_00000884:
+    blt lbl_tex_bakeCharacterTexture_00000704
+lbl_tex_bakeCharacterTexture_00000884:
     lwz r3, 0x79c(r14)
     mr r5, r18
     li r4, 0x0
@@ -695,24 +695,24 @@ lbl_fn_800D7278_00000884:
     bl fn_80075DEC
     li r16, 0x0
     li r14, 0x0
-    b lbl_fn_800D7278_000008E0
-lbl_fn_800D7278_000008B4:
+    b lbl_tex_bakeCharacterTexture_000008E0
+lbl_tex_bakeCharacterTexture_000008B4:
     lwz r3, 0x14(r15)
     lwzx r3, r3, r14
     cmpwi r3, 0x0
-    beq lbl_fn_800D7278_000008D8
+    beq lbl_tex_bakeCharacterTexture_000008D8
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_800D7278_000008D8:
+lbl_tex_bakeCharacterTexture_000008D8:
     addi r14, r14, 0x4
     addi r16, r16, 0x1
-lbl_fn_800D7278_000008E0:
+lbl_tex_bakeCharacterTexture_000008E0:
     lwz r0, 0x18(r15)
     cmplw r16, r0
-    blt lbl_fn_800D7278_000008B4
+    blt lbl_tex_bakeCharacterTexture_000008B4
     lwz r3, 0x18(r15)
     li r0, 0x1
     stw r0, 0x4(r15)

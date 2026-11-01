@@ -31,7 +31,7 @@ extern void fn_800971D4(void);
 extern void fn_80097C08(void);
 extern void fn_80097D40(void);
 extern void fn_80097D7C(void);
-extern void atn_LH_Texture_constructor(void);
+struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void fn_800D5808(void);
 extern void fn_800D59B8(void);
 extern void fn_800DC288(void);

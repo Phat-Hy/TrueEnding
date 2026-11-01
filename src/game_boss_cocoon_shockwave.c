@@ -75,7 +75,7 @@ extern u32 lbl_8087D7EC;
 extern u32 lbl_8087D7F0;
 extern u32 lbl_8087E058;
 extern u32 lbl_8087E05C;
-extern u32 lbl_8087EE94;
+extern u32 g_TaskManager;
 extern u32 lbl_8087EEE0;
 extern u32 lbl_8087F518;
 extern u32 lbl_8087F520;
@@ -527,7 +527,7 @@ lbl_fn_80473FCC_00000514:
     lwz r12, 0x10(r12)
     mtctr r12
     bctrl
-    lwz r21, lbl_8087EE94
+    lwz r21, g_TaskManager
     cmpwi r21, 0x0
     beq lbl_fn_80473FCC_00000620
     li r23, 0x0
