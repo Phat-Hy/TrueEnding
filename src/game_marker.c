@@ -1683,14 +1683,14 @@ asm void atn_Model_draw(void)
     srawi. r0, r0, 31
     mr r30, r7
     add r31, r3, r4
-    beq lbl_fn_8008FA24_00001B60
+    beq lbl_atn_Model_draw_00001B60
     extlwi r0, r8, 2, 27
     srawi. r0, r0, 31
-    beq lbl_fn_8008FA24_00001B60
+    beq lbl_atn_Model_draw_00001B60
     lwz r4, lbl_8087EFB4
     lwz r0, 0x2f8(r4)
     cmpwi r0, 0x3
-    bne lbl_fn_8008FA24_00001B60
+    bne lbl_atn_Model_draw_00001B60
     lwz r8, 0x1cc(r3)
     addi r3, r1, 0x38
     addi r7, r1, 0x44
@@ -1768,10 +1768,10 @@ asm void atn_Model_draw(void)
     lwz r7, 0xb0(r26)
     stfs f7, 0xe4(r1)
     cmpwi r7, 0x0
-    blt lbl_fn_8008FA24_00001B14
+    blt lbl_atn_Model_draw_00001B14
     lwz r0, 0xb4(r26)
     cmpwi r0, 0x0
-    blt lbl_fn_8008FA24_00001AD8
+    blt lbl_atn_Model_draw_00001AD8
     mulli r0, r0, 0x30
     lwz r6, 0x3c(r26)
     addi r3, r1, 0x1d0
@@ -1862,8 +1862,8 @@ asm void atn_Model_draw(void)
     psq_st f4, 0x18(r4), 0, 0
     psq_st f5, 0x20(r4), 0, 0
     psq_st f6, 0x28(r4), 0, 0
-    b lbl_fn_8008FA24_00001B14
-lbl_fn_8008FA24_00001AD8:
+    b lbl_atn_Model_draw_00001B14
+lbl_atn_Model_draw_00001AD8:
     mulli r0, r7, 0x30
     lwz r3, 0x3c(r26)
     add r3, r3, r0
@@ -1879,7 +1879,7 @@ lbl_fn_8008FA24_00001AD8:
     psq_st f3, 0x10(r4), 0, 0
     psq_st f4, 0x18(r4), 0, 0
     psq_st f5, 0x20(r4), 0, 0
-lbl_fn_8008FA24_00001B14:
+lbl_atn_Model_draw_00001B14:
     addi r24, r1, 0x74
     psq_l f1, 0x0(r25), 0, 0
     lfs f2, 0xe0(r1)
@@ -1898,8 +1898,8 @@ lbl_fn_8008FA24_00001B14:
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0xf0(r1)
     stfs f0, 0xf4(r1)
-    b lbl_fn_8008FA24_00001DB8
-lbl_fn_8008FA24_00001B60:
+    b lbl_atn_Model_draw_00001DB8
+lbl_atn_Model_draw_00001B60:
     psq_l f1, 0x8(r3), 0, 0
     addi r5, r1, 0x110
     psq_l f2, 0x10(r3), 0, 0
@@ -1916,10 +1916,10 @@ lbl_fn_8008FA24_00001B60:
     psq_st f5, 0x20(r5), 0, 0
     lwz r8, 0xb0(r3)
     cmpwi r8, 0x0
-    blt lbl_fn_8008FA24_00001D5C
+    blt lbl_atn_Model_draw_00001D5C
     lwz r0, 0xb4(r3)
     cmpwi r0, 0x0
-    blt lbl_fn_8008FA24_00001D20
+    blt lbl_atn_Model_draw_00001D20
     mulli r0, r0, 0x30
     lwz r7, 0x3c(r3)
     lfs f31, lbl_80880C08
@@ -2011,8 +2011,8 @@ lbl_fn_8008FA24_00001B60:
     psq_st f4, 0x18(r5), 0, 0
     psq_st f5, 0x20(r5), 0, 0
     psq_st f6, 0x28(r5), 0, 0
-    b lbl_fn_8008FA24_00001D5C
-lbl_fn_8008FA24_00001D20:
+    b lbl_atn_Model_draw_00001D5C
+lbl_atn_Model_draw_00001D20:
     mulli r0, r8, 0x30
     lwz r4, 0x3c(r3)
     add r4, r4, r0
@@ -2028,7 +2028,7 @@ lbl_fn_8008FA24_00001D20:
     psq_st f3, 0x10(r5), 0, 0
     psq_st f4, 0x18(r5), 0, 0
     psq_st f5, 0x20(r5), 0, 0
-lbl_fn_8008FA24_00001D5C:
+lbl_atn_Model_draw_00001D5C:
     lfs f7, 0x54(r3)
     addi r25, r1, 0x14
     lfs f0, 0xac(r3)
@@ -2052,15 +2052,15 @@ lbl_fn_8008FA24_00001D5C:
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0xf0(r1)
     stfs f0, 0xf4(r1)
-lbl_fn_8008FA24_00001DB8:
+lbl_atn_Model_draw_00001DB8:
     mr r3, r29
     addi r4, r1, 0xe8
     bl fn_8004FF58
     cmpwi r3, 0x0
-    bne lbl_fn_8008FA24_00001DD4
+    bne lbl_atn_Model_draw_00001DD4
     li r3, 0x0
-    b lbl_fn_8008FA24_00001F58
-lbl_fn_8008FA24_00001DD4:
+    b lbl_atn_Model_draw_00001F58
+lbl_atn_Model_draw_00001DD4:
     lfs f7, 0x8(r28)
     addi r3, r1, 0x8
     lfs f0, 0xf0(r1)
@@ -2078,18 +2078,18 @@ lbl_fn_8008FA24_00001DD4:
     lwz r3, lbl_8087EFA8
     lfs f0, 0x10c(r3)
     fcmpo cr0, f1, f0
-    ble lbl_fn_8008FA24_00001E24
+    ble lbl_atn_Model_draw_00001E24
     li r3, 0x0
-    b lbl_fn_8008FA24_00001F58
-lbl_fn_8008FA24_00001E24:
+    b lbl_atn_Model_draw_00001F58
+lbl_atn_Model_draw_00001E24:
     cmpwi r30, 0x0
-    beq lbl_fn_8008FA24_00001F54
+    beq lbl_atn_Model_draw_00001F54
     lfs f7, lbl_80880C18
     lfs f0, 0xac(r26)
     lfs f9, 0xf4(r1)
     fmuls f0, f7, f0
     fcmpo cr0, f9, f0
-    bge lbl_fn_8008FA24_00001EEC
+    bge lbl_atn_Model_draw_00001EEC
     lfs f8, 0xf0(r1)
     addi r4, r1, 0xbc
     lfs f7, 0xec(r1)
@@ -2131,8 +2131,8 @@ lbl_fn_8008FA24_00001E24:
     stfs f8, 0xac(r1)
     psq_st f1, 0xc(r30), 0, 0
     stfs f2, 0x14(r30)
-    b lbl_fn_8008FA24_00001F54
-lbl_fn_8008FA24_00001EEC:
+    b lbl_atn_Model_draw_00001F54
+lbl_atn_Model_draw_00001EEC:
     lwz r3, 0x16c(r31)
     addi r8, r1, 0x8c
     lfs f7, lbl_80880C1C
@@ -2159,9 +2159,9 @@ lbl_fn_8008FA24_00001EEC:
     psq_st f1, 0xc(r30), 0, 0
     stfs f2, 0x14(r30)
     bl fn_8008EEDC
-lbl_fn_8008FA24_00001F54:
+lbl_atn_Model_draw_00001F54:
     li r3, 0x1
-lbl_fn_8008FA24_00001F58:
+lbl_atn_Model_draw_00001F58:
     addi r11, r1, 0x250
     psq_l f31, 0x338(r1), 0, 0
     lfd f31, 0x330(r1)

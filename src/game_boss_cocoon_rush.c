@@ -109,13 +109,13 @@ asm void atn_Curve_evaluate(void)
     stw r0, 0x14(r1)
     lhz r0, 0x2(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_8047202C_00000024
+    bne lbl_atn_Curve_evaluate_00000024
     lwz r3, 0x8(r3)
     lfs f1, 0x0(r3)
-    b lbl_fn_8047202C_00000304
-lbl_fn_8047202C_00000024:
+    b lbl_atn_Curve_evaluate_00000304
+lbl_atn_Curve_evaluate_00000024:
     cmplwi r0, 0x3
-    bne lbl_fn_8047202C_00000148
+    bne lbl_atn_Curve_evaluate_00000148
     lhz r0, 0x6(r3)
     slwi r0, r0, 8
     ori r5, r0, 0x7
@@ -127,45 +127,45 @@ lbl_fn_8047202C_00000024:
     psq_l f0, 0x0(r7), 1, 5
     fcmpo cr0, f1, f0
     cror eq, lt, eq
-    bne lbl_fn_8047202C_00000064
+    bne lbl_atn_Curve_evaluate_00000064
     psq_l f1, 0x2(r7), 1, 6
-    b lbl_fn_8047202C_00000304
-lbl_fn_8047202C_00000064:
+    b lbl_atn_Curve_evaluate_00000304
+lbl_atn_Curve_evaluate_00000064:
     subi r0, r5, 0x1
     slwi r0, r0, 2
     add r3, r7, r0
     psq_l f0, 0x0(r3), 1, 5
     fcmpo cr0, f1, f0
     cror eq, gt, eq
-    bne lbl_fn_8047202C_00000088
+    bne lbl_atn_Curve_evaluate_00000088
     psq_l f1, 0x2(r3), 1, 6
-    b lbl_fn_8047202C_00000304
-lbl_fn_8047202C_00000088:
+    b lbl_atn_Curve_evaluate_00000304
+lbl_atn_Curve_evaluate_00000088:
     lha r3, 0x0(r4)
     subi r0, r5, 0x2
     cmpw r3, r0
-    bgt lbl_fn_8047202C_000000A0
+    bgt lbl_atn_Curve_evaluate_000000A0
     cmpwi r3, 0x0
-    bge lbl_fn_8047202C_000000A8
-lbl_fn_8047202C_000000A0:
+    bge lbl_atn_Curve_evaluate_000000A8
+lbl_atn_Curve_evaluate_000000A0:
     li r0, 0x0
     sth r0, 0x0(r4)
-lbl_fn_8047202C_000000A8:
+lbl_atn_Curve_evaluate_000000A8:
     lha r0, 0x0(r4)
     slwi r0, r0, 2
     psq_lx f0, r7, r0, 1, 5
     fcmpo cr0, f1, f0
-    bge lbl_fn_8047202C_000000C4
+    bge lbl_atn_Curve_evaluate_000000C4
     li r0, 0x0
     sth r0, 0x0(r4)
-lbl_fn_8047202C_000000C4:
+lbl_atn_Curve_evaluate_000000C4:
     subi r0, r5, 0x1
-    b lbl_fn_8047202C_000000D8
-lbl_fn_8047202C_000000CC:
+    b lbl_atn_Curve_evaluate_000000D8
+lbl_atn_Curve_evaluate_000000CC:
     lha r3, 0x0(r4)
     addi r3, r3, 0x1
     sth r3, 0x0(r4)
-lbl_fn_8047202C_000000D8:
+lbl_atn_Curve_evaluate_000000D8:
     lha r6, 0x0(r4)
     addi r5, r6, 0x1
     slwi r3, r5, 2
@@ -174,10 +174,10 @@ lbl_fn_8047202C_000000D8:
     cror eq, gt, eq
     mfcr r3
     extrwi. r3, r3, 1, 2
-    beq lbl_fn_8047202C_00000104
+    beq lbl_atn_Curve_evaluate_00000104
     cmpw r6, r0
-    blt lbl_fn_8047202C_000000CC
-lbl_fn_8047202C_00000104:
+    blt lbl_atn_Curve_evaluate_000000CC
+lbl_atn_Curve_evaluate_00000104:
     extsh r0, r5
     slwi r3, r6, 2
     slwi r0, r0, 2
@@ -194,10 +194,10 @@ lbl_fn_8047202C_00000104:
     fsubs f0, f0, f1
     fmuls f0, f0, f3
     fmadds f1, f4, f1, f0
-    b lbl_fn_8047202C_00000304
-lbl_fn_8047202C_00000148:
+    b lbl_atn_Curve_evaluate_00000304
+lbl_atn_Curve_evaluate_00000148:
     cmplwi r0, 0x4
-    bne lbl_fn_8047202C_000001F4
+    bne lbl_atn_Curve_evaluate_000001F4
     lhz r0, 0x6(r3)
     slwi r0, r0, 8
     ori r4, r0, 0x7
@@ -207,22 +207,22 @@ lbl_fn_8047202C_00000148:
     lfs f0, lbl_80886EE4
     lwz r5, 0x8(r3)
     fcmpo cr0, f1, f0
-    bge lbl_fn_8047202C_00000180
+    bge lbl_atn_Curve_evaluate_00000180
     psq_l f1, 0x0(r5), 1, 6
-    b lbl_fn_8047202C_00000304
-lbl_fn_8047202C_00000180:
+    b lbl_atn_Curve_evaluate_00000304
+lbl_atn_Curve_evaluate_00000180:
     fctiwz f0, f1
     lhz r3, 0x4(r3)
     stfd f0, 0x8(r1)
     subi r0, r3, 0x1
     lwz r6, 0xc(r1)
     cmpw r6, r0
-    blt lbl_fn_8047202C_000001AC
+    blt lbl_atn_Curve_evaluate_000001AC
     clrlslwi r0, r3, 16, 1
     add r3, r5, r0
     psq_l f1, -0x2(r3), 1, 6
-    b lbl_fn_8047202C_00000304
-lbl_fn_8047202C_000001AC:
+    b lbl_atn_Curve_evaluate_00000304
+lbl_atn_Curve_evaluate_000001AC:
     xoris r3, r6, 0x8000
     lis r0, 0x4330
     stw r3, 0xc(r1)
@@ -240,8 +240,8 @@ lbl_fn_8047202C_000001AC:
     fsubs f0, f0, f3
     fmuls f0, f0, f1
     fmadds f1, f2, f3, f0
-    b lbl_fn_8047202C_00000304
-lbl_fn_8047202C_000001F4:
+    b lbl_atn_Curve_evaluate_00000304
+lbl_atn_Curve_evaluate_000001F4:
     lhz r0, 0x6(r3)
     slwi r0, r0, 8
     ori r5, r0, 0x7
@@ -253,45 +253,45 @@ lbl_fn_8047202C_000001F4:
     psq_l f0, 0x0(r7), 1, 5
     fcmpo cr0, f1, f0
     cror eq, lt, eq
-    bne lbl_fn_8047202C_0000022C
+    bne lbl_atn_Curve_evaluate_0000022C
     psq_l f1, 0x2(r7), 1, 6
-    b lbl_fn_8047202C_00000304
-lbl_fn_8047202C_0000022C:
+    b lbl_atn_Curve_evaluate_00000304
+lbl_atn_Curve_evaluate_0000022C:
     subi r0, r5, 0x1
     mulli r0, r0, 0x6
     add r3, r7, r0
     psq_l f0, 0x0(r3), 1, 5
     fcmpo cr0, f1, f0
     cror eq, gt, eq
-    bne lbl_fn_8047202C_00000250
+    bne lbl_atn_Curve_evaluate_00000250
     psq_l f1, 0x2(r3), 1, 6
-    b lbl_fn_8047202C_00000304
-lbl_fn_8047202C_00000250:
+    b lbl_atn_Curve_evaluate_00000304
+lbl_atn_Curve_evaluate_00000250:
     lha r3, 0x0(r4)
     subi r0, r5, 0x2
     cmpw r3, r0
-    bgt lbl_fn_8047202C_00000268
+    bgt lbl_atn_Curve_evaluate_00000268
     cmpwi r3, 0x0
-    bge lbl_fn_8047202C_00000270
-lbl_fn_8047202C_00000268:
+    bge lbl_atn_Curve_evaluate_00000270
+lbl_atn_Curve_evaluate_00000268:
     li r0, 0x0
     sth r0, 0x0(r4)
-lbl_fn_8047202C_00000270:
+lbl_atn_Curve_evaluate_00000270:
     lha r0, 0x0(r4)
     mulli r0, r0, 0x6
     psq_lx f0, r7, r0, 1, 5
     fcmpo cr0, f1, f0
-    bge lbl_fn_8047202C_0000028C
+    bge lbl_atn_Curve_evaluate_0000028C
     li r0, 0x0
     sth r0, 0x0(r4)
-lbl_fn_8047202C_0000028C:
+lbl_atn_Curve_evaluate_0000028C:
     subi r0, r5, 0x1
-    b lbl_fn_8047202C_000002A0
-lbl_fn_8047202C_00000294:
+    b lbl_atn_Curve_evaluate_000002A0
+lbl_atn_Curve_evaluate_00000294:
     lha r3, 0x0(r4)
     addi r3, r3, 0x1
     sth r3, 0x0(r4)
-lbl_fn_8047202C_000002A0:
+lbl_atn_Curve_evaluate_000002A0:
     lha r6, 0x0(r4)
     addi r5, r6, 0x1
     mulli r3, r5, 0x6
@@ -300,10 +300,10 @@ lbl_fn_8047202C_000002A0:
     cror eq, gt, eq
     mfcr r3
     extrwi. r3, r3, 1, 2
-    beq lbl_fn_8047202C_000002CC
+    beq lbl_atn_Curve_evaluate_000002CC
     cmpw r6, r0
-    blt lbl_fn_8047202C_00000294
-lbl_fn_8047202C_000002CC:
+    blt lbl_atn_Curve_evaluate_00000294
+lbl_atn_Curve_evaluate_000002CC:
     extsh r0, r5
     mulli r3, r6, 0x6
     mulli r0, r0, 0x6
@@ -318,7 +318,7 @@ lbl_fn_8047202C_000002CC:
     addi r4, r4, 0x2
     addi r5, r5, lbl_8078FBF0@l
     bl atn_Curve_evalHermite
-lbl_fn_8047202C_00000304:
+lbl_atn_Curve_evaluate_00000304:
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10

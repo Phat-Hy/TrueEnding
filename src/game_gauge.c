@@ -540,7 +540,7 @@ asm void atn_Anim_evalNodeTransform(void)
     mr r29, r6
     li r31, 0x0
     li r30, 0x0
-    beq lbl_fn_800A0610_00000664
+    beq lbl_atn_Anim_evalNodeTransform_00000664
     mulli r0, r31, 0xc
     lwz r3, 0x1c(r5)
     mr r4, r29
@@ -565,10 +565,10 @@ asm void atn_Anim_evalNodeTransform(void)
     li r30, 0x3
     bl atn_Curve_evaluate
     stfs f1, 0x28(r27)
-lbl_fn_800A0610_00000664:
+lbl_atn_Anim_evalNodeTransform_00000664:
     lwz r0, 0x18(r28)
     rlwinm. r0, r0, 0, 30, 30
-    beq lbl_fn_800A0610_000007BC
+    beq lbl_atn_Anim_evalNodeTransform_000007BC
     mulli r3, r31, 0xc
     slwi r0, r30, 1
     lwz r5, 0x1c(r28)
@@ -652,10 +652,10 @@ lbl_fn_800A0610_00000664:
     psq_l f2, 0x8(r3), 0, 0
     psq_st f1, 0x10(r27), 0, 0
     psq_st f2, 0x18(r27), 0, 0
-lbl_fn_800A0610_000007BC:
+lbl_atn_Anim_evalNodeTransform_000007BC:
     lwz r0, 0x18(r28)
     clrlwi. r0, r0, 31
-    beq lbl_fn_800A0610_00000838
+    beq lbl_atn_Anim_evalNodeTransform_00000838
     mulli r3, r31, 0xc
     slwi r0, r30, 1
     lwz r5, 0x1c(r28)
@@ -684,7 +684,7 @@ lbl_fn_800A0610_000007BC:
     add r4, r29, r0
     bl atn_Curve_evaluate
     stfs f1, 0xc(r27)
-lbl_fn_800A0610_00000838:
+lbl_atn_Anim_evalNodeTransform_00000838:
     lwz r3, 0x0(r27)
     lwz r0, 0x18(r28)
     or r0, r3, r0

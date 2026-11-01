@@ -162,10 +162,10 @@ asm void atn_Model_drawSubNodes(void)
     psq_st f4, 0x18(r5), 0, 0
     psq_st f5, 0x20(r5), 0, 0
     psq_st f6, 0x28(r5), 0, 0
-    beq lbl_fn_8009B93C_00000088
+    beq lbl_atn_Model_drawSubNodes_00000088
     lbz r0, lbl_8087EFB0
     cmpwi r0, 0x0
-    bne lbl_fn_8009B93C_00000088
+    bne lbl_atn_Model_drawSubNodes_00000088
     li r0, 0x1
     stb r0, lbl_8087EF29
     lwz r4, 0xc(r3)
@@ -174,7 +174,7 @@ asm void atn_Model_drawSubNodes(void)
     bl atn_Model_drawNodes
     li r0, 0x0
     stb r0, lbl_8087EF29
-lbl_fn_8009B93C_00000088:
+lbl_atn_Model_drawSubNodes_00000088:
     lwz r4, 0xc(r31)
     mr r3, r31
     lwz r4, 0x48(r4)
@@ -2155,49 +2155,49 @@ asm void atn_Model_drawMeshNode(void)
     mr r29, r6
     lwz r0, 0x0(r4)
     cmpwi r0, 0x0
-    beq lbl_fn_8009D58C_00001CA0
+    beq lbl_atn_Model_drawMeshNode_00001CA0
     lwz r0, 0x0(r5)
     lwz r4, 0x4(r4)
     slwi r0, r0, 2
     lwzx r4, r4, r0
-    b lbl_fn_8009D58C_00001CA4
-lbl_fn_8009D58C_00001CA0:
+    b lbl_atn_Model_drawMeshNode_00001CA4
+lbl_atn_Model_drawMeshNode_00001CA0:
     lwz r4, 0x0(r5)
-lbl_fn_8009D58C_00001CA4:
+lbl_atn_Model_drawMeshNode_00001CA4:
     lwz r6, 0xc(r3)
     cmpwi r4, 0x0
     lwz r0, 0x4(r5)
     lwz r5, 0x40(r6)
     slwi r0, r0, 2
     lwzx r28, r5, r0
-    blt lbl_fn_8009D58C_00001CEC
+    blt lbl_atn_Model_drawMeshNode_00001CEC
     lwz r5, 0x4c(r3)
     cmpwi r5, 0x0
-    beq lbl_fn_8009D58C_00001CD8
+    beq lbl_atn_Model_drawMeshNode_00001CD8
     lbzx r0, r5, r4
     cmpwi r0, 0x0
-    beq lbl_fn_8009D58C_00002388
-lbl_fn_8009D58C_00001CD8:
+    beq lbl_atn_Model_drawMeshNode_00002388
+lbl_atn_Model_drawMeshNode_00001CD8:
     lwz r3, 0x20(r3)
     slwi r0, r4, 2
     lwz r3, 0x4(r3)
     lwzx r27, r3, r0
-    b lbl_fn_8009D58C_00001CF8
-lbl_fn_8009D58C_00001CEC:
+    b lbl_atn_Model_drawMeshNode_00001CF8
+lbl_atn_Model_drawMeshNode_00001CEC:
     lwz r3, lbl_8087EFE0
     bl fn_800C607C
     mr r27, r3
-lbl_fn_8009D58C_00001CF8:
+lbl_atn_Model_drawMeshNode_00001CF8:
     cmpwi r27, 0x0
-    beq lbl_fn_8009D58C_00002388
+    beq lbl_atn_Model_drawMeshNode_00002388
     lbz r0, lbl_8087EF29
     cmpwi r0, 0x0
-    beq lbl_fn_8009D58C_00001D1C
+    beq lbl_atn_Model_drawMeshNode_00001D1C
     lbz r0, 0x48(r27)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_8009D58C_00002388
-lbl_fn_8009D58C_00001D1C:
+    bne lbl_atn_Model_drawMeshNode_00002388
+lbl_atn_Model_drawMeshNode_00001D1C:
     lwz r5, lbl_8087EFB4
     lbz r0, lbl_8087EFB0
     lwz r3, 0x2f8(r5)
@@ -2205,82 +2205,82 @@ lbl_fn_8009D58C_00001D1C:
     lbz r4, 0x49(r27)
     slwi r0, r3, 2
     lwzx r3, r5, r0
-    bne lbl_fn_8009D58C_00001D4C
+    bne lbl_atn_Model_drawMeshNode_00001D4C
     lwz r0, 0xc(r3)
     and r0, r4, r0
     cmplw r4, r0
-    bne lbl_fn_8009D58C_00002388
-lbl_fn_8009D58C_00001D4C:
+    bne lbl_atn_Model_drawMeshNode_00002388
+lbl_atn_Model_drawMeshNode_00001D4C:
     lwz r0, 0x14(r28)
     li r26, 0x0
     cmpwi r0, -0x1
-    bne lbl_fn_8009D58C_00001D60
+    bne lbl_atn_Model_drawMeshNode_00001D60
     ori r26, r26, 0x1
-lbl_fn_8009D58C_00001D60:
+lbl_atn_Model_drawMeshNode_00001D60:
     lwz r5, lbl_8087EFA8
     lwz r0, 0x148(r5)
     cmpwi r0, 0x0
-    beq lbl_fn_8009D58C_00001D78
+    beq lbl_atn_Model_drawMeshNode_00001D78
     ori r26, r26, 0x4
-    b lbl_fn_8009D58C_00001E2C
-lbl_fn_8009D58C_00001D78:
+    b lbl_atn_Model_drawMeshNode_00001E2C
+lbl_atn_Model_drawMeshNode_00001D78:
     lwz r4, 0x4(r24)
     rlwinm r0, r4, 0, 28, 28
     cmpwi r0, 0x8
-    bne lbl_fn_8009D58C_00001D94
+    bne lbl_atn_Model_drawMeshNode_00001D94
     lwz r0, 0x104(r5)
     cmpwi r0, 0x0
-    bne lbl_fn_8009D58C_00001DA0
-lbl_fn_8009D58C_00001D94:
+    bne lbl_atn_Model_drawMeshNode_00001DA0
+lbl_atn_Model_drawMeshNode_00001D94:
     lwz r0, 0x13c(r5)
     cmpwi r0, 0x0
-    beq lbl_fn_8009D58C_00001E10
-lbl_fn_8009D58C_00001DA0:
+    beq lbl_atn_Model_drawMeshNode_00001E10
+lbl_atn_Model_drawMeshNode_00001DA0:
     cmpwi r29, 0x0
-    beq lbl_fn_8009D58C_00001DFC
+    beq lbl_atn_Model_drawMeshNode_00001DFC
     lwz r0, 0x184(r5)
     cmpwi r0, 0x0
-    beq lbl_fn_8009D58C_00001DBC
+    beq lbl_atn_Model_drawMeshNode_00001DBC
     ori r26, r26, 0x2
-    b lbl_fn_8009D58C_00001DFC
-lbl_fn_8009D58C_00001DBC:
+    b lbl_atn_Model_drawMeshNode_00001DFC
+lbl_atn_Model_drawMeshNode_00001DBC:
     lwz r0, 0x188(r5)
     cmpwi r0, 0x0
-    beq lbl_fn_8009D58C_00001DD0
+    beq lbl_atn_Model_drawMeshNode_00001DD0
     ori r26, r26, 0x10
-    b lbl_fn_8009D58C_00001DFC
-lbl_fn_8009D58C_00001DD0:
+    b lbl_atn_Model_drawMeshNode_00001DFC
+lbl_atn_Model_drawMeshNode_00001DD0:
     rlwinm r4, r4, 0, 16, 16
     addis r0, r4, 0x0
     cmplwi r0, 0x8000
-    beq lbl_fn_8009D58C_00001DF0
+    beq lbl_atn_Model_drawMeshNode_00001DF0
     lbz r0, 0x48(r27)
     clrlwi r0, r0, 31
     cmplwi r0, 0x1
-    bne lbl_fn_8009D58C_00001DF8
-lbl_fn_8009D58C_00001DF0:
+    bne lbl_atn_Model_drawMeshNode_00001DF8
+lbl_atn_Model_drawMeshNode_00001DF0:
     ori r26, r26, 0x10
-    b lbl_fn_8009D58C_00001DFC
-lbl_fn_8009D58C_00001DF8:
+    b lbl_atn_Model_drawMeshNode_00001DFC
+lbl_atn_Model_drawMeshNode_00001DF8:
     ori r26, r26, 0x2
-lbl_fn_8009D58C_00001DFC:
+lbl_atn_Model_drawMeshNode_00001DFC:
     lwz r0, 0x134(r5)
     cmpwi r0, 0x0
-    beq lbl_fn_8009D58C_00001E2C
+    beq lbl_atn_Model_drawMeshNode_00001E2C
     rlwinm r26, r26, 0, 31, 29
-    b lbl_fn_8009D58C_00001E2C
-lbl_fn_8009D58C_00001E10:
+    b lbl_atn_Model_drawMeshNode_00001E2C
+lbl_atn_Model_drawMeshNode_00001E10:
     rlwinm r0, r4, 0, 23, 23
     cmpwi r0, 0x100
-    bne lbl_fn_8009D58C_00001E2C
+    bne lbl_atn_Model_drawMeshNode_00001E2C
     lwz r0, 0x144(r5)
     cmpwi r0, 0x0
-    beq lbl_fn_8009D58C_00001E2C
+    beq lbl_atn_Model_drawMeshNode_00001E2C
     ori r26, r26, 0x4
-lbl_fn_8009D58C_00001E2C:
+lbl_atn_Model_drawMeshNode_00001E2C:
     lwz r0, 0x2f8(r5)
     cmpwi r0, 0x0
-    beq lbl_fn_8009D58C_00001F24
+    beq lbl_atn_Model_drawMeshNode_00001F24
     lwz r7, 0x84(r24)
     li r5, 0x1
     li r6, 0x1
@@ -2288,105 +2288,105 @@ lbl_fn_8009D58C_00001E2C:
     lwz r8, 0xc8(r7)
     clrlwi r0, r8, 31
     cmplwi r0, 0x1
-    bne lbl_fn_8009D58C_00001E6C
+    bne lbl_atn_Model_drawMeshNode_00001E6C
     lwz r0, 0x4(r24)
     rlwinm r0, r0, 0, 23, 23
     cmpwi r0, 0x100
-    bne lbl_fn_8009D58C_00001E6C
+    bne lbl_atn_Model_drawMeshNode_00001E6C
     li r4, 0x1
-lbl_fn_8009D58C_00001E6C:
+lbl_atn_Model_drawMeshNode_00001E6C:
     cmpwi r4, 0x0
-    bne lbl_fn_8009D58C_00001EA4
+    bne lbl_atn_Model_drawMeshNode_00001EA4
     rlwinm r0, r8, 0, 30, 30
     li r4, 0x0
     cmplwi r0, 0x2
-    bne lbl_fn_8009D58C_00001E98
+    bne lbl_atn_Model_drawMeshNode_00001E98
     lwz r0, 0x4(r24)
     rlwinm r0, r0, 0, 28, 28
     cmpwi r0, 0x8
-    bne lbl_fn_8009D58C_00001E98
+    bne lbl_atn_Model_drawMeshNode_00001E98
     li r4, 0x1
-lbl_fn_8009D58C_00001E98:
+lbl_atn_Model_drawMeshNode_00001E98:
     cmpwi r4, 0x0
-    bne lbl_fn_8009D58C_00001EA4
+    bne lbl_atn_Model_drawMeshNode_00001EA4
     li r6, 0x0
-lbl_fn_8009D58C_00001EA4:
+lbl_atn_Model_drawMeshNode_00001EA4:
     cmpwi r6, 0x0
-    bne lbl_fn_8009D58C_00001EC4
+    bne lbl_atn_Model_drawMeshNode_00001EC4
     lwz r0, 0x4(r24)
     rlwinm r4, r0, 0, 11, 11
     subis r0, r4, 0x10
     cmplwi r0, 0x0
-    beq lbl_fn_8009D58C_00001EC4
+    beq lbl_atn_Model_drawMeshNode_00001EC4
     li r5, 0x0
-lbl_fn_8009D58C_00001EC4:
+lbl_atn_Model_drawMeshNode_00001EC4:
     cmpwi r5, 0x0
     li r5, 0x0
-    beq lbl_fn_8009D58C_00001EE8
+    beq lbl_atn_Model_drawMeshNode_00001EE8
     lwz r0, 0x4(r24)
     rlwinm r4, r0, 0, 10, 10
     subis r0, r4, 0x20
     cmplwi r0, 0x0
-    beq lbl_fn_8009D58C_00001EE8
+    beq lbl_atn_Model_drawMeshNode_00001EE8
     li r5, 0x1
-lbl_fn_8009D58C_00001EE8:
+lbl_atn_Model_drawMeshNode_00001EE8:
     cmpwi r5, 0x0
-    beq lbl_fn_8009D58C_00001F24
+    beq lbl_atn_Model_drawMeshNode_00001F24
     lwz r0, 0x70(r7)
     cmpwi r0, 0x0
-    beq lbl_fn_8009D58C_00001F14
+    beq lbl_atn_Model_drawMeshNode_00001F14
     lwz r0, 0x74(r7)
     cmpwi r0, 0x0
-    beq lbl_fn_8009D58C_00001F0C
-    b lbl_fn_8009D58C_00001F18
-lbl_fn_8009D58C_00001F0C:
+    beq lbl_atn_Model_drawMeshNode_00001F0C
+    b lbl_atn_Model_drawMeshNode_00001F18
+lbl_atn_Model_drawMeshNode_00001F0C:
     addi r0, r7, 0x78
-    b lbl_fn_8009D58C_00001F18
-lbl_fn_8009D58C_00001F14:
+    b lbl_atn_Model_drawMeshNode_00001F18
+lbl_atn_Model_drawMeshNode_00001F14:
     li r0, 0x0
-lbl_fn_8009D58C_00001F18:
+lbl_atn_Model_drawMeshNode_00001F18:
     cmpwi r0, 0x0
-    beq lbl_fn_8009D58C_00001F24
+    beq lbl_atn_Model_drawMeshNode_00001F24
     ori r26, r26, 0x8
-lbl_fn_8009D58C_00001F24:
+lbl_atn_Model_drawMeshNode_00001F24:
     lwz r0, 0x4(r24)
     rlwinm r4, r0, 0, 12, 12
     subis r0, r4, 0x8
     cmplwi r0, 0x0
-    bne lbl_fn_8009D58C_00001F50
+    bne lbl_atn_Model_drawMeshNode_00001F50
     ori r26, r26, 0x20
     rlwinm. r0, r26, 0, 28, 28
-    beq lbl_fn_8009D58C_00001F50
+    beq lbl_atn_Model_drawMeshNode_00001F50
     rlwinm. r0, r26, 0, 29, 29
-    beq lbl_fn_8009D58C_00001F50
+    beq lbl_atn_Model_drawMeshNode_00001F50
     rlwinm r26, r26, 0, 30, 28
-lbl_fn_8009D58C_00001F50:
+lbl_atn_Model_drawMeshNode_00001F50:
     lwz r0, 0x58(r24)
     lwz r3, 0x10(r3)
     cmpwi r0, 0x0
     and r26, r26, r3
-    beq lbl_fn_8009D58C_00001F68
+    beq lbl_atn_Model_drawMeshNode_00001F68
     ori r26, r26, 0x40
-lbl_fn_8009D58C_00001F68:
+lbl_atn_Model_drawMeshNode_00001F68:
     lwz r0, 0x4(r28)
     cmplwi r0, 0x2
-    blt lbl_fn_8009D58C_00001F7C
+    blt lbl_atn_Model_drawMeshNode_00001F7C
     lwz r31, 0x54(r28)
-    b lbl_fn_8009D58C_00001F8C
-lbl_fn_8009D58C_00001F7C:
+    b lbl_atn_Model_drawMeshNode_00001F8C
+lbl_atn_Model_drawMeshNode_00001F7C:
     lwz r3, 0x8(r24)
     lwz r4, 0x4(r25)
     bl fn_8047614C
     mr r31, r3
-lbl_fn_8009D58C_00001F8C:
+lbl_atn_Model_drawMeshNode_00001F8C:
     lbz r0, lbl_8087EFB0
     cmpwi r0, 0x0
-    bne lbl_fn_8009D58C_00001FA0
+    bne lbl_atn_Model_drawMeshNode_00001FA0
     lwz r29, 0x44(r27)
-    b lbl_fn_8009D58C_00001FA4
-lbl_fn_8009D58C_00001FA0:
+    b lbl_atn_Model_drawMeshNode_00001FA4
+lbl_atn_Model_drawMeshNode_00001FA0:
     li r29, 0x0
-lbl_fn_8009D58C_00001FA4:
+lbl_atn_Model_drawMeshNode_00001FA4:
     lwz r6, 0x1c(r24)
     lwz r5, 0x88(r24)
     lwz r3, 0x8c(r24)
@@ -2449,7 +2449,7 @@ lbl_fn_8009D58C_00001FA4:
     lwz r3, 0x50(r3)
     cmpwi r0, 0x0
     stw r3, 0x80(r1)
-    beq lbl_fn_8009D58C_000020E4
+    beq lbl_atn_Model_drawMeshNode_000020E4
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x18
     lfs f0, 0x38(r24)
@@ -2467,25 +2467,25 @@ lbl_fn_8009D58C_00001FA4:
     stfs f4, 0x20(r1)
     bl fn_805F9940
     fmr f31, f1
-lbl_fn_8009D58C_000020E4:
+lbl_atn_Model_drawMeshNode_000020E4:
     rlwinm. r0, r26, 0, 29, 29
-    beq lbl_fn_8009D58C_0000210C
+    beq lbl_atn_Model_drawMeshNode_0000210C
     lwz r3, 0x5c(r24)
     cmpwi r3, 0x0
-    beq lbl_fn_8009D58C_000020FC
-    b lbl_fn_8009D58C_00002108
-lbl_fn_8009D58C_000020FC:
+    beq lbl_atn_Model_drawMeshNode_000020FC
+    b lbl_atn_Model_drawMeshNode_00002108
+lbl_atn_Model_drawMeshNode_000020FC:
     lwz r3, 0x84(r24)
     addi r4, r24, 0x30
     bl fn_800C258C
-lbl_fn_8009D58C_00002108:
+lbl_atn_Model_drawMeshNode_00002108:
     stw r3, 0x68(r1)
-lbl_fn_8009D58C_0000210C:
+lbl_atn_Model_drawMeshNode_0000210C:
     lwz r6, lbl_8087EFB4
     li r5, 0x0
     lwz r0, 0x954(r6)
     cmpwi r0, 0x0
-    beq lbl_fn_8009D58C_00002148
+    beq lbl_atn_Model_drawMeshNode_00002148
     addis r4, r6, 0x1
     li r3, 0x1000
     lwz r4, -0x76a4(r4)
@@ -2494,19 +2494,19 @@ lbl_fn_8009D58C_0000210C:
     srwi r0, r0, 1
     subf r0, r0, r3
     srwi. r0, r0, 31
-    bne lbl_fn_8009D58C_00002148
+    bne lbl_atn_Model_drawMeshNode_00002148
     li r5, 0x1
-lbl_fn_8009D58C_00002148:
+lbl_atn_Model_drawMeshNode_00002148:
     cmpwi r5, 0x0
-    beq lbl_fn_8009D58C_00002270
+    beq lbl_atn_Model_drawMeshNode_00002270
     lwz r3, lbl_8087EFA8
     lwz r0, 0x398(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_8009D58C_0000216C
+    bne lbl_atn_Model_drawMeshNode_0000216C
     lwz r0, 0x2f8(r6)
     cmpwi r0, 0x8
-    bne lbl_fn_8009D58C_00002270
-lbl_fn_8009D58C_0000216C:
+    bne lbl_atn_Model_drawMeshNode_00002270
+lbl_atn_Model_drawMeshNode_0000216C:
     lwz r3, lbl_8087EFB4
     lwz r5, 0x48(r1)
     lwz r0, 0x958(r3)
@@ -2517,10 +2517,10 @@ lbl_fn_8009D58C_0000216C:
     add r0, r3, r0
     addic. r6, r0, 0x95c
     stw r4, 0x14(r1)
-    beq lbl_fn_8009D58C_000021A0
+    beq lbl_atn_Model_drawMeshNode_000021A0
     stw r5, 0x0(r6)
     stw r4, 0x4(r6)
-lbl_fn_8009D58C_000021A0:
+lbl_atn_Model_drawMeshNode_000021A0:
     lwz r5, 0x958(r3)
     addis r4, r3, 0x1
     addi r0, r5, 0x1
@@ -2529,7 +2529,7 @@ lbl_fn_8009D58C_000021A0:
     mulli r0, r0, 0x4c
     add r0, r4, r0
     subic. r4, r0, 0x76a0
-    beq lbl_fn_8009D58C_0000225C
+    beq lbl_atn_Model_drawMeshNode_0000225C
     lwz r0, 0x48(r1)
     stw r0, 0x0(r4)
     lwz r0, 0x4c(r1)
@@ -2568,15 +2568,15 @@ lbl_fn_8009D58C_000021A0:
     stw r0, 0x44(r4)
     lwz r0, 0x90(r1)
     stw r0, 0x48(r4)
-lbl_fn_8009D58C_0000225C:
+lbl_atn_Model_drawMeshNode_0000225C:
     addis r4, r3, 0x1
     lwz r3, -0x76a4(r4)
     addi r0, r3, 0x1
     stw r0, -0x76a4(r4)
-    b lbl_fn_8009D58C_00002388
-lbl_fn_8009D58C_00002270:
+    b lbl_atn_Model_drawMeshNode_00002388
+lbl_atn_Model_drawMeshNode_00002270:
     cmpwi r29, 0x0
-    ble lbl_fn_8009D58C_0000237C
+    ble lbl_atn_Model_drawMeshNode_0000237C
     lwz r3, lbl_8087EFB4
     lwz r5, 0x48(r1)
     lwz r0, 0x958(r3)
@@ -2587,10 +2587,10 @@ lbl_fn_8009D58C_00002270:
     add r0, r3, r0
     addic. r6, r0, 0x95c
     stw r4, 0xc(r1)
-    beq lbl_fn_8009D58C_000022AC
+    beq lbl_atn_Model_drawMeshNode_000022AC
     stw r5, 0x0(r6)
     stw r4, 0x4(r6)
-lbl_fn_8009D58C_000022AC:
+lbl_atn_Model_drawMeshNode_000022AC:
     lwz r5, 0x958(r3)
     addis r4, r3, 0x1
     addi r0, r5, 0x1
@@ -2599,7 +2599,7 @@ lbl_fn_8009D58C_000022AC:
     mulli r0, r0, 0x4c
     add r0, r4, r0
     subic. r4, r0, 0x76a0
-    beq lbl_fn_8009D58C_00002368
+    beq lbl_atn_Model_drawMeshNode_00002368
     lwz r0, 0x48(r1)
     stw r0, 0x0(r4)
     lwz r0, 0x4c(r1)
@@ -2638,17 +2638,17 @@ lbl_fn_8009D58C_000022AC:
     stw r0, 0x44(r4)
     lwz r0, 0x90(r1)
     stw r0, 0x48(r4)
-lbl_fn_8009D58C_00002368:
+lbl_atn_Model_drawMeshNode_00002368:
     addis r4, r3, 0x1
     lwz r3, -0x76a4(r4)
     addi r0, r3, 0x1
     stw r0, -0x76a4(r4)
-    b lbl_fn_8009D58C_00002388
-lbl_fn_8009D58C_0000237C:
+    b lbl_atn_Model_drawMeshNode_00002388
+lbl_atn_Model_drawMeshNode_0000237C:
     fmr f1, f31
     addi r3, r1, 0x48
     bl fn_8009DE60
-lbl_fn_8009D58C_00002388:
+lbl_atn_Model_drawMeshNode_00002388:
     addi r11, r1, 0xc0
     psq_l f31, 0xc8(r1), 0, 0
     lfd f31, 0xc0(r1)

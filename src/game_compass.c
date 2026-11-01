@@ -458,18 +458,18 @@ asm void atn_Model_updateMatrices(void)
     srawi. r0, r0, 31
     add r4, r26, r4
     addi r30, r4, 0x164
-    beq lbl_fn_80091684_00000630
+    beq lbl_atn_Model_updateMatrices_00000630
     extlwi r0, r3, 2, 26
     srawi. r0, r0, 31
-    beq lbl_fn_80091684_00000630
+    beq lbl_atn_Model_updateMatrices_00000630
     bl fn_8008B964
     bl fn_8008E2D4
     cmpwi r3, 0x3
-    bne lbl_fn_80091684_00000630
+    bne lbl_atn_Model_updateMatrices_00000630
     li r0, -0x1
     stw r0, 0x5c(r26)
     addi r30, r26, 0x1c4
-lbl_fn_80091684_00000630:
+lbl_atn_Model_updateMatrices_00000630:
     addi r3, r31, 0x30
     bl fn_80089ACC
     mulli r5, r3, 0x30
@@ -494,9 +494,9 @@ lbl_fn_80091684_00000630:
     mulli r4, r0, 0x30
     bl DCZeroRange
     cmpwi r25, 0x0
-    beq lbl_fn_80091684_00000820
+    beq lbl_atn_Model_updateMatrices_00000820
     cmpwi r27, 0x0
-    beq lbl_fn_80091684_00000720
+    beq lbl_atn_Model_updateMatrices_00000720
     lwz r3, 0x8(r30)
     mr r4, r24
     mr r5, r28
@@ -507,8 +507,8 @@ lbl_fn_80091684_00000630:
     bl fn_8009A504
     li r24, 0x0
     li r30, 0x0
-    b lbl_fn_80091684_00000710
-lbl_fn_80091684_000006C8:
+    b lbl_atn_Model_updateMatrices_00000710
+lbl_atn_Model_updateMatrices_000006C8:
     lwz r0, 0x18(r29)
     addi r3, r1, 0xa0
     addi r5, r26, 0x60
@@ -527,12 +527,12 @@ lbl_fn_80091684_000006C8:
     addi r24, r24, 0x1
     addi r0, r3, 0x30
     stw r0, 0x8(r1)
-lbl_fn_80091684_00000710:
+lbl_atn_Model_updateMatrices_00000710:
     lwz r0, 0x14(r29)
     cmpw r24, r0
-    blt lbl_fn_80091684_000006C8
-    b lbl_fn_80091684_00000798
-lbl_fn_80091684_00000720:
+    blt lbl_atn_Model_updateMatrices_000006C8
+    b lbl_atn_Model_updateMatrices_00000798
+lbl_atn_Model_updateMatrices_00000720:
     addi r3, r31, 0x30
     bl fn_80089ACC
     mr r6, r3
@@ -543,8 +543,8 @@ lbl_fn_80091684_00000720:
     bl fn_8009A490
     li r24, 0x0
     li r27, 0x0
-    b lbl_fn_80091684_0000078C
-lbl_fn_80091684_0000074C:
+    b lbl_atn_Model_updateMatrices_0000078C
+lbl_atn_Model_updateMatrices_0000074C:
     lwz r0, 0x18(r29)
     addi r3, r1, 0x70
     addi r5, r26, 0x60
@@ -561,21 +561,21 @@ lbl_fn_80091684_0000074C:
     addi r24, r24, 0x1
     addi r0, r3, 0x30
     stw r0, 0x8(r1)
-lbl_fn_80091684_0000078C:
+lbl_atn_Model_updateMatrices_0000078C:
     lwz r0, 0x14(r29)
     cmpw r24, r0
-    blt lbl_fn_80091684_0000074C
-lbl_fn_80091684_00000798:
+    blt lbl_atn_Model_updateMatrices_0000074C
+lbl_atn_Model_updateMatrices_00000798:
     lwz r6, 0x1c(r29)
     cmpwi r6, 0x0
-    bne lbl_fn_80091684_000007BC
+    bne lbl_atn_Model_updateMatrices_000007BC
     lwz r0, 0x24(r29)
     cmpwi r0, 0x0
-    bne lbl_fn_80091684_000007BC
+    bne lbl_atn_Model_updateMatrices_000007BC
     lwz r0, 0x2c(r29)
     cmpwi r0, 0x0
-    beq lbl_fn_80091684_000009A8
-lbl_fn_80091684_000007BC:
+    beq lbl_atn_Model_updateMatrices_000009A8
+lbl_atn_Model_updateMatrices_000007BC:
     lwz r3, 0x8(r1)
     lis r4, 0xe000
     lwz r5, 0x20(r29)
@@ -600,10 +600,10 @@ lbl_fn_80091684_000007BC:
     lwz r5, 0x30(r29)
     lwz r6, 0x2c(r29)
     bl fn_800910D4
-    b lbl_fn_80091684_000009A8
-lbl_fn_80091684_00000820:
+    b lbl_atn_Model_updateMatrices_000009A8
+lbl_atn_Model_updateMatrices_00000820:
     cmpwi r27, 0x0
-    beq lbl_fn_80091684_000008AC
+    beq lbl_atn_Model_updateMatrices_000008AC
     lwz r3, 0x8(r30)
     mr r4, r24
     mr r5, r28
@@ -614,8 +614,8 @@ lbl_fn_80091684_00000820:
     bl fn_80090834
     li r24, 0x0
     li r30, 0x0
-    b lbl_fn_80091684_0000089C
-lbl_fn_80091684_00000854:
+    b lbl_atn_Model_updateMatrices_0000089C
+lbl_atn_Model_updateMatrices_00000854:
     lwz r0, 0x18(r29)
     addi r3, r1, 0x40
     addi r5, r26, 0x60
@@ -634,12 +634,12 @@ lbl_fn_80091684_00000854:
     addi r24, r24, 0x1
     addi r0, r3, 0x30
     stw r0, 0x8(r1)
-lbl_fn_80091684_0000089C:
+lbl_atn_Model_updateMatrices_0000089C:
     lwz r0, 0x14(r29)
     cmpw r24, r0
-    blt lbl_fn_80091684_00000854
-    b lbl_fn_80091684_00000924
-lbl_fn_80091684_000008AC:
+    blt lbl_atn_Model_updateMatrices_00000854
+    b lbl_atn_Model_updateMatrices_00000924
+lbl_atn_Model_updateMatrices_000008AC:
     addi r3, r31, 0x30
     bl fn_80089ACC
     mr r6, r3
@@ -650,8 +650,8 @@ lbl_fn_80091684_000008AC:
     bl fn_800908FC
     li r24, 0x0
     li r27, 0x0
-    b lbl_fn_80091684_00000918
-lbl_fn_80091684_000008D8:
+    b lbl_atn_Model_updateMatrices_00000918
+lbl_atn_Model_updateMatrices_000008D8:
     lwz r0, 0x18(r29)
     addi r3, r1, 0x10
     addi r5, r26, 0x60
@@ -668,21 +668,21 @@ lbl_fn_80091684_000008D8:
     addi r24, r24, 0x1
     addi r0, r3, 0x30
     stw r0, 0x8(r1)
-lbl_fn_80091684_00000918:
+lbl_atn_Model_updateMatrices_00000918:
     lwz r0, 0x14(r29)
     cmpw r24, r0
-    blt lbl_fn_80091684_000008D8
-lbl_fn_80091684_00000924:
+    blt lbl_atn_Model_updateMatrices_000008D8
+lbl_atn_Model_updateMatrices_00000924:
     lwz r6, 0x1c(r29)
     cmpwi r6, 0x0
-    bne lbl_fn_80091684_00000948
+    bne lbl_atn_Model_updateMatrices_00000948
     lwz r0, 0x24(r29)
     cmpwi r0, 0x0
-    bne lbl_fn_80091684_00000948
+    bne lbl_atn_Model_updateMatrices_00000948
     lwz r0, 0x2c(r29)
     cmpwi r0, 0x0
-    beq lbl_fn_80091684_000009A8
-lbl_fn_80091684_00000948:
+    beq lbl_atn_Model_updateMatrices_000009A8
+lbl_atn_Model_updateMatrices_00000948:
     lwz r3, 0x8(r1)
     lis r4, 0xe000
     lwz r5, 0x20(r29)
@@ -707,7 +707,7 @@ lbl_fn_80091684_00000948:
     lwz r5, 0x30(r29)
     lwz r6, 0x2c(r29)
     bl fn_800910D4
-lbl_fn_80091684_000009A8:
+lbl_atn_Model_updateMatrices_000009A8:
     lmw r24, 0xd0(r1)
     lwz r0, 0xf4(r1)
     mtlr r0
