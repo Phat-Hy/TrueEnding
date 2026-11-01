@@ -17,7 +17,7 @@ extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void fn_80092F1C(void);
+extern void target_pushPointToHistory(void);
 extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
@@ -37,7 +37,7 @@ extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
-extern void fn_80239D58(void);
+extern void res_Shader_findParameter(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void task_createWorker(void);
@@ -1403,7 +1403,7 @@ lbl_fn_8042B90C_00001140:
     beq lbl_fn_8042B90C_00001218
     mr r4, r31
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     bne lbl_fn_8042B90C_00001218
     lwz r0, 0x54c(r31)
@@ -1785,7 +1785,7 @@ lbl_fn_8042BF38_000016B0:
     addi r3, r29, 0xf4
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_8042BF38_000017BC
 lbl_fn_8042BF38_000016F8:
     mr r3, r30

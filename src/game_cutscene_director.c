@@ -28,7 +28,7 @@ extern void system_getNextSequenceId(void);
 extern void equip_getGlobalManager(void);
 extern void fn_8012A1B8(void);
 extern void fn_8012A288(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
@@ -1876,7 +1876,7 @@ lbl_fn_803267E8_000019B8:
     mulli r0, r0, 0x3
     subf. r0, r0, r4
     bne lbl_fn_803267E8_00001A04
-    bl fn_8013A194
+    bl npc_getGlobalManager
     bl system_getNextSequenceId
     stw r3, 0x15f8(r31)
 lbl_fn_803267E8_00001A04:

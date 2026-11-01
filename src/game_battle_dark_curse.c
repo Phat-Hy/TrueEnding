@@ -35,7 +35,7 @@ extern void fn_8011FE3C(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_unload(void);
-extern void fn_80239D58(void);
+extern void res_Shader_findParameter(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void world_getGlobalFlag(void);
@@ -355,7 +355,7 @@ lbl_fn_80422084_000002C4:
     mr r4, r31
     li r5, 0x2
     lwz r3, lbl_8087F3C0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_80422084_000002F4
     lwz r3, lbl_8087F3C0
@@ -367,7 +367,7 @@ lbl_fn_80422084_000002F4:
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x4
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_80422084_00000320
     lwz r3, lbl_8087F3C0
@@ -386,7 +386,7 @@ lbl_fn_80422084_00000334:
     mr r4, r31
     li r5, 0x2
     lwz r3, lbl_8087F3C0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     bne lbl_fn_80422084_000003B8
     lwz r5, lbl_8087F3C0
@@ -419,7 +419,7 @@ lbl_fn_80422084_000003B8:
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x4
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_80422084_000003E4
     lwz r3, lbl_8087F3C0
@@ -516,7 +516,7 @@ lbl_fn_80422084_00000524:
     mr r4, r31
     li r5, 0x2
     lwz r3, lbl_8087F3C0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_80422084_00000554
     lwz r3, lbl_8087F3C0
@@ -528,7 +528,7 @@ lbl_fn_80422084_00000554:
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x4
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     bne lbl_fn_80422084_000005D4
     lwz r5, lbl_8087F3C0

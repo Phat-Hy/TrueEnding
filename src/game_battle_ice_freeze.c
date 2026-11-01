@@ -18,7 +18,7 @@ extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void fn_80092F1C(void);
+extern void target_pushPointToHistory(void);
 extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
@@ -1569,7 +1569,7 @@ lbl_fn_8041C784_000013B0:
     addi r3, r29, 0xf4
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_8041C784_0000143C
 lbl_fn_8041C784_000013F8:
     mr r3, r30

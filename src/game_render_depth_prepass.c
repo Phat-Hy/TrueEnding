@@ -71,7 +71,7 @@ extern void fn_802B596C(void);
 extern void fn_802B5DA4(void);
 extern void fn_802B6104(void);
 extern void fn_802B6AF8(void);
-extern void fn_8037D4C0(void);
+extern void dvd_showDiskErrorDialog(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
@@ -1919,7 +1919,7 @@ lbl_fn_802B3764_000018D0:
     li r5, 0xf
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_802B3764_00001914:
     lwz r0, 0xd18(r31)
     lwz r3, 0x14e0(r31)

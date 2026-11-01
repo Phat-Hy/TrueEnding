@@ -44,7 +44,7 @@ extern void fn_80219544(void);
 extern void world_getGlobalFlag(void);
 extern void fn_804A436C(void);
 extern void fn_804A53D4(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void fn_805C3F10(void);
 extern void fn_805F3780(void);
 extern void fn_805F38A0(void);
@@ -1948,7 +1948,7 @@ lbl_fn_80572454_000018A0:
     bl save_findEntryByName
     lwz r3, lbl_8087F8A0
     lwz r4, 0x70(r31)
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     beq lbl_fn_80572454_00001964
     addi r23, r3, 0x7d4

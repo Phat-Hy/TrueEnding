@@ -11,7 +11,7 @@ extern void item_useConsumable(void);
 extern void collision_testLineSegment(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void msg_formatWindowLayout(void);
 extern void fn_8012111C(void);
 extern void magic_dispatchActionCommand(void);
@@ -2695,7 +2695,7 @@ lbl_fn_803792F0_000026A0:
     stfs f0, 0x2e8(r3)
     lwz r3, 0x3a8(r28)
     addi r3, r3, 0xb0
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     li r0, 0x0
     stw r0, 0x544(r1)
     addi r4, r1, 0x544
@@ -3254,7 +3254,7 @@ lbl_fn_803792F0_00002F20:
     stfs f26, 0x2e8(r31)
     addi r3, r31, 0xb0
     li r4, 0x1
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     stw r30, 0x530(r1)
     addi r3, r31, 0xb0
     addi r4, r1, 0x530

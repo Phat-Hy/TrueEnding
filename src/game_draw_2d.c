@@ -44,7 +44,7 @@ extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
 extern void GXInitLightDistAttn(void);
 extern void GXInitLightSpot(void);
-extern void fn_80615FF0(void);
+extern void GXInitLightObj(void);
 extern void GXClampLightAngle(void);
 extern void fn_80617200(void);
 extern void GXInitTexObjDefault(void);
@@ -929,7 +929,7 @@ asm void fn_800B2EA0(void)
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80880F28
     addi r3, r1, 0x28
     li r4, 0x1
@@ -954,7 +954,7 @@ asm void fn_800B2EA0(void)
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80880F28
     addi r3, r1, 0x8
     li r4, 0x1

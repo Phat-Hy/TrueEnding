@@ -42,7 +42,7 @@ extern u32 lbl_80880C14;
 
 /* Function declarations */
 void fn_80092EC8(void);
-void fn_80092F1C(void);
+void target_pushPointToHistory(void);
 void fn_80092F90(void);
 void fn_80093014(void);
 void fn_8009303C(void);
@@ -97,7 +97,7 @@ asm void fn_80092EC8(void)
     blr
 }
 
-asm void fn_80092F1C(void)
+asm void target_pushPointToHistory(void)
 {
     nofralloc
     stwu r1, -0x20(r1)

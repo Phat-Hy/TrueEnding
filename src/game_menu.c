@@ -41,7 +41,7 @@ extern void map_processTrigger(void);
 extern void minimap_renderOverlay(void);
 extern void fn_800902C0(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80092F1C(void);
+extern void target_pushPointToHistory(void);
 extern void fn_800C0A50(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
@@ -3478,7 +3478,7 @@ lbl_fn_8004439C_00002A98:
     addi r3, r31, 0x10
     addi r4, r1, 0x208
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_8004439C_00002C44
 lbl_fn_8004439C_00002AF4:
     addi r3, r1, 0x308
@@ -3487,7 +3487,7 @@ lbl_fn_8004439C_00002AF4:
     addi r3, r31, 0x10
     addi r4, r1, 0x208
     addi r5, r1, 0x108
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_8004439C_00002C44
 lbl_fn_8004439C_00002B14:
     mr r3, r29

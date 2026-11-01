@@ -73,7 +73,7 @@ extern void fn_8052EEC0(void);
 extern void fn_8052F890(void);
 extern void fn_8052FA48(void);
 extern void fn_80530DB8(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void fn_805BDCC0(void);
 extern void fn_805BF414(void);
 
@@ -166,7 +166,7 @@ asm void fn_8052C10C(void)
     stw r0, 0x10(r1)
     bl scene_transformPoint
     lwz r4, 0x10(r1)
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     stw r3, 0x14(r1)
     addi r3, r31, 0x1224
     addi r4, r1, 0x10

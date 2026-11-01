@@ -21,7 +21,7 @@ void fn_800EC2C4(void);
 void fn_800EC440(void);
 void fn_800EC534(void);
 void fn_800EC5BC(void);
-void fn_800EC654(void);
+void cam_evalControllerSpline(void);
 void fn_800EC7F0(void);
 void fn_800ED42C(void);
 void fn_800ED4D8(void);
@@ -370,7 +370,7 @@ lbl_fn_800EC5BC_00000440:
     blr
 }
 
-asm void fn_800EC654(void)
+asm void cam_evalControllerSpline(void)
 {
     nofralloc
     stwu r1, -0x60(r1)
@@ -385,14 +385,14 @@ asm void fn_800EC654(void)
     stw r29, 0x54(r1)
     addi r29, r1, 0x20
     stw r28, 0x50(r1)
-    bne lbl_fn_800EC654_000004AC
+    bne lbl_cam_evalControllerSpline_000004AC
     lwz r3, 0xc(r4)
     lwz r0, 0x10(r4)
     stw r5, 0x20(r1)
     stw r3, 0x24(r1)
     stw r0, 0x28(r1)
-    b lbl_fn_800EC654_000004F0
-lbl_fn_800EC654_000004AC:
+    b lbl_cam_evalControllerSpline_000004F0
+lbl_cam_evalControllerSpline_000004AC:
     li r0, 0x0
     stw r0, 0x20(r1)
     lwz r4, 0xc(r4)
@@ -410,17 +410,17 @@ lbl_fn_800EC654_000004AC:
     li r5, 0x0
     add r7, r6, r0
     bl actor_dispatchMessage
-lbl_fn_800EC654_000004F0:
+lbl_cam_evalControllerSpline_000004F0:
     lwz r4, 0x14(r31)
     srwi. r0, r4, 31
-    bne lbl_fn_800EC654_00000514
+    bne lbl_cam_evalControllerSpline_00000514
     lwz r3, 0x18(r31)
     lwz r0, 0x1c(r31)
     stw r4, 0x2c(r1)
     stw r3, 0x30(r1)
     stw r0, 0x34(r1)
-    b lbl_fn_800EC654_0000055C
-lbl_fn_800EC654_00000514:
+    b lbl_cam_evalControllerSpline_0000055C
+lbl_cam_evalControllerSpline_00000514:
     li r0, 0x0
     stw r0, 0xc(r29)
     lwz r4, 0x18(r31)
@@ -439,7 +439,7 @@ lbl_fn_800EC654_00000514:
     li r5, 0x0
     add r7, r6, r0
     bl actor_dispatchMessage
-lbl_fn_800EC654_0000055C:
+lbl_cam_evalControllerSpline_0000055C:
     lbz r11, 0x20(r31)
     mr r3, r30
     lbz r10, 0x21(r31)
@@ -459,21 +459,21 @@ lbl_fn_800EC654_0000055C:
     bl fn_800EC7F0
     addi r29, r1, 0x20
     addic. r0, r29, 0xc
-    beq lbl_fn_800EC654_000005C0
+    beq lbl_cam_evalControllerSpline_000005C0
     lwz r0, 0x2c(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_800EC654_000005C0
+    beq lbl_cam_evalControllerSpline_000005C0
     lwz r3, 0x34(r1)
     bl dtor_80084684
-lbl_fn_800EC654_000005C0:
+lbl_cam_evalControllerSpline_000005C0:
     cmpwi r29, 0x0
-    beq lbl_fn_800EC654_000005DC
+    beq lbl_cam_evalControllerSpline_000005DC
     lwz r0, 0x20(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_800EC654_000005DC
+    beq lbl_cam_evalControllerSpline_000005DC
     lwz r3, 0x28(r1)
     bl dtor_80084684
-lbl_fn_800EC654_000005DC:
+lbl_cam_evalControllerSpline_000005DC:
     lwz r0, 0x64(r1)
     lwz r31, 0x5c(r1)
     lwz r30, 0x58(r1)

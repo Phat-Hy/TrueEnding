@@ -36,7 +36,7 @@ extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -852,7 +852,7 @@ lbl_fn_802A9ADC_00000B18:
     lwz r3, lbl_8087F8A0
     stfs f7, 0x70(r1)
     stfs f0, 0x74(r1)
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_802A9ADC_00000B8C

@@ -33,7 +33,7 @@ extern void magic_getOffset6C(void);
 extern void npc_updateDialogueTarget(void);
 extern void fn_80139F24(void);
 extern void fn_80139F3C(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void fn_8013C554(void);
 extern void dialog_updateScriptState(void);
 extern void fn_8017A300(void);
@@ -427,7 +427,7 @@ lbl_fn_803041C8_000004CC:
     li r3, 0x64d
     bl task_findEntryById
     mr r30, r3
-    bl fn_8013A194
+    bl npc_getGlobalManager
     li r0, -0x1
     stw r0, 0x8(r1)
     lfs f1, lbl_80884A20

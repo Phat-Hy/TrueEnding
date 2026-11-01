@@ -22,7 +22,7 @@ extern void clip_calculateFrustum(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
 extern void fn_8013A158(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void quest_ctorRewardItem(void);
 extern void actor_setState(void);
 extern void actor_getMovementFlags(void);
@@ -627,7 +627,7 @@ lbl_fn_802BB92C_00000740:
     ble lbl_fn_802BB92C_00000950
     li r0, 0x0
     stw r0, 0x1918(r31)
-    bl fn_8013A194
+    bl npc_getGlobalManager
     mr r4, r31
     bl fn_80103F60
     mr r30, r3
@@ -717,7 +717,7 @@ lbl_fn_802BB92C_00000898:
 lbl_fn_802BB92C_000008A8:
     li r0, 0x0
     stw r0, 0x1918(r31)
-    bl fn_8013A194
+    bl npc_getGlobalManager
     mr r4, r31
     bl fn_80103F60
     mr r30, r3

@@ -34,7 +34,7 @@ extern void entity_Instance_constructor(void);
 extern void entity_Instance_destructor(void);
 extern void fn_803605EC(void);
 extern void kpad_getClampData(void);
-extern void fn_8037D4C0(void);
+extern void dvd_showDiskErrorDialog(void);
 extern void fn_803CE160(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
@@ -142,7 +142,7 @@ lbl_fn_805A2FD8_00000068:
 lbl_fn_805A2FD8_00000078:
     li r6, 0x0
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     lwz r3, lbl_8087F448
     lis r4, lbl_80763248@ha
     li r30, 0x1
@@ -220,7 +220,7 @@ lbl_fn_805A2FD8_0000018C:
 lbl_fn_805A2FD8_00000190:
     li r6, 0x0
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     lwz r4, 0xf4(r31)
     lwz r3, 0xf8(r31)
     cmpwi r4, 0x0
@@ -401,7 +401,7 @@ lbl_fn_805A32CC_000003F4:
 lbl_fn_805A32CC_00000404:
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     lwz r3, lbl_8087F448
     lis r4, lbl_80763248@ha
     li r29, 0x1

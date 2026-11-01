@@ -24,7 +24,7 @@ extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
 extern void GXInitLightDistAttn(void);
 extern void GXInitLightSpot(void);
-extern void fn_80615FF0(void);
+extern void GXInitLightObj(void);
 extern void GXClampLightAngle(void);
 extern void GXDrawDone(void);
 extern void fn_80617200(void);
@@ -558,7 +558,7 @@ asm void fn_800A9E64(void)
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80880D28
     addi r3, r22, 0x4
     li r4, 0x1
@@ -583,7 +583,7 @@ asm void fn_800A9E64(void)
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80880D28
     addi r3, r22, 0x24
     li r4, 0x1
@@ -614,7 +614,7 @@ asm void fn_800A9E64(void)
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80880D28
     addi r3, r1, 0x50
     li r4, 0x1
@@ -641,7 +641,7 @@ asm void fn_800A9E64(void)
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     clrlslwi r20, r24, 16, 1
     clrlslwi r21, r25, 16, 1
     clrlslwi r5, r25, 17, 1

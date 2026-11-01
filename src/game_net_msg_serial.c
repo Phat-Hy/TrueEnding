@@ -12,7 +12,7 @@ extern void fn_80239798(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void world_getGlobalFlag(void);
-extern void fn_8037D4C0(void);
+extern void dvd_showDiskErrorDialog(void);
 extern void fn_804AC83C(void);
 extern void fn_804ACD10(void);
 extern void fn_804ACE68(void);
@@ -1406,7 +1406,7 @@ lbl_fn_804FB678_000010DC:
     li r5, 0xf
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_804FB678_00001188:
     lwz r0, 0x104(r1)
     lwz r31, 0xfc(r1)

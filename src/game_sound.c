@@ -18,7 +18,7 @@ extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void boss_recordDamage(void);
 extern void fn_8006A9A4(void);
-extern void fn_8006AA20(void);
+extern void boss_triggerEventSequence(void);
 extern void fn_8006AD24(void);
 extern void fn_8006B53C(void);
 extern void fn_8006B594(void);
@@ -1396,7 +1396,7 @@ lbl_fn_80046EE0_00000F2C:
 lbl_fn_80046EE0_00000F40:
     lwz r3, 0x84(r1)
 lbl_fn_80046EE0_00000F44:
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     bne lbl_fn_80046EE0_00001038
     addi r3, r1, 0x4c
@@ -1456,7 +1456,7 @@ lbl_fn_80046EE0_00000FF8:
 lbl_fn_80046EE0_0000100C:
     lwz r3, 0x84(r1)
 lbl_fn_80046EE0_00001010:
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     bne lbl_fn_80046EE0_00001038
     lwz r0, 0x7c(r1)
@@ -1537,7 +1537,7 @@ lbl_fn_80046EE0_00001120:
 lbl_fn_80046EE0_00001134:
     lwz r3, 0x78(r1)
 lbl_fn_80046EE0_00001138:
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_80046EE0_00001164
     lwz r0, 0x70(r1)

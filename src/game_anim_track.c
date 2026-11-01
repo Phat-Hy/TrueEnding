@@ -45,7 +45,7 @@ extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void fn_805A507C(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -1045,7 +1045,7 @@ asm void fn_80273970(void)
     bne lbl_fn_80273970_00000E00
     lwz r3, lbl_8087F8A0
     li r4, 0x5
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     beq lbl_fn_80273970_00000E00
     lwz r7, 0x38(r3)

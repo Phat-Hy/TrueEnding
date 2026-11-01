@@ -29,7 +29,7 @@ extern void fn_8010A308(void);
 extern void fn_8010F668(void);
 extern void equip_getGlobalManager(void);
 extern void enemy_updateAnimTimer(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void fn_8013C480(void);
 extern void npc_getDialogController(void);
 extern void fn_8014052C(void);
@@ -496,7 +496,7 @@ lbl_fn_8030C490_0000053C:
     addi r3, r1, 0x8c
     addi r4, r1, 0x198
     bl mtx_multVec
-    bl fn_8013A194
+    bl npc_getGlobalManager
     lfs f1, lbl_80884BAC
     mr r4, r30
     lfs f2, lbl_80884BA8

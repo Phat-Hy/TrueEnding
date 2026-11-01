@@ -32,7 +32,7 @@ extern void fn_803761BC(void);
 extern void fn_803E5E64(void);
 extern void fn_80444020(void);
 extern void fn_8047961C(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void PSMTXInverse(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -1025,7 +1025,7 @@ lbl_fn_8010CB2C_00000C44:
     extrwi. r0, r0, 1, 3
     bne lbl_fn_8010CB2C_00000C78
     li r4, 0x0
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmplw r31, r3
     beq lbl_fn_8010CB2C_00000C80
 lbl_fn_8010CB2C_00000C78:

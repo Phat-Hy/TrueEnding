@@ -19,7 +19,7 @@ extern void node_createNamedChild(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void skin_applyWeights(void);
 extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
@@ -2060,7 +2060,7 @@ lbl_fn_80311364_00001AC4:
     addi r3, r27, 0xb0
     li r4, 0x1
     stfs f0, 0x2e4(r27)
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     b lbl_fn_80311364_00001CEC
     bl battle_updateActorStatus
     lwz r25, 0x151c(r27)

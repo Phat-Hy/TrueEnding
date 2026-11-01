@@ -7,7 +7,7 @@ extern void scene_traverseNode(void);
 extern void mem_alloc(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void skeleton_getGlobalManager(void);
 extern void fn_800C16C0(void);
 extern void fn_800C18BC(void);
@@ -467,7 +467,7 @@ lbl_fn_8041EE28_00000470:
     stfs f0, 0x2ec(r3)
     lwz r3, 0x11c(r31)
     addi r3, r3, 0xb0
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     li r0, 0x0
     stw r0, 0x8(r1)
     addi r4, r1, 0x8

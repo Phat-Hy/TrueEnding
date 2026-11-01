@@ -30,11 +30,11 @@ extern void fn_800EC2C4(void);
 extern void fn_800EC440(void);
 extern void fn_800EC534(void);
 extern void fn_800EC5BC(void);
-extern void fn_800EC654(void);
+extern void cam_evalControllerSpline(void);
 extern void fn_800ED42C(void);
 extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
-extern void fn_800EDFE8(void);
+extern void cam_evalLookAtMatrix(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80103F60(void);
@@ -2042,7 +2042,7 @@ lbl_fn_80345384_000019B0:
     bl fn_800EC534
     addi r3, r1, 0x98
     addi r4, r1, 0xd4
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     b lbl_fn_80345384_00001B20
 lbl_fn_80345384_00001ADC:
     addi r3, r1, 0x98
@@ -2066,7 +2066,7 @@ lbl_fn_80345384_00001B18:
 lbl_fn_80345384_00001B20:
     addi r3, r1, 0x38
     addi r4, r1, 0xd4
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     addi r3, r1, 0x98
     addi r4, r1, 0x38
     bl fn_800EC254

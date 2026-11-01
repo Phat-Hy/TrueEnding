@@ -24,7 +24,7 @@ extern void fn_80088724(void);
 extern void node_createNamedChild(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void fn_80092F1C(void);
+extern void target_pushPointToHistory(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void str_skipWhitespace(void);
@@ -340,7 +340,7 @@ lbl_fn_80419C00_000002F0:
     addi r3, r23, 0xf4
     addi r4, r1, 0x110
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_80419C00_00000A00
 lbl_fn_80419C00_00000338:
     mr r3, r22

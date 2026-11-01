@@ -27,7 +27,7 @@ extern void task_findEntryById(void);
 extern void fn_802BC4EC(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_8037D4C0(void);
+extern void dvd_showDiskErrorDialog(void);
 extern void fn_804DA490(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -795,7 +795,7 @@ lbl_fn_802BD480_00000950:
     li r5, 0xf
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_802BD480_00000CA0
 lbl_fn_802BD480_00000978:
     lwz r0, 0x14f4(r3)

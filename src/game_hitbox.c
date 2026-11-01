@@ -16,7 +16,7 @@ extern void fn_80134168(void);
 extern void fn_80210220(void);
 extern void task_mapIdToQueue(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80239D58(void);
+extern void res_Shader_findParameter(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A184(void);
 extern void res_Shader_bindParams(void);
@@ -383,7 +383,7 @@ lbl_fn_8010743C_000003D8:
     lwz r3, lbl_8087F3C0
     li r5, 0x0
     subi r4, r4, 0x760c
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     bne lbl_fn_8010743C_0000047C
 lbl_fn_8010743C_000003FC:
@@ -552,7 +552,7 @@ asm void fn_801076D0(void)
     stw r29, 0x44(r1)
     mr r29, r3
     lwz r3, lbl_8087F3C0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     bne lbl_fn_801076D0_000006B4
     mr r3, r30

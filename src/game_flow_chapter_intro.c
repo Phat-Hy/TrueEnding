@@ -30,7 +30,7 @@ extern void world_setGlobalFlag(void);
 extern void world_getLocalFlag(void);
 extern void fn_803748E0(void);
 extern void kpad_validateButtonIndex(void);
-extern void fn_8037D4C0(void);
+extern void dvd_showDiskErrorDialog(void);
 extern void fn_803BD2B0(void);
 extern void fn_803BD49C(void);
 extern void fn_803E9608(void);
@@ -1383,7 +1383,7 @@ lbl_fn_804E4EB4_000010D8:
     li r5, 0xf
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_804E4EB4_00001128:
     lwz r3, lbl_8087F628
     lwz r4, 0xc2c(r3)

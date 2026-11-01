@@ -37,7 +37,7 @@ extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
 extern void fn_801A03E8(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80239D58(void);
+extern void res_Shader_findParameter(void);
 extern void res_findResourceSlot(void);
 extern void res_Shader_bindParams(void);
 extern void fn_8031FAA4(void);
@@ -717,7 +717,7 @@ asm void fn_8031E8BC(void)
     bl viewport_getGlobalContext
     mr r4, r29
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_8031E8BC_00000ABC
     bl viewport_getGlobalContext
@@ -730,7 +730,7 @@ lbl_fn_8031E8BC_000008C0:
     bl viewport_getGlobalContext
     mr r4, r29
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     bne lbl_fn_8031E8BC_00000928
     bl viewport_getGlobalContext

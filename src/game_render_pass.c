@@ -73,7 +73,7 @@ extern void fn_802A3D6C(void);
 extern void fn_802A7970(void);
 extern void entity_Instance_constructor(void);
 extern void entity_Instance_destructor(void);
-extern void fn_8037D4C0(void);
+extern void dvd_showDiskErrorDialog(void);
 extern void craft_forgeUpgradeWeapon(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -559,7 +559,7 @@ lbl_fn_802A4478_00000518:
     li r5, 0xf
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_802A4478_00000554:
     lwz r5, 0x0(r29)
     lwz r4, 0x4(r29)

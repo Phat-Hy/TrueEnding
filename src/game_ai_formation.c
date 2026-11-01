@@ -85,7 +85,7 @@ extern void fn_803E6850(void);
 extern void fn_804439FC(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
@@ -1853,7 +1853,7 @@ asm void fn_80266FC4(void)
     stw r0, 0xd20(r3)
     lwz r3, lbl_8087F8A0
     lwz r30, 0x48(r3)
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     lwz r0, 0x12a4(r30)
     extrwi. r0, r0, 1, 3
     bne lbl_fn_80266FC4_00001828

@@ -23,7 +23,7 @@ extern void clip_calculateFrustum(void);
 extern void npc_updateDialogueTarget(void);
 extern void fn_80139F2C(void);
 extern void fn_80139F3C(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_801404F8(void);
 extern void quest_ctorRewardItem(void);
@@ -2057,7 +2057,7 @@ lbl_fn_802AF7D8_00001B64:
     mr r4, r3
     addi r3, r1, 0x50
     bl mtx_getTranslation
-    bl fn_8013A194
+    bl npc_getGlobalManager
     li r0, -0x1
     stw r0, 0x8(r1)
     lfs f1, lbl_80883F40
@@ -2179,7 +2179,7 @@ lbl_fn_802AF7D8_00001D30:
     mr r4, r3
     addi r3, r1, 0x44
     bl mtx_getTranslation
-    bl fn_8013A194
+    bl npc_getGlobalManager
     li r30, -0x1
     stw r30, 0x8(r1)
     lfs f1, lbl_80883F40
@@ -2202,7 +2202,7 @@ lbl_fn_802AF7D8_00001D30:
     addi r3, r1, 0x44
     addi r4, r1, 0x20
     bl vec3_copy
-    bl fn_8013A194
+    bl npc_getGlobalManager
     stw r30, 0x8(r1)
     mr r4, r31
     lfs f1, lbl_80883F40
@@ -2224,7 +2224,7 @@ lbl_fn_802AF7D8_00001D30:
     addi r3, r1, 0x44
     addi r4, r1, 0x14
     bl vec3_copy
-    bl fn_8013A194
+    bl npc_getGlobalManager
     stw r30, 0x8(r1)
     mr r4, r31
     lfs f1, lbl_80883F40
@@ -2260,7 +2260,7 @@ lbl_fn_802AF7D8_00001E78:
     mr r4, r3
     addi r3, r1, 0x38
     bl mtx_getTranslation
-    bl fn_8013A194
+    bl npc_getGlobalManager
     li r0, -0x1
     stw r0, 0x8(r1)
     lfs f1, lbl_80883F40
@@ -2407,7 +2407,7 @@ lbl_fn_802AF7D8_000020D8:
     mr r4, r3
     addi r3, r1, 0x2c
     bl mtx_getTranslation
-    bl fn_8013A194
+    bl npc_getGlobalManager
     li r0, -0x1
     stw r0, 0x8(r1)
     lfs f1, lbl_80883F40

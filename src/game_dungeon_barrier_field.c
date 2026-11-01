@@ -23,7 +23,7 @@ extern void minimap_renderOverlay(void);
 extern void fn_800902C0(void);
 extern void fn_80092A4C(void);
 extern void atn_Lockon_updateTargetTextures(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void motion_updateFogAdj(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -1284,7 +1284,7 @@ asm void barrier_bindFieldAnimation(void)
     bl fn_803F0764
     mr r3, r31
     li r4, 0x1
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

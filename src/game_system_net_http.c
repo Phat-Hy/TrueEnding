@@ -9,7 +9,7 @@ extern void atn_LH_Binary_destructor(void);
 extern void item_useConsumable(void);
 extern void skill_calculateDamage(void);
 extern void magic_castSpellCircle(void);
-extern void fn_8006AA20(void);
+extern void boss_triggerEventSequence(void);
 extern void fn_8006B2D8(void);
 extern void fn_8006CA80(void);
 extern void mem_alloc(void);
@@ -1713,7 +1713,7 @@ asm void fn_803936A4(void)
 lbl_fn_803936A4_000017D0:
     lwz r3, 0x68(r1)
 lbl_fn_803936A4_000017D4:
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_803936A4_00001814
     cmpwi r20, 0x3
@@ -1764,7 +1764,7 @@ lbl_fn_803936A4_0000183C:
 lbl_fn_803936A4_00001880:
     lwz r3, 0x68(r1)
 lbl_fn_803936A4_00001884:
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_803936A4_000018BC
     lwz r0, 0x60(r1)
@@ -1912,7 +1912,7 @@ lbl_fn_803936A4_00001A4C:
 lbl_fn_803936A4_00001A8C:
     lwz r3, 0x5c(r1)
 lbl_fn_803936A4_00001A90:
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_803936A4_00001AD4
     lwz r0, 0x54(r1)

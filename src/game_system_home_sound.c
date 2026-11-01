@@ -63,7 +63,7 @@ extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
 extern void fn_80614790(void);
 extern void GXInitLightDistAttn(void);
-extern void fn_80615FF0(void);
+extern void GXInitLightObj(void);
 extern void GXClampLightAngle(void);
 extern void fn_806165B0(void);
 extern void fn_80617340(void);
@@ -1474,7 +1474,7 @@ lbl_dvd_initFatalErrorScreen_00001278:
     li r9, 0x0
     lhz r7, 0x18(r7)
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_808856DC
     addi r3, r1, 0x38
     li r4, 0x1

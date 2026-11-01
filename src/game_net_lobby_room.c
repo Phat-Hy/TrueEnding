@@ -11,7 +11,7 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_800502A8(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8006AA20(void);
+extern void boss_triggerEventSequence(void);
 extern void fn_8006B0C8(void);
 extern void boss_decodePhaseBitfield(void);
 extern void fn_8006B2D8(void);
@@ -484,7 +484,7 @@ lbl_fn_8049A09C_0000052C:
     bl dtor_80084684
 lbl_fn_8049A09C_00000540:
     addi r3, r1, 0x160
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_8049A09C_0000056C
     lwz r0, 0x340(r29)
@@ -558,7 +558,7 @@ lbl_fn_8049A09C_0000063C:
     bl dtor_80084684
 lbl_fn_8049A09C_00000650:
     addi r3, r1, 0x60
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_8049A09C_000006D0
     lwz r0, 0x340(r29)

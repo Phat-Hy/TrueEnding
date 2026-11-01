@@ -30,7 +30,7 @@ extern void battle_canTargetActor(void);
 extern void fn_80171DB0(void);
 extern void event_findEntryById(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80239D58(void);
+extern void res_Shader_findParameter(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void world_getGlobalFlag(void);
@@ -864,7 +864,7 @@ lbl_fn_8010A868_00000AC4:
     lwz r3, lbl_8087F3C0
     li r5, 0x3e9
     lwz r4, 0x0(r27)
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     bne lbl_fn_8010A868_00000B6C
     lwz r3, 0x0(r27)

@@ -32,7 +32,7 @@ extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void str_skipWhitespace(void);
 extern void task_lookupTagIndex(void);
 extern void craft_forgeUpgradeWeapon(void);
@@ -902,7 +902,7 @@ lbl_fn_80427870_00000A7C:
 lbl_fn_80427870_00000A84:
     addi r3, r31, 0x54
     li r4, 0x1
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     lfs f2, 0x42c(r31)
     addi r3, r1, 0xa4
     psq_l f1, 0x424(r31), 0, 0

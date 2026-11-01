@@ -33,7 +33,7 @@ extern void sky_renderStub(void);
 extern void fn_805ED390(void);
 extern void PSMTXConcat(void);
 extern void fn_80615E00(void);
-extern void fn_80615FF0(void);
+extern void GXInitLightObj(void);
 extern void GXClampLightAngle(void);
 extern void msl_releaseRefCount(void);
 extern void runtime_clampDouble(void);
@@ -195,7 +195,7 @@ asm void fn_800BD9C0(void)
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80881088
     addi r3, r27, 0x77c
     li r4, 0x0

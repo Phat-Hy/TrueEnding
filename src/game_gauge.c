@@ -18,7 +18,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void area_updateZoneState(void);
 extern void fn_8008B138(void);
-extern void fn_80092F1C(void);
+extern void target_pushPointToHistory(void);
 extern void fn_800A1934(void);
 extern void fn_800A19B8(void);
 extern void fn_800A1A3C(void);
@@ -290,7 +290,7 @@ lbl_fn_800A005C_000002D4:
     addi r3, r30, 0x10
     addi r4, r1, 0x130
     addi r5, r1, 0x30
-    bl fn_80092F1C
+    bl target_pushPointToHistory
 lbl_fn_800A005C_000002FC:
     addi r3, r1, 0x430
     bl talk_parseQuotes

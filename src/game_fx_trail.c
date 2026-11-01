@@ -35,7 +35,7 @@ extern void fn_8012AFE8(void);
 extern void npc_updateDialogueTarget(void);
 extern void fn_80139F24(void);
 extern void fn_80139F3C(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_8013C554(void);
 extern void fn_801404F8(void);
@@ -394,10 +394,10 @@ asm void fn_8028CB38(void)
     bl fn_80290674
     li r0, 0x0
     stw r0, 0x14b8(r31)
-    bl fn_8013A194
+    bl npc_getGlobalManager
     bl system_getNextSequenceId
     stw r3, 0x1550(r31)
-    bl fn_8013A194
+    bl npc_getGlobalManager
     bl system_getNextSequenceId
     stw r3, 0x1554(r31)
     bl equip_getGlobalManager
@@ -604,7 +604,7 @@ lbl_fn_8028CB38_00000644:
     addi r3, r1, 0x54
     addi r4, r1, 0x124
     bl vec3_assign
-    bl fn_8013A194
+    bl npc_getGlobalManager
     li r0, -0x1
     stw r0, 0x8(r1)
     lfs f1, lbl_80883A98

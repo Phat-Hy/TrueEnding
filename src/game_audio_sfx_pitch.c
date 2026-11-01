@@ -47,7 +47,7 @@ extern void npc_updateDialogueTarget(void);
 extern void fn_80139F2C(void);
 extern void fn_80139F3C(void);
 extern void fn_80139F58(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_8013C394(void);
 extern void fn_8013C3B4(void);
@@ -78,7 +78,7 @@ extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
-extern void fn_80239D58(void);
+extern void res_Shader_findParameter(void);
 extern void res_findResourceSlot(void);
 extern void fn_80267B20(void);
 extern void fn_80267B28(void);
@@ -943,7 +943,7 @@ asm void fn_80313FE8(void)
     stw r0, 0x15f4(r31)
     li r5, 0x0
     lwz r3, lbl_8087F3C0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_80313FE8_00000B0C
     lwz r3, lbl_8087F3C0
@@ -1896,7 +1896,7 @@ lbl_fn_80314BD8_00001878:
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
     beq lbl_fn_80314BD8_000019E8
-    bl fn_8013A194
+    bl npc_getGlobalManager
     mr r4, r3
     mr r5, r30
     addi r3, r1, 0x17c
@@ -2159,7 +2159,7 @@ lbl_fn_80314BD8_00001C48:
     lwz r3, 0x15d8(r30)
     bl task_findEntryById
     mr r29, r3
-    bl fn_8013A194
+    bl npc_getGlobalManager
     li r0, -0x1
     stw r0, 0x8(r1)
     lis r8, lbl_807C7030@ha

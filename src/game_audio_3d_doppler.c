@@ -29,7 +29,7 @@ extern void fn_80129A48(void);
 extern void fn_80133130(void);
 extern void actor_testBitFlag(void);
 extern void fn_80133EE8(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void npc_initScriptContext(void);
 extern void quest_updateFlow(void);
 extern void fn_801495E8(void);
@@ -428,7 +428,7 @@ lbl_fn_80323690_00000274:
     stw r0, 0x14f8(r30)
     bl fn_8032C3CC
     stw r29, 0x14d0(r30)
-    bl fn_8013A194
+    bl npc_getGlobalManager
     bl system_getNextSequenceId
     stw r3, 0x15f8(r30)
     b lbl_fn_80323690_000003C0
@@ -593,7 +593,7 @@ lbl_fn_80323690_000005D4:
     lfs f30, lbl_80884F10
     b lbl_fn_80323690_0000064C
 lbl_fn_80323690_000005EC:
-    bl fn_8013A194
+    bl npc_getGlobalManager
     mr r4, r29
     bl fn_80103F60
     cmpwi r3, 0x0

@@ -13,7 +13,7 @@ extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void motion_updateFogAdj(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -555,7 +555,7 @@ lbl_fn_801E8244_00000634:
     li r4, 0x1
     lwz r3, 0x48(r31)
     addi r3, r3, 0xb0
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x44
     lfs f9, 0x7c(r31)
@@ -984,7 +984,7 @@ lbl_fn_801E8534_00000C80:
     stw r30, 0x100(r5)
     lwz r3, 0x48(r31)
     addi r3, r3, 0xb0
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     stw r30, 0x160(r1)
     addi r4, r1, 0x160
     lwz r3, 0x48(r31)

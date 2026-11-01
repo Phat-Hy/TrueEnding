@@ -12,7 +12,7 @@ extern void fn_800575BC(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
-extern void fn_8006AA20(void);
+extern void boss_triggerEventSequence(void);
 extern void fn_8007FAF0(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
@@ -23,7 +23,7 @@ extern void node_createNamedChild(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void fn_80092954(void);
-extern void fn_80092F1C(void);
+extern void target_pushPointToHistory(void);
 extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
@@ -769,7 +769,7 @@ lbl_fn_8042CA54_0000084C:
     addi r3, r29, 0xf4
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_8042CA54_000008D8
 lbl_fn_8042CA54_00000894:
     mr r3, r30
@@ -1273,7 +1273,7 @@ lbl_fn_8042D140_00000EF0:
     addi r3, r1, 0x20
     bl strcpy
     addi r3, r1, 0x20
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_8042D140_000010BC
     stw r31, 0x10(r1)

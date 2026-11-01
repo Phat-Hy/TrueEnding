@@ -15,7 +15,7 @@ extern void sound_releaseChannel(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
-extern void fn_8006AA20(void);
+extern void boss_triggerEventSequence(void);
 extern void fn_8006AD24(void);
 extern void boss_decodePhaseBitfield(void);
 extern void fn_8007C3F8(void);
@@ -2195,7 +2195,7 @@ lbl_area_updateZoneState_00001BC0:
 lbl_area_updateZoneState_00001BD4:
     lwz r3, 0x7c(r1)
 lbl_area_updateZoneState_00001BD8:
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_area_updateZoneState_00001C10
     lwz r0, 0x74(r1)

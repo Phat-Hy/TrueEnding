@@ -9,7 +9,7 @@ extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void fn_80069758(void);
-extern void fn_8006AA20(void);
+extern void boss_triggerEventSequence(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -1808,7 +1808,7 @@ asm void fn_804310B0(void)
     crclr 6
     bl sprintf
     addi r3, r1, 0x8
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     bne lbl_fn_804310B0_000017C0
     addi r0, r31, 0x4dd3

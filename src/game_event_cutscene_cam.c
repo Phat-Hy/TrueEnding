@@ -42,7 +42,7 @@ extern void fn_80473104(void);
 extern void shockwave_freeEmitter(void);
 extern void fn_805BDD20(void);
 extern void fn_805BDD78(void);
-extern void fn_80615FF0(void);
+extern void GXInitLightObj(void);
 extern void printf(void);
 extern void wmemcpy(void);
 extern void wcslen(void);
@@ -839,7 +839,7 @@ asm void fn_80478158(void)
     clrlwi r5, r5, 16
     lwz r7, 0x20(r7)
     clrlwi r6, r0, 16
-    b fn_80615FF0
+    b GXInitLightObj
     blr
 }
 

@@ -49,7 +49,7 @@ extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
-extern void fn_80239D58(void);
+extern void res_Shader_findParameter(void);
 extern void fn_8023A02C(void);
 extern void fn_8023A108(void);
 extern void res_Shader_bindParams(void);
@@ -1026,7 +1026,7 @@ lbl_fn_8049682C_00000ADC:
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     bne lbl_fn_8049682C_00000B64
     mr r3, r30

@@ -35,11 +35,11 @@ extern void fn_800EC2C4(void);
 extern void fn_800EC440(void);
 extern void fn_800EC534(void);
 extern void fn_800EC5BC(void);
-extern void fn_800EC654(void);
+extern void cam_evalControllerSpline(void);
 extern void fn_800ED42C(void);
 extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
-extern void fn_800EDFE8(void);
+extern void cam_evalLookAtMatrix(void);
 extern void fn_800F52F0(void);
 extern void system_getNextSequenceId(void);
 extern void boss_updatePhaseState(void);
@@ -57,7 +57,7 @@ extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
-extern void fn_80239D58(void);
+extern void res_Shader_findParameter(void);
 extern void res_findResourceSlot(void);
 extern void fn_802660FC(void);
 extern void fn_802BABC0(void);
@@ -1116,7 +1116,7 @@ asm void fn_8031B0A8(void)
     bl fn_800EC534
     addi r3, r1, 0x98
     addi r4, r1, 0xd4
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     b lbl_fn_8031B0A8_00000E20
 lbl_fn_8031B0A8_00000DDC:
     addi r3, r1, 0x98
@@ -1140,7 +1140,7 @@ lbl_fn_8031B0A8_00000E18:
 lbl_fn_8031B0A8_00000E20:
     addi r3, r1, 0x38
     addi r4, r1, 0xd4
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     addi r3, r1, 0x98
     addi r4, r1, 0x38
     bl fn_800EC254
@@ -1269,7 +1269,7 @@ lbl_fn_8031B3CC_00000FEC:
     lwz r3, lbl_8087F3C0
     addi r4, r28, 0x1538
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_8031B3CC_00001030
     lwz r3, lbl_8087F3C0
@@ -1377,7 +1377,7 @@ lbl_fn_8031B3CC_0000117C:
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_8031B3CC_000011C0
     lwz r3, lbl_8087F3C0
@@ -1785,7 +1785,7 @@ lbl_fn_8031B9B4_00001758:
     lwz r3, lbl_8087F3C0
     addi r4, r31, 0x1538
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_8031B9B4_0000179C
     lwz r3, lbl_8087F3C0
@@ -2329,7 +2329,7 @@ lbl_fn_8031B9B4_00001F78:
     lwz r3, lbl_8087F3C0
     addi r4, r31, 0x1538
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_8031B9B4_00001FB0
     lwz r3, lbl_8087F3C0

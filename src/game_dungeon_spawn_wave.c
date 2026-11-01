@@ -16,7 +16,7 @@ extern void fn_80049B74(void);
 extern void fn_80049CDC(void);
 extern void talk_formatQuotedString(void);
 extern void boss_recordDamage(void);
-extern void fn_8006AA20(void);
+extern void boss_triggerEventSequence(void);
 extern void fn_8007FAF0(void);
 extern void fn_80092954(void);
 extern void fn_8009385C(void);
@@ -694,7 +694,7 @@ lbl_fn_803EB038_00000748:
     crclr 6
     bl sprintf
     addi r3, r1, 0x8
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_803EB038_0000078C
     lwz r12, 0x10(r31)

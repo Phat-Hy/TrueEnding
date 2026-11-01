@@ -22,7 +22,7 @@ extern void res_Resource_destructor(void);
 extern void res_Resource_unload(void);
 extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
-extern void fn_80239D58(void);
+extern void res_Shader_findParameter(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A098(void);
 extern void res_Shader_bindParams(void);
@@ -1395,7 +1395,7 @@ lbl_fn_801829B4_000011C4:
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_801829B4_00001288
     lwz r3, lbl_8087F3C0
@@ -1433,7 +1433,7 @@ lbl_fn_801829B4_000012EC:
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     bne lbl_fn_801829B4_000013BC
     mr r3, r31
@@ -1493,7 +1493,7 @@ lbl_fn_801829B4_000013D0:
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_801829B4_000013FC
     lwz r3, lbl_8087F3C0

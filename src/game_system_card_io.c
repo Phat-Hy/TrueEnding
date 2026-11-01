@@ -13,7 +13,7 @@ extern void system_getNextSequenceId(void);
 extern void fn_801255C8(void);
 extern void fn_80127D8C(void);
 extern void fn_80128930(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void fn_8013C460(void);
 extern void fn_80161880(void);
 extern void actor_setState(void);
@@ -767,7 +767,7 @@ lbl_fn_803579FC_000009A8:
     mr r3, r31
     lfs f2, lbl_8088552C
     bl fn_8035738C
-    bl fn_8013A194
+    bl npc_getGlobalManager
     bl system_getNextSequenceId
     stw r3, 0x590(r31)
     mr r3, r31

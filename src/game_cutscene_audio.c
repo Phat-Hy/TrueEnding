@@ -40,7 +40,7 @@ extern void fn_8012A1B8(void);
 extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
 extern void npc_calcTargetDistance(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_8014052C(void);
 extern void quest_updateFlow(void);
@@ -1289,10 +1289,10 @@ lbl_fn_8032E938_00000FC0:
     addi r3, r1, 0x1c
     addi r5, r1, 0x10
     bl vec3_add
-    bl fn_8013A194
+    bl npc_getGlobalManager
     bl system_getNextSequenceId
     mr r30, r3
-    bl fn_8013A194
+    bl npc_getGlobalManager
     li r0, -0x1
     stw r0, 0x8(r1)
     lfs f1, lbl_80885078

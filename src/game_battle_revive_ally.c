@@ -21,7 +21,7 @@ extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_80402A40(void);
@@ -1459,7 +1459,7 @@ lbl_fn_804048CC_000013D8:
     stfs f8, 0x58(r31)
     addi r3, r31, 0x4
     li r4, 0x1
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     li r0, 0x0
     stw r0, 0x74(r1)
     addi r3, r31, 0x4

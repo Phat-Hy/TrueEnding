@@ -25,7 +25,7 @@ extern void world_getGlobalFlag(void);
 extern void kpad_getClampData(void);
 extern void kpad_testActiveFlags(void);
 extern void fn_803761FC(void);
-extern void fn_8037D4C0(void);
+extern void dvd_showDiskErrorDialog(void);
 extern void fn_803AC230(void);
 extern void fn_803AC3D8(void);
 extern void fn_803AC708(void);
@@ -1479,7 +1479,7 @@ lbl_fn_803CDAE4_0000123C:
     li r5, 0x0
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_803CDAE4_00001254:
     lwz r0, 0x14(r1)
     mtlr r0
@@ -1523,7 +1523,7 @@ asm void fn_803CDB68(void)
     li r5, 0x0
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_803CDB68_00001338
 lbl_fn_803CDB68_000012E8:
     lfs f1, lbl_80885D4C
@@ -1531,7 +1531,7 @@ lbl_fn_803CDB68_000012E8:
     li r5, 0x0
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_803CDB68_00001338
 lbl_fn_803CDB68_00001304:
     lfs f1, lbl_80885D4C
@@ -1539,7 +1539,7 @@ lbl_fn_803CDB68_00001304:
     li r5, 0x0
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_803CDB68_00001338
 lbl_fn_803CDB68_00001320:
     lfs f1, lbl_80885D4C
@@ -1547,7 +1547,7 @@ lbl_fn_803CDB68_00001320:
     li r5, 0x0
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_803CDB68_00001338:
     lwz r0, 0x14(r1)
     mtlr r0
@@ -1575,7 +1575,7 @@ asm void fn_803CDC48(void)
     li r5, 0x0
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_803CDC48_00001390:
     lwz r0, 0x14(r1)
     mtlr r0
@@ -1844,7 +1844,7 @@ lbl_fn_803CDF84_00001724:
     li r5, 0x0
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_803CDF84_00001760
 lbl_fn_803CDF84_00001744:
     lwz r3, lbl_8087F448
@@ -1853,7 +1853,7 @@ lbl_fn_803CDF84_00001744:
     li r5, 0x0
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_803CDF84_00001760:
     lwz r0, 0x14(r1)
     mtlr r0

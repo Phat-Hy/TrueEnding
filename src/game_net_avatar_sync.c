@@ -59,7 +59,7 @@ extern void fn_803743AC(void);
 extern void fn_803754F0(void);
 extern void fn_80376324(void);
 extern void fn_803766E4(void);
-extern void fn_8037D4C0(void);
+extern void dvd_showDiskErrorDialog(void);
 extern void fn_803B27F8(void);
 extern void fn_803B2FBC(void);
 extern void fn_803B3270(void);
@@ -2163,7 +2163,7 @@ lbl_fn_80529C74_00001B74:
     li r5, 0x5a
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_80529C74_00002398
 lbl_fn_80529C74_00001B9C:
     cmpwi r0, 0x5

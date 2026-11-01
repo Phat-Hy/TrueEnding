@@ -39,11 +39,11 @@ extern void fn_800EC2C4(void);
 extern void fn_800EC440(void);
 extern void fn_800EC534(void);
 extern void fn_800EC5BC(void);
-extern void fn_800EC654(void);
+extern void cam_evalControllerSpline(void);
 extern void fn_800ED42C(void);
 extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
-extern void fn_800EDFE8(void);
+extern void cam_evalLookAtMatrix(void);
 extern void fn_800F52F0(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
@@ -137,7 +137,7 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_804A04AC(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void fn_805A3D00(void);
 extern void fn_805A5224(void);
 extern void PSVECNormalize(void);
@@ -685,7 +685,7 @@ asm void fn_803388A4(void)
     bl fn_800EC534
     addi r3, r1, 0x98
     addi r4, r1, 0xd4
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     b lbl_fn_803388A4_00000730
 lbl_fn_803388A4_000006EC:
     addi r3, r1, 0x98
@@ -709,7 +709,7 @@ lbl_fn_803388A4_00000728:
 lbl_fn_803388A4_00000730:
     addi r3, r1, 0x38
     addi r4, r1, 0xd4
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     addi r3, r1, 0x98
     addi r4, r1, 0x38
     bl fn_800EC254
@@ -1513,7 +1513,7 @@ lbl_fn_80338FD0_000012A0:
     stw r0, 0x16c0(r31)
     bl scene_transformPoint
     li r4, 0x4
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     lwz r4, 0x14d8(r31)
     stw r3, 0x14c4(r31)
     cmpwi r4, 0x0

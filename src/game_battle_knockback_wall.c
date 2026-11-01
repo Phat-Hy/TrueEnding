@@ -33,13 +33,13 @@ extern void mem_alloc(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void minimap_renderOverlay(void);
-extern void fn_80092F1C(void);
+extern void target_pushPointToHistory(void);
 extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB688(void);
@@ -944,7 +944,7 @@ lbl_fn_804167FC_00000AB0:
     addi r3, r29, 0xf4
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
 lbl_fn_804167FC_00000AF4:
     addi r3, r1, 0x108
     bl talk_parseQuotes
@@ -2138,7 +2138,7 @@ lbl_fn_8041766C_00001B3C:
     bne lbl_fn_8041766C_00001BB8
     mr r3, r26
     li r4, 0x1
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     addi r3, r1, 0xf0
     li r4, 0x0
     bl fn_80317034
@@ -2412,7 +2412,7 @@ lbl_fn_8041766C_00001EF8:
     bl fn_80139F3C
     mr r3, r25
     li r4, 0x1
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     addi r3, r1, 0x5c
     addi r4, r25, 0x3e0
     bl vec3_toEulerAngles

@@ -29,7 +29,7 @@ extern void fn_80129A48(void);
 extern void fn_8012A190(void);
 extern void npc_updateDialogueTarget(void);
 extern void fn_8013A13C(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_8013C480(void);
 extern void npc_updateTalkInteraction(void);
@@ -1701,7 +1701,7 @@ lbl_fn_802F0328_000016D8:
     lwz r3, 0x14ec(r31)
     bl task_findEntryById
     mr r30, r3
-    bl fn_8013A194
+    bl npc_getGlobalManager
     lwz r6, 0x14c8(r31)
     mr r4, r31
     lfs f1, lbl_80884850
@@ -1737,7 +1737,7 @@ lbl_fn_802F0328_0000175C:
     lwz r3, 0x14ec(r31)
     bl task_findEntryById
     mr r30, r3
-    bl fn_8013A194
+    bl npc_getGlobalManager
     lwz r6, 0x14c8(r31)
     mr r4, r31
     lfs f1, lbl_80884850

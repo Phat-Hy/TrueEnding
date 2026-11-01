@@ -18,7 +18,7 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
-extern void fn_8006AA20(void);
+extern void boss_triggerEventSequence(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
@@ -40,9 +40,9 @@ extern void fn_800EC2C4(void);
 extern void fn_800EC440(void);
 extern void fn_800EC534(void);
 extern void fn_800EC5BC(void);
-extern void fn_800EC654(void);
+extern void cam_evalControllerSpline(void);
 extern void fn_800ED42C(void);
-extern void fn_800EDFE8(void);
+extern void cam_evalLookAtMatrix(void);
 extern void cam_destroyMsgHandle(void);
 extern void fn_8012044C(void);
 extern void fn_801206EC(void);
@@ -778,7 +778,7 @@ lbl_fn_803EE5AC_00000718:
     cmpwi r0, 0x0
     beq lbl_fn_803EE5AC_000008CC
     addi r3, r1, 0x88
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_803EE5AC_000008CC
     lwz r3, 0x64(r28)
@@ -1600,7 +1600,7 @@ lbl_fn_803EEEDC_000011BC:
     bl fn_800EC534
     addi r3, r1, 0x5c
     addi r4, r1, 0x30
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     b lbl_fn_803EEEDC_0000138C
 lbl_fn_803EEEDC_0000129C:
     mr r3, r19
@@ -1672,7 +1672,7 @@ lbl_fn_803EEEDC_00001370:
 lbl_fn_803EEEDC_0000138C:
     addi r3, r1, 0xf8
     addi r4, r1, 0x30
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     lbz r4, 0x124(r1)
     li r3, 0x0
     cmpwi r4, 0x0

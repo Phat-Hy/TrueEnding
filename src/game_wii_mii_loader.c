@@ -20,7 +20,7 @@ extern void area_updateZoneState(void);
 extern void fn_8008B130(void);
 extern void fn_80091C10(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80092F1C(void);
+extern void target_pushPointToHistory(void);
 extern void fn_8009373C(void);
 extern void fn_80093D98(void);
 extern void fn_80093EEC(void);
@@ -722,7 +722,7 @@ lbl_fn_80564344_00000890:
     mr r4, r20
     addi r3, r22, 0x24
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_80564344_00000940
 lbl_fn_80564344_000008B0:
     cmpwi r27, 0x0
@@ -746,7 +746,7 @@ lbl_fn_80564344_000008DC:
     mr r4, r21
     mr r5, r20
     addi r3, r22, 0x24
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_80564344_00000940
 lbl_fn_80564344_000008FC:
     mr r3, r20

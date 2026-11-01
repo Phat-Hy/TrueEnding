@@ -45,7 +45,7 @@ extern void fn_8049B72C(void);
 extern void fn_804A0BCC(void);
 extern void fn_804A0E90(void);
 extern void fn_8054A0A0(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void fn_80622180(void);
@@ -1636,7 +1636,7 @@ asm void fn_803BAAE0(void)
 lbl_fn_803BAAE0_000014EC:
     lwz r3, lbl_8087F8A0
     mr r4, r28
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     beq lbl_fn_803BAAE0_0000160C
     lfs f0, 0x7d8(r3)

@@ -12,7 +12,7 @@ extern void boss_recordDamage(void);
 extern void fn_8006A250(void);
 extern void fn_8006A900(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void fn_800A5B30(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
@@ -42,7 +42,7 @@ extern void fn_803786F0(void);
 extern void fn_803786FC(void);
 extern void fn_803792F0(void);
 extern void fn_8037C690(void);
-extern void fn_8037D4C0(void);
+extern void dvd_showDiskErrorDialog(void);
 extern void fn_80389838(void);
 extern void fn_803AB96C(void);
 extern void fn_803B57B0(void);
@@ -834,7 +834,7 @@ asm void world_startTransitionFade(void)
     li r5, 0x1e
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_world_startTransitionFade_000009F0:
     lwz r3, lbl_8087FA20
     cmpwi r3, 0x0
@@ -1088,7 +1088,7 @@ lbl_world_advanceChapter_00000D70:
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
     lwz r3, lbl_8087F448
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     cmpwi r31, 0x0
     bne lbl_world_advanceChapter_00000E10
     cmpwi r30, 0x0
@@ -2335,7 +2335,7 @@ lbl_fn_80371790_00001F64:
     stfs f8, 0x104(r20)
     addi r3, r20, 0xb0
     li r4, 0x1
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     lwz r0, 0x7c4(r1)
     addi r3, r20, 0xb0
     stw r0, 0x8c(r1)

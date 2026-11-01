@@ -37,7 +37,7 @@ extern void fn_8013310C(void);
 extern void boss_updatePhaseState(void);
 extern void npc_updateDialogueTarget(void);
 extern void fn_80139F58(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_8013C3F4(void);
 extern void fn_8013C478(void);
@@ -53,7 +53,7 @@ extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
-extern void fn_80239D58(void);
+extern void res_Shader_findParameter(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_802F0964(void);
@@ -1225,7 +1225,7 @@ lbl_fn_8030EA28_00000EC0:
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     bne lbl_fn_8030EA28_00000FF4
     mr r3, r31
@@ -2238,14 +2238,14 @@ lbl_fn_8030F564_00001D5C:
     blt lbl_fn_8030F564_00001D7C
     b lbl_fn_8030F564_00001D88
 lbl_fn_8030F564_00001D7C:
-    bl fn_8013A194
+    bl npc_getGlobalManager
     bl system_getNextSequenceId
     mr r28, r3
 lbl_fn_8030F564_00001D88:
     lwz r3, 0x14ec(r29)
     bl task_findEntryById
     mr r29, r3
-    bl fn_8013A194
+    bl npc_getGlobalManager
     lfs f1, lbl_80884C5C
     mr r4, r30
     mr r5, r29
@@ -2415,14 +2415,14 @@ lbl_fn_8030F564_00001FEC:
     blt lbl_fn_8030F564_0000200C
     b lbl_fn_8030F564_00002018
 lbl_fn_8030F564_0000200C:
-    bl fn_8013A194
+    bl npc_getGlobalManager
     bl system_getNextSequenceId
     mr r28, r3
 lbl_fn_8030F564_00002018:
     lwz r3, 0x14ec(r29)
     bl task_findEntryById
     mr r29, r3
-    bl fn_8013A194
+    bl npc_getGlobalManager
     lfs f1, lbl_80884C5C
     mr r4, r30
     mr r5, r29

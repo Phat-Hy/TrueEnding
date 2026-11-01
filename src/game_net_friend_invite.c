@@ -77,7 +77,7 @@ extern void world_setLocalFlag(void);
 extern void fn_8037308C(void);
 extern void fn_80373118(void);
 extern void kpad_getClampData(void);
-extern void fn_8037D4C0(void);
+extern void dvd_showDiskErrorDialog(void);
 extern void fn_8037EF30(void);
 extern void fn_8037F688(void);
 extern void fn_803BE590(void);
@@ -2510,7 +2510,7 @@ lbl_fn_804D25D4_00001D78:
     li r5, 0x0
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_804D25D4_00001DA0:
     bl fn_8020A3E4
     li r4, 0x0
@@ -3258,7 +3258,7 @@ lbl_fn_804D25D4_00002834:
     li r5, 0xa
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_804D25D4_00004898
     bl fn_804D5FC4
     cmpwi r3, 0x0
@@ -3609,7 +3609,7 @@ lbl_fn_804D25D4_00002D74:
     li r5, 0x0
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_804D25D4_00002DF4
 lbl_fn_804D25D4_00002DAC:
     lwz r0, 0x560(r24)
@@ -3621,7 +3621,7 @@ lbl_fn_804D25D4_00002DAC:
     li r5, 0x0
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_804D25D4_00002DF4
 lbl_fn_804D25D4_00002DD8:
     bl fn_804814F0
@@ -3630,7 +3630,7 @@ lbl_fn_804D25D4_00002DD8:
     li r5, 0x0
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_804D25D4_00002DF4:
     bl fn_804D640C
     cmpwi r3, 0x0
@@ -4395,7 +4395,7 @@ lbl_fn_804D25D4_000038F0:
     li r5, 0xf
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     mr r3, r24
     li r4, 0x6
     bl fn_804DA490
@@ -4727,7 +4727,7 @@ lbl_fn_804D25D4_00003E08:
     li r5, 0xf
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_804D25D4_00003E74
 lbl_fn_804D25D4_00003E28:
     cmpwi r0, 0x1
@@ -4741,7 +4741,7 @@ lbl_fn_804D25D4_00003E38:
     li r5, 0xf
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_804D25D4_00003E74
 lbl_fn_804D25D4_00003E58:
     bl fn_804814F0
@@ -4750,7 +4750,7 @@ lbl_fn_804D25D4_00003E58:
     li r5, 0xf
     li r6, 0x1
     li r7, 0x21fc
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_804D25D4_00003E74:
     bl fn_804D5FD4
     bl fn_804C5E1C
@@ -5267,7 +5267,7 @@ lbl_fn_804D25D4_000045A8:
     li r5, 0xf
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_804D25D4_0000462C:
     addis r3, r24, 0x1
     lbz r0, -0x6610(r3)
@@ -5514,7 +5514,7 @@ lbl_fn_804D25D4_000049A4:
     li r5, 0x1e
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_804D25D4_00004AD4
 lbl_fn_804D25D4_000049C4:
     addi r3, r24, 0x4fc
@@ -5539,7 +5539,7 @@ lbl_fn_804D25D4_000049C4:
     li r5, 0x1e
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_804D25D4_00004AD4
 lbl_fn_804D25D4_00004A24:
     bl fn_804814F0
@@ -5548,7 +5548,7 @@ lbl_fn_804D25D4_00004A24:
     li r5, 0x1e
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_804D25D4_00004AD4
 lbl_fn_804D25D4_00004A44:
     mr r3, r24
@@ -5567,7 +5567,7 @@ lbl_fn_804D25D4_00004A68:
     li r5, 0x1e
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_804D25D4_00004AD4
 lbl_fn_804D25D4_00004A88:
     cmpwi r0, 0x1
@@ -5581,7 +5581,7 @@ lbl_fn_804D25D4_00004A98:
     li r5, 0x1e
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_804D25D4_00004AD4
 lbl_fn_804D25D4_00004AB8:
     bl fn_804814F0
@@ -5590,7 +5590,7 @@ lbl_fn_804D25D4_00004AB8:
     li r5, 0x1e
     li r6, 0x1
     li r7, 0x21fc
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_804D25D4_00004AD4:
     lwz r3, 0x5cc(r24)
     addi r0, r3, 0x1

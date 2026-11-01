@@ -31,7 +31,7 @@ extern void PSMTXConcat(void);
 extern void PSVECNormalize(void);
 extern void PSVECCrossProduct(void);
 extern void fn_80615E00(void);
-extern void fn_80615FF0(void);
+extern void GXInitLightObj(void);
 extern void GXClampLightAngle(void);
 extern void fn_806163B0(void);
 extern void fn_80616400(void);
@@ -336,7 +336,7 @@ lbl_fn_800D5A3C_000003D4:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_808811D8
     mr r3, r27
     li r4, 0x0
@@ -417,7 +417,7 @@ lbl_fn_800D5B58_000004F4:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_808811D8
     mr r3, r25
     li r4, 0x0

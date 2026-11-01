@@ -17,7 +17,7 @@ extern void magic_castSpellCircle(void);
 extern void mem_alloc(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void fn_80092F1C(void);
+extern void target_pushPointToHistory(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void fn_80097B34(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -574,7 +574,7 @@ lbl_fn_803F8890_0000067C:
     addi r3, r28, 0xf4
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_803F8890_0000070C
 lbl_fn_803F8890_000006C4:
     mr r3, r29

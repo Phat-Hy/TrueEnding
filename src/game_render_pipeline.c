@@ -26,7 +26,7 @@ extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
 extern void fn_801125F8(void);
 extern void fn_8013A13C(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void fn_8013C480(void);
 extern void actor_setState(void);
 extern void battle_canTargetActor(void);
@@ -2009,7 +2009,7 @@ lbl_fn_802A3D80_00001A34:
     lfs f1, 0x1694(r27)
     bl fn_801125F8
     stfs f1, 0x148(r1)
-    bl fn_8013A194
+    bl npc_getGlobalManager
     lwz r5, 0x14e8(r27)
     mr r4, r27
     lfs f1, lbl_80883D28

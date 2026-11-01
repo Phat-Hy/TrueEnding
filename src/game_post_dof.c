@@ -56,7 +56,7 @@ extern void fn_802C6DF4(void);
 extern void entity_Instance_constructor(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_8037D4C0(void);
+extern void dvd_showDiskErrorDialog(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_804DA490(void);
 extern void fn_805A3D00(void);
@@ -861,7 +861,7 @@ lbl_fn_802C07F8_00000984:
     li r5, 0xf
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_802C07F8_00000A2C:
     lwz r0, 0x0(r31)
     cmpwi r0, 0xf

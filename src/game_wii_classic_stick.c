@@ -30,7 +30,7 @@ extern void fn_80360780(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void world_startMapTransition(void);
-extern void fn_8037D4C0(void);
+extern void dvd_showDiskErrorDialog(void);
 extern void fn_803B3B38(void);
 extern void fn_803B4C24(void);
 extern void fn_803B5774(void);
@@ -1466,7 +1466,7 @@ lbl_fn_8056014C_000011D4:
     mr r3, r7
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_8056014C_000011E4:
     lwz r31, 0xc(r1)
     li r3, 0x0

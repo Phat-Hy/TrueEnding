@@ -32,7 +32,7 @@ extern void fn_806149C0(void);
 extern void fn_80615C40(void);
 extern void GXInitLightDistAttn(void);
 extern void GXInitLightSpot(void);
-extern void fn_80615FF0(void);
+extern void GXInitLightObj(void);
 extern void fn_80616200(void);
 extern void GXClampLightAngle(void);
 extern void fn_80616390(void);
@@ -958,7 +958,7 @@ lbl_fn_805CE6F0_00000C1C:
     lwz r7, 0x4(r9)
     lwz r8, 0xc(r9)
     lwz r9, 0x10(r9)
-    bl fn_80615FF0
+    bl GXInitLightObj
 lbl_fn_805CE6F0_00000C3C:
     lwz r9, 0x0(r30)
     lis r5, 0x4330

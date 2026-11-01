@@ -44,7 +44,7 @@ extern void fn_8012A218(void);
 extern void npc_updateDialogueTarget(void);
 extern void fn_80139F3C(void);
 extern void fn_8013A158(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_8013C480(void);
 extern void fn_801404F8(void);
@@ -1249,13 +1249,13 @@ lbl_fn_8019FEC4_00000E78:
     bl fn_8013C480
     cmpwi r3, 0x0
     beq lbl_fn_8019FEC4_00000F7C
-    bl fn_8013A194
+    bl npc_getGlobalManager
     bl system_getNextSequenceId
     mr r30, r3
     li r3, 0x76f
     bl task_findEntryById
     mr r31, r3
-    bl fn_8013A194
+    bl npc_getGlobalManager
     li r0, -0x1
     stw r0, 0x8(r1)
     lis r8, lbl_807C7030@ha

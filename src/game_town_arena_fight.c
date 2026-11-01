@@ -60,7 +60,7 @@ extern void fn_80139F4C(void);
 extern void fn_80139F60(void);
 extern void fn_8013A13C(void);
 extern void fn_8013A158(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_8013C3A8(void);
 extern void fn_8013C42C(void);
@@ -2373,7 +2373,7 @@ lbl_fn_803D2A6C_00001E2C:
     bl fn_803D6EDC
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00001E70
-    bl fn_8013A194
+    bl npc_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00001E70
     addi r3, r24, 0x8d0
@@ -2383,7 +2383,7 @@ lbl_fn_803D2A6C_00001E2C:
     addi r3, r1, 0x1f0
     bl vec3_assign
     mr r23, r3
-    bl fn_8013A194
+    bl npc_getGlobalManager
     mr r4, r23
     bl fn_8010D320
 lbl_fn_803D2A6C_00001E70:

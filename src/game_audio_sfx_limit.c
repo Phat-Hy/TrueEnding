@@ -36,11 +36,11 @@ extern void fn_800EC2C4(void);
 extern void fn_800EC440(void);
 extern void fn_800EC534(void);
 extern void fn_800EC5BC(void);
-extern void fn_800EC654(void);
+extern void cam_evalControllerSpline(void);
 extern void fn_800ED42C(void);
 extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
-extern void fn_800EDFE8(void);
+extern void cam_evalLookAtMatrix(void);
 extern void skill_findNodeBySlotId(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
@@ -55,7 +55,7 @@ extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
-extern void fn_80239D58(void);
+extern void res_Shader_findParameter(void);
 extern void res_findResourceSlot(void);
 extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
@@ -398,7 +398,7 @@ asm void fn_80315964(void)
     stw r29, 0x374(r1)
     stw r28, 0x370(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_80315964_000003A4
     lwz r3, lbl_8087F3C0
@@ -814,7 +814,7 @@ asm void fn_80315FE0(void)
     mr r31, r3
     mr r4, r31
     lwz r3, lbl_8087F3C0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_80315FE0_000009DC
     lwz r3, lbl_8087F3C0
@@ -1092,7 +1092,7 @@ asm void fn_803161F8(void)
     bl fn_800EC534
     addi r3, r1, 0x98
     addi r4, r1, 0xd4
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     b lbl_fn_803161F8_00000E54
 lbl_fn_803161F8_00000DD4:
     addi r3, r1, 0x98
@@ -1132,7 +1132,7 @@ lbl_fn_803161F8_00000E4C:
 lbl_fn_803161F8_00000E54:
     addi r3, r1, 0x38
     addi r4, r1, 0xd4
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     addi r3, r1, 0x98
     addi r4, r1, 0x38
     bl fn_800EC254

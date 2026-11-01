@@ -21,7 +21,7 @@ extern void fn_8009757C(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void fn_80098698(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
@@ -2723,7 +2723,7 @@ lbl_quest_updateFlow_00002540:
 lbl_quest_updateFlow_00002578:
     mr r4, r27
     addi r3, r26, 0xb0
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     lwz r0, 0x55c(r26)
     mr r31, r3
     cmpwi r0, 0x6

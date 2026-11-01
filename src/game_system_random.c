@@ -18,8 +18,8 @@ extern void mem_realloc(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
-extern void fn_800EC654(void);
-extern void fn_800EDFE8(void);
+extern void cam_evalControllerSpline(void);
+extern void cam_evalLookAtMatrix(void);
 extern void fn_80205BE8(void);
 extern void fn_8020F064(void);
 extern void fn_8046DC5C(void);
@@ -1093,7 +1093,7 @@ lbl_fn_8020DF88_00000E14:
     addi r3, r1, 0xd4
     addi r4, r1, 0x110
     li r15, 0x0
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     mr r18, r16
     addi r31, r23, 0x30
     addi r30, r24, 0x30
@@ -1143,7 +1143,7 @@ lbl_fn_8020DF88_00000EAC:
 lbl_fn_8020DF88_00000EC8:
     addi r3, r1, 0x38
     addi r4, r1, 0x110
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     lbz r4, 0x64(r1)
     li r21, 0x0
     li r3, 0x0

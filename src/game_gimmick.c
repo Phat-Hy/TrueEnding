@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void atn_LH_Binary_destructor(void);
-extern void fn_8006AA20(void);
+extern void boss_triggerEventSequence(void);
 extern void fn_8006AD24(void);
 extern void fn_8006BA30(void);
 extern void fn_8006BD78(void);
@@ -827,7 +827,7 @@ lbl_fn_8006CABC_000009CC:
 lbl_fn_8006CABC_000009E0:
     lwz r3, 0x98(r1)
 lbl_fn_8006CABC_000009E4:
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_8006CABC_00000BD4
     lwz r0, 0x90(r1)
@@ -1211,7 +1211,7 @@ lbl_fn_8006D0C8_00000EF8:
 lbl_fn_8006D0C8_00000F3C:
     lwz r3, 0x44(r1)
 lbl_fn_8006D0C8_00000F40:
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_8006D0C8_000010A8
     lwz r0, 0x3c(r1)

@@ -24,7 +24,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_80094BD8(void);
 extern void fn_80095F10(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void model_updateBoneTransforms(void);
 extern void fn_8011D320(void);
 extern void fn_8011EE58(void);
@@ -646,7 +646,7 @@ lbl_fn_8022589C_000007D8:
     stfs f0, 0x2e8(r23)
     addi r3, r23, 0xb0
     li r4, 0x1
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     li r0, 0x0
     stw r0, 0x20(r1)
     addi r3, r23, 0xb0
@@ -1058,7 +1058,7 @@ lbl_fn_80225DDC_00000CF8:
 lbl_fn_80225DDC_00000D70:
     addi r3, r31, 0xb0
     li r4, 0x1
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     li r0, 0x0
     stw r0, 0x68(r1)
     addi r3, r31, 0xb0

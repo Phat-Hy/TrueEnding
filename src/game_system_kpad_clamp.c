@@ -19,7 +19,7 @@ extern void collision_testLineSegment(void);
 extern void mission_updateStub(void);
 extern void vec3_initValues(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
@@ -48,7 +48,7 @@ extern void fn_801370B8(void);
 extern void fn_80139F24(void);
 extern void fn_80139F3C(void);
 extern void fn_8013A13C(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_8013C3A8(void);
 extern void fn_8013C554(void);
@@ -516,7 +516,7 @@ asm void fn_803729B4(void)
     mr r30, r3
     mr r31, r4
     beq lbl_fn_803729B4_00000AD8
-    bl fn_8013A194
+    bl npc_getGlobalManager
     bl fn_801011B8
     bl fn_80356FFC
     li r4, 0x0
@@ -835,7 +835,7 @@ lbl_fn_803729B4_000008B8:
     mr r3, r26
     bl fn_8000DD0C
     li r4, 0x1
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     addi r3, r1, 0x8c
     li r4, 0x0
     bl fn_80317034
@@ -905,7 +905,7 @@ lbl_fn_803729B4_000009B4:
     bl fn_8036EE04
     li r4, 0x1
     bl fn_803B6C88
-    bl fn_8013A194
+    bl npc_getGlobalManager
     bl fn_80371664
     bl fn_8036635C
     bl fn_8054E520

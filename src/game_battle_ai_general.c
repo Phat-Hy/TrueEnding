@@ -23,7 +23,7 @@ extern void mission_updateStub(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void fn_80063200(void);
-extern void fn_8006AA20(void);
+extern void boss_triggerEventSequence(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
@@ -2124,7 +2124,7 @@ lbl_fn_8043DD78_00001AAC:
     addi r3, r1, 0x30
     bl strcpy
     addi r3, r1, 0x30
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_8043DD78_00001CC8
     mr r5, r31

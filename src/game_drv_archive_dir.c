@@ -61,7 +61,7 @@ extern void fn_803D6ED4(void);
 extern void fn_803DDD54(void);
 extern void fn_803E4978(void);
 extern void fn_804A4AEC(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void fn_8059D310(void);
 extern void fn_805A6D24(void);
 extern void fn_805A7604(void);
@@ -634,67 +634,67 @@ lbl_fn_805AB82C_000006DC:
     bl fn_805AB50C
     bl scene_transformPoint
     li r4, 0x0
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
     bl scene_transformPoint
     li r4, 0x2
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
     bl scene_transformPoint
     li r4, 0x3
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
     bl scene_transformPoint
     li r4, 0x6
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
     bl scene_transformPoint
     li r4, 0x1
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
     bl scene_transformPoint
     li r4, 0x9
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
     bl scene_transformPoint
     li r4, 0xa
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
     bl scene_transformPoint
     li r4, 0x4
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
     bl scene_transformPoint
     li r4, 0x5
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
     bl scene_transformPoint
     li r4, 0xb
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
     bl scene_transformPoint
     li r4, 0xe
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC

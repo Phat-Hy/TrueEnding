@@ -29,7 +29,7 @@ extern void fn_80277DC4(void);
 extern void fn_802790A0(void);
 extern void world_setLocalFlag(void);
 extern void world_initMapTransitionParams(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
@@ -816,7 +816,7 @@ lbl_fn_80276D58_00000974:
     b lbl_fn_80276D58_000009F0
 lbl_fn_80276D58_000009AC:
     lwz r3, lbl_8087F8A0
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     beq lbl_fn_80276D58_000009E8
     lwz r5, 0x38(r3)

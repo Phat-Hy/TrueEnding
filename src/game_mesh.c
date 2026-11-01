@@ -41,7 +41,7 @@ extern void str_skipWhitespace(void);
 extern void PSVECNormalize(void);
 extern void fn_806052C0(void);
 extern void fn_80615E00(void);
-extern void fn_80615FF0(void);
+extern void GXInitLightObj(void);
 extern void GXClampLightAngle(void);
 extern void fn_806249F0(void);
 extern void printf(void);
@@ -1300,7 +1300,7 @@ lbl_fn_800BC468_00001088:
     li r8, 0x0
     li r9, 0x1
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80881088
     mr r3, r29
     li r4, 0x1
@@ -1407,7 +1407,7 @@ lbl_fn_800BC618_000011FC:
     li r8, 0x0
     li r9, 0x1
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80881088
     mr r3, r30
     li r4, 0x0

@@ -20,7 +20,7 @@ extern void magic_castSpellCircle(void);
 extern void minimap_renderOverlay(void);
 extern void world_getGlobalFlag(void);
 extern void world_getLocalFlag(void);
-extern void fn_8037D4C0(void);
+extern void dvd_showDiskErrorDialog(void);
 extern void fn_803CCDAC(void);
 extern void fn_803CD958(void);
 extern void fn_804A04AC(void);
@@ -298,7 +298,7 @@ lbl_fn_803C1E3C_000002FC:
     lwz r5, 0x2c(r28)
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_803C1E3C_00000370
 lbl_fn_803C1E3C_00000324:
     lwz r4, 0x140(r27)
@@ -321,7 +321,7 @@ lbl_fn_803C1E3C_00000350:
     li r5, 0x3c
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_803C1E3C_00000370:
     stw r28, 0x140(r27)
 lbl_fn_803C1E3C_00000374:

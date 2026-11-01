@@ -20,7 +20,7 @@ extern void fn_803752F4(void);
 extern void fn_803754F0(void);
 extern void fn_80375B78(void);
 extern void fn_80375D0C(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
@@ -1791,7 +1791,7 @@ lbl_fn_804490E0_000017B8:
 lbl_fn_804490E0_000017BC:
     mr r3, r6
     mr r4, r31
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     beq lbl_fn_804490E0_000017D8
     addi r31, r3, 0x7d4

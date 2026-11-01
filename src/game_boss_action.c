@@ -21,7 +21,7 @@ extern void mem_getAllocSize(void);
 extern void fn_80089D70(void);
 extern void fn_80089EE4(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80092F1C(void);
+extern void target_pushPointToHistory(void);
 extern void fn_80092F90(void);
 extern void fn_80093014(void);
 extern void fn_8009373C(void);
@@ -39,11 +39,11 @@ extern void fn_800EC2C4(void);
 extern void fn_800EC440(void);
 extern void fn_800EC534(void);
 extern void fn_800EC5BC(void);
-extern void fn_800EC654(void);
+extern void cam_evalControllerSpline(void);
 extern void fn_800ED42C(void);
 extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
-extern void fn_800EDFE8(void);
+extern void cam_evalLookAtMatrix(void);
 extern void fn_801360C4(void);
 extern void fn_801360D8(void);
 extern void actor_setState(void);
@@ -176,7 +176,7 @@ lbl_fn_80137B78_000000C4:
     addi r3, r31, 0xb0
     addi r4, r1, 0x208
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_80137B78_000002C4
 lbl_fn_80137B78_00000138:
     addi r3, r1, 0x308
@@ -185,7 +185,7 @@ lbl_fn_80137B78_00000138:
     mr r5, r29
     addi r3, r31, 0xb0
     addi r4, r1, 0x208
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_80137B78_000002C4
 lbl_fn_80137B78_00000158:
     mr r3, r29
@@ -226,7 +226,7 @@ lbl_fn_80137B78_0000019C:
     addi r3, r31, 0xb0
     addi r4, r1, 0x108
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_80137B78_000002C4
 lbl_fn_80137B78_000001F0:
     addi r3, r1, 0x308
@@ -235,7 +235,7 @@ lbl_fn_80137B78_000001F0:
     mr r5, r29
     addi r3, r31, 0xb0
     addi r4, r1, 0x108
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_80137B78_000002C4
 lbl_fn_80137B78_00000210:
     mr r3, r29
@@ -276,7 +276,7 @@ lbl_fn_80137B78_00000254:
     addi r3, r31, 0xb0
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_80137B78_000002C4
 lbl_fn_80137B78_000002A8:
     addi r3, r1, 0x308
@@ -285,7 +285,7 @@ lbl_fn_80137B78_000002A8:
     mr r5, r29
     addi r3, r31, 0xb0
     addi r4, r1, 0x8
-    bl fn_80092F1C
+    bl target_pushPointToHistory
 lbl_fn_80137B78_000002C4:
     addi r3, r1, 0x308
     bl talk_parseQuotes
@@ -1043,7 +1043,7 @@ asm void fn_801388B8(void)
     bl fn_800EC534
     addi r3, r1, 0x90
     addi r4, r1, 0xcc
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     b lbl_fn_801388B8_00000E68
 lbl_fn_801388B8_00000DAC:
     addi r3, r1, 0x90
@@ -1099,7 +1099,7 @@ lbl_fn_801388B8_00000E60:
 lbl_fn_801388B8_00000E68:
     addi r3, r1, 0x30
     addi r4, r1, 0xcc
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     addi r3, r1, 0x90
     addi r4, r1, 0x30
     bl fn_800EC254

@@ -26,7 +26,7 @@ extern void fn_800F8290(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void fn_800FBA9C(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
@@ -37,7 +37,7 @@ extern void actor_setState(void);
 extern void battle_calcExpPosition(void);
 extern void battle_awardExp(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80239D58(void);
+extern void res_Shader_findParameter(void);
 extern void res_findResourceSlot(void);
 extern void res_Shader_bindParams(void);
 extern void fn_80267B20(void);
@@ -1051,7 +1051,7 @@ lbl_fn_8031958C_00000D38:
     mulli r0, r0, 0xa
     subf. r0, r0, r4
     bne lbl_fn_8031958C_00000D8C
-    bl fn_8013A194
+    bl npc_getGlobalManager
     lwz r5, 0x157c(r31)
     mr r4, r31
     lfs f1, lbl_80884D60
@@ -1154,7 +1154,7 @@ lbl_fn_8031958C_00000E08:
     bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e9
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     bne lbl_fn_8031958C_00000F4C
     bl viewport_getGlobalContext

@@ -1,7 +1,7 @@
 #include "revolution/types.h"
 
 /* External functions referenced */
-extern void fn_80615FF0(void);
+extern void GXInitLightObj(void);
 extern void std_sin(void);
 extern void math_u64DivMod(void);
 extern void _savegpr_24(void);
@@ -52,7 +52,7 @@ void GXInitLightDistAttn(void);
 void GXInitLightSpot(void);
 void fn_80615E00(void);
 void fn_80615F30(void);
-void fn_80615FF0(void);
+void GXInitLightObj(void);
 void fn_80616200(void);
 void GXClampLightAngle(void);
 void fn_80616360(void);
@@ -726,7 +726,7 @@ lbl_fn_80615F30_000008D8:
     blr
 }
 
-asm void fn_80615FF0(void)
+asm void GXInitLightObj(void)
 {
     nofralloc
     stwu r1, -0x40(r1)
@@ -751,31 +751,31 @@ asm void fn_80615FF0(void)
     cmpwi r26, 0x0
     ori r4, r0, 0x10
     stw r4, 0x0(r31)
-    beq lbl_fn_80615FF0_000009D8
+    beq lbl_GXInitLightObj_000009D8
     subi r0, r30, 0x8
     lbz r3, 0x1f(r31)
     cmplwi r0, 0x2
     ori r0, r3, 0x1
     stb r0, 0x1f(r31)
-    bgt lbl_fn_80615FF0_00000974
+    bgt lbl_GXInitLightObj_00000974
     li r0, 0x5
     rlwimi r4, r0, 5, 24, 26
     stw r4, 0x0(r31)
-    b lbl_fn_80615FF0_00000980
-lbl_fn_80615FF0_00000974:
+    b lbl_GXInitLightObj_00000980
+lbl_GXInitLightObj_00000974:
     li r0, 0x6
     rlwimi r4, r0, 5, 24, 26
     stw r4, 0x0(r31)
-lbl_fn_80615FF0_00000980:
+lbl_GXInitLightObj_00000980:
     cmplw r28, r29
-    ble lbl_fn_80615FF0_00000994
+    ble lbl_GXInitLightObj_00000994
     cntlzw r0, r28
     subfic r3, r0, 0x1f
-    b lbl_fn_80615FF0_0000099C
-lbl_fn_80615FF0_00000994:
+    b lbl_GXInitLightObj_0000099C
+lbl_GXInitLightObj_00000994:
     cntlzw r0, r29
     subfic r3, r0, 0x1f
-lbl_fn_80615FF0_0000099C:
+lbl_GXInitLightObj_0000099C:
     lis r0, 0x4330
     stw r0, 0x8(r1)
     lfd f2, lbl_80888790
@@ -790,12 +790,12 @@ lbl_fn_80615FF0_0000099C:
     lwz r3, 0x14(r1)
     rlwimi r0, r3, 8, 16, 23
     stw r0, 0x4(r31)
-    b lbl_fn_80615FF0_000009E4
-lbl_fn_80615FF0_000009D8:
+    b lbl_GXInitLightObj_000009E4
+lbl_GXInitLightObj_000009D8:
     li r0, 0x4
     rlwimi r4, r0, 5, 24, 26
     stw r4, 0x0(r31)
-lbl_fn_80615FF0_000009E4:
+lbl_GXInitLightObj_000009E4:
     clrlwi r5, r30, 28
     subi r0, r28, 0x1
     lwz r4, 0x8(r31)
@@ -809,7 +809,7 @@ lbl_fn_80615FF0_000009E4:
     rlwimi r4, r30, 20, 8, 11
     stw r4, 0x8(r31)
     stw r0, 0xc(r31)
-    bgt lbl_fn_80615FF0_00000A98
+    bgt lbl_GXInitLightObj_00000A98
     lis r3, jumptable_807B0D80@ha
     slwi r0, r5, 2
     addi r3, r3, jumptable_807B0D80@l
@@ -820,33 +820,33 @@ lbl_fn_80615FF0_000009E4:
     stb r0, 0x1e(r31)
     li r6, 0x3
     li r7, 0x3
-    b lbl_fn_80615FF0_00000AA8
+    b lbl_GXInitLightObj_00000AA8
     li r0, 0x2
     stb r0, 0x1e(r31)
     li r6, 0x3
     li r7, 0x2
-    b lbl_fn_80615FF0_00000AA8
+    b lbl_GXInitLightObj_00000AA8
     li r0, 0x2
     stb r0, 0x1e(r31)
     li r6, 0x2
     li r7, 0x2
-    b lbl_fn_80615FF0_00000AA8
+    b lbl_GXInitLightObj_00000AA8
     li r0, 0x3
     stb r0, 0x1e(r31)
     li r6, 0x2
     li r7, 0x2
-    b lbl_fn_80615FF0_00000AA8
+    b lbl_GXInitLightObj_00000AA8
     li r0, 0x0
     stb r0, 0x1e(r31)
     li r6, 0x3
     li r7, 0x3
-    b lbl_fn_80615FF0_00000AA8
-lbl_fn_80615FF0_00000A98:
+    b lbl_GXInitLightObj_00000AA8
+lbl_GXInitLightObj_00000A98:
     li r0, 0x2
     stb r0, 0x1e(r31)
     li r6, 0x2
     li r7, 0x2
-lbl_fn_80615FF0_00000AA8:
+lbl_GXInitLightObj_00000AA8:
     li r5, 0x1
     lbz r0, 0x1f(r31)
     slw r3, r5, r6
@@ -880,7 +880,7 @@ asm void fn_80616200(void)
     lwz r31, 0x18(r1)
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_80615FF0
+    bl GXInitLightObj
     lbz r0, 0x1f(r30)
     stw r31, 0x18(r30)
     rlwinm r0, r0, 0, 31, 29

@@ -44,7 +44,7 @@ extern void kpad_validateButtonIndex(void);
 extern void kpad_testActiveFlags(void);
 extern void fn_803761AC(void);
 extern void chest_spawnLoot(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXRotAxis(void);
 extern void PSMTXMultVec(void);
@@ -1584,7 +1584,7 @@ lbl_fn_801BE630_0000158C:
     beq lbl_fn_801BE630_00001688
     lwz r3, lbl_8087F8A0
     li r4, 0x0
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     li r4, 0x1
     bl fn_80219344
     cmpwi r3, 0x0

@@ -15,7 +15,7 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void sound_releaseChannel(void);
 extern void fn_80069BF4(void);
-extern void fn_8006AA20(void);
+extern void boss_triggerEventSequence(void);
 extern void boss_decodePhaseBitfield(void);
 extern void script_executeOpcode(void);
 extern void str_assignBuffer(void);
@@ -746,7 +746,7 @@ lbl_fn_80227A94_000008B4:
     crclr 6
     bl sprintf
     mr r3, r28
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     lwz r0, 0x44(r1)
     mr r27, r3
     srwi. r0, r0, 31
@@ -1460,7 +1460,7 @@ lbl_fn_802280B4_000011D4:
 lbl_fn_802280B4_0000120C:
     lwz r3, 0x24(r1)
 lbl_fn_802280B4_00001210:
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_802280B4_00001258
     mr r3, r26

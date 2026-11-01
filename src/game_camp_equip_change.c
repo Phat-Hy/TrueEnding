@@ -39,7 +39,7 @@ extern void fn_803CE768(void);
 extern void fn_803CE7E0(void);
 extern void fn_804A1C4C(void);
 extern void fn_804A1D2C(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void fn_8057F19C(void);
 extern void fn_8057F1B8(void);
 extern void __construct_new_array(void);
@@ -1112,7 +1112,7 @@ lbl_fn_803BDEE4_00000E5C:
 lbl_fn_803BDEE4_00000E84:
     lwz r3, lbl_8087F8A0
     mr r4, r29
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     beq lbl_fn_803BDEE4_00000FA4
     lfs f0, 0x7d8(r3)

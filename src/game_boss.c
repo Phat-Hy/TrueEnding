@@ -110,7 +110,7 @@ void atn_Fade_slot1(void);
 void atn_FadeCommon_draw(void);
 void atn_normalizePath(char* str);
 void fn_8006A9A4(void);
-void fn_8006AA20(void);
+void boss_triggerEventSequence(void);
 void fn_8006AB54(void);
 void fn_8006AC08(void);
 void fn_8006AD24(void);
@@ -2220,7 +2220,7 @@ lbl_fn_8006A9A4_00001C64:
     blr
 }
 
-asm void fn_8006AA20(void)
+asm void boss_triggerEventSequence(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -2232,73 +2232,73 @@ asm void fn_8006AA20(void)
     bl fn_8006AB54
     lwz r3, lbl_8087F518
     cmpwi r3, 0x0
-    beq lbl_fn_8006AA20_00001CD8
+    beq lbl_boss_triggerEventSequence_00001CD8
     lwz r0, 0x8(r1)
     srwi. r0, r0, 31
-    bne lbl_fn_8006AA20_00001CAC
+    bne lbl_boss_triggerEventSequence_00001CAC
     addi r4, r1, 0x9
-    b lbl_fn_8006AA20_00001CB0
-lbl_fn_8006AA20_00001CAC:
+    b lbl_boss_triggerEventSequence_00001CB0
+lbl_boss_triggerEventSequence_00001CAC:
     lwz r4, 0x10(r1)
-lbl_fn_8006AA20_00001CB0:
+lbl_boss_triggerEventSequence_00001CB0:
     bl fn_8046F4D4
     cmpwi r3, 0x0
-    beq lbl_fn_8006AA20_00001CD8
+    beq lbl_boss_triggerEventSequence_00001CD8
     lwz r0, 0x8(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_8006AA20_00001CD0
+    beq lbl_boss_triggerEventSequence_00001CD0
     lwz r3, 0x10(r1)
     bl dtor_80084684
-lbl_fn_8006AA20_00001CD0:
+lbl_boss_triggerEventSequence_00001CD0:
     li r3, 0x1
-    b lbl_fn_8006AA20_00001D90
-lbl_fn_8006AA20_00001CD8:
+    b lbl_boss_triggerEventSequence_00001D90
+lbl_boss_triggerEventSequence_00001CD8:
     addi r7, r1, 0x9
     li r6, 0x0
     li r4, 0x2f
-    b lbl_fn_8006AA20_00001D2C
-lbl_fn_8006AA20_00001CE8:
+    b lbl_boss_triggerEventSequence_00001D2C
+lbl_boss_triggerEventSequence_00001CE8:
     cntlzw r0, r3
     srwi. r5, r0, 5
-    beq lbl_fn_8006AA20_00001CFC
+    beq lbl_boss_triggerEventSequence_00001CFC
     mr r3, r7
-    b lbl_fn_8006AA20_00001D00
-lbl_fn_8006AA20_00001CFC:
+    b lbl_boss_triggerEventSequence_00001D00
+lbl_boss_triggerEventSequence_00001CFC:
     lwz r3, 0x10(r1)
-lbl_fn_8006AA20_00001D00:
+lbl_boss_triggerEventSequence_00001D00:
     lbzx r0, r3, r6
     extsb r0, r0
     cmpwi r0, 0x5c
-    bne lbl_fn_8006AA20_00001D28
+    bne lbl_boss_triggerEventSequence_00001D28
     cmpwi r5, 0x0
-    beq lbl_fn_8006AA20_00001D20
+    beq lbl_boss_triggerEventSequence_00001D20
     mr r3, r7
-    b lbl_fn_8006AA20_00001D24
-lbl_fn_8006AA20_00001D20:
+    b lbl_boss_triggerEventSequence_00001D24
+lbl_boss_triggerEventSequence_00001D20:
     lwz r3, 0x10(r1)
-lbl_fn_8006AA20_00001D24:
+lbl_boss_triggerEventSequence_00001D24:
     stbx r4, r3, r6
-lbl_fn_8006AA20_00001D28:
+lbl_boss_triggerEventSequence_00001D28:
     addi r6, r6, 0x1
-lbl_fn_8006AA20_00001D2C:
+lbl_boss_triggerEventSequence_00001D2C:
     lwz r0, 0x8(r1)
     srwi. r3, r0, 31
-    beq lbl_fn_8006AA20_00001D40
+    beq lbl_boss_triggerEventSequence_00001D40
     lwz r0, 0xc(r1)
-    b lbl_fn_8006AA20_00001D48
-lbl_fn_8006AA20_00001D40:
+    b lbl_boss_triggerEventSequence_00001D48
+lbl_boss_triggerEventSequence_00001D40:
     lbz r0, 0x8(r1)
     clrlwi r0, r0, 25
-lbl_fn_8006AA20_00001D48:
+lbl_boss_triggerEventSequence_00001D48:
     cmplw r6, r0
-    blt lbl_fn_8006AA20_00001CE8
+    blt lbl_boss_triggerEventSequence_00001CE8
     cmpwi r3, 0x0
-    bne lbl_fn_8006AA20_00001D60
+    bne lbl_boss_triggerEventSequence_00001D60
     addi r3, r1, 0x9
-    b lbl_fn_8006AA20_00001D64
-lbl_fn_8006AA20_00001D60:
+    b lbl_boss_triggerEventSequence_00001D64
+lbl_boss_triggerEventSequence_00001D60:
     lwz r3, 0x10(r1)
-lbl_fn_8006AA20_00001D64:
+lbl_boss_triggerEventSequence_00001D64:
     bl fn_805F9EF0
     lwz r0, 0x8(r1)
     subfic r4, r3, -0x1
@@ -2306,12 +2306,12 @@ lbl_fn_8006AA20_00001D64:
     srwi. r0, r0, 31
     or r0, r4, r3
     srwi r31, r0, 31
-    beq lbl_fn_8006AA20_00001D8C
+    beq lbl_boss_triggerEventSequence_00001D8C
     lwz r3, 0x10(r1)
     bl dtor_80084684
-lbl_fn_8006AA20_00001D8C:
+lbl_boss_triggerEventSequence_00001D8C:
     mr r3, r31
-lbl_fn_8006AA20_00001D90:
+lbl_boss_triggerEventSequence_00001D90:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     mtlr r0

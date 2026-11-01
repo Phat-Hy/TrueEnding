@@ -34,11 +34,11 @@ extern void fn_800EC2C4(void);
 extern void fn_800EC440(void);
 extern void fn_800EC534(void);
 extern void fn_800EC5BC(void);
-extern void fn_800EC654(void);
+extern void cam_evalControllerSpline(void);
 extern void fn_800ED42C(void);
 extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
-extern void fn_800EDFE8(void);
+extern void cam_evalLookAtMatrix(void);
 extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80105BD8(void);
@@ -1696,7 +1696,7 @@ asm void fn_800EBF1C(void)
     bl fn_800EC534
     addi r3, r1, 0x98
     addi r4, r1, 0xd4
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     li r30, 0x2
     b lbl_fn_800EBF1C_000017B8
 lbl_fn_800EBF1C_000015C0:
@@ -1832,7 +1832,7 @@ lbl_fn_800EBF1C_000017B0:
 lbl_fn_800EBF1C_000017B8:
     addi r3, r1, 0x38
     addi r4, r1, 0xd4
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     addi r3, r1, 0x98
     addi r4, r1, 0x38
     bl fn_800EC254

@@ -72,7 +72,7 @@ extern void fn_805288C0(void);
 extern void fn_805289AC(void);
 extern void fn_80528A94(void);
 extern void fn_80528BF4(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void fn_805BA358(void);
 extern void strcmp(void);
 extern void runtime_registerStaticObject(void);
@@ -1792,7 +1792,7 @@ asm void fn_8052793C(void)
     mr r31, r3
     bl scene_transformPoint
     li r4, 0x0
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     beq lbl_fn_8052793C_00001724
     bl fn_800F52F0
@@ -1829,7 +1829,7 @@ lbl_fn_8052793C_00001750:
     beq lbl_fn_8052793C_00002030
     bl scene_transformPoint
     lwz r4, 0x4(r23)
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     mr r20, r3
     beq lbl_fn_8052793C_000017B4

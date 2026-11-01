@@ -21,11 +21,11 @@ extern void fn_800EC2C4(void);
 extern void fn_800EC440(void);
 extern void fn_800EC534(void);
 extern void fn_800EC5BC(void);
-extern void fn_800EC654(void);
+extern void cam_evalControllerSpline(void);
 extern void fn_800ED42C(void);
 extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
-extern void fn_800EDFE8(void);
+extern void cam_evalLookAtMatrix(void);
 extern void fn_80288390(void);
 extern void fn_8028B74C(void);
 extern void fn_803C0624(void);
@@ -270,7 +270,7 @@ lbl_fn_803C606C_000001AC:
     bl fn_800EC534
     addi r3, r1, 0x80
     addi r4, r1, 0xbc
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     li r24, 0x0
     b lbl_fn_803C606C_00000298
 lbl_fn_803C606C_00000240:
@@ -300,7 +300,7 @@ lbl_fn_803C606C_00000290:
 lbl_fn_803C606C_00000298:
     addi r3, r1, 0x20
     addi r4, r1, 0xbc
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     addi r3, r1, 0x80
     addi r4, r1, 0x20
     bl fn_800EC254
@@ -677,7 +677,7 @@ lbl_fn_803C65EC_0000072C:
     bl fn_800EC534
     addi r3, r1, 0x80
     addi r4, r1, 0xbc
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     li r29, 0x0
     b lbl_fn_803C65EC_00000818
 lbl_fn_803C65EC_000007C0:
@@ -707,7 +707,7 @@ lbl_fn_803C65EC_00000810:
 lbl_fn_803C65EC_00000818:
     addi r3, r1, 0x20
     addi r4, r1, 0xbc
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     addi r3, r1, 0x80
     addi r4, r1, 0x20
     bl fn_800EC254
@@ -1051,7 +1051,7 @@ lbl_fn_803C6AE8_00000C28:
     bl fn_800EC534
     addi r3, r1, 0x80
     addi r4, r1, 0xbc
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     li r29, 0x0
     b lbl_fn_803C6AE8_00000D14
 lbl_fn_803C6AE8_00000CBC:
@@ -1081,7 +1081,7 @@ lbl_fn_803C6AE8_00000D0C:
 lbl_fn_803C6AE8_00000D14:
     addi r3, r1, 0x20
     addi r4, r1, 0xbc
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     addi r3, r1, 0x80
     addi r4, r1, 0x20
     bl fn_800EC254
@@ -1425,7 +1425,7 @@ lbl_fn_803C6FE4_00001124:
     bl fn_800EC534
     addi r3, r1, 0x80
     addi r4, r1, 0xbc
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     li r29, 0x0
     b lbl_fn_803C6FE4_00001210
 lbl_fn_803C6FE4_000011B8:
@@ -1455,7 +1455,7 @@ lbl_fn_803C6FE4_00001208:
 lbl_fn_803C6FE4_00001210:
     addi r3, r1, 0x20
     addi r4, r1, 0xbc
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     addi r3, r1, 0x80
     addi r4, r1, 0x20
     bl fn_800EC254
@@ -1837,7 +1837,7 @@ lbl_fn_803C74E0_00001630:
     bl fn_800EC534
     addi r3, r1, 0x90
     addi r4, r1, 0xcc
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     b lbl_fn_803C74E0_00001770
 lbl_fn_803C74E0_00001748:
     addi r3, r1, 0x90
@@ -1853,7 +1853,7 @@ lbl_fn_803C74E0_00001748:
 lbl_fn_803C74E0_00001770:
     addi r3, r1, 0x30
     addi r4, r1, 0xcc
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     addi r3, r1, 0x90
     addi r4, r1, 0x30
     bl fn_800EC254

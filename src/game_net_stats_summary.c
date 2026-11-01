@@ -15,7 +15,7 @@ extern void actor_dispatchMessage(void);
 extern void fn_8004B0E4(void);
 extern void fn_80069BF4(void);
 extern void fn_8006A250(void);
-extern void fn_8006AA20(void);
+extern void boss_triggerEventSequence(void);
 extern void fn_8006B2D8(void);
 extern void fn_8006D008(void);
 extern void script_executeOpcode(void);
@@ -677,7 +677,7 @@ lbl_fn_8053F6F0_000007D4:
     crclr 6
     bl sprintf
     addi r3, r1, 0x8
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_8053F6F0_00000838
     addi r3, r30, 0x29c

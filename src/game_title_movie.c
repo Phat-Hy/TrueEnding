@@ -34,7 +34,7 @@ extern void world_startMapTransition(void);
 extern void world_reloadMapTransition(void);
 extern void fn_803712BC(void);
 extern void kpad_getClampData(void);
-extern void fn_8037D4C0(void);
+extern void dvd_showDiskErrorDialog(void);
 extern void fn_803935AC(void);
 extern void fn_803CC6D0(void);
 extern void fn_803E5E64(void);
@@ -836,7 +836,7 @@ lbl_fn_803A98EC_000009F4:
     li r5, 0x2d
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_803A98EC_00000A20:
     lwz r3, lbl_8087F418
     cmpwi r3, 0x0

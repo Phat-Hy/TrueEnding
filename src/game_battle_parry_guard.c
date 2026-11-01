@@ -24,7 +24,7 @@ extern void mem_getAllocSize(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80092F1C(void);
+extern void target_pushPointToHistory(void);
 extern void fn_80095D44(void);
 extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
@@ -1724,7 +1724,7 @@ lbl_fn_80413BD4_0000158C:
     addi r4, r1, 0x8
     addi r3, r3, 0xfc
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_80413BD4_00001958
 lbl_fn_80413BD4_000015D8:
     mr r3, r18

@@ -16,7 +16,7 @@ extern void minimap_renderOverlay(void);
 extern void fn_800902C0(void);
 extern void fn_800929C0(void);
 extern void fn_80093E90(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void atn_Task_constructor(void);
 extern void str_findChar(void);
 extern void quest_updateFlow(void);
@@ -615,7 +615,7 @@ lbl_fn_8000D1A8_00000744:
 lbl_fn_8000D1A8_00000748:
     lwz r3, 0x48(r30)
     li r4, 0x1
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     li r0, 0x0
     stw r0, 0x38(r1)
     addi r4, r1, 0x38

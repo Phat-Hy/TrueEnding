@@ -39,7 +39,7 @@ extern void fn_8021A684(void);
 extern void fn_8021A77C(void);
 extern void fn_8021A8D0(void);
 extern void kpad_validateButtonIndex(void);
-extern void fn_8037D4C0(void);
+extern void dvd_showDiskErrorDialog(void);
 extern void fn_803E9B7C(void);
 extern void net_getPacketManager(void);
 extern void net_voiceCodec_destroy(void);
@@ -1823,7 +1823,7 @@ lbl_fn_804F1128_0000180C:
     li r5, 0xf
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_804F1128_0000185C:
     lwz r3, lbl_8087F628
     lwz r4, 0xc2c(r3)

@@ -21,7 +21,7 @@ extern void node_createNamedChild(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80092F1C(void);
+extern void target_pushPointToHistory(void);
 extern void fn_80094F98(void);
 extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
@@ -989,7 +989,7 @@ lbl_fn_8042E9F4_00000B24:
     addi r3, r29, 0xf4
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_8042E9F4_00000BDC
 lbl_fn_8042E9F4_00000B6C:
     mr r3, r30

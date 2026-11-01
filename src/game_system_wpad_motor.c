@@ -12,7 +12,7 @@ extern void fn_80047B54(void);
 extern void boss_recordDamage(void);
 extern void fn_8006A250(void);
 extern void fn_8006A900(void);
-extern void fn_8006AA20(void);
+extern void boss_triggerEventSequence(void);
 extern void fn_8006D0C8(void);
 extern void chapter_updateProgression(void);
 extern void mem_getAllocSize(void);
@@ -143,7 +143,7 @@ extern void fn_80547A88(void);
 extern void fn_80547B58(void);
 extern void fn_80549F18(void);
 extern void fn_8054A0A0(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void fn_8054A39C(void);
 extern void fn_8054A9AC(void);
 extern void fn_8054AF0C(void);
@@ -350,7 +350,7 @@ lbl_world_Manager_draw_00000170:
     cmpwi r0, 0x0
     beq lbl_world_Manager_draw_0000054C
     addi r3, r1, 0x620
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_world_Manager_draw_0000054C
     lwz r5, 0x5764(r28)
@@ -1604,7 +1604,7 @@ lbl_world_Manager_draw_00001330:
     blt lbl_world_Manager_draw_000014E4
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     lwz r6, lbl_8087F8A0
     addi r4, r1, 0x7c
     cmpwi r3, 0x0
@@ -1988,7 +1988,7 @@ lbl_world_Manager_draw_000018B4:
     blt lbl_world_Manager_draw_000019C0
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     beq lbl_world_Manager_draw_000019C0
     lwz r4, 0x10d8(r28)

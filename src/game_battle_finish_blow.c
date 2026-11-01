@@ -24,7 +24,7 @@ extern void fn_80092A4C(void);
 extern void cursor_Object_constructor(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void fn_80158CA4(void);
 extern void world_getLocalFlag(void);
 extern void task_createWorker(void);
@@ -1450,7 +1450,7 @@ lbl_fn_80402BD0_0000137C:
     lwz r0, 0x10c(r23)
     add r3, r0, r22
     addi r3, r3, 0x10
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     stw r21, 0xa4(r1)
     addi r4, r1, 0xa4
     lwz r0, 0x10c(r23)
@@ -1870,7 +1870,7 @@ lbl_fn_80403308_000019A4:
     lwz r0, 0x10c(r18)
     add r3, r0, r17
     addi r3, r3, 0x10
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     stw r27, 0x50(r1)
     addi r4, r1, 0x50
     lwz r0, 0x10c(r18)

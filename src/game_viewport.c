@@ -41,7 +41,7 @@ extern void fn_80134250(void);
 extern void fn_80134270(void);
 extern void fn_8021A888(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80239D58(void);
+extern void res_Shader_findParameter(void);
 extern void res_findResourceSlot(void);
 extern void res_Shader_bindParams(void);
 extern void PSMTXConcat(void);
@@ -939,7 +939,7 @@ lbl_fn_800F72F4_00000BD0:
     bl viewport_getGlobalContext
     mr r4, r29
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     bne lbl_fn_800F72F4_00000CD0
     cmpwi r28, 0x1

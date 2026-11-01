@@ -28,7 +28,7 @@ extern void fn_801010A0(void);
 extern void fn_8010B250(void);
 extern void fn_8010EE78(void);
 extern void npc_updateDialogueTarget(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void fn_8014052C(void);
 extern void actor_setState(void);
 extern void sound_initGlobalInstances(void);
@@ -222,7 +222,7 @@ lbl_fn_80348FF4_000000B4:
     li r4, -0x1
     bl ref_releaseHandle
     stw r30, 0x1a24(r31)
-    bl fn_8013A194
+    bl npc_getGlobalManager
     bl system_getNextSequenceId
     lwz r4, 0x14b4(r31)
     stw r3, 0x1a20(r31)
@@ -255,14 +255,14 @@ lbl_fn_80348FF4_000001AC:
     mr r3, r31
     addi r4, r1, 0x54
     bl fn_803489F4
-    bl fn_8013A194
+    bl npc_getGlobalManager
     bl fn_801010A0
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_80348FF4_000002A0
     addi r3, r1, 0x6c
     bl fn_80349424
-    bl fn_8013A194
+    bl npc_getGlobalManager
     lwz r4, 0x152c(r31)
     li r5, 0x0
     lwz r4, 0x3c(r4)

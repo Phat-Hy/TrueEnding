@@ -53,7 +53,7 @@ extern void fn_80139F2C(void);
 extern void fn_80139F3C(void);
 extern void fn_80139F58(void);
 extern void fn_8013A13C(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_8013C394(void);
 extern void fn_8013C3A8(void);
@@ -559,7 +559,7 @@ lbl_fn_8013A4E8_00000620:
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
     beq lbl_fn_8013A4E8_000007F4
-    bl fn_8013A194
+    bl npc_getGlobalManager
     mr r4, r3
     mr r5, r27
     addi r3, r1, 0x348
@@ -1844,7 +1844,7 @@ lbl_fn_8013A4E8_00001898:
     addi r3, r27, 0xd50
     addi r4, r27, 0x528
     bl vec3_copy
-    bl fn_8013A194
+    bl npc_getGlobalManager
     mr r4, r27
     bl fn_8010C948
     lwz r0, 0xd68(r27)

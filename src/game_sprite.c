@@ -29,7 +29,7 @@ extern void PSMTXMultVecArray(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
 extern void fn_80615E00(void);
-extern void fn_80615FF0(void);
+extern void GXInitLightObj(void);
 extern void GXClampLightAngle(void);
 extern void memcmp(void);
 extern void fn_8068A6D8(void);
@@ -210,7 +210,7 @@ lbl_fn_800B4134_0000010C:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80880F48
     addi r3, r31, lbl_807C7580@l
     li r4, 0x0

@@ -33,7 +33,7 @@ extern void GXClearVtxDesc(void);
 extern void fn_80614790(void);
 extern void fn_80615400(void);
 extern void GXInitLightDistAttn(void);
-extern void fn_80615FF0(void);
+extern void GXInitLightObj(void);
 extern void GXClampLightAngle(void);
 extern void GXDrawDone(void);
 extern void fn_80617340(void);
@@ -514,7 +514,7 @@ asm void fn_805B53D0(void)
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_808883CC
     addi r3, r1, 0x48
     li r4, 0x1
@@ -539,7 +539,7 @@ asm void fn_805B53D0(void)
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_808883CC
     addi r3, r1, 0x28
     li r4, 0x1
@@ -562,7 +562,7 @@ asm void fn_805B53D0(void)
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_808883CC
     addi r3, r1, 0x8
     li r4, 0x1

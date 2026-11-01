@@ -32,14 +32,14 @@ extern void map_debugLog(void);
 extern void fn_80091CFC(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092EC8(void);
-extern void fn_80092F1C(void);
+extern void target_pushPointToHistory(void);
 extern void fn_80095D44(void);
 extern void cursor_Object_constructor(void);
 extern void fn_80097510(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerTrack(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void fn_80099E9C(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_destructor(void);
@@ -1127,7 +1127,7 @@ lbl_boss_updatePhaseState_00000CE4:
 lbl_boss_updatePhaseState_00000D8C:
     addi r3, r30, 0xb0
     li r4, 0x1
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     li r0, 0x0
     stw r0, 0x12c(r1)
     addi r3, r30, 0xb0
@@ -1548,7 +1548,7 @@ lbl_fn_801371AC_0000130C:
     addi r3, r17, 0xb0
     addi r4, r1, 0x270
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_801371AC_00001AE8
 lbl_fn_801371AC_00001368:
     addi r3, r1, 0x870
@@ -1557,7 +1557,7 @@ lbl_fn_801371AC_00001368:
     addi r3, r17, 0xb0
     addi r4, r1, 0x270
     addi r5, r1, 0x770
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_801371AC_00001AE8
 lbl_fn_801371AC_00001388:
     mr r3, r16
@@ -1597,7 +1597,7 @@ lbl_fn_801371AC_000013CC:
     addi r3, r17, 0xb0
     addi r4, r1, 0x170
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_801371AC_00001AE8
 lbl_fn_801371AC_0000141C:
     addi r3, r1, 0x870
@@ -1606,7 +1606,7 @@ lbl_fn_801371AC_0000141C:
     addi r3, r17, 0xb0
     addi r4, r1, 0x170
     addi r5, r1, 0x770
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_801371AC_00001AE8
 lbl_fn_801371AC_0000143C:
     mr r3, r16
@@ -1646,7 +1646,7 @@ lbl_fn_801371AC_00001480:
     addi r3, r17, 0xb0
     addi r4, r1, 0x70
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_801371AC_00001AE8
 lbl_fn_801371AC_000014D0:
     addi r3, r1, 0x870
@@ -1655,7 +1655,7 @@ lbl_fn_801371AC_000014D0:
     addi r3, r17, 0xb0
     addi r4, r1, 0x70
     addi r5, r1, 0x770
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_801371AC_00001AE8
 lbl_fn_801371AC_000014F0:
     mr r3, r16

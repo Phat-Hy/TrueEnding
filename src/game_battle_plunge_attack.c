@@ -19,7 +19,7 @@ extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void minimap_renderOverlay(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80092F1C(void);
+extern void target_pushPointToHistory(void);
 extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
@@ -876,7 +876,7 @@ lbl_fn_80411720_00000A34:
     addi r3, r29, 0xf4
     addi r4, r1, 0x108
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_80411720_00000BC8
 lbl_fn_80411720_00000A7C:
     mr r3, r30

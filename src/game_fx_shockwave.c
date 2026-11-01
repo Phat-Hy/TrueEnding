@@ -77,7 +77,7 @@ extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_804A04AC(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void strcmp(void);
@@ -1655,7 +1655,7 @@ lbl_fn_802946BC_000014AC:
     stw r0, 0x14c4(r31)
     li r4, 0x1
     lwz r3, lbl_8087F8A0
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     mr r28, r3
     bne lbl_fn_802946BC_00001578
@@ -1712,7 +1712,7 @@ lbl_fn_802946BC_00001618:
     cmpwi r3, 0x0
     beq lbl_fn_802946BC_00001674
     li r4, 0x1
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_802946BC_00001674

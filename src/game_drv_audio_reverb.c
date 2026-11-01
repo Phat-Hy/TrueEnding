@@ -39,7 +39,7 @@ extern void atn_Matrix_copy(void);
 extern void atn_Matrix_concat(void);
 extern void fn_80097A20(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void fn_800A03E4(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
@@ -601,7 +601,7 @@ lbl_fn_805BAC18_00000420:
     lwz r3, 0x50(r29)
     bl fn_8000DD0C
     li r4, 0x1
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     addi r3, r1, 0x114
     li r4, 0x0
     bl fn_80317034

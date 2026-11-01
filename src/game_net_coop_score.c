@@ -76,7 +76,7 @@ extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
 extern void GXInitLightDistAttn(void);
-extern void fn_80615FF0(void);
+extern void GXInitLightObj(void);
 extern void GXClampLightAngle(void);
 extern void fn_80617340(void);
 extern void GXSetTevOrder(void);
@@ -270,7 +270,7 @@ lbl_fn_804ABA2C_00000144:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80887250
     addi r3, r1, 0xa0
     li r4, 0x1

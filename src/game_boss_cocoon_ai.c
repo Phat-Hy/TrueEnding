@@ -12,7 +12,7 @@ extern void mem_free(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80094958(void);
 extern void fn_80094B6C(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
@@ -1307,7 +1307,7 @@ lbl_fn_80454D4C_000010B8:
     li r4, 0x1
     stw r0, 0x16f8(r30)
     stw r31, 0x153c(r30)
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     stw r31, 0x38(r1)
     addi r3, r30, 0x14ec
     addi r4, r1, 0x38

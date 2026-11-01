@@ -131,7 +131,7 @@ void fn_80549EEC(void);
 void fn_80549F18(void);
 void fn_8054A004(void);
 void fn_8054A0A0(void);
-void fn_8054A340(void);
+void dlc_findItemInCatalog(void);
 void fn_8054A39C(void);
 void fn_8054A3E0(void);
 void fn_8054A530(void);
@@ -581,7 +581,7 @@ lbl_fn_8054A0A0_00000598:
     blr
 }
 
-asm void fn_8054A340(void)
+asm void dlc_findItemInCatalog(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -592,20 +592,20 @@ asm void fn_8054A340(void)
     mr r3, r4
     bl fn_80219544
     lwz r4, 0x48(r31)
-    b lbl_fn_8054A340_000005EC
-lbl_fn_8054A340_000005D4:
+    b lbl_dlc_findItemInCatalog_000005EC
+lbl_dlc_findItemInCatalog_000005D4:
     lwz r0, 0x50(r4)
     cmpw r3, r0
-    bne lbl_fn_8054A340_000005E8
+    bne lbl_dlc_findItemInCatalog_000005E8
     mr r3, r4
-    b lbl_fn_8054A340_000005F8
-lbl_fn_8054A340_000005E8:
+    b lbl_dlc_findItemInCatalog_000005F8
+lbl_dlc_findItemInCatalog_000005E8:
     lwz r4, 0x14ac(r4)
-lbl_fn_8054A340_000005EC:
+lbl_dlc_findItemInCatalog_000005EC:
     cmpwi r4, 0x0
-    bne lbl_fn_8054A340_000005D4
+    bne lbl_dlc_findItemInCatalog_000005D4
     li r3, 0x0
-lbl_fn_8054A340_000005F8:
+lbl_dlc_findItemInCatalog_000005F8:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

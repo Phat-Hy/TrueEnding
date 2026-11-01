@@ -114,7 +114,7 @@ void fn_8013A158(void);
 void fn_8013A16C(void);
 void fn_8013A184(void);
 void fn_8013A18C(void);
-void fn_8013A194(void);
+void npc_getGlobalManager(void);
 void fn_8013A19C(void);
 void fn_8013A1A8(void);
 void fn_8013A214(void);
@@ -693,7 +693,7 @@ lbl_npc_calcTargetDistance_000007F4:
     cmplwi r0, 0x0
     bne lbl_npc_calcTargetDistance_000008A8
 lbl_npc_calcTargetDistance_00000818:
-    bl fn_8013A194
+    bl npc_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_npc_calcTargetDistance_0000089C
     li r3, 0x7de
@@ -703,13 +703,13 @@ lbl_npc_calcTargetDistance_00000818:
     lfs f0, lbl_808819C0
     fadds f0, f1, f0
     stfs f0, 0x13a4(r31)
-    bl fn_8013A194
+    bl npc_getGlobalManager
     li r4, 0x1
     bl fn_8013A19C
-    bl fn_8013A194
+    bl npc_getGlobalManager
     bl system_getNextSequenceId
     mr r30, r3
-    bl fn_8013A194
+    bl npc_getGlobalManager
     li r0, -0x1
     stw r0, 0x8(r1)
     lfs f1, lbl_8088196C
@@ -723,7 +723,7 @@ lbl_npc_calcTargetDistance_00000818:
     li r9, 0x0
     li r10, 0x1e
     bl clip_calculateFrustum
-    bl fn_8013A194
+    bl npc_getGlobalManager
     li r4, 0x0
     bl fn_8013A19C
 lbl_npc_calcTargetDistance_0000089C:
@@ -736,16 +736,16 @@ lbl_npc_calcTargetDistance_000008A8:
     subis r0, r3, 0x10
     cmplwi r0, 0x0
     bne lbl_npc_calcTargetDistance_00000924
-    bl fn_8013A194
+    bl npc_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_npc_calcTargetDistance_00000918
     li r3, 0x7e8
     bl task_findEntryById
     mr r29, r3
-    bl fn_8013A194
+    bl npc_getGlobalManager
     bl system_getNextSequenceId
     mr r30, r3
-    bl fn_8013A194
+    bl npc_getGlobalManager
     li r0, -0x1
     stw r0, 0x8(r1)
     lfs f1, lbl_8088196C
@@ -1089,7 +1089,7 @@ asm void fn_8013A18C(void)
     blr
 }
 
-asm void fn_8013A194(void)
+asm void npc_getGlobalManager(void)
 {
     nofralloc
     lwz r3, lbl_8087F048

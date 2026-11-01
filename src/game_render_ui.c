@@ -45,7 +45,7 @@ extern void fn_80615B60(void);
 extern void fn_80615C40(void);
 extern void GXInitLightDistAttn(void);
 extern void GXInitLightSpot(void);
-extern void fn_80615FF0(void);
+extern void GXInitLightObj(void);
 extern void GXClampLightAngle(void);
 extern void GXDrawDone(void);
 extern void fn_80616EF0(void);
@@ -405,7 +405,7 @@ lbl_fn_800B105C_000003C0:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80880E6C
     addi r3, r31, 0x60
     li r4, 0x1

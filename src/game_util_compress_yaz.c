@@ -35,7 +35,7 @@ extern void boss_getOffset50(void);
 extern void fn_804A39EC(void);
 extern void fn_804A3A68(void);
 extern void fn_804A5824(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void fn_805634D4(void);
 extern void fn_8057F7AC(void);
 extern void fn_8057F884(void);
@@ -908,7 +908,7 @@ lbl_fn_8058BE7C_00000B78:
     lwz r3, lbl_8087F8A0
     mr r4, r21
     add r26, r5, r0
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     mr r25, r3
     beq lbl_fn_8058BE7C_00000C6C
@@ -978,7 +978,7 @@ lbl_fn_8058BE7C_00000C6C:
     lwz r3, lbl_8087F8A0
     mr r4, r20
     add r25, r5, r0
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     mr r24, r3
     beq lbl_fn_8058BE7C_00000D78
@@ -1063,7 +1063,7 @@ lbl_fn_8058BE7C_00000D78:
     lwz r3, lbl_8087F8A0
     mr r4, r20
     add r23, r5, r0
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     mr r24, r3
     beq lbl_fn_8058BE7C_00000EC0
@@ -1133,7 +1133,7 @@ lbl_fn_8058BE7C_00000EC0:
     lwz r3, lbl_8087F8A0
     mr r4, r20
     add r23, r5, r0
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     mr r22, r3
     beq lbl_fn_8058BE7C_00000FCC
@@ -1215,7 +1215,7 @@ lbl_fn_8058BE7C_00000FF8:
     mr r23, r3
     lwz r3, lbl_8087F8A0
     mr r4, r21
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     mr r21, r3
     lwz r3, lbl_8087F4F0
     lwz r5, 0x80(r22)

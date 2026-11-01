@@ -19,7 +19,7 @@ extern void fn_800DAA3C(void);
 extern void fn_803606CC(void);
 extern void fn_80360780(void);
 extern void kpad_getClampData(void);
-extern void fn_8037D4C0(void);
+extern void dvd_showDiskErrorDialog(void);
 extern void fn_8041D180(void);
 extern void fn_8041D198(void);
 extern void fn_804827D8(void);
@@ -673,7 +673,7 @@ asm void fn_80483E94(void)
     li r5, 0x3c
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_80483E94_000008A4:
     lwz r3, lbl_8087EFE8
     cmpwi r3, 0x0

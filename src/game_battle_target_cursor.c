@@ -32,7 +32,7 @@ extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
-extern void fn_80239D58(void);
+extern void res_Shader_findParameter(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A1F4(void);
 extern void res_registerResource(void);
@@ -1748,7 +1748,7 @@ lbl_fn_804096D4_0000169C:
     lwz r3, lbl_8087F3C0
     mr r4, r17
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     bne lbl_fn_804096D4_00001A18
     lwz r5, lbl_8087F3C0
@@ -1782,7 +1782,7 @@ lbl_fn_804096D4_00001728:
     lwz r3, lbl_8087F3C0
     mr r4, r17
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_804096D4_00001A18
     lwz r3, lbl_8087F3C0
@@ -1863,7 +1863,7 @@ lbl_fn_804096D4_00001858:
     lwz r3, lbl_8087F3C0
     mr r4, r17
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     bne lbl_fn_804096D4_00001A18
     lwz r3, lbl_8087F3C0
