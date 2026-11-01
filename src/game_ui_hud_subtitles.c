@@ -90,14 +90,14 @@ extern u32 lbl_80882A84;
 void fn_801CFA5C(void);
 void fn_801CFAA8(void);
 void fn_801CFACC(void);
-void fn_801CFC28(void);
-void fn_801CFC30(void);
+u32 fn_801CFC28(void);
+u8 fn_801CFC30(void *p);
 void fn_801CFC38(void);
 void fn_801CFC3C(void);
 void fn_801CFC40(void);
 void fn_801CFC44(void);
 void fn_801CFC48(void);
-void fn_801CFC4C(void);
+void fn_801CFC4C(void *p, u32 val);
 void fn_801CFC54(void);
 void fn_801CFC58(void);
 void fn_801CFD68(void);
@@ -246,18 +246,14 @@ lbl_fn_801CFACC_000000A8:
     blr
 }
 
-asm void fn_801CFC28(void)
+u32 fn_801CFC28(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_801CFC30(void)
+u8 fn_801CFC30(void *p)
 {
-    nofralloc
-    lbz r3, 0x94(r3)
-    blr
+    return *(u8 *)((u8 *)p + 0x94);
 }
 
 void fn_801CFC38(void) {
@@ -275,11 +271,9 @@ void fn_801CFC44(void) {
 void fn_801CFC48(void) {
 }
 
-asm void fn_801CFC4C(void)
+void fn_801CFC4C(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x7c(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x7c) = val;
 }
 
 void fn_801CFC54(void) {

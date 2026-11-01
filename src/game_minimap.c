@@ -61,7 +61,7 @@ void atn_Matrix_copy(void);
 void atn_Matrix_concat(void);
 void minimap_renderOverlay(void);
 void fn_8008D6C0(void);
-void fn_8008D784(void);
+void *fn_8008D784(void *p);
 void fn_8008D78C(void);
 
 asm void fn_8008C828(void)
@@ -1153,11 +1153,9 @@ lbl_fn_8008D6C0_00000F40:
     blr
 }
 
-asm void fn_8008D784(void)
+void *fn_8008D784(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x8
-    blr
+    return (u8 *)p + 8;
 }
 
 asm void fn_8008D78C(void)

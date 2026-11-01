@@ -88,7 +88,7 @@ void fn_804EF9B8(void);
 void fn_804EFC98(void);
 void fn_804EFE9C(void);
 void fn_804EFF78(void);
-void fn_804F1064(void);
+u32 fn_804F1064(void);
 void fn_804F106C(void);
 void fn_804F1128(void);
 void fn_804F12A4(void);
@@ -1696,11 +1696,9 @@ lbl_fn_804EFF78_00001694:
     blr
 }
 
-asm void fn_804F1064(void)
+u32 fn_804F1064(void)
 {
-    nofralloc
-    li r3, 0x6
-    blr
+    return 6;
 }
 
 asm void fn_804F106C(void)

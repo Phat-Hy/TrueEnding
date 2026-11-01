@@ -140,7 +140,7 @@ void fn_804406C4(void);
 void fn_8044073C(void);
 void fn_80440990(void);
 void fn_80440994(void);
-void fn_80440B24(void);
+u32 fn_80440B24(void);
 void fn_80440B2C(void);
 void fn_80440DC0(void);
 void fn_80440F64(void);
@@ -856,11 +856,9 @@ lbl_fn_80440994_0000098C:
     blr
 }
 
-asm void fn_80440B24(void)
+u32 fn_80440B24(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_80440B2C(void)

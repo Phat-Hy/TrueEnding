@@ -162,7 +162,7 @@ extern u32 lbl_80884908;
 
 /* Function declarations */
 void fn_802F0964(void);
-void fn_802F0988(void);
+f32 fn_802F0988(void *p);
 u32 fn_802F0990(void);
 void fn_802F0998(void);
 void fn_802F09D4(void);
@@ -190,11 +190,9 @@ asm void fn_802F0964(void)
     b scissor_clipFrustum
 }
 
-asm void fn_802F0988(void)
+f32 fn_802F0988(void *p)
 {
-    nofralloc
-    lfs f1, 0x3a4(r3)
-    blr
+    return *(f32 *)((u8 *)p + 0x3a4);
 }
 
 u32 fn_802F0990(void)

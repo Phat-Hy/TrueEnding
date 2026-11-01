@@ -115,7 +115,7 @@ void fn_807157D0(void);
 void fn_80715800(void);
 void fn_807159C0(void);
 void fn_80715A30(void);
-void fn_80715B10(void);
+u32 fn_80715B10(void);
 void fn_80715B20(void);
 void fn_80715BA0(void);
 
@@ -2350,11 +2350,9 @@ lbl_fn_80715A30_00001ED8:
     blr
 }
 
-asm void fn_80715B10(void)
+u32 fn_80715B10(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_80715B20(void)

@@ -12,7 +12,7 @@ extern u32 lbl_8087EFF0;
 
 /* Function declarations */
 void fn_800D26A4(void);
-void atn_Task_execute(void);
+u32 atn_Task_execute(void);
 void atn_Task_executeChildren(void);
 void atn_Task_pause(void);
 void atn_Task_resume(void);
@@ -153,11 +153,9 @@ lbl_fn_800D26A4_0000019C:
     blr
 }
 
-asm void atn_Task_execute(void)
+u32 atn_Task_execute(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void atn_Task_executeChildren(void)

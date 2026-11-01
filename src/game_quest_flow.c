@@ -128,18 +128,16 @@ extern u32 lbl_80881AA4;
 extern u32 lbl_80881AA8;
 
 /* Function declarations */
-void fn_801446E8(void);
+u32 fn_801446E8(void);
 void quest_resetObjectiveBounds(void *p);
 void quest_evaluateConditions(void);
 void fn_80144ED4(void);
 void fn_80144F4C(void);
 void quest_updateFlow(void);
 
-asm void fn_801446E8(void)
+u32 fn_801446E8(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 void quest_resetObjectiveBounds(void *p)

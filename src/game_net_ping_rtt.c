@@ -124,7 +124,7 @@ void fn_80516908(void);
 void fn_805169FC(void);
 void fn_80516A60(void);
 void fn_80516CA8(void);
-void fn_80516D30(void);
+u32 fn_80516D30(void);
 void fn_80516D38(void);
 void fn_80516DFC(void);
 void fn_80516E0C(void);
@@ -1124,11 +1124,9 @@ lbl_fn_80516CA8_00000DE8:
     blr
 }
 
-asm void fn_80516D30(void)
+u32 fn_80516D30(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_80516D38(void)

@@ -115,7 +115,7 @@ void fn_805266C0(void);
 void fn_805268CC(void);
 void fn_80526930(void);
 void fn_80526BC0(void);
-void fn_80526C18(void);
+u32 fn_80526C18(void);
 void fn_80526C20(void);
 void fn_80526CC0(void);
 void fn_80526D98(void);
@@ -826,11 +826,9 @@ lbl_fn_80526BC0_000009B0:
     blr
 }
 
-asm void fn_80526C18(void)
+u32 fn_80526C18(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_80526C20(void)

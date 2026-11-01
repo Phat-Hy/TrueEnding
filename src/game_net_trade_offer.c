@@ -49,7 +49,7 @@ extern u32 lbl_80887AB0;
 /* Function declarations */
 void fn_8052DEA8(void);
 void fn_8052DEBC(void);
-void fn_8052DED0(void);
+f32 fn_8052DED0(void *p);
 void fn_8052DED8(void);
 void fn_8052DEF0(void);
 void fn_8052E1A4(void);
@@ -78,11 +78,9 @@ asm void fn_8052DEBC(void)
     blr
 }
 
-asm void fn_8052DED0(void)
+f32 fn_8052DED0(void *p)
 {
-    nofralloc
-    lfs f1, 0x14(r3)
-    blr
+    return *(f32 *)((u8 *)p + 0x14);
 }
 
 asm void fn_8052DED8(void)

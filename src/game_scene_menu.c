@@ -123,7 +123,7 @@ void fn_801A73A4(void);
 void fn_801A7644(void);
 void fn_801A7648(void);
 void fn_801A7650(void);
-void fn_801A7664(void);
+u32 fn_801A7664(void);
 void fn_801A766C(void);
 void fn_801A767C(void);
 void fn_801A76BC(void);
@@ -1467,11 +1467,9 @@ asm void fn_801A7650(void)
     blr
 }
 
-asm void fn_801A7664(void)
+u32 fn_801A7664(void)
 {
-    nofralloc
-    li r3, 0x23
-    blr
+    return 0x23;
 }
 
 asm void fn_801A766C(void)

@@ -71,15 +71,13 @@ extern u32 lbl_808816A0;
 extern u32 lbl_808816A4;
 
 /* Function declarations */
-void fn_80110760(void);
+u32 fn_80110760(void);
 void fn_80110768(void);
 void fn_80110858(void);
 
-asm void fn_80110760(void)
+u32 fn_80110760(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_80110768(void)

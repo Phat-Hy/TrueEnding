@@ -76,7 +76,7 @@ void fn_800D775C(void);
 void fn_800D7D00(void);
 void fn_800D7F18(void);
 void fn_800D8100(void);
-void fn_800D8104(void);
+u32 fn_800D8104(void);
 void fn_800D810C(void);
 void fn_800D814C(void);
 void fn_800D818C(void);
@@ -1360,11 +1360,9 @@ asm void fn_800D7F18(void)
 void fn_800D8100(void) {
 }
 
-asm void fn_800D8104(void)
+u32 fn_800D8104(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_800D810C(void)

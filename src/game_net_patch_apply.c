@@ -109,8 +109,8 @@ void fn_8053E58C(void);
 void fn_8053E65C(void);
 void fn_8053E6E4(void);
 void fn_8053E870(void);
-void fn_8053E8C4(void);
-void fn_8053E8CC(void);
+u32 fn_8053E8C4(void);
+void fn_8053E8CC(void *p, u32 val);
 void fn_8053E8D4(void);
 void fn_8053ED50(void);
 
@@ -1759,18 +1759,14 @@ lbl_fn_8053E870_000014CC:
     blr
 }
 
-asm void fn_8053E8C4(void)
+u32 fn_8053E8C4(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
-asm void fn_8053E8CC(void)
+void fn_8053E8CC(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x194(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x194) = val;
 }
 
 asm void fn_8053E8D4(void)

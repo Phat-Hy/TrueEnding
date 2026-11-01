@@ -94,7 +94,7 @@ void fn_80401E50(void);
 void fn_804023E0(void);
 void fn_80402764(void);
 void fn_80402768(void);
-void fn_80402970(void);
+f32 fn_80402970(void *p);
 void fn_80402978(void);
 void fn_80402A40(void);
 void fn_80402A9C(void);
@@ -849,11 +849,9 @@ lbl_fn_80402768_0000097C:
     blr
 }
 
-asm void fn_80402970(void)
+f32 fn_80402970(void *p)
 {
-    nofralloc
-    lfs f1, 0x11c(r3)
-    blr
+    return *(f32 *)((u8 *)p + 0x11c);
 }
 
 asm void fn_80402978(void)

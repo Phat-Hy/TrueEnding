@@ -55,7 +55,7 @@ void atn_Polynomial2Curve_getDuration(void);
 void atn_Polynomial1Curve_getDerivative(void);
 void atn_Polynomial1Curve_getDuration(void);
 void atn_ConstantCurve_getDerivative(void);
-void atn_ConstantCurve_getDuration(void);
+f32 atn_ConstantCurve_getDuration(void *p);
 void atn_CosinusCurve_getDerivative(void);
 void atn_CosinusCurve_getDuration(void);
 void atn_SinusCurve_getDerivative(void);
@@ -1795,11 +1795,9 @@ asm void atn_ConstantCurve_getDerivative(void)
     blr
 }
 
-asm void atn_ConstantCurve_getDuration(void)
+f32 atn_ConstantCurve_getDuration(void *p)
 {
-    nofralloc
-    lfs f1, 0xc(r3)
-    blr
+    return *(f32 *)((u8 *)p + 0xc);
 }
 
 asm void atn_CosinusCurve_getDerivative(void)

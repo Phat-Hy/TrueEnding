@@ -236,11 +236,8 @@ asm void OSSetCurrentContext(register OSContext* context) {
     blr
 }
 
-asm OSContext* OSGetCurrentContext(void) {
-    nofralloc
-    lis r3, 0x8000
-    lwz r3, 0xd4(r3)
-    blr
+OSContext* OSGetCurrentContext(void) {
+    return *(OSContext**)0x800000D4;
 }
 
 asm BOOL OSSaveContext(register OSContext* context) {

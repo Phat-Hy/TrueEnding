@@ -93,7 +93,7 @@ void atn_LH_Model_destructor(void);
 void fn_80121048(void);
 void fn_801210B4(void);
 void fn_801210C4(void);
-void fn_80121114(void);
+void fn_80121114(void *p, u32 val);
 void fn_8012111C(void);
 void fn_8012133C(void);
 void fn_80121E14(void);
@@ -104,7 +104,7 @@ void fn_80121FD4(void);
 void fn_801220A0(void);
 void fn_8012216C(void);
 void fn_80122238(void);
-void fn_80122280(void);
+void *fn_80122280(void *p);
 void fn_80122288(void);
 
 void* equip_getElementPtr8(void* obj, int index)
@@ -424,11 +424,9 @@ lbl_fn_801210C4_000003DC:
     blr
 }
 
-asm void fn_80121114(void)
+void fn_80121114(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x0(r3)
-    blr
+    *(u32 *)p = val;
 }
 
 asm void fn_8012111C(void)
@@ -1696,11 +1694,9 @@ lbl_fn_80122238_0000154C:
     blr
 }
 
-asm void fn_80122280(void)
+void *fn_80122280(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x24
-    blr
+    return (u8 *)p + 0x24;
 }
 
 asm void fn_80122288(void)

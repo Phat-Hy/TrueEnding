@@ -38,9 +38,9 @@ extern u32 lbl_80885DE0;
 extern u32 lbl_80885DE4;
 
 /* Function declarations */
-void fn_803CFC58(void);
-void fn_803CFC64(void);
-void fn_803CFC6C(void);
+u32 fn_803CFC58(void *p);
+f32 fn_803CFC64(void *p);
+f32 fn_803CFC6C(void *p);
 void fn_803CFC74(void);
 void fn_803CFC78(void);
 void fn_803D022C(void);
@@ -48,26 +48,19 @@ void fn_803D0B20(void);
 void fn_803D11B4(void);
 void fn_803D1574(void);
 
-asm void fn_803CFC58(void)
+u32 fn_803CFC58(void *p)
 {
-    nofralloc
-    lwz r0, 0x38(r3)
-    extrwi r3, r0, 1, 29
-    blr
+    return (*(u32 *)((u8 *)p + 0x38) >> 2) & 1;
 }
 
-asm void fn_803CFC64(void)
+f32 fn_803CFC64(void *p)
 {
-    nofralloc
-    lfs f1, 0x100(r3)
-    blr
+    return *(f32 *)((u8 *)p + 0x100);
 }
 
-asm void fn_803CFC6C(void)
+f32 fn_803CFC6C(void *p)
 {
-    nofralloc
-    lfs f1, 0xa0(r3)
-    blr
+    return *(f32 *)((u8 *)p + 0xa0);
 }
 
 void fn_803CFC74(void) {

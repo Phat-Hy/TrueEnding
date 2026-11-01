@@ -155,7 +155,7 @@ void fn_80071274(void);
 void fn_800713D4(void);
 void fn_8007192C(void);
 void gx_syncFrameFifo(void);
-void fn_80071D60(void);
+void fn_80071D60(void *p, u32 val);
 void fn_80071D68(void);
 void fn_80071D74(void);
 void fn_80071D80(void);
@@ -3380,11 +3380,9 @@ lbl_gx_syncFrameFifo_00002DF8:
     blr
 }
 
-asm void fn_80071D60(void)
+void fn_80071D60(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0xcc(r3)
-    blr
+    *(u32 *)((u8 *)p + 0xcc) = val;
 }
 
 asm void fn_80071D68(void)

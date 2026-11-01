@@ -90,7 +90,7 @@ extern u32 lbl_80883DC4;
 /* Function declarations */
 void fn_8029F148(void);
 void fn_8029F3AC(void);
-void fn_8029F3F4(void);
+u32 fn_8029F3F4(void);
 void fn_8029F3FC(void);
 void fn_8029F738(void);
 void fn_8029FAC0(void);
@@ -295,11 +295,9 @@ lbl_fn_8029F3AC_000002A4:
     blr
 }
 
-asm void fn_8029F3F4(void)
+u32 fn_8029F3F4(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_8029F3FC(void)

@@ -125,7 +125,7 @@ void fn_8070CBC0(void);
 void fn_8070CD20(void);
 void fn_8070CD40(void);
 void fn_8070CD60(void);
-void fn_8070CE00(void);
+void fn_8070CE00(void *p, u8 val);
 void fn_8070CE10(void);
 void fn_8070CEB0(void);
 void fn_8070CED0(void);
@@ -1775,11 +1775,9 @@ lbl_fn_8070CD60_00001640:
     blr
 }
 
-asm void fn_8070CE00(void)
+void fn_8070CE00(void *p, u8 val)
 {
-    nofralloc
-    stb r4, 0x14(r3)
-    blr
+    *(u8 *)((u8 *)p + 0x14) = val;
 }
 
 asm void fn_8070CE10(void)

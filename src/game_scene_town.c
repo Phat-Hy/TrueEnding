@@ -84,7 +84,7 @@ void fn_801AA7A0(void);
 void fn_801AA7D0(void);
 void fn_801AA8EC(void);
 void fn_801AA94C(void);
-void fn_801AA95C(void);
+u32 fn_801AA95C(void);
 void fn_801AA964(void);
 void fn_801AA9A4(void);
 void fn_801AA9E4(void);
@@ -1139,11 +1139,9 @@ asm void fn_801AA94C(void)
     b map_processStreamChunk
 }
 
-asm void fn_801AA95C(void)
+u32 fn_801AA95C(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_801AA964(void)

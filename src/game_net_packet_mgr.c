@@ -77,12 +77,12 @@ void fn_804AD738(void);
 void fn_804AD8CC(void);
 void fn_804ADB60(void);
 void fn_804ADCAC(void);
-void fn_804AE11C(void);
+u32 fn_804AE11C(void);
 void fn_804AE124(void);
 void fn_804AE264(void);
 void fn_804AE2DC(void);
 u32 net_getPacketManager(void);
-void fn_804AE3C4(void);
+u32 fn_804AE3C4(void);
 void fn_804AE3CC(void);
 void fn_804AE4C4(void);
 void fn_804AE568(void);
@@ -789,11 +789,9 @@ lbl_fn_804ADCAC_0000099C:
     blr
 }
 
-asm void fn_804AE11C(void)
+u32 fn_804AE11C(void)
 {
-    nofralloc
-    li r3, 0x20
-    blr
+    return 0x20;
 }
 
 asm void fn_804AE124(void)
@@ -993,11 +991,9 @@ u32 net_getPacketManager(void)
     return lbl_8087F62C;
 }
 
-asm void fn_804AE3C4(void)
+u32 fn_804AE3C4(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_804AE3CC(void)

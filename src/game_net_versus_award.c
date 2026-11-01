@@ -89,7 +89,7 @@ void fn_804C134C(void);
 void fn_804C1370(void);
 void fn_804C1634(void);
 void fn_804C18A8(void);
-void fn_804C2260(void);
+void fn_804C2260(void *p, u32 val);
 void fn_804C2268(void);
 void fn_804C23E4(void);
 void fn_804C28A0(void);
@@ -1430,11 +1430,9 @@ lbl_fn_804C18A8_00001284:
     blr
 }
 
-asm void fn_804C2260(void)
+void fn_804C2260(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0xdcc(r3)
-    blr
+    *(u32 *)((u8 *)p + 0xdcc) = val;
 }
 
 asm void fn_804C2268(void)

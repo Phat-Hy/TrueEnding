@@ -101,7 +101,7 @@ extern u32 lbl_80883B14;
 
 /* Function declarations */
 void fn_80288DD8(void);
-void fn_80288E30(void);
+void fn_80288E30(void *p, f32 val);
 void fn_80288E38(void);
 void fn_80289974(void);
 void fn_80289978(void);
@@ -140,11 +140,9 @@ lbl_fn_80288DD8_0000003C:
     blr
 }
 
-asm void fn_80288E30(void)
+void fn_80288E30(void *p, f32 val)
 {
-    nofralloc
-    stfs f1, 0x56c(r3)
-    blr
+    *(f32 *)((u8 *)p + 0x56c) = val;
 }
 
 asm void fn_80288E38(void)

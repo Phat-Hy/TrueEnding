@@ -76,7 +76,7 @@ void fn_804DC688(void);
 void fn_804DC7C4(void);
 void fn_804DC810(void);
 void fn_804DC85C(void);
-void fn_804DCA50(void);
+u32 fn_804DCA50(void);
 void fn_804DCA58(void);
 void fn_804DD15C(void);
 void fn_804DD1AC(void);
@@ -1128,11 +1128,9 @@ lbl_fn_804DC85C_00000DB8:
     blr
 }
 
-asm void fn_804DCA50(void)
+u32 fn_804DCA50(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_804DCA58(void)

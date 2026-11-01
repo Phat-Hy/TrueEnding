@@ -54,7 +54,7 @@ void fn_8072BBE0(void);
 void fn_8072BBF0(void);
 void fn_8072BC00(void);
 void fn_8072BD60(void);
-void fn_8072C320(void);
+f32 fn_8072C320(void *p);
 void fn_8072C330(void);
 void fn_8072C450(void);
 
@@ -1953,11 +1953,9 @@ lbl_fn_8072BD60_00001B14:
     blr
 }
 
-asm void fn_8072C320(void)
+f32 fn_8072C320(void *p)
 {
-    nofralloc
-    lfs f1, 0x50(r3)
-    blr
+    return *(f32 *)((u8 *)p + 0x50);
 }
 
 asm void fn_8072C330(void)

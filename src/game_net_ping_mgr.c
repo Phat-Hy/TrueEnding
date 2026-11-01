@@ -120,7 +120,7 @@ void fn_80514580(void);
 void fn_80514724(void);
 void fn_80514788(void);
 void fn_80514AB0(void);
-void fn_80514B3C(void);
+u32 fn_80514B3C(void);
 void fn_80514B44(void);
 void fn_80514C14(void);
 void fn_80514C90(void);
@@ -615,11 +615,9 @@ lbl_fn_80514AB0_000006C4:
     blr
 }
 
-asm void fn_80514B3C(void)
+u32 fn_80514B3C(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_80514B44(void)

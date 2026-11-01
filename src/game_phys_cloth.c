@@ -97,7 +97,7 @@ void fn_8010DB88(void);
 void fn_8010DB94(void);
 void fn_8010DD34(void);
 void fn_8010E3F0(void);
-void fn_8010E604(void);
+u32 fn_8010E604(void);
 void fn_8010E60C(void);
 void fn_8010E7B8(void);
 void fn_8010EB58(void);
@@ -1192,11 +1192,9 @@ lbl_fn_8010E3F0_00000E5C:
     blr
 }
 
-asm void fn_8010E604(void)
+u32 fn_8010E604(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8010E60C(void)

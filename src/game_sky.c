@@ -102,10 +102,10 @@ void fn_800DCE20(void);
 void fn_800DD178(void);
 void fn_800DD17C(void);
 void fn_800DD1D0(void);
-void fn_800DD1D4(void);
+u32 fn_800DD1D4(void *p);
 void fn_800DD1DC(void);
 void fn_800DD1E0(void);
-void fn_800DD1E4(void);
+u32 fn_800DD1E4(void);
 void fn_800DD1EC(void);
 void fn_800DD2A8(void);
 void wcs_vformat(void);
@@ -1356,11 +1356,9 @@ asm void fn_800DD1D0(void)
     b fn_805B6C10
 }
 
-asm void fn_800DD1D4(void)
+u32 fn_800DD1D4(void *p)
 {
-    nofralloc
-    lwz r3, 0x80(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x80);
 }
 
 asm void fn_800DD1DC(void)
@@ -1375,11 +1373,9 @@ asm void fn_800DD1E0(void)
     b fn_805B6934
 }
 
-asm void fn_800DD1E4(void)
+u32 fn_800DD1E4(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_800DD1EC(void)

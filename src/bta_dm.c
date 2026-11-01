@@ -191,7 +191,7 @@ void fn_8062BB38(void);
 void fn_8062BB3C(void);
 void fn_8062BC04(void);
 void fn_8062BCC4(void);
-void fn_8062BDF4(void);
+u32 fn_8062BDF4(void);
 void fn_8062BDFC(void);
 void fn_8062BE98(void);
 void fn_8062BF1C(void);
@@ -2515,11 +2515,9 @@ lbl_fn_8062BCC4_00001D68:
     blr
 }
 
-asm void fn_8062BDF4(void)
+u32 fn_8062BDF4(void)
 {
-    nofralloc
-    li r3, 0xb
-    blr
+    return 0xb;
 }
 
 asm void fn_8062BDFC(void)

@@ -44,7 +44,7 @@ void fn_801EDC74(void);
 void fn_801EDC78(void);
 void fn_801EDCB8(void);
 void fn_801EDCBC(void);
-void fn_801EDCC0(void);
+u32 fn_801EDCC0(void);
 void fn_801EDCC8(void);
 void fn_801EDCCC(void);
 void fn_801EEE54(void);
@@ -330,11 +330,9 @@ void fn_801EDCB8(void) {
 void fn_801EDCBC(void) {
 }
 
-asm void fn_801EDCC0(void)
+u32 fn_801EDCC0(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 void fn_801EDCC8(void) {

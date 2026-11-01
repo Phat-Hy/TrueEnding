@@ -90,7 +90,7 @@ extern u32 lbl_80887170;
 void fn_8049D1A4(void);
 void fn_8049D1B4(void);
 void fn_8049D1BC(void);
-void fn_8049D22C(void);
+u32 fn_8049D22C(void);
 void fn_8049D234(void);
 void fn_8049D24C(void);
 void fn_8049D264(void);
@@ -156,11 +156,9 @@ lbl_fn_8049D1BC_0000006C:
     blr
 }
 
-asm void fn_8049D22C(void)
+u32 fn_8049D22C(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_8049D234(void)

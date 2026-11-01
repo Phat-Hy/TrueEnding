@@ -50,7 +50,7 @@ extern u32 lbl_80880C44;
 /* Function declarations */
 void fn_800991D0(void);
 void fn_80099E9C(void);
-void fn_80099F68(void);
+u32 fn_80099F68(void);
 void fn_80099F70(void);
 void fn_80099F74(void);
 void fn_8009A018(void);
@@ -992,11 +992,9 @@ lbl_fn_80099E9C_00000D7C:
     blr
 }
 
-asm void fn_80099F68(void)
+u32 fn_80099F68(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 void fn_80099F70(void) {

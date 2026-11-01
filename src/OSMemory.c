@@ -24,9 +24,9 @@ extern u8 ShutdownFunctionInfo_8079D7E8[];
 /* Small data declarations */
 
 /* Function declarations */
-void OSGetPhysicalMem2Size(void);
-void OSGetConsoleSimulatedMem1Size(void);
-void OSGetConsoleSimulatedMem2Size(void);
+u32 OSGetPhysicalMem2Size(void);
+u32 OSGetConsoleSimulatedMem1Size(void);
+u32 OSGetConsoleSimulatedMem2Size(void);
 void fn_805F2980(void);
 void MEMIntrruptHandler(void);
 void __OSSetMEM1Protection(void);
@@ -43,28 +43,19 @@ void OSInitMutex(void);
 void OSLockMutex(void);
 void OSUnlockMutex(void);
 
-asm void OSGetPhysicalMem2Size(void)
+u32 OSGetPhysicalMem2Size(void)
 {
-    nofralloc
-    lis r3, 0x8000
-    lwz r3, 0x3118(r3)
-    blr
+    return *(u32*)0x80003118;
 }
 
-asm void OSGetConsoleSimulatedMem1Size(void)
+u32 OSGetConsoleSimulatedMem1Size(void)
 {
-    nofralloc
-    lis r3, 0x8000
-    lwz r3, 0x3104(r3)
-    blr
+    return *(u32*)0x80003104;
 }
 
-asm void OSGetConsoleSimulatedMem2Size(void)
+u32 OSGetConsoleSimulatedMem2Size(void)
 {
-    nofralloc
-    lis r3, 0x8000
-    lwz r3, 0x311c(r3)
-    blr
+    return *(u32*)0x8000311C;
 }
 
 asm void fn_805F2980(void)
