@@ -41,6 +41,18 @@
 > XFB display copy); the layer's per-copy means and aurora's readback of two of those copies agree to **+5.0 % /
 > -13.5 %** (106.0/74.75 against 111.34/64.67 mean byte), and the sizes the quads sample are passed faithfully
 > (`TLS_AURORA_TEXBIND`, new). Texture identity is falsified **properly**: `TLS_AURORA_TEXOBJID=1` leaves the
+> **AP-BL IS THE CAUSE OF THE COMPOSITE DIFFERENCE, AND IT IS IN TWO LINES OF AURORA.** A drawn texture bound at a
+> copy destination resolves through `g_gxState.copyTextures` (`lib/gx/texture.cpp:842-857`), and that map is keyed by
+> the **destination pointer alone** (`lib/gx/gx.hpp:413`; replaced on every write at `GXFrameBuffer.cpp:45`). The
+> composite tail writes `0x9038D1C0` as 80x56 four times and then as 320x224 **inside one frame**, so the address can
+> only name one of those copies at a time: measured, the 80x56 copy's content (mean byte 69.75) is not what the
+> address carries (119.46, the 320x224 copy's 113.25), while a single-size control address agrees on all three sides
+> (113.76 / 106.0 / 111.34). The fix is to key that map by **(destination, width, height, format)** and match on the
+> bound texobj, so one change fixes both the live path and the harness. Exit criterion, already measured: the
+> composite probe copy's gradient must fall from **20.889** towards the layer's **1.123**, with the geometry frames'
+> 6.20-7.59 diagonal unchanged. It needs a patch file in `tools/aurora_spike/patches/`, a fork rebuild and the live
+> path re-validated - that is the next session's whole job.
+>
 > composite frame identical to the last digit (luma 86.98, gradient 20.889 both ways) on a replay of 113 525 draws,
 > where AP-BG's original test ran on a truncated feed of 203. What is left is aurora-side: the odd frame draws
 > **5 819** primitives against the geometry frame's 22 553, and aurora logs **`STUB: display copy is not
