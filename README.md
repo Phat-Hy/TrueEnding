@@ -67,7 +67,7 @@ was written for and has not been regenerated since: **the table above is current
 | Metric | Target | State |
 | :--- | :--- | :--- |
 | Sequence | `Boot → Stra → Titl → Game` | reached, deterministic |
-| Chapter 1 | playable | interactive field; the game creates its own save (1 348 992 B + 29 344 B banner) |
+| Chapter 1 | **playable field** | boot → title → New Game → Gurgan Cave → cutscene line → tutorial band → **B dismisses it** → direction input moves the field (94.71 % of pixels change guest 3800→4200 under holds vs 11.15 % without). The game creates its own save (1 348 992 B + 29 344 B banner). **No chapter transition has ever been executed** — the story entry chain (`0x8036F5D8`) is still never entered, so "playable" currently means the first field, not the story |
 | Gate | `pwsh tools/invariant.ps1` | **PASS attempt 1** (handover 1680; guest 2800 `54CB46BD…` 38.20 / 0.00 %; guest 3500 `A81F3E35…` 89.89 / 1.85 %) — on aurora, see `DEEPSEEK_HARNESS_HANDOVER.md` §5c.46 AP-BR |
 | Renderer | Aurora | migration **P1-P4 closed**: aurora publishes every presented frame (3 086 / 3 086 blitted, 0 failures) and the gate's references are recorded on its picture; the hand-rolled layer stays as the per-frame fallback and `TLS_LAYER=1` |
 | Recompiled DOL | 459 / 459 chunks | 100 % of the retail DOL's chunks run natively (472 objects linked); Track A's *decompilation* is 99.30 % of code bytes (data 0.06 %), which the port does not consume |
