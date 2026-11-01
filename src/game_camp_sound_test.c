@@ -68,18 +68,18 @@ extern u32 lbl_8087DEA4;
 extern u32 lbl_80885CBC;
 
 /* Function declarations */
-void fn_803C795C(void);
+u32 fn_803C795C(const void *p);
 void fn_803C7964(void);
 void fn_803C7A14(void);
 void fn_803C7A24(void);
 void fn_803C7C34(void);
 void fn_803C7CDC(void);
 void fn_803C7D08(void);
-void fn_803C7D18(void);
+u32 fn_803C7D18(const void *p);
 void fn_803C7D20(void);
 void fn_803C7DC8(void);
 void fn_803C7DF8(void);
-void fn_803C7F30(void);
+u32 fn_803C7F30(const void *p);
 void fn_803C7F38(void);
 void fn_803C7FE0(void);
 void fn_803C7FE4(void);
@@ -89,39 +89,37 @@ void soundTest_initOption(void);
 void soundTest_dummyCallback(void);
 void fn_803C8288(void);
 void fn_803C8330(void);
-void fn_803C8334(void);
+u32 fn_803C8334(const void *p);
 void fn_803C833C(void);
 void fn_803C83E4(void);
 void fn_803C83E8(void);
-void fn_803C8564(void);
+u32 fn_803C8564(const void *p);
 void fn_803C856C(void);
 void fn_803C861C(void);
 void fn_803C862C(void);
 void fn_803C8810(void);
-void fn_803C8898(void);
+u32 fn_803C8898(const void *p);
 void fn_803C88A0(void);
 void fn_803C8950(void);
 void fn_803C8960(void);
 void fn_803C8B0C(void);
 void fn_803C8BB4(void);
-void fn_803C8BB8(void);
+u32 fn_803C8BB8(const void *p);
 void fn_803C8BC0(void);
 void fn_803C8C68(void);
 void fn_803C8C6C(void);
-void fn_803C8E64(void);
+u32 fn_803C8E64(const void *p);
 void fn_803C8E6C(void);
 void fn_803C8F14(void);
 void fn_803C8F18(void);
-void fn_803C90BC(void);
+u32 fn_803C90BC(const void *p);
 void fn_803C90C4(void);
 void fn_803C916C(void);
 void fn_803C9170(void);
 
-asm void fn_803C795C(void)
+u32 fn_803C795C(const void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x4);
 }
 
 asm void fn_803C7964(void)
@@ -409,11 +407,9 @@ asm void fn_803C7D08(void)
     blr
 }
 
-asm void fn_803C7D18(void)
+u32 fn_803C7D18(const void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x4);
 }
 
 asm void fn_803C7D20(void)
@@ -572,11 +568,9 @@ lbl_fn_803C7DF8_000005B4:
     blr
 }
 
-asm void fn_803C7F30(void)
+u32 fn_803C7F30(const void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x4);
 }
 
 asm void fn_803C7F38(void)
@@ -889,11 +883,9 @@ void fn_803C8330(void)
 {
 }
 
-asm void fn_803C8334(void)
+u32 fn_803C8334(const void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x4);
 }
 
 asm void fn_803C833C(void)
@@ -1056,11 +1048,9 @@ lbl_fn_803C83E8_00000BE8:
     blr
 }
 
-asm void fn_803C8564(void)
+u32 fn_803C8564(const void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x4);
 }
 
 asm void fn_803C856C(void)
@@ -1303,11 +1293,9 @@ lbl_fn_803C8810_00000F20:
     blr
 }
 
-asm void fn_803C8898(void)
+u32 fn_803C8898(const void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x4);
 }
 
 asm void fn_803C88A0(void)
@@ -1548,11 +1536,9 @@ void fn_803C8BB4(void)
 {
 }
 
-asm void fn_803C8BB8(void)
+u32 fn_803C8BB8(const void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x4);
 }
 
 asm void fn_803C8BC0(void)
@@ -1746,11 +1732,9 @@ lbl_fn_803C8C6C_000014E8:
     blr
 }
 
-asm void fn_803C8E64(void)
+u32 fn_803C8E64(const void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x4);
 }
 
 asm void fn_803C8E6C(void)
@@ -1923,11 +1907,9 @@ lbl_fn_803C8F18_00001740:
     blr
 }
 
-asm void fn_803C90BC(void)
+u32 fn_803C90BC(const void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x4);
 }
 
 asm void fn_803C90C4(void)

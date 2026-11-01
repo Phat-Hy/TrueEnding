@@ -46,7 +46,7 @@ extern void atn_LoadHandle_getName(void);
 extern void fn_804768D0(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
-extern void PSMTXMultVec(void);
+extern void PSMTXMultVec(const void *m, const void *src, void *dst);
 extern void PSMTX44Identity(void);
 extern void PSVECMag(void);
 extern void printf(void);
@@ -87,7 +87,7 @@ void vec3_toEulerAngles(void);
 void fn_80011220(void);
 void fn_8001122C(void);
 void fn_800112E0(void);
-void mtx_multVec(void);
+void mtx_multVec(void *v, const void *m);
 void fn_80011420(void);
 void fn_80011964(void);
 void fn_800119B8(void);
@@ -1476,13 +1476,9 @@ lbl_fn_800112E0_000012E0:
     blr
 }
 
-asm void mtx_multVec(void)
+void mtx_multVec(void *v, const void *m)
 {
-    nofralloc
-    mr r5, r3
-    mr r3, r4
-    mr r4, r5
-    b PSMTXMultVec
+    PSMTXMultVec(m, v, v);
 }
 
 asm void fn_80011420(void)

@@ -59,8 +59,8 @@ void fn_8013C460(void);
 void fn_8013C470(void);
 void fn_8013C478(void);
 void fn_8013C480(void);
-void npc_getDialogController(void);
-void fn_8013C50C(void);
+void *npc_getDialogController(const void *p);
+f32 fn_8013C50C(const void *p);
 void fn_8013C514(void);
 void fn_8013C53C(void);
 void fn_8013C544(void);
@@ -263,18 +263,14 @@ lbl_fn_8013C480_00000170:
     blr
 }
 
-asm void npc_getDialogController(void)
+void *npc_getDialogController(const void *p)
 {
-    nofralloc
-    lwz r3, 0x10d8(r3)
-    blr
+    return *(void **)((const char *)p + 0x10d8);
 }
 
-asm void fn_8013C50C(void)
+f32 fn_8013C50C(const void *p)
 {
-    nofralloc
-    lfs f1, 0x48(r3)
-    blr
+    return *(const f32 *)((const char *)p + 0x48);
 }
 
 asm void fn_8013C514(void)

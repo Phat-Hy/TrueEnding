@@ -90,7 +90,7 @@ void fn_800C122C(void);
 void fn_800C1424(void);
 void fn_800C1660(void);
 void fn_800C169C(void);
-void skeleton_getGlobalManager(void);
+u32 skeleton_getGlobalManager(void);
 void fn_800C16BC(void);
 void fn_800C16C0(void);
 void fn_800C1720(void);
@@ -444,11 +444,9 @@ lbl_fn_800C169C_00000480:
     blr
 }
 
-asm void skeleton_getGlobalManager(void)
+u32 skeleton_getGlobalManager(void)
 {
-    nofralloc
-    lwz r3, lbl_8087EFB8
-    blr
+    return lbl_8087EFB8;
 }
 
 void fn_800C16BC(void) {
