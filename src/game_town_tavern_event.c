@@ -12,7 +12,7 @@ extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void atn_LH_Texture_release(void);
 extern void fn_800D5908(void);
-extern void fn_800D59B8(void);
+extern void atn_LH_Texture_update(void);
 extern void fn_801F3FF8(void);
 extern void fn_801F4FF4(void);
 extern void fn_801F64D0(void);
@@ -1756,19 +1756,19 @@ asm void fn_803D1574(void)
     cmpwi r0, 0x0
     beq lbl_fn_803D1574_000019C8
     addi r3, r3, 0xdd4
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_803D1574_00001980
     addi r3, r27, 0xe04
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_803D1574_00001980
     addi r3, r27, 0xe34
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_803D1574_00001980
     addi r3, r27, 0xe64
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     beq lbl_fn_803D1574_00001984
 lbl_fn_803D1574_00001980:

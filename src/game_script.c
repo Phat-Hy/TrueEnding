@@ -54,17 +54,17 @@ extern void fn_80613C60(void);
 extern void fn_80613FF0(void);
 extern void fn_80614190(void);
 extern void fn_80614B20(void);
-extern void fn_80614C80(void);
-extern void fn_80614CC0(void);
-extern void fn_80614D00(void);
-extern void fn_80614D30(void);
+extern void GXSetDispCopySrc(void);
+extern void GXSetTexCopySrc(void);
+extern void GXSetDispCopyDst(void);
+extern void GXSetTexCopyDst(void);
 extern void fn_80614E90(void);
 extern void fn_806150C0(void);
 extern void fn_80615190(void);
 extern void fn_80615210(void);
 extern void fn_80615400(void);
-extern void fn_80615420(void);
-extern void fn_80615560(void);
+extern void GXCopyDisp(void);
+extern void GXCopyTex(void);
 extern void fn_80616400(void);
 extern void fn_806167B0(void);
 extern void fn_80617DA0(void);
@@ -3024,10 +3024,10 @@ lbl_fn_800713D4_000026B4:
     lhz r6, 0x6(r30)
     li r3, 0x0
     li r4, 0x0
-    bl fn_80614C80
+    bl GXSetDispCopySrc
     lhz r3, 0x4(r30)
     mr r4, r27
-    bl fn_80614D00
+    bl GXSetDispCopyDst
     lbz r3, 0x19(r30)
     addi r4, r30, 0x1a
     addi r6, r30, 0x32
@@ -3049,7 +3049,7 @@ lbl_fn_800713D4_00002930:
 lbl_fn_800713D4_0000293C:
     lwz r3, 0x74(r30)
     li r4, 0x1
-    bl fn_80615420
+    bl GXCopyDisp
     mr r3, r30
     bl fn_80604580
     lwz r3, 0x70(r30)
@@ -3331,7 +3331,7 @@ lbl_fn_80071AFC_00002CD0:
     bl fn_80615210
     lwz r3, 0x78(r27)
     li r4, 0x1
-    bl fn_80615420
+    bl GXCopyDisp
     bl fn_80613C60
     lhz r3, lbl_8087D738
     addi r0, r3, 0x1
@@ -3419,7 +3419,7 @@ asm void fn_80071D80(void)
     lwz r0, 0x40(r30)
     clrlwi r5, r5, 16
     clrlwi r6, r0, 16
-    bl fn_80614CC0
+    bl GXSetTexCopySrc
     mr r3, r31
     bl fn_80616400
     lwz r0, 0x40(r30)
@@ -3428,10 +3428,10 @@ asm void fn_80071D80(void)
     li r6, 0x0
     clrlwi r4, r0, 16
     clrlwi r3, r3, 16
-    bl fn_80614D30
+    bl GXSetTexCopyDst
     lwz r3, 0x28(r31)
     li r4, 0x0
-    bl fn_80615560
+    bl GXCopyTex
     bl fn_80614190
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

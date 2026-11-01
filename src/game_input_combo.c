@@ -46,7 +46,7 @@ extern void fn_802E89B0(void);
 extern void world_setLocalFlag(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_804DA490(void);
 extern void fn_804DA4A4(void);
 extern void fn_805F8E70(void);
@@ -1391,7 +1391,7 @@ lbl_fn_802EC9A8_000011D8:
     cmpwi r3, 0x0
     bne lbl_fn_802EC9A8_00001BC0
     addi r3, r15, 0x14d4
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_802EC9A8_00001BC0
     mr r3, r15

@@ -45,7 +45,7 @@ extern void fn_802348E4(void);
 extern void fn_8023686C(void);
 extern void fn_802368B0(void);
 extern void fn_80239AB4(void);
-extern void fn_80473F18(void);
+extern void atn_LoadHandle_getName(void);
 extern void fn_805F89F0(void);
 extern void fn_805F8E70(void);
 extern void fn_805F93C0(void);
@@ -980,7 +980,7 @@ lbl_fn_8023A680_00000B0C:
     beq lbl_fn_8023A680_00000B94
     addi r3, r20, 0x4
     li r29, 0x0
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     lis r4, lbl_8074308C@ha
     addi r4, r4, lbl_8074308C@l
     addi r4, r4, 0xd

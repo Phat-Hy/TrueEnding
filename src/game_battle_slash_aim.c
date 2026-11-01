@@ -25,7 +25,7 @@ extern void fn_800BFAC8(void);
 extern void fn_800C122C(void);
 extern void fn_800C2C20(void);
 extern void fn_800D5908(void);
-extern void fn_800D59B8(void);
+extern void atn_LH_Texture_update(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
 extern void fn_802180A8(void);
@@ -1051,7 +1051,7 @@ lbl_fn_803F5B48_00000E08:
     b lbl_fn_803F5B48_00000E74
 lbl_fn_803F5B48_00000E10:
     addi r3, r28, 0x6a0
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     beq lbl_fn_803F5B48_00000E28
     li r3, 0x1

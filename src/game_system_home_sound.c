@@ -68,13 +68,13 @@ extern void fn_80616250(void);
 extern void fn_806165B0(void);
 extern void fn_80617340(void);
 extern void fn_80617880(void);
-extern void fn_806179E0(void);
+extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
 extern void fn_80617E00(void);
 extern void fn_80618290(void);
-extern void fn_80618350(void);
-extern void fn_80618400(void);
-extern void fn_80618420(void);
+extern void GXLoadPosMtxImm(void);
+extern void GXSetCurrentMtx(void);
+extern void GXLoadTexMtxImm(void);
 extern void fn_80682428(void);
 extern void fn_80695AD0(void);
 extern void fn_80695D84(void);
@@ -1507,7 +1507,7 @@ lbl_fn_803646C4_00001278:
     addi r3, r1, 0x58
     li r4, 0x1e
     li r5, 0x1
-    bl fn_80618420
+    bl GXLoadTexMtxImm
     li r3, 0x1
     bl fn_80613BB0
     li r3, 0x0
@@ -1637,9 +1637,9 @@ lbl_fn_80364BE8_0000149C:
     bl fn_805F8980
     addi r3, r1, 0x8
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     li r3, 0x1
     li r4, 0x7
     li r5, 0x1
@@ -1647,7 +1647,7 @@ lbl_fn_80364BE8_0000149C:
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0x3
     bl fn_80617340

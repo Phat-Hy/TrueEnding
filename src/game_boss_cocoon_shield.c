@@ -49,14 +49,14 @@ extern void fn_8046FD2C(void);
 extern void fn_80470264(void);
 extern void fn_80470580(void);
 extern void fn_80473104(void);
-extern void fn_80473EFC(void);
+extern void atn_LoadHandle_getStatus(void);
 extern void fn_805F9EF0(void);
 extern void fn_805FA200(void);
 extern void fn_805FA390(void);
 extern void fn_805FA4E0(void);
 extern void fn_806250D0(void);
 extern void fn_80625110(void);
-extern void fn_806254D0(void);
+extern void CXUncompressAny(void);
 extern void fn_80680770(void);
 extern void fn_806823B0(void);
 extern void fn_806827C4(void);
@@ -449,7 +449,7 @@ lbl_fn_8046BBF0_0000047C:
     cmpwi r0, 0x0
     bne lbl_fn_8046BBF0_000004C0
     lwz r4, 0x8(r30)
-    bl fn_806254D0
+    bl CXUncompressAny
     b lbl_fn_8046BBF0_000004CC
 lbl_fn_8046BBF0_000004C0:
     mr r4, r3
@@ -968,7 +968,7 @@ lbl_fn_8046C2D4_00000BC8:
     mr r4, r3
     beq lbl_fn_8046C2D4_00000BF8
     mr r4, r28
-    bl fn_806254D0
+    bl CXUncompressAny
     mr r3, r28
     mr r4, r29
     bl DCFlushRangeNoSync
@@ -1048,7 +1048,7 @@ lbl_fn_8046C3FC_00000CD0:
     lwz r20, 0x8(r30)
     li r21, 0x0
     addi r3, r20, 0x10
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_8046C3FC_00000D14
     addi r3, r20, 0x10

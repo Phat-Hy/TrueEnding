@@ -21,16 +21,16 @@ extern void fn_806134E0(void);
 extern void fn_80613520(void);
 extern void fn_80614190(void);
 extern void fn_80614790(void);
-extern void fn_80614CC0(void);
-extern void fn_80614D30(void);
-extern void fn_80615560(void);
+extern void GXSetTexCopySrc(void);
+extern void GXSetTexCopyDst(void);
+extern void GXCopyTex(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
 extern void fn_80617A10(void);
 extern void fn_806180B0(void);
 extern void fn_80618290(void);
-extern void fn_80618350(void);
-extern void fn_80618400(void);
+extern void GXLoadPosMtxImm(void);
+extern void GXSetCurrentMtx(void);
 extern void fn_806185A0(void);
 extern void fn_80695D84(void);
 
@@ -1463,9 +1463,9 @@ lbl_fn_800BFCB4_000011A8:
     bl fn_805F8980
     addi r3, r1, 0x30
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     li r3, 0x80
     li r4, 0x0
     li r5, 0x4
@@ -1585,15 +1585,15 @@ asm void fn_800C0508(void)
     lwz r31, 0x3c(r5)
     clrlwi r6, r30, 16
     clrlwi r5, r31, 16
-    bl fn_80614CC0
+    bl GXSetTexCopySrc
     clrlwi r3, r31, 16
     clrlwi r4, r30, 16
     li r5, 0x6
     li r6, 0x0
-    bl fn_80614D30
+    bl GXSetTexCopyDst
     lwz r3, 0x774(r28)
     clrlwi r4, r29, 24
-    bl fn_80615560
+    bl GXCopyTex
     bl fn_80614190
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1623,15 +1623,15 @@ asm void fn_800C0590(void)
     li r4, 0x0
     clrlwi r5, r31, 16
     clrlwi r6, r30, 16
-    bl fn_80614CC0
+    bl GXSetTexCopySrc
     mr r5, r29
     clrlwi r3, r31, 16
     clrlwi r4, r30, 16
     li r6, 0x0
-    bl fn_80614D30
+    bl GXSetTexCopyDst
     lwz r3, 0x79c(r27)
     clrlwi r4, r28, 24
-    bl fn_80615560
+    bl GXCopyTex
     bl fn_80614190
     cmpwi r29, 0x16
     beq lbl_fn_800C0590_00001560

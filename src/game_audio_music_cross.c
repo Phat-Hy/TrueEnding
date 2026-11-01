@@ -15,7 +15,7 @@ extern void fn_80013338(void);
 extern void fn_80013410(void);
 extern void fn_800846FC(void);
 extern void fn_80084C24(void);
-extern void fn_8008CCE8(void);
+extern void atn_Matrix_copy_2(void);
 extern void fn_80092814(void);
 extern void fn_80097C08(void);
 extern void fn_80097D7C(void);
@@ -482,7 +482,7 @@ lbl_fn_8030C490_00000528:
 lbl_fn_8030C490_0000053C:
     mr r4, r3
     addi r3, r1, 0x198
-    bl fn_8008CCE8
+    bl atn_Matrix_copy_2
     addi r3, r1, 0x98
     addi r4, r1, 0x198
     bl fn_8000D0F8
@@ -588,10 +588,10 @@ lbl_fn_8030C490_0000069C:
     beq lbl_fn_8030C490_000007E8
     addi r3, r1, 0x138
     addi r4, r1, 0x168
-    bl fn_8008CCE8
+    bl atn_Matrix_copy_2
     addi r3, r1, 0x108
     addi r4, r1, 0x168
-    bl fn_8008CCE8
+    bl atn_Matrix_copy_2
     lfs f1, lbl_80884BAC
     addi r3, r1, 0x5c
     lfs f3, lbl_80884BA8
@@ -641,7 +641,7 @@ lbl_fn_8030C490_0000077C:
     beq lbl_fn_8030C490_000007E8
     addi r3, r1, 0xd8
     addi r4, r1, 0x168
-    bl fn_8008CCE8
+    bl atn_Matrix_copy_2
     lfs f1, lbl_80884BAC
     addi r3, r1, 0x44
     lfs f3, lbl_80884BA8

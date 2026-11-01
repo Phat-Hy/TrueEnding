@@ -41,7 +41,7 @@ extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_8049D52C(void);
 extern void fn_8061E760(void);
 extern void fn_8061E940(void);
@@ -1873,7 +1873,7 @@ asm void fn_803B91DC(void)
     b lbl_fn_803B91DC_00001834
 lbl_fn_803B91DC_00001748:
     addi r3, r3, 0x50
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_803B91DC_00001760
     li r3, 0x0
@@ -1915,7 +1915,7 @@ lbl_fn_803B91DC_000017D4:
     b lbl_fn_803B91DC_00001838
 lbl_fn_803B91DC_000017DC:
     addi r3, r29, 0x58
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_803B91DC_000017F4
     li r3, 0x0
@@ -1926,7 +1926,7 @@ lbl_fn_803B91DC_000017F4:
     b lbl_fn_803B91DC_00001820
 lbl_fn_803B91DC_00001800:
     mr r3, r31
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_803B91DC_00001818
     li r3, 0x0

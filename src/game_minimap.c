@@ -22,7 +22,7 @@ extern void fn_80095300(void);
 extern void fn_800BDB58(void);
 extern void fn_800C0A50(void);
 extern void fn_800C122C(void);
-extern void fn_80473F18(void);
+extern void atn_LoadHandle_getName(void);
 extern void fn_80476130(void);
 extern void fn_80476194(void);
 extern void fn_804761B0(void);
@@ -56,9 +56,9 @@ void fn_8008C850(void);
 void fn_8008C950(void);
 void atn_AABB_getMax(void);
 void atn_AABB_getMin(void);
-void fn_8008CCE8(void);
-void fn_8008CD1C(void);
-void fn_8008CD50(void);
+void atn_Matrix_copy_2(void);
+void atn_Matrix_copy(void);
+void atn_Matrix_concat(void);
 void fn_8008CD60(void);
 void fn_8008D6C0(void);
 void fn_8008D784(void);
@@ -205,7 +205,7 @@ lbl_fn_8008C950_000001BC:
     cmpwi r0, 0x1800
     ble lbl_fn_8008C950_0000020C
     addi r3, r30, 0x164
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     lwz r4, 0x8(r31)
     lis r7, lbl_80732368@ha
     mr r5, r3
@@ -415,7 +415,7 @@ asm void atn_AABB_getMin(void)
     blr
 }
 
-asm void fn_8008CCE8(void)
+asm void atn_Matrix_copy_2(void)
 {
     nofralloc
     psq_l f1, 0x0(r4), 0, 0
@@ -433,7 +433,7 @@ asm void fn_8008CCE8(void)
     blr
 }
 
-asm void fn_8008CD1C(void)
+asm void atn_Matrix_copy(void)
 {
     nofralloc
     psq_l f1, 0x0(r4), 0, 0
@@ -451,7 +451,7 @@ asm void fn_8008CD1C(void)
     blr
 }
 
-asm void fn_8008CD50(void)
+asm void atn_Matrix_concat(void)
 {
     nofralloc
     mr r0, r3

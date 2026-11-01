@@ -30,9 +30,9 @@ extern void fn_80615D20(void);
 extern void fn_80615D50(void);
 extern void fn_80617340(void);
 extern void fn_80617880(void);
-extern void fn_806179E0(void);
+extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
-extern void fn_80618350(void);
+extern void GXLoadPosMtxImm(void);
 extern void fn_8061A0F0(void);
 extern void fn_8061A100(void);
 
@@ -607,7 +607,7 @@ asm void fn_805C03A0(void)
     li r3, 0x0
     bl fn_80613BB0
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0x4
     bl fn_80617340
@@ -629,7 +629,7 @@ asm void fn_805C03A0(void)
     bl fn_805F90D0
     addi r3, r1, 0x8
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     mr r3, r30
     li r4, 0x0
     bl fn_806149C0

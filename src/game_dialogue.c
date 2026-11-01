@@ -17,10 +17,10 @@ struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct 
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
 extern void fn_800D594C(void);
-extern void fn_800D59B8(void);
+extern void atn_LH_Texture_update(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
-extern void fn_80473EFC(void);
+extern void atn_LoadHandle_getStatus(void);
 extern void fn_80478198(void);
 extern void fn_80616250(void);
 extern void fn_80616360(void);
@@ -134,11 +134,11 @@ asm void fn_8007B100(void)
     cmpwi r0, 0x0
     bne lbl_fn_8007B100_000000E0
     mr r3, r30
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_8007B100_000000E4
     addi r3, r30, 0x20
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_8007B100_000000E4
 lbl_fn_8007B100_000000E0:

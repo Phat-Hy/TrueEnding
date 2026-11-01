@@ -60,7 +60,7 @@ extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_805F8E70(void);
 extern void fn_805F9750(void);
 extern void fn_805F98D0(void);
@@ -1907,7 +1907,7 @@ lbl_fn_8025CEF8_00001960:
     cmpwi r3, 0x0
     bne lbl_fn_8025CEF8_00001A08
     addi r3, r31, 0x14b0
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_8025CEF8_00001A08
     lwz r4, 0x7ec(r31)

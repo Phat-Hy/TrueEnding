@@ -59,8 +59,8 @@ extern void fn_805F89F0(void);
 extern void fn_805F8E70(void);
 extern void fn_805F9110(void);
 extern void fn_805F9160(void);
-extern void fn_80618350(void);
-extern void fn_80618400(void);
+extern void GXLoadPosMtxImm(void);
+extern void GXSetCurrentMtx(void);
 extern void fn_8061A0F0(void);
 extern void fn_8061A100(void);
 extern void fn_806958E0(void);
@@ -1044,9 +1044,9 @@ lbl_fn_805D3A90_00000C10:
     addi r3, r3, 0x84
 lbl_fn_805D3A90_00000C14:
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     mtlr r0

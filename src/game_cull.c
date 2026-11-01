@@ -24,7 +24,7 @@ extern void atn_Task_constructor(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
-extern void fn_800D59B8(void);
+extern void atn_LH_Texture_update(void);
 extern void fn_800D5B58(void);
 extern void fn_800D71A4(void);
 extern void fn_800D71D4(void);
@@ -847,14 +847,14 @@ asm void fn_800D8F5C(void)
     cmpwi r0, 0x0
     bne lbl_fn_800D8F5C_000009A4
     addi r3, r3, 0x198
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     mr r30, r3
     addi r31, r28, 0x1c8
     li r29, 0x0
     b lbl_fn_800D8F5C_00000990
 lbl_fn_800D8F5C_0000097C:
     mr r3, r31
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     or r30, r30, r3
     addi r31, r31, 0x30
     addi r29, r29, 0x1

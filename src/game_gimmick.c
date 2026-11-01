@@ -22,14 +22,14 @@ extern void atn_LH_Texture_destructAndFree(void);
 extern void atn_LH_Texture_release(void);
 extern void fn_800D5908(void);
 extern void fn_800D594C(void);
-extern void fn_800D59B8(void);
+extern void atn_LH_Texture_update(void);
 extern void fn_800DC978(void);
 extern void fn_8046F544(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_80473FCC(void);
 extern void fn_805F93C0(void);
@@ -1359,14 +1359,14 @@ lbl_fn_8006D3F8_00001134:
     li r25, 0x1
 lbl_fn_8006D3F8_00001140:
     mr r3, r30
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     beq lbl_fn_8006D3F8_00001158
     li r3, 0x1
     b lbl_fn_8006D3F8_00001238
 lbl_fn_8006D3F8_00001158:
     mr r3, r31
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_8006D3F8_00001170
     li r3, 0x1

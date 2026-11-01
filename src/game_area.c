@@ -28,14 +28,14 @@ extern void fn_800A08E0(void);
 extern void fn_800C49F0(void);
 extern void fn_800C4E50(void);
 extern void atn_LH_Texture_release(void);
-extern void fn_800D59B8(void);
+extern void atn_LH_Texture_update(void);
 extern void fn_800D87C4(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
 extern void fn_800DC6B4(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_80473EFC(void);
+extern void atn_LoadHandle_getStatus(void);
 extern void fn_80473F88(void);
 extern void fn_80682428(void);
 extern void fn_80695720(void);
@@ -794,11 +794,11 @@ lbl_fn_80089B5C_0000080C:
     cmpwi r0, 0x0
     bne lbl_fn_80089B5C_00000850
     mr r3, r28
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_80089B5C_00000854
     addi r3, r28, 0x20
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_80089B5C_00000854
 lbl_fn_80089B5C_00000850:

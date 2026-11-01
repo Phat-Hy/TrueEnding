@@ -15,7 +15,7 @@ extern void fn_8003EFB0(void);
 extern void fn_8004D388(void);
 extern void fn_8004ED34(void);
 extern void fn_8005361C(void);
-extern void fn_8008CCE8(void);
+extern void atn_Matrix_copy_2(void);
 extern void fn_800C344C(void);
 extern void fn_800CB3A0(void);
 extern void atn_Task_destructor(void);
@@ -709,7 +709,7 @@ asm void fn_8010F4BC(void)
     bl fn_8000D0F8
     mr r4, r31
     addi r3, r1, 0xb0
-    bl fn_8008CCE8
+    bl atn_Matrix_copy_2
     addi r3, r1, 0xb0
     bl fn_8010F668
     lfs f1, lbl_80881640
@@ -738,7 +738,7 @@ lbl_fn_8010F4BC_000008AC:
     beq lbl_fn_8010F4BC_0000095C
     mr r4, r31
     addi r3, r1, 0x80
-    bl fn_8008CCE8
+    bl atn_Matrix_copy_2
     mr r5, r31
     addi r3, r1, 0x5c
     addi r4, r30, 0x8

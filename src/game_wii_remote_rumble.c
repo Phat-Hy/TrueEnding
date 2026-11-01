@@ -28,8 +28,8 @@ extern void fn_80013338(void);
 extern void fn_80013410(void);
 extern void fn_80057A68(void);
 extern void fn_800844D8(void);
-extern void fn_8008CCE8(void);
-extern void fn_8008CD1C(void);
+extern void atn_Matrix_copy_2(void);
+extern void atn_Matrix_copy(void);
 extern void fn_800928B0(void);
 extern void fn_800F7FF0(void);
 extern void fn_8010F668(void);
@@ -389,7 +389,7 @@ lbl_fn_80551198_000003A4:
 lbl_fn_80551198_000003DC:
     mr r4, r24
     addi r3, r1, 0x390
-    bl fn_8008CCE8
+    bl atn_Matrix_copy_2
     addi r3, r1, 0xf8
     addi r4, r1, 0x390
     bl fn_8000D0F8
@@ -514,7 +514,7 @@ lbl_fn_80551198_0000057C:
 lbl_fn_80551198_000005AC:
     mr r4, r24
     addi r3, r1, 0x330
-    bl fn_8008CCE8
+    bl atn_Matrix_copy_2
     addi r3, r1, 0x330
     bl fn_8010F668
     cmpwi r28, 0x0
@@ -547,7 +547,7 @@ lbl_fn_80551198_0000061C:
     bl fn_80551EA0
     addi r3, r1, 0x360
     addi r4, r1, 0x2a0
-    bl fn_8008CD1C
+    bl atn_Matrix_copy
     addi r3, r1, 0x360
     addi r4, r1, 0x248
     bl fn_801479E4
@@ -729,7 +729,7 @@ lbl_fn_80551198_00000894:
     bl fn_8000D124
     mr r4, r24
     addi r3, r1, 0x300
-    bl fn_8008CCE8
+    bl atn_Matrix_copy_2
     addi r3, r1, 0x300
     bl fn_8010F668
     mr r3, r30
@@ -915,7 +915,7 @@ lbl_fn_80551198_00000B8C:
     bl fn_80551EA0
     addi r3, r1, 0x2d0
     addi r4, r1, 0x270
-    bl fn_8008CD1C
+    bl atn_Matrix_copy
 lbl_fn_80551198_00000BB4:
     mr r3, r31
     mr r4, r28

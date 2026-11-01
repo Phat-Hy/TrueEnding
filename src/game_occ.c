@@ -25,9 +25,9 @@ extern void fn_80613BB0(void);
 extern void fn_80613C60(void);
 extern void fn_806140C0(void);
 extern void fn_80614190(void);
-extern void fn_80614CC0(void);
-extern void fn_80614D30(void);
-extern void fn_80615560(void);
+extern void GXSetTexCopySrc(void);
+extern void GXSetTexCopyDst(void);
+extern void GXCopyTex(void);
 extern void fn_80615D20(void);
 extern void fn_80615E00(void);
 extern void fn_806163C0(void);
@@ -41,12 +41,12 @@ extern void fn_80617420(void);
 extern void fn_80617460(void);
 extern void fn_806174C0(void);
 extern void fn_806175F0(void);
-extern void fn_80617650(void);
-extern void fn_806176A0(void);
-extern void fn_806176F0(void);
+extern void GXSetTevKColorSel(void);
+extern void GXSetTevKAlphaSel(void);
+extern void GXSetTevSwapMode(void);
 extern void fn_80617730(void);
 extern void fn_80617880(void);
-extern void fn_806179E0(void);
+extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
 extern void fn_80617E00(void);
 
@@ -527,28 +527,28 @@ lbl_tex_bakeCharacterTexture_0000061C:
     clrlwi r6, r23, 16
     li r3, 0x0
     li r4, 0x0
-    bl fn_80614CC0
+    bl GXSetTexCopySrc
     mr r5, r26
     clrlwi r3, r24, 16
     clrlwi r4, r23, 16
     li r6, 0x0
-    bl fn_80614D30
+    bl GXSetTexCopyDst
     b lbl_tex_bakeCharacterTexture_00000684
 lbl_tex_bakeCharacterTexture_0000065C:
     clrlslwi r5, r24, 17, 1
     clrlslwi r6, r23, 17, 1
     li r3, 0x0
     li r4, 0x0
-    bl fn_80614CC0
+    bl GXSetTexCopySrc
     mr r5, r26
     clrlwi r3, r24, 16
     clrlwi r4, r23, 16
     li r6, 0x1
-    bl fn_80614D30
+    bl GXSetTexCopyDst
 lbl_tex_bakeCharacterTexture_00000684:
     mr r3, r22
     li r4, 0x1
-    bl fn_80615560
+    bl GXCopyTex
     bl fn_806167B0
     bl fn_80614190
     bl fn_80613C60
@@ -738,7 +738,7 @@ asm void fn_800D775C(void)
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x5
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     bl fn_80617200
     lwz r3, lbl_8087EEE0
@@ -870,10 +870,10 @@ asm void fn_800D775C(void)
     li r3, 0x0
     li r4, 0x1
     li r5, 0x1
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0x11
-    bl fn_80617650
+    bl GXSetTevKColorSel
     li r3, 0x0
     li r4, 0xf
     li r5, 0xe
@@ -896,7 +896,7 @@ asm void fn_800D775C(void)
     bl fn_80617220
     li r3, 0x0
     li r4, 0x11
-    bl fn_806176A0
+    bl GXSetTevKAlphaSel
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -913,10 +913,10 @@ asm void fn_800D775C(void)
     li r3, 0x1
     li r4, 0x2
     li r5, 0x2
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x1
     li r4, 0x15
-    bl fn_80617650
+    bl GXSetTevKColorSel
     li r3, 0x1
     li r4, 0xf
     li r5, 0xe
@@ -939,7 +939,7 @@ asm void fn_800D775C(void)
     bl fn_80617220
     li r3, 0x1
     li r4, 0x15
-    bl fn_806176A0
+    bl GXSetTevKAlphaSel
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -956,10 +956,10 @@ asm void fn_800D775C(void)
     li r3, 0x2
     li r4, 0x3
     li r5, 0x3
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x2
     li r4, 0x19
-    bl fn_80617650
+    bl GXSetTevKColorSel
     li r3, 0x2
     li r4, 0xf
     li r5, 0xe
@@ -982,7 +982,7 @@ asm void fn_800D775C(void)
     bl fn_80617220
     li r3, 0x2
     li r4, 0x19
-    bl fn_806176A0
+    bl GXSetTevKAlphaSel
     li r3, 0x2
     li r4, 0x0
     li r5, 0x0
@@ -999,7 +999,7 @@ asm void fn_800D775C(void)
     li r3, 0x3
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x3
     li r4, 0xf
     li r5, 0x8
@@ -1036,10 +1036,10 @@ asm void fn_800D775C(void)
     li r3, 0x4
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x4
     li r4, 0xc
-    bl fn_80617650
+    bl GXSetTevKColorSel
     li r3, 0x4
     li r4, 0xf
     li r5, 0xe
@@ -1104,7 +1104,7 @@ asm void fn_800D7D00(void)
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     bl fn_80617200
     li r3, 0x0
@@ -1174,11 +1174,11 @@ asm void fn_800D7D00(void)
     bl fn_806175F0
     li r3, 0x0
     li r4, 0xc
-    bl fn_80617650
+    bl GXSetTevKColorSel
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0xf
     li r5, 0x8
@@ -1243,7 +1243,7 @@ asm void fn_800D7F18(void)
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     bl fn_80617200
     li r3, 0x0
@@ -1295,11 +1295,11 @@ asm void fn_800D7F18(void)
     bl fn_806175F0
     li r3, 0x0
     li r4, 0xc
-    bl fn_80617650
+    bl GXSetTevKColorSel
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0xf
     li r5, 0x8

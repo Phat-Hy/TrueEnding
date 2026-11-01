@@ -38,7 +38,7 @@ extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_805B9ECC(void);
 extern void fn_805BE380(void);
@@ -348,7 +348,7 @@ asm void fn_805BC9F4(void)
     cmpwi r0, 0x0
     beq lbl_fn_805BC9F4_00000380
     addi r3, r3, 0x5c
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_805BC9F4_00000610
     li r0, 0x0

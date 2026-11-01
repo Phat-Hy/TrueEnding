@@ -33,7 +33,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800D59B8(void);
+extern void atn_LH_Texture_update(void);
 extern void fn_800E0000(void);
 extern void fn_800EE794(void);
 extern void fn_801231D0(void);
@@ -178,7 +178,7 @@ asm void fn_805A6404(void)
     li r29, 0x0
 lbl_fn_805A6404_00000024:
     mr r3, r31
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     beq lbl_fn_805A6404_00000038
     li r30, 0x0

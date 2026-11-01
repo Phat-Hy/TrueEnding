@@ -493,3 +493,41 @@ Decompiled: none in this unit
 Notes:    Names the 12 routines responsible for the 64 raw reader PCs detected during Track B MEM2 heap probe. Turns anonymous guest heap readers into identifiable model, curve, animation, and bounding box operations.
 Next:     A2 decompilation of fn_802189EC (task-manager constructor, 456 B)
 
+
+### 2026-11-01 - Batch 11: Top High-Frequency Queue Routines (29 routines, 3,582 logged hits)
+
+Numbers:  progress before -> after: 99.30 % -> 99.30 % (7,425,512 / 7,477,608 bytes, 18,054 / 18,155 functions)
+Self-check: git diff -U0 -- src/ for `asm void`: -29 / +29 (net 0 conversions, 29 renames)
+Named:
+- fn_806255E0 -> CXUncompressLZ (Queue #1, 970 hits: Nintendo SDK LZ77 decompressor in src/scapi.c)
+- fn_806254D0 -> CXUncompressAny (Queue #1 dispatch: checks compression header 0x10/0x20/0x30/0x80 and routes to LZ/Huffman/RL/Diff)
+- fn_80625730 -> CXUncompressHuffman (Nintendo SDK Huffman decompressor in src/scapi.c)
+- fn_80625890 -> CXUnfilterDiff (Nintendo SDK differential 8-bit filter in src/scapi.c)
+- fn_80615560 -> GXCopyTex (Queue #2, 609 hits: EFB copy to texture in src/GXFrameBuf.c)
+- fn_80615420 -> GXCopyDisp (Queue #12, display copy to XFB in src/GXFrameBuf.c)
+- fn_80614C80 -> GXSetDispCopySrc (src/GXFrameBuf.c)
+- fn_80614CC0 -> GXSetTexCopySrc (src/GXFrameBuf.c)
+- fn_80614D00 -> GXSetDispCopyDst (src/GXFrameBuf.c)
+- fn_80614D30 -> GXSetTexCopyDst (src/GXFrameBuf.c)
+- fn_806179E0 -> GXSetNumTevStages (Queue #11, 240 hits: sets TEV stage count and dirtyState |= 0x4 in src/GXTev.c)
+- fn_80617650 -> GXSetTevKColorSel (Queue #15, 233 hits: sets TEV konst color selection in src/GXTev.c)
+- fn_806176A0 -> GXSetTevKAlphaSel (sets TEV konst alpha selection in src/GXTev.c)
+- fn_806176F0 -> GXSetTevSwapMode (sets TEV swap mode table in src/GXTev.c)
+- fn_80618350 -> GXLoadPosMtxImm (Queue #16, 230 hits: loads 3x4 position matrix into XF register in src/GXTev.c)
+- fn_806183A0 -> GXLoadNrmMtxImm3x3 (Queue #24, 9 hits: loads 3x3 normal matrix into XF register in src/GXTev.c)
+- fn_80618400 -> GXSetCurrentMtx (sets current matrix index in __GXData in src/GXTev.c)
+- fn_80618420 -> GXLoadTexMtxImm (Queue #26, 7 hits: loads texture matrix into XF register in src/GXTev.c)
+- fn_8008CD1C -> atn_Matrix_copy (Queue #14, 234 hits: 48-byte paired-single matrix copy in src/game_minimap.c)
+- fn_8008CCE8 -> atn_Matrix_copy_2 (inlined matrix copy helper in src/game_minimap.c)
+- fn_8008CD50 -> atn_Matrix_concat (swaps operands and tails into PSMTXConcat in src/game_minimap.c)
+- fn_80206F44 -> weaponEffect_loadCSV (Queue #5, 375 hits: loads /boot/weapon_effect.csv in src/game_system_assert.c)
+- fn_800954DC -> atn_Lockon_updateTargetTextures (Queue #3, 440 hits: lockon target texture handle manager calling atn_LH_Texture_destructAndFree)
+- fn_800D59B8 -> atn_LH_Texture_update (Queue #13, 235 hits: checks atn_LoadHandle_isLoading and status == 3 in src/game_depth.c)
+- fn_80473EFC -> atn_LoadHandle_getStatus (returns status byte at m_entry + 0x4 in src/game_boss_cocoon_shockwave.c)
+- fn_80473F18 -> atn_LoadHandle_getName (returns name string at m_entry + 0x6 in src/game_boss_cocoon_shockwave.c)
+- fn_80473F34 -> atn_LoadHandle_getData (returns resource data pointer at m_entry + 0x48 in src/game_boss_cocoon_shockwave.c)
+- fn_80473F50 -> atn_LoadHandle_isLoading (returns 1 if status == 1 or status == 2 in src/game_boss_cocoon_shockwave.c)
+- fn_80083614 -> atn_SmallAllocator_allocate (Queue #4, 391 hits: SmallAllocator<6> virtual allocate method at 0x80778590[1])
+Decompiled: none in this unit (renames only)
+Notes:    All 29 symbols directly selected from Track B's probe log hit ranking in docs/TRACK_A_QUEUE.md. Covers 3,582 logged probe hits. Normalized local labels in 18 files. Zero build errors or byte differences across all 1,025 compilation units.
+Next:     Conversion of A2 targets or high-frequency SDK helpers to matching C.

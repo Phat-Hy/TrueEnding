@@ -24,7 +24,7 @@ extern u32 lbl_8087EF08;
 
 /* Function declarations */
 void fn_800832AC(void);
-void fn_80083614(void);
+void atn_SmallAllocator_allocate(void);
 void fn_80083760(void);
 void fn_800838AC(void);
 void fn_800838B8(void);
@@ -275,18 +275,18 @@ lbl_fn_800832AC_00000354:
     blr
 }
 
-asm void fn_80083614(void)
+asm void atn_SmallAllocator_allocate(void)
 {
     nofralloc
     lwz r9, 0x8(r3)
     mr r5, r9
-    b lbl_fn_80083614_00000378
-lbl_fn_80083614_00000374:
+    b lbl_atn_SmallAllocator_allocate_00000378
+lbl_atn_SmallAllocator_allocate_00000374:
     addi r5, r5, 0x8
-lbl_fn_80083614_00000378:
+lbl_atn_SmallAllocator_allocate_00000378:
     lwz r0, 0x0(r5)
     cmplw r0, r4
-    blt lbl_fn_80083614_00000374
+    blt lbl_atn_SmallAllocator_allocate_00000374
     lwz r4, 0xc(r3)
     subf r0, r9, r5
     srawi r6, r0, 3
@@ -305,19 +305,19 @@ lbl_fn_80083614_00000378:
     slwi r4, r4, 2
     lwz r7, 0x10(r7)
     add r6, r6, r4
-    b lbl_fn_80083614_000004A4
-lbl_fn_80083614_000003D0:
+    b lbl_atn_SmallAllocator_allocate_000004A4
+lbl_atn_SmallAllocator_allocate_000003D0:
     lwz r8, 0x0(r7)
     addis r4, r8, 0x1
     cmplwi r4, 0xffff
-    beq lbl_fn_80083614_000004A0
+    beq lbl_atn_SmallAllocator_allocate_000004A0
     li r9, 0x0
     mtctr r0
-lbl_fn_80083614_000003E8:
+lbl_atn_SmallAllocator_allocate_000003E8:
     slw r10, r5, r9
     and r4, r10, r8
     cmplw r10, r4
-    beq lbl_fn_80083614_00000498
+    beq lbl_atn_SmallAllocator_allocate_00000498
     lwz r0, 0x0(r7)
     li r5, 0x0
     li r6, 0x0
@@ -329,18 +329,18 @@ lbl_fn_80083614_000003E8:
     srawi r0, r0, 2
     mr r7, r10
     addze r8, r0
-    b lbl_fn_80083614_00000440
-lbl_fn_80083614_00000428:
+    b lbl_atn_SmallAllocator_allocate_00000440
+lbl_atn_SmallAllocator_allocate_00000428:
     add r4, r10, r6
     addi r6, r6, 0x8
     lwz r0, 0x4(r4)
     addi r7, r7, 0x8
     addi r5, r5, 0x1
     subf r8, r0, r8
-lbl_fn_80083614_00000440:
+lbl_atn_SmallAllocator_allocate_00000440:
     lwz r0, 0x4(r7)
     cmplw r8, r0
-    bge lbl_fn_80083614_00000428
+    bge lbl_atn_SmallAllocator_allocate_00000428
     slwi r4, r5, 4
     slwi r0, r5, 3
     add r7, r3, r4
@@ -356,19 +356,19 @@ lbl_fn_80083614_00000440:
     add r3, r6, r5
     cmpw r9, r0
     add r3, r4, r3
-    ble lbl_fn_80083614_00000490
+    ble lbl_atn_SmallAllocator_allocate_00000490
     mr r0, r9
-lbl_fn_80083614_00000490:
+lbl_atn_SmallAllocator_allocate_00000490:
     stw r0, 0x1c(r7)
     blr
-lbl_fn_80083614_00000498:
+lbl_atn_SmallAllocator_allocate_00000498:
     addi r9, r9, 0x1
-    bdnz lbl_fn_80083614_000003E8
-lbl_fn_80083614_000004A0:
+    bdnz lbl_atn_SmallAllocator_allocate_000003E8
+lbl_atn_SmallAllocator_allocate_000004A0:
     addi r7, r7, 0x4
-lbl_fn_80083614_000004A4:
+lbl_atn_SmallAllocator_allocate_000004A4:
     cmplw r7, r6
-    bne lbl_fn_80083614_000003D0
+    bne lbl_atn_SmallAllocator_allocate_000003D0
     li r3, 0x0
     blr
 }

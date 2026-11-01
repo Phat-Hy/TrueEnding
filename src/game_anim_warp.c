@@ -16,8 +16,8 @@ extern void fn_80013338(void);
 extern void fn_80013410(void);
 extern void fn_8004D124(void);
 extern void fn_8004ED34(void);
-extern void fn_8008CCE8(void);
-extern void fn_8008CD1C(void);
+extern void atn_Matrix_copy_2(void);
+extern void atn_Matrix_copy(void);
 extern void fn_80092814(void);
 extern void fn_800C344C(void);
 extern void fn_800CB3A0(void);
@@ -1578,10 +1578,10 @@ lbl_fn_80279280_0000151C:
     bl fn_800132EC
     mr r4, r3
     addi r3, r1, 0xf8
-    bl fn_8008CCE8
+    bl atn_Matrix_copy_2
     addi r3, r25, 0x28
     addi r4, r1, 0xf8
-    bl fn_8008CD1C
+    bl atn_Matrix_copy
     lwz r0, 0xc(r25)
     li r29, 0x0
     cmpwi r0, 0x0

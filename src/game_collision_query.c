@@ -31,7 +31,7 @@ extern void fn_8023A254(void);
 extern void fn_8023A8B4(void);
 extern void fn_8036554C(void);
 extern void world_setGlobalFlag(void);
-extern void fn_80473F18(void);
+extern void atn_LoadHandle_getName(void);
 extern void fn_8054D798(void);
 extern void fn_8067E23C(void);
 extern u32 strlen(const char* str);
@@ -1523,7 +1523,7 @@ asm void fn_80106878(void)
     bl fn_80097D40
     cmpwi r3, 0x0
     beq lbl_fn_80106878_00001BA0
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     li r0, 0x0
     stw r0, 0xc8(r1)
     mr r26, r3

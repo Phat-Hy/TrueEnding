@@ -22,8 +22,8 @@ extern void fn_800C2448(void);
 extern void fn_800C2520(void);
 struct atn_LoadHandle; extern void atn_LoadHandle_constructor(void*);
 extern void atn_LoadHandle_destructor(void*, int);
-extern void fn_80473EFC(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_getStatus(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void*);
 extern void fn_80473FCC(void);
 extern void fn_80478158(void);
@@ -95,7 +95,7 @@ atn_LH_Texture* atn_LH_Texture_destructAndFree(atn_LH_Texture* this, int flags);
 void atn_LH_Texture_release(atn_LH_Texture* this);
 void fn_800D5908(void);
 void fn_800D594C(void);
-void fn_800D59B8(void);
+void atn_LH_Texture_update(void);
 void fn_800D5A3C(void);
 void fn_800D5B58(void);
 void fn_800D5C84(void);
@@ -220,7 +220,7 @@ asm void fn_800D594C(void)
     li r0, 0x0
     stb r0, 0x2c(r31)
     addi r3, r31, 0x20
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_800D594C_000002E0
     lbz r5, 0x2d(r31)
@@ -240,7 +240,7 @@ lbl_fn_800D594C_000002E0:
     blr
 }
 
-asm void fn_800D59B8(void)
+asm void atn_LH_Texture_update(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -249,19 +249,19 @@ asm void fn_800D59B8(void)
     stw r31, 0xc(r1)
     mr r31, r3
     addi r3, r3, 0x20
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
-    beq lbl_fn_800D59B8_00000320
+    beq lbl_atn_LH_Texture_update_00000320
     li r3, 0x1
-    b lbl_fn_800D59B8_00000364
-lbl_fn_800D59B8_00000320:
+    b lbl_atn_LH_Texture_update_00000364
+lbl_atn_LH_Texture_update_00000320:
     lbz r0, 0x2c(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_800D59B8_00000360
+    bne lbl_atn_LH_Texture_update_00000360
     addi r3, r31, 0x20
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
-    bne lbl_fn_800D59B8_00000360
+    bne lbl_atn_LH_Texture_update_00000360
     lbz r5, 0x2d(r31)
     li r0, 0x1
     lbz r6, 0x2e(r31)
@@ -271,9 +271,9 @@ lbl_fn_800D59B8_00000320:
     extsb r5, r5
     extsb r6, r6
     bl fn_80478158
-lbl_fn_800D59B8_00000360:
+lbl_atn_LH_Texture_update_00000360:
     li r3, 0x0
-lbl_fn_800D59B8_00000364:
+lbl_atn_LH_Texture_update_00000364:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

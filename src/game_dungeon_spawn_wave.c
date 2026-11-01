@@ -103,7 +103,7 @@ extern void fn_8043A770(void);
 extern void fn_8043A850(void);
 extern void fn_8043B778(void);
 extern void fn_8043D594(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_80684600(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -734,7 +734,7 @@ lbl_fn_803EB234_000007D4:
     cmpwi r3, 0x0
     bne lbl_fn_803EB234_000007F4
     addi r3, r31, 0x10
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_803EB234_000007FC
 lbl_fn_803EB234_000007F4:

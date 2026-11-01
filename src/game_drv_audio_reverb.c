@@ -35,8 +35,8 @@ extern void fn_8006BA38(void);
 extern void fn_8006D008(void);
 extern void fn_80084320(void);
 extern void fn_8008B964(void);
-extern void fn_8008CD1C(void);
-extern void fn_8008CD50(void);
+extern void atn_Matrix_copy(void);
+extern void atn_Matrix_concat(void);
 extern void fn_80097A20(void);
 extern void fn_80097C08(void);
 extern void fn_80097E80(void);
@@ -569,10 +569,10 @@ lbl_fn_805BAC18_00000420:
     addi r3, r1, 0x128
     addi r4, r1, 0x1e8
     addi r5, r1, 0x188
-    bl fn_8008CD50
+    bl atn_Matrix_concat
     addi r3, r1, 0x188
     addi r4, r1, 0x128
-    bl fn_8008CD1C
+    bl atn_Matrix_copy
     lwz r3, 0x50(r29)
     bl fn_803727D4
     mr r4, r3

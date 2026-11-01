@@ -36,7 +36,7 @@ extern void fn_800D4DB8(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
-extern void fn_800D59B8(void);
+extern void atn_LH_Texture_update(void);
 extern void fn_800DC288(void);
 extern void fn_800DC6B4(void);
 extern void fn_80239DAC(void);
@@ -46,9 +46,9 @@ extern void fn_804714A4(void);
 extern void fn_804714B0(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_80473EFC(void);
-extern void fn_80473F18(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_getStatus(void);
+extern void atn_LoadHandle_getName(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_80490884(void);
 extern void fn_80490B0C(void);
@@ -161,7 +161,7 @@ asm void fn_80499E14(void)
     mr r26, r4
     mr r27, r5
     addi r3, r3, 0x58
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     li r0, 0x0
     stw r0, 0x10(r1)
     mr r30, r3
@@ -409,7 +409,7 @@ lbl_fn_8049A09C_000003C8:
     mtctr r12
     bctrl
     addi r3, r29, 0x50
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     addi r0, r29, 0x5c
     mr r28, r3
     cmplw r3, r0
@@ -869,7 +869,7 @@ asm void fn_8049A7D8(void)
     stw r30, 0x28(r1)
     stw r29, 0x24(r1)
     stw r28, 0x20(r1)
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_8049A7D8_00000AB0
     li r3, 0x0
@@ -886,7 +886,7 @@ lbl_fn_8049A7D8_00000AB0:
     bl fn_80473F88
 lbl_fn_8049A7D8_00000AD4:
     addi r3, r31, 0xdc
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     beq lbl_fn_8049A7D8_00000AEC
     li r3, 0x0
@@ -906,11 +906,11 @@ lbl_fn_8049A7D8_00000AEC:
     cmpwi r0, 0x0
     bne lbl_fn_8049A7D8_00000B40
     addi r3, r31, 0xdc
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_8049A7D8_00000B44
     addi r3, r31, 0xfc
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_8049A7D8_00000B44
 lbl_fn_8049A7D8_00000B40:
@@ -1563,7 +1563,7 @@ asm void fn_8049B1F0(void)
     stmw r25, 0x174(r1)
     mr r27, r3
     addi r3, r3, 0x50
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_8049B1F0_000019B8
     addi r3, r1, 0x28
@@ -1602,7 +1602,7 @@ lbl_fn_8049B1F0_0000152C:
     bl fn_80470580
     mr r31, r3
     addi r3, r27, 0x50
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     li r0, 0x0
     stw r0, 0x2c(r1)
     mr r26, r3

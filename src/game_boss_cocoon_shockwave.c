@@ -90,10 +90,10 @@ void atn_LH_Efp_onNotify(void);
 void fn_80473C88(void);
 void atn_LoadHandle_constructor(void);
 void atn_LoadHandle_destructor(void);
-void fn_80473EFC(void);
-void fn_80473F18(void);
-void fn_80473F34(void);
-void fn_80473F50(void);
+void atn_LoadHandle_getStatus(void);
+void atn_LoadHandle_getName(void);
+void atn_LoadHandle_getData(void);
+void atn_LoadHandle_isLoading(void);
 void fn_80473F88(void);
 void fn_80473FCC(void);
 void fn_804741C0(void);
@@ -410,51 +410,51 @@ lbl_atn_LoadHandle_destructor_000003C0:
     blr
 }
 
-asm void fn_80473EFC(void)
+asm void atn_LoadHandle_getStatus(void)
 {
     nofralloc
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80473EFC_000003F0
+    beq lbl_atn_LoadHandle_getStatus_000003F0
     lbz r3, 0x4(r3)
     blr
-lbl_fn_80473EFC_000003F0:
+lbl_atn_LoadHandle_getStatus_000003F0:
     li r3, 0x0
     blr
 }
 
-asm void fn_80473F18(void)
+asm void atn_LoadHandle_getName(void)
 {
     nofralloc
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80473F18_0000040C
+    beq lbl_atn_LoadHandle_getName_0000040C
     addi r3, r3, 0x6
     blr
-lbl_fn_80473F18_0000040C:
+lbl_atn_LoadHandle_getName_0000040C:
     li r3, 0x0
     blr
 }
 
-asm void fn_80473F34(void)
+asm void atn_LoadHandle_getData(void)
 {
     nofralloc
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80473F34_00000428
+    beq lbl_atn_LoadHandle_getData_00000428
     lwz r3, 0x48(r3)
     blr
-lbl_fn_80473F34_00000428:
+lbl_atn_LoadHandle_getData_00000428:
     li r3, 0x0
     blr
 }
 
-asm void fn_80473F50(void)
+asm void atn_LoadHandle_isLoading(void)
 {
     nofralloc
     lwz r4, 0x4(r3)
     cmpwi r4, 0x0
-    beq lbl_fn_80473F50_00000460
+    beq lbl_atn_LoadHandle_isLoading_00000460
     lbz r0, 0x4(r4)
     li r3, 0x1
     cmpwi r0, 0x1
@@ -464,7 +464,7 @@ asm void fn_80473F50(void)
     beqlr
     li r3, 0x0
     blr
-lbl_fn_80473F50_00000460:
+lbl_atn_LoadHandle_isLoading_00000460:
     li r3, 0x0
     blr
 }

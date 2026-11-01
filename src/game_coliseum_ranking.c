@@ -40,7 +40,7 @@ extern void fn_800D3FA4(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
-extern void fn_800D59B8(void);
+extern void atn_LH_Texture_update(void);
 extern void fn_800DC288(void);
 extern void fn_80232B7C(void);
 extern void fn_802375C4(void);
@@ -63,9 +63,9 @@ extern void fn_804714A4(void);
 extern void fn_804714B0(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_80473EFC(void);
-extern void fn_80473F18(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_getStatus(void);
+extern void atn_LoadHandle_getName(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_80491EA0(void);
 extern void fn_804985E4(void);
 extern void fn_8049A018(void);
@@ -1803,7 +1803,7 @@ asm void fn_80497374(void)
     b lbl_fn_80497374_000018FC
 lbl_fn_80497374_00001500:
     addi r3, r3, 0x58
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_80497374_00001518
     li r3, 0x0
@@ -1842,7 +1842,7 @@ lbl_fn_80497374_00001588:
     stw r0, 0x3c(r1)
 lbl_fn_80497374_00001590:
     addi r3, r30, 0x58
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_80497374_00001834
     addi r3, r30, 0x58
@@ -1889,7 +1889,7 @@ lbl_fn_80497374_0000161C:
     cmpwi r3, 0x0
     beq lbl_fn_80497374_000017B0
     addi r3, r30, 0x58
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     li r0, 0x0
     stw r0, 0x30(r1)
     mr r28, r3
@@ -2032,7 +2032,7 @@ lbl_fn_80497374_00001834:
     stw r0, 0x50(r30)
 lbl_fn_80497374_0000183C:
     addi r3, r30, 0xf0
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     beq lbl_fn_80497374_00001854
     li r3, 0x0

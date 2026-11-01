@@ -17,8 +17,8 @@ extern void _savegpr_23(void);
 extern void dtor_80084684(void);
 extern void fn_800610A0(void);
 extern void fn_800BDB58(void);
-extern void fn_800D59B8(void);
-extern void fn_80473EFC(void);
+extern void atn_LH_Texture_update(void);
+extern void atn_LoadHandle_getStatus(void);
 extern void fn_805F8E70(void);
 extern void fn_805F93C0(void);
 extern void fn_80695720(void);
@@ -885,11 +885,11 @@ lbl_fn_8005E838_00000BD8:
     cmpwi r0, 0x0
     bne lbl_fn_8005E838_00000C18
     mr r3, r27
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_8005E838_00000C1C
     addi r3, r27, 0x20
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_8005E838_00000C1C
 lbl_fn_8005E838_00000C18:
@@ -914,11 +914,11 @@ lbl_fn_8005E838_00000C38:
     cmpwi r0, 0x0
     bne lbl_fn_8005E838_00000C78
     mr r3, r28
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_8005E838_00000C7C
     addi r3, r28, 0x20
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_8005E838_00000C7C
 lbl_fn_8005E838_00000C78:
@@ -1719,11 +1719,11 @@ lbl_fn_8005F36C_00001754:
     cmpwi r0, 0x0
     bne lbl_fn_8005F36C_00001794
     mr r3, r23
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_8005F36C_00001798
     addi r3, r23, 0x20
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_8005F36C_00001798
 lbl_fn_8005F36C_00001794:
@@ -1748,11 +1748,11 @@ lbl_fn_8005F36C_000017B4:
     cmpwi r0, 0x0
     bne lbl_fn_8005F36C_000017F4
     mr r3, r24
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_8005F36C_000017F8
     addi r3, r24, 0x20
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_8005F36C_000017F8
 lbl_fn_8005F36C_000017F4:
@@ -2057,11 +2057,11 @@ lbl_fn_8005F90C_00001C34:
     cmpwi r0, 0x0
     bne lbl_fn_8005F90C_00001C74
     mr r3, r30
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_8005F90C_00001C78
     addi r3, r30, 0x20
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_8005F90C_00001C78
 lbl_fn_8005F90C_00001C74:
@@ -2398,11 +2398,11 @@ lbl_fn_8005FD80_0000211C:
     cmpwi r0, 0x0
     bne lbl_fn_8005FD80_0000215C
     mr r3, r28
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_8005FD80_00002160
     addi r3, r28, 0x20
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_8005FD80_00002160
 lbl_fn_8005FD80_0000215C:
@@ -2427,11 +2427,11 @@ lbl_fn_8005FD80_0000217C:
     cmpwi r0, 0x0
     bne lbl_fn_8005FD80_000021BC
     mr r3, r29
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_8005FD80_000021C0
     addi r3, r29, 0x20
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_8005FD80_000021C0
 lbl_fn_8005FD80_000021BC:
@@ -2789,11 +2789,11 @@ lbl_fn_800602E8_00002684:
     cmpwi r0, 0x0
     bne lbl_fn_800602E8_000026C4
     mr r3, r25
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_800602E8_000026C8
     addi r3, r25, 0x20
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_800602E8_000026C8
 lbl_fn_800602E8_000026C4:
@@ -3157,11 +3157,11 @@ lbl_fn_800607C0_00002BA4:
     cmpwi r0, 0x0
     bne lbl_fn_800607C0_00002BE4
     mr r3, r25
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_800607C0_00002BE8
     addi r3, r25, 0x20
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_800607C0_00002BE8
 lbl_fn_800607C0_00002BE4:
@@ -3186,11 +3186,11 @@ lbl_fn_800607C0_00002C04:
     cmpwi r0, 0x0
     bne lbl_fn_800607C0_00002C44
     mr r3, r26
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_800607C0_00002C48
     addi r3, r26, 0x20
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_800607C0_00002C48
 lbl_fn_800607C0_00002C44:

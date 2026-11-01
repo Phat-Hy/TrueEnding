@@ -72,15 +72,15 @@ extern void fn_804AB79C(void);
 extern void fn_80613960(void);
 extern void fn_80613BB0(void);
 extern void fn_80614190(void);
-extern void fn_80614CC0(void);
-extern void fn_80614D30(void);
-extern void fn_80615560(void);
+extern void GXSetTexCopySrc(void);
+extern void GXSetTexCopyDst(void);
+extern void GXCopyTex(void);
 extern void fn_80615D20(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
 extern void fn_80617340(void);
 extern void fn_80617880(void);
-extern void fn_806179E0(void);
+extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
 extern void fn_80680770(void);
 extern void fn_80686A48(void);
@@ -287,15 +287,15 @@ lbl_fn_804ABA2C_00000144:
     li r5, 0x100
     extrwi r4, r0, 15, 16
     li r6, 0x100
-    bl fn_80614CC0
+    bl GXSetTexCopySrc
     li r3, 0x100
     li r4, 0x100
     li r5, 0x4
     li r6, 0x0
-    bl fn_80614D30
+    bl GXSetTexCopyDst
     mr r3, r25
     li r4, 0x0
-    bl fn_80615560
+    bl GXCopyTex
     bl fn_80614190
     bl fn_803D71C4
     bl fn_80071E04
@@ -307,7 +307,7 @@ lbl_fn_804ABA2C_00000144:
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0x1
     li r5, 0x0

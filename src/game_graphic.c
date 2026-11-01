@@ -38,9 +38,9 @@ extern void fn_805F9990(void);
 extern void fn_80613960(void);
 extern void fn_80613BB0(void);
 extern void fn_80614190(void);
-extern void fn_80614CC0(void);
-extern void fn_80614D30(void);
-extern void fn_80615560(void);
+extern void GXSetTexCopySrc(void);
+extern void GXSetTexCopyDst(void);
+extern void GXCopyTex(void);
 extern void fn_80615D20(void);
 extern void fn_80615D50(void);
 extern void fn_80615E00(void);
@@ -59,13 +59,13 @@ extern void fn_80617420(void);
 extern void fn_80617460(void);
 extern void fn_806174C0(void);
 extern void fn_806175F0(void);
-extern void fn_80617650(void);
-extern void fn_806176F0(void);
+extern void GXSetTevKColorSel(void);
+extern void GXSetTevSwapMode(void);
 extern void fn_80617880(void);
-extern void fn_806179E0(void);
+extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
 extern void fn_80617E00(void);
-extern void fn_80618420(void);
+extern void GXLoadTexMtxImm(void);
 extern void fn_8068AEB0(void);
 extern void fn_80695720(void);
 
@@ -631,7 +631,7 @@ lbl_fn_800AF544_0000065C:
     cmpwi r0, 0x0
     beq lbl_fn_800AF544_00000790
     li r3, 0x2
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x3
     bl fn_80613BB0
     li r3, 0x1
@@ -653,7 +653,7 @@ lbl_fn_800AF544_0000065C:
     b lbl_fn_800AF544_000007B0
 lbl_fn_800AF544_00000790:
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x2
     bl fn_80613BB0
     li r3, 0x1
@@ -740,7 +740,7 @@ lbl_fn_800AF544_000007B0:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     lwz r0, 0x14(r29)
     cmpwi r0, 0x0
     beq lbl_fn_800AF544_00000954
@@ -765,7 +765,7 @@ lbl_fn_800AF544_000007B0:
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
 lbl_fn_800AF544_00000954:
     li r3, 0x0
     li r4, 0x4
@@ -799,28 +799,28 @@ lbl_fn_800AF544_000009A8:
     clrlslwi r6, r26, 17, 1
     li r3, 0x0
     li r4, 0x0
-    bl fn_80614CC0
+    bl GXSetTexCopySrc
     mr r5, r25
     clrlwi r3, r27, 16
     clrlwi r4, r26, 16
     li r6, 0x1
-    bl fn_80614D30
+    bl GXSetTexCopyDst
     b lbl_fn_800AF544_00000A10
 lbl_fn_800AF544_000009E8:
     clrlwi r5, r27, 16
     clrlwi r6, r26, 16
     li r3, 0x0
     li r4, 0x0
-    bl fn_80614CC0
+    bl GXSetTexCopySrc
     mr r5, r25
     clrlwi r3, r27, 16
     clrlwi r4, r26, 16
     li r6, 0x0
-    bl fn_80614D30
+    bl GXSetTexCopyDst
 lbl_fn_800AF544_00000A10:
     mr r3, r28
     li r4, 0x1
-    bl fn_80615560
+    bl GXCopyTex
     bl fn_80614190
     lwz r3, lbl_8087EEE0
     bl fn_80075DEC
@@ -901,7 +901,7 @@ lbl_fn_800AF544_00000B2C:
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x2
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     bl fn_80617200
     lfs f5, 0x28(r29)
@@ -1025,7 +1025,7 @@ lbl_fn_800AF544_00000C1C:
     bl fn_80617220
     li r3, 0x1
     li r4, 0xc
-    bl fn_80617650
+    bl GXSetTevKColorSel
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -1593,7 +1593,7 @@ lbl_fn_800AFFEC_000014D0:
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     bl fn_80617200
     li r3, 0x0
@@ -1635,23 +1635,23 @@ lbl_fn_800AFFEC_000014D0:
     clrlwi r6, r26, 16
     li r3, 0x0
     li r4, 0x0
-    bl fn_80614CC0
+    bl GXSetTexCopySrc
     clrlwi r3, r27, 16
     clrlwi r4, r26, 16
     li r5, 0x4
     li r6, 0x0
-    bl fn_80614D30
+    bl GXSetTexCopyDst
     slwi r0, r29, 2
     li r4, 0x1
     add r3, r28, r0
     lwz r3, 0x84(r3)
-    bl fn_80615560
+    bl GXCopyTex
     li r3, 0x1
     bl fn_80613BB0
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     bl fn_80617200
     li r3, 0x0
@@ -2017,7 +2017,7 @@ asm void fn_800B0A70(void)
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     bl fn_80617200
     li r3, 0x4
@@ -2054,7 +2054,7 @@ asm void fn_800B0A70(void)
     stfs f0, 0x40(r1)
     stfs f0, 0x2c(r1)
     stfs f0, 0x18(r1)
-    bl fn_80618420
+    bl GXLoadTexMtxImm
     li r3, 0x0
     li r4, 0xf
     li r5, 0xf

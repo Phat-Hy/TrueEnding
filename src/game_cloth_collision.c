@@ -51,7 +51,7 @@ extern void fn_8035B78C(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_805F8E70(void);
 extern void fn_805F93C0(void);
 extern void fn_805F98D0(void);
@@ -265,7 +265,7 @@ lbl_fn_8027CF28_000001CC:
     cmpwi r3, 0x0
     bne lbl_fn_8027CF28_00000A80
     addi r3, r27, 0x14b0
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_8027CF28_00000A80
     addi r3, r27, 0x14b0

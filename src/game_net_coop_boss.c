@@ -36,7 +36,7 @@ extern void fn_800D3FA4(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
-extern void fn_800D59B8(void);
+extern void atn_LH_Texture_update(void);
 extern void fn_800DC6B4(void);
 extern void fn_800DD3FC(void);
 extern void fn_801F3FF8(void);
@@ -44,7 +44,7 @@ extern void fn_80211480(void);
 extern void world_getGlobalFlag(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_804A9EB4(void);
 extern void fn_804AA490(void);
 extern void fn_805F8E70(void);
@@ -1533,43 +1533,43 @@ asm void fn_804A8504(void)
     stw r30, 0x8(r1)
     mr r30, r3
     addi r3, r3, 0x50
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_804A8504_000013F0
     addi r3, r30, 0x58
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_804A8504_000013F0
     addi r3, r30, 0x88
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_804A8504_000013F0
     addi r3, r30, 0xb8
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_804A8504_000013F0
     addi r3, r30, 0xe8
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_804A8504_000013F0
     addi r3, r30, 0x118
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_804A8504_000013F0
     addi r3, r30, 0x148
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_804A8504_000013F0
     addi r3, r30, 0x178
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_804A8504_000013F0
     addi r3, r30, 0x1a8
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_804A8504_000013F0
     addi r3, r30, 0x1d8
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_804A8504_000013F0
     mr r3, r30

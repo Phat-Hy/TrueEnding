@@ -36,7 +36,7 @@ extern void world_setGlobalFlag(void);
 extern void fn_803E3384(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_805A4984(void);
 extern void fn_805F9940(void);
 extern void fn_80680770(void);
@@ -127,7 +127,7 @@ lbl_fn_802AC590_0000006C:
     b lbl_fn_802AC590_00000380
 lbl_fn_802AC590_00000090:
     addi r3, r31, 0x14b4
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_802AC590_000000A8
     li r3, 0x0

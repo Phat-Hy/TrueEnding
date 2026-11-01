@@ -33,7 +33,7 @@ extern void fn_80097D40(void);
 extern void fn_80097D7C(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_800D59B8(void);
+extern void atn_LH_Texture_update(void);
 extern void fn_800DC288(void);
 extern void fn_800EF73C(void);
 extern void fn_80179A34(void);
@@ -58,7 +58,7 @@ extern void fn_803F11F8(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_80473EFC(void);
+extern void atn_LoadHandle_getStatus(void);
 extern void fn_805F9920(void);
 extern void fn_80682428(void);
 extern void fn_80684600(void);
@@ -1769,11 +1769,11 @@ asm void fn_803F4A4C(void)
     cmpwi r0, 0x0
     bne lbl_fn_803F4A4C_0000170C
     addi r3, r29, 0x6a0
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_803F4A4C_00001710
     addi r3, r29, 0x6c0
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_803F4A4C_00001710
 lbl_fn_803F4A4C_0000170C:

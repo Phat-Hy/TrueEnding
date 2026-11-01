@@ -41,8 +41,8 @@ extern void fn_804439FC(void);
 extern void fn_80444020(void);
 extern void fn_80444CF8(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_80473F18(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_getName(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_80695A50(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -255,14 +255,14 @@ lbl_fn_800EF91C_000001F0:
     b lbl_fn_800EF91C_00000234
 lbl_fn_800EF91C_00000208:
     addi r3, r29, 0x34
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_800EF91C_00000220
     li r0, 0x1
     b lbl_fn_800EF91C_00000234
 lbl_fn_800EF91C_00000220:
     addi r3, r29, 0x3c
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     neg r0, r3
     or r0, r0, r3
     srwi r0, r0, 31
@@ -453,7 +453,7 @@ lbl_fn_800EFBC4_0000047C:
     cmpwi r3, 0x0
     bne lbl_fn_800EFBC4_000004AC
     addi r3, r31, 0x8
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     cmpwi r3, 0x0
     beq lbl_fn_800EFBC4_000004AC
     addi r3, r31, 0x4
@@ -504,7 +504,7 @@ lbl_fn_800EFC64_0000051C:
     cmpwi r3, 0x0
     bne lbl_fn_800EFC64_0000054C
     addi r3, r31, 0x14
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     cmpwi r3, 0x0
     beq lbl_fn_800EFC64_0000054C
     addi r3, r31, 0x10

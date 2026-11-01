@@ -16,8 +16,8 @@ extern void fn_805F3210(void);
 extern void fn_805F8980(void);
 extern void fn_805F95A0(void);
 extern void fn_80618290(void);
-extern void fn_80618350(void);
-extern void fn_80618400(void);
+extern void GXLoadPosMtxImm(void);
+extern void GXSetCurrentMtx(void);
 extern void fn_80619920(void);
 extern void fn_806199D0(void);
 extern void fn_80619A00(void);
@@ -1900,9 +1900,9 @@ asm void fn_80723B90(void)
     bl fn_805F8980
     addi r3, r1, 0x8
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     mr r3, r31
     bl fn_80723A00
     lwz r0, 0x94(r1)

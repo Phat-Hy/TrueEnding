@@ -7,8 +7,8 @@ extern void fn_800846FC(void);
 extern void fn_80084C24(void);
 extern void fn_80089ACC(void);
 extern void fn_8008B964(void);
-extern void fn_8008CD1C(void);
-extern void fn_8008CD50(void);
+extern void atn_Matrix_copy(void);
+extern void atn_Matrix_concat(void);
 extern void fn_8008D784(void);
 extern void fn_8008E2D4(void);
 extern void fn_8008EECC(void);
@@ -448,7 +448,7 @@ asm void atn_Model_updateMatrices(void)
     mr r31, r3
     mr r4, r24
     addi r3, r26, 0x60
-    bl fn_8008CD1C
+    bl atn_Matrix_copy
     lwz r0, 0x48(r31)
     stw r0, 0x5c(r26)
     lwz r3, 0x20c(r26)
@@ -518,10 +518,10 @@ lbl_atn_Model_updateMatrices_000006C8:
     lwzx r0, r27, r0
     mulli r0, r0, 0x30
     add r4, r28, r0
-    bl fn_8008CD50
+    bl atn_Matrix_concat
     lwz r3, 0x8(r1)
     addi r4, r1, 0xa0
-    bl fn_8008CD1C
+    bl atn_Matrix_copy
     lwz r3, 0x8(r1)
     addi r30, r30, 0x8
     addi r24, r24, 0x1
@@ -552,10 +552,10 @@ lbl_atn_Model_updateMatrices_0000074C:
     lwz r0, 0x4(r4)
     mulli r0, r0, 0x30
     add r4, r28, r0
-    bl fn_8008CD50
+    bl atn_Matrix_concat
     lwz r3, 0x8(r1)
     addi r4, r1, 0x70
-    bl fn_8008CD1C
+    bl atn_Matrix_copy
     lwz r3, 0x8(r1)
     addi r27, r27, 0x8
     addi r24, r24, 0x1
@@ -625,10 +625,10 @@ lbl_atn_Model_updateMatrices_00000854:
     lwzx r0, r27, r0
     mulli r0, r0, 0x30
     add r4, r28, r0
-    bl fn_8008CD50
+    bl atn_Matrix_concat
     lwz r3, 0x8(r1)
     addi r4, r1, 0x40
-    bl fn_8008CD1C
+    bl atn_Matrix_copy
     lwz r3, 0x8(r1)
     addi r30, r30, 0x8
     addi r24, r24, 0x1
@@ -659,10 +659,10 @@ lbl_atn_Model_updateMatrices_000008D8:
     lwz r0, 0x4(r4)
     mulli r0, r0, 0x30
     add r4, r28, r0
-    bl fn_8008CD50
+    bl atn_Matrix_concat
     lwz r3, 0x8(r1)
     addi r4, r1, 0x10
-    bl fn_8008CD1C
+    bl atn_Matrix_copy
     lwz r3, 0x8(r1)
     addi r27, r27, 0x8
     addi r24, r24, 0x1

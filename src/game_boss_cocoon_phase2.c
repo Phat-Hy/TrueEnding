@@ -35,7 +35,7 @@ extern void fn_80087994(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void fn_8008BBD8(void);
-extern void fn_8008CD1C(void);
+extern void atn_Matrix_copy(void);
 extern void fn_80091CFC(void);
 extern void fn_80092814(void);
 extern void fn_80097C08(void);
@@ -115,7 +115,7 @@ extern void fn_80468A08(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_804A04AC(void);
 extern void fn_805F93C0(void);
 extern void fn_805F98D0(void);
@@ -1440,7 +1440,7 @@ asm void fn_8045FE70(void)
     cmpwi r3, 0x0
     bne lbl_fn_8045FE70_00001690
     addi r3, r31, 0x14b0
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_8045FE70_00001690
     addi r3, r31, 0x1790
@@ -2218,7 +2218,7 @@ lbl_fn_80460458_00001CF4:
     bl fn_80266154
     mr r4, r3
     addi r3, r31, 0x1578
-    bl fn_8008CD1C
+    bl atn_Matrix_copy
     addi r3, r1, 0x1c
     addi r4, r31, 0x1578
     bl fn_8000D0F8

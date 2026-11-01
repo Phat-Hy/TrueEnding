@@ -31,14 +31,14 @@ extern f32 lbl_808887F8;
 extern f32 lbl_808887FC;
 
 /* Function declarations */
-void fn_80617650(void);
-void fn_806176A0(void);
-void fn_806176F0(void);
+void GXSetTevKColorSel(void);
+void GXSetTevKAlphaSel(void);
+void GXSetTevSwapMode(void);
 void fn_80617730(void);
 void fn_806177B0(void);
 void fn_806177F0(void);
 void fn_80617880(void);
-void fn_806179E0(void);
+void GXSetNumTevStages(void);
 void fn_80617A10(void);
 void fn_80617C40(void);
 void fn_80617D50(void);
@@ -56,10 +56,10 @@ void fn_806180B0(void);
 void fn_80618240(void);
 void fn_80618290(void);
 void fn_80618300(void);
-void fn_80618350(void);
-void fn_806183A0(void);
-void fn_80618400(void);
-void fn_80618420(void);
+void GXLoadPosMtxImm(void);
+void GXLoadNrmMtxImm3x3(void);
+void GXSetCurrentMtx(void);
+void GXLoadTexMtxImm(void);
 void fn_806184E0(void);
 void fn_80618570(void);
 void fn_806185A0(void);
@@ -70,23 +70,23 @@ void fn_806186A0(void);
 void fn_80618730(void);
 void fn_80618F50(void);
 
-asm void fn_80617650(void)
+asm void GXSetTevKColorSel(void)
 {
     nofralloc
     clrlwi. r0, r3, 31
     lwz r5, __GXData
     extlwi r0, r3, 30, 1
     add r3, r5, r0
-    beq lbl_fn_80617650_00000024
+    beq lbl_GXSetTevKColorSel_00000024
     lwz r0, 0x200(r3)
     rlwimi r0, r4, 14, 13, 17
     stw r0, 0x200(r3)
-    b lbl_fn_80617650_00000030
-lbl_fn_80617650_00000024:
+    b lbl_GXSetTevKColorSel_00000030
+lbl_GXSetTevKColorSel_00000024:
     lwz r0, 0x200(r3)
     rlwimi r0, r4, 4, 23, 27
     stw r0, 0x200(r3)
-lbl_fn_80617650_00000030:
+lbl_GXSetTevKColorSel_00000030:
     lis r4, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r4)
@@ -97,23 +97,23 @@ lbl_fn_80617650_00000030:
     blr
 }
 
-asm void fn_806176A0(void)
+asm void GXSetTevKAlphaSel(void)
 {
     nofralloc
     clrlwi. r0, r3, 31
     lwz r5, __GXData
     extlwi r0, r3, 30, 1
     add r3, r5, r0
-    beq lbl_fn_806176A0_00000074
+    beq lbl_GXSetTevKAlphaSel_00000074
     lwz r0, 0x200(r3)
     rlwimi r0, r4, 19, 8, 12
     stw r0, 0x200(r3)
-    b lbl_fn_806176A0_00000080
-lbl_fn_806176A0_00000074:
+    b lbl_GXSetTevKAlphaSel_00000080
+lbl_GXSetTevKAlphaSel_00000074:
     lwz r0, 0x200(r3)
     rlwimi r0, r4, 9, 18, 22
     stw r0, 0x200(r3)
-lbl_fn_806176A0_00000080:
+lbl_GXSetTevKAlphaSel_00000080:
     lis r4, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r4)
@@ -124,7 +124,7 @@ lbl_fn_806176A0_00000080:
     blr
 }
 
-asm void fn_806176F0(void)
+asm void GXSetTevSwapMode(void)
 {
     nofralloc
     lwz r9, __GXData
@@ -344,7 +344,7 @@ lbl_fn_80617880_0000035C:
     blr
 }
 
-asm void fn_806179E0(void)
+asm void GXSetNumTevStages(void)
 {
     nofralloc
     lwz r4, __GXData
@@ -1034,7 +1034,7 @@ lbl_fn_80618300_00000CCC:
     blr
 }
 
-asm void fn_80618350(void)
+asm void GXLoadPosMtxImm(void)
 {
     nofralloc
     lis r5, 0xcc01
@@ -1059,7 +1059,7 @@ asm void fn_80618350(void)
     blr
 }
 
-asm void fn_806183A0(void)
+asm void GXLoadNrmMtxImm3x3(void)
 {
     nofralloc
     slwi r0, r4, 2
@@ -1086,7 +1086,7 @@ asm void fn_806183A0(void)
     blr
 }
 
-asm void fn_80618400(void)
+asm void GXSetCurrentMtx(void)
 {
     nofralloc
     lwz r4, __GXData
@@ -1099,25 +1099,25 @@ asm void fn_80618400(void)
     blr
 }
 
-asm void fn_80618420(void)
+asm void GXLoadTexMtxImm(void)
 {
     nofralloc
     cmplwi r4, 0x40
-    blt lbl_fn_80618420_00000DE8
+    blt lbl_GXLoadTexMtxImm_00000DE8
     subi r0, r4, 0x40
     slwi r4, r0, 2
     addi r7, r4, 0x500
-    b lbl_fn_80618420_00000DEC
-lbl_fn_80618420_00000DE8:
+    b lbl_GXLoadTexMtxImm_00000DEC
+lbl_GXLoadTexMtxImm_00000DE8:
     slwi r7, r4, 2
-lbl_fn_80618420_00000DEC:
+lbl_GXLoadTexMtxImm_00000DEC:
     cmpwi r5, 0x1
-    bne lbl_fn_80618420_00000DFC
+    bne lbl_GXLoadTexMtxImm_00000DFC
     li r6, 0x8
-    b lbl_fn_80618420_00000E00
-lbl_fn_80618420_00000DFC:
+    b lbl_GXLoadTexMtxImm_00000E00
+lbl_GXLoadTexMtxImm_00000DFC:
     li r6, 0xc
-lbl_fn_80618420_00000E00:
+lbl_GXLoadTexMtxImm_00000E00:
     lis r4, 0xcc01
     subi r6, r6, 0x1
     li r0, 0x10
@@ -1126,7 +1126,7 @@ lbl_fn_80618420_00000E00:
     cmpwi r5, 0x0
     or r0, r7, r0
     stw r0, -0x8000(r4)
-    bne lbl_fn_80618420_00000E5C
+    bne lbl_GXLoadTexMtxImm_00000E5C
     addi r4, r4, -0x8000
     psq_l f5, 0x0(r3), 0, 0
     psq_l f4, 0x8(r3), 0, 0
@@ -1141,7 +1141,7 @@ lbl_fn_80618420_00000E00:
     psq_st f1, 0x0(r4), 0, 0
     psq_st f0, 0x0(r4), 0, 0
     blr
-lbl_fn_80618420_00000E5C:
+lbl_GXLoadTexMtxImm_00000E5C:
     addi r4, r4, -0x8000
     psq_l f3, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0

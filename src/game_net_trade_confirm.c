@@ -27,7 +27,7 @@ extern void atn_Task_destructor(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
-extern void fn_800D59B8(void);
+extern void atn_LH_Texture_update(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
 extern void fn_800DC3CC(void);
@@ -36,7 +36,7 @@ extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_804741C0(void);
 extern void fn_8047C7FC(void);
@@ -1843,11 +1843,11 @@ asm void fn_8053133C(void)
     stw r31, 0xc(r1)
     mr r31, r3
     addi r3, r3, 0x64
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_8053133C_00001928
     addi r3, r31, 0x7c
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     beq lbl_fn_8053133C_00001930
 lbl_fn_8053133C_00001928:

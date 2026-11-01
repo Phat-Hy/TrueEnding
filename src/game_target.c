@@ -18,7 +18,7 @@ extern void fn_80084C24(void);
 extern void fn_80089D70(void);
 extern void fn_8008C850(void);
 extern void fn_800DC6B4(void);
-extern void fn_80473F18(void);
+extern void atn_LoadHandle_getName(void);
 extern void fn_80473F88(void);
 extern void fn_80475DF8(void);
 extern void fn_8067E23C(void);
@@ -279,7 +279,7 @@ asm void fn_80093158(void)
     mr r21, r3
     addi r25, r3, 0x164
     mr r3, r22
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     li r0, 0x0
     stw r0, 0x5c(r1)
     mr r19, r3
@@ -415,7 +415,7 @@ lbl_fn_80093158_00000480:
     stw r0, 0x14(r22)
 lbl_fn_80093158_00000488:
     mr r3, r25
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     li r0, 0x0
     stw r0, 0x44(r1)
     mr r19, r3
@@ -668,7 +668,7 @@ lbl_fn_80093158_000007E0:
     cmpwi r0, -0x1
     bne lbl_fn_80093158_0000081C
     addi r3, r21, 0x164
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     lwz r5, 0x10(r23)
     mr r6, r3
     addi r3, r1, 0x80

@@ -75,7 +75,7 @@ extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_80570A78(void);
 extern void fn_805A6A84(void);
@@ -448,7 +448,7 @@ asm void AreaEffConfig_execute(void)
     stw r31, 0xc(r1)
     mr r31, r3
     addi r3, r3, 0x48
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_AreaEffConfig_execute_000002DC
     mr r3, r31
@@ -3288,7 +3288,7 @@ asm void Arms_execute(void)
     b lbl_Arms_execute_0000292C
 lbl_Arms_execute_00002830:
     addi r3, r3, 0x27c
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_Arms_execute_00002848
     li r3, 0x1

@@ -26,8 +26,8 @@ extern void fn_80470604(void);
 extern void fn_804730D4(void);
 extern void fn_804730E4(void);
 extern void atn_LoadHandle_constructor(void);
-extern void fn_80473EFC(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_getStatus(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_80473FCC(void);
 extern void fn_805F9EF0(void);
@@ -1738,11 +1738,11 @@ asm void fn_80470198(void)
     addi r0, r4, 0x1
     stw r0, 0x2c(r3)
     addi r3, r3, 0x10
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x0
     beq lbl_fn_80470198_00001614
     addi r3, r31, 0x10
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x4
     bne lbl_fn_80470198_00001620
 lbl_fn_80470198_00001614:
@@ -1769,11 +1769,11 @@ asm void fn_804701F8(void)
     addi r0, r4, 0x1
     stw r0, 0x2c(r3)
     addi r3, r3, 0x10
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x0
     beq lbl_fn_804701F8_00001674
     addi r3, r31, 0x10
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x4
     bne lbl_fn_804701F8_0000168C
 lbl_fn_804701F8_00001674:
@@ -1802,7 +1802,7 @@ asm void fn_80470264(void)
     stw r30, 0x8(r1)
     mr r30, r3
     addi r3, r3, 0x10
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_80470264_000016D8
     lwz r0, 0x78(r30)
@@ -1832,7 +1832,7 @@ asm void fn_804702BC(void)
     cmpwi r0, 0x0
     bne lbl_fn_804702BC_00001788
     addi r3, r3, 0x8
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_804702BC_00001780
     li r0, 0x1

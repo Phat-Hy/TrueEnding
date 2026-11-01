@@ -37,7 +37,7 @@ extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_80473EFC(void);
+extern void atn_LoadHandle_getStatus(void);
 extern void fn_80473F88(void);
 extern void fn_80473FCC(void);
 extern void fn_805F9EF0(void);
@@ -1088,7 +1088,7 @@ lbl_atn_Loader_execute_00000D58:
     lwz r26, 0x8(r30)
     li r27, 0x0
     addi r3, r26, 0x10
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_atn_Loader_execute_00000D84
     addi r3, r26, 0x10
@@ -1415,7 +1415,7 @@ lbl_atn_Loader_finish_000011E8:
 lbl_atn_Loader_finish_000011F4:
     addi r3, r27, 0x10
     li r29, 0x0
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_atn_Loader_finish_0000121C
     addi r3, r27, 0x10

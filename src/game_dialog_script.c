@@ -51,7 +51,7 @@ extern void fn_80232B7C(void);
 extern void fn_80239DAC(void);
 extern void fn_8023A680(void);
 extern void world_getGlobalFlag(void);
-extern void fn_80473F18(void);
+extern void atn_LoadHandle_getName(void);
 extern void fn_80481654(void);
 extern void fn_805F89F0(void);
 extern void fn_805F8E70(void);
@@ -334,7 +334,7 @@ lbl_fn_8014C0B4_00000348:
     bl fn_80097D40
     cmpwi r3, 0x0
     beq lbl_fn_8014C0B4_00000368
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     bl fn_802096A8
     b lbl_fn_8014C0B4_0000036C
 lbl_fn_8014C0B4_00000368:
@@ -357,7 +357,7 @@ lbl_fn_8014C0B4_00000390:
     bl fn_80097D40
     cmpwi r3, 0x0
     beq lbl_fn_8014C0B4_000003B0
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     bl fn_802096A8
     b lbl_fn_8014C0B4_000003B4
 lbl_fn_8014C0B4_000003B0:
@@ -380,7 +380,7 @@ lbl_fn_8014C0B4_000003D8:
     bl fn_80097D40
     cmpwi r3, 0x0
     beq lbl_fn_8014C0B4_000003F8
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     bl fn_802096A8
     b lbl_fn_8014C0B4_000003FC
 lbl_fn_8014C0B4_000003F8:
@@ -403,7 +403,7 @@ lbl_fn_8014C0B4_00000420:
     bl fn_80097D40
     cmpwi r3, 0x0
     beq lbl_fn_8014C0B4_00000440
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     bl fn_802096A8
     b lbl_fn_8014C0B4_00000444
 lbl_fn_8014C0B4_00000440:

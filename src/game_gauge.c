@@ -35,8 +35,8 @@ extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void atn_Curve_evaluate(void);
 extern void atn_LoadHandle_constructor(void);
-extern void fn_80473F18(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_getName(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_80476884(void);
 extern void fn_804768B4(void);
@@ -129,7 +129,7 @@ asm void fn_800A005C(void)
     la r4, lbl_8087D710
     bl fn_8005BCE8
     mr r3, r30
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     stw r28, 0x18(r1)
     mr r29, r3
     addi r31, r1, 0x18
@@ -374,7 +374,7 @@ asm void fn_800A0448(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_800A0448_00000414
     li r3, 0x1

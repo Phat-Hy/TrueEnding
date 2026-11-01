@@ -25,7 +25,7 @@ extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
 extern void fn_8008B140(void);
 extern void atn_Model_updateMatrices(void);
-extern void fn_800954DC(void);
+extern void atn_Lockon_updateTargetTextures(void);
 extern void fn_80095CD0(void);
 extern void atn_Model_drawMeshNode(void);
 extern void fn_800A005C(void);
@@ -35,7 +35,7 @@ extern void fn_800C122C(void);
 extern void fn_800DC6B4(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_80475DF8(void);
 extern void fn_805F89F0(void);
@@ -1530,7 +1530,7 @@ lbl_fn_8009F4AC_0000142C:
     psq_st f1, 0x0(r5), 0, 0
     mr r3, r31
     lfs f1, 0x70(r30)
-    bl fn_800954DC
+    bl atn_Lockon_updateTargetTextures
 lbl_fn_8009F4AC_0000148C:
     addi r11, r1, 0xc0
     bl _restgpr_27
@@ -2157,7 +2157,7 @@ lbl_fn_8009FE24_00001CFC:
     cmpwi r0, 0x0
     bne lbl_fn_8009FE24_00001D40
     mr r3, r24
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_8009FE24_00001D2C
     li r0, 0x1
@@ -2230,7 +2230,7 @@ asm void fn_8009FFCC(void)
     lwz r0, 0x8(r3)
     cmpwi r0, 0x0
     bne lbl_fn_8009FFCC_00001E34
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_8009FFCC_00001E1C
     li r3, 0x1

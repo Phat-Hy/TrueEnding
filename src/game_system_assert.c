@@ -132,7 +132,7 @@ void fn_80206B9C(void);
 void fn_80206BE4(void);
 void fn_80206C50(void);
 void fn_80206D18(void);
-void fn_80206F44(void);
+void weaponEffect_loadCSV(void);
 void fn_80207250(void);
 void fn_8020726C(void);
 void fn_802072AC(void);
@@ -672,7 +672,7 @@ lbl_fn_80206D18_000006D4:
     blr
 }
 
-asm void fn_80206F44(void)
+asm void weaponEffect_loadCSV(void)
 {
     nofralloc
     stwu r1, -0x690(r1)
@@ -681,7 +681,7 @@ asm void fn_80206F44(void)
     stmw r23, 0x66c(r1)
     lwz r0, lbl_8087F16C
     cmpwi r0, 0x0
-    bne lbl_fn_80206F44_000009E0
+    bne lbl_weaponEffect_loadCSV_000009E0
     li r24, 0x0
     stw r24, 0x8(r1)
     lwz r3, lbl_8087F518
@@ -720,13 +720,13 @@ asm void fn_80206F44(void)
     la r4, lbl_8087D708
     bl fn_8005B6E8
     li r23, 0x0
-    b lbl_fn_80206F44_000007F0
-lbl_fn_80206F44_000007A0:
+    b lbl_weaponEffect_loadCSV_000007F0
+lbl_weaponEffect_loadCSV_000007A0:
     addi r3, r1, 0x30
     bl fn_8005B3CC
     lbz r0, 0x0(r3)
     extsb. r0, r0
-    bne lbl_fn_80206F44_000007F0
+    bne lbl_weaponEffect_loadCSV_000007F0
     addi r3, r1, 0x30
     bl fn_8005B3CC
     addi r3, r1, 0x30
@@ -735,18 +735,18 @@ lbl_fn_80206F44_000007A0:
     bl fn_8005B3CC
     bl fn_80684600
     cmpwi r3, 0x0
-    ble lbl_fn_80206F44_000007F0
+    ble lbl_weaponEffect_loadCSV_000007F0
     addi r3, r1, 0x30
     bl fn_8005B3CC
     lbz r0, 0x0(r3)
     extsb. r0, r0
-    beq lbl_fn_80206F44_000007F0
+    beq lbl_weaponEffect_loadCSV_000007F0
     addi r23, r23, 0x1
-lbl_fn_80206F44_000007F0:
+lbl_weaponEffect_loadCSV_000007F0:
     addi r3, r1, 0x30
     bl fn_8005B5F8
     cmpwi r3, 0x0
-    bne lbl_fn_80206F44_000007A0
+    bne lbl_weaponEffect_loadCSV_000007A0
     lis r24, lbl_8073E938@ha
     slwi r3, r23, 5
     addi r5, r24, lbl_8073E938@l
@@ -778,13 +778,13 @@ lbl_fn_80206F44_000007F0:
     li r25, 0x0
     li r28, 0x2
     li r27, 0x1
-    b lbl_fn_80206F44_000009C4
-lbl_fn_80206F44_00000880:
+    b lbl_weaponEffect_loadCSV_000009C4
+lbl_weaponEffect_loadCSV_00000880:
     addi r3, r1, 0x30
     bl fn_8005B3CC
     lbz r0, 0x0(r3)
     extsb. r0, r0
-    bne lbl_fn_80206F44_000009C4
+    bne lbl_weaponEffect_loadCSV_000009C4
     stw r24, 0x10(r1)
     addi r3, r1, 0x30
     stw r25, 0x14(r1)
@@ -793,34 +793,34 @@ lbl_fn_80206F44_00000880:
     bl fn_8005B3CC
     cmpwi r3, 0x0
     mr r23, r3
-    beq lbl_fn_80206F44_00000914
+    beq lbl_weaponEffect_loadCSV_00000914
     bl strlen
     cmplwi r3, 0x2
-    ble lbl_fn_80206F44_00000914
+    ble lbl_weaponEffect_loadCSV_00000914
     mr r3, r23
     addi r4, r26, 0x1
     li r5, 0x2
     bl fn_80682544
     cmpwi r3, 0x0
-    bne lbl_fn_80206F44_000008E4
+    bne lbl_weaponEffect_loadCSV_000008E4
     stw r25, 0x10(r1)
-    b lbl_fn_80206F44_00000908
-lbl_fn_80206F44_000008E4:
+    b lbl_weaponEffect_loadCSV_00000908
+lbl_weaponEffect_loadCSV_000008E4:
     mr r3, r23
     addi r4, r26, 0x4
     li r5, 0x2
     bl fn_80682544
     cmpwi r3, 0x0
-    bne lbl_fn_80206F44_00000904
+    bne lbl_weaponEffect_loadCSV_00000904
     stw r27, 0x10(r1)
-    b lbl_fn_80206F44_00000908
-lbl_fn_80206F44_00000904:
+    b lbl_weaponEffect_loadCSV_00000908
+lbl_weaponEffect_loadCSV_00000904:
     stw r28, 0x10(r1)
-lbl_fn_80206F44_00000908:
+lbl_weaponEffect_loadCSV_00000908:
     addi r3, r23, 0x2
     bl fn_80684600
     stw r3, 0x14(r1)
-lbl_fn_80206F44_00000914:
+lbl_weaponEffect_loadCSV_00000914:
     addi r3, r1, 0x30
     bl fn_8005B3CC
     addi r3, r1, 0x30
@@ -828,23 +828,23 @@ lbl_fn_80206F44_00000914:
     bl fn_80684600
     cmpwi r3, 0x0
     stw r3, 0x18(r1)
-    ble lbl_fn_80206F44_000009C4
+    ble lbl_weaponEffect_loadCSV_000009C4
     addi r3, r1, 0x30
     bl fn_8005B3CC
     cmplw r3, r31
     mr r23, r3
-    beq lbl_fn_80206F44_00000960
+    beq lbl_weaponEffect_loadCSV_00000960
     bl strlen
     mr r5, r3
     mr r3, r31
     mr r4, r23
     addi r5, r5, 0x1
     bl memcpy
-lbl_fn_80206F44_00000960:
+lbl_weaponEffect_loadCSV_00000960:
     addi r3, r1, 0x20
     bl strlen
     cmpwi r3, 0x0
-    beq lbl_fn_80206F44_000009C4
+    beq lbl_weaponEffect_loadCSV_000009C4
     lwz r3, lbl_8087F16C
     lwz r0, 0x10(r1)
     add r23, r3, r30
@@ -857,7 +857,7 @@ lbl_fn_80206F44_00000960:
     stw r0, 0x8(r23)
     lwz r0, 0x1c(r1)
     stw r0, 0xc(r23)
-    beq lbl_fn_80206F44_000009C0
+    beq lbl_weaponEffect_loadCSV_000009C0
     mr r3, r31
     bl strlen
     mr r5, r3
@@ -865,17 +865,17 @@ lbl_fn_80206F44_00000960:
     addi r3, r23, 0x10
     addi r5, r5, 0x1
     bl memcpy
-lbl_fn_80206F44_000009C0:
+lbl_weaponEffect_loadCSV_000009C0:
     addi r30, r30, 0x20
-lbl_fn_80206F44_000009C4:
+lbl_weaponEffect_loadCSV_000009C4:
     addi r3, r1, 0x30
     bl fn_8005B5F8
     cmpwi r3, 0x0
-    bne lbl_fn_80206F44_00000880
+    bne lbl_weaponEffect_loadCSV_00000880
     lwz r3, lbl_8087F518
     mr r4, r29
     bl fn_8046DD20
-lbl_fn_80206F44_000009E0:
+lbl_weaponEffect_loadCSV_000009E0:
     lmw r23, 0x66c(r1)
     lwz r0, 0x694(r1)
     mtlr r0
@@ -1865,7 +1865,7 @@ void fn_80207F80(void)
     fn_80208BE0();
     fn_80209960();
     fn_80204E54();
-    fn_80206F44();
+    weaponEffect_loadCSV();
     fn_8020DF88();
     fn_80204958();
     fn_8020FDEC();

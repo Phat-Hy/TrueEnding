@@ -37,10 +37,10 @@ extern void fn_80614790(void);
 extern void fn_806149C0(void);
 extern void fn_80614A00(void);
 extern void fn_80614A40(void);
-extern void fn_80614CC0(void);
-extern void fn_80614D30(void);
+extern void GXSetTexCopySrc(void);
+extern void GXSetTexCopyDst(void);
 extern void fn_80615190(void);
-extern void fn_80615560(void);
+extern void GXCopyTex(void);
 extern void fn_80615B60(void);
 extern void fn_80615C40(void);
 extern void fn_80615D20(void);
@@ -60,15 +60,15 @@ extern void fn_80617420(void);
 extern void fn_80617460(void);
 extern void fn_806174C0(void);
 extern void fn_806175F0(void);
-extern void fn_80617650(void);
-extern void fn_806176A0(void);
+extern void GXSetTevKColorSel(void);
+extern void GXSetTevKAlphaSel(void);
 extern void fn_80617880(void);
-extern void fn_806179E0(void);
+extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
-extern void fn_80618350(void);
-extern void fn_806183A0(void);
-extern void fn_80618400(void);
-extern void fn_80618420(void);
+extern void GXLoadPosMtxImm(void);
+extern void GXLoadNrmMtxImm3x3(void);
+extern void GXSetCurrentMtx(void);
+extern void GXLoadTexMtxImm(void);
 extern void fn_80680CF8(void);
 extern void fn_80695720(void);
 
@@ -152,7 +152,7 @@ asm void fn_800B0CD4(void)
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     bl fn_80617200
     li r3, 0x4
@@ -214,7 +214,7 @@ lbl_fn_800B0CD4_000000F0:
     stfs f2, 0xac(r1)
     stfs f3, 0xbc(r1)
     stfs f0, 0xcc(r1)
-    bl fn_80618420
+    bl GXLoadTexMtxImm
     li r3, 0x0
     li r4, 0xf
     li r5, 0xf
@@ -453,15 +453,15 @@ lbl_fn_800B105C_000003C0:
     clrlslwi r6, r26, 17, 1
     li r3, 0x0
     li r4, 0x0
-    bl fn_80614CC0
+    bl GXSetTexCopySrc
     clrlwi r3, r27, 16
     clrlwi r4, r26, 16
     li r5, 0x28
     li r6, 0x1
-    bl fn_80614D30
+    bl GXSetTexCopyDst
     mr r3, r25
     li r4, 0x1
-    bl fn_80615560
+    bl GXCopyTex
     bl fn_80614190
     bl fn_806167B0
     li r3, 0x0
@@ -474,7 +474,7 @@ lbl_fn_800B105C_000003C0:
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0x0
     bl fn_80617340
@@ -534,11 +534,11 @@ lbl_fn_800B105C_000003C0:
     stfs f0, 0x60(r1)
     stfs f0, 0x4c(r1)
     stfs f0, 0x38(r1)
-    bl fn_80618420
+    bl GXLoadTexMtxImm
     addi r3, r1, 0x38
     li r4, 0x1e
     li r5, 0x1
-    bl fn_80618420
+    bl GXLoadTexMtxImm
     li r3, 0x0
     li r4, 0x1
     li r5, 0x1
@@ -1324,7 +1324,7 @@ asm void fn_800B1C44(void)
     stw r0, 0x18(r1)
     bl fn_80615B60
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     psq_l f1, 0x15c(r28), 0, 0
     addi r30, r1, 0x88
     psq_l f2, 0x164(r28), 0, 0
@@ -1340,7 +1340,7 @@ asm void fn_800B1C44(void)
     psq_st f3, 0x10(r30), 0, 0
     psq_st f4, 0x18(r30), 0, 0
     psq_st f5, 0x20(r30), 0, 0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     addi r29, r1, 0x58
     psq_l f1, 0x0(r30), 0, 0
     psq_l f2, 0x8(r30), 0, 0
@@ -1362,11 +1362,11 @@ asm void fn_800B1C44(void)
     bl fn_805F8C50
     mr r3, r29
     li r4, 0x0
-    bl fn_806183A0
+    bl GXLoadNrmMtxImm3x3
     li r3, 0x0
     bl fn_80613BB0
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     bl fn_80617200
     lfs f10, lbl_80880EF4
@@ -1401,10 +1401,10 @@ asm void fn_800B1C44(void)
     bl fn_806175F0
     li r3, 0x0
     li r4, 0xc
-    bl fn_80617650
+    bl GXSetTevKColorSel
     li r3, 0x0
     li r4, 0x1c
-    bl fn_806176A0
+    bl GXSetTevKAlphaSel
     li r3, 0x0
     li r4, 0xf
     li r5, 0xf

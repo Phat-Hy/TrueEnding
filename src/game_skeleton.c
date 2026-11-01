@@ -18,13 +18,13 @@ extern void fn_800B6218(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
-extern void fn_800D59B8(void);
+extern void atn_LH_Texture_update(void);
 extern void fn_800DCA6C(void);
 extern void atn_Curve_evaluate(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_80473EFC(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_getStatus(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_80477FA4(void);
 extern void fn_80477FC0(void);
 extern void fn_80477FDC(void);
@@ -685,7 +685,7 @@ lbl_fn_800C1990_00000794:
     bne lbl_fn_800C1990_000007B4
     lwz r0, 0x40(r28)
     add r3, r0, r31
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     beq lbl_fn_800C1990_000007B8
 lbl_fn_800C1990_000007B4:
@@ -1185,7 +1185,7 @@ asm void fn_800C2108(void)
     stw r0, 0x24(r1)
     stmw r27, 0xc(r1)
     mr r27, r3
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_800C2108_00000F04
     li r3, 0x1
@@ -1202,11 +1202,11 @@ lbl_fn_800C2108_00000F18:
     cmpwi r0, 0x0
     bne lbl_fn_800C2108_00000F48
     addi r3, r27, 0x164
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_800C2108_00000F4C
     addi r3, r27, 0x184
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_800C2108_00000F4C
 lbl_fn_800C2108_00000F48:
@@ -1220,7 +1220,7 @@ lbl_fn_800C2108_00000F4C:
     bl fn_800D5908
 lbl_fn_800C2108_00000F64:
     addi r3, r27, 0x164
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     lwz r0, 0xcc(r27)
     mr r28, r3
     cmpwi r0, 0x0
@@ -1235,7 +1235,7 @@ lbl_fn_800C2108_00000F8C:
     bne lbl_fn_800C2108_00000FAC
     lwz r0, 0x110(r27)
     add r3, r0, r29
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     beq lbl_fn_800C2108_00000FB0
 lbl_fn_800C2108_00000FAC:
@@ -1264,7 +1264,7 @@ lbl_fn_800C2108_00000FEC:
     bne lbl_fn_800C2108_0000100C
     lwz r0, 0xb8(r27)
     add r3, r0, r29
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     beq lbl_fn_800C2108_00001010
 lbl_fn_800C2108_0000100C:
@@ -1308,7 +1308,7 @@ asm void fn_800C2274(void)
     li r0, 0x1
     stw r0, 0x8(r3)
     mr r27, r3
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_800C2274_00001184
     lfs f1, lbl_808810D0

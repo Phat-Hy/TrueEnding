@@ -44,8 +44,8 @@ extern void fn_80614A40(void);
 extern void fn_80614A80(void);
 extern void fn_80614AB0(void);
 extern void fn_80614AF0(void);
-extern void fn_80614C80(void);
-extern void fn_80614D00(void);
+extern void GXSetDispCopySrc(void);
+extern void GXSetDispCopyDst(void);
 extern void fn_80614E40(void);
 extern void fn_80614E60(void);
 extern void fn_806150C0(void);
@@ -66,14 +66,14 @@ extern void fn_80617030(void);
 extern void fn_80617200(void);
 extern void fn_80617220(void);
 extern void fn_80617340(void);
-extern void fn_80617650(void);
-extern void fn_806176A0(void);
-extern void fn_806176F0(void);
+extern void GXSetTevKColorSel(void);
+extern void GXSetTevKAlphaSel(void);
+extern void GXSetTevSwapMode(void);
 extern void fn_80617730(void);
 extern void fn_806177B0(void);
 extern void fn_806177F0(void);
 extern void fn_80617880(void);
-extern void fn_806179E0(void);
+extern void GXSetNumTevStages(void);
 extern void fn_80617A10(void);
 extern void fn_80617C40(void);
 extern void fn_80617D50(void);
@@ -87,10 +87,10 @@ extern void fn_80617F50(void);
 extern void fn_80617F80(void);
 extern void fn_80617FC0(void);
 extern void fn_80618300(void);
-extern void fn_80618350(void);
-extern void fn_806183A0(void);
-extern void fn_80618400(void);
-extern void fn_80618420(void);
+extern void GXLoadPosMtxImm(void);
+extern void GXLoadNrmMtxImm3x3(void);
+extern void GXSetCurrentMtx(void);
+extern void GXLoadTexMtxImm(void);
 extern void fn_80618570(void);
 extern void fn_806185C0(void);
 extern void fn_80618630(void);
@@ -734,20 +734,20 @@ lbl___GXInitGX_00000800:
     stfs f0, 0x64(r1)
     stfs f1, 0x68(r1)
     stfs f0, 0x6c(r1)
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     addi r3, r1, 0x40
     li r4, 0x0
-    bl fn_806183A0
+    bl GXLoadNrmMtxImm3x3
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     addi r3, r1, 0x40
     li r4, 0x3c
     li r5, 0x0
-    bl fn_80618420
+    bl GXLoadTexMtxImm
     addi r3, r1, 0x40
     li r4, 0x7d
     li r5, 0x0
-    bl fn_80618420
+    bl GXLoadTexMtxImm
     lhz r3, 0x4(r27)
     lhz r0, 0x8(r27)
     stw r3, 0x74(r1)
@@ -934,7 +934,7 @@ lbl___GXInitGX_00000800:
     li r6, 0xff
     bl fn_80617880
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0x3
     bl fn_80617340
@@ -952,14 +952,14 @@ lbl___GXInitGX_00000800:
 lbl___GXInitGX_00000C4C:
     mr r3, r31
     li r4, 0x6
-    bl fn_80617650
+    bl GXSetTevKColorSel
     mr r3, r31
     li r4, 0x0
-    bl fn_806176A0
+    bl GXSetTevKAlphaSel
     mr r3, r31
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     addi r31, r31, 0x1
     cmplwi r31, 0x10
     blt lbl___GXInitGX_00000C4C
@@ -1066,10 +1066,10 @@ lbl___GXInitGX_00000DF8:
     li r3, 0x0
     lhz r6, 0x6(r27)
     li r4, 0x0
-    bl fn_80614C80
+    bl GXSetDispCopySrc
     lhz r3, 0x4(r27)
     lhz r4, 0x6(r27)
-    bl fn_80614D00
+    bl GXSetDispCopyDst
     lhz r3, 0x8(r27)
     lhz r0, 0x6(r27)
     stw r3, 0x74(r1)

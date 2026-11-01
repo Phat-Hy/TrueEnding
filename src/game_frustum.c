@@ -13,7 +13,7 @@ extern void fn_800CB3A0(void);
 extern void atn_Task_setActive(void);
 extern void atn_LH_Texture_release(void);
 extern void fn_800D5908(void);
-extern void fn_800D59B8(void);
+extern void atn_LH_Texture_update(void);
 extern void fn_800EF91C(void);
 extern void fn_80103600(void);
 extern void fn_80103E60(void);
@@ -855,7 +855,7 @@ lbl_fn_800F3490_00000A38:
 lbl_fn_800F3490_00000A50:
     addis r3, r31, 0x1
     subi r3, r3, 0x3484
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     beq lbl_fn_800F3490_00000A68
     li r28, 0x1
@@ -1296,7 +1296,7 @@ lbl_fn_800F3B4C_0000105C:
 lbl_fn_800F3B4C_00001068:
     addis r3, r30, 0x4
     subi r3, r3, 0x763c
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     beq lbl_fn_800F3B4C_00001080
     li r31, 0x1

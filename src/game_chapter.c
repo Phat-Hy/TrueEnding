@@ -28,7 +28,7 @@ extern void fn_800C2448(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
-extern void fn_800D59B8(void);
+extern void atn_LH_Texture_update(void);
 extern void fn_800D69A8(void);
 extern void fn_800D6A84(void);
 extern void fn_80612E80(void);
@@ -41,9 +41,9 @@ extern void fn_80615D20(void);
 extern void fn_80615D50(void);
 extern void fn_80617340(void);
 extern void fn_80617880(void);
-extern void fn_806179E0(void);
-extern void fn_80618350(void);
-extern void fn_80618400(void);
+extern void GXSetNumTevStages(void);
+extern void GXLoadPosMtxImm(void);
+extern void GXSetCurrentMtx(void);
 extern void fn_80695720(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
@@ -437,7 +437,7 @@ asm void fn_800774D4(void)
     li r29, 0x0
 lbl_fn_800774D4_000004A0:
     mr r3, r31
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     addi r29, r29, 0x1
     or r30, r30, r3
     cmpwi r29, 0x6
@@ -2125,7 +2125,7 @@ asm void fn_80078938(void)
     li r3, 0x1
     bl fn_80613BB0
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -2209,9 +2209,9 @@ asm void fn_80078938(void)
     stfs f0, 0x1d8(r1)
     stfs f0, 0x1c4(r1)
     stfs f0, 0x1b0(r1)
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     mr r4, r30
     addi r3, r1, 0x170
     addi r5, r1, 0x194

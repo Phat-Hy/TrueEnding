@@ -18,8 +18,8 @@ extern void fn_8006F2F0(void);
 extern void fn_800846FC(void);
 extern void fn_80084C24(void);
 extern void fn_800BDB58(void);
-extern void fn_800D59B8(void);
-extern void fn_80473EFC(void);
+extern void atn_LH_Texture_update(void);
+extern void atn_LoadHandle_getStatus(void);
 extern void fn_805F8E70(void);
 extern void fn_805F93C0(void);
 extern void fn_806163C0(void);
@@ -1665,11 +1665,11 @@ lbl_fn_80061E2C_000016E4:
     cmpwi r0, 0x0
     bne lbl_fn_80061E2C_00001724
     mr r3, r17
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_80061E2C_00001728
     addi r3, r17, 0x20
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_80061E2C_00001728
 lbl_fn_80061E2C_00001724:
@@ -1695,12 +1695,12 @@ lbl_fn_80061E2C_00001744:
     lwz r0, 0x28(r3)
     cmpwi r0, 0x0
     bne lbl_fn_80061E2C_0000178C
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_80061E2C_00001790
     lwz r3, 0x8(r1)
     addi r3, r3, 0x20
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_80061E2C_00001790
 lbl_fn_80061E2C_0000178C:

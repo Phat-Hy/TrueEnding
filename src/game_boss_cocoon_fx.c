@@ -27,7 +27,7 @@ extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_800D59B8(void);
+extern void atn_LH_Texture_update(void);
 extern void fn_800DC1DC(void);
 extern void fn_800DC6B4(void);
 extern void fn_800DFB40(void);
@@ -52,8 +52,8 @@ extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_80473F18(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_getName(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_804A39EC(void);
 extern void fn_804A4930(void);
 extern void fn_804A55FC(void);
@@ -1045,7 +1045,7 @@ asm void task_Book_destructor(void)
     cmpwi r0, 0x0
     bne lbl_task_Book_destructor_00000E2C
     addi r3, r3, 0x48
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_task_Book_destructor_00000D2C
     li r3, 0x0
@@ -1127,7 +1127,7 @@ lbl_task_Book_destructor_00000E40:
     lwz r0, 0x9c(r31)
     add r3, r0, r30
     addi r3, r3, 0xc
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     beq lbl_task_Book_destructor_00000E60
     li r3, 0x0
@@ -1144,7 +1144,7 @@ lbl_task_Book_destructor_00000E68:
     cmpwi r0, 0x2
     bne lbl_task_Book_destructor_00000EA4
     addi r3, r30, 0x2c
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     lis r4, lbl_80755394@ha
     mr r5, r3
     addi r4, r4, lbl_80755394@l
@@ -1156,7 +1156,7 @@ lbl_task_Book_destructor_00000EA4:
     cmpwi r0, 0x2
     bne lbl_task_Book_destructor_00000ED0
     addi r3, r30, 0x2c
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     lis r4, lbl_80755394@ha
     mr r5, r3
     addi r4, r4, lbl_80755394@l
@@ -1449,7 +1449,7 @@ lbl_fn_8046A9D0_00001284:
     cmpwi r0, 0x2
     bne lbl_fn_8046A9D0_000012C0
     addi r3, r30, 0x2c
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     lis r4, lbl_80755394@ha
     mr r5, r3
     addi r4, r4, lbl_80755394@l
@@ -1461,7 +1461,7 @@ lbl_fn_8046A9D0_000012C0:
     cmpwi r0, 0x2
     bne lbl_fn_8046A9D0_00001320
     addi r3, r30, 0x2c
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     lis r4, lbl_80755394@ha
     mr r5, r3
     addi r4, r4, lbl_80755394@l

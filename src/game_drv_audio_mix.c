@@ -28,7 +28,7 @@ extern void fn_800C24B4(void);
 extern void world_getGlobalFlag(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_8049B780(void);
 extern void fn_8049D974(void);
 extern void fn_8049DDD8(void);
@@ -855,7 +855,7 @@ asm void fn_805B7220(void)
     stw r29, 0x14(r1)
     mr r29, r3
     addi r3, r3, 0x58
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_805B7220_000009B0
     li r3, 0x0

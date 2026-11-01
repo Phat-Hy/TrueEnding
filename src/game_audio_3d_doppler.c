@@ -12,7 +12,7 @@ extern void fn_8004D388(void);
 extern void fn_80057A64(void);
 extern void fn_80057A68(void);
 extern void fn_80063484(void);
-extern void fn_8008CD1C(void);
+extern void atn_Matrix_copy(void);
 extern void fn_80097C08(void);
 extern void fn_800EB7A0(void);
 extern void fn_800EC1F4(void);
@@ -666,7 +666,7 @@ lbl_fn_80323690_000006E0:
     bl fn_80323C34
     addi r3, r30, 0x159c
     addi r4, r1, 0x68
-    bl fn_8008CD1C
+    bl atn_Matrix_copy
     lfs f1, lbl_80884F34
     addi r3, r30, 0x159c
     bl fn_80149624

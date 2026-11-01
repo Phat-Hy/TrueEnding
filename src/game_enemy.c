@@ -34,15 +34,15 @@ extern void fn_80617420(void);
 extern void fn_80617460(void);
 extern void fn_806174C0(void);
 extern void fn_806175F0(void);
-extern void fn_80617650(void);
-extern void fn_806176F0(void);
+extern void GXSetTevKColorSel(void);
+extern void GXSetTevSwapMode(void);
 extern void fn_80617730(void);
 extern void fn_806177B0(void);
 extern void fn_80617880(void);
-extern void fn_806179E0(void);
+extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
-extern void fn_80618350(void);
-extern void fn_80618400(void);
+extern void GXLoadPosMtxImm(void);
+extern void GXSetCurrentMtx(void);
 extern void fn_80686A48(void);
 extern void fn_80695D84(void);
 
@@ -98,7 +98,7 @@ asm void atn_ComDrawLine_execute(void)
     li r3, 0x0
     bl fn_80613BB0
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0xff
     li r5, 0xff
@@ -146,9 +146,9 @@ asm void atn_ComDrawLine_execute(void)
     stfs f0, 0x30(r1)
     stfs f0, 0x1c(r1)
     stfs f0, 0x8(r1)
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     li r3, 0x0
     li r4, 0x9
     li r5, 0x0
@@ -218,9 +218,9 @@ lbl_atn_ComDrawLine_execute_000001A4:
     bl fn_806177B0
     addi r3, r28, 0x15c
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
@@ -292,7 +292,7 @@ asm void atn_ComDrawTexture_execute(void)
     li r3, 0x1
     bl fn_80613BB0
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -335,9 +335,9 @@ asm void atn_ComDrawTexture_execute(void)
     stfs f0, 0x30(r1)
     stfs f0, 0x1c(r1)
     stfs f0, 0x8(r1)
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     b lbl_atn_ComDrawTexture_execute_0000042C
 lbl_atn_ComDrawTexture_execute_000003D0:
     lwz r3, lbl_8087EEE0
@@ -360,9 +360,9 @@ lbl_atn_ComDrawTexture_execute_000003D0:
     bl fn_80076760
     addi r3, r28, 0x15c
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
 lbl_atn_ComDrawTexture_execute_0000042C:
     lwz r3, lbl_8087EEE0
     li r5, 0x0
@@ -535,7 +535,7 @@ asm void atn_ComDrawTextureAdd_execute(void)
     li r3, 0x1
     bl fn_80613BB0
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -578,9 +578,9 @@ asm void atn_ComDrawTextureAdd_execute(void)
     stfs f0, 0x30(r1)
     stfs f0, 0x1c(r1)
     stfs f0, 0x8(r1)
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     b lbl_atn_ComDrawTextureAdd_execute_000007C0
 lbl_atn_ComDrawTextureAdd_execute_00000764:
     lwz r3, lbl_8087EEE0
@@ -603,9 +603,9 @@ lbl_atn_ComDrawTextureAdd_execute_00000764:
     bl fn_80076760
     addi r3, r28, 0x15c
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
 lbl_atn_ComDrawTextureAdd_execute_000007C0:
     lwz r3, lbl_8087EEE0
     li r5, 0x0
@@ -838,7 +838,7 @@ asm void atn_ComDrawTextureMask_execute(void)
     li r3, 0x2
     bl fn_80613BB0
     li r3, 0x2
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -848,7 +848,7 @@ asm void atn_ComDrawTextureMask_execute(void)
     li r3, 0x1
     li r4, 0x0
     li r5, 0x1
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -952,9 +952,9 @@ asm void atn_ComDrawTextureMask_execute(void)
     stfs f0, 0x30(r1)
     stfs f0, 0x1c(r1)
     stfs f0, 0x8(r1)
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     b lbl_atn_ComDrawTextureMask_execute_00000D48
 lbl_atn_ComDrawTextureMask_execute_00000CEC:
     lwz r3, lbl_8087EEE0
@@ -977,9 +977,9 @@ lbl_atn_ComDrawTextureMask_execute_00000CEC:
     bl fn_80076760
     addi r3, r28, 0x15c
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
 lbl_atn_ComDrawTextureMask_execute_00000D48:
     lwz r4, 0xc(r31)
     lwz r3, lbl_8087EEE0
@@ -1170,7 +1170,7 @@ lbl_atn_ComDrawTextureMask_execute_00000FA8:
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -1308,7 +1308,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     li r3, 0x1
     bl fn_80613BB0
     li r3, 0x4
-    bl fn_806179E0
+    bl GXSetNumTevStages
     lwz r3, lbl_8087EEE0
     li r5, 0x0
     lwz r4, 0xc(r30)
@@ -1435,10 +1435,10 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0xc
-    bl fn_80617650
+    bl GXSetTevKColorSel
     li r3, 0x0
     li r4, 0xf
     li r5, 0xe
@@ -1475,10 +1475,10 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     li r3, 0x1
     li r4, 0x1
     li r5, 0x1
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x1
     li r4, 0xd
-    bl fn_80617650
+    bl GXSetTevKColorSel
     li r3, 0x1
     li r4, 0xf
     li r5, 0xe
@@ -1515,10 +1515,10 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     li r3, 0x2
     li r4, 0x2
     li r5, 0x2
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x2
     li r4, 0xe
-    bl fn_80617650
+    bl GXSetTevKColorSel
     li r3, 0x2
     li r4, 0xf
     li r5, 0xe
@@ -1555,7 +1555,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     li r3, 0x3
     li r4, 0x3
     li r5, 0x3
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x3
     li r4, 0xf
     li r5, 0x0
@@ -1623,9 +1623,9 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     stfs f0, 0x80(r1)
     stfs f0, 0x6c(r1)
     stfs f0, 0x58(r1)
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     b lbl_atn_ComDrawTextureMono_execute_00001768
 lbl_atn_ComDrawTextureMono_execute_0000170C:
     lwz r3, lbl_8087EEE0
@@ -1648,9 +1648,9 @@ lbl_atn_ComDrawTextureMono_execute_0000170C:
     bl fn_80076760
     addi r3, r31, 0x15c
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
 lbl_atn_ComDrawTextureMono_execute_00001768:
     bl fn_806134E0
     li r3, 0x9
@@ -1809,19 +1809,19 @@ lbl_atn_ComDrawTextureMono_execute_0000191C:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x2
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x3
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     lwz r0, 0x194(r1)
     lwz r31, 0x18c(r1)
     lwz r30, 0x188(r1)
@@ -1956,7 +1956,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     li r3, 0x2
     bl fn_80613BB0
     li r3, 0x4
-    bl fn_806179E0
+    bl GXSetNumTevStages
     lfs f4, lbl_808809E0
     addi r4, r1, 0x20
     lfs f0, 0x88(r1)
@@ -2074,10 +2074,10 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0xc
-    bl fn_80617650
+    bl GXSetTevKColorSel
     li r3, 0x0
     li r4, 0xf
     li r5, 0xe
@@ -2114,10 +2114,10 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     li r3, 0x1
     li r4, 0x1
     li r5, 0x1
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x1
     li r4, 0xd
-    bl fn_80617650
+    bl GXSetTevKColorSel
     li r3, 0x1
     li r4, 0xf
     li r5, 0xe
@@ -2154,10 +2154,10 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     li r3, 0x2
     li r4, 0x2
     li r5, 0x2
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x2
     li r4, 0xe
-    bl fn_80617650
+    bl GXSetTevKColorSel
     li r3, 0x2
     li r4, 0xf
     li r5, 0xe
@@ -2194,7 +2194,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     li r3, 0x3
     li r4, 0x3
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x3
     li r4, 0xf
     li r5, 0x0
@@ -2269,9 +2269,9 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     stfs f0, 0x80(r1)
     stfs f0, 0x6c(r1)
     stfs f0, 0x58(r1)
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     b lbl_atn_ComDrawTextureMaskMono_execute_00002144
 lbl_atn_ComDrawTextureMaskMono_execute_000020E8:
     lwz r3, lbl_8087EEE0
@@ -2294,9 +2294,9 @@ lbl_atn_ComDrawTextureMaskMono_execute_000020E8:
     bl fn_80076760
     addi r3, r31, 0x15c
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
 lbl_atn_ComDrawTextureMaskMono_execute_00002144:
     lwz r4, 0xc(r30)
     lwz r3, lbl_8087EEE0
@@ -2469,19 +2469,19 @@ lbl_atn_ComDrawTextureMaskMono_execute_00002314:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x2
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x3
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     lwz r0, 0x194(r1)
     lwz r31, 0x18c(r1)
     lwz r30, 0x188(r1)
@@ -2508,7 +2508,7 @@ asm void atn_ComDrawFont_execute(void)
     li r3, 0x1
     bl fn_80613BB0
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -2518,7 +2518,7 @@ asm void atn_ComDrawFont_execute(void)
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -2584,9 +2584,9 @@ asm void atn_ComDrawFont_execute(void)
     stfs f0, 0x30(r1)
     stfs f0, 0x1c(r1)
     stfs f0, 0x8(r1)
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     b lbl_atn_ComDrawFont_execute_000025F0
 lbl_atn_ComDrawFont_execute_00002594:
     lwz r3, lbl_8087EEE0
@@ -2609,9 +2609,9 @@ lbl_atn_ComDrawFont_execute_00002594:
     bl fn_80076760
     addi r3, r27, 0x15c
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
 lbl_atn_ComDrawFont_execute_000025F0:
     lbz r0, 0x2d(r30)
     cmpwi r0, 0x0
@@ -2757,7 +2757,7 @@ lbl_atn_ComDrawFont_execute_0000278C:
     stfs f0, 0x3290(r6)
     stfs f0, 0x327c(r6)
     stfs f0, 0x3268(r6)
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     lbz r0, 0x2d(r30)
     cmpwi r0, 0x0
     beq lbl_atn_ComDrawFont_execute_00002844
@@ -2887,7 +2887,7 @@ lbl_atn_ComDrawFontSideFade_execute_000029CC:
     li r3, 0x1
     bl fn_80613BB0
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -2897,7 +2897,7 @@ lbl_atn_ComDrawFontSideFade_execute_000029CC:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -2963,9 +2963,9 @@ lbl_atn_ComDrawFontSideFade_execute_000029CC:
     stfs f0, 0x30(r1)
     stfs f0, 0x1c(r1)
     stfs f0, 0x8(r1)
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     b lbl_atn_ComDrawFontSideFade_execute_00002B88
 lbl_atn_ComDrawFontSideFade_execute_00002B2C:
     lwz r3, lbl_8087EEE0
@@ -2988,9 +2988,9 @@ lbl_atn_ComDrawFontSideFade_execute_00002B2C:
     bl fn_80076760
     addi r3, r28, 0x15c
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
 lbl_atn_ComDrawFontSideFade_execute_00002B88:
     lbz r0, 0x2d(r27)
     cmpwi r0, 0x0
@@ -3151,7 +3151,7 @@ lbl_atn_ComDrawFontSideFade_execute_00002D8C:
     stfs f0, 0x3290(r6)
     stfs f0, 0x327c(r6)
     stfs f0, 0x3268(r6)
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     lbz r0, 0x2d(r27)
     cmpwi r0, 0x0
     beq lbl_atn_ComDrawFontSideFade_execute_00002E10
@@ -3204,7 +3204,7 @@ asm void atn_ComDrawColliObject_execute(void)
     li r3, 0x0
     bl fn_80613BB0
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0xff
     li r5, 0xff
@@ -3243,9 +3243,9 @@ asm void atn_ComDrawColliObject_execute(void)
     bl fn_80615D50
     addi r3, r30, 0x15c
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
@@ -3290,7 +3290,7 @@ asm void atn_ComDrawColliTree_execute(void)
     li r3, 0x0
     bl fn_80613BB0
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0xff
     li r5, 0xff
@@ -3329,9 +3329,9 @@ asm void atn_ComDrawColliTree_execute(void)
     bl fn_80615D50
     addi r3, r30, 0x15c
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
@@ -3398,9 +3398,9 @@ asm void atn_ComDrawD3TextureMask_execute(void)
     bl fn_80076760
     addi r3, r29, 0x15c
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x1
@@ -3422,11 +3422,11 @@ lbl_atn_ComDrawD3TextureMask_execute_000031C8:
     cmpwi r0, 0x0
     beq lbl_atn_ComDrawD3TextureMask_execute_00003344
     li r3, 0x2
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x1
     li r4, 0x0
     li r5, 0x1
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -3515,11 +3515,11 @@ lbl_atn_ComDrawD3TextureMask_execute_000031C8:
     b lbl_atn_ComDrawD3TextureMask_execute_00003424
 lbl_atn_ComDrawD3TextureMask_execute_00003344:
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -3649,11 +3649,11 @@ lbl_atn_ComDrawD3TextureMask_execute_0000353C:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -3680,7 +3680,7 @@ asm void atn_ComDrawWindow_execute(void)
     li r3, 0x2
     bl fn_80613BB0
     li r3, 0x2
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -3690,7 +3690,7 @@ asm void atn_ComDrawWindow_execute(void)
     li r3, 0x1
     li r4, 0x0
     li r5, 0x1
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -3794,9 +3794,9 @@ asm void atn_ComDrawWindow_execute(void)
     stfs f0, 0x30(r1)
     stfs f0, 0x1c(r1)
     stfs f0, 0x8(r1)
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     b lbl_atn_ComDrawWindow_execute_000037F0
 lbl_atn_ComDrawWindow_execute_00003794:
     lwz r3, lbl_8087EEE0
@@ -3819,9 +3819,9 @@ lbl_atn_ComDrawWindow_execute_00003794:
     bl fn_80076760
     addi r3, r29, 0x15c
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
 lbl_atn_ComDrawWindow_execute_000037F0:
     lwz r0, 0x34(r30)
     cmpwi r0, 0x0
@@ -4029,7 +4029,7 @@ lbl_atn_ComDrawWindow_execute_00003A78:
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5

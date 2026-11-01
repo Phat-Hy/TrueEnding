@@ -32,7 +32,7 @@ extern void fn_8037E12C(void);
 extern void fn_80389884(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
-extern void fn_80473F18(void);
+extern void atn_LoadHandle_getName(void);
 extern void fn_80491F94(void);
 extern void fn_804963F8(void);
 extern void fn_80496414(void);
@@ -1687,7 +1687,7 @@ lbl_fn_8049F4F4_00001780:
     cmpwi r0, 0x0
     bne lbl_fn_8049F4F4_000017C0
     addi r3, r16, 0x50
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     mr r5, r3
     mr r3, r21
     li r4, 0x6

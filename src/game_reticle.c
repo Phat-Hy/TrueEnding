@@ -34,9 +34,9 @@ extern void fn_800C607C(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D594C(void);
-extern void fn_800D59B8(void);
+extern void atn_LH_Texture_update(void);
 extern void fn_800D5C84(void);
-extern void fn_80473EFC(void);
+extern void atn_LoadHandle_getStatus(void);
 extern void fn_8047614C(void);
 extern void fn_80476170(void);
 extern void fn_80478198(void);
@@ -60,15 +60,15 @@ extern void fn_80617460(void);
 extern void fn_806174C0(void);
 extern void fn_80617520(void);
 extern void fn_806175F0(void);
-extern void fn_806176F0(void);
+extern void GXSetTevSwapMode(void);
 extern void fn_80617730(void);
 extern void fn_80617880(void);
-extern void fn_806179E0(void);
+extern void GXSetNumTevStages(void);
 extern void fn_80618030(void);
-extern void fn_80618350(void);
-extern void fn_806183A0(void);
-extern void fn_80618400(void);
-extern void fn_80618420(void);
+extern void GXLoadPosMtxImm(void);
+extern void GXLoadNrmMtxImm3x3(void);
+extern void GXSetCurrentMtx(void);
+extern void GXLoadTexMtxImm(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
 
@@ -205,7 +205,7 @@ asm void fn_8009B9E8(void)
     li r4, 0x0
     add r31, r6, r0
     mr r3, r31
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     mr r3, r31
     addi r4, r1, 0x38
     bl fn_805F8DA0
@@ -215,12 +215,12 @@ asm void fn_8009B9E8(void)
     li r4, 0x0
     stfs f0, 0x54(r1)
     stfs f0, 0x64(r1)
-    bl fn_806183A0
+    bl GXLoadNrmMtxImm3x3
     addi r3, r1, 0x38
     li r4, 0x3
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     b lbl_fn_8009B9E8_00000244
 lbl_fn_8009B9E8_00000130:
     lbz r0, lbl_8087EF28
@@ -250,7 +250,7 @@ lbl_fn_8009B9E8_00000168:
     stw r3, 0x0(r27)
     mr r4, r28
     add r3, r31, r0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
 lbl_fn_8009B9E8_00000194:
     addi r29, r29, 0x1
     addi r27, r27, 0x4
@@ -278,7 +278,7 @@ lbl_fn_8009B9E8_000001C4:
     mr r4, r27
     add r30, r31, r0
     mr r3, r30
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     mr r3, r30
     addi r4, r1, 0x8
     bl fn_805F8DA0
@@ -287,11 +287,11 @@ lbl_fn_8009B9E8_000001C4:
     addi r3, r1, 0x8
     stfs f31, 0x24(r1)
     stfs f31, 0x34(r1)
-    bl fn_806183A0
+    bl GXLoadNrmMtxImm3x3
     mr r4, r26
     addi r3, r1, 0x8
     li r5, 0x0
-    bl fn_80618420
+    bl GXLoadTexMtxImm
 lbl_fn_8009B9E8_0000022C:
     addi r25, r25, 0x1
     addi r28, r28, 0x4
@@ -473,13 +473,13 @@ lbl_fn_8009BB9C_00000460:
     lwz r4, 0x18(r28)
     addi r3, r1, 0x98
     li r5, 0x1
-    bl fn_80618420
+    bl GXLoadTexMtxImm
     b lbl_fn_8009BB9C_00000598
 lbl_fn_8009BB9C_000004A4:
     mr r4, r31
     addi r3, r1, 0x98
     li r5, 0x0
-    bl fn_80618420
+    bl GXLoadTexMtxImm
     addi r31, r31, 0x3
     b lbl_fn_8009BB9C_00000598
 lbl_fn_8009BB9C_000004BC:
@@ -507,14 +507,14 @@ lbl_fn_8009BB9C_000004BC:
     stfs f30, 0x84(r1)
     stfs f30, 0x94(r1)
     lwz r4, 0x18(r28)
-    bl fn_80618420
+    bl GXLoadTexMtxImm
     b lbl_fn_8009BB9C_00000538
 lbl_fn_8009BB9C_00000524:
     mulli r0, r4, 0x30
     lwz r4, 0x18(r28)
     li r5, 0x0
     add r3, r27, r0
-    bl fn_80618420
+    bl GXLoadTexMtxImm
 lbl_fn_8009BB9C_00000538:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x38
@@ -538,7 +538,7 @@ lbl_fn_8009BB9C_00000538:
     mr r4, r31
     addi r3, r1, 0x8
     li r5, 0x0
-    bl fn_80618420
+    bl GXLoadTexMtxImm
     addi r31, r31, 0x3
 lbl_fn_8009BB9C_00000598:
     addi r30, r30, 0x1
@@ -1154,11 +1154,11 @@ lbl_fn_8009C688_00000E38:
     cmpwi r0, 0x0
     bne lbl_fn_8009C688_00000E7C
     mr r3, r21
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_8009C688_00000E80
     addi r3, r21, 0x20
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_8009C688_00000E80
 lbl_fn_8009C688_00000E7C:
@@ -1740,7 +1740,7 @@ lbl_fn_8009CC28_00001674:
     addi r0, r4, 0x1
     cntlzw r0, r0
     srwi r28, r0, 5
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x1
     bl fn_80613BB0
     lwz r0, 0x38(r31)
@@ -1757,7 +1757,7 @@ lbl_fn_8009CC28_00001674:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x3
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1794,7 +1794,7 @@ lbl_fn_8009CC28_00001674:
     addi r3, r1, 0x30
     li r4, 0x1e
     li r5, 0x1
-    bl fn_80618420
+    bl GXLoadTexMtxImm
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -1807,7 +1807,7 @@ lbl_fn_8009CC28_00001784:
     addi r3, r1, 0x30
     li r4, 0x40
     li r5, 0x0
-    bl fn_80618420
+    bl GXLoadTexMtxImm
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -1828,13 +1828,13 @@ lbl_fn_8009CC28_000017B4:
     mr r3, r29
     bl fn_800761A8
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     bl fn_80613BB0
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0x4
     bl fn_80617340
@@ -1901,7 +1901,7 @@ asm void fn_8009D1A4(void)
     li r9, 0x2
     bl fn_80615D50
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -2042,11 +2042,11 @@ lbl_fn_8009D1A4_00001AD8:
     cmpwi r0, 0x0
     bne lbl_fn_8009D1A4_00001B20
     mr r3, r31
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_8009D1A4_00001B24
     addi r3, r31, 0x20
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_8009D1A4_00001B24
 lbl_fn_8009D1A4_00001B20:
@@ -2720,11 +2720,11 @@ lbl_fn_8009DCE0_0000244C:
     cmpwi r0, 0x0
     bne lbl_fn_8009DCE0_00002494
     mr r3, r22
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_8009DCE0_00002498
     addi r3, r22, 0x20
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_8009DCE0_00002498
 lbl_fn_8009DCE0_00002494:

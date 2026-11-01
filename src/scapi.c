@@ -74,10 +74,10 @@ void fn_80624FD0(void);
 void fn_80625040(void);
 void fn_806250D0(void);
 void fn_80625110(void);
-void fn_806254D0(void);
-void fn_806255E0(void);
-void fn_80625730(void);
-void fn_80625890(void);
+void CXUncompressAny(void);
+void CXUncompressLZ(void);
+void CXUncompressHuffman(void);
+void CXUnfilterDiff(void);
 void fn_80625910(void);
 void fn_80625BF0(void);
 void fn_80625C90(void);
@@ -992,30 +992,30 @@ lbl_fn_80625110_00000B44:
     blr
 }
 
-asm void fn_806254D0(void)
+asm void CXUncompressAny(void)
 {
     nofralloc
     lbz r0, 0x0(r3)
     rlwinm r0, r0, 0, 24, 27
     cmpwi r0, 0x30
-    beq lbl_fn_806254D0_00000B7C
+    beq lbl_CXUncompressAny_00000B7C
     cmpwi r0, 0x10
-    beq lbl_fn_806254D0_00000B80
+    beq lbl_CXUncompressAny_00000B80
     cmpwi r0, 0x20
-    beq lbl_fn_806254D0_00000B84
+    beq lbl_CXUncompressAny_00000B84
     cmpwi r0, 0x80
-    beq lbl_fn_806254D0_00000B88
+    beq lbl_CXUncompressAny_00000B88
     blr
-lbl_fn_806254D0_00000B7C:
-    b lbl_fn_806254D0_00000B90
-lbl_fn_806254D0_00000B80:
-    b fn_806255E0
-lbl_fn_806254D0_00000B84:
-    b fn_80625730
-lbl_fn_806254D0_00000B88:
-    b fn_80625890
+lbl_CXUncompressAny_00000B7C:
+    b lbl_CXUncompressAny_00000B90
+lbl_CXUncompressAny_00000B80:
+    b CXUncompressLZ
+lbl_CXUncompressAny_00000B84:
+    b CXUncompressHuffman
+lbl_CXUncompressAny_00000B88:
+    b CXUnfilterDiff
     blr
-lbl_fn_806254D0_00000B90:
+lbl_CXUncompressAny_00000B90:
     lwz r5, 0x0(r3)
     addi r6, r3, 0x4
     rlwinm r3, r5, 8, 8, 15
@@ -1024,7 +1024,7 @@ lbl_fn_806254D0_00000B90:
     rlwimi r0, r5, 8, 24, 31
     or r0, r3, r0
     srwi. r5, r0, 8
-    bne lbl_fn_806254D0_00000C48
+    bne lbl_CXUncompressAny_00000C48
     lwz r5, 0x0(r6)
     addi r6, r6, 0x4
     rlwinm r3, r5, 8, 8, 15
@@ -1032,49 +1032,49 @@ lbl_fn_806254D0_00000B90:
     rlwimi r3, r5, 24, 0, 7
     rlwimi r0, r5, 8, 24, 31
     or r5, r3, r0
-    b lbl_fn_806254D0_00000C48
+    b lbl_CXUncompressAny_00000C48
     nop
-lbl_fn_806254D0_00000BD8:
+lbl_CXUncompressAny_00000BD8:
     lbz r3, 0x0(r6)
     addi r6, r6, 0x1
     rlwinm. r0, r3, 0, 24, 24
     clrlwi r3, r3, 25
-    bne lbl_fn_806254D0_00000C1C
+    bne lbl_CXUncompressAny_00000C1C
     addi r3, r3, 0x1
     cmplw r3, r5
-    ble lbl_fn_806254D0_00000BFC
+    ble lbl_CXUncompressAny_00000BFC
     mr r3, r5
-lbl_fn_806254D0_00000BFC:
+lbl_CXUncompressAny_00000BFC:
     subf r5, r3, r5
-lbl_fn_806254D0_00000C00:
+lbl_CXUncompressAny_00000C00:
     lbz r0, 0x0(r6)
     subic. r3, r3, 0x1
     stb r0, 0x0(r4)
     addi r6, r6, 0x1
     addi r4, r4, 0x1
-    bne lbl_fn_806254D0_00000C00
-    b lbl_fn_806254D0_00000C48
-lbl_fn_806254D0_00000C1C:
+    bne lbl_CXUncompressAny_00000C00
+    b lbl_CXUncompressAny_00000C48
+lbl_CXUncompressAny_00000C1C:
     addi r3, r3, 0x3
     cmplw r3, r5
-    ble lbl_fn_806254D0_00000C2C
+    ble lbl_CXUncompressAny_00000C2C
     mr r3, r5
-lbl_fn_806254D0_00000C2C:
+lbl_CXUncompressAny_00000C2C:
     lbz r0, 0x0(r6)
     subf r5, r3, r5
     addi r6, r6, 0x1
-lbl_fn_806254D0_00000C38:
+lbl_CXUncompressAny_00000C38:
     subic. r3, r3, 0x1
     stb r0, 0x0(r4)
     addi r4, r4, 0x1
-    bne lbl_fn_806254D0_00000C38
-lbl_fn_806254D0_00000C48:
+    bne lbl_CXUncompressAny_00000C38
+lbl_CXUncompressAny_00000C48:
     cmpwi r5, 0x0
-    bne lbl_fn_806254D0_00000BD8
+    bne lbl_CXUncompressAny_00000BD8
     blr
 }
 
-asm void fn_806255E0(void)
+asm void CXUncompressLZ(void)
 {
     nofralloc
     lwz r7, 0x0(r3)
@@ -1090,7 +1090,7 @@ asm void fn_806255E0(void)
     or r0, r0, r3
     srwi. r9, r5, 8
     srwi r7, r0, 31
-    bne lbl_fn_806255E0_00000CB4
+    bne lbl_CXUncompressLZ_00000CB4
     lwz r5, 0x0(r8)
     addi r8, r8, 0x4
     rlwinm r3, r5, 8, 8, 15
@@ -1098,34 +1098,34 @@ asm void fn_806255E0(void)
     rlwimi r3, r5, 24, 0, 7
     rlwimi r0, r5, 8, 24, 31
     or r9, r3, r0
-lbl_fn_806255E0_00000CB4:
+lbl_CXUncompressLZ_00000CB4:
     li r0, 0x8
-    b lbl_fn_806255E0_00000DA0
+    b lbl_CXUncompressLZ_00000DA0
     nop
-lbl_fn_806255E0_00000CC0:
+lbl_CXUncompressLZ_00000CC0:
     lbz r10, 0x0(r8)
     mtctr r0
     addi r8, r8, 0x1
     nop
-lbl_fn_806255E0_00000CD0:
+lbl_CXUncompressLZ_00000CD0:
     rlwinm. r3, r10, 0, 24, 24
-    bne lbl_fn_806255E0_00000CF0
+    bne lbl_CXUncompressLZ_00000CF0
     lbz r3, 0x0(r8)
     addi r8, r8, 0x1
     stb r3, 0x0(r4)
     addi r4, r4, 0x1
     subi r9, r9, 0x1
-    b lbl_fn_806255E0_00000D90
-lbl_fn_806255E0_00000CF0:
+    b lbl_CXUncompressLZ_00000D90
+lbl_CXUncompressLZ_00000CF0:
     lbz r6, 0x0(r8)
     cmpwi r7, 0x0
     srawi r11, r6, 4
-    bne lbl_fn_806255E0_00000D08
+    bne lbl_CXUncompressLZ_00000D08
     addi r11, r11, 0x3
-    b lbl_fn_806255E0_00000D50
-lbl_fn_806255E0_00000D08:
+    b lbl_CXUncompressLZ_00000D50
+lbl_CXUncompressLZ_00000D08:
     cmpwi r11, 0x1
-    bne lbl_fn_806255E0_00000D30
+    bne lbl_CXUncompressLZ_00000D30
     lbz r5, 0x1(r8)
     lbzu r3, 0x2(r8)
     slwi r11, r5, 4
@@ -1133,48 +1133,48 @@ lbl_fn_806255E0_00000D08:
     srawi r3, r3, 4
     or r11, r11, r3
     addi r11, r11, 0x111
-    b lbl_fn_806255E0_00000D50
-lbl_fn_806255E0_00000D30:
+    b lbl_CXUncompressLZ_00000D50
+lbl_CXUncompressLZ_00000D30:
     cmpwi r11, 0x0
-    bne lbl_fn_806255E0_00000D4C
+    bne lbl_CXUncompressLZ_00000D4C
     lbzu r3, 0x1(r8)
     srawi r11, r3, 4
     rlwimi r11, r6, 4, 24, 27
     addi r11, r11, 0x11
-    b lbl_fn_806255E0_00000D50
-lbl_fn_806255E0_00000D4C:
+    b lbl_CXUncompressLZ_00000D50
+lbl_CXUncompressLZ_00000D4C:
     addi r11, r11, 0x1
-lbl_fn_806255E0_00000D50:
+lbl_CXUncompressLZ_00000D50:
     lbz r5, 0x0(r8)
     cmplw r11, r9
     lbz r3, 0x1(r8)
     addi r8, r8, 0x2
     rlwimi r3, r5, 8, 20, 23
     addi r5, r3, 0x1
-    ble lbl_fn_806255E0_00000D70
+    ble lbl_CXUncompressLZ_00000D70
     mr r11, r9
-lbl_fn_806255E0_00000D70:
+lbl_CXUncompressLZ_00000D70:
     subf r9, r11, r9
     nop
-lbl_fn_806255E0_00000D78:
+lbl_CXUncompressLZ_00000D78:
     subf r3, r5, r4
     subic. r11, r11, 0x1
     lbz r3, 0x0(r3)
     stb r3, 0x0(r4)
     addi r4, r4, 0x1
-    bgt lbl_fn_806255E0_00000D78
-lbl_fn_806255E0_00000D90:
+    bgt lbl_CXUncompressLZ_00000D78
+lbl_CXUncompressLZ_00000D90:
     cmpwi r9, 0x0
-    beq lbl_fn_806255E0_00000DA0
+    beq lbl_CXUncompressLZ_00000DA0
     slwi r10, r10, 1
-    bdnz lbl_fn_806255E0_00000CD0
-lbl_fn_806255E0_00000DA0:
+    bdnz lbl_CXUncompressLZ_00000CD0
+lbl_CXUncompressLZ_00000DA0:
     cmpwi r9, 0x0
-    bne lbl_fn_806255E0_00000CC0
+    bne lbl_CXUncompressLZ_00000CC0
     blr
 }
 
-asm void fn_80625730(void)
+asm void CXUncompressHuffman(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1189,12 +1189,12 @@ asm void fn_80625730(void)
     rlwimi r0, r6, 8, 24, 31
     or r0, r5, r0
     srwi. r5, r0, 8
-    beq lbl_fn_80625730_00000DEC
+    beq lbl_CXUncompressHuffman_00000DEC
     addi r11, r3, 0x4
-    b lbl_fn_80625730_00000DF0
-lbl_fn_80625730_00000DEC:
+    b lbl_CXUncompressHuffman_00000DF0
+lbl_CXUncompressHuffman_00000DEC:
     addi r11, r3, 0x8
-lbl_fn_80625730_00000DF0:
+lbl_CXUncompressHuffman_00000DF0:
     lbz r6, 0x0(r3)
     cmpwi r5, 0x0
     addi r0, r11, 0x1
@@ -1203,22 +1203,22 @@ lbl_fn_80625730_00000DF0:
     clrlwi r6, r6, 28
     addi r9, r8, 0x4
     li r8, 0x0
-    bne lbl_fn_80625730_00000E2C
+    bne lbl_CXUncompressHuffman_00000E2C
     lwz r10, 0x4(r3)
     rlwinm r5, r10, 8, 8, 15
     rlwinm r3, r10, 24, 16, 23
     rlwimi r5, r10, 24, 0, 7
     rlwimi r3, r10, 8, 24, 31
     or r5, r5, r3
-lbl_fn_80625730_00000E2C:
+lbl_CXUncompressHuffman_00000E2C:
     lbz r3, 0x0(r11)
     mr r30, r0
     subfic r12, r6, 0x20
     addi r3, r3, 0x1
     slwi r3, r3, 1
     add r31, r11, r3
-    b lbl_fn_80625730_00000EF0
-lbl_fn_80625730_00000E48:
+    b lbl_CXUncompressHuffman_00000EF0
+lbl_CXUncompressHuffman_00000E48:
     lwz r11, 0x0(r31)
     li r29, 0x20
     addi r31, r31, 0x4
@@ -1227,8 +1227,8 @@ lbl_fn_80625730_00000E48:
     rlwimi r10, r11, 24, 0, 7
     rlwimi r3, r11, 8, 24, 31
     or r28, r10, r3
-    b lbl_fn_80625730_00000EE8
-lbl_fn_80625730_00000E6C:
+    b lbl_CXUncompressHuffman_00000EE8
+lbl_CXUncompressHuffman_00000E6C:
     lbz r3, 0x0(r30)
     srwi r27, r28, 31
     clrrwi r11, r30, 1
@@ -1239,7 +1239,7 @@ lbl_fn_80625730_00000E6C:
     add r3, r27, r11
     slwi r10, r10, 1
     add r30, r10, r3
-    beq lbl_fn_80625730_00000EDC
+    beq lbl_CXUncompressHuffman_00000EDC
     lbz r3, 0x0(r30)
     addi r8, r8, 0x1
     cmplw r8, r9
@@ -1247,7 +1247,7 @@ lbl_fn_80625730_00000E6C:
     slw r3, r3, r12
     mr r30, r0
     or r7, r7, r3
-    bne lbl_fn_80625730_00000EDC
+    bne lbl_CXUncompressHuffman_00000EDC
     rlwinm r10, r7, 8, 8, 15
     rlwinm r3, r7, 24, 16, 23
     rlwimi r10, r7, 24, 0, 7
@@ -1257,16 +1257,16 @@ lbl_fn_80625730_00000E6C:
     or r3, r10, r3
     stw r3, 0x0(r4)
     addi r4, r4, 0x4
-lbl_fn_80625730_00000EDC:
+lbl_CXUncompressHuffman_00000EDC:
     cmpwi r5, 0x0
-    ble lbl_fn_80625730_00000EF0
+    ble lbl_CXUncompressHuffman_00000EF0
     slwi r28, r28, 1
-lbl_fn_80625730_00000EE8:
+lbl_CXUncompressHuffman_00000EE8:
     subic. r29, r29, 0x1
-    bge lbl_fn_80625730_00000E6C
-lbl_fn_80625730_00000EF0:
+    bge lbl_CXUncompressHuffman_00000E6C
+lbl_CXUncompressHuffman_00000EF0:
     cmpwi r5, 0x0
-    bgt lbl_fn_80625730_00000E48
+    bgt lbl_CXUncompressHuffman_00000E48
     addi r11, r1, 0x20
     bl _restgpr_27
     lwz r0, 0x24(r1)
@@ -1275,7 +1275,7 @@ lbl_fn_80625730_00000EF0:
     blr
 }
 
-asm void fn_80625890(void)
+asm void CXUnfilterDiff(void)
 {
     nofralloc
     lbz r0, 0x0(r3)
@@ -1290,18 +1290,18 @@ asm void fn_80625890(void)
     rlwimi r0, r5, 8, 24, 31
     or r0, r3, r0
     srwi r5, r0, 8
-    beq lbl_fn_80625890_00000F68
+    beq lbl_CXUnfilterDiff_00000F68
     nop
-lbl_fn_80625890_00000F48:
+lbl_CXUnfilterDiff_00000F48:
     lbz r0, 0x0(r6)
     subic. r5, r5, 0x1
     addi r6, r6, 0x1
     add r8, r8, r0
     stb r8, 0x0(r4)
     addi r4, r4, 0x1
-    bgt lbl_fn_80625890_00000F48
+    bgt lbl_CXUnfilterDiff_00000F48
     blr
-lbl_fn_80625890_00000F68:
+lbl_CXUnfilterDiff_00000F68:
     lhz r3, 0x0(r6)
     subic. r5, r5, 0x2
     addi r6, r6, 0x2
@@ -1310,7 +1310,7 @@ lbl_fn_80625890_00000F68:
     add r8, r8, r0
     sthbrx r8, r0, r4
     addi r4, r4, 0x2
-    bgt lbl_fn_80625890_00000F68
+    bgt lbl_CXUnfilterDiff_00000F68
     blr
 }
 

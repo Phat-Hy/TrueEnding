@@ -22,13 +22,13 @@ extern void fn_8008B130(void);
 extern void fn_8008CD60(void);
 extern void fn_800902C0(void);
 extern void fn_80092A4C(void);
-extern void fn_800954DC(void);
+extern void atn_Lockon_updateTargetTextures(void);
 extern void fn_80097E80(void);
 extern void fn_800BFAC8(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D59B8(void);
+extern void atn_LH_Texture_update(void);
 extern void fn_803EE3F0(void);
 extern void fn_803EE41C(void);
 extern void fn_803EEE44(void);
@@ -45,8 +45,8 @@ extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_80473EFC(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_getStatus(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_805F89F0(void);
 extern void fn_805F8E70(void);
 extern void fn_805F9160(void);
@@ -438,7 +438,7 @@ lbl_fn_803EC91C_000003F4:
     b lbl_fn_803EC91C_000005F4
 lbl_fn_803EC91C_00000464:
     addi r3, r3, 0x60
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_803EC91C_00000478
     li r29, 0x1
@@ -446,7 +446,7 @@ lbl_fn_803EC91C_00000478:
     cmpwi r29, 0x0
     bne lbl_fn_803EC91C_00000520
     addi r3, r31, 0x60
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_803EC91C_00000518
     lwz r12, 0x0(r31)
@@ -1680,11 +1680,11 @@ asm void fn_803EDB18(void)
     cmpwi r0, 0x0
     bne lbl_fn_803EDB18_00001608
     mr r3, r25
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_803EDB18_0000160C
     addi r3, r25, 0x20
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_803EDB18_0000160C
 lbl_fn_803EDB18_00001608:
@@ -1774,7 +1774,7 @@ lbl_fn_803EDB18_00001654:
     psq_st f1, 0x0(r5), 0, 0
     lwz r4, 0xa8(r30)
     lfs f1, 0xc(r22)
-    bl fn_800954DC
+    bl atn_Lockon_updateTargetTextures
     b lbl_fn_803EDB18_00001774
 lbl_fn_803EDB18_0000175C:
     addi r25, r25, 0x10

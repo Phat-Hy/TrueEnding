@@ -31,7 +31,7 @@ extern void fn_803761A4(void);
 extern void fn_803B3B38(void);
 extern void fn_80418318(void);
 extern void fn_804188A0(void);
-extern void fn_80473F34(void);
+extern void atn_LoadHandle_getData(void);
 extern void fn_80563A64(void);
 extern void fn_805F8E70(void);
 extern void fn_805F93C0(void);
@@ -1639,7 +1639,7 @@ lbl_fn_8017AD44_00001438:
     cmplw r30, r0
     blt lbl_fn_8017AD44_0000141C
     addi r3, r27, 0x98
-    bl fn_80473F34
+    bl atn_LoadHandle_getData
     lwz r0, 0x8(r28)
     mr r31, r3
     cmpwi r0, 0x0

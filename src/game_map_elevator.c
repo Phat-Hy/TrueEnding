@@ -18,7 +18,7 @@ extern void fn_802097C4(void);
 extern void fn_80219E6C(void);
 extern void fn_803EA77C(void);
 extern void fn_80441E8C(void);
-extern void fn_80473F18(void);
+extern void atn_LoadHandle_getName(void);
 extern void fn_805F8E70(void);
 extern void fn_805F93C0(void);
 extern void fn_805F9750(void);
@@ -177,7 +177,7 @@ lbl_fn_8018CAEC_00000118:
     addi r3, r3, 0xb0
     lwz r4, 0x22c(r3)
     bl fn_80097D40
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     bl fn_802097C4
     stw r3, 0x8(r31)
     lwz r0, lbl_8087F498
@@ -502,7 +502,7 @@ lbl_fn_8018CEF8_000005D4:
     addi r3, r3, 0xb0
     lwz r4, 0x22c(r3)
     bl fn_80097D40
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     bl fn_802097C4
     stw r3, 0x8(r31)
     lwz r0, lbl_8087F498
@@ -964,7 +964,7 @@ lbl_fn_8018D4AC_00000C34:
     lwz r4, 0x22c(r3)
     stfs f2, 0x68(r1)
     bl fn_80097D40
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     bl fn_802097C4
     lwz r0, 0x1c(r30)
     stw r3, 0x8(r30)
@@ -1270,7 +1270,7 @@ asm void fn_8018DAE4(void)
     addi r3, r3, 0xb0
     lwz r4, 0x22c(r3)
     bl fn_80097D40
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     bl fn_802097C4
     stw r3, 0x8(r31)
     li r0, 0x1
@@ -1940,7 +1940,7 @@ lbl_fn_8018E438_00001A74:
     addi r3, r3, 0xb0
     lwz r4, 0x22c(r3)
     bl fn_80097D40
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     bl fn_802097C4
     stw r3, 0x8(r31)
     lwz r3, lbl_8087F048

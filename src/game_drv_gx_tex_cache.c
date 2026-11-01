@@ -81,16 +81,16 @@ extern void fn_806173E0(void);
 extern void fn_80617420(void);
 extern void fn_80617460(void);
 extern void fn_806174C0(void);
-extern void fn_806176F0(void);
+extern void GXSetTevSwapMode(void);
 extern void fn_80617730(void);
 extern void fn_806177B0(void);
 extern void fn_80617880(void);
-extern void fn_806179E0(void);
+extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
 extern void fn_80617DD0(void);
 extern void fn_80617E00(void);
-extern void fn_80618350(void);
-extern void fn_80618400(void);
+extern void GXLoadPosMtxImm(void);
+extern void GXSetCurrentMtx(void);
 extern void fn_80619920(void);
 extern void fn_806199D0(void);
 extern void fn_8061A0F0(void);
@@ -1120,9 +1120,9 @@ asm void fn_805C3FE0(void)
     bl fn_805F8980
     addi r3, r1, 0x8
     li r4, 0x0
-    bl fn_80618350
+    bl GXLoadPosMtxImm
     li r3, 0x0
-    bl fn_80618400
+    bl GXSetCurrentMtx
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
@@ -1154,7 +1154,7 @@ asm void fn_805C3FE0(void)
     li r3, 0x0
     bl fn_80613BB0
     li r3, 0x1
-    bl fn_806179E0
+    bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0xff
     li r5, 0xff
@@ -1216,7 +1216,7 @@ asm void fn_805C3FE0(void)
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_806176F0
+    bl GXSetTevSwapMode
     lwz r0, 0x44(r1)
     mtlr r0
     addi r1, r1, 0x40

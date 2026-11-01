@@ -20,9 +20,9 @@ extern void fn_8008A4B0(void);
 extern void fn_8008A4E0(void);
 extern void atn_AABB_getMax(void);
 extern void atn_AABB_getMin(void);
-extern void fn_8008CCE8(void);
-extern void fn_8008CD1C(void);
-extern void fn_8008CD50(void);
+extern void atn_Matrix_copy_2(void);
+extern void atn_Matrix_copy(void);
+extern void atn_Matrix_concat(void);
 extern void fn_8008E2DC(void);
 extern void fn_8008E2E0(void);
 extern void fn_8008F5F8(void);
@@ -35,7 +35,7 @@ extern void fn_800D87B0(void);
 extern void fn_800D8808(void);
 extern void fn_800DC6B4(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_80473F34(void);
+extern void atn_LoadHandle_getData(void);
 extern void fn_80476130(void);
 extern void fn_805F93C0(void);
 extern void fn_8067E23C(void);
@@ -77,7 +77,7 @@ extern u32 lbl_80880C24;
 void fn_80094F98(void);
 void fn_800952F8(void);
 void fn_80095300(void);
-void fn_800954DC(void);
+void atn_Lockon_updateTargetTextures(void);
 void fn_80095750(void);
 void fn_80095B08(void);
 void fn_80095CD0(void);
@@ -351,7 +351,7 @@ asm void fn_80095300(void)
     mr r29, r3
     addi r3, r1, 0x158
     mr r4, r29
-    bl fn_8008CCE8
+    bl atn_Matrix_copy_2
     lwz r0, 0xb0(r28)
     cmpwi r0, 0x0
     blt lbl_fn_80095300_000004F4
@@ -369,7 +369,7 @@ asm void fn_80095300(void)
     mr r5, r3
     addi r3, r1, 0x128
     add r4, r31, r0
-    bl fn_8008CD50
+    bl atn_Matrix_concat
     lfs f1, 0xac(r28)
     mr r4, r27
     addi r3, r1, 0xb0
@@ -389,7 +389,7 @@ asm void fn_80095300(void)
     mr r5, r3
     addi r3, r1, 0xf8
     add r4, r31, r0
-    bl fn_8008CD50
+    bl atn_Matrix_concat
     lfs f1, 0xac(r28)
     mr r4, r27
     addi r3, r1, 0x98
@@ -418,10 +418,10 @@ lbl_fn_80095300_000004C4:
     mr r5, r3
     addi r3, r1, 0xc8
     add r4, r31, r0
-    bl fn_8008CD50
+    bl atn_Matrix_concat
     addi r3, r1, 0x158
     addi r4, r1, 0xc8
-    bl fn_8008CD1C
+    bl atn_Matrix_copy
 lbl_fn_80095300_000004F4:
     lfs f1, 0xac(r28)
     mr r4, r27
@@ -446,7 +446,7 @@ lbl_fn_80095300_0000052C:
     blr
 }
 
-asm void fn_800954DC(void)
+asm void atn_Lockon_updateTargetTextures(void)
 {
     nofralloc
     stwu r1, -0xa0(r1)
@@ -473,7 +473,7 @@ asm void fn_800954DC(void)
     mr r26, r3
     mr r27, r4
     mr r28, r5
-    beq lbl_fn_800954DC_00000768
+    beq lbl_atn_Lockon_updateTargetTextures_00000768
     lwz r30, 0x104(r3)
     li r29, 0x0
     lfs f27, lbl_80880B88
@@ -483,20 +483,20 @@ asm void fn_800954DC(void)
     lfs f29, lbl_80880B90
     lfs f30, lbl_80880B94
     lfs f31, lbl_80880B98
-    b lbl_fn_800954DC_00000760
-lbl_fn_800954DC_000005D0:
+    b lbl_atn_Lockon_updateTargetTextures_00000760
+lbl_atn_Lockon_updateTargetTextures_000005D0:
     lwz r3, 0x130(r26)
     lwz r4, 0x108(r26)
     lwzx r0, r3, r31
     lwzx r3, r4, r31
     cmpwi r0, -0x1
-    ble lbl_fn_800954DC_00000758
+    ble lbl_atn_Lockon_updateTargetTextures_00000758
     mulli r0, r0, 0x18
     lwz r3, 0xc(r3)
     add r24, r3, r0
     lwz r0, 0x8(r24)
     cmpwi r0, 0x0
-    bne lbl_fn_800954DC_00000638
+    bne lbl_atn_Lockon_updateTargetTextures_00000638
     li r3, 0x14
     li r4, 0x6
     la r5, lbl_8087D780
@@ -504,20 +504,20 @@ lbl_fn_800954DC_000005D0:
     li r7, 0x0
     bl fn_80084320
     cmpwi r3, 0x0
-    beq lbl_fn_800954DC_00000634
+    beq lbl_atn_Lockon_updateTargetTextures_00000634
     stfs f27, 0x0(r3)
     stfs f28, 0x4(r3)
     stfs f29, 0x8(r3)
     stfs f30, 0xc(r3)
     stfs f31, 0x10(r3)
-lbl_fn_800954DC_00000634:
+lbl_atn_Lockon_updateTargetTextures_00000634:
     stw r3, 0x8(r24)
-lbl_fn_800954DC_00000638:
+lbl_atn_Lockon_updateTargetTextures_00000638:
     lwz r3, 0x8(r24)
     stfs f25, 0x0(r3)
     lwz r0, 0x8(r24)
     cmpwi r0, 0x0
-    bne lbl_fn_800954DC_00000684
+    bne lbl_atn_Lockon_updateTargetTextures_00000684
     li r3, 0x14
     li r4, 0x6
     la r5, lbl_8087D780
@@ -525,21 +525,21 @@ lbl_fn_800954DC_00000638:
     li r7, 0x0
     bl fn_80084320
     cmpwi r3, 0x0
-    beq lbl_fn_800954DC_00000680
+    beq lbl_atn_Lockon_updateTargetTextures_00000680
     stfs f27, 0x0(r3)
     stfs f28, 0x4(r3)
     stfs f29, 0x8(r3)
     stfs f30, 0xc(r3)
     stfs f31, 0x10(r3)
-lbl_fn_800954DC_00000680:
+lbl_atn_Lockon_updateTargetTextures_00000680:
     stw r3, 0x8(r24)
-lbl_fn_800954DC_00000684:
+lbl_atn_Lockon_updateTargetTextures_00000684:
     lwz r3, 0x8(r24)
     stfs f25, 0x4(r3)
     lwz r0, 0x8(r24)
     lfs f26, 0x0(r28)
     cmpwi r0, 0x0
-    bne lbl_fn_800954DC_000006D4
+    bne lbl_atn_Lockon_updateTargetTextures_000006D4
     li r3, 0x14
     li r4, 0x6
     la r5, lbl_8087D780
@@ -547,21 +547,21 @@ lbl_fn_800954DC_00000684:
     li r7, 0x0
     bl fn_80084320
     cmpwi r3, 0x0
-    beq lbl_fn_800954DC_000006D0
+    beq lbl_atn_Lockon_updateTargetTextures_000006D0
     stfs f27, 0x0(r3)
     stfs f28, 0x4(r3)
     stfs f29, 0x8(r3)
     stfs f30, 0xc(r3)
     stfs f31, 0x10(r3)
-lbl_fn_800954DC_000006D0:
+lbl_atn_Lockon_updateTargetTextures_000006D0:
     stw r3, 0x8(r24)
-lbl_fn_800954DC_000006D4:
+lbl_atn_Lockon_updateTargetTextures_000006D4:
     lwz r3, 0x8(r24)
     stfs f26, 0xc(r3)
     lwz r0, 0x8(r24)
     lfs f26, 0x4(r28)
     cmpwi r0, 0x0
-    bne lbl_fn_800954DC_00000724
+    bne lbl_atn_Lockon_updateTargetTextures_00000724
     li r3, 0x14
     li r4, 0x6
     la r5, lbl_8087D780
@@ -569,36 +569,36 @@ lbl_fn_800954DC_000006D4:
     li r7, 0x0
     bl fn_80084320
     cmpwi r3, 0x0
-    beq lbl_fn_800954DC_00000720
+    beq lbl_atn_Lockon_updateTargetTextures_00000720
     stfs f27, 0x0(r3)
     stfs f28, 0x4(r3)
     stfs f29, 0x8(r3)
     stfs f30, 0xc(r3)
     stfs f31, 0x10(r3)
-lbl_fn_800954DC_00000720:
+lbl_atn_Lockon_updateTargetTextures_00000720:
     stw r3, 0x8(r24)
-lbl_fn_800954DC_00000724:
+lbl_atn_Lockon_updateTargetTextures_00000724:
     lwz r3, 0x8(r24)
     stfs f26, 0x10(r3)
     lbz r0, 0x11(r24)
     cmpwi r0, 0x0
-    beq lbl_fn_800954DC_00000754
+    beq lbl_atn_Lockon_updateTargetTextures_00000754
     lwz r3, 0x4(r24)
     cmpwi r3, 0x0
-    beq lbl_fn_800954DC_00000754
+    beq lbl_atn_Lockon_updateTargetTextures_00000754
     li r4, 0x1
     bl atn_LH_Texture_destructAndFree
     stb r25, 0x11(r24)
     stw r25, 0x4(r24)
-lbl_fn_800954DC_00000754:
+lbl_atn_Lockon_updateTargetTextures_00000754:
     stw r27, 0x4(r24)
-lbl_fn_800954DC_00000758:
+lbl_atn_Lockon_updateTargetTextures_00000758:
     addi r31, r31, 0x4
     addi r29, r29, 0x1
-lbl_fn_800954DC_00000760:
+lbl_atn_Lockon_updateTargetTextures_00000760:
     cmplw r29, r30
-    blt lbl_fn_800954DC_000005D0
-lbl_fn_800954DC_00000768:
+    blt lbl_atn_Lockon_updateTargetTextures_000005D0
+lbl_atn_Lockon_updateTargetTextures_00000768:
     addi r11, r1, 0x30
     psq_l f31, 0x98(r1), 0, 0
     lfd f31, 0x90(r1)
@@ -1408,7 +1408,7 @@ asm void fn_80096218(void)
     b lbl_fn_80096218_0000159C
 lbl_fn_80096218_000012AC:
     mr r3, r21
-    bl fn_80473F34
+    bl atn_LoadHandle_getData
     lwz r0, 0x8(r28)
     mr r26, r3
     cmpwi r0, 0x0
@@ -1617,7 +1617,7 @@ lbl_fn_80096218_0000159C:
     cmpw r31, r0
     blt lbl_fn_80096218_000012AC
     addi r3, r27, 0xfc
-    bl fn_80473F34
+    bl atn_LoadHandle_getData
     lwz r0, 0x8(r28)
     mr r25, r3
     cmpwi r0, 0x0
@@ -1831,7 +1831,7 @@ lbl_fn_80096218_000018B0:
     cmpwi r3, 0x0
     beq lbl_fn_80096218_00001BAC
     addi r3, r3, 0x20
-    bl fn_80473F34
+    bl atn_LoadHandle_getData
     lwz r0, 0x8(r28)
     mr r25, r3
     cmpwi r0, 0x0

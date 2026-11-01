@@ -12,7 +12,7 @@ extern void fn_8005F90C(void);
 extern void fn_8005FD80(void);
 extern void fn_800602E8(void);
 extern void fn_800607C0(void);
-extern void fn_800D59B8(void);
+extern void atn_LH_Texture_update(void);
 extern void fn_801ED928(void);
 extern void fn_801EDC78(void);
 extern void fn_801F9E70(void);
@@ -45,7 +45,7 @@ asm void fn_801F9FB0(void)
     cmpwi r3, 0x0
     beq lbl_fn_801F9FB0_00003568
     addi r3, r31, 0x194
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_801F9FB0_00003568
     lwz r0, 0x10(r31)
@@ -53,7 +53,7 @@ asm void fn_801F9FB0(void)
     cmplwi r0, 0x8
     bne lbl_fn_801F9FB0_00000054
     addi r3, r31, 0x1c4
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     bne lbl_fn_801F9FB0_00003568
 lbl_fn_801F9FB0_00000054:

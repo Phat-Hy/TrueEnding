@@ -45,8 +45,8 @@ extern void fn_803EFDA4(void);
 extern void fn_803FFD10(void);
 extern void fn_804006E0(void);
 extern void fn_80470580(void);
-extern void fn_80473EFC(void);
-extern void fn_80473F18(void);
+extern void atn_LoadHandle_getStatus(void);
+extern void atn_LoadHandle_getName(void);
 extern void fn_804918A4(void);
 extern void fn_8049707C(void);
 extern void fn_80497238(void);
@@ -316,14 +316,14 @@ asm void fn_804985E4(void)
     bl _savegpr_21
     mr r21, r3
     addi r3, r3, 0x58
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_804985E4_00000AF8
     addi r3, r21, 0x58
     bl fn_80470580
     addi r27, r3, 0x10
     addi r3, r21, 0x58
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     mr r4, r3
     addi r3, r1, 0x54
     bl fn_8003E4A4

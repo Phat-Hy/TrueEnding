@@ -30,12 +30,12 @@ extern void fn_800C4ECC(void);
 extern void fn_800C4F38(void);
 extern void fn_800C5F5C(void);
 extern void fn_800C5FF0(void);
-extern void fn_800D59B8(void);
+extern void atn_LH_Texture_update(void);
 extern void fn_800DC6B4(void);
-extern void fn_80473EFC(void);
-extern void fn_80473F18(void);
-extern void fn_80473F34(void);
-extern void fn_80473F50(void);
+extern void atn_LoadHandle_getStatus(void);
+extern void atn_LoadHandle_getName(void);
+extern void atn_LoadHandle_getData(void);
+extern void atn_LoadHandle_isLoading(void);
 extern void fn_80474860(void);
 extern void fn_8047486C(void);
 extern void fn_80476194(void);
@@ -88,14 +88,14 @@ asm void fn_8008B130(void)
 {
     nofralloc
     addi r3, r3, 0x164
-    b fn_80473F18
+    b atn_LoadHandle_getName
 }
 
 asm void fn_8008B138(void)
 {
     nofralloc
     addi r3, r3, 0x164
-    b fn_80473F34
+    b atn_LoadHandle_getData
 }
 
 asm void fn_8008B140(void)
@@ -125,14 +125,14 @@ asm void fn_8008B140(void)
     b lbl_fn_8008B140_0000081C
 lbl_fn_8008B140_00000068:
     addi r3, r3, 0x164
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_8008B140_00000080
     li r3, 0x1
     b lbl_fn_8008B140_00000820
 lbl_fn_8008B140_00000080:
     addi r3, r21, 0x164
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_8008B140_000000A4
     lwz r0, 0x20c(r21)
@@ -153,7 +153,7 @@ lbl_fn_8008B140_000000B8:
     b lbl_fn_8008B140_000000E4
 lbl_fn_8008B140_000000C8:
     mr r3, r24
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_8008B140_000000DC
     li r23, 0x1
@@ -170,7 +170,7 @@ lbl_fn_8008B140_000000E4:
     srawi. r0, r0, 31
     beq lbl_fn_8008B140_00000148
     addi r3, r21, 0x1c4
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r23, 0x0
     li r23, 0x0
     bne lbl_fn_8008B140_00000120
@@ -182,7 +182,7 @@ lbl_fn_8008B140_00000124:
     cmpwi r3, 0x0
     bne lbl_fn_8008B140_00000148
     addi r3, r21, 0x1c4
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x4
     bne lbl_fn_8008B140_00000148
     lwz r0, 0x20c(r21)
@@ -251,7 +251,7 @@ lbl_fn_8008B140_00000200:
     cmpwi r0, 0x1
     beq lbl_fn_8008B140_0000025C
     addi r3, r21, 0x164
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     lis r4, lbl_80732368@ha
     mr r5, r3
     addi r4, r4, lbl_80732368@l
@@ -435,7 +435,7 @@ lbl_fn_8008B140_00000490:
     stw r0, 0x20c(r21)
 lbl_fn_8008B140_000004A0:
     addi r3, r21, 0xfc
-    bl fn_80473F50
+    bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_8008B140_000004B8
     li r3, 0x1
@@ -451,7 +451,7 @@ lbl_fn_8008B140_000004B8:
     srawi. r0, r0, 31
     bne lbl_fn_8008B140_000006E8
     addi r3, r21, 0x164
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     li r0, 0x0
     stw r0, 0x1c(r1)
     mr r23, r3
@@ -613,7 +613,7 @@ lbl_fn_8008B140_00000714:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8008B140_00000738
-    bl fn_800D59B8
+    bl atn_LH_Texture_update
     cmpwi r3, 0x0
     beq lbl_fn_8008B140_00000738
     li r24, 0x1
@@ -728,7 +728,7 @@ asm void fn_8008B978(void)
     srawi. r0, r0, 31
     bne lbl_fn_8008B978_00000A94
     addi r3, r3, 0x164
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     li r0, 0x0
     stw r0, 0x1c(r1)
     mr r23, r3
@@ -996,7 +996,7 @@ asm void fn_8008BD10(void)
     cmpwi r29, 0xfe
     ble lbl_fn_8008BD10_00000C44
     addi r3, r3, 0x164
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     lis r4, lbl_80732368@ha
     mr r6, r3
     addi r4, r4, lbl_80732368@l
@@ -1099,7 +1099,7 @@ lbl_fn_8008BD10_00000D64:
     bdnz lbl_fn_8008BD10_00000D40
 lbl_fn_8008BD10_00000D70:
     addi r3, r26, 0xfc
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_8008BD10_00001054
     addi r3, r26, 0xfc
@@ -1107,7 +1107,7 @@ lbl_fn_8008BD10_00000D70:
     cmpwi r3, 0xfe
     ble lbl_fn_8008BD10_00000DD8
     addi r3, r26, 0xfc
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     mr r22, r3
     addi r3, r26, 0xfc
     bl fn_8047486C
@@ -1209,7 +1209,7 @@ lbl_fn_8008BD10_00000EEC:
     cmpwi r27, 0x0
     bne lbl_fn_8008BD10_00000F38
     addi r3, r26, 0x164
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     mr r6, r3
     mr r5, r21
     addi r3, r1, 0x228
@@ -1234,7 +1234,7 @@ lbl_fn_8008BD10_00000F48:
     cmpwi r20, 0x0
     bne lbl_fn_8008BD10_00000F8C
     addi r3, r26, 0x164
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     mr r5, r3
     addi r3, r1, 0x128
     addi r4, r23, 0xb9
@@ -1306,7 +1306,7 @@ lbl_fn_8008BD10_00001048:
     b lbl_fn_8008BD10_00001238
 lbl_fn_8008BD10_00001054:
     addi r3, r26, 0x164
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     lis r4, lbl_80732368@ha
     mr r5, r3
     addi r4, r4, lbl_80732368@l
@@ -1522,7 +1522,7 @@ lbl_fn_8008BD10_00001338:
     cmplwi r0, 0x200
     bne lbl_fn_8008BD10_000014E4
     addi r3, r26, 0x164
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     li r0, 0x0
     stw r0, 0x1c(r1)
     mr r23, r3
@@ -1589,7 +1589,7 @@ lbl_fn_8008BD10_0000143C:
 lbl_fn_8008BD10_00001448:
     addi r3, r26, 0xfc
     li r21, 0x0
-    bl fn_80473EFC
+    bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
     bne lbl_fn_8008BD10_000014BC
     lwz r0, 0x16c(r26)
@@ -1717,7 +1717,7 @@ lbl_fn_8008C62C_000015FC:
     cmpwi r6, 0x0
     bge lbl_fn_8008C62C_000016C8
     mr r3, r25
-    bl fn_80473F18
+    bl atn_LoadHandle_getName
     stw r30, 0x1c(r1)
     mr r18, r3
     stw r30, 0x20(r1)
