@@ -122,7 +122,7 @@ void fn_800F84D8(void);
 void fn_800F8524(void);
 void fn_800F8538(void);
 void fn_800F8544(void);
-void system_getNextSequenceId(void);
+s32 system_getNextSequenceId(s32* obj);
 void fn_800F8574(void);
 
 asm void fn_800F7250(void)
@@ -1563,21 +1563,15 @@ asm void fn_800F8544(void)
     blr
 }
 
-asm void system_getNextSequenceId(void)
+s32 system_getNextSequenceId(s32* obj)
 {
-    nofralloc
-    lwz r5, 0x14c(r3)
-    lis r4, 0x2
-    subi r0, r4, 0x7960
-    addi r4, r5, 0x1
-    stw r4, 0x14c(r3)
-    cmpw r4, r0
-    ble lbl_system_getNextSequenceId_0000131C
-    li r0, 0x0
-    stw r0, 0x14c(r3)
-lbl_system_getNextSequenceId_0000131C:
-    mr r3, r5
-    blr
+    s32 cur = obj[0x14c / 4];
+    s32 next = cur + 1;
+    obj[0x14c / 4] = next;
+    if (next > 100000) {
+        obj[0x14c / 4] = 0;
+    }
+    return cur;
 }
 
 asm void fn_800F8574(void)

@@ -51,9 +51,9 @@ void fn_802328DC(void);
 void fn_802328EC(void);
 void fn_80232AC4(void);
 void fn_80232ACC(void);
-void sound_initGlobalInstances(void);
-void sound_getGlobalInstance1(void);
-void sound_getGlobalInstance2(void);
+void sound_initGlobalInstances(u32 r3, u32 r4);
+u32 sound_getGlobalInstance1(void);
+u32 sound_getGlobalInstance2(void);
 void fn_80232B98(void);
 void fn_80232BEC(void);
 void fn_80232D04(void);
@@ -1622,26 +1622,20 @@ lbl_fn_80232ACC_00001648:
     blr
 }
 
-asm void sound_initGlobalInstances(void)
+void sound_initGlobalInstances(u32 r3, u32 r4)
 {
-    nofralloc
-    stw r3, lbl_8087F364
-    stw r4, lbl_8087DBE8
-    blr
+    lbl_8087F364 = r3;
+    lbl_8087DBE8 = r4;
 }
 
-asm void sound_getGlobalInstance1(void)
+u32 sound_getGlobalInstance1(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F364
-    blr
+    return lbl_8087F364;
 }
 
-asm void sound_getGlobalInstance2(void)
+u32 sound_getGlobalInstance2(void)
 {
-    nofralloc
-    lwz r3, lbl_8087DBE8
-    blr
+    return lbl_8087DBE8;
 }
 
 asm void fn_80232B98(void)
