@@ -15,7 +15,7 @@ extern void actor_findSpawnTemplate(void);
 extern void fn_801CE148(void);
 extern void fn_801CE4CC(void);
 extern void fn_801CE518(void);
-extern void fn_801CF334(void);
+extern void ui_log_findActiveEntry(void);
 extern void fn_801D3DF4(void);
 extern void fn_801D463C(void);
 extern void fn_801D6A88(void);
@@ -1564,22 +1564,22 @@ lbl_fn_801D19F0_0000155C:
     cmpwi r18, 0x8
     blt lbl_fn_801D19F0_00001400
     mr r3, r15
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     cmpwi r3, 0x0
     beq lbl_fn_801D19F0_0000159C
     mr r3, r15
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r16, 0x4c(r3)
     b lbl_fn_801D19F0_000015A0
 lbl_fn_801D19F0_0000159C:
     li r16, -0x1
 lbl_fn_801D19F0_000015A0:
     mr r3, r15
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     cmpwi r3, 0x0
     beq lbl_fn_801D19F0_000015C0
     mr r3, r15
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r19, 0x48(r3)
     b lbl_fn_801D19F0_000015C4
 lbl_fn_801D19F0_000015C0:
@@ -2544,11 +2544,11 @@ lbl_fn_801D19F0_000023EC:
     cmpwi r0, 0x0
     beq lbl_fn_801D19F0_0000280C
     mr r3, r15
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     cmpwi r3, 0x0
     beq lbl_fn_801D19F0_00002418
     mr r3, r15
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r14, 0x4c(r3)
     b lbl_fn_801D19F0_0000241C
 lbl_fn_801D19F0_00002418:
@@ -2861,11 +2861,11 @@ lbl_fn_801D19F0_00002874:
     cror eq, gt, eq
     bne lbl_fn_801D19F0_000028F8
     mr r3, r15
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     cmpwi r3, 0x0
     beq lbl_fn_801D19F0_000028F8
     mr r3, r15
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
     beq lbl_fn_801D19F0_000028F8

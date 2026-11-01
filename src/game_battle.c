@@ -164,7 +164,7 @@ void fn_8001A65C(void);
 void fn_8001A788(void);
 void fn_8001A8A4(void);
 void fn_8001AC54(void);
-void fn_8001AD80(void);
+void battle_calcActorDistance(void);
 void fn_8001ADE8(void);
 void fn_8001AEBC(void);
 void battle_getCharacterState(void);
@@ -4497,7 +4497,7 @@ lbl_fn_8001AC54_00003C50:
     blr
 }
 
-asm void fn_8001AD80(void)
+asm void battle_calcActorDistance(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -4505,9 +4505,9 @@ asm void fn_8001AD80(void)
     cmpwi r3, 0x0
     lfs f1, lbl_80880764
     stw r0, 0x24(r1)
-    beq lbl_fn_8001AD80_00003CB0
+    beq lbl_battle_calcActorDistance_00003CB0
     cmpwi r4, 0x0
-    beq lbl_fn_8001AD80_00003CB0
+    beq lbl_battle_calcActorDistance_00003CB0
     lfs f1, 0x530(r3)
     lfs f0, 0x530(r4)
     lfs f3, 0x52c(r3)
@@ -4522,7 +4522,7 @@ asm void fn_8001AD80(void)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
     bl PSVECMag
-lbl_fn_8001AD80_00003CB0:
+lbl_battle_calcActorDistance_00003CB0:
     lwz r0, 0x24(r1)
     mtlr r0
     addi r1, r1, 0x20

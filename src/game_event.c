@@ -6,7 +6,7 @@ extern void fn_8001A510(void);
 extern void fn_8001A65C(void);
 extern void fn_8001A8A4(void);
 extern void fn_8001AC54(void);
-extern void fn_8001AD80(void);
+extern void battle_calcActorDistance(void);
 extern void battle_getCharacterState(void);
 extern void fn_8001B5DC(void);
 extern void fn_8001B634(void);
@@ -213,7 +213,7 @@ lbl_fn_8003015C_0000015C:
     li r6, 0x0
     b lbl_fn_8003015C_00000174
 lbl_fn_8003015C_00000164:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x18(r1)
     lwz r6, 0x1c(r1)

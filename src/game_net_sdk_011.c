@@ -124,7 +124,7 @@ void fn_806B0F80(void);
 void fn_806B1170(void);
 void fn_806B1230(void);
 void net_isSessionConnected(void);
-void fn_806B12F0(void);
+void net_checkLinkStatus(void);
 void fn_806B13C0(void);
 void fn_806B14D0(void);
 void fn_806B1570(void);
@@ -1982,7 +1982,7 @@ lbl_net_isSessionConnected_000019C4:
     blr
 }
 
-asm void fn_806B12F0(void)
+asm void net_checkLinkStatus(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1991,53 +1991,53 @@ asm void fn_806B12F0(void)
     stw r0, 0x14(r1)
     lwz r3, lbl_8085FF98@l(r3)
     cmpwi r3, 0x0
-    bne lbl_fn_806B12F0_00001A04
+    bne lbl_net_checkLinkStatus_00001A04
     li r3, 0x0
-    b lbl_fn_806B12F0_00001A98
-lbl_fn_806B12F0_00001A04:
-    beq lbl_fn_806B12F0_00001A38
+    b lbl_net_checkLinkStatus_00001A98
+lbl_net_checkLinkStatus_00001A04:
+    beq lbl_net_checkLinkStatus_00001A38
     lwz r4, 0xaa4(r3)
     subi r0, r4, 0x9
     cmplwi r0, 0x2
-    ble lbl_fn_806B12F0_00001A38
+    ble lbl_net_checkLinkStatus_00001A38
     cmpwi r4, 0x0
-    beq lbl_fn_806B12F0_00001A38
+    beq lbl_net_checkLinkStatus_00001A38
     lbz r0, 0x36d(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_806B12F0_00001A38
+    beq lbl_net_checkLinkStatus_00001A38
     lbz r0, 0x376(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_806B12F0_00001A40
-lbl_fn_806B12F0_00001A38:
+    bne lbl_net_checkLinkStatus_00001A40
+lbl_net_checkLinkStatus_00001A38:
     li r0, 0xff
-    b lbl_fn_806B12F0_00001A70
-lbl_fn_806B12F0_00001A40:
+    b lbl_net_checkLinkStatus_00001A70
+lbl_net_checkLinkStatus_00001A40:
     li r3, 0x0
     bl fn_806CCED0
     cmpwi r3, 0x0
-    bne lbl_fn_806B12F0_00001A6C
+    bne lbl_net_checkLinkStatus_00001A6C
     lis r4, lbl_807BE128@ha
     li r3, 0x8
     addi r4, r4, lbl_807BE128@l
     crclr 6
     bl net_formatLog
     li r0, 0xff
-    b lbl_fn_806B12F0_00001A70
-lbl_fn_806B12F0_00001A6C:
+    b lbl_net_checkLinkStatus_00001A70
+lbl_net_checkLinkStatus_00001A6C:
     lbz r0, 0x16(r3)
-lbl_fn_806B12F0_00001A70:
+lbl_net_checkLinkStatus_00001A70:
     cmplwi r0, 0xff
-    bne lbl_fn_806B12F0_00001A80
+    bne lbl_net_checkLinkStatus_00001A80
     li r3, 0x0
-    b lbl_fn_806B12F0_00001A98
-lbl_fn_806B12F0_00001A80:
+    b lbl_net_checkLinkStatus_00001A98
+lbl_net_checkLinkStatus_00001A80:
     lis r3, lbl_8085FF98@ha
     lwz r3, lbl_8085FF98@l(r3)
     lbz r3, 0x376(r3)
     subi r0, r3, 0x2
     cntlzw r0, r0
     srwi r3, r0, 5
-lbl_fn_806B12F0_00001A98:
+lbl_net_checkLinkStatus_00001A98:
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10

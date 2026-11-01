@@ -39,7 +39,7 @@ extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getData(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80491528(void);
-extern void fn_805381A4(void);
+extern void node_getParentNode(void);
 extern void spectate_getRootNode(void);
 extern void fn_8053B02C(void);
 extern void fn_8054119C(void);
@@ -417,7 +417,7 @@ asm void fn_80562BEC(void)
     stw r30, 0x8(r1)
     bne lbl_fn_80562BEC_00000478
     mr r3, r31
-    bl fn_805381A4
+    bl node_getParentNode
     mr r30, r3
     mr r3, r31
     bl spectate_getRootNode
@@ -531,7 +531,7 @@ asm void fn_80562D50(void)
     mr r24, r4
     bne lbl_fn_80562D50_000006CC
     mr r3, r24
-    bl fn_805381A4
+    bl node_getParentNode
     mr r31, r3
     mr r3, r24
     bl spectate_getRootNode
@@ -705,7 +705,7 @@ asm void fn_80562FB4(void)
     mr r30, r4
     bne lbl_fn_80562FB4_000007C4
     mr r3, r30
-    bl fn_805381A4
+    bl node_getParentNode
     mr r3, r30
     bl spectate_getRootNode
     lwz r4, 0x10(r30)

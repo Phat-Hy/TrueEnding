@@ -12,7 +12,7 @@ extern void ref_releaseHandle(void);
 extern void wcs_vformat(void);
 extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
-extern void fn_801CF334(void);
+extern void ui_log_findActiveEntry(void);
 extern void fn_801CF3C0(void);
 extern void fn_801CFA5C(void);
 extern void fn_801CFAA8(void);
@@ -120,7 +120,7 @@ lbl_fn_801D8CC4_00000080:
     cmpwi r3, 0x0
     beq lbl_fn_801D8CC4_00000334
     mr r3, r31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r4, 0x4c(r3)
     mr r3, r31
     lwz r5, 0x1e4(r31)
@@ -149,10 +149,10 @@ lbl_fn_801D8CC4_000000F4:
     cmpw r0, r3
     bge lbl_fn_801D8CC4_00000318
     mr r3, r31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r30, 0x48(r3)
     mr r3, r31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r0, 0x80(r31)
     lwz r4, 0xb4c(r31)
     mulli r0, r0, 0x18
@@ -360,7 +360,7 @@ lbl_fn_801D8CC4_00000398:
     stw r0, 0x54(r1)
 lbl_fn_801D8CC4_00000424:
     mr r3, r31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r4, 0x4c(r3)
     mr r3, r31
     lwz r5, 0x1e4(r31)
@@ -412,7 +412,7 @@ lbl_fn_801D8CC4_00000460:
     stw r0, 0x3c(r1)
 lbl_fn_801D8CC4_000004EC:
     mr r3, r31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r4, 0x4c(r3)
     mr r3, r31
     lwz r5, 0x1e4(r31)
@@ -563,10 +563,10 @@ asm void fn_801D9388(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     mr r29, r3
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r31, 0x4c(r3)
     mr r3, r29
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r30, 0x48(r3)
     mr r3, r29
     mr r4, r31
@@ -748,7 +748,7 @@ lbl_fn_801D94D0_00000978:
     cmpw r21, r14
     blt lbl_fn_801D94D0_00000850
     mr r3, r15
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r0, 0x4c(r3)
     li r3, 0x0
     stw r0, 0x1bc8(r15)

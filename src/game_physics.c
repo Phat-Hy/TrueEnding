@@ -6,7 +6,7 @@ extern void fn_8001A510(void);
 extern void fn_8001A65C(void);
 extern void fn_8001A8A4(void);
 extern void fn_8001AC54(void);
-extern void fn_8001AD80(void);
+extern void battle_calcActorDistance(void);
 extern void battle_getCharacterState(void);
 extern void fn_8001B5DC(void);
 extern void fn_8001B634(void);
@@ -1835,7 +1835,7 @@ lbl_fn_80029784_00001744:
     li r6, 0x0
     b lbl_fn_80029784_0000175C
 lbl_fn_80029784_0000174C:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x18(r1)
     lwz r6, 0x1c(r1)
@@ -2177,7 +2177,7 @@ lbl_fn_80029B68_00001BE4:
     li r4, 0x0
     b lbl_fn_80029B68_00001BFC
 lbl_fn_80029B68_00001BEC:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x8(r1)
     lwz r4, 0xc(r1)
@@ -2210,7 +2210,7 @@ lbl_fn_80029B68_00001C50:
     li r5, 0x0
     b lbl_fn_80029B68_00001C68
 lbl_fn_80029B68_00001C58:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x8(r1)
     lwz r5, 0xc(r1)
@@ -4301,7 +4301,7 @@ lbl_fn_8002B8FC_000038D8:
     li r6, 0x0
     b lbl_fn_8002B8FC_000038F0
 lbl_fn_8002B8FC_000038E0:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x8(r1)
     lwz r6, 0xc(r1)

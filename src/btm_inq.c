@@ -21,7 +21,7 @@ extern void bta_sys_traceDebug(void);
 extern void fn_80629870(void);
 extern void fn_80629890(void);
 extern void fn_806298D0(void);
-extern void fn_80629E20(void);
+extern void bta_sys_sendmsg(void);
 extern void fn_80629E90(void);
 extern void fn_8062FD70(void);
 extern void fn_8062FD8C(void);
@@ -1972,7 +1972,7 @@ lbl_fn_806353EC_00001860:
     mr r5, r26
     addi r3, r31, 0x1680
     li r4, 0xa
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     cmpwi r24, 0x0
     beq lbl_fn_806353EC_000018AC
     lhz r0, 0x0(r24)

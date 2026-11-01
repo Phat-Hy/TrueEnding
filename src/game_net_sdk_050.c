@@ -32,7 +32,7 @@ extern void fn_8070CD40(void);
 extern void fn_8070CD60(void);
 extern void fn_8070CE00(void);
 extern void fn_8070CE10(void);
-extern void fn_80721120(void);
+extern void net_calcStreamOffset(void);
 extern void fn_80721150(void);
 extern void fn_807211D0(void);
 extern void fn_80721260(void);
@@ -2020,7 +2020,7 @@ lbl_fn_80709000_00001A20:
     lbz r3, 0x0(r4)
     lwz r4, 0x4(r4)
     addi r5, r5, 0x8
-    bl fn_80721120
+    bl net_calcStreamOffset
 lbl_fn_80709000_00001A34:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -2179,7 +2179,7 @@ lbl_fn_807092B0_00001C30:
     lbz r3, 0x0(r4)
     lwz r4, 0x4(r4)
     addi r5, r5, 0x8
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_807092B0_00001C54
     li r3, 0x0
@@ -2212,7 +2212,7 @@ lbl_fn_807092B0_00001CA4:
     lbz r3, 0x0(r4)
     lwz r4, 0x4(r4)
     addi r5, r5, 0x8
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_807092B0_00001CC8
     li r3, 0x0
@@ -2303,7 +2303,7 @@ lbl_fn_807093D0_00001DD4:
     add r4, r3, r0
     lbz r3, 0xc(r4)
     lwz r4, 0x10(r4)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_807093D0_00001DF8
     li r3, 0x0

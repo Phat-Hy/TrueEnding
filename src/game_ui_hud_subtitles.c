@@ -24,7 +24,7 @@ extern void fn_801CE4CC(void);
 extern void save_validateHeader(void);
 extern void save_createWorkerTask(void);
 extern void fn_80201E78(void);
-extern void fn_80202A6C(void);
+extern void perf_initNode(void);
 extern void sys_findModuleById(void);
 extern void fn_8020BD78(void);
 extern void fn_8020BDE0(void);
@@ -833,7 +833,7 @@ lbl_fn_801CFDCC_000009F4:
     add r24, r29, r23
     addi r4, r26, 0x1ae
     li r5, 0x1
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0xb94(r24)
     li r4, 0x1
     bl atn_Task_setActive
@@ -854,7 +854,7 @@ lbl_fn_801CFDCC_00000A40:
     add r27, r25, r24
     addi r4, r26, 0x1ae
     li r5, 0x1
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0xbb8(r27)
     li r4, 0x1
     bl atn_Task_setActive
@@ -882,7 +882,7 @@ lbl_fn_801CFDCC_00000A9C:
     add r27, r0, r25
     addi r4, r26, 0x1ae
     li r5, 0x1
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0xcf8(r27)
     li r4, 0x1
     bl atn_Task_setActive
@@ -891,7 +891,7 @@ lbl_fn_801CFDCC_00000A9C:
     add r27, r0, r25
     addi r4, r26, 0x1d0
     li r5, 0x1
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0xcfc(r27)
     li r4, 0x1
     bl atn_Task_setActive
@@ -928,7 +928,7 @@ lbl_fn_801CFDCC_00000B48:
     add r22, r0, r23
     addi r4, r26, 0x1f7
     li r5, 0x1
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x10f8(r22)
     li r4, 0x1
     bl atn_Task_setActive
@@ -937,7 +937,7 @@ lbl_fn_801CFDCC_00000B48:
     add r22, r0, r23
     addi r4, r26, 0x1d0
     li r5, 0x1
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x10fc(r22)
     li r4, 0x1
     bl atn_Task_setActive
@@ -948,7 +948,7 @@ lbl_fn_801CFDCC_00000B48:
     stw r27, 0x1100(r4)
     addi r4, r26, 0x1f7
     li r5, 0x1
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x12f8(r22)
     li r4, 0x1
     bl atn_Task_setActive
@@ -968,7 +968,7 @@ lbl_fn_801CFDCC_00000BC8:
     add r22, r0, r23
     addi r4, r1, 0x28
     li r5, 0x1
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x10f8(r22)
     li r4, 0x1
     bl atn_Task_setActive
@@ -977,7 +977,7 @@ lbl_fn_801CFDCC_00000BC8:
     add r22, r0, r23
     addi r4, r26, 0x1d0
     li r5, 0x1
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x10fc(r22)
     li r4, 0x1
     bl atn_Task_setActive
@@ -990,7 +990,7 @@ lbl_fn_801CFDCC_00000BC8:
     stw r3, 0x1100(r5)
     mr r3, r29
     li r5, 0x1
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x12f8(r22)
     li r4, 0x1
     bl atn_Task_setActive
@@ -998,7 +998,7 @@ lbl_fn_801CFDCC_00000C68:
     mr r3, r29
     addi r4, r26, 0x1d0
     li r5, 0x1
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x1378(r29)
     li r4, 0x1
     bl atn_Task_setActive

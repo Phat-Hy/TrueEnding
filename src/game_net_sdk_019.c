@@ -26,7 +26,7 @@ extern void fn_806ACCF0(void);
 extern void fn_806ACE00(void);
 extern void fn_806AEB10(void);
 extern void fn_806B1230(void);
-extern void fn_806B12F0(void);
+extern void net_checkLinkStatus(void);
 extern void fn_806B4D20(void);
 extern void fn_806BBCA0(void);
 extern void fn_806BC4C0(void);
@@ -70,7 +70,7 @@ void fn_806C4B30(void);
 void fn_806C50A0(void);
 void fn_806C57F0(void);
 void fn_806C5C10(void);
-void fn_806C5EB0(void);
+void net_formatSessionLog(void);
 void fn_806C6180(void);
 void fn_806C6470(void);
 void fn_806C6750(void);
@@ -618,7 +618,7 @@ lbl_fn_806C50A0_00000788:
     lbz r0, 0x15(r4)
     cmpwi r0, 0x0
     bne lbl_fn_806C50A0_000007C0
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     b lbl_fn_806C50A0_000007C4
 lbl_fn_806C50A0_000007C0:
     bl fn_806C5C10
@@ -814,7 +814,7 @@ lbl_fn_806C50A0_00000A38:
     lbz r0, 0x15(r4)
     cmpwi r0, 0x0
     bne lbl_fn_806C50A0_00000A6C
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     b lbl_fn_806C50A0_00000A70
 lbl_fn_806C50A0_00000A6C:
     bl fn_806C5C10
@@ -948,7 +948,7 @@ lbl_fn_806C50A0_00000C18:
     lbz r0, 0x15(r4)
     cmpwi r0, 0x0
     bne lbl_fn_806C50A0_00000C50
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     b lbl_fn_806C50A0_00000C54
 lbl_fn_806C50A0_00000C50:
     bl fn_806C5C10
@@ -1100,7 +1100,7 @@ lbl_fn_806C57F0_00000E20:
     lbz r0, 0x15(r4)
     cmpwi r0, 0x0
     bne lbl_fn_806C57F0_00000E58
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     b lbl_fn_806C57F0_00000E5C
 lbl_fn_806C57F0_00000E58:
     bl fn_806C5C10
@@ -1239,7 +1239,7 @@ lbl_fn_806C57F0_00001010:
     lbz r0, 0x15(r4)
     cmpwi r0, 0x0
     bne lbl_fn_806C57F0_00001044
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     b lbl_fn_806C57F0_00001048
 lbl_fn_806C57F0_00001044:
     bl fn_806C5C10
@@ -1405,7 +1405,7 @@ lbl_fn_806C5C10_00001218:
     li r4, 0x0
     b lbl_fn_806C5C10_000012D4
 lbl_fn_806C5C10_00001288:
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     beq lbl_fn_806C5C10_000012D0
     lwz r3, lbl_80860898@l(r28)
@@ -1474,7 +1474,7 @@ lbl_fn_806C5C10_00001368:
     blr
 }
 
-asm void fn_806C5EB0(void)
+asm void net_formatSessionLog(void)
 {
     nofralloc
     stwu r1, -0x60(r1)
@@ -1486,58 +1486,58 @@ asm void fn_806C5EB0(void)
     lis r31, lbl_807BE9D0@ha
     mr r29, r3
     addi r31, r31, lbl_807BE9D0@l
-    bne lbl_fn_806C5EB0_000013B4
+    bne lbl_net_formatSessionLog_000013B4
     li r3, 0x0
-    b lbl_fn_806C5EB0_00001630
-lbl_fn_806C5EB0_000013B4:
+    b lbl_net_formatSessionLog_00001630
+lbl_net_formatSessionLog_000013B4:
     mr r5, r29
     addi r4, r31, 0x217c
     li r3, 0x2
     crclr 6
     bl net_formatLog
     cmpwi r29, 0x1
-    beq lbl_fn_806C5EB0_000013FC
+    beq lbl_net_formatSessionLog_000013FC
     cmpwi r29, 0x2
-    beq lbl_fn_806C5EB0_00001408
+    beq lbl_net_formatSessionLog_00001408
     cmpwi r29, 0x3
-    beq lbl_fn_806C5EB0_00001414
+    beq lbl_net_formatSessionLog_00001414
     cmpwi r29, 0x4
-    beq lbl_fn_806C5EB0_00001420
+    beq lbl_net_formatSessionLog_00001420
     cmpwi r29, 0x5
-    beq lbl_fn_806C5EB0_0000142C
+    beq lbl_net_formatSessionLog_0000142C
     cmpwi r29, 0x6
-    beq lbl_fn_806C5EB0_00001438
-    b lbl_fn_806C5EB0_00001440
-lbl_fn_806C5EB0_000013FC:
+    beq lbl_net_formatSessionLog_00001438
+    b lbl_net_formatSessionLog_00001440
+lbl_net_formatSessionLog_000013FC:
     li r30, 0x6
     li r27, -0x32
-    b lbl_fn_806C5EB0_00001440
-lbl_fn_806C5EB0_00001408:
+    b lbl_net_formatSessionLog_00001440
+lbl_net_formatSessionLog_00001408:
     li r30, 0x6
     li r27, -0x1e
-    b lbl_fn_806C5EB0_00001440
-lbl_fn_806C5EB0_00001414:
+    b lbl_net_formatSessionLog_00001440
+lbl_net_formatSessionLog_00001414:
     li r30, 0x6
     li r27, -0x14
-    b lbl_fn_806C5EB0_00001440
-lbl_fn_806C5EB0_00001420:
+    b lbl_net_formatSessionLog_00001440
+lbl_net_formatSessionLog_00001420:
     li r30, 0x6
     li r27, -0x28
-    b lbl_fn_806C5EB0_00001440
-lbl_fn_806C5EB0_0000142C:
+    b lbl_net_formatSessionLog_00001440
+lbl_net_formatSessionLog_0000142C:
     li r30, 0x9
     li r27, -0x1
-    b lbl_fn_806C5EB0_00001440
-lbl_fn_806C5EB0_00001438:
+    b lbl_net_formatSessionLog_00001440
+lbl_net_formatSessionLog_00001438:
     li r30, 0x9
     li r27, -0x2
-lbl_fn_806C5EB0_00001440:
+lbl_net_formatSessionLog_00001440:
     lis r28, lbl_80860898@ha
     lwz r3, lbl_80860898@l(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_806C5EB0_0000162C
+    beq lbl_net_formatSessionLog_0000162C
     cmpwi r30, 0x0
-    beq lbl_fn_806C5EB0_0000162C
+    beq lbl_net_formatSessionLog_0000162C
     li r0, 0x1
     stb r0, 0x751(r3)
     lwz r3, lbl_80860898@l(r28)
@@ -1568,11 +1568,11 @@ lbl_fn_806C5EB0_00001440:
     lbz r0, 0x15(r3)
     lwz r6, 0x58(r3)
     cmplwi r0, 0x2
-    bne lbl_fn_806C5EB0_000014E0
+    bne lbl_net_formatSessionLog_000014E0
     cmpwi r6, 0x0
-    bne lbl_fn_806C5EB0_000014E0
+    bne lbl_net_formatSessionLog_000014E0
     li r6, 0x1
-lbl_fn_806C5EB0_000014E0:
+lbl_net_formatSessionLog_000014E0:
     addi r3, r1, 0x8
     addi r5, r31, 0x5c
     li r4, 0xc
@@ -1598,32 +1598,32 @@ lbl_fn_806C5EB0_000014E0:
     lwz r3, lbl_80860898@l(r28)
     lwz r0, 0x908(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_806C5EB0_00001550
+    bne lbl_net_formatSessionLog_00001550
     li r4, 0x0
-    b lbl_fn_806C5EB0_0000159C
-lbl_fn_806C5EB0_00001550:
-    bl fn_806B12F0
+    b lbl_net_formatSessionLog_0000159C
+lbl_net_formatSessionLog_00001550:
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
-    beq lbl_fn_806C5EB0_00001598
+    beq lbl_net_formatSessionLog_00001598
     lwz r3, lbl_80860898@l(r28)
     lbz r0, 0x15(r3)
     cmplwi r0, 0x1
-    beq lbl_fn_806C5EB0_00001584
+    beq lbl_net_formatSessionLog_00001584
     lbz r0, 0x15(r3)
     cmplwi r0, 0x3
-    beq lbl_fn_806C5EB0_00001584
+    beq lbl_net_formatSessionLog_00001584
     lbz r0, 0x15(r3)
     cmplwi r0, 0x2
-    bne lbl_fn_806C5EB0_00001598
-lbl_fn_806C5EB0_00001584:
+    bne lbl_net_formatSessionLog_00001598
+lbl_net_formatSessionLog_00001584:
     lwz r0, 0x8f4(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_806C5EB0_00001598
+    bne lbl_net_formatSessionLog_00001598
     li r4, 0x1
-    b lbl_fn_806C5EB0_0000159C
-lbl_fn_806C5EB0_00001598:
+    b lbl_net_formatSessionLog_0000159C
+lbl_net_formatSessionLog_00001598:
     li r4, 0x0
-lbl_fn_806C5EB0_0000159C:
+lbl_net_formatSessionLog_0000159C:
     neg r0, r4
     addi r3, r1, 0x8
     or r0, r0, r4
@@ -1660,9 +1660,9 @@ lbl_fn_806C5EB0_0000159C:
     mtctr r12
     bctrl
     bl fn_806BBCA0
-lbl_fn_806C5EB0_0000162C:
+lbl_net_formatSessionLog_0000162C:
     mr r3, r29
-lbl_fn_806C5EB0_00001630:
+lbl_net_formatSessionLog_00001630:
     addi r11, r1, 0x60
     bl _restgpr_27
     lwz r0, 0x64(r1)
@@ -1806,7 +1806,7 @@ lbl_fn_806C6180_000017C8:
     li r4, 0x0
     b lbl_fn_806C6180_00001884
 lbl_fn_806C6180_00001838:
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     beq lbl_fn_806C6180_00001880
     lwz r3, lbl_80860898@l(r28)
@@ -2013,7 +2013,7 @@ lbl_fn_806C6470_00001AB0:
     li r4, 0x0
     b lbl_fn_806C6470_00001B6C
 lbl_fn_806C6470_00001B20:
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     beq lbl_fn_806C6470_00001B68
     lwz r3, lbl_80860898@l(r28)
@@ -3590,7 +3590,7 @@ lbl_fn_806C6750_000032BC:
     cmpwi r0, 0x0
     bne lbl_fn_806C6750_000032E0
     li r3, 0x5
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     cmpwi r3, 0x0
     bne lbl_fn_806C6750_00003BA4
 lbl_fn_806C6750_000032E0:
@@ -3652,7 +3652,7 @@ lbl_fn_806C6750_00003394:
     lbz r0, 0x15(r4)
     cmpwi r0, 0x0
     bne lbl_fn_806C6750_000033CC
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     b lbl_fn_806C6750_00003BA4
 lbl_fn_806C6750_000033CC:
     bl fn_806C5C10
@@ -3766,7 +3766,7 @@ lbl_fn_806C6750_0000354C:
     lbz r0, 0x15(r4)
     cmpwi r0, 0x0
     bne lbl_fn_806C6750_00003568
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     b lbl_fn_806C6750_0000356C
 lbl_fn_806C6750_00003568:
     bl fn_806C5C10
@@ -3837,7 +3837,7 @@ lbl_fn_806C6750_00003628:
     lbz r0, 0x15(r4)
     cmpwi r0, 0x0
     bne lbl_fn_806C6750_00003678
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     b lbl_fn_806C6750_00003BA4
 lbl_fn_806C6750_00003678:
     bl fn_806C5C10
@@ -4000,7 +4000,7 @@ lbl_fn_806C6750_00003864:
     li r4, 0x0
     b lbl_fn_806C6750_00003920
 lbl_fn_806C6750_000038D4:
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     beq lbl_fn_806C6750_0000391C
     lwz r3, lbl_80860898@l(r27)

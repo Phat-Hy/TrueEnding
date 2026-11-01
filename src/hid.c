@@ -15,7 +15,7 @@ extern void scapi_cleanupContext(void);
 extern void bta_sys_logEvent(void);
 extern void bta_sys_log(void);
 extern void bta_sys_traceDebug(void);
-extern void fn_80629E20(void);
+extern void bta_sys_sendmsg(void);
 extern void fn_80629E90(void);
 extern void fn_80630CD8(void);
 extern void fn_806357EC(void);
@@ -225,7 +225,7 @@ lbl_fn_8063EF70_000001B0:
     addi r3, r31, 0x1c
     li r4, 0x16
     li r5, 0x1
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     b lbl_fn_8063EF70_000001DC
 lbl_fn_8063EF70_000001C4:
     lwz r12, 0xc4(r31)
@@ -453,7 +453,7 @@ lbl_fn_8063F210_0000049C:
     stw r3, 0x44(r30)
     addi r3, r30, 0x34
     li r5, 0x3c
-    bl fn_80629E20
+    bl bta_sys_sendmsg
 lbl_fn_8063F210_000004DC:
     lis r3, lbl_80822B90@ha
     addi r3, r3, lbl_80822B90@l

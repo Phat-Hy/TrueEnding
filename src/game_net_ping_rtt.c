@@ -42,7 +42,7 @@ extern void thread_findAndNotify(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_80201E78(void);
 extern void profile_getMetricValue(void);
-extern void fn_80202A6C(void);
+extern void perf_initNode(void);
 extern void perf_getMetricValue(void);
 extern void fn_8021F094(void);
 extern void fn_8021F0D4(void);
@@ -1050,7 +1050,7 @@ lbl_fn_80516A60_00000CF0:
     add r28, r31, r29
     addi r4, r30, 0x6b
     li r5, 0x1
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0xf4(r28)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1063,7 +1063,7 @@ lbl_fn_80516A60_00000CF0:
     addi r30, r30, lbl_8075BB80@l
     li r5, 0x1
     addi r4, r30, 0x87
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x124(r31)
     li r4, 0x1
     bl atn_Task_setActive

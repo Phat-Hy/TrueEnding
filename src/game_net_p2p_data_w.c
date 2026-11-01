@@ -23,7 +23,7 @@ extern void actor_spawnActorWithId(void);
 extern void fn_801D0960(void);
 extern void fn_80201E78(void);
 extern void fn_802020B4(void);
-extern void fn_80202A6C(void);
+extern void perf_initNode(void);
 extern void fn_80202CA4(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
@@ -580,7 +580,7 @@ lbl_fn_8050FB3C_000005E8:
     lwz r4, 0x4(r29)
     mr r3, r23
     mr r5, r25
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x0(r28)
     li r4, 0x1
     bl atn_Task_setActive

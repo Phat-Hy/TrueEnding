@@ -20,7 +20,7 @@ extern void fn_806ACE00(void);
 extern void net_getMyAid(void);
 extern void fn_806B0F80(void);
 extern void fn_806B1230(void);
-extern void fn_806B12F0(void);
+extern void net_checkLinkStatus(void);
 extern void fn_806B14D0(void);
 extern void fn_806B3CC0(void);
 extern void fn_806BC010(void);
@@ -28,7 +28,7 @@ extern void fn_806BC860(void);
 extern void fn_806C05F0(void);
 extern void fn_806C0980(void);
 extern void fn_806C5C10(void);
-extern void fn_806C5EB0(void);
+extern void net_formatSessionLog(void);
 extern void fn_806DB310(void);
 extern void fn_806EF8B0(void);
 extern void fn_806FC900(void);
@@ -130,7 +130,7 @@ lbl_fn_806CB3A0_0000009C:
     lbz r0, 0x15(r4)
     cmpwi r0, 0x0
     bne lbl_fn_806CB3A0_000000CC
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     b lbl_fn_806CB3A0_000000D0
 lbl_fn_806CB3A0_000000CC:
     bl fn_806C5C10
@@ -406,7 +406,7 @@ lbl_fn_806CB550_00000428:
     li r4, 0x0
     b lbl_fn_806CB550_000004E4
 lbl_fn_806CB550_00000498:
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     beq lbl_fn_806CB550_000004E0
     lwz r3, lbl_80860898@l(r29)
@@ -468,7 +468,7 @@ asm void fn_806CB8F0(void)
     stw r30, 0x28(r1)
     mr r30, r3
     stw r29, 0x24(r1)
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     bne lbl_fn_806CB8F0_0000058C
     li r3, 0x1
@@ -583,7 +583,7 @@ lbl_fn_806CB8F0_000006E8:
     lbz r0, 0x15(r4)
     cmpwi r0, 0x0
     bne lbl_fn_806CB8F0_00000724
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     b lbl_fn_806CB8F0_00000728
 lbl_fn_806CB8F0_00000724:
     bl fn_806C5C10
@@ -720,7 +720,7 @@ lbl_fn_806CBB20_00000894:
     li r4, 0x0
     b lbl_fn_806CBB20_00000950
 lbl_fn_806CBB20_00000904:
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     beq lbl_fn_806CBB20_0000094C
     lwz r3, lbl_80860898@l(r29)
@@ -763,7 +763,7 @@ lbl_fn_806CBB20_00000994:
     lis r31, lbl_80860898@ha
     lwz r3, lbl_80860898@l(r31)
     lwz r29, 0x1c(r3)
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     beq lbl_fn_806CBB20_000009D4
     lwz r3, lbl_80860898@l(r31)
@@ -881,7 +881,7 @@ lbl_fn_806CBB20_00000B14:
     lbz r0, 0x15(r4)
     cmpwi r0, 0x0
     bne lbl_fn_806CBB20_00000B48
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     b lbl_fn_806CBB20_00000B4C
 lbl_fn_806CBB20_00000B48:
     bl fn_806C5C10
@@ -950,7 +950,7 @@ lbl_fn_806CBB20_00000C08:
     lbz r0, 0x15(r4)
     cmpwi r0, 0x0
     bne lbl_fn_806CBB20_00000C44
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     b lbl_fn_806CBB20_00000C48
 lbl_fn_806CBB20_00000C44:
     bl fn_806C5C10
@@ -1163,7 +1163,7 @@ lbl_fn_806CC020_00000F1C:
     lbz r0, 0x15(r4)
     cmpwi r0, 0x0
     bne lbl_fn_806CC020_00000F54
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     b lbl_fn_806CC020_00000F58
 lbl_fn_806CC020_00000F54:
     bl fn_806C5C10
@@ -1300,7 +1300,7 @@ lbl_fn_806CC020_00001124:
     lbz r0, 0x15(r4)
     cmpwi r0, 0x0
     bne lbl_fn_806CC020_0000115C
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     b lbl_fn_806CC020_00001160
 lbl_fn_806CC020_0000115C:
     bl fn_806C5C10
@@ -1320,7 +1320,7 @@ lbl_fn_806CC020_00001178:
     lwz r3, lbl_80860898@l(r4)
     lwz r3, 0x7ac(r3)
     bl fn_806BC010
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     cntlzw r0, r3
     srwi r3, r0, 5
 lbl_fn_806CC020_000011A0:
@@ -1726,7 +1726,7 @@ lbl_fn_806CC850_000016A0:
     lbz r0, 0x15(r4)
     cmpwi r0, 0x0
     bne lbl_fn_806CC850_0000174C
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     b lbl_fn_806CC850_00001750
 lbl_fn_806CC850_0000174C:
     bl fn_806C5C10
@@ -2359,7 +2359,7 @@ lbl_fn_806CD150_00001F94:
     lbz r0, 0x15(r4)
     cmpwi r0, 0x0
     bne lbl_fn_806CD150_00001FB0
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     b lbl_fn_806CD150_00001FB4
 lbl_fn_806CD150_00001FB0:
     bl fn_806C5C10

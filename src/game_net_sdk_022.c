@@ -29,7 +29,7 @@ extern void fn_806ABA10(void);
 extern void net_getMyAid(void);
 extern void fn_806B0EB0(void);
 extern void fn_806B1170(void);
-extern void fn_806B12F0(void);
+extern void net_checkLinkStatus(void);
 extern void fn_806B14D0(void);
 extern void fn_806B1570(void);
 extern void fn_806B1730(void);
@@ -1266,7 +1266,7 @@ asm void fn_806CE250(void)
 lbl_fn_806CE250_00000EEC:
     li r26, 0x0
 lbl_fn_806CE250_00000EF0:
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     bne lbl_fn_806CE250_00000F14
     bl fn_806CCB40
@@ -1610,7 +1610,7 @@ asm void fn_806CE750(void)
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_806CE750_00001488
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     bne lbl_fn_806CE750_00001468
     li r3, 0x0
@@ -1910,7 +1910,7 @@ lbl_fn_806CEB00_000017FC:
     rlwimi r0, r4, 8, 16, 23
     or r0, r3, r0
     rotlwi r25, r0, 16
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     bne lbl_fn_806CEB00_00001854
     bl net_getMyAid

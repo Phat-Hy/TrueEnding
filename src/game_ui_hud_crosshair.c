@@ -20,7 +20,7 @@ extern void fn_801CDD9C(void);
 extern void fn_801CDE14(void);
 extern void fn_801CE4CC(void);
 extern void fn_801CE5B0(void);
-extern void fn_801CF334(void);
+extern void ui_log_findActiveEntry(void);
 extern void fn_801CFA5C(void);
 extern void fn_801CFAA8(void);
 extern void fn_801D59A8(void);
@@ -985,13 +985,13 @@ asm void fn_801D4A0C(void)
     li r0, 0x0
     stw r0, 0xfc(r31)
     mr r3, r31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     mr r4, r3
     mr r3, r31
     lwz r4, 0x4c(r4)
     bl fn_801DD26C
     mr r3, r31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r4, 0x4c(r3)
     mr r3, r31
     lwz r5, 0x1e4(r31)
@@ -1008,13 +1008,13 @@ asm void fn_801D4A0C(void)
     li r0, 0x0
     stw r0, 0xfc(r31)
     mr r3, r31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r4, 0x4c(r3)
     mr r3, r31
     lwz r5, 0x1e4(r31)
     bl fn_801E07A4
     mr r3, r31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r4, 0x4c(r3)
     mr r3, r31
     lwz r5, 0x1e4(r31)
@@ -1126,7 +1126,7 @@ lbl_fn_801D4A0C_00000EAC:
     li r5, 0x1
     bl fn_801CE5B0
     mr r3, r31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r0, 0x4c(r3)
     lwz r4, lbl_8087F4F0
     slwi r0, r0, 6
@@ -1163,18 +1163,18 @@ lbl_fn_801D4A0C_00000EAC:
     stw r3, 0xfc(r31)
     mr r3, r31
     stw r0, 0x88(r31)
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
     beq lbl_fn_801D4A0C_00000FB4
     mr r3, r31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r3, 0x48(r3)
     addi r3, r3, 0x7d4
     b lbl_fn_801D4A0C_00000FD0
 lbl_fn_801D4A0C_00000FB4:
     mr r3, r31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r0, 0x4c(r3)
     lwz r3, lbl_8087F4F0
     mulli r0, r0, 0x43c
@@ -1558,13 +1558,13 @@ asm void fn_801D52F8(void)
     lwzx r4, r4, r0
     mtctr r4
     bctr
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     mr r4, r3
     mr r3, r31
     lwz r4, 0x4c(r4)
     bl fn_801DD26C
     mr r3, r31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r4, 0x4c(r3)
     mr r3, r31
     lwz r5, 0x1e4(r31)
@@ -1575,13 +1575,13 @@ asm void fn_801D52F8(void)
     mr r3, r31
     bl fn_801E6714
     b lbl_fn_801D52F8_00001608
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r4, 0x4c(r3)
     mr r3, r31
     lwz r5, 0x1e4(r31)
     bl fn_801E07A4
     mr r3, r31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r4, 0x4c(r3)
     mr r3, r31
     lwz r5, 0x1e4(r31)
@@ -1695,7 +1695,7 @@ asm void fn_801D54C0(void)
     cmpwi r3, 0x0
     beq lbl_fn_801D54C0_00001A9C
     mr r3, r30
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r5, 0x1ba0(r30)
     lwz r0, 0x4c(r3)
     lwz r4, lbl_8087F4F0

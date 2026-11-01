@@ -63,7 +63,7 @@ void fn_801CE7E8(void);
 void fn_801CE87C(void);
 void fn_801CEA50(void);
 void fn_801CEA98(void);
-void fn_801CF334(void);
+void ui_log_findActiveEntry(void);
 void fn_801CF3C0(void);
 
 asm void fn_801CDE14(void)
@@ -1593,45 +1593,45 @@ lbl_fn_801CEA98_0000150C:
     blr
 }
 
-asm void fn_801CF334(void)
+asm void ui_log_findActiveEntry(void)
 {
     nofralloc
     lwz r0, 0xf4(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_801CF334_000015A4
+    beq lbl_ui_log_findActiveEntry_000015A4
     lwz r5, 0xd4(r3)
     cmpwi r5, 0x0
-    beq lbl_fn_801CF334_00001554
+    beq lbl_ui_log_findActiveEntry_00001554
     lwz r4, 0x104(r3)
     lwz r0, 0x4c(r5)
     lwz r4, 0x0(r4)
     cmpw r4, r0
-    bne lbl_fn_801CF334_00001554
+    bne lbl_ui_log_findActiveEntry_00001554
     mr r3, r5
     blr
-lbl_fn_801CF334_00001554:
+lbl_ui_log_findActiveEntry_00001554:
     lwz r5, 0xd8(r3)
     cmpwi r5, 0x0
-    beq lbl_fn_801CF334_0000157C
+    beq lbl_ui_log_findActiveEntry_0000157C
     lwz r4, 0x104(r3)
     lwz r0, 0x4c(r5)
     lwz r4, 0x0(r4)
     cmpw r4, r0
-    bne lbl_fn_801CF334_0000157C
+    bne lbl_ui_log_findActiveEntry_0000157C
     mr r3, r5
     blr
-lbl_fn_801CF334_0000157C:
+lbl_ui_log_findActiveEntry_0000157C:
     lwz r5, 0xdc(r3)
     cmpwi r5, 0x0
-    beq lbl_fn_801CF334_000015A4
+    beq lbl_ui_log_findActiveEntry_000015A4
     lwz r4, 0x104(r3)
     lwz r0, 0x4c(r5)
     lwz r4, 0x0(r4)
     cmpw r4, r0
-    bne lbl_fn_801CF334_000015A4
+    bne lbl_ui_log_findActiveEntry_000015A4
     mr r3, r5
     blr
-lbl_fn_801CF334_000015A4:
+lbl_ui_log_findActiveEntry_000015A4:
     lwz r3, 0xd4(r3)
     blr
 }

@@ -17,7 +17,7 @@ extern void wcs_vformat(void);
 extern void actor_findSpawnTemplate(void);
 extern void fn_80117214(void);
 extern void actor_spawnActorWithId(void);
-extern void fn_801CF334(void);
+extern void ui_log_findActiveEntry(void);
 extern void fn_801CFA5C(void);
 extern void fn_801CFAA8(void);
 extern void fn_801DC42C(void);
@@ -1078,7 +1078,7 @@ lbl_fn_801D80BC_00000DA8:
     neg r0, r4
     or r0, r0, r4
     srwi r30, r0, 31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     mr r4, r3
     mr r3, r31
     lwz r4, 0x4c(r4)
@@ -1107,7 +1107,7 @@ lbl_fn_801D80BC_00000E14:
     li r30, 0x1
 lbl_fn_801D80BC_00000E18:
     mr r3, r31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     mr r4, r3
     mr r3, r31
     lwz r4, 0x4c(r4)
@@ -1182,7 +1182,7 @@ lbl_fn_801D80BC_00000F24:
     li r29, 0x1
 lbl_fn_801D80BC_00000F28:
     mr r3, r31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r28, 0x4c(r3)
     mr r3, r31
     mr r5, r29
@@ -1273,7 +1273,7 @@ lbl_fn_801D80BC_00001054:
     b lbl_fn_801D80BC_000011EC
 lbl_fn_801D80BC_00001084:
     mr r3, r31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r0, 0x1b98(r31)
     lwz r4, lbl_8087F4F0
     lwz r3, 0x4c(r3)
@@ -1429,10 +1429,10 @@ lbl_fn_801D8560_0000128C:
     cmpw r0, r3
     bge lbl_fn_801D8560_000015F4
     mr r3, r26
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r31, 0x48(r3)
     mr r3, r26
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r4, 0x1e4(r26)
     li r29, 0x0
     lwz r30, 0x4c(r3)
@@ -1627,7 +1627,7 @@ lbl_fn_801D8560_00001598:
     mr r4, r30
     bl fn_801DD26C
     mr r3, r26
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r4, 0x4c(r3)
     mr r3, r26
     lwz r5, 0x1e4(r26)
@@ -1716,7 +1716,7 @@ lbl_fn_801D8560_00001674:
     lwz r25, 0xc(r3)
 lbl_fn_801D8560_000016FC:
     mr r3, r26
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     mr r4, r3
     mr r3, r26
     lwz r4, 0x4c(r4)
@@ -1801,7 +1801,7 @@ lbl_fn_801D8560_000017B4:
     lwz r25, 0xc(r3)
 lbl_fn_801D8560_0000183C:
     mr r3, r26
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     mr r4, r3
     mr r3, r26
     lwz r4, 0x4c(r4)

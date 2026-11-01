@@ -78,7 +78,7 @@ extern void fn_80720680(void);
 extern void fn_807209C0(void);
 extern void fn_80720A70(void);
 extern void fn_807210F0(void);
-extern void fn_80721120(void);
+extern void net_calcStreamOffset(void);
 extern void fn_80725170(void);
 extern void fn_80725200(void);
 extern void net_listInsertNode(void);
@@ -1532,7 +1532,7 @@ asm void fn_80719120(void)
     mr r31, r4
     lbzu r3, 0x8(r5)
     lwz r4, 0x4(r5)
-    bl fn_80721120
+    bl net_calcStreamOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x2
     beq lbl_fn_80719120_000012D0
@@ -1614,7 +1614,7 @@ asm void fn_80719230(void)
     mr r29, r3
     lbz r3, 0x10(r6)
     lwz r4, 0x14(r6)
-    bl fn_80721120
+    bl net_calcStreamOffset
     lbz r0, 0x0(r3)
     cmpw r30, r0
     blt lbl_fn_80719230_000013E8
@@ -1634,7 +1634,7 @@ lbl_fn_80719230_00001400:
     addi r5, r4, 0x8
     lbz r3, 0x4(r6)
     lwz r4, 0x8(r6)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_80719230_0000142C
     li r3, 0x0
@@ -1713,7 +1713,7 @@ lbl_fn_80719230_00001520:
     addi r5, r4, 0x8
     lbz r3, 0x4(r6)
     lwz r4, 0x8(r6)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_80719230_0000154C
     li r3, 0x0
@@ -1912,7 +1912,7 @@ lbl_fn_807194F0_000017D4:
     addi r5, r3, 0x8
     lbz r3, 0x8(r3)
     lwz r4, 0x4(r5)
-    bl fn_80721120
+    bl net_calcStreamOffset
 lbl_fn_807194F0_000017FC:
     li r3, 0x1
 lbl_fn_807194F0_00001800:
@@ -1942,7 +1942,7 @@ lbl_fn_807196C0_0000184C:
     lbz r3, 0x18(r4)
     addi r5, r4, 0x8
     lwz r4, 0x1c(r4)
-    bl fn_80721120
+    bl net_calcStreamOffset
     lbz r3, 0x0(r3)
 lbl_fn_807196C0_00001864:
     lwz r0, 0x14(r1)
@@ -2018,7 +2018,7 @@ lbl_fn_80719790_0000193C:
     lwz r5, 0x8(r3)
     lbzu r3, 0x8(r5)
     lwz r4, 0x4(r5)
-    bl fn_80721120
+    bl net_calcStreamOffset
     lbz r0, 0x0(r3)
     cmplwi r0, 0x2
     bne lbl_fn_80719790_00001A24
@@ -2026,7 +2026,7 @@ lbl_fn_80719790_0000193C:
     lbz r3, 0x18(r4)
     addi r5, r4, 0x8
     lwz r4, 0x1c(r4)
-    bl fn_80721120
+    bl net_calcStreamOffset
     lbz r0, 0x0(r3)
     cmpw r29, r0
     bge lbl_fn_80719790_00001A24
@@ -2036,13 +2036,13 @@ lbl_fn_80719790_0000193C:
     addi r5, r4, 0x8
     lbz r3, 0x4(r6)
     lwz r4, 0x8(r6)
-    bl fn_80721120
+    bl net_calcStreamOffset
     mr r4, r3
     lwz r5, 0x8(r28)
     lbz r3, 0x0(r3)
     lwz r4, 0x4(r4)
     addi r5, r5, 0x8
-    bl fn_80721120
+    bl net_calcStreamOffset
     lwz r4, 0x0(r3)
     lwz r0, 0x4(r3)
     stw r0, 0x4(r30)

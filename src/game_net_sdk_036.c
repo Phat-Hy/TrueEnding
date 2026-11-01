@@ -67,7 +67,7 @@ extern u8 lbl_807C4334[];
 /* Function declarations */
 void pad_03_806EA68C_text(void);
 void fn_806EA690(void);
-void fn_806EA730(void);
+void net_abortConnection(void);
 void fn_806EA790(void);
 void fn_806EA840(void);
 void fn_806EA850(void);
@@ -159,7 +159,7 @@ lbl_fn_806EA690_00000090:
     blr
 }
 
-asm void fn_806EA730(void)
+asm void net_abortConnection(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -168,7 +168,7 @@ asm void fn_806EA730(void)
     stw r3, 0x8(r1)
     lwz r0, 0xc(r3)
     cmpwi r0, 0x7
-    beq lbl_fn_806EA730_000000F0
+    beq lbl_net_abortConnection_000000F0
     li r0, 0x7
     stw r0, 0xc(r3)
     addi r4, r1, 0x8
@@ -181,7 +181,7 @@ asm void fn_806EA730(void)
     lwz r3, 0x8(r3)
     lwz r3, 0x10(r3)
     bl fn_806D5930
-lbl_fn_806EA730_000000F0:
+lbl_net_abortConnection_000000F0:
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10
@@ -750,7 +750,7 @@ asm void fn_806EAE70(void)
     lwz r0, 0x10(r3)
     cmpwi r0, 0x0
     beq lbl_fn_806EAE70_0000084C
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r31
     li r4, 0x7
     li r5, 0x0
@@ -767,12 +767,12 @@ lbl_fn_806EAE70_0000084C:
     stw r0, 0x14(r3)
 lbl_fn_806EAE70_0000085C:
     mr r3, r31
-    bl fn_806EA730
+    bl net_abortConnection
     b lbl_fn_806EAE70_00000890
 lbl_fn_806EAE70_00000868:
     cmpwi r6, 0x7
     beq lbl_fn_806EAE70_00000890
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r31
     li r4, 0x2
     bl fn_806E9BB0
@@ -795,7 +795,7 @@ lbl_fn_806EAE70_000008A4:
     lwz r0, 0x10(r3)
     cmpwi r0, 0x0
     beq lbl_fn_806EAE70_000008E8
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r31
     li r4, 0x7
     li r5, 0x0
@@ -812,12 +812,12 @@ lbl_fn_806EAE70_000008E8:
     stw r0, 0x14(r3)
 lbl_fn_806EAE70_000008F8:
     mr r3, r31
-    bl fn_806EA730
+    bl net_abortConnection
     b lbl_fn_806EAE70_0000092C
 lbl_fn_806EAE70_00000904:
     cmpwi r6, 0x7
     beq lbl_fn_806EAE70_0000092C
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r31
     li r4, 0x2
     bl fn_806E9BB0
@@ -845,7 +845,7 @@ lbl_fn_806EAE70_00000940:
     cmpwi r0, 0x0
     beq lbl_fn_806EAE70_00000998
     mr r3, r31
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r31
     li r4, 0x7
     li r5, 0x0
@@ -862,13 +862,13 @@ lbl_fn_806EAE70_00000998:
     stw r0, 0x14(r31)
 lbl_fn_806EAE70_000009A8:
     mr r3, r31
-    bl fn_806EA730
+    bl net_abortConnection
     b lbl_fn_806EAE70_000009E0
 lbl_fn_806EAE70_000009B4:
     cmpwi r3, 0x7
     beq lbl_fn_806EAE70_000009E0
     mr r3, r31
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r31
     li r4, 0x2
     bl fn_806E9BB0
@@ -986,7 +986,7 @@ asm void fn_806EB1B0(void)
     lwz r0, 0x10(r3)
     cmpwi r0, 0x0
     beq lbl_fn_806EB1B0_00000B8C
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r31
     li r4, 0x7
     li r5, 0x0
@@ -1003,12 +1003,12 @@ lbl_fn_806EB1B0_00000B8C:
     stw r0, 0x14(r3)
 lbl_fn_806EB1B0_00000B9C:
     mr r3, r31
-    bl fn_806EA730
+    bl net_abortConnection
     b lbl_fn_806EB1B0_00000BD0
 lbl_fn_806EB1B0_00000BA8:
     cmpwi r6, 0x7
     beq lbl_fn_806EB1B0_00000BD0
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r31
     li r4, 0x2
     bl fn_806E9BB0
@@ -1031,7 +1031,7 @@ lbl_fn_806EB1B0_00000BE4:
     lwz r0, 0x10(r3)
     cmpwi r0, 0x0
     beq lbl_fn_806EB1B0_00000C28
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r31
     li r4, 0x7
     li r5, 0x0
@@ -1048,12 +1048,12 @@ lbl_fn_806EB1B0_00000C28:
     stw r0, 0x14(r3)
 lbl_fn_806EB1B0_00000C38:
     mr r3, r31
-    bl fn_806EA730
+    bl net_abortConnection
     b lbl_fn_806EB1B0_00000C6C
 lbl_fn_806EB1B0_00000C44:
     cmpwi r6, 0x7
     beq lbl_fn_806EB1B0_00000C6C
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r31
     li r4, 0x2
     bl fn_806E9BB0
@@ -1081,7 +1081,7 @@ lbl_fn_806EB1B0_00000C80:
     cmpwi r0, 0x0
     beq lbl_fn_806EB1B0_00000CD8
     mr r3, r31
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r31
     li r4, 0x7
     li r5, 0x0
@@ -1098,13 +1098,13 @@ lbl_fn_806EB1B0_00000CD8:
     stw r0, 0x14(r31)
 lbl_fn_806EB1B0_00000CE8:
     mr r3, r31
-    bl fn_806EA730
+    bl net_abortConnection
     b lbl_fn_806EB1B0_00000D20
 lbl_fn_806EB1B0_00000CF4:
     cmpwi r3, 0x7
     beq lbl_fn_806EB1B0_00000D20
     mr r3, r31
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r31
     li r4, 0x2
     bl fn_806E9BB0
@@ -1161,7 +1161,7 @@ lbl_fn_806EB1B0_00000D78:
     b lbl_fn_806EB1B0_00000E18
 lbl_fn_806EB1B0_00000DCC:
     mr r3, r31
-    bl fn_806EA730
+    bl net_abortConnection
     li r3, 0x1
     b lbl_fn_806EB1B0_00000E18
 lbl_fn_806EB1B0_00000DDC:
@@ -1214,7 +1214,7 @@ asm void fn_806EB4C0(void)
     lwz r0, 0x10(r3)
     cmpwi r0, 0x0
     beq lbl_fn_806EB4C0_00000EB4
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r30
     li r4, 0x7
     li r5, 0x0
@@ -1231,12 +1231,12 @@ lbl_fn_806EB4C0_00000EB4:
     stw r0, 0x14(r3)
 lbl_fn_806EB4C0_00000EC4:
     mr r3, r30
-    bl fn_806EA730
+    bl net_abortConnection
     b lbl_fn_806EB4C0_00000EF8
 lbl_fn_806EB4C0_00000ED0:
     cmpwi r4, 0x7
     beq lbl_fn_806EB4C0_00000EF8
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r30
     li r4, 0x2
     bl fn_806E9BB0
@@ -1297,7 +1297,7 @@ lbl_fn_806EB4C0_00000F84:
     lwz r0, 0x10(r3)
     cmpwi r0, 0x0
     beq lbl_fn_806EB4C0_00000FD4
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r30
     li r4, 0x7
     li r5, 0x0
@@ -1314,12 +1314,12 @@ lbl_fn_806EB4C0_00000FD4:
     stw r0, 0x14(r3)
 lbl_fn_806EB4C0_00000FE4:
     mr r3, r30
-    bl fn_806EA730
+    bl net_abortConnection
     b lbl_fn_806EB4C0_00001018
 lbl_fn_806EB4C0_00000FF0:
     cmpwi r4, 0x7
     beq lbl_fn_806EB4C0_00001018
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r30
     li r4, 0x2
     bl fn_806E9BB0
@@ -1345,7 +1345,7 @@ lbl_fn_806EB4C0_00001034:
     lwz r0, 0x10(r3)
     cmpwi r0, 0x0
     beq lbl_fn_806EB4C0_00001078
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r30
     li r4, 0x7
     li r5, 0x0
@@ -1362,12 +1362,12 @@ lbl_fn_806EB4C0_00001078:
     stw r0, 0x14(r3)
 lbl_fn_806EB4C0_00001088:
     mr r3, r30
-    bl fn_806EA730
+    bl net_abortConnection
     b lbl_fn_806EB4C0_000010BC
 lbl_fn_806EB4C0_00001094:
     cmpwi r4, 0x7
     beq lbl_fn_806EB4C0_000010BC
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r30
     li r4, 0x2
     bl fn_806E9BB0
@@ -1495,7 +1495,7 @@ lbl_fn_806EB4C0_00001238:
     lwz r0, 0x10(r3)
     cmpwi r0, 0x0
     beq lbl_fn_806EB4C0_00001288
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r30
     li r4, 0x7
     li r5, 0x0
@@ -1512,12 +1512,12 @@ lbl_fn_806EB4C0_00001288:
     stw r0, 0x14(r3)
 lbl_fn_806EB4C0_00001298:
     mr r3, r30
-    bl fn_806EA730
+    bl net_abortConnection
     b lbl_fn_806EB4C0_000012CC
 lbl_fn_806EB4C0_000012A4:
     cmpwi r4, 0x7
     beq lbl_fn_806EB4C0_000012CC
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r30
     li r4, 0x2
     bl fn_806E9BB0
@@ -1561,7 +1561,7 @@ lbl_fn_806EB4C0_0000131C:
     lwz r0, 0x10(r3)
     cmpwi r0, 0x0
     beq lbl_fn_806EB4C0_0000136C
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r30
     li r4, 0x7
     li r5, 0x0
@@ -1578,12 +1578,12 @@ lbl_fn_806EB4C0_0000136C:
     stw r0, 0x14(r3)
 lbl_fn_806EB4C0_0000137C:
     mr r3, r30
-    bl fn_806EA730
+    bl net_abortConnection
     b lbl_fn_806EB4C0_000013B0
 lbl_fn_806EB4C0_00001388:
     cmpwi r4, 0x7
     beq lbl_fn_806EB4C0_000013B0
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r30
     li r4, 0x2
     bl fn_806E9BB0
@@ -1602,7 +1602,7 @@ lbl_fn_806EB4C0_000013C4:
     li r0, 0x1
     b lbl_fn_806EB4C0_0000147C
 lbl_fn_806EB4C0_000013CC:
-    bl fn_806EA730
+    bl net_abortConnection
     lwz r29, 0x8(r30)
     li r26, 0x0
     lhz r27, 0x4(r30)
@@ -1703,7 +1703,7 @@ lbl_fn_806EB4C0_00001520:
     cmpwi r0, 0x0
     beq lbl_fn_806EB4C0_00001570
     mr r3, r30
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r30
     li r4, 0x2
     li r5, 0x0
@@ -1720,13 +1720,13 @@ lbl_fn_806EB4C0_00001570:
     stw r0, 0x14(r30)
 lbl_fn_806EB4C0_00001580:
     mr r3, r30
-    bl fn_806EA730
+    bl net_abortConnection
     b lbl_fn_806EB4C0_000015BC
 lbl_fn_806EB4C0_0000158C:
     cmpwi r3, 0x7
     beq lbl_fn_806EB4C0_000015BC
     mr r3, r30
-    bl fn_806EA730
+    bl net_abortConnection
     cntlzw r0, r26
     mr r3, r30
     srwi r4, r0, 5
@@ -1909,7 +1909,7 @@ asm void fn_806EBE60(void)
     lwz r0, 0x10(r3)
     cmpwi r0, 0x0
     beq lbl_fn_806EBE60_00001844
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r30
     li r4, 0x7
     li r5, 0x0
@@ -1926,12 +1926,12 @@ lbl_fn_806EBE60_00001844:
     stw r0, 0x14(r3)
 lbl_fn_806EBE60_00001854:
     mr r3, r30
-    bl fn_806EA730
+    bl net_abortConnection
     b lbl_fn_806EBE60_00001888
 lbl_fn_806EBE60_00001860:
     cmpwi r4, 0x7
     beq lbl_fn_806EBE60_00001888
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r30
     li r4, 0x2
     bl fn_806E9BB0
@@ -2155,7 +2155,7 @@ lbl_fn_806EBE60_00001B6C:
     cmpwi r0, 0x0
     beq lbl_fn_806EBE60_00001BB0
     mr r3, r30
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r30
     li r4, 0x1
     li r5, 0x0
@@ -2172,13 +2172,13 @@ lbl_fn_806EBE60_00001BB0:
     stw r0, 0x14(r30)
 lbl_fn_806EBE60_00001BC0:
     mr r3, r30
-    bl fn_806EA730
+    bl net_abortConnection
     b lbl_fn_806EBE60_00001BF8
 lbl_fn_806EBE60_00001BCC:
     cmpwi r3, 0x7
     beq lbl_fn_806EBE60_00001BF8
     mr r3, r30
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r30
     li r4, 0x4
     bl fn_806E9BB0
@@ -2234,7 +2234,7 @@ lbl_fn_806EC2C0_00001C80:
     lwz r0, 0x10(r3)
     cmpwi r0, 0x0
     beq lbl_fn_806EC2C0_00001CC0
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r26
     li r4, 0x7
     li r5, 0x0
@@ -2251,12 +2251,12 @@ lbl_fn_806EC2C0_00001CC0:
     stw r0, 0x14(r3)
 lbl_fn_806EC2C0_00001CD0:
     mr r3, r26
-    bl fn_806EA730
+    bl net_abortConnection
     b lbl_fn_806EC2C0_00001D04
 lbl_fn_806EC2C0_00001CDC:
     cmpwi r4, 0x7
     beq lbl_fn_806EC2C0_00001D04
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r26
     li r4, 0x2
     bl fn_806E9BB0
@@ -2370,7 +2370,7 @@ asm void fn_806EC4B0(void)
     lwz r0, 0x10(r3)
     cmpwi r0, 0x0
     beq lbl_fn_806EC4B0_00001EA0
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r31
     li r4, 0x7
     li r5, 0x0
@@ -2387,12 +2387,12 @@ lbl_fn_806EC4B0_00001EA0:
     stw r0, 0x14(r3)
 lbl_fn_806EC4B0_00001EB0:
     mr r3, r31
-    bl fn_806EA730
+    bl net_abortConnection
     b lbl_fn_806EC4B0_00001EE4
 lbl_fn_806EC4B0_00001EBC:
     cmpwi r4, 0x7
     beq lbl_fn_806EC4B0_00001EE4
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r31
     li r4, 0x2
     bl fn_806E9BB0
@@ -2503,7 +2503,7 @@ lbl_fn_806EC4B0_00002028:
     lwz r0, 0x10(r3)
     cmpwi r0, 0x0
     beq lbl_fn_806EC4B0_00002070
-    bl fn_806EA730
+    bl net_abortConnection
     mr r3, r31
     li r4, 0x2
     li r5, 0x0
@@ -2520,11 +2520,11 @@ lbl_fn_806EC4B0_00002070:
     stw r0, 0x14(r3)
 lbl_fn_806EC4B0_00002080:
     mr r3, r31
-    bl fn_806EA730
+    bl net_abortConnection
     b lbl_fn_806EC4B0_000020B4
 lbl_fn_806EC4B0_0000208C:
     beq cr1, lbl_fn_806EC4B0_000020B4
-    bl fn_806EA730
+    bl net_abortConnection
     cntlzw r0, r30
     mr r3, r31
     srwi r4, r0, 5

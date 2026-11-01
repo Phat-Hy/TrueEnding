@@ -24,7 +24,7 @@ extern void bta_sys_traceDebug(void);
 extern void fn_80629870(void);
 extern void fn_806298B0(void);
 extern void fn_806298D0(void);
-extern void fn_80629E20(void);
+extern void bta_sys_sendmsg(void);
 extern void fn_80629E90(void);
 extern void fn_80630468(void);
 extern void fn_806307D8(void);
@@ -2150,7 +2150,7 @@ lbl_fn_80638CC0_00001AAC:
     addi r3, r7, 0x195c
     li r5, 0x1
     stw r6, 0x196c(r7)
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     b lbl_fn_80638CC0_00001B70
 lbl_fn_80638CC0_00001AE8:
     cmpwi r31, 0x0
@@ -3126,7 +3126,7 @@ lbl_fn_80639804_00002838:
     li r4, 0x16
     stw r5, 0x194c(r29)
     li r5, 0x3c
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     lwz r12, 0x1910(r29)
     mr r3, r27
     addi r4, r30, 0x22
@@ -4138,7 +4138,7 @@ lbl_fn_8063A778_000035A0:
     addi r3, r30, 0x4c
     li r4, 0x3c
     li r5, 0x8
-    bl fn_80629E20
+    bl bta_sys_sendmsg
 lbl_fn_8063A778_00003630:
     lhz r5, 0x80(r30)
     mr r3, r31
@@ -4572,7 +4572,7 @@ lbl_fn_8063ADA4_00003BD8:
     addi r3, r31, 0x4c
     li r4, 0x3c
     li r5, 0x8
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     b lbl_fn_8063ADA4_00003C0C
 lbl_fn_8063ADA4_00003C04:
     addi r3, r31, 0x4c
@@ -4801,7 +4801,7 @@ lbl_fn_8063B0BC_00003EFC:
     addi r3, r30, 0x4c
     li r4, 0x3c
     li r5, 0x8
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     b lbl_fn_8063B0BC_00003F30
 lbl_fn_8063B0BC_00003F28:
     addi r3, r30, 0x4c
@@ -4858,7 +4858,7 @@ lbl_fn_8063B1E4_00003FC4:
     addi r3, r31, 0x4c
     li r4, 0x3c
     li r5, 0x8
-    bl fn_80629E20
+    bl bta_sys_sendmsg
 lbl_fn_8063B1E4_00003FE4:
     lhz r0, 0x4(r30)
     lis r3, 0x7

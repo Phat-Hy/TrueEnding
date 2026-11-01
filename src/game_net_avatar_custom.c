@@ -37,7 +37,7 @@ extern void save_formatSlotString(void);
 extern void thread_findAndNotify(void);
 extern void fn_80201E78(void);
 extern void profile_getMetricValue(void);
-extern void fn_80202A6C(void);
+extern void perf_initNode(void);
 extern void perf_getMetricValue(void);
 extern void mem_findBlockById(void);
 extern void fn_8020A81C(void);
@@ -476,7 +476,7 @@ asm void fn_805266C0(void)
     addi r4, r4, lbl_8075C6C4@l
     li r5, 0x0
     addi r4, r4, 0x3a4
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x18(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -486,7 +486,7 @@ asm void fn_805266C0(void)
     addi r4, r4, lbl_8075C6C4@l
     li r5, 0x0
     addi r4, r4, 0x3ca
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x18(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -496,7 +496,7 @@ asm void fn_805266C0(void)
     addi r4, r4, lbl_8075C6C4@l
     li r5, 0x0
     addi r4, r4, 0x3f0
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x18(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -506,7 +506,7 @@ asm void fn_805266C0(void)
     addi r4, r4, lbl_8075C6C4@l
     li r5, 0x0
     addi r4, r4, 0x416
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x18(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -516,7 +516,7 @@ asm void fn_805266C0(void)
     addi r4, r4, lbl_8075C6C4@l
     li r5, 0x0
     addi r4, r4, 0x43c
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x18(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -526,7 +526,7 @@ asm void fn_805266C0(void)
     addi r4, r4, lbl_8075C6C4@l
     li r5, 0x0
     addi r4, r4, 0x462
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x18(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -536,7 +536,7 @@ asm void fn_805266C0(void)
     addi r4, r4, lbl_8075C6C4@l
     li r5, 0x0
     addi r4, r4, 0x488
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x18(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -546,7 +546,7 @@ asm void fn_805266C0(void)
     addi r4, r4, lbl_8075C6C4@l
     li r5, 0x0
     addi r4, r4, 0x4ae
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x18(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -556,7 +556,7 @@ asm void fn_805266C0(void)
     addi r4, r4, lbl_8075C6C4@l
     li r5, 0x0
     addi r4, r4, 0x4d4
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x18(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -566,7 +566,7 @@ asm void fn_805266C0(void)
     addi r4, r4, lbl_8075C6C4@l
     li r5, 0x0
     addi r4, r4, 0x4fa
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x18(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -576,7 +576,7 @@ asm void fn_805266C0(void)
     addi r4, r4, lbl_8075C6C4@l
     li r5, 0x0
     addi r4, r4, 0x517
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x18(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -769,7 +769,7 @@ lbl_fn_80526930_000008DC:
     mr r3, r31
     addi r4, r30, 0x49
     li r5, 0x1
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0xd8(r28)
     li r4, 0x1
     bl atn_Task_setActive

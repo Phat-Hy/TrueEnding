@@ -9,7 +9,7 @@ extern void actor_dispatchMessage(void);
 extern void fn_8001A464(void);
 extern void fn_8001A65C(void);
 extern void fn_8001A788(void);
-extern void fn_8001AD80(void);
+extern void battle_calcActorDistance(void);
 extern void fn_8001ADE8(void);
 extern void battle_getCharacterState(void);
 extern void fn_8001B5DC(void);
@@ -225,7 +225,7 @@ lbl_fn_80039950_000001F0:
     li r3, 0x0
     b lbl_fn_80039950_00000208
 lbl_fn_80039950_000001F8:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x68(r1)
     lwz r3, 0x6c(r1)
@@ -259,7 +259,7 @@ lbl_fn_80039950_00000268:
     li r0, 0x0
     b lbl_fn_80039950_00000280
 lbl_fn_80039950_00000270:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x68(r1)
     lwz r0, 0x6c(r1)
@@ -377,7 +377,7 @@ lbl_fn_80039D24_0000040C:
     li r3, 0x0
     b lbl_fn_80039D24_00000424
 lbl_fn_80039D24_00000414:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x18(r1)
     lwz r3, 0x1c(r1)
@@ -754,7 +754,7 @@ lbl_fn_8003A0D4_0000093C:
     li r3, 0x0
     b lbl_fn_8003A0D4_00000954
 lbl_fn_8003A0D4_00000944:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x68(r1)
     lwz r3, 0x6c(r1)
@@ -797,7 +797,7 @@ lbl_fn_8003A0D4_000009D8:
     li r5, 0x0
     b lbl_fn_8003A0D4_000009F0
 lbl_fn_8003A0D4_000009E0:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x68(r1)
     lwz r5, 0x6c(r1)
@@ -1121,7 +1121,7 @@ lbl_fn_8003A5C8_00000E68:
     li r3, 0x0
     b lbl_fn_8003A5C8_00000E80
 lbl_fn_8003A5C8_00000E70:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x68(r1)
     lwz r3, 0x6c(r1)
@@ -1150,7 +1150,7 @@ lbl_fn_8003A5C8_00000ECC:
     li r0, 0x0
     b lbl_fn_8003A5C8_00000EE4
 lbl_fn_8003A5C8_00000ED4:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x68(r1)
     lwz r0, 0x6c(r1)
@@ -1268,7 +1268,7 @@ lbl_fn_8003A988_00001070:
     li r3, 0x0
     b lbl_fn_8003A988_00001088
 lbl_fn_8003A988_00001078:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x18(r1)
     lwz r3, 0x1c(r1)
@@ -1674,7 +1674,7 @@ lbl_fn_8003AD38_0000160C:
     li r3, 0x0
     b lbl_fn_8003AD38_00001624
 lbl_fn_8003AD38_00001614:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x88(r1)
     lwz r3, 0x8c(r1)
@@ -1714,7 +1714,7 @@ lbl_fn_8003AD38_0000169C:
     li r5, 0x0
     b lbl_fn_8003AD38_000016B4
 lbl_fn_8003AD38_000016A4:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x88(r1)
     lwz r5, 0x8c(r1)
@@ -2069,7 +2069,7 @@ lbl_fn_8003B2F4_00001BA0:
     li r3, 0x0
     b lbl_fn_8003B2F4_00001BB8
 lbl_fn_8003B2F4_00001BA8:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x48(r1)
     lwz r3, 0x4c(r1)
@@ -2098,7 +2098,7 @@ lbl_fn_8003B2F4_00001C04:
     li r0, 0x0
     b lbl_fn_8003B2F4_00001C1C
 lbl_fn_8003B2F4_00001C0C:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x48(r1)
     lwz r0, 0x4c(r1)
@@ -2200,7 +2200,7 @@ lbl_fn_8003B680_00001D68:
     li r3, 0x0
     b lbl_fn_8003B680_00001D80
 lbl_fn_8003B680_00001D70:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x18(r1)
     lwz r3, 0x1c(r1)
@@ -2577,7 +2577,7 @@ lbl_fn_8003BA30_00002298:
     li r3, 0x0
     b lbl_fn_8003BA30_000022B0
 lbl_fn_8003BA30_000022A0:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x58(r1)
     lwz r3, 0x5c(r1)
@@ -2617,7 +2617,7 @@ lbl_fn_8003BA30_00002328:
     li r5, 0x0
     b lbl_fn_8003BA30_00002340
 lbl_fn_8003BA30_00002330:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x58(r1)
     lwz r5, 0x5c(r1)
@@ -3082,7 +3082,7 @@ lbl_fn_8003C0C4_000029B4:
     li r0, 0x0
     b lbl_fn_8003C0C4_000029CC
 lbl_fn_8003C0C4_000029BC:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x68(r1)
     lwz r0, 0x6c(r1)
@@ -3559,7 +3559,7 @@ lbl_fn_8003C804_00003044:
     li r5, 0x0
     b lbl_fn_8003C804_0000305C
 lbl_fn_8003C804_0000304C:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x68(r1)
     lwz r5, 0x6c(r1)

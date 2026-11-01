@@ -14,7 +14,7 @@ extern void mem_free(void);
 extern void str_findChar(void);
 extern void fn_80117200(void);
 extern void fn_80134800(void);
-extern void fn_801CF334(void);
+extern void ui_log_findActiveEntry(void);
 extern void fn_801CFA5C(void);
 extern void fn_801D4E74(void);
 extern void fn_801DCE88(void);
@@ -401,7 +401,7 @@ lbl_fn_801E6714_00000434:
     stw r0, 0x88(r3)
 lbl_fn_801E6714_00000464:
     mr r3, r22
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r0, 0x4c(r3)
     lwz r4, lbl_8087F4F0
     lwz r3, 0x13c(r22)
@@ -414,7 +414,7 @@ lbl_fn_801E6714_00000464:
     bl profile_getMetricValue
     mr r20, r3
     mr r3, r22
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r4, 0x4c(r3)
     mr r3, r22
     lwz r6, 0x1b98(r22)
@@ -679,7 +679,7 @@ lbl_fn_801E6B10_00000854:
     bl profile_getMetricValue
     mr r21, r3
     mr r3, r23
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r4, 0x4c(r3)
     mr r3, r23
     lwz r6, 0x1b98(r23)
@@ -687,7 +687,7 @@ lbl_fn_801E6B10_00000854:
     bl fn_801D4E74
 lbl_fn_801E6B10_00000884:
     mr r3, r23
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lis r4, lbl_8073CAA0@ha
     lis r5, lbl_8073CAA8@ha
     lwz r27, 0x4c(r3)

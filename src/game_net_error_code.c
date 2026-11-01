@@ -39,7 +39,7 @@ extern void save_formatSlotString(void);
 extern void thread_findAndNotify(void);
 extern void fn_80201E78(void);
 extern void profile_getMetricValue(void);
-extern void fn_80202A6C(void);
+extern void perf_initNode(void);
 extern void perf_getMetricValue(void);
 extern void assert_formatLocation(void);
 extern void event_findEntryById(void);
@@ -1218,7 +1218,7 @@ lbl_fn_8051B988_00000F38:
     sth r30, 0xe4(r25)
     mr r4, r29
     li r5, 0x1
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0xe0(r25)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1226,7 +1226,7 @@ lbl_fn_8051B988_00000F38:
     mr r3, r31
     mr r4, r27
     li r5, 0x1
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x8e0(r25)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1234,7 +1234,7 @@ lbl_fn_8051B988_00000F38:
     mr r3, r31
     mr r4, r26
     li r5, 0x1
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x10e0(r25)
     li r4, 0x1
     bl atn_Task_setActive

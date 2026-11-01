@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8001AD80(void);
+extern void battle_calcActorDistance(void);
 extern void fn_8001ADE8(void);
 extern void battle_getCharacterState(void);
 extern void fn_8001B5DC(void);
@@ -1158,7 +1158,7 @@ lbl_fn_80025E30_00000EBC:
     li r0, 0x0
     b lbl_fn_80025E30_00000ED4
 lbl_fn_80025E30_00000EC4:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x68(r1)
     lwz r0, 0x6c(r1)
@@ -1671,7 +1671,7 @@ lbl_fn_80026570_000015D4:
     li r0, 0x0
     b lbl_fn_80026570_000015EC
 lbl_fn_80026570_000015DC:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x88(r1)
     lwz r0, 0x8c(r1)

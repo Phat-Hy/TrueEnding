@@ -26,7 +26,7 @@ extern void fn_806ABB70(void);
 extern void fn_806ACCF0(void);
 extern void fn_806ACE00(void);
 extern void fn_806B1230(void);
-extern void fn_806B12F0(void);
+extern void net_checkLinkStatus(void);
 extern void fn_806B15B0(void);
 extern void fn_806B1660(void);
 extern void fn_806B1710(void);
@@ -404,7 +404,7 @@ lbl_fn_806B85B0_00000444:
     li r4, 0x0
     b lbl_fn_806B85B0_00000500
 lbl_fn_806B85B0_000004B4:
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     beq lbl_fn_806B85B0_000004FC
     lwz r3, lbl_80860898@l(r24)
@@ -588,7 +588,7 @@ lbl_fn_806B85B0_00000700:
     li r4, 0x0
     b lbl_fn_806B85B0_000007BC
 lbl_fn_806B85B0_00000770:
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     beq lbl_fn_806B85B0_000007B8
     lwz r3, lbl_80860898@l(r25)
@@ -1059,7 +1059,7 @@ lbl_fn_806B8D60_00000DD0:
     li r4, 0x0
     b lbl_fn_806B8D60_00000E8C
 lbl_fn_806B8D60_00000E40:
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     beq lbl_fn_806B8D60_00000E88
     lwz r3, lbl_80860898@l(r30)
@@ -1328,7 +1328,7 @@ lbl_fn_806B9500_000011A0:
     li r4, 0x0
     b lbl_fn_806B9500_0000125C
 lbl_fn_806B9500_00001210:
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     beq lbl_fn_806B9500_00001258
     lwz r3, lbl_80860898@l(r29)

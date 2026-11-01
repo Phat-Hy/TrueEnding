@@ -40,7 +40,7 @@ extern void saveSlot_readSummary(void);
 extern void save_calculateBlockCrc(void);
 extern void fn_80201E78(void);
 extern void profile_getMetricValue(void);
-extern void fn_80202A6C(void);
+extern void perf_initNode(void);
 extern void perf_getMetricValue(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_update(void);
@@ -979,21 +979,21 @@ lbl_fn_801CCE50_00000C00:
     add r29, r31, r28
     addi r4, r30, 0x1
     li r5, 0x1
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x108(r29)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0x1d
     li r5, 0x1
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x150(r29)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0x3f
     li r5, 0x1
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x198(r29)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1031,7 +1031,7 @@ lbl_fn_801CCE50_00000CCC:
     add r29, r31, r28
     addi r4, r30, 0xd0
     li r5, 0x1
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x140(r29)
     li r4, 0x1
     bl atn_Task_setActive

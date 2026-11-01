@@ -146,7 +146,7 @@ void fn_806299F0(void);
 void fn_80629A30(void);
 void fn_80629A60(void);
 void fn_80629AA0(void);
-void fn_80629E20(void);
+void bta_sys_sendmsg(void);
 void fn_80629E90(void);
 void bd_addr_copy(void);
 void fn_80629ED8(void);
@@ -1888,7 +1888,7 @@ lbl_fn_80629AA0_00001734:
     blr
 }
 
-asm void fn_80629E20(void)
+asm void bta_sys_sendmsg(void)
 {
     nofralloc
     stwu r1, -0x20(r1)

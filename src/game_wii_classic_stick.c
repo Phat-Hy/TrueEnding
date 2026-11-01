@@ -51,7 +51,7 @@ extern void fn_80489A2C(void);
 extern void fn_80489A50(void);
 extern void fn_8048E9A4(void);
 extern void fn_8048EC7C(void);
-extern void fn_805381A4(void);
+extern void node_getParentNode(void);
 extern void spectate_getRootNode(void);
 extern void fn_805384D0(void);
 extern void fn_80538DC8(void);
@@ -210,7 +210,7 @@ asm void fn_8055F154(void)
     cmpwi r0, 0x0
     bgt lbl_fn_8055F154_000001D8
     mr r3, r30
-    bl fn_805381A4
+    bl node_getParentNode
     mr r3, r30
     bl spectate_getRootNode
     lwz r0, 0x30(r30)
@@ -231,7 +231,7 @@ lbl_fn_8055F154_00000180:
     b lbl_fn_8055F154_000001D8
 lbl_fn_8055F154_00000198:
     mr r3, r30
-    bl fn_805381A4
+    bl node_getParentNode
     mr r3, r30
     bl spectate_getRootNode
     lwz r0, 0x30(r30)
@@ -269,7 +269,7 @@ asm void fn_8055F234(void)
     stw r29, 0x24(r1)
     mr r29, r4
     mr r3, r29
-    bl fn_805381A4
+    bl node_getParentNode
     mr r3, r29
     bl spectate_getRootNode
     lwz r31, 0x1ec(r3)
@@ -351,7 +351,7 @@ asm void fn_8055F328(void)
     cmpwi r0, 0x0
     bgt lbl_fn_8055F328_00000410
     mr r3, r30
-    bl fn_805381A4
+    bl node_getParentNode
     mr r3, r30
     bl spectate_getRootNode
     lwz r0, 0x30(r30)
@@ -389,7 +389,7 @@ lbl_fn_8055F328_00000398:
     b lbl_fn_8055F328_00000410
 lbl_fn_8055F328_000003A8:
     mr r3, r30
-    bl fn_805381A4
+    bl node_getParentNode
     mr r3, r30
     bl spectate_getRootNode
     lwz r0, 0x30(r30)
@@ -454,7 +454,7 @@ asm void fn_8055F474(void)
     cmpwi r0, 0x0
     bgt lbl_fn_8055F474_00000624
     mr r3, r26
-    bl fn_805381A4
+    bl node_getParentNode
     mr r3, r26
     bl spectate_getRootNode
     lwz r0, 0x30(r26)
@@ -619,7 +619,7 @@ lbl_fn_8055F690_0000069C:
     cmpwi r0, 0x0
     bne lbl_fn_8055F690_00000BC0
     mr r3, r26
-    bl fn_805381A4
+    bl node_getParentNode
     mr r3, r26
     bl spectate_getRootNode
     lwz r6, 0x30(r26)
@@ -1417,7 +1417,7 @@ asm void fn_8056014C(void)
     bne lbl_fn_8056014C_000011E4
 lbl_fn_8056014C_00001130:
     mr r3, r31
-    bl fn_805381A4
+    bl node_getParentNode
     mr r3, r31
     bl spectate_getRootNode
     lwz r0, 0x30(r31)
@@ -1487,7 +1487,7 @@ asm void fn_8056023C(void)
     mr r31, r4
     bne lbl_fn_8056023C_00001258
     mr r3, r31
-    bl fn_805381A4
+    bl node_getParentNode
     mr r3, r31
     bl spectate_getRootNode
     lwz r0, 0x30(r31)
@@ -1535,7 +1535,7 @@ asm void fn_805602B0(void)
     b lbl_fn_805602B0_0000172C
 lbl_fn_805602B0_000012B4:
     mr r3, r28
-    bl fn_805381A4
+    bl node_getParentNode
     mr r3, r28
     bl spectate_getRootNode
     lwz r0, 0x30(r28)
@@ -1915,7 +1915,7 @@ lbl_fn_80560798_000017A4:
     cmpwi r0, 0x0
     bne lbl_fn_80560798_000018C4
     mr r3, r30
-    bl fn_805381A4
+    bl node_getParentNode
     mr r3, r30
     bl spectate_getRootNode
     lwz r0, 0x30(r30)

@@ -34,7 +34,7 @@ extern void save_createWorkerTask(void);
 extern void fn_801F6C10(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
-extern void fn_80202A6C(void);
+extern void perf_initNode(void);
 extern void event_findEntryById(void);
 extern void fn_802179B4(void);
 extern void fn_802179BC(void);
@@ -942,7 +942,7 @@ lbl_fn_804A2A34_00000AFC:
     add r30, r31, r28
     addi r4, r29, 0x57
     li r5, 0x1
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x78(r30)
     li r4, 0x1
     bl atn_Task_setActive
