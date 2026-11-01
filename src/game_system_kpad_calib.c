@@ -131,7 +131,7 @@ void world_getLocalFlag(void);
 void world_setLocalFlag(void);
 void world_startMapTransition(void);
 void world_reloadMapTransition(void);
-void world_isTransitionFinished(void);
+int world_isTransitionFinished(void* world);
 void world_initMapTransitionParams(void);
 void world_startTransitionFade(void);
 void world_advanceChapter(void);
@@ -775,26 +775,13 @@ asm void world_reloadMapTransition(void)
     blr
 }
 
-asm void world_isTransitionFinished(void)
+int world_isTransitionFinished(void* world)
 {
-    nofralloc
-    lwz r4, 0x5620(r3)
-    lwz r0, 0x48(r4)
-    cmpwi r0, 0x0
-    beq lbl_world_isTransitionFinished_00000944
-    lwz r3, 0x58(r4)
-    lwz r0, 0x54(r4)
-    lwz r4, 0x4c(r4)
-    add r0, r3, r0
-    xor r0, r4, r0
-    srawi r3, r0, 1
-    and r0, r0, r4
-    subf r0, r0, r3
-    srwi r3, r0, 31
-    blr
-lbl_world_isTransitionFinished_00000944:
-    li r3, 0x1
-    blr
+    u32* sub = *(u32**)((char*)world + 0x5620);
+    if (sub[0x48 / 4] != 0) {
+        return (s32)(sub[0x58 / 4] + sub[0x54 / 4]) < (s32)sub[0x4c / 4];
+    }
+    return 1;
 }
 
 asm void world_initMapTransitionParams(void)

@@ -27,7 +27,7 @@ extern void fn_80211480(void);
 extern void fn_80219E6C(void);
 extern void world_startMapTransition(void);
 extern void world_reloadMapTransition(void);
-extern void world_isTransitionFinished(void);
+extern int world_isTransitionFinished(void* world);
 extern void fn_803E746C(void);
 extern void fn_80444CF8(void);
 extern void fn_804DA47C(void);

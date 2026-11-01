@@ -622,3 +622,29 @@ Names applied:
   - GXGetFifoStatus (fn_80612A60, 144 B)
   - GXGetFifoCount (fn_80612AF0, 20 B)
 Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.
+
+## Session 2026-11-01 - Conversion: world_isTransitionFinished to 100.0% matching C
+Subject:  track-a: decompile world_isTransitionFinished (64 B) to 100.0% matching C progress 99.30% -> 99.30%
+Scope:    Decompile world_isTransitionFinished (0x80370C2C, 64 B) in src/game_system_kpad_calib.c.
+Checklist:
+  1. src/game_system_kpad_calib.c: world_isTransitionFinished converted from inline asm to C.
+  2. Prototype swept in caller unit src/game_dungeon_torch_light.c.
+  3. report.json clean, ninja passed (orig/main.dol: OK).
+Self-check: git diff -U0 -- src/ for 'asm void': -1 / +0 (net 1 C conversion).
+Decompiled C logic:
+`c
+int world_isTransitionFinished(void* world)
+{
+    u32* sub = *(u32**)((char*)world + 0x5620);
+    if (sub[0x48 / 4] != 0) {
+        return (s32)(sub[0x58 / 4] + sub[0x54 / 4]) < (s32)sub[0x4c / 4];
+    }
+    return 1;
+}
+`
+Analysis for Track B:
+- Reads world subsystem pointer at +0x5620 (WorldTransitionManager).
+- If field_48 (transition active flag) == 0, returns 1 (transition complete / no transition in progress).
+- If field_48 != 0, evaluates whether elapsed frames (field_58 + field_54) < total duration (field_4c).
+- Returns 0 when still transitioning, 1 when finished.
+Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.
