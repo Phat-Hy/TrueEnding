@@ -46,8 +46,8 @@ extern void printf(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void abort(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 extern void fn_80695AD0(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -912,7 +912,7 @@ lbl_fn_8017BDDC_00000AE4:
 lbl_fn_8017BDDC_00000AEC:
     frsp f2, f2
     lfs f1, 0x110(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_8017BDDC_00000B00:
@@ -991,7 +991,7 @@ lbl_fn_8017BDDC_00000C10:
     b lbl_fn_8017BDDC_00000C30
 lbl_fn_8017BDDC_00000C1C:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -1008,7 +1008,7 @@ lbl_fn_8017BDDC_00000C30:
     fadds f1, f3, f0
     lfd f2, lbl_80737810@l(r3)
     stfs f4, 0x4c(r1)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f31, f1
     lfs f0, lbl_80881A0C
     fcmpo cr0, f31, f0

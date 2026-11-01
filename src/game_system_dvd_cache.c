@@ -27,12 +27,12 @@ extern void fn_802085E0(void);
 extern void fn_80208694(void);
 extern void fn_8021771C(void);
 extern void fn_8021F09C(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_802377B8(void);
 extern void fn_8023780C(void);
 extern void fn_8023781C(void);
 extern void fn_80237874(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
 extern void fn_803754F0(void);
@@ -1563,7 +1563,7 @@ asm void fn_80376DD8(void)
     bne lbl_fn_80376DD8_000016FC
     mr r3, r31
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_808857FC
     li r11, -0x1
     lfs f1, lbl_80885800
@@ -1588,7 +1588,7 @@ asm void fn_80376DD8(void)
     stfs f1, 0xa4(r1)
     stw r11, 0x8(r1)
     stw r0, 0xc(r1)
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r3, 0x48(r31)
     li r4, 0x1
     lfs f1, lbl_808857FC

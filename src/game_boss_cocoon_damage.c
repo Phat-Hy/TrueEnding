@@ -28,7 +28,7 @@ extern void fn_800ED42C(void);
 extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
 extern void fn_800EDFE8(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
 extern void fn_800F8C6C(void);
 extern void fn_8012DB04(void);
@@ -43,11 +43,11 @@ extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void fn_8020A780(void);
 extern void fn_80219E6C(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_802377B8(void);
 extern void fn_8023780C(void);
 extern void fn_80237874(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void fn_802AC550(void);
 extern void fn_802BABC0(void);
 extern void fn_802FCF14(void);
@@ -1107,7 +1107,7 @@ lbl_fn_8045883C_00000D9C:
     stw r30, 0x14bc(r31)
     stw r30, 0x14c0(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     mr r3, r31
     li r4, 0x3
@@ -1172,7 +1172,7 @@ lbl_fn_8045883C_00000E94:
     stw r30, 0x14bc(r31)
     stw r30, 0x14c0(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     mr r3, r31
     li r4, 0x3
@@ -1193,7 +1193,7 @@ lbl_fn_8045883C_00000E94:
     stw r30, 0x14bc(r31)
     stw r30, 0x14c0(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     mr r3, r31
     li r4, 0x3
@@ -1220,7 +1220,7 @@ lbl_fn_8045883C_00000F28:
     stw r30, 0x14bc(r31)
     stw r30, 0x14c0(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     mr r3, r31
     li r4, 0x3
@@ -1381,7 +1381,7 @@ lbl_fn_8045883C_00001180:
     stw r30, 0x14bc(r31)
     stw r30, 0x14c0(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     mr r3, r31
     li r4, 0x3
@@ -1405,7 +1405,7 @@ lbl_fn_8045883C_00001180:
     stw r0, 0x14bc(r31)
     stw r0, 0x14c0(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     li r0, 0xb
     mr r3, r31
@@ -1428,7 +1428,7 @@ lbl_fn_8045883C_00001180:
     bl atn_Anim_setLayerAnimation
     mr r3, r31
     li r4, 0x3e8
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80886C34
     li r0, -0x1
     lfs f1, lbl_80886C30
@@ -1452,7 +1452,7 @@ lbl_fn_8045883C_00001180:
     stw r0, 0x8(r1)
     stw r30, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     li r4, 0x4
     stw r4, 0x1520(r31)
     li r0, 0xa
@@ -1543,7 +1543,7 @@ lbl_fn_8045883C_0000143C:
     stw r30, 0x14bc(r31)
     stw r30, 0x14c0(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     mr r3, r31
     li r4, 0x3
@@ -1690,7 +1690,7 @@ lbl_fn_8045883C_000015C4:
     stw r30, 0x14bc(r31)
     stw r30, 0x14c0(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     li r0, 0xf
     mr r3, r31
@@ -1791,7 +1791,7 @@ lbl_fn_80459358_00001748:
     stw r31, 0x14bc(r30)
     stw r31, 0x14c0(r30)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r30)
     li r0, 0xe
     mr r3, r30
@@ -1926,7 +1926,7 @@ lbl_fn_80459358_000019D8:
     rlwinm r0, r0, 0, 29, 27
     stw r0, 0xc(r4)
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80886C34
     li r3, -0x1
     lfs f1, lbl_80886C30
@@ -1951,7 +1951,7 @@ lbl_fn_80459358_000019D8:
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_80459358_00001A64:
     mr r3, r30
     mr r4, r31

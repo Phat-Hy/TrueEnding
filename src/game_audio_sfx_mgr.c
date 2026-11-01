@@ -34,9 +34,9 @@ extern void fn_8016E4C4(void);
 extern void actor_setState(void);
 extern void fn_8016F3D0(void);
 extern void fn_80178A6C(void);
-extern void fn_80232B7C(void);
-extern void fn_80239DAC(void);
-extern void fn_8023A8B4(void);
+extern void sound_initGlobalInstances(void);
+extern void res_findResourceSlot(void);
+extern void res_registerResource(void);
 extern void fn_80312EF8(void);
 extern void fn_803132D0(void);
 extern void fn_803C11A4(void);
@@ -208,7 +208,7 @@ asm void fn_8030FFF0(void)
     stw r0, 0x44(r1)
     stw r31, 0x3c(r1)
     mr r31, r3
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80884C5C
     li r3, -0x1
     lfs f1, lbl_80884C64
@@ -233,7 +233,7 @@ asm void fn_8030FFF0(void)
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     mtlr r0
@@ -248,7 +248,7 @@ asm void fn_80310084(void)
     lwz r3, lbl_8087F3C0
     li r5, 0x1
     li r6, 0x1
-    b fn_80239DAC
+    b res_findResourceSlot
 }
 
 asm void fn_80310098(void)

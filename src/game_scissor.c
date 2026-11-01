@@ -19,8 +19,8 @@ extern void fn_80133EE8(void);
 extern void fn_80134134(void);
 extern void fn_80148B0C(void);
 extern void fn_80219E6C(void);
-extern void fn_80232B7C(void);
-extern void fn_8023A8B4(void);
+extern void sound_initGlobalInstances(void);
+extern void res_registerResource(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -31,7 +31,7 @@ extern void PSVECDotProduct(void);
 extern void printf(void);
 extern void abort(void);
 extern void fn_8068A850(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_8068B100(void);
 
 /* External data declarations */
@@ -995,7 +995,7 @@ lbl_fn_800F8C6C_00000D78:
     beq lbl_fn_800F8C6C_00000DF0
     li r3, 0x0
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     stw r27, 0x8(r1)
     mr r4, r19
     lfs f1, lbl_80881494
@@ -1007,7 +1007,7 @@ lbl_fn_800F8C6C_00000D78:
     lwz r3, lbl_8087F3C0
     li r6, 0x0
     li r10, -0x1
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_800F8C6C_00000DF0:
     li r3, 0x232d
     bl fn_800EFE3C
@@ -1070,7 +1070,7 @@ lbl_fn_800F8C6C_00000E64:
     beq lbl_fn_800F8C6C_00000F10
     li r3, 0x0
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     fdivs f1, f28, f26
     stw r27, 0x8(r1)
     mr r4, r19
@@ -1082,7 +1082,7 @@ lbl_fn_800F8C6C_00000E64:
     li r5, 0x0
     li r6, 0x0
     li r10, -0x1
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_800F8C6C_00000F10:
     li r3, 0x232f
     bl fn_800EFE3C
@@ -1191,7 +1191,7 @@ lbl_fn_800F8C6C_00001058:
     beq lbl_fn_800F8C6C_000010C0
     li r3, 0x0
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     stw r27, 0x8(r1)
     addi r7, r29, lbl_807C7030@l
     lfs f1, lbl_80881494
@@ -1203,7 +1203,7 @@ lbl_fn_800F8C6C_00001058:
     lwz r3, lbl_8087F3C0
     li r6, 0x0
     li r10, -0x1
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_800F8C6C_000010C0:
     addi r19, r19, 0x528
     li r3, 0x2330
@@ -1458,7 +1458,7 @@ lbl_fn_800F8C6C_00001458:
 lbl_fn_800F8C6C_00001460:
     frsp f2, f2
     lfs f1, 0x15c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x54(r1)
 lbl_fn_800F8C6C_00001474:
@@ -1533,7 +1533,7 @@ lbl_fn_800F8C6C_00001574:
     b lbl_fn_800F8C6C_00001594
 lbl_fn_800F8C6C_00001580:
     lfs f1, 0x60(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x50(r1)

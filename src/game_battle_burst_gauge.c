@@ -23,10 +23,10 @@ extern void fn_8009EB20(void);
 extern void fn_8009EE30(void);
 extern void fn_8009F788(void);
 extern void fn_8009FFCC(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_802377B8(void);
 extern void fn_80237874(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void fn_80376224(void);
 extern void fn_803EC758(void);
 extern void fn_803ED610(void);
@@ -1314,7 +1314,7 @@ lbl_fn_803FFF40_00001178:
     beq lbl_fn_803FFF40_000011F4
     mr r3, r31
     li r4, 0x1
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r3, lbl_8087F3C0
     li r11, 0x1
     lis r7, lbl_807C7030@ha
@@ -1335,7 +1335,7 @@ lbl_fn_803FFF40_00001178:
     stfs f1, 0x1c(r1)
     stw r0, 0x8(r1)
     stw r11, 0xc(r1)
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r3, lbl_8087F3C0
     li r0, 0x0
     stw r0, 0xb8(r3)

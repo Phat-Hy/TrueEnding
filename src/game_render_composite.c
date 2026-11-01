@@ -33,7 +33,7 @@ extern void fn_800ED42C(void);
 extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
 extern void fn_800EDFE8(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_800FAB80(void);
 extern void fn_80108F38(void);
 extern void boss_updatePhaseState(void);
@@ -48,12 +48,12 @@ extern void fn_801CB434(void);
 extern void fn_8020A780(void);
 extern void fn_80219E6C(void);
 extern void fn_8021A984(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_802375C4(void);
 extern void fn_802377B8(void);
 extern void fn_8023780C(void);
 extern void fn_80237874(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void fn_802AC550(void);
 extern void fn_802BDA04(void);
 extern void world_setLocalFlag(void);
@@ -1862,7 +1862,7 @@ asm void fn_802BB104(void)
     stw r0, 0x14dc(r3)
     stw r0, 0x14e0(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     li r0, 0x2
     mr r3, r31
@@ -1888,7 +1888,7 @@ asm void fn_802BB104(void)
     bl atn_Anim_setLayerAnimation
     li r3, 0x0
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80884190
     li r29, -0x1
     lfs f1, lbl_8088417C
@@ -1912,7 +1912,7 @@ asm void fn_802BB104(void)
     stfs f1, 0x2c(r1)
     stw r29, 0x8(r1)
     stw r28, 0xc(r1)
-    bl fn_8023A8B4
+    bl res_registerResource
     lis r3, lbl_807C7030@ha
     li r4, 0x65
     addi r3, r3, lbl_807C7030@l
@@ -1927,7 +1927,7 @@ asm void fn_802BB104(void)
     lwz r26, lbl_8087F048
     lwz r27, 0x48(r3)
     mr r3, r26
-    bl fn_800F8548
+    bl system_getNextSequenceId
     mr r30, r3
     li r3, 0x5c3
     bl fn_80219E6C
@@ -1963,7 +1963,7 @@ lbl_fn_802BB104_000019F0:
     stw r0, 0x14dc(r3)
     stw r0, 0x14e0(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lfs f0, lbl_8088417C
     li r4, 0xf
     stw r3, 0x590(r31)

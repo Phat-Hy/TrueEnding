@@ -74,7 +74,7 @@ extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
 extern void strcmp(void);
-extern void fn_8068AEA8(void);
+extern void std_fmod(void);
 extern void fn_80695B00(void);
 
 /* External data declarations */
@@ -680,7 +680,7 @@ lbl_fn_800E4278_00000720:
     lfs f0, 0x538(r22)
     lfd f2, lbl_80735258@l(r3)
     fsubs f1, f3, f0
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f31, f1
     lfs f0, lbl_8088131C
     fcmpo cr0, f31, f0

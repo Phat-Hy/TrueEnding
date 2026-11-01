@@ -5,11 +5,11 @@
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
 extern void fn_800FAB80(void);
 extern void actor_setState(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_802953C8(void);
 extern void fn_80296B8C(void);
 extern void PSMTXRotRad(void);
@@ -17,8 +17,8 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 extern void fn_8068B100(void);
 
 /* External data declarations */
@@ -122,7 +122,7 @@ asm void fn_80298580(void)
     stw r30, 0x14b4(r31)
     stw r30, 0x14b8(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lfs f0, lbl_80883BE8
     mr r4, r31
     stw r3, 0x590(r31)
@@ -131,19 +131,19 @@ asm void fn_80298580(void)
     stfs f0, 0x152c(r31)
     stw r30, 0x15b8(r31)
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x3e8
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     mr r3, r31
     li r4, 0x6
     bl actor_setState
     li r0, 0x4
     stw r0, 0x560(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lfs f0, lbl_80883BF0
     li r0, 0x1
     stw r3, 0x590(r31)
@@ -290,7 +290,7 @@ asm void fn_80298850(void)
     stw r31, 0x14b4(r30)
     stw r31, 0x14b8(r30)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lfs f0, lbl_80883BE8
     mr r4, r30
     stw r3, 0x590(r30)
@@ -299,19 +299,19 @@ asm void fn_80298850(void)
     stfs f0, 0x152c(r30)
     stw r31, 0x15b8(r30)
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x3e8
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     mr r3, r30
     li r4, 0x6
     bl actor_setState
     li r0, 0x4
     stw r0, 0x560(r30)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lfs f0, lbl_80883BF0
     li r0, 0x1
     stw r3, 0x590(r30)
@@ -339,7 +339,7 @@ lbl_fn_80298850_000003BC:
     lfs f0, 0x1544(r30)
     lfd f2, lbl_807457F0@l(r3)
     fsubs f1, f1, f0
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f2, f1
     lfs f0, lbl_80883C28
     fcmpo cr0, f2, f0
@@ -444,7 +444,7 @@ lbl_fn_80298850_00000494:
     b lbl_fn_80298850_00000570
 lbl_fn_80298850_00000564:
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r30)
 lbl_fn_80298850_00000570:
     lwz r0, 0x84(r1)
@@ -506,7 +506,7 @@ asm void fn_80298B10(void)
     lfs f0, 0x1544(r30)
     lfd f2, lbl_807457F0@l(r3)
     fsubs f1, f3, f0
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f4, f1
     lfs f0, lbl_80883C28
     fcmpo cr0, f4, f0
@@ -585,7 +585,7 @@ lbl_fn_80298B10_00000758:
 lbl_fn_80298B10_00000760:
     frsp f2, f2
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_80298B10_00000774:
@@ -664,7 +664,7 @@ lbl_fn_80298B10_00000884:
     b lbl_fn_80298B10_000008A4
 lbl_fn_80298B10_00000890:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -744,7 +744,7 @@ asm void fn_80298E98(void)
     stw r31, 0x14b4(r30)
     stw r31, 0x14b8(r30)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lfs f0, lbl_80883BE8
     mr r4, r30
     stw r3, 0x590(r30)
@@ -753,19 +753,19 @@ asm void fn_80298E98(void)
     stfs f0, 0x152c(r30)
     stw r31, 0x15b8(r30)
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x3e8
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     mr r3, r30
     li r4, 0x6
     bl actor_setState
     li r0, 0x4
     stw r0, 0x560(r30)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lfs f0, lbl_80883BF0
     li r0, 0x1
     stw r3, 0x590(r30)
@@ -803,7 +803,7 @@ lbl_fn_80298E98_00000A68:
     stw r3, 0x1584(r30)
     stw r0, 0x1580(r30)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lis r4, lbl_80745818@ha
     stw r3, 0x1588(r30)
     addi r4, r4, lbl_80745818@l
@@ -955,7 +955,7 @@ lbl_fn_80299134_00000C98:
     stw r31, 0x14b4(r29)
     stw r31, 0x14b8(r29)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lfs f0, lbl_80883BE8
     mr r4, r29
     stw r3, 0x590(r29)
@@ -964,12 +964,12 @@ lbl_fn_80299134_00000C98:
     stfs f0, 0x152c(r29)
     stw r31, 0x15b8(r29)
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r29
     li r5, 0x3e8
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     stw r31, 0x58c(r29)
     mr r3, r29
     li r4, 0x3
@@ -1151,7 +1151,7 @@ lbl_fn_802992F8_00000F6C:
     stw r30, 0x14b4(r3)
     stw r30, 0x14b8(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lfs f0, lbl_80883BE8
     mr r4, r31
     stw r3, 0x590(r31)
@@ -1160,19 +1160,19 @@ lbl_fn_802992F8_00000F6C:
     stfs f0, 0x152c(r31)
     stw r30, 0x15b8(r31)
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x3e8
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     mr r3, r31
     li r4, 0x6
     bl actor_setState
     li r0, 0x4
     stw r0, 0x560(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lfs f0, lbl_80883BF0
     li r0, 0x1
     stw r3, 0x590(r31)
@@ -1288,7 +1288,7 @@ lbl_fn_802995D4_00001164:
     stw r30, 0x14b4(r31)
     stw r30, 0x14b8(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lfs f0, lbl_80883BE8
     mr r4, r31
     stw r3, 0x590(r31)
@@ -1297,12 +1297,12 @@ lbl_fn_802995D4_00001164:
     stfs f0, 0x152c(r31)
     stw r30, 0x15b8(r31)
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x3e8
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     stw r30, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
@@ -1422,7 +1422,7 @@ lbl_fn_802997B8_00001348:
     stw r30, 0x14b4(r31)
     stw r30, 0x14b8(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lfs f0, lbl_80883BE8
     mr r4, r31
     stw r3, 0x590(r31)
@@ -1431,12 +1431,12 @@ lbl_fn_802997B8_00001348:
     stfs f0, 0x152c(r31)
     stw r30, 0x15b8(r31)
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x3e8
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     stw r30, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
@@ -1571,7 +1571,7 @@ asm void fn_80299A7C(void)
     lfs f0, 0x1544(r30)
     lfd f2, lbl_807457F0@l(r3)
     fsubs f1, f3, f0
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f4, f1
     lfs f0, lbl_80883C28
     fcmpo cr0, f4, f0
@@ -1671,7 +1671,7 @@ lbl_fn_80299A7C_0000170C:
 lbl_fn_80299A7C_00001714:
     frsp f2, f2
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_80299A7C_00001728:
@@ -1750,7 +1750,7 @@ lbl_fn_80299A7C_00001838:
     b lbl_fn_80299A7C_00001858
 lbl_fn_80299A7C_00001844:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -1776,7 +1776,7 @@ lbl_fn_80299A7C_00001878:
     stw r31, 0x14b4(r30)
     stw r31, 0x14b8(r30)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lfs f0, lbl_80883BE8
     mr r4, r30
     stw r3, 0x590(r30)
@@ -1785,12 +1785,12 @@ lbl_fn_80299A7C_00001878:
     stfs f0, 0x152c(r30)
     stw r31, 0x15b8(r30)
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x3e8
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     mr r3, r30
     li r4, 0x6
     bl actor_setState

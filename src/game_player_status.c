@@ -12,7 +12,7 @@ extern void fn_8017C974(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECMag(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 
 /* External data declarations */
 extern u8 jumptable_8077A5A8[];
@@ -1029,7 +1029,7 @@ lbl_fn_801248DC_00000D24:
     b lbl_fn_801248DC_00000D3C
 lbl_fn_801248DC_00000D2C:
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0xc(r1)
 lbl_fn_801248DC_00000D3C:
@@ -1108,7 +1108,7 @@ lbl_fn_801248DC_00000E4C:
     b lbl_fn_801248DC_00000E6C
 lbl_fn_801248DC_00000E58:
     lfs f1, 0x18(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x8(r1)

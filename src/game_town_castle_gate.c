@@ -18,7 +18,7 @@ extern void fn_801FEB9C(void);
 extern void fn_801FECE0(void);
 extern void fn_801FED24(void);
 extern void fn_801FEE08(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_8023A680(void);
 extern void fn_805F89F0(void);
 extern void PSMTXRotRad(void);
@@ -30,7 +30,7 @@ extern void PSVECMag(void);
 extern void printf(void);
 extern void abort(void);
 extern void fn_8068AD58(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 
 /* External data declarations */
 extern u8 lbl_807506A0[];
@@ -1509,7 +1509,7 @@ lbl_fn_803D7850_00000E78:
 lbl_fn_803D7850_00000E80:
     frsp f2, f2
     lfs f1, 0xe4(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x64(r1)
 lbl_fn_803D7850_00000E94:
@@ -1588,7 +1588,7 @@ lbl_fn_803D7850_00000FA4:
     b lbl_fn_803D7850_00000FC4
 lbl_fn_803D7850_00000FB0:
     lfs f1, 0x58(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x60(r1)
@@ -1982,7 +1982,7 @@ asm void fn_803D8344(void)
     stw r0, 0xb8(r3)
     li r6, 0x0
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     li r0, 0x0
     stw r0, 0xb8(r3)

@@ -31,7 +31,7 @@ extern void printf(void);
 extern void strcmp(void);
 extern void swprintf(void);
 extern void abort(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_80695B00(void);
 
 /* External data declarations */
@@ -1104,7 +1104,7 @@ lbl_fn_8019E670_00000E6C:
 lbl_fn_8019E670_00000E74:
     fmr f2, f5
     lfs f1, 0x80(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_8019E670_00000E88:
@@ -1183,7 +1183,7 @@ lbl_fn_8019E670_00000F98:
     b lbl_fn_8019E670_00000FB8
 lbl_fn_8019E670_00000FA4:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -1489,7 +1489,7 @@ lbl_fn_8019EC68_000013FC:
 lbl_fn_8019EC68_00001404:
     fmr f2, f4
     lfs f1, 0x68(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_8019EC68_00001418:
@@ -1568,7 +1568,7 @@ lbl_fn_8019EC68_00001528:
     b lbl_fn_8019EC68_00001548
 lbl_fn_8019EC68_00001534:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -1775,7 +1775,7 @@ lbl_fn_8019F0A8_00001810:
 lbl_fn_8019F0A8_00001818:
     frsp f2, f2
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_8019F0A8_0000182C:
@@ -1854,7 +1854,7 @@ lbl_fn_8019F0A8_0000193C:
     b lbl_fn_8019F0A8_0000195C
 lbl_fn_8019F0A8_00001948:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)

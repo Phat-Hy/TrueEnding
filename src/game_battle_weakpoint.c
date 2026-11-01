@@ -15,17 +15,17 @@ extern void ref_releaseHandle(void);
 extern void fn_800CB5C8(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_800FAB80(void);
 extern void fn_8016D3F8(void);
 extern void fn_80170F20(void);
 extern void fn_80174E04(void);
 extern void fn_801750FC(void);
 extern void fn_80219E6C(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_8023781C(void);
-extern void fn_80239DAC(void);
-extern void fn_8023A8B4(void);
+extern void res_findResourceSlot(void);
+extern void res_registerResource(void);
 extern void fn_803C1560(void);
 extern void fn_803CD958(void);
 extern void fn_803EC568(void);
@@ -41,7 +41,7 @@ extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_8068AEA8(void);
+extern void std_fmod(void);
 extern void fn_806A8E40(void);
 extern void fn_806B0E30(void);
 extern void fn_806B1250(void);
@@ -221,10 +221,10 @@ asm void fn_803FB870(void)
     mr r4, r30
     li r5, 0x0
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     li r3, 0x0
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f1, lbl_8088603C
     li r28, -0x1
     lfs f0, lbl_80886038
@@ -246,7 +246,7 @@ asm void fn_803FB870(void)
     stfs f1, 0x1c(r1)
     stw r28, 0x8(r1)
     stw r29, 0xc(r1)
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r3, 0x4f8(r30)
     bl fn_80219E6C
     lwz r0, 0x4f0(r30)
@@ -292,7 +292,7 @@ lbl_fn_803FB870_0000021C:
     mr r3, r29
     stfs f0, 0x30(r1)
     stfs f0, 0x34(r1)
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r28, 0x8(r1)
     mr r6, r3
     lfs f1, lbl_80886038
@@ -1505,7 +1505,7 @@ lbl_fn_803FC9DC_00001298:
     lfs f0, 0x7c(r3)
     lfd f2, lbl_807525B8@l(r4)
     fadds f1, f3, f0
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80886090
     fcmpo cr0, f3, f0
@@ -1810,7 +1810,7 @@ lbl_fn_803FCAB0_000016E4:
     stfs f0, 0x34(r1)
     lfs f0, 0x7c(r31)
     fadds f1, f3, f0
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f31, f1
     lfs f0, lbl_80886090
     fcmpo cr0, f31, f0

@@ -13,7 +13,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C31F4(void);
 extern void fn_800C344C(void);
 extern void ref_releaseHandle(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_800FAB80(void);
 extern void fn_800FB4B0(void);
 extern void fn_80102A40(void);
@@ -41,7 +41,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void rand(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -782,7 +782,7 @@ lbl_fn_801B79D8_0000084C:
     stfs f0, 0xacc(r3)
     lwz r27, lbl_8087F048
     mr r3, r27
-    bl fn_800F8548
+    bl system_getNextSequenceId
     li r0, 0x0
     stw r0, 0x8(r1)
     mr r6, r3
@@ -817,7 +817,7 @@ lbl_fn_801B79D8_00000990:
     lwz r26, lbl_8087F048
     lwz r27, 0x4(r29)
     mr r3, r26
-    bl fn_800F8548
+    bl system_getNextSequenceId
     mr r28, r3
     li r3, 0x1f6
     bl fn_80219E6C
@@ -1463,7 +1463,7 @@ lbl_fn_801B8360_000012C4:
 lbl_fn_801B8360_000012CC:
     fmr f2, f3
     lfs f1, 0x14(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x24(r1)
 lbl_fn_801B8360_000012E0:
@@ -1542,7 +1542,7 @@ lbl_fn_801B8360_000013F0:
     b lbl_fn_801B8360_00001410
 lbl_fn_801B8360_000013FC:
     lfs f1, 0x30(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x20(r1)
@@ -1696,7 +1696,7 @@ lbl_fn_801B86CC_00001630:
 lbl_fn_801B86CC_00001638:
     fmr f2, f3
     lfs f1, 0x14(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x24(r1)
 lbl_fn_801B86CC_0000164C:
@@ -1775,7 +1775,7 @@ lbl_fn_801B86CC_0000175C:
     b lbl_fn_801B86CC_0000177C
 lbl_fn_801B86CC_00001768:
     lfs f1, 0x30(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x20(r1)
@@ -1971,7 +1971,7 @@ lbl_fn_801B8AD0_00001A34:
 lbl_fn_801B8AD0_00001A3C:
     fmr f2, f3
     lfs f1, 0x14(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x24(r1)
 lbl_fn_801B8AD0_00001A50:
@@ -2050,7 +2050,7 @@ lbl_fn_801B8AD0_00001B60:
     b lbl_fn_801B8AD0_00001B80
 lbl_fn_801B8AD0_00001B6C:
     lfs f1, 0x30(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x20(r1)

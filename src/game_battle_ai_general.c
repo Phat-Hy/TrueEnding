@@ -99,8 +99,8 @@ extern void rand(void);
 extern void strcmp(void);
 extern void abort(void);
 extern void fn_8068AE9C(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 extern void fn_80695720(void);
 extern void fn_80695AD0(void);
 extern char* strcpy(char* dest, const char* src);
@@ -503,7 +503,7 @@ lbl_fn_8043C508_00000230:
     ble lbl_fn_8043C508_000006F4
     lfs f2, 0x8c(r1)
     lfs f1, 0x94(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     lfs f8, lbl_80886994
     frsp f9, f1
     lfs f7, lbl_80886998
@@ -2871,7 +2871,7 @@ lbl_fn_8043E770_00002528:
 lbl_fn_8043E770_00002530:
     fmr f2, f4
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_8043E770_00002544:
@@ -2950,7 +2950,7 @@ lbl_fn_8043E770_00002654:
     b lbl_fn_8043E770_00002674
 lbl_fn_8043E770_00002660:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -3089,7 +3089,7 @@ lbl_fn_8043EA64_00002854:
 lbl_fn_8043EA64_0000285C:
     frsp f2, f2
     lfs f1, 0x80(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_8043EA64_00002870:
@@ -3168,7 +3168,7 @@ lbl_fn_8043EA64_00002980:
     b lbl_fn_8043EA64_000029A0
 lbl_fn_8043EA64_0000298C:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -3185,7 +3185,7 @@ lbl_fn_8043EA64_000029A0:
     fsubs f1, f4, f0
     lfd f2, lbl_807543A0@l(r3)
     stfs f3, 0x4c(r1)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f4, f1
     lfs f0, lbl_808869E8
     fcmpo cr0, f4, f0

@@ -38,7 +38,7 @@ extern void fn_80219E6C(void);
 extern void fn_802377B8(void);
 extern void fn_8023780C(void);
 extern void fn_80237874(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_8035B694(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
@@ -56,7 +56,7 @@ extern void PSVECMag(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_8068B100(void);
 extern u32 strlen(const char* str);
 
@@ -181,12 +181,12 @@ lbl_fn_8025E9E4_00000098:
     mr r4, r31
     li r5, 0x1f4
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x66
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
 lbl_fn_8025E9E4_000000EC:
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
@@ -651,7 +651,7 @@ lbl_fn_8025F07C_00000794:
 lbl_fn_8025F07C_0000079C:
     fmr f2, f4
     lfs f1, 0x5c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_8025F07C_000007B0:
@@ -730,7 +730,7 @@ lbl_fn_8025F07C_000008C0:
     b lbl_fn_8025F07C_000008E0
 lbl_fn_8025F07C_000008CC:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -804,12 +804,12 @@ lbl_fn_8025F35C_000009A4:
     mr r4, r31
     li r5, 0x1f4
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x66
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, 0x15c0(r31)
     srwi r0, r3, 31
     add r0, r0, r3
@@ -827,12 +827,12 @@ lbl_fn_8025F35C_00000A08:
     mr r4, r31
     li r5, 0x1f4
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x66
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, 0x15c0(r31)
     srwi r0, r3, 31
     add r0, r0, r3
@@ -1076,12 +1076,12 @@ asm void fn_8025F754(void)
     mr r4, r31
     li r5, 0x1f4
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x66
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
 lbl_fn_8025F754_00000DD0:
     mr r3, r31
     bl fn_80139560
@@ -1293,7 +1293,7 @@ lbl_fn_8025F8C8_000010B8:
 lbl_fn_8025F8C8_000010C0:
     fmr f2, f3
     lfs f1, 0x20(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x6c(r1)
 lbl_fn_8025F8C8_000010D4:
@@ -1372,7 +1372,7 @@ lbl_fn_8025F8C8_000011E4:
     b lbl_fn_8025F8C8_00001204
 lbl_fn_8025F8C8_000011F0:
     lfs f1, 0x78(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x68(r1)

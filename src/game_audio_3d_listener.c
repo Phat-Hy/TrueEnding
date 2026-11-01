@@ -36,9 +36,9 @@ extern void fn_80145334(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_801A03E8(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_80239D58(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_8023A680(void);
 extern void fn_8031FAA4(void);
 extern void fn_8031FE4C(void);
@@ -56,7 +56,7 @@ extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
 extern void fn_8068AD58(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_80695B00(void);
 
 /* External data declarations */
@@ -250,7 +250,7 @@ lbl_fn_8031E078_000001A4:
 lbl_fn_8031E078_000001AC:
     frsp f2, f2
     lfs f1, 0x78(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x70(r1)
 lbl_fn_8031E078_000001C0:
@@ -329,7 +329,7 @@ lbl_fn_8031E078_000002D0:
     b lbl_fn_8031E078_000002F0
 lbl_fn_8031E078_000002DC:
     lfs f1, 0x64(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x6c(r1)
@@ -660,7 +660,7 @@ lbl_fn_8031E078_000007BC:
     beq lbl_fn_8031E078_00000814
     mr r3, r30
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     li r0, 0x0
     stw r0, 0x8(r1)
     li r3, -0x1
@@ -724,7 +724,7 @@ asm void fn_8031E8BC(void)
     mr r4, r29
     li r5, 0x0
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     b lbl_fn_8031E8BC_00000ABC
 lbl_fn_8031E8BC_000008C0:
     bl fn_800F7FA0

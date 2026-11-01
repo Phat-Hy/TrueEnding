@@ -12,7 +12,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_800E7BB0(void);
 extern void fn_800EB270(void);
 extern void fn_800EB4AC(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
 extern void fn_8010CA34(void);
 extern void fn_80134134(void);
@@ -1608,7 +1608,7 @@ lbl_fn_800E9ED8_0000152C:
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_800E9ED8_00001608
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
 lbl_fn_800E9ED8_00001608:
     li r0, -0x1
@@ -1777,7 +1777,7 @@ lbl_fn_800E9ED8_000017F4:
     stw r3, 0x598(r31)
     stw r0, 0x594(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
 lbl_fn_800E9ED8_00001868:
     lwz r0, 0x594(r31)

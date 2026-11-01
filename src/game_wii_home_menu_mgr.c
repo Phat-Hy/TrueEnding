@@ -27,8 +27,8 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void strcmp(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 
 /* External data declarations */
 extern u8 lbl_8075FE70[];
@@ -500,7 +500,7 @@ lbl_fn_8056B55C_00000594:
 lbl_fn_8056B55C_0000059C:
     frsp f2, f2
     lfs f1, 0x64(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x5c(r1)
 lbl_fn_8056B55C_000005B0:
@@ -579,7 +579,7 @@ lbl_fn_8056B55C_000006C0:
     b lbl_fn_8056B55C_000006E0
 lbl_fn_8056B55C_000006CC:
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x58(r1)
@@ -596,7 +596,7 @@ lbl_fn_8056B55C_000006E0:
     fsubs f1, f3, f0
     lfd f2, lbl_8075FE70@l(r3)
     stfs f4, 0x60(r1)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80888038
     fcmpo cr0, f3, f0
@@ -1617,7 +1617,7 @@ lbl_fn_8056C3DC_00001508:
 lbl_fn_8056C3DC_00001510:
     frsp f2, f2
     lfs f1, 0x2c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_8056C3DC_00001524:
@@ -1692,7 +1692,7 @@ lbl_fn_8056C3DC_00001624:
     b lbl_fn_8056C3DC_00001644
 lbl_fn_8056C3DC_00001630:
     lfs f1, 0x54(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -2072,7 +2072,7 @@ lbl_fn_8056CB24_00001B5C:
 lbl_fn_8056CB24_00001B64:
     frsp f2, f2
     lfs f1, 0x64(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x5c(r1)
 lbl_fn_8056CB24_00001B78:
@@ -2151,7 +2151,7 @@ lbl_fn_8056CB24_00001C88:
     b lbl_fn_8056CB24_00001CA8
 lbl_fn_8056CB24_00001C94:
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x58(r1)
@@ -2168,7 +2168,7 @@ lbl_fn_8056CB24_00001CA8:
     fsubs f1, f3, f0
     lfd f2, lbl_8075FE70@l(r3)
     stfs f4, 0x60(r1)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80888038
     fcmpo cr0, f3, f0

@@ -35,7 +35,7 @@ extern void fn_800F7FF0(void);
 extern void fn_800F80A8(void);
 extern void fn_800F80B8(void);
 extern void fn_800F8290(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_800FAB80(void);
 extern void fn_80116BAC(void);
 extern void fn_801240B4(void);
@@ -57,7 +57,7 @@ extern void fn_80198514(void);
 extern void fn_80198C00(void);
 extern void fn_801AE77C(void);
 extern void fn_80219E6C(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_804F5B0C(void);
 extern void fn_804F5CA0(void);
 extern void fn_804F5E3C(void);
@@ -961,7 +961,7 @@ asm void fn_8019FE4C(void)
     mr r4, r30
     li r5, -0x2
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
 lbl_fn_8019FE4C_00000B00:
     cmpwi r31, 0x0
     ble lbl_fn_8019FE4C_00000B10
@@ -1250,7 +1250,7 @@ lbl_fn_8019FEC4_00000E78:
     cmpwi r3, 0x0
     beq lbl_fn_8019FEC4_00000F7C
     bl fn_8013A194
-    bl fn_800F8548
+    bl system_getNextSequenceId
     mr r30, r3
     li r3, 0x76f
     bl fn_80219E6C

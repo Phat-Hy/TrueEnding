@@ -352,10 +352,10 @@ void fn_8068AD58(void);
 void fn_8068AE24(void);
 void fn_8068AE9C(void);
 void fn_8068AEA0(void);
-void fn_8068AEA4(void);
-void fn_8068AEA8(void);
-void fn_8068AEAC(void);
-void fn_8068AEB0(void);
+void std_atan2(void);
+void std_fmod(void);
+void std_sqrt(void);
+void std_pow(void);
 void fn_8068AEB4(void);
 void fn_8068B0FC(void);
 void fn_8068B100(void);
@@ -5122,25 +5122,25 @@ asm void fn_8068AEA0(void)
     b fn_80687200
 }
 
-asm void fn_8068AEA4(void)
+asm void std_atan2(void)
 {
     nofralloc
     b fn_80687498
 }
 
-asm void fn_8068AEA8(void)
+asm void std_fmod(void)
 {
     nofralloc
     b fn_806876F0
 }
 
-asm void fn_8068AEAC(void)
+asm void std_sqrt(void)
 {
     nofralloc
     b fn_80687D24
 }
 
-asm void fn_8068AEB0(void)
+asm void std_pow(void)
 {
     nofralloc
     b fn_80687E38

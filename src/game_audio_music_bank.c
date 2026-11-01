@@ -45,9 +45,9 @@ extern void fn_801513D0(void);
 extern void fn_80151448(void);
 extern void actor_setState(void);
 extern void fn_801765D8(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_80237874(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void fn_8028AC70(void);
 extern void fn_802A7964(void);
 extern void fn_8030C490(void);
@@ -63,7 +63,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -1210,7 +1210,7 @@ asm void fn_8030B5B0(void)
     bgt lbl_fn_8030B5B0_00001094
     mr r3, r30
     li r4, 0x64
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80884BAC
     li r0, -0x1
     lfs f1, lbl_80884BA8
@@ -1234,7 +1234,7 @@ asm void fn_8030B5B0(void)
     stw r0, 0x8(r1)
     stw r31, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     b lbl_fn_8030B5B0_00001094
 lbl_fn_8030B5B0_00001024:
     lwz r0, 0x940(r3)
@@ -1596,7 +1596,7 @@ lbl_fn_8030B92C_00001560:
 lbl_fn_8030B92C_00001568:
     frsp f2, f2
     lfs f1, 0xf8(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0xd8(r1)
 lbl_fn_8030B92C_0000157C:
@@ -1675,7 +1675,7 @@ lbl_fn_8030B92C_0000168C:
     b lbl_fn_8030B92C_000016AC
 lbl_fn_8030B92C_00001698:
     lfs f1, 0xcc(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0xd4(r1)
@@ -1711,7 +1711,7 @@ lbl_fn_8030B92C_0000170C:
 lbl_fn_8030B92C_00001714:
     frsp f2, f2
     lfs f1, 0xec(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x90(r1)
 lbl_fn_8030B92C_00001728:
@@ -1790,7 +1790,7 @@ lbl_fn_8030B92C_00001838:
     b lbl_fn_8030B92C_00001858
 lbl_fn_8030B92C_00001844:
     lfs f1, 0x84(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x8c(r1)
@@ -1832,7 +1832,7 @@ lbl_fn_8030B92C_000018D0:
 lbl_fn_8030B92C_000018D8:
     frsp f2, f2
     lfs f1, 0xe0(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_8030B92C_000018EC:
@@ -1911,7 +1911,7 @@ lbl_fn_8030B92C_000019FC:
     b lbl_fn_8030B92C_00001A1C
 lbl_fn_8030B92C_00001A08:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)

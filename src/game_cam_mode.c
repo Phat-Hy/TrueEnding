@@ -43,7 +43,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_80695720(void);
 extern void fn_80695A50(void);
 extern void fn_80695AD0(void);
@@ -1353,7 +1353,7 @@ lbl_fn_800EF080_000010FC:
 lbl_fn_800EF080_00001104:
     frsp f2, f2
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_800EF080_00001118:
@@ -1432,7 +1432,7 @@ lbl_fn_800EF080_00001228:
     b lbl_fn_800EF080_00001248
 lbl_fn_800EF080_00001234:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)

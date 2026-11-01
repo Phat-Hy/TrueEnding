@@ -19,9 +19,9 @@ extern void fn_80177EB8(void);
 extern void fn_80178A6C(void);
 extern void fn_80219558(void);
 extern void fn_80219E6C(void);
-extern void fn_80232B7C(void);
-extern void fn_80239DAC(void);
-extern void fn_8023A8B4(void);
+extern void sound_initGlobalInstances(void);
+extern void res_findResourceSlot(void);
+extern void res_registerResource(void);
 extern void fn_80373148(void);
 extern void fn_80375184(void);
 extern void fn_80376150(void);
@@ -32,8 +32,8 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 extern void fn_80695AD0(void);
 
 /* External data declarations */
@@ -522,7 +522,7 @@ lbl_fn_801765D8_000005DC:
     stfs f0, 0xfb8(r30)
     stfs f0, 0xfbc(r30)
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r0, 0x12a8(r30)
     mr r3, r30
     rlwinm r0, r0, 0, 4, 2
@@ -733,7 +733,7 @@ lbl_fn_80176B68_000008DC:
     beq lbl_fn_80176B68_00000978
     lwz r3, 0x121c(r30)
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r4, lbl_8087F3C0
     li r0, 0x2
     lfs f1, lbl_80881964
@@ -761,7 +761,7 @@ lbl_fn_80176B68_000008DC:
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r3, lbl_8087F3C0
     li r0, 0x0
     stw r0, 0xb8(r3)
@@ -824,7 +824,7 @@ lbl_fn_80176D2C_000009F4:
     mr r6, r31
     lwz r4, 0x121c(r30)
     li r5, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r0, 0x12a4(r30)
     rlwinm r0, r0, 0, 14, 12
     stw r0, 0x12a4(r30)
@@ -1080,7 +1080,7 @@ lbl_fn_80176E30_00000DB8:
 lbl_fn_80176E30_00000DC0:
     frsp f2, f2
     lfs f1, 0x58(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x50(r1)
 lbl_fn_80176E30_00000DD4:
@@ -1155,7 +1155,7 @@ lbl_fn_80176E30_00000ED4:
     b lbl_fn_80176E30_00000EF4
 lbl_fn_80176E30_00000EE0:
     lfs f1, 0x44(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x4c(r1)
@@ -1169,7 +1169,7 @@ lbl_fn_80176E30_00000EF4:
     fsubs f1, f3, f0
     lfd f2, lbl_80737810@l(r22)
     stfs f29, 0x54(r1)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f0, f1
     fcmpo cr0, f0, f21
     ble lbl_fn_80176E30_00000F2C

@@ -23,7 +23,7 @@ extern void fn_8015495C(void);
 extern void fn_8015E4B0(void);
 extern void fn_80176ACC(void);
 extern void fn_80219E6C(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_8037F6D8(void);
@@ -39,7 +39,7 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_80695D84(void);
 
 /* External data declarations */
@@ -1374,7 +1374,7 @@ lbl_fn_802C6DF4_000011D0:
     stfs f0, 0x978(r8)
     stw r30, 0x14d0(r31)
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     stw r30, 0x14d4(r31)
     b lbl_fn_802C6DF4_00001CC4
 lbl_fn_802C6DF4_0000128C:
@@ -1513,7 +1513,7 @@ lbl_fn_802C6DF4_00001480:
 lbl_fn_802C6DF4_00001488:
     frsp f2, f2
     lfs f1, 0x108(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0xa0(r1)
 lbl_fn_802C6DF4_0000149C:
@@ -1592,7 +1592,7 @@ lbl_fn_802C6DF4_000015AC:
     b lbl_fn_802C6DF4_000015CC
 lbl_fn_802C6DF4_000015B8:
     lfs f1, 0x94(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x9c(r1)
@@ -1957,7 +1957,7 @@ lbl_fn_802C6DF4_00001B2C:
 lbl_fn_802C6DF4_00001B34:
     frsp f2, f2
     lfs f1, 0xd8(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x58(r1)
 lbl_fn_802C6DF4_00001B48:
@@ -2036,7 +2036,7 @@ lbl_fn_802C6DF4_00001C58:
     b lbl_fn_802C6DF4_00001C78
 lbl_fn_802C6DF4_00001C64:
     lfs f1, 0x4c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x54(r1)

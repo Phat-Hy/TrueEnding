@@ -28,13 +28,13 @@ extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
 extern void fn_802180A8(void);
 extern void fn_80219E6C(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_802377B8(void);
 extern void fn_8023780C(void);
 extern void fn_8023781C(void);
 extern void fn_80237874(void);
-extern void fn_80239DAC(void);
-extern void fn_8023A8B4(void);
+extern void res_findResourceSlot(void);
+extern void res_registerResource(void);
 extern void fn_803EC568(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC7A0(void);
@@ -53,7 +53,7 @@ extern void PSMTXTrans(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void fn_8068AD58(void);
-extern void fn_8068AEA8(void);
+extern void std_fmod(void);
 extern void fn_80695B00(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -350,7 +350,7 @@ lbl_fn_8040F690_0000030C:
     mr r4, r29
     li r5, 0x0
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, 0x55c(r29)
     li r0, 0x0
     stw r0, 0x560(r29)
@@ -366,10 +366,10 @@ lbl_fn_8040F690_0000033C:
     stw r31, 0xb8(r3)
     li r6, 0x1
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     mr r3, r29
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_808863A0
     li r0, -0x1
     lfs f1, lbl_808863A4
@@ -393,7 +393,7 @@ lbl_fn_8040F690_0000033C:
     stw r0, 0x8(r1)
     stw r31, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r4, lbl_8087F3C0
     li r0, 0x0
     mr r3, r29
@@ -1372,7 +1372,7 @@ lbl_fn_8041044C_00001100:
     lfs f0, 0x8(r30)
     lfd f2, lbl_80752C28@l(r29)
     fmadds f1, f7, f8, f0
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f1, f1
     fcmpo cr0, f1, f29
     ble lbl_fn_8041044C_0000112C
@@ -1392,7 +1392,7 @@ lbl_fn_8041044C_00001138:
     lfs f0, 0x8(r31)
     lfd f2, lbl_80752C28@l(r29)
     fmadds f1, f7, f8, f0
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f1, f1
     fcmpo cr0, f1, f29
     ble lbl_fn_8041044C_00001174
@@ -1622,7 +1622,7 @@ lbl_fn_80410698_00001430:
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r0, 0x4cc(r30)
     clrrwi r0, r0, 1
     stw r0, 0x4cc(r30)

@@ -42,7 +42,7 @@ extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
 extern void atn_LH_Texture_update(void);
 extern void fn_800DC288(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_802375C4(void);
 extern void fn_802376D0(void);
 extern void fn_802377B8(void);
@@ -53,7 +53,7 @@ extern void fn_80239D58(void);
 extern void fn_8023A02C(void);
 extern void fn_8023A108(void);
 extern void fn_8023A680(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void fn_803EE374(void);
 extern void fn_803FFF40(void);
 extern void fn_804003E0(void);
@@ -959,7 +959,7 @@ lbl_fn_8049682C_000009BC:
     cmpwi r0, 0x0
     bne lbl_fn_8049682C_00000B64
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r3, lbl_8087F3C0
     li r31, 0x1
     lfs f1, lbl_808870D4
@@ -986,7 +986,7 @@ lbl_fn_8049682C_000009BC:
     stw r0, 0x8(r1)
     stw r31, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r3, lbl_8087F3C0
     li r0, 0x0
     stw r0, 0xb8(r3)
@@ -1001,7 +1001,7 @@ lbl_fn_8049682C_00000A50:
     bne lbl_fn_8049682C_00000B64
     mr r3, r30
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r5, 0x5c(r30)
     li r3, -0x1
     lfs f0, lbl_808870D0
@@ -1026,7 +1026,7 @@ lbl_fn_8049682C_00000A50:
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     b lbl_fn_8049682C_00000B64
 lbl_fn_8049682C_00000ADC:
     lwz r3, lbl_8087F3C0
@@ -1037,7 +1037,7 @@ lbl_fn_8049682C_00000ADC:
     bne lbl_fn_8049682C_00000B64
     mr r3, r30
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r5, 0x5c(r30)
     li r3, -0x1
     lfs f0, lbl_808870D0
@@ -1062,7 +1062,7 @@ lbl_fn_8049682C_00000ADC:
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_8049682C_00000B64:
     lwz r0, 0x94(r1)
     lwz r31, 0x8c(r1)
@@ -2366,7 +2366,7 @@ lbl_fn_80497874_00001CD8:
     lwz r0, 0x64(r15)
     li r4, 0x0
     add r3, r0, r16
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r0, 0x64(r15)
     add r29, r0, r16
     lfs f26, 0x94(r29)
@@ -2650,7 +2650,7 @@ lbl_fn_80497874_000020C0:
     stw r0, 0xb8(r17)
     lwz r0, 0x64(r15)
     add r3, r0, r31
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r0, 0x64(r15)
     add r18, r0, r31
     lfs f27, 0x94(r18)

@@ -58,7 +58,7 @@ extern void fn_80617880(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
 extern void GXLoadTexMtxImm(void);
-extern void fn_8068AEB0(void);
+extern void std_pow(void);
 extern void fn_806958E0(void);
 
 /* External data declarations */
@@ -408,13 +408,13 @@ lbl_fn_800AD484_00000418:
     fsubs f0, f0, f27
     fdivs f26, f0, f28
     fmr f1, f26
-    bl fn_8068AEB0
+    bl std_pow
     frsp f0, f1
     fcmpo cr0, f0, f29
     ble lbl_fn_800AD484_0000045C
     fmr f1, f26
     lfs f2, 0x10(r30)
-    bl fn_8068AEB0
+    bl std_pow
     frsp f0, f1
     b lbl_fn_800AD484_00000460
 lbl_fn_800AD484_0000045C:

@@ -13,7 +13,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800E2DD4(void);
 extern void fn_800E2FE0(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_801092C8(void);
 extern void fn_80126214(void);
 extern void fn_8012D8B8(void);
@@ -33,7 +33,7 @@ extern void fn_80178208(void);
 extern void fn_80178A6C(void);
 extern void fn_8019AFE8(void);
 extern void fn_80219558(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void fn_80249588(void);
 extern void fn_8035B694(void);
 extern void fn_8036554C(void);
@@ -48,7 +48,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void printf(void);
 extern void abort(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_80695AD0(void);
 
 /* External data declarations */
@@ -563,7 +563,7 @@ lbl_fn_80247FB0_00000618:
 lbl_fn_80247FB0_00000620:
     frsp f2, f2
     lfs f1, 0x5c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_80247FB0_00000634:
@@ -642,7 +642,7 @@ lbl_fn_80247FB0_00000744:
     b lbl_fn_80247FB0_00000764
 lbl_fn_80247FB0_00000750:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -675,7 +675,7 @@ lbl_fn_80247FB0_000007B4:
     stw r0, 0x5c0(r31)
     stw r30, 0x14b4(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     li r4, 0x3
     stw r4, 0x58c(r31)
     lfs f0, lbl_808831D8
@@ -827,7 +827,7 @@ lbl_fn_8024845C_000009F8:
 lbl_fn_8024845C_00000A00:
     frsp f2, f2
     lfs f1, 0x5c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_8024845C_00000A14:
@@ -906,7 +906,7 @@ lbl_fn_8024845C_00000B24:
     b lbl_fn_8024845C_00000B44
 lbl_fn_8024845C_00000B30:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -1003,7 +1003,7 @@ asm void fn_80248854(void)
     stw r30, 0x14b0(r3)
     stw r30, 0x14b4(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lwz r0, 0x12a4(r27)
     li r31, 0x1
     lwz r4, 0x5c0(r27)
@@ -1108,7 +1108,7 @@ asm void fn_80248854(void)
     stw r0, 0x8(r1)
     stw r31, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_80248854_00000E2C:
     addi r11, r1, 0xc0
     bl _restgpr_27
@@ -1134,7 +1134,7 @@ asm void fn_80248A4C(void)
     stw r31, 0x14b0(r3)
     stw r31, 0x14b4(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r30)
     li r0, 0x4
     mr r3, r30

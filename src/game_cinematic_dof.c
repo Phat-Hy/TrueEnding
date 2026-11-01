@@ -74,7 +74,7 @@ extern void fn_802377B8(void);
 extern void fn_8023780C(void);
 extern void fn_8023781C(void);
 extern void fn_80237874(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_8023A108(void);
 extern void fn_8023A254(void);
 extern void fn_80265804(void);
@@ -1788,7 +1788,7 @@ lbl_fn_80339760_0000163C:
     addi r4, r31, 0x1610
     li r5, 0x0
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     bl fn_800F7FA0
     addi r4, r31, 0x1610
     li r5, 0x0

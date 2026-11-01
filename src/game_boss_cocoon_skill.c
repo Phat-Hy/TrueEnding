@@ -10,16 +10,16 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
 extern void ref_releaseHandle(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
 extern void fn_800FAB80(void);
 extern void fn_801595BC(void);
 extern void fn_8015AC48(void);
 extern void actor_setState(void);
 extern void fn_80219E6C(void);
-extern void fn_80232B7C(void);
-extern void fn_80239DAC(void);
-extern void fn_8023A8B4(void);
+extern void sound_initGlobalInstances(void);
+extern void res_findResourceSlot(void);
+extern void res_registerResource(void);
 extern void world_setLocalFlag(void);
 extern void fn_805F89F0(void);
 extern void PSMTXRotRad(void);
@@ -29,7 +29,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void rand(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 
 /* External data declarations */
 extern u8 lbl_807549B8[];
@@ -90,7 +90,7 @@ asm void fn_80455D80(void)
     stw r31, 0x3c(r1)
     stw r30, 0x38(r1)
     mr r30, r3
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80886B80
     li r0, -0x1
     lfs f1, lbl_80886B78
@@ -115,7 +115,7 @@ asm void fn_80455D80(void)
     stw r0, 0x8(r1)
     stw r31, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     stw r31, 0x1920(r30)
     lwz r31, 0x3c(r1)
     lwz r30, 0x38(r1)
@@ -221,7 +221,7 @@ asm void fn_80455F2C(void)
     stw r0, 0x14bc(r3)
     stw r0, 0x14c0(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     li r0, 0x6
     mr r3, r31
@@ -264,7 +264,7 @@ asm void fn_80455F2C(void)
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     b lbl_fn_80455F2C_00000310
 lbl_fn_80455F2C_000002A4:
     li r0, 0x0
@@ -272,7 +272,7 @@ lbl_fn_80455F2C_000002A4:
     stw r0, 0x14bc(r3)
     stw r0, 0x14c0(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     li r0, 0x7
     mr r3, r31
@@ -420,7 +420,7 @@ asm void fn_80456194(void)
     stw r0, 0x8(r1)
     stw r11, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     b lbl_fn_80456194_0000054C
 lbl_fn_80456194_000004C8:
     lwz r0, 0x14c0(r3)
@@ -447,7 +447,7 @@ lbl_fn_80456194_000004C8:
     stw r31, 0x14bc(r30)
     stw r31, 0x14c0(r30)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r30)
     mr r3, r30
     li r4, 0x3
@@ -531,7 +531,7 @@ lbl_fn_804562E4_00000644:
     li r4, 0x3e9
     stw r14, 0x14bc(r3)
     stw r0, 0x14cc(r3)
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80886B80
     li r0, -0x1
     lfs f1, lbl_80886B78
@@ -555,7 +555,7 @@ lbl_fn_804562E4_00000644:
     stw r0, 0x8(r1)
     stw r14, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     b lbl_fn_804562E4_00000FB0
 lbl_fn_804562E4_000006C4:
     cmpwi r4, 0x1
@@ -571,7 +571,7 @@ lbl_fn_804562E4_000006E4:
     mr r4, r15
     li r5, 0x3e9
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lfs f0, lbl_80886B80
     li r11, -0x1
     lfs f1, lbl_80886B78
@@ -596,7 +596,7 @@ lbl_fn_804562E4_000006E4:
     stfs f1, 0x84(r1)
     stw r11, 0x8(r1)
     stw r0, 0xc(r1)
-    bl fn_8023A8B4
+    bl res_registerResource
     lis r3, lbl_807549D0@ha
     lfs f1, lbl_80886B78
     addi r14, r3, lbl_807549D0@l
@@ -844,7 +844,7 @@ lbl_fn_804562E4_00000AF0:
 lbl_fn_804562E4_00000AF8:
     frsp f2, f2
     lfs f1, 0xd4(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x54(r1)
 lbl_fn_804562E4_00000B0C:
@@ -921,7 +921,7 @@ lbl_fn_804562E4_00000C14:
     b lbl_fn_804562E4_00000C34
 lbl_fn_804562E4_00000C20:
     lfs f1, 0x48(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x50(r1)
@@ -1146,7 +1146,7 @@ lbl_fn_804562E4_00000F5C:
     stw r14, 0x14bc(r15)
     stw r14, 0x14c0(r15)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r15)
     mr r3, r15
     li r4, 0x3
@@ -1235,7 +1235,7 @@ asm void fn_80456E1C(void)
     stw r0, 0x14bc(r3)
     stw r0, 0x14c0(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     li r0, 0x6
     mr r3, r31
@@ -1278,7 +1278,7 @@ asm void fn_80456E1C(void)
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)
     mtlr r0
@@ -1298,7 +1298,7 @@ asm void fn_80456F04(void)
     stw r0, 0x14bc(r3)
     stw r0, 0x14c0(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     li r0, 0x7
     mr r3, r31
@@ -1340,7 +1340,7 @@ asm void fn_80456F94(void)
     stw r0, 0x14bc(r3)
     stw r0, 0x14c0(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r30)
     li r0, 0x8
     mr r3, r30
@@ -1351,10 +1351,10 @@ asm void fn_80456F94(void)
     mr r4, r30
     li r5, 0x3e8
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     li r3, 0x0
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80886B80
     li r0, -0x1
     lfs f1, lbl_80886B78
@@ -1379,7 +1379,7 @@ asm void fn_80456F94(void)
     stw r0, 0x8(r1)
     stw r31, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r0, 0x2548(r30)
     li r5, 0x3
     lfs f1, lbl_80886B90
@@ -1534,7 +1534,7 @@ lbl_fn_804570F4_00001514:
 lbl_fn_804570F4_0000151C:
     frsp f2, f2
     lfs f1, 0x2c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x54(r1)
 lbl_fn_804570F4_00001530:
@@ -1613,7 +1613,7 @@ lbl_fn_804570F4_00001640:
     b lbl_fn_804570F4_00001660
 lbl_fn_804570F4_0000164C:
     lfs f1, 0x60(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x50(r1)

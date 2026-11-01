@@ -16,7 +16,7 @@ extern void mem_free(void);
 extern void fn_8008BBD8(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_800FAB80(void);
 extern void fn_800FB4B0(void);
 extern void fn_8015495C(void);
@@ -42,8 +42,8 @@ extern void printf(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void abort(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 extern void fn_80695B00(void);
 extern u32 strlen(const char* str);
 
@@ -303,7 +303,7 @@ lbl_fn_801CAAF0_00000208:
     stfs f2, 0x20(r1)
     fadds f1, f3, f0
     lfd f2, lbl_8073B9A8@l(r4)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80882978
     fcmpo cr0, f3, f0
@@ -890,7 +890,7 @@ lbl_fn_801CB434_00000A88:
 lbl_fn_801CB434_00000A90:
     fmr f2, f4
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_801CB434_00000AA4:
@@ -969,7 +969,7 @@ lbl_fn_801CB434_00000BB4:
     b lbl_fn_801CB434_00000BD4
 lbl_fn_801CB434_00000BC0:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -1143,7 +1143,7 @@ lbl_fn_801CB76C_00000DCC:
     lwz r26, lbl_8087F048
     lwz r28, 0x638(r27)
     mr r3, r26
-    bl fn_800F8548
+    bl system_getNextSequenceId
     li r0, -0x1
     stw r0, 0x8(r1)
     mr r6, r3
@@ -1170,7 +1170,7 @@ lbl_fn_801CB76C_00000DCC:
     lwz r26, lbl_8087F048
     mr r27, r3
     mr r3, r26
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r29, 0x8(r1)
     mr r6, r3
     mr r3, r26

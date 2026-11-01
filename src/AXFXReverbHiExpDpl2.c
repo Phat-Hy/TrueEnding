@@ -11,7 +11,7 @@ extern void _restgpr_26(void);
 extern BOOL OSDisableInterrupts(void);
 extern BOOL OSRestoreInterrupts(BOOL);
 extern void fn_806095D0(void);
-extern void fn_8068AEB0(void);
+extern void std_pow(void);
 extern void fn_80695D84(void);
 
 /* External large data symbols */
@@ -962,7 +962,7 @@ lbl_fn_8060EB40_00000C74:
     fmuls f2, f30, f2
     fmuls f0, f31, f0
     fdivs f2, f2, f0
-    bl fn_8068AEB0
+    bl std_pow
     frsp f0, f1
     addi r25, r25, 0x1
     cmplwi r25, 0x2

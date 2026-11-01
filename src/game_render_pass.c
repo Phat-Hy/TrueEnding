@@ -29,7 +29,7 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8015495C(void);
 extern void fn_8016DA4C(void);
@@ -45,7 +45,7 @@ extern void fn_802377B8(void);
 extern void fn_8023780C(void);
 extern void fn_8023781C(void);
 extern void fn_80237874(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_8029DB54(void);
 extern void fn_8029DB58(void);
 extern void fn_8029DBE0(void);
@@ -504,7 +504,7 @@ asm void fn_802A4478(void)
     stw r31, 0x14d8(r28)
     stw r31, 0x14dc(r28)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lfs f0, lbl_80883D28
     li r4, 0x6
     stw r3, 0x590(r28)
@@ -592,7 +592,7 @@ asm void fn_802A4628(void)
     stw r31, 0x14d8(r3)
     stw r31, 0x14dc(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lfs f0, lbl_80883D28
     li r0, 0x6
     stw r3, 0x590(r30)
@@ -621,7 +621,7 @@ asm void fn_802A4628(void)
     mr r4, r30
     li r5, -0x2
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

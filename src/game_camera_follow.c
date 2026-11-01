@@ -15,7 +15,7 @@ extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
 extern void fn_800EE360(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80145334(void);
 extern void dialog_renderWindow(void);
@@ -28,11 +28,11 @@ extern void actor_setState(void);
 extern void fn_801765D8(void);
 extern void fn_80178A6C(void);
 extern void fn_80219E6C(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_802377B8(void);
 extern void fn_8023780C(void);
 extern void fn_80237874(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void fn_802E8084(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
@@ -44,7 +44,7 @@ extern void PSMTX44Identity(void);
 extern void strcmp(void);
 extern void strstr(void);
 extern void atoi(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -113,7 +113,7 @@ asm void fn_802E4D6C(void)
     stw r0, 0x14b8(r3)
     stw r0, 0x14bc(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r30)
     li r0, 0xc
     mr r3, r30
@@ -169,7 +169,7 @@ lbl_fn_802E4D6C_000000FC:
 lbl_fn_802E4D6C_00000104:
     fmr f2, f4
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_802E4D6C_00000118:
@@ -248,7 +248,7 @@ lbl_fn_802E4D6C_00000228:
     b lbl_fn_802E4D6C_00000248
 lbl_fn_802E4D6C_00000234:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -295,7 +295,7 @@ asm void fn_802E500C(void)
     stw r0, 0x14b8(r3)
     stw r0, 0x14bc(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r30)
     li r0, 0xd
     mr r3, r30
@@ -351,7 +351,7 @@ lbl_fn_802E500C_0000039C:
 lbl_fn_802E500C_000003A4:
     fmr f2, f4
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_802E500C_000003B8:
@@ -430,7 +430,7 @@ lbl_fn_802E500C_000004C8:
     b lbl_fn_802E500C_000004E8
 lbl_fn_802E500C_000004D4:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -477,7 +477,7 @@ asm void fn_802E52AC(void)
     stw r0, 0x14b8(r3)
     stw r0, 0x14bc(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r30)
     li r0, 0xe
     mr r3, r30
@@ -533,7 +533,7 @@ lbl_fn_802E52AC_0000063C:
 lbl_fn_802E52AC_00000644:
     fmr f2, f4
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_802E52AC_00000658:
@@ -612,7 +612,7 @@ lbl_fn_802E52AC_00000768:
     b lbl_fn_802E52AC_00000788
 lbl_fn_802E52AC_00000774:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -656,7 +656,7 @@ asm void fn_802E554C(void)
     stw r0, 0x14b8(r3)
     stw r0, 0x14bc(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r30)
     li r0, 0xf
     mr r3, r30
@@ -687,7 +687,7 @@ asm void fn_802E55B0(void)
     stw r0, 0x14b8(r3)
     stw r0, 0x14bc(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     mr r3, r31
     lwz r12, 0x0(r31)
@@ -733,7 +733,7 @@ lbl_fn_802E55B0_000008FC:
     bl atn_Anim_setLayerAnimation
     li r3, 0x0
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_808846EC
     li r0, -0x1
     lfs f1, lbl_80884720
@@ -757,7 +757,7 @@ lbl_fn_802E55B0_000008FC:
     stfs f1, 0x4c(r1)
     stw r0, 0x8(r1)
     stw r30, 0xc(r1)
-    bl fn_8023A8B4
+    bl res_registerResource
     b lbl_fn_802E55B0_000009E4
 lbl_fn_802E55B0_00000990:
     lfs f1, lbl_808846EC
@@ -1167,7 +1167,7 @@ lbl_fn_802E5B38_00000EC4:
     stw r30, 0x14dc(r31)
     stw r30, 0x14e0(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     mr r3, r31
     li r4, 0x3
@@ -1556,7 +1556,7 @@ asm void fn_802E61D0(void)
     stw r31, 0x14dc(r3)
     stw r31, 0x14e0(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r30)
     mr r3, r30
     li r4, 0x3
@@ -1600,7 +1600,7 @@ lbl_fn_802E6228_00001514:
     stw r30, 0x14dc(r3)
     stw r30, 0x14e0(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     li r0, 0x7
     mr r3, r31
@@ -1648,7 +1648,7 @@ lbl_fn_802E6228_000015CC:
     stw r0, 0x14dc(r3)
     stw r0, 0x14e0(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     li r0, 0x8
     mr r3, r31
@@ -1704,7 +1704,7 @@ lbl_fn_802E6228_000016A0:
 lbl_fn_802E6228_000016A8:
     fmr f2, f4
     lfs f1, 0x74(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x84(r1)
 lbl_fn_802E6228_000016BC:
@@ -1783,7 +1783,7 @@ lbl_fn_802E6228_000017CC:
     b lbl_fn_802E6228_000017EC
 lbl_fn_802E6228_000017D8:
     lfs f1, 0x90(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x80(r1)
@@ -1806,7 +1806,7 @@ lbl_fn_802E6228_00001820:
     stw r0, 0x14dc(r3)
     stw r0, 0x14e0(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     li r0, 0x9
     mr r3, r31
@@ -1862,7 +1862,7 @@ lbl_fn_802E6228_000018F4:
 lbl_fn_802E6228_000018FC:
     fmr f2, f4
     lfs f1, 0x14(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x24(r1)
 lbl_fn_802E6228_00001910:
@@ -1941,7 +1941,7 @@ lbl_fn_802E6228_00001A20:
     b lbl_fn_802E6228_00001A40
 lbl_fn_802E6228_00001A2C:
     lfs f1, 0x30(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x20(r1)
@@ -1968,7 +1968,7 @@ lbl_fn_802E6228_00001A80:
     stw r30, 0x14dc(r3)
     stw r30, 0x14e0(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     mr r3, r31
     li r4, 0x3

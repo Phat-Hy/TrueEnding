@@ -42,7 +42,7 @@ extern void fn_8019A3F4(void);
 extern void fn_8019A580(void);
 extern void fn_8019AFE8(void);
 extern void fn_80219E6C(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_80237518(void);
 extern void fn_802375C4(void);
 extern void fn_80237654(void);
@@ -51,7 +51,7 @@ extern void fn_802377B8(void);
 extern void fn_8023780C(void);
 extern void fn_8023781C(void);
 extern void fn_80237874(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void fn_8035B694(void);
 extern void fn_8035B78C(void);
 extern void world_getLocalFlag(void);
@@ -67,7 +67,7 @@ extern void PSMTX44Identity(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -308,7 +308,7 @@ lbl_fn_80249588_00000290:
 lbl_fn_80249588_00000298:
     fmr f2, f5
     lfs f1, 0x74(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_80249588_000002AC:
@@ -387,7 +387,7 @@ lbl_fn_80249588_000003BC:
     b lbl_fn_80249588_000003DC
 lbl_fn_80249588_000003C8:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -1019,7 +1019,7 @@ asm void fn_8024A1E0(void)
     bne lbl_fn_8024A1E0_00000D58
     li r3, 0x0
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80883258
     li r3, -0x1
     lfs f1, lbl_8088325C
@@ -1044,7 +1044,7 @@ asm void fn_8024A1E0(void)
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r12, 0x0(r30)
     mr r3, r30
     lwz r12, 0x44(r12)

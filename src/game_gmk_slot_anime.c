@@ -42,7 +42,7 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern u32 strlen(const char* str);
@@ -538,7 +538,7 @@ lbl_fn_80441F24_00000634:
 lbl_fn_80441F24_0000063C:
     frsp f2, f2
     lfs f1, 0x70(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x50(r1)
 lbl_fn_80441F24_00000650:
@@ -613,7 +613,7 @@ lbl_fn_80441F24_00000750:
     b lbl_fn_80441F24_00000770
 lbl_fn_80441F24_0000075C:
     lfs f1, 0x44(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x4c(r1)

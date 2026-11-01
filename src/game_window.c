@@ -18,8 +18,8 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void fn_8068A918(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEB0(void);
+extern void std_atan2(void);
+extern void std_pow(void);
 
 /* External data declarations */
 extern u8 jumptable_80778AD8[];
@@ -221,7 +221,7 @@ lbl_fn_800A6BDC_00000228:
     addi r28, r28, 0x1
     lfs f2, -0x4(r26)
     lfs f1, -0x8(r26)
-    bl fn_8068AEB0
+    bl std_pow
     frsp f0, f1
     subi r29, r29, 0x1
     stfs f0, -0x8(r26)
@@ -562,7 +562,7 @@ lbl_fn_800A70F4_00000694:
     b lbl_fn_800A70F4_000006C0
 lbl_fn_800A70F4_0000069C:
     fmr f1, f31
-    bl fn_8068AEB0
+    bl std_pow
     frsp f1, f1
     b lbl_fn_800A70F4_000006C0
 lbl_fn_800A70F4_000006AC:
@@ -722,7 +722,7 @@ lbl_fn_800A73A4_00000844:
     bge lbl_fn_800A73A4_00000A64
     fneg f2, f2
     lfs f1, 0x8(r4)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     addi r3, r1, 0x1d8
     li r4, 0x79
@@ -762,7 +762,7 @@ lbl_fn_800A73A4_000008DC:
 lbl_fn_800A73A4_000008E4:
     frsp f2, f2
     lfs f1, 0xb0(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x90(r1)
 lbl_fn_800A73A4_000008F8:
@@ -841,7 +841,7 @@ lbl_fn_800A73A4_00000A08:
     b lbl_fn_800A73A4_00000A28
 lbl_fn_800A73A4_00000A14:
     lfs f1, 0x84(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x8c(r1)
@@ -857,13 +857,13 @@ lbl_fn_800A73A4_00000A28:
     stfs f2, 0xb8(r1)
     fmr f2, f4
     stfs f0, 0x94(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x8(r29)
     b lbl_fn_800A73A4_00000C74
 lbl_fn_800A73A4_00000A64:
     lfs f1, 0x8(r4)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     addi r3, r1, 0x1a8
     li r4, 0x79
@@ -904,7 +904,7 @@ lbl_fn_800A73A4_00000AF0:
 lbl_fn_800A73A4_00000AF8:
     frsp f2, f2
     lfs f1, 0x98(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_800A73A4_00000B0C:
@@ -983,7 +983,7 @@ lbl_fn_800A73A4_00000C1C:
     b lbl_fn_800A73A4_00000C3C
 lbl_fn_800A73A4_00000C28:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -999,7 +999,7 @@ lbl_fn_800A73A4_00000C3C:
     stfs f2, 0xa0(r1)
     fmr f2, f4
     stfs f0, 0x4c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x8(r29)
 lbl_fn_800A73A4_00000C74:

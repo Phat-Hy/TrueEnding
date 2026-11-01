@@ -54,7 +54,7 @@ extern void rand(void);
 extern void strcmp(void);
 extern void fn_8068AC5C(void);
 extern void fn_8068AD58(void);
-extern void fn_8068AEA8(void);
+extern void std_fmod(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern void fn_80695AD0(void);
@@ -847,7 +847,7 @@ lbl_fn_804186D8_000008CC:
     lfs f7, 0x4c8(r29)
     lfs f0, 0x4cc(r29)
     fmadds f1, f7, f8, f0
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f1, f1
     fcmpo cr0, f1, f29
     ble lbl_fn_804186D8_00000904

@@ -13,12 +13,12 @@ extern void fn_800E14A4(void);
 extern void fn_800E1A48(void);
 extern void fn_800E1D5C(void);
 extern void fn_80232ACC(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_80232FF4(void);
 extern void fn_802346AC(void);
 extern void fn_802347DC(void);
 extern void fn_80234958(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_8023A680(void);
 extern void fn_8024067C(void);
 extern void fn_8024068C(void);
@@ -78,7 +78,7 @@ asm void fn_8023B724(void)
 lbl_fn_8023B724_00000040:
     lwz r3, 0x4c(r4)
     lwz r4, 0x50(r4)
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r3, 0x58(r27)
     bl fn_802346AC
     lwz r3, 0x40(r27)
@@ -233,7 +233,7 @@ lbl_fn_8023B724_00000288:
     lwz r4, 0x4c(r4)
     lwz r5, 0x50(r27)
     lwz r6, 0x5c(r27)
-    bl fn_80239DAC
+    bl res_findResourceSlot
 lbl_fn_8023B724_00000298:
     addi r11, r1, 0x160
     mr r3, r31

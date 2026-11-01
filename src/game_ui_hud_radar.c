@@ -18,7 +18,7 @@ extern void fn_80057A64(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800CB5C8(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
 extern void fn_8012A1B8(void);
 extern void fn_80139F24(void);
@@ -45,7 +45,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void rand(void);
 extern void fn_8068A850(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 
 /* External data declarations */
 extern u8 lbl_8073B5D8[];
@@ -429,7 +429,7 @@ lbl_fn_801C041C_00000378:
 lbl_fn_801C041C_00000380:
     frsp f2, f2
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_801C041C_00000394:
@@ -508,7 +508,7 @@ lbl_fn_801C041C_000004A4:
     b lbl_fn_801C041C_000004C4
 lbl_fn_801C041C_000004B0:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -820,7 +820,7 @@ lbl_fn_801C074C_00000908:
 lbl_fn_801C074C_00000910:
     frsp f2, f2
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_801C074C_00000924:
@@ -899,7 +899,7 @@ lbl_fn_801C074C_00000A34:
     b lbl_fn_801C074C_00000A54
 lbl_fn_801C074C_00000A40:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -1038,7 +1038,7 @@ asm void fn_801C0D04(void)
     cror eq, lt, eq
     bne lbl_fn_801C0D04_00000C28
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lwz r6, 0x4(r31)
     mr r8, r3
     lwz r3, lbl_8087F048
@@ -1892,7 +1892,7 @@ lbl_fn_801C1578_0000186C:
 lbl_fn_801C1578_00001874:
     frsp f2, f2
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_801C1578_00001888:
@@ -1971,7 +1971,7 @@ lbl_fn_801C1578_00001998:
     b lbl_fn_801C1578_000019B8
 lbl_fn_801C1578_000019A4:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)

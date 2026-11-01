@@ -47,8 +47,8 @@ extern void fn_8018EEC4(void);
 extern void fn_802096A8(void);
 extern void fn_80219558(void);
 extern void fn_80219E6C(void);
-extern void fn_80232B7C(void);
-extern void fn_80239DAC(void);
+extern void sound_initGlobalInstances(void);
+extern void res_findResourceSlot(void);
 extern void fn_8023A680(void);
 extern void world_getGlobalFlag(void);
 extern void atn_LoadHandle_getName(void);
@@ -1666,7 +1666,7 @@ lbl_fn_8014C540_000015E0:
     addi r4, r28, 0xf20
     li r5, 0x0
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r0, 0x12a8(r28)
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0x12a8(r28)
@@ -1847,7 +1847,7 @@ lbl_fn_8014C540_00001850:
     beq lbl_fn_8014C540_00001944
     addi r3, r28, 0xf20
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r3, lbl_8087F3C0
     li r0, 0x0
     li r5, -0x1

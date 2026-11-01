@@ -35,15 +35,15 @@ extern void fn_801644D4(void);
 extern void fn_80176ACC(void);
 extern void fn_8017CB2C(void);
 extern void fn_802180A8(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_80237654(void);
 extern void fn_802376D0(void);
 extern void fn_8023780C(void);
 extern void fn_80237874(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_8023A02C(void);
 extern void fn_8023A680(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void fn_803E598C(void);
 extern void fn_803EC568(void);
 extern void fn_803EC7A0(void);
@@ -929,7 +929,7 @@ lbl_fn_803F8E68_00000BA0:
     bl fn_803F8F30
     li r3, 0x0
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     li r0, 0x0
     stw r0, 0x8(r1)
     li r3, -0x1
@@ -1112,7 +1112,7 @@ lbl_fn_803F8F30_00000E00:
     li r5, 0x0
     extrwi r0, r0, 1, 29
     xori r6, r0, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r0, 0x96c(r31)
     cmpwi r0, 0x0
     bne lbl_fn_803F8F30_00000E38
@@ -1123,7 +1123,7 @@ lbl_fn_803F8F30_00000E00:
 lbl_fn_803F8F30_00000E38:
     mr r3, r31
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r3, lbl_8087F3C0
     li r0, 0x1
     stw r0, 0xb8(r3)
@@ -1188,7 +1188,7 @@ lbl_fn_803F8F30_00000EC0:
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     b lbl_fn_803F8F30_00001078
 lbl_fn_803F8F30_00000F40:
     lwz r12, 0x0(r31)
@@ -1227,7 +1227,7 @@ lbl_fn_803F8F30_00000F40:
     stw r11, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     b lbl_fn_803F8F30_00001078
 lbl_fn_803F8F30_00000FD8:
     lfs f0, lbl_80886018
@@ -1270,7 +1270,7 @@ lbl_fn_803F8F30_0000102C:
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_803F8F30_00001078:
     lwz r0, 0x9ac(r31)
     rlwinm r0, r0, 0, 25, 25

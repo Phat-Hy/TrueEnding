@@ -7,7 +7,7 @@ extern void _savegpr_27(void);
 extern void mem_alloc(void);
 extern void fn_800C344C(void);
 extern void ref_releaseHandle(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_800FD658(void);
 extern void fn_8010337C(void);
 extern void fn_80105F3C(void);
@@ -1119,7 +1119,7 @@ lbl_fn_80164454_00000ED8:
 lbl_fn_80164454_00000EDC:
     lwz r30, lbl_8087F048
     mr r3, r29
-    bl fn_800F8548
+    bl system_getNextSequenceId
     mr r7, r3
     mr r3, r30
     mr r4, r27

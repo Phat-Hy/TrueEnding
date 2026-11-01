@@ -48,7 +48,7 @@ extern void fn_8014C540(void);
 extern void actor_setState(void);
 extern void fn_8020A780(void);
 extern void fn_80219E6C(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_80237518(void);
 extern void fn_80237654(void);
 extern void fn_802376D0(void);
@@ -56,9 +56,9 @@ extern void fn_802377B8(void);
 extern void fn_8023780C(void);
 extern void fn_80237874(void);
 extern void fn_80239D58(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_8023A680(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void fn_80266154(void);
 extern void fn_802BABC0(void);
 extern void fn_80316FC0(void);
@@ -92,7 +92,7 @@ extern void PSVECMag(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_806958E0(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -405,7 +405,7 @@ asm void fn_80315964(void)
     mr r4, r31
     li r5, 0x0
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
 lbl_fn_80315964_000003A4:
     lfs f2, 0x608(r31)
     addi r3, r1, 0xe4
@@ -443,7 +443,7 @@ lbl_fn_80315964_000003A4:
 lbl_fn_80315964_00000428:
     mr r3, r31
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80884CF0
     li r29, -0x1
     lfs f1, lbl_80884CF4
@@ -468,7 +468,7 @@ lbl_fn_80315964_00000428:
     stfs f1, 0xbc(r1)
     stw r29, 0x8(r1)
     stw r30, 0xc(r1)
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r3, 0xd1c(r31)
     addi r4, r31, 0x157c
     lfs f0, lbl_80884CF0
@@ -492,7 +492,7 @@ lbl_fn_80315964_00000428:
     stfs f1, 0x94(r1)
     stw r29, 0x8(r1)
     stw r30, 0xc(r1)
-    bl fn_8023A8B4
+    bl res_registerResource
     lfs f1, 0xe4(r1)
     addi r3, r1, 0x340
     lfs f2, 0xe8(r1)
@@ -537,7 +537,7 @@ lbl_fn_80315964_0000058C:
 lbl_fn_80315964_00000594:
     frsp f2, f2
     lfs f1, 0xc0(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x64(r1)
 lbl_fn_80315964_000005A8:
@@ -616,7 +616,7 @@ lbl_fn_80315964_000006B8:
     b lbl_fn_80315964_000006D8
 lbl_fn_80315964_000006C4:
     lfs f1, 0x58(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x60(r1)
@@ -821,7 +821,7 @@ asm void fn_80315FE0(void)
     mr r4, r31
     li r5, 0x0
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
 lbl_fn_80315FE0_000009DC:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

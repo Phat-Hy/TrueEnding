@@ -56,8 +56,8 @@ extern void fn_805F99F0(void);
 extern void fn_805F9AB0(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 extern void fn_8068B100(void);
 
 /* External data declarations */
@@ -202,7 +202,7 @@ lbl_fn_801151A4_0000012C:
     fmuls f6, f6, f3
     fadds f1, f0, f6
     stfs f1, 0x25c(r31)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f4, f1
     lfs f0, lbl_808816E0
     fcmpo cr0, f4, f0
@@ -320,7 +320,7 @@ lbl_fn_801151A4_000002C8:
     fmuls f6, f6, f3
     fadds f1, f0, f6
     stfs f1, 0x260(r31)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f4, f1
     lfs f0, lbl_808816E0
     fcmpo cr0, f4, f0
@@ -958,11 +958,11 @@ lbl_fn_801157DC_00000B6C:
     bl PSVECNormalize
     lfs f2, 0x170(r1)
     lfs f1, 0x178(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f30, f1
     lfs f2, 0x164(r1)
     lfs f1, 0x16c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     lfs f0, lbl_808816B0
     frsp f28, f1
     fcmpo cr0, f29, f0

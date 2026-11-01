@@ -32,7 +32,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
 extern void rand(void);
-extern void fn_8068AEA8(void);
+extern void std_fmod(void);
 extern void fn_80695A50(void);
 
 /* External data declarations */
@@ -359,7 +359,7 @@ asm void fn_8041ECBC(void)
     lfs f2, 0x80(r30)
     stfs f2, 0x118(r30)
     lfd f2, lbl_80753200@l(r3)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80886588
     fcmpo cr0, f3, f0
@@ -1162,7 +1162,7 @@ lbl_fn_8041F6A4_00000D54:
     lfs f1, 0x138(r31)
     lfd f2, lbl_80753200@l(r3)
     stfs f0, 0x10(r1)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80886588
     fcmpo cr0, f3, f0
@@ -1180,7 +1180,7 @@ lbl_fn_8041F6A4_00000F20:
     lfs f1, 0x13c(r31)
     stfs f3, 0x138(r31)
     lfd f2, lbl_80753200@l(r3)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80886588
     fcmpo cr0, f3, f0
@@ -1198,7 +1198,7 @@ lbl_fn_8041F6A4_00000F60:
     lfs f1, 0x140(r31)
     stfs f3, 0x13c(r31)
     lfd f2, lbl_80753200@l(r3)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80886588
     fcmpo cr0, f3, f0

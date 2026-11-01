@@ -34,7 +34,7 @@ extern void fn_800CB6E4(void);
 extern void fn_802180A8(void);
 extern void fn_802377B8(void);
 extern void fn_8023781C(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_803EC568(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC91C(void);
@@ -59,8 +59,8 @@ extern void rand(void);
 extern void strcmp(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 extern void fn_80695720(void);
 extern void fn_80695A50(void);
 extern char* strcpy(char* dest, const char* src);
@@ -669,7 +669,7 @@ asm void fn_80405A14(void)
     psq_st f1, 0x3ec(r30), 0, 0
     lfs f1, 0x3ec(r30)
     stfs f2, 0x3f4(r30)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     lis r3, lbl_80752878@ha
     li r0, 0x12c
@@ -727,7 +727,7 @@ lbl_fn_80405A14_00000898:
 lbl_fn_80405A14_000008A0:
     frsp f2, f2
     lfs f1, 0x54(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x4c(r1)
 lbl_fn_80405A14_000008B4:
@@ -806,7 +806,7 @@ lbl_fn_80405A14_000009C4:
     b lbl_fn_80405A14_000009E4
 lbl_fn_80405A14_000009D0:
     lfs f1, 0x40(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x48(r1)
@@ -823,7 +823,7 @@ lbl_fn_80405A14_000009E4:
     fsubs f1, f3, f0
     lfd f2, lbl_80752890@l(r3)
     stfs f4, 0x50(r1)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f1, f1
     lfs f0, lbl_80886238
     fcmpo cr0, f1, f0
@@ -869,7 +869,7 @@ lbl_fn_80405A14_00000A90:
     bl PSMTXMultVec
     lfs f2, 0x3f4(r30)
     lfs f1, 0x3ec(r30)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x3e4(r30)
 lbl_fn_80405A14_00000AC0:
@@ -1860,7 +1860,7 @@ asm void fn_80406ACC(void)
     clrrwi r0, r0, 1
     stw r0, 0x89c(r3)
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     b lbl_fn_80406ACC_00001860
 lbl_fn_80406ACC_00001850:
     lwz r12, 0x0(r3)

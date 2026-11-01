@@ -30,7 +30,7 @@ extern void fn_800DC288(void);
 extern void fn_800E0AA8(void);
 extern void fn_800E0AB0(void);
 extern void fn_800EC204(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_8011FC10(void);
 extern void fn_80121F00(void);
 extern void boss_updatePhaseState(void);
@@ -44,7 +44,7 @@ extern void fn_80219E6C(void);
 extern void fn_802377B8(void);
 extern void fn_8023780C(void);
 extern void fn_80237874(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_80244CCC(void);
 extern void fn_80244FC0(void);
 extern void fn_802D8540(void);
@@ -1847,7 +1847,7 @@ asm void fn_802DF398(void)
     stw r31, 0x14ec(r3)
     stw r31, 0x14e8(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r30)
     mr r3, r30
     li r4, 0x3
@@ -1861,12 +1861,12 @@ asm void fn_802DF398(void)
     mr r4, r30
     li r5, 0x64
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x65
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1906,7 +1906,7 @@ lbl_fn_802DF428_000018D0:
     stw r0, 0x14ec(r3)
     stw r0, 0x14e8(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r30)
     li r0, 0x8
     mr r3, r30
@@ -1940,7 +1940,7 @@ lbl_fn_802DF428_00001948:
     stw r31, 0x14ec(r3)
     stw r31, 0x14e8(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r30)
     mr r3, r30
     li r4, 0x3
@@ -1954,12 +1954,12 @@ lbl_fn_802DF428_00001948:
     mr r4, r30
     li r5, 0x64
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x65
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
 lbl_fn_802DF428_000019A8:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

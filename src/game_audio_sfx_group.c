@@ -14,7 +14,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_80097D40(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void ref_releaseHandle(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_800FD658(void);
 extern void fn_80107168(void);
 extern void fn_801092C8(void);
@@ -42,7 +42,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void rand(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_80695720(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -965,7 +965,7 @@ lbl_fn_803123D0_00000C9C:
 lbl_fn_803123D0_00000CA4:
     frsp f2, f2
     lfs f1, 0x6c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_803123D0_00000CB8:
@@ -1044,7 +1044,7 @@ lbl_fn_803123D0_00000DC8:
     b lbl_fn_803123D0_00000DE8
 lbl_fn_803123D0_00000DD4:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -1112,7 +1112,7 @@ lbl_fn_803123D0_00000E6C:
     cmpwi r0, 0x0
     ble lbl_fn_803123D0_00000FF4
     mr r3, r28
-    bl fn_800F8548
+    bl system_getNextSequenceId
     mr r30, r3
     lwz r3, 0x14ec(r29)
     bl fn_80219E6C

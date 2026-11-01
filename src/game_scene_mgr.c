@@ -47,7 +47,7 @@ extern void PSVECNormalize(void);
 extern void printf(void);
 extern void rand(void);
 extern void abort(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_8068B100(void);
 
 /* External data declarations */
@@ -428,7 +428,7 @@ lbl_fn_801A2CEC_00000444:
 lbl_fn_801A2CEC_0000044C:
     frsp f2, f2
     lfs f1, 0xf8(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x90(r1)
 lbl_fn_801A2CEC_00000460:
@@ -507,7 +507,7 @@ lbl_fn_801A2CEC_00000570:
     b lbl_fn_801A2CEC_00000590
 lbl_fn_801A2CEC_0000057C:
     lfs f1, 0x84(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x8c(r1)
@@ -740,7 +740,7 @@ lbl_fn_801A2CEC_000008E4:
 lbl_fn_801A2CEC_000008EC:
     fmr f2, f5
     lfs f1, 0x98(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_801A2CEC_00000900:
@@ -819,7 +819,7 @@ lbl_fn_801A2CEC_00000A10:
     b lbl_fn_801A2CEC_00000A30
 lbl_fn_801A2CEC_00000A1C:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)

@@ -34,9 +34,9 @@ extern void fn_80219E6C(void);
 extern void fn_8021A4E0(void);
 extern void fn_8021A960(void);
 extern void fn_8021A984(void);
-extern void fn_80232B7C(void);
-extern void fn_80239DAC(void);
-extern void fn_8023A8B4(void);
+extern void sound_initGlobalInstances(void);
+extern void res_findResourceSlot(void);
+extern void res_registerResource(void);
 extern void fn_80444BE8(void);
 extern void fn_80444C48(void);
 extern void fn_80444C50(void);
@@ -1100,7 +1100,7 @@ lbl_fn_805991E4_00000E28:
     lwz r3, lbl_8087F3C0
     li r6, 0x1
     lwz r5, 0x4(r5)
-    bl fn_80239DAC
+    bl res_findResourceSlot
     addi r3, r31, 0x64
     li r4, 0x1e
     li r5, 0x0
@@ -1115,7 +1115,7 @@ lbl_fn_805991E4_00000E28:
     stw r0, 0xd0(r3)
     li r6, 0x1
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     li r0, 0x0
     stw r0, 0xd0(r3)
@@ -1226,7 +1226,7 @@ lbl_fn_80599458_00000F98:
     lwz r4, 0x4(r30)
     mr r3, r30
     lwz r4, 0x4(r4)
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r5, 0xc(r30)
     lis r7, lbl_807C7030@ha
     lwz r3, lbl_8087F3C0
@@ -1242,7 +1242,7 @@ lbl_fn_80599458_00000F98:
     addi r9, r1, 0x88
     li r6, 0x0
     li r10, -0x1
-    bl fn_8023A8B4
+    bl res_registerResource
     b lbl_fn_80599458_00001184
     cmpwi r3, 0x0
     beq lbl_fn_80599458_00001184
@@ -1260,7 +1260,7 @@ lbl_fn_80599458_00000F98:
     lwz r4, 0x4(r30)
     mr r3, r30
     lwz r4, 0x4(r4)
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r5, 0xc(r30)
     lis r7, lbl_807C7030@ha
     lwz r3, lbl_8087F3C0
@@ -1276,7 +1276,7 @@ lbl_fn_80599458_00000F98:
     addi r9, r1, 0x68
     li r6, 0x0
     li r10, -0x1
-    bl fn_8023A8B4
+    bl res_registerResource
     b lbl_fn_80599458_00001184
     subi r0, r5, 0x5
     addi r3, r30, 0x10
@@ -1306,7 +1306,7 @@ lbl_fn_80599458_0000110C:
     lwz r4, 0x4(r30)
     mr r3, r30
     lwz r4, 0x4(r4)
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r3, lbl_8087F3C0
     li r4, -0x1
     fmr f1, f31
@@ -1320,7 +1320,7 @@ lbl_fn_80599458_0000110C:
     li r5, 0x0
     li r6, 0x0
     li r10, -0x1
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_80599458_00001184:
     lwz r3, 0x4(r30)
     lwz r3, 0xb0(r3)

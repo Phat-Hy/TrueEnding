@@ -21,7 +21,7 @@ extern void fn_800DC12C(void);
 extern void fn_80117228(void);
 extern void fn_801F4D80(void);
 extern void fn_80202118(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void world_updateMapTransition(void);
 extern void fn_8036FB4C(void);
 extern void fn_80373148(void);
@@ -314,7 +314,7 @@ asm void fn_8051EF24(void)
     mr r4, r25
     li r5, 0x1
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, 0x1908(r25)
     cmpwi r3, 0x0
     beq lbl_fn_8051EF24_00000330
@@ -499,7 +499,7 @@ lbl_fn_8051F13C_00000538:
     mr r4, r31
     li r5, 0x1
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     li r0, 0x8
     addi r3, r31, 0xe0
     lfs f7, lbl_80887904
@@ -1191,7 +1191,7 @@ lbl_fn_8051FB80_00000F8C:
     mr r4, r31
     li r5, 0x1
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     b lbl_fn_8051FB80_000010BC
 lbl_fn_8051FB80_00000FAC:
     lwz r4, 0x19a8(r3)

@@ -62,7 +62,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void strcmp(void);
 extern void strncmp(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_806958E0(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -1403,7 +1403,7 @@ lbl_fn_80255458_0000111C:
 lbl_fn_80255458_00001124:
     frsp f2, f2
     lfs f1, 0x54(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x4c(r1)
 lbl_fn_80255458_00001138:
@@ -1482,7 +1482,7 @@ lbl_fn_80255458_00001248:
     b lbl_fn_80255458_00001268
 lbl_fn_80255458_00001254:
     lfs f1, 0x40(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x48(r1)

@@ -42,7 +42,7 @@ extern void fn_8020B1E0(void);
 extern void fn_8020B208(void);
 extern void fn_8020B27C(void);
 extern void fn_8021771C(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_80237518(void);
 extern void fn_802375C4(void);
 extern void fn_80237654(void);
@@ -52,7 +52,7 @@ extern void fn_8023780C(void);
 extern void fn_8023781C(void);
 extern void fn_80237874(void);
 extern void fn_8023A680(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void atn_LoadHandle_destructor(void);
 extern void printf(void);
 extern void rand(void);
@@ -937,7 +937,7 @@ lbl_fn_80184188_000009C4:
     stfs f4, 0x1c(r1)
     stfs f3, 0x20(r1)
     stfs f0, 0x24(r1)
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     li r0, 0x0
     stw r0, 0x8(r1)
     li r3, -0x1
@@ -1176,7 +1176,7 @@ asm void fn_801847C0(void)
     stw r11, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_801847C0_00000DA8:
     lwz r0, 0x44(r1)
     mtlr r0

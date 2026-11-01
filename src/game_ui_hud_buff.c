@@ -42,11 +42,11 @@ extern void fn_80201E78(void);
 extern void fn_80202118(void);
 extern void fn_80202A6C(void);
 extern void fn_80202D00(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_80237874(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_8023A02C(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void fn_8046ECDC(void);
 extern void fn_8046EED8(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -66,7 +66,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void fn_8068AE9C(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -525,7 +525,7 @@ lbl_fn_801CC4F4_00000580:
 lbl_fn_801CC4F4_00000588:
     fmr f2, f7
     lfs f1, 0x80(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_801CC4F4_0000059C:
@@ -604,7 +604,7 @@ lbl_fn_801CC4F4_000006AC:
     b lbl_fn_801CC4F4_000006CC
 lbl_fn_801CC4F4_000006B8:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -763,14 +763,14 @@ asm void fn_801CCD00(void)
     li r6, 0x1
     stw r0, 0xb8(r3)
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, 0x14b0(r31)
     subi r0, r3, 0x1
     cmplwi r0, 0x1
     bgt lbl_fn_801CCD00_00000998
     mr r3, r31
     li r4, 0x64
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80882998
     li r3, -0x1
     lfs f1, lbl_808829A0
@@ -795,7 +795,7 @@ asm void fn_801CCD00(void)
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r0, 0x14b0(r31)
     cmpwi r0, 0x1
     bne lbl_fn_801CCD00_00000998

@@ -40,7 +40,7 @@ extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
 extern void fn_800EDFE8(void);
 extern void fn_800EE360(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_80105BD8(void);
 extern void fn_8011BF94(void);
 extern void fn_8011CD84(void);
@@ -776,7 +776,7 @@ asm void fn_800EB270(void)
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_800EB270_000008DC
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r29)
 lbl_fn_800EB270_000008DC:
     cmpwi r30, 0xc8

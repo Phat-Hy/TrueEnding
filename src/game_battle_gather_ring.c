@@ -31,7 +31,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_800CB440(void);
 extern void fn_800CB5C8(void);
 extern void fn_800DC288(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_800FAB80(void);
 extern void fn_802180A8(void);
 extern void fn_80219E6C(void);
@@ -1175,7 +1175,7 @@ lbl_fn_803F2344_00000EFC:
     stw r0, -0x1c64(r3)
     lwz r29, lbl_8087F048
     mr r3, r29
-    bl fn_800F8548
+    bl system_getNextSequenceId
     mr r30, r3
     lwz r3, 0xa50(r31)
     bl fn_80219E6C

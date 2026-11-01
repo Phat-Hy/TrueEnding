@@ -57,7 +57,7 @@ extern void PSVECMag(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void swprintf(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_80695720(void);
 extern void fn_80695A50(void);
 extern char* strcpy(char* dest, const char* src);
@@ -573,7 +573,7 @@ lbl_fn_80427870_0000059C:
 lbl_fn_80427870_000005A4:
     frsp f2, f2
     lfs f1, 0x98(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x78(r1)
 lbl_fn_80427870_000005B8:
@@ -652,7 +652,7 @@ lbl_fn_80427870_000006C8:
     b lbl_fn_80427870_000006E8
 lbl_fn_80427870_000006D4:
     lfs f1, 0x6c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x74(r1)

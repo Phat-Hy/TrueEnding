@@ -33,7 +33,7 @@ extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DC6B4(void);
 extern void fn_800EC204(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_800FBA9C(void);
 extern void fn_800FBE70(void);
 extern void fn_80117228(void);
@@ -46,7 +46,7 @@ extern void fn_801F64D0(void);
 extern void fn_801FECE0(void);
 extern void fn_802375C4(void);
 extern void fn_8023781C(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_8032AB90(void);
 extern void fn_8032ABA4(void);
 extern void fn_8032AC1C(void);
@@ -69,8 +69,8 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 extern void fn_806959D8(void);
 
 /* External data declarations */
@@ -155,7 +155,7 @@ asm void fn_80467F50(void)
     stw r0, 0x14bc(r3)
     stw r0, 0x14c0(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
@@ -187,7 +187,7 @@ lbl_fn_80467F50_00000044:
     mr r4, r31
     li r5, 0x3e8
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lis r4, lbl_80755188@ha
     lfs f1, lbl_80886D8C
     addi r4, r4, lbl_80755188@l
@@ -386,7 +386,7 @@ lbl_fn_80468038_00000378:
 lbl_fn_80468038_00000380:
     frsp f2, f2
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_80468038_00000394:
@@ -465,7 +465,7 @@ lbl_fn_80468038_000004A4:
     b lbl_fn_80468038_000004C4
 lbl_fn_80468038_000004B0:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -666,7 +666,7 @@ lbl_fn_80468534_000006D8:
     ble lbl_fn_80468534_000007D4
     fadds f1, f23, f28
     lfd f2, lbl_80755098@l(r31)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f29, f1
     fcmpo cr0, f29, f23
     ble lbl_fn_80468534_000007B4

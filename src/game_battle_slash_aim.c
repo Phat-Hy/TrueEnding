@@ -29,11 +29,11 @@ extern void atn_LH_Texture_update(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
 extern void fn_802180A8(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_8023780C(void);
 extern void fn_80237874(void);
-extern void fn_80239DAC(void);
-extern void fn_8023A8B4(void);
+extern void res_findResourceSlot(void);
+extern void res_registerResource(void);
 extern void fn_803EC7A0(void);
 extern void fn_803ED0D4(void);
 extern void fn_803ED5D0(void);
@@ -1916,10 +1916,10 @@ lbl_fn_803F6448_00001A44:
     mr r4, r28
     li r5, 0x1
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     mr r3, r28
     li r4, 0x1
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80885FF0
     mulli r0, r30, 0xc
     lfs f1, lbl_80885FFC
@@ -1946,7 +1946,7 @@ lbl_fn_803F6448_00001A44:
     stw r12, 0x8(r1)
     stw r11, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     cmpwi r30, 0x0
     bne lbl_fn_803F6448_00001AEC
     cmpw r29, r30

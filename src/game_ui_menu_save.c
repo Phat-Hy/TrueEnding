@@ -14,7 +14,7 @@ extern void mem_free(void);
 extern void fn_8008BBD8(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800DC6B4(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
 extern void fn_800FAB80(void);
 extern void fn_800FB4B0(void);
@@ -55,8 +55,8 @@ extern void PSVECMag(void);
 extern void printf(void);
 extern void rand(void);
 extern void abort(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 
 /* External data declarations */
 extern u8 lbl_8073B3C8[];
@@ -305,7 +305,7 @@ lbl_fn_801BE630_0000029C:
     b lbl_fn_801BE630_000002B4
 lbl_fn_801BE630_000002A4:
     lfs f1, 0x22c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x5c(r1)
 lbl_fn_801BE630_000002B4:
@@ -384,7 +384,7 @@ lbl_fn_801BE630_000003C4:
     b lbl_fn_801BE630_000003E4
 lbl_fn_801BE630_000003D0:
     lfs f1, 0x68(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x58(r1)
@@ -510,7 +510,7 @@ lbl_fn_801BE630_00000588:
     psq_st f1, 0x0(r15), 0, 0
     mr r3, r16
     stfs f2, 0x210(r1)
-    bl fn_800F8548
+    bl system_getNextSequenceId
     li r0, -0x1
     stw r0, 0x8(r1)
     lis r8, lbl_807C7030@ha
@@ -570,7 +570,7 @@ lbl_fn_801BE630_00000670:
 lbl_fn_801BE630_00000678:
     frsp f2, f2
     lfs f1, 0x1a8(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x50(r1)
 lbl_fn_801BE630_0000068C:
@@ -649,7 +649,7 @@ lbl_fn_801BE630_0000079C:
     b lbl_fn_801BE630_000007BC
 lbl_fn_801BE630_000007A8:
     lfs f1, 0x44(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x4c(r1)
@@ -666,7 +666,7 @@ lbl_fn_801BE630_000007BC:
     fadds f1, f3, f0
     lfd f2, lbl_8073B428@l(r3)
     stfs f4, 0x54(r1)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f23, f1
     lfs f0, lbl_8088265C
     fcmpo cr0, f23, f0
@@ -1309,7 +1309,7 @@ lbl_fn_801BE630_00001174:
     psq_st f1, 0x0(r15), 0, 0
     mr r3, r17
     stfs f2, 0x1d4(r1)
-    bl fn_800F8548
+    bl system_getNextSequenceId
     mr r16, r3
     li r3, 0x17a1
     bl fn_80219E6C
@@ -1368,7 +1368,7 @@ lbl_fn_801BE630_00001260:
     bne lbl_fn_801BE630_000012A4
     lwz r16, lbl_8087F048
     mr r3, r16
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r15, 0x8(r1)
     mr r6, r3
     mr r3, r16

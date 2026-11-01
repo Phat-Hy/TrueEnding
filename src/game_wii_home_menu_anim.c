@@ -21,7 +21,7 @@ extern void quest_checkCondition(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014DEE4(void);
 extern void fn_8014EEC4(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_80239C14(void);
 extern void fn_80239C20(void);
 extern void fn_8023B71C(void);
@@ -40,7 +40,7 @@ extern void PSMTXTrans(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 
 /* External data declarations */
 extern u8 lbl_8075FF7C[];
@@ -564,7 +564,7 @@ lbl_fn_8056F5B8_00000688:
 lbl_fn_8056F5B8_00000690:
     frsp f2, f2
     lfs f1, 0x2c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_8056F5B8_000006A4:
@@ -639,7 +639,7 @@ lbl_fn_8056F5B8_000007A4:
     b lbl_fn_8056F5B8_000007C4
 lbl_fn_8056F5B8_000007B0:
     lfs f1, 0x54(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -1255,7 +1255,7 @@ lbl_fn_80570258_00001048:
     blt lbl_fn_80570258_00000FF4
     li r3, 0x0
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r3, lbl_8087F3C0
     li r4, 0x0
     bl fn_8023B71C
@@ -1407,7 +1407,7 @@ lbl_fn_805704B0_00001258:
     blt lbl_fn_805704B0_00001204
     li r3, 0x0
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r3, lbl_8087F3C0
     li r4, 0x0
     bl fn_8023B71C

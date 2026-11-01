@@ -25,8 +25,8 @@ extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 extern void fn_8068B100(void);
 extern void fn_80695AD0(void);
 
@@ -196,7 +196,7 @@ lbl_fn_801426A4_00000188:
 lbl_fn_801426A4_00000190:
     frsp f2, f2
     lfs f1, 0xa4(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x78(r1)
 lbl_fn_801426A4_000001A4:
@@ -275,7 +275,7 @@ lbl_fn_801426A4_000002B4:
     b lbl_fn_801426A4_000002D4
 lbl_fn_801426A4_000002C0:
     lfs f1, 0x6c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x74(r1)
@@ -1465,7 +1465,7 @@ lbl_fn_801437D0_000013F8:
 lbl_fn_801437D0_00001400:
     frsp f2, f2
     lfs f1, 0x5c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_801437D0_00001414:
@@ -1544,7 +1544,7 @@ lbl_fn_801437D0_00001524:
     b lbl_fn_801437D0_00001544
 lbl_fn_801437D0_00001530:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -1560,7 +1560,7 @@ lbl_fn_801437D0_00001544:
     fsubs f1, f4, f0
     lfd f2, 0x480(r31)
     stfs f3, 0x4c(r1)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80881A0C
     fcmpo cr0, f3, f0

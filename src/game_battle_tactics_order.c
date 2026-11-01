@@ -37,19 +37,19 @@ extern void fn_800CB6B0(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_800EF73C(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_800FAB80(void);
 extern void fn_8021823C(void);
 extern void fn_80219E6C(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_80237518(void);
 extern void fn_802375C4(void);
 extern void fn_802376D0(void);
 extern void fn_802377B8(void);
 extern void fn_80237874(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_8023A680(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void fn_803F1A38(void);
 extern void fn_805A38F4(void);
 extern void PSMTXRotRad(void);
@@ -1170,7 +1170,7 @@ lbl_fn_803F0764_00000D34:
     beq lbl_fn_803F0764_00000D8C
     mr r3, r15
     mr r4, r19
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r0, 0xc(r23)
     mr r7, r17
     lwz r4, 0xc(r15)
@@ -1208,7 +1208,7 @@ lbl_fn_803F0764_00000D8C:
     lfs f2, 0x80(r16)
     stfs f2, 0xa4(r1)
     psq_st f1, 0x0(r5), 0, 0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r0, 0xc(r23)
     addi r9, r1, 0x9c
     lwz r4, 0xc(r15)
@@ -1246,7 +1246,7 @@ lbl_fn_803F0764_00000E38:
 lbl_fn_803F0764_00000E58:
     mr r3, r15
     mr r4, r19
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r0, 0xc(r23)
     mr r5, r20
     lfs f1, 0x1c(r23)
@@ -1265,7 +1265,7 @@ lbl_fn_803F0764_00000E58:
     stfs f31, 0x2c(r1)
     stw r28, 0x8(r1)
     stw r29, 0xc(r1)
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r0, 0x8(r23)
     cmpwi r0, 0x2
     bne lbl_fn_803F0764_00000EC8
@@ -1591,7 +1591,7 @@ lbl_fn_803F0764_00001328:
     cmpwi r3, 0x0
     ble lbl_fn_803F0764_0000139C
     mr r3, r21
-    bl fn_800F8548
+    bl system_getNextSequenceId
     mr r30, r3
     mr r3, r17
     bl fn_80219E6C
@@ -1665,7 +1665,7 @@ lbl_fn_803F10AC_00001440:
     lwz r5, 0x28(r31)
     mr r4, r31
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
 lbl_fn_803F10AC_0000145C:
     li r29, 0x0
     li r30, 0x0
@@ -1697,7 +1697,7 @@ lbl_fn_803F10AC_000014AC:
     lwz r5, 0x28(r31)
     mr r4, r31
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
 lbl_fn_803F10AC_000014C8:
     li r29, 0x0
     li r30, 0x0

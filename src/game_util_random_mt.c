@@ -48,7 +48,7 @@ extern void PSVECDotProduct(void);
 extern void strstr(void);
 extern void atoi(void);
 extern void fn_8068A850(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -1582,7 +1582,7 @@ lbl_fn_805A4258_000013B0:
 lbl_fn_805A4258_000013B8:
     frsp f2, f2
     lfs f1, 0x5c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_805A4258_000013CC:
@@ -1661,7 +1661,7 @@ lbl_fn_805A4258_000014DC:
     b lbl_fn_805A4258_000014FC
 lbl_fn_805A4258_000014E8:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)

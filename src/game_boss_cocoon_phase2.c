@@ -51,7 +51,7 @@ extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
 extern void fn_800EDFE8(void);
 extern void fn_800F29D0(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_8010F668(void);
 extern void fn_80121F00(void);
 extern void magic_getOffset6C(void);
@@ -207,7 +207,7 @@ asm void fn_8045ECC4(void)
     stw r31, 0x14bc(r3)
     stw r31, 0x14c0(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r30)
     mr r3, r30
     lwz r12, 0x0(r30)

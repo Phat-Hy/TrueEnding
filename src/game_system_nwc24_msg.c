@@ -65,7 +65,7 @@ extern void PSVECMag(void);
 extern void PSVECCrossProduct(void);
 extern void fn_8068A4A8(void);
 extern void fn_8068AE24(void);
-extern void fn_8068AEA8(void);
+extern void std_fmod(void);
 
 /* External data declarations */
 extern u8 lbl_8074E008[];
@@ -784,7 +784,7 @@ lbl_fn_80387DE4_000009B4:
     lis r3, lbl_8074E010@ha
     lfd f2, lbl_8074E010@l(r3)
     fneg f1, f0
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_808858EC
     fcmpo cr0, f3, f0
@@ -802,7 +802,7 @@ lbl_fn_80387DE4_00000A08:
     lis r3, lbl_8074E010@ha
     lfd f2, lbl_8074E010@l(r3)
     fsubs f1, f0, f3
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_808858EC
     fcmpo cr0, f3, f0
@@ -824,7 +824,7 @@ lbl_fn_80387DE4_00000A48:
     fmuls f0, f0, f30
     stfs f0, 0x96c(r30)
     fadds f1, f0, f3
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f4, f1
     lfs f0, lbl_808858EC
     fcmpo cr0, f4, f0
@@ -928,7 +928,7 @@ lbl_fn_80387DE4_00000BB8:
     lis r3, lbl_8074E010@ha
     lfd f2, lbl_8074E010@l(r3)
     fadds f1, f0, f3
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_808858EC
     fcmpo cr0, f3, f0

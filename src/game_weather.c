@@ -17,7 +17,7 @@ extern void fn_800C31F4(void);
 extern void fn_800C344C(void);
 extern void ref_releaseHandle(void);
 extern void fn_800E8FB8(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
 extern void fn_800FAB80(void);
 extern void fn_800FFE68(void);
@@ -71,7 +71,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
-extern void fn_8068AEA8(void);
+extern void std_fmod(void);
 
 /* External data declarations */
 extern u8 lbl_80735238[];
@@ -287,7 +287,7 @@ lbl_fn_800E7214_000001FC:
     lfs f0, 0x538(r30)
     lfd f2, lbl_80735258@l(r3)
     fsubs f1, f1, f0
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f1, f1
     lfs f0, lbl_8088131C
     fcmpo cr0, f1, f0
@@ -1255,7 +1255,7 @@ lbl_fn_800E7F04_00000FC8:
     beq lbl_fn_800E7F04_00001358
     lwz r16, lbl_8087F048
     mr r3, r16
-    bl fn_800F8548
+    bl system_getNextSequenceId
     li r0, -0x1
     stw r0, 0x8(r1)
     lfs f1, lbl_808812DC
@@ -1381,7 +1381,7 @@ lbl_fn_800E7F04_00001184:
     li r21, 0x7
 lbl_fn_800E7F04_000011A0:
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lis r4, lbl_80735250@ha
     lfs f27, lbl_808812DC
     lfs f28, lbl_808812E4
@@ -1765,7 +1765,7 @@ asm void fn_800E8688(void)
     stfs f0, 0x9c(r1)
     bl PSVECNormalize
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lfs f0, lbl_808812D8
     lis r5, lbl_80735324@ha
     li r0, 0x1
@@ -1821,7 +1821,7 @@ lbl_fn_800E8688_000017C4:
     stfs f0, 0x90(r1)
     bl PSVECNormalize
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lfs f0, lbl_808812D8
     lis r5, lbl_80735324@ha
     li r0, 0x1
@@ -2164,7 +2164,7 @@ lbl_fn_800E8688_00001CEC:
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_800E8688_00001D08
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r23)
 lbl_fn_800E8688_00001D08:
     lwz r0, 0x12a4(r23)

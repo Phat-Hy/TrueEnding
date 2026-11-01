@@ -58,7 +58,7 @@ extern void fn_80237518(void);
 extern void fn_802377B8(void);
 extern void fn_8023780C(void);
 extern void fn_80239798(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void world_setLocalFlag(void);
 extern void fn_8037C8C4(void);
 extern void fn_803E836C(void);
@@ -2672,7 +2672,7 @@ lbl_fn_804D0328_000022C0:
     mr r4, r29
     li r5, 0x0
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lis r4, lbl_80759E48@ha
     addis r3, r29, 0x1
     addi r4, r4, lbl_80759E48@l

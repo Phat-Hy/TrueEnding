@@ -12,7 +12,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C31F4(void);
 extern void fn_800C344C(void);
 extern void ref_releaseHandle(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_80101524(void);
 extern void fn_801076D0(void);
 extern void fn_80107798(void);
@@ -36,7 +36,7 @@ extern void PSVECNormalize(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_80695B00(void);
 
 /* External data declarations */
@@ -265,7 +265,7 @@ lbl_fn_8018E5BC_000001BC:
     cmpw r0, r3
     bge lbl_fn_8018E5BC_0000021C
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x1c(r29)
     mr r3, r29
     lwz r12, 0x0(r29)
@@ -398,7 +398,7 @@ lbl_fn_8018E5BC_000003D8:
 lbl_fn_8018E5BC_000003E0:
     frsp f2, f2
     lfs f1, 0x58(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x50(r1)
 lbl_fn_8018E5BC_000003F4:
@@ -477,7 +477,7 @@ lbl_fn_8018E5BC_00000504:
     b lbl_fn_8018E5BC_00000524
 lbl_fn_8018E5BC_00000510:
     lfs f1, 0x44(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x4c(r1)

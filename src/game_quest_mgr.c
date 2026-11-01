@@ -32,8 +32,8 @@ extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 extern void fn_8068B100(void);
 extern void fn_80695AD0(void);
 
@@ -198,7 +198,7 @@ asm void fn_80140588(void)
     stfs f2, 0x108(r1)
     fsubs f1, f3, f0
     lfd f2, lbl_80737810@l(r5)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80881A0C
     fcmpo cr0, f3, f0
@@ -1128,7 +1128,7 @@ lbl_fn_80140588_00000EA0:
     b lbl_fn_80140588_00000EB8
 lbl_fn_80140588_00000EA8:
     lfs f1, 0x98(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0xc(r1)
 lbl_fn_80140588_00000EB8:
@@ -1207,7 +1207,7 @@ lbl_fn_80140588_00000FC8:
     b lbl_fn_80140588_00000FE8
 lbl_fn_80140588_00000FD4:
     lfs f1, 0x18(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x8(r1)
@@ -1224,7 +1224,7 @@ lbl_fn_80140588_00000FE8:
     fsubs f1, f3, f0
     lfd f2, lbl_80737810@l(r3)
     stfs f4, 0x10(r1)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f6, f1
     lfs f0, lbl_80881A0C
     fcmpo cr0, f6, f0
@@ -1769,7 +1769,7 @@ lbl_fn_80141674_000017C8:
 lbl_fn_80141674_000017D0:
     frsp f2, f2
     lfs f1, 0xd8(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x60(r1)
 lbl_fn_80141674_000017E4:
@@ -1848,7 +1848,7 @@ lbl_fn_80141674_000018F4:
     b lbl_fn_80141674_00001914
 lbl_fn_80141674_00001900:
     lfs f1, 0x54(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x5c(r1)
@@ -1863,7 +1863,7 @@ lbl_fn_80141674_00001914:
     lfs f1, 0xdc(r1)
     lfd f2, lbl_80737810@l(r3)
     stfs f0, 0x64(r1)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80881A0C
     fcmpo cr0, f3, f0

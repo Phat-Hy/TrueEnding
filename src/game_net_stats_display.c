@@ -16,7 +16,7 @@ extern void fn_800DC880(void);
 extern void fn_800E2DD4(void);
 extern void fn_800E2FE0(void);
 extern void fn_800E854C(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_800FAB80(void);
 extern void fn_80105BD8(void);
 extern void fn_8012D8B8(void);
@@ -35,7 +35,7 @@ extern void fn_8016DDB0(void);
 extern void fn_8016E4C4(void);
 extern void fn_8016EB48(void);
 extern void fn_80219E6C(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_80237518(void);
 extern void fn_802375C4(void);
 extern void fn_80237654(void);
@@ -44,7 +44,7 @@ extern void fn_802377B8(void);
 extern void fn_8023780C(void);
 extern void fn_8023781C(void);
 extern void fn_80237874(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_8023A184(void);
 extern void fn_8023A680(void);
 extern void fn_8035B694(void);
@@ -65,7 +65,7 @@ extern void printf(void);
 extern void rand(void);
 extern void abort(void);
 extern void fn_8068A850(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 
 /* External data declarations */
 extern u8 lbl_8075E148[];
@@ -676,10 +676,10 @@ lbl_fn_8054622C_000006B4:
     fadds f0, f3, f0
     lwz r3, lbl_8087F3C0
     stfs f0, 0x60(r1)
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r18, lbl_8087F048
     mr r3, r18
-    bl fn_800F8548
+    bl system_getNextSequenceId
     mr r17, r3
     li r3, 0x7f1
     bl fn_80219E6C
@@ -956,7 +956,7 @@ lbl_fn_8054622C_00000BC0:
     stfs f3, 0x2c(r1)
     stfs f3, 0x30(r1)
     stfs f0, 0x34(r1)
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     li r18, 0x0
     stw r18, 0x8(r1)
     li r0, -0x1
@@ -1447,7 +1447,7 @@ lbl_fn_80546B88_000012D4:
     addi r4, r18, 0x14b8
     li r5, 0x0
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, 0x14dc(r18)
     li r4, 0x1
     lwz r12, 0x0(r3)
@@ -1499,7 +1499,7 @@ lbl_fn_80546B88_000012D4:
     bl fn_80145334
     li r3, 0x0
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     stw r19, 0x8(r1)
     li r0, -0x1
     lfs f1, lbl_80887CE4
@@ -1578,7 +1578,7 @@ lbl_fn_80546B88_000014DC:
 lbl_fn_80546B88_000014E4:
     frsp f2, f2
     lfs f1, 0x78(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x64(r1)
 lbl_fn_80546B88_000014F8:
@@ -1657,7 +1657,7 @@ lbl_fn_80546B88_00001608:
     b lbl_fn_80546B88_00001628
 lbl_fn_80546B88_00001614:
     lfs f1, 0x58(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x60(r1)

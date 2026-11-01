@@ -40,7 +40,7 @@ extern void fn_802377B8(void);
 extern void fn_8023780C(void);
 extern void fn_8023781C(void);
 extern void fn_80237874(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void world_setLocalFlag(void);
 extern void fn_803EC568(void);
 extern void fn_803EC69C(void);
@@ -1242,7 +1242,7 @@ lbl_fn_8042EDF4_00000E60:
     stw r0, 0x8(r1)
     stw r31, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_8042EDF4_00000F04:
     lwz r3, 0x54(r30)
 lbl_fn_8042EDF4_00000F08:

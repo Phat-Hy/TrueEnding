@@ -36,9 +36,9 @@ extern void fn_800D3FA4(void);
 extern void fn_80117914(void);
 extern void fn_80124C6C(void);
 extern void fn_801F48C8(void);
-extern void fn_80232B7C(void);
-extern void fn_80239DAC(void);
-extern void fn_8023A8B4(void);
+extern void sound_initGlobalInstances(void);
+extern void res_findResourceSlot(void);
+extern void res_registerResource(void);
 extern void fn_80364E7C(void);
 extern void fn_8036503C(void);
 extern void fn_80365320(void);
@@ -257,7 +257,7 @@ asm void fn_80533BE0(void)
     addi r0, r3, 0x348
     stw r0, 0x3e8(r3)
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80887BB4
     li r3, -0x1
     lfs f1, lbl_80887BB8
@@ -282,7 +282,7 @@ asm void fn_80533BE0(void)
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     li r0, 0x0
     stw r0, 0x2c0(r31)
     lwz r3, 0x48(r31)
@@ -1119,10 +1119,10 @@ lbl_spectateCamera_update_00000F08:
     mr r4, r28
     li r5, 0x0
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     mr r3, r28
     li r4, 0x1
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80887BB4
     li r11, -0x1
     lfs f1, lbl_80887BB8
@@ -1147,7 +1147,7 @@ lbl_spectateCamera_update_00000F08:
     stfs f1, 0x11c(r1)
     stw r11, 0x8(r1)
     stw r0, 0xc(r1)
-    bl fn_8023A8B4
+    bl res_registerResource
     b lbl_spectateCamera_update_00001050
 lbl_spectateCamera_update_00000F90:
     lwz r3, 0x4c(r28)

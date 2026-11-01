@@ -26,8 +26,8 @@ extern void fn_801789D8(void);
 extern void fn_80211480(void);
 extern void fn_80219558(void);
 extern void fn_8021E48C(void);
-extern void fn_80232B7C(void);
-extern void fn_8023A8B4(void);
+extern void sound_initGlobalInstances(void);
+extern void res_registerResource(void);
 extern void fn_803761BC(void);
 extern void fn_803E5E64(void);
 extern void fn_80444020(void);
@@ -40,7 +40,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void rand(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 
 /* External data declarations */
 extern u8 lbl_80735DD0[];
@@ -1463,7 +1463,7 @@ lbl_fn_8010CF28_000011A0:
     beq lbl_fn_8010CF28_000012A8
     li r3, 0x0
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     li r0, -0x1
     stw r0, 0x8(r1)
     li r0, 0x1
@@ -1478,7 +1478,7 @@ lbl_fn_8010CF28_000011A0:
     addi r9, r1, 0x20
     li r6, 0x0
     li r10, -0x1
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_8010CF28_000012A8:
     addi r28, r31, 0x528
     li r3, 0x2331
@@ -1617,7 +1617,7 @@ lbl_fn_8010D320_0000148C:
 lbl_fn_8010D320_00001494:
     frsp f2, f2
     lfs f1, 0x68(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_8010D320_000014A8:
@@ -1696,7 +1696,7 @@ lbl_fn_8010D320_000015B8:
     b lbl_fn_8010D320_000015D8
 lbl_fn_8010D320_000015C4:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)

@@ -31,8 +31,8 @@ extern void fn_80219E6C(void);
 extern void fn_8021A7A0(void);
 extern void fn_8021A9CC(void);
 extern void fn_8021AA48(void);
-extern void fn_80232B7C(void);
-extern void fn_8023A8B4(void);
+extern void sound_initGlobalInstances(void);
+extern void res_registerResource(void);
 extern void fn_80491D50(void);
 extern void fn_8059B670(void);
 extern void PSMTXRotRad(void);
@@ -1032,7 +1032,7 @@ asm void fn_800FB1BC(void)
     li r3, 0x0
     li r4, 0x0
     stw r25, 0xc4(r5)
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r3, lbl_8087F3C0
     li r0, -0x1
     lis r8, lbl_807C7030@ha
@@ -1046,7 +1046,7 @@ asm void fn_800FB1BC(void)
     li r5, 0x0
     li r6, 0x0
     li r10, -0x1
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r3, lbl_8087F3C0
     li r0, 0x0
     stw r0, 0xc4(r3)
@@ -1335,7 +1335,7 @@ lbl_fn_800FB4B0_00001148:
     beq lbl_fn_800FB4B0_000011E4
     li r3, 0x0
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     stw r21, 0x8(r1)
     addi r7, r19, lbl_807C7030@l
     lfs f1, lbl_80881494
@@ -1347,7 +1347,7 @@ lbl_fn_800FB4B0_00001148:
     lwz r3, lbl_8087F3C0
     li r6, 0x0
     li r10, -0x1
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_800FB4B0_000011E4:
     lwz r30, 0x14ac(r30)
 lbl_fn_800FB4B0_000011E8:
@@ -1457,7 +1457,7 @@ lbl_fn_800FB4B0_00001310:
     beq lbl_fn_800FB4B0_000013AC
     li r3, 0x0
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     stw r19, 0x8(r1)
     addi r7, r21, lbl_807C7030@l
     lfs f1, lbl_80881494
@@ -1469,7 +1469,7 @@ lbl_fn_800FB4B0_00001310:
     lwz r3, lbl_8087F3C0
     li r6, 0x0
     li r10, -0x1
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_800FB4B0_000013AC:
     lwz r30, 0x14ac(r30)
 lbl_fn_800FB4B0_000013B0:
@@ -1491,7 +1491,7 @@ lbl_fn_800FB4B0_000013B0:
     beq lbl_fn_800FB4B0_00001434
     li r3, 0x0
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     li r0, -0x1
     stw r0, 0x8(r1)
     li r0, 0x1
@@ -1505,7 +1505,7 @@ lbl_fn_800FB4B0_000013B0:
     li r5, 0x0
     li r6, 0x0
     li r10, -0x1
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_800FB4B0_00001434:
     lwz r3, 0xb0(r24)
     addi r17, r23, 0x528

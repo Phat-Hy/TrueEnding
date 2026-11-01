@@ -16,10 +16,10 @@ extern void fn_800C344C(void);
 extern void ref_releaseHandle(void);
 extern void fn_800FFE68(void);
 extern void fn_801055A8(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_8023A614(void);
 extern void fn_8023A680(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
@@ -1325,7 +1325,7 @@ lbl_fn_80101434_00001194:
     li r4, 0x0
     subf r0, r0, r5
     srwi r28, r0, 31
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     cmpwi r28, 0x0
     beq lbl_fn_80101434_000011C8
     lwz r3, lbl_8087F3C0
@@ -1396,7 +1396,7 @@ lbl_fn_80101524_0000129C:
     beq lbl_fn_80101524_000012F4
     mr r3, r26
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     li r0, 0x0
     stw r0, 0x8(r1)
     li r0, -0x1
@@ -1419,7 +1419,7 @@ lbl_fn_80101524_000012F4:
     beq lbl_fn_80101524_0000134C
     mr r3, r26
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     li r0, 0x0
     stw r0, 0x8(r1)
     li r0, -0x1
@@ -1442,7 +1442,7 @@ lbl_fn_80101524_0000134C:
     beq lbl_fn_80101524_000013A4
     mr r3, r26
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     li r0, 0x0
     stw r0, 0x8(r1)
     li r0, -0x1
@@ -1467,7 +1467,7 @@ lbl_fn_80101524_000013A4:
     beq lbl_fn_80101524_00001440
     mr r3, r26
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f1, lbl_80881478
     rlwinm. r0, r31, 0, 12, 12
     lfs f0, lbl_80881494
@@ -1501,7 +1501,7 @@ lbl_fn_80101524_00001424:
     addi r9, r1, 0x50
     li r6, 0x0
     li r10, -0x1
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_80101524_00001440:
     lis r3, 0xfe60
     subi r3, r3, 0x1821

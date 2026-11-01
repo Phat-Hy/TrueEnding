@@ -21,7 +21,7 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC288(void);
 extern void fn_800E41FC(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
 extern void fn_800FAB80(void);
 extern void fn_80103F60(void);
@@ -42,11 +42,11 @@ extern void actor_setState(void);
 extern void fn_80176548(void);
 extern void fn_80176ACC(void);
 extern void fn_80219E6C(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_802377B8(void);
 extern void fn_8023780C(void);
 extern void fn_80237874(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -67,8 +67,8 @@ extern void PSVECSquareMag(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void atoi(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -1091,7 +1091,7 @@ lbl_fn_803067E0_00000D24:
 lbl_fn_803067E0_00000D2C:
     frsp f2, f2
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_803067E0_00000D40:
@@ -1170,7 +1170,7 @@ lbl_fn_803067E0_00000E50:
     b lbl_fn_803067E0_00000E70
 lbl_fn_803067E0_00000E5C:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -1389,7 +1389,7 @@ lbl_fn_80306B40_00001160:
     bl fn_805A4F20
 lbl_fn_80306B40_0000117C:
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lwz r0, 0x14cc(r31)
     stw r3, 0x14c8(r31)
     oris r0, r0, 0x1000
@@ -1435,7 +1435,7 @@ lbl_fn_80306B40_0000117C:
     stfs f0, 0x1554(r31)
     bl fn_805A4F20
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lwz r0, 0x14cc(r31)
     stw r3, 0x14c8(r31)
     oris r0, r0, 0x1000
@@ -2057,7 +2057,7 @@ lbl_fn_803073C4_00001B04:
 lbl_fn_803073C4_00001B0C:
     frsp f2, f2
     lfs f1, 0x278(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x1c8(r1)
 lbl_fn_803073C4_00001B20:
@@ -2136,7 +2136,7 @@ lbl_fn_803073C4_00001C30:
     b lbl_fn_803073C4_00001C50
 lbl_fn_803073C4_00001C3C:
     lfs f1, 0x1bc(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x1c4(r1)
@@ -2184,7 +2184,7 @@ lbl_fn_803073C4_00001CDC:
 lbl_fn_803073C4_00001CE4:
     frsp f2, f2
     lfs f1, 0x260(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x180(r1)
 lbl_fn_803073C4_00001CF8:
@@ -2263,7 +2263,7 @@ lbl_fn_803073C4_00001E08:
     b lbl_fn_803073C4_00001E28
 lbl_fn_803073C4_00001E14:
     lfs f1, 0x174(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x17c(r1)
@@ -2367,7 +2367,7 @@ lbl_fn_803073C4_00001F90:
 lbl_fn_803073C4_00001F98:
     frsp f2, f2
     lfs f1, 0x254(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x138(r1)
 lbl_fn_803073C4_00001FAC:
@@ -2446,7 +2446,7 @@ lbl_fn_803073C4_000020BC:
     b lbl_fn_803073C4_000020DC
 lbl_fn_803073C4_000020C8:
     lfs f1, 0x12c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x134(r1)
@@ -2504,7 +2504,7 @@ lbl_fn_803073C4_0000216C:
     bl atn_Anim_setLayerAnimation
     addi r3, r24, 0x152c
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80884B20
     li r3, -0x1
     lfs f1, lbl_80884B38
@@ -2529,7 +2529,7 @@ lbl_fn_803073C4_0000216C:
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r3, 0x14bc(r24)
     addi r0, r3, 0x1
     stw r0, 0x14bc(r24)
@@ -2846,7 +2846,7 @@ lbl_fn_803073C4_000026AC:
 lbl_fn_803073C4_000026B4:
     frsp f2, f2
     lfs f1, 0x218(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0xc8(r1)
 lbl_fn_803073C4_000026C8:
@@ -2925,7 +2925,7 @@ lbl_fn_803073C4_000027D8:
     b lbl_fn_803073C4_000027F8
 lbl_fn_803073C4_000027E4:
     lfs f1, 0xbc(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0xc4(r1)
@@ -3169,7 +3169,7 @@ lbl_fn_803073C4_00002B80:
 lbl_fn_803073C4_00002B88:
     frsp f2, f2
     lfs f1, 0x1e8(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x80(r1)
 lbl_fn_803073C4_00002B9C:
@@ -3248,7 +3248,7 @@ lbl_fn_803073C4_00002CAC:
     b lbl_fn_803073C4_00002CCC
 lbl_fn_803073C4_00002CB8:
     lfs f1, 0x74(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x7c(r1)
@@ -3265,7 +3265,7 @@ lbl_fn_803073C4_00002CCC:
     fsubs f1, f3, f0
     lfd f2, lbl_80748CF0@l(r3)
     stfs f4, 0x84(r1)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f4, f1
     lfs f0, lbl_80884B4C
     fcmpo cr0, f4, f0
@@ -3329,7 +3329,7 @@ lbl_fn_803073C4_00002D50:
     lfs f0, 0x538(r3)
     lfd f2, lbl_80748CF0@l(r4)
     fsubs f1, f3, f0
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f4, f1
     lfs f0, lbl_80884B4C
     fcmpo cr0, f4, f0
@@ -3479,7 +3479,7 @@ lbl_fn_803073C4_00002F4C:
     bctrl
     mr r3, r26
     mr r4, r27
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     stfs f31, 0x20(r1)
     fmr f1, f28
     addi r4, r24, 0x163c
@@ -3501,7 +3501,7 @@ lbl_fn_803073C4_00002F4C:
     stw r22, 0x8(r1)
     stw r21, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_803073C4_00003070:
     addi r27, r27, 0x1
     addi r23, r23, 0x8

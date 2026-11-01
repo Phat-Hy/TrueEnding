@@ -32,7 +32,7 @@ extern void fn_80477FF8(void);
 extern void fn_80478014(void);
 extern void fn_80478034(void);
 extern void PSVECNormalize(void);
-extern void fn_8068AEA8(void);
+extern void std_fmod(void);
 extern void fn_806952C4(void);
 extern void fn_80695720(void);
 extern void fn_80695A50(void);
@@ -624,7 +624,7 @@ asm void fn_800C18BC(void)
     stfs f3, 0x4(r3)
     lfd f2, lbl_807337A8@l(r4)
     stfs f0, 0x8(r3)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f1, f1
     lfs f0, lbl_808810D4
     fcmpo cr0, f1, f0

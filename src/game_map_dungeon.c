@@ -36,7 +36,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void fn_8068AE9C(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 
 /* External data declarations */
 extern u8 lbl_807380D8[];
@@ -199,7 +199,7 @@ lbl_fn_8017E9D8_000001A0:
     stfs f0, 0x54(r1)
     b lbl_fn_8017E9D8_000001B4
 lbl_fn_8017E9D8_000001A8:
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x54(r1)
 lbl_fn_8017E9D8_000001B4:
@@ -278,7 +278,7 @@ lbl_fn_8017E9D8_000002C4:
     b lbl_fn_8017E9D8_000002E4
 lbl_fn_8017E9D8_000002D0:
     lfs f1, 0x60(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x50(r1)
@@ -345,7 +345,7 @@ lbl_fn_8017E9D8_000003BC:
 lbl_fn_8017E9D8_000003C4:
     frsp f2, f2
     lfs f1, 0x98(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_8017E9D8_000003D8:
@@ -424,7 +424,7 @@ lbl_fn_8017E9D8_000004E8:
     b lbl_fn_8017E9D8_00000508
 lbl_fn_8017E9D8_000004F4:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -1582,7 +1582,7 @@ lbl_fn_8017FED0_000015D4:
 lbl_fn_8017FED0_000015DC:
     frsp f2, f2
     lfs f1, 0xb0(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x9c(r1)
 lbl_fn_8017FED0_000015F0:
@@ -1661,7 +1661,7 @@ lbl_fn_8017FED0_00001700:
     b lbl_fn_8017FED0_00001720
 lbl_fn_8017FED0_0000170C:
     lfs f1, 0x90(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x98(r1)
@@ -1771,7 +1771,7 @@ lbl_fn_8017FED0_00001894:
 lbl_fn_8017FED0_0000189C:
     fmr f2, f4
     lfs f1, 0xa4(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_8017FED0_000018B0:
@@ -1850,7 +1850,7 @@ lbl_fn_8017FED0_000019C0:
     b lbl_fn_8017FED0_000019E0
 lbl_fn_8017FED0_000019CC:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)

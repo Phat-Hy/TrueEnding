@@ -45,7 +45,7 @@ extern void PSVECSquareMag(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_80695B00(void);
 
 /* External data declarations */
@@ -1567,7 +1567,7 @@ lbl_fn_80191170_000013D0:
 lbl_fn_80191170_000013D8:
     frsp f2, f2
     lfs f1, 0x74(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_80191170_000013EC:
@@ -1646,7 +1646,7 @@ lbl_fn_80191170_000014FC:
     b lbl_fn_80191170_0000151C
 lbl_fn_80191170_00001508:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)

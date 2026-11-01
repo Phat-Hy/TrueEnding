@@ -30,7 +30,7 @@ extern void fn_80219558(void);
 extern void fn_80228AF4(void);
 extern void fn_80228AF8(void);
 extern void fn_80228CA0(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_803B3B38(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
@@ -1450,7 +1450,7 @@ asm void fn_805638C0(void)
     mr r4, r28
     li r5, 0x0
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
 lbl_fn_805638C0_00001058:
     addic. r0, r28, 0x430
     li r3, 0x0

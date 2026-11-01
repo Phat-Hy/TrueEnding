@@ -33,7 +33,7 @@ extern void PSVECCrossProduct(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_80695B00(void);
 
 /* External data declarations */
@@ -1448,7 +1448,7 @@ lbl_fn_80192948_000011EC:
 lbl_fn_80192948_000011F4:
     frsp f2, f2
     lfs f1, 0xec(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x90(r1)
 lbl_fn_80192948_00001208:
@@ -1527,7 +1527,7 @@ lbl_fn_80192948_00001318:
     b lbl_fn_80192948_00001338
 lbl_fn_80192948_00001324:
     lfs f1, 0x84(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x8c(r1)
@@ -1635,7 +1635,7 @@ lbl_fn_80192948_000014A8:
 lbl_fn_80192948_000014B0:
     frsp f2, f2
     lfs f1, 0xb0(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_80192948_000014C4:
@@ -1714,7 +1714,7 @@ lbl_fn_80192948_000015D4:
     b lbl_fn_80192948_000015F4
 lbl_fn_80192948_000015E0:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)

@@ -66,7 +66,7 @@ extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
 extern void GXSetZMode(void);
 extern void GXLoadTexMtxImm(void);
-extern void fn_8068AEB0(void);
+extern void std_pow(void);
 extern void fn_80695720(void);
 
 /* External data declarations */
@@ -1366,11 +1366,11 @@ lbl_fn_800AFFEC_000011D4:
     lfd f0, 0x50(r1)
     fsubs f27, f0, f31
     fmr f1, f27
-    bl fn_8068AEB0
+    bl std_pow
     frsp f29, f1
     lfs f2, 0x9c(r28)
     fmr f1, f27
-    bl fn_8068AEB0
+    bl std_pow
     frsp f1, f1
     addi r29, r29, 0x1
     fadds f0, f30, f29

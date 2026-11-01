@@ -27,7 +27,7 @@ extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
 extern void printf(void);
 extern void abort(void);
-extern void fn_8068AEA8(void);
+extern void std_fmod(void);
 
 /* External data declarations */
 extern u8 lbl_80749B00[];
@@ -182,7 +182,7 @@ lbl_fn_8032A3D4_000000F4:
     ble lbl_fn_8032A3D4_000001F0
     fadds f1, f23, f28
     lfd f2, lbl_80749B78@l(r31)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f29, f1
     fcmpo cr0, f29, f23
     ble lbl_fn_8032A3D4_000001D0

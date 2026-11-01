@@ -38,7 +38,7 @@ extern void printf(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void abort(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_80695720(void);
 extern void fn_80695B00(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -976,7 +976,7 @@ lbl_fn_803098D0_00000C9C:
 lbl_fn_803098D0_00000CA4:
     fmr f2, f4
     lfs f1, 0x0(r30)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x2c(r1)
 lbl_fn_803098D0_00000CB8:
@@ -1055,7 +1055,7 @@ lbl_fn_803098D0_00000DC8:
     b lbl_fn_803098D0_00000DE8
 lbl_fn_803098D0_00000DD4:
     lfs f1, 0x38(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x28(r1)

@@ -14,7 +14,7 @@ extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
 extern void fn_80375B78(void);
 extern void rand(void);
-extern void fn_8068AEB0(void);
+extern void std_pow(void);
 
 /* External data declarations */
 extern u8 jumptable_8077A6B8[];
@@ -387,7 +387,7 @@ lbl_fn_801334CC_000003EC:
     lfd f2, lbl_80737340@l(r3)
     lfd f0, 0x8(r1)
     fsubs f1, f0, f1
-    bl fn_8068AEB0
+    bl std_pow
     frsp f1, f1
     lfs f0, lbl_80881908
     fmuls f0, f0, f1
@@ -475,7 +475,7 @@ lbl_fn_8013354C_00000524:
     lfd f0, 0x288(r1)
     lfd f2, lbl_80737340@l(r3)
     fsubs f1, f0, f1
-    bl fn_8068AEB0
+    bl std_pow
     frsp f1, f1
     lfs f0, lbl_80881908
     fmuls f0, f0, f1
@@ -522,7 +522,7 @@ lbl_fn_8013354C_000005DC:
     lfd f2, lbl_80737340@l(r27)
     lfd f0, 0x280(r1)
     fsubs f1, f0, f30
-    bl fn_8068AEB0
+    bl std_pow
     frsp f0, f1
     fmuls f0, f31, f0
     fctiwz f0, f0

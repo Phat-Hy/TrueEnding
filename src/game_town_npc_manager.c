@@ -45,7 +45,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
 extern void fn_8068A850(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 
 /* External data declarations */
 extern u8 jumptable_8078BBE0[];
@@ -1008,7 +1008,7 @@ lbl_fn_803CB820_00000D44:
 lbl_fn_803CB820_00000D4C:
     frsp f2, f2
     lfs f1, 0xec(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_803CB820_00000D60:
@@ -1087,7 +1087,7 @@ lbl_fn_803CB820_00000E70:
     b lbl_fn_803CB820_00000E90
 lbl_fn_803CB820_00000E7C:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)

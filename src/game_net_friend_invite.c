@@ -56,12 +56,12 @@ extern void fn_80206B14(void);
 extern void fn_8020A3E4(void);
 extern void fn_8020A81C(void);
 extern void fn_8020ED84(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_802375C4(void);
 extern void fn_8023781C(void);
 extern void fn_80237874(void);
 extern void fn_80239798(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_80244CA0(void);
 extern void fn_80244CAC(void);
 extern void fn_8026607C(void);
@@ -1668,7 +1668,7 @@ asm void fn_804D250C(void)
     beq lbl_fn_804D250C_000011B8
     mr r3, r30
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r3, lbl_8087F59C
     li r4, 0x0
     bl atn_Task_setActive
@@ -3403,7 +3403,7 @@ lbl_fn_804D25D4_00002A5C:
     mr r4, r24
     li r5, 0x0
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     bl fn_800F7FA0
     bl atn_Task_unlink
     b lbl_fn_804D25D4_00004898

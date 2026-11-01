@@ -66,8 +66,8 @@ extern void fn_805ADF54(void);
 extern void fn_805AE18C(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 extern void fn_8068B100(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
@@ -870,7 +870,7 @@ lbl_fn_805A6D24_00000984:
 lbl_fn_805A6D24_0000098C:
     frsp f2, f2
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_805A6D24_000009A0:
@@ -949,7 +949,7 @@ lbl_fn_805A6D24_00000AB0:
     b lbl_fn_805A6D24_00000AD0
 lbl_fn_805A6D24_00000ABC:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -964,7 +964,7 @@ lbl_fn_805A6D24_00000AD0:
     lfs f1, 0x54(r1)
     lfd f2, lbl_80763848@l(r3)
     stfs f0, 0x4c(r1)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f0, f1
     lfs f3, lbl_808882FC
     fcmpo cr0, f0, f3

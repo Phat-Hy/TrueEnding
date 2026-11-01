@@ -19,7 +19,7 @@ extern void fn_8020FCE8(void);
 extern void fn_80219558(void);
 extern void world_getGlobalFlag(void);
 extern void fn_80375B78(void);
-extern void fn_8068AEB0(void);
+extern void std_pow(void);
 
 /* External data declarations */
 extern u8 lbl_80737200[];
@@ -406,7 +406,7 @@ lbl_fn_8012B028_00000480:
     lfd f2, lbl_80737340@l(r3)
     lfd f0, 0x8(r1)
     fsubs f1, f0, f1
-    bl fn_8068AEB0
+    bl std_pow
     frsp f1, f1
     lfs f0, lbl_80881908
     lwz r0, 0x1ac(r31)

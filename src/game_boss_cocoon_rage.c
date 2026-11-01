@@ -11,7 +11,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_80148990(void);
 extern void actor_setState(void);
 extern void fn_80179D44(void);
@@ -26,8 +26,8 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void fn_80686A64(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 extern void fn_80695720(void);
 
 /* External data declarations */
@@ -185,7 +185,7 @@ lbl_fn_804596E8_00000154:
     stw r0, 0x14c0(r31)
     psq_st f1, 0x0(r30), 0, 0
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     li r0, 0x7
     mr r3, r31
@@ -259,7 +259,7 @@ lbl_fn_804596E8_00000294:
 lbl_fn_804596E8_0000029C:
     frsp f2, f2
     lfs f1, 0x98(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0xb4(r1)
 lbl_fn_804596E8_000002B0:
@@ -338,7 +338,7 @@ lbl_fn_804596E8_000003C0:
     b lbl_fn_804596E8_000003E0
 lbl_fn_804596E8_000003CC:
     lfs f1, 0xc0(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0xb0(r1)
@@ -396,7 +396,7 @@ lbl_fn_804596E8_00000478:
     psq_st f1, 0x0(r30), 0, 0
     lwz r3, lbl_8087F048
     stfs f2, 0x100(r1)
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     li r0, 0x8
     mr r3, r31
@@ -470,7 +470,7 @@ lbl_fn_804596E8_000005B8:
 lbl_fn_804596E8_000005C0:
     frsp f2, f2
     lfs f1, 0x20(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x3c(r1)
 lbl_fn_804596E8_000005D4:
@@ -549,7 +549,7 @@ lbl_fn_804596E8_000006E4:
     b lbl_fn_804596E8_00000704
 lbl_fn_804596E8_000006F0:
     lfs f1, 0x48(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x38(r1)
@@ -1559,7 +1559,7 @@ lbl_fn_8045ABB4_0000151C:
     stfs f2, 0xc8(r1)
     lfd f2, lbl_80754DC0@l(r5)
     stw r0, 0x14c8(r3)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f6, f1
     lfs f0, lbl_80886C88
     fcmpo cr0, f6, f0
@@ -1868,7 +1868,7 @@ lbl_fn_8045ABB4_000019C8:
 lbl_fn_8045ABB4_000019D0:
     frsp f2, f2
     lfs f1, 0x68(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_8045ABB4_000019E4:
@@ -1947,7 +1947,7 @@ lbl_fn_8045ABB4_00001AF4:
     b lbl_fn_8045ABB4_00001B14
 lbl_fn_8045ABB4_00001B00:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -1964,7 +1964,7 @@ lbl_fn_8045ABB4_00001B14:
     fsubs f1, f3, f0
     lfd f2, lbl_80754DC0@l(r3)
     stfs f4, 0x4c(r1)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f31, f1
     lfs f0, lbl_80886C88
     fcmpo cr0, f31, f0
@@ -2020,7 +2020,7 @@ lbl_fn_8045ABB4_00001BC8:
     lfs f1, 0x534(r31)
     lfd f2, lbl_80754DC0@l(r3)
     stfs f0, 0x584(r31)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80886C88
     fcmpo cr0, f3, f0
@@ -2038,7 +2038,7 @@ lbl_fn_8045ABB4_00001C3C:
     lfs f1, 0x538(r31)
     stfs f3, 0x534(r31)
     lfd f2, lbl_80754DC0@l(r3)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80886C88
     fcmpo cr0, f3, f0
@@ -2056,7 +2056,7 @@ lbl_fn_8045ABB4_00001C7C:
     lfs f1, 0x53c(r31)
     stfs f3, 0x538(r31)
     lfd f2, lbl_80754DC0@l(r3)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80886C88
     fcmpo cr0, f3, f0

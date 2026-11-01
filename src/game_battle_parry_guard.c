@@ -38,15 +38,15 @@ extern void fn_80144710(void);
 extern void quest_checkCondition(void);
 extern void fn_802180A8(void);
 extern void fn_80219558(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_802377B8(void);
 extern void fn_8023780C(void);
 extern void fn_8023781C(void);
 extern void fn_80237874(void);
 extern void fn_802378C4(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_8023A02C(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_803EBE74(void);
@@ -926,7 +926,7 @@ lbl_fn_804131A4_00000A68:
     li r5, 0x0
     clrlwi r0, r0, 31
     xori r6, r0, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r0, 0x0(r26)
     cmpwi r0, 0x0
     beq lbl_fn_804131A4_00000BCC
@@ -940,7 +940,7 @@ lbl_fn_804131A4_00000A68:
 lbl_fn_804131A4_00000AAC:
     mr r3, r25
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r4, 0x54(r25)
     slwi r0, r4, 2
     add r3, r25, r0
@@ -973,7 +973,7 @@ lbl_fn_804131A4_00000AAC:
     stfs f1, 0x44(r1)
     stw r11, 0x8(r1)
     stw r0, 0xc(r1)
-    bl fn_8023A8B4
+    bl res_registerResource
     b lbl_fn_804131A4_00000B8C
 lbl_fn_804131A4_00000B40:
     lfs f1, 0x90(r25)
@@ -994,7 +994,7 @@ lbl_fn_804131A4_00000B40:
     stfs f0, 0x1c(r1)
     stw r11, 0x8(r1)
     stw r0, 0xc(r1)
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_804131A4_00000B8C:
     lwz r0, 0xc(r26)
     rlwinm r0, r0, 0, 30, 30

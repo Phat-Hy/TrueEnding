@@ -17,7 +17,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A56A8(void);
 extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_800FAB80(void);
 extern void fn_801065E4(void);
 extern void fn_801240B4(void);
@@ -43,8 +43,8 @@ extern void PSVECSquareMag(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 extern void fn_80695B00(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -265,7 +265,7 @@ lbl_fn_801A6364_00000130:
     stfs f0, 0x40(r1)
     stfs f3, 0x44(r1)
     stfs f4, 0x48(r1)
-    bl fn_800F8548
+    bl system_getNextSequenceId
     li r0, -0x1
     stw r0, 0x8(r1)
     mr r6, r3
@@ -621,7 +621,7 @@ lbl_fn_801A6750_00000700:
 lbl_fn_801A6750_00000708:
     frsp f2, f2
     lfs f1, 0x54(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x4c(r1)
 lbl_fn_801A6750_0000071C:
@@ -700,7 +700,7 @@ lbl_fn_801A6750_0000082C:
     b lbl_fn_801A6750_0000084C
 lbl_fn_801A6750_00000838:
     lfs f1, 0x40(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x48(r1)
@@ -881,7 +881,7 @@ lbl_fn_801A6CFC_00000A0C:
     stfs f0, 0x28(r1)
     stfs f3, 0x2c(r1)
     stfs f4, 0x30(r1)
-    bl fn_800F8548
+    bl system_getNextSequenceId
     li r0, -0x1
     stw r0, 0x8(r1)
     mr r6, r3
@@ -1260,7 +1260,7 @@ lbl_fn_801A72EC_00000FD0:
     lfs f0, 0x56c(r3)
     stfs f0, 0xc(r30)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x8(r30)
     mr r3, r30
     lwz r31, 0xc(r1)
@@ -1743,7 +1743,7 @@ lbl_fn_801A7870_0000155C:
     stfs f12, 0xc(r1)
     stfs f7, 0x10(r1)
     stfs f4, 0x40(r1)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f9, f1
     lfs f0, lbl_80882244
     fcmpo cr0, f9, f0

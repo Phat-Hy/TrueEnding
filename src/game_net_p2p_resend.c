@@ -19,11 +19,11 @@ struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct 
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800DC6B4(void);
 extern void fn_800EF73C(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_80237874(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_8023A108(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void fn_8037309C(void);
 extern void fn_804741C0(void);
 extern void fn_8050FA80(void);
@@ -36,7 +36,7 @@ extern void PSMTX44Identity(void);
 extern void printf(void);
 extern void strstr(void);
 extern void abort(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_80695720(void);
 extern void fn_806959D8(void);
 extern void fn_80695A50(void);
@@ -282,7 +282,7 @@ asm void fn_80512C80(void)
     lwz r3, lbl_8087F3C0
     li r5, 0x1
     li r6, 0x0
-    b fn_80239DAC
+    b res_findResourceSlot
 }
 
 asm void fn_80512C94(void)
@@ -312,7 +312,7 @@ asm void fn_80512C94(void)
     mr r29, r4
     mr r4, r31
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r5, lbl_8087F3C0
     li r4, 0x1
     li r0, 0x6
@@ -321,7 +321,7 @@ asm void fn_80512C94(void)
     li r4, 0x1
     lwz r5, lbl_8087F3C0
     stw r0, 0xb8(r5)
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r3, 0xd4(r31)
     slwi r0, r29, 6
     add r6, r3, r0
@@ -380,7 +380,7 @@ lbl_fn_80512C94_000003AC:
     b lbl_fn_80512C94_000003C4
 lbl_fn_80512C94_000003B4:
     lfs f1, 0x74(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x24(r1)
 lbl_fn_80512C94_000003C4:
@@ -459,7 +459,7 @@ lbl_fn_80512C94_000004D4:
     b lbl_fn_80512C94_000004F4
 lbl_fn_80512C94_000004E0:
     lfs f1, 0x30(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x20(r1)
@@ -496,7 +496,7 @@ lbl_fn_80512C94_000004F4:
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_80512C94_00000578:
     lwz r3, lbl_8087F3C0
     mr r4, r31
@@ -632,7 +632,7 @@ lbl_fn_80513024_00000744:
     mr r4, r30
     li r5, 0x1
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r5, lbl_8087F3C0
     li r4, 0x1
     li r0, 0x6
@@ -641,7 +641,7 @@ lbl_fn_80513024_00000744:
     li r4, 0x1
     lwz r5, lbl_8087F3C0
     stw r0, 0xb8(r5)
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r3, 0xd4(r30)
     slwi r0, r31, 6
     add r6, r3, r0
@@ -700,7 +700,7 @@ lbl_fn_80513024_00000854:
     b lbl_fn_80513024_0000086C
 lbl_fn_80513024_0000085C:
     lfs f1, 0x10(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x68(r1)
 lbl_fn_80513024_0000086C:
@@ -779,7 +779,7 @@ lbl_fn_80513024_0000097C:
     b lbl_fn_80513024_0000099C
 lbl_fn_80513024_00000988:
     lfs f1, 0x5c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x64(r1)
@@ -816,7 +816,7 @@ lbl_fn_80513024_0000099C:
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_80513024_00000A20:
     lwz r3, lbl_8087F3C0
     mr r4, r30
@@ -834,7 +834,7 @@ lbl_fn_80513024_00000A4C:
     mr r4, r30
     li r5, 0x1
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
 lbl_fn_80513024_00000A60:
     li r0, 0x848
     psq_lx f31, r1, r0, 0, 0

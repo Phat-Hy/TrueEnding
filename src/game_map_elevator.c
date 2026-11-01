@@ -10,7 +10,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
 extern void ref_releaseHandle(void);
 extern void fn_800EFF04(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_80106878(void);
 extern void fn_8013CB68(void);
 extern void fn_801446F0(void);
@@ -25,8 +25,8 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void rand(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 
 /* External data declarations */
 extern u8 lbl_80738F68[];
@@ -264,7 +264,7 @@ lbl_fn_8018CC74_0000024C:
 lbl_fn_8018CC74_00000254:
     frsp f2, f2
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_8018CC74_00000268:
@@ -343,7 +343,7 @@ lbl_fn_8018CC74_00000378:
     b lbl_fn_8018CC74_00000398
 lbl_fn_8018CC74_00000384:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -607,7 +607,7 @@ lbl_fn_8018D160_00000748:
 lbl_fn_8018D160_00000750:
     frsp f2, f2
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_8018D160_00000764:
@@ -686,7 +686,7 @@ lbl_fn_8018D160_00000874:
     b lbl_fn_8018D160_00000894
 lbl_fn_8018D160_00000880:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -861,7 +861,7 @@ lbl_fn_8018D4AC_00000AE8:
 lbl_fn_8018D4AC_00000AF0:
     frsp f2, f2
     lfs f1, 0x54(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x4c(r1)
 lbl_fn_8018D4AC_00000B04:
@@ -940,7 +940,7 @@ lbl_fn_8018D4AC_00000C14:
     b lbl_fn_8018D4AC_00000C34
 lbl_fn_8018D4AC_00000C20:
     lfs f1, 0x40(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x48(r1)
@@ -1424,7 +1424,7 @@ lbl_fn_8018DD34_00001310:
 lbl_fn_8018DD34_00001318:
     frsp f2, f2
     lfs f1, 0x104(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x90(r1)
 lbl_fn_8018DD34_0000132C:
@@ -1503,7 +1503,7 @@ lbl_fn_8018DD34_0000143C:
     b lbl_fn_8018DD34_0000145C
 lbl_fn_8018DD34_00001448:
     lfs f1, 0x84(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x8c(r1)
@@ -1690,7 +1690,7 @@ lbl_fn_8018DD34_00001704:
 lbl_fn_8018DD34_0000170C:
     frsp f2, f2
     lfs f1, 0xa4(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_8018DD34_00001720:
@@ -1769,7 +1769,7 @@ lbl_fn_8018DD34_00001830:
     b lbl_fn_8018DD34_00001850
 lbl_fn_8018DD34_0000183C:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -1786,7 +1786,7 @@ lbl_fn_8018DD34_00001850:
     fsubs f1, f3, f0
     lfd f2, lbl_80738FD0@l(r3)
     stfs f4, 0x4c(r1)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f5, f1
     lfs f0, lbl_80881EE4
     fcmpo cr0, f5, f0
@@ -1944,7 +1944,7 @@ lbl_fn_8018E438_00001A74:
     bl fn_802097C4
     stw r3, 0x8(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x1c(r31)
     li r0, 0x0
     li r3, 0xe3

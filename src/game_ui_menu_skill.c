@@ -24,8 +24,8 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void rand(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 
 /* External data declarations */
 extern u8 lbl_8073B2E8[];
@@ -195,7 +195,7 @@ lbl_fn_801B8DFC_0000017C:
 lbl_fn_801B8DFC_00000184:
     fmr f2, f3
     lfs f1, 0x14(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x24(r1)
 lbl_fn_801B8DFC_00000198:
@@ -274,7 +274,7 @@ lbl_fn_801B8DFC_000002A8:
     b lbl_fn_801B8DFC_000002C8
 lbl_fn_801B8DFC_000002B4:
     lfs f1, 0x30(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x20(r1)
@@ -402,7 +402,7 @@ lbl_fn_801B9128_00000480:
 lbl_fn_801B9128_00000488:
     frsp f2, f2
     lfs f1, 0x5c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_801B9128_0000049C:
@@ -481,7 +481,7 @@ lbl_fn_801B9128_000005AC:
     b lbl_fn_801B9128_000005CC
 lbl_fn_801B9128_000005B8:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -1115,7 +1115,7 @@ lbl_fn_801B9A54_00000E10:
 lbl_fn_801B9A54_00000E18:
     frsp f2, f2
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_801B9A54_00000E2C:
@@ -1194,7 +1194,7 @@ lbl_fn_801B9A54_00000F3C:
     b lbl_fn_801B9A54_00000F5C
 lbl_fn_801B9A54_00000F48:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -1284,7 +1284,7 @@ lbl_fn_801B9DE4_0000103C:
     stfs f2, 0x180(r1)
     fadds f1, f3, f0
     lfd f2, lbl_8073B308@l(r3)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80882568
     fcmpo cr0, f3, f0
@@ -1441,7 +1441,7 @@ lbl_fn_801B9DE4_00001248:
     stfs f2, 0x150(r1)
     fadds f1, f3, f0
     lfd f2, lbl_8073B308@l(r3)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80882568
     fcmpo cr0, f3, f0
@@ -1866,7 +1866,7 @@ lbl_fn_801B9DE4_00001918:
 lbl_fn_801B9DE4_00001920:
     frsp f2, f2
     lfs f1, 0x8c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x60(r1)
 lbl_fn_801B9DE4_00001934:
@@ -1945,7 +1945,7 @@ lbl_fn_801B9DE4_00001A44:
     b lbl_fn_801B9DE4_00001A64
 lbl_fn_801B9DE4_00001A50:
     lfs f1, 0x54(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x5c(r1)

@@ -35,7 +35,7 @@ extern void fn_8012044C(void);
 extern void fn_801495E8(void);
 extern void fn_80237518(void);
 extern void fn_80237654(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_8023A184(void);
 extern void fn_8030B408(void);
 extern void fn_803830A0(void);
@@ -1971,7 +1971,7 @@ lbl_fn_80499C48_0000192C:
     li r5, 0x0
     li r6, 0x0
     add r4, r0, r31
-    bl fn_80239DAC
+    bl res_findResourceSlot
     addi r31, r31, 0xa0
     addi r29, r29, 0x1
 lbl_fn_80499C48_0000194C:

@@ -62,8 +62,8 @@ extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECSquareMag(void);
 extern void rand(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -1860,7 +1860,7 @@ lbl_fn_803A11D8_00001774:
     b lbl_fn_803A11D8_0000178C
 lbl_fn_803A11D8_0000177C:
     lfs f1, 0x68(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0xc(r1)
 lbl_fn_803A11D8_0000178C:
@@ -1939,7 +1939,7 @@ lbl_fn_803A11D8_0000189C:
     b lbl_fn_803A11D8_000018BC
 lbl_fn_803A11D8_000018A8:
     lfs f1, 0x18(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x8(r1)
@@ -1967,7 +1967,7 @@ lbl_fn_803A11D8_000018FC:
     lfs f0, 0x6c(r1)
     lfd f2, lbl_8074F5F0@l(r3)
     fmadds f1, f9, f10, f0
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f9, f1
     lfs f0, lbl_80885B3C
     fcmpo cr0, f9, f0

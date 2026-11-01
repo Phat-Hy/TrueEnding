@@ -38,7 +38,7 @@ extern void fn_802377B8(void);
 extern void fn_8023780C(void);
 extern void fn_8023781C(void);
 extern void fn_80237874(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_8026580C(void);
 extern void fn_8035B694(void);
 extern void fn_8035B78C(void);
@@ -54,8 +54,8 @@ extern void PSVECMag(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void strncmp(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -209,7 +209,7 @@ lbl_fn_80263CF0_00000140:
 lbl_fn_80263CF0_00000148:
     frsp f2, f2
     lfs f1, 0x5c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_80263CF0_0000015C:
@@ -288,7 +288,7 @@ lbl_fn_80263CF0_0000026C:
     b lbl_fn_80263CF0_0000028C
 lbl_fn_80263CF0_00000278:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -477,7 +477,7 @@ lbl_fn_802640FC_00000504:
 lbl_fn_802640FC_0000050C:
     frsp f2, f2
     lfs f1, 0x5c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_802640FC_00000520:
@@ -556,7 +556,7 @@ lbl_fn_802640FC_00000630:
     b lbl_fn_802640FC_00000650
 lbl_fn_802640FC_0000063C:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -574,7 +574,7 @@ lbl_fn_802640FC_00000650:
     stfs f2, 0x4c(r1)
     lfd f2, lbl_80744398@l(r3)
     fmuls f1, f0, f3
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_8088361C
     fcmpo cr0, f3, f0
@@ -720,7 +720,7 @@ lbl_fn_8026442C_00000884:
     b lbl_fn_8026442C_0000089C
 lbl_fn_8026442C_0000088C:
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0xc(r1)
 lbl_fn_8026442C_0000089C:
@@ -799,7 +799,7 @@ lbl_fn_8026442C_000009AC:
     b lbl_fn_8026442C_000009CC
 lbl_fn_8026442C_000009B8:
     lfs f1, 0x18(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x8(r1)
@@ -817,7 +817,7 @@ lbl_fn_8026442C_000009CC:
     fsubs f3, f3, f4
     lfd f2, lbl_807443A8@l(r3)
     fmadds f1, f0, f3, f4
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80883648
     fcmpo cr0, f3, f0
@@ -928,7 +928,7 @@ lbl_fn_8026474C_00000AF8:
     stfs f2, 0x16f4(r31)
     psq_st f1, 0x0(r3), 0, 0
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F498
     cmpwi r3, 0x0
     beq lbl_fn_8026474C_00000BC0
@@ -1010,7 +1010,7 @@ lbl_fn_802648CC_00000CB0:
     b lbl_fn_802648CC_00000CC8
 lbl_fn_802648CC_00000CB8:
     lfs f1, 0x68(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0xc(r1)
 lbl_fn_802648CC_00000CC8:
@@ -1089,7 +1089,7 @@ lbl_fn_802648CC_00000DD8:
     b lbl_fn_802648CC_00000DF8
 lbl_fn_802648CC_00000DE4:
     lfs f1, 0x18(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x8(r1)
@@ -1107,7 +1107,7 @@ lbl_fn_802648CC_00000DF8:
     fsubs f3, f3, f4
     lfd f2, lbl_807443A8@l(r3)
     fmadds f1, f0, f3, f4
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80883648
     fcmpo cr0, f3, f0

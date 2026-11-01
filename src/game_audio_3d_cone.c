@@ -15,7 +15,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Task_setActive(void);
 extern void fn_800F29D0(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
 extern void fn_8012A288(void);
 extern void boss_updatePhaseState(void);
@@ -44,7 +44,7 @@ extern void PSVECMag(void);
 extern void fn_805F99F0(void);
 extern void fn_805F9AB0(void);
 extern void strcmp(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_80695720(void);
 
 /* External data declarations */
@@ -1249,7 +1249,7 @@ asm void fn_803227A0(void)
     li r0, 0x4
     stw r0, 0x560(r30)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lfs f3, lbl_80884E70
     li r0, 0x1
     lfs f0, lbl_80884E9C
@@ -1343,7 +1343,7 @@ lbl_fn_803227A0_00001214:
 lbl_fn_803227A0_0000121C:
     frsp f2, f2
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_803227A0_00001230:
@@ -1422,7 +1422,7 @@ lbl_fn_803227A0_00001340:
     b lbl_fn_803227A0_00001360
 lbl_fn_803227A0_0000134C:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)

@@ -160,7 +160,7 @@ extern void PSVECMag(void);
 extern void strncmp(void);
 extern void atoi(void);
 extern void fn_8068A918(void);
-extern void fn_8068AEA8(void);
+extern void std_fmod(void);
 extern void fn_806959D8(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -3562,7 +3562,7 @@ lbl_world_Manager_draw_00002F68:
     stfs f2, 0x48(r1)
     fadds f1, f3, f0
     lfd f2, lbl_8074DBF0@l(r3)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80885764
     fcmpo cr0, f3, f0

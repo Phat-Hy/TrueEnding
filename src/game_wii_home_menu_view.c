@@ -18,7 +18,7 @@ extern void fn_8010F41C(void);
 extern void quest_checkCondition(void);
 extern void fn_8014DEE4(void);
 extern void fn_8014EEC4(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_80237784(void);
 extern void fn_8023779C(void);
 extern void fn_8023B71C(void);
@@ -28,7 +28,7 @@ extern void fn_805F89F0(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
 extern void PSVECSquareMag(void);
-extern void fn_8068AEA8(void);
+extern void std_fmod(void);
 
 /* External data declarations */
 extern u8 lbl_8075FE68[];
@@ -731,7 +731,7 @@ lbl_fn_8056D8CC_000008D8:
     blt lbl_fn_8056D8CC_000008B0
     li r3, 0x0
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r3, lbl_8087F3C0
     li r4, 0x0
     bl fn_8023B71C
@@ -1394,7 +1394,7 @@ lbl_fn_8056DAD0_00001250:
     fsubs f0, f0, f28
     lfd f2, lbl_8075FE70@l(r29)
     fmadds f1, f27, f0, f28
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f28, f1
     fcmpo cr0, f28, f29
     ble lbl_fn_8056DAD0_00001270

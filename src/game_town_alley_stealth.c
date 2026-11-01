@@ -26,7 +26,7 @@ extern void fn_805AA828(void);
 extern void fn_805AE038(void);
 extern void PSVECSquareMag(void);
 extern void fn_80686A64(void);
-extern void fn_8068AEA8(void);
+extern void std_fmod(void);
 extern void fn_80695D84(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -189,7 +189,7 @@ lbl_fn_803DAB4C_00000140:
     lfd f2, lbl_80750688@l(r4)
     fsubs f1, f3, f0
     stfs f1, 0xdd0(r3)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80885EA0
     fcmpo cr0, f3, f0
@@ -215,7 +215,7 @@ lbl_fn_803DAB4C_000001D8:
     lfd f2, lbl_80750688@l(r4)
     fsubs f1, f3, f0
     stfs f1, 0xdd0(r3)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80885EA0
     fcmpo cr0, f3, f0

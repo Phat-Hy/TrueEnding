@@ -18,8 +18,8 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 extern void fn_80695720(void);
 
 /* External data declarations */
@@ -1486,7 +1486,7 @@ lbl_fn_80348568_000014C0:
 lbl_fn_80348568_000014C8:
     fmr f2, f3
     lfs f1, 0x8(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x24(r1)
 lbl_fn_80348568_000014DC:
@@ -1565,7 +1565,7 @@ lbl_fn_80348568_000015EC:
     b lbl_fn_80348568_0000160C
 lbl_fn_80348568_000015F8:
     lfs f1, 0x30(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x20(r1)
@@ -1582,7 +1582,7 @@ lbl_fn_80348568_0000160C:
     fsubs f1, f29, f0
     lfd f2, lbl_8074A8E0@l(r3)
     stfs f3, 0x28(r1)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f5, f1
     lfs f0, lbl_808853E4
     fcmpo cr0, f5, f0
@@ -1853,7 +1853,7 @@ lbl_fn_803489F4_00001A08:
 lbl_fn_803489F4_00001A10:
     frsp f2, f2
     lfs f1, 0x5c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x54(r1)
 lbl_fn_803489F4_00001A24:
@@ -1932,7 +1932,7 @@ lbl_fn_803489F4_00001B34:
     b lbl_fn_803489F4_00001B54
 lbl_fn_803489F4_00001B40:
     lfs f1, 0x48(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x50(r1)

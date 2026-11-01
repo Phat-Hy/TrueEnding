@@ -23,7 +23,7 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void printf(void);
 extern void abort(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 
 /* External data declarations */
 extern u8 lbl_8075D928[];
@@ -522,7 +522,7 @@ lbl_fn_805384D0_000005B8:
 lbl_fn_805384D0_000005C0:
     fmr f2, f4
     lfs f1, 0x74(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_805384D0_000005D4:
@@ -601,7 +601,7 @@ lbl_fn_805384D0_000006E4:
     b lbl_fn_805384D0_00000704
 lbl_fn_805384D0_000006F0:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)

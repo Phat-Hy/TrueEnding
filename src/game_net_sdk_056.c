@@ -19,8 +19,8 @@ extern void OSUnlockMutex(void);
 extern void PSMTXMultVec(void);
 extern void PSVECMag(void);
 extern void fn_8068A850(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEB0(void);
+extern void std_atan2(void);
+extern void std_pow(void);
 extern void fn_80703F90(void);
 extern void fn_80704890(void);
 extern void fn_807097E0(void);
@@ -1385,7 +1385,7 @@ lbl_fn_80714D00_00001198:
     fsubs f0, f1, f4
     fmr f1, f2
     fdivs f2, f0, f3
-    bl fn_8068AEB0
+    bl std_pow
     frsp f5, f1
     b lbl_fn_80714D00_000011D4
 lbl_fn_80714D00_000011B0:
@@ -2081,7 +2081,7 @@ lbl_fn_807156B0_00001B68:
     lfs f0, 0x1c(r1)
     lfs f1, 0x14(r1)
     fneg f2, f0
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     addi r3, r1, 0x14
     stfs f0, 0x0(r30)

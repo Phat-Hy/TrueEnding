@@ -19,7 +19,7 @@ extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
 extern void fn_800EC204(void);
 extern void fn_800EF73C(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_800FAB80(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
@@ -42,7 +42,7 @@ extern void fn_802376D0(void);
 extern void fn_802377B8(void);
 extern void fn_8023780C(void);
 extern void fn_80237874(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_80244CCC(void);
 extern void fn_80244FC0(void);
 extern void fn_802D3370(void);
@@ -67,8 +67,8 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void strcmp(void);
 extern void strncmp(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 extern void fn_806958E0(void);
 extern u32 strlen(const char* str);
 
@@ -1126,7 +1126,7 @@ lbl_fn_802D0B84_00000E20:
     li r30, 0x0
     stw r30, 0x14e8(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     mr r3, r31
     li r4, 0x3
@@ -1155,7 +1155,7 @@ lbl_fn_802D0B84_00000E20:
     li r30, 0x0
     stw r30, 0x14e8(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     mr r3, r31
     li r4, 0x3
@@ -1301,7 +1301,7 @@ lbl_fn_802D0B84_000010A4:
     mulli r0, r0, 0xc
     add r4, r31, r0
     addi r4, r4, 0x15f0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r12, 0x0(r31)
     mr r3, r31
     lwz r12, 0x98(r12)
@@ -2415,7 +2415,7 @@ lbl_fn_802D0B84_00002144:
     b lbl_fn_802D0B84_0000215C
 lbl_fn_802D0B84_0000214C:
     lfs f1, 0x178(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x8c(r1)
 lbl_fn_802D0B84_0000215C:
@@ -2494,7 +2494,7 @@ lbl_fn_802D0B84_0000226C:
     b lbl_fn_802D0B84_0000228C
 lbl_fn_802D0B84_00002278:
     lfs f1, 0x98(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x88(r1)
@@ -2510,7 +2510,7 @@ lbl_fn_802D0B84_0000228C:
     stfs f2, 0x90(r1)
     fsubs f1, f3, f0
     lfd f2, lbl_80747080@l(r3)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f4, f1
     lfs f0, lbl_808845B4
     fcmpo cr0, f4, f0

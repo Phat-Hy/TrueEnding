@@ -40,8 +40,8 @@ extern void PSVECCrossProduct(void);
 extern void printf(void);
 extern void rand(void);
 extern void abort(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 
 /* External data declarations */
 extern u8 lbl_8073A9A8[];
@@ -411,7 +411,7 @@ asm void fn_801AF264(void)
     lfd f2, lbl_8073A9C0@l(r3)
     lfs f0, 0x538(r4)
     fsubs f1, f3, f0
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80882330
     fcmpo cr0, f3, f0
@@ -465,7 +465,7 @@ lbl_fn_801AF264_00000448:
     stfs f2, 0x10(r1)
     fadds f1, f3, f0
     lfd f2, lbl_8073A9C0@l(r3)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80882330
     fcmpo cr0, f3, f0
@@ -1030,7 +1030,7 @@ lbl_fn_801AFAC0_00000C94:
 lbl_fn_801AFAC0_00000C9C:
     frsp f2, f2
     lfs f1, 0x5c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_801AFAC0_00000CB0:
@@ -1109,7 +1109,7 @@ lbl_fn_801AFAC0_00000DC0:
     b lbl_fn_801AFAC0_00000DE0
 lbl_fn_801AFAC0_00000DCC:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)

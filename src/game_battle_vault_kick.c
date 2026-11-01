@@ -33,13 +33,13 @@ extern void fn_802180A8(void);
 extern void fn_8021E444(void);
 extern void fn_8021E5A4(void);
 extern void fn_8021ECD0(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_802377B8(void);
 extern void fn_8023780C(void);
 extern void fn_8023781C(void);
 extern void fn_80237874(void);
-extern void fn_80239DAC(void);
-extern void fn_8023A8B4(void);
+extern void res_findResourceSlot(void);
+extern void res_registerResource(void);
 extern void world_getGlobalFlag(void);
 extern void fn_803EC568(void);
 extern void fn_803EC69C(void);
@@ -1018,13 +1018,13 @@ lbl_fn_8040E620_00000C48:
     mr r4, r30
     li r5, 0x0
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r5, lbl_8087F3C0
     li r29, 0x1
     mr r3, r30
     li r4, 0x0
     stw r29, 0xb8(r5)
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_8088638C
     li r0, -0x1
     lfs f1, lbl_80886390
@@ -1048,7 +1048,7 @@ lbl_fn_8040E620_00000C48:
     stw r0, 0x8(r1)
     stw r29, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r5, lbl_8087F3C0
     li r0, 0x0
     addi r3, r30, 0xf4
@@ -1101,7 +1101,7 @@ lbl_fn_8040E620_00000D88:
     mr r4, r30
     li r5, 0x0
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lfs f1, lbl_80886390
     addi r3, r30, 0xf4
     lfs f2, lbl_80886394
@@ -1238,7 +1238,7 @@ lbl_fn_8040E620_00000F88:
     mr r4, r30
     li r5, 0x0
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lfs f1, lbl_80886390
     addi r3, r30, 0xf4
     lfs f2, lbl_80886394
@@ -1275,7 +1275,7 @@ lbl_fn_8040E620_00001018:
     mr r4, r30
     li r5, 0x0
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     addi r3, r30, 0xf4
     li r4, 0x1
     bl fn_80097D40
@@ -1315,7 +1315,7 @@ lbl_fn_8040E620_000010B0:
     mr r4, r30
     li r5, 0x0
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
 lbl_fn_8040E620_000010C4:
     lwz r3, 0x0(r31)
     stw r3, 0x54(r30)

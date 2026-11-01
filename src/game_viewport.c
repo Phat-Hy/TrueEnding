@@ -40,9 +40,9 @@ extern void fn_8010EE78(void);
 extern void fn_80134250(void);
 extern void fn_80134270(void);
 extern void fn_8021A888(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_80239D58(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_8023A680(void);
 extern void fn_805F89F0(void);
 extern void PSMTXRotRad(void);
@@ -52,7 +52,7 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void rand(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_80695D84(void);
 
 /* External data declarations */
@@ -122,7 +122,7 @@ void fn_800F84D8(void);
 void fn_800F8524(void);
 void fn_800F8538(void);
 void fn_800F8544(void);
-void fn_800F8548(void);
+void system_getNextSequenceId(void);
 void fn_800F8574(void);
 
 asm void fn_800F7250(void)
@@ -294,7 +294,7 @@ lbl_fn_800F72F4_00000208:
     mr r4, r29
     li r5, 0x0
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     bl fn_800F7FA0
     li r4, 0x0
     bl fn_800F7F98
@@ -1078,7 +1078,7 @@ asm void fn_800F7FA8(void)
     nofralloc
     mr r3, r4
     mr r4, r5
-    b fn_80232B7C
+    b sound_initGlobalInstances
 }
 
 asm void fn_800F7FB4(void)
@@ -1563,7 +1563,7 @@ asm void fn_800F8544(void)
     blr
 }
 
-asm void fn_800F8548(void)
+asm void system_getNextSequenceId(void)
 {
     nofralloc
     lwz r5, 0x14c(r3)
@@ -1572,10 +1572,10 @@ asm void fn_800F8548(void)
     addi r4, r5, 0x1
     stw r4, 0x14c(r3)
     cmpw r4, r0
-    ble lbl_fn_800F8548_0000131C
+    ble lbl_system_getNextSequenceId_0000131C
     li r0, 0x0
     stw r0, 0x14c(r3)
-lbl_fn_800F8548_0000131C:
+lbl_system_getNextSequenceId_0000131C:
     mr r3, r5
     blr
 }
@@ -1673,7 +1673,7 @@ lbl_fn_800F8574_00001464:
 lbl_fn_800F8574_0000146C:
     frsp f2, f2
     lfs f1, 0x54(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x4c(r1)
 lbl_fn_800F8574_00001480:
@@ -1752,7 +1752,7 @@ lbl_fn_800F8574_00001590:
     b lbl_fn_800F8574_000015B0
 lbl_fn_800F8574_0000159C:
     lfs f1, 0x40(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x48(r1)

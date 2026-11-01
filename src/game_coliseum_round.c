@@ -49,7 +49,7 @@ extern void PSVECNormalize(void);
 extern void fn_805F9D20(void);
 extern void printf(void);
 extern void abort(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_8072D210(void);
 extern void memmove(void);
 
@@ -419,7 +419,7 @@ lbl_fn_8048F1DC_00000488:
 lbl_fn_8048F1DC_00000490:
     frsp f2, f2
     lfs f1, 0x58(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x84(r1)
 lbl_fn_8048F1DC_000004A4:
@@ -498,7 +498,7 @@ lbl_fn_8048F1DC_000005B4:
     b lbl_fn_8048F1DC_000005D4
 lbl_fn_8048F1DC_000005C0:
     lfs f1, 0x90(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x80(r1)
@@ -581,7 +581,7 @@ lbl_fn_8048F1DC_000006F0:
 lbl_fn_8048F1DC_000006F8:
     frsp f2, f2
     lfs f1, 0x64(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0xcc(r1)
 lbl_fn_8048F1DC_0000070C:
@@ -660,7 +660,7 @@ lbl_fn_8048F1DC_0000081C:
     b lbl_fn_8048F1DC_0000083C
 lbl_fn_8048F1DC_00000828:
     lfs f1, 0xd8(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0xc8(r1)

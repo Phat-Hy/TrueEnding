@@ -36,7 +36,7 @@ extern void fn_800DCA6C(void);
 extern void fn_8067E23C(void);
 extern void fn_806823B0(void);
 extern void fn_8068AD58(void);
-extern void fn_8068AEA8(void);
+extern void std_fmod(void);
 extern void fn_806952C4(void);
 extern void fn_80695720(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -164,7 +164,7 @@ lbl_fn_80080048_000000E4:
     lfs f0, 0x48(r28)
     fdivs f2, f31, f1
     fadds f1, f0, f30
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f2, f1
     stfs f2, 0x48(r28)
     lfs f1, 0x34(r28)
@@ -231,7 +231,7 @@ lbl_fn_80080048_000001CC:
     lfs f0, 0x4c(r28)
     fdivs f2, f31, f1
     fadds f1, f0, f30
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f2, f1
     stfs f2, 0x4c(r28)
     lfs f1, 0x40(r28)

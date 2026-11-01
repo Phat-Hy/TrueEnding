@@ -46,7 +46,7 @@ extern void fn_801C3910(void);
 extern void fn_80219E6C(void);
 extern void fn_802377B8(void);
 extern void fn_8023780C(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_80266154(void);
 extern void fn_802A7910(void);
 extern void fn_802A7964(void);
@@ -63,7 +63,7 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_80695720(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -202,7 +202,7 @@ lbl_fn_8030C1A4_00000118:
 lbl_fn_8030C1A4_00000120:
     frsp f2, f2
     lfs f1, 0x5c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_8030C1A4_00000134:
@@ -281,7 +281,7 @@ lbl_fn_8030C1A4_00000244:
     b lbl_fn_8030C1A4_00000264
 lbl_fn_8030C1A4_00000250:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -1025,7 +1025,7 @@ lbl_fn_8030CBC0_00000CC8:
     mr r4, r31
     li r5, 0x64
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r0, 0x5c0(r31)
     clrrwi r0, r0, 1
     stw r0, 0x5c0(r31)

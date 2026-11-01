@@ -47,7 +47,7 @@ extern void fn_8067E23C(void);
 extern void printf(void);
 extern void rand(void);
 extern void abort(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_80695AD0(void);
 extern u32 strlen(const char* str);
 
@@ -245,7 +245,7 @@ lbl_fn_801AD34C_000001DC:
 lbl_fn_801AD34C_000001E4:
     frsp f2, f2
     lfs f1, 0xac(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x80(r1)
 lbl_fn_801AD34C_000001F8:
@@ -324,7 +324,7 @@ lbl_fn_801AD34C_00000308:
     b lbl_fn_801AD34C_00000328
 lbl_fn_801AD34C_00000314:
     lfs f1, 0x74(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x7c(r1)

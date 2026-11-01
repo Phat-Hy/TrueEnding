@@ -30,7 +30,7 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
 extern void fn_80102824(void);
 extern void boss_updatePhaseState(void);
@@ -93,7 +93,7 @@ extern void strncmp(void);
 extern void atoi(void);
 extern void abort(void);
 extern void fn_8068A850(void);
-extern void fn_8068AEA8(void);
+extern void std_fmod(void);
 extern void fn_8068B100(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -269,7 +269,7 @@ asm void fn_802F09D4(void)
     lfs f0, 0x40(r1)
     lfd f2, lbl_80748460@l(r3)
     fsubs f1, f3, f0
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80884888
     fcmpo cr0, f3, f0
@@ -734,7 +734,7 @@ lbl_fn_802F0F60_0000077C:
     li r0, 0x1e
     stw r0, 0x1544(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x1540(r31)
 lbl_fn_802F0F60_000007A0:
     lwz r0, 0x74(r1)
@@ -2042,7 +2042,7 @@ lbl_fn_802F2294_00001A24:
 lbl_fn_802F2294_00001A28:
     stw r0, 0x15a0(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     li r0, 0x6
     mr r3, r31
@@ -2118,7 +2118,7 @@ lbl_fn_802F2294_00001B48:
 lbl_fn_802F2294_00001B4C:
     stw r0, 0x15a0(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     li r0, 0x6
     mr r3, r31
@@ -2215,7 +2215,7 @@ lbl_fn_802F2294_00001CA8:
 lbl_fn_802F2294_00001CAC:
     stw r0, 0x15a0(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     li r0, 0x6
     mr r3, r31
@@ -2236,7 +2236,7 @@ lbl_fn_802F2294_00001CF0:
 lbl_fn_802F2294_00001CF4:
     stw r0, 0x15a0(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     li r0, 0xf
     lis r5, lbl_807C7030@ha
@@ -2287,7 +2287,7 @@ lbl_fn_802F2294_00001DB4:
 lbl_fn_802F2294_00001DB8:
     stw r0, 0x15a0(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lwz r0, 0x54c(r31)
     li r4, 0x11
     stw r3, 0x590(r31)
@@ -2499,7 +2499,7 @@ lbl_fn_802F2294_000020DC:
 lbl_fn_802F2294_000020E0:
     stw r0, 0x15a0(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     li r0, 0x12
     lfs f1, lbl_808848DC

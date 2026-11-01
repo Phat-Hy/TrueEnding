@@ -24,7 +24,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
 extern void fn_8068A850(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_80695AD0(void);
 
 /* External data declarations */
@@ -1625,7 +1625,7 @@ lbl_fn_80174104_0000169C:
 lbl_fn_80174104_000016A4:
     frsp f2, f2
     lfs f1, 0xec(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x6c(r1)
 lbl_fn_80174104_000016B8:
@@ -1704,7 +1704,7 @@ lbl_fn_80174104_000017C8:
     b lbl_fn_80174104_000017E8
 lbl_fn_80174104_000017D4:
     lfs f1, 0x60(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x68(r1)

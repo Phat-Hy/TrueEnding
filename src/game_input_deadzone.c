@@ -20,7 +20,7 @@ extern void fn_800A56A8(void);
 extern void fn_800F52F8(void);
 extern void fn_800F72CC(void);
 extern void fn_800F7FF0(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_80102824(void);
 extern void fn_801028E4(void);
 extern void fn_801162A0(void);
@@ -63,7 +63,7 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 
 /* External data declarations */
 extern u8 jumptable_807876D0[];
@@ -294,7 +294,7 @@ asm void fn_802EF16C(void)
     li r6, 0x1
     bl fn_805A4F20
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lfs f2, 0x14e0(r31)
     addi r4, r31, 0x14d8
     lfs f0, lbl_80884864
@@ -321,7 +321,7 @@ lbl_fn_802EF16C_000002BC:
 lbl_fn_802EF16C_000002C4:
     frsp f2, f2
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_802EF16C_000002D8:
@@ -400,7 +400,7 @@ lbl_fn_802EF16C_000003E8:
     b lbl_fn_802EF16C_00000408
 lbl_fn_802EF16C_000003F4:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -1078,7 +1078,7 @@ lbl_fn_802EF5FC_00000DBC:
     b lbl_fn_802EF5FC_00000DD4
 lbl_fn_802EF5FC_00000DC4:
     lfs f1, 0x8(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x54(r1)
 lbl_fn_802EF5FC_00000DD4:
@@ -1157,7 +1157,7 @@ lbl_fn_802EF5FC_00000EE4:
     b lbl_fn_802EF5FC_00000F04
 lbl_fn_802EF5FC_00000EF0:
     lfs f1, 0x48(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x50(r1)

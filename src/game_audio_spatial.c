@@ -40,7 +40,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 
 /* External data declarations */
 extern u8 lbl_80748A14[];
@@ -565,7 +565,7 @@ lbl_fn_802FF800_000006A8:
 lbl_fn_802FF800_000006B0:
     frsp f2, f2
     lfs f1, 0x11c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0xd8(r1)
 lbl_fn_802FF800_000006C4:
@@ -644,7 +644,7 @@ lbl_fn_802FF800_000007D4:
     b lbl_fn_802FF800_000007F4
 lbl_fn_802FF800_000007E0:
     lfs f1, 0xcc(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0xd4(r1)
@@ -699,7 +699,7 @@ lbl_fn_802FF800_0000089C:
 lbl_fn_802FF800_000008A4:
     frsp f2, f2
     lfs f1, 0x104(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x90(r1)
 lbl_fn_802FF800_000008B8:
@@ -778,7 +778,7 @@ lbl_fn_802FF800_000009C8:
     b lbl_fn_802FF800_000009E8
 lbl_fn_802FF800_000009D4:
     lfs f1, 0x84(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x8c(r1)
@@ -853,7 +853,7 @@ lbl_fn_802FF800_00000ADC:
 lbl_fn_802FF800_00000AE4:
     frsp f2, f2
     lfs f1, 0xec(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_802FF800_00000AF8:
@@ -932,7 +932,7 @@ lbl_fn_802FF800_00000C08:
     b lbl_fn_802FF800_00000C28
 lbl_fn_802FF800_00000C14:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)

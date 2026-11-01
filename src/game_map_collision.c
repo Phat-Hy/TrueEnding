@@ -49,7 +49,7 @@ extern void rand(void);
 extern void strcmp(void);
 extern void abort(void);
 extern void fn_8068AE9C(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_80695D84(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -1962,7 +1962,7 @@ lbl_fn_80181D94_000019CC:
 lbl_fn_80181D94_000019D4:
     frsp f2, f2
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_80181D94_000019E8:
@@ -2041,7 +2041,7 @@ lbl_fn_80181D94_00001AF8:
     b lbl_fn_80181D94_00001B18
 lbl_fn_80181D94_00001B04:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)

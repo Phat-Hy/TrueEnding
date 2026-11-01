@@ -22,7 +22,7 @@ extern void fn_800E7BB0(void);
 extern void fn_800E8688(void);
 extern void fn_800E8FB8(void);
 extern void fn_800E9110(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
 extern void fn_800FFE68(void);
 extern void fn_80108A54(void);
@@ -636,7 +636,7 @@ lbl_fn_800E589C_000006E0:
     stw r3, 0x598(r30)
     stw r0, 0x594(r30)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r30)
 lbl_fn_800E589C_00000754:
     lwz r0, 0x594(r30)

@@ -31,8 +31,8 @@ extern void fn_805F9AB0(void);
 extern void strcmp(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 extern void fn_80695AD0(void);
 
 /* External data declarations */
@@ -141,7 +141,7 @@ asm void fn_8056796C(void)
     stfs f2, 0xcc(r1)
     fsubs f1, f3, f0
     lfd f2, lbl_8075FCA0@l(r4)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f0, f1
     lfs f3, lbl_80887F68
     fcmpo cr0, f0, f3
@@ -563,7 +563,7 @@ lbl_fn_8056796C_000006C0:
 lbl_fn_8056796C_000006C8:
     frsp f2, f2
     lfs f1, 0x5c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_8056796C_000006DC:
@@ -642,7 +642,7 @@ lbl_fn_8056796C_000007EC:
     b lbl_fn_8056796C_0000080C
 lbl_fn_8056796C_000007F8:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -659,7 +659,7 @@ lbl_fn_8056796C_0000080C:
     fsubs f1, f3, f0
     lfd f2, lbl_8075FCA0@l(r3)
     stfs f4, 0x4c(r1)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f30, f1
     lfs f0, lbl_80887F68
     fcmpo cr0, f30, f0
@@ -1665,7 +1665,7 @@ lbl_fn_80568F14_00001678:
 lbl_fn_80568F14_00001680:
     fmr f2, f4
     lfs f1, 0xa4(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x90(r1)
 lbl_fn_80568F14_00001694:
@@ -1744,7 +1744,7 @@ lbl_fn_80568F14_000017A4:
     b lbl_fn_80568F14_000017C4
 lbl_fn_80568F14_000017B0:
     lfs f1, 0x84(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x8c(r1)
@@ -1764,7 +1764,7 @@ lbl_fn_80568F14_000017C4:
     lfs f0, 0x538(r29)
     stfs f4, 0x94(r1)
     fsubs f1, f3, f0
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80887F68
     fcmpo cr0, f3, f0
@@ -1808,7 +1808,7 @@ lbl_fn_80568F14_0000188C:
 lbl_fn_80568F14_00001894:
     frsp f2, f2
     lfs f1, 0x98(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_80568F14_000018A8:
@@ -1887,7 +1887,7 @@ lbl_fn_80568F14_000019B8:
     b lbl_fn_80568F14_000019D8
 lbl_fn_80568F14_000019C4:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)

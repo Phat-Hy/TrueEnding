@@ -24,7 +24,7 @@ extern void fn_8054A340(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
-extern void fn_8068AEB0(void);
+extern void std_pow(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -1922,7 +1922,7 @@ lbl_fn_804491F4_0000196C:
     lfd f0, 0x8(r1)
     lfd f2, lbl_80754758@l(r3)
     fsubs f1, f0, f1
-    bl fn_8068AEB0
+    bl std_pow
     frsp f3, f1
     lfs f0, lbl_80886B08
     lis r3, 0x2

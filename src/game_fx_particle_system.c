@@ -31,7 +31,7 @@ extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
 extern void fn_800EB7A0(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80144710(void);
@@ -49,7 +49,7 @@ extern void fn_802377B8(void);
 extern void fn_8023780C(void);
 extern void fn_8023781C(void);
 extern void fn_80237874(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_802847CC(void);
 extern void fn_80284CC8(void);
 extern void fn_80285064(void);
@@ -74,8 +74,8 @@ extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
 extern void abort(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -158,7 +158,7 @@ asm void fn_80281ED8(void)
     li r31, 0x0
     stw r31, 0x14d8(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lwz r4, 0x14b8(r30)
     li r0, 0x7
     stw r3, 0x590(r30)
@@ -639,7 +639,7 @@ lbl_fn_80281F88_0000070C:
     bl fn_8017039C
     stw r29, 0x14d8(r30)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lfs f3, lbl_8088394C
     li r0, 0x1
     lfs f0, lbl_808839AC
@@ -740,7 +740,7 @@ lbl_fn_802826A0_00000898:
 lbl_fn_802826A0_000008A0:
     fmr f2, f4
     lfs f1, 0x5c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_802826A0_000008B4:
@@ -819,7 +819,7 @@ lbl_fn_802826A0_000009C4:
     b lbl_fn_802826A0_000009E4
 lbl_fn_802826A0_000009D0:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -835,7 +835,7 @@ lbl_fn_802826A0_000009E4:
     fsubs f1, f3, f31
     lfd f2, lbl_80744EE8@l(r3)
     stfs f0, 0x4c(r1)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f4, f1
     lfs f0, lbl_808839D4
     fcmpo cr0, f4, f0
@@ -865,7 +865,7 @@ lbl_fn_802826A0_00000A68:
     stw r29, 0x1540(r28)
     stw r0, 0x14d8(r28)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lfs f3, lbl_8088394C
     li r5, 0x9
     lfs f0, lbl_808839AC
@@ -920,7 +920,7 @@ asm void fn_802829DC(void)
     mr r4, r31
     li r5, 0x0
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
 lbl_fn_802829DC_00000B44:
     addi r3, r31, 0x15a8
     li r4, 0xf
@@ -930,7 +930,7 @@ lbl_fn_802829DC_00000B44:
     mr r4, r31
     li r5, 0xc8
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r12, 0x0(r31)
     mr r3, r31
     lwz r12, 0x48(r12)
@@ -2028,7 +2028,7 @@ lbl_fn_802837F4_00001B28:
 lbl_fn_802837F4_00001B2C:
     stw r0, 0x1594(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     addi r3, r31, 0x151c
     li r4, 0xf
@@ -2038,7 +2038,7 @@ lbl_fn_802837F4_00001B2C:
     mr r4, r31
     li r5, 0xc8
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     li r0, 0x6
     stw r0, 0x58c(r31)
     mr r3, r31
@@ -2102,7 +2102,7 @@ lbl_fn_802837F4_00001C44:
 lbl_fn_802837F4_00001C48:
     stw r0, 0x1594(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     addi r3, r31, 0x151c
     li r4, 0xf
@@ -2112,7 +2112,7 @@ lbl_fn_802837F4_00001C48:
     mr r4, r31
     li r5, 0xc8
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     li r0, 0x6
     stw r0, 0x58c(r31)
     mr r3, r31
@@ -2134,7 +2134,7 @@ lbl_fn_802837F4_00001CBC:
 lbl_fn_802837F4_00001CC0:
     stw r0, 0x1594(r3)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     addi r3, r31, 0x151c
     li r4, 0xf
@@ -2144,7 +2144,7 @@ lbl_fn_802837F4_00001CC0:
     mr r4, r31
     li r5, 0xc8
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     li r0, 0x6
     stw r0, 0x58c(r31)
     mr r3, r31

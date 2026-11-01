@@ -27,7 +27,7 @@ extern void PSVECSquareMag(void);
 extern void swprintf(void);
 extern void fn_8068AD58(void);
 extern void fn_8068AEA0(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_80695D84(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -360,7 +360,7 @@ lbl_fn_800F5314_000003C0:
 lbl_fn_800F5314_000003C8:
     frsp f2, f2
     lfs f1, 0x1fc(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x98(r1)
 lbl_fn_800F5314_000003DC:
@@ -439,7 +439,7 @@ lbl_fn_800F5314_000004EC:
     b lbl_fn_800F5314_0000050C
 lbl_fn_800F5314_000004F8:
     lfs f1, 0x8c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x94(r1)

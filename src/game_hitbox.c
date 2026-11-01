@@ -15,12 +15,12 @@ extern void fn_800EFE3C(void);
 extern void fn_80134168(void);
 extern void fn_80210220(void);
 extern void fn_80219558(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_80239D58(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_8023A184(void);
 extern void fn_8023A680(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void PSVECMag(void);
 extern void rand(void);
 
@@ -109,7 +109,7 @@ asm void fn_801070C8(void)
     beq lbl_fn_801070C8_00000088
     mr r3, r25
     mr r4, r26
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     li r0, -0x1
     stw r0, 0x8(r1)
     li r0, 0x1
@@ -123,7 +123,7 @@ asm void fn_801070C8(void)
     mr r9, r30
     li r6, 0x0
     li r10, -0x1
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_801070C8_00000088:
     lfd f31, 0x38(r1)
     lmw r25, 0x1c(r1)
@@ -155,7 +155,7 @@ asm void fn_80107168(void)
     beq lbl_fn_80107168_00000128
     mr r3, r25
     mr r4, r26
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     li r0, -0x1
     stw r0, 0x8(r1)
     li r0, 0x1
@@ -169,7 +169,7 @@ asm void fn_80107168(void)
     mr r9, r30
     li r6, 0x0
     li r10, -0x1
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_80107168_00000128:
     lfd f31, 0x38(r1)
     lmw r25, 0x1c(r1)
@@ -375,7 +375,7 @@ asm void fn_8010743C(void)
     li r5, 0x0
     li r6, 0x0
     subi r4, r4, 0x760c
-    bl fn_80239DAC
+    bl res_findResourceSlot
 lbl_fn_8010743C_000003D8:
     cmpwi r31, 0x0
     bne lbl_fn_8010743C_000003FC
@@ -400,7 +400,7 @@ lbl_fn_8010743C_000003FC:
     lfs f0, -0x1d04(r3)
     subi r3, r3, 0x760c
     stfs f0, 0x24(r1)
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_808814E8
     li r0, 0x0
     stw r0, 0x8(r1)
@@ -523,7 +523,7 @@ lbl_fn_80107584_00000578:
     li r5, 0x0
     li r6, 0x0
     subi r4, r4, 0x760c
-    bl fn_80239DAC
+    bl res_findResourceSlot
     addis r3, r31, 0x4
     li r0, 0x0
     stw r0, -0x1d00(r3)
@@ -557,7 +557,7 @@ asm void fn_801076D0(void)
     bne lbl_fn_801076D0_000006B4
     mr r3, r30
     li r4, 0x14
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80881478
     addis r4, r29, 0x4
     lfs f1, lbl_80881494
@@ -583,7 +583,7 @@ asm void fn_801076D0(void)
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_801076D0_000006B4:
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)
@@ -600,7 +600,7 @@ asm void fn_80107798(void)
     lwz r3, lbl_8087F3C0
     mr r6, r5
     li r5, 0x14
-    b fn_80239DAC
+    b res_findResourceSlot
 }
 
 asm void fn_801077A8(void)
@@ -615,7 +615,7 @@ asm void fn_801077A8(void)
     mr r30, r3
     mr r3, r4
     li r4, 0x15
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80881478
     addis r4, r30, 0x4
     lfs f1, lbl_80881494
@@ -641,7 +641,7 @@ asm void fn_801077A8(void)
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     lwz r30, 0x38(r1)
@@ -656,7 +656,7 @@ asm void fn_80107850(void)
     lwz r3, lbl_8087F3C0
     li r5, 0x15
     li r6, 0x1
-    b fn_80239DAC
+    b res_findResourceSlot
 }
 
 asm void fn_80107860(void)
@@ -671,7 +671,7 @@ asm void fn_80107860(void)
     mr r30, r3
     mr r3, r4
     li r4, 0x16
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80881478
     addis r4, r30, 0x4
     lfs f1, lbl_80881494
@@ -697,7 +697,7 @@ asm void fn_80107860(void)
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     lwz r30, 0x38(r1)
@@ -718,7 +718,7 @@ asm void fn_80107908(void)
     mr r30, r3
     mr r3, r4
     li r4, 0x17
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80881478
     addis r4, r30, 0x4
     lfs f1, lbl_80881494
@@ -744,7 +744,7 @@ asm void fn_80107908(void)
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     lwz r30, 0x38(r1)
@@ -759,7 +759,7 @@ asm void fn_801079B0(void)
     lwz r3, lbl_8087F3C0
     li r5, 0x17
     li r6, 0x1
-    b fn_80239DAC
+    b res_findResourceSlot
 }
 
 asm void fn_801079C0(void)
@@ -774,7 +774,7 @@ asm void fn_801079C0(void)
     mr r30, r3
     mr r3, r4
     li r4, 0x18
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80881478
     addis r4, r30, 0x4
     lfs f1, lbl_80881494
@@ -800,7 +800,7 @@ asm void fn_801079C0(void)
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     lwz r30, 0x38(r1)
@@ -815,7 +815,7 @@ asm void fn_80107A68(void)
     lwz r3, lbl_8087F3C0
     li r5, 0x18
     li r6, 0x1
-    b fn_80239DAC
+    b res_findResourceSlot
 }
 
 asm void fn_80107A78(void)
@@ -830,7 +830,7 @@ asm void fn_80107A78(void)
     mr r30, r3
     mr r3, r4
     li r4, 0x19
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80881478
     addis r4, r30, 0x4
     lfs f1, lbl_80881494
@@ -856,7 +856,7 @@ asm void fn_80107A78(void)
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     lwz r30, 0x38(r1)
@@ -871,7 +871,7 @@ asm void fn_80107B20(void)
     lwz r3, lbl_8087F3C0
     li r5, 0x19
     li r6, 0x1
-    b fn_80239DAC
+    b res_findResourceSlot
 }
 
 asm void fn_80107B30(void)
@@ -886,7 +886,7 @@ asm void fn_80107B30(void)
     mr r30, r3
     mr r3, r4
     li r4, 0x1a
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80881478
     addis r4, r30, 0x4
     lfs f1, lbl_80881494
@@ -912,7 +912,7 @@ asm void fn_80107B30(void)
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     lwz r30, 0x38(r1)
@@ -927,7 +927,7 @@ asm void fn_80107BD8(void)
     lwz r3, lbl_8087F3C0
     li r5, 0x1a
     li r6, 0x1
-    b fn_80239DAC
+    b res_findResourceSlot
 }
 
 asm void fn_80107BE8(void)
@@ -945,7 +945,7 @@ asm void fn_80107BE8(void)
     li r4, 0x1b
     lwz r6, lbl_8087F3C0
     stw r0, 0xb8(r6)
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80881478
     addis r4, r30, 0x4
     lfs f1, lbl_80881494
@@ -971,7 +971,7 @@ asm void fn_80107BE8(void)
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r3, lbl_8087F3C0
     li r0, 0x0
     stw r0, 0xb8(r3)
@@ -995,7 +995,7 @@ asm void fn_80107CA8(void)
     lwz r3, lbl_8087F3C0
     stw r0, 0xb8(r3)
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     li r0, 0x0
     stw r0, 0xb8(r3)
@@ -1020,7 +1020,7 @@ asm void fn_80107CEC(void)
     mr r30, r3
     mr r3, r4
     li r4, 0x1c
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80881494
     lis r7, lbl_807C7030@ha
     stfs f0, 0x10(r1)
@@ -1041,7 +1041,7 @@ asm void fn_80107CEC(void)
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r0, 0x44(r1)
     psq_l f31, 0x38(r1), 0, 0
     lfd f31, 0x30(r1)
@@ -1058,7 +1058,7 @@ asm void fn_80107D94(void)
     lwz r3, lbl_8087F3C0
     li r5, 0x1c
     li r6, 0x1
-    b fn_80239DAC
+    b res_findResourceSlot
 }
 
 asm void fn_80107DA4(void)
@@ -1078,7 +1078,7 @@ asm void fn_80107DA4(void)
     mr r29, r3
     mr r3, r4
     li r4, 0x1d
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80881494
     addis r4, r29, 0x4
     stfs f0, 0x10(r1)
@@ -1099,7 +1099,7 @@ asm void fn_80107DA4(void)
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r0, 0x44(r1)
     psq_l f31, 0x38(r1), 0, 0
     lfd f31, 0x30(r1)
@@ -1117,7 +1117,7 @@ asm void fn_80107E58(void)
     lwz r3, lbl_8087F3C0
     li r5, 0x1d
     li r6, 0x1
-    b fn_80239DAC
+    b res_findResourceSlot
 }
 
 asm void fn_80107E68(void)
@@ -1132,7 +1132,7 @@ asm void fn_80107E68(void)
     mr r30, r3
     mr r3, r4
     li r4, 0x1e
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80881478
     addis r4, r30, 0x4
     lfs f1, lbl_80881494
@@ -1158,7 +1158,7 @@ asm void fn_80107E68(void)
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     lwz r30, 0x38(r1)
@@ -1173,7 +1173,7 @@ asm void fn_80107F10(void)
     lwz r3, lbl_8087F3C0
     li r5, 0x1e
     li r6, 0x1
-    b fn_80239DAC
+    b res_findResourceSlot
 }
 
 asm void fn_80107F20(void)
@@ -1191,7 +1191,7 @@ asm void fn_80107F20(void)
     mr r30, r3
     mr r3, r4
     li r4, 0x1f
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80881494
     lis r7, lbl_807C7030@ha
     stfs f0, 0x10(r1)
@@ -1212,7 +1212,7 @@ asm void fn_80107F20(void)
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r0, 0x44(r1)
     psq_l f31, 0x38(r1), 0, 0
     lfd f31, 0x30(r1)
@@ -1229,7 +1229,7 @@ asm void fn_80107FC8(void)
     lwz r3, lbl_8087F3C0
     li r5, 0x1f
     li r6, 0x1
-    b fn_80239DAC
+    b res_findResourceSlot
 }
 
 asm void fn_80107FD8(void)
@@ -1244,7 +1244,7 @@ asm void fn_80107FD8(void)
     mr r30, r3
     mr r3, r4
     li r4, 0x20
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80881478
     addis r4, r30, 0x4
     lfs f1, lbl_80881494
@@ -1270,7 +1270,7 @@ asm void fn_80107FD8(void)
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     lwz r30, 0x38(r1)
@@ -1285,7 +1285,7 @@ asm void fn_80108080(void)
     lwz r3, lbl_8087F3C0
     li r5, 0x20
     li r6, 0x1
-    b fn_80239DAC
+    b res_findResourceSlot
 }
 
 asm void fn_80108090(void)

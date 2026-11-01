@@ -24,7 +24,7 @@ extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
 extern void swprintf(void);
 extern void fn_80686A64(void);
-extern void fn_8068AEA8(void);
+extern void std_fmod(void);
 
 /* External data declarations */
 extern u8 jumptable_80779D18[];
@@ -1515,7 +1515,7 @@ lbl_fn_80109950_0000134C:
     add r24, r31, r0
     lfs f0, 0x4(r24)
     fsubs f1, f30, f0
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f0, f1
     fcmpo cr0, f0, f27
     ble lbl_fn_80109950_00001374
@@ -1561,7 +1561,7 @@ lbl_fn_80109950_000013D8:
     lfd f2, lbl_80735EC8@l(r3)
     stfs f3, 0x30(r1)
     stfs f4, 0x34(r1)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f1, f1
     lfs f0, lbl_808815D4
     fcmpo cr0, f1, f0
@@ -1639,7 +1639,7 @@ lbl_fn_80109950_0000150C:
     add r25, r31, r0
     lfs f0, 0x4(r25)
     fsubs f1, f30, f0
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f0, f1
     fcmpo cr0, f0, f25
     ble lbl_fn_80109950_00001534
@@ -1686,7 +1686,7 @@ lbl_fn_80109950_0000159C:
     lfd f2, lbl_80735EC8@l(r3)
     stfs f3, 0x18(r1)
     stfs f4, 0x1c(r1)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f1, f1
     lfs f0, lbl_808815D4
     fcmpo cr0, f1, f0

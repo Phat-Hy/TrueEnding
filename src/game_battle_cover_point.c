@@ -36,8 +36,8 @@ extern void PSVECMag(void);
 extern void rand(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 extern void fn_80695720(void);
 extern void fn_80695A50(void);
 
@@ -1249,7 +1249,7 @@ lbl_fn_8040CD2C_000010FC:
 lbl_fn_8040CD2C_00001104:
     frsp f2, f2
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_8040CD2C_00001118:
@@ -1328,7 +1328,7 @@ lbl_fn_8040CD2C_00001228:
     b lbl_fn_8040CD2C_00001248
 lbl_fn_8040CD2C_00001234:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -1345,7 +1345,7 @@ lbl_fn_8040CD2C_00001248:
     fsubs f1, f3, f0
     lfd f2, lbl_80752AE0@l(r3)
     stfs f4, 0x4c(r1)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f1, f1
     lfs f0, lbl_80886364
     fcmpo cr0, f1, f0
@@ -1385,7 +1385,7 @@ lbl_fn_8040CD2C_000012E4:
     bl PSMTXMultVec
     lfs f2, 0x3f4(r31)
     lfs f1, 0x3ec(r31)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     lwz r3, 0x42c(r31)
     addi r0, r3, 0x1

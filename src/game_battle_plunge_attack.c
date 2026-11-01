@@ -30,7 +30,7 @@ extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void fn_800DC288(void);
 extern void fn_800EF73C(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_800FAB80(void);
 extern void fn_8012476C(void);
 extern void fn_801539E0(void);
@@ -42,12 +42,12 @@ extern void fn_8016A814(void);
 extern void fn_8016EB48(void);
 extern void fn_802180A8(void);
 extern void fn_80219E6C(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_802377B8(void);
 extern void fn_8023780C(void);
 extern void fn_8023781C(void);
 extern void fn_80237874(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_803EC568(void);
@@ -66,8 +66,8 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void strcmp(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern char* strcpy(char* dest, const char* src);
@@ -1335,7 +1335,7 @@ lbl_fn_80411BC4_000010C8:
     bne lbl_fn_80411BC4_0000115C
     li r3, 0x0
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_808863E0
     li r11, -0x1
     lfs f1, lbl_808863E4
@@ -1360,7 +1360,7 @@ lbl_fn_80411BC4_000010C8:
     stfs f1, 0x3c(r1)
     stw r11, 0x8(r1)
     stw r0, 0xc(r1)
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_80411BC4_0000115C:
     lfs f31, 0x328(r31)
     addi r3, r31, 0xf4
@@ -1391,7 +1391,7 @@ lbl_fn_80411BC4_0000115C:
     li r4, -0x1
     bl ref_releaseHandle
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     lfs f2, 0x74(r31)
     addi r7, r1, 0x40
     psq_l f1, 0x6c(r31), 0, 0
@@ -1582,7 +1582,7 @@ lbl_fn_804120C0_00001468:
 lbl_fn_804120C0_00001470:
     frsp f2, f2
     lfs f1, 0xc8(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0xa8(r1)
 lbl_fn_804120C0_00001484:
@@ -1661,7 +1661,7 @@ lbl_fn_804120C0_00001594:
     b lbl_fn_804120C0_000015B4
 lbl_fn_804120C0_000015A0:
     lfs f1, 0x9c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0xa4(r1)
@@ -1678,7 +1678,7 @@ lbl_fn_804120C0_000015B4:
     fsubs f1, f3, f0
     lfd f2, lbl_80752D00@l(r3)
     stfs f4, 0xac(r1)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80886400
     fcmpo cr0, f3, f0
@@ -1855,7 +1855,7 @@ lbl_fn_804120C0_00001808:
     stfs f1, 0x64(r1)
     stw r11, 0x8(r1)
     stw r0, 0xc(r1)
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r0, 0x694(r30)
     cmpwi r0, 0x1
     beq lbl_fn_804120C0_00001894

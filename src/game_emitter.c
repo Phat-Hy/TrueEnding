@@ -59,7 +59,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECSquareMag(void);
 extern void printf(void);
 extern void abort(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_8068B770(void);
 extern void fn_8068BC30(void);
 extern void fn_8068BD60(void);
@@ -1662,7 +1662,7 @@ lbl_fn_800E2FE0_000014E0:
 lbl_fn_800E2FE0_000014E8:
     fmr f2, f3
     lfs f1, 0x164(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x84(r1)
 lbl_fn_800E2FE0_000014FC:
@@ -1741,7 +1741,7 @@ lbl_fn_800E2FE0_0000160C:
     b lbl_fn_800E2FE0_0000162C
 lbl_fn_800E2FE0_00001618:
     lfs f1, 0x78(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x80(r1)

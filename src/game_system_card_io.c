@@ -9,7 +9,7 @@ extern void fn_80013338(void);
 extern void fn_8003EA3C(void);
 extern void fn_8004ED34(void);
 extern void fn_80097CCC(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_801255C8(void);
 extern void fn_80127D8C(void);
 extern void fn_80128930(void);
@@ -18,7 +18,7 @@ extern void fn_8013C460(void);
 extern void fn_80161880(void);
 extern void actor_setState(void);
 extern void fn_80179D44(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_802657FC(void);
 extern void fn_80356FFC(void);
 extern void fn_8035A9F4(void);
@@ -33,8 +33,8 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void rand(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 
 /* External data declarations */
 extern u8 jumptable_807897E8[];
@@ -184,7 +184,7 @@ lbl_fn_8035738C_00000148:
 lbl_fn_8035738C_00000150:
     frsp f2, f2
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_8035738C_00000164:
@@ -263,7 +263,7 @@ lbl_fn_8035738C_00000274:
     b lbl_fn_8035738C_00000294
 lbl_fn_8035738C_00000280:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -299,7 +299,7 @@ lbl_fn_8035738C_000002F4:
     lis r3, lbl_8074B088@ha
     lfd f2, lbl_8074B088@l(r3)
     fsubs f1, f28, f0
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f29, f1
     lfs f0, lbl_80885558
     fcmpo cr0, f29, f0
@@ -317,7 +317,7 @@ lbl_fn_8035738C_00000334:
     frsp f1, f28
     stfs f28, 0x538(r30)
     lfd f2, lbl_8074B088@l(r3)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80885558
     fcmpo cr0, f3, f0
@@ -768,7 +768,7 @@ lbl_fn_803579FC_000009A8:
     lfs f2, lbl_8088552C
     bl fn_8035738C
     bl fn_8013A194
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     mr r3, r31
     lfs f1, lbl_80885550
@@ -1236,21 +1236,21 @@ lbl_fn_80357F48_00001094:
     mr r4, r31
     li r5, 0x3e8
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     b lbl_fn_80357F48_000010D8
 lbl_fn_80357F48_000010AC:
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x5
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     b lbl_fn_80357F48_000010D8
 lbl_fn_80357F48_000010C4:
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x0
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
 lbl_fn_80357F48_000010D8:
     lwz r12, 0x0(r31)
     mr r3, r31
@@ -1344,7 +1344,7 @@ lbl_fn_80357F48_0000121C:
 lbl_fn_80357F48_00001224:
     frsp f2, f2
     lfs f1, 0x14(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x24(r1)
 lbl_fn_80357F48_00001238:
@@ -1423,7 +1423,7 @@ lbl_fn_80357F48_00001348:
     b lbl_fn_80357F48_00001368
 lbl_fn_80357F48_00001354:
     lfs f1, 0x30(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x20(r1)
@@ -1459,7 +1459,7 @@ lbl_fn_80357F48_000013C8:
     lis r3, lbl_8074B088@ha
     lfd f2, lbl_8074B088@l(r3)
     fsubs f1, f31, f0
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80885558
     fcmpo cr0, f3, f0
@@ -1473,7 +1473,7 @@ lbl_fn_80357F48_000013F4:
     frsp f1, f31
     stfs f31, 0x538(r31)
     lfd f2, lbl_8074B088@l(r3)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80885558
     fcmpo cr0, f3, f0
@@ -1593,21 +1593,21 @@ lbl_fn_80357F48_000015BC:
     mr r4, r31
     li r5, 0x3e8
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     b lbl_fn_80357F48_00001600
 lbl_fn_80357F48_000015D4:
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x5
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     b lbl_fn_80357F48_00001600
 lbl_fn_80357F48_000015EC:
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x0
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
 lbl_fn_80357F48_00001600:
     lwz r0, 0x14e0(r31)
     cmpwi r0, 0x2

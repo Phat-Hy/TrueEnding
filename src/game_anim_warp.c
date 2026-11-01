@@ -43,10 +43,10 @@ extern void fn_80176ACC(void);
 extern void fn_801A03E8(void);
 extern void fn_801A03F4(void);
 extern void fn_801A0400(void);
-extern void fn_80232B7C(void);
-extern void fn_80239DAC(void);
+extern void sound_initGlobalInstances(void);
+extern void res_findResourceSlot(void);
 extern void fn_8023A680(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void fn_8026607C(void);
 extern void fn_80267B20(void);
 extern void fn_80267B28(void);
@@ -68,7 +68,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 
 /* External data declarations */
 extern u8 lbl_80744A10[];
@@ -192,7 +192,7 @@ lbl_fn_80277DC4_00000130:
 lbl_fn_80277DC4_00000138:
     frsp f2, f2
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_80277DC4_0000014C:
@@ -267,7 +267,7 @@ lbl_fn_80277DC4_0000024C:
     b lbl_fn_80277DC4_0000026C
 lbl_fn_80277DC4_00000258:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -738,17 +738,17 @@ asm void fn_80278634(void)
     stw r6, 0x1544(r3)
     li r6, 0x1
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x65
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x67
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     li r0, 0x0
     stw r0, 0x4(r31)
     lis r3, lbl_80744AA4@ha
@@ -860,7 +860,7 @@ lbl_fn_80278634_00000AA8:
 lbl_fn_80278634_00000AB0:
     frsp f2, f2
     lfs f1, 0xb4(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0xac(r1)
 lbl_fn_80278634_00000AC4:
@@ -939,7 +939,7 @@ lbl_fn_80278634_00000BD4:
     b lbl_fn_80278634_00000BF4
 lbl_fn_80278634_00000BE0:
     lfs f1, 0xa0(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0xa8(r1)
@@ -1095,7 +1095,7 @@ lbl_fn_80278634_00000E28:
 lbl_fn_80278634_00000E30:
     frsp f2, f2
     lfs f1, 0xcc(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x64(r1)
 lbl_fn_80278634_00000E44:
@@ -1174,7 +1174,7 @@ lbl_fn_80278634_00000F54:
     b lbl_fn_80278634_00000F74
 lbl_fn_80278634_00000F60:
     lfs f1, 0x58(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x60(r1)
@@ -1344,7 +1344,7 @@ lbl_fn_80278634_00001144:
     psq_st f4, 0x18(r29), 0, 0
     psq_st f5, 0x20(r29), 0, 0
     psq_st f6, 0x28(r29), 0, 0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     li r0, 0x0
     stw r0, 0x8(r1)
     li r3, -0x1
@@ -1427,22 +1427,22 @@ asm void fn_802790A0(void)
     stw r0, 0x1538(r3)
     stw r0, 0x1544(r3)
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r29
     li r5, 0x65
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r29
     li r5, 0x66
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     mr r4, r29
     li r5, 0x67
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r0, 0x4(r29)
     cmpwi r0, 0x0
     beq lbl_fn_802790A0_00001494
@@ -1479,7 +1479,7 @@ lbl_fn_802790A0_000013CC:
     bne lbl_fn_802790A0_00001494
     li r3, 0x0
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r3, 0x88(r29)
     li r30, -0x1
     lfs f0, lbl_80883820
@@ -1505,10 +1505,10 @@ lbl_fn_802790A0_000013CC:
     stw r30, 0x8(r1)
     stw r31, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     li r3, 0x0
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     li r0, 0x0
     stw r0, 0x8(r1)
     lfs f1, lbl_80883830
@@ -1743,7 +1743,7 @@ lbl_fn_80279280_0000174C:
     mr r4, r25
     li r5, 0x64
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     stw r28, 0x4(r25)
     mr r4, r31
     lwz r3, 0x88(r25)

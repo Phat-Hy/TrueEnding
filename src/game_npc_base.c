@@ -22,7 +22,7 @@ extern void fn_800F7F60(void);
 extern void fn_800F7F80(void);
 extern void fn_800F7F90(void);
 extern void fn_800F7FD8(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_800FAB80(void);
 extern void fn_80116BAC(void);
 extern void fn_8011D1FC(void);
@@ -51,7 +51,7 @@ extern void fn_80219E6C(void);
 extern void world_getGlobalFlag(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_806952C4(void);
 extern void fn_80695AD0(void);
 extern char* strcpy(char* dest, const char* src);
@@ -707,7 +707,7 @@ lbl_fn_80139560_00000818:
     li r4, 0x1
     bl fn_8013A19C
     bl fn_8013A194
-    bl fn_800F8548
+    bl system_getNextSequenceId
     mr r30, r3
     bl fn_8013A194
     li r0, -0x1
@@ -743,7 +743,7 @@ lbl_fn_80139560_000008A8:
     bl fn_80219E6C
     mr r29, r3
     bl fn_8013A194
-    bl fn_800F8548
+    bl system_getNextSequenceId
     mr r30, r3
     bl fn_8013A194
     li r0, -0x1
@@ -931,7 +931,7 @@ lbl_fn_80139F60_00000A68:
     b lbl_fn_80139F60_00000A80
 lbl_fn_80139F60_00000A70:
     lfs f1, 0x0(r3)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_80139F60_00000A80:
@@ -1010,7 +1010,7 @@ lbl_fn_80139F60_00000B90:
     b lbl_fn_80139F60_00000BB0
 lbl_fn_80139F60_00000B9C:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)

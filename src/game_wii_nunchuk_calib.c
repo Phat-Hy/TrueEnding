@@ -21,10 +21,10 @@ extern void fn_80112974(void);
 extern void fn_80114468(void);
 extern void fn_8011447C(void);
 extern void fn_801FECE0(void);
-extern void fn_80232B7C(void);
-extern void fn_80239DAC(void);
+extern void sound_initGlobalInstances(void);
+extern void res_findResourceSlot(void);
 extern void fn_8023A680(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void fn_804786F8(void);
 extern void fn_8047F6B0(void);
 extern void fn_8047F850(void);
@@ -1255,7 +1255,7 @@ lbl_fn_8055DBF8_00000EC8:
     lwz r25, 0x18(r29)
     mr r3, r28
     mr r4, r26
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     cmpwi r24, 0x0
     beq lbl_fn_8055DBF8_00000FEC
     neg r0, r30
@@ -1299,7 +1299,7 @@ lbl_fn_8055DBF8_00001030:
     lwz r25, 0x18(r29)
     mr r3, r28
     mr r4, r26
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80887EB4
     li r3, -0x1
     stfs f0, 0x18(r1)
@@ -1318,7 +1318,7 @@ lbl_fn_8055DBF8_00001030:
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_8055DBF8_0000108C:
     lwz r3, lbl_8087F3C0
     li r0, 0x0
@@ -1404,7 +1404,7 @@ lbl_fn_8055DBF8_00001180:
     stw r7, 0xb8(r6)
     srwi r6, r0, 5
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     li r0, 0x0
     stw r0, 0xb8(r3)

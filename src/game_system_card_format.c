@@ -30,12 +30,12 @@ extern void fn_8015495C(void);
 extern void fn_80178208(void);
 extern void fn_801AFAC0(void);
 extern void fn_80219E6C(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_802377B8(void);
 extern void fn_8023780C(void);
 extern void fn_8023781C(void);
 extern void fn_80237874(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void fn_8035DC58(void);
 extern void fn_803EC16C(void);
 extern void fn_80470580(void);
@@ -457,7 +457,7 @@ lbl_fn_8035ACF0_00000498:
     bl PSMTXMultVec
     mr r3, r30
     li r4, 0x3e8
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f8, 0x530(r30)
     li r3, -0x1
     lfs f0, 0x84(r1)
@@ -488,11 +488,11 @@ lbl_fn_8035ACF0_00000498:
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     b lbl_fn_8035ACF0_00000628
 lbl_fn_8035ACF0_00000534:
     li r4, 0x5
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r4, lbl_8087F3C0
     li r0, 0x2
     lfs f1, lbl_80885550
@@ -520,14 +520,14 @@ lbl_fn_8035ACF0_00000534:
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r3, lbl_8087F3C0
     li r0, 0x0
     stw r0, 0xb8(r3)
     b lbl_fn_8035ACF0_00000628
 lbl_fn_8035ACF0_000005BC:
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_8088552C
     li r3, -0x1
     lfs f1, lbl_80885550
@@ -552,7 +552,7 @@ lbl_fn_8035ACF0_000005BC:
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_8035ACF0_00000628:
     lwz r0, 0x1e4(r1)
     lwz r31, 0x1dc(r1)
@@ -1532,7 +1532,7 @@ asm void fn_8035BC84(void)
     lwz r30, 0x4(r29)
     li r3, 0x0
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80885610
     li r0, -0x1
     lfs f1, lbl_8088560C
@@ -1556,7 +1556,7 @@ asm void fn_8035BC84(void)
     stw r0, 0x8(r1)
     stw r31, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r31, 0x4c(r1)
     mr r3, r29
     lwz r30, 0x48(r1)

@@ -26,11 +26,11 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_8009EE30(void);
 extern void fn_802180A8(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_8023780C(void);
 extern void fn_80237874(void);
-extern void fn_80239DAC(void);
-extern void fn_8023A8B4(void);
+extern void res_findResourceSlot(void);
+extern void res_registerResource(void);
 extern void fn_803EC568(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC7A0(void);
@@ -359,10 +359,10 @@ lbl_fn_80423BE0_0000034C:
     ori r0, r0, 0x1
     stw r0, 0x89c(r31)
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     mr r3, r31
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80886658
     li r3, -0x1
     lfs f1, lbl_8088665C
@@ -387,7 +387,7 @@ lbl_fn_80423BE0_0000034C:
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     b lbl_fn_80423BE0_000005A4
 lbl_fn_80423BE0_00000424:
     lfs f1, lbl_8088665C
@@ -408,7 +408,7 @@ lbl_fn_80423BE0_00000424:
     li r6, 0x1
     stw r0, 0x89c(r31)
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     b lbl_fn_80423BE0_000005A4
 lbl_fn_80423BE0_00000474:
     lfs f1, lbl_8088665C
@@ -431,7 +431,7 @@ lbl_fn_80423BE0_00000474:
     li r6, 0x1
     stw r0, 0x89c(r31)
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r12, 0x0(r31)
     mr r3, r31
     lwz r12, 0x38(r12)
@@ -488,7 +488,7 @@ lbl_fn_80423BE0_00000548:
     stfs f0, 0x6fc(r31)
     stw r0, 0x89c(r31)
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
 lbl_fn_80423BE0_000005A4:
     lwz r3, 0x54(r31)
 lbl_fn_80423BE0_000005A8:

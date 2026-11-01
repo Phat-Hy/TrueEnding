@@ -40,9 +40,9 @@ extern void fn_8017A300(void);
 extern void fn_801C3910(void);
 extern void fn_8020A81C(void);
 extern void fn_80219E6C(void);
-extern void fn_80232B7C(void);
-extern void fn_80239DAC(void);
-extern void fn_8023A8B4(void);
+extern void sound_initGlobalInstances(void);
+extern void res_findResourceSlot(void);
+extern void res_registerResource(void);
 extern void fn_8028CFB8(void);
 extern void fn_80300DF4(void);
 extern void fn_80301200(void);
@@ -303,7 +303,7 @@ lbl_fn_803041C8_00000284:
     mr r4, r31
     li r5, 0x190
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     bl fn_80121F00
     li r4, 0xa4
     li r5, 0x0
@@ -492,7 +492,7 @@ asm void fn_80304718(void)
     bl atn_Anim_setLayerAnimation
     mr r3, r31
     li r4, 0x131
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r3, 0x1614(r31)
     lwz r12, 0x0(r3)
     lwz r12, 0x38(r12)
@@ -521,7 +521,7 @@ asm void fn_80304718(void)
     stw r0, 0x8(r1)
     stw r30, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     b lbl_fn_80304718_00000958
 lbl_fn_80304718_00000660:
     lfs f1, 0x2e4(r31)
@@ -548,7 +548,7 @@ lbl_fn_80304718_00000684:
     mr r4, r31
     li r5, 0x131
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F430
     li r4, 0xa2
     li r5, 0x1
@@ -596,10 +596,10 @@ lbl_fn_80304718_0000073C:
     mr r4, r31
     li r5, 0x131
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     mr r3, r31
     li r4, 0x132
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r3, 0x1614(r31)
     lwz r12, 0x0(r3)
     lwz r12, 0x38(r12)
@@ -629,7 +629,7 @@ lbl_fn_80304718_0000073C:
     stw r11, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lis r3, lbl_80748A14@ha
     addi r3, r3, lbl_80748A14@l
     addi r3, r3, 0x13f
@@ -1092,7 +1092,7 @@ lbl_fn_80304FC0_00000E44:
     mr r4, r31
     mr r5, r29
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     addi r29, r29, 0x1
 lbl_fn_80304FC0_00000E5C:
     lwz r0, 0x15b4(r31)
@@ -1102,7 +1102,7 @@ lbl_fn_80304FC0_00000E5C:
     mr r4, r31
     li r5, 0x66
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     li r0, 0x3e8
     stw r0, 0x15b4(r31)
     b lbl_fn_80304FC0_000015B4
@@ -1571,7 +1571,7 @@ lbl_fn_80304FC0_00001320:
     lwz r3, lbl_8087F3C0
     li r6, 0x1
     subi r5, r5, 0x3
-    bl fn_80239DAC
+    bl res_findResourceSlot
 lbl_fn_80304FC0_000015A8:
     lwz r3, 0x15bc(r31)
     addi r0, r3, 0x1

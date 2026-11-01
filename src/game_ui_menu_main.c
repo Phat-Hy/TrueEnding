@@ -28,7 +28,7 @@ extern void PSMTX44Identity(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_80695B00(void);
 
 /* External data declarations */
@@ -1235,7 +1235,7 @@ lbl_fn_801B4D34_00000FB8:
 lbl_fn_801B4D34_00000FC0:
     fmr f2, f5
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_801B4D34_00000FD4:
@@ -1314,7 +1314,7 @@ lbl_fn_801B4D34_000010E4:
     b lbl_fn_801B4D34_00001104
 lbl_fn_801B4D34_000010F0:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)

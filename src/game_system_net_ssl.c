@@ -24,8 +24,8 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 
 /* External data declarations */
 extern u8 lbl_8074E008[];
@@ -1515,7 +1515,7 @@ lbl_fn_80390A88_000014C8:
     lis r3, lbl_8074E010@ha
     lfd f2, lbl_8074E010@l(r3)
     fadds f1, f24, f0
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_808858EC
     fcmpo cr0, f3, f0
@@ -1775,7 +1775,7 @@ lbl_fn_803918EC_000018AC:
 lbl_fn_803918EC_000018B4:
     frsp f2, f2
     lfs f1, 0x80(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x54(r1)
 lbl_fn_803918EC_000018C8:
@@ -1854,7 +1854,7 @@ lbl_fn_803918EC_000019D8:
     b lbl_fn_803918EC_000019F8
 lbl_fn_803918EC_000019E4:
     lfs f1, 0x48(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x50(r1)

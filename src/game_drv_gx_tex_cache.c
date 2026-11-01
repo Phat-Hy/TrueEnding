@@ -102,7 +102,7 @@ extern void fn_806263E0(void);
 extern void fn_8065F520(void);
 extern void fn_806823B0(void);
 extern void strcmp(void);
-extern void fn_8068AEAC(void);
+extern void std_sqrt(void);
 extern char* strcpy(char* dest, const char* src);
 
 /* External data declarations */
@@ -756,7 +756,7 @@ asm void fn_805C3B20(void)
     li r29, -0x388
     b lbl_fn_805C3B20_00000860
 lbl_fn_805C3B20_0000083C:
-    bl fn_8068AEAC
+    bl std_sqrt
     frsp f2, f1
     lfs f1, 0x30(r31)
     lfs f0, 0x2c(r31)

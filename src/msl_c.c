@@ -22,7 +22,7 @@ extern void fn_8067AF64(void);
 extern void fn_8068A824(void);
 extern void fn_8068AA68(void);
 extern void fn_8068AAF0(void);
-extern void fn_8068AEB0(void);
+extern void std_pow(void);
 extern void fn_8068B0FC(void);
 extern void fn_806964D0(void);
 extern u32 strlen(const char* str);
@@ -1884,7 +1884,7 @@ lbl_fn_8067C734_000016D0:
     lfd f1, lbl_80888A78
     lfd f0, 0x128(r1)
     fsub f2, f0, f2
-    bl fn_8068AEB0
+    bl std_pow
     fdiv f31, f31, f1
     b lbl_fn_8067C734_00001720
 lbl_fn_8067C734_00001700:
@@ -1894,7 +1894,7 @@ lbl_fn_8067C734_00001700:
     lfd f0, 0x130(r1)
     lfd f1, lbl_80888A78
     fsub f2, f0, f2
-    bl fn_8068AEB0
+    bl std_pow
     fmul f31, f31, f1
 lbl_fn_8067C734_00001720:
     fmr f1, f31

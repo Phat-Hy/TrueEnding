@@ -33,8 +33,8 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void rand(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 
 /* External data declarations */
 extern u8 lbl_8073B308[];
@@ -614,7 +614,7 @@ lbl_fn_801BB1C8_000006F0:
 lbl_fn_801BB1C8_000006F8:
     fmr f2, f5
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_801BB1C8_0000070C:
@@ -693,7 +693,7 @@ lbl_fn_801BB1C8_0000081C:
     b lbl_fn_801BB1C8_0000083C
 lbl_fn_801BB1C8_00000828:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -768,7 +768,7 @@ lbl_fn_801BB514_00000920:
     lfs f31, lbl_80882588
     fsubs f1, f3, f0
     lfd f2, lbl_8073B308@l(r3)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80882568
     fcmpo cr0, f3, f0
@@ -1328,7 +1328,7 @@ lbl_fn_801BBC48_00001160:
 lbl_fn_801BBC48_00001168:
     fmr f2, f5
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_801BBC48_0000117C:
@@ -1407,7 +1407,7 @@ lbl_fn_801BBC48_0000128C:
     b lbl_fn_801BBC48_000012AC
 lbl_fn_801BBC48_00001298:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)

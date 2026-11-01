@@ -26,7 +26,7 @@ extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_801028E4(void);
 extern void fn_8011FC10(void);
 extern void boss_updatePhaseState(void);
@@ -41,7 +41,7 @@ extern void actor_setState(void);
 extern void fn_80219E6C(void);
 extern void fn_8023781C(void);
 extern void fn_80237874(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_80258574(void);
 extern void fn_80258A50(void);
 extern void fn_80258F1C(void);
@@ -1778,7 +1778,7 @@ lbl_fn_80256C04_00001790:
     psq_st f1, 0x0(r4), 0, 0
     stw r14, 0x14c8(r15)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r15)
     li r0, 0xb
     mr r3, r15
@@ -1805,7 +1805,7 @@ lbl_fn_80256C04_00001790:
     mr r4, r15
     li r5, 0x0
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
     b lbl_fn_80256C04_000019DC
     mr r3, r15
     bl fn_80258F1C

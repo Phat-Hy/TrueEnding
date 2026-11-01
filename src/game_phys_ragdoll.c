@@ -7,7 +7,7 @@ extern void _savegpr_26(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800C344C(void);
 extern void ref_releaseHandle(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
 extern void fn_800FAB80(void);
 extern void fn_800FB1BC(void);
@@ -37,7 +37,7 @@ extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
 extern void rand(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 
 /* External data declarations */
 extern u8 lbl_80736680[];
@@ -406,7 +406,7 @@ lbl_fn_80110858_000004A8:
 lbl_fn_80110858_000004B0:
     frsp f2, f2
     lfs f1, 0x258(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x100(r1)
 lbl_fn_80110858_000004C4:
@@ -485,7 +485,7 @@ lbl_fn_80110858_000005D4:
     b lbl_fn_80110858_000005F4
 lbl_fn_80110858_000005E0:
     lfs f1, 0xf4(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0xfc(r1)
@@ -815,7 +815,7 @@ lbl_fn_80110858_00000AD8:
 lbl_fn_80110858_00000AE0:
     frsp f2, f2
     lfs f1, 0x6c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x7c(r1)
 lbl_fn_80110858_00000AF4:
@@ -894,7 +894,7 @@ lbl_fn_80110858_00000C04:
     b lbl_fn_80110858_00000C24
 lbl_fn_80110858_00000C10:
     lfs f1, 0x88(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x78(r1)
@@ -973,7 +973,7 @@ lbl_fn_80110858_00000CCC:
     bl fn_80219E6C
     mr r26, r3
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     mr r30, r3
     lwz r3, lbl_8087F048
     lwz r4, 0x88(r28)
@@ -1154,7 +1154,7 @@ lbl_fn_80110858_00000FDC:
 lbl_fn_80110858_00000FE4:
     frsp f2, f2
     lfs f1, 0x228(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x64(r1)
 lbl_fn_80110858_00000FF8:
@@ -1233,7 +1233,7 @@ lbl_fn_80110858_00001108:
     b lbl_fn_80110858_00001128
 lbl_fn_80110858_00001114:
     lfs f1, 0x58(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x60(r1)

@@ -39,7 +39,7 @@ extern void fn_800D5908(void);
 extern void atn_LH_Texture_update(void);
 extern void fn_800DC288(void);
 extern void fn_800DC6B4(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void fn_804714A4(void);
@@ -262,7 +262,7 @@ lbl_fn_80499E14_00000228:
     li r5, 0x0
     li r6, 0x0
     add r4, r0, r28
-    bl fn_80239DAC
+    bl res_findResourceSlot
     addi r28, r28, 0xa0
     addi r29, r29, 0x1
 lbl_fn_80499E14_00000248:

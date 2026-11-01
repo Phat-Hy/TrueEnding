@@ -16,14 +16,14 @@ extern void fn_8014C228(void);
 extern void fn_801598B4(void);
 extern void fn_80159E9C(void);
 extern void fn_8015A184(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_80237518(void);
 extern void fn_802375C4(void);
 extern void fn_80237654(void);
 extern void fn_802376D0(void);
 extern void fn_802377B8(void);
 extern void fn_80239D58(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_8023A098(void);
 extern void fn_8023A680(void);
 extern void fn_80360780(void);
@@ -42,7 +42,7 @@ extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
 extern void fn_8068AD58(void);
 extern void fn_8068AE9C(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 
@@ -395,7 +395,7 @@ asm void fn_80182418(void)
     mr r4, r28
     li r5, 0x0
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
 lbl_fn_80182418_0000043C:
     li r0, 0x0
     stw r0, 0x1bc(r28)
@@ -954,7 +954,7 @@ lbl_fn_801829B4_00000BB8:
 lbl_fn_801829B4_00000BC0:
     frsp f2, f2
     lfs f1, 0xcc(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0xac(r1)
 lbl_fn_801829B4_00000BD4:
@@ -1033,7 +1033,7 @@ lbl_fn_801829B4_00000CE4:
     b lbl_fn_801829B4_00000D04
 lbl_fn_801829B4_00000CF0:
     lfs f1, 0xa0(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0xa8(r1)
@@ -1089,7 +1089,7 @@ lbl_fn_801829B4_00000DB4:
 lbl_fn_801829B4_00000DBC:
     frsp f2, f2
     lfs f1, 0xe4(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x64(r1)
 lbl_fn_801829B4_00000DD0:
@@ -1168,7 +1168,7 @@ lbl_fn_801829B4_00000EE0:
     b lbl_fn_801829B4_00000F00
 lbl_fn_801829B4_00000EEC:
     lfs f1, 0x58(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x60(r1)
@@ -1402,11 +1402,11 @@ lbl_fn_801829B4_000011C4:
     mr r4, r31
     li r5, 0x0
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
 lbl_fn_801829B4_00001288:
     li r3, 0x0
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     li r0, 0x0
     stw r0, 0x8(r1)
     li r3, -0x1
@@ -1438,7 +1438,7 @@ lbl_fn_801829B4_000012EC:
     bne lbl_fn_801829B4_000013BC
     mr r3, r31
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r4, 0x1bc(r31)
     cmpwi r4, 0x0
     beq lbl_fn_801829B4_00001364
@@ -1500,7 +1500,7 @@ lbl_fn_801829B4_000013D0:
     mr r4, r31
     li r5, 0x0
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
 lbl_fn_801829B4_000013FC:
     lwz r0, 0x524(r1)
     psq_l f31, 0x518(r1), 0, 0

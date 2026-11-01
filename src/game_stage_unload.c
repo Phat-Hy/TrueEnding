@@ -26,7 +26,7 @@ extern void PSVECMag(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_80695B00(void);
 
 /* External data declarations */
@@ -230,7 +230,7 @@ lbl_fn_80198C08_00000214:
 lbl_fn_80198C08_0000021C:
     frsp f2, f2
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_80198C08_00000230:
@@ -309,7 +309,7 @@ lbl_fn_80198C08_00000340:
     b lbl_fn_80198C08_00000360
 lbl_fn_80198C08_0000034C:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -740,7 +740,7 @@ lbl_fn_80199450_00000954:
     b lbl_fn_80199450_0000096C
 lbl_fn_80199450_0000095C:
     lfs f1, 0x68(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0xc(r1)
 lbl_fn_80199450_0000096C:
@@ -819,7 +819,7 @@ lbl_fn_80199450_00000A7C:
     b lbl_fn_80199450_00000A9C
 lbl_fn_80199450_00000A88:
     lfs f1, 0x18(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x8(r1)
@@ -981,7 +981,7 @@ lbl_fn_80199788_00000CC4:
     b lbl_fn_80199788_00000CDC
 lbl_fn_80199788_00000CCC:
     lfs f1, 0x68(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0xc(r1)
 lbl_fn_80199788_00000CDC:
@@ -1060,7 +1060,7 @@ lbl_fn_80199788_00000DEC:
     b lbl_fn_80199788_00000E0C
 lbl_fn_80199788_00000DF8:
     lfs f1, 0x18(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x8(r1)
@@ -1198,7 +1198,7 @@ lbl_fn_80199AFC_00000FE8:
 lbl_fn_80199AFC_00000FF0:
     frsp f2, f2
     lfs f1, 0xbc(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x90(r1)
 lbl_fn_80199AFC_00001004:
@@ -1277,7 +1277,7 @@ lbl_fn_80199AFC_00001114:
     b lbl_fn_80199AFC_00001134
 lbl_fn_80199AFC_00001120:
     lfs f1, 0x84(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x8c(r1)
@@ -1349,7 +1349,7 @@ lbl_fn_80199AFC_00001224:
     b lbl_fn_80199AFC_0000123C
 lbl_fn_80199AFC_0000122C:
     lfs f1, 0xb0(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0xc(r1)
 lbl_fn_80199AFC_0000123C:
@@ -1428,7 +1428,7 @@ lbl_fn_80199AFC_0000134C:
     b lbl_fn_80199AFC_0000136C
 lbl_fn_80199AFC_00001358:
     lfs f1, 0x18(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x8(r1)

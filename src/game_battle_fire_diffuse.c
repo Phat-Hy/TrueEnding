@@ -25,10 +25,10 @@ extern void ref_releaseHandle(void);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800DC288(void);
 extern void fn_800EF73C(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_8023780C(void);
 extern void fn_80237874(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void fn_803EC568(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC91C(void);
@@ -760,7 +760,7 @@ lbl_fn_8041D4B4_00000788:
     fmsubs f2, f3, f4, f2
     fadds f0, f0, f2
     stfs f0, 0x40(r1)
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f1, 0x90(r30)
     mulli r0, r31, 0xc
     lfs f0, lbl_80886568
@@ -781,7 +781,7 @@ lbl_fn_8041D4B4_00000788:
     li r10, -0x1
     stw r11, 0x8(r1)
     stw r0, 0xc(r1)
-    bl fn_8023A8B4
+    bl res_registerResource
     slwi r0, r31, 5
     lfs f1, lbl_80886568
     add r4, r30, r0

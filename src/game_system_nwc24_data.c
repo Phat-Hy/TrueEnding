@@ -29,7 +29,7 @@ extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 
 /* External data declarations */
 extern u8 lbl_8074E008[];
@@ -1657,7 +1657,7 @@ lbl_fn_8038A5F0_00001728:
 lbl_fn_8038A5F0_00001730:
     frsp f2, f2
     lfs f1, 0xe0(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x78(r1)
 lbl_fn_8038A5F0_00001744:
@@ -1736,7 +1736,7 @@ lbl_fn_8038A5F0_00001854:
     b lbl_fn_8038A5F0_00001874
 lbl_fn_8038A5F0_00001860:
     lfs f1, 0x6c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x74(r1)

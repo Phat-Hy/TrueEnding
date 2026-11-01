@@ -24,7 +24,7 @@ extern void fn_80097D40(void);
 extern void atn_Anim_getDuration(void);
 extern void fn_800F72CC(void);
 extern void fn_800F7FD8(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_80121F00(void);
 extern void fn_8012A1B8(void);
 extern void fn_8012A288(void);
@@ -1877,7 +1877,7 @@ lbl_fn_803267E8_000019B8:
     subf. r0, r0, r4
     bne lbl_fn_803267E8_00001A04
     bl fn_8013A194
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x15f8(r31)
 lbl_fn_803267E8_00001A04:
     mr r3, r31

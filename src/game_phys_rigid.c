@@ -29,10 +29,10 @@ extern void fn_8014FCE8(void);
 extern void fn_8016F3D0(void);
 extern void fn_80171DB0(void);
 extern void fn_80211480(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_80239D58(void);
-extern void fn_80239DAC(void);
-extern void fn_8023A8B4(void);
+extern void res_findResourceSlot(void);
+extern void res_registerResource(void);
 extern void world_getGlobalFlag(void);
 extern void fn_80373148(void);
 extern void fn_803750E4(void);
@@ -408,7 +408,7 @@ lbl_fn_8010A308_00000454:
 lbl_fn_8010A308_0000046C:
     li r3, 0x0
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80881494
     lis r8, lbl_807C7030@ha
     stfs f0, 0x18(r1)
@@ -431,7 +431,7 @@ lbl_fn_8010A308_0000046C:
     li r10, -0x1
     stw r11, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lis r4, lbl_80735DD0@ha
     lfs f1, lbl_80881494
     addi r4, r4, lbl_80735DD0@l
@@ -558,7 +558,7 @@ lbl_fn_8010A4A8_00000680:
 lbl_fn_8010A4A8_00000684:
     mr r3, r30
     li r4, 0x3e9
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80881494
     lis r7, lbl_807C7030@ha
     stfs f0, 0x10(r1)
@@ -581,7 +581,7 @@ lbl_fn_8010A4A8_00000684:
     li r10, -0x1
     stw r28, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lfs f0, lbl_80881478
     li r3, 0x0
     li r0, 0x5
@@ -798,15 +798,15 @@ lbl_fn_8010A868_000009DC:
     lwz r3, lbl_8087F3C0
     li r5, 0x3e9
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     li r5, 0x3ea
     lwz r4, 0x0(r27)
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     li r3, 0x0
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r4, 0x0(r27)
     addi r7, r30, lbl_807C7030@l
     mulli r0, r24, 0x24
@@ -826,7 +826,7 @@ lbl_fn_8010A868_000009DC:
     stw r28, 0x8(r1)
     stw r29, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     addis r4, r26, 0x4
     subi r3, r31, 0x5555
     subi r0, r4, 0x1ce8
@@ -877,7 +877,7 @@ lbl_fn_8010A868_00000AC4:
     fmr f29, f30
 lbl_fn_8010A868_00000B10:
     li r4, 0x3ea
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r4, 0x0(r27)
     addi r7, r30, lbl_807C7030@l
     mulli r0, r24, 0x24
@@ -897,7 +897,7 @@ lbl_fn_8010A868_00000B10:
     stw r28, 0x8(r1)
     stw r29, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     stw r29, 0x8(r27)
 lbl_fn_8010A868_00000B6C:
     addi r27, r27, 0xc

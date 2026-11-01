@@ -23,8 +23,8 @@ extern void fn_801FEE08(void);
 extern void fn_80219160(void);
 extern void fn_80219558(void);
 extern void fn_8021AF50(void);
-extern void fn_80232B7C(void);
-extern void fn_80239DAC(void);
+extern void sound_initGlobalInstances(void);
+extern void res_findResourceSlot(void);
 extern void fn_8023A680(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
@@ -42,7 +42,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void fn_80686A48(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 
 /* External data declarations */
 extern u8 lbl_80750618[];
@@ -592,7 +592,7 @@ lbl_fn_803D83A8_00000710:
     addi r3, r15, 0x1554
     li r4, 0x0
     stw r0, 0xb8(r5)
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r3, lbl_8087F9F8
     li r16, 0x0
     lwz r0, 0x1590(r3)
@@ -768,7 +768,7 @@ lbl_fn_803D83A8_0000098C:
     stw r0, 0xb8(r3)
     li r6, 0x0
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     li r0, 0x0
     stw r0, 0xb8(r3)
@@ -795,7 +795,7 @@ lbl_fn_803D83A8_000009F0:
     addi r3, r15, 0x1158
     li r4, 0x0
     stw r0, 0xb8(r5)
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r3, lbl_8087F8A0
     li r31, 0x0
     lis r0, lbl_807506A0@ha
@@ -973,7 +973,7 @@ lbl_fn_803D83A8_00000CA8:
 lbl_fn_803D83A8_00000CB0:
     frsp f2, f2
     lfs f1, 0x1cc(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x7c(r1)
 lbl_fn_803D83A8_00000CC4:
@@ -1050,7 +1050,7 @@ lbl_fn_803D83A8_00000DCC:
     b lbl_fn_803D83A8_00000DEC
 lbl_fn_803D83A8_00000DD8:
     lfs f1, 0x70(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x78(r1)
@@ -1392,7 +1392,7 @@ lbl_fn_803D83A8_000012E0:
     stw r0, 0xb8(r3)
     li r6, 0x0
     lwz r3, lbl_8087F3C0
-    bl fn_80239DAC
+    bl res_findResourceSlot
     lwz r3, lbl_8087F3C0
     li r0, 0x0
     stw r0, 0xb8(r3)

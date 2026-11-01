@@ -38,8 +38,8 @@ extern void fn_80139560(void);
 extern void fn_80145334(void);
 extern void dialog_renderWindow(void);
 extern void fn_8016F3D0(void);
-extern void fn_80232B7C(void);
-extern void fn_8023A8B4(void);
+extern void sound_initGlobalInstances(void);
+extern void res_registerResource(void);
 extern void fn_8032B314(void);
 extern void fn_8032B6F8(void);
 extern void fn_8032B7F0(void);
@@ -136,7 +136,7 @@ asm void fn_8054770C(void)
     stfs f0, 0x1c(r1)
     stfs f0, 0x20(r1)
     stfs f0, 0x24(r1)
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     li r0, -0x1
     stw r0, 0x8(r1)
     li r0, 0x1
@@ -150,7 +150,7 @@ asm void fn_8054770C(void)
     li r5, 0x0
     li r6, 0x0
     li r10, -0x1
-    bl fn_8023A8B4
+    bl res_registerResource
     lis r4, lbl_8075E324@ha
     lfs f1, lbl_80887CE4
     addi r4, r4, lbl_8075E324@l

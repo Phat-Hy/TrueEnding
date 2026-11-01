@@ -26,12 +26,12 @@ extern void fn_8015495C(void);
 extern void fn_8016D3F8(void);
 extern void actor_setState(void);
 extern void fn_8016EB48(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_802377B8(void);
 extern void fn_8023780C(void);
 extern void fn_8023781C(void);
 extern void fn_80237874(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void fn_803EC568(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC91C(void);
@@ -44,7 +44,7 @@ extern void rand(void);
 extern void strcmp(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
-extern void fn_8068AEA8(void);
+extern void std_fmod(void);
 extern void fn_80695B00(void);
 
 /* External data declarations */
@@ -318,7 +318,7 @@ lbl_fn_803FD328_000002BC:
     stfs f2, 0x28(r1)
     fadds f1, f3, f0
     lfd f2, lbl_807525B8@l(r3)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80886090
     fcmpo cr0, f3, f0
@@ -395,7 +395,7 @@ lbl_fn_803FD328_000003E0:
     stfs f2, 0x1c(r1)
     fadds f1, f3, f0
     lfd f2, lbl_807525B8@l(r3)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_80886090
     fcmpo cr0, f3, f0
@@ -613,7 +613,7 @@ lbl_fn_803FD328_00000748:
     stfs f2, 0x10(r1)
     fadds f1, f29, f0
     lfd f2, lbl_807525B8@l(r25)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f0, f1
     fcmpo cr0, f0, f29
     ble lbl_fn_803FD328_0000079C
@@ -1750,7 +1750,7 @@ lbl_fn_803FE828_00001768:
     beq lbl_fn_803FE828_000017FC
     mr r3, r31
     li r4, 0x1
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r3, lbl_8087F3C0
     li r11, 0x1
     lfs f1, lbl_808860C4
@@ -1777,7 +1777,7 @@ lbl_fn_803FE828_00001768:
     stw r0, 0x8(r1)
     stw r11, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r3, lbl_8087F3C0
     li r0, 0x0
     stw r0, 0xb8(r3)

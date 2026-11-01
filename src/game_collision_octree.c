@@ -15,13 +15,13 @@ extern void fn_8017A160(void);
 extern void fn_801FECE0(void);
 extern void fn_801FED24(void);
 extern void fn_80210220(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_8023A680(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECMag(void);
 extern void rand(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 
 /* External data declarations */
 extern u8 lbl_80735DD0[];
@@ -131,7 +131,7 @@ lbl_fn_801018E4_000000C4:
 lbl_fn_801018E4_000000CC:
     frsp f2, f2
     lfs f1, 0x60(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x58(r1)
 lbl_fn_801018E4_000000E0:
@@ -210,7 +210,7 @@ lbl_fn_801018E4_000001F0:
     b lbl_fn_801018E4_00000210
 lbl_fn_801018E4_000001FC:
     lfs f1, 0x4c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x54(r1)
@@ -238,7 +238,7 @@ lbl_fn_801018E4_00000258:
 lbl_fn_801018E4_0000025C:
     mr r3, r30
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     li r0, 0x0
     stw r0, 0x8(r1)
     li r0, -0x1
@@ -270,7 +270,7 @@ lbl_fn_801018E4_000002B8:
     ble lbl_fn_801018E4_000003D0
     mr r3, r30
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     li r0, 0x0
     stw r0, 0x8(r1)
     subi r0, r28, 0x1
@@ -306,7 +306,7 @@ lbl_fn_801018E4_00000358:
 lbl_fn_801018E4_0000035C:
     mr r3, r30
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     li r0, 0x0
     stw r0, 0x8(r1)
     li r3, -0x1

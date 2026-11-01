@@ -38,8 +38,8 @@ extern void PSVECMag(void);
 extern void PSVECCrossProduct(void);
 extern void rand(void);
 extern void fn_8068A850(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 
 /* External data declarations */
 extern u8 lbl_80742F68[];
@@ -585,7 +585,7 @@ lbl_fn_8022D078_0000073C:
 lbl_fn_8022D078_0000076C:
     lfs f1, 0x48(r25)
     lfd f2, lbl_80742F70@l(r31)
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f0, f1
     lfs f29, lbl_808830D0
     stfs f0, 0x48(r25)
@@ -1999,7 +1999,7 @@ lbl_fn_8022DD1C_00001BB4:
 lbl_fn_8022DD1C_00001BBC:
     frsp f2, f2
     lfs f1, 0x244(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x148(r1)
 lbl_fn_8022DD1C_00001BD0:
@@ -2078,7 +2078,7 @@ lbl_fn_8022DD1C_00001CE0:
     b lbl_fn_8022DD1C_00001D00
 lbl_fn_8022DD1C_00001CEC:
     lfs f1, 0x13c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x144(r1)

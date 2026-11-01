@@ -23,7 +23,7 @@ extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECCrossProduct(void);
-extern void fn_8068AEA8(void);
+extern void std_fmod(void);
 
 /* External data declarations */
 extern u8 jumptable_8077A678[];
@@ -2013,7 +2013,7 @@ lbl_fn_80126214_00001B7C:
     lfs f0, 0x538(r4)
     lfd f2, lbl_807371F8@l(r3)
     fsubs f1, f3, f0
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_8088187C
     fcmpo cr0, f3, f0
@@ -2319,7 +2319,7 @@ lbl_fn_80126214_00001F7C:
     lfs f0, 0x538(r4)
     lfd f2, lbl_807371F8@l(r3)
     fsubs f1, f3, f0
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f3, f1
     lfs f0, lbl_8088187C
     fcmpo cr0, f3, f0

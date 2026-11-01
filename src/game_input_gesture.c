@@ -38,9 +38,9 @@ extern void fn_8017039C(void);
 extern void fn_801765D8(void);
 extern void fn_80176ACC(void);
 extern void fn_801781B0(void);
-extern void fn_80232B7C(void);
-extern void fn_80239DAC(void);
-extern void fn_8023A8B4(void);
+extern void sound_initGlobalInstances(void);
+extern void res_findResourceSlot(void);
+extern void res_registerResource(void);
 extern void fn_802EABE4(void);
 extern void fn_802EAC70(void);
 extern void fn_802EAF68(void);
@@ -73,7 +73,7 @@ extern void PSVECMag(void);
 extern void strcmp(void);
 extern void strstr(void);
 extern void atoi(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -1017,7 +1017,7 @@ asm void fn_802EDFE4(void)
     beq lbl_fn_802EDFE4_00000CBC
     li r3, 0x0
     li r4, 0x0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80884828
     li r3, -0x1
     lfs f1, lbl_80884820
@@ -1042,7 +1042,7 @@ asm void fn_802EDFE4(void)
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r3, lbl_8087F610
     cmpwi r3, 0x0
     beq lbl_fn_802EDFE4_00000CBC
@@ -1075,7 +1075,7 @@ lbl_fn_802EDFE4_00000CF4:
     beq lbl_fn_802EDFE4_00000D9C
     mr r3, r30
     li r4, 0x64
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lfs f0, lbl_80884828
     li r3, -0x1
     lfs f1, lbl_80884820
@@ -1100,7 +1100,7 @@ lbl_fn_802EDFE4_00000CF4:
     stw r3, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A8B4
+    bl res_registerResource
     lwz r29, lbl_8087F048
     mr r4, r30
     addi r3, r1, 0x60
@@ -1120,7 +1120,7 @@ lbl_fn_802EDFE4_00000D9C:
     mr r4, r30
     li r5, 0x64
     li r6, 0x0
-    bl fn_80239DAC
+    bl res_findResourceSlot
 lbl_fn_802EDFE4_00000DC8:
     lbz r3, 0xa(r31)
     lbz r0, 0xb(r31)
@@ -1262,7 +1262,7 @@ lbl_fn_802EE20C_00000FC4:
 lbl_fn_802EE20C_00000FCC:
     frsp f2, f2
     lfs f1, 0x50(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_802EE20C_00000FE0:
@@ -1341,7 +1341,7 @@ lbl_fn_802EE20C_000010F0:
     b lbl_fn_802EE20C_00001110
 lbl_fn_802EE20C_000010FC:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)

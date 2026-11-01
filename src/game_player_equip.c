@@ -29,11 +29,11 @@ extern void fn_8017C974(void);
 extern void fn_8018412C(void);
 extern void fn_80184548(void);
 extern void fn_80218218(void);
-extern void fn_80232B7C(void);
+extern void sound_initGlobalInstances(void);
 extern void fn_802377B8(void);
-extern void fn_80239DAC(void);
+extern void res_findResourceSlot(void);
 extern void fn_8023A680(void);
-extern void fn_8023A8B4(void);
+extern void res_registerResource(void);
 extern void world_getGlobalFlag(void);
 extern void fn_80373148(void);
 extern void atn_LoadHandle_constructor(void);
@@ -490,7 +490,7 @@ lbl_fn_8012111C_00000474:
     cmpwi r3, 0x0
     beq lbl_fn_8012111C_000004B0
     li r6, 0x1
-    bl fn_80239DAC
+    bl res_findResourceSlot
 lbl_fn_8012111C_000004B0:
     li r0, 0x0
     stw r0, 0x24(r31)
@@ -843,7 +843,7 @@ lbl_fn_8012133C_00000978:
 lbl_fn_8012133C_000009A8:
     lwz r4, 0x4(r15)
     mr r3, r15
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r0, 0x24(r24)
     cmpwi r0, 0x0
     beq lbl_fn_8012133C_00000A38
@@ -952,7 +952,7 @@ lbl_fn_8012133C_00000B2C:
     mulli r0, r0, 0xc
     lwz r4, 0x4(r15)
     add r3, r3, r0
-    bl fn_80232B7C
+    bl sound_initGlobalInstances
     lwz r0, 0x24(r24)
     cmpwi r0, 0x0
     beq lbl_fn_8012133C_00000BFC
@@ -1002,7 +1002,7 @@ lbl_fn_8012133C_00000BA8:
     stfs f29, 0x44(r1)
     stw r27, 0x8(r1)
     stw r28, 0xc(r1)
-    bl fn_8023A8B4
+    bl res_registerResource
     b lbl_fn_8012133C_00000CC4
 lbl_fn_8012133C_00000BFC:
     lwz r5, 0x0(r15)
@@ -1054,7 +1054,7 @@ lbl_fn_8012133C_00000BFC:
     stfs f29, 0x34(r1)
     stw r27, 0x8(r1)
     stw r28, 0xc(r1)
-    bl fn_8023A8B4
+    bl res_registerResource
 lbl_fn_8012133C_00000CC4:
     lwz r3, 0x30(r24)
     clrlwi r0, r3, 31
@@ -1370,7 +1370,7 @@ asm void fn_80121E14(void)
     lwz r5, 0x4(r30)
     mr r4, r6
     srwi r6, r0, 5
-    bl fn_80239DAC
+    bl res_findResourceSlot
 lbl_fn_80121E14_00001138:
     li r0, 0x0
     stw r0, 0x24(r30)

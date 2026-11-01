@@ -106,8 +106,8 @@ extern void fn_805F9D20(void);
 extern void fn_8067E23C(void);
 extern void strcmp(void);
 extern void atoi(void);
-extern void fn_8068AEA4(void);
-extern void fn_8068AEA8(void);
+extern void std_atan2(void);
+extern void std_fmod(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -2029,7 +2029,7 @@ lbl_fn_805BC1C4_00001A2C:
 lbl_fn_805BC1C4_00001A34:
     fmr f2, f8
     lfs f1, 0x68(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_805BC1C4_00001A48:
@@ -2108,7 +2108,7 @@ lbl_fn_805BC1C4_00001B58:
     b lbl_fn_805BC1C4_00001B78
 lbl_fn_805BC1C4_00001B64:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
@@ -2201,7 +2201,7 @@ lbl_fn_805BC1C4_00001BF0:
     lfs f0, 0xb4(r1)
     lfd f2, lbl_80763F10@l(r29)
     fadds f1, f24, f0
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f0, f1
     fcmpo cr0, f0, f25
     ble lbl_fn_805BC1C4_00001CE0

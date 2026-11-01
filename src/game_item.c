@@ -35,7 +35,7 @@ extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
 extern void fn_8068AE24(void);
 extern void fn_8068AE9C(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern void fn_8068B100(void);
 
 /* External data declarations */
@@ -238,7 +238,7 @@ lbl_item_useConsumable_000001D4:
 lbl_item_useConsumable_000001DC:
     frsp f2, f2
     lfs f1, 0x2c(r31)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x18(r1)
 lbl_item_useConsumable_000001F0:
@@ -317,7 +317,7 @@ lbl_item_useConsumable_00000300:
     b lbl_item_useConsumable_00000320
 lbl_item_useConsumable_0000030C:
     lfs f1, 0x24(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x14(r1)
@@ -1190,7 +1190,7 @@ lbl_fn_8004BF64_0000101C:
 lbl_fn_8004BF64_00001024:
     frsp f2, f2
     lfs f1, 0x194(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_8004BF64_00001038:
@@ -1269,7 +1269,7 @@ lbl_fn_8004BF64_00001148:
     b lbl_fn_8004BF64_00001168
 lbl_fn_8004BF64_00001154:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)

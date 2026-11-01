@@ -24,7 +24,7 @@ extern void fn_800DC6B4(void);
 extern void fn_800EB7A0(void);
 extern void fn_800EC204(void);
 extern void fn_800EE360(void);
-extern void fn_800F8548(void);
+extern void system_getNextSequenceId(void);
 extern void fn_800FAB80(void);
 extern void fn_80105BD8(void);
 extern void fn_8011FC10(void);
@@ -74,7 +74,7 @@ extern void printf(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void abort(void);
-extern void fn_8068AEA4(void);
+extern void std_atan2(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -1273,7 +1273,7 @@ lbl_fn_80245340_00000FC4:
     stw r30, 0x1514(r31)
     stw r30, 0x1518(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     mr r3, r31
     li r4, 0x3
@@ -1322,7 +1322,7 @@ lbl_fn_80245340_00001084:
     stw r30, 0x1514(r31)
     stw r30, 0x1518(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     mr r3, r31
     li r4, 0x3
@@ -1350,7 +1350,7 @@ lbl_fn_80245340_00001084:
     stw r30, 0x1514(r31)
     stw r30, 0x1518(r31)
     lwz r3, lbl_8087F048
-    bl fn_800F8548
+    bl system_getNextSequenceId
     stw r3, 0x590(r31)
     mr r3, r31
     li r4, 0x3
@@ -1705,7 +1705,7 @@ lbl_fn_80245BBC_000015A0:
     stfs f2, 0x24(r1)
     mr r3, r28
     stfs f0, 0x20(r1)
-    bl fn_800F8548
+    bl system_getNextSequenceId
     mr r30, r3
     li r3, 0x69d
     bl fn_80219E6C
@@ -1963,7 +1963,7 @@ lbl_fn_80245F14_000019EC:
 lbl_fn_80245F14_000019F4:
     frsp f2, f2
     lfs f1, 0x5c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
 lbl_fn_80245F14_00001A08:
@@ -2042,7 +2042,7 @@ lbl_fn_80245F14_00001B18:
     b lbl_fn_80245F14_00001B38
 lbl_fn_80245F14_00001B24:
     lfs f1, 0x3c(r1)
-    bl fn_8068AEA4
+    bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)

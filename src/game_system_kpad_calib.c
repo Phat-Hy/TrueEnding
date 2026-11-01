@@ -76,7 +76,7 @@ extern void PSMTXScale(void);
 extern void PSMTXMultVec(void);
 extern void PSVECMag(void);
 extern void fn_806055A0(void);
-extern void fn_8068AEA8(void);
+extern void std_fmod(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -1993,7 +1993,7 @@ lbl_fn_80371790_000019B8:
     lfs f0, 0x78(r1)
     lfd f2, lbl_8074DBF0@l(r29)
     fadds f1, f31, f0
-    bl fn_8068AEA8
+    bl std_fmod
     frsp f0, f1
     fcmpo cr0, f0, f22
     ble lbl_fn_80371790_00001A90
