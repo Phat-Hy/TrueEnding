@@ -8,7 +8,7 @@ extern void fn_800DC500(void);
 extern void fn_80119ECC(void);
 extern void fn_8012AE50(void);
 extern void fn_8012AFE8(void);
-extern void fn_80206B14(void);
+extern void sys_findModuleById(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_generateId(void);
 extern void time_wrapMilliseconds(void);
@@ -427,14 +427,14 @@ lbl_fn_803BD49C_000004BC:
 lbl_fn_803BD49C_000004C4:
     lwz r4, 0x20(r25)
     li r3, 0x0
-    bl fn_80206B14
+    bl sys_findModuleById
     cmpwi r24, 0x0
     bne lbl_fn_803BD49C_000004EC
     cmpwi r23, 0x1
     bne lbl_fn_803BD49C_000004EC
     lwz r4, 0x20(r25)
     li r3, 0x1
-    bl fn_80206B14
+    bl sys_findModuleById
 lbl_fn_803BD49C_000004EC:
     cmpwi r3, 0x0
     beq lbl_fn_803BD49C_00000524

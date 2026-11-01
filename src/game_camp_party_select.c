@@ -12,7 +12,7 @@ extern void fn_8005BEF8(void);
 extern void fn_8005BFAC(void);
 extern void equip_calcTotalStatBonuses(void);
 extern void skill_calculateDamage(void);
-extern void fn_8006CA80(void);
+extern void gmk_LoadHandle_constructor(void);
 extern void fn_8006F420(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
@@ -35,7 +35,7 @@ extern void fn_803BEAB4(void);
 extern void fn_803CE3B8(void);
 extern void fn_803CE408(void);
 extern void fn_803CE448(void);
-extern void fn_8046ECDC(void);
+extern void boss_updateLaserAimMatrix(void);
 extern void fn_8046EED8(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -1312,7 +1312,7 @@ lbl_fn_803B87A8_00000FBC:
     bge lbl_fn_803B87A8_00000FD8
     lwz r3, lbl_8087F518
     li r4, 0x0
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
 lbl_fn_803B87A8_00000FD8:
     li r3, 0x1
 lbl_fn_803B87A8_00000FDC:
@@ -1776,11 +1776,11 @@ asm void fn_803B9044(void)
     stw r31, 0x0(r27)
     mr r3, r28
     bl atn_LoadHandle_constructor
-    lis r4, fn_8006CA80@ha
+    lis r4, gmk_LoadHandle_constructor@ha
     lis r5, atn_LH_Binary_destructor@ha
     stw r31, 0x0(r28)
     addi r3, r29, 0x60
-    addi r4, r4, fn_8006CA80@l
+    addi r4, r4, gmk_LoadHandle_constructor@l
     addi r5, r5, atn_LH_Binary_destructor@l
     li r6, 0x8
     li r7, 0x8

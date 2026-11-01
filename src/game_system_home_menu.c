@@ -15,7 +15,7 @@ extern void fn_8000ECA8(void);
 extern void str_initFromCStr(void);
 extern void menu_initWindowBuffer(void);
 extern void fn_800422CC(void);
-extern void fn_80049B74(void);
+extern void snd_findSoundNodeByName(void);
 extern void fn_8004A1D4(void);
 extern void fn_8004AD9C(void);
 extern void fn_8004ADF4(void);
@@ -23,7 +23,7 @@ extern void fn_8004AE84(void);
 extern void fn_8004B0E4(void);
 extern void fn_8004B158(void);
 extern void fn_8004B1EC(void);
-extern void fn_80051CD8(void);
+extern void player_transformBoundingSphere(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void skill_calculateDamage(void);
@@ -41,7 +41,7 @@ extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB480(void);
 extern void fn_800CB538(void);
-extern void fn_800CB58C(void);
+extern void morph_hasActiveWeight(void);
 extern void fn_800CB5B4(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB69C(void);
@@ -50,7 +50,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
-extern void fn_800F52F8(void);
+extern void proj_getGlobalManager(void);
 extern void str_appendString(void);
 extern void res_MsgHandle_unload(void);
 extern void entity_Instance_destructor(void);
@@ -683,7 +683,7 @@ asm void fn_8035E550(void)
     cmpwi r0, 0x0
     beq lbl_fn_8035E550_00000784
     addi r3, r3, 0x194
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     bne lbl_fn_8035E550_00000784
     addi r3, r31, 0x194
@@ -1167,7 +1167,7 @@ lbl_fn_8035EA2C_00000D64:
     psq_st f1, 0x0(r26), 0, 0
     stfs f2, 0x20(r1)
     stfs f31, 0x24(r1)
-    bl fn_80051CD8
+    bl player_transformBoundingSphere
     cmpwi r3, 0x0
     beq lbl_fn_8035EA2C_00000E0C
     fmr f30, f29
@@ -2145,7 +2145,7 @@ lbl_fn_8035F3D4_00001BCC:
     mr r27, r3
     addi r4, r1, 0x20
     bl fn_80362FA4
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_8035FBF8
     cmpwi r3, 0x0
     beq lbl_fn_8035F3D4_00001C44
@@ -2158,7 +2158,7 @@ lbl_fn_8035F3D4_00001C44:
     beq lbl_fn_8035F3D4_00001C64
     bl fn_8035FC00
     addi r4, r27, 0xc
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     stw r3, 0x4(r27)
     b lbl_fn_8035F3D4_00001C68
 lbl_fn_8035F3D4_00001C64:

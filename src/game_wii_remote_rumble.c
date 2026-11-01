@@ -23,7 +23,7 @@ extern void fn_80011420(void);
 extern void fn_800119C0(void);
 extern void fn_800121F0(void);
 extern void fn_8001296C(void);
-extern void fn_80012C88(void);
+extern void vec3_addAssign(void);
 extern void vec3_sub(void);
 extern void vec3_add(void);
 extern void vec3_initValues(void);
@@ -48,7 +48,7 @@ extern void fn_803FAE8C(void);
 extern void fn_8048B3B8(void);
 extern void fn_8048BD04(void);
 extern void fn_8048C884(void);
-extern void fn_805381A4(void);
+extern void node_getParentNode(void);
 extern void spectate_getRootNode(void);
 extern void fn_805381F4(void);
 extern void fn_805389BC(void);
@@ -86,46 +86,42 @@ extern u32 lbl_80887E48;
 extern u32 lbl_80887E4C;
 
 /* Function declarations */
-void fn_805510FC(void);
-void fn_80551104(void);
+u32 fn_805510FC(void);
+u32 fn_80551104(void);
 void fn_8055110C(void);
 void fn_80551198(void);
-void fn_80551D24(void);
-void fn_80551D2C(void);
+void *fn_80551D24(void *p);
+u32 fn_80551D2C(void *p);
 void fn_80551D34(void);
-void fn_80551D70(void);
+u32 fn_80551D70(void *p);
 void fn_80551D78(void);
-void fn_80551D8C(void);
+u32 fn_80551D8C(void *p);
 void fn_80551D94(void);
 void fn_80551DE0(void);
-void fn_80551DFC(void);
+u32 fn_80551DFC(void *p);
 void fn_80551E04(void);
 void fn_80551E18(void);
 void fn_80551E2C(void);
 void fn_80551E40(void);
 void fn_80551E54(void);
-void fn_80551E90(void);
+u32 fn_80551E90(void *p);
 void fn_80551E98(void);
 void fn_80551EA0(void);
-void fn_80552028(void);
+u32 fn_80552028(void *p);
 void fn_80552030(void);
 void fn_805521DC(void);
 void fn_805523E0(void);
 void fn_80552434(void);
 void fn_80552464(void);
 
-asm void fn_805510FC(void)
+u32 fn_805510FC(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_80551104(void)
+u32 fn_80551104(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8055110C(void)
@@ -185,7 +181,7 @@ asm void fn_80551198(void)
     bl _savegpr_24
     fmr f31, f1
     mr r30, r3
-    bl fn_805381A4
+    bl node_getParentNode
     mr r26, r3
     mr r3, r30
     bl spectate_getRootNode
@@ -275,7 +271,7 @@ lbl_fn_80551198_000001BC:
 lbl_fn_80551198_00000228:
     addi r3, r1, 0x248
     addi r4, r1, 0x254
-    bl fn_80012C88
+    bl vec3_addAssign
     lis r4, lbl_807C7030@ha
     addi r3, r1, 0x230
     addi r4, r4, lbl_807C7030@l
@@ -329,7 +325,7 @@ lbl_fn_80551198_000002D8:
     bl fn_80538C18
     addi r3, r1, 0x230
     addi r4, r1, 0x128
-    bl fn_80012C88
+    bl vec3_addAssign
 lbl_fn_80551198_00000304:
     lfs f0, lbl_80887E30
     fcmpo cr0, f31, f0
@@ -529,7 +525,7 @@ lbl_fn_80551198_000005AC:
     bl vec3_toEulerAngles
     addi r3, r1, 0x230
     addi r4, r1, 0xb0
-    bl fn_80012C88
+    bl vec3_addAssign
 lbl_fn_80551198_000005F4:
     cmpwi r26, 0x0
     bne lbl_fn_80551198_0000061C
@@ -744,7 +740,7 @@ lbl_fn_80551198_00000894:
 lbl_fn_80551198_00000920:
     addi r3, r1, 0x1a0
     addi r4, r1, 0x194
-    bl fn_80012C88
+    bl vec3_addAssign
     lfs f0, lbl_80887E30
     fcmpo cr0, f31, f0
     ble lbl_fn_80551198_000009FC
@@ -867,7 +863,7 @@ lbl_fn_80551198_00000ACC:
     bl fn_80538C18
     addi r3, r1, 0x170
     addi r4, r1, 0x20
-    bl fn_80012C88
+    bl vec3_addAssign
 lbl_fn_80551198_00000B04:
     lfs f0, lbl_80887E30
     fcmpo cr0, f31, f0
@@ -950,18 +946,14 @@ lbl_fn_80551198_00000BF8:
     blr
 }
 
-asm void fn_80551D24(void)
+void *fn_80551D24(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x164
-    blr
+    return (u8 *)p + 0x164;
 }
 
-asm void fn_80551D2C(void)
+u32 fn_80551D2C(void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x4);
 }
 
 asm void fn_80551D34(void)
@@ -986,11 +978,9 @@ lbl_fn_80551D34_00000C6C:
     blr
 }
 
-asm void fn_80551D70(void)
+u32 fn_80551D70(void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x4);
 }
 
 asm void fn_80551D78(void)
@@ -1003,11 +993,9 @@ asm void fn_80551D78(void)
     blr
 }
 
-asm void fn_80551D8C(void)
+u32 fn_80551D8C(void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x4);
 }
 
 asm void fn_80551D94(void)
@@ -1048,11 +1036,9 @@ asm void fn_80551DE0(void)
     blr
 }
 
-asm void fn_80551DFC(void)
+u32 fn_80551DFC(void *p)
 {
-    nofralloc
-    lwz r3, 0x130(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x130);
 }
 
 asm void fn_80551E04(void)
@@ -1115,11 +1101,9 @@ asm void fn_80551E54(void)
     blr
 }
 
-asm void fn_80551E90(void)
+u32 fn_80551E90(void *p)
 {
-    nofralloc
-    lwz r3, 0x20(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x20);
 }
 
 asm void fn_80551E98(void)
@@ -1235,11 +1219,9 @@ lbl_fn_80551EA0_00000F14:
     blr
 }
 
-asm void fn_80552028(void)
+u32 fn_80552028(void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x4);
 }
 
 asm void fn_80552030(void)
@@ -1585,7 +1567,7 @@ lbl_fn_80552464_000013BC:
     cmpwi r0, 0x0
     bne lbl_fn_80552464_00001538
     mr r3, r26
-    bl fn_805381A4
+    bl node_getParentNode
     mr r25, r3
     mr r3, r26
     bl spectate_getRootNode
@@ -1693,7 +1675,7 @@ lbl_fn_80552464_00001538:
     cmpwi r0, 0x1
     bne lbl_fn_80552464_00001B04
     mr r3, r26
-    bl fn_805381A4
+    bl node_getParentNode
     mr r25, r3
     mr r3, r26
     bl spectate_getRootNode
@@ -2094,7 +2076,7 @@ lbl_fn_80552464_00001B04:
     cmpwi r0, 0x2
     bne lbl_fn_80552464_00001C04
     mr r3, r26
-    bl fn_805381A4
+    bl node_getParentNode
     mr r27, r3
     mr r3, r26
     bl spectate_getRootNode
@@ -2170,7 +2152,7 @@ lbl_fn_80552464_00001C04:
     cmpwi r0, 0x3
     bne lbl_fn_80552464_00002390
     mr r3, r26
-    bl fn_805381A4
+    bl node_getParentNode
     mr r27, r3
     mr r3, r26
     bl spectate_getRootNode
@@ -2219,7 +2201,7 @@ lbl_fn_80552464_00001CA4:
     cmpwi r0, 0x0
     ble lbl_fn_80552464_00002390
     mr r3, r26
-    bl fn_805381A4
+    bl node_getParentNode
     mr r27, r3
     mr r3, r26
     bl spectate_getRootNode
@@ -2270,7 +2252,7 @@ lbl_fn_80552464_00001D4C:
     cmpwi r24, -0x1
     beq lbl_fn_80552464_00002280
     mr r3, r26
-    bl fn_805381A4
+    bl node_getParentNode
     mr r27, r3
     mr r3, r26
     bl spectate_getRootNode

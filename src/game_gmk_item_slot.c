@@ -16,7 +16,7 @@ extern void ui_destroyWidget(void);
 extern void fn_8004A2CC(void);
 extern void fn_8005DFC8(void);
 extern void fn_8006BA8C(void);
-extern void fn_8006BB6C(void);
+extern void boss_triggerEventAction(void);
 extern void fn_80071D74(void);
 extern void gx_drawScreenQuad(void);
 extern void gx_setRenderStateParam(void);
@@ -973,7 +973,7 @@ lbl_fn_80440B2C_00000AEC:
     bl memcpy
     mr r3, r28
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
     lwz r28, lbl_80886A40
     addi r3, r1, 0x10
     mr r4, r28
@@ -1236,7 +1236,7 @@ lbl_fn_80440F64_00000E64:
     bl memcpy
     mr r3, r30
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
     bl dungeon_initGlobalContext
     addi r7, r31, 0x95
     lis r31, 0x2
@@ -1290,10 +1290,10 @@ lbl_fn_804410C0_00000F84:
     bl town_updateInteractionPoints
     lwz r3, 0x8(r28)
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
     lwz r3, 0xc(r28)
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
     bl dungeon_initGlobalContext
     lwz r4, 0x0(r29)
     bl town_updateInteractionPoints

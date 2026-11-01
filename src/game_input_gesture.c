@@ -12,20 +12,20 @@ extern void talk_setSpeakerName(void);
 extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void compass_findMarkerByName(void);
-extern void fn_8009373C(void);
+extern void target_findEntryByName(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
-extern void fn_800CB58C(void);
+extern void morph_hasActiveWeight(void);
 extern void morph_updateMesh(void);
-extern void fn_800CB6E4(void);
+extern void morph_dispatchTargetUpdate(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void fn_801028E4(void);
-extern void fn_80108F38(void);
+extern void hurtbox_testCollisionFlags(void);
 extern void skill_findNodeById(void);
-extern void fn_80129A48(void);
+extern void path_resetWaypointVelocity(void);
 extern void fn_80129A6C(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
@@ -63,7 +63,7 @@ extern void atn_LoadHandle_isLoading(void);
 extern void fn_804DA490(void);
 extern void fn_804DA4A4(void);
 extern void rand_Mersenne_constructor(void);
-extern void fn_805A3D00(void);
+extern void rand_Mersenne_init(void);
 extern void fn_805A3D6C(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
@@ -372,7 +372,7 @@ lbl_fn_802ED3F0_0000032C:
     li r5, 0x0
     bl morph_updateMesh
     addi r3, r31, 0x15a4
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     bne lbl_fn_802ED3F0_00000400
     lis r4, lbl_80748250@ha
@@ -397,7 +397,7 @@ lbl_fn_802ED3F0_000003A4:
     li r5, 0x0
     bl morph_updateMesh
     addi r3, r31, 0x15a0
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     bne lbl_fn_802ED3F0_00000400
     lis r4, lbl_80748250@ha
@@ -418,10 +418,10 @@ lbl_fn_802ED3F0_000003A4:
 lbl_fn_802ED3F0_00000400:
     addi r3, r31, 0x15a0
     addi r4, r31, 0x528
-    bl fn_800CB6E4
+    bl morph_dispatchTargetUpdate
     addi r3, r31, 0x15a4
     addi r4, r31, 0x528
-    bl fn_800CB6E4
+    bl morph_dispatchTargetUpdate
 lbl_fn_802ED3F0_00000418:
     mr r3, r31
     bl dialog_updateScriptState
@@ -691,7 +691,7 @@ asm void fn_802EDB34(void)
     stfs f1, 0xf8(r3)
     stfs f0, 0xfc(r3)
     addi r3, r3, 0xb0
-    bl fn_8009373C
+    bl target_findEntryByName
     b lbl_fn_802EDB34_00000990
 lbl_fn_802EDB34_000007A4:
     lfs f0, lbl_80884820
@@ -708,7 +708,7 @@ lbl_fn_802EDB34_000007A4:
     stfs f0, 0xf8(r3)
     stfs f0, 0xfc(r3)
     addi r3, r3, 0xb0
-    bl fn_8009373C
+    bl target_findEntryByName
     lwz r4, 0x940(r31)
     lis r0, 0x4330
     stw r0, 0x38(r1)
@@ -1108,7 +1108,7 @@ lbl_fn_802EDFE4_00000CF4:
     mr r3, r29
     addi r4, r1, 0x60
     li r5, 0x80
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
 lbl_fn_802EDFE4_00000D9C:
     lwz r0, 0x0(r31)
     cmpwi r0, 0xf
@@ -1562,7 +1562,7 @@ asm void fn_802EE7B8(void)
 lbl_fn_802EE7B8_00001410:
     mr r3, r30
     li r4, 0x0
-    bl fn_805A3D00
+    bl rand_Mersenne_init
     cmpwi r31, 0x0
     ble lbl_fn_802EE7B8_0000142C
     mr r3, r30
@@ -2062,7 +2062,7 @@ lbl_fn_802EEBA8_00001AEC:
     stw r30, 0xf1c(r3)
     lwz r3, 0x14e8(r31)
     addi r3, r3, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     lwz r3, 0x14e8(r31)
     li r0, 0x1
     lfs f0, lbl_80884858

@@ -9,34 +9,34 @@ extern void vec3_copy(void);
 extern void scene_transformPoint(void);
 extern void fn_8000D9F8(void);
 extern void vec3_assign(void);
-extern void fn_80012C88(void);
+extern void vec3_addAssign(void);
 extern void vec3_add(void);
 extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void fn_8004BF64(void);
-extern void fn_8008B964(void);
+extern void sys_getMainManager(void);
 extern void fn_800A97C4(void);
 extern void skeleton_getGlobalManager(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB58C(void);
+extern void morph_hasActiveWeight(void);
 extern void morph_updateMesh(void);
 extern void proj_getMatrix(void);
 extern void fn_800F7260(void);
 extern void viewport_getNextSequenceId(void);
-extern void fn_800F8524(void);
+extern void math_lerpf(void);
 extern void fn_80112958(void);
 extern void fn_80112960(void);
 extern void fn_80113CCC(void);
 extern void fn_80114AA0(void);
 extern void fn_801156BC(void);
 extern void fn_801156C4(void);
-extern void fn_80116BD4(void);
+extern void actor_calcSpawnTransform(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_8011F970(void);
 extern void equip_getGlobalManager(void);
 extern void fn_801D80B4(void);
 extern void fn_80217D9C(void);
-extern void fn_80219544(void);
+extern void task_getWorkerByIndex(void);
 extern void fn_8023A664(void);
 extern void fn_80244CA0(void);
 extern void fn_802F0990(void);
@@ -47,7 +47,7 @@ extern void world_getGlobalFlag(void);
 extern void fn_8037529C(void);
 extern void fn_8037F688(void);
 extern void fn_80383728(void);
-extern void fn_80392A04(void);
+extern void mtx_copyPairedSingle(void);
 extern void fn_803CF734(void);
 extern void fn_803CFC58(void);
 extern void fn_80453DBC(void);
@@ -75,7 +75,7 @@ extern void fn_8052FA48(void);
 extern void fn_80530DB8(void);
 extern void dlc_findItemInCatalog(void);
 extern void fn_805BDCC0(void);
-extern void fn_805BF414(void);
+extern void gx_evaluateVector3f(void);
 
 /* External data declarations */
 extern u8 lbl_807C7030[];
@@ -95,36 +95,34 @@ extern u32 lbl_80887B14;
 extern u32 lbl_80887B18;
 
 /* Function declarations */
-void fn_8052C0EC(void);
+u32 fn_8052C0EC(void);
 void fn_8052C0F4(void);
 void fn_8052C10C(void);
-void fn_8052C650(void);
-void fn_8052C658(void);
-void fn_8052C660(void);
+u32 fn_8052C650(void *p);
+u32 fn_8052C658(void);
+u32 fn_8052C660(void *p);
 void fn_8052C668(void);
-void fn_8052C670(void);
-void fn_8052C678(void);
+void fn_8052C670(void *p, u32 val);
+void fn_8052C678(void *p);
 void fn_8052C684(void);
 void fn_8052C68C(void);
 void fn_8052C6A8(void);
-void fn_8052C6C4(void);
+void fn_8052C6C4(void *p);
 void fn_8052C6D0(void);
 void fn_8052C960(void);
-void fn_8052C994(void);
+u32 fn_8052C994(void *p);
 void fn_8052C99C(void);
 void fn_8052C9C8(void);
 void fn_8052CA70(void);
-void fn_8052D3CC(void);
+void *fn_8052D3CC(void *p);
 void fn_8052D3D4(void);
 void fn_8052D420(void);
 void fn_8052D46C(void);
 void fn_8052DADC(void);
 
-asm void fn_8052C0EC(void)
+u32 fn_8052C0EC(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8052C0F4(void)
@@ -266,7 +264,7 @@ lbl_fn_8052C10C_000001B8:
     mr r26, r3
     bne lbl_fn_8052C10C_00000258
     lwz r3, 0x10(r1)
-    bl fn_80219544
+    bl task_getWorkerByIndex
     mr r30, r3
     bl fn_8052C658
     bl fn_8052C994
@@ -453,15 +451,15 @@ lbl_fn_8052C10C_00000408:
     bl fn_8037F688
     addi r3, r31, 0x6c
     bl item_useConsumable
-    bl fn_8008B964
+    bl sys_getMainManager
     addi r4, r31, 0x6c
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     addi r3, r31, 0x260
     addi r4, r31, 0x6c
-    bl fn_80392A04
-    bl fn_8008B964
+    bl mtx_copyPairedSingle
+    bl sys_getMainManager
     bl fn_8052C6C4
-    bl fn_8008B964
+    bl sys_getMainManager
     addi r4, r31, 0x260
     bl fn_8052C6D0
     li r0, 0x1
@@ -503,25 +501,19 @@ lbl_fn_8052C10C_00000520:
     blr
 }
 
-asm void fn_8052C650(void)
+u32 fn_8052C650(void *p)
 {
-    nofralloc
-    lwz r3, 0x10d0(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x10d0);
 }
 
-asm void fn_8052C658(void)
+u32 fn_8052C658(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F890
-    blr
+    return lbl_8087F890;
 }
 
-asm void fn_8052C660(void)
+u32 fn_8052C660(void *p)
 {
-    nofralloc
-    lwz r3, 0x1424(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x1424);
 }
 
 asm void fn_8052C668(void)
@@ -531,19 +523,14 @@ asm void fn_8052C668(void)
     b memcpy
 }
 
-asm void fn_8052C670(void)
+void fn_8052C670(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x2f0(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x2f0) = val;
 }
 
-asm void fn_8052C678(void)
+void fn_8052C678(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x380(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x380) = 0;
 }
 
 asm void fn_8052C684(void)
@@ -562,7 +549,7 @@ asm void fn_8052C68C(void)
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    b fn_805BF414
+    b gx_evaluateVector3f
 }
 
 asm void fn_8052C6A8(void)
@@ -574,15 +561,12 @@ asm void fn_8052C6A8(void)
     li r5, 0x7
     li r6, 0x8
     li r7, 0x9
-    b fn_805BF414
+    b gx_evaluateVector3f
 }
 
-asm void fn_8052C6C4(void)
+void fn_8052C6C4(void *p)
 {
-    nofralloc
-    li r0, 0x1
-    stw r0, 0x554(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x554) = 1;
 }
 
 asm void fn_8052C6D0(void)
@@ -774,11 +758,9 @@ lbl_fn_8052C960_00000898:
     blr
 }
 
-asm void fn_8052C994(void)
+u32 fn_8052C994(void *p)
 {
-    nofralloc
-    lwz r3, 0x48(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x48);
 }
 
 asm void fn_8052C99C(void)
@@ -1434,7 +1416,7 @@ lbl_fn_8052CA70_00000E14:
     stw r8, 0x2c(r1)
     bl fn_800A97C4
     addi r3, r30, 0x1340
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     beq lbl_fn_8052CA70_000012B8
     addi r3, r30, 0x1340
@@ -1454,11 +1436,9 @@ lbl_fn_8052CA70_000012B8:
     blr
 }
 
-asm void fn_8052D3CC(void)
+void *fn_8052D3CC(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x240
-    blr
+    return (u8 *)p + 0x240;
 }
 
 asm void fn_8052D3D4(void)
@@ -1550,13 +1530,13 @@ asm void fn_8052D46C(void)
     bl fn_80113CCC
     mr r4, r3
     addi r3, r1, 0x188
-    bl fn_80012C88
+    bl vec3_addAssign
     addi r3, r1, 0x1e8
     addi r4, r1, 0x188
     bl fn_80112960
     addi r3, r1, 0x1e8
     bl item_useConsumable
-    bl fn_8008B964
+    bl sys_getMainManager
     addi r4, r1, 0x1e8
     bl fn_8052C6D0
     bl fn_802F0990
@@ -1610,7 +1590,7 @@ lbl_fn_8052D46C_000014E4:
     lfs f1, lbl_80887B14
     addi r3, r31, 0x12d0
     la r4, lbl_8087E4A8
-    bl fn_800F8524
+    bl math_lerpf
     stfs f1, 0x12d0(r31)
     frsp f1, f1
     addi r3, r1, 0x11c
@@ -1691,7 +1671,7 @@ lbl_fn_8052D46C_00001614:
     addi r4, r4, lbl_807C7030@l
 lbl_fn_8052D46C_0000161C:
     addi r3, r1, 0x170
-    bl fn_80012C88
+    bl vec3_addAssign
     addi r3, r1, 0xbc
     addi r4, r31, 0x11fc
     addi r5, r31, 0x12ec
@@ -1815,7 +1795,7 @@ lbl_fn_8052D46C_000017DC:
     addi r4, r4, lbl_807C7030@l
 lbl_fn_8052D46C_000017E4:
     addi r3, r1, 0x164
-    bl fn_80012C88
+    bl vec3_addAssign
     lwz r0, 0x136c(r31)
     li r3, 0x0
     cmpwi r0, 0x0
@@ -1837,7 +1817,7 @@ lbl_fn_8052D46C_00001828:
     addi r4, r4, lbl_807C7030@l
 lbl_fn_8052D46C_00001830:
     addi r3, r1, 0x158
-    bl fn_80012C88
+    bl vec3_addAssign
     mr r3, r30
     bl fn_8052DED0
     lfs f0, 0x458(r31)
@@ -1924,7 +1904,7 @@ lbl_fn_8052D46C_00001948:
     bl fn_8052D3D4
 lbl_fn_8052D46C_00001978:
     addi r3, r31, 0x1340
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     beq lbl_fn_8052D46C_000019A8
     mr r3, r31
@@ -1941,9 +1921,9 @@ lbl_fn_8052D46C_000019A8:
     bl fn_8037F688
     addi r3, r31, 0x6c
     bl item_useConsumable
-    bl fn_8008B964
+    bl sys_getMainManager
     addi r4, r31, 0x6c
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     addi r3, r1, 0x1e8
     li r4, -0x1
     bl sound_releaseChannel

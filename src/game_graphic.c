@@ -12,9 +12,9 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_8005DF90(void);
 extern void fn_800610A4(void);
-extern void fn_80075DEC(void);
+extern void seq_stepPlaybackTimer(void);
 extern void fn_80075F58(void);
-extern void fn_800763FC(void);
+extern void seq_bindSlotResource(void);
 extern void dungeon_initGlobalContext(void);
 extern void town_registerInteractionPoint(void);
 extern void town_updateInteractionPoints(void);
@@ -37,7 +37,7 @@ extern void PSVECNormalize(void);
 extern void PSVECDotProduct(void);
 extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
-extern void fn_80614190(void);
+extern void __GXFlushPixelEngine(void);
 extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
@@ -50,15 +50,15 @@ extern void GXDrawDone(void);
 extern void fn_80616EF0(void);
 extern void fn_80617030(void);
 extern void fn_80617130(void);
-extern void fn_80617200(void);
+extern void GXSetTexCoordScaleManually(void);
 extern void GXInitTexObjDefault(void);
 extern void fn_80617270(void);
 extern void GXSetTevDirect(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
-extern void fn_806174C0(void);
-extern void fn_806175F0(void);
+extern void GXSetTevIndTile(void);
+extern void GXSetIndTexMatrix(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevSwapMode(void);
 extern void GXSetTevOrder(void);
@@ -637,12 +637,12 @@ lbl_fn_800AF544_0000065C:
     li r3, 0x1
     bl GXInitLightDistAttn
     li r3, 0x1
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     lwz r4, lbl_8087EFB4
     li r5, 0x2
     lwz r3, lbl_8087EEE0
     addi r4, r4, 0x74c
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x2
     li r4, 0x1
     li r5, 0x4
@@ -659,7 +659,7 @@ lbl_fn_800AF544_00000790:
     li r3, 0x1
     bl GXInitLightDistAttn
     li r3, 0x1
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
 lbl_fn_800AF544_000007B0:
     li r3, 0x4
     li r4, 0x0
@@ -672,12 +672,12 @@ lbl_fn_800AF544_000007B0:
     lwz r3, lbl_8087EEE0
     addi r4, r24, 0x38
     li r5, 0x0
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lwz r4, lbl_8087EFB4
     li r5, 0x1
     lwz r3, lbl_8087EEE0
     addi r4, r4, 0x77c
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -821,9 +821,9 @@ lbl_fn_800AF544_00000A10:
     mr r3, r28
     li r4, 0x1
     bl GXCopyTex
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     lwz r3, lbl_8087EEE0
-    bl fn_80075DEC
+    bl seq_stepPlaybackTimer
     lfs f1, lbl_80880E0C
     mr r4, r22
     lfs f2, lbl_80880E10
@@ -903,7 +903,7 @@ lbl_fn_800AF544_00000B2C:
     li r3, 0x2
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     lfs f5, 0x28(r29)
     lfs f4, 0x28(r24)
     lfs f3, 0x2c(r29)
@@ -1002,7 +1002,7 @@ lbl_fn_800AF544_00000C1C:
     stb r0, 0xb(r1)
     lwz r0, 0x8(r1)
     stw r0, 0xc(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1064,11 +1064,11 @@ lbl_fn_800AF544_00000C1C:
     li r5, 0x0
     lwz r3, lbl_8087EEE0
     addi r4, r4, 0x74c
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lwz r3, lbl_8087EEE0
     addi r4, r24, 0x8
     li r5, 0x1
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x0
     li r4, 0x4
     li r5, 0x1
@@ -1595,7 +1595,7 @@ lbl_fn_800AFFEC_000014D0:
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x0
     li r4, 0x3
     bl GXSetTevDirect
@@ -1617,7 +1617,7 @@ lbl_fn_800AFFEC_000014D0:
     li r5, 0x0
     lwz r3, lbl_8087EEE0
     addi r4, r4, 0x74c
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x0
     li r4, 0x1
     li r5, 0x0
@@ -1653,7 +1653,7 @@ lbl_fn_800AFFEC_000014D0:
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x0
     li r4, 0x0
     bl GXSetTevDirect
@@ -1683,9 +1683,9 @@ lbl_fn_800AFFEC_000014D0:
     li r5, 0x0
     lwz r3, lbl_8087EEE0
     addi r4, r4, 0x74c
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lwz r3, lbl_8087EEE0
-    bl fn_80075DEC
+    bl seq_stepPlaybackTimer
     li r3, 0x1
     li r4, 0x4
     li r5, 0x0
@@ -1732,7 +1732,7 @@ lbl_fn_800AFFEC_00001708:
     slwi r0, r0, 5
     add r4, r28, r0
     addi r4, r4, 0x4
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lfs f1, lbl_80880E40
     addi r4, r1, 0x8
     lfs f5, 0x28(r1)
@@ -2017,7 +2017,7 @@ asm void fn_800B0A70(void)
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x4
     li r4, 0x0
     li r5, 0x1
@@ -2083,11 +2083,11 @@ asm void fn_800B0A70(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     lwz r3, lbl_8087EEE0
     addi r4, r28, 0x88
     li r5, 0x0
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -2141,7 +2141,7 @@ lbl_fn_800B0A70_00001D1C:
     cmplw r29, r0
     blt lbl_fn_800B0A70_00001C88
     lwz r3, lbl_8087EEE0
-    bl fn_80075DEC
+    bl seq_stepPlaybackTimer
     li r3, 0x0
     li r4, 0x1
     li r5, 0x0

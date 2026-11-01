@@ -23,9 +23,9 @@ extern void fn_801489CC(void);
 extern void dialog_renderWindow(void);
 extern void inventory_applyItemStats(void);
 extern void shop_canPurchaseItem(void);
-extern void fn_80158CA4(void);
+extern void shop_loadCatalogItem(void);
 extern void fn_8015DEC0(void);
-extern void fn_8015E4B0(void);
+extern void party_initFormationSlots(void);
 extern void fn_801656A4(void);
 extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
@@ -409,7 +409,7 @@ lbl_fn_80252C40_00000364:
     stfs f3, 0x6bc(r31)
     stfs f0, 0x6c0(r31)
     stw r0, 0x12a4(r31)
-    bl fn_8015E4B0
+    bl party_initFormationSlots
 lbl_fn_80252C40_00000468:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
@@ -1363,7 +1363,7 @@ lbl_fn_80253884_0000122C:
     cmpwi r0, 0x0
     beq lbl_fn_80253884_0000129C
     mr r3, r31
-    bl fn_80158CA4
+    bl shop_loadCatalogItem
     cmpwi r3, 0x0
     beq lbl_fn_80253884_0000129C
     mr r3, r31

@@ -11,7 +11,7 @@ extern void vec3_mag(void);
 extern void scene_transformPoint(void);
 extern void fn_8000D9F8(void);
 extern void fn_8000DB1C(void);
-extern void fn_8000DCF4(void);
+extern void scene_getCamera(void);
 extern void scene_getRootNode(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
@@ -23,7 +23,7 @@ extern void mission_updateStub(void);
 extern void vec3_initValues(void);
 extern void script_executeOpcode(void);
 extern void fn_8006FA4C(void);
-extern void fn_8008B964(void);
+extern void sys_getMainManager(void);
 extern void msg_isWindowActive(void);
 extern void motion_updateFogAdj(void);
 extern void skin_playAnimationByName(void);
@@ -31,23 +31,23 @@ extern void ref_releaseHandle(void);
 extern void wcs_vformat(void);
 extern void fn_800E0000(void);
 extern void proj_getMatrix(void);
-extern void fn_800F52F8(void);
+extern void proj_getGlobalManager(void);
 extern void fn_800F530C(void);
 extern void fn_800F7260(void);
 extern void vec3_scale(void);
 extern void fn_800F7F80(void);
-extern void fn_800F7F90(void);
+extern void viewport_getFlag(void);
 extern void fn_800F7FB4(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_800F84BC(void);
-extern void fn_800F8524(void);
+extern void math_lerpf(void);
 extern void fn_8010D320(void);
 extern void fn_8010F6FC(void);
 extern void phys_scaleGravity(void);
 extern void fn_80113CCC(void);
 extern void fn_801156BC(void);
 extern void fn_801156C4(void);
-extern void fn_801162A0(void);
+extern void vec3_sqMag(void);
 extern void fn_80116BAC(void);
 extern void fn_80116E6C(void);
 extern void equip_getGlobalManager(void);
@@ -58,7 +58,7 @@ extern void fn_80139ED0(void);
 extern void fn_80139EFC(void);
 extern void fn_80139F4C(void);
 extern void fn_80139F60(void);
-extern void fn_8013A13C(void);
+extern void mtx_rotYRad(void);
 extern void fn_8013A158(void);
 extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
@@ -66,7 +66,7 @@ extern void fn_8013C3A8(void);
 extern void fn_8013C42C(void);
 extern void fn_8013C43C(void);
 extern void fn_8013C458(void);
-extern void fn_8013C480(void);
+extern void npc_isInteractionReady(void);
 extern void npc_getDialogController(void);
 extern void fn_80140518(void);
 extern void quest_initMarkerCoords(void);
@@ -75,8 +75,8 @@ extern void fn_80151210(void);
 extern void fn_801799BC(void);
 extern void fn_80179FA8(void);
 extern void fn_80198C00(void);
-extern void fn_801A03E0(void);
-extern void fn_801A03E8(void);
+extern void bgm_getGlobalManager(void);
+extern void vec3_dot(void);
 extern void fn_801A03EC(void);
 extern void fn_801A0408(void);
 extern void fn_801F19B4(void);
@@ -85,16 +85,16 @@ extern void fn_801F4484(void);
 extern void fn_801F465C(void);
 extern void save_parseSlotStats(void);
 extern void save_formatSlotTitle(void);
-extern void fn_801F6C2C(void);
+extern void save_getElapsedPlayTime(void);
 extern void save_computeCrc32(void);
 extern void save_verifyBlockCrc(void);
 extern void save_findEntryByName(void);
-extern void fn_801F8598(void);
+extern void save_formatSlotString(void);
 extern void perf_getMetricValue(void);
 extern void fn_802168BC(void);
 extern void fn_80216908(void);
 extern void fn_80244CA0(void);
-extern void fn_80244CAC(void);
+extern void script_setTaskTerminated(void);
 extern void fn_80267B20(void);
 extern void fn_80267B28(void);
 extern void fn_802A36B0(void);
@@ -340,29 +340,29 @@ lbl_fn_803D2A6C_000000BC:
     bl fn_803D2A60
 lbl_fn_803D2A6C_000000D4:
     lwz r3, 0x5c(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x60(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x64(r24)
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000000F4
-    bl fn_80244CAC
+    bl script_setTaskTerminated
 lbl_fn_803D2A6C_000000F4:
     lwz r3, 0x68(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x6c(r24)
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_0000010C
-    bl fn_80244CAC
+    bl script_setTaskTerminated
 lbl_fn_803D2A6C_0000010C:
     lwz r3, 0x70(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x74(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x78(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x7c(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     mr r21, r24
     mr r22, r24
     li r19, 0x0
@@ -391,30 +391,30 @@ lbl_fn_803D2A6C_00000170:
     bl fn_803D2A60
 lbl_fn_803D2A6C_00000188:
     lwz r3, 0xbc(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xc0(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xc4(r21)
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000001A8
-    bl fn_80244CAC
+    bl script_setTaskTerminated
 lbl_fn_803D2A6C_000001A8:
     lwz r3, 0xc8(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xcc(r21)
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000001C0
-    bl fn_80244CAC
+    bl script_setTaskTerminated
 lbl_fn_803D2A6C_000001C0:
     lwz r3, 0xd0(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xdc(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     mr r23, r22
     li r20, 0x0
 lbl_fn_803D2A6C_000001D8:
     lwz r3, 0x318(r23)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     addi r20, r20, 0x1
     addi r23, r23, 0x4
     cmpwi r20, 0x5
@@ -428,22 +428,22 @@ lbl_fn_803D2A6C_000001D8:
     li r19, 0x0
 lbl_fn_803D2A6C_0000020C:
     lwz r3, 0x574(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x594(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     addi r19, r19, 0x1
     addi r21, r21, 0x4
     cmpwi r19, 0x8
     blt lbl_fn_803D2A6C_0000020C
     lwz r3, 0x5b8(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x3d8(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     mr r21, r24
     li r19, 0x0
 lbl_fn_803D2A6C_00000244:
     lwz r3, 0x3dc(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     addi r19, r19, 0x1
     addi r21, r21, 0x4
     cmpwi r19, 0x4
@@ -459,23 +459,23 @@ lbl_fn_803D2A6C_00000264:
     bl fn_803D2A60
 lbl_fn_803D2A6C_0000027C:
     lwz r3, 0x6fc(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     addi r19, r19, 0x1
     addi r21, r21, 0x4
     cmpwi r19, 0x6
     blt lbl_fn_803D2A6C_00000264
     lwz r3, 0x714(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x71c(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x718(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x720(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x72c(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x730(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     mr r21, r24
     li r19, 0x0
 lbl_fn_803D2A6C_000002CC:
@@ -487,45 +487,45 @@ lbl_fn_803D2A6C_000002CC:
     bl fn_803D2A60
 lbl_fn_803D2A6C_000002E4:
     lwz r3, 0x8a0(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     addi r19, r19, 0x1
     addi r21, r21, 0x4
     cmpwi r19, 0xc
     blt lbl_fn_803D2A6C_000002CC
     lwz r3, 0xa84(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xa88(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x73c(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x740(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x744(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x7b8(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x7bc(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     mr r21, r24
     li r19, 0x0
 lbl_fn_803D2A6C_0000033C:
     lwz r3, 0x814(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x81c(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x824(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x82c(r21)
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000364
-    bl fn_80244CAC
+    bl script_setTaskTerminated
 lbl_fn_803D2A6C_00000364:
     addi r19, r19, 0x1
     addi r21, r21, 0x4
     cmpwi r19, 0x2
     blt lbl_fn_803D2A6C_0000033C
     lwz r3, 0x83c(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x840(r24)
     bl fn_803CFC58
     cmpwi r3, 0x0
@@ -534,13 +534,13 @@ lbl_fn_803D2A6C_00000364:
     bl fn_803D2A54
 lbl_fn_803D2A6C_00000394:
     lwz r3, 0x840(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     addi r3, r24, 0x85c
     bl fn_803CF734
     lwz r3, 0x844(r24)
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000003B4
-    bl fn_80244CAC
+    bl script_setTaskTerminated
 lbl_fn_803D2A6C_000003B4:
     lwz r3, 0x870(r24)
     cmpwi r3, 0x0
@@ -552,7 +552,7 @@ lbl_fn_803D2A6C_000003B4:
     bl fn_803D2A54
 lbl_fn_803D2A6C_000003D4:
     lwz r3, 0x870(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
 lbl_fn_803D2A6C_000003DC:
     lwz r3, 0x848(r24)
     cmpwi r3, 0x0
@@ -564,27 +564,27 @@ lbl_fn_803D2A6C_000003DC:
     bl fn_803D2A54
 lbl_fn_803D2A6C_000003FC:
     lwz r3, 0x848(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     mr r21, r24
     li r19, 0x0
 lbl_fn_803D2A6C_0000040C:
     lwz r3, 0x84c(r21)
     bl fn_803D2A60
     lwz r3, 0x84c(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     addi r19, r19, 0x1
     addi r21, r21, 0x4
     cmpwi r19, 0x4
     blt lbl_fn_803D2A6C_0000040C
     lwz r3, 0x874(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     mr r21, r24
     li r19, 0x0
 lbl_fn_803D2A6C_0000043C:
     lwz r3, 0x878(r21)
     bl fn_803D2A60
     lwz r3, 0x878(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     addi r19, r19, 0x1
     addi r21, r21, 0x4
     cmpwi r19, 0x4
@@ -594,47 +594,47 @@ lbl_fn_803D2A6C_0000045C:
     li r19, 0x0
 lbl_fn_803D2A6C_00000464:
     lwz r3, 0xb38(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xb3c(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xb40(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xb44(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xb48(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xb4c(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xb50(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xb54(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     addi r19, r19, 0x1
     addi r21, r21, 0x20
     cmpwi r19, 0x8
     blt lbl_fn_803D2A6C_00000464
     lwz r3, 0x2654(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xd70(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xd74(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xdb4(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xdb8(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xdbc(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xdc0(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     mr r3, r24
     bl fn_803D6DE4
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00004300
-    bl fn_800F7F90
+    bl viewport_getFlag
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000518
-    bl fn_800F7F90
+    bl viewport_getFlag
     bl fn_803D6DF4
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00004300
@@ -669,7 +669,7 @@ lbl_fn_803D2A6C_0000057C:
     li r29, 0x1
 lbl_fn_803D2A6C_00000580:
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     mr r31, r3
     bl equip_getGlobalManager
     bl magic_getOffset6C
@@ -802,7 +802,7 @@ lbl_fn_803D2A6C_0000076C:
     la r3, lbl_8087DEE8
     la r4, lbl_8087DEEC
     fmuls f1, f0, f1
-    bl fn_800F8524
+    bl math_lerpf
     lfs f2, 0x4c(r24)
     lfs f0, lbl_80885D58
     fsubs f26, f1, f2
@@ -929,7 +929,7 @@ lbl_fn_803D2A6C_00000930:
     bl fn_80179FA8
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000B60
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     bl fn_801A0408
     stw r3, 0x18(r1)
     lfs f31, lbl_80885E0C
@@ -949,7 +949,7 @@ lbl_fn_803D2A6C_0000096C:
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00000B4C
     lwz r3, 0x18(r1)
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000B4C
     lwz r3, 0x18(r1)
@@ -1029,7 +1029,7 @@ lbl_fn_803D2A6C_00000A5C:
     bl quest_initMarkerCoords
     addi r3, r1, 0x470
     addi r4, r1, 0x2a8
-    bl fn_801A03E8
+    bl vec3_dot
     fsubs f0, f27, f1
     fmadds f29, f26, f0, f29
 lbl_fn_803D2A6C_00000AD4:
@@ -1132,7 +1132,7 @@ lbl_fn_803D2A6C_00000B90:
     addi r3, r1, 0x10
     lfs f1, lbl_80885E28
     addi r4, r1, 0x14
-    bl fn_800F8524
+    bl math_lerpf
     stfs f1, 0x14(r1)
     frsp f1, f1
     addi r4, r21, 0x10b8
@@ -1229,7 +1229,7 @@ lbl_fn_803D2A6C_00000D80:
     li r5, 0x0
     li r7, 0x0
     bl fn_803E3468
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_803D6F60
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0
@@ -1356,7 +1356,7 @@ lbl_fn_803D2A6C_00000F68:
     lfs f0, lbl_80885DDC
     fadds f0, f1, f0
     stfs f0, 0x45c(r1)
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r3
     addi r3, r1, 0x44c
     addi r5, r1, 0x458
@@ -1462,7 +1462,7 @@ lbl_fn_803D2A6C_00001100:
     lfs f0, 0x444(r1)
     fadds f0, f0, f28
     stfs f0, 0x444(r1)
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r3
     addi r3, r1, 0x434
     addi r5, r1, 0x440
@@ -1516,13 +1516,13 @@ lbl_fn_803D2A6C_0000118C:
     bl vec3_assign
     addi r3, r1, 0x608
     bl fn_803D7280
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     bl fn_801A0408
     mr r20, r3
     b lbl_fn_803D2A6C_0000126C
 lbl_fn_803D2A6C_000011F0:
     mr r3, r20
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00001260
     addi r3, r1, 0x41c
@@ -1603,7 +1603,7 @@ lbl_fn_803D2A6C_000012EC:
     addi r3, r1, 0x608
     bl fn_803D731C
     mr r21, r3
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r3
     mr r5, r21
     addi r3, r1, 0x404
@@ -1643,7 +1643,7 @@ lbl_fn_803D2A6C_00001394:
     addi r3, r1, 0x608
     bl fn_803D731C
     mr r22, r3
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r3
     mr r5, r22
     addi r3, r1, 0x3f8
@@ -1677,7 +1677,7 @@ lbl_fn_803D2A6C_00001414:
     lwz r0, 0x728(r24)
     cmpwi r0, 0x0
     beq lbl_fn_803D2A6C_000014E4
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl magic_getOffset244
     bl fn_801156C4
     bl fn_803D6FE4
@@ -1740,7 +1740,7 @@ lbl_fn_803D2A6C_000014EC:
     fmr f3, f1
     fmr f4, f1
     bl fn_803D6FEC
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_80116BAC
     mr r4, r3
     addi r3, r1, 0x258
@@ -1823,7 +1823,7 @@ lbl_fn_803D2A6C_00001634:
     addi r3, r1, 0x3d0
     bl mission_updateStub
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     mr r19, r3
     bl scene_getRootNode
     lis r4, lbl_807506A0@ha
@@ -1849,7 +1849,7 @@ lbl_fn_803D2A6C_00001698:
     lfs f0, lbl_80885D68
     fadds f0, f1, f0
     stfs f0, 0x3e0(r1)
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r3
     addi r3, r1, 0x1fc
     addi r5, r1, 0x3dc
@@ -1863,7 +1863,7 @@ lbl_fn_803D2A6C_00001698:
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000016F4
     mr r3, r19
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_0000181C
 lbl_fn_803D2A6C_000016F4:
@@ -1948,7 +1948,7 @@ lbl_fn_803D2A6C_0000181C:
     bl fn_803D6F70
     cmpwi r3, 0x6
     bne lbl_fn_803D2A6C_00001838
-    bl fn_800F7F90
+    bl viewport_getFlag
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00001BEC
 lbl_fn_803D2A6C_00001838:
@@ -1990,14 +1990,14 @@ lbl_fn_803D2A6C_00001894:
     lwz r4, 0x0(r4)
     mr r5, r27
     bl fn_803E0E10
-    bl fn_800F7F90
+    bl viewport_getFlag
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_0000191C
-    bl fn_800F7F90
+    bl viewport_getFlag
     bl fn_803D6E1C
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_000018F4
-    bl fn_800F7F90
+    bl viewport_getFlag
     bl fn_803D7060
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_0000191C
@@ -2038,7 +2038,7 @@ lbl_fn_803D2A6C_0000195C:
     bl fn_803D215C
     stw r30, 0x334(r21)
 lbl_fn_803D2A6C_00001978:
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_803D6F60
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
@@ -2084,22 +2084,22 @@ lbl_fn_803D2A6C_00001A1C:
     mr r5, r19
     addi r4, r31, 0x10f7
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     mr r3, r18
     mr r5, r19
     addi r4, r31, 0x10fb
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     mr r3, r18
     mr r5, r19
     addi r4, r31, 0x1101
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     mr r3, r18
     bl fn_803D737C
     fmr f31, f1
     mr r3, r18
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     fmr f30, f1
     mr r3, r25
     bl fn_803D707C
@@ -2215,7 +2215,7 @@ lbl_fn_803D2A6C_00001BEC:
     cmpwi r3, 0x6
     beq lbl_fn_803D2A6C_00001E2C
     li r18, 0x0
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     bl fn_801A0408
     lis r5, lbl_80750650@ha
     lis r4, lbl_807506A0@ha
@@ -2305,7 +2305,7 @@ lbl_fn_803D2A6C_00001D20:
 lbl_fn_803D2A6C_00001D48:
     li r20, 0x1
 lbl_fn_803D2A6C_00001D4C:
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_803D6F60
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
@@ -2496,7 +2496,7 @@ lbl_fn_803D2A6C_00001FF8:
     addi r3, r1, 0x3c4
     addi r4, r24, 0x888
     bl vec3_assign
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r3
     addi r3, r1, 0x1e4
     addi r5, r1, 0x3c4
@@ -2507,7 +2507,7 @@ lbl_fn_803D2A6C_00001FF8:
     addi r3, r1, 0x3b8
     addi r4, r24, 0x894
     bl vec3_assign
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r3
     addi r3, r1, 0x1d8
     addi r5, r1, 0x3b8
@@ -2623,7 +2623,7 @@ lbl_fn_803D2A6C_000021EC:
     mr r4, r3
     addi r3, r1, 0x580
     bl wcscpy
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_80116BAC
     mr r4, r3
     addi r3, r1, 0x1c8
@@ -2640,7 +2640,7 @@ lbl_fn_803D2A6C_0000222C:
     mr r4, r3
     addi r3, r1, 0x580
     bl wcscpy
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_80116BAC
     mr r4, r3
     addi r3, r1, 0x1b8
@@ -2829,7 +2829,7 @@ lbl_fn_803D2A6C_000024FC:
     lwz r27, 0xb3c(r30)
     mr r3, r26
     bl perf_getMetricValue
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     fmr f24, f1
     b lbl_fn_803D2A6C_00002544
 lbl_fn_803D2A6C_00002518:
@@ -2863,7 +2863,7 @@ lbl_fn_803D2A6C_00002544:
     bl fn_803D2148
     mr r3, r27
     bl perf_getMetricValue
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     fmr f29, f1
     mr r3, r27
     bl perf_getMetricValue
@@ -2907,7 +2907,7 @@ lbl_fn_803D2A6C_000025F4:
     bl fn_803D2148
     mr r3, r27
     bl perf_getMetricValue
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     fmr f29, f1
     mr r3, r27
     bl perf_getMetricValue
@@ -2920,7 +2920,7 @@ lbl_fn_803D2A6C_000025F4:
 lbl_fn_803D2A6C_0000264C:
     mr r3, r26
     bl perf_getMetricValue
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     fmr f29, f1
     mr r3, r26
     bl perf_getMetricValue
@@ -3116,7 +3116,7 @@ lbl_fn_803D2A6C_000028C4:
     bl fn_803D7110
     lfs f1, 0x378(r1)
     addi r3, r1, 0x508
-    bl fn_8013A13C
+    bl mtx_rotYRad
     mr r3, r26
     addi r4, r1, 0x508
     bl fn_803D7124
@@ -3161,7 +3161,7 @@ lbl_fn_803D2A6C_000029B8:
     bl fn_803D7110
     lfs f1, 0x378(r1)
     addi r3, r1, 0x4d8
-    bl fn_8013A13C
+    bl mtx_rotYRad
     mr r3, r27
     addi r4, r1, 0x4d8
     bl fn_803D7124
@@ -3576,7 +3576,7 @@ lbl_fn_803D2A6C_00002FCC:
     lfs f0, 0x33c(r1)
     fadds f0, f0, f30
     stfs f0, 0x33c(r1)
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r3
     addi r3, r1, 0x32c
     addi r5, r1, 0x338
@@ -3638,11 +3638,11 @@ lbl_fn_803D2A6C_000030BC:
     addi r3, r1, 0x320
     bl mission_updateStub
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000030EC
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x320
@@ -3666,7 +3666,7 @@ lbl_fn_803D2A6C_000030EC:
     stw r18, 0x4b0(r1)
     stfs f26, 0x4d4(r1)
     stw r18, 0x4b4(r1)
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     bl fn_801A0408
     lfs f27, lbl_80885E2C
     mr r19, r3
@@ -3680,7 +3680,7 @@ lbl_fn_803D2A6C_00003150:
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00003368
     mr r3, r19
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00003368
     mr r3, r19
@@ -3700,10 +3700,10 @@ lbl_fn_803D2A6C_00003150:
     bl fn_803D70A8
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00003368
-    bl fn_800F7F90
+    bl viewport_getFlag
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000031D8
-    bl fn_800F7F90
+    bl viewport_getFlag
     mr r4, r19
     bl fn_804EB014
     cmpwi r3, 0x0
@@ -3716,7 +3716,7 @@ lbl_fn_803D2A6C_000031D8:
     addi r4, r1, 0x320
     bl vec3_sub
     addi r3, r1, 0x108
-    bl fn_801162A0
+    bl vec3_sqMag
     fmr f28, f1
     mr r3, r19
     bl fn_803D717C
@@ -3748,7 +3748,7 @@ lbl_fn_803D2A6C_0000325C:
     bl fn_803D6F70
     cmpwi r3, 0x6
     bne lbl_fn_803D2A6C_00003278
-    bl fn_800F7F90
+    bl viewport_getFlag
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000032A4
 lbl_fn_803D2A6C_00003278:
@@ -3841,7 +3841,7 @@ lbl_fn_803D2A6C_00003398:
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00003580
     mr r3, r19
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00003580
     mr r3, r19
@@ -3852,10 +3852,10 @@ lbl_fn_803D2A6C_00003398:
     bl fn_803D6EAC
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00003580
-    bl fn_800F7F90
+    bl viewport_getFlag
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000033FC
-    bl fn_800F7F90
+    bl viewport_getFlag
     mr r4, r19
     bl fn_804EB014
     cmpwi r3, 0x0
@@ -3868,7 +3868,7 @@ lbl_fn_803D2A6C_000033FC:
     addi r4, r1, 0x320
     bl vec3_sub
     addi r3, r1, 0xfc
-    bl fn_801162A0
+    bl vec3_sqMag
     fmr f28, f1
     mr r3, r19
     bl fn_803D717C
@@ -3893,11 +3893,11 @@ lbl_fn_803D2A6C_00003468:
     bl fn_803D6F70
     cmpwi r3, 0x6
     bne lbl_fn_803D2A6C_00003484
-    bl fn_800F7F90
+    bl viewport_getFlag
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000034BC
 lbl_fn_803D2A6C_00003484:
-    bl fn_800F7F90
+    bl viewport_getFlag
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000034BC
     fcmpo cr0, f28, f27
@@ -4014,7 +4014,7 @@ lbl_fn_803D2A6C_00003610:
     lfs f0, 0x318(r1)
     fadds f0, f0, f27
     stfs f0, 0x318(r1)
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r3
     addi r3, r1, 0xe4
     addi r5, r1, 0x314
@@ -4146,7 +4146,7 @@ lbl_fn_803D2A6C_00003800:
     addi r21, r21, 0x4
     blt lbl_fn_803D2A6C_000035CC
 lbl_fn_803D2A6C_00003814:
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_803D6F60
     lwz r0, 0x10(r3)
     cmpwi r0, 0x0
@@ -4192,7 +4192,7 @@ lbl_fn_803D2A6C_00003864:
     lfs f0, 0x300(r1)
     fadds f0, f0, f31
     stfs f0, 0x300(r1)
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r3
     addi r3, r1, 0xcc
     addi r5, r1, 0x2fc
@@ -4295,10 +4295,10 @@ lbl_fn_803D2A6C_00003A44:
     cmpwi r19, 0x0
     bne lbl_fn_803D2A6C_00003864
 lbl_fn_803D2A6C_00003A4C:
-    bl fn_800F7F90
+    bl viewport_getFlag
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00003C94
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     bl fn_801A0408
     lis r4, lbl_807506A0@ha
     slwi r0, r18, 2
@@ -4310,12 +4310,12 @@ lbl_fn_803D2A6C_00003A4C:
     addi r23, r4, lbl_807506A0@l
     b lbl_fn_803D2A6C_00003C8C
 lbl_fn_803D2A6C_00003A84:
-    bl fn_800F7F90
+    bl viewport_getFlag
     mr r4, r19
     bl fn_804EB7C8
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00003C80
-    bl fn_800F7F90
+    bl viewport_getFlag
     mr r4, r19
     bl fn_804EB014
     cmpwi r3, 0x0
@@ -4345,7 +4345,7 @@ lbl_fn_803D2A6C_00003A84:
     lfs f0, 0x300(r1)
     fadds f0, f0, f29
     stfs f0, 0x300(r1)
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r3
     addi r3, r1, 0xb4
     addi r5, r1, 0x2fc
@@ -4623,7 +4623,7 @@ lbl_fn_803D2A6C_00003F24:
     addi r3, r1, 0x2e4
     bl vec3_copy
 lbl_fn_803D2A6C_00003F2C:
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r3
     addi r3, r1, 0x6c
     addi r5, r1, 0x2e4
@@ -4747,7 +4747,7 @@ lbl_fn_803D2A6C_000040DC:
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00004118
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     mr r25, r3
     b lbl_fn_803D2A6C_0000411C
 lbl_fn_803D2A6C_00004118:
@@ -4791,7 +4791,7 @@ lbl_fn_803D2A6C_0000411C:
     addi r4, r1, 0x54
     bl vec3_copy
 lbl_fn_803D2A6C_000041B0:
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r3
     addi r3, r1, 0x2cc
     addi r5, r1, 0x2d8
@@ -4830,7 +4830,7 @@ lbl_fn_803D2A6C_00004218:
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00004254
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     mr r25, r3
     b lbl_fn_803D2A6C_00004258
 lbl_fn_803D2A6C_00004254:
@@ -4850,7 +4850,7 @@ lbl_fn_803D2A6C_00004258:
     mr r5, r23
     addi r3, r1, 0x3c
     bl vec3_add
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r3
     addi r3, r1, 0x2c0
     addi r5, r1, 0x3c

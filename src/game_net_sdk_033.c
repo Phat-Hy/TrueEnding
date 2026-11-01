@@ -15,7 +15,7 @@ extern void strncmp(void);
 extern void strstr(void);
 extern void atoi(void);
 extern void fn_806A420C(void);
-extern void fn_806A4270(void);
+extern void net_truncateU16(void);
 extern void fn_806D57A0(void);
 extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
@@ -25,7 +25,7 @@ extern void fn_806D5C90(void);
 extern void fn_806D6250(void);
 extern void fn_806D64B0(void);
 extern void fn_806D6560(void);
-extern void fn_806D6610(void);
+extern void net_invokeChannelCallback(void);
 extern void fn_806D6720(void);
 extern void net_socketConnect(void);
 extern void fn_806D7AA0(void);
@@ -36,7 +36,7 @@ extern void fn_806D7F20(void);
 extern void fn_806D8060(void);
 extern void fn_806D8560(void);
 extern void fn_806D8B20(void);
-extern void fn_806D8E30(void);
+extern void net_strdup(void);
 extern void net_getTimestampMs(void);
 extern void fn_806DA070(void);
 extern void fn_806DA120(void);
@@ -49,7 +49,7 @@ extern void fn_806DE290(void);
 extern void fn_806DE2F0(void);
 extern void fn_806DE3A0(void);
 extern void net_sendString(void);
-extern void fn_806DE4E0(void);
+extern void net_sendFormattedCommand(void);
 extern void fn_806DE660(void);
 extern void fn_806DE670(void);
 extern void fn_806DE790(void);
@@ -295,7 +295,7 @@ lbl_fn_806E4240_00000220:
     lwz r0, 0x10(r30)
     stw r0, 0x0(r3)
     lwz r3, 0x14(r1)
-    bl fn_806D8E30
+    bl net_strdup
     stw r3, 0x8(r27)
     li r3, 0x0
     bl fn_806D8B20
@@ -335,7 +335,7 @@ lbl_fn_806E4240_000002B8:
     lwz r0, 0x10(r30)
     stw r0, 0x0(r3)
     lwz r3, 0x14(r1)
-    bl fn_806D8E30
+    bl net_strdup
     stw r3, 0x8(r27)
     li r3, 0x0
     bl fn_806D8B20
@@ -944,7 +944,7 @@ lbl_fn_806E4CA0_00000AF4:
     mr r3, r26
     mr r5, r28
     addi r4, r1, 0x8
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     cmpwi r3, 0x0
     beq lbl_fn_806E4CA0_00000B10
     b lbl_fn_806E4CA0_00000BC8
@@ -960,7 +960,7 @@ lbl_fn_806E4CA0_00000B2C:
     mr r3, r26
     mr r5, r30
     addi r4, r1, 0x8
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     cmpwi r3, 0x0
     beq lbl_fn_806E4CA0_00000B48
     b lbl_fn_806E4CA0_00000BC8
@@ -1683,7 +1683,7 @@ lbl_fn_806E5700_00001500:
     stw r4, 0x38(r1)
     addi r4, r1, 0x38
     lwz r3, 0x5c8(r31)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     beq lbl_fn_806E5700_0000151C
     b lbl_fn_806E5700_00001588
@@ -1710,7 +1710,7 @@ lbl_fn_806E5700_0000151C:
     lwz r3, 0x0(r29)
     stw r30, 0x8(r1)
     lwz r3, 0x5c8(r3)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     beq lbl_fn_806E5700_00001584
     b lbl_fn_806E5700_00001588
@@ -1738,7 +1738,7 @@ asm void fn_806E57E0(void)
     stw r4, 0x8(r1)
     addi r4, r1, 0x8
     lwz r3, 0x5c8(r3)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r31, 0x0
     beq lbl_fn_806E57E0_000015E0
     stw r3, 0x0(r31)
@@ -1850,7 +1850,7 @@ asm void fn_806E5970(void)
     stw r4, 0x8(r1)
     addi r4, r1, 0x8
     lwz r3, 0x5c8(r31)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_806E5970_00001774
@@ -2377,7 +2377,7 @@ lbl_fn_806E5F90_00001E6C:
     lwz r4, 0x0(r4)
     lwz r0, 0x0(r4)
     stw r0, 0xc(r1)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0xa(r1)
     addi r4, r1, 0x8
     li r5, 0x8

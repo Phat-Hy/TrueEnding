@@ -23,7 +23,7 @@ extern void save_calculateBlockCrc(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
 extern void rand_scaleRangeInt(void);
-extern void fn_804439FC(void);
+extern void gmk_registerSlot(void);
 extern void fn_8044441C(void);
 extern void gmk_findSlotByIndex(void);
 extern void fn_80444564(void);
@@ -757,7 +757,7 @@ asm void fn_805849EC(void)
     lwz r4, 0x0(r4)
     mullw r5, r0, r5
     lwz r6, 0x54(r26)
-    bl fn_804439FC
+    bl gmk_registerSlot
     lwz r3, lbl_8087F4F0
     li r0, 0x1
     addis r3, r3, 0x1

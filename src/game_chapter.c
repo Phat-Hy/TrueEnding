@@ -24,7 +24,7 @@ extern void fn_800BDB40(void);
 extern void model_updateBoneTransforms(void);
 extern void motion_updateFogAdj(void);
 extern void fn_800C169C(void);
-extern void fn_800C2448(void);
+extern void skeleton_getBoneByIndex(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void depth_resetRenderTarget(void);
@@ -32,11 +32,11 @@ extern void atn_LH_Texture_update(void);
 extern void fn_800D69A8(void);
 extern void fn_800D6A84(void);
 extern void GXSetVtxDesc(void);
-extern void fn_806134E0(void);
+extern void __GXInitVtxDesc(void);
 extern void GXSetVtxAttrFmt(void);
 extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
-extern void fn_80614790(void);
+extern void GXBegin(void);
 extern void GXInitLightDistAttn(void);
 extern void GXInitLightSpot(void);
 extern void GXSetTevDirect(void);
@@ -481,7 +481,7 @@ asm void atn_LensFlare_draw(void)
     bne lbl_atn_LensFlare_draw_000005B8
     lwz r3, 0x2fc(r31)
     li r4, 0x0
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     lfs f0, 0x1c(r3)
     addi r4, r1, 0x44
     lfs f3, 0x18(r3)
@@ -1875,7 +1875,7 @@ lbl_fn_8007786C_000017D0:
     stfs f2, 0x1d8(r1)
     stw r0, 0x1dc(r1)
     psq_st f1, 0x10(r6), 0, 0
-    bl fn_80614790
+    bl GXBegin
     li r0, 0x5
     addi r4, r1, 0xf8
     lis r3, 0xcc01
@@ -1952,7 +1952,7 @@ asm void fn_80078938(void)
     stw r28, 0x250(r1)
     lwz r30, lbl_8087EFB4
     lwz r3, 0x2fc(r30)
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     lfs f0, 0x1c(r3)
     addi r4, r1, 0x20
     lfs f3, 0x18(r3)
@@ -2147,7 +2147,7 @@ asm void fn_80078938(void)
     li r7, 0x0
     li r8, 0x7d
     bl __GXSetVtxDesc
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc

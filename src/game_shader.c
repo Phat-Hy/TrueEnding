@@ -15,7 +15,7 @@ extern void fn_80087BB4(void);
 extern void route_createWaypoint(void);
 extern void fn_8008826C(void);
 extern void fn_80088AF4(void);
-extern void fn_80088FAC(void);
+extern void zone_formatEventString(void);
 extern void node_createNamedChild(void);
 extern void PSVECNormalize(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -2089,7 +2089,7 @@ lbl_fn_800B9618_00001068:
     li r6, 0x0
     lfs f3, lbl_8088101C
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lwz r3, 0x4c(r31)
     addi r4, r30, 0x73a
     bl node_createNamedChild

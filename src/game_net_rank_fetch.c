@@ -20,7 +20,7 @@ extern void actor_spawnActorWithId(void);
 extern void fn_801D082C(void);
 extern void save_validateHeader(void);
 extern void thread_findAndNotify(void);
-extern void fn_80201E78(void);
+extern void profile_allocNode(void);
 extern void fn_802020B4(void);
 extern void profile_getMetricValue(void);
 extern void fn_80202CA4(void);
@@ -1654,7 +1654,7 @@ lbl_fn_80521E84_00001520:
     mr r3, r31
     addi r4, r29, 0x2b
     li r5, 0x1
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0xf0(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1689,7 +1689,7 @@ lbl_fn_80521E84_000015AC:
     addi r29, r29, lbl_8075C6C4@l
     li r5, 0x1
     addi r4, r29, 0x4f
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0xfc(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1729,7 +1729,7 @@ lbl_fn_80521E84_00001634:
     addi r29, r29, lbl_8075C6C4@l
     li r5, 0x1
     addi r4, r29, 0x75
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0x108(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1789,7 +1789,7 @@ lbl_fn_80521E84_000016D0:
     addi r29, r29, lbl_8075C6C4@l
     li r5, 0x1
     addi r4, r29, 0x9b
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0x114(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1834,7 +1834,7 @@ lbl_fn_80521E84_000017BC:
     addi r29, r29, lbl_8075C6C4@l
     li r5, 0x1
     addi r4, r29, 0xbb
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0x120(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1904,7 +1904,7 @@ lbl_fn_80521E84_0000186C:
     addi r29, r29, lbl_8075C6C4@l
     li r5, 0x1
     addi r4, r29, 0xdb
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0x12c(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1959,35 +1959,35 @@ lbl_fn_80521E84_00001980:
     addi r29, r29, lbl_8075C6C4@l
     li r5, 0x1
     addi r4, r29, 0xfa
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0x138(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r29, 0x125
     li r5, 0x1
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0x13c(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r29, 0x14a
     li r5, 0x1
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0x140(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r29, 0x16f
     li r5, 0x1
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0x144(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r29, 0x199
     li r5, 0x1
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0x148(r31)
     li r4, 0x1
     bl atn_Task_setActive

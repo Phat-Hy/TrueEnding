@@ -17,12 +17,12 @@ extern void actor_dispatchMessage(void);
 extern void fn_8003E120(void);
 extern void item_testLineOfSight(void);
 extern void fn_80051A88(void);
-extern void fn_80051B70(void);
+extern void player_stepMovement(void);
 extern void fn_80051BC4(void);
-extern void fn_80051CD8(void);
+extern void player_transformBoundingSphere(void);
 extern void mem_free(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_8011F8F4(void);
+extern void skill_findEntryById(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void skill_findNodeByTag(void);
@@ -458,7 +458,7 @@ lbl_fn_803AC708_00000518:
     psq_st f1, 0x0(r31), 0, 0
     lfs f0, 0x14(r5)
     stfs f0, 0x2c(r1)
-    bl fn_80051B70
+    bl player_stepMovement
     cmpwi r3, 0x0
     beq lbl_fn_803AC708_00000570
     li r3, 0x1
@@ -926,7 +926,7 @@ lbl_fn_803ACE18_00000AD8:
     psq_st f4, 0x18(r30), 0, 0
     psq_st f5, 0x20(r30), 0, 0
     psq_st f6, 0x28(r30), 0, 0
-    bl fn_80051CD8
+    bl player_transformBoundingSphere
 lbl_fn_803ACE18_00000B98:
     addi r11, r1, 0xf0
     bl _restgpr_27
@@ -1025,7 +1025,7 @@ lbl_fn_803AD05C_00000CB8:
 lbl_fn_803AD05C_00000CD0:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803AD05C_00000CDC:
     mr r6, r3
     b lbl_fn_803AD05C_00000D44

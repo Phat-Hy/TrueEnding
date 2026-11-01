@@ -6,8 +6,8 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void mem_alloc(void);
 extern void camera_updateTargetMode(void);
-extern void fn_801059F8(void);
-extern void fn_80105B3C(void);
+extern void colli_findDynamicSlot(void);
+extern void colli_findStaticSlot(void);
 extern void fn_80107274(void);
 extern void fn_80107380(void);
 extern void fn_801079C0(void);
@@ -19,8 +19,8 @@ extern void fn_80107D94(void);
 extern void fn_80107DA4(void);
 extern void fn_80107E58(void);
 extern void fn_8012B3E8(void);
-extern void fn_8012B988(void);
-extern void fn_80164DCC(void);
+extern void enemy_updateNavSteering(void);
+extern void party_evalTacticCondition(void);
 extern void actor_setState(void);
 extern void fn_80191A44(void);
 extern void fn_80191D30(void);
@@ -869,7 +869,7 @@ asm void fn_80168F5C(void)
     addi r3, r3, 0x7d4
     bl fn_8012B3E8
     addi r3, r31, 0x7d4
-    bl fn_8012B988
+    bl enemy_updateNavSteering
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -888,7 +888,7 @@ asm void fn_80168F94(void)
     addi r3, r3, 0x7d4
     bl fn_8012B3E8
     addi r3, r31, 0x7d4
-    bl fn_8012B988
+    bl enemy_updateNavSteering
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -1127,7 +1127,7 @@ lbl_fn_80168FCC_00000E4C:
 lbl_fn_80168FCC_00000E74:
     mr r3, r29
     li r4, 0x1
-    bl fn_80164DCC
+    bl party_evalTacticCondition
     lwz r3, 0x1208(r29)
     cmpwi r3, 0x0
     beq lbl_fn_80168FCC_00000EE0
@@ -1183,10 +1183,10 @@ asm void fn_8016939C(void)
     beq lbl_fn_8016939C_00000F54
     mr r3, r0
     mr r4, r29
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r29
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_fn_8016939C_00000F54:
     lwz r0, 0x12a8(r29)
     lis r3, lbl_80737A9C@ha

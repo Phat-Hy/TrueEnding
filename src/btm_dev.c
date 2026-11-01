@@ -10,7 +10,7 @@ extern void bta_sys_logEvent(void);
 extern void bta_sys_log(void);
 extern void bta_sys_traceDebug(void);
 extern void fn_80629890(void);
-extern void fn_80629E20(void);
+extern void bta_sys_sendmsg(void);
 extern void fn_80629E90(void);
 extern void fn_80633EC0(void);
 extern void fn_80633F70(void);
@@ -203,7 +203,7 @@ lbl_fn_80632520_00000160:
     li r4, 0x1
     li r5, 0x4
     stb r0, 0x64f(r6)
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     bl fn_8063DBB0
     b lbl_fn_80632520_0000038C
 lbl_fn_80632520_00000188:
@@ -214,14 +214,14 @@ lbl_fn_80632520_00000188:
     b lbl_fn_80632520_000001B0
     stb r0, 0x64f(r6)
     stb r0, 0x64e(r6)
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     bl fn_8063DBB0
     b lbl_fn_80632520_000001D4
 lbl_fn_80632520_000001B0:
     addi r3, r6, 0x574
     li r4, 0x1
     li r5, 0x1
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     li r3, 0x2
     bl scapi_getConfigItem
     cmpwi r3, 0x0
@@ -294,14 +294,14 @@ lbl_fn_80632520_0000029C:
     li r4, 0x1
     li r5, 0x4
     stb r0, 0x64f(r6)
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     bl fn_8063DBB0
     b lbl_fn_80632520_0000038C
 lbl_fn_80632520_000002D8:
     addi r3, r6, 0x574
     li r4, 0x1
     li r5, 0x1
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     li r3, 0x2
     bl scapi_getConfigItem
     cmpwi r3, 0x0
@@ -321,14 +321,14 @@ lbl_fn_80632520_00000300:
     li r4, 0x1
     li r5, 0x4
     stb r0, 0x64f(r6)
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     bl fn_8063DBB0
     b lbl_fn_80632520_0000038C
 lbl_fn_80632520_0000033C:
     addi r3, r6, 0x574
     li r4, 0x1
     li r5, 0x1
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     bl fn_8063E66C
     bl fn_8063E750
     bl fn_80635A74
@@ -406,14 +406,14 @@ lbl_fn_806327B8_0000040C:
     b lbl_fn_806327B8_00000468
     stb r4, 0x64e(r31)
     stb r0, 0x64f(r31)
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     bl fn_8063DBB0
     b lbl_fn_806327B8_0000048C
 lbl_fn_806327B8_00000468:
     addi r3, r31, 0x574
     li r4, 0x1
     li r5, 0x1
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     li r3, 0x2
     bl scapi_getConfigItem
     cmpwi r3, 0x0
@@ -521,14 +521,14 @@ lbl_fn_8063297C_000005D4:
     b lbl_fn_8063297C_00000604
     stb r0, 0x64f(r3)
     stb r0, 0x64e(r3)
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     bl fn_8063DBB0
     b lbl_fn_8063297C_00000620
 lbl_fn_8063297C_00000604:
     addi r3, r3, 0x574
     li r4, 0x1
     li r5, 0x1
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     bl fn_8063E66C
     bl fn_8063E750
     bl fn_80635A74
@@ -578,14 +578,14 @@ lbl_fn_80632A44_0000069C:
     b lbl_fn_80632A44_000006C8
     stb r0, 0x64f(r3)
     stb r0, 0x64e(r3)
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     bl fn_8063DBB0
     b lbl_fn_80632A44_000006DC
 lbl_fn_80632A44_000006C8:
     addi r3, r3, 0x574
     li r4, 0x1
     li r5, 0x1
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     bl fn_8063E6CC
 lbl_fn_80632A44_000006DC:
     lwz r0, 0x14(r1)

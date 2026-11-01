@@ -9,7 +9,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void skill_calcTrajectory(void);
 extern void fn_80062C8C(void);
-extern void fn_80063764(void);
+extern void magic_updateCircleArea(void);
 extern void fn_8006F2F0(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
@@ -29,7 +29,7 @@ extern void fn_801E9544(void);
 extern void fn_801EB188(void);
 extern void fn_801EB7C4(void);
 extern void fn_801EB93C(void);
-extern void fn_801F4AA0(void);
+extern void save_findSlotTask(void);
 extern void fn_801F4C14(void);
 extern void thread_findAndNotify(void);
 extern void thread_dispatchToQueue(void);
@@ -478,7 +478,7 @@ lbl_fn_801E9B84_00000494:
     fmuls f2, f3, f2
     lwz r3, 0x48(r30)
     fmuls f3, f3, f0
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lis r29, lbl_8073CBEC@ha
     mr r5, r28
     addi r29, r29, lbl_8073CBEC@l
@@ -1609,7 +1609,7 @@ lbl_fn_801EAB24_000014B4:
     lfs f1, lbl_80882B70
     addi r5, r28, 0x18
     li r6, -0x1
-    bl fn_80063764
+    bl magic_updateCircleArea
     lfs f2, 0x2c(r28)
     addi r4, r28, 0xc
     lfs f1, 0x28(r28)
@@ -1633,7 +1633,7 @@ lbl_fn_801EAB24_000014B4:
     stfs f0, 0x34(r1)
     stfs f6, 0x38(r1)
     stfs f2, 0x3c(r1)
-    bl fn_80063764
+    bl magic_updateCircleArea
     b lbl_fn_801EAB24_00001658
 lbl_fn_801EAB24_00001534:
     fcmpo cr0, f25, f25

@@ -30,17 +30,17 @@ extern void fn_800F80B8(void);
 extern void fn_800F8290(void);
 extern void hurtbox_dispatchHitEvent(void);
 extern void fn_8010EDFC(void);
-extern void fn_801162A0(void);
+extern void vec3_sqMag(void);
 extern void enemy_updateAnimTimer(void);
-extern void fn_801404F8(void);
-extern void fn_80140500(void);
+extern void quest_getGlobalManager(void);
+extern void quest_resetActiveObjectiveSlots(void);
 extern void quest_updateFlow(void);
 extern void fn_801479E4(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015C0C0(void);
 extern void fn_8015C6A0(void);
 extern void battle_activateExpReward(void);
-extern void fn_801A03E8(void);
+extern void vec3_dot(void);
 extern void fn_801A03F4(void);
 extern void fn_801A0400(void);
 extern void sound_initGlobalInstances(void);
@@ -1652,7 +1652,7 @@ lbl_fn_80279280_0000160C:
     addi r5, r1, 0xb4
     bl vec3_sub
     addi r3, r1, 0x90
-    bl fn_801162A0
+    bl vec3_sqMag
     fmr f30, f1
     addi r3, r1, 0x54
     addi r4, r1, 0xb4
@@ -1660,7 +1660,7 @@ lbl_fn_80279280_0000160C:
     bl vec3_sub
     addi r3, r1, 0x90
     addi r4, r1, 0x54
-    bl fn_801A03E8
+    bl vec3_dot
     fneg f0, f1
     fdivs f1, f0, f30
     fcmpo cr0, f28, f1
@@ -1704,7 +1704,7 @@ lbl_fn_80279280_0000160C:
     lwz r12, 0x40(r12)
     mtctr r12
     bctrl
-    bl fn_801404F8
+    bl quest_getGlobalManager
     bl fn_8004D124
 lbl_fn_80279280_00001740:
     mr r3, r29
@@ -1714,8 +1714,8 @@ lbl_fn_80279280_0000174C:
     cmpwi r29, 0x0
     bne lbl_fn_80279280_0000160C
     addi r3, r1, 0x128
-    bl fn_80140500
-    bl fn_801404F8
+    bl quest_resetActiveObjectiveSlots
+    bl quest_getGlobalManager
     lwz r7, 0x1900(r31)
     addi r4, r1, 0x128
     addi r5, r1, 0xcc

@@ -6,7 +6,7 @@ extern void vec3_copy(void);
 extern void scene_getRootNode(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011220(void);
+extern void math_fabsf(void);
 extern void vec3_sub(void);
 extern void collision_queryGeometry(void);
 extern void mission_updateStub(void);
@@ -17,7 +17,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void sound_playSpatialEffect(void);
 extern void fn_800EC1F4(void);
 extern void system_getNextSequenceId(void);
-extern void fn_80103F60(void);
+extern void bsp_findLeafNode(void);
 extern void fn_801079C0(void);
 extern void fn_80107A68(void);
 extern void fn_80108378(void);
@@ -25,10 +25,10 @@ extern void phys_scaleGravity(void);
 extern void fn_8011BF3C(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80129978(void);
-extern void fn_80129A48(void);
-extern void fn_80133130(void);
+extern void path_resetWaypointVelocity(void);
+extern void boss_setPartCollisionFlags(void);
 extern void actor_testBitFlag(void);
-extern void fn_80133EE8(void);
+extern void boss_findPartSlotById(void);
 extern void npc_getGlobalManager(void);
 extern void npc_initScriptContext(void);
 extern void quest_updateFlow(void);
@@ -39,7 +39,7 @@ extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015B238(void);
-extern void fn_8015E4B0(void);
+extern void party_initFormationSlots(void);
 extern void fn_8016D454(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
@@ -563,7 +563,7 @@ lbl_fn_80323690_0000054C:
 lbl_fn_80323690_0000057C:
     lfs f1, lbl_80884F28
     addi r3, r30, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     b lbl_fn_80323690_000005B8
 lbl_fn_80323690_0000058C:
     lwz r3, 0x14bc(r30)
@@ -595,7 +595,7 @@ lbl_fn_80323690_000005D4:
 lbl_fn_80323690_000005EC:
     bl npc_getGlobalManager
     mr r4, r29
-    bl fn_80103F60
+    bl bsp_findLeafNode
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_80323690_00000640
@@ -634,11 +634,11 @@ lbl_fn_80323690_0000064C:
     bl phys_scaleGravity
     fmr f31, f1
     fmr f1, f30
-    bl fn_80011220
+    bl math_fabsf
     fcmpo cr0, f1, f31
     ble lbl_fn_80323690_000006A0
     fmr f1, f30
-    bl fn_80011220
+    bl math_fabsf
     fdivs f0, f30, f1
     fmuls f30, f31, f0
 lbl_fn_80323690_000006A0:
@@ -945,7 +945,7 @@ lbl_fn_80323E50_00000A8C:
     mr r3, r30
     addi r4, r30, 0x6b8
     li r5, -0x1
-    bl fn_8015E4B0
+    bl party_initFormationSlots
 lbl_fn_80323E50_00000AB4:
     lwz r3, 0x8(r31)
     lwz r0, 0x90(r3)
@@ -957,7 +957,7 @@ lbl_fn_80323E50_00000AB4:
     li r4, 0x4000
     li r5, 0xa
     li r6, 0x0
-    bl fn_80133130
+    bl boss_setPartCollisionFlags
     addi r3, r30, 0x7d4
     lis r4, 0x100
     bl actor_testBitFlag
@@ -980,7 +980,7 @@ lbl_fn_80323E50_00000AEC:
     beq lbl_fn_80323E50_00000BE4
     addi r3, r3, 0x7d4
     li r4, 0x18
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_80323E50_00000BE4
 lbl_fn_80323E50_00000B40:

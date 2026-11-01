@@ -13,9 +13,9 @@ extern void fn_8006D3F8(void);
 extern void fn_800A6BDC(void);
 extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
-extern void fn_8011F8F4(void);
+extern void skill_findEntryById(void);
 extern void fn_8012B3E8(void);
-extern void fn_8012B988(void);
+extern void enemy_updateNavSteering(void);
 extern void enemy_updateAnimTimer(void);
 extern void fn_802085E0(void);
 extern void mem_findBlockById(void);
@@ -24,16 +24,16 @@ extern void fn_8020FCE8(void);
 extern void fn_80214394(void);
 extern void fn_802143EC(void);
 extern void fn_8021446C(void);
-extern void fn_8021771C(void);
+extern void task_findNextReady(void);
 extern void fn_80218268(void);
-extern void fn_80219544(void);
+extern void task_getWorkerByIndex(void);
 extern void task_mapIdToQueue(void);
 extern void fn_8036097C(void);
 extern void fn_80360A2C(void);
 extern void fn_8036562C(void);
 extern void fn_8036CA60(void);
 extern void world_setGlobalFlag(void);
-extern void fn_8037EF30(void);
+extern void fat_dispatchFsRequest(void);
 extern void fn_803AB96C(void);
 extern void fn_803B3CA8(void);
 extern void fn_803BAD6C(void);
@@ -47,8 +47,8 @@ extern void fn_803D2194(void);
 extern void fn_8044386C(void);
 extern void fn_8044D0DC(void);
 extern void fn_8044D184(void);
-extern void fn_8046ECDC(void);
-extern void fn_80470528(void);
+extern void boss_updateLaserAimMatrix(void);
+extern void boss_releaseLaserTarget(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80547984(void);
 extern void fn_80547B58(void);
@@ -221,7 +221,7 @@ asm void world_Manager_update(void)
 lbl_world_Manager_update_00000150:
     lwz r3, lbl_8087F518
     li r4, 0x1
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     lwz r0, 0x10dc(r30)
     cmpwi r0, 0x0
     bne lbl_world_Manager_update_0000068C
@@ -265,7 +265,7 @@ lbl_world_Manager_update_000001F0:
     li r28, 0x0
 lbl_world_Manager_update_000001F4:
     mr r3, r28
-    bl fn_80219544
+    bl task_getWorkerByIndex
     bl mem_findBlockById
     cmpwi r3, 0x0
     beq lbl_world_Manager_update_00000218
@@ -414,7 +414,7 @@ lbl_world_Manager_update_00000404:
     li r29, 0x0
     lwz r4, 0x4c(r30)
     lwz r5, 0x50(r30)
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_world_Manager_update_00000604
@@ -617,7 +617,7 @@ lbl_world_Manager_update_000006BC:
     cmpwi r3, 0x0
     bne lbl_world_Manager_update_00000CE4
     addi r3, r30, 0x5690
-    bl fn_80470528
+    bl boss_releaseLaserTarget
     lwz r5, 0x10dc(r30)
     mr r3, r30
     lwz r4, 0x48(r30)
@@ -736,7 +736,7 @@ lbl_world_Manager_update_00000870:
     addi r3, r30, 0x6c
     li r4, 0x1
     li r5, 0x1
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
 lbl_world_Manager_update_000008A0:
     mr r3, r30
     li r4, 0x1
@@ -747,13 +747,13 @@ lbl_world_Manager_update_000008A0:
     beq lbl_world_Manager_update_000008F4
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
     cmpwi r3, 0x0
     beq lbl_world_Manager_update_000008F4
     lwz r27, lbl_8087F8A0
     li r4, 0x1
     mr r3, r27
-    bl fn_8011F8F4
+    bl skill_findEntryById
     lwz r12, 0x0(r3)
     lwz r4, 0x5c(r27)
     lwz r12, 0x30(r12)
@@ -836,7 +836,7 @@ lbl_world_Manager_update_00000A08:
     li r29, 0x0
     lwz r4, 0x4c(r30)
     lwz r5, 0x50(r30)
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_world_Manager_update_00000C08
@@ -984,7 +984,7 @@ lbl_world_Manager_update_00000C08:
     lwz r3, 0x48(r30)
     lwz r4, 0x4c(r30)
     lwz r5, 0x50(r30)
-    bl fn_8021771C
+    bl task_findNextReady
     mr r31, r3
     lwz r25, 0x934(r25)
     lwz r3, 0x48(r30)
@@ -1024,7 +1024,7 @@ lbl_world_Manager_update_00000CA8:
     addi r3, r25, 0x7d4
     bl fn_8012B3E8
     addi r3, r25, 0x7d4
-    bl fn_8012B988
+    bl enemy_updateNavSteering
 lbl_world_Manager_update_00000CC8:
     lwz r25, 0x14ac(r25)
 lbl_world_Manager_update_00000CCC:
@@ -1082,7 +1082,7 @@ asm void fn_80367A40(void)
     li r24, 0x0
 lbl_fn_80367A40_00000D7C:
     mr r3, r27
-    bl fn_80219544
+    bl task_getWorkerByIndex
     bl mem_findBlockById
     lwz r3, 0x14(r3)
     bl fn_8020A81C
@@ -1111,7 +1111,7 @@ lbl_fn_80367A40_00000D7C:
     li r27, 0x0
 lbl_fn_80367A40_00000DEC:
     mr r3, r28
-    bl fn_80219544
+    bl task_getWorkerByIndex
     bl mem_findBlockById
     lwz r3, 0x14(r3)
     bl fn_8020A81C
@@ -1153,7 +1153,7 @@ lbl_fn_80367A40_00000E54:
     stfs f0, 0x984(r27)
     bl fn_8012B3E8
     addi r3, r27, 0x7d4
-    bl fn_8012B988
+    bl enemy_updateNavSteering
     addi r3, r27, 0x7d4
     bl enemy_updateAnimTimer
 lbl_fn_80367A40_00000EA0:
@@ -1185,7 +1185,7 @@ lbl_fn_80367A40_00000ED4:
     li r27, 0x0
 lbl_fn_80367A40_00000EF8:
     mr r3, r28
-    bl fn_80219544
+    bl task_getWorkerByIndex
     bl mem_findBlockById
     lwz r3, 0x14(r3)
     bl fn_8020A81C
@@ -1336,7 +1336,7 @@ lbl_fn_80367A40_00001024:
     stw r0, 0x9f4(r26)
     bl fn_8012B3E8
     addi r3, r26, 0x7d4
-    bl fn_8012B988
+    bl enemy_updateNavSteering
     addi r3, r26, 0x7d4
     bl enemy_updateAnimTimer
     lwz r0, lbl_8087F4F0
@@ -1570,7 +1570,7 @@ lbl_fn_80367A40_000014B0:
     addi r3, r26, 0x7d4
     bl fn_8012B3E8
     addi r3, r26, 0x7d4
-    bl fn_8012B988
+    bl enemy_updateNavSteering
     addi r3, r26, 0x7d4
     bl enemy_updateAnimTimer
 lbl_fn_80367A40_000014C8:

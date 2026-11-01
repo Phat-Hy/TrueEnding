@@ -8,7 +8,7 @@ extern void _restgpr_19(void);
 extern void _savegpr_16(void);
 extern void _savegpr_19(void);
 extern void dtor_80084684(void);
-extern void fn_80051B70(void);
+extern void player_stepMovement(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -23,15 +23,15 @@ extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void skill_findNodeById(void);
-extern void fn_80133130(void);
+extern void boss_setPartCollisionFlags(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
 extern void fn_8015C6A0(void);
-extern void fn_8015E4B0(void);
+extern void party_initFormationSlots(void);
 extern void actor_setState(void);
-extern void fn_801789D8(void);
+extern void battle_evalDropTable(void);
 extern void fn_8021A888(void);
 extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
@@ -1119,7 +1119,7 @@ lbl_fn_8027A478_00000DD0:
     li r4, 0x4
     li r5, 0xa
     li r6, 0x0
-    bl fn_80133130
+    bl boss_setPartCollisionFlags
 lbl_fn_8027A478_00000DEC:
     lwz r0, 0x18f0(r21)
     cmpwi r0, 0x0
@@ -1231,7 +1231,7 @@ lbl_fn_8027A478_00000F28:
     psq_st f1, 0x0(r25), 0, 0
     stfs f2, 0x58(r1)
     stfs f29, 0x5c(r1)
-    bl fn_80051B70
+    bl player_stepMovement
     cmpwi r3, 0x0
     beq lbl_fn_8027A478_00000FA0
     li r23, 0x1
@@ -1416,14 +1416,14 @@ lbl_fn_8027A478_00001238:
     li r4, 0x9c
     li r5, 0x0
     lwzx r3, r3, r19
-    bl fn_801789D8
+    bl battle_evalDropTable
     cmpwi r3, 0x0
     bne lbl_fn_8027A478_00001288
     lwz r3, 0x1908(r21)
     li r4, 0xa0
     li r5, 0x0
     lwzx r3, r3, r19
-    bl fn_801789D8
+    bl battle_evalDropTable
     cmpwi r3, 0x0
     bne lbl_fn_8027A478_00001288
     lwz r3, 0x1908(r21)
@@ -1841,7 +1841,7 @@ asm void fn_8027AF4C(void)
     mr r3, r31
     addi r4, r1, 0x14
     li r5, -0x1
-    bl fn_8015E4B0
+    bl party_initFormationSlots
     li r0, 0x1
     stw r0, 0x199c(r31)
 lbl_fn_8027AF4C_00001894:
@@ -1873,7 +1873,7 @@ lbl_fn_8027AF4C_00001894:
     mr r3, r31
     addi r4, r1, 0x8
     li r5, -0x1
-    bl fn_8015E4B0
+    bl party_initFormationSlots
     li r0, 0x1
     stw r0, 0x199c(r31)
 lbl_fn_8027AF4C_00001910:

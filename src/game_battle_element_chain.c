@@ -10,7 +10,7 @@ extern void _savegpr_17(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void scene_traverseNode(void);
-extern void fn_80058078(void);
+extern void mission_clearPathTracker(void);
 extern void mission_isObjectiveActive(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
@@ -282,7 +282,7 @@ lbl_fn_804239D4_00000278:
     bl talk_formatQuotedString
     mr r4, r3
     addi r3, r29, 0x894
-    bl fn_80058078
+    bl mission_clearPathTracker
     b lbl_fn_804239D4_000002CC
 lbl_fn_804239D4_000002A4:
     mr r3, r30

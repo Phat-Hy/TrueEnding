@@ -23,9 +23,9 @@ extern void cursor_Object_constructor(void);
 extern void skeleton_getGlobalManager(void);
 extern void fn_800DBC1C(void);
 extern void fn_800DC3C8(void);
-extern void fn_8016E484(void);
+extern void task_isValidQueueRange(void);
 extern void time_wrapMilliseconds(void);
-extern void fn_8020EF4C(void);
+extern void rand_stepEntropy(void);
 extern void task_mapIdToQueue(void);
 extern void fn_80228AF4(void);
 extern void fn_80228AF8(void);
@@ -39,7 +39,7 @@ extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getData(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80491528(void);
-extern void fn_805381A4(void);
+extern void node_getParentNode(void);
 extern void spectate_getRootNode(void);
 extern void fn_8053B02C(void);
 extern void fn_8054119C(void);
@@ -117,31 +117,31 @@ void fn_805628BC(void);
 void fn_805628E0(void);
 void fn_80562AA0(void);
 void fn_80562ACC(void);
-void fn_80562B84(void);
+u32 fn_80562B84(void);
 void fn_80562B8C(void);
 void fn_80562BEC(void);
 void fn_80562D50(void);
 void fn_80562FB4(void);
-void fn_8056309C(void);
-void fn_805630A4(void);
-void fn_805630AC(void);
-void fn_805630B4(void);
-void fn_805630BC(void);
-void fn_805630C4(void);
-void fn_805630CC(void);
-void fn_805630D4(void);
-void fn_805630DC(void);
-void fn_805630E4(void);
-void fn_805630EC(void);
-void fn_805630F4(void);
-void fn_805630FC(void);
-void fn_80563104(void);
-void fn_8056310C(void);
-void fn_80563114(void);
-void fn_8056311C(void);
-void fn_80563124(void);
-void fn_8056312C(void);
-void fn_80563134(void);
+u32 fn_8056309C(void);
+u32 fn_805630A4(void);
+u32 fn_805630AC(void);
+u32 fn_805630B4(void);
+u32 fn_805630BC(void);
+u32 fn_805630C4(void);
+u32 fn_805630CC(void);
+u32 fn_805630D4(void);
+u32 fn_805630DC(void);
+u32 fn_805630E4(void);
+u32 fn_805630EC(void);
+u32 fn_805630F4(void);
+u32 fn_805630FC(void);
+u32 fn_80563104(void);
+u32 fn_8056310C(void);
+u32 fn_80563114(void);
+u32 fn_8056311C(void);
+u32 fn_80563124(void);
+u32 fn_8056312C(void);
+u32 fn_80563134(void);
 void fn_8056313C(void);
 void fn_805634D4(void);
 void fn_80563800(void);
@@ -367,11 +367,9 @@ lbl_fn_80562ACC_000002B0:
     blr
 }
 
-asm void fn_80562B84(void)
+u32 fn_80562B84(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_80562B8C(void)
@@ -419,7 +417,7 @@ asm void fn_80562BEC(void)
     stw r30, 0x8(r1)
     bne lbl_fn_80562BEC_00000478
     mr r3, r31
-    bl fn_805381A4
+    bl node_getParentNode
     mr r30, r3
     mr r3, r31
     bl spectate_getRootNode
@@ -533,7 +531,7 @@ asm void fn_80562D50(void)
     mr r24, r4
     bne lbl_fn_80562D50_000006CC
     mr r3, r24
-    bl fn_805381A4
+    bl node_getParentNode
     mr r31, r3
     mr r3, r24
     bl spectate_getRootNode
@@ -707,7 +705,7 @@ asm void fn_80562FB4(void)
     mr r30, r4
     bne lbl_fn_80562FB4_000007C4
     mr r3, r30
-    bl fn_805381A4
+    bl node_getParentNode
     mr r3, r30
     bl spectate_getRootNode
     lwz r4, 0x10(r30)
@@ -765,144 +763,104 @@ lbl_fn_80562FB4_000007C8:
     blr
 }
 
-asm void fn_8056309C(void)
+u32 fn_8056309C(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_805630A4(void)
+u32 fn_805630A4(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_805630AC(void)
+u32 fn_805630AC(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_805630B4(void)
+u32 fn_805630B4(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_805630BC(void)
+u32 fn_805630BC(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_805630C4(void)
+u32 fn_805630C4(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_805630CC(void)
+u32 fn_805630CC(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_805630D4(void)
+u32 fn_805630D4(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_805630DC(void)
+u32 fn_805630DC(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_805630E4(void)
+u32 fn_805630E4(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_805630EC(void)
+u32 fn_805630EC(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_805630F4(void)
+u32 fn_805630F4(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_805630FC(void)
+u32 fn_805630FC(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_80563104(void)
+u32 fn_80563104(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_8056310C(void)
+u32 fn_8056310C(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_80563114(void)
+u32 fn_80563114(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_8056311C(void)
+u32 fn_8056311C(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_80563124(void)
+u32 fn_80563124(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_8056312C(void)
+u32 fn_8056312C(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_80563134(void)
+u32 fn_80563134(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8056313C(void)
@@ -1250,7 +1208,7 @@ lbl_fn_805634D4_00000DAC:
     stw r0, 0x424(r28)
 lbl_fn_805634D4_00000DB4:
     lwz r3, 0x414(r28)
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_805634D4_00000DE0
     cmpwi r29, 0x0
@@ -1296,7 +1254,7 @@ lbl_fn_805634D4_00000E24:
     bl task_mapIdToQueue
 lbl_fn_805634D4_00000E58:
     mr r3, r30
-    bl fn_8016E484
+    bl task_isValidQueueRange
     cmpwi r3, 0x0
     beq lbl_fn_805634D4_00000E7C
     lwz r0, 0x14(r28)

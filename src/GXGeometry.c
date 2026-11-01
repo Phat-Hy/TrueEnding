@@ -19,7 +19,7 @@ extern u32 __GXData;
 
 /* Function declarations */
 void __GXSetDirtyState(void);
-void fn_80614790(void);
+void GXBegin(void);
 void fn_806148E0(void);
 void fn_806149C0(void);
 void fn_80614A00(void);
@@ -218,7 +218,7 @@ lbl___GXSetDirtyState_00000260:
     blr
 }
 
-asm void fn_80614790(void)
+asm void GXBegin(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -234,12 +234,12 @@ asm void fn_80614790(void)
     mr r28, r3
     lwz r0, 0x5fc(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_80614790_000002BC
+    beq lbl_GXBegin_000002BC
     bl __GXSetDirtyState
-lbl_fn_80614790_000002BC:
+lbl_GXBegin_000002BC:
     lwz r0, 0x0(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_80614790_0000039C
+    bne lbl_GXBegin_0000039C
     lwz r7, __GXData
     lis r3, 0xcc01
     li r0, 0x98
@@ -250,29 +250,29 @@ lbl_fn_80614790_000002BC:
     stb r0, -0x8000(r3)
     lhz r0, 0x4(r7)
     sth r0, -0x8000(r3)
-    beq lbl_fn_80614790_00000394
+    beq lbl_GXBegin_00000394
     addi r3, r5, 0x3
     subi r7, r5, 0x20
     srwi r0, r3, 2
     cmplwi r0, 0x8
-    ble lbl_fn_80614790_0000036C
+    ble lbl_GXBegin_0000036C
     cmplwi r3, 0x3
     li r0, 0x0
-    blt lbl_fn_80614790_00000320
+    blt lbl_GXBegin_00000320
     cmplw r5, r3
-    bgt lbl_fn_80614790_00000320
+    bgt lbl_GXBegin_00000320
     li r0, 0x1
-lbl_fn_80614790_00000320:
+lbl_GXBegin_00000320:
     cmpwi r0, 0x0
-    beq lbl_fn_80614790_0000036C
+    beq lbl_GXBegin_0000036C
     addi r0, r7, 0x1f
     li r4, 0x0
     srwi r0, r0, 5
     lis r3, 0xcc01
     mtctr r0
     cmplwi r7, 0x0
-    ble lbl_fn_80614790_0000036C
-lbl_fn_80614790_00000344:
+    ble lbl_GXBegin_0000036C
+lbl_GXBegin_00000344:
     stw r4, -0x8000(r3)
     addi r6, r6, 0x20
     stw r4, -0x8000(r3)
@@ -282,8 +282,8 @@ lbl_fn_80614790_00000344:
     stw r4, -0x8000(r3)
     stw r4, -0x8000(r3)
     stw r4, -0x8000(r3)
-    bdnz lbl_fn_80614790_00000344
-lbl_fn_80614790_0000036C:
+    bdnz lbl_GXBegin_00000344
+lbl_GXBegin_0000036C:
     addi r0, r5, 0x3
     li r4, 0x0
     subf r0, r6, r0
@@ -291,14 +291,14 @@ lbl_fn_80614790_0000036C:
     srwi r0, r0, 2
     mtctr r0
     cmplw r6, r5
-    bge lbl_fn_80614790_00000394
-lbl_fn_80614790_0000038C:
+    bge lbl_GXBegin_00000394
+lbl_GXBegin_0000038C:
     stw r4, -0x8000(r3)
-    bdnz lbl_fn_80614790_0000038C
-lbl_fn_80614790_00000394:
+    bdnz lbl_GXBegin_0000038C
+lbl_GXBegin_00000394:
     li r0, 0x1
     sth r0, 0x2(r31)
-lbl_fn_80614790_0000039C:
+lbl_GXBegin_0000039C:
     lis r3, 0xcc01
     or r0, r29, r28
     stb r0, -0x8000(r3)

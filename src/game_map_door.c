@@ -15,7 +15,7 @@ extern void fn_8010A308(void);
 extern void magic_dispatchActionCommand(void);
 extern void debuff_removeStatusEffect(void);
 extern void actor_getMovementFlags(void);
-extern void fn_80389838(void);
+extern void nwc24_transitionDataState(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
@@ -233,7 +233,7 @@ asm void fn_80187D04(void)
     stfs f3, 0x1c(r1)
     stfs f0, 0x20(r1)
     stw r31, 0x24(r1)
-    bl fn_80389838
+    bl nwc24_transitionDataState
     lwz r31, 0x3c(r1)
     mr r3, r29
     lwz r30, 0x38(r1)

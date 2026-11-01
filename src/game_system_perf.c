@@ -7,7 +7,7 @@ extern void fn_8000FAE4(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8004FF58(void);
-extern void fn_8006AD24(void);
+extern void boss_lookupActionEntry(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -77,7 +77,7 @@ extern u32 lbl_80882D10;
 extern u32 lbl_80882D14;
 
 /* Function declarations */
-void fn_80202A6C(void);
+void perf_initNode(void);
 void fn_80202AF0(void);
 void fn_80202C4C(void);
 void fn_80202CA4(void);
@@ -108,7 +108,7 @@ void fn_80204150(void);
 void fn_802041F0(void);
 void fn_80204230(void);
 
-asm void fn_80202A6C(void)
+asm void perf_initNode(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -121,7 +121,7 @@ asm void fn_80202A6C(void)
     mr r30, r4
     stw r29, 0x14(r1)
     mr r29, r3
-    beq lbl_fn_80202A6C_00000064
+    beq lbl_perf_initNode_00000064
     lis r5, lbl_8073E6D8@ha
     li r3, 0x108
     addi r5, r5, lbl_8073E6D8@l
@@ -130,15 +130,15 @@ asm void fn_80202A6C(void)
     li r7, 0x0
     bl mem_alloc
     cmpwi r3, 0x0
-    beq lbl_fn_80202A6C_00000068
+    beq lbl_perf_initNode_00000068
     mr r4, r29
     mr r5, r30
     mr r6, r31
     bl fn_80202AF0
-    b lbl_fn_80202A6C_00000068
-lbl_fn_80202A6C_00000064:
+    b lbl_perf_initNode_00000068
+lbl_perf_initNode_00000064:
     li r3, 0x0
-lbl_fn_80202A6C_00000068:
+lbl_perf_initNode_00000068:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -1288,7 +1288,7 @@ lbl_fn_80203A44_0000105C:
     bl actor_dispatchMessage
     mr r4, r28
     addi r3, r1, 0x24
-    bl fn_8006AD24
+    bl boss_lookupActionEntry
     lwz r0, 0x18(r1)
     srwi. r0, r0, 31
     beq lbl_fn_80203A44_000010D8

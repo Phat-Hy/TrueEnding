@@ -11,7 +11,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_80051CD8(void);
+extern void player_transformBoundingSphere(void);
 extern void fn_8005454C(void);
 extern void talk_parseQuotedString(void);
 extern void talk_formatQuotedString(void);
@@ -19,7 +19,7 @@ extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void skill_calculateDamage(void);
 extern void fn_800629F0(void);
-extern void fn_80063764(void);
+extern void magic_updateCircleArea(void);
 extern void magic_castSpellCircle(void);
 extern void fn_8006AC08(void);
 extern void mem_alloc(void);
@@ -467,7 +467,7 @@ lbl_fn_8036205C_00000428:
     beq lbl_fn_8036205C_000004B4
     li r6, -0x80
 lbl_fn_8036205C_000004B4:
-    bl fn_80063764
+    bl magic_updateCircleArea
     lfs f3, 0x38(r1)
     addi r3, r1, 0x8
     lfs f0, 0x44(r1)
@@ -1088,7 +1088,7 @@ asm void fn_80362928(void)
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x58(r1)
     stfs f0, 0x5c(r1)
-    bl fn_80051CD8
+    bl player_transformBoundingSphere
     cmpwi r3, 0x0
     beq lbl_fn_80362928_00000D60
     lwz r3, 0x50(r30)

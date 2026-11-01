@@ -10,7 +10,7 @@ extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_80041C0C(void);
+extern void menu_destroyObject(void);
 extern void fn_80042108(void);
 extern void fn_80042740(void);
 extern void collision_testLineSegment(void);
@@ -25,7 +25,7 @@ extern void fn_800C1A1C(void);
 extern void fn_800C1FB4(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB688(void);
+extern void morph_resetTargetWeight(void);
 extern void atn_Task_destructor(void);
 extern void bloom_processPasses(void);
 extern void fn_800D8814(void);
@@ -41,7 +41,7 @@ extern void fn_801856B4(void);
 extern void fn_8020B1E0(void);
 extern void fn_8020B208(void);
 extern void fn_8020B27C(void);
-extern void fn_8021771C(void);
+extern void task_findNextReady(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_ctor(void);
 extern void res_Resource_destructor(void);
@@ -177,9 +177,9 @@ asm void fn_80183AAC(void)
     stw r30, 0x8(r1)
     mr r30, r3
     beq lbl_fn_80183AAC_00000064
-    lis r4, fn_80041C0C@ha
+    lis r4, menu_destroyObject@ha
     li r5, 0x20
-    addi r4, r4, fn_80041C0C@l
+    addi r4, r4, menu_destroyObject@l
     li r6, 0x3
     addi r3, r3, 0x10
     bl __destroy_new_array
@@ -480,7 +480,7 @@ lbl_fn_80183D00_00000418:
     mr r3, r26
     mr r4, r27
     mr r5, r28
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_80183D00_00000490
@@ -553,11 +553,11 @@ asm void fn_80183F88(void)
     addi r3, r3, 0x4
     bl __construct_new_array
     lis r4, fn_80042740@ha
-    lis r5, fn_80041C0C@ha
+    lis r5, menu_destroyObject@ha
     addi r3, r31, 0x10
     li r6, 0x20
     addi r4, r4, fn_80042740@l
-    addi r5, r5, fn_80041C0C@l
+    addi r5, r5, menu_destroyObject@l
     li r7, 0x3
     bl __construct_new_array
     mr r3, r31
@@ -1117,7 +1117,7 @@ lbl_fn_80184548_00000C50:
     fdivs f5, f6, f5
     fmsubs f3, f4, f5, f3
     fadds f1, f0, f3
-    bl fn_800CB688
+    bl morph_resetTargetWeight
 lbl_fn_80184548_00000CE8:
     addi r3, r1, 0x8
     li r4, -0x1

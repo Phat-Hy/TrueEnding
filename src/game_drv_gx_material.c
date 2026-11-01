@@ -8,7 +8,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_805D8130(void);
-extern void fn_805D84C0(void);
+extern void viewport_destroyContext(void);
 extern void fn_805D8510(void);
 extern void fn_805D9190(void);
 extern void fn_805D91A0(void);
@@ -187,7 +187,7 @@ lbl_fn_805DC3B0_000000C4:
     bl fn_805D9530
     addi r3, r31, 0x78
     li r4, 0x0
-    bl fn_805D84C0
+    bl viewport_destroyContext
     mr r10, r31
     fmr f1, f30
     psq_l f31, 0x108(r10), 0, 0
@@ -308,7 +308,7 @@ lbl_fn_805DC5E0_00000298:
     bl fn_805D9530
     addi r3, r31, 0x8
     li r4, 0x0
-    bl fn_805D84C0
+    bl viewport_destroyContext
     mr r10, r31
     fmr f1, f30
     psq_l f31, 0x98(r10), 0, 0
@@ -402,7 +402,7 @@ asm void fn_805DC7B0(void)
     bl fn_805D9530
     addi r3, r1, 0x8
     li r4, 0x0
-    bl fn_805D84C0
+    bl viewport_destroyContext
     psq_l f31, 0x88(r1), 0, 0
     fmr f1, f30
     lfd f31, 0x80(r1)
@@ -498,7 +498,7 @@ asm void fn_805DC910(void)
     bl fn_805D9530
     addi r3, r1, 0x8
     li r4, 0x0
-    bl fn_805D84C0
+    bl viewport_destroyContext
     psq_l f31, 0x88(r1), 0, 0
     fmr f1, f30
     lfd f31, 0x80(r1)
@@ -648,7 +648,7 @@ asm void fn_805DCB00(void)
     lfs f0, 0x8(r1)
     li r4, 0x0
     fsubs f31, f1, f0
-    bl fn_805D84C0
+    bl viewport_destroyContext
     fmr f1, f31
     psq_l f31, 0x88(r1), 0, 0
     lfd f31, 0x80(r1)
@@ -1196,7 +1196,7 @@ lbl_fn_805DD170_00000EF8:
     lfs f0, 0x20(r1)
     li r4, 0x0
     fsubs f26, f1, f0
-    bl fn_805D84C0
+    bl viewport_destroyContext
     fsubs f1, f29, f26
     lfs f0, 0x58(r1)
     mr r3, r28
@@ -1278,7 +1278,7 @@ lbl_fn_805DD170_00001080:
     lfs f0, 0x10(r1)
     li r4, 0x0
     fsubs f26, f1, f0
-    bl fn_805D84C0
+    bl viewport_destroyContext
     fsubs f1, f29, f26
     lfs f0, 0x58(r1)
     mr r3, r28
@@ -1498,7 +1498,7 @@ asm void fn_805DD720(void)
     bl fn_805DD050
     addi r3, r1, 0xf8
     li r4, 0x0
-    bl fn_805D84C0
+    bl viewport_destroyContext
     lfs f3, 0x28(r1)
     lfs f2, 0x30(r1)
     lfs f1, 0x2c(r1)
@@ -1616,7 +1616,7 @@ lbl_fn_805DD720_00001560:
     lfs f0, 0x18(r1)
     li r4, 0x0
     fsubs f30, f1, f0
-    bl fn_805D84C0
+    bl viewport_destroyContext
     lis r3, lbl_80764640@ha
     fsubs f2, f31, f30
     lfs f1, lbl_80764640@l(r3)
@@ -1699,7 +1699,7 @@ lbl_fn_805DD720_000016B0:
     lfs f0, 0x8(r1)
     li r4, 0x0
     fsubs f30, f1, f0
-    bl fn_805D84C0
+    bl viewport_destroyContext
     fsubs f1, f31, f30
     lfs f0, 0x0(r28)
     mr r3, r27
@@ -1792,7 +1792,7 @@ asm void fn_805DDC90(void)
     mr r30, r3
     beq lbl_fn_805DDC90_0000191C
     li r4, 0x0
-    bl fn_805D84C0
+    bl viewport_destroyContext
     cmpwi r31, 0x0
     ble lbl_fn_805DDC90_0000191C
     mr r3, r30

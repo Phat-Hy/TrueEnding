@@ -22,7 +22,7 @@ extern void compass_findWaypointIndex(void);
 extern void fn_8048B3B8(void);
 extern void fn_8048BD04(void);
 extern void fn_8048C884(void);
-extern void fn_805381A4(void);
+extern void node_getParentNode(void);
 extern void spectate_getRootNode(void);
 extern void fn_805381F4(void);
 extern void fn_80538DC8(void);
@@ -129,7 +129,7 @@ asm void fn_8055353C(void)
     cmpwi r5, 0x0
     bne lbl_fn_8055353C_00000440
     mr r3, r23
-    bl fn_805381A4
+    bl node_getParentNode
     mr r25, r3
     mr r3, r23
     bl spectate_getRootNode
@@ -344,7 +344,7 @@ lbl_fn_8055353C_00000374:
     b lbl_fn_8055353C_00000440
 lbl_fn_8055353C_000003B8:
     mr r3, r23
-    bl fn_805381A4
+    bl node_getParentNode
     mr r24, r3
     mr r3, r23
     bl spectate_getRootNode
@@ -413,7 +413,7 @@ asm void fn_80553924(void)
     stw r30, 0x18(r1)
     bne lbl_fn_80553924_000005B4
     mr r3, r31
-    bl fn_805381A4
+    bl node_getParentNode
     mr r30, r3
     mr r3, r31
     bl spectate_getRootNode
@@ -529,7 +529,7 @@ asm void fn_80553A78(void)
     stw r0, 0x20(r1)
     mr r28, r3
     stw r0, 0x28(r1)
-    bl fn_805381A4
+    bl node_getParentNode
     mr r29, r3
     mr r3, r28
     bl spectate_getRootNode
@@ -763,7 +763,7 @@ asm void fn_80553DCC(void)
     mr r26, r4
     mr r28, r5
     mr r27, r6
-    bl fn_805381A4
+    bl node_getParentNode
     mr r29, r3
     mr r3, r25
     bl spectate_getRootNode
@@ -965,7 +965,7 @@ asm void fn_8055408C(void)
     fmr f29, f1
     mr r27, r3
     mr r28, r6
-    bl fn_805381A4
+    bl node_getParentNode
     mr r29, r3
     mr r3, r27
     bl spectate_getRootNode
@@ -1655,7 +1655,7 @@ lbl_fn_805549EC_000015DC:
 lbl_fn_805549EC_000015E0:
     lwz r30, 0x4(r3)
     mr r3, r28
-    bl fn_805381A4
+    bl node_getParentNode
     mr r29, r3
     mr r3, r28
     bl spectate_getRootNode
@@ -1921,7 +1921,7 @@ asm void fn_80554DF0(void)
     b lbl_fn_80554DF0_00001F0C
 lbl_fn_80554DF0_0000198C:
     mr r3, r30
-    bl fn_805381A4
+    bl node_getParentNode
     mr r31, r3
     mr r3, r30
     bl spectate_getRootNode
@@ -2136,7 +2136,7 @@ lbl_fn_80554DF0_00001C84:
     b lbl_fn_80554DF0_00001F0C
 lbl_fn_80554DF0_00001C90:
     mr r3, r30
-    bl fn_805381A4
+    bl node_getParentNode
     mr r31, r3
     mr r3, r30
     bl spectate_getRootNode
@@ -2200,7 +2200,7 @@ lbl_fn_80554DF0_00001D5C:
     b lbl_fn_80554DF0_00001F0C
 lbl_fn_80554DF0_00001D68:
     mr r3, r30
-    bl fn_805381A4
+    bl node_getParentNode
     mr r31, r3
     mr r3, r30
     bl spectate_getRootNode

@@ -43,10 +43,10 @@ extern void fn_806A0A78(void);
 extern void fn_806A0AD8(void);
 extern void fn_806A6CA0(void);
 extern void fn_806A6E40(void);
-extern void fn_806A7110(void);
+extern void net_isConnectionActive(void);
 extern void net_checkConnectionSession(void);
 extern void fn_806A72E0(void);
-extern void fn_806A7400(void);
+extern void net_memFree(void);
 extern void fn_806A75C0(void);
 extern void net_formatLog(void);
 extern void fn_806AA690(void);
@@ -80,7 +80,7 @@ void fn_806D1600(void);
 void fn_806D1610(void);
 void fn_806D1660(void);
 void fn_806D1670(void);
-void fn_806D1690(void);
+u32 fn_806D1690(void);
 void fn_806D16A0(void);
 void fn_806D16B0(void);
 void fn_806D16C0(void);
@@ -183,11 +183,9 @@ asm void fn_806D1670(void)
     blr
 }
 
-asm void fn_806D1690(void)
+u32 fn_806D1690(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_806D16A0(void)
@@ -1972,7 +1970,7 @@ lbl_fn_806D2F50_00001A9C:
     mr r4, r27
     li r3, 0x8
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
     li r0, 0x4
     addi r4, r1, 0x1c
     addi r3, r1, 0x8
@@ -2215,7 +2213,7 @@ lbl_fn_806D3210_00001EA8:
     li r3, 0x8
     crclr 6
     bl net_formatLog
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     bne lbl_fn_806D3210_00001ED8
     lis r4, 0xffff
@@ -2245,7 +2243,7 @@ lbl_fn_806D3210_00001EEC:
     bl net_formatLog
     mr r3, r28
     bl fn_806A75C0
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     bne lbl_fn_806D3210_00001F44
     lis r4, 0xffff
@@ -2271,7 +2269,7 @@ lbl_fn_806D3210_00001F68:
     bne lbl_fn_806D3210_00001FAC
     mr r3, r28
     bl fn_806A75C0
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     bne lbl_fn_806D3210_00001FA0
     lis r4, 0xffff
@@ -2295,7 +2293,7 @@ lbl_fn_806D3210_00001FAC:
     bne lbl_fn_806D3210_00002004
     mr r3, r28
     bl fn_806A75C0
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     bne lbl_fn_806D3210_00001FF8
     lis r4, 0xffff
@@ -2314,7 +2312,7 @@ lbl_fn_806D3210_00002004:
     stw r0, 0x0(r30)
     b lbl_fn_806D3210_00002040
 lbl_fn_806D3210_0000201C:
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     bne lbl_fn_806D3210_00002038
     lis r4, 0xffff

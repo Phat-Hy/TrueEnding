@@ -4,13 +4,13 @@
 /* External function declarations */
 extern void dtor_80084684(void);
 extern void collision_testLineSegment(void);
-extern void fn_8008B130(void);
+extern void map_getArchiveName(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB688(void);
+extern void morph_resetTargetWeight(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
 extern void actor_getMovementFlags(void);
@@ -1160,7 +1160,7 @@ lbl_fn_801C4750_00000E70:
     b lbl_fn_801C4750_00000F8C
 lbl_fn_801C4750_00000E8C:
     addi r3, r30, 0xb0
-    bl fn_8008B130
+    bl map_getArchiveName
     lis r31, lbl_8073B7DC@ha
     addi r4, r31, lbl_8073B7DC@l
     bl strstr
@@ -1170,7 +1170,7 @@ lbl_fn_801C4750_00000E8C:
     b lbl_fn_801C4750_00000F8C
 lbl_fn_801C4750_00000EB0:
     addi r3, r30, 0xb0
-    bl fn_8008B130
+    bl map_getArchiveName
     addi r31, r31, lbl_8073B7DC@l
     addi r4, r31, 0x6
     bl strstr
@@ -1180,7 +1180,7 @@ lbl_fn_801C4750_00000EB0:
     b lbl_fn_801C4750_00000F8C
 lbl_fn_801C4750_00000ED4:
     addi r3, r30, 0xb0
-    bl fn_8008B130
+    bl map_getArchiveName
     addi r4, r31, 0xc
     bl strstr
     cmpwi r3, 0x0
@@ -1189,7 +1189,7 @@ lbl_fn_801C4750_00000ED4:
     b lbl_fn_801C4750_00000F8C
 lbl_fn_801C4750_00000EF4:
     addi r3, r30, 0xb0
-    bl fn_8008B130
+    bl map_getArchiveName
     addi r4, r31, 0x12
     bl strstr
     cmpwi r3, 0x0
@@ -1198,7 +1198,7 @@ lbl_fn_801C4750_00000EF4:
     b lbl_fn_801C4750_00000F8C
 lbl_fn_801C4750_00000F14:
     addi r3, r30, 0xb0
-    bl fn_8008B130
+    bl map_getArchiveName
     addi r4, r31, 0x18
     bl strstr
     cmpwi r3, 0x0
@@ -1207,7 +1207,7 @@ lbl_fn_801C4750_00000F14:
     b lbl_fn_801C4750_00000F8C
 lbl_fn_801C4750_00000F34:
     addi r3, r30, 0xb0
-    bl fn_8008B130
+    bl map_getArchiveName
     addi r4, r31, 0x1e
     bl strstr
     cmpwi r3, 0x0
@@ -1216,7 +1216,7 @@ lbl_fn_801C4750_00000F34:
     b lbl_fn_801C4750_00000F8C
 lbl_fn_801C4750_00000F54:
     addi r3, r30, 0xb0
-    bl fn_8008B130
+    bl map_getArchiveName
     addi r4, r31, 0x24
     bl strstr
     cmpwi r3, 0x0
@@ -1225,7 +1225,7 @@ lbl_fn_801C4750_00000F54:
     b lbl_fn_801C4750_00000F8C
 lbl_fn_801C4750_00000F74:
     addi r3, r30, 0xb0
-    bl fn_8008B130
+    bl map_getArchiveName
     addi r4, r31, 0x2a
     bl strstr
     cntlzw r0, r3
@@ -1567,7 +1567,7 @@ lbl_fn_801C48B4_00001380:
     fdivs f5, f6, f5
     fmadds f3, f4, f5, f3
     fsubs f1, f3, f0
-    bl fn_800CB688
+    bl morph_resetTargetWeight
     lwz r0, 0x34(r31)
     cmpwi r0, 0x0
     beq lbl_fn_801C48B4_000015A0

@@ -11,19 +11,19 @@ extern void fn_805CE420(void);
 extern void fn_805D2A40(void);
 extern void fn_805D9830(void);
 extern void GXSetVtxDesc(void);
-extern void fn_806134E0(void);
+extern void __GXInitVtxDesc(void);
 extern void GXSetVtxAttrFmt(void);
 extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
 extern void GXInitLightDistAttn(void);
 extern void GXInitLightSpot(void);
-extern void fn_80617200(void);
+extern void GXSetTexCoordScaleManually(void);
 extern void GXInitTexObjDefault(void);
 extern void GXSetTevDirect(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
-extern void fn_806174C0(void);
+extern void GXSetTevIndTile(void);
 extern void GXSetTevSwapMode(void);
 extern void GXSetTevSwapModeTable(void);
 extern void fn_806177F0(void);
@@ -66,7 +66,7 @@ void fn_805D8090(void);
 void fn_805D80B0(void);
 void fn_805D80D0(void);
 void fn_805D8130(void);
-void fn_805D84C0(void);
+void viewport_destroyContext(void);
 void fn_805D8500(void *p, u32 val);
 u32 fn_805D8510(const void *p);
 void fn_805D8520(void);
@@ -1605,7 +1605,7 @@ lbl_fn_805D8130_00001570:
     blr
 }
 
-asm void fn_805D84C0(void)
+asm void viewport_destroyContext(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1614,11 +1614,11 @@ asm void fn_805D84C0(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    beq lbl_fn_805D84C0_00001688
+    beq lbl_viewport_destroyContext_00001688
     cmpwi r4, 0x0
-    ble lbl_fn_805D84C0_00001688
+    ble lbl_viewport_destroyContext_00001688
     bl dtor_80084684
-lbl_fn_805D84C0_00001688:
+lbl_viewport_destroyContext_00001688:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -1741,7 +1741,7 @@ lbl_fn_805D8520_00001784:
     li r8, 0x7d
     bl __GXSetVtxDesc
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -1785,7 +1785,7 @@ lbl_fn_805D8520_00001784:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
@@ -1804,7 +1804,7 @@ lbl_fn_805D8520_00001784:
     li r6, 0x2
     li r7, 0xf
     bl GXSetVtxAttrFmt
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -1871,7 +1871,7 @@ lbl_fn_805D8520_00001984:
     li r8, 0x7d
     bl __GXSetVtxDesc
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -1911,7 +1911,7 @@ lbl_fn_805D8520_00001984:
     li r6, 0x2
     li r7, 0xf
     bl GXSetVtxAttrFmt
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -1978,7 +1978,7 @@ lbl_fn_805D8520_00001B28:
     li r8, 0x7d
     bl __GXSetVtxDesc
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -2018,7 +2018,7 @@ lbl_fn_805D8520_00001B28:
     li r6, 0x2
     li r7, 0xf
     bl GXSetVtxAttrFmt
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -2085,7 +2085,7 @@ lbl_fn_805D8520_00001CCC:
     li r8, 0x7d
     bl __GXSetVtxDesc
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -2125,7 +2125,7 @@ lbl_fn_805D8520_00001CCC:
     li r6, 0x2
     li r7, 0xf
     bl GXSetVtxAttrFmt
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -2192,7 +2192,7 @@ lbl_fn_805D8520_00001E70:
     li r8, 0x7d
     bl __GXSetVtxDesc
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -2232,7 +2232,7 @@ lbl_fn_805D8520_00001E70:
     li r6, 0x2
     li r7, 0xf
     bl GXSetVtxAttrFmt
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc

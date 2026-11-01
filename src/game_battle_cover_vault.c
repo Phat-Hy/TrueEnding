@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void ui_destroyWidget(void);
 extern void fn_800577D8(void);
-extern void fn_80058078(void);
+extern void mission_clearPathTracker(void);
 extern void mission_isObjectiveActive(void);
 extern void mission_updateObjectiveTarget(void);
 extern void talk_formatQuotedString(void);
@@ -27,7 +27,7 @@ extern void fn_8011BE54(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void fn_8012B3E8(void);
-extern void fn_8012B988(void);
+extern void enemy_updateNavSteering(void);
 extern void enemy_updateAnimTimer(void);
 extern void quest_updateFlow(void);
 extern void equip_applyToCharacter(void);
@@ -605,7 +605,7 @@ lbl_fn_803F8890_0000070C:
     bl talk_formatQuotedString
     mr r4, r3
     addi r3, r28, 0x4c8
-    bl fn_80058078
+    bl mission_clearPathTracker
     stw r31, 0x550(r28)
     b lbl_fn_803F8890_00000944
 lbl_fn_803F8890_0000073C:
@@ -1747,7 +1747,7 @@ lbl_fn_803F9624_000016CC:
     bl fn_8012B3E8
     lwz r3, 0xf8(r30)
     addi r3, r3, 0x7d4
-    bl fn_8012B988
+    bl enemy_updateNavSteering
 lbl_fn_803F9624_000016EC:
     lwz r3, 0xf8(r30)
     bl battle_activateExpReward

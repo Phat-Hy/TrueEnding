@@ -16,7 +16,7 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void boss_initActionStream(void);
-extern void fn_8006CA80(void);
+extern void gmk_LoadHandle_constructor(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
@@ -26,20 +26,20 @@ extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void fn_800902C0(void);
+extern void radar_addBlipEntry(void);
 extern void atn_Model_findBoneIndex(void);
 extern void compass_findMarkerByName(void);
 extern void fn_80094D88(void);
 extern void str_parseInt(void);
-extern void fn_800EC254(void);
+extern void cam_testTargetVisibility(void);
 extern void cam_registerTarget(void);
 extern void cam_initTrajectoryParams(void);
 extern void cam_bindPathTarget(void);
 extern void cam_bindRotationTarget(void);
 extern void cam_evalControllerSpline(void);
 extern void cam_setLookAtTarget(void);
-extern void fn_800ED4D8(void);
-extern void fn_800ED4E0(void);
+extern void cam_getLookAtState(void);
+extern void cam_updateLookAtMatrix(void);
 extern void cam_evalLookAtMatrix(void);
 extern void skill_findNodeBySlotId(void);
 extern void boss_updatePhaseState(void);
@@ -969,7 +969,7 @@ asm void fn_803161F8(void)
     addi r3, r31, 0x14b0
     addi r4, r4, lbl_80788760@l
     stw r4, 0x0(r31)
-    bl fn_8006CA80
+    bl gmk_LoadHandle_constructor
     lfs f1, lbl_80884D60
     li r30, 0x0
     li r4, 0x1
@@ -1092,7 +1092,7 @@ asm void fn_803161F8(void)
     b lbl_fn_803161F8_00000E54
 lbl_fn_803161F8_00000DD4:
     addi r3, r1, 0x98
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     addi r4, r29, 0x2d
     li r5, 0x8
@@ -1100,7 +1100,7 @@ lbl_fn_803161F8_00000DD4:
     cmpwi r3, 0x0
     bne lbl_fn_803161F8_00000E14
     addi r3, r1, 0x98
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     mr r4, r3
     addi r3, r1, 0x20
@@ -1109,7 +1109,7 @@ lbl_fn_803161F8_00000DD4:
     b lbl_fn_803161F8_00000E4C
 lbl_fn_803161F8_00000E14:
     addi r3, r1, 0x98
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     addi r4, r29, 0x36
     li r5, 0x7
@@ -1117,21 +1117,21 @@ lbl_fn_803161F8_00000E14:
     cmpwi r3, 0x0
     bne lbl_fn_803161F8_00000E4C
     addi r3, r1, 0x98
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     addi r3, r3, 0x7
     bl str_parseInt
     stw r3, 0x14d0(r31)
 lbl_fn_803161F8_00000E4C:
     addi r3, r1, 0x98
-    bl fn_800ED4E0
+    bl cam_updateLookAtMatrix
 lbl_fn_803161F8_00000E54:
     addi r3, r1, 0x38
     addi r4, r1, 0xd4
     bl cam_evalLookAtMatrix
     addi r3, r1, 0x98
     addi r4, r1, 0x38
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     mr r30, r3
     addi r3, r1, 0x38
     li r4, -0x1
@@ -1563,7 +1563,7 @@ lbl_fn_80316A68_00001470:
     mr r3, r29
     addi r5, r1, 0x40
     li r4, 0x0
-    bl fn_800902C0
+    bl radar_addBlipEntry
     addi r3, r1, 0x40
     li r4, -0x1
     bl fn_8000D3A8

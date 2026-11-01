@@ -32,7 +32,7 @@ extern void save_findEntryByName(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
 extern void rand_scaleRangeInt(void);
-extern void fn_8020EFEC(void);
+extern void time_ticksToSeconds(void);
 extern void event_findEntryById(void);
 extern void fn_8021E4E4(void);
 extern void sound_initGlobalInstances(void);
@@ -1353,7 +1353,7 @@ lbl_fn_8040B394_000010DC:
     cmpwi r3, 0x0
     beq lbl_fn_8040B394_00001120
     mr r3, r29
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     cmpwi r3, 0x0
     beq lbl_fn_8040B394_00001150
     lwz r0, 0x78(r3)

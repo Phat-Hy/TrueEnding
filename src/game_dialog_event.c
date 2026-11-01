@@ -21,9 +21,9 @@ extern void proj_getMatrix(void);
 extern void vec3_scale(void);
 extern void fn_800F7F80(void);
 extern void fn_800F7FB4(void);
-extern void fn_801162A0(void);
+extern void vec3_sqMag(void);
 extern void equip_getGlobalManager(void);
-extern void fn_80133EE8(void);
+extern void boss_findPartSlotById(void);
 extern void fn_80133F18(void);
 extern void fn_80134270(void);
 extern void fn_80134290(void);
@@ -36,8 +36,8 @@ extern void fn_8013A18C(void);
 extern void fn_8013A214(void);
 extern void fn_8013A248(void);
 extern void fn_801404E0(void);
-extern void fn_801404F8(void);
-extern void fn_80140500(void);
+extern void quest_getGlobalManager(void);
+extern void quest_resetActiveObjectiveSlots(void);
 extern void fn_80140518(void);
 extern void quest_initMarkerCoords(void);
 extern void fn_80148334(void);
@@ -53,7 +53,7 @@ extern void fn_8015CC70(void);
 extern void fn_8015D8C0(void);
 extern void fn_8015DEC0(void);
 extern void fn_8015E1B8(void);
-extern void fn_8015E4B0(void);
+extern void party_initFormationSlots(void);
 extern void party_configureMemberSlot(void);
 extern void fn_80160324(void);
 extern void fn_801681B0(void);
@@ -61,7 +61,7 @@ extern void fn_80168824(void);
 extern void fn_801698E4(void);
 extern void debuff_clearStatus(void);
 extern void fn_8016F5EC(void);
-extern void fn_801750FC(void);
+extern void battle_calcOutcomeBonus(void);
 extern void fn_80175A38(void);
 extern void fn_8017B16C(void);
 extern void time_wrapMilliseconds(void);
@@ -1042,7 +1042,7 @@ asm void fn_80150460(void)
     addi r29, r4, 0x7d4
     li r4, 0xa
     mr r3, r29
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_80150460_00000C7C
     mr r3, r29
@@ -1328,7 +1328,7 @@ lbl_fn_8015076C_00000FE0:
     b lbl_fn_8015076C_000018D4
 lbl_fn_8015076C_00001030:
     mr r3, r25
-    bl fn_801162A0
+    bl vec3_sqMag
     fmr f30, f1
     mr r3, r23
     bl fn_80160324
@@ -1424,7 +1424,7 @@ lbl_fn_8015076C_00001158:
     cmpwi r3, 0x0
     bne lbl_fn_8015076C_000012D0
     addi r3, r1, 0x198
-    bl fn_80140500
+    bl quest_resetActiveObjectiveSlots
     lfs f1, lbl_8088196C
     addi r3, r1, 0xb0
     lfs f2, lbl_808819F8
@@ -1451,7 +1451,7 @@ lbl_fn_8015076C_00001158:
     addi r4, r1, 0xa4
     addi r5, r1, 0x8c
     bl vec3_add
-    bl fn_801404F8
+    bl quest_getGlobalManager
     addi r4, r1, 0x198
     addi r5, r1, 0xf8
     addi r6, r1, 0xec
@@ -1479,7 +1479,7 @@ lbl_fn_8015076C_00001158:
     cmpwi r0, 0x0
     beq lbl_fn_8015076C_00001270
     mr r3, r23
-    bl fn_801750FC
+    bl battle_calcOutcomeBonus
 lbl_fn_8015076C_00001270:
     addi r3, r1, 0x5c
     addi r4, r1, 0x1c0
@@ -1532,7 +1532,7 @@ lbl_fn_8015076C_00001310:
     addi r4, r23, 0x534
     bl vec3_assign
     addi r3, r1, 0x148
-    bl fn_80140500
+    bl quest_resetActiveObjectiveSlots
     mr r4, r23
     addi r3, r1, 0x44
     bl quest_initMarkerCoords
@@ -1562,7 +1562,7 @@ lbl_fn_8015076C_00001310:
     fsubs f0, f0, f2
     stfs f1, 0xd8(r1)
     stfs f0, 0xcc(r1)
-    bl fn_801404F8
+    bl quest_getGlobalManager
     addi r4, r1, 0x148
     addi r5, r1, 0xd4
     addi r6, r1, 0xc8
@@ -1615,7 +1615,7 @@ lbl_fn_8015076C_00001454:
     beq lbl_fn_8015076C_000014BC
     bl proj_getMatrix
     li r4, 0x18
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_8015076C_000014BC
     addi r3, r23, 0x7d4
@@ -1838,7 +1838,7 @@ lbl_fn_8015076C_0000176C:
 lbl_fn_8015076C_00001794:
     li r5, -0x1
 lbl_fn_8015076C_00001798:
-    bl fn_8015E4B0
+    bl party_initFormationSlots
     lwz r3, 0xd1c(r23)
     cmpwi r3, 0x0
     beq lbl_fn_8015076C_000017C0
@@ -1854,7 +1854,7 @@ lbl_fn_8015076C_000017C0:
     cmpwi r29, 0x0
     beq lbl_fn_8015076C_000017D0
     mr r3, r23
-    bl fn_801750FC
+    bl battle_calcOutcomeBonus
 lbl_fn_8015076C_000017D0:
     cmpwi r31, 0x0
     beq lbl_fn_8015076C_000018B8

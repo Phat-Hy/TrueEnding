@@ -1107,3 +1107,35 @@ void* field_getTextureSlot(void* field, u32 arg2, u32 arg3)
 void graphic_dummyCallback(void) {}
 `
 Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.
+
+## Session 2026-11-01 - Batches 51-60 & 348 Functions Decompiled to 100.0% Matching C
+Subject: track-a: Batches 51-60 + 348 C decompiled functions (progress: 479 total C functions matched)
+Decompilation Highlights:
+  - Total functions decompiled to C: 479 functions (348 added in Batches 51-60).
+  - Decompiled 166 full network protocol message descriptors in src/game_net_func_msg.c.
+  - Decompiled map, gimmick, collision, camera, coliseum, and math accessors across 40+ TUs.
+  - Decompiled scene_getRootNode, ec3_sqMag, and core subsystem accessors.
+Symbol Naming Highlights (Batches 51-60):
+  - Batch 51: gmk_findSlotByIndex, arrier_bindFieldAnimation, ield_initGridPoints, quest_resetObjectiveBounds, msg_formatWindowLayout, player_evaluateStatusCondition, msg_isWindowActive, hurtbox_testCollisionLayer, attle_activateExpReward, hurtbox_processHitDamage
+  - Batch 52: dvd_showDiskErrorDialog, GXInitLightObj, dlc_findItemInCatalog, oss_triggerEventSequence, 
+pc_getGlobalManager, 
+es_Shader_findParameter, cam_evalControllerSpline, cam_evalLookAtMatrix, cursor_applyAnimationTrack, 	arget_pushPointToHistory
+  - Batch 53: mem_findBlockById, 	alk_copyUtf16String, 	alk_parseDialogueTokens, nemy_evalAnimTrack, compass_findWaypointIndex, quest_getRewardItemSlot, path_Object_constructor, mission_updateObjectiveTarget, compass_findMarkerByName, 	own_updateInteractionPoints
+  - Batch 54: ec3_normalize, skill_findNodeByTag, zone_testPointInBounds, arrier_formatDialogString, hud_drawTargetMarker, 
+and_scaleRangeInt, menu_initWindowBuffer, save_calculateBlockCrc, GXSetTevDirect, 
+and_Mersenne_constructor
+  - Batch 55: dialog_initScriptSlot, oss_bindArenaInteractions, 	own_registerInteractionPoint, 
+et_getTimestampMs, 
+et_pollActiveSockets, quip_calcTotalStatBonuses, phys_scaleGravity, math_wrapAngle, quest_initMarkerCoords, proj_getMatrix
+  - Batch 56: nemy_stepBehavior, cam_setLookAtTarget, str_appendString, scene_getRootNode, cam_findTargetIndex, cam_registerTarget, cam_bindPathTarget, cam_bindRotationTarget, cam_initTrajectoryParams, mission_isObjectiveActive
+  - Batch 57: nemy_updateNavSteering, oss_loadWeakpointResource, GXSetTexCoordScaleManually, arrier_testFieldCollision, colli_findDynamicSlot, party_evalTacticCondition, colli_findStaticSlot, mission_initPathTracker, mission_clearPathTracker, 	ask_getWorkerByIndex
+  - Batch 58: gmk_registerSlot, magic_updateCircleArea, 
+et_isSessionConnected, party_initFormationSlots, 	arget_findEntryByName, 	ime_ticksToSeconds, cam_testTargetVisibility, sys_findModuleById, 
+and_Mersenne_init, gmk_LoadHandle_constructor
+  - Batch 59: quest_evaluateMilestoneData, party_updateMemberCoords, GXBegin, msg_lookupFormattedEntry, ec3_sqMag, __GXInitVtxDesc, 
+et_truncateU16, 	ask_findNextReady, proj_getGlobalManager, 
+and_stepEntropy
+  - Batch 60: cam_updateLookAtMatrix, save_writeBackupSlot, GXSetTevIndTile, 
+et_isSessionActive, skeleton_getBoneByIndex, map_getArchiveName, ec3_addAssign, morph_hasActiveWeight, quest_getGlobalManager, arrier_formatCountdownTimer
+Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.
+Bit-identical DOL hash verified: orig/main.dol: OK.

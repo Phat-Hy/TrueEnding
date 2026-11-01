@@ -6,7 +6,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void hurtbox_processHitDamage(void);
 extern void fn_8012B3E8(void);
-extern void fn_8012B988(void);
+extern void enemy_updateNavSteering(void);
 extern void fn_8012C6D4(void);
 extern void fn_8020FCE8(void);
 extern void fn_8021AF50(void);
@@ -34,8 +34,8 @@ extern u32 lbl_80881908;
 extern u32 lbl_80881918;
 
 /* Function declarations */
-void fn_8013310C(void);
-void fn_80133130(void);
+void boss_enablePartStatusFlags(void);
+void boss_setPartCollisionFlags(void);
 void actor_testBitFlag(void);
 void fn_801333A4(void);
 void fn_801333E4(void);
@@ -44,12 +44,12 @@ void fn_8013354C(void);
 void fn_80133B30(void);
 void fn_80133BD8(void);
 void fn_80133E24(void);
-void fn_80133EE8(void);
+void boss_findPartSlotById(void);
 void fn_80133F18(void);
 void fn_80133F6C(void);
 void fn_80133FBC(void);
 void fn_8013407C(void);
-void fn_80134134(void);
+void boss_findPartById(void);
 void fn_80134168(void);
 void fn_801341B8(void);
 void fn_80134208(void);
@@ -62,7 +62,7 @@ void fn_801342D0(void);
 void fn_8013459C(void);
 void fn_80134674(void);
 
-asm void fn_8013310C(void)
+asm void boss_enablePartStatusFlags(void)
 {
     nofralloc
     lwz r0, 0xc(r3)
@@ -76,81 +76,81 @@ asm void fn_8013310C(void)
     blr
 }
 
-asm void fn_80133130(void)
+asm void boss_setPartCollisionFlags(void)
 {
     nofralloc
     lwz r0, 0xc(r3)
     cmpwi r6, 0x0
     or r0, r0, r4
     stw r0, 0xc(r3)
-    beq lbl_fn_80133130_00000044
+    beq lbl_boss_setPartCollisionFlags_00000044
     lwz r0, 0x10(r3)
     or r0, r0, r4
     stw r0, 0x10(r3)
-lbl_fn_80133130_00000044:
+lbl_boss_setPartCollisionFlags_00000044:
     li r0, 0x4
     li r8, 0x0
     li r6, 0x1
     mtctr r0
-lbl_fn_80133130_00000054:
+lbl_boss_setPartCollisionFlags_00000054:
     slw r7, r6, r8
     and r0, r7, r4
     cmplw r7, r0
-    bne lbl_fn_80133130_00000068
+    bne lbl_boss_setPartCollisionFlags_00000068
     stw r5, 0x24c(r3)
-lbl_fn_80133130_00000068:
+lbl_boss_setPartCollisionFlags_00000068:
     addi r8, r8, 0x1
     slw r7, r6, r8
     and r0, r7, r4
     cmplw r7, r0
-    bne lbl_fn_80133130_00000080
+    bne lbl_boss_setPartCollisionFlags_00000080
     stw r5, 0x250(r3)
-lbl_fn_80133130_00000080:
+lbl_boss_setPartCollisionFlags_00000080:
     addi r8, r8, 0x1
     slw r7, r6, r8
     and r0, r7, r4
     cmplw r7, r0
-    bne lbl_fn_80133130_00000098
+    bne lbl_boss_setPartCollisionFlags_00000098
     stw r5, 0x254(r3)
-lbl_fn_80133130_00000098:
+lbl_boss_setPartCollisionFlags_00000098:
     addi r8, r8, 0x1
     slw r7, r6, r8
     and r0, r7, r4
     cmplw r7, r0
-    bne lbl_fn_80133130_000000B0
+    bne lbl_boss_setPartCollisionFlags_000000B0
     stw r5, 0x258(r3)
-lbl_fn_80133130_000000B0:
+lbl_boss_setPartCollisionFlags_000000B0:
     addi r8, r8, 0x1
     slw r7, r6, r8
     and r0, r7, r4
     cmplw r7, r0
-    bne lbl_fn_80133130_000000C8
+    bne lbl_boss_setPartCollisionFlags_000000C8
     stw r5, 0x25c(r3)
-lbl_fn_80133130_000000C8:
+lbl_boss_setPartCollisionFlags_000000C8:
     addi r8, r8, 0x1
     slw r7, r6, r8
     and r0, r7, r4
     cmplw r7, r0
-    bne lbl_fn_80133130_000000E0
+    bne lbl_boss_setPartCollisionFlags_000000E0
     stw r5, 0x260(r3)
-lbl_fn_80133130_000000E0:
+lbl_boss_setPartCollisionFlags_000000E0:
     addi r8, r8, 0x1
     slw r7, r6, r8
     and r0, r7, r4
     cmplw r7, r0
-    bne lbl_fn_80133130_000000F8
+    bne lbl_boss_setPartCollisionFlags_000000F8
     stw r5, 0x264(r3)
-lbl_fn_80133130_000000F8:
+lbl_boss_setPartCollisionFlags_000000F8:
     addi r8, r8, 0x1
     slw r7, r6, r8
     and r0, r7, r4
     cmplw r7, r0
-    bne lbl_fn_80133130_00000110
+    bne lbl_boss_setPartCollisionFlags_00000110
     stw r5, 0x268(r3)
-lbl_fn_80133130_00000110:
+lbl_boss_setPartCollisionFlags_00000110:
     addi r3, r3, 0x20
     addi r8, r8, 0x1
-    bdnz lbl_fn_80133130_00000054
+    bdnz lbl_boss_setPartCollisionFlags_00000054
     blr
 }
 
@@ -821,7 +821,7 @@ asm void fn_80133B30(void)
     srwi r31, r0, 31
     bl fn_8012B3E8
     mr r3, r30
-    bl fn_8012B988
+    bl enemy_updateNavSteering
     cmpwi r31, 0x0
     bne lbl_fn_80133B30_00000AB4
     lwz r3, 0x16c(r30)
@@ -1085,21 +1085,21 @@ lbl_fn_80133E24_00000DC0:
     blr
 }
 
-asm void fn_80133EE8(void)
+asm void boss_findPartSlotById(void)
 {
     nofralloc
     lwz r0, 0x304(r3)
     addi r3, r3, 0x308
     mtctr r0
     cmplwi r0, 0x0
-    ble lbl_fn_80133EE8_00000E04
-lbl_fn_80133EE8_00000DF0:
+    ble lbl_boss_findPartSlotById_00000E04
+lbl_boss_findPartSlotById_00000DF0:
     lwz r0, 0x0(r3)
     cmpw r0, r4
     beqlr
     addi r3, r3, 0x14
-    bdnz lbl_fn_80133EE8_00000DF0
-lbl_fn_80133EE8_00000E04:
+    bdnz lbl_boss_findPartSlotById_00000DF0
+lbl_boss_findPartSlotById_00000E04:
     li r3, 0x0
     blr
 }
@@ -1278,22 +1278,22 @@ lbl_fn_8013407C_0000100C:
     blr
 }
 
-asm void fn_80134134(void)
+asm void boss_findPartById(void)
 {
     nofralloc
     lwz r0, 0x380(r3)
     addi r3, r3, 0x384
     mtctr r0
     cmplwi r0, 0x0
-    ble lbl_fn_80134134_00001054
-lbl_fn_80134134_0000103C:
+    ble lbl_boss_findPartById_00001054
+lbl_boss_findPartById_0000103C:
     lwz r5, 0x0(r3)
     lwz r0, 0x0(r5)
     cmpw r0, r4
     beqlr
     addi r3, r3, 0x14
-    bdnz lbl_fn_80134134_0000103C
-lbl_fn_80134134_00001054:
+    bdnz lbl_boss_findPartById_0000103C
+lbl_boss_findPartById_00001054:
     li r3, 0x0
     blr
 }

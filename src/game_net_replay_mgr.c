@@ -26,8 +26,8 @@ extern void fn_804C4530(void);
 extern void fn_804E4A24(void);
 extern void fn_804EB1B0(void);
 extern void fn_8050BA6C(void);
-extern void fn_806A8E70(void);
-extern void fn_806B0DE0(void);
+extern void net_getInterfaceHandle(void);
+extern void net_isSessionActive(void);
 
 /* External data declarations */
 extern u8 lbl_80758848[];
@@ -329,7 +329,7 @@ lbl_fn_804C2C14_00000360:
     li r3, 0x1
     b lbl_fn_804C2C14_000003A8
 lbl_fn_804C2C14_00000388:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804C2C14_000003A8
 lbl_fn_804C2C14_00000390:
     lwz r0, 0x1f8(r4)
@@ -338,7 +338,7 @@ lbl_fn_804C2C14_00000390:
     li r3, 0x1
     b lbl_fn_804C2C14_000003A8
 lbl_fn_804C2C14_000003A4:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804C2C14_000003A8:
     cmpw r31, r3
     blt lbl_fn_804C2C14_000002B0

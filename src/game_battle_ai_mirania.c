@@ -11,12 +11,12 @@ extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void fn_800629F0(void);
-extern void fn_80063764(void);
+extern void magic_updateCircleArea(void);
 extern void magic_castSpellCircle(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB518(void);
-extern void fn_800CB688(void);
+extern void morph_resetTargetWeight(void);
 extern void str_skipWhitespace(void);
 extern void sound_initGlobalInstances(void);
 extern void res_Resource_unload(void);
@@ -32,7 +32,7 @@ extern void fn_8032B6F8(void);
 extern void fn_8032B7F0(void);
 extern void fn_8032BE88(void);
 extern void fn_8032C1EC(void);
-extern void fn_803EEE10(void);
+extern void dungeon_findArenaNodeByCoords(void);
 extern void fn_8044E1BC(void);
 extern void fn_8044EEC0(void);
 extern void fn_8044F434(void);
@@ -480,7 +480,7 @@ lbl_fn_80438814_00000594:
     lfs f1, lbl_80886900
     addi r5, r1, 0x68
     subi r6, r22, 0x1
-    bl fn_80063764
+    bl magic_updateCircleArea
     fadds f28, f28, f31
 lbl_fn_80438814_000005B0:
     fcmpo cr0, f28, f29
@@ -951,7 +951,7 @@ lbl_fn_804392C0_00000C30:
     beq lbl_fn_804392C0_00000C4C
     mr r5, r29
     li r4, 0x2af9
-    bl fn_803EEE10
+    bl dungeon_findArenaNodeByCoords
     b lbl_fn_804392C0_00000C50
 lbl_fn_804392C0_00000C4C:
     li r3, 0x0
@@ -2062,7 +2062,7 @@ lbl_fn_8043A08C_00001C68:
     fmr f1, f0
 lbl_fn_8043A08C_00001C6C:
     li r4, 0x0
-    bl fn_800CB688
+    bl morph_resetTargetWeight
     addi r3, r31, 0x90
     bl fn_80450778
     li r0, 0x4

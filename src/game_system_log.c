@@ -24,7 +24,7 @@ extern void cam_evalControllerSpline(void);
 extern void cam_evalLookAtMatrix(void);
 extern void fn_8020685C(void);
 extern void fn_8020689C(void);
-extern void fn_8046DC5C(void);
+extern void boss_loadWeakpointResource(void);
 extern void boss_bindArenaInteractions(void);
 extern void strncpy(void);
 extern void strcmp(void);
@@ -410,7 +410,7 @@ asm void fn_80204958(void)
     li r24, 0x0
     stw r24, 0x18(r1)
     lwz r3, lbl_8087F518
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lis r4, lbl_807772D0@ha
     mr r28, r3
     addi r4, r4, lbl_807772D0@l
@@ -760,7 +760,7 @@ asm void fn_80204E54(void)
     li r14, 0x0
     stw r14, 0x28(r1)
     lwz r3, lbl_8087F518
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lis r4, lbl_807772D0@ha
     stw r3, 0x770(r1)
     addi r4, r4, lbl_807772D0@l

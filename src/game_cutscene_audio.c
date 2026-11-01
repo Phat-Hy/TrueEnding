@@ -9,7 +9,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void vec3_mag(void);
 extern void scene_transformPoint(void);
-extern void fn_8000DCF4(void);
+extern void scene_getCamera(void);
 extern void vec3_sub(void);
 extern void vec3_add(void);
 extern void actor_validateIndex(void);
@@ -36,7 +36,7 @@ extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
-extern void fn_8012A1B8(void);
+extern void path_getFollowerNode(void);
 extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
 extern void npc_calcTargetDistance(void);
@@ -1224,7 +1224,7 @@ lbl_fn_8032E938_00000F08:
     cmpwi r0, 0x0
     bne lbl_fn_8032E938_00000F4C
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     stw r3, 0xd1c(r31)
 lbl_fn_8032E938_00000F4C:
     mr r3, r31
@@ -1276,7 +1276,7 @@ lbl_fn_8032E938_00000FC0:
     stfs f0, 0x7d8(r31)
     beq lbl_fn_8032E938_00001078
     mr r3, r31
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     lwz r4, 0xd1c(r31)
     mr r29, r3
     addi r3, r1, 0x10

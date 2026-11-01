@@ -17,13 +17,13 @@ extern void ref_releaseHandle(void);
 extern void fn_800FDE60(void);
 extern void fn_8010A308(void);
 extern void fn_80129978(void);
-extern void fn_80129A48(void);
+extern void path_resetWaypointVelocity(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_resetObjectiveBounds(void);
 extern void inventory_unequipItem(void);
 extern void equip_applyToCharacter(void);
 extern void inventory_calcTotalStats(void);
-extern void fn_80164DCC(void);
+extern void party_evalTacticCondition(void);
 extern void debuff_clearStatus(void);
 extern void actor_getMovementFlags(void);
 extern void fn_80188F08(void);
@@ -1137,7 +1137,7 @@ lbl_fn_801AFAC0_00000DE0:
 lbl_fn_801AFAC0_00000E30:
     lwz r3, 0x4(r30)
     li r4, 0x1
-    bl fn_80164DCC
+    bl party_evalTacticCondition
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
@@ -1933,7 +1933,7 @@ asm void fn_801B07D4(void)
     bgt lbl_fn_801B07D4_000018E4
     lfs f1, lbl_80882388
     addi r3, r6, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     li r3, 0x1
     b lbl_fn_801B07D4_00001904
 lbl_fn_801B07D4_000018E4:

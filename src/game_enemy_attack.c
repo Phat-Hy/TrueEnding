@@ -14,7 +14,7 @@ extern void fn_80107FC8(void);
 extern void hurtbox_testCollisionLayer(void);
 extern void hurtbox_processHitDamage(void);
 extern void fn_8010CCD0(void);
-extern void fn_8012476C(void);
+extern void player_testStatusCondition(void);
 extern void fn_8012F440(void);
 extern void party_configureMemberSlot(void);
 extern void fn_80166544(void);
@@ -27,8 +27,8 @@ extern void fn_80168E60(void);
 extern void fn_80168EA0(void);
 extern void fn_80168F3C(void);
 extern void fn_80168F94(void);
-extern void fn_8016E484(void);
-extern void fn_801789D8(void);
+extern void task_isValidQueueRange(void);
+extern void battle_evalDropTable(void);
 extern void fn_8017AC2C(void);
 extern void fn_80219344(void);
 extern void fn_8021A8D0(void);
@@ -63,7 +63,7 @@ extern u32 lbl_80881948;
 
 /* Function declarations */
 void fn_8012DD70(void);
-void fn_8012DF7C(void);
+void enemy_calcAttackTrajectory(void);
 void fn_8012E244(void);
 void fn_8012E534(void);
 void fn_8012E540(void);
@@ -224,7 +224,7 @@ lbl_fn_8012DD70_000001F8:
     blr
 }
 
-asm void fn_8012DF7C(void)
+asm void enemy_calcAttackTrajectory(void)
 {
     nofralloc
     stwu r1, -0x40(r1)
@@ -244,7 +244,7 @@ asm void fn_8012DF7C(void)
     li r29, 0x0
     li r28, 0x0
     li r27, 0x0
-    beq lbl_fn_8012DF7C_00000280
+    beq lbl_enemy_calcAttackTrajectory_00000280
     lbz r0, 0x1(r6)
     lwz r5, 0xac(r6)
     extsb r4, r0
@@ -256,29 +256,29 @@ asm void fn_8012DF7C(void)
     srwi r31, r4, 5
     extrwi r29, r5, 1, 22
     xori r28, r0, 0x1
-lbl_fn_8012DF7C_00000280:
+lbl_enemy_calcAttackTrajectory_00000280:
     lwz r0, 0xc(r3)
     rlwinm r0, r0, 0, 19, 19
     cmplwi r0, 0x1000
-    bne lbl_fn_8012DF7C_000002A8
+    bne lbl_enemy_calcAttackTrajectory_000002A8
     cmpwi r6, 0x0
-    beq lbl_fn_8012DF7C_000003E4
+    beq lbl_enemy_calcAttackTrajectory_000003E4
     mr r3, r6
     bl fn_8021A8D0
     cmpwi r3, 0x0
-    beq lbl_fn_8012DF7C_000003E4
-lbl_fn_8012DF7C_000002A8:
+    beq lbl_enemy_calcAttackTrajectory_000003E4
+lbl_enemy_calcAttackTrajectory_000002A8:
     cmpwi r31, 0x0
-    bne lbl_fn_8012DF7C_000002D0
+    bne lbl_enemy_calcAttackTrajectory_000002D0
     rlwinm r0, r26, 0, 26, 26
     cmplwi r0, 0x20
-    bne lbl_fn_8012DF7C_000002D0
+    bne lbl_enemy_calcAttackTrajectory_000002D0
     cmpwi r30, 0x0
-    beq lbl_fn_8012DF7C_000002D0
+    beq lbl_enemy_calcAttackTrajectory_000002D0
     lfs f0, lbl_80881900
     stfs f0, 0x4(r24)
-    b lbl_fn_8012DF7C_000002F4
-lbl_fn_8012DF7C_000002D0:
+    b lbl_enemy_calcAttackTrajectory_000002F4
+lbl_enemy_calcAttackTrajectory_000002D0:
     xoris r0, r25, 0x8000
     stw r0, 0xc(r1)
     lis r3, lbl_80737348@ha
@@ -288,15 +288,15 @@ lbl_fn_8012DF7C_000002D0:
     fsubs f1, f1, f2
     fsubs f0, f0, f1
     stfs f0, 0x4(r24)
-lbl_fn_8012DF7C_000002F4:
+lbl_enemy_calcAttackTrajectory_000002F4:
     lfs f2, 0x4(r24)
     lfs f0, lbl_80881900
     fcmpo cr0, f2, f0
-    ble lbl_fn_8012DF7C_00000308
-    b lbl_fn_8012DF7C_0000030C
-lbl_fn_8012DF7C_00000308:
+    ble lbl_enemy_calcAttackTrajectory_00000308
+    b lbl_enemy_calcAttackTrajectory_0000030C
+lbl_enemy_calcAttackTrajectory_00000308:
     fmr f2, f0
-lbl_fn_8012DF7C_0000030C:
+lbl_enemy_calcAttackTrajectory_0000030C:
     lwz r0, 0x16c(r24)
     lis r3, lbl_80737348@ha
     lfd f1, lbl_80737348@l(r3)
@@ -305,29 +305,29 @@ lbl_fn_8012DF7C_0000030C:
     lfd f0, 0x10(r1)
     fsubs f0, f0, f1
     fcmpo cr0, f2, f0
-    bge lbl_fn_8012DF7C_0000034C
+    bge lbl_enemy_calcAttackTrajectory_0000034C
     lfs f1, 0x4(r24)
     lfs f0, lbl_80881900
     fcmpo cr0, f1, f0
-    ble lbl_fn_8012DF7C_00000344
-    b lbl_fn_8012DF7C_00000358
-lbl_fn_8012DF7C_00000344:
+    ble lbl_enemy_calcAttackTrajectory_00000344
+    b lbl_enemy_calcAttackTrajectory_00000358
+lbl_enemy_calcAttackTrajectory_00000344:
     fmr f1, f0
-    b lbl_fn_8012DF7C_00000358
-lbl_fn_8012DF7C_0000034C:
+    b lbl_enemy_calcAttackTrajectory_00000358
+lbl_enemy_calcAttackTrajectory_0000034C:
     stw r0, 0xc(r1)
     lfd f0, 0x8(r1)
     fsubs f1, f0, f1
-lbl_fn_8012DF7C_00000358:
+lbl_enemy_calcAttackTrajectory_00000358:
     lfs f2, 0x8(r24)
     lfs f0, lbl_80881900
     stfs f1, 0x4(r24)
     fcmpo cr0, f2, f0
-    ble lbl_fn_8012DF7C_00000370
-    b lbl_fn_8012DF7C_00000374
-lbl_fn_8012DF7C_00000370:
+    ble lbl_enemy_calcAttackTrajectory_00000370
+    b lbl_enemy_calcAttackTrajectory_00000374
+lbl_enemy_calcAttackTrajectory_00000370:
     fmr f2, f0
-lbl_fn_8012DF7C_00000374:
+lbl_enemy_calcAttackTrajectory_00000374:
     lwz r0, 0x170(r24)
     lis r3, lbl_80737348@ha
     lfd f1, lbl_80737348@l(r3)
@@ -336,30 +336,30 @@ lbl_fn_8012DF7C_00000374:
     lfd f0, 0x10(r1)
     fsubs f0, f0, f1
     fcmpo cr0, f2, f0
-    bge lbl_fn_8012DF7C_000003B4
+    bge lbl_enemy_calcAttackTrajectory_000003B4
     lfs f2, 0x8(r24)
     lfs f0, lbl_80881900
     fcmpo cr0, f2, f0
-    ble lbl_fn_8012DF7C_000003AC
-    b lbl_fn_8012DF7C_000003C0
-lbl_fn_8012DF7C_000003AC:
+    ble lbl_enemy_calcAttackTrajectory_000003AC
+    b lbl_enemy_calcAttackTrajectory_000003C0
+lbl_enemy_calcAttackTrajectory_000003AC:
     fmr f2, f0
-    b lbl_fn_8012DF7C_000003C0
-lbl_fn_8012DF7C_000003B4:
+    b lbl_enemy_calcAttackTrajectory_000003C0
+lbl_enemy_calcAttackTrajectory_000003B4:
     stw r0, 0xc(r1)
     lfd f0, 0x8(r1)
     fsubs f2, f0, f1
-lbl_fn_8012DF7C_000003C0:
+lbl_enemy_calcAttackTrajectory_000003C0:
     lfs f1, 0x4(r24)
     lfs f0, lbl_80881900
     stfs f2, 0x8(r24)
     fcmpo cr0, f1, f0
     cror eq, lt, eq
-    bne lbl_fn_8012DF7C_000003E4
+    bne lbl_enemy_calcAttackTrajectory_000003E4
     mr r3, r24
     bl fn_8012DD70
-    b lbl_fn_8012DF7C_000004BC
-lbl_fn_8012DF7C_000003E4:
+    b lbl_enemy_calcAttackTrajectory_000004BC
+lbl_enemy_calcAttackTrajectory_000003E4:
     mr r3, r24
     mr r4, r26
     mr r5, r27
@@ -371,53 +371,53 @@ lbl_fn_8012DF7C_000003E4:
     bl fn_8012F440
     cmpwi r3, 0x0
     mr r25, r3
-    beq lbl_fn_8012DF7C_000004BC
+    beq lbl_enemy_calcAttackTrajectory_000004BC
     lwz r0, 0x2f0(r24)
     cmpwi r0, 0x0
-    beq lbl_fn_8012DF7C_000004BC
+    beq lbl_enemy_calcAttackTrajectory_000004BC
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_8012DF7C_000004BC
+    beq lbl_enemy_calcAttackTrajectory_000004BC
     bl kpad_testActiveFlags
     cmpwi r3, 0x0
-    beq lbl_fn_8012DF7C_000004BC
+    beq lbl_enemy_calcAttackTrajectory_000004BC
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
-    beq lbl_fn_8012DF7C_000004BC
+    beq lbl_enemy_calcAttackTrajectory_000004BC
     cmpwi r25, 0x0
-    ble lbl_fn_8012DF7C_00000484
+    ble lbl_enemy_calcAttackTrajectory_00000484
     lwz r5, 0x2f0(r24)
     lwz r0, 0x48(r5)
     cmpwi r0, 0x2
-    bne lbl_fn_8012DF7C_00000470
+    bne lbl_enemy_calcAttackTrajectory_00000470
     li r4, 0x8
     li r6, 0x0
     li r7, 0x0
     bl hurtbox_processHitDamage
-    b lbl_fn_8012DF7C_000004BC
-lbl_fn_8012DF7C_00000470:
+    b lbl_enemy_calcAttackTrajectory_000004BC
+lbl_enemy_calcAttackTrajectory_00000470:
     li r4, 0x9
     li r6, 0x0
     li r7, 0x0
     bl hurtbox_processHitDamage
-    b lbl_fn_8012DF7C_000004BC
-lbl_fn_8012DF7C_00000484:
-    bge lbl_fn_8012DF7C_000004BC
+    b lbl_enemy_calcAttackTrajectory_000004BC
+lbl_enemy_calcAttackTrajectory_00000484:
+    bge lbl_enemy_calcAttackTrajectory_000004BC
     lwz r5, 0x2f0(r24)
     lwz r0, 0x48(r5)
     cmpwi r0, 0x2
-    bne lbl_fn_8012DF7C_000004AC
+    bne lbl_enemy_calcAttackTrajectory_000004AC
     li r4, 0xa
     li r6, 0x0
     li r7, 0x0
     bl hurtbox_processHitDamage
-    b lbl_fn_8012DF7C_000004BC
-lbl_fn_8012DF7C_000004AC:
+    b lbl_enemy_calcAttackTrajectory_000004BC
+lbl_enemy_calcAttackTrajectory_000004AC:
     li r4, 0xb
     li r6, 0x0
     li r7, 0x0
     bl hurtbox_processHitDamage
-lbl_fn_8012DF7C_000004BC:
+lbl_enemy_calcAttackTrajectory_000004BC:
     addi r11, r1, 0x40
     bl _restgpr_24
     lwz r0, 0x44(r1)
@@ -959,7 +959,7 @@ lbl_fn_8012E540_00000C18:
     lwz r3, lbl_8087F0A8
     li r4, 0x22
     addi r3, r3, 0x48c
-    bl fn_8012476C
+    bl player_testStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_8012E540_00000C88
     rlwinm r0, r26, 0, 24, 24
@@ -1269,7 +1269,7 @@ lbl_fn_8012E540_000010B4:
     mr r3, r24
     li r5, 0x0
     li r6, 0x0
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
 lbl_fn_8012E540_000010C8:
     addi r25, r25, 0x1
     addi r27, r27, 0x4
@@ -1424,7 +1424,7 @@ asm void fn_8012F034(void)
     stw r31, 0x1c(r1)
     mr r31, r3
     lwz r3, 0x2f0(r3)
-    bl fn_8016E484
+    bl task_isValidQueueRange
     cmpwi r3, 0x0
     beq lbl_fn_8012F034_0000130C
     lwz r3, 0x2f0(r31)
@@ -1594,7 +1594,7 @@ lbl_fn_8012F188_0000152C:
     lfs f30, lbl_80881904
     li r4, 0x0
     li r5, 0x2000
-    bl fn_801789D8
+    bl battle_evalDropTable
     cmpwi r3, 0x0
     beq lbl_fn_8012F188_0000154C
     lfs f0, lbl_80881948

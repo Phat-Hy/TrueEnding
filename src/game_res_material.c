@@ -25,7 +25,7 @@ extern void fn_8024068C(void);
 extern void fn_80242FF4(void);
 extern void fn_80243514(void);
 extern void fn_8068B39C(void);
-extern void fn_806920C0(void);
+extern void std_string_append(void);
 extern void fn_8069293C(void);
 extern void msl_releaseRefCount(void);
 
@@ -416,7 +416,7 @@ lbl_fn_8023BA10_000004F0:
     stw r5, lbl_8087F3C4
 lbl_fn_8023BA10_0000050C:
     mr r3, r28
-    bl fn_806920C0
+    bl std_string_append
     lwz r3, 0x38(r1)
     slwi r0, r29, 2
     lwz r3, 0x0(r3)
@@ -911,7 +911,7 @@ lbl_fn_8023C0C0_00000BDC:
 lbl_fn_8023C0C0_00000BF8:
     mr r3, r30
     mr r4, r29
-    bl fn_806920C0
+    bl std_string_append
     lwz r3, 0x28(r1)
     slwi r0, r31, 2
     lwz r3, 0x0(r3)
@@ -1263,7 +1263,7 @@ lbl_fn_8023C6F4_00001088:
     stw r5, lbl_80880390
     stw r5, lbl_808803C0
 lbl_fn_8023C6F4_000010A8:
-    bl fn_806920C0
+    bl std_string_append
     lwz r3, 0x20(r1)
     slwi r0, r25, 2
     lwz r3, 0x0(r3)
@@ -1524,7 +1524,7 @@ lbl_fn_8023C6F4_00001400:
     stw r5, lbl_80880390
     stw r5, lbl_808803C0
 lbl_fn_8023C6F4_00001420:
-    bl fn_806920C0
+    bl std_string_append
     lwz r3, 0x18(r1)
     slwi r0, r30, 2
     lwz r3, 0x0(r3)
@@ -1838,7 +1838,7 @@ lbl_fn_8023C6F4_00001830:
     stw r5, lbl_80880390
     stw r5, lbl_808803C0
 lbl_fn_8023C6F4_00001850:
-    bl fn_806920C0
+    bl std_string_append
     lwz r3, 0x10(r1)
     slwi r0, r28, 2
     lwz r3, 0x0(r3)

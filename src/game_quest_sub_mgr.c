@@ -4,13 +4,13 @@
 /* External function declarations */
 extern void fn_80079044(void);
 extern void skeleton_getGlobalManager(void);
-extern void fn_800C2448(void);
+extern void skeleton_getBoneByIndex(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void str_findChar(void);
 extern void thread_findAndNotifySlot(void);
 extern void kpad_getClampData(void);
-extern void fn_8041D180(void);
+extern void battle_invokeVtableMethod(void);
 extern void fn_8041D198(void);
 extern void fn_8047CB74(void);
 extern void fn_8049003C(void);
@@ -882,7 +882,7 @@ lbl_fn_80481B9C_00000A74:
     psq_st f1, 0x0(r9), 0, 0
     lwz r0, 0x120(r3)
     stw r0, 0x1a8(r1)
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     lwz r0, 0x0(r3)
     addi r31, r30, 0x110
     stw r0, 0x1ac(r1)
@@ -1566,7 +1566,7 @@ lbl_fn_804827D8_000014E8:
     psq_st f1, 0x224(r3), 0, 0
     lwz r0, 0x148(r31)
     stw r0, 0x120(r3)
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     lwz r0, 0x14c(r31)
     stw r0, 0x0(r3)
     lwz r0, 0x150(r31)
@@ -1789,7 +1789,7 @@ asm void fn_80482D90(void)
     stw r31, 0xc(r1)
     mr r31, r4
     li r4, 0x0
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     lfs f2, 0x1c(r31)
     psq_l f1, 0x14(r31), 0, 0
     psq_st f1, 0x14(r3), 0, 0
@@ -2219,7 +2219,7 @@ lbl_fn_80482ED8_00001E34:
     psq_st f1, 0x0(r9), 0, 0
     lwz r0, 0x120(r3)
     stw r0, 0x1d18(r31)
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     lwz r0, 0x0(r3)
     addi r5, r31, 0x1d24
     stw r0, 0x1d1c(r31)
@@ -2261,12 +2261,12 @@ lbl_fn_80482ED8_00001E34:
     extsb. r0, r0
     bne lbl_fn_80482ED8_00001FD8
     lis r6, lbl_807C88F0@ha
-    lis r4, fn_8041D180@ha
+    lis r4, battle_invokeVtableMethod@ha
     lis r3, fn_8041D198@ha
     li r0, 0x1
     addi r3, r3, fn_8041D198@l
     addi r5, r6, lbl_807C88F0@l
-    addi r4, r4, fn_8041D180@l
+    addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C88F0@l(r6)
     stb r0, lbl_8087F4C0

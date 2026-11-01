@@ -11,7 +11,7 @@ extern void _savegpr_27(void);
 extern void fn_8022C9C8(void);
 extern void fn_8022DA70(void);
 extern void fn_802328EC(void);
-extern void fn_8023329C(void);
+extern void effect_evalKeyframeCurve(void);
 extern void fn_80233348(void);
 extern void fn_802334E0(void);
 extern void fn_80233678(void);
@@ -683,7 +683,7 @@ lbl_fn_802301EC_0000080C:
     fsubs f8, f8, f9
     fsubs f0, f0, f7
     fdivs f30, f8, f0
-    bl fn_8023329C
+    bl effect_evalKeyframeCurve
     fmr f31, f1
     lwz r5, 0xbc(r30)
     fmr f1, f30
@@ -691,7 +691,7 @@ lbl_fn_802301EC_0000080C:
     mr r4, r27
     li r3, 0xc
     li r6, 0x0
-    bl fn_8023329C
+    bl effect_evalKeyframeCurve
     fsubs f0, f1, f31
     lfs f1, lbl_808830D0
     mr r4, r27
@@ -700,7 +700,7 @@ lbl_fn_802301EC_0000080C:
     fmr f2, f1
     lwz r5, 0xbc(r30)
     li r6, 0x0
-    bl fn_8023329C
+    bl effect_evalKeyframeCurve
     fmr f31, f1
     lwz r5, 0xbc(r30)
     fmr f1, f30
@@ -708,7 +708,7 @@ lbl_fn_802301EC_0000080C:
     mr r4, r27
     li r3, 0xd
     li r6, 0x0
-    bl fn_8023329C
+    bl effect_evalKeyframeCurve
     fsubs f0, f1, f31
     lfs f1, lbl_808830D0
     mr r4, r27
@@ -717,7 +717,7 @@ lbl_fn_802301EC_0000080C:
     fmr f2, f1
     lwz r5, 0xbc(r30)
     li r6, 0x0
-    bl fn_8023329C
+    bl effect_evalKeyframeCurve
     fmr f31, f1
     lwz r5, 0xbc(r30)
     fmr f1, f30
@@ -725,7 +725,7 @@ lbl_fn_802301EC_0000080C:
     mr r4, r27
     li r3, 0xe
     li r6, 0x0
-    bl fn_8023329C
+    bl effect_evalKeyframeCurve
     fsubs f9, f1, f31
     addi r4, r1, 0x74
     lfs f7, 0x74(r1)
@@ -1157,7 +1157,7 @@ lbl_fn_80230780_00000FFC:
     lfs f2, 0x12c(r30)
     li r3, 0x12
     li r6, 0x0
-    bl fn_8023329C
+    bl effect_evalKeyframeCurve
     stfs f1, 0xcc(r30)
     frsp f3, f1
     lfs f0, 0xa8(r28)
@@ -1296,7 +1296,7 @@ lbl_fn_80230780_000011F0:
     li r3, 0xa
     fmr f2, f1
     li r6, 0x0
-    bl fn_8023329C
+    bl effect_evalKeyframeCurve
     stfs f1, 0xdc(r30)
     mr r4, r31
     lfs f1, lbl_808830D0
@@ -1304,7 +1304,7 @@ lbl_fn_80230780_000011F0:
     li r3, 0xb
     li r6, 0x0
     fmr f2, f1
-    bl fn_8023329C
+    bl effect_evalKeyframeCurve
     stfs f1, 0xe0(r30)
     b lbl_fn_80230780_0000125C
 lbl_fn_80230780_00001250:

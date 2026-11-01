@@ -25,7 +25,7 @@ extern void sky_renderStub(void);
 extern void save_validateHeader(void);
 extern void fn_802085E0(void);
 extern void fn_80208694(void);
-extern void fn_8021771C(void);
+extern void task_findNextReady(void);
 extern void fn_8021F09C(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
@@ -107,19 +107,19 @@ void fn_80375B78(void);
 void fn_80375D0C(void);
 void fn_80376150(void);
 void fn_80376194(void);
-void fn_803761A4(void);
+u32 fn_803761A4(void);
 void fn_803761AC(void);
 void fn_803761BC(void);
 void fn_803761CC(void);
-void fn_803761DC(void);
-void fn_803761E4(void);
-void fn_803761EC(void);
-void fn_803761F4(void);
+u32 fn_803761DC(void *p);
+void fn_803761E4(void *p, u32 val);
+u32 fn_803761EC(void *p);
+void fn_803761F4(void *p, u32 val);
 void fn_803761FC(void);
 void fn_80376210(void);
 void fn_80376224(void);
 void fn_80376238(void);
-void fn_8037624C(void);
+void fn_8037624C(void *p, u32 val);
 void fn_80376254(void);
 void fn_80376324(void);
 void fn_80376568(void);
@@ -148,7 +148,7 @@ asm void fn_80375B78(void)
     lwz r3, 0x48(r3)
     lwz r4, 0x4c(r29)
     lwz r5, 0x50(r29)
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_80375B78_0000017C
@@ -305,7 +305,7 @@ lbl_fn_80375D0C_00000228:
     mr r4, r28
     li r30, 0x0
     mr r5, r22
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_80375D0C_000004F0
@@ -316,7 +316,7 @@ lbl_fn_80375D0C_00000228:
     mr r4, r28
     mr r5, r22
     li r30, 0x0
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r24, r3
     beq lbl_fn_80375D0C_00000458
@@ -547,7 +547,7 @@ lbl_fn_80375D0C_00000590:
     lwz r3, 0x48(r25)
     lwz r4, 0x4c(r25)
     lwz r5, 0x50(r25)
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     beq lbl_fn_80375D0C_000005BC
     lwz r0, 0x44(r3)
@@ -598,11 +598,9 @@ asm void fn_80376194(void)
     blr
 }
 
-asm void fn_803761A4(void)
+u32 fn_803761A4(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_803761AC(void)
@@ -632,32 +630,24 @@ asm void fn_803761CC(void)
     blr
 }
 
-asm void fn_803761DC(void)
+u32 fn_803761DC(void *p)
 {
-    nofralloc
-    lwz r3, 0x10ec(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x10ec);
 }
 
-asm void fn_803761E4(void)
+void fn_803761E4(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x1118(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x1118) = val;
 }
 
-asm void fn_803761EC(void)
+u32 fn_803761EC(void *p)
 {
-    nofralloc
-    lwz r3, 0x111c(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x111c);
 }
 
-asm void fn_803761F4(void)
+void fn_803761F4(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x111c(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x111c) = val;
 }
 
 asm void fn_803761FC(void)
@@ -700,11 +690,9 @@ asm void fn_80376238(void)
     blr
 }
 
-asm void fn_8037624C(void)
+void fn_8037624C(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x1194(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x1194) = val;
 }
 
 asm void fn_80376254(void)

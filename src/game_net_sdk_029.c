@@ -17,19 +17,19 @@ extern void strncmp(void);
 extern void strstr(void);
 extern void atoi(void);
 extern void fn_806A426C(void);
-extern void fn_806A4270(void);
+extern void net_truncateU16(void);
 extern void fn_806D57A0(void);
 extern void fn_806D63A0(void);
 extern void net_socketConnect(void);
 extern void fn_806D7AA0(void);
 extern void net_socketClose(void);
 extern void fn_806D8B20(void);
-extern void fn_806D8E30(void);
+extern void net_strdup(void);
 extern void net_getTimestampMs(void);
 extern void fn_806D8F80(void);
 extern void fn_806D9590(void);
 extern void net_sendString(void);
-extern void fn_806DE4E0(void);
+extern void net_sendFormattedCommand(void);
 extern void fn_806DE7F0(void);
 extern void fn_806DE940(void);
 extern void net_sendPacket(void);
@@ -62,7 +62,7 @@ extern void fn_806E5C20(void);
 extern void fn_806E5C80(void);
 extern void fn_806E5D70(void);
 extern void fn_806E8650(void);
-extern void fn_806E8B10(void);
+extern void str_safeCopy(void);
 extern void fn_806E8B60(void);
 extern void fn_806E8D30(void);
 extern void net_formatPlayerInfo(void);
@@ -994,7 +994,7 @@ lbl_fn_806DC260_00000CBC:
     bl net_socketClose
     stw r25, 0x14(r24)
     addi r3, r27, 0x8
-    bl fn_806D8E30
+    bl net_strdup
     stw r3, 0x14(r24)
     lwz r3, 0x18(r24)
     addi r0, r3, 0x1
@@ -1019,7 +1019,7 @@ lbl_fn_806DC260_00000D20:
     addi r4, r1, 0x188
     li r5, 0x401
     addi r3, r3, 0x8
-    bl fn_806E8B10
+    bl str_safeCopy
     stw r29, 0x0(r24)
     mr r3, r26
     lwz r7, 0x10(r1)
@@ -1211,7 +1211,7 @@ lbl_fn_806DC260_00000FB8:
     stb r27, 0x88(r1)
 lbl_fn_806DC260_00000FF4:
     addi r3, r1, 0x88
-    bl fn_806D8E30
+    bl net_strdup
     cmpwi r3, 0x0
     stw r3, 0x8(r24)
     bne lbl_fn_806DC260_0000101C
@@ -1235,7 +1235,7 @@ lbl_fn_806DC260_0000101C:
     stb r27, 0x88(r1)
 lbl_fn_806DC260_0000104C:
     addi r3, r1, 0x88
-    bl fn_806D8E30
+    bl net_strdup
     cmpwi r3, 0x0
     stw r3, 0xc(r24)
     bne lbl_fn_806DC260_00001074
@@ -1275,7 +1275,7 @@ lbl_fn_806DC260_000010D4:
     addi r3, r1, 0x78
     bl atoi
     clrlwi r3, r3, 16
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x14(r24)
 lbl_fn_806DC260_000010E8:
     addi r3, r1, 0x188
@@ -1387,7 +1387,7 @@ lbl_fn_806DC260_00001250:
     addi r3, r1, 0x88
     addi r4, r4, 0x3
     li r5, 0x100
-    bl fn_806E8B10
+    bl str_safeCopy
     b lbl_fn_806DC260_00001290
 lbl_fn_806DC260_00001288:
     li r0, 0x0
@@ -1767,7 +1767,7 @@ lbl_fn_806DCD80_000017AC:
     b lbl_fn_806DCD80_00001A50
 lbl_fn_806DCD80_0000180C:
     addi r3, r1, 0x18
-    bl fn_806D8E30
+    bl net_strdup
     stw r3, 0x8(r24)
     lwz r3, 0xc(r24)
     bl net_socketClose
@@ -1791,7 +1791,7 @@ lbl_fn_806DCD80_0000180C:
     b lbl_fn_806DCD80_00001A50
 lbl_fn_806DCD80_00001868:
     addi r3, r1, 0x18
-    bl fn_806D8E30
+    bl net_strdup
     stw r3, 0xc(r24)
     lwz r3, 0x10(r24)
     bl net_socketClose
@@ -1815,7 +1815,7 @@ lbl_fn_806DCD80_00001868:
     b lbl_fn_806DCD80_00001A50
 lbl_fn_806DCD80_000018C4:
     addi r3, r1, 0x18
-    bl fn_806D8E30
+    bl net_strdup
     stw r3, 0x10(r24)
     lwz r3, 0x14(r24)
     bl net_socketClose
@@ -1839,7 +1839,7 @@ lbl_fn_806DCD80_000018C4:
     b lbl_fn_806DCD80_00001A50
 lbl_fn_806DCD80_00001920:
     addi r3, r1, 0x18
-    bl fn_806D8E30
+    bl net_strdup
     stw r3, 0x14(r24)
     mr r3, r27
     addi r4, r30, 0x124
@@ -2122,7 +2122,7 @@ asm void fn_806DD6D0(void)
     addi r31, r31, lbl_807C2DD0@l
     addi r3, r1, 0x8
     li r5, 0xdad
-    bl fn_806E8B10
+    bl str_safeCopy
     mr r3, r27
     addi r4, r30, 0x210
     addi r5, r31, 0x0
@@ -2130,7 +2130,7 @@ asm void fn_806DD6D0(void)
     mr r3, r27
     mr r5, r29
     addi r4, r30, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r27
     addi r4, r30, 0x210
     addi r5, r31, 0x168
@@ -2138,7 +2138,7 @@ asm void fn_806DD6D0(void)
     lwz r5, 0x198(r30)
     mr r3, r27
     addi r4, r30, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r27
     addi r4, r30, 0x210
     addi r5, r31, 0x174
@@ -2146,7 +2146,7 @@ asm void fn_806DD6D0(void)
     mr r3, r27
     mr r5, r28
     addi r4, r30, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r27
     addi r4, r30, 0x210
     addi r5, r31, 0x54

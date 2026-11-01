@@ -9,7 +9,7 @@ extern void vec3_copy(void);
 extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011220(void);
+extern void math_fabsf(void);
 extern void vec3_sub(void);
 extern void vec3_add(void);
 extern void mission_updateStub(void);
@@ -27,13 +27,13 @@ extern void vec3_scale(void);
 extern void vec3_normalize(void);
 extern void viewport_getNextSequenceId(void);
 extern void system_getNextSequenceId(void);
-extern void fn_801162A0(void);
+extern void vec3_sqMag(void);
 extern void skill_findNodeById(void);
 extern void enemy_stepBehavior(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80128930(void);
 extern void fn_8012F440(void);
-extern void fn_8013310C(void);
+extern void boss_enablePartStatusFlags(void);
 extern void boss_updatePhaseState(void);
 extern void npc_updateDialogueTarget(void);
 extern void fn_80139F58(void);
@@ -41,7 +41,7 @@ extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_8013C3F4(void);
 extern void fn_8013C478(void);
-extern void fn_8013C480(void);
+extern void npc_isInteractionReady(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_initMarkerCoords(void);
 extern void fn_80140588(void);
@@ -64,7 +64,7 @@ extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_805A3D00(void);
+extern void rand_Mersenne_init(void);
 extern void fn_805A4258(void);
 extern void fn_805A4F20(void);
 extern void PSVECNormalize(void);
@@ -156,7 +156,7 @@ lbl_fn_8030DC9C_00000048:
 lbl_fn_8030DC9C_00000068:
     mr r3, r29
     li r4, 0x0
-    bl fn_805A3D00
+    bl rand_Mersenne_init
     cmpwi r30, 0x0
     ble lbl_fn_8030DC9C_00000084
     mr r3, r29
@@ -684,7 +684,7 @@ lbl_fn_8030E36C_0000073C:
     addi r3, r31, 0x7d4
     li r4, 0x4000
     li r5, 0x0
-    bl fn_8013310C
+    bl boss_enablePartStatusFlags
     b lbl_fn_8030E36C_000007E0
 lbl_fn_8030E36C_000007B0:
     lwz r0, 0x58c(r3)
@@ -749,7 +749,7 @@ asm void fn_8030E4AC(void)
     addi r3, r31, 0x7d4
     li r4, 0x4000
     li r5, 0x0
-    bl fn_8013310C
+    bl boss_enablePartStatusFlags
 lbl_fn_8030E4AC_00000880:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -2097,7 +2097,7 @@ lbl_fn_8030F564_00001B4C:
     addi r3, r1, 0x104
     bl vec3_assign
     addi r3, r1, 0x104
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_80884C5C
     fcmpo cr0, f1, f0
     ble lbl_fn_8030F564_00001BB0
@@ -2122,7 +2122,7 @@ lbl_fn_8030F564_00001BB0:
     addi r5, r30, 0xd50
     bl vec3_sub
     addi r3, r1, 0x80
-    bl fn_801162A0
+    bl vec3_sqMag
     fmuls f0, f29, f29
     fcmpo cr0, f1, f0
     bge lbl_fn_8030F564_00001BEC
@@ -2135,7 +2135,7 @@ lbl_fn_8030F564_00001BF0:
     lwz r3, 0x14d4(r30)
     cmpwi r3, 0x0
     beq lbl_fn_8030F564_00001C08
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     bne lbl_fn_8030F564_00002180
 lbl_fn_8030F564_00001C08:
@@ -2194,8 +2194,8 @@ lbl_fn_8030F564_00001C78:
     addi r5, r30, 0x528
     bl vec3_sub
     addi r3, r1, 0xec
-    bl fn_801162A0
-    bl fn_80011220
+    bl vec3_sqMag
+    bl math_fabsf
     lfs f0, lbl_80884C98
     fcmpo cr0, f1, f0
     blt lbl_fn_8030F564_00001CFC
@@ -2296,8 +2296,8 @@ lbl_fn_8030F564_00001DFC:
     addi r5, r30, 0x528
     bl vec3_sub
     addi r3, r1, 0xe0
-    bl fn_801162A0
-    bl fn_80011220
+    bl vec3_sqMag
+    bl math_fabsf
     lfs f0, lbl_80884C98
     fcmpo cr0, f1, f0
     blt lbl_fn_8030F564_00001E90

@@ -6,14 +6,14 @@ extern void mtx_getTranslation(void);
 extern void vec3_copy(void);
 extern void vec3_mag(void);
 extern void scene_transformPoint(void);
-extern void fn_8000DCF4(void);
+extern void scene_getCamera(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_8009373C(void);
+extern void target_findEntryByName(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
@@ -23,7 +23,7 @@ extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_800F84D0(void);
 extern void system_getNextSequenceId(void);
-extern void fn_801162A0(void);
+extern void vec3_sqMag(void);
 extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
 extern void enemy_updateCombatBehavior(void);
@@ -40,7 +40,7 @@ extern void dialog_setScriptSlot(void);
 extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
 extern void fn_8015D8C0(void);
-extern void fn_8015E4B0(void);
+extern void party_initFormationSlots(void);
 extern void fn_8016D0A0(void);
 extern void actor_setState(void);
 extern void fn_80198514(void);
@@ -82,7 +82,7 @@ extern void world_setGlobalFlag(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_803E6850(void);
-extern void fn_804439FC(void);
+extern void gmk_registerSlot(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void dlc_findItemInCatalog(void);
@@ -447,7 +447,7 @@ lbl_fn_80265B00_00000418:
     lwz r4, 0x0(r30)
     addi r3, r31, 0xb0
     li r5, 0x0
-    bl fn_8009373C
+    bl target_findEntryByName
     addi r29, r29, 0x1
     addi r30, r30, 0x4
     cmpwi r29, 0x3
@@ -459,7 +459,7 @@ lbl_fn_80265B00_00000444:
     lwz r4, 0x0(r30)
     addi r3, r31, 0xb0
     li r5, 0x1
-    bl fn_8009373C
+    bl target_findEntryByName
     addi r29, r29, 0x1
     addi r30, r30, 0x4
     cmpwi r29, 0x5
@@ -677,7 +677,7 @@ lbl_fn_80265B00_00000760:
     bl magic_getOffset6C
     mr r29, r3
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     lwz r0, 0x163c(r31)
     cmpwi r0, 0x0
     bne lbl_fn_80265B00_00000838
@@ -1486,14 +1486,14 @@ lbl_fn_80266A24_000012B0:
     li r5, 0x1
     bl world_setLocalFlag
     addi r3, r30, 0x6b8
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_80883674
     fcmpo cr0, f1, f0
     ble lbl_fn_80266A24_000012F4
     mr r3, r30
     addi r4, r30, 0x6b8
     li r5, -0x1
-    bl fn_8015E4B0
+    bl party_initFormationSlots
     b lbl_fn_80266A24_0000131C
 lbl_fn_80266A24_000012F4:
     mr r4, r30
@@ -1505,7 +1505,7 @@ lbl_fn_80266A24_000012F4:
     mr r3, r30
     addi r4, r1, 0x38
     li r5, -0x1
-    bl fn_8015E4B0
+    bl party_initFormationSlots
 lbl_fn_80266A24_0000131C:
     mr r3, r30
     li r4, 0x0
@@ -1615,7 +1615,7 @@ lbl_fn_80266A24_000014A0:
     mr r3, r30
     addi r4, r30, 0x6b8
     li r5, -0x1
-    bl fn_8015E4B0
+    bl party_initFormationSlots
     mr r3, r30
     li r4, 0x0
     bl fn_802657FC
@@ -1780,7 +1780,7 @@ lbl_fn_80266A24_000016C4:
     li r5, 0x1
     bl world_setLocalFlag
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     cmpwi r3, 0x0
     beq lbl_fn_80266A24_00001788
     bl fn_80266FA4
@@ -1804,7 +1804,7 @@ lbl_fn_80266A24_000016C4:
     li r8, 0x0
     li r9, 0x1
     li r10, 0x0
-    bl fn_804439FC
+    bl gmk_registerSlot
 lbl_fn_80266A24_00001788:
     li r0, 0x1
     stw r0, 0x163c(r30)

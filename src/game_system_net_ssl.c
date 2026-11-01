@@ -8,14 +8,14 @@ extern void _savegpr_14(void);
 extern void _savegpr_22(void);
 extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
-extern void fn_800A55D4(void);
+extern void msg_lookupFormattedEntry(void);
 extern void msg_formatWindowLayout(void);
 extern void msg_isWindowActive(void);
 extern void kpad_getClampData(void);
 extern void fn_805AA830(void);
 extern void fn_805AA950(void);
 extern void fn_805BDCC0(void);
-extern void fn_805BF414(void);
+extern void gx_evaluateVector3f(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -1491,7 +1491,7 @@ lbl_fn_80390A88_00001488:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x2
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     beq lbl_fn_80390A88_000014A8
     lfs f0, lbl_8088592C
@@ -1500,7 +1500,7 @@ lbl_fn_80390A88_000014A8:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x3
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     beq lbl_fn_80390A88_000014C8
     lfs f0, lbl_8088592C
@@ -1644,7 +1644,7 @@ lbl_fn_803918EC_000016B0:
     li r5, 0x4
     li r6, 0x5
     li r7, 0x6
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     lfs f0, lbl_80885920
     addi r30, r1, 0x3f0
     lfs f7, 0xb8(r1)
@@ -1989,7 +1989,7 @@ lbl_fn_803918EC_00001BAC:
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     lfs f8, 0x7c(r1)
     addi r3, r1, 0x390
     lfs f7, 0x78(r1)

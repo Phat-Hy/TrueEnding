@@ -9,7 +9,7 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void atn_LH_Binary_destructor(void);
 extern void boss_triggerEventSequence(void);
-extern void fn_8006AD24(void);
+extern void boss_lookupActionEntry(void);
 extern void fn_8006BA30(void);
 extern void fn_8006BD78(void);
 extern void fn_8006F684(void);
@@ -36,7 +36,7 @@ extern void PSMTXMultVec(void);
 extern void fn_805F9EF0(void);
 extern void fn_805FA710(void);
 extern void fn_805FA770(void);
-extern void fn_80614790(void);
+extern void GXBegin(void);
 extern void strcat(void);
 extern void strcmp(void);
 extern void strstr(void);
@@ -77,7 +77,7 @@ void fn_8006C858(void);
 void fn_8006C8F8(void);
 void fn_8006CA14(void);
 void fn_8006CA20(void);
-void fn_8006CA80(void);
+void gmk_LoadHandle_constructor(void);
 void fn_8006CABC(void);
 void fn_8006D008(void);
 void fn_8006D0C8(void);
@@ -557,11 +557,11 @@ asm void fn_8006C8F8(void)
     addi r5, r5, fn_8006CA20@l
     li r7, 0x38
     bl __construct_new_array
-    lis r4, fn_8006CA80@ha
+    lis r4, gmk_LoadHandle_constructor@ha
     lis r5, atn_LH_Binary_destructor@ha
     addi r3, r30, 0x10a0
     li r6, 0x8
-    addi r4, r4, fn_8006CA80@l
+    addi r4, r4, gmk_LoadHandle_constructor@l
     addi r5, r5, atn_LH_Binary_destructor@l
     li r7, 0x38
     bl __construct_new_array
@@ -648,7 +648,7 @@ lbl_fn_8006CA20_00000764:
     blr
 }
 
-asm void fn_8006CA80(void)
+asm void gmk_LoadHandle_constructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -925,7 +925,7 @@ lbl_fn_8006CABC_00000AF8:
     bl actor_dispatchMessage
     mr r4, r25
     addi r3, r1, 0x90
-    bl fn_8006AD24
+    bl boss_lookupActionEntry
     lwz r0, 0x54(r1)
     srwi. r0, r0, 31
     beq lbl_fn_8006CABC_00000B5C
@@ -1284,7 +1284,7 @@ lbl_fn_8006D0C8_00000FD0:
     bl actor_dispatchMessage
     mr r4, r16
     addi r3, r1, 0x3c
-    bl fn_8006AD24
+    bl boss_lookupActionEntry
     lwz r0, 0x30(r1)
     srwi. r0, r0, 31
     beq lbl_fn_8006D0C8_00001064
@@ -1764,7 +1764,7 @@ lbl_gimmick_updateAll_000016D0:
     clrlslwi r5, r17, 18, 2
     li r3, 0x80
     li r4, 0x0
-    bl fn_80614790
+    bl GXBegin
     mr r3, r29
     mtctr r17
     cmpwi r17, 0x0
@@ -1833,7 +1833,7 @@ lbl_gimmick_updateAll_000017E8:
     clrlslwi r5, r17, 18, 2
     li r3, 0x80
     li r4, 0x0
-    bl fn_80614790
+    bl GXBegin
     mr r3, r29
     mtctr r17
     cmpwi r17, 0x0
@@ -2196,7 +2196,7 @@ lbl_gimmick_updateAll_00001D58:
     clrlslwi r5, r17, 18, 2
     li r3, 0x80
     li r4, 0x0
-    bl fn_80614790
+    bl GXBegin
     mr r3, r29
     mtctr r17
     cmpwi r17, 0x0
@@ -2265,7 +2265,7 @@ lbl_gimmick_updateAll_00001E78:
     clrlslwi r5, r17, 18, 2
     li r3, 0x80
     li r4, 0x0
-    bl fn_80614790
+    bl GXBegin
     mr r3, r29
     mtctr r17
     cmpwi r17, 0x0
@@ -2509,7 +2509,7 @@ lbl_gimmick_updateAll_00002208:
     clrlslwi r5, r17, 18, 2
     li r3, 0x80
     li r4, 0x0
-    bl fn_80614790
+    bl GXBegin
     mr r3, r29
     mtctr r17
     cmpwi r17, 0x0
@@ -2578,7 +2578,7 @@ lbl_gimmick_updateAll_00002328:
     clrlslwi r5, r17, 18, 2
     li r3, 0x80
     li r4, 0x0
-    bl fn_80614790
+    bl GXBegin
     mr r3, r29
     mtctr r17
     cmpwi r17, 0x0
@@ -3015,7 +3015,7 @@ lbl_gimmick_updateAll_00002980:
     clrlslwi r5, r17, 18, 2
     li r3, 0x80
     li r4, 0x0
-    bl fn_80614790
+    bl GXBegin
     lis r3, 0xcc01
     mtctr r17
     cmpwi r17, 0x0
@@ -3084,7 +3084,7 @@ lbl_gimmick_updateAll_00002AB8:
     clrlslwi r5, r17, 18, 2
     li r3, 0x80
     li r4, 0x0
-    bl fn_80614790
+    bl GXBegin
     lis r3, 0xcc01
     mtctr r17
     cmpwi r17, 0x0

@@ -80,7 +80,7 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_805A3D00(void);
+extern void rand_Mersenne_init(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void strncmp(void);
@@ -128,11 +128,11 @@ extern u32 lbl_80883E44;
 extern u32 lbl_80883E48;
 
 /* Function declarations */
-void fn_802A4094(void);
-void fn_802A409C(void);
+void *fn_802A4094(void *p);
+u32 fn_802A409C(void *p);
 void fn_802A40A8(void);
 void fn_802A4120(void);
-void fn_802A4168(void);
+void *fn_802A4168(void *p);
 void fn_802A4170(void);
 void fn_802A4184(void);
 void fn_802A4194(void);
@@ -143,7 +143,7 @@ void fn_802A4628(void);
 void fn_802A46E0(void);
 void fn_802A46E4(void);
 void fn_802A4968(void);
-void fn_802A49BC(void);
+u32 fn_802A49BC(void);
 void fn_802A49C4(void);
 void fn_802A49C8(void);
 void fn_802A4A04(void);
@@ -151,19 +151,14 @@ void fn_802A4BBC(void);
 void fn_802A5054(void);
 void fn_802A51F4(void);
 
-asm void fn_802A4094(void)
+void *fn_802A4094(void *p)
 {
-    nofralloc
-    lwz r3, 0x14ac(r3)
-    blr
+    return *(void **)((u8 *)p + 0x14ac);
 }
 
-asm void fn_802A409C(void)
+u32 fn_802A409C(void *p)
 {
-    nofralloc
-    lwz r0, 0x14a8(r3)
-    extrwi r3, r0, 1, 6
-    blr
+    return (*(u32 *)((u8 *)p + 0x14a8) >> 25) & 1;
 }
 
 asm void fn_802A40A8(void)
@@ -224,11 +219,9 @@ asm void fn_802A4120(void)
     blr
 }
 
-asm void fn_802A4168(void)
+void *fn_802A4168(void *p)
 {
-    nofralloc
-    lwz r3, 0x4c(r3)
-    blr
+    return *(void **)((u8 *)p + 0x4c);
 }
 
 asm void fn_802A4170(void)
@@ -835,11 +828,9 @@ lbl_fn_802A4968_00000910:
     blr
 }
 
-asm void fn_802A49BC(void)
+u32 fn_802A49BC(void)
 {
-    nofralloc
-    lwz r3, lbl_8087EEF0
-    blr
+    return lbl_8087EEF0;
 }
 
 void fn_802A49C4(void) {
@@ -975,7 +966,7 @@ lbl_fn_802A4A04_00000AD4:
     bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
-    bl fn_805A3D00
+    bl rand_Mersenne_init
     cmpwi r31, 0x0
     ble lbl_fn_802A4A04_00000B08
     mr r3, r30

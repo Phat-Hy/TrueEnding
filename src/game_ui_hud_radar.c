@@ -20,7 +20,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void morph_updateMesh(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
-extern void fn_8012A1B8(void);
+extern void path_getFollowerNode(void);
 extern void fn_80139F24(void);
 extern void fn_80139F3C(void);
 extern void npc_getPosition(void);
@@ -35,7 +35,7 @@ extern void inventory_unequipItem(void);
 extern void equip_applyToCharacter(void);
 extern void battle_calcExpPosition(void);
 extern void actor_getMovementFlags(void);
-extern void fn_801A03E8(void);
+extern void vec3_dot(void);
 extern void fn_801B2EDC(void);
 extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
@@ -1097,7 +1097,7 @@ asm void fn_801C0D80(void)
     bl quest_initMarkerCoords
     mr r4, r30
     addi r3, r1, 0x80
-    bl fn_801A03E8
+    bl vec3_dot
     fmr f31, f1
     lfs f1, lbl_808826D4
     bl fn_801C1060
@@ -1129,7 +1129,7 @@ lbl_fn_801C0D80_00000D34:
     bl vec3_toEulerAngles
     lfs f31, 0x6c(r1)
     lwz r3, 0x4(r29)
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     lfs f0, 0x4(r3)
     fsubs f1, f31, f0
     bl math_wrapAngle

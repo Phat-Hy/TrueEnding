@@ -32,7 +32,7 @@ extern void fn_80120E38(void);
 extern void fn_80120E48(void);
 extern void fn_80120F4C(void);
 extern void actor_setState(void);
-extern void fn_80219544(void);
+extern void task_getWorkerByIndex(void);
 extern void res_MsgHandle_ctor(void);
 extern void res_Resource_destructor(void);
 extern void res_Resource_unload(void);
@@ -73,7 +73,7 @@ void fn_8011F7FC(void);
 void fn_8011F82C(void);
 void fn_8011F87C(void);
 void fn_8011F8BC(void);
-void fn_8011F8F4(void);
+void skill_findEntryById(void);
 void skill_findNodeBySlotId(void);
 void fn_8011F944(void);
 void fn_8011F970(void);
@@ -248,19 +248,19 @@ lbl_fn_8011F8BC_00000168:
     blr
 }
 
-asm void fn_8011F8F4(void)
+asm void skill_findEntryById(void)
 {
     nofralloc
     lwz r3, 0x48(r3)
-    b lbl_fn_8011F8F4_00000190
-lbl_fn_8011F8F4_00000180:
+    b lbl_skill_findEntryById_00000190
+lbl_skill_findEntryById_00000180:
     lwz r0, 0x50(r3)
     cmpw r4, r0
     beqlr
     lwz r3, 0x14ac(r3)
-lbl_fn_8011F8F4_00000190:
+lbl_skill_findEntryById_00000190:
     cmpwi r3, 0x0
-    bne lbl_fn_8011F8F4_00000180
+    bne lbl_skill_findEntryById_00000180
     li r3, 0x0
     blr
 }
@@ -309,7 +309,7 @@ asm void fn_8011F970(void)
     stw r31, 0xc(r1)
     mr r31, r3
     mr r3, r4
-    bl fn_80219544
+    bl task_getWorkerByIndex
     lwz r4, 0x48(r31)
     b lbl_fn_8011F970_00000230
 lbl_fn_8011F970_00000218:

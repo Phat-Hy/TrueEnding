@@ -10,7 +10,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void mem_free(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_8009373C(void);
+extern void target_findEntryByName(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
@@ -19,7 +19,7 @@ extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
-extern void fn_8013310C(void);
+extern void boss_enablePartStatusFlags(void);
 extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
@@ -1428,7 +1428,7 @@ lbl_fn_803412AC_00001318:
     stfs f0, 0x7d8(r30)
     li r4, 0x20
     li r5, 0x0
-    bl fn_8013310C
+    bl boss_enablePartStatusFlags
     lwz r3, lbl_8087F430
     li r4, 0xce
     li r5, 0x1
@@ -1438,11 +1438,11 @@ lbl_fn_803412AC_00001318:
     addi r29, r29, lbl_8074A4C0@l
     li r5, 0x0
     addi r4, r29, 0x2fb
-    bl fn_8009373C
+    bl target_findEntryByName
     addi r3, r30, 0xb0
     addi r4, r29, 0x308
     li r5, 0x0
-    bl fn_8009373C
+    bl target_findEntryByName
 lbl_fn_803412AC_000013A0:
     lfs f1, lbl_80885238
     addi r3, r30, 0xb0

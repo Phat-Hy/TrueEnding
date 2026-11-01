@@ -10,7 +10,7 @@ extern void enemy_evalAnimTrack(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_80140588(void);
 extern void fn_80141674(void);
-extern void fn_801426A4(void);
+extern void quest_evaluateMilestoneData(void);
 extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
 extern void fn_80171F3C(void);
@@ -41,28 +41,28 @@ extern u32 lbl_80881A08;
 /* Function declarations */
 void *npc_getPosition(void *npc);
 void fn_8013C394(void);
-void fn_8013C3A8(void);
+u32 fn_8013C3A8(void *p);
 void fn_8013C3B4(void);
-void fn_8013C3DC(void);
+u32 fn_8013C3DC(void *p);
 void fn_8013C3E4(void);
-void fn_8013C3F4(void);
-void fn_8013C3FC(void);
+u32 fn_8013C3F4(void *p);
+void *fn_8013C3FC(void *p);
 void fn_8013C404(void);
-void fn_8013C41C(void);
-void fn_8013C424(void);
-void fn_8013C42C(void);
-void fn_8013C434(void);
-void fn_8013C43C(void);
+u32 fn_8013C41C(void *p);
+u32 fn_8013C424(void *p);
+f32 fn_8013C42C(void *p);
+void *fn_8013C434(void *p);
+u32 fn_8013C43C(void *p);
 void fn_8013C444(void);
-void fn_8013C458(void);
+u32 fn_8013C458(void *p);
 void fn_8013C460(void);
-void fn_8013C470(void);
-void fn_8013C478(void);
-void fn_8013C480(void);
+void fn_8013C470(void *p, u32 val);
+u32 fn_8013C478(void *p);
+void npc_isInteractionReady(void);
 void *npc_getDialogController(const void *p);
 f32 fn_8013C50C(const void *p);
 void fn_8013C514(void);
-void fn_8013C53C(void);
+void *fn_8013C53C(void *p);
 void fn_8013C544(void);
 void fn_8013C554(void);
 void fn_8013C564(void);
@@ -82,12 +82,9 @@ asm void fn_8013C394(void)
     b PSVECCrossProduct
 }
 
-asm void fn_8013C3A8(void)
+u32 fn_8013C3A8(void *p)
 {
-    nofralloc
-    lwz r0, 0x12a4(r3)
-    srwi r3, r0, 31
-    blr
+    return *(u32 *)((u8 *)p + 0x12a4) >> 31;
 }
 
 asm void fn_8013C3B4(void)
@@ -105,11 +102,9 @@ asm void fn_8013C3B4(void)
     blr
 }
 
-asm void fn_8013C3DC(void)
+u32 fn_8013C3DC(void *p)
 {
-    nofralloc
-    lwz r3, 0x34c(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x34c);
 }
 
 asm void fn_8013C3E4(void)
@@ -121,18 +116,14 @@ asm void fn_8013C3E4(void)
     blr
 }
 
-asm void fn_8013C3F4(void)
+u32 fn_8013C3F4(void *p)
 {
-    nofralloc
-    lwz r3, 0x2c(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x2c);
 }
 
-asm void fn_8013C3FC(void)
+void *fn_8013C3FC(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x70
-    blr
+    return (u8 *)p + 0x70;
 }
 
 asm void fn_8013C404(void)
@@ -146,39 +137,29 @@ asm void fn_8013C404(void)
     blr
 }
 
-asm void fn_8013C41C(void)
+u32 fn_8013C41C(void *p)
 {
-    nofralloc
-    lwz r3, 0x418(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x418);
 }
 
-asm void fn_8013C424(void)
+u32 fn_8013C424(void *p)
 {
-    nofralloc
-    lwz r3, 0x94(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x94);
 }
 
-asm void fn_8013C42C(void)
+f32 fn_8013C42C(void *p)
 {
-    nofralloc
-    lfs f1, 0x5b0(r3)
-    blr
+    return *(f32 *)((u8 *)p + 0x5b0);
 }
 
-asm void fn_8013C434(void)
+void *fn_8013C434(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x454
-    blr
+    return (u8 *)p + 0x454;
 }
 
-asm void fn_8013C43C(void)
+u32 fn_8013C43C(void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x4);
 }
 
 asm void fn_8013C444(void)
@@ -191,11 +172,9 @@ asm void fn_8013C444(void)
     blr
 }
 
-asm void fn_8013C458(void)
+u32 fn_8013C458(void *p)
 {
-    nofralloc
-    lwz r3, 0x648(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x648);
 }
 
 asm void fn_8013C460(void)
@@ -207,21 +186,17 @@ asm void fn_8013C460(void)
     blr
 }
 
-asm void fn_8013C470(void)
+void fn_8013C470(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0xfc0(r3)
-    blr
+    *(u32 *)((u8 *)p + 0xfc0) = val;
 }
 
-asm void fn_8013C478(void)
+u32 fn_8013C478(void *p)
 {
-    nofralloc
-    lwz r3, 0xfc0(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0xfc0);
 }
 
-asm void fn_8013C480(void)
+asm void npc_isInteractionReady(void)
 {
     nofralloc
     lwz r7, 0x38(r3)
@@ -230,35 +205,35 @@ asm void fn_8013C480(void)
     li r6, 0x0
     rlwinm r0, r7, 0, 29, 29
     cmplwi r0, 0x4
-    beq lbl_fn_8013C480_00000120
+    beq lbl_npc_isInteractionReady_00000120
     clrlwi r0, r7, 31
     cmplwi r0, 0x1
-    beq lbl_fn_8013C480_00000120
+    beq lbl_npc_isInteractionReady_00000120
     li r6, 0x1
-lbl_fn_8013C480_00000120:
+lbl_npc_isInteractionReady_00000120:
     cmpwi r6, 0x0
-    beq lbl_fn_8013C480_0000013C
+    beq lbl_npc_isInteractionReady_0000013C
     lwz r0, 0x7e0(r3)
     rlwinm r0, r0, 0, 26, 26
     cmplwi r0, 0x20
-    beq lbl_fn_8013C480_0000013C
+    beq lbl_npc_isInteractionReady_0000013C
     li r4, 0x1
-lbl_fn_8013C480_0000013C:
+lbl_npc_isInteractionReady_0000013C:
     cmpwi r4, 0x0
-    beq lbl_fn_8013C480_00000170
+    beq lbl_npc_isInteractionReady_00000170
     lwz r0, 0x55c(r3)
     li r4, 0x0
     cmpwi r0, 0x6
-    bne lbl_fn_8013C480_00000164
+    bne lbl_npc_isInteractionReady_00000164
     lwz r0, 0x560(r3)
     cmpwi r0, 0x1c
-    bne lbl_fn_8013C480_00000164
+    bne lbl_npc_isInteractionReady_00000164
     li r4, 0x1
-lbl_fn_8013C480_00000164:
+lbl_npc_isInteractionReady_00000164:
     cmpwi r4, 0x0
-    bne lbl_fn_8013C480_00000170
+    bne lbl_npc_isInteractionReady_00000170
     li r5, 0x1
-lbl_fn_8013C480_00000170:
+lbl_npc_isInteractionReady_00000170:
     mr r3, r5
     blr
 }
@@ -289,11 +264,9 @@ lbl_fn_8013C514_000001A8:
     blr
 }
 
-asm void fn_8013C53C(void)
+void *fn_8013C53C(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x10
-    blr
+    return (u8 *)p + 0x10;
 }
 
 asm void fn_8013C544(void)
@@ -682,7 +655,7 @@ lbl_fn_8013C564_000006FC:
     mr r3, r29
     fmr f2, f31
     mr r4, r30
-    bl fn_801426A4
+    bl quest_evaluateMilestoneData
     b lbl_fn_8013C564_0000072C
 lbl_fn_8013C564_00000714:
     fmr f1, f30

@@ -20,7 +20,7 @@ extern void fn_801079C0(void);
 extern void fn_80107A68(void);
 extern void hurtbox_testCollisionLayer(void);
 extern void hurtbox_dispatchHitEvent(void);
-extern void fn_8012DF7C(void);
+extern void enemy_calcAttackTrajectory(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_getRewardItemSlot(void);
 extern void equip_applyToCharacter(void);
@@ -391,7 +391,7 @@ lbl_fn_802CB43C_0000042C:
     mr r4, r29
     li r5, 0x0
     li r6, 0x0
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
     lwz r3, 0x14d0(r31)
     li r4, 0x0
     bl quest_getRewardItemSlot

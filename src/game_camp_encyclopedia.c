@@ -15,16 +15,16 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_80089ACC(void);
 extern void str_skipWhitespace(void);
-extern void fn_800E0AA8(void);
-extern void fn_800EC254(void);
+extern void particle_getEmitterContext(void);
+extern void cam_testTargetVisibility(void);
 extern void cam_registerTarget(void);
 extern void cam_initTrajectoryParams(void);
 extern void cam_bindPathTarget(void);
 extern void cam_bindRotationTarget(void);
 extern void cam_evalControllerSpline(void);
 extern void cam_setLookAtTarget(void);
-extern void fn_800ED4D8(void);
-extern void fn_800ED4E0(void);
+extern void cam_getLookAtState(void);
+extern void cam_updateLookAtMatrix(void);
 extern void cam_evalLookAtMatrix(void);
 extern void fn_80288390(void);
 extern void fn_8028B74C(void);
@@ -275,7 +275,7 @@ lbl_fn_803C606C_000001AC:
     b lbl_fn_803C606C_00000298
 lbl_fn_803C606C_00000240:
     addi r3, r1, 0x80
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     bl atoi
     mr r5, r3
@@ -296,14 +296,14 @@ lbl_fn_803C606C_00000240:
     bge lbl_fn_803C606C_000002C8
 lbl_fn_803C606C_00000290:
     addi r3, r1, 0x80
-    bl fn_800ED4E0
+    bl cam_updateLookAtMatrix
 lbl_fn_803C606C_00000298:
     addi r3, r1, 0x20
     addi r4, r1, 0xbc
     bl cam_evalLookAtMatrix
     addi r3, r1, 0x80
     addi r4, r1, 0x20
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     mr r26, r3
     addi r3, r1, 0x20
     li r4, -0x1
@@ -682,7 +682,7 @@ lbl_fn_803C65EC_0000072C:
     b lbl_fn_803C65EC_00000818
 lbl_fn_803C65EC_000007C0:
     addi r3, r1, 0x80
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     bl atoi
     mr r5, r3
@@ -703,14 +703,14 @@ lbl_fn_803C65EC_000007C0:
     bge lbl_fn_803C65EC_00000848
 lbl_fn_803C65EC_00000810:
     addi r3, r1, 0x80
-    bl fn_800ED4E0
+    bl cam_updateLookAtMatrix
 lbl_fn_803C65EC_00000818:
     addi r3, r1, 0x20
     addi r4, r1, 0xbc
     bl cam_evalLookAtMatrix
     addi r3, r1, 0x80
     addi r4, r1, 0x20
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     mr r31, r3
     addi r3, r1, 0x20
     li r4, -0x1
@@ -1056,7 +1056,7 @@ lbl_fn_803C6AE8_00000C28:
     b lbl_fn_803C6AE8_00000D14
 lbl_fn_803C6AE8_00000CBC:
     addi r3, r1, 0x80
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     bl atoi
     mr r5, r3
@@ -1077,14 +1077,14 @@ lbl_fn_803C6AE8_00000CBC:
     bge lbl_fn_803C6AE8_00000D44
 lbl_fn_803C6AE8_00000D0C:
     addi r3, r1, 0x80
-    bl fn_800ED4E0
+    bl cam_updateLookAtMatrix
 lbl_fn_803C6AE8_00000D14:
     addi r3, r1, 0x20
     addi r4, r1, 0xbc
     bl cam_evalLookAtMatrix
     addi r3, r1, 0x80
     addi r4, r1, 0x20
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     mr r31, r3
     addi r3, r1, 0x20
     li r4, -0x1
@@ -1430,7 +1430,7 @@ lbl_fn_803C6FE4_00001124:
     b lbl_fn_803C6FE4_00001210
 lbl_fn_803C6FE4_000011B8:
     addi r3, r1, 0x80
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     bl atoi
     mr r5, r3
@@ -1451,14 +1451,14 @@ lbl_fn_803C6FE4_000011B8:
     bge lbl_fn_803C6FE4_00001240
 lbl_fn_803C6FE4_00001208:
     addi r3, r1, 0x80
-    bl fn_800ED4E0
+    bl cam_updateLookAtMatrix
 lbl_fn_803C6FE4_00001210:
     addi r3, r1, 0x20
     addi r4, r1, 0xbc
     bl cam_evalLookAtMatrix
     addi r3, r1, 0x80
     addi r4, r1, 0x20
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     mr r31, r3
     addi r3, r1, 0x20
     li r4, -0x1
@@ -1841,7 +1841,7 @@ lbl_fn_803C74E0_00001630:
     b lbl_fn_803C74E0_00001770
 lbl_fn_803C74E0_00001748:
     addi r3, r1, 0x90
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     bl atoi
     stw r3, 0x8(r1)
@@ -1849,14 +1849,14 @@ lbl_fn_803C74E0_00001748:
     addi r4, r1, 0x8
     bl fn_8000E18C
     addi r3, r1, 0x90
-    bl fn_800ED4E0
+    bl cam_updateLookAtMatrix
 lbl_fn_803C74E0_00001770:
     addi r3, r1, 0x30
     addi r4, r1, 0xcc
     bl cam_evalLookAtMatrix
     addi r3, r1, 0x90
     addi r4, r1, 0x30
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     mr r23, r3
     addi r3, r1, 0x30
     li r4, -0x1
@@ -1867,7 +1867,7 @@ lbl_fn_803C74E0_00001770:
     li r4, -0x1
     bl cam_setLookAtTarget
     addi r3, r1, 0xc
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     mr r23, r3
     mr r3, r25
     mr r4, r28
@@ -1903,7 +1903,7 @@ lbl_fn_803C74E0_00001800:
     addi r21, r21, 0x1
 lbl_fn_803C74E0_00001830:
     addi r3, r1, 0xc
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     cmplw r21, r3
     blt lbl_fn_803C74E0_000017E0
     mr r3, r26

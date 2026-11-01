@@ -63,7 +63,7 @@ extern u32 lbl_808809DC;
 /* Function declarations */
 void fn_80063200(void);
 void fn_80063484(void);
-void fn_80063764(void);
+void magic_updateCircleArea(void);
 void fn_800638B0(void);
 void magic_castSpellCircle(void);
 void fn_800641CC(void);
@@ -442,7 +442,7 @@ lbl_fn_80063484_00000514:
     blr
 }
 
-asm void fn_80063764(void)
+asm void magic_updateCircleArea(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -461,31 +461,31 @@ asm void fn_80063764(void)
     cmpw r7, r0
     mr r29, r5
     mr r30, r6
-    ble lbl_fn_80063764_000005B0
+    ble lbl_magic_updateCircleArea_000005B0
     li r31, 0x0
-    b lbl_fn_80063764_000005D4
-lbl_fn_80063764_000005B0:
+    b lbl_magic_updateCircleArea_000005D4
+lbl_magic_updateCircleArea_000005B0:
     lwz r0, 0x4(r3)
     add. r31, r0, r8
-    beq lbl_fn_80063764_000005C8
+    beq lbl_magic_updateCircleArea_000005C8
     lis r4, lbl_80777AB0@ha
     addi r4, r4, lbl_80777AB0@l
     stw r4, 0x0(r31)
-lbl_fn_80063764_000005C8:
+lbl_magic_updateCircleArea_000005C8:
     lwz r4, 0xc(r3)
     addi r0, r4, 0x20
     stw r0, 0xc(r3)
-lbl_fn_80063764_000005D4:
+lbl_magic_updateCircleArea_000005D4:
     cmpwi r31, 0x0
-    beq lbl_fn_80063764_00000690
+    beq lbl_magic_updateCircleArea_00000690
     lwz r6, 0xc(r3)
     lwz r0, 0x8(r3)
     addi r4, r6, 0x34
     cmpw r4, r0
-    ble lbl_fn_80063764_000005F8
+    ble lbl_magic_updateCircleArea_000005F8
     li r3, 0x0
-    b lbl_fn_80063764_00000624
-lbl_fn_80063764_000005F8:
+    b lbl_magic_updateCircleArea_00000624
+lbl_magic_updateCircleArea_000005F8:
     lwz r0, 0x4(r3)
     lis r4, fn_800610A0@ha
     addi r4, r4, fn_800610A0@l
@@ -497,9 +497,9 @@ lbl_fn_80063764_000005F8:
     lwz r4, 0xc(r27)
     addi r0, r4, 0x34
     stw r0, 0xc(r27)
-lbl_fn_80063764_00000624:
+lbl_magic_updateCircleArea_00000624:
     cmpwi r3, 0x0
-    beq lbl_fn_80063764_00000690
+    beq lbl_magic_updateCircleArea_00000690
     psq_l f1, 0x0(r28), 0, 0
     li r8, 0x0
     psq_st f1, 0x0(r3), 0, 0
@@ -525,7 +525,7 @@ lbl_fn_80063764_00000624:
     stb r6, 0x18(r31)
     lwz r3, lbl_8087EFB4
     bl model_updateBoneTransforms
-lbl_fn_80063764_00000690:
+lbl_magic_updateCircleArea_00000690:
     addi r11, r1, 0x20
     psq_l f31, 0x28(r1), 0, 0
     lfd f31, 0x20(r1)

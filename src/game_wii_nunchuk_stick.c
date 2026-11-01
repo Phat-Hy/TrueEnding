@@ -14,7 +14,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_8009290C(void);
 extern void fn_80093D98(void);
 extern void fn_80093E90(void);
-extern void fn_80094958(void);
+extern void target_registerCandidate(void);
 extern void fn_80094B6C(void);
 extern void str_findChar(void);
 extern void fn_80112918(void);
@@ -30,7 +30,7 @@ extern void fn_80481818(void);
 extern void fn_8048B3B8(void);
 extern void fn_8048BD64(void);
 extern void fn_8048C884(void);
-extern void fn_805381A4(void);
+extern void node_getParentNode(void);
 extern void spectate_getRootNode(void);
 extern void fn_80538DC8(void);
 extern void fn_80541BDC(void);
@@ -95,7 +95,7 @@ asm void fn_80559B30(void)
     lwz r0, 0x14(r4)
     lwz r30, 0x18(r4)
     subf r31, r5, r0
-    bl fn_805381A4
+    bl node_getParentNode
     mr r24, r3
     mr r3, r25
     bl spectate_getRootNode
@@ -274,11 +274,11 @@ lbl_fn_80559B30_000001D4:
     fdivs f0, f0, f4
     stfs f0, 0xa4(r1)
     lwz r4, 0x50(r29)
-    bl fn_80094958
+    bl target_registerCandidate
     b lbl_fn_80559B30_00000898
 lbl_fn_80559B30_000002D4:
     mr r3, r25
-    bl fn_805381A4
+    bl node_getParentNode
     mr r24, r3
     mr r3, r25
     bl spectate_getRootNode
@@ -408,7 +408,7 @@ lbl_fn_80559B30_00000398:
     fdivs f0, f0, f4
     stfs f0, 0x84(r1)
     lwz r4, 0x50(r30)
-    bl fn_80094958
+    bl target_registerCandidate
     lwz r5, 0x17c(r27)
     slwi r0, r29, 2
     lwz r4, 0x50(r30)
@@ -500,7 +500,7 @@ lbl_fn_80559B30_000004FC:
     fdivs f0, f0, f4
     stfs f0, 0x64(r1)
     lwz r4, 0x50(r30)
-    bl fn_80094958
+    bl target_registerCandidate
     lwz r5, 0x164(r27)
     slwi r31, r29, 2
     lwz r4, 0x50(r30)
@@ -782,7 +782,7 @@ asm void fn_8055A4A0(void)
     b lbl_fn_8055A4A0_00001A9C
 lbl_fn_8055A4A0_000009A8:
     mr r3, r31
-    bl fn_805381A4
+    bl node_getParentNode
     mr r25, r3
     mr r3, r31
     bl spectate_getRootNode
@@ -1872,7 +1872,7 @@ lbl_fn_8055A4A0_000017B0:
     b lbl_fn_8055A4A0_00001A9C
 lbl_fn_8055A4A0_00001808:
     mr r3, r31
-    bl fn_805381A4
+    bl node_getParentNode
     lwz r0, 0x10(r3)
     lwz r3, lbl_8087F540
     mulli r0, r0, 0x65c

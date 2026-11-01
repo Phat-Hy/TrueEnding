@@ -8,7 +8,7 @@ extern void fn_80041A28(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
-extern void fn_800CB58C(void);
+extern void morph_hasActiveWeight(void);
 extern void morph_updateMesh(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
@@ -18,7 +18,7 @@ extern void fn_801562A0(void);
 extern void fn_8015783C(void);
 extern void fn_8015802C(void);
 extern void shop_canPurchaseItem(void);
-extern void fn_80158CA4(void);
+extern void shop_loadCatalogItem(void);
 extern void fn_8016ADF4(void);
 extern void actor_setState(void);
 extern void fn_8032F0EC(void);
@@ -182,7 +182,7 @@ lbl_fn_8032F6A8_00000138:
     cmpwi r0, 0x0
     beq lbl_fn_8032F6A8_0000015C
     addi r3, r31, 0x15b0
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     bne lbl_fn_8032F6A8_0000020C
 lbl_fn_8032F6A8_0000015C:
@@ -1002,7 +1002,7 @@ lbl_fn_80330218_00000CB0:
     cmpwi r0, 0x0
     beq lbl_fn_80330218_0000173C
     mr r3, r31
-    bl fn_80158CA4
+    bl shop_loadCatalogItem
     cmpwi r3, 0x0
     beq lbl_fn_80330218_0000173C
     lwz r0, 0xf80(r31)

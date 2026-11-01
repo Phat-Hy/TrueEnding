@@ -12,7 +12,7 @@ extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void mtx_multVec(void);
-extern void fn_80012C88(void);
+extern void vec3_addAssign(void);
 extern void vec3_sub(void);
 extern void math_wrapAngle(void);
 extern void fn_80013404(void);
@@ -23,7 +23,7 @@ extern void mission_updateStub(void);
 extern void vec3_initValues(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008B964(void);
+extern void sys_getMainManager(void);
 extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -33,8 +33,8 @@ extern void vec3_scale(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_801156BC(void);
 extern void fn_80116E6C(void);
-extern void fn_8012A1B8(void);
-extern void fn_8013A13C(void);
+extern void path_getFollowerNode(void);
+extern void mtx_rotYRad(void);
 extern void fn_8013C3B4(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_initMarkerCoords(void);
@@ -42,8 +42,8 @@ extern void quest_resetObjectiveBounds(void);
 extern void actor_getMovementFlags(void);
 extern void fn_80188A70(void);
 extern void fn_80188AA0(void);
-extern void fn_80192758(void);
-extern void fn_801A03E8(void);
+extern void map_processStreamChunk(void);
+extern void vec3_dot(void);
 extern void fn_801C0738(void);
 extern void fn_801C1060(void);
 extern void fn_801C1578(void);
@@ -1708,7 +1708,7 @@ lbl_fn_801C2CC0_00001650:
     stw r0, 0x0(r31)
     b lbl_fn_801C2CC0_00001660
 lbl_fn_801C2CC0_0000165C:
-    bl fn_80192758
+    bl map_processStreamChunk
 lbl_fn_801C2CC0_00001660:
     lwz r0, 0x214(r1)
     lwz r31, 0x20c(r1)
@@ -1984,7 +1984,7 @@ asm void fn_801C346C(void)
     bl vec3_mag
     fmr f28, f1
     lwz r3, 0x4(r30)
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     mr r4, r3
     addi r3, r1, 0xec
     bl vec3_assign
@@ -1992,7 +1992,7 @@ asm void fn_801C346C(void)
     fcmpo cr0, f28, f0
     cror eq, gt, eq
     bne lbl_fn_801C346C_00001D78
-    bl fn_8008B964
+    bl sys_getMainManager
     bl fn_800F7258
     bl fn_80116E6C
     lfs f27, 0x4(r3)
@@ -2036,7 +2036,7 @@ lbl_fn_801C346C_00001A68:
     bl vec3_set
     lfs f1, 0xf0(r1)
     addi r3, r1, 0x138
-    bl fn_8013A13C
+    bl mtx_rotYRad
     addi r3, r1, 0xe0
     addi r4, r1, 0x138
     bl mtx_multVec
@@ -2053,7 +2053,7 @@ lbl_fn_801C346C_00001A68:
     ble lbl_fn_801C346C_00001AD4
     addi r3, r30, 0x8
     addi r4, r1, 0xe0
-    bl fn_80012C88
+    bl vec3_addAssign
     b lbl_fn_801C346C_00001B40
 lbl_fn_801C346C_00001AD4:
     addi r3, r1, 0x98
@@ -2157,7 +2157,7 @@ lbl_fn_801C346C_00001BE4:
 lbl_fn_801C346C_00001C50:
     addi r3, r1, 0xc8
     addi r4, r1, 0xe0
-    bl fn_801A03E8
+    bl vec3_dot
     lfs f0, lbl_80882760
     fmr f29, f1
     fmuls f1, f0, f31
@@ -2206,7 +2206,7 @@ lbl_fn_801C346C_00001CF4:
     bl vec3_initValues
     fmr f1, f28
     addi r3, r1, 0x108
-    bl fn_8013A13C
+    bl mtx_rotYRad
     addi r3, r1, 0xe0
     addi r4, r1, 0x108
     bl mtx_multVec
@@ -2219,7 +2219,7 @@ lbl_fn_801C346C_00001CF4:
     bl vec3_copy
 lbl_fn_801C346C_00001D40:
     lwz r3, 0x4(r30)
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     mr r4, r3
     addi r3, r1, 0xbc
     bl vec3_assign

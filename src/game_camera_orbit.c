@@ -22,9 +22,9 @@ extern void skin_applyWeights(void);
 extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
-extern void fn_800CB58C(void);
+extern void morph_hasActiveWeight(void);
 extern void morph_updateMesh(void);
-extern void fn_800CB6E4(void);
+extern void morph_dispatchTargetUpdate(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void system_getNextSequenceId(void);
@@ -57,7 +57,7 @@ extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void rand_Mersenne_constructor(void);
-extern void fn_805A3D00(void);
+extern void rand_Mersenne_init(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
@@ -341,7 +341,7 @@ lbl_fn_802E84C8_000002E4:
 lbl_fn_802E84C8_000002F4:
     mr r3, r29
     li r4, 0x0
-    bl fn_805A3D00
+    bl rand_Mersenne_init
     cmpwi r30, 0x0
     ble lbl_fn_802E84C8_00000310
     mr r3, r29
@@ -757,7 +757,7 @@ lbl_fn_802E89B0_000008EC:
 lbl_fn_802E89B0_000008FC:
     mr r3, r29
     li r4, 0x0
-    bl fn_805A3D00
+    bl rand_Mersenne_init
     cmpwi r30, 0x0
     ble lbl_fn_802E89B0_00000918
     mr r3, r29
@@ -1576,7 +1576,7 @@ lbl_fn_802E9590_00001480:
     addi r3, r3, 0x15a0
     bl morph_updateMesh
     addi r3, r31, 0x15a4
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     bne lbl_fn_802E9590_00001564
     lis r4, lbl_80747F70@ha
@@ -1601,7 +1601,7 @@ lbl_fn_802E9590_00001508:
     addi r3, r3, 0x15a4
     bl morph_updateMesh
     addi r3, r31, 0x15a0
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     bne lbl_fn_802E9590_00001564
     lis r4, lbl_80747F70@ha
@@ -1622,10 +1622,10 @@ lbl_fn_802E9590_00001508:
 lbl_fn_802E9590_00001564:
     addi r3, r31, 0x15a0
     addi r4, r31, 0x528
-    bl fn_800CB6E4
+    bl morph_dispatchTargetUpdate
     addi r3, r31, 0x15a4
     addi r4, r31, 0x528
-    bl fn_800CB6E4
+    bl morph_dispatchTargetUpdate
 lbl_fn_802E9590_0000157C:
     lwz r0, 0x14f4(r31)
     cmpwi r0, 0x0

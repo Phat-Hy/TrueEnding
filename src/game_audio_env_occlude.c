@@ -16,7 +16,7 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void boss_initActionStream(void);
-extern void fn_8006CA80(void);
+extern void gmk_LoadHandle_constructor(void);
 extern void mem_free(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
@@ -30,15 +30,15 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void sound_playSpatialEffect(void);
-extern void fn_800EC254(void);
+extern void cam_testTargetVisibility(void);
 extern void cam_registerTarget(void);
 extern void cam_initTrajectoryParams(void);
 extern void cam_bindPathTarget(void);
 extern void cam_bindRotationTarget(void);
 extern void cam_evalControllerSpline(void);
 extern void cam_setLookAtTarget(void);
-extern void fn_800ED4D8(void);
-extern void fn_800ED4E0(void);
+extern void cam_getLookAtState(void);
+extern void cam_updateLookAtMatrix(void);
 extern void cam_evalLookAtMatrix(void);
 extern void proj_getMatrix(void);
 extern void system_getNextSequenceId(void);
@@ -1022,7 +1022,7 @@ asm void fn_8031B0A8(void)
     addi r3, r29, 0x14b0
     addi r4, r4, lbl_80788890@l
     stw r4, 0x0(r29)
-    bl fn_8006CA80
+    bl gmk_LoadHandle_constructor
     li r30, 0x0
     stw r30, 0x14b8(r29)
     addi r3, r29, 0x14c8
@@ -1120,7 +1120,7 @@ asm void fn_8031B0A8(void)
     b lbl_fn_8031B0A8_00000E20
 lbl_fn_8031B0A8_00000DDC:
     addi r3, r1, 0x98
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     addi r4, r30, 0x2d
     li r5, 0x8
@@ -1128,7 +1128,7 @@ lbl_fn_8031B0A8_00000DDC:
     cmpwi r3, 0x0
     bne lbl_fn_8031B0A8_00000E18
     addi r3, r1, 0x98
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     mr r4, r3
     addi r3, r1, 0x20
@@ -1136,14 +1136,14 @@ lbl_fn_8031B0A8_00000DDC:
     bl str_appendString
 lbl_fn_8031B0A8_00000E18:
     addi r3, r1, 0x98
-    bl fn_800ED4E0
+    bl cam_updateLookAtMatrix
 lbl_fn_8031B0A8_00000E20:
     addi r3, r1, 0x38
     addi r4, r1, 0xd4
     bl cam_evalLookAtMatrix
     addi r3, r1, 0x98
     addi r4, r1, 0x38
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     mr r31, r3
     addi r3, r1, 0x38
     li r4, -0x1

@@ -20,10 +20,10 @@ extern void PSMTXInverse(void);
 extern void PSMTXTrans(void);
 extern void PSMTXMultVec(void);
 extern void GXSetVtxDesc(void);
-extern void fn_806134E0(void);
+extern void __GXInitVtxDesc(void);
 extern void GXSetVtxAttrFmt(void);
 extern void GXClearVtxDesc(void);
-extern void fn_80614790(void);
+extern void GXBegin(void);
 extern void fn_806149C0(void);
 extern void fn_80614A80(void);
 extern void GXInitLightDistAttn(void);
@@ -573,7 +573,7 @@ asm void fn_805C03A0(void)
     mr r31, r4
     stw r30, 0x38(r1)
     mr r30, r3
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -636,7 +636,7 @@ asm void fn_805C03A0(void)
     li r3, 0xa8
     li r4, 0x0
     li r5, 0x2
-    bl fn_80614790
+    bl GXBegin
     lis r3, 0xcc01
     stfs f27, -0x8000(r3)
     stfs f28, -0x8000(r3)

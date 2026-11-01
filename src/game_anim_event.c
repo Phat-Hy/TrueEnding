@@ -23,7 +23,7 @@ extern void hurtbox_dispatchHitEvent(void);
 extern void enemy_updateCombatBehavior(void);
 extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_801426A4(void);
+extern void quest_evaluateMilestoneData(void);
 extern void fn_8015C0C0(void);
 extern void fn_8015C6A0(void);
 extern void fn_8015EFAC(void);
@@ -418,7 +418,7 @@ lbl_fn_802747D0_000004A8:
     mr r3, r29
     addi r4, r1, 0xc8
     fmuls f2, f0, f30
-    bl fn_801426A4
+    bl quest_evaluateMilestoneData
     b lbl_fn_802747D0_000004E8
 lbl_fn_802747D0_000004C4:
     cmpwi r0, 0x6

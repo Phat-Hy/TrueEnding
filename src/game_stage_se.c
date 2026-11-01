@@ -15,18 +15,18 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skill_findNodeById(void);
 extern void magic_dispatchActionCommand(void);
-extern void fn_8012476C(void);
+extern void player_testStatusCondition(void);
 extern void quest_resetObjectiveBounds(void);
 extern void fn_80154344(void);
 extern void inventory_calcTotalStats(void);
-extern void fn_80164DCC(void);
+extern void party_evalTacticCondition(void);
 extern void debuff_clearStatus(void);
-extern void fn_801750FC(void);
+extern void battle_calcOutcomeBonus(void);
 extern void fn_8018F81C(void);
 extern void fn_8018F84C(void);
 extern void fn_80191960(void);
 extern void fn_8019198C(void);
-extern void fn_80192758(void);
+extern void map_processStreamChunk(void);
 extern void fn_801A2A48(void);
 extern void fn_801AD34C(void);
 extern void fn_801C3414(void);
@@ -324,7 +324,7 @@ lbl_fn_801A10CC_00000308:
     stw r0, 0x0(r30)
     b lbl_fn_801A10CC_00000318
 lbl_fn_801A10CC_00000314:
-    bl fn_80192758
+    bl map_processStreamChunk
 lbl_fn_801A10CC_00000318:
     addi r11, r1, 0xd0
     bl _restgpr_27
@@ -1167,7 +1167,7 @@ lbl_fn_801A1D9C_00000F0C:
     cmpwi r3, 0x0
     beq lbl_fn_801A1D9C_00000F30
     lwz r3, 0x4(r31)
-    bl fn_801750FC
+    bl battle_calcOutcomeBonus
     li r30, 0x1
 lbl_fn_801A1D9C_00000F30:
     lwz r5, 0x4(r31)
@@ -1281,7 +1281,7 @@ lbl_fn_801A2058_000010B4:
     stw r0, 0x0(r31)
     b lbl_fn_801A2058_000010C4
 lbl_fn_801A2058_000010C0:
-    bl fn_80192758
+    bl map_processStreamChunk
 lbl_fn_801A2058_000010C4:
     lwz r0, 0x64(r1)
     lwz r31, 0x5c(r1)
@@ -1420,7 +1420,7 @@ lbl_fn_801A2290_00001234:
     bl debuff_clearStatus
     lwz r3, 0x4(r30)
     li r4, 0x1
-    bl fn_80164DCC
+    bl party_evalTacticCondition
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
@@ -1433,7 +1433,7 @@ lbl_fn_801A2290_0000127C:
     lwz r0, 0x1208(r3)
     cmpwi r0, 0x0
     beq lbl_fn_801A2290_00001290
-    bl fn_801750FC
+    bl battle_calcOutcomeBonus
 lbl_fn_801A2290_00001290:
     lwz r3, 0x4(r30)
     li r4, 0x0
@@ -1514,7 +1514,7 @@ lbl_fn_801A2414_00001384:
     lwz r3, lbl_8087F0A8
     li r4, 0x22
     addi r3, r3, 0x48c
-    bl fn_8012476C
+    bl player_testStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_801A2414_000013C0
     lwz r3, 0xc(r31)
@@ -1824,7 +1824,7 @@ lbl_fn_801A24E4_00001800:
 lbl_fn_801A24E4_0000180C:
     mr r3, r31
     mr r4, r30
-    bl fn_80192758
+    bl map_processStreamChunk
 lbl_fn_801A24E4_00001818:
     lwz r0, 0x114(r1)
     lwz r31, 0x10c(r1)

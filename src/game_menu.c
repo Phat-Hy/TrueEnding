@@ -26,7 +26,7 @@ extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void skill_calcTrajectory(void);
-extern void fn_8006B2D8(void);
+extern void boss_parseStateCondition(void);
 extern void script_executeOpcode(void);
 extern void fn_80070A70(void);
 extern void fn_80070C98(void);
@@ -39,7 +39,7 @@ extern void fn_8008A76C(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void minimap_renderOverlay(void);
-extern void fn_800902C0(void);
+extern void radar_addBlipEntry(void);
 extern void atn_Model_findBoneIndex(void);
 extern void target_pushPointToHistory(void);
 extern void fn_800C0A50(void);
@@ -56,7 +56,7 @@ extern void fn_8014FCE8(void);
 extern void fn_80179A34(void);
 extern void save_validateHeader(void);
 extern void thread_findAndNotify(void);
-extern void fn_80206B14(void);
+extern void sys_findModuleById(void);
 extern void fn_802072AC(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -160,7 +160,7 @@ void fn_80041A50(void);
 void fn_80041A80(void);
 void fn_80041B8C(void);
 void fn_80041B90(void);
-void fn_80041C0C(void);
+void menu_destroyObject(void);
 void AreaEffConfig_destructor(void);
 void AreaEffConfig_execute(void);
 void fn_80041D44(void);
@@ -173,20 +173,20 @@ void fn_8004215C(void);
 void fn_80042218(void);
 void fn_80042240(void);
 void fn_80042254(void);
-void fn_800422CC(void);
+void *fn_800422CC(void *p);
 void fn_800422D4(void);
-void fn_80042684(void);
-void fn_80042694(void);
+void fn_80042684(void *p);
+u32 fn_80042694(void *p);
 void fn_8004269C(void);
-void fn_80042740(void);
-void fn_8004274C(void);
-void fn_8004275C(void);
+void fn_80042740(void *p);
+void *fn_8004274C(void *p, u32 idx);
+void *fn_8004275C(void *p, u32 idx);
 void fn_8004276C(void);
 void fn_800427C8(void);
-void fn_80042E20(void);
+u32 fn_80042E20(void *p);
 void fn_80042E28(void);
-void fn_80042ECC(void);
-void fn_80042EDC(void);
+void *fn_80042ECC(void *p, u32 idx);
+void *fn_80042EDC(void *p, u32 idx);
 void fn_80042EEC(void);
 void fn_80043014(void);
 void menu_dummyCallback(void);
@@ -208,7 +208,7 @@ void fn_80043EAC(void);
 void atn_LH_Efp_destructor(void);
 void Arms_destructor(void);
 void Arms_execute(void);
-void fn_80044394(void);
+u32 fn_80044394(void *p);
 void fn_8004439C(void);
 void fn_8004476C(void);
 void fn_80044780(void);
@@ -346,8 +346,8 @@ asm void fn_80041B90(void)
     lwz r3, 0x1c(r3)
     cmpwi r3, 0x0
     beq lbl_fn_80041B90_00000184
-    lis r4, fn_80041C0C@ha
-    addi r4, r4, fn_80041C0C@l
+    lis r4, menu_destroyObject@ha
+    addi r4, r4, menu_destroyObject@l
     bl __destroy_arr
 lbl_fn_80041B90_00000184:
     li r0, 0x0
@@ -368,7 +368,7 @@ lbl_fn_80041B90_000001A0:
     blr
 }
 
-asm void fn_80041C0C(void)
+asm void menu_destroyObject(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -377,11 +377,11 @@ asm void fn_80041C0C(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    beq lbl_fn_80041C0C_000001E4
+    beq lbl_menu_destroyObject_000001E4
     cmpwi r4, 0x0
-    ble lbl_fn_80041C0C_000001E4
+    ble lbl_menu_destroyObject_000001E4
     bl dtor_80084684
-lbl_fn_80041C0C_000001E4:
+lbl_menu_destroyObject_000001E4:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -584,7 +584,7 @@ lbl_fn_80041D44_00000470:
     bl fn_800422D4
     addi r3, r1, 0x40
     li r4, -0x1
-    bl fn_80041C0C
+    bl menu_destroyObject
 lbl_fn_80041D44_0000049C:
     addi r3, r1, 0x80
     bl talk_parseQuotedString
@@ -793,7 +793,7 @@ asm void fn_8004215C(void)
     cmpwi r5, 0x0
     beq lbl_fn_8004215C_000007A0
     lwz r28, 0x4(r3)
-    lis r30, fn_80041C0C@ha
+    lis r30, menu_destroyObject@ha
     li r31, 0x0
     slwi r4, r28, 5
     subf r0, r28, r28
@@ -808,7 +808,7 @@ lbl_fn_8004215C_00000760:
     lwz r3, 0x1c(r29)
     cmpwi r3, 0x0
     beq lbl_fn_8004215C_00000784
-    addi r4, r30, fn_80041C0C@l
+    addi r4, r30, menu_destroyObject@l
     bl __destroy_arr
 lbl_fn_8004215C_00000784:
     stw r31, 0x1c(r29)
@@ -898,11 +898,9 @@ lbl_fn_80042254_00000860:
     blr
 }
 
-asm void fn_800422CC(void)
+void *fn_800422CC(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x10
-    blr
+    return (u8 *)p + 0x10;
 }
 
 asm void fn_800422D4(void)
@@ -1162,20 +1160,15 @@ lbl_fn_800422D4_00000C14:
     blr
 }
 
-asm void fn_80042684(void)
+void fn_80042684(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x18(r3)
-    stw r0, 0x1c(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x18) = 0;
+    *(u32 *)((u8 *)p + 0x1c) = 0;
 }
 
-asm void fn_80042694(void)
+u32 fn_80042694(void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(u32 *)((u8 *)p + 4);
 }
 
 asm void fn_8004269C(void)
@@ -1191,9 +1184,9 @@ asm void fn_8004269C(void)
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0
     beq lbl_fn_8004269C_00000C84
-    lis r4, fn_80041C0C@ha
+    lis r4, menu_destroyObject@ha
     mr r3, r0
-    addi r4, r4, fn_80041C0C@l
+    addi r4, r4, menu_destroyObject@l
     bl __destroy_arr
 lbl_fn_8004269C_00000C84:
     cmpwi r31, 0x0
@@ -1207,11 +1200,11 @@ lbl_fn_8004269C_00000C84:
     li r7, 0x0
     bl mem_realloc
     lis r4, fn_80042740@ha
-    lis r5, fn_80041C0C@ha
+    lis r5, menu_destroyObject@ha
     mr r7, r31
     li r6, 0x20
     addi r4, r4, fn_80042740@l
-    addi r5, r5, fn_80041C0C@l
+    addi r5, r5, menu_destroyObject@l
     bl runtime_registerStaticObject
     stw r3, 0x4(r30)
     b lbl_fn_8004269C_00000CD8
@@ -1227,30 +1220,19 @@ lbl_fn_8004269C_00000CD8:
     blr
 }
 
-asm void fn_80042740(void)
+void fn_80042740(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stb r0, 0x0(r3)
-    blr
+    *(u8 *)p = 0;
 }
 
-asm void fn_8004274C(void)
+void *fn_8004274C(void *p, u32 idx)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    slwi r0, r4, 5
-    add r3, r3, r0
-    blr
+    return (u8 *)*(void **)((u8 *)p + 4) + (idx << 5);
 }
 
-asm void fn_8004275C(void)
+void *fn_8004275C(void *p, u32 idx)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    slwi r0, r4, 5
-    add r3, r3, r0
-    blr
+    return (u8 *)*(void **)p + (idx << 5);
 }
 
 asm void fn_8004276C(void)
@@ -1330,11 +1312,11 @@ lbl_fn_800427C8_00000DFC:
     li r7, 0x0
     bl mem_realloc
     lis r4, fn_80042740@ha
-    lis r5, fn_80041C0C@ha
+    lis r5, menu_destroyObject@ha
     mr r7, r23
     li r6, 0x20
     addi r4, r4, fn_80042740@l
-    addi r5, r5, fn_80041C0C@l
+    addi r5, r5, menu_destroyObject@l
     bl runtime_registerStaticObject
     stw r3, 0x1c(r27)
     b lbl_fn_800427C8_00000E50
@@ -1485,7 +1467,7 @@ lbl_fn_800427C8_0000101C:
     bl abort
 lbl_fn_800427C8_00001050:
     lwz r5, 0x4(r28)
-    lis r25, fn_80041C0C@ha
+    lis r25, menu_destroyObject@ha
     lwz r0, 0x18(r1)
     lis r26, fn_80042740@ha
     slwi r4, r5, 5
@@ -1514,7 +1496,7 @@ lbl_fn_800427C8_00001050:
     stw r27, 0x18(r30)
     stw r27, 0x1c(r30)
     beq lbl_fn_800427C8_000010D4
-    addi r4, r25, fn_80041C0C@l
+    addi r4, r25, menu_destroyObject@l
     li r3, 0x0
     bl __destroy_arr
 lbl_fn_800427C8_000010D4:
@@ -1530,7 +1512,7 @@ lbl_fn_800427C8_000010D4:
     bl mem_realloc
     mr r7, r23
     addi r4, r26, fn_80042740@l
-    addi r5, r25, fn_80041C0C@l
+    addi r5, r25, menu_destroyObject@l
     li r6, 0x20
     bl runtime_registerStaticObject
     stw r3, 0x1c(r30)
@@ -1566,7 +1548,7 @@ lbl_fn_800427C8_00001170:
     lwz r4, 0x18(r1)
     lis r26, fn_80042740@ha
     lwz r0, 0x24(r1)
-    lis r27, fn_80041C0C@ha
+    lis r27, menu_destroyObject@ha
     addi r5, r4, 0x1
     lwz r3, 0x4(r28)
     lwz r29, 0x0(r28)
@@ -1599,7 +1581,7 @@ lbl_fn_800427C8_000011AC:
     stw r25, 0x1c(r30)
     lwz r23, 0x18(r31)
     beq lbl_fn_800427C8_00001208
-    addi r4, r27, fn_80041C0C@l
+    addi r4, r27, menu_destroyObject@l
     li r3, 0x0
     bl __destroy_arr
 lbl_fn_800427C8_00001208:
@@ -1615,7 +1597,7 @@ lbl_fn_800427C8_00001208:
     bl mem_realloc
     mr r7, r23
     addi r4, r26, fn_80042740@l
-    addi r5, r27, fn_80041C0C@l
+    addi r5, r27, menu_destroyObject@l
     li r6, 0x20
     bl runtime_registerStaticObject
     stw r3, 0x1c(r30)
@@ -1660,7 +1642,7 @@ lbl_fn_800427C8_000012BC:
     lwz r0, 0x24(r1)
     addi r27, r1, 0x14
     lwz r7, 0x0(r28)
-    lis r30, fn_80041C0C@ha
+    lis r30, menu_destroyObject@ha
     slwi r3, r0, 5
     lwz r5, 0x14(r1)
     lwz r6, 0x4(r28)
@@ -1686,7 +1668,7 @@ lbl_fn_800427C8_00001318:
     lwz r3, 0x1c(r26)
     cmpwi r3, 0x0
     beq lbl_fn_800427C8_0000133C
-    addi r4, r30, fn_80041C0C@l
+    addi r4, r30, menu_destroyObject@l
     bl __destroy_arr
 lbl_fn_800427C8_0000133C:
     stw r29, 0x1c(r26)
@@ -1703,7 +1685,7 @@ lbl_fn_800427C8_00001344:
     beq lbl_fn_800427C8_000013B8
     li r26, 0x0
     stw r26, 0x18(r1)
-    lis r28, fn_80041C0C@ha
+    lis r28, menu_destroyObject@ha
     b lbl_fn_800427C8_000013A8
 lbl_fn_800427C8_00001378:
     subic. r25, r25, 0x20
@@ -1713,7 +1695,7 @@ lbl_fn_800427C8_00001378:
     lwz r3, 0x1c(r25)
     cmpwi r3, 0x0
     beq lbl_fn_800427C8_0000139C
-    addi r4, r28, fn_80041C0C@l
+    addi r4, r28, menu_destroyObject@l
     bl __destroy_arr
 lbl_fn_800427C8_0000139C:
     stw r29, 0x1c(r25)
@@ -1734,11 +1716,9 @@ lbl_fn_800427C8_000013B8:
     blr
 }
 
-asm void fn_80042E20(void)
+u32 fn_80042E20(void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(u32 *)((u8 *)p + 4);
 }
 
 asm void fn_80042E28(void)
@@ -1790,22 +1770,14 @@ lbl_fn_80042E28_00001464:
     blr
 }
 
-asm void fn_80042ECC(void)
+void *fn_80042ECC(void *p, u32 idx)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    slwi r0, r4, 5
-    add r3, r3, r0
-    blr
+    return (u8 *)*(void **)((u8 *)p + 4) + (idx << 5);
 }
 
-asm void fn_80042EDC(void)
+void *fn_80042EDC(void *p, u32 idx)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    slwi r0, r4, 5
-    add r3, r3, r0
-    blr
+    return (u8 *)*(void **)p + (idx << 5);
 }
 
 asm void fn_80042EEC(void)
@@ -1833,9 +1805,9 @@ asm void fn_80042EEC(void)
     stw r5, 0x10(r3)
     stw r0, 0x14(r3)
     beq lbl_fn_80042EEC_00001504
-    lis r4, fn_80041C0C@ha
+    lis r4, menu_destroyObject@ha
     mr r3, r10
-    addi r4, r4, fn_80041C0C@l
+    addi r4, r4, menu_destroyObject@l
     bl __destroy_arr
 lbl_fn_80042EEC_00001504:
     cmpwi r28, 0x0
@@ -1849,11 +1821,11 @@ lbl_fn_80042EEC_00001504:
     li r7, 0x0
     bl mem_realloc
     lis r4, fn_80042740@ha
-    lis r5, fn_80041C0C@ha
+    lis r5, menu_destroyObject@ha
     mr r7, r28
     li r6, 0x20
     addi r4, r4, fn_80042740@l
-    addi r5, r5, fn_80041C0C@l
+    addi r5, r5, menu_destroyObject@l
     bl runtime_registerStaticObject
     stw r3, 0x1c(r30)
     b lbl_fn_80042EEC_00001558
@@ -3067,7 +3039,7 @@ asm void fn_80043EAC(void)
     stfs f0, 0x250(r31)
     stfs f0, 0x23c(r31)
     stfs f0, 0x228(r31)
-    bl fn_80206B14
+    bl sys_findModuleById
     stw r3, 0x274(r31)
     lwz r3, 0x4(r31)
     lwz r4, 0x8(r31)
@@ -3100,7 +3072,7 @@ asm void fn_80043EAC(void)
     bl actor_dispatchMessage
     mr r4, r28
     addi r3, r1, 0x1c
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0x10(r1)
     srwi. r0, r0, 31
     beq lbl_fn_80043EAC_000025E0
@@ -3361,11 +3333,9 @@ lbl_Arms_execute_00002930:
     blr
 }
 
-asm void fn_80044394(void)
+u32 fn_80044394(void *p)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(u32 *)p;
 }
 
 asm void fn_8004439C(void)
@@ -3897,7 +3867,7 @@ lbl_fn_80044780_000030D0:
     addi r3, r29, 0x10
     addi r5, r1, 0x38
     li r4, 0x0
-    bl fn_800902C0
+    bl radar_addBlipEntry
     addic. r3, r1, 0x38
     beq lbl_fn_80044780_00003134
     lwz r4, 0x38(r1)
@@ -4826,7 +4796,7 @@ asm void fn_800457A4(void)
     mr r30, r6
     mr r31, r7
     bge lbl_fn_800457A4_00003D94
-    bl fn_80206B14
+    bl sys_findModuleById
     cmpwi r3, 0x0
     bne lbl_fn_800457A4_00003D94
     li r3, 0x0

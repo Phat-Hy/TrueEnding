@@ -21,9 +21,9 @@ extern void fn_80107A78(void);
 extern void fn_80107FD8(void);
 extern void fn_80108080(void);
 extern void hurtbox_dispatchHitEvent(void);
-extern void fn_8012476C(void);
-extern void fn_8013310C(void);
-extern void fn_80133130(void);
+extern void player_testStatusCondition(void);
+extern void boss_enablePartStatusFlags(void);
+extern void boss_setPartCollisionFlags(void);
 extern void actor_testBitFlag(void);
 extern void quest_resetObjectiveBounds(void);
 extern void inventory_unequipItem(void);
@@ -36,7 +36,7 @@ extern void fn_80188F08(void);
 extern void fn_80188F40(void);
 extern void fn_80191960(void);
 extern void fn_8019198C(void);
-extern void fn_80192758(void);
+extern void map_processStreamChunk(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -159,13 +159,13 @@ asm void fn_8018FF6C(void)
     lis r4, 0x1
     li r5, 0x1c2
     li r6, 0x0
-    bl fn_80133130
+    bl boss_setPartCollisionFlags
     b lbl_fn_8018FF6C_000000C0
 lbl_fn_8018FF6C_0000008C:
     addi r3, r3, 0x7d4
     lis r4, 0x1
     li r5, 0x0
-    bl fn_8013310C
+    bl boss_enablePartStatusFlags
     b lbl_fn_8018FF6C_000000C0
 lbl_fn_8018FF6C_000000A0:
     lwz r6, 0x4(r3)
@@ -175,7 +175,7 @@ lbl_fn_8018FF6C_000000A0:
     stw r0, 0x560(r6)
     lwz r3, 0x4(r3)
     addi r3, r3, 0x7d4
-    bl fn_8013310C
+    bl boss_enablePartStatusFlags
 lbl_fn_8018FF6C_000000C0:
     lwz r3, 0x4(r31)
     bl debuff_clearStatus
@@ -841,7 +841,7 @@ asm void fn_801908F0(void)
     li r4, 0x10
     lwz r3, 0x4(r3)
     addi r3, r3, 0x7d4
-    bl fn_8013310C
+    bl boss_enablePartStatusFlags
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)
     rlwinm r0, r0, 0, 27, 25
@@ -1317,7 +1317,7 @@ asm void fn_80190F90(void)
     lwz r0, 0x564(r8)
     cmpwi r0, 0x7
     bne lbl_fn_80190F90_0000105C
-    bl fn_80192758
+    bl map_processStreamChunk
     b lbl_fn_80190F90_000011F4
 lbl_fn_80190F90_0000105C:
     lis r4, lbl_8077D638@ha
@@ -1478,7 +1478,7 @@ asm void fn_80191170(void)
     stw r0, 0x560(r6)
     lwz r3, 0x4(r3)
     addi r3, r3, 0x7d4
-    bl fn_8013310C
+    bl boss_enablePartStatusFlags
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)
     rlwinm r0, r0, 0, 27, 25
@@ -1799,7 +1799,7 @@ asm void fn_8019163C(void)
     lwz r3, lbl_8087F0A8
     li r4, 0x22
     addi r3, r3, 0x48c
-    bl fn_8012476C
+    bl player_testStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_8019163C_00001758
     lwz r3, lbl_8087EFA8

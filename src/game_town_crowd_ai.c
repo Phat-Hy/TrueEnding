@@ -6,7 +6,7 @@ extern void __files(void);
 extern void _restgpr_21(void);
 extern void _savegpr_21(void);
 extern void dtor_80084684(void);
-extern void fn_80051CD8(void);
+extern void player_transformBoundingSphere(void);
 extern void talk_parseQuotedString(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -83,7 +83,7 @@ void fn_803CCF64(void);
 void fn_803CCF68(void);
 void fn_803CD598(void);
 void fn_803CD918(void);
-void fn_803CD958(void);
+void crowd_selectWaypointByWeight(void);
 void fn_803CD9A8(void);
 void fn_803CDA5C(void);
 void fn_803CDAE4(void);
@@ -567,7 +567,7 @@ lbl_fn_803CCDAC_00000514:
     fadds f0, f0, f8
     stfs f31, 0x14(r1)
     stfs f0, 0xc(r1)
-    bl fn_80051CD8
+    bl player_transformBoundingSphere
     cmpwi r3, 0x0
     beq lbl_fn_803CCDAC_000005F8
     addi r3, r23, 0x18
@@ -1325,30 +1325,30 @@ asm void fn_803CD918(void)
     blr
 }
 
-asm void fn_803CD958(void)
+asm void crowd_selectWaypointByWeight(void)
 {
     nofralloc
     lhz r6, 0x2(r3)
     li r8, 0x0
     li r9, 0x0
-    b lbl_fn_803CD958_00001094
-lbl_fn_803CD958_00001068:
+    b lbl_crowd_selectWaypointByWeight_00001094
+lbl_crowd_selectWaypointByWeight_00001068:
     lwz r5, 0x4(r3)
     clrlslwi r7, r9, 16, 2
     lhzx r0, r5, r7
     add r8, r8, r0
     clrlwi r0, r8, 16
     cmplw r4, r0
-    bge lbl_fn_803CD958_00001090
+    bge lbl_crowd_selectWaypointByWeight_00001090
     add r3, r5, r7
     lhz r3, 0x2(r3)
     blr
-lbl_fn_803CD958_00001090:
+lbl_crowd_selectWaypointByWeight_00001090:
     addi r9, r9, 0x1
-lbl_fn_803CD958_00001094:
+lbl_crowd_selectWaypointByWeight_00001094:
     clrlwi r0, r9, 16
     cmplw r0, r6
-    blt lbl_fn_803CD958_00001068
+    blt lbl_crowd_selectWaypointByWeight_00001068
     li r3, 0x0
     blr
 }

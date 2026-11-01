@@ -8,9 +8,9 @@ extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void fn_800109E0(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011220(void);
+extern void math_fabsf(void);
 extern void mtx_multVec(void);
-extern void fn_80012C88(void);
+extern void vec3_addAssign(void);
 extern void vec3_sub(void);
 extern void vec3_add(void);
 extern void item_useConsumable(void);
@@ -22,20 +22,20 @@ extern void msg_formatWindowLayout(void);
 extern void msg_isWindowActive(void);
 extern void vec3_scale(void);
 extern void viewport_getNextSequenceId(void);
-extern void fn_800F8524(void);
+extern void math_lerpf(void);
 extern void fn_8010F6FC(void);
 extern void fn_80112958(void);
 extern void fn_80112960(void);
 extern void fn_80113CCC(void);
 extern void fn_80114AA0(void);
-extern void fn_801162A0(void);
+extern void vec3_sqMag(void);
 extern void fn_80116BA4(void);
-extern void fn_80116BD4(void);
+extern void actor_calcSpawnTransform(void);
 extern void player_evaluateStatusCondition(void);
-extern void fn_8013A13C(void);
+extern void mtx_rotYRad(void);
 extern void fn_8013C3B4(void);
 extern void fn_80178088(void);
-extern void fn_801A03E8(void);
+extern void vec3_dot(void);
 extern void fn_801C3910(void);
 extern void fn_8032EC94(void);
 extern void world_getGlobalFlag(void);
@@ -56,7 +56,7 @@ extern void fn_803920C8(void);
 extern void fn_80392510(void);
 extern void fn_803928C0(void);
 extern void fn_80392964(void);
-extern void fn_80392A04(void);
+extern void mtx_copyPairedSingle(void);
 extern void fn_80392FE8(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -355,7 +355,7 @@ lbl_fn_80387548_000001C8:
     bl item_useConsumable
     mr r4, r30
     addi r3, r30, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r30
     bl fn_803920C8
     mr r3, r30
@@ -364,7 +364,7 @@ lbl_fn_80387548_000001C8:
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r30, 0x1f4
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
 lbl_fn_80387548_000003AC:
     lwz r0, 0x114(r1)
     psq_l f31, 0x108(r1), 0, 0
@@ -407,7 +407,7 @@ asm void fn_80387910(void)
     addi r5, r29, 0x4c0
     bl fn_8037F830
     lfs f1, 0x4b8(r29)
-    bl fn_80011220
+    bl math_fabsf
     lfs f0, lbl_808859C8
     fcmpo cr0, f1, f0
     bge lbl_fn_80387910_00000454
@@ -434,8 +434,8 @@ lbl_fn_80387910_00000454:
     lfs f0, lbl_808858E8
     addi r3, r1, 0x104
     stfs f0, 0x108(r1)
-    bl fn_801162A0
-    bl fn_80011220
+    bl vec3_sqMag
+    bl math_fabsf
     lfs f0, lbl_808859C8
     fcmpo cr0, f1, f0
     bge lbl_fn_80387910_000004D0
@@ -534,7 +534,7 @@ lbl_fn_80387910_000004D8:
     lfs f0, 0x8a0(r29)
     addi r3, r1, 0x168
     fneg f1, f0
-    bl fn_8013A13C
+    bl mtx_rotYRad
     addi r3, r1, 0xe0
     addi r4, r1, 0x168
     bl mtx_multVec
@@ -553,7 +553,7 @@ lbl_fn_80387910_000004D8:
     bl vec3_scale
     addi r3, r1, 0x11c
     addi r4, r1, 0x8c
-    bl fn_80012C88
+    bl vec3_addAssign
     b lbl_fn_80387910_000006E4
 lbl_fn_80387910_00000680:
     lfs f0, lbl_808858E8
@@ -562,7 +562,7 @@ lbl_fn_80387910_00000680:
     bl viewport_getNextSequenceId
     addi r3, r1, 0xd4
     addi r4, r1, 0xe0
-    bl fn_801A03E8
+    bl vec3_dot
     lfs f0, lbl_808858E8
     fcmpo cr0, f1, f0
     bge lbl_fn_80387910_000006E4
@@ -577,7 +577,7 @@ lbl_fn_80387910_00000680:
     bl vec3_scale
     addi r3, r1, 0xc8
     addi r4, r1, 0x80
-    bl fn_80012C88
+    bl vec3_addAssign
     addi r3, r1, 0x11c
     addi r4, r1, 0xc8
     bl vec3_copy
@@ -592,8 +592,8 @@ lbl_fn_80387910_000006E4:
     lfs f0, lbl_808858E8
     addi r3, r1, 0x104
     stfs f0, 0x114(r1)
-    bl fn_801162A0
-    bl fn_80011220
+    bl vec3_sqMag
+    bl math_fabsf
     lfs f0, lbl_808859C8
     fcmpo cr0, f1, f0
     bge lbl_fn_80387910_00000730
@@ -619,7 +619,7 @@ lbl_fn_80387910_00000730:
     addi r3, r1, 0x8
     lfs f1, lbl_80885934
     addi r4, r1, 0x10
-    bl fn_800F8524
+    bl math_lerpf
     stfs f1, 0x10(r1)
     mr r4, r29
     addi r3, r1, 0x50
@@ -639,7 +639,7 @@ lbl_fn_80387910_00000730:
     lfs f1, lbl_80885934
     addi r3, r1, 0xc
     addi r4, r1, 0xbc
-    bl fn_800F8524
+    bl math_lerpf
     stfs f1, 0xbc(r1)
     addi r3, r1, 0x138
     addi r4, r1, 0xbc
@@ -1544,7 +1544,7 @@ lbl_fn_803884B8_000014CC:
     bl item_useConsumable
     mr r4, r29
     addi r3, r29, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r29
     bl fn_803920C8
     mr r3, r29
@@ -1553,7 +1553,7 @@ lbl_fn_803884B8_000014CC:
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r29, 0x1f4
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     lwz r0, 0x174(r1)
     psq_l f31, 0x168(r1), 0, 0
     lfd f31, 0x160(r1)
@@ -1673,7 +1673,7 @@ lbl_fn_80388A88_000016B0:
     bl item_useConsumable
     mr r4, r31
     addi r3, r31, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r31
     bl fn_803920C8
     mr r3, r31
@@ -1682,7 +1682,7 @@ lbl_fn_80388A88_000016B0:
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r31, 0x1f4
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     lwz r0, 0x74(r1)
     psq_l f31, 0x68(r1), 0, 0
     lfd f31, 0x60(r1)
@@ -1940,7 +1940,7 @@ lbl_fn_80388C44_00001A88:
     bl item_useConsumable
     mr r4, r31
     addi r3, r31, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r31
     bl fn_80392510
     mr r3, r31
@@ -1953,7 +1953,7 @@ lbl_fn_80388C44_00001A88:
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r31, 0x1f4
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     lwz r0, 0x1b4(r1)
     psq_l f31, 0x1a8(r1), 0, 0
     lfd f31, 0x1a0(r1)

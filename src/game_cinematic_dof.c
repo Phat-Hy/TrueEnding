@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void vec3_set(void);
 extern void fn_8000D760(void);
 extern void scene_transformPoint(void);
-extern void fn_8000DCF4(void);
+extern void scene_getCamera(void);
 extern void scene_getRootNode(void);
 extern void str_initFromCStr(void);
 extern void menu_initWindowBuffer(void);
@@ -21,28 +21,28 @@ extern void vec3_initValues(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void boss_initActionStream(void);
-extern void fn_8006CA80(void);
+extern void gmk_LoadHandle_constructor(void);
 extern void mem_free(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
-extern void fn_8009373C(void);
+extern void target_findEntryByName(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_80099E9C(void);
 extern void bloom_processPasses(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_800EC254(void);
+extern void cam_testTargetVisibility(void);
 extern void cam_registerTarget(void);
 extern void cam_initTrajectoryParams(void);
 extern void cam_bindPathTarget(void);
 extern void cam_bindRotationTarget(void);
 extern void cam_evalControllerSpline(void);
 extern void cam_setLookAtTarget(void);
-extern void fn_800ED4D8(void);
-extern void fn_800ED4E0(void);
+extern void cam_getLookAtState(void);
+extern void cam_updateLookAtMatrix(void);
 extern void cam_evalLookAtMatrix(void);
 extern void proj_getMatrix(void);
 extern void viewport_getGlobalContext(void);
@@ -51,20 +51,20 @@ extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
 extern void fn_80129978(void);
-extern void fn_80129A48(void);
+extern void path_resetWaypointVelocity(void);
 extern void fn_8012D180(void);
 extern void boss_updatePhaseState(void);
 extern void npc_updateDialogueTarget(void);
 extern void fn_80139F3C(void);
 extern void npc_getPosition(void);
-extern void fn_8013C480(void);
+extern void npc_isInteractionReady(void);
 extern void npc_getDialogController(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void fn_8015ECC4(void);
 extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
-extern void fn_801A03E0(void);
+extern void bgm_getGlobalManager(void);
 extern void str_appendString(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_ctor(void);
@@ -138,7 +138,7 @@ extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_804A04AC(void);
 extern void dlc_findItemInCatalog(void);
-extern void fn_805A3D00(void);
+extern void rand_Mersenne_init(void);
 extern void fn_805A5224(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
@@ -529,7 +529,7 @@ lbl_fn_803387DC_00000464:
 lbl_fn_803387DC_00000484:
     mr r3, r29
     li r4, 0x0
-    bl fn_805A3D00
+    bl rand_Mersenne_init
     cmpwi r30, 0x0
     ble lbl_fn_803387DC_000004A0
     mr r3, r29
@@ -636,7 +636,7 @@ asm void fn_803388A4(void)
     stb r28, 0x16b2(r31)
     stb r0, 0x16b3(r31)
     stb r28, 0x16b4(r31)
-    bl fn_8006CA80
+    bl gmk_LoadHandle_constructor
     li r4, 0xf
     li r0, 0x4b0
     stw r28, 0x16c8(r31)
@@ -689,7 +689,7 @@ asm void fn_803388A4(void)
     b lbl_fn_803388A4_00000730
 lbl_fn_803388A4_000006EC:
     addi r3, r1, 0x98
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     addi r4, r29, 0x34
     li r5, 0x8
@@ -697,7 +697,7 @@ lbl_fn_803388A4_000006EC:
     cmpwi r3, 0x0
     bne lbl_fn_803388A4_00000728
     addi r3, r1, 0x98
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     mr r4, r3
     addi r3, r1, 0x20
@@ -705,14 +705,14 @@ lbl_fn_803388A4_000006EC:
     bl str_appendString
 lbl_fn_803388A4_00000728:
     addi r3, r1, 0x98
-    bl fn_800ED4E0
+    bl cam_updateLookAtMatrix
 lbl_fn_803388A4_00000730:
     addi r3, r1, 0x38
     addi r4, r1, 0xd4
     bl cam_evalLookAtMatrix
     addi r3, r1, 0x98
     addi r4, r1, 0x38
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     mr r30, r3
     addi r3, r1, 0x38
     li r4, -0x1
@@ -1481,7 +1481,7 @@ lbl_fn_80338FD0_0000121C:
     bl talk_parseQuotedString
     bl atoi
     mr r30, r3
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     mr r4, r30
     bl skill_findNodeById
     stw r3, 0x1758(r31)
@@ -1713,7 +1713,7 @@ lbl_fn_80339760_00001524:
     cmpwi r0, 0x0
     bne lbl_fn_80339760_00001568
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     stw r3, 0x14b0(r31)
     stw r3, 0xd1c(r31)
 lbl_fn_80339760_00001568:
@@ -1762,7 +1762,7 @@ lbl_fn_80339760_00001600:
     cmpwi r3, 0x53
     bne lbl_fn_80339760_00001628
     mr r3, r29
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_80339760_00001628
     mr r3, r29
@@ -1831,7 +1831,7 @@ lbl_fn_80339760_0000163C:
     li r5, 0x0
     addi r4, r4, lbl_8074A4C0@l
     addi r4, r4, 0x2ea
-    bl fn_8009373C
+    bl target_findEntryByName
 lbl_fn_80339760_00001720:
     addi r3, r31, 0x7d4
     bl fn_8029F3AC
@@ -1923,7 +1923,7 @@ lbl_fn_80339760_00001834:
     stb r0, 0x14c8(r31)
 lbl_fn_80339760_00001860:
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     lwz r0, 0xd18(r31)
     li r30, 0x0
     cmpwi r0, 0x0
@@ -2017,7 +2017,7 @@ lbl_fn_80339760_0000197C:
 lbl_fn_80339760_000019C0:
     lfs f1, lbl_80885274
     addi r3, r31, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
 lbl_fn_80339760_000019CC:
     lwz r3, 0x58c(r31)
     li r4, 0x1
@@ -2032,7 +2032,7 @@ lbl_fn_80339760_000019E4:
     bl kpad_getClampData
     mr r28, r3
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     bl npc_getPosition
     lfs f2, 0x4(r3)
     lfs f1, 0x52c(r31)

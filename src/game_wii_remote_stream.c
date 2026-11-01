@@ -18,7 +18,7 @@ extern void actor_dispatchMessage(void);
 extern void fn_80069BF4(void);
 extern void boss_decodePhaseBitfield(void);
 extern void mem_getAllocSize(void);
-extern void fn_8008B130(void);
+extern void map_getArchiveName(void);
 extern void compass_findWaypointIndex(void);
 extern void fn_8009290C(void);
 extern void fn_800937E8(void);
@@ -27,13 +27,13 @@ extern void fn_80093D28(void);
 extern void fn_80093D98(void);
 extern void fn_80093F1C(void);
 extern void fn_800948F0(void);
-extern void fn_80094958(void);
+extern void target_registerCandidate(void);
 extern void fn_80094B6C(void);
 extern void fn_80097750(void);
 extern void fn_8011EE58(void);
 extern void fn_8048B3B8(void);
 extern void fn_8048BD04(void);
-extern void fn_805381A4(void);
+extern void node_getParentNode(void);
 extern void spectate_getRootNode(void);
 extern void fn_80538B1C(void);
 extern void fn_80538FD8(void);
@@ -86,7 +86,7 @@ asm void fn_80557ABC(void)
     b lbl_fn_80557ABC_00000324
 lbl_fn_80557ABC_0000003C:
     mr r3, r30
-    bl fn_805381A4
+    bl node_getParentNode
     mr r31, r3
     mr r3, r30
     bl spectate_getRootNode
@@ -165,7 +165,7 @@ lbl_fn_80557ABC_00000138:
     b lbl_fn_80557ABC_00000324
 lbl_fn_80557ABC_00000144:
     mr r3, r30
-    bl fn_805381A4
+    bl node_getParentNode
     mr r31, r3
     mr r3, r30
     bl spectate_getRootNode
@@ -195,7 +195,7 @@ lbl_fn_80557ABC_00000194:
     stb r0, 0x146(r6)
 lbl_fn_80557ABC_000001A8:
     mr r3, r30
-    bl fn_805381A4
+    bl node_getParentNode
     mr r31, r3
     mr r3, r30
     bl spectate_getRootNode
@@ -448,7 +448,7 @@ asm void fn_80557F88(void)
     mr r31, r3
     beq lbl_fn_80557F88_00000E20
     addi r3, r3, 0xb0
-    bl fn_8008B130
+    bl map_getArchiveName
     li r0, 0x0
     stw r0, 0x94(r1)
     mr r24, r3
@@ -1160,7 +1160,7 @@ asm void fn_805588F0(void)
     b lbl_fn_805588F0_00001538
 lbl_fn_805588F0_00000E7C:
     mr r3, r31
-    bl fn_805381A4
+    bl node_getParentNode
     mr r29, r3
     mr r3, r31
     bl spectate_getRootNode
@@ -1506,7 +1506,7 @@ lbl_fn_805588F0_00001310:
     b lbl_fn_805588F0_00001538
 lbl_fn_805588F0_00001320:
     mr r3, r31
-    bl fn_805381A4
+    bl node_getParentNode
     mr r30, r3
     mr r3, r31
     bl spectate_getRootNode
@@ -1555,7 +1555,7 @@ lbl_fn_805588F0_000013B0:
     b lbl_fn_805588F0_00001538
 lbl_fn_805588F0_000013C0:
     mr r3, r31
-    bl fn_805381A4
+    bl node_getParentNode
     mr r30, r3
     mr r3, r31
     bl spectate_getRootNode
@@ -1694,7 +1694,7 @@ asm void fn_80559020(void)
     stw r29, 0x24(r1)
     stw r0, 0x8(r1)
     stw r0, 0x10(r1)
-    bl fn_805381A4
+    bl node_getParentNode
     mr r29, r3
     mr r3, r31
     bl spectate_getRootNode
@@ -1941,7 +1941,7 @@ asm void fn_8055936C(void)
     b lbl_fn_8055936C_000019CC
 lbl_fn_8055936C_000018DC:
     mr r3, r30
-    bl fn_805381A4
+    bl node_getParentNode
     mr r31, r3
     mr r3, r30
     bl spectate_getRootNode
@@ -2038,7 +2038,7 @@ asm void fn_805594A4(void)
     stw r0, 0xa0(r1)
     bl spectate_getRootNode
     mr r3, r22
-    bl fn_805381A4
+    bl node_getParentNode
     mr r23, r3
     mr r3, r22
     bl spectate_getRootNode
@@ -2457,7 +2457,7 @@ lbl_fn_805594A4_00002030:
     addi r5, r1, 0x68
     addi r6, r1, 0x48
     addi r7, r1, 0x58
-    bl fn_80094958
+    bl target_registerCandidate
 lbl_fn_805594A4_00002048:
     psq_l f31, 0xf8(r1), 0, 0
     li r3, 0x0

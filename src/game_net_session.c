@@ -20,7 +20,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void str_findChar(void);
-extern void fn_80129A48(void);
+extern void path_resetWaypointVelocity(void);
 extern void fn_80129A6C(void);
 extern void fn_80147A18(void);
 extern void quest_checkCondition(void);
@@ -616,7 +616,7 @@ lbl_fn_801E8244_000006EC:
     stfs f0, 0x584(r3)
     lwz r3, 0x48(r31)
     addi r3, r3, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     lwz r3, 0x48(r31)
     addi r3, r3, 0x10d8
     bl fn_80129A6C

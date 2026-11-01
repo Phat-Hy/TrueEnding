@@ -36,7 +36,7 @@ extern void gmk_findSlotByIndex(void);
 extern void fn_8044D490(void);
 extern void fn_8044D678(void);
 extern void fn_80470364(void);
-extern void fn_80470528(void);
+extern void boss_releaseLaserTarget(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -45,7 +45,7 @@ extern void fn_804A39EC(void);
 extern void fn_804A3A68(void);
 extern void fn_804A436C(void);
 extern void fn_804A4494(void);
-extern void fn_804A53D4(void);
+extern void net_broadcastCoopPacket(void);
 extern void fn_80580B54(void);
 extern void fn_80581678(void);
 extern void fn_80581820(void);
@@ -1014,7 +1014,7 @@ lbl_fn_8057F7AC_00000D04:
     addic. r0, r3, 0x5b44
     beq lbl_fn_8057F7AC_00000D18
     addi r3, r3, 0x5b44
-    bl fn_80470528
+    bl boss_releaseLaserTarget
 lbl_fn_8057F7AC_00000D18:
     addis r4, r30, 0x2
     addic. r4, r4, 0x5b30
@@ -1102,7 +1102,7 @@ asm void fn_8057F8FC(void)
     mr r29, r3
     addis r3, r3, 0x2
     addi r3, r3, 0x5b44
-    bl fn_80470528
+    bl boss_releaseLaserTarget
     lwz r0, 0x54(r29)
     cmpwi r0, 0x0
     ble lbl_fn_8057F8FC_00000E78
@@ -1824,7 +1824,7 @@ lbl_fn_80580268_000017BC:
     li r4, 0x0
     li r5, 0x0
     li r7, 0x0
-    bl fn_804A53D4
+    bl net_broadcastCoopPacket
     b lbl_fn_80580268_0000185C
 lbl_fn_80580268_00001854:
     lfs f0, lbl_808880C8

@@ -14,7 +14,7 @@ extern void talk_formatQuotedString(void);
 extern void boss_triggerEventSequence(void);
 extern void fn_8006B0C8(void);
 extern void boss_decodePhaseBitfield(void);
-extern void fn_8006B2D8(void);
+extern void boss_parseStateCondition(void);
 extern void fn_80070C98(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
@@ -24,7 +24,7 @@ extern void fn_8008A76C(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void minimap_renderOverlay(void);
-extern void fn_800902C0(void);
+extern void radar_addBlipEntry(void);
 extern void fn_80092A4C(void);
 extern void fn_80095300(void);
 extern void fn_8009E690(void);
@@ -450,7 +450,7 @@ lbl_fn_8049A09C_0000045C:
     bl boss_decodePhaseBitfield
     addi r3, r1, 0x3c
     addi r4, r1, 0x48
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0x3c(r1)
     lis r4, lbl_80756B84@ha
     addi r4, r4, lbl_80756B84@l
@@ -524,7 +524,7 @@ lbl_fn_8049A09C_0000056C:
     bl boss_decodePhaseBitfield
     addi r3, r1, 0x18
     addi r4, r1, 0x24
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0x18(r1)
     lis r4, lbl_80756B84@ha
     addi r4, r4, lbl_80756B84@l
@@ -1047,7 +1047,7 @@ asm void fn_8049AA1C(void)
     addi r5, r1, 0x8
     li r4, 0x0
     lwz r3, 0x324(r29)
-    bl fn_800902C0
+    bl radar_addBlipEntry
     addic. r3, r1, 0x8
     beq lbl_fn_8049AA1C_00000D80
     lwz r4, 0x8(r1)

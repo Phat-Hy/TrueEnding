@@ -8,11 +8,11 @@ extern void item_useConsumable(void);
 extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void fn_80050900(void);
-extern void fn_80051B70(void);
+extern void player_stepMovement(void);
 extern void msg_formatWindowLayout(void);
 extern void msg_isWindowActive(void);
 extern void fn_801002DC(void);
-extern void fn_80116BD4(void);
+extern void actor_calcSpawnTransform(void);
 extern void magic_dispatchActionCommand(void);
 extern void player_evaluateStatusCondition(void);
 extern void world_getGlobalFlag(void);
@@ -20,7 +20,7 @@ extern void fn_80383F7C(void);
 extern void fn_803918EC(void);
 extern void fn_803920C8(void);
 extern void fn_803928C0(void);
-extern void fn_80392A04(void);
+extern void mtx_copyPairedSingle(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -179,7 +179,7 @@ lbl_fn_80385B48_000000BC:
     bl item_useConsumable
     mr r4, r28
     addi r3, r28, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r28
     bl fn_803918EC
     mr r3, r28
@@ -190,7 +190,7 @@ lbl_fn_80385B48_000000BC:
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r28, 0x1f4
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     b lbl_fn_80385B48_000019A0
 lbl_fn_80385B48_000001B8:
     lwz r3, lbl_8087F0A8
@@ -1589,7 +1589,7 @@ lbl_fn_80385B48_00001648:
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x290(r1)
     stfs f0, 0x294(r1)
-    bl fn_80051B70
+    bl player_stepMovement
     cmpwi r3, 0x0
     beq lbl_fn_80385B48_000018DC
     lfs f7, lbl_808858E8
@@ -1783,7 +1783,7 @@ lbl_fn_80385B48_0000195C:
     bl item_useConsumable
     mr r4, r28
     addi r3, r28, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r28
     bl fn_803918EC
     mr r3, r28
@@ -1794,7 +1794,7 @@ lbl_fn_80385B48_0000195C:
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r28, 0x1f4
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
 lbl_fn_80385B48_000019A0:
     li r0, 0x8f8
     addi r11, r1, 0x8a0

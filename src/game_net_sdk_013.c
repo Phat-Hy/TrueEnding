@@ -17,27 +17,27 @@ extern void _savegpr_21(void);
 extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void snprintf(void);
-extern void fn_806A7110(void);
+extern void net_isConnectionActive(void);
 extern void net_checkConnectionSession(void);
 extern void fn_806A72E0(void);
-extern void fn_806A7400(void);
+extern void net_memFree(void);
 extern void net_formatLog(void);
 extern void fn_806A9CA0(void);
-extern void fn_806AB920(void);
+extern void net_formatString(void);
 extern void http_formatParam(void);
 extern void fn_806ABB70(void);
-extern void fn_806ACCF0(void);
-extern void fn_806ACE00(void);
-extern void fn_806B0DE0(void);
+extern void net_findSessionSlot(void);
+extern void net_sendSessionCommand(void);
+extern void net_isSessionActive(void);
 extern void net_getMyAid(void);
 extern void fn_806B0F80(void);
 extern void fn_806B1230(void);
-extern void fn_806B12F0(void);
+extern void net_checkLinkStatus(void);
 extern void fn_806B14D0(void);
 extern void fn_806B1A00(void);
 extern void fn_806BB6C0(void);
 extern void fn_806BBBA0(void);
-extern void fn_806BBCA0(void);
+extern void net_logSessionStatus(void);
 extern void fn_806BC010(void);
 extern void fn_806BC860(void);
 extern void fn_806C05F0(void);
@@ -47,8 +47,8 @@ extern void fn_806C1430(void);
 extern void fn_806C3ED0(void);
 extern void fn_806C4B30(void);
 extern void fn_806C57F0(void);
-extern void fn_806C5C10(void);
-extern void fn_806C5EB0(void);
+extern void net_logConnectionEvent(void);
+extern void net_formatSessionLog(void);
 extern void fn_806C6180(void);
 extern void fn_806C6750(void);
 extern void fn_806C8DB0(void);
@@ -70,7 +70,7 @@ extern void fn_806CCFA0(void);
 extern void fn_806CD150(void);
 extern void fn_806CE700(void);
 extern void fn_806EA8A0(void);
-extern void fn_806EAC30(void);
+extern void net_bindSessionCallback(void);
 extern void fn_806EACC0(void);
 extern void fn_806EAD00(void);
 extern void fn_806EF0C0(void);
@@ -133,7 +133,7 @@ asm void fn_806B3AE0(void)
     lwz r0, lbl_80860898@l(r31)
     cmpwi r0, 0x0
     beq lbl_fn_806B3AE0_00000044
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     beq lbl_fn_806B3AE0_0000004C
 lbl_fn_806B3AE0_00000044:
@@ -180,7 +180,7 @@ asm void fn_806B3B80(void)
     lwz r0, lbl_80860898@l(r31)
     cmpwi r0, 0x0
     beq lbl_fn_806B3B80_000000E4
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     beq lbl_fn_806B3B80_000000EC
 lbl_fn_806B3B80_000000E4:
@@ -282,7 +282,7 @@ lbl_fn_806B3CC0_00000214:
     li r3, 0x0
     b lbl_fn_806B3CC0_000002F0
 lbl_fn_806B3CC0_00000228:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     cmpwi r3, 0x0
     bne lbl_fn_806B3CC0_0000023C
     li r3, 0x0
@@ -292,7 +292,7 @@ lbl_fn_806B3CC0_0000023C:
     lwz r29, 0x1c(r3)
     bl fn_806B0F80
     and r29, r29, r3
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     beq lbl_fn_806B3CC0_00000280
     lwz r3, lbl_80860898@l(r31)
@@ -515,7 +515,7 @@ lbl_fn_806B3DF0_00000578:
     beq lbl_fn_806B3DF0_00000590
     li r3, 0x4
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
 lbl_fn_806B3DF0_00000590:
     addi r22, r22, 0x1
     addi r23, r23, 0xc
@@ -695,7 +695,7 @@ asm void fn_806B42B0(void)
     mr r4, r0
     li r3, 0x4
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
     li r0, 0x0
     stw r0, lbl_80860140@l(r17)
 lbl_fn_806B42B0_00000844:
@@ -755,7 +755,7 @@ lbl_fn_806B42B0_00000844:
     lwz r3, lbl_80860898@l(r18)
     lwz r3, 0x4(r3)
     lwz r3, 0x0(r3)
-    bl fn_806EAC30
+    bl net_bindSessionCallback
     lwz r5, lbl_80860898@l(r18)
     lis r4, 0xffff
     li r3, 0x9
@@ -774,7 +774,7 @@ lbl_fn_806B42B0_00000844:
     addi r4, r1, 0x2c
     addi r5, r1, 0x60
     li r6, 0x2f
-    bl fn_806AB920
+    bl net_formatString
     lwz r3, lbl_80860898@l(r18)
     lbz r0, 0x15(r3)
     lwz r6, 0x58(r3)
@@ -813,7 +813,7 @@ lbl_fn_806B42B0_00000994:
     li r4, 0x0
     b lbl_fn_806B42B0_00000A50
 lbl_fn_806B42B0_00000A04:
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     beq lbl_fn_806B42B0_00000A4C
     lwz r3, lbl_80860898@l(r18)
@@ -851,13 +851,13 @@ lbl_fn_806B42B0_00000A50:
     addi r4, r1, 0x60
     li r3, 0x1
     li r5, 0x0
-    bl fn_806ACE00
+    bl net_sendSessionCommand
     lis r3, lbl_80860898@ha
     lwz r18, lbl_80860898@l(r3)
     lwz r3, 0x7b0(r18)
     cntlzw r0, r3
     srwi r17, r0, 5
-    bl fn_806ACCF0
+    bl net_findSessionSlot
     lbz r4, 0x14(r18)
     mr r7, r3
     lwz r12, 0x8a0(r18)
@@ -870,7 +870,7 @@ lbl_fn_806B42B0_00000A50:
     li r4, 0x0
     mtctr r12
     bctrl
-    bl fn_806BBCA0
+    bl net_logSessionStatus
     b lbl_fn_806B42B0_00000E48
 lbl_fn_806B42B0_00000AE4:
     mr r4, r20
@@ -989,7 +989,7 @@ lbl_fn_806B42B0_00000C88:
     cmpwi r0, 0x0
     bne lbl_fn_806B42B0_00000CAC
     li r3, 0x5
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     cmpwi r3, 0x0
     bne lbl_fn_806B42B0_00000E48
 lbl_fn_806B42B0_00000CAC:
@@ -1006,7 +1006,7 @@ lbl_fn_806B42B0_00000CAC:
     addi r4, r1, 0x20
     addi r5, r1, 0x38
     li r6, 0x2f
-    bl fn_806AB920
+    bl net_formatString
     lwz r3, lbl_80860898@l(r18)
     lbz r0, 0x15(r3)
     lwz r6, 0x58(r3)
@@ -1045,7 +1045,7 @@ lbl_fn_806B42B0_00000D04:
     li r4, 0x0
     b lbl_fn_806B42B0_00000DC0
 lbl_fn_806B42B0_00000D74:
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     beq lbl_fn_806B42B0_00000DBC
     lwz r3, lbl_80860898@l(r18)
@@ -1083,7 +1083,7 @@ lbl_fn_806B42B0_00000DC0:
     addi r4, r1, 0x38
     li r3, 0x3
     li r5, 0x0
-    bl fn_806ACE00
+    bl net_sendSessionCommand
     lis r3, lbl_80860898@ha
     lwz r4, lbl_80860898@l(r3)
     lwz r3, 0x10(r4)
@@ -1101,7 +1101,7 @@ lbl_fn_806B42B0_00000E30:
     lwz r3, lbl_80860898@l(r3)
     lwz r3, 0x7a8(r3)
     bl fn_806BC010
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     cmpwi r3, 0x0
 lbl_fn_806B42B0_00000E48:
     addi r11, r1, 0x4d0
@@ -1218,7 +1218,7 @@ lbl_fn_806B4940_00000FB0:
     addi r4, r1, 0x10
     addi r5, r1, 0x1c
     li r6, 0x2f
-    bl fn_806AB920
+    bl net_formatString
     lwz r3, lbl_80860898@l(r30)
     lbz r0, 0x15(r3)
     lwz r6, 0x58(r3)
@@ -1257,7 +1257,7 @@ lbl_fn_806B4940_00001014:
     li r4, 0x0
     b lbl_fn_806B4940_000010D0
 lbl_fn_806B4940_00001084:
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     beq lbl_fn_806B4940_000010CC
     lwz r3, lbl_80860898@l(r30)
@@ -1295,8 +1295,8 @@ lbl_fn_806B4940_000010D0:
     addi r4, r1, 0x1c
     li r3, 0x6
     li r5, 0x0
-    bl fn_806ACE00
-    bl fn_806C5C10
+    bl net_sendSessionCommand
+    bl net_logConnectionEvent
     cmpwi r3, 0x0
     bne lbl_fn_806B4940_0000121C
     lis r4, lbl_80860898@ha
@@ -1363,7 +1363,7 @@ lbl_fn_806B4940_000011F8:
     lwz r3, lbl_80860898@l(r31)
     lwz r3, 0x7a8(r3)
     bl fn_806BC010
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     cmpwi r3, 0x0
 lbl_fn_806B4940_0000121C:
     addi r11, r1, 0x70
@@ -1932,7 +1932,7 @@ lbl_fn_806B4D20_00001A88:
     cmpwi r0, 0x0
     bne lbl_fn_806B4D20_00001AAC
     li r3, 0x5
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     cmpwi r3, 0x0
     bne lbl_fn_806B4D20_00001D5C
 lbl_fn_806B4D20_00001AAC:
@@ -1949,7 +1949,7 @@ lbl_fn_806B4D20_00001AAC:
     addi r4, r1, 0x10
     addi r5, r1, 0x1c
     li r6, 0x2f
-    bl fn_806AB920
+    bl net_formatString
     lwz r3, lbl_80860898@l(r22)
     lbz r0, 0x15(r3)
     lwz r6, 0x58(r3)
@@ -1988,7 +1988,7 @@ lbl_fn_806B4D20_00001B04:
     li r4, 0x0
     b lbl_fn_806B4D20_00001BC0
 lbl_fn_806B4D20_00001B74:
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     beq lbl_fn_806B4D20_00001BBC
     lwz r3, lbl_80860898@l(r22)
@@ -2026,8 +2026,8 @@ lbl_fn_806B4D20_00001BC0:
     addi r4, r1, 0x1c
     li r3, 0x5
     li r5, 0x0
-    bl fn_806ACE00
-    bl fn_806C5C10
+    bl net_sendSessionCommand
+    bl net_logConnectionEvent
     cmpwi r3, 0x0
     bne lbl_fn_806B4D20_00001D5C
     lis r3, lbl_80860898@ha
@@ -2050,7 +2050,7 @@ lbl_fn_806B4D20_00001C3C:
     bne lbl_fn_806B4D20_00001C68
     lwz r3, 0x7a8(r3)
     bl fn_806BC010
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     cmpwi r3, 0x0
     beq lbl_fn_806B4D20_00001D5C
     b lbl_fn_806B4D20_00001D5C
@@ -2113,10 +2113,10 @@ lbl_fn_806B4D20_00001D20:
     lbz r0, 0x15(r4)
     cmpwi r0, 0x0
     bne lbl_fn_806B4D20_00001D54
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     b lbl_fn_806B4D20_00001D58
 lbl_fn_806B4D20_00001D54:
-    bl fn_806C5C10
+    bl net_logConnectionEvent
 lbl_fn_806B4D20_00001D58:
     cmpwi r3, 0x0
 lbl_fn_806B4D20_00001D5C:
@@ -2145,7 +2145,7 @@ asm void fn_806B5860(void)
     cmpwi r0, 0x0
     addi r27, r27, lbl_807BE9D0@l
     beq lbl_fn_806B5860_00004934
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     beq lbl_fn_806B5860_00001DC8
     b lbl_fn_806B5860_00004934
@@ -2237,7 +2237,7 @@ lbl_fn_806B5860_00001ED4:
     lwz r3, lbl_80860898@l(r26)
     lwz r3, 0x4(r3)
     lwz r3, 0x0(r3)
-    bl fn_806EAC30
+    bl net_bindSessionCallback
     lwz r5, lbl_80860898@l(r26)
     li r0, 0x0
     lis r4, 0xffff
@@ -2257,7 +2257,7 @@ lbl_fn_806B5860_00001ED4:
     addi r4, r1, 0x5c
     addi r5, r1, 0x180
     li r6, 0x2f
-    bl fn_806AB920
+    bl net_formatString
     lwz r3, lbl_80860898@l(r26)
     lbz r0, 0x15(r3)
     lwz r6, 0x58(r3)
@@ -2296,7 +2296,7 @@ lbl_fn_806B5860_00001F8C:
     li r4, 0x0
     b lbl_fn_806B5860_00002048
 lbl_fn_806B5860_00001FFC:
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     beq lbl_fn_806B5860_00002044
     lwz r3, lbl_80860898@l(r26)
@@ -2334,13 +2334,13 @@ lbl_fn_806B5860_00002048:
     addi r4, r1, 0x180
     li r3, 0x1
     li r5, 0x0
-    bl fn_806ACE00
+    bl net_sendSessionCommand
     lis r3, lbl_80860898@ha
     lwz r25, lbl_80860898@l(r3)
     lwz r3, 0x7b0(r25)
     cntlzw r0, r3
     srwi r24, r0, 5
-    bl fn_806ACCF0
+    bl net_findSessionSlot
     lbz r4, 0x14(r25)
     mr r7, r3
     lwz r12, 0x8a0(r25)
@@ -2353,7 +2353,7 @@ lbl_fn_806B5860_00002048:
     li r4, 0x0
     mtctr r12
     bctrl
-    bl fn_806BBCA0
+    bl net_logSessionStatus
     b lbl_fn_806B5860_00004934
 lbl_fn_806B5860_000020DC:
     li r3, 0x0
@@ -2445,7 +2445,7 @@ lbl_fn_806B5860_000021EC:
     lwz r3, lbl_80860898@l(r28)
     lwz r3, 0x4(r3)
     lwz r3, 0x0(r3)
-    bl fn_806EAC30
+    bl net_bindSessionCallback
     lwz r5, lbl_80860898@l(r28)
     li r0, 0x0
     lis r4, 0xffff
@@ -2465,7 +2465,7 @@ lbl_fn_806B5860_000021EC:
     addi r4, r1, 0x50
     addi r5, r1, 0x158
     li r6, 0x2f
-    bl fn_806AB920
+    bl net_formatString
     lwz r3, lbl_80860898@l(r28)
     lbz r0, 0x15(r3)
     lwz r6, 0x58(r3)
@@ -2504,7 +2504,7 @@ lbl_fn_806B5860_000022A4:
     li r4, 0x0
     b lbl_fn_806B5860_00002360
 lbl_fn_806B5860_00002314:
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     beq lbl_fn_806B5860_0000235C
     lwz r3, lbl_80860898@l(r26)
@@ -2542,13 +2542,13 @@ lbl_fn_806B5860_00002360:
     addi r4, r1, 0x158
     li r3, 0x1
     li r5, 0x0
-    bl fn_806ACE00
+    bl net_sendSessionCommand
     lis r3, lbl_80860898@ha
     lwz r25, lbl_80860898@l(r3)
     lwz r3, 0x7b0(r25)
     cntlzw r0, r3
     srwi r24, r0, 5
-    bl fn_806ACCF0
+    bl net_findSessionSlot
     lbz r4, 0x14(r25)
     mr r7, r3
     lwz r12, 0x8a0(r25)
@@ -2561,7 +2561,7 @@ lbl_fn_806B5860_00002360:
     li r4, 0x0
     mtctr r12
     bctrl
-    bl fn_806BBCA0
+    bl net_logSessionStatus
     b lbl_fn_806B5860_00004934
 lbl_fn_806B5860_000023F4:
     lwz r3, 0x660(r4)
@@ -2571,10 +2571,10 @@ lbl_fn_806B5860_000023F4:
     lbz r0, 0x15(r4)
     cmpwi r0, 0x0
     bne lbl_fn_806B5860_00002418
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     b lbl_fn_806B5860_0000241C
 lbl_fn_806B5860_00002418:
-    bl fn_806C5C10
+    bl net_logConnectionEvent
 lbl_fn_806B5860_0000241C:
     cmpwi r3, 0x0
     beq lbl_fn_806B5860_000024A8
@@ -2650,10 +2650,10 @@ lbl_fn_806B5860_000024A8:
     lbz r0, 0x15(r4)
     cmpwi r0, 0x0
     bne lbl_fn_806B5860_00002540
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     b lbl_fn_806B5860_00002544
 lbl_fn_806B5860_00002540:
-    bl fn_806C5C10
+    bl net_logConnectionEvent
 lbl_fn_806B5860_00002544:
     cmpwi r3, 0x0
     beq lbl_fn_806B5860_0000419C
@@ -2711,7 +2711,7 @@ lbl_fn_806B5860_000025A8:
     lwz r3, lbl_80860898@l(r28)
     lwz r3, 0x7ac(r3)
     bl fn_806BC010
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     cmpwi r3, 0x0
     bne lbl_fn_806B5860_00004934
     lwz r3, lbl_80860898@l(r28)
@@ -2953,10 +2953,10 @@ lbl_fn_806B5860_00002994:
     lbz r0, 0x15(r4)
     cmpwi r0, 0x0
     bne lbl_fn_806B5860_000029C8
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     b lbl_fn_806B5860_000029CC
 lbl_fn_806B5860_000029C8:
-    bl fn_806C5C10
+    bl net_logConnectionEvent
 lbl_fn_806B5860_000029CC:
     cmpwi r3, 0x0
     beq lbl_fn_806B5860_0000419C
@@ -3226,10 +3226,10 @@ lbl_fn_806B5860_00002DAC:
     lbz r0, 0x15(r4)
     cmpwi r0, 0x0
     bne lbl_fn_806B5860_00002DE0
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     b lbl_fn_806B5860_00002DE4
 lbl_fn_806B5860_00002DE0:
-    bl fn_806C5C10
+    bl net_logConnectionEvent
 lbl_fn_806B5860_00002DE4:
     cmpwi r3, 0x0
     bne lbl_fn_806B5860_00004934
@@ -3321,7 +3321,7 @@ lbl_fn_806B5860_00002EE8:
     lwz r3, lbl_80860898@l(r26)
     lwz r3, 0x4(r3)
     lwz r3, 0x0(r3)
-    bl fn_806EAC30
+    bl net_bindSessionCallback
     lwz r5, lbl_80860898@l(r26)
     li r0, 0x0
     lis r4, 0xffff
@@ -3341,7 +3341,7 @@ lbl_fn_806B5860_00002EE8:
     addi r4, r1, 0x44
     addi r5, r1, 0x130
     li r6, 0x2f
-    bl fn_806AB920
+    bl net_formatString
     lwz r3, lbl_80860898@l(r26)
     lbz r0, 0x15(r3)
     lwz r6, 0x58(r3)
@@ -3380,7 +3380,7 @@ lbl_fn_806B5860_00002FA0:
     li r4, 0x0
     b lbl_fn_806B5860_0000305C
 lbl_fn_806B5860_00003010:
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     beq lbl_fn_806B5860_00003058
     lwz r3, lbl_80860898@l(r26)
@@ -3418,13 +3418,13 @@ lbl_fn_806B5860_0000305C:
     addi r4, r1, 0x130
     li r3, 0x1
     li r5, 0x0
-    bl fn_806ACE00
+    bl net_sendSessionCommand
     lis r3, lbl_80860898@ha
     lwz r25, lbl_80860898@l(r3)
     lwz r3, 0x7b0(r25)
     cntlzw r0, r3
     srwi r24, r0, 5
-    bl fn_806ACCF0
+    bl net_findSessionSlot
     lbz r4, 0x14(r25)
     mr r7, r3
     lwz r12, 0x8a0(r25)
@@ -3437,7 +3437,7 @@ lbl_fn_806B5860_0000305C:
     li r4, 0x0
     mtctr r12
     bctrl
-    bl fn_806BBCA0
+    bl net_logSessionStatus
     b lbl_fn_806B5860_00004934
 lbl_fn_806B5860_000030F0:
     lis r3, lbl_80860898@ha
@@ -3523,7 +3523,7 @@ lbl_fn_806B5860_000031D4:
     lwz r3, lbl_80860898@l(r28)
     lwz r3, 0x4(r3)
     lwz r3, 0x0(r3)
-    bl fn_806EAC30
+    bl net_bindSessionCallback
     lwz r5, lbl_80860898@l(r28)
     li r0, 0x0
     lis r4, 0xffff
@@ -3543,7 +3543,7 @@ lbl_fn_806B5860_000031D4:
     addi r4, r1, 0x38
     addi r5, r1, 0x108
     li r6, 0x2f
-    bl fn_806AB920
+    bl net_formatString
     lwz r3, lbl_80860898@l(r28)
     lbz r0, 0x15(r3)
     lwz r6, 0x58(r3)
@@ -3582,7 +3582,7 @@ lbl_fn_806B5860_00003280:
     li r4, 0x0
     b lbl_fn_806B5860_0000333C
 lbl_fn_806B5860_000032F0:
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     beq lbl_fn_806B5860_00003338
     lwz r3, lbl_80860898@l(r28)
@@ -3620,13 +3620,13 @@ lbl_fn_806B5860_0000333C:
     addi r4, r1, 0x108
     li r3, 0x1
     li r5, 0x0
-    bl fn_806ACE00
+    bl net_sendSessionCommand
     lis r3, lbl_80860898@ha
     lwz r25, lbl_80860898@l(r3)
     lwz r3, 0x7b0(r25)
     cntlzw r0, r3
     srwi r24, r0, 5
-    bl fn_806ACCF0
+    bl net_findSessionSlot
     lbz r4, 0x14(r25)
     mr r7, r3
     lwz r12, 0x8a0(r25)
@@ -3639,7 +3639,7 @@ lbl_fn_806B5860_0000333C:
     li r4, 0x0
     mtctr r12
     bctrl
-    bl fn_806BBCA0
+    bl net_logSessionStatus
     b lbl_fn_806B5860_0000419C
 lbl_fn_806B5860_000033D0:
     addi r4, r27, 0x4c8
@@ -3964,7 +3964,7 @@ lbl_fn_806B5860_000037FC:
     lwz r3, lbl_80860898@l(r31)
     lwz r3, 0x4(r3)
     lwz r3, 0x0(r3)
-    bl fn_806EAC30
+    bl net_bindSessionCallback
     lwz r5, lbl_80860898@l(r31)
     lis r4, 0xffff
     li r3, 0x19
@@ -3983,7 +3983,7 @@ lbl_fn_806B5860_000037FC:
     addi r4, r1, 0x2c
     addi r5, r1, 0xe0
     li r6, 0x2f
-    bl fn_806AB920
+    bl net_formatString
     lwz r3, lbl_80860898@l(r31)
     lbz r0, 0x15(r3)
     lwz r6, 0x58(r3)
@@ -4022,7 +4022,7 @@ lbl_fn_806B5860_00003904:
     li r4, 0x0
     b lbl_fn_806B5860_000039C0
 lbl_fn_806B5860_00003974:
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     beq lbl_fn_806B5860_000039BC
     lwz r3, lbl_80860898@l(r28)
@@ -4060,13 +4060,13 @@ lbl_fn_806B5860_000039C0:
     addi r4, r1, 0xe0
     li r3, 0x1
     li r5, 0x0
-    bl fn_806ACE00
+    bl net_sendSessionCommand
     lis r3, lbl_80860898@ha
     lwz r25, lbl_80860898@l(r3)
     lwz r3, 0x7b0(r25)
     cntlzw r0, r3
     srwi r24, r0, 5
-    bl fn_806ACCF0
+    bl net_findSessionSlot
     lbz r4, 0x14(r25)
     mr r7, r3
     lwz r12, 0x8a0(r25)
@@ -4079,7 +4079,7 @@ lbl_fn_806B5860_000039C0:
     li r4, 0x0
     mtctr r12
     bctrl
-    bl fn_806BBCA0
+    bl net_logSessionStatus
     b lbl_fn_806B5860_0000419C
     lwz r0, 0x58(r31)
     cmpwi r0, 0x0
@@ -4125,7 +4125,7 @@ lbl_fn_806B5860_00003AB4:
     lwz r3, lbl_80860898@l(r28)
     lwz r3, 0x4(r3)
     lwz r3, 0x0(r3)
-    bl fn_806EAC30
+    bl net_bindSessionCallback
     lwz r5, lbl_80860898@l(r28)
     li r0, 0x0
     lis r4, 0xffff
@@ -4145,7 +4145,7 @@ lbl_fn_806B5860_00003AB4:
     addi r4, r1, 0x20
     addi r5, r1, 0xb8
     li r6, 0x2f
-    bl fn_806AB920
+    bl net_formatString
     lwz r3, lbl_80860898@l(r28)
     lbz r0, 0x15(r3)
     lwz r6, 0x58(r3)
@@ -4184,7 +4184,7 @@ lbl_fn_806B5860_00003B60:
     li r4, 0x0
     b lbl_fn_806B5860_00003C1C
 lbl_fn_806B5860_00003BD0:
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     beq lbl_fn_806B5860_00003C18
     lwz r3, lbl_80860898@l(r28)
@@ -4222,13 +4222,13 @@ lbl_fn_806B5860_00003C1C:
     addi r4, r1, 0xb8
     li r3, 0x1
     li r5, 0x0
-    bl fn_806ACE00
+    bl net_sendSessionCommand
     lis r3, lbl_80860898@ha
     lwz r25, lbl_80860898@l(r3)
     lwz r3, 0x7b0(r25)
     cntlzw r0, r3
     srwi r24, r0, 5
-    bl fn_806ACCF0
+    bl net_findSessionSlot
     lbz r4, 0x14(r25)
     mr r7, r3
     lwz r12, 0x8a0(r25)
@@ -4241,7 +4241,7 @@ lbl_fn_806B5860_00003C1C:
     li r4, 0x0
     mtctr r12
     bctrl
-    bl fn_806BBCA0
+    bl net_logSessionStatus
     b lbl_fn_806B5860_0000419C
 lbl_fn_806B5860_00003CB0:
     addi r4, r27, 0x548
@@ -4444,7 +4444,7 @@ lbl_fn_806B5860_00003EEC:
     lwz r3, lbl_80860898@l(r28)
     lwz r3, 0x4(r3)
     lwz r3, 0x0(r3)
-    bl fn_806EAC30
+    bl net_bindSessionCallback
     lwz r5, lbl_80860898@l(r28)
     lis r4, 0xffff
     li r3, 0x19
@@ -4463,7 +4463,7 @@ lbl_fn_806B5860_00003EEC:
     addi r4, r1, 0x14
     addi r5, r1, 0x90
     li r6, 0x2f
-    bl fn_806AB920
+    bl net_formatString
     lwz r3, lbl_80860898@l(r28)
     lbz r0, 0x15(r3)
     lwz r6, 0x58(r3)
@@ -4502,7 +4502,7 @@ lbl_fn_806B5860_00004014:
     li r4, 0x0
     b lbl_fn_806B5860_000040D0
 lbl_fn_806B5860_00004084:
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     beq lbl_fn_806B5860_000040CC
     lwz r3, lbl_80860898@l(r28)
@@ -4540,13 +4540,13 @@ lbl_fn_806B5860_000040D0:
     addi r4, r1, 0x90
     li r3, 0x1
     li r5, 0x0
-    bl fn_806ACE00
+    bl net_sendSessionCommand
     lis r3, lbl_80860898@ha
     lwz r25, lbl_80860898@l(r3)
     lwz r3, 0x7b0(r25)
     cntlzw r0, r3
     srwi r24, r0, 5
-    bl fn_806ACCF0
+    bl net_findSessionSlot
     lbz r4, 0x14(r25)
     mr r7, r3
     lwz r12, 0x8a0(r25)
@@ -4559,7 +4559,7 @@ lbl_fn_806B5860_000040D0:
     li r4, 0x0
     mtctr r12
     bctrl
-    bl fn_806BBCA0
+    bl net_logSessionStatus
     b lbl_fn_806B5860_0000419C
 lbl_fn_806B5860_00004164:
     lwz r5, lbl_80860898@l(r28)
@@ -4571,7 +4571,7 @@ lbl_fn_806B5860_00004164:
     bl net_formatLog
     li r3, 0x0
     bl fn_806BC010
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     cmpwi r3, 0x0
     bne lbl_fn_806B5860_00004934
     lwz r3, lbl_80860898@l(r28)
@@ -4745,10 +4745,10 @@ lbl_fn_806B5860_00004330:
     lbz r0, 0x15(r4)
     cmpwi r0, 0x0
     bne lbl_fn_806B5860_0000441C
-    bl fn_806C5EB0
+    bl net_formatSessionLog
     b lbl_fn_806B5860_00004420
 lbl_fn_806B5860_0000441C:
-    bl fn_806C5C10
+    bl net_logConnectionEvent
 lbl_fn_806B5860_00004420:
     cmpwi r3, 0x0
     beq lbl_fn_806B5860_00004450
@@ -4882,7 +4882,7 @@ lbl_fn_806B5860_0000459C:
     lwz r3, lbl_80860898@l(r31)
     lwz r3, 0x4(r3)
     lwz r3, 0x0(r3)
-    bl fn_806EAC30
+    bl net_bindSessionCallback
     lwz r5, lbl_80860898@l(r31)
     li r0, 0x0
     lis r4, 0xffff
@@ -4902,7 +4902,7 @@ lbl_fn_806B5860_0000459C:
     addi r4, r1, 0x8
     addi r5, r1, 0x68
     li r6, 0x2f
-    bl fn_806AB920
+    bl net_formatString
     lwz r3, lbl_80860898@l(r31)
     lbz r0, 0x15(r3)
     lwz r6, 0x58(r3)
@@ -4941,7 +4941,7 @@ lbl_fn_806B5860_0000468C:
     li r4, 0x0
     b lbl_fn_806B5860_00004748
 lbl_fn_806B5860_000046FC:
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     beq lbl_fn_806B5860_00004744
     lwz r3, lbl_80860898@l(r28)
@@ -4979,13 +4979,13 @@ lbl_fn_806B5860_00004748:
     addi r4, r1, 0x68
     li r3, 0x1
     li r5, 0x0
-    bl fn_806ACE00
+    bl net_sendSessionCommand
     lis r3, lbl_80860898@ha
     lwz r25, lbl_80860898@l(r3)
     lwz r3, 0x7b0(r25)
     cntlzw r0, r3
     srwi r24, r0, 5
-    bl fn_806ACCF0
+    bl net_findSessionSlot
     lbz r4, 0x14(r25)
     mr r7, r3
     lwz r12, 0x8a0(r25)
@@ -4998,7 +4998,7 @@ lbl_fn_806B5860_00004748:
     li r4, 0x0
     mtctr r12
     bctrl
-    bl fn_806BBCA0
+    bl net_logSessionStatus
 lbl_fn_806B5860_000047D8:
     addi r4, r27, 0x604
     li r3, 0x400

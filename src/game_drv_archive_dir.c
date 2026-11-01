@@ -12,7 +12,7 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void scene_transformPoint(void);
 extern void fn_8000D9F8(void);
-extern void fn_8000DCF4(void);
+extern void scene_getCamera(void);
 extern void vec3_assign(void);
 extern void vec3_sub(void);
 extern void script_executeOpcode(void);
@@ -31,13 +31,13 @@ extern void viewport_getNextSequenceId(void);
 extern void fn_80139EFC(void);
 extern void fn_80139F4C(void);
 extern void fn_8013A16C(void);
-extern void fn_8013C480(void);
+extern void npc_isInteractionReady(void);
 extern void battle_calcAABBCenter(void);
-extern void fn_801A03E0(void);
+extern void bgm_getGlobalManager(void);
 extern void fn_801A03EC(void);
 extern void fn_801A0408(void);
 extern void fn_801F4818(void);
-extern void fn_801F4AA0(void);
+extern void save_findSlotTask(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
@@ -616,7 +616,7 @@ lbl_fn_805AB82C_000006C0:
     cmpwi r3, 0x0
     beq lbl_fn_805AB82C_000006D8
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     b lbl_fn_805AB82C_000006DC
 lbl_fn_805AB82C_000006D8:
     li r3, 0x0
@@ -828,10 +828,10 @@ lbl_fn_805AB82C_000009B8:
 lbl_fn_805AB82C_000009D8:
     cmpwi r26, 0x1
     bne lbl_fn_805AB82C_00000A7C
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_805AB82C_000009F8
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     bl fn_801A0408
     b lbl_fn_805AB82C_000009FC
 lbl_fn_805AB82C_000009F8:
@@ -841,7 +841,7 @@ lbl_fn_805AB82C_000009FC:
     b lbl_fn_805AB82C_00000A74
 lbl_fn_805AB82C_00000A04:
     mr r3, r28
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_805AB82C_00000A68
     mr r3, r28
@@ -2045,13 +2045,13 @@ lbl_fn_805AC75C_00001A54:
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
     lwz r3, 0x15b0(r15)
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lfs f2, lbl_808882F4
     addi r4, r17, 0x164
     lwz r3, 0x15b8(r15)
     fmr f3, f2
     lfs f1, lbl_80888354
-    bl fn_801F4AA0
+    bl save_findSlotTask
     b lbl_fn_805AC75C_00001B94
 lbl_fn_805AC75C_00001B14:
     lfs f0, lbl_80888358
@@ -2066,13 +2066,13 @@ lbl_fn_805AC75C_00001B14:
     stw r0, 0x38(r3)
     lfs f3, lbl_80888360
     lwz r3, 0x15b0(r15)
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lwz r3, 0x15b8(r15)
     addi r4, r17, 0x164
     lfs f1, lbl_80888354
     lfs f2, lbl_8088835C
     lfs f3, lbl_80888360
-    bl fn_801F4AA0
+    bl save_findSlotTask
     b lbl_fn_805AC75C_00001B94
 lbl_fn_805AC75C_00001B64:
     lfs f1, lbl_80888354
@@ -2080,13 +2080,13 @@ lbl_fn_805AC75C_00001B64:
     lwz r3, 0x15b0(r15)
     fmr f2, f1
     fmr f3, f1
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lfs f1, lbl_80888354
     addi r4, r17, 0x164
     lwz r3, 0x15b8(r15)
     fmr f2, f1
     fmr f3, f1
-    bl fn_801F4AA0
+    bl save_findSlotTask
 lbl_fn_805AC75C_00001B94:
     cmpwi r14, 0x0
     bgt lbl_fn_805AC75C_00001BF8

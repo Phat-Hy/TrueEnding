@@ -29,7 +29,7 @@ extern void bta_sys_traceDebug(void);
 extern void fn_80629870(void);
 extern void fn_806298B0(void);
 extern void fn_806298D0(void);
-extern void fn_80629E20(void);
+extern void bta_sys_sendmsg(void);
 extern void fn_80629E90(void);
 extern void fn_8062FE10(void);
 extern void fn_80630124(void);
@@ -1220,7 +1220,7 @@ lbl_fn_80642D8C_00000D30:
     stw r0, 0x4(r28)
     li r4, 0x3
     li r5, 0x3c
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     b lbl_fn_80642D8C_00000E94
     lis r3, lbl_808230E0@ha
     lbz r0, lbl_808230E0@l(r3)
@@ -1349,7 +1349,7 @@ lbl_fn_80643020_00000F50:
     stw r0, 0x4(r31)
     li r4, 0x3
     li r5, 0x3c
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     mr r3, r31
     bl fn_80646894
     li r0, 0x0
@@ -1434,7 +1434,7 @@ lbl_fn_80643190_00001068:
     stw r0, 0x4(r29)
     li r4, 0x3
     li r5, 0x3c
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     lis r3, lbl_808230E0@ha
     lbz r0, lbl_808230E0@l(r3)
     cmplwi r0, 0x3
@@ -1552,7 +1552,7 @@ lbl_fn_806432F8_00001230:
     sth r5, 0x16(r29)
     li r5, 0x1e
     stw r0, 0x4(r29)
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     lis r3, lbl_808230E0@ha
     lbz r0, lbl_808230E0@l(r3)
     cmplwi r0, 0x3
@@ -1573,7 +1573,7 @@ lbl_fn_806432F8_00001294:
     addi r3, r29, 0x18
     li r4, 0x3
     li r5, 0x78
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     lwz r3, 0x30(r29)
     lwz r0, 0xc(r3)
     cmpwi r0, 0x0
@@ -1714,7 +1714,7 @@ lbl_fn_8064353C_0000149C:
     stw r0, 0x4(r31)
     li r4, 0x3
     li r5, 0x1e
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     b lbl_fn_8064353C_00001588
 lbl_fn_8064353C_000014C8:
     lhz r5, 0xc(r28)
@@ -1723,7 +1723,7 @@ lbl_fn_8064353C_000014C8:
     addi r3, r31, 0x18
     li r4, 0x3
     li r5, 0x78
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     b lbl_fn_8064353C_00001588
     lhz r4, 0xa(r28)
     mr r3, r31
@@ -1765,7 +1765,7 @@ lbl_fn_8064353C_0000153C:
     stw r0, 0x4(r31)
     li r4, 0x3
     li r5, 0x1e
-    bl fn_80629E20
+    bl bta_sys_sendmsg
 lbl_fn_8064353C_00001588:
     addi r11, r1, 0x20
     bl _restgpr_27
@@ -1911,7 +1911,7 @@ lbl_fn_80643714_00001770:
     addi r3, r29, 0x18
     li r4, 0x3
     li r5, 0x1e
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     li r0, 0x8
     lis r3, lbl_808230E0@ha
     stw r0, 0x4(r29)
@@ -1940,7 +1940,7 @@ lbl_fn_80643714_000017C8:
     addi r3, r29, 0x18
     li r4, 0x3
     li r5, 0x1e
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     b lbl_fn_80643714_00001950
     mr r3, r29
     mr r4, r30
@@ -1968,7 +1968,7 @@ lbl_fn_80643714_0000184C:
     addi r3, r29, 0x18
     li r4, 0x3
     li r5, 0x1e
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     b lbl_fn_80643714_00001950
     mr r3, r29
     bl fn_80647294
@@ -1977,7 +1977,7 @@ lbl_fn_80643714_0000184C:
     stw r0, 0x4(r29)
     li r4, 0x3
     li r5, 0x1e
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     b lbl_fn_80643714_00001950
     lis r3, lbl_808230E0@ha
     lbz r0, lbl_808230E0@l(r3)
@@ -2106,7 +2106,7 @@ lbl_fn_80643ADC_00001A08:
     li r4, 0x3
     li r5, 0x1e
     stb r0, 0x34(r31)
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     mr r3, r31
     mr r4, r27
     bl fn_80647BF8
@@ -2133,7 +2133,7 @@ lbl_fn_80643ADC_00001AA4:
     stw r0, 0x4(r31)
     li r4, 0x3
     li r5, 0x1e
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     lis r3, lbl_808230E0@ha
     lbz r0, lbl_808230E0@l(r3)
     cmplwi r0, 0x3
@@ -2165,7 +2165,7 @@ lbl_fn_80643ADC_00001B00:
     stw r0, 0x4(r31)
     li r4, 0x3
     li r5, 0x1e
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     b lbl_fn_80643ADC_00001BAC
     lhz r0, 0x14(r31)
     mr r3, r31
@@ -2186,7 +2186,7 @@ lbl_fn_80643ADC_00001B00:
     li r4, 0x3
     li r5, 0x1e
     stb r0, 0x34(r31)
-    bl fn_80629E20
+    bl bta_sys_sendmsg
 lbl_fn_80643ADC_00001BAC:
     addi r11, r1, 0x20
     bl _restgpr_26
@@ -2593,7 +2593,7 @@ lbl_fn_8064421C_00002134:
     stw r0, 0x4(r31)
     li r4, 0x2
     li r5, 0x3c
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     b lbl_fn_8064421C_000021E0
 lbl_fn_8064421C_0000216C:
     lwz r0, 0x4(r3)
@@ -2752,7 +2752,7 @@ lbl_fn_80644370_00002360:
     addi r3, r31, 0x10
     li r4, 0x2
     li r5, 0x1e
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     b lbl_fn_80644370_00002410
 lbl_fn_80644370_00002398:
     lwz r0, 0x8(r31)
@@ -2761,7 +2761,7 @@ lbl_fn_80644370_00002398:
     addi r3, r31, 0x10
     li r4, 0x2
     li r5, 0x3c
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     b lbl_fn_80644370_00002410
 lbl_fn_80644370_000023B8:
     cmplwi r0, 0x9
@@ -3047,7 +3047,7 @@ lbl_fn_80644788_00002744:
     beq lbl_fn_80644788_00002770
     addi r3, r30, 0x10
     li r4, 0x2
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     b lbl_fn_80644788_00002770
 lbl_fn_80644788_00002760:
     mr r3, r30
@@ -3243,7 +3243,7 @@ lbl_fn_80644A04_000029AC:
     addi r3, r29, 0x10
     li r4, 0x2
     li r5, 0x1
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     b lbl_fn_80644A04_00002B44
 lbl_fn_80644A04_00002A10:
     lis r28, lbl_808230E0@ha
@@ -3289,7 +3289,7 @@ lbl_fn_80644A04_00002A80:
     addi r3, r29, 0x10
     li r4, 0x2
     li r5, 0x2
-    bl fn_80629E20
+    bl bta_sys_sendmsg
 lbl_fn_80644A04_00002AB4:
     lbz r0, 0x41(r29)
     cmpwi r0, 0x0
@@ -3855,7 +3855,7 @@ asm void fn_80645364(void)
     li r4, 0x2
     li r5, 0x78
     addi r3, r3, 0x10
-    bl fn_80629E20
+    bl bta_sys_sendmsg
 lbl_fn_80645364_00003224:
     lwz r0, 0x14(r1)
     mtlr r0
@@ -4025,7 +4025,7 @@ lbl_fn_806454BC_00003458:
     addi r3, r28, 0x7cc
     li r4, 0x4
     li r5, 0x1
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     b lbl_fn_806454BC_00003660
 lbl_fn_806454BC_00003494:
     mr r3, r27
@@ -4981,7 +4981,7 @@ lbl_fn_806462AC_00004220:
     addi r3, r3, lbl_808230E0@l
     li r5, 0x1
     addi r3, r3, 0x7cc
-    bl fn_80629E20
+    bl bta_sys_sendmsg
 lbl_fn_806462AC_0000424C:
     addi r11, r1, 0x20
     bl _restgpr_27
@@ -6629,7 +6629,7 @@ lbl_fn_806478E4_000058E4:
     beq lbl_fn_806478E4_000058FC
     addi r3, r31, 0x10
     li r4, 0x2
-    bl fn_80629E20
+    bl bta_sys_sendmsg
 lbl_fn_806478E4_000058FC:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -7070,7 +7070,7 @@ lbl_fn_80647F3C_00005E60:
     addi r3, r31, 0x10
     li r4, 0x2
     li r5, 0xa
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     li r3, 0x1
     b lbl_fn_80647F3C_00005EC8
 lbl_fn_80647F3C_00005EB0:
@@ -7140,7 +7140,7 @@ lbl_fn_80648054_00005F84:
     addi r3, r30, 0x10
     li r4, 0x2
     li r5, 0x3c
-    bl fn_80629E20
+    bl bta_sys_sendmsg
     li r3, 0x1
 lbl_fn_80648054_00005F98:
     lwz r0, 0x14(r1)

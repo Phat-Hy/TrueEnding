@@ -7,7 +7,7 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80069BF4(void);
 extern void boss_decodePhaseBitfield(void);
-extern void fn_8006B2D8(void);
+extern void boss_parseStateCondition(void);
 extern void str_assignBuffer(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -59,7 +59,7 @@ void fn_801FEA9C(void);
 void fn_801FEB1C(void);
 void fn_801FEB9C(void);
 void fn_801FEC08(void);
-void fn_801FEC74(void);
+void thread_findQueueTaskByName(void);
 void thread_findAndNotify(void);
 void thread_findAndNotifySlot(void);
 void fn_801FED70(void);
@@ -208,7 +208,7 @@ lbl_fn_801FD5A0_000001C4:
 lbl_fn_801FD5A0_000001D8:
     addi r3, r1, 0x4c
     addi r4, r1, 0x64
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0x64(r1)
     srwi. r3, r0, 31
     bne lbl_fn_801FD5A0_00000214
@@ -545,7 +545,7 @@ lbl_fn_801FDA20_00000658:
 lbl_fn_801FDA20_0000066C:
     addi r3, r1, 0x4c
     addi r4, r1, 0x64
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0x64(r1)
     srwi. r3, r0, 31
     bne lbl_fn_801FDA20_000006A8
@@ -1804,7 +1804,7 @@ lbl_fn_801FEC08_00001730:
     blr
 }
 
-asm void fn_801FEC74(void)
+asm void thread_findQueueTaskByName(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1818,21 +1818,21 @@ asm void fn_801FEC74(void)
     lwz r6, 0x38(r31)
     slwi r0, r0, 2
     add r4, r6, r0
-    b lbl_fn_801FEC74_00001790
-lbl_fn_801FEC74_00001774:
+    b lbl_thread_findQueueTaskByName_00001790
+lbl_thread_findQueueTaskByName_00001774:
     lwz r5, 0x0(r6)
     lwz r0, 0x0(r5)
     cmplw r3, r0
-    bne lbl_fn_801FEC74_0000178C
+    bne lbl_thread_findQueueTaskByName_0000178C
     mr r3, r5
-    b lbl_fn_801FEC74_0000179C
-lbl_fn_801FEC74_0000178C:
+    b lbl_thread_findQueueTaskByName_0000179C
+lbl_thread_findQueueTaskByName_0000178C:
     addi r6, r6, 0x4
-lbl_fn_801FEC74_00001790:
+lbl_thread_findQueueTaskByName_00001790:
     cmplw r6, r4
-    bne lbl_fn_801FEC74_00001774
+    bne lbl_thread_findQueueTaskByName_00001774
     li r3, 0x0
-lbl_fn_801FEC74_0000179C:
+lbl_thread_findQueueTaskByName_0000179C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

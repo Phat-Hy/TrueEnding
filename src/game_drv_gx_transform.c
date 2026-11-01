@@ -9,22 +9,22 @@ extern void fn_805D7F90(void);
 extern void fn_805DB3D0(void);
 extern void fn_805DB4B0(void);
 extern void GXSetVtxDesc(void);
-extern void fn_806134E0(void);
+extern void __GXInitVtxDesc(void);
 extern void GXSetVtxAttrFmt(void);
 extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
-extern void fn_80614790(void);
+extern void GXBegin(void);
 extern void GXInitLightDistAttn(void);
 extern void GXInitLightSpot(void);
 extern void GXInitLightObj(void);
 extern void GXClampLightAngle(void);
 extern void fn_806165B0(void);
-extern void fn_80617200(void);
+extern void GXSetTexCoordScaleManually(void);
 extern void GXInitTexObjDefault(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
-extern void fn_806174C0(void);
+extern void GXSetTevIndTile(void);
 extern void fn_80617520(void);
 extern void GXSetTevSwapMode(void);
 extern void GXSetTevSwapModeTable(void);
@@ -57,22 +57,22 @@ extern u8 lbl_80808081[];
 void fn_805D8E70(void);
 void fn_805D8EC0(void);
 void fn_805D9010(void);
-void fn_805D9190(void);
-void fn_805D91A0(void);
+f32 fn_805D9190(void *p);
+f32 fn_805D91A0(void *p);
 void fn_805D91B0(void);
 void fn_805D9280(void);
 void fn_805D92F0(void);
 void fn_805D9360(void);
-void fn_805D93D0(void);
-void fn_805D93E0(void);
+u8 fn_805D93D0(void *p);
+f32 fn_805D93E0(void *p);
 void fn_805D93F0(void);
-void fn_805D9530(void);
-void fn_805D9540(void);
-void fn_805D9550(void);
-void fn_805D9560(void);
-void fn_805D9570(void);
-void fn_805D9580(void);
-void fn_805D9590(void);
+void fn_805D9530(void *p, f32 a, f32 b);
+void fn_805D9540(void *p, f32 a);
+void fn_805D9550(void *p, f32 a);
+void fn_805D9560(void *p, f32 val);
+void fn_805D9570(void *p, f32 val);
+f32 fn_805D9580(void *p);
+f32 fn_805D9590(void *p);
 void fn_805D95A0(void);
 void fn_805D9830(void);
 void fn_805D9B30(void);
@@ -90,29 +90,29 @@ void fn_805D9F00(void);
 void fn_805DA050(void);
 void fn_805DA160(void);
 void fn_805DA1B0(void);
-void fn_805DA1F0(void);
-void fn_805DA200(void);
-void fn_805DA210(void);
-void fn_805DA220(void);
+void fn_805DA1F0(void *p, u32 a, u32 b);
+u8 fn_805DA200(void *p);
+u8 fn_805DA210(void *p);
+u8 fn_805DA220(void *p);
 void fn_805DA230(void);
 void fn_805DA250(void);
-void fn_805DA270(void);
-void fn_805DA280(void);
-void fn_805DA290(void);
-void fn_805DA2A0(void);
-void fn_805DA2B0(void);
-void fn_805DA2C0(void);
+u8 fn_805DA270(void *p);
+u8 fn_805DA280(void *p);
+u8 fn_805DA290(void *p);
+u32 fn_805DA2A0(void);
+u16 fn_805DA2B0(void *p);
+s8 fn_805DA2C0(void *p);
 void fn_805DA2D0(void);
 void fn_805DA2F0(void);
 void fn_805DA310(void);
-void fn_805DA3B0(void);
+void fn_805DA3B0(void *p, u8 val);
 void fn_805DA3C0(void);
 void fn_805DA410(void);
 void fn_805DA510(void);
-void fn_805DA5C0(void);
+u8 fn_805DA5C0(void *p);
 void fn_805DA5D0(void);
 void fn_805DA6A0(void);
-void fn_805DA7B0(void);
+void fn_805DA7B0(void *p);
 void fn_805DA7C0(void);
 void fn_805DA800(void);
 
@@ -340,18 +340,14 @@ lbl_fn_805D9010_00000278:
     blr
 }
 
-asm void fn_805D9190(void)
+f32 fn_805D9190(void *p)
 {
-    nofralloc
-    lfs f1, 0x24(r3)
-    blr
+    return *(f32 *)((u8 *)p + 0x24);
 }
 
-asm void fn_805D91A0(void)
+f32 fn_805D91A0(void *p)
 {
-    nofralloc
-    lfs f1, 0x28(r3)
-    blr
+    return *(f32 *)((u8 *)p + 0x28);
 }
 
 asm void fn_805D91B0(void)
@@ -501,18 +497,14 @@ asm void fn_805D9360(void)
     blr
 }
 
-asm void fn_805D93D0(void)
+u8 fn_805D93D0(void *p)
 {
-    nofralloc
-    lbz r3, 0x43(r3)
-    blr
+    return *(u8 *)((u8 *)p + 0x43);
 }
 
-asm void fn_805D93E0(void)
+f32 fn_805D93E0(void *p)
 {
-    nofralloc
-    lfs f1, 0x44(r3)
-    blr
+    return *(f32 *)((u8 *)p + 0x44);
 }
 
 asm void fn_805D93F0(void)
@@ -601,58 +593,40 @@ lbl_fn_805D93F0_00000674:
     blr
 }
 
-asm void fn_805D9530(void)
+void fn_805D9530(void *p, f32 a, f32 b)
 {
-    nofralloc
-    stfs f1, 0x2c(r3)
-    stfs f2, 0x30(r3)
-    blr
+    *(f32 *)((u8 *)p + 0x2c) = a;
+    *(f32 *)((u8 *)p + 0x30) = b;
 }
 
-asm void fn_805D9540(void)
+void fn_805D9540(void *p, f32 a)
 {
-    nofralloc
-    stfs f1, 0x2c(r3)
-    blr
+    *(f32 *)((u8 *)p + 0x2c) = a;
 }
 
-asm void fn_805D9550(void)
+void fn_805D9550(void *p, f32 a)
 {
-    nofralloc
-    stfs f1, 0x30(r3)
-    blr
+    *(f32 *)((u8 *)p + 0x30) = a;
 }
 
-asm void fn_805D9560(void)
+void fn_805D9560(void *p, f32 val)
 {
-    nofralloc
-    lfs f0, 0x2c(r3)
-    fadds f0, f0, f1
-    stfs f0, 0x2c(r3)
-    blr
+    *(f32 *)((u8 *)p + 0x2c) += val;
 }
 
-asm void fn_805D9570(void)
+void fn_805D9570(void *p, f32 val)
 {
-    nofralloc
-    lfs f0, 0x30(r3)
-    fadds f0, f0, f1
-    stfs f0, 0x30(r3)
-    blr
+    *(f32 *)((u8 *)p + 0x30) += val;
 }
 
-asm void fn_805D9580(void)
+f32 fn_805D9580(void *p)
 {
-    nofralloc
-    lfs f1, 0x2c(r3)
-    blr
+    return *(f32 *)((u8 *)p + 0x2c);
 }
 
-asm void fn_805D9590(void)
+f32 fn_805D9590(void *p)
 {
-    nofralloc
-    lfs f1, 0x30(r3)
-    blr
+    return *(f32 *)((u8 *)p + 0x30);
 }
 
 asm void fn_805D95A0(void)
@@ -776,7 +750,7 @@ lbl_fn_805D95A0_000008F0:
     li r3, 0x80
     li r4, 0x0
     li r5, 0x4
-    bl fn_80614790
+    bl GXBegin
     lis r3, 0xcc01
     stfs f27, -0x8000(r3)
     stfs f28, -0x8000(r3)
@@ -893,7 +867,7 @@ lbl_fn_805D9830_00000A00:
     li r8, 0x7d
     bl __GXSetVtxDesc
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -953,7 +927,7 @@ lbl_fn_805D9830_00000A00:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x1
     li r4, 0xff
     li r5, 0xff
@@ -984,7 +958,7 @@ lbl_fn_805D9830_00000A00:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
@@ -1003,7 +977,7 @@ lbl_fn_805D9830_00000A00:
     li r6, 0x2
     li r7, 0xf
     bl GXSetVtxAttrFmt
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -1547,36 +1521,28 @@ lbl_fn_805DA1B0_00001368:
     blr
 }
 
-asm void fn_805DA1F0(void)
+void fn_805DA1F0(void *p, u32 a, u32 b)
 {
-    nofralloc
-    stw r4, 0x10(r3)
-    stw r5, 0x14(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x10) = a;
+    *(u32 *)((u8 *)p + 0x14) = b;
 }
 
-asm void fn_805DA200(void)
+u8 fn_805DA200(void *p)
 {
-    nofralloc
-    lwz r3, 0x14(r3)
-    lbz r3, 0x15(r3)
-    blr
+    void *sub = *(void **)((u8 *)p + 0x14);
+    return *(u8 *)((u8 *)sub + 0x15);
 }
 
-asm void fn_805DA210(void)
+u8 fn_805DA210(void *p)
 {
-    nofralloc
-    lwz r3, 0x14(r3)
-    lbz r3, 0x14(r3)
-    blr
+    void *sub = *(void **)((u8 *)p + 0x14);
+    return *(u8 *)((u8 *)sub + 0x14);
 }
 
-asm void fn_805DA220(void)
+u8 fn_805DA220(void *p)
 {
-    nofralloc
-    lwz r3, 0x14(r3)
-    lbz r3, 0x16(r3)
-    blr
+    void *sub = *(void **)((u8 *)p + 0x14);
+    return *(u8 *)((u8 *)sub + 0x16);
 }
 
 asm void fn_805DA230(void)
@@ -1599,56 +1565,34 @@ asm void fn_805DA250(void)
     blr
 }
 
-asm void fn_805DA270(void)
+u8 fn_805DA270(void *p)
 {
-    nofralloc
-    lwz r3, 0x14(r3)
-    lwz r3, 0x8(r3)
-    lbz r3, 0x1(r3)
-    blr
+    return *(u8 *)(*(u8 **)(*(u8 **)((u8 *)p + 0x14) + 8) + 1);
 }
 
-asm void fn_805DA280(void)
+u8 fn_805DA280(void *p)
 {
-    nofralloc
-    lwz r3, 0x14(r3)
-    lwz r3, 0x8(r3)
-    lbz r3, 0x0(r3)
-    blr
+    return *(u8 *)(*(u8 **)(*(u8 **)((u8 *)p + 0x14) + 8));
 }
 
-asm void fn_805DA290(void)
+u8 fn_805DA290(void *p)
 {
-    nofralloc
-    lwz r3, 0x14(r3)
-    lwz r3, 0x8(r3)
-    lbz r3, 0x3(r3)
-    blr
+    return *(u8 *)(*(u8 **)(*(u8 **)((u8 *)p + 0x14) + 8) + 3);
 }
 
-asm void fn_805DA2A0(void)
+u32 fn_805DA2A0(void)
 {
-    nofralloc
-    li r3, 0x2
-    blr
+    return 2;
 }
 
-asm void fn_805DA2B0(void)
+u16 fn_805DA2B0(void *p)
 {
-    nofralloc
-    lwz r3, 0x14(r3)
-    lwz r3, 0x8(r3)
-    lhz r3, 0xa(r3)
-    blr
+    return *(u16 *)(*(u8 **)(*(u8 **)((u8 *)p + 0x14) + 8) + 0xa);
 }
 
-asm void fn_805DA2C0(void)
+s8 fn_805DA2C0(void *p)
 {
-    nofralloc
-    lwz r3, 0x14(r3)
-    lbz r3, 0x1(r3)
-    extsb r3, r3
-    blr
+    return *(s8 *)(*(u8 **)((u8 *)p + 0x14) + 1);
 }
 
 asm void fn_805DA2D0(void)
@@ -1725,12 +1669,10 @@ lbl_fn_805DA310_00001528:
     blr
 }
 
-asm void fn_805DA3B0(void)
+void fn_805DA3B0(void *p, u8 val)
 {
-    nofralloc
-    lwz r3, 0x14(r3)
-    stb r4, 0x1(r3)
-    blr
+    void *sub = *(void **)((u8 *)p + 0x14);
+    *(u8 *)((u8 *)sub + 0x1) = val;
 }
 
 asm void fn_805DA3C0(void)
@@ -1883,12 +1825,10 @@ lbl_fn_805DA510_00001724:
     blr
 }
 
-asm void fn_805DA5C0(void)
+u8 fn_805DA5C0(void *p)
 {
-    nofralloc
-    lwz r3, 0x14(r3)
-    lbz r3, 0x7(r3)
-    blr
+    void *sub = *(void **)((u8 *)p + 0x14);
+    return *(u8 *)((u8 *)sub + 0x7);
 }
 
 asm void fn_805DA5D0(void)
@@ -2029,13 +1969,9 @@ lbl_fn_805DA6A0_000018E0:
     blr
 }
 
-asm void fn_805DA7B0(void)
+void fn_805DA7B0(void *p)
 {
-    nofralloc
-    lis r4, lbl_8079A6F0@ha
-    addi r4, r4, lbl_8079A6F0@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_8079A6F0;
 }
 
 asm void fn_805DA7C0(void)

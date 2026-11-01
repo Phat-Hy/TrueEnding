@@ -9,17 +9,17 @@ extern void fn_8000DB1C(void);
 extern void vec3_assign(void);
 extern void fn_800109E0(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011220(void);
+extern void math_fabsf(void);
 extern void vec3_sub(void);
 extern void math_wrapAngle(void);
 extern void vec3_add(void);
 extern void item_useConsumable(void);
-extern void fn_8008B964(void);
+extern void sys_getMainManager(void);
 extern void msg_formatWindowLayout(void);
 extern void msg_isWindowActive(void);
-extern void fn_800F52F8(void);
+extern void proj_getGlobalManager(void);
 extern void fn_800F7260(void);
-extern void fn_800F8524(void);
+extern void math_lerpf(void);
 extern void fn_8010F6FC(void);
 extern void fn_80112220(void);
 extern void phys_scaleGravity(void);
@@ -38,7 +38,7 @@ extern void fn_80116BAC(void);
 extern void fn_80116BB4(void);
 extern void fn_80116BB8(void);
 extern void fn_80116BC8(void);
-extern void fn_80116BD4(void);
+extern void actor_calcSpawnTransform(void);
 extern void fn_80116E64(void);
 extern void fn_80116E6C(void);
 extern void fn_80116E74(void);
@@ -103,7 +103,7 @@ void fn_801156E0(void);
 void fn_801156F8(void);
 void fn_80115704(void);
 void fn_801157DC(void);
-f32 fn_801162A0(const void *v);
+f32 vec3_sqMag(const void *v);
 void fn_801162A4(void);
 
 asm void fn_801151A4(void)
@@ -1302,7 +1302,7 @@ lbl_fn_801157DC_000010C8:
     blr
 }
 
-f32 fn_801162A0(const void *v)
+f32 vec3_sqMag(const void *v)
 {
     return PSVECSquareMag(v);
 }
@@ -1388,7 +1388,7 @@ lbl_fn_801162A4_000011FC:
     b lbl_fn_801162A4_000012D0
 lbl_fn_801162A4_00001224:
     addi r3, r29, 0x274
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_808816B0
     fcmpu cr0, f0, f1
     bne lbl_fn_801162A4_00001240
@@ -1506,7 +1506,7 @@ lbl_fn_801162A4_000013C8:
 lbl_fn_801162A4_000013CC:
     frsp f1, f2
     stfs f2, 0x14(r1)
-    bl fn_80011220
+    bl math_fabsf
     lfs f0, lbl_808816D4
     fcmpo cr0, f1, f0
     ble lbl_fn_801162A4_00001440
@@ -1593,7 +1593,7 @@ lbl_fn_801162A4_00001500:
 lbl_fn_801162A4_00001504:
     frsp f1, f2
     stfs f2, 0x10(r1)
-    bl fn_80011220
+    bl math_fabsf
     lfs f0, lbl_808816D4
     fcmpo cr0, f1, f0
     ble lbl_fn_801162A4_00001578
@@ -1623,7 +1623,7 @@ lbl_fn_801162A4_00001568:
     stfs f0, 0x10(r1)
 lbl_fn_801162A4_00001578:
     lfs f29, lbl_808816B0
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_80116BAC
     li r4, 0x7
     bl player_evaluateStatusCondition
@@ -1709,7 +1709,7 @@ lbl_fn_801162A4_0000168C:
 lbl_fn_801162A4_000016B4:
     la r3, lbl_8087D980
     la r4, lbl_8087D984
-    bl fn_800F8524
+    bl math_lerpf
     fmr f30, f1
     lfs f1, lbl_80881708
     bl phys_scaleGravity
@@ -1868,7 +1868,7 @@ lbl_fn_801162A4_0000188C:
     fmr f1, f29
     addi r3, r1, 0xc
     addi r4, r1, 0x8
-    bl fn_800F8524
+    bl math_lerpf
     mr r3, r29
     bl fn_80116BB8
 lbl_fn_801162A4_00001924:
@@ -1880,9 +1880,9 @@ lbl_fn_801162A4_00001924:
     bl fn_80116BC8
     cmpwi r3, 0x0
     bne lbl_fn_801162A4_000019A8
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r29
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     bl fn_80116E64
     cmpwi r3, 0x0
     beq lbl_fn_801162A4_000019A8

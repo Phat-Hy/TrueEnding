@@ -22,14 +22,14 @@ extern void saveSlot_readSummary(void);
 extern void save_createWorkerTask(void);
 extern void save_computeCrc32(void);
 extern void save_calculateBlockCrc(void);
-extern void fn_801F7590(void);
+extern void save_writeBackupSlot(void);
 extern void fn_801F7DF0(void);
 extern void save_findEntryByName(void);
-extern void fn_801F8598(void);
+extern void save_formatSlotString(void);
 extern void thread_findAndNotify(void);
 extern void thread_dispatchToQueue(void);
 extern void event_findEntryById(void);
-extern void fn_804439FC(void);
+extern void gmk_registerSlot(void);
 extern void fn_8044441C(void);
 extern void gmk_findSlotByIndex(void);
 extern void fn_80444BE8(void);
@@ -42,7 +42,7 @@ extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void fn_804A39EC(void);
 extern void fn_804A3A68(void);
-extern void fn_804A3C24(void);
+extern void net_initCoopSession(void);
 extern void fn_804A55FC(void);
 extern void fn_804A5824(void);
 extern void fn_8057F284(void);
@@ -493,7 +493,7 @@ lbl_fn_80588008_00000500:
     li r8, 0x0
     li r9, 0x1
     li r10, 0x1
-    bl fn_804439FC
+    bl gmk_registerSlot
     li r30, 0x0
 lbl_fn_80588008_00000538:
     lwz r4, 0x4(r29)
@@ -625,7 +625,7 @@ lbl_fn_805880F4_0000062C:
     mr r5, r22
     addi r4, r26, 0x146
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     lwz r3, 0x5b78(r25)
     addi r4, r26, 0x14e
     lfs f1, lbl_80888110
@@ -646,7 +646,7 @@ lbl_fn_805880F4_0000062C:
     addi r4, r26, 0x155
     psq_st f2, 0x8(r5), 0, 0
     lwz r3, 0x5b78(r25)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     cmpwi r22, 0x0
     bne lbl_fn_805880F4_000007D8
     lwz r3, 0x5b78(r25)
@@ -732,7 +732,7 @@ asm void fn_805883DC(void)
     lwz r3, lbl_8087F580
     li r5, 0x0
     lwz r4, 0xc(r4)
-    bl fn_804A3C24
+    bl net_initCoopSession
 lbl_fn_805883DC_000008AC:
     lfs f0, lbl_80888110
     lis r30, lbl_80761914@ha
@@ -795,7 +795,7 @@ lbl_fn_805883DC_000008D4:
     lwz r3, 0x5ba0(r3)
     addi r4, r30, 0x146
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     lwz r4, 0x4(r25)
     mr r3, r29
     bl gmk_findSlotByIndex
@@ -804,7 +804,7 @@ lbl_fn_805883DC_000008D4:
     lwz r3, 0x5ba0(r4)
     addi r4, r30, 0x181
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     addis r3, r26, 0x2
     lfs f1, lbl_80888110
     lwz r3, 0x5ba0(r3)

@@ -17,7 +17,7 @@ extern void saveSlot_readSummary(void);
 extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void mem_findBlockById(void);
-extern void fn_804A3C24(void);
+extern void net_initCoopSession(void);
 extern void fn_804A4738(void);
 extern void fn_804C54FC(void);
 extern void fn_804CB0B8(void);
@@ -237,7 +237,7 @@ lbl_fn_804CB74C_00000268:
     lwz r3, lbl_8087F580
     addi r4, r1, 0xb0
     li r5, 0x0
-    bl fn_804A3C24
+    bl net_initCoopSession
     b lbl_fn_804CB74C_000002BC
 lbl_fn_804CB74C_00000284:
     cmpwi r4, 0x16
@@ -255,7 +255,7 @@ lbl_fn_804CB74C_000002B0:
     la r4, lbl_808813D0
 lbl_fn_804CB74C_000002B4:
     li r5, 0x0
-    bl fn_804A3C24
+    bl net_initCoopSession
 lbl_fn_804CB74C_000002BC:
     lwz r0, 0x2c4(r1)
     lwz r31, 0x2bc(r1)
@@ -375,7 +375,7 @@ lbl_fn_804CBA1C_00000454:
     lwz r3, lbl_8087F580
     mr r4, r31
     li r5, 0x0
-    bl fn_804A3C24
+    bl net_initCoopSession
 lbl_fn_804CBA1C_00000478:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

@@ -11,22 +11,22 @@ extern void mission_updateStub(void);
 extern void atn_ColliCapsule_destructor(void);
 extern void magic_castSpellCircle(void);
 extern void boss_initActionStream(void);
-extern void fn_8006CA80(void);
+extern void gmk_LoadHandle_constructor(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800EC254(void);
+extern void cam_testTargetVisibility(void);
 extern void cam_registerTarget(void);
 extern void cam_initTrajectoryParams(void);
 extern void cam_bindPathTarget(void);
 extern void cam_bindRotationTarget(void);
 extern void cam_evalControllerSpline(void);
 extern void cam_setLookAtTarget(void);
-extern void fn_800ED4D8(void);
-extern void fn_800ED4E0(void);
+extern void cam_getLookAtState(void);
+extern void cam_updateLookAtMatrix(void);
 extern void cam_evalLookAtMatrix(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
@@ -596,7 +596,7 @@ asm void fn_80458270(void)
     addi r3, r28, 0x14b0
     addi r4, r4, lbl_8078F7F0@l
     stw r4, 0x0(r28)
-    bl fn_8006CA80
+    bl gmk_LoadHandle_constructor
     li r31, 0x0
     li r0, 0x5
     stw r31, 0x14b8(r28)
@@ -672,7 +672,7 @@ asm void fn_80458270(void)
     b lbl_fn_80458270_000007D0
 lbl_fn_80458270_0000078C:
     addi r3, r1, 0x98
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     addi r4, r31, 0x2d
     li r5, 0x8
@@ -680,7 +680,7 @@ lbl_fn_80458270_0000078C:
     cmpwi r3, 0x0
     bne lbl_fn_80458270_000007C8
     addi r3, r1, 0x98
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     mr r4, r3
     addi r3, r1, 0x20
@@ -688,14 +688,14 @@ lbl_fn_80458270_0000078C:
     bl str_appendString
 lbl_fn_80458270_000007C8:
     addi r3, r1, 0x98
-    bl fn_800ED4E0
+    bl cam_updateLookAtMatrix
 lbl_fn_80458270_000007D0:
     addi r3, r1, 0x38
     addi r4, r1, 0xd4
     bl cam_evalLookAtMatrix
     addi r3, r1, 0x98
     addi r4, r1, 0x38
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     mr r30, r3
     addi r3, r1, 0x38
     li r4, -0x1

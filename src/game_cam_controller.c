@@ -16,7 +16,7 @@ extern u8 lbl_807BB380[];
 void fn_800EC1F4(void);
 void cam_findTargetIndex(void);
 void fn_800EC24C(void *obj, void *val);
-void fn_800EC254(void);
+void cam_testTargetVisibility(void);
 void cam_registerTarget(void);
 void cam_initTrajectoryParams(void);
 void cam_bindPathTarget(void);
@@ -24,8 +24,8 @@ void cam_bindRotationTarget(void);
 void cam_evalControllerSpline(void);
 void fn_800EC7F0(void);
 void cam_setLookAtTarget(void);
-void *fn_800ED4D8(void *obj);
-void fn_800ED4E0(void);
+void *cam_getLookAtState(void *obj);
+void cam_updateLookAtMatrix(void);
 
 asm void fn_800EC1F4(void)
 {
@@ -67,37 +67,37 @@ void fn_800EC24C(void *obj, void *val)
     *(void **)((char *)obj + 0xa0) = val;
 }
 
-asm void fn_800EC254(void)
+asm void cam_testTargetVisibility(void)
 {
     nofralloc
     lbz r6, 0x2c(r4)
     li r5, 0x0
     cmpwi r6, 0x0
-    beq lbl_fn_800EC254_00000080
+    beq lbl_cam_testTargetVisibility_00000080
     lbz r0, 0x2c(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_800EC254_00000080
+    beq lbl_cam_testTargetVisibility_00000080
     li r5, 0x1
-lbl_fn_800EC254_00000080:
+lbl_cam_testTargetVisibility_00000080:
     cmpwi r5, 0x0
-    beq lbl_fn_800EC254_000000B4
+    beq lbl_cam_testTargetVisibility_000000B4
     lwz r5, 0x24(r4)
     li r6, 0x0
     lwz r0, 0x24(r3)
     cmplw r5, r0
-    bne lbl_fn_800EC254_000000C4
+    bne lbl_cam_testTargetVisibility_000000C4
     lwz r4, 0x28(r4)
     lwz r0, 0x28(r3)
     cmplw r4, r0
-    bne lbl_fn_800EC254_000000C4
+    bne lbl_cam_testTargetVisibility_000000C4
     li r6, 0x1
-    b lbl_fn_800EC254_000000C4
-lbl_fn_800EC254_000000B4:
+    b lbl_cam_testTargetVisibility_000000C4
+lbl_cam_testTargetVisibility_000000B4:
     lbz r0, 0x2c(r3)
     subf r0, r6, r0
     cntlzw r0, r0
     srwi r6, r0, 5
-lbl_fn_800EC254_000000C4:
+lbl_cam_testTargetVisibility_000000C4:
     cntlzw r0, r6
     srwi r3, r0, 5
     blr
@@ -1476,12 +1476,12 @@ lbl_cam_setLookAtTarget_000012C8:
     blr
 }
 
-void *fn_800ED4D8(void *obj)
+void *cam_getLookAtState(void *obj)
 {
     return (char *)obj + 0x30;
 }
 
-asm void fn_800ED4E0(void)
+asm void cam_updateLookAtMatrix(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1493,170 +1493,170 @@ asm void fn_800ED4E0(void)
     lwz r0, 0x1c(r3)
     lwz r8, 0x28(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_800ED4E0_0000143C
+    bne lbl_cam_updateLookAtMatrix_0000143C
     lis r6, lbl_807BB380@ha
     addi r0, r3, 0xd
     addi r6, r6, lbl_807BB380@l
-    b lbl_fn_800ED4E0_00001330
-lbl_fn_800ED4E0_00001324:
+    b lbl_cam_updateLookAtMatrix_00001330
+lbl_cam_updateLookAtMatrix_00001324:
     lwz r4, 0x24(r3)
     addi r4, r4, 0x1
     stw r4, 0x24(r3)
-lbl_fn_800ED4E0_00001330:
+lbl_cam_updateLookAtMatrix_00001330:
     lwz r5, 0x24(r3)
     cmplw r5, r8
-    beq lbl_fn_800ED4E0_0000143C
+    beq lbl_cam_updateLookAtMatrix_0000143C
     lwz r4, 0xc(r3)
     lbz r7, 0x0(r5)
     srwi. r5, r4, 31
     extsb r10, r7
-    bne lbl_fn_800ED4E0_0000135C
+    bne lbl_cam_updateLookAtMatrix_0000135C
     lbz r4, 0xc(r3)
     clrlwi r4, r4, 25
-    b lbl_fn_800ED4E0_00001360
-lbl_fn_800ED4E0_0000135C:
+    b lbl_cam_updateLookAtMatrix_00001360
+lbl_cam_updateLookAtMatrix_0000135C:
     lwz r4, 0x10(r3)
-lbl_fn_800ED4E0_00001360:
+lbl_cam_updateLookAtMatrix_00001360:
     cmpwi r4, 0x0
-    beq lbl_fn_800ED4E0_000013E0
+    beq lbl_cam_updateLookAtMatrix_000013E0
     cmpwi r5, 0x0
-    bne lbl_fn_800ED4E0_00001380
+    bne lbl_cam_updateLookAtMatrix_00001380
     lbz r4, 0xc(r3)
     mr r9, r0
     clrlwi r4, r4, 25
-    b lbl_fn_800ED4E0_00001388
-lbl_fn_800ED4E0_00001380:
+    b lbl_cam_updateLookAtMatrix_00001388
+lbl_cam_updateLookAtMatrix_00001380:
     lwz r9, 0x14(r3)
     lwz r4, 0x10(r3)
-lbl_fn_800ED4E0_00001388:
+lbl_cam_updateLookAtMatrix_00001388:
     cmpwi r4, 0x0
-    beq lbl_fn_800ED4E0_000013C8
+    beq lbl_cam_updateLookAtMatrix_000013C8
     add r7, r9, r4
     mr r5, r9
     subf r4, r9, r7
     mtctr r4
     cmplw r9, r7
-    bge lbl_fn_800ED4E0_000013C8
-lbl_fn_800ED4E0_000013A8:
+    bge lbl_cam_updateLookAtMatrix_000013C8
+lbl_cam_updateLookAtMatrix_000013A8:
     lbz r4, 0x0(r5)
     extsb r4, r4
     cmpw r10, r4
-    bne lbl_fn_800ED4E0_000013C0
+    bne lbl_cam_updateLookAtMatrix_000013C0
     subf r4, r9, r5
-    b lbl_fn_800ED4E0_000013CC
-lbl_fn_800ED4E0_000013C0:
+    b lbl_cam_updateLookAtMatrix_000013CC
+lbl_cam_updateLookAtMatrix_000013C0:
     addi r5, r5, 0x1
-    bdnz lbl_fn_800ED4E0_000013A8
-lbl_fn_800ED4E0_000013C8:
+    bdnz lbl_cam_updateLookAtMatrix_000013A8
+lbl_cam_updateLookAtMatrix_000013C8:
     li r4, -0x1
-lbl_fn_800ED4E0_000013CC:
+lbl_cam_updateLookAtMatrix_000013CC:
     subfic r5, r4, -0x1
     addi r4, r4, 0x1
     or r4, r5, r4
     srwi r4, r4, 31
-    b lbl_fn_800ED4E0_00001434
-lbl_fn_800ED4E0_000013E0:
+    b lbl_cam_updateLookAtMatrix_00001434
+lbl_cam_updateLookAtMatrix_000013E0:
     lbz r4, 0x19(r3)
     cmpwi r4, 0x0
-    beq lbl_fn_800ED4E0_00001430
+    beq lbl_cam_updateLookAtMatrix_00001430
     cmplwi r10, 0xff
     li r4, 0x1
-    bgt lbl_fn_800ED4E0_000013FC
+    bgt lbl_cam_updateLookAtMatrix_000013FC
     li r4, 0x0
-lbl_fn_800ED4E0_000013FC:
+lbl_cam_updateLookAtMatrix_000013FC:
     cmpwi r4, 0x0
-    beq lbl_fn_800ED4E0_0000140C
+    beq lbl_cam_updateLookAtMatrix_0000140C
     li r5, 0x0
-    b lbl_fn_800ED4E0_00001420
-lbl_fn_800ED4E0_0000140C:
+    b lbl_cam_updateLookAtMatrix_00001420
+lbl_cam_updateLookAtMatrix_0000140C:
     lwz r5, 0x38(r6)
     slwi r4, r10, 1
     lwz r5, 0x8(r5)
     lhzx r4, r5, r4
     rlwinm r5, r4, 0, 23, 23
-lbl_fn_800ED4E0_00001420:
+lbl_cam_updateLookAtMatrix_00001420:
     neg r4, r5
     or r4, r4, r5
     srwi r4, r4, 31
-    b lbl_fn_800ED4E0_00001434
-lbl_fn_800ED4E0_00001430:
+    b lbl_cam_updateLookAtMatrix_00001434
+lbl_cam_updateLookAtMatrix_00001430:
     li r4, 0x0
-lbl_fn_800ED4E0_00001434:
+lbl_cam_updateLookAtMatrix_00001434:
     cmpwi r4, 0x0
-    bne lbl_fn_800ED4E0_00001324
-lbl_fn_800ED4E0_0000143C:
+    bne lbl_cam_updateLookAtMatrix_00001324
+lbl_cam_updateLookAtMatrix_0000143C:
     lwz r0, 0x1c(r3)
     lwz r6, 0x24(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_800ED4E0_000017A0
+    bne lbl_cam_updateLookAtMatrix_000017A0
     cmplw r6, r8
-    bne lbl_fn_800ED4E0_0000145C
+    bne lbl_cam_updateLookAtMatrix_0000145C
     li r0, 0x0
-    b lbl_fn_800ED4E0_00001DD4
-lbl_fn_800ED4E0_0000145C:
+    b lbl_cam_updateLookAtMatrix_00001DD4
+lbl_cam_updateLookAtMatrix_0000145C:
     lwz r0, 0x0(r3)
     lbz r5, 0x0(r6)
     srwi. r4, r0, 31
     extsb r9, r5
-    bne lbl_fn_800ED4E0_0000147C
+    bne lbl_cam_updateLookAtMatrix_0000147C
     lbz r0, 0x0(r3)
     clrlwi r0, r0, 25
-    b lbl_fn_800ED4E0_00001480
-lbl_fn_800ED4E0_0000147C:
+    b lbl_cam_updateLookAtMatrix_00001480
+lbl_cam_updateLookAtMatrix_0000147C:
     lwz r0, 0x4(r3)
-lbl_fn_800ED4E0_00001480:
+lbl_cam_updateLookAtMatrix_00001480:
     cmpwi r0, 0x0
-    beq lbl_fn_800ED4E0_00001500
+    beq lbl_cam_updateLookAtMatrix_00001500
     cmpwi r4, 0x0
-    bne lbl_fn_800ED4E0_000014A0
+    bne lbl_cam_updateLookAtMatrix_000014A0
     lbz r0, 0x0(r3)
     addi r7, r3, 0x1
     clrlwi r0, r0, 25
-    b lbl_fn_800ED4E0_000014A8
-lbl_fn_800ED4E0_000014A0:
+    b lbl_cam_updateLookAtMatrix_000014A8
+lbl_cam_updateLookAtMatrix_000014A0:
     lwz r7, 0x8(r3)
     lwz r0, 0x4(r3)
-lbl_fn_800ED4E0_000014A8:
+lbl_cam_updateLookAtMatrix_000014A8:
     cmpwi r0, 0x0
-    beq lbl_fn_800ED4E0_000014E8
+    beq lbl_cam_updateLookAtMatrix_000014E8
     add r5, r7, r0
     mr r4, r7
     subf r0, r7, r5
     mtctr r0
     cmplw r7, r5
-    bge lbl_fn_800ED4E0_000014E8
-lbl_fn_800ED4E0_000014C8:
+    bge lbl_cam_updateLookAtMatrix_000014E8
+lbl_cam_updateLookAtMatrix_000014C8:
     lbz r0, 0x0(r4)
     extsb r0, r0
     cmpw r9, r0
-    bne lbl_fn_800ED4E0_000014E0
+    bne lbl_cam_updateLookAtMatrix_000014E0
     subf r5, r7, r4
-    b lbl_fn_800ED4E0_000014EC
-lbl_fn_800ED4E0_000014E0:
+    b lbl_cam_updateLookAtMatrix_000014EC
+lbl_cam_updateLookAtMatrix_000014E0:
     addi r4, r4, 0x1
-    bdnz lbl_fn_800ED4E0_000014C8
-lbl_fn_800ED4E0_000014E8:
+    bdnz lbl_cam_updateLookAtMatrix_000014C8
+lbl_cam_updateLookAtMatrix_000014E8:
     li r5, -0x1
-lbl_fn_800ED4E0_000014EC:
+lbl_cam_updateLookAtMatrix_000014EC:
     subfic r4, r5, -0x1
     addi r0, r5, 0x1
     or r0, r4, r0
     srwi r0, r0, 31
-    b lbl_fn_800ED4E0_0000155C
-lbl_fn_800ED4E0_00001500:
+    b lbl_cam_updateLookAtMatrix_0000155C
+lbl_cam_updateLookAtMatrix_00001500:
     lbz r0, 0x18(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_800ED4E0_00001558
+    beq lbl_cam_updateLookAtMatrix_00001558
     cmplwi r9, 0xff
     li r0, 0x1
-    bgt lbl_fn_800ED4E0_0000151C
+    bgt lbl_cam_updateLookAtMatrix_0000151C
     li r0, 0x0
-lbl_fn_800ED4E0_0000151C:
+lbl_cam_updateLookAtMatrix_0000151C:
     cmpwi r0, 0x0
-    beq lbl_fn_800ED4E0_0000152C
+    beq lbl_cam_updateLookAtMatrix_0000152C
     li r4, 0x0
-    b lbl_fn_800ED4E0_00001548
-lbl_fn_800ED4E0_0000152C:
+    b lbl_cam_updateLookAtMatrix_00001548
+lbl_cam_updateLookAtMatrix_0000152C:
     lis r4, lbl_807BB380@ha
     slwi r0, r9, 1
     addi r4, r4, lbl_807BB380@l
@@ -1664,208 +1664,208 @@ lbl_fn_800ED4E0_0000152C:
     lwz r4, 0x8(r4)
     lhzx r0, r4, r0
     rlwinm r4, r0, 0, 24, 24
-lbl_fn_800ED4E0_00001548:
+lbl_cam_updateLookAtMatrix_00001548:
     neg r0, r4
     or r0, r0, r4
     srwi r0, r0, 31
-    b lbl_fn_800ED4E0_0000155C
-lbl_fn_800ED4E0_00001558:
+    b lbl_cam_updateLookAtMatrix_0000155C
+lbl_cam_updateLookAtMatrix_00001558:
     li r0, 0x0
-lbl_fn_800ED4E0_0000155C:
+lbl_cam_updateLookAtMatrix_0000155C:
     cmpwi r0, 0x0
-    beq lbl_fn_800ED4E0_00001574
+    beq lbl_cam_updateLookAtMatrix_00001574
     lwz r4, 0x24(r3)
     addi r0, r4, 0x1
     stw r0, 0x24(r3)
-    b lbl_fn_800ED4E0_00001D98
-lbl_fn_800ED4E0_00001574:
+    b lbl_cam_updateLookAtMatrix_00001D98
+lbl_cam_updateLookAtMatrix_00001574:
     lis r5, lbl_807BB380@ha
     addi r0, r3, 0xd
     addi r4, r3, 0x1
     addi r9, r5, lbl_807BB380@l
-    b lbl_fn_800ED4E0_00001594
-lbl_fn_800ED4E0_00001588:
+    b lbl_cam_updateLookAtMatrix_00001594
+lbl_cam_updateLookAtMatrix_00001588:
     lwz r5, 0x24(r3)
     addi r5, r5, 0x1
     stw r5, 0x24(r3)
-lbl_fn_800ED4E0_00001594:
+lbl_cam_updateLookAtMatrix_00001594:
     lwz r5, 0x24(r3)
     cmplw r5, r8
-    beq lbl_fn_800ED4E0_00001D98
+    beq lbl_cam_updateLookAtMatrix_00001D98
     lwz r7, 0xc(r3)
     lbz r5, 0x0(r5)
     srwi. r10, r7, 31
     extsb r30, r5
-    bne lbl_fn_800ED4E0_000015C0
+    bne lbl_cam_updateLookAtMatrix_000015C0
     lbz r7, 0xc(r3)
     clrlwi r7, r7, 25
-    b lbl_fn_800ED4E0_000015C4
-lbl_fn_800ED4E0_000015C0:
+    b lbl_cam_updateLookAtMatrix_000015C4
+lbl_cam_updateLookAtMatrix_000015C0:
     lwz r7, 0x10(r3)
-lbl_fn_800ED4E0_000015C4:
+lbl_cam_updateLookAtMatrix_000015C4:
     cmpwi r7, 0x0
-    beq lbl_fn_800ED4E0_00001644
+    beq lbl_cam_updateLookAtMatrix_00001644
     cmpwi r10, 0x0
-    bne lbl_fn_800ED4E0_000015E4
+    bne lbl_cam_updateLookAtMatrix_000015E4
     lbz r7, 0xc(r3)
     mr r12, r0
     clrlwi r7, r7, 25
-    b lbl_fn_800ED4E0_000015EC
-lbl_fn_800ED4E0_000015E4:
+    b lbl_cam_updateLookAtMatrix_000015EC
+lbl_cam_updateLookAtMatrix_000015E4:
     lwz r12, 0x14(r3)
     lwz r7, 0x10(r3)
-lbl_fn_800ED4E0_000015EC:
+lbl_cam_updateLookAtMatrix_000015EC:
     cmpwi r7, 0x0
-    beq lbl_fn_800ED4E0_0000162C
+    beq lbl_cam_updateLookAtMatrix_0000162C
     add r11, r12, r7
     mr r10, r12
     subf r7, r12, r11
     mtctr r7
     cmplw r12, r11
-    bge lbl_fn_800ED4E0_0000162C
-lbl_fn_800ED4E0_0000160C:
+    bge lbl_cam_updateLookAtMatrix_0000162C
+lbl_cam_updateLookAtMatrix_0000160C:
     lbz r7, 0x0(r10)
     extsb r7, r7
     cmpw r30, r7
-    bne lbl_fn_800ED4E0_00001624
+    bne lbl_cam_updateLookAtMatrix_00001624
     subf r7, r12, r10
-    b lbl_fn_800ED4E0_00001630
-lbl_fn_800ED4E0_00001624:
+    b lbl_cam_updateLookAtMatrix_00001630
+lbl_cam_updateLookAtMatrix_00001624:
     addi r10, r10, 0x1
-    bdnz lbl_fn_800ED4E0_0000160C
-lbl_fn_800ED4E0_0000162C:
+    bdnz lbl_cam_updateLookAtMatrix_0000160C
+lbl_cam_updateLookAtMatrix_0000162C:
     li r7, -0x1
-lbl_fn_800ED4E0_00001630:
+lbl_cam_updateLookAtMatrix_00001630:
     subfic r10, r7, -0x1
     addi r7, r7, 0x1
     or r7, r10, r7
     srwi r7, r7, 31
-    b lbl_fn_800ED4E0_00001698
-lbl_fn_800ED4E0_00001644:
+    b lbl_cam_updateLookAtMatrix_00001698
+lbl_cam_updateLookAtMatrix_00001644:
     lbz r7, 0x19(r3)
     cmpwi r7, 0x0
-    beq lbl_fn_800ED4E0_00001694
+    beq lbl_cam_updateLookAtMatrix_00001694
     cmplwi r30, 0xff
     li r7, 0x1
-    bgt lbl_fn_800ED4E0_00001660
+    bgt lbl_cam_updateLookAtMatrix_00001660
     li r7, 0x0
-lbl_fn_800ED4E0_00001660:
+lbl_cam_updateLookAtMatrix_00001660:
     cmpwi r7, 0x0
-    beq lbl_fn_800ED4E0_00001670
+    beq lbl_cam_updateLookAtMatrix_00001670
     li r10, 0x0
-    b lbl_fn_800ED4E0_00001684
-lbl_fn_800ED4E0_00001670:
+    b lbl_cam_updateLookAtMatrix_00001684
+lbl_cam_updateLookAtMatrix_00001670:
     lwz r10, 0x38(r9)
     slwi r7, r30, 1
     lwz r10, 0x8(r10)
     lhzx r7, r10, r7
     rlwinm r10, r7, 0, 23, 23
-lbl_fn_800ED4E0_00001684:
+lbl_cam_updateLookAtMatrix_00001684:
     neg r7, r10
     or r7, r7, r10
     srwi r7, r7, 31
-    b lbl_fn_800ED4E0_00001698
-lbl_fn_800ED4E0_00001694:
+    b lbl_cam_updateLookAtMatrix_00001698
+lbl_cam_updateLookAtMatrix_00001694:
     li r7, 0x0
-lbl_fn_800ED4E0_00001698:
+lbl_cam_updateLookAtMatrix_00001698:
     cmpwi r7, 0x0
-    bne lbl_fn_800ED4E0_00001D98
+    bne lbl_cam_updateLookAtMatrix_00001D98
     lwz r7, 0x0(r3)
     extsb r12, r5
     srwi. r7, r7, 31
-    bne lbl_fn_800ED4E0_000016BC
+    bne lbl_cam_updateLookAtMatrix_000016BC
     lbz r5, 0x0(r3)
     clrlwi r5, r5, 25
-    b lbl_fn_800ED4E0_000016C0
-lbl_fn_800ED4E0_000016BC:
+    b lbl_cam_updateLookAtMatrix_000016C0
+lbl_cam_updateLookAtMatrix_000016BC:
     lwz r5, 0x4(r3)
-lbl_fn_800ED4E0_000016C0:
+lbl_cam_updateLookAtMatrix_000016C0:
     cmpwi r5, 0x0
-    beq lbl_fn_800ED4E0_00001740
+    beq lbl_cam_updateLookAtMatrix_00001740
     cmpwi r7, 0x0
-    bne lbl_fn_800ED4E0_000016E0
+    bne lbl_cam_updateLookAtMatrix_000016E0
     lbz r5, 0x0(r3)
     mr r11, r4
     clrlwi r5, r5, 25
-    b lbl_fn_800ED4E0_000016E8
-lbl_fn_800ED4E0_000016E0:
+    b lbl_cam_updateLookAtMatrix_000016E8
+lbl_cam_updateLookAtMatrix_000016E0:
     lwz r11, 0x8(r3)
     lwz r5, 0x4(r3)
-lbl_fn_800ED4E0_000016E8:
+lbl_cam_updateLookAtMatrix_000016E8:
     cmpwi r5, 0x0
-    beq lbl_fn_800ED4E0_00001728
+    beq lbl_cam_updateLookAtMatrix_00001728
     add r10, r11, r5
     mr r7, r11
     subf r5, r11, r10
     mtctr r5
     cmplw r11, r10
-    bge lbl_fn_800ED4E0_00001728
-lbl_fn_800ED4E0_00001708:
+    bge lbl_cam_updateLookAtMatrix_00001728
+lbl_cam_updateLookAtMatrix_00001708:
     lbz r5, 0x0(r7)
     extsb r5, r5
     cmpw r12, r5
-    bne lbl_fn_800ED4E0_00001720
+    bne lbl_cam_updateLookAtMatrix_00001720
     subf r5, r11, r7
-    b lbl_fn_800ED4E0_0000172C
-lbl_fn_800ED4E0_00001720:
+    b lbl_cam_updateLookAtMatrix_0000172C
+lbl_cam_updateLookAtMatrix_00001720:
     addi r7, r7, 0x1
-    bdnz lbl_fn_800ED4E0_00001708
-lbl_fn_800ED4E0_00001728:
+    bdnz lbl_cam_updateLookAtMatrix_00001708
+lbl_cam_updateLookAtMatrix_00001728:
     li r5, -0x1
-lbl_fn_800ED4E0_0000172C:
+lbl_cam_updateLookAtMatrix_0000172C:
     subfic r7, r5, -0x1
     addi r5, r5, 0x1
     or r5, r7, r5
     srwi r5, r5, 31
-    b lbl_fn_800ED4E0_00001794
-lbl_fn_800ED4E0_00001740:
+    b lbl_cam_updateLookAtMatrix_00001794
+lbl_cam_updateLookAtMatrix_00001740:
     lbz r5, 0x18(r3)
     cmpwi r5, 0x0
-    beq lbl_fn_800ED4E0_00001790
+    beq lbl_cam_updateLookAtMatrix_00001790
     cmplwi r12, 0xff
     li r5, 0x1
-    bgt lbl_fn_800ED4E0_0000175C
+    bgt lbl_cam_updateLookAtMatrix_0000175C
     li r5, 0x0
-lbl_fn_800ED4E0_0000175C:
+lbl_cam_updateLookAtMatrix_0000175C:
     cmpwi r5, 0x0
-    beq lbl_fn_800ED4E0_0000176C
+    beq lbl_cam_updateLookAtMatrix_0000176C
     li r7, 0x0
-    b lbl_fn_800ED4E0_00001780
-lbl_fn_800ED4E0_0000176C:
+    b lbl_cam_updateLookAtMatrix_00001780
+lbl_cam_updateLookAtMatrix_0000176C:
     lwz r7, 0x38(r9)
     slwi r5, r12, 1
     lwz r7, 0x8(r7)
     lhzx r5, r7, r5
     rlwinm r7, r5, 0, 24, 24
-lbl_fn_800ED4E0_00001780:
+lbl_cam_updateLookAtMatrix_00001780:
     neg r5, r7
     or r5, r5, r7
     srwi r5, r5, 31
-    b lbl_fn_800ED4E0_00001794
-lbl_fn_800ED4E0_00001790:
+    b lbl_cam_updateLookAtMatrix_00001794
+lbl_cam_updateLookAtMatrix_00001790:
     li r5, 0x0
-lbl_fn_800ED4E0_00001794:
+lbl_cam_updateLookAtMatrix_00001794:
     cmpwi r5, 0x0
-    beq lbl_fn_800ED4E0_00001588
-    b lbl_fn_800ED4E0_00001D98
-lbl_fn_800ED4E0_000017A0:
+    beq lbl_cam_updateLookAtMatrix_00001588
+    b lbl_cam_updateLookAtMatrix_00001D98
+lbl_cam_updateLookAtMatrix_000017A0:
     cmplw r6, r8
-    bne lbl_fn_800ED4E0_00001804
+    bne lbl_cam_updateLookAtMatrix_00001804
     lbz r0, 0x20(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_800ED4E0_000017FC
+    bne lbl_cam_updateLookAtMatrix_000017FC
     lwz r0, 0x30(r3)
     li r4, 0x1
     stb r4, 0x20(r3)
     mr r7, r6
     srwi. r0, r0, 31
-    bne lbl_fn_800ED4E0_000017D8
+    bne lbl_cam_updateLookAtMatrix_000017D8
     lbz r0, 0x30(r3)
     clrlwi r5, r0, 25
-    b lbl_fn_800ED4E0_000017DC
-lbl_fn_800ED4E0_000017D8:
+    b lbl_cam_updateLookAtMatrix_000017DC
+lbl_cam_updateLookAtMatrix_000017D8:
     lwz r5, 0x34(r3)
-lbl_fn_800ED4E0_000017DC:
+lbl_cam_updateLookAtMatrix_000017DC:
     lbz r0, 0xc(r1)
     addi r8, r1, 0x8
     stb r0, 0x8(r1)
@@ -1873,74 +1873,74 @@ lbl_fn_800ED4E0_000017DC:
     addi r3, r3, 0x30
     bl actor_dispatchMessage
     li r0, 0x1
-    b lbl_fn_800ED4E0_00001DD4
-lbl_fn_800ED4E0_000017FC:
+    b lbl_cam_updateLookAtMatrix_00001DD4
+lbl_cam_updateLookAtMatrix_000017FC:
     li r0, 0x0
-    b lbl_fn_800ED4E0_00001DD4
-lbl_fn_800ED4E0_00001804:
+    b lbl_cam_updateLookAtMatrix_00001DD4
+lbl_cam_updateLookAtMatrix_00001804:
     lwz r4, 0x0(r3)
     lbz r0, 0x0(r6)
     srwi. r5, r4, 31
     extsb r10, r0
-    bne lbl_fn_800ED4E0_00001824
+    bne lbl_cam_updateLookAtMatrix_00001824
     lbz r4, 0x0(r3)
     clrlwi r4, r4, 25
-    b lbl_fn_800ED4E0_00001828
-lbl_fn_800ED4E0_00001824:
+    b lbl_cam_updateLookAtMatrix_00001828
+lbl_cam_updateLookAtMatrix_00001824:
     lwz r4, 0x4(r3)
-lbl_fn_800ED4E0_00001828:
+lbl_cam_updateLookAtMatrix_00001828:
     cmpwi r4, 0x0
-    beq lbl_fn_800ED4E0_000018A8
+    beq lbl_cam_updateLookAtMatrix_000018A8
     cmpwi r5, 0x0
-    bne lbl_fn_800ED4E0_00001848
+    bne lbl_cam_updateLookAtMatrix_00001848
     lbz r4, 0x0(r3)
     addi r9, r3, 0x1
     clrlwi r4, r4, 25
-    b lbl_fn_800ED4E0_00001850
-lbl_fn_800ED4E0_00001848:
+    b lbl_cam_updateLookAtMatrix_00001850
+lbl_cam_updateLookAtMatrix_00001848:
     lwz r9, 0x8(r3)
     lwz r4, 0x4(r3)
-lbl_fn_800ED4E0_00001850:
+lbl_cam_updateLookAtMatrix_00001850:
     cmpwi r4, 0x0
-    beq lbl_fn_800ED4E0_00001890
+    beq lbl_cam_updateLookAtMatrix_00001890
     add r7, r9, r4
     mr r5, r9
     subf r4, r9, r7
     mtctr r4
     cmplw r9, r7
-    bge lbl_fn_800ED4E0_00001890
-lbl_fn_800ED4E0_00001870:
+    bge lbl_cam_updateLookAtMatrix_00001890
+lbl_cam_updateLookAtMatrix_00001870:
     lbz r4, 0x0(r5)
     extsb r4, r4
     cmpw r10, r4
-    bne lbl_fn_800ED4E0_00001888
+    bne lbl_cam_updateLookAtMatrix_00001888
     subf r4, r9, r5
-    b lbl_fn_800ED4E0_00001894
-lbl_fn_800ED4E0_00001888:
+    b lbl_cam_updateLookAtMatrix_00001894
+lbl_cam_updateLookAtMatrix_00001888:
     addi r5, r5, 0x1
-    bdnz lbl_fn_800ED4E0_00001870
-lbl_fn_800ED4E0_00001890:
+    bdnz lbl_cam_updateLookAtMatrix_00001870
+lbl_cam_updateLookAtMatrix_00001890:
     li r4, -0x1
-lbl_fn_800ED4E0_00001894:
+lbl_cam_updateLookAtMatrix_00001894:
     subfic r5, r4, -0x1
     addi r4, r4, 0x1
     or r4, r5, r4
     srwi r4, r4, 31
-    b lbl_fn_800ED4E0_00001904
-lbl_fn_800ED4E0_000018A8:
+    b lbl_cam_updateLookAtMatrix_00001904
+lbl_cam_updateLookAtMatrix_000018A8:
     lbz r4, 0x18(r3)
     cmpwi r4, 0x0
-    beq lbl_fn_800ED4E0_00001900
+    beq lbl_cam_updateLookAtMatrix_00001900
     cmplwi r10, 0xff
     li r4, 0x1
-    bgt lbl_fn_800ED4E0_000018C4
+    bgt lbl_cam_updateLookAtMatrix_000018C4
     li r4, 0x0
-lbl_fn_800ED4E0_000018C4:
+lbl_cam_updateLookAtMatrix_000018C4:
     cmpwi r4, 0x0
-    beq lbl_fn_800ED4E0_000018D4
+    beq lbl_cam_updateLookAtMatrix_000018D4
     li r5, 0x0
-    b lbl_fn_800ED4E0_000018F0
-lbl_fn_800ED4E0_000018D4:
+    b lbl_cam_updateLookAtMatrix_000018F0
+lbl_cam_updateLookAtMatrix_000018D4:
     lis r5, lbl_807BB380@ha
     slwi r4, r10, 1
     addi r5, r5, lbl_807BB380@l
@@ -1948,95 +1948,95 @@ lbl_fn_800ED4E0_000018D4:
     lwz r5, 0x8(r5)
     lhzx r4, r5, r4
     rlwinm r5, r4, 0, 24, 24
-lbl_fn_800ED4E0_000018F0:
+lbl_cam_updateLookAtMatrix_000018F0:
     neg r4, r5
     or r4, r4, r5
     srwi r4, r4, 31
-    b lbl_fn_800ED4E0_00001904
-lbl_fn_800ED4E0_00001900:
+    b lbl_cam_updateLookAtMatrix_00001904
+lbl_cam_updateLookAtMatrix_00001900:
     li r4, 0x0
-lbl_fn_800ED4E0_00001904:
+lbl_cam_updateLookAtMatrix_00001904:
     cmpwi r4, 0x0
-    beq lbl_fn_800ED4E0_0000193C
+    beq lbl_cam_updateLookAtMatrix_0000193C
     lbz r0, 0x20(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_800ED4E0_00001924
+    bne lbl_cam_updateLookAtMatrix_00001924
     li r0, 0x1
     stb r0, 0x20(r3)
-    b lbl_fn_800ED4E0_00001D98
-lbl_fn_800ED4E0_00001924:
+    b lbl_cam_updateLookAtMatrix_00001D98
+lbl_cam_updateLookAtMatrix_00001924:
     lwz r4, 0x24(r3)
     li r0, 0x0
     stb r0, 0x20(r3)
     addi r0, r4, 0x1
     stw r0, 0x24(r3)
-    b lbl_fn_800ED4E0_00001D98
-lbl_fn_800ED4E0_0000193C:
+    b lbl_cam_updateLookAtMatrix_00001D98
+lbl_cam_updateLookAtMatrix_0000193C:
     lbz r4, 0x20(r3)
     cmpwi r4, 0x0
-    bne lbl_fn_800ED4E0_00001A58
+    bne lbl_cam_updateLookAtMatrix_00001A58
     lwz r4, 0xc(r3)
     extsb r10, r0
     srwi. r5, r4, 31
-    bne lbl_fn_800ED4E0_00001964
+    bne lbl_cam_updateLookAtMatrix_00001964
     lbz r4, 0xc(r3)
     clrlwi r4, r4, 25
-    b lbl_fn_800ED4E0_00001968
-lbl_fn_800ED4E0_00001964:
+    b lbl_cam_updateLookAtMatrix_00001968
+lbl_cam_updateLookAtMatrix_00001964:
     lwz r4, 0x10(r3)
-lbl_fn_800ED4E0_00001968:
+lbl_cam_updateLookAtMatrix_00001968:
     cmpwi r4, 0x0
-    beq lbl_fn_800ED4E0_000019E8
+    beq lbl_cam_updateLookAtMatrix_000019E8
     cmpwi r5, 0x0
-    bne lbl_fn_800ED4E0_00001988
+    bne lbl_cam_updateLookAtMatrix_00001988
     lbz r4, 0xc(r3)
     addi r9, r3, 0xd
     clrlwi r4, r4, 25
-    b lbl_fn_800ED4E0_00001990
-lbl_fn_800ED4E0_00001988:
+    b lbl_cam_updateLookAtMatrix_00001990
+lbl_cam_updateLookAtMatrix_00001988:
     lwz r9, 0x14(r3)
     lwz r4, 0x10(r3)
-lbl_fn_800ED4E0_00001990:
+lbl_cam_updateLookAtMatrix_00001990:
     cmpwi r4, 0x0
-    beq lbl_fn_800ED4E0_000019D0
+    beq lbl_cam_updateLookAtMatrix_000019D0
     add r7, r9, r4
     mr r5, r9
     subf r4, r9, r7
     mtctr r4
     cmplw r9, r7
-    bge lbl_fn_800ED4E0_000019D0
-lbl_fn_800ED4E0_000019B0:
+    bge lbl_cam_updateLookAtMatrix_000019D0
+lbl_cam_updateLookAtMatrix_000019B0:
     lbz r4, 0x0(r5)
     extsb r4, r4
     cmpw r10, r4
-    bne lbl_fn_800ED4E0_000019C8
+    bne lbl_cam_updateLookAtMatrix_000019C8
     subf r4, r9, r5
-    b lbl_fn_800ED4E0_000019D4
-lbl_fn_800ED4E0_000019C8:
+    b lbl_cam_updateLookAtMatrix_000019D4
+lbl_cam_updateLookAtMatrix_000019C8:
     addi r5, r5, 0x1
-    bdnz lbl_fn_800ED4E0_000019B0
-lbl_fn_800ED4E0_000019D0:
+    bdnz lbl_cam_updateLookAtMatrix_000019B0
+lbl_cam_updateLookAtMatrix_000019D0:
     li r4, -0x1
-lbl_fn_800ED4E0_000019D4:
+lbl_cam_updateLookAtMatrix_000019D4:
     subfic r5, r4, -0x1
     addi r4, r4, 0x1
     or r4, r5, r4
     srwi r4, r4, 31
-    b lbl_fn_800ED4E0_00001A44
-lbl_fn_800ED4E0_000019E8:
+    b lbl_cam_updateLookAtMatrix_00001A44
+lbl_cam_updateLookAtMatrix_000019E8:
     lbz r4, 0x19(r3)
     cmpwi r4, 0x0
-    beq lbl_fn_800ED4E0_00001A40
+    beq lbl_cam_updateLookAtMatrix_00001A40
     cmplwi r10, 0xff
     li r4, 0x1
-    bgt lbl_fn_800ED4E0_00001A04
+    bgt lbl_cam_updateLookAtMatrix_00001A04
     li r4, 0x0
-lbl_fn_800ED4E0_00001A04:
+lbl_cam_updateLookAtMatrix_00001A04:
     cmpwi r4, 0x0
-    beq lbl_fn_800ED4E0_00001A14
+    beq lbl_cam_updateLookAtMatrix_00001A14
     li r5, 0x0
-    b lbl_fn_800ED4E0_00001A30
-lbl_fn_800ED4E0_00001A14:
+    b lbl_cam_updateLookAtMatrix_00001A30
+lbl_cam_updateLookAtMatrix_00001A14:
     lis r5, lbl_807BB380@ha
     slwi r4, r10, 1
     addi r5, r5, lbl_807BB380@l
@@ -2044,82 +2044,82 @@ lbl_fn_800ED4E0_00001A14:
     lwz r5, 0x8(r5)
     lhzx r4, r5, r4
     rlwinm r5, r4, 0, 23, 23
-lbl_fn_800ED4E0_00001A30:
+lbl_cam_updateLookAtMatrix_00001A30:
     neg r4, r5
     or r4, r4, r5
     srwi r4, r4, 31
-    b lbl_fn_800ED4E0_00001A44
-lbl_fn_800ED4E0_00001A40:
+    b lbl_cam_updateLookAtMatrix_00001A44
+lbl_cam_updateLookAtMatrix_00001A40:
     li r4, 0x0
-lbl_fn_800ED4E0_00001A44:
+lbl_cam_updateLookAtMatrix_00001A44:
     cmpwi r4, 0x0
-    beq lbl_fn_800ED4E0_00001A58
+    beq lbl_cam_updateLookAtMatrix_00001A58
     li r0, 0x1
     stb r0, 0x20(r3)
-    b lbl_fn_800ED4E0_00001D98
-lbl_fn_800ED4E0_00001A58:
+    b lbl_cam_updateLookAtMatrix_00001D98
+lbl_cam_updateLookAtMatrix_00001A58:
     lwz r4, 0xc(r3)
     extsb r9, r0
     srwi. r4, r4, 31
-    bne lbl_fn_800ED4E0_00001A74
+    bne lbl_cam_updateLookAtMatrix_00001A74
     lbz r0, 0xc(r3)
     clrlwi r0, r0, 25
-    b lbl_fn_800ED4E0_00001A78
-lbl_fn_800ED4E0_00001A74:
+    b lbl_cam_updateLookAtMatrix_00001A78
+lbl_cam_updateLookAtMatrix_00001A74:
     lwz r0, 0x10(r3)
-lbl_fn_800ED4E0_00001A78:
+lbl_cam_updateLookAtMatrix_00001A78:
     cmpwi r0, 0x0
-    beq lbl_fn_800ED4E0_00001AF8
+    beq lbl_cam_updateLookAtMatrix_00001AF8
     cmpwi r4, 0x0
-    bne lbl_fn_800ED4E0_00001A98
+    bne lbl_cam_updateLookAtMatrix_00001A98
     lbz r0, 0xc(r3)
     addi r7, r3, 0xd
     clrlwi r0, r0, 25
-    b lbl_fn_800ED4E0_00001AA0
-lbl_fn_800ED4E0_00001A98:
+    b lbl_cam_updateLookAtMatrix_00001AA0
+lbl_cam_updateLookAtMatrix_00001A98:
     lwz r7, 0x14(r3)
     lwz r0, 0x10(r3)
-lbl_fn_800ED4E0_00001AA0:
+lbl_cam_updateLookAtMatrix_00001AA0:
     cmpwi r0, 0x0
-    beq lbl_fn_800ED4E0_00001AE0
+    beq lbl_cam_updateLookAtMatrix_00001AE0
     add r5, r7, r0
     mr r4, r7
     subf r0, r7, r5
     mtctr r0
     cmplw r7, r5
-    bge lbl_fn_800ED4E0_00001AE0
-lbl_fn_800ED4E0_00001AC0:
+    bge lbl_cam_updateLookAtMatrix_00001AE0
+lbl_cam_updateLookAtMatrix_00001AC0:
     lbz r0, 0x0(r4)
     extsb r0, r0
     cmpw r9, r0
-    bne lbl_fn_800ED4E0_00001AD8
+    bne lbl_cam_updateLookAtMatrix_00001AD8
     subf r5, r7, r4
-    b lbl_fn_800ED4E0_00001AE4
-lbl_fn_800ED4E0_00001AD8:
+    b lbl_cam_updateLookAtMatrix_00001AE4
+lbl_cam_updateLookAtMatrix_00001AD8:
     addi r4, r4, 0x1
-    bdnz lbl_fn_800ED4E0_00001AC0
-lbl_fn_800ED4E0_00001AE0:
+    bdnz lbl_cam_updateLookAtMatrix_00001AC0
+lbl_cam_updateLookAtMatrix_00001AE0:
     li r5, -0x1
-lbl_fn_800ED4E0_00001AE4:
+lbl_cam_updateLookAtMatrix_00001AE4:
     subfic r4, r5, -0x1
     addi r0, r5, 0x1
     or r0, r4, r0
     srwi r0, r0, 31
-    b lbl_fn_800ED4E0_00001B54
-lbl_fn_800ED4E0_00001AF8:
+    b lbl_cam_updateLookAtMatrix_00001B54
+lbl_cam_updateLookAtMatrix_00001AF8:
     lbz r0, 0x19(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_800ED4E0_00001B50
+    beq lbl_cam_updateLookAtMatrix_00001B50
     cmplwi r9, 0xff
     li r0, 0x1
-    bgt lbl_fn_800ED4E0_00001B14
+    bgt lbl_cam_updateLookAtMatrix_00001B14
     li r0, 0x0
-lbl_fn_800ED4E0_00001B14:
+lbl_cam_updateLookAtMatrix_00001B14:
     cmpwi r0, 0x0
-    beq lbl_fn_800ED4E0_00001B24
+    beq lbl_cam_updateLookAtMatrix_00001B24
     li r4, 0x0
-    b lbl_fn_800ED4E0_00001B40
-lbl_fn_800ED4E0_00001B24:
+    b lbl_cam_updateLookAtMatrix_00001B40
+lbl_cam_updateLookAtMatrix_00001B24:
     lis r4, lbl_807BB380@ha
     slwi r0, r9, 1
     addi r4, r4, lbl_807BB380@l
@@ -2127,202 +2127,202 @@ lbl_fn_800ED4E0_00001B24:
     lwz r4, 0x8(r4)
     lhzx r0, r4, r0
     rlwinm r4, r0, 0, 23, 23
-lbl_fn_800ED4E0_00001B40:
+lbl_cam_updateLookAtMatrix_00001B40:
     neg r0, r4
     or r0, r0, r4
     srwi r0, r0, 31
-    b lbl_fn_800ED4E0_00001B54
-lbl_fn_800ED4E0_00001B50:
+    b lbl_cam_updateLookAtMatrix_00001B54
+lbl_cam_updateLookAtMatrix_00001B50:
     li r0, 0x0
-lbl_fn_800ED4E0_00001B54:
+lbl_cam_updateLookAtMatrix_00001B54:
     cmpwi r0, 0x0
-    beq lbl_fn_800ED4E0_00001B68
+    beq lbl_cam_updateLookAtMatrix_00001B68
     lwz r4, 0x24(r3)
     addi r6, r4, 0x1
     stw r6, 0x24(r3)
-lbl_fn_800ED4E0_00001B68:
+lbl_cam_updateLookAtMatrix_00001B68:
     lis r5, lbl_807BB380@ha
     addi r0, r3, 0xd
     addi r4, r3, 0x1
     addi r9, r5, lbl_807BB380@l
-    b lbl_fn_800ED4E0_00001B88
-lbl_fn_800ED4E0_00001B7C:
+    b lbl_cam_updateLookAtMatrix_00001B88
+lbl_cam_updateLookAtMatrix_00001B7C:
     lwz r5, 0x24(r3)
     addi r5, r5, 0x1
     stw r5, 0x24(r3)
-lbl_fn_800ED4E0_00001B88:
+lbl_cam_updateLookAtMatrix_00001B88:
     lwz r5, 0x24(r3)
     cmplw r5, r8
-    beq lbl_fn_800ED4E0_00001D90
+    beq lbl_cam_updateLookAtMatrix_00001D90
     lwz r7, 0xc(r3)
     lbz r5, 0x0(r5)
     srwi. r10, r7, 31
     extsb r30, r5
-    bne lbl_fn_800ED4E0_00001BB4
+    bne lbl_cam_updateLookAtMatrix_00001BB4
     lbz r7, 0xc(r3)
     clrlwi r7, r7, 25
-    b lbl_fn_800ED4E0_00001BB8
-lbl_fn_800ED4E0_00001BB4:
+    b lbl_cam_updateLookAtMatrix_00001BB8
+lbl_cam_updateLookAtMatrix_00001BB4:
     lwz r7, 0x10(r3)
-lbl_fn_800ED4E0_00001BB8:
+lbl_cam_updateLookAtMatrix_00001BB8:
     cmpwi r7, 0x0
-    beq lbl_fn_800ED4E0_00001C38
+    beq lbl_cam_updateLookAtMatrix_00001C38
     cmpwi r10, 0x0
-    bne lbl_fn_800ED4E0_00001BD8
+    bne lbl_cam_updateLookAtMatrix_00001BD8
     lbz r7, 0xc(r3)
     mr r12, r0
     clrlwi r7, r7, 25
-    b lbl_fn_800ED4E0_00001BE0
-lbl_fn_800ED4E0_00001BD8:
+    b lbl_cam_updateLookAtMatrix_00001BE0
+lbl_cam_updateLookAtMatrix_00001BD8:
     lwz r12, 0x14(r3)
     lwz r7, 0x10(r3)
-lbl_fn_800ED4E0_00001BE0:
+lbl_cam_updateLookAtMatrix_00001BE0:
     cmpwi r7, 0x0
-    beq lbl_fn_800ED4E0_00001C20
+    beq lbl_cam_updateLookAtMatrix_00001C20
     add r11, r12, r7
     mr r10, r12
     subf r7, r12, r11
     mtctr r7
     cmplw r12, r11
-    bge lbl_fn_800ED4E0_00001C20
-lbl_fn_800ED4E0_00001C00:
+    bge lbl_cam_updateLookAtMatrix_00001C20
+lbl_cam_updateLookAtMatrix_00001C00:
     lbz r7, 0x0(r10)
     extsb r7, r7
     cmpw r30, r7
-    bne lbl_fn_800ED4E0_00001C18
+    bne lbl_cam_updateLookAtMatrix_00001C18
     subf r7, r12, r10
-    b lbl_fn_800ED4E0_00001C24
-lbl_fn_800ED4E0_00001C18:
+    b lbl_cam_updateLookAtMatrix_00001C24
+lbl_cam_updateLookAtMatrix_00001C18:
     addi r10, r10, 0x1
-    bdnz lbl_fn_800ED4E0_00001C00
-lbl_fn_800ED4E0_00001C20:
+    bdnz lbl_cam_updateLookAtMatrix_00001C00
+lbl_cam_updateLookAtMatrix_00001C20:
     li r7, -0x1
-lbl_fn_800ED4E0_00001C24:
+lbl_cam_updateLookAtMatrix_00001C24:
     subfic r10, r7, -0x1
     addi r7, r7, 0x1
     or r7, r10, r7
     srwi r7, r7, 31
-    b lbl_fn_800ED4E0_00001C8C
-lbl_fn_800ED4E0_00001C38:
+    b lbl_cam_updateLookAtMatrix_00001C8C
+lbl_cam_updateLookAtMatrix_00001C38:
     lbz r7, 0x19(r3)
     cmpwi r7, 0x0
-    beq lbl_fn_800ED4E0_00001C88
+    beq lbl_cam_updateLookAtMatrix_00001C88
     cmplwi r30, 0xff
     li r7, 0x1
-    bgt lbl_fn_800ED4E0_00001C54
+    bgt lbl_cam_updateLookAtMatrix_00001C54
     li r7, 0x0
-lbl_fn_800ED4E0_00001C54:
+lbl_cam_updateLookAtMatrix_00001C54:
     cmpwi r7, 0x0
-    beq lbl_fn_800ED4E0_00001C64
+    beq lbl_cam_updateLookAtMatrix_00001C64
     li r10, 0x0
-    b lbl_fn_800ED4E0_00001C78
-lbl_fn_800ED4E0_00001C64:
+    b lbl_cam_updateLookAtMatrix_00001C78
+lbl_cam_updateLookAtMatrix_00001C64:
     lwz r10, 0x38(r9)
     slwi r7, r30, 1
     lwz r10, 0x8(r10)
     lhzx r7, r10, r7
     rlwinm r10, r7, 0, 23, 23
-lbl_fn_800ED4E0_00001C78:
+lbl_cam_updateLookAtMatrix_00001C78:
     neg r7, r10
     or r7, r7, r10
     srwi r7, r7, 31
-    b lbl_fn_800ED4E0_00001C8C
-lbl_fn_800ED4E0_00001C88:
+    b lbl_cam_updateLookAtMatrix_00001C8C
+lbl_cam_updateLookAtMatrix_00001C88:
     li r7, 0x0
-lbl_fn_800ED4E0_00001C8C:
+lbl_cam_updateLookAtMatrix_00001C8C:
     cmpwi r7, 0x0
-    bne lbl_fn_800ED4E0_00001D90
+    bne lbl_cam_updateLookAtMatrix_00001D90
     lwz r7, 0x0(r3)
     extsb r12, r5
     srwi. r7, r7, 31
-    bne lbl_fn_800ED4E0_00001CB0
+    bne lbl_cam_updateLookAtMatrix_00001CB0
     lbz r5, 0x0(r3)
     clrlwi r5, r5, 25
-    b lbl_fn_800ED4E0_00001CB4
-lbl_fn_800ED4E0_00001CB0:
+    b lbl_cam_updateLookAtMatrix_00001CB4
+lbl_cam_updateLookAtMatrix_00001CB0:
     lwz r5, 0x4(r3)
-lbl_fn_800ED4E0_00001CB4:
+lbl_cam_updateLookAtMatrix_00001CB4:
     cmpwi r5, 0x0
-    beq lbl_fn_800ED4E0_00001D34
+    beq lbl_cam_updateLookAtMatrix_00001D34
     cmpwi r7, 0x0
-    bne lbl_fn_800ED4E0_00001CD4
+    bne lbl_cam_updateLookAtMatrix_00001CD4
     lbz r5, 0x0(r3)
     mr r11, r4
     clrlwi r5, r5, 25
-    b lbl_fn_800ED4E0_00001CDC
-lbl_fn_800ED4E0_00001CD4:
+    b lbl_cam_updateLookAtMatrix_00001CDC
+lbl_cam_updateLookAtMatrix_00001CD4:
     lwz r11, 0x8(r3)
     lwz r5, 0x4(r3)
-lbl_fn_800ED4E0_00001CDC:
+lbl_cam_updateLookAtMatrix_00001CDC:
     cmpwi r5, 0x0
-    beq lbl_fn_800ED4E0_00001D1C
+    beq lbl_cam_updateLookAtMatrix_00001D1C
     add r10, r11, r5
     mr r7, r11
     subf r5, r11, r10
     mtctr r5
     cmplw r11, r10
-    bge lbl_fn_800ED4E0_00001D1C
-lbl_fn_800ED4E0_00001CFC:
+    bge lbl_cam_updateLookAtMatrix_00001D1C
+lbl_cam_updateLookAtMatrix_00001CFC:
     lbz r5, 0x0(r7)
     extsb r5, r5
     cmpw r12, r5
-    bne lbl_fn_800ED4E0_00001D14
+    bne lbl_cam_updateLookAtMatrix_00001D14
     subf r5, r11, r7
-    b lbl_fn_800ED4E0_00001D20
-lbl_fn_800ED4E0_00001D14:
+    b lbl_cam_updateLookAtMatrix_00001D20
+lbl_cam_updateLookAtMatrix_00001D14:
     addi r7, r7, 0x1
-    bdnz lbl_fn_800ED4E0_00001CFC
-lbl_fn_800ED4E0_00001D1C:
+    bdnz lbl_cam_updateLookAtMatrix_00001CFC
+lbl_cam_updateLookAtMatrix_00001D1C:
     li r5, -0x1
-lbl_fn_800ED4E0_00001D20:
+lbl_cam_updateLookAtMatrix_00001D20:
     subfic r7, r5, -0x1
     addi r5, r5, 0x1
     or r5, r7, r5
     srwi r5, r5, 31
-    b lbl_fn_800ED4E0_00001D88
-lbl_fn_800ED4E0_00001D34:
+    b lbl_cam_updateLookAtMatrix_00001D88
+lbl_cam_updateLookAtMatrix_00001D34:
     lbz r5, 0x18(r3)
     cmpwi r5, 0x0
-    beq lbl_fn_800ED4E0_00001D84
+    beq lbl_cam_updateLookAtMatrix_00001D84
     cmplwi r12, 0xff
     li r5, 0x1
-    bgt lbl_fn_800ED4E0_00001D50
+    bgt lbl_cam_updateLookAtMatrix_00001D50
     li r5, 0x0
-lbl_fn_800ED4E0_00001D50:
+lbl_cam_updateLookAtMatrix_00001D50:
     cmpwi r5, 0x0
-    beq lbl_fn_800ED4E0_00001D60
+    beq lbl_cam_updateLookAtMatrix_00001D60
     li r7, 0x0
-    b lbl_fn_800ED4E0_00001D74
-lbl_fn_800ED4E0_00001D60:
+    b lbl_cam_updateLookAtMatrix_00001D74
+lbl_cam_updateLookAtMatrix_00001D60:
     lwz r7, 0x38(r9)
     slwi r5, r12, 1
     lwz r7, 0x8(r7)
     lhzx r5, r7, r5
     rlwinm r7, r5, 0, 24, 24
-lbl_fn_800ED4E0_00001D74:
+lbl_cam_updateLookAtMatrix_00001D74:
     neg r5, r7
     or r5, r5, r7
     srwi r5, r5, 31
-    b lbl_fn_800ED4E0_00001D88
-lbl_fn_800ED4E0_00001D84:
+    b lbl_cam_updateLookAtMatrix_00001D88
+lbl_cam_updateLookAtMatrix_00001D84:
     li r5, 0x0
-lbl_fn_800ED4E0_00001D88:
+lbl_cam_updateLookAtMatrix_00001D88:
     cmpwi r5, 0x0
-    beq lbl_fn_800ED4E0_00001B7C
-lbl_fn_800ED4E0_00001D90:
+    beq lbl_cam_updateLookAtMatrix_00001B7C
+lbl_cam_updateLookAtMatrix_00001D90:
     li r0, 0x1
     stb r0, 0x20(r3)
-lbl_fn_800ED4E0_00001D98:
+lbl_cam_updateLookAtMatrix_00001D98:
     lwz r0, 0x30(r3)
     lwz r7, 0x24(r3)
     srwi. r0, r0, 31
-    bne lbl_fn_800ED4E0_00001DB4
+    bne lbl_cam_updateLookAtMatrix_00001DB4
     lbz r0, 0x30(r3)
     clrlwi r5, r0, 25
-    b lbl_fn_800ED4E0_00001DB8
-lbl_fn_800ED4E0_00001DB4:
+    b lbl_cam_updateLookAtMatrix_00001DB8
+lbl_cam_updateLookAtMatrix_00001DB4:
     lwz r5, 0x34(r3)
-lbl_fn_800ED4E0_00001DB8:
+lbl_cam_updateLookAtMatrix_00001DB8:
     lbz r0, 0x14(r1)
     addi r8, r1, 0x10
     stb r0, 0x10(r1)
@@ -2330,7 +2330,7 @@ lbl_fn_800ED4E0_00001DB8:
     addi r3, r3, 0x30
     bl actor_dispatchMessage
     li r0, 0x1
-lbl_fn_800ED4E0_00001DD4:
+lbl_cam_updateLookAtMatrix_00001DD4:
     stb r0, 0x2c(r31)
     mr r3, r31
     lwz r31, 0x1c(r1)

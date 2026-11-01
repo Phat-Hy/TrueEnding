@@ -8,7 +8,7 @@ extern void ui_drawColoredQuad(void);
 extern void wcs_vformat(void);
 extern void hurtbox_testCollisionLayer(void);
 extern void hurtbox_processHitDamage(void);
-extern void fn_80206B14(void);
+extern void sys_findModuleById(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_generateId(void);
 extern void assert_formatLocation(void);
@@ -19,7 +19,7 @@ extern void fn_8020BDAC(void);
 extern void time_wrapMilliseconds(void);
 extern void rand_scaleRangeInt(void);
 extern void random_generateValue(void);
-extern void fn_8020EFEC(void);
+extern void time_ticksToSeconds(void);
 extern void fn_80210AC4(void);
 extern void event_findEntryById(void);
 extern void fn_802114D8(void);
@@ -68,7 +68,7 @@ extern u32 lbl_80886AFC;
 /* Function declarations */
 void fn_8044386C(void);
 void fn_804438E0(void);
-void fn_804439FC(void);
+void gmk_registerSlot(void);
 void fn_80444020(void);
 void fn_8044441C(void);
 void gmk_findSlotByIndex(void);
@@ -203,7 +203,7 @@ lbl_fn_804438E0_0000017C:
     blr
 }
 
-asm void fn_804439FC(void)
+asm void gmk_registerSlot(void)
 {
     nofralloc
     stwu r1, -0x40(r1)
@@ -226,95 +226,95 @@ asm void fn_804439FC(void)
     bl fn_8021150C
     cmpwi r3, 0x0
     mr r31, r3
-    blt lbl_fn_804439FC_000001EC
+    blt lbl_gmk_registerSlot_000001EC
     cmpwi r3, 0x600
-    blt lbl_fn_804439FC_000001F4
-lbl_fn_804439FC_000001EC:
+    blt lbl_gmk_registerSlot_000001F4
+lbl_gmk_registerSlot_000001EC:
     li r3, 0x0
-    b lbl_fn_804439FC_000007A0
-lbl_fn_804439FC_000001F4:
+    b lbl_gmk_registerSlot_000007A0
+lbl_gmk_registerSlot_000001F4:
     lwz r3, 0x8(r1)
     bl event_findEntryById
     cmpwi r3, 0x0
     mr r30, r3
-    bne lbl_fn_804439FC_00000210
+    bne lbl_gmk_registerSlot_00000210
     li r3, 0x0
-    b lbl_fn_804439FC_000007A0
-lbl_fn_804439FC_00000210:
+    b lbl_gmk_registerSlot_000007A0
+lbl_gmk_registerSlot_00000210:
     lwz r3, 0x8(r1)
     li r29, 0x1
     bl game_initGlobalDatabases
     cmpwi r3, 0x0
-    beq lbl_fn_804439FC_00000344
+    beq lbl_gmk_registerSlot_00000344
     cmpwi r23, 0x0
-    beq lbl_fn_804439FC_00000304
+    beq lbl_gmk_registerSlot_00000304
     cmpwi r24, 0x0
-    beq lbl_fn_804439FC_0000023C
+    beq lbl_gmk_registerSlot_0000023C
     li r24, 0x64
-    b lbl_fn_804439FC_00000314
-lbl_fn_804439FC_0000023C:
+    b lbl_gmk_registerSlot_00000314
+lbl_gmk_registerSlot_0000023C:
     lwz r23, 0x8(r1)
     li r24, 0x64
     mr r3, r23
     bl game_initGlobalDatabases
     cmpwi r3, 0x0
-    beq lbl_fn_804439FC_00000314
+    beq lbl_gmk_registerSlot_00000314
     mr r3, r23
     bl assert_formatLocation
     mr r24, r3
     mr r3, r23
     bl fn_8021150C
     cmpwi r3, 0x0
-    blt lbl_fn_804439FC_00000278
+    blt lbl_gmk_registerSlot_00000278
     cmpwi r3, 0x600
-    blt lbl_fn_804439FC_00000280
-lbl_fn_804439FC_00000278:
+    blt lbl_gmk_registerSlot_00000280
+lbl_gmk_registerSlot_00000278:
     li r0, 0x0
-    b lbl_fn_804439FC_0000028C
-lbl_fn_804439FC_00000280:
+    b lbl_gmk_registerSlot_0000028C
+lbl_gmk_registerSlot_00000280:
     slwi r0, r3, 4
     add r3, r25, r0
     lwz r0, 0xc(r3)
-lbl_fn_804439FC_0000028C:
+lbl_gmk_registerSlot_0000028C:
     clrlwi r0, r0, 31
     cmplwi r0, 0x1
-    bne lbl_fn_804439FC_000002B0
+    bne lbl_gmk_registerSlot_000002B0
     lwz r0, 0x118(r24)
     lis r3, lbl_8075463C@ha
     addi r3, r3, lbl_8075463C@l
     slwi r0, r0, 2
     lwzx r24, r3, r0
-    b lbl_fn_804439FC_000002C4
-lbl_fn_804439FC_000002B0:
+    b lbl_gmk_registerSlot_000002C4
+lbl_gmk_registerSlot_000002B0:
     lwz r0, 0x118(r24)
     lis r3, lbl_80754628@ha
     addi r3, r3, lbl_80754628@l
     slwi r0, r0, 2
     lwzx r24, r3, r0
-lbl_fn_804439FC_000002C4:
+lbl_gmk_registerSlot_000002C4:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_804439FC_00000314
+    beq lbl_gmk_registerSlot_00000314
     li r4, 0x8a
     bl world_getGlobalFlag
     cmpwi r3, 0x1
-    bne lbl_fn_804439FC_000002E8
+    bne lbl_gmk_registerSlot_000002E8
     li r24, 0x0
-    b lbl_fn_804439FC_00000314
-lbl_fn_804439FC_000002E8:
+    b lbl_gmk_registerSlot_00000314
+lbl_gmk_registerSlot_000002E8:
     lwz r3, lbl_8087F430
     li r4, 0x8a
     bl world_getGlobalFlag
     cmpwi r3, 0x2
-    blt lbl_fn_804439FC_00000314
+    blt lbl_gmk_registerSlot_00000314
     li r24, 0x64
-    b lbl_fn_804439FC_00000314
-lbl_fn_804439FC_00000304:
+    b lbl_gmk_registerSlot_00000314
+lbl_gmk_registerSlot_00000304:
     neg r0, r24
     or r0, r0, r24
     srawi r0, r0, 31
     andi. r24, r0, 0x64
-lbl_fn_804439FC_00000314:
+lbl_gmk_registerSlot_00000314:
     bl rand
     lis r4, 0x51ec
     subi r0, r4, 0x7ae1
@@ -325,74 +325,74 @@ lbl_fn_804439FC_00000314:
     mulli r0, r0, 0x64
     subf r0, r0, r3
     cmpw r24, r0
-    bgt lbl_fn_804439FC_00000344
+    bgt lbl_gmk_registerSlot_00000344
     li r29, 0x0
-lbl_fn_804439FC_00000344:
+lbl_gmk_registerSlot_00000344:
     lwz r3, 0x8(r1)
     bl game_initGlobalDatabases
     cmpwi r3, 0x0
-    bne lbl_fn_804439FC_00000364
+    bne lbl_gmk_registerSlot_00000364
     lwz r3, 0x8(r1)
     bl rand_scaleRangeInt
     cmpwi r3, 0x0
-    beq lbl_fn_804439FC_000003A8
-lbl_fn_804439FC_00000364:
+    beq lbl_gmk_registerSlot_000003A8
+lbl_gmk_registerSlot_00000364:
     cmpwi r27, 0x0
-    beq lbl_fn_804439FC_00000424
+    beq lbl_gmk_registerSlot_00000424
     cmpwi r29, 0x0
-    beq lbl_fn_804439FC_00000424
+    beq lbl_gmk_registerSlot_00000424
     lwz r4, 0x8(r1)
     mr r3, r25
     bl fn_80444564
     lwz r0, 0xc(r1)
     add r0, r0, r3
     cmpwi r0, 0xa
-    ble lbl_fn_804439FC_00000424
+    ble lbl_gmk_registerSlot_00000424
     lwz r4, 0x8(r1)
     mr r3, r25
     bl fn_80444564
     subfic r0, r3, 0xa
     stw r0, 0xc(r1)
-    b lbl_fn_804439FC_00000424
-lbl_fn_804439FC_000003A8:
+    b lbl_gmk_registerSlot_00000424
+lbl_gmk_registerSlot_000003A8:
     lha r0, 0xbc(r30)
     cmpwi r0, 0x6
-    bne lbl_fn_804439FC_00000400
+    bne lbl_gmk_registerSlot_00000400
     lwz r0, 0x64(r30)
     cmpwi r0, 0x2
-    bne lbl_fn_804439FC_000003E4
+    bne lbl_gmk_registerSlot_000003E4
     li r23, 0x0
-lbl_fn_804439FC_000003C4:
+lbl_gmk_registerSlot_000003C4:
     mr r3, r25
     mr r4, r30
     mr r5, r23
     bl fn_804490E0
     addi r23, r23, 0x1
     cmpwi r23, 0x7
-    blt lbl_fn_804439FC_000003C4
-    b lbl_fn_804439FC_000003F4
-lbl_fn_804439FC_000003E4:
+    blt lbl_gmk_registerSlot_000003C4
+    b lbl_gmk_registerSlot_000003F4
+lbl_gmk_registerSlot_000003E4:
     mr r3, r25
     mr r4, r30
     li r5, 0x0
     bl fn_804490E0
-lbl_fn_804439FC_000003F4:
+lbl_gmk_registerSlot_000003F4:
     li r0, 0x0
     stw r0, 0xc(r1)
-    b lbl_fn_804439FC_00000424
-lbl_fn_804439FC_00000400:
+    b lbl_gmk_registerSlot_00000424
+lbl_gmk_registerSlot_00000400:
     slwi r3, r31, 4
     lwz r0, 0xc(r1)
     add r3, r25, r3
     lwz r3, 0x4(r3)
     add r0, r0, r3
     cmpwi r0, 0x63
-    ble lbl_fn_804439FC_00000424
+    ble lbl_gmk_registerSlot_00000424
     subfic r0, r3, 0x63
     stw r0, 0xc(r1)
-lbl_fn_804439FC_00000424:
+lbl_gmk_registerSlot_00000424:
     cmpwi r29, 0x0
-    beq lbl_fn_804439FC_0000054C
+    beq lbl_gmk_registerSlot_0000054C
     slwi r3, r31, 4
     lwz r0, 0x8(r1)
     stwx r0, r25, r3
@@ -402,17 +402,17 @@ lbl_fn_804439FC_00000424:
     lwz r0, 0xc(r1)
     add r0, r3, r0
     stw r0, 0x4(r4)
-    beq lbl_fn_804439FC_000005D0
+    beq lbl_gmk_registerSlot_000005D0
     lwz r3, 0x8(r1)
     bl fn_8021150C
     slwi r0, r3, 4
     add r4, r25, r0
     lhz r0, 0x8(r4)
     cmpwi r0, 0x0
-    beq lbl_fn_804439FC_000005D0
+    beq lbl_gmk_registerSlot_000005D0
     li r0, 0x60
     mtctr r0
-lbl_fn_804439FC_00000478:
+lbl_gmk_registerSlot_00000478:
     lhz r3, 0x8(r25)
     addi r0, r3, 0x1
     sth r0, 0x8(r25)
@@ -462,180 +462,180 @@ lbl_fn_804439FC_00000478:
     addi r0, r3, 0x1
     sth r0, 0xf8(r25)
     addi r25, r25, 0x100
-    bdnz lbl_fn_804439FC_00000478
+    bdnz lbl_gmk_registerSlot_00000478
     li r0, 0x0
     sth r0, 0x8(r4)
-    b lbl_fn_804439FC_000005D0
-lbl_fn_804439FC_0000054C:
+    b lbl_gmk_registerSlot_000005D0
+lbl_gmk_registerSlot_0000054C:
     li r24, 0x0
-    b lbl_fn_804439FC_000005B0
-lbl_fn_804439FC_00000554:
+    b lbl_gmk_registerSlot_000005B0
+lbl_gmk_registerSlot_00000554:
     lwz r23, 0x8(r1)
     mr r3, r23
     bl event_findEntryById
     cmpwi r3, 0x0
-    beq lbl_fn_804439FC_000005AC
+    beq lbl_gmk_registerSlot_000005AC
     lha r0, 0xbc(r3)
     cmpwi r0, 0x2
-    bne lbl_fn_804439FC_000005AC
+    bne lbl_gmk_registerSlot_000005AC
     addis r3, r25, 0x1
     lwz r0, -0x24d4(r3)
     cmplwi r0, 0x100
-    bge lbl_fn_804439FC_000005AC
+    bge lbl_gmk_registerSlot_000005AC
     lwz r0, -0x24d4(r3)
     slwi r0, r0, 2
     add r0, r3, r0
     subic. r3, r0, 0x24d0
-    beq lbl_fn_804439FC_0000059C
+    beq lbl_gmk_registerSlot_0000059C
     stw r23, 0x0(r3)
-lbl_fn_804439FC_0000059C:
+lbl_gmk_registerSlot_0000059C:
     addis r4, r25, 0x1
     lwz r3, -0x24d4(r4)
     addi r0, r3, 0x1
     stw r0, -0x24d4(r4)
-lbl_fn_804439FC_000005AC:
+lbl_gmk_registerSlot_000005AC:
     addi r24, r24, 0x1
-lbl_fn_804439FC_000005B0:
+lbl_gmk_registerSlot_000005B0:
     lwz r0, 0xc(r1)
     cmpw r24, r0
-    blt lbl_fn_804439FC_00000554
+    blt lbl_gmk_registerSlot_00000554
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_804439FC_000005D0
+    beq lbl_gmk_registerSlot_000005D0
     li r4, 0xa1
     bl kpad_validateButtonIndex
-lbl_fn_804439FC_000005D0:
+lbl_gmk_registerSlot_000005D0:
     cmpwi r26, 0x0
-    beq lbl_fn_804439FC_000005DC
+    beq lbl_gmk_registerSlot_000005DC
     stw r29, 0x0(r26)
-lbl_fn_804439FC_000005DC:
+lbl_gmk_registerSlot_000005DC:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_804439FC_0000079C
+    beq lbl_gmk_registerSlot_0000079C
     lwz r0, 0x8(r1)
     cmpwi r0, 0x74
-    bne lbl_fn_804439FC_000005FC
+    bne lbl_gmk_registerSlot_000005FC
     li r4, 0x91
     bl kpad_validateButtonIndex
-lbl_fn_804439FC_000005FC:
+lbl_gmk_registerSlot_000005FC:
     lwz r0, 0x8(r1)
     cmpwi r0, 0x143
-    bne lbl_fn_804439FC_00000614
+    bne lbl_gmk_registerSlot_00000614
     lwz r3, lbl_8087F430
     li r4, 0x1b8
     bl kpad_validateButtonIndex
-lbl_fn_804439FC_00000614:
+lbl_gmk_registerSlot_00000614:
     lwz r3, 0x8(r1)
     bl game_initGlobalDatabases
     cmpwi r3, 0x0
-    bne lbl_fn_804439FC_00000634
+    bne lbl_gmk_registerSlot_00000634
     lwz r3, 0x8(r1)
     bl rand_scaleRangeInt
     cmpwi r3, 0x0
-    beq lbl_fn_804439FC_00000654
-lbl_fn_804439FC_00000634:
+    beq lbl_gmk_registerSlot_00000654
+lbl_gmk_registerSlot_00000634:
     lwz r3, lbl_8087F430
     lis r4, 0x2
     subi r0, r4, 0x5a20
     lwz r4, 0x10d0(r3)
     cmpw r4, r0
-    blt lbl_fn_804439FC_00000654
+    blt lbl_gmk_registerSlot_00000654
     li r4, 0x148
     bl kpad_validateButtonIndex
-lbl_fn_804439FC_00000654:
+lbl_gmk_registerSlot_00000654:
     lha r0, 0xbc(r30)
     cmpwi r0, 0x6
-    bne lbl_fn_804439FC_00000678
+    bne lbl_gmk_registerSlot_00000678
     lwz r0, 0xb4(r30)
     cmpwi r0, 0x5
-    bne lbl_fn_804439FC_00000678
+    bne lbl_gmk_registerSlot_00000678
     lwz r3, lbl_8087F430
     li r4, 0x146
     bl kpad_validateButtonIndex
-lbl_fn_804439FC_00000678:
+lbl_gmk_registerSlot_00000678:
     lwz r3, 0x8(r1)
     bl game_initGlobalDatabases
     cmpwi r3, 0x0
-    beq lbl_fn_804439FC_000006BC
+    beq lbl_gmk_registerSlot_000006BC
     lwz r3, 0x8(r1)
     bl assert_formatLocation
     lwz r0, 0xf0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_804439FC_000006BC
+    beq lbl_gmk_registerSlot_000006BC
     lwz r3, lbl_8087F430
     lis r4, 0x2
     subi r0, r4, 0x5a20
     lwz r4, 0x10d0(r3)
     cmpw r4, r0
-    blt lbl_fn_804439FC_000006BC
+    blt lbl_gmk_registerSlot_000006BC
     li r4, 0x151
     bl kpad_validateButtonIndex
-lbl_fn_804439FC_000006BC:
+lbl_gmk_registerSlot_000006BC:
     lwz r3, 0x8(r1)
     bl rand_scaleRangeInt
     cmpwi r3, 0x0
-    beq lbl_fn_804439FC_00000728
+    beq lbl_gmk_registerSlot_00000728
     lwz r3, 0x8(r1)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     lwz r0, 0x78(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_804439FC_000006F4
+    bne lbl_gmk_registerSlot_000006F4
     lwz r3, 0x8(r1)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     lwz r0, 0xe0(r3)
     cmpwi r0, 0x6
-    bge lbl_fn_804439FC_0000071C
-lbl_fn_804439FC_000006F4:
+    bge lbl_gmk_registerSlot_0000071C
+lbl_gmk_registerSlot_000006F4:
     lwz r3, 0x8(r1)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     lwz r0, 0x78(r3)
     cmpwi r0, 0x1
-    bne lbl_fn_804439FC_00000728
+    bne lbl_gmk_registerSlot_00000728
     lwz r3, 0x8(r1)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     lwz r0, 0xe0(r3)
     cmpwi r0, 0x7
-    blt lbl_fn_804439FC_00000728
-lbl_fn_804439FC_0000071C:
+    blt lbl_gmk_registerSlot_00000728
+lbl_gmk_registerSlot_0000071C:
     lwz r3, lbl_8087F430
     li r4, 0x1af
     bl kpad_validateButtonIndex
-lbl_fn_804439FC_00000728:
+lbl_gmk_registerSlot_00000728:
     lwz r3, 0x8(r1)
     bl game_initGlobalDatabases
     cmpwi r3, 0x0
-    beq lbl_fn_804439FC_0000079C
+    beq lbl_gmk_registerSlot_0000079C
     lwz r3, 0x8(r1)
     bl assert_formatLocation
     lwz r0, 0xc4(r3)
     cmpwi r0, 0x3f
-    bne lbl_fn_804439FC_00000758
+    bne lbl_gmk_registerSlot_00000758
     lwz r0, 0xc8(r3)
     cmpwi r0, 0x7
-    beq lbl_fn_804439FC_00000790
-lbl_fn_804439FC_00000758:
+    beq lbl_gmk_registerSlot_00000790
+lbl_gmk_registerSlot_00000758:
     lwz r0, 0xd8(r3)
     cmpwi r0, 0x3f
-    bne lbl_fn_804439FC_00000770
+    bne lbl_gmk_registerSlot_00000770
     lwz r0, 0xdc(r3)
     cmpwi r0, 0x7
-    beq lbl_fn_804439FC_00000790
-lbl_fn_804439FC_00000770:
+    beq lbl_gmk_registerSlot_00000790
+lbl_gmk_registerSlot_00000770:
     lwz r0, 0x78(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_804439FC_0000079C
+    bne lbl_gmk_registerSlot_0000079C
     lwz r0, 0x80(r3)
     cmpwi r0, 0x18f
-    blt lbl_fn_804439FC_0000079C
+    blt lbl_gmk_registerSlot_0000079C
     cmpwi r0, 0x195
-    bgt lbl_fn_804439FC_0000079C
-lbl_fn_804439FC_00000790:
+    bgt lbl_gmk_registerSlot_0000079C
+lbl_gmk_registerSlot_00000790:
     lwz r3, lbl_8087F430
     li r4, 0x1b4
     bl kpad_validateButtonIndex
-lbl_fn_804439FC_0000079C:
+lbl_gmk_registerSlot_0000079C:
     lwz r3, 0xc(r1)
-lbl_fn_804439FC_000007A0:
+lbl_gmk_registerSlot_000007A0:
     lmw r23, 0x1c(r1)
     lwz r0, 0x44(r1)
     mtlr r0
@@ -721,7 +721,7 @@ lbl_fn_80444020_00000868:
     li r8, 0x0
     li r9, 0x1
     li r10, 0x1
-    bl fn_804439FC
+    bl gmk_registerSlot
     b lbl_fn_80444020_00000B90
 lbl_fn_80444020_000008CC:
     lwz r0, 0x0(r18)
@@ -835,7 +835,7 @@ lbl_fn_80444020_00000A20:
     li r7, 0x1
     li r9, 0x1
     li r10, 0x1
-    bl fn_804439FC
+    bl gmk_registerSlot
     cmpwi r25, 0x0
     beq lbl_fn_80444020_00000AD0
     lwz r3, 0x10(r1)
@@ -1079,14 +1079,14 @@ lbl_fn_80444564_00000D54:
 lbl_fn_80444564_00000D68:
     lwz r4, 0x20(r29)
     li r3, 0x0
-    bl fn_80206B14
+    bl sys_findModuleById
     cmpwi r27, 0x0
     bne lbl_fn_80444564_00000D90
     cmpwi r26, 0x1
     bne lbl_fn_80444564_00000D90
     lwz r4, 0x20(r29)
     li r3, 0x1
-    bl fn_80206B14
+    bl sys_findModuleById
 lbl_fn_80444564_00000D90:
     cmpwi r3, 0x0
     beq lbl_fn_80444564_00000DA8

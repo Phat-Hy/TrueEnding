@@ -17,7 +17,7 @@ extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB518(void);
-extern void fn_800CB688(void);
+extern void morph_resetTargetWeight(void);
 extern void fn_800EFBC4(void);
 extern void fn_800EFE3C(void);
 extern void fn_800F72F4(void);
@@ -60,10 +60,10 @@ void fn_80105510(void);
 void fn_801055A8(void);
 void fn_801058F8(void);
 void fn_80105950(void);
-void fn_801059F8(void);
+void colli_findDynamicSlot(void);
 void fn_80105A08(void);
 void fn_80105AB0(void);
-void fn_80105B3C(void);
+void colli_findStaticSlot(void);
 void fn_80105B4C(void);
 void fn_80105BD8(void);
 void fn_80105C9C(void);
@@ -455,7 +455,7 @@ asm void fn_80105950(void)
     blr
 }
 
-asm void fn_801059F8(void)
+asm void colli_findDynamicSlot(void)
 {
     nofralloc
     lwz r3, lbl_8087F3C0
@@ -551,7 +551,7 @@ asm void fn_80105AB0(void)
     blr
 }
 
-asm void fn_80105B3C(void)
+asm void colli_findStaticSlot(void)
 {
     nofralloc
     lwz r3, lbl_8087F3C0
@@ -1164,7 +1164,7 @@ lbl_fn_801061BC_00000EAC:
 lbl_fn_801061BC_00000EB4:
     addi r3, r1, 0x28
     li r4, 0x0
-    bl fn_800CB688
+    bl morph_resetTargetWeight
     addi r3, r1, 0x28
     li r4, 0xa
     bl fn_800CB518

@@ -24,7 +24,7 @@ extern void saveSlot_readSummary(void);
 extern void atn_LoadHandle_constructor(void);
 extern void fn_804A29C4(void);
 extern void fn_804A436C(void);
-extern void fn_804A53D4(void);
+extern void net_broadcastCoopPacket(void);
 extern void fn_804AF1BC(void);
 extern void fn_804AF210(void);
 extern void fn_804B9D44(void);
@@ -474,7 +474,7 @@ lbl_fn_804ADB60_00000548:
     li r4, 0x0
     li r5, 0x0
     li r7, 0x0
-    bl fn_804A53D4
+    bl net_broadcastCoopPacket
 lbl_fn_804ADB60_00000560:
     lwz r0, 0x94(r1)
     lwz r31, 0x8c(r1)

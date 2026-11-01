@@ -11,7 +11,7 @@ extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void sky_renderStub(void);
-extern void fn_8012476C(void);
+extern void player_testStatusCondition(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
 extern void fn_80188F08(void);
@@ -247,7 +247,7 @@ lbl_fn_8019C104_00000234:
     stw r0, 0x728(r3)
     lwz r3, lbl_8087F0A8
     addi r3, r3, 0x48c
-    bl fn_8012476C
+    bl player_testStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_8019C104_00000270
     lwz r3, 0x14(r30)

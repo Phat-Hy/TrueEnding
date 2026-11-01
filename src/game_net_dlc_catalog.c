@@ -14,7 +14,7 @@ extern void script_executeOpcode(void);
 extern void mem_alloc(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
-extern void fn_800A4450(void);
+extern void font_getGlyphEntryByIndex(void);
 extern void motion_updateFogAdj(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -36,16 +36,16 @@ extern void battle_activateExpReward(void);
 extern void save_validateHeader(void);
 extern void fn_801F4484(void);
 extern void fn_801F465C(void);
-extern void fn_801FEC74(void);
+extern void thread_findQueueTaskByName(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
 extern void mem_findBlockById(void);
-extern void fn_80219544(void);
+extern void task_getWorkerByIndex(void);
 extern void fn_80365390(void);
 extern void fn_80371320(void);
 extern void kpad_getClampData(void);
-extern void fn_804EB874(void);
+extern void net_getLocalPlayerAid(void);
 extern void fn_805AE3C8(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
@@ -287,7 +287,7 @@ asm void fn_80549F18(void)
     lis r4, 0xb
     lwz r3, lbl_8087F610
     subi r30, r4, 0x51a0
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     cmpwi r3, 0x0
     beq lbl_fn_80549F18_000001D4
     lwz r0, 0xb0(r3)
@@ -590,7 +590,7 @@ asm void dlc_findItemInCatalog(void)
     stw r31, 0xc(r1)
     mr r31, r3
     mr r3, r4
-    bl fn_80219544
+    bl task_getWorkerByIndex
     lwz r4, 0x48(r31)
     b lbl_dlc_findItemInCatalog_000005EC
 lbl_dlc_findItemInCatalog_000005D4:
@@ -3483,12 +3483,12 @@ lbl_fn_8054B328_00002F08:
     addi r4, r27, 0x2f1
     lwz r3, 0x4(r3)
     addi r3, r3, 0x58
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     mr r4, r3
     addi r3, r1, 0x10
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x10(r1)
     srwi r0, r0, 31
     cntlzw r0, r0

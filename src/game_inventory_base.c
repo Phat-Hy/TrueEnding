@@ -11,14 +11,14 @@ extern void fn_8010CD3C(void);
 extern void fn_8010CF28(void);
 extern void fn_8011D21C(void);
 extern void fn_80133E24(void);
-extern void fn_80133EE8(void);
+extern void boss_findPartSlotById(void);
 extern void fn_80133F6C(void);
-extern void fn_80134134(void);
+extern void boss_findPartById(void);
 extern void fn_80134168(void);
-extern void fn_801346C8(void);
+extern void boss_testAiFlag(void);
 extern void fn_80150460(void);
 extern void fn_8015076C(void);
-extern void fn_80164DCC(void);
+extern void party_evalTacticCondition(void);
 extern void actor_setState(void);
 extern void fn_801C8938(void);
 extern void task_findEntryById(void);
@@ -357,7 +357,7 @@ lbl_inventory_applyItemStats_0000037C:
     beq lbl_inventory_applyItemStats_000003A0
     addi r3, r3, 0x7d4
     li r4, 0x48
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_inventory_applyItemStats_000003A0
     ori r28, r28, 0x8
@@ -726,13 +726,13 @@ lbl_inventory_applyItemStats_000008B8:
     addi r3, r26, 0x7d4
     li r4, 0x2
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     bne lbl_inventory_applyItemStats_000008F8
     addi r3, r26, 0x7d4
     li r4, 0x3
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     bne lbl_inventory_applyItemStats_000008F8
     li r28, 0x0
@@ -989,7 +989,7 @@ lbl_inventory_applyItemStats_00000C80:
     beq lbl_inventory_applyItemStats_00000CE4
     addi r3, r3, 0x7d4
     li r4, 0x43
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     beq lbl_inventory_applyItemStats_00000CE4
     lwz r3, 0x0(r27)
@@ -1799,7 +1799,7 @@ lbl_inventory_applyItemStats_00001828:
     bne lbl_inventory_applyItemStats_0000183C
     mr r3, r26
     li r4, 0x1
-    bl fn_80164DCC
+    bl party_evalTacticCondition
 lbl_inventory_applyItemStats_0000183C:
     addi r11, r1, 0x1f0
     psq_l f31, 0x1f8(r1), 0, 0
@@ -1903,19 +1903,19 @@ lbl_fn_80152A24_00001924:
     addi r3, r30, 0x7d4
     li r4, 0x2
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     bne lbl_fn_80152A24_000019F0
     addi r3, r30, 0x7d4
     li r4, 0x3
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     bne lbl_fn_80152A24_000019F0
     addi r3, r30, 0x7d4
     li r4, 0x2e
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     bne lbl_fn_80152A24_000019F0
     lwz r0, lbl_8087F610

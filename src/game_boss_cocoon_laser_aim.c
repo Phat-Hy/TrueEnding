@@ -14,12 +14,12 @@ extern void fn_8006BD78(void);
 extern void script_executeOpcode(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800A4450(void);
+extern void font_getGlyphEntryByIndex(void);
 extern void fn_800A5B38(void);
 extern void str_findChar(void);
 extern void save_validateHeader(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801FEC74(void);
+extern void thread_findQueueTaskByName(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void fn_80470604(void);
@@ -62,7 +62,7 @@ extern u32 lbl_80886ED8;
 void fn_8046EBC4(void);
 void fn_8046EC7C(void);
 void fn_8046ECC8(void);
-void fn_8046ECDC(void);
+void boss_updateLaserAimMatrix(void);
 void fn_8046EED8(void);
 void fn_8046EF08(void);
 void fn_8046F014(void);
@@ -86,7 +86,7 @@ void fn_80470264(void);
 void fn_804702BC(void);
 void fn_80470364(void);
 void fn_8047043C(void);
-void fn_80470528(void);
+void boss_releaseLaserTarget(void);
 void fn_8047054C(void);
 void fn_80470564(void);
 void boss_getOffset54(void);
@@ -183,7 +183,7 @@ asm void fn_8046ECC8(void)
     blr
 }
 
-asm void fn_8046ECDC(void)
+asm void boss_updateLaserAimMatrix(void)
 {
     nofralloc
     stwu r1, -0x50(r1)
@@ -208,10 +208,10 @@ asm void fn_8046ECDC(void)
     lwz r3, 0x3ee0(r31)
     addi r4, r30, 0x18b
     addi r3, r3, 0x58
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     cmpwi r3, 0x0
     mr r28, r3
-    beq lbl_fn_8046ECDC_00000228
+    beq lbl_boss_updateLaserAimMatrix_00000228
     lwz r29, 0x3ee0(r31)
     addi r3, r30, 0x196
     bl str_findChar
@@ -223,17 +223,17 @@ asm void fn_8046ECDC(void)
     addi r3, r1, 0x8
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x8(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31
     lfs f1, 0x1c(r1)
-    bne lbl_fn_8046ECDC_000001CC
+    bne lbl_boss_updateLaserAimMatrix_000001CC
     addi r4, r1, 0xa
-    b lbl_fn_8046ECDC_000001D0
-lbl_fn_8046ECDC_000001CC:
+    b lbl_boss_updateLaserAimMatrix_000001D0
+lbl_boss_updateLaserAimMatrix_000001CC:
     lwz r4, 0x10(r1)
-lbl_fn_8046ECDC_000001D0:
+lbl_boss_updateLaserAimMatrix_000001D0:
     lfs f2, lbl_80886EC0
     li r5, 0x1
     li r6, 0x4
@@ -241,10 +241,10 @@ lbl_fn_8046ECDC_000001D0:
     lwz r0, 0x8(r1)
     fmr f31, f1
     srwi. r0, r0, 31
-    beq lbl_fn_8046ECDC_000001F8
+    beq lbl_boss_updateLaserAimMatrix_000001F8
     lwz r3, 0x10(r1)
     bl dtor_80084684
-lbl_fn_8046ECDC_000001F8:
+lbl_boss_updateLaserAimMatrix_000001F8:
     lwz r4, 0x3ee0(r31)
     lis r3, lbl_8075561C@ha
     addi r3, r3, lbl_8075561C@l
@@ -257,20 +257,20 @@ lbl_fn_8046ECDC_000001F8:
     li r5, 0x0
     fadds f1, f0, f31
     bl thread_findAndNotifySlot
-lbl_fn_8046ECDC_00000228:
+lbl_boss_updateLaserAimMatrix_00000228:
     cmpwi r27, 0x0
-    beq lbl_fn_8046ECDC_000002E0
+    beq lbl_boss_updateLaserAimMatrix_000002E0
     lwz r0, 0x3eec(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_8046ECDC_000002A0
+    bne lbl_boss_updateLaserAimMatrix_000002A0
     li r0, 0x0
     stw r0, 0x3ef0(r31)
     lwz r3, lbl_8087EF70
     cmpwi r3, 0x0
-    beq lbl_fn_8046ECDC_0000028C
+    beq lbl_boss_updateLaserAimMatrix_0000028C
     bl fn_800A5B38
     cmpwi r3, 0x1
-    bgt lbl_fn_8046ECDC_0000028C
+    bgt lbl_boss_updateLaserAimMatrix_0000028C
     lwz r4, 0x3ee0(r31)
     lis r3, lbl_8075561C@ha
     addi r3, r3, lbl_8075561C@l
@@ -283,21 +283,21 @@ lbl_fn_8046ECDC_00000228:
     bl thread_findAndNotify
     li r0, 0x1
     stw r0, 0x3ef0(r31)
-lbl_fn_8046ECDC_0000028C:
+lbl_boss_updateLaserAimMatrix_0000028C:
     li r3, 0x1
     li r0, 0x3c
     stw r3, 0x3eec(r31)
     stw r0, 0x3ee8(r31)
-    b lbl_fn_8046ECDC_000002E0
-lbl_fn_8046ECDC_000002A0:
+    b lbl_boss_updateLaserAimMatrix_000002E0
+lbl_boss_updateLaserAimMatrix_000002A0:
     lwz r0, 0x3ef0(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_8046ECDC_000002B4
+    beq lbl_boss_updateLaserAimMatrix_000002B4
     lfs f31, lbl_80886EC4
-    b lbl_fn_8046ECDC_000002B8
-lbl_fn_8046ECDC_000002B4:
+    b lbl_boss_updateLaserAimMatrix_000002B8
+lbl_boss_updateLaserAimMatrix_000002B4:
     lfs f31, lbl_80886EC0
-lbl_fn_8046ECDC_000002B8:
+lbl_boss_updateLaserAimMatrix_000002B8:
     lwz r4, 0x3ee0(r31)
     lis r3, lbl_8075561C@ha
     addi r3, r3, lbl_8075561C@l
@@ -308,13 +308,13 @@ lbl_fn_8046ECDC_000002B8:
     mr r4, r3
     mr r3, r28
     bl thread_findAndNotify
-lbl_fn_8046ECDC_000002E0:
+lbl_boss_updateLaserAimMatrix_000002E0:
     lwz r0, 0x3ef4(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_8046ECDC_000002F4
+    beq lbl_boss_updateLaserAimMatrix_000002F4
     li r0, 0xa
     stw r0, 0x3ee4(r31)
-lbl_fn_8046ECDC_000002F4:
+lbl_boss_updateLaserAimMatrix_000002F4:
     addi r11, r1, 0x40
     psq_l f31, 0x48(r1), 0, 0
     lfd f31, 0x40(r1)
@@ -2003,16 +2003,16 @@ lbl_fn_8047043C_00001944:
     blr
 }
 
-asm void fn_80470528(void)
+asm void boss_releaseLaserTarget(void)
 {
     nofralloc
     lwz r5, 0x0(r3)
     cmpwi r5, 0x0
-    beq lbl_fn_80470528_0000197C
+    beq lbl_boss_releaseLaserTarget_0000197C
     lwz r4, 0x2c(r5)
     subi r0, r4, 0x1
     stw r0, 0x2c(r5)
-lbl_fn_80470528_0000197C:
+lbl_boss_releaseLaserTarget_0000197C:
     li r0, 0x0
     stw r0, 0x0(r3)
     blr

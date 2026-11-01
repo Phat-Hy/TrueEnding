@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_80049B74(void);
+extern void snd_findSoundNodeByName(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -16,7 +16,7 @@ extern void wcs_parseInt(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
 extern void rand_scaleRangeInt(void);
-extern void fn_8020EFEC(void);
+extern void time_ticksToSeconds(void);
 extern void fn_80213B08(void);
 extern void fn_80216440(void);
 extern void fn_80216488(void);
@@ -24,7 +24,7 @@ extern void fn_802164A0(void);
 extern void fn_802164E8(void);
 extern void fn_80216500(void);
 extern void fn_80216AFC(void);
-extern void fn_8046DC5C(void);
+extern void boss_loadWeakpointResource(void);
 extern void boss_bindArenaInteractions(void);
 extern void strstr(void);
 extern void atoi(void);
@@ -187,7 +187,7 @@ lbl_fn_80213E60_00000128:
     cmpwi r3, 0x0
     beq lbl_fn_80213E60_00000200
     lwz r3, 0x4(r31)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     mr r31, r3
     mr r3, r28
     mr r4, r29
@@ -347,7 +347,7 @@ asm void fn_8021414C(void)
     addi r5, r1, 0x8
     lwz r4, lbl_80882EF8
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r12, 0xc(r1)
     mr r26, r3
     mr r4, r26
@@ -605,7 +605,7 @@ lbl_fn_802144A8_00000674:
     addi r5, r1, 0x8
     lwz r4, lbl_80882F00
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r12, 0xc(r1)
     mr r31, r3
     mr r4, r31
@@ -683,7 +683,7 @@ lbl_fn_802144A8_000007D4:
     bl talk_parseQuotedString
     mr r4, r3
     mr r3, r24
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     lwz r0, 0x14(r30)
     mr r27, r3
     cmpwi r0, 0x0
@@ -956,7 +956,7 @@ lbl_fn_802144A8_00000BD8:
     addi r5, r1, 0x8
     lwz r4, lbl_80882F04
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r12, 0xc(r1)
     mr r25, r3
     mr r4, r25
@@ -978,7 +978,7 @@ lbl_fn_802144A8_00000C30:
     bl talk_parseQuotedString
     mr r4, r3
     mr r3, r23
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     cmpwi r3, 0x0
     beq lbl_fn_802144A8_00000C68
     addi r24, r24, 0x1
@@ -1024,7 +1024,7 @@ lbl_fn_802144A8_00000CE0:
     bl talk_parseQuotedString
     mr r4, r3
     mr r3, r23
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     cmpwi r3, 0x0
     beq lbl_fn_802144A8_00000D64
     lwz r0, lbl_8087F250
@@ -1499,7 +1499,7 @@ asm void fn_802150F0(void)
     addi r5, r1, 0x18
     lwz r4, lbl_80882F08
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r12, 0xc70(r1)
     mr r25, r3
     mr r4, r25
@@ -2220,7 +2220,7 @@ lbl_fn_802150F0_00001D8C:
     addi r5, r1, 0x18
     lwz r4, lbl_80882F0C
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r12, 0xc70(r1)
     mr r26, r3
     mr r4, r26
@@ -2670,7 +2670,7 @@ lbl_fn_802150F0_000023C8:
     addi r5, r1, 0x18
     lwz r4, lbl_80882F10
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r4, 0x18(r1)
     mr r18, r3
     srwi r0, r4, 31

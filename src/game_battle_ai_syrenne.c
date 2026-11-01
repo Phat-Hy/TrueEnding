@@ -10,15 +10,15 @@ extern void _savegpr_23(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void item_testLineOfSight(void);
-extern void fn_80051B70(void);
-extern void fn_80051CD8(void);
+extern void player_stepMovement(void);
+extern void player_transformBoundingSphere(void);
 extern void mem_alloc(void);
 extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
 extern void motion_updateFogAdj(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB688(void);
+extern void morph_resetTargetWeight(void);
 extern void cam_destroyMsgHandle(void);
 extern void event_findEntryById(void);
 extern void fn_80216AFC(void);
@@ -243,7 +243,7 @@ lbl_fn_8043465C_00000128:
     stfs f8, 0x1c(r1)
     psq_st f1, 0x0(r26), 0, 0
     stfs f2, 0x98(r1)
-    bl fn_80051CD8
+    bl player_transformBoundingSphere
     cmpwi r3, 0x0
     beq lbl_fn_8043465C_0000021C
     stw r22, 0x144(r31)
@@ -554,7 +554,7 @@ lbl_fn_804348C4_000003EC:
     fadds f7, f9, f7
     stfs f0, 0x34(r1)
     stfs f7, 0x30(r1)
-    bl fn_80051B70
+    bl player_stepMovement
     cmpwi r3, 0x0
     beq lbl_fn_804348C4_000008B4
     lfs f2, 0x188(r1)
@@ -1202,7 +1202,7 @@ lbl_fn_804348C4_00001030:
     fmr f1, f0
 lbl_fn_804348C4_00001034:
     li r4, 0x0
-    bl fn_800CB688
+    bl morph_resetTargetWeight
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle

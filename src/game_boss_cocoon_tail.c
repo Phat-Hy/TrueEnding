@@ -8,7 +8,7 @@ extern void vec3_copy(void);
 extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011220(void);
+extern void math_fabsf(void);
 extern void vec3_sub(void);
 extern void item_testLineOfSight(void);
 extern void collision_testLineSegment(void);
@@ -24,11 +24,11 @@ extern void vec3_normalize(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void fn_80107A68(void);
-extern void fn_8012A1B8(void);
+extern void path_getFollowerNode(void);
 extern void fn_8012A288(void);
 extern void npc_getPosition(void);
-extern void fn_8013C480(void);
-extern void fn_801404F8(void);
+extern void npc_isInteractionReady(void);
+extern void quest_getGlobalManager(void);
 extern void quest_evaluateConditions(void);
 extern void actor_setState(void);
 extern void battle_updateTargetAggro(void);
@@ -826,7 +826,7 @@ lbl_fn_80463174_000009CC:
     bl vec3_mag
     fmr f28, f1
     mr r3, r31
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     lfs f29, 0x4(r3)
     addi r3, r1, 0x2c
     addi r4, r1, 0x68
@@ -838,7 +838,7 @@ lbl_fn_80463174_000009CC:
     fsubs f1, f0, f29
     bl fn_802A7964
     bl fn_802A7910
-    bl fn_80011220
+    bl math_fabsf
     fcmpo cr0, f1, f31
     cror eq, lt, eq
     bne lbl_fn_80463174_00000A88
@@ -910,7 +910,7 @@ lbl_fn_80463174_00000B5C:
     lwz r3, 0x1554(r31)
     cmpwi r3, 0x0
     beq lbl_fn_80463174_00000B7C
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     bne lbl_fn_80463174_00000B8C
 lbl_fn_80463174_00000B7C:
@@ -929,7 +929,7 @@ lbl_fn_80463174_00000B8C:
     bl vec3_mag
     fmr f30, f1
     mr r3, r31
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     lfs f31, 0x4(r3)
     addi r3, r1, 0x8
     addi r4, r1, 0x5c
@@ -941,7 +941,7 @@ lbl_fn_80463174_00000B8C:
     fsubs f1, f0, f31
     bl fn_802A7964
     bl fn_802A7910
-    bl fn_80011220
+    bl math_fabsf
     lfs f0, lbl_80886E10
     fcmpo cr0, f1, f0
     cror eq, lt, eq
@@ -963,7 +963,7 @@ lbl_fn_80463174_00000B8C:
     lfs f0, lbl_80886D9C
     fadds f0, f1, f0
     stfs f0, 0x48(r1)
-    bl fn_801404F8
+    bl quest_getGlobalManager
     lis r4, 0x8000
     addi r5, r1, 0x50
     addi r7, r4, 0x80

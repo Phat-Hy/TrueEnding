@@ -18,7 +18,7 @@ extern void sound_playSpatialEffect(void);
 extern void vec3_normalize(void);
 extern void system_getNextSequenceId(void);
 extern void hurtbox_dispatchHitEvent(void);
-extern void fn_8012A1B8(void);
+extern void path_getFollowerNode(void);
 extern void npc_getPosition(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015AC48(void);
@@ -1585,7 +1585,7 @@ asm void fn_802AC0E0(void)
     bl vec3_mag
     fmr f30, f1
     mr r3, r31
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     lfs f31, 0x4(r3)
     addi r3, r1, 0x8
     addi r4, r1, 0x20

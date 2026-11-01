@@ -17,7 +17,7 @@ extern void fn_804E82C8(void);
 extern void fn_804EAA88(void);
 extern void fn_804F50E0(void);
 extern void fn_805011D0(void);
-extern void fn_8050128C(void);
+extern void net_isMessageStateActive(void);
 extern void fn_8050A7F8(void);
 extern void fn_8050A8A8(void);
 extern void fn_8050A994(void);
@@ -25,7 +25,7 @@ extern void net_p2p_readPayload(void);
 extern void fn_8054D798(void);
 extern void net_getSocket(void);
 extern void net_getMyAid(void);
-extern void fn_806B1250(void);
+extern void net_isSessionConnected(void);
 
 /* External data declarations */
 extern u8 lbl_807C8AE8[];
@@ -575,7 +575,7 @@ lbl_fn_804F34B8_000006B8:
     li r0, 0x0
     b lbl_fn_804F34B8_000006F0
 lbl_fn_804F34B8_000006E0:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804F34B8_000006F0
 lbl_fn_804F34B8_000006EC:
@@ -745,7 +745,7 @@ lbl_fn_804F36FC_00000904:
     li r0, 0x0
     b lbl_fn_804F36FC_0000093C
 lbl_fn_804F36FC_0000092C:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804F36FC_0000093C
 lbl_fn_804F36FC_00000938:
@@ -1732,7 +1732,7 @@ lbl_fn_804F3EF0_00001618:
     andc r0, r0, r4
     srawi r0, r0, 31
     and r4, r4, r0
-    bl fn_8050128C
+    bl net_isMessageStateActive
     lwz r0, 0x540(r27)
     cmpwi r0, 0x2
     beq lbl_fn_804F3EF0_00001774
@@ -2099,7 +2099,7 @@ lbl_fn_804F4800_00001AD8:
     li r0, 0x0
     b lbl_fn_804F4800_00001B60
 lbl_fn_804F4800_00001B50:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804F4800_00001B60
 lbl_fn_804F4800_00001B5C:

@@ -17,14 +17,14 @@ extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
-extern void fn_800CB6E4(void);
+extern void morph_dispatchTargetUpdate(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
-extern void fn_8012476C(void);
+extern void player_testStatusCondition(void);
 extern void npc_updateTalkInteraction(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
-extern void fn_80164DCC(void);
+extern void party_evalTacticCondition(void);
 extern void debuff_clearStatus(void);
 extern void actor_getMovementFlags(void);
 extern void fn_801905AC(void);
@@ -1068,7 +1068,7 @@ lbl_fn_8019B29C_00000D94:
     bl debuff_clearStatus
     lwz r3, 0x4(r30)
     li r4, 0x1
-    bl fn_80164DCC
+    bl party_evalTacticCondition
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
@@ -1501,7 +1501,7 @@ lbl_fn_8019B6A8_000013DC:
     stw r0, 0x728(r3)
     lwz r3, lbl_8087F0A8
     addi r3, r3, 0x48c
-    bl fn_8012476C
+    bl player_testStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_8019B6A8_00001424
     lwz r3, 0x1c(r31)
@@ -1521,7 +1521,7 @@ lbl_fn_8019B6A8_00001448:
     lwz r4, 0x4(r31)
     addi r3, r31, 0x20
     addi r4, r4, 0x528
-    bl fn_800CB6E4
+    bl morph_dispatchTargetUpdate
 lbl_fn_8019B6A8_00001458:
     li r3, 0x0
 lbl_fn_8019B6A8_0000145C:

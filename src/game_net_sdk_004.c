@@ -125,12 +125,12 @@ void fn_806A0E64(void);
 void fn_806A0F4C(void);
 void fn_806A1064(void);
 void fn_806A117C(void);
-void fn_806A11D4(void);
+void net_initSubsystem(void);
 void fn_806A123C(void);
-void fn_806A1240(void);
-void fn_806A1248(void);
-void fn_806A1250(void);
-void fn_806A1258(void);
+void *fn_806A1240(void *p);
+void *fn_806A1248(void *p);
+void *fn_806A1250(void *p);
+void *fn_806A1258(void *p);
 void fn_806A1260(void);
 void fn_806A1270(void);
 void fn_806A1288(void);
@@ -181,7 +181,7 @@ asm void fn_806A02C0(void)
     mr r31, r3
     li r4, 0x0
     beq lbl_fn_806A02C0_000000B4
-    bl fn_806A11D4
+    bl net_initSubsystem
     mr r30, r3
     bl fn_806A1258
     mr r29, r3
@@ -275,7 +275,7 @@ asm void fn_806A0414(void)
     mr r29, r5
     stw r28, 0x10(r1)
     mr r28, r4
-    bl fn_806A11D4
+    bl net_initSubsystem
     mr r31, r3
     bl fn_806A1258
     mr r4, r30
@@ -332,7 +332,7 @@ asm void fn_806A04D8(void)
     mr r29, r5
     stw r28, 0x10(r1)
     mr r28, r4
-    bl fn_806A11D4
+    bl net_initSubsystem
     mr r31, r3
     bl fn_806A1258
     mr r4, r30
@@ -384,7 +384,7 @@ asm void fn_806A059C(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_806A11D4
+    bl net_initSubsystem
     bl fn_806A1258
     mr r4, r31
     bl fn_806A0DA4
@@ -414,7 +414,7 @@ asm void fn_806A05F8(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_806A11D4
+    bl net_initSubsystem
     mr r4, r31
     bl fn_8069BB48
     cntlzw r0, r3
@@ -436,7 +436,7 @@ asm void fn_806A0638(void)
     stw r31, 0xc(r1)
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_806A11D4
+    bl net_initSubsystem
     bl fn_806A1258
     mr r31, r3
     mr r4, r30
@@ -477,7 +477,7 @@ asm void fn_806A06BC(void)
     mr r31, r4
     stw r30, 0x18(r1)
     mr r30, r3
-    bl fn_806A11D4
+    bl net_initSubsystem
     bl fn_806A1258
     mr r4, r30
     bl fn_806A0DAC
@@ -508,7 +508,7 @@ asm void fn_806A0724(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_806A11D4
+    bl net_initSubsystem
     bl fn_806A1258
     mr r4, r31
     bl fn_806A0E00
@@ -542,7 +542,7 @@ asm void fn_806A0784(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_806A11D4
+    bl net_initSubsystem
     bl fn_806A1258
     mr r4, r30
     bl fn_806A0DBC
@@ -577,7 +577,7 @@ asm void fn_806A07E0(void)
     mr r26, r6
     mr r27, r7
     addi r30, r30, lbl_807BC628@l
-    bl fn_806A11D4
+    bl net_initSubsystem
     bl fn_806A1258
     mr r4, r31
     bl fn_806A0DBC
@@ -677,7 +677,7 @@ asm void fn_806A0950(void)
     lis r31, lbl_807BC628@ha
     mr r27, r3
     addi r31, r31, lbl_807BC628@l
-    bl fn_806A11D4
+    bl net_initSubsystem
     mr r30, r3
     bl fn_806A1258
     mr r4, r27
@@ -763,7 +763,7 @@ asm void fn_806A0A78(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_806A11D4
+    bl net_initSubsystem
     bl fn_806A1258
     mr r4, r31
     bl fn_806A0DBC
@@ -794,7 +794,7 @@ asm void fn_806A0AD8(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_806A11D4
+    bl net_initSubsystem
     bl fn_806A1258
     mr r4, r31
     bl fn_806A0DBC
@@ -1355,7 +1355,7 @@ lbl_fn_806A117C_00000F00:
     blr
 }
 
-asm void fn_806A11D4(void)
+asm void net_initSubsystem(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1364,7 +1364,7 @@ asm void fn_806A11D4(void)
     stw r31, 0xc(r1)
     lwz r0, lbl_808803F4
     cmpwi r0, 0x0
-    bne lbl_fn_806A11D4_00000F64
+    bne lbl_net_initSubsystem_00000F64
     lis r31, lbl_80833180@ha
     addi r31, r31, lbl_80833180@l
     stw r31, lbl_808803F4
@@ -1378,7 +1378,7 @@ asm void fn_806A11D4(void)
     bl fn_8069A9B8
     addi r3, r31, 0x840
     bl fn_8069D124
-lbl_fn_806A11D4_00000F64:
+lbl_net_initSubsystem_00000F64:
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
     lwz r3, lbl_808803F4
@@ -1390,32 +1390,24 @@ lbl_fn_806A11D4_00000F64:
 void fn_806A123C(void) {
 }
 
-asm void fn_806A1240(void)
+void *fn_806A1240(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x800
-    blr
+    return (u8 *)p + 0x800;
 }
 
-asm void fn_806A1248(void)
+void *fn_806A1248(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x808
-    blr
+    return (u8 *)p + 0x808;
 }
 
-asm void fn_806A1250(void)
+void *fn_806A1250(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x840
-    blr
+    return (u8 *)p + 0x840;
 }
 
-asm void fn_806A1258(void)
+void *fn_806A1258(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x80c
-    blr
+    return (u8 *)p + 0x80c;
 }
 
 asm void fn_806A1260(void)

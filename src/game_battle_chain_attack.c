@@ -15,7 +15,7 @@ extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
 extern void map_processTrigger(void);
 extern void map_debugLog(void);
-extern void fn_800902C0(void);
+extern void radar_addBlipEntry(void);
 extern void fn_800920B8(void);
 extern void compass_findWaypointIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -36,7 +36,7 @@ extern void task_createWorker(void);
 extern void task_destroyWorker(void);
 extern void task_updateWorker(void);
 extern void fn_803ECBD4(void);
-extern void fn_803EDB18(void);
+extern void barrier_testFieldCollision(void);
 extern void fn_803FFC50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void PSVECSquareMag(void);
@@ -1786,7 +1786,7 @@ lbl_fn_803FE828_000017FC:
     mr r3, r31
     addi r4, r31, 0xf4
     stw r0, 0x35c(r31)
-    bl fn_803EDB18
+    bl barrier_testFieldCollision
     mr r3, r31
     addi r4, r31, 0xf4
     li r5, 0x1
@@ -2058,7 +2058,7 @@ lbl_fn_803FEC54_00001BB4:
     addi r3, r31, 0xf4
     addi r5, r1, 0x14
     li r4, 0x0
-    bl fn_800902C0
+    bl radar_addBlipEntry
     addic. r3, r1, 0x14
     beq lbl_fn_803FEC54_00001C28
     lwz r4, 0x14(r1)

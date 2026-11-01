@@ -27,7 +27,7 @@ extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_800E0AA8(void);
+extern void particle_getEmitterContext(void);
 extern void fn_800E0AB0(void);
 extern void cam_findTargetIndex(void);
 extern void system_getNextSequenceId(void);
@@ -39,7 +39,7 @@ extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
 extern void actor_setState(void);
-extern void fn_801A03E0(void);
+extern void bgm_getGlobalManager(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -56,7 +56,7 @@ extern void fn_802E177C(void);
 extern void fn_802E1A0C(void);
 extern void fn_802E5B30(void);
 extern void world_setLocalFlag(void);
-extern void fn_803EEE10(void);
+extern void dungeon_findArenaNodeByCoords(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
@@ -764,7 +764,7 @@ lbl_fn_802DE27C_000008C4:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r28, r3
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     mr r4, r28
     bl skill_findNodeById
     cmpwi r28, 0x0
@@ -790,7 +790,7 @@ lbl_fn_802DE27C_00000920:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r28, r3
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     mr r4, r28
     bl skill_findNodeById
     cmpwi r28, 0x0
@@ -976,7 +976,7 @@ lbl_fn_802DE27C_00000BB4:
     addi r28, r28, 0x1
 lbl_fn_802DE27C_00000BD0:
     addi r3, r31, 0x1624
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     cmplw r28, r3
     blt lbl_fn_802DE27C_00000BB4
     mr r3, r31
@@ -1560,7 +1560,7 @@ lbl_fn_802DEE28_000013F4:
     lwz r3, lbl_8087F4A0
     li r4, 0x6dd6
     lwzx r5, r5, r0
-    bl fn_803EEE10
+    bl dungeon_findArenaNodeByCoords
     cmpwi r3, 0x0
     beq lbl_fn_802DEE28_000014F8
     lfs f0, lbl_8088467C
@@ -1596,7 +1596,7 @@ lbl_fn_802DEE28_00001480:
     li r4, 0x6dd6
     lwz r3, lbl_8087F4A0
     lwzx r5, r5, r26
-    bl fn_803EEE10
+    bl dungeon_findArenaNodeByCoords
     cmpwi r3, 0x0
     beq lbl_fn_802DEE28_000014E4
     cmplw r27, r28

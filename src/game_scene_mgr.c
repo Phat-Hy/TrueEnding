@@ -6,16 +6,16 @@ extern void __files(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_800185B4(void);
+extern void battle_findTargetSlotById(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800A55D4(void);
+extern void msg_lookupFormattedEntry(void);
 extern void fn_80105950(void);
-extern void fn_801059F8(void);
+extern void colli_findDynamicSlot(void);
 extern void fn_80105A08(void);
 extern void fn_8010CA24(void);
 extern void player_evaluateStatusCondition(void);
@@ -23,7 +23,7 @@ extern void fn_80134168(void);
 extern void npc_updateTalkInteraction(void);
 extern void inventory_unequipItem(void);
 extern void debuff_clearStatus(void);
-extern void fn_80192758(void);
+extern void map_processStreamChunk(void);
 extern void fn_801A471C(void);
 extern void fn_801A474C(void);
 extern void fn_801A4868(void);
@@ -1000,7 +1000,7 @@ lbl_fn_801A34D4_00000C68:
     cmpwi r3, 0x0
     beq lbl_fn_801A34D4_00000CCC
     lwz r4, 0x4(r27)
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r4, 0x4(r27)
     lwz r3, lbl_8087F048
     addi r5, r4, 0xb0
@@ -1053,7 +1053,7 @@ lbl_fn_801A34D4_00000D50:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x0
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cntlzw r0, r3
     srwi r3, r0, 5
     b lbl_fn_801A34D4_00000E00
@@ -1135,7 +1135,7 @@ lbl_fn_801A34D4_00000E58:
     bge lbl_fn_801A34D4_00000EB4
     lwz r3, lbl_8087F048
     lwz r4, 0x4(r27)
-    bl fn_801059F8
+    bl colli_findDynamicSlot
 lbl_fn_801A34D4_00000EB4:
     li r0, 0x1
     stw r0, 0x30(r27)
@@ -1309,7 +1309,7 @@ lbl_fn_801A34D4_00001128:
     lwz r3, lbl_8087EE68
     mr r5, r30
     lwz r4, 0x4(r27)
-    bl fn_800185B4
+    bl battle_findTargetSlotById
     cmpwi r3, 0x0
     beq lbl_fn_801A34D4_000011E0
     lwz r0, 0x8(r3)
@@ -1436,7 +1436,7 @@ lbl_fn_801A34D4_000012E0:
     bne lbl_fn_801A34D4_00001324
     lwz r3, lbl_8087F048
     lwz r4, 0x4(r27)
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     li r0, 0x1
     stw r0, 0x30(r27)
     li r29, 0x1
@@ -2099,7 +2099,7 @@ lbl_fn_801A3DFC_00001CAC:
     stw r0, 0x0(r28)
     b lbl_fn_801A3DFC_00001CBC
 lbl_fn_801A3DFC_00001CB8:
-    bl fn_80192758
+    bl map_processStreamChunk
 lbl_fn_801A3DFC_00001CBC:
     addi r11, r1, 0x1b0
     bl _restgpr_27

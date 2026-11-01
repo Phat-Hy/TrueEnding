@@ -9,7 +9,7 @@ extern void town_updateInteractionPoints(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800A4494(void);
+extern void font_mapErrorCode(void);
 extern void atn_Task_destructor(void);
 extern void str_skipWhitespace(void);
 extern void fn_800DDA70(void);
@@ -71,7 +71,7 @@ void fn_800A5554(void);
 void msg_getMessageById(void);
 void fn_800A5584(void);
 void msg_getMessageString(void);
-void fn_800A55D4(void);
+void msg_lookupFormattedEntry(void);
 void fn_800A55FC(void);
 void fn_800A5648(void);
 void msg_formatWindowLayout(void);
@@ -147,7 +147,7 @@ lbl_msg_formatTextWithAlignment_000000A8:
     stw r0, 0x158(r3)
     b lbl_msg_formatTextWithAlignment_000001F8
 lbl_msg_formatTextWithAlignment_000000B4:
-    bl fn_800A4494
+    bl font_mapErrorCode
     stw r3, 0x158(r31)
     b lbl_msg_formatTextWithAlignment_000001F8
     cmpwi r4, 0x0
@@ -159,32 +159,32 @@ lbl_msg_formatTextWithAlignment_000000B4:
     beq lbl_msg_formatTextWithAlignment_000001F8
 lbl_msg_formatTextWithAlignment_000000DC:
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     stw r3, 0x158(r31)
     b lbl_msg_formatTextWithAlignment_000001F8
     cmpwi r4, 0x0
     beq lbl_msg_formatTextWithAlignment_000001F8
-    bl fn_800A4494
+    bl font_mapErrorCode
     stw r3, 0x158(r31)
     b lbl_msg_formatTextWithAlignment_000001F8
     cmpwi r4, 0x0
     beq lbl_msg_formatTextWithAlignment_000001F8
-    bl fn_800A4494
+    bl font_mapErrorCode
     stw r3, 0x158(r31)
     b lbl_msg_formatTextWithAlignment_000001F8
     cmpwi r4, 0x0
     beq lbl_msg_formatTextWithAlignment_000001F8
-    bl fn_800A4494
+    bl font_mapErrorCode
     stw r3, 0x158(r31)
     b lbl_msg_formatTextWithAlignment_000001F8
     cmpwi r4, 0x0
     beq lbl_msg_formatTextWithAlignment_000001F8
-    bl fn_800A4494
+    bl font_mapErrorCode
     stw r3, 0x158(r31)
     b lbl_msg_formatTextWithAlignment_000001F8
     cmpwi r4, 0x0
     bge lbl_msg_formatTextWithAlignment_00000150
-    bl fn_800A4494
+    bl font_mapErrorCode
     stw r3, 0x158(r31)
     b lbl_msg_formatTextWithAlignment_000001F8
 lbl_msg_formatTextWithAlignment_00000150:
@@ -196,7 +196,7 @@ lbl_msg_formatTextWithAlignment_00000150:
     b lbl_msg_formatTextWithAlignment_000001F8
     cmpwi r4, 0x0
     bge lbl_msg_formatTextWithAlignment_0000017C
-    bl fn_800A4494
+    bl font_mapErrorCode
     stw r3, 0x158(r31)
     b lbl_msg_formatTextWithAlignment_000001F8
 lbl_msg_formatTextWithAlignment_0000017C:
@@ -208,7 +208,7 @@ lbl_msg_formatTextWithAlignment_0000017C:
     b lbl_msg_formatTextWithAlignment_000001F8
     cmpwi r4, 0x0
     bge lbl_msg_formatTextWithAlignment_000001A8
-    bl fn_800A4494
+    bl font_mapErrorCode
     stw r3, 0x158(r31)
     b lbl_msg_formatTextWithAlignment_000001F8
 lbl_msg_formatTextWithAlignment_000001A8:
@@ -220,17 +220,17 @@ lbl_msg_formatTextWithAlignment_000001A8:
     b lbl_msg_formatTextWithAlignment_000001F8
     cmpwi r4, 0x0
     beq lbl_msg_formatTextWithAlignment_000001F8
-    bl fn_800A4494
+    bl font_mapErrorCode
     stw r3, 0x158(r31)
     b lbl_msg_formatTextWithAlignment_000001F8
     cmpwi r4, 0x0
     beq lbl_msg_formatTextWithAlignment_000001F8
-    bl fn_800A4494
+    bl font_mapErrorCode
     stw r3, 0x158(r31)
     b lbl_msg_formatTextWithAlignment_000001F8
     cmpwi r4, 0x0
     beq lbl_msg_formatTextWithAlignment_000001F8
-    bl fn_800A4494
+    bl font_mapErrorCode
     stw r3, 0x158(r31)
 lbl_msg_formatTextWithAlignment_000001F8:
     lwz r0, 0x14(r1)
@@ -528,7 +528,7 @@ asm void msg_getMessageString(void)
     b fn_800DEF2C
 }
 
-asm void fn_800A55D4(void)
+asm void msg_lookupFormattedEntry(void)
 {
     nofralloc
     lis r7, lbl_80732898@ha

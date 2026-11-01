@@ -17,7 +17,7 @@ extern void fn_8005E7F4(void);
 extern void equip_calcTotalStatBonuses(void);
 extern void skill_calcTrajectory(void);
 extern void boss_recordDamage(void);
-extern void fn_8006A250(void);
+extern void boss_dispatchActionTransition(void);
 extern void fn_8006A5A8(void);
 extern void script_executeOpcode(void);
 extern void fn_80076FF8(void);
@@ -60,11 +60,11 @@ extern void fn_803BEAB4(void);
 extern void fn_803CE448(void);
 extern void fn_803CE44C(void);
 extern void fn_803EDFBC(void);
-extern void fn_803EEE10(void);
+extern void dungeon_findArenaNodeByCoords(void);
 extern void fn_80453DBC(void);
-extern void fn_8046ECDC(void);
+extern void boss_updateLaserAimMatrix(void);
 extern void fn_8047043C(void);
-extern void fn_80470528(void);
+extern void boss_releaseLaserTarget(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -80,7 +80,7 @@ extern void fn_8052E8D8(void);
 extern void fn_8052E984(void);
 extern void fn_8052EEC0(void);
 extern void fn_8052F890(void);
-extern void fn_80533BE0(void);
+extern void spectate_dispatchCameraMode(void);
 extern void spectateView_renderInterface(void);
 extern void PSVECNormalize(void);
 extern void fn_806163C0(void);
@@ -1049,7 +1049,7 @@ asm void fn_80531F48(void)
     stw r30, 0x2dc(r28)
     stw r30, 0x2e0(r28)
     stw r0, 0x2e8(r28)
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     stw r3, 0x2c8(r28)
     lis r5, 0x3b9b
     lis r4, 0x100
@@ -1373,7 +1373,7 @@ lbl_spectateManager_init_0000115C:
 lbl_spectateManager_init_00001170:
     addic. r3, r30, 0x6a0
     beq lbl_spectateManager_init_0000117C
-    bl fn_80470528
+    bl boss_releaseLaserTarget
 lbl_spectateManager_init_0000117C:
     addic. r3, r30, 0x438
     beq lbl_spectateManager_init_0000118C
@@ -1470,7 +1470,7 @@ asm void spectateManager_update(void)
     mr r30, r3
     lwz r3, lbl_8087F518
     li r4, 0x0
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     lwz r4, 0x2a8(r30)
     cmpwi r4, 0x0
     bne lbl_spectateManager_update_000015F4
@@ -2172,10 +2172,10 @@ lbl_spectateManager_update_00001D40:
     li r4, 0x0
     bl atn_Task_setActive
     addi r3, r30, 0x6a0
-    bl fn_80470528
+    bl boss_releaseLaserTarget
     mr r3, r30
     li r4, 0x1
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     lwz r3, 0x5c(r30)
     lis r28, lbl_8075D5B0@ha
     addi r28, r28, lbl_8075D5B0@l
@@ -2403,7 +2403,7 @@ lbl_spectateManager_update_000020D0:
     add r27, r0, r26
     lwzx r4, r26, r0
     lwz r5, 0x4(r27)
-    bl fn_803EEE10
+    bl dungeon_findArenaNodeByCoords
     cmpwi r3, 0x0
     beq lbl_spectateManager_update_00002108
     lwz r12, 0x0(r3)

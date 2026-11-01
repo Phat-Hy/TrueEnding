@@ -13,7 +13,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_getAllocSize(void);
 extern void minimap_renderOverlay(void);
-extern void fn_800902C0(void);
+extern void radar_addBlipEntry(void);
 extern void fn_800929C0(void);
 extern void fn_80093E90(void);
 extern void cursor_applyAnimationTrack(void);
@@ -54,13 +54,13 @@ extern u32 lbl_8088066C;
 extern u32 lbl_80880670;
 
 /* Function declarations */
-void fn_8000CBD0(void);
+u32 fn_8000CBD0(void);
 void fn_8000CBD8(void);
 void mtx_getTranslation(void);
 void vec3_set(f32* v, f32 x, f32 y, f32 z);
 void vec3_copy(void);
 void fn_8000D138(void);
-void fn_8000D1A0(void);
+u32 fn_8000D1A0(void);
 void fn_8000D1A8(void);
 f32 vec3_mag(const void *v);
 void fn_8000D3A8(void);
@@ -71,28 +71,26 @@ void fn_8000D760(void);
 void fn_8000D7DC(void);
 void fn_8000D844(void);
 void fn_8000D8C0(void);
-void scene_transformPoint(void);
-void fn_8000D9F0(void);
-void fn_8000D9F8(void);
+u32 scene_transformPoint(void);
+u32 fn_8000D9F0(void *p);
+u32 fn_8000D9F8(void *p);
 void fn_8000DA00(void);
 void fn_8000DAF0(void);
-void fn_8000DB1C(void);
+u32 fn_8000DB1C(void);
 void fn_8000DB24(void);
-void fn_8000DCF4(void);
-void fn_8000DCFC(void);
-void fn_8000DD04(void);
+u32 scene_getCamera(void *p);
+void fn_8000DCFC(void *p, u32 val);
+u32 fn_8000DD04(void *p);
 void *scene_getRootNode(void *obj);
 void fn_8000DD14(void);
-void fn_8000DD98(void);
+u32 fn_8000DD98(void *p);
 void fn_8000DDA0(void);
-void fn_8000DE3C(void);
+u32 fn_8000DE3C(void *p);
 void fn_8000DE44(void);
 
-asm void fn_8000CBD0(void)
+u32 fn_8000CBD0(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_8000CBD8(void)
@@ -503,11 +501,9 @@ lbl_fn_8000D138_000005A0:
     blr
 }
 
-asm void fn_8000D1A0(void)
+u32 fn_8000D1A0(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_8000D1A8(void)
@@ -724,7 +720,7 @@ lbl_scene_traverseNode_000008A4:
     lwz r4, 0x220(r31)
     mr r3, r31
     addi r5, r1, 0x8
-    bl fn_800902C0
+    bl radar_addBlipEntry
     addic. r3, r1, 0x8
     beq lbl_scene_traverseNode_000008F0
     lwz r4, 0x8(r1)
@@ -1127,25 +1123,19 @@ lbl_fn_8000D8C0_00000E00:
     blr
 }
 
-asm void scene_transformPoint(void)
+u32 scene_transformPoint(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F8A0
-    blr
+    return lbl_8087F8A0;
 }
 
-asm void fn_8000D9F0(void)
+u32 fn_8000D9F0(void *p)
 {
-    nofralloc
-    lwz r3, 0x54(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x54);
 }
 
-asm void fn_8000D9F8(void)
+u32 fn_8000D9F8(void *p)
 {
-    nofralloc
-    lwz r3, 0x50(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x50);
 }
 
 asm void fn_8000DA00(void)
@@ -1244,11 +1234,9 @@ lbl_fn_8000DAF0_00000F44:
     b fn_803CC5E4
 }
 
-asm void fn_8000DB1C(void)
+u32 fn_8000DB1C(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F540
-    blr
+    return lbl_8087F540;
 }
 
 asm void fn_8000DB24(void)
@@ -1288,7 +1276,7 @@ lbl_fn_8000DB24_00000F9C:
     cmpwi r3, 0x0
     beq lbl_fn_8000DB24_00000FE4
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     mr r30, r3
     b lbl_fn_8000DB24_00000FE8
 lbl_fn_8000DB24_00000FE4:
@@ -1381,25 +1369,19 @@ lbl_fn_8000DB24_0000110C:
     blr
 }
 
-asm void fn_8000DCF4(void)
+u32 scene_getCamera(void *p)
 {
-    nofralloc
-    lwz r3, 0x48(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x48);
 }
 
-asm void fn_8000DCFC(void)
+void fn_8000DCFC(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x58(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x58) = val;
 }
 
-asm void fn_8000DD04(void)
+u32 fn_8000DD04(void *p)
 {
-    nofralloc
-    lwz r3, 0x16c(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x16c);
 }
 
 void *scene_getRootNode(void *obj)
@@ -1445,11 +1427,9 @@ asm void fn_8000DD14(void)
     blr
 }
 
-asm void fn_8000DD98(void)
+u32 fn_8000DD98(void *p)
 {
-    nofralloc
-    lwz r3, 0x18(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x18);
 }
 
 asm void fn_8000DDA0(void)
@@ -1497,11 +1477,9 @@ lbl_fn_8000DDA0_0000124C:
     blr
 }
 
-asm void fn_8000DE3C(void)
+u32 fn_8000DE3C(void *p)
 {
-    nofralloc
-    lwz r3, 0x48(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x48);
 }
 
 asm void fn_8000DE44(void)

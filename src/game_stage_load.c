@@ -17,7 +17,7 @@ extern void debuff_clearStatus(void);
 extern void battle_calcExpPosition(void);
 extern void fn_80188A70(void);
 extern void fn_80188AA0(void);
-extern void fn_80192758(void);
+extern void map_processStreamChunk(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -297,7 +297,7 @@ lbl_fn_801971B8_00000338:
     stw r0, 0x0(r31)
     b lbl_fn_801971B8_00000348
 lbl_fn_801971B8_00000344:
-    bl fn_80192758
+    bl map_processStreamChunk
 lbl_fn_801971B8_00000348:
     lwz r0, 0x1c4(r1)
     lwz r31, 0x1bc(r1)
@@ -911,7 +911,7 @@ lbl_fn_80197A68_00000BE8:
     stw r0, 0x0(r31)
     b lbl_fn_80197A68_00000BF8
 lbl_fn_80197A68_00000BF4:
-    bl fn_80192758
+    bl map_processStreamChunk
 lbl_fn_80197A68_00000BF8:
     lwz r0, 0x1c4(r1)
     lwz r31, 0x1bc(r1)

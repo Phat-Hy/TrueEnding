@@ -11,14 +11,14 @@ extern void talk_parseDialogue(void);
 extern void talk_parseDialogueTokens(void);
 extern void talk_copyUtf16String(void);
 extern void fn_8006BA8C(void);
-extern void fn_8006BB6C(void);
+extern void boss_triggerEventAction(void);
 extern void dungeon_initGlobalContext(void);
 extern void town_registerInteractionPoint(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void str_skipWhitespace(void);
 extern void wcs_vformat(void);
-extern void fn_80206B14(void);
+extern void sys_findModuleById(void);
 extern void fn_80206B68(void);
 extern void fn_80206B70(void);
 extern void game_initGlobalDatabases(void);
@@ -27,8 +27,8 @@ extern void time_wrapMilliseconds(void);
 extern void fn_8020EE58(void);
 extern void fn_8020EE60(void);
 extern void rand_scaleRangeInt(void);
-extern void fn_8020EF4C(void);
-extern void fn_8020EFEC(void);
+extern void rand_stepEntropy(void);
+extern void time_ticksToSeconds(void);
 extern void fn_80219F1C(void);
 extern void fn_80219F84(void);
 extern void fn_8021A4E0(void);
@@ -600,7 +600,7 @@ lbl_event_processScriptAction_00000750:
     blt lbl_event_processScriptAction_0000072C
     mr r3, r22
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
     bl fn_80211244
     lmw r17, 0x654(r1)
     lwz r0, 0x694(r1)
@@ -757,7 +757,7 @@ lbl_fn_80211244_00000980:
     bne lbl_fn_80211244_0000093C
     mr r3, r28
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
 lbl_fn_80211244_0000099C:
     lwz r0, 0xc84(r1)
     lwz r31, 0xc7c(r1)
@@ -974,7 +974,7 @@ lbl_fn_80211648_00000C28:
     cmpwi r3, 0x0
     beq lbl_fn_80211648_00000C58
     lwz r3, 0x4(r31)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     lwz r3, 0xa8(r3)
     subi r0, r3, 0x8
     cmplwi r0, 0x2
@@ -1461,7 +1461,7 @@ lbl_fn_80211940_00001280:
     add r0, r0, r4
     mulli r0, r0, 0x3e8
     subf r4, r0, r5
-    bl fn_80206B14
+    bl sys_findModuleById
     lwz r0, 0x80(r27)
     addi r4, r25, 0x4dd3
     lfs f0, 0x0(r3)
@@ -1712,7 +1712,7 @@ lbl_fn_80211940_00001680:
     bl fn_8020EE60
     mr r31, r3
     lwz r3, 0x4(r25)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     lwz r0, 0x7c(r31)
     mr r27, r3
     cmpwi r0, 0x0
@@ -1882,7 +1882,7 @@ lbl_fn_80211940_000018C4:
     lwz r4, 0x7c(r30)
     add r0, r4, r0
     stw r0, 0x7c(r31)
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_80211940_00001944
     add r27, r27, r27

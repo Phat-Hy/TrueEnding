@@ -10,7 +10,7 @@ extern void _savegpr_24(void);
 extern void ui_destroyWidget(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
-extern void fn_800CB58C(void);
+extern void morph_hasActiveWeight(void);
 extern void battle_awardExp(void);
 extern void fn_803E9B7C(void);
 extern void fn_803EBA54(void);
@@ -20,11 +20,11 @@ extern void fn_804C54FC(void);
 extern void net_voiceCodec_destroy(void);
 extern void fn_804E9C68(void);
 extern void fn_804F50E0(void);
-extern void fn_8050128C(void);
+extern void net_isMessageStateActive(void);
 extern void net_p2p_readPayload(void);
 extern void net_getSocket(void);
 extern void net_getMyAid(void);
-extern void fn_806B1250(void);
+extern void net_isSessionConnected(void);
 
 /* External data declarations */
 extern u8 lbl_80759CC8[];
@@ -49,16 +49,16 @@ extern u32 lbl_80887590;
 
 /* Function declarations */
 void fn_804E8094(void);
-void fn_804E80A4(void);
+u32 fn_804E80A4(void *p);
 void fn_804E80AC(void);
-void fn_804E80BC(void);
-void fn_804E80C4(void);
+u32 fn_804E80BC(void *p);
+f32 fn_804E80C4(void *p);
 void fn_804E80CC(void);
-void fn_804E81C8(void);
+void *fn_804E81C8(void *p);
 void fn_804E81D0(void);
-void fn_804E8244(void);
+void *fn_804E8244(void *p);
 void fn_804E824C(void);
-void fn_804E82C0(void);
+void *fn_804E82C0(void *p);
 void fn_804E82C8(void);
 void fn_804E8A84(void);
 void fn_804E8BF8(void);
@@ -73,11 +73,9 @@ asm void fn_804E8094(void)
     blr
 }
 
-asm void fn_804E80A4(void)
+u32 fn_804E80A4(void *p)
 {
-    nofralloc
-    lwz r3, 0xc4c(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0xc4c);
 }
 
 asm void fn_804E80AC(void)
@@ -89,18 +87,14 @@ asm void fn_804E80AC(void)
     blr
 }
 
-asm void fn_804E80BC(void)
+u32 fn_804E80BC(void *p)
 {
-    nofralloc
-    lwz r3, 0x524(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x524);
 }
 
-asm void fn_804E80C4(void)
+f32 fn_804E80C4(void *p)
 {
-    nofralloc
-    lfs f1, 0x588(r3)
-    blr
+    return *(f32 *)((u8 *)p + 0x588);
 }
 
 asm void fn_804E80CC(void)
@@ -183,11 +177,9 @@ lbl_fn_804E80CC_00000128:
     blr
 }
 
-asm void fn_804E81C8(void)
+void *fn_804E81C8(void *p)
 {
-    nofralloc
-    addi r3, r3, 0xfa4
-    blr
+    return (u8 *)p + 0xfa4;
 }
 
 asm void fn_804E81D0(void)
@@ -225,11 +217,9 @@ lbl_fn_804E81D0_00000188:
     blr
 }
 
-asm void fn_804E8244(void)
+void *fn_804E8244(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x4
-    blr
+    return (u8 *)p + 4;
 }
 
 asm void fn_804E824C(void)
@@ -267,11 +257,9 @@ lbl_fn_804E824C_00000204:
     blr
 }
 
-asm void fn_804E82C0(void)
+void *fn_804E82C0(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x4
-    blr
+    return (u8 *)p + 4;
 }
 
 asm void fn_804E82C8(void)
@@ -303,7 +291,7 @@ lbl_fn_804E82C8_00000280:
     b lbl_fn_804E82C8_000009D8
 lbl_fn_804E82C8_00000288:
     addi r3, r3, 0x2b70
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     beq lbl_fn_804E82C8_000002A0
     li r3, 0x0
@@ -1634,7 +1622,7 @@ lbl_fn_804E9364_000013D0:
     stb r14, 0xcc(r31)
     addi r3, r31, 0xdc
     li r4, 0x0
-    bl fn_8050128C
+    bl net_isMessageStateActive
     lwz r0, 0xd4(r1)
     li r3, 0x0
     stw r0, 0xb0(r31)
@@ -1705,7 +1693,7 @@ lbl_fn_804E9364_000014C0:
     li r0, 0x0
     b lbl_fn_804E9364_000014F8
 lbl_fn_804E9364_000014E8:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804E9364_000014F8
 lbl_fn_804E9364_000014F4:
@@ -1919,7 +1907,7 @@ lbl_fn_804E9364_000017B0:
     li r20, 0x0
     b lbl_fn_804E9364_00001810
 lbl_fn_804E9364_00001800:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r20, r3, 24
     b lbl_fn_804E9364_00001810
 lbl_fn_804E9364_0000180C:

@@ -18,13 +18,13 @@ extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5C90(void);
 extern void fn_806D64B0(void);
-extern void fn_806D6610(void);
+extern void net_invokeChannelCallback(void);
 extern void net_socketConnect(void);
 extern void net_socketClose(void);
 extern void fn_806D7B30(void);
 extern void fn_806D7B70(void);
 extern void fn_806D7F20(void);
-extern void fn_806D8E30(void);
+extern void net_strdup(void);
 extern void net_getTimestampMs(void);
 extern void fn_806F2070(void);
 extern void fn_806F2600(void);
@@ -553,7 +553,7 @@ lbl_fn_806F6CA0_00000678:
     b lbl_fn_806F6CA0_000006B8
 lbl_fn_806F6CA0_00000698:
     mr r3, r26
-    bl fn_806D8E30
+    bl net_strdup
     cmpwi r3, 0x0
     stw r3, 0x130(r25)
     bne lbl_fn_806F6CA0_000006B8
@@ -901,7 +901,7 @@ asm void fn_806F7560(void)
     lwz r28, lbl_80862140@l(r3)
 lbl_fn_806F7560_00000B78:
     mr r3, r29
-    bl fn_806D8E30
+    bl net_strdup
     cmpwi r30, 0x0
     li r4, 0x0
     li r0, 0x1
@@ -933,7 +933,7 @@ lbl_fn_806F7560_00000BD8:
     b lbl_fn_806F7560_00000C1C
 lbl_fn_806F7560_00000BE8:
     mr r3, r31
-    bl fn_806D8E30
+    bl net_strdup
     li r4, 0x2f
     mr r5, r3
     b lbl_fn_806F7560_00000C10
@@ -962,7 +962,7 @@ lbl_fn_806F7560_00000C3C:
     stw r29, 0x8(r1)
     addi r4, r1, 0x8
     lwz r3, 0x0(r28)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     bne lbl_fn_806F7560_00000C5C
     li r3, 0x0
@@ -1003,7 +1003,7 @@ lbl_fn_806F76C0_00000CC4:
     stw r4, 0x8(r1)
     addi r4, r1, 0x8
     lwz r3, 0x0(r3)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_806F76C0_00000CE8
@@ -1038,7 +1038,7 @@ lbl_fn_806F76C0_00000D34:
     b lbl_fn_806F76C0_00000D7C
 lbl_fn_806F76C0_00000D44:
     mr r3, r30
-    bl fn_806D8E30
+    bl net_strdup
     li r4, 0x2f
     mr r5, r3
     b lbl_fn_806F76C0_00000D70
@@ -1099,7 +1099,7 @@ lbl_fn_806F77F0_00000E04:
     stw r4, 0x20(r1)
     addi r4, r1, 0x20
     lwz r3, 0x0(r3)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi cr1, r3, 0x0
     mr r30, r3
     bne cr1, lbl_fn_806F77F0_00000E28
@@ -1151,7 +1151,7 @@ lbl_fn_806F77F0_00000EAC:
     b lbl_fn_806F77F0_00000EF4
 lbl_fn_806F77F0_00000EBC:
     mr r3, r29
-    bl fn_806D8E30
+    bl net_strdup
     li r4, 0x2f
     mr r5, r3
     b lbl_fn_806F77F0_00000EE8
@@ -1228,7 +1228,7 @@ lbl_fn_806F77F0_00000FA4:
     b lbl_fn_806F77F0_00000FEC
 lbl_fn_806F77F0_00000FB4:
     mr r3, r29
-    bl fn_806D8E30
+    bl net_strdup
     li r4, 0x2f
     mr r5, r3
     b lbl_fn_806F77F0_00000FE0
@@ -1269,7 +1269,7 @@ lbl_fn_806F77F0_0000102C:
     stw r29, 0x8(r1)
     addi r4, r1, 0x8
     lwz r3, 0x0(r31)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_806F77F0_00001050
@@ -1328,7 +1328,7 @@ lbl_fn_806F77F0_000010F0:
     b lbl_fn_806F77F0_00001134
 lbl_fn_806F77F0_00001100:
     mr r3, r31
-    bl fn_806D8E30
+    bl net_strdup
     li r4, 0x2f
     mr r5, r3
     b lbl_fn_806F77F0_00001128
@@ -1388,7 +1388,7 @@ lbl_fn_806F7BB0_000011B4:
     stw r4, 0x8(r1)
     addi r4, r1, 0x8
     lwz r3, 0x0(r3)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi cr1, r3, 0x0
     mr r31, r3
     bne cr1, lbl_fn_806F7BB0_000011D8
@@ -1440,7 +1440,7 @@ lbl_fn_806F7BB0_0000125C:
     b lbl_fn_806F7BB0_000012A4
 lbl_fn_806F7BB0_0000126C:
     mr r3, r30
-    bl fn_806D8E30
+    bl net_strdup
     li r4, 0x2f
     mr r5, r3
     b lbl_fn_806F7BB0_00001298
@@ -1517,7 +1517,7 @@ lbl_fn_806F7BB0_00001354:
     b lbl_fn_806F7BB0_0000139C
 lbl_fn_806F7BB0_00001364:
     mr r3, r30
-    bl fn_806D8E30
+    bl net_strdup
     li r4, 0x2f
     mr r5, r3
     b lbl_fn_806F7BB0_00001390
@@ -1586,7 +1586,7 @@ lbl_fn_806F7E30_00001434:
     stw r4, 0x8(r1)
     addi r4, r1, 0x8
     lwz r3, 0x0(r3)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi cr1, r3, 0x0
     mr r31, r3
     bne cr1, lbl_fn_806F7E30_00001458
@@ -1638,7 +1638,7 @@ lbl_fn_806F7E30_000014DC:
     b lbl_fn_806F7E30_00001524
 lbl_fn_806F7E30_000014EC:
     mr r3, r30
-    bl fn_806D8E30
+    bl net_strdup
     li r4, 0x2f
     mr r5, r3
     b lbl_fn_806F7E30_00001518
@@ -1715,7 +1715,7 @@ lbl_fn_806F7E30_000015D4:
     b lbl_fn_806F7E30_0000161C
 lbl_fn_806F7E30_000015E4:
     mr r3, r30
-    bl fn_806D8E30
+    bl net_strdup
     li r4, 0x2f
     mr r5, r3
     b lbl_fn_806F7E30_00001610
@@ -1784,7 +1784,7 @@ lbl_fn_806F80B0_000016B4:
     stw r4, 0x8(r1)
     addi r4, r1, 0x8
     lwz r3, 0x0(r3)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi cr1, r3, 0x0
     mr r31, r3
     bne cr1, lbl_fn_806F80B0_000016D8
@@ -1836,7 +1836,7 @@ lbl_fn_806F80B0_0000175C:
     b lbl_fn_806F80B0_000017A4
 lbl_fn_806F80B0_0000176C:
     mr r3, r30
-    bl fn_806D8E30
+    bl net_strdup
     li r4, 0x2f
     mr r5, r3
     b lbl_fn_806F80B0_00001798
@@ -1913,7 +1913,7 @@ lbl_fn_806F80B0_00001854:
     b lbl_fn_806F80B0_0000189C
 lbl_fn_806F80B0_00001864:
     mr r3, r30
-    bl fn_806D8E30
+    bl net_strdup
     li r4, 0x2f
     mr r5, r3
     b lbl_fn_806F80B0_00001890
@@ -1984,7 +1984,7 @@ lbl_fn_806F8330_0000193C:
     stw r4, 0x8(r1)
     addi r4, r1, 0x8
     lwz r3, 0x0(r3)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_806F8330_00001960
@@ -2043,7 +2043,7 @@ lbl_fn_806F8330_00001A00:
     b lbl_fn_806F8330_00001A44
 lbl_fn_806F8330_00001A10:
     mr r3, r31
-    bl fn_806D8E30
+    bl net_strdup
     li r4, 0x2f
     mr r5, r3
     b lbl_fn_806F8330_00001A38
@@ -2104,7 +2104,7 @@ lbl_fn_806F84C0_00001AC8:
     stw r4, 0x8(r1)
     addi r4, r1, 0x8
     lwz r3, 0x0(r3)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi cr1, r3, 0x0
     mr r31, r3
     bne cr1, lbl_fn_806F84C0_00001AEC
@@ -2161,7 +2161,7 @@ lbl_fn_806F84C0_00001B84:
     b lbl_fn_806F84C0_00001BCC
 lbl_fn_806F84C0_00001B94:
     mr r3, r29
-    bl fn_806D8E30
+    bl net_strdup
     li r4, 0x2f
     mr r5, r3
     b lbl_fn_806F84C0_00001BC0
@@ -2256,7 +2256,7 @@ lbl_fn_806F84C0_00001CC4:
     b lbl_fn_806F84C0_00001D0C
 lbl_fn_806F84C0_00001CD4:
     mr r3, r29
-    bl fn_806D8E30
+    bl net_strdup
     li r4, 0x2f
     mr r5, r3
     b lbl_fn_806F84C0_00001D00

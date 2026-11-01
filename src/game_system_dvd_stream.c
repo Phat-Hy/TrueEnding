@@ -12,7 +12,7 @@ extern void item_useConsumable(void);
 extern void collision_queryGeometry(void);
 extern void item_testLineOfSight(void);
 extern void collision_testLineSegment(void);
-extern void fn_8006A250(void);
+extern void boss_dispatchActionTransition(void);
 extern void script_executeOpcode(void);
 extern void fn_80076FF8(void);
 extern void route_interpolatePath(void);
@@ -35,7 +35,7 @@ extern void thread_dispatchToQueue(void);
 extern void world_setGlobalFlag(void);
 extern void world_advanceChapter(void);
 extern void fn_80377298(void);
-extern void fn_80389838(void);
+extern void nwc24_transitionDataState(void);
 extern void fn_803903E0(void);
 extern void fn_80392C94(void);
 extern void fn_80392CE0(void);
@@ -52,7 +52,7 @@ extern void fn_804A4300(void);
 extern void fn_804A5B9C(void);
 extern void fn_80572B70(void);
 extern void fn_805BDCC0(void);
-extern void fn_805BF414(void);
+extern void gx_evaluateVector3f(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
@@ -887,7 +887,7 @@ lbl_fn_803775DC_00000ABC:
     li r5, 0x0
     lis r6, 0xff00
     lwz r3, 0x20(r3)
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     stw r3, 0x28c(r29)
     li r4, 0x2
     li r0, 0x1
@@ -1529,7 +1529,7 @@ lbl_fn_803786FC_000013E4:
     li r5, 0x7
     li r6, 0x8
     li r7, 0x9
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     addi r3, r1, 0x20
     addi r4, r1, 0x2c
     psq_l f1, 0x0(r3), 0, 0
@@ -1567,7 +1567,7 @@ lbl_fn_803786FC_000013E4:
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     addi r3, r1, 0x8
     addi r4, r1, 0x14
     psq_l f1, 0x0(r3), 0, 0
@@ -1675,7 +1675,7 @@ lbl_fn_803786FC_000015EC:
     bl fn_80392C94
     lwz r3, 0x368(r30)
     li r4, 0x6
-    bl fn_80389838
+    bl nwc24_transitionDataState
     lwz r3, 0x368(r30)
     mr r4, r29
     lfs f1, lbl_80885868

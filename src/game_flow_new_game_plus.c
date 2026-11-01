@@ -23,8 +23,8 @@ extern void fn_80102EAC(void);
 extern void fn_801031D0(void);
 extern void hurtbox_testCollisionLayer(void);
 extern void fn_80109864(void);
-extern void fn_8012DF7C(void);
-extern void fn_80133EE8(void);
+extern void enemy_calcAttackTrajectory(void);
+extern void boss_findPartSlotById(void);
 extern void fn_80133F18(void);
 extern void quest_getRewardItemSlot(void);
 extern void fn_80150460(void);
@@ -32,7 +32,7 @@ extern void fn_8015076C(void);
 extern void party_configureMemberSlot(void);
 extern void fn_801681B0(void);
 extern void fn_8016D0A0(void);
-extern void fn_801750FC(void);
+extern void battle_calcOutcomeBonus(void);
 extern void event_findEntryById(void);
 extern void task_findEntryById(void);
 extern void fn_8021A684(void);
@@ -838,7 +838,7 @@ lbl_fn_804EFF78_00000A40:
     addi r25, r25, lbl_807C6BB8@l
     mr r3, r26
     stw r31, 0xc(r25)
-    bl fn_801750FC
+    bl battle_calcOutcomeBonus
     lbz r0, lbl_8087EE74
     extsb. r0, r0
     bne lbl_fn_804EFF78_00000A94
@@ -934,7 +934,7 @@ lbl_fn_804EFF78_00000B6C:
     beq lbl_fn_804EFF78_00000D00
     addi r3, r27, 0x7d4
     li r4, 0x23
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_804EFF78_00000D00
     lwz r0, 0x7e0(r26)
@@ -993,7 +993,7 @@ lbl_fn_804EFF78_00000C50:
     lwz r4, 0x354(r1)
     subf r4, r4, r0
     stw r4, 0xd4(r1)
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
     lfs f2, 0x530(r26)
     addi r5, r1, 0xc4
     psq_l f1, 0x528(r26), 0, 0

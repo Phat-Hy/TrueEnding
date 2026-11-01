@@ -23,7 +23,7 @@ extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void skill_calcTrajectory(void);
 extern void boss_initActionStream(void);
-extern void fn_8006CA80(void);
+extern void gmk_LoadHandle_constructor(void);
 extern void script_executeOpcode(void);
 extern void mem_getAllocSize(void);
 extern void route_createSegment(void);
@@ -38,15 +38,15 @@ extern void atn_Anim_applyLayerTransform(void);
 extern void motion_updateFogAdj(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800EC254(void);
+extern void cam_testTargetVisibility(void);
 extern void cam_registerTarget(void);
 extern void cam_initTrajectoryParams(void);
 extern void cam_bindPathTarget(void);
 extern void cam_bindRotationTarget(void);
 extern void cam_evalControllerSpline(void);
 extern void cam_setLookAtTarget(void);
-extern void fn_800ED4D8(void);
-extern void fn_800ED4E0(void);
+extern void cam_getLookAtState(void);
+extern void cam_updateLookAtMatrix(void);
 extern void cam_evalLookAtMatrix(void);
 extern void proj_getMatrix(void);
 extern void fn_800F8014(void);
@@ -462,7 +462,7 @@ asm void fn_80452710(void)
     addi r3, r28, 0x14b0
     addi r4, r4, lbl_8078F500@l
     stw r4, 0x0(r28)
-    bl fn_8006CA80
+    bl gmk_LoadHandle_constructor
     li r31, 0x0
     stw r31, 0x14b8(r28)
     addi r3, r28, 0x14e0
@@ -507,7 +507,7 @@ asm void fn_80452710(void)
     b lbl_fn_80452710_000004CC
 lbl_fn_80452710_00000488:
     addi r3, r1, 0x98
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     addi r4, r30, 0x2d
     li r5, 0x8
@@ -515,7 +515,7 @@ lbl_fn_80452710_00000488:
     cmpwi r3, 0x0
     bne lbl_fn_80452710_000004C4
     addi r3, r1, 0x98
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     mr r4, r3
     addi r3, r1, 0x20
@@ -523,14 +523,14 @@ lbl_fn_80452710_00000488:
     bl str_appendString
 lbl_fn_80452710_000004C4:
     addi r3, r1, 0x98
-    bl fn_800ED4E0
+    bl cam_updateLookAtMatrix
 lbl_fn_80452710_000004CC:
     addi r3, r1, 0x38
     addi r4, r1, 0xd4
     bl cam_evalLookAtMatrix
     addi r3, r1, 0x98
     addi r4, r1, 0x38
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     mr r31, r3
     addi r3, r1, 0x38
     li r4, -0x1
@@ -1028,7 +1028,7 @@ asm void fn_80452F14(void)
     addi r3, r31, 0x14b0
     addi r4, r4, lbl_8078F630@l
     stw r4, 0x0(r31)
-    bl fn_8006CA80
+    bl gmk_LoadHandle_constructor
     lfs f2, lbl_80886B78
     li r29, 0x0
     lfs f1, lbl_80886B7C
@@ -1177,7 +1177,7 @@ lbl_fn_80452F14_00000D28:
     b lbl_fn_80452F14_00000E68
 lbl_fn_80452F14_00000E24:
     addi r3, r1, 0x98
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     addi r4, r30, 0x2d
     li r5, 0x8
@@ -1185,7 +1185,7 @@ lbl_fn_80452F14_00000E24:
     cmpwi r3, 0x0
     bne lbl_fn_80452F14_00000E60
     addi r3, r1, 0x98
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     mr r4, r3
     addi r3, r1, 0x20
@@ -1193,14 +1193,14 @@ lbl_fn_80452F14_00000E24:
     bl str_appendString
 lbl_fn_80452F14_00000E60:
     addi r3, r1, 0x98
-    bl fn_800ED4E0
+    bl cam_updateLookAtMatrix
 lbl_fn_80452F14_00000E68:
     addi r3, r1, 0x38
     addi r4, r1, 0xd4
     bl cam_evalLookAtMatrix
     addi r3, r1, 0x98
     addi r4, r1, 0x38
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     mr r29, r3
     addi r3, r1, 0x38
     li r4, -0x1

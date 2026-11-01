@@ -8,7 +8,7 @@ extern void quest_updateFlow(void);
 extern void dialog_selectChoice(void);
 extern void fn_80153698(void);
 extern void battle_awardExp(void);
-extern void fn_80206B14(void);
+extern void sys_findModuleById(void);
 extern void assert_generateId(void);
 extern void time_wrapMilliseconds(void);
 extern void random_generateValue(void);
@@ -2044,7 +2044,7 @@ lbl_fn_803BC2D4_00001E0C:
     cmpwi r4, 0x3e8
     blt lbl_fn_803BC2D4_00001E80
     li r3, 0x0
-    bl fn_80206B14
+    bl sys_findModuleById
     cmpwi r3, 0x0
     bne lbl_fn_803BC2D4_00001E80
     addis r3, r26, 0x1
@@ -2057,7 +2057,7 @@ lbl_fn_803BC2D4_00001E0C:
     add r0, r0, r4
     mulli r0, r0, 0x3e8
     subf r4, r0, r5
-    bl fn_80206B14
+    bl sys_findModuleById
     bl assert_generateId
     bl event_findEntryById
     addis r4, r26, 0x1

@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
-extern void fn_800185B4(void);
+extern void battle_findTargetSlotById(void);
 extern void fn_800A6BDC(void);
 extern void fn_8020FCE8(void);
 extern void fn_80219160(void);
@@ -862,7 +862,7 @@ lbl_fn_8012D180_00000B64:
     mr r3, r5
     lwz r4, 0x2f0(r31)
     lwz r5, 0x0(r28)
-    bl fn_800185B4
+    bl battle_findTargetSlotById
     b lbl_fn_8012D180_00000B84
 lbl_fn_8012D180_00000B80:
     li r3, 0x0

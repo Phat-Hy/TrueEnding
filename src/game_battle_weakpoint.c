@@ -20,14 +20,14 @@ extern void clip_calculateFrustum(void);
 extern void fn_8016D3F8(void);
 extern void fn_80170F20(void);
 extern void fn_80174E04(void);
-extern void fn_801750FC(void);
+extern void battle_calcOutcomeBonus(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_unload(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void craft_forgeUpgradeWeapon(void);
-extern void fn_803CD958(void);
+extern void crowd_selectWaypointByWeight(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
 extern void task_updateWorker(void);
@@ -44,7 +44,7 @@ extern void PSVECDotProduct(void);
 extern void std_fmod(void);
 extern void net_getSocket(void);
 extern void net_getMyAid(void);
-extern void fn_806B1250(void);
+extern void net_isSessionConnected(void);
 
 /* External data declarations */
 extern u8 jumptable_8078CFC0[];
@@ -171,7 +171,7 @@ asm void fn_803FB800(void)
     cmpwi r0, 0x0
     beq lbl_fn_803FB800_00000098
     mr r3, r4
-    b fn_801750FC
+    b battle_calcOutcomeBonus
 lbl_fn_803FB800_00000098:
     mr r3, r4
     mr r4, r5
@@ -887,7 +887,7 @@ lbl_fn_803FC134_00000A60:
     li r0, 0x0
     b lbl_fn_803FC134_00000A98
 lbl_fn_803FC134_00000A88:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_803FC134_00000A98
 lbl_fn_803FC134_00000A94:
@@ -2082,7 +2082,7 @@ lbl_fn_803FD0A0_00001AD0:
     subi r4, r3, 0x1
     lwz r3, 0xa4(r5)
     add r3, r3, r0
-    bl fn_803CD958
+    bl crowd_selectWaypointByWeight
     clrlwi. r0, r3, 16
     ble lbl_fn_803FD0A0_00001B60
     lfs f1, 0x530(r30)

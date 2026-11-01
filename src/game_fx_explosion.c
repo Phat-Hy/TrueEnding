@@ -9,10 +9,10 @@ extern void vec3_copy(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void atn_Model_findBoneIndex(void);
 extern void compass_findMarkerByName(void);
-extern void fn_8009373C(void);
+extern void target_findEntryByName(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void system_getNextSequenceId(void);
-extern void fn_80133130(void);
+extern void boss_setPartCollisionFlags(void);
 extern void actor_testBitFlag(void);
 extern void quest_ctorRewardItem(void);
 extern void dialog_renderWindow(void);
@@ -331,7 +331,7 @@ lbl_fn_80294F88_000003D0:
     lwz r4, 0x0(r30)
     cntlzw r0, r0
     srwi r5, r0, 5
-    bl fn_8009373C
+    bl target_findEntryByName
     addi r29, r29, 0x1
     addi r30, r30, 0x4
     cmpwi r29, 0xc
@@ -739,7 +739,7 @@ lbl_fn_802956D8_0000090C:
     li r4, 0x4
     li r5, 0x258
     li r6, 0x0
-    bl fn_80133130
+    bl boss_setPartCollisionFlags
     li r0, 0x6
     stw r0, 0x14c4(r31)
 lbl_fn_802956D8_000009D8:

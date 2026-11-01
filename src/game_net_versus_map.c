@@ -7,7 +7,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_8006A250(void);
+extern void boss_dispatchActionTransition(void);
 extern void mem_alloc(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -38,16 +38,16 @@ extern void fn_804DBD0C(void);
 extern void fn_804DDD54(void);
 extern void fn_804DE2FC(void);
 extern void fn_804EA5E0(void);
-extern void fn_804EB874(void);
+extern void net_getLocalPlayerAid(void);
 extern void fn_8050A638(void);
 extern void fn_8050BA6C(void);
 extern void __construct_new_array(void);
 extern void __destroy_new_array(void);
 extern void net_getSocket(void);
-extern void fn_806A8E70(void);
-extern void fn_806B0DE0(void);
+extern void net_getInterfaceHandle(void);
+extern void net_isSessionActive(void);
 extern void net_getMyAid(void);
-extern void fn_806B1250(void);
+extern void net_isSessionConnected(void);
 
 /* External data declarations */
 extern u8 jumptable_80790C48[];
@@ -599,7 +599,7 @@ lbl_fn_804BBC28_00000700:
     b lbl_fn_804BBC28_00000754
 lbl_fn_804BBC28_00000724:
     lwz r3, lbl_8087F610
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     cmpwi r3, 0x0
     beq lbl_fn_804BBC28_00000748
     lwz r0, 0xb0(r3)
@@ -623,7 +623,7 @@ lbl_fn_804BBC28_00000754:
     li r4, 0xf
     li r5, 0x0
     lis r6, 0xff00
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     stw r3, 0x7c(r27)
     addi r11, r1, 0x20
     lfs f0, lbl_808873FC
@@ -818,7 +818,7 @@ lbl_fn_804BC458_000009D4:
     li r3, 0x1
     b lbl_fn_804BC458_00000A1C
 lbl_fn_804BC458_000009FC:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804BC458_00000A1C
 lbl_fn_804BC458_00000A04:
     lwz r0, 0x1f8(r4)
@@ -827,7 +827,7 @@ lbl_fn_804BC458_00000A04:
     li r3, 0x1
     b lbl_fn_804BC458_00000A1C
 lbl_fn_804BC458_00000A18:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804BC458_00000A1C:
     cmpw r31, r3
     blt lbl_fn_804BC458_00000924
@@ -902,7 +902,7 @@ asm void fn_804BC628(void)
     cmpwi r4, 0x0
     blt lbl_fn_804BC628_00001E20
     lwz r3, lbl_8087F610
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     lwz r4, lbl_8087F59C
     mr r30, r3
     lwz r24, 0xdb4(r28)
@@ -1541,7 +1541,7 @@ lbl_fn_804BC628_00001440:
     li r0, 0x0
     b lbl_fn_804BC628_00001478
 lbl_fn_804BC628_00001468:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804BC628_00001478
 lbl_fn_804BC628_00001474:
@@ -1763,7 +1763,7 @@ lbl_fn_804BC628_00001764:
     li r3, 0x1
     b lbl_fn_804BC628_000017AC
 lbl_fn_804BC628_0000178C:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804BC628_000017AC
 lbl_fn_804BC628_00001794:
     lwz r0, 0x1f8(r4)
@@ -1772,7 +1772,7 @@ lbl_fn_804BC628_00001794:
     li r3, 0x1
     b lbl_fn_804BC628_000017AC
 lbl_fn_804BC628_000017A8:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804BC628_000017AC:
     cmpw r30, r3
     blt lbl_fn_804BC628_000016A0
@@ -2148,7 +2148,7 @@ lbl_fn_804BC628_00001CB0:
     li r0, 0x0
     b lbl_fn_804BC628_00001D14
 lbl_fn_804BC628_00001D04:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804BC628_00001D14
 lbl_fn_804BC628_00001D10:
@@ -2200,7 +2200,7 @@ lbl_fn_804BC628_00001D90:
     beq lbl_fn_804BC628_00001DB4
     b lbl_fn_804BC628_00001DC4
 lbl_fn_804BC628_00001DB4:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r31, r3, 24
     b lbl_fn_804BC628_00001DC4
 lbl_fn_804BC628_00001DC0:

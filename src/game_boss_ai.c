@@ -11,7 +11,7 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void path_Object_constructor(void);
 extern void boss_recordDamage(void);
-extern void fn_8006AD24(void);
+extern void boss_lookupActionEntry(void);
 extern void fn_8007A75C(void);
 extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
@@ -30,7 +30,7 @@ extern void fn_8012D628(void);
 extern void fn_8012D714(void);
 extern void fn_8013459C(void);
 extern void fn_80204E04(void);
-extern void fn_80206B14(void);
+extern void sys_findModuleById(void);
 extern void fn_8020787C(void);
 extern void mem_findBlockById(void);
 extern void fn_802092C0(void);
@@ -87,7 +87,7 @@ extern u32 lbl_80881984;
 extern u32 lbl_80881988;
 
 /* Function declarations */
-void fn_801346C8(void);
+void boss_testAiFlag(void);
 void fn_80134724(void);
 void fn_80134774(void);
 void fn_801347C8(void);
@@ -101,17 +101,17 @@ void fn_80135384(void);
 void fn_8013539C(void);
 void fn_801354B4(void);
 
-asm void fn_801346C8(void)
+asm void boss_testAiFlag(void)
 {
     nofralloc
     cmpwi r4, 0x0
-    blt lbl_fn_801346C8_00000010
+    blt lbl_boss_testAiFlag_00000010
     cmpwi r4, 0x80
-    blt lbl_fn_801346C8_00000018
-lbl_fn_801346C8_00000010:
+    blt lbl_boss_testAiFlag_00000018
+lbl_boss_testAiFlag_00000010:
     li r3, 0x0
     blr
-lbl_fn_801346C8_00000018:
+lbl_boss_testAiFlag_00000018:
     srawi r0, r4, 5
     slwi r6, r4, 27
     srwi r5, r4, 31
@@ -468,7 +468,7 @@ lbl_fn_80134800_0000051C:
     mr r4, r30
 lbl_fn_80134800_00000530:
     li r3, 0x0
-    bl fn_80206B14
+    bl sys_findModuleById
     cmpwi r25, 0x1
     lwz r4, 0x28(r31)
     mr r21, r3
@@ -484,7 +484,7 @@ lbl_fn_80134800_00000554:
     mr r4, r30
 lbl_fn_80134800_00000568:
     li r3, 0x0
-    bl fn_80206B14
+    bl sys_findModuleById
     mr r6, r3
     mr r3, r23
     mr r4, r22
@@ -506,7 +506,7 @@ lbl_fn_80134800_000005A0:
     mr r4, r30
 lbl_fn_80134800_000005B4:
     li r3, 0x0
-    bl fn_80206B14
+    bl sys_findModuleById
     mr r5, r3
     mr r3, r23
     mr r4, r22
@@ -587,7 +587,7 @@ lbl_fn_80134800_000006B8:
     mr r4, r30
 lbl_fn_80134800_000006CC:
     li r3, 0x0
-    bl fn_80206B14
+    bl sys_findModuleById
     cmpwi r3, 0x0
     beq lbl_fn_80134800_0000075C
     lwz r0, 0xc4(r3)
@@ -1724,7 +1724,7 @@ lbl_fn_801354B4_0000164C:
     bl actor_dispatchMessage
     mr r4, r24
     addi r3, r1, 0x5c
-    bl fn_8006AD24
+    bl boss_lookupActionEntry
     lwz r0, 0x44(r1)
     srwi. r0, r0, 31
     beq lbl_fn_801354B4_000016F8
@@ -1825,7 +1825,7 @@ lbl_fn_801354B4_000017C8:
     bl actor_dispatchMessage
     mr r4, r24
     addi r3, r1, 0x50
-    bl fn_8006AD24
+    bl boss_lookupActionEntry
     lwz r0, 0x38(r1)
     srwi. r0, r0, 31
     beq lbl_fn_801354B4_00001874

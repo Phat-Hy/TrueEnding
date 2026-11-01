@@ -77,7 +77,7 @@ void fn_806A2A58(void);
 void fn_806A2A64(void);
 void fn_806A2E8C(void);
 void fn_806A303C(void);
-void fn_806A3048(void);
+u32 fn_806A3048(void);
 void fn_806A3050(void);
 void fn_806A30A0(void);
 void fn_806A3188(void);
@@ -102,9 +102,9 @@ void fn_806A3FA4(void);
 void fn_806A4100(void);
 void fn_806A420C(void);
 void fn_806A4260(void);
-void fn_806A4264(void);
+u32 fn_806A4264(u32 val);
 void fn_806A426C(void);
-void fn_806A4270(void);
+u32 net_truncateU16(u32 val);
 void fn_806A4278(void);
 
 asm void fn_806A236C(void)
@@ -1086,11 +1086,9 @@ asm void fn_806A303C(void)
     blr
 }
 
-asm void fn_806A3048(void)
+u32 fn_806A3048(void)
 {
-    nofralloc
-    lwz r3, lbl_8087EDE4
-    blr
+    return lbl_8087EDE4;
 }
 
 asm void fn_806A3050(void)
@@ -2471,21 +2469,17 @@ asm void fn_806A420C(void)
 void fn_806A4260(void) {
 }
 
-asm void fn_806A4264(void)
+u32 fn_806A4264(u32 val)
 {
-    nofralloc
-    clrlwi r3, r3, 16
-    blr
+    return (u16)val;
 }
 
 void fn_806A426C(void) {
 }
 
-asm void fn_806A4270(void)
+u32 net_truncateU16(u32 val)
 {
-    nofralloc
-    clrlwi r3, r3, 16
-    blr
+    return (u16)val;
 }
 
 asm void fn_806A4278(void)

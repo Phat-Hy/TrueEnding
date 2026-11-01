@@ -11,20 +11,20 @@ extern void fn_80042108(void);
 extern void fn_8007A154(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008B964(void);
+extern void sys_getMainManager(void);
 extern void skeleton_getGlobalManager(void);
-extern void fn_800C2448(void);
+extern void skeleton_getBoneByIndex(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
 extern void fn_800F8348(void);
 extern void fn_801856A4(void);
-extern void fn_801F4998(void);
+extern void save_formatSlotMetadata(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void fn_80383728(void);
-extern void fn_8041D180(void);
+extern void battle_invokeVtableMethod(void);
 extern void fn_8041D198(void);
 extern void fn_8041D23C(void);
 extern void fn_8047C1D8(void);
@@ -50,7 +50,7 @@ extern void fn_805F9D20(void);
 extern void printf(void);
 extern void abort(void);
 extern void std_atan2(void);
-extern void fn_8072D210(void);
+extern void math_normalizeAngle(void);
 extern void memmove(void);
 
 /* External data declarations */
@@ -145,7 +145,7 @@ asm void fn_8048EE78(void)
     lis r30, lbl_80756380@ha
     addi r30, r30, lbl_80756380@l
     addi r4, r30, 0x2b4
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r4, 0x23ac(r31)
     addi r3, r30, 0x2bf
     addi r29, r4, 0x58
@@ -220,7 +220,7 @@ lbl_fn_8048EE78_0000019C:
     lis r30, lbl_80756380@ha
     addi r30, r30, lbl_80756380@l
     addi r4, r30, 0x2b4
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r4, 0x23b0(r31)
     addi r3, r30, 0x2bf
     addi r29, r4, 0x58
@@ -518,21 +518,21 @@ lbl_fn_8048F1DC_000005D4:
     lfs f29, 0x5c(r1)
     stfs f2, 0x60(r1)
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f3, lbl_80886F98
     addi r3, r1, 0xc
     lfs f0, lbl_80886F94
     addi r4, r1, 0x18
     fmuls f3, f29, f3
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f3, lbl_80886F98
     addi r3, r1, 0x8
     lfs f0, lbl_80886F94
     addi r4, r1, 0x14
     fmuls f3, f30, f3
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f12, 0x18(r1)
     addi r31, r1, 0x64
     lfs f9, 0x10(r1)
@@ -680,21 +680,21 @@ lbl_fn_8048F1DC_0000083C:
     lfs f29, 0x68(r1)
     stfs f2, 0x6c(r1)
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f3, lbl_80886F98
     addi r3, r1, 0x24
     lfs f0, lbl_80886F94
     addi r4, r1, 0x30
     fmuls f3, f29, f3
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f3, lbl_80886F98
     addi r3, r1, 0x20
     lfs f0, lbl_80886F94
     addi r4, r1, 0x2c
     fmuls f3, f30, f3
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f11, 0x30(r1)
     fmr f1, f31
     lfs f8, 0x28(r1)
@@ -743,7 +743,7 @@ lbl_fn_8048F1DC_0000083C:
     bl PSMTXMultVec
     addi r3, r30, 0x4c
     li r4, 0x0
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     addi r4, r1, 0x128
     lfs f2, 0x130(r1)
     psq_l f1, 0x0(r4), 0, 0
@@ -820,7 +820,7 @@ lbl_fn_8048F844_00000A08:
     stfs f1, 0x1c(r1)
     stfs f0, 0x18(r1)
     stfs f2, 0x20(r1)
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     lfs f0, 0x18(r1)
     stfs f0, 0x34(r3)
     lfs f0, 0x1c(r1)
@@ -914,7 +914,7 @@ lbl_fn_8048F9B0_00000BA4:
     addi r3, r1, 0x78
     addi r4, r1, 0x4c
     bl fn_8047C1D8
-    bl fn_8008B964
+    bl sys_getMainManager
     bl fn_804848C4
     addi r4, r1, 0x78
     bl fn_8047CDE8
@@ -984,7 +984,7 @@ lbl_fn_8048F9B0_00000CAC:
     mr r4, r3
     addi r3, r1, 0x20
     bl fn_8047CF48
-    bl fn_8008B964
+    bl sys_getMainManager
     bl fn_804848C4
     addi r4, r1, 0x20
     bl fn_8047CE04
@@ -996,7 +996,7 @@ lbl_fn_8048F9B0_00000CF8:
     addi r3, r1, 0x10
     addi r4, r29, 0x1bec
     bl fn_8047CF48
-    bl fn_8008B964
+    bl sys_getMainManager
     bl skeleton_getGlobalManager
     bl fn_801856A4
     addi r4, r1, 0x10
@@ -1104,7 +1104,7 @@ lbl_fn_8048FC7C_00000E38:
     mulli r0, r0, 0x65c
     add r5, r5, r0
     addi r30, r5, 0xc8
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     lfs f2, 0x8(r29)
     addi r5, r31, 0x1ab0
     psq_l f1, 0x0(r29), 0, 0
@@ -1122,12 +1122,12 @@ lbl_fn_8048FC7C_00000E38:
     stw r4, 0x18(r1)
     bne lbl_fn_8048FC7C_00000EC8
     lis r6, lbl_807C88F0@ha
-    lis r4, fn_8041D180@ha
+    lis r4, battle_invokeVtableMethod@ha
     lis r3, fn_8041D198@ha
     li r0, 0x1
     addi r3, r3, fn_8041D198@l
     addi r5, r6, lbl_807C88F0@l
-    addi r4, r4, fn_8041D180@l
+    addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C88F0@l(r6)
     stb r0, lbl_8087F4C0

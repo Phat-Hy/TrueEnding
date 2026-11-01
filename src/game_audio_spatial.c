@@ -10,7 +10,7 @@ extern void math_wrapAngle(void);
 extern void fn_80013404(void);
 extern void magic_castSpellCircle(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80103F60(void);
+extern void bsp_findLeafNode(void);
 extern void fn_80108378(void);
 extern void hurtbox_processHitDamage(void);
 extern void phys_scaleGravity(void);
@@ -405,7 +405,7 @@ lbl_fn_802FF6C4_0000045C:
 lbl_fn_802FF6C4_0000046C:
     lwz r3, lbl_8087F048
     mr r4, r31
-    bl fn_80103F60
+    bl bsp_findLeafNode
     lwz r4, lbl_8087F8A0
     mr r29, r3
     lfs f31, lbl_80884A5C

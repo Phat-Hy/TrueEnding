@@ -17,12 +17,12 @@ extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_800FB4B0(void);
 extern void fn_8010653C(void);
-extern void fn_80133130(void);
+extern void boss_setPartCollisionFlags(void);
 extern void quest_resetObjectiveBounds(void);
 extern void inventory_unequipItem(void);
 extern void debuff_clearStatus(void);
 extern void fn_80178864(void);
-extern void fn_801789D8(void);
+extern void battle_evalDropTable(void);
 extern void actor_getMovementFlags(void);
 extern void task_findEntryById(void);
 extern void kpad_getClampData(void);
@@ -1682,7 +1682,7 @@ lbl_fn_801A5BDC_00001518:
     lwz r3, 0x4(r30)
     li r4, 0x1395
     li r5, 0x0
-    bl fn_801789D8
+    bl battle_evalDropTable
     cmpwi r3, 0x0
     beq lbl_fn_801A5BDC_0000168C
     lwz r3, 0x4(r30)
@@ -1720,7 +1720,7 @@ lbl_fn_801A5BDC_000016E4:
     li r6, 0x0
     lwz r3, 0x4(r30)
     addi r3, r3, 0x7d4
-    bl fn_80133130
+    bl boss_setPartCollisionFlags
 lbl_fn_801A5BDC_00001700:
     lfs f31, 0x234(r31)
     mr r3, r31

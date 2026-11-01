@@ -15,7 +15,7 @@ extern void world_startMapTransition(void);
 extern void world_reloadMapTransition(void);
 extern void world_initMapTransitionParams(void);
 extern void fn_8037D3E8(void);
-extern void fn_8037EF30(void);
+extern void fat_dispatchFsRequest(void);
 extern void fn_803935FC(void);
 extern void fn_8039BF04(void);
 extern void fn_803B5774(void);
@@ -23,7 +23,7 @@ extern void fn_803B57B0(void);
 extern void fn_803B5830(void);
 extern void fn_803B5950(void);
 extern void fn_803CC6B4(void);
-extern void fn_8046ECDC(void);
+extern void boss_updateLaserAimMatrix(void);
 extern void fn_8047F580(void);
 extern void rand(void);
 extern void __ptmf_scall(void);
@@ -964,7 +964,7 @@ lbl_fn_8039D274_00000B7C:
 lbl_fn_8039D274_00000BB0:
     lwz r3, lbl_8087F518
     li r4, 0x0
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
 lbl_fn_8039D274_00000BBC:
     lwz r0, 0x0(r31)
     lis r3, lbl_8074ED24@ha
@@ -1143,7 +1143,7 @@ lbl_fn_8039D4C4_00000E10:
     lfs f1, lbl_80885B14
     li r5, 0x1
     addi r3, r3, 0x6c
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_8039D4C4_000010FC
 lbl_fn_8039D4C4_00000E2C:
     cmpwi r0, 0x1

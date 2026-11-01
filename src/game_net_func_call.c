@@ -34,7 +34,7 @@ extern void fn_803BE550(void);
 extern void fn_803BE8C0(void);
 extern void fn_803BEA08(void);
 extern void fn_803BEA7C(void);
-extern void fn_8046ECDC(void);
+extern void boss_updateLaserAimMatrix(void);
 extern void fn_80503B08(void);
 extern void fn_80503B10(void);
 extern void fn_80503D3C(void);
@@ -510,7 +510,7 @@ lbl_fn_80502460_0000053C:
 lbl_fn_80502460_0000056C:
     lwz r3, lbl_8087F518
     li r4, 0x0
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     b lbl_fn_80502460_000005F4
 lbl_fn_80502460_0000057C:
     lwz r3, 0x5c(r3)

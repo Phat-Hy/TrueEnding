@@ -19,7 +19,7 @@ extern void scene_transformPoint(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void mtx_multVec(void);
-extern void fn_80012C88(void);
+extern void vec3_addAssign(void);
 extern void vec3_sub(void);
 extern void vec3_add(void);
 extern void ui_destroyWidget(void);
@@ -42,13 +42,13 @@ extern void atn_Anim_getLayerDuration(void);
 extern void cursor_applyAnimationTrack(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB688(void);
+extern void morph_resetTargetWeight(void);
 extern void fn_800D8814(void);
 extern void fn_800D8BB4(void);
 extern void str_skipWhitespace(void);
 extern void cam_findTargetIndex(void);
 extern void cam_destroyMsgHandle(void);
-extern void fn_800F52F8(void);
+extern void proj_getGlobalManager(void);
 extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
@@ -60,13 +60,13 @@ extern void equip_getGlobalManager(void);
 extern void fn_8012A190(void);
 extern void npc_updateDialogueTarget(void);
 extern void fn_80139F3C(void);
-extern void fn_8013A13C(void);
+extern void mtx_rotYRad(void);
 extern void npc_getPosition(void);
 extern void npc_getDialogController(void);
-extern void fn_801404F8(void);
-extern void fn_80140500(void);
-extern void fn_801A03E0(void);
-extern void fn_801A03E8(void);
+extern void quest_getGlobalManager(void);
+extern void quest_resetActiveObjectiveSlots(void);
+extern void bgm_getGlobalManager(void);
+extern void vec3_dot(void);
 extern void fn_801A03F4(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_constructor(void);
@@ -1973,7 +1973,7 @@ lbl_fn_8041766C_000018C4:
     lwz r0, 0x89c(r29)
     cmpwi r0, 0x1
     bne lbl_fn_8041766C_00001B3C
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_802F0998
     lfs f0, 0x8b0(r29)
     mr r4, r28
@@ -1986,8 +1986,8 @@ lbl_fn_8041766C_000018C4:
     addi r3, r1, 0xc4
     bl vec3_add
     addi r3, r1, 0x1f0
-    bl fn_80140500
-    bl fn_801404F8
+    bl quest_resetActiveObjectiveSlots
+    bl quest_getGlobalManager
     addi r4, r1, 0x1f0
     addi r5, r1, 0xd0
     addi r6, r1, 0xc4
@@ -2042,7 +2042,7 @@ lbl_fn_8041766C_000019C4:
     bl vec3_set
     mr r4, r3
     addi r3, r1, 0x218
-    bl fn_801A03E8
+    bl vec3_dot
     fcmpo cr0, f1, f27
     ble lbl_fn_8041766C_000019F0
     li r19, 0x0
@@ -2100,7 +2100,7 @@ lbl_fn_8041766C_000019F0:
     bl fn_80417E88
     addi r3, r1, 0x8
     li r4, 0x0
-    bl fn_800CB688
+    bl morph_resetTargetWeight
 lbl_fn_8041766C_00001AC8:
     addi r3, r1, 0x8
     li r4, -0x1
@@ -2249,7 +2249,7 @@ lbl_fn_8041766C_00001CD8:
     lwz r0, 0x2c(r3)
     cmpwi r0, 0x2
     bne lbl_fn_8041766C_00001D04
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     mr r4, r3
     addi r3, r1, 0x1a8
     bl fn_80417FF8
@@ -2324,13 +2324,13 @@ lbl_fn_8041766C_00001D5C:
     fsubs f2, f2, f3
     fdivs f1, f2, f1
     fmuls f1, f0, f1
-    bl fn_8013A13C
+    bl mtx_rotYRad
     addi r3, r1, 0x74
     addi r4, r1, 0x118
     bl mtx_multVec
     addi r3, r1, 0x80
     addi r4, r1, 0x74
-    bl fn_80012C88
+    bl vec3_addAssign
     addi r3, r1, 0x68
     bl mission_updateStub
     lbz r0, 0x2(r31)
@@ -2354,7 +2354,7 @@ lbl_fn_8041766C_00001D5C:
     lfs f0, 0x84(r1)
     lfs f1, 0x8(r3)
     fsubs f29, f1, f0
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_802F0998
     fdivs f0, f29, f28
     lfs f2, lbl_808864B0

@@ -22,7 +22,7 @@ extern void wcs_vformat(void);
 extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
-extern void fn_800F8524(void);
+extern void math_lerpf(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
@@ -38,8 +38,8 @@ extern void fn_80139F3C(void);
 extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_8013C554(void);
-extern void fn_801404F8(void);
-extern void fn_80140500(void);
+extern void quest_getGlobalManager(void);
+extern void quest_resetActiveObjectiveSlots(void);
 extern void fn_801479E4(void);
 extern void actor_setState(void);
 extern void fn_801C0730(void);
@@ -518,7 +518,7 @@ lbl_fn_8028CB38_00000574:
     fmr f1, f31
     la r3, lbl_8087DC38
     la r4, lbl_8087DC3C
-    bl fn_800F8524
+    bl math_lerpf
     bl phys_scaleGravity
     addi r3, r1, 0xf0
     bl fn_8028CFB0
@@ -590,8 +590,8 @@ lbl_fn_8028CB38_00000644:
     addi r4, r1, 0x24
     bl vec3_copy
     addi r3, r1, 0x120
-    bl fn_80140500
-    bl fn_801404F8
+    bl quest_resetActiveObjectiveSlots
+    bl quest_getGlobalManager
     addi r4, r1, 0x120
     addi r5, r1, 0x6c
     addi r6, r1, 0x60

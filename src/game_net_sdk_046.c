@@ -21,7 +21,7 @@ extern void strncmp(void);
 extern void fn_8068B1F8(void);
 extern void fn_8068B1FC(void);
 extern void fn_806A426C(void);
-extern void fn_806A4270(void);
+extern void net_truncateU16(void);
 extern void fn_806D57A0(void);
 extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
@@ -32,7 +32,7 @@ extern void fn_806D6140(void);
 extern void fn_806D62F0(void);
 extern void fn_806D64B0(void);
 extern void fn_806D6560(void);
-extern void fn_806D6610(void);
+extern void net_invokeChannelCallback(void);
 extern void net_socketConnect(void);
 extern void net_socketClose(void);
 extern void fn_806D7AE0(void);
@@ -41,7 +41,7 @@ extern void fn_806D7C40(void);
 extern void fn_806D7D60(void);
 extern void fn_806D7EE0(void);
 extern void fn_806D8060(void);
-extern void fn_806D8E30(void);
+extern void net_strdup(void);
 extern void fn_806D8F10(void);
 extern void net_getTimestampMs(void);
 extern void fn_806D8F80(void);
@@ -57,7 +57,7 @@ extern void fn_806FE0F0(void);
 extern void fn_806FE5C0(void);
 extern void fn_806FE740(void);
 extern void fn_806FE760(void);
-extern void fn_806FE840(void);
+extern void net_http_initConnection(void);
 extern void fn_806FE900(void);
 extern void fn_806FEA20(void);
 extern void fn_806FEAA0(void);
@@ -99,11 +99,11 @@ void fn_806FF3B0(void);
 void fn_806FF3F0(void);
 void fn_806FF460(void);
 void fn_806FF490(void);
-void fn_806FF560(void);
+void fn_806FF560(void *obj, u8 val);
 void fn_806FF570(void);
-void fn_806FF580(void);
-void fn_806FF590(void);
-void fn_806FF5A0(void);
+void fn_806FF580(void *obj, void *val);
+void fn_806FF590(void *obj, u8 val);
+u8 fn_806FF5A0(void *obj);
 void fn_806FF5B0(void);
 void fn_806FF5D0(void);
 void fn_806FF820(void);
@@ -121,7 +121,7 @@ void fn_806FFE50(void);
 void fn_806FFEA0(void);
 void fn_806FFEB0(void);
 void fn_806FFEC0(void);
-void fn_806FFF50(void);
+void *fn_806FFF50(void *obj);
 void fn_806FFF60(void);
 void fn_80700100(void);
 void fn_80700190(void);
@@ -459,11 +459,9 @@ lbl_fn_806FF490_00000414:
     blr
 }
 
-asm void fn_806FF560(void)
+void fn_806FF560(void *obj, u8 val)
 {
-    nofralloc
-    stb r4, 0x15(r3)
-    blr
+    *(u8 *)((char *)obj + 0x15) = val;
 }
 
 asm void fn_806FF570(void)
@@ -474,25 +472,19 @@ asm void fn_806FF570(void)
     blr
 }
 
-asm void fn_806FF580(void)
+void fn_806FF580(void *obj, void *val)
 {
-    nofralloc
-    stw r4, 0x10(r3)
-    blr
+    *(void **)((char *)obj + 0x10) = val;
 }
 
-asm void fn_806FF590(void)
+void fn_806FF590(void *obj, u8 val)
 {
-    nofralloc
-    stb r4, 0x14(r3)
-    blr
+    *(u8 *)((char *)obj + 0x14) = val;
 }
 
-asm void fn_806FF5A0(void)
+u8 fn_806FF5A0(void *obj)
 {
-    nofralloc
-    lbz r3, 0x14(r3)
-    blr
+    return *(u8 *)((char *)obj + 0x14);
 }
 
 asm void fn_806FF5B0(void)
@@ -1019,7 +1011,7 @@ asm void fn_806FFCA0(void)
     mr r3, r5
     mr r29, r6
     mr r30, r7
-    bl fn_806A4270
+    bl net_truncateU16
     mr r31, r3
     mr r3, r28
     bl fn_806D7EE0
@@ -1051,7 +1043,7 @@ asm void fn_806FFD10(void)
     stw r28, 0x10(r1)
     mr r28, r3
     mr r3, r5
-    bl fn_806A4270
+    bl net_truncateU16
     mr r31, r3
     mr r3, r29
     bl fn_806D7EE0
@@ -1212,11 +1204,9 @@ lbl_fn_806FFEC0_00000DD8:
     blr
 }
 
-asm void fn_806FFF50(void)
+void *fn_806FFF50(void *obj)
 {
-    nofralloc
-    lwz r3, 0x704(r3)
-    blr
+    return *(void **)((char *)obj + 0x704);
 }
 
 asm void fn_806FFF60(void)
@@ -1836,9 +1826,9 @@ asm void fn_807007A0(void)
     stw r30, 0x18(r1)
     mr r30, r3
     stw r4, 0x8(r1)
-    bl fn_806FE840
+    bl net_http_initConnection
     addi r4, r1, 0x8
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     beq lbl_fn_807007A0_000016C0
     lwz r4, 0x4(r3)
@@ -1848,12 +1838,12 @@ asm void fn_807007A0(void)
     b lbl_fn_807007A0_000016E8
 lbl_fn_807007A0_000016C0:
     mr r3, r31
-    bl fn_806D8E30
+    bl net_strdup
     stw r3, 0x8(r1)
     li r0, 0x1
     mr r3, r30
     stw r0, 0xc(r1)
-    bl fn_806FE840
+    bl net_http_initConnection
     addi r4, r1, 0x8
     bl fn_806D64B0
     lwz r3, 0x8(r1)
@@ -1875,9 +1865,9 @@ asm void fn_80700830(void)
     stw r31, 0x1c(r1)
     mr r31, r3
     stw r4, 0x8(r1)
-    bl fn_806FE840
+    bl net_http_initConnection
     addi r4, r1, 0x8
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     beq lbl_fn_80700830_00001754
     lwz r0, 0x4(r3)
@@ -1885,7 +1875,7 @@ asm void fn_80700830(void)
     stw r0, 0x4(r3)
     bne lbl_fn_80700830_00001754
     mr r3, r31
-    bl fn_806FE840
+    bl net_http_initConnection
     addi r4, r1, 0x8
     bl fn_806D6560
 lbl_fn_80700830_00001754:
@@ -1950,7 +1940,7 @@ lbl_fn_807008D0_000017F0:
     li r30, 0x0
     mr r3, r24
     stw r30, 0x7d8(r24)
-    bl fn_806FE840
+    bl net_http_initConnection
     mr r4, r25
     addi r3, r24, 0xc
     li r5, 0x24
@@ -2063,7 +2053,7 @@ lbl_fn_80700A00_000019A0:
     li r0, 0x2
     stb r0, 0x9(r1)
     li r3, 0x70ee
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0xa(r1)
     addi r3, r1, 0x10
     bl fn_806D7EE0
@@ -2174,9 +2164,9 @@ lbl_fn_80700BA0_00001B24:
     lwz r0, 0x0(r3)
     mr r3, r26
     stw r0, 0x18(r1)
-    bl fn_806FE840
+    bl net_http_initConnection
     addi r4, r1, 0x18
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     beq lbl_fn_80700BA0_00001B70
     lwz r0, 0x4(r3)
@@ -2184,7 +2174,7 @@ lbl_fn_80700BA0_00001B24:
     stw r0, 0x4(r3)
     bne lbl_fn_80700BA0_00001B70
     mr r3, r26
-    bl fn_806FE840
+    bl net_http_initConnection
     addi r4, r1, 0x18
     bl fn_806D6560
 lbl_fn_80700BA0_00001B70:
@@ -2206,9 +2196,9 @@ lbl_fn_80700BA0_00001BA0:
     lwz r0, 0x84(r22)
     mr r3, r26
     stw r0, 0x20(r1)
-    bl fn_806FE840
+    bl net_http_initConnection
     addi r4, r1, 0x20
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     beq lbl_fn_80700BA0_00001BE0
     lwz r0, 0x4(r3)
@@ -2216,7 +2206,7 @@ lbl_fn_80700BA0_00001BA0:
     stw r0, 0x4(r3)
     bne lbl_fn_80700BA0_00001BE0
     mr r3, r26
-    bl fn_806FE840
+    bl net_http_initConnection
     addi r4, r1, 0x20
     bl fn_806D6560
 lbl_fn_80700BA0_00001BE0:
@@ -2305,9 +2295,9 @@ lbl_fn_80700BA0_00001D08:
     lwz r0, 0x0(r3)
     mr r3, r26
     stw r0, 0x10(r1)
-    bl fn_806FE840
+    bl net_http_initConnection
     addi r4, r1, 0x10
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     beq lbl_fn_80700BA0_00001D54
     lwz r0, 0x4(r3)
@@ -2315,7 +2305,7 @@ lbl_fn_80700BA0_00001D08:
     stw r0, 0x4(r3)
     bne lbl_fn_80700BA0_00001D54
     mr r3, r26
-    bl fn_806FE840
+    bl net_http_initConnection
     addi r4, r1, 0x10
     bl fn_806D6560
 lbl_fn_80700BA0_00001D54:
@@ -2339,9 +2329,9 @@ lbl_fn_80700BA0_00001D8C:
     lwz r0, 0x84(r24)
     mr r3, r26
     stw r0, 0x8(r1)
-    bl fn_806FE840
+    bl net_http_initConnection
     addi r4, r1, 0x8
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     beq lbl_fn_80700BA0_00001DCC
     lwz r0, 0x4(r3)
@@ -2349,7 +2339,7 @@ lbl_fn_80700BA0_00001D8C:
     stw r0, 0x4(r3)
     bne lbl_fn_80700BA0_00001DCC
     mr r3, r26
-    bl fn_806FE840
+    bl net_http_initConnection
     addi r4, r1, 0x8
     bl fn_806D6560
 lbl_fn_80700BA0_00001DCC:
@@ -2611,7 +2601,7 @@ lbl_fn_80700F50_00002134:
     addi r28, r28, 0x4
 lbl_fn_80700F50_00002178:
     clrlwi r3, r28, 16
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x8(r1)
     addi r3, r1, 0x30
     addi r4, r1, 0x8
@@ -2653,9 +2643,9 @@ lbl_fn_80700F50_00002200:
     lwz r0, 0x0(r3)
     mr r3, r23
     stw r0, 0x20(r1)
-    bl fn_806FE840
+    bl net_http_initConnection
     addi r4, r1, 0x20
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     beq lbl_fn_80700F50_0000224C
     lwz r0, 0x4(r3)
@@ -2663,7 +2653,7 @@ lbl_fn_80700F50_00002200:
     stw r0, 0x4(r3)
     bne lbl_fn_80700F50_0000224C
     mr r3, r23
-    bl fn_806FE840
+    bl net_http_initConnection
     addi r4, r1, 0x20
     bl fn_806D6560
 lbl_fn_80700F50_0000224C:
@@ -2687,9 +2677,9 @@ lbl_fn_80700F50_00002284:
     lwz r0, 0x84(r25)
     mr r3, r23
     stw r0, 0x28(r1)
-    bl fn_806FE840
+    bl net_http_initConnection
     addi r4, r1, 0x28
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     beq lbl_fn_80700F50_000022C4
     lwz r0, 0x4(r3)
@@ -2697,7 +2687,7 @@ lbl_fn_80700F50_00002284:
     stw r0, 0x4(r3)
     bne lbl_fn_80700F50_000022C4
     mr r3, r23
-    bl fn_806FE840
+    bl net_http_initConnection
     addi r4, r1, 0x28
     bl fn_806D6560
 lbl_fn_80700F50_000022C4:

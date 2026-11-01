@@ -14,15 +14,15 @@ extern void vec3_copy(void);
 extern void scene_getRootNode(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011220(void);
-extern void fn_80012C88(void);
+extern void math_fabsf(void);
+extern void vec3_addAssign(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
 extern void str_initFromCStr(void);
 extern void str_getData(void);
 extern void item_testLineOfSight(void);
 extern void fn_80051B14(void);
-extern void fn_80051B70(void);
+extern void player_stepMovement(void);
 extern void atn_ColliBase_destructor(void);
 extern void mission_updateStub(void);
 extern void atn_ColliCapsule_destructor(void);
@@ -30,7 +30,7 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void boss_initActionStream(void);
-extern void fn_8006CA80(void);
+extern void gmk_LoadHandle_constructor(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
@@ -40,15 +40,15 @@ extern void fn_80091CFC(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void motion_updateFogAdj(void);
-extern void fn_800EC254(void);
+extern void cam_testTargetVisibility(void);
 extern void cam_registerTarget(void);
 extern void cam_initTrajectoryParams(void);
 extern void cam_bindPathTarget(void);
 extern void cam_bindRotationTarget(void);
 extern void cam_evalControllerSpline(void);
 extern void cam_setLookAtTarget(void);
-extern void fn_800ED4D8(void);
-extern void fn_800ED4E0(void);
+extern void cam_getLookAtState(void);
+extern void cam_updateLookAtMatrix(void);
 extern void cam_evalLookAtMatrix(void);
 extern void fn_800F29D0(void);
 extern void system_getNextSequenceId(void);
@@ -57,10 +57,10 @@ extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
 extern void player_evaluateStatusCondition(void);
 extern void fn_80129978(void);
-extern void fn_80129A48(void);
+extern void path_resetWaypointVelocity(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80139F2C(void);
-extern void fn_8013A13C(void);
+extern void mtx_rotYRad(void);
 extern void quest_updateFlow(void);
 extern void fn_801479E4(void);
 extern void fn_801495E8(void);
@@ -480,7 +480,7 @@ lbl_fn_8045EDEC_000001C8:
     fmuls f7, f8, f11
     stfs f9, 0xc(r1)
     stfs f7, 0x8(r1)
-    bl fn_80051B70
+    bl player_stepMovement
     cmpwi r3, 0x0
     beq lbl_fn_8045EDEC_00000644
     lfs f2, 0x1d0(r1)
@@ -1191,7 +1191,7 @@ asm void fn_8045FAB0(void)
     addi r3, r28, 0x14b0
     addi r4, r4, lbl_8078F980@l
     stw r4, 0x0(r28)
-    bl fn_8006CA80
+    bl gmk_LoadHandle_constructor
     lfs f1, lbl_80886D60
     li r31, 0x0
     stw r31, 0x14b8(r28)
@@ -1310,7 +1310,7 @@ asm void fn_8045FAB0(void)
     b lbl_fn_8045FAB0_00001040
 lbl_fn_8045FAB0_00000FFC:
     addi r3, r1, 0x98
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     addi r4, r30, 0x2d
     li r5, 0x8
@@ -1318,7 +1318,7 @@ lbl_fn_8045FAB0_00000FFC:
     cmpwi r3, 0x0
     bne lbl_fn_8045FAB0_00001038
     addi r3, r1, 0x98
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     mr r4, r3
     addi r3, r1, 0x20
@@ -1326,14 +1326,14 @@ lbl_fn_8045FAB0_00000FFC:
     bl str_appendString
 lbl_fn_8045FAB0_00001038:
     addi r3, r1, 0x98
-    bl fn_800ED4E0
+    bl cam_updateLookAtMatrix
 lbl_fn_8045FAB0_00001040:
     addi r3, r1, 0x38
     addi r4, r1, 0xd4
     bl cam_evalLookAtMatrix
     addi r3, r1, 0x98
     addi r4, r1, 0x38
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     mr r31, r3
     addi r3, r1, 0x38
     li r4, -0x1
@@ -2026,7 +2026,7 @@ lbl_fn_80460458_00001A40:
     beq lbl_fn_80460458_00001A64
     lfs f1, lbl_80886D70
     addi r3, r31, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     b lbl_fn_80460458_00001A90
 lbl_fn_80460458_00001A64:
     lwz r3, 0x14b8(r31)
@@ -2194,12 +2194,12 @@ lbl_fn_80460458_00001CAC:
     fadds f1, f1, f2
     fsubs f31, f1, f0
     fmr f1, f31
-    bl fn_80011220
+    bl math_fabsf
     lfs f0, lbl_8087F500
     fcmpo cr0, f1, f0
     ble lbl_fn_80460458_00001CF4
     fmr f1, f31
-    bl fn_80011220
+    bl math_fabsf
     fdivs f1, f31, f1
     lfs f0, lbl_8087F500
     fmuls f31, f0, f1
@@ -2224,12 +2224,12 @@ lbl_fn_80460458_00001CF4:
     bl mtx_getTranslation
     addi r3, r1, 0x4c
     addi r4, r1, 0x1c
-    bl fn_80012C88
+    bl vec3_addAssign
     addi r3, r31, 0x1578
     bl fn_8010F668
     lfs f1, lbl_80886D78
     addi r3, r1, 0x98
-    bl fn_8013A13C
+    bl mtx_rotYRad
     addi r3, r31, 0x1578
     addi r4, r1, 0x98
     bl fn_801495E8

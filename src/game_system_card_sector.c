@@ -15,7 +15,7 @@ extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_805A4258(void);
 extern void fn_805A49E8(void);
-extern void fn_805A4A20(void);
+extern void world_setFlagByType(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -573,7 +573,7 @@ lbl_fn_80358A5C_000006C8:
     mr r3, r31
     addi r4, r31, 0x16ac
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
     b lbl_fn_80358A5C_00001EE8
     lfs f22, 0x2e4(r3)
     li r29, 0x0
@@ -642,7 +642,7 @@ lbl_fn_80358A5C_00000824:
     mr r3, r31
     addi r4, r31, 0x16ac
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
     b lbl_fn_80358A5C_00001EE8
     lfs f7, 0x2e4(r3)
     lfs f0, lbl_80885588
@@ -1246,7 +1246,7 @@ lbl_fn_80358A5C_00001138:
     mr r3, r31
     addi r4, r31, 0x1664
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
     lfs f0, lbl_80885550
     addi r3, r31, 0xb0
     lwz r0, 0x151c(r31)

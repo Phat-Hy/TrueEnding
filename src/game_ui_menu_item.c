@@ -16,13 +16,13 @@ extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void proj_getMatrix(void);
-extern void fn_8012476C(void);
-extern void fn_8012A1B8(void);
+extern void player_testStatusCondition(void);
+extern void path_getFollowerNode(void);
 extern void fn_80139F4C(void);
-extern void fn_8013A13C(void);
+extern void mtx_rotYRad(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
-extern void fn_8015E4B0(void);
+extern void party_initFormationSlots(void);
 extern void debuff_clearStatus(void);
 extern void battle_calcExpPosition(void);
 extern void battle_generateLootDrops(void);
@@ -178,7 +178,7 @@ asm void fn_801B5894(void)
     lwz r3, 0x8(r30)
     addi r4, r1, 0x8
     li r5, -0x1
-    bl fn_8015E4B0
+    bl party_initFormationSlots
     li r3, 0x1
     b lbl_fn_801B5894_00000180
 lbl_fn_801B5894_00000158:
@@ -794,7 +794,7 @@ asm void fn_801B6278(void)
     lwz r3, lbl_8087F0A8
     li r4, 0x22
     addi r3, r3, 0x48c
-    bl fn_8012476C
+    bl player_testStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_801B6278_00000A80
     lwz r3, 0xc(r31)
@@ -893,7 +893,7 @@ lbl_fn_801B6278_00000B30:
     lwz r3, 0x8(r31)
     addi r4, r1, 0x8
     li r5, -0x1
-    bl fn_8015E4B0
+    bl party_initFormationSlots
     li r3, 0x1
     b lbl_fn_801B6278_00000BE4
 lbl_fn_801B6278_00000BBC:
@@ -943,10 +943,10 @@ asm void fn_801B6494(void)
     fmr f2, f1
     bl vec3_set
     lwz r3, 0x4(r30)
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     lfs f1, 0x4(r3)
     addi r3, r1, 0x100
-    bl fn_8013A13C
+    bl mtx_rotYRad
     addi r3, r1, 0x50
     addi r4, r1, 0x100
     bl mtx_multVec
@@ -982,10 +982,10 @@ lbl_fn_801B6494_00000CC8:
     fmr f2, f1
     bl vec3_set
     lwz r3, 0x4(r30)
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     lfs f1, 0x4(r3)
     addi r3, r1, 0xa8
-    bl fn_8013A13C
+    bl mtx_rotYRad
     addi r3, r1, 0x44
     addi r4, r1, 0xa8
     bl mtx_multVec

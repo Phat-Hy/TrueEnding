@@ -14,11 +14,11 @@ extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
-extern void fn_80108F38(void);
+extern void hurtbox_testCollisionFlags(void);
 extern void enemy_updateCombatBehavior(void);
 extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_801426A4(void);
+extern void quest_evaluateMilestoneData(void);
 extern void quest_getRewardItemSlot(void);
 extern void dialog_renderWindow(void);
 extern void inventory_applyItemStats(void);
@@ -590,7 +590,7 @@ lbl_fn_8028429C_0000065C:
     mr r3, r30
     addi r4, r1, 0x10
     li r5, 0x80
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
 lbl_fn_8028429C_00000768:
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)
@@ -1110,7 +1110,7 @@ lbl_fn_802847CC_00000ED8:
     mr r3, r29
     addi r4, r1, 0xc8
     fmuls f2, f0, f30
-    bl fn_801426A4
+    bl quest_evaluateMilestoneData
     b lbl_fn_802847CC_00000F2C
 lbl_fn_802847CC_00000EF4:
     cmpwi r0, 0x6

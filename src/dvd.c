@@ -160,7 +160,7 @@ void fn_805FABB0(void);
 void fn_805FAD40(void);
 void fn_805FAD50(void);
 void fn_805FAE60(void);
-void fn_805FAE80(void);
+void dvd_resetAlarmHandler(void);
 void fn_805FAEC0(void);
 void fn_805FAFC0(void);
 void fn_805FB090(void);
@@ -430,18 +430,18 @@ lbl_0330:
     cmplwi r30, 0x10
     bne lbl_0354
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_044c
 lbl_0354:
     cmplwi r30, 0x20
     bne lbl_0374
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_044c
 lbl_0374:
@@ -545,18 +545,18 @@ lbl_04c8:
     stw r0, 0xc(r3)
     bne lbl_04f4
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_057c
 lbl_04f4:
     cmplwi r31, 0x20
     bne lbl_0514
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_057c
 lbl_0514:
@@ -607,7 +607,7 @@ asm void fn_805FAE60(void) {
 }
 
 
-asm void fn_805FAE80(void) {
+asm void dvd_resetAlarmHandler(void) {
     nofralloc
     stwu r1, -0x10(r1)
     mflr r0
@@ -787,18 +787,18 @@ lbl_0818:
     cmplwi r28, 0x10
     bne lbl_083c
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_0ca4
 lbl_083c:
     cmplwi r28, 0x20
     bne lbl_085c
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_0ca4
 lbl_085c:
@@ -1139,18 +1139,18 @@ lbl_0d20:
     cmplwi r30, 0x10
     bne lbl_0d44
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_0e98
 lbl_0d44:
     cmplwi r30, 0x20
     bne lbl_0d64
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_0e98
 lbl_0d64:
@@ -1271,18 +1271,18 @@ lbl_0efc:
     cmplwi r31, 0x10
     bne lbl_0f20
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_0f70
 lbl_0f20:
     cmplwi r31, 0x20
     bne lbl_0f40
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_0f70
 lbl_0f40:
@@ -1335,18 +1335,18 @@ lbl_0fdc:
     cmplwi r31, 0x10
     bne lbl_1000
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_11bc
 lbl_1000:
     cmplwi r31, 0x20
     bne lbl_1020
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_11bc
 lbl_1020:
@@ -1719,18 +1719,18 @@ lbl_1568:
     cmplwi r29, 0x10
     bne lbl_158c
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_1694
 lbl_158c:
     cmplwi r29, 0x20
     bne lbl_15ac
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_1694
 lbl_15ac:
@@ -1838,18 +1838,18 @@ lbl_1714:
     cmplwi r28, 0x10
     bne lbl_1738
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_1b0c
 lbl_1738:
     cmplwi r28, 0x20
     bne lbl_1758
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_1b0c
 lbl_1758:
@@ -2148,18 +2148,18 @@ lbl_1b84:
     cmplwi r30, 0x10
     bne lbl_1ba8
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_1ca0
 lbl_1ba8:
     cmplwi r30, 0x20
     bne lbl_1bc8
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_1ca0
 lbl_1bc8:
@@ -2256,18 +2256,18 @@ lbl_1d0c:
     cmplwi r31, 0x10
     bne lbl_1d30
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_1e10
 lbl_1d30:
     cmplwi r31, 0x20
     bne lbl_1d50
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_1e10
 lbl_1d50:
@@ -2360,18 +2360,18 @@ lbl_1e7c:
     cmplwi r31, 0x10
     bne lbl_1ea0
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_1fe4
 lbl_1ea0:
     cmplwi r31, 0x20
     bne lbl_1ec0
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_1fe4
 lbl_1ec0:
@@ -2490,18 +2490,18 @@ lbl_2050:
     cmplwi r31, 0x10
     bne lbl_2074
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_2180
 lbl_2074:
     cmplwi r31, 0x20
     bne lbl_2094
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_2180
 lbl_2094:
@@ -2803,18 +2803,18 @@ asm void fn_805FCD90(void) {
     stw r31, 0xc(r1)
     bne lbl_24f0
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_2590
 lbl_24f0:
     cmplwi r3, 0x20
     bne lbl_2510
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_2590
 lbl_2510:
@@ -2945,18 +2945,18 @@ lbl_26d4:
     cmplwi r30, 0x10
     bne lbl_26f8
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_28a8
 lbl_26f8:
     cmplwi r30, 0x20
     bne lbl_2718
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_28a8
 lbl_2718:
@@ -3210,18 +3210,18 @@ lbl_2a8c:
     cmplwi r31, 0x10
     bne lbl_2ab0
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_2b04
 lbl_2ab0:
     cmplwi r31, 0x20
     bne lbl_2ad0
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_2b04
 lbl_2ad0:
@@ -4011,18 +4011,18 @@ lbl_3610:
     cmplwi r31, 0x10
     bne lbl_3634
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_3f74
 lbl_3634:
     cmplwi r31, 0x20
     bne lbl_3654
     lis r3, 0x123
-    lis r4, fn_805FAE80@ha
+    lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
-    addi r4, r4, fn_805FAE80@l
+    addi r4, r4, dvd_resetAlarmHandler@l
     bl fn_80600120
     b lbl_3f74
 lbl_3654:

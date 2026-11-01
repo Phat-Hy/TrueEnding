@@ -30,7 +30,7 @@ extern void fn_8010F668(void);
 extern void equip_getGlobalManager(void);
 extern void enemy_updateAnimTimer(void);
 extern void npc_getGlobalManager(void);
-extern void fn_8013C480(void);
+extern void npc_isInteractionReady(void);
 extern void npc_getDialogController(void);
 extern void quest_initMarkerCoords(void);
 extern void quest_updateFlow(void);
@@ -39,7 +39,7 @@ extern void fn_80149624(void);
 extern void equip_applyToCharacter(void);
 extern void actor_setState(void);
 extern void battle_activateExpReward(void);
-extern void fn_801A03E0(void);
+extern void bgm_getGlobalManager(void);
 extern void fn_801A03EC(void);
 extern void fn_801A0408(void);
 extern void fn_801C3910(void);
@@ -553,13 +553,13 @@ lbl_fn_8030C490_000005E0:
     addi r4, r30, 0x534
     bl fn_8030CA38
     li r27, -0x3
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     bl fn_801A0408
     mr r28, r3
     b lbl_fn_8030C490_0000069C
 lbl_fn_8030C490_00000668:
     mr r3, r28
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_8030C490_00000690
     mr r3, r28

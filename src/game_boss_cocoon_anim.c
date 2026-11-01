@@ -24,7 +24,7 @@ extern void fn_8021E444(void);
 extern void kpad_getClampData(void);
 extern void fn_803E5E64(void);
 extern void fn_8040B394(void);
-extern void fn_804439FC(void);
+extern void gmk_registerSlot(void);
 extern void fn_80444CF8(void);
 extern void fn_80445F44(void);
 extern void fn_8044D678(void);
@@ -345,7 +345,7 @@ lbl_fn_80450778_000003E4:
     li r8, 0x0
     li r9, 0x1
     li r10, 0x1
-    bl fn_804439FC
+    bl gmk_registerSlot
     lwz r0, lbl_8087F048
     cmpwi r0, 0x0
     beq lbl_fn_80450778_0000047C

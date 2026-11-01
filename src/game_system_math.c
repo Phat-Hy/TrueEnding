@@ -19,13 +19,13 @@ extern void talk_parseDialogueTokens(void);
 extern void talk_copyUtf16String(void);
 extern void boss_initActionStream(void);
 extern void fn_8006B0C8(void);
-extern void fn_8006B2D8(void);
+extern void boss_parseStateCondition(void);
 extern void fn_8006BA8C(void);
-extern void fn_8006BB6C(void);
+extern void boss_triggerEventAction(void);
 extern void fn_8006D008(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
-extern void fn_8008B130(void);
+extern void map_getArchiveName(void);
 extern void fn_80095750(void);
 extern void fn_800D8C14(void);
 extern void str_skipWhitespace(void);
@@ -690,10 +690,10 @@ lbl_fn_8020C0BC_00000784:
     bne lbl_fn_8020C0BC_0000071C
     mr r3, r30
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
     mr r3, r29
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
     mr r3, r28
     lmw r23, 0x18bc(r1)
     lwz r0, 0x18e4(r1)
@@ -1504,7 +1504,7 @@ lbl_fn_8020CC64_000012C4:
     cmpwi r0, 0x0
     beq lbl_fn_8020CC64_000017BC
     mr r3, r15
-    bl fn_8008B130
+    bl map_getArchiveName
     stw r29, 0x74(r1)
     mr r16, r3
     stw r29, 0x78(r1)
@@ -1570,7 +1570,7 @@ lbl_fn_8020CC64_0000133C:
     bl actor_dispatchMessage
     mr r4, r27
     addi r3, r1, 0x80
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0x68(r1)
     srwi. r0, r0, 31
     beq lbl_fn_8020CC64_000013EC

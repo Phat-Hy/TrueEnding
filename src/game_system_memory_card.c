@@ -22,8 +22,8 @@ extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
-extern void fn_80158CA4(void);
-extern void fn_8015E4B0(void);
+extern void shop_loadCatalogItem(void);
+extern void party_initFormationSlots(void);
 extern void party_configureMemberSlot(void);
 extern void fn_8015ECC4(void);
 extern void actor_setState(void);
@@ -44,7 +44,7 @@ extern void rand_Mersenne_constructor(void);
 extern void fn_805A3D6C(void);
 extern void fn_805A4984(void);
 extern void fn_805A49E8(void);
-extern void fn_805A4A20(void);
+extern void world_setFlagByType(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -1045,43 +1045,43 @@ lbl_fn_803563E4_00000CEC:
     mr r3, r31
     addi r4, r31, 0x1664
     li r5, 0x0
-    bl fn_805A4A20
+    bl world_setFlagByType
     mr r3, r31
     addi r4, r31, 0x166c
     li r5, 0x0
-    bl fn_805A4A20
+    bl world_setFlagByType
     mr r3, r31
     addi r4, r31, 0x1674
     li r5, 0x0
-    bl fn_805A4A20
+    bl world_setFlagByType
     mr r3, r31
     addi r4, r31, 0x167c
     li r5, 0x0
-    bl fn_805A4A20
+    bl world_setFlagByType
     mr r3, r31
     addi r4, r31, 0x1684
     li r5, 0x0
-    bl fn_805A4A20
+    bl world_setFlagByType
     mr r3, r31
     addi r4, r31, 0x168c
     li r5, 0x0
-    bl fn_805A4A20
+    bl world_setFlagByType
     mr r3, r31
     addi r4, r31, 0x1694
     li r5, 0x0
-    bl fn_805A4A20
+    bl world_setFlagByType
     mr r3, r31
     addi r4, r31, 0x169c
     li r5, 0x0
-    bl fn_805A4A20
+    bl world_setFlagByType
     mr r3, r31
     addi r4, r31, 0x16a4
     li r5, 0x0
-    bl fn_805A4A20
+    bl world_setFlagByType
     mr r3, r31
     addi r4, r31, 0x16ac
     li r5, 0x0
-    bl fn_805A4A20
+    bl world_setFlagByType
     li r4, 0x0
     li r3, 0x3
     li r0, -0x1
@@ -1346,7 +1346,7 @@ lbl_fn_803563E4_00001148:
     cmpwi r3, 0x0
     bne lbl_fn_803563E4_00001188
     mr r3, r30
-    bl fn_80158CA4
+    bl shop_loadCatalogItem
     cmpwi r3, 0x0
     beq lbl_fn_803563E4_000011B4
 lbl_fn_803563E4_00001188:
@@ -1435,7 +1435,7 @@ lbl_fn_803563E4_00001298:
     mr r3, r31
     mr r4, r29
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
     stw r30, 0x162c(r31)
     b lbl_fn_803563E4_000012D8
 lbl_fn_803563E4_000012C4:
@@ -1452,13 +1452,13 @@ lbl_fn_803563E4_000012D8:
     mr r3, r31
     addi r4, r31, 0x169c
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
     b lbl_fn_803563E4_00001308
 lbl_fn_803563E4_000012F8:
     mr r3, r31
     addi r4, r31, 0x169c
     li r5, 0x0
-    bl fn_805A4A20
+    bl world_setFlagByType
 lbl_fn_803563E4_00001308:
     lwz r3, 0x1550(r31)
     cmpwi r3, 0x0
@@ -1688,7 +1688,7 @@ lbl_fn_80356A98_000015F8:
     mr r3, r30
     addi r4, r30, 0x167c
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
     b lbl_fn_80356A98_000017A4
 lbl_fn_80356A98_00001658:
     li r0, 0x1
@@ -1701,7 +1701,7 @@ lbl_fn_80356A98_00001658:
     mr r3, r30
     addi r4, r30, 0x1674
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
     b lbl_fn_80356A98_000017A4
 lbl_fn_80356A98_00001688:
     lwz r4, 0x8(r31)
@@ -1742,7 +1742,7 @@ lbl_fn_80356A98_000016D8:
     mr r3, r30
     addi r4, r30, 0x1694
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
     b lbl_fn_80356A98_000017A4
 lbl_fn_80356A98_00001720:
     lwz r0, 0x58c(r30)
@@ -2050,7 +2050,7 @@ lbl_fn_80357004_00001B08:
     stfs f3, 0x10(r1)
     stfs f0, 0x8(r1)
     stfs f1, 0xc(r1)
-    bl fn_8015E4B0
+    bl party_initFormationSlots
 lbl_fn_80357004_00001B58:
     lwz r3, 0x1630(r31)
     lwz r0, 0x1588(r31)

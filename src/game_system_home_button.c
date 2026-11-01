@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80049B2C(void);
-extern void fn_80049B74(void);
+extern void snd_findSoundNodeByName(void);
 extern void fn_8004A1D4(void);
 extern void fn_8004B0E4(void);
 extern void fn_8004B1EC(void);
@@ -38,7 +38,7 @@ extern void fn_800CB5B4(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB69C(void);
 extern void fn_800CB6B0(void);
-extern void fn_800CB6E4(void);
+extern void morph_dispatchTargetUpdate(void);
 extern void fn_800CB6F8(void);
 extern void fn_800CFDC8(void);
 extern void fn_800D03AC(void);
@@ -115,16 +115,16 @@ extern u32 lbl_808856AC;
 extern u32 lbl_808856B0;
 
 /* Function declarations */
-void fn_8035FBF8(void);
-void fn_8035FC00(void);
-void fn_8035FC08(void);
+void *fn_8035FBF8(void *p);
+u32 fn_8035FC00(void);
+void fn_8035FC08(void *p, void *val);
 void fn_8035FC10(void);
 void fn_8035FCB4(void);
 void fn_8035FD40(void);
 void fn_8035FDE4(void);
 void fn_8035FE88(void);
-void fn_8035FF24(void);
-void fn_8035FF34(void);
+void fn_8035FF24(void *p);
+void *fn_8035FF34(void *p, s32 idx);
 void fn_8035FF44(void);
 void fn_8035FF94(void);
 void fn_803601E4(void);
@@ -158,25 +158,19 @@ void fn_803612F4(void);
 void fn_80361414(void);
 void fn_803614E8(void);
 
-asm void fn_8035FBF8(void)
+void *fn_8035FBF8(void *p)
 {
-    nofralloc
-    lwz r3, 0x7c(r3)
-    blr
+    return *(void **)((u8 *)p + 0x7c);
 }
 
-asm void fn_8035FC00(void)
+u32 fn_8035FC00(void)
 {
-    nofralloc
-    lwz r3, lbl_8087EE90
-    blr
+    return lbl_8087EE90;
 }
 
-asm void fn_8035FC08(void)
+void fn_8035FC08(void *p, void *val)
 {
-    nofralloc
-    stw r4, 0x64(r3)
-    blr
+    *(void **)((u8 *)p + 0x64) = val;
 }
 
 asm void fn_8035FC10(void)
@@ -410,22 +404,15 @@ lbl_fn_8035FE88_00000314:
     blr
 }
 
-asm void fn_8035FF24(void)
+void fn_8035FF24(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    stw r0, 0x4(r3)
-    blr
+    *(u32 *)p = 0;
+    *((u32 *)p + 1) = 0;
 }
 
-asm void fn_8035FF34(void)
+void *fn_8035FF34(void *p, s32 idx)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    slwi r0, r4, 3
-    add r3, r3, r0
-    blr
+    return (u8 *)*(void **)((u8 *)p + 4) + (idx << 3);
 }
 
 asm void fn_8035FF44(void)
@@ -883,7 +870,7 @@ asm void fn_8036055C(void)
     add r4, r3, r0
     addi r3, r4, 0x58
     addi r4, r4, 0x30
-    b fn_800CB6E4
+    b morph_dispatchTargetUpdate
 }
 
 asm void fn_80360574(void)
@@ -900,7 +887,7 @@ asm void fn_80360574(void)
     addi r30, r31, 0x58
     mr r3, r30
     addi r4, r31, 0x30
-    bl fn_800CB6E4
+    bl morph_dispatchTargetUpdate
     lfs f1, 0x3c(r31)
     mr r3, r30
     li r4, 0x1
@@ -1355,7 +1342,7 @@ asm void fn_80360B40(void)
     cmpwi r3, 0x0
     beq lbl_fn_80360B40_00000F94
     addi r4, r30, 0x4
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     stw r3, 0x24(r30)
 lbl_fn_80360B40_00000F94:
     mr r3, r31

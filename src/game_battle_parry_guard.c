@@ -11,8 +11,8 @@ extern void scene_traverseNode(void);
 extern void collision_testLineSegment(void);
 extern void path_Object_constructor(void);
 extern void atn_ColliBase_destructor(void);
-extern void fn_80057F28(void);
-extern void fn_80058078(void);
+extern void mission_initPathTracker(void);
+extern void mission_clearPathTracker(void);
 extern void mission_isObjectiveActive(void);
 extern void mission_updateObjectiveTarget(void);
 extern void talk_formatQuotedString(void);
@@ -32,7 +32,7 @@ extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void str_skipWhitespace(void);
-extern void fn_8011F8F4(void);
+extern void skill_findEntryById(void);
 extern void skill_findNodeById(void);
 extern void quest_evaluateConditions(void);
 extern void quest_checkCondition(void);
@@ -58,7 +58,7 @@ extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
 extern void barrier_bindFieldAnimation(void);
 extern void dungeon_updateBarrierField(void);
-extern void fn_803EDB18(void);
+extern void barrier_testFieldCollision(void);
 extern void fn_803F10AC(void);
 extern void fn_803F1DA4(void);
 extern void fn_803F1E18(void);
@@ -251,7 +251,7 @@ lbl_fn_80412968_00000178:
 lbl_fn_80412968_00000194:
     lwz r3, lbl_8087F8A0
     mr r4, r30
-    bl fn_8011F8F4
+    bl skill_findEntryById
     cmpwi r3, 0x0
     stw r3, 0x698(r29)
     beq lbl_fn_80412968_00000228
@@ -716,7 +716,7 @@ lbl_fn_80412FFC_00000784:
     beq lbl_fn_80412FFC_000007D8
     mr r3, r27
     mr r4, r30
-    bl fn_803EDB18
+    bl barrier_testFieldCollision
     addi r3, r27, 0x2284
     bl strlen
     cmpwi r3, 0x0
@@ -1785,14 +1785,14 @@ lbl_fn_80413BD4_00001684:
     bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80413BD4_000016C0
-    bl fn_80057F28
+    bl mission_initPathTracker
 lbl_fn_80413BD4_000016C0:
     stw r3, 0x203c(r18)
     addi r3, r1, 0x108
     bl talk_formatQuotedString
     mr r4, r3
     lwz r3, 0x203c(r18)
-    bl fn_80058078
+    bl mission_clearPathTracker
     b lbl_fn_80413BD4_00001958
 lbl_fn_80413BD4_000016DC:
     mr r3, r18

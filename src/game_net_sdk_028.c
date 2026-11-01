@@ -41,7 +41,7 @@ extern void fn_806DDE60(void);
 extern void fn_806DE020(void);
 extern void fn_806DE290(void);
 extern void net_sendString(void);
-extern void fn_806DE4E0(void);
+extern void net_sendFormattedCommand(void);
 extern void fn_806DF610(void);
 extern void fn_806E0770(void);
 extern void fn_806E2010(void);
@@ -54,7 +54,7 @@ extern void fn_806E5BC0(void);
 extern void fn_806E5D00(void);
 extern void fn_806E6250(void);
 extern void fn_806E64E0(void);
-extern void fn_806E8B10(void);
+extern void str_safeCopy(void);
 extern void net_copyStringSafe(void);
 extern void fn_806EA840(void);
 extern void fn_806EA850(void);
@@ -106,8 +106,8 @@ void fn_806DA660(void);
 void fn_806DA700(void);
 void fn_806DA750(void);
 void fn_806DA7D0(void);
-void fn_806DA860(void);
-void fn_806DA870(void);
+void *fn_806DA860(void *obj);
+void *fn_806DA870(void *obj);
 void fn_806DA880(void);
 void fn_806DA8B0(void);
 void fn_806DA8D0(void);
@@ -1277,18 +1277,14 @@ lbl_fn_806DA7D0_00000FB4:
     blr
 }
 
-asm void fn_806DA860(void)
+void *fn_806DA860(void *obj)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(void **)(obj);
 }
 
-asm void fn_806DA870(void)
+void *fn_806DA870(void *obj)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(void **)((char *)obj + 4);
 }
 
 asm void fn_806DA880(void)
@@ -1725,7 +1721,7 @@ lbl_fn_806DAD50_00001550:
     mr r4, r5
     addi r3, r1, 0x8
     li r5, 0x401
-    bl fn_806E8B10
+    bl str_safeCopy
     addi r4, r1, 0x8
     li r3, 0x2f
     b lbl_fn_806DAD50_00001584
@@ -1756,7 +1752,7 @@ lbl_fn_806DAD50_00001584:
     lwz r5, 0x198(r30)
     mr r3, r28
     addi r4, r30, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r28
     addi r4, r30, 0x210
     addi r5, r31, 0x108
@@ -1764,7 +1760,7 @@ lbl_fn_806DAD50_00001584:
     mr r3, r28
     mr r5, r29
     addi r4, r30, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r28
     addi r4, r30, 0x210
     addi r5, r31, 0x118
@@ -2000,7 +1996,7 @@ lbl_fn_806DB0A0_000018E0:
     beq lbl_fn_806DB0A0_00001914
     addi r3, r31, 0x8
     li r5, 0x100
-    bl fn_806E8B10
+    bl str_safeCopy
     b lbl_fn_806DB0A0_0000191C
 lbl_fn_806DB0A0_00001914:
     li r0, 0x0
@@ -2012,7 +2008,7 @@ lbl_fn_806DB0A0_0000191C:
     beq lbl_fn_806DB0A0_0000193C
     addi r3, r31, 0x108
     li r5, 0x100
-    bl fn_806E8B10
+    bl str_safeCopy
     b lbl_fn_806DB0A0_00001944
 lbl_fn_806DB0A0_0000193C:
     li r0, 0x0
@@ -2264,7 +2260,7 @@ lbl_fn_806DB460_00001C74:
     mr r4, r5
     addi r3, r1, 0x108
     li r5, 0x100
-    bl fn_806E8B10
+    bl str_safeCopy
     addi r4, r1, 0x108
     li r3, 0x2f
     b lbl_fn_806DB460_00001CA4
@@ -2282,7 +2278,7 @@ lbl_fn_806DB460_00001CA4:
     mr r4, r27
     addi r3, r1, 0x8
     li r5, 0x100
-    bl fn_806E8B10
+    bl str_safeCopy
     addi r4, r1, 0x8
     li r3, 0x2f
     b lbl_fn_806DB460_00001CE4
@@ -2318,11 +2314,11 @@ lbl_fn_806DB460_00001D2C:
     addi r3, r28, 0x3b8
     addi r4, r1, 0x108
     li r5, 0x100
-    bl fn_806E8B10
+    bl str_safeCopy
     addi r3, r28, 0x4b8
     addi r4, r1, 0x8
     li r5, 0x100
-    bl fn_806E8B10
+    bl str_safeCopy
     mr r3, r30
     addi r4, r28, 0x210
     addi r5, r29, 0x1a0
@@ -2330,7 +2326,7 @@ lbl_fn_806DB460_00001D2C:
     mr r3, r30
     mr r5, r31
     addi r4, r28, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r30
     addi r4, r28, 0x210
     addi r5, r29, 0xfc
@@ -2338,7 +2334,7 @@ lbl_fn_806DB460_00001D2C:
     lwz r5, 0x198(r28)
     mr r3, r30
     addi r4, r28, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r30
     addi r4, r28, 0x210
     addi r5, r29, 0x1ac

@@ -72,7 +72,7 @@ extern void fn_8046D7D8(void);
 extern void fn_8046F014(void);
 extern void fn_8046F2C4(void);
 extern void fn_8047043C(void);
-extern void fn_80470528(void);
+extern void boss_releaseLaserTarget(void);
 extern void atn_TaskEntry_zeroInit(void* obj);
 extern void fn_8047B5A0(void);
 extern void fn_8047B5CC(void);
@@ -1893,12 +1893,12 @@ lbl_taskManager_initSystem_00001658:
     bl fn_804405F8
     bl fn_80207F80
     addi r3, r1, 0x18
-    bl fn_80470528
+    bl boss_releaseLaserTarget
     lwz r4, lbl_8087F420
     addi r3, r1, 0x18
     stw r30, 0x18(r4)
     stw r30, 0x1c(r4)
-    bl fn_80470528
+    bl boss_releaseLaserTarget
     lwz r0, 0x254(r1)
     lwz r31, 0x24c(r1)
     lwz r30, 0x248(r1)

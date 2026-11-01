@@ -26,15 +26,15 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void fn_8006AC08(void);
-extern void fn_8006AD24(void);
+extern void boss_lookupActionEntry(void);
 extern void fn_8006AF38(void);
 extern void boss_initActionStream(void);
-extern void fn_8006B2D8(void);
+extern void boss_parseStateCondition(void);
 extern void fn_8006BA30(void);
 extern void fn_8006BA38(void);
 extern void fn_8006D008(void);
 extern void mem_alloc(void);
-extern void fn_8008B964(void);
+extern void sys_getMainManager(void);
 extern void atn_Matrix_copy(void);
 extern void atn_Matrix_concat(void);
 extern void fn_80097A20(void);
@@ -48,10 +48,10 @@ extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void fn_800DCA70(void);
-extern void fn_800F52F8(void);
+extern void proj_getGlobalManager(void);
 extern void fn_800F7260(void);
 extern void fn_800F80A8(void);
-extern void fn_800F8524(void);
+extern void math_lerpf(void);
 extern void fn_80112958(void);
 extern void fn_80112960(void);
 extern void fn_80113CCC(void);
@@ -59,7 +59,7 @@ extern void fn_80114AA0(void);
 extern void fn_801156C4(void);
 extern void fn_80116BA4(void);
 extern void fn_80116BAC(void);
-extern void fn_80116BD4(void);
+extern void actor_calcSpawnTransform(void);
 extern void equip_getGlobalManager(void);
 extern void fn_80122280(void);
 extern void magic_isField28Zero(void);
@@ -72,7 +72,7 @@ extern void save_validateHeader(void);
 extern void fn_801F45F4(void);
 extern void saveSlot_readSummary(void);
 extern void thread_findAndNotifySlot(void);
-extern void fn_80244CAC(void);
+extern void script_setTaskTerminated(void);
 extern void fn_802A4968(void);
 extern void fn_802A49BC(void);
 extern void fn_802F0990(void);
@@ -86,7 +86,7 @@ extern void fn_80372754(void);
 extern void fn_803727D4(void);
 extern void fn_8037529C(void);
 extern void fn_8037F688(void);
-extern void fn_80392A04(void);
+extern void mtx_copyPairedSingle(void);
 extern void craft_forgeUpgradeWeapon(void);
 extern void fn_803CFC58(void);
 extern void fn_803CFC64(void);
@@ -508,7 +508,7 @@ lbl_fn_805BAC18_00000420:
     fmr f1, f31
     addi r3, r1, 0x10
     addi r4, r1, 0xc
-    bl fn_800F8524
+    bl math_lerpf
     fmr f3, f1
     lfs f1, lbl_80888454
     addi r3, r1, 0x68
@@ -547,7 +547,7 @@ lbl_fn_805BAC18_00000420:
     fmr f1, f31
     addi r3, r1, 0x8
     addi r4, r31, 0x30
-    bl fn_800F8524
+    bl math_lerpf
     fmr f31, f1
     addi r3, r29, 0x280
     addi r4, r1, 0x108
@@ -560,9 +560,9 @@ lbl_fn_805BAC18_00000420:
     bl fn_8037F688
     addi r3, r29, 0x280
     bl item_useConsumable
-    bl fn_8008B964
+    bl sys_getMainManager
     addi r4, r29, 0x280
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     addi r3, r1, 0x188
     addi r4, r1, 0xf0
     bl fn_800F80A8
@@ -747,7 +747,7 @@ lbl_fn_805BAC18_00000864:
     lwz r0, 0x34(r3)
     cmpwi r0, 0x1
     bne lbl_fn_805BAC18_000008E8
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_80116BAC
     li r4, 0x25
     bl magic_dispatchActionCommand
@@ -758,7 +758,7 @@ lbl_fn_805BAC18_00000864:
     bl fn_80122280
     stw r28, 0x4(r3)
 lbl_fn_805BAC18_000008AC:
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_80116BAC
     li r4, 0x26
     bl magic_dispatchActionCommand
@@ -782,7 +782,7 @@ lbl_fn_805BAC18_000008E8:
     lwz r0, 0x5bc(r29)
     cmpwi r0, 0x0
     bne lbl_fn_805BAC18_0000095C
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_80116BAC
     li r4, 0x29
     bl magic_dispatchActionCommand
@@ -806,7 +806,7 @@ lbl_fn_805BAC18_00000924:
     stw r0, 0x5bc(r29)
     b lbl_fn_805BAC18_00000A1C
 lbl_fn_805BAC18_0000095C:
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_80116BAC
     li r4, 0x2a
     bl magic_dispatchActionCommand
@@ -828,7 +828,7 @@ lbl_fn_805BAC18_00000978:
     li r30, 0x1
     b lbl_fn_805BAC18_00000A1C
 lbl_fn_805BAC18_000009AC:
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_80116BAC
     li r4, 0x1
     bl magic_dispatchActionCommand
@@ -838,7 +838,7 @@ lbl_fn_805BAC18_000009AC:
     stw r0, 0x5bc(r29)
     b lbl_fn_805BAC18_00000A1C
 lbl_fn_805BAC18_000009D0:
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_80116BAC
     li r4, 0x0
     bl magic_dispatchActionCommand
@@ -922,7 +922,7 @@ lbl_fn_805BAC18_00000AEC:
     lwz r3, 0x40(r31)
     cmpwi r3, 0x0
     beq lbl_fn_805BAC18_00000B08
-    bl fn_80244CAC
+    bl script_setTaskTerminated
 lbl_fn_805BAC18_00000B08:
     li r0, 0x3
     stw r0, 0x88(r29)
@@ -966,7 +966,7 @@ lbl_fn_805BAC18_00000B78:
     bne lbl_fn_805BAC18_00000BC4
     addi r3, r29, 0x8c
     addi r4, r29, 0x280
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     addi r3, r29, 0x54
     addi r4, r29, 0x6c
     bl vec3_copy
@@ -1283,7 +1283,7 @@ lbl_fn_805BB658_00000EB0:
     beq lbl_fn_805BB658_000012D4
     mr r4, r23
     addi r3, r1, 0x90
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0x90(r1)
     srwi. r0, r0, 31
     bne lbl_fn_805BB658_00000FE8
@@ -1561,7 +1561,7 @@ lbl_fn_805BB658_00001310:
     bl actor_dispatchMessage
     mr r4, r22
     addi r3, r1, 0xa8
-    bl fn_8006AD24
+    bl boss_lookupActionEntry
     mr r5, r3
     addi r3, r1, 0x84
     addi r4, r29, 0x5c

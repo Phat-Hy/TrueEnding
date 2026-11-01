@@ -6,7 +6,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void collision_testLineSegment(void);
-extern void fn_80063764(void);
+extern void magic_updateCircleArea(void);
 extern void mem_alloc(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -237,14 +237,14 @@ asm void fn_80182134(void)
     lfs f1, lbl_80881C04
     addi r5, r1, 0x9c
     li r6, -0x100
-    bl fn_80063764
+    bl magic_updateCircleArea
     lis r6, 0xff4d
     lwz r3, lbl_8087EEB0
     lfs f1, lbl_80881C04
     addi r4, r1, 0x9c
     addi r5, r1, 0x44
     addi r6, r6, 0x4d00
-    bl fn_80063764
+    bl magic_updateCircleArea
     b lbl_fn_80182134_00000240
 lbl_fn_80182134_00000224:
     lis r6, 0xff4d
@@ -253,7 +253,7 @@ lbl_fn_80182134_00000224:
     addi r4, r1, 0x50
     addi r5, r1, 0x44
     addi r6, r6, 0x4d00
-    bl fn_80063764
+    bl magic_updateCircleArea
 lbl_fn_80182134_00000240:
     mr r3, r29
     b lbl_fn_80182134_0000024C

@@ -120,7 +120,7 @@ void fn_806D8B70(void);
 void fn_806D8C20(void);
 void fn_806D8D20(void);
 void fn_806D8DA0(void);
-void fn_806D8E30(void);
+void net_strdup(void);
 void fn_806D8EB0(void);
 void fn_806D8F10(void);
 void fn_806D8F20(void);
@@ -1790,7 +1790,7 @@ lbl_fn_806D8DA0_000015B0:
     blr
 }
 
-asm void fn_806D8E30(void)
+asm void net_strdup(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1801,23 +1801,23 @@ asm void fn_806D8E30(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     mr r29, r3
-    bne lbl_fn_806D8E30_000015FC
+    bne lbl_net_strdup_000015FC
     li r3, 0x0
-    b lbl_fn_806D8E30_00001628
-lbl_fn_806D8E30_000015FC:
+    b lbl_net_strdup_00001628
+lbl_net_strdup_000015FC:
     bl strlen
     addi r30, r3, 0x1
     mr r3, r30
     bl net_socketConnect
     cmpwi r3, 0x0
     mr r31, r3
-    beq lbl_fn_806D8E30_00001624
+    beq lbl_net_strdup_00001624
     mr r4, r29
     mr r5, r30
     bl memcpy
-lbl_fn_806D8E30_00001624:
+lbl_net_strdup_00001624:
     mr r3, r31
-lbl_fn_806D8E30_00001628:
+lbl_net_strdup_00001628:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

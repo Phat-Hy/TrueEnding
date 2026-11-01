@@ -6,12 +6,12 @@ extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void collision_queryGeometry(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_8009373C(void);
+extern void target_findEntryByName(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
-extern void fn_80108F38(void);
+extern void hurtbox_testCollisionFlags(void);
 extern void enemy_updateCombatBehavior(void);
 extern void enemy_evalAnimTrack(void);
 extern void npc_initScriptContext(void);
@@ -109,7 +109,7 @@ asm void fn_802E9D38(void)
     stfs f1, 0xf8(r3)
     stfs f0, 0xfc(r3)
     addi r3, r3, 0xb0
-    bl fn_8009373C
+    bl target_findEntryByName
     b lbl_fn_802E9D38_00000098
 lbl_fn_802E9D38_0000005C:
     lfs f0, lbl_808847AC
@@ -126,7 +126,7 @@ lbl_fn_802E9D38_0000005C:
     stfs f0, 0xf8(r3)
     stfs f0, 0xfc(r3)
     addi r3, r3, 0xb0
-    bl fn_8009373C
+    bl target_findEntryByName
 lbl_fn_802E9D38_00000098:
     mr r3, r31
     bl dialog_renderWindow
@@ -428,7 +428,7 @@ lbl_fn_802E9FC8_000003FC:
     mr r3, r30
     addi r4, r1, 0x10
     li r5, 0x80
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
     b lbl_fn_802E9FC8_00000514
 lbl_fn_802E9FC8_000004F8:
     lwz r0, 0x1530(r3)

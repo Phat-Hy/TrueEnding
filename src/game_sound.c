@@ -19,7 +19,7 @@ extern void talk_setSpeakerName(void);
 extern void boss_recordDamage(void);
 extern void fn_8006A9A4(void);
 extern void boss_triggerEventSequence(void);
-extern void fn_8006AD24(void);
+extern void boss_lookupActionEntry(void);
 extern void fn_8006B53C(void);
 extern void fn_8006B594(void);
 extern void fn_8006BA6C(void);
@@ -52,7 +52,7 @@ extern void fn_800D19FC(void);
 extern void str_parseInt(void);
 extern void str_findChar(void);
 extern void sky_renderStub(void);
-extern void fn_8046DC5C(void);
+extern void boss_loadWeakpointResource(void);
 extern void boss_bindArenaInteractions(void);
 extern void fn_8059D7DC(void);
 extern void fn_8059D828(void);
@@ -117,7 +117,7 @@ extern void fn_80718470(void);
 extern void fn_807184D0(void);
 extern void fn_807184F0(void);
 extern void fn_807186F0(void);
-extern void fn_80725170(void);
+extern void net_listClearAll(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -211,7 +211,7 @@ void fn_80049AAC(void);
 void fn_80049AE4(void);
 void fn_80049B08(void);
 void fn_80049B2C(void);
-void fn_80049B74(void);
+void snd_findSoundNodeByName(void);
 void fn_80049C3C(void);
 void fn_80049CDC(void);
 void fn_80049D74(void);
@@ -686,7 +686,7 @@ asm void fn_80046784(void)
     addic. r3, r3, 0xc
     beq lbl_fn_80046784_000005BC
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_80046784_000005BC:
     cmpwi r31, 0x0
     ble lbl_fn_80046784_000005CC
@@ -1192,7 +1192,7 @@ lbl_fn_800467E4_00000C68:
     addic. r3, r0, 0xc
     beq lbl_fn_800467E4_00000C80
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_800467E4_00000C80:
     addi r3, r30, 0x330
     li r4, -0x1
@@ -1522,7 +1522,7 @@ lbl_fn_80046EE0_000010A4:
     bl actor_dispatchMessage
     mr r4, r27
     addi r3, r1, 0x70
-    bl fn_8006AD24
+    bl boss_lookupActionEntry
     lwz r0, 0x40(r1)
     srwi. r0, r0, 31
     beq lbl_fn_80046EE0_00001120
@@ -4499,7 +4499,7 @@ lbl_fn_80049B2C_00003968:
     blr
 }
 
-asm void fn_80049B74(void)
+asm void snd_findSoundNodeByName(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -4509,53 +4509,53 @@ asm void fn_80049B74(void)
     mr r31, r3
     lwz r0, 0x8e0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80049B74_00003A0C
+    beq lbl_snd_findSoundNodeByName_00003A0C
     mr r3, r4
     bl str_findChar
     lwz r4, 0x8d4(r31)
     addi r5, r31, 0x8d4
-    b lbl_fn_80049B74_000039C8
-lbl_fn_80049B74_000039AC:
+    b lbl_snd_findSoundNodeByName_000039C8
+lbl_snd_findSoundNodeByName_000039AC:
     lwz r0, 0xc(r4)
     cmplw r0, r3
-    blt lbl_fn_80049B74_000039C4
+    blt lbl_snd_findSoundNodeByName_000039C4
     mr r5, r4
     lwz r4, 0x0(r4)
-    b lbl_fn_80049B74_000039C8
-lbl_fn_80049B74_000039C4:
+    b lbl_snd_findSoundNodeByName_000039C8
+lbl_snd_findSoundNodeByName_000039C4:
     lwz r4, 0x4(r4)
-lbl_fn_80049B74_000039C8:
+lbl_snd_findSoundNodeByName_000039C8:
     cmpwi r4, 0x0
-    bne lbl_fn_80049B74_000039AC
+    bne lbl_snd_findSoundNodeByName_000039AC
     addi r0, r31, 0x8d4
     cmplw r5, r0
-    beq lbl_fn_80049B74_000039E8
+    beq lbl_snd_findSoundNodeByName_000039E8
     lwz r0, 0xc(r5)
     cmplw r3, r0
-    bge lbl_fn_80049B74_000039EC
-lbl_fn_80049B74_000039E8:
+    bge lbl_snd_findSoundNodeByName_000039EC
+lbl_snd_findSoundNodeByName_000039E8:
     addi r5, r31, 0x8d4
-lbl_fn_80049B74_000039EC:
+lbl_snd_findSoundNodeByName_000039EC:
     addi r0, r31, 0x8d4
     cmplw r5, r0
-    beq lbl_fn_80049B74_00003A04
+    beq lbl_snd_findSoundNodeByName_00003A04
     lwz r3, 0x10(r5)
     addi r3, r3, 0x1
-    b lbl_fn_80049B74_00003A2C
-lbl_fn_80049B74_00003A04:
+    b lbl_snd_findSoundNodeByName_00003A2C
+lbl_snd_findSoundNodeByName_00003A04:
     li r3, 0x0
-    b lbl_fn_80049B74_00003A2C
-lbl_fn_80049B74_00003A0C:
+    b lbl_snd_findSoundNodeByName_00003A2C
+lbl_snd_findSoundNodeByName_00003A0C:
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80049B74_00003A28
+    beq lbl_snd_findSoundNodeByName_00003A28
     addi r3, r3, 0x8
     bl fn_8059E320
     addi r3, r3, 0x1
-    b lbl_fn_80049B74_00003A2C
-lbl_fn_80049B74_00003A28:
+    b lbl_snd_findSoundNodeByName_00003A2C
+lbl_snd_findSoundNodeByName_00003A28:
     li r3, 0x0
-lbl_fn_80049B74_00003A2C:
+lbl_snd_findSoundNodeByName_00003A2C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -5186,7 +5186,7 @@ asm void fn_8004A3FC(void)
     lwz r3, lbl_8087F518
     addi r5, r1, 0x14
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lis r4, lbl_807772D0@ha
     mr r28, r3
     addi r4, r4, lbl_807772D0@l
@@ -6007,7 +6007,7 @@ lbl_fn_8004AE84_00004CFC:
 lbl_fn_8004AE84_00004D04:
     lwz r3, lbl_8087EE90
     mr r4, r29
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     mr r4, r3
     lwz r3, lbl_8087EFE8
     bl fn_800D0AB0
@@ -6090,7 +6090,7 @@ lbl_fn_8004AFAC_00004E1C:
 lbl_fn_8004AFAC_00004E24:
     lwz r3, lbl_8087EE90
     mr r4, r28
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     mr r4, r3
     lwz r3, lbl_8087EFE8
     bl fn_800D0AB0

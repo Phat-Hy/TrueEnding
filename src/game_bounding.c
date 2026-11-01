@@ -24,19 +24,19 @@ extern void fn_80109864(void);
 extern void fn_8010B180(void);
 extern void fn_8010B250(void);
 extern void fn_8010B398(void);
-extern void fn_8012DF7C(void);
+extern void enemy_calcAttackTrajectory(void);
 extern void fn_8012F034(void);
 extern void fn_8012F188(void);
 extern void fn_8012F440(void);
 extern void fn_80133E24(void);
-extern void fn_80133EE8(void);
+extern void boss_findPartSlotById(void);
 extern void fn_80133F18(void);
 extern void fn_80133F6C(void);
 extern void fn_80134168(void);
 extern void quest_getRewardItemSlot(void);
 extern void fn_801533C8(void);
 extern void battle_canTargetActor(void);
-extern void fn_801789D8(void);
+extern void battle_evalDropTable(void);
 extern void fn_801799BC(void);
 extern void fn_8017A5D8(void);
 extern void thread_findAndNotify(void);
@@ -537,7 +537,7 @@ lbl_fn_800FDB20_000005DC:
     mr r3, r25
     li r4, 0x0
     lis r5, 0x40
-    bl fn_801789D8
+    bl battle_evalDropTable
     cmpwi r3, 0x0
     beq lbl_fn_800FDB20_000006A8
     cmpwi r26, 0x4
@@ -887,7 +887,7 @@ lbl_fn_800FDF14_00000B40:
     mr r3, r28
     li r4, 0x4f60
     li r5, 0x0
-    bl fn_801789D8
+    bl battle_evalDropTable
     cmpwi r3, 0x0
     beq lbl_fn_800FDF14_00000B70
     lwz r3, 0xc(r26)
@@ -934,7 +934,7 @@ lbl_fn_800FDF14_00000BC4:
     beq lbl_fn_800FDF14_00000E5C
     addi r3, r29, 0x7d4
     li r4, 0x3c
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_800FDF14_00000E5C
     lwz r3, 0x5c(r28)
@@ -1038,7 +1038,7 @@ lbl_fn_800FDF14_00000D38:
     stb r0, 0x92e(r24)
     addi r3, r29, 0x7d4
     li r4, 0x3c
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     mr r4, r3
     mr r3, r25
     mr r5, r29
@@ -1105,7 +1105,7 @@ lbl_fn_800FDF14_00000E4C:
 lbl_fn_800FDF14_00000E5C:
     addi r3, r29, 0x7d4
     li r4, 0x31
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_800FDF14_00000E98
     lfs f4, 0x10(r26)
@@ -1252,7 +1252,7 @@ lbl_fn_800FDF14_0000106C:
     beq lbl_fn_800FDF14_000010C8
     addi r3, r29, 0x7d4
     li r4, 0x30
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_800FDF14_00001094
     lwz r0, 0xc(r26)
@@ -1353,7 +1353,7 @@ lbl_fn_800FDF14_000011C8:
     beq lbl_fn_800FDF14_000011F0
     addi r3, r29, 0x7d4
     li r4, 0x40
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_800FDF14_000011F0
     lwz r0, 0xc(r26)
@@ -1512,7 +1512,7 @@ lbl_fn_800FDF14_000013A4:
     lwz r0, 0x3e4(r1)
     neg r4, r0
     stw r4, 0x13c(r1)
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
     lwz r0, 0x90(r26)
     cmpwi r0, 0x0
     beq lbl_fn_800FDF14_000014E0
@@ -1600,7 +1600,7 @@ lbl_fn_800FDF14_000014E0:
     mr r4, r27
     stw r7, 0x118(r1)
     stw r27, 0x11c(r1)
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
     lwz r3, lbl_8087F0A8
     lwz r0, 0x470(r3)
     cmpwi r0, 0x0
@@ -1671,7 +1671,7 @@ lbl_fn_800FDF14_00001684:
     beq lbl_fn_800FDF14_00001808
     addi r3, r29, 0x7d4
     li r4, 0x23
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_800FDF14_00001808
     lwz r0, 0x7e0(r28)
@@ -1724,7 +1724,7 @@ lbl_fn_800FDF14_00001720:
     lwz r4, 0x3e4(r1)
     subf r4, r4, r0
     stw r4, 0xfc(r1)
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
     lwz r4, 0x40(r26)
     mr r3, r28
     bl quest_getRewardItemSlot
@@ -1778,7 +1778,7 @@ lbl_fn_800FDF14_00001808:
     li r27, 0x0
     li r30, 0x0
     li r4, 0x7
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_800FDF14_000018B0
     mr r3, r23
@@ -1815,7 +1815,7 @@ lbl_fn_800FDF14_000018A0:
 lbl_fn_800FDF14_000018B0:
     mr r3, r23
     li r4, 0x8
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_800FDF14_000019E8
     mr r3, r23
@@ -1902,12 +1902,12 @@ lbl_fn_800FDF14_000019DC:
 lbl_fn_800FDF14_000019E8:
     mr r3, r23
     li r4, 0x9
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_800FDF14_00001A34
     mr r3, r23
     li r4, 0x9
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     lwz r0, 0x188(r1)
     addi r3, r1, 0x18c
     li r30, 0x1
@@ -1923,7 +1923,7 @@ lbl_fn_800FDF14_00001A24:
 lbl_fn_800FDF14_00001A34:
     mr r3, r23
     li r4, 0x47
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_800FDF14_00001AAC
     mr r3, r23
@@ -1985,7 +1985,7 @@ lbl_fn_800FDF14_00001B14:
     lwz r4, 0xdc(r1)
     li r6, 0x0
     addi r3, r21, 0x7d4
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
     lwz r0, 0x90(r26)
     cmpwi r0, 0x0
     beq lbl_fn_800FDF14_00001BCC

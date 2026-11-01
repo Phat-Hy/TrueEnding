@@ -13,7 +13,7 @@ extern void str_skipWhitespace(void);
 extern void game_initGlobalDatabases(void);
 extern void rand_scaleRangeInt(void);
 extern void event_findEntryById(void);
-extern void fn_8046DC5C(void);
+extern void boss_loadWeakpointResource(void);
 extern void boss_bindArenaInteractions(void);
 extern void rand(void);
 extern void strcmp(void);
@@ -128,7 +128,7 @@ asm void fn_8021CCC4(void)
     addi r5, r1, 0x8
     lwz r4, lbl_80882F98
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r12, 0xc(r1)
     mr r31, r3
     mr r4, r31
@@ -338,7 +338,7 @@ asm void fn_8021CF8C(void)
     addi r5, r1, 0x8
     lwz r4, lbl_80882FA0
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r12, 0x40(r1)
     mr r21, r3
     mr r4, r21
@@ -1245,7 +1245,7 @@ asm void fn_8021DBEC(void)
     addi r5, r1, 0x8
     lwz r4, lbl_80882FA4
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r12, 0xc(r1)
     mr r28, r3
     mr r4, r28
@@ -1588,7 +1588,7 @@ asm void fn_8021E0B0(void)
     addi r5, r1, 0x8
     lwz r4, lbl_80882FB0
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     stw r28, lbl_8087F330
     mr r31, r3
     lwz r12, 0xc(r1)

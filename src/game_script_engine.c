@@ -12,7 +12,7 @@ extern void fn_802428D8(void);
 extern void fn_80243514(void);
 extern void fn_802435A8(void);
 extern void fn_8068B39C(void);
-extern void fn_806920C0(void);
+extern void std_string_append(void);
 extern void fn_8069293C(void);
 extern void fn_80693884(void);
 extern void fn_806939C8(void);
@@ -218,7 +218,7 @@ lbl_fn_802407CC_00000224:
     stw r5, lbl_80880390
     stw r5, lbl_808803C0
 lbl_fn_802407CC_00000244:
-    bl fn_806920C0
+    bl std_string_append
     lwz r3, 0x50(r1)
     slwi r0, r27, 2
     lwz r3, 0x0(r3)
@@ -378,7 +378,7 @@ lbl_fn_802407CC_00000458:
 lbl_fn_802407CC_00000474:
     mr r3, r31
     mr r4, r27
-    bl fn_806920C0
+    bl std_string_append
     lwz r3, 0x50(r1)
     slwi r0, r30, 2
     lwz r3, 0x0(r3)
@@ -929,7 +929,7 @@ lbl_fn_802411B8_00000BD0:
     stw r5, lbl_80880390
     stw r5, lbl_808803C0
 lbl_fn_802411B8_00000BF0:
-    bl fn_806920C0
+    bl std_string_append
     lwz r3, 0xa0(r1)
     slwi r0, r27, 2
     lwz r3, 0x0(r3)
@@ -1089,7 +1089,7 @@ lbl_fn_802411B8_00000E04:
 lbl_fn_802411B8_00000E20:
     mr r3, r31
     mr r4, r28
-    bl fn_806920C0
+    bl std_string_append
     lwz r3, 0xa0(r1)
     slwi r0, r30, 2
     lwz r3, 0x0(r3)
@@ -1737,7 +1737,7 @@ lbl_fn_80241CB8_000016D0:
     stw r5, lbl_80880390
     stw r5, lbl_808803C0
 lbl_fn_80241CB8_000016F0:
-    bl fn_806920C0
+    bl std_string_append
     lwz r3, 0x90(r1)
     slwi r0, r26, 2
     lwz r3, 0x0(r3)
@@ -1897,7 +1897,7 @@ lbl_fn_80241CB8_00001904:
 lbl_fn_80241CB8_00001920:
     mr r3, r30
     mr r4, r31
-    bl fn_806920C0
+    bl std_string_append
     lwz r3, 0x90(r1)
     slwi r0, r29, 2
     lwz r3, 0x0(r3)

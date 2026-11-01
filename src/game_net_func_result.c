@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_80049B74(void);
+extern void snd_findSoundNodeByName(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -2063,7 +2063,7 @@ lbl_fn_80506D98_00001A0C:
     bl fn_8006F420
     lwz r3, lbl_8087EE90
     addi r4, r1, 0x28
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     stw r3, 0x8(r1)
     addi r3, r1, 0x128
     bl talk_parseDialogue

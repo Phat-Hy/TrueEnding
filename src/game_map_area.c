@@ -20,8 +20,8 @@ extern void boss_recordDamage(void);
 extern void mem_free(void);
 extern void fn_80094BD8(void);
 extern void str_parseInt(void);
-extern void fn_801059F8(void);
-extern void fn_80105B3C(void);
+extern void colli_findDynamicSlot(void);
+extern void colli_findStaticSlot(void);
 extern void fn_8011BEB8(void);
 extern void fn_8011C044(void);
 extern void fn_8011D1FC(void);
@@ -113,7 +113,7 @@ void fn_8017C4C4(void);
 void fn_8017C52C(void);
 void fn_8017C7F8(void);
 void fn_8017C904(void);
-void fn_8017C974(void);
+void map_isAreaCombatActive(void);
 void fn_8017C9A0(void);
 void fn_8017C9AC(void);
 void fn_8017CB2C(void);
@@ -518,10 +518,10 @@ lbl_fn_8017B434_00000574:
     cmpwi r3, 0x0
     beq lbl_fn_8017B434_00000594
     mr r4, r29
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r29
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_fn_8017B434_00000594:
     lwz r0, 0x12a8(r29)
     addi r3, r29, 0xc58
@@ -1643,18 +1643,18 @@ asm void fn_8017C904(void)
     blr
 }
 
-asm void fn_8017C974(void)
+asm void map_isAreaCombatActive(void)
 {
     nofralloc
     lwz r4, lbl_8087F430
     cmpwi r4, 0x0
-    beq lbl_fn_8017C974_000015D4
+    beq lbl_map_isAreaCombatActive_000015D4
     lwz r0, 0x5760(r4)
     cmpwi r0, 0x0
-    ble lbl_fn_8017C974_000015D4
+    ble lbl_map_isAreaCombatActive_000015D4
     li r3, 0x1
     blr
-lbl_fn_8017C974_000015D4:
+lbl_map_isAreaCombatActive_000015D4:
     lwz r0, 0x54c(r3)
     extrwi r3, r0, 1, 27
     blr

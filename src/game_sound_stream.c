@@ -20,7 +20,7 @@ extern void fn_801CE648(void);
 extern void fn_801CE7E8(void);
 extern void fn_801CE87C(void);
 extern void fn_801CEA50(void);
-extern void fn_801CF334(void);
+extern void ui_log_findActiveEntry(void);
 extern void fn_801CFAA8(void);
 extern void fn_801D3DF4(void);
 extern void fn_801D4E74(void);
@@ -29,7 +29,7 @@ extern void fn_801F45F4(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
 extern void save_calculateBlockCrc(void);
-extern void fn_801F7590(void);
+extern void save_writeBackupSlot(void);
 extern void fn_801F7DF0(void);
 extern void save_findEntryByName(void);
 extern void profile_getMetricValue(void);
@@ -38,7 +38,7 @@ extern void fn_8020BCEC(void);
 extern void fn_8020D608(void);
 extern void fn_8020DB18(void);
 extern void time_wrapMilliseconds(void);
-extern void fn_8020EF4C(void);
+extern void rand_stepEntropy(void);
 extern void random_generateValue(void);
 extern void task_mapIdToQueue(void);
 extern void gmk_findSlotByIndex(void);
@@ -179,10 +179,10 @@ asm void fn_801D5AB0(void)
     lwz r0, 0x68(r4)
     cmpwi r0, 0x0
     bne lbl_fn_801D5AB0_00000208
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r26, 0x4c(r3)
     mr r3, r31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r4, 0x1bb0(r31)
     lwz r25, 0x48(r3)
     cmpwi r4, 0x1
@@ -266,7 +266,7 @@ lbl_fn_801D5AB0_0000025C:
     cmpwi r3, 0x0
     beq lbl_fn_801D5AB0_000003DC
     mr r3, r31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r0, 0x4c(r3)
     li r3, 0x0
     lwz r4, lbl_8087F4F0
@@ -275,7 +275,7 @@ lbl_fn_801D5AB0_0000025C:
     add r4, r4, r0
     lwz r4, -0x7d70(r4)
     bl time_wrapMilliseconds
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_801D5AB0_000002E4
     lwz r28, lbl_8087F580
@@ -482,7 +482,7 @@ asm void fn_801D5F04(void)
     lwz r0, 0x68(r4)
     cmpwi r0, 0x0
     bne lbl_fn_801D5F04_0000064C
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r3, 0x48(r3)
     lwz r3, 0x50(r3)
     bl task_mapIdToQueue
@@ -545,7 +545,7 @@ lbl_fn_801D5F04_00000668:
     cmpwi r3, 0x0
     beq lbl_fn_801D5F04_00000724
     mr r3, r31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r0, 0x4c(r3)
     li r3, 0x0
     lwz r4, lbl_8087F4F0
@@ -554,7 +554,7 @@ lbl_fn_801D5F04_00000668:
     add r4, r4, r0
     lwz r4, -0x7d70(r4)
     bl time_wrapMilliseconds
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_801D5F04_000006F0
     lwz r31, lbl_8087F580
@@ -684,10 +684,10 @@ lbl_fn_801D6188_00000868:
     cmpwi r0, 0x0
     beq lbl_fn_801D6188_00000950
     mr r3, r31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r25, 0x4c(r3)
     mr r3, r31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r24, 0x48(r3)
     lwz r27, 0x8(r28)
     lwz r3, 0x1bb8(r31)
@@ -831,10 +831,10 @@ lbl_fn_801D6390_00000A78:
     cmpwi r0, 0x0
     beq lbl_fn_801D6390_00000B18
     mr r3, r31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r29, 0x4c(r3)
     mr r3, r31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r4, 0x8(r30)
     lwz r3, 0x48(r3)
     cmpwi r4, 0x1f
@@ -947,7 +947,7 @@ asm void fn_801D6560(void)
     bl fn_801CE87C
     mr r30, r3
     mr r3, r29
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r3, 0x48(r3)
     slwi r0, r26, 2
     mr r4, r26
@@ -1069,10 +1069,10 @@ asm void fn_801D6754(void)
     cmpwi r3, 0x0
     beq lbl_fn_801D6754_00000F20
     mr r3, r27
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r31, 0x4c(r3)
     mr r3, r27
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r0, 0x1bc0(r27)
     li r28, 0x0
     lwz r30, 0x48(r3)
@@ -1473,7 +1473,7 @@ lbl_fn_801D6C1C_00001324:
     bne lbl_fn_801D6C1C_00001388
 lbl_fn_801D6C1C_00001368:
     mr r3, r16
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r4, 0x4c(r3)
     mr r3, r16
     mr r5, r18
@@ -1482,7 +1482,7 @@ lbl_fn_801D6C1C_00001368:
     b lbl_fn_801D6C1C_000013C4
 lbl_fn_801D6C1C_00001388:
     mr r3, r16
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r4, 0x4c(r3)
     mr r3, r16
     mr r5, r18
@@ -1491,7 +1491,7 @@ lbl_fn_801D6C1C_00001388:
     b lbl_fn_801D6C1C_000013C4
 lbl_fn_801D6C1C_000013A8:
     mr r3, r16
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r4, 0x4c(r3)
     mr r3, r16
     mr r5, r18
@@ -1499,7 +1499,7 @@ lbl_fn_801D6C1C_000013A8:
     bl fn_801D4E74
 lbl_fn_801D6C1C_000013C4:
     mr r3, r16
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lis r30, lbl_8073CA28@ha
     lwz r23, 0x4c(r3)
     lfs f29, lbl_80882AD0
@@ -1620,7 +1620,7 @@ lbl_fn_801D6C1C_00001538:
     psq_st f2, 0x8(r26), 0, 0
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F7590
+    bl save_writeBackupSlot
     b lbl_fn_801D6C1C_00001598
 lbl_fn_801D6C1C_00001594:
     stfs f31, 0x50(r3)
@@ -1706,7 +1706,7 @@ lbl_fn_801D6F84_0000169C:
     stw r6, 0x80(r3)
 lbl_fn_801D6F84_000016A0:
     mr r3, r26
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lis r31, lbl_8073CA28@ha
     lfs f31, lbl_80882AD8
     lfs f30, lbl_80882AD0

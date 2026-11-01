@@ -14,7 +14,7 @@ extern void vec3_assign(void);
 extern void fn_800109E0(void);
 extern void vec3_toEulerAngles(void);
 extern void mtx_multVec(void);
-extern void fn_80012C88(void);
+extern void vec3_addAssign(void);
 extern void vec3_sub(void);
 extern void math_wrapAngle(void);
 extern void vec3_add(void);
@@ -28,7 +28,7 @@ extern void atn_Matrix_copy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800F52F8(void);
+extern void proj_getGlobalManager(void);
 extern void vec3_scale(void);
 extern void fn_800F7F80(void);
 extern void viewport_getNextSequenceId(void);
@@ -39,16 +39,16 @@ extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80116BAC(void);
 extern void player_evaluateStatusCondition(void);
-extern void fn_8012A1B8(void);
+extern void path_getFollowerNode(void);
 extern void fn_8012A218(void);
 extern void npc_updateDialogueTarget(void);
 extern void fn_80139F3C(void);
 extern void fn_8013A158(void);
 extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
-extern void fn_8013C480(void);
-extern void fn_801404F8(void);
-extern void fn_80140500(void);
+extern void npc_isInteractionReady(void);
+extern void quest_getGlobalManager(void);
+extern void quest_resetActiveObjectiveSlots(void);
 extern void quest_initMarkerCoords(void);
 extern void quest_resetObjectiveBounds(void);
 extern void fn_80178018(void);
@@ -133,15 +133,15 @@ void fn_8019FBE0(void);
 void fn_8019FC6C(void);
 void fn_8019FE4C(void);
 void fn_8019FEC4(void);
-void fn_801A03E0(void);
-void fn_801A03E8(void);
-void fn_801A03EC(void);
+u32 bgm_getGlobalManager(void);
+void vec3_dot(void);
+u32 fn_801A03EC(void *p);
 void fn_801A03F4(void);
-void fn_801A0400(void);
-void fn_801A0408(void);
-void fn_801A0410(void);
-void fn_801A0418(void);
-void fn_801A0420(void);
+u32 fn_801A0400(void *p);
+u32 fn_801A0408(void *p);
+u32 fn_801A0410(void *p);
+u8 fn_801A0418(void *p);
+u32 fn_801A0420(void *p);
 void fn_801A0428(void);
 void fn_801A0468(void);
 void fn_801A04A8(void);
@@ -1031,7 +1031,7 @@ lbl_fn_8019FEC4_00000BC4:
     addi r4, r1, 0x4c
     bl fn_80198514
     lwz r3, 0x4(r28)
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     mr r4, r3
     lwz r3, 0x4(r28)
     lfs f1, lbl_80881FCC
@@ -1059,7 +1059,7 @@ lbl_fn_8019FEC4_00000BC4:
     bl vec3_scale
     addi r3, r1, 0xb8
     addi r4, r1, 0x34
-    bl fn_80012C88
+    bl vec3_addAssign
     addi r3, r1, 0xac
     addi r4, r28, 0x8
     bl vec3_toEulerAngles
@@ -1088,7 +1088,7 @@ lbl_fn_8019FEC4_00000BC4:
     bl mtx_multVec
     lfs f29, lbl_8088211C
     li r30, 0x0
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     bl fn_801A0408
     lfs f30, lbl_80881FCC
     mr r31, r3
@@ -1096,7 +1096,7 @@ lbl_fn_8019FEC4_00000BC4:
     b lbl_fn_8019FEC4_00000D5C
 lbl_fn_8019FEC4_00000CEC:
     mr r3, r31
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_8019FEC4_00000D50
     mr r3, r31
@@ -1113,7 +1113,7 @@ lbl_fn_8019FEC4_00000CEC:
     bl viewport_getNextSequenceId
     addi r3, r1, 0x94
     addi r4, r1, 0x88
-    bl fn_801A03E8
+    bl vec3_dot
     fcmpo cr0, f1, f31
     ble lbl_fn_8019FEC4_00000D50
     fcmpo cr0, f28, f29
@@ -1192,7 +1192,7 @@ lbl_fn_8019FEC4_00000E3C:
     stfs f2, 0x70(r1)
     addi r3, r1, 0xac
     addi r4, r1, 0x70
-    bl fn_80012C88
+    bl vec3_addAssign
     lfs f1, lbl_80881FCC
     addi r3, r28, 0x8
     lfs f3, lbl_80881FBC
@@ -1206,7 +1206,7 @@ lbl_fn_8019FEC4_00000E3C:
     bl mtx_multVec
 lbl_fn_8019FEC4_00000E78:
     addi r3, r1, 0x158
-    bl fn_80140500
+    bl quest_resetActiveObjectiveSlots
     addi r3, r1, 0x64
     addi r4, r1, 0xb8
     bl vec3_assign
@@ -1221,7 +1221,7 @@ lbl_fn_8019FEC4_00000E78:
     lwz r3, 0x4(r28)
     bl fn_80198C00
     mr r30, r3
-    bl fn_801404F8
+    bl quest_getGlobalManager
     mr r8, r30
     addi r4, r1, 0x158
     addi r5, r1, 0x64
@@ -1246,7 +1246,7 @@ lbl_fn_8019FEC4_00000E78:
     cmpwi r3, 0x0
     beq lbl_fn_8019FEC4_00000F7C
     mr r3, r30
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_8019FEC4_00000F7C
     bl npc_getGlobalManager
@@ -1275,7 +1275,7 @@ lbl_fn_8019FEC4_00000F7C:
     bl fn_800F7F80
     cmpwi r3, 0x0
     beq lbl_fn_8019FEC4_00000FA8
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_80116BAC
     li r4, 0x7
     bl player_evaluateStatusCondition
@@ -1328,24 +1328,20 @@ lbl_fn_8019FEC4_00001008:
     blr
 }
 
-asm void fn_801A03E0(void)
+u32 bgm_getGlobalManager(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F408
-    blr
+    return lbl_8087F408;
 }
 
-asm void fn_801A03E8(void)
+asm void vec3_dot(void)
 {
     nofralloc
     b PSVECDotProduct
 }
 
-asm void fn_801A03EC(void)
+u32 fn_801A03EC(void *p)
 {
-    nofralloc
-    lwz r3, 0x14ac(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x14ac);
 }
 
 asm void fn_801A03F4(void)
@@ -1356,39 +1352,29 @@ asm void fn_801A03F4(void)
     blr
 }
 
-asm void fn_801A0400(void)
+u32 fn_801A0400(void *p)
 {
-    nofralloc
-    lwz r3, 0xc(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0xc);
 }
 
-asm void fn_801A0408(void)
+u32 fn_801A0408(void *p)
 {
-    nofralloc
-    lwz r3, 0x48(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x48);
 }
 
-asm void fn_801A0410(void)
+u32 fn_801A0410(void *p)
 {
-    nofralloc
-    lwz r3, 0xc(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0xc);
 }
 
-asm void fn_801A0418(void)
+u8 fn_801A0418(void *p)
 {
-    nofralloc
-    lbz r3, 0x38(r3)
-    blr
+    return *(u8 *)((u8 *)p + 0x38);
 }
 
-asm void fn_801A0420(void)
+u32 fn_801A0420(void *p)
 {
-    nofralloc
-    lwz r3, 0x28(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x28);
 }
 
 asm void fn_801A0428(void)

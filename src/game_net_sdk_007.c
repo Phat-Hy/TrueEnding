@@ -114,8 +114,8 @@ extern u32 lbl_80880484;
 
 /* Function declarations */
 void pad_03_806A6568_text(void);
-void fn_806A6570(void);
-void fn_806A6580(void);
+u32 fn_806A6570(void);
+u32 fn_806A6580(void);
 void fn_806A6590(void);
 void fn_806A65A0(void);
 void fn_806A65E0(void);
@@ -125,7 +125,7 @@ void fn_806A66D0(void);
 void fn_806A6740(void);
 void fn_806A6760(void);
 void fn_806A68F0(void);
-void fn_806A6A80(void);
+u32 fn_806A6A80(u32 val);
 void fn_806A6A90(void);
 void fn_806A6BA0(void);
 void fn_806A6C90(void);
@@ -133,7 +133,7 @@ void fn_806A6CA0(void);
 void fn_806A6E40(void);
 void fn_806A7020(void);
 void fn_806A70E0(void);
-void fn_806A7110(void);
+void net_isConnectionActive(void);
 void net_checkConnectionSession(void);
 void fn_806A7150(void);
 void fn_806A7250(void);
@@ -141,7 +141,7 @@ void fn_806A72B0(void);
 void fn_806A72C0(void);
 void fn_806A72E0(void);
 void fn_806A7370(void);
-void fn_806A7400(void);
+void net_memFree(void);
 void fn_806A7420(void);
 void fn_806A74C0(void);
 void fn_806A75C0(void);
@@ -170,18 +170,14 @@ asm void pad_03_806A6568_text(void)
     opword 0x00000000
 }
 
-asm void fn_806A6570(void)
+u32 fn_806A6570(void)
 {
-    nofralloc
-    li r3, 0x2
-    blr
+    return 2;
 }
 
-asm void fn_806A6580(void)
+u32 fn_806A6580(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_806A6590(void)
@@ -215,12 +211,9 @@ lbl_fn_806A65A0_0000005C:
     blr
 }
 
-asm void fn_806A65E0(void)
+void fn_806A65E0(void)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, lbl_80880458
-    blr
+    lbl_80880458 = 0;
 }
 
 void fn_806A65F0(void) {
@@ -566,13 +559,11 @@ lbl_fn_806A68F0_000004F4:
     blr
 }
 
-asm void fn_806A6A80(void)
+u32 fn_806A6A80(u32 val)
 {
-    nofralloc
-    mr r0, r3
-    lwz r3, lbl_8088047C
-    stw r0, lbl_8088047C
-    blr
+    u32 old = lbl_8088047C;
+    lbl_8088047C = val;
+    return old;
 }
 
 asm void fn_806A6A90(void)
@@ -1043,7 +1034,7 @@ asm void fn_806A70E0(void)
     blr
 }
 
-asm void fn_806A7110(void)
+asm void net_isConnectionActive(void)
 {
     nofralloc
     lis r3, lbl_8085FF18@ha
@@ -1269,7 +1260,7 @@ lbl_fn_806A7370_00000E7C:
     blr
 }
 
-asm void fn_806A7400(void)
+asm void net_memFree(void)
 {
     nofralloc
     cmpwi r4, 0x0
@@ -1780,12 +1771,12 @@ lbl_fn_806A7A50_00001548:
     beq lbl_fn_806A7A50_00001568
     li r3, 0x6
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
 lbl_fn_806A7A50_00001568:
     mr r4, r31
     li r3, 0x6
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
 lbl_fn_806A7A50_00001578:
     cmpwi r30, 0x0
     bne lbl_fn_806A7A50_00001548
@@ -1809,7 +1800,7 @@ asm void fn_806A7B10(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     beq lbl_fn_806A7B10_000015C8
     li r3, 0x0
@@ -1897,7 +1888,7 @@ lbl_fn_806A7B50_000016D0:
     beq lbl_fn_806A7B50_000016F4
     li r3, 0x6
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
     b lbl_fn_806A7B50_000016F8
 lbl_fn_806A7B50_000016F4:
     li r29, 0x1
@@ -1988,7 +1979,7 @@ asm void fn_806A7D40(void)
     li r3, 0x4
     crclr 6
     bl net_formatLog
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     beq lbl_fn_806A7D40_00001834
     li r3, -0x1
@@ -2119,7 +2110,7 @@ lbl_fn_806A7D40_000019B8:
     beq lbl_fn_806A7D40_00001A08
     li r3, 0x6
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
 lbl_fn_806A7D40_00001A08:
     mr r3, r26
     bl fn_806A8160
@@ -2167,7 +2158,7 @@ lbl_fn_806A7FB0_00001A88:
     beq lbl_fn_806A7FB0_00001AA8
     li r3, 0x6
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
 lbl_fn_806A7FB0_00001AA8:
     mr r3, r31
     bl fn_806A8160
@@ -2279,7 +2270,7 @@ asm void fn_806A8160(void)
     lwz r30, 0x1c(r4)
     li r3, 0x6
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
     stw r30, lbl_8085FF38@l(r31)
     b lbl_fn_806A8160_00001C7C
 lbl_fn_806A8160_00001C3C:
@@ -2296,7 +2287,7 @@ lbl_fn_806A8160_00001C58:
     li r3, 0x6
     stw r0, 0x1c(r5)
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
     b lbl_fn_806A8160_00001C7C
 lbl_fn_806A8160_00001C70:
     lwz r4, 0x1c(r5)
@@ -2538,7 +2529,7 @@ lbl_fn_806A8290_00001F20:
     beq lbl_fn_806A8290_00002804
     li r3, 0x5
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
     stw r24, 0x0(r31)
     b lbl_fn_806A8290_00002804
 lbl_fn_806A8290_00001FDC:

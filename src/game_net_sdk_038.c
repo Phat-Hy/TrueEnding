@@ -21,14 +21,14 @@ extern void atoi(void);
 extern void fn_806A420C(void);
 extern void fn_806A4264(void);
 extern void fn_806A426C(void);
-extern void fn_806A4270(void);
+extern void net_truncateU16(void);
 extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5C90(void);
 extern void fn_806D63A0(void);
 extern void fn_806D6560(void);
-extern void fn_806D6610(void);
+extern void net_invokeChannelCallback(void);
 extern void fn_806D6720(void);
 extern void net_socketConnect(void);
 extern void net_socketClose(void);
@@ -51,7 +51,7 @@ extern void fn_806D9590(void);
 extern void fn_806E9860(void);
 extern void fn_806E9F50(void);
 extern void fn_806EA540(void);
-extern void fn_806EAC30(void);
+extern void net_bindSessionCallback(void);
 extern void fn_806ECC20(void);
 extern void fn_806ECE40(void);
 extern void fn_806F0EB0(void);
@@ -223,7 +223,7 @@ lbl_fn_806EE8B0_00000138:
     stb r0, 0x19(r1)
     mr r3, r31
     stw r30, 0x1c(r1)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x1a(r1)
     addi r7, r1, 0x18
     lwz r4, 0x8(r1)
@@ -275,7 +275,7 @@ lbl_fn_806EE8B0_000001F8:
     li r31, 0x1
     stw r31, 0x18(r29)
     mr r3, r29
-    bl fn_806EAC30
+    bl net_bindSessionCallback
     mr r3, r29
     bl fn_806E9860
     cmpwi r3, 0x0
@@ -308,7 +308,7 @@ lbl_fn_806EE8B0_0000026C:
     sth r31, 0x24(r1)
     stw r0, 0x10(r1)
     lwz r3, 0xc(r29)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     mr. r4, r3
     mr r3, r29
     beq lbl_fn_806EE8B0_000002A8
@@ -533,7 +533,7 @@ asm void fn_806EED30(void)
     bne lbl_fn_806EED30_000005D4
     li r31, 0x1
     stw r31, 0x18(r3)
-    bl fn_806EAC30
+    bl net_bindSessionCallback
     mr r3, r30
     bl fn_806E9860
     cmpwi r3, 0x0
@@ -1606,7 +1606,7 @@ asm void fn_806EFB80(void)
     li r0, 0x2
     stb r0, 0x1(r29)
     clrlwi r3, r28, 16
-    bl fn_806A4270
+    bl net_truncateU16
     cmpwi r27, 0x0
     sth r3, 0x2(r29)
     bne lbl_fn_806EFB80_0000140C
@@ -2092,7 +2092,7 @@ asm void fn_806F0240(void)
     bctrl
     mr r29, r3
     clrlwi r3, r3, 16
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x8(r1)
     addi r4, r1, 0x8
     li r5, 0x2

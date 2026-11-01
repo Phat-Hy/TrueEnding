@@ -38,7 +38,7 @@ extern void npc_updateTalkInteraction(void);
 extern void dialog_renderWindow(void);
 extern void inventory_applyItemStats(void);
 extern void equip_applyToCharacter(void);
-extern void fn_8015E4B0(void);
+extern void party_initFormationSlots(void);
 extern void fn_801603CC(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
@@ -297,7 +297,7 @@ asm void fn_8025B7DC(void)
     bne lbl_fn_8025B7DC_00000294
     addi r4, r3, 0x6b8
     li r5, -0x1
-    bl fn_8015E4B0
+    bl party_initFormationSlots
 lbl_fn_8025B7DC_0000025C:
     li r0, 0x0
     stw r0, 0x58c(r30)
@@ -336,7 +336,7 @@ lbl_fn_8025B7DC_00000294:
     stfs f3, 0x1c(r1)
     stfs f0, 0x14(r1)
     stfs f1, 0x18(r1)
-    bl fn_8015E4B0
+    bl party_initFormationSlots
 lbl_fn_8025B7DC_000002F0:
     lwz r0, 0x7e0(r30)
     rlwinm r0, r0, 0, 26, 26
@@ -406,7 +406,7 @@ lbl_fn_8025B7DC_000003B4:
     stfs f3, 0x10(r1)
     stfs f0, 0x8(r1)
     stfs f1, 0xc(r1)
-    bl fn_8015E4B0
+    bl party_initFormationSlots
 lbl_fn_8025B7DC_00000400:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)

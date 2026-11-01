@@ -31,7 +31,7 @@ extern void mem_getAllocSize(void);
 extern void map_processTrigger(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800929C0(void);
-extern void fn_8009373C(void);
+extern void target_findEntryByName(void);
 extern void fn_80093E90(void);
 extern void fn_80094420(void);
 extern void fn_80097A20(void);
@@ -43,24 +43,24 @@ extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
 extern void fn_8011EDE0(void);
-extern void fn_80129A48(void);
+extern void path_resetWaypointVelocity(void);
 extern void fn_8012AC40(void);
 extern void quest_resetObjectiveBounds(void);
 extern void quest_evaluateConditions(void);
 extern void quest_checkCondition(void);
 extern void dialog_selectChoice(void);
-extern void fn_8014EEC4(void);
+extern void dialog_activateChoiceWindow(void);
 extern void fn_8014F4FC(void);
 extern void fn_8014FAD0(void);
 extern void fn_80150178(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
-extern void fn_80164DCC(void);
+extern void party_evalTacticCondition(void);
 extern void debuff_removeStatusEffect(void);
 extern void fn_8016E5F0(void);
 extern void actor_setState(void);
 extern void battle_applyStatusEffect(void);
-extern void fn_801750FC(void);
+extern void battle_calcOutcomeBonus(void);
 extern void battle_awardExp(void);
 extern void battle_activateExpReward(void);
 extern void fn_80176DFC(void);
@@ -1841,7 +1841,7 @@ lbl_fn_8000F1EC_00001720:
     lfs f1, lbl_80880674
     lwz r3, 0x48(r3)
     addi r3, r3, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     lwz r3, 0x1c(r29)
     li r4, 0x0
     lwz r3, 0x48(r3)
@@ -1910,13 +1910,13 @@ lbl_fn_8000F1EC_000018A8:
     lwz r3, 0x1c(r29)
     li r4, 0x0
     lwz r3, 0x48(r3)
-    bl fn_80164DCC
+    bl party_evalTacticCondition
     lwz r3, 0x1c(r29)
     lwz r3, 0x48(r3)
     lwz r0, 0x1208(r3)
     cmpwi r0, 0x0
     beq lbl_fn_8000F1EC_000018D0
-    bl fn_801750FC
+    bl battle_calcOutcomeBonus
 lbl_fn_8000F1EC_000018D0:
     lwz r3, 0x1c(r29)
     lwz r15, 0x48(r3)
@@ -2184,7 +2184,7 @@ lbl_fn_8000FAE8_00001C5C:
     addi r4, r4, lbl_8072F924@l
     li r5, 0x0
     addi r4, r4, 0x48
-    bl fn_8009373C
+    bl target_findEntryByName
     lwz r0, 0x20(r31)
     cmpwi r0, 0x7
     beq lbl_fn_8000FAE8_00001CA0
@@ -2195,7 +2195,7 @@ lbl_fn_8000FAE8_00001CA0:
     lfs f1, lbl_80880674
     lwz r3, 0x48(r3)
     addi r3, r3, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
 lbl_fn_8000FAE8_00001CB4:
     lwz r0, 0x20(r31)
     cmpwi r0, 0x7
@@ -2224,7 +2224,7 @@ lbl_fn_8000FAE8_00001CDC:
     lwz r3, 0x1c(r31)
     li r4, 0x0
     lwz r3, 0x48(r3)
-    bl fn_8014EEC4
+    bl dialog_activateChoiceWindow
     b lbl_fn_8000FAE8_00001D34
 lbl_fn_8000FAE8_00001D20:
     lwz r3, 0x1c(r31)

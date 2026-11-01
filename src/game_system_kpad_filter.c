@@ -22,18 +22,18 @@ extern void fn_8010AC60(void);
 extern void fn_80124BE4(void);
 extern void enemy_updateAnimTimer(void);
 extern void fn_80133B30(void);
-extern void fn_801346C8(void);
+extern void boss_testAiFlag(void);
 extern void fn_801546F4(void);
-extern void fn_80164DCC(void);
+extern void party_evalTacticCondition(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void battle_applyStatusEffect(void);
-extern void fn_801750FC(void);
+extern void battle_calcOutcomeBonus(void);
 extern void battle_updateActorStatus(void);
 extern void fn_801E97DC(void);
 extern void thread_findAndNotify(void);
 extern void fn_802085E0(void);
-extern void fn_8021771C(void);
+extern void task_findNextReady(void);
 extern void fn_80219074(void);
 extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
@@ -46,7 +46,7 @@ extern void fn_803731E8(void);
 extern void fn_80378CAC(void);
 extern void fn_80378CCC(void);
 extern void fn_8037D49C(void);
-extern void fn_80389838(void);
+extern void nwc24_transitionDataState(void);
 extern void fn_803903E0(void);
 extern void fn_803CDAE4(void);
 extern void fn_803CDB64(void);
@@ -349,7 +349,7 @@ lbl_fn_80373FC4_00000218:
     psq_st f1, 0x0(r26), 0, 0
     stfs f2, 0x14(r1)
     stw r8, 0x950(r31)
-    bl fn_80389838
+    bl nwc24_transitionDataState
     lfs f0, 0x10(r1)
     mr r4, r27
     addi r3, r31, 0x6c
@@ -647,7 +647,7 @@ asm void fn_80374710(void)
     addi r3, r3, 0x6c
     lwz r5, lbl_8087F8A0
     lwz r31, 0x48(r5)
-    bl fn_80389838
+    bl nwc24_transitionDataState
     psq_l f1, 0x528(r31), 0, 0
     addi r3, r1, 0x8
     lfs f2, 0x530(r31)
@@ -782,7 +782,7 @@ asm void fn_803748E0(void)
     mr r30, r3
     lwz r4, 0x870(r3)
     addi r3, r3, 0x6c
-    bl fn_80389838
+    bl nwc24_transitionDataState
     li r0, 0x0
     stw r0, 0x954(r30)
     cmpwi r31, 0x0
@@ -1004,7 +1004,7 @@ lbl_fn_80374964_00000C70:
     beq lbl_fn_80374964_00000C8C
     mr r3, r31
     li r4, 0x1
-    bl fn_80164DCC
+    bl party_evalTacticCondition
 lbl_fn_80374964_00000C8C:
     lwz r0, 0x7e0(r31)
     rlwinm r0, r0, 0, 26, 26
@@ -1067,7 +1067,7 @@ lbl_fn_80374964_00000D50:
     stb r30, 0x4e(r3)
 lbl_fn_80374964_00000D70:
     mr r3, r31
-    bl fn_801750FC
+    bl battle_calcOutcomeBonus
     lwz r0, 0x55c(r31)
     cmpwi r0, 0x6
     bne lbl_fn_80374964_00000D9C
@@ -1137,7 +1137,7 @@ lbl_fn_80374D64_00000E48:
     mr r4, r27
     addi r3, r28, 0x7d4
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_80374D64_000010E0
     cmplwi r27, 0x2e
@@ -1709,7 +1709,7 @@ lbl_fn_803754F0_000015FC:
     mr r4, r28
     li r30, 0x0
     mr r5, r24
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_803754F0_000018C4
@@ -1720,7 +1720,7 @@ lbl_fn_803754F0_000015FC:
     mr r4, r28
     mr r5, r24
     li r30, 0x0
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r26, r3
     beq lbl_fn_803754F0_0000182C
@@ -1939,7 +1939,7 @@ asm void fn_8037587C(void)
     mr r4, r27
     mr r5, r26
     li r30, 0x0
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_8037587C_00001BE8
@@ -1950,7 +1950,7 @@ asm void fn_8037587C(void)
     mr r4, r27
     mr r5, r26
     li r30, 0x0
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_8037587C_00001B50

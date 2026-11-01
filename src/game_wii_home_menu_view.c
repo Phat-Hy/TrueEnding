@@ -17,7 +17,7 @@ extern void fn_8010F26C(void);
 extern void fn_8010F41C(void);
 extern void quest_checkCondition(void);
 extern void dialog_selectChoice(void);
-extern void fn_8014EEC4(void);
+extern void dialog_activateChoiceWindow(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80237784(void);
 extern void fn_8023779C(void);
@@ -1034,7 +1034,7 @@ lbl_fn_8056DAD0_00000C88:
 lbl_fn_8056DAD0_00000D28:
     lwz r3, 0x0(r25)
     li r4, 0x1
-    bl fn_8014EEC4
+    bl dialog_activateChoiceWindow
 lbl_fn_8056DAD0_00000D34:
     fmr f1, f25
     lwz r3, 0x0(r25)
@@ -1517,7 +1517,7 @@ lbl_fn_8056DAD0_00001364:
 lbl_fn_8056DAD0_00001418:
     lwz r3, 0x0(r25)
     li r4, 0x1
-    bl fn_8014EEC4
+    bl dialog_activateChoiceWindow
 lbl_fn_8056DAD0_00001424:
     fmr f1, f28
     lwz r3, 0x0(r25)

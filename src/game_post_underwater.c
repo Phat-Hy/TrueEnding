@@ -23,7 +23,7 @@ extern void clip_calculateFrustum(void);
 extern void fn_80107850(void);
 extern void hurtbox_testCollisionLayer(void);
 extern void hurtbox_dispatchHitEvent(void);
-extern void fn_8012DF7C(void);
+extern void enemy_calcAttackTrajectory(void);
 extern void quest_getRewardItemSlot(void);
 extern void party_configureMemberSlot(void);
 extern void actor_setState(void);
@@ -37,7 +37,7 @@ extern void fn_802DCA34(void);
 extern void fn_802DD1B4(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_803EEE10(void);
+extern void dungeon_findArenaNodeByCoords(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
@@ -609,7 +609,7 @@ lbl_fn_802DAA38_0000077C:
     stw r4, 0x144(r1)
     addi r0, r7, 0x1
     subf r31, r0, r31
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
     lfs f4, 0x530(r26)
     mr r6, r29
     lfs f3, 0x52c(r26)
@@ -802,7 +802,7 @@ lbl_fn_802DAA38_00000A2C:
     stfs f4, 0x128(r1)
     stfs f3, 0x12c(r1)
     stfs f0, 0x130(r1)
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
     lwz r3, lbl_8087F048
     mr r5, r21
     mr r7, r29
@@ -1184,7 +1184,7 @@ lbl_fn_802DB534_00001018:
     li r4, 0x6dd6
     lwz r3, lbl_8087F4A0
     lwzx r5, r5, r26
-    bl fn_803EEE10
+    bl dungeon_findArenaNodeByCoords
     cmpwi r3, 0x0
     beq lbl_fn_802DB534_0000107C
     cmplw r27, r28

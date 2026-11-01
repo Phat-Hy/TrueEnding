@@ -5,7 +5,7 @@
 extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void dtor_80084684(void);
-extern void fn_80041C0C(void);
+extern void menu_destroyObject(void);
 extern void fn_80042740(void);
 extern void mem_realloc(void);
 extern void compass_findWaypointIndex(void);
@@ -13,7 +13,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void msg_getMessageById(void);
 extern void fn_800A5584(void);
 extern void msg_getMessageString(void);
-extern void fn_800A55D4(void);
+extern void msg_lookupFormattedEntry(void);
 extern void msg_isWindowActive(void);
 extern void skin_applyWeights(void);
 extern void morph_reset(void);
@@ -21,11 +21,11 @@ extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB6B0(void);
-extern void fn_800CB6E4(void);
+extern void morph_dispatchTargetUpdate(void);
 extern void str_findChar(void);
 extern void cam_destroyMsgHandle(void);
 extern void fn_8011FFF8(void);
-extern void fn_8017C974(void);
+extern void map_isAreaCombatActive(void);
 extern void fn_8018412C(void);
 extern void fn_80184548(void);
 extern void fn_80218218(void);
@@ -217,11 +217,11 @@ asm void fn_80120E48(void)
     li r7, 0x0
     bl mem_realloc
     lis r4, fn_80042740@ha
-    lis r5, fn_80041C0C@ha
+    lis r5, menu_destroyObject@ha
     mr r7, r25
     li r6, 0x20
     addi r4, r4, fn_80042740@l
-    addi r5, r5, fn_80041C0C@l
+    addi r5, r5, menu_destroyObject@l
     bl runtime_registerStaticObject
     mr r29, r3
     b lbl_fn_80120E48_00000188
@@ -260,9 +260,9 @@ lbl_fn_80120E48_000001E4:
 lbl_fn_80120E48_000001F0:
     cmplw r26, r31
     blt lbl_fn_80120E48_000001B8
-    lis r4, fn_80041C0C@ha
+    lis r4, menu_destroyObject@ha
     lwz r3, 0x8(r24)
-    addi r4, r4, fn_80041C0C@l
+    addi r4, r4, menu_destroyObject@l
     bl __destroy_arr
 lbl_fn_80120E48_00000208:
     stw r29, 0x8(r24)
@@ -574,7 +574,7 @@ lbl_fn_8012111C_000005C0:
     stfs f2, 0xc(r1)
     stfs f1, 0x10(r1)
     stfs f0, 0x14(r1)
-    bl fn_800CB6E4
+    bl morph_dispatchTargetUpdate
 lbl_fn_8012111C_000005FC:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
@@ -1453,7 +1453,7 @@ lbl_fn_80121F08_0000124C:
 lbl_fn_80121F08_00001250:
     cmpwi r3, 0x0
     beq lbl_fn_80121F08_0000126C
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -1516,7 +1516,7 @@ lbl_fn_80121FD4_00001318:
 lbl_fn_80121FD4_0000131C:
     cmpwi r3, 0x0
     beq lbl_fn_80121FD4_00001338
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -1579,7 +1579,7 @@ lbl_fn_801220A0_000013E4:
 lbl_fn_801220A0_000013E8:
     cmpwi r3, 0x0
     beq lbl_fn_801220A0_00001404
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -1642,7 +1642,7 @@ lbl_fn_8012216C_000014B0:
 lbl_fn_8012216C_000014B4:
     cmpwi r3, 0x0
     beq lbl_fn_8012216C_000014D0
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -1659,7 +1659,7 @@ lbl_fn_8012216C_000014E4:
     lwz r3, lbl_8087EF70
     mr r5, r31
     li r4, 0x0
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31

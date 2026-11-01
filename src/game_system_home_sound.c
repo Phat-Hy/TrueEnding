@@ -14,13 +14,13 @@ extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void skill_calcTrajectory(void);
-extern void fn_8006A250(void);
+extern void boss_dispatchActionTransition(void);
 extern void fn_8006BA30(void);
 extern void fn_8006F2F0(void);
 extern void fn_8007192C(void);
 extern void gx_syncFrameFifo(void);
 extern void fn_80071D60(void);
-extern void fn_80075DEC(void);
+extern void seq_stepPlaybackTimer(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void fn_80089EE4(void);
@@ -57,11 +57,11 @@ extern void PSVECMag(void);
 extern void fn_805FEB00(void);
 extern void fn_805FF120(void);
 extern void GXSetVtxDesc(void);
-extern void fn_806134E0(void);
+extern void __GXInitVtxDesc(void);
 extern void GXSetVtxAttrFmt(void);
 extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
-extern void fn_80614790(void);
+extern void GXBegin(void);
 extern void GXInitLightDistAttn(void);
 extern void GXInitLightObj(void);
 extern void GXClampLightAngle(void);
@@ -713,7 +713,7 @@ lbl_dvd_renderFatalErrorScreen_000007D4:
     li r4, 0x1
     li r5, 0x0
     lis r6, 0xff00
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     stw r3, 0x44(r30)
     lfs f0, lbl_808856D0
     stfs f0, 0x74(r3)
@@ -1430,7 +1430,7 @@ lbl_dvd_initFatalErrorScreen_000011E8:
     stw r0, 0x48(r30)
     bl fn_8007192C
     mr r3, r30
-    bl fn_80075DEC
+    bl seq_stepPlaybackTimer
     lis r3, lbl_8074D8B8@ha
     lis r31, lbl_8074CCD0@ha
     lis r24, lbl_8074D8C0@ha
@@ -1661,7 +1661,7 @@ lbl_fn_80364BE8_0000149C:
     li r5, 0x1
     li r6, 0x0
     bl GXSetTevAlphaIn
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -1719,7 +1719,7 @@ asm void fn_80364DB4(void)
     extsh r24, r0
     li r4, 0x0
     li r5, 0x4
-    bl fn_80614790
+    bl GXBegin
     lis r3, 0xcc01
     li r0, 0x0
     sth r31, -0x8000(r3)

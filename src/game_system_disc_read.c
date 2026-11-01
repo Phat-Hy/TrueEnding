@@ -6,7 +6,7 @@ extern void collision_testLineSegment(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void system_getNextSequenceId(void);
 extern void actor_setState(void);
-extern void fn_80206B14(void);
+extern void sys_findModuleById(void);
 extern void assert_generateId(void);
 extern void time_wrapMilliseconds(void);
 extern void random_generateValue(void);
@@ -16,7 +16,7 @@ extern void fn_8023A108(void);
 extern void fn_8023A254(void);
 extern void res_registerResource(void);
 extern void chest_spawnLoot(void);
-extern void fn_804439FC(void);
+extern void gmk_registerSlot(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -1934,7 +1934,7 @@ lbl_fn_80351AB8_00001B8C:
 lbl_fn_80351AB8_00001BA8:
     lwz r4, 0x20(r30)
     li r3, 0x0
-    bl fn_80206B14
+    bl sys_findModuleById
     cmpwi r3, 0x0
     beq lbl_fn_80351AB8_00001BE4
     bl assert_generateId
@@ -1946,7 +1946,7 @@ lbl_fn_80351AB8_00001BA8:
     li r8, 0x0
     li r9, 0x1
     li r10, 0x0
-    bl fn_804439FC
+    bl gmk_registerSlot
 lbl_fn_80351AB8_00001BE4:
     addi r29, r29, 0x1
     addi r30, r30, 0x8
@@ -1968,7 +1968,7 @@ lbl_fn_80351AB8_00001BF8:
     li r8, 0x0
     li r9, 0x1
     li r10, 0x0
-    bl fn_804439FC
+    bl gmk_registerSlot
 lbl_fn_80351AB8_00001C34:
     addi r29, r29, 0x1
     addi r31, r31, 0x8

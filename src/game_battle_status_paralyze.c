@@ -17,7 +17,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_8008B130(void);
+extern void map_getArchiveName(void);
 extern void fn_800970CC(void);
 extern void fn_800A03A0(void);
 extern void fn_800A03E4(void);
@@ -31,7 +31,7 @@ extern void battle_applyStatusEffect(void);
 extern void fn_80170F20(void);
 extern void task_lookupTagIndex(void);
 extern void kpad_getClampData(void);
-extern void fn_803CD958(void);
+extern void crowd_selectWaypointByWeight(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
 extern void task_updateWorker(void);
@@ -489,7 +489,7 @@ lbl_fn_8042917C_00000578:
     slwi r0, r0, 3
     subi r4, r3, 0x1
     add r3, r5, r0
-    bl fn_803CD958
+    bl crowd_selectWaypointByWeight
     clrlwi. r0, r3, 16
     ble lbl_fn_8042917C_000006EC
     lwz r4, 0x114(r27)
@@ -962,7 +962,7 @@ lbl_fn_80429964_00000BE4:
     b lbl_fn_80429964_00000D8C
 lbl_fn_80429964_00000C04:
     addi r3, r23, 0x50
-    bl fn_8008B130
+    bl map_getArchiveName
     lwz r19, 0x28c(r31)
     mr r20, r3
     li r24, 0x0
@@ -1138,7 +1138,7 @@ lbl_fn_80429964_00000E2C:
     b lbl_fn_80429964_000010B8
 lbl_fn_80429964_00000E4C:
     addi r3, r20, 0x50
-    bl fn_8008B130
+    bl map_getArchiveName
     lwz r23, 0x28c(r31)
     mr r19, r3
     li r18, 0x0

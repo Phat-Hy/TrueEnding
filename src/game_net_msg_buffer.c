@@ -18,10 +18,10 @@ extern void npc_calcTargetDistance(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
-extern void fn_8015EB2C(void);
+extern void party_evalFormationState(void);
 extern void battle_activateExpReward(void);
 extern void entity_Instance_destructor(void);
-extern void fn_8050128C(void);
+extern void net_isMessageStateActive(void);
 extern void fn_80508F0C(void);
 extern void printf(void);
 extern void abort(void);
@@ -396,7 +396,7 @@ lbl_fn_804FC5AC_00000418:
     cmpwi r0, 0x2
     bne lbl_fn_804FC5AC_00000530
     mr r3, r31
-    bl fn_8015EB2C
+    bl party_evalFormationState
     cmpwi r3, 0x0
     bne lbl_fn_804FC5AC_00000454
     lwz r0, 0x14b4(r31)
@@ -1207,7 +1207,7 @@ lbl_fn_804FCA38_00000F70:
     stw r26, 0xd48(r1)
     stw r26, 0xd4c(r1)
     stb r28, 0xd4(r1)
-    bl fn_8050128C
+    bl net_isMessageStateActive
     cmpwi r20, 0x0
     stw r27, 0xd8(r1)
     stw r27, 0xb8(r1)

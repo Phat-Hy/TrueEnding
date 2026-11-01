@@ -17,7 +17,7 @@ extern void str_findChar(void);
 extern void fn_801333A4(void);
 extern void fn_80160324(void);
 extern void fn_8016DAB0(void);
-extern void fn_801789D8(void);
+extern void battle_evalDropTable(void);
 extern void save_parseSlotStats(void);
 extern void fn_801F4C14(void);
 extern void save_computeCrc32(void);
@@ -25,7 +25,7 @@ extern void save_verifyBlockCrc(void);
 extern void fn_801F791C(void);
 extern void fn_801F80A8(void);
 extern void save_findEntryByName(void);
-extern void fn_801F8598(void);
+extern void save_formatSlotString(void);
 extern void fn_801F8FE4(void);
 extern void fn_801F90E0(void);
 extern void fn_801F91DC(void);
@@ -463,7 +463,7 @@ lbl_fn_803E2410_00000564:
     mr r3, r31
     li r4, 0x4fbf
     li r5, 0x0
-    bl fn_801789D8
+    bl battle_evalDropTable
     cmpwi r3, 0x0
     beq lbl_fn_803E2410_00000580
     slwi r28, r28, 1
@@ -545,7 +545,7 @@ lbl_fn_803E2410_00000698:
     mr r3, r31
     li r4, 0x4fbf
     li r5, 0x0
-    bl fn_801789D8
+    bl battle_evalDropTable
     cmpwi r3, 0x0
     beq lbl_fn_803E2410_000006B4
     slwi r27, r27, 1
@@ -834,7 +834,7 @@ lbl_fn_803E2A30_00000ACC:
     mr r5, r31
     addi r4, r20, 0x1181
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
 lbl_fn_803E2A30_00000AE0:
     cmpwi r31, 0xc
     li r20, 0x0

@@ -14,12 +14,12 @@ extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
-extern void fn_80103F60(void);
+extern void bsp_findLeafNode(void);
 extern void enemy_updateCombatBehavior(void);
 extern void actor_testBitFlag(void);
 extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_801426A4(void);
+extern void quest_evaluateMilestoneData(void);
 extern void quest_getRewardItemSlot(void);
 extern void dialog_renderWindow(void);
 extern void inventory_applyItemStats(void);
@@ -1021,7 +1021,7 @@ lbl_fn_802F33A0_00000D2C:
     mr r3, r29
     addi r4, r1, 0xc8
     fmuls f2, f0, f30
-    bl fn_801426A4
+    bl quest_evaluateMilestoneData
     b lbl_fn_802F33A0_00000D6C
 lbl_fn_802F33A0_00000D48:
     cmpwi r0, 0x6
@@ -1919,7 +1919,7 @@ lbl_fn_802F42CC_00001A14:
 lbl_fn_802F42CC_00001A20:
     lwz r3, lbl_8087F048
     mr r4, r31
-    bl fn_80103F60
+    bl bsp_findLeafNode
     li r0, 0x3
     lfs f0, lbl_808848FC
     mtctr r0

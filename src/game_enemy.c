@@ -14,15 +14,15 @@ extern void fn_8006F17C(void);
 extern void fn_80072914(void);
 extern void gx_beginQuadBatch(void);
 extern void gx_applyRenderState(void);
-extern void fn_800763FC(void);
+extern void seq_bindSlotResource(void);
 extern void gx_setRenderStateParam(void);
 extern void fn_80076BE4(void);
 extern void GXSetVtxDesc(void);
-extern void fn_806134E0(void);
+extern void __GXInitVtxDesc(void);
 extern void GXSetVtxAttrFmt(void);
 extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
-extern void fn_80614790(void);
+extern void GXBegin(void);
 extern void fn_80615B60(void);
 extern void fn_80615C40(void);
 extern void GXInitLightDistAttn(void);
@@ -32,8 +32,8 @@ extern void GXSetTevDirect(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
-extern void fn_806174C0(void);
-extern void fn_806175F0(void);
+extern void GXSetTevIndTile(void);
+extern void GXSetIndTexMatrix(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevSwapMode(void);
 extern void GXSetTevSwapModeTable(void);
@@ -120,7 +120,7 @@ asm void atn_ComDrawLine_execute(void)
     li r5, 0x5
     li r6, 0x0
     bl GXSetTevAlphaIn
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -167,7 +167,7 @@ asm void atn_ComDrawLine_execute(void)
     li r4, 0x0
     lwz r3, 0xc(r31)
     clrlwi r5, r0, 16
-    bl fn_80614790
+    bl GXBegin
     li r6, 0x0
     li r5, 0x0
     lis r4, 0xcc01
@@ -239,7 +239,7 @@ lbl_atn_ComDrawLine_execute_000001A4:
     li r4, 0x0
     lwz r3, 0xc(r31)
     clrlwi r5, r0, 16
-    bl fn_80614790
+    bl GXBegin
     li r6, 0x0
     li r5, 0x0
     lis r4, 0xcc01
@@ -367,7 +367,7 @@ lbl_atn_ComDrawTexture_execute_0000042C:
     lwz r3, lbl_8087EEE0
     li r5, 0x0
     lwz r4, 0xc(r31)
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lbz r3, 0x10(r31)
     li r4, 0x4
     li r5, 0x5
@@ -376,7 +376,7 @@ lbl_atn_ComDrawTexture_execute_0000042C:
     or r0, r0, r3
     srwi r3, r0, 31
     bl GXSetTevAlphaIn
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -433,7 +433,7 @@ lbl_atn_ComDrawTexture_execute_00000524:
     li r3, 0x80
     li r4, 0x0
     li r5, 0x4
-    bl fn_80614790
+    bl GXBegin
     li r0, 0x2
     li r6, 0x0
     li r5, 0x0
@@ -610,7 +610,7 @@ lbl_atn_ComDrawTextureAdd_execute_000007C0:
     lwz r3, lbl_8087EEE0
     li r5, 0x0
     lwz r4, 0xc(r31)
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lwz r0, 0x14(r31)
     cmpwi r0, 0x0
     beq lbl_atn_ComDrawTextureAdd_execute_00000800
@@ -673,7 +673,7 @@ lbl_atn_ComDrawTextureAdd_execute_00000890:
     srwi r3, r0, 31
     bl GXSetTevAlphaIn
 lbl_atn_ComDrawTextureAdd_execute_000008B0:
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -728,7 +728,7 @@ lbl_atn_ComDrawTextureAdd_execute_00000978:
     li r3, 0x80
     li r4, 0x0
     li r5, 0x4
-    bl fn_80614790
+    bl GXBegin
     li r0, 0x2
     li r6, 0x0
     li r5, 0x0
@@ -884,7 +884,7 @@ asm void atn_ComDrawTextureMask_execute(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x1
     li r4, 0xf
     li r5, 0x0
@@ -910,7 +910,7 @@ asm void atn_ComDrawTextureMask_execute(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x4
     li r4, 0x0
     li r5, 0x1
@@ -991,7 +991,7 @@ lbl_atn_ComDrawTextureMask_execute_00000D5C:
     addi r4, r4, 0x10
 lbl_atn_ComDrawTextureMask_execute_00000D64:
     li r5, 0x0
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lwz r4, 0x10(r31)
     lwz r3, lbl_8087EEE0
     cmpwi r4, 0x0
@@ -1002,7 +1002,7 @@ lbl_atn_ComDrawTextureMask_execute_00000D80:
     addi r4, r4, 0x10
 lbl_atn_ComDrawTextureMask_execute_00000D88:
     li r5, 0x1
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lwz r0, 0x18(r31)
     cmpwi r0, 0x0
     beq lbl_atn_ComDrawTextureMask_execute_00000DC0
@@ -1050,7 +1050,7 @@ lbl_atn_ComDrawTextureMask_execute_00000E20:
     li r6, 0x0
     bl GXSetTevAlphaIn
 lbl_atn_ComDrawTextureMask_execute_00000E34:
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -1122,7 +1122,7 @@ lbl_atn_ComDrawTextureMask_execute_00000F38:
     li r3, 0x80
     li r4, 0x0
     li r5, 0x4
-    bl fn_80614790
+    bl GXBegin
     li r0, 0x4
     li r5, 0x0
     lis r4, 0xcc01
@@ -1312,7 +1312,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     lwz r3, lbl_8087EEE0
     li r5, 0x0
     lwz r4, 0xc(r30)
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -1347,7 +1347,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     stb r0, 0x13(r1)
     lwz r0, 0x10(r1)
     stw r0, 0x20(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     lfs f4, lbl_808809E0
     addi r4, r1, 0x1c
     lfs f0, 0x98(r1)
@@ -1377,7 +1377,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     stb r0, 0xf(r1)
     lwz r0, 0xc(r1)
     stw r0, 0x1c(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     lfs f4, lbl_808809E0
     addi r4, r1, 0x18
     lfs f0, 0xa8(r1)
@@ -1407,7 +1407,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     stb r0, 0xb(r1)
     lwz r0, 0x8(r1)
     stw r0, 0x18(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1464,7 +1464,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1504,7 +1504,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -1544,7 +1544,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x2
     li r4, 0x0
     li r5, 0x0
@@ -1581,7 +1581,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x3
     li r4, 0x0
     li r5, 0x0
@@ -1652,7 +1652,7 @@ lbl_atn_ComDrawTextureMono_execute_0000170C:
     li r3, 0x0
     bl GXSetCurrentMtx
 lbl_atn_ComDrawTextureMono_execute_00001768:
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -1709,7 +1709,7 @@ lbl_atn_ComDrawTextureMono_execute_00001830:
     li r3, 0x80
     li r4, 0x0
     li r5, 0x4
-    bl fn_80614790
+    bl GXBegin
     li r0, 0x2
     li r6, 0x0
     li r5, 0x0
@@ -1986,7 +1986,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     stb r0, 0x13(r1)
     lwz r0, 0x10(r1)
     stw r0, 0x20(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     lfs f4, lbl_808809E0
     addi r4, r1, 0x1c
     lfs f0, 0x98(r1)
@@ -2016,7 +2016,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     stb r0, 0xf(r1)
     lwz r0, 0xc(r1)
     stw r0, 0x1c(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     lfs f4, lbl_808809E0
     addi r4, r1, 0x18
     lfs f0, 0xa8(r1)
@@ -2046,7 +2046,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     stb r0, 0xb(r1)
     lwz r0, 0x8(r1)
     stw r0, 0x18(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -2103,7 +2103,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -2143,7 +2143,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -2183,7 +2183,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x2
     li r4, 0x0
     li r5, 0x0
@@ -2220,7 +2220,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x3
     li r4, 0x1
     li r5, 0x1
@@ -2308,7 +2308,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00002158:
     addi r4, r4, 0x10
 lbl_atn_ComDrawTextureMaskMono_execute_00002160:
     li r5, 0x0
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lwz r4, 0x10(r30)
     lwz r3, lbl_8087EEE0
     cmpwi r4, 0x0
@@ -2319,13 +2319,13 @@ lbl_atn_ComDrawTextureMaskMono_execute_0000217C:
     addi r4, r4, 0x10
 lbl_atn_ComDrawTextureMaskMono_execute_00002184:
     li r5, 0x1
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
     li r6, 0x0
     bl GXSetTevAlphaIn
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -2397,7 +2397,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_000022A4:
     li r3, 0x80
     li r4, 0x0
     li r5, 0x4
-    bl fn_80614790
+    bl GXBegin
     li r0, 0x4
     li r5, 0x0
     lis r4, 0xcc01
@@ -2549,7 +2549,7 @@ asm void atn_ComDrawFont_execute(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x4
     li r4, 0x0
     li r5, 0x1
@@ -2635,7 +2635,7 @@ lbl_atn_ComDrawFont_execute_00002620:
     li r6, 0x0
     bl GXSetTevAlphaIn
 lbl_atn_ComDrawFont_execute_00002640:
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -2928,7 +2928,7 @@ lbl_atn_ComDrawFontSideFade_execute_000029CC:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x4
     li r4, 0x0
     li r5, 0x1
@@ -3014,7 +3014,7 @@ lbl_atn_ComDrawFontSideFade_execute_00002BB8:
     li r6, 0x0
     bl GXSetTevAlphaIn
 lbl_atn_ComDrawFontSideFade_execute_00002BD8:
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -3246,7 +3246,7 @@ asm void atn_ComDrawColliObject_execute(void)
     bl GXLoadPosMtxImm
     li r3, 0x0
     bl GXSetCurrentMtx
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -3332,7 +3332,7 @@ asm void atn_ComDrawColliTree_execute(void)
     bl GXLoadPosMtxImm
     li r3, 0x0
     bl GXSetCurrentMtx
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -3462,7 +3462,7 @@ lbl_atn_ComDrawD3TextureMask_execute_000031C8:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x1
     li r4, 0xf
     li r5, 0x0
@@ -3488,7 +3488,7 @@ lbl_atn_ComDrawD3TextureMask_execute_000031C8:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x4
     li r4, 0x0
     li r5, 0x1
@@ -3507,11 +3507,11 @@ lbl_atn_ComDrawD3TextureMask_execute_000031C8:
     lwz r3, lbl_8087EEE0
     li r5, 0x0
     lwz r4, 0x18(r31)
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lwz r3, lbl_8087EEE0
     li r5, 0x1
     lwz r4, 0x1c(r31)
-    bl fn_800763FC
+    bl seq_bindSlotResource
     b lbl_atn_ComDrawD3TextureMask_execute_00003424
 lbl_atn_ComDrawD3TextureMask_execute_00003344:
     li r3, 0x1
@@ -3550,7 +3550,7 @@ lbl_atn_ComDrawD3TextureMask_execute_00003344:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x4
     li r4, 0x0
     li r5, 0x1
@@ -3569,7 +3569,7 @@ lbl_atn_ComDrawD3TextureMask_execute_00003344:
     lwz r3, lbl_8087EEE0
     li r5, 0x0
     lwz r4, 0x1c(r31)
-    bl fn_800763FC
+    bl seq_bindSlotResource
 lbl_atn_ComDrawD3TextureMask_execute_00003424:
     lwz r3, lbl_8087EEE0
     li r4, 0x0
@@ -3581,7 +3581,7 @@ lbl_atn_ComDrawD3TextureMask_execute_00003424:
     lwz r3, lbl_8087EEE0
     li r4, 0x0
     bl fn_80076BE4
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -3615,7 +3615,7 @@ lbl_atn_ComDrawD3TextureMask_execute_00003424:
     li r4, 0x0
     lwz r3, 0xc(r31)
     clrlwi r5, r0, 16
-    bl fn_80614790
+    bl GXBegin
     li r6, 0x0
     li r5, 0x0
     lis r4, 0xcc01
@@ -3726,7 +3726,7 @@ asm void atn_ComDrawWindow_execute(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x1
     li r4, 0xf
     li r5, 0x0
@@ -3752,7 +3752,7 @@ asm void atn_ComDrawWindow_execute(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x4
     li r4, 0x0
     li r5, 0x1
@@ -3870,7 +3870,7 @@ lbl_atn_ComDrawWindow_execute_00003880:
     li r6, 0x0
     bl GXSetTevAlphaIn
 lbl_atn_ComDrawWindow_execute_00003894:
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -3946,7 +3946,7 @@ lbl_atn_ComDrawWindow_execute_000039A8:
     li r5, 0x0
     lwz r3, lbl_8087EEE0
     addi r4, r4, 0x10
-    bl fn_800763FC
+    bl seq_bindSlotResource
     cmplwi r31, 0x4
     bge lbl_atn_ComDrawWindow_execute_000039EC
     lwz r4, 0x28(r30)
@@ -3959,7 +3959,7 @@ lbl_atn_ComDrawWindow_execute_000039D8:
     addi r4, r4, 0x10
 lbl_atn_ComDrawWindow_execute_000039E0:
     li r5, 0x1
-    bl fn_800763FC
+    bl seq_bindSlotResource
     b lbl_atn_ComDrawWindow_execute_00003A10
 lbl_atn_ComDrawWindow_execute_000039EC:
     lwz r4, 0x2c(r30)
@@ -3972,14 +3972,14 @@ lbl_atn_ComDrawWindow_execute_00003A00:
     addi r4, r4, 0x10
 lbl_atn_ComDrawWindow_execute_00003A08:
     li r5, 0x1
-    bl fn_800763FC
+    bl seq_bindSlotResource
 lbl_atn_ComDrawWindow_execute_00003A10:
     lwz r3, lbl_8087EEE0
     bl gx_applyRenderState
     li r3, 0x80
     li r4, 0x0
     li r5, 0x4
-    bl fn_80614790
+    bl GXBegin
     li r4, 0x0
     mtctr r29
 lbl_atn_ComDrawWindow_execute_00003A30:

@@ -10,7 +10,7 @@ extern void fn_80101524(void);
 extern void fn_801067D0(void);
 extern void fn_80107F20(void);
 extern void fn_80107FC8(void);
-extern void fn_80108F38(void);
+extern void hurtbox_testCollisionFlags(void);
 extern void fn_8012DD70(void);
 extern void fn_8015EFAC(void);
 extern void fn_8016624C(void);
@@ -678,7 +678,7 @@ lbl_fn_8012F440_00000844:
     mr r3, r29
     addi r4, r1, 0xe0
     li r5, 0x1
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
 lbl_fn_8012F440_00000874:
     li r29, 0x1
     b lbl_fn_8012F440_000009F0
@@ -889,7 +889,7 @@ lbl_fn_8012F440_00000B18:
     mr r3, r29
     addi r4, r1, 0xd4
     lis r5, 0x40
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
 lbl_fn_8012F440_00000B54:
     li r29, 0x1
     b lbl_fn_8012F440_00000CCC
@@ -1095,7 +1095,7 @@ lbl_fn_8012F440_00000DE0:
     mr r3, r29
     addi r4, r1, 0xc8
     addi r5, r5, -0x8000
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
 lbl_fn_8012F440_00000E20:
     li r29, 0x1
     b lbl_fn_8012F440_00000F98
@@ -1263,7 +1263,7 @@ lbl_fn_8012F440_00001048:
     mr r3, r31
     addi r4, r1, 0xbc
     li r5, 0x100
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
     b lbl_fn_8012F440_000011E8
 lbl_fn_8012F440_00001074:
     lwz r4, 0xc(r21)
@@ -1411,7 +1411,7 @@ lbl_fn_8012F440_00001250:
     mr r3, r25
     addi r4, r1, 0xb0
     li r5, 0x40
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
 lbl_fn_8012F440_00001278:
     li r29, 0x1
     b lbl_fn_8012F440_000013F0
@@ -1637,7 +1637,7 @@ lbl_fn_8012F440_00001560:
     mr r3, r22
     addi r4, r1, 0xa4
     li r5, 0x80
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
 lbl_fn_8012F440_00001590:
     li r29, 0x1
     b lbl_fn_8012F440_0000170C
@@ -1814,7 +1814,7 @@ lbl_fn_8012F440_000017DC:
     mr r3, r22
     addi r4, r1, 0x98
     lis r5, 0x1
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
     b lbl_fn_8012F440_0000197C
 lbl_fn_8012F440_00001808:
     lwz r4, 0xc(r21)
@@ -1960,7 +1960,7 @@ lbl_fn_8012F440_000019BC:
     mr r3, r22
     addi r4, r1, 0x8c
     li r5, 0x10
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
 lbl_fn_8012F440_00001A0C:
     li r29, 0x1
     b lbl_fn_8012F440_00001B84
@@ -2115,7 +2115,7 @@ lbl_fn_8012F440_00001BAC:
     mr r3, r22
     addi r4, r1, 0x80
     li r5, 0x4000
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
 lbl_fn_8012F440_00001C34:
     li r29, 0x1
     b lbl_fn_8012F440_00001DB0
@@ -2450,7 +2450,7 @@ lbl_fn_8012F440_00002088:
     mr r3, r22
     addi r4, r1, 0x74
     li r5, 0x4
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
 lbl_fn_8012F440_000020C4:
     li r29, 0x1
     b lbl_fn_8012F440_0000223C
@@ -2655,7 +2655,7 @@ lbl_fn_8012F440_00002350:
     mr r3, r22
     addi r4, r1, 0x68
     li r5, 0x2
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
 lbl_fn_8012F440_0000238C:
     li r29, 0x1
     b lbl_fn_8012F440_00002504
@@ -2863,7 +2863,7 @@ lbl_fn_8012F440_0000263C:
     mr r3, r22
     addi r4, r1, 0x5c
     li r5, 0x8
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
 lbl_fn_8012F440_0000265C:
     li r29, 0x1
     b lbl_fn_8012F440_000027D4
@@ -3063,7 +3063,7 @@ lbl_fn_8012F440_000028DC:
     mr r3, r22
     addi r4, r1, 0x50
     li r5, 0x200
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
 lbl_fn_8012F440_00002910:
     li r29, 0x1
     b lbl_fn_8012F440_00002A88
@@ -3418,7 +3418,7 @@ lbl_fn_8012F440_00002D8C:
     mr r3, r22
     addi r4, r1, 0x44
     lis r5, 0x4
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
 lbl_fn_8012F440_00002DEC:
     lwz r0, 0xc(r21)
     cmpwi r26, 0x0
@@ -3707,7 +3707,7 @@ lbl_fn_8012F440_000031B8:
     mr r3, r22
     addi r4, r1, 0x38
     li r5, 0x400
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
 lbl_fn_8012F440_000031D8:
     li r29, 0x1
     b lbl_fn_8012F440_00003350
@@ -3911,7 +3911,7 @@ lbl_fn_8012F440_00003468:
     mr r3, r22
     addi r4, r1, 0x2c
     lis r5, 0x100
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
 lbl_fn_8012F440_0000349C:
     li r29, 0x1
     b lbl_fn_8012F440_00003614
@@ -4125,7 +4125,7 @@ lbl_fn_8012F440_00003764:
     mr r3, r22
     addi r4, r1, 0x20
     lis r5, 0x80
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
 lbl_fn_8012F440_00003784:
     li r29, 0x1
     b lbl_fn_8012F440_000038FC
@@ -4351,7 +4351,7 @@ lbl_fn_8012F440_00003A68:
     mr r3, r22
     addi r4, r1, 0x14
     lis r5, 0x200
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
 lbl_fn_8012F440_00003A9C:
     li r29, 0x1
     b lbl_fn_8012F440_00003C14

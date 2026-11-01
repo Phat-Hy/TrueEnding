@@ -14,7 +14,7 @@ extern void talk_parseQuotedString(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
-extern void fn_8006AD24(void);
+extern void boss_lookupActionEntry(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -24,25 +24,25 @@ extern void atn_Model_findBoneIndex(void);
 extern void target_pushPointToHistory(void);
 extern void fn_80092F90(void);
 extern void fn_80093014(void);
-extern void fn_8009373C(void);
+extern void target_findEntryByName(void);
 extern void fn_80093D98(void);
 extern void fn_80093F58(void);
-extern void fn_80094958(void);
+extern void target_registerCandidate(void);
 extern void fn_80095D44(void);
 extern void fn_800973C0(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_800EC254(void);
+extern void cam_testTargetVisibility(void);
 extern void cam_registerTarget(void);
 extern void cam_initTrajectoryParams(void);
 extern void cam_bindPathTarget(void);
 extern void cam_bindRotationTarget(void);
 extern void cam_evalControllerSpline(void);
 extern void cam_setLookAtTarget(void);
-extern void fn_800ED4D8(void);
-extern void fn_800ED4E0(void);
+extern void cam_getLookAtState(void);
+extern void cam_updateLookAtMatrix(void);
 extern void cam_evalLookAtMatrix(void);
 extern void fn_801360C4(void);
 extern void fn_801360D8(void);
@@ -476,7 +476,7 @@ lbl_fn_80137FC0_00000520:
     mr r5, r3
     addi r3, r31, 0xb0
     addi r4, r1, 0x1a0
-    bl fn_8009373C
+    bl target_findEntryByName
     b lbl_fn_80137FC0_00000904
 lbl_fn_80137FC0_00000570:
     mr r3, r28
@@ -551,7 +551,7 @@ lbl_fn_80137FC0_00000570:
     addi r7, r1, 0x18
     stfs f31, 0x20(r1)
     stfs f1, 0x24(r1)
-    bl fn_80094958
+    bl target_registerCandidate
     b lbl_fn_80137FC0_00000904
 lbl_fn_80137FC0_00000698:
     mr r3, r28
@@ -858,7 +858,7 @@ lbl_fn_80138528_00000A70:
     bl actor_dispatchMessage
     mr r4, r30
     addi r3, r1, 0x2c
-    bl fn_8006AD24
+    bl boss_lookupActionEntry
     lwz r0, 0x20(r1)
     srwi. r0, r0, 31
     beq lbl_fn_80138528_00000B1C
@@ -1047,7 +1047,7 @@ asm void fn_801388B8(void)
     b lbl_fn_801388B8_00000E68
 lbl_fn_801388B8_00000DAC:
     addi r3, r1, 0x90
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     addi r4, r30, 0x293
     li r5, 0x5
@@ -1055,7 +1055,7 @@ lbl_fn_801388B8_00000DAC:
     cmpwi r3, 0x0
     bne lbl_fn_801388B8_00000E60
     addi r3, r1, 0x90
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     mr r4, r3
     addi r3, r1, 0x18
@@ -1095,14 +1095,14 @@ lbl_fn_801388B8_00000E3C:
     bl dtor_80013D60
 lbl_fn_801388B8_00000E60:
     addi r3, r1, 0x90
-    bl fn_800ED4E0
+    bl cam_updateLookAtMatrix
 lbl_fn_801388B8_00000E68:
     addi r3, r1, 0x30
     addi r4, r1, 0xcc
     bl cam_evalLookAtMatrix
     addi r3, r1, 0x90
     addi r4, r1, 0x30
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     mr r31, r3
     addi r3, r1, 0x30
     li r4, -0x1

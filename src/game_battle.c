@@ -54,12 +54,12 @@ extern void fn_8011CC30(void);
 extern void fn_8011CCA0(void);
 extern void fn_8011CD1C(void);
 extern void skill_findNodeByTag(void);
-extern void fn_80134134(void);
+extern void boss_findPartById(void);
 extern void fn_80134270(void);
 extern void fn_80134290(void);
 extern void fn_801342B0(void);
 extern void dialog_selectChoice(void);
-extern void fn_8014EEC4(void);
+extern void dialog_activateChoiceWindow(void);
 extern void battle_canTargetActor(void);
 extern void actor_getMovementFlags(void);
 extern void task_lookupTagIndex(void);
@@ -67,7 +67,7 @@ extern void task_findEntryById(void);
 extern void fn_8021A984(void);
 extern void world_getGlobalFlag(void);
 extern void craft_forgeUpgradeWeapon(void);
-extern void fn_803CD958(void);
+extern void crowd_selectWaypointByWeight(void);
 extern void fn_80599C94(void);
 extern void fn_80599D64(void);
 extern void fn_805AA018(void);
@@ -140,7 +140,7 @@ void fn_80018240(void);
 void fn_80018394(void);
 void fn_800183E0(void);
 void fn_800184F4(void);
-void fn_800185B4(void);
+void battle_findTargetSlotById(void);
 void fn_80018608(void);
 void fn_80018834(void);
 void fn_80018BAC(void);
@@ -164,7 +164,7 @@ void fn_8001A65C(void);
 void fn_8001A788(void);
 void fn_8001A8A4(void);
 void fn_8001AC54(void);
-void fn_8001AD80(void);
+void battle_calcActorDistance(void);
 void fn_8001ADE8(void);
 void fn_8001AEBC(void);
 void battle_getCharacterState(void);
@@ -576,7 +576,7 @@ lbl_fn_80017128_000004D4:
 lbl_fn_80017128_0000061C:
     mr r3, r27
     li r4, 0x0
-    bl fn_8014EEC4
+    bl dialog_activateChoiceWindow
 lbl_fn_80017128_00000628:
     lwz r4, 0x10(r28)
     lis r3, lbl_8072FC70@ha
@@ -1599,7 +1599,7 @@ lbl_fn_800184F4_00001468:
     blr
 }
 
-asm void fn_800185B4(void)
+asm void battle_findTargetSlotById(void)
 {
     nofralloc
     lwz r0, 0x48c(r3)
@@ -1607,24 +1607,24 @@ asm void fn_800185B4(void)
     mulli r0, r0, 0x34
     add r3, r3, r0
     addi r3, r3, 0x490
-    b lbl_fn_800185B4_000014D0
-lbl_fn_800185B4_000014A4:
+    b lbl_battle_findTargetSlotById_000014D0
+lbl_battle_findTargetSlotById_000014A4:
     lwz r0, 0x4(r6)
     cmplw r0, r4
-    bne lbl_fn_800185B4_000014CC
+    bne lbl_battle_findTargetSlotById_000014CC
     cmpwi r5, 0x0
-    beq lbl_fn_800185B4_000014C4
+    beq lbl_battle_findTargetSlotById_000014C4
     lwz r0, 0x28(r6)
     cmplw r0, r5
-    bne lbl_fn_800185B4_000014CC
-lbl_fn_800185B4_000014C4:
+    bne lbl_battle_findTargetSlotById_000014CC
+lbl_battle_findTargetSlotById_000014C4:
     mr r3, r6
     blr
-lbl_fn_800185B4_000014CC:
+lbl_battle_findTargetSlotById_000014CC:
     addi r6, r6, 0x34
-lbl_fn_800185B4_000014D0:
+lbl_battle_findTargetSlotById_000014D0:
     cmplw r6, r3
-    bne lbl_fn_800185B4_000014A4
+    bne lbl_battle_findTargetSlotById_000014A4
     li r3, 0x0
     blr
 }
@@ -2288,7 +2288,7 @@ lbl_fn_80018D5C_00001DC0:
     lwz r3, 0xa4(r28)
     slwi r0, r0, 3
     add r3, r3, r0
-    bl fn_803CD958
+    bl crowd_selectWaypointByWeight
     clrlwi. r0, r3, 16
     ble lbl_fn_80018D5C_00001EE8
     lwz r0, 0x1c(r27)
@@ -2642,7 +2642,7 @@ lbl_fn_80019254_000022E0:
     lwz r3, 0xa4(r29)
     slwi r0, r0, 3
     add r3, r3, r0
-    bl fn_803CD958
+    bl crowd_selectWaypointByWeight
     clrlwi. r0, r3, 16
     ble lbl_fn_80019254_00002408
     lwz r0, 0x1c(r28)
@@ -4497,7 +4497,7 @@ lbl_fn_8001AC54_00003C50:
     blr
 }
 
-asm void fn_8001AD80(void)
+asm void battle_calcActorDistance(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -4505,9 +4505,9 @@ asm void fn_8001AD80(void)
     cmpwi r3, 0x0
     lfs f1, lbl_80880764
     stw r0, 0x24(r1)
-    beq lbl_fn_8001AD80_00003CB0
+    beq lbl_battle_calcActorDistance_00003CB0
     cmpwi r4, 0x0
-    beq lbl_fn_8001AD80_00003CB0
+    beq lbl_battle_calcActorDistance_00003CB0
     lfs f1, 0x530(r3)
     lfs f0, 0x530(r4)
     lfs f3, 0x52c(r3)
@@ -4522,7 +4522,7 @@ asm void fn_8001AD80(void)
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
     bl PSVECMag
-lbl_fn_8001AD80_00003CB0:
+lbl_battle_calcActorDistance_00003CB0:
     lwz r0, 0x24(r1)
     mtlr r0
     addi r1, r1, 0x20
@@ -4686,7 +4686,7 @@ lbl_battle_getCharacterState_00003EAC:
 lbl_battle_getCharacterState_00003EC0:
     mr r3, r29
     li r4, 0x1a
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     beq lbl_battle_getCharacterState_00003F2C
     xoris r3, r28, 0x8000
@@ -4791,7 +4791,7 @@ lbl_battle_getCharacterState_00004044:
 lbl_battle_getCharacterState_00004048:
     addi r3, r30, 0x7d4
     li r4, 0x1a
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     beq lbl_battle_getCharacterState_000040B4
     xoris r3, r28, 0x8000

@@ -10,8 +10,8 @@ extern void menu_renderLayout(void);
 extern void mem_alloc(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
-extern void fn_801059F8(void);
-extern void fn_80105B3C(void);
+extern void colli_findDynamicSlot(void);
+extern void colli_findStaticSlot(void);
 extern void fn_80107CA8(void);
 extern void fn_8010CA34(void);
 extern void fn_8011BEB8(void);
@@ -59,7 +59,7 @@ void fn_8016DC14(void);
 void fn_8016DCD4(void);
 void fn_8016DDB0(void);
 void fn_8016DF3C(void);
-void fn_8016E484(void);
+void task_isValidQueueRange(void);
 void debuff_removeStatusEffect(void);
 void fn_8016E5F0(void);
 void fn_8016E71C(void);
@@ -534,10 +534,10 @@ asm void debuff_clearStatus(void)
     beq lbl_debuff_clearStatus_0000068C
     mr r3, r0
     mr r4, r31
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r31
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_debuff_clearStatus_0000068C:
     lwz r0, 0x12a8(r31)
     lfs f0, lbl_8088196C
@@ -1075,10 +1075,10 @@ lbl_fn_8016DF3C_00000DB0:
     cmpwi r3, 0x0
     beq lbl_fn_8016DF3C_00000DD0
     mr r4, r30
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r30
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_fn_8016DF3C_00000DD0:
     lwz r0, 0x12a8(r30)
     lfs f0, lbl_8088196C
@@ -1256,10 +1256,10 @@ lbl_fn_8016DF3C_00001030:
     cmpwi r3, 0x0
     beq lbl_fn_8016DF3C_00001050
     mr r4, r30
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r30
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_fn_8016DF3C_00001050:
     lwz r0, 0x12a8(r30)
     lfs f0, lbl_8088196C
@@ -1280,7 +1280,7 @@ lbl_fn_8016DF3C_00001074:
     blr
 }
 
-asm void fn_8016E484(void)
+asm void task_isValidQueueRange(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1290,11 +1290,11 @@ asm void fn_8016E484(void)
     bl task_mapIdToQueue
     cmpwi r3, 0x0
     li r0, 0x0
-    blt lbl_fn_8016E484_000010B8
+    blt lbl_task_isValidQueueRange_000010B8
     cmpwi r3, 0x7
-    bge lbl_fn_8016E484_000010B8
+    bge lbl_task_isValidQueueRange_000010B8
     li r0, 0x1
-lbl_fn_8016E484_000010B8:
+lbl_task_isValidQueueRange_000010B8:
     mr r3, r0
     lwz r0, 0x14(r1)
     mtlr r0
@@ -2339,10 +2339,10 @@ lbl_battle_applyStatusEffect_00001F18:
     cmpwi r3, 0x0
     beq lbl_battle_applyStatusEffect_00001F40
     mr r4, r27
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r27
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_battle_applyStatusEffect_00001F40:
     lwz r0, 0x12a8(r27)
     lfs f0, lbl_8088196C

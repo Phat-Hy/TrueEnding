@@ -14,7 +14,7 @@ extern void talk_setSpeakerName(void);
 extern void talk_parseDialogue(void);
 extern void talk_parseDialogueTokens(void);
 extern void talk_copyUtf16String(void);
-extern void fn_8006BB6C(void);
+extern void boss_triggerEventAction(void);
 extern void fn_8006F420(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
@@ -22,7 +22,7 @@ extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void fn_802091E8(void);
-extern void fn_8046DC5C(void);
+extern void boss_loadWeakpointResource(void);
 extern void boss_bindArenaInteractions(void);
 extern void strncpy(void);
 extern void strcmp(void);
@@ -546,7 +546,7 @@ asm void fn_8020A90C(void)
     stw r28, 0x640(r1)
     stw r31, 0x8(r1)
     lwz r3, lbl_8087F518
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lis r4, lbl_807772D0@ha
     mr r30, r3
     addi r4, r4, lbl_807772D0@l
@@ -996,7 +996,7 @@ lbl_fn_8020A90C_00000C50:
     bne lbl_fn_8020A90C_00000674
     mr r3, r30
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
     lwz r0, 0x664(r1)
     psq_l f31, 0x658(r1), 0, 0
     lfd f31, 0x650(r1)
@@ -1078,7 +1078,7 @@ lbl_fn_8020AFF4_00000D44:
     addi r5, r1, 0x8
     lwz r4, lbl_80882E20
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r12, 0xc(r1)
     mr r30, r3
     mr r4, r30
@@ -1275,7 +1275,7 @@ lbl_fn_8020B2BC_00000FFC:
     addi r4, r1, 0x348
     addi r5, r1, 0x14
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lis r4, lbl_807772D0@ha
     li r31, 0x0
     addi r4, r4, lbl_807772D0@l
@@ -1397,7 +1397,7 @@ lbl_fn_8020B2BC_000011B4:
     addi r4, r1, 0x248
     addi r5, r1, 0x10
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r5, 0x10(r1)
     li r0, 0x0
     lis r4, lbl_8077A090@ha
@@ -1551,7 +1551,7 @@ lbl_fn_8020B2BC_0000140C:
     addi r4, r1, 0x148
     addi r5, r1, 0xc
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lis r4, lbl_807772D0@ha
     li r0, 0x0
     addi r4, r4, lbl_807772D0@l
@@ -1649,7 +1649,7 @@ lbl_fn_8020B2BC_00001564:
     addi r4, r1, 0x48
     addi r5, r1, 0x8
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r5, 0x8(r1)
     li r0, 0x0
     lis r4, lbl_8077A090@ha
@@ -1829,7 +1829,7 @@ lbl_fn_8020BB0C_000017EC:
     addi r4, r1, 0x50
     addi r5, r1, 0x8
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lis r4, lbl_807772D0@ha
     li r0, 0x0
     addi r4, r4, lbl_807772D0@l

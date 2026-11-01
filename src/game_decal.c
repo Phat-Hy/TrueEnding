@@ -31,19 +31,19 @@ extern void fn_8011E81C(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_801237F0(void);
 extern void player_evaluateStatusCondition(void);
-extern void fn_80134134(void);
+extern void boss_findPartById(void);
 extern void npc_calcTargetDistance(void);
 extern void quest_evaluateConditions(void);
 extern void fn_80155790(void);
 extern void inventory_calcTotalStats(void);
 extern void shop_canPurchaseItem(void);
-extern void fn_80158CA4(void);
+extern void shop_loadCatalogItem(void);
 extern void fn_8016AFE8(void);
 extern void fn_8016D74C(void);
 extern void debuff_clearStatus(void);
 extern void fn_8016DC14(void);
 extern void fn_8016DCD4(void);
-extern void fn_8016E484(void);
+extern void task_isValidQueueRange(void);
 extern void actor_setState(void);
 extern void fn_80178018(void);
 extern void fn_80178078(void);
@@ -61,7 +61,7 @@ extern void fn_80373FC4(void);
 extern void fn_803748E0(void);
 extern void kpad_testActiveFlags(void);
 extern void fn_803761AC(void);
-extern void fn_8037EF30(void);
+extern void fat_dispatchFsRequest(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECDotProduct(void);
@@ -583,7 +583,7 @@ lbl_fn_800E589C_00000668:
     cmpwi r0, 0x0
     beq lbl_fn_800E589C_00000838
     mr r3, r30
-    bl fn_80158CA4
+    bl shop_loadCatalogItem
     cmpwi r3, 0x0
     beq lbl_fn_800E589C_00000838
     lwz r0, 0x560(r30)
@@ -1123,7 +1123,7 @@ lbl_fn_800E62AC_00000DE4:
     li r0, 0x1
     mr r3, r25
     stw r0, 0x1c(r4)
-    bl fn_8016E484
+    bl task_isValidQueueRange
     cmpwi r3, 0x0
     beq lbl_fn_800E62AC_00000E54
     li r3, 0x2
@@ -1386,7 +1386,7 @@ lbl_fn_800E62AC_000011B0:
     mr r3, r30
     li r4, 0x0
     li r5, 0x1
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_800E62AC_00001390
 lbl_fn_800E62AC_000011F8:
     extrwi. r0, r3, 1, 26
@@ -1564,7 +1564,7 @@ lbl_fn_800E62AC_00001434:
     beq lbl_fn_800E62AC_000017C8
     addi r3, r25, 0x7d4
     li r4, 0x2e
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     bne lbl_fn_800E62AC_000017C8
     lwz r0, 0x5674(r26)

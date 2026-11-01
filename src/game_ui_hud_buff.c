@@ -21,7 +21,7 @@ extern void atn_Task_setActive(void);
 extern void str_findChar(void);
 extern void fn_8010C00C(void);
 extern void actor_spawnActorWithId(void);
-extern void fn_8012B988(void);
+extern void enemy_updateNavSteering(void);
 extern void enemy_updateAnimTimer(void);
 extern void fn_8013407C(void);
 extern void boss_updatePhaseState(void);
@@ -38,16 +38,16 @@ extern void fn_801E91B4(void);
 extern void fn_801E9218(void);
 extern void saveSlot_readSummary(void);
 extern void save_calculateBlockCrc(void);
-extern void fn_80201E78(void);
+extern void profile_allocNode(void);
 extern void profile_getMetricValue(void);
-extern void fn_80202A6C(void);
+extern void perf_initNode(void);
 extern void perf_getMetricValue(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A02C(void);
 extern void res_registerResource(void);
-extern void fn_8046ECDC(void);
+extern void boss_updateLaserAimMatrix(void);
 extern void fn_8046EED8(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_804776F4(void);
@@ -979,21 +979,21 @@ lbl_fn_801CCE50_00000C00:
     add r29, r31, r28
     addi r4, r30, 0x1
     li r5, 0x1
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x108(r29)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0x1d
     li r5, 0x1
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x150(r29)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0x3f
     li r5, 0x1
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x198(r29)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1006,21 +1006,21 @@ lbl_fn_801CCE50_00000C00:
     addi r30, r4, lbl_8073BCF0@l
     li r5, 0x1
     addi r4, r30, 0x61
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0x13c(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0x82
     li r5, 0x1
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0x184(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0xa9
     li r5, 0x1
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0x1cc(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1031,7 +1031,7 @@ lbl_fn_801CCE50_00000CCC:
     add r29, r31, r28
     addi r4, r30, 0xd0
     li r5, 0x1
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x140(r29)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1113,7 +1113,7 @@ asm void fn_801CD210(void)
     beq lbl_fn_801CD210_00000F74
     lwz r3, lbl_8087F518
     li r4, 0x0
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     li r0, 0x3
     stw r0, 0xa88(r31)
     mr r30, r31
@@ -1176,7 +1176,7 @@ lbl_fn_801CD210_00000E7C:
 lbl_fn_801CD210_00000ECC:
     lwz r3, 0x490(r30)
     addi r3, r3, 0x7d4
-    bl fn_8012B988
+    bl enemy_updateNavSteering
     lwz r4, 0x490(r30)
     lwz r0, 0x674(r4)
     cmpwi r0, 0x0

@@ -6,9 +6,9 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void menu_renderLayout(void);
 extern void collision_testLineSegment(void);
-extern void fn_800902C0(void);
+extern void radar_addBlipEntry(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_8009373C(void);
+extern void target_findEntryByName(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
@@ -23,7 +23,7 @@ extern void dialog_selectChoice(void);
 extern void fn_8014EF48(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015D8C0(void);
-extern void fn_80161570(void);
+extern void party_updateMemberCoords(void);
 extern void debuff_clearStatus(void);
 extern void fn_8016DDB0(void);
 extern void actor_setState(void);
@@ -505,7 +505,7 @@ lbl_fn_8026CC28_000005A4:
     lwz r4, 0x0(r30)
     addi r3, r29, 0xb0
     li r5, 0x1
-    bl fn_8009373C
+    bl target_findEntryByName
     addi r31, r31, 0x1
     addi r30, r30, 0x4
     cmpwi r31, 0x4
@@ -790,7 +790,7 @@ lbl_fn_8026D0F8_000009B4:
     lwz r4, 0x0(r28)
     addi r3, r29, 0xb0
     li r5, 0x0
-    bl fn_8009373C
+    bl target_findEntryByName
     addi r27, r27, 0x1
     addi r28, r28, 0x4
     cmpwi r27, 0x4
@@ -2955,7 +2955,7 @@ lbl_fn_8026DB8C_00002988:
     fmr f2, f1
     li r5, 0x0
     li r6, 0x0
-    bl fn_80161570
+    bl party_updateMemberCoords
     lis r4, lbl_80744608@ha
     lfs f1, lbl_80883670
     addi r4, r4, lbl_80744608@l
@@ -3071,7 +3071,7 @@ lbl_fn_8026DB8C_00002B38:
     li r4, 0x0
     lwz r3, 0x1624(r28)
     addi r3, r3, 0x10
-    bl fn_800902C0
+    bl radar_addBlipEntry
     addic. r3, r1, 0x2c0
     beq lbl_fn_8026DB8C_00002B90
     lwz r4, 0x2c0(r1)

@@ -24,7 +24,7 @@ extern void fn_80155A88(void);
 extern void fn_801562A0(void);
 extern void fn_8015783C(void);
 extern void shop_canPurchaseItem(void);
-extern void fn_80158CA4(void);
+extern void shop_loadCatalogItem(void);
 extern void fn_80161880(void);
 extern void fn_8016D74C(void);
 extern void actor_setState(void);
@@ -903,7 +903,7 @@ lbl_fn_8035CF78_00000B88:
     cmpwi r0, 0x0
     beq lbl_fn_8035CF78_00000DFC
     mr r3, r31
-    bl fn_80158CA4
+    bl shop_loadCatalogItem
     cmpwi r3, 0x0
     beq lbl_fn_8035CF78_00000DFC
     lwz r0, 0xf80(r31)

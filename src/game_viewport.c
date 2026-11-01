@@ -9,10 +9,10 @@ extern void _savegpr_21(void);
 extern void vec3_copy(void);
 extern void vec3_mag(void);
 extern void scene_transformPoint(void);
-extern void fn_8000DCF4(void);
+extern void scene_getCamera(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80012C88(void);
+extern void vec3_addAssign(void);
 extern void vec3_sub(void);
 extern void fn_80013484(void);
 extern void fn_80041B8C(void);
@@ -20,7 +20,7 @@ extern void fn_80042108(void);
 extern void fn_80050420(void);
 extern void fn_8005E3E0(void);
 extern void fn_80064F00(void);
-extern void fn_8008B964(void);
+extern void sys_getMainManager(void);
 extern void atn_Matrix_copy(void);
 extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
@@ -30,7 +30,7 @@ extern void fn_800EFD04(void);
 extern void fn_800EFDA0(void);
 extern void fn_800EFF04(void);
 extern void proj_getMatrix(void);
-extern void fn_800F52F8(void);
+extern void proj_getGlobalManager(void);
 extern void fn_800F5300(void);
 extern void fn_800F530C(void);
 extern void fn_80102890(void);
@@ -90,16 +90,16 @@ extern u32 lbl_80881530;
 extern u32 lbl_80881534;
 
 /* Function declarations */
-void fn_800F7250(void);
+u32 fn_800F7250(void);
 void *fn_800F7258(void *p);
 void fn_800F7260(void);
 void vec3_scale(f32 *dest, const f32 *src, f32 scale);
 void fn_800F72F4(void);
 void fn_800F7F60(void);
 void fn_800F7F80(void);
-u32 fn_800F7F90(void);
+u32 viewport_getFlag(void);
 void fn_800F7F98(void *p, u32 val);
-void viewport_getGlobalContext(void);
+u32 viewport_getGlobalContext(void);
 void fn_800F7FA8(void);
 u32 fn_800F7FB4(const void *p);
 void fn_800F7FBC(void);
@@ -116,20 +116,18 @@ void fn_800F831C(void);
 void fn_800F833C(void);
 void fn_800F8348(void);
 void fn_800F84BC(void);
-void fn_800F84C8(void);
-void fn_800F84D0(void);
+void *fn_800F84C8(void *p);
+void fn_800F84D0(void *p, void *val);
 void fn_800F84D8(void);
-void fn_800F8524(void);
-void fn_800F8538(void);
+void math_lerpf(void);
+void *fn_800F8538(void *p, s32 idx);
 void fn_800F8544(void);
 s32 system_getNextSequenceId(s32* obj);
 void viewport_updateCulling(void);
 
-asm void fn_800F7250(void)
+u32 fn_800F7250(void)
 {
-    nofralloc
-    lwz r3, lbl_8087EEB0
-    blr
+    return lbl_8087EEB0;
 }
 
 void *fn_800F7258(void *p)
@@ -247,7 +245,7 @@ asm void fn_800F72F4(void)
     cmpwi r3, 0x0
     bne lbl_fn_800F72F4_000001B0
 lbl_fn_800F72F4_000001A4:
-    bl fn_800F7F90
+    bl viewport_getFlag
     cmpwi r3, 0x0
     beq lbl_fn_800F72F4_000001B8
 lbl_fn_800F72F4_000001B0:
@@ -255,7 +253,7 @@ lbl_fn_800F72F4_000001B0:
     b lbl_fn_800F72F4_000001E0
 lbl_fn_800F72F4_000001B8:
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     bl fn_800F5300
     cmpwi r3, 0x0
     beq lbl_fn_800F72F4_000001D4
@@ -411,7 +409,7 @@ lbl_fn_800F72F4_000003A4:
     bl vec3_scale
     addi r3, r1, 0x1bc
     addi r4, r1, 0x16c
-    bl fn_80012C88
+    bl vec3_addAssign
     mr r3, r30
     bl fn_800F7FF8
     addi r3, r1, 0x154
@@ -456,7 +454,7 @@ lbl_fn_800F72F4_000004A0:
     bl fn_80134270
     cmpwi r3, 0x0
     beq lbl_fn_800F72F4_000004DC
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_800F8098
     mr r4, r3
     addi r3, r1, 0x138
@@ -472,7 +470,7 @@ lbl_fn_800F72F4_000004DC:
     bl fn_80134250
     cmpwi r3, 0x0
     beq lbl_fn_800F72F4_00000518
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_800F8098
     mr r4, r3
     addi r3, r1, 0x128
@@ -483,7 +481,7 @@ lbl_fn_800F72F4_000004DC:
     bl fn_80042108
     b lbl_fn_800F72F4_0000053C
 lbl_fn_800F72F4_00000518:
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_800F8098
     mr r4, r3
     addi r3, r1, 0x118
@@ -498,7 +496,7 @@ lbl_fn_800F72F4_0000053C:
     subi r0, r3, 0x11
     cmplwi r0, 0x1
     bgt lbl_fn_800F72F4_000005C4
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_800F8098
     mr r4, r3
     addi r3, r1, 0x108
@@ -509,7 +507,7 @@ lbl_fn_800F72F4_0000053C:
     bl fn_80042108
     b lbl_fn_800F72F4_000005C4
 lbl_fn_800F72F4_00000578:
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_800F8098
     mr r4, r3
     addi r3, r1, 0xf8
@@ -520,7 +518,7 @@ lbl_fn_800F72F4_00000578:
     bl fn_80042108
     b lbl_fn_800F72F4_000005C4
 lbl_fn_800F72F4_000005A0:
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_800F8098
     mr r4, r3
     addi r3, r1, 0xe8
@@ -601,7 +599,7 @@ lbl_fn_800F72F4_00000668:
     fmr f1, f28
     fdivs f0, f2, f0
     stfs f0, 0x24(r1)
-    bl fn_800F8524
+    bl math_lerpf
     stfs f1, 0x24(r1)
     addi r3, r1, 0x1a4
     bl viewport_getNextSequenceId
@@ -621,7 +619,7 @@ lbl_fn_800F72F4_00000668:
     addi r3, r1, 0x21c
     addi r4, r1, 0x1b0
     bl vec3_copy
-    bl fn_8008B964
+    bl sys_getMainManager
     bl fn_800F7258
     bl fn_800F80A0
     addi r4, r1, 0x210
@@ -750,7 +748,7 @@ lbl_fn_800F72F4_0000088C:
     bl vec3_scale
     mr r3, r22
     addi r4, r1, 0x84
-    bl fn_80012C88
+    bl vec3_addAssign
     addi r3, r1, 0x188
     bl fn_800F8348
     lfs f1, lbl_80881478
@@ -839,7 +837,7 @@ lbl_fn_800F72F4_00000A38:
     li r4, -0x1
     bl ref_releaseHandle
 lbl_fn_800F72F4_00000A64:
-    bl fn_800F7F90
+    bl viewport_getFlag
     cmpwi r3, 0x0
     beq lbl_fn_800F72F4_00000BD0
     lwz r0, 0x70(r29)
@@ -865,7 +863,7 @@ lbl_fn_800F72F4_00000A9C:
     addi r3, r1, 0x1ec
     addi r4, r1, 0x1b0
     bl vec3_copy
-    bl fn_8008B964
+    bl sys_getMainManager
     bl fn_800F7258
     bl fn_800F80A0
     addi r4, r1, 0x1e0
@@ -1045,7 +1043,7 @@ asm void fn_800F7F80(void)
     blr
 }
 
-u32 fn_800F7F90(void)
+u32 viewport_getFlag(void)
 {
     return lbl_8087F610;
 }
@@ -1055,11 +1053,9 @@ void fn_800F7F98(void *p, u32 val)
     *(u32 *)((char *)p + 0xd0) = val;
 }
 
-asm void viewport_getGlobalContext(void)
+u32 viewport_getGlobalContext(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F3C0
-    blr
+    return lbl_8087F3C0;
 }
 
 asm void fn_800F7FA8(void)
@@ -1484,18 +1480,14 @@ asm void fn_800F84BC(void)
     blr
 }
 
-asm void fn_800F84C8(void)
+void *fn_800F84C8(void *p)
 {
-    nofralloc
-    addi r3, r3, 0xb0
-    blr
+    return (u8 *)p + 0xb0;
 }
 
-asm void fn_800F84D0(void)
+void fn_800F84D0(void *p, void *val)
 {
-    nofralloc
-    stw r4, 0xb8(r3)
-    blr
+    *(void **)((u8 *)p + 0xb8) = val;
 }
 
 asm void fn_800F84D8(void)
@@ -1522,7 +1514,7 @@ asm void fn_800F84D8(void)
     blr
 }
 
-asm void fn_800F8524(void)
+asm void math_lerpf(void)
 {
     nofralloc
     lfs f0, 0x0(r4)
@@ -1532,12 +1524,9 @@ asm void fn_800F8524(void)
     blr
 }
 
-asm void fn_800F8538(void)
+void *fn_800F8538(void *p, s32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0x78
-    add r3, r3, r0
-    blr
+    return (u8 *)p + idx * 0x78;
 }
 
 void fn_800F8544(void) {

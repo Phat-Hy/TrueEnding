@@ -11,7 +11,7 @@ extern void fn_8006144C(void);
 extern void fn_8007192C(void);
 extern void gx_syncFrameFifo(void);
 extern void fn_80071D80(void);
-extern void fn_80075DEC(void);
+extern void seq_stepPlaybackTimer(void);
 extern void fn_8007A100(void);
 extern void fn_8007A4CC(void);
 extern void dungeon_initGlobalContext(void);
@@ -915,7 +915,7 @@ lbl_atn_Model_updateAnimation_00000BC0:
     psq_l f1, 0x0(r3), 0, 0
     psq_st f1, 0xfc(r23), 0, 0
     lwz r3, lbl_8087EEE0
-    bl fn_80075DEC
+    bl seq_stepPlaybackTimer
     lwz r3, lbl_8087EFA8
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0

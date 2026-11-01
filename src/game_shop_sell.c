@@ -4,12 +4,12 @@
 /* External function declarations */
 extern void menu_renderLayout(void);
 extern void mem_alloc(void);
-extern void fn_801059F8(void);
-extern void fn_80105B3C(void);
+extern void colli_findDynamicSlot(void);
+extern void colli_findStaticSlot(void);
 extern void fn_8011BEB8(void);
 extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
-extern void fn_80164DCC(void);
+extern void party_evalTacticCondition(void);
 extern void actor_setState(void);
 extern void fn_801A2290(void);
 extern void fn_801A2A48(void);
@@ -1250,10 +1250,10 @@ lbl_fn_8015A46C_000010F0:
     cmpwi r3, 0x0
     beq lbl_fn_8015A46C_00001110
     mr r4, r28
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r28
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_fn_8015A46C_00001110:
     lwz r30, 0x564(r28)
     lwz r3, 0x55c(r28)
@@ -1600,7 +1600,7 @@ lbl_fn_8015A46C_000015D8:
 lbl_fn_8015A46C_00001600:
     mr r3, r28
     li r4, 0x1
-    bl fn_80164DCC
+    bl party_evalTacticCondition
     lwz r3, 0x1208(r28)
     cmpwi r3, 0x0
     beq lbl_fn_8015A46C_0000166C

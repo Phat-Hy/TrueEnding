@@ -10,7 +10,7 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void fn_8006BA8C(void);
-extern void fn_8006BB6C(void);
+extern void boss_triggerEventAction(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void fn_800A5D14(void);
@@ -23,7 +23,7 @@ extern void fn_800A6F88(void);
 extern void fn_800A6FF0(void);
 extern void str_skipWhitespace(void);
 extern void time_wrapMilliseconds(void);
-extern void fn_8046DC5C(void);
+extern void boss_loadWeakpointResource(void);
 extern void boss_bindArenaInteractions(void);
 extern void strcmp(void);
 extern void strncmp(void);
@@ -69,7 +69,7 @@ extern u32 lbl_80882ED8;
 extern u32 lbl_80882EDC;
 
 /* Function declarations */
-void fn_8020EFEC(void);
+void time_ticksToSeconds(void);
 void fn_8020F064(void);
 void fn_8020F0AC(void);
 void fn_8020F130(void);
@@ -91,7 +91,7 @@ void fn_8021021C(void);
 void fn_80210220(void);
 void fn_80210244(void);
 
-asm void fn_8020EFEC(void)
+asm void time_ticksToSeconds(void)
 {
     nofralloc
     subis r4, r3, 0x3
@@ -606,7 +606,7 @@ lbl_fn_8020F248_000006F0:
     bne lbl_fn_8020F248_000003F0
     mr r3, r25
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
 lbl_fn_8020F248_0000070C:
     addi r11, r1, 0x6d0
     bl _restgpr_22
@@ -739,7 +739,7 @@ asm void fn_8020F84C(void)
     stw r29, 0x664(r1)
     stw r30, 0x8(r1)
     lwz r3, lbl_8087F518
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lis r4, lbl_807772D0@ha
     mr r31, r3
     addi r4, r4, lbl_807772D0@l
@@ -1169,7 +1169,7 @@ asm void fn_8020FDEC(void)
     addi r5, r1, 0x8
     lwz r4, lbl_80882EB0
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r12, 0xc(r1)
     mr r30, r3
     mr r4, r30
@@ -1465,7 +1465,7 @@ asm void fn_80210244(void)
     addi r5, r1, 0x8
     lwz r4, lbl_80882ED8
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r12, 0xc(r1)
     mr r31, r3
     mr r4, r31

@@ -4,13 +4,13 @@
 /* External function declarations */
 extern void math_wrapAngle(void);
 extern void fn_80013404(void);
-extern void fn_8008B964(void);
+extern void sys_getMainManager(void);
 extern void msg_getMessageById(void);
 extern void msg_getMessageString(void);
-extern void fn_800A55D4(void);
+extern void msg_lookupFormattedEntry(void);
 extern void msg_formatWindowLayout(void);
 extern void msg_isWindowActive(void);
-extern void fn_800F52F8(void);
+extern void proj_getGlobalManager(void);
 extern void fn_800F7258(void);
 extern void fn_801156BC(void);
 extern void fn_801156C4(void);
@@ -26,7 +26,7 @@ extern void fn_80122288(void);
 extern void player_evaluateStatusCondition(void);
 extern void fn_801248DC(void);
 extern void fn_80124BE4(void);
-extern void fn_8017C974(void);
+extern void map_isAreaCombatActive(void);
 extern void world_getGlobalFlag(void);
 
 /* External data declarations */
@@ -203,7 +203,7 @@ lbl_fn_80122330_000001C4:
     lfs f0, lbl_80881828
     fcmpo cr0, f1, f0
     bge lbl_fn_80122330_00000204
-    bl fn_8008B964
+    bl sys_getMainManager
     bl fn_800F7258
     bl fn_80116E6C
     lfs f0, 0x4(r3)
@@ -214,7 +214,7 @@ lbl_fn_80122330_000001C4:
     stfs f0, 0xc(r31)
     b lbl_fn_80122330_00000254
 lbl_fn_80122330_00000204:
-    bl fn_8008B964
+    bl sys_getMainManager
     bl fn_800F7258
     bl fn_80116E6C
     lfs f0, 0x4(r3)
@@ -327,7 +327,7 @@ lbl_fn_8012256C_00000360:
 lbl_fn_8012256C_00000364:
     cmpwi r3, 0x0
     beq lbl_fn_8012256C_00000380
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -344,7 +344,7 @@ lbl_fn_8012256C_00000394:
     lwz r3, lbl_8087EF70
     mr r5, r26
     li r4, 0x0
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -377,7 +377,7 @@ lbl_fn_8012256C_0000040C:
 lbl_fn_8012256C_00000410:
     cmpwi r3, 0x0
     beq lbl_fn_8012256C_0000042C
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -393,7 +393,7 @@ lbl_fn_8012256C_00000440:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0xb
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -428,7 +428,7 @@ lbl_fn_8012256C_000004C0:
 lbl_fn_8012256C_000004C4:
     cmpwi r3, 0x0
     beq lbl_fn_8012256C_000004E0
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -445,7 +445,7 @@ lbl_fn_8012256C_000004F4:
     lwz r3, lbl_8087EF70
     mr r5, r26
     li r4, 0x0
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -479,7 +479,7 @@ lbl_fn_8012256C_00000570:
 lbl_fn_8012256C_00000574:
     cmpwi r3, 0x0
     beq lbl_fn_8012256C_00000590
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -496,7 +496,7 @@ lbl_fn_8012256C_000005A4:
     lwz r3, lbl_8087EF70
     mr r5, r26
     li r4, 0x0
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -528,7 +528,7 @@ lbl_fn_8012256C_00000618:
 lbl_fn_8012256C_0000061C:
     cmpwi r3, 0x0
     beq lbl_fn_8012256C_00000638
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -544,7 +544,7 @@ lbl_fn_8012256C_0000064C:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x9
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r0, r0, 31
@@ -580,7 +580,7 @@ lbl_fn_8012256C_000006CC:
 lbl_fn_8012256C_000006D0:
     cmpwi r3, 0x0
     beq lbl_fn_8012256C_000006EC
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -596,7 +596,7 @@ lbl_fn_8012256C_00000700:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x6
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r0, r0, 31
@@ -632,7 +632,7 @@ lbl_fn_8012256C_00000780:
 lbl_fn_8012256C_00000784:
     cmpwi r3, 0x0
     beq lbl_fn_8012256C_000007A0
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -648,7 +648,7 @@ lbl_fn_8012256C_000007B4:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r0, r0, 31
@@ -698,7 +698,7 @@ lbl_fn_8012256C_00000868:
 lbl_fn_8012256C_0000086C:
     cmpwi r3, 0x0
     beq lbl_fn_8012256C_00000888
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -715,7 +715,7 @@ lbl_fn_8012256C_0000089C:
     lwz r3, lbl_8087EF70
     mr r5, r26
     li r4, 0x0
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -749,7 +749,7 @@ lbl_fn_8012256C_00000918:
 lbl_fn_8012256C_0000091C:
     cmpwi r3, 0x0
     beq lbl_fn_8012256C_00000938
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -766,7 +766,7 @@ lbl_fn_8012256C_0000094C:
     lwz r3, lbl_8087EF70
     mr r5, r26
     li r4, 0x0
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -1173,7 +1173,7 @@ asm void magic_dispatchActionCommand(void)
     mr r30, r4
     stw r29, 0x14(r1)
     mr r29, r3
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl magic_getOffset244
     subi r0, r30, 0x4
     cmplwi r0, 0x2b
@@ -1635,7 +1635,7 @@ lbl_fn_801237F0_000015AC:
 lbl_fn_801237F0_000015B0:
     cmpwi r3, 0x0
     beq lbl_fn_801237F0_000015CC
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -1684,7 +1684,7 @@ lbl_fn_801237F0_00001654:
 lbl_fn_801237F0_00001658:
     cmpwi r3, 0x0
     beq lbl_fn_801237F0_00001674
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -1700,7 +1700,7 @@ lbl_fn_801237F0_00001688:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x9
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r0, r0, 31
@@ -1736,7 +1736,7 @@ lbl_fn_801237F0_00001708:
 lbl_fn_801237F0_0000170C:
     cmpwi r3, 0x0
     beq lbl_fn_801237F0_00001728
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -1752,7 +1752,7 @@ lbl_fn_801237F0_0000173C:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x6
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r0, r0, 31
@@ -1788,7 +1788,7 @@ lbl_fn_801237F0_000017BC:
 lbl_fn_801237F0_000017C0:
     cmpwi r3, 0x0
     beq lbl_fn_801237F0_000017DC
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -1804,7 +1804,7 @@ lbl_fn_801237F0_000017F0:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r0, r0, 31
@@ -1852,7 +1852,7 @@ lbl_fn_801237F0_0000189C:
 lbl_fn_801237F0_000018A0:
     cmpwi r3, 0x0
     beq lbl_fn_801237F0_000018BC
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -1901,7 +1901,7 @@ lbl_fn_801237F0_00001944:
 lbl_fn_801237F0_00001948:
     cmpwi r3, 0x0
     beq lbl_fn_801237F0_00001964
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5

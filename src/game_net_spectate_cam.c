@@ -23,7 +23,7 @@ extern void fn_800A4E08(void);
 extern void fn_800A4F0C(void);
 extern void msg_getMessageById(void);
 extern void msg_getMessageString(void);
-extern void fn_800A55D4(void);
+extern void msg_lookupFormattedEntry(void);
 extern void skeleton_getGlobalManager(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
@@ -49,7 +49,7 @@ extern void fn_803B9044(void);
 extern void fn_803B9638(void);
 extern void fn_803B97C8(void);
 extern void fn_803CE44C(void);
-extern void fn_803EEE10(void);
+extern void dungeon_findArenaNodeByCoords(void);
 extern void fn_80453DBC(void);
 extern void fn_804741C0(void);
 extern void fn_8047C7FC(void);
@@ -102,7 +102,7 @@ extern u32 lbl_80887C38;
 
 /* Function declarations */
 void fn_80533A2C(void);
-void fn_80533BE0(void);
+void spectate_dispatchCameraMode(void);
 void spectateCamera_update(void);
 
 asm void fn_80533A2C(void)
@@ -232,7 +232,7 @@ lbl_fn_80533A2C_00000194:
     blr
 }
 
-asm void fn_80533BE0(void)
+asm void spectate_dispatchCameraMode(void)
 {
     nofralloc
     stwu r1, -0x80(r1)
@@ -247,7 +247,7 @@ asm void fn_80533BE0(void)
     stw r6, 0x2b0(r3)
     mr r31, r3
     stw r4, 0x2ac(r3)
-    bgt lbl_fn_80533BE0_00000628
+    bgt lbl_spectate_dispatchCameraMode_00000628
     lis r5, jumptable_80793950@ha
     slwi r0, r4, 2
     addi r5, r5, jumptable_80793950@l
@@ -290,7 +290,7 @@ asm void fn_80533BE0(void)
     stfs f0, 0x100(r3)
     lwz r3, 0x50(r31)
     stfs f0, 0x100(r3)
-    b lbl_fn_80533BE0_00000628
+    b lbl_spectate_dispatchCameraMode_00000628
     addi r0, r3, 0x410
     stw r0, 0x434(r3)
     lwz r3, 0x2cc(r3)
@@ -327,30 +327,30 @@ asm void fn_80533BE0(void)
     lwz r0, 0x270(r31)
     stw r30, 0x2c0(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_80533BE0_00000334
+    beq lbl_spectate_dispatchCameraMode_00000334
     addi r3, r31, 0x268
     li r4, 0x5a
     bl fn_8004B1EC
-lbl_fn_80533BE0_00000334:
+lbl_spectate_dispatchCameraMode_00000334:
     lwz r0, 0x284(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_80533BE0_00000628
+    beq lbl_spectate_dispatchCameraMode_00000628
     lfs f1, lbl_80887BB8
     addi r3, r31, 0x27c
     li r4, 0x5a
     bl fn_8004B158
-    b lbl_fn_80533BE0_00000628
+    b lbl_spectate_dispatchCameraMode_00000628
     cmpwi r6, 0xa
     addi r0, r3, 0x410
     stw r0, 0x434(r3)
-    bne lbl_fn_80533BE0_00000370
+    bne lbl_spectate_dispatchCameraMode_00000370
     addi r0, r3, 0x388
     stw r0, 0x3e8(r3)
-    b lbl_fn_80533BE0_00000378
-lbl_fn_80533BE0_00000370:
+    b lbl_spectate_dispatchCameraMode_00000378
+lbl_spectate_dispatchCameraMode_00000370:
     addi r0, r3, 0x368
     stw r0, 0x3e8(r3)
-lbl_fn_80533BE0_00000378:
+lbl_spectate_dispatchCameraMode_00000378:
     lwz r4, 0x48(r3)
     li r0, 0x0
     lfs f2, lbl_80887C20
@@ -370,35 +370,35 @@ lbl_fn_80533BE0_00000378:
     lwz r4, 0x60(r3)
     stfs f1, 0x104(r4)
     stw r0, 0x2c0(r3)
-    b lbl_fn_80533BE0_00000404
-lbl_fn_80533BE0_000003C8:
+    b lbl_spectate_dispatchCameraMode_00000404
+lbl_spectate_dispatchCameraMode_000003C8:
     lwz r0, 0x2d0(r31)
     lwz r3, lbl_8087F4A0
     add r30, r0, r28
     lwzx r4, r28, r0
     lwz r5, 0x4(r30)
-    bl fn_803EEE10
+    bl dungeon_findArenaNodeByCoords
     cmpwi r3, 0x0
-    beq lbl_fn_80533BE0_000003FC
+    beq lbl_spectate_dispatchCameraMode_000003FC
     lwz r12, 0x0(r3)
     lwz r4, 0x8(r30)
     lwz r12, 0x70(r12)
     mtctr r12
     bctrl
-lbl_fn_80533BE0_000003FC:
+lbl_spectate_dispatchCameraMode_000003FC:
     addi r28, r28, 0x10
     addi r29, r29, 0x1
-lbl_fn_80533BE0_00000404:
+lbl_spectate_dispatchCameraMode_00000404:
     lwz r0, 0x2d4(r31)
     cmplw r29, r0
-    blt lbl_fn_80533BE0_000003C8
-    b lbl_fn_80533BE0_00000628
+    blt lbl_spectate_dispatchCameraMode_000003C8
+    b lbl_spectate_dispatchCameraMode_00000628
     lwz r4, 0x60(r3)
     li r0, 0x0
     lfs f0, lbl_80887BB8
     stfs f0, 0x104(r4)
     stw r0, 0x2c0(r3)
-    b lbl_fn_80533BE0_00000628
+    b lbl_spectate_dispatchCameraMode_00000628
     li r30, 0x0
     addi r0, r3, 0x3a8
     stw r0, 0x3e8(r3)
@@ -407,19 +407,19 @@ lbl_fn_80533BE0_00000404:
     li r28, 0x0
     stw r30, 0x2b8(r3)
     stw r30, 0x2bc(r3)
-    b lbl_fn_80533BE0_000004B8
-lbl_fn_80533BE0_00000450:
+    b lbl_spectate_dispatchCameraMode_000004B8
+lbl_spectate_dispatchCameraMode_00000450:
     lwz r0, 0x2d0(r31)
     lwz r3, lbl_8087F4A0
     add r29, r0, r28
     lwzx r4, r28, r0
     lwz r5, 0x4(r29)
-    bl fn_803EEE10
+    bl dungeon_findArenaNodeByCoords
     cmpwi r3, 0x0
-    beq lbl_fn_80533BE0_000004B0
+    beq lbl_spectate_dispatchCameraMode_000004B0
     lwz r0, 0xc(r29)
     cmpwi r0, 0x0
-    beq lbl_fn_80533BE0_000004B0
+    beq lbl_spectate_dispatchCameraMode_000004B0
     stw r0, 0x38(r1)
     addi r4, r1, 0x38
     stw r30, 0x3c(r1)
@@ -433,14 +433,14 @@ lbl_fn_80533BE0_00000450:
     lwz r12, 0x40(r12)
     mtctr r12
     bctrl
-lbl_fn_80533BE0_000004B0:
+lbl_spectate_dispatchCameraMode_000004B0:
     addi r28, r28, 0x10
     addi r27, r27, 0x1
-lbl_fn_80533BE0_000004B8:
+lbl_spectate_dispatchCameraMode_000004B8:
     lwz r0, 0x2d4(r31)
     cmplw r27, r0
-    blt lbl_fn_80533BE0_00000450
-    b lbl_fn_80533BE0_00000628
+    blt lbl_spectate_dispatchCameraMode_00000450
+    b lbl_spectate_dispatchCameraMode_00000628
     li r0, 0x0
     addi r4, r3, 0x388
     stw r4, 0x3e8(r3)
@@ -459,16 +459,16 @@ lbl_fn_80533BE0_000004B8:
     stfs f0, 0x104(r4)
     lwz r3, 0x60(r3)
     stfs f0, 0x104(r3)
-    b lbl_fn_80533BE0_00000628
+    b lbl_spectate_dispatchCameraMode_00000628
     subi r0, r6, 0xd
     addi r4, r3, 0x3a8
     cmplwi r0, 0x1
     stw r4, 0x3e8(r3)
-    bgt lbl_fn_80533BE0_00000534
+    bgt lbl_spectate_dispatchCameraMode_00000534
     li r0, 0x0
     stw r0, 0x2b8(r3)
     stw r0, 0x2bc(r3)
-lbl_fn_80533BE0_00000534:
+lbl_spectate_dispatchCameraMode_00000534:
     lwz r4, 0x5c(r3)
     lfs f0, lbl_80887C24
     stfs f0, 0x104(r4)
@@ -478,7 +478,7 @@ lbl_fn_80533BE0_00000534:
     stfs f1, 0x100(r4)
     lwz r3, 0x60(r3)
     stfs f0, 0x104(r3)
-    b lbl_fn_80533BE0_00000628
+    b lbl_spectate_dispatchCameraMode_00000628
     lwz r4, 0x60(r3)
     addi r0, r3, 0x3c8
     lfs f0, lbl_80887BB8
@@ -486,24 +486,24 @@ lbl_fn_80533BE0_00000534:
     lwz r4, 0x5c(r3)
     stfs f0, 0x104(r4)
     stw r0, 0x3e8(r3)
-    b lbl_fn_80533BE0_00000628
+    b lbl_spectate_dispatchCameraMode_00000628
     li r0, 0x0
     stw r0, 0x2b8(r3)
-    b lbl_fn_80533BE0_00000628
+    b lbl_spectate_dispatchCameraMode_00000628
     lwz r0, lbl_8087F06C
     cmpwi r0, 0x0
-    bne lbl_fn_80533BE0_00000628
+    bne lbl_spectate_dispatchCameraMode_00000628
     lwz r4, 0x6e4(r3)
     lwz r5, 0x6e0(r3)
     bl fn_80117914
-    b lbl_fn_80533BE0_00000628
+    b lbl_spectate_dispatchCameraMode_00000628
     lwz r0, 0x284(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80533BE0_000005BC
+    beq lbl_spectate_dispatchCameraMode_000005BC
     li r4, 0x5a
     addi r3, r3, 0x27c
     bl fn_8004B1EC
-lbl_fn_80533BE0_000005BC:
+lbl_spectate_dispatchCameraMode_000005BC:
     lwz r3, 0x2c8(r31)
     li r4, 0x0
     bl atn_Task_setActive
@@ -531,7 +531,7 @@ lbl_fn_80533BE0_000005BC:
     stw r6, 0x4c(r3)
     lwz r3, 0x2c8(r31)
     stw r7, 0x48(r3)
-lbl_fn_80533BE0_00000628:
+lbl_spectate_dispatchCameraMode_00000628:
     addi r11, r1, 0x70
     psq_l f31, 0x78(r1), 0, 0
     lfd f31, 0x70(r1)
@@ -635,19 +635,19 @@ lbl_spectateCamera_update_000007A0:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0xe
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     beq lbl_spectateCamera_update_00000808
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0xc
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     beq lbl_spectateCamera_update_00000808
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0xd
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     beq lbl_spectateCamera_update_00000808
     lwz r3, 0xbac(r28)
@@ -688,7 +688,7 @@ lbl_spectateCamera_update_00000810:
     beq lbl_spectateCamera_update_000008A4
     mr r3, r28
     li r4, 0x2
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     lwz r4, 0x58(r31)
     addi r3, r1, 0x3c
     lfs f1, lbl_80887BB8
@@ -1184,7 +1184,7 @@ lbl_spectateCamera_update_00001000:
     beq lbl_spectateCamera_update_00001050
     mr r3, r28
     li r4, 0x3
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     lwz r0, 0x2e8(r28)
     cmpwi r0, 0x0
     beq lbl_spectateCamera_update_0000290C
@@ -1228,7 +1228,7 @@ lbl_spectateCamera_update_000010A0:
     beq lbl_spectateCamera_update_00002308
     mr r3, r28
     li r4, 0x4
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
     lwz r3, 0x4c(r28)
     li r4, 0x0
@@ -1254,7 +1254,7 @@ lbl_spectateCamera_update_000010A0:
     beq lbl_spectateCamera_update_0000113C
     mr r3, r28
     li r4, 0x6
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
     beq lbl_spectateCamera_update_00001194
@@ -1274,7 +1274,7 @@ lbl_spectateCamera_update_0000113C:
     beq lbl_spectateCamera_update_00001188
     mr r3, r28
     li r4, 0x6
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
     beq lbl_spectateCamera_update_00001194
@@ -1284,7 +1284,7 @@ lbl_spectateCamera_update_0000113C:
 lbl_spectateCamera_update_00001188:
     mr r3, r28
     li r4, 0x5
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
 lbl_spectateCamera_update_00001194:
     lwz r4, 0x58(r31)
     addi r3, r1, 0x38
@@ -1339,7 +1339,7 @@ lbl_spectateCamera_update_000011EC:
     bne lbl_spectateCamera_update_0000127C
     mr r3, r28
     li r4, 0x6
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
     beq lbl_spectateCamera_update_0000131C
@@ -1359,7 +1359,7 @@ lbl_spectateCamera_update_0000127C:
     beq lbl_spectateCamera_update_000012C8
     mr r3, r28
     li r4, 0x6
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
     beq lbl_spectateCamera_update_0000131C
@@ -1369,7 +1369,7 @@ lbl_spectateCamera_update_0000127C:
 lbl_spectateCamera_update_000012C8:
     mr r3, r28
     li r4, 0x9
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_0000131C
 lbl_spectateCamera_update_000012D8:
     cmpwi r0, 0x5
@@ -1379,7 +1379,7 @@ lbl_spectateCamera_update_000012D8:
 lbl_spectateCamera_update_000012E8:
     mr r3, r28
     li r4, 0x6
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
     beq lbl_spectateCamera_update_0000131C
@@ -1390,7 +1390,7 @@ lbl_spectateCamera_update_000012E8:
 lbl_spectateCamera_update_00001310:
     mr r3, r28
     li r4, 0x9
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
 lbl_spectateCamera_update_0000131C:
     lwz r3, 0x4c(r28)
     lfs f0, lbl_80887BB4
@@ -1430,7 +1430,7 @@ lbl_spectateCamera_update_00001378:
     bl fn_800A4F0C
     mr r3, r28
     li r4, 0x7
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     lwz r4, 0x58(r31)
     addi r3, r1, 0x34
     lfs f1, lbl_80887BB8
@@ -1444,7 +1444,7 @@ lbl_spectateCamera_update_00001378:
 lbl_spectateCamera_update_000013D8:
     mr r3, r28
     li r4, 0x4
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     addi r3, r31, 0x58
     lfs f1, lbl_80887BB8
     lwz r4, 0x4(r3)
@@ -1470,7 +1470,7 @@ lbl_spectateCamera_update_00001410:
 lbl_spectateCamera_update_00001438:
     mr r3, r28
     li r4, 0x4
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     addi r3, r31, 0x58
     lfs f1, lbl_80887BB8
     lwz r4, 0x4(r3)
@@ -1507,14 +1507,14 @@ lbl_spectateCamera_update_00001438:
     bl fn_800A4F0C
     mr r3, r28
     li r4, 0x8
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
 lbl_spectateCamera_update_000014DC:
     li r0, 0x1
     stw r0, 0x2c4(r28)
     mr r3, r28
     li r4, 0x9
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
     lwz r3, 0x4c(r28)
     addi r4, r1, 0x64
@@ -1560,7 +1560,7 @@ lbl_spectateCamera_update_00001588:
     stw r0, 0x2c4(r28)
     mr r3, r28
     li r4, 0x9
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
     lwz r3, 0x4c(r28)
     lfs f9, lbl_80887BB8
@@ -1633,7 +1633,7 @@ lbl_spectateCamera_update_00001670:
     psq_st f1, 0x78(r28), 0, 0
     lfs f0, 0x18(r5)
     stfs f0, 0xb4(r28)
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
     lwz r3, 0x5c(r28)
     lfs f0, lbl_80887BB4
@@ -1683,7 +1683,7 @@ lbl_spectateCamera_update_00001748:
     bne lbl_spectateCamera_update_00001770
     mr r3, r28
     li r4, 0x3
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
 lbl_spectateCamera_update_00001770:
     lwz r3, lbl_8087EF70
@@ -1705,7 +1705,7 @@ lbl_spectateCamera_update_00001770:
     psq_st f1, 0x78(r28), 0, 0
     lfs f0, 0x18(r5)
     stfs f0, 0xb4(r28)
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
     lwz r3, 0x5c(r28)
     lfs f0, lbl_80887C30
@@ -1784,7 +1784,7 @@ lbl_spectateCamera_update_000018C8:
 lbl_spectateCamera_update_000018D0:
     mr r3, r28
     li r4, 0xc
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     lwz r4, 0x58(r31)
     addi r3, r1, 0x28
     lfs f1, lbl_80887BB8
@@ -1804,7 +1804,7 @@ lbl_spectateCamera_update_00001904:
     beq lbl_spectateCamera_update_00002308
     mr r3, r28
     li r4, 0xa
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     addi r3, r31, 0x58
     lfs f1, lbl_80887BB8
     lwz r4, 0x4(r3)
@@ -1874,22 +1874,22 @@ lbl_spectateCamera_update_00001A14:
     bne lbl_spectateCamera_update_00001A38
     mr r3, r28
     li r4, 0x10
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
 lbl_spectateCamera_update_00001A38:
     mr r3, r28
     li r4, 0x19
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
 lbl_spectateCamera_update_00001A48:
     mr r3, r28
     li r4, 0xf
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
 lbl_spectateCamera_update_00001A58:
     mr r3, r28
     li r4, 0xf
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
     mr r3, r28
     li r4, 0x2
@@ -1912,7 +1912,7 @@ lbl_spectateCamera_update_00001A58:
     bl fn_8006BA74
     mr r3, r28
     li r4, 0x19
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     lwz r4, 0x58(r31)
     addi r3, r1, 0x20
     lfs f1, lbl_80887BB8
@@ -1932,7 +1932,7 @@ lbl_spectateCamera_update_00001AE8:
     beq lbl_spectateCamera_update_00002308
     mr r3, r28
     li r4, 0xb
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     addi r3, r31, 0x58
     lfs f1, lbl_80887BB8
     lwz r4, 0x4(r3)
@@ -1953,7 +1953,7 @@ lbl_spectateCamera_update_00001AE8:
     bl atn_Task_unlink
     mr r3, r28
     li r4, 0xb
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
 lbl_spectateCamera_update_00001B64:
     cmpwi r0, 0x8
@@ -1967,7 +1967,7 @@ lbl_spectateCamera_update_00001B64:
     bl fn_803B9044
     mr r3, r28
     li r4, 0x15
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
     lwz r0, lbl_8087EF68
     cmpwi r0, 0x0
@@ -1988,12 +1988,12 @@ lbl_spectateCamera_update_00001BBC:
 lbl_spectateCamera_update_00001BD4:
     mr r3, r28
     li r4, 0x11
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
 lbl_spectateCamera_update_00001BE4:
     mr r3, r28
     li r4, 0x19
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
     mr r3, r28
     bl bloom_processPasses
@@ -2020,7 +2020,7 @@ lbl_spectateCamera_update_00001BE4:
 lbl_spectateCamera_update_00001C4C:
     mr r3, r28
     li r4, 0x12
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
     lwz r3, lbl_8087EF68
     cmpwi r3, 0x0
@@ -2038,7 +2038,7 @@ lbl_spectateCamera_update_00001C78:
     bne lbl_spectateCamera_update_00001CA0
     mr r3, r28
     li r4, 0x13
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
 lbl_spectateCamera_update_00001CA0:
     lwz r3, lbl_8087F420
@@ -2049,7 +2049,7 @@ lbl_spectateCamera_update_00001CA0:
 lbl_spectateCamera_update_00001CB4:
     mr r3, r28
     li r4, 0x17
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
     lwz r3, lbl_8087EF68
     cmpwi r3, 0x0
@@ -2084,7 +2084,7 @@ lbl_spectateCamera_update_00001CE0:
 lbl_spectateCamera_update_00001D38:
     mr r3, r28
     li r4, 0x14
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     lwz r3, lbl_8087F9A0
     cmpwi r3, 0x0
     beq lbl_spectateCamera_update_00002308
@@ -2100,12 +2100,12 @@ lbl_spectateCamera_update_00001D5C:
 lbl_spectateCamera_update_00001D70:
     mr r3, r28
     li r4, 0x17
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
 lbl_spectateCamera_update_00001D80:
     mr r3, r28
     li r4, 0x14
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
     lwz r3, lbl_8087EF68
     cmpwi r3, 0x0
@@ -2137,7 +2137,7 @@ lbl_spectateCamera_update_00001DAC:
 lbl_spectateCamera_update_00001DF8:
     mr r3, r28
     li r4, 0x16
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
 lbl_spectateCamera_update_00001E08:
     lwz r0, 0x6e8(r28)
@@ -2156,12 +2156,12 @@ lbl_spectateCamera_update_00001E20:
 lbl_spectateCamera_update_00001E38:
     mr r3, r28
     li r4, 0x15
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
 lbl_spectateCamera_update_00001E48:
     mr r3, r28
     li r4, 0x19
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
 lbl_spectateCamera_update_00001E58:
     lwz r3, lbl_8087F420
@@ -2172,12 +2172,12 @@ lbl_spectateCamera_update_00001E58:
 lbl_spectateCamera_update_00001E6C:
     mr r3, r28
     li r4, 0x17
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
 lbl_spectateCamera_update_00001E7C:
     mr r3, r28
     li r4, 0x19
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
     lwz r3, lbl_8087F470
     cmpwi r3, 0x0
@@ -2194,7 +2194,7 @@ lbl_spectateCamera_update_00001EA8:
 lbl_spectateCamera_update_00001EB8:
     mr r3, r28
     li r4, 0x16
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
     lwz r3, lbl_8087EF68
     cmpwi r3, 0x0
@@ -2223,7 +2223,7 @@ lbl_spectateCamera_update_00001EF4:
 lbl_spectateCamera_update_00001F20:
     mr r3, r28
     li r4, 0x19
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
 lbl_spectateCamera_update_00001F30:
     lwz r3, lbl_8087F420
@@ -2234,12 +2234,12 @@ lbl_spectateCamera_update_00001F30:
 lbl_spectateCamera_update_00001F44:
     mr r3, r28
     li r4, 0x17
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
 lbl_spectateCamera_update_00001F54:
     mr r3, r28
     li r4, 0x19
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
     lwz r3, lbl_8087F9A0
     cmpwi r3, 0x0
@@ -2282,7 +2282,7 @@ lbl_spectateCamera_update_00001FB4:
 lbl_spectateCamera_update_00001FF4:
     mr r3, r28
     li r4, 0x18
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     b lbl_spectateCamera_update_00002308
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
@@ -2334,7 +2334,7 @@ lbl_spectateCamera_update_00002088:
 lbl_spectateCamera_update_000020B0:
     mr r3, r28
     li r4, 0xb
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     addi r3, r31, 0x58
     lfs f1, lbl_80887BB8
     lwz r4, 0x4(r3)

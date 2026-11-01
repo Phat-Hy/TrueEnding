@@ -18,10 +18,10 @@ extern void memcmp(void);
 extern void strncpy(void);
 extern void strncmp(void);
 extern void fn_8068446C(void);
-extern void fn_806A7110(void);
+extern void net_isConnectionActive(void);
 extern void net_checkConnectionSession(void);
 extern void fn_806A72E0(void);
-extern void fn_806A7400(void);
+extern void net_memFree(void);
 extern void net_formatLog(void);
 extern void fn_806A9CA0(void);
 extern void fn_806AB8B0(void);
@@ -29,7 +29,7 @@ extern void fn_806ABA10(void);
 extern void net_getMyAid(void);
 extern void fn_806B0EB0(void);
 extern void fn_806B1170(void);
-extern void fn_806B12F0(void);
+extern void net_checkLinkStatus(void);
 extern void fn_806B14D0(void);
 extern void fn_806B1570(void);
 extern void fn_806B1730(void);
@@ -114,9 +114,9 @@ void fn_806CED40(void);
 void fn_806CEED0(void);
 void fn_806CF030(void);
 void fn_806CF090(void);
-void fn_806CF0A0(void);
+void *fn_806CF0A0(void *obj);
 void fn_806CF0B0(void);
-void fn_806CF0D0(void);
+void fn_806CF0D0(void *obj, void *val);
 void fn_806CF0E0(void);
 void fn_806CF130(void);
 void fn_806CF160(void);
@@ -282,11 +282,11 @@ lbl_fn_806CD560_000001C4:
     stw r0, lbl_808608A0@l(r31)
     lwz r4, 0x4(r30)
     lwz r5, 0x8(r30)
-    bl fn_806A7400
+    bl net_memFree
     mr r4, r30
     li r3, 0x4
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
     lwz r30, lbl_808608A0@l(r31)
 lbl_fn_806CD560_000001F0:
     cmpwi r30, 0x0
@@ -359,7 +359,7 @@ lbl_fn_806CD620_00000294:
     stw r0, 0x4(r30)
     lwz r4, 0x4(r29)
     lwz r5, 0x8(r29)
-    bl fn_806A7400
+    bl net_memFree
     stw r31, 0x4(r29)
     stw r31, 0x8(r29)
     stw r31, 0x0(r29)
@@ -394,7 +394,7 @@ lbl_fn_806CD620_0000032C:
     li r3, 0x4
     stw r0, lbl_808608A0@l(r31)
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
     lwz r4, lbl_808608A0@l(r31)
 lbl_fn_806CD620_00000350:
     cmpwi r4, 0x0
@@ -463,7 +463,7 @@ lbl_fn_806CD740_0000040C:
     bne lbl_fn_806CD740_0000044C
     li r3, 0x4
     li r5, 0x10
-    bl fn_806A7400
+    bl net_memFree
     li r0, 0x0
     stw r0, 0x0(r31)
     li r3, 0x0
@@ -518,7 +518,7 @@ asm void fn_806CD880(void)
     stw r29, 0x14(r1)
     mr r29, r4
     stw r28, 0x10(r1)
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     bne lbl_fn_806CD880_00000514
     cmplwi r29, 0x1
@@ -842,7 +842,7 @@ asm void fn_806CDD00(void)
     mr r30, r4
     stw r29, 0x14(r1)
     mr r29, r3
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     beq lbl_fn_806CDD00_0000097C
     li r3, 0x0
@@ -948,7 +948,7 @@ asm void fn_806CDE80(void)
     stw r31, 0xc(r1)
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     beq lbl_fn_806CDE80_00000AF0
     li r3, 0x0
@@ -1266,7 +1266,7 @@ asm void fn_806CE250(void)
 lbl_fn_806CE250_00000EEC:
     li r26, 0x0
 lbl_fn_806CE250_00000EF0:
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     bne lbl_fn_806CE250_00000F14
     bl fn_806CCB40
@@ -1610,7 +1610,7 @@ asm void fn_806CE750(void)
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_806CE750_00001488
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     bne lbl_fn_806CE750_00001468
     li r3, 0x0
@@ -1693,7 +1693,7 @@ lbl_fn_806CE750_00001488:
     mr r4, r30
     li r3, 0x4
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
     b lbl_fn_806CE750_00001538
 lbl_fn_806CE750_00001524:
     mr r3, r31
@@ -1910,7 +1910,7 @@ lbl_fn_806CEB00_000017FC:
     rlwimi r0, r4, 8, 16, 23
     or r0, r3, r0
     rotlwi r25, r0, 16
-    bl fn_806B12F0
+    bl net_checkLinkStatus
     cmpwi r3, 0x0
     bne lbl_fn_806CEB00_00001854
     bl net_getMyAid
@@ -2231,7 +2231,7 @@ lbl_fn_806CF030_00001C94:
     lwz r30, 0x18(r4)
     li r3, 0xc
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
     stw r30, lbl_808608B0@l(r31)
     mr r4, r30
 lbl_fn_806CF030_00001CAC:
@@ -2255,11 +2255,9 @@ asm void fn_806CF090(void)
     blr
 }
 
-asm void fn_806CF0A0(void)
+void *fn_806CF0A0(void *obj)
 {
-    nofralloc
-    lwz r3, 0x8(r3)
-    blr
+    return *(void **)((char *)obj + 8);
 }
 
 asm void fn_806CF0B0(void)
@@ -2276,11 +2274,9 @@ lbl_fn_806CF0B0_00001D0C:
     blr
 }
 
-asm void fn_806CF0D0(void)
+void fn_806CF0D0(void *obj, void *val)
 {
-    nofralloc
-    stw r4, 0x8(r3)
-    blr
+    *(void **)((char *)obj + 8) = val;
 }
 
 asm void fn_806CF0E0(void)

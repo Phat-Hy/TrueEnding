@@ -63,7 +63,7 @@ void fn_805BF168(void);
 void fn_805BF1EC(void);
 void fn_805BF208(void);
 void fn_805BF218(void);
-void fn_805BF414(void);
+void gx_evaluateVector3f(void);
 void fn_805BF4B8(void);
 void fn_805BF594(void);
 void fn_805BF664(void);
@@ -1339,7 +1339,7 @@ lbl_fn_805BF218_00001084:
     blr
 }
 
-asm void fn_805BF414(void)
+asm void gx_evaluateVector3f(void)
 {
     nofralloc
     stwu r1, -0x20(r1)

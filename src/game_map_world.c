@@ -8,17 +8,17 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_80096218(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
-extern void fn_801059F8(void);
-extern void fn_80105B3C(void);
+extern void colli_findDynamicSlot(void);
+extern void colli_findStaticSlot(void);
 extern void fn_801065F4(void);
 extern void fn_80106680(void);
 extern void fn_8012B3E8(void);
-extern void fn_8012B988(void);
-extern void fn_8013310C(void);
+extern void enemy_updateNavSteering(void);
+extern void boss_enablePartStatusFlags(void);
 extern void actor_testBitFlag(void);
 extern void fn_80134250(void);
 extern void fn_80134270(void);
-extern void fn_801346C8(void);
+extern void boss_testAiFlag(void);
 extern void fn_80134724(void);
 extern void dialog_selectChoice(void);
 extern void fn_8015487C(void);
@@ -77,9 +77,9 @@ void fn_80179EBC(void);
 void fn_80179F98(void);
 void fn_80179FA8(void);
 void fn_8017A160(void);
-void fn_8017A220(void);
+u32 fn_8017A220(void);
 void fn_8017A228(void);
-void fn_8017A2F8(void);
+s32 fn_8017A2F8(void);
 void fn_8017A300(void);
 void fn_8017A33C(void);
 void fn_8017A450(void);
@@ -90,7 +90,7 @@ void fn_8017ABD4(void);
 void fn_8017AC08(void);
 void fn_8017AC24(void);
 void fn_8017AC2C(void);
-void fn_8017AC3C(void);
+void fn_8017AC3C(void *p, void *val);
 void fn_8017AC44(void);
 void fn_8017AD44(void);
 void fn_8017B0F8(void);
@@ -653,7 +653,7 @@ lbl_fn_80179FA8_0000070C:
     addi r3, r31, 0x7d4
     li r4, 0xe
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     bne lbl_fn_80179FA8_00000738
     li r3, 0x0
@@ -748,11 +748,9 @@ lbl_fn_8017A160_00000850:
     blr
 }
 
-asm void fn_8017A220(void)
+u32 fn_8017A220(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8017A228(void)
@@ -816,11 +814,9 @@ lbl_fn_8017A228_00000924:
     blr
 }
 
-asm void fn_8017A2F8(void)
+s32 fn_8017A2F8(void)
 {
-    nofralloc
-    li r3, -0x1
-    blr
+    return -1;
 }
 
 asm void fn_8017A300(void)
@@ -835,7 +831,7 @@ asm void fn_8017A300(void)
     addi r3, r3, 0x7d4
     bl fn_8012B3E8
     addi r3, r31, 0x7d4
-    bl fn_8012B988
+    bl enemy_updateNavSteering
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -1065,7 +1061,7 @@ lbl_fn_8017A5D8_00000C5C:
     li r4, 0x800
     li r5, 0x0
     addi r3, r3, 0x7d4
-    bl fn_8013310C
+    bl boss_enablePartStatusFlags
     lwz r0, 0xc04(r31)
     cmpwi r0, 0x0
     bgt lbl_fn_8017A5D8_00000C9C
@@ -1232,10 +1228,10 @@ lbl_fn_8017A5D8_00000EE8:
     cmpwi r3, 0x0
     beq lbl_fn_8017A5D8_00000F10
     mr r4, r31
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r31
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_fn_8017A5D8_00000F10:
     lwz r0, 0x12a8(r31)
     lis r4, lbl_807C7030@ha
@@ -1505,11 +1501,9 @@ asm void fn_8017AC2C(void)
     b fn_80106680
 }
 
-asm void fn_8017AC3C(void)
+void fn_8017AC3C(void *p, void *val)
 {
-    nofralloc
-    stw r4, 0x13fc(r3)
-    blr
+    *(void **)((u8 *)p + 0x13fc) = val;
 }
 
 asm void fn_8017AC44(void)

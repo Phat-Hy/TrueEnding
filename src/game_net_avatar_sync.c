@@ -12,7 +12,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8006A250(void);
+extern void boss_dispatchActionTransition(void);
 extern void script_executeOpcode(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
@@ -20,7 +20,7 @@ extern void mem_getAllocSize(void);
 extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
 extern void hud_drawTargetMarker(void);
-extern void fn_800A4450(void);
+extern void font_getGlyphEntryByIndex(void);
 extern void msg_getMessageById(void);
 extern void msg_getMessageString(void);
 extern void msg_isWindowActive(void);
@@ -35,7 +35,7 @@ extern void actor_spawnActorWithId(void);
 extern void fn_80117914(void);
 extern void fn_80119ECC(void);
 extern void fn_8012AFE8(void);
-extern void fn_801346C8(void);
+extern void boss_testAiFlag(void);
 extern void fn_801D082C(void);
 extern void save_validateHeader(void);
 extern void save_formatSlotTitle(void);
@@ -43,12 +43,12 @@ extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
 extern void save_calculateBlockCrc(void);
 extern void save_findEntryByName(void);
-extern void fn_801FEC74(void);
+extern void thread_findQueueTaskByName(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
 extern void profile_getMetricValue(void);
-extern void fn_80202A6C(void);
+extern void perf_initNode(void);
 extern void perf_getMetricValue(void);
 extern void fn_8021AF50(void);
 extern void fn_8021F09C(void);
@@ -235,7 +235,7 @@ asm void fn_80528314(void)
     mr r28, r9
     mr r4, r29
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_80528314_00000194
     lis r30, lbl_8075CED4@ha
@@ -1357,14 +1357,14 @@ lbl_fn_80529180_00001020:
     add r27, r31, r29
     addi r4, r30, 0xb
     li r5, 0x1
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0xe4(r27)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0x2c
     li r5, 0x1
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0xe8(r27)
     li r4, 0x1
     bl atn_Task_setActive
@@ -2283,7 +2283,7 @@ lbl_fn_80529C74_00001D20:
     lwz r3, lbl_8087F430
     li r6, 0x0
     lwz r3, 0x20(r3)
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     li r7, 0x1
     stw r7, 0x68(r3)
     li r6, 0x0
@@ -2392,7 +2392,7 @@ lbl_fn_80529C74_00001EA0:
     li r5, 0x0
     li r6, 0x0
     lwz r3, 0x20(r3)
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     li r7, 0x1
     stw r7, 0x68(r3)
     li r6, 0x0
@@ -2577,12 +2577,12 @@ lbl_fn_80529C74_00002148:
     addi r4, r4, lbl_8075D1A0@l
     addi r3, r3, 0x58
     addi r4, r4, 0x11c
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     mr r4, r3
     addi r3, r1, 0x3c
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x3c(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31

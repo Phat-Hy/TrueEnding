@@ -18,7 +18,7 @@ extern void save_parseSlotHeader(void);
 extern void saveSlot_readSummary(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
-extern void fn_804A53D4(void);
+extern void net_broadcastCoopPacket(void);
 extern void fn_804AC734(void);
 extern void fn_804F7F1C(void);
 extern void wcslen(void);
@@ -1798,7 +1798,7 @@ lbl_fn_80505084_000017E0:
     li r4, 0x0
     li r5, 0x0
     li r7, 0x0
-    bl fn_804A53D4
+    bl net_broadcastCoopPacket
     lwz r3, lbl_8087F628
     addi r3, r3, 0x5f0
     bl wcslen

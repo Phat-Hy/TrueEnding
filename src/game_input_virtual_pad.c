@@ -12,7 +12,7 @@ extern void sound_playSpatialEffect(void);
 extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void actor_testBitFlag(void);
-extern void fn_801426A4(void);
+extern void quest_evaluateMilestoneData(void);
 extern void actor_setState(void);
 extern void battle_resolveAggroHierarchy(void);
 extern void battle_updateTargetAggro(void);
@@ -931,7 +931,7 @@ lbl_fn_802F4A98_00000C50:
     fmuls f2, f0, f30
     stfs f4, 0x4c(r1)
     stfs f3, 0x538(r31)
-    bl fn_801426A4
+    bl quest_evaluateMilestoneData
     lwz r3, 0x159c(r31)
     subi r0, r3, 0x1
     stw r0, 0x159c(r31)

@@ -5,7 +5,7 @@
 extern void _restgpr_21(void);
 extern void _savegpr_21(void);
 extern void fn_8010B180(void);
-extern void fn_801789D8(void);
+extern void battle_evalDropTable(void);
 extern void kpad_getClampData(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -81,7 +81,7 @@ lbl_fn_800FFE68_00000094:
     li r28, 0x0
     li r4, 0x0
     lis r5, 0x44
-    bl fn_801789D8
+    bl battle_evalDropTable
     lfs f3, lbl_80881478
     mr r31, r3
     lfs f0, lbl_80881494

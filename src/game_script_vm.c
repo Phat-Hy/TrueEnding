@@ -53,7 +53,7 @@ extern void fn_8068B770(void);
 extern void fn_8068BC30(void);
 extern void fn_8068BD60(void);
 extern void fn_8068C240(void);
-extern void fn_806920C0(void);
+extern void std_string_append(void);
 extern void msl_releaseRefCount(void);
 extern void runtime_registerStaticObject(void);
 extern void __destroy_arr(void);
@@ -442,7 +442,7 @@ lbl_fn_80242A8C_0000042C:
 lbl_fn_80242A8C_00000448:
     mr r3, r19
     mr r4, r20
-    bl fn_806920C0
+    bl std_string_append
     lwz r3, 0x18(r1)
     slwi r0, r14, 2
     lwz r3, 0x0(r3)
@@ -839,7 +839,7 @@ lbl_fn_80242FF4_00000990:
 lbl_fn_80242FF4_000009AC:
     mr r3, r30
     mr r4, r29
-    bl fn_806920C0
+    bl std_string_append
     lwz r3, 0x18(r1)
     slwi r0, r31, 2
     lwz r3, 0x0(r3)

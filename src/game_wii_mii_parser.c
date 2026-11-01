@@ -9,7 +9,7 @@ extern void vec3_copy(void);
 extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011220(void);
+extern void math_fabsf(void);
 extern void math_wrapAngle(void);
 extern void fn_80063484(void);
 extern void mem_realloc(void);
@@ -45,9 +45,9 @@ extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
 extern void shop_canPurchaseItem(void);
-extern void fn_80158CA4(void);
+extern void shop_loadCatalogItem(void);
 extern void party_configureMemberSlot(void);
-extern void fn_8015EB2C(void);
+extern void party_evalFormationState(void);
 extern void fn_8016D454(void);
 extern void battle_applyStatusEffect(void);
 extern void fn_8016F67C(void);
@@ -1620,7 +1620,7 @@ lbl_fn_80566FB8_00001420:
     cmpwi r0, 0x0
     beq lbl_fn_80566FB8_000014D8
     mr r3, r31
-    bl fn_80158CA4
+    bl shop_loadCatalogItem
     cmpwi r3, 0x0
     beq lbl_fn_80566FB8_000014D8
     lwz r0, 0x594(r31)
@@ -1645,7 +1645,7 @@ lbl_fn_80566FB8_00001420:
     stw r0, 0x594(r31)
     b lbl_fn_80566FB8_000014D8
 lbl_fn_80566FB8_00001498:
-    bl fn_8015EB2C
+    bl party_evalFormationState
     cmpwi r3, 0x0
     bne lbl_fn_80566FB8_000014B0
     mr r3, r31
@@ -1921,7 +1921,7 @@ lbl_fn_80567600_00001828:
     bl phys_scaleGravity
     fmr f31, f1
     fmr f1, f29
-    bl fn_80011220
+    bl math_fabsf
     fcmpo cr0, f1, f31
     cror eq, gt, eq
     bne lbl_fn_80567600_000019C8
@@ -1936,7 +1936,7 @@ lbl_fn_80567600_00001880:
     bl phys_scaleGravity
     fmr f31, f1
     fmr f1, f29
-    bl fn_80011220
+    bl math_fabsf
     fcmpo cr0, f1, f31
     cror eq, gt, eq
     bne lbl_fn_80567600_000019C8

@@ -12,7 +12,7 @@ extern void talk_parseDialogue(void);
 extern void talk_parseDialogueTokens(void);
 extern void talk_copyUtf16String(void);
 extern void fn_8006BA8C(void);
-extern void fn_8006BB6C(void);
+extern void boss_triggerEventAction(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void str_parseInt(void);
@@ -22,7 +22,7 @@ extern void cam_evalControllerSpline(void);
 extern void cam_evalLookAtMatrix(void);
 extern void fn_80205BE8(void);
 extern void fn_8020F064(void);
-extern void fn_8046DC5C(void);
+extern void boss_loadWeakpointResource(void);
 extern void boss_bindArenaInteractions(void);
 extern void strcmp(void);
 extern void strncmp(void);
@@ -82,7 +82,7 @@ void fn_8020EE58(void);
 void fn_8020EE60(void);
 void fn_8020EE8C(void);
 void rand_scaleRangeInt(void);
-void fn_8020EF4C(void);
+void rand_stepEntropy(void);
 void random_generateValue(void);
 
 asm void fn_8020D688(void)
@@ -123,13 +123,13 @@ lbl_fn_8020D688_0000006C:
     addi r5, r1, 0xc
     addi r4, r26, 0x2f
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     mr r31, r3
     lwz r3, lbl_8087F518
     addi r4, r26, 0x58
     addi r5, r1, 0x8
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lis r4, lbl_807772D0@ha
     li r26, 0x0
     addi r4, r4, lbl_807772D0@l
@@ -490,7 +490,7 @@ lbl_fn_8020DB58_0000055C:
     addi r4, r1, 0x10
     addi r5, r1, 0x8
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     stw r28, 0x110(r1)
     mr r20, r3
     lwz r19, 0x8(r1)
@@ -758,7 +758,7 @@ asm void fn_8020DF88(void)
     li r14, 0x0
     stw r14, 0x28(r1)
     lwz r3, lbl_8087F518
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lis r4, lbl_807772D0@ha
     stw r3, 0x770(r1)
     addi r4, r4, lbl_807772D0@l
@@ -1707,7 +1707,7 @@ lbl_fn_8020EB0C_000016CC:
     bne lbl_fn_8020EB0C_00001624
     mr r3, r31
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
 lbl_fn_8020EB0C_000016E8:
     lmw r27, 0xc6c(r1)
     lwz r0, 0xc84(r1)
@@ -1865,14 +1865,14 @@ asm void rand_scaleRangeInt(void)
     blr
 }
 
-asm void fn_8020EF4C(void)
+asm void rand_stepEntropy(void)
 {
     nofralloc
     cmpwi r3, 0x0
-    bne lbl_fn_8020EF4C_000018D4
+    bne lbl_rand_stepEntropy_000018D4
     li r3, 0x0
     blr
-lbl_fn_8020EF4C_000018D4:
+lbl_rand_stepEntropy_000018D4:
     lwz r4, 0xa8(r3)
     li r3, 0x2
     subi r4, r4, 0x8

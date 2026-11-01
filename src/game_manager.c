@@ -22,7 +22,7 @@ extern void mem_free(void);
 extern s32 atn_Model_findBoneIndex(void*, u32, int);
 extern void compass_findWaypointIndex(void);
 extern void fn_800929C0(void);
-extern void fn_80094958(void);
+extern void target_registerCandidate(void);
 extern void fn_80097A9C(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
@@ -32,13 +32,13 @@ extern void str_findChar(void);
 extern void fn_8011E81C(void);
 extern void fn_80129930(void);
 extern void fn_80129954(void);
-extern void fn_80129A48(void);
+extern void path_resetWaypointVelocity(void);
 extern void fn_8012ABD0(void);
 extern void fn_8012ABF4(void);
 extern void fn_8012AC18(void);
 extern void fn_8012AC40(void);
 extern void dialog_selectChoice(void);
-extern void fn_8014EEC4(void);
+extern void dialog_activateChoiceWindow(void);
 extern void fn_8016E5F0(void);
 extern void fn_80176DFC(void);
 extern void fn_802096A8(void);
@@ -84,7 +84,7 @@ void fn_80010490(void);
 void fn_800109E0(void);
 void fn_80010B68(void);
 void vec3_toEulerAngles(void);
-void fn_80011220(void);
+void math_fabsf(void);
 void fn_8001122C(void);
 void fn_800112E0(void);
 void mtx_multVec(void *v, const void *m);
@@ -114,7 +114,7 @@ u32 fn_80012A14(void);
 void fn_80012A1C(void);
 void fn_80012AC4(void);
 void fn_80012C3C(void);
-void fn_80012C88(void);
+void vec3_addAssign(void);
 void fn_80012CBC(void);
 void fn_80012CE4(void);
 void fn_80012D0C(void);
@@ -1328,7 +1328,7 @@ lbl_vec3_toEulerAngles_000010C8:
     blr
 }
 
-asm void fn_80011220(void)
+asm void math_fabsf(void)
 {
     nofralloc
     fabs f0, f1
@@ -3019,7 +3019,7 @@ lbl_fn_8001282C_00002724:
     cmpwi r0, 0x0
     beqlr
     li r4, 0x0
-    b fn_8014EEC4
+    b dialog_activateChoiceWindow
 lbl_fn_8001282C_00002748:
     cmpwi r5, -0x1
     beq lbl_fn_8001282C_00002788
@@ -3361,7 +3361,7 @@ lbl_fn_80012C3C_00002B58:
     blr
 }
 
-asm void fn_80012C88(void)
+asm void vec3_addAssign(void)
 {
     nofralloc
     lfs f1, 0x0(r3)
@@ -3423,7 +3423,7 @@ lbl_fn_80012D0C_00002C04:
     lwz r3, 0x1c(r3)
     lwz r3, 0x48(r3)
     addi r3, r3, 0x10d8
-    b fn_80129A48
+    b path_resetWaypointVelocity
     blr
 }
 
@@ -3528,7 +3528,7 @@ lbl_fn_80012D34_00002C80:
     beq lbl_fn_80012D34_00002DA8
 lbl_fn_80012D34_00002D94:
     fmr f1, f29
-    bl fn_80011220
+    bl math_fabsf
     lfs f0, lbl_80880680
     fcmpo cr0, f1, f0
     bge lbl_fn_80012D34_00002DB8
@@ -3677,7 +3677,7 @@ lbl_fn_80012D34_00002F00:
     bl mtx_multVec
     addi r3, r1, 0x11c
     addi r4, r1, 0x110
-    bl fn_80012C88
+    bl vec3_addAssign
     mr r4, r31
     addi r3, r1, 0x50
     bl mtx_getTranslation
@@ -3691,7 +3691,7 @@ lbl_fn_80012D34_00002F00:
 lbl_fn_80012D34_00002FF4:
     mr r4, r28
     addi r3, r1, 0x128
-    bl fn_80012C88
+    bl vec3_addAssign
 lbl_fn_80012D34_00003000:
     lis r4, lbl_807C7030@ha
     mr r3, r30
@@ -3729,7 +3729,7 @@ lbl_fn_80012D34_00003000:
     bl mtx_multVec
     addi r3, r1, 0x104
     addi r4, r1, 0xf8
-    bl fn_80012C88
+    bl vec3_addAssign
     mr r4, r31
     addi r3, r1, 0x20
     bl mtx_getTranslation
@@ -3770,7 +3770,7 @@ lbl_fn_80012D34_000030D0:
 lbl_fn_80012D34_00003120:
     mr r4, r28
     addi r3, r1, 0xe0
-    bl fn_80012C88
+    bl vec3_addAssign
     lis r4, lbl_807C7030@ha
     mr r3, r30
     addi r4, r4, lbl_807C7030@l
@@ -4507,7 +4507,7 @@ lbl_fn_80013558_00003A3C:
     lwz r4, 0x50(r19)
     add r5, r0, r31
     addi r3, r3, 0xb0
-    bl fn_80094958
+    bl target_registerCandidate
     addi r19, r19, 0x4
     addi r16, r16, 0x1
     addi r31, r31, 0x10

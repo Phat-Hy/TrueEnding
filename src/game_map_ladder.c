@@ -17,14 +17,14 @@ extern void fn_80101524(void);
 extern void fn_801076D0(void);
 extern void fn_80107798(void);
 extern void fn_80107860(void);
-extern void fn_8012476C(void);
-extern void fn_8013310C(void);
+extern void player_testStatusCondition(void);
+extern void boss_enablePartStatusFlags(void);
 extern void actor_testBitFlag(void);
 extern void npc_updateTalkInteraction(void);
 extern void inventory_unequipItem(void);
 extern void fn_80154344(void);
 extern void inventory_calcTotalStats(void);
-extern void fn_80164DCC(void);
+extern void party_evalTacticCondition(void);
 extern void debuff_clearStatus(void);
 extern void fn_801AD34C(void);
 extern void fn_8037D49C(void);
@@ -844,7 +844,7 @@ asm void fn_8018EEC4(void)
     stw r0, 0x560(r6)
     lwz r3, 0x4(r3)
     addi r3, r3, 0x7d4
-    bl fn_8013310C
+    bl boss_enablePartStatusFlags
     lwz r3, 0x4(r30)
     li r0, 0x0
     stw r0, 0xf94(r3)
@@ -883,7 +883,7 @@ lbl_fn_8018EEC4_000009DC:
 lbl_fn_8018EEC4_000009F4:
     lwz r3, 0x4(r30)
     li r4, 0x1
-    bl fn_80164DCC
+    bl party_evalTacticCondition
     lwz r5, 0x4(r30)
     addi r3, r1, 0x28
     lfs f0, lbl_80881F74
@@ -957,7 +957,7 @@ asm void fn_8018F090(void)
     lwz r3, lbl_8087F0A8
     li r4, 0x22
     addi r3, r3, 0x48c
-    bl fn_8012476C
+    bl player_testStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_8018F090_00000B70
     lfs f3, 0x18(r31)
@@ -1604,7 +1604,7 @@ asm void fn_8018F970(void)
     stw r0, 0x560(r6)
     lwz r3, 0x4(r3)
     addi r3, r3, 0x7d4
-    bl fn_8013310C
+    bl boss_enablePartStatusFlags
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)
     rlwinm r0, r0, 0, 27, 25

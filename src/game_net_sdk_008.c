@@ -15,7 +15,7 @@ extern void fn_806A6600(void);
 extern void fn_806A66D0(void);
 extern void fn_806A6740(void);
 extern void fn_806A7370(void);
-extern void fn_806A7400(void);
+extern void net_memFree(void);
 extern void net_formatLog(void);
 extern void fn_806EA840(void);
 extern void fn_806EA850(void);
@@ -54,7 +54,7 @@ void pad_03_806A8D84_text(void);
 void fn_806A8D90(void);
 void fn_806A8DB0(void);
 void net_getSocket(void);
-void fn_806A8E70(void);
+void net_getInterfaceHandle(void);
 void fn_806A8E80(void);
 void fn_806A8F20(void);
 void fn_806A8F40(void);
@@ -62,7 +62,7 @@ void fn_806A8FA0(void);
 void fn_806A8FB0(void);
 void fn_806A8FC0(void);
 void fn_806A8FD0(void);
-void fn_806A8FE0(void);
+u32 fn_806A8FE0(void);
 void fn_806A8FF0(void);
 void fn_806A9000(void);
 void fn_806A9170(void);
@@ -126,7 +126,7 @@ asm void fn_806A8DB0(void)
     beq lbl_fn_806A8DB0_0000009C
     li r3, 0x5
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
     stw r31, 0x0(r30)
 lbl_fn_806A8DB0_0000009C:
     lwz r0, 0x14(r1)
@@ -153,7 +153,7 @@ lbl_net_getSocket_000000DC:
     blr
 }
 
-asm void fn_806A8E70(void)
+asm void net_getInterfaceHandle(void)
 {
     nofralloc
     lis r3, lbl_8085FF44@ha
@@ -261,11 +261,9 @@ void fn_806A8FC0(void) {
 void fn_806A8FD0(void) {
 }
 
-asm void fn_806A8FE0(void)
+u32 fn_806A8FE0(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 void fn_806A8FF0(void) {
@@ -1932,11 +1930,11 @@ lbl_fn_806AA690_000019EC:
     mr r4, r28
     li r3, 0x3
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
     mr r4, r29
     li r3, 0x3
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
 lbl_fn_806AA690_00001A0C:
     lis r3, lbl_8085FF58@ha
     lwz r31, 0x1c(r1)

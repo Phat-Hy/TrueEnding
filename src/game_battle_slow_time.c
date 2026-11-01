@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void ui_destroyWidget(void);
 extern void collision_queryGeometry(void);
 extern void fn_8004FF58(void);
-extern void fn_80058078(void);
+extern void mission_clearPathTracker(void);
 extern void mission_isObjectiveActive(void);
 extern void mission_updateObjectiveTarget(void);
 extern void talk_formatQuotedString(void);
@@ -46,7 +46,7 @@ extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
 extern void barrier_bindFieldAnimation(void);
 extern void dungeon_updateBarrierField(void);
-extern void fn_803EDB18(void);
+extern void barrier_testFieldCollision(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
@@ -372,7 +372,7 @@ lbl_fn_804070B4_00000378:
     bl talk_formatQuotedString
     mr r4, r3
     addi r3, r29, 0x894
-    bl fn_80058078
+    bl mission_clearPathTracker
     b lbl_fn_804070B4_0000047C
 lbl_fn_804070B4_000003A4:
     mr r3, r30
@@ -1717,10 +1717,10 @@ asm void fn_80408520(void)
     bne lbl_fn_80408520_0000169C
     mr r3, r31
     addi r4, r31, 0xf4
-    bl fn_803EDB18
+    bl barrier_testFieldCollision
     mr r3, r31
     addi r4, r31, 0x4c4
-    bl fn_803EDB18
+    bl barrier_testFieldCollision
     li r3, 0x1
     b lbl_fn_80408520_000016A0
 lbl_fn_80408520_0000169C:

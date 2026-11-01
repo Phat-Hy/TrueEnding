@@ -13,9 +13,9 @@ extern void atn_LH_Binary_destructor(void);
 extern void fn_8004318C(void);
 extern void fn_800431F4(void);
 extern void boss_triggerEventSequence(void);
-extern void fn_8006AD24(void);
-extern void fn_8006B2D8(void);
-extern void fn_8006CA80(void);
+extern void boss_lookupActionEntry(void);
+extern void boss_parseStateCondition(void);
+extern void gmk_LoadHandle_constructor(void);
 extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800C3094(void);
@@ -29,7 +29,7 @@ extern void atn_Task_setActive(void);
 extern void fn_800DC500(void);
 extern void fn_80117E34(void);
 extern void fn_80183D00(void);
-extern void fn_8021771C(void);
+extern void task_findNextReady(void);
 extern void fn_8035E858(void);
 extern void fn_8035F33C(void);
 extern void fn_80366364(void);
@@ -40,7 +40,7 @@ extern void fn_803B3C10(void);
 extern void fn_803CD918(void);
 extern void fn_803CE160(void);
 extern void fn_80470364(void);
-extern void fn_80470528(void);
+extern void boss_releaseLaserTarget(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_8049D52C(void);
@@ -242,11 +242,11 @@ asm void fn_803BEC40(void)
     lis r3, lbl_8078BC48@ha
     li r21, 0x0
     addi r3, r3, lbl_8078BC48@l
-    lis r4, fn_8006CA80@ha
+    lis r4, gmk_LoadHandle_constructor@ha
     lis r5, atn_LH_Binary_destructor@ha
     stw r3, 0x0(r17)
     addi r3, r17, 0x4c
-    addi r4, r4, fn_8006CA80@l
+    addi r4, r4, gmk_LoadHandle_constructor@l
     stw r21, 0x48(r17)
     addi r5, r5, atn_LH_Binary_destructor@l
     li r6, 0x8
@@ -616,7 +616,7 @@ lbl_fn_803BEC40_0000071C:
     bl actor_dispatchMessage
     addi r3, r1, 0xa4
     addi r4, r1, 0x80
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0x80(r1)
     srwi. r0, r0, 31
     beq lbl_fn_803BEC40_00000784
@@ -782,7 +782,7 @@ lbl_fn_803BEC40_0000090C:
     bl actor_dispatchMessage
     mr r3, r22
     mr r4, r24
-    bl fn_8006AD24
+    bl boss_lookupActionEntry
     lwz r0, 0x68(r1)
     srwi. r0, r0, 31
     beq lbl_fn_803BEC40_000009D8
@@ -849,7 +849,7 @@ lbl_fn_803BEC40_000009F4:
     bl actor_dispatchMessage
     mr r3, r22
     mr r4, r24
-    bl fn_8006AD24
+    bl boss_lookupActionEntry
     lwz r0, 0x5c(r1)
     srwi. r0, r0, 31
     beq lbl_fn_803BEC40_00000AD8
@@ -999,7 +999,7 @@ lbl_fn_803BEC40_00000CC0:
     mr r3, r18
     mr r4, r19
     mr r5, r20
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     stw r3, 0x144(r17)
     beq lbl_fn_803BEC40_00000CF8
@@ -1271,7 +1271,7 @@ lbl_fn_803BF9D4_00001004:
     lwz r3, 0x5514(r5)
     lwz r4, 0x5518(r5)
     lwz r5, 0x551c(r5)
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     beq lbl_fn_803BF9D4_0000107C
     lwz r0, 0x44(r3)
@@ -1371,7 +1371,7 @@ lbl_fn_803BF9D4_0000118C:
     bl __destroy_new_array
     addic. r3, r30, 0x994
     beq lbl_fn_803BF9D4_000011B0
-    bl fn_80470528
+    bl boss_releaseLaserTarget
 lbl_fn_803BF9D4_000011B0:
     addic. r0, r30, 0x188
     beq lbl_fn_803BF9D4_000011D4

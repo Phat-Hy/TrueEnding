@@ -50,15 +50,15 @@ extern void fn_804EAFD4(void);
 extern void fn_804EB1B0(void);
 extern void fn_804EB270(void);
 extern void fn_804EB2DC(void);
-extern void fn_804EB874(void);
+extern void net_getLocalPlayerAid(void);
 extern void fn_804FA94C(void);
 extern void fn_804FB474(void);
 extern void fn_804FC014(void);
 extern void fn_8050A4E4(void);
 extern void fn_8050BA6C(void);
-extern void fn_806A8E70(void);
-extern void fn_806B0DE0(void);
-extern void fn_806B1250(void);
+extern void net_getInterfaceHandle(void);
+extern void net_isSessionActive(void);
+extern void net_isSessionConnected(void);
 extern void fn_806B3CC0(void);
 
 /* External data declarations */
@@ -454,7 +454,7 @@ lbl_fn_804BDD68_000004D0:
     li r3, 0x1
     b lbl_fn_804BDD68_00000528
 lbl_fn_804BDD68_00000508:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804BDD68_00000528
 lbl_fn_804BDD68_00000510:
     lwz r0, 0x1f8(r4)
@@ -463,7 +463,7 @@ lbl_fn_804BDD68_00000510:
     li r3, 0x1
     b lbl_fn_804BDD68_00000528
 lbl_fn_804BDD68_00000524:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804BDD68_00000528:
     cmpwi r3, 0x1
     beq lbl_fn_804BDD68_00000538
@@ -670,7 +670,7 @@ lbl_fn_804BDD68_000007AC:
     li r0, 0x0
     b lbl_fn_804BDD68_00000858
 lbl_fn_804BDD68_00000848:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804BDD68_00000858
 lbl_fn_804BDD68_00000854:
@@ -720,7 +720,7 @@ lbl_fn_804BDD68_000008A8:
     li r0, 0x0
     b lbl_fn_804BDD68_00000904
 lbl_fn_804BDD68_000008F4:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804BDD68_00000904
 lbl_fn_804BDD68_00000900:
@@ -950,7 +950,7 @@ lbl_fn_804BE4A4_00000BE0:
     li r3, 0x1
     b lbl_fn_804BE4A4_00000C38
 lbl_fn_804BE4A4_00000C18:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804BE4A4_00000C38
 lbl_fn_804BE4A4_00000C20:
     lwz r0, 0x1f8(r4)
@@ -959,7 +959,7 @@ lbl_fn_804BE4A4_00000C20:
     li r3, 0x1
     b lbl_fn_804BE4A4_00000C38
 lbl_fn_804BE4A4_00000C34:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804BE4A4_00000C38:
     cmpwi r3, 0x1
     beq lbl_fn_804BE4A4_00000C48
@@ -985,7 +985,7 @@ asm void fn_804BE610(void)
     mr r27, r3
     lwz r29, lbl_8087EF70
     lwz r3, lbl_8087F610
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     mr r31, r3
     lwz r3, lbl_8087F610
     bl fn_804EB1B0
@@ -1070,7 +1070,7 @@ lbl_fn_804BE610_00000D74:
     li r3, 0x1
     b lbl_fn_804BE610_00000DD4
 lbl_fn_804BE610_00000DB4:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804BE610_00000DD4
 lbl_fn_804BE610_00000DBC:
     lwz r0, 0x1f8(r4)
@@ -1079,7 +1079,7 @@ lbl_fn_804BE610_00000DBC:
     li r3, 0x1
     b lbl_fn_804BE610_00000DD4
 lbl_fn_804BE610_00000DD0:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804BE610_00000DD4:
     cmpwi r3, 0x1
     bne lbl_fn_804BE610_00000E2C
@@ -1206,7 +1206,7 @@ lbl_fn_804BE610_00000F5C:
     li r3, 0x1
     b lbl_fn_804BE610_00000FC4
 lbl_fn_804BE610_00000FA4:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804BE610_00000FC4
 lbl_fn_804BE610_00000FAC:
     lwz r0, 0x1f8(r4)
@@ -1215,7 +1215,7 @@ lbl_fn_804BE610_00000FAC:
     li r3, 0x1
     b lbl_fn_804BE610_00000FC4
 lbl_fn_804BE610_00000FC0:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804BE610_00000FC4:
     cmpwi r3, 0x1
     bne lbl_fn_804BE610_00000FDC
@@ -1299,7 +1299,7 @@ lbl_fn_804BE610_000010AC:
     li r3, 0x1
     b lbl_fn_804BE610_000010F4
 lbl_fn_804BE610_000010D4:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804BE610_000010F4
 lbl_fn_804BE610_000010DC:
     lwz r0, 0x1f8(r4)
@@ -1308,7 +1308,7 @@ lbl_fn_804BE610_000010DC:
     li r3, 0x1
     b lbl_fn_804BE610_000010F4
 lbl_fn_804BE610_000010F0:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804BE610_000010F4:
     cmpw r30, r3
     blt lbl_fn_804BE610_00000FFC
@@ -1317,11 +1317,11 @@ lbl_fn_804BE610_00001100:
     cmpwi r0, 0x0
     beq lbl_fn_804BE610_00001194
     lwz r3, lbl_8087F610
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     cmpwi r3, 0x0
     beq lbl_fn_804BE610_00001138
     lwz r3, lbl_8087F610
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     lwz r0, 0xd0(r3)
     extrwi. r0, r0, 1, 3
     bne lbl_fn_804BE610_00001158
@@ -1439,7 +1439,7 @@ lbl_fn_804BE610_00001284:
 lbl_fn_804BE610_000012C4:
     lwz r29, 0xe5c(r27)
     lwz r3, lbl_8087F610
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     lwz r0, 0xd0(r3)
     rlwimi r0, r29, 6, 22, 25
     stw r0, 0xd0(r3)
@@ -1482,7 +1482,7 @@ lbl_fn_804BE610_00001330:
 lbl_fn_804BE610_00001364:
     lwz r29, 0xe5c(r27)
     lwz r3, lbl_8087F610
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     lwz r0, 0xd0(r3)
     rlwimi r0, r29, 6, 22, 25
     stw r0, 0xd0(r3)
@@ -1694,7 +1694,7 @@ lbl_fn_804BEDB8_00001620:
     li r3, 0x1
     b lbl_fn_804BEDB8_00001684
 lbl_fn_804BEDB8_00001664:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804BEDB8_00001684
 lbl_fn_804BEDB8_0000166C:
     lwz r0, 0x1f8(r4)
@@ -1703,7 +1703,7 @@ lbl_fn_804BEDB8_0000166C:
     li r3, 0x1
     b lbl_fn_804BEDB8_00001684
 lbl_fn_804BEDB8_00001680:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804BEDB8_00001684:
     cmpwi r3, 0x1
     bgt lbl_fn_804BEDB8_000016A0
@@ -1811,7 +1811,7 @@ lbl_fn_804BEDB8_000017B8:
     li r3, 0x1
     b lbl_fn_804BEDB8_00001804
 lbl_fn_804BEDB8_00001800:
-    bl fn_806B0DE0
+    bl net_isSessionActive
 lbl_fn_804BEDB8_00001804:
     mr r28, r3
     b lbl_fn_804BEDB8_00001828
@@ -1822,7 +1822,7 @@ lbl_fn_804BEDB8_0000180C:
     li r3, 0x1
     b lbl_fn_804BEDB8_00001824
 lbl_fn_804BEDB8_00001820:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804BEDB8_00001824:
     mr r28, r3
 lbl_fn_804BEDB8_00001828:
@@ -1963,7 +1963,7 @@ lbl_fn_804BEDB8_000019D8:
     li r3, 0x1
     b lbl_fn_804BEDB8_00001A20
 lbl_fn_804BEDB8_00001A00:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804BEDB8_00001A20
 lbl_fn_804BEDB8_00001A08:
     lwz r0, 0x1f8(r4)
@@ -1972,7 +1972,7 @@ lbl_fn_804BEDB8_00001A08:
     li r3, 0x1
     b lbl_fn_804BEDB8_00001A20
 lbl_fn_804BEDB8_00001A1C:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804BEDB8_00001A20:
     cmpw r31, r3
     blt lbl_fn_804BEDB8_00001928
@@ -1981,11 +1981,11 @@ lbl_fn_804BEDB8_00001A2C:
     cmpwi r0, 0x0
     beq lbl_fn_804BEDB8_00001AC0
     lwz r3, lbl_8087F610
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     cmpwi r3, 0x0
     beq lbl_fn_804BEDB8_00001A64
     lwz r3, lbl_8087F610
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     lwz r0, 0xd0(r3)
     extrwi. r0, r0, 1, 3
     bne lbl_fn_804BEDB8_00001A84

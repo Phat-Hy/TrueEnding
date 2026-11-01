@@ -17,12 +17,12 @@ extern void fn_800EFE3C(void);
 extern void hurtbox_processHitDamage(void);
 extern void enemy_evalAnimTrack(void);
 extern void fn_80133FBC(void);
-extern void fn_80134134(void);
+extern void boss_findPartById(void);
 extern void fn_80134168(void);
-extern void fn_801346C8(void);
+extern void boss_testAiFlag(void);
 extern void fn_8015E1B8(void);
 extern void battle_canTargetActor(void);
-extern void fn_801789D8(void);
+extern void battle_evalDropTable(void);
 extern void event_findEntryById(void);
 extern void task_mapIdToQueue(void);
 extern void fn_8021E48C(void);
@@ -890,7 +890,7 @@ asm void fn_8010CA3C(void)
     fsubs f1, f1, f2
     fdivs f0, f1, f0
     fadds f31, f31, f0
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     beq lbl_fn_8010CA3C_00000AA8
     lfs f0, lbl_808815C0
@@ -966,7 +966,7 @@ lbl_fn_8010CB2C_00000B8C:
     mr r3, r30
     li r4, 0x4fbf
     li r5, 0x0
-    bl fn_801789D8
+    bl battle_evalDropTable
     cmpwi r3, 0x0
     beq lbl_fn_8010CB2C_00000BAC
     lfs f0, lbl_80881510
@@ -1120,7 +1120,7 @@ lbl_fn_8010CD3C_00000D70:
     beq lbl_fn_8010CD3C_00000F04
     addi r3, r5, 0x7d4
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_8010CD3C_00000F04
     bl rand
@@ -1144,7 +1144,7 @@ lbl_fn_8010CD3C_00000DCC:
     addi r3, r5, 0x7d4
     li r4, 0x4
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_8010CD3C_00000F04
     lwz r3, 0x5c(r31)
@@ -1204,7 +1204,7 @@ lbl_fn_8010CD3C_00000EB0:
     addi r3, r5, 0x7d4
     li r4, 0x5
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_8010CD3C_00000F04
     bl rand

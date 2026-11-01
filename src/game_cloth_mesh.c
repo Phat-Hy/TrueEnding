@@ -27,7 +27,7 @@ extern void enemy_updateCombatBehavior(void);
 extern void fn_8012F440(void);
 extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_801426A4(void);
+extern void quest_evaluateMilestoneData(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015C3A8(void);
 extern void party_configureMemberSlot(void);
@@ -522,7 +522,7 @@ lbl_fn_8027B21C_000005AC:
     mr r3, r29
     addi r4, r1, 0xc8
     fmuls f2, f0, f30
-    bl fn_801426A4
+    bl quest_evaluateMilestoneData
     b lbl_fn_8027B21C_000005EC
 lbl_fn_8027B21C_000005C8:
     cmpwi r0, 0x6

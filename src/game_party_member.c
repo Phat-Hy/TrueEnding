@@ -2,11 +2,11 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_800185B4(void);
+extern void battle_findTargetSlotById(void);
 extern void mem_alloc(void);
 extern void atn_Anim_getLayerTrack(void);
-extern void fn_801059F8(void);
-extern void fn_80105B3C(void);
+extern void colli_findDynamicSlot(void);
+extern void colli_findStaticSlot(void);
 extern void actor_setState(void);
 extern void fn_801880D0(void);
 extern void fn_80188BD8(void);
@@ -44,7 +44,7 @@ void fn_801603CC(void);
 void fn_801606DC(void);
 void fn_80160F54(void);
 void fn_8016125C(void);
-void fn_80161570(void);
+void party_updateMemberCoords(void);
 void fn_80161880(void);
 
 asm void fn_80160170(void)
@@ -105,7 +105,7 @@ lbl_fn_80160170_000000B0:
     beq lbl_fn_80160170_000000D8
     mr r4, r29
     mr r5, r30
-    bl fn_800185B4
+    bl battle_findTargetSlotById
     mr r28, r3
     b lbl_fn_80160170_000000DC
 lbl_fn_80160170_000000D8:
@@ -201,10 +201,10 @@ asm void fn_8016034C(void)
     beq lbl_fn_8016034C_00000214
     mr r3, r0
     mr r4, r31
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r31
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_fn_8016034C_00000214:
     lwz r0, 0x12a8(r31)
     lis r4, lbl_807C7030@ha
@@ -1465,7 +1465,7 @@ lbl_fn_8016125C_000013E8:
     blr
 }
 
-asm void fn_80161570(void)
+asm void party_updateMemberCoords(void)
 {
     nofralloc
     stwu r1, -0x80(r1)
@@ -1492,7 +1492,7 @@ asm void fn_80161570(void)
     bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
-    beq lbl_fn_80161570_00001484
+    beq lbl_party_updateMemberCoords_00001484
     fmr f1, f30
     mr r4, r29
     fmr f2, f31
@@ -1501,13 +1501,13 @@ asm void fn_80161570(void)
     mr r7, r28
     bl fn_801C3DCC
     mr r30, r3
-lbl_fn_80161570_00001484:
+lbl_party_updateMemberCoords_00001484:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    bne lbl_fn_80161570_00001514
+    bne lbl_party_updateMemberCoords_00001514
     lwz r0, 0xf80(r29)
     cmpwi r0, 0x0
-    bne lbl_fn_80161570_000014BC
+    bne lbl_party_updateMemberCoords_000014BC
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x2c(r1)
@@ -1515,8 +1515,8 @@ lbl_fn_80161570_00001484:
     lwz r0, 0x8(r5)
     stw r3, 0x30(r1)
     stw r0, 0x34(r1)
-    b lbl_fn_80161570_000014D8
-lbl_fn_80161570_000014BC:
+    b lbl_party_updateMemberCoords_000014D8
+lbl_party_updateMemberCoords_000014BC:
     addi r3, r31, 0x10d4
     lwz r5, 0x10d4(r31)
     lwz r4, 0x4(r3)
@@ -1524,7 +1524,7 @@ lbl_fn_80161570_000014BC:
     stw r5, 0x2c(r1)
     stw r4, 0x30(r1)
     stw r0, 0x34(r1)
-lbl_fn_80161570_000014D8:
+lbl_party_updateMemberCoords_000014D8:
     lwz r5, 0x2c(r1)
     addi r3, r1, 0x8
     lwz r4, 0x30(r1)
@@ -1534,26 +1534,26 @@ lbl_fn_80161570_000014D8:
     stw r0, 0x10(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_80161570_00001514
+    beq lbl_party_updateMemberCoords_00001514
     lwz r3, 0xf80(r29)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_80161570_00001514:
+lbl_party_updateMemberCoords_00001514:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    beq lbl_fn_80161570_000016C8
+    beq lbl_party_updateMemberCoords_000016C8
     cmpwi r0, 0x8
-    beq lbl_fn_80161570_0000152C
+    beq lbl_party_updateMemberCoords_0000152C
     stw r0, 0x564(r29)
-lbl_fn_80161570_0000152C:
+lbl_party_updateMemberCoords_0000152C:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    bne lbl_fn_80161570_000016C8
+    bne lbl_party_updateMemberCoords_000016C8
     lwz r0, 0xf80(r29)
     cmpwi r0, 0x0
-    bne lbl_fn_80161570_00001564
+    bne lbl_party_updateMemberCoords_00001564
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x38(r1)
@@ -1561,8 +1561,8 @@ lbl_fn_80161570_0000152C:
     lwz r0, 0x8(r5)
     stw r3, 0x3c(r1)
     stw r0, 0x40(r1)
-    b lbl_fn_80161570_00001580
-lbl_fn_80161570_00001564:
+    b lbl_party_updateMemberCoords_00001580
+lbl_party_updateMemberCoords_00001564:
     addi r3, r31, 0x10e0
     lwz r5, 0x10e0(r31)
     lwz r4, 0x4(r3)
@@ -1570,7 +1570,7 @@ lbl_fn_80161570_00001564:
     stw r5, 0x38(r1)
     stw r4, 0x3c(r1)
     stw r0, 0x40(r1)
-lbl_fn_80161570_00001580:
+lbl_party_updateMemberCoords_00001580:
     lwz r5, 0x38(r1)
     addi r3, r1, 0x20
     lwz r4, 0x3c(r1)
@@ -1580,26 +1580,26 @@ lbl_fn_80161570_00001580:
     stw r0, 0x28(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_80161570_000015BC
+    beq lbl_party_updateMemberCoords_000015BC
     lwz r3, 0xf80(r29)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_80161570_000015BC:
+lbl_party_updateMemberCoords_000015BC:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    beq lbl_fn_80161570_00001698
+    beq lbl_party_updateMemberCoords_00001698
     cmpwi r0, 0x8
-    beq lbl_fn_80161570_000015D4
+    beq lbl_party_updateMemberCoords_000015D4
     stw r0, 0x564(r29)
-lbl_fn_80161570_000015D4:
+lbl_party_updateMemberCoords_000015D4:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    bne lbl_fn_80161570_00001698
+    bne lbl_party_updateMemberCoords_00001698
     lwz r0, 0xf80(r29)
     cmpwi r0, 0x0
-    bne lbl_fn_80161570_0000160C
+    bne lbl_party_updateMemberCoords_0000160C
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x44(r1)
@@ -1607,8 +1607,8 @@ lbl_fn_80161570_000015D4:
     lwz r0, 0x8(r5)
     stw r3, 0x48(r1)
     stw r0, 0x4c(r1)
-    b lbl_fn_80161570_00001628
-lbl_fn_80161570_0000160C:
+    b lbl_party_updateMemberCoords_00001628
+lbl_party_updateMemberCoords_0000160C:
     addi r3, r31, 0x10ec
     lwz r5, 0x10ec(r31)
     lwz r4, 0x4(r3)
@@ -1616,7 +1616,7 @@ lbl_fn_80161570_0000160C:
     stw r5, 0x44(r1)
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
-lbl_fn_80161570_00001628:
+lbl_party_updateMemberCoords_00001628:
     lwz r5, 0x44(r1)
     addi r3, r1, 0x14
     lwz r4, 0x48(r1)
@@ -1626,13 +1626,13 @@ lbl_fn_80161570_00001628:
     stw r0, 0x1c(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_80161570_00001664
+    beq lbl_party_updateMemberCoords_00001664
     lwz r3, 0xf80(r29)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_80161570_00001664:
+lbl_party_updateMemberCoords_00001664:
     mr r3, r29
     li r4, 0x6
     bl actor_setState
@@ -1640,38 +1640,38 @@ lbl_fn_80161570_00001664:
     li r0, 0x0
     cmpwi r3, 0x0
     stw r0, 0xf80(r29)
-    beq lbl_fn_80161570_00001698
+    beq lbl_party_updateMemberCoords_00001698
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_80161570_00001698:
+lbl_party_updateMemberCoords_00001698:
     lwz r3, 0xf80(r29)
     li r4, 0x6
     li r0, 0x0
     stw r4, 0x55c(r29)
     cmpwi r3, 0x0
     stw r0, 0xf80(r29)
-    beq lbl_fn_80161570_000016C8
+    beq lbl_party_updateMemberCoords_000016C8
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_80161570_000016C8:
+lbl_party_updateMemberCoords_000016C8:
     lwz r3, 0xf80(r29)
     li r0, 0x6
     stw r0, 0x55c(r29)
     cmpwi r3, 0x0
     stw r30, 0xf80(r29)
-    beq lbl_fn_80161570_000016F4
+    beq lbl_party_updateMemberCoords_000016F4
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_80161570_000016F4:
+lbl_party_updateMemberCoords_000016F4:
     lfd f31, 0x78(r1)
     lfd f30, 0x70(r1)
     lmw r26, 0x58(r1)

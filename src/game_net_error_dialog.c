@@ -20,7 +20,7 @@ extern void fn_801FEEFC(void);
 extern void profile_getMetricValue(void);
 extern void perf_getMetricValue(void);
 extern void fn_802168BC(void);
-extern void fn_8021771C(void);
+extern void task_findNextReady(void);
 extern void world_getGlobalFlag(void);
 extern void fn_804A5E40(void);
 extern void fn_8050FD24(void);
@@ -335,7 +335,7 @@ lbl_fn_8051CF7C_00000388:
     lwz r3, 0xc(r27)
     li r5, 0x1
     lwz r4, 0x10(r27)
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     beq lbl_fn_8051CF7C_000003A4
     lwz r30, 0xc8(r3)

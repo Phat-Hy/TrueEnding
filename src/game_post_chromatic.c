@@ -12,14 +12,14 @@ extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void magic_castSpellCircle(void);
 extern void boss_initActionStream(void);
-extern void fn_8006CA80(void);
+extern void gmk_LoadHandle_constructor(void);
 extern void route_createSegment(void);
-extern void fn_80088FAC(void);
+extern void zone_formatEventString(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void compass_findMarkerByName(void);
-extern void fn_80094958(void);
+extern void target_registerCandidate(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
@@ -29,15 +29,15 @@ extern void fn_800D8BB4(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void sound_playSpatialEffect(void);
-extern void fn_800EC254(void);
+extern void cam_testTargetVisibility(void);
 extern void cam_registerTarget(void);
 extern void cam_initTrajectoryParams(void);
 extern void cam_bindPathTarget(void);
 extern void cam_bindRotationTarget(void);
 extern void cam_evalControllerSpline(void);
 extern void cam_setLookAtTarget(void);
-extern void fn_800ED4D8(void);
-extern void fn_800ED4E0(void);
+extern void cam_getLookAtState(void);
+extern void cam_updateLookAtMatrix(void);
 extern void cam_evalLookAtMatrix(void);
 extern void camera_updateTargetMode(void);
 extern void proj_getMatrix(void);
@@ -479,7 +479,7 @@ asm void fn_802CCFD8(void)
     addi r3, r28, 0x14b0
     addi r4, r4, lbl_80786B18@l
     stw r4, 0x0(r28)
-    bl fn_8006CA80
+    bl gmk_LoadHandle_constructor
     li r29, 0x0
     stw r29, 0x14b8(r28)
     addi r3, r28, 0x14cc
@@ -576,7 +576,7 @@ asm void fn_802CCFD8(void)
     b lbl_fn_802CCFD8_0000067C
 lbl_fn_802CCFD8_00000614:
     addi r3, r1, 0x98
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     addi r4, r29, 0x2d
     li r5, 0x8
@@ -584,7 +584,7 @@ lbl_fn_802CCFD8_00000614:
     cmpwi r3, 0x0
     bne lbl_fn_802CCFD8_00000654
     addi r3, r1, 0x98
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     mr r4, r3
     addi r3, r1, 0x20
@@ -593,7 +593,7 @@ lbl_fn_802CCFD8_00000614:
     b lbl_fn_802CCFD8_00000674
 lbl_fn_802CCFD8_00000654:
     addi r3, r1, 0x98
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     addi r4, r29, 0x36
     bl strcmp
@@ -602,14 +602,14 @@ lbl_fn_802CCFD8_00000654:
     stb r30, 0x1549(r28)
 lbl_fn_802CCFD8_00000674:
     addi r3, r1, 0x98
-    bl fn_800ED4E0
+    bl cam_updateLookAtMatrix
 lbl_fn_802CCFD8_0000067C:
     addi r3, r1, 0x38
     addi r4, r1, 0xd4
     bl cam_evalLookAtMatrix
     addi r3, r1, 0x98
     addi r4, r1, 0x38
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     mr r31, r3
     addi r3, r1, 0x38
     li r4, -0x1
@@ -796,7 +796,7 @@ lbl_fn_802CD3BC_000008F4:
     addi r5, r31, 0x14fc
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lwz r0, 0x7ec(r31)
     addi r3, r31, 0x14b0
     lwz r4, 0x5c(r31)
@@ -1635,7 +1635,7 @@ lbl_fn_802CD73C_00001478:
     stfs f3, 0xc0(r1)
     fdivs f0, f0, f6
     stfs f0, 0xc4(r1)
-    bl fn_80094958
+    bl target_registerCandidate
 lbl_fn_802CD73C_00001598:
     lis r30, lbl_80746EE0@ha
     addi r3, r31, 0xb0
@@ -1704,7 +1704,7 @@ lbl_fn_802CD73C_00001598:
     stfs f3, 0xa0(r1)
     fdivs f0, f0, f6
     stfs f0, 0xa4(r1)
-    bl fn_80094958
+    bl target_registerCandidate
 lbl_fn_802CD73C_000016A8:
     lwz r6, 0x38(r31)
     li r4, 0x0

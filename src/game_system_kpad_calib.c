@@ -9,7 +9,7 @@ extern void _savegpr_26(void);
 extern void scene_traverseNode(void);
 extern void collision_testLineSegment(void);
 extern void boss_recordDamage(void);
-extern void fn_8006A250(void);
+extern void boss_dispatchActionTransition(void);
 extern void fn_8006A900(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_applyAnimationTrack(void);
@@ -17,7 +17,7 @@ extern void fn_800A5B30(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800F1378(void);
-extern void fn_801346C8(void);
+extern void boss_testAiFlag(void);
 extern void quest_checkCondition(void);
 extern void dialog_selectChoice(void);
 extern void fn_80154344(void);
@@ -43,7 +43,7 @@ extern void fn_803786FC(void);
 extern void fn_803792F0(void);
 extern void fn_8037C690(void);
 extern void dvd_showDiskErrorDialog(void);
-extern void fn_80389838(void);
+extern void nwc24_transitionDataState(void);
 extern void fn_803AB96C(void);
 extern void fn_803B57B0(void);
 extern void fn_803B57EC(void);
@@ -1253,7 +1253,7 @@ asm void fn_803712BC(void)
     stw r31, 0xc(r1)
     mr r31, r3
     lwz r3, 0x20(r3)
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     li r0, 0x1
     stw r0, 0x48(r3)
     lis r4, lbl_8074DC1C@ha
@@ -1475,7 +1475,7 @@ lbl_fn_80371334_000012A8:
     bl battle_applyStatusEffect
     lwz r4, 0x870(r31)
     addi r3, r31, 0x6c
-    bl fn_80389838
+    bl nwc24_transitionDataState
 lbl_fn_80371334_00001300:
     lwz r3, lbl_8087F4E8
     li r30, 0x0
@@ -2033,7 +2033,7 @@ lbl_fn_80371790_00001AEC:
     mr r4, r16
     addi r3, r20, 0x7d4
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_80371790_00001B1C
     li r19, 0x1
@@ -2072,7 +2072,7 @@ lbl_fn_80371790_00001B74:
     mr r4, r18
     addi r3, r20, 0x7d4
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_80371790_00001BA0
     addi r17, r17, 0x1

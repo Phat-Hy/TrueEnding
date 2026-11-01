@@ -9,12 +9,12 @@ extern void mem_free(void);
 extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_8012476C(void);
-extern void fn_8012DF7C(void);
+extern void player_testStatusCondition(void);
+extern void enemy_calcAttackTrajectory(void);
 extern void npc_updateTalkInteraction(void);
 extern void inventory_calcTotalStats(void);
 extern void debuff_clearStatus(void);
-extern void fn_80192758(void);
+extern void map_processStreamChunk(void);
 extern void world_getGlobalFlag(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -213,7 +213,7 @@ lbl_fn_801A7E8C_000001A8:
     stw r0, 0x728(r3)
     lwz r3, lbl_8087F0A8
     addi r3, r3, 0x48c
-    bl fn_8012476C
+    bl player_testStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_801A7E8C_000001E4
     lwz r3, 0x14(r31)
@@ -269,7 +269,7 @@ lbl_fn_801A7E8C_00000230:
     fctiwz f0, f0
     stfd f0, 0x68(r1)
     lwz r4, 0x6c(r1)
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
 lbl_fn_801A7E8C_000002A0:
     li r3, 0x0
 lbl_fn_801A7E8C_000002A4:
@@ -720,7 +720,7 @@ lbl_fn_801A84AC_000008D0:
     stw r0, 0x0(r31)
     b lbl_fn_801A84AC_000008E0
 lbl_fn_801A84AC_000008DC:
-    bl fn_80192758
+    bl map_processStreamChunk
 lbl_fn_801A84AC_000008E0:
     lwz r0, 0x74(r1)
     lwz r31, 0x6c(r1)

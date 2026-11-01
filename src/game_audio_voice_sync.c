@@ -24,7 +24,7 @@ extern void fn_800E41FC(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
-extern void fn_80103F60(void);
+extern void bsp_findLeafNode(void);
 extern void fn_80108378(void);
 extern void skill_findNodeById(void);
 extern void enemy_stepBehavior(void);
@@ -33,7 +33,7 @@ extern void fn_80128930(void);
 extern void enemy_updateAnimTimer(void);
 extern void boss_updatePhaseState(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_801426A4(void);
+extern void quest_evaluateMilestoneData(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
@@ -56,7 +56,7 @@ extern void fn_805A40BC(void);
 extern void fn_805A4258(void);
 extern void fn_805A45FC(void);
 extern void fn_805A4984(void);
-extern void fn_805A4A20(void);
+extern void world_setFlagByType(void);
 extern void fn_805A4F20(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXRotAxis(void);
@@ -907,7 +907,7 @@ lbl_fn_8030646C_00000AB4:
     beq lbl_fn_8030646C_00000B18
     lwz r3, lbl_8087F048
     mr r4, r31
-    bl fn_80103F60
+    bl bsp_findLeafNode
     lwz r4, lbl_8087F8A0
     mr r31, r3
     lwz r30, 0x48(r4)
@@ -1213,7 +1213,7 @@ lbl_fn_803067E0_00000ED4:
     mr r3, r28
     addi r4, r28, 0x1560
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
     li r0, 0x1
     stw r0, 0x1570(r28)
 lbl_fn_803067E0_00000F10:
@@ -3511,7 +3511,7 @@ lbl_fn_803073C4_00003078:
     mr r3, r24
     addi r4, r24, 0x1568
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
     lwz r3, 0x14bc(r24)
     addi r0, r3, 0x1
     stw r0, 0x14bc(r24)
@@ -3540,7 +3540,7 @@ lbl_fn_803073C4_000030E0:
     mr r3, r24
     fmr f2, f29
     addi r4, r1, 0x328
-    bl fn_801426A4
+    bl quest_evaluateMilestoneData
     b lbl_fn_803073C4_0000311C
 lbl_fn_803073C4_00003100:
     lfs f0, 0x568(r24)

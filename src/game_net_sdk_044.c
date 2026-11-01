@@ -12,7 +12,7 @@ extern void fn_806A420C(void);
 extern void fn_806A4260(void);
 extern void fn_806A4264(void);
 extern void fn_806A426C(void);
-extern void fn_806A4270(void);
+extern void net_truncateU16(void);
 extern void fn_806D57A0(void);
 extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
@@ -1308,7 +1308,7 @@ lbl_fn_806FBE00_00001090:
     lwz r29, 0x4(r31)
     li r3, 0x6cfd
     stb r0, 0x11(r1)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x12(r1)
     mr r3, r28
     addi r4, r1, 0x18
@@ -1394,7 +1394,7 @@ lbl_fn_806FC030_000011C0:
     lwz r30, lbl_808627E4@l(r30)
     li r3, 0x6cfd
     stb r0, 0x11(r1)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x12(r1)
     mr r3, r29
     addi r4, r1, 0x18
@@ -1530,7 +1530,7 @@ lbl_fn_806FC170_00001360:
     lwz r27, 0x4(r31)
     li r3, 0x6cfd
     stb r0, 0x41(r1)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x42(r1)
     mr r3, r26
     mr r4, r30
@@ -1555,7 +1555,7 @@ lbl_fn_806FC170_00001414:
     lwz r27, 0x4(r31)
     li r3, 0x6cfd
     stb r0, 0x39(r1)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x3a(r1)
     mr r3, r26
     mr r4, r30
@@ -1603,7 +1603,7 @@ lbl_fn_806FC170_000014B4:
     li r3, 0x6cfd
     lwz r25, 0x8(r31)
     stb r27, 0x29(r1)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x2a(r1)
     mr r3, r26
     mr r4, r30
@@ -1628,7 +1628,7 @@ lbl_fn_806FC170_00001520:
     lwz r26, 0xc(r31)
     li r3, 0x6cfd
     stb r0, 0x21(r1)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x22(r1)
     mr r3, r25
     mr r4, r30
@@ -2156,7 +2156,7 @@ lbl_fn_806FC9C0_00001C64:
     lwz r0, 0x3c(r30)
     stw r0, 0xdc(r1)
     lhz r3, 0x40(r30)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0xe0(r1)
     li r3, 0x0
     lbz r0, 0x42(r30)
@@ -2184,7 +2184,7 @@ lbl_fn_806FC9C0_00001CF8:
 lbl_fn_806FC9C0_00001CFC:
     li r0, 0x2
     stb r0, 0x29(r1)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x2a(r1)
     mr r3, r28
     addi r4, r1, 0xd0
@@ -2248,7 +2248,7 @@ lbl_fn_806FC9C0_00001DB4:
     lwz r0, 0x3c(r30)
     stw r0, 0x90(r1)
     lhz r3, 0x40(r30)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x94(r1)
     li r3, 0x0
     lbz r0, 0x42(r30)
@@ -2276,7 +2276,7 @@ lbl_fn_806FC9C0_00001E50:
 lbl_fn_806FC9C0_00001E54:
     li r0, 0x2
     stb r0, 0x21(r1)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x22(r1)
     mr r3, r28
     addi r4, r1, 0x84
@@ -2352,7 +2352,7 @@ lbl_fn_806FC9C0_00001F5C:
     lwz r29, 0x4(r31)
     li r3, 0x6cfd
     stb r0, 0x19(r1)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x1a(r1)
     mr r3, r28
     addi r4, r1, 0x38

@@ -29,7 +29,7 @@ extern void skin_applyWeights(void);
 extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
-extern void fn_800CB688(void);
+extern void morph_resetTargetWeight(void);
 extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
@@ -43,7 +43,7 @@ extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
-extern void fn_803EC758(void);
+extern void barrier_formatCountdownTimer(void);
 extern void barrier_formatDialogString(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
@@ -480,7 +480,7 @@ asm void fn_80420934(void)
     addi r4, r1, 0x8
     stw r29, 0x34(r1)
     mr r29, r3
-    bl fn_803EC758
+    bl barrier_formatCountdownTimer
     lwz r0, 0xf0(r29)
     cmpwi r0, 0x0
     bne lbl_fn_80420934_00000504
@@ -1559,7 +1559,7 @@ lbl_fn_80421628_00001304:
     fdivs f3, f4, f3
     fmsubs f1, f2, f3, f1
     fadds f1, f0, f1
-    bl fn_800CB688
+    bl morph_resetTargetWeight
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1649,7 +1649,7 @@ asm void fn_80421904(void)
     addi r4, r1, 0x8
     stw r28, 0x30(r1)
     mr r28, r3
-    bl fn_803EC758
+    bl barrier_formatCountdownTimer
     lwz r0, 0xf0(r28)
     cmpwi r0, 0x0
     bne lbl_fn_80421904_000014D8

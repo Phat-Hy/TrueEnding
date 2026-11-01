@@ -18,25 +18,25 @@ extern void fn_80079994(void);
 extern void mem_realloc(void);
 extern void route_interpolatePath(void);
 extern void node_createNamedChild(void);
-extern void fn_800902C0(void);
+extern void radar_addBlipEntry(void);
 extern void fn_80094D88(void);
 extern void fn_80094F14(void);
 extern void motion_updateFogAdj(void);
 extern void fn_800C0508(void);
 extern void fn_800C06B0(void);
 extern void fn_800C08B0(void);
-extern void fn_800C2448(void);
+extern void skeleton_getBoneByIndex(void);
 extern void msg_drawText(void);
 extern void fn_80238560(void);
 extern void PSMTXTranspose(void);
 extern void PSMTXInverse(void);
 extern void PSVECMag(void);
 extern void GXSetVtxDesc(void);
-extern void fn_806134E0(void);
+extern void __GXInitVtxDesc(void);
 extern void GXSetVtxAttrFmt(void);
 extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
-extern void fn_80614790(void);
+extern void GXBegin(void);
 extern void fn_80615AE0(void);
 extern void fn_80615B60(void);
 extern void fn_80615C40(void);
@@ -45,14 +45,14 @@ extern void GXInitLightSpot(void);
 extern void fn_80616EF0(void);
 extern void fn_80617030(void);
 extern void fn_80617130(void);
-extern void fn_80617200(void);
+extern void GXSetTexCoordScaleManually(void);
 extern void GXInitTexObjDefault(void);
 extern void fn_80617270(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
-extern void fn_806174C0(void);
-extern void fn_806175F0(void);
+extern void GXSetTevIndTile(void);
+extern void GXSetIndTexMatrix(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevKAlphaSel(void);
 extern void GXSetTevSwapMode(void);
@@ -555,7 +555,7 @@ lbl_font_renderString_000005BC:
     addi r5, r1, 0x44
     li r4, 0x0
     stw r24, 0x44(r1)
-    bl fn_800902C0
+    bl radar_addBlipEntry
     cmpwi r25, 0x0
     beq lbl_font_renderString_0000060C
     lwz r3, 0x44(r1)
@@ -728,7 +728,7 @@ lbl_font_renderString_00000730:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x0
     li r4, 0xc
     bl GXSetTevKColorSel
@@ -767,7 +767,7 @@ lbl_font_renderString_00000730:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x1
     li r4, 0xc
     bl GXSetTevKColorSel
@@ -837,7 +837,7 @@ lbl_font_renderString_00000730:
     bl GXLoadPosMtxImm
     li r3, 0x0
     bl GXSetCurrentMtx
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -859,7 +859,7 @@ lbl_font_renderString_00000730:
     lwz r3, lbl_8087EFB4
     li r4, 0x0
     lwz r3, 0x2fc(r3)
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     mr r5, r23
     addi r4, r1, 0x118
     bl fn_80079994
@@ -956,7 +956,7 @@ lbl_font_renderString_00000B98:
     li r8, 0x0
     li r9, 0x2
     bl GXInitLightSpot
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -1098,7 +1098,7 @@ lbl_font_renderString_00000D88:
     li r8, 0x0
     li r9, 0x2
     bl GXInitLightSpot
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -1525,7 +1525,7 @@ asm void fn_80235BF8(void)
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x1
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1556,7 +1556,7 @@ asm void fn_80235BF8(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x0
     li r4, 0xc
     bl GXSetTevKColorSel
@@ -1607,7 +1607,7 @@ asm void fn_80235BF8(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x1
     li r4, 0xc
     bl GXSetTevKColorSel
@@ -1664,7 +1664,7 @@ asm void fn_80235BF8(void)
     bl GXLoadPosMtxImm
     li r3, 0x0
     bl GXSetCurrentMtx
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -1820,7 +1820,7 @@ lbl_fn_80235BF8_00001790:
     li r3, 0x98
     li r4, 0x0
     clrlwi r5, r0, 16
-    bl fn_80614790
+    bl GXBegin
     li r19, 0x0
     b lbl_fn_80235BF8_000018C0
 lbl_fn_80235BF8_00001850:
@@ -1874,7 +1874,7 @@ lbl_fn_80235BF8_000018D4:
     li r3, 0x8
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1
@@ -1905,7 +1905,7 @@ lbl_fn_80235BF8_000018D4:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x0
     li r4, 0x10
     bl GXSetTevKColorSel
@@ -1960,7 +1960,7 @@ lbl_fn_80235BF8_000019E8:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     addi r3, r14, 0x1
     li r4, 0x10
     bl GXSetTevKColorSel
@@ -2003,8 +2003,8 @@ lbl_fn_80235BF8_000019E8:
     lwz r0, 0xc(r1)
     stfs f2, 0x6c(r1)
     stw r0, 0x1c(r1)
-    bl fn_806175F0
-    bl fn_806134E0
+    bl GXSetIndTexMatrix
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -2134,7 +2134,7 @@ lbl_fn_80235BF8_00001CC0:
     li r3, 0x98
     li r4, 0x0
     clrlwi r5, r0, 16
-    bl fn_80614790
+    bl GXBegin
     li r0, 0x5
     lfs f28, 0x4c(r1)
     xoris r30, r0, 0x8000

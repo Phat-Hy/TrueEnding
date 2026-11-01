@@ -6,7 +6,7 @@ extern void _restgpr_23(void);
 extern void _restgpr_26(void);
 extern void _savegpr_23(void);
 extern void _savegpr_26(void);
-extern void fn_800185B4(void);
+extern void battle_findTargetSlotById(void);
 extern void menu_renderLayout(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
@@ -14,7 +14,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
 extern void fn_80153B44(void);
-extern void fn_80164DCC(void);
+extern void party_evalTacticCondition(void);
 extern void actor_setState(void);
 extern void actor_getMovementFlags(void);
 extern void fn_80196C68(void);
@@ -65,14 +65,14 @@ extern u32 lbl_80881B24;
 extern u32 lbl_80881B28;
 
 /* Function declarations */
-void fn_8015E4B0(void);
+void party_initFormationSlots(void);
 void party_configureMemberSlot(void);
-void fn_8015EB2C(void);
+void party_evalFormationState(void);
 void fn_8015ECC4(void);
 void fn_8015EFAC(void);
 void fn_8015F568(void);
 
-asm void fn_8015E4B0(void)
+asm void party_initFormationSlots(void)
 {
     nofralloc
     stwu r1, -0x70(r1)
@@ -94,19 +94,19 @@ asm void fn_8015E4B0(void)
     bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
-    beq lbl_fn_8015E4B0_00000064
+    beq lbl_party_initFormationSlots_00000064
     mr r4, r29
     mr r5, r27
     mr r6, r28
     bl fn_801AC434
     mr r30, r3
-lbl_fn_8015E4B0_00000064:
+lbl_party_initFormationSlots_00000064:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    bne lbl_fn_8015E4B0_000000F4
+    bne lbl_party_initFormationSlots_000000F4
     lwz r0, 0xf80(r29)
     cmpwi r0, 0x0
-    bne lbl_fn_8015E4B0_0000009C
+    bne lbl_party_initFormationSlots_0000009C
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x2c(r1)
@@ -114,8 +114,8 @@ lbl_fn_8015E4B0_00000064:
     lwz r0, 0x8(r5)
     stw r3, 0x30(r1)
     stw r0, 0x34(r1)
-    b lbl_fn_8015E4B0_000000B8
-lbl_fn_8015E4B0_0000009C:
+    b lbl_party_initFormationSlots_000000B8
+lbl_party_initFormationSlots_0000009C:
     addi r3, r31, 0xf00
     lwz r5, 0xf00(r31)
     lwz r4, 0x4(r3)
@@ -123,7 +123,7 @@ lbl_fn_8015E4B0_0000009C:
     stw r5, 0x2c(r1)
     stw r4, 0x30(r1)
     stw r0, 0x34(r1)
-lbl_fn_8015E4B0_000000B8:
+lbl_party_initFormationSlots_000000B8:
     lwz r5, 0x2c(r1)
     addi r3, r1, 0x8
     lwz r4, 0x30(r1)
@@ -133,26 +133,26 @@ lbl_fn_8015E4B0_000000B8:
     stw r0, 0x10(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8015E4B0_000000F4
+    beq lbl_party_initFormationSlots_000000F4
     lwz r3, 0xf80(r29)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8015E4B0_000000F4:
+lbl_party_initFormationSlots_000000F4:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    beq lbl_fn_8015E4B0_000002A8
+    beq lbl_party_initFormationSlots_000002A8
     cmpwi r0, 0x8
-    beq lbl_fn_8015E4B0_0000010C
+    beq lbl_party_initFormationSlots_0000010C
     stw r0, 0x564(r29)
-lbl_fn_8015E4B0_0000010C:
+lbl_party_initFormationSlots_0000010C:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    bne lbl_fn_8015E4B0_000002A8
+    bne lbl_party_initFormationSlots_000002A8
     lwz r0, 0xf80(r29)
     cmpwi r0, 0x0
-    bne lbl_fn_8015E4B0_00000144
+    bne lbl_party_initFormationSlots_00000144
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x38(r1)
@@ -160,8 +160,8 @@ lbl_fn_8015E4B0_0000010C:
     lwz r0, 0x8(r5)
     stw r3, 0x3c(r1)
     stw r0, 0x40(r1)
-    b lbl_fn_8015E4B0_00000160
-lbl_fn_8015E4B0_00000144:
+    b lbl_party_initFormationSlots_00000160
+lbl_party_initFormationSlots_00000144:
     addi r3, r31, 0xf0c
     lwz r5, 0xf0c(r31)
     lwz r4, 0x4(r3)
@@ -169,7 +169,7 @@ lbl_fn_8015E4B0_00000144:
     stw r5, 0x38(r1)
     stw r4, 0x3c(r1)
     stw r0, 0x40(r1)
-lbl_fn_8015E4B0_00000160:
+lbl_party_initFormationSlots_00000160:
     lwz r5, 0x38(r1)
     addi r3, r1, 0x20
     lwz r4, 0x3c(r1)
@@ -179,26 +179,26 @@ lbl_fn_8015E4B0_00000160:
     stw r0, 0x28(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8015E4B0_0000019C
+    beq lbl_party_initFormationSlots_0000019C
     lwz r3, 0xf80(r29)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8015E4B0_0000019C:
+lbl_party_initFormationSlots_0000019C:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    beq lbl_fn_8015E4B0_00000278
+    beq lbl_party_initFormationSlots_00000278
     cmpwi r0, 0x8
-    beq lbl_fn_8015E4B0_000001B4
+    beq lbl_party_initFormationSlots_000001B4
     stw r0, 0x564(r29)
-lbl_fn_8015E4B0_000001B4:
+lbl_party_initFormationSlots_000001B4:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    bne lbl_fn_8015E4B0_00000278
+    bne lbl_party_initFormationSlots_00000278
     lwz r0, 0xf80(r29)
     cmpwi r0, 0x0
-    bne lbl_fn_8015E4B0_000001EC
+    bne lbl_party_initFormationSlots_000001EC
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x44(r1)
@@ -206,8 +206,8 @@ lbl_fn_8015E4B0_000001B4:
     lwz r0, 0x8(r5)
     stw r3, 0x48(r1)
     stw r0, 0x4c(r1)
-    b lbl_fn_8015E4B0_00000208
-lbl_fn_8015E4B0_000001EC:
+    b lbl_party_initFormationSlots_00000208
+lbl_party_initFormationSlots_000001EC:
     addi r3, r31, 0xf18
     lwz r5, 0xf18(r31)
     lwz r4, 0x4(r3)
@@ -215,7 +215,7 @@ lbl_fn_8015E4B0_000001EC:
     stw r5, 0x44(r1)
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
-lbl_fn_8015E4B0_00000208:
+lbl_party_initFormationSlots_00000208:
     lwz r5, 0x44(r1)
     addi r3, r1, 0x14
     lwz r4, 0x48(r1)
@@ -225,13 +225,13 @@ lbl_fn_8015E4B0_00000208:
     stw r0, 0x1c(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8015E4B0_00000244
+    beq lbl_party_initFormationSlots_00000244
     lwz r3, 0xf80(r29)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8015E4B0_00000244:
+lbl_party_initFormationSlots_00000244:
     mr r3, r29
     li r4, 0x6
     bl actor_setState
@@ -239,38 +239,38 @@ lbl_fn_8015E4B0_00000244:
     li r0, 0x0
     cmpwi r3, 0x0
     stw r0, 0xf80(r29)
-    beq lbl_fn_8015E4B0_00000278
+    beq lbl_party_initFormationSlots_00000278
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8015E4B0_00000278:
+lbl_party_initFormationSlots_00000278:
     lwz r3, 0xf80(r29)
     li r4, 0x6
     li r0, 0x0
     stw r4, 0x55c(r29)
     cmpwi r3, 0x0
     stw r0, 0xf80(r29)
-    beq lbl_fn_8015E4B0_000002A8
+    beq lbl_party_initFormationSlots_000002A8
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8015E4B0_000002A8:
+lbl_party_initFormationSlots_000002A8:
     lwz r3, 0xf80(r29)
     li r0, 0x6
     stw r0, 0x55c(r29)
     cmpwi r3, 0x0
     stw r30, 0xf80(r29)
-    beq lbl_fn_8015E4B0_000002D4
+    beq lbl_party_initFormationSlots_000002D4
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8015E4B0_000002D4:
+lbl_party_initFormationSlots_000002D4:
     li r0, 0x0
     stw r0, 0x638(r29)
     lmw r27, 0x5c(r1)
@@ -495,7 +495,7 @@ lbl_party_configureMemberSlot_000005D0:
 lbl_party_configureMemberSlot_000005F8:
     mr r3, r29
     li r4, 0x1
-    bl fn_80164DCC
+    bl party_evalTacticCondition
     lwz r3, 0x1208(r29)
     cmpwi r3, 0x0
     beq lbl_party_configureMemberSlot_00000664
@@ -529,7 +529,7 @@ lbl_party_configureMemberSlot_00000664:
     blr
 }
 
-asm void fn_8015EB2C(void)
+asm void party_evalFormationState(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -541,21 +541,21 @@ asm void fn_8015EB2C(void)
     psq_st f30, 0x18(r1), 0, 0
     lwz r0, 0x55c(r3)
     cmpwi r0, 0x6
-    beq lbl_fn_8015EB2C_000006AC
+    beq lbl_party_evalFormationState_000006AC
     li r3, 0x1
-    b lbl_fn_8015EB2C_000007F4
-lbl_fn_8015EB2C_000006AC:
+    b lbl_party_evalFormationState_000007F4
+lbl_party_evalFormationState_000006AC:
     lwz r4, 0x12a4(r3)
     extrwi. r0, r4, 1, 29
-    beq lbl_fn_8015EB2C_00000724
+    beq lbl_party_evalFormationState_00000724
     extrwi. r0, r4, 1, 6
-    beq lbl_fn_8015EB2C_000006C8
+    beq lbl_party_evalFormationState_000006C8
     li r3, 0x1
-    b lbl_fn_8015EB2C_000007F4
-lbl_fn_8015EB2C_000006C8:
+    b lbl_party_evalFormationState_000007F4
+lbl_party_evalFormationState_000006C8:
     lbz r0, 0x2f4(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_8015EB2C_000006F8
+    bne lbl_party_evalFormationState_000006F8
     lfs f31, 0x2e4(r3)
     li r4, 0x0
     addi r3, r3, 0xb0
@@ -564,8 +564,8 @@ lbl_fn_8015EB2C_000006C8:
     cror eq, gt, eq
     mfcr r3
     extrwi r3, r3, 1, 2
-    b lbl_fn_8015EB2C_000007F4
-lbl_fn_8015EB2C_000006F8:
+    b lbl_party_evalFormationState_000007F4
+lbl_party_evalFormationState_000006F8:
     lfs f31, 0x2e8(r3)
     li r4, 0x0
     lfs f30, 0x2e4(r3)
@@ -576,43 +576,43 @@ lbl_fn_8015EB2C_000006F8:
     cror eq, gt, eq
     mfcr r3
     extrwi r3, r3, 1, 2
-    b lbl_fn_8015EB2C_000007F4
-lbl_fn_8015EB2C_00000724:
+    b lbl_party_evalFormationState_000007F4
+lbl_party_evalFormationState_00000724:
     lwz r0, 0xf80(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8015EB2C_00000784
+    beq lbl_party_evalFormationState_00000784
     lwz r4, 0x560(r3)
     cmpwi r4, 0x43
-    bne lbl_fn_8015EB2C_00000748
+    bne lbl_party_evalFormationState_00000748
     mr r3, r0
     bl fn_80196C68
-    b lbl_fn_8015EB2C_000007F4
-lbl_fn_8015EB2C_00000748:
+    b lbl_party_evalFormationState_000007F4
+lbl_party_evalFormationState_00000748:
     cmpwi r4, 0x17
-    bne lbl_fn_8015EB2C_0000075C
+    bne lbl_party_evalFormationState_0000075C
     mr r3, r0
     bl fn_801AE41C
-    b lbl_fn_8015EB2C_000007F4
-lbl_fn_8015EB2C_0000075C:
+    b lbl_party_evalFormationState_000007F4
+lbl_party_evalFormationState_0000075C:
     cmpwi r4, 0x3b
-    bne lbl_fn_8015EB2C_00000770
+    bne lbl_party_evalFormationState_00000770
     mr r3, r0
     bl fn_801AF81C
-    b lbl_fn_8015EB2C_000007F4
-lbl_fn_8015EB2C_00000770:
+    b lbl_party_evalFormationState_000007F4
+lbl_party_evalFormationState_00000770:
     cmpwi r4, 0x8e
-    bne lbl_fn_8015EB2C_00000784
+    bne lbl_party_evalFormationState_00000784
     mr r3, r0
     bl fn_801B0260
-    b lbl_fn_8015EB2C_000007F4
-lbl_fn_8015EB2C_00000784:
+    b lbl_party_evalFormationState_000007F4
+lbl_party_evalFormationState_00000784:
     lfs f1, 0x578(r3)
     lfs f0, lbl_80881B24
     fcmpo cr0, f1, f0
-    ble lbl_fn_8015EB2C_000007F0
+    ble lbl_party_evalFormationState_000007F0
     lbz r0, 0x2f4(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_8015EB2C_000007C4
+    bne lbl_party_evalFormationState_000007C4
     lfs f30, 0x2e4(r3)
     li r4, 0x0
     addi r3, r3, 0xb0
@@ -621,8 +621,8 @@ lbl_fn_8015EB2C_00000784:
     cror eq, gt, eq
     mfcr r3
     extrwi r3, r3, 1, 2
-    b lbl_fn_8015EB2C_000007F4
-lbl_fn_8015EB2C_000007C4:
+    b lbl_party_evalFormationState_000007F4
+lbl_party_evalFormationState_000007C4:
     lfs f30, 0x2e8(r3)
     li r4, 0x0
     lfs f31, 0x2e4(r3)
@@ -633,10 +633,10 @@ lbl_fn_8015EB2C_000007C4:
     cror eq, gt, eq
     mfcr r3
     extrwi r3, r3, 1, 2
-    b lbl_fn_8015EB2C_000007F4
-lbl_fn_8015EB2C_000007F0:
+    b lbl_party_evalFormationState_000007F4
+lbl_party_evalFormationState_000007F0:
     li r3, 0x0
-lbl_fn_8015EB2C_000007F4:
+lbl_party_evalFormationState_000007F4:
     lwz r0, 0x34(r1)
     psq_l f31, 0x28(r1), 0, 0
     lfd f31, 0x20(r1)
@@ -1508,7 +1508,7 @@ lbl_fn_8015F568_00001454:
     beq lbl_fn_8015F568_00001478
     mr r4, r27
     mr r5, r30
-    bl fn_800185B4
+    bl battle_findTargetSlotById
     b lbl_fn_8015F568_0000147C
 lbl_fn_8015F568_00001478:
     li r3, 0x0

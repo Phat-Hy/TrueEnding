@@ -13,15 +13,15 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
-extern void fn_800CB688(void);
-extern void fn_800CB6E4(void);
+extern void morph_resetTargetWeight(void);
+extern void morph_dispatchTargetUpdate(void);
 extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_801010A0(void);
 extern void hurtbox_testCollisionLayer(void);
 extern void fn_8010EE78(void);
-extern void fn_8012DF7C(void);
+extern void enemy_calcAttackTrajectory(void);
 extern void quest_evaluateConditions(void);
 extern void quest_getRewardItemSlot(void);
 extern void shop_canPurchaseItem(void);
@@ -29,7 +29,7 @@ extern void fn_8015A46C(void);
 extern void fn_8015AC48(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
-extern void fn_801789D8(void);
+extern void battle_evalDropTable(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -187,7 +187,7 @@ lbl_fn_802A91D0_0000014C:
     mr r4, r30
     li r5, 0x0
     li r6, 0x0
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
     lwz r3, 0x1644(r31)
     li r4, 0x0
     bl quest_getRewardItemSlot
@@ -1403,7 +1403,7 @@ lbl_fn_802AA1B8_000012EC:
 lbl_fn_802AA1B8_0000133C:
     addi r3, r30, 0x1538
     addi r4, r30, 0x528
-    bl fn_800CB6E4
+    bl morph_dispatchTargetUpdate
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)
     lwz r30, 0x48(r1)
@@ -1508,13 +1508,13 @@ lbl_fn_802AA534_00001444:
     li r5, 0x0
     lwz r29, 0x48(r3)
     mr r3, r29
-    bl fn_801789D8
+    bl battle_evalDropTable
     cmpwi r3, 0x0
     bne lbl_fn_802AA534_000014F4
     mr r3, r29
     li r4, 0xa0
     li r5, 0x0
-    bl fn_801789D8
+    bl battle_evalDropTable
     cmpwi r3, 0x0
     beq lbl_fn_802AA534_000016B0
 lbl_fn_802AA534_000014F4:
@@ -1633,7 +1633,7 @@ lbl_fn_802AA534_0000161C:
 lbl_fn_802AA534_000016A4:
     addi r3, r31, 0x1538
     addi r4, r31, 0x528
-    bl fn_800CB6E4
+    bl morph_dispatchTargetUpdate
 lbl_fn_802AA534_000016B0:
     lwz r0, 0x64(r1)
     lwz r31, 0x5c(r1)
@@ -1730,7 +1730,7 @@ asm void fn_802AA89C(void)
     lfs f1, lbl_80883E38
     addi r3, r1, 0x10
     li r4, 0x0
-    bl fn_800CB688
+    bl morph_resetTargetWeight
     lwz r12, 0x0(r31)
     mr r3, r31
     li r4, 0x1

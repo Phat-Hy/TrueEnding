@@ -16,14 +16,14 @@ extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
 extern void save_parseSlotHeader(void);
-extern void fn_801F4998(void);
+extern void save_formatSlotMetadata(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801F4F08(void);
 extern void thread_findAndNotify(void);
 extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
-extern void fn_804A3C24(void);
+extern void net_initCoopSession(void);
 extern void fn_804AC734(void);
 extern void fn_804AC83C(void);
 extern void fn_804ACD10(void);
@@ -37,7 +37,7 @@ extern void fn_804DD9D0(void);
 extern void fn_804DE564(void);
 extern void fn_804EB1B0(void);
 extern void fn_804EB270(void);
-extern void fn_804EB874(void);
+extern void net_getLocalPlayerAid(void);
 extern void fn_804F5B0C(void);
 extern void fn_804F5CA0(void);
 extern void fn_804F5E3C(void);
@@ -45,8 +45,8 @@ extern void fn_804FAB44(void);
 extern void fn_804FC014(void);
 extern void fn_8050BA6C(void);
 extern void runtime_clampDouble(void);
-extern void fn_806A8E70(void);
-extern void fn_806B0DE0(void);
+extern void net_getInterfaceHandle(void);
+extern void net_isSessionActive(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -156,7 +156,7 @@ lbl_fn_804BF550_00000088:
     li r3, 0x1
     b lbl_fn_804BF550_000000FC
 lbl_fn_804BF550_000000DC:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804BF550_000000FC
 lbl_fn_804BF550_000000E4:
     lwz r0, 0x1f8(r4)
@@ -165,7 +165,7 @@ lbl_fn_804BF550_000000E4:
     li r3, 0x1
     b lbl_fn_804BF550_000000FC
 lbl_fn_804BF550_000000F8:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804BF550_000000FC:
     cmpwi r3, 0x1
     bgt lbl_fn_804BF550_00000118
@@ -228,7 +228,7 @@ lbl_fn_804BF550_0000018C:
     beq lbl_fn_804BF550_000001DC
     b lbl_fn_804BF550_00000200
 lbl_fn_804BF550_000001DC:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     mr r30, r3
     b lbl_fn_804BF550_00000200
 lbl_fn_804BF550_000001E8:
@@ -237,7 +237,7 @@ lbl_fn_804BF550_000001E8:
     beq lbl_fn_804BF550_000001F8
     b lbl_fn_804BF550_00000200
 lbl_fn_804BF550_000001F8:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
     mr r30, r3
 lbl_fn_804BF550_00000200:
     cmpwi r30, 0x1
@@ -279,7 +279,7 @@ lbl_fn_804BF550_00000248:
     li r3, 0x1
     b lbl_fn_804BF550_000002B4
 lbl_fn_804BF550_00000294:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804BF550_000002B4
 lbl_fn_804BF550_0000029C:
     lwz r0, 0x1f8(r4)
@@ -288,7 +288,7 @@ lbl_fn_804BF550_0000029C:
     li r3, 0x1
     b lbl_fn_804BF550_000002B4
 lbl_fn_804BF550_000002B0:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804BF550_000002B4:
     cmpwi r3, 0x1
     bne lbl_fn_804BF550_000002EC
@@ -1213,7 +1213,7 @@ asm void fn_804C0548(void)
     stw r28, 0x10(r1)
     lwz r29, lbl_8087EF70
     lwz r3, lbl_8087F610
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     lwz r4, 0xe64(r31)
     mr r30, r3
     lwz r0, 0xd0(r3)
@@ -1235,7 +1235,7 @@ asm void fn_804C0548(void)
     addi r28, r28, 0x3
 lbl_fn_804C0548_00001070:
     lwz r3, lbl_8087F610
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     mr r30, r3
     lwz r3, lbl_8087F610
     bl fn_804EB1B0
@@ -1412,7 +1412,7 @@ lbl_fn_804C06C8_000012B8:
     li r3, 0x1
     b lbl_fn_804C06C8_00001310
 lbl_fn_804C06C8_000012F0:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804C06C8_00001310
 lbl_fn_804C06C8_000012F8:
     lwz r0, 0x1f8(r4)
@@ -1421,7 +1421,7 @@ lbl_fn_804C06C8_000012F8:
     li r3, 0x1
     b lbl_fn_804C06C8_00001310
 lbl_fn_804C06C8_0000130C:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804C06C8_00001310:
     cmpwi r3, 0x2
     blt lbl_fn_804C06C8_0000138C
@@ -1584,7 +1584,7 @@ asm void fn_804C0A40(void)
     li r3, 0x1
     b lbl_fn_804C0A40_00001588
 lbl_fn_804C0A40_00001568:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804C0A40_00001588
 lbl_fn_804C0A40_00001570:
     lwz r0, 0x1f8(r4)
@@ -1593,7 +1593,7 @@ lbl_fn_804C0A40_00001570:
     li r3, 0x1
     b lbl_fn_804C0A40_00001588
 lbl_fn_804C0A40_00001584:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804C0A40_00001588:
     cmpwi r3, 0x2
     blt lbl_fn_804C0A40_000015A0
@@ -1849,7 +1849,7 @@ lbl_fn_804C0A40_000018E8:
     or r0, r0, r3
     lwz r3, 0x94(r30)
     or r5, r27, r0
-    bl fn_801F4998
+    bl save_formatSlotMetadata
 lbl_fn_804C0A40_0000190C:
     addi r29, r29, 0x1
     addi r30, r30, 0x22c
@@ -1920,7 +1920,7 @@ lbl_fn_804C0EA4_000019F0:
     la r4, lbl_808813D0
 lbl_fn_804C0EA4_000019F4:
     li r5, 0x0
-    bl fn_804A3C24
+    bl net_initCoopSession
     b lbl_fn_804C0EA4_00001A24
 lbl_fn_804C0EA4_00001A00:
     lwz r4, lbl_8087F86C
@@ -1933,7 +1933,7 @@ lbl_fn_804C0EA4_00001A18:
     la r4, lbl_808813D0
 lbl_fn_804C0EA4_00001A1C:
     li r5, 0x0
-    bl fn_804A3C24
+    bl net_initCoopSession
 lbl_fn_804C0EA4_00001A24:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

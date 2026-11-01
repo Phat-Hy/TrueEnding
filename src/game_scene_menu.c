@@ -6,7 +6,7 @@ extern void __files(void);
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_800185B4(void);
+extern void battle_findTargetSlotById(void);
 extern void fn_80018608(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
@@ -21,14 +21,14 @@ extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_801065E4(void);
 extern void player_evaluateStatusCondition(void);
-extern void fn_80133130(void);
+extern void boss_setPartCollisionFlags(void);
 extern void quest_resetObjectiveBounds(void);
 extern void inventory_unequipItem(void);
 extern void equip_applyToCharacter(void);
 extern void inventory_calcTotalStats(void);
 extern void debuff_clearStatus(void);
 extern void actor_getMovementFlags(void);
-extern void fn_80192758(void);
+extern void map_processStreamChunk(void);
 extern void fn_801A4B00(void);
 extern void fn_801A4E08(void);
 extern void fn_801A7DC8(void);
@@ -293,7 +293,7 @@ lbl_fn_801A6364_00000130:
     beq lbl_fn_801A6364_00000274
     lwz r4, 0x4(r29)
     mr r5, r28
-    bl fn_800185B4
+    bl battle_findTargetSlotById
     cmpwi r3, 0x0
     beq lbl_fn_801A6364_00000274
     lwz r3, lbl_8087EE68
@@ -337,7 +337,7 @@ lbl_fn_801A6364_000002E4:
     li r6, 0x0
     lwz r3, 0x4(r29)
     addi r3, r3, 0x7d4
-    bl fn_80133130
+    bl boss_setPartCollisionFlags
     b lbl_fn_801A6364_0000033C
 lbl_fn_801A6364_00000304:
     lfs f3, 0x234(r30)
@@ -909,7 +909,7 @@ lbl_fn_801A6CFC_00000A0C:
     beq lbl_fn_801A6CFC_00000B70
     lwz r4, 0x4(r31)
     mr r5, r30
-    bl fn_800185B4
+    bl battle_findTargetSlotById
     cmpwi r3, 0x0
     beq lbl_fn_801A6CFC_00000B70
     lwz r3, lbl_8087EE68
@@ -1106,7 +1106,7 @@ lbl_fn_801A6F58_00000E0C:
 lbl_fn_801A6F58_00000E18:
     mr r3, r31
     mr r4, r30
-    bl fn_80192758
+    bl map_processStreamChunk
 lbl_fn_801A6F58_00000E24:
     lwz r0, 0x84(r1)
     lwz r31, 0x7c(r1)

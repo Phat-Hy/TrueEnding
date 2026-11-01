@@ -78,11 +78,11 @@ extern void fn_80720680(void);
 extern void fn_807209C0(void);
 extern void fn_80720A70(void);
 extern void fn_807210F0(void);
-extern void fn_80721120(void);
-extern void fn_80725170(void);
+extern void net_calcStreamOffset(void);
+extern void net_listClearAll(void);
 extern void fn_80725200(void);
-extern void fn_807252A0(void);
-extern void fn_807252D0(void);
+extern void net_listInsertNode(void);
+extern void net_listRemoveNode(void);
 
 /* External data declarations */
 extern u8 lbl_807C6380[];
@@ -245,7 +245,7 @@ lbl_fn_80717EC0_00000110:
     mr r3, r30
     addi r4, r1, 0xc
     addi r5, r31, 0xf8
-    bl fn_807252A0
+    bl net_listInsertNode
     bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
@@ -287,7 +287,7 @@ lbl_fn_80717EC0_000001B0:
     addi r3, r30, 0xc
     addi r4, r1, 0x8
     addi r5, r31, 0x100
-    bl fn_807252A0
+    bl net_listInsertNode
     bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
@@ -323,7 +323,7 @@ asm void fn_807180A0(void)
     bl OSLockMutex
     addi r3, r30, 0xc
     addi r4, r31, 0x100
-    bl fn_807252D0
+    bl net_listRemoveNode
     bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
@@ -332,7 +332,7 @@ asm void fn_807180A0(void)
     bl OSLockMutex
     mr r3, r30
     addi r4, r31, 0xf8
-    bl fn_807252D0
+    bl net_listRemoveNode
     mr r3, r31
     mr r4, r30
     bl fn_8070AB90
@@ -484,7 +484,7 @@ asm void fn_807182B0(void)
     addi r4, r1, 0x8
     stw r0, 0x8(r1)
     addi r5, r31, 0x18
-    bl fn_807252A0
+    bl net_listInsertNode
     bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
@@ -578,7 +578,7 @@ lbl_fn_807183D0_00000584:
     addi r3, r29, 0x18
     addi r4, r1, 0x8
     addi r5, r31, 0x18
-    bl fn_807252A0
+    bl net_listInsertNode
     bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
@@ -909,12 +909,12 @@ asm void fn_80718890(void)
     addic. r3, r3, 0x384
     beq lbl_fn_80718890_00000A30
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_80718890_00000A30:
     addic. r3, r30, 0x378
     beq lbl_fn_80718890_00000A40
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_80718890_00000A40:
     cmpwi r31, 0x0
     ble lbl_fn_80718890_00000A50
@@ -1232,7 +1232,7 @@ asm void fn_80718D00(void)
     mr r5, r30
     addi r3, r29, 0x384
     addi r4, r1, 0x8
-    bl fn_807252A0
+    bl net_listInsertNode
     mr r3, r31
     bl OSUnlockMutex
     lwz r0, 0x24(r1)
@@ -1260,7 +1260,7 @@ asm void fn_80718D70(void)
     bl OSLockMutex
     mr r4, r30
     addi r3, r29, 0x384
-    bl fn_807252D0
+    bl net_listRemoveNode
     mr r3, r31
     bl OSUnlockMutex
     lwz r0, 0x24(r1)
@@ -1532,7 +1532,7 @@ asm void fn_80719120(void)
     mr r31, r4
     lbzu r3, 0x8(r5)
     lwz r4, 0x4(r5)
-    bl fn_80721120
+    bl net_calcStreamOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x2
     beq lbl_fn_80719120_000012D0
@@ -1614,7 +1614,7 @@ asm void fn_80719230(void)
     mr r29, r3
     lbz r3, 0x10(r6)
     lwz r4, 0x14(r6)
-    bl fn_80721120
+    bl net_calcStreamOffset
     lbz r0, 0x0(r3)
     cmpw r30, r0
     blt lbl_fn_80719230_000013E8
@@ -1634,7 +1634,7 @@ lbl_fn_80719230_00001400:
     addi r5, r4, 0x8
     lbz r3, 0x4(r6)
     lwz r4, 0x8(r6)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_80719230_0000142C
     li r3, 0x0
@@ -1713,7 +1713,7 @@ lbl_fn_80719230_00001520:
     addi r5, r4, 0x8
     lbz r3, 0x4(r6)
     lwz r4, 0x8(r6)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_80719230_0000154C
     li r3, 0x0
@@ -1912,7 +1912,7 @@ lbl_fn_807194F0_000017D4:
     addi r5, r3, 0x8
     lbz r3, 0x8(r3)
     lwz r4, 0x4(r5)
-    bl fn_80721120
+    bl net_calcStreamOffset
 lbl_fn_807194F0_000017FC:
     li r3, 0x1
 lbl_fn_807194F0_00001800:
@@ -1942,7 +1942,7 @@ lbl_fn_807196C0_0000184C:
     lbz r3, 0x18(r4)
     addi r5, r4, 0x8
     lwz r4, 0x1c(r4)
-    bl fn_80721120
+    bl net_calcStreamOffset
     lbz r3, 0x0(r3)
 lbl_fn_807196C0_00001864:
     lwz r0, 0x14(r1)
@@ -2018,7 +2018,7 @@ lbl_fn_80719790_0000193C:
     lwz r5, 0x8(r3)
     lbzu r3, 0x8(r5)
     lwz r4, 0x4(r5)
-    bl fn_80721120
+    bl net_calcStreamOffset
     lbz r0, 0x0(r3)
     cmplwi r0, 0x2
     bne lbl_fn_80719790_00001A24
@@ -2026,7 +2026,7 @@ lbl_fn_80719790_0000193C:
     lbz r3, 0x18(r4)
     addi r5, r4, 0x8
     lwz r4, 0x1c(r4)
-    bl fn_80721120
+    bl net_calcStreamOffset
     lbz r0, 0x0(r3)
     cmpw r29, r0
     bge lbl_fn_80719790_00001A24
@@ -2036,13 +2036,13 @@ lbl_fn_80719790_0000193C:
     addi r5, r4, 0x8
     lbz r3, 0x4(r6)
     lwz r4, 0x8(r6)
-    bl fn_80721120
+    bl net_calcStreamOffset
     mr r4, r3
     lwz r5, 0x8(r28)
     lbz r3, 0x0(r3)
     lwz r4, 0x4(r4)
     addi r5, r5, 0x8
-    bl fn_80721120
+    bl net_calcStreamOffset
     lwz r4, 0x0(r3)
     lwz r0, 0x4(r3)
     stw r0, 0x4(r30)
@@ -2383,7 +2383,7 @@ lbl_fn_80719C50_00001E54:
     addic. r3, r29, 0x174
     beq lbl_fn_80719C50_00001E7C
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_80719C50_00001E7C:
     addic. r3, r29, 0x154
     beq lbl_fn_80719C50_00001E8C

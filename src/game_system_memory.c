@@ -20,7 +20,7 @@ extern void talk_copyUtf16String(void);
 extern void boss_decodePhaseBitfield(void);
 extern void fn_8006BA30(void);
 extern void fn_8006BA8C(void);
-extern void fn_8006BB6C(void);
+extern void boss_triggerEventAction(void);
 extern void fn_8006F420(void);
 extern void str_assignBuffer(void);
 extern void mem_realloc(void);
@@ -29,15 +29,15 @@ extern void str_parseInt(void);
 extern void wcs_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
-extern void fn_800EC254(void);
+extern void cam_testTargetVisibility(void);
 extern void cam_registerTarget(void);
 extern void cam_initTrajectoryParams(void);
 extern void cam_bindPathTarget(void);
 extern void cam_bindRotationTarget(void);
 extern void cam_evalControllerSpline(void);
 extern void cam_setLookAtTarget(void);
-extern void fn_800ED4D8(void);
-extern void fn_800ED4E0(void);
+extern void cam_getLookAtState(void);
+extern void cam_updateLookAtMatrix(void);
 extern void cam_evalLookAtMatrix(void);
 extern void fn_8011BB90(void);
 extern void fn_80205BE8(void);
@@ -49,8 +49,8 @@ extern void fn_8020A5D4(void);
 extern void str_appendString(void);
 extern void fn_8020A808(void);
 extern void task_lookupTagIndex(void);
-extern void fn_80219544(void);
-extern void fn_8046DC5C(void);
+extern void task_getWorkerByIndex(void);
+extern void boss_loadWeakpointResource(void);
 extern void boss_bindArenaInteractions(void);
 extern void fn_805A52F8(void);
 extern void strcmp(void);
@@ -902,7 +902,7 @@ lbl_fn_80208BE8_00000A64:
     bne lbl_fn_80208BE8_000008BC
     mr r3, r31
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
     lmw r27, 0xd8c(r1)
     lwz r0, 0xda4(r1)
     mtlr r0
@@ -1040,7 +1040,7 @@ asm void fn_802091E8(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_80219544
+    bl task_getWorkerByIndex
     lwz r6, lbl_8087F198
     li r4, 0x0
     lwz r0, lbl_8087F19C
@@ -1387,7 +1387,7 @@ lbl_fn_80209300_000010C4:
     bne lbl_fn_80209300_00000F14
     mr r3, r31
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
     lmw r21, 0x644(r1)
     lwz r0, 0x674(r1)
     mtlr r0
@@ -1631,7 +1631,7 @@ asm void fn_80209960(void)
     lwz r4, lbl_80882E04
     addi r5, r1, 0x8
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r12, 0x2d4(r1)
     mr r21, r3
     mr r4, r21
@@ -1902,7 +1902,7 @@ lbl_fn_80209960_000017D0:
     b lbl_fn_80209960_00001870
 lbl_fn_80209960_0000182C:
     addi r3, r1, 0x26c
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     bl str_skipWhitespace
     lwz r5, lbl_8087F1B8
@@ -1925,7 +1925,7 @@ lbl_fn_80209960_00001870:
     addi r3, r1, 0x26c
     addi r4, r1, 0x12c
     li r20, 0x0
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     cmpwi r3, 0x0
     beq lbl_fn_80209960_000018A0
     cmpwi r22, 0x7
@@ -1965,7 +1965,7 @@ lbl_fn_80209960_000018A0:
     b lbl_fn_80209960_00001960
 lbl_fn_80209960_0000191C:
     addi r3, r1, 0x230
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     bl str_skipWhitespace
     lwz r5, lbl_8087F1B8
@@ -1988,7 +1988,7 @@ lbl_fn_80209960_00001960:
     addi r3, r1, 0x230
     addi r4, r1, 0x90
     li r20, 0x0
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     cmpwi r3, 0x0
     beq lbl_fn_80209960_00001990
     cmpwi r22, 0x7
@@ -2132,14 +2132,14 @@ lbl_fn_80209960_00001B2C:
     b lbl_fn_80209960_00001BB4
 lbl_fn_80209960_00001B90:
     addi r3, r1, 0x1c8
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     bl atoi
     stw r3, 0x0(r19)
     addi r19, r19, 0x4
     addi r17, r17, 0x1
     addi r3, r1, 0x1c8
-    bl fn_800ED4E0
+    bl cam_updateLookAtMatrix
 lbl_fn_80209960_00001BB4:
     addi r3, r1, 0x30
     addi r4, r1, 0x204
@@ -2147,7 +2147,7 @@ lbl_fn_80209960_00001BB4:
     addi r3, r1, 0x1c8
     addi r4, r1, 0x30
     li r20, 0x0
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     cmpwi r3, 0x0
     beq lbl_fn_80209960_00001BE4
     cmpwi r17, 0x2

@@ -46,7 +46,7 @@ extern void fn_806A0DA4(void);
 extern void fn_806A0DAC(void);
 extern void fn_806A0E44(void);
 extern void fn_806A117C(void);
-extern void fn_806A11D4(void);
+extern void net_initSubsystem(void);
 extern void fn_806A123C(void);
 extern void fn_806A1240(void);
 extern void fn_806A1248(void);
@@ -57,7 +57,7 @@ extern void fn_806A37F4(void);
 extern void fn_806A39B8(void);
 extern void fn_806A3B44(void);
 extern void fn_806A3D50(void);
-extern void fn_806A4270(void);
+extern void net_truncateU16(void);
 extern void fn_806A4C5C(void);
 extern void fn_806A5798(void);
 
@@ -78,21 +78,21 @@ extern u32 lbl_8087ED58;
 void fn_8069A0D0(void);
 void fn_8069A100(void);
 void fn_8069A15C(void);
-void fn_8069A1A0(void);
-void fn_8069A1A8(void);
-void fn_8069A1B0(void);
+void fn_8069A1A0(void *p, void *val);
+void fn_8069A1A8(void *p, void *val);
+void *fn_8069A1B0(void *p);
 void fn_8069A1B8(void);
 void fn_8069A348(void);
 void fn_8069A438(void);
 void fn_8069A574(void);
 void fn_8069A5BC(void);
 void fn_8069A5DC(void);
-void fn_8069A768(void);
+void fn_8069A768(void *p);
 void fn_8069A778(void);
 void fn_8069A844(void);
 void fn_8069A960(void);
 void fn_8069A9B4(void);
-void fn_8069A9B8(void);
+void fn_8069A9B8(void *p);
 void fn_8069A9C4(void);
 void fn_8069AA04(void);
 void fn_8069AA08(void);
@@ -110,7 +110,7 @@ void fn_8069B0BC(void);
 void fn_8069B200(void);
 void fn_8069B21C(void);
 void fn_8069B23C(void);
-void fn_8069B278(void);
+void fn_8069B278(void *p);
 void fn_8069B284(void);
 void fn_8069B8AC(void);
 void fn_8069B9B0(void);
@@ -151,7 +151,7 @@ asm void fn_8069A100(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_806A11D4
+    bl net_initSubsystem
     lwz r12, 0x7c4(r3)
     cmpwi r12, 0x0
     beq lbl_fn_8069A100_00000070
@@ -179,7 +179,7 @@ asm void fn_8069A15C(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_806A11D4
+    bl net_initSubsystem
     lwz r12, 0x7c8(r3)
     cmpwi r12, 0x0
     beq lbl_fn_8069A15C_000000BC
@@ -194,25 +194,19 @@ lbl_fn_8069A15C_000000BC:
     blr
 }
 
-asm void fn_8069A1A0(void)
+void fn_8069A1A0(void *p, void *val)
 {
-    nofralloc
-    stw r4, 0x7d8(r3)
-    blr
+    *(void **)((u8 *)p + 0x7d8) = val;
 }
 
-asm void fn_8069A1A8(void)
+void fn_8069A1A8(void *p, void *val)
 {
-    nofralloc
-    stw r4, 0x7d4(r3)
-    blr
+    *(void **)((u8 *)p + 0x7d4) = val;
 }
 
-asm void fn_8069A1B0(void)
+void *fn_8069A1B0(void *p)
 {
-    nofralloc
-    lwz r3, 0x7d4(r3)
-    blr
+    return *(void **)((u8 *)p + 0x7d4);
 }
 
 asm void fn_8069A1B8(void)
@@ -258,7 +252,7 @@ asm void fn_8069A1B8(void)
     bl fn_806A1288
     li r0, -0x1
     stw r0, 0x7d0(r29)
-    bl fn_806A11D4
+    bl net_initSubsystem
     lwz r12, 0x7c4(r3)
     cmpwi r12, 0x0
     beq lbl_fn_8069A1B8_000001AC
@@ -286,7 +280,7 @@ lbl_fn_8069A1B8_000001CC:
     li r0, 0x9
     stw r0, 0x7d8(r29)
     lwz r30, 0x7e0(r29)
-    bl fn_806A11D4
+    bl net_initSubsystem
     lwz r12, 0x7c8(r3)
     cmpwi r12, 0x0
     beq lbl_fn_8069A1B8_0000020C
@@ -351,7 +345,7 @@ asm void fn_8069A348(void)
     mr r4, r30
     bl fn_8069AAA4
     lwz r31, 0x7e0(r30)
-    bl fn_806A11D4
+    bl net_initSubsystem
     lwz r12, 0x7c8(r3)
     cmpwi r12, 0x0
     beq lbl_fn_8069A348_000002EC
@@ -645,13 +639,10 @@ lbl_fn_8069A5DC_00000680:
     blr
 }
 
-asm void fn_8069A768(void)
+void fn_8069A768(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    stw r0, 0x4(r3)
-    blr
+    *(u32 *)p = 0;
+    *((u32 *)p + 1) = 0;
 }
 
 asm void fn_8069A778(void)
@@ -832,12 +823,9 @@ asm void fn_8069A9B4(void)
     b fn_8069A574
 }
 
-asm void fn_8069A9B8(void)
+void fn_8069A9B8(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x18(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x18) = 0;
 }
 
 asm void fn_8069A9C4(void)
@@ -1551,12 +1539,9 @@ lbl_fn_8069B23C_000011A0:
     blr
 }
 
-asm void fn_8069B278(void)
+void fn_8069B278(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)p = 0;
 }
 
 asm void fn_8069B284(void)
@@ -2606,7 +2591,7 @@ asm void fn_8069C04C(void)
     mr r30, r6
     mr r31, r7
     clrlwi r3, r8, 16
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0xa(r1)
     mr r3, r30
     addi r4, r1, 0x8

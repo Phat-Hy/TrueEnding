@@ -18,9 +18,9 @@ extern void map_debugLog(void);
 extern void atn_Matrix_copy(void);
 extern void fn_80091CFC(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80094958(void);
+extern void target_registerCandidate(void);
 extern void fn_80094B6C(void);
-extern void fn_800CB6E4(void);
+extern void morph_dispatchTargetUpdate(void);
 extern void atn_Task_setActive(void);
 extern void fn_800F29D0(void);
 extern void viewport_getGlobalContext(void);
@@ -35,7 +35,7 @@ extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
-extern void fn_801A03E8(void);
+extern void vec3_dot(void);
 extern void sound_initGlobalInstances(void);
 extern void res_Shader_findParameter(void);
 extern void res_findResourceSlot(void);
@@ -771,7 +771,7 @@ lbl_fn_8031E8BC_00000928:
     bl vec3_normalize
     mr r4, r31
     addi r3, r1, 0x3c
-    bl fn_801A03E8
+    bl vec3_dot
     lfs f0, lbl_80884E3C
     fcmpo cr0, f1, f0
     ble lbl_fn_8031E8BC_00000980
@@ -787,7 +787,7 @@ lbl_fn_8031E8BC_00000980:
     bl vec3_normalize
     addi r3, r1, 0x30
     addi r4, r28, 0x3c
-    bl fn_801A03E8
+    bl vec3_dot
     lfs f0, lbl_80884DFC
     fcmpo cr0, f1, f0
     bge lbl_fn_8031E8BC_000009BC
@@ -854,7 +854,7 @@ lbl_fn_8031E8BC_00000A7C:
 lbl_fn_8031E8BC_00000A98:
     mr r4, r30
     addi r3, r29, 0x38
-    bl fn_800CB6E4
+    bl morph_dispatchTargetUpdate
     mr r4, r30
     addi r3, r29, 0x10
     bl vec3_copy
@@ -1934,7 +1934,7 @@ asm void fn_8031F810(void)
     stfs f1, 0x30(r1)
     fdivs f0, f0, f4
     stfs f0, 0x34(r1)
-    bl fn_80094958
+    bl target_registerCandidate
     lwz r3, lbl_8087F0A8
     lwz r0, 0x34(r3)
     cmpwi r0, 0x0

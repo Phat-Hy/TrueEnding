@@ -9,7 +9,7 @@ extern void fn_8016F824(void);
 extern void fn_8016FDCC(void);
 extern void battle_resolveAggroHierarchy(void);
 extern void fn_805B3124(void);
-extern void fn_805B325C(void);
+extern void dvd_queue_traverseNodes(void);
 extern void fn_805B33BC(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
@@ -680,13 +680,13 @@ lbl_fn_805AF618_000008D4:
     cmpwi r4, 0x0
     beq lbl_fn_805AF618_00000928
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805AF618_00000928:
     lwz r4, 0x4(r25)
     cmpwi r4, 0x0
     beq lbl_fn_805AF618_0000093C
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805AF618_0000093C:
     mr r3, r25
     bl dtor_80084684
@@ -698,13 +698,13 @@ lbl_fn_805AF618_00000944:
     cmpwi r4, 0x0
     beq lbl_fn_805AF618_00000964
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805AF618_00000964:
     lwz r4, 0x4(r25)
     cmpwi r4, 0x0
     beq lbl_fn_805AF618_00000978
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805AF618_00000978:
     mr r3, r25
     bl dtor_80084684
@@ -722,13 +722,13 @@ lbl_fn_805AF618_00000988:
     cmpwi r4, 0x0
     beq lbl_fn_805AF618_000009B4
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805AF618_000009B4:
     lwz r4, 0x4(r25)
     cmpwi r4, 0x0
     beq lbl_fn_805AF618_000009C8
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805AF618_000009C8:
     mr r3, r25
     bl dtor_80084684
@@ -740,13 +740,13 @@ lbl_fn_805AF618_000009D0:
     cmpwi r4, 0x0
     beq lbl_fn_805AF618_000009F0
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805AF618_000009F0:
     lwz r4, 0x4(r25)
     cmpwi r4, 0x0
     beq lbl_fn_805AF618_00000A04
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805AF618_00000A04:
     mr r3, r25
     bl dtor_80084684
@@ -775,13 +775,13 @@ lbl_fn_805AF618_00000A1C:
     cmpwi r4, 0x0
     beq lbl_fn_805AF618_00000A68
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805AF618_00000A68:
     lwz r4, 0x4(r25)
     cmpwi r4, 0x0
     beq lbl_fn_805AF618_00000A7C
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805AF618_00000A7C:
     mr r3, r25
     bl dtor_80084684
@@ -793,13 +793,13 @@ lbl_fn_805AF618_00000A84:
     cmpwi r4, 0x0
     beq lbl_fn_805AF618_00000AA4
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805AF618_00000AA4:
     lwz r4, 0x4(r25)
     cmpwi r4, 0x0
     beq lbl_fn_805AF618_00000AB8
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805AF618_00000AB8:
     mr r3, r25
     bl dtor_80084684
@@ -817,13 +817,13 @@ lbl_fn_805AF618_00000AC8:
     cmpwi r4, 0x0
     beq lbl_fn_805AF618_00000AF4
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805AF618_00000AF4:
     lwz r4, 0x4(r25)
     cmpwi r4, 0x0
     beq lbl_fn_805AF618_00000B08
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805AF618_00000B08:
     mr r3, r25
     bl dtor_80084684
@@ -835,13 +835,13 @@ lbl_fn_805AF618_00000B10:
     cmpwi r4, 0x0
     beq lbl_fn_805AF618_00000B30
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805AF618_00000B30:
     lwz r4, 0x4(r25)
     cmpwi r4, 0x0
     beq lbl_fn_805AF618_00000B44
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805AF618_00000B44:
     mr r3, r25
     bl dtor_80084684
@@ -1520,13 +1520,13 @@ lbl_fn_805B01C4_00001480:
     cmpwi r4, 0x0
     beq lbl_fn_805B01C4_000014D4
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B01C4_000014D4:
     lwz r4, 0x4(r25)
     cmpwi r4, 0x0
     beq lbl_fn_805B01C4_000014E8
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B01C4_000014E8:
     mr r3, r25
     bl dtor_80084684
@@ -1538,13 +1538,13 @@ lbl_fn_805B01C4_000014F0:
     cmpwi r4, 0x0
     beq lbl_fn_805B01C4_00001510
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B01C4_00001510:
     lwz r4, 0x4(r25)
     cmpwi r4, 0x0
     beq lbl_fn_805B01C4_00001524
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B01C4_00001524:
     mr r3, r25
     bl dtor_80084684
@@ -1562,13 +1562,13 @@ lbl_fn_805B01C4_00001534:
     cmpwi r4, 0x0
     beq lbl_fn_805B01C4_00001560
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B01C4_00001560:
     lwz r4, 0x4(r25)
     cmpwi r4, 0x0
     beq lbl_fn_805B01C4_00001574
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B01C4_00001574:
     mr r3, r25
     bl dtor_80084684
@@ -1580,13 +1580,13 @@ lbl_fn_805B01C4_0000157C:
     cmpwi r4, 0x0
     beq lbl_fn_805B01C4_0000159C
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B01C4_0000159C:
     lwz r4, 0x4(r25)
     cmpwi r4, 0x0
     beq lbl_fn_805B01C4_000015B0
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B01C4_000015B0:
     mr r3, r25
     bl dtor_80084684
@@ -1615,13 +1615,13 @@ lbl_fn_805B01C4_000015C8:
     cmpwi r4, 0x0
     beq lbl_fn_805B01C4_00001614
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B01C4_00001614:
     lwz r4, 0x4(r25)
     cmpwi r4, 0x0
     beq lbl_fn_805B01C4_00001628
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B01C4_00001628:
     mr r3, r25
     bl dtor_80084684
@@ -1633,13 +1633,13 @@ lbl_fn_805B01C4_00001630:
     cmpwi r4, 0x0
     beq lbl_fn_805B01C4_00001650
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B01C4_00001650:
     lwz r4, 0x4(r25)
     cmpwi r4, 0x0
     beq lbl_fn_805B01C4_00001664
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B01C4_00001664:
     mr r3, r25
     bl dtor_80084684
@@ -1657,13 +1657,13 @@ lbl_fn_805B01C4_00001674:
     cmpwi r4, 0x0
     beq lbl_fn_805B01C4_000016A0
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B01C4_000016A0:
     lwz r4, 0x4(r25)
     cmpwi r4, 0x0
     beq lbl_fn_805B01C4_000016B4
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B01C4_000016B4:
     mr r3, r25
     bl dtor_80084684
@@ -1675,13 +1675,13 @@ lbl_fn_805B01C4_000016BC:
     cmpwi r4, 0x0
     beq lbl_fn_805B01C4_000016DC
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B01C4_000016DC:
     lwz r4, 0x4(r25)
     cmpwi r4, 0x0
     beq lbl_fn_805B01C4_000016F0
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B01C4_000016F0:
     mr r3, r25
     bl dtor_80084684
@@ -2360,13 +2360,13 @@ lbl_fn_805B0D70_0000202C:
     cmpwi r4, 0x0
     beq lbl_fn_805B0D70_00002080
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B0D70_00002080:
     lwz r4, 0x4(r25)
     cmpwi r4, 0x0
     beq lbl_fn_805B0D70_00002094
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B0D70_00002094:
     mr r3, r25
     bl dtor_80084684
@@ -2378,13 +2378,13 @@ lbl_fn_805B0D70_0000209C:
     cmpwi r4, 0x0
     beq lbl_fn_805B0D70_000020BC
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B0D70_000020BC:
     lwz r4, 0x4(r25)
     cmpwi r4, 0x0
     beq lbl_fn_805B0D70_000020D0
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B0D70_000020D0:
     mr r3, r25
     bl dtor_80084684
@@ -2402,13 +2402,13 @@ lbl_fn_805B0D70_000020E0:
     cmpwi r4, 0x0
     beq lbl_fn_805B0D70_0000210C
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B0D70_0000210C:
     lwz r4, 0x4(r25)
     cmpwi r4, 0x0
     beq lbl_fn_805B0D70_00002120
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B0D70_00002120:
     mr r3, r25
     bl dtor_80084684
@@ -2420,13 +2420,13 @@ lbl_fn_805B0D70_00002128:
     cmpwi r4, 0x0
     beq lbl_fn_805B0D70_00002148
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B0D70_00002148:
     lwz r4, 0x4(r25)
     cmpwi r4, 0x0
     beq lbl_fn_805B0D70_0000215C
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B0D70_0000215C:
     mr r3, r25
     bl dtor_80084684
@@ -2455,13 +2455,13 @@ lbl_fn_805B0D70_00002174:
     cmpwi r4, 0x0
     beq lbl_fn_805B0D70_000021C0
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B0D70_000021C0:
     lwz r4, 0x4(r25)
     cmpwi r4, 0x0
     beq lbl_fn_805B0D70_000021D4
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B0D70_000021D4:
     mr r3, r25
     bl dtor_80084684
@@ -2473,13 +2473,13 @@ lbl_fn_805B0D70_000021DC:
     cmpwi r4, 0x0
     beq lbl_fn_805B0D70_000021FC
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B0D70_000021FC:
     lwz r4, 0x4(r25)
     cmpwi r4, 0x0
     beq lbl_fn_805B0D70_00002210
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B0D70_00002210:
     mr r3, r25
     bl dtor_80084684
@@ -2497,13 +2497,13 @@ lbl_fn_805B0D70_00002220:
     cmpwi r4, 0x0
     beq lbl_fn_805B0D70_0000224C
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B0D70_0000224C:
     lwz r4, 0x4(r25)
     cmpwi r4, 0x0
     beq lbl_fn_805B0D70_00002260
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B0D70_00002260:
     mr r3, r25
     bl dtor_80084684
@@ -2515,13 +2515,13 @@ lbl_fn_805B0D70_00002268:
     cmpwi r4, 0x0
     beq lbl_fn_805B0D70_00002288
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B0D70_00002288:
     lwz r4, 0x4(r25)
     cmpwi r4, 0x0
     beq lbl_fn_805B0D70_0000229C
     mr r3, r22
-    bl fn_805B325C
+    bl dvd_queue_traverseNodes
 lbl_fn_805B0D70_0000229C:
     mr r3, r25
     bl dtor_80084684

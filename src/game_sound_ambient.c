@@ -12,7 +12,7 @@ extern void ref_releaseHandle(void);
 extern void wcs_vformat(void);
 extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
-extern void fn_801CF334(void);
+extern void ui_log_findActiveEntry(void);
 extern void fn_801CF3C0(void);
 extern void fn_801CFA5C(void);
 extern void fn_801CFAA8(void);
@@ -33,16 +33,16 @@ extern void assert_formatLocation(void);
 extern void mem_findBlockById(void);
 extern void time_wrapMilliseconds(void);
 extern void rand_scaleRangeInt(void);
-extern void fn_8020EF4C(void);
+extern void rand_stepEntropy(void);
 extern void random_generateValue(void);
-extern void fn_8020EFEC(void);
+extern void time_ticksToSeconds(void);
 extern void event_findEntryById(void);
 extern void fn_802114D8(void);
 extern void fn_802114E0(void);
 extern void task_mapIdToQueue(void);
-extern void fn_804439FC(void);
+extern void gmk_registerSlot(void);
 extern void gmk_findSlotByIndex(void);
-extern void fn_804A3C24(void);
+extern void net_initCoopSession(void);
 extern void fn_804A4294(void);
 extern void fn_804A4300(void);
 extern void fn_804A4494(void);
@@ -110,7 +110,7 @@ asm void fn_801D8CC4(void)
     lwz r3, lbl_8087F580
     li r5, 0x0
     lwz r4, 0xc(r4)
-    bl fn_804A3C24
+    bl net_initCoopSession
 lbl_fn_801D8CC4_00000080:
     lwz r28, lbl_8087EF70
     li r4, 0x0
@@ -120,7 +120,7 @@ lbl_fn_801D8CC4_00000080:
     cmpwi r3, 0x0
     beq lbl_fn_801D8CC4_00000334
     mr r3, r31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r4, 0x4c(r3)
     mr r3, r31
     lwz r5, 0x1e4(r31)
@@ -149,10 +149,10 @@ lbl_fn_801D8CC4_000000F4:
     cmpw r0, r3
     bge lbl_fn_801D8CC4_00000318
     mr r3, r31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r30, 0x48(r3)
     mr r3, r31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r0, 0x80(r31)
     lwz r4, 0xb4c(r31)
     mulli r0, r0, 0x18
@@ -360,7 +360,7 @@ lbl_fn_801D8CC4_00000398:
     stw r0, 0x54(r1)
 lbl_fn_801D8CC4_00000424:
     mr r3, r31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r4, 0x4c(r3)
     mr r3, r31
     lwz r5, 0x1e4(r31)
@@ -412,7 +412,7 @@ lbl_fn_801D8CC4_00000460:
     stw r0, 0x3c(r1)
 lbl_fn_801D8CC4_000004EC:
     mr r3, r31
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r4, 0x4c(r3)
     mr r3, r31
     lwz r5, 0x1e4(r31)
@@ -563,10 +563,10 @@ asm void fn_801D9388(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     mr r29, r3
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r31, 0x4c(r3)
     mr r3, r29
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r30, 0x48(r3)
     mr r3, r29
     mr r4, r31
@@ -612,7 +612,7 @@ lbl_fn_801D9388_00000750:
     add r4, r4, r0
     lwz r4, -0x7d70(r4)
     bl time_wrapMilliseconds
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     bne lbl_fn_801D9388_000007D8
     mr r3, r29
@@ -702,7 +702,7 @@ lbl_fn_801D94D0_0000088C:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_804439FC
+    bl gmk_registerSlot
     stw r16, 0x20(r20)
 lbl_fn_801D94D0_000008E8:
     addi r22, r22, 0x1
@@ -727,7 +727,7 @@ lbl_fn_801D94D0_00000900:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_804439FC
+    bl gmk_registerSlot
     cmpwi r22, 0x0
     stw r16, 0x0(r20)
     bne lbl_fn_801D94D0_00000954
@@ -748,7 +748,7 @@ lbl_fn_801D94D0_00000978:
     cmpw r21, r14
     blt lbl_fn_801D94D0_00000850
     mr r3, r15
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r0, 0x4c(r3)
     li r3, 0x0
     stw r0, 0x1bc8(r15)
@@ -981,7 +981,7 @@ lbl_fn_801D94D0_00000CA4:
     cmpwi r3, 0x0
     beq lbl_fn_801D94D0_00001030
     lwz r3, 0x4(r25)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     cmpwi r3, 0x0
     mr r18, r3
     beq lbl_fn_801D94D0_00001030
@@ -996,7 +996,7 @@ lbl_fn_801D94D0_00000CA4:
     cmpwi r0, 0x0
     bne lbl_fn_801D94D0_00000D38
     mr r3, r18
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_801D94D0_00000D30
     lwz r0, 0xa8(r18)
@@ -1600,7 +1600,7 @@ lbl_fn_801D94D0_0000153C:
     add r4, r4, r0
     lwz r4, -0x7d70(r4)
     bl time_wrapMilliseconds
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     bne lbl_fn_801D94D0_000015C4
     mr r3, r15

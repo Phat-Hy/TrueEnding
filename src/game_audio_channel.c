@@ -13,7 +13,7 @@ extern void morph_updateMesh(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void enemy_evalAnimTrack(void);
-extern void fn_801426A4(void);
+extern void quest_evaluateMilestoneData(void);
 extern void quest_getRewardItemSlot(void);
 extern void shop_canPurchaseItem(void);
 extern void actor_setState(void);
@@ -1783,7 +1783,7 @@ lbl_fn_802FA764_000018A0:
     mr r3, r31
     addi r4, r1, 0x128
     fmuls f2, f0, f30
-    bl fn_801426A4
+    bl quest_evaluateMilestoneData
     lwz r3, 0x15d0(r31)
     subi r0, r3, 0x1
     stw r0, 0x15d0(r31)

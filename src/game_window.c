@@ -41,16 +41,16 @@ extern u32 lbl_80880CD8;
 void fn_800A6BD4(void);
 void fn_800A6BDC(void);
 void fn_800A6E8C(void);
-void fn_800A6F7C(void);
+void fn_800A6F7C(void *p);
 void fn_800A6F88(void);
 void fn_800A6FF0(void);
-void fn_800A70EC(void);
+u32 fn_800A70EC(void);
 void fn_800A70F4(void);
 void fn_800A72B0(void);
-void fn_800A72F0(void);
+u32 fn_800A72F0(void);
 void fn_800A72F8(void);
 void fn_800A7314(void);
-void fn_800A7354(void);
+u32 fn_800A7354(void);
 void fn_800A735C(void);
 void fn_800A7364(void);
 void fn_800A73A4(void);
@@ -325,12 +325,9 @@ lbl_fn_800A6E8C_00000394:
     blr
 }
 
-asm void fn_800A6F7C(void)
+void fn_800A6F7C(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)p = 0;
 }
 
 asm void fn_800A6F88(void)
@@ -439,11 +436,9 @@ lbl_fn_800A6FF0_00000500:
     blr
 }
 
-asm void fn_800A70EC(void)
+u32 fn_800A70EC(void)
 {
-    nofralloc
-    li r3, 0x3
-    blr
+    return 3;
 }
 
 asm void fn_800A70F4(void)
@@ -604,11 +599,9 @@ lbl_fn_800A72B0_00000704:
     blr
 }
 
-asm void fn_800A72F0(void)
+u32 fn_800A72F0(void)
 {
-    nofralloc
-    li r3, 0x2
-    blr
+    return 2;
 }
 
 asm void fn_800A72F8(void)
@@ -646,11 +639,9 @@ lbl_fn_800A7314_00000768:
     blr
 }
 
-asm void fn_800A7354(void)
+u32 fn_800A7354(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_800A735C(void)

@@ -18,7 +18,7 @@ extern void* dungeon_initGlobalContext(void);
 extern void town_registerInteractionPoint(void);
 extern void town_updateInteractionPoints(void*, void*);
 extern void fn_800C2418(void);
-extern void fn_800C2448(void);
+extern void skeleton_getBoneByIndex(void);
 extern void fn_800C2520(void);
 struct atn_LoadHandle; extern void atn_LoadHandle_constructor(void*);
 extern void atn_LoadHandle_destructor(void*, int);
@@ -756,7 +756,7 @@ lbl_fn_800D5F68_000009B8:
     psq_st f4, 0x18(r6), 0, 0
     psq_st f5, 0x20(r6), 0, 0
     lwz r3, 0x2fc(r3)
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     lfs f2, 0x1c(r3)
     addi r4, r1, 0xc8
     psq_l f1, 0x14(r3), 0, 0
@@ -916,7 +916,7 @@ lbl_fn_800D5F68_00000C28:
     psq_st f4, 0x18(r6), 0, 0
     psq_st f5, 0x20(r6), 0, 0
     lwz r3, 0x2fc(r3)
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     addi r4, r1, 0x98
     psq_l f1, 0x14(r3), 0, 0
     psq_st f1, 0x0(r4), 0, 0

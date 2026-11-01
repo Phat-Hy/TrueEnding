@@ -10,12 +10,12 @@ extern void map_debugLog(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_8012476C(void);
-extern void fn_801426A4(void);
+extern void player_testStatusCondition(void);
+extern void quest_evaluateMilestoneData(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
 extern void debuff_clearStatus(void);
-extern void fn_801750FC(void);
+extern void battle_calcOutcomeBonus(void);
 extern void fn_801B2EDC(void);
 extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
@@ -452,7 +452,7 @@ lbl_fn_8019905C_00000548:
     cmpwi r0, 0x0
     beq lbl_fn_8019905C_000005CC
     lwz r31, 0x1208(r3)
-    bl fn_801750FC
+    bl battle_calcOutcomeBonus
     lfs f0, lbl_80881FCC
     li r6, 0x0
     li r5, 0x6
@@ -497,7 +497,7 @@ lbl_fn_8019905C_000005D4:
     stw r0, 0x728(r3)
     lwz r3, lbl_8087F0A8
     addi r3, r3, 0x48c
-    bl fn_8012476C
+    bl player_testStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_8019905C_00000628
     lwz r3, 0x28(r30)
@@ -1293,7 +1293,7 @@ lbl_fn_80199AFC_00001134:
     lfs f2, lbl_8088200C
     stfs f0, 0x94(r1)
     lwz r3, 0x4(r30)
-    bl fn_801426A4
+    bl quest_evaluateMilestoneData
     b lbl_fn_80199AFC_000013CC
 lbl_fn_80199AFC_00001168:
     lwz r3, 0x4(r30)

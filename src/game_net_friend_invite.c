@@ -9,7 +9,7 @@ extern void _savegpr_20(void);
 extern void dtor_80084684(void);
 extern void vec3_set(void);
 extern void scene_transformPoint(void);
-extern void fn_8000DCF4(void);
+extern void scene_getCamera(void);
 extern void ui_destroyWidget(void);
 extern void fn_8004895C(void);
 extern void fn_80049654(void);
@@ -23,7 +23,7 @@ extern void msg_getMessageById(void);
 extern void fn_800C310C(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB58C(void);
+extern void morph_hasActiveWeight(void);
 extern void morph_updateMesh(void);
 extern void fn_800CE368(void);
 extern void atn_Task_destructor(void);
@@ -34,7 +34,7 @@ extern void fn_800D8814(void);
 extern void fn_800EC1F4(void);
 extern void proj_getMatrix(void);
 extern void fn_800F530C(void);
-extern void fn_800F7F90(void);
+extern void viewport_getFlag(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void phys_scaleGravity(void);
@@ -43,7 +43,7 @@ extern void fn_80114AA0(void);
 extern void fn_801156BC(void);
 extern void magic_getOffset6C(void);
 extern void fn_8012B3E8(void);
-extern void fn_8012B988(void);
+extern void enemy_updateNavSteering(void);
 extern void enemy_updateAnimTimer(void);
 extern void fn_80139F4C(void);
 extern void npc_getDialogController(void);
@@ -52,7 +52,7 @@ extern void debuff_removeStatusEffect(void);
 extern void battle_activateExpReward(void);
 extern void fn_8017A300(void);
 extern void fn_80198C00(void);
-extern void fn_80206B14(void);
+extern void sys_findModuleById(void);
 extern void fn_8020A3E4(void);
 extern void fn_8020A81C(void);
 extern void time_wrapMilliseconds(void);
@@ -63,7 +63,7 @@ extern void res_MsgHandle_update(void);
 extern void fn_80239798(void);
 extern void res_findResourceSlot(void);
 extern void fn_80244CA0(void);
-extern void fn_80244CAC(void);
+extern void script_setTaskTerminated(void);
 extern void fn_8026607C(void);
 extern void fn_80266FA4(void);
 extern void fn_80266FB4(void);
@@ -78,7 +78,7 @@ extern void fn_8037308C(void);
 extern void fn_80373118(void);
 extern void kpad_getClampData(void);
 extern void dvd_showDiskErrorDialog(void);
-extern void fn_8037EF30(void);
+extern void fat_dispatchFsRequest(void);
 extern void fn_8037F688(void);
 extern void fn_803BE590(void);
 extern void fn_803CFC58(void);
@@ -86,7 +86,7 @@ extern void fn_803D6E1C(void);
 extern void fn_803D6E70(void);
 extern void fn_803D7100(void);
 extern void fn_803EFDAC(void);
-extern void fn_8046ECDC(void);
+extern void boss_updateLaserAimMatrix(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
@@ -96,7 +96,7 @@ extern void fn_804814F0(void);
 extern void fn_8049D68C(void);
 extern void fn_804AC734(void);
 extern void net_getPacketManager(void);
-extern void fn_804AF520(void);
+extern void net_queue_transitionState(void);
 extern void fn_804B50C0(void);
 extern void fn_804B6204(void);
 extern void fn_804B691C(void);
@@ -259,7 +259,7 @@ extern void fn_804EAFD4(void);
 extern void fn_804EB1B0(void);
 extern void fn_804EB3D0(void);
 extern void fn_804EB5DC(void);
-extern void fn_804EB874(void);
+extern void net_getLocalPlayerAid(void);
 extern void fn_804ED76C(void);
 extern void fn_804EDB10(void);
 extern void fn_804EDCD0(void);
@@ -286,7 +286,7 @@ extern void fn_804FB66C(void);
 extern void fn_804FB678(void);
 extern void fn_804FB96C(void);
 extern void fn_804FC0D8(void);
-extern void fn_8050128C(void);
+extern void net_isMessageStateActive(void);
 extern void fn_80502100(void);
 extern void fn_8050270C(void);
 extern void fn_8050284C(void);
@@ -1192,7 +1192,7 @@ lbl_fn_804D16FC_00000AF4:
     stw r30, 0xd40(r31)
     stw r30, 0xd44(r31)
     stb r0, 0xcc(r31)
-    bl fn_8050128C
+    bl net_isMessageStateActive
     stw r29, 0xd0(r31)
     mr r3, r31
     stw r29, 0xb0(r31)
@@ -1225,7 +1225,7 @@ asm void fn_804D1F70(void)
     mr r31, r3
     stb r0, 0xcc(r3)
     addi r3, r3, 0xdc
-    bl fn_8050128C
+    bl net_isMessageStateActive
     li r3, 0x0
     li r0, -0x1
     stw r3, 0xd0(r31)
@@ -1807,7 +1807,7 @@ lbl_fn_804D25D4_00001338:
     lbz r0, -0x6688(r3)
     cmpwi r0, 0x0
     bne lbl_fn_804D25D4_000013A4
-    bl fn_800F7F90
+    bl viewport_getFlag
     bl fn_804DC688
     cmplwi r3, 0x1
     bne lbl_fn_804D25D4_000013A4
@@ -1903,7 +1903,7 @@ lbl_fn_804D25D4_000014D0:
     stw r0, -0x68ac(r3)
     bl fn_804D16D0
     li r4, 0x16
-    bl fn_804AF520
+    bl net_queue_transitionState
     li r27, 0x0
     bl net_getFriendManager
     bl fn_8050C0B8
@@ -2071,7 +2071,7 @@ lbl_fn_804D25D4_00001718:
     bl fn_804D16D0
     addis r4, r24, 0x1
     lwz r4, -0x68a8(r4)
-    bl fn_804AF520
+    bl net_queue_transitionState
     addis r3, r24, 0x1
     li r0, -0x1
     stw r0, -0x68a8(r3)
@@ -2094,12 +2094,12 @@ lbl_fn_804D25D4_00001718:
     bne lbl_fn_804D25D4_000017A4
     bl fn_804D16D0
     li r4, 0x5
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804D25D4_000017B8
 lbl_fn_804D25D4_000017A4:
     bl fn_804D16D0
     li r4, 0x2
-    bl fn_804AF520
+    bl net_queue_transitionState
     mr r3, r24
     bl fn_804FB678
 lbl_fn_804D25D4_000017B8:
@@ -2335,7 +2335,7 @@ lbl_fn_804D25D4_00001A8C:
     b lbl_fn_804D25D4_00004898
     bl fn_8020A3E4
     li r4, 0x0
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     bl net_getFriendManager
     bl fn_804D16E8
     bl fn_804D24AC
@@ -2435,12 +2435,12 @@ lbl_fn_804D25D4_00001BEC:
     beq lbl_fn_804D25D4_00001CB4
     bl fn_804D16D0
     li r4, 0x2
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804D25D4_00001CC0
 lbl_fn_804D25D4_00001CB4:
     bl fn_804D16D0
     li r4, 0x5
-    bl fn_804AF520
+    bl net_queue_transitionState
 lbl_fn_804D25D4_00001CC0:
     bl fn_804D16D0
     li r4, 0xf
@@ -2504,7 +2504,7 @@ lbl_fn_804D25D4_00001D78:
 lbl_fn_804D25D4_00001DA0:
     bl fn_8020A3E4
     li r4, 0x0
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     b lbl_fn_804D25D4_00004898
     bl fn_804D16D0
     bl fn_804D6148
@@ -2563,7 +2563,7 @@ lbl_fn_804D25D4_00001DD0:
     bl fn_804D6164
     bl fn_804D16D0
     li r4, 0x9
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804D25D4_00004898
     li r0, 0x0
     stw r0, 0x53c(r24)
@@ -2741,7 +2741,7 @@ lbl_fn_804D25D4_000020E8:
     li r4, 0xc
     bl fn_804D16A0
     li r22, 0xff
-    bl fn_800F7F90
+    bl viewport_getFlag
     addis r3, r3, 0x1
     stb r22, -0x6687(r3)
     stw r23, 0x544(r24)
@@ -2760,7 +2760,7 @@ lbl_fn_804D25D4_000020E8:
 lbl_fn_804D25D4_0000218C:
     bl fn_804D16D0
     li r4, 0xd
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804D25D4_000021B8
 lbl_fn_804D25D4_0000219C:
     bl fn_804D16D0
@@ -2769,7 +2769,7 @@ lbl_fn_804D25D4_0000219C:
     bne lbl_fn_804D25D4_000021B8
     bl fn_804D16D0
     li r4, 0xd
-    bl fn_804AF520
+    bl net_queue_transitionState
 lbl_fn_804D25D4_000021B8:
     li r0, 0x0
     stw r0, 0x5cc(r24)
@@ -2805,14 +2805,14 @@ lbl_fn_804D25D4_00002200:
     bl fn_804D6214
     cmpwi r3, 0x1
     bne lbl_fn_804D25D4_00002244
-    bl fn_800F7F90
+    bl viewport_getFlag
     li r4, 0x0
     bl fn_804DC454
 lbl_fn_804D25D4_00002244:
     bl net_getFriendManager
     bl fn_804D16E8
     bl fn_8050CF94
-    bl fn_800F7F90
+    bl viewport_getFlag
     bl fn_804EAA54
     cmpwi r3, 0x1
     bne lbl_fn_804D25D4_00002268
@@ -2821,7 +2821,7 @@ lbl_fn_804D25D4_00002244:
 lbl_fn_804D25D4_00002268:
     bl fn_804D16D0
     li r4, 0xa
-    bl fn_804AF520
+    bl net_queue_transitionState
 lbl_fn_804D25D4_00002274:
     bl fn_804D16D0
     bl fn_804D6018
@@ -2862,7 +2862,7 @@ lbl_fn_804D25D4_000022F4:
     bl fn_804BA350
     b lbl_fn_804D25D4_00004898
     mr r3, r24
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_fn_804D25D4_000027E0
@@ -2880,7 +2880,7 @@ lbl_fn_804D25D4_00002330:
     bl net_getFriendManager
     bl fn_804D622C
     mr r22, r3
-    bl fn_800F7F90
+    bl viewport_getFlag
     addis r3, r3, 0x1
     lbz r0, -0x6687(r3)
     cmplwi r0, 0xff
@@ -3142,7 +3142,7 @@ lbl_fn_804D25D4_000026E0:
     ble lbl_fn_804D25D4_00002778
     li r0, 0x1
     stb r0, lbl_8087F614
-    bl fn_800F7F90
+    bl viewport_getFlag
     bl fn_804EB1B0
     cmpwi r3, 0x1
     bne lbl_fn_804D25D4_00002744
@@ -3179,7 +3179,7 @@ lbl_fn_804D25D4_00002744:
     b lbl_fn_804D25D4_000027E0
 lbl_fn_804D25D4_00002778:
     bne lbl_fn_804D25D4_000027E0
-    bl fn_800F7F90
+    bl viewport_getFlag
     bl fn_804EB1B0
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_000027BC
@@ -3374,7 +3374,7 @@ lbl_fn_804D25D4_00002A3C:
     bne lbl_fn_804D25D4_00002A5C
     bl fn_8020A3E4
     li r4, 0x0
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
 lbl_fn_804D25D4_00002A5C:
     mr r3, r24
     bl fn_804E9364
@@ -3408,7 +3408,7 @@ lbl_fn_804D25D4_00002AA8:
     mr r3, r24
     bl fn_804E9364
     mr r3, r24
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     mr r22, r3
     mr r3, r24
     li r4, 0x0
@@ -3437,7 +3437,7 @@ lbl_fn_804D25D4_00002B24:
     bl fn_804D16A0
     bl fn_804D16D0
     li r4, 0x15
-    bl fn_804AF520
+    bl net_queue_transitionState
     mr r3, r24
     li r4, 0x708
     bl fn_804D6388
@@ -3452,7 +3452,7 @@ lbl_fn_804D25D4_00002B58:
     b lbl_fn_804D25D4_00004898
     bl fn_8020A3E4
     li r4, 0x0
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     mr r3, r24
     bl fn_804E9364
     mr r3, r24
@@ -3460,12 +3460,12 @@ lbl_fn_804D25D4_00002B58:
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_00002E44
     mr r3, r24
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     cmpwi r3, 0x0
     mr r22, r3
     beq lbl_fn_804D25D4_00002BD0
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     stw r3, 0x0(r22)
     li r4, 0x1
     bl fn_804D63AC
@@ -3520,7 +3520,7 @@ lbl_fn_804D25D4_00002C48:
     lwz r4, 0xd8(r22)
     lbz r0, 0xd4(r3)
     extsb r3, r0
-    bl fn_80206B14
+    bl sys_findModuleById
     mr r22, r3
     lwz r3, 0x0(r23)
     bl fn_80266FA4
@@ -3585,7 +3585,7 @@ lbl_fn_804D25D4_00002D44:
     lfs f1, lbl_808875CC
     li r4, 0x1
     li r5, 0x1
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
 lbl_fn_804D25D4_00002D74:
     bl fn_804814F0
     cmpwi r3, 0x0
@@ -3665,10 +3665,10 @@ lbl_fn_804D25D4_00002E68:
     b lbl_fn_804D25D4_00004898
     bl fn_8020A3E4
     li r4, 0x0
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     bl fn_804D16D0
     li r4, 0xf
-    bl fn_804AF520
+    bl net_queue_transitionState
     mr r3, r24
     bl fn_804E9364
     mr r3, r24
@@ -3688,7 +3688,7 @@ lbl_fn_804D25D4_00002ED8:
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00004898
     mr r3, r24
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     mr r22, r3
     bl net_getFriendManager
     lbz r4, 0xcc(r22)
@@ -3723,7 +3723,7 @@ lbl_fn_804D25D4_00002F50:
     b lbl_fn_804D25D4_00004898
     bl fn_8020A3E4
     li r4, 0x0
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     mr r3, r24
     bl fn_804E9364
     mr r3, r24
@@ -3737,7 +3737,7 @@ lbl_fn_804D25D4_00002F50:
     b lbl_fn_804D25D4_00004898
 lbl_fn_804D25D4_00002FA4:
     mr r3, r24
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     mr r22, r3
     bl net_getFriendManager
     lbz r4, 0xcc(r22)
@@ -3794,7 +3794,7 @@ lbl_fn_804D25D4_00003054:
     bl fn_804D16A0
     bl fn_804D16D0
     li r4, 0x10
-    bl fn_804AF520
+    bl net_queue_transitionState
     bl fn_804D16D8
     li r4, 0x0
     bl atn_Task_setActive
@@ -3910,7 +3910,7 @@ lbl_fn_804D25D4_00003110:
     mr r3, r24
     bl fn_804E9C68
     mr r3, r24
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     lis r4, lbl_80759748@ha
     lis r30, lbl_80759E48@ha
     lfd f31, lbl_80759748@l(r4)
@@ -4051,7 +4051,7 @@ lbl_fn_804D25D4_00003418:
     bl fn_8012B3E8
     lwz r3, 0x0(r28)
     bl proj_getMatrix
-    bl fn_8012B988
+    bl enemy_updateNavSteering
     lwz r3, 0x0(r28)
     bl proj_getMatrix
     bl enemy_updateAnimTimer
@@ -4207,7 +4207,7 @@ lbl_fn_804D25D4_0000367C:
     bl fn_8012B3E8
     lwz r3, 0x0(r30)
     bl proj_getMatrix
-    bl fn_8012B988
+    bl enemy_updateNavSteering
     lwz r3, 0x0(r30)
     bl proj_getMatrix
     bl enemy_updateAnimTimer
@@ -4267,7 +4267,7 @@ lbl_fn_804D25D4_000036EC:
     li r5, 0x1046
     li r7, 0x1
     bl net_p2p_readPayload
-    bl fn_800F7F90
+    bl viewport_getFlag
     lbz r4, 0xcc(r26)
     li r5, 0x96
     lbz r6, 0x0(r20)
@@ -4282,7 +4282,7 @@ lbl_fn_804D25D4_000036EC:
     mr r3, r24
     bl fn_804E9364
     mr r3, r24
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     addis r4, r24, 0x1
     mr r31, r3
     lbz r0, -0x6589(r4)
@@ -4295,14 +4295,14 @@ lbl_fn_804D25D4_000036EC:
     bl fn_804D627C
     cmpwi r3, 0x1
     beq lbl_fn_804D25D4_000038A4
-    bl fn_800F7F90
+    bl viewport_getFlag
     addis r4, r24, 0x1
     lbz r4, -0x6580(r4)
     bl fn_804F5E3C
     addi r0, r3, 0x2
     cmplwi r0, 0x1
     bgt lbl_fn_804D25D4_00003818
-    bl fn_800F7F90
+    bl viewport_getFlag
     addis r4, r24, 0x1
     lbz r4, -0x6580(r4)
     bl fn_804F5CA0
@@ -4336,7 +4336,7 @@ lbl_fn_804D25D4_00003818:
     stw r0, 0x5bc(r24)
     subfe r0, r3, r27
     stw r0, 0x5b8(r24)
-    bl fn_800F7F90
+    bl viewport_getFlag
     addis r4, r24, 0x1
     lbz r4, -0x6580(r4)
     bl fn_804F5CA0
@@ -4397,7 +4397,7 @@ lbl_fn_804D25D4_00003960:
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_0000414C
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     mr r4, r3
     mr r3, r24
     bl fn_804FB96C
@@ -4415,7 +4415,7 @@ lbl_fn_804D25D4_00003960:
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_000039BC
     bl fn_8036635C
-    bl fn_80244CAC
+    bl script_setTaskTerminated
 lbl_fn_804D25D4_000039BC:
     lwz r0, 0xd0(r31)
     extrwi. r0, r0, 1, 5
@@ -4762,7 +4762,7 @@ lbl_fn_804D25D4_00003EAC:
     bl fn_804D6010
     b lbl_fn_804D25D4_0000414C
     li r25, 0x0
-    bl fn_800F7F90
+    bl viewport_getFlag
     addis r3, r3, 0x1
     stb r25, -0x6664(r3)
     bl fn_804D5FD4
@@ -5029,7 +5029,7 @@ lbl_fn_804D25D4_00004220:
     bl fn_804DC454
     bl fn_804D16D0
     li r4, 0x9
-    bl fn_804AF520
+    bl net_queue_transitionState
     bl fn_804D16D0
     bl fn_804D6018
     bl fn_804D16D0
@@ -5184,7 +5184,7 @@ lbl_fn_804D25D4_000044F8:
     cmpw r20, r3
     blt lbl_fn_804D25D4_00004458
     mr r3, r24
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     lwz r4, 0xd4(r3)
     mr r20, r3
     lwz r0, 0xd0(r3)
@@ -5223,7 +5223,7 @@ lbl_fn_804D25D4_00004568:
     bl fn_8050A3D4
     bl fn_804D16D0
     li r4, 0xd
-    bl fn_804AF520
+    bl net_queue_transitionState
 lbl_fn_804D25D4_000045A8:
     lfs f1, lbl_80887570
     addi r3, r1, 0x30
@@ -5424,7 +5424,7 @@ lbl_fn_804D25D4_00004860:
     bl fn_804D16A0
     bl fn_804D16D0
     li r4, 0x12
-    bl fn_804AF520
+    bl net_queue_transitionState
 lbl_fn_804D25D4_00004898:
     addis r3, r24, 0x1
     lwz r0, -0x6894(r3)
@@ -5443,7 +5443,7 @@ lbl_fn_804D25D4_00004898:
     bl fn_804FB474
 lbl_fn_804D25D4_000048D4:
     addi r3, r24, 0x2b70
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_000048F4
     addi r3, r24, 0x2b70

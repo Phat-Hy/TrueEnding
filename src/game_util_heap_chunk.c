@@ -31,24 +31,24 @@ extern void saveSlot_readSummary(void);
 extern void save_createWorkerTask(void);
 extern void save_computeCrc32(void);
 extern void save_calculateBlockCrc(void);
-extern void fn_801F7590(void);
+extern void save_writeBackupSlot(void);
 extern void fn_801F7DF0(void);
 extern void save_findEntryByName(void);
-extern void fn_801F8598(void);
+extern void save_formatSlotString(void);
 extern void thread_findAndNotify(void);
 extern void thread_dispatchToQueue(void);
-extern void fn_80206B14(void);
+extern void sys_findModuleById(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
 extern void fn_80206D18(void);
 extern void mem_findBlockById(void);
 extern void time_wrapMilliseconds(void);
 extern void rand_scaleRangeInt(void);
-extern void fn_8020EF4C(void);
-extern void fn_8020EFEC(void);
+extern void rand_stepEntropy(void);
+extern void time_ticksToSeconds(void);
 extern void event_findEntryById(void);
 extern void fn_80217D9C(void);
-extern void fn_80219544(void);
+extern void task_getWorkerByIndex(void);
 extern void gmk_findSlotByIndex(void);
 extern void fn_80444564(void);
 extern void fn_80444BE8(void);
@@ -721,7 +721,7 @@ lbl_fn_80586220_00000814:
     lwz r3, 0xac(r18)
     addi r4, r25, 0x160
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     lwz r3, lbl_8087F4F0
     mr r4, r15
     bl fn_80444BE8
@@ -797,7 +797,7 @@ lbl_fn_80586220_00000914:
     addi r4, r25, 0x180
     lwz r5, 0x4(r21)
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     lwz r4, lbl_8087F4F0
     mr r5, r20
     addi r3, r1, 0x28
@@ -810,7 +810,7 @@ lbl_fn_80586220_00000914:
     addi r4, r25, 0x186
     psq_st f2, 0x8(r5), 0, 0
     lwz r3, 0xac(r15)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     lwz r3, 0xac(r15)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
@@ -918,7 +918,7 @@ asm void fn_805866F8(void)
     stfs f0, 0x78(r1)
     stfs f0, 0x7c(r1)
     stfs f0, 0x80(r1)
-    bl fn_80219544
+    bl task_getWorkerByIndex
     bl mem_findBlockById
     addis r5, r20, 0x2
     slwi r0, r22, 2
@@ -1065,7 +1065,7 @@ lbl_fn_805866F8_00000C9C:
     rlwinm r0, r0, 30, 2, 28
     add r4, r28, r0
     lwz r4, 0x20(r4)
-    bl fn_80206B14
+    bl sys_findModuleById
     mr r29, r3
     mr r25, r31
     li r24, 0x1
@@ -1150,7 +1150,7 @@ lbl_fn_805866F8_00000E40:
     addi r3, r26, 0x58
     bl thread_findAndNotify
     mr r3, r21
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     lfs f31, lbl_808880F0
     cmpwi r3, 0x0
     fmr f30, f31
@@ -1164,7 +1164,7 @@ lbl_fn_805866F8_00000E40:
     mr r4, r28
     bl time_wrapMilliseconds
     mr r29, r3
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_805866F8_00000F44
     cmpwi r28, 0x3e8
@@ -1323,7 +1323,7 @@ lbl_fn_805866F8_00001094:
     mr r5, r25
     addi r4, r21, 0x1c8
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
 lbl_fn_805866F8_00001100:
     addi r23, r23, 0x1
     addi r20, r20, 0x4

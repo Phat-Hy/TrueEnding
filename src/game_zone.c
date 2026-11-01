@@ -18,7 +18,7 @@ extern u8 lbl_80778808[];
 void fn_8008826C(void);
 void zone_testPointInBounds(void);
 void fn_80088AF4(void);
-void fn_80088FAC(void);
+void zone_formatEventString(void);
 
 asm void fn_8008826C(void)
 {
@@ -939,7 +939,7 @@ lbl_fn_80088AF4_00000D20:
     blr
 }
 
-asm void fn_80088FAC(void)
+asm void zone_formatEventString(void)
 {
     nofralloc
     stwu r1, -0x40(r1)
@@ -967,13 +967,13 @@ asm void fn_80088FAC(void)
     bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
-    beq lbl_fn_80088FAC_00000E10
+    beq lbl_zone_formatEventString_00000E10
     addi r0, r3, 0x4
     lis r4, lbl_80778808@ha
     cmplw r25, r0
     addi r4, r4, lbl_80778808@l
     stw r4, 0x0(r3)
-    beq lbl_fn_80088FAC_00000DDC
+    beq lbl_zone_formatEventString_00000DDC
     mr r3, r25
     bl strlen
     mr r5, r3
@@ -981,7 +981,7 @@ asm void fn_80088FAC(void)
     addi r3, r31, 0x4
     addi r5, r5, 0x1
     bl memcpy
-lbl_fn_80088FAC_00000DDC:
+lbl_zone_formatEventString_00000DDC:
     li r4, 0x0
     stw r4, 0x44(r31)
     lis r3, lbl_80778610@ha
@@ -995,9 +995,9 @@ lbl_fn_80088FAC_00000DDC:
     stw r4, 0x58(r31)
     stw r4, 0x5c(r31)
     stw r4, 0x60(r31)
-lbl_fn_80088FAC_00000E10:
+lbl_zone_formatEventString_00000E10:
     cmpwi r31, 0x0
-    beq lbl_fn_80088FAC_000010F0
+    beq lbl_zone_formatEventString_000010F0
     lis r8, lbl_807321F0@ha
     li r3, 0xa8
     addi r8, r8, lbl_807321F0@l
@@ -1009,13 +1009,13 @@ lbl_fn_80088FAC_00000E10:
     bl mem_alloc
     cmpwi r3, 0x0
     mr r25, r3
-    beq lbl_fn_80088FAC_00000EB4
+    beq lbl_zone_formatEventString_00000EB4
     addi r0, r3, 0x4
     lis r4, lbl_80778808@ha
     cmplw r26, r0
     addi r4, r4, lbl_80778808@l
     stw r4, 0x0(r3)
-    beq lbl_fn_80088FAC_00000E7C
+    beq lbl_zone_formatEventString_00000E7C
     mr r3, r26
     bl strlen
     mr r5, r3
@@ -1023,7 +1023,7 @@ lbl_fn_80088FAC_00000E10:
     addi r3, r25, 0x4
     addi r5, r5, 0x1
     bl memcpy
-lbl_fn_80088FAC_00000E7C:
+lbl_zone_formatEventString_00000E7C:
     li r0, 0x0
     stw r0, 0x44(r25)
     lis r3, lbl_80778730@ha
@@ -1038,9 +1038,9 @@ lbl_fn_80088FAC_00000E7C:
     stfs f30, 0x60(r25)
     stfs f31, 0x64(r25)
     stb r0, 0x68(r25)
-lbl_fn_80088FAC_00000EB4:
+lbl_zone_formatEventString_00000EB4:
     cmpwi r25, 0x0
-    beq lbl_fn_80088FAC_00000EFC
+    beq lbl_zone_formatEventString_00000EFC
     lwz r12, 0x0(r25)
     mr r3, r25
     mr r4, r29
@@ -1050,15 +1050,15 @@ lbl_fn_80088FAC_00000EB4:
     bctrl
     lwz r0, 0x58(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_80088FAC_00000EF0
+    bne lbl_zone_formatEventString_00000EF0
     stw r25, 0x58(r31)
     stw r25, 0x5c(r31)
-    b lbl_fn_80088FAC_00000EFC
-lbl_fn_80088FAC_00000EF0:
+    b lbl_zone_formatEventString_00000EFC
+lbl_zone_formatEventString_00000EF0:
     lwz r3, 0x5c(r31)
     stw r25, 0x44(r3)
     stw r25, 0x5c(r31)
-lbl_fn_80088FAC_00000EFC:
+lbl_zone_formatEventString_00000EFC:
     lis r8, lbl_807321F0@ha
     li r3, 0xa8
     addi r8, r8, lbl_807321F0@l
@@ -1070,13 +1070,13 @@ lbl_fn_80088FAC_00000EFC:
     bl mem_alloc
     cmpwi r3, 0x0
     mr r26, r3
-    beq lbl_fn_80088FAC_00000F9C
+    beq lbl_zone_formatEventString_00000F9C
     addi r0, r3, 0x4
     lis r4, lbl_80778808@ha
     cmplw r25, r0
     addi r4, r4, lbl_80778808@l
     stw r4, 0x0(r3)
-    beq lbl_fn_80088FAC_00000F60
+    beq lbl_zone_formatEventString_00000F60
     mr r3, r25
     bl strlen
     mr r5, r3
@@ -1084,7 +1084,7 @@ lbl_fn_80088FAC_00000EFC:
     addi r3, r26, 0x4
     addi r5, r5, 0x1
     bl memcpy
-lbl_fn_80088FAC_00000F60:
+lbl_zone_formatEventString_00000F60:
     li r4, 0x0
     stw r4, 0x44(r26)
     lis r3, lbl_80778730@ha
@@ -1100,9 +1100,9 @@ lbl_fn_80088FAC_00000F60:
     stfs f30, 0x60(r26)
     stfs f31, 0x64(r26)
     stb r4, 0x68(r26)
-lbl_fn_80088FAC_00000F9C:
+lbl_zone_formatEventString_00000F9C:
     cmpwi r26, 0x0
-    beq lbl_fn_80088FAC_00000FE4
+    beq lbl_zone_formatEventString_00000FE4
     lwz r12, 0x0(r26)
     mr r3, r26
     mr r4, r29
@@ -1112,15 +1112,15 @@ lbl_fn_80088FAC_00000F9C:
     bctrl
     lwz r0, 0x58(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_80088FAC_00000FD8
+    bne lbl_zone_formatEventString_00000FD8
     stw r26, 0x58(r31)
     stw r26, 0x5c(r31)
-    b lbl_fn_80088FAC_00000FE4
-lbl_fn_80088FAC_00000FD8:
+    b lbl_zone_formatEventString_00000FE4
+lbl_zone_formatEventString_00000FD8:
     lwz r3, 0x5c(r31)
     stw r26, 0x44(r3)
     stw r26, 0x5c(r31)
-lbl_fn_80088FAC_00000FE4:
+lbl_zone_formatEventString_00000FE4:
     lis r8, lbl_807321F0@ha
     li r3, 0xa8
     addi r8, r8, lbl_807321F0@l
@@ -1132,13 +1132,13 @@ lbl_fn_80088FAC_00000FE4:
     bl mem_alloc
     cmpwi r3, 0x0
     mr r26, r3
-    beq lbl_fn_80088FAC_00001084
+    beq lbl_zone_formatEventString_00001084
     addi r0, r3, 0x4
     lis r4, lbl_80778808@ha
     cmplw r25, r0
     addi r4, r4, lbl_80778808@l
     stw r4, 0x0(r3)
-    beq lbl_fn_80088FAC_00001048
+    beq lbl_zone_formatEventString_00001048
     mr r3, r25
     bl strlen
     mr r5, r3
@@ -1146,7 +1146,7 @@ lbl_fn_80088FAC_00000FE4:
     addi r3, r26, 0x4
     addi r5, r5, 0x1
     bl memcpy
-lbl_fn_80088FAC_00001048:
+lbl_zone_formatEventString_00001048:
     li r4, 0x0
     stw r4, 0x44(r26)
     lis r3, lbl_80778730@ha
@@ -1162,9 +1162,9 @@ lbl_fn_80088FAC_00001048:
     stfs f30, 0x60(r26)
     stfs f31, 0x64(r26)
     stb r4, 0x68(r26)
-lbl_fn_80088FAC_00001084:
+lbl_zone_formatEventString_00001084:
     cmpwi r26, 0x0
-    beq lbl_fn_80088FAC_000010CC
+    beq lbl_zone_formatEventString_000010CC
     lwz r12, 0x0(r26)
     mr r3, r26
     mr r4, r29
@@ -1174,26 +1174,26 @@ lbl_fn_80088FAC_00001084:
     bctrl
     lwz r0, 0x58(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_80088FAC_000010C0
+    bne lbl_zone_formatEventString_000010C0
     stw r26, 0x58(r31)
     stw r26, 0x5c(r31)
-    b lbl_fn_80088FAC_000010CC
-lbl_fn_80088FAC_000010C0:
+    b lbl_zone_formatEventString_000010CC
+lbl_zone_formatEventString_000010C0:
     lwz r3, 0x5c(r31)
     stw r26, 0x44(r3)
     stw r26, 0x5c(r31)
-lbl_fn_80088FAC_000010CC:
+lbl_zone_formatEventString_000010CC:
     lwz r0, 0x58(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_80088FAC_000010E4
+    bne lbl_zone_formatEventString_000010E4
     stw r31, 0x58(r27)
     stw r31, 0x5c(r27)
-    b lbl_fn_80088FAC_000010F0
-lbl_fn_80088FAC_000010E4:
+    b lbl_zone_formatEventString_000010F0
+lbl_zone_formatEventString_000010E4:
     lwz r3, 0x5c(r27)
     stw r31, 0x44(r3)
     stw r31, 0x5c(r27)
-lbl_fn_80088FAC_000010F0:
+lbl_zone_formatEventString_000010F0:
     lfd f31, 0x38(r1)
     lfd f30, 0x30(r1)
     lfd f29, 0x28(r1)

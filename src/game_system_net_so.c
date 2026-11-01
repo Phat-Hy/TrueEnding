@@ -8,9 +8,9 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void collision_testLineSegment(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800F52F8(void);
+extern void proj_getGlobalManager(void);
 extern void fn_800F84C8(void);
-extern void fn_800F8524(void);
+extern void math_lerpf(void);
 extern void phys_scaleGravity(void);
 extern void fn_801156C4(void);
 extern void fn_801156D8(void);
@@ -22,7 +22,7 @@ extern void fn_80139F2C(void);
 extern void fn_8013C3A8(void);
 extern void npc_getDialogController(void);
 extern void fn_801479D8(void);
-extern void fn_8015EB2C(void);
+extern void party_evalFormationState(void);
 extern void fn_80267B20(void);
 extern void fn_80267B28(void);
 extern void fn_8032EC94(void);
@@ -30,11 +30,11 @@ extern void fn_80339F6C(void);
 extern void kpad_getClampData(void);
 extern void fn_8037E89C(void);
 extern void fn_8037E964(void);
-extern void fn_8037EF30(void);
+extern void fat_dispatchFsRequest(void);
 extern void fn_80382A00(void);
 extern void fn_803830A0(void);
 extern void fn_80387540(void);
-extern void fn_80389838(void);
+extern void nwc24_transitionDataState(void);
 extern void fn_8038B648(void);
 extern void fn_80390374(void);
 extern void fn_803903C4(void);
@@ -1211,12 +1211,12 @@ asm void fn_8038F52C(void)
     beq lbl_fn_8038F52C_0000106C
     mr r3, r29
     li r4, 0x3
-    bl fn_80389838
+    bl nwc24_transitionDataState
     b lbl_fn_8038F52C_00001DE4
 lbl_fn_8038F52C_0000106C:
     mr r3, r29
     li r4, 0x2
-    bl fn_80389838
+    bl nwc24_transitionDataState
     b lbl_fn_8038F52C_00001DE4
 lbl_fn_8038F52C_0000107C:
     mr r3, r30
@@ -1225,7 +1225,7 @@ lbl_fn_8038F52C_0000107C:
     beq lbl_fn_8038F52C_0000109C
     mr r3, r29
     li r4, 0x4
-    bl fn_80389838
+    bl nwc24_transitionDataState
     b lbl_fn_8038F52C_00001DE4
 lbl_fn_8038F52C_0000109C:
     mr r3, r30
@@ -1245,7 +1245,7 @@ lbl_fn_8038F52C_0000109C:
     bctr
     mr r3, r29
     li r4, 0x5
-    bl fn_80389838
+    bl nwc24_transitionDataState
     b lbl_fn_8038F52C_00001DE4
     mr r3, r30
     bl fn_800F84C8
@@ -1287,7 +1287,7 @@ lbl_fn_8038F52C_0000109C:
     mr r3, r29
     li r4, 0x0
     li r5, 0x0
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_8038F52C_00001DE4
     mr r3, r30
     bl fn_80387540
@@ -1303,12 +1303,12 @@ lbl_fn_8038F52C_0000109C:
     beq lbl_fn_8038F52C_000011D0
     mr r3, r29
     li r4, 0x4
-    bl fn_80389838
+    bl nwc24_transitionDataState
     b lbl_fn_8038F52C_00001DE4
 lbl_fn_8038F52C_000011D0:
     mr r3, r29
     li r4, 0x5
-    bl fn_80389838
+    bl nwc24_transitionDataState
     b lbl_fn_8038F52C_00001DE4
     mr r3, r30
     bl fn_80339F6C
@@ -1324,7 +1324,7 @@ lbl_fn_8038F52C_000011D0:
     b lbl_fn_8038F52C_00001DE4
     mr r3, r29
     li r4, 0x7
-    bl fn_80389838
+    bl nwc24_transitionDataState
     b lbl_fn_8038F52C_00001DE4
     mr r3, r29
     bl fn_80390374
@@ -1332,7 +1332,7 @@ lbl_fn_8038F52C_000011D0:
     mr r3, r29
     li r4, 0x0
     li r5, 0x1
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_8038F52C_00001DE4
     mr r3, r29
     bl fn_80390374
@@ -1341,7 +1341,7 @@ lbl_fn_8038F52C_000011D0:
     cmpwi r3, 0x2
     bne lbl_fn_8038F52C_00001268
     mr r3, r30
-    bl fn_8015EB2C
+    bl party_evalFormationState
     cmpwi r3, 0x0
     bne lbl_fn_8038F52C_00001DE4
 lbl_fn_8038F52C_00001268:
@@ -1349,7 +1349,7 @@ lbl_fn_8038F52C_00001268:
     mr r3, r29
     li r4, 0x0
     li r5, 0x0
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_8038F52C_00001DE4
     addi r3, r1, 0x190
     addi r4, r29, 0x51c
@@ -1368,7 +1368,7 @@ lbl_fn_8038F52C_00001268:
     mr r3, r29
     li r4, 0x0
     li r5, 0x0
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_8038F52C_00001DE4
     mr r3, r29
     bl fn_80390374
@@ -1379,28 +1379,28 @@ lbl_fn_8038F52C_00001268:
     lfs f1, 0x0(r4)
     li r4, 0x0
     li r5, 0x0
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_8038F52C_00001DE4
     mr r3, r29
     li r4, 0xd
-    bl fn_80389838
+    bl nwc24_transitionDataState
     b lbl_fn_8038F52C_00001DE4
     mr r3, r29
     li r4, 0xe
-    bl fn_80389838
+    bl nwc24_transitionDataState
     b lbl_fn_8038F52C_00001DE4
     mr r3, r29
     li r4, 0xf
-    bl fn_80389838
+    bl nwc24_transitionDataState
     b lbl_fn_8038F52C_00001DE4
     mr r3, r29
     li r4, 0x14
-    bl fn_80389838
+    bl nwc24_transitionDataState
     lfs f1, lbl_80885904
     mr r3, r29
     li r4, 0x1
     li r5, 0x1
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_8038F52C_00001DE4
     mr r3, r29
     bl fn_80390374
@@ -1408,7 +1408,7 @@ lbl_fn_8038F52C_00001268:
     mr r3, r29
     li r4, 0x1
     li r5, 0x1
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_8038F52C_00001DE4
     addi r3, r1, 0x154
     addi r4, r29, 0x51c
@@ -1429,7 +1429,7 @@ lbl_fn_8038F52C_00001268:
     mr r3, r29
     li r4, 0x0
     li r5, 0x0
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_8038F52C_00001DE4
     mr r3, r30
     bl fn_800F84C8
@@ -1473,7 +1473,7 @@ lbl_fn_8038F52C_00001454:
 lbl_fn_8038F52C_00001458:
     addi r3, r1, 0x24
     addi r4, r1, 0x20
-    bl fn_800F8524
+    bl math_lerpf
     lfs f0, 0x120(r1)
     fadds f0, f0, f1
     stfs f0, 0x120(r1)
@@ -1494,7 +1494,7 @@ lbl_fn_8038F52C_0000149C:
 lbl_fn_8038F52C_000014A0:
     addi r4, r1, 0x24
     la r3, lbl_8087DD04
-    bl fn_800F8524
+    bl math_lerpf
     lfs f0, 0x120(r1)
     fadds f0, f0, f1
     stfs f0, 0x120(r1)
@@ -1534,7 +1534,7 @@ lbl_fn_8038F52C_0000152C:
 lbl_fn_8038F52C_00001530:
     addi r3, r1, 0x1c
     addi r4, r1, 0x18
-    bl fn_800F8524
+    bl math_lerpf
     lfs f0, 0x120(r1)
     fadds f0, f0, f1
     stfs f0, 0x120(r1)
@@ -1555,7 +1555,7 @@ lbl_fn_8038F52C_00001574:
 lbl_fn_8038F52C_00001578:
     addi r4, r1, 0x1c
     la r3, lbl_8087DD08
-    bl fn_800F8524
+    bl math_lerpf
     lfs f0, 0x120(r1)
     fadds f0, f0, f1
     stfs f0, 0x120(r1)
@@ -1594,7 +1594,7 @@ lbl_fn_8038F52C_000015F8:
     fmr f1, f29
     addi r4, r1, 0x124
     la r3, lbl_8087DD0C
-    bl fn_800F8524
+    bl math_lerpf
     stfs f1, 0x124(r1)
     lfs f1, lbl_80885970
     bl phys_scaleGravity
@@ -1603,7 +1603,7 @@ lbl_fn_8038F52C_000015F8:
     fmr f1, f29
     addi r4, r1, 0x14c
     stfs f0, 0xc(r1)
-    bl fn_800F8524
+    bl math_lerpf
     stfs f1, 0x14c(r1)
     b lbl_fn_8038F52C_000016C4
 lbl_fn_8038F52C_00001634:
@@ -1637,7 +1637,7 @@ lbl_fn_8038F52C_0000168C:
     fmr f1, f29
     addi r3, r1, 0x124
     la r4, lbl_8087DD10
-    bl fn_800F8524
+    bl math_lerpf
     stfs f1, 0x124(r1)
     lfs f1, lbl_80885970
     bl phys_scaleGravity
@@ -1646,7 +1646,7 @@ lbl_fn_8038F52C_0000168C:
     fmr f1, f29
     addi r4, r1, 0x8
     stfs f0, 0x8(r1)
-    bl fn_800F8524
+    bl math_lerpf
     stfs f1, 0x14c(r1)
 lbl_fn_8038F52C_000016C4:
     lfs f1, 0x11c(r1)
@@ -1695,7 +1695,7 @@ lbl_fn_8038F52C_00001758:
 lbl_fn_8038F52C_0000175C:
     la r3, lbl_8087DD14
     la r4, lbl_8087DD18
-    bl fn_800F8524
+    bl math_lerpf
     lfs f0, lbl_80885914
     lfs f3, 0x118(r1)
     fsubs f2, f31, f0
@@ -1713,7 +1713,7 @@ lbl_fn_8038F52C_00001798:
 lbl_fn_8038F52C_0000179C:
     addi r3, r29, 0x480
     addi r4, r1, 0x120
-    bl fn_800F8524
+    bl math_lerpf
     stfs f1, 0x120(r1)
     b lbl_fn_8038F52C_0000193C
 lbl_fn_8038F52C_000017B0:
@@ -1733,7 +1733,7 @@ lbl_fn_8038F52C_000017DC:
 lbl_fn_8038F52C_000017E0:
     addi r3, r1, 0x14
     addi r4, r1, 0x10
-    bl fn_800F8524
+    bl math_lerpf
     lfs f0, lbl_80885AA8
     lfs f3, 0x120(r1)
     fsubs f2, f30, f0
@@ -1766,7 +1766,7 @@ lbl_fn_8038F52C_0000184C:
 lbl_fn_8038F52C_00001850:
     la r3, lbl_8087DD1C
     la r4, lbl_8087DD20
-    bl fn_800F8524
+    bl math_lerpf
     lfs f0, 0x118(r1)
     fmuls f0, f0, f1
     stfs f0, 0x118(r1)
@@ -1801,7 +1801,7 @@ lbl_fn_8038F52C_000018C0:
 lbl_fn_8038F52C_000018C4:
     addi r4, r1, 0x14
     la r3, lbl_8087DD24
-    bl fn_800F8524
+    bl math_lerpf
     lfs f0, lbl_80885930
     lfs f2, 0x120(r1)
     fdivs f0, f30, f0
@@ -1830,7 +1830,7 @@ lbl_fn_8038F52C_00001920:
 lbl_fn_8038F52C_00001924:
     la r3, lbl_8087DD28
     la r4, lbl_8087DD2C
-    bl fn_800F8524
+    bl math_lerpf
     lfs f0, 0x118(r1)
     fmuls f0, f0, f1
     stfs f0, 0x118(r1)
@@ -1866,7 +1866,7 @@ lbl_fn_8038F52C_00001974:
     mr r3, r29
     li r4, 0x0
     li r5, 0x1
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_8038F52C_00001DE4
     addi r3, r1, 0xdc
     addi r4, r29, 0x51c
@@ -2004,7 +2004,7 @@ lbl_fn_8038F52C_00001B80:
     mr r3, r29
     li r4, 0x0
     li r5, 0x0
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_8038F52C_00001DE4
     addi r3, r1, 0x28
     addi r4, r29, 0x51c
@@ -2055,7 +2055,7 @@ lbl_fn_8038F52C_00001C48:
 lbl_fn_8038F52C_00001C7C:
     la r3, lbl_8087DD30
     la r4, lbl_8087DD34
-    bl fn_800F8524
+    bl math_lerpf
     lfs f0, 0x28(r1)
     fmuls f0, f0, f1
     stfs f0, 0x28(r1)
@@ -2082,7 +2082,7 @@ lbl_fn_8038F52C_00001CA8:
     mr r3, r29
     li r4, 0x0
     li r5, 0x0
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_8038F52C_00001DE4
 lbl_fn_8038F52C_00001CF0:
     mr r3, r29
@@ -2092,7 +2092,7 @@ lbl_fn_8038F52C_00001CFC:
     bl fn_803830A0
     cmpwi r3, 0x0
     beq lbl_fn_8038F52C_00001D30
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_80116BAC
     li r4, 0x24
     bl player_evaluateStatusCondition
@@ -2100,7 +2100,7 @@ lbl_fn_8038F52C_00001CFC:
     beq lbl_fn_8038F52C_00001D30
     mr r3, r29
     li r4, 0x9
-    bl fn_80389838
+    bl nwc24_transitionDataState
     b lbl_fn_8038F52C_00001DE4
 lbl_fn_8038F52C_00001D30:
     bl fn_803903C4
@@ -2112,7 +2112,7 @@ lbl_fn_8038F52C_00001D30:
     beq lbl_fn_8038F52C_00001D5C
     mr r3, r29
     li r4, 0x8
-    bl fn_80389838
+    bl nwc24_transitionDataState
     b lbl_fn_8038F52C_00001DE4
 lbl_fn_8038F52C_00001D5C:
     bl equip_getGlobalManager
@@ -2133,14 +2133,14 @@ lbl_fn_8038F52C_00001D5C:
     bne lbl_fn_8038F52C_00001DAC
     mr r3, r29
     li r4, 0xa
-    bl fn_80389838
+    bl nwc24_transitionDataState
     b lbl_fn_8038F52C_00001DE4
 lbl_fn_8038F52C_00001DAC:
     cmpwi r0, 0x2
     bne lbl_fn_8038F52C_00001DC4
     mr r3, r29
     li r4, 0xb
-    bl fn_80389838
+    bl nwc24_transitionDataState
     b lbl_fn_8038F52C_00001DE4
 lbl_fn_8038F52C_00001DC4:
     mr r3, r29

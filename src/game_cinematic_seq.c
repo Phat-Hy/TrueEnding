@@ -24,7 +24,7 @@ extern void skill_findNodeById(void);
 extern void enemy_stepBehavior(void);
 extern void fn_80128930(void);
 extern void fn_80129978(void);
-extern void fn_80129A48(void);
+extern void path_resetWaypointVelocity(void);
 extern void actor_testBitFlag(void);
 extern void fn_80134674(void);
 extern void boss_updatePhaseState(void);
@@ -34,7 +34,7 @@ extern void dialog_setScriptSlot(void);
 extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
 extern void fn_8015783C(void);
-extern void fn_8015E4B0(void);
+extern void party_initFormationSlots(void);
 extern void fn_80168F3C(void);
 extern void fn_8016D74C(void);
 extern void actor_setState(void);
@@ -58,7 +58,7 @@ extern void rand_Mersenne_constructor(void);
 extern void fn_805A3D6C(void);
 extern void fn_805A4984(void);
 extern void fn_805A49E8(void);
-extern void fn_805A4A20(void);
+extern void world_setFlagByType(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
@@ -989,7 +989,7 @@ lbl_fn_80335374_00000B6C:
 lbl_fn_80335374_00000BA0:
     lfs f1, lbl_808851A8
     addi r3, r31, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
 lbl_fn_80335374_00000BAC:
     lwz r0, 0x157c(r31)
     cmpwi r0, 0x0
@@ -1076,7 +1076,7 @@ lbl_fn_80335600_00000C74:
     mr r3, r29
     addi r4, r29, 0x1554
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
 lbl_fn_80335600_00000CE0:
     li r31, 0x1
     b lbl_fn_80335600_00000D48
@@ -1105,7 +1105,7 @@ lbl_fn_80335600_00000D24:
     mr r3, r29
     addi r4, r29, 0x154c
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
 lbl_fn_80335600_00000D48:
     cmpwi r31, 0x0
     bne lbl_fn_80335600_00000D78
@@ -1179,7 +1179,7 @@ lbl_fn_80335788_00000E28:
     bne lbl_fn_80335788_00000E4C
     addi r4, r3, 0x6b8
     li r5, -0x1
-    bl fn_8015E4B0
+    bl party_initFormationSlots
 lbl_fn_80335788_00000E4C:
     lwz r0, 0x560(r30)
     cmpwi r0, 0xa
@@ -1710,7 +1710,7 @@ lbl_fn_80335988_00001558:
     mr r3, r31
     addi r4, r31, 0x155c
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
     b lbl_fn_80335988_00001650
 lbl_fn_80335988_00001610:
     cmpwi r0, 0x1
@@ -1728,7 +1728,7 @@ lbl_fn_80335988_00001610:
     mr r3, r31
     addi r4, r31, 0x1544
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
 lbl_fn_80335988_00001650:
     lwz r4, 0x12a4(r31)
     li r0, 0x1

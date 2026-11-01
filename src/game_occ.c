@@ -10,9 +10,9 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8006945C(void);
 extern void gx_drawScreenQuad(void);
-extern void fn_80075DEC(void);
+extern void seq_stepPlaybackTimer(void);
 extern void fn_80075F58(void);
-extern void fn_800763FC(void);
+extern void seq_bindSlotResource(void);
 extern void model_updateBoneTransforms(void);
 extern void fn_800BFB70(void);
 extern void fn_800C0FBC(void);
@@ -24,7 +24,7 @@ extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
 extern void GXFlush(void);
 extern void fn_806140C0(void);
-extern void fn_80614190(void);
+extern void __GXFlushPixelEngine(void);
 extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
@@ -34,13 +34,13 @@ extern void fn_806163C0(void);
 extern void fn_806163E0(void);
 extern void fn_80616400(void);
 extern void GXDrawDone(void);
-extern void fn_80617200(void);
+extern void GXSetTexCoordScaleManually(void);
 extern void GXInitTexObjDefault(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
-extern void fn_806174C0(void);
-extern void fn_806175F0(void);
+extern void GXSetTevIndTile(void);
+extern void GXSetIndTexMatrix(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevKAlphaSel(void);
 extern void GXSetTevSwapMode(void);
@@ -491,7 +491,7 @@ lbl_tex_bakeCharacterTexture_000005A4:
     b lbl_tex_bakeCharacterTexture_0000061C
 lbl_tex_bakeCharacterTexture_000005B8:
     bl GXDrawDone
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     cmpwi r17, 0x0
     bne lbl_tex_bakeCharacterTexture_000005E4
     lwz r3, lbl_8087EEE0
@@ -550,7 +550,7 @@ lbl_tex_bakeCharacterTexture_00000684:
     li r4, 0x1
     bl GXCopyTex
     bl GXDrawDone
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     bl GXFlush
     bl fn_806140C0
     mr r5, r21
@@ -692,7 +692,7 @@ lbl_tex_bakeCharacterTexture_00000884:
     mr r4, r18
     bl DCFlushRange
     lwz r3, lbl_8087EEE0
-    bl fn_80075DEC
+    bl seq_stepPlaybackTimer
     li r16, 0x0
     li r14, 0x0
     b lbl_tex_bakeCharacterTexture_000008E0
@@ -740,11 +740,11 @@ asm void fn_800D775C(void)
     li r3, 0x5
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     lwz r3, lbl_8087EEE0
     li r5, 0x0
     lwz r4, 0x8(r31)
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -755,7 +755,7 @@ asm void fn_800D775C(void)
     lwz r3, lbl_8087EEE0
     li r5, 0x1
     lwz r4, 0x4(r31)
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x1
     li r4, 0x1
     li r5, 0x4
@@ -766,7 +766,7 @@ asm void fn_800D775C(void)
     lwz r3, lbl_8087EEE0
     li r5, 0x2
     lwz r4, 0xc(r31)
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x2
     li r4, 0x1
     li r5, 0x4
@@ -812,7 +812,7 @@ asm void fn_800D775C(void)
     stb r0, 0xf(r1)
     lwz r0, 0xc(r1)
     stw r0, 0x14(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     lfs f4, lbl_8088120C
     addi r4, r1, 0x10
     lfs f0, 0x20(r31)
@@ -842,7 +842,7 @@ asm void fn_800D775C(void)
     stb r0, 0xb(r1)
     lwz r0, 0x8(r1)
     stw r0, 0x10(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1
@@ -903,7 +903,7 @@ asm void fn_800D775C(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x0
     li r4, 0x7
     li r5, 0x6
@@ -946,7 +946,7 @@ asm void fn_800D775C(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x1
     li r4, 0x7
     li r5, 0x6
@@ -989,7 +989,7 @@ asm void fn_800D775C(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x2
     li r4, 0x7
     li r5, 0x6
@@ -1024,7 +1024,7 @@ asm void fn_800D775C(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x3
     li r4, 0x7
     li r5, 0x7
@@ -1064,7 +1064,7 @@ asm void fn_800D775C(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x4
     li r4, 0x7
     li r5, 0x7
@@ -1106,7 +1106,7 @@ asm void fn_800D7D00(void)
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1
@@ -1134,7 +1134,7 @@ asm void fn_800D7D00(void)
     lwz r3, lbl_8087EEE0
     li r5, 0x0
     lwz r4, 0x4(r31)
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -1171,7 +1171,7 @@ asm void fn_800D7D00(void)
     stb r0, 0xb(r1)
     lwz r0, 0x8(r1)
     stw r0, 0xc(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     li r3, 0x0
     li r4, 0xc
     bl GXSetTevKColorSel
@@ -1204,7 +1204,7 @@ asm void fn_800D7D00(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1245,7 +1245,7 @@ asm void fn_800D7F18(void)
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x0
     li r4, 0x3
     li r5, 0x3
@@ -1255,7 +1255,7 @@ asm void fn_800D7F18(void)
     lwz r3, lbl_8087EEE0
     li r5, 0x0
     lwz r4, 0x4(r31)
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -1292,7 +1292,7 @@ asm void fn_800D7F18(void)
     stb r0, 0xb(r1)
     lwz r0, 0x8(r1)
     stw r0, 0xc(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     li r3, 0x0
     li r4, 0xc
     bl GXSetTevKColorSel
@@ -1325,7 +1325,7 @@ asm void fn_800D7F18(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0

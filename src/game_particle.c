@@ -25,7 +25,7 @@ extern u8 lbl_80779AB8[];
 /* Function declarations */
 void fn_800E0908(void);
 void fn_800E0A64(void);
-void fn_800E0AA8(void);
+void particle_getEmitterContext(void);
 void fn_800E0AB0(void);
 void dtor_800E0AC0(void);
 void fn_800E0B18(void);
@@ -174,7 +174,7 @@ lbl_fn_800E0A64_00000180:
     blr
 }
 
-asm void fn_800E0AA8(void)
+asm void particle_getEmitterContext(void)
 {
     nofralloc
     lwz r3, 0x4(r3)

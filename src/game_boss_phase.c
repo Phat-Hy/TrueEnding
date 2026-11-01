@@ -18,7 +18,7 @@ extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void fn_8006A004(void);
-extern void fn_8006AD24(void);
+extern void boss_lookupActionEntry(void);
 extern void fn_8006B0C8(void);
 extern void fn_8006D008(void);
 extern void mem_alloc(void);
@@ -26,7 +26,7 @@ extern void mem_getAllocSize(void);
 extern void node_destroy(void);
 extern void fn_800899DC(void);
 extern void area_updateZoneState(void);
-extern void fn_8008B130(void);
+extern void map_getArchiveName(void);
 extern void map_processTrigger(void);
 extern void map_debugLog(void);
 extern void fn_80091CFC(void);
@@ -55,7 +55,7 @@ extern void fn_801298AC(void);
 extern void fn_801298EC(void);
 extern void fn_8012B3A8(void);
 extern void fn_8012B3E8(void);
-extern void fn_8012B988(void);
+extern void enemy_updateNavSteering(void);
 extern void enemy_updateAnimTimer(void);
 extern void fn_801352F8(void);
 extern void fn_80137E68(void);
@@ -1029,7 +1029,7 @@ lbl_boss_updatePhaseState_00000BC4:
     bl fn_80095D44
 lbl_boss_updatePhaseState_00000C20:
     addi r3, r30, 0xb0
-    bl fn_8008B130
+    bl map_getArchiveName
     lis r29, lbl_80737A9C@ha
     addi r29, r29, lbl_80737A9C@l
     addi r4, r29, 0xbe
@@ -1037,7 +1037,7 @@ lbl_boss_updatePhaseState_00000C20:
     cmpwi r3, 0x0
     bne lbl_boss_updatePhaseState_00000C58
     addi r3, r30, 0xb0
-    bl fn_8008B130
+    bl map_getArchiveName
     addi r4, r29, 0xc3
     bl strstr
     cmpwi r3, 0x0
@@ -1302,7 +1302,7 @@ lbl_boss_updatePhaseState_00001000:
     addi r3, r30, 0x7d4
     bl fn_8012B3E8
     addi r3, r30, 0x7d4
-    bl fn_8012B988
+    bl enemy_updateNavSteering
     addi r3, r30, 0x7d4
     bl enemy_updateAnimTimer
     lwz r0, 0x954(r30)
@@ -1738,7 +1738,7 @@ lbl_fn_801371AC_00001570:
     bl actor_dispatchMessage
     mr r3, r25
     mr r4, r24
-    bl fn_8006AD24
+    bl boss_lookupActionEntry
     lwz r0, 0x48(r1)
     srwi. r0, r0, 31
     beq lbl_fn_801371AC_00001640

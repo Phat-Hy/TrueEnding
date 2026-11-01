@@ -14,7 +14,7 @@ extern void scene_getRootNode(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void mtx_multVec(void);
-extern void fn_80012C88(void);
+extern void vec3_addAssign(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
 extern void fn_8001336C(void);
@@ -68,10 +68,10 @@ void fn_801298EC(void);
 void fn_80129930(void);
 void fn_80129954(void);
 void fn_80129978(void);
-void fn_80129A48(void);
+void path_resetWaypointVelocity(void);
 void fn_80129A6C(void);
 void fn_8012A190(void);
-void *fn_8012A1B8(void *p);
+void *path_getFollowerNode(void *p);
 void fn_8012A1C0(void);
 void fn_8012A1E0(void);
 void fn_8012A218(void);
@@ -736,7 +736,7 @@ lbl_fn_80129978_000008E0:
     blr
 }
 
-asm void fn_80129A48(void)
+asm void path_resetWaypointVelocity(void)
 {
     nofralloc
     lfs f0, lbl_808818A8
@@ -865,7 +865,7 @@ lbl_fn_80129A6C_00000A80:
     bl mtx_getTranslation
     addi r3, r1, 0xdc
     addi r4, r1, 0x7c
-    bl fn_80012C88
+    bl vec3_addAssign
 lbl_fn_80129A6C_00000AC0:
     addi r3, r1, 0xd0
     bl mission_updateStub
@@ -873,7 +873,7 @@ lbl_fn_80129A6C_00000AC0:
     cmpwi r27, 0x0
     bge lbl_fn_80129A6C_00000AEC
     lwz r3, 0x0(r31)
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     mr r4, r3
     addi r3, r1, 0xf4
     bl vec3_copy
@@ -898,7 +898,7 @@ lbl_fn_80129A6C_00000AEC:
     cmpwi r3, 0x0
     beq lbl_fn_80129A6C_00000B4C
     lwz r3, 0x0(r31)
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     mr r4, r3
     addi r3, r1, 0xf4
     bl vec3_copy
@@ -918,7 +918,7 @@ lbl_fn_80129A6C_00000B6C:
     addi r4, r29, math_wrapAngle@l
     bl fn_8012A218
     lwz r3, 0x0(r31)
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     lfs f1, 0x4(r3)
     addi r3, r1, 0xf4
     lfs f0, 0xf8(r1)
@@ -1046,7 +1046,7 @@ lbl_fn_80129A6C_00000D18:
     bl mtx_getTranslation
     addi r3, r1, 0xac
     addi r4, r1, 0x40
-    bl fn_80012C88
+    bl vec3_addAssign
 lbl_fn_80129A6C_00000D58:
     lwz r3, 0x0(r31)
     bl scene_getRootNode
@@ -1073,7 +1073,7 @@ lbl_fn_80129A6C_00000DA0:
     cmpwi r26, 0x0
     bge lbl_fn_80129A6C_00000DCC
     lwz r3, 0x0(r31)
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     mr r4, r3
     mr r3, r28
     bl vec3_copy
@@ -1098,7 +1098,7 @@ lbl_fn_80129A6C_00000DCC:
     cmpwi r3, 0x0
     beq lbl_fn_80129A6C_00000E2C
     lwz r3, 0x0(r31)
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     mr r4, r3
     mr r3, r28
     bl vec3_copy
@@ -1274,7 +1274,7 @@ asm void fn_8012A190(void)
     blr
 }
 
-void *fn_8012A1B8(void *p)
+void *path_getFollowerNode(void *p)
 {
     return (char *)p + 0x534;
 }

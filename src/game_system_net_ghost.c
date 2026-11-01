@@ -14,7 +14,7 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void collision_testLineSegment(void);
 extern void fn_80051A88(void);
-extern void fn_80051CD8(void);
+extern void player_transformBoundingSphere(void);
 extern void equip_calcTotalStatBonuses(void);
 extern void skill_calculateDamage(void);
 extern void mem_free(void);
@@ -799,7 +799,7 @@ lbl_fn_8039B2BC_00000A10:
 lbl_fn_8039B2BC_00000A30:
     addi r3, r1, 0x30
     addi r4, r1, 0x120
-    bl fn_80051CD8
+    bl player_transformBoundingSphere
     cmpwi r3, 0x0
     beq lbl_fn_8039B2BC_00000C4C
     lwz r0, 0xe0(r15)
@@ -901,7 +901,7 @@ lbl_fn_8039B2BC_00000B54:
     srwi r0, r0, 5
     stfs f2, 0x28(r1)
     stw r0, 0x84(r1)
-    bl fn_80051CD8
+    bl player_transformBoundingSphere
     cntlzw r0, r3
     lfs f0, 0x7c(r1)
     srwi r0, r0, 5

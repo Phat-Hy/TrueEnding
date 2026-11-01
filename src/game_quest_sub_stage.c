@@ -13,14 +13,14 @@ extern void fn_800791B4(void);
 extern void fn_8007A154(void);
 extern void mem_free(void);
 extern void skeleton_getGlobalManager(void);
-extern void fn_800C2448(void);
+extern void skeleton_getBoneByIndex(void);
 extern void fn_800CF680(void);
 extern void fn_800DAA3C(void);
 extern void fn_803606CC(void);
 extern void fn_80360780(void);
 extern void kpad_getClampData(void);
 extern void dvd_showDiskErrorDialog(void);
-extern void fn_8041D180(void);
+extern void battle_invokeVtableMethod(void);
 extern void fn_8041D198(void);
 extern void fn_804827D8(void);
 extern void fn_80482B24(void);
@@ -95,12 +95,12 @@ asm void fn_80483644(void)
     extsb. r0, r0
     bne lbl_fn_80483644_00000058
     lis r7, lbl_807C88F0@ha
-    lis r5, fn_8041D180@ha
+    lis r5, battle_invokeVtableMethod@ha
     lis r4, fn_8041D198@ha
     li r0, 0x1
     addi r4, r4, fn_8041D198@l
     addi r6, r7, lbl_807C88F0@l
-    addi r5, r5, fn_8041D180@l
+    addi r5, r5, battle_invokeVtableMethod@l
     stw r5, 0x4(r6)
     stw r4, lbl_807C88F0@l(r7)
     stb r0, lbl_8087F4C0
@@ -468,7 +468,7 @@ lbl_fn_80483714_00000504:
     psq_st f2, 0x22c(r3), 0, 0
     lwz r0, 0x1d18(r29)
     stw r0, 0x120(r3)
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     lwz r0, 0x0(r28)
     addi r5, r29, 0x1ab0
     stw r0, 0x0(r3)
@@ -509,12 +509,12 @@ lbl_fn_80483714_00000504:
     stw r4, 0x18(r1)
     bne lbl_fn_80483714_00000698
     lis r6, lbl_807C88F0@ha
-    lis r4, fn_8041D180@ha
+    lis r4, battle_invokeVtableMethod@ha
     lis r3, fn_8041D198@ha
     li r0, 0x1
     addi r3, r3, fn_8041D198@l
     addi r5, r6, lbl_807C88F0@l
-    addi r4, r4, fn_8041D180@l
+    addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C88F0@l(r6)
     stb r0, lbl_8087F4C0
@@ -1165,12 +1165,12 @@ lbl_fn_80484088_00000F80:
     extsb. r0, r0
     bne lbl_fn_80484088_00000FC8
     lis r6, lbl_807C88F0@ha
-    lis r4, fn_8041D180@ha
+    lis r4, battle_invokeVtableMethod@ha
     lis r3, fn_8041D198@ha
     li r0, 0x1
     addi r3, r3, fn_8041D198@l
     addi r5, r6, lbl_807C88F0@l
-    addi r4, r4, fn_8041D180@l
+    addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C88F0@l(r6)
     stb r0, lbl_8087F4C0
@@ -1261,7 +1261,7 @@ asm void fn_804846FC(void)
     stw r0, 0x38(r1)
     bl skeleton_getGlobalManager
     li r4, 0x0
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     extrwi r0, r31, 8, 8
     stw r0, 0x34(r1)
     lis r4, lbl_80756338@ha
@@ -1304,12 +1304,12 @@ asm void fn_804846FC(void)
     stw r4, 0x18(r1)
     bne lbl_fn_804846FC_000011BC
     lis r6, lbl_807C88F0@ha
-    lis r4, fn_8041D180@ha
+    lis r4, battle_invokeVtableMethod@ha
     lis r3, fn_8041D198@ha
     li r0, 0x1
     addi r3, r3, fn_8041D198@l
     addi r5, r6, lbl_807C88F0@l
-    addi r4, r4, fn_8041D180@l
+    addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C88F0@l(r6)
     stb r0, lbl_8087F4C0
@@ -1377,7 +1377,7 @@ asm void fn_804848C4(void)
     nofralloc
     lwz r3, 0x2fc(r3)
     li r4, 0x0
-    b fn_800C2448
+    b skeleton_getBoneByIndex
 }
 
 asm void fn_804848D0(void)
@@ -1420,7 +1420,7 @@ lbl_fn_804848D0_000012C4:
     beq lbl_fn_804848D0_00001398
     li r4, 0x0
     addi r3, r3, 0x4c
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     lwz r0, 0x0(r3)
     stw r0, 0x0(r31)
     lwz r0, 0x4(r3)
@@ -1456,7 +1456,7 @@ lbl_fn_804848D0_00001398:
     lwz r3, lbl_8087EFB4
     li r4, 0x0
     lwz r3, 0x2fc(r3)
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     lwz r0, 0x0(r3)
     stw r0, 0x0(r31)
     lwz r0, 0x4(r3)
@@ -1537,12 +1537,12 @@ asm void fn_80484A78(void)
     stfs f0, 0x14(r1)
     bne lbl_fn_80484A78_000014F4
     lis r6, lbl_807C88F0@ha
-    lis r4, fn_8041D180@ha
+    lis r4, battle_invokeVtableMethod@ha
     lis r3, fn_8041D198@ha
     li r0, 0x1
     addi r3, r3, fn_8041D198@l
     addi r5, r6, lbl_807C88F0@l
-    addi r4, r4, fn_8041D180@l
+    addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C88F0@l(r6)
     stb r0, lbl_8087F4C0
@@ -1634,12 +1634,12 @@ lbl_fn_80484BF4_000015EC:
     extsb. r0, r0
     bne lbl_fn_80484BF4_0000163C
     lis r6, lbl_807C88F0@ha
-    lis r4, fn_8041D180@ha
+    lis r4, battle_invokeVtableMethod@ha
     lis r3, fn_8041D198@ha
     li r0, 0x1
     addi r3, r3, fn_8041D198@l
     addi r5, r6, lbl_807C88F0@l
-    addi r4, r4, fn_8041D180@l
+    addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C88F0@l(r6)
     stb r0, lbl_8087F4C0
@@ -1827,12 +1827,12 @@ lbl_fn_80484E88_00001870:
     extsb. r0, r0
     bne lbl_fn_80484E88_000018BC
     lis r6, lbl_807C88F0@ha
-    lis r4, fn_8041D180@ha
+    lis r4, battle_invokeVtableMethod@ha
     lis r3, fn_8041D198@ha
     li r0, 0x1
     addi r3, r3, fn_8041D198@l
     addi r5, r6, lbl_807C88F0@l
-    addi r4, r4, fn_8041D180@l
+    addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C88F0@l(r6)
     stb r0, lbl_8087F4C0

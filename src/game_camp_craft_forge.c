@@ -27,7 +27,7 @@ extern void fn_801546F4(void);
 extern void fn_80176DFC(void);
 extern void fn_801EA4B0(void);
 extern void fn_801EB078(void);
-extern void fn_80219544(void);
+extern void task_getWorkerByIndex(void);
 extern void fn_8035B534(void);
 extern void fn_8035E730(void);
 extern void fn_8035E7CC(void);
@@ -50,7 +50,7 @@ extern void fn_803CAABC(void);
 extern void fn_803EC16C(void);
 extern void fn_803EC374(void);
 extern void fn_803EE374(void);
-extern void fn_80470528(void);
+extern void boss_releaseLaserTarget(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -351,7 +351,7 @@ lbl_fn_803C01C0_000002C8:
     cmpwi r0, 0x0
     beq lbl_fn_803C01C0_00000458
     addi r3, r31, 0x9ac
-    bl fn_80470528
+    bl boss_releaseLaserTarget
     b lbl_fn_803C01C0_00000458
 lbl_fn_803C01C0_0000032C:
     cmpwi r0, 0x1
@@ -789,7 +789,7 @@ lbl_fn_803C0938_000008A8:
     slwi r0, r0, 2
     add r3, r4, r0
     lwz r3, 0x64a0(r3)
-    bl fn_80219544
+    bl task_getWorkerByIndex
     mr r5, r3
 lbl_fn_803C0938_00000908:
     lwz r3, lbl_8087F8A0
@@ -1130,7 +1130,7 @@ asm void fn_803C0F48(void)
     mr r28, r4
 lbl_fn_803C0F48_00000DC4:
     mr r3, r29
-    bl fn_80470528
+    bl boss_releaseLaserTarget
     addi r30, r30, 0x1
     addi r29, r29, 0x4
     cmplwi r30, 0x6

@@ -7,14 +7,14 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void actor_dispatchMessage(void);
 extern void mem_alloc(void);
-extern void fn_8008B130(void);
+extern void map_getArchiveName(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_8012B988(void);
+extern void enemy_updateNavSteering(void);
 extern void fn_80134774(void);
 extern void dialog_selectChoice(void);
 extern void fn_8014EE48(void);
-extern void fn_8014EEC4(void);
+extern void dialog_activateChoiceWindow(void);
 extern void fn_8014F5D4(void);
 extern void fn_8014FAD0(void);
 extern void fn_801CDD9C(void);
@@ -23,11 +23,11 @@ extern void fn_801E9164(void);
 extern void fn_801E9168(void);
 extern void fn_801E917C(void);
 extern void fn_801E92D4(void);
-extern void fn_80206B14(void);
+extern void sys_findModuleById(void);
 extern void assert_generateId(void);
 extern void assert_formatLocation(void);
 extern void task_mapIdToQueue(void);
-extern void fn_804439FC(void);
+extern void gmk_registerSlot(void);
 extern void fn_8044441C(void);
 extern void fn_8044D034(void);
 extern void fn_8044D184(void);
@@ -63,7 +63,7 @@ void fn_801CE7E8(void);
 void fn_801CE87C(void);
 void fn_801CEA50(void);
 void fn_801CEA98(void);
-void fn_801CF334(void);
+void ui_log_findActiveEntry(void);
 void fn_801CF3C0(void);
 
 asm void fn_801CDE14(void)
@@ -1385,7 +1385,7 @@ lbl_fn_801CEA98_00001230:
     lwz r19, 0x74(r1)
 lbl_fn_801CEA98_00001234:
     addi r3, r30, 0xb0
-    bl fn_8008B130
+    bl map_getArchiveName
     mr r4, r19
     bl strstr
     cmpwi r3, 0x0
@@ -1462,7 +1462,7 @@ lbl_fn_801CEA98_00001344:
     lwz r19, 0x74(r1)
 lbl_fn_801CEA98_00001348:
     addi r3, r30, 0xb0
-    bl fn_8008B130
+    bl map_getArchiveName
     mr r4, r19
     bl strstr
     cmpwi r3, 0x0
@@ -1532,7 +1532,7 @@ lbl_fn_801CEA98_00001440:
     lwz r19, 0x74(r1)
 lbl_fn_801CEA98_00001444:
     addi r3, r30, 0xb0
-    bl fn_8008B130
+    bl map_getArchiveName
     mr r4, r19
     bl strstr
     cmpwi r3, 0x0
@@ -1593,45 +1593,45 @@ lbl_fn_801CEA98_0000150C:
     blr
 }
 
-asm void fn_801CF334(void)
+asm void ui_log_findActiveEntry(void)
 {
     nofralloc
     lwz r0, 0xf4(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_801CF334_000015A4
+    beq lbl_ui_log_findActiveEntry_000015A4
     lwz r5, 0xd4(r3)
     cmpwi r5, 0x0
-    beq lbl_fn_801CF334_00001554
+    beq lbl_ui_log_findActiveEntry_00001554
     lwz r4, 0x104(r3)
     lwz r0, 0x4c(r5)
     lwz r4, 0x0(r4)
     cmpw r4, r0
-    bne lbl_fn_801CF334_00001554
+    bne lbl_ui_log_findActiveEntry_00001554
     mr r3, r5
     blr
-lbl_fn_801CF334_00001554:
+lbl_ui_log_findActiveEntry_00001554:
     lwz r5, 0xd8(r3)
     cmpwi r5, 0x0
-    beq lbl_fn_801CF334_0000157C
+    beq lbl_ui_log_findActiveEntry_0000157C
     lwz r4, 0x104(r3)
     lwz r0, 0x4c(r5)
     lwz r4, 0x0(r4)
     cmpw r4, r0
-    bne lbl_fn_801CF334_0000157C
+    bne lbl_ui_log_findActiveEntry_0000157C
     mr r3, r5
     blr
-lbl_fn_801CF334_0000157C:
+lbl_ui_log_findActiveEntry_0000157C:
     lwz r5, 0xdc(r3)
     cmpwi r5, 0x0
-    beq lbl_fn_801CF334_000015A4
+    beq lbl_ui_log_findActiveEntry_000015A4
     lwz r4, 0x104(r3)
     lwz r0, 0x4c(r5)
     lwz r4, 0x0(r4)
     cmpw r4, r0
-    bne lbl_fn_801CF334_000015A4
+    bne lbl_ui_log_findActiveEntry_000015A4
     mr r3, r5
     blr
-lbl_fn_801CF334_000015A4:
+lbl_ui_log_findActiveEntry_000015A4:
     lwz r3, 0xd4(r3)
     blr
 }
@@ -1671,14 +1671,14 @@ lbl_fn_801CF3C0_000015F4:
     li r3, 0x1
     add r4, r4, r0
     lwz r4, 0x20(r4)
-    bl fn_80206B14
+    bl sys_findModuleById
     b lbl_fn_801CF3C0_00001644
 lbl_fn_801CF3C0_00001630:
     slwi r0, r28, 3
     li r3, 0x0
     add r4, r4, r0
     lwz r4, 0x20(r4)
-    bl fn_80206B14
+    bl sys_findModuleById
 lbl_fn_801CF3C0_00001644:
     cmpwi r3, 0x0
     beq lbl_fn_801CF3C0_0000165C
@@ -1702,7 +1702,7 @@ lbl_fn_801CF3C0_0000165C:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_804439FC
+    bl gmk_registerSlot
 lbl_fn_801CF3C0_0000169C:
     lwz r3, lbl_8087F4F0
     mr r4, r28
@@ -1721,7 +1721,7 @@ lbl_fn_801CF3C0_000016D0:
     lwz r24, 0x674(r27)
     mr r3, r27
     li r4, 0x1
-    bl fn_8014EEC4
+    bl dialog_activateChoiceWindow
     lwz r5, 0x78(r31)
     mr r3, r27
     lwz r6, 0x80(r31)
@@ -1761,7 +1761,7 @@ lbl_fn_801CF3C0_00001758:
     b lbl_fn_801CF3C0_00001770
 lbl_fn_801CF3C0_00001768:
     addi r3, r27, 0x7d4
-    bl fn_8012B988
+    bl enemy_updateNavSteering
 lbl_fn_801CF3C0_00001770:
     cmpwi r29, 0x0
     beq lbl_fn_801CF3C0_000017A0
@@ -1995,7 +1995,7 @@ lbl_fn_801CF3C0_00001A9C:
     lwz r23, 0x60(r1)
 lbl_fn_801CF3C0_00001AA0:
     addi r3, r29, 0xb0
-    bl fn_8008B130
+    bl map_getArchiveName
     mr r4, r23
     bl strstr
     cmpwi r3, 0x0
@@ -2003,7 +2003,7 @@ lbl_fn_801CF3C0_00001AA0:
     lwz r23, 0x674(r29)
     mr r3, r29
     li r4, 0x1
-    bl fn_8014EEC4
+    bl dialog_activateChoiceWindow
     lwz r5, 0x78(r31)
     mr r3, r29
     lwz r6, 0x80(r31)
@@ -2058,7 +2058,7 @@ lbl_fn_801CF3C0_00001B7C:
     lwz r23, 0x60(r1)
 lbl_fn_801CF3C0_00001B80:
     addi r3, r29, 0xb0
-    bl fn_8008B130
+    bl map_getArchiveName
     mr r4, r23
     bl strstr
     cmpwi r3, 0x0
@@ -2066,7 +2066,7 @@ lbl_fn_801CF3C0_00001B80:
     lwz r23, 0x674(r29)
     mr r3, r29
     li r4, 0x1
-    bl fn_8014EEC4
+    bl dialog_activateChoiceWindow
     lwz r5, 0x78(r31)
     mr r3, r29
     lwz r6, 0x80(r31)

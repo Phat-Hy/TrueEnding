@@ -21,7 +21,7 @@ extern void fn_80392D2C(void);
 extern void fn_804786F8(void);
 extern void fn_805BDCC0(void);
 extern void fn_805BF208(void);
-extern void fn_805BF414(void);
+extern void gx_evaluateVector3f(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
@@ -1188,14 +1188,14 @@ lbl_fn_8034DE90_0000100C:
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     lfs f1, 0x2e4(r29)
     mr r3, r30
     addi r4, r1, 0x14
     li r5, 0x7
     li r6, 0x8
     li r7, 0x9
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     lwz r0, 0x16f4(r29)
     cmpwi r0, 0x2
     beq lbl_fn_8034DE90_00001058

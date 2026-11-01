@@ -18,7 +18,7 @@ extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void actor_findSpawnTemplate(void);
 extern void save_parseSlotHeader(void);
-extern void fn_801F4998(void);
+extern void save_formatSlotMetadata(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void thread_findTaskById(void);
@@ -27,9 +27,9 @@ extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_804A3C24(void);
+extern void net_initCoopSession(void);
 extern void fn_804A4738(void);
-extern void fn_804A53D4(void);
+extern void net_broadcastCoopPacket(void);
 extern void fn_804DCA50(void);
 extern void fn_804EA538(void);
 extern void fn_804EA60C(void);
@@ -168,7 +168,7 @@ lbl_fn_804B2C20_00000048:
     li r4, 0x0
     li r5, 0x0
     li r7, 0x0
-    bl fn_804A53D4
+    bl net_broadcastCoopPacket
     lwz r4, 0xbc(r31)
     mr r3, r31
     lwz r5, 0xe4(r31)
@@ -183,7 +183,7 @@ lbl_fn_804B2C20_00000048:
     lwz r3, lbl_8087F580
     mr r4, r30
     li r5, 0x0
-    bl fn_804A3C24
+    bl net_initCoopSession
     b lbl_fn_804B2C20_0000078C
     lwz r4, lbl_8087F588
     lwz r0, 0x38(r4)
@@ -225,7 +225,7 @@ lbl_fn_804B2C20_00000048:
     li r4, 0x0
     li r5, 0x0
     li r7, 0x0
-    bl fn_804A53D4
+    bl net_broadcastCoopPacket
     lwz r4, 0xbc(r31)
     mr r3, r31
     lwz r5, 0xe4(r31)
@@ -240,7 +240,7 @@ lbl_fn_804B2C20_00000048:
     lwz r3, lbl_8087F580
     mr r4, r30
     li r5, 0x0
-    bl fn_804A3C24
+    bl net_initCoopSession
     b lbl_fn_804B2C20_0000078C
     lwz r0, lbl_8087F5EC
     cmpwi r0, 0x0
@@ -344,7 +344,7 @@ lbl_fn_804B2C20_0000033C:
     li r4, 0x0
     li r5, 0x0
     li r7, 0x0
-    bl fn_804A53D4
+    bl net_broadcastCoopPacket
     lwz r4, 0xbc(r31)
     mr r3, r31
     lwz r5, 0xe4(r31)
@@ -359,7 +359,7 @@ lbl_fn_804B2C20_0000033C:
     lwz r3, lbl_8087F580
     mr r4, r30
     li r5, 0x0
-    bl fn_804A3C24
+    bl net_initCoopSession
     b lbl_fn_804B2C20_0000078C
     lwz r3, lbl_8087F5B0
     cmpwi r3, 0x0
@@ -731,7 +731,7 @@ lbl_fn_804B3494_0000090C:
     li r4, 0x0
     li r5, 0x0
     li r7, 0x0
-    bl fn_804A53D4
+    bl net_broadcastCoopPacket
     lwz r4, 0xbc(r30)
     mr r3, r30
     lwz r5, 0xe4(r30)
@@ -746,7 +746,7 @@ lbl_fn_804B3494_0000090C:
     lwz r3, lbl_8087F580
     mr r4, r29
     li r5, 0x0
-    bl fn_804A3C24
+    bl net_initCoopSession
 lbl_fn_804B3494_000009CC:
     lwz r3, 0x54(r30)
     lwz r0, 0x38(r3)
@@ -868,29 +868,29 @@ lbl_fn_804B3494_00000B68:
     mulli r29, r0, 0xc
     add r5, r28, r29
     lwz r5, 0x50(r5)
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     add r4, r28, r29
     lwz r3, 0xb8(r28)
     lwz r5, 0x54(r4)
     addi r4, r31, 0x4ca
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     add r30, r28, r29
     lwz r3, 0xb8(r28)
     lwz r5, 0x58(r30)
     addi r4, r31, 0x4d8
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r3, 0xb8(r28)
     addi r4, r31, 0x4dd
     lwz r5, 0x58(r30)
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r3, 0xb8(r28)
     addi r4, r31, 0x4e2
     lwz r5, 0x58(r30)
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r3, 0xb8(r28)
     addi r4, r31, 0x4e7
     lwz r5, 0x58(r30)
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r3, lbl_8087F588
     lwz r0, 0x4c(r3)
     cmpwi r0, 0x0
@@ -1006,7 +1006,7 @@ lbl_fn_804B3838_00000D90:
     la r4, lbl_808813D0
 lbl_fn_804B3838_00000D94:
     li r5, 0x0
-    bl fn_804A3C24
+    bl net_initCoopSession
     lwz r0, 0xc8(r31)
     li r6, 0xa
     lwz r3, 0xb4(r31)
@@ -1071,7 +1071,7 @@ asm void fn_804B39F8(void)
     li r4, 0x0
     li r5, 0x0
     li r7, 0x0
-    bl fn_804A53D4
+    bl net_broadcastCoopPacket
     lwz r4, 0xbc(r31)
     mr r3, r31
     lwz r5, 0xe4(r31)
@@ -1086,7 +1086,7 @@ asm void fn_804B39F8(void)
     lwz r3, lbl_8087F580
     mr r4, r30
     li r5, 0x0
-    bl fn_804A3C24
+    bl net_initCoopSession
 lbl_fn_804B39F8_00000EC4:
     lwz r3, lbl_8087F610
     bl fn_804EAA54

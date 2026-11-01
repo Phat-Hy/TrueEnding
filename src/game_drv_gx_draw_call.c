@@ -29,7 +29,7 @@ extern void fn_805C3FE0(void);
 extern void fn_805CF4C0(void);
 extern void fn_805D7DD0(void);
 extern void fn_805EC870(void);
-extern void fn_80614790(void);
+extern void GXBegin(void);
 extern void fn_80616840(void);
 extern void fn_806168C0(void);
 extern void fn_80617520(void);
@@ -261,7 +261,7 @@ asm void fn_805C7C20(void)
     li r3, 0x80
     li r4, 0x0
     li r5, 0x4
-    bl fn_80614790
+    bl GXBegin
     lis r29, 0xcc01
     lfs f0, 0x33c(r31)
     stfs f0, -0x8000(r29)
@@ -287,7 +287,7 @@ asm void fn_805C7C20(void)
     li r3, 0x80
     li r4, 0x0
     li r5, 0x4
-    bl fn_80614790
+    bl GXBegin
     lfs f0, 0x33c(r31)
     stfs f0, -0x8000(r29)
     lfs f0, 0x33c(r31)
@@ -360,7 +360,7 @@ lbl_fn_805C7C20_00000428:
     li r3, 0x80
     li r4, 0x0
     li r5, 0x4
-    bl fn_80614790
+    bl GXBegin
     lis r3, 0xcc01
     lfs f0, 0x2f8(r31)
     stfs f0, -0x8000(r3)

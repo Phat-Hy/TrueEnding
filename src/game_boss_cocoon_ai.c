@@ -10,7 +10,7 @@ extern void scene_traverseNode(void);
 extern void vec3_sub(void);
 extern void mem_free(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80094958(void);
+extern void target_registerCandidate(void);
 extern void fn_80094B6C(void);
 extern void cursor_applyAnimationTrack(void);
 extern void skin_applyWeights(void);
@@ -18,8 +18,8 @@ extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80101340(void);
 extern void hurtbox_testCollisionLayer(void);
-extern void fn_801162A0(void);
-extern void fn_8012DF7C(void);
+extern void vec3_sqMag(void);
+extern void enemy_calcAttackTrajectory(void);
 extern void npc_getPosition(void);
 extern void quest_evaluateConditions(void);
 extern void quest_getRewardItemSlot(void);
@@ -569,7 +569,7 @@ lbl_fn_804541A0_00000630:
     addi r5, r31, 0x528
     bl vec3_sub
     addi r3, r1, 0x8
-    bl fn_801162A0
+    bl vec3_sqMag
     fcmpo cr0, f1, f31
     bge lbl_fn_804541A0_000006BC
     mr r4, r30
@@ -1816,7 +1816,7 @@ lbl_fn_8045531C_00001770:
     stfs f1, 0x50(r1)
     fdivs f0, f0, f4
     stfs f0, 0x54(r1)
-    bl fn_80094958
+    bl target_registerCandidate
 lbl_fn_8045531C_0000186C:
     lwz r0, 0xc4(r1)
     lwz r31, 0xbc(r1)
@@ -2002,7 +2002,7 @@ lbl_fn_80455638_00001AE0:
     stw r4, 0xcc(r1)
     lwz r3, 0x0(r23)
     addi r3, r3, 0x7d4
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
     lwz r3, 0x0(r23)
     mr r6, r20
     stfs f28, 0x6c(r1)
@@ -2281,7 +2281,7 @@ lbl_fn_80455638_00001DFC:
     stfs f4, 0x84(r1)
     stfs f3, 0x88(r1)
     stfs f0, 0x8c(r1)
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
     lwz r3, lbl_8087F048
     mr r5, r17
     mr r6, r20

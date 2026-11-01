@@ -6,8 +6,8 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void atn_ColliBase_destructor(void);
-extern void fn_80057F28(void);
-extern void fn_80058078(void);
+extern void mission_initPathTracker(void);
+extern void mission_clearPathTracker(void);
 extern void mission_isObjectiveActive(void);
 extern void mission_updateObjectiveTarget(void);
 extern void atn_ColliObject_destructor(void);
@@ -32,7 +32,7 @@ extern void str_skipWhitespace(void);
 extern void cam_destroyMsgHandle(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
-extern void fn_8012476C(void);
+extern void player_testStatusCondition(void);
 extern void inventory_unequipItem(void);
 extern void fn_80169F04(void);
 extern void fn_8016A20C(void);
@@ -56,7 +56,7 @@ extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
 extern void barrier_bindFieldAnimation(void);
 extern void dungeon_updateBarrierField(void);
-extern void fn_803EDB18(void);
+extern void barrier_testFieldCollision(void);
 extern void fn_80412968(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -318,7 +318,7 @@ lbl_fn_80410E84_000002B8:
     lwz r3, lbl_8087F0A8
     li r4, 0x22
     addi r3, r3, 0x48c
-    bl fn_8012476C
+    bl player_testStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_80410E84_000002DC
     lwz r3, 0x4c8(r31)
@@ -638,12 +638,12 @@ asm void fn_804114B4(void)
     li r5, 0x20
     bl lockon_updateTarget
     addi r3, r30, 0x4c4
-    bl fn_80057F28
-    lis r4, fn_80057F28@ha
+    bl mission_initPathTracker
+    lis r4, mission_initPathTracker@ha
     lis r5, atn_ColliObject_destructor@ha
     addi r3, r30, 0x54c
     li r6, 0x88
-    addi r4, r4, fn_80057F28@l
+    addi r4, r4, mission_initPathTracker@l
     addi r5, r5, atn_ColliObject_destructor@l
     li r7, 0x2
     bl __construct_new_array
@@ -907,7 +907,7 @@ lbl_fn_80411720_00000AC4:
     bl talk_formatQuotedString
     mr r4, r3
     addi r3, r29, 0x4c4
-    bl fn_80058078
+    bl mission_clearPathTracker
     b lbl_fn_80411720_00000BC8
 lbl_fn_80411720_00000AF0:
     mr r3, r30
@@ -919,7 +919,7 @@ lbl_fn_80411720_00000AF0:
     bl talk_formatQuotedString
     mr r4, r3
     addi r3, r29, 0x54c
-    bl fn_80058078
+    bl mission_clearPathTracker
     b lbl_fn_80411720_00000BC8
 lbl_fn_80411720_00000B1C:
     mr r3, r30
@@ -931,7 +931,7 @@ lbl_fn_80411720_00000B1C:
     bl talk_formatQuotedString
     mr r4, r3
     addi r3, r29, 0x5d4
-    bl fn_80058078
+    bl mission_clearPathTracker
     b lbl_fn_80411720_00000BC8
 lbl_fn_80411720_00000B48:
     mr r3, r30
@@ -1054,7 +1054,7 @@ asm void fn_80411AA8(void)
     bne lbl_fn_80411AA8_00000CFC
     mr r3, r31
     addi r4, r31, 0xf4
-    bl fn_803EDB18
+    bl barrier_testFieldCollision
     li r3, 0x1
     b lbl_fn_80411AA8_00000D00
 lbl_fn_80411AA8_00000CFC:

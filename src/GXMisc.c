@@ -33,7 +33,7 @@ void fn_80613E30(void);
 void GXSetDrawSync(void);
 void fn_806140B0(void);
 void fn_806140C0(void);
-void fn_80614190(void);
+void __GXFlushPixelEngine(void);
 void fn_806141C0(void);
 void fn_806141D0(void);
 void fn_806141F0(void);
@@ -459,7 +459,7 @@ lbl_fn_806140C0_0000057C:
     blr
 }
 
-asm void fn_80614190(void)
+asm void __GXFlushPixelEngine(void)
 {
     nofralloc
     lis r4, 0xcc01

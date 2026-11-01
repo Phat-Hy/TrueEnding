@@ -11,7 +11,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void fn_80049B2C(void);
-extern void fn_80049B74(void);
+extern void snd_findSoundNodeByName(void);
 extern void fn_80049C3C(void);
 extern void fn_80049CDC(void);
 extern void boss_recordDamage(void);
@@ -27,7 +27,7 @@ extern void fn_800CB36C(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB404(void);
 extern void morph_updateWeights(void);
-extern void fn_800CB58C(void);
+extern void morph_hasActiveWeight(void);
 extern void fn_800CB5B4(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB654(void);
@@ -104,7 +104,7 @@ lbl_fn_803E907C_00000068:
     beq lbl_fn_803E907C_00000084
     lwz r3, lbl_8087EE90
     mr r4, r28
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     mr r4, r3
     b lbl_fn_803E907C_00000088
 lbl_fn_803E907C_00000084:
@@ -131,7 +131,7 @@ lbl_fn_803E907C_000000BC:
     beq lbl_fn_803E907C_000000E4
     lwz r3, lbl_8087EE90
     mr r4, r28
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     mr r24, r3
     b lbl_fn_803E907C_000000E8
 lbl_fn_803E907C_000000E4:
@@ -237,7 +237,7 @@ lbl_fn_803E907C_0000022C:
     stb r25, 0x2c(r31)
     stb r25, 0x2d(r31)
     lwz r3, lbl_8087EE90
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     lwz r5, lbl_8087EFE8
     mr r4, r3
     stw r25, 0x34c8(r5)
@@ -482,7 +482,7 @@ lbl_fn_803E9608_000005F0:
     beq lbl_fn_803E9608_0000060C
     lwz r3, lbl_8087EE90
     mr r4, r29
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     mr r4, r3
     b lbl_fn_803E9608_00000610
 lbl_fn_803E9608_0000060C:
@@ -509,7 +509,7 @@ lbl_fn_803E9608_00000644:
     beq lbl_fn_803E9608_0000066C
     lwz r3, lbl_8087EE90
     mr r4, r29
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     mr r25, r3
     b lbl_fn_803E9608_00000670
 lbl_fn_803E9608_0000066C:
@@ -615,7 +615,7 @@ lbl_fn_803E9608_000007B4:
     stb r26, 0x2c(r31)
     stb r26, 0x2d(r31)
     lwz r3, lbl_8087EE90
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     lwz r5, lbl_8087EFE8
     mr r4, r3
     stw r26, 0x34c8(r5)
@@ -1223,7 +1223,7 @@ lbl_fn_803EA09C_000010C8:
     beq lbl_fn_803EA09C_000010F0
     lwz r3, lbl_8087EE90
     mr r4, r28
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     mr r23, r3
     b lbl_fn_803EA09C_000010F4
 lbl_fn_803EA09C_000010F0:
@@ -1330,7 +1330,7 @@ lbl_fn_803EA09C_00001238:
     stb r24, 0x2d(r31)
     lwz r23, lbl_8087EE90
     mr r3, r23
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     mr r4, r3
     mr r3, r23
     bl fn_80049B2C
@@ -1343,7 +1343,7 @@ lbl_fn_803EA09C_00001238:
     lwz r3, lbl_8087EE90
     mr r4, r28
     addi r23, r27, 0x528
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     lwz r5, lbl_8087EFE8
     mr r4, r3
     stw r24, 0x34c8(r5)
@@ -1381,7 +1381,7 @@ lbl_fn_803EA09C_00001320:
 lbl_fn_803EA09C_00001330:
     lwz r3, lbl_8087EE90
     mr r4, r28
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     lwz r5, lbl_8087EFE8
     li r0, 0x0
     mr r4, r3
@@ -1713,7 +1713,7 @@ lbl_chest_spawnLoot_000017E0:
     b lbl_chest_spawnLoot_00001820
 lbl_chest_spawnLoot_00001800:
     mr r3, r26
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     bne lbl_chest_spawnLoot_00001818
     li r0, 0x1

@@ -9,14 +9,14 @@ extern void _savegpr_14(void);
 extern void _savegpr_25(void);
 extern void vec3_copy(void);
 extern void scene_transformPoint(void);
-extern void fn_8000DCF4(void);
+extern void scene_getCamera(void);
 extern void scene_getRootNode(void);
 extern void vec3_assign(void);
 extern void vec3_sub(void);
 extern void math_wrapAngle(void);
 extern void msg_getMessageById(void);
 extern void fn_8012A190(void);
-extern void fn_8012A1B8(void);
+extern void path_getFollowerNode(void);
 extern void fn_80139F2C(void);
 extern void npc_getPosition(void);
 extern void fn_8013C3A8(void);
@@ -48,7 +48,7 @@ extern void fn_804E824C(void);
 extern void fn_804E82C0(void);
 extern void fn_804E82C8(void);
 extern void fn_804EB3D0(void);
-extern void fn_804EB874(void);
+extern void net_getLocalPlayerAid(void);
 extern void fn_80506530(void);
 extern void net_p2p_readPayload(void);
 extern void rand(void);
@@ -1651,9 +1651,9 @@ asm void fn_804E7AC4(void)
     psq_st f31, 0x1e8(r1), 0, 0
     bl _savegpr_25
     mr r31, r3
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     mr r29, r3
     bl scene_getRootNode
     bl fn_804CF424
@@ -1702,7 +1702,7 @@ asm void fn_804E7AC4(void)
     bl fn_8012A190
 lbl_fn_804E7AC4_00001698:
     mr r3, r29
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     lfs f0, 0x4(r3)
     mr r3, r29
     stfs f0, 0x24(r27)
@@ -1829,7 +1829,7 @@ lbl_fn_804E7AC4_0000176C:
     bl fn_8012A190
 lbl_fn_804E7AC4_00001888:
     lwz r3, 0x0(r28)
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     lfs f0, 0x4(r3)
     li r4, 0x1
     stfs f0, 0x24(r25)
@@ -1960,7 +1960,7 @@ lbl_fn_804E7AC4_000019C8:
     bl fn_8012A190
 lbl_fn_804E7AC4_00001A80:
     lwz r3, 0x10c(r1)
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     lfs f0, 0x4(r3)
     li r4, 0x1
     stfs f0, 0x24(r27)

@@ -19,17 +19,17 @@ extern void fn_800C122C(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800FC410(void);
-extern void fn_801059F8(void);
-extern void fn_80105B3C(void);
+extern void colli_findDynamicSlot(void);
+extern void colli_findStaticSlot(void);
 extern void fn_80107850(void);
 extern void fn_80107B20(void);
 extern void fn_80107BE8(void);
 extern void fn_80107CA8(void);
 extern void fn_8010C00C(void);
 extern void fn_8011BEB8(void);
-extern void fn_8012476C(void);
+extern void player_testStatusCondition(void);
 extern void fn_8012AD20(void);
-extern void fn_8012B988(void);
+extern void enemy_updateNavSteering(void);
 extern void fn_8012E540(void);
 extern void fn_8012F188(void);
 extern void actor_testBitFlag(void);
@@ -38,7 +38,7 @@ extern void fn_80134168(void);
 extern void dialog_selectChoice(void);
 extern void fn_8014FD30(void);
 extern void fn_801533C8(void);
-extern void fn_8015EB2C(void);
+extern void party_evalFormationState(void);
 extern void actor_setState(void);
 extern void fn_80178BFC(void);
 extern void fn_801840D8(void);
@@ -668,7 +668,7 @@ asm void dialog_updateScriptState(void)
     bl fn_8012E540
 lbl_dialog_updateScriptState_000007DC:
     addi r3, r28, 0x7d4
-    bl fn_8012B988
+    bl enemy_updateNavSteering
     mr r3, r28
     bl fn_80178BFC
     lwz r3, 0x48(r28)
@@ -1018,7 +1018,7 @@ lbl_dialog_updateScriptState_00000CD8:
     li r4, 0x22
     lwz r3, lbl_8087F0A8
     addi r3, r3, 0x48c
-    bl fn_8012476C
+    bl player_testStatusCondition
     cmpwi r3, 0x0
     beq lbl_dialog_updateScriptState_00000D10
     lwz r3, 0xf84(r28)
@@ -1209,10 +1209,10 @@ lbl_dialog_updateScriptState_00000F94:
     cmpwi r3, 0x0
     beq lbl_dialog_updateScriptState_00000FB4
     mr r4, r28
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r28
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_dialog_updateScriptState_00000FB4:
     lwz r0, 0x48(r28)
     li r4, 0x0
@@ -1424,10 +1424,10 @@ lbl_dialog_updateScriptState_00001298:
     cmpwi r3, 0x0
     beq lbl_dialog_updateScriptState_000012B8
     mr r4, r28
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r28
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_dialog_updateScriptState_000012B8:
     lwz r0, 0x48(r28)
     li r4, 0x0
@@ -2145,7 +2145,7 @@ lbl_dialog_updateScriptState_00001D14:
     cmpwi r4, 0x0
     beq lbl_dialog_updateScriptState_00001EA8
     mr r3, r29
-    bl fn_8015EB2C
+    bl party_evalFormationState
     cmpwi r3, 0x0
     beq lbl_dialog_updateScriptState_00001EA8
     lwz r0, 0x55c(r29)
@@ -2304,7 +2304,7 @@ lbl_dialog_updateScriptState_00001F4C:
     cmpwi r4, 0x0
     beq lbl_dialog_updateScriptState_000020E0
     mr r3, r29
-    bl fn_8015EB2C
+    bl party_evalFormationState
     cmpwi r3, 0x0
     beq lbl_dialog_updateScriptState_000020E0
     lwz r0, 0x55c(r29)

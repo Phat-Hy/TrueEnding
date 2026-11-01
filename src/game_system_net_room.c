@@ -13,17 +13,17 @@ extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_800FDE60(void);
 extern void fn_8011CD84(void);
-extern void fn_8011F8F4(void);
+extern void skill_findEntryById(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void skill_findNodeByTag(void);
 extern void fn_8012B3E8(void);
-extern void fn_8012B988(void);
+extern void enemy_updateNavSteering(void);
 extern void enemy_updateAnimTimer(void);
 extern void fn_801333E4(void);
 extern void fn_80133B30(void);
 extern void dialog_selectChoice(void);
-extern void fn_8014EEC4(void);
+extern void dialog_activateChoiceWindow(void);
 extern void inventory_unequipItem(void);
 extern void fn_80183930(void);
 extern void task_mapIdToQueue(void);
@@ -36,7 +36,7 @@ extern void kpad_getClampData(void);
 extern void fn_8039BF04(void);
 extern void fn_803CAABC(void);
 extern void fn_803EBAC8(void);
-extern void fn_803EEE10(void);
+extern void dungeon_findArenaNodeByCoords(void);
 extern void fn_8047EA34(void);
 extern void fn_8047EFD8(void);
 extern void fn_8047F420(void);
@@ -302,7 +302,7 @@ lbl_fn_8039FBFC_00000240:
 lbl_fn_8039FBFC_0000027C:
     mr r3, r30
     li r4, 0x0
-    bl fn_8014EEC4
+    bl dialog_activateChoiceWindow
     b lbl_fn_8039FBFC_00000428
     lwz r0, 0x48(r30)
     cmpwi r0, 0x2
@@ -343,7 +343,7 @@ lbl_fn_8039FBFC_000002C4:
     stfs f0, 0x984(r30)
     bl fn_8012B3E8
     addi r3, r30, 0x7d4
-    bl fn_8012B988
+    bl enemy_updateNavSteering
     addi r3, r30, 0x7d4
     bl enemy_updateAnimTimer
     b lbl_fn_8039FBFC_00000428
@@ -459,7 +459,7 @@ lbl_fn_803A0040_000004AC:
 lbl_fn_803A0040_000004C0:
     mr r3, r31
     li r4, 0x0
-    bl fn_8014EEC4
+    bl dialog_activateChoiceWindow
 lbl_fn_803A0040_000004CC:
     lwz r4, 0xc(r30)
     lis r0, 0x4330
@@ -516,7 +516,7 @@ lbl_fn_803A0040_0000057C:
 lbl_fn_803A0040_00000590:
     mr r3, r27
     li r4, 0x0
-    bl fn_8014EEC4
+    bl dialog_activateChoiceWindow
 lbl_fn_803A0040_0000059C:
     lwz r27, 0x14ac(r27)
 lbl_fn_803A0040_000005A0:
@@ -578,7 +578,7 @@ lbl_fn_803A0040_0000065C:
 lbl_fn_803A0040_00000670:
     mr r3, r28
     li r4, 0x0
-    bl fn_8014EEC4
+    bl dialog_activateChoiceWindow
 lbl_fn_803A0040_0000067C:
     lwz r28, 0x14ac(r28)
 lbl_fn_803A0040_00000680:
@@ -616,7 +616,7 @@ asm void fn_803A02C8(void)
     lwz r4, 0x8(r5)
     lwz r3, lbl_8087F4A0
     lwz r5, 0xc(r5)
-    bl fn_803EEE10
+    bl dungeon_findArenaNodeByCoords
     cmpwi r3, 0x0
     beq lbl_fn_803A02C8_00000768
     lwz r0, 0x14(r31)
@@ -820,7 +820,7 @@ lbl_fn_803A0520_00000978:
 lbl_fn_803A0520_00000990:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A0520_0000099C:
     mr r4, r3
     b lbl_fn_803A0520_00000A04
@@ -911,7 +911,7 @@ lbl_fn_803A064C_00000AB0:
 lbl_fn_803A064C_00000AC8:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A064C_00000AD4:
     mr r31, r3
     b lbl_fn_803A064C_00000C1C
@@ -1096,7 +1096,7 @@ lbl_fn_803A08D4_00000D30:
 lbl_fn_803A08D4_00000D48:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A08D4_00000D54:
     mr r29, r3
     b lbl_fn_803A08D4_00000DBC
@@ -1150,7 +1150,7 @@ lbl_fn_803A08D4_00000DEC:
 lbl_fn_803A08D4_00000E04:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A08D4_00000E10:
     mr r5, r3
     b lbl_fn_803A08D4_00000E6C

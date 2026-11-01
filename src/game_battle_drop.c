@@ -77,7 +77,7 @@ void battle_generateLootDrops(void);
 void fn_801784BC(void);
 void fn_80178668(void);
 void fn_80178864(void);
-void fn_801789D8(void);
+void battle_evalDropTable(void);
 void battle_updateActorStatus(void);
 void fn_80178BFC(void);
 void fn_80179730(void);
@@ -909,7 +909,7 @@ lbl_fn_80178864_00000AE4:
     blr
 }
 
-asm void fn_801789D8(void)
+asm void battle_evalDropTable(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -919,35 +919,35 @@ asm void fn_801789D8(void)
     lwz r0, 0x12d0(r3)
     mtctr r0
     cmplwi r0, 0x0
-    ble lbl_fn_801789D8_00000B94
-lbl_fn_801789D8_00000B40:
+    ble lbl_battle_evalDropTable_00000B94
+lbl_battle_evalDropTable_00000B40:
     cmpwi r4, 0x0
-    ble lbl_fn_801789D8_00000B58
+    ble lbl_battle_evalDropTable_00000B58
     lwz r3, 0x0(r6)
     lwz r0, 0x4(r3)
     cmpw r0, r4
-    bne lbl_fn_801789D8_00000B8C
-lbl_fn_801789D8_00000B58:
+    bne lbl_battle_evalDropTable_00000B8C
+lbl_battle_evalDropTable_00000B58:
     cmpwi r5, 0x0
-    beq lbl_fn_801789D8_00000B74
+    beq lbl_battle_evalDropTable_00000B74
     lwz r3, 0x0(r6)
     lwz r0, 0xac(r3)
     and r0, r5, r0
     cmplw r5, r0
-    bne lbl_fn_801789D8_00000B8C
-lbl_fn_801789D8_00000B74:
+    bne lbl_battle_evalDropTable_00000B8C
+lbl_battle_evalDropTable_00000B74:
     lwz r3, 0x0(r6)
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
-    ble lbl_fn_801789D8_00000B8C
+    ble lbl_battle_evalDropTable_00000B8C
     bl task_findEntryById
-    b lbl_fn_801789D8_00000B98
-lbl_fn_801789D8_00000B8C:
+    b lbl_battle_evalDropTable_00000B98
+lbl_battle_evalDropTable_00000B8C:
     addi r6, r6, 0x14
-    bdnz lbl_fn_801789D8_00000B40
-lbl_fn_801789D8_00000B94:
+    bdnz lbl_battle_evalDropTable_00000B40
+lbl_battle_evalDropTable_00000B94:
     li r3, 0x0
-lbl_fn_801789D8_00000B98:
+lbl_battle_evalDropTable_00000B98:
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31

@@ -13,7 +13,7 @@ extern void talk_setSpeakerName(void);
 extern void talk_parseDialogue(void);
 extern void talk_parseDialogueTokens(void);
 extern void talk_copyUtf16String(void);
-extern void fn_8006A250(void);
+extern void boss_dispatchActionTransition(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void route_interpolatePath(void);
@@ -1772,7 +1772,7 @@ asm void fn_8053121C(void)
     li r4, 0xf
     lis r5, 0xff00
     li r6, 0x0
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     stw r3, 0xac(r30)
     lis r4, 0x2
     subi r0, r4, 0x7961

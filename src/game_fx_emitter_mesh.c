@@ -12,7 +12,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_setActive(void);
 extern void system_getNextSequenceId(void);
-extern void fn_80133130(void);
+extern void boss_setPartCollisionFlags(void);
 extern void actor_testBitFlag(void);
 extern void quest_updateFlow(void);
 extern void quest_ctorRewardItem(void);
@@ -1108,7 +1108,7 @@ lbl_fn_80289978_00000DC8:
     li r4, 0x4
     li r5, 0x258
     li r6, 0x0
-    bl fn_80133130
+    bl boss_setPartCollisionFlags
     li r0, 0x3
     stw r0, 0x14c0(r31)
     li r4, 0xe6

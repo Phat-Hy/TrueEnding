@@ -7,7 +7,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void fn_800128FC(void);
-extern void fn_80049B74(void);
+extern void snd_findSoundNodeByName(void);
 extern void fn_8004B0E4(void);
 extern void fn_8004B1EC(void);
 extern void skin_playAnimationByName(void);
@@ -22,7 +22,7 @@ extern void fn_800CB5B4(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB654(void);
 extern void fn_800CB668(void);
-extern void fn_800CB688(void);
+extern void morph_resetTargetWeight(void);
 extern void fn_8022960C(void);
 extern void fn_803601E4(void);
 extern void fn_803606CC(void);
@@ -51,7 +51,7 @@ extern void fn_80489A2C(void);
 extern void fn_80489A50(void);
 extern void fn_8048E9A4(void);
 extern void fn_8048EC7C(void);
-extern void fn_805381A4(void);
+extern void node_getParentNode(void);
 extern void spectate_getRootNode(void);
 extern void fn_805384D0(void);
 extern void fn_80538DC8(void);
@@ -210,7 +210,7 @@ asm void fn_8055F154(void)
     cmpwi r0, 0x0
     bgt lbl_fn_8055F154_000001D8
     mr r3, r30
-    bl fn_805381A4
+    bl node_getParentNode
     mr r3, r30
     bl spectate_getRootNode
     lwz r0, 0x30(r30)
@@ -231,7 +231,7 @@ lbl_fn_8055F154_00000180:
     b lbl_fn_8055F154_000001D8
 lbl_fn_8055F154_00000198:
     mr r3, r30
-    bl fn_805381A4
+    bl node_getParentNode
     mr r3, r30
     bl spectate_getRootNode
     lwz r0, 0x30(r30)
@@ -269,7 +269,7 @@ asm void fn_8055F234(void)
     stw r29, 0x24(r1)
     mr r29, r4
     mr r3, r29
-    bl fn_805381A4
+    bl node_getParentNode
     mr r3, r29
     bl spectate_getRootNode
     lwz r31, 0x1ec(r3)
@@ -351,7 +351,7 @@ asm void fn_8055F328(void)
     cmpwi r0, 0x0
     bgt lbl_fn_8055F328_00000410
     mr r3, r30
-    bl fn_805381A4
+    bl node_getParentNode
     mr r3, r30
     bl spectate_getRootNode
     lwz r0, 0x30(r30)
@@ -389,7 +389,7 @@ lbl_fn_8055F328_00000398:
     b lbl_fn_8055F328_00000410
 lbl_fn_8055F328_000003A8:
     mr r3, r30
-    bl fn_805381A4
+    bl node_getParentNode
     mr r3, r30
     bl spectate_getRootNode
     lwz r0, 0x30(r30)
@@ -454,7 +454,7 @@ asm void fn_8055F474(void)
     cmpwi r0, 0x0
     bgt lbl_fn_8055F474_00000624
     mr r3, r26
-    bl fn_805381A4
+    bl node_getParentNode
     mr r3, r26
     bl spectate_getRootNode
     lwz r0, 0x30(r26)
@@ -619,7 +619,7 @@ lbl_fn_8055F690_0000069C:
     cmpwi r0, 0x0
     bne lbl_fn_8055F690_00000BC0
     mr r3, r26
-    bl fn_805381A4
+    bl node_getParentNode
     mr r3, r26
     bl spectate_getRootNode
     lwz r6, 0x30(r26)
@@ -871,7 +871,7 @@ lbl_fn_8055F690_000009D8:
 lbl_fn_8055F690_000009F8:
     lwz r4, 0x10(r31)
 lbl_fn_8055F690_000009FC:
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     mr r25, r3
     b lbl_fn_8055F690_00000A0C
 lbl_fn_8055F690_00000A08:
@@ -883,12 +883,12 @@ lbl_fn_8055F690_00000A0C:
     lwz r3, lbl_8087EE90
     addi r27, r27, lbl_8075FAF8@l
     addi r4, r27, 0x2d
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     cmplw r25, r3
     beq lbl_fn_8055F690_00000A44
     lwz r3, lbl_8087EE90
     addi r4, r27, 0x3b
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     cmplw r25, r3
     bne lbl_fn_8055F690_00000A54
 lbl_fn_8055F690_00000A44:
@@ -983,7 +983,7 @@ lbl_fn_8055F690_00000B74:
     fmr f1, f29
     addi r3, r1, 0x34
     li r4, 0x0
-    bl fn_800CB688
+    bl morph_resetTargetWeight
     cmpwi r29, 0x0
     beq lbl_fn_8055F690_00000B94
     li r27, 0x0
@@ -1301,7 +1301,7 @@ lbl_fn_8055FE0C_00000FAC:
     fmr f1, f30
     mr r3, r29
     li r4, 0x0
-    bl fn_800CB688
+    bl morph_resetTargetWeight
     b lbl_fn_8055FE0C_000010DC
 lbl_fn_8055FE0C_00000FC0:
     cmpwi r0, 0x1
@@ -1417,7 +1417,7 @@ asm void fn_8056014C(void)
     bne lbl_fn_8056014C_000011E4
 lbl_fn_8056014C_00001130:
     mr r3, r31
-    bl fn_805381A4
+    bl node_getParentNode
     mr r3, r31
     bl spectate_getRootNode
     lwz r0, 0x30(r31)
@@ -1487,7 +1487,7 @@ asm void fn_8056023C(void)
     mr r31, r4
     bne lbl_fn_8056023C_00001258
     mr r3, r31
-    bl fn_805381A4
+    bl node_getParentNode
     mr r3, r31
     bl spectate_getRootNode
     lwz r0, 0x30(r31)
@@ -1535,7 +1535,7 @@ asm void fn_805602B0(void)
     b lbl_fn_805602B0_0000172C
 lbl_fn_805602B0_000012B4:
     mr r3, r28
-    bl fn_805381A4
+    bl node_getParentNode
     mr r3, r28
     bl spectate_getRootNode
     lwz r0, 0x30(r28)
@@ -1590,7 +1590,7 @@ lbl_fn_805602B0_00001340:
 lbl_fn_805602B0_00001368:
     lwz r4, 0x10(r29)
 lbl_fn_805602B0_0000136C:
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     subi r4, r3, 0x1
     subfic r3, r4, -0x1
     addi r0, r4, 0x1
@@ -1771,7 +1771,7 @@ lbl_fn_805602B0_000015C0:
     fmr f1, f30
     addi r3, r1, 0x14
     li r4, 0x0
-    bl fn_800CB688
+    bl morph_resetTargetWeight
     lwz r3, lbl_8087F540
     lwz r0, 0xc4(r3)
     cmpwi r0, 0x0
@@ -1915,7 +1915,7 @@ lbl_fn_80560798_000017A4:
     cmpwi r0, 0x0
     bne lbl_fn_80560798_000018C4
     mr r3, r30
-    bl fn_805381A4
+    bl node_getParentNode
     mr r3, r30
     bl spectate_getRootNode
     lwz r0, 0x30(r30)

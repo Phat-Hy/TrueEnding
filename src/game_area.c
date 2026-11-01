@@ -16,7 +16,7 @@ extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void boss_triggerEventSequence(void);
-extern void fn_8006AD24(void);
+extern void boss_lookupActionEntry(void);
 extern void boss_decodePhaseBitfield(void);
 extern void fn_8007C3F8(void);
 extern void dungeon_initGlobalContext(void);
@@ -2118,7 +2118,7 @@ lbl_area_updateZoneState_00001A40:
     bl actor_dispatchMessage
     mr r4, r28
     addi r3, r1, 0x74
-    bl fn_8006AD24
+    bl boss_lookupActionEntry
     lwz r0, 0x74(r1)
     srwi. r5, r0, 31
     bne lbl_area_updateZoneState_00001B08

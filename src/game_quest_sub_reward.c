@@ -17,13 +17,13 @@ extern void mtx_multVec(void);
 extern void fn_80012774(void);
 extern void vec3_sub(void);
 extern void actor_dispatchMessage(void);
-extern void fn_80049B74(void);
+extern void snd_findSoundNodeByName(void);
 extern void fn_8004AE84(void);
 extern void fn_8004B158(void);
 extern void fn_8004B1EC(void);
 extern void vec3_initValues(void);
 extern void magic_castSpellCircle(void);
-extern void fn_8008B964(void);
+extern void sys_getMainManager(void);
 extern void msg_formatWindowLayout(void);
 extern void skeleton_getGlobalManager(void);
 extern void fn_800CB480(void);
@@ -41,9 +41,9 @@ extern void fn_801156BC(void);
 extern void fn_801162A4(void);
 extern void fn_80116E64(void);
 extern void fn_8012A1E0(void);
-extern void fn_8013A13C(void);
+extern void mtx_rotYRad(void);
 extern void fn_80221F54(void);
-extern void fn_80244CAC(void);
+extern void script_setTaskTerminated(void);
 extern void fn_802A7964(void);
 extern void fn_802F0988(void);
 extern void fn_802F0990(void);
@@ -166,7 +166,7 @@ asm void fn_80487490(void)
     fcmpo cr0, f1, f0
     cror eq, lt, eq
     bne lbl_fn_80487490_000000A8
-    bl fn_8008B964
+    bl sys_getMainManager
     bl skeleton_getGlobalManager
     mr r4, r3
     addi r3, r31, 0x1bd0
@@ -190,7 +190,7 @@ asm void fn_80487490(void)
     stb r0, 0x1ab1(r31)
     b lbl_fn_80487490_00000100
 lbl_fn_80487490_000000A8:
-    bl fn_8008B964
+    bl sys_getMainManager
     bl skeleton_getGlobalManager
     lfs f1, 0x1ab4(r31)
     mr r4, r3
@@ -394,7 +394,7 @@ lbl_fn_80487490_000003A4:
     fmr f2, f0
 lbl_fn_80487490_000003A8:
     stfs f2, 0x2434(r31)
-    bl fn_8008B964
+    bl sys_getMainManager
     bl fn_800F7258
     mr r30, r3
     addi r3, r1, 0x78
@@ -426,7 +426,7 @@ lbl_fn_80487490_0000040C:
     bl vec3_toEulerAngles
     lfs f1, 0x64(r1)
     addi r3, r1, 0x108
-    bl fn_8013A13C
+    bl mtx_rotYRad
     addi r3, r1, 0x54
     addi r4, r1, 0x84
     addi r5, r1, 0x78
@@ -524,7 +524,7 @@ lbl_fn_80487490_00000588:
     lwz r3, 0x241c(r31)
     bl fn_803D2A54
     lwz r3, 0x241c(r31)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     li r0, 0x0
     lis r30, lbl_807C7028@ha
     stw r0, 0x1eac(r31)
@@ -535,7 +535,7 @@ lbl_fn_80487490_00000588:
     addi r4, r30, lbl_807C7028@l
     bl fn_800F833C
     lwz r3, 0x2438(r31)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lfs f1, lbl_80886F8C
     addi r3, r1, 0x30
     stfs f1, 0x2434(r31)
@@ -1783,7 +1783,7 @@ asm void fn_80488A74(void)
     mr r31, r3
     mr r3, r30
     mr r4, r28
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     cmplw r31, r3
     beq lbl_fn_80488A74_00001654
 lbl_fn_80488A74_0000163C:
@@ -2183,7 +2183,7 @@ lbl_fn_80488E00_00001B40:
 lbl_fn_80488E00_00001B68:
     lwz r4, 0x10(r27)
 lbl_fn_80488E00_00001B6C:
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     subi r4, r3, 0x1
     subfic r3, r4, -0x1
     addi r0, r4, 0x1

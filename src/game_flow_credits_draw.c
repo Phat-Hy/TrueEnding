@@ -11,7 +11,7 @@ extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
 extern void fn_800CB518(void);
-extern void fn_800CB58C(void);
+extern void morph_hasActiveWeight(void);
 extern void morph_updateMesh(void);
 extern void fn_80102EAC(void);
 extern void fn_801031D0(void);
@@ -25,14 +25,14 @@ extern void net_voiceCodec_destroy(void);
 extern void fn_804E82C8(void);
 extern void fn_804E8BF8(void);
 extern void fn_804EAEE4(void);
-extern void fn_8050128C(void);
+extern void net_isMessageStateActive(void);
 extern void fn_8050DDE0(void);
 extern void net_p2p_readPayload(void);
 extern void fn_8054D798(void);
 extern void rand(void);
 extern void net_getSocket(void);
 extern void net_getMyAid(void);
-extern void fn_806B1250(void);
+extern void net_isSessionConnected(void);
 
 /* External data declarations */
 extern u8 jumptable_807912B0[];
@@ -55,7 +55,7 @@ extern u32 lbl_80887590;
 void fn_804EB754(void);
 void fn_804EB7C8(void);
 void fn_804EB818(void);
-void fn_804EB874(void);
+void net_getLocalPlayerAid(void);
 void fn_804EB938(void);
 
 asm void fn_804EB754(void)
@@ -158,7 +158,7 @@ lbl_fn_804EB818_00000118:
     blr
 }
 
-asm void fn_804EB874(void)
+asm void net_getLocalPlayerAid(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -170,50 +170,50 @@ asm void fn_804EB874(void)
     addis r3, r4, 0x1
     lbz r0, -0x3deb(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_804EB874_00000168
+    bne lbl_net_getLocalPlayerAid_00000168
     lwz r0, 0x1f8(r4)
     extrwi. r0, r0, 1, 12
-    beq lbl_fn_804EB874_0000015C
+    beq lbl_net_getLocalPlayerAid_0000015C
     li r0, 0x0
-    b lbl_fn_804EB874_00000184
-lbl_fn_804EB874_0000015C:
+    b lbl_net_getLocalPlayerAid_00000184
+lbl_net_getLocalPlayerAid_0000015C:
     bl net_getMyAid
     clrlwi r0, r3, 24
-    b lbl_fn_804EB874_00000184
-lbl_fn_804EB874_00000168:
+    b lbl_net_getLocalPlayerAid_00000184
+lbl_net_getLocalPlayerAid_00000168:
     lwz r0, 0x1f8(r4)
     extrwi. r0, r0, 1, 12
-    beq lbl_fn_804EB874_0000017C
+    beq lbl_net_getLocalPlayerAid_0000017C
     li r3, 0x0
-    b lbl_fn_804EB874_00000180
-lbl_fn_804EB874_0000017C:
+    b lbl_net_getLocalPlayerAid_00000180
+lbl_net_getLocalPlayerAid_0000017C:
     bl net_getSocket
-lbl_fn_804EB874_00000180:
+lbl_net_getLocalPlayerAid_00000180:
     clrlwi r0, r3, 24
-lbl_fn_804EB874_00000184:
+lbl_net_getLocalPlayerAid_00000184:
     lwz r3, 0x5e8(r31)
     clrlwi r5, r0, 24
     li r4, 0x0
     mtctr r3
     cmpwi r3, 0x0
-    ble lbl_fn_804EB874_000001CC
-lbl_fn_804EB874_0000019C:
+    ble lbl_net_getLocalPlayerAid_000001CC
+lbl_net_getLocalPlayerAid_0000019C:
     lwz r0, 0x5e4(r31)
     add r3, r0, r4
     lwz r0, 0xd0(r3)
     srwi r0, r0, 31
     cmplwi r0, 0x1
-    bne lbl_fn_804EB874_000001C4
+    bne lbl_net_getLocalPlayerAid_000001C4
     lbz r0, 0xcc(r3)
     cmplw r5, r0
-    bne lbl_fn_804EB874_000001C4
-    b lbl_fn_804EB874_000001D0
-lbl_fn_804EB874_000001C4:
+    bne lbl_net_getLocalPlayerAid_000001C4
+    b lbl_net_getLocalPlayerAid_000001D0
+lbl_net_getLocalPlayerAid_000001C4:
     addi r4, r4, 0xd5c
-    bdnz lbl_fn_804EB874_0000019C
-lbl_fn_804EB874_000001CC:
+    bdnz lbl_net_getLocalPlayerAid_0000019C
+lbl_net_getLocalPlayerAid_000001CC:
     li r3, 0x0
-lbl_fn_804EB874_000001D0:
+lbl_net_getLocalPlayerAid_000001D0:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -483,7 +483,7 @@ lbl_fn_804EB938_00000520:
     beq lbl_fn_804EB938_000005C0
     lwz r3, lbl_8087F610
     addi r3, r3, 0x2b74
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     bne lbl_fn_804EB938_000005C0
     lwz r23, lbl_8087F498
@@ -1083,7 +1083,7 @@ lbl_fn_804EB938_00000D2C:
     andc r0, r0, r4
     srawi r0, r0, 31
     and r4, r4, r0
-    bl fn_8050128C
+    bl net_isMessageStateActive
     lwz r0, 0x540(r25)
     cmpwi r0, 0x2
     beq lbl_fn_804EB938_00000E88
@@ -2009,7 +2009,7 @@ lbl_fn_804EB938_00001A78:
     li r0, 0x0
     b lbl_fn_804EB938_00001AB0
 lbl_fn_804EB938_00001AA0:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804EB938_00001AB0
 lbl_fn_804EB938_00001AAC:
@@ -2096,7 +2096,7 @@ lbl_fn_804EB938_00001B90:
     li r4, 0x0
     b lbl_fn_804EB938_00001BD8
 lbl_fn_804EB938_00001BC8:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r4, r3, 24
     b lbl_fn_804EB938_00001BD8
 lbl_fn_804EB938_00001BD4:
@@ -2158,7 +2158,7 @@ lbl_fn_804EB938_00001C50:
     li r23, 0x0
     b lbl_fn_804EB938_00001CB0
 lbl_fn_804EB938_00001CA0:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r23, r3, 24
     b lbl_fn_804EB938_00001CB0
 lbl_fn_804EB938_00001CAC:
@@ -2208,7 +2208,7 @@ lbl_fn_804EB938_00001D1C:
     li r0, 0x0
     b lbl_fn_804EB938_00001D54
 lbl_fn_804EB938_00001D44:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804EB938_00001D54
 lbl_fn_804EB938_00001D50:
@@ -2333,7 +2333,7 @@ lbl_fn_804EB938_00001EB4:
     li r4, 0x0
     b lbl_fn_804EB938_00001EFC
 lbl_fn_804EB938_00001EEC:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r4, r3, 24
     b lbl_fn_804EB938_00001EFC
 lbl_fn_804EB938_00001EF8:
@@ -2395,7 +2395,7 @@ lbl_fn_804EB938_00001F74:
     li r23, 0x0
     b lbl_fn_804EB938_00001FD4
 lbl_fn_804EB938_00001FC4:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r23, r3, 24
     b lbl_fn_804EB938_00001FD4
 lbl_fn_804EB938_00001FD0:

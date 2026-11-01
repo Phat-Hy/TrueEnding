@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_24(void);
 extern void _savegpr_27(void);
 extern void atn_Task_setActive(void);
-extern void fn_801F6C2C(void);
+extern void save_getElapsedPlayTime(void);
 extern void save_computeCrc32(void);
 extern void perf_getMetricValue(void);
 extern void fn_803DF5B4(void);
@@ -106,7 +106,7 @@ lbl_fn_803D164C_000000C8:
     stb r31, 0x4d(r3)
     lwz r28, 0x7c(r27)
     mr r3, r28
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     stfs f1, 0x50(r28)
     li r4, 0x0
     lwz r3, 0x7c(r27)
@@ -189,7 +189,7 @@ lbl_fn_803D164C_0000020C:
     stb r31, 0x4d(r3)
     lwz r26, 0xdc(r30)
     mr r3, r26
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     stfs f1, 0x50(r26)
     mr r25, r29
     li r24, 0x0
@@ -205,7 +205,7 @@ lbl_fn_803D164C_0000026C:
     stb r31, 0x4d(r3)
     lwz r26, 0x318(r25)
     mr r3, r26
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     stfs f1, 0x50(r26)
     addi r24, r24, 0x1
     cmpwi r24, 0x5
@@ -222,7 +222,7 @@ lbl_fn_803D164C_0000026C:
     stb r31, 0x4d(r3)
     lwz r26, 0x32c(r29)
     mr r3, r26
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     stfs f1, 0x50(r26)
     li r4, 0x0
     lwz r3, 0x32c(r29)
@@ -235,7 +235,7 @@ lbl_fn_803D164C_0000026C:
     stb r31, 0x4d(r3)
     lwz r26, 0x330(r29)
     mr r3, r26
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     stfs f1, 0x50(r26)
     addi r28, r28, 0x1
     cmpwi r28, 0x6
@@ -783,7 +783,7 @@ asm void fn_803D215C(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     stfs f1, 0x50(r31)
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)

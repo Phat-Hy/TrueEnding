@@ -16,7 +16,7 @@ extern void mem_free(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_80088FAC(void);
+extern void zone_formatEventString(void);
 extern void node_createNamedChild(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -27,7 +27,7 @@ extern void sound_playSpatialEffect(void);
 extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
-extern void fn_80108F38(void);
+extern void hurtbox_testCollisionFlags(void);
 extern void boss_updatePhaseState(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
@@ -837,7 +837,7 @@ asm void fn_802EC160(void)
     mr r3, r31
     addi r4, r1, 0x38
     li r5, 0x80
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)
     lwz r30, 0x48(r1)
@@ -961,7 +961,7 @@ lbl_fn_802EC38C_00000BD0:
     addi r5, r29, 0x15c4
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f1, lbl_808847B0
     mr r3, r30
     lfs f2, lbl_808847E0

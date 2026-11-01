@@ -2,18 +2,18 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_800185B4(void);
+extern void battle_findTargetSlotById(void);
 extern void menu_renderLayout(void);
 extern void mem_alloc(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_801059F8(void);
-extern void fn_80105B3C(void);
+extern void colli_findDynamicSlot(void);
+extern void colli_findStaticSlot(void);
 extern void fn_8011BE54(void);
 extern void fn_8011BEB8(void);
 extern void fn_8012D180(void);
-extern void fn_80134134(void);
+extern void boss_findPartById(void);
 extern void fn_80134208(void);
 extern void fn_80134270(void);
 extern void fn_80134290(void);
@@ -423,10 +423,10 @@ lbl_equip_applyToCharacter_000004B4:
     cmpwi r3, 0x0
     beq lbl_equip_applyToCharacter_000004DC
     mr r4, r29
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r29
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_equip_applyToCharacter_000004DC:
     lwz r0, 0x12a8(r29)
     lfs f0, lbl_8088196C
@@ -482,7 +482,7 @@ lbl_fn_80154C08_0000057C:
     beq lbl_fn_80154C08_00000598
     mr r4, r30
     li r5, 0x0
-    bl fn_800185B4
+    bl battle_findTargetSlotById
     b lbl_fn_80154C08_0000059C
 lbl_fn_80154C08_00000598:
     li r3, 0x0
@@ -634,7 +634,7 @@ lbl_fn_80154E38_00000774:
     bne lbl_fn_80154E38_000007B0
     li r4, 0x6
     addi r3, r3, 0x7d4
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     bne lbl_fn_80154E38_000007B0
     lwz r0, 0x7e0(r30)

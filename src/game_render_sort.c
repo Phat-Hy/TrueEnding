@@ -14,12 +14,12 @@ extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void hurtbox_dispatchHitEvent(void);
 extern void actor_testBitFlag(void);
-extern void fn_801426A4(void);
+extern void quest_evaluateMilestoneData(void);
 extern void fn_801595BC(void);
 extern void fn_8015AC48(void);
 extern void fn_80166A54(void);
 extern void actor_setState(void);
-extern void fn_801789D8(void);
+extern void battle_evalDropTable(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -297,13 +297,13 @@ lbl_fn_802A74A4_000002F8:
     mr r3, r29
     li r4, 0x9c
     li r5, 0x0
-    bl fn_801789D8
+    bl battle_evalDropTable
     cmpwi r3, 0x0
     bne lbl_fn_802A74A4_00000344
     mr r3, r29
     li r4, 0xa0
     li r5, 0x0
-    bl fn_801789D8
+    bl battle_evalDropTable
     cmpwi r3, 0x0
     beq lbl_fn_802A74A4_0000037C
 lbl_fn_802A74A4_00000344:
@@ -1308,7 +1308,7 @@ lbl_fn_802A820C_0000110C:
     mr r3, r31
     addi r4, r1, 0x8c
     fmuls f2, f0, f31
-    bl fn_801426A4
+    bl quest_evaluateMilestoneData
     lwz r3, 0x1694(r31)
     lwz r0, 0x16ec(r31)
     ori r6, r3, 0x1
@@ -1627,7 +1627,7 @@ lbl_fn_802A8718_000015B0:
     mr r3, r31
     addi r4, r1, 0x64
     fmuls f2, f0, f31
-    bl fn_801426A4
+    bl quest_evaluateMilestoneData
     lwz r3, 0x1694(r31)
     lwz r0, 0x16ec(r31)
     ori r6, r3, 0x1

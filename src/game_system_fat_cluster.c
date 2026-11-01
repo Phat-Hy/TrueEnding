@@ -7,11 +7,11 @@ extern void _savegpr_21(void);
 extern void item_useConsumable(void);
 extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
-extern void fn_800A55D4(void);
+extern void msg_lookupFormattedEntry(void);
 extern void msg_formatWindowLayout(void);
 extern void msg_isWindowActive(void);
-extern void fn_80116BD4(void);
-extern void fn_8015EB2C(void);
+extern void actor_calcSpawnTransform(void);
+extern void party_evalFormationState(void);
 extern void fn_80178088(void);
 extern void fn_8037F830(void);
 extern void fn_80387DE4(void);
@@ -19,7 +19,7 @@ extern void fn_803918EC(void);
 extern void fn_803920C8(void);
 extern void fn_80392510(void);
 extern void fn_803928C0(void);
-extern void fn_80392A04(void);
+extern void mtx_copyPairedSingle(void);
 extern void fn_80392FE8(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
@@ -1743,7 +1743,7 @@ lbl_fn_8037F9AC_00001798:
     cmpwi r0, 0x2
     bne lbl_fn_8037F9AC_000017F0
     mr r3, r30
-    bl fn_8015EB2C
+    bl party_evalFormationState
     cmpwi r3, 0x0
     beq lbl_fn_8037F9AC_000017F0
     lwz r3, lbl_8087EF70
@@ -1762,7 +1762,7 @@ lbl_fn_8037F9AC_000017F0:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x2
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     beq lbl_fn_8037F9AC_00001814
     lfs f0, lbl_80885A04
@@ -1772,7 +1772,7 @@ lbl_fn_8037F9AC_00001814:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x3
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     beq lbl_fn_8037F9AC_00001834
     lfs f0, lbl_80885A04
@@ -3335,7 +3335,7 @@ lbl_fn_8037F9AC_00002EE0:
     bl item_useConsumable
     mr r4, r29
     addi r3, r29, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r29
     bl fn_80392510
     mr r3, r29
@@ -3350,7 +3350,7 @@ lbl_fn_8037F9AC_00002EE0:
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r29, 0x1f4
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     li r0, 0x0
     stw r0, 0x8ec(r29)
 lbl_fn_8037F9AC_00002F9C:

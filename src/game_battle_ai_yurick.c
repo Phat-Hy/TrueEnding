@@ -25,7 +25,7 @@ extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void fn_800902C0(void);
+extern void radar_addBlipEntry(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cam_destroyMsgHandle(void);
@@ -44,7 +44,7 @@ extern void kpad_validateButtonIndex(void);
 extern void fn_803CCA84(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
-extern void fn_803EC758(void);
+extern void barrier_formatCountdownTimer(void);
 extern void task_updateWorker(void);
 extern void fn_8043C334(void);
 extern void boss_getOffset54(void);
@@ -1346,7 +1346,7 @@ asm void fn_8043B614(void)
     addi r4, r1, 0x8
     stw r29, 0x34(r1)
     mr r29, r3
-    bl fn_803EC758
+    bl barrier_formatCountdownTimer
     lwz r0, 0xf0(r29)
     cmpwi r0, 0x0
     bne lbl_fn_8043B614_00001144
@@ -1708,7 +1708,7 @@ lbl_fn_8043B9E0_000015E8:
     addi r5, r1, 0xa0
     stw r0, 0xa0(r1)
     li r4, 0x0
-    bl fn_800902C0
+    bl radar_addBlipEntry
     addic. r3, r1, 0xa0
     beq lbl_fn_8043B9E0_00001640
     lwz r4, 0xa0(r1)

@@ -5,7 +5,7 @@
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_800185B4(void);
+extern void battle_findTargetSlotById(void);
 extern void fn_80018608(void);
 extern void fn_80050A1C(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -27,7 +27,7 @@ extern void npc_updateTalkInteraction(void);
 extern void quest_resetObjectiveBounds(void);
 extern void equip_applyToCharacter(void);
 extern void fn_80164B00(void);
-extern void fn_80164DCC(void);
+extern void party_evalTacticCondition(void);
 extern void fn_8016DCD4(void);
 extern void fn_80210220(void);
 extern void task_findEntryById(void);
@@ -511,7 +511,7 @@ lbl_fn_801B74FC_0000053C:
 lbl_fn_801B74FC_00000548:
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_80164DCC
+    bl party_evalTacticCondition
 lbl_fn_801B74FC_00000554:
     li r0, 0x1
 lbl_fn_801B74FC_00000558:
@@ -802,7 +802,7 @@ lbl_fn_801B79D8_0000084C:
     beq lbl_fn_801B79D8_00000990
     lwz r4, 0x4(r29)
     mr r5, r26
-    bl fn_800185B4
+    bl battle_findTargetSlotById
     cmpwi r3, 0x0
     beq lbl_fn_801B79D8_00000990
     lwz r3, lbl_8087EE68

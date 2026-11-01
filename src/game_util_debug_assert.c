@@ -11,7 +11,7 @@ extern void dtor_80084684(void);
 extern void mem_free(void);
 extern void str_findChar(void);
 extern void actor_findSpawnTemplate(void);
-extern void fn_801F4AA0(void);
+extern void save_findSlotTask(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
@@ -24,8 +24,8 @@ extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
 extern void time_wrapMilliseconds(void);
 extern void rand_scaleRangeInt(void);
-extern void fn_8020EF4C(void);
-extern void fn_8020EFEC(void);
+extern void rand_stepEntropy(void);
+extern void time_ticksToSeconds(void);
 extern void event_findEntryById(void);
 extern void fn_80211770(void);
 extern void fn_80212840(void);
@@ -33,7 +33,7 @@ extern void fn_80212C34(void);
 extern void fn_8021C6A4(void);
 extern void world_getGlobalFlag(void);
 extern void gmk_findSlotByIndex(void);
-extern void fn_804A3C24(void);
+extern void net_initCoopSession(void);
 extern void fn_804A4CE4(void);
 extern void fn_804A7DD4(void);
 extern void fn_80584754(void);
@@ -1730,7 +1730,7 @@ lbl_fn_80597558_00001778:
     cmpwi r0, 0x0
     beq lbl_fn_80597558_00001BD8
     lwz r3, 0x4(r3)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     mr r18, r3
     lwz r3, 0x4(r14)
     bl assert_formatLocation
@@ -1738,7 +1738,7 @@ lbl_fn_80597558_00001778:
     mr r21, r3
     beq lbl_fn_80597558_00001BD8
     mr r3, r18
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_80597558_00001BD8
     lwz r4, 0x7c(r18)
@@ -1916,7 +1916,7 @@ lbl_fn_80597558_00001AC8:
     cmpwi r3, 0x0
     beq lbl_fn_80597558_00001B24
     lwz r3, 0x4(r14)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     mr r18, r3
 lbl_fn_80597558_00001B24:
     lwz r3, 0x4(r14)
@@ -1959,7 +1959,7 @@ lbl_fn_80597558_00001B88:
     stw r3, 0x5bf8(r4)
     beq lbl_fn_80597558_00001BD4
     mr r3, r18
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_80597558_00001BD4
     lwz r4, 0x7c(r18)
@@ -2181,7 +2181,7 @@ lbl_fn_80597558_00001E80:
     lwz r3, lbl_8087F580
     li r5, 0x0
     lwz r4, 0x88(r24)
-    bl fn_804A3C24
+    bl net_initCoopSession
     b lbl_fn_80597558_00001FA8
 lbl_fn_80597558_00001EF8:
     lwz r17, lbl_8087F580
@@ -2191,7 +2191,7 @@ lbl_fn_80597558_00001EF8:
     mr r4, r3
     mr r3, r17
     li r5, 0x0
-    bl fn_804A3C24
+    bl net_initCoopSession
     b lbl_fn_80597558_00001FA8
 lbl_fn_80597558_00001F1C:
     lwz r3, 0x4(r17)
@@ -2200,10 +2200,10 @@ lbl_fn_80597558_00001F1C:
     beq lbl_fn_80597558_00001FA8
     lwz r3, 0x4(r17)
     li r14, 0x0
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     mr r24, r3
     mr r19, r18
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_80597558_00001F60
     lwz r4, 0x7c(r24)
@@ -2220,7 +2220,7 @@ lbl_fn_80597558_00001F60:
     lwz r3, lbl_8087F580
     li r5, 0x0
     lwz r4, 0x84(r24)
-    bl fn_804A3C24
+    bl net_initCoopSession
     b lbl_fn_80597558_00001FA8
 lbl_fn_80597558_00001F88:
     lwz r17, lbl_8087F580
@@ -2230,7 +2230,7 @@ lbl_fn_80597558_00001F88:
     mr r4, r3
     mr r3, r17
     li r5, 0x0
-    bl fn_804A3C24
+    bl net_initCoopSession
 lbl_fn_80597558_00001FA8:
     addi r3, r1, 0x80
     li r4, 0x0
@@ -2481,7 +2481,7 @@ lbl_fn_80597558_000022C8:
     addi r4, r1, 0xe8
     lfs f2, 0x4(r5)
     lfs f3, 0x8(r5)
-    bl fn_801F4AA0
+    bl save_findSlotTask
     b lbl_fn_80597558_000023CC
 lbl_fn_80597558_00002378:
     bne lbl_fn_80597558_000023A0
@@ -2492,7 +2492,7 @@ lbl_fn_80597558_00002378:
     addi r4, r1, 0xe8
     lfs f2, 0x4(r27)
     lfs f3, 0x8(r27)
-    bl fn_801F4AA0
+    bl save_findSlotTask
     b lbl_fn_80597558_000023CC
 lbl_fn_80597558_000023A0:
     lis r5, lbl_807C78A8@ha
@@ -2505,7 +2505,7 @@ lbl_fn_80597558_000023A0:
     addi r4, r1, 0xe8
     lfs f2, 0x4(r5)
     lfs f3, 0x8(r5)
-    bl fn_801F4AA0
+    bl save_findSlotTask
 lbl_fn_80597558_000023CC:
     mr r5, r18
     addi r3, r1, 0xe8
@@ -2559,7 +2559,7 @@ lbl_fn_80597558_00002464:
     addi r4, r1, 0xe8
     lfs f2, 0x4(r27)
     lfs f3, 0x8(r27)
-    bl fn_801F4AA0
+    bl save_findSlotTask
     mr r5, r18
     addi r3, r1, 0xe8
     addi r4, r28, 0x34c

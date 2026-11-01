@@ -16,7 +16,7 @@ extern void fn_80049654(void);
 extern void fn_800496C0(void);
 extern void fn_800498A4(void);
 extern void fn_800498D4(void);
-extern void fn_80049B74(void);
+extern void snd_findSoundNodeByName(void);
 extern void fn_80049C3C(void);
 extern void fn_80049D74(void);
 extern void fn_80049E44(void);
@@ -329,7 +329,7 @@ lbl_skin_playAnimationByName_000001DC:
 lbl_skin_playAnimationByName_000001F8:
     lwz r3, lbl_8087EE90
     mr r4, r29
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     fmr f1, f31
     mr r4, r3
     mr r3, r28
@@ -493,7 +493,7 @@ lbl_skin_applyWeights_0000042C:
 lbl_skin_applyWeights_00000438:
     lwz r3, lbl_8087EE90
     mr r4, r27
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     mr r4, r3
     lwz r3, lbl_8087EFE8
     bl fn_800D0AB0

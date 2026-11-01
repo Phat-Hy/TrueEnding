@@ -26,8 +26,8 @@ extern void fn_80107850(void);
 extern void hurtbox_processHitDamage(void);
 extern void hurtbox_dispatchHitEvent(void);
 extern void enemy_updateAnimTimer(void);
-extern void fn_8013310C(void);
-extern void fn_80133130(void);
+extern void boss_enablePartStatusFlags(void);
+extern void boss_setPartCollisionFlags(void);
 extern void quest_updateFlow(void);
 extern void equip_applyToCharacter(void);
 extern void fn_80166760(void);
@@ -43,7 +43,7 @@ extern void fn_802E2328(void);
 extern void fn_802E3D60(void);
 extern void fn_802E55B0(void);
 extern void kpad_testActiveFlags(void);
-extern void fn_803EEE10(void);
+extern void dungeon_findArenaNodeByCoords(void);
 extern void printf(void);
 extern void rand(void);
 extern void abort(void);
@@ -320,7 +320,7 @@ lbl_fn_802DC3D0_0000036C:
     lwz r3, lbl_8087F4A0
     li r4, 0x6dd6
     lwzx r5, r5, r0
-    bl fn_803EEE10
+    bl dungeon_findArenaNodeByCoords
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_802DC3D0_000003CC
@@ -1121,7 +1121,7 @@ lbl_fn_802DCA34_00000EC8:
     li r6, 0x0
     lwzx r3, r3, r15
     addi r3, r3, 0x7d4
-    bl fn_80133130
+    bl boss_setPartCollisionFlags
     lwz r3, 0x20(r1)
     lwzx r3, r3, r15
     bl fn_80167F1C
@@ -1158,7 +1158,7 @@ lbl_fn_802DCA34_00000F4C:
     li r5, 0x0
     lwzx r3, r3, r14
     addi r3, r3, 0x7d4
-    bl fn_8013310C
+    bl boss_enablePartStatusFlags
     lwz r3, 0x20(r1)
     li r4, 0x1
     lwzx r3, r3, r14

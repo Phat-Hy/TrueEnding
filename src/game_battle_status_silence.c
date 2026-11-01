@@ -5,7 +5,7 @@
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_80051CD8(void);
+extern void player_transformBoundingSphere(void);
 extern void path_Object_constructor(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_800575BC(void);
@@ -46,13 +46,13 @@ extern void task_lookupTagIndex(void);
 extern void kpad_getClampData(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
-extern void fn_803EC758(void);
+extern void barrier_formatCountdownTimer(void);
 extern void barrier_formatDialogString(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
 extern void barrier_bindFieldAnimation(void);
 extern void dungeon_updateBarrierField(void);
-extern void fn_803EDB18(void);
+extern void barrier_testFieldCollision(void);
 extern void fn_803EDCF4(void);
 extern void fn_803F11F8(void);
 extern void boss_getOffset54(void);
@@ -255,7 +255,7 @@ lbl_fn_8042C384_00000148:
     addi r4, r31, 0xf4
     fmuls f0, f5, f0
     stfs f0, 0x28(r1)
-    bl fn_803EDB18
+    bl barrier_testFieldCollision
     stw r31, 0x4d0(r31)
     addi r3, r31, 0x4c4
     addi r4, r31, 0x6c
@@ -475,7 +475,7 @@ lbl_fn_8042C5AC_0000040C:
     addi r4, r31, 0x500
     fsubs f0, f0, f30
     stfs f0, 0x24(r1)
-    bl fn_80051CD8
+    bl player_transformBoundingSphere
     cmpwi r3, 0x0
     beq lbl_fn_8042C5AC_00000490
     li r29, 0x1
@@ -874,7 +874,7 @@ asm void fn_8042CCAC(void)
     cmpwi r0, 0x0
     bne lbl_fn_8042CCAC_00000B00
     addi r4, r1, 0x8
-    bl fn_803EC758
+    bl barrier_formatCountdownTimer
     lwz r0, 0xf0(r29)
     cmpwi r0, 0x0
     bne lbl_fn_8042CCAC_00000A0C
@@ -1459,7 +1459,7 @@ asm void fn_8042D488(void)
     addi r4, r1, 0x8
     stw r29, 0x34(r1)
     mr r29, r3
-    bl fn_803EC758
+    bl barrier_formatCountdownTimer
     lwz r0, 0xf0(r29)
     cmpwi r0, 0x0
     bne lbl_fn_8042D488_000011DC

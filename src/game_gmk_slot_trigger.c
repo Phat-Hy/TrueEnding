@@ -7,7 +7,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_21(void);
 extern void _savegpr_26(void);
 extern void fn_8013354C(void);
-extern void fn_8016E484(void);
+extern void task_isValidQueueRange(void);
 extern void task_mapIdToQueue(void);
 extern void world_getGlobalFlag(void);
 extern void fn_80375D0C(void);
@@ -569,7 +569,7 @@ lbl_fn_80449ABC_00000730:
     cmpwi r0, 0x0
     beq lbl_fn_80449ABC_000008B0
     mr r3, r28
-    bl fn_8016E484
+    bl task_isValidQueueRange
     cmpwi r3, 0x0
     beq lbl_fn_80449ABC_000008B0
     lwz r0, 0x130(r1)

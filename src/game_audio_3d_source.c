@@ -18,10 +18,10 @@ extern void npc_initScriptContext(void);
 extern void quest_evaluateConditions(void);
 extern void inventory_applyItemStats(void);
 extern void shop_canPurchaseItem(void);
-extern void fn_80158CA4(void);
-extern void fn_8015E4B0(void);
+extern void shop_loadCatalogItem(void);
+extern void party_initFormationSlots(void);
 extern void party_configureMemberSlot(void);
-extern void fn_8015EB2C(void);
+extern void party_evalFormationState(void);
 extern void actor_setState(void);
 extern void battle_applyStatusEffect(void);
 extern void battle_resolveAggroHierarchy(void);
@@ -337,7 +337,7 @@ lbl_fn_8031FD34_000002F4:
     mr r3, r30
     addi r4, r30, 0x6b8
     li r5, -0x1
-    bl fn_8015E4B0
+    bl party_initFormationSlots
 lbl_fn_8031FD34_0000031C:
     lwz r0, 0x7e0(r30)
     rlwinm r0, r0, 0, 26, 26
@@ -598,7 +598,7 @@ lbl_fn_8031FE4C_000006B4:
     cmpwi r0, 0x0
     beq lbl_fn_8031FE4C_0000080C
     mr r3, r31
-    bl fn_80158CA4
+    bl shop_loadCatalogItem
     cmpwi r3, 0x0
     beq lbl_fn_8031FE4C_0000080C
     lwz r0, 0x594(r31)
@@ -668,7 +668,7 @@ lbl_fn_8031FE4C_00000784:
     b lbl_fn_8031FE4C_0000080C
 lbl_fn_8031FE4C_000007C4:
     mr r3, r31
-    bl fn_8015EB2C
+    bl party_evalFormationState
     cmpwi r3, 0x0
     bne lbl_fn_8031FE4C_000007E0
     mr r3, r31

@@ -19,13 +19,13 @@ extern void fn_80107850(void);
 extern void hurtbox_processHitDamage(void);
 extern void hurtbox_dispatchHitEvent(void);
 extern void enemy_updateAnimTimer(void);
-extern void fn_8013310C(void);
+extern void boss_enablePartStatusFlags(void);
 extern void quest_updateFlow(void);
 extern void equip_applyToCharacter(void);
 extern void fn_80166D3C(void);
 extern void fn_8016CAD0(void);
 extern void debuff_clearStatus(void);
-extern void fn_8016E484(void);
+extern void task_isValidQueueRange(void);
 extern void actor_setState(void);
 extern void battle_activateExpReward(void);
 extern void battle_updateActorStatus(void);
@@ -35,8 +35,8 @@ extern void res_registerResource(void);
 extern void wpad_getActiveDevice(void);
 extern void world_setGlobalFlag(void);
 extern void kpad_testActiveFlags(void);
-extern void fn_80389838(void);
-extern void fn_805A4A20(void);
+extern void nwc24_transitionDataState(void);
+extern void world_setFlagByType(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void printf(void);
@@ -353,7 +353,7 @@ lbl_fn_802D57B8_00000394:
     addi r3, r3, 0x6c
     stfs f0, 0xd8(r1)
     stw r0, 0xdc(r1)
-    bl fn_80389838
+    bl nwc24_transitionDataState
     lwz r10, lbl_8087EFA8
     li r0, 0x1
     lfs f0, lbl_80884558
@@ -563,7 +563,7 @@ lbl_fn_802D5D18_000006E4:
     addi r3, r26, 0x7d4
     li r4, 0x100
     li r5, 0x0
-    bl fn_8013310C
+    bl boss_enablePartStatusFlags
     mr r3, r26
     li r4, 0x1
     bl fn_80166D3C
@@ -623,7 +623,7 @@ lbl_fn_802D5D18_000007D8:
 lbl_fn_802D5D18_000007E4:
     cmpwi r6, 0x0
     beq lbl_fn_802D5D18_00000844
-    bl fn_8016E484
+    bl task_isValidQueueRange
     cmpwi r3, 0x0
     beq lbl_fn_802D5D18_00000844
     lwz r0, 0x14d4(r28)
@@ -698,7 +698,7 @@ lbl_fn_802D5D18_000008C8:
     add r26, r27, r0
     lwz r3, 0x4(r26)
     addi r3, r3, 0x7d4
-    bl fn_8013310C
+    bl boss_enablePartStatusFlags
     lwz r3, 0x4(r26)
     li r4, 0x1
     bl fn_80166D3C
@@ -733,7 +733,7 @@ lbl_fn_802D5D18_00000958:
     mr r3, r28
     addi r4, r28, 0x1690
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
 lbl_fn_802D5D18_0000097C:
     lmw r26, 0x58(r1)
     lwz r0, 0x74(r1)

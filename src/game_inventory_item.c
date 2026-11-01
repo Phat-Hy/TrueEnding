@@ -10,8 +10,8 @@ extern void fn_80050A1C(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_801059F8(void);
-extern void fn_80105B3C(void);
+extern void colli_findDynamicSlot(void);
+extern void colli_findStaticSlot(void);
 extern void fn_80107380(void);
 extern void fn_80107798(void);
 extern void fn_80107850(void);
@@ -32,7 +32,7 @@ extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
 extern void fn_8015487C(void);
 extern void fn_80154C08(void);
-extern void fn_80164DCC(void);
+extern void party_evalTacticCondition(void);
 extern void actor_setState(void);
 extern void battle_updateActorStatus(void);
 extern void actor_getMovementFlags(void);
@@ -264,10 +264,10 @@ lbl_fn_80152D10_00000250:
     cmpwi r3, 0x0
     beq lbl_fn_80152D10_00000270
     mr r4, r31
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r31
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_fn_80152D10_00000270:
     lwz r0, 0x12a8(r31)
     lfs f0, lbl_8088196C
@@ -279,10 +279,10 @@ lbl_fn_80152D10_00000270:
     cmpwi r3, 0x0
     beq lbl_fn_80152D10_000002A8
     mr r4, r31
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r31
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_fn_80152D10_000002A8:
     lwz r0, 0x12a8(r31)
     mr r3, r31
@@ -292,7 +292,7 @@ lbl_fn_80152D10_000002A8:
     stw r0, 0x12a8(r31)
     stfs f0, 0xfb8(r31)
     stfs f0, 0xfbc(r31)
-    bl fn_80164DCC
+    bl party_evalTacticCondition
     lwz r0, 0x12a8(r31)
     li r3, 0x0
     stw r3, 0xfc0(r31)
@@ -969,7 +969,7 @@ lbl_fn_80153698_00000C1C:
     beq lbl_fn_80153698_00000C68
     mr r3, r29
     li r4, 0x1
-    bl fn_80164DCC
+    bl party_evalTacticCondition
 lbl_fn_80153698_00000C68:
     lwz r0, 0x48(r29)
     cmpwi r0, 0x0

@@ -21,7 +21,7 @@ extern void saveSlot_readSummary(void);
 extern void thread_findAndNotify(void);
 extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
-extern void fn_804A53D4(void);
+extern void net_broadcastCoopPacket(void);
 extern void fn_804C54FC(void);
 extern void fn_804C8D80(void);
 extern void fn_804CB74C(void);
@@ -1662,7 +1662,7 @@ lbl_fn_804CB0B8_00001638:
     li r4, 0x0
     li r5, 0x0
     li r7, 0x0
-    bl fn_804A53D4
+    bl net_broadcastCoopPacket
 lbl_fn_804CB0B8_00001650:
     lwz r0, 0xb4(r1)
     lwz r31, 0xac(r1)

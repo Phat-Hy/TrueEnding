@@ -15,7 +15,7 @@ extern void boss_initActionStream(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_80088FAC(void);
+extern void zone_formatEventString(void);
 extern void node_createNamedChild(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -23,9 +23,9 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_8010653C(void);
-extern void fn_8012DF7C(void);
+extern void enemy_calcAttackTrajectory(void);
 extern void fn_8012F440(void);
-extern void fn_80133EE8(void);
+extern void boss_findPartSlotById(void);
 extern void boss_updatePhaseState(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_801437D0(void);
@@ -51,7 +51,7 @@ extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void rand_Mersenne_constructor(void);
-extern void fn_805A3D00(void);
+extern void rand_Mersenne_init(void);
 extern void fn_805A3D6C(void);
 extern void fn_805A40BC(void);
 extern void fn_805A4258(void);
@@ -265,7 +265,7 @@ asm void fn_80254648(void)
 lbl_fn_80254648_000001A0:
     mr r3, r29
     li r4, 0x0
-    bl fn_805A3D00
+    bl rand_Mersenne_init
     cmpwi r30, 0x0
     ble lbl_fn_80254648_000001BC
     mr r3, r29
@@ -677,7 +677,7 @@ lbl_fn_80254B98_000006F4:
     beq lbl_fn_80254B98_00000744
     addi r3, r3, 0x7d4
     li r4, 0x19
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_80254B98_00000744
 lbl_fn_80254B98_00000730:
@@ -685,7 +685,7 @@ lbl_fn_80254B98_00000730:
     addi r3, r30, 0x7d4
     li r4, 0x0
     li r5, 0x4
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
 lbl_fn_80254B98_00000744:
     lis r4, lbl_807C7030@ha
     li r5, 0x0
@@ -1940,7 +1940,7 @@ lbl_fn_802558B0_0000183C:
     addi r5, r30, 0x16c0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f1, lbl_808833E0
     mr r3, r26
     lfs f2, lbl_808833F4
@@ -1949,7 +1949,7 @@ lbl_fn_802558B0_0000183C:
     addi r5, r30, 0x16d0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f1, lbl_808833E0
     mr r3, r26
     lfs f2, lbl_808833F4
@@ -1958,7 +1958,7 @@ lbl_fn_802558B0_0000183C:
     addi r5, r30, 0x16f0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f1, lbl_808833E0
     mr r3, r26
     lfs f2, lbl_808833F4
@@ -1967,7 +1967,7 @@ lbl_fn_802558B0_0000183C:
     addi r5, r30, 0x1700
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     addi r3, r30, 0x15f8
     addi r4, r31, 0xb8
     bl res_MsgHandle_destructor

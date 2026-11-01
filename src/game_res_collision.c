@@ -6,7 +6,7 @@ extern void mem_free(void);
 extern void fn_800E1D5C(void);
 extern void fn_80242A8C(void);
 extern void fn_80242FF4(void);
-extern void fn_806920C0(void);
+extern void std_string_append(void);
 extern void fn_8069293C(void);
 extern void msl_releaseRefCount(void);
 
@@ -81,7 +81,7 @@ lbl_fn_8023D308_000000B0:
     stw r5, lbl_80880390
     stw r5, lbl_808803C0
 lbl_fn_8023D308_000000D0:
-    bl fn_806920C0
+    bl std_string_append
     lwz r3, 0x20(r1)
     slwi r0, r25, 2
     lwz r3, 0x0(r3)
@@ -342,7 +342,7 @@ lbl_fn_8023D308_00000428:
     stw r5, lbl_80880390
     stw r5, lbl_808803C0
 lbl_fn_8023D308_00000448:
-    bl fn_806920C0
+    bl std_string_append
     lwz r3, 0x18(r1)
     slwi r0, r30, 2
     lwz r3, 0x0(r3)
@@ -656,7 +656,7 @@ lbl_fn_8023D308_00000858:
     stw r5, lbl_80880390
     stw r5, lbl_808803C0
 lbl_fn_8023D308_00000878:
-    bl fn_806920C0
+    bl std_string_append
     lwz r3, 0x10(r1)
     slwi r0, r28, 2
     lwz r3, 0x0(r3)
@@ -920,7 +920,7 @@ lbl_fn_8023DE24_00000BD0:
     stw r5, lbl_80880390
     stw r5, lbl_808803C0
 lbl_fn_8023DE24_00000BF0:
-    bl fn_806920C0
+    bl std_string_append
     lwz r3, 0x20(r1)
     slwi r0, r25, 2
     lwz r3, 0x0(r3)
@@ -1182,7 +1182,7 @@ lbl_fn_8023DE24_00000F4C:
     stw r5, lbl_80880390
     stw r5, lbl_808803C0
 lbl_fn_8023DE24_00000F6C:
-    bl fn_806920C0
+    bl std_string_append
     lwz r3, 0x18(r1)
     slwi r0, r30, 2
     lwz r3, 0x0(r3)
@@ -1497,7 +1497,7 @@ lbl_fn_8023DE24_00001380:
     stw r5, lbl_80880390
     stw r5, lbl_808803C0
 lbl_fn_8023DE24_000013A0:
-    bl fn_806920C0
+    bl std_string_append
     lwz r3, 0x10(r1)
     slwi r0, r30, 2
     lwz r3, 0x0(r3)
@@ -1845,7 +1845,7 @@ lbl_fn_8023EA78_00001824:
     stw r5, lbl_80880390
     stw r5, lbl_808803C0
 lbl_fn_8023EA78_00001844:
-    bl fn_806920C0
+    bl std_string_append
     lwz r3, 0x20(r1)
     slwi r0, r25, 2
     lwz r3, 0x0(r3)
@@ -2107,7 +2107,7 @@ lbl_fn_8023EA78_00001BA0:
     stw r5, lbl_80880390
     stw r5, lbl_808803C0
 lbl_fn_8023EA78_00001BC0:
-    bl fn_806920C0
+    bl std_string_append
     lwz r3, 0x18(r1)
     slwi r0, r30, 2
     lwz r3, 0x0(r3)
@@ -2422,7 +2422,7 @@ lbl_fn_8023EA78_00001FD4:
     stw r5, lbl_80880390
     stw r5, lbl_808803C0
 lbl_fn_8023EA78_00001FF4:
-    bl fn_806920C0
+    bl std_string_append
     lwz r3, 0x10(r1)
     slwi r0, r28, 2
     lwz r3, 0x0(r3)

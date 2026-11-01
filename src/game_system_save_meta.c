@@ -7,7 +7,7 @@ extern void dtor_80084684(void);
 extern void fn_8000D3A8(void);
 extern void scene_traverseNode(void);
 extern void scene_transformPoint(void);
-extern void fn_8000DCF4(void);
+extern void scene_getCamera(void);
 extern void scene_getRootNode(void);
 extern void menu_initWindowBuffer(void);
 extern void talk_parseQuotedString(void);
@@ -29,7 +29,7 @@ extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
 extern void npc_updateDialogueTarget(void);
 extern void npc_getPosition(void);
-extern void fn_8013C480(void);
+extern void npc_isInteractionReady(void);
 extern void npc_getDialogController(void);
 extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
@@ -43,7 +43,7 @@ extern void task_findEntryById(void);
 extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
-extern void fn_80244CAC(void);
+extern void script_setTaskTerminated(void);
 extern void fn_80265804(void);
 extern void fn_80267B28(void);
 extern void fn_80288E30(void);
@@ -512,12 +512,12 @@ asm void fn_80345BA8(void)
     li r4, 0x0
     bl atn_Task_setActive
     lwz r3, 0x17f4(r29)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x17f8(r29)
     li r4, 0x0
     bl atn_Task_setActive
     lwz r3, 0x17f8(r29)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r0, 0x7ec(r29)
     ori r0, r0, 0x1c0
     oris r0, r0, 0x1
@@ -1038,7 +1038,7 @@ lbl_fn_80346384_00000BEC:
     cmpwi r0, 0x0
     bne lbl_fn_80346384_00000C54
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     stw r3, 0x14b0(r31)
     stw r3, 0xd1c(r31)
 lbl_fn_80346384_00000C54:
@@ -1091,7 +1091,7 @@ lbl_fn_80346384_00000CFC:
     cmpwi r3, 0x53
     bne lbl_fn_80346384_00000D24
     mr r3, r30
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_80346384_00000D24
     mr r3, r30
@@ -1150,7 +1150,7 @@ lbl_fn_80346384_00000DC4:
     bl fn_80265804
 lbl_fn_80346384_00000DD0:
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     lbz r0, 0x1808(r31)
     cmpwi r0, 0x0
     bne lbl_fn_80346384_00000E04
@@ -1264,7 +1264,7 @@ lbl_fn_80346384_00000F68:
     bl kpad_getClampData
     mr r28, r3
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     bl npc_getPosition
     lfs f2, 0x4(r3)
     lfs f1, 0x52c(r31)

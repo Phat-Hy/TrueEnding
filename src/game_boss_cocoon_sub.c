@@ -34,7 +34,7 @@ extern void fn_8045ECC4(void);
 extern void fn_804786F8(void);
 extern void fn_805BDCC0(void);
 extern void fn_805BF208(void);
-extern void fn_805BF414(void);
+extern void gx_evaluateVector3f(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
@@ -259,14 +259,14 @@ asm void fn_8045D3A4(void)
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     lfs f1, 0x2e4(r30)
     mr r3, r31
     addi r4, r1, 0x4c
     li r5, 0x7
     li r6, 0x8
     li r7, 0x9
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     lfs f1, 0x528(r30)
     addi r3, r1, 0x208
     lfs f2, 0x52c(r30)

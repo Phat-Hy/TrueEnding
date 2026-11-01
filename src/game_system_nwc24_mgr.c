@@ -11,7 +11,7 @@ extern void vec3_assign(void);
 extern void fn_800109E0(void);
 extern void vec3_toEulerAngles(void);
 extern void mtx_multVec(void);
-extern void fn_80012C88(void);
+extern void vec3_addAssign(void);
 extern void vec3_sub(void);
 extern void math_wrapAngle(void);
 extern void vec3_add(void);
@@ -20,7 +20,7 @@ extern void item_useConsumable(void);
 extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void fn_80050900(void);
-extern void fn_80051B70(void);
+extern void player_stepMovement(void);
 extern void mission_updateStub(void);
 extern void msg_formatWindowLayout(void);
 extern void msg_isWindowActive(void);
@@ -32,16 +32,16 @@ extern void fn_801002DC(void);
 extern void fn_80112960(void);
 extern void fn_80113CCC(void);
 extern void fn_80114AA0(void);
-extern void fn_801162A0(void);
+extern void vec3_sqMag(void);
 extern void fn_80116BA4(void);
-extern void fn_80116BD4(void);
+extern void actor_calcSpawnTransform(void);
 extern void magic_dispatchActionCommand(void);
 extern void player_evaluateStatusCondition(void);
-extern void fn_8012A1B8(void);
-extern void fn_8013A13C(void);
+extern void path_getFollowerNode(void);
+extern void mtx_rotYRad(void);
 extern void fn_8013C3B4(void);
-extern void fn_801404F8(void);
-extern void fn_80140500(void);
+extern void quest_getGlobalManager(void);
+extern void quest_resetActiveObjectiveSlots(void);
 extern void fn_80178088(void);
 extern void fn_801C3910(void);
 extern void world_getGlobalFlag(void);
@@ -55,7 +55,7 @@ extern void fn_803920C8(void);
 extern void fn_80392510(void);
 extern void fn_803928C0(void);
 extern void fn_80392964(void);
-extern void fn_80392A04(void);
+extern void mtx_copyPairedSingle(void);
 extern void fn_80392FE8(void);
 extern void fn_805B81F4(void);
 extern void PSMTXConcat(void);
@@ -231,7 +231,7 @@ asm void fn_80382A1C(void)
     bl fn_80178088
     mr r3, r31
     addi r31, r1, 0x14c
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     mr r4, r3
     addi r3, r1, 0x140
     bl vec3_assign
@@ -273,7 +273,7 @@ lbl_fn_80382A1C_00000174:
     stfs f2, 0x138(r1)
     bge lbl_fn_80382A1C_000001E4
     addi r3, r1, 0x134
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_80885A48
     fcmpo cr0, f1, f0
     bge lbl_fn_80382A1C_000001E4
@@ -318,7 +318,7 @@ lbl_fn_80382A1C_000001E4:
     lfs f0, 0x12c(r1)
     addi r3, r1, 0x1f8
     fneg f1, f0
-    bl fn_8013A13C
+    bl mtx_rotYRad
     addi r3, r1, 0x104
     addi r4, r1, 0x1f8
     bl mtx_multVec
@@ -327,7 +327,7 @@ lbl_fn_80382A1C_000001E4:
     lfs f0, 0x12c(r1)
     fmadds f1, f29, f1, f0
     stfs f1, 0x12c(r1)
-    bl fn_8013A13C
+    bl mtx_rotYRad
     addi r3, r1, 0x104
     addi r4, r1, 0x1c8
     bl mtx_multVec
@@ -350,7 +350,7 @@ lbl_fn_80382A1C_000001E4:
     addi r3, r1, 0x11c
     bl viewport_getNextSequenceId
     addi r3, r1, 0x258
-    bl fn_80140500
+    bl quest_resetActiveObjectiveSlots
     addi r3, r1, 0xb0
     addi r4, r1, 0x17c
     addi r5, r1, 0x110
@@ -396,7 +396,7 @@ lbl_fn_80382A1C_000001E4:
     addi r3, r1, 0x188
     addi r4, r1, 0x80
     bl vec3_copy
-    bl fn_801404F8
+    bl quest_getGlobalManager
     lis r7, 0x8000
     addi r4, r1, 0x258
     addi r5, r1, 0x17c
@@ -412,7 +412,7 @@ lbl_fn_80382A1C_000001E4:
     addi r5, r1, 0x268
     bl vec3_sub
     addi r3, r1, 0xf8
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_808859DC
     fcmpo cr0, f1, f0
     ble lbl_fn_80382A1C_0000054C
@@ -432,7 +432,7 @@ lbl_fn_80382A1C_000001E4:
     bl vec3_scale
     addi r3, r1, 0x188
     addi r4, r1, 0x74
-    bl fn_80012C88
+    bl vec3_addAssign
     li r0, 0xa
     stw r0, 0x880(r30)
     mr r3, r30
@@ -442,7 +442,7 @@ lbl_fn_80382A1C_000001E4:
     addi r4, r1, 0x188
     bl vec3_sub
     addi r3, r1, 0x50
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_808859C4
     fcmpo cr0, f1, f0
     ble lbl_fn_80382A1C_0000054C
@@ -473,7 +473,7 @@ lbl_fn_80382A1C_000004B4:
     addi r4, r1, 0x188
     bl vec3_sub
     addi r3, r1, 0x38
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_808859C4
     fcmpo cr0, f1, f0
     ble lbl_fn_80382A1C_0000054C
@@ -500,7 +500,7 @@ lbl_fn_80382A1C_000004B4:
     addi r4, r1, 0x2c
     bl vec3_copy
 lbl_fn_80382A1C_0000054C:
-    bl fn_801404F8
+    bl quest_getGlobalManager
     lis r6, lbl_807C7030@ha
     lis r7, 0x8000
     lfs f1, lbl_80885A3C
@@ -1022,7 +1022,7 @@ lbl_fn_803830A8_00000D08:
     bl item_useConsumable
     mr r4, r30
     addi r3, r30, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r30
     bl fn_803918EC
     mr r3, r30
@@ -1033,7 +1033,7 @@ lbl_fn_803830A8_00000D08:
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r30, 0x1f4
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
 lbl_fn_803830A8_00000D48:
     lwz r0, 0x1d4(r1)
     lwz r31, 0x1cc(r1)
@@ -1569,7 +1569,7 @@ lbl_fn_8038378C_00001338:
     bl item_useConsumable
     mr r4, r30
     addi r3, r30, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r30
     bl fn_80392510
     mr r3, r30
@@ -1584,7 +1584,7 @@ lbl_fn_8038378C_00001338:
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r30, 0x1f4
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
 lbl_fn_8038378C_00001570:
     lwz r0, 0x324(r1)
     psq_l f31, 0x318(r1), 0, 0
@@ -1859,7 +1859,7 @@ lbl_fn_80384188_0000187C:
     bl item_useConsumable
     mr r4, r29
     addi r3, r29, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r29
     bl fn_803918EC
     mr r3, r29
@@ -1870,7 +1870,7 @@ lbl_fn_80384188_0000187C:
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r29, 0x1f4
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     b lbl_fn_80384188_00003120
 lbl_fn_80384188_00001978:
     lwz r3, lbl_8087F0A8
@@ -3301,7 +3301,7 @@ lbl_fn_80384188_00002E80:
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x290(r1)
     stfs f0, 0x294(r1)
-    bl fn_80051B70
+    bl player_stepMovement
     cmpwi r3, 0x0
     beq lbl_fn_80384188_0000306C
     lfs f7, lbl_808858E8
@@ -3446,7 +3446,7 @@ lbl_fn_80384188_000030DC:
     bl item_useConsumable
     mr r4, r29
     addi r3, r29, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r29
     bl fn_803918EC
     mr r3, r29
@@ -3457,7 +3457,7 @@ lbl_fn_80384188_000030DC:
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r29, 0x1f4
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
 lbl_fn_80384188_00003120:
     li r0, 0x988
     addi r11, r1, 0x930

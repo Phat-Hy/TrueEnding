@@ -17,7 +17,7 @@ extern void fn_800CA798(void);
 extern void fn_800CAC48(void);
 extern void fn_800CB480(void);
 extern void fn_800CB6C4(void);
-extern void fn_800CB6E4(void);
+extern void morph_dispatchTargetUpdate(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_803605EC(void);
@@ -2076,7 +2076,7 @@ lbl_fn_805A2510_00001A68:
     beq lbl_fn_805A2510_00001D18
     mr r3, r4
     addi r4, r31, 0x78
-    bl fn_800CB6E4
+    bl morph_dispatchTargetUpdate
     lwz r3, 0xf8(r31)
     li r4, 0x1
     lfs f1, 0xa8(r31)

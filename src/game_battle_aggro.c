@@ -8,8 +8,8 @@ extern void fn_80017064(void);
 extern void menu_renderLayout(void);
 extern void item_testLineOfSight(void);
 extern void boss_recordDamage(void);
-extern void fn_801059F8(void);
-extern void fn_80105B3C(void);
+extern void colli_findDynamicSlot(void);
+extern void colli_findStaticSlot(void);
 extern void fn_8011BEB8(void);
 extern void fn_8011C044(void);
 extern void enemy_stepBehavior(void);
@@ -626,10 +626,10 @@ lbl_fn_8016F824_0000074C:
     cmpwi r3, 0x0
     beq lbl_fn_8016F824_0000076C
     mr r4, r30
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r30
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_fn_8016F824_0000076C:
     lwz r0, 0x12a8(r30)
     addi r3, r30, 0xc58
@@ -1036,10 +1036,10 @@ lbl_fn_8016FDCC_00000D1C:
     cmpwi r3, 0x0
     beq lbl_fn_8016FDCC_00000D3C
     mr r4, r30
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r30
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_fn_8016FDCC_00000D3C:
     lwz r0, 0x12a8(r30)
     addi r3, r30, 0xc58
@@ -1497,10 +1497,10 @@ lbl_battle_resolveAggroHierarchy_000013A8:
     cmpwi r3, 0x0
     beq lbl_battle_resolveAggroHierarchy_000013C8
     mr r4, r30
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r30
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_battle_resolveAggroHierarchy_000013C8:
     lwz r0, 0x12a8(r30)
     addi r3, r30, 0xc58
@@ -1884,10 +1884,10 @@ lbl_battle_updateTargetAggro_00001924:
     cmpwi r3, 0x0
     beq lbl_battle_updateTargetAggro_00001944
     mr r4, r31
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r31
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_battle_updateTargetAggro_00001944:
     lwz r0, 0x12a8(r31)
     addi r3, r31, 0xc58

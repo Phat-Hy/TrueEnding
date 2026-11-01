@@ -28,38 +28,38 @@ extern void morph_updateMesh(void);
 extern void fn_800CFA28(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
-extern void fn_800E0AA8(void);
+extern void particle_getEmitterContext(void);
 extern void cam_findTargetIndex(void);
 extern void fn_800EFE3C(void);
 extern void proj_getMatrix(void);
 extern void vec3_scale(void);
-extern void fn_800F7F90(void);
+extern void viewport_getFlag(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F80A8(void);
 extern void fn_801011B8(void);
 extern void fn_8010129C(void);
 extern void fn_8010AB34(void);
 extern void fn_8010F6FC(void);
-extern void fn_80129A48(void);
+extern void path_resetWaypointVelocity(void);
 extern void fn_80129A6C(void);
-extern void fn_8012A1B8(void);
+extern void path_getFollowerNode(void);
 extern void enemy_updateAnimTimer(void);
 extern void fn_801370B8(void);
 extern void fn_80139F24(void);
 extern void fn_80139F3C(void);
-extern void fn_8013A13C(void);
+extern void mtx_rotYRad(void);
 extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_8013C3A8(void);
 extern void fn_8013C554(void);
-extern void fn_801404F8(void);
+extern void quest_getGlobalManager(void);
 extern void fn_801479D8(void);
 extern void quest_checkCondition(void);
 extern void dialog_selectChoice(void);
 extern void fn_80151210(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
-extern void fn_801750FC(void);
+extern void battle_calcOutcomeBonus(void);
 extern void battle_updateActorStatus(void);
 extern void fn_801C0738(void);
 extern void thread_findAndNotify(void);
@@ -68,7 +68,7 @@ extern void fn_802328DC(void);
 extern void fn_8023A60C(void);
 extern void fn_8023A614(void);
 extern void fn_80244674(void);
-extern void fn_80244CAC(void);
+extern void script_setTaskTerminated(void);
 extern void fn_80244FC0(void);
 extern void fn_80267B20(void);
 extern void fn_802A4170(void);
@@ -170,18 +170,18 @@ extern u32 lbl_808857E8;
 extern u32 lbl_808857EC;
 
 /* Function declarations */
-void fn_80372574(void);
+u32 fn_80372574(void *p);
 void fn_8037257C(void);
 void fn_80372754(void);
-void fn_803727D4(void);
+void *fn_803727D4(void *p);
 void fn_803727DC(void);
 void fn_803729B4(void);
-void fn_80373084(void);
-void fn_8037308C(void);
-void fn_80373094(void);
+void fn_80373084(void *p, u32 val);
+void *fn_8037308C(void *p);
+void *fn_80373094(void *p);
 void fn_8037309C(void);
-void fn_80373100(void);
-void fn_80373108(void);
+void *fn_80373100(void *p);
+void *fn_80373108(void *p, u32 idx);
 void fn_80373118(void);
 void kpad_getClampData(void);
 void fn_80373164(void);
@@ -189,11 +189,9 @@ void fn_803731E8(void);
 void fn_803737C0(void);
 void fn_80373AE8(void);
 
-asm void fn_80372574(void)
+u32 fn_80372574(void *p)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(u32 *)p;
 }
 
 asm void fn_8037257C(void)
@@ -359,11 +357,9 @@ asm void fn_80372754(void)
     blr
 }
 
-asm void fn_803727D4(void)
+void *fn_803727D4(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x540
-    blr
+    return (u8 *)p + 0x540;
 }
 
 asm void fn_803727DC(void)
@@ -567,7 +563,7 @@ lbl_fn_803729B4_0000050C:
     b lbl_fn_803729B4_0000060C
 lbl_fn_803729B4_00000540:
     mr r3, r31
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     mr r4, r3
     addi r3, r1, 0x74
     bl vec3_copy
@@ -589,7 +585,7 @@ lbl_fn_803729B4_00000564:
     bl vec3_set
     lfs f1, 0x78(r1)
     addi r3, r1, 0xf8
-    bl fn_8013A13C
+    bl mtx_rotYRad
     addi r3, r1, 0x5c
     addi r4, r1, 0xf8
     bl mtx_multVec
@@ -601,7 +597,7 @@ lbl_fn_803729B4_00000564:
     addi r4, r1, 0x68
     addi r5, r1, 0x20
     bl vec3_add
-    bl fn_801404F8
+    bl quest_getGlobalManager
     addi r5, r1, 0x68
     addi r6, r1, 0x50
     addi r7, r28, 0x8
@@ -621,7 +617,7 @@ lbl_fn_803729B4_00000564:
 lbl_fn_803729B4_0000060C:
     addi r3, r1, 0x44
     bl fn_802A4170
-    bl fn_800F7F90
+    bl viewport_getFlag
     bl fn_8037308C
     addi r28, r3, 0x8
     li r29, 0x0
@@ -699,12 +695,12 @@ lbl_fn_803729B4_00000724:
     mr r3, r26
     bl fn_80373094
     lfs f1, lbl_80885708
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     mr r3, r26
     bl fn_80373094
     bl fn_80129A6C
     mr r3, r26
-    bl fn_801750FC
+    bl battle_calcOutcomeBonus
     mr r3, r26
     li r4, 0x0
     li r5, 0x0
@@ -855,7 +851,7 @@ lbl_fn_803729B4_000008B8:
     li r4, 0x0
     bl fn_80357F38
     mr r3, r26
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     mr r3, r26
     addi r4, r1, 0x2c
     bl fn_8036B438
@@ -871,7 +867,7 @@ lbl_fn_803729B4_000008B8:
     addi r27, r27, 0x1
 lbl_fn_803729B4_000009B4:
     addi r3, r1, 0x44
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     cmplw r27, r3
     blt lbl_fn_803729B4_00000694
     addi r3, r30, 0x56dc
@@ -938,7 +934,7 @@ lbl_fn_803729B4_000009B4:
     bl fn_802F0990
     mr r4, r30
     bl fn_80366DAC
-    bl fn_800F7F90
+    bl viewport_getFlag
     bl fn_804DA3F8
     addi r3, r1, 0x44
     li r4, -0x1
@@ -960,25 +956,19 @@ lbl_fn_803729B4_00000AD8:
     blr
 }
 
-asm void fn_80373084(void)
+void fn_80373084(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0xe8(r3)
-    blr
+    *(u32 *)((u8 *)p + 0xe8) = val;
 }
 
-asm void fn_8037308C(void)
+void *fn_8037308C(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x2b80
-    blr
+    return (u8 *)p + 0x2b80;
 }
 
-asm void fn_80373094(void)
+void *fn_80373094(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x10d8
-    blr
+    return (u8 *)p + 0x10d8;
 }
 
 asm void fn_8037309C(void)
@@ -1011,20 +1001,14 @@ asm void fn_8037309C(void)
     blr
 }
 
-asm void fn_80373100(void)
+void *fn_80373100(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x324
-    blr
+    return (u8 *)p + 0x324;
 }
 
-asm void fn_80373108(void)
+void *fn_80373108(void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0xd5c
-    add r3, r3, r0
-    addi r3, r3, 0x4
-    blr
+    return (u8 *)p + idx * 0xd5c + 4;
 }
 
 asm void fn_80373118(void)

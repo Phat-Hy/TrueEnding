@@ -69,18 +69,18 @@ extern void fn_80607900(void);
 extern void fn_80607D70(void);
 extern void fn_80609D00(void);
 extern void GXSetVtxDesc(void);
-extern void fn_806134E0(void);
+extern void __GXInitVtxDesc(void);
 extern void GXSetVtxAttrFmt(void);
 extern void GXClearVtxDesc(void);
 extern void fn_80614A80(void);
 extern void fn_80615400(void);
 extern void GXInitLightDistAttn(void);
 extern void GXInitLightSpot(void);
-extern void fn_80617200(void);
+extern void GXSetTexCoordScaleManually(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
-extern void fn_806174C0(void);
+extern void GXSetTevIndTile(void);
 extern void GXSetTevSwapMode(void);
 extern void GXSetTevSwapModeTable(void);
 extern void fn_806177B0(void);
@@ -1121,7 +1121,7 @@ asm void fn_805C3FE0(void)
     bl GXLoadPosMtxImm
     li r3, 0x0
     bl GXSetCurrentMtx
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -1183,7 +1183,7 @@ asm void fn_805C3FE0(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x7
     li r4, 0x0
     li r5, 0x1
@@ -1204,7 +1204,7 @@ asm void fn_805C3FE0(void)
     li r3, 0x0
     bl fn_80615400
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1

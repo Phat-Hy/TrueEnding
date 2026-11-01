@@ -15,7 +15,7 @@ extern void battle_canTargetActor(void);
 extern void net_getPacketManager(void);
 extern void net_voiceCodec_destroy(void);
 extern void fn_804FB224(void);
-extern void fn_8050128C(void);
+extern void net_isMessageStateActive(void);
 extern void fn_80502874(void);
 extern void fn_80509CB0(void);
 extern void fn_80509DA4(void);
@@ -36,10 +36,10 @@ extern void strstr(void);
 extern void atoi(void);
 extern void wcscmp(void);
 extern void net_getSocket(void);
-extern void fn_806A8E70(void);
+extern void net_getInterfaceHandle(void);
 extern void fn_806ABE70(void);
 extern void fn_806ABEE0(void);
-extern void fn_806B0DE0(void);
+extern void net_isSessionActive(void);
 extern void net_getMyAid(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -154,7 +154,7 @@ lbl_fn_804DBD0C_000000C8:
     add r27, r0, r31
     stb r28, 0xcc(r27)
     addi r3, r27, 0xdc
-    bl fn_8050128C
+    bl net_isMessageStateActive
     stw r29, 0xd0(r27)
     addi r26, r26, 0x1
     addi r31, r31, 0xd5c
@@ -742,7 +742,7 @@ lbl_fn_804DC454_00000884:
     li r3, 0x1
     b lbl_fn_804DC454_000008E8
 lbl_fn_804DC454_000008C8:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804DC454_000008E8
 lbl_fn_804DC454_000008D0:
     lwz r0, 0x1f8(r4)
@@ -751,7 +751,7 @@ lbl_fn_804DC454_000008D0:
     li r3, 0x1
     b lbl_fn_804DC454_000008E8
 lbl_fn_804DC454_000008E4:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804DC454_000008E8:
     addi r4, r1, 0x10
     li r5, 0xa
@@ -1161,7 +1161,7 @@ asm void fn_804DCA58(void)
     li r3, 0x1
     b lbl_fn_804DCA58_00000E30
 lbl_fn_804DCA58_00000E2C:
-    bl fn_806B0DE0
+    bl net_isSessionActive
 lbl_fn_804DCA58_00000E30:
     mr r25, r3
     b lbl_fn_804DCA58_00000E54
@@ -1172,7 +1172,7 @@ lbl_fn_804DCA58_00000E38:
     li r3, 0x1
     b lbl_fn_804DCA58_00000E50
 lbl_fn_804DCA58_00000E4C:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804DCA58_00000E50:
     mr r25, r3
 lbl_fn_804DCA58_00000E54:

@@ -23,7 +23,7 @@ extern void node_createNamedChild(void);
 extern void node_destroy(void);
 extern void skeleton_getGlobalManager(void);
 extern void fn_800C18BC(void);
-extern void fn_800C2448(void);
+extern void skeleton_getBoneByIndex(void);
 extern void fn_800C24B4(void);
 extern void world_getGlobalFlag(void);
 extern void boss_getOffset54(void);
@@ -1139,7 +1139,7 @@ lbl_fn_805B739C_00000D1C:
     mr r21, r3
     addi r3, r25, 0x4c
     li r4, 0x0
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     lwz r0, 0x0(r21)
     stw r0, 0x0(r3)
     lwz r0, 0x4(r21)

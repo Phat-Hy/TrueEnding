@@ -58,7 +58,7 @@ void fn_801644D4(void);
 void fn_801647BC(void);
 void fn_80164B00(void);
 void fn_80164D24(void);
-void fn_80164DCC(void);
+void party_evalTacticCondition(void);
 void fn_80164EF4(void);
 
 asm void fn_801635B8(void)
@@ -1775,11 +1775,11 @@ lbl_fn_80164D24_000017E0:
     beqlr
     stfs f0, 0x7f4(r3)
     li r4, 0x1
-    b fn_80164DCC
+    b party_evalTacticCondition
     blr
 }
 
-asm void fn_80164DCC(void)
+asm void party_evalTacticCondition(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1791,27 +1791,27 @@ asm void fn_80164DCC(void)
     mr r30, r3
     lwz r0, 0x12a4(r3)
     extrwi. r0, r0, 1, 3
-    bne lbl_fn_80164DCC_00001858
+    bne lbl_party_evalTacticCondition_00001858
     lwz r0, 0x55c(r3)
     cmpwi r0, 0x6
-    bne lbl_fn_80164DCC_00001924
+    bne lbl_party_evalTacticCondition_00001924
     lwz r0, 0x560(r3)
     cmpwi r0, 0x2e
-    beq lbl_fn_80164DCC_00001858
-    b lbl_fn_80164DCC_00001924
-lbl_fn_80164DCC_00001858:
+    beq lbl_party_evalTacticCondition_00001858
+    b lbl_party_evalTacticCondition_00001924
+lbl_party_evalTacticCondition_00001858:
     lwz r0, 0x55c(r3)
     cmpwi r0, 0x6
-    bne lbl_fn_80164DCC_00001884
+    bne lbl_party_evalTacticCondition_00001884
     lwz r0, 0x560(r3)
     cmpwi r0, 0x2e
-    bne lbl_fn_80164DCC_00001884
+    bne lbl_party_evalTacticCondition_00001884
     mr r3, r30
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
     bl battle_applyStatusEffect
-lbl_fn_80164DCC_00001884:
+lbl_party_evalTacticCondition_00001884:
     lwz r3, 0x12a4(r30)
     li r0, 0x1
     lfs f0, lbl_8088196C
@@ -1832,7 +1832,7 @@ lbl_fn_80164DCC_00001884:
     mr r4, r30
     bl fn_80105F3C
     cmpwi r31, 0x0
-    beq lbl_fn_80164DCC_00001918
+    beq lbl_party_evalTacticCondition_00001918
     lwz r3, lbl_8087F048
     mr r4, r30
     addi r5, r30, 0xb0
@@ -1849,11 +1849,11 @@ lbl_fn_80164DCC_00001884:
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
-lbl_fn_80164DCC_00001918:
+lbl_party_evalTacticCondition_00001918:
     lwz r3, lbl_8087F048
     mr r4, r30
     bl fn_8010652C
-lbl_fn_80164DCC_00001924:
+lbl_party_evalTacticCondition_00001924:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

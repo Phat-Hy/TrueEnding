@@ -21,17 +21,17 @@ extern void str_assignBuffer(void);
 extern void fn_80071D68(void);
 extern void fn_80071D74(void);
 extern void gx_drawScreenQuad(void);
-extern void fn_80075DEC(void);
+extern void seq_stepPlaybackTimer(void);
 extern void fn_800760BC(void);
 extern void fn_800760D0(void);
-extern void fn_800763FC(void);
+extern void seq_bindSlotResource(void);
 extern void gx_setRenderStateParam(void);
 extern void fn_80076FF8(void);
 extern void fn_8007FAF0(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_80089ACC(void);
-extern void fn_8008B964(void);
+extern void sys_getMainManager(void);
 extern void fn_80093D98(void);
 extern void fn_80093E30(void);
 extern void fn_800A96AC(void);
@@ -45,7 +45,7 @@ extern void env_updateAtmosphere(void);
 extern void str_findChar(void);
 extern void fn_800E0000(void);
 extern void fn_800F7258(void);
-extern void fn_80116BD4(void);
+extern void actor_calcSpawnTransform(void);
 extern void save_validateHeader(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
@@ -71,7 +71,7 @@ extern void fn_804AB060(void);
 extern void fn_804AB79C(void);
 extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
-extern void fn_80614190(void);
+extern void __GXFlushPixelEngine(void);
 extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
@@ -193,7 +193,7 @@ lbl_fn_804ABA2C_00000048:
     bl fn_804AB79C
     mr r3, r29
     addi r4, r28, 0x640
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     addi r3, r28, 0x640
     bl fn_804ABEE4
     mr r26, r3
@@ -206,7 +206,7 @@ lbl_fn_804ABA2C_00000048:
     bl fn_803D71C4
     bl fn_804A9E8C
     mr r27, r3
-    bl fn_8008B964
+    bl sys_getMainManager
     li r4, 0x10
     bl fn_804ABEEC
     mr r31, r3
@@ -251,7 +251,7 @@ lbl_fn_804ABA2C_00000048:
     bctrl
 lbl_fn_804ABA2C_00000144:
     bl fn_803D71C4
-    bl fn_80075DEC
+    bl seq_stepPlaybackTimer
     bl fn_803D71C4
     bl fn_800760D0
     bl fn_804ABF20
@@ -296,7 +296,7 @@ lbl_fn_804ABA2C_00000144:
     mr r3, r25
     li r4, 0x0
     bl GXCopyTex
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     bl fn_803D71C4
     bl gx_drawScreenQuad
     bl fn_803D71C4
@@ -333,7 +333,7 @@ lbl_fn_804ABA2C_00000144:
     bl fn_803D71C4
     mr r4, r27
     li r5, 0x0
-    bl fn_800763FC
+    bl seq_bindSlotResource
     mr r3, r29
     bl fn_800BFB70
     addi r3, r1, 0xc0
@@ -451,7 +451,7 @@ lbl_fn_804ABA2C_00000144:
     bl fn_804ABF00
     mr r3, r29
     addi r4, r1, 0x140
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     addi r3, r1, 0x140
     bl fn_804ABEE4
     mr r28, r3
@@ -647,7 +647,7 @@ asm void fn_804ABF84(void)
     bl item_useConsumable
     mr r3, r27
     addi r4, r1, 0x38
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     addi r3, r1, 0x38
     bl fn_804ABEE4
     mr r31, r3
@@ -658,7 +658,7 @@ asm void fn_804ABF84(void)
     bl fn_804A9E84
     bl fn_803D71C4
     bl fn_804A9E8C
-    bl fn_8008B964
+    bl sys_getMainManager
     li r4, 0x10
     bl fn_804ABEEC
     mr r30, r3
@@ -817,7 +817,7 @@ lbl_fn_804ABF84_00000908:
     cmplw r28, r3
     blt lbl_fn_804ABF84_00000898
     bl fn_803D71C4
-    bl fn_80075DEC
+    bl seq_stepPlaybackTimer
     bl fn_803D71C4
     bl fn_800760D0
     mr r3, r30
@@ -825,7 +825,7 @@ lbl_fn_804ABF84_00000908:
     bl fn_804ABF00
     mr r3, r27
     addi r4, r1, 0x22c
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     addi r3, r1, 0x22c
     bl fn_804ABEE4
     mr r31, r3

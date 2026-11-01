@@ -143,7 +143,7 @@ extern u32 lbl_80880278;
 /* Function declarations */
 void fn_8065B990(void);
 void fn_8065BA40(void);
-void fn_8065BB40(void);
+u32 fn_8065BB40(void);
 void fn_8065BB50(void);
 void fn_8065BCF0(void);
 void fn_8065BE40(void);
@@ -154,22 +154,22 @@ void fn_8065C6B0(void);
 void fn_8065C750(void);
 void fn_8065C7F0(void);
 void fn_8065CDA0(void);
-void fn_8065CE30(void);
-void fn_8065CE40(void);
-void fn_8065CE50(void);
-void fn_8065CE60(void);
-void fn_8065CE70(void);
-void fn_8065CE80(void);
-void fn_8065CE90(void);
-void fn_8065CEA0(void);
-void fn_8065CEB0(void);
-void fn_8065CEC0(void);
-void fn_8065CED0(void);
-void fn_8065CEE0(void);
-void fn_8065CEF0(void);
-void fn_8065CF00(void);
-void fn_8065CF10(void);
-void fn_8065CF20(void);
+u32 fn_8065CE30(void);
+u32 fn_8065CE40(void);
+u32 fn_8065CE50(void);
+u32 fn_8065CE60(void);
+u32 fn_8065CE70(void);
+u32 fn_8065CE80(void);
+u32 fn_8065CE90(void);
+u32 fn_8065CEA0(void);
+u32 fn_8065CEB0(void);
+u32 fn_8065CEC0(void);
+u32 fn_8065CED0(void);
+u32 fn_8065CEE0(void);
+u32 fn_8065CEF0(void);
+s32 fn_8065CF00(void);
+s32 fn_8065CF10(void);
+s32 fn_8065CF20(void);
 void fn_8065CF30(void);
 void fn_8065D0E0(void);
 void fn_8065D100(void);
@@ -316,11 +316,9 @@ lbl_fn_8065BA40_00000180:
     blr
 }
 
-asm void fn_8065BB40(void)
+u32 fn_8065BB40(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8065BB50(void)
@@ -1631,116 +1629,84 @@ asm void fn_8065CDA0(void)
     blr
 }
 
-asm void fn_8065CE30(void)
+u32 fn_8065CE30(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_8065CE40(void)
+u32 fn_8065CE40(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_8065CE50(void)
+u32 fn_8065CE50(void)
 {
-    nofralloc
-    lwz r3, lbl_80880238
-    blr
+    return lbl_80880238;
 }
 
-asm void fn_8065CE60(void)
+u32 fn_8065CE60(void)
 {
-    nofralloc
-    lwz r3, lbl_8088023C
-    blr
+    return lbl_8088023C;
 }
 
-asm void fn_8065CE70(void)
+u32 fn_8065CE70(void)
 {
-    nofralloc
-    lwz r3, lbl_80880240
-    blr
+    return lbl_80880240;
 }
 
-asm void fn_8065CE80(void)
+u32 fn_8065CE80(void)
 {
-    nofralloc
-    lwz r3, lbl_80880244
-    blr
+    return lbl_80880244;
 }
 
-asm void fn_8065CE90(void)
+u32 fn_8065CE90(void)
 {
-    nofralloc
-    lwz r3, lbl_80880248
-    blr
+    return lbl_80880248;
 }
 
-asm void fn_8065CEA0(void)
+u32 fn_8065CEA0(void)
 {
-    nofralloc
-    lwz r3, lbl_8088024C
-    blr
+    return lbl_8088024C;
 }
 
-asm void fn_8065CEB0(void)
+u32 fn_8065CEB0(void)
 {
-    nofralloc
-    lwz r3, lbl_80880250
-    blr
+    return lbl_80880250;
 }
 
-asm void fn_8065CEC0(void)
+u32 fn_8065CEC0(void)
 {
-    nofralloc
-    lwz r3, lbl_80880254
-    blr
+    return lbl_80880254;
 }
 
-asm void fn_8065CED0(void)
+u32 fn_8065CED0(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_8065CEE0(void)
+u32 fn_8065CEE0(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_8065CEF0(void)
+u32 fn_8065CEF0(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_8065CF00(void)
+s32 fn_8065CF00(void)
 {
-    nofralloc
-    li r3, -0x1
-    blr
+    return -1;
 }
 
-asm void fn_8065CF10(void)
+s32 fn_8065CF10(void)
 {
-    nofralloc
-    li r3, -0x1
-    blr
+    return -1;
 }
 
-asm void fn_8065CF20(void)
+s32 fn_8065CF20(void)
 {
-    nofralloc
-    li r3, -0x1
-    blr
+    return -1;
 }
 
 asm void fn_8065CF30(void)

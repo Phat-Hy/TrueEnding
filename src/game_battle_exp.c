@@ -9,8 +9,8 @@ extern void _savegpr_21(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void menu_renderLayout(void);
-extern void fn_801059F8(void);
-extern void fn_80105B3C(void);
+extern void colli_findDynamicSlot(void);
+extern void colli_findStaticSlot(void);
 extern void hurtbox_processHitDamage(void);
 extern void fn_80121E14(void);
 extern void fn_80135384(void);
@@ -507,10 +507,10 @@ lbl_battle_awardExp_000005BC:
     cmpwi r3, 0x0
     beq lbl_battle_awardExp_000005DC
     mr r4, r30
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r30
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_battle_awardExp_000005DC:
     lwz r0, 0x12a8(r30)
     addi r4, r30, 0xf20

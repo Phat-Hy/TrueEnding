@@ -11,7 +11,7 @@ extern void _savegpr_27(void);
 extern void ui_drawColoredQuad(void);
 extern void boss_recordDamage(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_8009373C(void);
+extern void target_findEntryByName(void);
 extern void fn_80093B88(void);
 extern void msg_getMessageById(void);
 extern void skin_playAnimationByName(void);
@@ -23,11 +23,11 @@ extern void fn_800EFDA0(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void hurtbox_processHitDamage(void);
-extern void fn_8011F8F4(void);
+extern void skill_findEntryById(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void skill_findNodeByTag(void);
-extern void fn_80161570(void);
+extern void party_updateMemberCoords(void);
 extern void fn_80162A08(void);
 extern void fn_80163B88(void);
 extern void fn_8016939C(void);
@@ -53,7 +53,7 @@ extern void fn_803935AC(void);
 extern void fn_8039BF04(void);
 extern void fn_803C18DC(void);
 extern void fn_803E5E64(void);
-extern void fn_804439FC(void);
+extern void gmk_registerSlot(void);
 extern void fn_8044441C(void);
 extern void gmk_findSlotByIndex(void);
 extern void fn_804A04AC(void);
@@ -818,7 +818,7 @@ lbl_fn_803A3D20_00000934:
 lbl_fn_803A3D20_0000094C:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A3D20_00000958:
     mr r4, r3
     b lbl_fn_803A3D20_000009C0
@@ -1084,7 +1084,7 @@ lbl_fn_803A3FFC_00000D00:
     li r7, 0x1
     li r9, 0x1
     li r10, 0x1
-    bl fn_804439FC
+    bl gmk_registerSlot
     lwz r3, 0x8(r30)
     bl game_initGlobalDatabases
     cmpwi r3, 0x0
@@ -1413,7 +1413,7 @@ lbl_fn_803A4568_00001178:
 lbl_fn_803A4568_00001190:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A4568_0000119C:
     mr r29, r3
     b lbl_fn_803A4568_000011F8
@@ -1507,7 +1507,7 @@ lbl_fn_803A4568_000012B4:
     addi r4, r1, 0x8
     cntlzw r0, r0
     srwi r5, r0, 5
-    bl fn_8009373C
+    bl target_findEntryByName
     b lbl_fn_803A4568_0000131C
 lbl_fn_803A4568_000012F4:
     lis r4, lbl_8074F8CC@ha
@@ -1682,7 +1682,7 @@ lbl_fn_803A48A8_00001534:
     li r5, 0x0
     fmr f2, f1
     li r6, 0x0
-    bl fn_80161570
+    bl party_updateMemberCoords
     li r0, 0x0
     stw r0, 0xb4(r22)
     li r27, 0x1
@@ -2116,7 +2116,7 @@ lbl_fn_803A4A7C_00001B64:
 lbl_fn_803A4A7C_00001B7C:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8011F8F4
+    bl skill_findEntryById
 lbl_fn_803A4A7C_00001B88:
     mr r21, r3
     b lbl_fn_803A4A7C_00001BE4

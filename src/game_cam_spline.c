@@ -23,11 +23,11 @@ extern void cam_initStickBindings(void);
 extern void fn_801334CC(void);
 extern void save_validateHeader(void);
 extern void save_createWorkerTask(void);
-extern void fn_801F6C2C(void);
+extern void save_getElapsedPlayTime(void);
 extern void save_computeCrc32(void);
 extern void save_verifyBlockCrc(void);
 extern void save_findEntryByName(void);
-extern void fn_801F8598(void);
+extern void save_formatSlotString(void);
 extern void thread_findAndNotifySlot(void);
 extern void fn_80207C34(void);
 extern void res_Resource_destructor(void);
@@ -37,7 +37,7 @@ extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void world_getGlobalFlag(void);
 extern void fn_803E5E64(void);
-extern void fn_804439FC(void);
+extern void gmk_registerSlot(void);
 extern void fn_80444020(void);
 extern void fn_80444CF8(void);
 extern void atn_LoadHandle_destructor(void);
@@ -1230,7 +1230,7 @@ lbl_fn_800F03C4_00000F14:
     lwz r30, 0x54(r28)
     stfs f30, 0x54(r30)
     mr r3, r30
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     lfs f0, 0x50(r30)
     fcmpo cr0, f0, f1
     cror eq, gt, eq
@@ -1262,7 +1262,7 @@ lbl_fn_800F03C4_00000F68:
     lfs f0, lbl_808813BC
     mr r3, r30
     stfs f0, 0x54(r30)
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     lfs f0, 0x50(r30)
     fcmpo cr0, f0, f1
     cror eq, gt, eq
@@ -1303,7 +1303,7 @@ lbl_fn_800F03C4_00001018:
     lwz r28, 0x54(r31)
     stfs f30, 0x54(r28)
     mr r3, r28
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     lfs f0, 0x50(r28)
     fcmpo cr0, f0, f1
     cror eq, gt, eq
@@ -1328,7 +1328,7 @@ lbl_fn_800F03C4_00001064:
     lwz r27, 0xa8(r31)
     mr r3, r28
     stfs f30, 0x54(r28)
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     lfs f0, 0x50(r28)
     fcmpo cr0, f0, f1
     cror eq, gt, eq
@@ -1360,7 +1360,7 @@ lbl_fn_800F03C4_000010C8:
     lfs f0, lbl_808813BC
     mr r3, r27
     stfs f0, 0x54(r27)
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     lfs f0, 0x50(r27)
     fcmpo cr0, f0, f1
     cror eq, gt, eq
@@ -1433,7 +1433,7 @@ lbl_fn_800F03C4_00001194:
     b lbl_fn_800F03C4_00001220
 lbl_fn_800F03C4_000011FC:
     lwz r3, 0x54(r27)
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     fsubs f0, f1, f31
     lwz r3, 0x54(r27)
     addi r28, r28, 0x1
@@ -1447,7 +1447,7 @@ lbl_fn_800F03C4_00001220:
     blt lbl_fn_800F03C4_000011FC
 lbl_fn_800F03C4_0000122C:
     lwz r3, 0x17c(r29)
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     lfs f0, lbl_808813BC
     lwz r3, 0x17c(r29)
     fsubs f1, f1, f0
@@ -1479,7 +1479,7 @@ lbl_fn_800F03C4_00001294:
     lwz r27, 0x54(r31)
     stfs f31, 0x54(r27)
     mr r3, r27
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     lfs f0, 0x50(r27)
     fcmpo cr0, f0, f1
     cror eq, gt, eq
@@ -1504,7 +1504,7 @@ lbl_fn_800F03C4_000012E0:
     lwz r28, 0xa8(r31)
     mr r3, r27
     stfs f31, 0x54(r27)
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     lfs f0, 0x50(r27)
     fcmpo cr0, f0, f1
     cror eq, gt, eq
@@ -1536,7 +1536,7 @@ lbl_fn_800F03C4_00001344:
     lfs f0, lbl_808813C4
     mr r3, r27
     stfs f0, 0x54(r27)
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     lfs f0, 0x50(r27)
     fcmpo cr0, f0, f1
     cror eq, gt, eq
@@ -1640,7 +1640,7 @@ lbl_fn_800F0BC0_00001480:
     mr r5, r26
     addi r4, r31, 0x10c
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     fmr f1, f29
     lwz r3, 0x54(r28)
     addi r4, r31, 0x113
@@ -1652,7 +1652,7 @@ lbl_fn_800F0BC0_00001500:
     mr r5, r26
     addi r4, r31, 0x10c
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     fmr f1, f29
     lwz r3, 0x70(r28)
     addi r4, r31, 0x113
@@ -2052,7 +2052,7 @@ lbl_fn_800F0D14_00001AA8:
     li r8, 0x0
     li r9, 0x1
     li r10, 0x1
-    bl fn_804439FC
+    bl gmk_registerSlot
     addi r3, r1, 0x40
     li r4, 0x0
     li r5, 0x80

@@ -18,7 +18,7 @@ extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_createWaypoint(void);
-extern void fn_80088FAC(void);
+extern void zone_formatEventString(void);
 extern void node_createNamedChild(void);
 extern void hud_drawTargetMarker(void);
 extern void msg_getMessageById(void);
@@ -34,15 +34,15 @@ extern void save_parseSlotHeader(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
 extern void save_calculateBlockCrc(void);
-extern void fn_801F7590(void);
+extern void save_writeBackupSlot(void);
 extern void fn_801F791C(void);
 extern void fn_801F7DF0(void);
 extern void save_findEntryByName(void);
 extern void thread_findAndNotify(void);
 extern void thread_dispatchToQueue(void);
-extern void fn_80201E78(void);
+extern void profile_allocNode(void);
 extern void profile_getMetricValue(void);
-extern void fn_80202A6C(void);
+extern void perf_initNode(void);
 extern void perf_getMetricValue(void);
 extern void fn_8021F094(void);
 extern void fn_8021F0D4(void);
@@ -622,7 +622,7 @@ lbl_fn_80516548_00000668:
     stfs f30, 0x1c(r1)
     stfs f31, 0x20(r1)
     stfs f31, 0x24(r1)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     lfs f1, lbl_8088788C
     mr r3, r27
     lfs f2, lbl_80887890
@@ -638,7 +638,7 @@ lbl_fn_80516548_00000714:
     stfs f30, 0xc(r1)
     stfs f29, 0x10(r1)
     stfs f31, 0x14(r1)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     lfs f1, lbl_80887898
     mr r3, r27
     lfs f2, lbl_8088789C
@@ -743,7 +743,7 @@ lbl_fn_80516740_0000084C:
     addi r5, r29, 0x15c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f1, lbl_80887848
     mr r3, r30
     lfs f2, lbl_80887840
@@ -752,7 +752,7 @@ lbl_fn_80516740_0000084C:
     addi r5, r29, 0x16c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f1, lbl_80887848
     mr r3, r30
     lfs f2, lbl_80887840
@@ -761,7 +761,7 @@ lbl_fn_80516740_0000084C:
     addi r5, r29, 0x17c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f1, lbl_80887848
     mr r3, r30
     lfs f2, lbl_80887840
@@ -770,7 +770,7 @@ lbl_fn_80516740_0000084C:
     addi r5, r29, 0x18c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088FAC
+    bl zone_formatEventString
     lfs f1, lbl_808878A4
     mr r3, r30
     lfs f2, lbl_808878A8
@@ -1032,14 +1032,14 @@ lbl_fn_80516A60_00000C84:
     li r5, 0x1
     subf r0, r0, r0
     stw r0, 0xd8(r31)
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0x11c(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0x48
     li r5, 0x1
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0x120(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1050,7 +1050,7 @@ lbl_fn_80516A60_00000CF0:
     add r28, r31, r29
     addi r4, r30, 0x6b
     li r5, 0x1
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0xf4(r28)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1063,7 +1063,7 @@ lbl_fn_80516A60_00000CF0:
     addi r30, r30, lbl_8075BB80@l
     li r5, 0x1
     addi r4, r30, 0x87
-    bl fn_80202A6C
+    bl perf_initNode
     stw r3, 0x124(r31)
     li r4, 0x1
     bl atn_Task_setActive

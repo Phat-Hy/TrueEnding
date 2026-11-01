@@ -14,12 +14,12 @@ extern void magic_castSpellCircle(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800E0AA8(void);
+extern void particle_getEmitterContext(void);
 extern void fn_800E0AB0(void);
 extern void viewport_getNextSequenceId(void);
-extern void fn_800F8524(void);
+extern void math_lerpf(void);
 extern void system_getNextSequenceId(void);
-extern void fn_801162A0(void);
+extern void vec3_sqMag(void);
 extern void equip_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void actor_setState(void);
@@ -41,7 +41,7 @@ extern void fn_80292C9C(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void craft_forgeUpgradeWeapon(void);
-extern void fn_803CD958(void);
+extern void crowd_selectWaypointByWeight(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -222,7 +222,7 @@ lbl_fn_8028AA38_00000170:
     addi r5, r31, 0x18
     bl vec3_sub
     addi r3, r1, 0x88
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_80883B18
     fcmpo cr0, f1, f0
     bge lbl_fn_8028AA38_000001CC
@@ -231,7 +231,7 @@ lbl_fn_8028AA38_00000170:
     bl vec3_copy
 lbl_fn_8028AA38_000001CC:
     addi r3, r1, 0x70
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_80883B18
     fcmpo cr0, f1, f0
     bge lbl_fn_8028AA38_000001EC
@@ -266,7 +266,7 @@ lbl_fn_8028AA38_000001EC:
     fmr f1, f29
     addi r3, r1, 0xc
     addi r4, r1, 0x8
-    bl fn_800F8524
+    bl math_lerpf
     lwz r0, 0x58c(r30)
     cmpwi r0, 0x7
     bne lbl_fn_8028AA38_0000029C
@@ -611,7 +611,7 @@ lbl_fn_8028AFD8_000006AC:
     lwz r3, 0xa4(r3)
     slwi r0, r0, 3
     add r3, r3, r0
-    bl fn_803CD958
+    bl crowd_selectWaypointByWeight
     clrlwi. r27, r3, 16
     bne lbl_fn_8028AFD8_00000778
     lwz r3, lbl_8087F430
@@ -621,7 +621,7 @@ lbl_fn_8028AFD8_000006AC:
     lwz r3, 0x10d8(r3)
     lwz r3, 0xa4(r3)
     add r3, r3, r0
-    bl fn_803CD958
+    bl crowd_selectWaypointByWeight
     clrlwi r27, r3, 16
 lbl_fn_8028AFD8_00000778:
     stw r27, 0x150c(r28)
@@ -632,7 +632,7 @@ lbl_fn_8028AFD8_00000778:
     lwz r3, 0x10d8(r3)
     lwz r3, 0xa4(r3)
     add r3, r3, r0
-    bl fn_803CD958
+    bl crowd_selectWaypointByWeight
     clrlwi. r3, r3, 16
     bne lbl_fn_8028AFD8_000008A8
     lwz r3, lbl_8087F430
@@ -642,7 +642,7 @@ lbl_fn_8028AFD8_00000778:
     lwz r3, 0x10d8(r3)
     lwz r3, 0xa4(r3)
     add r3, r3, r0
-    bl fn_803CD958
+    bl crowd_selectWaypointByWeight
     clrlwi r3, r3, 16
     b lbl_fn_8028AFD8_000008A8
 lbl_fn_8028AFD8_000007CC:
@@ -685,7 +685,7 @@ lbl_fn_8028AFD8_000007CC:
     lwz r3, 0xa4(r3)
     slwi r0, r0, 3
     add r3, r3, r0
-    bl fn_803CD958
+    bl crowd_selectWaypointByWeight
     clrlwi. r27, r3, 16
     bne lbl_fn_8028AFD8_00000878
     mr r27, r24
@@ -698,7 +698,7 @@ lbl_fn_8028AFD8_00000878:
     lwz r3, 0x10d8(r3)
     lwz r3, 0xa4(r3)
     add r3, r3, r0
-    bl fn_803CD958
+    bl crowd_selectWaypointByWeight
     clrlwi. r3, r3, 16
     bne lbl_fn_8028AFD8_000008A8
     mr r3, r24
@@ -1033,7 +1033,7 @@ lbl_fn_8028B47C_00000D54:
     stw r3, 0x1628(r30)
     add r3, r30, r0
     addi r3, r3, 0x15ec
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     lwz r0, 0x1628(r30)
     cmpw r0, r3
     blt lbl_fn_8028B47C_00000D88

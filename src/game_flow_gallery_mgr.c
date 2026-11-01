@@ -16,7 +16,7 @@ extern void fn_804CF640(void);
 extern void fn_804EE4F4(void);
 extern void fn_805010C4(void);
 extern void fn_805011D0(void);
-extern void fn_8050128C(void);
+extern void net_isMessageStateActive(void);
 extern void fn_8050A730(void);
 extern void fn_8050A964(void);
 extern void fn_8050A984(void);
@@ -25,7 +25,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void net_getSocket(void);
 extern void net_getMyAid(void);
-extern void fn_806B1250(void);
+extern void net_isSessionConnected(void);
 
 /* External data declarations */
 extern u8 jumptable_807913E0[];
@@ -226,7 +226,7 @@ lbl_fn_804F1568_000001B4:
     li r0, 0x0
     b lbl_fn_804F1568_00000228
 lbl_fn_804F1568_00000218:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804F1568_00000228
 lbl_fn_804F1568_00000224:
@@ -1153,7 +1153,7 @@ lbl_fn_804F225C_00000E90:
 lbl_fn_804F225C_00000EE8:
     lha r4, 0x4(r31)
     addi r3, r30, 0xdc
-    bl fn_8050128C
+    bl net_isMessageStateActive
     lbz r0, 0x6(r31)
     stw r0, 0xe0(r30)
     lbz r0, 0x7(r31)

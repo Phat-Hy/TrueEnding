@@ -32,13 +32,13 @@ extern void strncmp(void);
 extern void __construct_new_array(void);
 extern void __destroy_new_array(void);
 extern void fn_806A426C(void);
-extern void fn_806A4270(void);
+extern void net_truncateU16(void);
 extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
 extern void fn_806D6560(void);
-extern void fn_806D6610(void);
+extern void net_invokeChannelCallback(void);
 extern void net_socketClose(void);
 extern void fn_806D7B30(void);
 extern void fn_806D7CB0(void);
@@ -47,7 +47,7 @@ extern void fn_806D7D60(void);
 extern void fn_806D8650(void);
 extern void net_getTimestampMs(void);
 extern void fn_806FDBC0(void);
-extern void fn_806FE840(void);
+extern void net_http_initConnection(void);
 extern void fn_806FE900(void);
 extern void fn_806FEC90(void);
 extern void fn_806FECB0(void);
@@ -61,10 +61,10 @@ extern void fn_80702150(void);
 extern void fn_807031B0(void);
 extern void fn_807204D0(void);
 extern void fn_80720BF0(void);
-extern void fn_80725170(void);
+extern void net_listClearAll(void);
 extern void fn_80725250(void);
-extern void fn_807252A0(void);
-extern void fn_807252D0(void);
+extern void net_listInsertNode(void);
+extern void net_listRemoveNode(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -230,9 +230,9 @@ lbl_fn_80703610_00000150:
     lwz r0, 0x0(r3)
     mr r3, r31
     stw r0, 0x10(r1)
-    bl fn_806FE840
+    bl net_http_initConnection
     addi r4, r1, 0x10
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     beq lbl_fn_80703610_0000019C
     lwz r0, 0x4(r3)
@@ -240,7 +240,7 @@ lbl_fn_80703610_00000150:
     stw r0, 0x4(r3)
     bne lbl_fn_80703610_0000019C
     mr r3, r31
-    bl fn_806FE840
+    bl net_http_initConnection
     addi r4, r1, 0x10
     bl fn_806D6560
 lbl_fn_80703610_0000019C:
@@ -264,9 +264,9 @@ lbl_fn_80703610_000001D4:
     lwz r0, 0x84(r29)
     mr r3, r31
     stw r0, 0x8(r1)
-    bl fn_806FE840
+    bl net_http_initConnection
     addi r4, r1, 0x8
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     beq lbl_fn_80703610_00000214
     lwz r0, 0x4(r3)
@@ -274,7 +274,7 @@ lbl_fn_80703610_000001D4:
     stw r0, 0x4(r3)
     bne lbl_fn_80703610_00000214
     mr r3, r31
-    bl fn_806FE840
+    bl net_http_initConnection
     addi r4, r1, 0x8
     bl fn_806D6560
 lbl_fn_80703610_00000214:
@@ -372,7 +372,7 @@ lbl_fn_80703900_00000340:
 lbl_fn_80703900_00000354:
     addi r0, r31, 0x9
     clrlwi r3, r0, 16
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0xe(r1)
     addi r3, r1, 0x10
     addi r4, r1, 0xe
@@ -793,7 +793,7 @@ asm void fn_80703F30(void)
     mr r30, r3
     beq lbl_fn_80703F30_00000960
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
     cmpwi r31, 0x0
     ble lbl_fn_80703F30_00000960
     mr r3, r30
@@ -860,7 +860,7 @@ asm void fn_80704000(void)
     addic. r3, r30, 0x8
     beq lbl_fn_80704000_00000A40
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_80704000_00000A40:
     cmpwi r31, 0x0
     ble lbl_fn_80704000_00000A50
@@ -1342,7 +1342,7 @@ asm void fn_807046B0(void)
     stw r0, 0x8(r1)
     addi r3, r29, 0x8
     addi r4, r1, 0x8
-    bl fn_807252A0
+    bl net_listInsertNode
     mr r3, r31
     bl OSRestoreInterrupts
     lwz r0, 0x24(r1)
@@ -1369,7 +1369,7 @@ asm void fn_80704720(void)
     mr r31, r3
     mr r4, r30
     addi r3, r29, 0x8
-    bl fn_807252D0
+    bl net_listRemoveNode
     mr r3, r31
     bl OSRestoreInterrupts
     lwz r0, 0x24(r1)
@@ -1756,7 +1756,7 @@ lbl_fn_80704AD0_00001678:
     mr r3, r27
     addi r4, r1, 0x8
     addi r5, r31, 0x4
-    bl fn_807252A0
+    bl net_listInsertNode
     mr r3, r28
     bl OSRestoreInterrupts
     li r3, 0x1

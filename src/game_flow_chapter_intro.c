@@ -14,9 +14,9 @@ extern void ui_destroyWidget(void);
 extern void fn_80051C78(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
-extern void fn_800CB58C(void);
-extern void fn_8014EEC4(void);
-extern void fn_8015EB2C(void);
+extern void morph_hasActiveWeight(void);
+extern void dialog_activateChoiceWindow(void);
+extern void party_evalFormationState(void);
 extern void fn_8015EFAC(void);
 extern void battle_canTargetActor(void);
 extern void fn_80178668(void);
@@ -35,7 +35,7 @@ extern void fn_803BD2B0(void);
 extern void fn_803BD49C(void);
 extern void fn_803E9608(void);
 extern void fn_803EBA54(void);
-extern void fn_804439FC(void);
+extern void gmk_registerSlot(void);
 extern void net_getPacketManager(void);
 extern void fn_804B6204(void);
 extern void fn_804B671C(void);
@@ -44,7 +44,7 @@ extern void fn_804DF4BC(void);
 extern void fn_804E651C(void);
 extern void fn_804EAA88(void);
 extern void fn_804FB224(void);
-extern void fn_8050128C(void);
+extern void net_isMessageStateActive(void);
 extern void fn_80502730(void);
 extern void fn_80502874(void);
 extern void fn_80506560(void);
@@ -1199,7 +1199,7 @@ lbl_fn_804E4EB4_00000E60:
     andc r0, r0, r4
     srawi r0, r0, 31
     and r4, r4, r0
-    bl fn_8050128C
+    bl net_isMessageStateActive
     lwz r0, 0x540(r15)
     cmpwi r0, 0x2
     beq lbl_fn_804E4EB4_00000FB0
@@ -1656,7 +1656,7 @@ lbl_fn_804E4EB4_000014F4:
     ori r0, r0, 0x4
     stw r0, 0x54c(r3)
     lwz r3, 0x0(r23)
-    bl fn_8014EEC4
+    bl dialog_activateChoiceWindow
     lwz r3, 0x0(r23)
     li r4, 0x1
     stw r28, 0xd18(r3)
@@ -1692,7 +1692,7 @@ lbl_fn_804E4EB4_000014F4:
     li r8, 0x0
     li r9, 0x1
     li r10, 0x1
-    bl fn_804439FC
+    bl gmk_registerSlot
     lwz r3, lbl_8087F4F0
     li r4, 0x70
     li r5, 0x63
@@ -1701,7 +1701,7 @@ lbl_fn_804E4EB4_000014F4:
     li r8, 0x0
     li r9, 0x1
     li r10, 0x1
-    bl fn_804439FC
+    bl gmk_registerSlot
     lwz r3, lbl_8087F610
     lwz r0, 0x50c(r3)
     cmpwi r0, 0x0
@@ -2178,7 +2178,7 @@ lbl_fn_804E5BC8_00001C1C:
     cmplwi r0, 0x20
     bne lbl_fn_804E5BC8_00001C68
     mr r3, r18
-    bl fn_8015EB2C
+    bl party_evalFormationState
     cmpwi r3, 0x0
     beq lbl_fn_804E5BC8_00001C68
     lwz r0, 0x9f8(r18)
@@ -2335,7 +2335,7 @@ lbl_fn_804E5BC8_00001E34:
     cmpwi r3, 0x0
     beq lbl_fn_804E5BC8_00001F10
     addi r3, r27, 0x2b74
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     bne lbl_fn_804E5BC8_00001F10
     bl rand

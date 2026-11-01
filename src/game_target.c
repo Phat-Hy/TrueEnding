@@ -47,7 +47,7 @@ void fn_80092F90(void);
 void fn_80093014(void);
 void fn_8009303C(void);
 void fn_80093158(void);
-void fn_8009373C(void);
+void target_findEntryByName(void);
 void fn_800937E8(void);
 void fn_8009385C(void);
 void fn_80093A1C(void);
@@ -64,7 +64,7 @@ void fn_80093F58(void);
 void fn_80094420(void);
 void fn_80094778(void);
 void fn_800948F0(void);
-void fn_80094958(void);
+void target_registerCandidate(void);
 void fn_80094B6C(void);
 void fn_80094BD8(void);
 void fn_80094D88(void);
@@ -706,7 +706,7 @@ lbl_fn_80093158_00000860:
     blr
 }
 
-asm void fn_8009373C(void)
+asm void target_findEntryByName(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -720,38 +720,38 @@ asm void fn_8009373C(void)
     bl str_findChar
     lwz r5, 0x16c(r30)
     cmpwi r5, 0x0
-    bne lbl_fn_8009373C_000008AC
+    bne lbl_target_findEntryByName_000008AC
     li r6, -0x1
-    b lbl_fn_8009373C_000008EC
-lbl_fn_8009373C_000008AC:
+    b lbl_target_findEntryByName_000008EC
+lbl_target_findEntryByName_000008AC:
     lwz r0, 0x44(r5)
     li r6, 0x0
     li r7, 0x0
     mtctr r0
     cmpwi r0, 0x0
-    ble lbl_fn_8009373C_000008E8
-lbl_fn_8009373C_000008C4:
+    ble lbl_target_findEntryByName_000008E8
+lbl_target_findEntryByName_000008C4:
     lwz r4, 0x48(r5)
     lwzx r4, r4, r7
     lwz r0, 0x14(r4)
     cmplw r3, r0
-    bne lbl_fn_8009373C_000008DC
-    b lbl_fn_8009373C_000008EC
-lbl_fn_8009373C_000008DC:
+    bne lbl_target_findEntryByName_000008DC
+    b lbl_target_findEntryByName_000008EC
+lbl_target_findEntryByName_000008DC:
     addi r7, r7, 0x4
     addi r6, r6, 0x1
-    bdnz lbl_fn_8009373C_000008C4
-lbl_fn_8009373C_000008E8:
+    bdnz lbl_target_findEntryByName_000008C4
+lbl_target_findEntryByName_000008E8:
     li r6, -0x1
-lbl_fn_8009373C_000008EC:
+lbl_target_findEntryByName_000008EC:
     cmpwi r6, 0x0
-    blt lbl_fn_8009373C_00000908
+    blt lbl_target_findEntryByName_00000908
     neg r0, r31
     lwz r3, 0xf0(r30)
     or r0, r0, r31
     srwi r0, r0, 31
     stbx r0, r3, r6
-lbl_fn_8009373C_00000908:
+lbl_target_findEntryByName_00000908:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -2094,7 +2094,7 @@ lbl_fn_800948F0_00001A7C:
     blr
 }
 
-asm void fn_80094958(void)
+asm void target_registerCandidate(void)
 {
     nofralloc
     stwu r1, -0xb0(r1)
@@ -2111,13 +2111,13 @@ asm void fn_80094958(void)
     lfs f0, lbl_80880C14
     li r5, 0x0
     li r4, 0x0
-    b lbl_fn_80094958_00001C80
-lbl_fn_80094958_00001ACC:
+    b lbl_target_registerCandidate_00001C80
+lbl_target_registerCandidate_00001ACC:
     lwz r6, 0x108(r28)
     lwzx r6, r6, r4
     lwz r0, 0x0(r6)
     cmplw r0, r3
-    bne lbl_fn_80094958_00001C78
+    bne lbl_target_registerCandidate_00001C78
     lfs f1, 0x0(r29)
     lfs f3, 0x4(r29)
     fmuls f6, f0, f1
@@ -2220,13 +2220,13 @@ lbl_fn_80094958_00001ACC:
     stb r0, 0x1e(r6)
     lbz r0, 0x17(r1)
     stb r0, 0x1f(r6)
-lbl_fn_80094958_00001C78:
+lbl_target_registerCandidate_00001C78:
     addi r4, r4, 0x4
     addi r5, r5, 0x1
-lbl_fn_80094958_00001C80:
+lbl_target_registerCandidate_00001C80:
     lwz r0, 0x104(r28)
     cmplw r5, r0
-    blt lbl_fn_80094958_00001ACC
+    blt lbl_target_registerCandidate_00001ACC
     addi r11, r1, 0xb0
     bl _restgpr_23
     lwz r0, 0xb4(r1)

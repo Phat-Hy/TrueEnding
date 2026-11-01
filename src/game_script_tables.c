@@ -33,7 +33,7 @@ extern void inventory_applyItemStats(void);
 extern void fn_80152D10(void);
 extern void equip_applyToCharacter(void);
 extern void party_configureMemberSlot(void);
-extern void fn_8015EB2C(void);
+extern void party_evalFormationState(void);
 extern void battle_applyStatusEffect(void);
 extern void battle_awardExp(void);
 extern void battle_generateLootDrops(void);
@@ -1197,7 +1197,7 @@ asm void fn_8024A4A0(void)
     stw r0, 0x34(r1)
     stw r31, 0x2c(r1)
     mr r31, r3
-    bl fn_8015EB2C
+    bl party_evalFormationState
     cmpwi r3, 0x0
     bne lbl_fn_8024A4A0_00000F58
     mr r3, r31

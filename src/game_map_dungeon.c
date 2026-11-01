@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_24(void);
 extern void _savegpr_27(void);
 extern void collision_testLineSegment(void);
-extern void fn_80063764(void);
+extern void magic_updateCircleArea(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
@@ -18,10 +18,10 @@ extern void fn_80128508(void);
 extern void fn_80128A30(void);
 extern void fn_80129954(void);
 extern void fn_80129978(void);
-extern void fn_80129A48(void);
+extern void path_resetWaypointVelocity(void);
 extern void npc_calcTargetDistance(void);
 extern void party_configureMemberSlot(void);
-extern void fn_80161570(void);
+extern void party_updateMemberCoords(void);
 extern void battle_applyStatusEffect(void);
 extern void fn_80182874(void);
 extern void fn_80183860(void);
@@ -484,7 +484,7 @@ lbl_fn_8017E9D8_000005B4:
     li r5, 0x0
     fmr f2, f1
     li r6, 0x0
-    bl fn_80161570
+    bl party_updateMemberCoords
     lfs f0, lbl_80881BC8
     stfs f0, 0x2e8(r31)
     b lbl_fn_8017E9D8_000006B4
@@ -861,7 +861,7 @@ asm void fn_8017F4A0(void)
     mr r31, r4
     stw r28, 0x14d4(r3)
     addi r3, r3, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     cmpwi r31, 0x4
     beq lbl_fn_8017F4A0_00000B6C
     cmpwi r31, 0x5
@@ -1461,14 +1461,14 @@ lbl_fn_8017FBEC_0000129C:
     lfs f1, lbl_80881B78
     addi r5, r1, 0xac
     li r6, -0x100
-    bl fn_80063764
+    bl magic_updateCircleArea
     lis r6, 0xff4d
     lwz r3, lbl_8087EEB0
     lfs f1, lbl_80881B78
     addi r4, r1, 0xac
     addi r5, r1, 0x50
     addi r6, r6, 0x4d00
-    bl fn_80063764
+    bl magic_updateCircleArea
     b lbl_fn_8017FBEC_00001474
 lbl_fn_8017FBEC_00001458:
     lis r6, 0xff4d
@@ -1477,7 +1477,7 @@ lbl_fn_8017FBEC_00001458:
     addi r4, r1, 0x5c
     addi r5, r1, 0x50
     addi r6, r6, 0x4d00
-    bl fn_80063764
+    bl magic_updateCircleArea
 lbl_fn_8017FBEC_00001474:
     cmpwi r27, 0x0
     beq lbl_fn_8017FBEC_000014D4

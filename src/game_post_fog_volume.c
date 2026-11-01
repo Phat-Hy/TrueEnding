@@ -20,7 +20,7 @@ extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_800E0AA8(void);
+extern void particle_getEmitterContext(void);
 extern void fn_800E0AB0(void);
 extern void cam_findTargetIndex(void);
 extern void cam_destroyMsgHandle(void);
@@ -28,7 +28,7 @@ extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
 extern void npc_getDialogController(void);
-extern void fn_801A03E0(void);
+extern void bgm_getGlobalManager(void);
 extern void fn_8020A81C(void);
 extern void res_MsgHandle_ctor(void);
 extern void res_Resource_destructor(void);
@@ -51,7 +51,7 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_805A3D00(void);
+extern void rand_Mersenne_init(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void strncmp(void);
@@ -350,7 +350,7 @@ lbl_fn_802D710C_00000330:
 lbl_fn_802D710C_00000350:
     mr r3, r30
     li r4, 0x0
-    bl fn_805A3D00
+    bl rand_Mersenne_init
     cmpwi r31, 0x0
     ble lbl_fn_802D710C_0000036C
     mr r3, r30
@@ -1308,7 +1308,7 @@ lbl_fn_802D7E80_00001118:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r28, r3
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     mr r4, r28
     bl skill_findNodeById
     cmpwi r3, 0x0
@@ -1343,7 +1343,7 @@ lbl_fn_802D7E80_00001194:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r28, r3
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     mr r4, r28
     bl skill_findNodeById
     cmpwi r3, 0x0
@@ -1535,7 +1535,7 @@ lbl_fn_802D7E80_00001440:
     addi r28, r28, 0x1
 lbl_fn_802D7E80_0000145C:
     addi r3, r31, 0x1678
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     cmplw r28, r3
     blt lbl_fn_802D7E80_00001440
     mr r3, r31

@@ -18,7 +18,7 @@ void GXSetVtxDesc(void);
 void fn_806130F0(void);
 void __GXSetVtxDescs(void);
 void fn_806133B0(void);
-void fn_806134E0(void);
+void __GXInitVtxDesc(void);
 void GXSetVtxAttrFmt(void);
 void fn_806136C0(void);
 void fn_80613890(void);
@@ -469,7 +469,7 @@ lbl_fn_806133B0_00000650:
     blr
 }
 
-asm void fn_806134E0(void)
+asm void __GXInitVtxDesc(void)
 {
     nofralloc
     lwz r5, __GXData

@@ -13,8 +13,8 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void msg_getMessageById(void);
 extern void hurtbox_testCollisionLayer(void);
-extern void fn_8012476C(void);
-extern void fn_8012DF7C(void);
+extern void player_testStatusCondition(void);
+extern void enemy_calcAttackTrajectory(void);
 extern void quest_getRewardItemSlot(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
@@ -395,7 +395,7 @@ lbl_fn_8019DBA4_0000036C:
     li r6, 0x0
     addi r3, r3, 0x7d4
     neg r4, r0
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
     lwz r3, 0x1c(r31)
     li r4, 0x0
     bl quest_getRewardItemSlot
@@ -448,7 +448,7 @@ lbl_fn_8019DBA4_00000508:
     stw r0, 0x728(r3)
     lwz r3, lbl_8087F0A8
     addi r3, r3, 0x48c
-    bl fn_8012476C
+    bl player_testStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_8019DBA4_00000548
     lwz r3, 0x14(r31)

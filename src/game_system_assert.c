@@ -13,7 +13,7 @@ extern void talk_copyUtf16String(void);
 extern void fn_8005BFCC(void);
 extern void fn_8005C1F8(void);
 extern void fn_8006BA8C(void);
-extern void fn_8006BB6C(void);
+extern void boss_triggerEventAction(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -63,7 +63,7 @@ extern void fn_8021ED08(void);
 extern void fn_8021F100(void);
 extern void fn_8021F47C(void);
 extern void world_getGlobalFlag(void);
-extern void fn_8046DC5C(void);
+extern void boss_loadWeakpointResource(void);
 extern void boss_bindArenaInteractions(void);
 extern void printf(void);
 extern void strncpy(void);
@@ -125,7 +125,7 @@ extern u32 lbl_80882D80;
 /* Function declarations */
 void fn_8020685C(void);
 void fn_8020689C(void);
-void fn_80206B14(void);
+void sys_findModuleById(void);
 void fn_80206B68(void);
 void fn_80206B70(void);
 void game_initGlobalDatabases(void);
@@ -336,7 +336,7 @@ lbl_fn_8020689C_00000288:
     bne lbl_fn_8020689C_000001E0
     mr r3, r31
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
 lbl_fn_8020689C_000002A4:
     lmw r27, 0xc6c(r1)
     lwz r0, 0xc84(r1)
@@ -345,7 +345,7 @@ lbl_fn_8020689C_000002A4:
     blr
 }
 
-asm void fn_80206B14(void)
+asm void sys_findModuleById(void)
 {
     nofralloc
     lwz r6, lbl_8087F160
@@ -354,22 +354,22 @@ asm void fn_80206B14(void)
     mr r5, r6
     mtctr r0
     cmplwi r0, 0x0
-    ble lbl_fn_80206B14_00000304
-lbl_fn_80206B14_000002D4:
+    ble lbl_sys_findModuleById_00000304
+lbl_sys_findModuleById_000002D4:
     lwz r0, 0x78(r5)
     cmpw r3, r0
-    bne lbl_fn_80206B14_000002F8
+    bne lbl_sys_findModuleById_000002F8
     lwz r0, 0x80(r5)
     cmpw r4, r0
-    bne lbl_fn_80206B14_000002F8
+    bne lbl_sys_findModuleById_000002F8
     mulli r0, r7, 0x130
     add r3, r6, r0
     blr
-lbl_fn_80206B14_000002F8:
+lbl_sys_findModuleById_000002F8:
     addi r5, r5, 0x130
     addi r7, r7, 0x1
-    bdnz lbl_fn_80206B14_000002D4
-lbl_fn_80206B14_00000304:
+    bdnz lbl_sys_findModuleById_000002D4
+lbl_sys_findModuleById_00000304:
     li r3, 0x0
     blr
 }
@@ -688,7 +688,7 @@ asm void weaponEffect_loadCSV(void)
     addi r5, r1, 0x8
     lwz r4, lbl_80882D5C
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lis r4, lbl_807772D0@ha
     mr r29, r3
     addi r4, r4, lbl_807772D0@l
@@ -964,7 +964,7 @@ asm void fn_80207310(void)
     addi r5, r1, 0x14
     lwz r4, lbl_80882D60
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lis r4, lbl_807772D0@ha
     li r0, 0x0
     addi r4, r4, lbl_807772D0@l
@@ -1376,7 +1376,7 @@ asm void fn_802078C4(void)
     li r29, 0x0
     stw r29, 0x8(r1)
     lwz r3, lbl_8087F518
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lis r4, lbl_807772D0@ha
     mr r25, r3
     addi r4, r4, lbl_807772D0@l
@@ -1697,7 +1697,7 @@ asm void fn_80207CC0(void)
     addi r5, r1, 0x8
     lwz r4, lbl_80882D70
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r12, 0xc(r1)
     mr r28, r3
     mr r4, r28
@@ -1992,7 +1992,7 @@ asm void fn_80208144(void)
     addi r5, r1, 0x8
     lwz r4, lbl_80882D80
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lis r4, lbl_807772D0@ha
     li r0, 0x0
     addi r4, r4, lbl_807772D0@l

@@ -7,8 +7,8 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void boss_decodePhaseBitfield(void);
-extern void fn_8006B2D8(void);
-extern void fn_8006BB6C(void);
+extern void boss_parseStateCondition(void);
+extern void boss_triggerEventAction(void);
 extern void fn_8006D008(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
@@ -110,7 +110,7 @@ asm void fn_80575FD0(void)
     bne lbl_fn_80575FD0_000000A0
     lwz r3, 0x1d0(r3)
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
     li r0, 0x0
     stw r0, 0x1d0(r31)
     stw r0, 0x1cc(r31)
@@ -228,7 +228,7 @@ lbl_fn_80576034_000001C8:
     bl boss_decodePhaseBitfield
     addi r3, r1, 0x1c
     addi r4, r1, 0x28
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lis r5, lbl_80760D70@ha
     addi r3, r1, 0x10
     addi r5, r5, lbl_80760D70@l

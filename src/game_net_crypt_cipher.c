@@ -21,14 +21,14 @@ extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void save_validateHeader(void);
 extern void save_parseSlotHeader(void);
-extern void fn_801F4998(void);
-extern void fn_801F4AA0(void);
+extern void save_formatSlotMetadata(void);
+extern void save_findSlotTask(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_803E9608(void);
 extern void fn_804EB484(void);
-extern void fn_804EB874(void);
+extern void net_getLocalPlayerAid(void);
 extern void fn_805075C8(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -393,29 +393,29 @@ lbl_fn_804B49E0_000003AC:
     addi r4, r30, 0x4bc
     add r5, r28, r31
     lwz r5, 0x50(r5)
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     add r4, r28, r31
     lwz r3, 0xb8(r29)
     lwz r5, 0x54(r4)
     addi r4, r30, 0x4ca
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     add r31, r28, r31
     lwz r3, 0xb8(r29)
     lwz r5, 0x58(r31)
     addi r4, r30, 0x4d8
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r3, 0xb8(r29)
     addi r4, r30, 0x4dd
     lwz r5, 0x58(r31)
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r3, 0xb8(r29)
     addi r4, r30, 0x4e2
     lwz r5, 0x58(r31)
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r3, 0xb8(r29)
     addi r4, r30, 0x4e7
     lwz r5, 0x58(r31)
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -1629,11 +1629,11 @@ asm void fn_804B5B10(void)
     stw r0, 0x98(r1)
     lwz r3, lbl_8087F610
     stw r0, 0xa0(r1)
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     cmpwi r3, 0x0
     beq lbl_fn_804B5B10_00001B2C
     lwz r3, lbl_8087F610
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     lwz r5, lbl_8087F610
     lwz r0, 0xd0(r3)
     lwz r3, 0x540(r5)
@@ -1782,7 +1782,7 @@ lbl_fn_804B5B10_0000173C:
     add r25, r31, r18
     addi r4, r27, 0x14a
     lwz r3, 0x50(r25)
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     cmpwi r22, 0x1
     lwz r3, 0x50(r25)
     addi r4, r27, 0x155
@@ -1790,7 +1790,7 @@ lbl_fn_804B5B10_0000173C:
     bne lbl_fn_804B5B10_00001764
     subi r5, r29, 0x61ca
 lbl_fn_804B5B10_00001764:
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r4, 0x50(r25)
     addi r3, r27, 0x160
     lwz r0, 0x38(r4)
@@ -2033,7 +2033,7 @@ lbl_fn_804B5B10_00001AB0:
     lwz r3, 0x70(r25)
     fmr f3, f2
     lfs f1, lbl_80887388
-    bl fn_801F4AA0
+    bl save_findSlotTask
     b lbl_fn_804B5B10_00001B0C
 lbl_fn_804B5B10_00001AF4:
     lwz r3, 0x70(r25)
@@ -2041,7 +2041,7 @@ lbl_fn_804B5B10_00001AF4:
     lfs f1, lbl_8088738C
     lfs f2, lbl_80887390
     lfs f3, lbl_80887388
-    bl fn_801F4AA0
+    bl save_findSlotTask
 lbl_fn_804B5B10_00001B0C:
     addi r20, r20, 0x1
     addi r22, r22, 0xd5c

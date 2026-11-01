@@ -14,7 +14,7 @@ extern void str_getData(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void boss_decodePhaseBitfield(void);
-extern void fn_8006B2D8(void);
+extern void boss_parseStateCondition(void);
 extern void fn_80079BC8(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -22,7 +22,7 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
-extern void fn_8008B964(void);
+extern void sys_getMainManager(void);
 extern void fn_8008E2DC(void);
 extern void fn_800B2180(void);
 extern void fn_800BB4FC(void);
@@ -32,7 +32,7 @@ extern void fn_800BBEFC(void);
 extern void fn_800BC194(void);
 extern void fn_800C1A1C(void);
 extern void fn_800C23E8(void);
-extern void fn_800C2448(void);
+extern void skeleton_getBoneByIndex(void);
 extern void fn_800C2E30(void);
 extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
@@ -237,7 +237,7 @@ lbl_fn_80494354_00000194:
     addi r3, r28, 0x28
     addi r4, r1, 0x98
     bl fn_804949D4
-    bl fn_8008B964
+    bl sys_getMainManager
     bl fn_804923AC
     bl fn_8047C770
     mr r31, r3
@@ -245,7 +245,7 @@ lbl_fn_80494354_00000194:
     bl fn_8047C770
     mr r4, r31
     bl fn_8047C850
-    bl fn_8008B964
+    bl sys_getMainManager
     bl fn_804923AC
     bl fn_801856A4
     mr r31, r3
@@ -253,7 +253,7 @@ lbl_fn_80494354_00000194:
     bl fn_801856A4
     mr r4, r31
     bl fn_80042108
-    bl fn_8008B964
+    bl sys_getMainManager
     bl fn_804848C4
     mr r4, r3
     addi r3, r1, 0xb0
@@ -369,7 +369,7 @@ lbl_fn_80494354_000003F0:
     bl boss_decodePhaseBitfield
     addi r3, r1, 0x30
     addi r4, r1, 0x3c
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     addi r3, r28, 0x40
     addi r4, r1, 0x30
     bl fn_801207D4
@@ -426,7 +426,7 @@ lbl_fn_80494354_000004B0:
     bl boss_decodePhaseBitfield
     addi r3, r1, 0xc
     addi r4, r1, 0x18
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     addi r3, r1, 0xc
     bl str_getData
     bl str_findChar
@@ -1959,7 +1959,7 @@ lbl_fn_80495788_00001AB8:
     mr r4, r23
     lwzx r3, r5, r26
     addi r3, r3, 0x4c
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     mr r4, r24
     bl fn_80079BC8
     addi r23, r23, 0x1

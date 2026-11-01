@@ -9,7 +9,7 @@ extern void vec3_copy(void);
 extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011220(void);
+extern void math_fabsf(void);
 extern void mtx_multVec(void);
 extern void vec3_sub(void);
 extern void vec3_add(void);
@@ -23,7 +23,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void cam_findTargetIndex(void);
 extern void proj_getMatrix(void);
-extern void fn_800F52F8(void);
+extern void proj_getGlobalManager(void);
 extern void vec3_scale(void);
 extern void fn_800F7F60(void);
 extern void vec3_normalize(void);
@@ -31,7 +31,7 @@ extern void viewport_getNextSequenceId(void);
 extern void fn_80109950(void);
 extern void fn_8010C948(void);
 extern void phys_scaleGravity(void);
-extern void fn_801162A0(void);
+extern void vec3_sqMag(void);
 extern void fn_8011BF3C(void);
 extern void equip_getGlobalManager(void);
 extern void f32_abs(void);
@@ -52,7 +52,7 @@ extern void fn_80139F24(void);
 extern void fn_80139F2C(void);
 extern void fn_80139F3C(void);
 extern void fn_80139F58(void);
-extern void fn_8013A13C(void);
+extern void mtx_rotYRad(void);
 extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_8013C394(void);
@@ -73,7 +73,7 @@ extern void fn_8013C458(void);
 extern void fn_8013C460(void);
 extern void fn_8013C470(void);
 extern void fn_8013C478(void);
-extern void fn_8013C480(void);
+extern void npc_isInteractionReady(void);
 extern void npc_getDialogController(void);
 extern void fn_8013C50C(void);
 extern void fn_8013C514(void);
@@ -283,8 +283,8 @@ lbl_fn_8013A4E8_00000214:
     addi r5, r27, 0x528
     bl vec3_sub
     addi r3, r1, 0x378
-    bl fn_801162A0
-    bl fn_80011220
+    bl vec3_sqMag
+    bl math_fabsf
     lfs f0, lbl_808819C4
     fcmpo cr0, f1, f0
     blt lbl_fn_8013A4E8_00000264
@@ -398,7 +398,7 @@ lbl_fn_8013A4E8_000003D0:
     bl fn_8013C404
     cmpwi r3, 0x0
     beq lbl_fn_8013A4E8_0000040C
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_8013C41C
     cmpwi r3, 0x0
     beq lbl_fn_8013A4E8_0000040C
@@ -554,7 +554,7 @@ lbl_fn_8013A4E8_000005EC:
     bl vec3_copy
     b lbl_fn_8013A4E8_00001E78
 lbl_fn_8013A4E8_00000620:
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_8013C434
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
@@ -674,7 +674,7 @@ lbl_fn_8013A4E8_000007C8:
     addi r4, r1, 0x150
     bl vec3_copy
 lbl_fn_8013A4E8_000007E0:
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_8013C434
     lfs f0, 0x18(r3)
     stfs f0, 0x0(r30)
@@ -862,8 +862,8 @@ lbl_fn_8013A4E8_00000A74:
     addi r5, r27, 0x528
     bl vec3_sub
     addi r3, r1, 0x318
-    bl fn_801162A0
-    bl fn_80011220
+    bl vec3_sqMag
+    bl math_fabsf
     lfs f0, lbl_808819C4
     fcmpo cr0, f1, f0
     blt lbl_fn_8013A4E8_00000ACC
@@ -1227,7 +1227,7 @@ lbl_fn_8013A4E8_00000FA4:
     addi r3, r1, 0x2dc
     bl vec3_assign
     addi r3, r1, 0x2dc
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_8088196C
     fcmpo cr0, f1, f0
     ble lbl_fn_8013A4E8_00001000
@@ -1252,7 +1252,7 @@ lbl_fn_8013A4E8_00001000:
     addi r5, r27, 0xd50
     bl vec3_sub
     addi r3, r1, 0xa8
-    bl fn_801162A0
+    bl vec3_sqMag
     fmuls f0, f31, f31
     fcmpo cr0, f1, f0
     bge lbl_fn_8013A4E8_0000103C
@@ -1266,7 +1266,7 @@ lbl_fn_8013A4E8_0000103C:
     lwz r3, 0xd24(r27)
     cmpwi r3, 0x0
     beq lbl_fn_8013A4E8_00001060
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     bne lbl_fn_8013A4E8_0000106C
 lbl_fn_8013A4E8_00001060:
@@ -1303,8 +1303,8 @@ lbl_fn_8013A4E8_00001084:
     addi r5, r27, 0x528
     bl vec3_sub
     addi r3, r1, 0x2d0
-    bl fn_801162A0
-    bl fn_80011220
+    bl vec3_sqMag
+    bl math_fabsf
     lfs f0, lbl_808819C4
     fcmpo cr0, f1, f0
     blt lbl_fn_8013A4E8_000010F8
@@ -1331,7 +1331,7 @@ lbl_fn_8013A4E8_000010F8:
     bl phys_scaleGravity
     fmuls f1, f1, f31
     addi r3, r1, 0x390
-    bl fn_8013A13C
+    bl mtx_rotYRad
     addi r3, r1, 0x2d0
     addi r4, r1, 0x390
     bl mtx_multVec
@@ -1430,8 +1430,8 @@ lbl_fn_8013A4E8_0000127C:
     addi r3, r1, 0x2c4
     bl vec3_assign
     addi r3, r1, 0x2c4
-    bl fn_801162A0
-    bl fn_80011220
+    bl vec3_sqMag
+    bl math_fabsf
     lfs f0, lbl_808819C4
     fcmpo cr0, f1, f0
     blt lbl_fn_8013A4E8_000012E4
@@ -1465,7 +1465,7 @@ lbl_fn_8013A4E8_00001300:
     lwz r3, 0xd64(r27)
     cmpwi r3, 0x0
     beq lbl_fn_8013A4E8_000014B8
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_8013A4E8_000014B8
     lwz r3, 0xd64(r27)
@@ -1485,7 +1485,7 @@ lbl_fn_8013A4E8_00001300:
     addi r3, r1, 0x2b8
     bl vec3_assign
     addi r3, r1, 0x2b8
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_808819F4
     fcmpo cr0, f1, f0
     ble lbl_fn_8013A4E8_00001450
@@ -1586,7 +1586,7 @@ lbl_fn_8013A4E8_000014D0:
     lwz r3, 0xd64(r27)
     cmpwi r3, 0x0
     beq lbl_fn_8013A4E8_00001574
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_8013A4E8_00001574
     mr r3, r31
@@ -1597,7 +1597,7 @@ lbl_fn_8013A4E8_000014D0:
     addi r3, r1, 0x2ac
     bl vec3_assign
     addi r3, r1, 0x2ac
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_808819F4
     fcmpo cr0, f1, f0
     ble lbl_fn_8013A4E8_0000154C
@@ -1724,13 +1724,13 @@ lbl_fn_8013A4E8_000016CC:
     mr r4, r3
     addi r3, r1, 0x288
     bl vec3_assign
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_8013C50C
     lfs f0, 0x0(r30)
     addi r3, r1, 0x288
     fmuls f0, f0, f1
     stfs f0, 0x0(r30)
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_808819F4
     fcmpo cr0, f1, f0
     ble lbl_fn_8013A4E8_00001744
@@ -1798,7 +1798,7 @@ lbl_fn_8013A4E8_000017E4:
     addi r3, r1, 0x270
     bl vec3_assign
     addi r3, r1, 0x270
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_808819F4
     fcmpo cr0, f1, f0
     ble lbl_fn_8013A4E8_00001848
@@ -1897,7 +1897,7 @@ lbl_fn_8013A4E8_00001970:
     addi r5, r27, 0x528
     bl vec3_sub
     addi r3, r1, 0x264
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_8088196C
     fmr f31, f1
     fcmpo cr0, f1, f0
@@ -1948,7 +1948,7 @@ lbl_fn_8013A4E8_00001A2C:
     addi r5, r27, 0x528
     bl vec3_sub
     addi r3, r1, 0x258
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_8088196C
     fmr f31, f1
     fcmpo cr0, f1, f0
@@ -2044,7 +2044,7 @@ lbl_fn_8013A4E8_00001B84:
     addi r3, r1, 0x24c
     bl vec3_assign
     addi r3, r1, 0x24c
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_808819F4
     fcmpo cr0, f1, f0
     ble lbl_fn_8013A4E8_00001BC4

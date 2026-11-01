@@ -23,7 +23,7 @@ extern void enemy_updateCombatBehavior(void);
 extern void npc_initScriptContext(void);
 extern void npc_getPosition(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_801426A4(void);
+extern void quest_evaluateMilestoneData(void);
 extern void actor_setState(void);
 extern void battle_resolveAggroHierarchy(void);
 extern void battle_updateTargetAggro(void);
@@ -888,7 +888,7 @@ lbl_fn_8027EB14_00000B94:
     mr r3, r31
     addi r4, r1, 0x1ac
     fmuls f2, f0, f29
-    bl fn_801426A4
+    bl quest_evaluateMilestoneData
     b lbl_fn_8027EB14_00000BD4
 lbl_fn_8027EB14_00000BB8:
     lfs f0, 0x568(r31)

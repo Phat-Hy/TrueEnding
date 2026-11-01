@@ -24,14 +24,14 @@ extern void fn_800E9ED8(void);
 extern void fn_800EFC64(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
-extern void fn_80103F60(void);
+extern void bsp_findLeafNode(void);
 extern void fn_80108378(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_8012B3E8(void);
-extern void fn_8012B988(void);
-extern void fn_80133130(void);
+extern void enemy_updateNavSteering(void);
+extern void boss_setPartCollisionFlags(void);
 extern void boss_updatePhaseState(void);
 extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
@@ -42,7 +42,7 @@ extern void equip_applyToCharacter(void);
 extern void fn_80155A88(void);
 extern void fn_801561E4(void);
 extern void fn_80158EF0(void);
-extern void fn_80161570(void);
+extern void party_updateMemberCoords(void);
 extern void fn_801644D4(void);
 extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
@@ -860,7 +860,7 @@ lbl_fn_80250ECC_00000A34:
     addi r3, r30, 0x7d4
     bl fn_8012B3E8
     addi r3, r30, 0x7d4
-    bl fn_8012B988
+    bl enemy_updateNavSteering
     lwz r6, 0x5c(r30)
     mr r3, r30
     li r4, 0x0
@@ -1008,7 +1008,7 @@ lbl_fn_80251344_00000BF8:
     li r5, 0x0
     fmr f2, f1
     li r6, 0x0
-    bl fn_80161570
+    bl party_updateMemberCoords
 lbl_fn_80251344_00000C64:
     lwz r3, 0x1540(r29)
     li r22, 0x0
@@ -1528,7 +1528,7 @@ lbl_fn_80251344_0000138C:
     li r6, 0x1
     subi r5, r4, 0x3601
     lis r4, 0x20
-    bl fn_80133130
+    bl boss_setPartCollisionFlags
 lbl_fn_80251344_00001400:
     lha r4, 0x1470(r29)
     cmpwi r4, 0x0
@@ -1608,7 +1608,7 @@ lbl_fn_80251344_00001510:
     li r5, 0x0
     fmr f2, f1
     li r6, 0x0
-    bl fn_80161570
+    bl party_updateMemberCoords
     li r0, 0x0
     sth r0, 0x1470(r29)
     b lbl_fn_80251344_00001684
@@ -2329,7 +2329,7 @@ lbl_fn_80251344_00001F68:
 lbl_fn_80251344_00001F9C:
     lwz r3, lbl_8087F048
     mr r4, r29
-    bl fn_80103F60
+    bl bsp_findLeafNode
     cmpwi r3, 0x0
     mr r23, r3
     beq lbl_fn_80251344_00002024

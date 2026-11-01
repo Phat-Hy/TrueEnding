@@ -9,10 +9,10 @@ extern void _savegpr_26(void);
 extern void fn_80010374(void);
 extern void fn_8001296C(void);
 extern void fn_80012AC4(void);
-extern void fn_80051B70(void);
+extern void player_stepMovement(void);
 extern void msg_getMessageById(void);
 extern void fn_800A5584(void);
-extern void fn_800A55D4(void);
+extern void msg_lookupFormattedEntry(void);
 extern void msg_formatWindowLayout(void);
 extern void msg_isWindowActive(void);
 extern void motion_updateFogAdj(void);
@@ -33,7 +33,7 @@ extern void fn_804817D4(void);
 extern void fn_80481800(void);
 extern void fn_80481818(void);
 extern void fn_80531E84(void);
-extern void fn_805381A4(void);
+extern void node_getParentNode(void);
 extern void spectate_getRootNode(void);
 extern void fn_805384D0(void);
 extern void fn_80538DC8(void);
@@ -581,7 +581,7 @@ asm void fn_8055D6B8(void)
     lwz r3, lbl_8087F540
     bl fn_80481818
     mr r3, r31
-    bl fn_805381A4
+    bl node_getParentNode
     lwz r5, 0x30(r31)
     cmpwi r5, 0x0
     ble lbl_fn_8055D6B8_000006F4
@@ -709,7 +709,7 @@ lbl_fn_8055D818_00000878:
     lwz r3, lbl_8087F540
     bl fn_80481818
     mr r3, r29
-    bl fn_805381A4
+    bl node_getParentNode
     mr r30, r3
     mr r3, r29
     bl spectate_getRootNode
@@ -825,7 +825,7 @@ lbl_fn_8055D818_00000974:
     b lbl_fn_8055D818_00000AC4
 lbl_fn_8055D818_00000A0C:
     mr r3, r29
-    bl fn_805381A4
+    bl node_getParentNode
     mr r30, r3
     mr r3, r29
     bl spectate_getRootNode
@@ -857,7 +857,7 @@ lbl_fn_8055D818_00000A0C:
     b lbl_fn_8055D818_00000AC4
 lbl_fn_8055D818_00000A88:
     mr r3, r29
-    bl fn_805381A4
+    bl node_getParentNode
     lwz r3, 0x10(r3)
     li r0, 0x0
     lwz r4, lbl_8087F540
@@ -905,7 +905,7 @@ asm void fn_8055DB04(void)
     lwz r3, lbl_8087F540
     bl fn_80481818
     mr r3, r31
-    bl fn_805381A4
+    bl node_getParentNode
     lwz r0, 0x30(r31)
     cmpwi r0, 0x0
     ble lbl_fn_8055DB04_00000B4C
@@ -934,7 +934,7 @@ lbl_fn_8055DB04_00000B6C:
     b lbl_fn_8055DB04_00000BBC
 lbl_fn_8055DB04_00000B90:
     mr r3, r31
-    bl fn_805381A4
+    bl node_getParentNode
     lwz r0, 0x10(r3)
     li r4, 0x0
     lfs f1, lbl_80887E7C
@@ -1469,7 +1469,7 @@ asm void fn_8055E258(void)
     stw r31, 0xc(r1)
     mr r31, r4
     mr r3, r31
-    bl fn_805381A4
+    bl node_getParentNode
     mr r3, r31
     bl spectate_getRootNode
     lwz r0, 0x30(r31)
@@ -1549,7 +1549,7 @@ asm void fn_8055E354(void)
     cmpwi r5, 0x0
     bne lbl_fn_8055E354_00001504
     mr r3, r31
-    bl fn_805381A4
+    bl node_getParentNode
     mr r3, r31
     bl spectate_getRootNode
     lwz r0, 0x30(r31)
@@ -1626,7 +1626,7 @@ lbl_fn_8055E354_00001460:
     b lbl_fn_8055E354_00001504
 lbl_fn_8055E354_00001474:
     mr r3, r31
-    bl fn_805381A4
+    bl node_getParentNode
     mr r3, r31
     bl spectate_getRootNode
     lwz r0, 0x30(r31)
@@ -1847,7 +1847,7 @@ asm void fn_8055E724(void)
     bl _savegpr_26
     mr r27, r4
     mr r3, r27
-    bl fn_805381A4
+    bl node_getParentNode
     mr r3, r27
     bl spectate_getRootNode
     lwz r5, 0x30(r27)
@@ -2060,7 +2060,7 @@ lbl_fn_8055E724_00001948:
     stfs f4, 0xac(r1)
     stfs f3, 0xb0(r1)
     stfs f0, 0xb4(r1)
-    bl fn_80051B70
+    bl player_stepMovement
     cmpwi r3, 0x0
     bne lbl_fn_8055E724_00001A90
     lwz r3, lbl_8087F540
@@ -2281,7 +2281,7 @@ lbl_fn_8055E724_00001D60:
     bne lbl_fn_8055E724_00001DB8
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     bne lbl_fn_8055E724_00001D8C
     lwz r3, lbl_8087F540

@@ -6,7 +6,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void atn_ColliBase_destructor(void);
-extern void fn_80057F28(void);
+extern void mission_initPathTracker(void);
 extern void mission_updateObjectiveTarget(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
@@ -44,12 +44,12 @@ extern void kpad_testActiveFlags(void);
 extern void fn_80376730(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
-extern void fn_803EC758(void);
+extern void barrier_formatCountdownTimer(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
 extern void barrier_bindFieldAnimation(void);
-extern void fn_803EDB18(void);
-extern void fn_8041D180(void);
+extern void barrier_testFieldCollision(void);
+extern void battle_invokeVtableMethod(void);
 extern void fn_8041D198(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -645,7 +645,7 @@ asm void fn_80422510(void)
     addi r4, r1, 0x8
     stw r29, 0x34(r1)
     mr r29, r3
-    bl fn_803EC758
+    bl barrier_formatCountdownTimer
     lwz r0, 0xf0(r29)
     cmpwi r0, 0x0
     bne lbl_fn_80422510_0000071C
@@ -861,12 +861,12 @@ lbl_fn_804227A4_000009A4:
     extsb. r0, r0
     bne lbl_fn_804227A4_000009F0
     lis r6, lbl_807C88F0@ha
-    lis r4, fn_8041D180@ha
+    lis r4, battle_invokeVtableMethod@ha
     lis r3, fn_8041D198@ha
     li r0, 0x1
     addi r3, r3, fn_8041D198@l
     addi r5, r6, lbl_807C88F0@l
-    addi r4, r4, fn_8041D180@l
+    addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C88F0@l(r6)
     stb r0, lbl_8087F4C0
@@ -1010,12 +1010,12 @@ lbl_fn_804229A8_00000B90:
     extsb. r0, r0
     bne lbl_fn_804229A8_00000BE0
     lis r6, lbl_807C88F0@ha
-    lis r4, fn_8041D180@ha
+    lis r4, battle_invokeVtableMethod@ha
     lis r3, fn_8041D198@ha
     li r0, 0x1
     addi r3, r3, fn_8041D198@l
     addi r5, r6, lbl_807C88F0@l
-    addi r4, r4, fn_8041D180@l
+    addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C88F0@l(r6)
     stb r0, lbl_8087F4C0
@@ -1168,12 +1168,12 @@ lbl_fn_80422BF4_00000DD0:
     extsb. r0, r0
     bne lbl_fn_80422BF4_00000E0C
     lis r6, lbl_807C88F0@ha
-    lis r4, fn_8041D180@ha
+    lis r4, battle_invokeVtableMethod@ha
     lis r3, fn_8041D198@ha
     li r0, 0x1
     addi r3, r3, fn_8041D198@l
     addi r5, r6, lbl_807C88F0@l
-    addi r4, r4, fn_8041D180@l
+    addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C88F0@l(r6)
     stb r0, lbl_8087F4C0
@@ -1591,7 +1591,7 @@ asm void fn_804231C0(void)
     mr r26, r4
     mr r27, r3
     addi r4, r1, 0x8
-    bl fn_803EC758
+    bl barrier_formatCountdownTimer
     lwz r0, 0xf0(r27)
     cmpwi r0, 0x0
     bne lbl_fn_804231C0_000013C8
@@ -1737,7 +1737,7 @@ asm void fn_8042335C(void)
     li r5, 0x20
     bl lockon_updateTarget
     addi r3, r31, 0x894
-    bl fn_80057F28
+    bl mission_initPathTracker
     addi r3, r31, 0x91c
     bl res_MsgHandle_constructor
     li r0, 0x0
@@ -1840,10 +1840,10 @@ asm void fn_804234F4(void)
     stw r5, 0xf8(r31)
     oris r0, r0, 0x10
     stw r0, 0x4c8(r31)
-    bl fn_803EDB18
+    bl barrier_testFieldCollision
     mr r3, r31
     addi r4, r31, 0x4c4
-    bl fn_803EDB18
+    bl barrier_testFieldCollision
     li r3, 0x1
     b lbl_fn_804234F4_00001714
 lbl_fn_804234F4_00001710:

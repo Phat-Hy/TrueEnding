@@ -42,11 +42,11 @@ extern void fn_8070F130(void);
 extern void fn_807157D0(void);
 extern void fn_80717EA0(void);
 extern void net_getGlobalContext(void);
-extern void fn_80721120(void);
-extern void fn_80725170(void);
+extern void net_calcStreamOffset(void);
+extern void net_listClearAll(void);
 extern void fn_80725200(void);
-extern void fn_807252A0(void);
-extern void fn_807252D0(void);
+extern void net_listInsertNode(void);
+extern void net_listRemoveNode(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -68,13 +68,13 @@ extern u32 lbl_80889264;
 
 /* Function declarations */
 void pad_03_80715D5C_text(void);
-void fn_80715D60(void);
-void fn_80715D70(void);
-void fn_80715D80(void);
+void fn_80715D60(void *p, f32 val);
+void fn_80715D70(void *p, f32 val);
+void fn_80715D80(void *p, f32 val);
 void fn_80715D90(void);
 void fn_80715DF0(void);
 void fn_80715E50(void);
-void fn_80715E90(void);
+void fn_80715E90(void *p, u32 val);
 void fn_80715EA0(void);
 void fn_80715EF0(void);
 void fn_80715F30(void);
@@ -94,7 +94,7 @@ void fn_80716260(void);
 void fn_80716280(void);
 void fn_807162B0(void);
 void fn_80716360(void);
-void fn_80716410(void);
+void fn_80716410(void *p, void *val);
 void fn_80716420(void);
 void fn_80716510(void);
 void fn_80716640(void);
@@ -132,7 +132,7 @@ void fn_80717A20(void);
 void fn_80717A40(void);
 void fn_80717AA0(void);
 void fn_80717B80(void);
-void fn_80717C00(void);
+f32 fn_80717C00(void *p, u32 idx);
 void fn_80717C10(void);
 void fn_80717D10(void);
 
@@ -142,25 +142,19 @@ asm void pad_03_80715D5C_text(void)
     opword 0x00000000
 }
 
-asm void fn_80715D60(void)
+void fn_80715D60(void *p, f32 val)
 {
-    nofralloc
-    stfs f1, 0x48(r3)
-    blr
+    *(f32 *)((u8 *)p + 0x48) = val;
 }
 
-asm void fn_80715D70(void)
+void fn_80715D70(void *p, f32 val)
 {
-    nofralloc
-    stfs f1, 0x4c(r3)
-    blr
+    *(f32 *)((u8 *)p + 0x4c) = val;
 }
 
-asm void fn_80715D80(void)
+void fn_80715D80(void *p, f32 val)
 {
-    nofralloc
-    stfs f1, 0x50(r3)
-    blr
+    *(f32 *)((u8 *)p + 0x50) = val;
 }
 
 asm void fn_80715D90(void)
@@ -235,11 +229,9 @@ asm void fn_80715E50(void)
     blr
 }
 
-asm void fn_80715E90(void)
+void fn_80715E90(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x18(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x18) = val;
 }
 
 asm void fn_80715EA0(void)
@@ -676,12 +668,9 @@ lbl_fn_80716360_000006A4:
     blr
 }
 
-asm void fn_80716410(void)
+void fn_80716410(void *p, void *val)
 {
-    nofralloc
-    addi r0, r4, 0x8
-    stw r0, 0x28(r3)
-    blr
+    *(void **)((u8 *)p + 0x28) = (u8 *)val + 8;
 }
 
 asm void fn_80716420(void)
@@ -697,7 +686,7 @@ asm void fn_80716420(void)
     mr r30, r3
     lbz r3, 0x0(r5)
     lwz r4, 0x4(r5)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_80716420_00000700
     li r3, 0x0
@@ -717,7 +706,7 @@ lbl_fn_80716420_00000714:
     add r4, r3, r0
     lbz r3, 0x4(r4)
     lwz r4, 0x8(r4)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_80716420_00000748
     li r3, 0x0
@@ -773,7 +762,7 @@ asm void fn_80716510(void)
     mr r29, r3
     lbz r3, 0x0(r6)
     lwz r4, 0x4(r6)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_80716510_000007FC
     li r3, 0x0
@@ -793,7 +782,7 @@ lbl_fn_80716510_00000810:
     add r4, r3, r0
     lbz r3, 0x4(r4)
     lwz r4, 0x8(r4)
-    bl fn_80721120
+    bl net_calcStreamOffset
     b lbl_fn_80716510_0000084C
 lbl_fn_80716510_00000838:
     slwi r4, r30, 3
@@ -860,7 +849,7 @@ asm void fn_80716640(void)
     mr r29, r3
     lbz r3, 0x0(r6)
     lwz r4, 0x4(r6)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_80716640_0000092C
     li r4, 0x0
@@ -880,7 +869,7 @@ lbl_fn_80716640_00000940:
     add r4, r3, r0
     lbz r3, 0x4(r4)
     lwz r4, 0x8(r4)
-    bl fn_80721120
+    bl net_calcStreamOffset
     mr r4, r3
     b lbl_fn_80716640_00000980
 lbl_fn_80716640_0000096C:
@@ -898,7 +887,7 @@ lbl_fn_80716640_00000990:
     lbz r3, 0xc(r4)
     lwz r4, 0x10(r4)
     lwz r5, 0x28(r29)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_80716640_000009B0
     li r3, 0x0
@@ -953,7 +942,7 @@ lbl_fn_80716750_00000A4C:
     lbz r3, 0x8(r1)
     lwz r4, 0xc(r1)
     lwz r5, 0x28(r29)
-    bl fn_80721120
+    bl net_calcStreamOffset
 lbl_fn_80716750_00000A5C:
     cmpwi r3, 0x0
     bne lbl_fn_80716750_00000A6C
@@ -1022,7 +1011,7 @@ lbl_fn_80716840_00000B3C:
     lbz r3, 0x8(r1)
     lwz r4, 0xc(r1)
     lwz r5, 0x28(r29)
-    bl fn_80721120
+    bl net_calcStreamOffset
 lbl_fn_80716840_00000B4C:
     cmpwi r3, 0x0
     bne lbl_fn_80716840_00000B5C
@@ -1103,7 +1092,7 @@ lbl_fn_80716950_00000C4C:
     lbz r3, 0x8(r1)
     lwz r4, 0xc(r1)
     lwz r5, 0x28(r29)
-    bl fn_80721120
+    bl net_calcStreamOffset
 lbl_fn_80716950_00000C5C:
     cmpwi r3, 0x0
     bne lbl_fn_80716950_00000C6C
@@ -1154,7 +1143,7 @@ asm void fn_80716A30(void)
     mr r29, r3
     lbz r3, 0x8(r6)
     lwz r4, 0xc(r6)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_80716A30_00000D1C
     li r3, 0x0
@@ -1171,7 +1160,7 @@ lbl_fn_80716A30_00000D30:
     add r4, r3, r0
     lbz r3, 0x4(r4)
     lwz r4, 0x8(r4)
-    bl fn_80721120
+    bl net_calcStreamOffset
 lbl_fn_80716A30_00000D48:
     cmpwi r3, 0x0
     bne lbl_fn_80716A30_00000D58
@@ -1207,7 +1196,7 @@ asm void fn_80716AE0(void)
     mr r29, r3
     lbz r3, 0x10(r6)
     lwz r4, 0x14(r6)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_80716AE0_00000DCC
     li r4, 0x0
@@ -1224,7 +1213,7 @@ lbl_fn_80716AE0_00000DE0:
     add r4, r3, r0
     lbz r3, 0x4(r4)
     lwz r4, 0x8(r4)
-    bl fn_80721120
+    bl net_calcStreamOffset
     mr r4, r3
 lbl_fn_80716AE0_00000DFC:
     cmpwi r4, 0x0
@@ -1264,7 +1253,7 @@ asm void fn_80716BA0(void)
     mr r28, r3
     lbz r3, 0x20(r6)
     lwz r4, 0x24(r6)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_80716BA0_00000E90
     li r30, 0x0
@@ -1281,7 +1270,7 @@ lbl_fn_80716BA0_00000EA4:
     add r4, r3, r0
     lbz r3, 0x4(r4)
     lwz r4, 0x8(r4)
-    bl fn_80721120
+    bl net_calcStreamOffset
     mr r30, r3
 lbl_fn_80716BA0_00000EC0:
     cmpwi r30, 0x0
@@ -1292,7 +1281,7 @@ lbl_fn_80716BA0_00000ED0:
     lbz r3, 0x20(r30)
     lwz r4, 0x24(r30)
     lwz r5, 0x28(r28)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_80716BA0_00000EF4
@@ -1302,7 +1291,7 @@ lbl_fn_80716BA0_00000EF4:
     lbz r3, 0x8(r30)
     lwz r4, 0xc(r30)
     lwz r5, 0x28(r28)
-    bl fn_80721120
+    bl net_calcStreamOffset
     stw r3, 0x4(r29)
     li r3, 0x1
     lwz r0, 0x10(r30)
@@ -1344,7 +1333,7 @@ asm void fn_80716CB0(void)
     mr r28, r3
     lbz r3, 0x20(r7)
     lwz r4, 0x24(r7)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_80716CB0_00000FA4
     li r4, 0x0
@@ -1361,7 +1350,7 @@ lbl_fn_80716CB0_00000FB8:
     add r4, r3, r0
     lbz r3, 0x4(r4)
     lwz r4, 0x8(r4)
-    bl fn_80721120
+    bl net_calcStreamOffset
     mr r4, r3
 lbl_fn_80716CB0_00000FD4:
     cmpwi r4, 0x0
@@ -1372,7 +1361,7 @@ lbl_fn_80716CB0_00000FE4:
     lbz r3, 0x20(r4)
     lwz r4, 0x24(r4)
     lwz r5, 0x28(r28)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_80716CB0_00001004
     li r3, 0x0
@@ -1389,7 +1378,7 @@ lbl_fn_80716CB0_00001018:
     add r4, r3, r0
     lbz r3, 0x4(r4)
     lwz r4, 0x8(r4)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_80716CB0_00001040
     li r3, 0x0
@@ -1428,7 +1417,7 @@ asm void fn_80716DF0(void)
     mr r31, r4
     lbz r3, 0x28(r5)
     lwz r4, 0x2c(r5)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r31, 0x0
     bne lbl_fn_80716DF0_000010C8
     li r3, 0x0
@@ -1466,7 +1455,7 @@ asm void fn_80716E80(void)
     stw r0, 0x14(r1)
     lbz r3, 0x10(r5)
     lwz r4, 0x14(r5)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_80716E80_00001150
     li r3, 0x0
@@ -1489,7 +1478,7 @@ asm void fn_80716EC0(void)
     stw r0, 0x14(r1)
     lbz r3, 0x20(r5)
     lwz r4, 0x24(r5)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_80716EC0_00001190
     li r3, 0x0
@@ -1517,7 +1506,7 @@ asm void fn_80716F10(void)
     mr r30, r3
     lbz r3, 0x0(r5)
     lwz r4, 0x4(r5)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_80716F10_000011F0
     li r3, 0x0
@@ -1537,7 +1526,7 @@ lbl_fn_80716F10_00001204:
     add r4, r3, r0
     lbz r3, 0x4(r4)
     lwz r4, 0x8(r4)
-    bl fn_80721120
+    bl net_calcStreamOffset
     b lbl_fn_80716F10_00001240
 lbl_fn_80716F10_0000122C:
     slwi r4, r31, 3
@@ -1597,7 +1586,7 @@ asm void fn_80717020(void)
     mr r30, r3
     lbz r3, 0x0(r5)
     lwz r4, 0x4(r5)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_80717020_00001300
     li r3, 0x0
@@ -1617,7 +1606,7 @@ lbl_fn_80717020_00001314:
     add r4, r3, r0
     lbz r3, 0x4(r4)
     lwz r4, 0x8(r4)
-    bl fn_80721120
+    bl net_calcStreamOffset
     b lbl_fn_80717020_00001350
 lbl_fn_80717020_0000133C:
     slwi r4, r31, 3
@@ -1650,7 +1639,7 @@ asm void fn_807170E0(void)
     stw r0, 0x14(r1)
     lbz r3, 0x18(r5)
     lwz r4, 0x1c(r5)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_807170E0_000013B0
     li r3, 0x0
@@ -1681,7 +1670,7 @@ asm void fn_80717120(void)
     mr r28, r3
     lbz r3, 0x18(r6)
     lwz r4, 0x1c(r6)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_80717120_00001410
     li r3, 0x0
@@ -1698,7 +1687,7 @@ lbl_fn_80717120_00001424:
     add r4, r3, r0
     lbz r3, 0x4(r4)
     lwz r4, 0x8(r4)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_80717120_00001450
@@ -1708,7 +1697,7 @@ lbl_fn_80717120_00001450:
     lbz r3, 0x14(r3)
     lwz r4, 0x18(r30)
     lwz r5, 0x28(r28)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_80717120_00001474
@@ -1722,7 +1711,7 @@ lbl_fn_80717120_00001474:
     stw r0, 0x4(r29)
     lbz r3, 0xc(r30)
     lwz r4, 0x10(r30)
-    bl fn_80721120
+    bl net_calcStreamOffset
     stw r3, 0x8(r29)
     li r3, 0x1
     lwz r0, 0x0(r31)
@@ -1756,7 +1745,7 @@ asm void fn_80717220(void)
     mr r28, r3
     lbz r3, 0x18(r7)
     lwz r4, 0x1c(r7)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_80717220_00001514
     li r3, 0x0
@@ -1773,7 +1762,7 @@ lbl_fn_80717220_00001528:
     add r4, r3, r0
     lbz r3, 0x4(r4)
     lwz r4, 0x8(r4)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     mr r4, r3
     bne lbl_fn_80717220_00001554
@@ -1783,7 +1772,7 @@ lbl_fn_80717220_00001554:
     lbz r3, 0x14(r3)
     lwz r4, 0x18(r4)
     lwz r5, 0x28(r28)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_80717220_00001574
     li r3, 0x0
@@ -1800,7 +1789,7 @@ lbl_fn_80717220_00001588:
     add r4, r3, r0
     lbz r3, 0x4(r4)
     lwz r4, 0x8(r4)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_80717220_000015B0
     li r3, 0x0
@@ -1938,7 +1927,7 @@ asm void fn_80717490(void)
     mr r29, r3
     lbz r3, 0x0(r6)
     lwz r4, 0x4(r6)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_80717490_0000177C
     li r3, 0x0
@@ -1958,7 +1947,7 @@ lbl_fn_80717490_00001790:
     add r4, r3, r0
     lbz r3, 0x4(r4)
     lwz r4, 0x8(r4)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_80717490_000017C4
     li r3, 0x0
@@ -2362,7 +2351,7 @@ asm void fn_80717A40(void)
     mr r30, r3
     beq lbl_fn_80717A40_00001D20
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
     cmpwi r31, 0x0
     ble lbl_fn_80717A40_00001D20
     mr r3, r30
@@ -2412,18 +2401,18 @@ lbl_fn_80717AA0_00001D9C:
     addic. r3, r28, 0x18
     beq lbl_fn_80717AA0_00001DC0
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_80717AA0_00001DC0:
     addic. r3, r28, 0xc
     beq lbl_fn_80717AA0_00001DD0
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_80717AA0_00001DD0:
     cmpwi r28, 0x0
     beq lbl_fn_80717AA0_00001DE4
     mr r3, r28
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_80717AA0_00001DE4:
     cmpwi r29, 0x0
     ble lbl_fn_80717AA0_00001DF4
@@ -2479,13 +2468,9 @@ lbl_fn_80717B80_00001E68:
     blr
 }
 
-asm void fn_80717C00(void)
+f32 fn_80717C00(void *p, u32 idx)
 {
-    nofralloc
-    slwi r0, r4, 2
-    add r3, r3, r0
-    lfs f1, 0x44(r3)
-    blr
+    return *(f32 *)((u8 *)p + (idx << 2) + 0x44);
 }
 
 asm void fn_80717C10(void)
@@ -2505,7 +2490,7 @@ asm void fn_80717C10(void)
     addi r31, r30, 0x100
     addi r3, r29, 0xc
     mr r4, r31
-    bl fn_807252D0
+    bl net_listRemoveNode
     bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
@@ -2549,7 +2534,7 @@ lbl_fn_80717C10_00001F70:
     mr r5, r31
     addi r3, r29, 0xc
     addi r4, r1, 0x8
-    bl fn_807252A0
+    bl net_listInsertNode
     bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
@@ -2629,7 +2614,7 @@ lbl_fn_80717D10_00002088:
     add r3, r30, r0
     addi r0, r3, 0x4
     stw r0, 0x10(r1)
-    bl fn_807252A0
+    bl net_listInsertNode
 lbl_fn_80717D10_000020A4:
     lwz r0, 0xc(r31)
     cmpwi r0, 0x0
@@ -2653,7 +2638,7 @@ lbl_fn_80717D10_000020D0:
     mr r5, r28
     addi r3, r31, 0xc
     addi r4, r1, 0x8
-    bl fn_807252A0
+    bl net_listInsertNode
 lbl_fn_80717D10_000020F8:
     lwz r0, 0x0(r29)
     cmpwi r0, 0x0

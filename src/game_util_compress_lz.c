@@ -14,7 +14,7 @@ extern void script_executeOpcode(void);
 extern void str_assignBuffer(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800A4450(void);
+extern void font_getGlyphEntryByIndex(void);
 extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
@@ -29,18 +29,18 @@ extern void saveSlot_readSummary(void);
 extern void save_createWorkerTask(void);
 extern void save_computeCrc32(void);
 extern void save_calculateBlockCrc(void);
-extern void fn_801F7590(void);
+extern void save_writeBackupSlot(void);
 extern void fn_801F7DF0(void);
 extern void save_findEntryByName(void);
-extern void fn_801F8598(void);
-extern void fn_801FEC74(void);
+extern void save_formatSlotString(void);
+extern void thread_findQueueTaskByName(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
 extern void rand_scaleRangeInt(void);
-extern void fn_8020EFEC(void);
+extern void time_ticksToSeconds(void);
 extern void event_findEntryById(void);
 extern void fn_8021154C(void);
 extern void fn_80211648(void);
@@ -53,7 +53,7 @@ extern void fn_80444BE8(void);
 extern void fn_80444C48(void);
 extern void fn_80444C50(void);
 extern void fn_8044D56C(void);
-extern void fn_804A3C24(void);
+extern void net_initCoopSession(void);
 extern void fn_804A55FC(void);
 extern void fn_804A7DD4(void);
 extern void fn_8057F284(void);
@@ -647,7 +647,7 @@ lbl_fn_80589AF8_0000076C:
     addi r4, r30, 0x121
     lwz r5, 0x8(r23)
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     lwz r3, 0x5b74(r28)
     addi r4, r30, 0x127
     addi r5, r24, 0x2
@@ -669,7 +669,7 @@ lbl_fn_80589AF8_000007BC:
     addi r4, r30, 0x12b
     psq_st f2, 0x8(r5), 0, 0
     lwzx r3, r26, r23
-    bl fn_801F7590
+    bl save_writeBackupSlot
     lwzx r3, r26, r23
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
@@ -769,12 +769,12 @@ lbl_fn_80589DE4_00000944:
     addi r4, r4, lbl_80761AB0@l
     addi r4, r4, 0x143
     addi r3, r3, 0x58
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     mr r4, r3
     addi r3, r1, 0x14
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x14(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31
@@ -815,12 +815,12 @@ lbl_fn_80589DE4_000009BC:
     addi r4, r28, 0x159
     lwz r3, 0x5b6c(r3)
     addi r3, r3, 0x58
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     mr r4, r3
     addi r3, r1, 0x8
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x8(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31
@@ -870,7 +870,7 @@ lbl_fn_80589DE4_00000A68:
     lwz r3, lbl_8087F580
     li r5, 0x0
     lwz r4, 0xc(r4)
-    bl fn_804A3C24
+    bl net_initCoopSession
     b lbl_fn_80589DE4_00000B00
 lbl_fn_80589DE4_00000AE0:
     lwz r27, lbl_8087F580
@@ -880,7 +880,7 @@ lbl_fn_80589DE4_00000AE0:
     mr r4, r3
     mr r3, r27
     li r5, 0x0
-    bl fn_804A3C24
+    bl net_initCoopSession
 lbl_fn_80589DE4_00000B00:
     lwz r3, lbl_8087F0A8
     lwz r0, 0x488(r3)
@@ -1026,12 +1026,12 @@ lbl_fn_8058A0F4_00000C54:
     addi r4, r29, 0x185
     lwz r3, 0x5b9c(r3)
     addi r3, r3, 0x58
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     mr r4, r3
     addi r3, r1, 0x10
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x10(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31
@@ -1625,7 +1625,7 @@ lbl_fn_8058AAC0_00001564:
     cmpwi r3, 0x0
     beq lbl_fn_8058AAC0_000015B4
     lwz r3, 0x0(r27)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     cmpwi r3, 0x0
     beq lbl_fn_8058AAC0_000015F8
     lwz r3, 0x7c(r3)

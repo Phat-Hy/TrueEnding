@@ -6,10 +6,10 @@ extern void battle_getCharacterState(void);
 extern void fn_8001B634(void);
 extern void fn_8001BD14(void);
 extern void entity_isActive(void);
-extern void fn_8001BEB0(void);
+extern void entity_checkActorType(void);
 extern void fn_8003CDB0(void);
 extern void fn_8003D298(void);
-extern void fn_8003DBA4(void);
+extern void effect_testLifetime(void);
 extern void rand(void);
 
 /* External data declarations */
@@ -136,7 +136,7 @@ asm void fn_8001EE58(void)
     lwz r3, lbl_807C68C0@l(r6)
     stw r0, 0x20(r4)
     stw r31, lbl_807C6A40@l(r5)
-    bl fn_8001BEB0
+    bl entity_checkActorType
     cmpwi r3, 0x0
     beq lbl_fn_8001EE58_000000BC
     li r31, 0x7
@@ -677,7 +677,7 @@ lbl_fn_8001F478_00000820:
 lbl_fn_8001F478_00000824:
     cmpwi r0, 0x6
     bne lbl_fn_8001F478_00000870
-    bl fn_8003DBA4
+    bl effect_testLifetime
     cmpwi r3, 0x6
     bne lbl_fn_8001F478_0000084C
     lis r3, lbl_807C6A40@ha
@@ -810,7 +810,7 @@ lbl_fn_8001F6F8_000009D0:
     li r3, -0x1
     b lbl_fn_8001F6F8_00000A18
 lbl_fn_8001F6F8_000009D8:
-    bl fn_8003DBA4
+    bl effect_testLifetime
     cmpwi r3, 0x6
     bne lbl_fn_8001F6F8_000009F4
     li r0, 0x1
@@ -889,7 +889,7 @@ lbl_fn_8001F814_00000AD8:
 lbl_fn_8001F814_00000ADC:
     cmpwi r0, 0x6
     bne lbl_fn_8001F814_00000B28
-    bl fn_8003DBA4
+    bl effect_testLifetime
     cmpwi r3, 0x4
     bne lbl_fn_8001F814_00000B04
     lis r3, lbl_807C6A40@ha
@@ -1168,7 +1168,7 @@ asm void fn_8001FC40(void)
     stw r4, 0x24(r6)
     stw r0, 0x28(r6)
     stw r31, lbl_807C6A40@l(r7)
-    bl fn_8001BEB0
+    bl entity_checkActorType
     cmpwi r3, 0x0
     beq lbl_fn_8001FC40_00000EB4
     li r31, 0x7

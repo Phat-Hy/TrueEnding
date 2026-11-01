@@ -29,8 +29,8 @@ extern void fn_800FDB20(void);
 extern void fn_80101434(void);
 extern void enemy_updateAnimTimer(void);
 extern void npc_getPosition(void);
-extern void fn_801404F8(void);
-extern void fn_80140500(void);
+extern void quest_getGlobalManager(void);
+extern void quest_resetActiveObjectiveSlots(void);
 extern void dialog_renderWindow(void);
 extern void inventory_applyItemStats(void);
 extern void fn_801533C8(void);
@@ -1138,8 +1138,8 @@ asm void fn_8031D350(void)
     addi r5, r1, 0x2c
     bl vec3_add
     addi r3, r1, 0x80
-    bl fn_80140500
-    bl fn_801404F8
+    bl quest_resetActiveObjectiveSlots
+    bl quest_getGlobalManager
     lis r7, 0x8000
     addi r4, r1, 0x80
     addi r5, r31, 0x528

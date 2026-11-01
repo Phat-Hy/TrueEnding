@@ -19,27 +19,27 @@ extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void fn_800EFC64(void);
 extern void fn_800FB1BC(void);
-extern void fn_80108F38(void);
+extern void hurtbox_testCollisionFlags(void);
 extern void hurtbox_processHitDamage(void);
 extern void fn_8010CA2C(void);
 extern void fn_8010CD3C(void);
 extern void fn_8012B0B0(void);
-extern void fn_8012DF7C(void);
+extern void enemy_calcAttackTrajectory(void);
 extern void fn_8012E534(void);
 extern void fn_80133B30(void);
 extern void fn_80133BD8(void);
 extern void fn_80133E24(void);
-extern void fn_80133EE8(void);
+extern void boss_findPartSlotById(void);
 extern void fn_80133F18(void);
 extern void fn_80133F6C(void);
 extern void fn_80133FBC(void);
-extern void fn_80134134(void);
+extern void boss_findPartById(void);
 extern void fn_80134168(void);
 extern void fn_80156120(void);
 extern void fn_8016ADF4(void);
-extern void fn_8016E484(void);
+extern void task_isValidQueueRange(void);
 extern void battle_calcAABBCenter(void);
-extern void fn_801789D8(void);
+extern void battle_evalDropTable(void);
 extern void actor_getMovementFlags(void);
 extern void fn_8017AC24(void);
 extern void fn_80187CC0(void);
@@ -603,12 +603,12 @@ lbl_ui_drawColoredQuad_0000063C:
     addi r30, r27, 0x7d4
     mr r3, r31
     li r4, 0x1a
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_ui_drawColoredQuad_000006B4
     mr r3, r31
     li r4, 0x1a
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     lwz r4, 0x648(r26)
     li r6, 0x384
     li r0, 0x0
@@ -624,12 +624,12 @@ lbl_ui_drawColoredQuad_0000063C:
 lbl_ui_drawColoredQuad_000006B4:
     mr r3, r31
     li r4, 0x1c
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_ui_drawColoredQuad_00000704
     mr r3, r31
     li r4, 0x1c
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     lwz r4, 0x648(r26)
     li r6, 0x384
     li r0, 0x0
@@ -645,12 +645,12 @@ lbl_ui_drawColoredQuad_000006B4:
 lbl_ui_drawColoredQuad_00000704:
     mr r3, r31
     li r4, 0x1e
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_ui_drawColoredQuad_00000754
     mr r3, r31
     li r4, 0x1e
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     lwz r4, 0x648(r26)
     li r6, 0x384
     li r0, 0x0
@@ -666,12 +666,12 @@ lbl_ui_drawColoredQuad_00000704:
 lbl_ui_drawColoredQuad_00000754:
     mr r3, r31
     li r4, 0x20
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_ui_drawColoredQuad_000007A4
     mr r3, r31
     li r4, 0x20
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     lwz r4, 0x648(r26)
     li r6, 0x12c
     li r0, 0x0
@@ -687,12 +687,12 @@ lbl_ui_drawColoredQuad_00000754:
 lbl_ui_drawColoredQuad_000007A4:
     mr r3, r31
     li r4, 0x34
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_ui_drawColoredQuad_0000083C
     mr r3, r31
     li r4, 0x34
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     lwz r6, 0x4(r24)
     lis r4, 0x4330
     lwz r0, 0x4(r3)
@@ -1168,7 +1168,7 @@ lbl_fn_8003F440_00000E34:
     cmpwi r27, 0x0
     beq lbl_fn_8003F440_00000E64
     mr r3, r27
-    bl fn_8016E484
+    bl task_isValidQueueRange
     cmpwi r3, 0x0
     beq lbl_fn_8003F440_00000E64
     li r29, 0x0
@@ -1468,7 +1468,7 @@ lbl_fn_8003F538_00001240:
 lbl_fn_8003F538_00001278:
     mr r3, r24
     li r4, 0x30
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_8003F538_000012B8
     xoris r0, r28, 0x8000
@@ -1491,7 +1491,7 @@ lbl_fn_8003F538_000012B8:
     bne lbl_fn_8003F538_000012E8
     mr r3, r24
     li r4, 0x1
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_8003F538_000012E8
 lbl_fn_8003F538_000012E4:
@@ -1706,7 +1706,7 @@ lbl_fn_8003F538_000015AC:
 lbl_fn_8003F538_000015E8:
     mr r3, r25
     li r4, 0x2d
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     beq lbl_fn_8003F538_00001660
     mr r3, r25
@@ -1739,7 +1739,7 @@ lbl_fn_8003F538_0000162C:
 lbl_fn_8003F538_00001660:
     mr r3, r25
     li r4, 0x45
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     beq lbl_fn_8003F538_00001700
     mr r3, r25
@@ -2061,7 +2061,7 @@ lbl_fn_8003F538_00001AA8:
 lbl_fn_8003F538_00001AF4:
     mr r3, r24
     li r4, 0x3
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_8003F538_00001B48
     mr r3, r24
@@ -2083,7 +2083,7 @@ lbl_fn_8003F538_00001AF4:
 lbl_fn_8003F538_00001B48:
     mr r3, r24
     li r4, 0x41
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_8003F538_00001B70
     mr r3, r24
@@ -2094,7 +2094,7 @@ lbl_fn_8003F538_00001B48:
 lbl_fn_8003F538_00001B70:
     mr r3, r24
     li r4, 0x42
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_8003F538_00001BF0
     lwz r0, 0xac(r23)
@@ -2127,7 +2127,7 @@ lbl_fn_8003F538_00001B70:
 lbl_fn_8003F538_00001BF0:
     mr r3, r24
     li r4, 0x3b
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_8003F538_00001C48
     mr r3, r24
@@ -2150,7 +2150,7 @@ lbl_fn_8003F538_00001BF0:
 lbl_fn_8003F538_00001C48:
     mr r3, r24
     li r4, 0xb
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_8003F538_00001CA0
     xoris r0, r29, 0x8000
@@ -2202,7 +2202,7 @@ lbl_fn_8003F538_00001CFC:
 lbl_fn_8003F538_00001D0C:
     mr r3, r24
     li r4, 0xe
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_8003F538_00001D24
     li r23, 0x0
@@ -2259,7 +2259,7 @@ asm void fn_80040434(void)
     stw r30, 0x8(r1)
     mr r30, r3
     mr r3, r31
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_80040434_00001EE8
     lfs f0, lbl_808807C8
@@ -2937,7 +2937,7 @@ lbl_fn_80040B44_000026B8:
     bne lbl_fn_80040B44_00002818
     mr r3, r22
     li r4, 0x10
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_80040B44_00002714
     lwz r26, lbl_8087F048
@@ -2950,67 +2950,67 @@ lbl_fn_80040B44_000026B8:
     mr r3, r26
     addi r4, r1, 0x8
     li r5, 0x20
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
 lbl_fn_80040B44_00002714:
     mr r3, r22
     li r4, 0x11
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_80040B44_0000272C
     oris r29, r29, 0x1
 lbl_fn_80040B44_0000272C:
     mr r3, r22
     li r4, 0x12
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_80040B44_00002744
     oris r29, r29, 0x40
 lbl_fn_80040B44_00002744:
     mr r3, r22
     li r4, 0x13
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_80040B44_0000275C
     ori r29, r29, 0x80
 lbl_fn_80040B44_0000275C:
     mr r3, r22
     li r4, 0x14
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_80040B44_00002774
     ori r29, r29, 0x1
 lbl_fn_80040B44_00002774:
     mr r3, r22
     li r4, 0x15
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_80040B44_0000278C
     ori r29, r29, 0x40
 lbl_fn_80040B44_0000278C:
     mr r3, r22
     li r4, 0x16
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_80040B44_000027A4
     ori r29, r29, 0x10
 lbl_fn_80040B44_000027A4:
     mr r3, r22
     li r4, 0x17
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_80040B44_000027BC
     ori r29, r29, 0x8000
 lbl_fn_80040B44_000027BC:
     mr r3, r22
     li r4, 0x19
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_80040B44_000027D4
     ori r29, r29, 0x4
 lbl_fn_80040B44_000027D4:
     mr r3, r22
     li r4, 0x18
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_80040B44_00002818
     rlwinm r0, r24, 0, 28, 28
@@ -3075,7 +3075,7 @@ lbl_fn_80040B44_00002860:
     mr r5, r29
     mr r6, r21
     neg r4, r31
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
 lbl_fn_80040B44_000028D8:
     neg r4, r31
     li r3, 0x0
@@ -3242,7 +3242,7 @@ lbl_fn_80040B44_00002B20:
     mr r4, r27
     mr r5, r29
     mr r6, r21
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
 lbl_fn_80040B44_00002B3C:
     neg r0, r28
     stw r27, 0x4(r20)
@@ -3486,19 +3486,19 @@ lbl_fn_800413EC_00002E74:
     mr r3, r27
     li r4, 0x1789
     li r5, 0x0
-    bl fn_801789D8
+    bl battle_evalDropTable
     cmpwi r3, 0x0
     beq lbl_fn_800413EC_00002E90
     lfs f31, lbl_808807C8
 lbl_fn_800413EC_00002E90:
     addi r3, r27, 0x7d4
     li r4, 0xc
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     beq lbl_fn_800413EC_00002EEC
     addi r3, r27, 0x7d4
     li r4, 0xc
-    bl fn_80134134
+    bl boss_findPartById
     mr r29, r3
     bl rand
     lis r5, 0x51ec
@@ -3767,12 +3767,12 @@ lbl_fn_800417E8_00003230:
 lbl_fn_800417E8_00003278:
     addi r3, r29, 0x7d4
     li r4, 0xc
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     beq lbl_fn_800417E8_000032D4
     addi r3, r29, 0x7d4
     li r4, 0xc
-    bl fn_80134134
+    bl boss_findPartById
     mr r27, r3
     bl rand
     lis r5, 0x51ec
@@ -3792,7 +3792,7 @@ lbl_fn_800417E8_000032D4:
     mr r3, r29
     li r4, 0x1789
     li r5, 0x0
-    bl fn_801789D8
+    bl battle_evalDropTable
     cmpwi r3, 0x0
     beq lbl_fn_800417E8_000032F0
     lfs f31, lbl_808807C8

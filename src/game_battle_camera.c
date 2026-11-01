@@ -11,8 +11,8 @@ extern void menu_renderLayout(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void atn_Anim_getLayerTrack(void);
-extern void fn_801059F8(void);
-extern void fn_80105B3C(void);
+extern void colli_findDynamicSlot(void);
+extern void colli_findStaticSlot(void);
 extern void fn_8011BEB8(void);
 extern void fn_8011C044(void);
 extern void enemy_stepBehavior(void);
@@ -256,10 +256,10 @@ lbl_fn_80170F20_0000026C:
     cmpwi r3, 0x0
     beq lbl_fn_80170F20_0000028C
     mr r4, r31
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r31
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_fn_80170F20_0000028C:
     lwz r0, 0x12a8(r31)
     addi r3, r31, 0xc58
@@ -602,10 +602,10 @@ lbl_fn_80171420_0000074C:
     cmpwi r3, 0x0
     beq lbl_fn_80171420_0000076C
     mr r4, r31
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r31
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_fn_80171420_0000076C:
     lwz r0, 0x12a8(r31)
     addi r3, r31, 0xc58
@@ -938,10 +938,10 @@ lbl_fn_801718F8_00000C04:
     cmpwi r3, 0x0
     beq lbl_fn_801718F8_00000C24
     mr r4, r31
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r31
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_fn_801718F8_00000C24:
     lwz r0, 0x12a8(r31)
     addi r3, r31, 0xc58
@@ -1190,10 +1190,10 @@ lbl_fn_80171DB0_00000F8C:
     cmpwi r3, 0x0
     beq lbl_fn_80171DB0_00000FAC
     mr r4, r31
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r31
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_fn_80171DB0_00000FAC:
     lwz r0, 0x12a8(r31)
     addi r3, r31, 0xc58

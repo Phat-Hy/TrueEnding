@@ -10,7 +10,7 @@ extern void _restgpr_23(void);
 extern void _restgpr_27(void);
 extern void _savegpr_23(void);
 extern void _savegpr_27(void);
-extern void fn_800763FC(void);
+extern void seq_bindSlotResource(void);
 extern void fn_805B697C(void);
 extern void fn_805E4090(void);
 extern void fn_805E7480(void);
@@ -26,11 +26,11 @@ extern void fn_806077A0(void);
 extern void fn_806077F0(void);
 extern void fn_80607870(void);
 extern void GXSetVtxDesc(void);
-extern void fn_806134E0(void);
+extern void __GXInitVtxDesc(void);
 extern void GXSetVtxAttrFmt(void);
 extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
-extern void fn_80614790(void);
+extern void GXBegin(void);
 extern void fn_80615400(void);
 extern void GXInitLightDistAttn(void);
 extern void GXInitLightObj(void);
@@ -40,9 +40,9 @@ extern void GXSetTevDirect(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
-extern void fn_806174C0(void);
+extern void GXSetTevIndTile(void);
 extern void fn_80617580(void);
-extern void fn_806175F0(void);
+extern void GXSetIndTexMatrix(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevKAlphaSel(void);
 extern void GXSetTevSwapMode(void);
@@ -276,7 +276,7 @@ asm void fn_805B4F0C(void)
     li r8, 0x7d
     bl __GXSetVtxDesc
     bl GXDrawDone
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -327,7 +327,7 @@ asm void fn_805B4F0C(void)
     li r6, 0x0
     li r7, 0x0
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x0
     li r4, 0xc
     bl GXSetTevKColorSel
@@ -368,7 +368,7 @@ asm void fn_805B4F0C(void)
     li r6, 0x0
     li r7, 0x0
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x1
     li r4, 0xd
     bl GXSetTevKColorSel
@@ -409,7 +409,7 @@ asm void fn_805B4F0C(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x2
     li r4, 0x0
     li r5, 0x0
@@ -444,7 +444,7 @@ asm void fn_805B4F0C(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x3
     li r4, 0x0
     li r5, 0x0
@@ -464,17 +464,17 @@ asm void fn_805B4F0C(void)
     addi r4, r1, 0x10
     stw r0, 0x10(r1)
     li r3, 0x0
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     lwz r0, lbl_808883C4
     addi r4, r1, 0xc
     stw r0, 0xc(r1)
     li r3, 0x1
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     lwz r0, lbl_808883C8
     addi r4, r1, 0x8
     stw r0, 0x8(r1)
     li r3, 0x2
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1
@@ -528,7 +528,7 @@ asm void fn_805B53D0(void)
     lwz r3, lbl_8087EEE0
     addi r4, r1, 0x48
     li r5, 0x0
-    bl fn_800763FC
+    bl seq_bindSlotResource
     srawi r31, r27, 1
     mr r4, r30
     srawi r30, r26, 1
@@ -553,7 +553,7 @@ asm void fn_805B53D0(void)
     lwz r3, lbl_8087EEE0
     addi r4, r1, 0x28
     li r5, 0x1
-    bl fn_800763FC
+    bl seq_bindSlotResource
     mr r4, r23
     addi r3, r1, 0x8
     clrlwi r5, r30, 16
@@ -576,11 +576,11 @@ asm void fn_805B53D0(void)
     lwz r3, lbl_8087EEE0
     addi r4, r1, 0x8
     li r5, 0x2
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x80
     li r4, 0x7
     li r5, 0x4
-    bl fn_80614790
+    bl GXBegin
     lis r4, 0xcc01
     li r3, 0x0
     sth r24, -0x8000(r4)

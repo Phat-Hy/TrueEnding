@@ -9,28 +9,28 @@ extern void dtor_80084684(void);
 extern void mtx_getTranslation(void);
 extern void vec3_set(void);
 extern void scene_transformPoint(void);
-extern void fn_8000DCF4(void);
+extern void scene_getCamera(void);
 extern void scene_getRootNode(void);
 extern void fn_800109E0(void);
 extern void mtx_multVec(void);
-extern void fn_80012C88(void);
+extern void vec3_addAssign(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void fn_8001336C(void);
 extern void mem_free(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800E0AA8(void);
+extern void particle_getEmitterContext(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
 extern void phys_scaleGravity(void);
-extern void fn_8013A13C(void);
+extern void mtx_rotYRad(void);
 extern void npc_getGlobalManager(void);
-extern void fn_8013C480(void);
+extern void npc_isInteractionReady(void);
 extern void actor_setState(void);
 extern void battle_canTargetActor(void);
-extern void fn_801A03E0(void);
+extern void bgm_getGlobalManager(void);
 extern void fn_801A03EC(void);
 extern void fn_801A0408(void);
 extern void fn_80244674(void);
@@ -1861,7 +1861,7 @@ asm void fn_802A3D80(void)
     cmpwi r28, 0x0
     beq lbl_fn_802A3D80_00001968
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     stw r3, 0x8(r1)
     addi r3, r1, 0x38
     addi r4, r1, 0x8
@@ -1873,7 +1873,7 @@ lbl_fn_802A3D80_00001968:
     stw r3, 0x10(r1)
     b lbl_fn_802A3D80_0000199C
 lbl_fn_802A3D80_00001978:
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_802A3D80_00001990
     addi r3, r1, 0x38
@@ -1886,12 +1886,12 @@ lbl_fn_802A3D80_00001990:
 lbl_fn_802A3D80_0000199C:
     cmpwi r3, 0x0
     bne lbl_fn_802A3D80_00001978
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     bl fn_801A0408
     stw r3, 0xc(r1)
     b lbl_fn_802A3D80_00001A00
 lbl_fn_802A3D80_000019B4:
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_802A3D80_000019F4
     lwz r3, 0xc(r1)
@@ -1916,7 +1916,7 @@ lbl_fn_802A3D80_00001A00:
     bne lbl_fn_802A3D80_000019B4
 lbl_fn_802A3D80_00001A08:
     addi r3, r1, 0x38
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     lis r3, lbl_80745C50@ha
     lis r30, lbl_80745C70@ha
     lfs f29, lbl_80883D6C
@@ -1961,7 +1961,7 @@ lbl_fn_802A3D80_00001A34:
     bl mtx_multVec
     addi r3, r1, 0x2c
     addi r4, r1, 0x20
-    bl fn_80012C88
+    bl vec3_addAssign
     lfs f1, lbl_80883D28
     lfs f2, lbl_80883E14
     bl fn_802A40A8
@@ -1974,7 +1974,7 @@ lbl_fn_802A3D80_00001A34:
     lfs f1, lbl_80883E18
     bl phys_scaleGravity
     addi r3, r1, 0xa8
-    bl fn_8013A13C
+    bl mtx_rotYRad
     addi r3, r1, 0x14
     addi r4, r1, 0xa8
     bl mtx_multVec
@@ -2023,7 +2023,7 @@ lbl_fn_802A3D80_00001A34:
     addi r29, r29, 0x1
 lbl_fn_802A3D80_00001BAC:
     addi r3, r1, 0x38
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     cmplw r29, r3
     blt lbl_fn_802A3D80_00001A34
     addi r3, r1, 0x38

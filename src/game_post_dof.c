@@ -14,13 +14,13 @@ extern void route_createSegment(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80094958(void);
+extern void target_registerCandidate(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80107A68(void);
-extern void fn_80108F38(void);
+extern void hurtbox_testCollisionFlags(void);
 extern void skill_findNodeById(void);
 extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
@@ -59,7 +59,7 @@ extern void world_setLocalFlag(void);
 extern void dvd_showDiskErrorDialog(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_804DA490(void);
-extern void fn_805A3D00(void);
+extern void rand_Mersenne_init(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXScale(void);
@@ -879,7 +879,7 @@ lbl_fn_802C07F8_00000A2C:
     mr r3, r27
     addi r4, r1, 0x38
     li r5, 0x4000
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
 lbl_fn_802C07F8_00000A70:
     lbz r3, 0xc(r31)
     lbz r0, 0xd(r31)
@@ -980,7 +980,7 @@ lbl_fn_802C0B68_00000B7C:
 lbl_fn_802C0B68_00000BA4:
     mr r3, r29
     li r4, 0x0
-    bl fn_805A3D00
+    bl rand_Mersenne_init
     cmpwi r30, 0x0
     ble lbl_fn_802C0B68_00000BC0
     mr r3, r29
@@ -1085,26 +1085,26 @@ asm void fn_802C0C38(void)
     stfs f1, 0xc(r1)
     stfs f1, 0x20(r1)
     stfs f0, 0x34(r1)
-    bl fn_80094958
+    bl target_registerCandidate
     addi r31, r31, lbl_80746C90@l
     addi r3, r28, 0xb0
     addi r4, r31, 0xd
     addi r5, r1, 0x68
     addi r6, r1, 0x58
     addi r7, r1, 0x48
-    bl fn_80094958
+    bl target_registerCandidate
     addi r3, r28, 0xb0
     addi r4, r31, 0x1a
     addi r5, r1, 0x68
     addi r6, r1, 0x58
     addi r7, r1, 0x48
-    bl fn_80094958
+    bl target_registerCandidate
     addi r3, r28, 0xb0
     addi r4, r31, 0x27
     addi r5, r1, 0x68
     addi r6, r1, 0x58
     addi r7, r1, 0x48
-    bl fn_80094958
+    bl target_registerCandidate
     addi r3, r28, 0x156c
     addi r4, r31, 0x34
     bl res_Resource_unload

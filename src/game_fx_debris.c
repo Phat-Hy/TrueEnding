@@ -29,7 +29,7 @@ extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
 extern void npc_getDialogController(void);
 extern void actor_getMovementFlags(void);
-extern void fn_801A03E0(void);
+extern void bgm_getGlobalManager(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -1892,7 +1892,7 @@ lbl_fn_8029CF00_000018F8:
     bl talk_parseQuotedString
     bl atoi
     mr r30, r3
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     mr r4, r30
     bl skill_findNodeById
     stw r3, 0x1648(r31)
@@ -1907,7 +1907,7 @@ lbl_fn_8029CF00_00001934:
     bl talk_parseQuotedString
     bl atoi
     mr r30, r3
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     mr r4, r30
     bl skill_findNodeById
     stw r3, 0x164c(r31)

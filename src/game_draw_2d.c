@@ -13,10 +13,10 @@ extern void fn_800502A8(void);
 extern void fn_80071D68(void);
 extern void fn_80071D74(void);
 extern void gx_drawScreenQuad(void);
-extern void fn_80075DEC(void);
+extern void seq_stepPlaybackTimer(void);
 extern void fn_80075F58(void);
 extern void gx_applyRenderState(void);
-extern void fn_800763FC(void);
+extern void seq_bindSlotResource(void);
 extern void gx_setRenderStateParam(void);
 extern void fn_800848B4(void);
 extern void mem_getAllocSize(void);
@@ -38,7 +38,7 @@ extern void fn_804761B0(void);
 extern void PSMTXMultVecArraySR(void);
 extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
-extern void fn_80614190(void);
+extern void __GXFlushPixelEngine(void);
 extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
@@ -46,7 +46,7 @@ extern void GXInitLightDistAttn(void);
 extern void GXInitLightSpot(void);
 extern void GXInitLightObj(void);
 extern void GXClampLightAngle(void);
-extern void fn_80617200(void);
+extern void GXSetTexCoordScaleManually(void);
 extern void GXInitTexObjDefault(void);
 extern void GXSetTevDirect(void);
 extern void GXSetTevOrder(void);
@@ -907,7 +907,7 @@ asm void fn_800B2EA0(void)
     mr r27, r3
     lwz r31, 0x3c(r4)
     lwz r30, 0x40(r4)
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     lwz r3, lbl_8087EFB4
     li r4, 0x1
     bl fn_800C0508
@@ -972,7 +972,7 @@ asm void fn_800B2EA0(void)
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x0
     li r4, 0x3
     bl GXSetTevDirect
@@ -994,7 +994,7 @@ asm void fn_800B2EA0(void)
     li r5, 0x0
     lwz r3, lbl_8087EEE0
     addi r4, r4, 0x74c
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lwz r3, lbl_8087EEE0
     slwi r6, r31, 1
     slwi r7, r30, 1
@@ -1016,7 +1016,7 @@ asm void fn_800B2EA0(void)
     mr r3, r29
     li r4, 0x1
     bl GXCopyTex
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     lwz r3, lbl_8087EFA8
     lfs f1, 0x420(r3)
     bl std_cos
@@ -1068,11 +1068,11 @@ asm void fn_800B2EA0(void)
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     lwz r3, lbl_8087EEE0
     addi r4, r1, 0x28
     li r5, 0x0
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x0
     li r4, 0x3
     bl GXSetTevDirect
@@ -1097,7 +1097,7 @@ asm void fn_800B2EA0(void)
     li r6, 0x3
     bl GXSetTevAlphaIn
     lwz r3, lbl_8087EEE0
-    bl fn_80075DEC
+    bl seq_stepPlaybackTimer
     lwz r3, lbl_8087EFB4
     bl fn_800BFB70
     mr r3, r27

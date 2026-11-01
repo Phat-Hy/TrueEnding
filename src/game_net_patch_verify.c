@@ -7,7 +7,7 @@ extern void dtor_80084684(void);
 extern void vec3_copy(void);
 extern void fn_80042740(void);
 extern void mission_updateStub(void);
-extern void fn_8006CA80(void);
+extern void gmk_LoadHandle_constructor(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_getAllocSize(void);
@@ -2049,7 +2049,7 @@ asm void fn_8053D0F8(void)
     stw r30, 0x1ac(r28)
     stw r30, 0x1bc(r28)
     stw r30, 0x1c0(r28)
-    bl fn_8006CA80
+    bl gmk_LoadHandle_constructor
     stw r30, 0x1cc(r28)
     addi r3, r28, 0x1d4
     stw r30, 0x1d0(r28)

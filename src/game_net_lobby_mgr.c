@@ -28,7 +28,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void hud_drawTargetMarker(void);
 extern void str_skipWhitespace(void);
-extern void fn_800E0AA8(void);
+extern void particle_getEmitterContext(void);
 extern void fn_800F80A8(void);
 extern void phys_scaleGravity(void);
 extern void fn_8012044C(void);
@@ -92,11 +92,11 @@ void fn_80498E7C(void);
 void fn_80498EAC(void);
 void fn_80498EC0(void);
 void fn_80498ED4(void);
-void fn_80498EE8(void);
-void fn_80498EF0(void);
+void fn_80498EE8(void *p, u32 val);
+void fn_80498EF0(void *p, u32 val);
 void fn_80498EF8(void);
 void fn_80498F08(void);
-void fn_80498F0C(void);
+void fn_80498F0C(void *p, u32 val);
 void fn_80498F14(void);
 void fn_80498F4C(void);
 void fn_80498F50(void);
@@ -105,10 +105,10 @@ void fn_80498F78(void);
 void fn_80498FF4(void);
 void fn_80499008(void);
 void fn_80499080(void);
-void fn_80499388(void);
+void fn_80499388(void *p, u32 val);
 void fn_80499390(void);
 void fn_80499684(void);
-void fn_80499694(void);
+u32 fn_80499694(void *p);
 void fn_8049969C(void);
 void fn_80499724(void);
 void fn_80499734(void);
@@ -667,7 +667,7 @@ lbl_fn_804985E4_000007F8:
     blt lbl_fn_804985E4_0000061C
 lbl_fn_804985E4_00000808:
     addi r3, r1, 0x9c
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     lis r5, lbl_80756A8C@ha
     mr r4, r3
     addi r23, r5, lbl_80756A8C@l
@@ -843,7 +843,7 @@ lbl_fn_804985E4_00000AA4:
     addi r24, r24, 0x1
 lbl_fn_804985E4_00000AB8:
     addi r3, r1, 0x9c
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     cmplw r24, r3
     blt lbl_fn_804985E4_00000840
     addi r3, r1, 0x6c
@@ -921,18 +921,14 @@ asm void fn_80498ED4(void)
     blr
 }
 
-asm void fn_80498EE8(void)
+void fn_80498EE8(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x58(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x58) = val;
 }
 
-asm void fn_80498EF0(void)
+void fn_80498EF0(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0xa4(r3)
-    blr
+    *(u32 *)((u8 *)p + 0xa4) = val;
 }
 
 asm void fn_80498EF8(void)
@@ -947,11 +943,9 @@ asm void fn_80498EF8(void)
 void fn_80498F08(void) {
 }
 
-asm void fn_80498F0C(void)
+void fn_80498F0C(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x7c(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x7c) = val;
 }
 
 asm void fn_80498F14(void)
@@ -1291,11 +1285,9 @@ lbl_fn_80499080_00001014:
     blr
 }
 
-asm void fn_80499388(void)
+void fn_80499388(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x630(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x630) = val;
 }
 
 asm void fn_80499390(void)
@@ -1512,11 +1504,9 @@ asm void fn_80499684(void)
     blr
 }
 
-asm void fn_80499694(void)
+u32 fn_80499694(void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(u32 *)((u8 *)p + 4);
 }
 
 asm void fn_8049969C(void)

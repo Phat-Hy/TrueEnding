@@ -8,9 +8,9 @@ extern void fn_80018BAC(void);
 extern void fn_80018C80(void);
 extern void fn_800197A4(void);
 extern void fn_8001E0A8(void);
-extern void fn_8001E0B8(void);
-extern void fn_8001E168(void);
-extern void fn_8001E1D0(void);
+extern void property_copyValue(void);
+extern void property_releaseValue(void);
+extern void property_formatValue(void);
 extern void fn_8001E340(void);
 extern void fn_8001E350(void);
 extern void fn_8001E360(void);
@@ -81,7 +81,7 @@ extern void str_initFromCStr(void);
 extern void fn_8003F440(void);
 extern void mem_alloc(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80161570(void);
+extern void party_updateMemberCoords(void);
 extern void fn_80161880(void);
 extern void fn_80176428(void);
 extern void task_lookupTagIndex(void);
@@ -145,7 +145,7 @@ void fn_8001BCB4(void);
 void fn_8001BD14(void);
 void entity_isActive(void);
 void fn_8001BE90(void);
-void fn_8001BEB0(void);
+void entity_checkActorType(void);
 void fn_8001BEE0(void);
 u32 fn_8001BF44(void);
 void fn_8001BF4C(void);
@@ -241,7 +241,7 @@ lbl_fn_8001B508_000000D8:
     li r5, 0x0
     fmr f2, f1
     li r6, 0x0
-    bl fn_80161570
+    bl party_updateMemberCoords
 lbl_fn_8001B508_000000F8:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -932,21 +932,21 @@ lbl_fn_8001BE90_00000A04:
     blr
 }
 
-asm void fn_8001BEB0(void)
+asm void entity_checkActorType(void)
 {
     nofralloc
     cmpwi r3, 0x0
     li r4, 0x0
-    beq lbl_fn_8001BEB0_00000A20
+    beq lbl_entity_checkActorType_00000A20
     lwz r0, 0x12a4(r3)
     srwi r4, r0, 31
-lbl_fn_8001BEB0_00000A20:
+lbl_entity_checkActorType_00000A20:
     lwz r3, 0x50(r3)
     subis r0, r3, 0x1
     cmplwi r0, 0x8709
-    bne lbl_fn_8001BEB0_00000A34
+    bne lbl_entity_checkActorType_00000A34
     li r4, 0x1
-lbl_fn_8001BEB0_00000A34:
+lbl_entity_checkActorType_00000A34:
     mr r3, r4
     blr
 }
@@ -1300,15 +1300,15 @@ lbl_fn_8001C284_00000E28:
     addi r3, r1, 0xae8
     addi r4, r1, 0xaf8
     addi r5, r1, 0x104
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x300
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0xae8
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0xae8
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0xaf8
     li r4, -0x1
     bl dtor_80013D60
@@ -1331,15 +1331,15 @@ lbl_fn_8001C284_00000EA0:
     addi r3, r1, 0xac8
     addi r4, r1, 0xad8
     addi r5, r1, 0x100
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x2f8
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0xac8
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0xac8
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0xad8
     li r4, -0x1
     bl dtor_80013D60
@@ -1362,15 +1362,15 @@ lbl_fn_8001C284_00000F18:
     addi r3, r1, 0xaa8
     addi r4, r1, 0xab8
     addi r5, r1, 0xfc
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x2f0
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0xaa8
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0xaa8
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0xab8
     li r4, -0x1
     bl dtor_80013D60
@@ -1393,15 +1393,15 @@ lbl_fn_8001C284_00000F90:
     addi r3, r1, 0xa88
     addi r4, r1, 0xa98
     addi r5, r1, 0xf8
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x2e8
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0xa88
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0xa88
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0xa98
     li r4, -0x1
     bl dtor_80013D60
@@ -1424,15 +1424,15 @@ lbl_fn_8001C284_00001008:
     addi r3, r1, 0xa68
     addi r4, r1, 0xa78
     addi r5, r1, 0xf4
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x2e0
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0xa68
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0xa68
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0xa78
     li r4, -0x1
     bl dtor_80013D60
@@ -1455,15 +1455,15 @@ lbl_fn_8001C284_00001080:
     addi r3, r1, 0xa48
     addi r4, r1, 0xa58
     addi r5, r1, 0xf0
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x2d8
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0xa48
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0xa48
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0xa58
     li r4, -0x1
     bl dtor_80013D60
@@ -1486,15 +1486,15 @@ lbl_fn_8001C284_000010F8:
     addi r3, r1, 0xa28
     addi r4, r1, 0xa38
     addi r5, r1, 0xec
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x2d0
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0xa28
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0xa28
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0xa38
     li r4, -0x1
     bl dtor_80013D60
@@ -1517,15 +1517,15 @@ lbl_fn_8001C284_00001170:
     addi r3, r1, 0xa08
     addi r4, r1, 0xa18
     addi r5, r1, 0xe8
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x2c8
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0xa08
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0xa08
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0xa18
     li r4, -0x1
     bl dtor_80013D60
@@ -1548,15 +1548,15 @@ lbl_fn_8001C284_000011E8:
     addi r3, r1, 0x9e8
     addi r4, r1, 0x9f8
     addi r5, r1, 0xe4
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x2c0
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x9e8
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x9e8
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x9f8
     li r4, -0x1
     bl dtor_80013D60
@@ -1579,15 +1579,15 @@ lbl_fn_8001C284_00001260:
     addi r3, r1, 0x9c8
     addi r4, r1, 0x9d8
     addi r5, r1, 0xe0
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x2b8
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x9c8
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x9c8
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x9d8
     li r4, -0x1
     bl dtor_80013D60
@@ -1610,15 +1610,15 @@ lbl_fn_8001C284_000012D8:
     addi r3, r1, 0x9a8
     addi r4, r1, 0x9b8
     addi r5, r1, 0xdc
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x2b0
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x9a8
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x9a8
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x9b8
     li r4, -0x1
     bl dtor_80013D60
@@ -1641,15 +1641,15 @@ lbl_fn_8001C284_00001350:
     addi r3, r1, 0x988
     addi r4, r1, 0x998
     addi r5, r1, 0xd8
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x2a8
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x988
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x988
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x998
     li r4, -0x1
     bl dtor_80013D60
@@ -1672,15 +1672,15 @@ lbl_fn_8001C284_000013C8:
     addi r3, r1, 0x968
     addi r4, r1, 0x978
     addi r5, r1, 0xd4
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x2a0
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x968
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x968
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x978
     li r4, -0x1
     bl dtor_80013D60
@@ -1703,15 +1703,15 @@ lbl_fn_8001C284_00001440:
     addi r3, r1, 0x948
     addi r4, r1, 0x958
     addi r5, r1, 0xd0
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x298
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x948
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x948
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x958
     li r4, -0x1
     bl dtor_80013D60
@@ -1734,15 +1734,15 @@ lbl_fn_8001C284_000014B8:
     addi r3, r1, 0x928
     addi r4, r1, 0x938
     addi r5, r1, 0xcc
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x290
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x928
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x928
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x938
     li r4, -0x1
     bl dtor_80013D60
@@ -1765,15 +1765,15 @@ lbl_fn_8001C284_00001530:
     addi r3, r1, 0x908
     addi r4, r1, 0x918
     addi r5, r1, 0xc8
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x288
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x908
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x908
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x918
     li r4, -0x1
     bl dtor_80013D60
@@ -1796,15 +1796,15 @@ lbl_fn_8001C284_000015A8:
     addi r3, r1, 0x8e8
     addi r4, r1, 0x8f8
     addi r5, r1, 0xc4
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x280
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x8e8
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x8e8
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x8f8
     li r4, -0x1
     bl dtor_80013D60
@@ -1827,15 +1827,15 @@ lbl_fn_8001C284_00001620:
     addi r3, r1, 0x8c8
     addi r4, r1, 0x8d8
     addi r5, r1, 0xc0
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x278
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x8c8
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x8c8
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x8d8
     li r4, -0x1
     bl dtor_80013D60
@@ -1858,15 +1858,15 @@ lbl_fn_8001C284_00001698:
     addi r3, r1, 0x8a8
     addi r4, r1, 0x8b8
     addi r5, r1, 0xbc
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x270
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x8a8
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x8a8
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x8b8
     li r4, -0x1
     bl dtor_80013D60
@@ -1889,15 +1889,15 @@ lbl_fn_8001C284_00001710:
     addi r3, r1, 0x888
     addi r4, r1, 0x898
     addi r5, r1, 0xb8
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x268
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x888
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x888
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x898
     li r4, -0x1
     bl dtor_80013D60
@@ -1920,15 +1920,15 @@ lbl_fn_8001C284_00001788:
     addi r3, r1, 0x868
     addi r4, r1, 0x878
     addi r5, r1, 0xb4
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x260
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x868
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x868
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x878
     li r4, -0x1
     bl dtor_80013D60
@@ -1951,15 +1951,15 @@ lbl_fn_8001C284_00001800:
     addi r3, r1, 0x848
     addi r4, r1, 0x858
     addi r5, r1, 0xb0
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x258
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x848
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x848
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x858
     li r4, -0x1
     bl dtor_80013D60
@@ -1982,15 +1982,15 @@ lbl_fn_8001C284_00001878:
     addi r3, r1, 0x828
     addi r4, r1, 0x838
     addi r5, r1, 0xac
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x250
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x828
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x828
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x838
     li r4, -0x1
     bl dtor_80013D60
@@ -2013,15 +2013,15 @@ lbl_fn_8001C284_000018F0:
     addi r3, r1, 0x808
     addi r4, r1, 0x818
     addi r5, r1, 0xa8
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x248
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x808
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x808
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x818
     li r4, -0x1
     bl dtor_80013D60
@@ -2044,15 +2044,15 @@ lbl_fn_8001C284_00001968:
     addi r3, r1, 0x7e8
     addi r4, r1, 0x7f8
     addi r5, r1, 0xa4
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x240
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x7e8
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x7e8
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x7f8
     li r4, -0x1
     bl dtor_80013D60
@@ -2075,15 +2075,15 @@ lbl_fn_8001C284_000019E0:
     addi r3, r1, 0x7c8
     addi r4, r1, 0x7d8
     addi r5, r1, 0xa0
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x238
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x7c8
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x7c8
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x7d8
     li r4, -0x1
     bl dtor_80013D60
@@ -2106,15 +2106,15 @@ lbl_fn_8001C284_00001A58:
     addi r3, r1, 0x7a8
     addi r4, r1, 0x7b8
     addi r5, r1, 0x9c
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x230
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x7a8
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x7a8
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x7b8
     li r4, -0x1
     bl dtor_80013D60
@@ -2137,15 +2137,15 @@ lbl_fn_8001C284_00001AD0:
     addi r3, r1, 0x788
     addi r4, r1, 0x798
     addi r5, r1, 0x98
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x228
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x788
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x788
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x798
     li r4, -0x1
     bl dtor_80013D60
@@ -2168,15 +2168,15 @@ lbl_fn_8001C284_00001B48:
     addi r3, r1, 0x768
     addi r4, r1, 0x778
     addi r5, r1, 0x94
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x220
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x768
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x768
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x778
     li r4, -0x1
     bl dtor_80013D60
@@ -2199,15 +2199,15 @@ lbl_fn_8001C284_00001BC0:
     addi r3, r1, 0x748
     addi r4, r1, 0x758
     addi r5, r1, 0x90
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x218
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x748
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x748
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x758
     li r4, -0x1
     bl dtor_80013D60
@@ -2230,15 +2230,15 @@ lbl_fn_8001C284_00001C38:
     addi r3, r1, 0x728
     addi r4, r1, 0x738
     addi r5, r1, 0x8c
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x210
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x728
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x728
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x738
     li r4, -0x1
     bl dtor_80013D60
@@ -2261,15 +2261,15 @@ lbl_fn_8001C284_00001CB0:
     addi r3, r1, 0x708
     addi r4, r1, 0x718
     addi r5, r1, 0x88
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x208
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x708
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x708
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x718
     li r4, -0x1
     bl dtor_80013D60
@@ -2292,15 +2292,15 @@ lbl_fn_8001C284_00001D28:
     addi r3, r1, 0x6e8
     addi r4, r1, 0x6f8
     addi r5, r1, 0x84
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x200
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x6e8
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x6e8
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x6f8
     li r4, -0x1
     bl dtor_80013D60
@@ -2323,15 +2323,15 @@ lbl_fn_8001C284_00001DA0:
     addi r3, r1, 0x6c8
     addi r4, r1, 0x6d8
     addi r5, r1, 0x80
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x1f8
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x6c8
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x6c8
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x6d8
     li r4, -0x1
     bl dtor_80013D60
@@ -2354,15 +2354,15 @@ lbl_fn_8001C284_00001E18:
     addi r3, r1, 0x6a8
     addi r4, r1, 0x6b8
     addi r5, r1, 0x7c
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x1f0
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x6a8
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x6a8
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x6b8
     li r4, -0x1
     bl dtor_80013D60
@@ -2385,15 +2385,15 @@ lbl_fn_8001C284_00001E90:
     addi r3, r1, 0x688
     addi r4, r1, 0x698
     addi r5, r1, 0x78
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x1e8
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x688
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x688
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x698
     li r4, -0x1
     bl dtor_80013D60
@@ -2416,15 +2416,15 @@ lbl_fn_8001C284_00001F08:
     addi r3, r1, 0x668
     addi r4, r1, 0x678
     addi r5, r1, 0x74
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x1e0
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x668
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x668
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x678
     li r4, -0x1
     bl dtor_80013D60
@@ -2447,15 +2447,15 @@ lbl_fn_8001C284_00001F80:
     addi r3, r1, 0x648
     addi r4, r1, 0x658
     addi r5, r1, 0x70
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x1d8
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x648
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x648
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x658
     li r4, -0x1
     bl dtor_80013D60
@@ -2478,15 +2478,15 @@ lbl_fn_8001C284_00001FF8:
     addi r3, r1, 0x628
     addi r4, r1, 0x638
     addi r5, r1, 0x6c
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x1d0
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x628
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x628
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x638
     li r4, -0x1
     bl dtor_80013D60
@@ -2509,15 +2509,15 @@ lbl_fn_8001C284_00002070:
     addi r3, r1, 0x608
     addi r4, r1, 0x618
     addi r5, r1, 0x68
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x1c8
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x608
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x608
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x618
     li r4, -0x1
     bl dtor_80013D60
@@ -2540,15 +2540,15 @@ lbl_fn_8001C284_000020E8:
     addi r3, r1, 0x5e8
     addi r4, r1, 0x5f8
     addi r5, r1, 0x64
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x1c0
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x5e8
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x5e8
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x5f8
     li r4, -0x1
     bl dtor_80013D60
@@ -2571,15 +2571,15 @@ lbl_fn_8001C284_00002160:
     addi r3, r1, 0x5c8
     addi r4, r1, 0x5d8
     addi r5, r1, 0x60
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x1b8
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x5c8
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x5c8
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x5d8
     li r4, -0x1
     bl dtor_80013D60
@@ -2602,15 +2602,15 @@ lbl_fn_8001C284_000021D8:
     addi r3, r1, 0x5a8
     addi r4, r1, 0x5b8
     addi r5, r1, 0x5c
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x1b0
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x5a8
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x5a8
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x5b8
     li r4, -0x1
     bl dtor_80013D60
@@ -2633,15 +2633,15 @@ lbl_fn_8001C284_00002250:
     addi r3, r1, 0x588
     addi r4, r1, 0x598
     addi r5, r1, 0x58
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x1a8
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x588
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x588
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x598
     li r4, -0x1
     bl dtor_80013D60
@@ -2664,15 +2664,15 @@ lbl_fn_8001C284_000022C8:
     addi r3, r1, 0x568
     addi r4, r1, 0x578
     addi r5, r1, 0x54
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x1a0
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x568
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x568
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x578
     li r4, -0x1
     bl dtor_80013D60
@@ -2695,15 +2695,15 @@ lbl_fn_8001C284_00002340:
     addi r3, r1, 0x548
     addi r4, r1, 0x558
     addi r5, r1, 0x50
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x198
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x548
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x548
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x558
     li r4, -0x1
     bl dtor_80013D60
@@ -2726,15 +2726,15 @@ lbl_fn_8001C284_000023B8:
     addi r3, r1, 0x528
     addi r4, r1, 0x538
     addi r5, r1, 0x4c
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x190
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x528
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x528
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x538
     li r4, -0x1
     bl dtor_80013D60
@@ -2757,15 +2757,15 @@ lbl_fn_8001C284_00002430:
     addi r3, r1, 0x508
     addi r4, r1, 0x518
     addi r5, r1, 0x48
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x188
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x508
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x508
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x518
     li r4, -0x1
     bl dtor_80013D60
@@ -2788,15 +2788,15 @@ lbl_fn_8001C284_000024A8:
     addi r3, r1, 0x4e8
     addi r4, r1, 0x4f8
     addi r5, r1, 0x44
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x180
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x4e8
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x4e8
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x4f8
     li r4, -0x1
     bl dtor_80013D60
@@ -2819,15 +2819,15 @@ lbl_fn_8001C284_00002520:
     addi r3, r1, 0x4c8
     addi r4, r1, 0x4d8
     addi r5, r1, 0x40
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x178
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x4c8
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x4c8
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x4d8
     li r4, -0x1
     bl dtor_80013D60
@@ -2850,15 +2850,15 @@ lbl_fn_8001C284_00002598:
     addi r3, r1, 0x4a8
     addi r4, r1, 0x4b8
     addi r5, r1, 0x3c
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x170
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x4a8
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x4a8
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x4b8
     li r4, -0x1
     bl dtor_80013D60
@@ -2881,15 +2881,15 @@ lbl_fn_8001C284_00002610:
     addi r3, r1, 0x488
     addi r4, r1, 0x498
     addi r5, r1, 0x38
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x168
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x488
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x488
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x498
     li r4, -0x1
     bl dtor_80013D60
@@ -2912,15 +2912,15 @@ lbl_fn_8001C284_00002688:
     addi r3, r1, 0x468
     addi r4, r1, 0x478
     addi r5, r1, 0x34
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x160
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x468
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x468
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x478
     li r4, -0x1
     bl dtor_80013D60
@@ -2943,15 +2943,15 @@ lbl_fn_8001C284_00002700:
     addi r3, r1, 0x448
     addi r4, r1, 0x458
     addi r5, r1, 0x30
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x158
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x448
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x448
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x458
     li r4, -0x1
     bl dtor_80013D60
@@ -2974,15 +2974,15 @@ lbl_fn_8001C284_00002778:
     addi r3, r1, 0x428
     addi r4, r1, 0x438
     addi r5, r1, 0x2c
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x150
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x428
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x428
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x438
     li r4, -0x1
     bl dtor_80013D60
@@ -3005,15 +3005,15 @@ lbl_fn_8001C284_000027F0:
     addi r3, r1, 0x408
     addi r4, r1, 0x418
     addi r5, r1, 0x28
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x148
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x408
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x408
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x418
     li r4, -0x1
     bl dtor_80013D60
@@ -3036,15 +3036,15 @@ lbl_fn_8001C284_00002868:
     addi r3, r1, 0x3e8
     addi r4, r1, 0x3f8
     addi r5, r1, 0x24
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x140
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x3e8
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x3e8
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x3f8
     li r4, -0x1
     bl dtor_80013D60
@@ -3067,15 +3067,15 @@ lbl_fn_8001C284_000028E0:
     addi r3, r1, 0x3c8
     addi r4, r1, 0x3d8
     addi r5, r1, 0x20
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x138
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x3c8
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x3c8
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x3d8
     li r4, -0x1
     bl dtor_80013D60
@@ -3098,15 +3098,15 @@ lbl_fn_8001C284_00002958:
     addi r3, r1, 0x3a8
     addi r4, r1, 0x3b8
     addi r5, r1, 0x1c
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x130
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x3a8
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x3a8
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x3b8
     li r4, -0x1
     bl dtor_80013D60
@@ -3129,15 +3129,15 @@ lbl_fn_8001C284_000029D0:
     addi r3, r1, 0x388
     addi r4, r1, 0x398
     addi r5, r1, 0x18
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x128
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x388
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x388
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x398
     li r4, -0x1
     bl dtor_80013D60
@@ -3160,15 +3160,15 @@ lbl_fn_8001C284_00002A48:
     addi r3, r1, 0x368
     addi r4, r1, 0x378
     addi r5, r1, 0x14
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x120
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x368
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x368
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x378
     li r4, -0x1
     bl dtor_80013D60
@@ -3191,15 +3191,15 @@ lbl_fn_8001C284_00002AC0:
     addi r3, r1, 0x348
     addi r4, r1, 0x358
     addi r5, r1, 0x10
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x118
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x348
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x348
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x358
     li r4, -0x1
     bl dtor_80013D60
@@ -3222,15 +3222,15 @@ lbl_fn_8001C284_00002B38:
     addi r3, r1, 0x328
     addi r4, r1, 0x338
     addi r5, r1, 0xc
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x110
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x328
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x328
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x338
     li r4, -0x1
     bl dtor_80013D60
@@ -3253,15 +3253,15 @@ lbl_fn_8001C284_00002BB0:
     addi r3, r1, 0x308
     addi r4, r1, 0x318
     addi r5, r1, 0x8
-    bl fn_8001E0B8
+    bl property_copyValue
     lis r4, lbl_807C6B84@ha
     addi r3, r1, 0x108
     addi r4, r4, lbl_807C6B84@l
     addi r5, r1, 0x308
-    bl fn_8001E1D0
+    bl property_formatValue
     addi r3, r1, 0x308
     li r4, -0x1
-    bl fn_8001E168
+    bl property_releaseValue
     addi r3, r1, 0x318
     li r4, -0x1
     bl dtor_80013D60

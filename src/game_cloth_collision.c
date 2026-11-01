@@ -19,7 +19,7 @@ extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
-extern void fn_80108F38(void);
+extern void hurtbox_testCollisionFlags(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
@@ -1939,7 +1939,7 @@ lbl_fn_8027E678_00001980:
     mr r3, r29
     addi r4, r1, 0x10
     li r5, 0x80
-    bl fn_80108F38
+    bl hurtbox_testCollisionFlags
 lbl_fn_8027E678_00001A84:
     lwz r0, 0x14e4(r30)
     cmpwi r0, 0x0

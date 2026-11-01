@@ -52,7 +52,7 @@ extern u32 __GXGetOverflowCount(void);
 extern void GXInvalidateVtxCache(void);
 extern void GXFlush(void);
 extern void GXSetDrawSync(void);
-extern void fn_80614190(void);
+extern void __GXFlushPixelEngine(void);
 extern void fn_80614B20(void);
 extern void GXSetDispCopySrc(void);
 extern void GXSetTexCopySrc(void);
@@ -3432,7 +3432,7 @@ asm void fn_80071D80(void)
     lwz r3, 0x28(r31)
     li r4, 0x0
     bl GXCopyTex
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

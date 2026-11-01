@@ -10,7 +10,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8006AD24(void);
+extern void boss_lookupActionEntry(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void map_debugLog(void);
@@ -22,11 +22,11 @@ extern void fn_800FB4B0(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void fn_80178864(void);
-extern void fn_801789D8(void);
-extern void fn_80192758(void);
+extern void battle_evalDropTable(void);
+extern void map_processStreamChunk(void);
 extern void mem_findBlockById(void);
 extern void task_lookupTagIndex(void);
-extern void fn_80219544(void);
+extern void task_getWorkerByIndex(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -1184,7 +1184,7 @@ lbl_fn_801CB76C_00000DCC:
     lwz r3, 0x4(r30)
     li r4, 0x1395
     li r5, 0x0
-    bl fn_801789D8
+    bl battle_evalDropTable
     cmpwi r3, 0x0
     beq lbl_fn_801CB76C_00000F04
     lwz r3, 0x4(r30)
@@ -1515,7 +1515,7 @@ lbl_fn_801CBB34_0000136C:
     stw r0, 0x0(r31)
     b lbl_fn_801CBB34_0000137C
 lbl_fn_801CBB34_00001378:
-    bl fn_80192758
+    bl map_processStreamChunk
 lbl_fn_801CBB34_0000137C:
     addi r11, r1, 0x1d0
     bl _restgpr_27
@@ -1730,7 +1730,7 @@ asm void fn_801CC0AC(void)
     slwi r0, r0, 2
     add r3, r4, r0
     lwz r3, 0x64a0(r3)
-    bl fn_80219544
+    bl task_getWorkerByIndex
     mr r6, r3
     b lbl_fn_801CC0AC_000016B0
 lbl_fn_801CC0AC_00001628:
@@ -1881,7 +1881,7 @@ lbl_fn_801CC0AC_000017B8:
     bl actor_dispatchMessage
     mr r4, r28
     addi r3, r1, 0x2c
-    bl fn_8006AD24
+    bl boss_lookupActionEntry
     lwz r0, 0x20(r1)
     srwi. r0, r0, 31
     beq lbl_fn_801CC0AC_00001864

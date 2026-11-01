@@ -9,7 +9,7 @@ extern void _savegpr_16(void);
 extern void _savegpr_22(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_800185B4(void);
+extern void battle_findTargetSlotById(void);
 extern void fn_80041A28(void);
 extern void fn_80044C30(void);
 extern void mem_alloc(void);
@@ -31,8 +31,8 @@ extern void magic_dispatchActionCommand(void);
 extern void fn_801237F0(void);
 extern void player_evaluateStatusCondition(void);
 extern void fn_8012F3D8(void);
-extern void fn_80134134(void);
-extern void fn_801346C8(void);
+extern void boss_findPartById(void);
+extern void boss_testAiFlag(void);
 extern void fn_80152D10(void);
 extern void inventory_unequipItem(void);
 extern void fn_80155790(void);
@@ -46,7 +46,7 @@ extern void party_configureMemberSlot(void);
 extern void fn_8015F568(void);
 extern void fn_8016125C(void);
 extern void fn_801647BC(void);
-extern void fn_80164DCC(void);
+extern void party_evalTacticCondition(void);
 extern void fn_8016D74C(void);
 extern void fn_8016DDB0(void);
 extern void battle_canTargetActor(void);
@@ -66,7 +66,7 @@ extern void fn_8036DAA8(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
 extern void kpad_testActiveFlags(void);
-extern void fn_8037EF30(void);
+extern void fat_dispatchFsRequest(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
@@ -386,7 +386,7 @@ asm void fn_800E73EC(void)
     mr r3, r26
     li r4, 0x0
     li r5, 0x1
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     li r0, 0x0
     stw r0, 0xfc0(r27)
 lbl_fn_800E73EC_000003A0:
@@ -591,7 +591,7 @@ lbl_fn_800E7650_00000644:
     mr r3, r30
     li r4, 0x0
     li r5, 0x1
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_800E7650_00000974
 lbl_fn_800E7650_00000688:
     srwi. r0, r5, 31
@@ -721,7 +721,7 @@ lbl_fn_800E7650_00000828:
     mr r3, r30
     li r4, 0x0
     li r5, 0x1
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     stw r28, 0xfc0(r29)
     b lbl_fn_800E7650_00000974
 lbl_fn_800E7650_0000086C:
@@ -782,7 +782,7 @@ lbl_fn_800E7650_0000092C:
     ori r0, r0, 0x10
     stw r0, 0x12a4(r29)
     li r5, 0x1
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_800E7650_00000974
 lbl_fn_800E7650_00000950:
     lwz r3, lbl_8087F0A8
@@ -927,7 +927,7 @@ asm void fn_800E7BB0(void)
 lbl_fn_800E7BB0_00000B48:
     li r4, 0xd
     addi r3, r3, 0x7d4
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     beq lbl_fn_800E7BB0_00000B64
     li r31, 0x179b
@@ -935,7 +935,7 @@ lbl_fn_800E7BB0_00000B48:
 lbl_fn_800E7BB0_00000B64:
     addi r3, r30, 0x7d4
     li r4, 0x29
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     beq lbl_fn_800E7BB0_00000B80
     li r31, 0x177b
@@ -982,7 +982,7 @@ lbl_fn_800E7BB0_00000BFC:
     beq lbl_fn_800E7BB0_00000C24
     mr r3, r0
     mr r4, r30
-    bl fn_800185B4
+    bl battle_findTargetSlotById
     b lbl_fn_800E7BB0_00000C28
 lbl_fn_800E7BB0_00000C24:
     li r3, 0x0
@@ -1015,7 +1015,7 @@ lbl_fn_800E7BB0_00000C6C:
     beq lbl_fn_800E7BB0_00000C94
     mr r3, r0
     mr r4, r30
-    bl fn_800185B4
+    bl battle_findTargetSlotById
     b lbl_fn_800E7BB0_00000C98
 lbl_fn_800E7BB0_00000C94:
     li r3, 0x0
@@ -1206,7 +1206,7 @@ asm void fn_800E7F04(void)
     addi r3, r17, 0x7d4
     li r4, 0x3d
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_800E7F04_00000FC8
     addi r3, r17, 0x7d4
@@ -1495,7 +1495,7 @@ lbl_fn_800E7F04_00001358:
     cntlzw r0, r20
     lwz r3, 0x1428(r17)
     srwi r4, r0, 5
-    bl fn_80164DCC
+    bl party_evalTacticCondition
     lwz r0, 0x14a8(r17)
     li r3, 0x0
     stw r3, 0x1428(r17)
@@ -1520,7 +1520,7 @@ lbl_fn_800E7F04_00001394:
     addi r3, r17, 0x7d4
     li r4, 0xa
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_800E7F04_00001430
     lwz r0, lbl_8087F610
@@ -1601,7 +1601,7 @@ asm void fn_800E854C(void)
     cmplwi r0, 0x20
     bne lbl_fn_800E854C_00001570
     li r4, 0x1
-    bl fn_80164DCC
+    bl party_evalTacticCondition
     lwz r0, 0x55c(r30)
     cmpwi r0, 0x6
     bne lbl_fn_800E854C_0000150C

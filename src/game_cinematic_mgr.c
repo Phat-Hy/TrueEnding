@@ -26,7 +26,7 @@ extern void npc_updateTalkInteraction(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void equip_applyToCharacter(void);
-extern void fn_80161570(void);
+extern void party_updateMemberCoords(void);
 extern void fn_8016D74C(void);
 extern void battle_applyStatusEffect(void);
 extern void actor_getMovementFlags(void);
@@ -404,7 +404,7 @@ lbl_fn_80332BE0_000003D4:
     stw r0, 0x12a4(r30)
     li r5, 0x0
     li r6, 0x0
-    bl fn_80161570
+    bl party_updateMemberCoords
     lwz r0, 0x114(r1)
     psq_l f31, 0x108(r1), 0, 0
     lfd f31, 0x100(r1)
@@ -457,7 +457,7 @@ lbl_fn_80332F78_00000490:
     stw r0, 0x12a4(r30)
     li r5, 0x0
     li r6, 0x0
-    bl fn_80161570
+    bl party_updateMemberCoords
     lfs f0, lbl_8088512C
     stfs f0, 0x2e8(r30)
     lwz r31, 0xc(r1)
@@ -704,7 +704,7 @@ lbl_fn_80333024_00000818:
     stw r0, 0x12a4(r30)
     li r5, 0x0
     li r6, 0x0
-    bl fn_80161570
+    bl party_updateMemberCoords
     lwz r0, 0x114(r1)
     psq_l f31, 0x108(r1), 0, 0
     lfd f31, 0x100(r1)
@@ -757,7 +757,7 @@ lbl_fn_803333BC_000008D4:
     stw r0, 0x12a4(r30)
     li r5, 0x0
     li r6, 0x0
-    bl fn_80161570
+    bl party_updateMemberCoords
     mr r3, r30
     li r4, 0x3e8
     bl sound_initGlobalInstances

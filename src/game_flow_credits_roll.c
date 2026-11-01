@@ -27,10 +27,10 @@ extern void printf(void);
 extern void rand(void);
 extern void abort(void);
 extern void net_getSocket(void);
-extern void fn_806A8E70(void);
-extern void fn_806B0DE0(void);
+extern void net_getInterfaceHandle(void);
+extern void net_isSessionActive(void);
 extern void net_getMyAid(void);
-extern void fn_806B1250(void);
+extern void net_isSessionConnected(void);
 
 /* External data declarations */
 extern u8 jumptable_8079120C[];
@@ -150,7 +150,7 @@ lbl_fn_804E9C68_000000C0:
     li r3, 0x1
     b lbl_fn_804E9C68_000000EC
 lbl_fn_804E9C68_000000E8:
-    bl fn_806B0DE0
+    bl net_isSessionActive
 lbl_fn_804E9C68_000000EC:
     mr r21, r3
     b lbl_fn_804E9C68_00000110
@@ -161,7 +161,7 @@ lbl_fn_804E9C68_000000F4:
     li r3, 0x1
     b lbl_fn_804E9C68_0000010C
 lbl_fn_804E9C68_00000108:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804E9C68_0000010C:
     mr r21, r3
 lbl_fn_804E9C68_00000110:
@@ -1688,7 +1688,7 @@ lbl_fn_804EB1B0_000015A8:
     li r0, 0x0
     b lbl_fn_804EB1B0_000015E0
 lbl_fn_804EB1B0_000015D0:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804EB1B0_000015E0
 lbl_fn_804EB1B0_000015DC:

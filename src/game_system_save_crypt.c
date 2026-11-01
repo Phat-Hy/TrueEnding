@@ -16,7 +16,7 @@ extern void mission_updateStub(void);
 extern void vec3_initValues(void);
 extern void magic_castSpellCircle(void);
 extern void boss_initActionStream(void);
-extern void fn_8006CA80(void);
+extern void gmk_LoadHandle_constructor(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
@@ -25,19 +25,19 @@ extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Task_setActive(void);
-extern void fn_800EC254(void);
+extern void cam_testTargetVisibility(void);
 extern void cam_registerTarget(void);
 extern void cam_initTrajectoryParams(void);
 extern void cam_bindPathTarget(void);
 extern void cam_bindRotationTarget(void);
 extern void cam_evalControllerSpline(void);
 extern void cam_setLookAtTarget(void);
-extern void fn_800ED4D8(void);
-extern void fn_800ED4E0(void);
+extern void cam_getLookAtState(void);
+extern void cam_updateLookAtMatrix(void);
 extern void cam_evalLookAtMatrix(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
-extern void fn_80103F60(void);
+extern void bsp_findLeafNode(void);
 extern void fn_80108378(void);
 extern void equip_getGlobalManager(void);
 extern void debuff_removeStatusEffect(void);
@@ -1189,7 +1189,7 @@ asm void fn_803449AC(void)
     mr r29, r3
     mr r4, r29
     lwz r3, lbl_8087F048
-    bl fn_80103F60
+    bl bsp_findLeafNode
     lbz r0, 0x14c8(r29)
     mr r31, r3
     cmpwi r0, 0x0
@@ -1990,7 +1990,7 @@ lbl_fn_80345384_000019B0:
     stb r28, 0x1809(r31)
     stb r28, 0x180a(r31)
     stb r28, 0x180b(r31)
-    bl fn_8006CA80
+    bl gmk_LoadHandle_constructor
     li r0, 0xf
     stw r28, 0x1814(r31)
     addi r3, r31, 0x181c
@@ -2046,7 +2046,7 @@ lbl_fn_80345384_000019B0:
     b lbl_fn_80345384_00001B20
 lbl_fn_80345384_00001ADC:
     addi r3, r1, 0x98
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     addi r4, r29, 0x33
     li r5, 0x8
@@ -2054,7 +2054,7 @@ lbl_fn_80345384_00001ADC:
     cmpwi r3, 0x0
     bne lbl_fn_80345384_00001B18
     addi r3, r1, 0x98
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     mr r4, r3
     addi r3, r1, 0x20
@@ -2062,14 +2062,14 @@ lbl_fn_80345384_00001ADC:
     bl str_appendString
 lbl_fn_80345384_00001B18:
     addi r3, r1, 0x98
-    bl fn_800ED4E0
+    bl cam_updateLookAtMatrix
 lbl_fn_80345384_00001B20:
     addi r3, r1, 0x38
     addi r4, r1, 0xd4
     bl cam_evalLookAtMatrix
     addi r3, r1, 0x98
     addi r4, r1, 0x38
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     mr r30, r3
     addi r3, r1, 0x38
     li r4, -0x1

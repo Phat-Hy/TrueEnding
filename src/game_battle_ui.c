@@ -7,7 +7,7 @@ extern void _savegpr_23(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void fn_80134208(void);
-extern void fn_801346C8(void);
+extern void boss_testAiFlag(void);
 extern void actor_setState(void);
 extern void fn_801C1578(void);
 extern void fn_801C9B24(void);
@@ -123,7 +123,7 @@ lbl_fn_80172EFC_000000B0:
     addi r3, r27, 0x7d4
     li r4, 0x10
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     bne lbl_fn_80172EFC_000000F0
     lwz r0, lbl_8087F610

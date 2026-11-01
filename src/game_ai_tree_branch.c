@@ -34,14 +34,14 @@ extern void wcs_vformat(void);
 extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80102EAC(void);
-extern void fn_80103F60(void);
+extern void bsp_findLeafNode(void);
 extern void fn_80108378(void);
 extern void hurtbox_dispatchHitEvent(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void fn_801513D0(void);
-extern void fn_8015E4B0(void);
+extern void party_initFormationSlots(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
 extern void task_findEntryById(void);
@@ -447,7 +447,7 @@ lbl_fn_80259604_00000474:
     mr r3, r30
     addi r4, r30, 0x6b8
     li r5, -0x1
-    bl fn_8015E4B0
+    bl party_initFormationSlots
 lbl_fn_80259604_00000484:
     li r31, 0x0
     stw r31, 0x58c(r30)
@@ -2386,7 +2386,7 @@ lbl_fn_8025ACA0_00002074:
     beq lbl_fn_8025ACA0_000020B0
     lwz r3, lbl_8087F048
     mr r4, r29
-    bl fn_80103F60
+    bl bsp_findLeafNode
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8025ACA0_000020B0

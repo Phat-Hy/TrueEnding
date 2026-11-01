@@ -5,7 +5,7 @@
 extern void __files(void);
 extern void _restgpr_15(void);
 extern void _savegpr_15(void);
-extern void fn_800185B4(void);
+extern void battle_findTargetSlotById(void);
 extern void fn_80018608(void);
 extern void ui_drawColoredQuad(void);
 extern void fn_8003F030(void);
@@ -27,7 +27,7 @@ extern void fn_8010CCD8(void);
 extern void fn_8012F034(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
-extern void fn_80192758(void);
+extern void map_processStreamChunk(void);
 extern void fn_801B2EDC(void);
 extern void fn_801BDE68(void);
 extern void fn_801BDE98(void);
@@ -440,7 +440,7 @@ lbl_fn_801BE630_0000048C:
     beq lbl_fn_801BE630_000004BC
     lwz r4, 0x4(r31)
     mr r5, r19
-    bl fn_800185B4
+    bl battle_findTargetSlotById
     cmpwi r3, 0x0
     beq lbl_fn_801BE630_000004BC
     lwz r3, lbl_8087EE68
@@ -1722,7 +1722,7 @@ lbl_fn_801BE630_00001774:
     beq lbl_fn_801BE630_000017C4
     lwz r4, 0x4(r31)
     mr r5, r19
-    bl fn_800185B4
+    bl battle_findTargetSlotById
     cmpwi r3, 0x0
     beq lbl_fn_801BE630_000017C4
     lwz r3, lbl_8087EE68
@@ -1952,7 +1952,7 @@ lbl_fn_801BFF28_00001AE8:
     stw r0, 0x0(r31)
     b lbl_fn_801BFF28_00001AF8
 lbl_fn_801BFF28_00001AF4:
-    bl fn_80192758
+    bl map_processStreamChunk
 lbl_fn_801BFF28_00001AF8:
     lwz r0, 0x84(r1)
     lwz r31, 0x7c(r1)

@@ -22,7 +22,7 @@ extern void fn_800E0908(void);
 extern void fn_80124B60(void);
 extern void fn_801F0544(void);
 extern void save_createWorkerTask(void);
-extern void fn_801F6C2C(void);
+extern void save_getElapsedPlayTime(void);
 extern void fn_801F6C38(void);
 extern void save_computeCrc32(void);
 extern void save_findEntryByName(void);
@@ -43,7 +43,7 @@ extern void fn_803EB234(void);
 extern void fn_803EB394(void);
 extern void fn_803EB4A8(void);
 extern void fn_803EBC04(void);
-extern void fn_8046ECDC(void);
+extern void boss_updateLaserAimMatrix(void);
 extern void wcslen(void);
 extern u32 strlen(const char* str);
 
@@ -487,7 +487,7 @@ lbl_fn_803B6324_00000518:
 lbl_fn_803B6324_00000570:
     lwz r3, 0x48(r31)
     lfs f31, 0x50(r3)
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     fcmpo cr0, f31, f1
     cror eq, gt, eq
     bne lbl_fn_803B6324_00000824
@@ -1928,7 +1928,7 @@ asm void fn_803B7A60(void)
     stw r31, 0xc(r1)
     mr r31, r3
     lwz r3, lbl_8087F518
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     lwz r3, 0xd70(r31)
     cmpwi r3, 0x0
     beq lbl_fn_803B7A60_00001974

@@ -10,11 +10,11 @@ extern void _savegpr_21(void);
 extern void _savegpr_27(void);
 extern void fn_8004FF58(void);
 extern void fn_800502A8(void);
-extern void fn_80051CD8(void);
+extern void player_transformBoundingSphere(void);
 extern void fn_800629F0(void);
 extern void fn_80062F7C(void);
 extern void fn_80063200(void);
-extern void fn_80063764(void);
+extern void magic_updateCircleArea(void);
 extern void fn_800638B0(void);
 extern void magic_castSpellCircle(void);
 extern void minimap_renderOverlay(void);
@@ -22,7 +22,7 @@ extern void world_getGlobalFlag(void);
 extern void world_getLocalFlag(void);
 extern void dvd_showDiskErrorDialog(void);
 extern void fn_803CCDAC(void);
-extern void fn_803CD958(void);
+extern void crowd_selectWaypointByWeight(void);
 extern void fn_804A04AC(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -446,7 +446,7 @@ lbl_fn_803C2090_0000044C:
     fadds f0, f0, f8
     stfs f31, 0x14(r1)
     stfs f0, 0xc(r1)
-    bl fn_80051CD8
+    bl player_transformBoundingSphere
     cmpwi r3, 0x0
     beq lbl_fn_803C2090_00000530
     addi r3, r23, 0x18
@@ -983,7 +983,7 @@ lbl_fn_803C221C_00000C70:
     lwzx r18, r28, r0
 lbl_fn_803C221C_00000CC8:
     mr r4, r19
-    bl fn_803CD958
+    bl crowd_selectWaypointByWeight
     clrlwi r3, r3, 16
     addi r0, r19, 0x1
     cmplw r0, r3
@@ -1062,7 +1062,7 @@ lbl_fn_803C221C_00000CFC:
     lfs f1, lbl_80885CBC
     mr r5, r21
     mr r6, r18
-    bl fn_80063764
+    bl magic_updateCircleArea
 lbl_fn_803C221C_00000E08:
     addi r19, r19, 0x1
     addi r15, r15, 0x30
@@ -1248,7 +1248,7 @@ lbl_fn_803C221C_00000FAC:
     lfs f1, lbl_80885CBC
     mr r5, r21
     addi r6, r15, 0xff
-    bl fn_80063764
+    bl magic_updateCircleArea
 lbl_fn_803C221C_000010C8:
     addi r18, r18, 0x1
     addi r19, r19, 0x18
@@ -1354,7 +1354,7 @@ lbl_fn_803C221C_00001144:
     lfs f1, lbl_80885CBC
     mr r5, r21
     subi r6, r15, 0x100
-    bl fn_80063764
+    bl magic_updateCircleArea
 lbl_fn_803C221C_00001260:
     addi r18, r18, 0x1
     addi r19, r19, 0xc
@@ -1531,7 +1531,7 @@ lbl_fn_803C221C_000013E4:
     lfs f1, lbl_80885CBC
     mr r5, r21
     addi r6, r15, 0x4000
-    bl fn_80063764
+    bl magic_updateCircleArea
 lbl_fn_803C221C_00001500:
     addi r18, r18, 0x1
     addi r19, r19, 0x8

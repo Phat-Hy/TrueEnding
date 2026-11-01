@@ -14,15 +14,15 @@ extern void mem_free(void);
 extern void str_findChar(void);
 extern void fn_80117200(void);
 extern void fn_80134800(void);
-extern void fn_801CF334(void);
+extern void ui_log_findActiveEntry(void);
 extern void fn_801CFA5C(void);
 extern void fn_801D4E74(void);
 extern void fn_801DCE88(void);
 extern void save_parseSlotStats(void);
-extern void fn_801F4AA0(void);
+extern void save_findSlotTask(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801F7590(void);
+extern void save_writeBackupSlot(void);
 extern void save_findEntryByName(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
@@ -33,10 +33,10 @@ extern void assert_generateId(void);
 extern void assert_formatLocation(void);
 extern void mem_findBlockById(void);
 extern void time_wrapMilliseconds(void);
-extern void fn_8020EF4C(void);
+extern void rand_stepEntropy(void);
 extern void random_generateValue(void);
 extern void event_findEntryById(void);
-extern void fn_80219544(void);
+extern void task_getWorkerByIndex(void);
 extern void fn_80444B64(void);
 extern void fn_80444BE8(void);
 extern void fn_80444C48(void);
@@ -401,7 +401,7 @@ lbl_fn_801E6714_00000434:
     stw r0, 0x88(r3)
 lbl_fn_801E6714_00000464:
     mr r3, r22
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r0, 0x4c(r3)
     lwz r4, lbl_8087F4F0
     lwz r3, 0x13c(r22)
@@ -414,7 +414,7 @@ lbl_fn_801E6714_00000464:
     bl profile_getMetricValue
     mr r20, r3
     mr r3, r22
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r4, 0x4c(r3)
     mr r3, r22
     lwz r6, 0x1b98(r22)
@@ -502,7 +502,7 @@ lbl_fn_801E6714_000005C8:
     psq_st f1, 0x0(r5), 0, 0
     addi r4, r31, 0x1b
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F7590
+    bl save_writeBackupSlot
     lwz r3, 0xc(r26)
     cmpwi r3, 0x0
     blt lbl_fn_801E6714_000006AC
@@ -562,7 +562,7 @@ lbl_fn_801E6714_000006AC:
     psq_st f1, 0x0(r5), 0, 0
     addi r4, r31, 0x24
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F7590
+    bl save_writeBackupSlot
     addi r5, r1, 0x8
     psq_l f1, 0x0(r29), 0, 0
     psq_l f2, 0x8(r29), 0, 0
@@ -570,7 +570,7 @@ lbl_fn_801E6714_000006AC:
     psq_st f1, 0x0(r5), 0, 0
     addi r4, r31, 0x2b
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F7590
+    bl save_writeBackupSlot
     slwi r0, r23, 3
     lwz r3, 0x8(r26)
     add r4, r27, r0
@@ -679,7 +679,7 @@ lbl_fn_801E6B10_00000854:
     bl profile_getMetricValue
     mr r21, r3
     mr r3, r23
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lwz r4, 0x4c(r3)
     mr r3, r23
     lwz r6, 0x1b98(r23)
@@ -687,7 +687,7 @@ lbl_fn_801E6B10_00000854:
     bl fn_801D4E74
 lbl_fn_801E6B10_00000884:
     mr r3, r23
-    bl fn_801CF334
+    bl ui_log_findActiveEntry
     lis r4, lbl_8073CAA0@ha
     lis r5, lbl_8073CAA8@ha
     lwz r27, 0x4c(r3)
@@ -772,7 +772,7 @@ lbl_fn_801E6B10_0000099C:
     psq_st f1, 0x0(r5), 0, 0
     addi r4, r31, 0x1b
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F7590
+    bl save_writeBackupSlot
     lwz r3, 0xc(r26)
     stfs f29, 0x48(r1)
     cmpwi r3, 0x0
@@ -852,7 +852,7 @@ lbl_fn_801E6B10_00000AD0:
     psq_st f1, 0x0(r5), 0, 0
     addi r4, r31, 0x24
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F7590
+    bl save_writeBackupSlot
     addi r5, r1, 0x8
     psq_l f1, 0x0(r29), 0, 0
     psq_l f2, 0x8(r29), 0, 0
@@ -860,7 +860,7 @@ lbl_fn_801E6B10_00000AD0:
     psq_st f1, 0x0(r5), 0, 0
     addi r4, r31, 0x2b
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F7590
+    bl save_writeBackupSlot
     b lbl_fn_801E6B10_00000B18
 lbl_fn_801E6B10_00000B14:
     stfs f28, 0x50(r3)
@@ -906,7 +906,7 @@ asm void fn_801E6EF0(void)
     mr r29, r6
     mr r30, r7
     mr r31, r8
-    bl fn_80219544
+    bl task_getWorkerByIndex
     mulli r7, r28, 0xc
     li r8, 0x0
     li r4, 0x0
@@ -971,7 +971,7 @@ asm void fn_801E6FC8(void)
     mr r29, r6
     mr r30, r7
     mr r31, r8
-    bl fn_80219544
+    bl task_getWorkerByIndex
     li r7, 0x0
     li r4, 0x0
     mr r5, r7
@@ -1307,7 +1307,7 @@ lbl_fn_801E714C_00001144:
     li r3, 0x1
     bl time_wrapMilliseconds
     mr r24, r3
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_801E714C_00001170
     lwz r4, -0x7d70(r27)
@@ -1484,7 +1484,7 @@ lbl_fn_801E75F8_000013D0:
     li r24, 0x0
     bne lbl_fn_801E75F8_00001450
     lwz r3, 0x0(r20)
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_801E75F8_0000140C
     lwz r24, 0x8(r20)
@@ -1496,7 +1496,7 @@ lbl_fn_801E75F8_0000140C:
     slwi r0, r3, 3
     lwzx r4, r22, r0
     bl time_wrapMilliseconds
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_801E75F8_00001450
     mr r3, r26
@@ -1722,13 +1722,13 @@ lbl_fn_801E75F8_000016D4:
     lfs f2, 0x4(r31)
     addi r4, r1, 0x128
     lfs f3, 0x8(r31)
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lfs f1, lbl_807C7898@l(r23)
     mr r3, r29
     lfs f2, 0x4(r31)
     addi r4, r1, 0xa8
     lfs f3, 0x8(r31)
-    bl fn_801F4AA0
+    bl save_findSlotTask
     b lbl_fn_801E75F8_00001848
 lbl_fn_801E75F8_000017B0:
     bne lbl_fn_801E75F8_00001800
@@ -1743,13 +1743,13 @@ lbl_fn_801E75F8_000017B0:
     lfs f2, 0x4(r28)
     addi r4, r1, 0x128
     lfs f3, 0x8(r28)
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lfs f1, lbl_807C78B8@l(r30)
     mr r3, r29
     lfs f2, 0x4(r28)
     addi r4, r1, 0xa8
     lfs f3, 0x8(r28)
-    bl fn_801F4AA0
+    bl save_findSlotTask
     b lbl_fn_801E75F8_00001848
 lbl_fn_801E75F8_00001800:
     addi r3, r1, 0xe8
@@ -1763,13 +1763,13 @@ lbl_fn_801E75F8_00001800:
     lfs f2, 0x4(r24)
     addi r4, r1, 0x128
     lfs f3, 0x8(r24)
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lfs f1, lbl_807C78A8@l(r25)
     mr r3, r29
     lfs f2, 0x4(r24)
     addi r4, r1, 0xa8
     lfs f3, 0x8(r24)
-    bl fn_801F4AA0
+    bl save_findSlotTask
 lbl_fn_801E75F8_00001848:
     addi r19, r19, 0x1
     addi r20, r20, 0x4

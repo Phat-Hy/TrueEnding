@@ -21,7 +21,7 @@ extern void fn_80127D8C(void);
 extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_evaluateConditions(void);
-extern void fn_80158CA4(void);
+extern void shop_loadCatalogItem(void);
 extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
@@ -40,7 +40,7 @@ extern void world_startMapTransition(void);
 extern void world_reloadMapTransition(void);
 extern void fn_805A4258(void);
 extern void fn_805A49E8(void);
-extern void fn_805A4A20(void);
+extern void world_setFlagByType(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -1875,7 +1875,7 @@ lbl_fn_80336C8C_000019D8:
     stw r0, 0x14cc(r30)
 lbl_fn_80336C8C_00001A00:
     mr r3, r30
-    bl fn_80158CA4
+    bl shop_loadCatalogItem
     cmpwi r3, 0x0
     beq lbl_fn_80336C8C_00001C90
     lwz r0, 0xf80(r30)
@@ -2046,7 +2046,7 @@ lbl_fn_80336C8C_00001C30:
     mr r3, r30
     addi r4, r30, 0x1564
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
 lbl_fn_80336C8C_00001C90:
     mr r3, r30
     bl npc_initScriptContext

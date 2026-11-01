@@ -19,7 +19,7 @@ extern void fn_80103600(void);
 extern void fn_80107850(void);
 extern void hurtbox_testCollisionLayer(void);
 extern void hurtbox_dispatchHitEvent(void);
-extern void fn_8012DF7C(void);
+extern void enemy_calcAttackTrajectory(void);
 extern void quest_getRewardItemSlot(void);
 extern void party_configureMemberSlot(void);
 extern void fn_80160170(void);
@@ -37,9 +37,9 @@ extern void fn_802D67F8(void);
 extern void fn_802D7058(void);
 extern void world_setGlobalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_80389838(void);
+extern void nwc24_transitionDataState(void);
 extern void fn_805991E4(void);
-extern void fn_805A4A20(void);
+extern void world_setFlagByType(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -575,7 +575,7 @@ lbl_fn_802D4238_00000694:
     mr r3, r29
     addi r4, r29, 0x1678
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
 lbl_fn_802D4238_000006E8:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1089,7 +1089,7 @@ lbl_fn_802D4628_00000E34:
     stw r4, 0x13c(r1)
     addi r0, r7, 0x1
     subf r26, r0, r26
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
     lwz r12, 0x0(r20)
     mr r4, r20
     addi r3, r1, 0xd4
@@ -1278,7 +1278,7 @@ lbl_fn_802D4628_000010C8:
     stfs f4, 0x11c(r1)
     stfs f3, 0x120(r1)
     stfs f0, 0x124(r1)
-    bl fn_8012DF7C
+    bl enemy_calcAttackTrajectory
     lwz r3, lbl_8087F048
     mr r5, r22
     mr r7, r24
@@ -1306,7 +1306,7 @@ lbl_fn_802D4628_00001170:
     mr r3, r24
     addi r4, r24, 0x1698
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
 lbl_fn_802D4628_000011B0:
     lwz r0, 0x1538(r24)
     cmpwi r0, 0x0
@@ -1595,7 +1595,7 @@ lbl_fn_802D5020_00001538:
     mr r3, r31
     addi r4, r31, 0x16a0
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
 lbl_fn_802D5020_000015C8:
     lwz r4, 0x1510(r31)
     mr r3, r31
@@ -1841,7 +1841,7 @@ lbl_fn_802D52A0_000018C8:
     lwz r3, lbl_8087F430
     addi r3, r3, 0x6c
     lwz r4, 0x804(r3)
-    bl fn_80389838
+    bl nwc24_transitionDataState
     lwz r7, lbl_8087EFA8
     li r0, 0x0
     lfs f0, lbl_8088458C

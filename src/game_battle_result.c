@@ -14,7 +14,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_80129930(void);
 extern void fn_80129954(void);
 extern void fn_80129978(void);
-extern void fn_80129A48(void);
+extern void path_resetWaypointVelocity(void);
 extern void actor_setState(void);
 extern void fn_801A0BA8(void);
 extern void fn_801A17A4(void);
@@ -66,7 +66,7 @@ extern u32 lbl_80881B50;
 /* Function declarations */
 void fn_801749EC(void);
 void fn_80174E04(void);
-void fn_801750FC(void);
+void battle_calcOutcomeBonus(void);
 void fn_8017518C(void);
 void fn_8017547C(void);
 void fn_80175A38(void);
@@ -573,7 +573,7 @@ lbl_fn_80174E04_000006F0:
     blr
 }
 
-asm void fn_801750FC(void)
+asm void battle_calcOutcomeBonus(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -584,7 +584,7 @@ asm void fn_801750FC(void)
     mr r30, r3
     lwz r4, 0x1208(r3)
     cmpwi r4, 0x0
-    beq lbl_fn_801750FC_00000788
+    beq lbl_battle_calcOutcomeBonus_00000788
     lfs f0, lbl_8088196C
     li r31, 0x0
     stw r3, 0x18(r1)
@@ -606,7 +606,7 @@ asm void fn_801750FC(void)
     li r0, 0xff
     stb r0, 0x520(r3)
     stw r31, 0x1208(r30)
-lbl_fn_801750FC_00000788:
+lbl_battle_calcOutcomeBonus_00000788:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
     lwz r30, 0x28(r1)
@@ -1318,7 +1318,7 @@ asm void fn_80175B18(void)
     beq lbl_fn_80175B18_00001990
     lfs f1, lbl_80881A00
     addi r3, r3, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     b lbl_fn_80175B18_00001990
 lbl_fn_80175B18_0000118C:
     lwz r0, 0x12bc(r3)
@@ -1333,7 +1333,7 @@ lbl_fn_80175B18_0000118C:
     stfs f3, 0x580(r3)
     stfs f0, 0x584(r3)
     addi r3, r3, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     b lbl_fn_80175B18_00001990
 lbl_fn_80175B18_000011C4:
     lwz r4, 0x48(r3)
@@ -1439,7 +1439,7 @@ lbl_fn_80175B18_000012FC:
 lbl_fn_80175B18_0000132C:
     lfs f1, lbl_80881A00
     addi r3, r29, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     b lbl_fn_80175B18_00001990
 lbl_fn_80175B18_0000133C:
     lwz r0, 0x12a4(r29)
@@ -1447,7 +1447,7 @@ lbl_fn_80175B18_0000133C:
     beq lbl_fn_80175B18_00001358
     lfs f1, lbl_80881A00
     addi r3, r29, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     b lbl_fn_80175B18_00001990
 lbl_fn_80175B18_00001358:
     lwz r3, lbl_8087F430
@@ -1470,7 +1470,7 @@ lbl_fn_80175B18_00001374:
     stfs f3, 0x580(r29)
     lfs f1, lbl_80881964
     stfs f0, 0x584(r29)
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     b lbl_fn_80175B18_00001990
 lbl_fn_80175B18_000013AC:
     lwz r3, lbl_8087EFA8
@@ -1480,7 +1480,7 @@ lbl_fn_80175B18_000013AC:
     ble lbl_fn_80175B18_000013D0
     lfs f1, lbl_80881A00
     addi r3, r29, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     b lbl_fn_80175B18_00001990
 lbl_fn_80175B18_000013D0:
     lwz r3, lbl_8087F098
@@ -1883,7 +1883,7 @@ lbl_fn_80175B18_0000197C:
     bne lbl_fn_80175B18_00001990
     lfs f1, lbl_80881A00
     addi r3, r29, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
 lbl_fn_80175B18_00001990:
     addi r11, r1, 0x100
     psq_l f31, 0x108(r1), 0, 0

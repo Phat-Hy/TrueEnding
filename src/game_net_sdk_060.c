@@ -54,10 +54,10 @@ extern void fn_8071EA40(void);
 extern void fn_8071F270(void);
 extern void fn_8071F360(void);
 extern void fn_80721000(void);
-extern void fn_80725170(void);
+extern void net_listClearAll(void);
 extern void fn_80725200(void);
-extern void fn_807252A0(void);
-extern void fn_807252D0(void);
+extern void net_listInsertNode(void);
+extern void net_listRemoveNode(void);
 
 /* External data declarations */
 extern u8 lbl_807C63C8[];
@@ -93,9 +93,9 @@ void fn_8071C790(void);
 void fn_8071C840(void);
 void fn_8071C850(void);
 void fn_8071C860(void);
-void fn_8071C870(void);
-void fn_8071C880(void);
-void fn_8071C890(void);
+u8 fn_8071C870(void *p);
+u8 fn_8071C880(void *p);
+u8 fn_8071C890(void *p);
 void fn_8071C8A0(void);
 void fn_8071C8B0(void);
 void fn_8071C8C0(void);
@@ -112,10 +112,10 @@ void fn_8071CF10(void);
 void fn_8071CF70(void);
 void fn_8071D060(void);
 void fn_8071D080(void);
-void fn_8071D090(void);
-void fn_8071D0A0(void);
-void fn_8071D0B0(void);
-void fn_8071D0C0(void);
+void *fn_8071D090(void *p);
+void *fn_8071D0A0(void *p);
+u8 fn_8071D0B0(void *p);
+void *fn_8071D0C0(void);
 void fn_8071D0D0(void);
 void fn_8071D0E0(void);
 void fn_8071D1E0(void);
@@ -231,7 +231,7 @@ lbl_fn_8071BF80_00000100:
     addi r3, r29, 0x174
     addi r4, r1, 0x8
     addi r5, r28, 0x2c
-    bl fn_807252A0
+    bl net_listInsertNode
     lbz r0, 0x102(r29)
     li r31, 0x1
     cmpwi r0, 0x0
@@ -666,7 +666,7 @@ lbl_fn_8071C630_00000700:
     mr r31, r3
     addi r4, r29, 0x2c
     addi r3, r5, 0x174
-    bl fn_807252D0
+    bl net_listRemoveNode
     lwz r3, 0x10(r29)
     cmpwi r29, 0x0
     addi r30, r3, 0x180
@@ -711,7 +711,7 @@ asm void fn_8071C700(void)
     mr r31, r3
     addi r4, r29, 0x2c
     addi r3, r5, 0x174
-    bl fn_807252D0
+    bl net_listRemoveNode
     lwz r3, 0x10(r29)
     cmpwi r29, 0x0
     addi r30, r3, 0x180
@@ -807,25 +807,19 @@ asm void fn_8071C860(void)
     bctr
 }
 
-asm void fn_8071C870(void)
+u8 fn_8071C870(void *p)
 {
-    nofralloc
-    lbz r3, 0x107(r3)
-    blr
+    return *(u8 *)((u8 *)p + 0x107);
 }
 
-asm void fn_8071C880(void)
+u8 fn_8071C880(void *p)
 {
-    nofralloc
-    lbz r3, 0x102(r3)
-    blr
+    return *(u8 *)((u8 *)p + 0x102);
 }
 
-asm void fn_8071C890(void)
+u8 fn_8071C890(void *p)
 {
-    nofralloc
-    lbz r3, 0x101(r3)
-    blr
+    return *(u8 *)((u8 *)p + 0x101);
 }
 
 asm void fn_8071C8A0(void)
@@ -1284,7 +1278,7 @@ asm void fn_8071CE70(void)
 lbl_fn_8071CE70_00000F38:
     addi r3, r30, 0x4
     addi r4, r29, 0xf0
-    bl fn_807252D0
+    bl net_listRemoveNode
     lwz r12, 0x0(r29)
     mr r3, r29
     li r4, -0x1
@@ -1364,7 +1358,7 @@ lbl_fn_8071CF70_00001034:
     addi r28, r28, 0xf0
     addi r3, r30, 0x4
     mr r4, r28
-    bl fn_807252D0
+    bl net_listRemoveNode
     lwz r3, 0x8(r30)
     addi r0, r30, 0x8
     b lbl_fn_8071CF70_00001090
@@ -1391,7 +1385,7 @@ lbl_fn_8071CF70_00001098:
     mr r5, r28
     addi r3, r30, 0x4
     addi r4, r1, 0x8
-    bl fn_807252A0
+    bl net_listInsertNode
     mr r3, r31
     bl OSUnlockMutex
     lwz r0, 0x24(r1)
@@ -1421,32 +1415,24 @@ asm void fn_8071D080(void)
     b fn_8071D1E0
 }
 
-asm void fn_8071D090(void)
+void *fn_8071D090(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x110
-    blr
+    return (u8 *)p + 0x110;
 }
 
-asm void fn_8071D0A0(void)
+void *fn_8071D0A0(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x110
-    blr
+    return (u8 *)p + 0x110;
 }
 
-asm void fn_8071D0B0(void)
+u8 fn_8071D0B0(void *p)
 {
-    nofralloc
-    lbz r3, 0x213(r3)
-    blr
+    return *(u8 *)((u8 *)p + 0x213);
 }
 
-asm void fn_8071D0C0(void)
+void *fn_8071D0C0(void)
 {
-    nofralloc
-    la r3, lbl_80880500
-    blr
+    return &lbl_80880500;
 }
 
 asm void fn_8071D0D0(void)
@@ -1665,7 +1651,7 @@ asm void fn_8071D370(void)
     mr r30, r3
     beq lbl_fn_8071D370_0000142C
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
     cmpwi r31, 0x0
     ble lbl_fn_8071D370_0000142C
     mr r3, r30
@@ -1713,7 +1699,7 @@ asm void net_packet_enqueueSend(void)
     addi r0, r3, 0x4
     stw r0, 0x8(r1)
     addi r5, r30, 0x4
-    bl fn_807252A0
+    bl net_listInsertNode
     addi r3, r29, 0x2c
     bl OSWakeupThread
     mr r3, r31

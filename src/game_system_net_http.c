@@ -10,13 +10,13 @@ extern void item_useConsumable(void);
 extern void skill_calculateDamage(void);
 extern void magic_castSpellCircle(void);
 extern void boss_triggerEventSequence(void);
-extern void fn_8006B2D8(void);
-extern void fn_8006CA80(void);
+extern void boss_parseStateCondition(void);
+extern void gmk_LoadHandle_constructor(void);
 extern void mem_alloc(void);
-extern void fn_8008B964(void);
+extern void sys_getMainManager(void);
 extern void skin_playAnimationByName(void);
 extern void atn_Task_constructor(void);
-extern void fn_80116BD4(void);
+extern void actor_calcSpawnTransform(void);
 extern void fn_803918EC(void);
 extern void fn_80393BEC(void);
 extern void PSMTXRotRad(void);
@@ -62,7 +62,7 @@ void fn_803920C8(void);
 void fn_80392510(void);
 void fn_803928C0(void);
 void fn_80392964(void);
-void fn_80392A04(void);
+void mtx_copyPairedSingle(void);
 void fn_80392C94(void);
 void fn_80392CE0(void);
 void fn_80392D2C(void);
@@ -675,7 +675,7 @@ asm void fn_80392964(void)
     mr r31, r7
     mr r4, r27
     addi r3, r3, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     cmpwi r30, 0x0
     beq lbl_fn_80392964_000008DC
     mr r3, r27
@@ -700,9 +700,9 @@ lbl_fn_80392964_0000090C:
     bl fn_803928C0
     addi r3, r27, 0x1f4
     bl item_useConsumable
-    bl fn_8008B964
+    bl sys_getMainManager
     addi r4, r27, 0x1f4
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     lmw r27, 0xc(r1)
     lwz r0, 0x24(r1)
     mtlr r0
@@ -710,7 +710,7 @@ lbl_fn_80392964_0000090C:
     blr
 }
 
-asm void fn_80392A04(void)
+asm void mtx_copyPairedSingle(void)
 {
     nofralloc
     stwu r1, -0x50(r1)
@@ -857,7 +857,7 @@ asm void fn_80392A04(void)
     stfs f0, 0x178(r3)
     psq_st f1, 0xc(r7), 0, 0
     stfs f2, 0x190(r3)
-lbl_fn_80392A04_00000B7C:
+lbl_mtx_copyPairedSingle_00000B7C:
     psq_l f1, 0x0(r8), 0, 0
     psq_st f1, 0x0(r9), 0, 0
     lfs f2, 0x8(r8)
@@ -867,7 +867,7 @@ lbl_fn_80392A04_00000B7C:
     stfs f0, 0xc(r9)
     addi r9, r9, 0x10
     cmplw r9, r0
-    blt lbl_fn_80392A04_00000B7C
+    blt lbl_mtx_copyPairedSingle_00000B7C
     psq_l f31, 0x48(r1), 0, 0
     lfd f31, 0x40(r1)
     psq_l f30, 0x38(r1), 0, 0
@@ -1596,12 +1596,12 @@ asm void fn_803936A4(void)
     mr r20, r7
     bl atn_Task_constructor
     lis r3, lbl_8078B128@ha
-    lis r4, fn_8006CA80@ha
+    lis r4, gmk_LoadHandle_constructor@ha
     addi r3, r3, lbl_8078B128@l
     lis r5, atn_LH_Binary_destructor@ha
     stw r3, 0x0(r21)
     addi r3, r21, 0x48
-    addi r4, r4, fn_8006CA80@l
+    addi r4, r4, gmk_LoadHandle_constructor@l
     addi r5, r5, atn_LH_Binary_destructor@l
     li r6, 0x8
     li r7, 0x3
@@ -1822,7 +1822,7 @@ lbl_fn_803936A4_0000190C:
     bl actor_dispatchMessage
     addi r3, r1, 0x54
     addi r4, r1, 0x48
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0x48(r1)
     srwi. r0, r0, 31
     beq lbl_fn_803936A4_00001970

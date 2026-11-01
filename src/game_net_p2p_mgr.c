@@ -23,7 +23,7 @@ extern void fn_806B0CF0(void);
 extern void net_getMyAid(void);
 extern void fn_806B0EB0(void);
 extern void fn_806B1170(void);
-extern void fn_806B1250(void);
+extern void net_isSessionConnected(void);
 extern void fn_806B3C20(void);
 extern void fn_806B3C40(void);
 extern void fn_806B3CC0(void);
@@ -321,7 +321,7 @@ lbl_fn_8050A994_000002D8:
     li r0, 0x0
     b lbl_fn_8050A994_00000310
 lbl_fn_8050A994_00000300:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_8050A994_00000310
 lbl_fn_8050A994_0000030C:
@@ -825,7 +825,7 @@ lbl_fn_8050B01C_00000954:
     li r0, 0x0
     b lbl_fn_8050B01C_0000098C
 lbl_fn_8050B01C_0000097C:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_8050B01C_0000098C
 lbl_fn_8050B01C_00000988:
@@ -846,7 +846,7 @@ lbl_fn_8050B01C_0000098C:
     li r0, 0x0
     b lbl_fn_8050B01C_000009D4
 lbl_fn_8050B01C_000009C4:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_8050B01C_000009D4
 lbl_fn_8050B01C_000009D0:
@@ -1684,7 +1684,7 @@ lbl_fn_8050BAC8_0000148C:
     li r3, 0x0
     b lbl_fn_8050BAC8_000014C0
 lbl_fn_8050BAC8_000014B0:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r3, r3, 24
     b lbl_fn_8050BAC8_000014C0
 lbl_fn_8050BAC8_000014BC:
@@ -1941,7 +1941,7 @@ lbl_fn_8050BDC8_000017DC:
     li r0, 0x0
     b lbl_fn_8050BDC8_00001810
 lbl_fn_8050BDC8_00001800:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_8050BDC8_00001810
 lbl_fn_8050BDC8_0000180C:

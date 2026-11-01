@@ -12,7 +12,7 @@ extern void actor_dispatchMessage(void);
 extern void fn_800458D4(void);
 extern void fn_800458F4(void);
 extern void boss_decodePhaseBitfield(void);
-extern void fn_8006B2D8(void);
+extern void boss_parseStateCondition(void);
 extern void fn_80070C98(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
@@ -20,7 +20,7 @@ extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
-extern void fn_8008B130(void);
+extern void map_getArchiveName(void);
 extern void fn_8009FE24(void);
 extern void fn_800B1BAC(void);
 extern void fn_800B1C1C(void);
@@ -35,10 +35,10 @@ extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void fn_800D5B58(void);
 extern void str_findChar(void);
-extern void fn_8021771C(void);
+extern void task_findNextReady(void);
 extern void fn_8037DD00(void);
 extern void fn_803EE5AC(void);
-extern void fn_80470528(void);
+extern void boss_releaseLaserTarget(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getName(void);
@@ -907,7 +907,7 @@ lbl_fn_8049D974_00000A70:
     mr r3, r29
     mr r4, r30
     mr r5, r31
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     stw r3, 0x54(r28)
     beq lbl_fn_8049D974_00000BE4
@@ -1060,7 +1060,7 @@ lbl_fn_8049DDD8_00000C84:
     bl shockwave_freeEmitter
     addic. r3, r30, 0xfc
     beq lbl_fn_8049DDD8_00000CA8
-    bl fn_80470528
+    bl boss_releaseLaserTarget
 lbl_fn_8049DDD8_00000CA8:
     addi r3, r30, 0xd0
     li r4, -0x1
@@ -1602,7 +1602,7 @@ lbl_fn_8049E480_00001408:
     cmpwi r0, 0x0
     bne lbl_fn_8049E480_000015F0
     addi r3, r23, 0x50
-    bl fn_8008B130
+    bl map_getArchiveName
     stw r20, 0x90(r1)
     mr r19, r3
     stw r20, 0x94(r1)
@@ -1626,7 +1626,7 @@ lbl_fn_8049E480_00001408:
     bl boss_decodePhaseBitfield
     addi r3, r1, 0xb4
     addi r4, r1, 0x84
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0x84(r1)
     srwi. r0, r0, 31
     beq lbl_fn_8049E480_00001490
@@ -1766,7 +1766,7 @@ lbl_fn_8049E480_000015F0:
     bl boss_decodePhaseBitfield
     addi r3, r1, 0xa8
     addi r4, r1, 0x6c
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0x6c(r1)
     srwi. r0, r0, 31
     beq lbl_fn_8049E480_00001670
@@ -1905,7 +1905,7 @@ lbl_fn_8049E480_000017C8:
     bl boss_decodePhaseBitfield
     addi r3, r1, 0x9c
     addi r4, r1, 0x54
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lwz r0, 0x54(r1)
     srwi. r0, r0, 31
     beq lbl_fn_8049E480_0000184C

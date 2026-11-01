@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void fn_80017060(void);
 extern void fn_80047B54(void);
 extern void boss_recordDamage(void);
-extern void fn_8006A250(void);
+extern void boss_dispatchActionTransition(void);
 extern void fn_8006A900(void);
 extern void boss_triggerEventSequence(void);
 extern void fn_8006D0C8(void);
@@ -54,9 +54,9 @@ extern void fn_80183774(void);
 extern void fn_801E97DC(void);
 extern void fn_802085E0(void);
 extern void fn_80208634(void);
-extern void fn_8021771C(void);
+extern void task_findNextReady(void);
 extern void fn_80218268(void);
-extern void fn_80219544(void);
+extern void task_getWorkerByIndex(void);
 extern void fn_80239C14(void);
 extern void fn_8023A5A8(void);
 extern void fn_8023A614(void);
@@ -91,9 +91,9 @@ extern void fn_803792F0(void);
 extern void fn_8037D34C(void);
 extern void fn_8037D3E8(void);
 extern void fn_8037D684(void);
-extern void fn_8037EF30(void);
+extern void fat_dispatchFsRequest(void);
 extern void fn_8037F744(void);
-extern void fn_80389838(void);
+extern void nwc24_transitionDataState(void);
 extern void fn_8038F52C(void);
 extern void fn_80390A88(void);
 extern void fn_803933A4(void);
@@ -116,11 +116,11 @@ extern void fn_803E32EC(void);
 extern void fn_803E4478(void);
 extern void fn_803E454C(void);
 extern void fn_8044D028(void);
-extern void fn_8046ECDC(void);
+extern void boss_updateLaserAimMatrix(void);
 extern void fn_8046F8B8(void);
 extern void fn_8046F96C(void);
 extern void fn_80470364(void);
-extern void fn_80470528(void);
+extern void boss_releaseLaserTarget(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -367,7 +367,7 @@ lbl_world_Manager_draw_00000170:
     lwz r3, 0x5514(r28)
     lwz r4, 0x5518(r28)
     lwz r5, 0x551c(r28)
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_world_Manager_draw_0000055C
@@ -393,7 +393,7 @@ lbl_world_Manager_draw_00000210:
     slwi r0, r0, 2
     add r3, r4, r0
     lwz r3, 0x64a0(r3)
-    bl fn_80219544
+    bl task_getWorkerByIndex
     mr r30, r3
 lbl_world_Manager_draw_00000254:
     lwz r3, lbl_8087F8A0
@@ -693,7 +693,7 @@ lbl_world_Manager_draw_00000620:
     stw r0, 0x950(r28)
     addi r3, r28, 0x6c
     li r4, 0x0
-    bl fn_80389838
+    bl nwc24_transitionDataState
 lbl_world_Manager_draw_00000650:
     lwz r3, lbl_8087F048
     li r4, 0x1
@@ -1074,7 +1074,7 @@ lbl_world_Manager_draw_00000B94:
     li r30, 0x0
     lwz r4, 0x5518(r28)
     lwz r5, 0x551c(r28)
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_world_Manager_draw_00000DC8
@@ -1222,7 +1222,7 @@ lbl_world_Manager_draw_00000DC8:
     lwz r3, 0x5514(r28)
     lwz r4, 0x5518(r28)
     lwz r5, 0x551c(r28)
-    bl fn_8021771C
+    bl task_findNextReady
     mr r27, r3
     lwz r24, 0x934(r25)
     lwz r3, 0x5514(r28)
@@ -1254,7 +1254,7 @@ lbl_world_Manager_draw_00000E54:
 lbl_world_Manager_draw_00000E5C:
     lwz r3, lbl_8087F518
     li r4, 0x1
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     b lbl_world_Manager_draw_000031A0
     lwz r5, 0x5514(r3)
     lwz r4, 0x551c(r3)
@@ -1303,11 +1303,11 @@ lbl_world_Manager_draw_00000F04:
     stw r0, 0x5538(r28)
     li r4, 0x1
     lwz r3, lbl_8087F518
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     b lbl_world_Manager_draw_000031A0
     lwz r3, lbl_8087F518
     li r4, 0x1
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     lwz r3, lbl_8087F048
     bl fn_800F3490
     cmpwi r3, 0x0
@@ -1321,13 +1321,13 @@ lbl_world_Manager_draw_00000F04:
     cmpwi r3, 0x0
     beq lbl_world_Manager_draw_000031A0
     addi r3, r28, 0x5690
-    bl fn_80470528
+    bl boss_releaseLaserTarget
     li r0, 0x8
     stw r0, 0x5538(r28)
     b lbl_world_Manager_draw_000031A0
     lwz r3, lbl_8087F518
     li r4, 0x1
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     lwz r0, 0x553c(r28)
     cmpwi r0, 0x0
     beq lbl_world_Manager_draw_0000118C
@@ -1335,7 +1335,7 @@ lbl_world_Manager_draw_00000F04:
     li r29, 0x0
     lwz r4, 0x4c(r28)
     lwz r5, 0x50(r28)
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_world_Manager_draw_00001184
@@ -1564,7 +1564,7 @@ lbl_world_Manager_draw_000012B0:
     addi r3, r28, 0x6c
     li r4, 0x1
     li r5, 0x1
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     li r0, 0x5
     stw r0, 0x5748(r28)
 lbl_world_Manager_draw_000012E8:
@@ -1701,7 +1701,7 @@ lbl_world_Manager_draw_000014E4:
     li r30, 0x0
     lwz r4, 0x5518(r28)
     lwz r3, 0x5514(r28)
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_world_Manager_draw_000016E4
@@ -1849,7 +1849,7 @@ lbl_world_Manager_draw_000016E4:
     lwz r3, 0x5514(r28)
     lwz r4, 0x5518(r28)
     lwz r5, 0x551c(r28)
-    bl fn_8021771C
+    bl task_findNextReady
     mr r27, r3
     lwz r24, 0x934(r25)
     lwz r3, 0x5514(r28)
@@ -1878,7 +1878,7 @@ lbl_world_Manager_draw_000016E4:
 lbl_world_Manager_draw_00001770:
     lwz r4, 0x870(r28)
     addi r3, r28, 0x6c
-    bl fn_80389838
+    bl nwc24_transitionDataState
     li r4, 0x0
     stw r4, 0x954(r28)
     lwz r3, lbl_8087F8A0
@@ -2074,7 +2074,7 @@ lbl_world_Manager_draw_00001A30:
     mr r4, r29
     li r25, 0x0
     mr r5, r26
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_world_Manager_draw_00001CF8
@@ -2085,7 +2085,7 @@ lbl_world_Manager_draw_00001A30:
     mr r4, r29
     mr r5, r26
     li r25, 0x0
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_world_Manager_draw_00001C60
@@ -2475,7 +2475,7 @@ lbl_world_Manager_draw_00001FC8:
     li r4, 0x3c
     li r5, 0x0
     lis r6, 0xff00
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     stw r3, 0x575c(r28)
     lis r4, 0x2
     lfs f0, lbl_80885758

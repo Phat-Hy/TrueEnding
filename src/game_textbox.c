@@ -10,9 +10,9 @@ extern void _savegpr_15(void);
 extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void fn_8005DF90(void);
-extern void fn_80075DEC(void);
+extern void seq_stepPlaybackTimer(void);
 extern void fn_80075F58(void);
-extern void fn_800763FC(void);
+extern void seq_bindSlotResource(void);
 extern void fn_800A96AC(void);
 extern void fn_800ACFC8(void);
 extern void fn_800BC2E0(void);
@@ -28,7 +28,7 @@ extern void atn_LoadHandle_getStatus(void);
 extern void PSMTXScale(void);
 extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
-extern void fn_80614190(void);
+extern void __GXFlushPixelEngine(void);
 extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
@@ -44,13 +44,13 @@ extern void fn_80616E80(void);
 extern void fn_80616EF0(void);
 extern void fn_80617030(void);
 extern void fn_80617130(void);
-extern void fn_80617200(void);
+extern void GXSetTexCoordScaleManually(void);
 extern void GXInitTexObjDefault(void);
 extern void fn_80617270(void);
 extern void GXSetTevDirect(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevIndirect(void);
-extern void fn_806175F0(void);
+extern void GXSetIndTexMatrix(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevSwapMode(void);
 extern void GXSetTevSwapModeTable(void);
@@ -512,7 +512,7 @@ asm void fn_800AD648(void)
     li r3, 0x8
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     lfs f1, lbl_80880DE4
     addi r4, r1, 0xc
     lfs f0, lbl_80880DE0
@@ -537,7 +537,7 @@ asm void fn_800AD648(void)
     lwz r0, 0x8(r1)
     stfs f1, 0x1c(r1)
     stw r0, 0xc(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     li r31, 0x0
 lbl_fn_800AD648_00000614:
     lwz r0, 0x16c(r30)
@@ -552,7 +552,7 @@ lbl_fn_800AD648_00000614:
     mulli r0, r0, 0x30
     add r4, r30, r0
     addi r4, r4, 0x170
-    bl fn_800763FC
+    bl seq_bindSlotResource
     cmpwi r31, 0x0
     ble lbl_fn_800AD648_0000066C
     mr r3, r31
@@ -598,7 +598,7 @@ lbl_fn_800AD648_00000684:
     bl fn_80075F58
     lwz r3, lbl_8087EFB4
     bl fn_800BFB70
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1
@@ -637,7 +637,7 @@ asm void fn_800AD834(void)
     lwz r0, 0x3e0(r4)
     cmpwi r0, 0x0
     beq lbl_fn_800AD834_00001450
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     lwz r3, lbl_8087EFB4
     li r4, 0x0
     bl fn_800C0508
@@ -707,7 +707,7 @@ asm void fn_800AD834(void)
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x0
     li r4, 0x3
     bl GXSetTevDirect
@@ -729,7 +729,7 @@ asm void fn_800AD834(void)
     li r5, 0x0
     lwz r3, lbl_8087EEE0
     addi r4, r4, 0x74c
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lwz r3, lbl_8087EEE0
     slwi r6, r28, 1
     slwi r7, r27, 1
@@ -738,7 +738,7 @@ asm void fn_800AD834(void)
     bl fn_80075F58
     lwz r3, lbl_8087EFB4
     bl fn_800BFB70
-    bl fn_80614190
+    bl __GXFlushPixelEngine
 lbl_fn_800AD834_00000914:
     clrlslwi r5, r28, 17, 1
     clrlslwi r6, r27, 17, 1
@@ -1023,7 +1023,7 @@ lbl_fn_800AD834_00000D04:
     bge lbl_fn_800AD834_00000D20
     mr r15, r18
 lbl_fn_800AD834_00000D20:
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     bl GXDrawDone
     li r3, 0x1
     bl GXClearVtxDesc
@@ -1032,7 +1032,7 @@ lbl_fn_800AD834_00000D20:
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x0
     li r4, 0x3
     bl GXSetTevDirect
@@ -1058,7 +1058,7 @@ lbl_fn_800AD834_00000D20:
     bl fn_80075F58
     lwz r3, lbl_8087EFB4
     bl fn_800BFB70
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     clrlslwi r5, r15, 17, 1
     clrlslwi r6, r19, 17, 1
     li r3, 0x0
@@ -1128,7 +1128,7 @@ lbl_fn_800AD834_00000E44:
     lwz r3, lbl_8087EEE0
     mr r4, r17
     li r5, 0x0
-    bl fn_800763FC
+    bl seq_bindSlotResource
     srawi r0, r15, 2
     li r18, 0x1
     cmpwi r0, 0x1
@@ -1149,7 +1149,7 @@ lbl_fn_800AD834_00000EEC:
     cmpw r18, r0
     bge lbl_fn_800AD834_00000D04
 lbl_fn_800AD834_00000F00:
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     bl GXDrawDone
     mr r3, r26
     bl fn_800AD648
@@ -1167,11 +1167,11 @@ lbl_fn_800AD834_00000F00:
     lwz r3, lbl_8087EEE0
     addi r4, r26, 0x320
     li r5, 0x0
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lwz r3, lbl_8087EEE0
     addi r4, r26, 0x138
     li r5, 0x1
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -1213,7 +1213,7 @@ lbl_fn_800AD834_00000F00:
     stfs f1, 0x164(r1)
     bl GXLoadTexMtxImm
     li r3, 0x1
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x0
     li r4, 0x1
     li r5, 0x1
@@ -1259,7 +1259,7 @@ lbl_fn_800AD834_00000F00:
     bl fn_80075F58
     lwz r3, lbl_8087EFB4
     bl fn_800BFB70
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     li r3, 0x0
     li r4, 0x0
     li r5, 0x40
@@ -1273,7 +1273,7 @@ lbl_fn_800AD834_00000F00:
     lwz r3, 0x318(r26)
     li r4, 0x1
     bl GXCopyTex
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     bl GXDrawDone
     li r3, 0x3
     bl GXClearVtxDesc
@@ -1290,15 +1290,15 @@ lbl_fn_800AD834_00000F00:
     li r5, 0x0
     lwz r3, lbl_8087EEE0
     addi r4, r4, 0x74c
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lwz r3, lbl_8087EEE0
     addi r4, r26, 0x2f0
     li r5, 0x1
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lwz r3, lbl_8087EEE0
     addi r4, r26, 0x38
     li r5, 0x2
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -1367,7 +1367,7 @@ lbl_fn_800AD834_00000F00:
     li r6, 0xff
     bl GXSetTevOrder
     li r3, 0x1
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x0
     li r4, 0x2
     li r5, 0x2
@@ -1405,7 +1405,7 @@ lbl_fn_800AD834_00000F00:
     extsb r5, r0
     bl fn_80616EF0
     lwz r3, lbl_8087EEE0
-    bl fn_80075DEC
+    bl seq_stepPlaybackTimer
     li r3, 0x0
     li r4, 0x4
     li r5, 0x1
@@ -1604,7 +1604,7 @@ lbl_fn_800AE568_000015A0:
     li r3, 0x1
     bl GXInitLightDistAttn
     li r3, 0x3
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x0
     li r4, 0x1
     li r5, 0x1
@@ -1819,12 +1819,12 @@ lbl_fn_800AE568_000017F8:
     lwz r3, lbl_8087EEE0
     mr r4, r27
     li r5, 0x0
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lis r4, lbl_807C7470@ha
     lwz r3, lbl_8087EEE0
     addi r4, r4, lbl_807C7470@l
     li r5, 0x1
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1
@@ -1835,7 +1835,7 @@ lbl_fn_800AE568_000017F8:
     addi r4, r1, 0x8
     stw r0, 0x8(r1)
     li r3, 0x0
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     li r3, 0x0
     li r4, 0xc
     bl GXSetTevKColorSel
@@ -1964,7 +1964,7 @@ lbl_fn_800AE568_000017F8:
     mr r3, r28
     li r4, 0x0
     bl GXCopyTex
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     bl GXDrawDone
     li r3, 0x1
     bl GXInitTexObjDefault

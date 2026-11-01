@@ -17,10 +17,10 @@ extern void fn_800C61C0(void);
 extern void fn_800C622C(void);
 extern void fn_800C7CA8(void);
 extern void sky_renderStub(void);
-extern void fn_800F52F8(void);
+extern void proj_getGlobalManager(void);
 extern void fn_800F7F60(void);
 extern void fn_800F7F80(void);
-extern void fn_800F7F90(void);
+extern void viewport_getFlag(void);
 extern void vec3_normalize(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
@@ -39,13 +39,13 @@ extern void fn_801698E4(void);
 extern void fn_8016BBCC(void);
 extern void actor_setState(void);
 extern void fn_80171F3C(void);
-extern void fn_801750FC(void);
+extern void battle_calcOutcomeBonus(void);
 extern void fn_80178018(void);
 extern void fn_80178078(void);
 extern void battle_generateLootDrops(void);
 extern void fn_8017B3C0(void);
 extern void fn_8017B434(void);
-extern void fn_8017C974(void);
+extern void map_isAreaCombatActive(void);
 extern void fn_801A1BE4(void);
 extern void task_findEntryById(void);
 extern void world_getGlobalFlag(void);
@@ -91,35 +91,35 @@ extern u32 lbl_808819CC;
 /* Function declarations */
 void npc_updateDialogueTarget(void);
 void npc_calcTargetDistance(void);
-void fn_80139E90(void);
+u32 fn_80139E90(void *p);
 void fn_80139E9C(void);
-void fn_80139EB0(void);
+u32 fn_80139EB0(void *p);
 void fn_80139EBC(void);
-void fn_80139ED0(void);
-void fn_80139EDC(void);
-void fn_80139EE8(void);
-void fn_80139EF4(void);
-void fn_80139EFC(void);
+u32 fn_80139ED0(void *p);
+u32 fn_80139EDC(void *p);
+u32 fn_80139EE8(void *p);
+u32 fn_80139EF4(void);
+u32 fn_80139EFC(void *p);
 void fn_80139F04(void);
-void fn_80139F24(void);
-void fn_80139F2C(void);
-void fn_80139F3C(void);
-void fn_80139F4C(void);
-void fn_80139F58(void);
+void fn_80139F24(void *p, u32 val);
+u32 fn_80139F2C(void *p, u32 idx);
+void fn_80139F3C(void *p, u32 idx, f32 val);
+u32 fn_80139F4C(void *p);
+void *fn_80139F58(void *p);
 void fn_80139F60(void);
-void fn_8013A13C(void);
-void fn_8013A144(void);
-void fn_8013A150(void);
+void mtx_rotYRad(void);
+u32 fn_8013A144(void *p);
+u32 fn_8013A150(void *p);
 void fn_8013A158(void);
 void fn_8013A16C(void);
-void fn_8013A184(void);
-void fn_8013A18C(void);
+u32 fn_8013A184(void *p);
+u32 fn_8013A18C(void *p);
 u32 npc_getGlobalManager(void);
 void fn_8013A19C(void *p, u32 val);
 void fn_8013A1A8(void);
-void fn_8013A214(void);
+u32 fn_8013A214(void *p);
 void fn_8013A21C(void);
-void fn_8013A248(void);
+u32 fn_8013A248(void *p);
 void npc_initScriptContext(void);
 
 asm void npc_updateDialogueTarget(void)
@@ -172,7 +172,7 @@ lbl_npc_calcTargetDistance_00000094:
     cmpwi r3, 0x1
     bne lbl_npc_calcTargetDistance_000002D4
     mr r3, r31
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     cmpwi r3, 0x0
     bne lbl_npc_calcTargetDistance_000000C8
     lwz r0, 0x12a4(r31)
@@ -214,17 +214,17 @@ lbl_npc_calcTargetDistance_00000124:
     beq lbl_npc_calcTargetDistance_000001BC
     lfs f0, lbl_80881964
     stfs f0, 0x10(r1)
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_80116BAC
     li r4, 0x1f
     bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_npc_calcTargetDistance_00000160
     mr r3, r31
-    bl fn_801750FC
+    bl battle_calcOutcomeBonus
     b lbl_npc_calcTargetDistance_00000700
 lbl_npc_calcTargetDistance_00000160:
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_80116BAC
     li r4, 0x20
     bl magic_dispatchActionCommand
@@ -574,7 +574,7 @@ lbl_npc_calcTargetDistance_00000624:
     bl fn_80139F4C
     cmpwi r3, 0x0
     bne lbl_npc_calcTargetDistance_0000069C
-    bl fn_800F7F90
+    bl viewport_getFlag
     cmpwi r3, 0x0
     bne lbl_npc_calcTargetDistance_0000069C
     addi r3, r1, 0x18
@@ -773,12 +773,9 @@ lbl_npc_calcTargetDistance_00000924:
     blr
 }
 
-asm void fn_80139E90(void)
+u32 fn_80139E90(void *p)
 {
-    nofralloc
-    lwz r0, 0x12a4(r3)
-    extrwi r3, r0, 1, 4
-    blr
+    return (*(u32 *)((u8 *)p + 0x12a4) >> 27) & 1;
 }
 
 asm void fn_80139E9C(void)
@@ -791,12 +788,9 @@ asm void fn_80139E9C(void)
     blr
 }
 
-asm void fn_80139EB0(void)
+u32 fn_80139EB0(void *p)
 {
-    nofralloc
-    lwz r0, 0x12a4(r3)
-    extrwi r3, r0, 1, 28
-    blr
+    return (*(u32 *)((u8 *)p + 0x12a4) >> 3) & 1;
 }
 
 asm void fn_80139EBC(void)
@@ -809,42 +803,29 @@ asm void fn_80139EBC(void)
     blr
 }
 
-asm void fn_80139ED0(void)
+u32 fn_80139ED0(void *p)
 {
-    nofralloc
-    lwz r0, 0x12a4(r3)
-    extrwi r3, r0, 1, 26
-    blr
+    return (*(u32 *)((u8 *)p + 0x12a4) >> 5) & 1;
 }
 
-asm void fn_80139EDC(void)
+u32 fn_80139EDC(void *p)
 {
-    nofralloc
-    lwz r0, 0x12a4(r3)
-    extrwi r3, r0, 1, 27
-    blr
+    return (*(u32 *)((u8 *)p + 0x12a4) >> 4) & 1;
 }
 
-asm void fn_80139EE8(void)
+u32 fn_80139EE8(void *p)
 {
-    nofralloc
-    lwz r0, 0x54c(r3)
-    extrwi r3, r0, 1, 25
-    blr
+    return (*(u32 *)((u8 *)p + 0x54c) >> 6) & 1;
 }
 
-asm void fn_80139EF4(void)
+u32 fn_80139EF4(void)
 {
-    nofralloc
-    lwz r3, lbl_8087EE68
-    blr
+    return lbl_8087EE68;
 }
 
-asm void fn_80139EFC(void)
+u32 fn_80139EFC(void *p)
 {
-    nofralloc
-    lwz r3, 0xc54(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0xc54);
 }
 
 asm void fn_80139F04(void)
@@ -860,44 +841,29 @@ asm void fn_80139F04(void)
     blr
 }
 
-asm void fn_80139F24(void)
+void fn_80139F24(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x34c(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x34c) = val;
 }
 
-asm void fn_80139F2C(void)
+u32 fn_80139F2C(void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0x30
-    add r3, r3, r0
-    lwz r3, 0x22c(r3)
-    blr
+    return *(u32 *)((u8 *)p + idx * 0x30 + 0x22c);
 }
 
-asm void fn_80139F3C(void)
+void fn_80139F3C(void *p, u32 idx, f32 val)
 {
-    nofralloc
-    mulli r0, r4, 0x30
-    add r3, r3, r0
-    stfs f1, 0x238(r3)
-    blr
+    *(f32 *)((u8 *)p + idx * 0x30 + 0x238) = val;
 }
 
-asm void fn_80139F4C(void)
+u32 fn_80139F4C(void *p)
 {
-    nofralloc
-    lwz r0, 0xc(r3)
-    extrwi r3, r0, 1, 26
-    blr
+    return (*(u32 *)((u8 *)p + 0xc) >> 5) & 1;
 }
 
-asm void fn_80139F58(void)
+void *fn_80139F58(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x58
-    blr
+    return (u8 *)p + 0x58;
 }
 
 asm void fn_80139F60(void)
@@ -1032,26 +998,21 @@ lbl_fn_80139F60_00000BB0:
     blr
 }
 
-asm void fn_8013A13C(void)
+asm void mtx_rotYRad(void)
 {
     nofralloc
     li r4, 0x79
     b PSMTXRotRad
 }
 
-asm void fn_8013A144(void)
+u32 fn_8013A144(void *p)
 {
-    nofralloc
-    lwz r0, 0x20(r3)
-    clrlwi r3, r0, 31
-    blr
+    return *(u32 *)((u8 *)p + 0x20) & 1;
 }
 
-asm void fn_8013A150(void)
+u32 fn_8013A150(void *p)
 {
-    nofralloc
-    lwz r3, 0x564(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x564);
 }
 
 asm void fn_8013A158(void)
@@ -1075,18 +1036,14 @@ asm void fn_8013A16C(void)
     blr
 }
 
-asm void fn_8013A184(void)
+u32 fn_8013A184(void *p)
 {
-    nofralloc
-    lwz r3, 0x54(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x54);
 }
 
-asm void fn_8013A18C(void)
+u32 fn_8013A18C(void *p)
 {
-    nofralloc
-    lwz r3, 0x9c(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x9c);
 }
 
 u32 npc_getGlobalManager(void)
@@ -1133,11 +1090,9 @@ lbl_fn_8013A1A8_00000CA4:
     blr
 }
 
-asm void fn_8013A214(void)
+u32 fn_8013A214(void *p)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(u32 *)p;
 }
 
 asm void fn_8013A21C(void)
@@ -1156,13 +1111,9 @@ asm void fn_8013A21C(void)
     blr
 }
 
-asm void fn_8013A248(void)
+u32 fn_8013A248(void *p)
 {
-    nofralloc
-    lwz r0, 0x0(r3)
-    cntlzw r0, r0
-    srwi r3, r0, 5
-    blr
+    return *(u32 *)p == 0;
 }
 
 asm void npc_initScriptContext(void)

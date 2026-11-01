@@ -44,13 +44,13 @@ extern void res_registerResource(void);
 extern void world_setLocalFlag(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
-extern void fn_803EC758(void);
+extern void barrier_formatCountdownTimer(void);
 extern void barrier_formatDialogString(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
 extern void barrier_bindFieldAnimation(void);
 extern void dungeon_updateBarrierField(void);
-extern void fn_803EDB18(void);
+extern void barrier_testFieldCollision(void);
 extern void fn_803F11F8(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -564,7 +564,7 @@ asm void fn_8042E51C(void)
     bne lbl_fn_8042E51C_00000588
     mr r3, r31
     addi r4, r31, 0xf4
-    bl fn_803EDB18
+    bl barrier_testFieldCollision
     li r0, 0x1a
     stw r31, 0x4dc(r31)
     li r3, 0x1
@@ -1289,7 +1289,7 @@ asm void fn_8042EF4C(void)
     addi r4, r1, 0x8
     stw r29, 0x34(r1)
     mr r29, r3
-    bl fn_803EC758
+    bl barrier_formatCountdownTimer
     lwz r0, 0xf0(r29)
     cmpwi r0, 0x0
     bne lbl_fn_8042EF4C_00000FD8
@@ -1892,7 +1892,7 @@ asm void fn_8042F750(void)
     addi r4, r1, 0x8
     stw r30, 0x28(r1)
     mr r30, r3
-    bl fn_803EC758
+    bl barrier_formatCountdownTimer
     lwz r0, 0xf0(r30)
     cmpwi r0, 0x0
     bne lbl_fn_8042F750_000017D4

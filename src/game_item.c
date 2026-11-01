@@ -11,7 +11,7 @@ extern void fn_80050C38(void);
 extern void fn_80056EB0(void);
 extern void fn_80058EE4(void);
 extern void mem_alloc(void);
-extern void fn_800A55D4(void);
+extern void msg_lookupFormattedEntry(void);
 extern void fn_800A5648(void);
 extern void msg_formatWindowLayout(void);
 extern void msg_isWindowActive(void);
@@ -994,13 +994,13 @@ lbl_fn_8004BF64_00000D2C:
     lwz r3, lbl_8087EF70
     mr r5, r30
     li r4, 0x0
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     beq lbl_fn_8004BF64_00000DEC
     lwz r3, lbl_8087EF70
     mr r5, r27
     li r4, 0x0
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     beq lbl_fn_8004BF64_00000DEC
     lwz r3, lbl_8087EF70
@@ -1428,7 +1428,7 @@ lbl_fn_8004BF64_000013A4:
     lwz r3, lbl_8087EF70
     stfs f0, 0x180(r1)
     stfs f0, 0x184(r1)
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     beq lbl_fn_8004BF64_00001414
     lfs f4, 0x190(r1)
@@ -1453,7 +1453,7 @@ lbl_fn_8004BF64_00001414:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x1
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     beq lbl_fn_8004BF64_00001474
     lfs f4, 0x190(r1)
@@ -1478,7 +1478,7 @@ lbl_fn_8004BF64_00001474:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x3
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     beq lbl_fn_8004BF64_000014F8
     lfs f3, lbl_8088089C
@@ -1512,7 +1512,7 @@ lbl_fn_8004BF64_000014F8:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x2
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     beq lbl_fn_8004BF64_0000157C
     lfs f3, lbl_8088089C

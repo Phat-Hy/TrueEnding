@@ -37,14 +37,14 @@ extern void fn_80616640(void);
 extern void fn_80616E80(void);
 extern void fn_80617030(void);
 extern void fn_80617130(void);
-extern void fn_80617200(void);
+extern void GXSetTexCoordScaleManually(void);
 extern void GXInitTexObjDefault(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
-extern void fn_806174C0(void);
+extern void GXSetTevIndTile(void);
 extern void fn_80617580(void);
-extern void fn_806175F0(void);
+extern void GXSetIndTexMatrix(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevKAlphaSel(void);
 extern void GXSetTevSwapMode(void);
@@ -787,22 +787,22 @@ lbl_fn_805D1A40_0000095C:
     addi r4, r1, 0x1c
     stw r0, 0x1c(r1)
     li r3, 0x0
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     lwz r0, 0x40(r26)
     addi r4, r1, 0x18
     stw r0, 0x18(r1)
     li r3, 0x1
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     lwz r0, 0x44(r26)
     addi r4, r1, 0x14
     stw r0, 0x14(r1)
     li r3, 0x2
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     lwz r0, 0x48(r26)
     addi r4, r1, 0x10
     stw r0, 0x10(r1)
     li r3, 0x3
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     lwz r8, 0x4c(r26)
     extrwi. r0, r8, 1, 17
     beq lbl_fn_805D1A40_00000A70
@@ -943,7 +943,7 @@ lbl_fn_805D1A40_00000B5C:
     extrwi r6, r6, 2, 24
     clrlwi r7, r0, 31
     extrwi r8, r0, 2, 29
-    bl fn_806174C0
+    bl GXSetTevIndTile
     lbz r0, 0xb(r25)
     mr r3, r28
     extrwi r4, r0, 5, 24
@@ -1227,7 +1227,7 @@ lbl_fn_805D1A40_00001014:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     mr r3, r24
     bl GXInitTexObjDefault
     mr r3, r24
@@ -1313,7 +1313,7 @@ lbl_fn_805D1A40_00001174:
 lbl_fn_805D1A40_00001184:
     lwz r0, 0x50(r26)
     extrwi r3, r0, 3, 14
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     lwz r0, 0x50(r26)
     extrwi. r0, r0, 3, 14
     beq lbl_fn_805D1A40_00001228

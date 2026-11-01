@@ -3,17 +3,17 @@
 
 /* External function declarations */
 extern void scene_transformPoint(void);
-extern void fn_8000DCF4(void);
+extern void scene_getCamera(void);
 extern void vec3_assign(void);
 extern void vec3_sub(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_8009373C(void);
+extern void target_findEntryByName(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800E0AA8(void);
+extern void particle_getEmitterContext(void);
 extern void system_getNextSequenceId(void);
 extern void actor_testBitFlag(void);
 extern void npc_getPosition(void);
@@ -66,13 +66,13 @@ extern u32 lbl_8088528C;
 /* Function declarations */
 void fn_80339F04(void);
 void fn_80339F14(void);
-void fn_80339F24(void);
+void *fn_80339F24(void *p, u32 idx);
 void fn_80339F34(void);
-void fn_80339F5C(void);
-void fn_80339F6C(void);
-void fn_80339F74(void);
-void fn_80339F7C(void);
-void fn_80339F84(void);
+void fn_80339F5C(void *p, u32 idx, f32 val);
+u32 fn_80339F6C(void *p);
+void fn_80339F74(void *p, u32 val);
+u32 fn_80339F7C(void *p);
+void fn_80339F84(void *p, u32 val);
 void fn_80339F8C(void);
 void fn_8033A154(void);
 void fn_8033A7A0(void);
@@ -97,13 +97,9 @@ asm void fn_80339F14(void)
     blr
 }
 
-asm void fn_80339F24(void)
+void *fn_80339F24(void *p, u32 idx)
 {
-    nofralloc
-    slwi r0, r4, 2
-    add r3, r3, r0
-    addi r3, r3, 0x4
-    blr
+    return (u8 *)p + (idx << 2) + 4;
 }
 
 asm void fn_80339F34(void)
@@ -122,41 +118,29 @@ lbl_fn_80339F34_00000048:
     blr
 }
 
-asm void fn_80339F5C(void)
+void fn_80339F5C(void *p, u32 idx, f32 val)
 {
-    nofralloc
-    mulli r0, r4, 0x30
-    add r3, r3, r0
-    stfs f1, 0x23c(r3)
-    blr
+    *(f32 *)((u8 *)p + idx * 0x30 + 0x23c) = val;
 }
 
-asm void fn_80339F6C(void)
+u32 fn_80339F6C(void *p)
 {
-    nofralloc
-    lwz r3, 0x638(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x638);
 }
 
-asm void fn_80339F74(void)
+void fn_80339F74(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x1454(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x1454) = val;
 }
 
-asm void fn_80339F7C(void)
+u32 fn_80339F7C(void *p)
 {
-    nofralloc
-    lwz r3, 0xe0(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0xe0);
 }
 
-asm void fn_80339F84(void)
+void fn_80339F84(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0xe8(r3)
-    blr
+    *(u32 *)((u8 *)p + 0xe8) = val;
 }
 
 asm void fn_80339F8C(void)
@@ -524,11 +508,11 @@ lbl_fn_8033A154_000005B8:
     addi r31, r31, lbl_8074A4C0@l
     li r5, 0x0
     addi r4, r31, 0x2fb
-    bl fn_8009373C
+    bl target_findEntryByName
     addi r3, r30, 0xb0
     addi r4, r31, 0x308
     li r5, 0x0
-    bl fn_8009373C
+    bl target_findEntryByName
     b lbl_fn_8033A154_00000884
 lbl_fn_8033A154_000005F4:
     lwz r5, 0x68(r4)
@@ -722,7 +706,7 @@ asm void fn_8033A7A0(void)
     cmpwi r0, 0x0
     beq lbl_fn_8033A7A0_00000C64
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     lwz r3, 0x14b0(r30)
     bl npc_getPosition
     mr r4, r3
@@ -811,7 +795,7 @@ lbl_fn_8033A7A0_000009EC:
     mulli r0, r0, 0x24
     add r3, r30, r0
     addi r3, r3, 0x14ec
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     subi r0, r3, 0x1
     cmpw r31, r0
     bge lbl_fn_8033A7A0_00000A24
@@ -821,7 +805,7 @@ lbl_fn_8033A7A0_00000A24:
     mulli r0, r0, 0x24
     add r3, r30, r0
     addi r3, r3, 0x14ec
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     subi r31, r3, 0x1
 lbl_fn_8033A7A0_00000A3C:
     lwz r0, 0x1558(r30)
@@ -836,7 +820,7 @@ lbl_fn_8033A7A0_00000A3C:
     mulli r0, r0, 0x24
     add r3, r30, r0
     addi r3, r3, 0x14ec
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     lwz r4, 0x155c(r30)
     addi r4, r4, 0x1
     divwu r0, r4, r3
@@ -854,7 +838,7 @@ lbl_fn_8033A7A0_00000A8C:
     mulli r0, r0, 0x24
     add r3, r30, r0
     addi r3, r3, 0x14f8
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     subi r0, r3, 0x1
     cmpw r31, r0
     bge lbl_fn_8033A7A0_00000AC4
@@ -864,7 +848,7 @@ lbl_fn_8033A7A0_00000AC4:
     mulli r0, r0, 0x24
     add r3, r30, r0
     addi r3, r3, 0x14f8
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     subi r31, r3, 0x1
 lbl_fn_8033A7A0_00000ADC:
     lwz r0, 0x1558(r30)
@@ -879,7 +863,7 @@ lbl_fn_8033A7A0_00000ADC:
     mulli r0, r0, 0x24
     add r3, r30, r0
     addi r3, r3, 0x14f8
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     lwz r4, 0x1560(r30)
     addi r4, r4, 0x1
     divwu r0, r4, r3
@@ -893,7 +877,7 @@ lbl_fn_8033A7A0_00000B2C:
     mulli r0, r0, 0x24
     add r3, r30, r0
     addi r3, r3, 0x1504
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     subi r0, r3, 0x1
     cmpw r31, r0
     bge lbl_fn_8033A7A0_00000B54
@@ -903,7 +887,7 @@ lbl_fn_8033A7A0_00000B54:
     mulli r0, r0, 0x24
     add r3, r30, r0
     addi r3, r3, 0x1504
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     subi r31, r3, 0x1
 lbl_fn_8033A7A0_00000B6C:
     lwz r0, 0x1558(r30)
@@ -918,7 +902,7 @@ lbl_fn_8033A7A0_00000B6C:
     mulli r0, r0, 0x24
     add r3, r30, r0
     addi r3, r3, 0x1504
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     lwz r4, 0x1564(r30)
     addi r4, r4, 0x1
     divwu r0, r4, r3

@@ -8,10 +8,10 @@ extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8005DF90(void);
-extern void fn_80075DEC(void);
+extern void seq_stepPlaybackTimer(void);
 extern void fn_80075F58(void);
 extern void gx_applyRenderState(void);
-extern void fn_800763FC(void);
+extern void seq_bindSlotResource(void);
 extern void gx_setRenderStateParam(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -28,12 +28,12 @@ extern void PSMTXTranspose(void);
 extern void PSMTXInverse(void);
 extern void PSMTXScale(void);
 extern void GXSetVtxDesc(void);
-extern void fn_806134E0(void);
+extern void __GXInitVtxDesc(void);
 extern void GXSetVtxAttrFmt(void);
 extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
-extern void fn_80614190(void);
-extern void fn_80614790(void);
+extern void __GXFlushPixelEngine(void);
+extern void GXBegin(void);
 extern void fn_806149C0(void);
 extern void fn_80614A00(void);
 extern void fn_80614A40(void);
@@ -51,15 +51,15 @@ extern void GXDrawDone(void);
 extern void fn_80616EF0(void);
 extern void fn_80617030(void);
 extern void fn_80617130(void);
-extern void fn_80617200(void);
+extern void GXSetTexCoordScaleManually(void);
 extern void GXInitTexObjDefault(void);
 extern void fn_80617270(void);
 extern void GXSetTevDirect(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
-extern void fn_806174C0(void);
-extern void fn_806175F0(void);
+extern void GXSetTevIndTile(void);
+extern void GXSetIndTexMatrix(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevKAlphaSel(void);
 extern void GXSetTevOrder(void);
@@ -154,7 +154,7 @@ asm void fn_800B0CD4(void)
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x4
     li r4, 0x0
     li r5, 0x1
@@ -245,11 +245,11 @@ lbl_fn_800B0CD4_000000F0:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     lwz r3, lbl_8087EEE0
     addi r4, r31, 0xb8
     li r5, 0x0
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -344,7 +344,7 @@ lbl_fn_800B0CD4_000000F0:
     stfs f0, 0x5c(r1)
     bl fn_800BFCB4
     lwz r3, lbl_8087EEE0
-    bl fn_80075DEC
+    bl seq_stepPlaybackTimer
     li r3, 0x0
     li r4, 0x1
     li r5, 0x0
@@ -416,7 +416,7 @@ lbl_fn_800B105C_000003C0:
     li r7, 0x0
     li r8, 0x0
     bl GXClampLightAngle
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     li r0, 0x7f
     stb r0, 0xc(r1)
     lis r30, 0x100
@@ -462,7 +462,7 @@ lbl_fn_800B105C_000003C0:
     mr r3, r25
     li r4, 0x1
     bl GXCopyTex
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     bl GXDrawDone
     li r3, 0x0
     li r4, 0x1
@@ -492,7 +492,7 @@ lbl_fn_800B105C_000003C0:
     li r9, 0x2
     bl GXInitLightSpot
     li r3, 0x1
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x4
     li r4, 0x0
     li r5, 0x1
@@ -551,11 +551,11 @@ lbl_fn_800B105C_000003C0:
     li r5, 0x0
     lwz r3, lbl_8087EEE0
     addi r4, r4, 0x74c
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lwz r3, lbl_8087EEE0
     addi r4, r31, 0x60
     li r5, 0x1
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1
@@ -654,7 +654,7 @@ lbl_fn_800B105C_000007B0:
     li r3, 0x1
     bl fn_80616EF0
     lwz r3, lbl_8087EEE0
-    bl fn_80075DEC
+    bl seq_stepPlaybackTimer
     lwz r3, lbl_8087EFB4
     bl fn_800BFB70
     li r3, 0x0
@@ -1248,7 +1248,7 @@ asm void fn_800B1C44(void)
     bl gx_setRenderStateParam
     mr r3, r29
     bl gx_applyRenderState
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
@@ -1368,7 +1368,7 @@ asm void fn_800B1C44(void)
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     lfs f10, lbl_80880EF4
     addi r4, r1, 0x14
     lfs f0, 0x20(r31)
@@ -1398,7 +1398,7 @@ asm void fn_800B1C44(void)
     stb r0, 0xb(r1)
     lwz r0, 0x8(r1)
     stw r0, 0x14(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     li r3, 0x0
     li r4, 0xc
     bl GXSetTevKColorSel
@@ -1432,7 +1432,7 @@ asm void fn_800B1C44(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x0
     li r4, 0xff
     li r5, 0xff
@@ -1482,7 +1482,7 @@ lbl_fn_800B1C44_00001320:
     li r3, 0xb8
     li r4, 0x0
     clrlwi r5, r0, 16
-    bl fn_80614790
+    bl GXBegin
     li r6, 0x0
     li r3, 0x0
     lis r4, 0xcc01
@@ -1508,7 +1508,7 @@ lbl_fn_800B1C44_000013D0:
     li r3, 0xa8
     li r4, 0x0
     clrlslwi r5, r0, 17, 1
-    bl fn_80614790
+    bl GXBegin
     addi r5, r1, 0x4c
     li r7, 0x0
     li r3, 0x0

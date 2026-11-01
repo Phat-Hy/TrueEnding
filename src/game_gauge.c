@@ -41,7 +41,7 @@ extern void shockwave_freeEmitter(void);
 extern void fn_80476884(void);
 extern void fn_804768B4(void);
 extern void strcmp(void);
-extern void fn_8072D210(void);
+extern void math_normalizeAngle(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -608,21 +608,21 @@ lbl_atn_Anim_evalNodeTransform_00000664:
     stfs f1, 0x38(r1)
     lfs f29, 0x34(r1)
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f3, lbl_80880C94
     addi r3, r1, 0x18
     lfs f0, lbl_80880C90
     addi r4, r1, 0xc
     fmuls f3, f29, f3
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f3, lbl_80880C94
     addi r3, r1, 0x1c
     lfs f0, lbl_80880C90
     addi r4, r1, 0x10
     fmuls f3, f30, f3
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f11, 0xc(r1)
     addi r3, r1, 0x20
     lfs f8, 0x14(r1)

@@ -21,7 +21,7 @@ extern void fn_800BBD90(void);
 extern void fn_800BBFE8(void);
 extern void skeleton_getGlobalManager(void);
 extern void fn_800C2108(void);
-extern void fn_800C2448(void);
+extern void skeleton_getBoneByIndex(void);
 extern void fn_800C2634(void);
 extern void fn_800C289C(void);
 extern void fn_800C2B24(void);
@@ -1839,7 +1839,7 @@ lbl_fn_8049248C_00001898:
     li r4, 0x0
     stfs f30, 0x1e4(r1)
     stfs f1, 0x1e8(r1)
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     addi r4, r1, 0x1e0
     lfs f2, 0x1e8(r1)
     psq_l f1, 0x0(r4), 0, 0
@@ -1851,7 +1851,7 @@ lbl_fn_8049248C_00001898:
     stfs f27, 0x11c(r1)
     stfs f28, 0x120(r1)
     stfs f29, 0x124(r1)
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     frsp f0, f26
     stfs f0, 0x34(r3)
     frsp f0, f27

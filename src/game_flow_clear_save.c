@@ -11,7 +11,7 @@ extern void ui_destroyWidget(void);
 extern void dungeon_initGlobalContext(void);
 extern void town_synchronizedDispatch(void);
 extern void fn_800EFD04(void);
-extern void fn_800F7F90(void);
+extern void viewport_getFlag(void);
 extern void fn_801010A0(void);
 extern void fn_801010E8(void);
 extern void fn_8010EE78(void);
@@ -79,7 +79,7 @@ extern void fn_804F4F68(void);
 extern void fn_804F4FC8(void);
 extern void fn_804F50C8(void);
 extern void fn_804FC0D8(void);
-extern void fn_8050128C(void);
+extern void net_isMessageStateActive(void);
 extern void fn_8050DDE0(void);
 extern void net_p2p_readPayload(void);
 extern void fn_8050E414(void);
@@ -94,7 +94,7 @@ extern void strcmp(void);
 extern void __dynamic_cast(void);
 extern void net_getSocket(void);
 extern void net_getMyAid(void);
-extern void fn_806B1250(void);
+extern void net_isSessionConnected(void);
 extern void fn_806B3AE0(void);
 extern void fn_806B3B80(void);
 
@@ -582,7 +582,7 @@ lbl_fn_804EDCD0_000005CC:
     li r0, 0x0
     b lbl_fn_804EDCD0_00000604
 lbl_fn_804EDCD0_000005F4:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804EDCD0_00000604
 lbl_fn_804EDCD0_00000600:
@@ -678,7 +678,7 @@ lbl_fn_804EDCD0_00000718:
     li r0, 0x0
     b lbl_fn_804EDCD0_00000750
 lbl_fn_804EDCD0_00000740:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804EDCD0_00000750
 lbl_fn_804EDCD0_0000074C:
@@ -731,7 +731,7 @@ lbl_fn_804EDCD0_000007CC:
     li r0, 0x0
     b lbl_fn_804EDCD0_00000804
 lbl_fn_804EDCD0_000007F4:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804EDCD0_00000804
 lbl_fn_804EDCD0_00000800:
@@ -752,7 +752,7 @@ lbl_fn_804EDCD0_00000804:
     li r0, 0x0
     b lbl_fn_804EDCD0_0000084C
 lbl_fn_804EDCD0_0000083C:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804EDCD0_0000084C
 lbl_fn_804EDCD0_00000848:
@@ -826,22 +826,22 @@ asm void fn_804EE044(void)
     mr r4, r31
     clrlwi r5, r26, 16
     bl fn_804EE4E4
-    bl fn_800F7F90
+    bl viewport_getFlag
     mr r4, r31
     bl fn_804DD15C
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_804EE044_00000998
-    bl fn_800F7F90
+    bl viewport_getFlag
     bl fn_804EE034
     cmpwi r3, 0xc
     bgt lbl_fn_804EE044_00000998
-    bl fn_800F7F90
+    bl viewport_getFlag
     addi r3, r3, 0x5e4
     bl fn_804D5F44
     cmplw r31, r3
     bge lbl_fn_804EE044_00000998
-    bl fn_800F7F90
+    bl viewport_getFlag
     mr r4, r31
     addi r3, r3, 0x5e4
     bl fn_804D5F4C
@@ -852,14 +852,14 @@ asm void fn_804EE044(void)
     rlwinm r0, r0, 0, 2, 0
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xd0(r3)
-    bl fn_800F7F90
+    bl viewport_getFlag
     bl fn_804EB1B0
     cmpwi r3, 0x1
     bne lbl_fn_804EE044_00000998
-    bl fn_800F7F90
+    bl viewport_getFlag
     li r4, 0x5a
     bl fn_804EE03C
-    bl fn_800F7F90
+    bl viewport_getFlag
     li r4, 0x1
     bl fn_804FC0D8
 lbl_fn_804EE044_00000998:
@@ -888,7 +888,7 @@ lbl_fn_804EE044_000009E0:
     clrlwi r5, r26, 16
     bl fn_804EE4F0
     li r28, 0x0
-    bl fn_800F7F90
+    bl viewport_getFlag
     addis r3, r3, 0x1
     lis r30, lbl_80759E48@ha
     stb r28, -0x6650(r3)
@@ -1094,15 +1094,15 @@ lbl_fn_804EE044_00000A84:
     bl fn_804F50C8
     b lbl_fn_804EE044_00000A10
 lbl_fn_804EE044_00000D24:
-    bl fn_800F7F90
+    bl viewport_getFlag
     addis r3, r3, 0x1
     lbz r0, -0x6650(r3)
     cmplwi r0, 0x1
     bne lbl_fn_804EE044_00000D60
     bl net_getFriendManager
-    bl fn_800F7F90
+    bl viewport_getFlag
     addis r30, r3, 0x1
-    bl fn_800F7F90
+    bl viewport_getFlag
     addis r3, r3, 0x1
     lbz r31, -0x664f(r3)
     bl net_getPacketManager
@@ -1570,7 +1570,7 @@ lbl_fn_804EE9F4_00001338:
 lbl_fn_804EE9F4_0000137C:
     lha r4, 0x4(r31)
     addi r3, r30, 0xdc
-    bl fn_8050128C
+    bl net_isMessageStateActive
     lbz r0, 0x6(r31)
     stw r0, 0xe0(r30)
     lwz r3, 0xd0(r30)
@@ -2177,7 +2177,7 @@ lbl_fn_804EF0F4_00001B6C:
     li r0, 0x0
     b lbl_fn_804EF0F4_00001C10
 lbl_fn_804EF0F4_00001C00:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804EF0F4_00001C10
 lbl_fn_804EF0F4_00001C0C:
@@ -2233,7 +2233,7 @@ lbl_fn_804EF0F4_00001C94:
     li r0, 0x0
     b lbl_fn_804EF0F4_00001CCC
 lbl_fn_804EF0F4_00001CBC:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804EF0F4_00001CCC
 lbl_fn_804EF0F4_00001CC8:
@@ -2374,7 +2374,7 @@ lbl_fn_804EF0F4_00001E88:
     li r0, 0x0
     b lbl_fn_804EF0F4_00001EC0
 lbl_fn_804EF0F4_00001EB0:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804EF0F4_00001EC0
 lbl_fn_804EF0F4_00001EBC:
@@ -2438,7 +2438,7 @@ lbl_fn_804EF0F4_00001F5C:
     li r0, 0x0
     b lbl_fn_804EF0F4_00001F94
 lbl_fn_804EF0F4_00001F84:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804EF0F4_00001F94
 lbl_fn_804EF0F4_00001F90:

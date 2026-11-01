@@ -17,7 +17,7 @@ extern void actor_getMovementFlags(void);
 extern void fn_803C11A4(void);
 extern void fn_803C1338(void);
 extern void craft_forgeUpgradeWeapon(void);
-extern void fn_803CD958(void);
+extern void crowd_selectWaypointByWeight(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
@@ -905,7 +905,7 @@ lbl_fn_80128508_00000B70:
     stw r3, 0x0(r30)
     lwz r3, 0xa4(r29)
     add r3, r3, r0
-    bl fn_803CD958
+    bl crowd_selectWaypointByWeight
     clrlwi. r0, r3, 16
     lwz r4, 0x0(r30)
     stw r0, 0x4(r30)

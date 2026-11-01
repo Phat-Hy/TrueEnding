@@ -8,8 +8,8 @@ extern void _savegpr_14(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void item_testLineOfSight(void);
-extern void fn_80051B70(void);
-extern void fn_80051CD8(void);
+extern void player_stepMovement(void);
+extern void player_transformBoundingSphere(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
@@ -53,7 +53,7 @@ extern void kpad_testActiveFlags(void);
 extern void fn_803E3050(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
-extern void fn_803EC758(void);
+extern void barrier_formatCountdownTimer(void);
 extern void barrier_formatDialogString(void);
 extern void task_updateWorker(void);
 extern void fn_803ECBD4(void);
@@ -1109,7 +1109,7 @@ asm void fn_80436D04(void)
     addi r4, r1, 0x8
     stw r29, 0x34(r1)
     mr r29, r3
-    bl fn_803EC758
+    bl barrier_formatCountdownTimer
     lwz r0, 0xf0(r29)
     cmpwi r0, 0x0
     bne lbl_fn_80436D04_00000D64
@@ -1836,7 +1836,7 @@ lbl_fn_804375C0_00001764:
 lbl_fn_804375C0_00001770:
     addi r3, r1, 0x148
     addi r4, r14, 0x28
-    bl fn_80051CD8
+    bl player_transformBoundingSphere
     cmpwi r3, 0x0
     beq lbl_fn_804375C0_0000178C
     stw r14, 0xef8(r15)
@@ -2272,7 +2272,7 @@ lbl_fn_804375C0_00001BE0:
     bne lbl_fn_804375C0_00001F3C
     mr r4, r23
     addi r3, r1, 0x188
-    bl fn_80051B70
+    bl player_stepMovement
     cmpwi r3, 0x0
     beq lbl_fn_804375C0_00001F3C
     lfs f2, 0x190(r1)

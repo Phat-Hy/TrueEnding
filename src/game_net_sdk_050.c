@@ -32,17 +32,17 @@ extern void fn_8070CD40(void);
 extern void fn_8070CD60(void);
 extern void fn_8070CE00(void);
 extern void fn_8070CE10(void);
-extern void fn_80721120(void);
+extern void net_calcStreamOffset(void);
 extern void fn_80721150(void);
 extern void fn_807211D0(void);
 extern void fn_80721260(void);
 extern void fn_80721280(void);
 extern void fn_80721290(void);
 extern void fn_80722F50(void);
-extern void fn_80725170(void);
+extern void net_listClearAll(void);
 extern void fn_80725200(void);
-extern void fn_807252A0(void);
-extern void fn_807252D0(void);
+extern void net_listInsertNode(void);
+extern void net_listRemoveNode(void);
 
 /* External data declarations */
 extern u8 lbl_80862F30[];
@@ -896,18 +896,18 @@ asm void fn_80708150(void)
     addic. r3, r3, 0x18
     beq lbl_fn_80708150_00000AC4
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_80708150_00000AC4:
     addic. r3, r30, 0xc
     beq lbl_fn_80708150_00000AD4
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_80708150_00000AD4:
     cmpwi r30, 0x0
     beq lbl_fn_80708150_00000AE8
     mr r3, r30
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_80708150_00000AE8:
     cmpwi r31, 0x0
     ble lbl_fn_80708150_00000AF8
@@ -967,7 +967,7 @@ lbl_fn_807081F0_00000B9C:
     addi r3, r28, 0xc
     addi r4, r1, 0x8
     addi r5, r5, 0x40
-    bl fn_807252A0
+    bl net_listInsertNode
     addi r30, r30, 0x48
     addi r29, r29, 0x1
 lbl_fn_807081F0_00000BB8:
@@ -1054,20 +1054,20 @@ lbl_fn_807082B0_00000CAC:
     addi r28, r28, 0x40
     addi r3, r31, 0x18
     mr r4, r28
-    bl fn_807252D0
+    bl net_listRemoveNode
     b lbl_fn_807082B0_00000CF0
 lbl_fn_807082B0_00000CE0:
     addi r28, r28, 0x40
     mr r3, r31
     mr r4, r28
-    bl fn_807252D0
+    bl net_listRemoveNode
 lbl_fn_807082B0_00000CF0:
     addi r0, r31, 0x10
     stw r0, 0x14(r1)
     mr r5, r28
     addi r3, r31, 0xc
     addi r4, r1, 0x14
-    bl fn_807252A0
+    bl net_listInsertNode
     mr r3, r29
     bl OSRestoreInterrupts
     mr r3, r30
@@ -1128,20 +1128,20 @@ lbl_fn_807082B0_00000DB4:
     addi r28, r28, 0x40
     addi r3, r31, 0x18
     mr r4, r28
-    bl fn_807252D0
+    bl net_listRemoveNode
     b lbl_fn_807082B0_00000DF8
 lbl_fn_807082B0_00000DE8:
     addi r28, r28, 0x40
     mr r3, r31
     mr r4, r28
-    bl fn_807252D0
+    bl net_listRemoveNode
 lbl_fn_807082B0_00000DF8:
     addi r0, r31, 0x10
     stw r0, 0xc(r1)
     mr r5, r28
     addi r3, r31, 0xc
     addi r4, r1, 0xc
-    bl fn_807252A0
+    bl net_listInsertNode
     mr r3, r30
     bl OSRestoreInterrupts
     mr r3, r29
@@ -1257,19 +1257,19 @@ lbl_fn_80708550_00000F88:
     addi r26, r26, 0x40
     addi r3, r27, 0x18
     mr r4, r26
-    bl fn_807252D0
+    bl net_listRemoveNode
     b lbl_fn_80708550_00000FCC
 lbl_fn_80708550_00000FBC:
     addi r26, r26, 0x40
     mr r3, r27
     mr r4, r26
-    bl fn_807252D0
+    bl net_listRemoveNode
 lbl_fn_80708550_00000FCC:
     stw r17, 0xc(r1)
     mr r5, r26
     addi r3, r27, 0xc
     addi r4, r1, 0xc
-    bl fn_807252A0
+    bl net_listInsertNode
     mr r3, r18
     bl OSRestoreInterrupts
     mr r3, r19
@@ -1305,7 +1305,7 @@ lbl_fn_80708550_00001048:
     mr r3, r22
     addi r4, r1, 0x14
     addi r5, r17, 0x40
-    bl fn_807252A0
+    bl net_listInsertNode
     mr r3, r20
     bl OSRestoreInterrupts
 lbl_fn_80708550_00001068:
@@ -1335,20 +1335,20 @@ lbl_fn_80708550_00001080:
     addi r17, r19, 0x40
     addi r3, r22, 0x18
     mr r4, r17
-    bl fn_807252D0
+    bl net_listRemoveNode
     b lbl_fn_80708550_000010E4
 lbl_fn_80708550_000010D4:
     addi r17, r19, 0x40
     mr r3, r22
     mr r4, r17
-    bl fn_807252D0
+    bl net_listRemoveNode
 lbl_fn_80708550_000010E4:
     addi r0, r22, 0x10
     stw r0, 0x8(r1)
     mr r5, r17
     addi r3, r22, 0xc
     addi r4, r1, 0x8
-    bl fn_807252A0
+    bl net_listInsertNode
     mr r3, r18
     bl OSRestoreInterrupts
     mr r3, r21
@@ -1403,20 +1403,20 @@ lbl_fn_80708810_00001190:
     addi r29, r29, 0x40
     addi r3, r28, 0x18
     mr r4, r29
-    bl fn_807252D0
+    bl net_listRemoveNode
     b lbl_fn_80708810_000011D4
 lbl_fn_80708810_000011C4:
     addi r29, r29, 0x40
     mr r3, r28
     mr r4, r29
-    bl fn_807252D0
+    bl net_listRemoveNode
 lbl_fn_80708810_000011D4:
     addi r0, r28, 0x10
     stw r0, 0x8(r1)
     mr r5, r29
     addi r3, r28, 0xc
     addi r4, r1, 0x8
-    bl fn_807252A0
+    bl net_listInsertNode
     mr r3, r30
     bl OSRestoreInterrupts
     mr r3, r31
@@ -1452,13 +1452,13 @@ asm void fn_807088E0(void)
     mr r30, r3
     mr r3, r28
     mr r4, r29
-    bl fn_807252D0
+    bl net_listRemoveNode
     addi r0, r28, 0x1c
     stw r0, 0x8(r1)
     mr r5, r29
     addi r3, r28, 0x18
     addi r4, r1, 0x8
-    bl fn_807252A0
+    bl net_listInsertNode
     mr r3, r30
     bl OSRestoreInterrupts
     mr r3, r31
@@ -1546,19 +1546,19 @@ lbl_fn_80708980_0000139C:
     addi r22, r22, 0x40
     addi r3, r23, 0x18
     mr r4, r22
-    bl fn_807252D0
+    bl net_listRemoveNode
     b lbl_fn_80708980_000013E0
 lbl_fn_80708980_000013D0:
     addi r22, r22, 0x40
     mr r3, r23
     mr r4, r22
-    bl fn_807252D0
+    bl net_listRemoveNode
 lbl_fn_80708980_000013E0:
     stw r28, 0x8(r1)
     mr r5, r22
     addi r3, r23, 0xc
     addi r4, r1, 0x8
-    bl fn_807252A0
+    bl net_listInsertNode
     mr r3, r29
     bl OSRestoreInterrupts
     mr r3, r30
@@ -2020,7 +2020,7 @@ lbl_fn_80709000_00001A20:
     lbz r3, 0x0(r4)
     lwz r4, 0x4(r4)
     addi r5, r5, 0x8
-    bl fn_80721120
+    bl net_calcStreamOffset
 lbl_fn_80709000_00001A34:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -2179,7 +2179,7 @@ lbl_fn_807092B0_00001C30:
     lbz r3, 0x0(r4)
     lwz r4, 0x4(r4)
     addi r5, r5, 0x8
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_807092B0_00001C54
     li r3, 0x0
@@ -2212,7 +2212,7 @@ lbl_fn_807092B0_00001CA4:
     lbz r3, 0x0(r4)
     lwz r4, 0x4(r4)
     addi r5, r5, 0x8
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_807092B0_00001CC8
     li r3, 0x0
@@ -2303,7 +2303,7 @@ lbl_fn_807093D0_00001DD4:
     add r4, r3, r0
     lbz r3, 0xc(r4)
     lwz r4, 0x10(r4)
-    bl fn_80721120
+    bl net_calcStreamOffset
     cmpwi r3, 0x0
     bne lbl_fn_807093D0_00001DF8
     li r3, 0x0

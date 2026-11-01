@@ -29,9 +29,9 @@ extern void skin_applyWeights(void);
 extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
-extern void fn_800CB58C(void);
+extern void morph_hasActiveWeight(void);
 extern void morph_updateMesh(void);
-extern void fn_800CB6E4(void);
+extern void morph_dispatchTargetUpdate(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
@@ -79,7 +79,7 @@ extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_804DA490(void);
 extern void rand_Mersenne_constructor(void);
-extern void fn_805A3D00(void);
+extern void rand_Mersenne_init(void);
 extern void fn_805A507C(void);
 extern void fn_805A5224(void);
 extern void PSMTXRotRad(void);
@@ -480,7 +480,7 @@ lbl_fn_802B21FC_00000478:
 lbl_fn_802B21FC_00000488:
     mr r3, r30
     li r4, 0x0
-    bl fn_805A3D00
+    bl rand_Mersenne_init
     cmpwi r31, 0x0
     ble lbl_fn_802B21FC_000004A4
     mr r3, r30
@@ -1461,7 +1461,7 @@ lbl_fn_802B2F64_0000127C:
     cmpwi r0, 0x140
     bne lbl_fn_802B2F64_000012E8
     addi r3, r31, 0x1548
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     bne lbl_fn_802B2F64_000012D8
     lis r4, lbl_807465E0@ha
@@ -1483,11 +1483,11 @@ lbl_fn_802B2F64_0000127C:
 lbl_fn_802B2F64_000012D8:
     addi r3, r31, 0x1548
     addi r4, r31, 0x528
-    bl fn_800CB6E4
+    bl morph_dispatchTargetUpdate
     b lbl_fn_802B2F64_00001308
 lbl_fn_802B2F64_000012E8:
     addi r3, r31, 0x1548
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     beq lbl_fn_802B2F64_00001308
     addi r3, r31, 0x1548

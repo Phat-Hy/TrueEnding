@@ -40,7 +40,7 @@ extern u32 lbl_80887C74;
 extern u32 lbl_80887C78;
 
 /* Function declarations */
-void fn_805381A4(void);
+void node_getParentNode(void);
 void fn_805381B0(void);
 void fn_805381BC(void);
 void* spectate_getRootNode(void*);
@@ -62,7 +62,7 @@ void fn_805393FC(void);
 void fn_8053985C(void);
 void fn_80539874(void);
 
-asm void fn_805381A4(void)
+asm void node_getParentNode(void)
 {
     nofralloc
     lwz r3, 0x8(r3)

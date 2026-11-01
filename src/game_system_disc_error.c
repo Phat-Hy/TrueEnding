@@ -17,7 +17,7 @@ extern void fn_8006AF38(void);
 extern void mem_free(void);
 extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_8009373C(void);
+extern void target_findEntryByName(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -31,7 +31,7 @@ extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015ECC4(void);
-extern void fn_80161570(void);
+extern void party_updateMemberCoords(void);
 extern void debuff_removeStatusEffect(void);
 extern void battle_applyStatusEffect(void);
 extern void actor_getMovementFlags(void);
@@ -378,11 +378,11 @@ asm void fn_80353F50(void)
     addi r30, r30, lbl_8074AA58@l
     addi r3, r3, 0xb0
     addi r4, r30, 0x466
-    bl fn_8009373C
+    bl target_findEntryByName
     addi r3, r29, 0xb0
     addi r4, r30, 0x473
     li r5, 0x0
-    bl fn_8009373C
+    bl target_findEntryByName
     lwz r3, lbl_8087F3C0
     li r0, 0x2
     li r4, 0x0
@@ -1243,7 +1243,7 @@ lbl_fn_80354AA4_00000E5C:
     stfs f0, 0x6b8(r31)
     stfs f0, 0x6bc(r31)
     stfs f0, 0x6c0(r31)
-    bl fn_80161570
+    bl party_updateMemberCoords
     lwz r3, 0x14f0(r31)
     bl task_findEntryById
     lfs f2, 0x530(r31)

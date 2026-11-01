@@ -7,7 +7,7 @@ extern void _restgpr_22(void);
 extern void _savegpr_22(void);
 extern void dtor_80084684(void);
 extern void fn_8006A0F4(void);
-extern void fn_8006A250(void);
+extern void boss_dispatchActionTransition(void);
 extern void mem_alloc(void);
 extern void fn_800A4228(void);
 extern void msg_getMessageById(void);
@@ -26,24 +26,24 @@ extern void fn_8011770C(void);
 extern void fn_8012B028(void);
 extern void fn_80134800(void);
 extern void save_validateHeader(void);
-extern void fn_801F4AA0(void);
+extern void save_findSlotTask(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void save_createWorkerTask(void);
 extern void save_computeCrc32(void);
 extern void save_calculateBlockCrc(void);
 extern void save_findEntryByName(void);
-extern void fn_801F8598(void);
+extern void save_formatSlotString(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_801FEF40(void);
 extern void mem_findBlockById(void);
 extern void fn_80216544(void);
-extern void fn_8021771C(void);
+extern void task_findNextReady(void);
 extern void fn_80217D9C(void);
-extern void fn_80219544(void);
+extern void task_getWorkerByIndex(void);
 extern void world_getGlobalFlag(void);
 extern void fn_804A436C(void);
-extern void fn_804A53D4(void);
+extern void net_broadcastCoopPacket(void);
 extern void dlc_findItemInCatalog(void);
 extern void fn_805C3F10(void);
 extern void fn_805F3780(void);
@@ -350,7 +350,7 @@ lbl_homeMenu_returnToWiiMenu_00000348:
     li r4, 0x14
     li r5, 0x0
     lis r6, 0xff00
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     stw r3, 0x18(r31)
     lis r4, 0x5
     subi r0, r4, 0x6c20
@@ -430,7 +430,7 @@ lbl_homeMenu_returnToWiiMenu_00000468:
     li r4, 0x14
     li r5, 0x0
     lis r6, 0xff00
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     stw r3, 0x18(r31)
     lis r4, 0x5
     subi r0, r4, 0x6c20
@@ -499,7 +499,7 @@ lbl_homeMenu_returnToWiiMenu_00000560:
     li r4, 0x14
     li r5, 0x0
     lis r6, 0xff00
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     stw r3, 0x18(r31)
     lis r4, 0x5
     subi r0, r4, 0x6c20
@@ -568,7 +568,7 @@ lbl_homeMenu_returnToWiiMenu_00000658:
     li r4, 0x14
     li r5, 0x0
     lis r6, 0xff00
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     stw r3, 0x18(r31)
     lis r4, 0x5
     subi r0, r4, 0x6c20
@@ -1169,7 +1169,7 @@ lbl_fn_80571A2C_00000E4C:
     li r4, 0x0
     li r5, 0x0
     li r7, 0x0
-    bl fn_804A53D4
+    bl net_broadcastCoopPacket
     b lbl_fn_80571A2C_00000F58
 lbl_fn_80571A2C_00000E84:
     bl fn_80572454
@@ -1197,7 +1197,7 @@ lbl_fn_80571A2C_00000E84:
     li r4, 0x0
     li r5, 0x0
     li r7, 0x0
-    bl fn_804A53D4
+    bl net_broadcastCoopPacket
     b lbl_fn_80571A2C_00000F58
 lbl_fn_80571A2C_00000EF0:
     bl fn_80572454
@@ -1225,7 +1225,7 @@ lbl_fn_80571A2C_00000EF0:
     li r4, 0x0
     li r5, 0x0
     li r7, 0x0
-    bl fn_804A53D4
+    bl net_broadcastCoopPacket
 lbl_fn_80571A2C_00000F58:
     lwz r0, 0x114(r1)
     lwz r31, 0x10c(r1)
@@ -1798,7 +1798,7 @@ lbl_fn_80572294_00001700:
     lbz r4, 0x1(r5)
     lbz r3, 0x0(r3)
     lbz r5, 0x2(r5)
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     beq lbl_fn_80572294_0000173C
     lwz r0, 0x54(r3)
@@ -1869,7 +1869,7 @@ lbl_fn_80572454_000017D0:
     lfs f1, lbl_80888064
     lfs f2, lbl_80888068
     lfs f3, lbl_8088806C
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lwz r3, 0x48(r27)
     lfs f0, lbl_80888070
     stfs f0, 0x100(r3)
@@ -1880,7 +1880,7 @@ lbl_fn_80572454_00001834:
     lwz r3, 0x48(r27)
     fmr f2, f1
     fmr f3, f1
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lwz r3, 0x48(r27)
     lfs f0, lbl_80888078
     stfs f0, 0x100(r3)
@@ -1935,7 +1935,7 @@ lbl_fn_80572454_000018A0:
     bl save_calculateBlockCrc
     add r31, r27, r26
     lwz r3, 0x70(r31)
-    bl fn_80219544
+    bl task_getWorkerByIndex
     bl mem_findBlockById
     lwz r5, 0x4c(r29)
     mr r6, r3
@@ -1974,7 +1974,7 @@ lbl_fn_80572454_00001978:
     addi r4, r30, 0xe6
     lwz r5, 0xf0(r1)
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     lwz r22, 0x1ac(r23)
     mr r3, r23
     bl fn_8012B028

@@ -8,7 +8,7 @@ extern void _restgpr_19(void);
 extern void _savegpr_16(void);
 extern void _savegpr_19(void);
 extern void dtor_80084684(void);
-extern void fn_80051B70(void);
+extern void player_stepMovement(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -21,7 +21,7 @@ extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void skill_findNodeById(void);
-extern void fn_80133130(void);
+extern void boss_setPartCollisionFlags(void);
 extern void fn_80134270(void);
 extern void fn_80134290(void);
 extern void boss_updatePhaseState(void);
@@ -1089,7 +1089,7 @@ lbl_fn_80273970_00000DE4:
     li r4, 0x4
     li r5, 0xa
     li r6, 0x0
-    bl fn_80133130
+    bl boss_setPartCollisionFlags
 lbl_fn_80273970_00000E00:
     lwz r0, 0x18f0(r21)
     cmpwi r0, 0x0
@@ -1201,7 +1201,7 @@ lbl_fn_80273970_00000F3C:
     psq_st f1, 0x0(r25), 0, 0
     stfs f2, 0x40(r1)
     stfs f29, 0x44(r1)
-    bl fn_80051B70
+    bl player_stepMovement
     cmpwi r3, 0x0
     beq lbl_fn_80273970_00000FB4
     li r23, 0x1

@@ -5,7 +5,7 @@
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void fn_8004FF58(void);
-extern void fn_80063764(void);
+extern void magic_updateCircleArea(void);
 extern void magic_castSpellCircle(void);
 extern void boss_recordDamage(void);
 extern void fn_8006FEBC(void);
@@ -16,7 +16,7 @@ extern void dungeon_initGlobalContext(void);
 extern void town_synchronizedDispatch(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800902C0(void);
+extern void radar_addBlipEntry(void);
 extern void atn_Model_updateMatrices(void);
 extern void fn_80095300(void);
 extern void model_updateBoneTransforms(void);
@@ -368,7 +368,7 @@ lbl_fn_8008C950_00000318:
     li r4, 0x0
     stfs f0, 0xa8(r30)
     stw r0, 0x5c(r1)
-    bl fn_800902C0
+    bl radar_addBlipEntry
     addic. r3, r1, 0x5c
     beq lbl_fn_8008C950_0000047C
     lwz r4, 0x5c(r1)
@@ -887,7 +887,7 @@ lbl_minimap_renderOverlay_00000B38:
     stfs f7, 0x30(r1)
     stfs f0, 0x34(r1)
     lfs f1, 0x98(r31)
-    bl fn_80063764
+    bl magic_updateCircleArea
 lbl_minimap_renderOverlay_00000B80:
     addi r28, r28, 0x4
     addi r27, r27, 0x1

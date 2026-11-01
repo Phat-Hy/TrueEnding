@@ -10,7 +10,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_22(void);
 extern void _savegpr_24(void);
 extern void dtor_80084684(void);
-extern void fn_80041C0C(void);
+extern void menu_destroyObject(void);
 extern void fn_80042740(void);
 extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
@@ -32,7 +32,7 @@ extern void morph_updateWeights(void);
 extern void fn_800CB480(void);
 extern void fn_800CB518(void);
 extern void morph_updateMesh(void);
-extern void fn_800CB688(void);
+extern void morph_resetTargetWeight(void);
 extern void fn_800CB6B0(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -794,9 +794,9 @@ asm void fn_803F0538(void)
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0
     beq lbl_fn_803F0538_000008D0
-    lis r4, fn_80041C0C@ha
+    lis r4, menu_destroyObject@ha
     mr r3, r0
-    addi r4, r4, fn_80041C0C@l
+    addi r4, r4, menu_destroyObject@l
     bl __destroy_arr
 lbl_fn_803F0538_000008D0:
     cmpwi r30, 0x0
@@ -810,11 +810,11 @@ lbl_fn_803F0538_000008D0:
     li r7, 0x0
     bl mem_realloc
     lis r4, fn_80042740@ha
-    lis r5, fn_80041C0C@ha
+    lis r5, menu_destroyObject@ha
     mr r7, r30
     li r6, 0x20
     addi r4, r4, fn_80042740@l
-    addi r5, r5, fn_80041C0C@l
+    addi r5, r5, menu_destroyObject@l
     bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803F0538_00000924
@@ -2274,7 +2274,7 @@ lbl_fn_803F1508_00001CD4:
     lfs f1, lbl_80885FA8
     addi r3, r1, 0x10
     li r4, 0xf0
-    bl fn_800CB688
+    bl morph_resetTargetWeight
 lbl_fn_803F1508_00001CF4:
     lwz r0, 0x44(r28)
     rlwinm r0, r0, 0, 27, 27
@@ -2283,7 +2283,7 @@ lbl_fn_803F1508_00001CF4:
     lfs f1, lbl_80885FA4
     addi r3, r1, 0x10
     li r4, 0xf0
-    bl fn_800CB688
+    bl morph_resetTargetWeight
 lbl_fn_803F1508_00001D14:
     lwz r3, lbl_8087EFE8
     stw r24, 0x34d0(r3)

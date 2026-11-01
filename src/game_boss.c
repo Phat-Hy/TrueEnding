@@ -28,7 +28,7 @@ extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5A3C(void);
 extern void fn_800D5B58(void);
 extern void fn_8046CC90(void);
-extern void fn_8046DC5C(void);
+extern void boss_loadWeakpointResource(void);
 extern void boss_bindArenaInteractions(void);
 extern void fn_8046F4D4(void);
 extern void fn_805F9EF0(void);
@@ -97,7 +97,7 @@ void fn_8006A004(void);
 void atn_FadeCommon_destructor(void);
 void fn_8006A0F4(void);
 void fn_8006A204(void);
-void fn_8006A250(void);
+void boss_dispatchActionTransition(void);
 void atn_FadeColor_destructor(void);
 void atn_FadeColor_draw(void);
 void fn_8006A5A8(void);
@@ -113,12 +113,12 @@ void fn_8006A9A4(void);
 void boss_triggerEventSequence(void);
 void fn_8006AB54(void);
 void fn_8006AC08(void);
-void fn_8006AD24(void);
+void boss_lookupActionEntry(void);
 void fn_8006AF38(void);
 void boss_initActionStream(void);
 void fn_8006B0C8(void);
 void boss_decodePhaseBitfield(void);
-void fn_8006B2D8(void);
+void boss_parseStateCondition(void);
 void fn_8006B404(void);
 void fn_8006B46C(void);
 void fn_8006B53C(void);
@@ -129,7 +129,7 @@ void fn_8006BA54(void);
 u32 fn_8006BA6C(void);
 void fn_8006BA74(void);
 void fn_8006BA8C(void);
-void fn_8006BB6C(void);
+void boss_triggerEventAction(void);
 void fn_8006BBCC(void);
 void atn_FileList_destructor(void);
 void fn_8006BD78(void);
@@ -1647,7 +1647,7 @@ lbl_fn_8006A204_0000148C:
     blr
 }
 
-asm void fn_8006A250(void)
+asm void boss_dispatchActionTransition(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1668,7 +1668,7 @@ asm void fn_8006A250(void)
     bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
-    beq lbl_fn_8006A250_0000154C
+    beq lbl_boss_dispatchActionTransition_0000154C
     mr r4, r27
     bl atn_Task_constructor
     lis r4, lbl_80777B88@ha
@@ -1693,7 +1693,7 @@ asm void fn_8006A250(void)
     stfs f0, 0x74(r31)
     stw r3, 0x0(r31)
     stw r4, 0x78(r31)
-lbl_fn_8006A250_0000154C:
+lbl_boss_dispatchActionTransition_0000154C:
     addi r11, r1, 0x20
     mr r3, r31
     bl _restgpr_27
@@ -2450,7 +2450,7 @@ lbl_fn_8006AC08_00001F58:
     blr
 }
 
-asm void fn_8006AD24(void)
+asm void boss_lookupActionEntry(void)
 {
     nofralloc
     stwu r1, -0x50(r1)
@@ -2463,41 +2463,41 @@ asm void fn_8006AD24(void)
     mr r30, r4
     lwz r0, 0x0(r3)
     srwi. r0, r0, 31
-    bne lbl_fn_8006AD24_00001FB0
+    bne lbl_boss_lookupActionEntry_00001FB0
     lbz r0, 0x0(r3)
     addi r4, r3, 0x1
     clrlwi r3, r0, 25
-    b lbl_fn_8006AD24_00001FB8
-lbl_fn_8006AD24_00001FB0:
+    b lbl_boss_lookupActionEntry_00001FB8
+lbl_boss_lookupActionEntry_00001FB0:
     lwz r4, 0x8(r3)
     lwz r3, 0x4(r3)
-lbl_fn_8006AD24_00001FB8:
+lbl_boss_lookupActionEntry_00001FB8:
     cmpwi r3, 0x0
-    beq lbl_fn_8006AD24_00001FFC
+    beq lbl_boss_lookupActionEntry_00001FFC
     subi r3, r3, 0x1
     li r0, -0x1
     cmplw r3, r0
-    bge lbl_fn_8006AD24_00001FD4
+    bge lbl_boss_lookupActionEntry_00001FD4
     mr r5, r3
-lbl_fn_8006AD24_00001FD4:
+lbl_boss_lookupActionEntry_00001FD4:
     add r3, r4, r5
-lbl_fn_8006AD24_00001FD8:
+lbl_boss_lookupActionEntry_00001FD8:
     lbz r0, 0x0(r3)
     cmpwi r0, 0x2e
-    bne lbl_fn_8006AD24_00001FEC
+    bne lbl_boss_lookupActionEntry_00001FEC
     subf r5, r4, r3
-    b lbl_fn_8006AD24_00002000
-lbl_fn_8006AD24_00001FEC:
+    b lbl_boss_lookupActionEntry_00002000
+lbl_boss_lookupActionEntry_00001FEC:
     cmplw r3, r4
-    ble lbl_fn_8006AD24_00001FFC
+    ble lbl_boss_lookupActionEntry_00001FFC
     subi r3, r3, 0x1
-    b lbl_fn_8006AD24_00001FD8
-lbl_fn_8006AD24_00001FFC:
+    b lbl_boss_lookupActionEntry_00001FD8
+lbl_boss_lookupActionEntry_00001FFC:
     li r5, -0x1
-lbl_fn_8006AD24_00002000:
+lbl_boss_lookupActionEntry_00002000:
     addis r0, r5, 0x1
     cmplwi r0, 0xffff
-    beq lbl_fn_8006AD24_000020E4
+    beq lbl_boss_lookupActionEntry_000020E4
     addi r6, r5, 0x1
     mr r4, r31
     addi r3, r1, 0x30
@@ -2509,36 +2509,36 @@ lbl_fn_8006AD24_00002000:
     bl boss_initActionStream
     lwz r0, 0x0(r31)
     srwi. r4, r0, 31
-    bne lbl_fn_8006AD24_00002060
+    bne lbl_boss_lookupActionEntry_00002060
     lwz r3, 0x24(r1)
     srwi. r0, r3, 31
-    bne lbl_fn_8006AD24_00002060
+    bne lbl_boss_lookupActionEntry_00002060
     lwz r0, 0x28(r1)
     stw r0, 0x4(r31)
     stw r3, 0x0(r31)
     lwz r0, 0x2c(r1)
     stw r0, 0x8(r31)
-    b lbl_fn_8006AD24_000020B8
-lbl_fn_8006AD24_00002060:
+    b lbl_boss_lookupActionEntry_000020B8
+lbl_boss_lookupActionEntry_00002060:
     cmpwi r4, 0x0
-    beq lbl_fn_8006AD24_00002070
+    beq lbl_boss_lookupActionEntry_00002070
     lwz r5, 0x4(r31)
-    b lbl_fn_8006AD24_00002078
-lbl_fn_8006AD24_00002070:
+    b lbl_boss_lookupActionEntry_00002078
+lbl_boss_lookupActionEntry_00002070:
     lbz r0, 0x0(r31)
     clrlwi r5, r0, 25
-lbl_fn_8006AD24_00002078:
+lbl_boss_lookupActionEntry_00002078:
     lwz r0, 0x24(r1)
     srwi. r0, r0, 31
-    bne lbl_fn_8006AD24_00002094
+    bne lbl_boss_lookupActionEntry_00002094
     lbz r0, 0x24(r1)
     addi r6, r1, 0x25
     clrlwi r4, r0, 25
-    b lbl_fn_8006AD24_0000209C
-lbl_fn_8006AD24_00002094:
+    b lbl_boss_lookupActionEntry_0000209C
+lbl_boss_lookupActionEntry_00002094:
     lwz r6, 0x2c(r1)
     lwz r4, 0x28(r1)
-lbl_fn_8006AD24_0000209C:
+lbl_boss_lookupActionEntry_0000209C:
     lbz r0, 0x14(r1)
     add r7, r6, r4
     stb r0, 0x10(r1)
@@ -2546,20 +2546,20 @@ lbl_fn_8006AD24_0000209C:
     addi r8, r1, 0x10
     li r4, 0x0
     bl actor_dispatchMessage
-lbl_fn_8006AD24_000020B8:
+lbl_boss_lookupActionEntry_000020B8:
     lwz r0, 0x24(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_8006AD24_000020CC
+    beq lbl_boss_lookupActionEntry_000020CC
     lwz r3, 0x2c(r1)
     bl dtor_80084684
-lbl_fn_8006AD24_000020CC:
+lbl_boss_lookupActionEntry_000020CC:
     lwz r0, 0x30(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_8006AD24_0000216C
+    beq lbl_boss_lookupActionEntry_0000216C
     lwz r3, 0x38(r1)
     bl dtor_80084684
-    b lbl_fn_8006AD24_0000216C
-lbl_fn_8006AD24_000020E4:
+    b lbl_boss_lookupActionEntry_0000216C
+lbl_boss_lookupActionEntry_000020E4:
     lis r4, lbl_8073148C@ha
     mr r5, r30
     addi r4, r4, lbl_8073148C@l
@@ -2568,24 +2568,24 @@ lbl_fn_8006AD24_000020E4:
     bl fn_8006AF38
     lwz r0, 0x0(r31)
     srwi. r0, r0, 31
-    bne lbl_fn_8006AD24_00002114
+    bne lbl_boss_lookupActionEntry_00002114
     lbz r0, 0x0(r31)
     clrlwi r4, r0, 25
-    b lbl_fn_8006AD24_00002118
-lbl_fn_8006AD24_00002114:
+    b lbl_boss_lookupActionEntry_00002118
+lbl_boss_lookupActionEntry_00002114:
     lwz r4, 0x4(r31)
-lbl_fn_8006AD24_00002118:
+lbl_boss_lookupActionEntry_00002118:
     lwz r0, 0x18(r1)
     srwi. r0, r0, 31
-    bne lbl_fn_8006AD24_00002134
+    bne lbl_boss_lookupActionEntry_00002134
     lbz r0, 0x18(r1)
     addi r6, r1, 0x19
     clrlwi r5, r0, 25
-    b lbl_fn_8006AD24_0000213C
-lbl_fn_8006AD24_00002134:
+    b lbl_boss_lookupActionEntry_0000213C
+lbl_boss_lookupActionEntry_00002134:
     lwz r6, 0x20(r1)
     lwz r5, 0x1c(r1)
-lbl_fn_8006AD24_0000213C:
+lbl_boss_lookupActionEntry_0000213C:
     lbz r0, 0xc(r1)
     add r7, r6, r5
     stb r0, 0x8(r1)
@@ -2595,10 +2595,10 @@ lbl_fn_8006AD24_0000213C:
     bl actor_dispatchMessage
     lwz r0, 0x18(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_8006AD24_0000216C
+    beq lbl_boss_lookupActionEntry_0000216C
     lwz r3, 0x20(r1)
     bl dtor_80084684
-lbl_fn_8006AD24_0000216C:
+lbl_boss_lookupActionEntry_0000216C:
     mr r3, r31
     lwz r31, 0x4c(r1)
     lwz r30, 0x48(r1)
@@ -2889,7 +2889,7 @@ lbl_boss_decodePhaseBitfield_00002510:
     blr
 }
 
-asm void fn_8006B2D8(void)
+asm void boss_parseStateCondition(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -2902,57 +2902,57 @@ asm void fn_8006B2D8(void)
     mr r30, r3
     lwz r0, 0x0(r4)
     srwi. r7, r0, 31
-    bne lbl_fn_8006B2D8_00002564
+    bne lbl_boss_parseStateCondition_00002564
     lbz r0, 0x0(r4)
     addi r6, r4, 0x1
     clrlwi r5, r0, 25
-    b lbl_fn_8006B2D8_0000256C
-lbl_fn_8006B2D8_00002564:
+    b lbl_boss_parseStateCondition_0000256C
+lbl_boss_parseStateCondition_00002564:
     lwz r6, 0x8(r4)
     lwz r5, 0x4(r4)
-lbl_fn_8006B2D8_0000256C:
+lbl_boss_parseStateCondition_0000256C:
     cmpwi r5, 0x0
-    beq lbl_fn_8006B2D8_000025B0
+    beq lbl_boss_parseStateCondition_000025B0
     subi r5, r5, 0x1
     li r0, -0x1
     cmplw r5, r0
-    bge lbl_fn_8006B2D8_00002588
+    bge lbl_boss_parseStateCondition_00002588
     mr r8, r5
-lbl_fn_8006B2D8_00002588:
+lbl_boss_parseStateCondition_00002588:
     add r5, r6, r8
-lbl_fn_8006B2D8_0000258C:
+lbl_boss_parseStateCondition_0000258C:
     lbz r0, 0x0(r5)
     cmpwi r0, 0x2e
-    bne lbl_fn_8006B2D8_000025A0
+    bne lbl_boss_parseStateCondition_000025A0
     subf r6, r6, r5
-    b lbl_fn_8006B2D8_000025B4
-lbl_fn_8006B2D8_000025A0:
+    b lbl_boss_parseStateCondition_000025B4
+lbl_boss_parseStateCondition_000025A0:
     cmplw r5, r6
-    ble lbl_fn_8006B2D8_000025B0
+    ble lbl_boss_parseStateCondition_000025B0
     subi r5, r5, 0x1
-    b lbl_fn_8006B2D8_0000258C
-lbl_fn_8006B2D8_000025B0:
+    b lbl_boss_parseStateCondition_0000258C
+lbl_boss_parseStateCondition_000025B0:
     li r6, -0x1
-lbl_fn_8006B2D8_000025B4:
+lbl_boss_parseStateCondition_000025B4:
     addis r0, r6, 0x1
     cmplwi r0, 0xffff
-    beq lbl_fn_8006B2D8_000025D4
+    beq lbl_boss_parseStateCondition_000025D4
     mr r3, r30
     mr r4, r31
     li r5, 0x0
     bl fn_80069BF4
-    b lbl_fn_8006B2D8_0000263C
-lbl_fn_8006B2D8_000025D4:
+    b lbl_boss_parseStateCondition_0000263C
+lbl_boss_parseStateCondition_000025D4:
     cmpwi r7, 0x0
-    bne lbl_fn_8006B2D8_000025F8
+    bne lbl_boss_parseStateCondition_000025F8
     lwz r5, 0x0(r4)
     lwz r0, 0x4(r4)
     stw r0, 0x4(r3)
     stw r5, 0x0(r3)
     lwz r0, 0x8(r4)
     stw r0, 0x8(r3)
-    b lbl_fn_8006B2D8_0000263C
-lbl_fn_8006B2D8_000025F8:
+    b lbl_boss_parseStateCondition_0000263C
+lbl_boss_parseStateCondition_000025F8:
     li r0, 0x0
     stw r0, 0x0(r3)
     stw r0, 0x4(r3)
@@ -2970,7 +2970,7 @@ lbl_fn_8006B2D8_000025F8:
     lwz r0, 0x4(r31)
     add r7, r6, r0
     bl actor_dispatchMessage
-lbl_fn_8006B2D8_0000263C:
+lbl_boss_parseStateCondition_0000263C:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -3492,7 +3492,7 @@ asm void fn_8006BA8C(void)
     mr r3, r0
     mr r5, r30
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     b lbl_fn_8006BA8C_00002DA4
 lbl_fn_8006BA8C_00002D24:
     mr r3, r6
@@ -3537,7 +3537,7 @@ lbl_fn_8006BA8C_00002DA4:
     blr
 }
 
-asm void fn_8006BB6C(void)
+asm void boss_triggerEventAction(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -3547,20 +3547,20 @@ asm void fn_8006BB6C(void)
     mr r31, r3
     lwz r0, lbl_8087F518
     cmpwi r0, 0x0
-    beq lbl_fn_8006BB6C_00002DF4
+    beq lbl_boss_triggerEventAction_00002DF4
     cmpwi r4, 0x0
-    bne lbl_fn_8006BB6C_00002DF4
+    bne lbl_boss_triggerEventAction_00002DF4
     mr r3, r0
     mr r4, r31
     bl boss_bindArenaInteractions
-    b lbl_fn_8006BB6C_00002E08
-lbl_fn_8006BB6C_00002DF4:
+    b lbl_boss_triggerEventAction_00002E08
+lbl_boss_triggerEventAction_00002DF4:
     cmpwi r3, 0x0
-    beq lbl_fn_8006BB6C_00002E08
+    beq lbl_boss_triggerEventAction_00002E08
     bl dungeon_initGlobalContext
     mr r4, r31
     bl town_updateInteractionPoints
-lbl_fn_8006BB6C_00002E08:
+lbl_boss_triggerEventAction_00002E08:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

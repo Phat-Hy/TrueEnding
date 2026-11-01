@@ -59,7 +59,7 @@ extern void fn_8069D144(void);
 extern void fn_8069D2EC(void);
 extern void fn_8069D3F0(void);
 extern void fn_8069D580(void);
-extern void fn_8069D64C(void);
+extern void net_dispatchSubsystemRequest(void);
 extern void fn_8069D6F8(void);
 extern void fn_8069D9A0(void);
 extern void fn_8069DB98(void);
@@ -74,7 +74,7 @@ extern void fn_806A0DAC(void);
 extern void fn_806A0DB4(void);
 extern void fn_806A1064(void);
 extern void fn_806A117C(void);
-extern void fn_806A11D4(void);
+extern void net_initSubsystem(void);
 extern void fn_806A123C(void);
 extern void fn_806A1240(void);
 extern void fn_806A1248(void);
@@ -134,7 +134,7 @@ asm void fn_8069E1BC(void)
     addi r11, r1, 0x40
     bl _savegpr_25
     mr r27, r3
-    bl fn_806A11D4
+    bl net_initSubsystem
     mr r25, r3
     bl fn_806A1258
     mr r30, r3
@@ -199,7 +199,7 @@ lbl_fn_8069E1BC_000000E8:
     mr r3, r27
     li r5, 0x31
     addi r4, r4, lbl_80767314@l
-    bl fn_8069D64C
+    bl net_dispatchSubsystemRequest
     cmpwi r3, 0x0
     beq lbl_fn_8069E1BC_00000118
     b lbl_fn_8069E1BC_000002AC
@@ -208,7 +208,7 @@ lbl_fn_8069E1BC_00000118:
     mr r3, r27
     addi r4, r4, lbl_807BC5B4@l
     li r5, 0x10
-    bl fn_8069D64C
+    bl net_dispatchSubsystemRequest
     cmpwi r3, 0x0
     beq lbl_fn_8069E1BC_00000138
     b lbl_fn_8069E1BC_000002AC
@@ -216,7 +216,7 @@ lbl_fn_8069E1BC_00000138:
     mr r3, r27
     mr r5, r25
     addi r4, r1, 0xc
-    bl fn_8069D64C
+    bl net_dispatchSubsystemRequest
     cmpwi r3, 0x0
     beq lbl_fn_8069E1BC_00000154
     b lbl_fn_8069E1BC_000002AC
@@ -224,7 +224,7 @@ lbl_fn_8069E1BC_00000154:
     mr r3, r27
     la r4, lbl_8087ED6C
     li r5, 0x2
-    bl fn_8069D64C
+    bl net_dispatchSubsystemRequest
     cmpwi r3, 0x0
     beq lbl_fn_8069E1BC_00000170
     b lbl_fn_8069E1BC_000002AC
@@ -232,7 +232,7 @@ lbl_fn_8069E1BC_00000170:
     mr r3, r27
     la r4, lbl_8087ED6C
     li r5, 0x2
-    bl fn_8069D64C
+    bl net_dispatchSubsystemRequest
     cmpwi r3, 0x0
     beq lbl_fn_8069E1BC_0000018C
     b lbl_fn_8069E1BC_000002AC
@@ -249,7 +249,7 @@ lbl_fn_8069E1BC_0000019C:
     mr r5, r3
     mr r3, r27
     addi r4, r1, 0xc
-    bl fn_8069D64C
+    bl net_dispatchSubsystemRequest
     cmpwi r3, 0x0
     beq lbl_fn_8069E1BC_000001C4
     b lbl_fn_8069E1BC_000002AC
@@ -263,7 +263,7 @@ lbl_fn_8069E1BC_000001C8:
     mr r3, r27
     la r4, lbl_8087ED88
     li r5, 0x1
-    bl fn_8069D64C
+    bl net_dispatchSubsystemRequest
     cmpwi r3, 0x0
     beq lbl_fn_8069E1BC_000001F4
     b lbl_fn_8069E1BC_000002AC
@@ -292,7 +292,7 @@ lbl_fn_8069E1BC_00000234:
     mr r5, r3
     mr r3, r27
     addi r4, r1, 0xc
-    bl fn_8069D64C
+    bl net_dispatchSubsystemRequest
     cmpwi r3, 0x0
     beq lbl_fn_8069E1BC_0000025C
     b lbl_fn_8069E1BC_000002AC
@@ -311,7 +311,7 @@ lbl_fn_8069E1BC_00000270:
     mr r3, r27
     la r4, lbl_8087ED8C
     li r5, 0x1
-    bl fn_8069D64C
+    bl net_dispatchSubsystemRequest
     cmpwi r3, 0x0
     beq lbl_fn_8069E1BC_0000029C
     b lbl_fn_8069E1BC_000002AC
@@ -340,7 +340,7 @@ asm void fn_8069E480(void)
     addi r11, r1, 0x30
     bl _savegpr_24
     mr r26, r3
-    bl fn_806A11D4
+    bl net_initSubsystem
     mr r25, r3
     bl fn_806A123C
     mr r24, r3
@@ -451,7 +451,7 @@ asm void fn_8069E600(void)
     stw r29, 0x14(r1)
     stw r28, 0x10(r1)
     mr r28, r3
-    bl fn_806A11D4
+    bl net_initSubsystem
     mr r30, r3
     bl fn_806A1258
     mr r29, r3
@@ -505,7 +505,7 @@ asm void fn_8069E6B8(void)
     mr r31, r3
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
-    bl fn_806A11D4
+    bl net_initSubsystem
     bl fn_806A1248
     lwz r3, 0x0(r3)
     lwz r30, 0xc(r3)
@@ -603,7 +603,7 @@ asm void fn_8069E80C(void)
     addi r11, r1, 0x20
     bl _savegpr_26
     mr r31, r3
-    bl fn_806A11D4
+    bl net_initSubsystem
     mr r29, r3
     bl fn_806A123C
     mr r28, r3
@@ -730,7 +730,7 @@ asm void fn_8069E9C8(void)
     stw r29, 0x14(r1)
     stw r28, 0x10(r1)
     mr r28, r3
-    bl fn_806A11D4
+    bl net_initSubsystem
     mr r30, r3
     bl fn_806A123C
     mr r29, r3
@@ -829,7 +829,7 @@ asm void fn_8069EB1C(void)
     lis r30, lbl_807BC558@ha
     mr r27, r3
     addi r30, r30, lbl_807BC558@l
-    bl fn_806A11D4
+    bl net_initSubsystem
     mr r28, r3
     bl fn_806A1248
     lwz r4, 0x0(r3)
@@ -875,19 +875,19 @@ lbl_fn_8069EB1C_00000A20:
     mr r3, r27
     la r4, lbl_8087ED90
     li r5, 0x4
-    bl fn_8069D64C
+    bl net_dispatchSubsystemRequest
     b lbl_fn_8069EB1C_00000A58
 lbl_fn_8069EB1C_00000A34:
     mr r3, r27
     la r4, lbl_8087ED98
     li r5, 0x5
-    bl fn_8069D64C
+    bl net_dispatchSubsystemRequest
     b lbl_fn_8069EB1C_00000A58
 lbl_fn_8069EB1C_00000A48:
     mr r3, r27
     la r4, lbl_8087EDA0
     li r5, 0x5
-    bl fn_8069D64C
+    bl net_dispatchSubsystemRequest
 lbl_fn_8069EB1C_00000A58:
     cmpwi r3, 0x0
     beq lbl_fn_8069EB1C_00000A64
@@ -902,7 +902,7 @@ lbl_fn_8069EB1C_00000A64:
     lwz r4, 0x24(r29)
     mr r3, r27
     mr r5, r25
-    bl fn_8069D64C
+    bl net_dispatchSubsystemRequest
     cmpwi r3, 0x0
     beq lbl_fn_8069EB1C_00000AE0
     b lbl_fn_8069EB1C_00000DE4
@@ -914,7 +914,7 @@ lbl_fn_8069EB1C_00000A98:
     subf r5, r4, r25
     mr r3, r27
     add r4, r0, r4
-    bl fn_8069D64C
+    bl net_dispatchSubsystemRequest
     cmpwi r3, 0x0
     beq lbl_fn_8069EB1C_00000AE0
     b lbl_fn_8069EB1C_00000DE4
@@ -922,7 +922,7 @@ lbl_fn_8069EB1C_00000AC4:
     mr r3, r27
     la r4, lbl_8087EDA8
     li r5, 0x1
-    bl fn_8069D64C
+    bl net_dispatchSubsystemRequest
     cmpwi r3, 0x0
     beq lbl_fn_8069EB1C_00000AE0
     b lbl_fn_8069EB1C_00000DE4
@@ -930,7 +930,7 @@ lbl_fn_8069EB1C_00000AE0:
     mr r3, r27
     addi r4, r30, 0xc
     li r5, 0xb
-    bl fn_8069D64C
+    bl net_dispatchSubsystemRequest
     cmpwi r3, 0x0
     beq lbl_fn_8069EB1C_00000AFC
     b lbl_fn_8069EB1C_00000DE4
@@ -943,7 +943,7 @@ lbl_fn_8069EB1C_00000AFC:
     or r0, r0, r6
     srwi r6, r0, 31
     addi r26, r6, 0x7
-    bl fn_8069D64C
+    bl net_dispatchSubsystemRequest
     cmpwi r3, 0x0
     beq lbl_fn_8069EB1C_00000B2C
     b lbl_fn_8069EB1C_00000DE4
@@ -953,7 +953,7 @@ lbl_fn_8069EB1C_00000B2C:
     lwz r0, 0x14(r29)
     add r4, r4, r26
     subf r5, r26, r0
-    bl fn_8069D64C
+    bl net_dispatchSubsystemRequest
     cmpwi r3, 0x0
     beq lbl_fn_8069EB1C_00000B50
     b lbl_fn_8069EB1C_00000DE4
@@ -961,7 +961,7 @@ lbl_fn_8069EB1C_00000B50:
     mr r3, r27
     la r4, lbl_8087ED6C
     li r5, 0x2
-    bl fn_8069D64C
+    bl net_dispatchSubsystemRequest
     cmpwi r3, 0x0
     beq lbl_fn_8069EB1C_00000B6C
     b lbl_fn_8069EB1C_00000DE4
@@ -972,7 +972,7 @@ lbl_fn_8069EB1C_00000B6C:
     lwz r0, 0x8(r29)
     cmpwi r0, 0x0
     bne lbl_fn_8069EB1C_00000C0C
-    bl fn_806A11D4
+    bl net_initSubsystem
     bl fn_806A1248
     lwz r3, 0x0(r3)
     lwz r26, 0xc(r3)
@@ -985,7 +985,7 @@ lbl_fn_8069EB1C_00000BA8:
     mr r3, r27
     addi r4, r30, 0x40
     li r5, 0x1b
-    bl fn_8069D64C
+    bl net_dispatchSubsystemRequest
     cmpwi r3, 0x0
     beq lbl_fn_8069EB1C_00000BC4
     b lbl_fn_8069EB1C_00000C00
@@ -993,7 +993,7 @@ lbl_fn_8069EB1C_00000BC4:
     lwz r5, 0x240(r26)
     mr r3, r27
     addi r4, r26, 0x1e4
-    bl fn_8069D64C
+    bl net_dispatchSubsystemRequest
     cmpwi r3, 0x0
     beq lbl_fn_8069EB1C_00000BE0
     b lbl_fn_8069EB1C_00000C00
@@ -1001,7 +1001,7 @@ lbl_fn_8069EB1C_00000BE0:
     mr r3, r27
     la r4, lbl_8087ED6C
     li r5, 0x2
-    bl fn_8069D64C
+    bl net_dispatchSubsystemRequest
     neg r0, r3
     or r0, r0, r3
     srawi r0, r0, 31
@@ -1011,7 +1011,7 @@ lbl_fn_8069EB1C_00000C00:
     beq lbl_fn_8069EB1C_00000C0C
     b lbl_fn_8069EB1C_00000DE4
 lbl_fn_8069EB1C_00000C0C:
-    bl fn_806A11D4
+    bl net_initSubsystem
     bl fn_806A1248
     lwz r3, 0x0(r3)
     lwz r26, 0xc(r3)
@@ -1024,7 +1024,7 @@ lbl_fn_8069EB1C_00000C30:
     mr r3, r27
     addi r4, r30, 0x70
     li r5, 0x15
-    bl fn_8069D64C
+    bl net_dispatchSubsystemRequest
     cmpwi r3, 0x0
     beq lbl_fn_8069EB1C_00000C4C
     b lbl_fn_8069EB1C_00000C88
@@ -1032,7 +1032,7 @@ lbl_fn_8069EB1C_00000C4C:
     lwz r5, 0xa8(r26)
     mr r3, r27
     addi r4, r26, 0x4c
-    bl fn_8069D64C
+    bl net_dispatchSubsystemRequest
     cmpwi r3, 0x0
     beq lbl_fn_8069EB1C_00000C68
     b lbl_fn_8069EB1C_00000C88
@@ -1040,7 +1040,7 @@ lbl_fn_8069EB1C_00000C68:
     mr r3, r27
     la r4, lbl_8087ED6C
     li r5, 0x2
-    bl fn_8069D64C
+    bl net_dispatchSubsystemRequest
     neg r0, r3
     or r0, r0, r3
     srawi r0, r0, 31
@@ -1113,7 +1113,7 @@ lbl_fn_8069EB1C_00000D5C:
     mr r3, r27
     la r4, lbl_8087ED6C
     li r5, 0x2
-    bl fn_8069D64C
+    bl net_dispatchSubsystemRequest
     cmpwi r3, 0x0
     beq lbl_fn_8069EB1C_00000D78
     b lbl_fn_8069EB1C_00000DE4
@@ -1165,7 +1165,7 @@ asm void fn_8069EFB8(void)
     addi r11, r1, 0x40
     bl _savegpr_23
     mr r25, r3
-    bl fn_806A11D4
+    bl net_initSubsystem
     mr r23, r3
     bl fn_806A1248
     lwz r4, 0x0(r3)
@@ -1307,7 +1307,7 @@ asm void fn_8069F1A4(void)
     lis r28, lbl_807BC558@ha
     mr r30, r3
     addi r28, r28, lbl_807BC558@l
-    bl fn_806A11D4
+    bl net_initSubsystem
     mr r29, r3
     bl fn_806A1248
     lwz r4, 0x0(r3)
@@ -1537,7 +1537,7 @@ asm void fn_8069F4D4(void)
     addi r11, r1, 0x60
     bl _savegpr_16
     mr r16, r3
-    bl fn_806A11D4
+    bl net_initSubsystem
     mr r17, r3
     bl fn_806A1248
     lwz r4, 0x0(r3)
@@ -1970,7 +1970,7 @@ asm void fn_8069FAC4(void)
     stw r0, 0x364(r1)
     addi r11, r1, 0x360
     bl _savegpr_27
-    bl fn_806A11D4
+    bl net_initSubsystem
     mr r28, r3
     bl fn_806A123C
     mr r27, r3
@@ -2126,7 +2126,7 @@ asm void fn_8069FCC8(void)
     mr r25, r6
     mr r26, r7
     mr r27, r8
-    bl fn_806A11D4
+    bl net_initSubsystem
     mr r29, r3
     bl fn_806A123C
     mr r31, r3
@@ -2211,7 +2211,7 @@ asm void fn_8069FE10(void)
     stw r31, 0xc(r1)
     mr r31, r3
     stw r30, 0x8(r1)
-    bl fn_806A11D4
+    bl net_initSubsystem
     mr r30, r3
     bl fn_806A1258
     mr r4, r31
@@ -2259,7 +2259,7 @@ asm void fn_8069FE9C(void)
     mr r29, r4
     stw r28, 0x10(r1)
     mr r28, r3
-    bl fn_806A11D4
+    bl net_initSubsystem
     bl fn_806A1258
     mr r31, r3
     mr r4, r28
@@ -2302,7 +2302,7 @@ asm void fn_8069FF38(void)
     stw r31, 0xc(r1)
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_806A11D4
+    bl net_initSubsystem
     bl fn_806A1258
     mr r31, r3
     mr r4, r30
@@ -2338,7 +2338,7 @@ asm void fn_8069FFAC(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_806A11D4
+    bl net_initSubsystem
     bl fn_806A1258
     mr r4, r31
     bl fn_806A0DB4
@@ -2369,7 +2369,7 @@ asm void fn_8069FFF8(void)
     mr r29, r4
     stw r28, 0x10(r1)
     mr r28, r3
-    bl fn_806A11D4
+    bl net_initSubsystem
     lwz r0, lbl_808803E8
     mr r31, r3
     cmpwi r0, 0x0
@@ -2405,7 +2405,7 @@ asm void fn_806A0084(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_806A11D4
+    bl net_initSubsystem
     mr r4, r31
     bl fn_8069A348
     lwz r0, 0x14(r1)
@@ -2421,7 +2421,7 @@ asm void fn_806A00B8(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_806A11D4
+    bl net_initSubsystem
     bl fn_8069A1B0
     lwz r0, 0x14(r1)
     mtlr r0
@@ -2442,7 +2442,7 @@ asm void fn_806A00DC(void)
     mr r29, r5
     stw r28, 0x10(r1)
     mr r28, r3
-    bl fn_806A11D4
+    bl net_initSubsystem
     bl fn_806A1258
     mr r30, r3
     mr r4, r28

@@ -25,14 +25,14 @@ extern void fn_80122330(void);
 extern void fn_80124C6C(void);
 extern void inventory_calcTotalStats(void);
 extern void battle_applyStatusEffect(void);
-extern void fn_801750FC(void);
+extern void battle_calcOutcomeBonus(void);
 extern void save_parseSlotStats(void);
 extern void fn_80227F78(void);
 extern void fn_8022ADD4(void);
 extern void texCache_freeBlock(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
-extern void fn_80389838(void);
+extern void nwc24_transitionDataState(void);
 extern void fn_803EBAC8(void);
 extern void fn_80489C98(void);
 extern void abort(void);
@@ -150,7 +150,7 @@ lbl_fn_80228FD8_000000A4:
     beq lbl_fn_80228FD8_000000C4
     mr r3, r29
     bl fn_800128FC
-    bl fn_801750FC
+    bl battle_calcOutcomeBonus
 lbl_fn_80228FD8_000000C4:
     lfs f1, lbl_80883090
     mr r3, r29
@@ -183,7 +183,7 @@ lbl_fn_80228FD8_000000E8:
     cmpwi r0, 0x0
     beq lbl_fn_80228FD8_0000013C
     li r4, 0x0
-    bl fn_80389838
+    bl nwc24_transitionDataState
 lbl_fn_80228FD8_0000013C:
     lwz r3, lbl_8087F008
     li r4, 0x0

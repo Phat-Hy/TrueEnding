@@ -11,7 +11,7 @@ extern void _savegpr_23(void);
 extern void _savegpr_24(void);
 extern void _savegpr_27(void);
 extern void qsort(void);
-extern void fn_806A4270(void);
+extern void net_truncateU16(void);
 extern void net_socketConnect(void);
 extern void fn_806D7AA0(void);
 extern void net_socketClose(void);
@@ -56,7 +56,7 @@ void fn_806D63A0(void);
 void fn_806D6420(void);
 void fn_806D64B0(void);
 void fn_806D6560(void);
-void fn_806D6610(void);
+void net_invokeChannelCallback(void);
 void fn_806D66B0(void);
 void fn_806D6720(void);
 void fn_806D67A0(void);
@@ -1183,7 +1183,7 @@ lbl_fn_806D6560_00000E50:
     blr
 }
 
-asm void fn_806D6610(void)
+asm void net_invokeChannelCallback(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1195,10 +1195,10 @@ asm void fn_806D6610(void)
     mr r30, r4
     stw r29, 0x14(r1)
     mr r29, r3
-    bne lbl_fn_806D6610_00000EA8
+    bne lbl_net_invokeChannelCallback_00000EA8
     li r3, 0x0
-    b lbl_fn_806D6610_00000EFC
-lbl_fn_806D6610_00000EA8:
+    b lbl_net_invokeChannelCallback_00000EFC
+lbl_net_invokeChannelCallback_00000EA8:
     lwz r12, 0xc(r29)
     mr r3, r30
     lwz r4, 0x4(r29)
@@ -1213,15 +1213,15 @@ lbl_fn_806D6610_00000EA8:
     li r7, 0x0
     bl fn_806D5E60
     cmpwi r3, -0x1
-    bne lbl_fn_806D6610_00000EEC
+    bne lbl_net_invokeChannelCallback_00000EEC
     li r3, 0x0
-    b lbl_fn_806D6610_00000EFC
-lbl_fn_806D6610_00000EEC:
+    b lbl_net_invokeChannelCallback_00000EFC
+lbl_net_invokeChannelCallback_00000EEC:
     lwz r5, 0x0(r29)
     mr r4, r3
     lwzx r3, r5, r31
     bl net_bufferGetElement
-lbl_fn_806D6610_00000EFC:
+lbl_net_invokeChannelCallback_00000EFC:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -2332,7 +2332,7 @@ lbl_fn_806D76E0_00001FB0:
     li r0, 0x2
     stb r0, 0x5(r30)
     li r3, 0x6cfc
-    bl fn_806A4270
+    bl net_truncateU16
     cmpwi r31, 0x0
     sth r3, 0x6(r30)
     addi r3, r1, 0x8

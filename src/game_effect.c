@@ -9,7 +9,7 @@ extern void actor_dispatchMessage(void);
 extern void fn_8001A464(void);
 extern void fn_8001A65C(void);
 extern void fn_8001A788(void);
-extern void fn_8001AD80(void);
+extern void battle_calcActorDistance(void);
 extern void fn_8001ADE8(void);
 extern void battle_getCharacterState(void);
 extern void fn_8001B5DC(void);
@@ -20,7 +20,7 @@ extern void fn_8001BC38(void);
 extern void fn_8001BCB4(void);
 extern void fn_8001BD14(void);
 extern void entity_isActive(void);
-extern void fn_8001BEB0(void);
+extern void entity_checkActorType(void);
 extern void fn_8001BF44(void);
 extern void fn_8001BF58(void);
 extern void fn_8001BF64(void);
@@ -79,7 +79,7 @@ void fn_8003D084(void);
 void fn_8003D298(void);
 void fn_8003D3F8(void);
 void fn_8003D6E8(void);
-void fn_8003DBA4(void);
+void effect_testLifetime(void);
 void fn_8003DD50(void);
 void fn_8003DEE0(void);
 void fn_8003E120(void);
@@ -225,7 +225,7 @@ lbl_fn_80039950_000001F0:
     li r3, 0x0
     b lbl_fn_80039950_00000208
 lbl_fn_80039950_000001F8:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x68(r1)
     lwz r3, 0x6c(r1)
@@ -259,7 +259,7 @@ lbl_fn_80039950_00000268:
     li r0, 0x0
     b lbl_fn_80039950_00000280
 lbl_fn_80039950_00000270:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x68(r1)
     lwz r0, 0x6c(r1)
@@ -377,7 +377,7 @@ lbl_fn_80039D24_0000040C:
     li r3, 0x0
     b lbl_fn_80039D24_00000424
 lbl_fn_80039D24_00000414:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x18(r1)
     lwz r3, 0x1c(r1)
@@ -754,7 +754,7 @@ lbl_fn_8003A0D4_0000093C:
     li r3, 0x0
     b lbl_fn_8003A0D4_00000954
 lbl_fn_8003A0D4_00000944:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x68(r1)
     lwz r3, 0x6c(r1)
@@ -797,7 +797,7 @@ lbl_fn_8003A0D4_000009D8:
     li r5, 0x0
     b lbl_fn_8003A0D4_000009F0
 lbl_fn_8003A0D4_000009E0:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x68(r1)
     lwz r5, 0x6c(r1)
@@ -1121,7 +1121,7 @@ lbl_fn_8003A5C8_00000E68:
     li r3, 0x0
     b lbl_fn_8003A5C8_00000E80
 lbl_fn_8003A5C8_00000E70:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x68(r1)
     lwz r3, 0x6c(r1)
@@ -1150,7 +1150,7 @@ lbl_fn_8003A5C8_00000ECC:
     li r0, 0x0
     b lbl_fn_8003A5C8_00000EE4
 lbl_fn_8003A5C8_00000ED4:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x68(r1)
     lwz r0, 0x6c(r1)
@@ -1268,7 +1268,7 @@ lbl_fn_8003A988_00001070:
     li r3, 0x0
     b lbl_fn_8003A988_00001088
 lbl_fn_8003A988_00001078:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x18(r1)
     lwz r3, 0x1c(r1)
@@ -1674,7 +1674,7 @@ lbl_fn_8003AD38_0000160C:
     li r3, 0x0
     b lbl_fn_8003AD38_00001624
 lbl_fn_8003AD38_00001614:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x88(r1)
     lwz r3, 0x8c(r1)
@@ -1714,7 +1714,7 @@ lbl_fn_8003AD38_0000169C:
     li r5, 0x0
     b lbl_fn_8003AD38_000016B4
 lbl_fn_8003AD38_000016A4:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x88(r1)
     lwz r5, 0x8c(r1)
@@ -2069,7 +2069,7 @@ lbl_fn_8003B2F4_00001BA0:
     li r3, 0x0
     b lbl_fn_8003B2F4_00001BB8
 lbl_fn_8003B2F4_00001BA8:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x48(r1)
     lwz r3, 0x4c(r1)
@@ -2098,7 +2098,7 @@ lbl_fn_8003B2F4_00001C04:
     li r0, 0x0
     b lbl_fn_8003B2F4_00001C1C
 lbl_fn_8003B2F4_00001C0C:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x48(r1)
     lwz r0, 0x4c(r1)
@@ -2200,7 +2200,7 @@ lbl_fn_8003B680_00001D68:
     li r3, 0x0
     b lbl_fn_8003B680_00001D80
 lbl_fn_8003B680_00001D70:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x18(r1)
     lwz r3, 0x1c(r1)
@@ -2577,7 +2577,7 @@ lbl_fn_8003BA30_00002298:
     li r3, 0x0
     b lbl_fn_8003BA30_000022B0
 lbl_fn_8003BA30_000022A0:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x58(r1)
     lwz r3, 0x5c(r1)
@@ -2617,7 +2617,7 @@ lbl_fn_8003BA30_00002328:
     li r5, 0x0
     b lbl_fn_8003BA30_00002340
 lbl_fn_8003BA30_00002330:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x58(r1)
     lwz r5, 0x5c(r1)
@@ -3082,7 +3082,7 @@ lbl_fn_8003C0C4_000029B4:
     li r0, 0x0
     b lbl_fn_8003C0C4_000029CC
 lbl_fn_8003C0C4_000029BC:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x68(r1)
     lwz r0, 0x6c(r1)
@@ -3559,7 +3559,7 @@ lbl_fn_8003C804_00003044:
     li r5, 0x0
     b lbl_fn_8003C804_0000305C
 lbl_fn_8003C804_0000304C:
-    bl fn_8001AD80
+    bl battle_calcActorDistance
     fctiwz f0, f1
     stfd f0, 0x68(r1)
     lwz r5, 0x6c(r1)
@@ -3876,7 +3876,7 @@ asm void fn_8003CDB0(void)
     fcmpo cr0, f2, f1
     bge lbl_fn_8003CDB0_00003640
     lwz r3, lbl_807C68C0@l(r30)
-    bl fn_8001BEB0
+    bl entity_checkActorType
     cmpwi r3, 0x0
     beq lbl_fn_8003CDB0_000034E0
     li r0, 0x0
@@ -4137,7 +4137,7 @@ lbl_fn_8003D084_0000382C:
     cmpwi r3, 0x0
     beq lbl_fn_8003D084_0000392C
     lwz r3, lbl_807C68C0@l(r30)
-    bl fn_8001BEB0
+    bl entity_checkActorType
     cmpwi r3, 0x0
     beq lbl_fn_8003D084_00003864
     lis r3, lbl_807C6A40@ha
@@ -4337,7 +4337,7 @@ asm void fn_8003D3F8(void)
     fcmpo cr0, f2, f0
     bge lbl_fn_8003D3F8_00003C10
     lwz r3, lbl_807C68C0@l(r30)
-    bl fn_8001BEB0
+    bl entity_checkActorType
     cmpwi r3, 0x0
     beq lbl_fn_8003D3F8_00003B44
     li r0, 0x0
@@ -4553,7 +4553,7 @@ asm void fn_8003D6E8(void)
     cror eq, gt, eq
     bne lbl_fn_8003D6E8_00003EB8
     lwz r3, lbl_807C68C0@l(r30)
-    bl fn_8001BEB0
+    bl entity_checkActorType
     cmpwi r3, 0x0
     beq lbl_fn_8003D6E8_00003E24
     li r3, -0x1
@@ -4850,7 +4850,7 @@ lbl_fn_8003D6E8_0000423C:
     blr
 }
 
-asm void fn_8003DBA4(void)
+asm void effect_testLifetime(void)
 {
     nofralloc
     stwu r1, -0x50(r1)
@@ -4871,17 +4871,17 @@ asm void fn_8003DBA4(void)
     lfd f0, 0x38(r1)
     fsubs f0, f0, f1
     fcmpo cr0, f2, f0
-    blt lbl_fn_8003DBA4_000042B0
+    blt lbl_effect_testLifetime_000042B0
     lwz r3, lbl_807C68C0@l(r30)
-    bl fn_8001BEB0
+    bl entity_checkActorType
     cmpwi r3, 0x0
-    beq lbl_fn_8003DBA4_00004308
-lbl_fn_8003DBA4_000042B0:
+    beq lbl_effect_testLifetime_00004308
+lbl_effect_testLifetime_000042B0:
     lis r3, lbl_807C68C0@ha
     addi r3, r3, lbl_807C68C0@l
     lwz r8, 0x20(r3)
     cmpwi r8, 0x0
-    beq lbl_fn_8003DBA4_000042F4
+    beq lbl_effect_testLifetime_000042F4
     li r3, 0x0
     li r0, 0x1e
     stw r3, 0x34(r1)
@@ -4894,31 +4894,31 @@ lbl_fn_8003DBA4_000042B0:
     stw r0, 0x2c(r1)
     stw r8, 0x28(r1)
     bl battle_getCharacterState
-lbl_fn_8003DBA4_000042F4:
+lbl_effect_testLifetime_000042F4:
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
     li r3, 0x6
-    b lbl_fn_8003DBA4_000043E8
-lbl_fn_8003DBA4_00004308:
+    b lbl_effect_testLifetime_000043E8
+lbl_effect_testLifetime_00004308:
     lfs f1, 0x1c(r31)
     lfs f0, lbl_80880798
     fcmpo cr0, f1, f0
     mfcr r0
     srwi. r0, r0, 31
-    beq lbl_fn_8003DBA4_0000433C
+    beq lbl_effect_testLifetime_0000433C
     lwz r3, lbl_807C68C0@l(r30)
     bl fn_8001B634
     cmpwi r3, 0x0
-    ble lbl_fn_8003DBA4_0000433C
+    ble lbl_effect_testLifetime_0000433C
     stw r3, 0x64(r31)
     li r0, 0x1
-    b lbl_fn_8003DBA4_00004340
-lbl_fn_8003DBA4_0000433C:
+    b lbl_effect_testLifetime_00004340
+lbl_effect_testLifetime_0000433C:
     li r0, 0x0
-lbl_fn_8003DBA4_00004340:
+lbl_effect_testLifetime_00004340:
     cmpwi r0, 0x0
-    beq lbl_fn_8003DBA4_00004394
+    beq lbl_effect_testLifetime_00004394
     lis r3, lbl_807C68C0@ha
     li r8, 0x0
     addi r3, r3, lbl_807C68C0@l
@@ -4937,13 +4937,13 @@ lbl_fn_8003DBA4_00004340:
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
     li r3, 0x4
-    b lbl_fn_8003DBA4_000043E8
-lbl_fn_8003DBA4_00004394:
+    b lbl_effect_testLifetime_000043E8
+lbl_effect_testLifetime_00004394:
     lis r3, lbl_807C68C0@ha
     addi r3, r3, lbl_807C68C0@l
     lwz r8, 0x20(r3)
     cmpwi r8, 0x0
-    beq lbl_fn_8003DBA4_000043D8
+    beq lbl_effect_testLifetime_000043D8
     li r3, 0x0
     li r0, 0x1e
     stw r3, 0x14(r1)
@@ -4956,12 +4956,12 @@ lbl_fn_8003DBA4_00004394:
     stw r0, 0xc(r1)
     stw r8, 0x8(r1)
     bl battle_getCharacterState
-lbl_fn_8003DBA4_000043D8:
+lbl_effect_testLifetime_000043D8:
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
     li r3, 0x6
-lbl_fn_8003DBA4_000043E8:
+lbl_effect_testLifetime_000043E8:
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)
     lwz r30, 0x48(r1)

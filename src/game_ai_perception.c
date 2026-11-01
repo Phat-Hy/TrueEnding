@@ -29,7 +29,7 @@ extern void fn_80134674(void);
 extern void boss_updatePhaseState(void);
 extern void npc_calcTargetDistance(void);
 extern void inventory_applyItemStats(void);
-extern void fn_8015E4B0(void);
+extern void party_initFormationSlots(void);
 extern void fn_8016D74C(void);
 extern void actor_setState(void);
 extern void battle_generateLootDrops(void);
@@ -1192,7 +1192,7 @@ asm void fn_8025F8C8(void)
 lbl_fn_8025F8C8_00000F44:
     addi r4, r3, 0x6b8
     li r5, -0x1
-    bl fn_8015E4B0
+    bl party_initFormationSlots
 lbl_fn_8025F8C8_00000F50:
     li r0, 0x0
     stw r0, 0x58c(r30)
@@ -1513,7 +1513,7 @@ lbl_fn_8025F8C8_000013C8:
     stfs f5, 0xb8(r1)
     stfs f0, 0xb0(r1)
     stfs f3, 0xb4(r1)
-    bl fn_8015E4B0
+    bl party_initFormationSlots
 lbl_fn_8025F8C8_0000141C:
     addi r11, r1, 0x1b0
     psq_l f31, 0x1d8(r1), 0, 0

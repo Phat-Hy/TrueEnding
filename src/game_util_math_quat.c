@@ -27,10 +27,10 @@ extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
 extern void save_calculateBlockCrc(void);
-extern void fn_801F7590(void);
+extern void save_writeBackupSlot(void);
 extern void fn_801F7DF0(void);
 extern void save_findEntryByName(void);
-extern void fn_801F8598(void);
+extern void save_formatSlotString(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
@@ -38,8 +38,8 @@ extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
 extern void time_wrapMilliseconds(void);
 extern void rand_scaleRangeInt(void);
-extern void fn_8020EF4C(void);
-extern void fn_8020EFEC(void);
+extern void rand_stepEntropy(void);
+extern void time_ticksToSeconds(void);
 extern void event_findEntryById(void);
 extern void fn_8021C6A4(void);
 extern void world_getGlobalFlag(void);
@@ -51,7 +51,7 @@ extern void fn_804A24C4(void);
 extern void fn_804A251C(void);
 extern void fn_804A26DC(void);
 extern void fn_804A2724(void);
-extern void fn_804A3C24(void);
+extern void net_initCoopSession(void);
 extern void fn_804A4930(void);
 extern void fn_804A55FC(void);
 extern void strcmp(void);
@@ -411,7 +411,7 @@ lbl_fn_805807A8_00000380:
     lwz r3, 0xac(r28)
     addi r4, r30, 0x2d2
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     lwz r3, lbl_8087F4F0
     mr r4, r20
     bl fn_80444BE8
@@ -490,7 +490,7 @@ lbl_fn_805807A8_00000558:
     addi r4, r30, 0x2f2
     lwz r5, 0x3304(r21)
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     lwz r4, lbl_8087F4F0
     mr r5, r20
     addi r3, r1, 0x18
@@ -503,7 +503,7 @@ lbl_fn_805807A8_00000558:
     addi r4, r30, 0x2f8
     psq_st f2, 0x8(r5), 0, 0
     lwz r3, 0xac(r21)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     lwz r3, 0xac(r21)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
@@ -1024,7 +1024,7 @@ asm void fn_805811E0(void)
     cmpwi r3, 0x0
     beq lbl_fn_805811E0_00000FE0
     mr r3, r21
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     cmpwi r3, 0x0
     bne lbl_fn_805811E0_00000CB8
     mr r3, r21
@@ -1078,7 +1078,7 @@ lbl_fn_805811E0_00000CF0:
     cmpwi r22, 0x2
     blt lbl_fn_805811E0_00000CF0
     mr r3, r21
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     mr r29, r3
     mr r3, r21
     bl assert_formatLocation
@@ -1125,7 +1125,7 @@ lbl_fn_805811E0_00000DF0:
     li r28, 0x0
     beq lbl_fn_805811E0_00000E3C
     mr r3, r29
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_805811E0_00000E34
     lwz r4, 0x7c(r29)
@@ -1284,7 +1284,7 @@ asm void fn_80581574(void)
     lwz r3, lbl_8087F580
     li r5, 0x0
     lwz r4, 0x88(r4)
-    bl fn_804A3C24
+    bl net_initCoopSession
     b lbl_fn_80581574_000010D0
 lbl_fn_80581574_00001064:
     lwz r31, lbl_8087F580
@@ -1294,7 +1294,7 @@ lbl_fn_80581574_00001064:
     mr r4, r3
     mr r3, r31
     li r5, 0x0
-    bl fn_804A3C24
+    bl net_initCoopSession
     b lbl_fn_80581574_000010D0
 lbl_fn_80581574_00001088:
     lwz r3, 0x4(r31)
@@ -1302,20 +1302,20 @@ lbl_fn_80581574_00001088:
     cmpwi r3, 0x0
     beq lbl_fn_80581574_000010C0
     lwz r3, 0x4(r31)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_80581574_000010D0
     lwz r3, lbl_8087F580
     li r5, 0x0
     lwz r4, 0x84(r4)
-    bl fn_804A3C24
+    bl net_initCoopSession
     b lbl_fn_80581574_000010D0
 lbl_fn_80581574_000010C0:
     lwz r3, lbl_8087F580
     li r5, 0x0
     lwz r4, 0xc(r31)
-    bl fn_804A3C24
+    bl net_initCoopSession
 lbl_fn_80581574_000010D0:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

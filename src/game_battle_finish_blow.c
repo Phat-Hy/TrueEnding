@@ -25,11 +25,11 @@ extern void cursor_Object_constructor(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void cursor_applyAnimationTrack(void);
-extern void fn_80158CA4(void);
+extern void shop_loadCatalogItem(void);
 extern void world_getLocalFlag(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
-extern void fn_803EC758(void);
+extern void barrier_formatCountdownTimer(void);
 extern void task_updateWorker(void);
 extern void dungeon_updateBarrierField(void);
 extern void fn_8040161C(void);
@@ -164,7 +164,7 @@ lbl_fn_80401E50_000000C0:
     neg r0, r4
     or r0, r0, r4
     srwi r26, r0, 31
-    bl fn_80158CA4
+    bl shop_loadCatalogItem
     and r4, r26, r3
     lis r3, lbl_807527C0@ha
     neg r0, r4
@@ -724,7 +724,7 @@ asm void fn_80402768(void)
     addi r4, r1, 0x8
     stw r29, 0x34(r1)
     mr r29, r3
-    bl fn_803EC758
+    bl barrier_formatCountdownTimer
     lwz r0, 0xf0(r29)
     cmpwi r0, 0x0
     bne lbl_fn_80402768_00000978

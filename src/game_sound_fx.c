@@ -29,15 +29,15 @@ extern void str_skipWhitespace(void);
 extern void fn_800EC1F4(void);
 extern void cam_findTargetIndex(void);
 extern void fn_800EC24C(void);
-extern void fn_800EC254(void);
+extern void cam_testTargetVisibility(void);
 extern void cam_registerTarget(void);
 extern void cam_initTrajectoryParams(void);
 extern void cam_bindPathTarget(void);
 extern void cam_bindRotationTarget(void);
 extern void cam_evalControllerSpline(void);
 extern void cam_setLookAtTarget(void);
-extern void fn_800ED4D8(void);
-extern void fn_800ED4E0(void);
+extern void cam_getLookAtState(void);
+extern void cam_updateLookAtMatrix(void);
 extern void cam_evalLookAtMatrix(void);
 extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
@@ -47,16 +47,16 @@ extern void fn_8011CD84(void);
 extern void fn_8011D21C(void);
 extern void fn_8012539C(void);
 extern void enemy_updateAnimTimer(void);
-extern void fn_8013310C(void);
+extern void boss_enablePartStatusFlags(void);
 extern void fn_80133B30(void);
 extern void fn_80133BD8(void);
-extern void fn_80134134(void);
+extern void boss_findPartById(void);
 extern void fn_80137B78(void);
 extern void fn_801388B8(void);
 extern void npc_calcTargetDistance(void);
 extern void quest_resetObjectiveBounds(void);
 extern void dialog_selectChoice(void);
-extern void fn_8014EEC4(void);
+extern void dialog_activateChoiceWindow(void);
 extern void inventory_unequipItem(void);
 extern void equip_applyToCharacter(void);
 extern void inventory_calcTotalStats(void);
@@ -64,8 +64,8 @@ extern void fn_801561E4(void);
 extern void fn_801562A0(void);
 extern void fn_8015783C(void);
 extern void party_configureMemberSlot(void);
-extern void fn_8015EB2C(void);
-extern void fn_80164DCC(void);
+extern void party_evalFormationState(void);
+extern void party_evalTacticCondition(void);
 extern void fn_80165C5C(void);
 extern void fn_8016DC14(void);
 extern void fn_8016F634(void);
@@ -152,7 +152,7 @@ asm void fn_800EA9D4(void)
     stw r30, 0x38(r1)
     stw r29, 0x34(r1)
     stw r28, 0x30(r1)
-    bl fn_8015EB2C
+    bl party_evalFormationState
     cmpwi r3, 0x0
     bne lbl_fn_800EA9D4_00000040
     mr r3, r31
@@ -255,7 +255,7 @@ lbl_fn_800EA9D4_00000158:
     addi r3, r31, 0x7d4
     li r4, 0x20
     li r5, 0x0
-    bl fn_8013310C
+    bl boss_enablePartStatusFlags
 lbl_fn_800EA9D4_0000019C:
     lwz r0, 0x24(r1)
     li r12, 0x0
@@ -373,7 +373,7 @@ asm void fn_800EACEC(void)
     stw r31, 0x2c(r1)
     mr r31, r3
     stw r30, 0x28(r1)
-    bl fn_8015EB2C
+    bl party_evalFormationState
     cmpwi r3, 0x0
     bne lbl_fn_800EACEC_00000350
     mr r3, r31
@@ -430,7 +430,7 @@ lbl_fn_800EACEC_000003D0:
     addi r3, r31, 0x7d4
     li r4, 0x20
     li r5, 0x0
-    bl fn_8013310C
+    bl boss_enablePartStatusFlags
 lbl_fn_800EACEC_00000408:
     lwz r0, 0x24(r1)
     li r12, 0x0
@@ -1099,7 +1099,7 @@ lbl_fn_800EB4AC_00000D60:
 lbl_fn_800EB4AC_00000D64:
     addi r3, r31, 0x7d4
     li r4, 0x3d
-    bl fn_80134134
+    bl boss_findPartById
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_800EB4AC_00000D98
@@ -1358,7 +1358,7 @@ lbl_fn_800EBA5C_000010F4:
 lbl_fn_800EBA5C_0000110C:
     mr r3, r31
     li r4, 0x0
-    bl fn_80164DCC
+    bl party_evalTacticCondition
     lwz r0, 0x54c(r31)
     li r30, 0x0
     lfs f0, lbl_808812D8
@@ -1525,7 +1525,7 @@ asm void fn_800EBD00(void)
     lwz r3, lbl_8087F8A0
     li r4, 0x0
     lwz r3, 0x48(r3)
-    bl fn_8014EEC4
+    bl dialog_activateChoiceWindow
     li r0, 0x1
     stw r0, 0x3fc(r29)
     lfs f1, lbl_808812D8
@@ -1701,7 +1701,7 @@ asm void fn_800EBF1C(void)
     b lbl_fn_800EBF1C_000017B8
 lbl_fn_800EBF1C_000015C0:
     addi r3, r1, 0x98
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     addi r4, r29, 0x85
     li r5, 0x5
@@ -1709,7 +1709,7 @@ lbl_fn_800EBF1C_000015C0:
     cmpwi r3, 0x0
     bne lbl_fn_800EBF1C_000016A0
     addi r3, r1, 0x98
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     mr r4, r3
     addi r3, r1, 0x20
@@ -1758,7 +1758,7 @@ lbl_fn_800EBF1C_000015C0:
     b lbl_fn_800EBF1C_000017B0
 lbl_fn_800EBF1C_000016A0:
     addi r3, r1, 0x98
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     addi r4, r29, 0x8b
     li r5, 0xd
@@ -1766,7 +1766,7 @@ lbl_fn_800EBF1C_000016A0:
     cmpwi r3, 0x0
     bne lbl_fn_800EBF1C_0000172C
     addi r3, r1, 0x98
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     mr r4, r3
     addi r3, r1, 0x14
@@ -1794,7 +1794,7 @@ lbl_fn_800EBF1C_000016A0:
     b lbl_fn_800EBF1C_000017B0
 lbl_fn_800EBF1C_0000172C:
     addi r3, r1, 0x98
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     addi r4, r29, 0x99
     li r5, 0xe
@@ -1802,7 +1802,7 @@ lbl_fn_800EBF1C_0000172C:
     cmpwi r3, 0x0
     bne lbl_fn_800EBF1C_000017B0
     addi r3, r1, 0x98
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     mr r4, r3
     addi r3, r1, 0x8
@@ -1828,14 +1828,14 @@ lbl_fn_800EBF1C_0000172C:
     bl dtor_80013D60
 lbl_fn_800EBF1C_000017B0:
     addi r3, r1, 0x98
-    bl fn_800ED4E0
+    bl cam_updateLookAtMatrix
 lbl_fn_800EBF1C_000017B8:
     addi r3, r1, 0x38
     addi r4, r1, 0xd4
     bl cam_evalLookAtMatrix
     addi r3, r1, 0x98
     addi r4, r1, 0x38
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     mr r31, r3
     addi r3, r1, 0x38
     li r4, -0x1

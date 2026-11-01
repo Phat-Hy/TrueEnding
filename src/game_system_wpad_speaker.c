@@ -32,8 +32,8 @@ extern void fn_8036D2D0(void);
 extern void fn_8036FC58(void);
 extern void world_setGlobalFlag(void);
 extern void fn_8037C69C(void);
-extern void fn_8037EF30(void);
-extern void fn_80389838(void);
+extern void fat_dispatchFsRequest(void);
+extern void nwc24_transitionDataState(void);
 extern void fn_8038F52C(void);
 extern void fn_8039328C(void);
 extern void fn_803C0F48(void);
@@ -42,7 +42,7 @@ extern void fn_803D2A6C(void);
 extern void fn_803D83A8(void);
 extern void fn_803DAB4C(void);
 extern void fn_803E4478(void);
-extern void fn_8046ECDC(void);
+extern void boss_updateLaserAimMatrix(void);
 extern void fn_80541214(void);
 extern void dlc_findItemInCatalog(void);
 extern void fn_8056BF90(void);
@@ -1455,7 +1455,7 @@ lbl_world_Manager_postUpdate_000011D8:
     b lbl_world_Manager_postUpdate_000015C8
     lwz r3, lbl_8087F518
     li r4, 0x1
-    bl fn_8046ECDC
+    bl boss_updateLaserAimMatrix
     lwz r3, 0x5620(r27)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
@@ -1512,7 +1512,7 @@ lbl_world_Manager_postUpdate_00001414:
     addi r3, r27, 0x6c
     li r4, 0x1
     li r5, 0x1
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     lis r3, 0x9
     lwz r4, 0x10d0(r27)
     addi r0, r3, 0x27c0
@@ -1656,12 +1656,12 @@ lbl_fn_8036CA60_00001670:
 lbl_fn_8036CA60_0000167C:
     lwz r4, 0x870(r29)
     addi r3, r29, 0x6c
-    bl fn_80389838
+    bl nwc24_transitionDataState
     lfs f1, lbl_80885744
     addi r3, r29, 0x6c
     li r4, 0x1
     li r5, 0x1
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     lwz r3, 0x10d8(r29)
     lwz r31, 0x64(r3)
     lwz r3, 0x48(r31)

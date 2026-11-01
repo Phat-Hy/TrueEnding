@@ -23,10 +23,10 @@ extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void npc_getPosition(void);
-extern void fn_8013C480(void);
+extern void npc_isInteractionReady(void);
 extern void quest_initMarkerCoords(void);
 extern void actor_setState(void);
-extern void fn_801A03E8(void);
+extern void vec3_dot(void);
 extern void res_findResourceSlot(void);
 extern void fn_802A2790(void);
 extern void fn_802A2A68(void);
@@ -130,7 +130,7 @@ lbl_fn_8029F148_00000064:
     lwz r3, 0x1648(r31)
     cmpwi r3, 0x0
     beq lbl_fn_8029F148_000000A4
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_8029F148_000000A4
     lwz r3, 0x1648(r31)
@@ -193,7 +193,7 @@ lbl_fn_8029F148_00000144:
     bl quest_initMarkerCoords
     addi r3, r1, 0x14
     addi r4, r1, 0x8
-    bl fn_801A03E8
+    bl vec3_dot
     fcmpo cr0, f1, f31
     ble lbl_fn_8029F148_00000208
     lwz r3, 0x14f0(r31)

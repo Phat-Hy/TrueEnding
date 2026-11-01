@@ -9,12 +9,12 @@ extern void fn_800457A4(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_getLayerTrack(void);
 extern void fn_8010C00C(void);
-extern void fn_8012B988(void);
+extern void enemy_updateNavSteering(void);
 extern void fn_8013407C(void);
 extern void dialog_setScriptSlot(void);
 extern void dialog_initScriptSlot(void);
 extern void fn_8014FD30(void);
-extern void fn_80206B14(void);
+extern void sys_findModuleById(void);
 extern void assert_generateId(void);
 extern void event_findEntryById(void);
 extern void fn_80211940(void);
@@ -46,7 +46,7 @@ extern u32 lbl_80881A0C;
 /* Function declarations */
 void dialog_selectChoice(void);
 void fn_8014EE48(void);
-void fn_8014EEC4(void);
+void dialog_activateChoiceWindow(void);
 void fn_8014EF48(void);
 void fn_8014F2B4(void);
 void fn_8014F4FC(void);
@@ -216,7 +216,7 @@ lbl_dialog_selectChoice_000001D8:
     stw r0, 0x64c(r30)
 lbl_dialog_selectChoice_00000238:
     addi r3, r30, 0x7d4
-    bl fn_8012B988
+    bl enemy_updateNavSteering
     lwz r3, lbl_8087F9E8
     cmpwi r3, 0x0
     beq lbl_dialog_selectChoice_00000254
@@ -1127,7 +1127,7 @@ lbl_fn_8014EE48_00000FCC:
     blr
 }
 
-asm void fn_8014EEC4(void)
+asm void dialog_activateChoiceWindow(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1139,27 +1139,27 @@ asm void fn_8014EEC4(void)
     mr r30, r3
     lwz r0, 0x648(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8014EEC4_00001014
+    beq lbl_dialog_activateChoiceWindow_00001014
     mr r3, r0
     li r4, 0x1
     bl menu_renderLayout
-lbl_fn_8014EEC4_00001014:
+lbl_dialog_activateChoiceWindow_00001014:
     lwz r3, 0x64c(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_8014EEC4_00001028
+    beq lbl_dialog_activateChoiceWindow_00001028
     li r4, 0x1
     bl menu_renderLayout
-lbl_fn_8014EEC4_00001028:
+lbl_dialog_activateChoiceWindow_00001028:
     cmpwi r31, 0x0
     li r0, 0x0
     li r3, -0x1
     stw r3, 0x674(r30)
     stw r0, 0x648(r30)
     stw r0, 0x64c(r30)
-    bne lbl_fn_8014EEC4_0000104C
+    bne lbl_dialog_activateChoiceWindow_0000104C
     mr r3, r30
     bl dialog_initScriptSlot
-lbl_fn_8014EEC4_0000104C:
+lbl_dialog_activateChoiceWindow_0000104C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1439,7 +1439,7 @@ asm void fn_8014F2B4(void)
     blt lbl_fn_8014F2B4_000014A8
     mr r4, r28
     li r3, 0x0
-    bl fn_80206B14
+    bl sys_findModuleById
     cmpwi r3, 0x0
     bne lbl_fn_8014F2B4_000014A8
     lis r29, 0x1062
@@ -1451,7 +1451,7 @@ asm void fn_8014F2B4(void)
     add r0, r0, r4
     mulli r0, r0, 0x3e8
     subf r4, r0, r28
-    bl fn_80206B14
+    bl sys_findModuleById
     bl assert_generateId
     bl event_findEntryById
     addi r0, r29, 0x4dd3

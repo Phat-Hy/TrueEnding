@@ -9,24 +9,24 @@ extern void _savegpr_21(void);
 extern void _savegpr_22(void);
 extern void _savegpr_26(void);
 extern void scene_transformPoint(void);
-extern void fn_8000DCF4(void);
+extern void scene_getCamera(void);
 extern void collision_queryGeometry(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_800E0AA8(void);
+extern void particle_getEmitterContext(void);
 extern void fn_800E0AB0(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
-extern void fn_80103F60(void);
+extern void bsp_findLeafNode(void);
 extern void fn_80108378(void);
 extern void fn_8013A158(void);
 extern void npc_getGlobalManager(void);
 extern void quest_ctorRewardItem(void);
 extern void actor_setState(void);
 extern void actor_getMovementFlags(void);
-extern void fn_801A03E0(void);
+extern void bgm_getGlobalManager(void);
 extern void fn_801A03EC(void);
 extern void fn_801A0408(void);
 extern void task_findEntryById(void);
@@ -530,7 +530,7 @@ asm void fn_802BB92C(void)
     stw r0, 0x14e0(r3)
     bne lbl_fn_802BB92C_00000608
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     stw r3, 0xd1c(r31)
 lbl_fn_802BB92C_00000608:
     lwz r0, 0xd18(r31)
@@ -629,7 +629,7 @@ lbl_fn_802BB92C_00000740:
     stw r0, 0x1918(r31)
     bl npc_getGlobalManager
     mr r4, r31
-    bl fn_80103F60
+    bl bsp_findLeafNode
     mr r30, r3
     addi r3, r1, 0x10
     bl fn_802A4170
@@ -658,7 +658,7 @@ lbl_fn_802BB92C_000007B0:
 lbl_fn_802BB92C_000007D4:
     cmpwi r3, 0x0
     bne lbl_fn_802BB92C_00000798
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     bl fn_801A0408
     stw r3, 0x8(r1)
     lfs f31, lbl_808841A0
@@ -693,7 +693,7 @@ lbl_fn_802BB92C_0000083C:
     cmpwi r3, 0x0
     bne lbl_fn_802BB92C_00000898
     addi r3, r1, 0x10
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     mr r31, r3
     bl rand
     divwu r0, r3, r31
@@ -719,7 +719,7 @@ lbl_fn_802BB92C_000008A8:
     stw r0, 0x1918(r31)
     bl npc_getGlobalManager
     mr r4, r31
-    bl fn_80103F60
+    bl bsp_findLeafNode
     mr r30, r3
     bl scene_transformPoint
     bl fn_802A36B0
@@ -739,7 +739,7 @@ lbl_fn_802BB92C_000008D4:
 lbl_fn_802BB92C_000008F8:
     cmpwi r31, 0x0
     bne lbl_fn_802BB92C_000008D4
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     bl fn_801A0408
     lfs f31, lbl_8088417C
     mr r31, r3

@@ -96,17 +96,17 @@ void fn_800CB4EC(void);
 void fn_800CB504(void);
 void fn_800CB518(void);
 void fn_800CB538(void);
-void fn_800CB58C(void);
+void morph_hasActiveWeight(void);
 void fn_800CB5B4(void);
 void morph_updateMesh(void);
 void fn_800CB640(void);
 void fn_800CB654(void);
 void fn_800CB668(void);
-void fn_800CB688(void);
+void morph_resetTargetWeight(void);
 void fn_800CB69C(void);
 void fn_800CB6B0(void);
 void fn_800CB6C4(void);
-void fn_800CB6E4(void);
+void morph_dispatchTargetUpdate(void);
 void fn_800CB6F8(void);
 void fn_800CB714(void);
 void fn_800CB718(void);
@@ -1508,18 +1508,18 @@ lbl_fn_800CB538_00001150:
     blr
 }
 
-asm void fn_800CB58C(void)
+asm void morph_hasActiveWeight(void)
 {
     nofralloc
     lwz r3, 0x0(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_800CB58C_00001180
+    beq lbl_morph_hasActiveWeight_00001180
     lwz r3, 0x4(r3)
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
     blr
-lbl_fn_800CB58C_00001180:
+lbl_morph_hasActiveWeight_00001180:
     li r3, 0x0
     blr
 }
@@ -1604,7 +1604,7 @@ asm void fn_800CB668(void)
     blr
 }
 
-asm void fn_800CB688(void)
+asm void morph_resetTargetWeight(void)
 {
     nofralloc
     lwz r3, 0x0(r3)
@@ -1648,7 +1648,7 @@ lbl_fn_800CB6C4_000012AC:
     blr
 }
 
-asm void fn_800CB6E4(void)
+asm void morph_dispatchTargetUpdate(void)
 {
     nofralloc
     lwz r3, 0x0(r3)

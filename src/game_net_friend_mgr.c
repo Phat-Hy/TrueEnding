@@ -7,7 +7,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void script_executeOpcode(void);
 extern void mem_alloc(void);
-extern void fn_800A4450(void);
+extern void font_getGlyphEntryByIndex(void);
 extern void msg_getMessageById(void);
 extern void msg_getMessageString(void);
 extern void ref_releaseHandle(void);
@@ -21,12 +21,12 @@ extern void actor_spawnActorWithId(void);
 extern void save_validateHeader(void);
 extern void save_parseSlotHeader(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801FEC74(void);
+extern void thread_findQueueTaskByName(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
 extern void mem_findBlockById(void);
-extern void fn_804A3C24(void);
-extern void fn_804A53D4(void);
+extern void net_initCoopSession(void);
+extern void net_broadcastCoopPacket(void);
 extern void fn_804A5CD8(void);
 extern void fn_804AC79C(void);
 extern void fn_804AC7EC(void);
@@ -41,7 +41,7 @@ extern void fn_804CF078(void);
 extern void fn_804D8250(void);
 extern void fn_804D9C18(void);
 extern void fn_804EB1B0(void);
-extern void fn_804EB874(void);
+extern void net_getLocalPlayerAid(void);
 extern void fn_804FB624(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -884,14 +884,14 @@ lbl_fn_804CDBFC_000009CC:
     addi r4, r4, lbl_80759610@l
     addi r4, r4, 0x87
     addi r3, r3, 0x58
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     cmpwi r3, 0x0
     beq lbl_fn_804CDBFC_00000AEC
     mr r4, r3
     addi r3, r1, 0x8
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x8(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31
@@ -1538,7 +1538,7 @@ asm void fn_804CE61C(void)
     beq lbl_fn_804CE61C_00001388
     lwz r28, lbl_8087F610
     mr r3, r28
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     mr r4, r3
     mr r3, r28
     li r5, 0x0
@@ -1587,7 +1587,7 @@ lbl_fn_804CE61C_000013EC:
     bne lbl_fn_804CE61C_00001428
     lwz r28, lbl_8087F610
     mr r3, r28
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     mr r4, r3
     mr r3, r28
     li r5, 0x0
@@ -1944,7 +1944,7 @@ lbl_fn_804CEAA0_00001818:
     stfs f2, 0x24(r1)
     stfs f1, 0x28(r1)
     stfs f0, 0x2c(r1)
-    bl fn_804A53D4
+    bl net_broadcastCoopPacket
 lbl_fn_804CEAA0_00001918:
     lwz r0, 0x78(r31)
     cmpwi r0, 0x2
@@ -1963,7 +1963,7 @@ lbl_fn_804CEAA0_0000194C:
     la r4, lbl_808813D0
 lbl_fn_804CEAA0_00001950:
     li r5, 0x0
-    bl fn_804A3C24
+    bl net_initCoopSession
     b lbl_fn_804CEAA0_000019DC
 lbl_fn_804CEAA0_0000195C:
     lwz r3, 0x68(r31)
@@ -1980,7 +1980,7 @@ lbl_fn_804CEAA0_00001984:
     la r4, lbl_808813D0
 lbl_fn_804CEAA0_00001988:
     li r5, 0x0
-    bl fn_804A3C24
+    bl net_initCoopSession
     b lbl_fn_804CEAA0_000019DC
 lbl_fn_804CEAA0_00001994:
     lwz r12, 0x0(r31)

@@ -84,87 +84,83 @@ extern u32 lbl_8087D6F0;
 extern u32 lbl_8087D6F1;
 
 /* Function declarations */
-void fn_8001E0A8(void);
-void fn_8001E0B8(void);
-void fn_8001E168(void);
-void fn_8001E1D0(void);
-void fn_8001E340(void);
-void fn_8001E350(void);
-void fn_8001E360(void);
-void fn_8001E370(void);
-void fn_8001E380(void);
-void fn_8001E390(void);
-void fn_8001E3A0(void);
-void fn_8001E3B0(void);
-void fn_8001E3C0(void);
-void fn_8001E3D0(void);
-void fn_8001E3E0(void);
-void fn_8001E3F0(void);
-void fn_8001E400(void);
-void fn_8001E410(void);
-void fn_8001E420(void);
-void fn_8001E430(void);
-void fn_8001E440(void);
-void fn_8001E450(void);
-void fn_8001E460(void);
-void fn_8001E470(void);
-void fn_8001E480(void);
-void fn_8001E490(void);
-void fn_8001E4A0(void);
-void fn_8001E4B0(void);
-void fn_8001E4C0(void);
-void fn_8001E4D0(void);
-void fn_8001E4E0(void);
-void fn_8001E4F0(void);
-void fn_8001E500(void);
-void fn_8001E510(void);
-void fn_8001E520(void);
-void fn_8001E530(void);
-void fn_8001E540(void);
-void fn_8001E550(void);
-void fn_8001E560(void);
-void fn_8001E570(void);
-void fn_8001E580(void);
-void fn_8001E590(void);
-void fn_8001E5A0(void);
-void fn_8001E5B0(void);
-void fn_8001E5C0(void);
-void fn_8001E5D0(void);
-void fn_8001E5E0(void);
-void fn_8001E5F0(void);
-void fn_8001E600(void);
-void fn_8001E610(void);
-void fn_8001E620(void);
-void fn_8001E630(void);
-void fn_8001E640(void);
-void fn_8001E650(void);
-void fn_8001E660(void);
-void fn_8001E670(void);
-void fn_8001E680(void);
-void fn_8001E690(void);
-void fn_8001E6A0(void);
-void fn_8001E6B0(void);
-void fn_8001E6C0(void);
-void fn_8001E6D0(void);
-void fn_8001E6E0(void);
-void fn_8001E6F0(void);
-void fn_8001E700(void);
-void fn_8001E710(void);
-void fn_8001E720(void);
+void fn_8001E0A8(void *p);
+void property_copyValue(void);
+void property_releaseValue(void);
+void property_formatValue(void);
+void fn_8001E340(void *p);
+void fn_8001E350(void *p);
+void fn_8001E360(void *p);
+void fn_8001E370(void *p);
+void fn_8001E380(void *p);
+void fn_8001E390(void *p);
+void fn_8001E3A0(void *p);
+void fn_8001E3B0(void *p);
+void fn_8001E3C0(void *p);
+void fn_8001E3D0(void *p);
+void fn_8001E3E0(void *p);
+void fn_8001E3F0(void *p);
+void fn_8001E400(void *p);
+void fn_8001E410(void *p);
+void fn_8001E420(void *p);
+void fn_8001E430(void *p);
+void fn_8001E440(void *p);
+void fn_8001E450(void *p);
+void fn_8001E460(void *p);
+void fn_8001E470(void *p);
+void fn_8001E480(void *p);
+void fn_8001E490(void *p);
+void fn_8001E4A0(void *p);
+void fn_8001E4B0(void *p);
+void fn_8001E4C0(void *p);
+void fn_8001E4D0(void *p);
+void fn_8001E4E0(void *p);
+void fn_8001E4F0(void *p);
+void fn_8001E500(void *p);
+void fn_8001E510(void *p);
+void fn_8001E520(void *p);
+void fn_8001E530(void *p);
+void fn_8001E540(void *p);
+void fn_8001E550(void *p);
+void fn_8001E560(void *p);
+void fn_8001E570(void *p);
+void fn_8001E580(void *p);
+void fn_8001E590(void *p);
+void fn_8001E5A0(void *p);
+void fn_8001E5B0(void *p);
+void fn_8001E5C0(void *p);
+void fn_8001E5D0(void *p);
+void fn_8001E5E0(void *p);
+void fn_8001E5F0(void *p);
+void fn_8001E600(void *p);
+void fn_8001E610(void *p);
+void fn_8001E620(void *p);
+void fn_8001E630(void *p);
+void fn_8001E640(void *p);
+void fn_8001E650(void *p);
+void fn_8001E660(void *p);
+void fn_8001E670(void *p);
+void fn_8001E680(void *p);
+void fn_8001E690(void *p);
+void fn_8001E6A0(void *p);
+void fn_8001E6B0(void *p);
+void fn_8001E6C0(void *p);
+void fn_8001E6D0(void *p);
+void fn_8001E6E0(void *p);
+void fn_8001E6F0(void *p);
+void fn_8001E700(void *p);
+void fn_8001E710(void *p);
+void fn_8001E720(void *p);
 void fn_8001E730(void);
 void fn_8001EA18(void);
 void fn_8001ECD0(void);
 
-asm void fn_8001E0A8(void)
+void fn_8001E0A8(void *p)
 {
-    nofralloc
-    lis r4, lbl_80777230@ha
-    addi r4, r4, lbl_80777230@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80777230;
 }
 
-asm void fn_8001E0B8(void)
+asm void property_copyValue(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -178,14 +174,14 @@ asm void fn_8001E0B8(void)
     mr r30, r4
     stw r29, 0x14(r1)
     mr r29, r3
-    bne lbl_fn_8001E0B8_00000058
+    bne lbl_property_copyValue_00000058
     lwz r5, 0x4(r4)
     lwz r0, 0x8(r4)
     stw r6, 0x0(r3)
     stw r5, 0x4(r3)
     stw r0, 0x8(r3)
-    b lbl_fn_8001E0B8_00000098
-lbl_fn_8001E0B8_00000058:
+    b lbl_property_copyValue_00000098
+lbl_property_copyValue_00000058:
     li r0, 0x0
     stw r0, 0x0(r3)
     lwz r4, 0x4(r4)
@@ -202,7 +198,7 @@ lbl_fn_8001E0B8_00000058:
     li r5, 0x0
     add r7, r6, r0
     bl actor_dispatchMessage
-lbl_fn_8001E0B8_00000098:
+lbl_property_copyValue_00000098:
     lwz r0, 0x0(r31)
     mr r3, r29
     stw r0, 0xc(r29)
@@ -215,7 +211,7 @@ lbl_fn_8001E0B8_00000098:
     blr
 }
 
-asm void fn_8001E168(void)
+asm void property_releaseValue(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -226,19 +222,19 @@ asm void fn_8001E168(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_8001E168_0000010C
-    beq lbl_fn_8001E168_000000FC
+    beq lbl_property_releaseValue_0000010C
+    beq lbl_property_releaseValue_000000FC
     lwz r0, 0x0(r3)
     srwi. r0, r0, 31
-    beq lbl_fn_8001E168_000000FC
+    beq lbl_property_releaseValue_000000FC
     lwz r3, 0x8(r3)
     bl dtor_80084684
-lbl_fn_8001E168_000000FC:
+lbl_property_releaseValue_000000FC:
     cmpwi r31, 0x0
-    ble lbl_fn_8001E168_0000010C
+    ble lbl_property_releaseValue_0000010C
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8001E168_0000010C:
+lbl_property_releaseValue_0000010C:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -248,7 +244,7 @@ lbl_fn_8001E168_0000010C:
     blr
 }
 
-asm void fn_8001E1D0(void)
+asm void property_formatValue(void)
 {
     nofralloc
     stwu r1, -0x40(r1)
@@ -267,72 +263,72 @@ asm void fn_8001E1D0(void)
     lwz r30, 0xc(r1)
     mr r31, r3
     cmpwi r30, 0x0
-    beq lbl_fn_8001E1D0_00000240
+    beq lbl_property_formatValue_00000240
     lwz r0, 0x0(r29)
     srwi. r0, r0, 31
-    bne lbl_fn_8001E1D0_00000188
+    bne lbl_property_formatValue_00000188
     lbz r0, 0x0(r29)
     addi r4, r29, 0x1
     clrlwi r26, r0, 25
-    b lbl_fn_8001E1D0_00000190
-lbl_fn_8001E1D0_00000188:
+    b lbl_property_formatValue_00000190
+lbl_property_formatValue_00000188:
     lwz r4, 0x8(r29)
     lwz r26, 0x4(r29)
-lbl_fn_8001E1D0_00000190:
+lbl_property_formatValue_00000190:
     stw r26, 0x14(r1)
     lwz r0, 0xc(r30)
     srwi. r0, r0, 31
-    bne lbl_fn_8001E1D0_000001AC
+    bne lbl_property_formatValue_000001AC
     lbz r0, 0xc(r30)
     clrlwi r5, r0, 25
-    b lbl_fn_8001E1D0_000001B0
-lbl_fn_8001E1D0_000001AC:
+    b lbl_property_formatValue_000001B0
+lbl_property_formatValue_000001AC:
     lwz r5, 0x10(r30)
-lbl_fn_8001E1D0_000001B0:
+lbl_property_formatValue_000001B0:
     stw r5, 0x10(r1)
     lwz r0, 0xc(r30)
     srwi. r0, r0, 31
-    bne lbl_fn_8001E1D0_000001D0
+    bne lbl_property_formatValue_000001D0
     lbz r0, 0xc(r30)
     addi r3, r30, 0xd
     clrlwi r0, r0, 25
-    b lbl_fn_8001E1D0_000001D8
-lbl_fn_8001E1D0_000001D0:
+    b lbl_property_formatValue_000001D8
+lbl_property_formatValue_000001D0:
     lwz r3, 0x14(r30)
     lwz r0, 0x10(r30)
-lbl_fn_8001E1D0_000001D8:
+lbl_property_formatValue_000001D8:
     cmplw r5, r0
     stw r0, 0x18(r1)
     addi r5, r1, 0x18
-    bge lbl_fn_8001E1D0_000001EC
+    bge lbl_property_formatValue_000001EC
     addi r5, r1, 0x10
-lbl_fn_8001E1D0_000001EC:
+lbl_property_formatValue_000001EC:
     lwz r0, 0x0(r5)
     addi r5, r1, 0x1c
     stw r0, 0x1c(r1)
     cmplw r26, r0
-    bge lbl_fn_8001E1D0_00000204
+    bge lbl_property_formatValue_00000204
     addi r5, r1, 0x14
-lbl_fn_8001E1D0_00000204:
+lbl_property_formatValue_00000204:
     lwz r5, 0x0(r5)
     bl memcmp
     cmpwi r3, 0x0
-    bne lbl_fn_8001E1D0_00000238
+    bne lbl_property_formatValue_00000238
     lwz r0, 0x1c(r1)
     cmplw r0, r26
-    bge lbl_fn_8001E1D0_00000228
+    bge lbl_property_formatValue_00000228
     li r3, -0x1
-    b lbl_fn_8001E1D0_00000238
-lbl_fn_8001E1D0_00000228:
-    bne lbl_fn_8001E1D0_00000234
+    b lbl_property_formatValue_00000238
+lbl_property_formatValue_00000228:
+    bne lbl_property_formatValue_00000234
     li r3, 0x0
-    b lbl_fn_8001E1D0_00000238
-lbl_fn_8001E1D0_00000234:
+    b lbl_property_formatValue_00000238
+lbl_property_formatValue_00000234:
     li r3, 0x1
-lbl_fn_8001E1D0_00000238:
+lbl_property_formatValue_00000238:
     cmpwi r3, 0x0
-    bge lbl_fn_8001E1D0_00000268
-lbl_fn_8001E1D0_00000240:
+    bge lbl_property_formatValue_00000268
+lbl_property_formatValue_00000240:
     lbz r5, 0x8(r1)
     mr r3, r28
     lbz r6, 0x9(r1)
@@ -342,12 +338,12 @@ lbl_fn_8001E1D0_00000240:
     lbz r0, lbl_8087D6F0
     stw r3, 0x20(r1)
     stb r0, 0x24(r1)
-    b lbl_fn_8001E1D0_00000274
-lbl_fn_8001E1D0_00000268:
+    b lbl_property_formatValue_00000274
+lbl_property_formatValue_00000268:
     lbz r0, lbl_8087D6F1
     stw r30, 0x20(r1)
     stb r0, 0x24(r1)
-lbl_fn_8001E1D0_00000274:
+lbl_property_formatValue_00000274:
     lwz r3, 0x20(r1)
     lbz r0, 0x24(r1)
     stw r3, 0x0(r27)
@@ -359,571 +355,319 @@ lbl_fn_8001E1D0_00000274:
     blr
 }
 
-asm void fn_8001E340(void)
+void fn_8001E340(void *p)
 {
-    nofralloc
-    lis r4, lbl_807771D8@ha
-    addi r4, r4, lbl_807771D8@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_807771D8;
 }
 
-asm void fn_8001E350(void)
+void fn_8001E350(void *p)
 {
-    nofralloc
-    lis r4, lbl_80777180@ha
-    addi r4, r4, lbl_80777180@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80777180;
 }
 
-asm void fn_8001E360(void)
+void fn_8001E360(void *p)
 {
-    nofralloc
-    lis r4, lbl_80777128@ha
-    addi r4, r4, lbl_80777128@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80777128;
 }
 
-asm void fn_8001E370(void)
+void fn_8001E370(void *p)
 {
-    nofralloc
-    lis r4, lbl_807770D0@ha
-    addi r4, r4, lbl_807770D0@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_807770D0;
 }
 
-asm void fn_8001E380(void)
+void fn_8001E380(void *p)
 {
-    nofralloc
-    lis r4, lbl_80777078@ha
-    addi r4, r4, lbl_80777078@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80777078;
 }
 
-asm void fn_8001E390(void)
+void fn_8001E390(void *p)
 {
-    nofralloc
-    lis r4, lbl_80777020@ha
-    addi r4, r4, lbl_80777020@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80777020;
 }
 
-asm void fn_8001E3A0(void)
+void fn_8001E3A0(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776FC8@ha
-    addi r4, r4, lbl_80776FC8@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776FC8;
 }
 
-asm void fn_8001E3B0(void)
+void fn_8001E3B0(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776F70@ha
-    addi r4, r4, lbl_80776F70@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776F70;
 }
 
-asm void fn_8001E3C0(void)
+void fn_8001E3C0(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776F18@ha
-    addi r4, r4, lbl_80776F18@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776F18;
 }
 
-asm void fn_8001E3D0(void)
+void fn_8001E3D0(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776EC0@ha
-    addi r4, r4, lbl_80776EC0@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776EC0;
 }
 
-asm void fn_8001E3E0(void)
+void fn_8001E3E0(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776E68@ha
-    addi r4, r4, lbl_80776E68@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776E68;
 }
 
-asm void fn_8001E3F0(void)
+void fn_8001E3F0(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776E10@ha
-    addi r4, r4, lbl_80776E10@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776E10;
 }
 
-asm void fn_8001E400(void)
+void fn_8001E400(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776DB8@ha
-    addi r4, r4, lbl_80776DB8@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776DB8;
 }
 
-asm void fn_8001E410(void)
+void fn_8001E410(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776D60@ha
-    addi r4, r4, lbl_80776D60@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776D60;
 }
 
-asm void fn_8001E420(void)
+void fn_8001E420(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776D08@ha
-    addi r4, r4, lbl_80776D08@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776D08;
 }
 
-asm void fn_8001E430(void)
+void fn_8001E430(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776CB0@ha
-    addi r4, r4, lbl_80776CB0@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776CB0;
 }
 
-asm void fn_8001E440(void)
+void fn_8001E440(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776C58@ha
-    addi r4, r4, lbl_80776C58@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776C58;
 }
 
-asm void fn_8001E450(void)
+void fn_8001E450(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776C00@ha
-    addi r4, r4, lbl_80776C00@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776C00;
 }
 
-asm void fn_8001E460(void)
+void fn_8001E460(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776BA8@ha
-    addi r4, r4, lbl_80776BA8@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776BA8;
 }
 
-asm void fn_8001E470(void)
+void fn_8001E470(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776B50@ha
-    addi r4, r4, lbl_80776B50@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776B50;
 }
 
-asm void fn_8001E480(void)
+void fn_8001E480(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776AF8@ha
-    addi r4, r4, lbl_80776AF8@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776AF8;
 }
 
-asm void fn_8001E490(void)
+void fn_8001E490(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776AA0@ha
-    addi r4, r4, lbl_80776AA0@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776AA0;
 }
 
-asm void fn_8001E4A0(void)
+void fn_8001E4A0(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776A48@ha
-    addi r4, r4, lbl_80776A48@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776A48;
 }
 
-asm void fn_8001E4B0(void)
+void fn_8001E4B0(void *p)
 {
-    nofralloc
-    lis r4, lbl_807769F0@ha
-    addi r4, r4, lbl_807769F0@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_807769F0;
 }
 
-asm void fn_8001E4C0(void)
+void fn_8001E4C0(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776998@ha
-    addi r4, r4, lbl_80776998@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776998;
 }
 
-asm void fn_8001E4D0(void)
+void fn_8001E4D0(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776940@ha
-    addi r4, r4, lbl_80776940@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776940;
 }
 
-asm void fn_8001E4E0(void)
+void fn_8001E4E0(void *p)
 {
-    nofralloc
-    lis r4, lbl_807768E8@ha
-    addi r4, r4, lbl_807768E8@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_807768E8;
 }
 
-asm void fn_8001E4F0(void)
+void fn_8001E4F0(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776890@ha
-    addi r4, r4, lbl_80776890@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776890;
 }
 
-asm void fn_8001E500(void)
+void fn_8001E500(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776838@ha
-    addi r4, r4, lbl_80776838@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776838;
 }
 
-asm void fn_8001E510(void)
+void fn_8001E510(void *p)
 {
-    nofralloc
-    lis r4, lbl_807767E0@ha
-    addi r4, r4, lbl_807767E0@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_807767E0;
 }
 
-asm void fn_8001E520(void)
+void fn_8001E520(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776788@ha
-    addi r4, r4, lbl_80776788@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776788;
 }
 
-asm void fn_8001E530(void)
+void fn_8001E530(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776730@ha
-    addi r4, r4, lbl_80776730@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776730;
 }
 
-asm void fn_8001E540(void)
+void fn_8001E540(void *p)
 {
-    nofralloc
-    lis r4, lbl_807766D8@ha
-    addi r4, r4, lbl_807766D8@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_807766D8;
 }
 
-asm void fn_8001E550(void)
+void fn_8001E550(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776680@ha
-    addi r4, r4, lbl_80776680@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776680;
 }
 
-asm void fn_8001E560(void)
+void fn_8001E560(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776628@ha
-    addi r4, r4, lbl_80776628@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776628;
 }
 
-asm void fn_8001E570(void)
+void fn_8001E570(void *p)
 {
-    nofralloc
-    lis r4, lbl_807765D0@ha
-    addi r4, r4, lbl_807765D0@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_807765D0;
 }
 
-asm void fn_8001E580(void)
+void fn_8001E580(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776578@ha
-    addi r4, r4, lbl_80776578@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776578;
 }
 
-asm void fn_8001E590(void)
+void fn_8001E590(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776520@ha
-    addi r4, r4, lbl_80776520@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776520;
 }
 
-asm void fn_8001E5A0(void)
+void fn_8001E5A0(void *p)
 {
-    nofralloc
-    lis r4, lbl_807764C8@ha
-    addi r4, r4, lbl_807764C8@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_807764C8;
 }
 
-asm void fn_8001E5B0(void)
+void fn_8001E5B0(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776470@ha
-    addi r4, r4, lbl_80776470@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776470;
 }
 
-asm void fn_8001E5C0(void)
+void fn_8001E5C0(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776418@ha
-    addi r4, r4, lbl_80776418@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776418;
 }
 
-asm void fn_8001E5D0(void)
+void fn_8001E5D0(void *p)
 {
-    nofralloc
-    lis r4, lbl_807763C0@ha
-    addi r4, r4, lbl_807763C0@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_807763C0;
 }
 
-asm void fn_8001E5E0(void)
+void fn_8001E5E0(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776368@ha
-    addi r4, r4, lbl_80776368@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776368;
 }
 
-asm void fn_8001E5F0(void)
+void fn_8001E5F0(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776310@ha
-    addi r4, r4, lbl_80776310@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776310;
 }
 
-asm void fn_8001E600(void)
+void fn_8001E600(void *p)
 {
-    nofralloc
-    lis r4, lbl_807762B8@ha
-    addi r4, r4, lbl_807762B8@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_807762B8;
 }
 
-asm void fn_8001E610(void)
+void fn_8001E610(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776260@ha
-    addi r4, r4, lbl_80776260@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776260;
 }
 
-asm void fn_8001E620(void)
+void fn_8001E620(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776208@ha
-    addi r4, r4, lbl_80776208@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776208;
 }
 
-asm void fn_8001E630(void)
+void fn_8001E630(void *p)
 {
-    nofralloc
-    lis r4, lbl_807761B0@ha
-    addi r4, r4, lbl_807761B0@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_807761B0;
 }
 
-asm void fn_8001E640(void)
+void fn_8001E640(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776158@ha
-    addi r4, r4, lbl_80776158@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776158;
 }
 
-asm void fn_8001E650(void)
+void fn_8001E650(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776100@ha
-    addi r4, r4, lbl_80776100@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776100;
 }
 
-asm void fn_8001E660(void)
+void fn_8001E660(void *p)
 {
-    nofralloc
-    lis r4, lbl_807760A8@ha
-    addi r4, r4, lbl_807760A8@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_807760A8;
 }
 
-asm void fn_8001E670(void)
+void fn_8001E670(void *p)
 {
-    nofralloc
-    lis r4, lbl_80776050@ha
-    addi r4, r4, lbl_80776050@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80776050;
 }
 
-asm void fn_8001E680(void)
+void fn_8001E680(void *p)
 {
-    nofralloc
-    lis r4, lbl_80775FF8@ha
-    addi r4, r4, lbl_80775FF8@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80775FF8;
 }
 
-asm void fn_8001E690(void)
+void fn_8001E690(void *p)
 {
-    nofralloc
-    lis r4, lbl_80775FA0@ha
-    addi r4, r4, lbl_80775FA0@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80775FA0;
 }
 
-asm void fn_8001E6A0(void)
+void fn_8001E6A0(void *p)
 {
-    nofralloc
-    lis r4, lbl_80775F48@ha
-    addi r4, r4, lbl_80775F48@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80775F48;
 }
 
-asm void fn_8001E6B0(void)
+void fn_8001E6B0(void *p)
 {
-    nofralloc
-    lis r4, lbl_80775EF0@ha
-    addi r4, r4, lbl_80775EF0@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80775EF0;
 }
 
-asm void fn_8001E6C0(void)
+void fn_8001E6C0(void *p)
 {
-    nofralloc
-    lis r4, lbl_80775E98@ha
-    addi r4, r4, lbl_80775E98@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80775E98;
 }
 
-asm void fn_8001E6D0(void)
+void fn_8001E6D0(void *p)
 {
-    nofralloc
-    lis r4, lbl_80775E40@ha
-    addi r4, r4, lbl_80775E40@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80775E40;
 }
 
-asm void fn_8001E6E0(void)
+void fn_8001E6E0(void *p)
 {
-    nofralloc
-    lis r4, lbl_80775DE8@ha
-    addi r4, r4, lbl_80775DE8@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80775DE8;
 }
 
-asm void fn_8001E6F0(void)
+void fn_8001E6F0(void *p)
 {
-    nofralloc
-    lis r4, lbl_80775D90@ha
-    addi r4, r4, lbl_80775D90@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80775D90;
 }
 
-asm void fn_8001E700(void)
+void fn_8001E700(void *p)
 {
-    nofralloc
-    lis r4, lbl_80775D38@ha
-    addi r4, r4, lbl_80775D38@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80775D38;
 }
 
-asm void fn_8001E710(void)
+void fn_8001E710(void *p)
 {
-    nofralloc
-    lis r4, lbl_80775CE0@ha
-    addi r4, r4, lbl_80775CE0@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80775CE0;
 }
 
-asm void fn_8001E720(void)
+void fn_8001E720(void *p)
 {
-    nofralloc
-    lis r4, lbl_80775C84@ha
-    addi r4, r4, lbl_80775C84@l
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = &lbl_80775C84;
 }
 
 asm void fn_8001E730(void)

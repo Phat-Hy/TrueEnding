@@ -30,7 +30,7 @@ extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
-extern void fn_80103F60(void);
+extern void bsp_findLeafNode(void);
 extern void fn_80108378(void);
 extern void boss_updatePhaseState(void);
 extern void equip_applyToCharacter(void);
@@ -313,7 +313,7 @@ lbl_fn_802F62A0_0000029C:
     stw r30, 0x1530(r28)
     stw r29, 0x1588(r28)
     lwz r3, lbl_8087F048
-    bl fn_80103F60
+    bl bsp_findLeafNode
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_802F62A0_00000374

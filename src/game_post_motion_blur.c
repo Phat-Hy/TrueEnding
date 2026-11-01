@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void item_testLineOfSight(void);
-extern void fn_80094958(void);
+extern void target_registerCandidate(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void system_getNextSequenceId(void);
 extern void enemy_updateCombatBehavior(void);
@@ -481,26 +481,26 @@ lbl_fn_802C1FEC_00000508:
     stfs f1, 0xc(r1)
     stfs f1, 0x10(r1)
     stfs f1, 0x14(r1)
-    bl fn_80094958
+    bl target_registerCandidate
     addi r30, r30, lbl_80746C90@l
     addi r6, r1, 0x8
     mr r7, r6
     addi r3, r31, 0xb0
     addi r4, r30, 0x27
     addi r5, r1, 0x38
-    bl fn_80094958
+    bl target_registerCandidate
     addi r6, r1, 0x8
     addi r3, r31, 0xb0
     mr r7, r6
     addi r4, r30, 0x1a
     addi r5, r1, 0x28
-    bl fn_80094958
+    bl target_registerCandidate
     addi r6, r1, 0x8
     addi r3, r31, 0xb0
     mr r7, r6
     addi r4, r30, 0xd
     addi r5, r1, 0x18
-    bl fn_80094958
+    bl target_registerCandidate
     lwz r3, 0x15fc(r31)
     addi r0, r3, 0x1
     stw r0, 0x15fc(r31)

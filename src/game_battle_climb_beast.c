@@ -12,10 +12,10 @@ extern void vec3_copy(void);
 extern void fn_8000D3A8(void);
 extern void scene_traverseNode(void);
 extern void scene_transformPoint(void);
-extern void fn_8000DCF4(void);
+extern void scene_getCamera(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80012C88(void);
+extern void vec3_addAssign(void);
 extern void vec3_sub(void);
 extern void vec3_add(void);
 extern void fn_80013484(void);
@@ -38,31 +38,31 @@ extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
-extern void fn_800CB6E4(void);
+extern void morph_dispatchTargetUpdate(void);
 extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void str_skipWhitespace(void);
-extern void fn_800F52F8(void);
+extern void proj_getGlobalManager(void);
 extern void vec3_scale(void);
-extern void fn_800F7F90(void);
+extern void viewport_getFlag(void);
 extern void vec3_normalize(void);
 extern void fn_800F80A8(void);
 extern void fn_800F80B8(void);
 extern void fn_800F84C8(void);
-extern void fn_801162A0(void);
+extern void vec3_sqMag(void);
 extern void equip_getGlobalManager(void);
 extern void fn_8013A18C(void);
 extern void npc_getPosition(void);
 extern void fn_8013C3B4(void);
-extern void fn_8013C480(void);
-extern void fn_801404F8(void);
-extern void fn_80140500(void);
+extern void npc_isInteractionReady(void);
+extern void quest_getGlobalManager(void);
+extern void quest_resetActiveObjectiveSlots(void);
 extern void fn_80144ED4(void);
 extern void fn_80148334(void);
-extern void fn_801750FC(void);
+extern void battle_calcOutcomeBonus(void);
 extern void fn_80198C00(void);
-extern void fn_801A03E0(void);
-extern void fn_801A03E8(void);
+extern void bgm_getGlobalManager(void);
+extern void vec3_dot(void);
 extern void fn_801A03EC(void);
 extern void fn_801A0408(void);
 extern void sound_initGlobalInstances(void);
@@ -786,10 +786,10 @@ lbl_fn_803FA5C8_0000084C:
     lwz r3, 0x4d0(r31)
     subi r0, r3, 0x1
     stw r0, 0x4d0(r31)
-    bl fn_800F7F90
+    bl viewport_getFlag
     cmpwi r3, 0x0
     beq lbl_fn_803FA5C8_000008B0
-    bl fn_800F7F90
+    bl viewport_getFlag
     bl fn_804EB1B0
     cmpwi r3, 0x0
     bne lbl_fn_803FA5C8_000008B0
@@ -841,7 +841,7 @@ lbl_fn_803FA5C8_00000924:
     beq lbl_fn_803FA5C8_00000944
     addi r3, r31, 0x518
     addi r4, r31, 0x6c
-    bl fn_800CB6E4
+    bl morph_dispatchTargetUpdate
     b lbl_fn_803FA5C8_0000098C
 lbl_fn_803FA5C8_00000944:
     lwz r0, 0x4d0(r31)
@@ -910,7 +910,7 @@ lbl_fn_803FA5C8_00000A20:
     cmpwi r0, 0x2
     bne lbl_fn_803FA5C8_00000A58
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     mr r5, r3
     mr r3, r31
     addi r4, r31, 0x6c
@@ -921,7 +921,7 @@ lbl_fn_803FA5C8_00000A58:
     cmpwi r0, 0x6
     bne lbl_fn_803FA5C8_00000A80
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     mr r5, r3
     mr r3, r31
     addi r4, r31, 0x6c
@@ -930,7 +930,7 @@ lbl_fn_803FA5C8_00000A58:
     b lbl_fn_803FA5C8_00000FB8
 lbl_fn_803FA5C8_00000A80:
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     mr r5, r3
     mr r3, r31
     addi r4, r31, 0x6c
@@ -968,7 +968,7 @@ lbl_fn_803FA5C8_00000B08:
     lwz r0, 0x54(r31)
     cmpwi r0, 0x3
     bne lbl_fn_803FA5C8_00000BA8
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_802F0998
     lfs f2, 0x4d4(r31)
     addi r3, r1, 0xf0
@@ -985,7 +985,7 @@ lbl_fn_803FA5C8_00000B08:
     fadds f0, f1, f0
     stfs f0, 0xf4(r1)
     bl mission_updateStub
-    bl fn_801404F8
+    bl quest_getGlobalManager
     lis r7, 0x8000
     addi r4, r1, 0xe4
     addi r5, r1, 0xf0
@@ -1011,7 +1011,7 @@ lbl_fn_803FA5C8_00000BA8:
     addi r3, r1, 0xd8
     addi r4, r31, 0x6c
     bl vec3_assign
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_802F0998
     lfs f0, 0x4e8(r31)
     addi r3, r1, 0xd8
@@ -1021,7 +1021,7 @@ lbl_fn_803FA5C8_00000BA8:
     bl fn_80013484
     addi r3, r31, 0x6c
     addi r4, r31, 0x4e4
-    bl fn_80012C88
+    bl vec3_addAssign
     addi r3, r1, 0xcc
     bl mission_updateStub
     lwz r3, 0x4c4(r31)
@@ -1032,8 +1032,8 @@ lbl_fn_803FA5C8_00000BA8:
     oris r30, r30, 0x8000
 lbl_fn_803FA5C8_00000C08:
     addi r3, r1, 0x190
-    bl fn_80140500
-    bl fn_801404F8
+    bl quest_resetActiveObjectiveSlots
+    bl quest_getGlobalManager
     lwz r8, 0x4cc(r31)
     mr r7, r30
     addi r4, r1, 0x190
@@ -1054,13 +1054,13 @@ lbl_fn_803FA5C8_00000C08:
     bl vec3_set
     mr r4, r3
     addi r3, r1, 0x1b8
-    bl fn_801A03E8
+    bl vec3_dot
     lfs f0, lbl_80886048
     fcmpo cr0, f1, f0
     bge lbl_fn_803FA5C8_00000D04
     addi r3, r1, 0x1b8
     addi r4, r31, 0x4e4
-    bl fn_801A03E8
+    bl vec3_dot
     addi r3, r1, 0xc0
     addi r4, r1, 0x1b8
     bl fn_803FAE8C
@@ -1107,7 +1107,7 @@ lbl_fn_803FA5C8_00000D20:
     cmpwi r0, 0x0
     beq lbl_fn_803FA5C8_00000D4C
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     mr r5, r3
     mr r3, r31
     addi r4, r1, 0x194
@@ -1123,7 +1123,7 @@ lbl_fn_803FA5C8_00000D4C:
     fcmpo cr0, f1, f0
     bge lbl_fn_803FA5C8_00000D88
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     mr r5, r3
     mr r3, r31
     addi r4, r31, 0x6c
@@ -1155,8 +1155,8 @@ lbl_fn_803FA5C8_00000DC8:
     bl vec3_assign
     addi r3, r31, 0x6c
     addi r4, r31, 0x4e4
-    bl fn_80012C88
-    bl fn_800F52F8
+    bl vec3_addAssign
+    bl proj_getGlobalManager
     bl fn_802F0998
     lfs f2, lbl_8088605C
     addi r3, r1, 0xc
@@ -1179,7 +1179,7 @@ lbl_fn_803FA5C8_00000DC8:
 lbl_fn_803FA5C8_00000E38:
     cmpwi r0, 0x7
     bne lbl_fn_803FA5C8_00000F70
-    bl fn_800F7F90
+    bl viewport_getFlag
     cmpwi r3, 0x0
     beq lbl_fn_803FA5C8_00000E58
     bl fn_803FAEB4
@@ -1193,7 +1193,7 @@ lbl_fn_803FA5C8_00000E58:
     b lbl_fn_803FA5C8_00000EDC
 lbl_fn_803FA5C8_00000E6C:
     mr r3, r30
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_803FA5C8_00000ED0
     mr r3, r30
@@ -1208,7 +1208,7 @@ lbl_fn_803FA5C8_00000E6C:
     lfs f30, 0x18(r3)
     addi r3, r1, 0x9c
     fadds f30, f30, f31
-    bl fn_801162A0
+    bl vec3_sqMag
     fmuls f0, f30, f30
     fcmpo cr0, f1, f0
     bge lbl_fn_803FA5C8_00000ED0
@@ -1224,14 +1224,14 @@ lbl_fn_803FA5C8_00000ED0:
 lbl_fn_803FA5C8_00000EDC:
     cmpwi r30, 0x0
     bne lbl_fn_803FA5C8_00000E6C
-    bl fn_801A03E0
+    bl bgm_getGlobalManager
     bl fn_801A0408
     lfs f31, lbl_80886060
     mr r30, r3
     b lbl_fn_803FA5C8_00000F68
 lbl_fn_803FA5C8_00000EF8:
     mr r3, r30
-    bl fn_8013C480
+    bl npc_isInteractionReady
     cmpwi r3, 0x0
     beq lbl_fn_803FA5C8_00000F5C
     mr r3, r30
@@ -1246,7 +1246,7 @@ lbl_fn_803FA5C8_00000EF8:
     lfs f30, 0x18(r3)
     addi r3, r1, 0x90
     fadds f30, f30, f31
-    bl fn_801162A0
+    bl vec3_sqMag
     fmuls f0, f30, f30
     fcmpo cr0, f1, f0
     bge lbl_fn_803FA5C8_00000F5C
@@ -1711,7 +1711,7 @@ lbl_fn_803FAF8C_00001560:
     lwz r3, 0x10(r31)
     cmpwi r3, 0x0
     beq lbl_fn_803FAF8C_00001584
-    bl fn_801750FC
+    bl battle_calcOutcomeBonus
 lbl_fn_803FAF8C_00001584:
     psq_l f1, 0x14(r31), 0, 0
     lfs f2, 0x1c(r31)

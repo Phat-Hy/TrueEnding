@@ -15,7 +15,7 @@ extern void vec3_sub(void);
 extern void math_wrapAngle(void);
 extern void vec3_add(void);
 extern void skill_calculateDamage(void);
-extern void fn_80063764(void);
+extern void magic_updateCircleArea(void);
 extern void chapter_updateProgression(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
@@ -31,8 +31,8 @@ extern void fn_800F7250(void);
 extern void vec3_normalize(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_800F8348(void);
-extern void fn_800F8524(void);
-extern void fn_801162A0(void);
+extern void math_lerpf(void);
+extern void vec3_sqMag(void);
 extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
 extern void actor_testBitFlag(void);
@@ -56,7 +56,7 @@ extern void fn_8030CF84(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_803C17FC(void);
-extern void fn_803CD958(void);
+extern void crowd_selectWaypointByWeight(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -856,7 +856,7 @@ lbl_fn_8030AF10_0000095C:
     mr r6, r28
     addi r4, r31, 0x528
     addi r5, r1, 0xa0
-    bl fn_80063764
+    bl magic_updateCircleArea
     lfs f1, lbl_80884BE8
     addi r3, r1, 0x190
     bl fn_80149624
@@ -886,7 +886,7 @@ lbl_fn_8030AF10_0000095C:
     mr r6, r28
     addi r4, r31, 0x528
     addi r5, r1, 0x80
-    bl fn_80063764
+    bl magic_updateCircleArea
     lfs f1, lbl_80884BA8
     addi r3, r1, 0x50
     lfs f2, lbl_80884BAC
@@ -904,7 +904,7 @@ lbl_fn_8030AF10_0000095C:
     mr r6, r28
     addi r4, r31, 0x528
     addi r5, r1, 0x60
-    bl fn_80063764
+    bl magic_updateCircleArea
     lis r3, lbl_80748FD0@ha
     lis r29, lbl_80748FE8@ha
     lfd f29, lbl_80748FD0@l(r3)
@@ -980,7 +980,7 @@ lbl_fn_8030AF10_00000B8C:
     mr r6, r28
     addi r4, r30, 0x4
     addi r5, r1, 0x34
-    bl fn_80063764
+    bl magic_updateCircleArea
     mr r4, r27
     addi r3, r1, 0x10
     bl vec3_toEulerAngles
@@ -1328,7 +1328,7 @@ lbl_fn_8030B74C_00001108:
     addi r5, r31, 0x18
     bl vec3_sub
     addi r3, r1, 0x4c
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_80884C10
     fcmpo cr0, f1, f0
     bge lbl_fn_8030B74C_0000118C
@@ -1337,7 +1337,7 @@ lbl_fn_8030B74C_00001108:
     bl vec3_copy
 lbl_fn_8030B74C_0000118C:
     addi r3, r1, 0x34
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_80884C10
     fcmpo cr0, f1, f0
     bge lbl_fn_8030B74C_000011AC
@@ -1372,7 +1372,7 @@ lbl_fn_8030B74C_000011AC:
     fmr f1, f29
     addi r3, r1, 0xc
     addi r4, r1, 0x8
-    bl fn_800F8524
+    bl math_lerpf
     fneg f4, f1
     lfs f1, lbl_80884C14
     lfs f3, 0x15d0(r30)
@@ -1441,7 +1441,7 @@ asm void fn_8030B92C(void)
     lwz r3, 0xa4(r3)
     slwi r0, r0, 3
     add r3, r3, r0
-    bl fn_803CD958
+    bl crowd_selectWaypointByWeight
     clrlwi. r30, r3, 16
     bne lbl_fn_8030B92C_00001328
     mr r30, r26
@@ -1453,7 +1453,7 @@ lbl_fn_8030B92C_00001328:
     lwz r3, 0x10d8(r3)
     lwz r3, 0xa4(r3)
     add r3, r3, r0
-    bl fn_803CD958
+    bl crowd_selectWaypointByWeight
     clrlwi. r4, r3, 16
     bne lbl_fn_8030B92C_00001354
     mr r4, r26

@@ -21,11 +21,11 @@ extern void fn_800E0000(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_801F0544(void);
 extern void save_parseSlotStats(void);
-extern void fn_801F6C2C(void);
+extern void save_getElapsedPlayTime(void);
 extern void fn_801F6C38(void);
 extern void save_computeCrc32(void);
 extern void save_verifyBlockCrc(void);
-extern void fn_801F7590(void);
+extern void save_writeBackupSlot(void);
 extern void fn_801F791C(void);
 extern void fn_801FEB9C(void);
 extern void thread_findAndNotify(void);
@@ -66,7 +66,7 @@ extern u32 lbl_80887220;
 void fn_804A3AF0(void);
 void fn_804A3B60(void);
 void fn_804A3BD4(void);
-void fn_804A3C24(void);
+void net_initCoopSession(void);
 void fn_804A4264(void);
 void fn_804A4280(void);
 void fn_804A4294(void);
@@ -81,7 +81,7 @@ void fn_804A4AEC(void);
 void fn_804A4CE4(void);
 void fn_804A4EEC(void);
 void fn_804A5160(void);
-void fn_804A53D4(void);
+void net_broadcastCoopPacket(void);
 
 asm void fn_804A3AF0(void)
 {
@@ -178,7 +178,7 @@ lbl_fn_804A3BD4_0000011C:
     blr
 }
 
-asm void fn_804A3C24(void)
+asm void net_initCoopSession(void)
 {
     nofralloc
     stwu r1, -0xa0(r1)
@@ -189,7 +189,7 @@ asm void fn_804A3C24(void)
     cmpwi r4, 0x0
     mr r15, r3
     mr r16, r5
-    beq lbl_fn_804A3C24_0000075C
+    beq lbl_net_initCoopSession_0000075C
     li r23, 0x0
     stw r23, 0x38(r1)
     lfs f1, lbl_8088720C
@@ -216,8 +216,8 @@ asm void fn_804A3C24(void)
     lis r28, 0x71c
     lis r30, 0xe39
     lis r31, 0x2aab
-    b lbl_fn_804A3C24_000005C0
-lbl_fn_804A3C24_000001C4:
+    b lbl_net_initCoopSession_000005C0
+lbl_net_initCoopSession_000001C4:
     stw r23, 0x2c(r1)
     mr r3, r22
     stw r23, 0x30(r1)
@@ -239,21 +239,21 @@ lbl_fn_804A3C24_000001C4:
     lwz r0, 0x3c(r1)
     lwz r3, 0x40(r1)
     cmplw r0, r3
-    bge lbl_fn_804A3C24_000002A4
+    bge lbl_net_initCoopSession_000002A4
     mulli r0, r0, 0xc
     lwz r3, 0x38(r1)
     add. r17, r3, r0
-    beq lbl_fn_804A3C24_00000294
+    beq lbl_net_initCoopSession_00000294
     lwz r3, 0x2c(r1)
     srwi. r0, r3, 31
-    bne lbl_fn_804A3C24_00000250
+    bne lbl_net_initCoopSession_00000250
     lwz r0, 0x30(r1)
     stw r3, 0x0(r17)
     stw r0, 0x4(r17)
     lwz r0, 0x34(r1)
     stw r0, 0x8(r17)
-    b lbl_fn_804A3C24_00000294
-lbl_fn_804A3C24_00000250:
+    b lbl_net_initCoopSession_00000294
+lbl_net_initCoopSession_00000250:
     stw r23, 0x0(r17)
     mr r3, r17
     stw r23, 0x4(r17)
@@ -271,22 +271,22 @@ lbl_fn_804A3C24_00000250:
     li r5, 0x0
     add r7, r6, r0
     bl str_assignBuffer
-lbl_fn_804A3C24_00000294:
+lbl_net_initCoopSession_00000294:
     lwz r3, 0x3c(r1)
     addi r0, r3, 0x1
     stw r0, 0x3c(r1)
-    b lbl_fn_804A3C24_000005AC
-lbl_fn_804A3C24_000002A4:
+    b lbl_net_initCoopSession_000005AC
+lbl_net_initCoopSession_000002A4:
     addi r0, r25, 0x5555
     subf r0, r3, r0
     cmplwi r0, 0x1
-    bge lbl_fn_804A3C24_000002C8
+    bge lbl_net_initCoopSession_000002C8
     addi r4, r14, 0x143
     addi r3, r26, 0xa0
     crclr 6
     bl printf
     bl abort
-lbl_fn_804A3C24_000002C8:
+lbl_net_initCoopSession_000002C8:
     lwz r3, 0x3c(r1)
     addi r0, r25, 0x5555
     lwz r17, 0x40(r1)
@@ -300,16 +300,16 @@ lbl_fn_804A3C24_000002C8:
     stw r27, 0x50(r1)
     stw r23, 0x54(r1)
     stw r3, 0x28(r1)
-    ble lbl_fn_804A3C24_00000314
+    ble lbl_net_initCoopSession_00000314
     addi r4, r14, 0x143
     addi r3, r26, 0xa0
     crclr 6
     bl printf
     bl abort
-lbl_fn_804A3C24_00000314:
+lbl_net_initCoopSession_00000314:
     addi r0, r28, 0x71c7
     cmplw r17, r0
-    bge lbl_fn_804A3C24_0000035C
+    bge lbl_net_initCoopSession_0000035C
     addi r4, r17, 0x1
     subi r5, r29, 0x3333
     slwi r3, r4, 2
@@ -320,52 +320,52 @@ lbl_fn_804A3C24_00000314:
     srwi r4, r4, 2
     stw r4, 0x20(r1)
     cmplw r4, r0
-    bge lbl_fn_804A3C24_00000350
+    bge lbl_net_initCoopSession_00000350
     addi r3, r1, 0x28
-lbl_fn_804A3C24_00000350:
+lbl_net_initCoopSession_00000350:
     lwz r0, 0x0(r3)
     add r17, r17, r0
-    b lbl_fn_804A3C24_00000398
-lbl_fn_804A3C24_0000035C:
+    b lbl_net_initCoopSession_00000398
+lbl_net_initCoopSession_0000035C:
     subi r0, r30, 0x1c72
     cmplw r17, r0
-    bge lbl_fn_804A3C24_00000394
+    bge lbl_net_initCoopSession_00000394
     addi r3, r17, 0x1
     lwz r0, 0x28(r1)
     srwi r3, r3, 1
     stw r3, 0x24(r1)
     cmplw r3, r0
     addi r3, r1, 0x24
-    bge lbl_fn_804A3C24_00000388
+    bge lbl_net_initCoopSession_00000388
     addi r3, r1, 0x28
-lbl_fn_804A3C24_00000388:
+lbl_net_initCoopSession_00000388:
     lwz r0, 0x0(r3)
     add r17, r17, r0
-    b lbl_fn_804A3C24_00000398
-lbl_fn_804A3C24_00000394:
+    b lbl_net_initCoopSession_00000398
+lbl_net_initCoopSession_00000394:
     addi r17, r25, 0x5555
-lbl_fn_804A3C24_00000398:
+lbl_net_initCoopSession_00000398:
     addi r0, r25, 0x5555
     cmplw r17, r0
-    ble lbl_fn_804A3C24_000003B8
+    ble lbl_net_initCoopSession_000003B8
     addi r4, r14, 0x143
     addi r3, r26, 0xa0
     crclr 6
     bl printf
     bl abort
-lbl_fn_804A3C24_000003B8:
+lbl_net_initCoopSession_000003B8:
     mulli r3, r17, 0xc
     bl mem_free
     cmpwi r3, 0x0
     mr r18, r3
-    bne lbl_fn_804A3C24_000003E4
+    bne lbl_net_initCoopSession_000003E4
     lis r4, lbl_807799A0@ha
     addi r3, r26, 0xa0
     addi r4, r4, lbl_807799A0@l
     crclr 6
     bl printf
     bl abort
-lbl_fn_804A3C24_000003E4:
+lbl_net_initCoopSession_000003E4:
     lwz r5, 0x3c(r1)
     lwz r0, 0x48(r1)
     mulli r4, r5, 0xc
@@ -375,17 +375,17 @@ lbl_fn_804A3C24_000003E4:
     add r0, r18, r4
     stw r5, 0x54(r1)
     add. r17, r3, r0
-    beq lbl_fn_804A3C24_00000474
+    beq lbl_net_initCoopSession_00000474
     lwz r3, 0x2c(r1)
     srwi. r0, r3, 31
-    bne lbl_fn_804A3C24_00000430
+    bne lbl_net_initCoopSession_00000430
     lwz r0, 0x30(r1)
     stw r3, 0x0(r17)
     stw r0, 0x4(r17)
     lwz r0, 0x34(r1)
     stw r0, 0x8(r17)
-    b lbl_fn_804A3C24_00000474
-lbl_fn_804A3C24_00000430:
+    b lbl_net_initCoopSession_00000474
+lbl_net_initCoopSession_00000430:
     stw r23, 0x0(r17)
     mr r3, r17
     stw r23, 0x4(r17)
@@ -403,7 +403,7 @@ lbl_fn_804A3C24_00000430:
     li r5, 0x0
     add r7, r6, r0
     bl str_assignBuffer
-lbl_fn_804A3C24_00000474:
+lbl_net_initCoopSession_00000474:
     lwz r0, 0x3c(r1)
     subi r6, r31, 0x5555
     lwz r17, 0x38(r1)
@@ -449,80 +449,80 @@ lbl_fn_804A3C24_00000474:
     stw r7, 0x44(r1)
     stw r5, 0x3c(r1)
     stw r8, 0x48(r1)
-    b lbl_fn_804A3C24_00000548
-lbl_fn_804A3C24_0000052C:
+    b lbl_net_initCoopSession_00000548
+lbl_net_initCoopSession_0000052C:
     subic. r17, r17, 0xc
-    beq lbl_fn_804A3C24_00000548
+    beq lbl_net_initCoopSession_00000548
     lwz r0, 0x0(r17)
     srwi. r0, r0, 31
-    beq lbl_fn_804A3C24_00000548
+    beq lbl_net_initCoopSession_00000548
     lwz r3, 0x8(r17)
     bl dtor_80084684
-lbl_fn_804A3C24_00000548:
+lbl_net_initCoopSession_00000548:
     cmplw r17, r18
-    bgt lbl_fn_804A3C24_0000052C
+    bgt lbl_net_initCoopSession_0000052C
     cmpwi r19, 0x0
     stw r23, 0x48(r1)
-    beq lbl_fn_804A3C24_000005AC
+    beq lbl_net_initCoopSession_000005AC
     lwz r3, 0x44(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_804A3C24_000005AC
+    beq lbl_net_initCoopSession_000005AC
     mulli r0, r23, 0xc
     stw r23, 0x48(r1)
     li r17, 0x0
     add r18, r3, r0
-    b lbl_fn_804A3C24_0000059C
-lbl_fn_804A3C24_0000057C:
+    b lbl_net_initCoopSession_0000059C
+lbl_net_initCoopSession_0000057C:
     subic. r18, r18, 0xc
-    beq lbl_fn_804A3C24_00000598
+    beq lbl_net_initCoopSession_00000598
     lwz r0, 0x0(r18)
     srwi. r0, r0, 31
-    beq lbl_fn_804A3C24_00000598
+    beq lbl_net_initCoopSession_00000598
     lwz r3, 0x8(r18)
     bl dtor_80084684
-lbl_fn_804A3C24_00000598:
+lbl_net_initCoopSession_00000598:
     subi r17, r17, 0x1
-lbl_fn_804A3C24_0000059C:
+lbl_net_initCoopSession_0000059C:
     cmpwi r17, 0x0
-    bne lbl_fn_804A3C24_0000057C
+    bne lbl_net_initCoopSession_0000057C
     lwz r3, 0x44(r1)
     bl dtor_80084684
-lbl_fn_804A3C24_000005AC:
+lbl_net_initCoopSession_000005AC:
     lwz r0, 0x2c(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_804A3C24_000005C0
+    beq lbl_net_initCoopSession_000005C0
     lwz r3, 0x34(r1)
     bl dtor_80084684
-lbl_fn_804A3C24_000005C0:
+lbl_net_initCoopSession_000005C0:
     lwz r0, 0x3c(r1)
     cmplwi r0, 0x3
-    blt lbl_fn_804A3C24_000001C4
+    blt lbl_net_initCoopSession_000001C4
     lwz r4, 0x38(r1)
     lwz r0, 0x18(r4)
     srwi. r0, r0, 31
-    bne lbl_fn_804A3C24_000005E4
+    bne lbl_net_initCoopSession_000005E4
     addi r14, r4, 0x1a
-    b lbl_fn_804A3C24_000005E8
-lbl_fn_804A3C24_000005E4:
+    b lbl_net_initCoopSession_000005E8
+lbl_net_initCoopSession_000005E4:
     lwz r14, 0x20(r4)
-lbl_fn_804A3C24_000005E8:
+lbl_net_initCoopSession_000005E8:
     lwz r0, 0xc(r4)
     srwi. r0, r0, 31
-    bne lbl_fn_804A3C24_000005FC
+    bne lbl_net_initCoopSession_000005FC
     addi r19, r4, 0xe
-    b lbl_fn_804A3C24_00000600
-lbl_fn_804A3C24_000005FC:
+    b lbl_net_initCoopSession_00000600
+lbl_net_initCoopSession_000005FC:
     lwz r19, 0x14(r4)
-lbl_fn_804A3C24_00000600:
+lbl_net_initCoopSession_00000600:
     lwz r3, 0x38(r1)
     lwz r0, 0x0(r3)
     srwi. r0, r0, 31
-    bne lbl_fn_804A3C24_00000618
+    bne lbl_net_initCoopSession_00000618
     addi r18, r4, 0x2
-    b lbl_fn_804A3C24_0000061C
-lbl_fn_804A3C24_00000618:
+    b lbl_net_initCoopSession_0000061C
+lbl_net_initCoopSession_00000618:
     lwz r18, 0x8(r4)
-lbl_fn_804A3C24_0000061C:
+lbl_net_initCoopSession_0000061C:
     lwz r4, 0x1c8(r15)
     lis r3, lbl_807573D0@ha
     addi r3, r3, lbl_807573D0@l
@@ -531,11 +531,11 @@ lbl_fn_804A3C24_0000061C:
     stw r0, 0x1c0(r15)
     addi r3, r3, 0x157
     addi r17, r4, 0x58
-    beq lbl_fn_804A3C24_00000644
-    b lbl_fn_804A3C24_00000648
-lbl_fn_804A3C24_00000644:
+    beq lbl_net_initCoopSession_00000644
+    b lbl_net_initCoopSession_00000648
+lbl_net_initCoopSession_00000644:
     la r18, lbl_8087E0E0
-lbl_fn_804A3C24_00000648:
+lbl_net_initCoopSession_00000648:
     bl str_findChar
     mr r4, r3
     mr r3, r17
@@ -547,11 +547,11 @@ lbl_fn_804A3C24_00000648:
     cmpwi r19, 0x0
     addi r3, r3, 0x15d
     addi r17, r4, 0x58
-    beq lbl_fn_804A3C24_0000067C
-    b lbl_fn_804A3C24_00000680
-lbl_fn_804A3C24_0000067C:
+    beq lbl_net_initCoopSession_0000067C
+    b lbl_net_initCoopSession_00000680
+lbl_net_initCoopSession_0000067C:
     la r19, lbl_8087E0E0
-lbl_fn_804A3C24_00000680:
+lbl_net_initCoopSession_00000680:
     bl str_findChar
     mr r4, r3
     mr r3, r17
@@ -563,11 +563,11 @@ lbl_fn_804A3C24_00000680:
     cmpwi r14, 0x0
     addi r3, r3, 0x163
     addi r17, r4, 0x58
-    beq lbl_fn_804A3C24_000006B4
-    b lbl_fn_804A3C24_000006B8
-lbl_fn_804A3C24_000006B4:
+    beq lbl_net_initCoopSession_000006B4
+    b lbl_net_initCoopSession_000006B8
+lbl_net_initCoopSession_000006B4:
     la r14, lbl_8087E0E0
-lbl_fn_804A3C24_000006B8:
+lbl_net_initCoopSession_000006B8:
     bl str_findChar
     mr r4, r3
     mr r3, r17
@@ -586,33 +586,33 @@ lbl_fn_804A3C24_000006B8:
     bl thread_dispatchToQueue
     addic. r0, r1, 0x38
     stw r16, 0x1c4(r15)
-    beq lbl_fn_804A3C24_0000075C
-    beq lbl_fn_804A3C24_0000075C
+    beq lbl_net_initCoopSession_0000075C
+    beq lbl_net_initCoopSession_0000075C
     lwz r4, 0x38(r1)
     cmpwi r4, 0x0
-    beq lbl_fn_804A3C24_0000075C
+    beq lbl_net_initCoopSession_0000075C
     lwz r15, 0x3c(r1)
     mulli r3, r15, 0xc
     subf r0, r15, r15
     stw r0, 0x3c(r1)
     add r14, r4, r3
-    b lbl_fn_804A3C24_0000074C
-lbl_fn_804A3C24_0000072C:
+    b lbl_net_initCoopSession_0000074C
+lbl_net_initCoopSession_0000072C:
     subic. r14, r14, 0xc
-    beq lbl_fn_804A3C24_00000748
+    beq lbl_net_initCoopSession_00000748
     lwz r0, 0x0(r14)
     srwi. r0, r0, 31
-    beq lbl_fn_804A3C24_00000748
+    beq lbl_net_initCoopSession_00000748
     lwz r3, 0x8(r14)
     bl dtor_80084684
-lbl_fn_804A3C24_00000748:
+lbl_net_initCoopSession_00000748:
     subi r15, r15, 0x1
-lbl_fn_804A3C24_0000074C:
+lbl_net_initCoopSession_0000074C:
     cmpwi r15, 0x0
-    bne lbl_fn_804A3C24_0000072C
+    bne lbl_net_initCoopSession_0000072C
     lwz r3, 0x38(r1)
     bl dtor_80084684
-lbl_fn_804A3C24_0000075C:
+lbl_net_initCoopSession_0000075C:
     addi r11, r1, 0xa0
     bl _restgpr_14
     lwz r0, 0xa4(r1)
@@ -1487,7 +1487,7 @@ lbl_fn_804A4CE4_00001354:
     mr r3, r31
     addi r4, r30, 0x1a4
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F7590
+    bl save_writeBackupSlot
     addi r5, r1, 0x28
     psq_l f1, 0x0(r29), 0, 0
     psq_l f2, 0x8(r29), 0, 0
@@ -1495,7 +1495,7 @@ lbl_fn_804A4CE4_00001354:
     psq_st f1, 0x0(r5), 0, 0
     addi r4, r30, 0x1ab
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F7590
+    bl save_writeBackupSlot
     addi r5, r1, 0x18
     psq_l f1, 0x0(r29), 0, 0
     psq_l f2, 0x8(r29), 0, 0
@@ -1503,7 +1503,7 @@ lbl_fn_804A4CE4_00001354:
     psq_st f1, 0x0(r5), 0, 0
     addi r4, r30, 0x1b3
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F7590
+    bl save_writeBackupSlot
     addi r5, r1, 0x8
     psq_l f1, 0x0(r29), 0, 0
     psq_l f2, 0x8(r29), 0, 0
@@ -1511,7 +1511,7 @@ lbl_fn_804A4CE4_00001354:
     psq_st f1, 0x0(r5), 0, 0
     addi r4, r30, 0x1bd
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F7590
+    bl save_writeBackupSlot
     lwz r0, 0x94(r1)
     lwz r31, 0x8c(r1)
     lwz r30, 0x88(r1)
@@ -1597,7 +1597,7 @@ asm void fn_804A4EEC(void)
     beq lbl_fn_804A4EEC_00001538
     lwz r3, 0x78(r29)
     bl perf_getMetricValue
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     lfs f0, lbl_80887220
     lwz r3, 0x78(r29)
     fsubs f31, f1, f0
@@ -1763,7 +1763,7 @@ asm void fn_804A5160(void)
     beq lbl_fn_804A5160_000017AC
     lwz r3, 0x78(r29)
     bl perf_getMetricValue
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     lfs f0, lbl_80887220
     lwz r3, 0x78(r29)
     fsubs f31, f1, f0
@@ -1853,7 +1853,7 @@ lbl_fn_804A5160_000018A4:
     blr
 }
 
-asm void fn_804A53D4(void)
+asm void net_broadcastCoopPacket(void)
 {
     nofralloc
     stwu r1, -0x70(r1)
@@ -1869,13 +1869,13 @@ asm void fn_804A53D4(void)
     mr r30, r6
     cmpwi r4, 0x4
     mr r31, r7
-    bge lbl_fn_804A53D4_000019FC
+    bge lbl_net_broadcastCoopPacket_000019FC
     slwi r0, r4, 2
     stw r4, 0x88(r3)
     add r3, r3, r0
     lwz r3, 0x8c(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_804A53D4_000019FC
+    beq lbl_net_broadcastCoopPacket_000019FC
     lis r26, lbl_807573D0@ha
     lfs f1, 0x0(r6)
     addi r26, r26, lbl_807573D0@l
@@ -1913,12 +1913,12 @@ asm void fn_804A53D4(void)
     lwz r3, 0x8c(r3)
     bl save_computeCrc32
     cmpwi r31, 0x0
-    beq lbl_fn_804A53D4_000019FC
+    beq lbl_net_broadcastCoopPacket_000019FC
     lwz r0, 0x88(r27)
     slwi r0, r0, 2
     add r3, r27, r0
     lwz r3, 0x8c(r3)
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     lwz r0, 0x88(r27)
     lfs f0, lbl_80887220
     slwi r0, r0, 2
@@ -1926,12 +1926,12 @@ asm void fn_804A53D4(void)
     fsubs f0, f1, f0
     lwz r3, 0x8c(r3)
     stfs f0, 0x50(r3)
-lbl_fn_804A53D4_000019FC:
+lbl_net_broadcastCoopPacket_000019FC:
     cmpwi r28, 0x0
-    beq lbl_fn_804A53D4_00001AF4
+    beq lbl_net_broadcastCoopPacket_00001AF4
     lwz r0, 0x9c(r27)
     cmplwi r0, 0x4
-    bge lbl_fn_804A53D4_00001AF4
+    bge lbl_net_broadcastCoopPacket_00001AF4
     li r0, 0x0
     stw r0, 0x8(r1)
     addi r3, r1, 0x10
@@ -1941,16 +1941,16 @@ lbl_fn_804A53D4_000019FC:
     bl memset
     cmpwi r29, 0x0
     stw r28, 0x8(r1)
-    beq lbl_fn_804A53D4_00001A44
+    beq lbl_net_broadcastCoopPacket_00001A44
     mr r4, r29
     addi r3, r1, 0x10
     bl strcpy
-lbl_fn_804A53D4_00001A44:
+lbl_net_broadcastCoopPacket_00001A44:
     lwz r0, 0x9c(r27)
     mulli r0, r0, 0x48
     add r0, r27, r0
     addic. r4, r0, 0xa0
-    beq lbl_fn_804A53D4_00001AE8
+    beq lbl_net_broadcastCoopPacket_00001AE8
     lwz r0, 0x8(r1)
     stw r0, 0x0(r4)
     lwz r0, 0xc(r1)
@@ -1987,11 +1987,11 @@ lbl_fn_804A53D4_00001A44:
     lwz r3, 0x48(r1)
     stw r3, 0x40(r4)
     stw r0, 0x44(r4)
-lbl_fn_804A53D4_00001AE8:
+lbl_net_broadcastCoopPacket_00001AE8:
     lwz r3, 0x9c(r27)
     addi r0, r3, 0x1
     stw r0, 0x9c(r27)
-lbl_fn_804A53D4_00001AF4:
+lbl_net_broadcastCoopPacket_00001AF4:
     addi r11, r1, 0x70
     bl _restgpr_26
     lwz r0, 0x74(r1)

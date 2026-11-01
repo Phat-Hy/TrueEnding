@@ -50,7 +50,7 @@ extern void fn_80718ED0(void);
 extern void fn_80718F50(void);
 extern void net_packetDebugLog(void);
 extern void fn_80724E90(void);
-extern void fn_80725170(void);
+extern void net_listClearAll(void);
 extern void fn_80726310(void);
 extern void fn_807263E0(void);
 extern void fn_80726470(void);
@@ -97,28 +97,28 @@ extern u32 lbl_80880558;
 /* Function declarations */
 void fn_8059DA90(void);
 void fn_8059DB5C(void);
-void fn_8059DC60(void);
+u32 fn_8059DC60(void);
 void fn_8059DC68(void);
 void fn_8059DD4C(void);
 void fn_8059DE68(void);
 void fn_8059DF58(void);
 void fn_8059E018(void);
-void fn_8059E0A8(void);
-void fn_8059E0B0(void);
-void fn_8059E0B8(void);
-void fn_8059E0C0(void);
-void fn_8059E0C8(void);
-void fn_8059E0D0(void);
-void fn_8059E0D8(void);
-void fn_8059E0E0(void);
-void fn_8059E0E8(void);
+u32 fn_8059E0A8(void);
+u32 fn_8059E0B0(void);
+u32 fn_8059E0B8(void);
+u32 fn_8059E0C0(void);
+u32 fn_8059E0C8(void);
+u32 fn_8059E0D0(void);
+u32 fn_8059E0D8(void);
+u8 fn_8059E0E0(void *p);
+u32 fn_8059E0E8(void);
 void fn_8059E0F0(void);
 void fn_8059E144(void);
-void fn_8059E198(void);
-void fn_8059E1A0(void);
+void *fn_8059E198(void);
+u32 fn_8059E1A0(void *p);
 void fn_8059E1A8(void);
-void fn_8059E1B8(void);
-void fn_8059E1C0(void);
+u32 fn_8059E1B8(void);
+u32 fn_8059E1C0(void);
 void fn_8059E1C8(void);
 void fn_8059E220(void);
 void fn_8059E244(void);
@@ -301,11 +301,9 @@ lbl_fn_8059DB5C_000001B0:
     blr
 }
 
-asm void fn_8059DC60(void)
+u32 fn_8059DC60(void)
 {
-    nofralloc
-    li r3, 0x78
-    blr
+    return 0x78;
 }
 
 asm void fn_8059DC68(void)
@@ -634,67 +632,49 @@ lbl_fn_8059E018_00000610:
     b fn_80726310
 }
 
-asm void fn_8059E0A8(void)
+u32 fn_8059E0A8(void)
 {
-    nofralloc
-    li r3, 0x20
-    blr
+    return 0x20;
 }
 
-asm void fn_8059E0B0(void)
+u32 fn_8059E0B0(void)
 {
-    nofralloc
-    li r3, 0x20
-    blr
+    return 0x20;
 }
 
-asm void fn_8059E0B8(void)
+u32 fn_8059E0B8(void)
 {
-    nofralloc
-    li r3, 0x4
-    blr
+    return 4;
 }
 
-asm void fn_8059E0C0(void)
+u32 fn_8059E0C0(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
-asm void fn_8059E0C8(void)
+u32 fn_8059E0C8(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_8059E0D0(void)
+u32 fn_8059E0D0(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
-asm void fn_8059E0D8(void)
+u32 fn_8059E0D8(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
-asm void fn_8059E0E0(void)
+u8 fn_8059E0E0(void *p)
 {
-    nofralloc
-    lbz r3, 0x6c(r3)
-    blr
+    return *(u8 *)((u8 *)p + 0x6c);
 }
 
-asm void fn_8059E0E8(void)
+u32 fn_8059E0E8(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8059E0F0(void)
@@ -751,18 +731,14 @@ lbl_fn_8059E144_000006F4:
     blr
 }
 
-asm void fn_8059E198(void)
+void *fn_8059E198(void)
 {
-    nofralloc
-    la r3, lbl_80880558
-    blr
+    return &lbl_80880558;
 }
 
-asm void fn_8059E1A0(void)
+u32 fn_8059E1A0(void *p)
 {
-    nofralloc
-    lwz r3, 0x74(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x74);
 }
 
 asm void fn_8059E1A8(void)
@@ -774,18 +750,14 @@ asm void fn_8059E1A8(void)
     blr
 }
 
-asm void fn_8059E1B8(void)
+u32 fn_8059E1B8(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_8059E1C0(void)
+u32 fn_8059E1C0(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8059E1C8(void)
@@ -1491,7 +1463,7 @@ asm void fn_8059E9A8(void)
     mr r30, r3
     beq lbl_fn_8059E9A8_00000F54
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
     cmpwi r31, 0x0
     ble lbl_fn_8059E9A8_00000F54
     mr r3, r30
@@ -1530,7 +1502,7 @@ asm void fn_8059EA18(void)
     mr r30, r3
     beq lbl_fn_8059EA18_00000FC4
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
     cmpwi r31, 0x0
     ble lbl_fn_8059EA18_00000FC4
     mr r3, r30
@@ -1569,7 +1541,7 @@ asm void fn_8059EA88(void)
     mr r30, r3
     beq lbl_fn_8059EA88_00001034
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
     cmpwi r31, 0x0
     ble lbl_fn_8059EA88_00001034
     mr r3, r30
@@ -1631,21 +1603,21 @@ asm void fn_8059EB20(void)
     addic. r3, r0, 0x4
     beq lbl_fn_8059EB20_000010EC
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_8059EB20_000010EC:
     addic. r0, r30, 0x6c
     beq lbl_fn_8059EB20_00001104
     addic. r3, r0, 0x4
     beq lbl_fn_8059EB20_00001104
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_8059EB20_00001104:
     addic. r0, r30, 0x44
     beq lbl_fn_8059EB20_0000111C
     addic. r3, r0, 0x4
     beq lbl_fn_8059EB20_0000111C
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_8059EB20_0000111C:
     cmpwi r31, 0x0
     ble lbl_fn_8059EB20_0000112C

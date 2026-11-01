@@ -11,9 +11,9 @@ extern void fn_8004CB70(void);
 extern void fn_8004CBB0(void);
 extern void fn_800502A8(void);
 extern void fn_80051A88(void);
-extern void fn_80051B70(void);
+extern void player_stepMovement(void);
 extern void fn_80051C10(void);
-extern void fn_80051CD8(void);
+extern void player_transformBoundingSphere(void);
 extern void fn_80051E90(void);
 extern void fn_800520F0(void);
 extern void fn_800523A0(void);
@@ -43,7 +43,7 @@ extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void PSVECCrossProduct(void);
-extern void fn_80614790(void);
+extern void GXBegin(void);
 
 /* External data declarations */
 extern u8 lbl_80777588[];
@@ -74,9 +74,9 @@ void atn_ColliBox_testSphere(void);
 void atn_ColliBox_testCapsule(void);
 void atn_ColliBox_testBox(void);
 void atn_ColliBox_getAABB(void);
-void fn_80057F28(void);
+void mission_initPathTracker(void);
 void atn_LH_ColliObject_destructor(void);
-void fn_80058078(void);
+void mission_clearPathTracker(void);
 void mission_isObjectiveActive(void);
 void atn_ColliObject_testRay(void);
 void atn_ColliObject_testSphere(void);
@@ -229,7 +229,7 @@ asm void atn_ColliBox_testRay(void)
     ble lbl_atn_ColliBox_testRay_00000218
     mr r3, r27
     addi r4, r24, 0x3c
-    bl fn_80051CD8
+    bl player_transformBoundingSphere
     cmpwi r3, 0x0
     beq lbl_atn_ColliBox_testRay_00000218
     addi r30, r24, 0x78
@@ -462,7 +462,7 @@ asm void atn_ColliBox_getAABB(void)
     blr
 }
 
-asm void fn_80057F28(void)
+asm void mission_initPathTracker(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -492,10 +492,10 @@ asm void fn_80057F28(void)
     bl memset
     lwz r3, lbl_8087EE98
     cmpwi r3, 0x0
-    beq lbl_fn_80057F28_0000053C
+    beq lbl_mission_initPathTracker_0000053C
     mr r4, r30
     bl fn_8004CB70
-lbl_fn_80057F28_0000053C:
+lbl_mission_initPathTracker_0000053C:
     lis r3, lbl_807775C0@ha
     addi r31, r30, 0x3c
     addi r3, r3, lbl_807775C0@l
@@ -558,7 +558,7 @@ lbl_atn_LH_ColliObject_destructor_000005F8:
     blr
 }
 
-asm void fn_80058078(void)
+asm void mission_clearPathTracker(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -710,7 +710,7 @@ asm void atn_ColliObject_testSphere(void)
     mr r31, r8
     mr r3, r29
     addi r4, r26, 0x78
-    bl fn_80051B70
+    bl player_stepMovement
     cmpwi r3, 0x0
     bne lbl_atn_ColliObject_testSphere_0000081C
     li r3, 0x0
@@ -1057,7 +1057,7 @@ lbl_fn_800584D8_00000B24:
     psq_l f1, 0x0(r20), 0, 0
     psq_st f1, 0x0(r21), 0, 0
     stfs f2, 0x70(r1)
-    bl fn_80614790
+    bl GXBegin
     lfs f0, 0x80(r1)
     addi r19, r19, 0x1
     stfs f0, -0x8000(r30)
@@ -1903,7 +1903,7 @@ lbl_fn_80059264_00001894:
     li r3, 0xb0
     li r4, 0x0
     li r5, 0x4
-    bl fn_80614790
+    bl GXBegin
     lfs f2, 0x10(r19)
     rotlwi r0, r21, 8
     lfs f1, 0xc(r19)
@@ -2281,7 +2281,7 @@ asm void fn_80059784(void)
 lbl_fn_80059784_00001D8C:
     mr r3, r28
     mr r4, r8
-    bl fn_80051B70
+    bl player_stepMovement
     cmpwi r3, 0x0
     bne lbl_fn_80059784_00001DA8
     li r3, 0x0

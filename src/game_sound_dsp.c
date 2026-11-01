@@ -30,16 +30,16 @@ extern void assert_formatLocation(void);
 extern void fn_80206D18(void);
 extern void time_wrapMilliseconds(void);
 extern void rand_scaleRangeInt(void);
-extern void fn_8020EF4C(void);
+extern void rand_stepEntropy(void);
 extern void random_generateValue(void);
-extern void fn_8020EFEC(void);
+extern void time_ticksToSeconds(void);
 extern void fn_8020F0AC(void);
 extern void event_findEntryById(void);
 extern void fn_802114D8(void);
 extern void fn_802114E0(void);
 extern void fn_80218BB4(void);
 extern void fn_80218BC4(void);
-extern void fn_80219544(void);
+extern void task_getWorkerByIndex(void);
 extern void gmk_findSlotByIndex(void);
 extern void fn_8044D034(void);
 extern void wcscmp(void);
@@ -837,7 +837,7 @@ lbl_fn_801DD26C_00000A40:
     bl fn_801D80A0
     mr r23, r3
     lwz r3, 0x0(r24)
-    bl fn_80219544
+    bl task_getWorkerByIndex
     lwzx r4, r28, r23
     mr r18, r3
     mr r3, r25
@@ -888,7 +888,7 @@ lbl_fn_801DD26C_00000AF0:
     cmpwi r3, 0x0
     beq lbl_fn_801DD26C_00000C5C
     lwz r3, 0x4(r31)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     cmpwi r3, 0x0
     mr r23, r3
     beq lbl_fn_801DD26C_00000C5C
@@ -897,7 +897,7 @@ lbl_fn_801DD26C_00000AF0:
     bne lbl_fn_801DD26C_00000C5C
     cmpwi r0, 0x1
     bne lbl_fn_801DD26C_00000B54
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     bne lbl_fn_801DD26C_00000C5C
 lbl_fn_801DD26C_00000B54:
@@ -991,7 +991,7 @@ lbl_fn_801DD26C_00000C60:
     lwz r4, 0x0(r29)
     li r3, 0x0
     bl time_wrapMilliseconds
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_801DD26C_00000D54
     li r16, 0x0
@@ -1033,7 +1033,7 @@ lbl_fn_801DD26C_00000CF0:
     li r3, 0x0
     lwz r4, 0x8(r4)
     bl time_wrapMilliseconds
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     bne lbl_fn_801DD26C_00000D40
     mr r4, r16

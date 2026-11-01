@@ -6,7 +6,7 @@ extern void __files(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_80041C0C(void);
+extern void menu_destroyObject(void);
 extern void sound_releaseChannel(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
@@ -32,7 +32,7 @@ extern void fn_8046D1EC(void);
 extern void fn_8046F5CC(void);
 extern void fn_8046F834(void);
 extern void fn_80470364(void);
-extern void fn_80470528(void);
+extern void boss_releaseLaserTarget(void);
 extern void fn_804714A4(void);
 extern void fn_804714B0(void);
 extern void fn_80472FAC(void);
@@ -996,8 +996,8 @@ asm void atn_LoadMotionCommandData_slot0(void)
     lwz r3, 0x2c(r31)
     cmpwi r3, 0x0
     beq lbl_atn_LoadMotionCommandData_slot0_00000B44
-    lis r4, fn_80041C0C@ha
-    addi r4, r4, fn_80041C0C@l
+    lis r4, menu_destroyObject@ha
+    addi r4, r4, menu_destroyObject@l
     bl __destroy_arr
 lbl_atn_LoadMotionCommandData_slot0_00000B44:
     addic. r0, r31, 0x18
@@ -1329,7 +1329,7 @@ asm void atn_LoadMotionCommandData_constructor(void)
     beq lbl_atn_LoadMotionCommandData_constructor_00000FE4
     addic. r3, r3, 0x6c
     beq lbl_atn_LoadMotionCommandData_constructor_00000F9C
-    bl fn_80470528
+    bl boss_releaseLaserTarget
 lbl_atn_LoadMotionCommandData_constructor_00000F9C:
     addic. r0, r30, 0x5c
     beq lbl_atn_LoadMotionCommandData_constructor_00000FC8
@@ -1407,7 +1407,7 @@ lbl_atn_LoadMotionCommandData_destructor_00001084:
     cmpwi r30, 0x0
     beq lbl_atn_LoadMotionCommandData_destructor_000010BC
     addi r3, r28, 0x6c
-    bl fn_80470528
+    bl boss_releaseLaserTarget
     mr r3, r28
     li r4, 0x3
     bl fn_80473104

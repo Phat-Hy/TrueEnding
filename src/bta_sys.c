@@ -47,7 +47,7 @@ extern void fn_80633C38(void);
 extern void fn_80635694(void);
 extern void fn_80636DF4(void);
 extern void fn_8063A1C0(void);
-extern void fn_8063A778(void);
+extern void btm_sec_dispatchCallback(void);
 extern void fn_8063B1E4(void);
 extern void fn_8063B41C(void);
 extern void fn_8063B448(void);
@@ -146,7 +146,7 @@ void fn_806299F0(void);
 void fn_80629A30(void);
 void fn_80629A60(void);
 void fn_80629AA0(void);
-void fn_80629E20(void);
+void bta_sys_sendmsg(void);
 void fn_80629E90(void);
 void bd_addr_copy(void);
 void fn_80629ED8(void);
@@ -1698,7 +1698,7 @@ lbl_fn_80629AA0_000014CC:
     b lbl_fn_80629AA0_00001554
 lbl_fn_80629AA0_000014E0:
     mr r3, r27
-    bl fn_8063A778
+    bl btm_sec_dispatchCallback
     b lbl_fn_80629AA0_00001554
 lbl_fn_80629AA0_000014EC:
     li r26, 0x0
@@ -1888,7 +1888,7 @@ lbl_fn_80629AA0_00001734:
     blr
 }
 
-asm void fn_80629E20(void)
+asm void bta_sys_sendmsg(void)
 {
     nofralloc
     stwu r1, -0x20(r1)

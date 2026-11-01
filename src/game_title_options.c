@@ -9,7 +9,7 @@ extern void talk_parseDialogueTokens(void);
 extern void talk_copyUtf16String(void);
 extern void skill_calculateDamage(void);
 extern void fn_8006BA8C(void);
-extern void fn_8006BB6C(void);
+extern void boss_triggerEventAction(void);
 extern void fn_8006F420(void);
 extern void str_assignBuffer(void);
 extern void mem_alloc(void);
@@ -623,7 +623,7 @@ lbl_fn_803B2A68_000005DC:
     bl memcpy
     mr r3, r30
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
     lwz r3, lbl_8087F460
     bl fn_803BE850
     li r0, 0x4

@@ -17,7 +17,7 @@ extern void fn_80154344(void);
 extern void equip_applyToCharacter(void);
 extern void inventory_calcTotalStats(void);
 extern void battle_generateLootDrops(void);
-extern void fn_80192758(void);
+extern void map_processStreamChunk(void);
 extern void fn_801B2EDC(void);
 extern void fn_801B618C(void);
 extern void chest_spawnLoot(void);
@@ -1046,7 +1046,7 @@ lbl_fn_801B47EC_00000D30:
     stw r0, 0x0(r31)
     b lbl_fn_801B47EC_00000D40
 lbl_fn_801B47EC_00000D3C:
-    bl fn_80192758
+    bl map_processStreamChunk
 lbl_fn_801B47EC_00000D40:
     addi r11, r1, 0x240
     bl _restgpr_26

@@ -37,9 +37,9 @@ extern void fn_8008A4E0(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void minimap_renderOverlay(void);
-extern void fn_800902C0(void);
+extern void radar_addBlipEntry(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_8009373C(void);
+extern void target_findEntryByName(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
@@ -47,7 +47,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_800E0AA8(void);
+extern void particle_getEmitterContext(void);
 extern void fn_8011D424(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
@@ -62,7 +62,7 @@ extern void fn_8032AC1C(void);
 extern void fn_8032AF90(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
-extern void fn_803EC758(void);
+extern void barrier_formatCountdownTimer(void);
 extern void task_updateWorker(void);
 extern void fn_803ED610(void);
 extern void fn_803EDCF4(void);
@@ -633,7 +633,7 @@ lbl_fn_8043C508_000005F4:
     addi r5, r1, 0xb0
     stw r0, 0xb0(r1)
     li r4, 0x0
-    bl fn_800902C0
+    bl radar_addBlipEntry
     addic. r3, r1, 0xb0
     beq lbl_fn_8043C508_0000064C
     lwz r4, 0xb0(r1)
@@ -2273,7 +2273,7 @@ lbl_fn_8043DD78_00001CEC:
     addi r30, r30, 0x1
 lbl_fn_8043DD78_00001D1C:
     addi r3, r29, 0x124
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     cmplw r30, r3
     blt lbl_fn_8043DD78_00001CEC
     lwz r0, 0x784(r1)
@@ -2671,7 +2671,7 @@ asm void fn_8043E580(void)
     addi r4, r1, 0x8
     stw r29, 0x34(r1)
     mr r29, r3
-    bl fn_803EC758
+    bl barrier_formatCountdownTimer
     lwz r0, 0xf0(r29)
     cmpwi r0, 0x0
     bne lbl_fn_8043E580_000022AC
@@ -3628,7 +3628,7 @@ lbl_fn_8043F24C_00002FE8:
     addi r3, r31, 0x10
     addi r4, r4, lbl_80754498@l
     addi r4, r4, 0x10
-    bl fn_8009373C
+    bl target_findEntryByName
     cmpwi r30, 0x0
     beq lbl_fn_8043F24C_00003258
     lwz r0, 0x2a8(r31)
@@ -3769,7 +3769,7 @@ lbl_fn_8043F24C_000031F8:
     li r4, 0x0
     stw r0, 0x50(r1)
     lwz r3, 0x2a8(r31)
-    bl fn_800902C0
+    bl radar_addBlipEntry
     addic. r3, r1, 0x50
     beq lbl_fn_8043F24C_00003250
     lwz r4, 0x50(r1)

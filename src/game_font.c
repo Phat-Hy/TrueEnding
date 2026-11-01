@@ -22,7 +22,7 @@ extern void str_findChar(void);
 extern void fn_801F0758(void);
 extern void save_validateHeader(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801FEC74(void);
+extern void thread_findQueueTaskByName(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void fn_8061E370(void);
@@ -89,9 +89,9 @@ void fn_800A2D60(void);
 void fn_800A2DE0(void);
 void fn_800A4228(void);
 void fn_800A4244(void);
-void fn_800A4450(void);
+void font_getGlyphEntryByIndex(void);
 void fn_800A4460(void);
-void fn_800A4494(void);
+void font_mapErrorCode(void);
 void fn_800A45D0(void);
 void fn_800A472C(void);
 void fn_800A4794(void);
@@ -438,7 +438,7 @@ lbl_fn_800A2DE0_00000520:
     bl fn_80620220
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     stw r3, 0x158(r31)
     b lbl_fn_800A2DE0_00000730
 lbl_fn_800A2DE0_00000588:
@@ -516,7 +516,7 @@ lbl_fn_800A2DE0_00000684:
     b lbl_fn_800A2DE0_000006A4
 lbl_fn_800A2DE0_00000694:
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     stw r3, 0x158(r31)
     li r0, 0x0
 lbl_fn_800A2DE0_000006A4:
@@ -536,7 +536,7 @@ lbl_fn_800A2DE0_000006A4:
     bl fn_8061F9F0
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     stw r3, 0x158(r31)
     b lbl_fn_800A2DE0_00000730
 lbl_fn_800A2DE0_000006F0:
@@ -554,7 +554,7 @@ lbl_fn_800A2DE0_000006F0:
     bl fn_8061E370
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     stw r3, 0x158(r31)
 lbl_fn_800A2DE0_00000730:
     lwz r5, 0x158(r31)
@@ -648,7 +648,7 @@ lbl_fn_800A2DE0_00000850:
     bl fn_8061E370
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     cmpwi r3, 0x0
     stw r3, 0x158(r31)
     beq lbl_fn_800A2DE0_000018B0
@@ -678,7 +678,7 @@ lbl_fn_800A2DE0_000008C4:
     bl fn_8061EC60
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     cmpwi r3, 0x0
     stw r3, 0x158(r31)
     beq lbl_fn_800A2DE0_000018B0
@@ -789,7 +789,7 @@ lbl_fn_800A2DE0_00000A64:
     bl fn_8061F9F0
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     cmpwi r3, 0x0
     stw r3, 0x158(r31)
     beq lbl_fn_800A2DE0_000018B0
@@ -878,7 +878,7 @@ lbl_fn_800A2DE0_00000BAC:
     bl fn_8061F9F0
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     cmpwi r3, 0x0
     stw r3, 0x158(r31)
     beq lbl_fn_800A2DE0_000018B0
@@ -953,7 +953,7 @@ lbl_fn_800A2DE0_00000C84:
     bl fn_8061E8C0
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     cmpwi r3, 0x0
     stw r3, 0x158(r31)
     beq lbl_fn_800A2DE0_000018B0
@@ -981,7 +981,7 @@ lbl_fn_800A2DE0_00000C84:
     bl fn_8061FBE0
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     b lbl_fn_800A2DE0_000018B0
 lbl_fn_800A2DE0_00000D80:
     lwz r28, 0x154(r3)
@@ -1001,7 +1001,7 @@ lbl_fn_800A2DE0_00000D80:
     bl fn_8061E9E0
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     stw r3, 0x158(r31)
     b lbl_fn_800A2DE0_00000E18
 lbl_fn_800A2DE0_00000DD0:
@@ -1021,7 +1021,7 @@ lbl_fn_800A2DE0_00000DD0:
     bl fn_8061E8C0
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     stw r3, 0x158(r31)
 lbl_fn_800A2DE0_00000E18:
     lwz r7, 0x158(r31)
@@ -1047,7 +1047,7 @@ lbl_fn_800A2DE0_00000E18:
     bl fn_80620BD0
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     b lbl_fn_800A2DE0_000018B0
 lbl_fn_800A2DE0_00000E7C:
     li r0, 0xe
@@ -1066,7 +1066,7 @@ lbl_fn_800A2DE0_00000E7C:
     bl fn_8061E8C0
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     cmpwi r3, 0x0
     stw r3, 0x158(r31)
     beq lbl_fn_800A2DE0_000018B0
@@ -1090,7 +1090,7 @@ lbl_fn_800A2DE0_00000E7C:
     bl fn_8061FBE0
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     b lbl_fn_800A2DE0_000018B0
 lbl_fn_800A2DE0_00000F24:
     lwz r28, 0x154(r3)
@@ -1110,7 +1110,7 @@ lbl_fn_800A2DE0_00000F24:
     bl fn_8061E9E0
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     stw r3, 0x158(r31)
     b lbl_fn_800A2DE0_00000FBC
 lbl_fn_800A2DE0_00000F74:
@@ -1130,7 +1130,7 @@ lbl_fn_800A2DE0_00000F74:
     bl fn_8061E7D0
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     stw r3, 0x158(r31)
 lbl_fn_800A2DE0_00000FBC:
     lwz r7, 0x158(r31)
@@ -1156,7 +1156,7 @@ lbl_fn_800A2DE0_00000FBC:
     bl fn_80620BD0
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     b lbl_fn_800A2DE0_000018B0
 lbl_fn_800A2DE0_00001020:
     beq cr1, lbl_fn_800A2DE0_00001074
@@ -1178,7 +1178,7 @@ lbl_fn_800A2DE0_00001020:
     bl fn_80620BD0
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     b lbl_fn_800A2DE0_000018B0
 lbl_fn_800A2DE0_00001074:
     li r0, 0x0
@@ -1206,7 +1206,7 @@ lbl_fn_800A2DE0_00001080:
     bl fn_80620BD0
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     b lbl_fn_800A2DE0_00001110
 lbl_fn_800A2DE0_000010DC:
     li r0, 0x12
@@ -1221,7 +1221,7 @@ lbl_fn_800A2DE0_000010DC:
     bl fn_8061FBE0
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
 lbl_fn_800A2DE0_00001110:
     li r0, 0x0
     stw r0, 0x15c(r31)
@@ -1254,7 +1254,7 @@ lbl_fn_800A2DE0_00001148:
     bl fn_8061E8C0
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     cmpwi r3, 0x0
     stw r3, 0x158(r31)
     beq lbl_fn_800A2DE0_000018B0
@@ -1278,7 +1278,7 @@ lbl_fn_800A2DE0_00001148:
     bl fn_80620BD0
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     b lbl_fn_800A2DE0_000018B0
 lbl_fn_800A2DE0_000011F0:
     li r0, 0xc
@@ -1297,7 +1297,7 @@ lbl_fn_800A2DE0_000011F0:
     bl fn_8061E7D0
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     cmpwi r3, 0x0
     stw r3, 0x158(r31)
     beq lbl_fn_800A2DE0_000018B0
@@ -1321,7 +1321,7 @@ lbl_fn_800A2DE0_000011F0:
     bl fn_80620BD0
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     b lbl_fn_800A2DE0_000018B0
 lbl_fn_800A2DE0_00001298:
     lwz r4, 0x48(r3)
@@ -1343,7 +1343,7 @@ lbl_fn_800A2DE0_00001298:
     bl fn_80620BD0
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     b lbl_fn_800A2DE0_000018B0
     lwz r6, 0x158(r3)
     cmpwi r6, 0x0
@@ -1372,7 +1372,7 @@ lbl_fn_800A2DE0_00001318:
     bl fn_8061FBE0
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     cmpwi r3, 0x0
     stw r3, 0x158(r31)
     beq lbl_fn_800A2DE0_000018B0
@@ -1400,7 +1400,7 @@ lbl_fn_800A2DE0_00001390:
     bl fn_80620830
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     cmpwi r3, 0x0
     stw r3, 0x158(r31)
     beq lbl_fn_800A2DE0_000018B0
@@ -1428,7 +1428,7 @@ lbl_fn_800A2DE0_000013FC:
     bl fn_8061FBE0
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     cmpwi r3, 0x0
     stw r3, 0x158(r31)
     beq lbl_fn_800A2DE0_000018B0
@@ -1469,7 +1469,7 @@ lbl_fn_800A2DE0_00001498:
     bl fn_80620BD0
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     b lbl_fn_800A2DE0_000018B0
     lwz r7, 0x158(r3)
     cmpwi r7, 0x0
@@ -1493,7 +1493,7 @@ lbl_fn_800A2DE0_000014F4:
     bl fn_80620830
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     cmpwi r3, 0x0
     stw r3, 0x158(r31)
     beq lbl_fn_800A2DE0_000018B0
@@ -1532,7 +1532,7 @@ lbl_fn_800A2DE0_0000156C:
     bl fn_80620BD0
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     b lbl_fn_800A2DE0_000018B0
     lwz r4, 0x158(r3)
     cmpwi r4, 0x0
@@ -1644,7 +1644,7 @@ lbl_fn_800A2DE0_00001740:
     bl fn_8061EF10
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     lwz r0, 0x3c(r1)
     mr r29, r3
     srwi. r0, r0, 31
@@ -1857,7 +1857,7 @@ lbl_fn_800A4244_00001A38:
     addi r30, r30, lbl_807327B4@l
     addi r4, r30, 0x2f
     addi r3, r3, 0x58
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_800A4244_00001B10
@@ -1873,7 +1873,7 @@ lbl_fn_800A4244_00001A38:
     addi r3, r1, 0x8
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x8(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31
@@ -1920,7 +1920,7 @@ lbl_fn_800A4244_00001B10:
     blr
 }
 
-asm void fn_800A4450(void)
+asm void font_getGlyphEntryByIndex(void)
 {
     nofralloc
     slwi r0, r6, 3
@@ -1949,110 +1949,110 @@ lbl_fn_800A4460_00001B70:
     blr
 }
 
-asm void fn_800A4494(void)
+asm void font_mapErrorCode(void)
 {
     nofralloc
     cmpwi r4, -0xa
-    beq lbl_fn_800A4494_00001C64
-    bge lbl_fn_800A4494_00001BCC
+    beq lbl_font_mapErrorCode_00001C64
+    bge lbl_font_mapErrorCode_00001BCC
     cmpwi r4, -0x10
-    beq lbl_fn_800A4494_00001C94
-    bge lbl_fn_800A4494_00001BA8
+    beq lbl_font_mapErrorCode_00001C94
+    bge lbl_font_mapErrorCode_00001BA8
     cmpwi r4, -0x40
-    beq lbl_fn_800A4494_00001C9C
-    bge lbl_fn_800A4494_00001CAC
+    beq lbl_font_mapErrorCode_00001C9C
+    bge lbl_font_mapErrorCode_00001CAC
     cmpwi r4, -0x80
-    beq lbl_fn_800A4494_00001CA4
-    b lbl_fn_800A4494_00001CAC
-lbl_fn_800A4494_00001BA8:
+    beq lbl_font_mapErrorCode_00001CA4
+    b lbl_font_mapErrorCode_00001CAC
+lbl_font_mapErrorCode_00001BA8:
     cmpwi r4, -0xd
-    beq lbl_fn_800A4494_00001C7C
-    bge lbl_fn_800A4494_00001BC0
+    beq lbl_font_mapErrorCode_00001C7C
+    bge lbl_font_mapErrorCode_00001BC0
     cmpwi r4, -0xe
-    bge lbl_fn_800A4494_00001C84
-    b lbl_fn_800A4494_00001C8C
-lbl_fn_800A4494_00001BC0:
+    bge lbl_font_mapErrorCode_00001C84
+    b lbl_font_mapErrorCode_00001C8C
+lbl_font_mapErrorCode_00001BC0:
     cmpwi r4, -0xb
-    bge lbl_fn_800A4494_00001C6C
-    b lbl_fn_800A4494_00001C74
-lbl_fn_800A4494_00001BCC:
+    bge lbl_font_mapErrorCode_00001C6C
+    b lbl_font_mapErrorCode_00001C74
+lbl_font_mapErrorCode_00001BCC:
     cmpwi r4, -0x4
-    beq lbl_fn_800A4494_00001C3C
-    bge lbl_fn_800A4494_00001BFC
+    beq lbl_font_mapErrorCode_00001C3C
+    bge lbl_font_mapErrorCode_00001BFC
     cmpwi r4, -0x7
-    beq lbl_fn_800A4494_00001CAC
-    bge lbl_fn_800A4494_00001BF0
+    beq lbl_font_mapErrorCode_00001CAC
+    bge lbl_font_mapErrorCode_00001BF0
     cmpwi r4, -0x8
-    bge lbl_fn_800A4494_00001C54
-    b lbl_fn_800A4494_00001C5C
-lbl_fn_800A4494_00001BF0:
+    bge lbl_font_mapErrorCode_00001C54
+    b lbl_font_mapErrorCode_00001C5C
+lbl_font_mapErrorCode_00001BF0:
     cmpwi r4, -0x5
-    bge lbl_fn_800A4494_00001C44
-    b lbl_fn_800A4494_00001C4C
-lbl_fn_800A4494_00001BFC:
+    bge lbl_font_mapErrorCode_00001C44
+    b lbl_font_mapErrorCode_00001C4C
+lbl_font_mapErrorCode_00001BFC:
     cmpwi r4, -0x1
-    beq lbl_fn_800A4494_00001C24
-    bge lbl_fn_800A4494_00001C14
+    beq lbl_font_mapErrorCode_00001C24
+    bge lbl_font_mapErrorCode_00001C14
     cmpwi r4, -0x2
-    bge lbl_fn_800A4494_00001C2C
-    b lbl_fn_800A4494_00001C34
-lbl_fn_800A4494_00001C14:
+    bge lbl_font_mapErrorCode_00001C2C
+    b lbl_font_mapErrorCode_00001C34
+lbl_font_mapErrorCode_00001C14:
     cmpwi r4, 0x1
-    bge lbl_fn_800A4494_00001CAC
+    bge lbl_font_mapErrorCode_00001CAC
     li r3, 0x0
     blr
-lbl_fn_800A4494_00001C24:
+lbl_font_mapErrorCode_00001C24:
     li r3, 0x1
     blr
-lbl_fn_800A4494_00001C2C:
+lbl_font_mapErrorCode_00001C2C:
     li r3, 0x2
     blr
-lbl_fn_800A4494_00001C34:
+lbl_font_mapErrorCode_00001C34:
     li r3, 0x3
     blr
-lbl_fn_800A4494_00001C3C:
+lbl_font_mapErrorCode_00001C3C:
     li r3, 0x4
     blr
-lbl_fn_800A4494_00001C44:
+lbl_font_mapErrorCode_00001C44:
     li r3, 0x5
     blr
-lbl_fn_800A4494_00001C4C:
+lbl_font_mapErrorCode_00001C4C:
     li r3, 0x6
     blr
-lbl_fn_800A4494_00001C54:
+lbl_font_mapErrorCode_00001C54:
     li r3, 0x7
     blr
-lbl_fn_800A4494_00001C5C:
+lbl_font_mapErrorCode_00001C5C:
     li r3, 0x8
     blr
-lbl_fn_800A4494_00001C64:
+lbl_font_mapErrorCode_00001C64:
     li r3, 0x9
     blr
-lbl_fn_800A4494_00001C6C:
+lbl_font_mapErrorCode_00001C6C:
     li r3, 0xa
     blr
-lbl_fn_800A4494_00001C74:
+lbl_font_mapErrorCode_00001C74:
     li r3, 0xb
     blr
-lbl_fn_800A4494_00001C7C:
+lbl_font_mapErrorCode_00001C7C:
     li r3, 0xc
     blr
-lbl_fn_800A4494_00001C84:
+lbl_font_mapErrorCode_00001C84:
     li r3, 0xd
     blr
-lbl_fn_800A4494_00001C8C:
+lbl_font_mapErrorCode_00001C8C:
     li r3, 0xe
     blr
-lbl_fn_800A4494_00001C94:
+lbl_font_mapErrorCode_00001C94:
     li r3, 0xf
     blr
-lbl_fn_800A4494_00001C9C:
+lbl_font_mapErrorCode_00001C9C:
     li r3, 0x10
     blr
-lbl_fn_800A4494_00001CA4:
+lbl_font_mapErrorCode_00001CA4:
     li r3, 0x11
     blr
-lbl_fn_800A4494_00001CAC:
+lbl_font_mapErrorCode_00001CAC:
     li r3, 0x10
     blr
 }
@@ -2082,7 +2082,7 @@ asm void fn_800A45D0(void)
     mr r4, r3
     beq lbl_fn_800A45D0_00001D1C
     mr r3, r28
-    bl fn_800A4494
+    bl font_mapErrorCode
     stw r3, 0x0(r30)
     li r0, 0x0
     b lbl_fn_800A45D0_00001D70
@@ -2145,7 +2145,7 @@ lbl_fn_800A45D0_00001DD0:
     b lbl_fn_800A45D0_00001DF0
 lbl_fn_800A45D0_00001DE0:
     mr r3, r28
-    bl fn_800A4494
+    bl font_mapErrorCode
     stw r3, 0x0(r30)
     li r3, 0x0
 lbl_fn_800A45D0_00001DF0:
@@ -2177,7 +2177,7 @@ asm void fn_800A472C(void)
     mr r4, r3
     beq lbl_fn_800A472C_00001E5C
     mr r3, r30
-    bl fn_800A4494
+    bl font_mapErrorCode
     stw r3, 0x0(r31)
     li r3, 0x0
     b lbl_fn_800A472C_00001E60
@@ -2242,7 +2242,7 @@ lbl_fn_800A4794_00001ED8:
     bl fn_80622260
     mr r4, r3
     mr r3, r28
-    bl fn_800A4494
+    bl font_mapErrorCode
     cmpwi r3, 0x0
     stw r3, 0x0(r30)
     beq lbl_fn_800A4794_00001F70
@@ -2308,7 +2308,7 @@ lbl_fn_800A48B8_00002000:
     b lbl_fn_800A48B8_00002020
 lbl_fn_800A48B8_00002010:
     mr r3, r27
-    bl fn_800A4494
+    bl font_mapErrorCode
     stw r3, 0x158(r27)
     li r0, 0x0
 lbl_fn_800A48B8_00002020:
@@ -2401,7 +2401,7 @@ lbl_fn_800A49C4_00002108:
     bl fn_80620220
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     cmpwi r3, 0x0
     stw r3, 0x0(r29)
     beq lbl_fn_800A49C4_000021A0
@@ -2477,7 +2477,7 @@ lbl_fn_800A4AD4_00002218:
     bl fn_80622260
     mr r4, r3
     mr r3, r31
-    bl fn_800A4494
+    bl font_mapErrorCode
     cmpwi r3, 0x0
     stw r3, 0x0(r29)
     beq lbl_fn_800A4AD4_000022B0
@@ -2553,7 +2553,7 @@ lbl_fn_800A4BE4_00002328:
     bl fn_80620220
     mr r4, r3
     mr r3, r28
-    bl fn_800A4494
+    bl font_mapErrorCode
     cmpwi r3, 0x0
     stw r3, 0x0(r30)
     beq lbl_fn_800A4BE4_000023C0
@@ -2630,7 +2630,7 @@ lbl_fn_800A4D00_00002448:
     bl fn_8061E9E0
     mr r4, r3
     mr r3, r26
-    bl fn_800A4494
+    bl font_mapErrorCode
     cmpwi r3, 0x0
     stw r3, 0x0(r30)
     beq lbl_fn_800A4D00_000024D4
@@ -2701,7 +2701,7 @@ lbl_fn_800A4E08_0000254C:
     bl fn_80620830
     mr r4, r3
     mr r3, r29
-    bl fn_800A4494
+    bl font_mapErrorCode
     cmpwi r3, 0x0
     stw r3, 0x0(r30)
     beq lbl_fn_800A4E08_000025D0
@@ -2773,7 +2773,7 @@ lbl_fn_800A4F0C_0000264C:
     bl fn_8061E5C0
     mr r4, r3
     mr r3, r29
-    bl fn_800A4494
+    bl font_mapErrorCode
     cmpwi r3, 0x0
     stw r3, 0x0(r30)
     beq lbl_fn_800A4F0C_000026D0

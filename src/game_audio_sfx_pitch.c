@@ -9,7 +9,7 @@ extern void vec3_copy(void);
 extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011220(void);
+extern void math_fabsf(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
 extern void math_wrapAngle(void);
@@ -27,7 +27,7 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
 extern void proj_getMatrix(void);
-extern void fn_800F52F8(void);
+extern void proj_getGlobalManager(void);
 extern void fn_800F7260(void);
 extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
@@ -37,7 +37,7 @@ extern void viewport_getNextSequenceId(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80109950(void);
-extern void fn_801162A0(void);
+extern void vec3_sqMag(void);
 extern void enemy_stepBehavior(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80128930(void);
@@ -55,8 +55,8 @@ extern void fn_8013C3F4(void);
 extern void fn_8013C434(void);
 extern void fn_8013C478(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_801404F8(void);
-extern void fn_80140500(void);
+extern void quest_getGlobalManager(void);
+extern void quest_resetActiveObjectiveSlots(void);
 extern void quest_initMarkerCoords(void);
 extern void fn_80140588(void);
 extern void quest_updateFlow(void);
@@ -95,12 +95,12 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void rand_Mersenne_constructor(void);
-extern void fn_805A3D00(void);
+extern void rand_Mersenne_init(void);
 extern void fn_805A3D6C(void);
 extern void fn_805A40BC(void);
 extern void fn_805A4258(void);
 extern void fn_805A4984(void);
-extern void fn_805A4A20(void);
+extern void world_setFlagByType(void);
 extern void fn_805A4F20(void);
 extern void PSVECSquareMag(void);
 extern void strcmp(void);
@@ -422,7 +422,7 @@ lbl_fn_80313848_00000390:
 lbl_fn_80313848_000003BC:
     mr r3, r29
     li r4, 0x0
-    bl fn_805A3D00
+    bl rand_Mersenne_init
     cmpwi r30, 0x0
     ble lbl_fn_80313848_000003D8
     mr r3, r29
@@ -1618,7 +1618,7 @@ lbl_fn_80314384_00001460:
 lbl_fn_80314384_0000148C:
     lwz r5, 0x58(r5)
 lbl_fn_80314384_00001490:
-    bl fn_805A4A20
+    bl world_setFlagByType
 lbl_fn_80314384_00001494:
     lwz r3, 0xd1c(r31)
     mr r4, r31
@@ -1890,7 +1890,7 @@ lbl_fn_80314BD8_00001848:
     bl vec3_copy
     b lbl_fn_80314BD8_0000207C
 lbl_fn_80314BD8_00001878:
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_8013C434
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
@@ -1985,7 +1985,7 @@ lbl_fn_80314BD8_000019C0:
     addi r4, r1, 0x80
     bl vec3_copy
 lbl_fn_80314BD8_000019D8:
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_8013C434
     lfs f29, 0x18(r3)
     b lbl_fn_80314BD8_0000207C
@@ -2036,7 +2036,7 @@ lbl_fn_80314BD8_000019E8:
     addi r4, r1, 0x68
     bl vec3_copy
     addi r3, r1, 0x1b0
-    bl fn_80140500
+    bl quest_resetActiveObjectiveSlots
     addi r3, r1, 0x158
     addi r4, r30, 0x15f8
     bl vec3_assign
@@ -2051,7 +2051,7 @@ lbl_fn_80314BD8_000019E8:
     lfs f0, lbl_80884D1C
     fsubs f0, f1, f0
     stfs f0, 0x150(r1)
-    bl fn_801404F8
+    bl quest_getGlobalManager
     addi r4, r1, 0x1b0
     addi r5, r1, 0x158
     addi r6, r1, 0x14c
@@ -2231,8 +2231,8 @@ lbl_fn_80314BD8_00001D4C:
     addi r5, r30, 0x528
     bl vec3_sub
     addi r3, r1, 0x134
-    bl fn_801162A0
-    bl fn_80011220
+    bl vec3_sqMag
+    bl math_fabsf
     lfs f0, lbl_80884D50
     fcmpo cr0, f1, f0
     blt lbl_fn_80314BD8_00001D9C

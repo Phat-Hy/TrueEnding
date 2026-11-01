@@ -12,7 +12,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_23(void);
 extern void _savegpr_24(void);
 extern void _savegpr_25(void);
-extern void fn_80049B74(void);
+extern void snd_findSoundNodeByName(void);
 extern void fn_80049CDC(void);
 extern void talk_formatQuotedString(void);
 extern void boss_recordDamage(void);
@@ -26,7 +26,7 @@ extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB404(void);
 extern void fn_800CB4EC(void);
-extern void fn_800CB58C(void);
+extern void morph_hasActiveWeight(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB6F8(void);
 extern void fn_800CFDA0(void);
@@ -592,7 +592,7 @@ asm void fn_803EB038(void)
     mr r28, r5
     beq lbl_fn_803EB038_000005FC
     lwz r3, lbl_8087EE90
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     mr r4, r3
     b lbl_fn_803EB038_00000600
 lbl_fn_803EB038_000005FC:
@@ -647,7 +647,7 @@ lbl_fn_803EB038_0000067C:
     stb r29, 0x2c(r31)
     stb r29, 0x2d(r31)
     lwz r3, lbl_8087EE90
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     lwz r5, lbl_8087EFE8
     mr r4, r3
     stw r29, 0x34c8(r5)
@@ -768,7 +768,7 @@ asm void fn_803EB2A4(void)
     mr r29, r3
     beq lbl_fn_803EB2A4_0000085C
     lwz r3, lbl_8087EE90
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     mr r31, r3
     b lbl_fn_803EB2A4_00000860
 lbl_fn_803EB2A4_0000085C:
@@ -848,7 +848,7 @@ asm void fn_803EB394(void)
     mr r24, r3
     beq lbl_fn_803EB394_00000950
     lwz r3, lbl_8087EE90
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     mr r27, r3
     b lbl_fn_803EB394_00000954
 lbl_fn_803EB394_00000950:
@@ -1055,7 +1055,7 @@ asm void fn_803EB668(void)
     beq lbl_fn_803EB668_00000C28
     lwz r3, lbl_8087EE90
     mr r4, r5
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     mr r29, r3
     b lbl_fn_803EB668_00000C2C
 lbl_fn_803EB668_00000C28:
@@ -1265,7 +1265,7 @@ lbl_fn_803EB7E4_00000EE4:
     b lbl_fn_803EB7E4_00000F24
 lbl_fn_803EB7E4_00000EF8:
     mr r3, r21
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     bne lbl_fn_803EB7E4_00000F1C
     lwz r0, 0x18(r21)
@@ -1288,7 +1288,7 @@ lbl_fn_803EB7E4_00000F30:
     b lbl_fn_803EB7E4_00000F64
 lbl_fn_803EB7E4_00000F44:
     mr r3, r21
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     bne lbl_fn_803EB7E4_00000F5C
     mr r22, r21
@@ -1347,7 +1347,7 @@ asm void fn_803EBA54(void)
     b lbl_fn_803EBA54_00001020
 lbl_fn_803EBA54_00001000:
     mr r3, r31
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     bne lbl_fn_803EBA54_00001018
     li r3, 0x1
@@ -1475,7 +1475,7 @@ asm void fn_803EBC04(void)
     lwz r3, lbl_8087EE90
     cmpwi r3, 0x0
     beq lbl_fn_803EBC04_000011B4
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31

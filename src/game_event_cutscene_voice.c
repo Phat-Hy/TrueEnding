@@ -7,7 +7,7 @@ extern void _savegpr_26(void);
 extern void vec3_copy(void);
 extern void fn_80042108(void);
 extern void fn_8004AD9C(void);
-extern void fn_8006A250(void);
+extern void boss_dispatchActionTransition(void);
 extern void fn_80079044(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
@@ -16,12 +16,12 @@ extern void route_createSegment(void);
 extern void node_createNamedChild(void);
 extern void fn_800C16C0(void);
 extern void fn_800C1814(void);
-extern void fn_800C2448(void);
+extern void skeleton_getBoneByIndex(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D94F8(void);
 extern void fn_800F7260(void);
-extern void fn_800F8524(void);
+extern void math_lerpf(void);
 extern void fn_8010D98C(void);
 extern void fn_80112254(void);
 extern void fn_801856A4(void);
@@ -43,7 +43,7 @@ extern void strcmp(void);
 extern void std_atan2(void);
 extern void __construct_new_array(void);
 extern void __ptmf_scall(void);
-extern void fn_8072D210(void);
+extern void math_normalizeAngle(void);
 
 /* External data declarations */
 extern u8 lbl_80756380[];
@@ -1244,21 +1244,21 @@ lbl_fn_8047C1D8_00000E10:
     lfs f29, 0xe8(r1)
     stfs f2, 0xec(r1)
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f3, lbl_80886F98
     addi r3, r1, 0x30
     lfs f0, lbl_80886F94
     addi r4, r1, 0x24
     fmuls f3, f29, f3
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f3, lbl_80886F98
     addi r3, r1, 0x34
     lfs f0, lbl_80886F94
     addi r4, r1, 0x28
     fmuls f3, f30, f3
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f12, 0x24(r1)
     addi r31, r1, 0xd8
     lfs f9, 0x2c(r1)
@@ -1406,21 +1406,21 @@ lbl_fn_8047C1D8_00001078:
     lfs f30, 0xdc(r1)
     stfs f2, 0xe0(r1)
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f3, lbl_80886F98
     addi r3, r1, 0x18
     lfs f0, lbl_80886F94
     addi r4, r1, 0xc
     fmuls f3, f30, f3
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f3, lbl_80886F98
     addi r3, r1, 0x1c
     lfs f0, lbl_80886F94
     addi r4, r1, 0x10
     fmuls f3, f29, f3
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f11, 0xc(r1)
     fmr f1, f31
     lfs f8, 0x14(r1)
@@ -1742,7 +1742,7 @@ lbl_fn_8047C88C_00001490:
     mr r3, r4
     stw r0, 0x120(r4)
     li r4, 0x0
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     lwz r0, 0x14c(r31)
     stw r0, 0x0(r3)
     lwz r0, 0x150(r31)
@@ -1866,7 +1866,7 @@ asm void fn_8047CB74(void)
     mr r4, r3
     addi r3, r27, 0x70
     addi r4, r4, 0x24
-    bl fn_800F8524
+    bl math_lerpf
     fmr f31, f1
     mr r3, r28
     bl fn_8047C780
@@ -1907,7 +1907,7 @@ lbl_fn_8047CB74_00001748:
     bl fn_8047CB6C
     mr r3, r28
     li r4, 0x0
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     bl fn_8047CDFC
     mr r31, r3
     addi r3, r27, 0x14c
@@ -1919,12 +1919,12 @@ lbl_fn_8047CB74_00001748:
     bl fn_8047C1D8
     mr r3, r28
     li r4, 0x0
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     addi r4, r1, 0x18
     bl fn_8047CDE8
     mr r3, r28
     li r4, 0x0
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     bl fn_8047CE28
     mr r31, r3
     addi r3, r27, 0x14c
@@ -1936,7 +1936,7 @@ lbl_fn_8047CB74_00001748:
     bl fn_8047CEBC
     mr r3, r28
     li r4, 0x0
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     addi r4, r1, 0x8
     bl fn_8047CE04
     lfd f31, 0xa8(r1)
@@ -2599,7 +2599,7 @@ lbl_fn_8047CF7C_000020F0:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     stw r3, 0x1aa8(r31)
     li r4, 0x1
     bl atn_Task_setActive

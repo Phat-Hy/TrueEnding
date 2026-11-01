@@ -10,7 +10,7 @@ extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_80206B14(void);
+extern void sys_findModuleById(void);
 extern void fn_80206B68(void);
 extern void fn_80206B70(void);
 extern void game_initGlobalDatabases(void);
@@ -19,11 +19,11 @@ extern void time_wrapMilliseconds(void);
 extern void fn_8020EE58(void);
 extern void fn_8020EE60(void);
 extern void rand_scaleRangeInt(void);
-extern void fn_8020EF4C(void);
-extern void fn_8020EFEC(void);
+extern void rand_stepEntropy(void);
+extern void time_ticksToSeconds(void);
 extern void event_findEntryById(void);
 extern void fn_80216AFC(void);
-extern void fn_8046DC5C(void);
+extern void boss_loadWeakpointResource(void);
 extern void boss_bindArenaInteractions(void);
 extern void strncmp(void);
 extern void atoi(void);
@@ -222,7 +222,7 @@ lbl_fn_802124B4_000001E8:
     bl fn_8020EE60
     mr r30, r3
     lwz r3, 0x4(r31)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     lwz r0, 0x7c(r30)
     cmpwi r0, 0x0
     bge lbl_fn_802124B4_00000220
@@ -277,7 +277,7 @@ lbl_fn_80212714_000002A0:
     cmpwi r3, 0x0
     beq lbl_fn_80212714_000002C0
     lwz r3, 0x4(r31)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     li r0, -0x1
     stw r0, 0x7c(r3)
 lbl_fn_80212714_000002C0:
@@ -327,7 +327,7 @@ lbl_fn_80212790_00000344:
     cmpwi r3, 0x0
     beq lbl_fn_80212790_00000360
     lwz r3, 0x4(r30)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     stw r31, 0x7c(r3)
 lbl_fn_80212790_00000360:
     stw r31, 0x4(r30)
@@ -367,7 +367,7 @@ asm void fn_80212840(void)
     add r0, r0, r4
     mulli r0, r0, 0x3e8
     subf r4, r0, r6
-    bl fn_80206B14
+    bl sys_findModuleById
     lfs f0, 0x0(r3)
     addi r5, r30, 0x4dd3
     stfs f0, 0x0(r28)
@@ -785,7 +785,7 @@ lbl_fn_80212C34_000009B0:
     lwz r4, 0x7c(r30)
     add r0, r4, r0
     stw r0, 0x7c(r28)
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_80212C34_00000A30
     add r31, r31, r31
@@ -956,7 +956,7 @@ asm void fn_802130BC(void)
     addi r5, r1, 0x10
     lwz r4, lbl_80882EF0
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r12, 0x28(r1)
     mr r31, r3
     mr r4, r31
@@ -1758,7 +1758,7 @@ lbl_fn_80213B78_000017EC:
     cmpwi r3, 0x0
     beq lbl_fn_80213B78_000018C0
     lwz r3, 0x4(r31)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     mr r31, r3
     mr r3, r28
     mr r4, r29

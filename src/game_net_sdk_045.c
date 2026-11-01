@@ -23,14 +23,14 @@ extern void fn_806A420C(void);
 extern void fn_806A4260(void);
 extern void fn_806A4264(void);
 extern void fn_806A426C(void);
-extern void fn_806A4270(void);
+extern void net_truncateU16(void);
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D62F0(void);
 extern void fn_806D63A0(void);
 extern void fn_806D6420(void);
 extern void fn_806D64B0(void);
-extern void fn_806D6610(void);
+extern void net_invokeChannelCallback(void);
 extern void net_socketClose(void);
 extern void fn_806D7AE0(void);
 extern void fn_806D7B30(void);
@@ -85,7 +85,7 @@ void fn_806FDBC0(void);
 void fn_806FDCA0(void);
 void fn_806FDD20(void);
 void fn_806FDFB0(void);
-void fn_806FE060(void);
+void fn_806FE060(void *obj, void *val);
 void fn_806FE070(void);
 void fn_806FE090(void);
 void fn_806FE0F0(void);
@@ -97,7 +97,7 @@ void fn_806FE760(void);
 void fn_806FE7B0(void);
 void fn_806FE820(void);
 void fn_806FE830(void);
-void fn_806FE840(void);
+void net_http_initConnection(void);
 void fn_806FE8B0(void);
 void fn_806FE900(void);
 void fn_806FE940(void);
@@ -106,15 +106,15 @@ void fn_806FEA20(void);
 void fn_806FEAA0(void);
 void fn_806FEBD0(void);
 void fn_806FEC60(void);
-void fn_806FEC90(void);
+void *fn_806FEC90(void *obj);
 void fn_806FECA0(void);
-void fn_806FECB0(void);
+u16 fn_806FECB0(void *obj);
 void fn_806FECC0(void);
 void fn_806FECD0(void);
-void fn_806FED00(void);
+void *fn_806FED00(void *obj);
 void fn_806FED10(void);
-void fn_806FED20(void);
-void fn_806FED30(void);
+void fn_806FED20(void *obj, void *val);
+void *fn_806FED30(void *obj);
 void fn_806FED40(void);
 void fn_806FEF30(void);
 
@@ -222,7 +222,7 @@ asm void fn_806FD090(void)
     lwz r30, 0x18(r31)
     clrlwi r3, r3, 16
     stb r0, 0x19(r1)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x1a(r1)
     mr r3, r30
     addi r4, r1, 0x6c
@@ -283,7 +283,7 @@ lbl_fn_806FD090_000001D0:
     lwz r0, 0x3c(r31)
     stw r0, 0x2c(r1)
     lhz r3, 0x40(r31)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x30(r1)
     lbz r0, 0x42(r31)
     stb r0, 0x32(r1)
@@ -310,7 +310,7 @@ lbl_fn_806FD090_00000294:
 lbl_fn_806FD090_00000298:
     li r0, 0x2
     stb r0, 0x11(r1)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x12(r1)
     mr r3, r30
     addi r4, r1, 0x20
@@ -405,7 +405,7 @@ lbl_fn_806FD2D0_000003D4:
     lwz r31, 0x18(r31)
     clrlwi r3, r3, 16
     stb r0, 0x9(r1)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0xa(r1)
     mr r3, r31
     mr r4, r29
@@ -551,7 +551,7 @@ lbl_fn_806FD420_00000560:
     lwz r0, 0x3c(r31)
     stw r0, 0x2c(r1)
     lhz r3, 0x40(r31)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x30(r1)
     li r3, 0x0
     lbz r0, 0x42(r31)
@@ -580,7 +580,7 @@ lbl_fn_806FD420_00000664:
 lbl_fn_806FD420_00000668:
     li r0, 0x2
     stb r0, 0x19(r1)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x1a(r1)
     mr r3, r29
     addi r4, r1, 0x20
@@ -1300,11 +1300,9 @@ lbl_fn_806FDFB0_00001068:
     blr
 }
 
-asm void fn_806FE060(void)
+void fn_806FE060(void *obj, void *val)
 {
-    nofralloc
-    stw r4, 0x28(r3)
-    blr
+    *(void **)((char *)obj + 0x28) = val;
 }
 
 asm void fn_806FE070(void)
@@ -1900,7 +1898,7 @@ asm void fn_806FE830(void)
     b net_socketClose
 }
 
-asm void fn_806FE840(void)
+asm void net_http_initConnection(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1910,7 +1908,7 @@ asm void fn_806FE840(void)
     lis r31, lbl_80862AF0@ha
     lwz r0, lbl_80862AF0@l(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_806FE840_000018B8
+    bne lbl_net_http_initConnection_000018B8
     lis r6, fn_806FE7B0@ha
     lis r7, fn_806FE820@ha
     lis r8, fn_806FE830@ha
@@ -1922,7 +1920,7 @@ asm void fn_806FE840(void)
     li r5, 0x4
     bl fn_806D62F0
     stw r3, lbl_80862AF0@l(r31)
-lbl_fn_806FE840_000018B8:
+lbl_net_http_initConnection_000018B8:
     lwz r31, 0xc(r1)
     lis r3, lbl_80862AF0@ha
     lwz r0, 0x14(r1)
@@ -2058,7 +2056,7 @@ lbl_fn_806FEA20_00001A74:
     stw r4, 0x8(r1)
     addi r4, r1, 0x8
     lwz r3, 0x18(r3)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     beq lbl_fn_806FEA20_00001AA0
     lwz r31, 0x4(r3)
@@ -2114,7 +2112,7 @@ lbl_fn_806FEAA0_00001B30:
     stw r31, 0x8(r1)
     addi r4, r1, 0x8
     lwz r3, 0x18(r29)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     beq lbl_fn_806FEAA0_00001B5C
     lwz r31, 0x4(r3)
@@ -2191,7 +2189,7 @@ lbl_fn_806FEBD0_00001C24:
     stw r4, 0x8(r1)
     addi r4, r1, 0x8
     lwz r3, 0x18(r3)
-    bl fn_806D6610
+    bl net_invokeChannelCallback
     cmpwi r3, 0x0
     beq lbl_fn_806FEBD0_00001C50
     lwz r31, 0x4(r3)
@@ -2235,11 +2233,9 @@ asm void fn_806FEC60(void)
     blr
 }
 
-asm void fn_806FEC90(void)
+void *fn_806FEC90(void *obj)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(void **)(obj);
 }
 
 asm void fn_806FECA0(void)
@@ -2249,11 +2245,9 @@ asm void fn_806FECA0(void)
     b fn_806A4264
 }
 
-asm void fn_806FECB0(void)
+u16 fn_806FECB0(void *obj)
 {
-    nofralloc
-    lhz r3, 0x4(r3)
-    blr
+    return *(u16 *)((char *)obj + 4);
 }
 
 asm void fn_806FECC0(void)
@@ -2280,11 +2274,9 @@ asm void fn_806FECD0(void)
     blr
 }
 
-asm void fn_806FED00(void)
+void *fn_806FED00(void *obj)
 {
-    nofralloc
-    lwz r3, 0x8(r3)
-    blr
+    return *(void **)((char *)obj + 8);
 }
 
 asm void fn_806FED10(void)
@@ -2294,18 +2286,14 @@ asm void fn_806FED10(void)
     b fn_806A4264
 }
 
-asm void fn_806FED20(void)
+void fn_806FED20(void *obj, void *val)
 {
-    nofralloc
-    stw r4, 0x24(r3)
-    blr
+    *(void **)((char *)obj + 0x24) = val;
 }
 
-asm void fn_806FED30(void)
+void *fn_806FED30(void *obj)
 {
-    nofralloc
-    lwz r3, 0x24(r3)
-    blr
+    return *(void **)((char *)obj + 0x24);
 }
 
 asm void fn_806FED40(void)

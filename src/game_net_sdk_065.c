@@ -16,23 +16,23 @@ extern void dtor_80084684(void);
 extern void OSUnlockMutex(void);
 extern void fn_805F3350(void);
 extern void GXSetVtxDesc(void);
-extern void fn_806134E0(void);
+extern void __GXInitVtxDesc(void);
 extern void GXSetVtxAttrFmt(void);
 extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
-extern void fn_80614790(void);
+extern void GXBegin(void);
 extern void GXInitLightDistAttn(void);
 extern void GXInitLightSpot(void);
 extern void GXInitLightObj(void);
 extern void GXClampLightAngle(void);
 extern void fn_806165B0(void);
-extern void fn_80617200(void);
+extern void GXSetTexCoordScaleManually(void);
 extern void GXInitTexObjDefault(void);
 extern void GXSetTevDirect(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
-extern void fn_806174C0(void);
+extern void GXSetTevIndTile(void);
 extern void fn_80617520(void);
 extern void GXSetTevSwapMode(void);
 extern void GXSetTevSwapModeTable(void);
@@ -676,7 +676,7 @@ lbl_fn_80726B90_00000758:
     li r8, 0x7d
     bl __GXSetVtxDesc
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -720,7 +720,7 @@ lbl_fn_80726B90_00000758:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
@@ -739,7 +739,7 @@ lbl_fn_80726B90_00000758:
     li r6, 0x2
     li r7, 0xf
     bl GXSetVtxAttrFmt
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -805,7 +805,7 @@ lbl_fn_80726B90_00000954:
     li r8, 0x7d
     bl __GXSetVtxDesc
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -845,7 +845,7 @@ lbl_fn_80726B90_00000954:
     li r6, 0x2
     li r7, 0xf
     bl GXSetVtxAttrFmt
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -911,7 +911,7 @@ lbl_fn_80726B90_00000AF4:
     li r8, 0x7d
     bl __GXSetVtxDesc
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -951,7 +951,7 @@ lbl_fn_80726B90_00000AF4:
     li r6, 0x2
     li r7, 0xf
     bl GXSetVtxAttrFmt
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -1017,7 +1017,7 @@ lbl_fn_80726B90_00000C94:
     li r8, 0x7d
     bl __GXSetVtxDesc
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -1057,7 +1057,7 @@ lbl_fn_80726B90_00000C94:
     li r6, 0x2
     li r7, 0xf
     bl GXSetVtxAttrFmt
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -1123,7 +1123,7 @@ lbl_fn_80726B90_00000E34:
     li r8, 0x7d
     bl __GXSetVtxDesc
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -1163,7 +1163,7 @@ lbl_fn_80726B90_00000E34:
     li r6, 0x2
     li r7, 0xf
     bl GXSetVtxAttrFmt
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -1505,7 +1505,7 @@ lbl_fn_80727790_00001454:
     li r3, 0x80
     li r4, 0x0
     li r5, 0x4
-    bl fn_80614790
+    bl GXBegin
     lis r3, 0xcc01
     stfs f27, -0x8000(r3)
     stfs f28, -0x8000(r3)
@@ -1713,7 +1713,7 @@ lbl_fn_80727B60_000016A4:
     li r8, 0x7d
     bl __GXSetVtxDesc
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -1773,7 +1773,7 @@ lbl_fn_80727B60_000016A4:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x1
     li r4, 0xff
     li r5, 0xff
@@ -1804,7 +1804,7 @@ lbl_fn_80727B60_000016A4:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
@@ -1823,7 +1823,7 @@ lbl_fn_80727B60_000016A4:
     li r6, 0x2
     li r7, 0xf
     bl GXSetVtxAttrFmt
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc

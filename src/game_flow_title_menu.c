@@ -32,7 +32,7 @@ extern void fn_804DCA58(void);
 extern void fn_804DD1AC(void);
 extern void fn_804DD578(void);
 extern void fn_804E9364(void);
-extern void fn_8050128C(void);
+extern void net_isMessageStateActive(void);
 extern void fn_805012C8(void);
 extern void fn_80509B50(void);
 extern void fn_8050BA6C(void);
@@ -40,10 +40,10 @@ extern void fn_8050DDE0(void);
 extern void net_p2p_readPayload(void);
 extern void rand(void);
 extern void net_getSocket(void);
-extern void fn_806A8E70(void);
-extern void fn_806B0DE0(void);
+extern void net_getInterfaceHandle(void);
+extern void net_isSessionActive(void);
 extern void net_getMyAid(void);
-extern void fn_806B1250(void);
+extern void net_isSessionConnected(void);
 
 /* External data declarations */
 extern u8 lbl_80759748[];
@@ -145,7 +145,7 @@ lbl_fn_804DDA08_000000A0:
     li r3, 0x1
     b lbl_fn_804DDA08_000000E8
 lbl_fn_804DDA08_000000C8:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804DDA08_000000E8
 lbl_fn_804DDA08_000000D0:
     lwz r0, 0x1f8(r4)
@@ -154,7 +154,7 @@ lbl_fn_804DDA08_000000D0:
     li r3, 0x1
     b lbl_fn_804DDA08_000000E8
 lbl_fn_804DDA08_000000E4:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804DDA08_000000E8:
     cmpw r23, r3
     blt lbl_fn_804DDA08_00000078
@@ -390,7 +390,7 @@ lbl_fn_804DDD54_000003E4:
     li r0, 0x0
     b lbl_fn_804DDD54_0000041C
 lbl_fn_804DDD54_0000040C:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804DDD54_0000041C
 lbl_fn_804DDD54_00000418:
@@ -463,7 +463,7 @@ lbl_fn_804DDE38_000004D0:
     li r0, 0x0
     b lbl_fn_804DDE38_00000508
 lbl_fn_804DDE38_000004F8:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804DDE38_00000508
 lbl_fn_804DDE38_00000504:
@@ -603,7 +603,7 @@ lbl_fn_804DE000_0000069C:
     li r0, 0x0
     b lbl_fn_804DE000_000006D4
 lbl_fn_804DE000_000006C4:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804DE000_000006D4
 lbl_fn_804DE000_000006D0:
@@ -753,7 +753,7 @@ lbl_fn_804DE000_00000894:
     li r3, 0x1
     b lbl_fn_804DE000_000008DC
 lbl_fn_804DE000_000008BC:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804DE000_000008DC
 lbl_fn_804DE000_000008C4:
     lwz r0, 0x1f8(r4)
@@ -762,7 +762,7 @@ lbl_fn_804DE000_000008C4:
     li r3, 0x1
     b lbl_fn_804DE000_000008DC
 lbl_fn_804DE000_000008D8:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804DE000_000008DC:
     cmpw r31, r3
     blt lbl_fn_804DE000_000007DC
@@ -834,7 +834,7 @@ lbl_fn_804DE2FC_0000099C:
     li r0, 0x0
     b lbl_fn_804DE2FC_000009D4
 lbl_fn_804DE2FC_000009C4:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804DE2FC_000009D4
 lbl_fn_804DE2FC_000009D0:
@@ -1020,7 +1020,7 @@ lbl_fn_804DE564_00000C00:
     li r0, 0x0
     b lbl_fn_804DE564_00000C38
 lbl_fn_804DE564_00000C28:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804DE564_00000C38
 lbl_fn_804DE564_00000C34:
@@ -1100,7 +1100,7 @@ lbl_fn_804DE564_00000CFC:
     li r3, 0x1
     b lbl_fn_804DE564_00000D34
 lbl_fn_804DE564_00000D30:
-    bl fn_806B0DE0
+    bl net_isSessionActive
 lbl_fn_804DE564_00000D34:
     mr r31, r3
     b lbl_fn_804DE564_00000D58
@@ -1111,7 +1111,7 @@ lbl_fn_804DE564_00000D3C:
     li r3, 0x1
     b lbl_fn_804DE564_00000D54
 lbl_fn_804DE564_00000D50:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804DE564_00000D54:
     mr r31, r3
 lbl_fn_804DE564_00000D58:
@@ -1199,7 +1199,7 @@ lbl_fn_804DE564_00000E40:
     li r3, 0x1
     b lbl_fn_804DE564_00000E90
 lbl_fn_804DE564_00000E70:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804DE564_00000E90
 lbl_fn_804DE564_00000E78:
     lwz r0, 0x1f8(r4)
@@ -1208,7 +1208,7 @@ lbl_fn_804DE564_00000E78:
     li r3, 0x1
     b lbl_fn_804DE564_00000E90
 lbl_fn_804DE564_00000E8C:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804DE564_00000E90:
     addi r0, r27, 0x1
     cmpw r0, r3
@@ -1339,7 +1339,7 @@ asm void fn_804DE888(void)
     beq lbl_fn_804DE888_00001074
     b lbl_fn_804DE888_00001084
 lbl_fn_804DE888_00001074:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r23, r3, 24
     b lbl_fn_804DE888_00001084
 lbl_fn_804DE888_00001080:
@@ -1512,7 +1512,7 @@ lbl_fn_804DE888_000012AC:
     bne lbl_fn_804DE888_00001528
     addi r3, r29, 0xdc
     li r4, 0x0
-    bl fn_8050128C
+    bl net_isMessageStateActive
     stw r31, 0xe0(r29)
     cmplw r29, r26
     stw r31, 0xe4(r29)

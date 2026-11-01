@@ -10,14 +10,14 @@ extern void item_useConsumable(void);
 extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80116BD4(void);
+extern void actor_calcSpawnTransform(void);
 extern void fn_80178088(void);
 extern void fn_8037F9AC(void);
 extern void fn_803918EC(void);
 extern void fn_803920C8(void);
 extern void fn_80392510(void);
 extern void fn_803928C0(void);
-extern void fn_80392A04(void);
+extern void mtx_copyPairedSingle(void);
 extern void fn_80392FE8(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -331,7 +331,7 @@ lbl_fn_8038C928_000002E0:
     bl item_useConsumable
     mr r4, r31
     addi r3, r31, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r31
     bl fn_803920C8
     mr r3, r31
@@ -340,7 +340,7 @@ lbl_fn_8038C928_000002E0:
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r31, 0x1f4
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     lwz r0, 0x154(r1)
     psq_l f31, 0x148(r1), 0, 0
     lfd f31, 0x140(r1)
@@ -586,7 +586,7 @@ lbl_fn_8038CD94_000006B4:
     bl item_useConsumable
     mr r4, r30
     addi r3, r30, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r30
     bl fn_80392510
     mr r3, r30
@@ -599,7 +599,7 @@ lbl_fn_8038CD94_000006B4:
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r30, 0x1f4
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     lfs f0, lbl_808858F8
     lwz r3, 0x808(r30)
     fcmpo cr0, f31, f0
@@ -812,7 +812,7 @@ lbl_fn_8038D1C0_000008F0:
     bl item_useConsumable
     mr r4, r31
     addi r3, r31, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r31
     bl fn_803918EC
     mr r3, r31
@@ -823,7 +823,7 @@ lbl_fn_8038D1C0_000008F0:
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r31, 0x1f4
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     lwz r3, 0x808(r31)
     addi r0, r3, 0x1
     stw r0, 0x808(r31)
@@ -1029,7 +1029,7 @@ lbl_fn_8038D4D4_00000C38:
     bl item_useConsumable
     mr r4, r31
     addi r3, r31, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r31
     bl fn_803918EC
     mr r3, r31
@@ -1040,7 +1040,7 @@ lbl_fn_8038D4D4_00000C38:
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r31, 0x1f4
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     lwz r3, 0x808(r31)
     addi r0, r3, 0x1
     stw r0, 0x808(r31)
@@ -1266,7 +1266,7 @@ lbl_fn_8038D854_00000FF8:
     bl item_useConsumable
     mr r4, r31
     addi r3, r31, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r31
     bl fn_803918EC
     mr r3, r31
@@ -1277,7 +1277,7 @@ lbl_fn_8038D854_00000FF8:
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r31, 0x1f4
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     lwz r3, 0x808(r31)
     addi r0, r3, 0x1
     stw r0, 0x808(r31)
@@ -1413,7 +1413,7 @@ lbl_fn_8038DBE4_00001394:
     bl item_useConsumable
     mr r4, r31
     addi r3, r31, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r31
     bl fn_803918EC
     mr r3, r31
@@ -1424,7 +1424,7 @@ lbl_fn_8038DBE4_00001394:
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r31, 0x1f4
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     lwz r3, 0x808(r31)
     addi r0, r3, 0x1
     stw r0, 0x808(r31)
@@ -1526,7 +1526,7 @@ lbl_fn_8038DDE0_0000159C:
     bl item_useConsumable
     mr r4, r28
     addi r3, r28, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r28
     bl fn_80392510
     mr r3, r28
@@ -1539,7 +1539,7 @@ lbl_fn_8038DDE0_0000159C:
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r28, 0x1f4
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     lwz r0, 0x64(r1)
     lwz r31, 0x5c(r1)
     lwz r30, 0x58(r1)
@@ -1687,7 +1687,7 @@ lbl_fn_8038DF5C_000016D0:
     bl item_useConsumable
     mr r4, r30
     addi r3, r30, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r30
     bl fn_80392510
     mr r3, r30
@@ -1702,7 +1702,7 @@ lbl_fn_8038DF5C_000016D0:
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r30, 0x1f4
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     lwz r3, 0x808(r30)
     addi r0, r3, 0x1
     stw r0, 0x808(r30)

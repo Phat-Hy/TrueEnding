@@ -23,16 +23,16 @@ extern void fn_80089ACC(void);
 extern void area_updateZoneState(void);
 extern void lockon_updateTarget(void);
 extern void str_skipWhitespace(void);
-extern void fn_800E0AA8(void);
-extern void fn_800EC254(void);
+extern void particle_getEmitterContext(void);
+extern void cam_testTargetVisibility(void);
 extern void cam_registerTarget(void);
 extern void cam_initTrajectoryParams(void);
 extern void cam_bindPathTarget(void);
 extern void cam_bindRotationTarget(void);
 extern void cam_evalControllerSpline(void);
 extern void cam_setLookAtTarget(void);
-extern void fn_800ED4D8(void);
-extern void fn_800ED4E0(void);
+extern void cam_getLookAtState(void);
+extern void cam_updateLookAtMatrix(void);
 extern void cam_evalLookAtMatrix(void);
 extern void vec3_scale(void);
 extern void str_appendString(void);
@@ -123,129 +123,81 @@ extern u8 lbl_807500DC[];
 extern u32 lbl_80885CCC;
 
 /* Function declarations */
-void fn_803C3664(void);
-void fn_803C3674(void);
-void fn_803C3684(void);
-void fn_803C3694(void);
-void fn_803C36A4(void);
-void fn_803C36B4(void);
-void fn_803C36C4(void);
-void fn_803C36D4(void);
-void fn_803C36E4(void);
-void fn_803C36F4(void);
-void fn_803C3704(void);
-void fn_803C3714(void);
+void *fn_803C3664(void *p, u32 idx);
+void *fn_803C3674(void *p, u32 idx);
+void *fn_803C3684(void *p, u32 idx);
+void *fn_803C3694(void *p, u32 idx);
+void *fn_803C36A4(void *p, u32 idx);
+void *fn_803C36B4(void *p, u32 idx);
+void *fn_803C36C4(void *p, u32 idx);
+void *fn_803C36D4(void *p, u32 idx);
+void *fn_803C36E4(void *p, u32 idx);
+void *fn_803C36F4(void *p, u32 idx);
+void *fn_803C3704(void *p, u32 idx);
+void *fn_803C3714(void *p, u32 idx);
 void fn_803C3724(void);
 void fn_803C3798(void);
 void fn_803C380C(void);
 void fn_803C3894(void);
 
-asm void fn_803C3664(void)
+void *fn_803C3664(void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0x30
-    lwz r3, 0x4(r3)
-    add r3, r3, r0
-    blr
+    return (u8 *)*(void **)((u8 *)p + 4) + idx * 0x30;
 }
 
-asm void fn_803C3674(void)
+void *fn_803C3674(void *p, u32 idx)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    slwi r0, r4, 6
-    add r3, r3, r0
-    blr
+    return (u8 *)*(void **)((u8 *)p + 4) + (idx << 6);
 }
 
-asm void fn_803C3684(void)
+void *fn_803C3684(void *p, u32 idx)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    slwi r0, r4, 6
-    add r3, r3, r0
-    blr
+    return (u8 *)*(void **)((u8 *)p + 4) + (idx << 6);
 }
 
-asm void fn_803C3694(void)
+void *fn_803C3694(void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0x48
-    lwz r3, 0x4(r3)
-    add r3, r3, r0
-    blr
+    return (u8 *)*(void **)((u8 *)p + 4) + idx * 0x48;
 }
 
-asm void fn_803C36A4(void)
+void *fn_803C36A4(void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0x28
-    lwz r3, 0x4(r3)
-    add r3, r3, r0
-    blr
+    return (u8 *)*(void **)((u8 *)p + 4) + idx * 0x28;
 }
 
-asm void fn_803C36B4(void)
+void *fn_803C36B4(void *p, u32 idx)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    slwi r0, r4, 3
-    add r3, r3, r0
-    blr
+    return (u8 *)*(void **)((u8 *)p + 4) + (idx << 3);
 }
 
-asm void fn_803C36C4(void)
+void *fn_803C36C4(void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0x18
-    lwz r3, 0x4(r3)
-    add r3, r3, r0
-    blr
+    return (u8 *)*(void **)((u8 *)p + 4) + idx * 0x18;
 }
 
-asm void fn_803C36D4(void)
+void *fn_803C36D4(void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0xc
-    lwz r3, 0x4(r3)
-    add r3, r3, r0
-    blr
+    return (u8 *)*(void **)((u8 *)p + 4) + idx * 0xc;
 }
 
-asm void fn_803C36E4(void)
+void *fn_803C36E4(void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0x30
-    lwz r3, 0x4(r3)
-    add r3, r3, r0
-    blr
+    return (u8 *)*(void **)((u8 *)p + 4) + idx * 0x30;
 }
 
-asm void fn_803C36F4(void)
+void *fn_803C36F4(void *p, u32 idx)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    slwi r0, r4, 3
-    add r3, r3, r0
-    blr
+    return (u8 *)*(void **)((u8 *)p + 4) + (idx << 3);
 }
 
-asm void fn_803C3704(void)
+void *fn_803C3704(void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0x30
-    lwz r3, 0x4(r3)
-    add r3, r3, r0
-    blr
+    return (u8 *)*(void **)((u8 *)p + 4) + idx * 0x30;
 }
 
-asm void fn_803C3714(void)
+void *fn_803C3714(void *p, u32 idx)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    slwi r0, r4, 7
-    add r3, r3, r0
-    blr
+    return (u8 *)*(void **)((u8 *)p + 4) + (idx << 7);
 }
 
 asm void fn_803C3724(void)
@@ -1378,7 +1330,7 @@ lbl_fn_803C3894_00001040:
     b lbl_fn_803C3894_00001180
 lbl_fn_803C3894_00001158:
     addi r3, r1, 0x248
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     bl atoi
     stw r3, 0xc(r1)
@@ -1386,14 +1338,14 @@ lbl_fn_803C3894_00001158:
     addi r4, r1, 0xc
     bl fn_8000E18C
     addi r3, r1, 0x248
-    bl fn_800ED4E0
+    bl cam_updateLookAtMatrix
 lbl_fn_803C3894_00001180:
     addi r3, r1, 0x180
     addi r4, r1, 0x284
     bl cam_evalLookAtMatrix
     addi r3, r1, 0x248
     addi r4, r1, 0x180
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     mr r19, r3
     addi r3, r1, 0x180
     li r4, -0x1
@@ -1404,7 +1356,7 @@ lbl_fn_803C3894_00001180:
     li r4, -0x1
     bl cam_setLookAtTarget
     addi r3, r1, 0xb8
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     mr r4, r3
     addi r3, r21, 0x24
     addi r6, r25, 0x24f
@@ -1433,7 +1385,7 @@ lbl_fn_803C3894_00001200:
     addi r18, r18, 0x1
 lbl_fn_803C3894_00001224:
     addi r3, r1, 0xb8
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     cmplw r18, r3
     blt lbl_fn_803C3894_000011E0
     addi r3, r1, 0x2b0
@@ -1580,7 +1532,7 @@ lbl_fn_803C3894_00001370:
     b lbl_fn_803C3894_00001480
 lbl_fn_803C3894_00001458:
     addi r3, r1, 0x1e0
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     bl atoi
     stw r3, 0x8(r1)
@@ -1588,14 +1540,14 @@ lbl_fn_803C3894_00001458:
     addi r4, r1, 0x8
     bl fn_8000E18C
     addi r3, r1, 0x1e0
-    bl fn_800ED4E0
+    bl cam_updateLookAtMatrix
 lbl_fn_803C3894_00001480:
     addi r3, r1, 0x120
     addi r4, r1, 0x21c
     bl cam_evalLookAtMatrix
     addi r3, r1, 0x1e0
     addi r4, r1, 0x120
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     mr r19, r3
     addi r3, r1, 0x120
     li r4, -0x1
@@ -1606,7 +1558,7 @@ lbl_fn_803C3894_00001480:
     li r4, -0x1
     bl cam_setLookAtTarget
     addi r3, r1, 0xa0
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     mr r4, r3
     addi r3, r18, 0x18
     addi r6, r25, 0x24f
@@ -1635,7 +1587,7 @@ lbl_fn_803C3894_00001500:
     addi r21, r21, 0x1
 lbl_fn_803C3894_00001524:
     addi r3, r1, 0xa0
-    bl fn_800E0AA8
+    bl particle_getEmitterContext
     cmplw r21, r3
     blt lbl_fn_803C3894_000014E0
     addi r3, r1, 0x2b0

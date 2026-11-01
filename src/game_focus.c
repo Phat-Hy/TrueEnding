@@ -22,7 +22,7 @@ extern void PSMTXMultVec(void);
 extern void fn_805F99F0(void);
 extern void msl_releaseRefCount(void);
 extern void vec3_isNonZero(void);
-extern void fn_8072D210(void);
+extern void math_normalizeAngle(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -257,17 +257,17 @@ lbl_fn_800991D0_00000294:
     fmuls f0, f0, f30
     lfs f25, 0x19c(r1)
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     fmuls f0, f25, f30
     addi r3, r1, 0x74
     addi r4, r1, 0x80
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     fmuls f0, f24, f30
     addi r3, r1, 0x70
     addi r4, r1, 0x7c
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f11, 0x80(r1)
     addi r3, r1, 0x188
     lfs f8, 0x78(r1)
@@ -346,17 +346,17 @@ lbl_fn_800991D0_000003EC:
     fmuls f0, f0, f30
     lfs f24, 0x164(r1)
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     fmuls f0, f24, f30
     addi r3, r1, 0x5c
     addi r4, r1, 0x68
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     fmuls f0, f25, f30
     addi r3, r1, 0x58
     addi r4, r1, 0x64
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f11, 0x68(r1)
     addi r3, r1, 0x150
     lfs f8, 0x60(r1)
@@ -451,17 +451,17 @@ lbl_fn_800991D0_00000584:
     fmuls f0, f0, f30
     lfs f24, 0x12c(r1)
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     fmuls f0, f24, f30
     addi r3, r1, 0x44
     addi r4, r1, 0x50
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     fmuls f0, f25, f30
     addi r3, r1, 0x40
     addi r4, r1, 0x4c
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f11, 0x50(r1)
     addi r3, r1, 0x118
     lfs f8, 0x48(r1)
@@ -636,17 +636,17 @@ lbl_fn_800991D0_00000834:
     fmuls f0, f0, f30
     lfs f24, 0xf4(r1)
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     fmuls f0, f24, f30
     addi r3, r1, 0x2c
     addi r4, r1, 0x38
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     fmuls f0, f25, f30
     addi r3, r1, 0x28
     addi r4, r1, 0x34
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f11, 0x38(r1)
     lfs f8, 0x30(r1)
     lfs f5, 0x2c(r1)
@@ -724,17 +724,17 @@ lbl_fn_800991D0_00000988:
     fmuls f0, f0, f30
     lfs f24, 0xbc(r1)
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     fmuls f0, f24, f30
     addi r3, r1, 0x14
     addi r4, r1, 0x20
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     fmuls f0, f25, f30
     addi r3, r1, 0x10
     addi r4, r1, 0x1c
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f11, 0x20(r1)
     lfs f8, 0x18(r1)
     lfs f5, 0x14(r1)
@@ -1656,17 +1656,17 @@ lbl_fn_8009A5CC_00001694:
     fmuls f0, f0, f30
     lfs f25, 0xb0(r1)
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     fmuls f0, f26, f30
     addi r3, r1, 0x34
     addi r4, r1, 0x28
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     fmuls f0, f25, f30
     addi r3, r1, 0x38
     addi r4, r1, 0x2c
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f27, 0x28(r1)
     addi r3, r1, 0x78
     lfs f12, 0x30(r1)
@@ -1710,17 +1710,17 @@ lbl_fn_8009A5CC_00001750:
     fmuls f0, f0, f30
     lfs f25, 0x1c(r18)
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     fmuls f0, f26, f30
     addi r3, r1, 0x1c
     addi r4, r1, 0x10
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     fmuls f0, f25, f30
     addi r3, r1, 0x20
     addi r4, r1, 0x14
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f26, 0x10(r1)
     addi r4, r1, 0x98
     lfs f12, 0x18(r1)
@@ -2236,17 +2236,17 @@ lbl_fn_8009ADA4_00001F18:
     fmuls f0, f0, f30
     lfs f25, 0x130(r1)
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     fmuls f0, f26, f30
     addi r3, r1, 0x54
     addi r4, r1, 0x48
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     fmuls f0, f25, f30
     addi r3, r1, 0x58
     addi r4, r1, 0x4c
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f27, 0x48(r1)
     addi r3, r1, 0xe8
     lfs f12, 0x50(r1)
@@ -2288,17 +2288,17 @@ lbl_fn_8009ADA4_00001FD4:
     fmuls f0, f0, f30
     lfs f25, 0x1c(r27)
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     fmuls f0, f26, f30
     addi r3, r1, 0x3c
     addi r4, r1, 0x30
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     fmuls f0, f25, f30
     addi r3, r1, 0x40
     addi r4, r1, 0x34
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f27, 0x30(r1)
     addi r4, r1, 0x138
     lfs f12, 0x38(r1)
@@ -2371,17 +2371,17 @@ lbl_fn_8009ADA4_00002120:
     fmuls f0, f0, f30
     lfs f25, 0x124(r1)
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     fmuls f0, f26, f30
     addi r3, r1, 0x24
     addi r4, r1, 0x18
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     fmuls f0, f25, f30
     addi r3, r1, 0x28
     addi r4, r1, 0x1c
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f26, 0x18(r1)
     addi r3, r1, 0xc8
     lfs f12, 0x20(r1)

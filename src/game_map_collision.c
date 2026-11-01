@@ -34,7 +34,7 @@ extern void fn_80182134(void);
 extern void entity_Instance_constructor(void);
 extern void entity_Instance_destructor(void);
 extern void craft_forgeUpgradeWeapon(void);
-extern void fn_803CD958(void);
+extern void crowd_selectWaypointByWeight(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXScale(void);
@@ -1717,7 +1717,7 @@ lbl_fn_80181A64_00001640:
     li r21, 0x1
     add r3, r0, r31
     addi r24, r24, 0x1
-    bl fn_803CD958
+    bl crowd_selectWaypointByWeight
     clrlwi r19, r3, 16
     lwz r4, 0x9c(r26)
     subi r0, r19, 0x1
@@ -1758,7 +1758,7 @@ lbl_fn_80181A64_00001708:
     slwi r0, r0, 3
     subi r4, r30, 0x1
     add r3, r3, r0
-    bl fn_803CD958
+    bl crowd_selectWaypointByWeight
     clrlwi r19, r3, 16
 lbl_fn_80181A64_00001724:
     cmpwi r19, 0x0

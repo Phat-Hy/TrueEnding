@@ -28,7 +28,7 @@ extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_update(void);
 extern void res_registerResource(void);
 extern void fn_80376224(void);
-extern void fn_803EC758(void);
+extern void barrier_formatCountdownTimer(void);
 extern void fn_803ED610(void);
 extern void fn_803FDFC0(void);
 extern void boss_getOffset54(void);
@@ -816,7 +816,7 @@ asm void fn_803FF9A4(void)
     mr r27, r4
     mr r26, r3
     addi r4, r1, 0x8
-    bl fn_803EC758
+    bl barrier_formatCountdownTimer
     lwz r0, 0xf0(r26)
     cmpwi r0, 0x0
     bne lbl_fn_803FF9A4_00000A88

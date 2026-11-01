@@ -73,9 +73,9 @@ extern u32 lbl_80888A58;
 
 /* Function declarations */
 void gdev_cc_initialize(void);
-void gdev_cc_shutdown(void);
+u32 gdev_cc_shutdown(void);
 void gdev_cc_open(void);
-void gdev_cc_close(void);
+u32 gdev_cc_close(void);
 void gdev_cc_read(void);
 void gdev_cc_write(void);
 void gdev_cc_pre_continue(void);
@@ -85,7 +85,7 @@ void gdev_cc_initinterrupts(void);
 void fn_80675190(void);
 void fn_80675194(void);
 void fn_806751C4(void);
-void fn_806751CC(void);
+u32 fn_806751CC(void *p);
 void fn_806751D4(void);
 void fn_806751F8(void);
 void fn_80675300(void);
@@ -128,8 +128,8 @@ void TRKInitializeEndian(void);
 void fn_80676328(void);
 void TRKGetInput(void);
 void fn_80676420(void);
-void TRKInitializeSerialHandler(void);
-void fn_80676468(void);
+u32 TRKInitializeSerialHandler(void);
+u32 fn_80676468(void);
 void fn_80676470(void);
 void fn_8067648C(void);
 void fn_80676680(void);
@@ -155,7 +155,7 @@ void fn_8067732C(void);
 void fn_8067741C(void);
 void fn_806774FC(void);
 void fn_80677594(void);
-void fn_8067767C(void);
+u32 fn_8067767C(void);
 void fn_80677684(void);
 void fn_806776F4(void);
 void fn_8067777C(void);
@@ -207,10 +207,10 @@ void fn_80679D28(void);
 void fn_80679D4C(void);
 void fn_80679F14(void);
 void TRKTargetSetInputPendingPtr(void);
-void fn_80679F8C(void);
+u32 fn_80679F8C(u32 val);
 void fn_80679F94(void);
-void fn_8067A024(void);
-void fn_8067A02C(void);
+void fn_8067A024(u8 val);
+u8 fn_8067A02C(void);
 void fn_8067A034(void);
 void fn_8067A238(void);
 void fn_8067A388(void);
@@ -245,11 +245,9 @@ asm void gdev_cc_initialize(void)
     blr
 }
 
-asm void gdev_cc_shutdown(void)
+u32 gdev_cc_shutdown(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void gdev_cc_open(void)
@@ -267,11 +265,9 @@ lbl_gdev_cc_open_00000058:
     blr
 }
 
-asm void gdev_cc_close(void)
+u32 gdev_cc_close(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void gdev_cc_read(void)
@@ -474,11 +470,9 @@ asm void fn_806751C4(void)
     b OSRestoreInterrupts
 }
 
-asm void fn_806751CC(void)
+u32 fn_806751CC(void *p)
 {
-    nofralloc
-    lwz r3, 0x10(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x10);
 }
 
 asm void fn_806751D4(void)
@@ -1946,18 +1940,14 @@ asm void fn_80676420(void)
     blr
 }
 
-asm void TRKInitializeSerialHandler(void)
+u32 TRKInitializeSerialHandler(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_80676468(void)
+u32 fn_80676468(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_80676470(void)
@@ -3333,11 +3323,9 @@ lbl_fn_80677594_0000274C:
     blr
 }
 
-asm void fn_8067767C(void)
+u32 fn_8067767C(void)
 {
-    nofralloc
-    lwz r3, lbl_8088032C
-    blr
+    return lbl_8088032C;
 }
 
 asm void fn_80677684(void)
@@ -6401,11 +6389,9 @@ asm void TRKTargetSetInputPendingPtr(void)
     blr
 }
 
-asm void fn_80679F8C(void)
+u32 fn_80679F8C(u32 val)
 {
-    nofralloc
-    oris r3, r3, 0x8000
-    blr
+    return val | 0x80000000;
 }
 
 asm void fn_80679F94(void)
@@ -6454,18 +6440,14 @@ lbl_fn_80679F94_00005104:
     blr
 }
 
-asm void fn_8067A024(void)
+void fn_8067A024(u8 val)
 {
-    nofralloc
-    stb r3, lbl_80880338
-    blr
+    lbl_80880338 = val;
 }
 
-asm void fn_8067A02C(void)
+u8 fn_8067A02C(void)
 {
-    nofralloc
-    lbz r3, lbl_80880338
-    blr
+    return lbl_80880338;
 }
 
 asm void fn_8067A034(void)

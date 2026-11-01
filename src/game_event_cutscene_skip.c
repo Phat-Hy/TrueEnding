@@ -17,14 +17,14 @@ extern void fn_8006A204(void);
 extern void fn_8006A900(void);
 extern void boss_triggerEventSequence(void);
 extern void fn_8006BA8C(void);
-extern void fn_8006BB6C(void);
+extern void boss_triggerEventAction(void);
 extern void mem_free(void);
 extern void map_debugLog(void);
 extern void fn_800C3094(void);
 extern void fn_800CB480(void);
 extern void fn_800CF680(void);
-extern void fn_800D0180(void);
-extern void fn_800D0198(void);
+extern void shadow_dispatchCallback(void);
+extern void shadow_initProjectionContext(void);
 extern void fn_800D0DB0(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
@@ -34,8 +34,8 @@ extern void fn_8016DF3C(void);
 extern void actor_setState(void);
 extern void fn_801839FC(void);
 extern void fn_80183D00(void);
-extern void fn_8021771C(void);
-extern void fn_80219544(void);
+extern void task_findNextReady(void);
+extern void task_getWorkerByIndex(void);
 extern void fn_80334B38(void);
 extern void fn_80365464(void);
 extern void world_startMapTransition(void);
@@ -528,12 +528,12 @@ lbl_fn_8047FAD0_000004D4:
     stw r0, 0x20(r1)
     bne lbl_fn_8047FAD0_00000524
     lis r6, lbl_807C75C0@ha
-    lis r4, fn_800D0180@ha
-    lis r3, fn_800D0198@ha
+    lis r4, shadow_dispatchCallback@ha
+    lis r3, shadow_initProjectionContext@ha
     li r0, 0x1
-    addi r3, r3, fn_800D0198@l
+    addi r3, r3, shadow_initProjectionContext@l
     addi r5, r6, lbl_807C75C0@l
-    addi r4, r4, fn_800D0180@l
+    addi r4, r4, shadow_dispatchCallback@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C75C0@l(r6)
     stb r0, lbl_8087EFEE
@@ -823,7 +823,7 @@ asm void fn_8047FF70(void)
     slwi r0, r0, 2
     add r3, r4, r0
     lwz r3, 0x64a0(r3)
-    bl fn_80219544
+    bl task_getWorkerByIndex
     mr r5, r3
 lbl_fn_8047FF70_00000934:
     cmpwi r27, 0x0
@@ -1298,7 +1298,7 @@ asm void fn_804805F0(void)
     lbz r19, 0x37(r1)
     mr r4, r20
     mr r5, r19
-    bl fn_8021771C
+    bl task_findNextReady
     rlwinm. r0, r17, 0, 27, 27
     stw r3, 0x2a8(r1)
     beq lbl_fn_804805F0_00001114
@@ -1339,7 +1339,7 @@ asm void fn_804805F0(void)
     bl fn_803C3894
     mr r3, r18
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
     cmpwi r21, 0x1
     bne lbl_fn_804805F0_000010F8
     lwz r3, lbl_8087F0A8
@@ -1366,7 +1366,7 @@ asm void fn_804805F0(void)
     bl fn_803C3894
     mr r3, r14
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
 lbl_fn_804805F0_0000109C:
     lis r4, lbl_80756380@ha
     addi r3, r1, 0x1a8
@@ -1390,7 +1390,7 @@ lbl_fn_804805F0_0000109C:
     bl fn_803C3894
     mr r3, r14
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
 lbl_fn_804805F0_000010F8:
     lwz r0, lbl_8087F4A0
     cmpwi r0, 0x0

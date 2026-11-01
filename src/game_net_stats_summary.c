@@ -14,14 +14,14 @@ extern void fn_800128FC(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8004B0E4(void);
 extern void fn_80069BF4(void);
-extern void fn_8006A250(void);
+extern void boss_dispatchActionTransition(void);
 extern void boss_triggerEventSequence(void);
-extern void fn_8006B2D8(void);
+extern void boss_parseStateCondition(void);
 extern void fn_8006D008(void);
 extern void script_executeOpcode(void);
 extern void dungeon_initGlobalContext(void);
 extern void fn_80084F84(void);
-extern void fn_800A4450(void);
+extern void font_getGlyphEntryByIndex(void);
 extern void fn_800C3094(void);
 extern void fn_800C310C(void);
 extern void fn_800C3124(void);
@@ -31,7 +31,7 @@ extern void str_findChar(void);
 extern void magic_dispatchActionCommand(void);
 extern void boss_updatePhaseState(void);
 extern void save_validateHeader(void);
-extern void fn_801FEC74(void);
+extern void thread_findQueueTaskByName(void);
 extern void thread_findAndNotify(void);
 extern void fn_80204230(void);
 extern void fn_8020F130(void);
@@ -45,7 +45,7 @@ extern void fn_803B5470(void);
 extern void fn_803CCCC0(void);
 extern void fn_803EB234(void);
 extern void fn_80470364(void);
-extern void fn_80470528(void);
+extern void boss_releaseLaserTarget(void);
 extern void fn_8047054C(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_8047F580(void);
@@ -347,7 +347,7 @@ lbl_fn_8053F1B8_00000344:
     cmpwi r3, 0x0
     beq lbl_fn_8053F1B8_00000560
     addi r3, r31, 0x29c
-    bl fn_80470528
+    bl boss_releaseLaserTarget
     lwz r0, 0x98(r31)
     extrwi r0, r0, 1, 11
     cmplwi r0, 0x1
@@ -386,12 +386,12 @@ lbl_fn_8053F1B8_000003B4:
     lwz r30, 0x18(r4)
     addi r4, r3, 0x1b
     addi r3, r30, 0x58
-    bl fn_801FEC74
+    bl thread_findQueueTaskByName
     mr r4, r3
     addi r3, r1, 0x8
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A4450
+    bl font_getGlyphEntryByIndex
     lwz r0, 0x8(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31
@@ -472,7 +472,7 @@ lbl_fn_8053F1B8_000004C8:
     li r5, -0x1
     lis r6, 0xff00
     stw r0, 0x2c4(r31)
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     li r4, 0x1
     stw r4, 0x48(r3)
     li r0, 0xa
@@ -942,7 +942,7 @@ lbl_fn_8053F81C_00000B80:
     bne lbl_fn_8053F81C_00000C64
     addi r3, r1, 0x68
     addi r4, r24, 0x68
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lis r5, lbl_8075E148@ha
     addi r3, r1, 0x5c
     addi r5, r5, lbl_8075E148@l
@@ -1092,7 +1092,7 @@ lbl_fn_8053F81C_00000D80:
 lbl_fn_8053F81C_00000D98:
     addi r3, r1, 0x2c
     addi r4, r24, 0x68
-    bl fn_8006B2D8
+    bl boss_parseStateCondition
     lis r5, lbl_8075E148@ha
     addi r3, r1, 0x20
     addi r5, r5, lbl_8075E148@l
@@ -1862,7 +1862,7 @@ asm void fn_805406C0(void)
     rlwimi r5, r0, 27, 5, 5
     stw r5, 0x98(r3)
     addi r3, r3, 0x29c
-    bl fn_80470528
+    bl boss_releaseLaserTarget
     li r28, 0x0
     li r29, 0x0
     b lbl_fn_805406C0_000017C4
