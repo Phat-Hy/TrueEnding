@@ -29,7 +29,7 @@ extern void fn_80083AD4(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void fn_800C93D4(void);
 extern void fn_800C97F8(void);
@@ -315,7 +315,7 @@ lbl_sound_updateActiveTasks_00000084:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     stw r3, 0x1c(r1)
     mr r18, r3
     stw r3, 0x10(r1)

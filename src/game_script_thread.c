@@ -28,7 +28,7 @@ extern void npc_calcTargetDistance(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
-extern void fn_80176ACC(void);
+extern void battle_activateExpReward(void);
 extern void battle_generateLootDrops(void);
 extern void battle_updateActorStatus(void);
 extern void actor_getMovementFlags(void);
@@ -1729,7 +1729,7 @@ lbl_fn_8024FFE8_000017F4:
 lbl_fn_8024FFE8_00001808:
     add r25, r29, r28
     lwz r3, 0x16dc(r25)
-    bl fn_80176ACC
+    bl battle_activateExpReward
     lwz r3, 0x16dc(r25)
     addi r3, r3, 0x7d4
     bl enemy_updateAnimTimer

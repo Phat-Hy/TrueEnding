@@ -9,7 +9,7 @@ extern void sound_releaseChannel(void);
 extern void fn_800795DC(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
@@ -182,7 +182,7 @@ lbl_fn_800C122C_00000070:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x1c(r1)
     mr r31, r3
@@ -339,7 +339,7 @@ lbl_fn_800C1424_000002AC:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x4c(r1)
     mr r30, r3

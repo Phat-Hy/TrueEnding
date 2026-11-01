@@ -10,7 +10,7 @@ extern void enemy_updateAnimTimer(void);
 extern void quest_updateFlow(void);
 extern void fn_80154654(void);
 extern void battle_awardExp(void);
-extern void fn_80176ACC(void);
+extern void battle_activateExpReward(void);
 extern void fn_8021ECD0(void);
 extern void wpad_getActiveDevice(void);
 extern void world_getGlobalFlag(void);
@@ -1488,7 +1488,7 @@ lbl_fn_803965FC_00001330:
     lwz r5, 0x24(r21)
     bl fn_80154654
     mr r3, r22
-    bl fn_80176ACC
+    bl battle_activateExpReward
     lwz r0, 0x4(r16)
     add r3, r0, r29
     lwz r0, 0x4(r3)
@@ -1722,7 +1722,7 @@ lbl_fn_803965FC_00001668:
     bl quest_updateFlow
 lbl_fn_803965FC_0000167C:
     mr r3, r22
-    bl fn_80176ACC
+    bl battle_activateExpReward
     b lbl_fn_803965FC_000016A0
 lbl_fn_803965FC_00001688:
     lwz r0, 0x38(r22)

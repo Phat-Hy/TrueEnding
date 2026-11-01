@@ -30,7 +30,7 @@ extern void str_findChar(void);
 extern void fn_80154654(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
-extern void fn_80176ACC(void);
+extern void battle_activateExpReward(void);
 extern void actor_getMovementFlags(void);
 extern void fn_801F0364(void);
 extern void fn_801F03AC(void);
@@ -633,7 +633,7 @@ lbl_fn_801EB8C0_00000764:
     cmpwi r30, 0x0
     beq lbl_fn_801EB8C0_00000784
     mr r3, r31
-    bl fn_80176ACC
+    bl battle_activateExpReward
     b lbl_fn_801EB8C0_0000078C
 lbl_fn_801EB8C0_00000784:
     mr r3, r31

@@ -12,7 +12,7 @@ extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void viewport_updateCulling(void);
-extern void fn_80108C10(void);
+extern void hurtbox_testCollisionLayer(void);
 extern void fn_8010B250(void);
 extern void fn_8010CF28(void);
 extern void fn_8010F4BC(void);
@@ -327,7 +327,7 @@ lbl_fn_80441F24_000002A0:
     lwz r6, 0x88(r19)
     stfs f9, 0xb0(r1)
     stfs f10, 0xb4(r1)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     cmpwi r18, 0x2
     bne lbl_fn_80441F24_00000494
     lwz r0, 0x48(r20)

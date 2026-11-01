@@ -34,7 +34,7 @@ extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_8017547C(void);
 extern void battle_awardExp(void);
-extern void fn_80176ACC(void);
+extern void battle_activateExpReward(void);
 extern void battle_updateActorStatus(void);
 extern void task_mapIdToQueue(void);
 extern void sound_initGlobalInstances(void);
@@ -904,7 +904,7 @@ lbl_fn_80246C30_00000B34:
     mr r3, r25
     rlwinm r0, r0, 0, 17, 15
     stw r0, 0x12a4(r25)
-    bl fn_80176ACC
+    bl battle_activateExpReward
     mr r3, r25
     li r4, 0x0
     bl atn_Task_setActive
@@ -1404,7 +1404,7 @@ lbl_fn_80247258_0000126C:
     mr r3, r20
     rlwinm r0, r0, 0, 17, 15
     stw r0, 0x12a4(r20)
-    bl fn_80176ACC
+    bl battle_activateExpReward
     mr r3, r20
     li r4, 0x0
     bl atn_Task_setActive

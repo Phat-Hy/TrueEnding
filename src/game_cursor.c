@@ -16,7 +16,7 @@ extern void boss_decodePhaseBitfield(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void* area_refresh(void*);
 extern void fn_8008A76C(void);
@@ -1572,7 +1572,7 @@ lbl_fn_80097E80_00001360:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x2c(r1)
     mr r14, r3

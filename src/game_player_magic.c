@@ -8,8 +8,8 @@ extern void fn_8008B964(void);
 extern void msg_getMessageById(void);
 extern void msg_getMessageString(void);
 extern void fn_800A55D4(void);
-extern void fn_800A56A8(void);
-extern void fn_800A58D0(void);
+extern void msg_formatWindowLayout(void);
+extern void msg_isWindowActive(void);
 extern void fn_800F52F8(void);
 extern void fn_800F7258(void);
 extern void fn_801156BC(void);
@@ -23,7 +23,7 @@ extern void fn_8012216C(void);
 extern void fn_80122238(void);
 extern void fn_80122280(void);
 extern void fn_80122288(void);
-extern void fn_801240B4(void);
+extern void player_evaluateStatusCondition(void);
 extern void fn_801248DC(void);
 extern void fn_80124BE4(void);
 extern void fn_8017C974(void);
@@ -114,7 +114,7 @@ asm void fn_80122330(void)
     b lbl_fn_80122330_0000025C
 lbl_fn_80122330_0000009C:
     li r4, 0x11
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_80122330_000000C8
     bl fn_80122288
@@ -153,7 +153,7 @@ lbl_fn_80122330_00000118:
 lbl_fn_80122330_00000120:
     mr r3, r31
     li r4, 0x3
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_80122330_00000144
     lwz r3, 0x8(r31)
@@ -166,7 +166,7 @@ lbl_fn_80122330_00000144:
 lbl_fn_80122330_0000014C:
     mr r3, r31
     li r4, 0x7
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_80122330_00000170
     lwz r3, 0x4c(r31)
@@ -352,7 +352,7 @@ lbl_fn_8012256C_00000394:
 lbl_fn_8012256C_000003B4:
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_fn_8012256C_00000514
     lwz r3, lbl_8087F430
@@ -824,7 +824,7 @@ lbl_fn_80122C70_000009C4:
 lbl_fn_80122C70_00000A10:
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_fn_80122C70_00000A2C
     li r3, 0xf
@@ -850,7 +850,7 @@ lbl_fn_80122C70_00000A2C:
     b lbl_fn_80122C70_00000EC8
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     li r3, 0x5
     beq lbl_fn_80122C70_00000EC8
@@ -897,7 +897,7 @@ lbl_fn_80122C70_00000AE4:
     b lbl_fn_80122C70_00000EC8
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     neg r0, r3
     or r0, r0, r3
     srawi r3, r0, 31
@@ -926,7 +926,7 @@ lbl_fn_80122C70_00000AE4:
 lbl_fn_80122C70_00000B94:
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_fn_80122C70_00000BB0
     li r3, 0xf
@@ -984,7 +984,7 @@ lbl_fn_80122C70_00000C3C:
 lbl_fn_80122C70_00000C68:
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_fn_80122C70_00000C84
     li r3, 0xf
@@ -1051,7 +1051,7 @@ lbl_fn_80122C70_00000C84:
     b lbl_fn_80122C70_00000EC8
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -1059,7 +1059,7 @@ lbl_fn_80122C70_00000C84:
     b lbl_fn_80122C70_00000EC8
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     neg r0, r3
     or r0, r0, r3
     srawi r3, r0, 31
@@ -1067,7 +1067,7 @@ lbl_fn_80122C70_00000C84:
     b lbl_fn_80122C70_00000EC8
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     li r3, 0x0
     beq lbl_fn_80122C70_00000EC8
@@ -1075,7 +1075,7 @@ lbl_fn_80122C70_00000C84:
     b lbl_fn_80122C70_00000EC8
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -1083,7 +1083,7 @@ lbl_fn_80122C70_00000C84:
     b lbl_fn_80122C70_00000EC8
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -1091,7 +1091,7 @@ lbl_fn_80122C70_00000C84:
     b lbl_fn_80122C70_00000EC8
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_fn_80122C70_00000E2C
     li r3, 0x0
@@ -1105,7 +1105,7 @@ lbl_fn_80122C70_00000E2C:
     b lbl_fn_80122C70_00000EC8
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     li r3, 0xa
     beq lbl_fn_80122C70_00000EC8
@@ -1113,7 +1113,7 @@ lbl_fn_80122C70_00000E2C:
     b lbl_fn_80122C70_00000EC8
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     li r3, 0x1f
     beq lbl_fn_80122C70_00000EC8
@@ -1121,7 +1121,7 @@ lbl_fn_80122C70_00000E2C:
     b lbl_fn_80122C70_00000EC8
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     li r3, 0xf
     beq lbl_fn_80122C70_00000EC8
@@ -1129,7 +1129,7 @@ lbl_fn_80122C70_00000E2C:
     b lbl_fn_80122C70_00000EC8
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     li r3, 0xe
     beq lbl_fn_80122C70_00000EC8
@@ -1192,7 +1192,7 @@ asm void magic_dispatchActionCommand(void)
     b lbl_magic_dispatchActionCommand_000014E8
     bl fn_801156BC
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_magic_dispatchActionCommand_00000FB8
     li r31, 0x0
@@ -1313,7 +1313,7 @@ lbl_magic_dispatchActionCommand_0000110C:
     mr r3, r29
     li r31, 0x0
     li r4, 0x7
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     beq lbl_magic_dispatchActionCommand_00001158
     mr r3, r29
@@ -1345,7 +1345,7 @@ lbl_magic_dispatchActionCommand_0000118C:
     li r4, 0x0
     li r5, 0x4
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     bl fn_80013404
     lfs f0, lbl_80881830
     fcmpo cr0, f1, f0
@@ -1417,13 +1417,13 @@ lbl_magic_dispatchActionCommand_000012A8:
     li r4, 0x0
     li r5, 0x6
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fneg f31, f1
     bl fn_801156BC
     li r4, 0x0
     li r5, 0x5
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fadds f31, f31, f1
     lfs f0, lbl_80881834
     fcmpo cr0, f31, f0
@@ -1464,7 +1464,7 @@ lbl_magic_dispatchActionCommand_00001358:
     li r4, 0x0
     li r5, 0x6
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     lfs f0, lbl_80881830
     fcmpo cr0, f1, f0
     mfcr r3

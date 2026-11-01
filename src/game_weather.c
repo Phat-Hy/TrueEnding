@@ -29,7 +29,7 @@ extern void fn_80108A54(void);
 extern void fn_8010AB94(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_801237F0(void);
-extern void fn_801240B4(void);
+extern void player_evaluateStatusCondition(void);
 extern void fn_8012F3D8(void);
 extern void fn_80134134(void);
 extern void fn_801346C8(void);
@@ -393,7 +393,7 @@ lbl_fn_800E73EC_000003A0:
     lwz r3, lbl_8087F0A8
     li r4, 0x12
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_800E73EC_000003E0
     lwz r0, 0x12a8(r27)
@@ -410,7 +410,7 @@ lbl_fn_800E73EC_000003E0:
     lwz r3, lbl_8087F0A8
     li r4, 0x7
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     bne lbl_fn_800E73EC_00000404
     lwz r0, 0x12a8(r27)
@@ -611,7 +611,7 @@ lbl_fn_800E7650_000006A4:
     stw r0, 0x12a4(r3)
     lwz r3, lbl_8087F0A8
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     bne lbl_fn_800E7650_00000974
     mr r3, r29
@@ -699,7 +699,7 @@ lbl_fn_800E7650_000007F4:
     stw r0, 0x12a4(r29)
     lwz r3, lbl_8087F0A8
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     bne lbl_fn_800E7650_00000974
     lwz r0, 0x12a4(r29)
@@ -728,7 +728,7 @@ lbl_fn_800E7650_0000086C:
     lwz r3, lbl_8087F0A8
     li r4, 0x7
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_800E7650_00000950
     lis r3, lbl_80735238@ha
@@ -788,7 +788,7 @@ lbl_fn_800E7650_00000950:
     lwz r3, lbl_8087F0A8
     li r4, 0x12
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_800E7650_00000974
     mr r3, r29

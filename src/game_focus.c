@@ -5,7 +5,7 @@
 extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void mem_free(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void fn_80098948(void);
 extern void fn_800A0548(void);
@@ -845,7 +845,7 @@ lbl_fn_800991D0_00000B2C:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0xc
     stw r3, 0x94(r1)
     mr r18, r3
@@ -1843,7 +1843,7 @@ lbl_fn_8009A5CC_00001938:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x54(r1)
     mr r31, r3
@@ -2532,7 +2532,7 @@ lbl_fn_8009ADA4_00002350:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x10
     stw r3, 0x90(r1)
     mr r27, r3
@@ -2705,7 +2705,7 @@ lbl_fn_8009ADA4_000025B8:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0xc
     stw r3, 0x84(r1)
     mr r27, r3

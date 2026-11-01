@@ -10,7 +10,7 @@ extern void talk_formatQuotedString(void);
 extern void fn_800709F4(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void fn_8009E5A0(void);
 extern void hud_updateTargetReticle(void);
@@ -1110,7 +1110,7 @@ lbl_fn_80491528_00000DB4:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     stw r3, 0x30(r1)
     mr r15, r3
     stw r3, 0x18(r1)
@@ -1204,7 +1204,7 @@ lbl_fn_80491528_00000F0C:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     stw r3, 0x24(r1)
     mr r15, r3
     stw r3, 0x10(r1)

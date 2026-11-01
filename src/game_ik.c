@@ -10,7 +10,7 @@ extern void fn_80049CDC(void);
 extern void fn_80049E3C(void);
 extern void boss_recordDamage(void);
 extern void mem_free(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void msg_getMessageById(void);
 extern void fn_800A5584(void);
@@ -159,7 +159,7 @@ lbl_fn_800C6CD4_0000005C:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     stw r3, 0x1c(r1)
     mr r17, r3
     stw r3, 0x10(r1)
@@ -866,7 +866,7 @@ lbl_fn_800C7568_0000092C:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x1c(r1)
     mr r25, r3
@@ -1183,7 +1183,7 @@ asm void fn_800C7A30(void)
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x1c(r1)
     mr r24, r3
@@ -1272,7 +1272,7 @@ asm void fn_800C7B78(void)
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x1c(r1)
     mr r28, r3
@@ -1356,7 +1356,7 @@ asm void fn_800C7CA8(void)
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x1c(r1)
     mr r31, r3

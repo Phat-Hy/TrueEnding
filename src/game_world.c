@@ -21,7 +21,7 @@ extern void fn_8007FE5C(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void fn_800875F8(void);
@@ -1030,7 +1030,7 @@ lbl_fn_80080C20_00000C60:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x44(r1)
     mr r15, r3

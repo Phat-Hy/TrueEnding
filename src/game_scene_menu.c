@@ -14,15 +14,15 @@ extern void mem_free(void);
 extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800A56A8(void);
+extern void msg_formatWindowLayout(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_801065E4(void);
-extern void fn_801240B4(void);
+extern void player_evaluateStatusCondition(void);
 extern void fn_80133130(void);
-extern void fn_801446F0(void);
+extern void quest_resetObjectiveBounds(void);
 extern void inventory_unequipItem(void);
 extern void equip_applyToCharacter(void);
 extern void inventory_calcTotalStats(void);
@@ -456,7 +456,7 @@ asm void fn_801A6750(void)
     lfs f0, lbl_80882178
     stfs f0, 0x234(r29)
     lwz r3, 0x4(r31)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     cmpwi r30, 0x0
     beq lbl_fn_801A6750_00000624
     lwz r3, 0x4(r31)
@@ -1331,7 +1331,7 @@ lbl_fn_801A73A4_00001114:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fneg f4, f1
     lfs f3, lbl_808821E4
     lwz r3, lbl_8087F0A8
@@ -1341,7 +1341,7 @@ lbl_fn_801A73A4_00001114:
     addi r3, r3, 0x48c
     fmadds f0, f30, f3, f0
     stfs f0, 0x38(r1)
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     bne lbl_fn_801A73A4_0000117C
     lfs f1, lbl_80882178

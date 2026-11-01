@@ -13,8 +13,8 @@ extern void fn_80058EE4(void);
 extern void mem_alloc(void);
 extern void fn_800A55D4(void);
 extern void fn_800A5648(void);
-extern void fn_800A56A8(void);
-extern void fn_800A58D0(void);
+extern void msg_formatWindowLayout(void);
+extern void msg_isWindowActive(void);
 extern void fn_800A58F8(void);
 extern void PSMTXConcat(void);
 extern void PSMTXInverse(void);
@@ -976,7 +976,7 @@ lbl_fn_8004BF64_00000CE8:
     li r30, 0x1f
     li r27, 0x20
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     bne lbl_fn_8004BF64_00000D10
     li r30, 0xc
@@ -1007,7 +1007,7 @@ lbl_fn_8004BF64_00000D2C:
     li r4, 0x0
     li r5, 0x1
     li r6, 0x1
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fabs f3, f1
     lfs f0, lbl_808808B4
     frsp f3, f3
@@ -1044,7 +1044,7 @@ lbl_fn_8004BF64_00000DEC:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x1
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fabs f3, f1
     lfs f0, lbl_808808B4
     frsp f3, f3
@@ -1095,7 +1095,7 @@ lbl_fn_8004BF64_00000EB4:
     li r4, 0x0
     li r5, 0x1
     li r6, 0x1
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fabs f3, f1
     lfs f0, lbl_808808B4
     frsp f3, f3
@@ -1284,7 +1284,7 @@ lbl_fn_8004BF64_00001168:
     li r6, 0x1
     psq_st f1, 0x0(r30), 0, 0
     stfs f2, 0x19c(r1)
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fabs f3, f1
     lfs f0, lbl_808808B4
     frsp f3, f3
@@ -1342,7 +1342,7 @@ lbl_fn_8004BF64_00001264:
     li r4, 0x0
     li r5, 0x3
     li r6, 0x1
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fabs f3, f1
     lfs f0, lbl_808808B4
     frsp f3, f3

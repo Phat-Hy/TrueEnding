@@ -24,7 +24,7 @@ extern void vec3_initValues(void);
 extern void script_executeOpcode(void);
 extern void fn_8006FA4C(void);
 extern void fn_8008B964(void);
-extern void fn_800A58D0(void);
+extern void msg_isWindowActive(void);
 extern void motion_updateFogAdj(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
@@ -2605,7 +2605,7 @@ lbl_fn_803D2A6C_00002194:
     bl fn_803D6FEC
     bl fn_801156BC
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     addi r3, r1, 0x580
     li r4, 0x0
     li r5, 0x40

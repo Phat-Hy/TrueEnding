@@ -74,9 +74,9 @@ void msg_getMessageString(void);
 void fn_800A55D4(void);
 void fn_800A55FC(void);
 void fn_800A5648(void);
-void fn_800A56A8(void);
+void msg_formatWindowLayout(void);
 void fn_800A5870(void);
-void fn_800A58D0(void);
+void msg_isWindowActive(void);
 void fn_800A58F8(void);
 void fn_800A5920(void);
 void fn_800A59F0(void);
@@ -596,7 +596,7 @@ asm void fn_800A5648(void)
     blr
 }
 
-asm void fn_800A56A8(void)
+asm void msg_formatWindowLayout(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -613,14 +613,14 @@ asm void fn_800A56A8(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     mr r29, r5
-    ble lbl_fn_800A56A8_000007F0
+    ble lbl_msg_formatWindowLayout_000007F0
     cmplwi r5, 0x1
-    ble lbl_fn_800A56A8_000006F0
+    ble lbl_msg_formatWindowLayout_000006F0
     subi r0, r5, 0x2
     cmplwi r0, 0x1
-    ble lbl_fn_800A56A8_00000770
-    b lbl_fn_800A56A8_00000818
-lbl_fn_800A56A8_000006F0:
+    ble lbl_msg_formatWindowLayout_00000770
+    b lbl_msg_formatWindowLayout_00000818
+lbl_msg_formatWindowLayout_000006F0:
     slwi r0, r4, 2
     addi r3, r31, 0x0
     lwzx r30, r3, r0
@@ -630,23 +630,23 @@ lbl_fn_800A56A8_000006F0:
     lwz r0, 0x3c00(r4)
     clrlwi r0, r0, 31
     cmplwi r0, 0x1
-    bne lbl_fn_800A56A8_00000734
+    bne lbl_msg_formatWindowLayout_00000734
     slwi r0, r5, 2
     addi r4, r31, 0xc0
     lwzx r5, r4, r0
     mr r4, r30
     bl fn_800DEF94
     fadds f31, f31, f1
-    b lbl_fn_800A56A8_0000083C
-lbl_fn_800A56A8_00000734:
+    b lbl_msg_formatWindowLayout_0000083C
+lbl_msg_formatWindowLayout_00000734:
     cmpwi r6, 0x0
-    beq lbl_fn_800A56A8_00000750
+    beq lbl_msg_formatWindowLayout_00000750
     mr r4, r30
     li r5, 0xd
     bl fn_800DEF54
     cmpwi r3, 0x0
-    bne lbl_fn_800A56A8_0000083C
-lbl_fn_800A56A8_00000750:
+    bne lbl_msg_formatWindowLayout_0000083C
+lbl_msg_formatWindowLayout_00000750:
     slwi r0, r29, 2
     addi r5, r31, 0x98
     lwz r3, lbl_8087F018
@@ -654,8 +654,8 @@ lbl_fn_800A56A8_00000750:
     lwzx r5, r5, r0
     bl fn_800DEF94
     fadds f31, f31, f1
-    b lbl_fn_800A56A8_0000083C
-lbl_fn_800A56A8_00000770:
+    b lbl_msg_formatWindowLayout_0000083C
+lbl_msg_formatWindowLayout_00000770:
     slwi r0, r4, 2
     addi r3, r31, 0x0
     lwzx r30, r3, r0
@@ -665,22 +665,22 @@ lbl_fn_800A56A8_00000770:
     lwz r0, 0x3c00(r4)
     clrlwi r0, r0, 31
     cmplwi r0, 0x1
-    bne lbl_fn_800A56A8_000007B4
+    bne lbl_msg_formatWindowLayout_000007B4
     slwi r0, r5, 2
     addi r4, r31, 0xc0
     lwzx r5, r4, r0
     mr r4, r30
     bl fn_800DEF94
     fadds f31, f31, f1
-    b lbl_fn_800A56A8_0000083C
-lbl_fn_800A56A8_000007B4:
+    b lbl_msg_formatWindowLayout_0000083C
+lbl_msg_formatWindowLayout_000007B4:
     cmpwi r6, 0x0
-    beq lbl_fn_800A56A8_0000083C
+    beq lbl_msg_formatWindowLayout_0000083C
     mr r4, r30
     li r5, 0xd
     bl fn_800DEF54
     cmpwi r3, 0x0
-    beq lbl_fn_800A56A8_0000083C
+    beq lbl_msg_formatWindowLayout_0000083C
     slwi r0, r29, 2
     addi r5, r31, 0x98
     lwz r3, lbl_8087F018
@@ -688,8 +688,8 @@ lbl_fn_800A56A8_000007B4:
     lwzx r5, r5, r0
     bl fn_800DEF94
     fadds f31, f31, f1
-    b lbl_fn_800A56A8_0000083C
-lbl_fn_800A56A8_000007F0:
+    b lbl_msg_formatWindowLayout_0000083C
+lbl_msg_formatWindowLayout_000007F0:
     slwi r6, r4, 2
     addi r4, r31, 0x0
     slwi r0, r5, 2
@@ -699,8 +699,8 @@ lbl_fn_800A56A8_000007F0:
     lwzx r5, r5, r0
     bl fn_800DEF94
     fadds f31, f31, f1
-    b lbl_fn_800A56A8_0000083C
-lbl_fn_800A56A8_00000818:
+    b lbl_msg_formatWindowLayout_0000083C
+lbl_msg_formatWindowLayout_00000818:
     slwi r6, r4, 2
     addi r4, r31, 0x0
     slwi r0, r5, 2
@@ -710,7 +710,7 @@ lbl_fn_800A56A8_00000818:
     lwzx r5, r5, r0
     bl fn_800DEF94
     fadds f31, f31, f1
-lbl_fn_800A56A8_0000083C:
+lbl_msg_formatWindowLayout_0000083C:
     fmr f1, f31
     psq_l f31, 0x28(r1), 0, 0
     lfd f31, 0x20(r1)
@@ -753,7 +753,7 @@ lbl_fn_800A5870_000008AC:
     blr
 }
 
-asm void fn_800A58D0(void)
+asm void msg_isWindowActive(void)
 {
     nofralloc
     lis r5, lbl_80732898@ha

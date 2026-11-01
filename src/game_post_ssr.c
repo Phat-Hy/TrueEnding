@@ -16,7 +16,7 @@ extern void sound_playSpatialEffect(void);
 extern void system_getNextSequenceId(void);
 extern void fn_801077A8(void);
 extern void fn_80107850(void);
-extern void fn_801092C8(void);
+extern void hurtbox_processHitDamage(void);
 extern void hurtbox_dispatchHitEvent(void);
 extern void enemy_updateAnimTimer(void);
 extern void fn_8013310C(void);
@@ -27,7 +27,7 @@ extern void fn_8016CAD0(void);
 extern void debuff_clearStatus(void);
 extern void fn_8016E484(void);
 extern void actor_setState(void);
-extern void fn_80176ACC(void);
+extern void battle_activateExpReward(void);
 extern void battle_updateActorStatus(void);
 extern void task_mapIdToQueue(void);
 extern void sound_initGlobalInstances(void);
@@ -294,7 +294,7 @@ lbl_fn_802D57B8_000002F8:
     li r4, 0x6
     li r6, 0x0
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
 lbl_fn_802D57B8_00000334:
     mr r3, r31
     bl sound_playSpatialEffect
@@ -1787,7 +1787,7 @@ lbl_fn_802D67F8_000017D4:
     mr r3, r22
     rlwinm r0, r0, 0, 17, 15
     stw r0, 0x12a4(r22)
-    bl fn_80176ACC
+    bl battle_activateExpReward
     mr r3, r22
     li r4, 0x0
     bl atn_Task_setActive

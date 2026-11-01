@@ -8,7 +8,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -30,7 +30,7 @@ extern void fn_8010CA34(void);
 extern void fn_8011E81C(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_801237F0(void);
-extern void fn_801240B4(void);
+extern void player_evaluateStatusCondition(void);
 extern void fn_80134134(void);
 extern void npc_calcTargetDistance(void);
 extern void quest_evaluateConditions(void);
@@ -496,7 +496,7 @@ lbl_fn_800E589C_00000528:
     lwz r3, lbl_8087F0A8
     li r4, 0x7
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     bne lbl_fn_800E589C_00000590
 lbl_fn_800E589C_00000564:
@@ -1015,7 +1015,7 @@ lbl_fn_800E62AC_00000C28:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x24(r1)
     mr r30, r3
@@ -1157,7 +1157,7 @@ lbl_fn_800E62AC_00000E74:
     li r4, 0x7
     lwz r3, lbl_8087F0A8
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     lwz r0, 0x55c(r25)
     cntlzw r3, r3
     srwi r4, r3, 5
@@ -1258,7 +1258,7 @@ lbl_fn_800E62AC_00000FD0:
     stw r0, 0x12a4(r25)
     lwz r3, lbl_8087F0A8
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     bne lbl_fn_800E62AC_00001018
     mr r3, r25
@@ -1465,7 +1465,7 @@ lbl_fn_800E62AC_000012F4:
     lwz r3, lbl_8087F0A8
     li r4, 0x7
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     bne lbl_fn_800E62AC_00001390
     lwz r0, 0x12a8(r25)
@@ -1555,7 +1555,7 @@ lbl_fn_800E62AC_00001434:
     lwz r3, lbl_8087F0A8
     li r4, 0x9
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_800E62AC_000017C8
     mr r3, r26

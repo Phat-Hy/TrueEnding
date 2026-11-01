@@ -11,7 +11,7 @@ extern void _savegpr_26(void);
 extern void fn_800551BC(void);
 extern void fn_800E2A24(void);
 extern void fn_800FDF14(void);
-extern void fn_80108C10(void);
+extern void hurtbox_testCollisionLayer(void);
 extern void fn_8010B250(void);
 extern void fn_80134234(void);
 extern void fn_80148B0C(void);
@@ -1122,7 +1122,7 @@ lbl_fn_800FCD24_00000F30:
     stw r11, 0xf0(r1)
     stw r12, 0xdc(r1)
     stw r0, 0xd8(r1)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     b lbl_fn_800FCD24_000017C8
 lbl_fn_800FCD24_00000F88:
     addis r3, r3, 0x4

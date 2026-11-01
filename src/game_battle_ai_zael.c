@@ -45,7 +45,7 @@ extern void fn_803EC758(void);
 extern void fn_803EC7A0(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
-extern void fn_803ED5D0(void);
+extern void barrier_bindFieldAnimation(void);
 extern void dungeon_updateBarrierField(void);
 extern void fn_803F3334(void);
 extern void fn_803F3360(void);
@@ -343,7 +343,7 @@ lbl_fn_8042FAC4_000002A8:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_8042FAC4_000002F0:
     li r30, 0x0
     li r29, 0x0
@@ -1250,7 +1250,7 @@ lbl_fn_804308F8_00000FC8:
     bl atn_Anim_setLayerAnimation
     mr r3, r31
     addi r4, r31, 0x4d4
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
     lfs f0, lbl_80886818
     mr r3, r31
     stfs f0, 0x708(r31)
@@ -1352,7 +1352,7 @@ lbl_fn_804308F8_00001108:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_804308F8_00001178:
     lwz r12, 0x0(r31)
     mr r3, r31

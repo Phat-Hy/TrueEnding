@@ -44,7 +44,7 @@ extern void task_createWorker(void);
 extern void task_destroyWorker(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
-extern void fn_803ED5D0(void);
+extern void barrier_bindFieldAnimation(void);
 extern void fn_80415F6C(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -450,7 +450,7 @@ asm void fn_804146E4(void)
     bctrl
     mr r4, r3
     mr r3, r30
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_804146E4_00000490:
     lwz r12, 0x0(r30)
     mr r3, r30

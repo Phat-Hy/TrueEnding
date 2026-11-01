@@ -41,7 +41,7 @@ extern void fn_802114D8(void);
 extern void fn_802114E0(void);
 extern void task_mapIdToQueue(void);
 extern void fn_804439FC(void);
-extern void fn_804444E8(void);
+extern void gmk_findSlotByIndex(void);
 extern void fn_804A3C24(void);
 extern void fn_804A4294(void);
 extern void fn_804A4300(void);
@@ -987,7 +987,7 @@ lbl_fn_801D94D0_00000CA4:
     beq lbl_fn_801D94D0_00001030
     lwz r3, lbl_8087F4F0
     lwz r4, 0x4(r25)
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     mr r26, r3
     ble lbl_fn_801D94D0_00001030

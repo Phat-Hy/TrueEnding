@@ -30,7 +30,7 @@ extern void fn_8015EFAC(void);
 extern void actor_setState(void);
 extern void battle_updateTargetAggro(void);
 extern void battle_awardExp(void);
-extern void fn_80176ACC(void);
+extern void battle_activateExpReward(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_Shader_bindParams(void);
@@ -659,7 +659,7 @@ lbl_fn_80274F54_00000800:
     lwz r3, 0x1908(r27)
     lwzx r28, r3, r31
     mr r3, r28
-    bl fn_80176ACC
+    bl battle_activateExpReward
     lfs f2, 0x530(r27)
     addi r3, r28, 0xb0
     psq_l f1, 0x528(r27), 0, 0

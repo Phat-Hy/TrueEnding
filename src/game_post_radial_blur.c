@@ -18,7 +18,7 @@ extern void clip_calculateFrustum(void);
 extern void fn_801031D0(void);
 extern void fn_801079C0(void);
 extern void fn_80107A68(void);
-extern void fn_80108C10(void);
+extern void hurtbox_testCollisionLayer(void);
 extern void hurtbox_dispatchHitEvent(void);
 extern void fn_8012DF7C(void);
 extern void npc_updateTalkInteraction(void);
@@ -451,7 +451,7 @@ lbl_fn_802CB43C_0000042C:
     stw r0, 0x38(r1)
     stw r29, 0x3c(r1)
     lwz r7, 0x14d0(r31)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
 lbl_fn_802CB43C_0000052C:
     lfs f3, 0x14cc(r31)
     lfs f0, lbl_808843F4

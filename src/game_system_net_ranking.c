@@ -10,7 +10,7 @@ extern void fn_80051B70(void);
 extern void motion_updateFogAdj(void);
 extern void ref_releaseHandle(void);
 extern void magic_dispatchActionCommand(void);
-extern void fn_801240B4(void);
+extern void player_evaluateStatusCondition(void);
 extern void world_getGlobalFlag(void);
 extern void fn_8037F690(void);
 extern void fn_803935FC(void);
@@ -1021,7 +1021,7 @@ lbl_fn_80399734_00000DE0:
     beq lbl_fn_80399734_00000E08
     addi r3, r3, 0x48c
     li r4, 0x24
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     b lbl_fn_80399734_00000E34
 lbl_fn_80399734_00000E08:
     lwz r4, lbl_8087F430
@@ -1214,7 +1214,7 @@ lbl_fn_80399734_000010B8:
     beq lbl_fn_80399734_000010E0
     addi r3, r3, 0x48c
     li r4, 0x24
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     b lbl_fn_80399734_0000110C
 lbl_fn_80399734_000010E0:
     lwz r4, lbl_8087F430
@@ -1555,7 +1555,7 @@ lbl_fn_80399734_000015D4:
     beq lbl_fn_80399734_000015FC
     addi r3, r3, 0x48c
     li r4, 0x24
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     b lbl_fn_80399734_00001628
 lbl_fn_80399734_000015FC:
     lwz r4, lbl_8087F430

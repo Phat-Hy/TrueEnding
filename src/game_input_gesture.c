@@ -36,7 +36,7 @@ extern void equip_applyToCharacter(void);
 extern void actor_setState(void);
 extern void battle_resolveAggroHierarchy(void);
 extern void battle_awardExp(void);
-extern void fn_80176ACC(void);
+extern void battle_activateExpReward(void);
 extern void battle_calcAABBCenter(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -2055,7 +2055,7 @@ lbl_fn_802EEBA8_00001AEC:
     rlwinm r0, r0, 0, 26, 26
     cmplwi r0, 0x20
     bne lbl_fn_802EEBA8_00001BC4
-    bl fn_80176ACC
+    bl battle_activateExpReward
     lwz r3, 0x14e8(r31)
     li r30, 0x0
     lfs f1, lbl_80884860

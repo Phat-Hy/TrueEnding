@@ -8,8 +8,8 @@ extern void item_useConsumable(void);
 extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void fn_800A55D4(void);
-extern void fn_800A56A8(void);
-extern void fn_800A58D0(void);
+extern void msg_formatWindowLayout(void);
+extern void msg_isWindowActive(void);
 extern void fn_80116BD4(void);
 extern void fn_8015EB2C(void);
 extern void fn_80178088(void);
@@ -626,13 +626,13 @@ lbl_fn_8037F9AC_00000744:
     stfs f2, 0x360(r1)
     psq_st f1, 0x0(r7), 0, 0
     stfs f2, 0x420(r1)
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fmr f24, f1
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x1
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fabs f7, f24
     lfs f0, lbl_808859E0
     frsp f7, f7
@@ -1352,7 +1352,7 @@ lbl_fn_8037F9AC_000011FC:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fabs f7, f1
     lfs f0, lbl_808859E0
     fmr f24, f1
@@ -1366,7 +1366,7 @@ lbl_fn_8037F9AC_00001230:
     li r4, 0x0
     li r5, 0x1
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fabs f7, f1
     lfs f0, lbl_808859E0
     frsp f7, f7
@@ -1720,20 +1720,20 @@ lbl_fn_8037F9AC_0000174C:
     li r4, 0x0
     lwz r3, lbl_8087EF70
     fmr f24, f25
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_fn_8037F9AC_00001798
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x2
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fmr f25, f1
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x3
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fmr f24, f1
 lbl_fn_8037F9AC_00001798:
     lwz r0, lbl_8087F610
@@ -1750,13 +1750,13 @@ lbl_fn_8037F9AC_00001798:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fadds f25, f25, f1
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x1
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fadds f24, f24, f1
 lbl_fn_8037F9AC_000017F0:
     lwz r3, lbl_8087EF70

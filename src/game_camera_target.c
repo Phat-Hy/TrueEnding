@@ -26,7 +26,7 @@ extern void sound_playSpatialEffect(void);
 extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
-extern void fn_801092C8(void);
+extern void hurtbox_processHitDamage(void);
 extern void hurtbox_dispatchHitEvent(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
@@ -779,7 +779,7 @@ lbl_fn_802E177C_00000874:
     li r4, 0x6
     li r6, 0x0
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
 lbl_fn_802E177C_00000964:
     lis r4, lbl_80747B10@ha
     lfs f1, lbl_80884698

@@ -26,7 +26,7 @@ extern void fn_8011F8F4(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
-extern void fn_801240B4(void);
+extern void player_evaluateStatusCondition(void);
 extern void world_getGlobalFlag(void);
 extern void fn_803E3C78(void);
 extern void fn_8047F580(void);
@@ -259,7 +259,7 @@ lbl_fn_803AC3D8_00000270:
     beq lbl_fn_803AC3D8_00000298
     addi r3, r3, 0x48c
     li r4, 0x24
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     b lbl_fn_803AC3D8_000002CC
 lbl_fn_803AC3D8_00000298:
     lwz r4, lbl_8087F430

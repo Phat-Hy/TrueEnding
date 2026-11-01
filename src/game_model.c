@@ -20,7 +20,7 @@ extern void fn_80083F50(void);
 extern void fn_80084110(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void atn_Reticle_updateDraw(void);
 extern void fn_800BC468(void);
@@ -858,7 +858,7 @@ lbl_atn_Model_updateAnimation_00000A84:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x14
     stw r3, 0x70(r1)
     mr r24, r3
@@ -1230,7 +1230,7 @@ lbl_atn_Model_updateAnimation_00001030:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x10
     stw r3, 0x64(r1)
     mr r24, r3
@@ -1310,7 +1310,7 @@ lbl_atn_Model_updateAnimation_0000113C:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0xc
     stw r3, 0x58(r1)
     mr r24, r3
@@ -1378,7 +1378,7 @@ lbl_atn_Model_updateAnimation_0000126C:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x4c(r1)
     mr r24, r3

@@ -50,7 +50,7 @@ extern void task_mapIdToQueue(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
 extern void kpad_validateButtonIndex(void);
-extern void fn_804444E8(void);
+extern void gmk_findSlotByIndex(void);
 extern void fn_8044493C(void);
 extern void fn_804A3C24(void);
 extern void fn_804A4294(void);
@@ -191,7 +191,7 @@ lbl_fn_801D7354_00000094:
     bl fn_8044493C
     mr r4, r3
     lwz r3, lbl_8087F4F0
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     bgt lbl_fn_801D7354_00000170
     lwz r0, 0x8(r25)

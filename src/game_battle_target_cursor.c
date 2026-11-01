@@ -41,7 +41,7 @@ extern void task_createWorker(void);
 extern void fn_803EC758(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
-extern void fn_803ED5D0(void);
+extern void barrier_bindFieldAnimation(void);
 extern void dungeon_updateBarrierField(void);
 extern void fn_8040B200(void);
 extern void fn_8044D710(void);
@@ -508,7 +508,7 @@ lbl_fn_80408D58_00000500:
     bl atn_Anim_setLayerAnimation
     mr r3, r30
     addi r4, r30, 0xf4
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
     lfs f0, lbl_80886294
     stfs f0, 0x328(r30)
     b lbl_fn_80408D58_00000854

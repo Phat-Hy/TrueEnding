@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void dtor_80084684(void);
 extern void mem_free(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void fn_800C411C(void);
 extern void sky_renderStub(void);
@@ -530,7 +530,7 @@ asm void fn_80574AF0(void)
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x1c(r1)
     mr r22, r3
@@ -664,7 +664,7 @@ asm void power_handleShutdownEvent(void)
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x1c(r1)
     mr r29, r3
@@ -768,7 +768,7 @@ asm void power_handleResetEvent(void)
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x1c(r1)
     mr r31, r3

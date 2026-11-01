@@ -22,7 +22,7 @@ extern void fn_800EFC64(void);
 extern void fn_800EFDA0(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
-extern void fn_801092C8(void);
+extern void hurtbox_processHitDamage(void);
 extern void fn_8011F8F4(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
@@ -55,7 +55,7 @@ extern void fn_803C18DC(void);
 extern void fn_803E5E64(void);
 extern void fn_804439FC(void);
 extern void fn_8044441C(void);
-extern void fn_804444E8(void);
+extern void gmk_findSlotByIndex(void);
 extern void fn_804A04AC(void);
 extern void fn_8059C2AC(void);
 extern void fn_805AA4E8(void);
@@ -1127,7 +1127,7 @@ lbl_fn_803A3FFC_00000DA8:
     lwz r6, 0x8(r30)
     li r4, 0x2
     li r5, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
     lwz r3, lbl_8087F430
     lwz r28, 0x10(r30)
     cmpwi r3, 0x0
@@ -1200,7 +1200,7 @@ lbl_fn_803A3FFC_00000EA8:
     mr r7, r28
     li r4, 0x1
     li r5, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
     lwz r3, lbl_8087F430
     lwz r28, 0x10(r30)
     cmpwi r3, 0x0
@@ -1324,7 +1324,7 @@ asm void fn_803A4474(void)
     bne lbl_fn_803A4474_00001088
     lwz r3, lbl_8087F4F0
     lwz r4, 0x8(r5)
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     lwz r4, 0x10(r31)
     mr r8, r3
     lwz r5, 0x14(r31)

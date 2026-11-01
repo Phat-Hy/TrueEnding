@@ -19,7 +19,7 @@ extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
 extern void fn_8015EB2C(void);
-extern void fn_80176ACC(void);
+extern void battle_activateExpReward(void);
 extern void entity_Instance_destructor(void);
 extern void fn_8050128C(void);
 extern void fn_80508F0C(void);
@@ -355,7 +355,7 @@ asm void fn_804FC5AC(void)
     lwz r0, 0x14b0(r3)
     cmpwi r0, 0x0
     bne lbl_fn_804FC5AC_000003A0
-    bl fn_80176ACC
+    bl battle_activateExpReward
     li r0, 0x1
     stw r0, 0x14b0(r31)
 lbl_fn_804FC5AC_000003A0:

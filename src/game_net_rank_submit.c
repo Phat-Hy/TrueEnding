@@ -16,7 +16,7 @@ extern void fn_8006F5E8(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_8009EE30(void);
-extern void fn_800A58D0(void);
+extern void msg_isWindowActive(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
 extern void fn_8010A828(void);
@@ -1347,7 +1347,7 @@ lbl_fn_805233FC_00001164:
     lwz r29, 0xf8(r25)
     li r4, 0x0
     lwz r3, lbl_8087EF70
-    bl fn_800A58D0
+    bl msg_isWindowActive
     neg r0, r3
     lis r4, lbl_8075C6C4@ha
     or r0, r0, r3
@@ -1745,7 +1745,7 @@ lbl_fn_805233FC_00001714:
 lbl_fn_805233FC_00001724:
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_fn_805233FC_0000179C
     lis r27, 0xf
@@ -1835,7 +1835,7 @@ lbl_fn_805233FC_0000186C:
     subi r0, r5, 0x1
     cntlzw r0, r0
     srwi r26, r0, 5
-    bl fn_800A58D0
+    bl msg_isWindowActive
     lwz r4, 0x104(r25)
     cntlzw r0, r26
     srwi r0, r0, 5
@@ -2016,7 +2016,7 @@ lbl_fn_805233FC_00001AF4:
     bl sprintf
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_fn_805233FC_00001B54
     lwz r3, 0x140(r25)

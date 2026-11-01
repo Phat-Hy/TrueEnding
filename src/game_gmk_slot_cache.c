@@ -6,8 +6,8 @@ extern void _restgpr_18(void);
 extern void _savegpr_18(void);
 extern void ui_drawColoredQuad(void);
 extern void wcs_vformat(void);
-extern void fn_80108C10(void);
-extern void fn_801092C8(void);
+extern void hurtbox_testCollisionLayer(void);
+extern void hurtbox_processHitDamage(void);
 extern void fn_80206B14(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_generateId(void);
@@ -71,7 +71,7 @@ void fn_804438E0(void);
 void fn_804439FC(void);
 void fn_80444020(void);
 void fn_8044441C(void);
-void fn_804444E8(void);
+void gmk_findSlotByIndex(void);
 void fn_8044453C(void);
 void fn_80444564(void);
 void fn_804446BC(void);
@@ -800,7 +800,7 @@ lbl_fn_80444020_000009B8:
     addi r5, r1, 0x14
     li r8, 0x0
     li r9, 0x0
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
 lbl_fn_80444020_000009F0:
     cmpwi r28, 0x0
     beq lbl_fn_80444020_00000A00
@@ -850,7 +850,7 @@ lbl_fn_80444020_00000A20:
     lwz r6, 0x10(r1)
     li r5, 0x0
     lwz r7, 0xc(r1)
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
     b lbl_fn_80444020_00000AD0
 lbl_fn_80444020_00000AAC:
     lha r0, 0xbc(r31)
@@ -861,7 +861,7 @@ lbl_fn_80444020_00000AAC:
     lwz r6, 0x10(r1)
     li r5, 0x0
     lwz r7, 0xc(r1)
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
 lbl_fn_80444020_00000AD0:
     cmpwi r28, 0x0
     beq lbl_fn_80444020_00000AE0
@@ -906,7 +906,7 @@ lbl_fn_80444020_00000B48:
     li r4, 0x3
     li r5, 0x0
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
 lbl_fn_80444020_00000B68:
     cmpwi r28, 0x0
     beq lbl_fn_80444020_00000B78
@@ -995,7 +995,7 @@ lbl_fn_8044441C_00000C5C:
     blr
 }
 
-asm void fn_804444E8(void)
+asm void gmk_findSlotByIndex(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1006,17 +1006,17 @@ asm void fn_804444E8(void)
     mr r3, r4
     bl fn_8021150C
     cmpwi r3, 0x0
-    blt lbl_fn_804444E8_00000CA8
+    blt lbl_gmk_findSlotByIndex_00000CA8
     cmpwi r3, 0x600
-    blt lbl_fn_804444E8_00000CB0
-lbl_fn_804444E8_00000CA8:
+    blt lbl_gmk_findSlotByIndex_00000CB0
+lbl_gmk_findSlotByIndex_00000CA8:
     li r3, -0x1
-    b lbl_fn_804444E8_00000CBC
-lbl_fn_804444E8_00000CB0:
+    b lbl_gmk_findSlotByIndex_00000CBC
+lbl_gmk_findSlotByIndex_00000CB0:
     slwi r0, r3, 4
     add r3, r31, r0
     lwz r3, 0x4(r3)
-lbl_fn_804444E8_00000CBC:
+lbl_gmk_findSlotByIndex_00000CBC:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

@@ -14,7 +14,7 @@ extern void msg_getMessageById(void);
 extern void fn_800A5584(void);
 extern void msg_getMessageString(void);
 extern void fn_800A55D4(void);
-extern void fn_800A58D0(void);
+extern void msg_isWindowActive(void);
 extern void skin_applyWeights(void);
 extern void morph_reset(void);
 extern void ref_releaseHandle(void);
@@ -1679,7 +1679,7 @@ asm void fn_80122238(void)
     li r4, 0x0
     stw r0, 0x14(r1)
     lwz r3, lbl_8087EF70
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_fn_80122238_0000153C
     li r3, 0xf

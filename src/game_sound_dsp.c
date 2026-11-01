@@ -40,7 +40,7 @@ extern void fn_802114E0(void);
 extern void fn_80218BB4(void);
 extern void fn_80218BC4(void);
 extern void fn_80219544(void);
-extern void fn_804444E8(void);
+extern void gmk_findSlotByIndex(void);
 extern void fn_8044D034(void);
 extern void wcscmp(void);
 
@@ -954,7 +954,7 @@ lbl_fn_801DD26C_00000BF4:
     blt lbl_fn_801DD26C_00000BBC
     bl fn_801D80B4
     lwz r4, 0x4(r31)
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     mr r18, r3
     li r16, 0x0
     b lbl_fn_801DD26C_00000C54

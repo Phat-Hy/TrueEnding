@@ -38,7 +38,7 @@ extern void fn_80211734(void);
 extern void task_findEntryById(void);
 extern void world_getGlobalFlag(void);
 extern void fn_8044441C(void);
-extern void fn_804444E8(void);
+extern void gmk_findSlotByIndex(void);
 extern void PSVECSquareMag(void);
 extern void rand(void);
 extern void runtime_clampDouble(void);
@@ -157,7 +157,7 @@ lbl_fn_801E97E8_00000054:
     bne lbl_fn_801E97E8_00000084
     lwz r3, lbl_8087F4F0
     lwz r4, 0x50(r30)
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     ble lbl_fn_801E97E8_00000088
 lbl_fn_801E97E8_00000084:
@@ -430,7 +430,7 @@ asm void fn_801E9B84(void)
     beq lbl_fn_801E9B84_000006A0
     lwz r3, lbl_8087F4F0
     lwz r4, 0x50(r29)
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     mr r28, r3
     mr r4, r30
     mr r5, r31
@@ -688,7 +688,7 @@ lbl_fn_801E9ECC_000007C4:
     bne lbl_fn_801E9ECC_00000828
     lwz r3, lbl_8087F4F0
     lwz r4, 0x4(r27)
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     ble lbl_fn_801E9ECC_00000810
     b lbl_fn_801E9ECC_00000828
@@ -727,7 +727,7 @@ asm void fn_801EA01C(void)
     beq lbl_fn_801EA01C_000008BC
     lwz r3, lbl_8087F4F0
     mr r4, r30
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     ble lbl_fn_801EA01C_000008BC
     mr r3, r30

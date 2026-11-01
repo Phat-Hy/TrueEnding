@@ -26,7 +26,7 @@ extern void fn_800F8524(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
-extern void fn_80108C10(void);
+extern void hurtbox_testCollisionLayer(void);
 extern void hurtbox_dispatchHitEvent(void);
 extern void fn_801125F8(void);
 extern void equip_getGlobalManager(void);
@@ -1429,7 +1429,7 @@ asm void fn_8028D5C8(void)
     stfs f0, 0x44(r1)
     stfs f1, 0x48(r1)
     stfs f2, 0x4c(r1)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     lwz r3, 0x1630(r30)
     lis r4, lbl_80745314@ha
     addi r4, r4, lbl_80745314@l

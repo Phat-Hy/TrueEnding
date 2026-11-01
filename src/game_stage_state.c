@@ -5,7 +5,7 @@
 extern void __files(void);
 extern void dtor_80084684(void);
 extern void mem_free(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -1587,7 +1587,7 @@ asm void fn_8019D42C(void)
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x24(r1)
     mr r30, r3
@@ -1649,7 +1649,7 @@ lbl_fn_8019D42C_00001590:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0xc
     stw r3, 0x30(r1)
     mr r30, r3

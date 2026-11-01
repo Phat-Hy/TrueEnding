@@ -11,7 +11,7 @@ extern void _savegpr_26(void);
 extern void menu_renderLayout(void);
 extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
-extern void fn_801092C8(void);
+extern void hurtbox_processHitDamage(void);
 extern void fn_80121E14(void);
 extern void fn_80135384(void);
 extern void actor_setState(void);
@@ -70,7 +70,7 @@ void fn_801763E0(void);
 void fn_80176428(void);
 void battle_calcExpPosition(void);
 void battle_awardExp(void);
-void fn_80176ACC(void);
+void battle_activateExpReward(void);
 void fn_80176B68(void);
 void fn_80176D2C(void);
 void fn_80176DFC(void);
@@ -608,7 +608,7 @@ lbl_battle_awardExp_00000718:
     blr
 }
 
-asm void fn_80176ACC(void)
+asm void battle_activateExpReward(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -634,18 +634,18 @@ asm void fn_80176ACC(void)
     bctrl
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_80176ACC_000007B8
+    beq lbl_battle_activateExpReward_000007B8
     lwz r3, 0x10d8(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80176ACC_000007B8
+    beq lbl_battle_activateExpReward_000007B8
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_80176ACC_000007B8
+    bne lbl_battle_activateExpReward_000007B8
     mr r4, r31
     li r5, 0x1
     bl fn_803CC718
-lbl_fn_80176ACC_000007B8:
+lbl_battle_activateExpReward_000007B8:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -1382,7 +1382,7 @@ lbl_fn_80176E30_000011D0:
     li r4, 0x5
     li r6, 0x0
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
 lbl_fn_80176E30_00001234:
     lwz r0, 0x48(r23)
     li r3, 0x1e

@@ -41,7 +41,7 @@ extern void time_wrapMilliseconds(void);
 extern void fn_8020EF4C(void);
 extern void random_generateValue(void);
 extern void task_mapIdToQueue(void);
-extern void fn_804444E8(void);
+extern void gmk_findSlotByIndex(void);
 extern void fn_80444828(void);
 extern void fn_80444A50(void);
 extern void fn_80444B64(void);
@@ -1092,7 +1092,7 @@ lbl_fn_801D6754_00000E20:
     bl fn_80444A50
     mr r4, r3
     mr r3, r29
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     ble lbl_fn_801D6754_00000ECC
     li r28, 0x1
@@ -1104,7 +1104,7 @@ lbl_fn_801D6754_00000E4C:
     bl fn_80444A50
     mr r4, r3
     mr r3, r29
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     ble lbl_fn_801D6754_00000ECC
     li r28, 0x1
@@ -1116,7 +1116,7 @@ lbl_fn_801D6754_00000E78:
     bl fn_80444A50
     mr r4, r3
     mr r3, r29
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     ble lbl_fn_801D6754_00000ECC
     lwz r29, lbl_8087F4F0
@@ -1125,7 +1125,7 @@ lbl_fn_801D6754_00000E78:
     bl fn_80444A50
     mr r4, r3
     mr r3, r29
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     ble lbl_fn_801D6754_00000ECC
     li r28, 0x1
@@ -1863,7 +1863,7 @@ lbl_fn_801D70EC_000017F0:
     mr r28, r3
     lwz r3, lbl_8087F4F0
     mr r4, r28
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     bgt lbl_fn_801D70EC_00001900
     cmpwi r28, 0x0

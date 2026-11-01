@@ -15,8 +15,8 @@ extern void fn_800133B0(void);
 extern void vec3_add(void);
 extern void item_useConsumable(void);
 extern void fn_8008B964(void);
-extern void fn_800A56A8(void);
-extern void fn_800A58D0(void);
+extern void msg_formatWindowLayout(void);
+extern void msg_isWindowActive(void);
 extern void fn_800F52F8(void);
 extern void fn_800F7260(void);
 extern void fn_800F8524(void);
@@ -42,7 +42,7 @@ extern void fn_80116BD4(void);
 extern void fn_80116E64(void);
 extern void fn_80116E6C(void);
 extern void fn_80116E74(void);
-extern void fn_801240B4(void);
+extern void player_evaluateStatusCondition(void);
 extern void fn_8048BCA4(void);
 extern void fn_8048BD04(void);
 extern void PSMTXRotAxis(void);
@@ -121,18 +121,18 @@ asm void fn_801151A4(void)
     mr r31, r3
     stw r30, 0xa8(r1)
     lwz r3, lbl_8087EF70
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fneg f31, f1
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_fn_801151A4_00000068
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x3
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fneg f0, f1
     fadds f31, f31, f0
 lbl_fn_801151A4_00000068:
@@ -239,18 +239,18 @@ lbl_fn_801151A4_000001BC:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fneg f31, f1
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_fn_801151A4_00000204
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x2
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fneg f0, f1
     fadds f31, f31, f0
 lbl_fn_801151A4_00000204:
@@ -521,7 +521,7 @@ asm void fn_80115704(void)
     stw r31, 0xc(r1)
     mr r31, r3
     lwz r3, lbl_8087EF70
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fneg f2, f1
     lfs f0, lbl_808816D4
     fabs f1, f2
@@ -1452,19 +1452,19 @@ lbl_fn_801162A4_000012D0:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fneg f0, f1
     stfs f0, 0x14(r1)
     bl fn_801156BC
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_fn_801162A4_0000135C
     bl fn_801156BC
     li r4, 0x0
     li r5, 0x2
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fneg f1, f1
     lfs f0, 0x14(r1)
     fadds f0, f0, f1
@@ -1539,19 +1539,19 @@ lbl_fn_801162A4_00001440:
     li r4, 0x0
     li r5, 0x1
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fneg f0, f1
     stfs f0, 0x10(r1)
     bl fn_801156BC
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_fn_801162A4_00001494
     bl fn_801156BC
     li r4, 0x0
     li r5, 0x3
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fneg f1, f1
     lfs f0, 0x10(r1)
     fadds f0, f0, f1
@@ -1626,7 +1626,7 @@ lbl_fn_801162A4_00001578:
     bl fn_800F52F8
     bl fn_80116BAC
     li r4, 0x7
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_801162A4_00001598
     lfs f29, lbl_808816A8

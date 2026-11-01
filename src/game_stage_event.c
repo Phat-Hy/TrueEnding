@@ -12,7 +12,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void msg_getMessageById(void);
-extern void fn_80108C10(void);
+extern void hurtbox_testCollisionLayer(void);
 extern void fn_8012476C(void);
 extern void fn_8012DF7C(void);
 extern void fn_80148B0C(void);
@@ -388,7 +388,7 @@ lbl_fn_8019DBA4_0000036C:
     stfs f5, 0x48(r1)
     lwz r7, 0x4(r31)
     stfs f6, 0x4c(r1)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     lwz r3, 0x1c(r31)
     li r5, 0x0
     lwz r0, 0x7c(r1)

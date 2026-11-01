@@ -11,18 +11,18 @@ extern void fn_8003F1E4(void);
 extern void collision_testLineSegment(void);
 extern void fn_80063484(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_800A56A8(void);
+extern void msg_formatWindowLayout(void);
 extern void fn_800E62AC(void);
 extern void fn_800E7650(void);
 extern void fn_800E8688(void);
 extern void fn_8010089C(void);
 extern void fn_801021B4(void);
 extern void fn_8010220C(void);
-extern void fn_80108C10(void);
-extern void fn_801092C8(void);
+extern void hurtbox_testCollisionLayer(void);
+extern void hurtbox_processHitDamage(void);
 extern void fn_80122330(void);
 extern void magic_dispatchActionCommand(void);
-extern void fn_801240B4(void);
+extern void player_evaluateStatusCondition(void);
 extern void fn_801248DC(void);
 extern void fn_80124B60(void);
 extern void fn_8013310C(void);
@@ -64,7 +64,7 @@ extern void fn_803CCA64(void);
 extern void fn_803CCC4C(void);
 extern void fn_803FC870(void);
 extern void fn_8044441C(void);
-extern void fn_804444E8(void);
+extern void gmk_findSlotByIndex(void);
 extern void fn_8054D798(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -463,7 +463,7 @@ lbl_fn_800E4278_00000464:
     lwz r3, lbl_8087F0A8
     li r4, 0x15
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_800E4278_00000494
     li r24, 0x0
@@ -549,7 +549,7 @@ lbl_fn_800E4278_000005AC:
     lwz r3, lbl_8087F0A8
     li r4, 0x11
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_800E4278_000005E0
     mr r3, r22
@@ -628,7 +628,7 @@ lbl_fn_800E4278_000006A8:
     lwz r3, lbl_8087F0A8
     li r4, 0x15
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     bne lbl_fn_800E4278_000006FC
     mr r3, r22
@@ -657,7 +657,7 @@ lbl_fn_800E4278_00000720:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fneg f3, f1
     lfs f0, lbl_808812DC
     stfs f0, 0xf8(r1)
@@ -666,7 +666,7 @@ lbl_fn_800E4278_00000720:
     li r5, 0x1
     stfs f3, 0xf4(r1)
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fneg f0, f1
     addi r3, r1, 0xf4
     stfs f0, 0xfc(r1)
@@ -1087,7 +1087,7 @@ lbl_fn_800E4278_00000D78:
     lwz r3, lbl_8087F0A8
     li r4, 0x15
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_800E4278_00000DBC
     lwz r0, 0x143c(r22)
@@ -1386,7 +1386,7 @@ lbl_fn_800E4278_000011EC:
     bne lbl_fn_800E4278_00001254
     lwz r3, lbl_8087F4F0
     li r4, 0x190
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     mr r25, r3
     ble lbl_fn_800E4278_00001254
@@ -1461,7 +1461,7 @@ lbl_fn_800E4278_000012B0:
     li r4, 0x16
     li r6, 0x0
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
     li r3, 0x4fbf
     bl task_findEntryById
     cmpwi r3, 0x0
@@ -1619,7 +1619,7 @@ lbl_fn_800E4278_000014D0:
     stfs f0, 0x34(r1)
     stfs f3, 0x38(r1)
     stfs f4, 0x3c(r1)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
 lbl_fn_800E4278_00001570:
     addi r27, r27, 0x4
     addi r21, r21, 0x1
@@ -1870,7 +1870,7 @@ lbl_fn_800E4278_000018E8:
     lwz r3, lbl_8087F0A8
     li r4, 0x12
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     bne lbl_fn_800E4278_000019FC
     mr r3, r22
@@ -1900,7 +1900,7 @@ lbl_fn_800E4278_00001964:
     lwz r3, lbl_8087F0A8
     li r4, 0x12
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_800E4278_000019FC
     lwz r0, 0x55c(r22)

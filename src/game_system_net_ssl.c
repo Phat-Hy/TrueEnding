@@ -9,8 +9,8 @@ extern void _savegpr_22(void);
 extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void fn_800A55D4(void);
-extern void fn_800A56A8(void);
-extern void fn_800A58D0(void);
+extern void msg_formatWindowLayout(void);
+extern void msg_isWindowActive(void);
 extern void kpad_getClampData(void);
 extern void fn_805AA830(void);
 extern void fn_805AA950(void);
@@ -598,7 +598,7 @@ asm void fn_80390A88(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fneg f3, f1
     lfs f0, lbl_808858E8
     stfs f0, 0x15c(r1)
@@ -607,7 +607,7 @@ asm void fn_80390A88(void)
     li r5, 0x1
     stfs f3, 0x158(r1)
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     lfs f3, 0x158(r1)
     lfs f0, lbl_80885938
     fabs f3, f3
@@ -1459,14 +1459,14 @@ lbl_fn_80390A88_00001414:
     lfs f24, lbl_808858E8
     li r4, 0x0
     lwz r3, lbl_8087EF70
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_fn_80390A88_00001464
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x2
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fneg f4, f1
     lfs f0, lbl_80885938
     fabs f3, f4

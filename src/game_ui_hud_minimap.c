@@ -40,7 +40,7 @@ extern void fn_8020BCEC(void);
 extern void fn_8020BD14(void);
 extern void event_findEntryById(void);
 extern void task_mapIdToQueue(void);
-extern void fn_804444E8(void);
+extern void gmk_findSlotByIndex(void);
 extern void fn_80444828(void);
 extern void fn_8044493C(void);
 extern void fn_80444A50(void);
@@ -943,7 +943,7 @@ lbl_fn_801D19F0_00000BB0:
     bl fn_80444A50
     mr r4, r3
     mr r3, r14
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     neg r0, r3
     lwz r17, lbl_8087F4F0
     andc r0, r0, r3
@@ -953,7 +953,7 @@ lbl_fn_801D19F0_00000BB0:
     bl fn_80444A50
     mr r4, r3
     mr r3, r17
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     neg r0, r3
     lwz r4, 0xb30(r15)
     andc r0, r0, r3
@@ -1091,7 +1091,7 @@ lbl_fn_801D19F0_00000D28:
     beq lbl_fn_801D19F0_00000F18
     lwz r3, lbl_8087F4F0
     mr r4, r14
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     ble lbl_fn_801D19F0_00000F18
     lwz r3, 0xadc(r15)
@@ -1268,7 +1268,7 @@ lbl_fn_801D19F0_00001100:
     beq lbl_fn_801D19F0_000011D8
     lwz r3, lbl_8087F4F0
     mr r4, r16
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     ble lbl_fn_801D19F0_000011D8
     lis r16, lbl_8073C56C@ha
@@ -1958,7 +1958,7 @@ lbl_fn_801D19F0_00001B1C:
     bl fn_80444A50
     mr r4, r3
     mr r3, r14
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     bgt lbl_fn_801D19F0_00001B7C
     lwz r14, lbl_8087F4F0
@@ -1967,7 +1967,7 @@ lbl_fn_801D19F0_00001B1C:
     bl fn_80444A50
     mr r4, r3
     mr r3, r14
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     ble lbl_fn_801D19F0_00001BB4
 lbl_fn_801D19F0_00001B7C:

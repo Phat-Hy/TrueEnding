@@ -52,7 +52,7 @@ extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
-extern void fn_804444E8(void);
+extern void gmk_findSlotByIndex(void);
 extern void fn_80444BE8(void);
 extern void fn_80444C48(void);
 extern void fn_80444C50(void);
@@ -201,7 +201,7 @@ lbl_fn_8051B168_00000034:
 lbl_fn_8051B168_000000B0:
     lwz r3, lbl_8087F4F0
     lwz r4, 0x4(r22)
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     mr r5, r3
     mr r3, r29
     addi r4, r24, 0x157

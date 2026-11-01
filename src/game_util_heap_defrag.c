@@ -31,7 +31,7 @@ extern void thread_dispatchToQueue(void);
 extern void event_findEntryById(void);
 extern void fn_804439FC(void);
 extern void fn_8044441C(void);
-extern void fn_804444E8(void);
+extern void gmk_findSlotByIndex(void);
 extern void fn_80444BE8(void);
 extern void fn_80444C50(void);
 extern void fn_8044D500(void);
@@ -474,7 +474,7 @@ lbl_fn_80588008_000004CC:
     beq lbl_fn_80588008_00000500
     lwz r3, lbl_8087F4F0
     lwz r4, 0x4(r4)
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     lwz r0, 0x10(r31)
     cmpw r0, r3
     ble lbl_fn_80588008_00000500
@@ -611,7 +611,7 @@ lbl_fn_805880F4_0000062C:
     bl save_findEntryByName
     lwz r4, 0x4(r23)
     mr r3, r31
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     mr r22, r3
     lwz r3, 0x5b78(r25)
     lfs f1, lbl_80888110
@@ -798,7 +798,7 @@ lbl_fn_805883DC_000008D4:
     bl fn_801F8598
     lwz r4, 0x4(r25)
     mr r3, r29
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     addis r4, r26, 0x2
     mr r5, r3
     lwz r3, 0x5ba0(r4)
@@ -817,7 +817,7 @@ lbl_fn_805883DC_000008D4:
     bl save_findEntryByName
     lwz r4, 0x4(r25)
     mr r3, r29
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     lwz r0, 0x10(r27)
     cmpw r0, r3
     bgt lbl_fn_805883DC_00000A74
@@ -1611,7 +1611,7 @@ lbl_fn_80588E28_0000150C:
     beq lbl_fn_80588E28_00001548
     lwz r3, lbl_8087F4F0
     lwz r4, 0x3300(r4)
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     addis r4, r31, 0x2
     stw r3, 0x5b28(r4)
     b lbl_fn_80588E28_0000154C

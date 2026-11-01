@@ -19,7 +19,7 @@ extern void fn_801018E4(void);
 extern void fn_80101CDC(void);
 extern void fn_80102EAC(void);
 extern void fn_8010895C(void);
-extern void fn_80108C10(void);
+extern void hurtbox_testCollisionLayer(void);
 extern void fn_80109864(void);
 extern void fn_8010B180(void);
 extern void fn_8010B250(void);
@@ -498,7 +498,7 @@ lbl_fn_800FDB20_00000580:
     stw r11, 0x20(r1)
     stw r12, 0xc(r1)
     stw r0, 0x8(r1)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     li r3, 0x4
     b lbl_fn_800FDB20_000007F0
 lbl_fn_800FDB20_000005DC:
@@ -1558,7 +1558,7 @@ lbl_fn_800FDF14_00001488:
     stfs f4, 0xa0(r1)
     stfs f3, 0xa4(r1)
     stfs f0, 0xa8(r1)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
 lbl_fn_800FDF14_000014E0:
     cmpwi r29, 0x0
     beq lbl_fn_800FDF14_00001684
@@ -1767,7 +1767,7 @@ lbl_fn_800FDF14_000017B0:
     stfs f4, 0x80(r1)
     stfs f3, 0x84(r1)
     stfs f0, 0x88(r1)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
 lbl_fn_800FDF14_00001808:
     cmpwi r29, 0x0
     beq lbl_fn_800FDF14_00001C34
@@ -2027,7 +2027,7 @@ lbl_fn_800FDF14_00001B7C:
     stfs f4, 0x74(r1)
     stfs f3, 0x78(r1)
     stfs f0, 0x7c(r1)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
 lbl_fn_800FDF14_00001BCC:
     addi r31, r31, 0x1
     addi r27, r27, 0x4
@@ -2108,7 +2108,7 @@ lbl_fn_800FDF14_00001C98:
     stfs f5, 0x24(r1)
     lwz r8, 0x94(r26)
     stfs f6, 0x28(r1)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
 lbl_fn_800FDF14_00001CF0:
     mr r3, r25
     mr r4, r26

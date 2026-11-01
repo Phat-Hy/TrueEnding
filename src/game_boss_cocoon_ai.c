@@ -17,7 +17,7 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80101340(void);
-extern void fn_80108C10(void);
+extern void hurtbox_testCollisionLayer(void);
 extern void fn_801162A0(void);
 extern void fn_8012DF7C(void);
 extern void npc_getPosition(void);
@@ -2027,7 +2027,7 @@ lbl_fn_80455638_00001AE0:
     stfs f4, 0x80(r1)
     stfs f28, 0x74(r1)
     lwz r7, 0x0(r23)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     lwz r3, 0x0(r23)
     fmr f1, f29
     addi r4, r20, 0x1988
@@ -2293,7 +2293,7 @@ lbl_fn_80455638_00001DFC:
     addi r4, r1, 0xa8
     li r8, 0x0
     li r9, 0x0
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     stw r22, 0x0(r23)
 lbl_fn_80455638_00001F6C:
     addi r24, r24, 0x1

@@ -52,7 +52,7 @@ extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
-extern void fn_803ED5D0(void);
+extern void barrier_bindFieldAnimation(void);
 extern void fn_803EDB18(void);
 extern void fn_803F11F8(void);
 extern void boss_getOffset54(void);
@@ -484,7 +484,7 @@ lbl_fn_803F3820_000004F0:
     bl atn_Anim_setLayerAnimation
     mr r3, r30
     addi r4, r30, 0x65c
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
     mr r3, r30
     addi r4, r30, 0x65c
     li r5, 0x1
@@ -507,7 +507,7 @@ lbl_fn_803F3820_0000054C:
     bl atn_Anim_setLayerAnimation
     mr r3, r30
     addi r4, r30, 0x65c
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
     mr r3, r30
     addi r4, r30, 0x65c
     li r5, 0x1
@@ -525,7 +525,7 @@ lbl_fn_803F3820_000005A0:
     bl atn_Anim_setLayerAnimation
     mr r3, r30
     addi r4, r30, 0x28c
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
     mr r3, r30
     addi r4, r30, 0x28c
     li r5, 0x1
@@ -804,7 +804,7 @@ lbl_fn_803F3820_00000980:
     bctrl
     mr r4, r3
     mr r3, r30
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_803F3820_000009F4:
     lwz r12, 0x0(r30)
     mr r3, r30

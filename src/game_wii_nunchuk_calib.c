@@ -13,8 +13,8 @@ extern void fn_80051B70(void);
 extern void msg_getMessageById(void);
 extern void fn_800A5584(void);
 extern void fn_800A55D4(void);
-extern void fn_800A56A8(void);
-extern void fn_800A58D0(void);
+extern void msg_formatWindowLayout(void);
+extern void msg_isWindowActive(void);
 extern void motion_updateFogAdj(void);
 extern void str_findChar(void);
 extern void fn_80112974(void);
@@ -1507,7 +1507,7 @@ lbl_fn_8055E258_000012D4:
     cmpwi r3, 0x0
     beq lbl_fn_8055E258_00001330
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     lis r4, lbl_8075FAF8@ha
     cmpwi r3, 0x0
     addi r4, r4, lbl_8075FAF8@l
@@ -2081,7 +2081,7 @@ lbl_fn_8055E724_00001AB0:
     li r4, 0x0
     lwz r5, 0x0(r28)
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fabs f0, f1
     frsp f0, f0
     fcmpo cr0, f0, f31
@@ -2404,7 +2404,7 @@ lbl_fn_8055E724_00001EE0:
     li r26, 0x0
     li r4, 0x0
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fabs f3, f1
     lfs f0, lbl_80887ECC
     frsp f3, f3

@@ -41,7 +41,7 @@ extern void task_destroyWorker(void);
 extern void fn_803EC7A0(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
-extern void fn_803ED5D0(void);
+extern void barrier_bindFieldAnimation(void);
 extern void fn_803EDB18(void);
 extern void fn_803EDCF4(void);
 extern void fn_803F8324(void);
@@ -1834,7 +1834,7 @@ lbl_fn_803F7F30_00001770:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_803F7F30_000017AC:
     lwz r0, 0x4c4(r31)
     cmpwi r0, 0x0

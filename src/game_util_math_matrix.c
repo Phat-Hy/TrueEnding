@@ -32,7 +32,7 @@ extern void fn_803E64F0(void);
 extern void fn_803E656C(void);
 extern void fn_803E65F8(void);
 extern void fn_8044441C(void);
-extern void fn_804444E8(void);
+extern void gmk_findSlotByIndex(void);
 extern void fn_8044D490(void);
 extern void fn_8044D678(void);
 extern void fn_80470364(void);
@@ -1590,7 +1590,7 @@ lbl_fn_8057FF3C_000014DC:
     cmpwi r0, 0x0
     beq lbl_fn_8057FF3C_00001510
     lwz r4, 0x3300(r31)
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     bgt lbl_fn_8057FF3C_00001510
     li r31, 0xa

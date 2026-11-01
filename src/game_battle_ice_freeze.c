@@ -40,7 +40,7 @@ extern void task_destroyWorker(void);
 extern void fn_803EC7A0(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
-extern void fn_803ED5D0(void);
+extern void barrier_bindFieldAnimation(void);
 extern void dungeon_updateBarrierField(void);
 extern void fn_803EDB18(void);
 extern void boss_getOffset54(void);
@@ -1321,7 +1321,7 @@ lbl_fn_8041C3B0_00001030:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
     b lbl_fn_8041C3B0_000011B4
 lbl_fn_8041C3B0_00001084:
     lwz r12, 0x0(r31)
@@ -1338,7 +1338,7 @@ lbl_fn_8041C3B0_00001084:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_8041C3B0_000010C0:
     lfs f31, 0x328(r31)
     addi r3, r31, 0xf4
@@ -1380,7 +1380,7 @@ lbl_fn_8041C3B0_00001124:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_8041C3B0_00001160:
     lfs f7, 0x328(r31)
     lfs f0, lbl_80886548
@@ -1721,7 +1721,7 @@ lbl_fn_8041C99C_000015E0:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
     b lbl_fn_8041C99C_00001788
 lbl_fn_8041C99C_00001620:
     lfs f1, lbl_8088654C
@@ -1793,7 +1793,7 @@ lbl_fn_8041C99C_000016F4:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
     b lbl_fn_8041C99C_00001788
 lbl_fn_8041C99C_00001734:
     lfs f1, lbl_8088654C

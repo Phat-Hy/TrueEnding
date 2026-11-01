@@ -14,7 +14,7 @@ extern void ref_releaseHandle(void);
 extern void wcs_vformat(void);
 extern void fn_800EFBC4(void);
 extern void fn_800EFE3C(void);
-extern void fn_801092C8(void);
+extern void hurtbox_processHitDamage(void);
 extern void fn_8012DB04(void);
 extern void fn_80133FBC(void);
 extern void fn_80134134(void);
@@ -1410,7 +1410,7 @@ lbl_fn_8010CF28_00001170:
     mr r6, r27
     li r4, 0xe
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
     b lbl_fn_8010CF28_000012FC
 lbl_fn_8010CF28_000011A0:
     cmpwi r5, 0x0
@@ -1501,7 +1501,7 @@ lbl_fn_8010CF28_000012E4:
     mr r6, r27
     li r4, 0xe
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
 lbl_fn_8010CF28_000012FC:
     addi r11, r1, 0x2a0
     bl _restgpr_27

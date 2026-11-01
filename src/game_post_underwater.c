@@ -21,7 +21,7 @@ extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80107850(void);
-extern void fn_80108C10(void);
+extern void hurtbox_testCollisionLayer(void);
 extern void hurtbox_dispatchHitEvent(void);
 extern void fn_8012DF7C(void);
 extern void fn_80148B0C(void);
@@ -629,7 +629,7 @@ lbl_fn_802DAA38_0000077C:
     stfs f0, 0xe0(r1)
     stfs f3, 0xe4(r1)
     stfs f4, 0xe8(r1)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     lwz r3, lbl_8087F048
     addi r4, r26, 0xb0
     bl fn_80107850
@@ -810,7 +810,7 @@ lbl_fn_802DAA38_00000A2C:
     li r6, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     addi r3, r1, 0x1d0
     li r4, 0x0
     li r5, 0x200

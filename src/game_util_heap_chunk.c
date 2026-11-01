@@ -49,7 +49,7 @@ extern void fn_8020EFEC(void);
 extern void event_findEntryById(void);
 extern void fn_80217D9C(void);
 extern void fn_80219544(void);
-extern void fn_804444E8(void);
+extern void gmk_findSlotByIndex(void);
 extern void fn_80444564(void);
 extern void fn_80444BE8(void);
 extern void fn_80444C48(void);
@@ -2061,7 +2061,7 @@ lbl_fn_80587628_00001B18:
     blt lbl_fn_80587628_00001B18
     lwz r3, lbl_8087F4F0
     lwz r4, 0x28(r1)
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     ble lbl_fn_80587628_00001B64
     stw r24, 0x44(r1)
@@ -2080,7 +2080,7 @@ lbl_fn_80587628_00001B7C:
 lbl_fn_80587628_00001B84:
     lwz r3, lbl_8087F4F0
     lwz r4, 0x4(r18)
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     ble lbl_fn_80587628_00001BA0
     stw r24, 0x48(r1)

@@ -38,7 +38,7 @@ extern void fn_800F8290(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80116BAC(void);
-extern void fn_801240B4(void);
+extern void player_evaluateStatusCondition(void);
 extern void fn_8012A1B8(void);
 extern void fn_8012A218(void);
 extern void npc_updateDialogueTarget(void);
@@ -50,7 +50,7 @@ extern void fn_8013C480(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
 extern void fn_8014052C(void);
-extern void fn_801446F0(void);
+extern void quest_resetObjectiveBounds(void);
 extern void fn_80178018(void);
 extern void fn_80178078(void);
 extern void fn_80198514(void);
@@ -1278,7 +1278,7 @@ lbl_fn_8019FEC4_00000F7C:
     bl fn_800F52F8
     bl fn_80116BAC
     li r4, 0x7
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     bne lbl_fn_8019FEC4_00000FA8
     li r29, 0x1
@@ -2089,7 +2089,7 @@ asm void fn_801A0BA8(void)
     lfs f0, lbl_8088213C
     stfs f0, 0x238(r31)
     lwz r3, 0x4(r30)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -2380,7 +2380,7 @@ lbl_fn_801A0C54_00001C88:
     lwz r3, lbl_8087F0A8
     li r4, 0x20
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_801A0C54_00001CB8
     li r0, 0x1

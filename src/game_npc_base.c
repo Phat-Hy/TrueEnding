@@ -10,7 +10,7 @@ extern void fn_80017064(void);
 extern void vec3_initValues(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800C61C0(void);
@@ -1265,7 +1265,7 @@ lbl_npc_initScriptContext_00000E08:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x1c(r1)
     mr r31, r3

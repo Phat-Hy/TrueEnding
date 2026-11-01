@@ -12,7 +12,7 @@ extern void collision_testLineSegment(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_80097E80(void);
-extern void fn_800A56A8(void);
+extern void msg_formatWindowLayout(void);
 extern void fn_8012111C(void);
 extern void magic_dispatchActionCommand(void);
 extern void quest_checkCondition(void);
@@ -846,13 +846,13 @@ lbl_fn_803792F0_00000AD4:
     fadds f0, f9, f0
     lwz r3, lbl_8087EF70
     stfs f0, 0x51c(r1)
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fmr f28, f1
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x1
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     lfs f2, 0x18(r28)
     fmr f29, f1
     psq_l f1, 0x10(r28), 0, 0

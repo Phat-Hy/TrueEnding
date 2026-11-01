@@ -45,7 +45,7 @@ extern void fn_8011F87C(void);
 extern void fn_8011FB98(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_80123C7C(void);
-extern void fn_801240B4(void);
+extern void player_evaluateStatusCondition(void);
 extern void fn_8012AFE8(void);
 extern void battle_applyStatusEffect(void);
 extern void fn_8017AD44(void);
@@ -2421,7 +2421,7 @@ lbl_world_Manager_draw_00001EFC:
     lwz r3, lbl_8087F0A8
     li r4, 0x9
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     bne lbl_world_Manager_draw_00001F28
     li r0, 0x1

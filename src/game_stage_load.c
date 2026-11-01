@@ -8,7 +8,7 @@ extern void mem_free(void);
 extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_80108C10(void);
+extern void hurtbox_testCollisionLayer(void);
 extern void magic_dispatchActionCommand(void);
 extern void quest_evaluateConditions(void);
 extern void inventory_unequipItem(void);
@@ -1874,7 +1874,7 @@ lbl_fn_80198874_0000194C:
     stfs f8, 0x14(r1)
     stfs f7, 0x18(r1)
     stfs f0, 0x1c(r1)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     lwz r3, 0x4(r30)
     lwz r12, 0x0(r3)
     lwz r12, 0x44(r12)

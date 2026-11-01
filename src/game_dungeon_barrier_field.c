@@ -102,7 +102,7 @@ void fn_803ECBCC(void);
 void fn_803ECBD0(void);
 void fn_803ECBD4(void);
 void task_initWorkerContext(void);
-void fn_803ED5D0(void);
+void barrier_bindFieldAnimation(void);
 void fn_803ED610(void);
 void dungeon_updateBarrierField(void);
 void fn_803ED8D8(void);
@@ -1271,7 +1271,7 @@ lbl_task_initWorkerContext_00001038:
     blr
 }
 
-asm void fn_803ED5D0(void)
+asm void barrier_bindFieldAnimation(void)
 {
     nofralloc
     stwu r1, -0x10(r1)

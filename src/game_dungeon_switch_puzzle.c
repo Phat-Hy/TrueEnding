@@ -11,7 +11,7 @@ extern void _savegpr_22(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void mem_free(void);
-extern void fn_800A58D0(void);
+extern void msg_isWindowActive(void);
 extern void motion_updateFogAdj(void);
 extern void str_findChar(void);
 extern void fn_801333A4(void);
@@ -1521,7 +1521,7 @@ lbl_fn_803E3468_0000148C:
 lbl_fn_803E3468_00001498:
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     lwz r4, lbl_8087F9C0
     cmpwi r3, 0x0
     lwz r3, 0x30(r4)

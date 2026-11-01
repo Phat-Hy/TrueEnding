@@ -129,7 +129,7 @@ extern u32 lbl_80881AA8;
 
 /* Function declarations */
 void fn_801446E8(void);
-void fn_801446F0(void);
+void quest_resetObjectiveBounds(void);
 void quest_evaluateConditions(void);
 void fn_80144ED4(void);
 void fn_80144F4C(void);
@@ -142,7 +142,7 @@ asm void fn_801446E8(void)
     blr
 }
 
-asm void fn_801446F0(void)
+asm void quest_resetObjectiveBounds(void)
 {
     nofralloc
     lfs f0, lbl_8088196C

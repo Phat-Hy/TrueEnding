@@ -31,7 +31,7 @@ extern void dungeon_initGlobalContext(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void fn_80089620(void);
 extern void map_debugLog(void);
@@ -724,7 +724,7 @@ lbl_main_0000078C:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     stw r3, 0x1c(r1)
     mr r26, r3
     stw r3, 0x10(r1)

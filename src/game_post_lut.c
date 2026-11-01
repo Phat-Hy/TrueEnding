@@ -21,7 +21,7 @@ extern void enemy_updateAnimTimer(void);
 extern void quest_updateFlow(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015E4B0(void);
-extern void fn_80176ACC(void);
+extern void battle_activateExpReward(void);
 extern void task_findEntryById(void);
 extern void res_findResourceSlot(void);
 extern void world_getLocalFlag(void);
@@ -880,7 +880,7 @@ lbl_fn_802C6878_00000B6C:
     stw r5, 0x12a4(r4)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r4)
-    bl fn_80176ACC
+    bl battle_activateExpReward
     mr r3, r30
     li r4, 0x0
     bl atn_Task_setActive

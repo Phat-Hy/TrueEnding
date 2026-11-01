@@ -36,7 +36,7 @@ extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_803EC7A0(void);
 extern void task_initWorkerContext(void);
-extern void fn_803ED5D0(void);
+extern void barrier_bindFieldAnimation(void);
 extern void dungeon_updateBarrierField(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -233,7 +233,7 @@ lbl_fn_803F4D98_0000017C:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_803F4D98_00000234:
     mr r3, r31
     bl fn_803F53E0
@@ -1744,7 +1744,7 @@ lbl_fn_803F6448_00001774:
     bctrl
     mr r4, r3
     mr r3, r28
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_803F6448_000017E4:
     li r0, 0x0
     stw r0, 0x5e4(r28)
@@ -1788,7 +1788,7 @@ lbl_fn_803F6448_00001808:
     bctrl
     mr r4, r3
     mr r3, r28
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_803F6448_00001884:
     li r0, 0x0
     stw r0, 0x5e4(r28)
@@ -1828,7 +1828,7 @@ lbl_fn_803F6448_00001898:
     bctrl
     mr r4, r3
     mr r3, r28
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_803F6448_00001918:
     li r0, 0x0
     stw r0, 0x5e4(r28)

@@ -29,7 +29,7 @@ extern void bloom_processPasses(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800DD8A8(void);
-extern void fn_801092C8(void);
+extern void hurtbox_processHitDamage(void);
 extern void fn_8011D424(void);
 extern void fn_801354B4(void);
 extern void fn_80136544(void);
@@ -37,7 +37,7 @@ extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void battle_awardExp(void);
-extern void fn_80176ACC(void);
+extern void battle_activateExpReward(void);
 extern void fn_8017C974(void);
 extern void event_findEntryById(void);
 extern void fn_8021DE88(void);
@@ -871,7 +871,7 @@ lbl_fn_80431774_000009AC:
     lfs f0, lbl_8088686C
     mr r3, r27
     stfs f0, 0x2e8(r27)
-    bl fn_80176ACC
+    bl battle_activateExpReward
     lwz r3, 0x784(r29)
     cmpwi r3, 0x0
     beq lbl_fn_80431774_00000C84
@@ -1575,7 +1575,7 @@ lbl_fn_80432728_00001464:
     li r4, 0x1
     lwz r7, 0x2ebc(r30)
     li r5, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
 lbl_fn_80432728_000014CC:
     lwz r3, lbl_8087F490
     li r6, 0x1

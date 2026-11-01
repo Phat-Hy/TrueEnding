@@ -20,7 +20,7 @@ extern void mem_alloc(void);
 extern void fn_800EFC64(void);
 extern void fn_800FB1BC(void);
 extern void fn_80108F38(void);
-extern void fn_801092C8(void);
+extern void hurtbox_processHitDamage(void);
 extern void fn_8010CA2C(void);
 extern void fn_8010CD3C(void);
 extern void fn_8012B0B0(void);
@@ -3762,7 +3762,7 @@ lbl_fn_800417E8_00003230:
     li r4, 0xe
     li r6, 0x3
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
     lfs f31, lbl_808807C8
 lbl_fn_800417E8_00003278:
     addi r3, r29, 0x7d4

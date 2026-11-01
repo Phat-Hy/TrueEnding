@@ -16,7 +16,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_8010653C(void);
 extern void fn_801065E4(void);
 extern void fn_8010A308(void);
-extern void fn_801446F0(void);
+extern void quest_resetObjectiveBounds(void);
 extern void inventory_unequipItem(void);
 extern void equip_applyToCharacter(void);
 extern void fn_80178078(void);
@@ -614,7 +614,7 @@ asm void fn_801B2888(void)
     lfs f0, lbl_80882410
     stfs f0, 0x238(r31)
     lwz r3, 0x4(r29)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     lwz r4, 0x4(r29)
     mr r3, r29
     stw r30, 0xf54(r4)
@@ -687,7 +687,7 @@ asm void fn_801B2984(void)
     lfs f0, lbl_80882410
     stfs f0, 0x238(r31)
     lwz r3, 0x4(r29)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     lwz r4, 0x4(r29)
     mr r3, r29
     stw r30, 0xf50(r4)

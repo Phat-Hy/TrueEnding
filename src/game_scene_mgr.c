@@ -18,7 +18,7 @@ extern void fn_80105950(void);
 extern void fn_801059F8(void);
 extern void fn_80105A08(void);
 extern void fn_8010CA24(void);
-extern void fn_801240B4(void);
+extern void player_evaluateStatusCondition(void);
 extern void fn_80134168(void);
 extern void npc_updateTalkInteraction(void);
 extern void inventory_unequipItem(void);
@@ -1071,7 +1071,7 @@ lbl_fn_801A34D4_00000DB8:
     lwz r3, lbl_8087F0A8
     li r4, 0x9
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cntlzw r0, r3
     srwi r3, r0, 5
     b lbl_fn_801A34D4_00000E00
@@ -1079,7 +1079,7 @@ lbl_fn_801A34D4_00000DD4:
     lwz r3, lbl_8087F0A8
     li r4, 0x9
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cntlzw r0, r3
     srwi r3, r0, 5
     b lbl_fn_801A34D4_00000E00
@@ -1087,7 +1087,7 @@ lbl_fn_801A34D4_00000DF0:
     lwz r3, lbl_8087F0A8
     li r4, 0x0
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
 lbl_fn_801A34D4_00000E00:
     cmpwi r3, 0x0
     beq lbl_fn_801A34D4_00000EEC

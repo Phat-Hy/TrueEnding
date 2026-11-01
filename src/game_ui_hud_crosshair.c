@@ -9,7 +9,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void str_assignBuffer(void);
 extern void msg_getMessageById(void);
-extern void fn_800A58D0(void);
+extern void msg_isWindowActive(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CFBA0(void);
 extern void str_findChar(void);
@@ -64,7 +64,7 @@ extern void event_findEntryById(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
 extern void kpad_validateButtonIndex(void);
-extern void fn_804444E8(void);
+extern void gmk_findSlotByIndex(void);
 extern void fn_80444A50(void);
 extern void fn_80444B64(void);
 extern void fn_80444BE8(void);
@@ -816,7 +816,7 @@ lbl_fn_801D4700_00000A58:
     beq lbl_fn_801D4700_00000AD0
     mr r3, r31
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_fn_801D4700_00000AB4
     mr r3, r31
@@ -1793,7 +1793,7 @@ lbl_fn_801D54C0_0000185C:
     bl fn_80444A50
     mr r4, r3
     mr r3, r31
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     bgt lbl_fn_801D54C0_000018A4
     lwz r31, lbl_8087F4F0
@@ -1802,7 +1802,7 @@ lbl_fn_801D54C0_0000185C:
     bl fn_80444A50
     mr r4, r3
     mr r3, r31
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     ble lbl_fn_801D54C0_000018C0
 lbl_fn_801D54C0_000018A4:

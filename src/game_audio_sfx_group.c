@@ -17,7 +17,7 @@ extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800FD658(void);
 extern void fn_80107168(void);
-extern void fn_801092C8(void);
+extern void hurtbox_processHitDamage(void);
 extern void fn_8012DB04(void);
 extern void fn_8012DD70(void);
 extern void npc_updateTalkInteraction(void);
@@ -1183,7 +1183,7 @@ lbl_fn_803123D0_00000F54:
     li r5, 0x0
     li r6, 0xa
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
 lbl_fn_803123D0_00000FF4:
     lwz r6, 0x14e4(r29)
     li r30, 0x270f
@@ -1774,7 +1774,7 @@ lbl_fn_803132D0_000017A0:
     li r4, 0x4
     li r5, 0x0
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
 lbl_fn_803132D0_0000180C:
     lfs f1, lbl_80884CA8
     addi r3, r1, 0x30

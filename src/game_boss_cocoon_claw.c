@@ -11,7 +11,7 @@ extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
 extern void fn_80107A68(void);
-extern void fn_80108C10(void);
+extern void hurtbox_testCollisionLayer(void);
 extern void fn_8012DF7C(void);
 extern void quest_evaluateConditions(void);
 extern void fn_80148B0C(void);
@@ -1053,7 +1053,7 @@ lbl_fn_80465294_00000D68:
     stfs f0, 0x20(r1)
     stfs f3, 0x24(r1)
     stfs f4, 0x28(r1)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     lwz r0, 0x3c(r1)
     mr r3, r31
     li r4, 0x0
@@ -1089,7 +1089,7 @@ lbl_fn_80465294_00000D68:
     addi r4, r1, 0x38
     li r8, 0x0
     li r9, 0x0
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
 lbl_fn_80465294_00000ED0:
     lwz r0, 0x74(r1)
     lwz r31, 0x6c(r1)

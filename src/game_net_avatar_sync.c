@@ -23,7 +23,7 @@ extern void fn_8009EE30(void);
 extern void fn_800A4450(void);
 extern void msg_getMessageById(void);
 extern void msg_getMessageString(void);
-extern void fn_800A58D0(void);
+extern void msg_isWindowActive(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CFBA0(void);
 extern void atn_Task_unlink(void);
@@ -527,7 +527,7 @@ lbl_fn_80528698_000004A8:
 lbl_fn_80528698_000004B8:
     mr r3, r29
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_fn_80528698_00000598
     mr r3, r29

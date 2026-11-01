@@ -11,7 +11,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
-extern void fn_801092C8(void);
+extern void hurtbox_processHitDamage(void);
 extern void fn_8011F8F4(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
@@ -1863,14 +1863,14 @@ lbl_fn_803A8284_00001774:
     li r4, 0x3
     li r5, 0x0
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
     b lbl_fn_803A8284_000017D0
 lbl_fn_803A8284_000017BC:
     neg r6, r29
     li r4, 0x4
     li r5, 0x0
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
 lbl_fn_803A8284_000017D0:
     lwz r3, lbl_8087F490
     mr r5, r29

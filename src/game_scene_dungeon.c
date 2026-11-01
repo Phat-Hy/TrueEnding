@@ -13,7 +13,7 @@ extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A55D4(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_801446F0(void);
+extern void quest_resetObjectiveBounds(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
 extern void fn_803C18DC(void);
@@ -1571,7 +1571,7 @@ asm void fn_801ACB38(void)
     stfs f2, 0x6c0(r4)
     stfs f2, 0x7c(r1)
     lwz r3, 0x4(r3)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     mr r3, r30
     bl PSVECSquareMag
     lfs f0, lbl_80882318
@@ -1838,7 +1838,7 @@ asm void fn_801ACF4C(void)
     stw r0, 0x560(r4)
     lwz r3, 0x4(r3)
     addi r29, r3, 0xb0
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     mr r3, r30
     bl PSVECSquareMag
     lfs f0, lbl_80882318

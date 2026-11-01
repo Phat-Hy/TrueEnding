@@ -32,7 +32,7 @@ extern void fn_801546F4(void);
 extern void fn_8016DF3C(void);
 extern void battle_applyStatusEffect(void);
 extern void battle_awardExp(void);
-extern void fn_80176ACC(void);
+extern void battle_activateExpReward(void);
 extern void save_validateHeader(void);
 extern void fn_801F4484(void);
 extern void fn_801F465C(void);
@@ -374,7 +374,7 @@ lbl_fn_8054A004_000002C4:
     li r4, 0x0
     bl atn_Task_setActive
     mr r3, r31
-    bl fn_80176ACC
+    bl battle_activateExpReward
     lwz r31, 0x14ac(r31)
 lbl_fn_8054A004_000002F0:
     cmpwi r31, 0x0
@@ -412,7 +412,7 @@ asm void fn_8054A0A0(void)
     cmplwi r0, 0x4
     bne lbl_fn_8054A0A0_0000036C
     mr r3, r30
-    bl fn_80176ACC
+    bl battle_activateExpReward
 lbl_fn_8054A0A0_0000036C:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
@@ -561,7 +561,7 @@ lbl_fn_8054A0A0_00000550:
     stw r0, 0x58(r30)
     bne lbl_fn_8054A0A0_00000574
     mr r3, r30
-    bl fn_80176ACC
+    bl battle_activateExpReward
 lbl_fn_8054A0A0_00000574:
     mr r3, r29
     mr r4, r30

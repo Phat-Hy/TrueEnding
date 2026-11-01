@@ -32,7 +32,7 @@ extern void enemy_updateAnimTimer(void);
 extern void quest_updateFlow(void);
 extern void equip_applyToCharacter(void);
 extern void fn_801644D4(void);
-extern void fn_80176ACC(void);
+extern void battle_activateExpReward(void);
 extern void fn_8017CB2C(void);
 extern void task_lookupTagIndex(void);
 extern void sound_initGlobalInstances(void);
@@ -1750,7 +1750,7 @@ lbl_fn_803F9624_000016CC:
     bl fn_8012B988
 lbl_fn_803F9624_000016EC:
     lwz r3, 0xf8(r30)
-    bl fn_80176ACC
+    bl battle_activateExpReward
     lwz r3, 0xf8(r30)
     li r4, 0x0
     bl atn_Task_setActive

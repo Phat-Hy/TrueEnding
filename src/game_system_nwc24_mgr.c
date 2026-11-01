@@ -22,8 +22,8 @@ extern void collision_testLineSegment(void);
 extern void fn_80050900(void);
 extern void fn_80051B70(void);
 extern void mission_updateStub(void);
-extern void fn_800A56A8(void);
-extern void fn_800A58D0(void);
+extern void msg_formatWindowLayout(void);
+extern void msg_isWindowActive(void);
 extern void fn_800F7260(void);
 extern void vec3_scale(void);
 extern void fn_800F7FD8(void);
@@ -36,7 +36,7 @@ extern void fn_801162A0(void);
 extern void fn_80116BA4(void);
 extern void fn_80116BD4(void);
 extern void magic_dispatchActionCommand(void);
-extern void fn_801240B4(void);
+extern void player_evaluateStatusCondition(void);
 extern void fn_8012A1B8(void);
 extern void fn_8013A13C(void);
 extern void fn_8013C3B4(void);
@@ -754,7 +754,7 @@ lbl_fn_803830A8_000008F8:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fabs f0, f1
     lfs f3, lbl_808859E0
     frsp f0, f0
@@ -821,7 +821,7 @@ lbl_fn_803830A8_000009F8:
     li r4, 0x0
     li r5, 0x1
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fabs f0, f1
     lfs f3, lbl_808859E0
     frsp f0, f0
@@ -1877,7 +1877,7 @@ lbl_fn_80384188_00001978:
     li r31, 0x0
     li r4, 0x24
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_80384188_000019B0
     lwz r3, lbl_8087F0A8
@@ -2072,18 +2072,18 @@ lbl_fn_80384188_00001C5C:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fmr f26, f1
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_fn_80384188_00001CA0
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x2
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fadds f26, f26, f1
 lbl_fn_80384188_00001CA0:
     lwz r3, lbl_8087F9C0
@@ -2127,18 +2127,18 @@ lbl_fn_80384188_00001D18:
     li r4, 0x0
     li r5, 0x1
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fmr f27, f1
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_fn_80384188_00001D5C
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x3
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fadds f27, f27, f1
 lbl_fn_80384188_00001D5C:
     lwz r3, lbl_8087F9C0

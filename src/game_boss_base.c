@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
-extern void fn_801092C8(void);
+extern void hurtbox_processHitDamage(void);
 extern void fn_8012B3E8(void);
 extern void fn_8012B988(void);
 extern void fn_8012C6D4(void);
@@ -1608,7 +1608,7 @@ lbl_fn_801342D0_0000142C:
     li r7, 0x0
     stfd f0, 0x18(r1)
     lwz r6, 0x1c(r1)
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
 lbl_fn_801342D0_00001460:
     mr r3, r31
     bl fn_8012B3E8

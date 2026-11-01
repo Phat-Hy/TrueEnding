@@ -45,7 +45,7 @@ extern void str_findChar(void);
 extern void fn_8011EDE0(void);
 extern void fn_80129A48(void);
 extern void fn_8012AC40(void);
-extern void fn_801446F0(void);
+extern void quest_resetObjectiveBounds(void);
 extern void quest_evaluateConditions(void);
 extern void quest_checkCondition(void);
 extern void dialog_selectChoice(void);
@@ -62,7 +62,7 @@ extern void actor_setState(void);
 extern void battle_applyStatusEffect(void);
 extern void fn_801750FC(void);
 extern void battle_awardExp(void);
-extern void fn_80176ACC(void);
+extern void battle_activateExpReward(void);
 extern void fn_80176DFC(void);
 extern void battle_generateLootDrops(void);
 extern void fn_8017A33C(void);
@@ -1836,7 +1836,7 @@ lbl_fn_8000F1EC_00001720:
     stw r0, 0x958(r3)
     lwz r3, 0x1c(r29)
     lwz r3, 0x48(r3)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     lwz r3, 0x1c(r29)
     lfs f1, lbl_80880674
     lwz r3, 0x48(r3)
@@ -2313,7 +2313,7 @@ lbl_fn_8000FAE8_00001E3C:
     cmpwi r0, 0x0
     beq lbl_fn_8000FAE8_00001EF8
     lwz r3, 0x13fc(r30)
-    bl fn_80176ACC
+    bl battle_activateExpReward
     lwz r3, 0x13fc(r30)
     lis r4, lbl_8072F924@ha
     addi r4, r4, lbl_8072F924@l

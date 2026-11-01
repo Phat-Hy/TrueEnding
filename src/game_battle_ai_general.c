@@ -77,7 +77,7 @@ extern void fn_80442E64(void);
 extern void fn_80442EA4(void);
 extern void fn_80442EAC(void);
 extern void fn_80442ECC(void);
-extern void fn_804444E8(void);
+extern void gmk_findSlotByIndex(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void PSMTXConcat(void);
@@ -3603,7 +3603,7 @@ lbl_fn_8043F24C_00002F8C:
     cmpwi r3, 0x0
     beq lbl_fn_8043F24C_00002FB0
     li r4, 0x70
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     ble lbl_fn_8043F24C_00002FB0
     li r30, 0x1

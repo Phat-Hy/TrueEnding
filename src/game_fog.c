@@ -6,7 +6,7 @@ extern void _restgpr_19(void);
 extern void _savegpr_19(void);
 extern void dtor_80084684(void);
 extern void mem_free(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
@@ -124,7 +124,7 @@ lbl_fn_800D0DB0_00000098:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     stw r3, 0x1c(r1)
     mr r22, r3
     stw r3, 0x10(r1)
@@ -236,7 +236,7 @@ lbl_fn_800D0F34_0000021C:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     stw r3, 0x1c(r1)
     mr r22, r3
     stw r3, 0x10(r1)
@@ -348,7 +348,7 @@ lbl_fn_800D10B8_000003A0:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     stw r3, 0x1c(r1)
     mr r22, r3
     stw r3, 0x10(r1)
@@ -496,7 +496,7 @@ lbl_fn_800D123C_00000594:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     stw r3, 0x1c(r1)
     mr r17, r3
     stw r3, 0x10(r1)

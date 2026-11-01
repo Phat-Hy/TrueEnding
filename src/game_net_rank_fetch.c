@@ -12,7 +12,7 @@ extern void actor_dispatchMessage(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800A56A8(void);
+extern void msg_formatWindowLayout(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
@@ -682,13 +682,13 @@ asm void fn_805212C0(void)
     mr r30, r3
     stw r29, 0xc4(r1)
     lwz r3, lbl_8087EF70
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     stfs f1, 0xb4(r1)
     li r4, 0x0
     lwz r3, lbl_8087EF70
     li r5, 0x1
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     lfs f0, 0xb4(r1)
     lfs f3, lbl_80887904
     fabs f4, f0

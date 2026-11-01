@@ -40,7 +40,7 @@ extern void dialog_updateScriptState(void);
 extern void equip_applyToCharacter(void);
 extern void actor_setState(void);
 extern void battle_calcExpPosition(void);
-extern void fn_80176ACC(void);
+extern void battle_activateExpReward(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
@@ -3453,7 +3453,7 @@ lbl_fn_803073C4_00002F4C:
     stfs f2, 0x28c(r1)
     bl PSMTXMultVec
     mr r3, r25
-    bl fn_80176ACC
+    bl battle_activateExpReward
     mr r3, r25
     li r4, 0x0
     bl atn_Task_setActive

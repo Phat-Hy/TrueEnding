@@ -38,7 +38,7 @@ extern void quest_ctorRewardItem(void);
 extern void fn_80149624(void);
 extern void equip_applyToCharacter(void);
 extern void actor_setState(void);
-extern void fn_80176ACC(void);
+extern void battle_activateExpReward(void);
 extern void fn_801A03E0(void);
 extern void fn_801A03EC(void);
 extern void fn_801A0408(void);
@@ -147,7 +147,7 @@ asm void fn_8030C1A4(void)
     mr r3, r29
     rlwinm r0, r0, 0, 17, 15
     stw r0, 0x12a4(r4)
-    bl fn_80176ACC
+    bl battle_activateExpReward
     mr r3, r29
     li r4, 0x0
     bl atn_Task_setActive

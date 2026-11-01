@@ -32,7 +32,7 @@ extern void fn_80212840(void);
 extern void fn_80212C34(void);
 extern void fn_8021C6A4(void);
 extern void world_getGlobalFlag(void);
-extern void fn_804444E8(void);
+extern void gmk_findSlotByIndex(void);
 extern void fn_804A3C24(void);
 extern void fn_804A4CE4(void);
 extern void fn_804A7DD4(void);
@@ -1465,7 +1465,7 @@ lbl_fn_8059726C_000013B8:
     mr r25, r3
     mr r3, r27
     lwz r4, 0x4(r25)
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r23, 0x0
     mr r24, r3
     beq lbl_fn_8059726C_000015A0
@@ -1974,7 +1974,7 @@ lbl_fn_80597558_00001BD8:
     beq lbl_fn_80597558_00001DB8
     lwz r4, 0x4(r14)
     mr r3, r23
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     bge lbl_fn_80597558_00001C00
     li r3, 0x0
@@ -1982,7 +1982,7 @@ lbl_fn_80597558_00001BD8:
 lbl_fn_80597558_00001C00:
     lwz r4, 0x4(r14)
     mr r3, r23
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
 lbl_fn_80597558_00001C0C:
     addis r4, r15, 0x2
     mr r7, r3
@@ -2011,7 +2011,7 @@ lbl_fn_80597558_00001C0C:
     beq lbl_fn_80597558_00001DCC
     lwz r4, 0x4(r19)
     mr r3, r23
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     addis r4, r15, 0x2
     mr r22, r3
     lwz r4, 0x5bbc(r4)
@@ -2056,7 +2056,7 @@ lbl_fn_80597558_00001CF8:
     beq lbl_fn_80597558_00001DA0
     lwz r4, 0x4(r28)
     mr r3, r23
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     add r27, r17, r24
     mr r25, r3
     addis r3, r22, 0x2

@@ -6,7 +6,7 @@ extern void _restgpr_22(void);
 extern void _savegpr_22(void);
 extern void dtor_80084684(void);
 extern void fn_8006BA30(void);
-extern void fn_800A58D0(void);
+extern void msg_isWindowActive(void);
 extern void fn_800C63D8(void);
 extern void fn_800C73B0(void);
 extern void fn_800C755C(void);
@@ -1730,7 +1730,7 @@ lbl_fn_80505084_000016EC:
     blt lbl_fn_80505084_00001688
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_fn_80505084_0000178C
     lwz r3, 0xe8(r31)

@@ -25,7 +25,7 @@ extern void fn_8012476C(void);
 extern void fn_8013310C(void);
 extern void fn_80133130(void);
 extern void actor_testBitFlag(void);
-extern void fn_801446F0(void);
+extern void quest_resetObjectiveBounds(void);
 extern void inventory_unequipItem(void);
 extern void fn_80154344(void);
 extern void fn_80154654(void);
@@ -1714,7 +1714,7 @@ lbl_fn_80191170_000015FC:
     stfs f0, 0xc(r30)
 lbl_fn_80191170_00001600:
     lwz r3, 0x4(r30)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_80191170_00001620

@@ -23,7 +23,7 @@ extern void sound_playSpatialEffect(void);
 extern void system_getNextSequenceId(void);
 extern void fn_801077A8(void);
 extern void fn_80107850(void);
-extern void fn_801092C8(void);
+extern void hurtbox_processHitDamage(void);
 extern void hurtbox_dispatchHitEvent(void);
 extern void enemy_updateAnimTimer(void);
 extern void fn_8013310C(void);
@@ -519,7 +519,7 @@ lbl_fn_802DC618_00000578:
     li r4, 0x6
     li r6, 0x0
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
 lbl_fn_802DC618_00000668:
     lwz r8, lbl_8087EFA8
     li r0, 0x0

@@ -24,7 +24,7 @@ extern void route_createSegment(void);
 extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
-extern void fn_800A56A8(void);
+extern void msg_formatWindowLayout(void);
 extern void fn_800BC2E0(void);
 extern void fn_800C1A1C(void);
 extern void fn_800C1FB4(void);
@@ -1737,7 +1737,7 @@ lbl_fn_8052BD00_000016F4:
     li r4, 0x0
     li r5, 0x4
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fabs f1, f1
     lfs f0, lbl_80887AEC
     frsp f1, f1

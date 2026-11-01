@@ -16,7 +16,7 @@ extern void fn_801156C4(void);
 extern void fn_801156D8(void);
 extern void fn_80116BAC(void);
 extern void equip_getGlobalManager(void);
-extern void fn_801240B4(void);
+extern void player_evaluateStatusCondition(void);
 extern void npc_updateDialogueTarget(void);
 extern void fn_80139F2C(void);
 extern void fn_8013C3A8(void);
@@ -2095,7 +2095,7 @@ lbl_fn_8038F52C_00001CFC:
     bl fn_800F52F8
     bl fn_80116BAC
     li r4, 0x24
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_8038F52C_00001D30
     mr r3, r29

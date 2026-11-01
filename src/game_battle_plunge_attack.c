@@ -54,7 +54,7 @@ extern void task_createWorker(void);
 extern void task_destroyWorker(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
-extern void fn_803ED5D0(void);
+extern void barrier_bindFieldAnimation(void);
 extern void dungeon_updateBarrierField(void);
 extern void fn_803EDB18(void);
 extern void fn_80412968(void);
@@ -268,7 +268,7 @@ lbl_fn_80410E84_000001D0:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_80410E84_0000020C:
     lfs f31, 0x328(r31)
     addi r3, r31, 0xf4
@@ -313,7 +313,7 @@ lbl_fn_80410E84_00000270:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_80410E84_000002B8:
     lwz r3, lbl_8087F0A8
     li r4, 0x22
@@ -387,7 +387,7 @@ lbl_fn_80410E84_00000394:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_80410E84_000003D0:
     lfs f31, 0x328(r31)
     addi r3, r31, 0xf4
@@ -1303,7 +1303,7 @@ lbl_fn_80411BC4_0000104C:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
     b lbl_fn_80411BC4_000012B8
 lbl_fn_80411BC4_0000108C:
     lwz r12, 0x0(r31)
@@ -1320,7 +1320,7 @@ lbl_fn_80411BC4_0000108C:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_80411BC4_000010C8:
     lwz r0, 0x694(r31)
     cmpwi r0, 0x0
@@ -1526,7 +1526,7 @@ lbl_fn_804120C0_0000134C:
     bctrl
     mr r4, r3
     mr r3, r30
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
     b lbl_fn_804120C0_00001A98
 lbl_fn_804120C0_000013BC:
     lwz r4, lbl_8087F8A0
@@ -1958,7 +1958,7 @@ lbl_fn_804120C0_0000197C:
     bctrl
     mr r4, r3
     mr r3, r30
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
     b lbl_fn_804120C0_00001A98
 lbl_fn_804120C0_00001A0C:
     lwz r0, 0x54(r3)
@@ -1995,7 +1995,7 @@ lbl_fn_804120C0_00001A0C:
     bctrl
     mr r4, r3
     mr r3, r30
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_804120C0_00001A98:
     lwz r3, 0x0(r31)
     stw r3, 0x54(r30)

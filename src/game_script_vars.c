@@ -14,7 +14,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800E2DD4(void);
 extern void fn_800E2FE0(void);
 extern void system_getNextSequenceId(void);
-extern void fn_801092C8(void);
+extern void hurtbox_processHitDamage(void);
 extern void enemy_updateCombatBehavior(void);
 extern void enemy_updateAnimTimer(void);
 extern void npc_calcTargetDistance(void);
@@ -1169,7 +1169,7 @@ asm void fn_80248A4C(void)
     li r4, 0x6
     li r6, 0x0
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
 lbl_fn_80248A4C_00000F08:
     lwz r0, 0xf54(r30)
     cmpwi r0, 0x0

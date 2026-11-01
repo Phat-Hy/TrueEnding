@@ -30,7 +30,7 @@ extern void fn_8013C460(void);
 extern void fn_8013C554(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_8014052C(void);
-extern void fn_801446F0(void);
+extern void quest_resetObjectiveBounds(void);
 extern void inventory_unequipItem(void);
 extern void equip_applyToCharacter(void);
 extern void battle_calcExpPosition(void);
@@ -1088,7 +1088,7 @@ asm void fn_801C0D80(void)
     li r4, 0x0
     bl fn_801C1050
     lwz r3, 0x4(r29)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     mr r4, r30
     addi r3, r29, 0x8
     bl vec3_copy
@@ -1633,7 +1633,7 @@ asm void fn_801C1578(void)
     rlwinm r0, r0, 0, 28, 26
     stw r0, 0x12a4(r4)
     lwz r3, 0x4(r3)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     lfs f1, lbl_808826A4
     mr r3, r28
     lfs f2, lbl_808826AC

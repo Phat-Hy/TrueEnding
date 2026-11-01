@@ -34,7 +34,7 @@ extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void fn_80102824(void);
 extern void boss_updatePhaseState(void);
-extern void fn_801446F0(void);
+extern void quest_resetObjectiveBounds(void);
 extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
@@ -926,7 +926,7 @@ lbl_fn_802F1320_00000A14:
     bl actor_setState
 lbl_fn_802F1320_00000A30:
     lwz r3, 0x152c(r29)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     lwz r4, 0x152c(r29)
     li r31, 0x0
     lfs f3, lbl_80884850

@@ -46,7 +46,7 @@ extern void fn_8021154C(void);
 extern void fn_80211648(void);
 extern void fn_80212714(void);
 extern void world_getGlobalFlag(void);
-extern void fn_804444E8(void);
+extern void gmk_findSlotByIndex(void);
 extern void fn_80444564(void);
 extern void fn_80444804(void);
 extern void fn_80444BE8(void);
@@ -159,7 +159,7 @@ asm void fn_805895B8(void)
 lbl_fn_805895B8_00000098:
     lwz r3, lbl_8087F4F0
     lwz r4, 0x4(r30)
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     bgt lbl_fn_805895B8_000000B4
     li r30, 0x10
@@ -597,7 +597,7 @@ lbl_fn_80589AF8_000005B4:
     beq lbl_fn_80589AF8_000006F8
     lwz r3, lbl_8087F4F0
     lwz r4, 0x4(r23)
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     bgt lbl_fn_80589AF8_000007BC
 lbl_fn_80589AF8_000006F8:

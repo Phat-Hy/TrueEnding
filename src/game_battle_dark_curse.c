@@ -47,7 +47,7 @@ extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
-extern void fn_803ED5D0(void);
+extern void barrier_bindFieldAnimation(void);
 extern void fn_803EDB18(void);
 extern void fn_8041D180(void);
 extern void fn_8041D198(void);
@@ -2020,7 +2020,7 @@ lbl_fn_80423684_00001948:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_80423684_00001984:
     lfs f31, 0x6f8(r31)
     addi r3, r31, 0x4c4
@@ -2062,7 +2062,7 @@ lbl_fn_80423684_000019E8:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_80423684_00001A24:
     lfs f7, 0x6f8(r31)
     lfs f0, lbl_80886658

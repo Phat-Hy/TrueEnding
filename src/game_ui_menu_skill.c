@@ -10,9 +10,9 @@ extern void fn_80051A88(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800A56A8(void);
+extern void msg_formatWindowLayout(void);
 extern void fn_8010A308(void);
-extern void fn_801446F0(void);
+extern void quest_resetObjectiveBounds(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
 extern void fn_80176DFC(void);
@@ -290,7 +290,7 @@ lbl_fn_801B8DFC_000002C8:
     stfs f2, 0x53c(r3)
     psq_st f1, 0x0(r31), 0, 0
     lwz r3, 0x4(r28)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     psq_l f31, 0x108(r1), 0, 0
     mr r3, r28
     lfd f31, 0x100(r1)
@@ -1210,7 +1210,7 @@ lbl_fn_801B9A54_00000F5C:
     stfs f2, 0x53c(r3)
     psq_st f1, 0x0(r30), 0, 0
     lwz r3, 0x4(r29)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     lwz r3, 0x4(r29)
     li r4, 0x1
     li r5, 0x0
@@ -1512,7 +1512,7 @@ lbl_fn_801B9DE4_000013C0:
     li r4, 0x0
     li r5, 0x1
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fabs f3, f1
     lfs f0, lbl_80882584
     frsp f3, f3

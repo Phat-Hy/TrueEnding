@@ -43,7 +43,7 @@ extern void fn_8020EFEC(void);
 extern void event_findEntryById(void);
 extern void fn_8021C6A4(void);
 extern void world_getGlobalFlag(void);
-extern void fn_804444E8(void);
+extern void gmk_findSlotByIndex(void);
 extern void fn_80444BE8(void);
 extern void fn_80444C48(void);
 extern void fn_80444C50(void);
@@ -306,7 +306,7 @@ asm void fn_805807A8(void)
     beq lbl_fn_805807A8_000002D0
     lwz r4, 0x3300(r3)
     mr r3, r27
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     mr r5, r3
     lwz r3, 0xd4(r25)
     addi r4, r21, 0x294
@@ -406,7 +406,7 @@ lbl_fn_805807A8_00000380:
     bl save_findEntryByName
     lwz r4, 0x3300(r21)
     mr r3, r27
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     mr r5, r3
     lwz r3, 0xac(r28)
     addi r4, r30, 0x2d2
@@ -902,7 +902,7 @@ asm void fn_8058100C(void)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
     lwz r3, lbl_8087F4F0
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     mr r29, r3
     lwz r3, lbl_8087F578
     mr r4, r27

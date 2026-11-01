@@ -24,7 +24,7 @@ extern void fn_8004B1EC(void);
 extern void vec3_initValues(void);
 extern void magic_castSpellCircle(void);
 extern void fn_8008B964(void);
-extern void fn_800A56A8(void);
+extern void msg_formatWindowLayout(void);
 extern void skeleton_getGlobalManager(void);
 extern void fn_800CB480(void);
 extern void fn_800CB640(void);
@@ -264,14 +264,14 @@ lbl_fn_80487490_00000170:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fneg f0, f1
     stfs f0, 0x28(r1)
     bl fn_801156BC
     li r4, 0x0
     li r5, 0x1
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     stfs f1, 0x2c(r1)
 lbl_fn_80487490_000001E8:
     lwz r0, 0x1ea8(r31)

@@ -49,7 +49,7 @@ extern void fn_80139F4C(void);
 extern void npc_getDialogController(void);
 extern void dialog_selectChoice(void);
 extern void debuff_removeStatusEffect(void);
-extern void fn_80176ACC(void);
+extern void battle_activateExpReward(void);
 extern void fn_8017A300(void);
 extern void fn_80198C00(void);
 extern void fn_80206B14(void);
@@ -1744,7 +1744,7 @@ lbl_fn_804D25D4_00001270:
     cmplwi r3, 0x1
     bne lbl_fn_804D25D4_000012A0
     lwz r3, 0x0(r22)
-    bl fn_80176ACC
+    bl battle_activateExpReward
     lwz r3, 0x0(r22)
     li r4, 0x0
     bl fn_804D5F5C

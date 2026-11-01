@@ -11,8 +11,8 @@ extern void fn_800FDE60(void);
 extern void fn_801061BC(void);
 extern void fn_8010652C(void);
 extern void fn_80107FC8(void);
-extern void fn_80108C10(void);
-extern void fn_801092C8(void);
+extern void hurtbox_testCollisionLayer(void);
+extern void hurtbox_processHitDamage(void);
 extern void fn_8010CCD0(void);
 extern void fn_8012476C(void);
 extern void fn_8012F440(void);
@@ -393,13 +393,13 @@ lbl_fn_8012DF7C_000003E4:
     li r4, 0x8
     li r6, 0x0
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
     b lbl_fn_8012DF7C_000004BC
 lbl_fn_8012DF7C_00000470:
     li r4, 0x9
     li r6, 0x0
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
     b lbl_fn_8012DF7C_000004BC
 lbl_fn_8012DF7C_00000484:
     bge lbl_fn_8012DF7C_000004BC
@@ -410,13 +410,13 @@ lbl_fn_8012DF7C_00000484:
     li r4, 0xa
     li r6, 0x0
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
     b lbl_fn_8012DF7C_000004BC
 lbl_fn_8012DF7C_000004AC:
     li r4, 0xb
     li r6, 0x0
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
 lbl_fn_8012DF7C_000004BC:
     addi r11, r1, 0x40
     bl _restgpr_24
@@ -1256,7 +1256,7 @@ lbl_fn_8012E540_00001048:
     li r6, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
 lbl_fn_8012E540_0000109C:
     lwz r3, 0x2f0(r24)
     cmpwi r3, 0x0

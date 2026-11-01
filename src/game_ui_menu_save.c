@@ -21,8 +21,8 @@ extern void fn_800FB4B0(void);
 extern void fn_801070C8(void);
 extern void fn_80107168(void);
 extern void fn_80107208(void);
-extern void fn_80108C10(void);
-extern void fn_801092C8(void);
+extern void hurtbox_testCollisionLayer(void);
+extern void hurtbox_processHitDamage(void);
 extern void fn_8010CCD8(void);
 extern void fn_8012F034(void);
 extern void equip_applyToCharacter(void);
@@ -1516,7 +1516,7 @@ lbl_fn_801BE630_0000145C:
     stfs f5, 0xc0(r1)
     lwz r6, 0x4(r31)
     stfs f6, 0xc4(r1)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     b lbl_fn_801BE630_000014E4
 lbl_fn_801BE630_000014B8:
     psq_l f1, 0x8(r31), 0, 0
@@ -1658,14 +1658,14 @@ lbl_fn_801BE630_00001688:
     li r4, 0xc
     lwz r6, 0x4(r19)
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
     b lbl_fn_801BE630_000016DC
 lbl_fn_801BE630_000016C8:
     lwz r3, lbl_8087F048
     li r4, 0xd
     lwz r6, 0x4(r19)
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
 lbl_fn_801BE630_000016DC:
     lwz r0, lbl_8087F498
     cmpwi r0, 0x0

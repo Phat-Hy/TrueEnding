@@ -11,7 +11,7 @@ extern void wcs_vformat(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80105BD8(void);
-extern void fn_80108C10(void);
+extern void hurtbox_testCollisionLayer(void);
 extern void hurtbox_dispatchHitEvent(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_8012DF7C(void);
@@ -1884,7 +1884,7 @@ lbl_fn_802CAFB8_000018D4:
     addi r4, r1, 0x20
     li r8, 0x0
     li r9, 0x0
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     lwz r4, 0x14d0(r30)
     lwz r3, lbl_8087F048
     addi r4, r4, 0xb0

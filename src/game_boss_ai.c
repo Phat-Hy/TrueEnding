@@ -44,7 +44,7 @@ extern void fn_80219EBC(void);
 extern void fn_8021FC00(void);
 extern void fn_8036823C(void);
 extern void world_getGlobalFlag(void);
-extern void fn_804444E8(void);
+extern void gmk_findSlotByIndex(void);
 extern void fn_804446BC(void);
 extern void atn_LoadHandle_constructor(void);
 extern void rand(void);
@@ -1077,7 +1077,7 @@ lbl_fn_8013539C_00000D2C:
     mr r4, r3
     beq lbl_fn_8013539C_00000D60
     lwz r3, lbl_8087F4F0
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     ble lbl_fn_8013539C_00000D60
     li r3, 0x1
@@ -1090,7 +1090,7 @@ lbl_fn_8013539C_00000D68:
     blt lbl_fn_8013539C_00000D2C
     lwz r3, lbl_8087F4F0
     li r4, 0x19c
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     ble lbl_fn_8013539C_00000DCC
     li r3, 0x1
@@ -1103,7 +1103,7 @@ lbl_fn_8013539C_00000D98:
     lwz r4, 0x8(r31)
     lwz r3, lbl_8087F4F0
     lwzx r4, r4, r30
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     ble lbl_fn_8013539C_00000DB8
     li r3, 0x1

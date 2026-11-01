@@ -56,7 +56,7 @@ extern void task_destroyWorker(void);
 extern void fn_803EC7A0(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
-extern void fn_803ED5D0(void);
+extern void barrier_bindFieldAnimation(void);
 extern void dungeon_updateBarrierField(void);
 extern void fn_803EDB18(void);
 extern void fn_803F10AC(void);
@@ -1045,7 +1045,7 @@ lbl_fn_804131A4_00000C0C:
     bctrl
     mr r4, r3
     mr r3, r25
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_804131A4_00000C48:
     lwz r12, 0x0(r25)
     mr r3, r25

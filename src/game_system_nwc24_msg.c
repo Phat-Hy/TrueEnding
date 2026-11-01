@@ -18,8 +18,8 @@ extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void vec3_initValues(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800A56A8(void);
-extern void fn_800A58D0(void);
+extern void msg_formatWindowLayout(void);
+extern void msg_isWindowActive(void);
 extern void vec3_scale(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_800F8524(void);
@@ -31,7 +31,7 @@ extern void fn_80114AA0(void);
 extern void fn_801162A0(void);
 extern void fn_80116BA4(void);
 extern void fn_80116BD4(void);
-extern void fn_801240B4(void);
+extern void player_evaluateStatusCondition(void);
 extern void fn_8013A13C(void);
 extern void fn_8013C3B4(void);
 extern void fn_80178088(void);
@@ -145,7 +145,7 @@ asm void fn_80387548(void)
     beq lbl_fn_80387548_00000064
     addi r3, r5, 0x48c
     li r4, 0x7
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_80387548_00000064
     mr r3, r30
@@ -849,14 +849,14 @@ lbl_fn_80387DE4_00000A98:
 lbl_fn_80387DE4_00000AB8:
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_fn_80387DE4_00000C0C
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x2
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fneg f4, f1
     lfs f0, lbl_808859E0
     fabs f3, f4

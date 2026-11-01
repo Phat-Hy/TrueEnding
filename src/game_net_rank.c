@@ -15,7 +15,7 @@ extern void str_assignBuffer(void);
 extern void fn_8006FA4C(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800A58D0(void);
+extern void msg_isWindowActive(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
@@ -390,7 +390,7 @@ asm void fn_801F10E0(void)
     bne lbl_fn_801F10E0_000003C8
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_fn_801F10E0_000003C8
     li r28, 0x9
@@ -492,7 +492,7 @@ lbl_fn_801F10E0_000003C8:
     bl thread_findAndNotify
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     bne lbl_fn_801F10E0_000005E0
     mulli r3, r26, 0x34

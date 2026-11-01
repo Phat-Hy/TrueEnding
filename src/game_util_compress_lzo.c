@@ -36,7 +36,7 @@ extern void world_getGlobalFlag(void);
 extern void fn_804438E0(void);
 extern void fn_804439FC(void);
 extern void fn_8044441C(void);
-extern void fn_804444E8(void);
+extern void gmk_findSlotByIndex(void);
 extern void fn_8044453C(void);
 extern void fn_80444564(void);
 extern void fn_8044D500(void);
@@ -758,7 +758,7 @@ lbl_fn_8058D7FC_00000914:
     ble lbl_fn_8058D7FC_00000994
     lwz r3, lbl_8087F4F0
     li r4, 0x143
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x1
     bge lbl_fn_8058D7FC_00000954
     li r3, 0xe
@@ -795,7 +795,7 @@ lbl_fn_8058D7FC_0000099C:
     beq lbl_fn_8058D7FC_000009E4
     lwz r3, lbl_8087F4F0
     lwz r4, 0x4(r4)
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     add r4, r29, r28
     lbz r0, 0x12c(r4)
     extsb r0, r0

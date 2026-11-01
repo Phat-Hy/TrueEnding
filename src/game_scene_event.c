@@ -19,7 +19,7 @@ extern void fn_8010A308(void);
 extern void fn_80129978(void);
 extern void fn_80129A48(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_801446F0(void);
+extern void quest_resetObjectiveBounds(void);
 extern void inventory_unequipItem(void);
 extern void equip_applyToCharacter(void);
 extern void inventory_calcTotalStats(void);
@@ -818,7 +818,7 @@ lbl_fn_801AF888_0000098C:
     stw r0, 0x560(r4)
     lwz r3, 0x4(r3)
     addi r31, r3, 0xb0
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     li r0, 0x1
     stw r0, 0x34c(r31)
     lfs f0, lbl_808822F0

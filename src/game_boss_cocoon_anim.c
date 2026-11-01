@@ -5,8 +5,8 @@
 extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void ui_drawColoredQuad(void);
-extern void fn_80108C10(void);
-extern void fn_801092C8(void);
+extern void hurtbox_testCollisionLayer(void);
+extern void hurtbox_processHitDamage(void);
 extern void fn_80206B68(void);
 extern void fn_80206B70(void);
 extern void game_initGlobalDatabases(void);
@@ -228,7 +228,7 @@ lbl_fn_80450778_00000234:
     li r4, 0x3
     li r5, 0x0
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
     b lbl_fn_80450778_0000047C
 lbl_fn_80450778_00000264:
     beq cr1, lbl_fn_80450778_00000274
@@ -334,7 +334,7 @@ lbl_fn_80450778_00000344:
     li r7, 0x0
     li r8, 0x0
     li r9, 0x1
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     b lbl_fn_80450778_0000047C
 lbl_fn_80450778_000003E4:
     lwz r0, 0xec(r31)
@@ -363,7 +363,7 @@ lbl_fn_80450778_000003E4:
     li r5, 0x0
     lwz r6, 0x4(r6)
     lwz r7, 0x24(r31)
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
     b lbl_fn_80450778_0000047C
 lbl_fn_80450778_00000454:
     lwz r5, 0x20(r31)
@@ -375,7 +375,7 @@ lbl_fn_80450778_00000454:
     lwz r3, lbl_8087F048
     li r5, 0x0
     lwz r7, 0x24(r31)
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
 lbl_fn_80450778_0000047C:
     lwz r4, 0x20(r31)
     cmpwi r4, 0x0

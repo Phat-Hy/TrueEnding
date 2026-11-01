@@ -39,7 +39,7 @@ extern void fn_801479E4(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015C0C0(void);
 extern void fn_8015C6A0(void);
-extern void fn_80176ACC(void);
+extern void battle_activateExpReward(void);
 extern void fn_801A03E8(void);
 extern void fn_801A03F4(void);
 extern void fn_801A0400(void);
@@ -288,7 +288,7 @@ lbl_fn_80277DC4_0000026C:
     stfs f0, 0x60(r1)
     stfs f29, 0x64(r1)
     stw r0, 0x38(r23)
-    bl fn_80176ACC
+    bl battle_activateExpReward
     mr r3, r23
     li r4, 0x0
     bl atn_Task_setActive

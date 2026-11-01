@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_8010CA3C(void);
-extern void fn_801240B4(void);
+extern void player_evaluateStatusCondition(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_80153698(void);
 extern void inventory_unequipItem(void);
@@ -1542,7 +1542,7 @@ lbl_fn_801B1AAC_00001468:
     lwz r3, lbl_8087F0A8
     li r4, 0x7
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_801B1AAC_000014A4
 lbl_fn_801B1AAC_00001498:

@@ -55,7 +55,7 @@ extern void system_getNextSequenceId(void);
 extern void fn_8010F668(void);
 extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
-extern void fn_801240B4(void);
+extern void player_evaluateStatusCondition(void);
 extern void fn_80129978(void);
 extern void fn_80129A48(void);
 extern void boss_updatePhaseState(void);
@@ -585,7 +585,7 @@ lbl_fn_8045EDEC_00000554:
     beq lbl_fn_8045EDEC_000005FC
     addi r3, r3, 0x48c
     li r4, 0x24
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     b lbl_fn_8045EDEC_00000600
 lbl_fn_8045EDEC_000005FC:
     li r3, 0x1

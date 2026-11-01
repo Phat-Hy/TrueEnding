@@ -27,7 +27,7 @@ extern void fn_8008B964(void);
 extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800A56A8(void);
+extern void msg_formatWindowLayout(void);
 extern void fn_800F7258(void);
 extern void vec3_scale(void);
 extern void viewport_getNextSequenceId(void);
@@ -38,7 +38,7 @@ extern void fn_8013A13C(void);
 extern void fn_8013C3B4(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_8014052C(void);
-extern void fn_801446F0(void);
+extern void quest_resetObjectiveBounds(void);
 extern void actor_getMovementFlags(void);
 extern void fn_80188A70(void);
 extern void fn_80188AA0(void);
@@ -363,7 +363,7 @@ asm void fn_801C1DCC(void)
     rlwinm r0, r0, 0, 28, 26
     stw r0, 0x12a4(r4)
     lwz r3, 0x4(r3)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     lfs f1, lbl_808826A4
     mr r3, r30
     lfs f2, lbl_808826AC
@@ -1968,7 +1968,7 @@ asm void fn_801C346C(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fneg f1, f1
     lfs f0, lbl_80882748
     stfs f0, 0xfc(r1)
@@ -1977,7 +1977,7 @@ asm void fn_801C346C(void)
     li r4, 0x0
     li r5, 0x1
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fneg f0, f1
     addi r3, r1, 0xf8
     stfs f0, 0x100(r1)

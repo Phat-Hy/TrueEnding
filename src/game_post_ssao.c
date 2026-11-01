@@ -17,7 +17,7 @@ extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80103600(void);
 extern void fn_80107850(void);
-extern void fn_80108C10(void);
+extern void hurtbox_testCollisionLayer(void);
 extern void hurtbox_dispatchHitEvent(void);
 extern void fn_8012DF7C(void);
 extern void fn_80148B0C(void);
@@ -1104,7 +1104,7 @@ lbl_fn_802D4628_00000E34:
     addi r5, r1, 0xd4
     li r8, 0x0
     li r9, 0x0
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     lwz r3, lbl_8087F048
     addi r4, r20, 0xb0
     bl fn_80107850
@@ -1286,7 +1286,7 @@ lbl_fn_802D4628_000010C8:
     li r6, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     lwz r3, 0x1560(r24)
     addi r0, r3, 0x1
     stw r0, 0x1560(r24)

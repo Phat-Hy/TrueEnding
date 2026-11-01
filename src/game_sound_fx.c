@@ -54,7 +54,7 @@ extern void fn_80134134(void);
 extern void fn_80137B78(void);
 extern void fn_801388B8(void);
 extern void npc_calcTargetDistance(void);
-extern void fn_801446F0(void);
+extern void quest_resetObjectiveBounds(void);
 extern void dialog_selectChoice(void);
 extern void fn_8014EEC4(void);
 extern void inventory_unequipItem(void);
@@ -1327,7 +1327,7 @@ asm void fn_800EBA5C(void)
     stw r30, 0x28(r1)
     bl battle_awardExp
     mr r3, r31
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     lwz r0, 0x12a4(r31)
     srwi. r0, r0, 31
     beq lbl_fn_800EBA5C_000010C0
