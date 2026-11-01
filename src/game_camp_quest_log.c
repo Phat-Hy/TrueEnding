@@ -32,7 +32,7 @@ extern void cam_bindRotationTarget(void);
 extern void cam_evalControllerSpline(void);
 extern void cam_setLookAtTarget(void);
 extern void fn_800ED4D8(void);
-extern void fn_800ED4E0(void);
+extern void cam_updateLookAtMatrix(void);
 extern void cam_evalLookAtMatrix(void);
 extern void vec3_scale(void);
 extern void str_appendString(void);
@@ -1386,7 +1386,7 @@ lbl_fn_803C3894_00001158:
     addi r4, r1, 0xc
     bl fn_8000E18C
     addi r3, r1, 0x248
-    bl fn_800ED4E0
+    bl cam_updateLookAtMatrix
 lbl_fn_803C3894_00001180:
     addi r3, r1, 0x180
     addi r4, r1, 0x284
@@ -1588,7 +1588,7 @@ lbl_fn_803C3894_00001458:
     addi r4, r1, 0x8
     bl fn_8000E18C
     addi r3, r1, 0x1e0
-    bl fn_800ED4E0
+    bl cam_updateLookAtMatrix
 lbl_fn_803C3894_00001480:
     addi r3, r1, 0x120
     addi r4, r1, 0x21c

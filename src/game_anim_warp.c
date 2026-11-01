@@ -32,7 +32,7 @@ extern void hurtbox_dispatchHitEvent(void);
 extern void fn_8010EDFC(void);
 extern void vec3_sqMag(void);
 extern void enemy_updateAnimTimer(void);
-extern void fn_801404F8(void);
+extern void quest_getGlobalManager(void);
 extern void fn_80140500(void);
 extern void quest_updateFlow(void);
 extern void fn_801479E4(void);
@@ -1704,7 +1704,7 @@ lbl_fn_80279280_0000160C:
     lwz r12, 0x40(r12)
     mtctr r12
     bctrl
-    bl fn_801404F8
+    bl quest_getGlobalManager
     bl fn_8004D124
 lbl_fn_80279280_00001740:
     mr r3, r29
@@ -1715,7 +1715,7 @@ lbl_fn_80279280_0000174C:
     bne lbl_fn_80279280_0000160C
     addi r3, r1, 0x128
     bl fn_80140500
-    bl fn_801404F8
+    bl quest_getGlobalManager
     lwz r7, 0x1900(r31)
     addi r4, r1, 0x128
     addi r5, r1, 0xcc

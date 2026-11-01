@@ -71,7 +71,7 @@ extern u32 lbl_8087EFE0;
 extern u32 lbl_80880BF8;
 
 /* Function declarations */
-void fn_8008B130(void);
+void map_getArchiveName(void);
 void fn_8008B138(void);
 void map_processTrigger(void);
 u32 fn_8008B964(void);
@@ -84,7 +84,7 @@ void fn_8008BC58(void);
 void fn_8008BD10(void);
 void fn_8008C62C(void);
 
-asm void fn_8008B130(void)
+asm void map_getArchiveName(void)
 {
     nofralloc
     addi r3, r3, 0x164

@@ -17,7 +17,7 @@ extern void fn_8006B2D8(void);
 extern void fn_8006D008(void);
 extern void mem_alloc(void);
 extern void area_updateZoneState(void);
-extern void fn_8008B130(void);
+extern void map_getArchiveName(void);
 extern void fn_80091C10(void);
 extern void atn_Model_findBoneIndex(void);
 extern void target_pushPointToHistory(void);
@@ -1432,7 +1432,7 @@ asm void fn_8056556C(void)
 lbl_fn_8056556C_00001264:
     addi r31, r3, 0xb0
     mr r3, r31
-    bl fn_8008B130
+    bl map_getArchiveName
     li r0, 0x0
     stw r0, 0x1c(r1)
     mr r27, r3

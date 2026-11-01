@@ -25,7 +25,7 @@ extern void fn_801F6C2C(void);
 extern void fn_801F6C38(void);
 extern void save_computeCrc32(void);
 extern void save_verifyBlockCrc(void);
-extern void fn_801F7590(void);
+extern void save_writeBackupSlot(void);
 extern void fn_801F791C(void);
 extern void fn_801FEB9C(void);
 extern void thread_findAndNotify(void);
@@ -1487,7 +1487,7 @@ lbl_fn_804A4CE4_00001354:
     mr r3, r31
     addi r4, r30, 0x1a4
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F7590
+    bl save_writeBackupSlot
     addi r5, r1, 0x28
     psq_l f1, 0x0(r29), 0, 0
     psq_l f2, 0x8(r29), 0, 0
@@ -1495,7 +1495,7 @@ lbl_fn_804A4CE4_00001354:
     psq_st f1, 0x0(r5), 0, 0
     addi r4, r30, 0x1ab
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F7590
+    bl save_writeBackupSlot
     addi r5, r1, 0x18
     psq_l f1, 0x0(r29), 0, 0
     psq_l f2, 0x8(r29), 0, 0
@@ -1503,7 +1503,7 @@ lbl_fn_804A4CE4_00001354:
     psq_st f1, 0x0(r5), 0, 0
     addi r4, r30, 0x1b3
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F7590
+    bl save_writeBackupSlot
     addi r5, r1, 0x8
     psq_l f1, 0x0(r29), 0, 0
     psq_l f2, 0x8(r29), 0, 0
@@ -1511,7 +1511,7 @@ lbl_fn_804A4CE4_00001354:
     psq_st f1, 0x0(r5), 0, 0
     addi r4, r30, 0x1bd
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F7590
+    bl save_writeBackupSlot
     lwz r0, 0x94(r1)
     lwz r31, 0x8c(r1)
     lwz r30, 0x88(r1)

@@ -14,7 +14,7 @@ extern void scene_getRootNode(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void mtx_multVec(void);
-extern void fn_80012C88(void);
+extern void vec3_addAssign(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
 extern void fn_8001336C(void);
@@ -865,7 +865,7 @@ lbl_fn_80129A6C_00000A80:
     bl mtx_getTranslation
     addi r3, r1, 0xdc
     addi r4, r1, 0x7c
-    bl fn_80012C88
+    bl vec3_addAssign
 lbl_fn_80129A6C_00000AC0:
     addi r3, r1, 0xd0
     bl mission_updateStub
@@ -1046,7 +1046,7 @@ lbl_fn_80129A6C_00000D18:
     bl mtx_getTranslation
     addi r3, r1, 0xac
     addi r4, r1, 0x40
-    bl fn_80012C88
+    bl vec3_addAssign
 lbl_fn_80129A6C_00000D58:
     lwz r3, 0x0(r31)
     bl scene_getRootNode

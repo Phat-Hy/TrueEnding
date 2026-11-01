@@ -33,7 +33,7 @@ extern void fn_800B6BEC(void);
 extern void fn_800B95C4(void);
 extern void fn_800BD94C(void);
 extern void fn_800C1A1C(void);
-extern void fn_800C2448(void);
+extern void skeleton_getBoneByIndex(void);
 extern void fn_800C2E30(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void str_parseInt(void);
@@ -2154,7 +2154,7 @@ lbl_fn_800BC874_00001C08:
     mr r28, r3
     lwz r3, 0x2fc(r29)
     li r4, 0x0
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     mr r4, r28
     bl fn_80079BC8
     lwz r3, lbl_8087EFA8

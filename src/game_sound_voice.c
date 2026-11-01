@@ -32,7 +32,7 @@ extern void save_parseSlotStats(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
 extern void save_calculateBlockCrc(void);
-extern void fn_801F7590(void);
+extern void save_writeBackupSlot(void);
 extern void fn_801F7DF0(void);
 extern void fn_801F8830(void);
 extern void profile_getMetricValue(void);
@@ -505,7 +505,7 @@ lbl_fn_801D77A4_0000059C:
     mr r5, r25
     addi r25, r4, lbl_8073CA28@l
     addi r4, r25, 0x61
-    bl fn_801F7590
+    bl save_writeBackupSlot
     addi r24, r1, 0x20
     psq_l f1, 0x0(r26), 0, 0
     psq_l f2, 0x8(r26), 0, 0
@@ -515,7 +515,7 @@ lbl_fn_801D77A4_0000059C:
     bl perf_getMetricValue
     mr r5, r24
     addi r4, r25, 0x68
-    bl fn_801F7590
+    bl save_writeBackupSlot
     lfs f30, lbl_80882AE0
     mr r24, r29
     lfs f31, lbl_80882ADC

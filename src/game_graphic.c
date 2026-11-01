@@ -57,7 +57,7 @@ extern void GXSetTevDirect(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
-extern void fn_806174C0(void);
+extern void GXSetTevIndTile(void);
 extern void fn_806175F0(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevSwapMode(void);
@@ -2083,7 +2083,7 @@ asm void fn_800B0A70(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     lwz r3, lbl_8087EEE0
     addi r4, r28, 0x88
     li r5, 0x0

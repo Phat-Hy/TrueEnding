@@ -55,7 +55,7 @@ extern void fn_8013C3F4(void);
 extern void fn_8013C434(void);
 extern void fn_8013C478(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_801404F8(void);
+extern void quest_getGlobalManager(void);
 extern void fn_80140500(void);
 extern void quest_initMarkerCoords(void);
 extern void fn_80140588(void);
@@ -2051,7 +2051,7 @@ lbl_fn_80314BD8_000019E8:
     lfs f0, lbl_80884D1C
     fsubs f0, f1, f0
     stfs f0, 0x150(r1)
-    bl fn_801404F8
+    bl quest_getGlobalManager
     addi r4, r1, 0x1b0
     addi r5, r1, 0x158
     addi r6, r1, 0x14c

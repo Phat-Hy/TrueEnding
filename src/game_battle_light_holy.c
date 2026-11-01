@@ -43,7 +43,7 @@ extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
-extern void fn_803EC758(void);
+extern void barrier_formatCountdownTimer(void);
 extern void barrier_formatDialogString(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
@@ -480,7 +480,7 @@ asm void fn_80420934(void)
     addi r4, r1, 0x8
     stw r29, 0x34(r1)
     mr r29, r3
-    bl fn_803EC758
+    bl barrier_formatCountdownTimer
     lwz r0, 0xf0(r29)
     cmpwi r0, 0x0
     bne lbl_fn_80420934_00000504
@@ -1649,7 +1649,7 @@ asm void fn_80421904(void)
     addi r4, r1, 0x8
     stw r28, 0x30(r1)
     mr r28, r3
-    bl fn_803EC758
+    bl barrier_formatCountdownTimer
     lwz r0, 0xf0(r28)
     cmpwi r0, 0x0
     bne lbl_fn_80421904_000014D8

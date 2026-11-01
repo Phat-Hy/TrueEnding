@@ -15,7 +15,7 @@ extern void scene_transformPoint(void);
 extern void fn_8000DCF4(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80012C88(void);
+extern void vec3_addAssign(void);
 extern void vec3_sub(void);
 extern void vec3_add(void);
 extern void fn_80013484(void);
@@ -55,7 +55,7 @@ extern void fn_8013A18C(void);
 extern void npc_getPosition(void);
 extern void fn_8013C3B4(void);
 extern void fn_8013C480(void);
-extern void fn_801404F8(void);
+extern void quest_getGlobalManager(void);
 extern void fn_80140500(void);
 extern void fn_80144ED4(void);
 extern void fn_80148334(void);
@@ -985,7 +985,7 @@ lbl_fn_803FA5C8_00000B08:
     fadds f0, f1, f0
     stfs f0, 0xf4(r1)
     bl mission_updateStub
-    bl fn_801404F8
+    bl quest_getGlobalManager
     lis r7, 0x8000
     addi r4, r1, 0xe4
     addi r5, r1, 0xf0
@@ -1021,7 +1021,7 @@ lbl_fn_803FA5C8_00000BA8:
     bl fn_80013484
     addi r3, r31, 0x6c
     addi r4, r31, 0x4e4
-    bl fn_80012C88
+    bl vec3_addAssign
     addi r3, r1, 0xcc
     bl mission_updateStub
     lwz r3, 0x4c4(r31)
@@ -1033,7 +1033,7 @@ lbl_fn_803FA5C8_00000BA8:
 lbl_fn_803FA5C8_00000C08:
     addi r3, r1, 0x190
     bl fn_80140500
-    bl fn_801404F8
+    bl quest_getGlobalManager
     lwz r8, 0x4cc(r31)
     mr r7, r30
     addi r4, r1, 0x190
@@ -1155,7 +1155,7 @@ lbl_fn_803FA5C8_00000DC8:
     bl vec3_assign
     addi r3, r31, 0x6c
     addi r4, r31, 0x4e4
-    bl fn_80012C88
+    bl vec3_addAssign
     bl proj_getGlobalManager
     bl fn_802F0998
     lfs f2, lbl_8088605C

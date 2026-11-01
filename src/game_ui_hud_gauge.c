@@ -12,7 +12,7 @@ extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void mtx_multVec(void);
-extern void fn_80012C88(void);
+extern void vec3_addAssign(void);
 extern void vec3_sub(void);
 extern void math_wrapAngle(void);
 extern void fn_80013404(void);
@@ -2053,7 +2053,7 @@ lbl_fn_801C346C_00001A68:
     ble lbl_fn_801C346C_00001AD4
     addi r3, r30, 0x8
     addi r4, r1, 0xe0
-    bl fn_80012C88
+    bl vec3_addAssign
     b lbl_fn_801C346C_00001B40
 lbl_fn_801C346C_00001AD4:
     addi r3, r1, 0x98

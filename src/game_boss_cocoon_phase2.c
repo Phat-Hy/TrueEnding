@@ -15,7 +15,7 @@ extern void scene_getRootNode(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
-extern void fn_80012C88(void);
+extern void vec3_addAssign(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
 extern void str_initFromCStr(void);
@@ -48,7 +48,7 @@ extern void cam_bindRotationTarget(void);
 extern void cam_evalControllerSpline(void);
 extern void cam_setLookAtTarget(void);
 extern void fn_800ED4D8(void);
-extern void fn_800ED4E0(void);
+extern void cam_updateLookAtMatrix(void);
 extern void cam_evalLookAtMatrix(void);
 extern void fn_800F29D0(void);
 extern void system_getNextSequenceId(void);
@@ -1326,7 +1326,7 @@ lbl_fn_8045FAB0_00000FFC:
     bl str_appendString
 lbl_fn_8045FAB0_00001038:
     addi r3, r1, 0x98
-    bl fn_800ED4E0
+    bl cam_updateLookAtMatrix
 lbl_fn_8045FAB0_00001040:
     addi r3, r1, 0x38
     addi r4, r1, 0xd4
@@ -2224,7 +2224,7 @@ lbl_fn_80460458_00001CF4:
     bl mtx_getTranslation
     addi r3, r1, 0x4c
     addi r4, r1, 0x1c
-    bl fn_80012C88
+    bl vec3_addAssign
     addi r3, r31, 0x1578
     bl fn_8010F668
     lfs f1, lbl_80886D78

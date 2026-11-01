@@ -28,7 +28,7 @@ extern void http_formatParam(void);
 extern void fn_806ABB70(void);
 extern void fn_806ACCF0(void);
 extern void fn_806ACE00(void);
-extern void fn_806B0DE0(void);
+extern void net_isSessionActive(void);
 extern void net_getMyAid(void);
 extern void fn_806B0F80(void);
 extern void fn_806B1230(void);
@@ -282,7 +282,7 @@ lbl_fn_806B3CC0_00000214:
     li r3, 0x0
     b lbl_fn_806B3CC0_000002F0
 lbl_fn_806B3CC0_00000228:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     cmpwi r3, 0x0
     bne lbl_fn_806B3CC0_0000023C
     li r3, 0x0

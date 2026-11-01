@@ -25,7 +25,7 @@ extern void motion_updateFogAdj(void);
 extern void fn_800C0508(void);
 extern void fn_800C06B0(void);
 extern void fn_800C08B0(void);
-extern void fn_800C2448(void);
+extern void skeleton_getBoneByIndex(void);
 extern void msg_drawText(void);
 extern void fn_80238560(void);
 extern void PSMTXTranspose(void);
@@ -51,7 +51,7 @@ extern void fn_80617270(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
-extern void fn_806174C0(void);
+extern void GXSetTevIndTile(void);
 extern void fn_806175F0(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevKAlphaSel(void);
@@ -728,7 +728,7 @@ lbl_font_renderString_00000730:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x0
     li r4, 0xc
     bl GXSetTevKColorSel
@@ -767,7 +767,7 @@ lbl_font_renderString_00000730:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x1
     li r4, 0xc
     bl GXSetTevKColorSel
@@ -859,7 +859,7 @@ lbl_font_renderString_00000730:
     lwz r3, lbl_8087EFB4
     li r4, 0x0
     lwz r3, 0x2fc(r3)
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     mr r5, r23
     addi r4, r1, 0x118
     bl fn_80079994
@@ -1556,7 +1556,7 @@ asm void fn_80235BF8(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x0
     li r4, 0xc
     bl GXSetTevKColorSel
@@ -1607,7 +1607,7 @@ asm void fn_80235BF8(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x1
     li r4, 0xc
     bl GXSetTevKColorSel
@@ -1905,7 +1905,7 @@ lbl_fn_80235BF8_000018D4:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x0
     li r4, 0x10
     bl GXSetTevKColorSel
@@ -1960,7 +1960,7 @@ lbl_fn_80235BF8_000019E8:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     addi r3, r14, 0x1
     li r4, 0x10
     bl GXSetTevKColorSel

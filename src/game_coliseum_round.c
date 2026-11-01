@@ -13,7 +13,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_8008B964(void);
 extern void skeleton_getGlobalManager(void);
-extern void fn_800C2448(void);
+extern void skeleton_getBoneByIndex(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
@@ -743,7 +743,7 @@ lbl_fn_8048F1DC_0000083C:
     bl PSMTXMultVec
     addi r3, r30, 0x4c
     li r4, 0x0
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     addi r4, r1, 0x128
     lfs f2, 0x130(r1)
     psq_l f1, 0x0(r4), 0, 0
@@ -820,7 +820,7 @@ lbl_fn_8048F844_00000A08:
     stfs f1, 0x1c(r1)
     stfs f0, 0x18(r1)
     stfs f2, 0x20(r1)
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     lfs f0, 0x18(r1)
     stfs f0, 0x34(r3)
     lfs f0, 0x1c(r1)
@@ -1104,7 +1104,7 @@ lbl_fn_8048FC7C_00000E38:
     mulli r0, r0, 0x65c
     add r5, r5, r0
     addi r30, r5, 0xc8
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     lfs f2, 0x8(r29)
     addi r5, r31, 0x1ab0
     psq_l f1, 0x0(r29), 0, 0

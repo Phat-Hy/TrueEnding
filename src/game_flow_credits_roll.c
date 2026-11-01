@@ -28,7 +28,7 @@ extern void rand(void);
 extern void abort(void);
 extern void net_getSocket(void);
 extern void fn_806A8E70(void);
-extern void fn_806B0DE0(void);
+extern void net_isSessionActive(void);
 extern void net_getMyAid(void);
 extern void net_isSessionConnected(void);
 
@@ -150,7 +150,7 @@ lbl_fn_804E9C68_000000C0:
     li r3, 0x1
     b lbl_fn_804E9C68_000000EC
 lbl_fn_804E9C68_000000E8:
-    bl fn_806B0DE0
+    bl net_isSessionActive
 lbl_fn_804E9C68_000000EC:
     mr r21, r3
     b lbl_fn_804E9C68_00000110

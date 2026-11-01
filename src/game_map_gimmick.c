@@ -19,7 +19,7 @@ extern void fn_80087BB4(void);
 extern void route_createWaypoint(void);
 extern void fn_80088FAC(void);
 extern void node_createNamedChild(void);
-extern void fn_800C2448(void);
+extern void skeleton_getBoneByIndex(void);
 extern void fn_801222D4(void);
 extern void fn_80184A64(void);
 extern void fn_80184AD4(void);
@@ -404,7 +404,7 @@ lbl_fn_801856B8_000002D8:
     mr r31, r3
     mr r3, r28
     li r4, 0x0
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     mr r4, r31
     bl fn_80079BC8
     addi r25, r25, 0x1

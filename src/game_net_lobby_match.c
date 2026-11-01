@@ -23,7 +23,7 @@ extern void route_interpolatePath(void);
 extern void fn_80087858(void);
 extern void node_createNamedChild(void);
 extern void area_updateZoneState(void);
-extern void fn_8008B130(void);
+extern void map_getArchiveName(void);
 extern void map_processTrigger(void);
 extern void minimap_renderOverlay(void);
 extern void atn_Model_findBoneIndex(void);
@@ -717,7 +717,7 @@ lbl_fn_8049BB4C_0000083C:
     cmpwi r0, 0x0
     bne lbl_fn_8049BB4C_00000878
     addi r3, r27, 0x50
-    bl fn_8008B130
+    bl map_getArchiveName
     lis r4, lbl_80756CD8@ha
     addi r4, r4, lbl_80756CD8@l
     addi r4, r4, 0xe6
@@ -1285,7 +1285,7 @@ asm void fn_8049C7AC(void)
     mr r27, r4
     mr r28, r5
     addi r3, r3, 0x50
-    bl fn_8008B130
+    bl map_getArchiveName
     li r0, 0x0
     stw r0, 0x10(r1)
     mr r31, r3

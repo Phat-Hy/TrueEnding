@@ -52,7 +52,7 @@ extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_8013C3A8(void);
 extern void fn_8013C554(void);
-extern void fn_801404F8(void);
+extern void quest_getGlobalManager(void);
 extern void fn_801479D8(void);
 extern void quest_checkCondition(void);
 extern void dialog_selectChoice(void);
@@ -601,7 +601,7 @@ lbl_fn_803729B4_00000564:
     addi r4, r1, 0x68
     addi r5, r1, 0x20
     bl vec3_add
-    bl fn_801404F8
+    bl quest_getGlobalManager
     addi r5, r1, 0x68
     addi r6, r1, 0x50
     addi r7, r28, 0x8

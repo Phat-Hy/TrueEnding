@@ -22,7 +22,7 @@ extern void wcslen(void);
 extern void fn_8068B2A0(void);
 extern void net_getSocket(void);
 extern void fn_806A8E70(void);
-extern void fn_806B0DE0(void);
+extern void net_isSessionActive(void);
 extern void net_getMyAid(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -2673,7 +2673,7 @@ lbl_fn_804F8468_000023B0:
     li r3, 0x1
     b lbl_fn_804F8468_000024C0
 lbl_fn_804F8468_000024A0:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804F8468_000024C0
 lbl_fn_804F8468_000024A8:
     lwz r0, 0x1f8(r4)

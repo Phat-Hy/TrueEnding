@@ -20,7 +20,7 @@ extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
-extern void fn_8008B130(void);
+extern void map_getArchiveName(void);
 extern void fn_8009FE24(void);
 extern void fn_800B1BAC(void);
 extern void fn_800B1C1C(void);
@@ -1602,7 +1602,7 @@ lbl_fn_8049E480_00001408:
     cmpwi r0, 0x0
     bne lbl_fn_8049E480_000015F0
     addi r3, r23, 0x50
-    bl fn_8008B130
+    bl map_getArchiveName
     stw r20, 0x90(r1)
     mr r19, r3
     stw r20, 0x94(r1)

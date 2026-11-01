@@ -13,7 +13,7 @@ extern void fn_8000DCF4(void);
 extern void scene_getRootNode(void);
 extern void fn_800109E0(void);
 extern void mtx_multVec(void);
-extern void fn_80012C88(void);
+extern void vec3_addAssign(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void fn_8001336C(void);
 extern void mem_free(void);
@@ -1961,7 +1961,7 @@ lbl_fn_802A3D80_00001A34:
     bl mtx_multVec
     addi r3, r1, 0x2c
     addi r4, r1, 0x20
-    bl fn_80012C88
+    bl vec3_addAssign
     lfs f1, lbl_80883D28
     lfs f2, lbl_80883E14
     bl fn_802A40A8

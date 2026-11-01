@@ -24,7 +24,7 @@ extern void fn_806ACC80(void);
 extern void fn_806ACCF0(void);
 extern void fn_806ACE00(void);
 extern void fn_806AEAF0(void);
-extern void fn_806B0DE0(void);
+extern void net_isSessionActive(void);
 extern void fn_806B12F0(void);
 extern void fn_806B14D0(void);
 extern void fn_806B1680(void);
@@ -494,7 +494,7 @@ lbl_fn_806BFEA0_0000059C:
     li r3, 0xff
     b lbl_fn_806BFEA0_000007FC
 lbl_fn_806BFEA0_000005A4:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     lis r28, lbl_80860898@ha
     lwz r5, lbl_80860898@l(r28)
     lbz r4, 0x17(r5)

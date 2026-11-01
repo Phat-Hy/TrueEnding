@@ -11,7 +11,7 @@ extern void vec3_assign(void);
 extern void fn_800109E0(void);
 extern void vec3_toEulerAngles(void);
 extern void mtx_multVec(void);
-extern void fn_80012C88(void);
+extern void vec3_addAssign(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
 extern void vec3_initValues(void);
@@ -270,7 +270,7 @@ lbl_fn_803041C8_00000284:
     addi r3, r31, 0x528
     addi r4, r31, 0x15d8
     li r30, 0x0
-    bl fn_80012C88
+    bl vec3_addAssign
     lfs f0, lbl_80884AC4
     fmr f1, f31
     stfs f0, 0x52c(r31)

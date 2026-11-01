@@ -37,7 +37,7 @@ extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
-extern void fn_803EC758(void);
+extern void barrier_formatCountdownTimer(void);
 extern void barrier_formatDialogString(void);
 extern void dungeon_updateBarrierField(void);
 extern void fn_803F11F8(void);
@@ -1712,7 +1712,7 @@ asm void fn_8041B094(void)
     mr r28, r4
     mr r27, r3
     addi r4, r1, 0x8
-    bl fn_803EC758
+    bl barrier_formatCountdownTimer
     lwz r0, 0xf0(r27)
     cmpwi r0, 0x0
     bne lbl_fn_8041B094_000016A8

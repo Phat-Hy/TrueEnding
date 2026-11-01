@@ -23,7 +23,7 @@ extern void fn_80011420(void);
 extern void fn_800119C0(void);
 extern void fn_800121F0(void);
 extern void fn_8001296C(void);
-extern void fn_80012C88(void);
+extern void vec3_addAssign(void);
 extern void vec3_sub(void);
 extern void vec3_add(void);
 extern void vec3_initValues(void);
@@ -275,7 +275,7 @@ lbl_fn_80551198_000001BC:
 lbl_fn_80551198_00000228:
     addi r3, r1, 0x248
     addi r4, r1, 0x254
-    bl fn_80012C88
+    bl vec3_addAssign
     lis r4, lbl_807C7030@ha
     addi r3, r1, 0x230
     addi r4, r4, lbl_807C7030@l
@@ -329,7 +329,7 @@ lbl_fn_80551198_000002D8:
     bl fn_80538C18
     addi r3, r1, 0x230
     addi r4, r1, 0x128
-    bl fn_80012C88
+    bl vec3_addAssign
 lbl_fn_80551198_00000304:
     lfs f0, lbl_80887E30
     fcmpo cr0, f31, f0
@@ -529,7 +529,7 @@ lbl_fn_80551198_000005AC:
     bl vec3_toEulerAngles
     addi r3, r1, 0x230
     addi r4, r1, 0xb0
-    bl fn_80012C88
+    bl vec3_addAssign
 lbl_fn_80551198_000005F4:
     cmpwi r26, 0x0
     bne lbl_fn_80551198_0000061C
@@ -744,7 +744,7 @@ lbl_fn_80551198_00000894:
 lbl_fn_80551198_00000920:
     addi r3, r1, 0x1a0
     addi r4, r1, 0x194
-    bl fn_80012C88
+    bl vec3_addAssign
     lfs f0, lbl_80887E30
     fcmpo cr0, f31, f0
     ble lbl_fn_80551198_000009FC
@@ -867,7 +867,7 @@ lbl_fn_80551198_00000ACC:
     bl fn_80538C18
     addi r3, r1, 0x170
     addi r4, r1, 0x20
-    bl fn_80012C88
+    bl vec3_addAssign
 lbl_fn_80551198_00000B04:
     lfs f0, lbl_80887E30
     fcmpo cr0, f31, f0

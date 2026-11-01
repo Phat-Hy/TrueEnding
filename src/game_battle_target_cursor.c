@@ -38,7 +38,7 @@ extern void fn_8023A1F4(void);
 extern void res_registerResource(void);
 extern void kpad_getClampData(void);
 extern void task_createWorker(void);
-extern void fn_803EC758(void);
+extern void barrier_formatCountdownTimer(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
 extern void barrier_bindFieldAnimation(void);
@@ -801,7 +801,7 @@ asm void fn_804091FC(void)
     addi r4, r1, 0x8
     stw r29, 0x34(r1)
     mr r29, r3
-    bl fn_803EC758
+    bl barrier_formatCountdownTimer
     lwz r0, 0xf0(r29)
     cmpwi r0, 0x0
     bne lbl_fn_804091FC_0000099C

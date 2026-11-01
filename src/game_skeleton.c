@@ -104,7 +104,7 @@ void fn_800C2108(void);
 void fn_800C2274(void);
 void fn_800C23E8(void);
 void fn_800C2418(void);
-void fn_800C2448(void);
+void skeleton_getBoneByIndex(void);
 void fn_800C24B4(void);
 void fn_800C2520(void);
 void fn_800C258C(void);
@@ -1419,7 +1419,7 @@ asm void fn_800C2418(void)
     blr
 }
 
-asm void fn_800C2448(void)
+asm void skeleton_getBoneByIndex(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1431,20 +1431,20 @@ asm void fn_800C2448(void)
     mr r30, r3
     bl fn_80477FDC
     cmpw r31, r3
-    bge lbl_fn_800C2448_00001258
+    bge lbl_skeleton_getBoneByIndex_00001258
     mr r3, r30
     bl fn_80477FA4
     mulli r0, r31, 0x44
     add r3, r3, r0
-    b lbl_fn_800C2448_00001270
-lbl_fn_800C2448_00001258:
+    b lbl_skeleton_getBoneByIndex_00001270
+lbl_skeleton_getBoneByIndex_00001258:
     mr r3, r30
     bl fn_80477FDC
     subf r0, r3, r31
     lwz r3, 0x58(r30)
     mulli r0, r0, 0x44
     add r3, r3, r0
-lbl_fn_800C2448_00001270:
+lbl_skeleton_getBoneByIndex_00001270:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

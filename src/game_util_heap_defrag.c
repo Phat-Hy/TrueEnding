@@ -22,7 +22,7 @@ extern void saveSlot_readSummary(void);
 extern void save_createWorkerTask(void);
 extern void save_computeCrc32(void);
 extern void save_calculateBlockCrc(void);
-extern void fn_801F7590(void);
+extern void save_writeBackupSlot(void);
 extern void fn_801F7DF0(void);
 extern void save_findEntryByName(void);
 extern void fn_801F8598(void);
@@ -646,7 +646,7 @@ lbl_fn_805880F4_0000062C:
     addi r4, r26, 0x155
     psq_st f2, 0x8(r5), 0, 0
     lwz r3, 0x5b78(r25)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     cmpwi r22, 0x0
     bne lbl_fn_805880F4_000007D8
     lwz r3, 0x5b78(r25)

@@ -27,7 +27,7 @@ extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
 extern void save_calculateBlockCrc(void);
-extern void fn_801F7590(void);
+extern void save_writeBackupSlot(void);
 extern void fn_801F7DF0(void);
 extern void save_findEntryByName(void);
 extern void fn_801F8598(void);
@@ -503,7 +503,7 @@ lbl_fn_805807A8_00000558:
     addi r4, r30, 0x2f8
     psq_st f2, 0x8(r5), 0, 0
     lwz r3, 0xac(r21)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     lwz r3, 0xac(r21)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28

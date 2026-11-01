@@ -26,7 +26,7 @@ extern void mem_getAllocSize(void);
 extern void node_destroy(void);
 extern void fn_800899DC(void);
 extern void area_updateZoneState(void);
-extern void fn_8008B130(void);
+extern void map_getArchiveName(void);
 extern void map_processTrigger(void);
 extern void map_debugLog(void);
 extern void fn_80091CFC(void);
@@ -1029,7 +1029,7 @@ lbl_boss_updatePhaseState_00000BC4:
     bl fn_80095D44
 lbl_boss_updatePhaseState_00000C20:
     addi r3, r30, 0xb0
-    bl fn_8008B130
+    bl map_getArchiveName
     lis r29, lbl_80737A9C@ha
     addi r29, r29, lbl_80737A9C@l
     addi r4, r29, 0xbe
@@ -1037,7 +1037,7 @@ lbl_boss_updatePhaseState_00000C20:
     cmpwi r3, 0x0
     bne lbl_boss_updatePhaseState_00000C58
     addi r3, r30, 0xb0
-    bl fn_8008B130
+    bl map_getArchiveName
     addi r4, r29, 0xc3
     bl strstr
     cmpwi r3, 0x0

@@ -41,7 +41,7 @@ extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB480(void);
 extern void fn_800CB538(void);
-extern void fn_800CB58C(void);
+extern void morph_hasActiveWeight(void);
 extern void fn_800CB5B4(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB69C(void);
@@ -683,7 +683,7 @@ asm void fn_8035E550(void)
     cmpwi r0, 0x0
     beq lbl_fn_8035E550_00000784
     addi r3, r3, 0x194
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     bne lbl_fn_8035E550_00000784
     addi r3, r31, 0x194

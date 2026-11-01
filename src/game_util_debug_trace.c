@@ -26,7 +26,7 @@ extern void fn_8017639C(void);
 extern void fn_801763E0(void);
 extern void fn_80178864(void);
 extern void save_computeCrc32(void);
-extern void fn_801F7590(void);
+extern void save_writeBackupSlot(void);
 extern void save_findEntryByName(void);
 extern void fn_801F8598(void);
 extern void assert_formatLocation(void);
@@ -269,7 +269,7 @@ lbl_fn_80598534_00000240:
     mr r3, r30
     addi r4, r4, 0x3ae
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F7590
+    bl save_writeBackupSlot
     addi r11, r1, 0x50
     bl _restgpr_25
     lwz r0, 0x54(r1)

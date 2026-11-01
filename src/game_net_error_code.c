@@ -33,7 +33,7 @@ extern void actor_spawnActorWithId(void);
 extern void fn_801D082C(void);
 extern void save_validateHeader(void);
 extern void save_computeCrc32(void);
-extern void fn_801F7590(void);
+extern void save_writeBackupSlot(void);
 extern void save_findEntryByName(void);
 extern void fn_801F8598(void);
 extern void thread_findAndNotify(void);
@@ -259,7 +259,7 @@ lbl_fn_8051B168_00000160:
     psq_st f1, 0x0(r5), 0, 0
     addi r4, r24, 0x160
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F7590
+    bl save_writeBackupSlot
     li r23, 0x1
 lbl_fn_8051B168_00000194:
     add r3, r28, r27

@@ -8,7 +8,7 @@ extern void fn_80041A28(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
-extern void fn_800CB58C(void);
+extern void morph_hasActiveWeight(void);
 extern void morph_updateMesh(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
@@ -182,7 +182,7 @@ lbl_fn_8032F6A8_00000138:
     cmpwi r0, 0x0
     beq lbl_fn_8032F6A8_0000015C
     addi r3, r31, 0x15b0
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     bne lbl_fn_8032F6A8_0000020C
 lbl_fn_8032F6A8_0000015C:

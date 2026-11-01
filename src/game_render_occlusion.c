@@ -25,7 +25,7 @@ extern void fn_80139F2C(void);
 extern void fn_80139F3C(void);
 extern void npc_getGlobalManager(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_801404F8(void);
+extern void quest_getGlobalManager(void);
 extern void quest_ctorRewardItem(void);
 extern void actor_setState(void);
 extern void fn_802B0430(void);
@@ -2647,7 +2647,7 @@ lbl_fn_802AF7D8_00002478:
     mr r3, r31
     li r4, 0x0
     bl fn_802B1B08
-    bl fn_801404F8
+    bl quest_getGlobalManager
     bl fn_8004D124
     lfs f0, 0x568(r31)
     fmr f1, f31
@@ -2662,7 +2662,7 @@ lbl_fn_802AF7D8_00002478:
     mr r3, r31
     li r4, 0x1
     bl fn_802B1B08
-    bl fn_801404F8
+    bl quest_getGlobalManager
     bl fn_8004D124
 lbl_fn_802AF7D8_000024C8:
     lwz r0, 0xb4(r1)

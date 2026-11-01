@@ -16,7 +16,7 @@ extern void fn_801F5644(void);
 extern void fn_801F5740(void);
 extern void fn_801F5E9C(void);
 extern void fn_801F60B8(void);
-extern void fn_801F7590(void);
+extern void save_writeBackupSlot(void);
 extern void fn_801F80A8(void);
 extern void thread_findAndNotify(void);
 extern void fn_801FEEFC(void);
@@ -1367,7 +1367,7 @@ asm void fn_803DDD54(void)
     stfs f2, 0x2bc(r1)
     stfs f1, 0x2c0(r1)
     stfs f0, 0x2c4(r1)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     lfs f3, lbl_80885DE8
     mr r3, r30
     lfs f2, lbl_80885D58
@@ -1379,7 +1379,7 @@ asm void fn_803DDD54(void)
     stfs f2, 0x2ac(r1)
     stfs f1, 0x2b0(r1)
     stfs f0, 0x2b4(r1)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     addi r28, r31, 0x0
     lfs f3, 0x0(r31)
     lfs f2, 0x4(r28)
@@ -1418,7 +1418,7 @@ asm void fn_803DDD54(void)
     stfs f2, 0x27c(r1)
     stfs f1, 0x280(r1)
     stfs f0, 0x284(r1)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     lfs f3, lbl_80885DFC
     mr r3, r30
     lfs f2, lbl_80885D58
@@ -1430,7 +1430,7 @@ asm void fn_803DDD54(void)
     stfs f2, 0x26c(r1)
     stfs f1, 0x270(r1)
     stfs f0, 0x274(r1)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     addi r28, r31, 0x40
     lfs f3, 0x40(r31)
     lfs f2, 0x4(r28)
@@ -1468,7 +1468,7 @@ asm void fn_803DDD54(void)
     stfs f1, 0x23c(r1)
     stfs f1, 0x240(r1)
     stfs f0, 0x244(r1)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     lfs f1, lbl_80885DFC
     mr r3, r30
     lfs f2, lbl_80885E28
@@ -1479,7 +1479,7 @@ asm void fn_803DDD54(void)
     stfs f1, 0x22c(r1)
     stfs f1, 0x230(r1)
     stfs f0, 0x234(r1)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     addi r28, r31, 0x60
     lfs f3, 0x60(r31)
     lfs f2, 0x4(r28)
@@ -1517,7 +1517,7 @@ asm void fn_803DDD54(void)
     stfs f1, 0x1fc(r1)
     stfs f0, 0x200(r1)
     stfs f2, 0x204(r1)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     lfs f2, lbl_80885E28
     mr r3, r30
     lfs f1, lbl_80885D58
@@ -1528,7 +1528,7 @@ asm void fn_803DDD54(void)
     stfs f1, 0x1ec(r1)
     stfs f0, 0x1f0(r1)
     stfs f2, 0x1f4(r1)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     addi r28, r31, 0x20
     lfs f3, 0x20(r31)
     lfs f2, 0x4(r28)
@@ -1566,7 +1566,7 @@ asm void fn_803DDD54(void)
     stfs f1, 0x1bc(r1)
     stfs f0, 0x1c0(r1)
     stfs f2, 0x1c4(r1)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     lfs f2, lbl_80885E28
     mr r3, r30
     lfs f1, lbl_80885D58
@@ -1577,7 +1577,7 @@ asm void fn_803DDD54(void)
     stfs f1, 0x1ac(r1)
     stfs f0, 0x1b0(r1)
     stfs f2, 0x1b4(r1)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     addi r28, r31, 0x30
     lfs f3, 0x30(r31)
     lfs f2, 0x4(r28)
@@ -1614,7 +1614,7 @@ asm void fn_803DDD54(void)
     stfs f1, 0x17c(r1)
     stfs f0, 0x180(r1)
     stfs f0, 0x184(r1)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     lfs f1, lbl_80885E28
     mr r3, r30
     lfs f0, lbl_80885DFC
@@ -1624,7 +1624,7 @@ asm void fn_803DDD54(void)
     stfs f1, 0x16c(r1)
     stfs f0, 0x170(r1)
     stfs f0, 0x174(r1)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     addi r28, r31, 0x70
     lfs f3, 0x70(r31)
     lfs f2, 0x4(r28)
@@ -1662,7 +1662,7 @@ asm void fn_803DDD54(void)
     stfs f1, 0x13c(r1)
     stfs f0, 0x140(r1)
     stfs f2, 0x144(r1)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     lfs f2, lbl_80885DFC
     mr r3, r30
     lfs f1, lbl_80885E28
@@ -1673,7 +1673,7 @@ asm void fn_803DDD54(void)
     stfs f1, 0x12c(r1)
     stfs f0, 0x130(r1)
     stfs f2, 0x134(r1)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     addi r28, r31, 0x80
     lfs f3, 0x80(r31)
     lfs f2, 0x4(r28)
@@ -1712,7 +1712,7 @@ asm void fn_803DDD54(void)
     stfs f2, 0xfc(r1)
     stfs f1, 0x100(r1)
     stfs f0, 0x104(r1)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     lfs f3, lbl_80885DE8
     mr r3, r30
     lfs f2, lbl_80885E28
@@ -1724,7 +1724,7 @@ asm void fn_803DDD54(void)
     stfs f2, 0xec(r1)
     stfs f1, 0xf0(r1)
     stfs f0, 0xf4(r1)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     addi r28, r31, 0x90
     lfs f3, 0x90(r31)
     lfs f2, 0x4(r28)
@@ -1763,7 +1763,7 @@ asm void fn_803DDD54(void)
     stfs f2, 0xbc(r1)
     stfs f1, 0xc0(r1)
     stfs f0, 0xc4(r1)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     lfs f3, lbl_80885D58
     mr r3, r30
     lfs f2, lbl_80885DFC
@@ -1775,7 +1775,7 @@ asm void fn_803DDD54(void)
     stfs f2, 0xac(r1)
     stfs f1, 0xb0(r1)
     stfs f0, 0xb4(r1)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     addi r28, r31, 0xb0
     lfs f3, 0xb0(r31)
     lfs f2, 0x4(r28)
@@ -1813,7 +1813,7 @@ asm void fn_803DDD54(void)
     stfs f1, 0x7c(r1)
     stfs f1, 0x80(r1)
     stfs f0, 0x84(r1)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     lfs f1, lbl_80885E28
     mr r3, r30
     lfs f2, lbl_80885D58
@@ -1824,7 +1824,7 @@ asm void fn_803DDD54(void)
     stfs f1, 0x6c(r1)
     stfs f1, 0x70(r1)
     stfs f0, 0x74(r1)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     addi r28, r31, 0xa0
     lfs f3, 0xa0(r31)
     lfs f2, 0x4(r28)
@@ -1865,7 +1865,7 @@ lbl_fn_803DDD54_00001AD8:
     stfs f2, 0x3c(r1)
     stfs f1, 0x40(r1)
     stfs f0, 0x44(r1)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     lfs f3, lbl_80885DE8
     mr r3, r30
     lfs f2, lbl_80885D58
@@ -1877,7 +1877,7 @@ lbl_fn_803DDD54_00001AD8:
     stfs f2, 0x2c(r1)
     stfs f1, 0x30(r1)
     stfs f0, 0x34(r1)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     addi r29, r31, 0x50
     lfs f3, 0x50(r31)
     lfs f2, 0x4(r29)

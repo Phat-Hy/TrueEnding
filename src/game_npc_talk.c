@@ -13,7 +13,7 @@ extern void item_testLineOfSight(void);
 extern void collision_testLineSegment(void);
 extern void boss_decodePhaseBitfield(void);
 extern void mem_alloc(void);
-extern void fn_8008B130(void);
+extern void map_getArchiveName(void);
 extern void fn_80125474(void);
 extern void actor_setState(void);
 extern void fn_801720AC(void);
@@ -1470,7 +1470,7 @@ lbl_npc_updateTalkInteraction_00001348:
     cmpwi r0, 0x0
     bne lbl_npc_updateTalkInteraction_000021A4
     addi r3, r30, 0xb0
-    bl fn_8008B130
+    bl map_getArchiveName
     li r0, 0x0
     stw r0, 0x1c0(r1)
     mr r26, r3

@@ -18,7 +18,7 @@ extern void route_createWaypoint(void);
 extern void zone_testPointInBounds(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
-extern void fn_8008B130(void);
+extern void map_getArchiveName(void);
 extern void minimap_renderOverlay(void);
 extern void fn_800902C0(void);
 extern void fn_80092A4C(void);
@@ -93,7 +93,7 @@ extern u32 lbl_80885F84;
 /* Function declarations */
 void task_createWorker(void);
 void task_destroyWorker(void);
-void fn_803EC758(void);
+void barrier_formatCountdownTimer(void);
 void barrier_formatDialogString(void);
 void task_updateWorker(void);
 u32 fn_803ECB7C(void);
@@ -254,7 +254,7 @@ lbl_task_destroyWorker_000001D4:
     blr
 }
 
-asm void fn_803EC758(void)
+asm void barrier_formatCountdownTimer(void)
 {
     nofralloc
     lis r5, 0x1062
@@ -1690,7 +1690,7 @@ lbl_barrier_testFieldCollision_0000160C:
     cmpwi r0, 0x0
     beq lbl_barrier_testFieldCollision_00001774
     mr r3, r31
-    bl fn_8008B130
+    bl map_getArchiveName
     cmpwi r3, 0x0
     bne lbl_barrier_testFieldCollision_00001634
     b lbl_barrier_testFieldCollision_00001774
@@ -1744,7 +1744,7 @@ lbl_barrier_testFieldCollision_00001654:
     bl talk_parseQuotedString
     mr r29, r3
     mr r3, r31
-    bl fn_8008B130
+    bl map_getArchiveName
     mr r4, r29
     bl strstr
     cmpwi r3, 0x0

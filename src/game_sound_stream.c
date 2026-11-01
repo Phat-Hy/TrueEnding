@@ -29,7 +29,7 @@ extern void fn_801F45F4(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
 extern void save_calculateBlockCrc(void);
-extern void fn_801F7590(void);
+extern void save_writeBackupSlot(void);
 extern void fn_801F7DF0(void);
 extern void save_findEntryByName(void);
 extern void profile_getMetricValue(void);
@@ -1620,7 +1620,7 @@ lbl_fn_801D6C1C_00001538:
     psq_st f2, 0x8(r26), 0, 0
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F7590
+    bl save_writeBackupSlot
     b lbl_fn_801D6C1C_00001598
 lbl_fn_801D6C1C_00001594:
     stfs f31, 0x50(r3)

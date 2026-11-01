@@ -11,7 +11,7 @@ extern void vec3_assign(void);
 extern void fn_800109E0(void);
 extern void vec3_toEulerAngles(void);
 extern void mtx_multVec(void);
-extern void fn_80012C88(void);
+extern void vec3_addAssign(void);
 extern void vec3_sub(void);
 extern void math_wrapAngle(void);
 extern void vec3_add(void);
@@ -40,7 +40,7 @@ extern void player_evaluateStatusCondition(void);
 extern void fn_8012A1B8(void);
 extern void fn_8013A13C(void);
 extern void fn_8013C3B4(void);
-extern void fn_801404F8(void);
+extern void quest_getGlobalManager(void);
 extern void fn_80140500(void);
 extern void fn_80178088(void);
 extern void fn_801C3910(void);
@@ -396,7 +396,7 @@ lbl_fn_80382A1C_000001E4:
     addi r3, r1, 0x188
     addi r4, r1, 0x80
     bl vec3_copy
-    bl fn_801404F8
+    bl quest_getGlobalManager
     lis r7, 0x8000
     addi r4, r1, 0x258
     addi r5, r1, 0x17c
@@ -432,7 +432,7 @@ lbl_fn_80382A1C_000001E4:
     bl vec3_scale
     addi r3, r1, 0x188
     addi r4, r1, 0x74
-    bl fn_80012C88
+    bl vec3_addAssign
     li r0, 0xa
     stw r0, 0x880(r30)
     mr r3, r30
@@ -500,7 +500,7 @@ lbl_fn_80382A1C_000004B4:
     addi r4, r1, 0x2c
     bl vec3_copy
 lbl_fn_80382A1C_0000054C:
-    bl fn_801404F8
+    bl quest_getGlobalManager
     lis r6, lbl_807C7030@ha
     lis r7, 0x8000
     lfs f1, lbl_80885A3C

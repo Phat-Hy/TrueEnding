@@ -37,7 +37,7 @@ extern void cam_bindRotationTarget(void);
 extern void cam_evalControllerSpline(void);
 extern void cam_setLookAtTarget(void);
 extern void fn_800ED4D8(void);
-extern void fn_800ED4E0(void);
+extern void cam_updateLookAtMatrix(void);
 extern void cam_evalLookAtMatrix(void);
 extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
@@ -1828,7 +1828,7 @@ lbl_fn_800EBF1C_0000172C:
     bl dtor_80013D60
 lbl_fn_800EBF1C_000017B0:
     addi r3, r1, 0x98
-    bl fn_800ED4E0
+    bl cam_updateLookAtMatrix
 lbl_fn_800EBF1C_000017B8:
     addi r3, r1, 0x38
     addi r4, r1, 0xd4

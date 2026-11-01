@@ -24,7 +24,7 @@ extern void fn_800CAA88(void);
 extern void fn_800CB480(void);
 extern void fn_800CB4C4(void);
 extern void fn_800CB538(void);
-extern void fn_800CB58C(void);
+extern void morph_hasActiveWeight(void);
 extern void fn_800CB5B4(void);
 extern void fn_800CB640(void);
 extern void fn_800CB6F8(void);
@@ -919,7 +919,7 @@ lbl_fn_8037CB38_00000AD0:
     bne lbl_fn_8037CB38_00000BCC
     lwz r3, 0x74(r3)
     addi r3, r3, 0x8
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     bne lbl_fn_8037CB38_00000B10
     lfs f1, lbl_808858D8
@@ -1065,7 +1065,7 @@ asm void fn_8037D34C(void)
     mr r31, r3
     beq lbl_fn_8037D34C_00000D08
     addi r3, r4, 0x8
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     beq lbl_fn_8037D34C_00000D08
     lwz r3, 0x74(r31)
@@ -1080,7 +1080,7 @@ lbl_fn_8037D34C_00000D08:
     cmpwi r3, 0x0
     beq lbl_fn_8037D34C_00000D40
     addi r3, r3, 0x8
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     beq lbl_fn_8037D34C_00000D40
     lwz r3, 0x78(r31)
@@ -1118,7 +1118,7 @@ asm void fn_8037D3E8(void)
     cmpwi r7, 0x0
     beq lbl_fn_8037D3E8_00000DB8
     addi r3, r7, 0x8
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     beq lbl_fn_8037D3E8_00000DB8
     lwz r3, 0x74(r28)
@@ -1132,7 +1132,7 @@ lbl_fn_8037D3E8_00000DB8:
     cmpwi r3, 0x0
     beq lbl_fn_8037D3E8_00000DEC
     addi r3, r3, 0x8
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     beq lbl_fn_8037D3E8_00000DEC
     lwz r3, 0x78(r28)

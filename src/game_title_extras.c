@@ -27,7 +27,7 @@ extern void fn_801F6C2C(void);
 extern void fn_801F6C38(void);
 extern void save_computeCrc32(void);
 extern void fn_801F72D4(void);
-extern void fn_801F7590(void);
+extern void save_writeBackupSlot(void);
 extern void save_findEntryByName(void);
 extern void fn_801F8830(void);
 extern void mem_findBlockById(void);
@@ -1534,7 +1534,7 @@ lbl_fn_803B5618_00001408:
     addi r4, r31, 0x11f
     psq_st f2, 0x8(r5), 0, 0
     lwz r3, 0x48(r29)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     addi r5, r1, 0x8
     psq_l f1, 0x0(r30), 0, 0
     psq_l f2, 0x8(r30), 0, 0
@@ -1542,7 +1542,7 @@ lbl_fn_803B5618_00001408:
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
     lwz r3, 0x48(r29)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     lwz r0, 0x64(r1)
     psq_l f31, 0x58(r1), 0, 0
     lfd f31, 0x50(r1)

@@ -9,7 +9,7 @@ extern void fn_8016E484(void);
 extern void fn_801F6C2C(void);
 extern void save_computeCrc32(void);
 extern void save_calculateBlockCrc(void);
-extern void fn_801F7590(void);
+extern void save_writeBackupSlot(void);
 extern void fn_801F7A18(void);
 extern void fn_801F7DF0(void);
 extern void save_findEntryByName(void);
@@ -1575,7 +1575,7 @@ lbl_fn_803E0E10_0000150C:
     addi r4, r25, 0x1432
     psq_st f2, 0x8(r5), 0, 0
     lwz r3, 0xc(r24)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     addi r5, r1, 0x8
     psq_l f1, 0x0(r31), 0, 0
     psq_l f2, 0x8(r31), 0, 0
@@ -1583,7 +1583,7 @@ lbl_fn_803E0E10_0000150C:
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
     lwz r3, 0xc(r24)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     cmpwi r28, 0x0
     beq lbl_fn_803E0E10_000015D4
     lwz r0, 0x4(r28)

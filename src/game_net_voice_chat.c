@@ -20,7 +20,7 @@ extern void printf(void);
 extern void abort(void);
 extern void net_getSocket(void);
 extern void fn_806A8E70(void);
-extern void fn_806B0DE0(void);
+extern void net_isSessionActive(void);
 extern void net_getMyAid(void);
 extern void net_isSessionConnected(void);
 
@@ -660,7 +660,7 @@ asm void fn_804D6304(void)
     li r3, 0x1
     blr
 lbl_fn_804D6304_00000420:
-    b fn_806B0DE0
+    b net_isSessionActive
     blr
 lbl_fn_804D6304_00000428:
     lwz r0, 0x1f8(r3)

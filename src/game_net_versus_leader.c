@@ -46,7 +46,7 @@ extern void fn_804FC014(void);
 extern void fn_8050BA6C(void);
 extern void runtime_clampDouble(void);
 extern void fn_806A8E70(void);
-extern void fn_806B0DE0(void);
+extern void net_isSessionActive(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -156,7 +156,7 @@ lbl_fn_804BF550_00000088:
     li r3, 0x1
     b lbl_fn_804BF550_000000FC
 lbl_fn_804BF550_000000DC:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804BF550_000000FC
 lbl_fn_804BF550_000000E4:
     lwz r0, 0x1f8(r4)
@@ -228,7 +228,7 @@ lbl_fn_804BF550_0000018C:
     beq lbl_fn_804BF550_000001DC
     b lbl_fn_804BF550_00000200
 lbl_fn_804BF550_000001DC:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     mr r30, r3
     b lbl_fn_804BF550_00000200
 lbl_fn_804BF550_000001E8:
@@ -279,7 +279,7 @@ lbl_fn_804BF550_00000248:
     li r3, 0x1
     b lbl_fn_804BF550_000002B4
 lbl_fn_804BF550_00000294:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804BF550_000002B4
 lbl_fn_804BF550_0000029C:
     lwz r0, 0x1f8(r4)
@@ -1412,7 +1412,7 @@ lbl_fn_804C06C8_000012B8:
     li r3, 0x1
     b lbl_fn_804C06C8_00001310
 lbl_fn_804C06C8_000012F0:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804C06C8_00001310
 lbl_fn_804C06C8_000012F8:
     lwz r0, 0x1f8(r4)
@@ -1584,7 +1584,7 @@ asm void fn_804C0A40(void)
     li r3, 0x1
     b lbl_fn_804C0A40_00001588
 lbl_fn_804C0A40_00001568:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804C0A40_00001588
 lbl_fn_804C0A40_00001570:
     lwz r0, 0x1f8(r4)

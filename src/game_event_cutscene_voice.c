@@ -16,7 +16,7 @@ extern void route_createSegment(void);
 extern void node_createNamedChild(void);
 extern void fn_800C16C0(void);
 extern void fn_800C1814(void);
-extern void fn_800C2448(void);
+extern void skeleton_getBoneByIndex(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D94F8(void);
@@ -1742,7 +1742,7 @@ lbl_fn_8047C88C_00001490:
     mr r3, r4
     stw r0, 0x120(r4)
     li r4, 0x0
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     lwz r0, 0x14c(r31)
     stw r0, 0x0(r3)
     lwz r0, 0x150(r31)
@@ -1907,7 +1907,7 @@ lbl_fn_8047CB74_00001748:
     bl fn_8047CB6C
     mr r3, r28
     li r4, 0x0
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     bl fn_8047CDFC
     mr r31, r3
     addi r3, r27, 0x14c
@@ -1919,12 +1919,12 @@ lbl_fn_8047CB74_00001748:
     bl fn_8047C1D8
     mr r3, r28
     li r4, 0x0
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     addi r4, r1, 0x18
     bl fn_8047CDE8
     mr r3, r28
     li r4, 0x0
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     bl fn_8047CE28
     mr r31, r3
     addi r3, r27, 0x14c
@@ -1936,7 +1936,7 @@ lbl_fn_8047CB74_00001748:
     bl fn_8047CEBC
     mr r3, r28
     li r4, 0x0
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     addi r4, r1, 0x8
     bl fn_8047CE04
     lfd f31, 0xa8(r1)

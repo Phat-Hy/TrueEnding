@@ -43,7 +43,7 @@ extern void fn_8050BA6C(void);
 extern void rand(void);
 extern void wcscmp(void);
 extern void fn_806A8E70(void);
-extern void fn_806B0DE0(void);
+extern void net_isSessionActive(void);
 extern void net_isSessionConnected(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -145,7 +145,7 @@ lbl_fn_804C0F88_00000074:
     li r3, 0x1
     b lbl_fn_804C0F88_000000D8
 lbl_fn_804C0F88_000000B8:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804C0F88_000000D8
 lbl_fn_804C0F88_000000C0:
     lwz r0, 0x1f8(r4)
@@ -169,7 +169,7 @@ lbl_fn_804C0F88_000000D8:
     li r3, 0x1
     b lbl_fn_804C0F88_00000128
 lbl_fn_804C0F88_00000108:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804C0F88_00000128
 lbl_fn_804C0F88_00000110:
     lwz r0, 0x1f8(r4)
@@ -828,7 +828,7 @@ lbl_fn_804C18A8_00000A1C:
     li r3, 0x1
     b lbl_fn_804C18A8_00000A64
 lbl_fn_804C18A8_00000A44:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804C18A8_00000A64
 lbl_fn_804C18A8_00000A4C:
     lwz r0, 0x1f8(r4)
@@ -1645,7 +1645,7 @@ lbl_fn_804C23E4_00001598:
     li r3, 0x1
     b lbl_fn_804C23E4_000015E0
 lbl_fn_804C23E4_000015C0:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804C23E4_000015E0
 lbl_fn_804C23E4_000015C8:
     lwz r0, 0x1f8(r4)

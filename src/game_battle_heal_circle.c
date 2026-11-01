@@ -49,7 +49,7 @@ extern void fn_803EBC44(void);
 extern void fn_803EC0A4(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
-extern void fn_803EC758(void);
+extern void barrier_formatCountdownTimer(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
 extern void barrier_bindFieldAnimation(void);
@@ -980,7 +980,7 @@ asm void fn_803F3FBC(void)
     addi r4, r1, 0x8
     stw r28, 0x30(r1)
     mr r28, r3
-    bl fn_803EC758
+    bl barrier_formatCountdownTimer
     lwz r0, 0xf0(r28)
     cmpwi r0, 0x0
     bne lbl_fn_803F3FBC_00000C7C

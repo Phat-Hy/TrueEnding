@@ -34,7 +34,7 @@ extern void save_parseSlotHeader(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
 extern void save_calculateBlockCrc(void);
-extern void fn_801F7590(void);
+extern void save_writeBackupSlot(void);
 extern void fn_801F791C(void);
 extern void fn_801F7DF0(void);
 extern void save_findEntryByName(void);
@@ -622,7 +622,7 @@ lbl_fn_80516548_00000668:
     stfs f30, 0x1c(r1)
     stfs f31, 0x20(r1)
     stfs f31, 0x24(r1)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     lfs f1, lbl_8088788C
     mr r3, r27
     lfs f2, lbl_80887890
@@ -638,7 +638,7 @@ lbl_fn_80516548_00000714:
     stfs f30, 0xc(r1)
     stfs f29, 0x10(r1)
     stfs f31, 0x14(r1)
-    bl fn_801F7590
+    bl save_writeBackupSlot
     lfs f1, lbl_80887898
     mr r3, r27
     lfs f2, lbl_8088789C

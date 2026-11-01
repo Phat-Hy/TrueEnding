@@ -26,7 +26,7 @@ extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB404(void);
 extern void fn_800CB4EC(void);
-extern void fn_800CB58C(void);
+extern void morph_hasActiveWeight(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB6F8(void);
 extern void fn_800CFDA0(void);
@@ -1265,7 +1265,7 @@ lbl_fn_803EB7E4_00000EE4:
     b lbl_fn_803EB7E4_00000F24
 lbl_fn_803EB7E4_00000EF8:
     mr r3, r21
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     bne lbl_fn_803EB7E4_00000F1C
     lwz r0, 0x18(r21)
@@ -1288,7 +1288,7 @@ lbl_fn_803EB7E4_00000F30:
     b lbl_fn_803EB7E4_00000F64
 lbl_fn_803EB7E4_00000F44:
     mr r3, r21
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     bne lbl_fn_803EB7E4_00000F5C
     mr r22, r21
@@ -1347,7 +1347,7 @@ asm void fn_803EBA54(void)
     b lbl_fn_803EBA54_00001020
 lbl_fn_803EBA54_00001000:
     mr r3, r31
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     bne lbl_fn_803EBA54_00001018
     li r3, 0x1

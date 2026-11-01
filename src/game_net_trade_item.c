@@ -9,7 +9,7 @@ extern void vec3_copy(void);
 extern void scene_transformPoint(void);
 extern void fn_8000D9F8(void);
 extern void vec3_assign(void);
-extern void fn_80012C88(void);
+extern void vec3_addAssign(void);
 extern void vec3_add(void);
 extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
@@ -18,7 +18,7 @@ extern void fn_8008B964(void);
 extern void fn_800A97C4(void);
 extern void skeleton_getGlobalManager(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB58C(void);
+extern void morph_hasActiveWeight(void);
 extern void morph_updateMesh(void);
 extern void proj_getMatrix(void);
 extern void fn_800F7260(void);
@@ -1434,7 +1434,7 @@ lbl_fn_8052CA70_00000E14:
     stw r8, 0x2c(r1)
     bl fn_800A97C4
     addi r3, r30, 0x1340
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     beq lbl_fn_8052CA70_000012B8
     addi r3, r30, 0x1340
@@ -1550,7 +1550,7 @@ asm void fn_8052D46C(void)
     bl fn_80113CCC
     mr r4, r3
     addi r3, r1, 0x188
-    bl fn_80012C88
+    bl vec3_addAssign
     addi r3, r1, 0x1e8
     addi r4, r1, 0x188
     bl fn_80112960
@@ -1691,7 +1691,7 @@ lbl_fn_8052D46C_00001614:
     addi r4, r4, lbl_807C7030@l
 lbl_fn_8052D46C_0000161C:
     addi r3, r1, 0x170
-    bl fn_80012C88
+    bl vec3_addAssign
     addi r3, r1, 0xbc
     addi r4, r31, 0x11fc
     addi r5, r31, 0x12ec
@@ -1815,7 +1815,7 @@ lbl_fn_8052D46C_000017DC:
     addi r4, r4, lbl_807C7030@l
 lbl_fn_8052D46C_000017E4:
     addi r3, r1, 0x164
-    bl fn_80012C88
+    bl vec3_addAssign
     lwz r0, 0x136c(r31)
     li r3, 0x0
     cmpwi r0, 0x0
@@ -1837,7 +1837,7 @@ lbl_fn_8052D46C_00001828:
     addi r4, r4, lbl_807C7030@l
 lbl_fn_8052D46C_00001830:
     addi r3, r1, 0x158
-    bl fn_80012C88
+    bl vec3_addAssign
     mr r3, r30
     bl fn_8052DED0
     lfs f0, 0x458(r31)
@@ -1924,7 +1924,7 @@ lbl_fn_8052D46C_00001948:
     bl fn_8052D3D4
 lbl_fn_8052D46C_00001978:
     addi r3, r31, 0x1340
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     beq lbl_fn_8052D46C_000019A8
     mr r3, r31

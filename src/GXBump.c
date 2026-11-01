@@ -9,7 +9,7 @@ void GXSetTevDirect(void);
 void GXSetTevColorIn(void);
 void GXSetTevColorOp(void);
 void GXSetTevIndirect(void);
-void fn_806174C0(void);
+void GXSetTevIndTile(void);
 void fn_80617520(void);
 void fn_80617580(void);
 void fn_806175F0(void);
@@ -129,7 +129,7 @@ lbl_GXSetTevIndirect_00000150:
     blr
 }
 
-asm void fn_806174C0(void)
+asm void GXSetTevIndTile(void)
 {
     nofralloc
     lwz r10, __GXData
@@ -138,14 +138,14 @@ asm void fn_806174C0(void)
     add r9, r10, r0
     lwz r11, 0x1c0(r9)
     rlwimi r11, r4, 18, 13, 13
-    bgt lbl_fn_806174C0_000001A8
+    bgt lbl_GXSetTevIndTile_000001A8
     rlwimi r11, r6, 20, 10, 11
     rlwimi r11, r5, 16, 14, 15
-    b lbl_fn_806174C0_000001B0
-lbl_fn_806174C0_000001A8:
+    b lbl_GXSetTevIndTile_000001B0
+lbl_GXSetTevIndTile_000001A8:
     rlwimi r11, r4, 19, 10, 11
     oris r11, r11, 0x3
-lbl_fn_806174C0_000001B0:
+lbl_GXSetTevIndTile_000001B0:
     lis r3, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r3)

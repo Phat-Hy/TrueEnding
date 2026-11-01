@@ -10,7 +10,7 @@ extern void _savegpr_24(void);
 extern void ui_destroyWidget(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
-extern void fn_800CB58C(void);
+extern void morph_hasActiveWeight(void);
 extern void battle_awardExp(void);
 extern void fn_803E9B7C(void);
 extern void fn_803EBA54(void);
@@ -303,7 +303,7 @@ lbl_fn_804E82C8_00000280:
     b lbl_fn_804E82C8_000009D8
 lbl_fn_804E82C8_00000288:
     addi r3, r3, 0x2b70
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     beq lbl_fn_804E82C8_000002A0
     li r3, 0x0

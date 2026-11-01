@@ -24,7 +24,7 @@ extern void fn_800BDB40(void);
 extern void model_updateBoneTransforms(void);
 extern void motion_updateFogAdj(void);
 extern void fn_800C169C(void);
-extern void fn_800C2448(void);
+extern void skeleton_getBoneByIndex(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void depth_resetRenderTarget(void);
@@ -481,7 +481,7 @@ asm void atn_LensFlare_draw(void)
     bne lbl_atn_LensFlare_draw_000005B8
     lwz r3, 0x2fc(r31)
     li r4, 0x0
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     lfs f0, 0x1c(r3)
     addi r4, r1, 0x44
     lfs f3, 0x18(r3)
@@ -1952,7 +1952,7 @@ asm void fn_80078938(void)
     stw r28, 0x250(r1)
     lwz r30, lbl_8087EFB4
     lwz r3, 0x2fc(r30)
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     lfs f0, 0x1c(r3)
     addi r4, r1, 0x20
     lfs f3, 0x18(r3)

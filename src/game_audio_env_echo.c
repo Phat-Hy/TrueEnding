@@ -6,7 +6,7 @@ extern void vec3_copy(void);
 extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80012C88(void);
+extern void vec3_addAssign(void);
 extern void vec3_sub(void);
 extern void vec3_add(void);
 extern void collision_queryGeometry(void);
@@ -28,7 +28,7 @@ extern void viewport_updateCulling(void);
 extern void fn_800FBA9C(void);
 extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
-extern void fn_801404F8(void);
+extern void quest_getGlobalManager(void);
 extern void fn_80140500(void);
 extern void quest_initMarkerCoords(void);
 extern void fn_80158CA4(void);
@@ -983,7 +983,7 @@ lbl_fn_8031958C_00000BE8:
     bl vec3_scale
     addi r3, r1, 0xe4
     addi r4, r1, 0xa8
-    bl fn_80012C88
+    bl vec3_addAssign
     lfs f1, 0x5b0(r31)
     addi r3, r1, 0x78
     addi r4, r31, 0x155c
@@ -1076,7 +1076,7 @@ lbl_fn_8031958C_00000D8C:
     addi r4, r1, 0xcc
     addi r5, r1, 0x54
     bl vec3_add
-    bl fn_801404F8
+    bl quest_getGlobalManager
     lis r7, 0x8000
     addi r4, r1, 0x180
     addi r5, r1, 0xcc

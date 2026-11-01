@@ -39,7 +39,7 @@ extern void GXInitTexObjDefault(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
-extern void fn_806174C0(void);
+extern void GXSetTevIndTile(void);
 extern void fn_806175F0(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevKAlphaSel(void);
@@ -903,7 +903,7 @@ asm void fn_800D775C(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x0
     li r4, 0x7
     li r5, 0x6
@@ -946,7 +946,7 @@ asm void fn_800D775C(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x1
     li r4, 0x7
     li r5, 0x6
@@ -989,7 +989,7 @@ asm void fn_800D775C(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x2
     li r4, 0x7
     li r5, 0x6
@@ -1024,7 +1024,7 @@ asm void fn_800D775C(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x3
     li r4, 0x7
     li r5, 0x7
@@ -1064,7 +1064,7 @@ asm void fn_800D775C(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x4
     li r4, 0x7
     li r5, 0x7
@@ -1204,7 +1204,7 @@ asm void fn_800D7D00(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1325,7 +1325,7 @@ asm void fn_800D7F18(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0

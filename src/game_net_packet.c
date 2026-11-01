@@ -22,7 +22,7 @@ extern void save_parseSlotStats(void);
 extern void fn_801F4AA0(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801F7590(void);
+extern void save_writeBackupSlot(void);
 extern void save_findEntryByName(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
@@ -502,7 +502,7 @@ lbl_fn_801E6714_000005C8:
     psq_st f1, 0x0(r5), 0, 0
     addi r4, r31, 0x1b
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F7590
+    bl save_writeBackupSlot
     lwz r3, 0xc(r26)
     cmpwi r3, 0x0
     blt lbl_fn_801E6714_000006AC
@@ -562,7 +562,7 @@ lbl_fn_801E6714_000006AC:
     psq_st f1, 0x0(r5), 0, 0
     addi r4, r31, 0x24
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F7590
+    bl save_writeBackupSlot
     addi r5, r1, 0x8
     psq_l f1, 0x0(r29), 0, 0
     psq_l f2, 0x8(r29), 0, 0
@@ -570,7 +570,7 @@ lbl_fn_801E6714_000006AC:
     psq_st f1, 0x0(r5), 0, 0
     addi r4, r31, 0x2b
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F7590
+    bl save_writeBackupSlot
     slwi r0, r23, 3
     lwz r3, 0x8(r26)
     add r4, r27, r0
@@ -772,7 +772,7 @@ lbl_fn_801E6B10_0000099C:
     psq_st f1, 0x0(r5), 0, 0
     addi r4, r31, 0x1b
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F7590
+    bl save_writeBackupSlot
     lwz r3, 0xc(r26)
     stfs f29, 0x48(r1)
     cmpwi r3, 0x0
@@ -852,7 +852,7 @@ lbl_fn_801E6B10_00000AD0:
     psq_st f1, 0x0(r5), 0, 0
     addi r4, r31, 0x24
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F7590
+    bl save_writeBackupSlot
     addi r5, r1, 0x8
     psq_l f1, 0x0(r29), 0, 0
     psq_l f2, 0x8(r29), 0, 0
@@ -860,7 +860,7 @@ lbl_fn_801E6B10_00000AD0:
     psq_st f1, 0x0(r5), 0, 0
     addi r4, r31, 0x2b
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F7590
+    bl save_writeBackupSlot
     b lbl_fn_801E6B10_00000B18
 lbl_fn_801E6B10_00000B14:
     stfs f28, 0x50(r3)

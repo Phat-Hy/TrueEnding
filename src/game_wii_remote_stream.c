@@ -18,7 +18,7 @@ extern void actor_dispatchMessage(void);
 extern void fn_80069BF4(void);
 extern void boss_decodePhaseBitfield(void);
 extern void mem_getAllocSize(void);
-extern void fn_8008B130(void);
+extern void map_getArchiveName(void);
 extern void compass_findWaypointIndex(void);
 extern void fn_8009290C(void);
 extern void fn_800937E8(void);
@@ -448,7 +448,7 @@ asm void fn_80557F88(void)
     mr r31, r3
     beq lbl_fn_80557F88_00000E20
     addi r3, r3, 0xb0
-    bl fn_8008B130
+    bl map_getArchiveName
     li r0, 0x0
     stw r0, 0x94(r1)
     mr r24, r3

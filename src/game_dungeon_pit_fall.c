@@ -14,7 +14,7 @@ extern void ref_releaseHandle(void);
 extern void fn_800CB480(void);
 extern void fn_800CB4EC(void);
 extern void fn_800CB504(void);
-extern void fn_800CB58C(void);
+extern void morph_hasActiveWeight(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB6E4(void);
 extern void atn_Task_constructor(void);
@@ -1820,7 +1820,7 @@ lbl_fn_803E8A50_00001984:
     lwz r3, 0x24(r20)
     cmpwi r3, 0x0
     beq lbl_fn_803E8A50_000019F4
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     bne lbl_fn_803E8A50_000019F8
     lwz r3, 0x8(r20)

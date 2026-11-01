@@ -34,7 +34,7 @@ extern void res_MsgHandle_constructor(void);
 extern void kpad_getClampData(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
-extern void fn_803EC758(void);
+extern void barrier_formatCountdownTimer(void);
 extern void barrier_formatDialogString(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
@@ -1192,7 +1192,7 @@ asm void fn_80418C4C(void)
     mr r20, r4
     mr r21, r3
     addi r4, r1, 0x8
-    bl fn_803EC758
+    bl barrier_formatCountdownTimer
     lwz r0, 0xf0(r21)
     cmpwi r0, 0x0
     bne lbl_fn_80418C4C_00000E20

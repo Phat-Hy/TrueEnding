@@ -14,7 +14,7 @@ extern void ui_destroyWidget(void);
 extern void fn_80051C78(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
-extern void fn_800CB58C(void);
+extern void morph_hasActiveWeight(void);
 extern void fn_8014EEC4(void);
 extern void fn_8015EB2C(void);
 extern void fn_8015EFAC(void);
@@ -2335,7 +2335,7 @@ lbl_fn_804E5BC8_00001E34:
     cmpwi r3, 0x0
     beq lbl_fn_804E5BC8_00001F10
     addi r3, r27, 0x2b74
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     bne lbl_fn_804E5BC8_00001F10
     bl rand

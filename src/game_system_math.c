@@ -25,7 +25,7 @@ extern void fn_8006BB6C(void);
 extern void fn_8006D008(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
-extern void fn_8008B130(void);
+extern void map_getArchiveName(void);
 extern void fn_80095750(void);
 extern void fn_800D8C14(void);
 extern void str_skipWhitespace(void);
@@ -1504,7 +1504,7 @@ lbl_fn_8020CC64_000012C4:
     cmpwi r0, 0x0
     beq lbl_fn_8020CC64_000017BC
     mr r3, r15
-    bl fn_8008B130
+    bl map_getArchiveName
     stw r29, 0x74(r1)
     mr r16, r3
     stw r29, 0x78(r1)

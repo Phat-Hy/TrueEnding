@@ -81,7 +81,7 @@ extern void GXSetTevDirect(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
-extern void fn_806174C0(void);
+extern void GXSetTevIndTile(void);
 extern void fn_806175F0(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevKAlphaSel(void);
@@ -2100,7 +2100,7 @@ lbl_fn_80073194_00001BF4:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
 lbl_fn_80073194_00001C30:
     addi r11, r1, 0x530
     psq_l f31, 0x568(r1), 0, 0
@@ -2428,7 +2428,7 @@ lbl_fn_80073A6C_00002034:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     mr r3, r27
     mr r4, r20
     mr r5, r22
@@ -2465,7 +2465,7 @@ lbl_fn_80073A6C_00002034:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     lwz r3, lbl_8087EFA8
     lwz r0, 0x12c(r3)
     cmpwi r0, 0x0
@@ -2509,7 +2509,7 @@ lbl_fn_80073A6C_00002034:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     b lbl_fn_80073A6C_000024AC
 lbl_fn_80073A6C_00002238:
     cmpwi r17, 0x1
@@ -2553,7 +2553,7 @@ lbl_fn_80073A6C_00002238:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     mr r3, r24
     li r4, 0xff
     li r5, 0xff
@@ -2590,7 +2590,7 @@ lbl_fn_80073A6C_00002238:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     b lbl_fn_80073A6C_000024AC
 lbl_fn_80073A6C_00002378:
     mr r3, r26
@@ -2632,7 +2632,7 @@ lbl_fn_80073A6C_00002378:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     mr r3, r24
     li r4, 0xff
     li r5, 0xff
@@ -2669,7 +2669,7 @@ lbl_fn_80073A6C_00002378:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
 lbl_fn_80073A6C_000024AC:
     addi r11, r1, 0x90
     bl _restgpr_17
@@ -2989,7 +2989,7 @@ lbl_fn_800742C8_00002808:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     mr r3, r30
     mr r4, r25
     mr r5, r27
@@ -3026,7 +3026,7 @@ lbl_fn_800742C8_00002808:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     mr r3, r29
     li r4, 0xff
     li r5, 0xff
@@ -3074,7 +3074,7 @@ lbl_fn_800742C8_00002A54:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     addi r11, r1, 0x1f0
     bl _restgpr_19
     lwz r0, 0x1f4(r1)
@@ -3232,7 +3232,7 @@ lbl_fn_800748D8_00002CA0:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     addi r11, r1, 0xb0
     bl _restgpr_27
     lwz r0, 0xb4(r1)
@@ -3426,7 +3426,7 @@ lbl_fn_80074B24_00002EB0:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x3
-    bl fn_806174C0
+    bl GXSetTevIndTile
     mr r3, r30
     li r4, 0xff
     li r5, 0xff
@@ -3481,7 +3481,7 @@ lbl_fn_80074B24_00003090:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     addi r11, r1, 0xc0
     bl _restgpr_24
     lwz r0, 0xc4(r1)
@@ -3933,7 +3933,7 @@ lbl_gx_beginQuadBatch_00003680:
     clrlwi r7, r0, 24
     lwz r6, 0x120(r1)
     lwz r8, 0x128(r1)
-    bl fn_806174C0
+    bl GXSetTevIndTile
     lwz r0, 0x148(r1)
     mr r3, r18
     clrlwi r0, r0, 24

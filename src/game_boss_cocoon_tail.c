@@ -28,7 +28,7 @@ extern void fn_8012A1B8(void);
 extern void fn_8012A288(void);
 extern void npc_getPosition(void);
 extern void fn_8013C480(void);
-extern void fn_801404F8(void);
+extern void quest_getGlobalManager(void);
 extern void quest_evaluateConditions(void);
 extern void actor_setState(void);
 extern void battle_updateTargetAggro(void);
@@ -963,7 +963,7 @@ lbl_fn_80463174_00000B8C:
     lfs f0, lbl_80886D9C
     fadds f0, f1, f0
     stfs f0, 0x48(r1)
-    bl fn_801404F8
+    bl quest_getGlobalManager
     lis r4, 0x8000
     addi r5, r1, 0x50
     addi r7, r4, 0x80

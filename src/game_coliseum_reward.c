@@ -32,7 +32,7 @@ extern void fn_800BBEFC(void);
 extern void fn_800BC194(void);
 extern void fn_800C1A1C(void);
 extern void fn_800C23E8(void);
-extern void fn_800C2448(void);
+extern void skeleton_getBoneByIndex(void);
 extern void fn_800C2E30(void);
 extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
@@ -1959,7 +1959,7 @@ lbl_fn_80495788_00001AB8:
     mr r4, r23
     lwzx r3, r5, r26
     addi r3, r3, 0x4c
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     mr r4, r24
     bl fn_80079BC8
     addi r23, r23, 0x1

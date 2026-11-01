@@ -44,7 +44,7 @@ extern u32 lbl_80882C94;
 extern u32 lbl_80882C98;
 
 /* Function declarations */
-void fn_801F7590(void);
+void save_writeBackupSlot(void);
 void fn_801F791C(void);
 void fn_801F7A18(void);
 void fn_801F7DF0(void);
@@ -61,7 +61,7 @@ void fn_801F8D64(void);
 void fn_801F8E00(void);
 void fn_801F8E6C(void);
 
-asm void fn_801F7590(void)
+asm void save_writeBackupSlot(void)
 {
     nofralloc
     stwu r1, -0x60(r1)
@@ -93,45 +93,45 @@ asm void fn_801F7590(void)
     stfs f31, 0x34(r1)
     mtctr r8
     cmplwi r8, 0x0
-    ble lbl_fn_801F7590_000000C4
-lbl_fn_801F7590_00000078:
+    ble lbl_save_writeBackupSlot_000000C4
+lbl_save_writeBackupSlot_00000078:
     lbz r0, 0x5c(r7)
     extsb r0, r0
     cmpw r5, r0
-    bne lbl_fn_801F7590_000000B8
+    bne lbl_save_writeBackupSlot_000000B8
     lbz r0, 0x5d(r7)
     extsb r0, r0
     cmpw r4, r0
-    bne lbl_fn_801F7590_000000B8
+    bne lbl_save_writeBackupSlot_000000B8
     lwz r0, 0x60(r7)
     cmplw r3, r0
-    bne lbl_fn_801F7590_000000B8
+    bne lbl_save_writeBackupSlot_000000B8
     mulli r0, r6, 0xc
     lwz r4, 0x34(r1)
     add r3, r29, r0
     stw r4, 0x64(r3)
-    b lbl_fn_801F7590_000000FC
-lbl_fn_801F7590_000000B8:
+    b lbl_save_writeBackupSlot_000000FC
+lbl_save_writeBackupSlot_000000B8:
     addi r7, r7, 0xc
     addi r6, r6, 0x1
-    bdnz lbl_fn_801F7590_00000078
-lbl_fn_801F7590_000000C4:
+    bdnz lbl_save_writeBackupSlot_00000078
+lbl_save_writeBackupSlot_000000C4:
     lwz r0, 0x58(r29)
     mulli r0, r0, 0xc
     add r0, r29, r0
     addic. r3, r0, 0x5c
-    beq lbl_fn_801F7590_000000F0
+    beq lbl_save_writeBackupSlot_000000F0
     lwz r0, 0x2c(r1)
     stw r0, 0x0(r3)
     lwz r0, 0x30(r1)
     stw r0, 0x4(r3)
     lwz r0, 0x34(r1)
     stw r0, 0x8(r3)
-lbl_fn_801F7590_000000F0:
+lbl_save_writeBackupSlot_000000F0:
     lwz r3, 0x58(r29)
     addi r0, r3, 0x1
     stw r0, 0x58(r29)
-lbl_fn_801F7590_000000FC:
+lbl_save_writeBackupSlot_000000FC:
     li r3, 0x2
     li r0, 0x1
     stb r3, 0x20(r1)
@@ -150,45 +150,45 @@ lbl_fn_801F7590_000000FC:
     stfs f31, 0x28(r1)
     mtctr r8
     cmplwi r8, 0x0
-    ble lbl_fn_801F7590_00000194
-lbl_fn_801F7590_00000148:
+    ble lbl_save_writeBackupSlot_00000194
+lbl_save_writeBackupSlot_00000148:
     lbz r0, 0x5c(r7)
     extsb r0, r0
     cmpw r5, r0
-    bne lbl_fn_801F7590_00000188
+    bne lbl_save_writeBackupSlot_00000188
     lbz r0, 0x5d(r7)
     extsb r0, r0
     cmpw r4, r0
-    bne lbl_fn_801F7590_00000188
+    bne lbl_save_writeBackupSlot_00000188
     lwz r0, 0x60(r7)
     cmplw r3, r0
-    bne lbl_fn_801F7590_00000188
+    bne lbl_save_writeBackupSlot_00000188
     mulli r0, r6, 0xc
     lwz r4, 0x28(r1)
     add r3, r29, r0
     stw r4, 0x64(r3)
-    b lbl_fn_801F7590_000001CC
-lbl_fn_801F7590_00000188:
+    b lbl_save_writeBackupSlot_000001CC
+lbl_save_writeBackupSlot_00000188:
     addi r7, r7, 0xc
     addi r6, r6, 0x1
-    bdnz lbl_fn_801F7590_00000148
-lbl_fn_801F7590_00000194:
+    bdnz lbl_save_writeBackupSlot_00000148
+lbl_save_writeBackupSlot_00000194:
     lwz r0, 0x58(r29)
     mulli r0, r0, 0xc
     add r0, r29, r0
     addic. r3, r0, 0x5c
-    beq lbl_fn_801F7590_000001C0
+    beq lbl_save_writeBackupSlot_000001C0
     lwz r0, 0x20(r1)
     stw r0, 0x0(r3)
     lwz r0, 0x24(r1)
     stw r0, 0x4(r3)
     lwz r0, 0x28(r1)
     stw r0, 0x8(r3)
-lbl_fn_801F7590_000001C0:
+lbl_save_writeBackupSlot_000001C0:
     lwz r3, 0x58(r29)
     addi r0, r3, 0x1
     stw r0, 0x58(r29)
-lbl_fn_801F7590_000001CC:
+lbl_save_writeBackupSlot_000001CC:
     li r0, 0x2
     stb r0, 0x14(r1)
     lfs f31, 0x8(r31)
@@ -206,45 +206,45 @@ lbl_fn_801F7590_000001CC:
     stfs f31, 0x1c(r1)
     mtctr r8
     cmplwi r8, 0x0
-    ble lbl_fn_801F7590_00000260
-lbl_fn_801F7590_00000214:
+    ble lbl_save_writeBackupSlot_00000260
+lbl_save_writeBackupSlot_00000214:
     lbz r0, 0x5c(r7)
     extsb r0, r0
     cmpw r5, r0
-    bne lbl_fn_801F7590_00000254
+    bne lbl_save_writeBackupSlot_00000254
     lbz r0, 0x5d(r7)
     extsb r0, r0
     cmpw r4, r0
-    bne lbl_fn_801F7590_00000254
+    bne lbl_save_writeBackupSlot_00000254
     lwz r0, 0x60(r7)
     cmplw r3, r0
-    bne lbl_fn_801F7590_00000254
+    bne lbl_save_writeBackupSlot_00000254
     mulli r0, r6, 0xc
     lwz r4, 0x1c(r1)
     add r3, r29, r0
     stw r4, 0x64(r3)
-    b lbl_fn_801F7590_00000298
-lbl_fn_801F7590_00000254:
+    b lbl_save_writeBackupSlot_00000298
+lbl_save_writeBackupSlot_00000254:
     addi r7, r7, 0xc
     addi r6, r6, 0x1
-    bdnz lbl_fn_801F7590_00000214
-lbl_fn_801F7590_00000260:
+    bdnz lbl_save_writeBackupSlot_00000214
+lbl_save_writeBackupSlot_00000260:
     lwz r0, 0x58(r29)
     mulli r0, r0, 0xc
     add r0, r29, r0
     addic. r3, r0, 0x5c
-    beq lbl_fn_801F7590_0000028C
+    beq lbl_save_writeBackupSlot_0000028C
     lwz r0, 0x14(r1)
     stw r0, 0x0(r3)
     lwz r0, 0x18(r1)
     stw r0, 0x4(r3)
     lwz r0, 0x1c(r1)
     stw r0, 0x8(r3)
-lbl_fn_801F7590_0000028C:
+lbl_save_writeBackupSlot_0000028C:
     lwz r3, 0x58(r29)
     addi r0, r3, 0x1
     stw r0, 0x58(r29)
-lbl_fn_801F7590_00000298:
+lbl_save_writeBackupSlot_00000298:
     li r3, 0x2
     li r0, 0x3
     stb r3, 0x8(r1)
@@ -263,45 +263,45 @@ lbl_fn_801F7590_00000298:
     stfs f31, 0x10(r1)
     mtctr r8
     cmplwi r8, 0x0
-    ble lbl_fn_801F7590_00000330
-lbl_fn_801F7590_000002E4:
+    ble lbl_save_writeBackupSlot_00000330
+lbl_save_writeBackupSlot_000002E4:
     lbz r0, 0x5c(r7)
     extsb r0, r0
     cmpw r5, r0
-    bne lbl_fn_801F7590_00000324
+    bne lbl_save_writeBackupSlot_00000324
     lbz r0, 0x5d(r7)
     extsb r0, r0
     cmpw r4, r0
-    bne lbl_fn_801F7590_00000324
+    bne lbl_save_writeBackupSlot_00000324
     lwz r0, 0x60(r7)
     cmplw r3, r0
-    bne lbl_fn_801F7590_00000324
+    bne lbl_save_writeBackupSlot_00000324
     mulli r0, r6, 0xc
     lwz r4, 0x10(r1)
     add r3, r29, r0
     stw r4, 0x64(r3)
-    b lbl_fn_801F7590_00000368
-lbl_fn_801F7590_00000324:
+    b lbl_save_writeBackupSlot_00000368
+lbl_save_writeBackupSlot_00000324:
     addi r7, r7, 0xc
     addi r6, r6, 0x1
-    bdnz lbl_fn_801F7590_000002E4
-lbl_fn_801F7590_00000330:
+    bdnz lbl_save_writeBackupSlot_000002E4
+lbl_save_writeBackupSlot_00000330:
     lwz r0, 0x58(r29)
     mulli r0, r0, 0xc
     add r0, r29, r0
     addic. r3, r0, 0x5c
-    beq lbl_fn_801F7590_0000035C
+    beq lbl_save_writeBackupSlot_0000035C
     lwz r0, 0x8(r1)
     stw r0, 0x0(r3)
     lwz r0, 0xc(r1)
     stw r0, 0x4(r3)
     lwz r0, 0x10(r1)
     stw r0, 0x8(r3)
-lbl_fn_801F7590_0000035C:
+lbl_save_writeBackupSlot_0000035C:
     lwz r3, 0x58(r29)
     addi r0, r3, 0x1
     stw r0, 0x58(r29)
-lbl_fn_801F7590_00000368:
+lbl_save_writeBackupSlot_00000368:
     lwz r0, 0x64(r1)
     psq_l f31, 0x58(r1), 0, 0
     lfd f31, 0x50(r1)

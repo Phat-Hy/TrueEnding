@@ -57,7 +57,7 @@ extern void GXSetTevDirect(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
-extern void fn_806174C0(void);
+extern void GXSetTevIndTile(void);
 extern void fn_80617520(void);
 extern void fn_806175F0(void);
 extern void GXSetTevSwapMode(void);
@@ -1785,7 +1785,7 @@ lbl_fn_8009CC28_00001674:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     cmpwi r28, 0x0
     bne lbl_fn_8009CC28_00001784
     addi r3, r1, 0x30

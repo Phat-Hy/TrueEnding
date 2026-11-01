@@ -14,7 +14,7 @@ extern void vec3_assign(void);
 extern void fn_800109E0(void);
 extern void vec3_toEulerAngles(void);
 extern void mtx_multVec(void);
-extern void fn_80012C88(void);
+extern void vec3_addAssign(void);
 extern void vec3_sub(void);
 extern void math_wrapAngle(void);
 extern void vec3_add(void);
@@ -47,7 +47,7 @@ extern void fn_8013A158(void);
 extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_8013C480(void);
-extern void fn_801404F8(void);
+extern void quest_getGlobalManager(void);
 extern void fn_80140500(void);
 extern void quest_initMarkerCoords(void);
 extern void quest_resetObjectiveBounds(void);
@@ -1059,7 +1059,7 @@ lbl_fn_8019FEC4_00000BC4:
     bl vec3_scale
     addi r3, r1, 0xb8
     addi r4, r1, 0x34
-    bl fn_80012C88
+    bl vec3_addAssign
     addi r3, r1, 0xac
     addi r4, r28, 0x8
     bl vec3_toEulerAngles
@@ -1192,7 +1192,7 @@ lbl_fn_8019FEC4_00000E3C:
     stfs f2, 0x70(r1)
     addi r3, r1, 0xac
     addi r4, r1, 0x70
-    bl fn_80012C88
+    bl vec3_addAssign
     lfs f1, lbl_80881FCC
     addi r3, r28, 0x8
     lfs f3, lbl_80881FBC
@@ -1221,7 +1221,7 @@ lbl_fn_8019FEC4_00000E78:
     lwz r3, 0x4(r28)
     bl fn_80198C00
     mr r30, r3
-    bl fn_801404F8
+    bl quest_getGlobalManager
     mr r8, r30
     addi r4, r1, 0x158
     addi r5, r1, 0x64

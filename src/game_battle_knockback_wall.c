@@ -19,7 +19,7 @@ extern void scene_transformPoint(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void mtx_multVec(void);
-extern void fn_80012C88(void);
+extern void vec3_addAssign(void);
 extern void vec3_sub(void);
 extern void vec3_add(void);
 extern void ui_destroyWidget(void);
@@ -63,7 +63,7 @@ extern void fn_80139F3C(void);
 extern void fn_8013A13C(void);
 extern void npc_getPosition(void);
 extern void npc_getDialogController(void);
-extern void fn_801404F8(void);
+extern void quest_getGlobalManager(void);
 extern void fn_80140500(void);
 extern void fn_801A03E0(void);
 extern void fn_801A03E8(void);
@@ -1987,7 +1987,7 @@ lbl_fn_8041766C_000018C4:
     bl vec3_add
     addi r3, r1, 0x1f0
     bl fn_80140500
-    bl fn_801404F8
+    bl quest_getGlobalManager
     addi r4, r1, 0x1f0
     addi r5, r1, 0xd0
     addi r6, r1, 0xc4
@@ -2330,7 +2330,7 @@ lbl_fn_8041766C_00001D5C:
     bl mtx_multVec
     addi r3, r1, 0x80
     addi r4, r1, 0x74
-    bl fn_80012C88
+    bl vec3_addAssign
     addi r3, r1, 0x68
     bl mission_updateStub
     lbz r0, 0x2(r31)

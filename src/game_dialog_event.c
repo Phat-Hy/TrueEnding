@@ -36,7 +36,7 @@ extern void fn_8013A18C(void);
 extern void fn_8013A214(void);
 extern void fn_8013A248(void);
 extern void fn_801404E0(void);
-extern void fn_801404F8(void);
+extern void quest_getGlobalManager(void);
 extern void fn_80140500(void);
 extern void fn_80140518(void);
 extern void quest_initMarkerCoords(void);
@@ -1451,7 +1451,7 @@ lbl_fn_8015076C_00001158:
     addi r4, r1, 0xa4
     addi r5, r1, 0x8c
     bl vec3_add
-    bl fn_801404F8
+    bl quest_getGlobalManager
     addi r4, r1, 0x198
     addi r5, r1, 0xf8
     addi r6, r1, 0xec
@@ -1562,7 +1562,7 @@ lbl_fn_8015076C_00001310:
     fsubs f0, f0, f2
     stfs f1, 0xd8(r1)
     stfs f0, 0xcc(r1)
-    bl fn_801404F8
+    bl quest_getGlobalManager
     addi r4, r1, 0x148
     addi r5, r1, 0xd4
     addi r6, r1, 0xc8

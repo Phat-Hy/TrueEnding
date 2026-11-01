@@ -14,7 +14,7 @@ extern void fn_80069BF4(void);
 extern void fn_8006A004(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800CAA88(void);
-extern void fn_800CB58C(void);
+extern void morph_hasActiveWeight(void);
 extern void fn_800D089C(void);
 extern void fn_800D0974(void);
 extern void fn_800EAECC(void);
@@ -346,7 +346,7 @@ asm void fn_805A32CC(void)
     lwzu r0, 0x8(r3)
     cmpwi r0, 0x0
     beq lbl_fn_805A32CC_000003B0
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     beq lbl_fn_805A32CC_000003B0
     lwz r3, 0xf8(r30)

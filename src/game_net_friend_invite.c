@@ -23,7 +23,7 @@ extern void msg_getMessageById(void);
 extern void fn_800C310C(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB58C(void);
+extern void morph_hasActiveWeight(void);
 extern void morph_updateMesh(void);
 extern void fn_800CE368(void);
 extern void atn_Task_destructor(void);
@@ -5443,7 +5443,7 @@ lbl_fn_804D25D4_00004898:
     bl fn_804FB474
 lbl_fn_804D25D4_000048D4:
     addi r3, r24, 0x2b70
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_000048F4
     addi r3, r24, 0x2b70

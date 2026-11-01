@@ -33,7 +33,7 @@ extern void fn_8054D798(void);
 extern void rand(void);
 extern void net_getSocket(void);
 extern void fn_806A8E70(void);
-extern void fn_806B0DE0(void);
+extern void net_isSessionActive(void);
 extern void net_getMyAid(void);
 extern u32 strlen(const char* str);
 
@@ -426,7 +426,7 @@ lbl_fn_804D9C18_000004C0:
     li r3, 0x1
     b lbl_fn_804D9C18_00000508
 lbl_fn_804D9C18_000004E8:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804D9C18_00000508
 lbl_fn_804D9C18_000004F0:
     lwz r0, 0x1f8(r4)

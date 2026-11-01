@@ -117,7 +117,7 @@ void fn_806B05B0(void);
 void fn_806B0950(void);
 void fn_806B0980(void);
 void fn_806B0CF0(void);
-void fn_806B0DE0(void);
+void net_isSessionActive(void);
 void net_getMyAid(void);
 void fn_806B0EB0(void);
 void fn_806B0F80(void);
@@ -1589,29 +1589,29 @@ lbl_fn_806B0CF0_000014B8:
     blr
 }
 
-asm void fn_806B0DE0(void)
+asm void net_isSessionActive(void)
 {
     nofralloc
     lis r3, lbl_8085FF98@ha
     lwz r4, lbl_8085FF98@l(r3)
     cmpwi r4, 0x0
-    beq lbl_fn_806B0DE0_00001508
+    beq lbl_net_isSessionActive_00001508
     lbz r0, 0x375(r4)
     li r3, 0x0
     cmplwi r0, 0x2
-    beq lbl_fn_806B0DE0_000014FC
+    beq lbl_net_isSessionActive_000014FC
     lbz r0, 0x36d(r4)
     cmpwi r0, 0x0
-    beq lbl_fn_806B0DE0_00001500
-lbl_fn_806B0DE0_000014FC:
+    beq lbl_net_isSessionActive_00001500
+lbl_net_isSessionActive_000014FC:
     li r3, 0x1
-lbl_fn_806B0DE0_00001500:
+lbl_net_isSessionActive_00001500:
     cmpwi r3, 0x0
-    bne lbl_fn_806B0DE0_00001510
-lbl_fn_806B0DE0_00001508:
+    bne lbl_net_isSessionActive_00001510
+lbl_net_isSessionActive_00001508:
     li r3, 0x0
     blr
-lbl_fn_806B0DE0_00001510:
+lbl_net_isSessionActive_00001510:
     b fn_806CCCB0
     blr
 }

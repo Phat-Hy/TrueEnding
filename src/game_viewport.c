@@ -12,7 +12,7 @@ extern void scene_transformPoint(void);
 extern void fn_8000DCF4(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80012C88(void);
+extern void vec3_addAssign(void);
 extern void vec3_sub(void);
 extern void fn_80013484(void);
 extern void fn_80041B8C(void);
@@ -411,7 +411,7 @@ lbl_fn_800F72F4_000003A4:
     bl vec3_scale
     addi r3, r1, 0x1bc
     addi r4, r1, 0x16c
-    bl fn_80012C88
+    bl vec3_addAssign
     mr r3, r30
     bl fn_800F7FF8
     addi r3, r1, 0x154
@@ -750,7 +750,7 @@ lbl_fn_800F72F4_0000088C:
     bl vec3_scale
     mr r3, r22
     addi r4, r1, 0x84
-    bl fn_80012C88
+    bl vec3_addAssign
     addi r3, r1, 0x188
     bl fn_800F8348
     lfs f1, lbl_80881478

@@ -62,7 +62,7 @@ extern void fn_8032AC1C(void);
 extern void fn_8032AF90(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
-extern void fn_803EC758(void);
+extern void barrier_formatCountdownTimer(void);
 extern void task_updateWorker(void);
 extern void fn_803ED610(void);
 extern void fn_803EDCF4(void);
@@ -2671,7 +2671,7 @@ asm void fn_8043E580(void)
     addi r4, r1, 0x8
     stw r29, 0x34(r1)
     mr r29, r3
-    bl fn_803EC758
+    bl barrier_formatCountdownTimer
     lwz r0, 0xf0(r29)
     cmpwi r0, 0x0
     bne lbl_fn_8043E580_000022AC

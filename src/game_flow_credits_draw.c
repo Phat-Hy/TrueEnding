@@ -11,7 +11,7 @@ extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
 extern void fn_800CB518(void);
-extern void fn_800CB58C(void);
+extern void morph_hasActiveWeight(void);
 extern void morph_updateMesh(void);
 extern void fn_80102EAC(void);
 extern void fn_801031D0(void);
@@ -483,7 +483,7 @@ lbl_fn_804EB938_00000520:
     beq lbl_fn_804EB938_000005C0
     lwz r3, lbl_8087F610
     addi r3, r3, 0x2b74
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     bne lbl_fn_804EB938_000005C0
     lwz r23, lbl_8087F498

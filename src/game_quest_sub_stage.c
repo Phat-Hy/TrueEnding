@@ -13,7 +13,7 @@ extern void fn_800791B4(void);
 extern void fn_8007A154(void);
 extern void mem_free(void);
 extern void skeleton_getGlobalManager(void);
-extern void fn_800C2448(void);
+extern void skeleton_getBoneByIndex(void);
 extern void fn_800CF680(void);
 extern void fn_800DAA3C(void);
 extern void fn_803606CC(void);
@@ -468,7 +468,7 @@ lbl_fn_80483714_00000504:
     psq_st f2, 0x22c(r3), 0, 0
     lwz r0, 0x1d18(r29)
     stw r0, 0x120(r3)
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     lwz r0, 0x0(r28)
     addi r5, r29, 0x1ab0
     stw r0, 0x0(r3)
@@ -1261,7 +1261,7 @@ asm void fn_804846FC(void)
     stw r0, 0x38(r1)
     bl skeleton_getGlobalManager
     li r4, 0x0
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     extrwi r0, r31, 8, 8
     stw r0, 0x34(r1)
     lis r4, lbl_80756338@ha
@@ -1377,7 +1377,7 @@ asm void fn_804848C4(void)
     nofralloc
     lwz r3, 0x2fc(r3)
     li r4, 0x0
-    b fn_800C2448
+    b skeleton_getBoneByIndex
 }
 
 asm void fn_804848D0(void)
@@ -1420,7 +1420,7 @@ lbl_fn_804848D0_000012C4:
     beq lbl_fn_804848D0_00001398
     li r4, 0x0
     addi r3, r3, 0x4c
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     lwz r0, 0x0(r3)
     stw r0, 0x0(r31)
     lwz r0, 0x4(r3)
@@ -1456,7 +1456,7 @@ lbl_fn_804848D0_00001398:
     lwz r3, lbl_8087EFB4
     li r4, 0x0
     lwz r3, 0x2fc(r3)
-    bl fn_800C2448
+    bl skeleton_getBoneByIndex
     lwz r0, 0x0(r3)
     stw r0, 0x0(r31)
     lwz r0, 0x4(r3)

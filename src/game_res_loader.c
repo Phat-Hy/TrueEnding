@@ -23,7 +23,7 @@ extern void fn_8007A748(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_8008B130(void);
+extern void map_getArchiveName(void);
 extern void atn_Anim_getLayerTrack(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_setActive(void);
@@ -614,7 +614,7 @@ asm void fn_80227A94(void)
     lwz r0, 0x16c(r3)
     cmpwi r0, 0x0
     beq lbl_fn_80227A94_0000082C
-    bl fn_8008B130
+    bl map_getArchiveName
     stw r27, 0x38(r1)
     mr r25, r3
     addi r26, r1, 0x38
@@ -1735,7 +1735,7 @@ lbl_fn_80228928_00001574:
     b lbl_fn_80228928_000016AC
 lbl_fn_80228928_000015DC:
     addi r3, r3, 0xb0
-    bl fn_8008B130
+    bl map_getArchiveName
     li r30, 0x0
     stw r30, 0x28(r1)
     mr r29, r3

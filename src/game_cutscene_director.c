@@ -30,7 +30,7 @@ extern void fn_8012A1B8(void);
 extern void fn_8012A288(void);
 extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
-extern void fn_801404F8(void);
+extern void quest_getGlobalManager(void);
 extern void fn_80140500(void);
 extern void quest_ctorRewardItem(void);
 extern void fn_802A7910(void);
@@ -1662,7 +1662,7 @@ lbl_fn_803267E8_0000163C:
     addi r4, r1, 0x144
     addi r5, r1, 0xf0
     bl vec3_add
-    bl fn_801404F8
+    bl quest_getGlobalManager
     addi r4, r1, 0x1b8
     addi r5, r1, 0x144
     addi r6, r1, 0x138
@@ -1748,7 +1748,7 @@ lbl_fn_803267E8_00001788:
     addi r4, r1, 0x12c
     addi r5, r1, 0xa8
     bl vec3_add
-    bl fn_801404F8
+    bl quest_getGlobalManager
     addi r4, r1, 0x168
     addi r5, r1, 0x12c
     addi r6, r1, 0x120
@@ -1947,7 +1947,7 @@ lbl_fn_803267E8_00001A74:
     lfs f0, lbl_80884F30
     fadds f0, f1, f0
     stfs f0, 0x100(r1)
-    bl fn_801404F8
+    bl quest_getGlobalManager
     addi r5, r1, 0x108
     addi r6, r1, 0xfc
     addi r8, r31, 0x5b8

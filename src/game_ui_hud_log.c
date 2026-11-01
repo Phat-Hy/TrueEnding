@@ -7,7 +7,7 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void actor_dispatchMessage(void);
 extern void mem_alloc(void);
-extern void fn_8008B130(void);
+extern void map_getArchiveName(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void enemy_updateNavSteering(void);
@@ -1385,7 +1385,7 @@ lbl_fn_801CEA98_00001230:
     lwz r19, 0x74(r1)
 lbl_fn_801CEA98_00001234:
     addi r3, r30, 0xb0
-    bl fn_8008B130
+    bl map_getArchiveName
     mr r4, r19
     bl strstr
     cmpwi r3, 0x0
@@ -1462,7 +1462,7 @@ lbl_fn_801CEA98_00001344:
     lwz r19, 0x74(r1)
 lbl_fn_801CEA98_00001348:
     addi r3, r30, 0xb0
-    bl fn_8008B130
+    bl map_getArchiveName
     mr r4, r19
     bl strstr
     cmpwi r3, 0x0
@@ -1532,7 +1532,7 @@ lbl_fn_801CEA98_00001440:
     lwz r19, 0x74(r1)
 lbl_fn_801CEA98_00001444:
     addi r3, r30, 0xb0
-    bl fn_8008B130
+    bl map_getArchiveName
     mr r4, r19
     bl strstr
     cmpwi r3, 0x0
@@ -1995,7 +1995,7 @@ lbl_fn_801CF3C0_00001A9C:
     lwz r23, 0x60(r1)
 lbl_fn_801CF3C0_00001AA0:
     addi r3, r29, 0xb0
-    bl fn_8008B130
+    bl map_getArchiveName
     mr r4, r23
     bl strstr
     cmpwi r3, 0x0
@@ -2058,7 +2058,7 @@ lbl_fn_801CF3C0_00001B7C:
     lwz r23, 0x60(r1)
 lbl_fn_801CF3C0_00001B80:
     addi r3, r29, 0xb0
-    bl fn_8008B130
+    bl map_getArchiveName
     mr r4, r23
     bl strstr
     cmpwi r3, 0x0

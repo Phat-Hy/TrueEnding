@@ -19,7 +19,7 @@ extern void fn_80076FF8(void);
 extern void fn_8007A7BC(void);
 extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_8008B130(void);
+extern void map_getArchiveName(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80094BD8(void);
 extern void fn_80095F10(void);
@@ -830,7 +830,7 @@ lbl_fn_80225C80_00000A58:
 lbl_fn_80225C80_00000A5C:
     stw r0, 0x1620(r27)
     addi r3, r27, 0xb0
-    bl fn_8008B130
+    bl map_getArchiveName
     lis r31, lbl_80742D7C@ha
     addi r31, r31, lbl_80742D7C@l
     addi r4, r31, 0x6
@@ -845,7 +845,7 @@ lbl_fn_80225C80_00000A8C:
     b lbl_fn_80225C80_00000B58
 lbl_fn_80225C80_00000A94:
     addi r3, r27, 0xb0
-    bl fn_8008B130
+    bl map_getArchiveName
     addi r4, r31, 0xd
     bl strstr
     cmpwi r3, 0x0

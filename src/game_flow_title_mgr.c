@@ -39,7 +39,7 @@ extern void net_getSocket(void);
 extern void fn_806A8E70(void);
 extern void fn_806ABE70(void);
 extern void fn_806ABEE0(void);
-extern void fn_806B0DE0(void);
+extern void net_isSessionActive(void);
 extern void net_getMyAid(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -742,7 +742,7 @@ lbl_fn_804DC454_00000884:
     li r3, 0x1
     b lbl_fn_804DC454_000008E8
 lbl_fn_804DC454_000008C8:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804DC454_000008E8
 lbl_fn_804DC454_000008D0:
     lwz r0, 0x1f8(r4)
@@ -1161,7 +1161,7 @@ asm void fn_804DCA58(void)
     li r3, 0x1
     b lbl_fn_804DCA58_00000E30
 lbl_fn_804DCA58_00000E2C:
-    bl fn_806B0DE0
+    bl net_isSessionActive
 lbl_fn_804DCA58_00000E30:
     mr r25, r3
     b lbl_fn_804DCA58_00000E54

@@ -38,7 +38,7 @@ extern void fn_80139F3C(void);
 extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_8013C554(void);
-extern void fn_801404F8(void);
+extern void quest_getGlobalManager(void);
 extern void fn_80140500(void);
 extern void fn_801479E4(void);
 extern void actor_setState(void);
@@ -591,7 +591,7 @@ lbl_fn_8028CB38_00000644:
     bl vec3_copy
     addi r3, r1, 0x120
     bl fn_80140500
-    bl fn_801404F8
+    bl quest_getGlobalManager
     addi r4, r1, 0x120
     addi r5, r1, 0x6c
     addi r6, r1, 0x60

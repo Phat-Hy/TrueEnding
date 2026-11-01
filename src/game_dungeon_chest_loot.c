@@ -27,7 +27,7 @@ extern void fn_800CB36C(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB404(void);
 extern void morph_updateWeights(void);
-extern void fn_800CB58C(void);
+extern void morph_hasActiveWeight(void);
 extern void fn_800CB5B4(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB654(void);
@@ -1713,7 +1713,7 @@ lbl_chest_spawnLoot_000017E0:
     b lbl_chest_spawnLoot_00001820
 lbl_chest_spawnLoot_00001800:
     mr r3, r26
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     bne lbl_chest_spawnLoot_00001818
     li r0, 0x1

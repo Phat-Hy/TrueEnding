@@ -33,7 +33,7 @@ extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_8013C480(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_801404F8(void);
+extern void quest_getGlobalManager(void);
 extern void fn_80140500(void);
 extern void quest_resetObjectiveBounds(void);
 extern void dialog_renderWindow(void);
@@ -1777,7 +1777,7 @@ lbl_fn_802F0328_000017C0:
     bl fn_8012A190
     addi r3, r1, 0xc8
     bl fn_80140500
-    bl fn_801404F8
+    bl quest_getGlobalManager
     lfs f1, 0x620(r31)
     addi r4, r1, 0xc8
     addi r5, r31, 0x614

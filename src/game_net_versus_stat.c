@@ -57,7 +57,7 @@ extern void fn_804FC014(void);
 extern void fn_8050A4E4(void);
 extern void fn_8050BA6C(void);
 extern void fn_806A8E70(void);
-extern void fn_806B0DE0(void);
+extern void net_isSessionActive(void);
 extern void net_isSessionConnected(void);
 extern void fn_806B3CC0(void);
 
@@ -454,7 +454,7 @@ lbl_fn_804BDD68_000004D0:
     li r3, 0x1
     b lbl_fn_804BDD68_00000528
 lbl_fn_804BDD68_00000508:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804BDD68_00000528
 lbl_fn_804BDD68_00000510:
     lwz r0, 0x1f8(r4)
@@ -950,7 +950,7 @@ lbl_fn_804BE4A4_00000BE0:
     li r3, 0x1
     b lbl_fn_804BE4A4_00000C38
 lbl_fn_804BE4A4_00000C18:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804BE4A4_00000C38
 lbl_fn_804BE4A4_00000C20:
     lwz r0, 0x1f8(r4)
@@ -1070,7 +1070,7 @@ lbl_fn_804BE610_00000D74:
     li r3, 0x1
     b lbl_fn_804BE610_00000DD4
 lbl_fn_804BE610_00000DB4:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804BE610_00000DD4
 lbl_fn_804BE610_00000DBC:
     lwz r0, 0x1f8(r4)
@@ -1206,7 +1206,7 @@ lbl_fn_804BE610_00000F5C:
     li r3, 0x1
     b lbl_fn_804BE610_00000FC4
 lbl_fn_804BE610_00000FA4:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804BE610_00000FC4
 lbl_fn_804BE610_00000FAC:
     lwz r0, 0x1f8(r4)
@@ -1299,7 +1299,7 @@ lbl_fn_804BE610_000010AC:
     li r3, 0x1
     b lbl_fn_804BE610_000010F4
 lbl_fn_804BE610_000010D4:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804BE610_000010F4
 lbl_fn_804BE610_000010DC:
     lwz r0, 0x1f8(r4)
@@ -1694,7 +1694,7 @@ lbl_fn_804BEDB8_00001620:
     li r3, 0x1
     b lbl_fn_804BEDB8_00001684
 lbl_fn_804BEDB8_00001664:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804BEDB8_00001684
 lbl_fn_804BEDB8_0000166C:
     lwz r0, 0x1f8(r4)
@@ -1811,7 +1811,7 @@ lbl_fn_804BEDB8_000017B8:
     li r3, 0x1
     b lbl_fn_804BEDB8_00001804
 lbl_fn_804BEDB8_00001800:
-    bl fn_806B0DE0
+    bl net_isSessionActive
 lbl_fn_804BEDB8_00001804:
     mr r28, r3
     b lbl_fn_804BEDB8_00001828
@@ -1963,7 +1963,7 @@ lbl_fn_804BEDB8_000019D8:
     li r3, 0x1
     b lbl_fn_804BEDB8_00001A20
 lbl_fn_804BEDB8_00001A00:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804BEDB8_00001A20
 lbl_fn_804BEDB8_00001A08:
     lwz r0, 0x1f8(r4)

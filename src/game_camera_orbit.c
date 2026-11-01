@@ -22,7 +22,7 @@ extern void skin_applyWeights(void);
 extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
-extern void fn_800CB58C(void);
+extern void morph_hasActiveWeight(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB6E4(void);
 extern void atn_Task_setActive(void);
@@ -1576,7 +1576,7 @@ lbl_fn_802E9590_00001480:
     addi r3, r3, 0x15a0
     bl morph_updateMesh
     addi r3, r31, 0x15a4
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     bne lbl_fn_802E9590_00001564
     lis r4, lbl_80747F70@ha
@@ -1601,7 +1601,7 @@ lbl_fn_802E9590_00001508:
     addi r3, r3, 0x15a4
     bl morph_updateMesh
     addi r3, r31, 0x15a0
-    bl fn_800CB58C
+    bl morph_hasActiveWeight
     cmpwi r3, 0x0
     bne lbl_fn_802E9590_00001564
     lis r4, lbl_80747F70@ha

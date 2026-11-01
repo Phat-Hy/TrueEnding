@@ -45,7 +45,7 @@ extern void __construct_new_array(void);
 extern void __destroy_new_array(void);
 extern void net_getSocket(void);
 extern void fn_806A8E70(void);
-extern void fn_806B0DE0(void);
+extern void net_isSessionActive(void);
 extern void net_getMyAid(void);
 extern void net_isSessionConnected(void);
 
@@ -818,7 +818,7 @@ lbl_fn_804BC458_000009D4:
     li r3, 0x1
     b lbl_fn_804BC458_00000A1C
 lbl_fn_804BC458_000009FC:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804BC458_00000A1C
 lbl_fn_804BC458_00000A04:
     lwz r0, 0x1f8(r4)
@@ -1763,7 +1763,7 @@ lbl_fn_804BC628_00001764:
     li r3, 0x1
     b lbl_fn_804BC628_000017AC
 lbl_fn_804BC628_0000178C:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804BC628_000017AC
 lbl_fn_804BC628_00001794:
     lwz r0, 0x1f8(r4)

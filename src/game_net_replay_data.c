@@ -40,7 +40,7 @@ extern void fn_804DA3F8(void);
 extern void fn_804E82C8(void);
 extern void fn_804EB874(void);
 extern void fn_806A8E70(void);
-extern void fn_806B0DE0(void);
+extern void net_isSessionActive(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -125,7 +125,7 @@ asm void fn_804C4530(void)
     li r3, 0x1
     b lbl_fn_804C4530_00000070
 lbl_fn_804C4530_00000050:
-    bl fn_806B0DE0
+    bl net_isSessionActive
     b lbl_fn_804C4530_00000070
 lbl_fn_804C4530_00000058:
     lwz r0, 0x1f8(r4)

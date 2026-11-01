@@ -10,7 +10,7 @@ extern void fn_800109E0(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
 extern void mtx_multVec(void);
-extern void fn_80012C88(void);
+extern void vec3_addAssign(void);
 extern void vec3_sub(void);
 extern void vec3_add(void);
 extern void item_useConsumable(void);
@@ -553,7 +553,7 @@ lbl_fn_80387910_000004D8:
     bl vec3_scale
     addi r3, r1, 0x11c
     addi r4, r1, 0x8c
-    bl fn_80012C88
+    bl vec3_addAssign
     b lbl_fn_80387910_000006E4
 lbl_fn_80387910_00000680:
     lfs f0, lbl_808858E8
@@ -577,7 +577,7 @@ lbl_fn_80387910_00000680:
     bl vec3_scale
     addi r3, r1, 0xc8
     addi r4, r1, 0x80
-    bl fn_80012C88
+    bl vec3_addAssign
     addi r3, r1, 0x11c
     addi r4, r1, 0xc8
     bl vec3_copy

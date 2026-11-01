@@ -114,7 +114,7 @@ u32 fn_80012A14(void);
 void fn_80012A1C(void);
 void fn_80012AC4(void);
 void fn_80012C3C(void);
-void fn_80012C88(void);
+void vec3_addAssign(void);
 void fn_80012CBC(void);
 void fn_80012CE4(void);
 void fn_80012D0C(void);
@@ -3361,7 +3361,7 @@ lbl_fn_80012C3C_00002B58:
     blr
 }
 
-asm void fn_80012C88(void)
+asm void vec3_addAssign(void)
 {
     nofralloc
     lfs f1, 0x0(r3)
@@ -3677,7 +3677,7 @@ lbl_fn_80012D34_00002F00:
     bl mtx_multVec
     addi r3, r1, 0x11c
     addi r4, r1, 0x110
-    bl fn_80012C88
+    bl vec3_addAssign
     mr r4, r31
     addi r3, r1, 0x50
     bl mtx_getTranslation
@@ -3691,7 +3691,7 @@ lbl_fn_80012D34_00002F00:
 lbl_fn_80012D34_00002FF4:
     mr r4, r28
     addi r3, r1, 0x128
-    bl fn_80012C88
+    bl vec3_addAssign
 lbl_fn_80012D34_00003000:
     lis r4, lbl_807C7030@ha
     mr r3, r30
@@ -3729,7 +3729,7 @@ lbl_fn_80012D34_00003000:
     bl mtx_multVec
     addi r3, r1, 0x104
     addi r4, r1, 0xf8
-    bl fn_80012C88
+    bl vec3_addAssign
     mr r4, r31
     addi r3, r1, 0x20
     bl mtx_getTranslation
@@ -3770,7 +3770,7 @@ lbl_fn_80012D34_000030D0:
 lbl_fn_80012D34_00003120:
     mr r4, r28
     addi r3, r1, 0xe0
-    bl fn_80012C88
+    bl vec3_addAssign
     lis r4, lbl_807C7030@ha
     mr r3, r30
     addi r4, r4, lbl_807C7030@l

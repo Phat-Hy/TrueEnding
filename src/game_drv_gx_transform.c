@@ -24,7 +24,7 @@ extern void GXInitTexObjDefault(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
-extern void fn_806174C0(void);
+extern void GXSetTevIndTile(void);
 extern void fn_80617520(void);
 extern void GXSetTevSwapMode(void);
 extern void GXSetTevSwapModeTable(void);
@@ -953,7 +953,7 @@ lbl_fn_805D9830_00000A00:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x1
     li r4, 0xff
     li r5, 0xff
@@ -984,7 +984,7 @@ lbl_fn_805D9830_00000A00:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_806174C0
+    bl GXSetTevIndTile
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
