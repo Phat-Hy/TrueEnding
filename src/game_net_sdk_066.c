@@ -12,7 +12,7 @@ extern void _savegpr_16(void);
 extern void _savegpr_20(void);
 extern void _savegpr_21(void);
 extern void _savegpr_27(void);
-extern void fn_80695B00(void);
+extern void __ptmf_scall(void);
 extern void fn_80726B50(void);
 extern void fn_80727600(void);
 extern void fn_80727660(void);
@@ -1097,7 +1097,7 @@ lbl_fn_807293C0_00000F20:
     stfs f1, 0x60(r1)
     stfs f0, 0x74(r1)
     stw r21, 0x98(r1)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lfs f29, lbl_8088937C
     mr r26, r3
@@ -1353,7 +1353,7 @@ lbl_fn_807293C0_000012E4:
 lbl_fn_807293C0_000012F0:
     addi r3, r1, 0x98
     addi r12, r1, 0x9c
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     mr r26, r3
 lbl_fn_807293C0_00001304:
@@ -1559,7 +1559,7 @@ asm void fn_80729AE0(void)
     stw r23, 0x48(r1)
     addi r3, r1, 0x48
     addi r12, r1, 0x4c
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lfs f29, lbl_8088937C
     mr r26, r3
@@ -1967,7 +1967,7 @@ lbl_fn_80729AE0_00001BB8:
 lbl_fn_80729AE0_00001BC4:
     addi r3, r1, 0x48
     addi r12, r1, 0x4c
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     mr r26, r3
 lbl_fn_80729AE0_00001BD8:

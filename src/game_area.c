@@ -30,7 +30,7 @@ extern void fn_800C4E50(void);
 extern void atn_LH_Texture_release(void);
 extern void atn_LH_Texture_update(void);
 extern void fn_800D87C4(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void atn_LoadHandle_constructor(void);
@@ -39,8 +39,8 @@ extern void atn_LoadHandle_getStatus(void);
 extern void fn_80473F88(void);
 extern void strcmp(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -685,7 +685,7 @@ lbl_fn_800899DC_000006E0:
     addi r4, r4, fn_80016F48@l
     li r5, 0x8
     li r6, 0x4
-    bl fn_806959D8
+    bl __destroy_new_array
     cmpwi r28, 0x0
     beq lbl_fn_800899DC_0000071C
     lwz r3, 0x4(r28)
@@ -1100,7 +1100,7 @@ asm void fn_80089EE4(void)
     stfs f31, 0xc(r1)
     stfs f1, 0x10(r1)
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r8, r3
     mr r3, r30
     addi r4, r1, 0x30
@@ -1513,7 +1513,7 @@ asm void fn_8008A4E0(void)
     li r6, 0x8
     li r7, 0x4
     stw r31, 0x108(r29)
-    bl fn_806958E0
+    bl __construct_new_array
     lfs f1, lbl_80880C00
     lis r4, fn_80089C28@ha
     lfs f0, lbl_80880BF8
@@ -1537,7 +1537,7 @@ asm void fn_8008A4E0(void)
     stfs f1, 0x158(r29)
     stw r31, 0x15c(r29)
     stw r31, 0x160(r29)
-    bl fn_806958E0
+    bl __construct_new_array
     addi r30, r29, 0x1c4
     mr r3, r30
     bl atn_LoadHandle_constructor
@@ -1686,7 +1686,7 @@ lbl_fn_8008A76C_000014CC:
     addi r4, r4, fn_80089CE4@l
     li r5, 0x18
     li r6, 0x4
-    bl fn_806959D8
+    bl __destroy_new_array
     addic. r0, r30, 0x144
     beq lbl_fn_8008A76C_00001508
     lwz r3, 0x148(r30)
@@ -1741,7 +1741,7 @@ lbl_fn_8008A76C_00001588:
     addi r4, r4, fn_80016F48@l
     li r5, 0x8
     li r6, 0x4
-    bl fn_806959D8
+    bl __destroy_new_array
     cmpwi r29, 0x0
     beq lbl_fn_8008A76C_000015C4
     lwz r3, 0x4(r29)
@@ -1978,7 +1978,7 @@ lbl_fn_8008AA90_000018B0:
     addi r4, r4, fn_80016F48@l
     li r5, 0x8
     li r6, 0x4
-    bl fn_806959D8
+    bl __destroy_new_array
     cmpwi r30, 0x0
     beq lbl_fn_8008AA90_000018EC
     lwz r3, 0x4(r30)
@@ -2027,7 +2027,7 @@ lbl_fn_8008AA90_00001958:
     addi r4, r4, fn_80016F48@l
     li r5, 0x8
     li r6, 0x4
-    bl fn_806959D8
+    bl __destroy_new_array
     cmpwi r30, 0x0
     beq lbl_fn_8008AA90_00001994
     lwz r3, 0x4(r30)

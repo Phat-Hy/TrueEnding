@@ -12,7 +12,7 @@ extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800DC1DC(void);
+extern void wcs_parseInt(void);
 extern void fn_80206B9C(void);
 extern void assert_formatLocation(void);
 extern void fn_8020EF04(void);
@@ -2757,7 +2757,7 @@ lbl_fn_802150F0_0000254C:
     beq lbl_fn_802150F0_000025B0
     lwz r0, lbl_8087F268
     add r20, r0, r19
-    bl fn_800DC1DC
+    bl wcs_parseInt
     stw r3, 0x0(r20)
     addi r3, r1, 0x1c
     bl talk_parseDialogue
@@ -2768,7 +2768,7 @@ lbl_fn_802150F0_0000254C:
     bl talk_parseDialogue
     addi r3, r1, 0x1c
     bl talk_parseDialogue
-    bl fn_800DC1DC
+    bl wcs_parseInt
     stw r3, 0x84(r20)
     addi r19, r19, 0x88
 lbl_fn_802150F0_000025B0:

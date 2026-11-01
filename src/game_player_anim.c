@@ -23,9 +23,9 @@ extern void fn_8017BC4C(void);
 extern void PSVECMag(void);
 extern void fn_805F99F0(void);
 extern void strcmp(void);
-extern void fn_806958E0(void);
-extern void fn_80695A50(void);
-extern void fn_80695B00(void);
+extern void __construct_new_array(void);
+extern void __destroy_arr(void);
+extern void __ptmf_scall(void);
 extern void fn_8072D210(void);
 
 /* External data declarations */
@@ -546,7 +546,7 @@ asm void fn_8011D24C(void)
     mr r30, r3
     stw r31, 0x0(r3)
     addi r3, r3, 0x4
-    bl fn_806958E0
+    bl __construct_new_array
     lis r4, fn_8011D410@ha
     lis r5, fn_8000D7DC@ha
     addi r3, r30, 0x44
@@ -554,7 +554,7 @@ asm void fn_8011D24C(void)
     addi r4, r4, fn_8011D410@l
     addi r5, r5, fn_8000D7DC@l
     li r7, 0x2
-    bl fn_806958E0
+    bl __construct_new_array
     lfs f1, lbl_808817C0
     mr r3, r30
     lfs f0, lbl_808817C4
@@ -647,7 +647,7 @@ asm void fn_8011D394(void)
     beq lbl_fn_8011D394_000007A8
     lis r4, fn_8011D320@ha
     addi r4, r4, fn_8011D320@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8011D394_000007A8:
     li r0, 0x0
     stw r0, 0x18(r30)
@@ -917,7 +917,7 @@ asm void fn_8011D760(void)
     mr r12, r3
     stw r0, 0x14(r1)
     lwz r3, 0xc(r3)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0

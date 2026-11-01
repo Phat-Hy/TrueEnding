@@ -51,8 +51,8 @@ extern void rand(void);
 extern void strcmp(void);
 extern void wcslen(void);
 extern void wcscpy(void);
-extern void fn_806959D8(void);
-extern void fn_80695B00(void);
+extern void __destroy_new_array(void);
+extern void __ptmf_scall(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -304,7 +304,7 @@ asm void fn_80562AA0(void)
     mr r12, r3
     stw r0, 0x14(r1)
     lwz r3, 0xc(r3)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0
@@ -1466,24 +1466,24 @@ lbl_fn_805638C0_00001058:
     addi r4, r31, fn_80563800@l
     li r5, 0x64
     li r6, 0x4
-    bl fn_806959D8
+    bl __destroy_new_array
     addi r3, r30, 0xc20
     addi r4, r31, fn_80563800@l
     li r5, 0x64
     li r6, 0x8
-    bl fn_806959D8
+    bl __destroy_new_array
     lis r4, fn_80563840@ha
     addi r3, r30, 0x440
     addi r4, r4, fn_80563840@l
     li r5, 0x54
     li r6, 0x18
-    bl fn_806959D8
+    bl __destroy_new_array
     lis r4, fn_80563880@ha
     mr r3, r30
     addi r4, r4, fn_80563880@l
     li r5, 0x44
     li r6, 0x10
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r30
     bl dtor_80084684
 lbl_fn_805638C0_000010E0:

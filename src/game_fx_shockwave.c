@@ -22,7 +22,7 @@ extern void fn_800897D8(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800DB3EC(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800EC204(void);
 extern void system_getNextSequenceId(void);
@@ -69,7 +69,7 @@ extern void fn_8035B694(void);
 extern void fn_8035B78C(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_803C1560(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -84,8 +84,8 @@ extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
 extern void fn_8068B100(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -469,7 +469,7 @@ asm void fn_80293738(void)
     stw r28, 0x14c8(r29)
     stw r28, 0x14cc(r29)
     stw r28, 0x14d0(r29)
-    bl fn_806958E0
+    bl __construct_new_array
     lfs f0, lbl_80883BE8
     addi r3, r29, 0x15bc
     stw r28, 0x151c(r29)
@@ -897,7 +897,7 @@ lbl_fn_80293BC8_00000A74:
     addi r4, r4, fn_8000D760@l
     li r5, 0xc
     li r6, 0x2
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
     bl fn_8035B78C
@@ -1031,7 +1031,7 @@ lbl_fn_80293E30_00000C54:
     bne lbl_fn_80293E30_00000C7C
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x167c(r27)
     b lbl_fn_80293E30_000012B8
 lbl_fn_80293E30_00000C7C:
@@ -1042,7 +1042,7 @@ lbl_fn_80293E30_00000C7C:
     bne lbl_fn_80293E30_00000CA4
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1680(r27)
     b lbl_fn_80293E30_000012B8
 lbl_fn_80293E30_00000CA4:
@@ -1053,7 +1053,7 @@ lbl_fn_80293E30_00000CA4:
     bne lbl_fn_80293E30_00000CCC
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1684(r27)
     b lbl_fn_80293E30_000012B8
 lbl_fn_80293E30_00000CCC:
@@ -1064,7 +1064,7 @@ lbl_fn_80293E30_00000CCC:
     bne lbl_fn_80293E30_00000CF4
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1688(r27)
     b lbl_fn_80293E30_000012B8
 lbl_fn_80293E30_00000CF4:
@@ -1086,7 +1086,7 @@ lbl_fn_80293E30_00000D1C:
     bne lbl_fn_80293E30_00000D44
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1694(r27)
     b lbl_fn_80293E30_000012B8
 lbl_fn_80293E30_00000D44:
@@ -1097,7 +1097,7 @@ lbl_fn_80293E30_00000D44:
     bne lbl_fn_80293E30_00000D6C
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1690(r27)
     b lbl_fn_80293E30_000012B8
 lbl_fn_80293E30_00000D6C:
@@ -1108,7 +1108,7 @@ lbl_fn_80293E30_00000D6C:
     bne lbl_fn_80293E30_00000D94
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1698(r27)
     b lbl_fn_80293E30_000012B8
 lbl_fn_80293E30_00000D94:
@@ -1119,7 +1119,7 @@ lbl_fn_80293E30_00000D94:
     bne lbl_fn_80293E30_00000DBC
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x169c(r27)
     b lbl_fn_80293E30_000012B8
 lbl_fn_80293E30_00000DBC:
@@ -1130,7 +1130,7 @@ lbl_fn_80293E30_00000DBC:
     bne lbl_fn_80293E30_00000DE4
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x16a0(r27)
     b lbl_fn_80293E30_000012B8
 lbl_fn_80293E30_00000DE4:
@@ -1141,7 +1141,7 @@ lbl_fn_80293E30_00000DE4:
     bne lbl_fn_80293E30_00000E0C
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x16a4(r27)
     b lbl_fn_80293E30_000012B8
 lbl_fn_80293E30_00000E0C:
@@ -1152,7 +1152,7 @@ lbl_fn_80293E30_00000E0C:
     bne lbl_fn_80293E30_00000E34
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x16a8(r27)
     b lbl_fn_80293E30_000012B8
 lbl_fn_80293E30_00000E34:
@@ -1163,7 +1163,7 @@ lbl_fn_80293E30_00000E34:
     bne lbl_fn_80293E30_00000E5C
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x16ac(r27)
     b lbl_fn_80293E30_000012B8
 lbl_fn_80293E30_00000E5C:
@@ -1220,7 +1220,7 @@ lbl_fn_80293E30_00000EFC:
 lbl_fn_80293E30_00000F14:
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1c(r1)
     addi r3, r27, 0x1504
     addi r4, r1, 0x1c
@@ -1239,7 +1239,7 @@ lbl_fn_80293E30_00000F40:
 lbl_fn_80293E30_00000F58:
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x18(r1)
     addi r3, r27, 0x1510
     addi r4, r1, 0x18
@@ -1295,7 +1295,7 @@ lbl_fn_80293E30_0000100C:
 lbl_fn_80293E30_00001020:
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r28, r3
     mr r3, r29
     mr r4, r28
@@ -1320,7 +1320,7 @@ lbl_fn_80293E30_00001060:
 lbl_fn_80293E30_00001078:
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x8(r1)
     addi r3, r27, 0x1570
     addi r4, r1, 0x8
@@ -1337,7 +1337,7 @@ lbl_fn_80293E30_000010A4:
     bne lbl_fn_80293E30_000010EC
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r4, r3
     mr r3, r29
     bl fn_800EC204
@@ -2083,7 +2083,7 @@ lbl_fn_802946BC_00001B60:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_802946BC_00001B9C
-    bl fn_80373148
+    bl kpad_getClampData
     mr r27, r3
     b lbl_fn_802946BC_00001BA0
 lbl_fn_802946BC_00001B9C:

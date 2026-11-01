@@ -47,7 +47,7 @@ extern void fn_805BB658(void);
 extern void PSVECSquareMag(void);
 extern void printf(void);
 extern void abort(void);
-extern void fn_806958E0(void);
+extern void __construct_new_array(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -1472,7 +1472,7 @@ asm void fn_805B9FC8(void)
     addi r4, r4, fn_805BA11C@l
     addi r5, r5, fn_805B9ECC@l
     li r7, 0x4
-    bl fn_806958E0
+    bl __construct_new_array
     addi r29, r28, 0x5a4
     mr r3, r29
     bl atn_LoadHandle_constructor

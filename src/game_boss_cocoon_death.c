@@ -20,7 +20,7 @@ extern void route_interpolatePath(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800C3094(void);
 extern void fn_800C3124(void);
 extern void fn_800C31F4(void);
@@ -71,7 +71,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_806959D8(void);
+extern void __destroy_new_array(void);
 
 /* External data declarations */
 extern u8 lbl_80755018[];
@@ -1210,7 +1210,7 @@ lbl_fn_80468D48_00000ED8:
     addi r4, r4, atn_ColliCapsule_destructor@l
     li r5, 0x58
     li r6, 0x5
-    bl fn_806959D8
+    bl __destroy_new_array
     addic. r29, r30, 0x1504
     beq lbl_fn_80468D48_00000FAC
     addic. r4, r29, 0x44
@@ -1718,7 +1718,7 @@ lbl_fn_80469494_000015DC:
     li r4, 0x0
     li r5, 0x4
     mr r3, r31
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80469494_00001658
     lis r3, lbl_80755310@ha
@@ -1742,7 +1742,7 @@ lbl_fn_80469494_00001658:
     mr r3, r31
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80469494_000016E8
     addi r3, r1, 0x8

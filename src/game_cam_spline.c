@@ -44,7 +44,7 @@ extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getName(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -200,7 +200,7 @@ asm void fn_800EF8DC(void)
     beq lbl_fn_800EF8DC_0000016C
     lis r4, fn_800EF7F8@ha
     addi r4, r4, fn_800EF7F8@l
-    bl fn_80695A50
+    bl __destroy_arr
     li r0, 0x0
     stw r0, lbl_8087F030
     stw r0, lbl_8087F034

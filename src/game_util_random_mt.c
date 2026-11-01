@@ -33,7 +33,7 @@ extern void fn_8017BC4C(void);
 extern void fn_8035B694(void);
 extern void fn_8035B78C(void);
 extern void fn_803605EC(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_8037D4C0(void);
 extern void fn_803CE160(void);
 extern void atn_LoadHandle_constructor(void);
@@ -819,7 +819,7 @@ lbl_fn_805A38F4_00000978:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_805A38F4_00000990
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     bne lbl_fn_805A38F4_000009B0
 lbl_fn_805A38F4_00000990:

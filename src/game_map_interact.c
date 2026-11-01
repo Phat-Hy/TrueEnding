@@ -59,9 +59,9 @@ extern void rand(void);
 extern void strcmp(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
-extern void fn_80695A50(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
+extern void __destroy_arr(void);
 extern void runtime_clampDouble(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -182,13 +182,13 @@ asm void fn_80183AAC(void)
     addi r4, r4, fn_80041C0C@l
     li r6, 0x3
     addi r3, r3, 0x10
-    bl fn_806959D8
+    bl __destroy_new_array
     lis r4, fn_802375C4@ha
     addi r3, r30, 0x4
     addi r4, r4, fn_802375C4@l
     li r5, 0xc
     li r6, 0x1
-    bl fn_806959D8
+    bl __destroy_new_array
     cmpwi r31, 0x0
     ble lbl_fn_80183AAC_00000064
     mr r3, r30
@@ -241,7 +241,7 @@ lbl_fn_80183B2C_000000E4:
     beq lbl_fn_80183B2C_00000108
     lis r4, fn_80183AAC@ha
     addi r4, r4, fn_80183AAC@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80183B2C_00000108:
     li r0, 0x0
     stw r0, 0x54(r28)
@@ -264,7 +264,7 @@ lbl_fn_80183B2C_0000013C:
     beq lbl_fn_80183B2C_0000015C
     lis r4, fn_80183AAC@ha
     addi r4, r4, fn_80183AAC@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80183B2C_0000015C:
     li r0, 0x0
     stw r0, 0x54(r28)
@@ -384,13 +384,13 @@ lbl_fn_80183D00_000002A0:
     beq lbl_fn_80183D00_000002C4
     lis r4, fn_80183AAC@ha
     addi r4, r4, fn_80183AAC@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80183D00_000002C4:
     li r0, 0x0
     stw r0, 0x54(r31)
     stw r0, 0x50(r31)
     b lbl_fn_80183D00_000002D8
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80183D00_000002D8:
     li r0, 0x21
     stw r0, 0x50(r31)
@@ -447,7 +447,7 @@ lbl_fn_80183D00_0000037C:
     beq lbl_fn_80183D00_000003A0
     lis r4, fn_80183AAC@ha
     addi r4, r4, fn_80183AAC@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80183D00_000003A0:
     li r0, 0x0
     stw r0, 0x54(r31)
@@ -459,7 +459,7 @@ lbl_fn_80183D00_000003A0:
     beq lbl_fn_80183D00_000003CC
     lis r4, fn_80183AAC@ha
     addi r4, r4, fn_80183AAC@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80183D00_000003CC:
     li r0, 0x10
     stw r0, 0x50(r31)
@@ -555,7 +555,7 @@ asm void fn_80183F88(void)
     li r7, 0x1
     stw r0, 0x0(r3)
     addi r3, r3, 0x4
-    bl fn_806958E0
+    bl __construct_new_array
     lis r4, fn_80042740@ha
     lis r5, fn_80041C0C@ha
     addi r3, r31, 0x10
@@ -563,7 +563,7 @@ asm void fn_80183F88(void)
     addi r4, r4, fn_80042740@l
     addi r5, r5, fn_80041C0C@l
     li r7, 0x3
-    bl fn_806958E0
+    bl __construct_new_array
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -1476,7 +1476,7 @@ asm void fn_80184C30(void)
     addi r4, r4, fn_800C1A1C@l
     addi r5, r5, fn_800C1FB4@l
     li r7, 0x4
-    bl fn_806958E0
+    bl __construct_new_array
     lfs f1, lbl_80881CFC
     li r0, 0x1
     stw r0, 0xb78(r30)

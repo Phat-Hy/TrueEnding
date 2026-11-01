@@ -14,7 +14,7 @@ extern void fn_8000DD0C(void);
 extern void fn_8001047C(void);
 extern void vec3_sub(void);
 extern void fn_800133B0(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_8012A190(void);
 extern void fn_8012A1B8(void);
 extern void fn_80139F2C(void);
@@ -217,7 +217,7 @@ lbl_fn_804E651C_000001B4:
     li r29, -0x1
     li r4, 0x0
     li r5, 0x0
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_804E651C_000001E8
     lwz r3, lbl_8087F9C0
@@ -230,7 +230,7 @@ lbl_fn_804E651C_000001E8:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x1
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_804E651C_00000218
     lwz r3, lbl_8087F9C0
@@ -243,7 +243,7 @@ lbl_fn_804E651C_00000218:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x2
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_804E651C_00000238
     li r29, 0x1
@@ -252,7 +252,7 @@ lbl_fn_804E651C_00000238:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x3
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_804E651C_00000254
     li r29, 0x2

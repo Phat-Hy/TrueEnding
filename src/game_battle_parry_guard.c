@@ -72,8 +72,8 @@ extern void PSMTXMultVec(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -373,7 +373,7 @@ asm void fn_80412B80(void)
     li r6, 0x3d0
     li r7, 0x8
     stw r30, 0xf8(r31)
-    bl fn_806958E0
+    bl __construct_new_array
     addi r5, r31, 0x1fb0
     addi r3, r31, 0x203c
     lfs f1, lbl_80886410
@@ -410,7 +410,7 @@ lbl_fn_80412B80_00000398:
     addi r4, r4, fn_80412D94@l
     addi r5, r5, fn_80412DA8@l
     li r7, 0x8
-    bl fn_806958E0
+    bl __construct_new_array
     lis r4, fn_80412E5C@ha
     lis r5, fn_80412EA0@ha
     addi r3, r31, 0x209c
@@ -418,7 +418,7 @@ lbl_fn_80412B80_00000398:
     addi r4, r4, fn_80412E5C@l
     addi r5, r5, fn_80412EA0@l
     li r7, 0x8
-    bl fn_806958E0
+    bl __construct_new_array
     addi r6, r31, 0x2124
     addi r3, r31, 0x215c
     cmplw r6, r3
@@ -467,7 +467,7 @@ lbl_fn_80412B80_0000045C:
     stb r30, 0x2284(r31)
     li r6, 0x8
     li r7, 0x8
-    bl fn_806958E0
+    bl __construct_new_array
     lis r4, fn_80412F18@ha
     lis r5, fn_803F1E18@ha
     addi r3, r31, 0x2304
@@ -475,7 +475,7 @@ lbl_fn_80412B80_0000045C:
     addi r4, r4, fn_80412F18@l
     addi r5, r5, fn_803F1E18@l
     li r7, 0x8
-    bl fn_806958E0
+    bl __construct_new_array
     stw r30, 0x54(r31)
     addi r3, r31, 0x1f7c
     li r4, 0x0
@@ -655,31 +655,31 @@ asm void fn_80412F28(void)
     addi r4, r4, fn_803F1E18@l
     li r6, 0x8
     addi r3, r3, 0x2304
-    bl fn_806959D8
+    bl __destroy_new_array
     lis r4, fn_803F1DA4@ha
     addi r3, r30, 0x22c4
     addi r4, r4, fn_803F1DA4@l
     li r5, 0x8
     li r6, 0x8
-    bl fn_806959D8
+    bl __destroy_new_array
     lis r4, fn_80412EA0@ha
     addi r3, r30, 0x209c
     addi r4, r4, fn_80412EA0@l
     li r5, 0x10
     li r6, 0x8
-    bl fn_806959D8
+    bl __destroy_new_array
     lis r4, fn_80412DA8@ha
     addi r3, r30, 0x203c
     addi r4, r4, fn_80412DA8@l
     li r5, 0xc
     li r6, 0x8
-    bl fn_806959D8
+    bl __destroy_new_array
     lis r4, fn_800971D4@ha
     addi r3, r30, 0xfc
     addi r4, r4, fn_800971D4@l
     li r5, 0x3d0
     li r6, 0x8
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
     bl fn_803EC69C

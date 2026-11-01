@@ -18,7 +18,7 @@ extern void strcmp(void);
 extern void atoi(void);
 extern void wcscpy(void);
 extern void fn_8068B100(void);
-extern void fn_806958E0(void);
+extern void __construct_new_array(void);
 extern void fn_80699E24(void);
 extern void fn_80699E2C(void);
 extern void fn_80699E30(void);
@@ -1903,7 +1903,7 @@ asm void fn_80508B78(void)
     stw r29, 0xbc(r3)
     stw r29, 0xc8(r3)
     addi r3, r3, 0xd8
-    bl fn_806958E0
+    bl __construct_new_array
     addi r3, r26, 0x200
     bl fn_8050E680
     stw r29, 0x270(r26)

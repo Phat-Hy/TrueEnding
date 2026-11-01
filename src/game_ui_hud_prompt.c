@@ -29,7 +29,7 @@ extern void fn_801C3414(void);
 extern void fn_801C3458(void);
 extern void task_findEntryById(void);
 extern void world_getGlobalFlag(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_80375184(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
@@ -1984,12 +1984,12 @@ lbl_fn_801CA1E0_00001A98:
     cmpwi r0, 0x0
     bne lbl_fn_801CA1E0_00001AF8
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x4c(r3)
     cmpwi r0, 0x28
     bne lbl_fn_801CA1E0_00001AF8
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x50(r3)
     cmpwi r0, 0x8
     bne lbl_fn_801CA1E0_00001AF8
@@ -2011,12 +2011,12 @@ lbl_fn_801CA1E0_00001AF8:
     cmpwi r0, 0x0
     bne lbl_fn_801CA1E0_00001BE0
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x4c(r3)
     cmpwi r0, 0x28
     bne lbl_fn_801CA1E0_00001BE0
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x50(r3)
     cmpwi r0, 0x8
     bne lbl_fn_801CA1E0_00001BE0

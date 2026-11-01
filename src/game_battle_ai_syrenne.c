@@ -55,8 +55,8 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void rand(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 
 /* External data declarations */
 extern u8 lbl_807541A0[];
@@ -1710,7 +1710,7 @@ asm void fn_80435CE4(void)
     addi r4, r4, res_MsgHandle_constructor@l
     addi r5, r5, fn_800EF73C@l
     li r7, 0x3
-    bl fn_806958E0
+    bl __construct_new_array
     li r5, 0x1
     stw r5, 0x32c(r31)
     lfs f0, lbl_808868C8
@@ -1784,7 +1784,7 @@ asm void fn_80435DEC(void)
     addi r4, r4, res_MsgHandle_constructor@l
     addi r5, r5, fn_800EF73C@l
     li r7, 0x3
-    bl fn_806958E0
+    bl __construct_new_array
     li r5, 0x1
     stw r5, 0x32c(r31)
     lfs f0, lbl_808868C8
@@ -1870,7 +1870,7 @@ lbl_fn_80435F58_000019A0:
     addi r4, r4, fn_800EF73C@l
     li r5, 0xc
     li r6, 0x3
-    bl fn_806959D8
+    bl __destroy_new_array
     addi r3, r30, 0xf4
     li r4, -0x1
     bl fn_8008A76C

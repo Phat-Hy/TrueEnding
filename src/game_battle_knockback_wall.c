@@ -100,8 +100,8 @@ extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern char* strcpy(char* dest, const char* src);
 
 /* External data declarations */
@@ -1453,7 +1453,7 @@ asm void fn_80416F74(void)
     addi r4, r4, fn_80417098@l
     addi r5, r5, fn_804170D8@l
     li r7, 0x8
-    bl fn_806958E0
+    bl __construct_new_array
     addi r3, r28, 0x242c
     bl res_MsgHandle_constructor
     addi r3, r28, 0x2438
@@ -1465,13 +1465,13 @@ asm void fn_80416F74(void)
     addi r4, r30, res_MsgHandle_constructor@l
     addi r5, r31, fn_800EF73C@l
     li r7, 0x3
-    bl fn_806958E0
+    bl __construct_new_array
     addi r3, r28, 0x2468
     addi r4, r30, res_MsgHandle_constructor@l
     addi r5, r31, fn_800EF73C@l
     li r6, 0xc
     li r7, 0x3
-    bl fn_806958E0
+    bl __construct_new_array
     stw r29, 0x54(r28)
 lbl_fn_80416F74_0000122C:
     mr r3, r28
@@ -1556,12 +1556,12 @@ asm void fn_80417130(void)
     addi r4, r31, fn_800EF73C@l
     li r6, 0x3
     addi r3, r3, 0x2468
-    bl fn_806959D8
+    bl __destroy_new_array
     addi r3, r29, 0x2444
     addi r4, r31, fn_800EF73C@l
     li r5, 0xc
     li r6, 0x3
-    bl fn_806959D8
+    bl __destroy_new_array
     addic. r31, r29, 0x2438
     beq lbl_fn_80417130_00001364
     mr r3, r31
@@ -1585,7 +1585,7 @@ lbl_fn_80417130_00001384:
     addi r4, r4, fn_804170D8@l
     li r5, 0x3ec
     li r6, 0x8
-    bl fn_806959D8
+    bl __destroy_new_array
     addi r3, r29, 0xfc
     li r4, -0x1
     bl fn_800971D4

@@ -10,7 +10,7 @@ extern void fn_80042740(void);
 extern void mem_realloc(void);
 extern void fn_800928B0(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800A5584(void);
 extern void fn_800A55AC(void);
 extern void fn_800A55D4(void);
@@ -35,7 +35,7 @@ extern void res_findResourceSlot(void);
 extern void fn_8023A680(void);
 extern void res_registerResource(void);
 extern void world_getGlobalFlag(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -46,7 +46,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void strncmp(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -185,7 +185,7 @@ lbl_fn_80120D44_000000DC:
     lis r4, fn_800EF73C@ha
     lwz r3, 0x8(r25)
     addi r4, r4, fn_800EF73C@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80120D44_000000F4:
     stw r30, 0x8(r25)
     stw r26, 0x0(r25)
@@ -271,7 +271,7 @@ lbl_fn_80120E48_000001F0:
     lis r4, fn_80041C0C@ha
     lwz r3, 0x8(r24)
     addi r4, r4, fn_80041C0C@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80120E48_00000208:
     stw r29, 0x8(r24)
     stw r25, 0x0(r24)
@@ -697,11 +697,11 @@ lbl_fn_8012133C_00000780:
     li r21, 0x0
     cmpwi r3, 0x0
     beq lbl_fn_8012133C_000007DC
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_8012133C_000007DC
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r4, 0x48(r3)
     subi r0, r4, 0x2
     cmplwi r0, 0x2
@@ -1480,7 +1480,7 @@ lbl_fn_80121F08_00001280:
     lwz r3, lbl_8087EF70
     mr r5, r31
     li r4, 0x0
-    bl fn_800A555C
+    bl msg_getMessageById
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31

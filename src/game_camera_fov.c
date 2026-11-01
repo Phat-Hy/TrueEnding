@@ -25,7 +25,7 @@ extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800E0AA8(void);
 extern void fn_800E0AB0(void);
@@ -706,7 +706,7 @@ lbl_fn_802DE27C_000007E0:
 lbl_fn_802DE27C_000007FC:
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r28, r3
     bl fn_80121F00
     bl fn_8013C504
@@ -741,7 +741,7 @@ lbl_fn_802DE27C_00000864:
 lbl_fn_802DE27C_0000087C:
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     cmpwi r3, 0x0
     stw r3, 0x14(r1)
     beq lbl_fn_802DE27C_000008A0
@@ -762,7 +762,7 @@ lbl_fn_802DE27C_000008B0:
 lbl_fn_802DE27C_000008C4:
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r28, r3
     bl fn_801A03E0
     mr r4, r28
@@ -788,7 +788,7 @@ lbl_fn_802DE27C_0000090C:
 lbl_fn_802DE27C_00000920:
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r28, r3
     bl fn_801A03E0
     mr r4, r28
@@ -814,7 +814,7 @@ lbl_fn_802DE27C_00000968:
 lbl_fn_802DE27C_0000097C:
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r28, r3
     bl fn_80121F00
     bl fn_8013C504
@@ -860,7 +860,7 @@ lbl_fn_802DE27C_000009E0:
     ble lbl_fn_802DE27C_00000A44
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x24(r1)
     addi r3, r31, 0x1638
     addi r4, r1, 0x20
@@ -879,7 +879,7 @@ lbl_fn_802DE27C_00000A58:
     bne lbl_fn_802DE27C_00000A9C
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r28, r3
     bl fn_80121F00
     bl fn_8013C504
@@ -897,7 +897,7 @@ lbl_fn_802DE27C_00000A9C:
     bne lbl_fn_802DE27C_00000AC4
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1500(r31)
     b lbl_fn_802DE27C_00000B84
 lbl_fn_802DE27C_00000AC4:
@@ -908,7 +908,7 @@ lbl_fn_802DE27C_00000AC4:
     bne lbl_fn_802DE27C_00000AEC
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x155c(r31)
     b lbl_fn_802DE27C_00000B84
 lbl_fn_802DE27C_00000AEC:

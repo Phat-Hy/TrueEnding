@@ -32,7 +32,7 @@ extern void world_getGlobalFlag(void);
 extern void world_getLocalFlag(void);
 extern void world_reloadMapTransition(void);
 extern void fn_80371334(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_8039BF04(void);
 extern void fn_803CAABC(void);
 extern void fn_803EBAC8(void);
@@ -231,21 +231,21 @@ lbl_fn_8039FBFC_00000144:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_8039FBFC_00000428
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_8039FBFC_00000428
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x48(r3)
     cmpwi r0, 0x2
     bne lbl_fn_8039FBFC_00000428
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x4c(r3)
     cmpwi r0, 0x43
     bne lbl_fn_8039FBFC_00000428
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x50(r3)
     cmpwi r0, 0x1
     bne lbl_fn_8039FBFC_00000428

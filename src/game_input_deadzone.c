@@ -14,7 +14,7 @@ extern void fn_8004D388(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800A55D4(void);
 extern void fn_800A56A8(void);
 extern void fn_800F52F8(void);
@@ -899,7 +899,7 @@ lbl_fn_802EF5FC_00000AAC:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_802EF5FC_00000B4C
     mr r3, r31
@@ -1188,7 +1188,7 @@ lbl_fn_802EF5FC_00000F4C:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_802EF5FC_00000F7C
     mr r3, r31
@@ -1199,7 +1199,7 @@ lbl_fn_802EF5FC_00000F7C:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x9
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_802EF5FC_00000FB8
     lwz r3, lbl_8087F430

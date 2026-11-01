@@ -39,7 +39,7 @@ extern void fn_8022526C(void);
 extern void fn_805381B0(void);
 extern void fn_805392C0(void);
 extern void fn_805411E0(void);
-extern void fn_806959D8(void);
+extern void __destroy_new_array(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -1905,7 +1905,7 @@ asm void fn_8022513C(void)
     li r5, 0x10
     addi r4, r4, fn_80225158@l
     li r6, 0x6
-    b fn_806959D8
+    b __destroy_new_array
 }
 
 asm void fn_80225158(void)
@@ -1950,7 +1950,7 @@ asm void fn_802251C0(void)
     li r5, 0x10
     addi r4, r4, fn_80225158@l
     li r6, 0x6
-    b fn_806959D8
+    b __destroy_new_array
 }
 
 asm void fn_802251DC(void)
@@ -1962,7 +1962,7 @@ asm void fn_802251DC(void)
     li r5, 0x10
     addi r4, r4, fn_80225158@l
     li r6, 0xa
-    b fn_806959D8
+    b __destroy_new_array
 }
 
 asm void fn_802251F8(void)

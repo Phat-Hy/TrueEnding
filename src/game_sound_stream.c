@@ -8,10 +8,10 @@ extern void _restgpr_26(void);
 extern void _savegpr_15(void);
 extern void _savegpr_22(void);
 extern void _savegpr_26(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_80116FC0(void);
 extern void fn_80117214(void);
 extern void actor_spawnActorWithId(void);
@@ -101,7 +101,7 @@ asm void fn_801D59A8(void)
     mr r30, r3
     lwz r31, lbl_8087EF70
     mr r3, r31
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801D59A8_00000068
     addi r3, r1, 0x10
@@ -121,7 +121,7 @@ lbl_fn_801D59A8_00000068:
     mr r3, r31
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801D59A8_000000CC
     addi r3, r1, 0xc
@@ -262,7 +262,7 @@ lbl_fn_801D5AB0_0000025C:
     li r4, 0x0
     li r5, 0x4
     mr r3, r27
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801D5AB0_000003DC
     mr r3, r31
@@ -362,7 +362,7 @@ lbl_fn_801D5AB0_000003DC:
     mr r3, r27
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801D5AB0_00000440
     addi r3, r1, 0x14
@@ -388,7 +388,7 @@ lbl_fn_801D5AB0_00000440:
     mr r3, r27
     li r4, 0x0
     li r5, 0xc
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801D5AB0_0000049C
     li r0, 0x0
@@ -412,7 +412,7 @@ lbl_fn_801D5AB0_0000049C:
     mr r3, r27
     li r4, 0x0
     li r5, 0xd
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801D5AB0_000004F8
     li r0, 0x1
@@ -541,7 +541,7 @@ lbl_fn_801D5F04_00000668:
     li r4, 0x0
     li r5, 0x4
     mr r3, r30
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801D5F04_00000724
     mr r3, r31
@@ -589,7 +589,7 @@ lbl_fn_801D5F04_00000724:
     mr r3, r30
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801D5F04_00000788
     addi r3, r1, 0xc
@@ -650,7 +650,7 @@ asm void fn_801D6188(void)
     mr r31, r3
     lwz r23, lbl_8087EF70
     mr r3, r23
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801D6188_0000096C
     lwz r0, 0x7c(r31)
@@ -751,7 +751,7 @@ lbl_fn_801D6188_0000096C:
     mr r3, r23
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801D6188_000009B8
     lwz r12, 0x0(r31)
@@ -797,7 +797,7 @@ asm void fn_801D6390(void)
     stw r29, 0x24(r1)
     lwz r29, lbl_8087EF70
     mr r3, r29
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801D6390_00000B34
     lwz r0, 0x7c(r31)
@@ -881,7 +881,7 @@ lbl_fn_801D6390_00000B34:
     mr r3, r29
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801D6390_00000B80
     lwz r12, 0x0(r31)
@@ -927,7 +927,7 @@ asm void fn_801D6560(void)
     mr r29, r3
     lwz r26, lbl_8087EF70
     mr r3, r26
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801D6560_00000CFC
     lwz r0, 0x137c(r29)
@@ -1008,7 +1008,7 @@ lbl_fn_801D6560_00000CFC:
     mr r3, r26
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801D6560_00000D60
     addi r3, r1, 0xc
@@ -1065,7 +1065,7 @@ asm void fn_801D6754(void)
     mr r27, r3
     lwz r30, lbl_8087EF70
     mr r3, r30
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801D6754_00000F20
     mr r3, r27
@@ -1159,7 +1159,7 @@ lbl_fn_801D6754_00000F20:
     mr r3, r30
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801D6754_00000F6C
     addi r3, r1, 0x8
@@ -1725,7 +1725,7 @@ lbl_fn_801D6F84_000016C4:
     addi r4, r30, lbl_80782850@l
     addi r5, r28, 0x1
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     mr r3, r27
     addi r4, r31, 0x16
     addi r5, r1, 0x8

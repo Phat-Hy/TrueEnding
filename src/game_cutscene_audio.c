@@ -108,8 +108,8 @@ extern void PSVECDotProduct(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void atoi(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -436,13 +436,13 @@ lbl_fn_8032DDD0_00000394:
     addi r4, r4, fn_800EF73C@l
     li r5, 0xc
     li r6, 0x4
-    bl fn_806959D8
+    bl __destroy_new_array
     lis r4, atn_ColliObject_destructor@ha
     addi r3, r29, 0x14b0
     addi r4, r4, atn_ColliObject_destructor@l
     li r5, 0x88
     li r6, 0x2
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r29
     li r4, 0x0
     bl fn_8035B78C
@@ -527,7 +527,7 @@ asm void fn_8032DEA0(void)
     stw r29, 0x15e4(r31)
     stw r29, 0x1610(r31)
     stw r29, 0x1614(r31)
-    bl fn_806958E0
+    bl __construct_new_array
     stw r29, 0x1654(r31)
     addi r3, r31, 0x1660
     lfs f3, lbl_8088507C

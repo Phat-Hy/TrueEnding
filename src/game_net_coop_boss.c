@@ -38,7 +38,7 @@ extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
 extern void atn_LH_Texture_update(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void save_validateHeader(void);
 extern void event_findEntryById(void);
 extern void world_getGlobalFlag(void);
@@ -1045,7 +1045,7 @@ lbl_fn_804A7DD4_00000C28:
 lbl_fn_804A7DD4_00000C2C:
     lwz r5, 0x8(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087EEC8
     addi r4, r1, 0x8
     lfs f1, lbl_80887248

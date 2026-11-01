@@ -18,15 +18,15 @@ extern void fn_80237518(void);
 extern void fn_802375C4(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_803761E4(void);
 extern void fn_803761EC(void);
 extern void fn_803761F4(void);
 extern void fn_803CC900(void);
 extern void fn_803CFC78(void);
 extern void fn_803E668C(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 
 /* External data declarations */
 extern u8 jumptable_8078BCD8[];
@@ -133,17 +133,17 @@ lbl_fn_803CE278_0000003C:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_803CE278_0000007C
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_803CE278_0000007C
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r28, 0x48(r3)
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r29, 0x4c(r3)
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r30, 0x50(r3)
     b lbl_fn_803CE278_000000BC
 lbl_fn_803CE278_0000007C:
@@ -955,13 +955,13 @@ lbl_fn_803CE980_00000AD8:
     addi r4, r29, fn_80237518@l
     addi r5, r30, fn_802375C4@l
     li r7, 0x4
-    bl fn_806958E0
+    bl __construct_new_array
     addi r3, r31, 0x1584
     addi r4, r29, fn_80237518@l
     addi r5, r30, fn_802375C4@l
     li r6, 0xc
     li r7, 0x4
-    bl fn_806958E0
+    bl __construct_new_array
     addi r5, r31, 0x1638
     addi r3, r31, 0x253c
     lfs f0, lbl_80885D58
@@ -1671,12 +1671,12 @@ lbl_fn_803CF79C_00001578:
     addi r4, r31, fn_802375C4@l
     li r5, 0xc
     li r6, 0x4
-    bl fn_806959D8
+    bl __destroy_new_array
     addi r3, r29, 0x1554
     addi r4, r31, fn_802375C4@l
     li r5, 0xc
     li r6, 0x4
-    bl fn_806959D8
+    bl __destroy_new_array
     addi r3, r29, 0x1164
     li r4, -0x1
     bl fn_802375C4

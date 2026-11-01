@@ -23,9 +23,9 @@ extern void fn_800C7568(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_800DC1DC(void);
+extern void wcs_parseInt(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_80206B9C(void);
@@ -51,9 +51,9 @@ extern void atoi(void);
 extern void wmemcpy(void);
 extern void wcslen(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
-extern void fn_80695A50(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
+extern void __destroy_arr(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -785,7 +785,7 @@ asm void fn_80505DD4(void)
     addi r5, r5, fn_8020C07C@l
     li r6, 0x8
     li r7, 0x139
-    bl fn_806958E0
+    bl __construct_new_array
     addi r30, r31, 0xa10
     mr r3, r30
     bl atn_LoadHandle_constructor
@@ -844,7 +844,7 @@ lbl_fn_80505EA4_000009F0:
     addi r4, r4, fn_8020C07C@l
     li r5, 0x8
     li r6, 0x139
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r29
     li r4, 0x0
     bl atn_Task_destructor
@@ -1018,7 +1018,7 @@ lbl_fn_80505FC8_00000C1C:
     mr r5, r28
     add r3, r0, r29
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r0, lbl_8087F868
     mr r3, r28
     add r0, r0, r29
@@ -1999,7 +1999,7 @@ lbl_fn_80506D98_00001940:
     bl talk_parseDialogue
     addi r3, r1, 0x128
     bl talk_parseDialogue
-    bl fn_800DC1DC
+    bl wcs_parseInt
     subic. r0, r3, 0x1
     blt lbl_fn_80506D98_0000198C
     cmpwi r0, 0x15
@@ -2070,7 +2070,7 @@ lbl_fn_80506D98_00001A0C:
     stw r3, 0x8(r1)
     addi r3, r1, 0x128
     bl talk_parseDialogue
-    bl fn_800DC1DC
+    bl wcs_parseInt
     subic. r21, r3, 0x1
     lwz r0, 0x10(r1)
     rlwimi r0, r21, 24, 0, 7
@@ -2087,7 +2087,7 @@ lbl_fn_80506D98_00001A0C:
     mr r5, r27
     add r3, r0, r22
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r0, 0xfc(r19)
     mr r3, r27
     add r0, r0, r22
@@ -2117,7 +2117,7 @@ lbl_fn_80506D98_00001B10:
     blt lbl_fn_80506D98_00001AE4
     addi r3, r1, 0x128
     bl talk_parseDialogue
-    bl fn_800DC1DC
+    bl wcs_parseInt
     lwz r0, 0xc(r1)
     rlwimi r0, r3, 0, 24, 31
     stw r0, 0xc(r1)
@@ -2194,7 +2194,7 @@ lbl_fn_80506D98_00001C28:
 lbl_fn_80506D98_00001C38:
     lwz r3, 0x8(r27)
     addi r4, r30, fn_804D147C@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80506D98_00001C44:
     stw r22, 0x8(r27)
     stw r31, 0x4(r28)
@@ -2260,7 +2260,7 @@ lbl_fn_80506D98_00001D14:
 lbl_fn_80506D98_00001D24:
     lwz r3, 0x8(r27)
     addi r4, r30, fn_804D147C@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80506D98_00001D30:
     stw r22, 0x8(r27)
     stw r28, 0x4(r27)

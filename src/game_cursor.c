@@ -32,7 +32,7 @@ extern void fn_800A0A68(void);
 extern void fn_800A1060(void);
 extern void fn_800A787C(void);
 extern void fn_800A8BE4(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_findChar(void);
 extern void fn_800DCA6C(void);
 extern void atn_LoadHandle_getName(void);
@@ -46,7 +46,7 @@ extern void rand(void);
 extern void strncmp(void);
 extern void fn_806952C4(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 extern void vec3_isNonZero(void);
 extern void fn_8072D210(void);
 extern char* strcpy(char* dest, const char* src);
@@ -187,7 +187,7 @@ lbl_fn_800971D4_000000FC:
     beq lbl_fn_800971D4_0000011C
     lis r4, fn_80097180@ha
     addi r4, r4, fn_80097180@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_800971D4_0000011C:
     li r0, 0x0
     stw r0, 0x358(r30)
@@ -200,7 +200,7 @@ lbl_fn_800971D4_00000128:
     beq lbl_fn_800971D4_00000148
     lis r4, fn_800970CC@ha
     addi r4, r4, fn_800970CC@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_800971D4_00000148:
     li r0, 0x0
     stw r0, 0x228(r30)
@@ -267,7 +267,7 @@ asm void fn_800973C0(void)
     bge lbl_fn_800973C0_00000320
     mr r3, r29
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     cmpwi r3, 0x0
     bne lbl_fn_800973C0_000002A4
     lis r5, lbl_80732368@ha
@@ -639,7 +639,7 @@ lbl_fn_800977F0_00000734:
     beq lbl_fn_800977F0_00000760
     lis r4, fn_80097180@ha
     addi r4, r4, fn_80097180@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_800977F0_00000760:
     cmpwi r30, 0x0
     stw r30, 0x354(r31)

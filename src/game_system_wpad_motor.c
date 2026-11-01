@@ -17,7 +17,7 @@ extern void fn_8006D0C8(void);
 extern void fn_8007708C(void);
 extern void mem_getAllocSize(void);
 extern void fn_8009246C(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800AFEBC(void);
 extern void fn_800C7F08(void);
 extern void fn_800CF45C(void);
@@ -161,7 +161,7 @@ extern void strncmp(void);
 extern void atoi(void);
 extern void fn_8068A918(void);
 extern void std_fmod(void);
-extern void fn_806959D8(void);
+extern void __destroy_new_array(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -1907,7 +1907,7 @@ lbl_world_Manager_draw_00001770:
     addi r4, r4, fn_80119ECC@l
     li r5, 0x2d4
     li r6, 0x1c
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_world_Manager_draw_000017F0:
     addic. r3, r25, 0x539c
     beq lbl_world_Manager_draw_0000180C
@@ -1915,7 +1915,7 @@ lbl_world_Manager_draw_000017F0:
     li r5, 0x240
     addi r4, r4, fn_8012AFE8@l
     li r6, 0x7
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_world_Manager_draw_0000180C:
     mr r3, r25
     bl dtor_80084684
@@ -3003,7 +3003,7 @@ lbl_world_Manager_draw_00002788:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_world_Manager_draw_000027A4
     li r24, 0x1

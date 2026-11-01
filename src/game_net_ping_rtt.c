@@ -21,7 +21,7 @@ extern void fn_80087E9C(void);
 extern void fn_80088FAC(void);
 extern void fn_8008937C(void);
 extern void fn_8009EE30(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
@@ -426,7 +426,7 @@ lbl_fn_80516008_0000041C:
     li r4, 0x0
     li r5, 0x5
     mr r3, r16
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80516008_00000468
     addi r3, r1, 0x1c
@@ -445,7 +445,7 @@ lbl_fn_80516008_00000468:
     mr r3, r16
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80516008_000004CC
     lwz r0, 0x130(r31)
@@ -505,7 +505,7 @@ lbl_fn_80516410_00000538:
     mr r3, r31
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80516410_00000578
     addi r3, r1, 0x10
@@ -522,7 +522,7 @@ lbl_fn_80516410_00000578:
     mr r3, r31
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80516410_00000600
     lwz r3, 0xec(r29)

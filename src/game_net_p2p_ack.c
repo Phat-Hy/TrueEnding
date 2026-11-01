@@ -40,7 +40,7 @@ extern void PSMTXConcat(void);
 extern void PSMTXScale(void);
 extern void PSVECMag(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806958E0(void);
+extern void __construct_new_array(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -1950,7 +1950,7 @@ asm void fn_805128C4(void)
     addi r5, r5, fn_800EF73C@l
     li r6, 0xc
     li r7, 0x8
-    bl fn_806958E0
+    bl __construct_new_array
     lwz r0, 0x98(r30)
     addi r3, r31, lbl_8075B510@l
     addi r31, r3, 0x1

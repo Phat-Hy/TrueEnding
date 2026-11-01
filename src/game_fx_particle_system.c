@@ -28,7 +28,7 @@ extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800EB7A0(void);
 extern void system_getNextSequenceId(void);
@@ -1492,7 +1492,7 @@ lbl_fn_80283004_00001374:
 lbl_fn_80283004_00001388:
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r4, lbl_8087F430
     mr r23, r3
     li r5, 0x0

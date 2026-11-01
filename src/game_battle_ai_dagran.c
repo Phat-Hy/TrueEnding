@@ -42,7 +42,7 @@ extern void PSMTXRotRad(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 
 /* External data declarations */
 extern u8 lbl_807541B8[];
@@ -278,7 +278,7 @@ asm void fn_80432EC0(void)
     beq lbl_fn_80432EC0_00000284
     lis r4, fn_80432E50@ha
     addi r4, r4, fn_80432E50@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80432EC0_00000284:
     addic. r0, r29, 0x12c
     beq lbl_fn_80432EC0_000002A4
@@ -1094,7 +1094,7 @@ lbl_fn_804334EC_00000DE8:
     blt lbl_fn_804334EC_00000B24
     lwz r3, 0x140(r15)
     addi r4, r27, fn_80432E50@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_804334EC_00000DFC:
     li r0, 0x8
     stw r22, 0x140(r15)
@@ -1328,7 +1328,7 @@ lbl_fn_804334EC_00001148:
     blt lbl_fn_804334EC_00000E84
     lwz r3, 0x140(r15)
     addi r4, r27, fn_80432E50@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_804334EC_0000115C:
     stw r18, 0x140(r15)
     stw r20, 0x13c(r15)

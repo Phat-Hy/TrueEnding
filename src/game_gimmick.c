@@ -42,8 +42,8 @@ extern void strcmp(void);
 extern void strstr(void);
 extern void wcslen(void);
 extern void fn_8068A918(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -507,19 +507,19 @@ lbl_fn_8006C858_0000058C:
     addi r4, r4, atn_LH_Binary_destructor@l
     li r5, 0x8
     li r6, 0x38
-    bl fn_806959D8
+    bl __destroy_new_array
     lis r4, fn_8006CA20@ha
     addi r3, r31, 0xa80
     addi r4, r4, fn_8006CA20@l
     li r5, 0x1c
     li r6, 0x38
-    bl fn_806959D8
+    bl __destroy_new_array
     lis r4, atn_LH_Texture_destructAndFree@ha
     mr r3, r31
     addi r4, r4, atn_LH_Texture_destructAndFree@l
     li r5, 0x30
     li r6, 0x38
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r31
     bl dtor_80084684
 lbl_fn_8006C858_000005DC:
@@ -548,7 +548,7 @@ asm void fn_8006C8F8(void)
     li r7, 0x38
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_806958E0
+    bl __construct_new_array
     lis r4, fn_8006CA14@ha
     lis r5, fn_8006CA20@ha
     addi r3, r30, 0xa80
@@ -556,7 +556,7 @@ asm void fn_8006C8F8(void)
     addi r4, r4, fn_8006CA14@l
     addi r5, r5, fn_8006CA20@l
     li r7, 0x38
-    bl fn_806958E0
+    bl __construct_new_array
     lis r4, fn_8006CA80@ha
     lis r5, atn_LH_Binary_destructor@ha
     addi r3, r30, 0x10a0
@@ -564,7 +564,7 @@ asm void fn_8006C8F8(void)
     addi r4, r4, fn_8006CA80@l
     addi r5, r5, atn_LH_Binary_destructor@l
     li r7, 0x38
-    bl fn_806958E0
+    bl __construct_new_array
     addis r31, r30, 0x3
     addi r31, r31, 0x3260
     mr r3, r31

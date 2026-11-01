@@ -16,7 +16,7 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_800E426C(void);
 extern void fn_800E4278(void);
 extern void magic_dispatchActionCommand(void);
@@ -460,7 +460,7 @@ lbl_world_Manager_postUpdate_00000484:
     addi r5, r1, 0x180
     addi r6, r29, 0x4
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087EEC8
     addi r4, r1, 0x380
     lfs f1, lbl_80885774
@@ -493,7 +493,7 @@ lbl_world_Manager_postUpdate_00000484:
     fadds f31, f31, f0
     addi r4, r28, 0xc
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087EEC8
     addi r4, r1, 0x380
     lfs f1, lbl_80885774
@@ -534,7 +534,7 @@ lbl_world_Manager_postUpdate_00000484:
     lfs f2, 0x44(r1)
     lfs f3, 0x48(r1)
     crset 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087EEC8
     addi r4, r1, 0x380
     lfs f1, lbl_80885774
@@ -593,7 +593,7 @@ lbl_world_Manager_postUpdate_0000067C:
     addi r4, r4, 0x50
     addi r5, r1, 0x180
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_world_Manager_postUpdate_000006E4
 lbl_world_Manager_postUpdate_000006C8:
     lis r4, lbl_8078A408@ha
@@ -602,7 +602,7 @@ lbl_world_Manager_postUpdate_000006C8:
     addi r5, r1, 0x180
     addi r4, r4, 0x74
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
 lbl_world_Manager_postUpdate_000006E4:
     lwz r3, lbl_8087EEC8
     addi r4, r1, 0x380
@@ -650,7 +650,7 @@ lbl_world_Manager_postUpdate_00000750:
     mulli r0, r5, 0x3c
     subf r6, r0, r6
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087EEC8
     addi r4, r1, 0x380
     lfs f1, lbl_80885774

@@ -30,7 +30,7 @@ extern void strncmp(void);
 extern void strstr(void);
 extern void atoi(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -263,7 +263,7 @@ asm void fn_8020F1D0(void)
     beq lbl_fn_8020F1D0_00000224
     lis r4, fn_8020F190@ha
     addi r4, r4, fn_8020F190@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8020F1D0_00000224:
     li r0, 0x0
     stw r0, 0x4(r30)
@@ -350,7 +350,7 @@ lbl_fn_8020F248_00000330:
     beq lbl_fn_8020F248_00000358
     lis r4, fn_8020F190@ha
     addi r4, r4, fn_8020F190@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8020F248_00000358:
     cmpwi r22, 0x0
     stw r22, 0x0(r24)

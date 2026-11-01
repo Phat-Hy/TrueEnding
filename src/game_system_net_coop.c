@@ -26,7 +26,7 @@ extern void fn_803CC6B4(void);
 extern void fn_8046ECDC(void);
 extern void fn_8047F580(void);
 extern void rand(void);
-extern void fn_80695B00(void);
+extern void __ptmf_scall(void);
 
 /* External data declarations */
 extern u8 jumptable_8078AD40[];
@@ -781,7 +781,7 @@ lbl_fn_8039CF8C_0000092C:
     addi r4, r1, 0x8
     mulli r0, r0, 0xc
     add r12, r25, r0
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
 lbl_fn_8039CF8C_0000094C:
     lwz r0, 0xc(r1)

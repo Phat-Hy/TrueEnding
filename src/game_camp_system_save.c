@@ -23,7 +23,7 @@ extern void PSMTXMultVec(void);
 extern void printf(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 
 /* External data declarations */
 extern u8 lbl_807500DC[];
@@ -200,7 +200,7 @@ asm void fn_803C940C(void)
     lis r4, fn_803BF898@ha
     mr r3, r0
     addi r4, r4, fn_803BF898@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803C940C_00000148:
     cmpwi r30, 0x0
     stw r30, 0x0(r29)

@@ -8,11 +8,11 @@ extern void fn_80092954(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
 extern void fn_80109828(void);
@@ -778,7 +778,7 @@ lbl_fn_802A5A1C_00000A2C:
     addi r3, r1, 0x140
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x140
     bl fn_80109828
@@ -1179,7 +1179,7 @@ lbl_fn_802A5A1C_00001044:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_802A5A1C_00001150
     lfs f8, lbl_80883E40

@@ -8,7 +8,7 @@ extern void _savegpr_20(void);
 extern void _savegpr_26(void);
 extern void fn_80087E9C(void);
 extern void fn_8008937C(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800A55AC(void);
 extern void fn_800A58D0(void);
 extern void ref_releaseHandle(void);
@@ -660,7 +660,7 @@ lbl_fn_80524E84_000006E8:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80524E84_00000934
     mr r3, r31
@@ -698,7 +698,7 @@ lbl_fn_80524E84_00000874:
     mr r3, r30
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80524E84_00000934
     mr r3, r31
@@ -755,7 +755,7 @@ lbl_fn_80524E84_00000934:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x6
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80524E84_00000990
     mr r3, r31
@@ -1264,7 +1264,7 @@ lbl_fn_80525804_000010A8:
     mr r3, r31
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80525804_000010F0
     lwz r3, 0x48(r29)
@@ -1283,7 +1283,7 @@ lbl_fn_80525804_000010F0:
     mr r3, r31
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80525804_000011CC
     lwz r0, 0xe8(r29)
@@ -1623,7 +1623,7 @@ lbl_fn_80525A0C_000015D0:
     mr r3, r31
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80525A0C_00001610
     mr r3, r29
@@ -1811,7 +1811,7 @@ lbl_fn_80525F0C_0000188C:
     mr r3, r31
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80525F0C_000018CC
     mr r3, r30

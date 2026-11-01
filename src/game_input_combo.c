@@ -22,7 +22,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void fn_800EB7A0(void);
 extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
@@ -1467,7 +1467,7 @@ lbl_fn_802EC9A8_00001310:
 lbl_fn_802EC9A8_0000132C:
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r4, lbl_8087F430
     mr r19, r3
     li r5, 0x0
@@ -1654,19 +1654,19 @@ lbl_fn_802EC9A8_000015C4:
     bne lbl_fn_802EC9A8_0000188C
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r27, r3
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r28, r3
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r29, r3
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r5, 0x14e0(r15)
     mr r30, r3
     lwz r4, 0x14e4(r15)

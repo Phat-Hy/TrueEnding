@@ -10,7 +10,7 @@ extern void fn_80010374(void);
 extern void fn_8001296C(void);
 extern void fn_80012AC4(void);
 extern void fn_80051B70(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800A5584(void);
 extern void fn_800A55D4(void);
 extern void fn_800A56A8(void);
@@ -2189,7 +2189,7 @@ lbl_fn_8055E724_00001C1C:
     bne lbl_fn_8055E724_00001C5C
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     bne lbl_fn_8055E724_00001C4C
     lwz r3, lbl_8087F540
@@ -2206,7 +2206,7 @@ lbl_fn_8055E724_00001C5C:
     bne lbl_fn_8055E724_00001CC0
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     bne lbl_fn_8055E724_00001C88
     lwz r3, lbl_8087F540

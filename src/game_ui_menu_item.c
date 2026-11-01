@@ -35,7 +35,7 @@ extern void printf(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void abort(void);
-extern void fn_80695B00(void);
+extern void __ptmf_scall(void);
 
 /* External data declarations */
 extern u8 lbl_8073AEE0[];
@@ -1205,7 +1205,7 @@ asm void fn_801B6880(void)
     lwz r12, 0x0(r3)
     lwz r3, 0xc(r12)
     lwz r4, 0x10(r12)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0
@@ -1532,7 +1532,7 @@ asm void fn_801B6D10(void)
     lwz r3, 0xc(r12)
     addi r4, r12, 0x10
     lwz r5, 0x1c(r12)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0

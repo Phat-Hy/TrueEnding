@@ -16,7 +16,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
 extern void fn_80108F38(void);
@@ -358,7 +358,7 @@ lbl_fn_8027CF28_0000037C:
     bne lbl_fn_8027CF28_000003A4
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x14b8(r27)
     b lbl_fn_8027CF28_00000A1C
 lbl_fn_8027CF28_000003A4:
@@ -369,7 +369,7 @@ lbl_fn_8027CF28_000003A4:
     bne lbl_fn_8027CF28_000003CC
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1534(r27)
     b lbl_fn_8027CF28_00000A1C
 lbl_fn_8027CF28_000003CC:
@@ -380,7 +380,7 @@ lbl_fn_8027CF28_000003CC:
     bne lbl_fn_8027CF28_000003F4
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x14bc(r27)
     b lbl_fn_8027CF28_00000A1C
 lbl_fn_8027CF28_000003F4:
@@ -452,7 +452,7 @@ lbl_fn_8027CF28_000004D0:
 lbl_fn_8027CF28_000004E4:
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r4, lbl_8087F430
     mr r26, r3
     li r5, 0x0
@@ -639,7 +639,7 @@ lbl_fn_8027CF28_00000778:
 lbl_fn_8027CF28_0000078C:
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r4, lbl_8087F430
     mr r25, r3
     li r5, 0x0

@@ -30,7 +30,7 @@ extern void fn_800902C0(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092954(void);
 extern void fn_80094D88(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void fn_800EC254(void);
 extern void fn_800EC2C4(void);
 extern void fn_800EC440(void);
@@ -93,7 +93,7 @@ extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
 extern void std_atan2(void);
-extern void fn_806958E0(void);
+extern void __construct_new_array(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -1055,7 +1055,7 @@ asm void fn_803161F8(void)
     addi r4, r4, fn_803165E4@l
     addi r5, r5, fn_8008A76C@l
     li r7, 0x3
-    bl fn_806958E0
+    bl __construct_new_array
     li r0, 0xf
     stw r29, 0x1c84(r31)
     addi r3, r31, 0x1c8c
@@ -1124,7 +1124,7 @@ lbl_fn_803161F8_00000E14:
     bl fn_800ED4D8
     bl fn_8004212C
     addi r3, r3, 0x7
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x14d0(r31)
 lbl_fn_803161F8_00000E4C:
     addi r3, r1, 0x98

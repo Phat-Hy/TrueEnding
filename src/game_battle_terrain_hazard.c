@@ -27,11 +27,11 @@ extern void fn_8008CD60(void);
 extern void atn_Model_findBoneIndex(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800EF73C(void);
 extern void res_MsgHandle_constructor(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_803EC568(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC758(void);
@@ -55,8 +55,8 @@ extern void strcmp(void);
 extern void fn_8068AC5C(void);
 extern void fn_8068AD58(void);
 extern void std_fmod(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern void vec3_isNonZero(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -735,11 +735,11 @@ lbl_fn_804184BC_00000744:
     bne lbl_fn_804184BC_000007C0
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r31, r3
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     cmplwi r3, 0x1
     bgt lbl_fn_804184BC_000007C0
     mulli r0, r31, 0x18
@@ -1483,7 +1483,7 @@ asm void fn_80419010(void)
     addi r5, r5, fn_800EF73C@l
     li r6, 0xc
     li r7, 0x7
-    bl fn_806958E0
+    bl __construct_new_array
     addi r5, r28, 0x544
     addi r3, r28, 0x634
     lfs f0, lbl_808864F8
@@ -1602,7 +1602,7 @@ lbl_fn_8041919C_0000137C:
     addi r4, r4, fn_800EF73C@l
     li r5, 0xc
     li r6, 0x7
-    bl fn_806959D8
+    bl __destroy_new_array
     addic. r0, r28, 0x4c4
     beq lbl_fn_8041919C_000013CC
     lwz r3, 0x4c4(r28)
@@ -1863,11 +1863,11 @@ lbl_fn_8041953C_000016F4:
     fmr f31, f1
     cmpwi r3, 0x0
     beq lbl_fn_8041953C_0000176C
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_8041953C_0000176C
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x48(r3)
     cmpwi r0, 0x1
     bne lbl_fn_8041953C_0000176C

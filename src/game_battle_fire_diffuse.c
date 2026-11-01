@@ -46,8 +46,8 @@ extern void rand(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806959D8(void);
-extern void fn_80695A50(void);
+extern void __destroy_new_array(void);
+extern void __destroy_arr(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -209,7 +209,7 @@ lbl_fn_8041CF94_0000014C:
     beq lbl_fn_8041CF94_00000174
     lis r4, atn_LH_Texture_destructAndFree@ha
     addi r4, r4, atn_LH_Texture_destructAndFree@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8041CF94_00000174:
     li r0, 0x0
     stw r0, 0x40(r29)
@@ -220,13 +220,13 @@ lbl_fn_8041CF94_00000180:
     addi r4, r4, fn_80041C0C@l
     li r5, 0x20
     li r6, 0x6
-    bl fn_806959D8
+    bl __destroy_new_array
     lis r4, fn_800EF73C@ha
     addi r3, r30, 0xf4
     addi r4, r4, fn_800EF73C@l
     li r5, 0xc
     li r6, 0x6
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
     bl fn_803EC69C

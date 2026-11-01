@@ -59,8 +59,8 @@ extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -323,7 +323,7 @@ asm void fn_8043A770(void)
     addi r5, r5, fn_800EF73C@l
     li r6, 0xc
     li r7, 0x5
-    bl fn_806958E0
+    bl __construct_new_array
     li r3, 0x0
     stw r3, 0x130(r31)
     li r0, 0x1
@@ -385,7 +385,7 @@ asm void fn_8043A850(void)
     addi r5, r5, fn_800EF73C@l
     li r6, 0xc
     li r7, 0x5
-    bl fn_806958E0
+    bl __construct_new_array
     li r3, 0x0
     stw r3, 0x130(r31)
     li r0, 0x1
@@ -464,7 +464,7 @@ lbl_fn_8043A98C_000004A8:
     addi r4, r4, fn_800EF73C@l
     li r5, 0xc
     li r6, 0x5
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
     bl fn_803EC69C

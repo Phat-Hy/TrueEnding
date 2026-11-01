@@ -35,7 +35,7 @@ extern void PSVECNormalize(void);
 extern void std_fmod(void);
 extern void fn_806952C4(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 extern void vec3_isNonZero(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -520,7 +520,7 @@ asm void fn_800C1720(void)
     stw r0, 0x48(r3)
     stw r0, 0x4c(r3)
     b lbl_fn_800C1720_00000574
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_800C1720_00000574:
     li r0, 0x1
     stw r0, 0x3c(r30)
@@ -570,7 +570,7 @@ asm void fn_800C1814(void)
     lis r4, atn_LH_Texture_destructAndFree@ha
     mr r3, r0
     addi r4, r4, atn_LH_Texture_destructAndFree@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_800C1814_00000620:
     li r0, 0x1
     stw r0, 0x3c(r30)
@@ -1100,7 +1100,7 @@ asm void fn_800C1FB4(void)
     beq lbl_fn_800C1FB4_00000DDC
     lis r4, atn_LH_Texture_destructAndFree@ha
     addi r4, r4, atn_LH_Texture_destructAndFree@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_800C1FB4_00000DDC:
     li r0, 0x0
     stw r0, 0x40(r31)
@@ -1115,7 +1115,7 @@ lbl_fn_800C1FB4_00000DE8:
     beq lbl_fn_800C1FB4_00000E10
     lis r4, atn_LH_Texture_destructAndFree@ha
     addi r4, r4, atn_LH_Texture_destructAndFree@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_800C1FB4_00000E10:
     li r0, 0x0
     stw r0, 0x40(r31)
@@ -1622,7 +1622,7 @@ lbl_fn_800C2634_000014A0:
     beq lbl_fn_800C2634_000014B8
     lis r4, atn_LH_Texture_destructAndFree@ha
     addi r4, r4, atn_LH_Texture_destructAndFree@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_800C2634_000014B8:
     cmpwi r31, 0x0
     stw r31, 0xb4(r30)
@@ -1798,7 +1798,7 @@ lbl_fn_800C289C_00001724:
     beq lbl_fn_800C289C_0000173C
     lis r4, atn_LH_Texture_destructAndFree@ha
     addi r4, r4, atn_LH_Texture_destructAndFree@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_800C289C_0000173C:
     cmpwi r29, 0x0
     stw r29, 0xb4(r30)
@@ -1953,7 +1953,7 @@ asm void fn_800C2B24(void)
     lis r4, atn_LH_Texture_destructAndFree@ha
     mr r3, r8
     addi r4, r4, atn_LH_Texture_destructAndFree@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_800C2B24_0000196C:
     li r0, 0x1
     stw r0, 0x10c(r30)

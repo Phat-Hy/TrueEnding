@@ -33,7 +33,7 @@ extern void fn_806163E0(void);
 extern void GXSetZMode(void);
 extern void fn_8068A6D8(void);
 extern void fn_8068A918(void);
-extern void fn_806958E0(void);
+extern void __construct_new_array(void);
 
 /* External data declarations */
 extern u8 lbl_80732E28[];
@@ -441,7 +441,7 @@ asm void fn_800B6684(void)
     addi r4, r4, fn_80057A64@l
     li r6, 0xc
     li r7, 0x10
-    b fn_806958E0
+    b __construct_new_array
 }
 
 asm void fn_800B66A4(void)

@@ -26,7 +26,7 @@ extern void fn_800CB58C(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB6E4(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
 extern void fn_800FAB80(void);
@@ -887,7 +887,7 @@ lbl_fn_802E8B88_00000AC4:
 lbl_fn_802E8B88_00000AE0:
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r4, lbl_8087F430
     mr r19, r3
     li r5, 0x0
@@ -1074,19 +1074,19 @@ lbl_fn_802E8B88_00000D78:
     bne lbl_fn_802E8B88_00001040
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r27, r3
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r28, r3
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r29, r3
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r5, 0x14e0(r15)
     mr r30, r3
     lwz r4, 0x14e4(r15)

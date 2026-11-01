@@ -16,10 +16,10 @@ extern void fn_8005B6E8(void);
 extern void fn_8006F2F0(void);
 extern void fn_800A55AC(void);
 extern void ref_releaseHandle(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_80116FC0(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_8011728C(void);
@@ -1487,7 +1487,7 @@ lbl_fn_80581820_0000131C:
 lbl_fn_80581820_00001320:
     mr r5, r6
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r4, 0x74(r30)
     lis r3, lbl_807612E4@ha
     addi r3, r3, lbl_807612E4@l
@@ -1747,7 +1747,7 @@ lbl_fn_80581A58_000016A4:
     stw r28, 0x64(r1)
     stw r30, 0x68(r1)
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x8(r1)
     bl event_findEntryById
     cmpwi r3, 0x0
@@ -1771,11 +1771,11 @@ lbl_fn_80581A58_000016A4:
 lbl_fn_80581A58_00001724:
     addi r3, r1, 0x6c
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r24, r3
     addi r3, r1, 0x6c
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     cmpwi r24, 0x0
     mr r4, r3
     beq lbl_fn_80581A58_00001768
@@ -1800,11 +1800,11 @@ lbl_fn_80581A58_00001768:
 lbl_fn_80581A58_00001790:
     addi r3, r1, 0x6c
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r24, r3
     addi r3, r1, 0x6c
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     cmpwi r24, 0x0
     mr r4, r3
     beq lbl_fn_80581A58_000017FC
@@ -1829,13 +1829,13 @@ lbl_fn_80581A58_000017EC:
 lbl_fn_80581A58_000017FC:
     addi r3, r1, 0x6c
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     cntlzw r0, r3
     addi r3, r1, 0x6c
     srwi r0, r0, 5
     stw r0, 0x5c(r1)
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     cmpwi r3, 0x0
     stw r3, 0x60(r1)
     bgt lbl_fn_80581A58_00001830
@@ -1851,7 +1851,7 @@ lbl_fn_80581A58_00001830:
     bl fn_8006F2F0
     addi r3, r1, 0x6c
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     cmpwi r3, 0x0
     ble lbl_fn_80581A58_0000189C
     lwz r0, 0x60(r1)

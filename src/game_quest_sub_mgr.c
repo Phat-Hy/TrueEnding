@@ -9,7 +9,7 @@ extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
 extern void str_findChar(void);
 extern void thread_findAndNotifySlot(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_8041D180(void);
 extern void fn_8041D198(void);
 extern void fn_8047CB74(void);
@@ -2329,11 +2329,11 @@ lbl_fn_80482ED8_00002084:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_80482ED8_000020BC
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_80482ED8_000020BC
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     mr r30, r3
 lbl_fn_80482ED8_000020BC:
     cmpwi r30, 0x0

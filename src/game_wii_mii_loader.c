@@ -25,7 +25,7 @@ extern void fn_8009373C(void);
 extern void fn_80093D98(void);
 extern void fn_80093EEC(void);
 extern void fn_80095D44(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_8020C4C8(void);
 extern void fn_8020C5D4(void);
@@ -46,8 +46,8 @@ extern void PSMTXConcat(void);
 extern void PSMTXScale(void);
 extern void PSVECMag(void);
 extern void strcmp(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern void vec3_isNonZero(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -790,7 +790,7 @@ lbl_fn_80564344_00000940:
     li r6, 0x44
     addi r5, r5, fn_80563880@l
     li r7, 0x10
-    bl fn_806958E0
+    bl __construct_new_array
     lis r4, fn_8056504C@ha
     lis r5, fn_80563840@ha
     addi r3, r21, 0x440
@@ -798,7 +798,7 @@ lbl_fn_80564344_00000940:
     addi r4, r4, fn_8056504C@l
     addi r5, r5, fn_80563840@l
     li r7, 0x18
-    bl fn_806958E0
+    bl __construct_new_array
     lis r24, fn_8056505C@ha
     lis r23, fn_80563800@ha
     addi r3, r21, 0xc20
@@ -806,13 +806,13 @@ lbl_fn_80564344_00000940:
     addi r4, r24, fn_8056505C@l
     addi r5, r23, fn_80563800@l
     li r7, 0x8
-    bl fn_806958E0
+    bl __construct_new_array
     addi r3, r21, 0xf40
     addi r4, r24, fn_8056505C@l
     addi r5, r23, fn_80563800@l
     li r6, 0x64
     li r7, 0x4
-    bl fn_806958E0
+    bl __construct_new_array
 lbl_fn_80564344_000009F8:
     lwz r24, 0x430(r22)
     cmpwi r24, 0x0
@@ -823,24 +823,24 @@ lbl_fn_80564344_000009F8:
     addi r4, r23, fn_80563800@l
     li r5, 0x64
     li r6, 0x4
-    bl fn_806959D8
+    bl __destroy_new_array
     addi r3, r24, 0xc20
     addi r4, r23, fn_80563800@l
     li r5, 0x64
     li r6, 0x8
-    bl fn_806959D8
+    bl __destroy_new_array
     lis r4, fn_80563840@ha
     addi r3, r24, 0x440
     addi r4, r4, fn_80563840@l
     li r5, 0x54
     li r6, 0x18
-    bl fn_806959D8
+    bl __destroy_new_array
     lis r4, fn_80563880@ha
     mr r3, r24
     addi r4, r4, fn_80563880@l
     li r5, 0x44
     li r6, 0x10
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r24
     bl dtor_80084684
 lbl_fn_80564344_00000A6C:
@@ -1161,7 +1161,7 @@ lbl_fn_80565068_00000E88:
     bl strcpy
     addi r3, r1, 0x120
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r5, r3
     addi r3, r31, 0x24
     addi r4, r1, 0x20

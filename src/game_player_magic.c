@@ -5,7 +5,7 @@
 extern void fn_800133B0(void);
 extern void fn_80013404(void);
 extern void fn_8008B964(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800A55AC(void);
 extern void fn_800A55D4(void);
 extern void fn_800A56A8(void);
@@ -1533,7 +1533,7 @@ lbl_magic_dispatchActionCommand_00001444:
     bl fn_801156BC
     mr r5, r31
     li r4, 0x0
-    bl fn_800A555C
+    bl msg_getMessageById
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31

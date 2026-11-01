@@ -39,7 +39,7 @@ extern void fn_801A03E8(void);
 extern void fn_801C3910(void);
 extern void fn_8032EC94(void);
 extern void world_getGlobalFlag(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_8037E964(void);
 extern void fn_8037F664(void);
 extern void fn_8037F688(void);
@@ -731,7 +731,7 @@ asm void fn_80387DE4(void)
     stfs f0, 0x60(r1)
     beq lbl_fn_80387DE4_0000092C
     mr r3, r0
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_80387DE4_0000092C
     li r28, 0x1
@@ -739,7 +739,7 @@ lbl_fn_80387DE4_0000092C:
     cmpwi r28, 0x0
     beq lbl_fn_80387DE4_0000094C
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0xec(r3)
     cmpwi r0, 0x0
     beq lbl_fn_80387DE4_0000094C
@@ -750,11 +750,11 @@ lbl_fn_80387DE4_0000094C:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_80387DE4_000009A4
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_80387DE4_000009A4
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x4c(r3)
     cmpwi r0, 0x3
     bne lbl_fn_80387DE4_00000988
@@ -949,7 +949,7 @@ lbl_fn_80387DE4_00000C0C:
     li r29, 0x0
     cmpwi r3, 0x0
     beq lbl_fn_80387DE4_00000C30
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_80387DE4_00000C30
     li r29, 0x1
@@ -957,7 +957,7 @@ lbl_fn_80387DE4_00000C30:
     cmpwi r29, 0x0
     beq lbl_fn_80387DE4_00000C50
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0xec(r3)
     cmpwi r0, 0x0
     beq lbl_fn_80387DE4_00000C50

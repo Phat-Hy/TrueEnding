@@ -21,7 +21,7 @@ extern void fn_800A4AD4(void);
 extern void fn_800A4BE4(void);
 extern void fn_800A4E08(void);
 extern void fn_800A4F0C(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800A55AC(void);
 extern void fn_800A55D4(void);
 extern void fn_800C16B4(void);
@@ -675,7 +675,7 @@ lbl_spectateCamera_update_00000810:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_spectateCamera_update_000008DC
     lwz r3, 0x48(r28)
@@ -1168,7 +1168,7 @@ lbl_spectateCamera_update_00000FC8:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_spectateCamera_update_00001000
     lwz r5, 0x2cc(r28)
@@ -1242,7 +1242,7 @@ lbl_spectateCamera_update_000010A0:
     lwz r3, 0x4c(r28)
     stfs f0, 0x100(r3)
     lwz r3, lbl_8087EF70
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_spectateCamera_update_000011B8
     lwz r0, 0x2c4(r28)
@@ -1409,7 +1409,7 @@ lbl_spectateCamera_update_00001350:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_spectateCamera_update_00001410
     lwz r3, lbl_8087F420
@@ -1460,7 +1460,7 @@ lbl_spectateCamera_update_00001410:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_spectateCamera_update_00002308
     lwz r3, lbl_8087F420
@@ -1613,7 +1613,7 @@ lbl_spectateCamera_update_00001654:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_spectateCamera_update_00001670
     li r26, 0x1
@@ -1689,7 +1689,7 @@ lbl_spectateCamera_update_00001770:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_spectateCamera_update_00002308
     lwz r5, 0x3e8(r28)
@@ -1757,7 +1757,7 @@ lbl_spectateCamera_update_0000185C:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_spectateCamera_update_00001904
     lwz r0, 0x2bc(r28)
@@ -1799,7 +1799,7 @@ lbl_spectateCamera_update_00001904:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_spectateCamera_update_00002308
     mr r3, r28
@@ -1900,7 +1900,7 @@ lbl_spectateCamera_update_00001A58:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_spectateCamera_update_00001AE8
     lwz r0, 0x2b8(r28)
@@ -1927,7 +1927,7 @@ lbl_spectateCamera_update_00001AE8:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_spectateCamera_update_00002308
     mr r3, r28
@@ -2253,13 +2253,13 @@ lbl_spectateCamera_update_00001F84:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     bne lbl_spectateCamera_update_00001FB4
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_spectateCamera_update_00002308
 lbl_spectateCamera_update_00001FB4:
@@ -2292,13 +2292,13 @@ lbl_spectateCamera_update_00002014:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     bne lbl_spectateCamera_update_00002044
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_spectateCamera_update_00002308
 lbl_spectateCamera_update_00002044:

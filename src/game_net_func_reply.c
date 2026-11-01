@@ -35,7 +35,7 @@ extern void OSUnlockMutex(void);
 extern void fn_80624D40(void);
 extern void strcat(void);
 extern void wcscpy(void);
-extern void fn_806959D8(void);
+extern void __destroy_new_array(void);
 extern void fn_806A2790(void);
 extern void fn_806A295C(void);
 extern void fn_806A2A58(void);
@@ -150,7 +150,7 @@ lbl_fn_80508CF0_00000090:
     addi r4, r4, fn_804DBC84@l
     li r5, 0x24
     li r6, 0x8
-    bl fn_806959D8
+    bl __destroy_new_array
     cmpwi r30, 0x0
     ble lbl_fn_80508CF0_000000B8
     mr r3, r29

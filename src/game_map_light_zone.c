@@ -7,7 +7,7 @@ extern void _savegpr_26(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800C31F4(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
@@ -597,7 +597,7 @@ lbl_fn_801937CC_00000750:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_801937CC_000007E0
     lwz r3, 0x20(r30)

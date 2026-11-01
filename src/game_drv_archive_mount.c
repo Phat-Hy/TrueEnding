@@ -20,7 +20,7 @@ extern void fn_8006EF48(void);
 extern void fn_800827E0(void);
 extern void mem_alloc(void);
 extern void fn_80084F84(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800A55FC(void);
 extern void fn_800A5920(void);
 extern void fn_800C31F4(void);
@@ -69,8 +69,8 @@ extern void PSMTX44Identity(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void fn_8068B100(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern void runtime_clampDouble(void);
 
 /* External data declarations */
@@ -1177,7 +1177,7 @@ asm void fn_805A715C(void)
     addi r5, r5, fn_805A75C4@l
     li r6, 0x98
     li r7, 0x10
-    bl fn_806958E0
+    bl __construct_new_array
     li r0, 0x6
     stw r29, 0xa70(r30)
     addi r27, r30, 0xa8c
@@ -1524,7 +1524,7 @@ asm void fn_805A7650(void)
     addi r4, r4, fn_805A75C4@l
     li r5, 0x98
     li r6, 0x10
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_805A7650_000012A8:
     mr r3, r30
     li r4, 0x0
@@ -2038,7 +2038,7 @@ lbl_fn_805A7820_000019B4:
 lbl_fn_805A7820_00001A08:
     li r4, 0x0
     li r5, 0x0
-    bl fn_800A555C
+    bl msg_getMessageById
 lbl_fn_805A7820_00001A14:
     neg r0, r3
     or r0, r0, r3
@@ -2052,7 +2052,7 @@ lbl_fn_805A7820_00001A14:
 lbl_fn_805A7820_00001A38:
     li r4, 0x0
     li r5, 0x1a
-    bl fn_800A555C
+    bl msg_getMessageById
 lbl_fn_805A7820_00001A44:
     neg r0, r3
     or r0, r0, r3
@@ -2077,7 +2077,7 @@ lbl_fn_805A7820_00001A6C:
 lbl_fn_805A7820_00001A8C:
     li r4, 0x0
     li r5, 0x2
-    bl fn_800A555C
+    bl msg_getMessageById
 lbl_fn_805A7820_00001A98:
     neg r0, r3
     or r0, r0, r3
@@ -2091,7 +2091,7 @@ lbl_fn_805A7820_00001A98:
 lbl_fn_805A7820_00001ABC:
     li r4, 0x0
     li r5, 0x17
-    bl fn_800A555C
+    bl msg_getMessageById
 lbl_fn_805A7820_00001AC8:
     neg r0, r3
     or r0, r0, r3
@@ -2116,7 +2116,7 @@ lbl_fn_805A7820_00001AF0:
 lbl_fn_805A7820_00001B10:
     li r4, 0x0
     li r5, 0x3
-    bl fn_800A555C
+    bl msg_getMessageById
 lbl_fn_805A7820_00001B1C:
     neg r0, r3
     or r0, r0, r3
@@ -2130,7 +2130,7 @@ lbl_fn_805A7820_00001B1C:
 lbl_fn_805A7820_00001B40:
     li r4, 0x0
     li r5, 0x18
-    bl fn_800A555C
+    bl msg_getMessageById
 lbl_fn_805A7820_00001B4C:
     neg r0, r3
     or r0, r0, r3
@@ -2155,7 +2155,7 @@ lbl_fn_805A7820_00001B74:
 lbl_fn_805A7820_00001B94:
     li r4, 0x0
     li r5, 0x1
-    bl fn_800A555C
+    bl msg_getMessageById
 lbl_fn_805A7820_00001BA0:
     neg r0, r3
     or r0, r0, r3
@@ -2169,7 +2169,7 @@ lbl_fn_805A7820_00001BA0:
 lbl_fn_805A7820_00001BC4:
     li r4, 0x0
     li r5, 0x19
-    bl fn_800A555C
+    bl msg_getMessageById
 lbl_fn_805A7820_00001BD0:
     neg r0, r3
     or r0, r0, r3
@@ -2198,7 +2198,7 @@ lbl_fn_805A7820_00001C10:
 lbl_fn_805A7820_00001C24:
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
 lbl_fn_805A7820_00001C30:
     cmpwi r3, 0x0
     beq lbl_fn_805A7820_00001C3C
@@ -2212,7 +2212,7 @@ lbl_fn_805A7820_00001C3C:
 lbl_fn_805A7820_00001C50:
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
 lbl_fn_805A7820_00001C5C:
     cmpwi r3, 0x0
     beq lbl_fn_805A7820_00001C68
@@ -3431,7 +3431,7 @@ lbl_fn_805A7820_00002E00:
     beq lbl_fn_805A7820_00002E1C
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     b lbl_fn_805A7820_00002E20
 lbl_fn_805A7820_00002E1C:
     li r3, 0x0
@@ -3552,7 +3552,7 @@ lbl_fn_805A7820_00002FB4:
     beq lbl_fn_805A7820_00002FD0
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     b lbl_fn_805A7820_00002FD4
 lbl_fn_805A7820_00002FD0:
     li r3, 0x0

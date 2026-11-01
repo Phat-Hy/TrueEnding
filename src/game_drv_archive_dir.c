@@ -23,7 +23,7 @@ extern void mem_getAllocSize(void);
 extern void fn_800BFAC8(void);
 extern void fn_800DBF68(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_800F52F0(void);
 extern void fn_800F530C(void);
 extern void fn_800F7FB4(void);
@@ -2383,7 +2383,7 @@ lbl_fn_805AC75C_00001FC8:
     lwz r6, 0xc(r4)
     addi r4, r24, lbl_80797728@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     stw r23, 0x68(r1)
     addi r3, r1, 0x158
     stw r23, 0x6c(r1)

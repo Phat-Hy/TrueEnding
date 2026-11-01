@@ -12,7 +12,7 @@ extern void fn_8006F72C(void);
 extern void mem_realloc(void);
 extern void fn_800A55AC(void);
 extern void ref_releaseHandle(void);
-extern void fn_800DC1DC(void);
+extern void wcs_parseInt(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_80117E88(void);
 extern void fn_80125320(void);
@@ -38,7 +38,7 @@ extern void rand(void);
 extern void wcslen(void);
 extern void wcscmp(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 
 /* External data declarations */
 extern u8 lbl_8077A070[];
@@ -412,11 +412,11 @@ lbl_fn_8011B8D4_00000428:
     bne lbl_fn_8011B8D4_00000470
     addi r3, r1, 0x10
     bl talk_parseDialogue
-    bl fn_800DC1DC
+    bl wcs_parseInt
     mr r27, r3
     addi r3, r1, 0x10
     bl talk_parseDialogue
-    bl fn_800DC1DC
+    bl wcs_parseInt
     cmpwi r27, 0x0
     ble lbl_fn_8011B8D4_00000470
     cmpwi r3, 0x0
@@ -432,7 +432,7 @@ lbl_fn_8011B8D4_00000470:
     beq lbl_fn_8011B8D4_00000498
     lis r4, fn_80117E88@ha
     addi r4, r4, fn_80117E88@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8011B8D4_00000498:
     cmpwi r26, 0x0
     stw r26, 0x4c0(r31)
@@ -482,15 +482,15 @@ lbl_fn_8011B8D4_00000524:
     bne lbl_fn_8011B8D4_000005E8
     addi r3, r1, 0x10
     bl talk_parseDialogue
-    bl fn_800DC1DC
+    bl wcs_parseInt
     mr r28, r3
     addi r3, r1, 0x10
     bl talk_parseDialogue
-    bl fn_800DC1DC
+    bl wcs_parseInt
     mr r29, r3
     addi r3, r1, 0x10
     bl talk_parseDialogue
-    bl fn_800DC1DC
+    bl wcs_parseInt
     cmpwi r28, 0x0
     ble lbl_fn_8011B8D4_000005E8
     cmpwi r29, 0x0

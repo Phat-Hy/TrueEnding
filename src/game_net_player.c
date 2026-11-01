@@ -11,7 +11,7 @@ extern void fn_801FDEE4(void);
 extern void fn_801FE89C(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 
 /* External data declarations */
 extern u8 lbl_80782A80[];
@@ -1740,7 +1740,7 @@ lbl_fn_801EEF74_00001774:
     beq lbl_fn_801EEF74_00001794
     lis r4, fn_801EEF04@ha
     addi r4, r4, fn_801EEF04@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_801EEF74_00001794:
     li r0, 0x0
     stw r0, 0x7c(r30)

@@ -12,7 +12,7 @@ extern void fn_8001296C(void);
 extern void fn_8004ECC0(void);
 extern void fn_8008BBD8(void);
 extern void fn_800928B0(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800C16B4(void);
 extern void fn_80480438(void);
 extern void fn_80483F70(void);
@@ -42,7 +42,7 @@ extern void fn_80538FD8(void);
 extern void fn_80541BDC(void);
 extern void PSVECMag(void);
 extern void strcmp(void);
-extern void fn_80695B00(void);
+extern void __ptmf_scall(void);
 
 /* External data declarations */
 extern u8 lbl_8075F060[];
@@ -880,7 +880,7 @@ lbl_fn_8056173C_00000A00:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x6
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_8056173C_00000D6C
     lwz r3, lbl_8087F540
@@ -1743,7 +1743,7 @@ asm void fn_805623A8(void)
     mr r12, r3
     stw r0, 0x14(r1)
     lwz r3, 0xc(r3)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0

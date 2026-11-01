@@ -22,7 +22,7 @@ extern void fn_802381D8(void);
 extern void printf(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 
 /* External data declarations */
 extern u8 lbl_80742F68[];
@@ -1824,7 +1824,7 @@ lbl_fn_8022C2A0_00001894:
     beq lbl_fn_8022C2A0_000018C0
     lis r4, fn_802381D8@ha
     addi r4, r4, fn_802381D8@l
-    bl fn_80695A50
+    bl __destroy_arr
     stw r30, 0x24(r31)
     stw r30, 0x20(r31)
 lbl_fn_8022C2A0_000018C0:

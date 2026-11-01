@@ -30,7 +30,7 @@ extern void fn_800928B0(void);
 extern void fn_80093F58(void);
 extern void fn_80097D9C(void);
 extern void fn_800A4228(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CF7DC(void);
@@ -1995,13 +1995,13 @@ lbl_fn_8036503C_00001964:
     mr r3, r29
     li r4, 0x0
     li r5, 0x0
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     bne lbl_fn_8036503C_00001A68
     mr r3, r29
     li r4, 0x0
     li r5, 0x1a
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_8036503C_00001AB0
 lbl_fn_8036503C_00001A68:
@@ -2028,13 +2028,13 @@ lbl_fn_8036503C_00001AB0:
     mr r3, r29
     li r4, 0x0
     li r5, 0x1
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     bne lbl_fn_8036503C_00001AE0
     mr r3, r29
     li r4, 0x0
     li r5, 0x19
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_8036503C_00001B28
 lbl_fn_8036503C_00001AE0:

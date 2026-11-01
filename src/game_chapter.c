@@ -45,8 +45,8 @@ extern void GXSetNumTevStages(void);
 extern void GXLoadPosMtxImm(void);
 extern void GXSetCurrentMtx(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern void runtime_clampDouble(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -209,7 +209,7 @@ asm void fn_80077160(void)
     stw r29, 0x18(r3)
     stw r29, 0x1c(r3)
     addi r3, r3, 0x20
-    bl fn_806958E0
+    bl __construct_new_array
     stw r29, 0x140(r31)
     li r28, 0x0
     li r27, 0x0
@@ -393,7 +393,7 @@ lbl_atn_LensFlare_destructor_0000040C:
     addi r4, r4, atn_LH_Texture_destructAndFree@l
     li r5, 0x30
     li r6, 0x6
-    bl fn_806959D8
+    bl __destroy_new_array
     addic. r0, r30, 0x18
     beq lbl_atn_LensFlare_destructor_00000450
     lwz r3, 0x1c(r30)

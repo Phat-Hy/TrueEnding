@@ -63,8 +63,8 @@ extern void GXLoadPosMtxImm(void);
 extern void GXSetCurrentMtx(void);
 extern void fn_8061A0F0(void);
 extern void fn_8061A100(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 
 /* External data declarations */
 extern u8 lbl_80764588[];
@@ -1161,7 +1161,7 @@ asm void fn_805D3CA0(void)
     addi r5, r5, fn_805CD940@l
     li r6, 0x4
     li r7, 0x4
-    bl fn_806958E0
+    bl __construct_new_array
     addi r3, r28, 0xe4
     bl fn_805CDA80
     lbz r0, 0x5e(r29)
@@ -1262,7 +1262,7 @@ lbl_fn_805D3DD0_00000EE8:
     addi r4, r4, fn_805CD940@l
     li r5, 0x4
     li r6, 0x4
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
     bl fn_805D2C70
@@ -1593,7 +1593,7 @@ asm void fn_805D4260(void)
     addi r5, r5, fn_805CD940@l
     li r6, 0x4
     li r7, 0x2
-    bl fn_806958E0
+    bl __construct_new_array
     lis r3, lbl_807645B0@ha
     lfs f0, lbl_807645B0@l(r3)
     stfs f0, 0xe4(r28)
@@ -1849,7 +1849,7 @@ lbl_fn_805D4520_000016EC:
     addi r4, r4, fn_805CD940@l
     li r5, 0x4
     li r6, 0x2
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
     bl fn_805D2C70

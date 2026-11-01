@@ -10,7 +10,7 @@ extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
 extern void fn_800D0240(void);
 extern void atn_Task_constructor(void);
@@ -1408,13 +1408,13 @@ lbl_fn_8057FD00_0000125C:
     mr r3, r31
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     bne lbl_fn_8057FD00_00001294
     mr r3, r31
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_8057FD00_000012D8
 lbl_fn_8057FD00_00001294:
@@ -1478,7 +1478,7 @@ asm void fn_8057FDE8(void)
     stw r0, 0x8c(r30)
     lwz r31, lbl_8087EF70
     mr r3, r31
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_8057FDE8_000013D4
     lwz r0, 0x8c(r30)
@@ -1515,7 +1515,7 @@ lbl_fn_8057FDE8_000013D4:
     mr r3, r31
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_8057FDE8_00001430
     addi r3, r1, 0x8
@@ -1571,7 +1571,7 @@ asm void fn_8057FF3C(void)
     stw r0, 0xe0(r30)
     lwz r31, lbl_8087EF70
     mr r3, r31
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_8057FF3C_000015AC
     lwz r0, 0x32fc(r30)
@@ -1644,7 +1644,7 @@ lbl_fn_8057FF3C_000015AC:
     mr r3, r31
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_8057FF3C_000015F4
     addi r3, r1, 0x8
@@ -1682,7 +1682,7 @@ asm void fn_80580100(void)
     li r4, 0x0
     li r5, 0x4
     mr r3, r31
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80580100_00001714
     lwz r0, 0xdc(r30)
@@ -1744,7 +1744,7 @@ lbl_fn_80580100_00001714:
     mr r3, r31
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_80580100_0000175C
     addi r3, r1, 0x8

@@ -17,7 +17,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void mem_free(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800A55AC(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
@@ -567,7 +567,7 @@ lbl_fn_804B83F4_000006B8:
     mr r3, r31
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_804B83F4_000008FC
     li r4, 0x2
@@ -723,7 +723,7 @@ lbl_fn_804B83F4_000008FC:
     mr r3, r31
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_804B83F4_0000096C
     li r0, 0x0

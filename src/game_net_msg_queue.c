@@ -7,7 +7,7 @@ extern void __register_global_object(void);
 extern void fn_800827E0(void);
 extern void fn_800838B8(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_8047961C(void);
 extern void net_getPacketManager(void);
 extern void fn_804AF520(void);
@@ -539,7 +539,7 @@ lbl_fn_804F50E0_0000061C:
     la r6, lbl_808813D0
 lbl_fn_804F50E0_00000620:
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r5, lbl_8087F628
     li r3, 0x0
     sth r3, 0x86(r1)
@@ -799,7 +799,7 @@ lbl_fn_804F50E0_00000980:
     lwz r5, 0x4(r5)
     lwz r6, 0x4(r6)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_804F50E0_00000B5C
 lbl_fn_804F50E0_00000994:
     lwz r4, lbl_8087F1E4
@@ -818,7 +818,7 @@ lbl_fn_804F50E0_000009C0:
     lwz r5, 0x4(r5)
     lwz r6, 0x4(r6)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_804F50E0_00000B5C
 lbl_fn_804F50E0_000009D4:
     cmpwi r0, 0x1
@@ -874,7 +874,7 @@ lbl_fn_804F50E0_00000A84:
     lwz r5, 0x4(r5)
     lwz r6, 0x4(r6)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_804F50E0_00000B5C
 lbl_fn_804F50E0_00000A98:
     cmpwi r0, 0x2
@@ -931,7 +931,7 @@ lbl_fn_804F50E0_00000B4C:
     lwz r5, 0x4(r5)
     lwz r6, 0x4(r6)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
 lbl_fn_804F50E0_00000B5C:
     lhz r0, 0x8(r1)
     cmpwi r0, 0x0

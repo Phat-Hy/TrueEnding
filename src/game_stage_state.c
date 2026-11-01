@@ -22,7 +22,7 @@ extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
 extern void fn_806952C4(void);
-extern void fn_80695B00(void);
+extern void __ptmf_scall(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -1856,7 +1856,7 @@ asm void fn_8019D81C(void)
     lwz r5, 0x14(r12)
     lwz r6, 0x18(r12)
     lwz r7, 0x1c(r12)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0

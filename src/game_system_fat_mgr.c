@@ -39,7 +39,7 @@ extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_80695B00(void);
+extern void __ptmf_scall(void);
 
 /* External data declarations */
 extern u8 lbl_8074E008[];
@@ -1652,7 +1652,7 @@ asm void fn_8037F744(void)
     lis r5, lbl_8074E018@ha
     addi r5, r5, lbl_8074E018@l
     add r12, r5, r0
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     b lbl_fn_8037F744_00001690
 lbl_fn_8037F744_00001678:
@@ -1660,7 +1660,7 @@ lbl_fn_8037F744_00001678:
     lis r5, lbl_8074E114@ha
     addi r5, r5, lbl_8074E114@l
     add r12, r5, r0
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
 lbl_fn_8037F744_00001690:
     lwz r3, 0x900(r31)

@@ -17,7 +17,7 @@ extern void mem_free(void);
 extern void fn_800C16B4(void);
 extern void fn_800C1990(void);
 extern void atn_Task_setActive(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_8041D180(void);
 extern void fn_8041D198(void);
 extern void fn_80482DF4(void);
@@ -1659,11 +1659,11 @@ asm void fn_80487064(void)
     li r31, 0x0
     cmpwi r3, 0x0
     beq lbl_fn_80487064_00001748
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_80487064_00001748
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     mr r31, r3
 lbl_fn_80487064_00001748:
     cmpwi r31, 0x0
@@ -1702,11 +1702,11 @@ asm void fn_804870F4(void)
     cmpwi r0, 0x0
     beq lbl_fn_804870F4_000017D4
     mr r3, r0
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_804870F4_000017D4
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     mr r31, r3
 lbl_fn_804870F4_000017D4:
     cmpwi r31, 0x0

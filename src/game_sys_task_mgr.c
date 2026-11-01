@@ -13,8 +13,8 @@ extern void fn_8005B9AC(void);
 extern void fn_8006F420(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800DC12C(void);
-extern void fn_800DC1DC(void);
+extern void str_parseInt(void);
+extern void wcs_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800DC3CC(void);
 extern void fn_801360D8(void);
@@ -694,10 +694,10 @@ lbl_fn_80216AFC_000006EC:
     li r5, 0x2
     bl strncpy
     addi r3, r1, 0xc
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x0(r28)
     addi r3, r1, 0x8
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x0(r29)
     b lbl_fn_80216AFC_00000878
 lbl_fn_80216AFC_00000750:
@@ -719,10 +719,10 @@ lbl_fn_80216AFC_00000750:
     li r5, 0x2
     bl strncpy
     addi r3, r1, 0xc
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x0(r28)
     addi r3, r1, 0x8
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x0(r29)
     b lbl_fn_80216AFC_00000878
 lbl_fn_80216AFC_000007B0:
@@ -743,10 +743,10 @@ lbl_fn_80216AFC_000007B0:
     li r5, 0x2
     bl strncpy
     addi r3, r1, 0xc
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x0(r28)
     addi r3, r1, 0x8
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x0(r29)
     b lbl_fn_80216AFC_00000878
 lbl_fn_80216AFC_0000080C:
@@ -767,10 +767,10 @@ lbl_fn_80216AFC_0000080C:
     li r5, 0x2
     bl strncpy
     addi r3, r1, 0xc
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x0(r28)
     addi r3, r1, 0x8
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x0(r29)
     b lbl_fn_80216AFC_00000878
 lbl_fn_80216AFC_00000868:
@@ -1045,15 +1045,15 @@ lbl_fn_80216CD0_00000BBC:
     bl talk_parseDialogue
     addi r3, r1, 0xce0
     bl talk_parseDialogue
-    bl fn_800DC1DC
+    bl wcs_parseInt
     stw r3, 0x50(r25)
     addi r3, r1, 0xce0
     bl talk_parseDialogue
-    bl fn_800DC1DC
+    bl wcs_parseInt
     stw r3, 0x54(r25)
     addi r3, r1, 0xce0
     bl talk_parseDialogue
-    bl fn_800DC1DC
+    bl wcs_parseInt
     stw r3, 0x58(r25)
     addi r3, r1, 0xce0
     bl talk_parseDialogue
@@ -1104,7 +1104,7 @@ lbl_fn_80216CD0_00000BBC:
 lbl_fn_80216CD0_00000D44:
     addi r3, r1, 0xce0
     bl talk_parseDialogue
-    bl fn_800DC1DC
+    bl wcs_parseInt
     addi r24, r24, 0x1
     stw r3, 0x74(r27)
     cmpwi r24, 0x10
@@ -1198,7 +1198,7 @@ lbl_fn_80216CD0_00000E9C:
     beq lbl_fn_80216CD0_00000EE4
     addi r3, r1, 0x6ac
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0xbc(r28)
     addi r3, r1, 0x6ac
     bl talk_parseQuotedString
@@ -1206,11 +1206,11 @@ lbl_fn_80216CD0_00000E9C:
     stfs f1, 0xc4(r28)
     addi r3, r1, 0x6ac
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0xc0(r28)
     addi r3, r1, 0x6ac
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0xc8(r28)
 lbl_fn_80216CD0_00000EE4:
     addi r3, r1, 0x6ac

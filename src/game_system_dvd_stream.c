@@ -18,7 +18,7 @@ extern void fn_80076FF8(void);
 extern void route_interpolatePath(void);
 extern void fn_80087858(void);
 extern void fn_8008937C(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800A55AC(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_unlink(void);
@@ -59,7 +59,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void rand(void);
-extern void fn_806959D8(void);
+extern void __destroy_new_array(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -252,13 +252,13 @@ lbl_fn_803775DC_00000170:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     bne lbl_fn_803775DC_000001F8
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_803775DC_000002B4
 lbl_fn_803775DC_000001F8:
@@ -280,13 +280,13 @@ lbl_fn_803775DC_00000200:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     bne lbl_fn_803775DC_00000260
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_803775DC_000002B4
 lbl_fn_803775DC_00000260:
@@ -408,7 +408,7 @@ lbl_fn_803775DC_00000404:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_803775DC_000007F0
     lwz r0, 0x78(r29)
@@ -578,7 +578,7 @@ lbl_fn_803775DC_0000062C:
     addi r4, r4, fn_80119ECC@l
     li r5, 0x2d4
     li r6, 0x1c
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_803775DC_0000067C:
     addic. r3, r22, 0x539c
     beq lbl_fn_803775DC_00000698
@@ -586,7 +586,7 @@ lbl_fn_803775DC_0000067C:
     li r5, 0x240
     addi r4, r4, fn_8012AFE8@l
     li r6, 0x7
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_803775DC_00000698:
     mr r3, r22
     bl dtor_80084684

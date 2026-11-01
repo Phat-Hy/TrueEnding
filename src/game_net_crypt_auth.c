@@ -10,7 +10,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800A55AC(void);
 extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
@@ -19,7 +19,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
 extern void magic_dispatchActionCommand(void);
 extern void save_validateHeader(void);
@@ -219,7 +219,7 @@ lbl_fn_804B6204_00000164:
     mulli r0, r0, 0x3c
     subf r5, r0, r31
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     subi r0, r29, 0x7777
     lis r29, lbl_80758150@ha
     mulhw r0, r0, r31
@@ -465,7 +465,7 @@ asm void fn_804B671C(void)
     stw r0, 0x10(r1)
     stw r0, 0x14(r1)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     cmpwi r31, 0x0
     bne lbl_fn_804B671C_00000598
     lwz r4, 0x4c(r30)
@@ -1466,7 +1466,7 @@ lbl_fn_804B6F08_0000131C:
     la r4, lbl_808813D0
 lbl_fn_804B6F08_00001320:
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F588
     addi r4, r1, 0x28
     li r5, 0x0
@@ -1876,7 +1876,7 @@ lbl_fn_804B79F4_00001868:
     mr r3, r30
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_804B79F4_000018D0
     addi r3, r1, 0x8
@@ -1891,7 +1891,7 @@ lbl_fn_804B79F4_000018D0:
     mr r3, r30
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_804B79F4_00001904
     addi r3, r1, 0xc

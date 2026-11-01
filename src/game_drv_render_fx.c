@@ -22,8 +22,8 @@ extern void fn_80616EF0(void);
 extern void fn_8061A0F0(void);
 extern void fn_8061A100(void);
 extern void strncpy(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 
 /* External data declarations */
 extern u8 lbl_80764558[];
@@ -436,7 +436,7 @@ asm void fn_805CFC20(void)
     li r7, 0x4
     stw r0, 0x20(r3)
     addi r3, r3, 0x3c
-    bl fn_806958E0
+    bl __construct_new_array
     lis r4, lbl_80764558@ha
     li r7, 0xff
     addi r5, r4, lbl_80764558@l
@@ -1621,7 +1621,7 @@ lbl_fn_805D0DB0_0000172C:
     addi r4, r4, fn_805CD940@l
     li r5, 0x4
     li r6, 0x4
-    bl fn_806959D8
+    bl __destroy_new_array
     addic. r3, r30, 0x18
     beq lbl_fn_805D0DB0_00001754
     li r4, 0x0

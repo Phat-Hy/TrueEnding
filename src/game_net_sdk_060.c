@@ -23,8 +23,8 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void OSLockMutex(void);
 extern void OSUnlockMutex(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern void fn_80705450(void);
 extern void fn_80706E80(void);
 extern void fn_80707170(void);
@@ -1598,7 +1598,7 @@ asm void fn_8071D260(void)
     addi r5, r5, fn_8071D370@l
     li r6, 0xc
     li r7, 0x3
-    bl fn_806958E0
+    bl __construct_new_array
     li r0, 0x0
     stw r0, 0x24(r31)
     addi r3, r31, 0x2c
@@ -1640,7 +1640,7 @@ asm void fn_8071D300(void)
     li r5, 0xc
     addi r4, r4, fn_8071D370@l
     li r6, 0x3
-    bl fn_806959D8
+    bl __destroy_new_array
     cmpwi r31, 0x0
     ble lbl_fn_8071D300_000013C8
     mr r3, r30

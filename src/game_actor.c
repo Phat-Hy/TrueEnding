@@ -57,8 +57,8 @@ extern void fn_805B3658(void);
 extern void printf(void);
 extern void rand(void);
 extern void abort(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern void memmove(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -813,7 +813,7 @@ asm void fn_80014564(void)
     stw r27, 0x98(r31)
     stw r26, 0xdc(r31)
     stw r26, 0xe0(r31)
-    bl fn_806958E0
+    bl __construct_new_array
     lis r30, lbl_80775B18@ha
     addi r3, r31, 0x424
     addi r30, r30, lbl_80775B18@l
@@ -828,7 +828,7 @@ asm void fn_80014564(void)
     addi r5, r29, fn_8001482C@l
     li r6, 0x34
     li r7, 0x10
-    bl fn_806958E0
+    bl __construct_new_array
     li r3, -0x1
     li r0, 0x1c2
     stw r3, 0x7d0(r31)
@@ -1015,7 +1015,7 @@ lbl_fn_8001486C_00000B6C:
     addi r4, r4, fn_8001482C@l
     li r5, 0x34
     li r6, 0x10
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_8001486C_00000B90:
     addic. r3, r30, 0xe0
     beq lbl_fn_8001486C_00000BB4
@@ -1025,7 +1025,7 @@ lbl_fn_8001486C_00000B90:
     addi r4, r4, fn_8001482C@l
     li r5, 0x34
     li r6, 0x10
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_8001486C_00000BB4:
     addic. r4, r30, 0x6c
     beq lbl_fn_8001486C_00000BE0

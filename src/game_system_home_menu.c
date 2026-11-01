@@ -83,9 +83,9 @@ extern void fn_80473F88(void);
 extern void fn_805A38F4(void);
 extern void PSVECSquareMag(void);
 extern void atoi(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
-extern void fn_80695A50(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
+extern void __destroy_arr(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -306,7 +306,7 @@ asm void fn_8035DFB8(void)
     stw r29, 0x80(r31)
     stw r29, 0x84(r31)
     stw r29, 0x88(r31)
-    bl fn_806958E0
+    bl __construct_new_array
     lfs f1, lbl_80885670
     li r30, 0x1
     lfs f0, lbl_80885674
@@ -548,7 +548,7 @@ lbl_fn_8035E314_0000057C:
     beq lbl_fn_8035E314_000005B4
     lis r4, fn_8035E244@ha
     addi r4, r4, fn_8035E244@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8035E314_000005B4:
     lwz r3, 0x60(r30)
     li r0, 0x0
@@ -558,7 +558,7 @@ lbl_fn_8035E314_000005B4:
     beq lbl_fn_8035E314_000005D8
     lis r4, fn_8035E2A0@ha
     addi r4, r4, fn_8035E2A0@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8035E314_000005D8:
     addic. r0, r30, 0x1a8
     li r0, 0x0
@@ -582,7 +582,7 @@ lbl_fn_8035E314_0000060C:
     addi r4, r4, fn_8004ADF4@l
     li r5, 0x14
     li r6, 0x2
-    bl fn_806959D8
+    bl __destroy_new_array
     addic. r0, r30, 0x64
     beq lbl_fn_8035E314_0000065C
     lwz r3, 0x68(r30)
@@ -603,7 +603,7 @@ lbl_fn_8035E314_0000065C:
     beq lbl_fn_8035E314_0000067C
     lis r4, fn_8035E2A0@ha
     addi r4, r4, fn_8035E2A0@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8035E314_0000067C:
     li r0, 0x0
     stw r0, 0x60(r30)
@@ -616,7 +616,7 @@ lbl_fn_8035E314_00000688:
     beq lbl_fn_8035E314_000006A8
     lis r4, fn_8035E244@ha
     addi r4, r4, fn_8035E244@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8035E314_000006A8:
     li r0, 0x0
     stw r0, 0x58(r30)

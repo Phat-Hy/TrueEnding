@@ -41,8 +41,8 @@ extern void PSVECNormalize(void);
 extern void fn_805F9D20(void);
 extern void strcmp(void);
 extern void std_atan2(void);
-extern void fn_806958E0(void);
-extern void fn_80695B00(void);
+extern void __construct_new_array(void);
+extern void __ptmf_scall(void);
 extern void fn_8072D210(void);
 
 /* External data declarations */
@@ -139,7 +139,7 @@ asm void fn_8047B5A0(void)
     mr r12, r3
     stw r0, 0x14(r1)
     lwz r3, 0xc(r3)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0
@@ -210,7 +210,7 @@ asm void fn_8047B684(void)
     mr r12, r3
     stw r0, 0x14(r1)
     lwz r3, 0xc(r3)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0
@@ -2120,7 +2120,7 @@ asm void fn_8047CF7C(void)
     stw r8, 0x4(r8)
     stw r8, 0x0(r8)
     stw r30, 0xc4(r31)
-    bl fn_806958E0
+    bl __construct_new_array
     lfs f2, lbl_80886F90
     li r6, 0x1
     lfs f12, lbl_80886F8C

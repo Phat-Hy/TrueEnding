@@ -24,7 +24,7 @@ extern void fn_800971D4(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_802180A8(void);
 extern void task_findEntryById(void);
@@ -54,7 +54,7 @@ extern void strcmp(void);
 extern void atoi(void);
 extern void fn_8068AD58(void);
 extern void std_fmod(void);
-extern void fn_80695B00(void);
+extern void __ptmf_scall(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -560,7 +560,7 @@ asm void fn_8040F9C0(void)
     mr r12, r3
     stw r0, 0x14(r1)
     lwz r3, 0xc(r3)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0
@@ -1206,11 +1206,11 @@ lbl_fn_80410028_00000E9C:
     bne lbl_fn_80410028_00000F1C
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r30, r3
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     cmplwi r3, 0x1
     bgt lbl_fn_80410028_00000F58
     mulli r0, r30, 0x18
@@ -1239,7 +1239,7 @@ lbl_fn_80410028_00000F1C:
     bne lbl_fn_80410028_00000F58
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r30, r3
     addi r3, r1, 0x108
     bl talk_formatQuotedString

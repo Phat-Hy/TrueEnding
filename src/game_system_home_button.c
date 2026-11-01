@@ -60,7 +60,7 @@ extern void fn_8035EA2C(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
 extern void world_getLocalFlag(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_803E907C(void);
 extern void fn_803E9608(void);
 extern void fn_805A38F4(void);
@@ -71,7 +71,7 @@ extern void strncpy(void);
 extern void atoi(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -195,7 +195,7 @@ asm void fn_8035FC10(void)
     lis r4, fn_8035E244@ha
     mr r3, r0
     addi r4, r4, fn_8035E244@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8035FC10_00000050:
     cmpwi r31, 0x0
     stw r31, 0x0(r30)
@@ -284,7 +284,7 @@ asm void fn_8035FD40(void)
     lis r4, fn_8035E2A0@ha
     mr r3, r0
     addi r4, r4, fn_8035E2A0@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8035FD40_00000180:
     cmpwi r31, 0x0
     stw r31, 0x0(r30)
@@ -948,11 +948,11 @@ lbl_fn_803605EC_00000A3C:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_803605EC_00000A90
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_803605EC_00000A90
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x48(r3)
     cmpwi r0, 0x2
     bne lbl_fn_803605EC_00000A90

@@ -91,7 +91,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void fn_8067CE80(void);
 extern void strcmp(void);
-extern void fn_80695B28(void);
+extern void __dynamic_cast(void);
 extern void fn_806A8E40(void);
 extern void fn_806B0E30(void);
 extern void fn_806B1250(void);
@@ -2167,7 +2167,7 @@ lbl_fn_804EF0F4_00001B6C:
     addi r5, r5, lbl_8078CF20@l
     addi r6, r6, lbl_8078CA58@l
     li r7, 0x0
-    bl fn_80695B28
+    bl __dynamic_cast
     lhz r0, 0xe(r30)
     mr r31, r3
     cmplwi r0, 0x2
@@ -2472,7 +2472,7 @@ lbl_fn_804EF0F4_00001F94:
     addi r5, r5, lbl_8078CF20@l
     addi r6, r6, lbl_8078CA58@l
     li r7, 0x0
-    bl fn_80695B28
+    bl __dynamic_cast
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_fn_804EF0F4_000021D4
@@ -2550,7 +2550,7 @@ lbl_fn_804EF0F4_000020C8:
     addi r5, r5, lbl_8078D4E8@l
     addi r6, r6, lbl_8078CA58@l
     li r7, 0x0
-    bl fn_80695B28
+    bl __dynamic_cast
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_fn_804EF0F4_000021D4

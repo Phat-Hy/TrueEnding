@@ -30,12 +30,12 @@ extern void fn_80095750(void);
 extern void fn_800D8C14(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void wcslen(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -438,7 +438,7 @@ asm void fn_8020C0BC(void)
     stmw r23, 0x18bc(r1)
     mr r28, r3
     li r7, 0x203
-    bl fn_806958E0
+    bl __construct_new_array
     lis r27, lbl_8073F5C4@ha
     li r31, 0x0
     addi r27, r27, lbl_8073F5C4@l
@@ -637,7 +637,7 @@ lbl_fn_8020C0BC_00000694:
     mr r5, r24
     add r3, r0, r25
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r0, lbl_8087F1E0
     add r4, r28, r26
     mr r3, r24
@@ -673,7 +673,7 @@ lbl_fn_8020C0BC_0000071C:
     mr r5, r24
     add r3, r0, r25
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r0, lbl_8087F1E0
     add r4, r28, r26
     mr r3, r24
@@ -1277,7 +1277,7 @@ asm void fn_8020CC64(void)
     addi r3, r1, 0x270
     li r6, 0x24c
     li r7, 0x20
-    bl fn_806958E0
+    bl __construct_new_array
     mr r19, r27
     mr r20, r28
     addi r14, r28, 0x440
@@ -1867,7 +1867,7 @@ lbl_fn_8020CC64_000017C4:
     addi r4, r4, fn_8020D5A0@l
     li r5, 0x24c
     li r6, 0x20
-    bl fn_806959D8
+    bl __destroy_new_array
     addi r11, r1, 0x4c40
     bl _restgpr_14
     lwz r0, 0x4c44(r1)
@@ -1894,7 +1894,7 @@ asm void fn_8020D4E8(void)
     mr r30, r3
     stb r31, 0x0(r3)
     addi r3, r3, 0x20
-    bl fn_806958E0
+    bl __construct_new_array
     stw r31, 0x248(r30)
     mr r3, r30
     lwz r31, 0xc(r1)
@@ -1955,7 +1955,7 @@ asm void fn_8020D5A0(void)
     addi r4, r4, fn_8020D560@l
     li r6, 0x6
     addi r3, r3, 0x20
-    bl fn_806959D8
+    bl __destroy_new_array
     cmpwi r31, 0x0
     ble lbl_fn_8020D5A0_00001900
     mr r3, r30

@@ -23,7 +23,7 @@ extern void fn_805D9560(void);
 extern void fn_805D9570(void);
 extern void fn_805D9580(void);
 extern void fn_805D9590(void);
-extern void fn_80695B00(void);
+extern void __ptmf_scall(void);
 extern u32 strlen(const char* str);
 extern void vsnprintf(void);
 
@@ -772,7 +772,7 @@ lbl_fn_805DCC70_00000A48:
     addi r3, r1, 0x28
     addi r12, r1, 0x2c
     stw r29, 0x28(r1)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lis r5, lbl_80764630@ha
     lis r4, lbl_80764638@ha
@@ -913,7 +913,7 @@ lbl_fn_805DCC70_00000C34:
 lbl_fn_805DCC70_00000C38:
     addi r3, r1, 0x28
     addi r12, r1, 0x2c
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     mr r25, r3
 lbl_fn_805DCC70_00000C4C:
@@ -1094,7 +1094,7 @@ asm void fn_805DD170(void)
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     stw r29, 0x40(r1)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lis r4, lbl_80764630@ha
     lis r5, lbl_80764640@ha
@@ -1360,7 +1360,7 @@ lbl_fn_805DD170_0000124C:
 lbl_fn_805DD170_000012B8:
     addi r3, r1, 0x40
     addi r12, r1, 0x44
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     mr r26, r3
 lbl_fn_805DD170_000012CC:

@@ -18,7 +18,7 @@ extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void fn_8008BBD8(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void fn_80148990(void);
 extern void fn_801957F0(void);
 extern void task_findEntryById(void);
@@ -40,7 +40,7 @@ extern void strncmp(void);
 extern void abort(void);
 extern void std_atan2(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695B00(void);
+extern void __ptmf_scall(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -1216,7 +1216,7 @@ asm void fn_80309D20(void)
     lwz r12, 0x0(r3)
     lwz r3, 0xc(r12)
     lwz r4, 0x10(r12)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0
@@ -1754,7 +1754,7 @@ lbl_fn_8030A144_0000178C:
     cmpwi r3, 0x0
     bne lbl_fn_8030A144_000017D8
     addi r3, r28, 0x6
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x14f4(r29)
     b lbl_fn_8030A144_0000178C
 lbl_fn_8030A144_000017D8:
@@ -1765,7 +1765,7 @@ lbl_fn_8030A144_000017D8:
     cmpwi r3, 0x0
     bne lbl_fn_8030A144_00001800
     addi r3, r28, 0x6
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x14f8(r29)
     b lbl_fn_8030A144_0000178C
 lbl_fn_8030A144_00001800:
@@ -1776,7 +1776,7 @@ lbl_fn_8030A144_00001800:
     cmpwi r3, 0x0
     bne lbl_fn_8030A144_00001828
     addi r3, r28, 0x6
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x14fc(r29)
     b lbl_fn_8030A144_0000178C
 lbl_fn_8030A144_00001828:
@@ -1787,7 +1787,7 @@ lbl_fn_8030A144_00001828:
     cmpwi r3, 0x0
     bne lbl_fn_8030A144_00001850
     addi r3, r28, 0x3
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1524(r29)
     b lbl_fn_8030A144_0000178C
 lbl_fn_8030A144_00001850:
@@ -1798,7 +1798,7 @@ lbl_fn_8030A144_00001850:
     cmpwi r3, 0x0
     bne lbl_fn_8030A144_0000178C
     addi r3, r28, 0x3
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1528(r29)
     b lbl_fn_8030A144_0000178C
 lbl_fn_8030A144_00001878:

@@ -40,8 +40,8 @@ extern void PSMTXTrans(void);
 extern void PSVECMag(void);
 extern void rand(void);
 extern void strstr(void);
-extern void fn_806958E0(void);
-extern void fn_80695A50(void);
+extern void __construct_new_array(void);
+extern void __destroy_arr(void);
 extern void vec3_isNonZero(void);
 
 /* External data declarations */
@@ -144,7 +144,7 @@ lbl_fn_8022526C_00000038:
     stfs f0, 0x1834(r29)
     stfs f0, 0x1838(r29)
     stfs f0, 0x183c(r29)
-    bl fn_806958E0
+    bl __construct_new_array
     lwz r0, 0x12a8(r29)
     li r3, 0x1e
     stw r31, 0x1a00(r29)
@@ -232,7 +232,7 @@ lbl_fn_802253E4_000001CC:
     beq lbl_fn_802253E4_000001EC
     lis r4, fn_8011D320@ha
     addi r4, r4, fn_8011D320@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_802253E4_000001EC:
     li r0, 0x0
     stw r0, 0xc(r31)

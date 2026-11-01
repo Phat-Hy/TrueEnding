@@ -27,8 +27,8 @@ extern void OSLockMutex(void);
 extern void OSUnlockMutex(void);
 extern void fn_8060B080(void);
 extern void fn_80624AB0(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern void fn_80703F90(void);
 extern void fn_80704080(void);
 extern void fn_807041B0(void);
@@ -165,7 +165,7 @@ asm void fn_80717EA0(void)
     li r5, 0xc
     addi r4, r4, fn_80717A40@l
     li r6, 0x80
-    b fn_806959D8
+    b __destroy_new_array
 }
 
 asm void fn_80717EC0(void)
@@ -2250,7 +2250,7 @@ asm void fn_80719AA0(void)
     stw r9, 0x178(r30)
     stw r9, 0x17c(r30)
     stw r31, 0x180(r30)
-    bl fn_806958E0
+    bl __construct_new_array
     stw r31, 0x808(r30)
     lbz r0, lbl_808804F8
     cmpwi r0, 0x0
@@ -2379,7 +2379,7 @@ lbl_fn_80719C50_00001E54:
     addi r4, r4, fn_80719BF0@l
     li r5, 0x34
     li r6, 0x20
-    bl fn_806959D8
+    bl __destroy_new_array
     addic. r3, r29, 0x174
     beq lbl_fn_80719C50_00001E7C
     li r4, 0x0

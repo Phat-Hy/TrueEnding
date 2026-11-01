@@ -17,12 +17,12 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800A4228(void);
 extern void fn_800A49C4(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800A55AC(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void fn_800DBF68(void);
-extern void fn_800DC1DC(void);
+extern void wcs_parseInt(void);
 extern void fn_800E0908(void);
 extern void fn_80119ECC(void);
 extern void fn_8012AFE8(void);
@@ -64,8 +64,8 @@ extern void fn_8068BC30(void);
 extern void fn_8068BD60(void);
 extern void fn_8068C240(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806959D8(void);
-extern void fn_80695A50(void);
+extern void __destroy_new_array(void);
+extern void __destroy_arr(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -539,7 +539,7 @@ lbl_fn_803B2A68_000004E4:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_803B2A68_000006C0
     lwz r3, 0x48(r31)
@@ -576,7 +576,7 @@ lbl_fn_803B2A68_00000514:
     addi r4, r4, fn_80119ECC@l
     li r5, 0x2d4
     li r6, 0x1c
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_803B2A68_00000584:
     addic. r3, r29, 0x539c
     beq lbl_fn_803B2A68_000005A0
@@ -584,7 +584,7 @@ lbl_fn_803B2A68_00000584:
     li r5, 0x240
     addi r4, r4, fn_8012AFE8@l
     li r6, 0x7
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_803B2A68_000005A0:
     mr r3, r29
     bl dtor_80084684
@@ -666,7 +666,7 @@ lbl_fn_803B2A68_000006C0:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_803B2A68_00000820
     lis r4, lbl_8074FBA4@ha
@@ -705,7 +705,7 @@ lbl_fn_803B2A68_00000718:
     addi r4, r4, fn_80119ECC@l
     li r5, 0x2d4
     li r6, 0x1c
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_803B2A68_00000764:
     addic. r3, r29, 0x539c
     beq lbl_fn_803B2A68_00000780
@@ -713,7 +713,7 @@ lbl_fn_803B2A68_00000764:
     li r5, 0x240
     addi r4, r4, fn_8012AFE8@l
     li r6, 0x7
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_803B2A68_00000780:
     mr r3, r29
     bl dtor_80084684
@@ -796,7 +796,7 @@ asm void fn_803B2FBC(void)
     addi r4, r4, fn_80119ECC@l
     li r5, 0x2d4
     li r6, 0x1c
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_803B2FBC_00000898:
     addic. r3, r31, 0x539c
     beq lbl_fn_803B2FBC_000008B4
@@ -804,7 +804,7 @@ lbl_fn_803B2FBC_00000898:
     li r5, 0x240
     addi r4, r4, fn_8012AFE8@l
     li r6, 0x7
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_803B2FBC_000008B4:
     mr r3, r31
     bl dtor_80084684
@@ -1317,7 +1317,7 @@ lbl_fn_803B35FC_00000F48:
 lbl_fn_803B35FC_00000F5C:
     addi r3, r1, 0x18
     bl talk_parseDialogue
-    bl fn_800DC1DC
+    bl wcs_parseInt
     cmpwi r3, 0x1
     beq lbl_fn_803B35FC_00000FA0
     addi r27, r27, 0x1
@@ -1362,7 +1362,7 @@ lbl_fn_803B35FC_00000FF4:
     beq lbl_fn_803B35FC_0000100C
     lis r4, fn_80366364@ha
     addi r4, r4, fn_80366364@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803B35FC_0000100C:
     cmpwi r27, 0x0
     stw r27, 0x8(r28)
@@ -1411,7 +1411,7 @@ lbl_fn_803B35FC_00001090:
 lbl_fn_803B35FC_000010A8:
     addi r3, r1, 0x18
     bl talk_parseDialogue
-    bl fn_800DC1DC
+    bl wcs_parseInt
     cmpwi r3, 0x1
     beq lbl_fn_803B35FC_000012FC
     lwz r0, 0xc(r28)
@@ -1420,11 +1420,11 @@ lbl_fn_803B35FC_000010A8:
     bl talk_parseDialogue
     addi r3, r1, 0x18
     bl talk_parseDialogue
-    bl fn_800DC1DC
+    bl wcs_parseInt
     stw r3, 0x0(r30)
     addi r3, r1, 0x18
     bl talk_parseDialogue
-    bl fn_800DC1DC
+    bl wcs_parseInt
     stw r3, 0x4(r30)
     slwi r0, r29, 1
     addi r3, r1, 0x18
@@ -1556,11 +1556,11 @@ lbl_fn_803B35FC_00001254:
 lbl_fn_803B35FC_000012C8:
     addi r3, r1, 0x18
     bl talk_parseDialogue
-    bl fn_800DC1DC
+    bl wcs_parseInt
     stw r3, 0x30(r30)
     addi r3, r1, 0x18
     bl talk_parseDialogue
-    bl fn_800DC1DC
+    bl wcs_parseInt
     stw r3, 0x34(r30)
     addi r31, r31, 0x38
     lwz r3, 0x8(r30)
@@ -1608,7 +1608,7 @@ asm void fn_803B3AC4(void)
     lis r4, fn_80366364@ha
     mr r3, r0
     addi r4, r4, fn_80366364@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803B3AC4_00001374:
     lwz r3, 0x4(r31)
     li r0, 0x0
@@ -1712,7 +1712,7 @@ asm void fn_803B3C10(void)
     lis r4, fn_80366364@ha
     mr r3, r0
     addi r4, r4, fn_80366364@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803B3C10_000014C8:
     lwz r3, 0x4(r30)
     li r0, 0x0
@@ -1948,7 +1948,7 @@ lbl_fn_803B3D2C_0000179C:
 lbl_fn_803B3D2C_000017D8:
     lwz r3, 0x50(r1)
 lbl_fn_803B3D2C_000017DC:
-    bl fn_800DC1DC
+    bl wcs_parseInt
     lwz r0, 0x48(r1)
     mr r21, r3
     srwi. r0, r0, 31
@@ -1979,7 +1979,7 @@ lbl_fn_803B3D2C_00001814:
 lbl_fn_803B3D2C_00001844:
     lwz r3, 0x44(r1)
 lbl_fn_803B3D2C_00001848:
-    bl fn_800DC1DC
+    bl wcs_parseInt
     lwz r0, 0x3c(r1)
     mr r21, r3
     srwi. r0, r0, 31
@@ -2008,7 +2008,7 @@ lbl_fn_803B3D2C_00001880:
 lbl_fn_803B3D2C_000018A8:
     lwz r3, 0x38(r1)
 lbl_fn_803B3D2C_000018AC:
-    bl fn_800DC1DC
+    bl wcs_parseInt
     lwz r0, 0x30(r1)
     mr r21, r3
     srwi. r0, r0, 31

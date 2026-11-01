@@ -52,7 +52,7 @@ extern void strcmp(void);
 extern void strncmp(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_806958E0(void);
+extern void __construct_new_array(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -1721,7 +1721,7 @@ asm void fn_8027276C(void)
     addi r4, r4, fn_80057A64@l
     li r6, 0xc
     li r7, 0x6
-    b fn_806958E0
+    b __construct_new_array
 }
 
 asm void fn_8027278C(void)
@@ -1789,7 +1789,7 @@ asm void fn_8027278C(void)
     stw r0, 0x152c(r28)
     stw r31, 0x1530(r28)
     stw r31, 0x1534(r28)
-    bl fn_806958E0
+    bl __construct_new_array
     stw r31, 0x18e8(r28)
     addi r3, r28, 0x18f4
     stw r31, 0x18ec(r28)

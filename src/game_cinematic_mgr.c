@@ -52,7 +52,7 @@ extern void strstr(void);
 extern void atoi(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_806959D8(void);
+extern void __destroy_new_array(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -827,7 +827,7 @@ lbl_fn_803334D0_000009E0:
     addi r4, r4, dtor_80013D60@l
     li r5, 0xc
     li r6, 0x5
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_803334D0_00000A04:
     addi r3, r29, 0x15b0
     li r4, -0x1

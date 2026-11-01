@@ -16,7 +16,7 @@ extern void fn_800C31F4(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800FAB80(void);
@@ -456,7 +456,7 @@ lbl_fn_802DAA38_00000564:
     addi r3, r1, 0x3d0
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x3d0
     bl fn_80109828
@@ -827,7 +827,7 @@ lbl_fn_802DAA38_00000AF4:
     lwz r5, 0x60(r29)
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x1d0
     bl fn_80109828
@@ -1897,7 +1897,7 @@ lbl_fn_802DC014_00001A74:
     lwz r5, 0x60(r30)
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x40
     bl fn_80109828

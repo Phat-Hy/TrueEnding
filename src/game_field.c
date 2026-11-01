@@ -9,7 +9,7 @@ extern void fn_80082CAC(void);
 extern void fn_800832AC(void);
 extern void fn_80083AD4(void);
 extern void fn_8008510C(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void fn_8022AB18(void);
 extern void fn_8022ADB8(void);
 extern void texCache_freeBlock(void);
@@ -1203,7 +1203,7 @@ asm void fn_80085024(void)
     cmpwi r3, 0x0
     beq lbl_fn_80085024_00000F48
     addi r3, r31, 0x68
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r4, 0x58(r31)
     stw r3, 0x0(r4)
 lbl_fn_80085024_00000F48:

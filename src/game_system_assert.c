@@ -17,7 +17,7 @@ extern void fn_8006BB6C(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void fn_80204958(void);
 extern void fn_80204E54(void);
 extern void fn_802085B4(void);
@@ -1061,7 +1061,7 @@ lbl_fn_80207310_00000C34:
     beq lbl_fn_80207310_00000F6C
     lwz r0, lbl_8087F178
     add r28, r0, r30
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x0(r28)
     addi r3, r1, 0x38
     bl talk_parseQuotedString

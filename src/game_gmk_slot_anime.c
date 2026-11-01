@@ -43,8 +43,8 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void std_atan2(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -1336,13 +1336,13 @@ lbl_fn_80442F68_00001148:
     li r5, 0x2d4
     li r6, 0x1c
     subi r3, r3, 0x7bb0
-    bl fn_806959D8
+    bl __destroy_new_array
     lis r4, fn_8012B3A8@ha
     addi r3, r31, 0x64ec
     addi r4, r4, fn_8012B3A8@l
     li r5, 0x43c
     li r6, 0x7
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r31
     bl dtor_80084684
 lbl_fn_80442F68_00001184:
@@ -1468,7 +1468,7 @@ lbl_fn_80442FF4_000012EC:
     addi r4, r4, fn_8012B0B0@l
     addi r5, r5, fn_8012B3A8@l
     li r7, 0x7
-    bl fn_806958E0
+    bl __construct_new_array
     addis r3, r23, 0x1
     lis r4, fn_803BB3C0@ha
     lis r5, fn_80119ECC@ha
@@ -1477,7 +1477,7 @@ lbl_fn_80442FF4_000012EC:
     li r7, 0x1c
     addi r5, r5, fn_80119ECC@l
     subi r3, r3, 0x7bb0
-    bl fn_806958E0
+    bl __construct_new_array
     addis r22, r23, 0x1
     li r21, -0x1
     subi r24, r22, 0x2ac0

@@ -13,7 +13,7 @@ extern void fn_800A55AC(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_801F4728(void);
 extern void fn_801F4998(void);
@@ -1104,7 +1104,7 @@ lbl_fn_804C0094_00000E3C:
     srwi r5, r0, 31
     add r5, r0, r5
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r4, 0x4c(r31)
     addi r3, r30, 0x2a6
     addi r26, r4, 0x58

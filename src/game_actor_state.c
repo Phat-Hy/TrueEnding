@@ -9,7 +9,7 @@ extern void fn_80060D58(void);
 extern void fn_80061AE4(void);
 extern void fn_8006EF48(void);
 extern void fn_800A4450(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800A55D4(void);
 extern void fn_800A58D0(void);
 extern void ref_releaseHandle(void);
@@ -45,7 +45,7 @@ extern void fn_803BE8B4(void);
 extern void fn_803BEAB4(void);
 extern void fn_803BEB54(void);
 extern void fn_805BC6CC(void);
-extern void fn_806959D8(void);
+extern void __destroy_new_array(void);
 extern void runtime_clampDouble(void);
 
 /* External data declarations */
@@ -243,7 +243,7 @@ lbl_fn_801185E0_0000021C:
     beq lbl_fn_801185E0_00000238
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     b lbl_fn_801185E0_0000023C
 lbl_fn_801185E0_00000238:
     li r3, 0x0
@@ -255,7 +255,7 @@ lbl_fn_801185E0_0000023C:
     beq lbl_fn_801185E0_00000260
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     b lbl_fn_801185E0_00000264
 lbl_fn_801185E0_00000260:
     li r3, 0x0
@@ -274,7 +274,7 @@ lbl_fn_801185E0_00000280:
     beq lbl_fn_801185E0_0000029C
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     b lbl_fn_801185E0_000002A0
 lbl_fn_801185E0_0000029C:
     li r3, 0x0
@@ -286,7 +286,7 @@ lbl_fn_801185E0_000002A0:
     beq lbl_fn_801185E0_000002C4
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     b lbl_fn_801185E0_000002C8
 lbl_fn_801185E0_000002C4:
     li r3, 0x0
@@ -970,7 +970,7 @@ asm void fn_801191A8(void)
     mr r3, r0
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     b lbl_fn_801191A8_00000C10
 lbl_fn_801191A8_00000C0C:
     li r3, 0x0
@@ -1029,7 +1029,7 @@ lbl_fn_801191A8_00000CC8:
     beq lbl_fn_801191A8_00000CE4
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     b lbl_fn_801191A8_00000CE8
 lbl_fn_801191A8_00000CE4:
     li r3, 0x0
@@ -1096,7 +1096,7 @@ lbl_fn_801191A8_00000DAC:
     beq lbl_fn_801191A8_00000DD8
     li r4, 0x0
     li r5, 0xe
-    bl fn_800A555C
+    bl msg_getMessageById
     b lbl_fn_801191A8_00000E00
 lbl_fn_801191A8_00000DD8:
     li r3, 0x0
@@ -1107,7 +1107,7 @@ lbl_fn_801191A8_00000DE0:
     beq lbl_fn_801191A8_00000DFC
     li r4, 0x0
     li r5, 0xf
-    bl fn_800A555C
+    bl msg_getMessageById
     b lbl_fn_801191A8_00000E00
 lbl_fn_801191A8_00000DFC:
     li r3, 0x0
@@ -1318,7 +1318,7 @@ asm void fn_8011968C(void)
     mr r3, r0
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     b lbl_fn_8011968C_000010E4
 lbl_fn_8011968C_000010E0:
     li r3, 0x0
@@ -1330,7 +1330,7 @@ lbl_fn_8011968C_000010E4:
     beq lbl_fn_8011968C_00001108
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     b lbl_fn_8011968C_0000110C
 lbl_fn_8011968C_00001108:
     li r3, 0x0
@@ -1400,7 +1400,7 @@ asm void fn_8011979C(void)
     mr r3, r0
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     b lbl_fn_8011979C_000011F4
 lbl_fn_8011979C_000011F0:
     li r3, 0x0
@@ -1498,7 +1498,7 @@ lbl_fn_8011979C_00001330:
     beq lbl_fn_8011979C_0000134C
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     b lbl_fn_8011979C_00001350
 lbl_fn_8011979C_0000134C:
     li r3, 0x0
@@ -1730,7 +1730,7 @@ lbl_fn_8011999C_0000166C:
     addi r4, r4, fn_80119ECC@l
     li r5, 0x2d4
     li r6, 0x1c
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_8011999C_000016A0:
     addic. r3, r29, 0x539c
     beq lbl_fn_8011999C_000016BC
@@ -1738,7 +1738,7 @@ lbl_fn_8011999C_000016A0:
     li r5, 0x240
     addi r4, r4, fn_8012AFE8@l
     li r6, 0x7
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_8011999C_000016BC:
     mr r3, r29
     bl dtor_80084684

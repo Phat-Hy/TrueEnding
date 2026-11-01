@@ -43,8 +43,8 @@ extern void PSVECCrossProduct(void);
 extern void fn_8068AD58(void);
 extern void fn_8068AE9C(void);
 extern void std_atan2(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 
 /* External data declarations */
 extern u8 lbl_807381A8[];
@@ -343,19 +343,19 @@ asm void fn_80182418(void)
     stw r29, 0x70(r28)
     stw r29, 0x74(r28)
     stw r29, 0xf8(r28)
-    bl fn_806958E0
+    bl __construct_new_array
     addi r3, r28, 0x114
     addi r4, r30, fn_80237518@l
     addi r5, r31, fn_802375C4@l
     li r6, 0xc
     li r7, 0x2
-    bl fn_806958E0
+    bl __construct_new_array
     addi r3, r28, 0x12c
     addi r4, r30, fn_80237518@l
     addi r5, r31, fn_802375C4@l
     li r6, 0xc
     li r7, 0x2
-    bl fn_806958E0
+    bl __construct_new_array
     lfs f1, lbl_80881C4C
     lis r31, lbl_807381A8@ha
     lfs f0, lbl_80881C50
@@ -473,17 +473,17 @@ lbl_fn_801825F0_00000530:
     addi r4, r31, fn_802375C4@l
     li r5, 0xc
     li r6, 0x2
-    bl fn_806959D8
+    bl __destroy_new_array
     addi r3, r29, 0x114
     addi r4, r31, fn_802375C4@l
     li r5, 0xc
     li r6, 0x2
-    bl fn_806959D8
+    bl __destroy_new_array
     addi r3, r29, 0xfc
     addi r4, r31, fn_802375C4@l
     li r5, 0xc
     li r6, 0x2
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r29
     li r4, 0x0
     bl atn_Task_destructor

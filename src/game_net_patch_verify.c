@@ -59,7 +59,7 @@ extern void fn_805436F4(void);
 extern void fn_805436FC(void);
 extern void printf(void);
 extern void abort(void);
-extern void fn_806958E0(void);
+extern void __construct_new_array(void);
 extern char* strcpy(char* dest, const char* src);
 
 /* External data declarations */
@@ -2032,7 +2032,7 @@ asm void fn_8053D0F8(void)
     addi r4, r4, fn_800CB360@l
     addi r5, r5, ref_releaseHandle@l
     li r7, 0x4
-    bl fn_806958E0
+    bl __construct_new_array
     addi r3, r28, 0x184
     bl fn_8053E3A0
     lfs f0, lbl_80887CA0

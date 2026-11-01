@@ -18,7 +18,7 @@ extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
 extern void fn_800D594C(void);
 extern void atn_LH_Texture_update(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void atn_LoadHandle_getStatus(void);
 extern void fn_80478198(void);
@@ -26,7 +26,7 @@ extern void fn_80616250(void);
 extern void fn_80616360(void);
 extern void memcmp(void);
 extern void strncmp(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -689,7 +689,7 @@ lbl_fn_8007B260_00000870:
     addi r5, r1, 0x2c
     bl fn_8007A994
     mr r21, r3
-    bl fn_800DC12C
+    bl str_parseInt
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r20, r0, 5
@@ -699,7 +699,7 @@ lbl_fn_8007B260_00000870:
     addi r5, r1, 0x2c
     bl fn_8007A994
     mr r21, r3
-    bl fn_800DC12C
+    bl str_parseInt
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r19, r0, 5
@@ -709,7 +709,7 @@ lbl_fn_8007B260_00000870:
     addi r5, r1, 0x2c
     bl fn_8007A994
     mr r21, r3
-    bl fn_800DC12C
+    bl str_parseInt
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r18, r0, 5
@@ -719,7 +719,7 @@ lbl_fn_8007B260_00000870:
     addi r5, r1, 0x2c
     bl fn_8007A994
     mr r21, r3
-    bl fn_800DC12C
+    bl str_parseInt
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r17, r0, 5
@@ -1478,7 +1478,7 @@ asm void fn_8007C3F8(void)
     lis r4, fn_8007AA64@ha
     lwz r3, 0xc(r3)
     addi r4, r4, fn_8007AA64@l
-    bl fn_80695A50
+    bl __destroy_arr
     lwz r3, 0x10(r30)
     cmpwi r3, 0x0
     beq lbl_fn_8007C3F8_000013C8

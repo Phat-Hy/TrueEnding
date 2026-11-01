@@ -68,7 +68,7 @@ void fn_800A5218(void);
 void fn_800A54B0(void);
 void fn_800A5508(void);
 void fn_800A5554(void);
-void fn_800A555C(void);
+void msg_getMessageById(void);
 void fn_800A5584(void);
 void fn_800A55AC(void);
 void fn_800A55D4(void);
@@ -483,7 +483,7 @@ asm void fn_800A5554(void)
     b fn_800DDD18
 }
 
-asm void fn_800A555C(void)
+asm void msg_getMessageById(void)
 {
     nofralloc
     lis r7, lbl_80732898@ha

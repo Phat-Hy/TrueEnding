@@ -19,7 +19,7 @@ extern void fn_8005B6E8(void);
 extern void fn_800697D8(void);
 extern void mem_free(void);
 extern void fn_80094BD8(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
 extern void fn_8011BEB8(void);
@@ -1900,7 +1900,7 @@ asm void fn_8017CB9C(void)
     b lbl_fn_8017CB9C_00001BD8
 lbl_fn_8017CB9C_00001918:
     mr r3, r17
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r5, lbl_8087F430
     mr r4, r3
     lwz r3, 0x10d8(r5)

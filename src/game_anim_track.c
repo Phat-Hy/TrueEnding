@@ -18,7 +18,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_80092954(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_8011FC10(void);
 extern void fn_80133130(void);
@@ -57,7 +57,7 @@ extern void strcmp(void);
 extern void atoi(void);
 extern void abort(void);
 extern void fn_8068A850(void);
-extern void fn_806959D8(void);
+extern void __destroy_new_array(void);
 
 /* External data declarations */
 extern u8 jumptable_80785078[];
@@ -298,7 +298,7 @@ lbl_fn_80272E0C_0000028C:
     addi r4, r4, fn_80272CF0@l
     li r5, 0xec
     li r6, 0x4
-    bl fn_806959D8
+    bl __destroy_new_array
     addic. r4, r29, 0x14c0
     beq lbl_fn_80272E0C_000002E0
     beq lbl_fn_80272E0C_000002E0
@@ -622,7 +622,7 @@ lbl_fn_80272FB8_00000744:
     bne lbl_fn_80272FB8_0000076C
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x14bc(r29)
     b lbl_fn_80272FB8_00000C7C
 lbl_fn_80272FB8_0000076C:
@@ -634,7 +634,7 @@ lbl_fn_80272FB8_0000076C:
 lbl_fn_80272FB8_00000780:
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r4, lbl_8087F430
     mr r28, r3
     li r5, 0x0
@@ -821,7 +821,7 @@ lbl_fn_80272FB8_00000A14:
 lbl_fn_80272FB8_00000A28:
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r30, r3
     lwz r3, lbl_8087F408
     mr r4, r30

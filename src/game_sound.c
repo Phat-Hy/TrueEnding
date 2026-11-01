@@ -49,7 +49,7 @@ extern void fn_800CB654(void);
 extern void fn_800CFDA0(void);
 extern void fn_800D0AB0(void);
 extern void fn_800D19FC(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_findChar(void);
 extern void fn_800DCA6C(void);
 extern void fn_8046DC5C(void);
@@ -5229,15 +5229,15 @@ lbl_fn_8004A3FC_000042B8:
     bl sprintf
     addi r3, r1, 0x130
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r31, r3
     addi r3, r1, 0x130
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r26, r3
     addi r3, r1, 0x130
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     cmpwi r3, 0x0
     ble lbl_fn_8004A3FC_0000433C
     srawi r4, r26, 5
@@ -5256,7 +5256,7 @@ lbl_fn_8004A3FC_000042B8:
 lbl_fn_8004A3FC_0000433C:
     addi r3, r1, 0x130
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r26, r3
     addi r3, r1, 0x30
     bl str_findChar

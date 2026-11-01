@@ -11,7 +11,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_800EB7A0(void);
 extern void system_getNextSequenceId(void);
 extern void fn_801077A8(void);
@@ -148,7 +148,7 @@ lbl_fn_802D5674_000000F8:
     lwz r5, 0x60(r30)
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x38
     bl fn_80109828
@@ -1845,7 +1845,7 @@ lbl_fn_802D67F8_00001948:
     lwz r5, 0x60(r15)
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0xa0
     bl fn_80109828

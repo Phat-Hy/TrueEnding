@@ -12,7 +12,7 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_801173A8(void);
 extern void save_validateHeader(void);
@@ -272,7 +272,7 @@ lbl_fn_80584178_00000224:
     addi r3, r1, 0xe8
     addi r4, r30, 0x12
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0xe8
     li r4, 0x2b
     bl wcschr
@@ -284,7 +284,7 @@ lbl_fn_80584178_00000250:
     addi r3, r1, 0x68
     addi r4, r30, 0x12
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x68
     li r4, 0x2b
     bl wcschr

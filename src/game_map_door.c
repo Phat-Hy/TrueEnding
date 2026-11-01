@@ -19,7 +19,7 @@ extern void fn_80389838(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
-extern void fn_80695B00(void);
+extern void __ptmf_scall(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -1032,7 +1032,7 @@ asm void fn_80188918(void)
     lfs f1, 0x14(r12)
     lwz r3, 0xc(r12)
     lwz r4, 0x10(r12)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0
@@ -1134,7 +1134,7 @@ asm void fn_80188A70(void)
     lwz r12, 0x0(r3)
     lwz r3, 0xc(r12)
     addi r4, r12, 0x10
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0
@@ -1476,7 +1476,7 @@ asm void fn_80188F08(void)
     lbz r4, 0x10(r12)
     lbz r5, 0x11(r12)
     lbz r6, 0x12(r12)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0

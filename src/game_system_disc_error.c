@@ -60,8 +60,8 @@ extern void abort(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void fn_8068B100(void);
-extern void fn_806959D8(void);
-extern void fn_80695B00(void);
+extern void __destroy_new_array(void);
+extern void __ptmf_scall(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -154,7 +154,7 @@ asm void fn_80353C9C(void)
     lwz r12, 0x0(r3)
     lwz r3, 0xc(r12)
     lwz r4, 0x10(r12)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0
@@ -822,7 +822,7 @@ lbl_fn_80354398_000008F0:
     addi r4, r4, fn_8000D760@l
     li r5, 0xc
     li r6, 0x9
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r29
     li r4, 0x0
     bl fn_8035B78C

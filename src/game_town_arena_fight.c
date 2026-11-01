@@ -28,7 +28,7 @@ extern void fn_800A58D0(void);
 extern void fn_800BFAC8(void);
 extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_800E0000(void);
 extern void fn_800F52F0(void);
 extern void fn_800F52F8(void);
@@ -3390,7 +3390,7 @@ lbl_fn_803D2A6C_00002D08:
     addi r3, r1, 0x660
     addi r4, r4, lbl_8078C638@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x12c
     addi r4, r1, 0x660
     bl fn_803E6CBC
@@ -3419,7 +3419,7 @@ lbl_fn_803D2A6C_00002D68:
     addi r4, r4, lbl_8078C638@l
     addi r4, r4, 0xc
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
 lbl_fn_803D2A6C_00002DA8:
     addi r18, r1, 0x860
 lbl_fn_803D2A6C_00002DAC:

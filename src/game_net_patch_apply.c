@@ -24,7 +24,7 @@ extern void fn_8020F71C(void);
 extern void fn_80228FD8(void);
 extern void fn_80229240(void);
 extern void fn_803663A4(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_803B57EC(void);
 extern void fn_803CCC84(void);
 extern void atn_LoadHandle_constructor(void);
@@ -43,7 +43,7 @@ extern void fn_8053D0F8(void);
 extern void fn_8053EF74(void);
 extern void fn_805406C0(void);
 extern void fn_805501E0(void);
-extern void fn_806959D8(void);
+extern void __destroy_new_array(void);
 
 /* External data declarations */
 extern u8 lbl_8075E148[];
@@ -1669,7 +1669,7 @@ asm void fn_8053E6E4(void)
     addi r4, r4, ref_releaseHandle@l
     li r5, 0x4
     li r6, 0x4
-    bl fn_806959D8
+    bl __destroy_new_array
     addi r3, r30, 0x164
     li r4, -0x1
     bl fn_8053E054
@@ -2074,7 +2074,7 @@ lbl_fn_8053E8D4_000018FC:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_8053E8D4_00001940
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_8053E8D4_00001940
     lwz r3, lbl_8087F8A0
@@ -2084,7 +2084,7 @@ lbl_fn_8053E8D4_000018FC:
     cmpwi r30, 0x0
     beq lbl_fn_8053E8D4_00001940
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     addi r5, r30, 0x528
     li r4, 0x1
     bl fn_804A0580

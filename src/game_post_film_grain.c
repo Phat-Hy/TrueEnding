@@ -7,7 +7,7 @@ extern void fn_80063D3C(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800FAB80(void);
 extern void fn_80105BD8(void);
@@ -481,7 +481,7 @@ lbl_fn_802C9BF8_00000564:
     lwz r5, 0x60(r31)
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x1d0
     bl fn_80109828
@@ -500,7 +500,7 @@ lbl_fn_802C9BF8_000005A8:
     lwz r5, 0x60(r31)
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x1d0
     bl fn_80109828
@@ -518,7 +518,7 @@ lbl_fn_802C9BF8_000005E4:
     lwz r5, 0x60(r31)
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x1d0
     bl fn_80109828
@@ -728,7 +728,7 @@ lbl_fn_802C9BF8_000008EC:
     lwz r5, 0x60(r31)
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x1d0
     bl fn_80109828
@@ -789,7 +789,7 @@ lbl_fn_802C9BF8_000009C8:
     lwz r5, 0x60(r31)
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x1d0
     bl fn_80109828
@@ -824,7 +824,7 @@ lbl_fn_802C9BF8_00000A44:
     addi r3, r1, 0x1d0
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x1d0
     bl fn_80109828
@@ -847,7 +847,7 @@ lbl_fn_802C9BF8_00000A94:
     addi r3, r1, 0x1d0
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x1d0
     bl fn_80109828
@@ -1066,7 +1066,7 @@ lbl_fn_802CA490_00000DC4:
     lwz r5, 0x60(r31)
     lwz r5, 0x4(r5)
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0xb0
     bl fn_80109828

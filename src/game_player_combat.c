@@ -37,7 +37,7 @@ extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 
 /* External data declarations */
 extern u8 lbl_80736FA8[];
@@ -561,7 +561,7 @@ lbl_fn_8011E81C_000006B8:
     beq lbl_fn_8011E81C_000006F4
     lis r4, fn_8011D320@ha
     addi r4, r4, fn_8011D320@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8011E81C_000006F4:
     li r0, 0x1
     stw r0, 0x18(r27)
@@ -772,7 +772,7 @@ lbl_fn_8011EB18_000009BC:
     beq lbl_fn_8011EB18_000009E4
     lis r4, fn_8011D320@ha
     addi r4, r4, fn_8011D320@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8011EB18_000009E4:
     cmpwi r23, 0x0
     stw r23, 0x18(r31)
@@ -992,7 +992,7 @@ asm void fn_8011EEA0(void)
     lis r4, fn_8011D320@ha
     mr r3, r0
     addi r4, r4, fn_8011D320@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8011EEA0_00000CD8:
     li r0, 0x0
     stw r0, 0xc(r30)
@@ -1102,7 +1102,7 @@ lbl_fn_8011EF14_00000E38:
     beq lbl_fn_8011EF14_00000E68
     lis r4, fn_8011D320@ha
     addi r4, r4, fn_8011D320@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8011EF14_00000E68:
     cmpwi r17, 0x0
     stw r17, 0x8(r15)

@@ -24,8 +24,8 @@ extern void fn_805A1764(void);
 extern void fn_805A1A64(void);
 extern void OSLockMutex(void);
 extern void OSUnlockMutex(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern void fn_80709AD0(void);
 extern void fn_8070ABA0(void);
 extern void fn_8070AC20(void);
@@ -308,7 +308,7 @@ lbl_fn_8059F878_00000274:
     addi r4, r4, fn_8059E990@l
     addi r5, r5, fn_8059E9A8@l
     li r7, 0x80
-    bl fn_806958E0
+    bl __construct_new_array
     lis r29, lbl_80797128@ha
     lis r28, lbl_80797104@ha
     lis r27, lbl_807970C8@ha
@@ -455,7 +455,7 @@ lbl_fn_8059F878_0000049C:
     addi r4, r4, fn_8059E9A8@l
     li r5, 0xc
     li r6, 0x80
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r30
     bl OSUnlockMutex
 lbl_fn_8059F878_000004CC:
@@ -472,7 +472,7 @@ lbl_fn_8059F878_000004CC:
     addi r4, r4, fn_8059EA00@l
     addi r5, r5, fn_8059EA18@l
     li r7, 0x80
-    bl fn_806958E0
+    bl __construct_new_array
     lis r29, lbl_80797068@ha
     lis r28, lbl_80797044@ha
     lis r27, lbl_80797008@ha
@@ -619,7 +619,7 @@ lbl_fn_8059F878_000006E8:
     addi r4, r4, fn_8059EA18@l
     li r5, 0xc
     li r6, 0x80
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r30
     bl OSUnlockMutex
 lbl_fn_8059F878_00000718:
@@ -636,7 +636,7 @@ lbl_fn_8059F878_00000718:
     addi r4, r4, fn_8059EA70@l
     addi r5, r5, fn_8059EA88@l
     li r7, 0x80
-    bl fn_806958E0
+    bl __construct_new_array
     lis r25, lbl_80796FA8@ha
     lis r26, lbl_80796F84@ha
     lis r27, lbl_80796F48@ha
@@ -783,7 +783,7 @@ lbl_fn_8059F878_00000934:
     addi r4, r4, fn_8059EA88@l
     li r5, 0xc
     li r6, 0x80
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r24
     bl OSUnlockMutex
 lbl_fn_8059F878_00000964:

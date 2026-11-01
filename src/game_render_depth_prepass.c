@@ -33,7 +33,7 @@ extern void fn_800CB58C(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB6E4(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
@@ -91,7 +91,7 @@ extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
 extern void fn_8068B100(void);
-extern void fn_806959D8(void);
+extern void __destroy_new_array(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -438,7 +438,7 @@ lbl_fn_802B21FC_000003E8:
     addi r4, r4, atn_ColliCapsule_destructor@l
     li r5, 0x58
     li r6, 0xe
-    bl fn_806959D8
+    bl __destroy_new_array
     addic. r27, r30, 0x1558
     beq lbl_fn_802B21FC_00000488
     beq lbl_fn_802B21FC_00000488
@@ -939,7 +939,7 @@ lbl_fn_802B28BC_00000B3C:
     bne lbl_fn_802B28BC_00000B6C
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1520(r30)
     b lbl_fn_802B28BC_00000F34
 lbl_fn_802B28BC_00000B6C:
@@ -951,7 +951,7 @@ lbl_fn_802B28BC_00000B6C:
 lbl_fn_802B28BC_00000B80:
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r4, lbl_8087F430
     li r5, 0x0
     li r6, 0x0
@@ -1000,7 +1000,7 @@ lbl_fn_802B28BC_00000C10:
 lbl_fn_802B28BC_00000C24:
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r4, lbl_8087F430
     li r5, 0x0
     li r6, 0x0
@@ -1202,7 +1202,7 @@ lbl_fn_802B28BC_00000EE8:
     bne lbl_fn_802B28BC_00000F10
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1500(r30)
     b lbl_fn_802B28BC_00000F34
 lbl_fn_802B28BC_00000F10:
@@ -1213,7 +1213,7 @@ lbl_fn_802B28BC_00000F10:
     bne lbl_fn_802B28BC_00000F34
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x1508(r30)
 lbl_fn_802B28BC_00000F34:
     addi r3, r1, 0x8

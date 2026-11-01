@@ -57,7 +57,7 @@ extern void strcmp(void);
 extern void abort(void);
 extern void fn_8068AD58(void);
 extern void std_atan2(void);
-extern void fn_80695B00(void);
+extern void __ptmf_scall(void);
 
 /* External data declarations */
 extern u8 lbl_8074973C[];
@@ -1536,7 +1536,7 @@ asm void fn_8031F48C(void)
     mr r12, r3
     stw r0, 0x14(r1)
     lwz r3, 0xc(r3)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0
@@ -1607,7 +1607,7 @@ asm void fn_8031F570(void)
     mr r12, r3
     stw r0, 0x14(r1)
     lwz r3, 0xc(r3)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0

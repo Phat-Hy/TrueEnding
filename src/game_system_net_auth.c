@@ -37,7 +37,7 @@ extern void fn_803B0808(void);
 extern void fn_803B17C4(void);
 extern void fn_803EE45C(void);
 extern void fn_8047F580(void);
-extern void fn_80695B00(void);
+extern void __ptmf_scall(void);
 extern void memmove(void);
 
 /* External data declarations */
@@ -1992,7 +1992,7 @@ lbl_fn_80398704_00001A88:
     addi r4, r1, 0x8
     mulli r0, r0, 0xc
     add r12, r6, r0
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0xc(r1)
     cmpwi r0, 0x0

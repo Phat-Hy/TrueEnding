@@ -16,7 +16,7 @@ extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void save_validateHeader(void);
 extern void fn_801F4728(void);
 extern void fn_801F48C8(void);
@@ -326,7 +326,7 @@ lbl_fn_804C822C_000002C8:
     addi r3, r1, 0xa8
     addi r4, r31, 0x20
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r4, 0xa0(r22)
     addi r3, r28, 0x3fa
     addi r29, r4, 0x58

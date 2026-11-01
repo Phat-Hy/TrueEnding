@@ -17,7 +17,7 @@ extern void fn_800839EC(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void str_skipWhitespace(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_80206B14(void);
 extern void fn_80206B68(void);
 extern void fn_80206B70(void);
@@ -1127,7 +1127,7 @@ lbl_fn_80211770_00000E0C:
     add r6, r30, r31
     addi r4, r4, 0x2
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_80211770_00000E50
 lbl_fn_80211770_00000E34:
     la r4, lbl_8087DB40
@@ -1136,7 +1136,7 @@ lbl_fn_80211770_00000E34:
     add r6, r30, r31
     addi r4, r4, 0xe
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
 lbl_fn_80211770_00000E50:
     mr r3, r29
     addi r4, r1, 0x8

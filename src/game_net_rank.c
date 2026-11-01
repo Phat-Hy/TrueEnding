@@ -47,8 +47,8 @@ extern void printf(void);
 extern void wcslen(void);
 extern void wcsncmp(void);
 extern void abort(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -155,7 +155,7 @@ asm void fn_801F0DF0(void)
     addi r5, r5, atn_LH_Texture_destructAndFree@l
     li r6, 0x30
     li r7, 0x6
-    bl fn_806958E0
+    bl __construct_new_array
     addi r3, r27, 0x168
     bl fn_801F3490
     lis r31, lbl_8073E228@ha
@@ -227,7 +227,7 @@ asm void fn_801F0EF4(void)
     addi r4, r4, atn_LH_Texture_destructAndFree@l
     li r5, 0x30
     li r6, 0x6
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
     bl atn_Task_destructor
@@ -1744,7 +1744,7 @@ lbl_fn_801F2398_000016A0:
     addi r4, r4, fn_801F25CC@l
     addi r5, r5, fn_8006FA4C@l
     li r7, 0x1
-    bl fn_806958E0
+    bl __construct_new_array
     li r0, 0x1
     lis r4, lbl_8073E314@ha
     sth r0, 0x8(r31)
@@ -1956,7 +1956,7 @@ lbl_fn_801F26B8_00001980:
     addi r4, r4, fn_8006FA4C@l
     li r5, 0xc
     li r6, 0x1
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_801F26B8_000019A4:
     mr r3, r30
     li r4, 0x0

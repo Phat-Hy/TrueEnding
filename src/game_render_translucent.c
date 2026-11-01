@@ -40,7 +40,7 @@ extern void res_findResourceSlot(void);
 extern void fn_8023A680(void);
 extern void fn_802B98B0(void);
 extern void fn_802B9C5C(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_803EEE10(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -192,11 +192,11 @@ lbl_fn_802B77AC_000000E0:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_802B77AC_00000194
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_802B77AC_00000194
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x48(r3)
     cmpwi r0, 0x2
     bne lbl_fn_802B77AC_00000194

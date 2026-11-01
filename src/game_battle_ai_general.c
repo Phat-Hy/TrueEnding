@@ -45,7 +45,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800E0AA8(void);
 extern void fn_8011D424(void);
@@ -2196,7 +2196,7 @@ lbl_fn_8043DD78_00001BE0:
     bne lbl_fn_8043DD78_00001C08
     addi r3, r1, 0x130
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x194(r29)
     b lbl_fn_8043DD78_00001CC8
 lbl_fn_8043DD78_00001C08:
@@ -2240,15 +2240,15 @@ lbl_fn_8043DD78_00001C84:
     bne lbl_fn_8043DD78_00001CC8
     addi r3, r1, 0x130
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0xf4(r29)
     addi r3, r1, 0x130
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0xfc(r29)
     addi r3, r1, 0x130
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0xf8(r29)
 lbl_fn_8043DD78_00001CC8:
     addi r3, r1, 0x130

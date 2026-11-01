@@ -57,7 +57,7 @@ extern void fn_802180A8(void);
 extern void fn_802375C4(void);
 extern void fn_80237654(void);
 extern void res_MsgHandle_destructor(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_803ED8D8(void);
 extern void fn_803ED8F4(void);
 extern void fn_803EFCA8(void);
@@ -100,8 +100,8 @@ extern void strncmp(void);
 extern void atoi(void);
 extern void fn_806952C4(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695A50(void);
-extern void fn_80695B00(void);
+extern void __destroy_arr(void);
+extern void __ptmf_scall(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -416,7 +416,7 @@ lbl_fn_803EE124_0000027C:
     beq lbl_fn_803EE124_0000029C
     lis r4, fn_803EDF7C@ha
     addi r4, r4, fn_803EDF7C@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803EE124_0000029C:
     mr r3, r30
     li r4, 0x0
@@ -799,7 +799,7 @@ lbl_fn_803EE5AC_00000718:
     beq lbl_fn_803EE5AC_00000758
     lis r4, fn_803EDF7C@ha
     addi r4, r4, fn_803EDF7C@l
-    bl fn_80695A50
+    bl __destroy_arr
     stw r27, 0x64(r28)
 lbl_fn_803EE5AC_00000758:
     li r6, 0x0
@@ -1002,7 +1002,7 @@ lbl_fn_803EE7FC_00000A18:
     lis r4, fn_803EDF7C@ha
     lwz r3, 0x64(r25)
     addi r4, r4, fn_803EDF7C@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803EE7FC_00000A30:
     stw r26, 0x64(r25)
     stw r29, 0x60(r25)
@@ -1085,7 +1085,7 @@ lbl_fn_803EE7FC_00000B4C:
     lis r4, fn_803EDF7C@ha
     lwz r3, 0x64(r25)
     addi r4, r4, fn_803EDF7C@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803EE7FC_00000B64:
     stw r26, 0x64(r25)
     stw r27, 0x60(r25)
@@ -1290,7 +1290,7 @@ asm void fn_803EED2C(void)
     mr r12, r3
     stw r0, 0x14(r1)
     lwz r3, 0xc(r3)
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
     lwz r0, 0x14(r1)
     mtlr r0
@@ -1973,7 +1973,7 @@ asm void fn_803EF64C(void)
     beq lbl_fn_803EF64C_0000177C
     lis r4, fn_80041C0C@ha
     addi r4, r4, fn_80041C0C@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803EF64C_0000177C:
     li r0, 0x0
     stw r0, 0x24(r30)
@@ -1986,7 +1986,7 @@ lbl_fn_803EF64C_00001788:
     beq lbl_fn_803EF64C_000017A8
     lis r4, ref_releaseHandle@ha
     addi r4, r4, ref_releaseHandle@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803EF64C_000017A8:
     li r0, 0x0
     stw r0, 0x1c(r30)
@@ -1999,7 +1999,7 @@ lbl_fn_803EF64C_000017B4:
     beq lbl_fn_803EF64C_000017D4
     lis r4, fn_800EF73C@ha
     addi r4, r4, fn_800EF73C@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803EF64C_000017D4:
     li r0, 0x0
     stw r0, 0x14(r30)
@@ -2012,7 +2012,7 @@ lbl_fn_803EF64C_000017E0:
     beq lbl_fn_803EF64C_00001800
     lis r4, fn_802375C4@ha
     addi r4, r4, fn_802375C4@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_803EF64C_00001800:
     li r0, 0x0
     stw r0, 0xc(r30)
@@ -2166,11 +2166,11 @@ lbl_fn_803EF780_000019E0:
     cmpwi r3, 0x0
     beq lbl_fn_803EF780_00001B14
     bl fn_80121F00
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_803EF780_00001B14
     bl fn_80121F00
-    bl fn_80373148
+    bl kpad_getClampData
     mr r25, r3
     bl fn_803EFD9C
     lwz r0, 0x1c(r1)

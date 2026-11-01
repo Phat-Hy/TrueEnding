@@ -19,7 +19,7 @@ extern void fn_80083AD4(void);
 extern void mem_getAllocSize(void);
 extern void fn_800897D8(void);
 extern void fn_80089ACC(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800C310C(void);
 extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
@@ -76,7 +76,7 @@ extern void fn_8036635C(void);
 extern void world_setLocalFlag(void);
 extern void fn_8037308C(void);
 extern void fn_80373118(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_8037D4C0(void);
 extern void fn_8037EF30(void);
 extern void fn_8037F688(void);
@@ -322,8 +322,8 @@ extern void fn_8050EAEC(void);
 extern void fn_8050EB30(void);
 extern void fn_8050F8C8(void);
 extern void wcslen(void);
-extern void fn_806959D8(void);
-extern void fn_80695A50(void);
+extern void __destroy_new_array(void);
+extern void __destroy_arr(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -416,7 +416,7 @@ asm void fn_804D1414(void)
     beq lbl_fn_804D1414_00000050
     lis r4, fn_804D147C@ha
     addi r4, r4, fn_804D147C@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_804D1414_00000050:
     cmpwi r31, 0x0
     ble lbl_fn_804D1414_00000060
@@ -1494,7 +1494,7 @@ lbl_fn_804D201C_00000F0C:
     addi r4, r4, fn_804D1FDC@l
     li r5, 0xd5c
     li r6, 0x8
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_804D201C_00000F38:
     addi r3, r30, 0x2b78
     li r4, -0x1
@@ -1539,7 +1539,7 @@ lbl_fn_804D201C_00000FB4:
     addi r4, r4, fn_804D1414@l
     li r5, 0xc
     li r6, 0x15
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_804D201C_00000FD4:
     addic. r26, r30, 0x610
     beq lbl_fn_804D201C_00000FFC
@@ -2162,7 +2162,7 @@ lbl_fn_804D25D4_00001864:
     bl fn_801156BC
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00001934
     bl fn_804D16F4
@@ -2218,7 +2218,7 @@ lbl_fn_804D25D4_00001934:
     bl fn_801156BC
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00004898
     bl fn_804D16F4
@@ -2804,7 +2804,7 @@ lbl_fn_804D25D4_00002200:
     bl fn_801156BC
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_000022C4
     bl net_getFriendManager
@@ -4140,11 +4140,11 @@ lbl_fn_804D25D4_00003548:
     lwz r3, 0x5e0(r24)
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_000035A0
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_000035A0
     lwz r3, 0x5e0(r24)
-    bl fn_80373148
+    bl kpad_getClampData
     bl fn_803EFDAC
     cmpwi r3, 0x6
     bne lbl_fn_804D25D4_000035A0
@@ -4159,11 +4159,11 @@ lbl_fn_804D25D4_000035A0:
     lwz r3, 0x5e0(r24)
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_000035E8
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_000035E8
     lwz r3, 0x5e0(r24)
-    bl fn_80373148
+    bl kpad_getClampData
     bl fn_803EFDAC
     cmpwi r3, 0x7
     bne lbl_fn_804D25D4_000035E8
@@ -4814,7 +4814,7 @@ lbl_fn_804D25D4_00003EAC:
     bl fn_801156BC
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00003F7C
     li r20, 0x1
@@ -4860,7 +4860,7 @@ lbl_fn_804D25D4_00003FE4:
     bl fn_801156BC
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00004098
 lbl_fn_804D25D4_0000401C:

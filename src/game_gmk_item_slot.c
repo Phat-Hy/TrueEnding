@@ -26,7 +26,7 @@ extern void fn_80083AD4(void);
 extern void mem_alloc(void);
 extern void fn_800928B0(void);
 extern void fn_800A4228(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800BDB58(void);
 extern void fn_800CF7DC(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
@@ -591,25 +591,25 @@ asm void fn_8044073C(void)
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x11
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     bne lbl_fn_8044073C_00000640
     lwz r3, lbl_8087EF70
     li r4, 0x1
     li r5, 0x11
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     bne lbl_fn_8044073C_00000640
     lwz r3, lbl_8087EF70
     li r4, 0x2
     li r5, 0x11
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     bne lbl_fn_8044073C_00000640
     lwz r3, lbl_8087EF70
     li r4, 0x3
     li r5, 0x11
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_8044073C_0000071C
 lbl_fn_8044073C_00000640:

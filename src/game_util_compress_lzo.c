@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_8010C00C(void);
 extern void fn_80116FC0(void);
 extern void fn_8012B988(void);
@@ -1771,7 +1771,7 @@ lbl_fn_8058E5FC_00001754:
     addi r3, r1, 0x88
     addi r4, r4, lbl_80796ACC@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x88
     li r4, 0x2b
     bl wcschr
@@ -1785,7 +1785,7 @@ lbl_fn_8058E5FC_0000179C:
     addi r3, r1, 0x8
     addi r4, r4, lbl_80796ACC@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x8
     li r4, 0x2b
     bl wcschr

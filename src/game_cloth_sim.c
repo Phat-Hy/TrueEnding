@@ -20,7 +20,7 @@ extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_8011FC10(void);
 extern void fn_80133130(void);
@@ -590,7 +590,7 @@ lbl_fn_802799C0_00000630:
     bne lbl_fn_802799C0_00000658
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x19ac(r29)
     b lbl_fn_802799C0_00000C54
 lbl_fn_802799C0_00000658:
@@ -601,7 +601,7 @@ lbl_fn_802799C0_00000658:
     bne lbl_fn_802799C0_00000680
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x19b0(r29)
     b lbl_fn_802799C0_00000C54
 lbl_fn_802799C0_00000680:
@@ -623,7 +623,7 @@ lbl_fn_802799C0_000006A8:
     bne lbl_fn_802799C0_000006D0
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x14bc(r29)
     b lbl_fn_802799C0_00000C54
 lbl_fn_802799C0_000006D0:
@@ -634,7 +634,7 @@ lbl_fn_802799C0_000006D0:
     bne lbl_fn_802799C0_00000744
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r4, lbl_8087F430
     li r5, 0x0
     li r6, 0x0
@@ -669,7 +669,7 @@ lbl_fn_802799C0_00000744:
 lbl_fn_802799C0_00000758:
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r4, lbl_8087F430
     mr r28, r3
     li r5, 0x0
@@ -856,7 +856,7 @@ lbl_fn_802799C0_000009EC:
 lbl_fn_802799C0_00000A00:
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     mr r30, r3
     lwz r3, lbl_8087F408
     mr r4, r30

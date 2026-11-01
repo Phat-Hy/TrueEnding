@@ -23,7 +23,7 @@ extern void fn_80097E80(void);
 extern void fn_800BFAC8(void);
 extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_800EF73C(void);
 extern void fn_8014F698(void);
 extern void fn_801F6D7C(void);
@@ -76,7 +76,7 @@ extern void strcmp(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
 extern void fn_8068B100(void);
-extern void fn_806959D8(void);
+extern void __destroy_new_array(void);
 
 /* External data declarations */
 extern u8 lbl_80752A18[];
@@ -343,7 +343,7 @@ lbl_fn_8040A32C_000002C0:
     addi r3, r1, 0x50
     addi r4, r4, lbl_8078D4F0@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lfs f0, lbl_808862D4
     fmuls f30, f30, f0
     b lbl_fn_8040A32C_00000360
@@ -370,7 +370,7 @@ lbl_fn_8040A32C_00000328:
     addi r4, r4, lbl_8078D4F0@l
     addi r4, r4, 0x6
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     b lbl_fn_8040A32C_00000360
 lbl_fn_8040A32C_0000034C:
     lwz r4, 0x158(r30)
@@ -1436,7 +1436,7 @@ lbl_fn_8040B4B8_000011E0:
     addi r4, r4, fn_800EF73C@l
     li r5, 0xc
     li r6, 0x7
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r29
     li r4, 0x0
     bl fn_803EC69C

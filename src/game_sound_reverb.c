@@ -6,7 +6,7 @@ extern void _restgpr_22(void);
 extern void _restgpr_26(void);
 extern void _savegpr_22(void);
 extern void _savegpr_26(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_801DBAC0(void);
 extern void fn_801DBAD8(void);
 extern void fn_801DBAF8(void);
@@ -1599,7 +1599,7 @@ lbl_fn_801DF904_000015EC:
     addi r3, r1, 0x88
     addi r4, r4, lbl_80782898@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x88
     li r4, 0x2b
     bl wcschr
@@ -1613,7 +1613,7 @@ lbl_fn_801DF904_00001640:
     addi r3, r1, 0x8
     addi r4, r4, lbl_80782898@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     addi r3, r1, 0x8
     li r4, 0x2b
     bl wcschr

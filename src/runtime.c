@@ -29,12 +29,12 @@ void fn_806954E0(void);
 void fn_806954EC(void);
 void runtime_registerStaticObject(void);
 void dtor_80695824(void);
-void fn_806958E0(void);
-void fn_806959D8(void);
-void fn_80695A50(void);
+void __construct_new_array(void);
+void __destroy_new_array(void);
+void __destroy_arr(void);
 void vec3_isNonZero(void);
-void fn_80695B00(void);
-void fn_80695B28(void);
+void __ptmf_scall(void);
+void __dynamic_cast(void);
 void runtime_clampDouble(void);
 void __save_fpr(void);
 void __restore_fpr(void);
@@ -476,7 +476,7 @@ lbl_dtor_80695824_00000440:
     blr
 }
 
-asm void fn_806958E0(void)
+asm void __construct_new_array(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -496,8 +496,8 @@ asm void fn_806958E0(void)
     stw r7, 0x10(r1)
     stw r5, 0x14(r1)
     stw r0, 0x18(r1)
-    b lbl_fn_806958E0_000004CC
-lbl_fn_806958E0_000004A8:
+    b lbl___construct_new_array_000004CC
+lbl___construct_new_array_000004A8:
     mr r12, r28
     mr r3, r31
     li r4, 0x1
@@ -507,22 +507,22 @@ lbl_fn_806958E0_000004A8:
     add r31, r31, r29
     addi r0, r3, 0x1
     stw r0, 0x18(r1)
-lbl_fn_806958E0_000004CC:
+lbl___construct_new_array_000004CC:
     lwz r4, 0x18(r1)
     cmplw r4, r30
-    blt lbl_fn_806958E0_000004A8
+    blt lbl___construct_new_array_000004A8
     lwz r0, 0x10(r1)
     cmplw r4, r0
-    bge lbl_fn_806958E0_00000538
+    bge lbl___construct_new_array_00000538
     lwz r0, 0x14(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_806958E0_00000538
+    beq lbl___construct_new_array_00000538
     lwz r0, 0xc(r1)
     lwz r3, 0x8(r1)
     mullw r0, r0, r4
     add r31, r3, r0
-    b lbl_fn_806958E0_0000052C
-lbl_fn_806958E0_00000504:
+    b lbl___construct_new_array_0000052C
+lbl___construct_new_array_00000504:
     lwz r0, 0xc(r1)
     li r4, -0x1
     lwz r12, 0x14(r1)
@@ -533,11 +533,11 @@ lbl_fn_806958E0_00000504:
     lwz r3, 0x18(r1)
     subi r0, r3, 0x1
     stw r0, 0x18(r1)
-lbl_fn_806958E0_0000052C:
+lbl___construct_new_array_0000052C:
     lwz r0, 0x18(r1)
     cmpwi r0, 0x0
-    bne lbl_fn_806958E0_00000504
-lbl_fn_806958E0_00000538:
+    bne lbl___construct_new_array_00000504
+lbl___construct_new_array_00000538:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
     lwz r30, 0x28(r1)
@@ -548,7 +548,7 @@ lbl_fn_806958E0_00000538:
     blr
 }
 
-asm void fn_806959D8(void)
+asm void __destroy_new_array(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -563,8 +563,8 @@ asm void fn_806959D8(void)
     mr r29, r5
     stw r28, 0x10(r1)
     mr r28, r4
-    b lbl_fn_806959D8_000005A8
-lbl_fn_806959D8_0000058C:
+    b lbl___destroy_new_array_000005A8
+lbl___destroy_new_array_0000058C:
     subf r31, r29, r31
     mr r12, r28
     mr r3, r31
@@ -572,9 +572,9 @@ lbl_fn_806959D8_0000058C:
     mtctr r12
     bctrl
     subi r30, r30, 0x1
-lbl_fn_806959D8_000005A8:
+lbl___destroy_new_array_000005A8:
     cmpwi r30, 0x0
-    bne lbl_fn_806959D8_0000058C
+    bne lbl___destroy_new_array_0000058C
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -585,7 +585,7 @@ lbl_fn_806959D8_000005A8:
     blr
 }
 
-asm void fn_80695A50(void)
+asm void __destroy_arr(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -595,16 +595,16 @@ asm void fn_80695A50(void)
     stmw r26, 0x8(r1)
     mr r26, r3
     mr r27, r4
-    beq lbl_fn_80695A50_0000063C
+    beq lbl___destroy_arr_0000063C
     cmpwi r4, 0x0
-    beq lbl_fn_80695A50_00000634
+    beq lbl___destroy_arr_00000634
     lwz r29, -0x10(r3)
     li r31, 0x0
     lwz r30, -0xc(r3)
     mullw r0, r29, r30
     add r28, r3, r0
-    b lbl_fn_80695A50_0000062C
-lbl_fn_80695A50_00000610:
+    b lbl___destroy_arr_0000062C
+lbl___destroy_arr_00000610:
     subf r28, r29, r28
     mr r12, r27
     mr r3, r28
@@ -612,13 +612,13 @@ lbl_fn_80695A50_00000610:
     mtctr r12
     bctrl
     addi r31, r31, 0x1
-lbl_fn_80695A50_0000062C:
+lbl___destroy_arr_0000062C:
     cmplw r31, r30
-    blt lbl_fn_80695A50_00000610
-lbl_fn_80695A50_00000634:
+    blt lbl___destroy_arr_00000610
+lbl___destroy_arr_00000634:
     subi r3, r26, 0x10
     bl mem_getAllocSize
-lbl_fn_80695A50_0000063C:
+lbl___destroy_arr_0000063C:
     lmw r26, 0x8(r1)
     lwz r0, 0x24(r1)
     mtlr r0
@@ -643,7 +643,7 @@ asm void vec3_isNonZero(void)
     blr
 }
 
-asm void fn_80695B00(void)
+asm void __ptmf_scall(void)
 {
     nofralloc
     lwz r0, 0x0(r12)
@@ -651,15 +651,15 @@ asm void fn_80695B00(void)
     lwz r12, 0x8(r12)
     add r3, r3, r0
     cmpwi r11, 0x0
-    blt lbl_fn_80695B00_000006A0
+    blt lbl___ptmf_scall_000006A0
     lwzx r12, r3, r12
     lwzx r12, r12, r11
-lbl_fn_80695B00_000006A0:
+lbl___ptmf_scall_000006A0:
     mtctr r12
     bctr
 }
 
-asm void fn_80695B28(void)
+asm void __dynamic_cast(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -667,162 +667,162 @@ asm void fn_80695B28(void)
     cmpwi r3, 0x0
     stw r0, 0x24(r1)
     stw r31, 0x1c(r1)
-    bne lbl_fn_80695B28_000006C8
+    bne lbl___dynamic_cast_000006C8
     li r3, 0x0
-    b lbl_fn_80695B28_000008F0
-lbl_fn_80695B28_000006C8:
+    b lbl___dynamic_cast_000008F0
+lbl___dynamic_cast_000006C8:
     lwzx r4, r3, r4
     lwz r11, 0x0(r4)
     cmpwi r11, 0x0
-    beq lbl_fn_80695B28_000008BC
+    beq lbl___dynamic_cast_000008BC
     lwz r0, 0x4(r4)
     cmpwi r5, 0x0
     add r3, r3, r0
-    beq lbl_fn_80695B28_000008F0
+    beq lbl___dynamic_cast_000008F0
     lwz r4, 0x0(r5)
     lwz r9, 0x0(r11)
     mr r10, r4
-    b lbl_fn_80695B28_00000710
-lbl_fn_80695B28_000006F8:
+    b lbl___dynamic_cast_00000710
+lbl___dynamic_cast_000006F8:
     extsb. r5, r12
-    bne lbl_fn_80695B28_00000708
+    bne lbl___dynamic_cast_00000708
     li r5, 0x0
-    b lbl_fn_80695B28_00000734
-lbl_fn_80695B28_00000708:
+    b lbl___dynamic_cast_00000734
+lbl___dynamic_cast_00000708:
     addi r9, r9, 0x1
     addi r10, r10, 0x1
-lbl_fn_80695B28_00000710:
+lbl___dynamic_cast_00000710:
     lbz r12, 0x0(r9)
     lbz r5, 0x0(r10)
     extsb r8, r12
     extsb r5, r5
     cmpw r8, r5
-    beq lbl_fn_80695B28_000006F8
+    beq lbl___dynamic_cast_000006F8
     lbz r8, 0x0(r10)
     lbz r5, 0x0(r9)
     subf r5, r8, r5
-lbl_fn_80695B28_00000734:
+lbl___dynamic_cast_00000734:
     cmpwi r5, 0x0
-    bne lbl_fn_80695B28_00000740
-    b lbl_fn_80695B28_000008F0
-lbl_fn_80695B28_00000740:
+    bne lbl___dynamic_cast_00000740
+    b lbl___dynamic_cast_000008F0
+lbl___dynamic_cast_00000740:
     lwz r5, 0x4(r11)
     cmpwi r5, 0x0
-    beq lbl_fn_80695B28_000008BC
-    b lbl_fn_80695B28_000008B0
-lbl_fn_80695B28_00000750:
+    beq lbl___dynamic_cast_000008BC
+    b lbl___dynamic_cast_000008B0
+lbl___dynamic_cast_00000750:
     lwz r12, 0x4(r5)
     clrrwi. r8, r12, 31
-    beq lbl_fn_80695B28_00000854
+    beq lbl___dynamic_cast_00000854
     clrlwi r8, r12, 1
     lwz r31, 0x8(r5)
     add. r8, r0, r8
-    bne lbl_fn_80695B28_00000840
+    bne lbl___dynamic_cast_00000840
     lwz r10, 0x0(r9)
     mr r11, r4
-    b lbl_fn_80695B28_00000790
-lbl_fn_80695B28_00000778:
+    b lbl___dynamic_cast_00000790
+lbl___dynamic_cast_00000778:
     extsb. r8, r12
-    bne lbl_fn_80695B28_00000788
+    bne lbl___dynamic_cast_00000788
     li r8, 0x0
-    b lbl_fn_80695B28_000007B4
-lbl_fn_80695B28_00000788:
+    b lbl___dynamic_cast_000007B4
+lbl___dynamic_cast_00000788:
     addi r10, r10, 0x1
     addi r11, r11, 0x1
-lbl_fn_80695B28_00000790:
+lbl___dynamic_cast_00000790:
     lbz r12, 0x0(r10)
     lbz r8, 0x0(r11)
     extsb r9, r12
     extsb r8, r8
     cmpw r9, r8
-    beq lbl_fn_80695B28_00000778
+    beq lbl___dynamic_cast_00000778
     lbz r9, 0x0(r11)
     lbz r8, 0x0(r10)
     subf r8, r9, r8
-lbl_fn_80695B28_000007B4:
+lbl___dynamic_cast_000007B4:
     cmpwi r8, 0x0
-    bne lbl_fn_80695B28_00000840
+    bne lbl___dynamic_cast_00000840
     addi r12, r5, 0xc
     mtctr r31
     cmpwi r31, 0x0
-    ble lbl_fn_80695B28_000008BC
-lbl_fn_80695B28_000007CC:
+    ble lbl___dynamic_cast_000008BC
+lbl___dynamic_cast_000007CC:
     lwz r11, 0x4(r12)
     add. r4, r0, r11
-    bne lbl_fn_80695B28_00000834
+    bne lbl___dynamic_cast_00000834
     lwz r4, 0x0(r12)
     lwz r9, 0x0(r6)
     lwz r8, 0x0(r4)
-    b lbl_fn_80695B28_00000800
-lbl_fn_80695B28_000007E8:
+    b lbl___dynamic_cast_00000800
+lbl___dynamic_cast_000007E8:
     extsb. r4, r10
-    bne lbl_fn_80695B28_000007F8
+    bne lbl___dynamic_cast_000007F8
     li r4, 0x0
-    b lbl_fn_80695B28_00000824
-lbl_fn_80695B28_000007F8:
+    b lbl___dynamic_cast_00000824
+lbl___dynamic_cast_000007F8:
     addi r8, r8, 0x1
     addi r9, r9, 0x1
-lbl_fn_80695B28_00000800:
+lbl___dynamic_cast_00000800:
     lbz r10, 0x0(r8)
     lbz r4, 0x0(r9)
     extsb r5, r10
     extsb r4, r4
     cmpw r5, r4
-    beq lbl_fn_80695B28_000007E8
+    beq lbl___dynamic_cast_000007E8
     lbz r5, 0x0(r9)
     lbz r4, 0x0(r8)
     subf r4, r5, r4
-lbl_fn_80695B28_00000824:
+lbl___dynamic_cast_00000824:
     cmpwi r4, 0x0
-    bne lbl_fn_80695B28_00000834
+    bne lbl___dynamic_cast_00000834
     add r3, r3, r11
-    b lbl_fn_80695B28_000008F0
-lbl_fn_80695B28_00000834:
+    b lbl___dynamic_cast_000008F0
+lbl___dynamic_cast_00000834:
     addi r12, r12, 0x8
-    bdnz lbl_fn_80695B28_000007CC
-    b lbl_fn_80695B28_000008BC
-lbl_fn_80695B28_00000840:
+    bdnz lbl___dynamic_cast_000007CC
+    b lbl___dynamic_cast_000008BC
+lbl___dynamic_cast_00000840:
     subi r8, r31, 0x1
     addi r5, r5, 0xc
     slwi r8, r8, 3
     add r5, r5, r8
-    b lbl_fn_80695B28_000008AC
-lbl_fn_80695B28_00000854:
+    b lbl___dynamic_cast_000008AC
+lbl___dynamic_cast_00000854:
     lwz r10, 0x0(r9)
     mr r11, r4
-    b lbl_fn_80695B28_00000878
-lbl_fn_80695B28_00000860:
+    b lbl___dynamic_cast_00000878
+lbl___dynamic_cast_00000860:
     extsb. r8, r31
-    bne lbl_fn_80695B28_00000870
+    bne lbl___dynamic_cast_00000870
     li r8, 0x0
-    b lbl_fn_80695B28_0000089C
-lbl_fn_80695B28_00000870:
+    b lbl___dynamic_cast_0000089C
+lbl___dynamic_cast_00000870:
     addi r10, r10, 0x1
     addi r11, r11, 0x1
-lbl_fn_80695B28_00000878:
+lbl___dynamic_cast_00000878:
     lbz r31, 0x0(r10)
     lbz r8, 0x0(r11)
     extsb r9, r31
     extsb r8, r8
     cmpw r9, r8
-    beq lbl_fn_80695B28_00000860
+    beq lbl___dynamic_cast_00000860
     lbz r9, 0x0(r11)
     lbz r8, 0x0(r10)
     subf r8, r9, r8
-lbl_fn_80695B28_0000089C:
+lbl___dynamic_cast_0000089C:
     cmpwi r8, 0x0
-    bne lbl_fn_80695B28_000008AC
+    bne lbl___dynamic_cast_000008AC
     add r3, r3, r12
-    b lbl_fn_80695B28_000008F0
-lbl_fn_80695B28_000008AC:
+    b lbl___dynamic_cast_000008F0
+lbl___dynamic_cast_000008AC:
     addi r5, r5, 0x8
-lbl_fn_80695B28_000008B0:
+lbl___dynamic_cast_000008B0:
     lwz r9, 0x0(r5)
     cmpwi r9, 0x0
-    bne lbl_fn_80695B28_00000750
-lbl_fn_80695B28_000008BC:
+    bne lbl___dynamic_cast_00000750
+lbl___dynamic_cast_000008BC:
     cmpwi r7, 0x0
-    beq lbl_fn_80695B28_000008EC
+    beq lbl___dynamic_cast_000008EC
     lis r4, lbl_8078B198@ha
     lis r3, lbl_80766778@ha
     addi r4, r4, lbl_8078B198@l
@@ -833,9 +833,9 @@ lbl_fn_80695B28_000008BC:
     addi r4, r1, 0x8
     addi r5, r5, fn_80394068@l
     bl fn_80697BB8
-lbl_fn_80695B28_000008EC:
+lbl___dynamic_cast_000008EC:
     li r3, 0x0
-lbl_fn_80695B28_000008F0:
+lbl___dynamic_cast_000008F0:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     mtlr r0

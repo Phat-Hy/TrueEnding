@@ -16,7 +16,7 @@ extern void fn_800CA2FC(void);
 extern void fn_800CA3D4(void);
 extern void fn_8059E380(void);
 extern void PSVECMag(void);
-extern void fn_80695B00(void);
+extern void __ptmf_scall(void);
 extern void fn_80709AD0(void);
 extern void fn_80709F20(void);
 extern void fn_8070ABE0(void);
@@ -1029,7 +1029,7 @@ lbl_fn_800CAE64_00000B4C:
     mulli r0, r0, 0xc
     addi r5, r5, 0x30
     add r12, r30, r0
-    bl fn_80695B00
+    bl __ptmf_scall
     nop
 lbl_fn_800CAE64_00000BA8:
     lfs f1, 0x18(r1)

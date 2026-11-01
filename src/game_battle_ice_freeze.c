@@ -57,7 +57,7 @@ extern void strncpy(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void fn_8068A850(void);
-extern void fn_806958E0(void);
+extern void __construct_new_array(void);
 extern char* strcpy(char* dest, const char* src);
 
 /* External data declarations */
@@ -1962,7 +1962,7 @@ asm void fn_8041CDD8(void)
     addi r5, r5, fn_800EF73C@l
     li r6, 0xc
     li r7, 0x6
-    bl fn_806958E0
+    bl __construct_new_array
     lis r4, fn_80042740@ha
     lis r5, fn_80041C0C@ha
     addi r3, r31, 0x13c
@@ -1970,7 +1970,7 @@ asm void fn_8041CDD8(void)
     addi r4, r4, fn_80042740@l
     addi r5, r5, fn_80041C0C@l
     li r7, 0x6
-    bl fn_806958E0
+    bl __construct_new_array
     addi r8, r31, 0x23c
     addi r3, r31, 0x278
     lfs f2, lbl_80886558

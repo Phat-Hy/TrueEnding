@@ -32,7 +32,7 @@ extern void fn_800971D4(void);
 extern void fn_800B1B28(void);
 extern void fn_800C16B4(void);
 extern void atn_Task_destructor(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void fn_804962B0(void);
@@ -1454,7 +1454,7 @@ lbl_fn_8049C960_00001264:
     bne lbl_fn_8049C960_000012D0
     mr r3, r28
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     cmplwi r3, 0x1
     bgt lbl_fn_8049C960_000012D0
     mulli r29, r3, 0xc
@@ -1870,7 +1870,7 @@ lbl_fn_8049CE40_00001818:
     bne lbl_fn_8049CE40_0000186C
     mr r3, r22
     bl talk_formatQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     lwz r0, lbl_8087E0D0
     lwz r4, lbl_8087E0D0
     cmpw r3, r0

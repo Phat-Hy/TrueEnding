@@ -24,7 +24,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Task_constructor(void);
 extern void fn_800DBF68(void);
-extern void fn_800DC1DC(void);
+extern void wcs_parseInt(void);
 extern void fn_800E0000(void);
 extern void fn_800E0908(void);
 extern void fn_801EC158(void);
@@ -1349,7 +1349,7 @@ lbl_fn_801F36C8_000010A4:
     stw r27, 0x34(r1)
     stw r27, 0x38(r1)
     stw r27, 0x3c(r1)
-    bl fn_800DC1DC
+    bl wcs_parseInt
     stw r3, 0x30(r1)
     addi r3, r1, 0x60
     bl talk_parseDialogue

@@ -78,7 +78,7 @@ extern void fn_802F0998(void);
 extern void fn_80315644(void);
 extern void fn_80316E38(void);
 extern void fn_80317034(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_803750E4(void);
 extern void fn_803D6E24(void);
 extern void fn_803EC568(void);
@@ -867,16 +867,16 @@ lbl_fn_803FA5C8_0000098C:
     cmpwi r3, 0x0
     beq lbl_fn_803FA5C8_000009F0
     bl fn_80121F00
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_803FA5C8_000009F0
     bl fn_80121F00
-    bl fn_80373148
+    bl kpad_getClampData
     bl fn_803EFDA4
     cmpwi r3, 0xb
     bne lbl_fn_803FA5C8_000009F0
     bl fn_80121F00
-    bl fn_80373148
+    bl kpad_getClampData
     bl fn_803EFDAC
     cmpwi r3, 0x3
     bne lbl_fn_803FA5C8_000009F0
@@ -1593,16 +1593,16 @@ lbl_fn_803FAF8C_000013B0:
     li r27, 0x0
     cmpwi r3, 0x0
     beq lbl_fn_803FAF8C_000013F8
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_803FAF8C_000013F8
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x4c(r3)
     cmpwi r0, 0xb
     bne lbl_fn_803FAF8C_000013F8
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r0, 0x50(r3)
     cmpwi r0, 0x3
     bne lbl_fn_803FAF8C_000013F8

@@ -18,7 +18,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_801D0960(void);
 extern void fn_80201E78(void);
@@ -36,7 +36,7 @@ extern void PSMTXMultVec(void);
 extern void PSVECMag(void);
 extern void strcmp(void);
 extern void strstr(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 extern void fn_806ABCF0(void);
 extern void fn_806CF0E0(void);
 extern void fn_806CF160(void);
@@ -229,7 +229,7 @@ asm void fn_8050F738(void)
     addi r3, r3, 0x1f0
     addi r4, r4, 0x1a
     crclr 6
-    b fn_800DD3FC
+    b wcs_vformat
 }
 
 asm void fn_8050F758(void)
@@ -477,7 +477,7 @@ lbl_fn_8050F940_00000498:
     lis r4, fn_801D0960@ha
     stw r0, 0x54(r28)
     addi r4, r4, fn_801D0960@l
-    bl fn_80695A50
+    bl __destroy_arr
     lwz r31, 0x1c(r1)
     mr r3, r28
     lwz r30, 0x18(r1)
@@ -519,7 +519,7 @@ lbl_fn_8050FA80_00000524:
     lis r4, fn_801D0960@ha
     lwz r3, 0x54(r30)
     addi r4, r4, fn_801D0960@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_8050FA80_0000053C:
     addic. r0, r30, 0x50
     beq lbl_fn_8050FA80_00000558

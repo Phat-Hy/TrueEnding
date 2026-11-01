@@ -37,8 +37,8 @@ extern void fn_806926D4(void);
 extern void fn_8069293C(void);
 extern void fn_806952C4(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806959D8(void);
-extern void fn_80695A50(void);
+extern void __destroy_new_array(void);
+extern void __destroy_arr(void);
 
 /* External data declarations */
 extern u8 lbl_8074F8CC[];
@@ -918,7 +918,7 @@ lbl_fn_80394320_00000B58:
     beq lbl_fn_80394320_00000B78
     lis r4, fn_801360D8@ha
     addi r4, r4, fn_801360D8@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80394320_00000B78:
     li r0, 0x0
     stw r0, 0x150(r30)
@@ -931,7 +931,7 @@ lbl_fn_80394320_00000B84:
     beq lbl_fn_80394320_00000BA4
     lis r4, fn_801360D8@ha
     addi r4, r4, fn_801360D8@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80394320_00000BA4:
     li r0, 0x0
     stw r0, 0x148(r30)
@@ -1104,7 +1104,7 @@ lbl_fn_80394320_00000DD0:
     beq lbl_fn_80394320_00000DF0
     lis r4, atn_ColliBox_destructor@ha
     addi r4, r4, atn_ColliBox_destructor@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80394320_00000DF0:
     li r0, 0x0
     stw r0, 0x108(r30)
@@ -1224,7 +1224,7 @@ lbl_fn_80394320_00000F6C:
     addi r4, r4, atn_LH_Binary_destructor@l
     li r5, 0x8
     li r6, 0x3
-    bl fn_806959D8
+    bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
     bl atn_Task_destructor
@@ -1473,7 +1473,7 @@ lbl_fn_80394C68_000012CC:
     beq lbl_fn_80394C68_000012EC
     lis r4, atn_ColliBox_destructor@ha
     addi r4, r4, atn_ColliBox_destructor@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80394C68_000012EC:
     cmpwi r18, 0x0
     stw r18, 0x104(r25)
@@ -1505,7 +1505,7 @@ lbl_fn_80394C68_00001340:
     beq lbl_fn_80394C68_00001360
     lis r4, fn_801360D8@ha
     addi r4, r4, fn_801360D8@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80394C68_00001360:
     cmpwi r18, 0x0
     stw r18, 0x144(r25)
@@ -1537,7 +1537,7 @@ lbl_fn_80394C68_000013B4:
     beq lbl_fn_80394C68_000013D4
     lis r4, fn_801360D8@ha
     addi r4, r4, fn_801360D8@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80394C68_000013D4:
     cmpwi r18, 0x0
     stw r18, 0x14c(r25)

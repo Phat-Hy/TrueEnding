@@ -58,8 +58,8 @@ extern void printf(void);
 extern void atoi(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806959D8(void);
-extern void fn_80695A50(void);
+extern void __destroy_new_array(void);
+extern void __destroy_arr(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -1053,7 +1053,7 @@ lbl_fn_805BD3B0_00000D18:
     li r5, 0x4c
     addi r4, r4, fn_805B9ECC@l
     li r6, 0x4
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_805BD3B0_00000D34:
     addi r3, r30, 0x280
     li r4, -0x1
@@ -1423,7 +1423,7 @@ lbl_fn_805BD4BC_0000121C:
     lwz r3, 0x1c(r31)
     addi r4, r19, dtor_80013D60@l
     stw r0, 0x1c(r31)
-    bl fn_80695A50
+    bl __destroy_arr
     li r19, 0x0
     li r20, 0x0
     li r25, 0x0
@@ -1763,7 +1763,7 @@ lbl_fn_805BDD78_000016F4:
     lis r4, dtor_80013D60@ha
     lwz r3, 0x1c(r29)
     addi r4, r4, dtor_80013D60@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_805BDD78_00001724:
     addic. r4, r29, 0x10
     beq lbl_fn_805BDD78_00001750

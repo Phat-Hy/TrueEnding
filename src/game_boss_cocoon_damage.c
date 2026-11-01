@@ -72,7 +72,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void strncmp(void);
 extern void fn_8068B100(void);
-extern void fn_806958E0(void);
+extern void __construct_new_array(void);
 
 /* External data declarations */
 extern u8 jumptable_8078F7A0[];
@@ -617,7 +617,7 @@ asm void fn_80458270(void)
     addi r4, r4, fn_802AC550@l
     addi r5, r5, atn_ColliCapsule_destructor@l
     li r7, 0xb
-    bl fn_806958E0
+    bl __construct_new_array
     li r0, 0x1
     stw r0, 0x18c8(r28)
     addi r3, r28, 0x18fc

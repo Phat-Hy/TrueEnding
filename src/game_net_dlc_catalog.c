@@ -22,7 +22,7 @@ extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void str_findChar(void);
-extern void fn_800DD3FC(void);
+extern void wcs_vformat(void);
 extern void fn_800E2AF8(void);
 extern void fn_800E2D4C(void);
 extern void fn_8011F6B0(void);
@@ -44,7 +44,7 @@ extern void fn_8020924C(void);
 extern void fn_80219544(void);
 extern void fn_80365390(void);
 extern void fn_80371320(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_804EB874(void);
 extern void fn_805AE3C8(void);
 extern void PSVECNormalize(void);
@@ -52,8 +52,8 @@ extern void PSVECMag(void);
 extern void wmemcpy(void);
 extern void wcslen(void);
 extern void wcscpy(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern void runtime_clampDouble(void);
 
 /* External data declarations */
@@ -349,7 +349,7 @@ asm void fn_8054A004(void)
     stw r30, 0x8(r1)
     mr r30, r3
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     lwz r31, 0x48(r30)
     b lbl_fn_8054A004_000002F0
 lbl_fn_8054A004_0000029C:
@@ -936,7 +936,7 @@ asm void fn_8054A754(void)
     li r6, 0xb4
     li r7, 0x20
     stw r31, 0x4c(r30)
-    bl fn_806958E0
+    bl __construct_new_array
     lis r4, lbl_8075E49C@ha
     mr r3, r30
     addi r4, r4, lbl_8075E49C@l
@@ -1067,7 +1067,7 @@ asm void fn_8054A924(void)
     addi r4, r4, fn_8054A8E4@l
     li r5, 0xb4
     li r6, 0x20
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_8054A924_00000BE4:
     mr r3, r30
     li r4, 0x0
@@ -2868,7 +2868,7 @@ lbl_fn_8054B328_00002660:
 lbl_fn_8054B328_00002664:
     addi r3, r1, 0x70
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     fmr f1, f19
     lwz r3, lbl_8087EEC8
     lfs f2, lbl_80887D60
@@ -3001,7 +3001,7 @@ lbl_fn_8054B328_0000285C:
     addi r3, r1, 0x8
     addi r4, r30, lbl_80794AC0@l
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r4, 0x94(r19)
     addi r3, r27, 0x2c2
     lwz r4, 0x4(r4)
@@ -3016,7 +3016,7 @@ lbl_fn_8054B328_000028A0:
     addi r3, r1, 0x8
     addi r4, r31, 0x8
     crclr 6
-    bl fn_800DD3FC
+    bl wcs_vformat
     lwz r4, 0x94(r19)
     addi r3, r27, 0x2c2
     lwz r4, 0x4(r4)

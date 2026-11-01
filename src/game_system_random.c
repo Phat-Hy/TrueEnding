@@ -15,7 +15,7 @@ extern void fn_8006BA8C(void);
 extern void fn_8006BB6C(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void fn_800EC654(void);
@@ -31,8 +31,8 @@ extern void wmemcpy(void);
 extern void wcslen(void);
 extern void wcscpy(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -113,7 +113,7 @@ asm void fn_8020D688(void)
     li r6, 0x544
     addi r5, r5, fn_8020DAB4@l
     li r7, 0x2c
-    bl fn_806958E0
+    bl __construct_new_array
 lbl_fn_8020D688_00000068:
     stw r26, lbl_8087F1E8
 lbl_fn_8020D688_0000006C:
@@ -270,7 +270,7 @@ lbl_fn_8020D688_0000026C:
     mulli r0, r0, 0x54
     add r23, r22, r0
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x0(r23)
     mr r24, r23
     li r25, 0x0
@@ -341,7 +341,7 @@ asm void fn_8020DA08(void)
     stw r31, 0xc(r1)
     mr r31, r3
     li r7, 0x10
-    bl fn_806958E0
+    bl __construct_new_array
     mr r3, r31
     li r4, 0x0
     li r5, 0x540
@@ -402,7 +402,7 @@ asm void fn_8020DAB4(void)
     li r5, 0x54
     addi r4, r4, fn_8020DA74@l
     li r6, 0x10
-    bl fn_806959D8
+    bl __destroy_new_array
     cmpwi r31, 0x0
     ble lbl_fn_8020DAB4_00000474
     mr r3, r30
@@ -687,7 +687,7 @@ lbl_fn_8020DE0C_00000840:
     cmpwi r30, 0xf
     blt lbl_fn_8020DE0C_00000854
     addi r3, r24, 0xf
-    bl fn_800DC12C
+    bl str_parseInt
     mr r28, r3
 lbl_fn_8020DE0C_00000854:
     cmpwi r28, 0x0

@@ -22,7 +22,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC12C(void);
+extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void fn_80120D24(void);
@@ -49,7 +49,7 @@ extern void strcmp(void);
 extern void atoi(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695A50(void);
+extern void __destroy_arr(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -1073,7 +1073,7 @@ lbl_fn_8011FFF8_00000AC8:
     stw r3, 0x28(r26)
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC12C
+    bl str_parseInt
     stw r3, 0x30(r26)
 lbl_fn_8011FFF8_00000B38:
     addi r3, r1, 0x50
@@ -1833,7 +1833,7 @@ lbl_fn_80120C30_00001570:
     lis r4, fn_802375C4@ha
     lwz r3, 0x8(r25)
     addi r4, r4, fn_802375C4@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_80120C30_00001588:
     stw r30, 0x8(r25)
     stw r26, 0x0(r25)

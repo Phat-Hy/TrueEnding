@@ -35,7 +35,7 @@ extern void fn_800CB718(void);
 extern void fn_800CF5B4(void);
 extern void fn_800CF5D0(void);
 extern void fn_800D123C(void);
-extern void fn_806959D8(void);
+extern void __destroy_new_array(void);
 extern void fn_80709AD0(void);
 extern void fn_8070ABE0(void);
 extern void fn_80715D60(void);
@@ -227,7 +227,7 @@ lbl_fn_800CDD8C_000001D0:
     addi r4, r4, fn_800CDD4C@l
     li r5, 0x90
     li r6, 0x20
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_800CDD8C_000001F4:
     addi r3, r30, 0x2984
     li r4, -0x1
@@ -237,7 +237,7 @@ lbl_fn_800CDD8C_000001F4:
     addi r4, r4, fn_800C81CC@l
     li r5, 0x14c
     li r6, 0x20
-    bl fn_806959D8
+    bl __destroy_new_array
     cmpwi r31, 0x0
     ble lbl_fn_800CDD8C_00000228
     mr r3, r30

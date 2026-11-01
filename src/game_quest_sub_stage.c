@@ -18,7 +18,7 @@ extern void fn_800CF680(void);
 extern void fn_800DAA3C(void);
 extern void fn_803606CC(void);
 extern void fn_80360780(void);
-extern void fn_80373148(void);
+extern void kpad_getClampData(void);
 extern void fn_8037D4C0(void);
 extern void fn_8041D180(void);
 extern void fn_8041D198(void);
@@ -573,11 +573,11 @@ lbl_fn_80483714_00000744:
     li r28, 0x0
     cmpwi r3, 0x0
     beq lbl_fn_80483714_0000076C
-    bl fn_80373148
+    bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_80483714_0000076C
     lwz r3, lbl_8087F430
-    bl fn_80373148
+    bl kpad_getClampData
     mr r28, r3
 lbl_fn_80483714_0000076C:
     cmpwi r28, 0x0
@@ -1397,7 +1397,7 @@ lbl_fn_804848D0_000012B4:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_804848D0_000012C4
-    bl fn_80373148
+    bl kpad_getClampData
 lbl_fn_804848D0_000012C4:
     lwz r5, lbl_8087F540
     addi r4, r1, 0x8

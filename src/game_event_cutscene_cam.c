@@ -49,9 +49,9 @@ extern void wcslen(void);
 extern void abort(void);
 extern void fn_8068AD58(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_806958E0(void);
-extern void fn_806959D8(void);
-extern void fn_80695A50(void);
+extern void __construct_new_array(void);
+extern void __destroy_new_array(void);
+extern void __destroy_arr(void);
 extern void runtime_clampDouble(void);
 
 /* External data declarations */
@@ -207,7 +207,7 @@ asm void fn_804778DC(void)
     lis r4, fn_8004B338@ha
     mr r3, r0
     addi r4, r4, fn_8004B338@l
-    bl fn_80695A50
+    bl __destroy_arr
 lbl_fn_804778DC_00000104:
     cmpwi r14, 0x0
     stw r14, 0x68(r15)
@@ -1298,7 +1298,7 @@ asm void fn_80478714(void)
     addi r5, r5, fn_804787EC@l
     li r6, 0x90
     li r7, 0x10
-    bl fn_806958E0
+    bl __construct_new_array
     lfs f0, lbl_80886F14
     li r0, 0x12c
     stfs f0, 0x94c(r31)
@@ -1372,7 +1372,7 @@ asm void fn_8047882C(void)
     addi r4, r4, fn_804787EC@l
     li r5, 0x90
     li r6, 0x10
-    bl fn_806959D8
+    bl __destroy_new_array
 lbl_fn_8047882C_00001050:
     mr r3, r30
     li r4, 0x0

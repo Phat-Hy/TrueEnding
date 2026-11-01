@@ -12,7 +12,7 @@ extern void fn_800697D8(void);
 extern void mem_free(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800A5584(void);
 extern void fn_800A55AC(void);
 extern void fn_800DCA6C(void);
@@ -487,7 +487,7 @@ lbl_fn_800C7158_000004B4:
     beq lbl_fn_800C7158_000004D8
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A555C
+    bl msg_getMessageById
     b lbl_fn_800C7158_000004DC
 lbl_fn_800C7158_000004D8:
     li r3, 0x0
@@ -604,7 +604,7 @@ lbl_fn_800C72C0_0000061C:
     beq lbl_fn_800C72C0_00000640
     li r4, 0x0
     li r5, 0xf
-    bl fn_800A555C
+    bl msg_getMessageById
     b lbl_fn_800C72C0_00000644
 lbl_fn_800C72C0_00000640:
     li r3, 0x0
@@ -643,7 +643,7 @@ lbl_fn_800C7338_00000694:
     beq lbl_fn_800C7338_000006B8
     li r4, 0x0
     li r5, 0x5
-    bl fn_800A555C
+    bl msg_getMessageById
     b lbl_fn_800C7338_000006BC
 lbl_fn_800C7338_000006B8:
     li r3, 0x0

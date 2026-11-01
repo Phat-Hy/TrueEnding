@@ -13,7 +13,7 @@ extern void fn_800499D0(void);
 extern void mem_alloc(void);
 extern void fn_8008A4E0(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_800A555C(void);
+extern void msg_getMessageById(void);
 extern void fn_800C37FC(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_unlink(void);
@@ -38,7 +38,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void std_atan2(void);
-extern void fn_806958E0(void);
+extern void __construct_new_array(void);
 
 /* External data declarations */
 extern u8 lbl_80736614[];
@@ -427,7 +427,7 @@ asm void fn_8010DB68(void)
     addi r4, r4, fn_8010DB88@l
     li r6, 0x4
     li r7, 0x3
-    b fn_806958E0
+    b __construct_new_array
 }
 
 asm void fn_8010DB88(void)
@@ -1161,7 +1161,7 @@ lbl_fn_8010E3F0_00000E18:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     lwz r5, 0x0(r30)
-    bl fn_800A555C
+    bl msg_getMessageById
     cmpwi r3, 0x0
     beq lbl_fn_8010E3F0_00000E5C
     lwz r5, 0x0(r29)
