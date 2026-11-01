@@ -11,6 +11,13 @@
  * frame rendered by aurora *inside the runner*, which can be compared with the harness's picture
  * for the same capture.
  *
+ * `TLS_AURORA_SHOTS=<f>[,<f>...]` (5c.46 AP-BI) asks for a readback at SEVERAL fed frames in one
+ * launch. It exists because the alignment question AP-BD leaves open - "which guest frame is this
+ * aurora picture?" - cannot be answered from one picture per launch: the layer's own neighbouring
+ * frames differ by 33-48 mean |d|, so a one-picture comparison measures the frame offset rather
+ * than the renderer. Absent = one readback at the first display boundary at/after TLS_AURORA_TO,
+ * which is the behaviour every measurement before AP-BI used.
+ *
  * The display-list rule is the capture's: a `0x40` CALL_DL is 9 bytes that aurora ignores
  * ("Ignoring nested GX_CMD_CALL_DL") because its own GXCallDisplayList inlines the list, so the
  * call is dropped and the inlined body (which the parser feeds back through this same function)

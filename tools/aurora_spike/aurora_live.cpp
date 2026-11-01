@@ -11,14 +11,16 @@
  * The ABI is deliberately synchronous and dumb, because the runner is C and single-threaded:
  *
  *   int  tls_aurora_live_init(uint32_t fb_w, uint32_t fb_h);
- *   void tls_aurora_live_frame(const void* fifo, uint32_t len, int last);
+ *   void tls_aurora_live_frame(const void* fifo, uint32_t len, int want_readback, int* draws, int* copies);
  *   int  tls_aurora_live_readback(uint8_t* rgba, uint32_t cap, uint32_t* w, uint32_t* h);
  *   void tls_aurora_live_shutdown(void);
  *
  * `tls_aurora_live_frame` replays ONE frame of the guest's raw FIFO (display lists already
- * inlined by the caller - the runner's parser does that, exactly as the capture does). `last`
- * requests the colour capture of that frame. `tls_aurora_live_readback` pumps empty frames until
- * aurora delivers the capture (its readback is delivered on a later frame) and copies RGBA8 out.
+ * inlined by the caller - the runner's parser does that, exactly as the capture does).
+ * `want_readback` requests the EFB capture of that frame; it may be set on ANY fed frame, so one
+ * launch can put the two implementations on several consecutive guest frames (5c.46 AP-BI).
+ * `tls_aurora_live_readback` pumps empty frames until aurora delivers the capture (its readback is
+ * delivered on a later frame) and copies RGBA8 out.
  *
  * Built as `tls_aurora_live.dll` by tools/aurora_spike/spike_target.cmake.
  */
@@ -39,12 +41,21 @@ StreamState g_liveState{};
 std::vector<uint8_t> g_liveRewritten;
 
 /* The copy probe: one real EFB copy (640x448 RGBA8, clear off) appended to the last fed frame, read
- * back with key = its destination address. PROBE_COPY_DST is inside the mapped MEM2 copy. */
+ * back with key = its destination address. PROBE_COPY_DST is inside the mapped MEM2 copy.
+ *
+ * A DISTINCT SLOT PER SHOT (5c.46 AP-BI). The readback is looked up by key in the latest delivered
+ * packet, so one key re-used across shots returned the same payload repeatedly (measured: three
+ * byte-identical readbacks, SHA BBE1D16E7B76ADE1). One 640x448 RGBA8 payload is 0x118000 bytes, so
+ * shot n goes to PROBE_COPY_DST + n*0x200000 - far enough apart that a copy can never overlap the
+ * next shot's, and n is bounded by the host's shot list (32). */
 constexpr uint32_t kProbeCopyDst = 0x90001000u;
 constexpr uint32_t kProbeCopyW = 640, kProbeCopyH = 448;
+constexpr uint32_t kProbeCopyStride = 0x200000u;
+constexpr size_t PayloadBytes = static_cast<size_t>(kProbeCopyW) * kProbeCopyH * 4u;
 std::vector<uint8_t> g_probeCopyCmd;
 std::vector<uint8_t> g_probePayload;
 uint32_t g_probeKey = 2;
+uint32_t g_probeSeq = 0;
 
 }  // namespace
 
@@ -180,8 +191,10 @@ TLS_LIVE_EXPORT int tls_aurora_live_map(const void* mem1, uint32_t mem1_size, co
 }
 
 /* Replay one frame. `fifo`/`len` is the guest's raw GX byte stream for that frame (display lists
- * already inlined); `last` asks for the colour capture to be taken after this frame's draws. */
-TLS_LIVE_EXPORT void tls_aurora_live_frame(const void* fifo, uint32_t len, int last,
+ * already inlined); `want_readback` asks for the EFB probe copy to be taken after this frame's
+ * draws (5c.46 AP-BI: it is a per-frame request, not "the last frame", so the host can ask for a
+ * readback at SEVERAL consecutive guest frames in one launch - the alignment matrix). */
+TLS_LIVE_EXPORT void tls_aurora_live_frame(const void* fifo, uint32_t len, int want_readback,
                                            int* draws_out, int* rewritten_out) {
   if (!g_liveInit) return;
   /* The planes are a snapshot taken at tls_aurora_live_map(); make them live before this frame is
@@ -211,33 +224,48 @@ TLS_LIVE_EXPORT void tls_aurora_live_frame(const void* fifo, uint32_t len, int l
       if (consumed != len) std::printf("[AuroraLive] adapter consumed %u of %u bytes\n", consumed, len);
     }
   }
-  if (last && !g_liveRequested) {
-    /* Append the probe copy AFTER the frame's own draws, then ask for its payload. */
-    if (g_probeCopyCmd.empty()) {
+  if (want_readback) {
+    /* Append the probe copy AFTER the frame's own draws, then ask for its payload. Re-armed on
+     * every request (5c.46 AP-BI): the previous session's `last && !g_liveRequested` guard made the
+     * probe fire once per process, which is why the field comparison could only ever have ONE
+     * aurora picture per launch and the "which frame is this?" question was unanswerable.
+     *
+     * ONE KEY AND ONE DESTINATION PER SHOT, measured. `AuroraReadbackGet` looks the key up in the
+     * LATEST delivered packet, not in the packet of the capture that was just issued, so re-using
+     * one key made consecutive shots return the SAME payload: on the field window the first three
+     * readbacks came back byte-identical (SHA BBE1D16E7B76ADE1 x3) and only the fourth differed -
+     * an instrument artefact, not a renderer fact, and it would have been read as "aurora's frames
+     * are static". Each request therefore takes the next key and the next 640x448 slot
+     * (kProbeCopyStride apart, inside the mapped MEM2 copy), so the payload looked up can only be
+     * that shot's own. */
+    if (g_probeCopyCmd.empty()) g_probePayload.assign(PayloadBytes, 0);
+    const uint32_t seq = g_probeSeq++;
+    const uint32_t dst = kProbeCopyDst + seq * kProbeCopyStride;
+    {
       CopyRegs regs{};
       regs.srcX0 = 0;
       regs.srcY0 = 0;
       regs.srcX1 = kProbeCopyW - 1;
       regs.srcY1 = kProbeCopyH - 1;
-      regs.dstAddr = kProbeCopyDst;
+      regs.dstAddr = dst;
       regs.pitch = (kProbeCopyW * 4u) / 8u;
       regs.haveSrc = true;
       const uint32_t exec = 12u << 3; /* tpf 12 = format 6 (RGBA8), clear bit off */
+      g_probeCopyCmd.clear();
       emit_copy_state(g_probeCopyCmd, regs, exec);
       g_probeCopyCmd.push_back(0x61);
       append_u32(g_probeCopyCmd, (uint32_t(0x52) << 24) | (exec & 0xFFFFFFu));
-      g_probePayload.assign(static_cast<size_t>(kProbeCopyW) * kProbeCopyH * 4u, 0);
     }
     aurora::gx::fifo::write_data_grow(g_probeCopyCmd.data(),
                                       static_cast<uint32_t>(g_probeCopyCmd.size()));
-    const uint32_t key = kProbeCopyDst;
-    const AuroraReadbackCopySrc src{key, reinterpret_cast<const void*>(static_cast<uintptr_t>(kProbeCopyDst))};
+    const uint32_t key = dst;
+    const AuroraReadbackCopySrc src{key, reinterpret_cast<const void*>(static_cast<uintptr_t>(dst))};
     g_probeKey = key;
     g_liveW = kProbeCopyW;
     g_liveH = kProbeCopyH;
     g_liveRequested = AuroraReadbackCaptureCopies(g_liveStream, &src, 1) == GX_TRUE;
-    std::printf("[AuroraLive] probe copy armed: %ux%u RGBA8 -> key 0x%08X, capture %s\n", kProbeCopyW,
-                kProbeCopyH, key, g_liveRequested ? "accepted" : "REJECTED");
+    std::printf("[AuroraLive] probe copy #%u armed: %ux%u RGBA8 -> dst/key 0x%08X, capture %s\n",
+                seq, kProbeCopyW, kProbeCopyH, key, g_liveRequested ? "accepted" : "REJECTED");
     std::fflush(stdout);
   }
   if (0) {
@@ -283,12 +311,15 @@ TLS_LIVE_EXPORT int tls_aurora_live_readback(uint8_t* rgba, uint32_t cap, uint32
         }
         if (w) *w = kProbeCopyW;
         if (h) *h = kProbeCopyH;
+        /* Consumed: the next request must issue its own capture (5c.46 AP-BI). */
+        g_liveRequested = GX_FALSE;
         return static_cast<int>(need);
       }
     }
     if (!aurora_begin_frame()) break;
     aurora_end_frame();
   }
+  g_liveRequested = GX_FALSE;
   return 0;
 }
 

@@ -252,6 +252,8 @@ foreach ($v in 'TLS_SCRIPT_FILTER','TLS_NO_SCRIPT_FILTER','TLS_FAKE_FADE','TLS_N
                # reduction is guarded by the same variable), and TLS_AURORA is inert on the default
                # path - but a gate run must measure the default renderer, so neither may leak in.
                'TLS_TEX_CACHE_LOG','TLS_AURORA','TLS_AURORA_FROM','TLS_AURORA_TO','TLS_AURORA_FRAME',
+               'TLS_AURORA_SHOTS','TLS_AURORA_NO_RESYNC','TLS_AURORA_TEX_BYTES','TLS_AURORA_STATS',
+               'TLS_AURORA_DUMP_DRAW',
                'TLS_AURORA_TEST_NO_DEPTH','TLS_AURORA_TEST_WHITE_TEV','TLS_AURORA_TEST_MAT_WHITE') {
     Remove-Item "Env:\$v" -ErrorAction SilentlyContinue
 }

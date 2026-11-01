@@ -17,17 +17,34 @@
 > CMPR data. The title control is unchanged (205.62 -> 205.69), so the fix does not disturb what worked. The
 > harness is unaffected by design — a recorded capture *is* a snapshot — so AP-AY's 1.5 % equality pair stands.
 >
-> **THEN §5c.46 AP-BD, because it decides whether any field comparison is readable.** The layer's guest-2800
-> shot is the **geometry half** of the frame (the cave, luma 35.64) while aurora's 2801 readback is the
-> **composite half** (the dialogue subtitle), and the layer's own neighbouring frames differ by 33-48 mean |d|
-> while the validated same-capture pair agrees to 1.79. **The next run must therefore capture the layer's shots
-> and the resynced aurora readback in ONE launch and build the alignment matrix** — reading a live-vs-layer
-> number before that is reading the half-frame, not the renderer.
+> **THEN READ §5c.46 AP-BI (the last section): THE CONTENT GAP HAD A SECOND ROOT CAUSE — A TRUNCATED FEED.**
+> The aurora tap was called from `gx_pipeline_feed_byte`, but the layer's fast FIFO path parses display lists
+> **inline** and never calls it, so the geometry was not in the stream: the same guest frame fed **203 draws /
+> 655 116 B** without the recorder armed and **28 372 draws / 1 890 604 B** with it (title: 106 vs 313). With
+> `gx_pipeline_feed_bytes` taking the slow path when either instrument is armed, the live path renders the
+> Gurgan Cave — readbacks `(94.44,104.23,87.67) … (94.37,104.16,87.66)`, luma ~99 — and **AP-BF's "the TEV's
+> texture argument is the problem" is falsified**: the TEV was never reached with that geometry. AP-BI also
+> builds the alignment matrix AP-BD asked for (8 layer shots x 4 aurora readbacks in one launch, new
+> `TLS_AURORA_SHOTS` + per-shot readback keys, `tools/aurora_spike/align_matrix.py`): it is **column-flat**
+> (the layer's adjacent frames spread 41-44, aurora's 6-11, and no offset brings them together), because the
+> layer alternates a sharp geometry half with a blurred composite half. P1's *valid* form now has a number: a
+> same-run field capture replayed by the harness matches the layer's shot of the same frame to **7.66 mean |d|
+> (31.9 % > 8)** while the other half is 45-46 — and the harness feeds **per guest frame** where the live path
+> still accumulates the pair into one aurora frame, which is the next change to make (the live path measures
+> 63-66 against the same layer shots).
 >
-> **PRIORITY ORDER for the next session.** (1) gate on an idle host; (2) the same-launch alignment run above,
-> then judge the field's 3D shading (with content now real, the 3D still comes out near-black — that is the
-> question AP-BH leaves open); (3) P1's equality on a **single capture replayed by both implementations**
-> (`tools/aurora_spike` `--probe-copy`), which is the only valid form of that test; (4) P4 when it passes.
+> **§5c.46 AP-BD is now answered by AP-BI's matrix**, and its "read a live-vs-layer number and you are reading
+> the half-frame" warning still holds for every comparison that is not a same-run, same-frame pair:
+>
+> **PRIORITY ORDER for the next session.** (1) gate on an idle host, **with nothing else running** (AP-BI's
+> row 1 is a launch that was not evidence because a capture census ran beside it); (2) **change the live feed
+> from the accumulate model to one aurora frame per guest frame** — the harness already does this and matches
+> the layer to 7.66 mean |d| at the same frame, while the live path's accumulated pair measures 63-66, so this
+> is the highest-value renderer change left and its exit criterion is the live-vs-layer pair at the same guest
+> frame coming down towards 7.66; (3) re-run P1's equality on a fresh **same-run capture** (`--probe-copy`) and
+> only then (4) P4. Two cheap checks exist and are worth using before any 2 810-frame run: the title window
+> (440..452, 460 frames, 30 s) for the readback path, and `tools/aurora_spike/capinfo.py` on a capture for its
+> per-frame FIFO sizes (the field alternates 0.79 MB and 1.06 MB frames).
 > `TLS_AURORA_FROM/TO` are **guest-keyed** (guest 2800 = present 2864, the documented 64 offset) and the feed
 > closes at the guest's own display boundary (an XFB copy), so a feed is now one whole guest frame.
 >
@@ -16261,3 +16278,79 @@ Both runs exit code 0 (260 s, 30 s). The **harness is untouched by design**: `tl
 | 1 | `TLS_AURORA_TEX_BYTES=10`, 2 810 frames, snapshot behaviour | `nz=0/64` at every texobj — the cause, in ten lines |
 | 2 | `TLS_AURORA_TEX_BYTES=6`, same window, resync on | `nz=64/64` with real CMPR data; field `mean=(2.53,4.10,0.92)`; exit 0 in 260 s |
 | 3 | title control 440..452 with resync on, 460 frames | `mean=205.69` vs 205.62 - unchanged; exit 0 in 30 s |
+
+---
+
+### AP-BI. THE AURORA "CONTENT GAP" WAS ALSO A **TRUNCATED FEED**: the live tap listened on `gx_pipeline_feed_byte`, which the layer's fast FIFO path bypasses, so the geometry never reached aurora — **203 draws / 655 116 B** per fed frame against **28 372 draws / 1 890 604 B** when the slow path is armed (title: 106 vs 313 draws); with the tap on the same condition the Gurgan Cave renders (mean `(94.37,104.16,87.66)`, luma 99.35), the matrix from one launch (4 aurora readbacks x 8 layer shots) shows the remaining difference is the **composite half** and not the TEV texture argument, and P1's valid same-capture form now measures **7.66 mean |d|** at the field
+
+AP-BH closed the texture half of the content gap. This session closes the geometry half, and the two are separate bugs with the same symptom: a black field frame.
+
+**1. The gate first, and one run that is not evidence.** `logs_ap/gate_bi2.log`: **PASS attempt 1**, handover **1 680**, content `B4646917…`, popup `22B1CE31…`, save 1 348 992 / 29 344. One earlier launch (`gate_bi.log`) drifted on attempt 1 (content `A92B4EC7…` luma 27.68, popup `A061F4F9…`, handover still 1 680) and hit both references exactly on attempt 2 - the cause was my own: a 142 MB capture census ran in the same shell during attempt 1, which is precisely the host-load fingerprint the gate exists to catch. Recorded because it is a rule with a number: **nothing else runs while a runner runs**, not even a read-only Python parse of a large file.
+
+**2. Two new instruments, and the artefact inside the first one.**
+
+* `TLS_AURORA_SHOTS=<guest frame>[,<frame>…]` (`recomp/aurora_live_host.c`): a readback at several fed frames in ONE launch. Without it the live path had `s_done`, so a launch could only ever produce one picture, which is why AP-BD's alignment question was unanswerable - the layer's own neighbouring frames differ by 33-48 mean |d|, so one column cannot separate frame offset from renderer.
+* A **distinct probe key and destination per shot** (`tools/aurora_spike/aurora_live.cpp`). The readback is looked up *by key in the latest delivered packet*, not in the packet of the capture just issued, so re-using one key returned the SAME payload repeatedly: on the field window the first three readbacks came back byte-identical (`SHA BBE1D16E7B76ADE1` x3) and only the fourth differed. That is an instrument artefact that would have been read as "aurora's frames are static". With one slot per shot the same launch yields four distinct payloads (`BBE1D16E…`, `267F61BC…`, `5622FC18…`, `BB0F33DE…`) and the first reproduces byte-exactly across runs.
+* `tools/aurora_spike/align_matrix.py`: the mean |d| matrix (layer rows x aurora columns, BOX resize of the 1280x720 layer shot to the 640x448 EFB), plus each side's own adjacent-frame spread = the noise floor any renderer claim has to beat.
+
+Validated on the title before it was pointed at the field (460 frames, 30 s): four readbacks at guest 442/444/446/448 = `197.00 / 197.00 / 201.77 / 205.68`, i.e. the plate fading in, the last agreeing with AP-BC's live `205.69`. The control that matters is that the list does not disturb a scene that already fed correctly.
+
+**3. The measurement that names the cause.** The same field window, two launches, one variable - `TLS_GX_CAPTURE`:
+
+| | fed bytes per frame | draws per fed frame | readback |
+|---|---|---|---|
+| no recorder (fast path) | **655 116** | **203** | `(2.54,4.12,0.93)` - the AP-BH near-black frame, reproduced |
+| recorder armed (slow path) | **1 890 604** | **28 372** | `(94.37,104.16,87.66)` - **the cave** |
+| title control, no recorder | 63 723 | 106 | `205.69` |
+| title control, recorder | 70 241 | 313 | `205.68` |
+
+The mechanism is one function: `tls_aurora_tap_byte` is called from `gx_pipeline_feed_byte`, but `gx_pipeline_feed_bytes` has a fast path that parses primitives and display lists **inline**, and it never calls it. The recorder already needed every byte on the slow path (`if (tls_gxcap_on)`, documented in `gx_pipeline.c`), so arming the recorder was, unnoticed, the only way the aurora tap ever saw the display lists. **That is the second root cause of the "content gap"**, and it explains the shape of everything AP-AN..AP-BH measured: the feed reported ~200 draws per frame and called them whole frames; the guest was issuing 28 000.
+
+**4. The fix, and what it produces.** `gx_pipeline_feed_bytes` now takes the slow (identical) path when **either** instrument is armed: `if (tls_gxcap_on || tls_aurora_live_on)`. Inert for every other run (one global load per call), and the gate is unchanged - verified below. With it, the live path renders the cave: readbacks `(94.44,104.23,87.67)` luma 99.41 at guest 2795, `(93.95,103.68,87.20)` at 2797, `(94.35,104.14,87.24)` at 2799, `(94.37,104.16,87.66)` luma 99.35 at 2801 - a fully shaded frame with rock, water and the dialogue subtitle. The recorder-armed launch (which had only the 2801 readback, because the shot list did not exist yet) measures `(94.37,104.16,87.66)` at guest 2801, identical **to two decimals** to the fixed-tap launch, so the fix reproduces the recorder's stream exactly rather than approximating it. The layer's pictures in the same launches are the gate's own: guest 2800 hashes `B4646917…` exactly.
+
+**So AP-BF's reading is falsified.** Forcing the TEV output white saturated the frame, and forcing the material white changed nothing, which was read as "the TEV's texture argument is the problem". The TEV was never reached with this geometry: the geometry was not in the stream. The TEV texture argument was innocent, and so was every candidate AP-BF/AP-BG had already excluded.
+
+**5. The alignment matrix, and what it actually says.** One launch, 8 layer shots (guest 2794..2801, present = guest + 64), 4 aurora readbacks (the fed frames - display boundaries only). Layer luma per frame: `35.58 / 40.35 / 35.60 / 39.37 / 1.94 / 40.68 / 35.63 / 43.16`; aurora: `99.41 / 98.89 / 99.29 / 99.35`. Mean |d| matrix (rows layer, cols aurora):
+
+```
+              A2795   A2797   A2799   A2801
+  L2794      85.82   85.27   85.78   85.84
+  L2795      65.77   65.28   65.72   65.73
+  L2796      85.83   85.26   85.73   85.78
+  L2797      66.57   66.04   66.49   66.51
+  L2798     102.49  101.94  102.40  102.42
+  L2799      65.22   64.69   65.15   65.17
+  L2800      85.98   85.36   85.70   85.70
+  L2801      63.67   63.14   63.60   63.61
+```
+
+* **The matrix is column-flat**: every row's best aurora column is the same one (A2797, by 0.4-0.5), and aurora's own adjacent-frame spread is **6.10-11.01** while the layer's is **41.15-43.93**. There is no alignment peak to find, and no offset makes them agree (best cell 63.14).
+* **The reason is the half-frame, now quantified.** In this window the layer alternates a sharp geometry half (even frames, luma ~35.6, guest 2800 = the gate's content reference) with a blurred composite half (odd, luma ~39-43); guest 2798 is the cutscene's black frame (1.94). Aurora's fed frame at a display boundary carries both halves' commands and its EFB is neither: a sharp, much brighter frame (luma 99). AP-BD's 33-48 "alignment noise" is therefore the half-frame alternating, and the number that separates the two halves from the renderer is in item 6: **7.66 across the correct half pair, 45-46 across halves**.
+
+**6. P1's only valid form, measured at the field (and the model question it opens).** One run recorded the field window: `TLS_GX_CAPTURE=build/recomp/gxcap FROM=2794 TO=2801` with the layer's 8 shots from the same launch (7 417 471 FIFO bytes, MEM1+MEM2 planes). Replayed through `tools/aurora_spike/tls_gx_replay` with `--probe-copy`:
+
+| | draws parsed | EFB probe (640x448) | vs the layer's SAME-RUN shot at guest 2801 |
+|---|---|---|---|
+| harness, per-frame replay | 113 851 over 8 frames = **28 462 per fed pair** | mean `(29.16,30.31,29.97)` luma 29.93 | **mean &#124;d&#124; 7.66, changed>8 31.87 %** |
+| live, accumulate model (this session) | 28 372 per fed frame | mean `(94.37,104.16,87.66)` | 63.14-65.77 (same-launch matrix) |
+
+Two conclusions, both load-bearing. (a) The two aurora paths now parse the **same stream** (28 462 vs 28 372 draws, 0.3 %), which is the stream-agreement P3 was waiting for. (b) The **feed model** is what differs: the harness feeds each recorded guest frame as its own aurora frame, and it matches the layer to 7.66 while the whole other half of the window sits at 45-46; the live path accumulates the pair into one aurora frame (AP-BC's rule), so its composite half's copies run over a populated EFB where the layer - and the harness - start from a cleared one. **The next change is to feed per guest frame, not per display boundary** (the copy-only half then has to be fed as the layer renders it, which is what the harness already demonstrates). The title agrees independently: the harness's replay of the title capture (440..452) measures **205.68**, the live path **205.69**, the layer **90.43** - two implementations of aurora on one screen.
+
+**7. What this does NOT do.** P4 (re-record the gate references against aurora) is **withdrawn for now**, deliberately: the gate must keep measuring the layer until aurora is the default renderer, and the live feed still disagrees with the layer by 63 mean |d| against the harness's 7.66 - re-recording aurora references now would freeze the accumulate-model defect. P2/P3 are untouched. The aurora frame's brightness (luma ~99 against the layer's 35.6-43.2) is **not** explained by this section: with a per-frame feed the harness lands at luma 29.93 against the layer's 27.35, so the live path's brightness is a property of the accumulate model (geometry + composite drawn over each other without a clear), and it must be re-measured after the per-frame change before any "aurora is too bright" claim is made.
+
+**8. Changes.** `recomp/gx_pipeline.c` (the tap takes the slow path when either instrument is armed, with the measurement in the comment); `recomp/aurora_live_host.c` / `.h` (`TLS_AURORA_SHOTS`, the per-frame want logic, `s_done` retired); `tools/aurora_spike/aurora_live.cpp` (per-shot readback key/destination, re-armed per request); `tools/aurora_spike/align_matrix.py` (new); `tools/invariant.ps1` (the new instruments added to the scrub list); this file. **0 changes to `src/`.** Build green (472 objects, 0 chunks recompiled), runner 107.76 MB. Gate **PASS attempt 1** at the unchanged references after the change.
+
+**9. Run log** (one runner at a time; every launch `--window --minimized`; save files deleted before each; the host was idle - one launch is called out below because it was not).
+
+| # | what | result |
+|---|---|---|
+| 0 | gate, idle host | **PASS attempt 1**, handover 1 680, content `B4646917…`, popup `22B1CE31…`, save 1 348 992 / 29 344 (`gate_bi2.log`) |
+| 1 | gate, with a 142 MB capture census running in the same shell | attempt 1 drifted (content `A92B4EC7…` luma 27.68), attempt 2 exact - **the run is not evidence**; re-run alone = row 0 |
+| 2 | title 440..452, `TLS_AURORA_SHOTS=442,444,446,448`, 460 frames, 30 s | 4 readbacks, `197.00 / 197.00 / 201.77 / 205.68` - instrument validated, plate control unchanged |
+| 3 | title 440..452 with and without `TLS_GX_CAPTURE`, 460 frames each | 106-108 draws / 63 723-64 977 B without, **306-313 draws / 68 939-70 321 B** with - the tap's blindness, on a scene that already works |
+| 4 | field 2794..2801 + shots + `TLS_GX_CAPTURE`, 2 812 frames | fed 28 389/28 388/28 376/28 372 draws, 1 890 604-1 892 714 B; readback `(94.37,104.16,87.66)` - the cave |
+| 5 | the same window, no recorder (`TLS_AURORA_SHOTS`), 2 812 frames | fed 220/219/207/203 draws, 655 116-657 226 B; readback `(2.54,4.11,0.92)` x3 - AP-BH's number reproduced, now explained |
+| 6 | the same window after the tap fix, 2 812 frames | fed 28 389/28 388/28 376/28 372 draws; 4 distinct readbacks `(94.44,104.23,87.67) … (94.37,104.16,87.66)`; matrix of item 5 |
+| 7 | field capture 2794..2801, same-run layer shots, 2 812 frames | 7 417 471 FIFO bytes, 8 frames, both MEM planes; layer 2800 = `74F0CAED…` (the cutscene drifted this run) |
+| 8 | harness replay of row 7 (`--stop-after 8 --probe-copy`) | 113 851 draws / 861 490 vertices; probe mean `(29.16,30.31,29.97)`; **7.66 mean &#124;d&#124; vs the same-run layer 2801** |
+| 9 | harness replay of the title capture 440..452 | probe `205.68` vs live `205.69` vs layer `90.43` |

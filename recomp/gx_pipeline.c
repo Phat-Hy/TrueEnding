@@ -3011,8 +3011,20 @@ void gx_pipeline_feed_bytes(const uint8_t* data, uint32_t size) {
     /* TLS_GX_CAPTURE needs every byte to pass through gx_pipeline_feed_byte(), where the
      * recorder can see the parser state that decides whether a byte is a display-list call
      * header. Taking the fast paths below would bypass it, so capture mode runs the slow
-     * (identical) path instead. Only ever set for a capture run. */
-    if (tls_gxcap_on) {
+     * (identical) path instead. Only ever set for a capture run.
+     *
+     * THE AURORA TAP HAS THE SAME REQUIREMENT, and until 5c.46 AP-BI it did not have it
+     * (measured). `tls_aurora_tap_byte` is called from `gx_pipeline_feed_byte`, but the fast path
+     * below parses display lists and primitives inline, so the tap never saw those bytes. The
+     * visible effect was that the aurora feed carried only the fraction of the stream the slow
+     * path happened to consume: on the gate's Chapter-1 window the same guest frame fed
+     * **203 draws / 655 116 B** without the recorder armed and **28 372 draws / 1 890 604 B**
+     * with it (and 106 vs 313 draws on the title, 63 723 vs 70 241 B) - and only the full stream
+     * rendered the Gurgan Cave (mean (94.37,104.16,87.66)) instead of the near-black frame
+     * (2.54,4.11,0.92) that four earlier sessions chased through depth, scissor, raster channel,
+     * texture identity and the guest-memory snapshot. The tap is therefore armed on the same
+     * condition as the recorder: one global load when neither instrument is on. */
+    if (tls_gxcap_on || tls_aurora_live_on) {
         for (uint32_t i = 0; i < size; i++) gx_pipeline_feed_byte(data[i]);
         return;
     }

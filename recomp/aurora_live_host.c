@@ -45,6 +45,20 @@ static long s_want_frame = -2;
  * trap AP-AN documented on the harness side, where the fix is to start at a FULL frame. */
 static long s_from = -2, s_to = -2;
 
+/* WHICH FED FRAMES GET A PICTURE, from TLS_AURORA_SHOTS=2794,2795,... (5c.46 AP-BI).
+ *
+ * The alignment question AP-BD leaves open is "which guest frame is an aurora readback?", and it
+ * cannot be answered with one picture per launch: the layer's own neighbouring frames differ by
+ * 33-48 mean |d|, so a single aurora frame compared against four layer frames measures the frame
+ * offset, not the renderer. The feed is per PRESENT and the guest renders the pair
+ * (draws, then copies) as two presents - so the pair's FIRST present is the geometry half and the
+ * second is the composite half, and only a readback at each of them can put the two implementations
+ * on the same instant. A list, not a single number. Empty/absent = one readback at the first
+ * present at/after s_to, the pre-AP-BI behaviour. */
+static long s_shots[32];
+static int s_nshot;
+
+
 /* Display-list call skipping: a 0x40 opcode costs 9 bytes and is NOT forwarded. The parser feeds
  * the list's body back through gx_pipeline_feed_byte, so the body is recorded in place. */
 static int s_skip;
@@ -59,6 +73,17 @@ static void load(void) {
         const char* b = getenv("TLS_AURORA_TO");
         s_from = (a && *a) ? atol(a) : (s_want_frame >= 0 ? s_want_frame : -1);
         s_to   = (b && *b) ? atol(b) : (s_want_frame >= 0 ? s_want_frame : -1);
+    }
+    {
+        const char* shots = getenv("TLS_AURORA_SHOTS");
+        if (shots && *shots) {
+            char buf[512];
+            strncpy(buf, shots, sizeof(buf) - 1);
+            buf[sizeof(buf) - 1] = '\0';
+            for (char* tok = strtok(buf, ","); tok && s_nshot < 32; tok = strtok(NULL, ",")) {
+                s_shots[s_nshot++] = atol(tok);
+            }
+        }
     }
     /* The DLL's own dependencies (webgpu_dawn.dll, SDL3.dll, libpng16.dll, libzlib1.dll) sit next
      * to it, and Windows does NOT search a loaded module's own directory - only the app's, PATH
@@ -195,12 +220,20 @@ void tls_aurora_frame_end(uint32_t guest_frame, int at_present) {
         return;
     }
 
-    static int s_done = 0;
-    if (s_done) { s_len = 0; return; }
-    const int is_last = (s_to < 0) ? 1 : ((long)guest_frame >= s_to);
-    if (is_last) s_done = 1;
+    /* One picture per requested fed frame (5c.46 AP-BI). Without a list, keep the old single-shot
+     * behaviour: the first display boundary at or after s_to. */
+    int want = 0;
+    if (s_nshot > 0) {
+        for (int i = 0; i < s_nshot; i++) {
+            if (s_shots[i] == (long)guest_frame) { want = 1; break; }
+        }
+    } else {
+        want = (s_to < 0) ? 1 : ((long)guest_frame >= s_to);
+    }
     int draws = 0, copies = 0;
-    s_frame(s_buf, (uint32_t)s_len, is_last, &draws, &copies);
+    s_frame(s_buf, (uint32_t)s_len, want, &draws, &copies);
+    /* The readback buffer is reused for every shot; the PPM it is written to is named by the guest
+     * frame, so a list of shots leaves one file per frame. */
     static uint8_t* rgba;
     static size_t rgba_cap;
     const size_t need = 640u * 448u * 4u;
@@ -208,7 +241,7 @@ void tls_aurora_frame_end(uint32_t guest_frame, int at_present) {
         rgba = (uint8_t*)realloc(rgba, need);
         rgba_cap = rgba ? need : 0;
     }
-    if (!is_last) {
+    if (!want) {
         /* history frame: fed, no picture yet */
         printf("[AuroraLive] history guest frame %u: fed %zu bytes, %d draw(s), %d copy cmd(s)\n",
                guest_frame, s_len, draws, copies);
