@@ -70,10 +70,13 @@ function, not ten. Recommended order — smallest with the highest payoff first:
 
 | function | size | why Track B needs it |
 | --- | --- | --- |
-| `fn_802189EC` | 456 B | the task-manager constructor: the task-manager global is touched by exactly three instructions in the whole image, all here |
+| **`fn_8047A4C8`** | 2548 B | **the real task-manager constructor.** The whole image writes the manager slot `0x8087EE94` exactly once, at `0x8047A604` inside this function (`addi r3,r0,12` → `bl 0x80084320` → three words cleared → `stw r3,-26668(r13)`), and its only caller is `main`. Track B's Chapter-1 task-creation search now hangs on this function and the 12-byte object's `+0`/`+4`/`+8` words |
 | `fn_8036F268` | 2276 B | the **only** writer of the field state `+0x5538 = 1` (writes it at `+0x360`); the whole Chapter-1 field stall hinges on it |
-| `fn_80207F80` | 220 B | the task-creation dispatch; the dossier says it "has no data-plane pointer at all and needs a runtime probe, not another scan" |
 | `fn_800D7278` | 1252 B | the character-texture bake: issues an EFB copy, calls `GXDrawDone`, then reads it back |
+| ~~`fn_802189EC`~~ | ~~456 B~~ | **struck from this list (2026-11-01).** It is the player weapon/protector **priority CSV loader** (`0x6AC` = 7 x `0xF4` bytes, `/boot/player_param.csv`, accessors `fn_80218BB4`/`fn_80218BC4`), not the task manager. The dossier's "task-manager constructor" reading came from `r13 = 0x808852A0`; `__init_registers` sets `r13 = 0x808856C0`, an exact `0x420` error. Track A's own report of this was right and is what corrected the dossier (5c.46 AP-BE) |
+
+**`fn_80207F80` is done** (Track A converted it, 220 B, 48 sub-system inits in sequence) - that closes the entry
+that used to be here.
 
 **Exit criteria:** the unit still reports 100 % in `report.json` for that function, the function now exists as C in
 `src/`, `docs/TRACK_A_LOG.md` describes in plain English *what it does and what it reads/writes* (which fields, in
@@ -145,3 +148,69 @@ summary of them. If you are unsure whether a path is yours, it is not — ask or
 **When you stop** (budget, blocking condition, or the queue is done), leave the branch pushed and the log current,
 and end with: what landed, the progress numbers, and the next 3–5 candidates ranked by Track B payoff.
 
+
+## 7. Round-4 updates (2026-11-01) — four rounds of your output changed this order
+
+Everything below comes from reviewing your batches 1-6, not from theory. The work has been good; these close the
+gaps the reviews found.
+
+### 7.1 Keep the vocabulary exact: a NAME is not a CONVERSION
+
+The log has used "decompile", "name" and "convert" loosely, and a reader cannot tell them apart from the commit
+subject. They have very different value to Track B:
+
+* **name** = same instruction stream, new symbol. Improves grep, the symbol map in probe output, the model.
+  Track B now consumes names directly (`recomp/tls_sym.c` turns every probe PC into `name+0xOFFSET`), so a name
+  batch is real value - but it **cannot move the progress digits**, and `99.30 % -> 99.30 %` is the tell.
+* **convert** = the `asm void` body replaced by readable C that still matches. That is the only thing that gives
+  Track B a *specification*.
+
+Self-check before committing: count both sides of `git diff -- src/` for `asm void`. A rename batch has the same
+number on each side (`-asm void fn_X` → `+asm void newName`). A conversion has fewer `+` than `-`. If you claim a
+conversion, that number must be in the log ("40 names, 0 conversions" or "1 conversion, 55/55 instructions").
+
+### 7.2 The rename checklist (each item has cost a review round)
+
+1. `config/symbols.txt` entry renamed in place, no duplicate left behind.
+2. **Every** reference in `src/`: the definition, every prototype, every `bl`/`b` in asm blocks, every `extern`.
+3. **The function's own labels too** — `lbl_fn_XXXXXXXX_*` inside its body → `lbl_<newName>_*`. You did this in
+   `af5f17b` and it is now a requirement, because a later `grep fn_XXXXXXXX` otherwise finds a "leftover" and the
+   reviewer (this one did) concludes the rename was incomplete.
+4. **Prototypes in other translation units**: `src/game_bloom.c:6` still declares
+   `extern void atn_TaskBase_isValid(void);` while the new prototype takes `atn_TaskBase*`. C does not diagnose
+   that across units and the caller is asm that sets `r3` itself, so it links - but the next person who converts
+   that caller to C will call it with no argument. Sweep the externs of anything you renamed or converted.
+5. Verification: `ninja build/SLSEXJ/report.json` clean, and `python configure.py progress` **identical** (a rename
+   cannot change bytes, so any movement is a mistake, not progress).
+
+### 7.3 The evidence bar for a name (your `fn_802189EC` entry is the model)
+
+That entry earned its keep: instruction bytes, the resolved address, the string xref chain through `_SDA2_BASE_`,
+the allocation size (`0x6AC` = 7 x `0xF4`), and the adjacent accessors - and it **contradicted the dossier**, which
+turned out to be wrong by an exact `0x420` in `r13`. So:
+
+* cite the **instruction and its address**, not just the conclusion;
+* resolve SDA-relative operands from the real bases (`_SDA_BASE_ = 0x808856C0`, `_SDA2_BASE_ = 0x808885A0`, both
+  set by `__init_registers` at `0x80004210`) - never from a probe's `r13`;
+* if a name contradicts `DEEPSEEK_HARNESS_HANDOVER.md`, **say so explicitly** in the log with the conflicting
+  citation. That is the case where Track A's work is worth the most to Track B, and it happened once already.
+
+### 7.4 Alternate one conversion per naming batch
+
+Six batches have produced ~120 names and 3 conversions (`fn_80207F80`, `atn_TaskBase_isValid`,
+`atn_Task_initCookie`). Track B's queue is now **`fn_8047A4C8` first** (see A2 - it is the task manager's real
+constructor, and the Chapter-1 task-creation question hangs on it), then `fn_8036F268`, then `fn_800D7278`. One
+conversion per session beats ten names for the port; both are welcome, and the log should say which it did.
+
+### 7.5 Where the next naming batch should come from: `docs/TRACK_A_QUEUE.md`
+
+Not from a subsystem sweep. Track B's probe logs contain **137 distinct routines**; 36 now carry human names and
+**101 are still `fn_`/`lbl_`**. `docs/TRACK_A_QUEUE.md` ranks the unnamed ones by how often Track B's instruments
+actually hit them (resolved against your `config/symbols.txt`, so it is regenerable and always current).
+
+Evidence that this is the highest-yield target: batch 1 was aimed at the 12 routines behind one 64-PC audit and took
+them from **0/12 named to 12/12**, which is why every probe now prints `name+0xOFFSET`. Batches 5-8 named ~186
+functions and moved that number by **zero on the routines Track B touches** — good for Track A's own coverage, no
+leverage on the port. The queue's top five alone cover 2 785 logged hits.
+
+Take the top 10-15 of that list first, then alternate one A2-style conversion per batch.
