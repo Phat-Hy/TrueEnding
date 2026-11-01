@@ -15,7 +15,7 @@ extern void fn_8000ECA8(void);
 extern void str_initFromCStr(void);
 extern void menu_initWindowBuffer(void);
 extern void fn_800422CC(void);
-extern void fn_80049B74(void);
+extern void snd_findSoundNodeByName(void);
 extern void fn_8004A1D4(void);
 extern void fn_8004AD9C(void);
 extern void fn_8004ADF4(void);
@@ -2158,7 +2158,7 @@ lbl_fn_8035F3D4_00001C44:
     beq lbl_fn_8035F3D4_00001C64
     bl fn_8035FC00
     addi r4, r27, 0xc
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     stw r3, 0x4(r27)
     b lbl_fn_8035F3D4_00001C68
 lbl_fn_8035F3D4_00001C64:

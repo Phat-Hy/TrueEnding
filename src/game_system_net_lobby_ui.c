@@ -27,7 +27,7 @@ extern void skill_findNodeById(void);
 extern void skill_findNodeByTag(void);
 extern void equip_getGlobalManager(void);
 extern void fn_8012A190(void);
-extern void fn_8012A1B8(void);
+extern void path_getFollowerNode(void);
 extern void enemy_updateAnimTimer(void);
 extern void npc_getPosition(void);
 extern void fn_8013C404(void);
@@ -37,7 +37,7 @@ extern void dialog_setScriptSlot(void);
 extern void fn_8014C468(void);
 extern void party_updateMemberCoords(void);
 extern void party_evalTacticCondition(void);
-extern void fn_8016E484(void);
+extern void task_isValidQueueRange(void);
 extern void battle_applyStatusEffect(void);
 extern void fn_8016F634(void);
 extern void battle_resolveAggroHierarchy(void);
@@ -59,7 +59,7 @@ extern void kpad_getClampData(void);
 extern void fn_8037529C(void);
 extern void fn_803761FC(void);
 extern void dvd_showDiskErrorDialog(void);
-extern void fn_8037EF30(void);
+extern void fat_dispatchFsRequest(void);
 extern void fn_80392D2C(void);
 extern void fn_8039CCB4(void);
 extern void fn_803A11D8(void);
@@ -539,7 +539,7 @@ lbl_fn_803A1DB0_000005C4:
     lfs f1, lbl_80885B14
     li r5, 0x1
     addi r3, r3, 0x6c
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     lis r4, 0x100
     lwz r3, lbl_8087F430
     subi r5, r4, 0x1
@@ -572,7 +572,7 @@ lbl_fn_803A1DB0_00000600:
     lfs f1, lbl_80885B14
     li r5, 0x1
     addi r3, r3, 0x6c
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_803A1DB0_00000678
 lbl_fn_803A1DB0_00000660:
     lwz r3, lbl_8087F430
@@ -580,7 +580,7 @@ lbl_fn_803A1DB0_00000660:
     lfs f1, lbl_80885B14
     li r5, 0x1
     addi r3, r3, 0x6c
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
 lbl_fn_803A1DB0_00000678:
     lwz r0, 0x4c(r27)
     rlwinm r0, r0, 0, 27, 27
@@ -644,7 +644,7 @@ lbl_fn_803A1DB0_00000740:
     b lbl_fn_803A1DB0_00000780
 lbl_fn_803A1DB0_00000750:
     mr r3, r27
-    bl fn_8016E484
+    bl task_isValidQueueRange
     cmpwi r3, 0x0
     beq lbl_fn_803A1DB0_0000077C
     lwz r0, 0x7e0(r27)
@@ -1139,7 +1139,7 @@ lbl_fn_803A26F4_00000DD8:
     cmpwi r28, 0x0
     bne lbl_fn_803A26F4_00000E3C
     mr r3, r31
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     lfs f1, 0x4(r3)
     mr r3, r31
     lfs f0, 0x14(r26)
@@ -1160,7 +1160,7 @@ lbl_fn_803A26F4_00000E3C:
     bl vec3_set
     mr r23, r3
     mr r3, r31
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     mr r4, r3
     mr r5, r23
     addi r3, r1, 0x74
@@ -1182,7 +1182,7 @@ lbl_fn_803A26F4_00000E3C:
     b lbl_fn_803A26F4_000013B0
 lbl_fn_803A26F4_00000EA8:
     mr r3, r31
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     mr r4, r3
     addi r3, r1, 0xec
     bl vec3_assign
@@ -1299,7 +1299,7 @@ lbl_fn_803A26F4_0000102C:
     b lbl_fn_803A26F4_000013B0
 lbl_fn_803A26F4_00001064:
     mr r3, r31
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     mr r4, r3
     addi r3, r1, 0xc8
     bl vec3_assign
@@ -1455,7 +1455,7 @@ lbl_fn_803A26F4_0000125C:
     b lbl_fn_803A26F4_000013B0
 lbl_fn_803A26F4_00001294:
     mr r3, r31
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     mr r4, r3
     addi r3, r1, 0x98
     bl vec3_assign
@@ -1519,7 +1519,7 @@ lbl_fn_803A26F4_00001344:
     b lbl_fn_803A26F4_000013B0
 lbl_fn_803A26F4_0000137C:
     mr r3, r31
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     mr r4, r3
     addi r3, r1, 0x80
     bl vec3_assign

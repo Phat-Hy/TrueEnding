@@ -24,7 +24,7 @@ extern void vec3_normalize(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void fn_80107A68(void);
-extern void fn_8012A1B8(void);
+extern void path_getFollowerNode(void);
 extern void fn_8012A288(void);
 extern void npc_getPosition(void);
 extern void fn_8013C480(void);
@@ -826,7 +826,7 @@ lbl_fn_80463174_000009CC:
     bl vec3_mag
     fmr f28, f1
     mr r3, r31
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     lfs f29, 0x4(r3)
     addi r3, r1, 0x2c
     addi r4, r1, 0x68
@@ -929,7 +929,7 @@ lbl_fn_80463174_00000B8C:
     bl vec3_mag
     fmr f30, f1
     mr r3, r31
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     lfs f31, 0x4(r3)
     addi r3, r1, 0x8
     addi r4, r1, 0x5c

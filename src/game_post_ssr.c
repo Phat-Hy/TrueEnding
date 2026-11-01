@@ -25,7 +25,7 @@ extern void equip_applyToCharacter(void);
 extern void fn_80166D3C(void);
 extern void fn_8016CAD0(void);
 extern void debuff_clearStatus(void);
-extern void fn_8016E484(void);
+extern void task_isValidQueueRange(void);
 extern void actor_setState(void);
 extern void battle_activateExpReward(void);
 extern void battle_updateActorStatus(void);
@@ -36,7 +36,7 @@ extern void wpad_getActiveDevice(void);
 extern void world_setGlobalFlag(void);
 extern void kpad_testActiveFlags(void);
 extern void fn_80389838(void);
-extern void fn_805A4A20(void);
+extern void world_setFlagByType(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void printf(void);
@@ -623,7 +623,7 @@ lbl_fn_802D5D18_000007D8:
 lbl_fn_802D5D18_000007E4:
     cmpwi r6, 0x0
     beq lbl_fn_802D5D18_00000844
-    bl fn_8016E484
+    bl task_isValidQueueRange
     cmpwi r3, 0x0
     beq lbl_fn_802D5D18_00000844
     lwz r0, 0x14d4(r28)
@@ -733,7 +733,7 @@ lbl_fn_802D5D18_00000958:
     mr r3, r28
     addi r4, r28, 0x1690
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
 lbl_fn_802D5D18_0000097C:
     lmw r26, 0x58(r1)
     lwz r0, 0x74(r1)

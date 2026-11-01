@@ -34,7 +34,7 @@ extern void fn_804EA538(void);
 extern void fn_804EA5E0(void);
 extern void fn_804EB1B0(void);
 extern void fn_804EB270(void);
-extern void fn_804EB874(void);
+extern void net_getLocalPlayerAid(void);
 extern void fn_804FA7CC(void);
 extern void fn_804FA890(void);
 extern void fn_804FC014(void);
@@ -1703,7 +1703,7 @@ lbl_fn_804C23E4_00001658:
     bl fn_804EA538
     lwz r30, 0xdd4(r31)
     lwz r3, lbl_8087F610
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     lwz r0, 0xd0(r3)
     rlwimi r0, r30, 2, 26, 29
     stw r0, 0xd0(r3)
@@ -1825,7 +1825,7 @@ lbl_fn_804C23E4_00001818:
     bdnz lbl_fn_804C23E4_000016FC
 lbl_fn_804C23E4_00001824:
     lwz r3, lbl_8087F610
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     lwz r0, 0xd0(r3)
     rlwimi r0, r30, 2, 26, 29
     stw r0, 0xd0(r3)

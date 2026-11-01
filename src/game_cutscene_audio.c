@@ -36,7 +36,7 @@ extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
-extern void fn_8012A1B8(void);
+extern void path_getFollowerNode(void);
 extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
 extern void npc_calcTargetDistance(void);
@@ -1276,7 +1276,7 @@ lbl_fn_8032E938_00000FC0:
     stfs f0, 0x7d8(r31)
     beq lbl_fn_8032E938_00001078
     mr r3, r31
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     lwz r4, 0xd1c(r31)
     mr r29, r3
     addi r3, r1, 0x10

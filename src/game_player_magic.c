@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void math_wrapAngle(void);
 extern void fn_80013404(void);
-extern void fn_8008B964(void);
+extern void sys_getMainManager(void);
 extern void msg_getMessageById(void);
 extern void msg_getMessageString(void);
 extern void msg_lookupFormattedEntry(void);
@@ -203,7 +203,7 @@ lbl_fn_80122330_000001C4:
     lfs f0, lbl_80881828
     fcmpo cr0, f1, f0
     bge lbl_fn_80122330_00000204
-    bl fn_8008B964
+    bl sys_getMainManager
     bl fn_800F7258
     bl fn_80116E6C
     lfs f0, 0x4(r3)
@@ -214,7 +214,7 @@ lbl_fn_80122330_000001C4:
     stfs f0, 0xc(r31)
     b lbl_fn_80122330_00000254
 lbl_fn_80122330_00000204:
-    bl fn_8008B964
+    bl sys_getMainManager
     bl fn_800F7258
     bl fn_80116E6C
     lfs f0, 0x4(r3)

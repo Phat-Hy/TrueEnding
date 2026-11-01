@@ -37,7 +37,7 @@ extern void fn_80116BA4(void);
 extern void actor_calcSpawnTransform(void);
 extern void magic_dispatchActionCommand(void);
 extern void player_evaluateStatusCondition(void);
-extern void fn_8012A1B8(void);
+extern void path_getFollowerNode(void);
 extern void fn_8013A13C(void);
 extern void fn_8013C3B4(void);
 extern void quest_getGlobalManager(void);
@@ -231,7 +231,7 @@ asm void fn_80382A1C(void)
     bl fn_80178088
     mr r3, r31
     addi r31, r1, 0x14c
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     mr r4, r3
     addi r3, r1, 0x140
     bl vec3_assign

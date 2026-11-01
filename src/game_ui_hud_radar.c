@@ -20,7 +20,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void morph_updateMesh(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
-extern void fn_8012A1B8(void);
+extern void path_getFollowerNode(void);
 extern void fn_80139F24(void);
 extern void fn_80139F3C(void);
 extern void npc_getPosition(void);
@@ -1129,7 +1129,7 @@ lbl_fn_801C0D80_00000D34:
     bl vec3_toEulerAngles
     lfs f31, 0x6c(r1)
     lwz r3, 0x4(r29)
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     lfs f0, 0x4(r3)
     fsubs f1, f31, f0
     bl math_wrapAngle

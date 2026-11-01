@@ -26,7 +26,7 @@ extern void vec3_scale(void);
 extern void vec3_normalize(void);
 extern void system_getNextSequenceId(void);
 extern void equip_getGlobalManager(void);
-extern void fn_8012A1B8(void);
+extern void path_getFollowerNode(void);
 extern void fn_8012A288(void);
 extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
@@ -1801,7 +1801,7 @@ lbl_fn_803267E8_000018CC:
     addi r3, r1, 0x114
     bl mission_updateStub
     lwz r3, 0x14bc(r31)
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     lfs f1, 0x4(r3)
     mr r3, r31
     lfs f2, lbl_80884FD4
@@ -1913,7 +1913,7 @@ lbl_fn_803267E8_00001A74:
     cmpwi r0, 0x3
     bne lbl_fn_803267E8_00001B44
     mr r3, r31
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     lfs f31, 0x4(r3)
     addi r3, r1, 0xc
     addi r4, r1, 0x150

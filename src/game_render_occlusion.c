@@ -39,7 +39,7 @@ extern void fn_802B1B08(void);
 extern void fn_802B1B50(void);
 extern void fn_805A40BC(void);
 extern void fn_805A4258(void);
-extern void fn_805A4A20(void);
+extern void world_setFlagByType(void);
 extern void PSVECSquareMag(void);
 extern void rand(void);
 extern void runtime_registerStaticObject(void);
@@ -1366,7 +1366,7 @@ lbl_fn_802AEB08_000011A0:
     stfs f0, 0x1550(r3)
     mr r3, r31
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
     lfs f4, lbl_80883F68
     lfs f3, 0x1524(r31)
     lfs f0, lbl_80883F64
@@ -2502,7 +2502,7 @@ lbl_fn_802AF7D8_00002208:
     mr r3, r31
     addi r4, r31, 0x1a8c
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
 lbl_fn_802AF7D8_00002268:
     addi r3, r31, 0xb0
     li r4, 0x0

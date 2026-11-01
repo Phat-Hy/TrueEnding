@@ -23,7 +23,7 @@ extern void cursor_Object_constructor(void);
 extern void skeleton_getGlobalManager(void);
 extern void fn_800DBC1C(void);
 extern void fn_800DC3C8(void);
-extern void fn_8016E484(void);
+extern void task_isValidQueueRange(void);
 extern void time_wrapMilliseconds(void);
 extern void rand_stepEntropy(void);
 extern void task_mapIdToQueue(void);
@@ -1296,7 +1296,7 @@ lbl_fn_805634D4_00000E24:
     bl task_mapIdToQueue
 lbl_fn_805634D4_00000E58:
     mr r3, r30
-    bl fn_8016E484
+    bl task_isValidQueueRange
     cmpwi r3, 0x0
     beq lbl_fn_805634D4_00000E7C
     lwz r0, 0x14(r28)

@@ -13,7 +13,7 @@ extern void str_findChar(void);
 extern void fn_80134250(void);
 extern void fn_80134270(void);
 extern void fn_801F0544(void);
-extern void fn_801F6C2C(void);
+extern void save_getElapsedPlayTime(void);
 extern void fn_801FEB9C(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
@@ -827,7 +827,7 @@ asm void fn_803D733C(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     lfs f0, 0x50(r31)
     fcmpo cr0, f0, f1
     cror eq, gt, eq

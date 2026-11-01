@@ -32,7 +32,7 @@ extern void npc_updateTalkInteraction(void);
 extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
-extern void fn_8016E484(void);
+extern void task_isValidQueueRange(void);
 extern void actor_setState(void);
 extern void fn_801A03E0(void);
 extern void task_findEntryById(void);
@@ -59,7 +59,7 @@ extern void atn_LoadHandle_isLoading(void);
 extern void fn_804A04AC(void);
 extern void rand_Mersenne_constructor(void);
 extern void fn_805A4984(void);
-extern void fn_805A4A20(void);
+extern void world_setFlagByType(void);
 extern void fn_805A4A58(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
@@ -2564,7 +2564,7 @@ lbl_fn_802D0B84_00002364:
     bl fn_80108378
     mr r30, r3
     mr r3, r28
-    bl fn_8016E484
+    bl task_isValidQueueRange
     cmpwi r3, 0x0
     bne lbl_fn_802D0B84_00002394
     slwi r0, r30, 2
@@ -2588,7 +2588,7 @@ lbl_fn_802D0B84_000023A4:
     mr r3, r31
     addi r4, r31, 0x166c
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
     li r0, 0x0
     stb r0, 0x1674(r31)
 lbl_fn_802D0B84_000023D8:

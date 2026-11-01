@@ -15,7 +15,7 @@ extern void world_startMapTransition(void);
 extern void world_reloadMapTransition(void);
 extern void world_initMapTransitionParams(void);
 extern void fn_8037D3E8(void);
-extern void fn_8037EF30(void);
+extern void fat_dispatchFsRequest(void);
 extern void fn_803935FC(void);
 extern void fn_8039BF04(void);
 extern void fn_803B5774(void);
@@ -1143,7 +1143,7 @@ lbl_fn_8039D4C4_00000E10:
     lfs f1, lbl_80885B14
     li r5, 0x1
     addi r3, r3, 0x6c
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_8039D4C4_000010FC
 lbl_fn_8039D4C4_00000E2C:
     cmpwi r0, 0x1

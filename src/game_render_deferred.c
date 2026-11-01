@@ -19,7 +19,7 @@ extern void vec3_normalize(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
-extern void fn_8012A1B8(void);
+extern void path_getFollowerNode(void);
 extern void npc_getPosition(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
@@ -1369,7 +1369,7 @@ asm void fn_802B6F80(void)
     bl vec3_mag
     fmr f30, f1
     mr r3, r31
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     lfs f31, 0x4(r3)
     addi r3, r1, 0x8
     addi r4, r1, 0x20

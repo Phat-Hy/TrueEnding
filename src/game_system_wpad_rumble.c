@@ -33,7 +33,7 @@ extern void fn_80360A2C(void);
 extern void fn_8036562C(void);
 extern void fn_8036CA60(void);
 extern void world_setGlobalFlag(void);
-extern void fn_8037EF30(void);
+extern void fat_dispatchFsRequest(void);
 extern void fn_803AB96C(void);
 extern void fn_803B3CA8(void);
 extern void fn_803BAD6C(void);
@@ -736,7 +736,7 @@ lbl_world_Manager_update_00000870:
     addi r3, r30, 0x6c
     li r4, 0x1
     li r5, 0x1
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
 lbl_world_Manager_update_000008A0:
     mr r3, r30
     li r4, 0x1

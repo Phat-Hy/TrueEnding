@@ -34,7 +34,7 @@ extern void chest_spawnLoot(void);
 extern void fn_8044D6AC(void);
 extern void fn_805A40BC(void);
 extern void fn_805A4258(void);
-extern void fn_805A4A20(void);
+extern void world_setFlagByType(void);
 extern void fn_805A5224(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -1683,7 +1683,7 @@ lbl_fn_8031319C_00001684:
 lbl_fn_8031319C_000016B8:
     lwz r5, 0x58(r5)
 lbl_fn_8031319C_000016BC:
-    bl fn_805A4A20
+    bl world_setFlagByType
 lbl_fn_8031319C_000016C0:
     lwz r5, 0x14e4(r31)
     addi r3, r1, 0x8

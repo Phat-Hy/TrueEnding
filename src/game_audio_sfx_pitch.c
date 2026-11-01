@@ -100,7 +100,7 @@ extern void fn_805A3D6C(void);
 extern void fn_805A40BC(void);
 extern void fn_805A4258(void);
 extern void fn_805A4984(void);
-extern void fn_805A4A20(void);
+extern void world_setFlagByType(void);
 extern void fn_805A4F20(void);
 extern void PSVECSquareMag(void);
 extern void strcmp(void);
@@ -1618,7 +1618,7 @@ lbl_fn_80314384_00001460:
 lbl_fn_80314384_0000148C:
     lwz r5, 0x58(r5)
 lbl_fn_80314384_00001490:
-    bl fn_805A4A20
+    bl world_setFlagByType
 lbl_fn_80314384_00001494:
     lwz r3, 0xd1c(r31)
     mr r4, r31

@@ -143,7 +143,7 @@ extern u32 lbl_80888294;
 
 /* Function declarations */
 void fn_805A49E8(void);
-void fn_805A4A20(void);
+void world_setFlagByType(void);
 void fn_805A4A58(void);
 void fn_805A4F20(void);
 void fn_805A4F5C(void);
@@ -178,7 +178,7 @@ lbl_fn_805A49E8_00000030:
     blr
 }
 
-asm void fn_805A4A20(void)
+asm void world_setFlagByType(void)
 {
     nofralloc
     lwz r3, lbl_8087F430
@@ -186,10 +186,10 @@ asm void fn_805A4A20(void)
     beqlr
     lwz r0, 0x0(r4)
     cmpwi r0, 0x0
-    bne lbl_fn_805A4A20_00000058
+    bne lbl_world_setFlagByType_00000058
     lwz r4, 0x4(r4)
     b world_setLocalFlag
-lbl_fn_805A4A20_00000058:
+lbl_world_setFlagByType_00000058:
     cmpwi r0, 0x1
     bnelr
     lwz r4, 0x4(r4)

@@ -27,7 +27,7 @@ extern void fn_80168E60(void);
 extern void fn_80168EA0(void);
 extern void fn_80168F3C(void);
 extern void fn_80168F94(void);
-extern void fn_8016E484(void);
+extern void task_isValidQueueRange(void);
 extern void fn_801789D8(void);
 extern void fn_8017AC2C(void);
 extern void fn_80219344(void);
@@ -1424,7 +1424,7 @@ asm void fn_8012F034(void)
     stw r31, 0x1c(r1)
     mr r31, r3
     lwz r3, 0x2f0(r3)
-    bl fn_8016E484
+    bl task_isValidQueueRange
     cmpwi r3, 0x0
     beq lbl_fn_8012F034_0000130C
     lwz r3, 0x2f0(r31)

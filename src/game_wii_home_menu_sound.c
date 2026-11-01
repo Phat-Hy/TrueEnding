@@ -33,7 +33,7 @@ extern void save_createWorkerTask(void);
 extern void save_computeCrc32(void);
 extern void save_calculateBlockCrc(void);
 extern void save_findEntryByName(void);
-extern void fn_801F8598(void);
+extern void save_formatSlotString(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_801FEF40(void);
 extern void mem_findBlockById(void);
@@ -1974,7 +1974,7 @@ lbl_fn_80572454_00001978:
     addi r4, r30, 0xe6
     lwz r5, 0xf0(r1)
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     lwz r22, 0x1ac(r23)
     mr r3, r23
     bl fn_8012B028

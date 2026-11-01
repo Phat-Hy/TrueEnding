@@ -32,7 +32,7 @@ extern void cam_bindPathTarget(void);
 extern void cam_bindRotationTarget(void);
 extern void cam_evalControllerSpline(void);
 extern void cam_setLookAtTarget(void);
-extern void fn_800ED4D8(void);
+extern void cam_getLookAtState(void);
 extern void cam_updateLookAtMatrix(void);
 extern void cam_evalLookAtMatrix(void);
 extern void system_getNextSequenceId(void);
@@ -2046,7 +2046,7 @@ lbl_fn_80345384_000019B0:
     b lbl_fn_80345384_00001B20
 lbl_fn_80345384_00001ADC:
     addi r3, r1, 0x98
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     addi r4, r29, 0x33
     li r5, 0x8
@@ -2054,7 +2054,7 @@ lbl_fn_80345384_00001ADC:
     cmpwi r3, 0x0
     bne lbl_fn_80345384_00001B18
     addi r3, r1, 0x98
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     mr r4, r3
     addi r3, r1, 0x20

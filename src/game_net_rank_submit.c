@@ -24,7 +24,7 @@ extern void fn_80116EB8(void);
 extern void actor_findSpawnTemplate(void);
 extern void save_parseSlotHeader(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801F6C2C(void);
+extern void save_getElapsedPlayTime(void);
 extern void save_verifyBlockCrc(void);
 extern void save_findEntryByName(void);
 extern void fn_801F8830(void);
@@ -978,7 +978,7 @@ lbl_fn_805231F4_00000BFC:
     stfs f31, 0x54(r3)
     b lbl_fn_805231F4_00000C68
 lbl_fn_805231F4_00000C44:
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     lfs f0, 0x50(r28)
     fcmpo cr0, f0, f1
     cror eq, gt, eq

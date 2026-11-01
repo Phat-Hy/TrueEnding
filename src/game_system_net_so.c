@@ -30,7 +30,7 @@ extern void fn_80339F6C(void);
 extern void kpad_getClampData(void);
 extern void fn_8037E89C(void);
 extern void fn_8037E964(void);
-extern void fn_8037EF30(void);
+extern void fat_dispatchFsRequest(void);
 extern void fn_80382A00(void);
 extern void fn_803830A0(void);
 extern void fn_80387540(void);
@@ -1287,7 +1287,7 @@ lbl_fn_8038F52C_0000109C:
     mr r3, r29
     li r4, 0x0
     li r5, 0x0
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_8038F52C_00001DE4
     mr r3, r30
     bl fn_80387540
@@ -1332,7 +1332,7 @@ lbl_fn_8038F52C_000011D0:
     mr r3, r29
     li r4, 0x0
     li r5, 0x1
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_8038F52C_00001DE4
     mr r3, r29
     bl fn_80390374
@@ -1349,7 +1349,7 @@ lbl_fn_8038F52C_00001268:
     mr r3, r29
     li r4, 0x0
     li r5, 0x0
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_8038F52C_00001DE4
     addi r3, r1, 0x190
     addi r4, r29, 0x51c
@@ -1368,7 +1368,7 @@ lbl_fn_8038F52C_00001268:
     mr r3, r29
     li r4, 0x0
     li r5, 0x0
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_8038F52C_00001DE4
     mr r3, r29
     bl fn_80390374
@@ -1379,7 +1379,7 @@ lbl_fn_8038F52C_00001268:
     lfs f1, 0x0(r4)
     li r4, 0x0
     li r5, 0x0
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_8038F52C_00001DE4
     mr r3, r29
     li r4, 0xd
@@ -1400,7 +1400,7 @@ lbl_fn_8038F52C_00001268:
     mr r3, r29
     li r4, 0x1
     li r5, 0x1
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_8038F52C_00001DE4
     mr r3, r29
     bl fn_80390374
@@ -1408,7 +1408,7 @@ lbl_fn_8038F52C_00001268:
     mr r3, r29
     li r4, 0x1
     li r5, 0x1
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_8038F52C_00001DE4
     addi r3, r1, 0x154
     addi r4, r29, 0x51c
@@ -1429,7 +1429,7 @@ lbl_fn_8038F52C_00001268:
     mr r3, r29
     li r4, 0x0
     li r5, 0x0
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_8038F52C_00001DE4
     mr r3, r30
     bl fn_800F84C8
@@ -1866,7 +1866,7 @@ lbl_fn_8038F52C_00001974:
     mr r3, r29
     li r4, 0x0
     li r5, 0x1
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_8038F52C_00001DE4
     addi r3, r1, 0xdc
     addi r4, r29, 0x51c
@@ -2004,7 +2004,7 @@ lbl_fn_8038F52C_00001B80:
     mr r3, r29
     li r4, 0x0
     li r5, 0x0
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_8038F52C_00001DE4
     addi r3, r1, 0x28
     addi r4, r29, 0x51c
@@ -2082,7 +2082,7 @@ lbl_fn_8038F52C_00001CA8:
     mr r3, r29
     li r4, 0x0
     li r5, 0x0
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_8038F52C_00001DE4
 lbl_fn_8038F52C_00001CF0:
     mr r3, r29

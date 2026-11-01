@@ -29,7 +29,7 @@ extern void thread_dispatchToQueue(void);
 extern void assert_formatLocation(void);
 extern void fn_8021C6A4(void);
 extern void fn_80450A5C(void);
-extern void fn_804EB874(void);
+extern void net_getLocalPlayerAid(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
@@ -2824,11 +2824,11 @@ lbl_fn_8050158C_00001810:
     b lbl_fn_8050158C_00002298
 lbl_fn_8050158C_0000181C:
     mr r3, r4
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     cmpwi r3, 0x0
     beq lbl_fn_8050158C_00002298
     lwz r3, lbl_8087F610
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
     beq lbl_fn_8050158C_00002298
@@ -2842,7 +2842,7 @@ lbl_fn_8050158C_0000181C:
     b lbl_fn_8050158C_00002298
 lbl_fn_8050158C_00001860:
     lwz r3, lbl_8087F610
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     lwz r4, lbl_8087F4A0
     lwz r28, 0x0(r3)
     cmpwi r4, 0x0

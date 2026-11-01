@@ -5,15 +5,15 @@
 extern void _restgpr_22(void);
 extern void _savegpr_22(void);
 extern void fn_8012B028(void);
-extern void fn_8016E484(void);
-extern void fn_801F6C2C(void);
+extern void task_isValidQueueRange(void);
+extern void save_getElapsedPlayTime(void);
 extern void save_computeCrc32(void);
 extern void save_calculateBlockCrc(void);
 extern void save_writeBackupSlot(void);
 extern void fn_801F7A18(void);
 extern void fn_801F7DF0(void);
 extern void save_findEntryByName(void);
-extern void fn_801F8598(void);
+extern void save_formatSlotString(void);
 extern void fn_801F8830(void);
 extern void fn_80219344(void);
 extern void task_mapIdToQueue(void);
@@ -1223,7 +1223,7 @@ lbl_fn_803E0E10_00001000:
     stw r29, 0x5c(r24)
 lbl_fn_803E0E10_0000100C:
     mr r3, r23
-    bl fn_8016E484
+    bl task_isValidQueueRange
     cmpwi r3, 0x0
     beq lbl_fn_803E0E10_00001030
     mr r3, r23
@@ -1401,22 +1401,22 @@ lbl_fn_803E0E10_000011A8:
     addi r4, r31, 0x1317
     lwz r5, 0x934(r23)
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     lwz r3, 0xc(r24)
     addi r4, r31, 0x1400
     lwz r5, 0x874(r23)
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     lwz r3, 0xc(r24)
     addi r4, r31, 0x1406
     lwz r5, 0x38(r24)
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     lwz r3, 0xc(r24)
     addi r4, r31, 0x140c
     lwz r5, 0x940(r23)
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     lwz r0, lbl_8087F610
     cmpwi r0, 0x0
     beq lbl_fn_803E0E10_00001314
@@ -1792,12 +1792,12 @@ lbl_fn_803E0E10_000017F8:
     stfs f0, 0x54(r3)
     li r6, 0x0
     lwz r3, 0x14(r24)
-    bl fn_801F8598
+    bl save_formatSlotString
     lwz r3, 0x14(r24)
     mr r5, r29
     addi r4, r25, 0x1496
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     b lbl_fn_803E0E10_00001938
 lbl_fn_803E0E10_00001874:
     lwz r3, 0x14(r24)
@@ -1847,12 +1847,12 @@ lbl_fn_803E0E10_00001908:
     mr r5, r29
     addi r4, r25, 0x148b
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     lwz r3, 0x14(r24)
     mr r5, r29
     addi r4, r25, 0x1496
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
 lbl_fn_803E0E10_00001938:
     cmpwi r29, 0x0
     bgt lbl_fn_803E0E10_0000195C
@@ -2014,7 +2014,7 @@ lbl_fn_803E0E10_00001B68:
     addi r4, r25, 0x1317
     lwz r5, 0x934(r23)
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
 lbl_fn_803E0E10_00001B98:
     lwz r3, 0x24(r24)
     cmpwi r3, 0x0
@@ -2171,7 +2171,7 @@ lbl_fn_803E0E10_00001DC8:
     lfs f31, 0x50(r3)
     fcmpo cr0, f31, f0
     ble lbl_fn_803E0E10_00001E14
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     fcmpo cr0, f31, f1
     bge lbl_fn_803E0E10_00001E14
 lbl_fn_803E0E10_00001DE8:
@@ -2181,7 +2181,7 @@ lbl_fn_803E0E10_00001DE8:
     mr r5, r26
     addi r4, r4, 0x1317
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     lwz r3, 0x20(r24)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
@@ -2205,7 +2205,7 @@ lbl_fn_803E0E10_00001E14:
 lbl_fn_803E0E10_00001E50:
     lwz r25, 0x2c(r24)
     mr r3, r25
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     lfs f0, 0x50(r25)
     fcmpo cr0, f0, f1
     cror eq, gt, eq

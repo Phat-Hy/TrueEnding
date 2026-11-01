@@ -21,7 +21,7 @@ extern void fn_800E0000(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_801F0544(void);
 extern void save_parseSlotStats(void);
-extern void fn_801F6C2C(void);
+extern void save_getElapsedPlayTime(void);
 extern void fn_801F6C38(void);
 extern void save_computeCrc32(void);
 extern void save_verifyBlockCrc(void);
@@ -1597,7 +1597,7 @@ asm void fn_804A4EEC(void)
     beq lbl_fn_804A4EEC_00001538
     lwz r3, 0x78(r29)
     bl perf_getMetricValue
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     lfs f0, lbl_80887220
     lwz r3, 0x78(r29)
     fsubs f31, f1, f0
@@ -1763,7 +1763,7 @@ asm void fn_804A5160(void)
     beq lbl_fn_804A5160_000017AC
     lwz r3, 0x78(r29)
     bl perf_getMetricValue
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     lfs f0, lbl_80887220
     lwz r3, 0x78(r29)
     fsubs f31, f1, f0
@@ -1918,7 +1918,7 @@ asm void fn_804A53D4(void)
     slwi r0, r0, 2
     add r3, r27, r0
     lwz r3, 0x8c(r3)
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     lwz r0, 0x88(r27)
     lfs f0, lbl_80887220
     slwi r0, r0, 2

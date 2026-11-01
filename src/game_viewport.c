@@ -20,7 +20,7 @@ extern void fn_80042108(void);
 extern void fn_80050420(void);
 extern void fn_8005E3E0(void);
 extern void fn_80064F00(void);
-extern void fn_8008B964(void);
+extern void sys_getMainManager(void);
 extern void atn_Matrix_copy(void);
 extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
@@ -621,7 +621,7 @@ lbl_fn_800F72F4_00000668:
     addi r3, r1, 0x21c
     addi r4, r1, 0x1b0
     bl vec3_copy
-    bl fn_8008B964
+    bl sys_getMainManager
     bl fn_800F7258
     bl fn_800F80A0
     addi r4, r1, 0x210
@@ -865,7 +865,7 @@ lbl_fn_800F72F4_00000A9C:
     addi r3, r1, 0x1ec
     addi r4, r1, 0x1b0
     bl vec3_copy
-    bl fn_8008B964
+    bl sys_getMainManager
     bl fn_800F7258
     bl fn_800F80A0
     addi r4, r1, 0x1e0

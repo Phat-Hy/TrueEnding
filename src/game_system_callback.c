@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_80049B74(void);
+extern void snd_findSoundNodeByName(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -683,7 +683,7 @@ lbl_fn_802144A8_000007D4:
     bl talk_parseQuotedString
     mr r4, r3
     mr r3, r24
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     lwz r0, 0x14(r30)
     mr r27, r3
     cmpwi r0, 0x0
@@ -978,7 +978,7 @@ lbl_fn_802144A8_00000C30:
     bl talk_parseQuotedString
     mr r4, r3
     mr r3, r23
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     cmpwi r3, 0x0
     beq lbl_fn_802144A8_00000C68
     addi r24, r24, 0x1
@@ -1024,7 +1024,7 @@ lbl_fn_802144A8_00000CE0:
     bl talk_parseQuotedString
     mr r4, r3
     mr r3, r23
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     cmpwi r3, 0x0
     beq lbl_fn_802144A8_00000D64
     lwz r0, lbl_8087F250

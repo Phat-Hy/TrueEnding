@@ -26,7 +26,7 @@ extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void kpad_getClampData(void);
 extern void fn_805A49E8(void);
-extern void fn_805A4A20(void);
+extern void world_setFlagByType(void);
 extern void rand(void);
 extern void runtime_registerStaticObject(void);
 
@@ -176,7 +176,7 @@ lbl_fn_802D22A0_000000B4:
     mr r3, r30
     addi r4, r30, 0x1680
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
 lbl_fn_802D22A0_000001B4:
     li r0, 0x1c2
     stw r0, 0x15e8(r30)
@@ -243,7 +243,7 @@ lbl_fn_802D22A0_000001C0:
     mr r3, r30
     addi r4, r30, 0x1680
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
 lbl_fn_802D22A0_000002B8:
     li r0, 0x1c2
     stw r0, 0x15e8(r30)
@@ -366,7 +366,7 @@ lbl_fn_802D22A0_00000420:
     mr r3, r30
     addi r4, r30, 0x1688
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
     b lbl_fn_802D22A0_00000578
 lbl_fn_802D22A0_00000478:
     lwz r0, 0x40(r31)

@@ -14,7 +14,7 @@ extern void vec3_add(void);
 extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void fn_8004BF64(void);
-extern void fn_8008B964(void);
+extern void sys_getMainManager(void);
 extern void fn_800A97C4(void);
 extern void skeleton_getGlobalManager(void);
 extern void ref_releaseHandle(void);
@@ -453,15 +453,15 @@ lbl_fn_8052C10C_00000408:
     bl fn_8037F688
     addi r3, r31, 0x6c
     bl item_useConsumable
-    bl fn_8008B964
+    bl sys_getMainManager
     addi r4, r31, 0x6c
     bl actor_calcSpawnTransform
     addi r3, r31, 0x260
     addi r4, r31, 0x6c
     bl fn_80392A04
-    bl fn_8008B964
+    bl sys_getMainManager
     bl fn_8052C6C4
-    bl fn_8008B964
+    bl sys_getMainManager
     addi r4, r31, 0x260
     bl fn_8052C6D0
     li r0, 0x1
@@ -1556,7 +1556,7 @@ asm void fn_8052D46C(void)
     bl fn_80112960
     addi r3, r1, 0x1e8
     bl item_useConsumable
-    bl fn_8008B964
+    bl sys_getMainManager
     addi r4, r1, 0x1e8
     bl fn_8052C6D0
     bl fn_802F0990
@@ -1941,7 +1941,7 @@ lbl_fn_8052D46C_000019A8:
     bl fn_8037F688
     addi r3, r31, 0x6c
     bl item_useConsumable
-    bl fn_8008B964
+    bl sys_getMainManager
     addi r4, r31, 0x6c
     bl actor_calcSpawnTransform
     addi r3, r1, 0x1e8

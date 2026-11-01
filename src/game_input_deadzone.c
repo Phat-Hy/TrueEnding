@@ -54,7 +54,7 @@ extern void fn_802F09D4(void);
 extern void fn_802F0F60(void);
 extern void fn_802F1240(void);
 extern void fn_802F1320(void);
-extern void fn_8037EF30(void);
+extern void fat_dispatchFsRequest(void);
 extern void fn_805A40BC(void);
 extern void fn_805A4258(void);
 extern void fn_805A4F20(void);
@@ -1209,7 +1209,7 @@ lbl_fn_802EF5FC_00000F7C:
     addi r3, r3, 0x6c
     li r4, 0x0
     li r5, 0x0
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_802EF5FC_00000FE4
 lbl_fn_802EF5FC_00000FB8:
     lwz r3, lbl_8087EF70

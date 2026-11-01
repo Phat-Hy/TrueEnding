@@ -17,7 +17,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void proj_getMatrix(void);
 extern void fn_8012476C(void);
-extern void fn_8012A1B8(void);
+extern void path_getFollowerNode(void);
 extern void fn_80139F4C(void);
 extern void fn_8013A13C(void);
 extern void inventory_unequipItem(void);
@@ -943,7 +943,7 @@ asm void fn_801B6494(void)
     fmr f2, f1
     bl vec3_set
     lwz r3, 0x4(r30)
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     lfs f1, 0x4(r3)
     addi r3, r1, 0x100
     bl fn_8013A13C
@@ -982,7 +982,7 @@ lbl_fn_801B6494_00000CC8:
     fmr f2, f1
     bl vec3_set
     lwz r3, 0x4(r30)
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     lfs f1, 0x4(r3)
     addi r3, r1, 0xa8
     bl fn_8013A13C

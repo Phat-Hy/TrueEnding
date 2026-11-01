@@ -41,7 +41,7 @@ extern void fn_804CF078(void);
 extern void fn_804D8250(void);
 extern void fn_804D9C18(void);
 extern void fn_804EB1B0(void);
-extern void fn_804EB874(void);
+extern void net_getLocalPlayerAid(void);
 extern void fn_804FB624(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -1538,7 +1538,7 @@ asm void fn_804CE61C(void)
     beq lbl_fn_804CE61C_00001388
     lwz r28, lbl_8087F610
     mr r3, r28
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     mr r4, r3
     mr r3, r28
     li r5, 0x0
@@ -1587,7 +1587,7 @@ lbl_fn_804CE61C_000013EC:
     bne lbl_fn_804CE61C_00001428
     lwz r28, lbl_8087F610
     mr r3, r28
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     mr r4, r3
     mr r3, r28
     li r5, 0x0

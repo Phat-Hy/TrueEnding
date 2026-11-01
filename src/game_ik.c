@@ -5,7 +5,7 @@
 extern void dtor_80084684(void);
 extern void fn_80049AE4(void);
 extern void fn_80049B2C(void);
-extern void fn_80049B74(void);
+extern void snd_findSoundNodeByName(void);
 extern void fn_80049CDC(void);
 extern void fn_80049E3C(void);
 extern void boss_recordDamage(void);
@@ -2138,7 +2138,7 @@ asm void fn_800C8780(void)
     stw r29, 0x234(r1)
     mr r29, r4
     lwz r3, lbl_8087EE90
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_800C8780_00001E78

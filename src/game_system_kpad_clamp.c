@@ -42,7 +42,7 @@ extern void fn_8010AB34(void);
 extern void fn_8010F6FC(void);
 extern void path_resetWaypointVelocity(void);
 extern void fn_80129A6C(void);
-extern void fn_8012A1B8(void);
+extern void path_getFollowerNode(void);
 extern void enemy_updateAnimTimer(void);
 extern void fn_801370B8(void);
 extern void fn_80139F24(void);
@@ -567,7 +567,7 @@ lbl_fn_803729B4_0000050C:
     b lbl_fn_803729B4_0000060C
 lbl_fn_803729B4_00000540:
     mr r3, r31
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     mr r4, r3
     addi r3, r1, 0x74
     bl vec3_copy

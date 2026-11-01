@@ -71,7 +71,7 @@ void fn_80129978(void);
 void path_resetWaypointVelocity(void);
 void fn_80129A6C(void);
 void fn_8012A190(void);
-void *fn_8012A1B8(void *p);
+void *path_getFollowerNode(void *p);
 void fn_8012A1C0(void);
 void fn_8012A1E0(void);
 void fn_8012A218(void);
@@ -873,7 +873,7 @@ lbl_fn_80129A6C_00000AC0:
     cmpwi r27, 0x0
     bge lbl_fn_80129A6C_00000AEC
     lwz r3, 0x0(r31)
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     mr r4, r3
     addi r3, r1, 0xf4
     bl vec3_copy
@@ -898,7 +898,7 @@ lbl_fn_80129A6C_00000AEC:
     cmpwi r3, 0x0
     beq lbl_fn_80129A6C_00000B4C
     lwz r3, 0x0(r31)
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     mr r4, r3
     addi r3, r1, 0xf4
     bl vec3_copy
@@ -918,7 +918,7 @@ lbl_fn_80129A6C_00000B6C:
     addi r4, r29, math_wrapAngle@l
     bl fn_8012A218
     lwz r3, 0x0(r31)
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     lfs f1, 0x4(r3)
     addi r3, r1, 0xf4
     lfs f0, 0xf8(r1)
@@ -1073,7 +1073,7 @@ lbl_fn_80129A6C_00000DA0:
     cmpwi r26, 0x0
     bge lbl_fn_80129A6C_00000DCC
     lwz r3, 0x0(r31)
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     mr r4, r3
     mr r3, r28
     bl vec3_copy
@@ -1098,7 +1098,7 @@ lbl_fn_80129A6C_00000DCC:
     cmpwi r3, 0x0
     beq lbl_fn_80129A6C_00000E2C
     lwz r3, 0x0(r31)
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     mr r4, r3
     mr r3, r28
     bl vec3_copy
@@ -1274,7 +1274,7 @@ asm void fn_8012A190(void)
     blr
 }
 
-void *fn_8012A1B8(void *p)
+void *path_getFollowerNode(void *p)
 {
     return (char *)p + 0x534;
 }

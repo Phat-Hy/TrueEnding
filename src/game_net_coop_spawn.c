@@ -19,7 +19,7 @@ extern void fn_80124C6C(void);
 extern void fn_801EFA78(void);
 extern void save_parseSlotStats(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801F6C2C(void);
+extern void save_getElapsedPlayTime(void);
 extern void save_computeCrc32(void);
 extern void save_verifyBlockCrc(void);
 extern void thread_findAndNotify(void);
@@ -133,7 +133,7 @@ asm void fn_804A55FC(void)
     slwi r0, r0, 2
     add r3, r27, r0
     lwz r3, 0x8c(r3)
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     lwz r0, 0x88(r27)
     lfs f0, lbl_80887220
     slwi r0, r0, 2
@@ -370,7 +370,7 @@ lbl_fn_804A5824_00000360:
     slwi r0, r0, 2
     add r3, r31, r0
     lwz r3, 0x8c(r3)
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     lwz r0, 0x88(r31)
     lfs f0, lbl_80887220
     slwi r0, r0, 2

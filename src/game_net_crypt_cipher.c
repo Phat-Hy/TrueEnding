@@ -28,7 +28,7 @@ extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_803E9608(void);
 extern void fn_804EB484(void);
-extern void fn_804EB874(void);
+extern void net_getLocalPlayerAid(void);
 extern void fn_805075C8(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -1629,11 +1629,11 @@ asm void fn_804B5B10(void)
     stw r0, 0x98(r1)
     lwz r3, lbl_8087F610
     stw r0, 0xa0(r1)
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     cmpwi r3, 0x0
     beq lbl_fn_804B5B10_00001B2C
     lwz r3, lbl_8087F610
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     lwz r5, lbl_8087F610
     lwz r0, 0xd0(r3)
     lwz r3, 0x540(r5)

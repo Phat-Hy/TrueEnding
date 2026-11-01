@@ -50,7 +50,7 @@ void fn_801F7A18(void);
 void fn_801F7DF0(void);
 void fn_801F80A8(void);
 void save_findEntryByName(void);
-void fn_801F8598(void);
+void save_formatSlotString(void);
 void fn_801F8830(void);
 void fn_801F8914(void);
 void fn_801F8928(void);
@@ -1206,7 +1206,7 @@ lbl_save_findEntryByName_00000FEC:
     blr
 }
 
-asm void fn_801F8598(void)
+asm void save_formatSlotString(void)
 {
     nofralloc
     stwu r1, -0x280(r1)
@@ -1219,16 +1219,16 @@ asm void fn_801F8598(void)
     mr r30, r5
     stw r29, 0x274(r1)
     mr r29, r4
-    ble lbl_fn_801F8598_00001050
+    ble lbl_save_formatSlotString_00001050
     lis r4, lbl_80782D50@ha
     mr r5, r6
     addi r3, r1, 0x30
     addi r4, r4, lbl_80782D50@l
     crclr 6
     bl wcs_vformat
-    b lbl_fn_801F8598_0000108C
-lbl_fn_801F8598_00001050:
-    bge lbl_fn_801F8598_00001074
+    b lbl_save_formatSlotString_0000108C
+lbl_save_formatSlotString_00001050:
+    bge lbl_save_formatSlotString_00001074
     lis r4, lbl_80782D50@ha
     addi r3, r1, 0x30
     addi r4, r4, lbl_80782D50@l
@@ -1236,15 +1236,15 @@ lbl_fn_801F8598_00001050:
     addi r4, r4, 0xe
     crclr 6
     bl wcs_vformat
-    b lbl_fn_801F8598_0000108C
-lbl_fn_801F8598_00001074:
+    b lbl_save_formatSlotString_0000108C
+lbl_save_formatSlotString_00001074:
     lis r4, lbl_80782D50@ha
     addi r3, r1, 0x30
     addi r4, r4, lbl_80782D50@l
     addi r4, r4, 0x1e
     crclr 6
     bl wcs_vformat
-lbl_fn_801F8598_0000108C:
+lbl_save_formatSlotString_0000108C:
     mr r5, r30
     addi r3, r1, 0x70
     addi r4, r1, 0x30
@@ -1259,13 +1259,13 @@ lbl_fn_801F8598_0000108C:
     lwz r0, 0x24(r1)
     stw r3, 0x20(r1)
     srwi. r0, r0, 31
-    bne lbl_fn_801F8598_000010D4
+    bne lbl_save_formatSlotString_000010D4
     lbz r0, 0x24(r1)
     clrlwi r30, r0, 25
-    b lbl_fn_801F8598_000010D8
-lbl_fn_801F8598_000010D4:
+    b lbl_save_formatSlotString_000010D8
+lbl_save_formatSlotString_000010D4:
     lwz r30, 0x28(r1)
-lbl_fn_801F8598_000010D8:
+lbl_save_formatSlotString_000010D8:
     lbz r0, 0x8(r1)
     addi r3, r1, 0x70
     stb r0, 0xc(r1)
@@ -1285,45 +1285,45 @@ lbl_fn_801F8598_000010D8:
     li r3, 0x0
     mtctr r0
     cmplwi r0, 0x0
-    ble lbl_fn_801F8598_000011D4
-lbl_fn_801F8598_00001128:
+    ble lbl_save_formatSlotString_000011D4
+lbl_save_formatSlotString_00001128:
     lwz r0, 0x1e0(r4)
     cmplw r5, r0
-    bne lbl_fn_801F8598_000011C8
+    bne lbl_save_formatSlotString_000011C8
     slwi r0, r3, 4
     add r3, r31, r0
     lwzu r0, 0x1e4(r3)
     srwi. r5, r0, 31
-    bne lbl_fn_801F8598_0000116C
+    bne lbl_save_formatSlotString_0000116C
     lwz r4, 0x24(r1)
     srwi. r0, r4, 31
-    bne lbl_fn_801F8598_0000116C
+    bne lbl_save_formatSlotString_0000116C
     lwz r0, 0x28(r1)
     stw r4, 0x0(r3)
     stw r0, 0x4(r3)
     lwz r0, 0x2c(r1)
     stw r0, 0x8(r3)
-    b lbl_fn_801F8598_00001268
-lbl_fn_801F8598_0000116C:
+    b lbl_save_formatSlotString_00001268
+lbl_save_formatSlotString_0000116C:
     cmpwi r5, 0x0
-    beq lbl_fn_801F8598_0000117C
+    beq lbl_save_formatSlotString_0000117C
     lwz r5, 0x4(r3)
-    b lbl_fn_801F8598_00001184
-lbl_fn_801F8598_0000117C:
+    b lbl_save_formatSlotString_00001184
+lbl_save_formatSlotString_0000117C:
     lbz r0, 0x0(r3)
     clrlwi r5, r0, 25
-lbl_fn_801F8598_00001184:
+lbl_save_formatSlotString_00001184:
     lwz r0, 0x24(r1)
     srwi. r0, r0, 31
-    bne lbl_fn_801F8598_000011A0
+    bne lbl_save_formatSlotString_000011A0
     lbz r0, 0x24(r1)
     addi r6, r1, 0x26
     clrlwi r0, r0, 25
-    b lbl_fn_801F8598_000011A8
-lbl_fn_801F8598_000011A0:
+    b lbl_save_formatSlotString_000011A8
+lbl_save_formatSlotString_000011A0:
     lwz r6, 0x2c(r1)
     lwz r0, 0x28(r1)
-lbl_fn_801F8598_000011A8:
+lbl_save_formatSlotString_000011A8:
     lbz r4, 0x1c(r1)
     slwi r0, r0, 1
     stb r4, 0x18(r1)
@@ -1331,29 +1331,29 @@ lbl_fn_801F8598_000011A8:
     addi r8, r1, 0x18
     li r4, 0x0
     bl str_assignBuffer
-    b lbl_fn_801F8598_00001268
-lbl_fn_801F8598_000011C8:
+    b lbl_save_formatSlotString_00001268
+lbl_save_formatSlotString_000011C8:
     addi r4, r4, 0x10
     addi r3, r3, 0x1
-    bdnz lbl_fn_801F8598_00001128
-lbl_fn_801F8598_000011D4:
+    bdnz lbl_save_formatSlotString_00001128
+lbl_save_formatSlotString_000011D4:
     lwz r0, 0x1dc(r31)
     slwi r0, r0, 4
     add r0, r31, r0
     addic. r30, r0, 0x1e0
-    beq lbl_fn_801F8598_0000125C
+    beq lbl_save_formatSlotString_0000125C
     lwz r0, 0x20(r1)
     stw r0, 0x0(r30)
     lwz r3, 0x24(r1)
     srwi. r0, r3, 31
-    bne lbl_fn_801F8598_00001214
+    bne lbl_save_formatSlotString_00001214
     lwz r0, 0x28(r1)
     stw r3, 0x4(r30)
     stw r0, 0x8(r30)
     lwz r0, 0x2c(r1)
     stw r0, 0xc(r30)
-    b lbl_fn_801F8598_0000125C
-lbl_fn_801F8598_00001214:
+    b lbl_save_formatSlotString_0000125C
+lbl_save_formatSlotString_00001214:
     li r0, 0x0
     stw r0, 0x4(r30)
     addi r3, r30, 0x4
@@ -1372,19 +1372,19 @@ lbl_fn_801F8598_00001214:
     li r5, 0x0
     add r7, r6, r0
     bl str_assignBuffer
-lbl_fn_801F8598_0000125C:
+lbl_save_formatSlotString_0000125C:
     lwz r3, 0x1dc(r31)
     addi r0, r3, 0x1
     stw r0, 0x1dc(r31)
-lbl_fn_801F8598_00001268:
+lbl_save_formatSlotString_00001268:
     addic. r0, r1, 0x24
-    beq lbl_fn_801F8598_00001284
+    beq lbl_save_formatSlotString_00001284
     lwz r0, 0x24(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_801F8598_00001284
+    beq lbl_save_formatSlotString_00001284
     lwz r3, 0x2c(r1)
     bl dtor_80084684
-lbl_fn_801F8598_00001284:
+lbl_save_formatSlotString_00001284:
     lwz r0, 0x284(r1)
     lwz r31, 0x27c(r1)
     lwz r30, 0x278(r1)

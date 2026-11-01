@@ -55,7 +55,7 @@ void fn_801F69A8(void);
 void fn_801F6A38(void);
 void fn_801F6A98(void);
 void fn_801F6C10(void);
-void fn_801F6C2C(void);
+void save_getElapsedPlayTime(void);
 void fn_801F6C38(void);
 void save_computeCrc32(void);
 void save_verifyBlockCrc(void);
@@ -1284,7 +1284,7 @@ lbl_fn_801F6C10_0000105C:
     blr
 }
 
-asm void fn_801F6C2C(void)
+asm void save_getElapsedPlayTime(void)
 {
     nofralloc
     lwz r3, 0x48(r3)

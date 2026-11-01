@@ -22,7 +22,7 @@ extern void fn_800E0908(void);
 extern void fn_80124B60(void);
 extern void fn_801F0544(void);
 extern void save_createWorkerTask(void);
-extern void fn_801F6C2C(void);
+extern void save_getElapsedPlayTime(void);
 extern void fn_801F6C38(void);
 extern void save_computeCrc32(void);
 extern void save_findEntryByName(void);
@@ -487,7 +487,7 @@ lbl_fn_803B6324_00000518:
 lbl_fn_803B6324_00000570:
     lwz r3, 0x48(r31)
     lfs f31, 0x50(r3)
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     fcmpo cr0, f31, f1
     cror eq, gt, eq
     bne lbl_fn_803B6324_00000824

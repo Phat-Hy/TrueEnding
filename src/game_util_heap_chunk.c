@@ -34,7 +34,7 @@ extern void save_calculateBlockCrc(void);
 extern void save_writeBackupSlot(void);
 extern void fn_801F7DF0(void);
 extern void save_findEntryByName(void);
-extern void fn_801F8598(void);
+extern void save_formatSlotString(void);
 extern void thread_findAndNotify(void);
 extern void thread_dispatchToQueue(void);
 extern void sys_findModuleById(void);
@@ -721,7 +721,7 @@ lbl_fn_80586220_00000814:
     lwz r3, 0xac(r18)
     addi r4, r25, 0x160
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     lwz r3, lbl_8087F4F0
     mr r4, r15
     bl fn_80444BE8
@@ -797,7 +797,7 @@ lbl_fn_80586220_00000914:
     addi r4, r25, 0x180
     lwz r5, 0x4(r21)
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     lwz r4, lbl_8087F4F0
     mr r5, r20
     addi r3, r1, 0x28
@@ -1323,7 +1323,7 @@ lbl_fn_805866F8_00001094:
     mr r5, r25
     addi r4, r21, 0x1c8
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
 lbl_fn_805866F8_00001100:
     addi r23, r23, 0x1
     addi r20, r20, 0x4

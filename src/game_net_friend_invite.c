@@ -78,7 +78,7 @@ extern void fn_8037308C(void);
 extern void fn_80373118(void);
 extern void kpad_getClampData(void);
 extern void dvd_showDiskErrorDialog(void);
-extern void fn_8037EF30(void);
+extern void fat_dispatchFsRequest(void);
 extern void fn_8037F688(void);
 extern void fn_803BE590(void);
 extern void fn_803CFC58(void);
@@ -259,7 +259,7 @@ extern void fn_804EAFD4(void);
 extern void fn_804EB1B0(void);
 extern void fn_804EB3D0(void);
 extern void fn_804EB5DC(void);
-extern void fn_804EB874(void);
+extern void net_getLocalPlayerAid(void);
 extern void fn_804ED76C(void);
 extern void fn_804EDB10(void);
 extern void fn_804EDCD0(void);
@@ -2862,7 +2862,7 @@ lbl_fn_804D25D4_000022F4:
     bl fn_804BA350
     b lbl_fn_804D25D4_00004898
     mr r3, r24
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_fn_804D25D4_000027E0
@@ -3408,7 +3408,7 @@ lbl_fn_804D25D4_00002AA8:
     mr r3, r24
     bl fn_804E9364
     mr r3, r24
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     mr r22, r3
     mr r3, r24
     li r4, 0x0
@@ -3460,7 +3460,7 @@ lbl_fn_804D25D4_00002B58:
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_00002E44
     mr r3, r24
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     cmpwi r3, 0x0
     mr r22, r3
     beq lbl_fn_804D25D4_00002BD0
@@ -3585,7 +3585,7 @@ lbl_fn_804D25D4_00002D44:
     lfs f1, lbl_808875CC
     li r4, 0x1
     li r5, 0x1
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
 lbl_fn_804D25D4_00002D74:
     bl fn_804814F0
     cmpwi r3, 0x0
@@ -3688,7 +3688,7 @@ lbl_fn_804D25D4_00002ED8:
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00004898
     mr r3, r24
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     mr r22, r3
     bl net_getFriendManager
     lbz r4, 0xcc(r22)
@@ -3737,7 +3737,7 @@ lbl_fn_804D25D4_00002F50:
     b lbl_fn_804D25D4_00004898
 lbl_fn_804D25D4_00002FA4:
     mr r3, r24
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     mr r22, r3
     bl net_getFriendManager
     lbz r4, 0xcc(r22)
@@ -3910,7 +3910,7 @@ lbl_fn_804D25D4_00003110:
     mr r3, r24
     bl fn_804E9C68
     mr r3, r24
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     lis r4, lbl_80759748@ha
     lis r30, lbl_80759E48@ha
     lfd f31, lbl_80759748@l(r4)
@@ -4282,7 +4282,7 @@ lbl_fn_804D25D4_000036EC:
     mr r3, r24
     bl fn_804E9364
     mr r3, r24
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     addis r4, r24, 0x1
     mr r31, r3
     lbz r0, -0x6589(r4)
@@ -5184,7 +5184,7 @@ lbl_fn_804D25D4_000044F8:
     cmpw r20, r3
     blt lbl_fn_804D25D4_00004458
     mr r3, r24
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     lwz r4, 0xd4(r3)
     mr r20, r3
     lwz r0, 0xd0(r3)

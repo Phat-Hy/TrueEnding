@@ -38,7 +38,7 @@ extern void fn_804C7D7C(void);
 extern void fn_804C822C(void);
 extern void fn_804DA3F8(void);
 extern void fn_804E82C8(void);
-extern void fn_804EB874(void);
+extern void net_getLocalPlayerAid(void);
 extern void fn_806A8E70(void);
 extern void net_isSessionActive(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -1971,7 +1971,7 @@ asm void fn_804C5E9C(void)
     cmpwi r4, 0x0
     blt lbl_fn_804C5E9C_00002178
     lwz r3, lbl_8087F610
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     lwz r0, 0xe4(r31)
     li r3, 0x0
     stw r3, 0xec(r31)
@@ -2039,16 +2039,16 @@ lbl_fn_804C5E9C_00001A9C:
     cmpwi r0, 0x0
     beq lbl_fn_804C5E9C_00001B04
     lwz r3, lbl_8087F610
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     cmpwi r3, 0x0
     beq lbl_fn_804C5E9C_00001B04
     lwz r3, lbl_8087F610
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
     beq lbl_fn_804C5E9C_00001B04
     lwz r3, lbl_8087F610
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     lwz r28, 0x0(r3)
     li r4, 0x1
     lwz r0, 0x54c(r28)

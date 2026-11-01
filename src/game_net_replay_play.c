@@ -29,7 +29,7 @@ extern void fn_804E4C38(void);
 extern void fn_804E4D74(void);
 extern void fn_804EB404(void);
 extern void fn_804EB484(void);
-extern void fn_804EB874(void);
+extern void net_getLocalPlayerAid(void);
 extern void fn_804FA890(void);
 extern void fn_805075C8(void);
 extern void fn_80507614(void);
@@ -255,7 +255,7 @@ asm void fn_804C68E0(void)
     cmpwi r0, 0xa
     beq lbl_fn_804C68E0_0000027C
     lwz r3, lbl_8087F610
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     lwz r3, 0x0(r3)
     li r4, 0x0
     lwz r0, 0x54c(r3)
@@ -725,7 +725,7 @@ lbl_fn_804C6E20_000008AC:
     mr r5, r31
     bl thread_dispatchToQueue
     lwz r3, lbl_8087F610
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     lwz r0, 0xf0(r30)
     cmpwi r0, 0x0
     bne lbl_fn_804C6E20_00000998
@@ -1228,7 +1228,7 @@ lbl_fn_804C76EC_000010B4:
     stfs f0, 0x24(r1)
     stfs f0, 0x3c(r1)
     stfs f0, 0x54(r1)
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     lwz r6, lbl_8087F610
     lis r4, lbl_80758E28@ha
     lis r5, lbl_80758E44@ha

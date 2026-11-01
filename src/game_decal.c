@@ -43,7 +43,7 @@ extern void fn_8016D74C(void);
 extern void debuff_clearStatus(void);
 extern void fn_8016DC14(void);
 extern void fn_8016DCD4(void);
-extern void fn_8016E484(void);
+extern void task_isValidQueueRange(void);
 extern void actor_setState(void);
 extern void fn_80178018(void);
 extern void fn_80178078(void);
@@ -61,7 +61,7 @@ extern void fn_80373FC4(void);
 extern void fn_803748E0(void);
 extern void kpad_testActiveFlags(void);
 extern void fn_803761AC(void);
-extern void fn_8037EF30(void);
+extern void fat_dispatchFsRequest(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECDotProduct(void);
@@ -1123,7 +1123,7 @@ lbl_fn_800E62AC_00000DE4:
     li r0, 0x1
     mr r3, r25
     stw r0, 0x1c(r4)
-    bl fn_8016E484
+    bl task_isValidQueueRange
     cmpwi r3, 0x0
     beq lbl_fn_800E62AC_00000E54
     li r3, 0x2
@@ -1386,7 +1386,7 @@ lbl_fn_800E62AC_000011B0:
     mr r3, r30
     li r4, 0x0
     li r5, 0x1
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_800E62AC_00001390
 lbl_fn_800E62AC_000011F8:
     extrwi. r0, r3, 1, 26

@@ -38,7 +38,7 @@ extern void fn_804DBD0C(void);
 extern void fn_804DDD54(void);
 extern void fn_804DE2FC(void);
 extern void fn_804EA5E0(void);
-extern void fn_804EB874(void);
+extern void net_getLocalPlayerAid(void);
 extern void fn_8050A638(void);
 extern void fn_8050BA6C(void);
 extern void __construct_new_array(void);
@@ -599,7 +599,7 @@ lbl_fn_804BBC28_00000700:
     b lbl_fn_804BBC28_00000754
 lbl_fn_804BBC28_00000724:
     lwz r3, lbl_8087F610
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     cmpwi r3, 0x0
     beq lbl_fn_804BBC28_00000748
     lwz r0, 0xb0(r3)
@@ -902,7 +902,7 @@ asm void fn_804BC628(void)
     cmpwi r4, 0x0
     blt lbl_fn_804BC628_00001E20
     lwz r3, lbl_8087F610
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     lwz r4, lbl_8087F59C
     mr r30, r3
     lwz r24, 0xdb4(r28)

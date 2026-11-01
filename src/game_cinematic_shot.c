@@ -40,7 +40,7 @@ extern void world_startMapTransition(void);
 extern void world_reloadMapTransition(void);
 extern void fn_805A4258(void);
 extern void fn_805A49E8(void);
-extern void fn_805A4A20(void);
+extern void world_setFlagByType(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -2046,7 +2046,7 @@ lbl_fn_80336C8C_00001C30:
     mr r3, r30
     addi r4, r30, 0x1564
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
 lbl_fn_80336C8C_00001C90:
     mr r3, r30
     bl npc_initScriptContext

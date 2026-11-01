@@ -6,7 +6,7 @@ extern void DCZeroRange(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_80089ACC(void);
-extern void fn_8008B964(void);
+extern void sys_getMainManager(void);
 extern void atn_Matrix_copy(void);
 extern void atn_Matrix_concat(void);
 extern void fn_8008D784(void);
@@ -462,7 +462,7 @@ asm void atn_Model_updateMatrices(void)
     extlwi r0, r3, 2, 26
     srawi. r0, r0, 31
     beq lbl_atn_Model_updateMatrices_00000630
-    bl fn_8008B964
+    bl sys_getMainManager
     bl fn_8008E2D4
     cmpwi r3, 0x3
     bne lbl_atn_Model_updateMatrices_00000630

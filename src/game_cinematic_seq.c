@@ -58,7 +58,7 @@ extern void rand_Mersenne_constructor(void);
 extern void fn_805A3D6C(void);
 extern void fn_805A4984(void);
 extern void fn_805A49E8(void);
-extern void fn_805A4A20(void);
+extern void world_setFlagByType(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
@@ -1076,7 +1076,7 @@ lbl_fn_80335600_00000C74:
     mr r3, r29
     addi r4, r29, 0x1554
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
 lbl_fn_80335600_00000CE0:
     li r31, 0x1
     b lbl_fn_80335600_00000D48
@@ -1105,7 +1105,7 @@ lbl_fn_80335600_00000D24:
     mr r3, r29
     addi r4, r29, 0x154c
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
 lbl_fn_80335600_00000D48:
     cmpwi r31, 0x0
     bne lbl_fn_80335600_00000D78
@@ -1710,7 +1710,7 @@ lbl_fn_80335988_00001558:
     mr r3, r31
     addi r4, r31, 0x155c
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
     b lbl_fn_80335988_00001650
 lbl_fn_80335988_00001610:
     cmpwi r0, 0x1
@@ -1728,7 +1728,7 @@ lbl_fn_80335988_00001610:
     mr r3, r31
     addi r4, r31, 0x1544
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
 lbl_fn_80335988_00001650:
     lwz r4, 0x12a4(r31)
     li r0, 0x1

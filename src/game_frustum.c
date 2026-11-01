@@ -28,7 +28,7 @@ extern void fn_8010AEF4(void);
 extern void fn_8010C3E4(void);
 extern void fn_80154488(void);
 extern void fn_801656A4(void);
-extern void fn_8016E484(void);
+extern void task_isValidQueueRange(void);
 extern void fn_8016F368(void);
 extern void battle_canTargetActor(void);
 extern void save_validateHeader(void);
@@ -2230,7 +2230,7 @@ lbl_fn_800F3EF4_00001D64:
     cmpwi r0, 0x0
     beq lbl_fn_800F3EF4_00002034
     mr r3, r25
-    bl fn_8016E484
+    bl task_isValidQueueRange
     cmpwi r3, 0x0
     beq lbl_fn_800F3EF4_00002024
     lwz r3, lbl_8087F430

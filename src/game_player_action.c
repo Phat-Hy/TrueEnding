@@ -30,7 +30,7 @@ extern void fn_80153FA0(void);
 extern void fn_80154344(void);
 extern void fn_80155790(void);
 extern void inventory_calcTotalStats(void);
-extern void fn_8016E484(void);
+extern void task_isValidQueueRange(void);
 extern void fn_8016F4D8(void);
 extern void fn_8016F5EC(void);
 extern void fn_803BEB54(void);
@@ -1249,7 +1249,7 @@ asm void fn_8011C4AC(void)
     cmpwi r0, 0x3
     bne lbl_fn_8011C4AC_00000FF0
     mr r3, r30
-    bl fn_8016E484
+    bl task_isValidQueueRange
     cmpwi r3, 0x0
     bne lbl_fn_8011C4AC_00000FF0
     lfs f3, 0x9fc(r30)

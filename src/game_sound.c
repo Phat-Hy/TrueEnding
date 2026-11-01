@@ -211,7 +211,7 @@ void fn_80049AAC(void);
 void fn_80049AE4(void);
 void fn_80049B08(void);
 void fn_80049B2C(void);
-void fn_80049B74(void);
+void snd_findSoundNodeByName(void);
 void fn_80049C3C(void);
 void fn_80049CDC(void);
 void fn_80049D74(void);
@@ -4499,7 +4499,7 @@ lbl_fn_80049B2C_00003968:
     blr
 }
 
-asm void fn_80049B74(void)
+asm void snd_findSoundNodeByName(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -4509,53 +4509,53 @@ asm void fn_80049B74(void)
     mr r31, r3
     lwz r0, 0x8e0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80049B74_00003A0C
+    beq lbl_snd_findSoundNodeByName_00003A0C
     mr r3, r4
     bl str_findChar
     lwz r4, 0x8d4(r31)
     addi r5, r31, 0x8d4
-    b lbl_fn_80049B74_000039C8
-lbl_fn_80049B74_000039AC:
+    b lbl_snd_findSoundNodeByName_000039C8
+lbl_snd_findSoundNodeByName_000039AC:
     lwz r0, 0xc(r4)
     cmplw r0, r3
-    blt lbl_fn_80049B74_000039C4
+    blt lbl_snd_findSoundNodeByName_000039C4
     mr r5, r4
     lwz r4, 0x0(r4)
-    b lbl_fn_80049B74_000039C8
-lbl_fn_80049B74_000039C4:
+    b lbl_snd_findSoundNodeByName_000039C8
+lbl_snd_findSoundNodeByName_000039C4:
     lwz r4, 0x4(r4)
-lbl_fn_80049B74_000039C8:
+lbl_snd_findSoundNodeByName_000039C8:
     cmpwi r4, 0x0
-    bne lbl_fn_80049B74_000039AC
+    bne lbl_snd_findSoundNodeByName_000039AC
     addi r0, r31, 0x8d4
     cmplw r5, r0
-    beq lbl_fn_80049B74_000039E8
+    beq lbl_snd_findSoundNodeByName_000039E8
     lwz r0, 0xc(r5)
     cmplw r3, r0
-    bge lbl_fn_80049B74_000039EC
-lbl_fn_80049B74_000039E8:
+    bge lbl_snd_findSoundNodeByName_000039EC
+lbl_snd_findSoundNodeByName_000039E8:
     addi r5, r31, 0x8d4
-lbl_fn_80049B74_000039EC:
+lbl_snd_findSoundNodeByName_000039EC:
     addi r0, r31, 0x8d4
     cmplw r5, r0
-    beq lbl_fn_80049B74_00003A04
+    beq lbl_snd_findSoundNodeByName_00003A04
     lwz r3, 0x10(r5)
     addi r3, r3, 0x1
-    b lbl_fn_80049B74_00003A2C
-lbl_fn_80049B74_00003A04:
+    b lbl_snd_findSoundNodeByName_00003A2C
+lbl_snd_findSoundNodeByName_00003A04:
     li r3, 0x0
-    b lbl_fn_80049B74_00003A2C
-lbl_fn_80049B74_00003A0C:
+    b lbl_snd_findSoundNodeByName_00003A2C
+lbl_snd_findSoundNodeByName_00003A0C:
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80049B74_00003A28
+    beq lbl_snd_findSoundNodeByName_00003A28
     addi r3, r3, 0x8
     bl fn_8059E320
     addi r3, r3, 0x1
-    b lbl_fn_80049B74_00003A2C
-lbl_fn_80049B74_00003A28:
+    b lbl_snd_findSoundNodeByName_00003A2C
+lbl_snd_findSoundNodeByName_00003A28:
     li r3, 0x0
-lbl_fn_80049B74_00003A2C:
+lbl_snd_findSoundNodeByName_00003A2C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -6007,7 +6007,7 @@ lbl_fn_8004AE84_00004CFC:
 lbl_fn_8004AE84_00004D04:
     lwz r3, lbl_8087EE90
     mr r4, r29
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     mr r4, r3
     lwz r3, lbl_8087EFE8
     bl fn_800D0AB0
@@ -6090,7 +6090,7 @@ lbl_fn_8004AFAC_00004E1C:
 lbl_fn_8004AFAC_00004E24:
     lwz r3, lbl_8087EE90
     mr r4, r28
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     mr r4, r3
     lwz r3, lbl_8087EFE8
     bl fn_800D0AB0

@@ -7,7 +7,7 @@ extern void _restgpr_25(void);
 extern void _savegpr_22(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
-extern void fn_80049B74(void);
+extern void snd_findSoundNodeByName(void);
 extern void fn_8004AD9C(void);
 extern void fn_8004ADF4(void);
 extern void fn_8004AE84(void);
@@ -1010,7 +1010,7 @@ asm void fn_8037D274(void)
 lbl_fn_8037D274_00000C18:
     lwz r3, lbl_8087EE90
     mr r4, r27
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     lwz r5, lbl_8087F480
     mr r4, r3
     cmpwi r5, 0x0
@@ -1213,7 +1213,7 @@ lbl_dvd_showDiskErrorDialog_00000EC8:
     beq lbl_dvd_showDiskErrorDialog_00000EE0
     mr r3, r28
     mr r4, r29
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     mr r27, r3
 lbl_dvd_showDiskErrorDialog_00000EE0:
     mr r3, r22
@@ -1233,7 +1233,7 @@ lbl_dvd_showDiskErrorDialog_00000F04:
     bl fn_8037C71C
     mr r4, r3
     mr r3, r30
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     mr r26, r3
 lbl_dvd_showDiskErrorDialog_00000F28:
     cmplw r27, r26

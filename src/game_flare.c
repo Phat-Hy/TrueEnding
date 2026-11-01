@@ -56,7 +56,7 @@ extern void fn_8036E098(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
 extern void fn_803761BC(void);
-extern void fn_8037EF30(void);
+extern void fat_dispatchFsRequest(void);
 extern void fn_803CC77C(void);
 extern void fn_803CCA34(void);
 extern void fn_803CCA4C(void);
@@ -1893,7 +1893,7 @@ lbl_fn_800E4278_0000191C:
     mr r3, r30
     li r4, 0x0
     li r5, 0x1
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     li r0, 0x0
     stw r0, 0xfc0(r22)
 lbl_fn_800E4278_00001964:

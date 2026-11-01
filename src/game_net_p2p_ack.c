@@ -22,7 +22,7 @@ extern void fn_80134800(void);
 extern void save_formatSlotTitle(void);
 extern void fn_801F6C10(void);
 extern void save_computeCrc32(void);
-extern void fn_801F8598(void);
+extern void save_formatSlotString(void);
 extern void thread_findAndNotify(void);
 extern void profile_getMetricValue(void);
 extern void perf_getMetricValue(void);
@@ -1190,7 +1190,7 @@ lbl_fn_80511DA0_00000ED0:
     mr r3, r29
     addi r4, r28, 0x3c
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     lfs f1, lbl_808877D0
     mr r3, r29
     addi r4, r28, 0x42
@@ -1206,7 +1206,7 @@ lbl_fn_80511DA0_00000F08:
     li r6, 0x0
     stfd f0, 0xe0(r1)
     lwz r5, 0xe4(r1)
-    bl fn_801F8598
+    bl save_formatSlotString
     lwz r0, 0x94(r1)
     lis r3, lbl_8075B2A8@ha
     lfd f1, lbl_8075B2A8@l(r3)
@@ -1237,7 +1237,7 @@ lbl_fn_80511DA0_00000F84:
     mr r3, r29
     addi r4, r28, 0x49
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     fmr f1, f31
     mr r3, r29
     addi r4, r28, 0x4f

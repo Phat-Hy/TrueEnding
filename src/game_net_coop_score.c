@@ -31,7 +31,7 @@ extern void fn_8007FAF0(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_80089ACC(void);
-extern void fn_8008B964(void);
+extern void sys_getMainManager(void);
 extern void fn_80093D98(void);
 extern void fn_80093E30(void);
 extern void fn_800A96AC(void);
@@ -206,7 +206,7 @@ lbl_fn_804ABA2C_00000048:
     bl fn_803D71C4
     bl fn_804A9E8C
     mr r27, r3
-    bl fn_8008B964
+    bl sys_getMainManager
     li r4, 0x10
     bl fn_804ABEEC
     mr r31, r3
@@ -658,7 +658,7 @@ asm void fn_804ABF84(void)
     bl fn_804A9E84
     bl fn_803D71C4
     bl fn_804A9E8C
-    bl fn_8008B964
+    bl sys_getMainManager
     li r4, 0x10
     bl fn_804ABEEC
     mr r30, r3

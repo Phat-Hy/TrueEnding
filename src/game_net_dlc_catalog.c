@@ -45,7 +45,7 @@ extern void task_getWorkerByIndex(void);
 extern void fn_80365390(void);
 extern void fn_80371320(void);
 extern void kpad_getClampData(void);
-extern void fn_804EB874(void);
+extern void net_getLocalPlayerAid(void);
 extern void fn_805AE3C8(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
@@ -287,7 +287,7 @@ asm void fn_80549F18(void)
     lis r4, 0xb
     lwz r3, lbl_8087F610
     subi r30, r4, 0x51a0
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     cmpwi r3, 0x0
     beq lbl_fn_80549F18_000001D4
     lwz r0, 0xb0(r3)

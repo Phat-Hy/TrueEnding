@@ -28,7 +28,7 @@ extern void fn_80178864(void);
 extern void save_computeCrc32(void);
 extern void save_writeBackupSlot(void);
 extern void save_findEntryByName(void);
-extern void fn_801F8598(void);
+extern void save_formatSlotString(void);
 extern void assert_formatLocation(void);
 extern void task_findEntryById(void);
 extern void fn_8021A4E0(void);
@@ -192,7 +192,7 @@ lbl_fn_80598534_0000014C:
     mr r5, r26
     addi r4, r29, 0x389
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
 lbl_fn_80598534_00000160:
     cmpwi r27, 0x0
     bge lbl_fn_80598534_0000019C
@@ -220,7 +220,7 @@ lbl_fn_80598534_0000019C:
     mr r5, r27
     addi r4, r29, 0x39a
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
 lbl_fn_80598534_000001C8:
     lwz r3, lbl_8087F4F0
     mr r4, r25
@@ -253,7 +253,7 @@ lbl_fn_80598534_00000214:
     mr r5, r31
     addi r4, r29, 0x3a8
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
 lbl_fn_80598534_00000240:
     lwz r4, lbl_8087F4F0
     mr r5, r28

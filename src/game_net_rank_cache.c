@@ -15,7 +15,7 @@ extern void ref_releaseHandle(void);
 extern void fn_80116EB8(void);
 extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
-extern void fn_801F6C2C(void);
+extern void save_getElapsedPlayTime(void);
 extern void save_computeCrc32(void);
 extern void save_findEntryByName(void);
 extern void perf_getMetricValue(void);
@@ -1476,7 +1476,7 @@ lbl_fn_80525A0C_000013A4:
     lwz r3, 0x18(r30)
     bl perf_getMetricValue
     mr r28, r3
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     stfs f1, 0x50(r28)
     lwz r3, 0x18(r30)
     bl perf_getMetricValue
@@ -1598,7 +1598,7 @@ lbl_fn_80525A0C_00001570:
     lwz r3, 0x18(r30)
     bl perf_getMetricValue
     mr r28, r3
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     stfs f1, 0x50(r28)
     lwz r3, 0x18(r30)
     bl perf_getMetricValue

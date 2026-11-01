@@ -13,7 +13,7 @@ extern void boss_triggerEventSequence(void);
 extern void fn_8006B2D8(void);
 extern void gmk_LoadHandle_constructor(void);
 extern void mem_alloc(void);
-extern void fn_8008B964(void);
+extern void sys_getMainManager(void);
 extern void skin_playAnimationByName(void);
 extern void atn_Task_constructor(void);
 extern void actor_calcSpawnTransform(void);
@@ -700,7 +700,7 @@ lbl_fn_80392964_0000090C:
     bl fn_803928C0
     addi r3, r27, 0x1f4
     bl item_useConsumable
-    bl fn_8008B964
+    bl sys_getMainManager
     addi r4, r27, 0x1f4
     bl actor_calcSpawnTransform
     lmw r27, 0xc(r1)

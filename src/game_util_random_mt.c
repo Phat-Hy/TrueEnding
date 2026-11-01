@@ -6,7 +6,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80049B2C(void);
-extern void fn_80049B74(void);
+extern void snd_findSoundNodeByName(void);
 extern void fn_8004AFAC(void);
 extern void fn_8004B1EC(void);
 extern void talk_parseQuotedString(void);
@@ -832,7 +832,7 @@ lbl_fn_805A38F4_000009A8:
 lbl_fn_805A38F4_000009B0:
     lwz r3, lbl_8087EE90
     mr r4, r30
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_805A38F4_000009D8

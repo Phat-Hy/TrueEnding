@@ -14,7 +14,7 @@ extern void vec3_sub(void);
 extern void math_wrapAngle(void);
 extern void vec3_add(void);
 extern void item_useConsumable(void);
-extern void fn_8008B964(void);
+extern void sys_getMainManager(void);
 extern void msg_formatWindowLayout(void);
 extern void msg_isWindowActive(void);
 extern void proj_getGlobalManager(void);
@@ -1880,7 +1880,7 @@ lbl_fn_801162A4_00001924:
     bl fn_80116BC8
     cmpwi r3, 0x0
     bne lbl_fn_801162A4_000019A8
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r29
     bl actor_calcSpawnTransform
     bl fn_80116E64

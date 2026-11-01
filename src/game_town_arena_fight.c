@@ -23,7 +23,7 @@ extern void mission_updateStub(void);
 extern void vec3_initValues(void);
 extern void script_executeOpcode(void);
 extern void fn_8006FA4C(void);
-extern void fn_8008B964(void);
+extern void sys_getMainManager(void);
 extern void msg_isWindowActive(void);
 extern void motion_updateFogAdj(void);
 extern void skin_playAnimationByName(void);
@@ -85,11 +85,11 @@ extern void fn_801F4484(void);
 extern void fn_801F465C(void);
 extern void save_parseSlotStats(void);
 extern void save_formatSlotTitle(void);
-extern void fn_801F6C2C(void);
+extern void save_getElapsedPlayTime(void);
 extern void save_computeCrc32(void);
 extern void save_verifyBlockCrc(void);
 extern void save_findEntryByName(void);
-extern void fn_801F8598(void);
+extern void save_formatSlotString(void);
 extern void perf_getMetricValue(void);
 extern void fn_802168BC(void);
 extern void fn_80216908(void);
@@ -1356,7 +1356,7 @@ lbl_fn_803D2A6C_00000F68:
     lfs f0, lbl_80885DDC
     fadds f0, f1, f0
     stfs f0, 0x45c(r1)
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r3
     addi r3, r1, 0x44c
     addi r5, r1, 0x458
@@ -1462,7 +1462,7 @@ lbl_fn_803D2A6C_00001100:
     lfs f0, 0x444(r1)
     fadds f0, f0, f28
     stfs f0, 0x444(r1)
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r3
     addi r3, r1, 0x434
     addi r5, r1, 0x440
@@ -1603,7 +1603,7 @@ lbl_fn_803D2A6C_000012EC:
     addi r3, r1, 0x608
     bl fn_803D731C
     mr r21, r3
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r3
     mr r5, r21
     addi r3, r1, 0x404
@@ -1643,7 +1643,7 @@ lbl_fn_803D2A6C_00001394:
     addi r3, r1, 0x608
     bl fn_803D731C
     mr r22, r3
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r3
     mr r5, r22
     addi r3, r1, 0x3f8
@@ -1849,7 +1849,7 @@ lbl_fn_803D2A6C_00001698:
     lfs f0, lbl_80885D68
     fadds f0, f1, f0
     stfs f0, 0x3e0(r1)
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r3
     addi r3, r1, 0x1fc
     addi r5, r1, 0x3dc
@@ -2084,22 +2084,22 @@ lbl_fn_803D2A6C_00001A1C:
     mr r5, r19
     addi r4, r31, 0x10f7
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     mr r3, r18
     mr r5, r19
     addi r4, r31, 0x10fb
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     mr r3, r18
     mr r5, r19
     addi r4, r31, 0x1101
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     mr r3, r18
     bl fn_803D737C
     fmr f31, f1
     mr r3, r18
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     fmr f30, f1
     mr r3, r25
     bl fn_803D707C
@@ -2496,7 +2496,7 @@ lbl_fn_803D2A6C_00001FF8:
     addi r3, r1, 0x3c4
     addi r4, r24, 0x888
     bl vec3_assign
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r3
     addi r3, r1, 0x1e4
     addi r5, r1, 0x3c4
@@ -2507,7 +2507,7 @@ lbl_fn_803D2A6C_00001FF8:
     addi r3, r1, 0x3b8
     addi r4, r24, 0x894
     bl vec3_assign
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r3
     addi r3, r1, 0x1d8
     addi r5, r1, 0x3b8
@@ -2829,7 +2829,7 @@ lbl_fn_803D2A6C_000024FC:
     lwz r27, 0xb3c(r30)
     mr r3, r26
     bl perf_getMetricValue
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     fmr f24, f1
     b lbl_fn_803D2A6C_00002544
 lbl_fn_803D2A6C_00002518:
@@ -2863,7 +2863,7 @@ lbl_fn_803D2A6C_00002544:
     bl fn_803D2148
     mr r3, r27
     bl perf_getMetricValue
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     fmr f29, f1
     mr r3, r27
     bl perf_getMetricValue
@@ -2907,7 +2907,7 @@ lbl_fn_803D2A6C_000025F4:
     bl fn_803D2148
     mr r3, r27
     bl perf_getMetricValue
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     fmr f29, f1
     mr r3, r27
     bl perf_getMetricValue
@@ -2920,7 +2920,7 @@ lbl_fn_803D2A6C_000025F4:
 lbl_fn_803D2A6C_0000264C:
     mr r3, r26
     bl perf_getMetricValue
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     fmr f29, f1
     mr r3, r26
     bl perf_getMetricValue
@@ -3576,7 +3576,7 @@ lbl_fn_803D2A6C_00002FCC:
     lfs f0, 0x33c(r1)
     fadds f0, f0, f30
     stfs f0, 0x33c(r1)
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r3
     addi r3, r1, 0x32c
     addi r5, r1, 0x338
@@ -4014,7 +4014,7 @@ lbl_fn_803D2A6C_00003610:
     lfs f0, 0x318(r1)
     fadds f0, f0, f27
     stfs f0, 0x318(r1)
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r3
     addi r3, r1, 0xe4
     addi r5, r1, 0x314
@@ -4192,7 +4192,7 @@ lbl_fn_803D2A6C_00003864:
     lfs f0, 0x300(r1)
     fadds f0, f0, f31
     stfs f0, 0x300(r1)
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r3
     addi r3, r1, 0xcc
     addi r5, r1, 0x2fc
@@ -4345,7 +4345,7 @@ lbl_fn_803D2A6C_00003A84:
     lfs f0, 0x300(r1)
     fadds f0, f0, f29
     stfs f0, 0x300(r1)
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r3
     addi r3, r1, 0xb4
     addi r5, r1, 0x2fc
@@ -4623,7 +4623,7 @@ lbl_fn_803D2A6C_00003F24:
     addi r3, r1, 0x2e4
     bl vec3_copy
 lbl_fn_803D2A6C_00003F2C:
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r3
     addi r3, r1, 0x6c
     addi r5, r1, 0x2e4
@@ -4791,7 +4791,7 @@ lbl_fn_803D2A6C_0000411C:
     addi r4, r1, 0x54
     bl vec3_copy
 lbl_fn_803D2A6C_000041B0:
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r3
     addi r3, r1, 0x2cc
     addi r5, r1, 0x2d8
@@ -4850,7 +4850,7 @@ lbl_fn_803D2A6C_00004258:
     mr r5, r23
     addi r3, r1, 0x3c
     bl vec3_add
-    bl fn_8008B964
+    bl sys_getMainManager
     mr r4, r3
     addi r3, r1, 0x2c0
     addi r5, r1, 0x3c

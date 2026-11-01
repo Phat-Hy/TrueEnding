@@ -26,7 +26,7 @@ extern void fn_8035ACB8(void);
 extern void fn_8035ACF0(void);
 extern void fn_8059C2AC(void);
 extern void fn_805A49E8(void);
-extern void fn_805A4A20(void);
+extern void world_setFlagByType(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -720,7 +720,7 @@ asm void fn_803579FC(void)
     mr r3, r31
     addi r4, r31, 0x16a4
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
     b lbl_fn_803579FC_000009A8
 lbl_fn_803579FC_0000094C:
     cmpwi r0, 0x1
@@ -733,7 +733,7 @@ lbl_fn_803579FC_0000094C:
     mr r3, r31
     addi r4, r31, 0x166c
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
     b lbl_fn_803579FC_000009A8
 lbl_fn_803579FC_0000097C:
     cmpwi r0, 0x2
@@ -746,7 +746,7 @@ lbl_fn_803579FC_0000097C:
     mr r3, r31
     addi r4, r31, 0x1684
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
 lbl_fn_803579FC_000009A8:
     mr r3, r31
     li r4, 0x0
@@ -833,7 +833,7 @@ lbl_fn_803579FC_00000A7C:
     mr r3, r31
     addi r4, r31, 0x168c
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
 lbl_fn_803579FC_00000AF8:
     lfs f1, lbl_8088552C
     addi r3, r31, 0xb0

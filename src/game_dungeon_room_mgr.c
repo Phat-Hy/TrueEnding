@@ -19,7 +19,7 @@ extern void fn_8021A9CC(void);
 extern void wpad_getActiveDevice(void);
 extern void fn_803E0250(void);
 extern void fn_803E0AB4(void);
-extern void fn_804EB874(void);
+extern void net_getLocalPlayerAid(void);
 extern void fn_8059A268(void);
 extern void PSVECSquareMag(void);
 
@@ -1287,7 +1287,7 @@ lbl_fn_803DF648_000010D4:
 lbl_fn_803DF648_000010F8:
     li r29, 0x0
 lbl_fn_803DF648_000010FC:
-    bl fn_804EB874
+    bl net_getLocalPlayerAid
     cmplw r29, r3
     beq lbl_fn_803DF648_00001174
     lwz r4, 0x0(r29)

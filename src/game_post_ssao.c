@@ -39,7 +39,7 @@ extern void world_setGlobalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_80389838(void);
 extern void fn_805991E4(void);
-extern void fn_805A4A20(void);
+extern void world_setFlagByType(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -575,7 +575,7 @@ lbl_fn_802D4238_00000694:
     mr r3, r29
     addi r4, r29, 0x1678
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
 lbl_fn_802D4238_000006E8:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1306,7 +1306,7 @@ lbl_fn_802D4628_00001170:
     mr r3, r24
     addi r4, r24, 0x1698
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
 lbl_fn_802D4628_000011B0:
     lwz r0, 0x1538(r24)
     cmpwi r0, 0x0
@@ -1595,7 +1595,7 @@ lbl_fn_802D5020_00001538:
     mr r3, r31
     addi r4, r31, 0x16a0
     li r5, 0x1
-    bl fn_805A4A20
+    bl world_setFlagByType
 lbl_fn_802D5020_000015C8:
     lwz r4, 0x1510(r31)
     mr r3, r31

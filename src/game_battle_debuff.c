@@ -59,7 +59,7 @@ void fn_8016DC14(void);
 void fn_8016DCD4(void);
 void fn_8016DDB0(void);
 void fn_8016DF3C(void);
-void fn_8016E484(void);
+void task_isValidQueueRange(void);
 void debuff_removeStatusEffect(void);
 void fn_8016E5F0(void);
 void fn_8016E71C(void);
@@ -1280,7 +1280,7 @@ lbl_fn_8016DF3C_00001074:
     blr
 }
 
-asm void fn_8016E484(void)
+asm void task_isValidQueueRange(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1290,11 +1290,11 @@ asm void fn_8016E484(void)
     bl task_mapIdToQueue
     cmpwi r3, 0x0
     li r0, 0x0
-    blt lbl_fn_8016E484_000010B8
+    blt lbl_task_isValidQueueRange_000010B8
     cmpwi r3, 0x7
-    bge lbl_fn_8016E484_000010B8
+    bge lbl_task_isValidQueueRange_000010B8
     li r0, 0x1
-lbl_fn_8016E484_000010B8:
+lbl_task_isValidQueueRange_000010B8:
     mr r3, r0
     lwz r0, 0x14(r1)
     mtlr r0

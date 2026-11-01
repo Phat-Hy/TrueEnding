@@ -66,7 +66,7 @@ extern void fn_8036DAA8(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
 extern void kpad_testActiveFlags(void);
-extern void fn_8037EF30(void);
+extern void fat_dispatchFsRequest(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
@@ -386,7 +386,7 @@ asm void fn_800E73EC(void)
     mr r3, r26
     li r4, 0x0
     li r5, 0x1
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     li r0, 0x0
     stw r0, 0xfc0(r27)
 lbl_fn_800E73EC_000003A0:
@@ -591,7 +591,7 @@ lbl_fn_800E7650_00000644:
     mr r3, r30
     li r4, 0x0
     li r5, 0x1
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_800E7650_00000974
 lbl_fn_800E7650_00000688:
     srwi. r0, r5, 31
@@ -721,7 +721,7 @@ lbl_fn_800E7650_00000828:
     mr r3, r30
     li r4, 0x0
     li r5, 0x1
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     stw r28, 0xfc0(r29)
     b lbl_fn_800E7650_00000974
 lbl_fn_800E7650_0000086C:
@@ -782,7 +782,7 @@ lbl_fn_800E7650_0000092C:
     ori r0, r0, 0x10
     stw r0, 0x12a4(r29)
     li r5, 0x1
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     b lbl_fn_800E7650_00000974
 lbl_fn_800E7650_00000950:
     lwz r3, lbl_8087F0A8

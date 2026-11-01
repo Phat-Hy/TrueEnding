@@ -34,7 +34,7 @@ extern void fn_8006BA30(void);
 extern void fn_8006BA38(void);
 extern void fn_8006D008(void);
 extern void mem_alloc(void);
-extern void fn_8008B964(void);
+extern void sys_getMainManager(void);
 extern void atn_Matrix_copy(void);
 extern void atn_Matrix_concat(void);
 extern void fn_80097A20(void);
@@ -560,7 +560,7 @@ lbl_fn_805BAC18_00000420:
     bl fn_8037F688
     addi r3, r29, 0x280
     bl item_useConsumable
-    bl fn_8008B964
+    bl sys_getMainManager
     addi r4, r29, 0x280
     bl actor_calcSpawnTransform
     addi r3, r1, 0x188

@@ -39,7 +39,7 @@ extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80116BAC(void);
 extern void player_evaluateStatusCondition(void);
-extern void fn_8012A1B8(void);
+extern void path_getFollowerNode(void);
 extern void fn_8012A218(void);
 extern void npc_updateDialogueTarget(void);
 extern void fn_80139F3C(void);
@@ -1031,7 +1031,7 @@ lbl_fn_8019FEC4_00000BC4:
     addi r4, r1, 0x4c
     bl fn_80198514
     lwz r3, 0x4(r28)
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     mr r4, r3
     lwz r3, 0x4(r28)
     lfs f1, lbl_80881FCC

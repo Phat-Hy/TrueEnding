@@ -33,7 +33,7 @@ extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
 extern void save_calculateBlockCrc(void);
 extern void save_findEntryByName(void);
-extern void fn_801F8598(void);
+extern void save_formatSlotString(void);
 extern void thread_findAndNotify(void);
 extern void fn_80201E78(void);
 extern void profile_getMetricValue(void);
@@ -1890,7 +1890,7 @@ lbl_fn_8052793C_000017C4:
     fctiwz f0, f0
     stfd f0, 0x108(r1)
     lwz r5, 0x10c(r1)
-    bl fn_801F8598
+    bl save_formatSlotString
     lfs f0, 0x50(r1)
     mr r3, r21
     addi r4, r28, 0xd2
@@ -1898,7 +1898,7 @@ lbl_fn_8052793C_000017C4:
     fctiwz f0, f0
     stfd f0, 0x110(r1)
     lwz r5, 0x114(r1)
-    bl fn_801F8598
+    bl save_formatSlotString
     lfs f0, 0x4c(r1)
     mr r3, r21
     addi r4, r28, 0xdc
@@ -1906,7 +1906,7 @@ lbl_fn_8052793C_000017C4:
     fctiwz f0, f0
     stfd f0, 0x118(r1)
     lwz r5, 0x11c(r1)
-    bl fn_801F8598
+    bl save_formatSlotString
     lfs f0, 0x54(r1)
     mr r3, r21
     addi r4, r28, 0xe7
@@ -1914,12 +1914,12 @@ lbl_fn_8052793C_000017C4:
     fctiwz f0, f0
     stfd f0, 0x120(r1)
     lwz r5, 0x124(r1)
-    bl fn_801F8598
+    bl save_formatSlotString
     lwz r5, 0xdc(r1)
     mr r3, r21
     addi r4, r28, 0xf2
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
     lfs f1, lbl_80887A60
     mr r3, r21
     addi r4, r28, 0xfc

@@ -7,7 +7,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void fn_800128FC(void);
-extern void fn_80049B74(void);
+extern void snd_findSoundNodeByName(void);
 extern void fn_8004B0E4(void);
 extern void fn_8004B1EC(void);
 extern void skin_playAnimationByName(void);
@@ -871,7 +871,7 @@ lbl_fn_8055F690_000009D8:
 lbl_fn_8055F690_000009F8:
     lwz r4, 0x10(r31)
 lbl_fn_8055F690_000009FC:
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     mr r25, r3
     b lbl_fn_8055F690_00000A0C
 lbl_fn_8055F690_00000A08:
@@ -883,12 +883,12 @@ lbl_fn_8055F690_00000A0C:
     lwz r3, lbl_8087EE90
     addi r27, r27, lbl_8075FAF8@l
     addi r4, r27, 0x2d
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     cmplw r25, r3
     beq lbl_fn_8055F690_00000A44
     lwz r3, lbl_8087EE90
     addi r4, r27, 0x3b
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     cmplw r25, r3
     bne lbl_fn_8055F690_00000A54
 lbl_fn_8055F690_00000A44:
@@ -1590,7 +1590,7 @@ lbl_fn_805602B0_00001340:
 lbl_fn_805602B0_00001368:
     lwz r4, 0x10(r29)
 lbl_fn_805602B0_0000136C:
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     subi r4, r3, 0x1
     subfic r3, r4, -0x1
     addi r0, r4, 0x1

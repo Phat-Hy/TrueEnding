@@ -31,7 +31,7 @@ extern void world_setGlobalFlag(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_80373F78(void);
-extern void fn_8037EF30(void);
+extern void fat_dispatchFsRequest(void);
 extern void fn_8039BF04(void);
 extern void fn_803CE688(void);
 extern void fn_803CE6BC(void);
@@ -1312,7 +1312,7 @@ asm void fn_803A7BB0(void)
     addi r3, r3, 0x6c
     lfs f1, lbl_80885B14
     li r5, 0x1
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
 lbl_fn_803A7BB0_00001050:
     lwz r4, 0x0(r31)
     lis r3, lbl_8074ED24@ha

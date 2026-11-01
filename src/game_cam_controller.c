@@ -24,7 +24,7 @@ void cam_bindRotationTarget(void);
 void cam_evalControllerSpline(void);
 void fn_800EC7F0(void);
 void cam_setLookAtTarget(void);
-void *fn_800ED4D8(void *obj);
+void *cam_getLookAtState(void *obj);
 void cam_updateLookAtMatrix(void);
 
 asm void fn_800EC1F4(void)
@@ -1476,7 +1476,7 @@ lbl_cam_setLookAtTarget_000012C8:
     blr
 }
 
-void *fn_800ED4D8(void *obj)
+void *cam_getLookAtState(void *obj)
 {
     return (char *)obj + 0x30;
 }

@@ -24,7 +24,7 @@ extern void cam_bindPathTarget(void);
 extern void cam_bindRotationTarget(void);
 extern void cam_evalControllerSpline(void);
 extern void cam_setLookAtTarget(void);
-extern void fn_800ED4D8(void);
+extern void cam_getLookAtState(void);
 extern void cam_evalLookAtMatrix(void);
 extern void phys_scaleGravity(void);
 extern void fn_80205BE8(void);
@@ -711,7 +711,7 @@ asm void fn_80219F84(void)
     b lbl_fn_80219F84_0000089C
 lbl_fn_80219F84_00000864:
     addi r3, r1, 0x260
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     bl str_skipWhitespace
     stfs f1, 0x74(r30)
@@ -795,7 +795,7 @@ lbl_fn_80219F84_00000934:
     b lbl_fn_80219F84_000009DC
 lbl_fn_80219F84_000009A4:
     addi r3, r1, 0x224
-    bl fn_800ED4D8
+    bl cam_getLookAtState
     bl str_getData
     bl atoi
     stw r3, 0x98(r30)

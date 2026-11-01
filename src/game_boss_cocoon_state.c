@@ -17,7 +17,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_8010A828(void);
 extern void save_createWorkerTask(void);
-extern void fn_801F6C2C(void);
+extern void save_getElapsedPlayTime(void);
 extern void fn_801F791C(void);
 extern void event_findEntryById(void);
 extern void fn_8021150C(void);
@@ -2050,7 +2050,7 @@ lbl_fn_8044E88C_00001948:
     lwz r3, 0x0(r3)
     lwz r29, 0x0(r3)
     mr r3, r29
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     lis r3, lbl_80754848@ha
     stfs f1, 0x50(r29)
     lwz r28, lbl_80886B34

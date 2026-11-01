@@ -12,7 +12,7 @@ extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void str_findChar(void);
 extern void fn_801346C8(void);
-extern void fn_8016E484(void);
+extern void task_isValidQueueRange(void);
 extern void fn_801F465C(void);
 extern void fn_801F4B4C(void);
 extern void save_formatSlotTitle(void);
@@ -2412,7 +2412,7 @@ lbl_fn_803D83A8_00001DF0:
     cmpwi r0, 0x0
     bne lbl_fn_803D83A8_00002328
     lwz r3, 0x110c(r15)
-    bl fn_8016E484
+    bl task_isValidQueueRange
     cmpwi r3, 0x0
     beq lbl_fn_803D83A8_000022D0
     lwz r3, 0x110c(r15)

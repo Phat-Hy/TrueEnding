@@ -22,7 +22,7 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
-extern void fn_8008B964(void);
+extern void sys_getMainManager(void);
 extern void fn_8008E2DC(void);
 extern void fn_800B2180(void);
 extern void fn_800BB4FC(void);
@@ -237,7 +237,7 @@ lbl_fn_80494354_00000194:
     addi r3, r28, 0x28
     addi r4, r1, 0x98
     bl fn_804949D4
-    bl fn_8008B964
+    bl sys_getMainManager
     bl fn_804923AC
     bl fn_8047C770
     mr r31, r3
@@ -245,7 +245,7 @@ lbl_fn_80494354_00000194:
     bl fn_8047C770
     mr r4, r31
     bl fn_8047C850
-    bl fn_8008B964
+    bl sys_getMainManager
     bl fn_804923AC
     bl fn_801856A4
     mr r31, r3
@@ -253,7 +253,7 @@ lbl_fn_80494354_00000194:
     bl fn_801856A4
     mr r4, r31
     bl fn_80042108
-    bl fn_8008B964
+    bl sys_getMainManager
     bl fn_804848C4
     mr r4, r3
     addi r3, r1, 0xb0

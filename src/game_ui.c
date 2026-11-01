@@ -37,7 +37,7 @@ extern void fn_80134134(void);
 extern void fn_80134168(void);
 extern void fn_80156120(void);
 extern void fn_8016ADF4(void);
-extern void fn_8016E484(void);
+extern void task_isValidQueueRange(void);
 extern void battle_calcAABBCenter(void);
 extern void fn_801789D8(void);
 extern void actor_getMovementFlags(void);
@@ -1168,7 +1168,7 @@ lbl_fn_8003F440_00000E34:
     cmpwi r27, 0x0
     beq lbl_fn_8003F440_00000E64
     mr r3, r27
-    bl fn_8016E484
+    bl task_isValidQueueRange
     cmpwi r3, 0x0
     beq lbl_fn_8003F440_00000E64
     li r29, 0x0

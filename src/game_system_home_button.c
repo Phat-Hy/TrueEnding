@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80049B2C(void);
-extern void fn_80049B74(void);
+extern void snd_findSoundNodeByName(void);
 extern void fn_8004A1D4(void);
 extern void fn_8004B0E4(void);
 extern void fn_8004B1EC(void);
@@ -1355,7 +1355,7 @@ asm void fn_80360B40(void)
     cmpwi r3, 0x0
     beq lbl_fn_80360B40_00000F94
     addi r4, r30, 0x4
-    bl fn_80049B74
+    bl snd_findSoundNodeByName
     stw r3, 0x24(r30)
 lbl_fn_80360B40_00000F94:
     mr r3, r31

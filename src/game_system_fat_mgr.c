@@ -90,7 +90,7 @@ void fn_8037E89C(void);
 void fn_8037E964(void);
 void fn_8037E9E0(void);
 void fn_8037ECF0(void);
-void fn_8037EF30(void);
+void fat_dispatchFsRequest(void);
 void fn_8037EF48(void);
 void fn_8037F640(void);
 void fn_8037F664(void);
@@ -1046,7 +1046,7 @@ asm void fn_8037ECF0(void)
     blr
 }
 
-asm void fn_8037EF30(void)
+asm void fat_dispatchFsRequest(void)
 {
     nofralloc
     lwz r7, lbl_8087F8A0

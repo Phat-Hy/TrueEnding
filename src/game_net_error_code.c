@@ -35,7 +35,7 @@ extern void save_validateHeader(void);
 extern void save_computeCrc32(void);
 extern void save_writeBackupSlot(void);
 extern void save_findEntryByName(void);
-extern void fn_801F8598(void);
+extern void save_formatSlotString(void);
 extern void thread_findAndNotify(void);
 extern void fn_80201E78(void);
 extern void profile_getMetricValue(void);
@@ -206,7 +206,7 @@ lbl_fn_8051B168_000000B0:
     mr r3, r29
     addi r4, r24, 0x157
     li r6, 0x0
-    bl fn_801F8598
+    bl save_formatSlotString
 lbl_fn_8051B168_000000D0:
     lwz r5, 0x8(r22)
     mr r3, r29

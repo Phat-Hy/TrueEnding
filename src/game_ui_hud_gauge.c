@@ -23,7 +23,7 @@ extern void mission_updateStub(void);
 extern void vec3_initValues(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008B964(void);
+extern void sys_getMainManager(void);
 extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -33,7 +33,7 @@ extern void vec3_scale(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_801156BC(void);
 extern void fn_80116E6C(void);
-extern void fn_8012A1B8(void);
+extern void path_getFollowerNode(void);
 extern void fn_8013A13C(void);
 extern void fn_8013C3B4(void);
 extern void npc_updateTalkInteraction(void);
@@ -1984,7 +1984,7 @@ asm void fn_801C346C(void)
     bl vec3_mag
     fmr f28, f1
     lwz r3, 0x4(r30)
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     mr r4, r3
     addi r3, r1, 0xec
     bl vec3_assign
@@ -1992,7 +1992,7 @@ asm void fn_801C346C(void)
     fcmpo cr0, f28, f0
     cror eq, gt, eq
     bne lbl_fn_801C346C_00001D78
-    bl fn_8008B964
+    bl sys_getMainManager
     bl fn_800F7258
     bl fn_80116E6C
     lfs f27, 0x4(r3)
@@ -2219,7 +2219,7 @@ lbl_fn_801C346C_00001CF4:
     bl vec3_copy
 lbl_fn_801C346C_00001D40:
     lwz r3, 0x4(r30)
-    bl fn_8012A1B8
+    bl path_getFollowerNode
     mr r4, r3
     addi r3, r1, 0xbc
     bl vec3_assign

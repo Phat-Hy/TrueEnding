@@ -8,7 +8,7 @@ extern void motion_updateFogAdj(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CFD18(void);
-extern void fn_801F6C2C(void);
+extern void save_getElapsedPlayTime(void);
 extern void save_verifyBlockCrc(void);
 extern void fn_801F791C(void);
 extern void save_findEntryByName(void);
@@ -220,7 +220,7 @@ lbl_fn_8044EA34_00000254:
     lwz r3, 0x0(r3)
     lwz r30, 0x0(r3)
     mr r3, r30
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     stfs f1, 0x50(r30)
     lfs f0, lbl_80886B50
     lwz r3, 0x0(r31)
@@ -511,7 +511,7 @@ lbl_fn_8044EEC0_00000624:
     cmplwi r0, 0x4
     beq lbl_fn_8044EEC0_00000654
     mr r3, r30
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     lfs f0, 0x50(r30)
     fcmpo cr0, f0, f1
     cror eq, gt, eq
@@ -524,7 +524,7 @@ lbl_fn_8044EEC0_00000654:
     cmplwi r0, 0x4
     beq lbl_fn_8044EEC0_0000068C
     mr r3, r29
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     lfs f0, 0x50(r29)
     fcmpo cr0, f0, f1
     cror eq, gt, eq
@@ -553,7 +553,7 @@ lbl_fn_8044EEC0_0000068C:
     lwz r3, 0x0(r31)
     lwz r31, 0x0(r3)
     mr r3, r31
-    bl fn_801F6C2C
+    bl save_getElapsedPlayTime
     lfs f0, 0x50(r31)
     fcmpo cr0, f0, f1
     cror eq, gt, eq

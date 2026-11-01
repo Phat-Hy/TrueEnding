@@ -55,7 +55,7 @@ extern u32 lbl_80887590;
 void fn_804EB754(void);
 void fn_804EB7C8(void);
 void fn_804EB818(void);
-void fn_804EB874(void);
+void net_getLocalPlayerAid(void);
 void fn_804EB938(void);
 
 asm void fn_804EB754(void)
@@ -158,7 +158,7 @@ lbl_fn_804EB818_00000118:
     blr
 }
 
-asm void fn_804EB874(void)
+asm void net_getLocalPlayerAid(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -170,50 +170,50 @@ asm void fn_804EB874(void)
     addis r3, r4, 0x1
     lbz r0, -0x3deb(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_804EB874_00000168
+    bne lbl_net_getLocalPlayerAid_00000168
     lwz r0, 0x1f8(r4)
     extrwi. r0, r0, 1, 12
-    beq lbl_fn_804EB874_0000015C
+    beq lbl_net_getLocalPlayerAid_0000015C
     li r0, 0x0
-    b lbl_fn_804EB874_00000184
-lbl_fn_804EB874_0000015C:
+    b lbl_net_getLocalPlayerAid_00000184
+lbl_net_getLocalPlayerAid_0000015C:
     bl net_getMyAid
     clrlwi r0, r3, 24
-    b lbl_fn_804EB874_00000184
-lbl_fn_804EB874_00000168:
+    b lbl_net_getLocalPlayerAid_00000184
+lbl_net_getLocalPlayerAid_00000168:
     lwz r0, 0x1f8(r4)
     extrwi. r0, r0, 1, 12
-    beq lbl_fn_804EB874_0000017C
+    beq lbl_net_getLocalPlayerAid_0000017C
     li r3, 0x0
-    b lbl_fn_804EB874_00000180
-lbl_fn_804EB874_0000017C:
+    b lbl_net_getLocalPlayerAid_00000180
+lbl_net_getLocalPlayerAid_0000017C:
     bl net_getSocket
-lbl_fn_804EB874_00000180:
+lbl_net_getLocalPlayerAid_00000180:
     clrlwi r0, r3, 24
-lbl_fn_804EB874_00000184:
+lbl_net_getLocalPlayerAid_00000184:
     lwz r3, 0x5e8(r31)
     clrlwi r5, r0, 24
     li r4, 0x0
     mtctr r3
     cmpwi r3, 0x0
-    ble lbl_fn_804EB874_000001CC
-lbl_fn_804EB874_0000019C:
+    ble lbl_net_getLocalPlayerAid_000001CC
+lbl_net_getLocalPlayerAid_0000019C:
     lwz r0, 0x5e4(r31)
     add r3, r0, r4
     lwz r0, 0xd0(r3)
     srwi r0, r0, 31
     cmplwi r0, 0x1
-    bne lbl_fn_804EB874_000001C4
+    bne lbl_net_getLocalPlayerAid_000001C4
     lbz r0, 0xcc(r3)
     cmplw r5, r0
-    bne lbl_fn_804EB874_000001C4
-    b lbl_fn_804EB874_000001D0
-lbl_fn_804EB874_000001C4:
+    bne lbl_net_getLocalPlayerAid_000001C4
+    b lbl_net_getLocalPlayerAid_000001D0
+lbl_net_getLocalPlayerAid_000001C4:
     addi r4, r4, 0xd5c
-    bdnz lbl_fn_804EB874_0000019C
-lbl_fn_804EB874_000001CC:
+    bdnz lbl_net_getLocalPlayerAid_0000019C
+lbl_net_getLocalPlayerAid_000001CC:
     li r3, 0x0
-lbl_fn_804EB874_000001D0:
+lbl_net_getLocalPlayerAid_000001D0:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

@@ -91,7 +91,7 @@ extern void fn_803792F0(void);
 extern void fn_8037D34C(void);
 extern void fn_8037D3E8(void);
 extern void fn_8037D684(void);
-extern void fn_8037EF30(void);
+extern void fat_dispatchFsRequest(void);
 extern void fn_8037F744(void);
 extern void fn_80389838(void);
 extern void fn_8038F52C(void);
@@ -1564,7 +1564,7 @@ lbl_world_Manager_draw_000012B0:
     addi r3, r28, 0x6c
     li r4, 0x1
     li r5, 0x1
-    bl fn_8037EF30
+    bl fat_dispatchFsRequest
     li r0, 0x5
     stw r0, 0x5748(r28)
 lbl_world_Manager_draw_000012E8:

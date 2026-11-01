@@ -25,7 +25,7 @@ extern void shop_loadCatalogItem(void);
 extern void fn_80158EF0(void);
 extern void fn_8015F568(void);
 extern void fn_80165C5C(void);
-extern void fn_8016E484(void);
+extern void task_isValidQueueRange(void);
 extern void battle_applyStatusEffect(void);
 extern void fn_8016F67C(void);
 extern void fn_801725EC(void);
@@ -1276,7 +1276,7 @@ lbl_fn_800E9ED8_000010DC:
     li r0, 0x1
     stw r0, 0x1c(r3)
     mr r3, r31
-    bl fn_8016E484
+    bl task_isValidQueueRange
     cmpwi r3, 0x0
     beq lbl_fn_800E9ED8_00001140
     li r3, 0x2
