@@ -44,9 +44,9 @@ void fn_804FC244(void);
 void fn_804FC26C(void);
 void fn_804FC294(void);
 void fn_804FC2F4(void);
-void fn_804FC514(void);
-void fn_804FC51C(void);
-void fn_804FC524(void);
+u32 fn_804FC514(void);
+u32 fn_804FC51C(void);
+u32 fn_804FC524(void);
 void fn_804FC52C(void);
 void fn_804FC584(void);
 void fn_804FC5AC(void);
@@ -277,25 +277,19 @@ lbl_fn_804FC2F4_000002B8:
     blr
 }
 
-asm void fn_804FC514(void)
+u32 fn_804FC514(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_804FC51C(void)
+u32 fn_804FC51C(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_804FC524(void)
+u32 fn_804FC524(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_804FC52C(void)

@@ -157,11 +157,11 @@ void fn_805BA938(void);
 void fn_805BAC18(void);
 void fn_805BB510(void);
 void fn_805BB548(void);
-void fn_805BB55C(void);
+void fn_805BB55C(void *p);
 u32 fn_805BB568(const void *p);
 u32 fn_805BB570(const void *p);
-void fn_805BB578(void);
-void fn_805BB584(void);
+void fn_805BB578(void *p);
+void fn_805BB584(void *p);
 u32 fn_805BB590(void);
 void fn_805BB598(void *p, u32 val);
 void fn_805BB5A0(void);
@@ -1017,12 +1017,9 @@ asm void fn_805BB548(void)
     b fn_805F9D20
 }
 
-asm void fn_805BB55C(void)
+void fn_805BB55C(void *p)
 {
-    nofralloc
-    li r0, 0x3
-    stw r0, 0x8(r3)
-    blr
+    *(u32 *)((u8 *)p + 8) = 3;
 }
 
 u32 fn_805BB568(const void *p)
@@ -1035,20 +1032,14 @@ u32 fn_805BB570(const void *p)
     return *(const u32 *)((const char *)p + 0x8);
 }
 
-asm void fn_805BB578(void)
+void fn_805BB578(void *p)
 {
-    nofralloc
-    li r0, 0x5
-    stw r0, 0x8(r3)
-    blr
+    *(u32 *)((u8 *)p + 8) = 5;
 }
 
-asm void fn_805BB584(void)
+void fn_805BB584(void *p)
 {
-    nofralloc
-    li r0, 0x4
-    stw r0, 0x8(r3)
-    blr
+    *(u32 *)((u8 *)p + 8) = 4;
 }
 
 u32 fn_805BB590(void)

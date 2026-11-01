@@ -47,22 +47,20 @@ extern u32 lbl_80880C1C;
 extern u32 lbl_80880C20;
 
 /* Function declarations */
-void fn_8008E2D4(void);
+void *fn_8008E2D4(void *p);
 void fn_8008E2DC(void);
 void fn_8008E2E0(void);
 void fn_8008E304(void);
 void fn_8008E818(void);
-void fn_8008EECC(void);
-void fn_8008EED4(void);
+void *fn_8008EECC(void *p);
+void *fn_8008EED4(void *p);
 void fn_8008EEDC(void);
 void fn_8008F5F8(void);
 void atn_Model_draw(void);
 
-asm void fn_8008E2D4(void)
+void *fn_8008E2D4(void *p)
 {
-    nofralloc
-    lwz r3, 0x2f8(r3)
-    blr
+    return *(void **)((u8 *)p + 0x2f8);
 }
 
 void fn_8008E2DC(void) {
@@ -879,18 +877,14 @@ lbl_fn_8008E818_00000B60:
     blr
 }
 
-asm void fn_8008EECC(void)
+void *fn_8008EECC(void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(void **)((u8 *)p + 4);
 }
 
-asm void fn_8008EED4(void)
+void *fn_8008EED4(void *p)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(void **)p;
 }
 
 asm void fn_8008EEDC(void)

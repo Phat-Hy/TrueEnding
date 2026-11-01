@@ -63,7 +63,7 @@ extern u32 lbl_808816C4;
 /* Function declarations */
 void fn_801120B0(void);
 void fn_80112174(void);
-void fn_80112218(void);
+u32 fn_80112218(void);
 void fn_80112220(void);
 void fn_80112254(void);
 void phys_scaleGravity(void);
@@ -72,16 +72,16 @@ void fn_80112784(void);
 void fn_80112840(void);
 void fn_801128C4(void);
 void fn_80112918(void);
-void fn_80112958(void);
+void *fn_80112958(void *p);
 void fn_80112960(void);
 void fn_80112974(void);
-void fn_801129B4(void);
+void fn_801129B4(void *p);
 void fn_801129C0(void);
 void fn_80112A00(void);
 void fn_80112B64(void);
-void fn_80112F54(void);
+void *fn_80112F54(void *p);
 void fn_80112F5C(void);
-void fn_801130F4(void);
+void *fn_801130F4(void *p);
 void fn_801130FC(void);
 void fn_80113128(void);
 
@@ -189,11 +189,9 @@ lbl_fn_80112174_00000154:
     blr
 }
 
-asm void fn_80112218(void)
+u32 fn_80112218(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_80112220(void)
@@ -714,11 +712,9 @@ asm void fn_80112918(void)
     blr
 }
 
-asm void fn_80112958(void)
+void *fn_80112958(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x14
-    blr
+    return (u8 *)p + 0x14;
 }
 
 asm void fn_80112960(void)
@@ -752,12 +748,9 @@ asm void fn_80112974(void)
     blr
 }
 
-asm void fn_801129B4(void)
+void fn_801129B4(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x1f4(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x1f4) = 0;
 }
 
 asm void fn_801129C0(void)
@@ -1166,11 +1159,9 @@ lbl_fn_80112B64_00000E8C:
     blr
 }
 
-asm void fn_80112F54(void)
+void *fn_80112F54(void *p)
 {
-    nofralloc
-    lwz r3, 0x70(r3)
-    blr
+    return *(void **)((u8 *)p + 0x70);
 }
 
 asm void fn_80112F5C(void)
@@ -1281,11 +1272,9 @@ lbl_fn_80112F5C_0000101C:
     blr
 }
 
-asm void fn_801130F4(void)
+void *fn_801130F4(void *p)
 {
-    nofralloc
-    lwz r3, 0xc4(r3)
-    blr
+    return *(void **)((u8 *)p + 0xc4);
 }
 
 asm void fn_801130FC(void)

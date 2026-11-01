@@ -82,10 +82,10 @@ void fn_8055D0BC(void);
 void fn_8055D6B8(void);
 void fn_8055D818(void);
 void fn_8055DB04(void);
-void fn_8055DBD8(void);
-void fn_8055DBE0(void);
-void fn_8055DBE8(void);
-void fn_8055DBF0(void);
+u32 fn_8055DBD8(void);
+u32 fn_8055DBE0(void);
+u32 fn_8055DBE8(void);
+u32 fn_8055DBF0(void);
 void fn_8055DBF8(void);
 void fn_8055E258(void);
 void fn_8055E354(void);
@@ -953,32 +953,24 @@ lbl_fn_8055DB04_00000BBC:
     blr
 }
 
-asm void fn_8055DBD8(void)
+u32 fn_8055DBD8(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_8055DBE0(void)
+u32 fn_8055DBE0(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_8055DBE8(void)
+u32 fn_8055DBE8(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_8055DBF0(void)
+u32 fn_8055DBF0(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8055DBF8(void)

@@ -70,39 +70,30 @@ extern u32 lbl_8088150C;
 extern u32 lbl_80881510;
 
 /* Function declarations */
-void proj_getMatrix(void);
-void proj_getGlobalManager(void);
-void fn_800F5300(void);
-void fn_800F530C(void);
+void *proj_getMatrix(void *p);
+u32 proj_getGlobalManager(void);
+u32 fn_800F5300(void *p);
+void *fn_800F530C(void *p);
 void fn_800F5314(void);
 
-asm void proj_getMatrix(void)
+void *proj_getMatrix(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x7d4
-    blr
+    return (u8 *)p + 0x7d4;
 }
 
-asm void proj_getGlobalManager(void)
+u32 proj_getGlobalManager(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F0A8
-    blr
+    return lbl_8087F0A8;
 }
 
-asm void fn_800F5300(void)
+u32 fn_800F5300(void *p)
 {
-    nofralloc
-    lwz r0, 0x12a4(r3)
-    extrwi r3, r0, 1, 3
-    blr
+    return (*(u32 *)((u8 *)p + 0x12a4) >> 28) & 1;
 }
 
-asm void fn_800F530C(void)
+void *fn_800F530C(void *p)
 {
-    nofralloc
-    addi r3, r3, 0xc58
-    blr
+    return (u8 *)p + 0xc58;
 }
 
 asm void fn_800F5314(void)

@@ -89,9 +89,9 @@ void fn_8053B82C(void);
 void fn_8053BF84(void);
 void fn_8053C128(void);
 void fn_8053C1B4(void);
-void fn_8053C1D8(void);
+u32 fn_8053C1D8(void);
 void fn_8053C1E0(void);
-void fn_8053C204(void);
+u32 fn_8053C204(void);
 void fn_8053C20C(void);
 void fn_8053C4E4(void);
 void fn_8053C524(void);
@@ -101,7 +101,7 @@ void fn_8053C6CC(void);
 void fn_8053C754(void);
 void fn_8053C78C(void);
 void fn_8053CEDC(void);
-void fn_8053CF00(void);
+u32 fn_8053CF00(void);
 void fn_8053CF08(void);
 void fn_8053CF48(void);
 void fn_8053D0F8(void);
@@ -848,11 +848,9 @@ asm void fn_8053C1B4(void)
     blr
 }
 
-asm void fn_8053C1D8(void)
+u32 fn_8053C1D8(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8053C1E0(void)
@@ -869,11 +867,9 @@ asm void fn_8053C1E0(void)
     blr
 }
 
-asm void fn_8053C204(void)
+u32 fn_8053C204(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8053C20C(void)
@@ -1824,11 +1820,9 @@ asm void fn_8053CEDC(void)
     blr
 }
 
-asm void fn_8053CF00(void)
+u32 fn_8053CF00(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8053CF08(void)

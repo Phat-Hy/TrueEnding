@@ -65,10 +65,10 @@ extern u32 lbl_80887E80;
 
 /* Function declarations */
 void fn_80559B30(void);
-void fn_8055A3E4(void);
-void fn_8055A3EC(void);
-void fn_8055A3F4(void);
-void fn_8055A3FC(void);
+u32 fn_8055A3E4(void);
+u32 fn_8055A3EC(void);
+u32 fn_8055A3F4(void);
+u32 fn_8055A3FC(void);
 void fn_8055A404(void);
 void fn_8055A444(void);
 void fn_8055A4A0(void);
@@ -683,32 +683,24 @@ lbl_fn_80559B30_00000898:
     blr
 }
 
-asm void fn_8055A3E4(void)
+u32 fn_8055A3E4(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_8055A3EC(void)
+u32 fn_8055A3EC(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_8055A3F4(void)
+u32 fn_8055A3F4(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_8055A3FC(void)
+u32 fn_8055A3FC(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8055A404(void)

@@ -100,7 +100,7 @@ void pad_03_8070D84C_text(void);
 void fn_8070D850(void);
 void fn_8070D900(void);
 void fn_8070D9D0(void);
-void fn_8070DC00(void);
+u32 fn_8070DC00(void *p);
 void fn_8070DC10(void);
 void fn_8070DC20(void);
 void fn_8070DCB0(void);
@@ -140,9 +140,9 @@ void fn_8070F390(void);
 void fn_8070F3A0(void);
 void fn_8070F3B0(void);
 void fn_8070F3C0(void);
-void fn_8070F3D0(void);
-void fn_8070F3E0(void);
-void fn_8070F3F0(void);
+u32 fn_8070F3D0(void *p);
+u32 fn_8070F3E0(void *p);
+u32 fn_8070F3F0(void *p);
 void fn_8070F400(void);
 void fn_8070F410(void);
 void fn_8070F420(void);
@@ -425,12 +425,9 @@ lbl_fn_8070D9D0_00000390:
     blr
 }
 
-asm void fn_8070DC00(void)
+u32 fn_8070DC00(void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    subi r3, r3, 0x1
-    blr
+    return *(u32 *)((u8 *)p + 4) - 1;
 }
 
 asm void fn_8070DC10(void)
@@ -2225,25 +2222,19 @@ void fn_8070F3B0(void) {
 void fn_8070F3C0(void) {
 }
 
-asm void fn_8070F3D0(void)
+u32 fn_8070F3D0(void *p)
 {
-    nofralloc
-    lbz r3, 0xce(r3)
-    blr
+    return *(u8 *)((u8 *)p + 0xce);
 }
 
-asm void fn_8070F3E0(void)
+u32 fn_8070F3E0(void *p)
 {
-    nofralloc
-    lbz r3, 0xcd(r3)
-    blr
+    return *(u8 *)((u8 *)p + 0xcd);
 }
 
-asm void fn_8070F3F0(void)
+u32 fn_8070F3F0(void *p)
 {
-    nofralloc
-    lbz r3, 0xcc(r3)
-    blr
+    return *(u8 *)((u8 *)p + 0xcc);
 }
 
 asm void fn_8070F400(void)
