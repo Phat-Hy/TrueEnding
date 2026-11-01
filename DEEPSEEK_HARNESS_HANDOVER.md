@@ -16470,3 +16470,19 @@ The guest asks for an 80x56 sample of `0x9038D1C0` and an 160x112 sample of `0x9
 | 3 | harness replay, `--copy-dst 0x903DBDC0 --copy-wh-fmt 160x112:6` | 71 680 B, mean byte 111.34 |
 | 4 | harness replay, `--copy-dst 0x903917C0 --copy-wh-fmt 80x56:6` | 17 920 B, mean byte 64.67 |
 | 5 | harness replay with `TLS_AURORA_TEXBIND` on the five tail addresses | binds of item 4, sizes faithful to the guest |
+
+### AP-BK addendum. Textured identity is falsified PROPERLY: `texObjId`/`texDataVersion` per texture changes the composite frame by **exactly nothing** (luma 86.98, gradient 20.889, identical to the off case) — now on a feed of 113 525 draws, where AP-BG''s original test had a truncated one
+
+AP-BG changed the adapter''s constant `texObjId = 0` to a per-texture identity, measured "changed the field readback by 0.00", and reverted. That measurement was taken while the live tap was **truncated** (AP-BI: 203 draws per fed frame instead of 28 372), so the field it sampled had almost no texturing in it and the test could not have seen a difference; AP-BK left identity as one of three unexcluded causes for the composite frame. It is now excluded on a feed that carries the geometry.
+
+New switch **`TLS_AURORA_TEXOBJID=1`** (`tools/aurora_spike/aurora_replay.cpp`): every texture object is emitted with `texObjId = its guest address` and `texDataVersion = 1` instead of `0/0`, so aurora''s per-slot comparison can never treat two different textures as the same object. A/B on the same capture, same replay length, same probe copy:
+
+| | probe copy luma | probe copy gradient |
+|---|---|---|
+| `texObjId` off (default) | 86.98 | 20.889 |
+| `texObjId` on (per-address) | **86.98** | **20.889** |
+| the layer''s shot of the same frame | 43.16 | 1.123 |
+
+Identical to the second decimal, with a replay that parsed **113 525 draws / 845 916 vertices**. So the identity hypothesis is closed - not because a session looked at 203 draws, but because a session looked at the whole frame - and the difference between the composite frames is not the texture object identity either.
+
+What that leaves, with the numbers already in hand: **the composite frame draws 5 819 primitives against the geometry frame''s 22 553** (`TLS_AURORA_STATS`), and aurora logs `STUB: display copy is not implemented` for the XFB display copies the guest uses to put the composite on screen. Those two - what the odd frame actually draws, and the display-copy path - are the next measurements, and they are aurora-side, so they begin with `TLS_AURORA_STATS`/`TLS_AURORA_DUMP_DRAW` on frame 2801 and a decision about the stub.

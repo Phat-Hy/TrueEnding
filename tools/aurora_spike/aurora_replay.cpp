@@ -383,8 +383,26 @@ void emit_texobj(std::vector<uint8_t>& out, uint32_t mapId, const TexState& t) {
   append_u32(out, format);
   append_u32(out, 0); /* tlut slot: this game loads no TLUTs in the captured window */
   append_u8(out, 0);  /* no mips/no-cache flag */
-  append_u32(out, 0); /* texObjId */
-  append_u32(out, 0); /* texDataVersion */
+  /* TLS_AURORA_TEXOBJID=1 re-tests AP-BG's texture-identity change ON A FULL FEED. AP-BG measured
+   * "per-texture identity changed the field readback by 0.00" and reverted it - but that measurement
+   * ran while the live tap was still truncated by the fast FIFO path (5c.46 AP-BI: 203 draws per fed
+   * frame instead of 28 372), so the field it sampled had almost no texturing in it and the test could
+   * not have seen a difference. AP-BK has since shown the composite tail's copy CONTENT and sample
+   * SIZES are both right, which leaves texture identity as one of the unexcluded causes. This gives
+   * every texture object a distinct id (its guest address) and a non-zero data version, so aurora's
+   * per-slot comparison cannot treat two different textures as the same object. Default off, so every
+   * earlier measurement keeps its meaning. */
+  {
+    static int sTexObjId = -1;
+    if (sTexObjId < 0) sTexObjId = (std::getenv("TLS_AURORA_TEXOBJID") != nullptr) ? 1 : 0;
+    if (sTexObjId) {
+      append_u32(out, guest_addr_for_image3(t.image3)); /* texObjId = the guest address */
+      append_u32(out, 1);                              /* texDataVersion */
+    } else {
+      append_u32(out, 0); /* texObjId */
+      append_u32(out, 0); /* texDataVersion */
+    }
+  }
   ++g_texObjs;
   if (g_texObjs <= 6) {
     std::printf("[replay] texobj map %u -> 0x%08X %ux%u fmt %u\n", mapId, guest_addr_for_image3(t.image3), width,
