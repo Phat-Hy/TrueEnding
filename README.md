@@ -76,10 +76,11 @@ was written for and has not been regenerated since: **the table above is current
 *What is **not** measured:* how much of the game's content runs. The gate covers Boot → Title → Chapter 1
 (the 3 520-frame scripted run), so a whole-game percentage would be invented, not measured — the honest
 state is "Chapter 1 interactive, renderer migrated", plus the open items in §AP-BR §8 of the dossier.
-The shipped binaries are verified: `logs_ap/gate_br4.log` **PASSes on attempt 2** (handover 1 680, both
-references, exit 0) — attempt 1 came in at handover 1 380 on a freshly-freed machine and its pictures are
-near-black, which is what the gate's retry loop exists for; only a 1 680 attempt counts. One known defect
-remains: a rare `std::terminate` inside the DLL (~3 runs in 13) is instrumented but not yet fixed.
+The shipped binaries are verified: `logs_ap/gate_br5.log` **PASSes on attempt 1** (handover 1 680, both
+references, exit 0), and the run before it (`gate_br4.log`) needed attempt 2 because its first attempt came
+in at handover 1 380 on a freshly-freed machine with near-black pictures — that is what the retry loop
+exists for, and only a 1 680 attempt counts. One known defect remains: a rare `std::terminate` inside the
+DLL (~3 runs in 13) is instrumented but not yet fixed.
 
 ---
 

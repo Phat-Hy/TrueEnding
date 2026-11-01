@@ -37,9 +37,10 @@
 > `git diff --stat origin/track-a..HEAD -- src/` empty), then `pwsh tools/invariant.ps1 -Log
 > logs_ap\gate_start.log` on an **idle** host. **PASS at handover 1 680** = content `54CB46BD…`
 > 38.20 / 0.00 %, popup `A81F3E35…` 89.89 / 1.85 %, save 1 348 992 / 29 344. If the handover is not 1 680 the
-> attempt is not evidence. **The shipped binaries are verified:** `logs_ap/gate_br4.log` PASSes on
-> **attempt 2** (runner `145B9838…`, DLL `6E7D7182…`, exit 0) — attempt 1 reported handover **1 380**
-> with near-black shots (`47E30E30…` / `847B7F79…`, popup luma 0.26) on a machine that had just had a game
+> attempt is not evidence. **The shipped binaries are verified on attempt 1:** `logs_ap/gate_br5.log`
+> (runner `145B9838…`, DLL `6E7D7182…`) PASSes at handover 1 680 with both references, exit 0. The run
+> before it, `logs_ap/gate_br4.log`, PASSed on **attempt 2**: its attempt 1 reported handover **1 380** with
+> near-black shots (`47E30E30…` / `847B7F79…`, popup luma 0.26) on a machine that had just had a game
 > running, and the retry policy covered it exactly as designed. So a warm first attempt is a *known*
 > failure mode of this gate, not a regression: let it retry, and only a 1 680 attempt counts. **A loaded
 > host moves the popup frame too** (`F1004F50…`, luma 86.91, bright still 1.85 %) while the content frame
@@ -17028,10 +17029,11 @@ inherited `TLS_LAYER=1` cannot quietly measure the layer instead). Only the two 
 | guest 3500 (popup) | `22B1CE31…` luma 46.18 / 2.03 % | **`A81F3E35…` luma 89.89 / 1.85 %** | < 150, 0.5..10 % | inside |
 
 `logs_ap/gate_br2.log`: **PASS attempt 1**, handover 1 680, save 1 348 992 / 29 344, exit 0. On the
-*shipped* binaries (which add only the exception guards of §8) the same gate **PASSes on attempt 2** —
-`logs_ap/gate_br4.log`: attempt 1 reported handover 1 380 with near-black shots on a machine that had just
-had a game running, attempt 2 handover 1 680 with both references exact, exit 0. That is the retry policy
-working, and it is the reason a handover ≠ 1 680 is never evidence (§9 row 15).
+*shipped* binaries (which add only the exception guards of §8) the same gate **PASSes attempt 1** —
+`logs_ap/gate_br5.log`, handover 1 680, both references exact, exit 0 — and the run before it
+(`logs_ap/gate_br4.log`) PASSed on attempt 2 after a warm first attempt at handover 1 380 with near-black
+shots. That is the retry policy working, and it is the reason a handover ≠ 1 680 is never evidence
+(§9 rows 15-16).
 
 **6. The escape hatch still reproduces the layer, pixel for pixel.** `logs_ap/run_escape.ps1` (the same
 3 520-frame run plus `TLS_LAYER=1`): content `B4646917A98EC7CE…` luma 36.51 / 0.00 % and popup
@@ -17108,3 +17110,4 @@ of killing the process.
 | 13 | gates attempted while another game held the host | attempts at handover **840 / 1 140** with unrelated pictures — recorded here as the worked example of the "a loaded host is void, not a regression" rule |
 | 14 | `run_publish_record.ps1 -Tag g` on the **shipped** runner + DLL, still loaded (`fifa15` running) | void (handover **840**), but it reproduced the content reference exactly (`54CB46BD…` 38.20 / 0.00 %) and the popup showed the alternate `F1004F50…` 86.91 — i.e. the exception-guard DLL still draws aurora's content frame identically, and the popup frame is the one that moves when the present timing does |
 | 15 | `pwsh tools/invariant.ps1 -Log logs_ap/gate_br4.log` on the **shipped** binaries, host idle | **PASS attempt 2** (exit 0): handover 1 680, content `54CB46BD…` 38.20 / 0.00 %, popup `A81F3E35…` 89.89 / 1.85 %, save 1 348 992 / 29 344. Attempt 1 came in at handover **1 380** (a machine that had just run a game) with near-black shots `47E30E30…` / `847B7F79…` — the retry policy's reason for existing, and the reason a handover ≠ 1 680 must never be re-recorded |
+| 16 | same gate again, immediately after | **PASS attempt 1** (`logs_ap/gate_br5.log`, exit 0): handover 1 680, both references exact, save exact — the shipped pair's attempt-1 PASS, and the published run-to-run result |
