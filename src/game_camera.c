@@ -6,7 +6,7 @@ extern void battle_getCharacterState(void);
 extern void fn_8001B634(void);
 extern void fn_8001BD14(void);
 extern void entity_isActive(void);
-extern void fn_8001BEB0(void);
+extern void entity_checkActorType(void);
 extern void fn_8003CDB0(void);
 extern void fn_8003D298(void);
 extern void effect_testLifetime(void);
@@ -136,7 +136,7 @@ asm void fn_8001EE58(void)
     lwz r3, lbl_807C68C0@l(r6)
     stw r0, 0x20(r4)
     stw r31, lbl_807C6A40@l(r5)
-    bl fn_8001BEB0
+    bl entity_checkActorType
     cmpwi r3, 0x0
     beq lbl_fn_8001EE58_000000BC
     li r31, 0x7
@@ -1168,7 +1168,7 @@ asm void fn_8001FC40(void)
     stw r4, 0x24(r6)
     stw r0, 0x28(r6)
     stw r31, lbl_807C6A40@l(r7)
-    bl fn_8001BEB0
+    bl entity_checkActorType
     cmpwi r3, 0x0
     beq lbl_fn_8001FC40_00000EB4
     li r31, 0x7

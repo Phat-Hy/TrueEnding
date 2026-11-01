@@ -48,7 +48,7 @@ extern void msl_releaseRefCount(void);
 extern void runtime_registerStaticObject(void);
 extern void __destroy_arr(void);
 extern void vec3_isNonZero(void);
-extern void fn_8072D210(void);
+extern void math_normalizeAngle(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -2373,21 +2373,21 @@ lbl_fn_80099010_00001E9C:
     stfs f2, 0x34(r1)
     lfs f30, 0x30(r1)
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f3, lbl_80880C08
     addi r3, r1, 0x18
     lfs f0, lbl_80880C34
     addi r4, r1, 0xc
     fmuls f3, f30, f3
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f3, lbl_80880C08
     addi r3, r1, 0x1c
     lfs f0, lbl_80880C34
     addi r4, r1, 0x10
     fmuls f3, f31, f3
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f11, 0xc(r1)
     addi r3, r1, 0x38
     lfs f8, 0x14(r1)

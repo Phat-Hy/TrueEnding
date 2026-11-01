@@ -43,7 +43,7 @@ extern void fn_807157D0(void);
 extern void fn_80717EA0(void);
 extern void net_getGlobalContext(void);
 extern void net_calcStreamOffset(void);
-extern void fn_80725170(void);
+extern void net_listClearAll(void);
 extern void fn_80725200(void);
 extern void net_listInsertNode(void);
 extern void net_listRemoveNode(void);
@@ -2351,7 +2351,7 @@ asm void fn_80717A40(void)
     mr r30, r3
     beq lbl_fn_80717A40_00001D20
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
     cmpwi r31, 0x0
     ble lbl_fn_80717A40_00001D20
     mr r3, r30
@@ -2401,18 +2401,18 @@ lbl_fn_80717AA0_00001D9C:
     addic. r3, r28, 0x18
     beq lbl_fn_80717AA0_00001DC0
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_80717AA0_00001DC0:
     addic. r3, r28, 0xc
     beq lbl_fn_80717AA0_00001DD0
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_80717AA0_00001DD0:
     cmpwi r28, 0x0
     beq lbl_fn_80717AA0_00001DE4
     mr r3, r28
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_80717AA0_00001DE4:
     cmpwi r29, 0x0
     ble lbl_fn_80717AA0_00001DF4

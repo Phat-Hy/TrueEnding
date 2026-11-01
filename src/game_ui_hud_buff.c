@@ -38,7 +38,7 @@ extern void fn_801E91B4(void);
 extern void fn_801E9218(void);
 extern void saveSlot_readSummary(void);
 extern void save_calculateBlockCrc(void);
-extern void fn_80201E78(void);
+extern void profile_allocNode(void);
 extern void profile_getMetricValue(void);
 extern void perf_initNode(void);
 extern void perf_getMetricValue(void);
@@ -1006,21 +1006,21 @@ lbl_fn_801CCE50_00000C00:
     addi r30, r4, lbl_8073BCF0@l
     li r5, 0x1
     addi r4, r30, 0x61
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0x13c(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0x82
     li r5, 0x1
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0x184(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0xa9
     li r5, 0x1
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0x1cc(r31)
     li r4, 0x1
     bl atn_Task_setActive

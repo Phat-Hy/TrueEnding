@@ -12,7 +12,7 @@ extern void fn_8001BAA4(void);
 extern void fn_8001BC38(void);
 extern void fn_8001BCB4(void);
 extern void entity_isActive(void);
-extern void fn_8001BEB0(void);
+extern void entity_checkActorType(void);
 extern void fn_800281A0(void);
 extern void effect_testLifetime(void);
 extern void rand(void);
@@ -343,7 +343,7 @@ asm void fn_8002552C(void)
     lwz r3, lbl_807C68C0@l(r3)
     stw r0, 0x1c(r4)
     stw r31, lbl_807C6A40@l(r5)
-    bl fn_8001BEB0
+    bl entity_checkActorType
     cmpwi r3, 0x0
     beq lbl_fn_8002552C_000003C0
     li r31, 0x7

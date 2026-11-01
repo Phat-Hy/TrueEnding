@@ -50,7 +50,7 @@ extern void fn_80718ED0(void);
 extern void fn_80718F50(void);
 extern void net_packetDebugLog(void);
 extern void fn_80724E90(void);
-extern void fn_80725170(void);
+extern void net_listClearAll(void);
 extern void fn_80726310(void);
 extern void fn_807263E0(void);
 extern void fn_80726470(void);
@@ -1463,7 +1463,7 @@ asm void fn_8059E9A8(void)
     mr r30, r3
     beq lbl_fn_8059E9A8_00000F54
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
     cmpwi r31, 0x0
     ble lbl_fn_8059E9A8_00000F54
     mr r3, r30
@@ -1502,7 +1502,7 @@ asm void fn_8059EA18(void)
     mr r30, r3
     beq lbl_fn_8059EA18_00000FC4
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
     cmpwi r31, 0x0
     ble lbl_fn_8059EA18_00000FC4
     mr r3, r30
@@ -1541,7 +1541,7 @@ asm void fn_8059EA88(void)
     mr r30, r3
     beq lbl_fn_8059EA88_00001034
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
     cmpwi r31, 0x0
     ble lbl_fn_8059EA88_00001034
     mr r3, r30
@@ -1603,21 +1603,21 @@ asm void fn_8059EB20(void)
     addic. r3, r0, 0x4
     beq lbl_fn_8059EB20_000010EC
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_8059EB20_000010EC:
     addic. r0, r30, 0x6c
     beq lbl_fn_8059EB20_00001104
     addic. r3, r0, 0x4
     beq lbl_fn_8059EB20_00001104
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_8059EB20_00001104:
     addic. r0, r30, 0x44
     beq lbl_fn_8059EB20_0000111C
     addic. r3, r0, 0x4
     beq lbl_fn_8059EB20_0000111C
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_8059EB20_0000111C:
     cmpwi r31, 0x0
     ble lbl_fn_8059EB20_0000112C

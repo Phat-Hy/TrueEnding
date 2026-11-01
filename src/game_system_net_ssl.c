@@ -15,7 +15,7 @@ extern void kpad_getClampData(void);
 extern void fn_805AA830(void);
 extern void fn_805AA950(void);
 extern void fn_805BDCC0(void);
-extern void fn_805BF414(void);
+extern void gx_evaluateVector3f(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -1644,7 +1644,7 @@ lbl_fn_803918EC_000016B0:
     li r5, 0x4
     li r6, 0x5
     li r7, 0x6
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     lfs f0, lbl_80885920
     addi r30, r1, 0x3f0
     lfs f7, 0xb8(r1)
@@ -1989,7 +1989,7 @@ lbl_fn_803918EC_00001BAC:
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     lfs f8, 0x7c(r1)
     addi r3, r1, 0x390
     lfs f7, 0x78(r1)

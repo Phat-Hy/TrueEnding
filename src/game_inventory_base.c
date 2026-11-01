@@ -15,7 +15,7 @@ extern void boss_findPartSlotById(void);
 extern void fn_80133F6C(void);
 extern void boss_findPartById(void);
 extern void fn_80134168(void);
-extern void fn_801346C8(void);
+extern void boss_testAiFlag(void);
 extern void fn_80150460(void);
 extern void fn_8015076C(void);
 extern void party_evalTacticCondition(void);
@@ -726,13 +726,13 @@ lbl_inventory_applyItemStats_000008B8:
     addi r3, r26, 0x7d4
     li r4, 0x2
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     bne lbl_inventory_applyItemStats_000008F8
     addi r3, r26, 0x7d4
     li r4, 0x3
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     bne lbl_inventory_applyItemStats_000008F8
     li r28, 0x0
@@ -1903,19 +1903,19 @@ lbl_fn_80152A24_00001924:
     addi r3, r30, 0x7d4
     li r4, 0x2
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     bne lbl_fn_80152A24_000019F0
     addi r3, r30, 0x7d4
     li r4, 0x3
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     bne lbl_fn_80152A24_000019F0
     addi r3, r30, 0x7d4
     li r4, 0x2e
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     bne lbl_fn_80152A24_000019F0
     lwz r0, lbl_8087F610

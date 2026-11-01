@@ -75,7 +75,7 @@ extern void fn_8052FA48(void);
 extern void fn_80530DB8(void);
 extern void dlc_findItemInCatalog(void);
 extern void fn_805BDCC0(void);
-extern void fn_805BF414(void);
+extern void gx_evaluateVector3f(void);
 
 /* External data declarations */
 extern u8 lbl_807C7030[];
@@ -549,7 +549,7 @@ asm void fn_8052C68C(void)
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    b fn_805BF414
+    b gx_evaluateVector3f
 }
 
 asm void fn_8052C6A8(void)
@@ -561,7 +561,7 @@ asm void fn_8052C6A8(void)
     li r5, 0x7
     li r6, 0x8
     li r7, 0x9
-    b fn_805BF414
+    b gx_evaluateVector3f
 }
 
 void fn_8052C6C4(void *p)

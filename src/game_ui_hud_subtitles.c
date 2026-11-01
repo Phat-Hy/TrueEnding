@@ -23,7 +23,7 @@ extern void fn_801CD184(void);
 extern void fn_801CE4CC(void);
 extern void save_validateHeader(void);
 extern void save_createWorkerTask(void);
-extern void fn_80201E78(void);
+extern void profile_allocNode(void);
 extern void perf_initNode(void);
 extern void sys_findModuleById(void);
 extern void fn_8020BD78(void);
@@ -738,56 +738,56 @@ lbl_fn_801CFDCC_00000878:
     addi r26, r4, lbl_8073C56C@l
     li r5, 0x1
     addi r4, r26, 0xd
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0xacc(r29)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r29
     addi r4, r26, 0x2b
     li r5, 0x1
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0xad0(r29)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r29
     addi r4, r26, 0x51
     li r5, 0x1
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0xad4(r29)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r29
     addi r4, r26, 0x76
     li r5, 0x1
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0xad8(r29)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r29
     addi r4, r26, 0x9a
     li r5, 0x1
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0xadc(r29)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r29
     addi r4, r26, 0xbf
     li r5, 0x1
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0xae0(r29)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r29
     addi r4, r26, 0xe5
     li r5, 0x1
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0xb0c(r29)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r29
     addi r4, r26, 0x103
     li r5, 0x1
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0xb10(r29)
     li r4, 0x1
     bl atn_Task_setActive
@@ -801,7 +801,7 @@ lbl_fn_801CFDCC_00000878:
     mr r3, r29
     addi r4, r26, 0x120
     li r5, 0x1
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0xb18(r29)
     li r4, 0x1
     bl atn_Task_setActive
@@ -822,7 +822,7 @@ lbl_fn_801CFDCC_00000878:
     mr r3, r29
     addi r4, r26, 0x185
     li r5, 0x1
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0xb90(r29)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1021,14 +1021,14 @@ lbl_fn_801CFDCC_00000CBC:
     add r22, r29, r26
     addi r4, r28, 0x23d
     li r5, 0x1
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0xae4(r22)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r29
     addi r4, r28, 0x264
     li r5, 0x1
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0xaf8(r22)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1041,7 +1041,7 @@ lbl_fn_801CFDCC_00000CBC:
     addi r28, r28, lbl_8073C56C@l
     li r5, 0x1
     addi r4, r28, 0x28d
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0xb24(r29)
     li r4, 0x1
     bl atn_Task_setActive

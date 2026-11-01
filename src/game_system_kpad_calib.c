@@ -17,7 +17,7 @@ extern void fn_800A5B30(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800F1378(void);
-extern void fn_801346C8(void);
+extern void boss_testAiFlag(void);
 extern void quest_checkCondition(void);
 extern void dialog_selectChoice(void);
 extern void fn_80154344(void);
@@ -2033,7 +2033,7 @@ lbl_fn_80371790_00001AEC:
     mr r4, r16
     addi r3, r20, 0x7d4
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_80371790_00001B1C
     li r19, 0x1
@@ -2072,7 +2072,7 @@ lbl_fn_80371790_00001B74:
     mr r4, r18
     addi r3, r20, 0x7d4
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_80371790_00001BA0
     addi r17, r17, 0x1

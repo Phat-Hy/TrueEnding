@@ -110,7 +110,7 @@ void fn_80725050(void);
 void fn_80725070(void);
 void fn_807250E0(void);
 void fn_80725150(void);
-void fn_80725170(void);
+void net_listClearAll(void);
 void fn_80725200(void);
 void fn_80725250(void);
 void net_listInsertNode(void);
@@ -1076,7 +1076,7 @@ lbl_fn_80725150_00000C70:
     blr
 }
 
-asm void fn_80725170(void)
+asm void net_listClearAll(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1085,12 +1085,12 @@ asm void fn_80725170(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    beq lbl_fn_80725170_00000CEC
+    beq lbl_net_listClearAll_00000CEC
     lwz r7, 0x4(r3)
     addi r6, r3, 0x4
     li r0, 0x0
-    b lbl_fn_80725170_00000CD4
-lbl_fn_80725170_00000CAC:
+    b lbl_net_listClearAll_00000CD4
+lbl_net_listClearAll_00000CAC:
     lwz r8, 0x0(r7)
     lwz r5, 0x4(r7)
     stw r5, 0x4(r8)
@@ -1101,14 +1101,14 @@ lbl_fn_80725170_00000CAC:
     stw r0, 0x0(r7)
     stw r0, 0x4(r7)
     mr r7, r8
-lbl_fn_80725170_00000CD4:
+lbl_net_listClearAll_00000CD4:
     cmplw r7, r6
-    bne lbl_fn_80725170_00000CAC
+    bne lbl_net_listClearAll_00000CAC
     cmpwi r4, 0x0
-    ble lbl_fn_80725170_00000CEC
+    ble lbl_net_listClearAll_00000CEC
     mr r3, r31
     bl dtor_80084684
-lbl_fn_80725170_00000CEC:
+lbl_net_listClearAll_00000CEC:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)

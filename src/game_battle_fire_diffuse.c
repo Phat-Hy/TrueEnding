@@ -83,7 +83,7 @@ extern u32 lbl_80886574;
 
 /* Function declarations */
 void fn_8041CF94(void);
-void fn_8041D180(void);
+void battle_invokeVtableMethod(void);
 void fn_8041D198(void);
 void fn_8041D23C(void);
 void fn_8041D2C4(void);
@@ -140,12 +140,12 @@ lbl_fn_8041CF94_00000054:
     extsb. r0, r0
     bne lbl_fn_8041CF94_000000A0
     lis r6, lbl_807C88F0@ha
-    lis r4, fn_8041D180@ha
+    lis r4, battle_invokeVtableMethod@ha
     lis r3, fn_8041D198@ha
     li r0, 0x1
     addi r3, r3, fn_8041D198@l
     addi r5, r6, lbl_807C88F0@l
-    addi r4, r4, fn_8041D180@l
+    addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C88F0@l(r6)
     stb r0, lbl_8087F4C0
@@ -245,7 +245,7 @@ lbl_fn_8041CF94_000001CC:
     blr
 }
 
-asm void fn_8041D180(void)
+asm void battle_invokeVtableMethod(void)
 {
     nofralloc
     mr r6, r3
@@ -411,12 +411,12 @@ lbl_fn_8041D320_000003C8:
     extsb. r0, r0
     bne lbl_fn_8041D320_00000418
     lis r6, lbl_807C88F0@ha
-    lis r4, fn_8041D180@ha
+    lis r4, battle_invokeVtableMethod@ha
     lis r3, fn_8041D198@ha
     li r0, 0x1
     addi r3, r3, fn_8041D198@l
     addi r5, r6, lbl_807C88F0@l
-    addi r4, r4, fn_8041D180@l
+    addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C88F0@l(r6)
     stb r0, lbl_8087F4C0
@@ -519,12 +519,12 @@ lbl_fn_8041D4B4_00000554:
     extsb. r0, r0
     bne lbl_fn_8041D4B4_00000590
     lis r6, lbl_807C88F0@ha
-    lis r4, fn_8041D180@ha
+    lis r4, battle_invokeVtableMethod@ha
     lis r3, fn_8041D198@ha
     li r0, 0x1
     addi r3, r3, fn_8041D198@l
     addi r5, r6, lbl_807C88F0@l
-    addi r4, r4, fn_8041D180@l
+    addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C88F0@l(r6)
     stb r0, lbl_8087F4C0

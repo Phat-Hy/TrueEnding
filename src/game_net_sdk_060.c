@@ -54,7 +54,7 @@ extern void fn_8071EA40(void);
 extern void fn_8071F270(void);
 extern void fn_8071F360(void);
 extern void fn_80721000(void);
-extern void fn_80725170(void);
+extern void net_listClearAll(void);
 extern void fn_80725200(void);
 extern void net_listInsertNode(void);
 extern void net_listRemoveNode(void);
@@ -1651,7 +1651,7 @@ asm void fn_8071D370(void)
     mr r30, r3
     beq lbl_fn_8071D370_0000142C
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
     cmpwi r31, 0x0
     ble lbl_fn_8071D370_0000142C
     mr r3, r30

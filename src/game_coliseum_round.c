@@ -24,7 +24,7 @@ extern void save_formatSlotMetadata(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void fn_80383728(void);
-extern void fn_8041D180(void);
+extern void battle_invokeVtableMethod(void);
 extern void fn_8041D198(void);
 extern void fn_8041D23C(void);
 extern void fn_8047C1D8(void);
@@ -50,7 +50,7 @@ extern void fn_805F9D20(void);
 extern void printf(void);
 extern void abort(void);
 extern void std_atan2(void);
-extern void fn_8072D210(void);
+extern void math_normalizeAngle(void);
 extern void memmove(void);
 
 /* External data declarations */
@@ -518,21 +518,21 @@ lbl_fn_8048F1DC_000005D4:
     lfs f29, 0x5c(r1)
     stfs f2, 0x60(r1)
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f3, lbl_80886F98
     addi r3, r1, 0xc
     lfs f0, lbl_80886F94
     addi r4, r1, 0x18
     fmuls f3, f29, f3
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f3, lbl_80886F98
     addi r3, r1, 0x8
     lfs f0, lbl_80886F94
     addi r4, r1, 0x14
     fmuls f3, f30, f3
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f12, 0x18(r1)
     addi r31, r1, 0x64
     lfs f9, 0x10(r1)
@@ -680,21 +680,21 @@ lbl_fn_8048F1DC_0000083C:
     lfs f29, 0x68(r1)
     stfs f2, 0x6c(r1)
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f3, lbl_80886F98
     addi r3, r1, 0x24
     lfs f0, lbl_80886F94
     addi r4, r1, 0x30
     fmuls f3, f29, f3
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f3, lbl_80886F98
     addi r3, r1, 0x20
     lfs f0, lbl_80886F94
     addi r4, r1, 0x2c
     fmuls f3, f30, f3
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f11, 0x30(r1)
     fmr f1, f31
     lfs f8, 0x28(r1)
@@ -1122,12 +1122,12 @@ lbl_fn_8048FC7C_00000E38:
     stw r4, 0x18(r1)
     bne lbl_fn_8048FC7C_00000EC8
     lis r6, lbl_807C88F0@ha
-    lis r4, fn_8041D180@ha
+    lis r4, battle_invokeVtableMethod@ha
     lis r3, fn_8041D198@ha
     li r0, 0x1
     addi r3, r3, fn_8041D198@l
     addi r5, r6, lbl_807C88F0@l
-    addi r4, r4, fn_8041D180@l
+    addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C88F0@l(r6)
     stb r0, lbl_8087F4C0

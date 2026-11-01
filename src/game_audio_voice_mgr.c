@@ -29,7 +29,7 @@ extern void world_setLocalFlag(void);
 extern void fn_804786F8(void);
 extern void fn_805BDCC0(void);
 extern void fn_805BF208(void);
-extern void fn_805BF414(void);
+extern void gx_evaluateVector3f(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -1360,14 +1360,14 @@ lbl_fn_803012AC_00001268:
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     lfs f1, 0x1688(r30)
     mr r3, r31
     addi r4, r1, 0x90
     li r5, 0x7
     li r6, 0x8
     li r7, 0x9
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     psq_l f1, 0xb8(r30), 0, 0
     addi r29, r1, 0x138
     psq_l f2, 0xc0(r30), 0, 0
@@ -1495,7 +1495,7 @@ lbl_fn_803012AC_00001414:
     stfs f0, 0x88(r1)
     stfs f9, 0x8c(r1)
     lfs f1, 0x1688(r30)
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     lfs f9, 0x80(r1)
     addi r3, r1, 0x108
     lfs f0, lbl_80884AC0

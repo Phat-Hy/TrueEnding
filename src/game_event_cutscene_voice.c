@@ -43,7 +43,7 @@ extern void strcmp(void);
 extern void std_atan2(void);
 extern void __construct_new_array(void);
 extern void __ptmf_scall(void);
-extern void fn_8072D210(void);
+extern void math_normalizeAngle(void);
 
 /* External data declarations */
 extern u8 lbl_80756380[];
@@ -1244,21 +1244,21 @@ lbl_fn_8047C1D8_00000E10:
     lfs f29, 0xe8(r1)
     stfs f2, 0xec(r1)
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f3, lbl_80886F98
     addi r3, r1, 0x30
     lfs f0, lbl_80886F94
     addi r4, r1, 0x24
     fmuls f3, f29, f3
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f3, lbl_80886F98
     addi r3, r1, 0x34
     lfs f0, lbl_80886F94
     addi r4, r1, 0x28
     fmuls f3, f30, f3
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f12, 0x24(r1)
     addi r31, r1, 0xd8
     lfs f9, 0x2c(r1)
@@ -1406,21 +1406,21 @@ lbl_fn_8047C1D8_00001078:
     lfs f30, 0xdc(r1)
     stfs f2, 0xe0(r1)
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f3, lbl_80886F98
     addi r3, r1, 0x18
     lfs f0, lbl_80886F94
     addi r4, r1, 0xc
     fmuls f3, f30, f3
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f3, lbl_80886F98
     addi r3, r1, 0x1c
     lfs f0, lbl_80886F94
     addi r4, r1, 0x10
     fmuls f3, f29, f3
     fmuls f1, f0, f3
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f11, 0xc(r1)
     fmr f1, f31
     lfs f8, 0x14(r1)

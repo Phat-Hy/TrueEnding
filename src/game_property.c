@@ -86,8 +86,8 @@ extern u32 lbl_8087D6F1;
 /* Function declarations */
 void fn_8001E0A8(void *p);
 void property_copyValue(void);
-void fn_8001E168(void);
-void fn_8001E1D0(void);
+void property_releaseValue(void);
+void property_formatValue(void);
 void fn_8001E340(void *p);
 void fn_8001E350(void *p);
 void fn_8001E360(void *p);
@@ -211,7 +211,7 @@ lbl_property_copyValue_00000098:
     blr
 }
 
-asm void fn_8001E168(void)
+asm void property_releaseValue(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -222,19 +222,19 @@ asm void fn_8001E168(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_8001E168_0000010C
-    beq lbl_fn_8001E168_000000FC
+    beq lbl_property_releaseValue_0000010C
+    beq lbl_property_releaseValue_000000FC
     lwz r0, 0x0(r3)
     srwi. r0, r0, 31
-    beq lbl_fn_8001E168_000000FC
+    beq lbl_property_releaseValue_000000FC
     lwz r3, 0x8(r3)
     bl dtor_80084684
-lbl_fn_8001E168_000000FC:
+lbl_property_releaseValue_000000FC:
     cmpwi r31, 0x0
-    ble lbl_fn_8001E168_0000010C
+    ble lbl_property_releaseValue_0000010C
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8001E168_0000010C:
+lbl_property_releaseValue_0000010C:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -244,7 +244,7 @@ lbl_fn_8001E168_0000010C:
     blr
 }
 
-asm void fn_8001E1D0(void)
+asm void property_formatValue(void)
 {
     nofralloc
     stwu r1, -0x40(r1)
@@ -263,72 +263,72 @@ asm void fn_8001E1D0(void)
     lwz r30, 0xc(r1)
     mr r31, r3
     cmpwi r30, 0x0
-    beq lbl_fn_8001E1D0_00000240
+    beq lbl_property_formatValue_00000240
     lwz r0, 0x0(r29)
     srwi. r0, r0, 31
-    bne lbl_fn_8001E1D0_00000188
+    bne lbl_property_formatValue_00000188
     lbz r0, 0x0(r29)
     addi r4, r29, 0x1
     clrlwi r26, r0, 25
-    b lbl_fn_8001E1D0_00000190
-lbl_fn_8001E1D0_00000188:
+    b lbl_property_formatValue_00000190
+lbl_property_formatValue_00000188:
     lwz r4, 0x8(r29)
     lwz r26, 0x4(r29)
-lbl_fn_8001E1D0_00000190:
+lbl_property_formatValue_00000190:
     stw r26, 0x14(r1)
     lwz r0, 0xc(r30)
     srwi. r0, r0, 31
-    bne lbl_fn_8001E1D0_000001AC
+    bne lbl_property_formatValue_000001AC
     lbz r0, 0xc(r30)
     clrlwi r5, r0, 25
-    b lbl_fn_8001E1D0_000001B0
-lbl_fn_8001E1D0_000001AC:
+    b lbl_property_formatValue_000001B0
+lbl_property_formatValue_000001AC:
     lwz r5, 0x10(r30)
-lbl_fn_8001E1D0_000001B0:
+lbl_property_formatValue_000001B0:
     stw r5, 0x10(r1)
     lwz r0, 0xc(r30)
     srwi. r0, r0, 31
-    bne lbl_fn_8001E1D0_000001D0
+    bne lbl_property_formatValue_000001D0
     lbz r0, 0xc(r30)
     addi r3, r30, 0xd
     clrlwi r0, r0, 25
-    b lbl_fn_8001E1D0_000001D8
-lbl_fn_8001E1D0_000001D0:
+    b lbl_property_formatValue_000001D8
+lbl_property_formatValue_000001D0:
     lwz r3, 0x14(r30)
     lwz r0, 0x10(r30)
-lbl_fn_8001E1D0_000001D8:
+lbl_property_formatValue_000001D8:
     cmplw r5, r0
     stw r0, 0x18(r1)
     addi r5, r1, 0x18
-    bge lbl_fn_8001E1D0_000001EC
+    bge lbl_property_formatValue_000001EC
     addi r5, r1, 0x10
-lbl_fn_8001E1D0_000001EC:
+lbl_property_formatValue_000001EC:
     lwz r0, 0x0(r5)
     addi r5, r1, 0x1c
     stw r0, 0x1c(r1)
     cmplw r26, r0
-    bge lbl_fn_8001E1D0_00000204
+    bge lbl_property_formatValue_00000204
     addi r5, r1, 0x14
-lbl_fn_8001E1D0_00000204:
+lbl_property_formatValue_00000204:
     lwz r5, 0x0(r5)
     bl memcmp
     cmpwi r3, 0x0
-    bne lbl_fn_8001E1D0_00000238
+    bne lbl_property_formatValue_00000238
     lwz r0, 0x1c(r1)
     cmplw r0, r26
-    bge lbl_fn_8001E1D0_00000228
+    bge lbl_property_formatValue_00000228
     li r3, -0x1
-    b lbl_fn_8001E1D0_00000238
-lbl_fn_8001E1D0_00000228:
-    bne lbl_fn_8001E1D0_00000234
+    b lbl_property_formatValue_00000238
+lbl_property_formatValue_00000228:
+    bne lbl_property_formatValue_00000234
     li r3, 0x0
-    b lbl_fn_8001E1D0_00000238
-lbl_fn_8001E1D0_00000234:
+    b lbl_property_formatValue_00000238
+lbl_property_formatValue_00000234:
     li r3, 0x1
-lbl_fn_8001E1D0_00000238:
+lbl_property_formatValue_00000238:
     cmpwi r3, 0x0
-    bge lbl_fn_8001E1D0_00000268
-lbl_fn_8001E1D0_00000240:
+    bge lbl_property_formatValue_00000268
+lbl_property_formatValue_00000240:
     lbz r5, 0x8(r1)
     mr r3, r28
     lbz r6, 0x9(r1)
@@ -338,12 +338,12 @@ lbl_fn_8001E1D0_00000240:
     lbz r0, lbl_8087D6F0
     stw r3, 0x20(r1)
     stb r0, 0x24(r1)
-    b lbl_fn_8001E1D0_00000274
-lbl_fn_8001E1D0_00000268:
+    b lbl_property_formatValue_00000274
+lbl_property_formatValue_00000268:
     lbz r0, lbl_8087D6F1
     stw r30, 0x20(r1)
     stb r0, 0x24(r1)
-lbl_fn_8001E1D0_00000274:
+lbl_property_formatValue_00000274:
     lwz r3, 0x20(r1)
     lbz r0, 0x24(r1)
     stw r3, 0x0(r27)

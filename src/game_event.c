@@ -15,7 +15,7 @@ extern void fn_8001BC38(void);
 extern void fn_8001BC80(void);
 extern void fn_8001BCB4(void);
 extern void entity_isActive(void);
-extern void fn_8001BEB0(void);
+extern void entity_checkActorType(void);
 extern void fn_8001C01C(void);
 extern void fn_8001C038(void);
 extern void fn_8001C068(void);
@@ -605,7 +605,7 @@ asm void fn_8003068C(void)
     stw r4, 0x24(r6)
     stw r0, 0x28(r6)
     stw r31, lbl_807C6A40@l(r7)
-    bl fn_8001BEB0
+    bl entity_checkActorType
     cmpwi r3, 0x0
     beq lbl_fn_8003068C_000006BC
     li r31, 0x7
@@ -1830,7 +1830,7 @@ asm void fn_80031758(void)
     lis r3, lbl_807C68C0@ha
     stw r0, 0x14(r1)
     lwz r3, lbl_807C68C0@l(r3)
-    bl fn_8001BEB0
+    bl entity_checkActorType
     cmpwi r3, 0x0
     beq lbl_fn_80031758_00001760
     lis r3, lbl_807C6A40@ha
@@ -2328,7 +2328,7 @@ asm void fn_80031DE4(void)
     lis r3, lbl_807C68C0@ha
     stw r0, 0x14(r1)
     lwz r3, lbl_807C68C0@l(r3)
-    bl fn_8001BEB0
+    bl entity_checkActorType
     cmpwi r3, 0x0
     beq lbl_fn_80031DE4_00001DEC
     lis r3, lbl_807C6A40@ha
@@ -2798,7 +2798,7 @@ asm void fn_80032424(void)
     li r31, 0x1
     stw r31, lbl_807C6A40@l(r4)
     lwz r3, lbl_807C68C0@l(r3)
-    bl fn_8001BEB0
+    bl entity_checkActorType
     cmpwi r3, 0x0
     beq lbl_fn_80032424_0000242C
     li r31, 0x7
@@ -3813,7 +3813,7 @@ lbl_fn_80033040_00003174:
     b lbl_fn_80033040_000033CC
 lbl_fn_80033040_0000319C:
     lwz r3, 0x0(r31)
-    bl fn_8001BEB0
+    bl entity_checkActorType
     cmpwi r3, 0x0
     beq lbl_fn_80033040_000031EC
     li r8, 0x0
@@ -3888,7 +3888,7 @@ lbl_fn_80033040_00003274:
     b lbl_fn_80033040_000033CC
 lbl_fn_80033040_000032B4:
     lwz r3, 0x0(r31)
-    bl fn_8001BEB0
+    bl entity_checkActorType
     cmpwi r3, 0x0
     beq lbl_fn_80033040_00003304
     li r8, 0x0
@@ -4283,7 +4283,7 @@ asm void fn_800337F4(void)
     lwz r3, lbl_807C68C0@l(r3)
     stw r0, 0x28(r4)
     stw r31, lbl_807C6A40@l(r5)
-    bl fn_8001BEB0
+    bl entity_checkActorType
     cmpwi r3, 0x0
     beq lbl_fn_800337F4_00003810
     li r31, 0x7
@@ -4833,7 +4833,7 @@ asm void fn_80033F38(void)
     lwz r3, lbl_807C68C0@l(r3)
     stw r0, 0x28(r4)
     stw r31, lbl_807C6A40@l(r5)
-    bl fn_8001BEB0
+    bl entity_checkActorType
     cmpwi r3, 0x0
     beq lbl_fn_80033F38_00003F54
     li r31, 0x7
@@ -5440,7 +5440,7 @@ asm void fn_80034760(void)
     lwz r3, lbl_807C68C0@l(r3)
     stw r0, 0x28(r4)
     stw r31, lbl_807C6A40@l(r5)
-    bl fn_8001BEB0
+    bl entity_checkActorType
     cmpwi r3, 0x0
     beq lbl_fn_80034760_0000477C
     li r31, 0x7

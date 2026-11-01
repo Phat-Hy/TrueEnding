@@ -37,7 +37,7 @@ extern void save_writeBackupSlot(void);
 extern void save_findEntryByName(void);
 extern void save_formatSlotString(void);
 extern void thread_findAndNotify(void);
-extern void fn_80201E78(void);
+extern void profile_allocNode(void);
 extern void profile_getMetricValue(void);
 extern void perf_initNode(void);
 extern void perf_getMetricValue(void);
@@ -1245,14 +1245,14 @@ lbl_fn_8051B988_00000F38:
     lwz r4, lbl_808878FC
     mr r3, r31
     li r5, 0x1
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0x18e0(r31)
     li r4, 0x1
     bl atn_Task_setActive
     lwz r4, lbl_80887900
     mr r3, r31
     li r5, 0x1
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0x18e4(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1803,7 +1803,7 @@ lbl_fn_8051C754_000017C8:
     lwz r21, 0x50(r24)
     mr r3, r24
     li r5, 0x1
-    bl fn_80201E78
+    bl profile_allocNode
     stwx r3, r21, r26
     li r4, 0x1
     lwz r3, 0x50(r24)

@@ -25,7 +25,7 @@ extern void fn_8047C7FC(void);
 extern void fn_80512C94(void);
 extern void fn_8052BBF0(void);
 extern void fn_805BDCC0(void);
-extern void fn_805BF414(void);
+extern void gx_evaluateVector3f(void);
 extern void printf(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
@@ -227,7 +227,7 @@ lbl_fn_8052DEF0_00000204:
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     addi r3, r1, 0x18
     lfs f2, 0x20(r1)
     psq_l f1, 0x0(r3), 0, 0
@@ -244,7 +244,7 @@ lbl_fn_8052DEF0_00000204:
     li r5, 0x7
     li r6, 0x8
     li r7, 0x9
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     addi r3, r1, 0xc
     lfs f2, 0x14(r1)
     psq_l f1, 0x0(r3), 0, 0

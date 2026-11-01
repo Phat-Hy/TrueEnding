@@ -87,7 +87,7 @@ extern u32 lbl_80881984;
 extern u32 lbl_80881988;
 
 /* Function declarations */
-void fn_801346C8(void);
+void boss_testAiFlag(void);
 void fn_80134724(void);
 void fn_80134774(void);
 void fn_801347C8(void);
@@ -101,17 +101,17 @@ void fn_80135384(void);
 void fn_8013539C(void);
 void fn_801354B4(void);
 
-asm void fn_801346C8(void)
+asm void boss_testAiFlag(void)
 {
     nofralloc
     cmpwi r4, 0x0
-    blt lbl_fn_801346C8_00000010
+    blt lbl_boss_testAiFlag_00000010
     cmpwi r4, 0x80
-    blt lbl_fn_801346C8_00000018
-lbl_fn_801346C8_00000010:
+    blt lbl_boss_testAiFlag_00000018
+lbl_boss_testAiFlag_00000010:
     li r3, 0x0
     blr
-lbl_fn_801346C8_00000018:
+lbl_boss_testAiFlag_00000018:
     srawi r0, r4, 5
     slwi r6, r4, 27
     srwi r5, r4, 31

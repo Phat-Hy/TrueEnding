@@ -20,7 +20,7 @@ extern void fn_803606CC(void);
 extern void fn_80360780(void);
 extern void kpad_getClampData(void);
 extern void dvd_showDiskErrorDialog(void);
-extern void fn_8041D180(void);
+extern void battle_invokeVtableMethod(void);
 extern void fn_8041D198(void);
 extern void fn_804827D8(void);
 extern void fn_80482B24(void);
@@ -95,12 +95,12 @@ asm void fn_80483644(void)
     extsb. r0, r0
     bne lbl_fn_80483644_00000058
     lis r7, lbl_807C88F0@ha
-    lis r5, fn_8041D180@ha
+    lis r5, battle_invokeVtableMethod@ha
     lis r4, fn_8041D198@ha
     li r0, 0x1
     addi r4, r4, fn_8041D198@l
     addi r6, r7, lbl_807C88F0@l
-    addi r5, r5, fn_8041D180@l
+    addi r5, r5, battle_invokeVtableMethod@l
     stw r5, 0x4(r6)
     stw r4, lbl_807C88F0@l(r7)
     stb r0, lbl_8087F4C0
@@ -509,12 +509,12 @@ lbl_fn_80483714_00000504:
     stw r4, 0x18(r1)
     bne lbl_fn_80483714_00000698
     lis r6, lbl_807C88F0@ha
-    lis r4, fn_8041D180@ha
+    lis r4, battle_invokeVtableMethod@ha
     lis r3, fn_8041D198@ha
     li r0, 0x1
     addi r3, r3, fn_8041D198@l
     addi r5, r6, lbl_807C88F0@l
-    addi r4, r4, fn_8041D180@l
+    addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C88F0@l(r6)
     stb r0, lbl_8087F4C0
@@ -1165,12 +1165,12 @@ lbl_fn_80484088_00000F80:
     extsb. r0, r0
     bne lbl_fn_80484088_00000FC8
     lis r6, lbl_807C88F0@ha
-    lis r4, fn_8041D180@ha
+    lis r4, battle_invokeVtableMethod@ha
     lis r3, fn_8041D198@ha
     li r0, 0x1
     addi r3, r3, fn_8041D198@l
     addi r5, r6, lbl_807C88F0@l
-    addi r4, r4, fn_8041D180@l
+    addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C88F0@l(r6)
     stb r0, lbl_8087F4C0
@@ -1304,12 +1304,12 @@ asm void fn_804846FC(void)
     stw r4, 0x18(r1)
     bne lbl_fn_804846FC_000011BC
     lis r6, lbl_807C88F0@ha
-    lis r4, fn_8041D180@ha
+    lis r4, battle_invokeVtableMethod@ha
     lis r3, fn_8041D198@ha
     li r0, 0x1
     addi r3, r3, fn_8041D198@l
     addi r5, r6, lbl_807C88F0@l
-    addi r4, r4, fn_8041D180@l
+    addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C88F0@l(r6)
     stb r0, lbl_8087F4C0
@@ -1537,12 +1537,12 @@ asm void fn_80484A78(void)
     stfs f0, 0x14(r1)
     bne lbl_fn_80484A78_000014F4
     lis r6, lbl_807C88F0@ha
-    lis r4, fn_8041D180@ha
+    lis r4, battle_invokeVtableMethod@ha
     lis r3, fn_8041D198@ha
     li r0, 0x1
     addi r3, r3, fn_8041D198@l
     addi r5, r6, lbl_807C88F0@l
-    addi r4, r4, fn_8041D180@l
+    addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C88F0@l(r6)
     stb r0, lbl_8087F4C0
@@ -1634,12 +1634,12 @@ lbl_fn_80484BF4_000015EC:
     extsb. r0, r0
     bne lbl_fn_80484BF4_0000163C
     lis r6, lbl_807C88F0@ha
-    lis r4, fn_8041D180@ha
+    lis r4, battle_invokeVtableMethod@ha
     lis r3, fn_8041D198@ha
     li r0, 0x1
     addi r3, r3, fn_8041D198@l
     addi r5, r6, lbl_807C88F0@l
-    addi r4, r4, fn_8041D180@l
+    addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C88F0@l(r6)
     stb r0, lbl_8087F4C0
@@ -1827,12 +1827,12 @@ lbl_fn_80484E88_00001870:
     extsb. r0, r0
     bne lbl_fn_80484E88_000018BC
     lis r6, lbl_807C88F0@ha
-    lis r4, fn_8041D180@ha
+    lis r4, battle_invokeVtableMethod@ha
     lis r3, fn_8041D198@ha
     li r0, 0x1
     addi r3, r3, fn_8041D198@l
     addi r5, r6, lbl_807C88F0@l
-    addi r4, r4, fn_8041D180@l
+    addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C88F0@l(r6)
     stb r0, lbl_8087F4C0

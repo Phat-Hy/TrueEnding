@@ -32,7 +32,7 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_8068B50C(void);
 extern void fn_8068B610(void);
-extern void fn_806920C0(void);
+extern void std_string_append(void);
 extern void fn_806926D4(void);
 extern void fn_8069293C(void);
 extern void msl_releaseRefCount(void);
@@ -153,7 +153,7 @@ lbl_fn_80393BEC_000000E4:
     stw r5, lbl_80880390
     stw r5, lbl_808803C0
 lbl_fn_80393BEC_00000104:
-    bl fn_806920C0
+    bl std_string_append
     lwz r3, 0x10(r1)
     slwi r0, r31, 2
     lwz r3, 0x0(r3)

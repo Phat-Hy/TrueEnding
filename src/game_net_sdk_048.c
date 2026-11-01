@@ -61,7 +61,7 @@ extern void fn_80702150(void);
 extern void fn_807031B0(void);
 extern void fn_807204D0(void);
 extern void fn_80720BF0(void);
-extern void fn_80725170(void);
+extern void net_listClearAll(void);
 extern void fn_80725250(void);
 extern void net_listInsertNode(void);
 extern void net_listRemoveNode(void);
@@ -793,7 +793,7 @@ asm void fn_80703F30(void)
     mr r30, r3
     beq lbl_fn_80703F30_00000960
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
     cmpwi r31, 0x0
     ble lbl_fn_80703F30_00000960
     mr r3, r30
@@ -860,7 +860,7 @@ asm void fn_80704000(void)
     addic. r3, r30, 0x8
     beq lbl_fn_80704000_00000A40
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_80704000_00000A40:
     cmpwi r31, 0x0
     ble lbl_fn_80704000_00000A50

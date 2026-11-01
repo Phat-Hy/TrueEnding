@@ -22,7 +22,7 @@ extern void fn_807180A0(void);
 extern void fn_807183D0(void);
 extern void fn_8071E680(void);
 extern void fn_8071E970(void);
-extern void fn_80725170(void);
+extern void net_listClearAll(void);
 extern void net_listRemoveNode(void);
 
 /* External data declarations */
@@ -2342,7 +2342,7 @@ asm void fn_8070B530(void)
     addic. r3, r3, 0x4
     beq lbl_fn_8070B530_00001E70
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_8070B530_00001E70:
     cmpwi r31, 0x0
     ble lbl_fn_8070B530_00001E80

@@ -11,7 +11,7 @@ extern void motion_updateFogAdj(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void str_findChar(void);
-extern void fn_801346C8(void);
+extern void boss_testAiFlag(void);
 extern void task_isValidQueueRange(void);
 extern void fn_801F465C(void);
 extern void fn_801F4B4C(void);
@@ -2441,7 +2441,7 @@ lbl_fn_803D83A8_00002260:
     mr r4, r17
     li r5, 0x0
     addi r3, r3, 0x7d4
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_803D83A8_000022C4
     mr r3, r17

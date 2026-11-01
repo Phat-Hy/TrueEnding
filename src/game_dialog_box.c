@@ -32,7 +32,7 @@ extern void PSVECSquareMag(void);
 extern void fn_805F99F0(void);
 extern void fn_805F9A50(void);
 extern void swprintf(void);
-extern void fn_8072D210(void);
+extern void math_normalizeAngle(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -349,21 +349,21 @@ asm void fn_801498F0(void)
     stw r31, 0x2c(r1)
     mr r31, r3
     addi r3, r1, 0x10
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f1, lbl_808819A8
     addi r3, r1, 0xc
     lfs f0, lbl_80881AD8
     addi r4, r1, 0x18
     fmuls f1, f31, f1
     fmuls f1, f0, f1
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f1, lbl_808819A8
     addi r3, r1, 0x8
     lfs f0, lbl_80881AD8
     addi r4, r1, 0x14
     fmuls f1, f30, f1
     fmuls f1, f0, f1
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f1, 0xc(r1)
     lfs f0, 0x8(r1)
     lfs f3, 0x18(r1)

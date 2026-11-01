@@ -10,7 +10,7 @@ extern void ref_releaseHandle(void);
 extern void str_findChar(void);
 extern void thread_findAndNotifySlot(void);
 extern void kpad_getClampData(void);
-extern void fn_8041D180(void);
+extern void battle_invokeVtableMethod(void);
 extern void fn_8041D198(void);
 extern void fn_8047CB74(void);
 extern void fn_8049003C(void);
@@ -2261,12 +2261,12 @@ lbl_fn_80482ED8_00001E34:
     extsb. r0, r0
     bne lbl_fn_80482ED8_00001FD8
     lis r6, lbl_807C88F0@ha
-    lis r4, fn_8041D180@ha
+    lis r4, battle_invokeVtableMethod@ha
     lis r3, fn_8041D198@ha
     li r0, 0x1
     addi r3, r3, fn_8041D198@l
     addi r5, r6, lbl_807C88F0@l
-    addi r4, r4, fn_8041D180@l
+    addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C88F0@l(r6)
     stb r0, lbl_8087F4C0

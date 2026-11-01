@@ -23,7 +23,7 @@ extern void crowd_selectWaypointByWeight(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
 extern void task_updateWorker(void);
-extern void fn_8041D180(void);
+extern void battle_invokeVtableMethod(void);
 extern void fn_8041D198(void);
 extern void fn_8041E480(void);
 extern void fn_8041E7E4(void);
@@ -1760,12 +1760,12 @@ lbl_fn_80420120_00001744:
     extsb. r0, r0
     bne lbl_fn_80420120_00001794
     lis r6, lbl_807C88F0@ha
-    lis r4, fn_8041D180@ha
+    lis r4, battle_invokeVtableMethod@ha
     lis r3, fn_8041D198@ha
     li r0, 0x1
     addi r3, r3, fn_8041D198@l
     addi r5, r6, lbl_807C88F0@l
-    addi r4, r4, fn_8041D180@l
+    addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C88F0@l(r6)
     stb r0, lbl_8087F4C0

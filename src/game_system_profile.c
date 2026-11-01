@@ -59,7 +59,7 @@ void profile_initMetric(void* ptr);
 void fn_80201DE8(void);
 void fn_80201E10(void);
 void fn_80201E1C(void);
-void fn_80201E78(void);
+void profile_allocNode(void);
 void fn_80201EFC(void);
 void fn_8020205C(void);
 void fn_802020B4(void);
@@ -1143,7 +1143,7 @@ asm void fn_80201E1C(void)
     blr
 }
 
-asm void fn_80201E78(void)
+asm void profile_allocNode(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1156,7 +1156,7 @@ asm void fn_80201E78(void)
     mr r30, r4
     stw r29, 0x14(r1)
     mr r29, r3
-    beq lbl_fn_80201E78_0000100C
+    beq lbl_profile_allocNode_0000100C
     lis r5, lbl_8073E6A8@ha
     li r3, 0x108
     addi r5, r5, lbl_8073E6A8@l
@@ -1165,15 +1165,15 @@ asm void fn_80201E78(void)
     li r7, 0x0
     bl mem_alloc
     cmpwi r3, 0x0
-    beq lbl_fn_80201E78_00001010
+    beq lbl_profile_allocNode_00001010
     mr r4, r29
     mr r5, r30
     mr r6, r31
     bl fn_80201EFC
-    b lbl_fn_80201E78_00001010
-lbl_fn_80201E78_0000100C:
+    b lbl_profile_allocNode_00001010
+lbl_profile_allocNode_0000100C:
     li r3, 0x0
-lbl_fn_80201E78_00001010:
+lbl_profile_allocNode_00001010:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

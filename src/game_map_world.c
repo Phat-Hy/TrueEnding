@@ -18,7 +18,7 @@ extern void boss_enablePartStatusFlags(void);
 extern void actor_testBitFlag(void);
 extern void fn_80134250(void);
 extern void fn_80134270(void);
-extern void fn_801346C8(void);
+extern void boss_testAiFlag(void);
 extern void fn_80134724(void);
 extern void dialog_selectChoice(void);
 extern void fn_8015487C(void);
@@ -653,7 +653,7 @@ lbl_fn_80179FA8_0000070C:
     addi r3, r31, 0x7d4
     li r4, 0xe
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     bne lbl_fn_80179FA8_00000738
     li r3, 0x0

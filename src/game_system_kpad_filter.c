@@ -22,7 +22,7 @@ extern void fn_8010AC60(void);
 extern void fn_80124BE4(void);
 extern void enemy_updateAnimTimer(void);
 extern void fn_80133B30(void);
-extern void fn_801346C8(void);
+extern void boss_testAiFlag(void);
 extern void fn_801546F4(void);
 extern void party_evalTacticCondition(void);
 extern void debuff_clearStatus(void);
@@ -1137,7 +1137,7 @@ lbl_fn_80374D64_00000E48:
     mr r4, r27
     addi r3, r28, 0x7d4
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_80374D64_000010E0
     cmplwi r27, 0x2e

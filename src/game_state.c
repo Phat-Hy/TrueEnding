@@ -15,7 +15,7 @@ extern void fn_8001B634(void);
 extern void fn_8001BA88(void);
 extern void entity_isActive(void);
 extern void fn_8001BE90(void);
-extern void fn_8001BEB0(void);
+extern void entity_checkActorType(void);
 extern void fn_8001BF58(void);
 extern void fn_8001BF64(void);
 extern void fn_8001C01C(void);
@@ -3143,7 +3143,7 @@ asm void fn_800377AC(void)
     stfd f0, 0x10(r1)
     lwz r0, 0x14(r1)
     stw r0, 0x1c(r7)
-    bl fn_8001BEB0
+    bl entity_checkActorType
     cmpwi r3, 0x0
     beq lbl_fn_800377AC_000028E8
     li r31, 0x7
@@ -4388,7 +4388,7 @@ asm void fn_800388C4(void)
     lwz r3, lbl_807C68C0@l(r3)
     stw r0, 0x28(r4)
     stw r31, lbl_807C6A40@l(r5)
-    bl fn_8001BEB0
+    bl entity_checkActorType
     cmpwi r3, 0x0
     beq lbl_fn_800388C4_000039B8
     li r31, 0x7
@@ -4761,7 +4761,7 @@ asm void fn_80038D90(void)
     stw r4, 0x24(r5)
     stw r0, 0x28(r5)
     stw r31, lbl_807C6A40@l(r6)
-    bl fn_8001BEB0
+    bl entity_checkActorType
     cmpwi r3, 0x0
     beq lbl_fn_80038D90_00003E8C
     li r31, 0x7

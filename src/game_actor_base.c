@@ -13,7 +13,7 @@ extern void fn_8048B048(void);
 extern void fn_8048BCA4(void);
 extern void fn_80548570(void);
 extern void fn_805BDCC0(void);
-extern void fn_805BF414(void);
+extern void gx_evaluateVector3f(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -1501,7 +1501,7 @@ lbl_fn_80114AB4_00001470:
     li r5, 0x4
     li r6, 0x5
     li r7, 0x6
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     lfs f0, lbl_808816C4
     addi r30, r1, 0x338
     lfs f7, 0xac(r1)
@@ -1637,7 +1637,7 @@ lbl_fn_80114AB4_00001638:
     fmr f1, f7
     stfs f2, 0x70(r1)
     stfs f2, 0xb8(r1)
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     lfs f0, 0x58(r1)
     addi r4, r1, 0x5c
     lfs f7, 0x54(r1)
@@ -1660,7 +1660,7 @@ lbl_fn_80114AB4_000016E8:
     li r5, 0x4
     li r6, 0x5
     li r7, 0x6
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     lfs f0, lbl_808816C4
     addi r30, r1, 0x308
     lfs f7, 0x94(r1)
@@ -1813,14 +1813,14 @@ lbl_fn_80114AB4_0000193C:
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     lfs f1, 0x408(r31)
     mr r3, r29
     addi r4, r1, 0x20
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     lfs f7, 0x28(r1)
     lfs f0, 0x7c(r1)
     lfs f8, 0x24(r1)

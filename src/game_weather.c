@@ -32,7 +32,7 @@ extern void fn_801237F0(void);
 extern void player_evaluateStatusCondition(void);
 extern void fn_8012F3D8(void);
 extern void boss_findPartById(void);
-extern void fn_801346C8(void);
+extern void boss_testAiFlag(void);
 extern void fn_80152D10(void);
 extern void inventory_unequipItem(void);
 extern void fn_80155790(void);
@@ -1206,7 +1206,7 @@ asm void fn_800E7F04(void)
     addi r3, r17, 0x7d4
     li r4, 0x3d
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_800E7F04_00000FC8
     addi r3, r17, 0x7d4
@@ -1520,7 +1520,7 @@ lbl_fn_800E7F04_00001394:
     addi r3, r17, 0x7d4
     li r4, 0xa
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_800E7F04_00001430
     lwz r0, lbl_8087F610

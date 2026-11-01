@@ -23,7 +23,7 @@ extern void str_findChar(void);
 extern void proj_getMatrix(void);
 extern void fn_80116EB8(void);
 extern void fn_8012CE4C(void);
-extern void fn_801346C8(void);
+extern void boss_testAiFlag(void);
 extern void fn_80134800(void);
 extern void fn_801D082C(void);
 extern void fn_801D80A0(void);
@@ -35,7 +35,7 @@ extern void save_calculateBlockCrc(void);
 extern void save_findEntryByName(void);
 extern void save_formatSlotString(void);
 extern void thread_findAndNotify(void);
-extern void fn_80201E78(void);
+extern void profile_allocNode(void);
 extern void profile_getMetricValue(void);
 extern void perf_initNode(void);
 extern void perf_getMetricValue(void);
@@ -762,7 +762,7 @@ lbl_fn_80526930_000008DC:
     add r28, r31, r29
     addi r4, r30, 0x2b
     li r5, 0x1
-    bl fn_80201E78
+    bl profile_allocNode
     stw r3, 0xd4(r28)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1980,7 +1980,7 @@ lbl_fn_8052793C_000019D8:
     mr r3, r25
     li r4, 0x9
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_8052793C_00001A04
     mr r3, r31
@@ -2000,7 +2000,7 @@ lbl_fn_8052793C_00001A04:
     mr r3, r29
     li r4, 0x3f
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_8052793C_00001A5C
     mr r3, r31
@@ -2067,7 +2067,7 @@ lbl_fn_8052793C_00001B28:
     mr r3, r29
     li r4, 0x32
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_8052793C_00001B64
     mr r3, r31
@@ -2083,7 +2083,7 @@ lbl_fn_8052793C_00001B64:
     mr r3, r29
     li r4, 0x31
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_8052793C_00001B9C
     mr r3, r31
@@ -2098,7 +2098,7 @@ lbl_fn_8052793C_00001B9C:
     mr r3, r29
     li r4, 0x1a
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_8052793C_00001BD8
     mr r3, r31
@@ -2114,7 +2114,7 @@ lbl_fn_8052793C_00001BD8:
     mr r3, r29
     li r4, 0x19
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_8052793C_00001C10
     mr r3, r31
@@ -2133,7 +2133,7 @@ lbl_fn_8052793C_00001C1C:
     mr r3, r25
     li r4, 0x9
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_8052793C_00001C48
     mr r3, r31
@@ -2145,7 +2145,7 @@ lbl_fn_8052793C_00001C48:
     mr r3, r29
     li r4, 0x22
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_8052793C_00001C84
     mr r3, r31
@@ -2182,7 +2182,7 @@ lbl_fn_8052793C_00001CD0:
     mr r3, r25
     li r4, 0x9
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_8052793C_00001CFC
     mr r3, r31
@@ -2214,7 +2214,7 @@ lbl_fn_8052793C_00001D48:
     mr r3, r29
     li r4, 0x13
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_8052793C_00001D84
     mr r3, r31
@@ -2230,7 +2230,7 @@ lbl_fn_8052793C_00001D84:
     mr r3, r29
     li r4, 0x12
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_8052793C_00001DBC
     mr r3, r31
@@ -2257,7 +2257,7 @@ lbl_fn_8052793C_00001DE8:
     mr r3, r29
     li r4, 0x1a
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_8052793C_00001E24
     mr r3, r31
@@ -2273,7 +2273,7 @@ lbl_fn_8052793C_00001E24:
     mr r3, r29
     li r4, 0x19
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_8052793C_00001E5C
     mr r3, r31
@@ -2288,7 +2288,7 @@ lbl_fn_8052793C_00001E5C:
     mr r3, r29
     li r4, 0x39
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_8052793C_00001E98
     mr r3, r31
@@ -2304,7 +2304,7 @@ lbl_fn_8052793C_00001E98:
     mr r3, r29
     li r4, 0x38
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_8052793C_00001ED0
     mr r3, r31
@@ -2323,7 +2323,7 @@ lbl_fn_8052793C_00001EDC:
     mr r3, r29
     li r4, 0x17
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_8052793C_00001F18
     mr r3, r31
@@ -2339,7 +2339,7 @@ lbl_fn_8052793C_00001F18:
     mr r3, r29
     li r4, 0x16
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_8052793C_00001F50
     mr r3, r31
@@ -2373,7 +2373,7 @@ lbl_fn_8052793C_00001F98:
     mr r3, r29
     mr r4, r19
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_8052793C_00002010
     mr r3, r19

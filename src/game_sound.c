@@ -117,7 +117,7 @@ extern void fn_80718470(void);
 extern void fn_807184D0(void);
 extern void fn_807184F0(void);
 extern void fn_807186F0(void);
-extern void fn_80725170(void);
+extern void net_listClearAll(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -686,7 +686,7 @@ asm void fn_80046784(void)
     addic. r3, r3, 0xc
     beq lbl_fn_80046784_000005BC
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_80046784_000005BC:
     cmpwi r31, 0x0
     ble lbl_fn_80046784_000005CC
@@ -1192,7 +1192,7 @@ lbl_fn_800467E4_00000C68:
     addic. r3, r0, 0xc
     beq lbl_fn_800467E4_00000C80
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_800467E4_00000C80:
     addi r3, r30, 0x330
     li r4, -0x1

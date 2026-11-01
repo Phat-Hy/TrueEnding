@@ -18,7 +18,7 @@ extern void skeleton_getGlobalManager(void);
 extern void fn_800C1990(void);
 extern void atn_Task_setActive(void);
 extern void kpad_getClampData(void);
-extern void fn_8041D180(void);
+extern void battle_invokeVtableMethod(void);
 extern void fn_8041D198(void);
 extern void fn_80482DF4(void);
 extern void fn_80482E28(void);
@@ -1375,12 +1375,12 @@ asm void fn_80486BEC(void)
     stw r3, 0x18(r1)
     bne lbl_fn_80486BEC_00001380
     lis r6, lbl_807C88F0@ha
-    lis r4, fn_8041D180@ha
+    lis r4, battle_invokeVtableMethod@ha
     lis r3, fn_8041D198@ha
     li r0, 0x1
     addi r3, r3, fn_8041D198@l
     addi r5, r6, lbl_807C88F0@l
-    addi r4, r4, fn_8041D180@l
+    addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C88F0@l(r6)
     stb r0, lbl_8087F4C0
@@ -1495,12 +1495,12 @@ asm void fn_80486DAC(void)
     stw r3, 0x18(r1)
     bne lbl_fn_80486DAC_0000152C
     lis r6, lbl_807C88F0@ha
-    lis r4, fn_8041D180@ha
+    lis r4, battle_invokeVtableMethod@ha
     lis r3, fn_8041D198@ha
     li r0, 0x1
     addi r3, r3, fn_8041D198@l
     addi r5, r6, lbl_807C88F0@l
-    addi r4, r4, fn_8041D180@l
+    addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C88F0@l(r6)
     stb r0, lbl_8087F4C0
@@ -1578,12 +1578,12 @@ asm void fn_80486F50(void)
     stw r4, 0x18(r1)
     bne lbl_fn_80486F50_00001644
     lis r6, lbl_807C88F0@ha
-    lis r4, fn_8041D180@ha
+    lis r4, battle_invokeVtableMethod@ha
     lis r3, fn_8041D198@ha
     li r0, 0x1
     addi r3, r3, fn_8041D198@l
     addi r5, r6, lbl_807C88F0@l
-    addi r4, r4, fn_8041D180@l
+    addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)
     stw r3, lbl_807C88F0@l(r6)
     stb r0, lbl_8087F4C0

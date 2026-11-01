@@ -19,7 +19,7 @@ extern void enemy_evalAnimTrack(void);
 extern void fn_80133FBC(void);
 extern void boss_findPartById(void);
 extern void fn_80134168(void);
-extern void fn_801346C8(void);
+extern void boss_testAiFlag(void);
 extern void fn_8015E1B8(void);
 extern void battle_canTargetActor(void);
 extern void battle_evalDropTable(void);
@@ -1120,7 +1120,7 @@ lbl_fn_8010CD3C_00000D70:
     beq lbl_fn_8010CD3C_00000F04
     addi r3, r5, 0x7d4
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_8010CD3C_00000F04
     bl rand
@@ -1144,7 +1144,7 @@ lbl_fn_8010CD3C_00000DCC:
     addi r3, r5, 0x7d4
     li r4, 0x4
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_8010CD3C_00000F04
     lwz r3, 0x5c(r31)
@@ -1204,7 +1204,7 @@ lbl_fn_8010CD3C_00000EB0:
     addi r3, r5, 0x7d4
     li r4, 0x5
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_8010CD3C_00000F04
     bl rand

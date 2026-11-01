@@ -14,7 +14,7 @@ extern void fn_80243514(void);
 extern void fn_8067E558(void);
 extern void fn_8067E570(void);
 extern void fn_8068B39C(void);
-extern void fn_806920C0(void);
+extern void std_string_append(void);
 extern void fn_8069293C(void);
 extern void msl_releaseRefCount(void);
 
@@ -105,7 +105,7 @@ lbl_fn_8023F5E0_000000D4:
     stw r5, lbl_80880390
     stw r5, lbl_808803C0
 lbl_fn_8023F5E0_000000F4:
-    bl fn_806920C0
+    bl std_string_append
     lwz r3, 0x28(r1)
     slwi r0, r24, 2
     lwz r3, 0x0(r3)
@@ -334,7 +334,7 @@ lbl_fn_8023F5E0_00000400:
     stw r5, lbl_80880390
     stw r5, lbl_808803C0
 lbl_fn_8023F5E0_00000420:
-    bl fn_806920C0
+    bl std_string_append
     lwz r3, 0x20(r1)
     slwi r0, r24, 2
     lwz r3, 0x0(r3)
@@ -701,7 +701,7 @@ lbl_fn_8023FD90_000008D0:
     stw r5, lbl_80880390
     stw r5, lbl_808803C0
 lbl_fn_8023FD90_000008F0:
-    bl fn_806920C0
+    bl std_string_append
     lwz r3, 0x18(r1)
     slwi r0, r25, 2
     lwz r3, 0x0(r3)
@@ -763,7 +763,7 @@ lbl_fn_8023FD90_000009B0:
     stw r5, lbl_80880390
     stw r5, lbl_808803C0
 lbl_fn_8023FD90_000009D0:
-    bl fn_806920C0
+    bl std_string_append
     lwz r3, 0x10(r1)
     slwi r0, r25, 2
     lwz r3, 0x0(r3)

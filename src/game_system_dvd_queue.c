@@ -28,7 +28,7 @@ extern void fn_804A5E40(void);
 extern void fn_805BDCC0(void);
 extern void fn_805BF1EC(void);
 extern void fn_805BF208(void);
-extern void fn_805BF414(void);
+extern void gx_evaluateVector3f(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -167,7 +167,7 @@ lbl_fn_80379104_000000A0:
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     psq_l f1, 0x0(r25), 0, 0
     mr r3, r26
     lfs f2, 0x10(r1)
@@ -1220,7 +1220,7 @@ lbl_fn_803792F0_00001058:
     li r5, 0x7
     li r6, 0x8
     li r7, 0x9
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     addi r3, r1, 0x38c
     addi r4, r1, 0x398
     psq_l f1, 0x0(r3), 0, 0
@@ -1254,7 +1254,7 @@ lbl_fn_803792F0_00001058:
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     addi r3, r1, 0x374
     addi r4, r1, 0x380
     psq_l f1, 0x0(r3), 0, 0
@@ -1363,7 +1363,7 @@ lbl_fn_803792F0_00001264:
     li r5, 0x4
     li r6, 0x5
     li r7, 0x6
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     lfs f9, 0x358(r1)
     addi r3, r1, 0xa68
     lfs f0, lbl_808858A8
@@ -1542,7 +1542,7 @@ lbl_fn_803792F0_00001524:
     li r5, 0x7
     li r6, 0x8
     li r7, 0x9
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     addi r3, r1, 0x320
     addi r4, r1, 0x32c
     psq_l f1, 0x0(r3), 0, 0
@@ -1578,7 +1578,7 @@ lbl_fn_803792F0_00001524:
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     addi r3, r1, 0x308
     addi r4, r1, 0x314
     psq_l f1, 0x0(r3), 0, 0
@@ -1682,7 +1682,7 @@ lbl_fn_803792F0_00001734:
     li r5, 0x4
     li r6, 0x5
     li r7, 0x6
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     lfs f9, 0x2e0(r1)
     addi r3, r1, 0x9d8
     lfs f0, lbl_808858A8
@@ -2046,7 +2046,7 @@ lbl_fn_803792F0_00001CAC:
     li r5, 0x7
     li r6, 0x8
     li r7, 0x9
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     addi r3, r1, 0x2b4
     addi r4, r1, 0x2c0
     psq_l f1, 0x0(r3), 0, 0
@@ -2080,7 +2080,7 @@ lbl_fn_803792F0_00001CAC:
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     addi r3, r1, 0x29c
     addi r4, r1, 0x2a8
     psq_l f1, 0x0(r3), 0, 0
@@ -2211,7 +2211,7 @@ lbl_fn_803792F0_00001F00:
     li r5, 0x4
     li r6, 0x5
     li r7, 0x6
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     lfs f9, 0x274(r1)
     addi r3, r1, 0x8e8
     lfs f0, lbl_808858A8
@@ -2328,7 +2328,7 @@ lbl_fn_803792F0_000020DC:
     li r5, 0x7
     li r6, 0x8
     li r7, 0x9
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     addi r3, r1, 0x254
     addi r4, r1, 0x260
     psq_l f1, 0x0(r3), 0, 0
@@ -2367,7 +2367,7 @@ lbl_fn_803792F0_000020DC:
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     addi r3, r1, 0x23c
     addi r4, r1, 0x248
     psq_l f1, 0x0(r3), 0, 0
@@ -2395,7 +2395,7 @@ lbl_fn_803792F0_000020DC:
     li r7, 0x6
     stfs f10, 0x528(r1)
     stfs f0, 0x52c(r1)
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     lfs f1, 0x238(r1)
     addi r3, r1, 0x858
     li r4, 0x7a
@@ -2898,7 +2898,7 @@ lbl_fn_803792F0_00002978:
     li r5, 0x7
     li r6, 0x8
     li r7, 0x9
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     addi r3, r1, 0x1ac
     addi r4, r1, 0x1b8
     psq_l f1, 0x0(r3), 0, 0
@@ -2937,7 +2937,7 @@ lbl_fn_803792F0_00002978:
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     addi r3, r1, 0x194
     addi r4, r1, 0x1a0
     psq_l f1, 0x0(r3), 0, 0
@@ -2965,7 +2965,7 @@ lbl_fn_803792F0_00002978:
     li r7, 0x6
     stfs f10, 0x528(r1)
     stfs f0, 0x52c(r1)
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     lfs f1, 0x190(r1)
     addi r3, r1, 0x7c8
     li r4, 0x7a

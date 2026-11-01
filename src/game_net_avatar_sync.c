@@ -35,7 +35,7 @@ extern void actor_spawnActorWithId(void);
 extern void fn_80117914(void);
 extern void fn_80119ECC(void);
 extern void fn_8012AFE8(void);
-extern void fn_801346C8(void);
+extern void boss_testAiFlag(void);
 extern void fn_801D082C(void);
 extern void save_validateHeader(void);
 extern void save_formatSlotTitle(void);
@@ -235,7 +235,7 @@ asm void fn_80528314(void)
     mr r28, r9
     mr r4, r29
     li r5, 0x0
-    bl fn_801346C8
+    bl boss_testAiFlag
     cmpwi r3, 0x0
     beq lbl_fn_80528314_00000194
     lis r30, lbl_8075CED4@ha

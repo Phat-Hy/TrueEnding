@@ -52,7 +52,7 @@ extern void fn_804A4300(void);
 extern void fn_804A5B9C(void);
 extern void fn_80572B70(void);
 extern void fn_805BDCC0(void);
-extern void fn_805BF414(void);
+extern void gx_evaluateVector3f(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
@@ -1529,7 +1529,7 @@ lbl_fn_803786FC_000013E4:
     li r5, 0x7
     li r6, 0x8
     li r7, 0x9
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     addi r3, r1, 0x20
     addi r4, r1, 0x2c
     psq_l f1, 0x0(r3), 0, 0
@@ -1567,7 +1567,7 @@ lbl_fn_803786FC_000013E4:
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_805BF414
+    bl gx_evaluateVector3f
     addi r3, r1, 0x8
     addi r4, r1, 0x14
     psq_l f1, 0x0(r3), 0, 0

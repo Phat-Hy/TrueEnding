@@ -20,7 +20,7 @@ extern void fn_8001BC38(void);
 extern void fn_8001BCB4(void);
 extern void fn_8001BD14(void);
 extern void entity_isActive(void);
-extern void fn_8001BEB0(void);
+extern void entity_checkActorType(void);
 extern void fn_8001BF44(void);
 extern void fn_8001BF58(void);
 extern void fn_8001BF64(void);
@@ -3876,7 +3876,7 @@ asm void fn_8003CDB0(void)
     fcmpo cr0, f2, f1
     bge lbl_fn_8003CDB0_00003640
     lwz r3, lbl_807C68C0@l(r30)
-    bl fn_8001BEB0
+    bl entity_checkActorType
     cmpwi r3, 0x0
     beq lbl_fn_8003CDB0_000034E0
     li r0, 0x0
@@ -4137,7 +4137,7 @@ lbl_fn_8003D084_0000382C:
     cmpwi r3, 0x0
     beq lbl_fn_8003D084_0000392C
     lwz r3, lbl_807C68C0@l(r30)
-    bl fn_8001BEB0
+    bl entity_checkActorType
     cmpwi r3, 0x0
     beq lbl_fn_8003D084_00003864
     lis r3, lbl_807C6A40@ha
@@ -4337,7 +4337,7 @@ asm void fn_8003D3F8(void)
     fcmpo cr0, f2, f0
     bge lbl_fn_8003D3F8_00003C10
     lwz r3, lbl_807C68C0@l(r30)
-    bl fn_8001BEB0
+    bl entity_checkActorType
     cmpwi r3, 0x0
     beq lbl_fn_8003D3F8_00003B44
     li r0, 0x0
@@ -4553,7 +4553,7 @@ asm void fn_8003D6E8(void)
     cror eq, gt, eq
     bne lbl_fn_8003D6E8_00003EB8
     lwz r3, lbl_807C68C0@l(r30)
-    bl fn_8001BEB0
+    bl entity_checkActorType
     cmpwi r3, 0x0
     beq lbl_fn_8003D6E8_00003E24
     li r3, -0x1
@@ -4873,7 +4873,7 @@ asm void effect_testLifetime(void)
     fcmpo cr0, f2, f0
     blt lbl_effect_testLifetime_000042B0
     lwz r3, lbl_807C68C0@l(r30)
-    bl fn_8001BEB0
+    bl entity_checkActorType
     cmpwi r3, 0x0
     beq lbl_effect_testLifetime_00004308
 lbl_effect_testLifetime_000042B0:

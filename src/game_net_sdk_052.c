@@ -55,7 +55,7 @@ extern void fn_807204D0(void);
 extern void fn_80720760(void);
 extern void fn_80720C70(void);
 extern void fn_80720E20(void);
-extern void fn_80725170(void);
+extern void net_listClearAll(void);
 extern void net_listInsertNode(void);
 extern void net_listRemoveNode(void);
 
@@ -1234,7 +1234,7 @@ asm void fn_8070C6E0(void)
     beq lbl_fn_8070C6E0_00000F6C
     beq lbl_fn_8070C6E0_00000F5C
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_8070C6E0_00000F5C:
     cmpwi r31, 0x0
     ble lbl_fn_8070C6E0_00000F6C
@@ -1874,7 +1874,7 @@ lbl_fn_8070CED0_00001768:
     beq lbl_fn_8070CED0_00001784
     mr r3, r28
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_8070CED0_00001784:
     cmpwi r29, 0x0
     ble lbl_fn_8070CED0_00001794
@@ -2251,7 +2251,7 @@ lbl_fn_8070D380_00001C48:
     addic. r3, r29, 0x8
     beq lbl_fn_8070D380_00001C64
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_8070D380_00001C64:
     mr r4, r29
     addi r3, r27, 0x4
@@ -2271,7 +2271,7 @@ lbl_fn_8070D380_00001C98:
     addic. r3, r27, 0x4
     beq lbl_fn_8070D380_00001CA8
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_8070D380_00001CA8:
     cmpwi r28, 0x0
     ble lbl_fn_8070D380_00001CB8
@@ -2332,7 +2332,7 @@ lbl_fn_8070D490_00001D60:
     addic. r3, r29, 0x8
     beq lbl_fn_8070D490_00001D7C
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_8070D490_00001D7C:
     mr r4, r29
     addi r3, r26, 0x4
@@ -2453,7 +2453,7 @@ lbl_fn_8070D630_00001EFC:
     addic. r3, r29, 0x8
     beq lbl_fn_8070D630_00001F18
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_8070D630_00001F18:
     mr r4, r29
     addi r3, r28, 0x4
@@ -2522,7 +2522,7 @@ lbl_fn_8070D720_00001FE0:
     addic. r3, r29, 0x8
     beq lbl_fn_8070D720_00001FFC
     li r4, 0x0
-    bl fn_80725170
+    bl net_listClearAll
 lbl_fn_8070D720_00001FFC:
     mr r4, r29
     addi r3, r28, 0x4

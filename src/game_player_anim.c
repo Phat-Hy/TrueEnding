@@ -26,7 +26,7 @@ extern void strcmp(void);
 extern void __construct_new_array(void);
 extern void __destroy_arr(void);
 extern void __ptmf_scall(void);
-extern void fn_8072D210(void);
+extern void math_normalizeAngle(void);
 
 /* External data declarations */
 extern u8 lbl_8077A150[];
@@ -1536,17 +1536,17 @@ lbl_fn_8011D844_000013E8:
     fmuls f0, f0, f30
     lfs f25, 0x1c(r5)
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     fmuls f0, f24, f30
     addi r3, r1, 0xc
     addi r4, r1, 0x18
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     fmuls f0, f25, f30
     addi r3, r1, 0x8
     addi r4, r1, 0x14
     fmuls f1, f31, f0
-    bl fn_8072D210
+    bl math_normalizeAngle
     lfs f11, 0x18(r1)
     mr r3, r23
     lfs f8, 0x10(r1)
