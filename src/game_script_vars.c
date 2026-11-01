@@ -21,7 +21,7 @@ extern void fn_80139560(void);
 extern void fn_80144710(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015EB2C(void);
 extern void debuff_clearStatus(void);
@@ -1550,7 +1550,7 @@ lbl_fn_80249004_00001458:
     mr r3, r30
     bl quest_updateFlow
     mr r3, r30
-    bl fn_8014C540
+    bl dialog_updateScriptState
     b lbl_fn_80249004_000015FC
 lbl_fn_80249004_00001474:
     mr r3, r30
@@ -1558,7 +1558,7 @@ lbl_fn_80249004_00001474:
     mr r3, r30
     bl quest_updateFlow
     mr r3, r30
-    bl fn_8014C540
+    bl dialog_updateScriptState
     b lbl_fn_80249004_000015FC
 lbl_fn_80249004_00001490:
     lwz r0, 0xd18(r3)
@@ -1625,7 +1625,7 @@ lbl_fn_80249004_00001490:
     stw r0, 0x1500(r30)
     bl quest_updateFlow
     mr r3, r30
-    bl fn_8014C540
+    bl dialog_updateScriptState
     li r31, 0x0
 lbl_fn_80249004_00001598:
     cmpwi r31, 0x0

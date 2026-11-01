@@ -12,7 +12,7 @@ extern void _savegpr_24(void);
 extern void dtor_80084684(void);
 extern void fn_80041C0C(void);
 extern void fn_80042740(void);
-extern void fn_8005BCE8(void);
+extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
@@ -177,7 +177,7 @@ asm void fn_803EFCA8(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x0(r29)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lwz r31, 0x1c(r1)
     mr r3, r29
     lwz r30, 0x18(r1)

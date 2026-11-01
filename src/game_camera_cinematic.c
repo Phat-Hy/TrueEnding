@@ -13,7 +13,7 @@ extern void system_getNextSequenceId(void);
 extern void fn_80126214(void);
 extern void fn_8013A258(void);
 extern void fn_8013C38C(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void quest_ctorRewardItem(void);
 extern void dialog_renderWindow(void);
 extern void fn_80151448(void);
@@ -966,7 +966,7 @@ lbl_fn_802E37DC_00000C48:
     addi r4, r1, 0x80
     fmuls f2, f30, f0
     li r5, 0x0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_802E37DC_00000C64:
     lwz r0, 0x154(r1)
     psq_l f31, 0x148(r1), 0, 0

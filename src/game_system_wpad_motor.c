@@ -124,7 +124,7 @@ extern void fn_80470528(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_8047E528(void);
 extern void fn_8047F91C(void);
 extern void fn_8047F994(void);
@@ -2345,7 +2345,7 @@ lbl_world_Manager_draw_00001DD8:
     mr r4, r24
     bl fn_8046F96C
     addi r3, r28, 0x550c
-    bl fn_80473F88
+    bl shockwave_freeEmitter
 lbl_world_Manager_draw_00001E0C:
     lwz r3, lbl_8087F448
     cmpwi r3, 0x0

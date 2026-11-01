@@ -15,8 +15,8 @@ extern void fn_8004B290(void);
 extern void fn_8004B338(void);
 extern void atn_ColliBase_destructor(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void fn_8006A004(void);
 extern void fn_8006AD24(void);
 extern void fn_8006B0C8(void);
@@ -1443,7 +1443,7 @@ asm void fn_801371AC(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x870(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     li r0, 0x20
     addi r3, r1, 0x76c
     mtctr r0
@@ -2076,7 +2076,7 @@ lbl_fn_801371AC_00001AD4:
     bl dtor_80084684
 lbl_fn_801371AC_00001AE8:
     addi r3, r1, 0x870
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_801371AC_0000122C
     lmw r16, 0xeb0(r1)

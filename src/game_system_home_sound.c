@@ -11,9 +11,9 @@ extern void dtor_80084684(void);
 extern void fn_8000D430(void);
 extern void fn_8004A2CC(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
-extern void fn_80061824(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
+extern void skill_calcTrajectory(void);
 extern void fn_8006A250(void);
 extern void fn_8006BA30(void);
 extern void fn_8006F2F0(void);
@@ -185,7 +185,7 @@ asm void fn_803637D4(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x34(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r31, lbl_8074B780@ha
     addi r31, r31, lbl_8074B780@l
 lbl_fn_803637D4_000000B0:
@@ -237,7 +237,7 @@ lbl_fn_803637D4_00000134:
     bl fn_80093F58
 lbl_fn_803637D4_00000160:
     addi r3, r1, 0x34
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_803637D4_000000B0
     lwz r0, 0x684(r1)
@@ -1290,7 +1290,7 @@ lbl_dvd_initFatalErrorScreen_00000FB0:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     addi r23, r23, 0x1
     addi r22, r22, 0x4
     cmplwi r23, 0x4

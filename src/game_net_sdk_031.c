@@ -46,7 +46,7 @@ extern void fn_806E8B60(void);
 extern void fn_806E8E10(void);
 extern void fn_806E8EC0(void);
 extern void fn_806E91A0(void);
-extern void fn_806E91F0(void);
+extern void net_copyStringSafe(void);
 extern void fn_806E9230(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -638,7 +638,7 @@ lbl_fn_806DFEC0_000007DC:
     bne lbl_fn_806DFEC0_00000824
     mr r3, r29
     addi r4, r28, 0x188
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DFEC0_00000894
 lbl_fn_806DFEC0_00000824:
@@ -1563,7 +1563,7 @@ lbl_fn_806E0DE0_000014B0:
     bne lbl_fn_806E0DE0_000014F0
     mr r3, r26
     addi r4, r31, 0x108
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x2
     b lbl_fn_806E0DE0_00001500
 lbl_fn_806E0DE0_000014F0:
@@ -1900,7 +1900,7 @@ lbl_fn_806E0DE0_00001960:
     bne lbl_fn_806E0DE0_000019A0
     mr r3, r26
     addi r4, r31, 0x180
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806E0DE0_000019FC
 lbl_fn_806E0DE0_000019A0:
@@ -2038,7 +2038,7 @@ asm void fn_806E17D0(void)
     cmpwi r5, 0x0
     bge lbl_fn_806E17D0_00001BA0
     addi r4, r30, 0x1d4
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x2
     b lbl_fn_806E17D0_00002358
 lbl_fn_806E17D0_00001BA0:
@@ -2150,7 +2150,7 @@ lbl_fn_806E17D0_00001D00:
     b lbl_fn_806E17D0_00002358
 lbl_fn_806E17D0_00001D0C:
     addi r4, r30, 0x1f8
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x2
     b lbl_fn_806E17D0_00002358
     addi r3, r1, 0x8
@@ -2598,7 +2598,7 @@ lbl_fn_806E17D0_00002334:
 lbl_fn_806E17D0_00002340:
     mr r3, r31
     addi r4, r30, 0x284
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x2
     b lbl_fn_806E17D0_00002358
 lbl_fn_806E17D0_00002354:

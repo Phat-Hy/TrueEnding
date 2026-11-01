@@ -11,7 +11,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
 extern void quest_updateFlow(void);
 extern void quest_ctorRewardItem(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
@@ -285,7 +285,7 @@ lbl_fn_8029D7AC_000002BC:
     stw r0, 0x1554(r31)
 lbl_fn_8029D7AC_000002E0:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
     bl quest_updateFlow
     lwz r12, 0x0(r31)

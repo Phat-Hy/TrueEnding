@@ -14,7 +14,7 @@ extern void dtor_80084684(void);
 extern void fn_8004B290(void);
 extern void fn_8004B338(void);
 extern void item_useConsumable(void);
-extern void fn_80061824(void);
+extern void skill_calcTrajectory(void);
 extern void atn_normalizePath(char* str);
 extern void fn_8006B404(void);
 extern void fn_80079044(void);
@@ -39,7 +39,7 @@ extern void fn_80472FAC(void);
 extern void fn_8047304C(void);
 extern void fn_804730D4(void);
 extern void fn_80473104(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_805BDD20(void);
 extern void fn_805BDD78(void);
 extern void fn_80615FF0(void);
@@ -502,7 +502,7 @@ asm void atn_LH_Scene_onNotify(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r3, lbl_8087F518
     mr r4, r31
     li r5, 0x1
@@ -867,7 +867,7 @@ asm void atn_LH_Texture_onNotify(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r3, lbl_8087F518
     mr r4, r31
     li r5, 0x1
@@ -1099,7 +1099,7 @@ asm void atn_LH_Xsca_onNotify(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r3, lbl_8087F518
     mr r4, r31
     li r5, 0x1
@@ -2141,7 +2141,7 @@ lbl_fn_80478A70_00001B18:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f0, 0x130(r1)
     fcmpo cr0, f0, f27
     cror eq, gt, eq
@@ -2233,7 +2233,7 @@ lbl_fn_80478A70_00001C50:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     addi r23, r23, 0x1
     cmplwi r23, 0x8
     blt lbl_fn_80478A70_00001390
@@ -2272,7 +2272,7 @@ lbl_fn_80478A70_00001CE0:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     addi r20, r20, 0x90
     addi r21, r21, 0x1
 lbl_fn_80478A70_00001D44:

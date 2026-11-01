@@ -15,7 +15,7 @@ extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void fn_800FDE60(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void fn_8012D8B8(void);
 extern void fn_801446F0(void);
 extern void fn_8016E4C4(void);
@@ -3480,7 +3480,7 @@ lbl_fn_8050158C_00001BC8:
     bl fn_801F4CB4
     li r3, 0x0
     li r4, 0x79
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r19, r3
     addi r3, r20, 0x28
     bl str_findChar
@@ -3547,7 +3547,7 @@ lbl_fn_8050158C_00001D24:
     bl fn_801F4CB4
     li r3, 0x0
     li r4, 0x72
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r19, r3
     addi r3, r20, 0x28
     bl str_findChar
@@ -3676,7 +3676,7 @@ lbl_fn_8050158C_00001F20:
     bl fn_801F4CB4
     li r3, 0x0
     li r4, 0x79
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r19, r3
     addi r3, r20, 0x8d
     bl str_findChar
@@ -3743,7 +3743,7 @@ lbl_fn_8050158C_00002028:
     bl fn_801F4CB4
     li r3, 0x0
     li r4, 0x72
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r19, r3
     addi r3, r20, 0x8d
     bl str_findChar

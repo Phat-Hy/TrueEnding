@@ -36,7 +36,7 @@ extern void str_parseInt(void);
 extern void str_findChar(void);
 extern void fn_800DCA6C(void);
 extern void atn_LoadHandle_getName(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_804741C0(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -727,7 +727,7 @@ asm void fn_80097A20(void)
     lwz r5, 0x228(r3)
     add r31, r5, r0
     mr r3, r31
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     stw r0, 0x8(r31)
     slwi r0, r30, 4

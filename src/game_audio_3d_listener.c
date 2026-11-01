@@ -34,7 +34,7 @@ extern void fn_80129978(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_801A03E8(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80239D58(void);
@@ -1721,7 +1721,7 @@ lbl_fn_8031F654_00001668:
     stw r0, 0x156c(r31)
     psq_st f1, 0x0(r5), 0, 0
     stfs f2, 0x10(r1)
-    bl fn_8014C540
+    bl dialog_updateScriptState
     lwz r0, 0x7e0(r31)
     rlwinm r0, r0, 0, 26, 26
     cmplwi r0, 0x20

@@ -28,7 +28,7 @@ extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void quest_ctorRewardItem(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_8015AC48(void);
 extern void fn_8016E4C4(void);
 extern void actor_setState(void);
@@ -1282,7 +1282,7 @@ asm void fn_80310EF8(void)
     mtctr r12
     bctrl
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     lwz r0, 0x38(r31)
     clrlwi r0, r0, 31
     cmplwi r0, 0x1

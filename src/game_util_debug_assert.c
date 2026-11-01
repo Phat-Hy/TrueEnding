@@ -10,7 +10,7 @@ extern void _savegpr_22(void);
 extern void dtor_80084684(void);
 extern void mem_free(void);
 extern void str_findChar(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void fn_801F4AA0(void);
 extern void fn_801F4CB4(void);
 extern void saveSlot_readSummary(void);
@@ -2187,7 +2187,7 @@ lbl_fn_80597558_00001EF8:
     lwz r17, lbl_8087F580
     li r3, 0x1
     li r4, 0x15b
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     mr r3, r17
     li r5, 0x0
@@ -2226,7 +2226,7 @@ lbl_fn_80597558_00001F88:
     lwz r17, lbl_8087F580
     li r3, 0x1
     li r4, 0x15b
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     mr r3, r17
     li r5, 0x0
@@ -2448,7 +2448,7 @@ lbl_fn_80597558_000022C8:
     addi r4, r26, 0x0
     lwzx r4, r4, r20
     li r3, 0x0
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x368(r1)
     mr r25, r3
     addi r3, r1, 0xe8

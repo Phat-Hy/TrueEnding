@@ -14,7 +14,7 @@ extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void fn_801F4AA0(void);
 extern void fn_801FEC74(void);
 extern void thread_findAndNotifySlot(void);
@@ -1462,7 +1462,7 @@ lbl_fn_804AF520_00001338:
     addi r4, r3, 0x547b
     stfs f0, 0x100(r5)
     li r3, 0x0
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x88(r30)
     lis r5, lbl_80757B7C@ha
     addi r5, r5, lbl_80757B7C@l

@@ -14,14 +14,14 @@ extern void _savegpr_26(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void str_initFromCStr(void);
-extern void fn_8004212C(void);
+extern void str_getData(void);
 extern void fn_80043EAC(void);
 extern void Arms_destructor(void);
 extern void Arms_execute(void);
 extern void Arms_slot3(void);
 extern void fn_80057A64(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
+extern void talk_parseQuotes(void);
 extern void fn_80063200(void);
 extern void fn_8006AA20(void);
 extern void mem_alloc(void);
@@ -2252,7 +2252,7 @@ lbl_fn_8043DD78_00001C84:
     stw r3, 0xf8(r29)
 lbl_fn_8043DD78_00001CC8:
     addi r3, r1, 0x130
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_8043DD78_00001AAC
     addi r3, r29, 0x140
@@ -2262,7 +2262,7 @@ lbl_fn_8043DD78_00001CC8:
     b lbl_fn_8043DD78_00001D1C
 lbl_fn_8043DD78_00001CEC:
     addi r3, r29, 0x108
-    bl fn_8004212C
+    bl str_getData
     mr r31, r3
     mr r4, r30
     addi r3, r29, 0x124

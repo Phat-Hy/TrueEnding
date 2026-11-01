@@ -30,7 +30,7 @@ extern void fn_801092C8(void);
 extern void fn_80109828(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
@@ -2185,7 +2185,7 @@ lbl_fn_802E289C_00001CCC:
     lfs f0, 0x14c8(r31)
     mr r3, r31
     stfs f0, 0x52c(r31)
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
     bl quest_updateFlow
     lfs f2, 0x530(r31)

@@ -8,8 +8,8 @@ extern void dtor_80084684(void);
 extern void fn_80056DB8(void);
 extern void atn_ColliBase_destructor(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
@@ -196,7 +196,7 @@ asm void fn_8042049C(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x34(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r24, lbl_80753230@ha
     lis r20, lbl_807C7030@ha
     lfs f30, lbl_808865C0
@@ -422,7 +422,7 @@ lbl_fn_8042049C_000003F4:
     stw r30, 0x14c(r31)
 lbl_fn_8042049C_0000040C:
     addi r3, r1, 0x34
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_8042049C_00000108
     addi r11, r1, 0x6a0
@@ -792,7 +792,7 @@ asm void fn_80420D0C(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r30, lbl_807532E0@ha
     li r31, 0x1
     addi r30, r30, lbl_807532E0@l
@@ -855,7 +855,7 @@ lbl_fn_80420D0C_000009E4:
     stfs f1, 0x4f0(r28)
 lbl_fn_80420D0C_00000A08:
     addi r3, r1, 0x8
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_80420D0C_00000934
     lwz r0, 0x654(r1)
@@ -1956,7 +1956,7 @@ asm void fn_80421CCC(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r31, lbl_807533C8@ha
     addi r31, r31, lbl_807533C8@l
 lbl_fn_80421CCC_000018EC:
@@ -2007,7 +2007,7 @@ lbl_fn_80421CCC_00001970:
     bl res_MsgHandle_destructor
 lbl_fn_80421CCC_00001998:
     addi r3, r1, 0x8
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_80421CCC_000018EC
     lwz r0, 0x654(r1)

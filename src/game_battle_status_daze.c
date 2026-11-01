@@ -10,8 +10,8 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
@@ -243,7 +243,7 @@ asm void fn_8042E064(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r31, lbl_80753E98@ha
     addi r31, r31, lbl_80753E98@l
 lbl_fn_8042E064_00000144:
@@ -349,7 +349,7 @@ lbl_fn_8042E064_000002A0:
     blt lbl_fn_8042E064_000002A0
 lbl_fn_8042E064_000002C0:
     addi r3, r1, 0x8
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_8042E064_00000144
     lwz r0, 0x654(r1)
@@ -949,7 +949,7 @@ asm void fn_8042E9F4(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x108(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r31, lbl_80753ED0@ha
     addi r31, r31, lbl_80753ED0@l
 lbl_fn_8042E9F4_00000AD0:
@@ -1025,7 +1025,7 @@ lbl_fn_8042E9F4_00000B98:
     bl atn_Anim_applyLayerTransform
 lbl_fn_8042E9F4_00000BDC:
     addi r3, r1, 0x108
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_8042E9F4_00000AD0
     lwz r0, 0x754(r1)
@@ -1082,7 +1082,7 @@ asm void fn_8042EBDC(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r30, lbl_80753ED0@ha
     li r31, 0x1
     addi r30, r30, lbl_80753ED0@l
@@ -1166,7 +1166,7 @@ lbl_fn_8042EBDC_00000D7C:
     stw r3, 0x87c(r28)
 lbl_fn_8042EBDC_00000DF0:
     addi r3, r1, 0x8
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_8042EBDC_00000CC0
     lwz r0, 0x654(r1)

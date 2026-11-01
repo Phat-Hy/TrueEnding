@@ -12,7 +12,7 @@ extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
 extern void fn_80060D58(void);
 extern void fn_800610A4(void);
-extern void fn_80061824(void);
+extern void skill_calcTrajectory(void);
 extern void fn_8006F420(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
@@ -732,7 +732,7 @@ lbl_fn_80505C20_000007E0:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lwz r0, 0x74(r1)
     psq_l f31, 0x68(r1), 0, 0
     lfd f31, 0x60(r1)

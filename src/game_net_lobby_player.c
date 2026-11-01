@@ -43,7 +43,7 @@ extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getName(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_804786F8(void);
 extern void fn_80491418(void);
 extern void fn_80491440(void);
@@ -1057,7 +1057,7 @@ lbl_fn_8049DDD8_00000C84:
     bl fn_800BDB40
     bl fn_8009FE24
     addi r3, r30, 0x60
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     addic. r3, r30, 0xfc
     beq lbl_fn_8049DDD8_00000CA8
     bl fn_80470528
@@ -1265,7 +1265,7 @@ lbl_fn_8049DEE4_00000E88:
     stfs f0, 0x48(r3)
 lbl_fn_8049DEE4_00000F88:
     addi r3, r27, 0x58
-    bl fn_80473F88
+    bl shockwave_freeEmitter
 lbl_fn_8049DEE4_00000F90:
     mr r3, r27
     bl bloom_processPasses

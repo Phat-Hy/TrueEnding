@@ -15,8 +15,8 @@ extern void fn_80051CD8(void);
 extern void fn_8005454C(void);
 extern void talk_parseQuotedString(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void skill_calculateDamage(void);
 extern void fn_800629F0(void);
 extern void fn_80063764(void);
@@ -51,7 +51,7 @@ extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void PSMTXRotRad(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
@@ -1947,7 +1947,7 @@ lbl_fn_8036354C_000018F4:
     mr r3, r31
     bl fn_803637D4
     addi r3, r31, 0x3ec
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x2
     stw r0, 0x3f4(r31)
 lbl_fn_8036354C_0000191C:
@@ -2007,7 +2007,7 @@ asm void fn_803635E8(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x308(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r31, lbl_8074B780@ha
     addi r31, r31, lbl_8074B780@l
 lbl_fn_803635E8_000019F4:
@@ -2084,7 +2084,7 @@ lbl_fn_803635E8_00001AB0:
     bl atn_Anim_applyLayerTransform
 lbl_fn_803635E8_00001B04:
     addi r3, r1, 0x308
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_803635E8_000019F4
     lwz r0, 0x954(r1)

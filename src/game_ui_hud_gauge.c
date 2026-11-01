@@ -36,7 +36,7 @@ extern void fn_80116E6C(void);
 extern void fn_8012A1B8(void);
 extern void fn_8013A13C(void);
 extern void fn_8013C3B4(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_8014052C(void);
 extern void fn_801446F0(void);
 extern void actor_getMovementFlags(void);
@@ -1309,7 +1309,7 @@ lbl_fn_801C2870_00001070:
     stfs f2, 0x4c(r1)
     lwz r3, 0x4(r29)
     lfs f2, 0x2c(r29)
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     lfs f3, 0x234(r30)
     lfs f0, lbl_80882704
     fcmpo cr0, f3, f0

@@ -25,7 +25,7 @@ extern void str_skipWhitespace(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_801588A0(void);
 extern void fn_8020A780(void);
 extern void task_findEntryById(void);
@@ -1721,7 +1721,7 @@ lbl_fn_802AD930_000016C4:
     blt lbl_fn_802AD930_00001648
 lbl_fn_802AD930_000016D0:
     mr r3, r30
-    bl fn_8014C540
+    bl dialog_updateScriptState
     lwz r0, 0x38(r30)
     clrlwi r0, r0, 31
     cmplwi r0, 0x1

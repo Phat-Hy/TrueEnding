@@ -24,7 +24,7 @@ extern void fn_8013C38C(void);
 extern void fn_80144710(void);
 extern void fn_80148B0C(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void actor_setState(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -625,7 +625,7 @@ lbl_fn_804541A0_00000708:
     bl fn_80454538
 lbl_fn_804541A0_00000718:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
     bl fn_80454F08
     mr r3, r31

@@ -32,7 +32,7 @@ extern void fn_8011FC10(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80139560(void);
 extern void quest_updateFlow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_8015E7A0(void);
 extern void fn_8015ECC4(void);
 extern void fn_80166A54(void);
@@ -1906,7 +1906,7 @@ lbl_fn_80256C04_000019C8:
     bl fn_80139560
 lbl_fn_80256C04_000019DC:
     mr r3, r15
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r15
     bl quest_updateFlow
     lwz r0, 0x1650(r15)

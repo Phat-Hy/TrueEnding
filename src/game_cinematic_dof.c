@@ -14,7 +14,7 @@ extern void fn_8000DCF4(void);
 extern void fn_8000DD0C(void);
 extern void str_initFromCStr(void);
 extern void fn_8004203C(void);
-extern void fn_8004212C(void);
+extern void str_getData(void);
 extern void collision_testLineSegment(void);
 extern void fn_80057A64(void);
 extern void fn_80057A68(void);
@@ -60,7 +60,7 @@ extern void fn_8013C38C(void);
 extern void fn_8013C480(void);
 extern void fn_8013C504(void);
 extern void quest_updateFlow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_8015ECC4(void);
 extern void fn_8016E4C4(void);
 extern void actor_setState(void);
@@ -690,7 +690,7 @@ asm void fn_803388A4(void)
 lbl_fn_803388A4_000006EC:
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     addi r4, r29, 0x34
     li r5, 0x8
     bl strncmp
@@ -698,7 +698,7 @@ lbl_fn_803388A4_000006EC:
     bne lbl_fn_803388A4_00000728
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     addi r3, r1, 0x20
     addi r4, r4, 0x8
@@ -727,7 +727,7 @@ lbl_fn_803388A4_00000730:
     addi r5, r1, 0x20
     bl fn_8006AFF8
     addi r3, r1, 0x8
-    bl fn_8004212C
+    bl str_getData
     lwz r12, 0x16b8(r31)
     mr r4, r3
     addi r3, r31, 0x16b8
@@ -2060,7 +2060,7 @@ lbl_fn_80339760_00001A28:
     bl fn_80339F84
 lbl_fn_80339760_00001A5C:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
     bl quest_updateFlow
     mr r3, r31

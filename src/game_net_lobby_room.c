@@ -49,7 +49,7 @@ extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getStatus(void);
 extern void atn_LoadHandle_getName(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_80490884(void);
 extern void fn_80490B0C(void);
 extern void fn_80490DE8(void);
@@ -883,7 +883,7 @@ lbl_fn_8049A7D8_00000AB0:
     mr r3, r31
     bl fn_8049B1F0
     addi r3, r31, 0x50
-    bl fn_80473F88
+    bl shockwave_freeEmitter
 lbl_fn_8049A7D8_00000AD4:
     addi r3, r31, 0xdc
     bl atn_LH_Texture_update

@@ -21,7 +21,7 @@ extern void fn_80107A68(void);
 extern void fn_80108C10(void);
 extern void fn_80109828(void);
 extern void fn_8012DF7C(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_80148B0C(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015BAF0(void);
@@ -755,7 +755,7 @@ lbl_fn_802CB8A0_00000960:
     addi r4, r1, 0x124
     fmuls f2, f0, f30
     li r5, 0x0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     lfs f3, 0x570(r31)
     lfs f0, lbl_808844A0
     fcmpo cr0, f3, f0

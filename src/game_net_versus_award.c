@@ -8,7 +8,7 @@ extern void _restgpr_25(void);
 extern void _savegpr_14(void);
 extern void _savegpr_23(void);
 extern void _savegpr_25(void);
-extern void fn_80061824(void);
+extern void skill_calcTrajectory(void);
 extern void fn_80061AE4(void);
 extern void fn_8006EF48(void);
 extern void ref_releaseHandle(void);
@@ -555,7 +555,7 @@ lbl_fn_804C1370_0000060C:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     addi r31, r31, 0x1
 lbl_fn_804C1370_00000668:
     addi r23, r23, 0x1

@@ -41,7 +41,7 @@ extern void clip_calculateFrustum(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_80151448(void);
 extern void equip_applyToCharacter(void);
 extern void fn_80158BB4(void);
@@ -1428,7 +1428,7 @@ lbl_fn_802B2F64_000011EC:
     bctrl
 lbl_fn_802B2F64_0000120C:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
     bl quest_updateFlow
     mr r3, r31

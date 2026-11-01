@@ -24,7 +24,7 @@ extern void fn_80139550(void);
 extern void fn_80139F2C(void);
 extern void fn_80139F3C(void);
 extern void fn_8013A194(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_801404F8(void);
 extern void quest_ctorRewardItem(void);
 extern void actor_setState(void);
@@ -2655,7 +2655,7 @@ lbl_fn_802AF7D8_00002478:
     addi r4, r1, 0x5c
     fmuls f2, f0, f30
     li r5, 0x1
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     lwz r0, 0x1a44(r31)
     cmpwi r0, 0x0
     beq lbl_fn_802AF7D8_000024C8

@@ -6,7 +6,7 @@ extern void _restgpr_16(void);
 extern void _savegpr_16(void);
 extern void fn_80060D58(void);
 extern void skill_calculateDamage(void);
-extern void fn_80061824(void);
+extern void skill_calcTrajectory(void);
 extern void fn_80062C8C(void);
 extern void fn_80063484(void);
 extern void fn_80063764(void);
@@ -649,7 +649,7 @@ lbl_fn_800F5314_00000798:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_fn_800F5314_00000820:
     lwz r3, lbl_8087F0A8
     lwz r24, 0x5c(r3)
@@ -794,7 +794,7 @@ lbl_fn_800F5314_000009A0:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     fadds f22, f22, f25
     mr r17, r25
     addis r22, r31, 0x3
@@ -853,7 +853,7 @@ lbl_fn_800F5314_00000AC4:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lwz r5, 0x0(r17)
     addi r3, r1, 0x6b8
     addi r4, r27, 0x1e9
@@ -883,7 +883,7 @@ lbl_fn_800F5314_00000AC4:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     fadds f22, f22, f25
 lbl_fn_800F5314_00000BA4:
     addi r17, r17, 0x934
@@ -953,7 +953,7 @@ lbl_fn_800F5314_00000C3C:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lwz r5, 0x0(r17)
     addi r3, r1, 0x6b8
     addi r4, r27, 0x1e9
@@ -983,7 +983,7 @@ lbl_fn_800F5314_00000C3C:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     fadds f22, f22, f25
 lbl_fn_800F5314_00000D1C:
     addi r17, r17, 0x934
@@ -1248,7 +1248,7 @@ lbl_fn_800F5314_0000105C:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lwz r6, 0x60(r30)
     addi r3, r1, 0x5b8
     lwz r5, 0x58(r30)
@@ -1277,7 +1277,7 @@ lbl_fn_800F5314_0000105C:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     fadds f23, f23, f25
 lbl_fn_800F5314_00001130:
     addi r18, r18, 0x934
@@ -2100,7 +2100,7 @@ lbl_fn_800F5314_00001CF8:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_fn_800F5314_00001DBC:
     lwz r4, 0x54(r1)
     lwz r3, 0x54(r1)

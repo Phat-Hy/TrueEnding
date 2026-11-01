@@ -34,7 +34,7 @@ extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void __construct_new_array(void);
 extern void __destroy_new_array(void);
 
@@ -177,7 +177,7 @@ lbl_saveSlot_updateLoadState_000000C4:
     addi r3, r30, 0x48
     bl fn_801EFB00
     addi r3, r30, 0xf0
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r0, 0xfc(r30)
     srawi. r0, r0, 31
     beq lbl_saveSlot_updateLoadState_00000158

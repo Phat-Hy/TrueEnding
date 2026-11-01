@@ -24,7 +24,7 @@ extern void scissor_clipFrustum(void);
 extern void fn_80126214(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013A258(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_80144710(void);
 extern void fn_80158BB4(void);
 extern void actor_setState(void);
@@ -324,7 +324,7 @@ lbl_fn_80263CF0_000002E8:
     mr r3, r29
     addi r4, r1, 0x8c
     li r5, 0x1
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_80263CF0_00000300:
     lwz r0, 0x154(r1)
     psq_l f31, 0x148(r1), 0, 0

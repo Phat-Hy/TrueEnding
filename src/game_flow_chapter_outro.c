@@ -52,7 +52,7 @@ extern void fn_804EB874(void);
 extern void fn_80506530(void);
 extern void fn_8050E098(void);
 extern void rand(void);
-extern void fn_806A8E40(void);
+extern void net_getSocket(void);
 extern void net_getMyAid(void);
 
 /* External data declarations */
@@ -119,7 +119,7 @@ lbl_fn_804E651C_0000005C:
     li r3, 0x0
     b lbl_fn_804E651C_00000074
 lbl_fn_804E651C_00000070:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804E651C_00000074:
     clrlwi r0, r3, 24
 lbl_fn_804E651C_00000078:
@@ -760,7 +760,7 @@ lbl_fn_804E6DD4_00000910:
     li r3, 0x0
     b lbl_fn_804E6DD4_00000928
 lbl_fn_804E6DD4_00000924:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804E6DD4_00000928:
     clrlwi r0, r3, 24
 lbl_fn_804E6DD4_0000092C:
@@ -829,7 +829,7 @@ lbl_fn_804E6DD4_00000A00:
     beq lbl_fn_804E6DD4_00000A10
     b lbl_fn_804E6DD4_00000A14
 lbl_fn_804E6DD4_00000A10:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804E6DD4_00000A14:
     clrlwi r3, r3, 24
 lbl_fn_804E6DD4_00000A18:
@@ -922,7 +922,7 @@ lbl_fn_804E6DD4_00000B48:
     li r3, 0x0
     b lbl_fn_804E6DD4_00000B60
 lbl_fn_804E6DD4_00000B5C:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804E6DD4_00000B60:
     clrlwi r0, r3, 24
 lbl_fn_804E6DD4_00000B64:
@@ -1336,7 +1336,7 @@ lbl_fn_804E762C_00001164:
     li r3, 0x0
     b lbl_fn_804E762C_0000117C
 lbl_fn_804E762C_00001178:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804E762C_0000117C:
     clrlwi r0, r3, 24
 lbl_fn_804E762C_00001180:
@@ -1402,7 +1402,7 @@ lbl_fn_804E762C_0000124C:
     beq lbl_fn_804E762C_0000125C
     b lbl_fn_804E762C_00001260
 lbl_fn_804E762C_0000125C:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804E762C_00001260:
     clrlwi r3, r3, 24
 lbl_fn_804E762C_00001264:
@@ -1475,7 +1475,7 @@ lbl_fn_804E762C_00001344:
     li r3, 0x0
     b lbl_fn_804E762C_0000135C
 lbl_fn_804E762C_00001358:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804E762C_0000135C:
     clrlwi r0, r3, 24
 lbl_fn_804E762C_00001360:

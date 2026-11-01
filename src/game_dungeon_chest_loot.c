@@ -42,7 +42,7 @@ extern void fn_8036554C(void);
 extern void fn_803761CC(void);
 extern void fn_803EB668(void);
 extern void fn_803EB7E4(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void rand(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -187,7 +187,7 @@ lbl_fn_803E907C_0000015C:
     stfs f0, 0x1158(r4)
 lbl_fn_803E907C_000001A4:
     addi r3, r31, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     lis r3, lbl_807C7030@ha
     stw r0, 0x18(r31)
@@ -223,7 +223,7 @@ lbl_fn_803E907C_000001D8:
     stfs f0, 0x1158(r4)
 lbl_fn_803E907C_0000022C:
     addi r3, r31, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r25, 0x0
     lis r3, lbl_807C7030@ha
     stw r25, 0x18(r31)
@@ -347,7 +347,7 @@ lbl_fn_803E907C_00000368:
     stfs f0, 0x1158(r3)
 lbl_fn_803E907C_00000408:
     li r3, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     lis r4, lbl_807C7030@ha
     stw r0, 0x18(r3)
@@ -565,7 +565,7 @@ lbl_fn_803E9608_000006E4:
     stfs f0, 0x1158(r4)
 lbl_fn_803E9608_0000072C:
     addi r3, r31, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     lis r3, lbl_807C7030@ha
     stw r0, 0x18(r31)
@@ -601,7 +601,7 @@ lbl_fn_803E9608_00000760:
     stfs f0, 0x1158(r4)
 lbl_fn_803E9608_000007B4:
     addi r3, r31, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r26, 0x0
     lis r3, lbl_807C7030@ha
     stw r26, 0x18(r31)
@@ -720,7 +720,7 @@ lbl_fn_803E9608_000008EC:
     stfs f0, 0x1158(r3)
 lbl_fn_803E9608_0000097C:
     li r3, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     lis r4, lbl_807C7030@ha
     stw r0, 0x18(r3)
@@ -922,7 +922,7 @@ lbl_fn_803E9B7C_00000C28:
     stfs f0, 0x1158(r4)
 lbl_fn_803E9B7C_00000C70:
     addi r3, r31, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     lis r3, lbl_807C7030@ha
     stw r0, 0x18(r31)
@@ -958,7 +958,7 @@ lbl_fn_803E9B7C_00000CA4:
     stfs f0, 0x1158(r4)
 lbl_fn_803E9B7C_00000CF8:
     addi r3, r31, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     lis r3, lbl_807C7030@ha
     stw r0, 0x18(r31)
@@ -1067,7 +1067,7 @@ lbl_fn_803E9B7C_00000DCC:
     stfs f0, 0x1158(r4)
 lbl_fn_803E9B7C_00000E9C:
     li r3, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     lis r3, lbl_807C7030@ha
     stw r0, 0x18(r25)
@@ -1279,7 +1279,7 @@ lbl_fn_803EA09C_00001168:
     stfs f0, 0x1158(r4)
 lbl_fn_803EA09C_000011B0:
     addi r3, r31, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     lis r3, lbl_807C7030@ha
     stw r0, 0x18(r31)
@@ -1315,7 +1315,7 @@ lbl_fn_803EA09C_000011E4:
     stfs f0, 0x1158(r4)
 lbl_fn_803EA09C_00001238:
     addi r3, r31, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r24, 0x0
     lis r3, lbl_807C7030@ha
     stw r24, 0x18(r31)
@@ -1514,7 +1514,7 @@ lbl_fn_803EA09C_00001494:
     stfs f0, 0x1158(r3)
 lbl_fn_803EA09C_00001528:
     li r3, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     lis r4, lbl_807C7030@ha
     stw r0, 0x18(r3)

@@ -32,7 +32,7 @@ extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_8016E4C4(void);
 extern void actor_setState(void);
 extern void fn_8017039C(void);
@@ -1983,7 +1983,7 @@ lbl_fn_802E9590_00001AA0:
     mr r3, r31
     addi r0, r4, 0x1
     stw r0, 0x14fc(r31)
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
     bl quest_updateFlow
     lwz r0, 0x134(r1)

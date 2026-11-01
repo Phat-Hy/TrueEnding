@@ -16,7 +16,7 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_80119ECC(void);
 extern void fn_80119F0C(void);
@@ -1155,7 +1155,7 @@ lbl_fn_801191A8_00000E58:
     beq lbl_fn_801191A8_00000ED0
     li r3, 0x1
     li r4, 0x11a
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x60(r31)
     lis r5, lbl_80736B10@ha
     addi r5, r5, lbl_80736B10@l
@@ -1595,7 +1595,7 @@ lbl_fn_8011999C_00001464:
     beq lbl_fn_8011999C_000014D0
     li r3, 0x1
     li r4, 0x11c
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x60(r31)
     lis r5, lbl_80736B10@ha
     addi r5, r5, lbl_80736B10@l
@@ -1636,7 +1636,7 @@ lbl_fn_8011999C_000014DC:
     beq lbl_fn_8011999C_0000156C
     li r3, 0x1
     li r4, 0x11e
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x60(r31)
     lis r5, lbl_80736B10@ha
     addi r5, r5, lbl_80736B10@l
@@ -1707,7 +1707,7 @@ lbl_fn_8011999C_000015C8:
     bl thread_findAndNotify
     li r3, 0x1
     li r4, 0x11b
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x64(r31)
     mr r29, r3
     addi r3, r30, 0x289
@@ -1807,7 +1807,7 @@ lbl_fn_8011999C_00001778:
     beq lbl_fn_8011999C_000017E4
     li r3, 0x1
     li r4, 0x120
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x60(r31)
     lis r5, lbl_80736B10@ha
     addi r5, r5, lbl_80736B10@l
@@ -1867,7 +1867,7 @@ lbl_fn_8011999C_0000185C:
     beq lbl_fn_8011999C_000018C8
     li r3, 0x1
     li r4, 0x120
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x60(r31)
     lis r5, lbl_80736B10@ha
     addi r5, r5, lbl_80736B10@l

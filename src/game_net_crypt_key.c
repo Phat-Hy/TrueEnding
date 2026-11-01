@@ -16,7 +16,7 @@ extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void fn_801F4728(void);
 extern void fn_801F4998(void);
 extern void fn_801F4CB4(void);
@@ -1159,7 +1159,7 @@ lbl_fn_804B39F8_00000FBC:
 lbl_fn_804B39F8_00000FC4:
     li r3, 0x0
     li r4, 0x166
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x6c(r31)
     lis r5, lbl_80757B7C@ha
     addi r5, r5, lbl_80757B7C@l
@@ -1175,7 +1175,7 @@ lbl_fn_804B39F8_00000FC4:
 lbl_fn_804B39F8_00001000:
     li r3, 0x0
     li r4, 0x164
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x6c(r31)
     lis r5, lbl_80757B7C@ha
     addi r5, r5, lbl_80757B7C@l
@@ -1231,7 +1231,7 @@ lbl_fn_804B3C78_000010A8:
     lis r4, 0x89
     li r3, 0x0
     addi r4, r4, 0x547b
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     addi r3, r1, 0x208
     crclr 6
@@ -1243,7 +1243,7 @@ lbl_fn_804B3C78_000010E0:
     lis r4, 0x89
     li r3, 0x0
     addi r4, r4, 0x547c
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     addi r3, r1, 0x208
     crclr 6
@@ -1255,7 +1255,7 @@ lbl_fn_804B3C78_0000110C:
     lis r4, 0x89
     li r3, 0x0
     addi r4, r4, 0x54d7
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     addi r3, r1, 0x208
     crclr 6
@@ -1266,7 +1266,7 @@ lbl_fn_804B3C78_00001134:
     lis r4, 0x89
     li r3, 0x0
     addi r4, r4, 0x547b
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     addi r3, r1, 0x8
     crclr 6
@@ -1278,7 +1278,7 @@ lbl_fn_804B3C78_00001160:
     lis r4, 0x89
     li r3, 0x0
     addi r4, r4, 0x547c
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     addi r3, r1, 0x8
     crclr 6
@@ -1290,7 +1290,7 @@ lbl_fn_804B3C78_0000118C:
     lis r4, 0x89
     li r3, 0x0
     addi r4, r4, 0x54d7
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     addi r3, r1, 0x8
     crclr 6

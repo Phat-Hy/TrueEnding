@@ -18,7 +18,7 @@ extern void fn_8050128C(void);
 extern void fn_8050CDAC(void);
 extern void printf(void);
 extern void abort(void);
-extern void fn_806A8E40(void);
+extern void net_getSocket(void);
 extern void fn_806A8E70(void);
 extern void fn_806B0DE0(void);
 extern void net_getMyAid(void);
@@ -525,7 +525,7 @@ lbl_fn_804D619C_000002D0:
     li r3, 0x0
     b lbl_fn_804D619C_000002E8
 lbl_fn_804D619C_000002E4:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804D619C_000002E8:
     clrlwi r3, r3, 24
 lbl_fn_804D619C_000002EC:

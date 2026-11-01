@@ -19,7 +19,7 @@ extern void fn_80089D70(void);
 extern void fn_8008C850(void);
 extern void str_findChar(void);
 extern void atn_LoadHandle_getName(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_80475DF8(void);
 extern void memcmp(void);
 extern void runtime_registerStaticObject(void);
@@ -148,7 +148,7 @@ asm void fn_80092F90(void)
     b lbl_fn_80092F90_0000010C
 lbl_fn_80092F90_000000F8:
     mr r3, r30
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     stw r31, 0x8(r30)
     addi r30, r30, 0x18
     addi r29, r29, 0x1

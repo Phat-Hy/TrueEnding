@@ -8,7 +8,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_17(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
-extern void fn_80061824(void);
+extern void skill_calcTrajectory(void);
 extern void msg_getMessageString(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
@@ -1480,7 +1480,7 @@ lbl_fn_804C06C8_0000138C:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f3, lbl_808873F8
     fmr f4, f31
     fmr f5, f31
@@ -1497,7 +1497,7 @@ lbl_fn_804C06C8_0000138C:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     b lbl_fn_804C06C8_000014D0
 lbl_fn_804C06C8_00001434:
     rlwinm. r0, r3, 0, 28, 28
@@ -1521,7 +1521,7 @@ lbl_fn_804C06C8_00001434:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f3, lbl_808873F8
     fmr f4, f31
     fmr f5, f31
@@ -1538,7 +1538,7 @@ lbl_fn_804C06C8_00001434:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_fn_804C06C8_000014D0:
     lwz r0, 0x24(r1)
     psq_l f31, 0x18(r1), 0, 0

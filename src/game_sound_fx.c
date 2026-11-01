@@ -13,7 +13,7 @@ extern void fn_8003EA3C(void);
 extern void ui_destroyWidget(void);
 extern void fn_80041A28(void);
 extern void fn_8004203C(void);
-extern void fn_8004212C(void);
+extern void str_getData(void);
 extern void fn_80044BD4(void);
 extern void fn_80044C30(void);
 extern void talk_parseQuotedString(void);
@@ -1702,7 +1702,7 @@ asm void fn_800EBF1C(void)
 lbl_fn_800EBF1C_000015C0:
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     addi r4, r29, 0x85
     li r5, 0x5
     bl strncmp
@@ -1710,7 +1710,7 @@ lbl_fn_800EBF1C_000015C0:
     bne lbl_fn_800EBF1C_000016A0
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     addi r3, r1, 0x20
     bl str_initFromCStr
@@ -1718,7 +1718,7 @@ lbl_fn_800EBF1C_000015C0:
     bl fn_8000EC88
     mr r31, r3
     addi r3, r1, 0x20
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     mr r5, r31
     addi r3, r1, 0xd68
@@ -1759,7 +1759,7 @@ lbl_fn_800EBF1C_000015C0:
 lbl_fn_800EBF1C_000016A0:
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     addi r4, r29, 0x8b
     li r5, 0xd
     bl strncmp
@@ -1767,7 +1767,7 @@ lbl_fn_800EBF1C_000016A0:
     bne lbl_fn_800EBF1C_0000172C
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     addi r3, r1, 0x14
     bl str_initFromCStr
@@ -1775,7 +1775,7 @@ lbl_fn_800EBF1C_000016A0:
     bl fn_8000EC88
     mr r31, r3
     addi r3, r1, 0x14
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     mr r5, r31
     addi r3, r1, 0x734
@@ -1795,7 +1795,7 @@ lbl_fn_800EBF1C_000016A0:
 lbl_fn_800EBF1C_0000172C:
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     addi r4, r29, 0x99
     li r5, 0xe
     bl strncmp
@@ -1803,7 +1803,7 @@ lbl_fn_800EBF1C_0000172C:
     bne lbl_fn_800EBF1C_000017B0
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     addi r3, r1, 0x8
     bl str_initFromCStr
@@ -1811,7 +1811,7 @@ lbl_fn_800EBF1C_0000172C:
     bl fn_8000EC88
     mr r31, r3
     addi r3, r1, 0x8
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     mr r5, r31
     addi r3, r1, 0x100

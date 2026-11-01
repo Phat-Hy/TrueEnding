@@ -35,7 +35,7 @@ extern void fn_806E8E10(void);
 extern void fn_806E8EC0(void);
 extern void fn_806E8FB0(void);
 extern void fn_806E91A0(void);
-extern void fn_806E91F0(void);
+extern void net_copyStringSafe(void);
 extern void fn_806E9230(void);
 
 /* External data declarations */
@@ -113,7 +113,7 @@ lbl_fn_806E6250_000000B0:
     lis r4, lbl_807C3DA0@ha
     mr r3, r21
     addi r4, r4, lbl_807C3DA0@l
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x2
     b lbl_fn_806E6250_0000027C
 lbl_fn_806E6250_000000C8:
@@ -1115,7 +1115,7 @@ lbl_fn_806E65E0_00000F20:
     bne lbl_fn_806E65E0_00000F6C
     mr r3, r28
     addi r4, r20, 0x40
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806E65E0_000023E4
 lbl_fn_806E65E0_00000F6C:
@@ -1320,7 +1320,7 @@ lbl_fn_806E65E0_00001234:
     bne lbl_fn_806E65E0_0000125C
     mr r3, r28
     addi r4, r20, 0x40
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806E65E0_000023E4
 lbl_fn_806E65E0_0000125C:
@@ -1363,7 +1363,7 @@ lbl_fn_806E65E0_00001288:
     bne lbl_fn_806E65E0_000012FC
     mr r3, r28
     addi r4, r20, 0x40
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806E65E0_000023E4
 lbl_fn_806E65E0_000012FC:
@@ -1427,7 +1427,7 @@ lbl_fn_806E65E0_000013A4:
     bne lbl_fn_806E65E0_000013E8
     mr r3, r28
     addi r4, r20, 0x40
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806E65E0_000023E4
 lbl_fn_806E65E0_000013E8:
@@ -1438,7 +1438,7 @@ lbl_fn_806E65E0_000013E8:
     bne lbl_fn_806E65E0_00001410
     mr r3, r28
     addi r4, r20, 0x40
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806E65E0_000023E4
 lbl_fn_806E65E0_00001410:
@@ -1473,7 +1473,7 @@ lbl_fn_806E65E0_0000144C:
     bne lbl_fn_806E65E0_00001494
     mr r3, r28
     addi r4, r20, 0x40
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806E65E0_000023E4
 lbl_fn_806E65E0_00001494:
@@ -1484,7 +1484,7 @@ lbl_fn_806E65E0_00001494:
     bne lbl_fn_806E65E0_000014BC
     mr r3, r28
     addi r4, r20, 0x40
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806E65E0_000023E4
 lbl_fn_806E65E0_000014BC:
@@ -1550,7 +1550,7 @@ lbl_fn_806E65E0_00001538:
     bne lbl_fn_806E65E0_000015B4
     mr r3, r28
     addi r4, r20, 0x40
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806E65E0_000023E4
 lbl_fn_806E65E0_000015B4:
@@ -1595,7 +1595,7 @@ lbl_fn_806E65E0_0000160C:
     bne lbl_fn_806E65E0_00001658
     mr r3, r28
     addi r4, r20, 0x40
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806E65E0_000023E4
 lbl_fn_806E65E0_00001658:
@@ -1768,7 +1768,7 @@ lbl_fn_806E65E0_000018AC:
     bne lbl_fn_806E65E0_000018D0
     mr r3, r28
     addi r4, r20, 0x40
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806E65E0_000023E4
 lbl_fn_806E65E0_000018D0:
@@ -1859,7 +1859,7 @@ lbl_fn_806E65E0_000019FC:
     bne lbl_fn_806E65E0_00001A20
     mr r3, r28
     addi r4, r20, 0x40
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806E65E0_000023E4
 lbl_fn_806E65E0_00001A20:
@@ -1891,7 +1891,7 @@ lbl_fn_806E65E0_00001A20:
     bne lbl_fn_806E65E0_00001A9C
     mr r3, r28
     addi r4, r20, 0x40
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806E65E0_000023E4
 lbl_fn_806E65E0_00001A9C:
@@ -1958,7 +1958,7 @@ lbl_fn_806E65E0_00001B4C:
     bne lbl_fn_806E65E0_00001B90
     mr r3, r28
     addi r4, r20, 0x40
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806E65E0_000023E4
 lbl_fn_806E65E0_00001B90:
@@ -2101,7 +2101,7 @@ lbl_fn_806E65E0_00001D20:
     bne lbl_fn_806E65E0_00001D9C
     mr r3, r28
     addi r4, r20, 0x40
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806E65E0_000023E4
 lbl_fn_806E65E0_00001D9C:
@@ -2168,7 +2168,7 @@ lbl_fn_806E65E0_00001E4C:
     bne lbl_fn_806E65E0_00001E90
     mr r3, r28
     addi r4, r20, 0x40
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806E65E0_000023E4
 lbl_fn_806E65E0_00001E90:
@@ -2268,7 +2268,7 @@ lbl_fn_806E65E0_00001F80:
     bne lbl_fn_806E65E0_00002000
     mr r3, r28
     addi r4, r20, 0x40
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806E65E0_000023E4
 lbl_fn_806E65E0_00002000:
@@ -2311,7 +2311,7 @@ lbl_fn_806E65E0_0000206C:
     bne lbl_fn_806E65E0_000020A0
     mr r3, r28
     addi r4, r20, 0x40
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806E65E0_000023E4
 lbl_fn_806E65E0_000020A0:
@@ -2343,7 +2343,7 @@ lbl_fn_806E65E0_000020CC:
     bne lbl_fn_806E65E0_00002114
     mr r3, r28
     addi r4, r20, 0x40
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806E65E0_000023E4
 lbl_fn_806E65E0_00002114:
@@ -2402,7 +2402,7 @@ lbl_fn_806E65E0_00002174:
     bne lbl_fn_806E65E0_000021F0
     mr r3, r28
     addi r4, r20, 0x40
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806E65E0_000023E4
 lbl_fn_806E65E0_000021F0:
@@ -2483,7 +2483,7 @@ lbl_fn_806E65E0_000022D0:
     bne lbl_fn_806E65E0_00002318
     mr r3, r28
     addi r4, r20, 0x40
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806E65E0_000023E4
 lbl_fn_806E65E0_00002318:

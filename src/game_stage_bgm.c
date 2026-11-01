@@ -66,7 +66,7 @@ extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
 extern void __ptmf_scall(void);
-extern void fn_806A8E40(void);
+extern void net_getSocket(void);
 extern void net_getMyAid(void);
 
 /* External data declarations */
@@ -2209,7 +2209,7 @@ lbl_fn_801A0C54_00001A30:
     li r3, 0x0
     b lbl_fn_801A0C54_00001A48
 lbl_fn_801A0C54_00001A44:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_801A0C54_00001A48:
     clrlwi r0, r3, 24
 lbl_fn_801A0C54_00001A4C:
@@ -2249,7 +2249,7 @@ lbl_fn_801A0C54_00001AB0:
     li r3, 0x0
     b lbl_fn_801A0C54_00001AC8
 lbl_fn_801A0C54_00001AC4:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_801A0C54_00001AC8:
     clrlwi r0, r3, 24
 lbl_fn_801A0C54_00001ACC:

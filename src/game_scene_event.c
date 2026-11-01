@@ -18,7 +18,7 @@ extern void fn_800FDE60(void);
 extern void fn_8010A308(void);
 extern void fn_80129978(void);
 extern void fn_80129A48(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_801446F0(void);
 extern void fn_801539E0(void);
 extern void equip_applyToCharacter(void);
@@ -938,7 +938,7 @@ lbl_fn_801AF97C_00000B40:
     lfs f1, lbl_808822EC
     lfs f2, 0x568(r3)
     addi r4, r3, 0x534
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     psq_l f31, 0x78(r1), 0, 0
     mr r3, r30
     lfd f31, 0x70(r1)
@@ -1460,7 +1460,7 @@ lbl_fn_801AFF1C_000012E0:
     lfs f1, lbl_808822EC
     li r5, 0x0
     lfs f2, 0x568(r3)
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     li r3, 0x0
 lbl_fn_801AFF1C_000012FC:
     lwz r0, 0x104(r1)

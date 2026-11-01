@@ -35,7 +35,7 @@ extern void fn_80139F24(void);
 extern void fn_80139F3C(void);
 extern void fn_8013A194(void);
 extern void fn_8013C554(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_8017A300(void);
 extern void fn_801C3910(void);
 extern void fn_8020A81C(void);
@@ -638,7 +638,7 @@ lbl_fn_80304718_0000073C:
     mr r3, r31
     bl fn_8017A300
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
 lbl_fn_80304718_00000818:
     lfs f1, 0x2e4(r31)
     lfs f0, lbl_80884A44

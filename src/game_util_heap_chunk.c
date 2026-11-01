@@ -21,7 +21,7 @@ extern void bloom_processPasses(void);
 extern void fn_800DBF68(void);
 extern void str_parseInt(void);
 extern void str_findChar(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
 extern void save_validateHeader(void);
 extern void fn_801F4728(void);
@@ -1123,7 +1123,7 @@ lbl_fn_805866F8_00000DE8:
     li r3, 0x0
     slwi r0, r0, 2
     lwzx r4, r21, r0
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r25, r3
     addi r3, r1, 0x88
     bl str_findChar
@@ -1250,7 +1250,7 @@ lbl_fn_805866F8_00000FCC:
     li r3, 0x0
     slwi r0, r0, 2
     lwzx r4, r21, r0
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r25, r3
     addi r3, r1, 0x88
     bl str_findChar

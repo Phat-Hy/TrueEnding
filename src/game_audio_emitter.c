@@ -27,7 +27,7 @@ extern void boss_updatePhaseState(void);
 extern void fn_80144710(void);
 extern void quest_updateFlow(void);
 extern void quest_ctorRewardItem(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_80151448(void);
 extern void actor_setState(void);
 extern void task_findEntryById(void);
@@ -641,7 +641,7 @@ lbl_fn_802FD328_00000750:
     bl fn_802FFFF8
 lbl_fn_802FD328_00000760:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
     bl quest_updateFlow
     lbz r0, 0x15b8(r31)

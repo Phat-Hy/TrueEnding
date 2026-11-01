@@ -27,7 +27,7 @@ extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void magic_dispatchActionCommand(void);
 extern void save_validateHeader(void);
 extern void fn_801F4C14(void);
@@ -39,7 +39,7 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_805B9ECC(void);
 extern void fn_805BE380(void);
 extern void fn_805BEA38(void);
@@ -356,7 +356,7 @@ asm void fn_805BC9F4(void)
     mr r3, r31
     bl fn_805BCF08
     addi r3, r31, 0x5c
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     b lbl_fn_805BC9F4_00000610
 lbl_fn_805BC9F4_00000380:
     bl bloom_processPasses
@@ -436,7 +436,7 @@ lbl_fn_805BC9F4_00000420:
     lwz r29, lbl_8087EEC8
     addi r4, r3, 0x5472
     li r3, 0x0
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lfs f1, lbl_8088846C
     mr r4, r3
     lfs f2, lbl_80888454

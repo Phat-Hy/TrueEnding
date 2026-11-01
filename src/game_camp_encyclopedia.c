@@ -8,7 +8,7 @@ extern void fn_8000E18C(void);
 extern void sys_copyString(void);
 extern void fn_8000ECA8(void);
 extern void str_initFromCStr(void);
-extern void fn_8004212C(void);
+extern void str_getData(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void mem_realloc(void);
@@ -276,7 +276,7 @@ lbl_fn_803C606C_000001AC:
 lbl_fn_803C606C_00000240:
     addi r3, r1, 0x80
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     mr r5, r3
     mr r3, r27
@@ -685,7 +685,7 @@ lbl_fn_803C65EC_0000072C:
 lbl_fn_803C65EC_000007C0:
     addi r3, r1, 0x80
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     mr r5, r3
     mr r3, r23
@@ -1061,7 +1061,7 @@ lbl_fn_803C6AE8_00000C28:
 lbl_fn_803C6AE8_00000CBC:
     addi r3, r1, 0x80
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     mr r5, r3
     mr r3, r23
@@ -1437,7 +1437,7 @@ lbl_fn_803C6FE4_00001124:
 lbl_fn_803C6FE4_000011B8:
     addi r3, r1, 0x80
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     mr r5, r3
     mr r3, r23
@@ -1778,7 +1778,7 @@ lbl_fn_803C74E0_00001608:
     b lbl_fn_803C74E0_00001970
 lbl_fn_803C74E0_00001630:
     addi r3, r1, 0x24
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     add r23, r29, r3
     mr r3, r25
@@ -1850,7 +1850,7 @@ lbl_fn_803C74E0_00001630:
 lbl_fn_803C74E0_00001748:
     addi r3, r1, 0x90
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     stw r3, 0x8(r1)
     addi r3, r1, 0xc

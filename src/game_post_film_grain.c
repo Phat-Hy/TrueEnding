@@ -16,7 +16,7 @@ extern void fn_80109828(void);
 extern void fn_80126214(void);
 extern void fn_8012DF7C(void);
 extern void fn_8013A258(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_80144710(void);
 extern void fn_80148B0C(void);
 extern void fn_80155D70(void);
@@ -407,7 +407,7 @@ lbl_fn_802C9880_00000450:
     addi r4, r1, 0x80
     fmuls f2, f0, f30
     li r5, 0x0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_802C9880_0000046C:
     lwz r0, 0x154(r1)
     psq_l f31, 0x148(r1), 0, 0

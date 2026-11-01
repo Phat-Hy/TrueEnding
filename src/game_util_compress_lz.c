@@ -19,7 +19,7 @@ extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void fn_801170C8(void);
 extern void actor_spawnActorWithId(void);
 extern void save_validateHeader(void);
@@ -876,7 +876,7 @@ lbl_fn_80589DE4_00000AE0:
     lwz r27, lbl_8087F580
     li r3, 0x1
     li r4, 0x15b
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     mr r3, r27
     li r5, 0x0

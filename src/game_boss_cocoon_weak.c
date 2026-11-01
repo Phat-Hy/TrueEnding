@@ -38,7 +38,7 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getStatus(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void taskManager_updateTasks(void);
 extern void fn_805F9EF0(void);
 extern void strncpy(void);
@@ -926,7 +926,7 @@ asm void fn_8046DC5C(void)
     mr r5, r31
     bl memcpy
     addi r3, r1, 0x8
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     addi r3, r1, 0x8
     li r4, 0x0
     bl atn_LoadHandle_destructor
@@ -1427,7 +1427,7 @@ lbl_atn_Loader_finish_0000121C:
     cmpwi r29, 0x0
     beq lbl_atn_Loader_finish_0000122C
     addi r3, r27, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
 lbl_atn_Loader_finish_0000122C:
     lwz r30, 0x4(r30)
     b lbl_atn_Loader_finish_00001250

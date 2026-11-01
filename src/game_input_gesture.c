@@ -30,7 +30,7 @@ extern void fn_80129A6C(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_80151448(void);
 extern void equip_applyToCharacter(void);
 extern void actor_setState(void);
@@ -424,7 +424,7 @@ lbl_fn_802ED3F0_00000400:
     bl fn_800CB6E4
 lbl_fn_802ED3F0_00000418:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
     bl quest_updateFlow
     lwz r0, 0x24(r1)
@@ -1934,7 +1934,7 @@ lbl_fn_802EEBA8_00001910:
     blt lbl_fn_802EEBA8_000018A0
 lbl_fn_802EEBA8_00001918:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     lwz r0, 0x38(r31)
     clrlwi r0, r0, 31
     cmplwi r0, 0x1

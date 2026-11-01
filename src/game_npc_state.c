@@ -7,7 +7,7 @@ extern void collision_testLineSegment(void);
 extern void fn_8010CA3C(void);
 extern void fn_801279E8(void);
 extern void fn_8012DB04(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_80140588(void);
 extern void fn_80141674(void);
 extern void fn_801426A4(void);
@@ -593,7 +593,7 @@ lbl_fn_8013C564_000005A8:
     fmr f2, f31
     mr r4, r30
     li r5, 0x0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     b lbl_fn_8013C564_0000072C
 lbl_fn_8013C564_000005D0:
     fmr f1, f30
@@ -632,7 +632,7 @@ lbl_fn_8013C564_00000638:
     mr r3, r29
     mr r4, r30
     li r5, 0x0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     b lbl_fn_8013C564_0000072C
 lbl_fn_8013C564_00000650:
     lwz r0, 0xf54(r29)
@@ -651,7 +651,7 @@ lbl_fn_8013C564_00000678:
     mr r3, r29
     mr r4, r30
     li r5, 0x0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     b lbl_fn_8013C564_0000072C
 lbl_fn_8013C564_00000690:
     extrwi. r0, r3, 1, 26
@@ -669,7 +669,7 @@ lbl_fn_8013C564_000006A0:
     fmr f2, f31
     mr r4, r30
     mr r5, r31
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     b lbl_fn_8013C564_0000072C
 lbl_fn_8013C564_000006D0:
     lfs f0, lbl_80881A08
@@ -696,7 +696,7 @@ lbl_fn_8013C564_00000714:
     fmr f2, f31
     mr r4, r30
     mr r5, r31
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_8013C564_0000072C:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6

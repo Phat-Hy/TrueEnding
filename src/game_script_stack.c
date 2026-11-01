@@ -27,7 +27,7 @@ extern void fn_8013322C(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80144710(void);
 extern void quest_updateFlow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void equip_applyToCharacter(void);
 extern void fn_801603CC(void);
 extern void debuff_clearStatus(void);
@@ -1707,7 +1707,7 @@ asm void fn_802478C4(void)
     stw r31, 0x1c(r1)
     mr r31, r3
     stw r30, 0x18(r1)
-    bl fn_8014C540
+    bl dialog_updateScriptState
     lwz r0, 0xd18(r31)
     li r30, 0x0
     cmpwi r0, 0x0

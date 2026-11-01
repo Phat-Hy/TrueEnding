@@ -25,7 +25,7 @@ extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_8011745C(void);
 extern void fn_801D082C(void);
@@ -1679,7 +1679,7 @@ lbl_fn_80516E0C_00001594:
     bl fn_801F4728
     li r3, 0x0
     li r4, 0x196
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0xf0(r30)
     mr r27, r3
     addi r3, r29, 0x10e
@@ -1691,7 +1691,7 @@ lbl_fn_80516E0C_00001594:
     bl thread_dispatchToQueue
     li r3, 0x0
     li r4, 0x197
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0xf0(r30)
     mr r27, r3
     addi r3, r29, 0x11b
@@ -1945,7 +1945,7 @@ lbl_fn_80517660_000019C4:
     beq lbl_fn_80517660_00001A20
     li r3, 0x0
     li r4, 0x2741
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lis r4, lbl_8075BB80@ha
     mr r26, r3
     addi r4, r4, lbl_8075BB80@l

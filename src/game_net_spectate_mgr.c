@@ -15,7 +15,7 @@ extern void fn_8004B290(void);
 extern void fn_8004B338(void);
 extern void fn_8005E7F4(void);
 extern void fn_80060D58(void);
-extern void fn_80061824(void);
+extern void skill_calcTrajectory(void);
 extern void fn_800697D8(void);
 extern void fn_8006A250(void);
 extern void fn_8006A5A8(void);
@@ -517,7 +517,7 @@ lbl_fn_805319C8_00000478:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887B30
     fmr f1, f20
     lfs f4, 0x8(r26)
@@ -534,7 +534,7 @@ lbl_fn_805319C8_00000478:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lwz r3, lbl_8087EEB0
     stw r28, 0xa0(r3)
 lbl_fn_805319C8_00000510:

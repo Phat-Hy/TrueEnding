@@ -6,7 +6,7 @@ extern void _restgpr_18(void);
 extern void _restgpr_23(void);
 extern void _savegpr_18(void);
 extern void _savegpr_23(void);
-extern void fn_80061824(void);
+extern void skill_calcTrajectory(void);
 extern void fn_80061AE4(void);
 extern void fn_8006EF48(void);
 extern void str_findChar(void);
@@ -1075,7 +1075,7 @@ lbl_fn_804CBCD0_00000D54:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     b lbl_fn_804CBCD0_00000E5C
 lbl_fn_804CBCD0_00000DD4:
     lwz r0, 0xe4(r25)

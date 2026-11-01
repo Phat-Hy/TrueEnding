@@ -29,7 +29,7 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void __construct_new_array(void);
 extern void __destroy_new_array(void);
 extern u32 strlen(const char* str);
@@ -1324,7 +1324,7 @@ asm void fn_803E8698(void)
     stfs f0, 0x1158(r4)
 lbl_fn_803E8698_000012BC:
     addi r3, r29, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     lis r4, lbl_807C7030@ha
     stw r0, 0x18(r29)
@@ -1440,7 +1440,7 @@ asm void fn_803E8820(void)
     stfs f0, 0x1158(r3)
 lbl_fn_803E8820_00001450:
     li r3, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     lis r5, lbl_807C7030@ha
     stw r0, 0x18(r3)
@@ -1734,7 +1734,7 @@ lbl_fn_803E8A50_000017EC:
     stfs f30, 0x1158(r3)
 lbl_fn_803E8A50_00001858:
     addi r3, r22, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     stw r26, 0x18(r22)
     lfs f2, 0x8(r25)
     psq_l f1, 0x0(r25), 0, 0
@@ -1780,7 +1780,7 @@ lbl_fn_803E8A50_000018B0:
     bl fn_8007A530
     lwz r3, 0x24(r20)
     addi r3, r3, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r3, 0x24(r20)
     lwz r4, 0x8(r20)
     addi r0, r3, 0x4
@@ -1872,7 +1872,7 @@ lbl_fn_803E8A50_000019F8:
     stfs f30, 0x1158(r3)
 lbl_fn_803E8A50_00001A44:
     addi r3, r21, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     stw r26, 0x18(r21)
     lfs f2, 0x8(r25)
     psq_l f1, 0x0(r25), 0, 0

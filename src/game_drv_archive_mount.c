@@ -15,7 +15,7 @@ extern void fn_80043EAC(void);
 extern void Arms_destructor(void);
 extern void Arms_execute(void);
 extern void fn_8005DFC8(void);
-extern void fn_80061824(void);
+extern void skill_calcTrajectory(void);
 extern void fn_8006EF48(void);
 extern void dungeon_initGlobalContext(void);
 extern void mem_alloc(void);
@@ -490,7 +490,7 @@ lbl_arms_calcWeaponHitbox_0000046C:
     li r9, 0x0
     fmr f8, f6
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     addi r30, r30, 0xc
     addi r31, r31, 0x1
 lbl_arms_calcWeaponHitbox_00000498:

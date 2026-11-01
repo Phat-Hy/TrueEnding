@@ -28,7 +28,7 @@ extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void str_findChar(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_801D082C(void);
 extern void save_validateHeader(void);
@@ -582,7 +582,7 @@ lbl_fn_8051B548_0000060C:
     lwz r31, lbl_8087F580
     li r3, 0x1
     li r4, 0x15b
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     mr r3, r31
     li r5, 0x0

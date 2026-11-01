@@ -11,8 +11,8 @@ extern void fn_80058078(void);
 extern void fn_800580BC(void);
 extern void fn_800588FC(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
 extern void atn_Model_findBoneIndex(void);
@@ -1132,7 +1132,7 @@ asm void fn_803F5C2C(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x108(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r29, lbl_807522F4@ha
     li r30, 0x1
     addi r29, r29, lbl_807522F4@l
@@ -1411,7 +1411,7 @@ lbl_fn_803F5C2C_000012E8:
     bl memcpy
 lbl_fn_803F5C2C_0000132C:
     addi r3, r1, 0x108
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_803F5C2C_00000F40
     lmw r27, 0x74c(r1)
@@ -1466,7 +1466,7 @@ asm void fn_803F60E8(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r30, lbl_807522F4@ha
     li r31, 0x1
     addi r30, r30, lbl_807522F4@l
@@ -1518,7 +1518,7 @@ lbl_fn_803F60E8_00001494:
     stw r3, 0x5ec(r28)
 lbl_fn_803F60E8_000014B8:
     addi r3, r1, 0x8
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_803F60E8_00001408
     lwz r0, 0x654(r1)

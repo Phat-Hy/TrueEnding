@@ -5,7 +5,7 @@
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void str_initFromCStr(void);
-extern void fn_8004212C(void);
+extern void str_getData(void);
 extern void fn_80057A64(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
@@ -49,7 +49,7 @@ extern void boss_updatePhaseState(void);
 extern void fn_80144710(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_80151448(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
@@ -577,7 +577,7 @@ asm void fn_802CCFD8(void)
 lbl_fn_802CCFD8_00000614:
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     addi r4, r29, 0x2d
     li r5, 0x8
     bl strncmp
@@ -585,7 +585,7 @@ lbl_fn_802CCFD8_00000614:
     bne lbl_fn_802CCFD8_00000654
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     addi r3, r1, 0x20
     addi r4, r4, 0x8
@@ -594,7 +594,7 @@ lbl_fn_802CCFD8_00000614:
 lbl_fn_802CCFD8_00000654:
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     addi r4, r29, 0x36
     bl strcmp
     cmpwi r3, 0x0
@@ -624,7 +624,7 @@ lbl_fn_802CCFD8_0000067C:
     addi r5, r1, 0x20
     bl fn_8006AFF8
     addi r3, r1, 0x8
-    bl fn_8004212C
+    bl str_getData
     lwz r12, 0x14b0(r28)
     mr r4, r3
     addi r3, r28, 0x14b0
@@ -1565,7 +1565,7 @@ lbl_fn_802CD73C_0000145C:
     bl fn_802CF3AC
 lbl_fn_802CD73C_00001478:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
     bl quest_updateFlow
     lis r30, lbl_80746EE0@ha

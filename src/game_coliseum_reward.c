@@ -10,9 +10,9 @@ extern void dtor_80084684(void);
 extern void str_initFromCStr(void);
 extern void fn_80041A80(void);
 extern void fn_80042108(void);
-extern void fn_8004212C(void);
+extern void str_getData(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
+extern void talk_parseQuotes(void);
 extern void fn_8006B174(void);
 extern void fn_8006B2D8(void);
 extern void fn_80079BC8(void);
@@ -428,7 +428,7 @@ lbl_fn_80494354_000004B0:
     addi r4, r1, 0x18
     bl fn_8006B2D8
     addi r3, r1, 0xc
-    bl fn_8004212C
+    bl str_getData
     bl str_findChar
     stw r3, 0x54(r1)
     addi r3, r1, 0xc
@@ -448,7 +448,7 @@ lbl_fn_80494354_000004B0:
     bl fn_80495418
 lbl_fn_80494354_00000560:
     addi r3, r1, 0xf4
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_80494354_00000048
     lmw r27, 0x72c(r1)

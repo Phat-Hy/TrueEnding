@@ -40,7 +40,7 @@ extern void fn_80470528(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_804A39EC(void);
 extern void fn_804A3A68(void);
 extern void fn_804A436C(void);
@@ -1357,7 +1357,7 @@ lbl_fn_8057FC28_000011B4:
     b lbl_fn_8057FC28_000011F8
 lbl_fn_8057FC28_000011C0:
     addi r3, r3, 0x58
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r3, lbl_8087F490
     cmpwi r3, 0x0
     beq lbl_fn_8057FC28_000011E8

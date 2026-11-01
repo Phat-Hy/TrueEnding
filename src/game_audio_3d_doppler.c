@@ -35,7 +35,7 @@ extern void quest_updateFlow(void);
 extern void fn_801495E8(void);
 extern void fn_80149624(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_80151448(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015B238(void);
@@ -644,7 +644,7 @@ lbl_fn_80323690_0000064C:
 lbl_fn_80323690_000006A0:
     stfs f30, 0x14b4(r30)
     mr r3, r30
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r30
     bl quest_updateFlow
     lwz r3, 0x15ec(r30)

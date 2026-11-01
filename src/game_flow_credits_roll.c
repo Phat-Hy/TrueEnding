@@ -26,7 +26,7 @@ extern void PSVECSquareMag(void);
 extern void printf(void);
 extern void rand(void);
 extern void abort(void);
-extern void fn_806A8E40(void);
+extern void net_getSocket(void);
 extern void fn_806A8E70(void);
 extern void fn_806B0DE0(void);
 extern void net_getMyAid(void);
@@ -108,7 +108,7 @@ lbl_fn_804E9C68_0000004C:
     li r3, 0x0
     b lbl_fn_804E9C68_00000064
 lbl_fn_804E9C68_00000060:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804E9C68_00000064:
     clrlwi r14, r3, 24
 lbl_fn_804E9C68_00000068:
@@ -1009,7 +1009,7 @@ lbl_fn_804EA8BC_00000CC8:
     li r3, 0x0
     b lbl_fn_804EA8BC_00000CE0
 lbl_fn_804EA8BC_00000CDC:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804EA8BC_00000CE0:
     clrlwi r0, r3, 24
 lbl_fn_804EA8BC_00000CE4:
@@ -1549,7 +1549,7 @@ lbl_fn_804EB014_000013FC:
     li r3, 0x0
     b lbl_fn_804EB014_00001414
 lbl_fn_804EB014_00001410:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804EB014_00001414:
     clrlwi r0, r3, 24
 lbl_fn_804EB014_00001418:
@@ -1673,7 +1673,7 @@ lbl_fn_804EB1B0_0000158C:
     li r3, 0x0
     b lbl_fn_804EB1B0_000015A4
 lbl_fn_804EB1B0_000015A0:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804EB1B0_000015A4:
     clrlwi r31, r3, 24
 lbl_fn_804EB1B0_000015A8:
@@ -1928,7 +1928,7 @@ lbl_fn_804EB4B0_00001898:
     li r3, 0x0
     b lbl_fn_804EB4B0_000018B0
 lbl_fn_804EB4B0_000018AC:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804EB4B0_000018B0:
     clrlwi r0, r3, 24
 lbl_fn_804EB4B0_000018B4:

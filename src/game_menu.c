@@ -23,9 +23,9 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
-extern void fn_80061824(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
+extern void skill_calcTrajectory(void);
 extern void fn_8006B2D8(void);
 extern void fn_8006EF48(void);
 extern void fn_80070A70(void);
@@ -76,7 +76,7 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_80570A78(void);
 extern void fn_805A6A84(void);
 extern void PSMTXConcat(void);
@@ -167,7 +167,7 @@ void fn_80041D44(void);
 void fn_8004203C(void);
 void fn_800420F4(void);
 void fn_80042108(void);
-void fn_8004212C(void);
+void str_getData(void);
 void fn_80042148(void);
 void fn_8004215C(void);
 void fn_80042218(void);
@@ -452,7 +452,7 @@ asm void AreaEffConfig_execute(void)
     mr r3, r31
     bl fn_80041D44
     addi r3, r31, 0x48
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r0, 0x38(r31)
     li r3, 0x1
     ori r0, r0, 0x4
@@ -594,7 +594,7 @@ lbl_fn_80041D44_0000049C:
     addi r3, r1, 0x60
     bl fn_80042684
     addi r3, r1, 0x28
-    bl fn_8004212C
+    bl str_getData
     bl str_findChar
     stw r3, 0x60(r1)
     addi r3, r1, 0x68
@@ -753,15 +753,15 @@ asm void fn_80042108(void)
     blr
 }
 
-asm void fn_8004212C(void)
+asm void str_getData(void)
 {
     nofralloc
     lwz r0, 0x0(r3)
     srwi. r0, r0, 31
-    bne lbl_fn_8004212C_000006F0
+    bne lbl_str_getData_000006F0
     addi r3, r3, 0x1
     blr
-lbl_fn_8004212C_000006F0:
+lbl_str_getData_000006F0:
     lwz r3, 0x8(r3)
     blr
 }
@@ -2547,7 +2547,7 @@ lbl_ArenaTask_draw_00001DDC:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_ArenaTask_draw_00001E74:
     lwz r4, 0x2b8(r31)
     cmpwi r4, 0x0
@@ -3294,7 +3294,7 @@ lbl_Arms_execute_00002850:
     mr r3, r31
     bl fn_8004439C
     addi r3, r31, 0x27c
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x2
     stw r0, 0x284(r31)
 lbl_Arms_execute_00002868:
@@ -3415,7 +3415,7 @@ asm void fn_8004439C(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x308(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r30, lbl_80730E5C@ha
     lfs f31, lbl_80880860
     addi r30, r30, lbl_80730E5C@l
@@ -3573,7 +3573,7 @@ lbl_fn_8004439C_00002C2C:
     bl res_MsgHandle_destructor
 lbl_fn_8004439C_00002C44:
     addi r3, r1, 0x308
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_8004439C_00002A0C
     lwz r0, 0x29c(r31)

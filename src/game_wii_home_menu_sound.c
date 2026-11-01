@@ -20,7 +20,7 @@ extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void str_findChar(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_8011770C(void);
 extern void fn_8012B028(void);
@@ -1262,7 +1262,7 @@ lbl_fn_80571C68_00000FAC:
     lis r4, 0x89
     li r3, 0x0
     addi r4, r4, 0x54d8
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x68(r31)
     lis r5, lbl_8075FFD0@ha
     addi r5, r5, lbl_8075FFD0@l

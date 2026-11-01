@@ -21,7 +21,7 @@ extern void fn_800CB6E4(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_8012476C(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_801539E0(void);
 extern void fn_80155DAC(void);
 extern void fn_80164DCC(void);
@@ -1440,7 +1440,7 @@ lbl_fn_8019B6A8_000012F0:
     lwz r3, 0x4(r31)
     stfs f2, 0x50(r1)
     lfs f2, 0x568(r3)
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     lwz r3, 0x4(r31)
     li r4, 0x0
     addi r29, r3, 0xb0

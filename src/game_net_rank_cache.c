@@ -13,7 +13,7 @@ extern void msg_getMessageString(void);
 extern void fn_800A58D0(void);
 extern void ref_releaseHandle(void);
 extern void fn_80116EB8(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_801F6C2C(void);
 extern void save_computeCrc32(void);
@@ -1662,7 +1662,7 @@ lbl_fn_80525A0C_00001610:
     lwz r28, lbl_8087F580
     addi r4, r3, 0x4258
     li r3, 0x0
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     mr r3, r28
     li r5, 0x1

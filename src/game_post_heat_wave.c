@@ -19,11 +19,11 @@ extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void system_getNextSequenceId(void);
 extern void fn_8013A258(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void quest_updateFlow(void);
 extern void quest_ctorRewardItem(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_80151448(void);
 extern void actor_setState(void);
 extern void fn_80194550(void);
@@ -448,7 +448,7 @@ lbl_fn_802D8B7C_000004D4:
     mr r3, r31
     li r5, 0x0
     fmuls f2, f0, f4
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_802D8B7C_000004EC:
     mr r3, r31
     bl fn_802DA174
@@ -490,7 +490,7 @@ lbl_fn_802D8B7C_0000052C:
     stfs f0, 0x52c(r31)
 lbl_fn_802D8B7C_0000057C:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
     bl quest_updateFlow
     lfs f4, 0x16a0(r31)

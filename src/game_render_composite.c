@@ -8,7 +8,7 @@ extern void _savegpr_26(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void str_initFromCStr(void);
-extern void fn_8004212C(void);
+extern void str_getData(void);
 extern void fn_80057A64(void);
 extern void atn_ColliCapsule_destructor(void);
 extern void fn_8006AFF8(void);
@@ -39,7 +39,7 @@ extern void fn_80108F38(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void quest_ctorRewardItem(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_80151448(void);
 extern void actor_setState(void);
 extern void fn_801CB100(void);
@@ -1383,7 +1383,7 @@ asm void fn_802BA92C(void)
 lbl_fn_802BA92C_000011E8:
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     addi r4, r30, 0x2d
     li r5, 0x8
     bl strncmp
@@ -1391,7 +1391,7 @@ lbl_fn_802BA92C_000011E8:
     bne lbl_fn_802BA92C_00001224
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     addi r3, r1, 0x20
     addi r4, r4, 0x8
@@ -1425,7 +1425,7 @@ lbl_fn_802BA92C_0000122C:
     addi r4, r4, 0x36
     bl res_MsgHandle_destructor
     addi r3, r1, 0x8
-    bl fn_8004212C
+    bl str_getData
     lwz r12, 0x14d4(r28)
     mr r4, r3
     addi r3, r28, 0x14d4
@@ -1732,7 +1732,7 @@ lbl_fn_802BADB0_000016AC:
     bctrl
 lbl_fn_802BADB0_000016D8:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
     bl quest_updateFlow
     mr r3, r31

@@ -13,7 +13,7 @@ extern void fn_804FB224(void);
 extern void fn_8050DDE0(void);
 extern void fn_8050DE38(void);
 extern void fn_8050E098(void);
-extern void fn_806A8E40(void);
+extern void net_getSocket(void);
 extern void net_getMyAid(void);
 extern void fn_806B1250(void);
 
@@ -498,7 +498,7 @@ lbl_fn_804D8614_000005F0:
     li r3, 0x0
     b lbl_fn_804D8614_00000608
 lbl_fn_804D8614_00000604:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804D8614_00000608:
     clrlwi r0, r3, 24
 lbl_fn_804D8614_0000060C:
@@ -546,7 +546,7 @@ lbl_fn_804D8614_0000068C:
     li r3, 0x0
     b lbl_fn_804D8614_000006A4
 lbl_fn_804D8614_000006A0:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804D8614_000006A4:
     clrlwi r29, r3, 24
 lbl_fn_804D8614_000006A8:
@@ -623,7 +623,7 @@ lbl_fn_804D87B4_00000784:
     li r3, 0x0
     b lbl_fn_804D87B4_0000079C
 lbl_fn_804D87B4_00000798:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804D87B4_0000079C:
     clrlwi r30, r3, 24
 lbl_fn_804D87B4_000007A0:
@@ -728,7 +728,7 @@ lbl_fn_804D8914_000008E4:
     li r3, 0x0
     b lbl_fn_804D8914_000008FC
 lbl_fn_804D8914_000008F8:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804D8914_000008FC:
     clrlwi r0, r3, 24
 lbl_fn_804D8914_00000900:
@@ -1262,7 +1262,7 @@ lbl_fn_804D90E4_000010B8:
     li r3, 0x0
     b lbl_fn_804D90E4_000010D0
 lbl_fn_804D90E4_000010CC:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804D90E4_000010D0:
     clrlwi r0, r3, 24
 lbl_fn_804D90E4_000010D4:
@@ -1772,7 +1772,7 @@ lbl_fn_804D97F4_000017C4:
     li r3, 0x0
     b lbl_fn_804D97F4_000017DC
 lbl_fn_804D97F4_000017D8:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804D97F4_000017DC:
     clrlwi r30, r3, 24
 lbl_fn_804D97F4_000017E0:
@@ -1889,7 +1889,7 @@ lbl_fn_804D9970_00001944:
     li r3, 0x0
     b lbl_fn_804D9970_0000195C
 lbl_fn_804D9970_00001958:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804D9970_0000195C:
     clrlwi r0, r3, 24
 lbl_fn_804D9970_00001960:
@@ -1937,7 +1937,7 @@ lbl_fn_804D9970_000019E0:
     li r3, 0x0
     b lbl_fn_804D9970_000019F8
 lbl_fn_804D9970_000019F4:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804D9970_000019F8:
     clrlwi r29, r3, 24
 lbl_fn_804D9970_000019FC:

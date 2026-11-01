@@ -43,7 +43,7 @@ extern void fn_80444CF8(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getName(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void __destroy_arr(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -340,9 +340,9 @@ lbl_fn_800EFA18_000002D4:
     addi r3, r28, 0x28
     bl res_MsgHandle_unload
     addi r3, r28, 0x34
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     addi r3, r28, 0x3c
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     b lbl_fn_800EFA18_000003A4
 lbl_fn_800EFA18_0000033C:
     lwz r4, lbl_8087F038
@@ -365,9 +365,9 @@ lbl_fn_800EFA18_0000033C:
     addi r3, r28, 0x28
     bl res_MsgHandle_unload
     addi r3, r28, 0x34
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     addi r3, r28, 0x3c
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     b lbl_fn_800EFA18_000003A4
 lbl_fn_800EFA18_0000039C:
     mr r3, r28

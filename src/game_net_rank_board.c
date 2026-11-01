@@ -29,7 +29,7 @@ extern void fn_803743AC(void);
 extern void fn_8037587C(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_804A62C8(void);
 extern void fn_805113EC(void);
 extern void fn_80521014(void);
@@ -2283,7 +2283,7 @@ lbl_fn_80520638_00001E7C:
     cmpwi r3, 0x0
     bne lbl_fn_80520638_00001B08
     addi r3, r23, 0x19c4
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     addi r11, r1, 0x720
     psq_l f31, 0x728(r1), 0, 0
     lfd f31, 0x720(r1)

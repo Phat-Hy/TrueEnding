@@ -44,7 +44,7 @@ extern void fn_8013A194(void);
 extern void fn_8013C38C(void);
 extern void fn_8014052C(void);
 extern void quest_updateFlow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_801513D0(void);
 extern void fn_8015E7A0(void);
 extern void fn_8016D74C(void);
@@ -1379,7 +1379,7 @@ lbl_fn_8032E938_0000117C:
     mr r3, r31
     bl fn_80139560
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
     bl quest_updateFlow
     mr r3, r31

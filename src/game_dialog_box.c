@@ -6,7 +6,7 @@ extern void _restgpr_24(void);
 extern void _savegpr_24(void);
 extern void fn_80044E0C(void);
 extern void fn_80050A1C(void);
-extern void fn_80061824(void);
+extern void skill_calcTrajectory(void);
 extern void fn_80063D3C(void);
 extern void fn_8006EF48(void);
 extern void fn_8006F2F0(void);
@@ -1556,7 +1556,7 @@ lbl_dialog_renderWindow_00001384:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f0, lbl_80881A88
     lis r25, lbl_8077C6F8@ha
     lwz r6, 0x55c(r24)
@@ -1592,7 +1592,7 @@ lbl_dialog_renderWindow_00001384:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f0, lbl_80881A88
     addi r25, r25, lbl_8077C6F8@l
     lfs f6, 0x348(r24)
@@ -1632,7 +1632,7 @@ lbl_dialog_renderWindow_00001384:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f0, lbl_80881A88
     addi r3, r1, 0x9f8
     lfs f1, 0x570(r24)
@@ -1666,7 +1666,7 @@ lbl_dialog_renderWindow_00001384:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f0, lbl_80881A88
     fadds f30, f30, f0
 lbl_dialog_renderWindow_00001674:
@@ -1733,7 +1733,7 @@ lbl_dialog_renderWindow_00001710:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f0, lbl_80881A88
     fadds f30, f30, f0
 lbl_dialog_renderWindow_00001774:
@@ -1803,7 +1803,7 @@ lbl_dialog_renderWindow_00001774:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f0, lbl_80881A88
     lwz r0, 0x48(r24)
     fadds f30, f30, f0
@@ -1863,7 +1863,7 @@ lbl_dialog_renderWindow_0000191C:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lwz r0, 0x7e0(r24)
     lis r4, lbl_8077C6F8@ha
     lfs f0, lbl_80881A88
@@ -1899,7 +1899,7 @@ lbl_dialog_renderWindow_000019A0:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f0, lbl_80881A88
     lis r3, lbl_8077C6F8@ha
     addi r25, r3, lbl_8077C6F8@l
@@ -1927,7 +1927,7 @@ lbl_dialog_renderWindow_000019A0:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f0, lbl_80881A88
     addi r3, r1, 0x5f8
     lfs f1, 0x8c4(r24)
@@ -1953,7 +1953,7 @@ lbl_dialog_renderWindow_000019A0:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f31, lbl_80881A88
     addi r27, r24, 0x12d4
     li r28, 0x0
@@ -1989,7 +1989,7 @@ lbl_dialog_renderWindow_00001ADC:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     fadds f30, f30, f31
 lbl_dialog_renderWindow_00001B58:
     addi r27, r27, 0x14
@@ -2033,7 +2033,7 @@ lbl_dialog_renderWindow_00001B88:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     fadds f30, f30, f31
 lbl_dialog_renderWindow_00001BFC:
     addi r27, r27, 0x14
@@ -2085,7 +2085,7 @@ lbl_dialog_renderWindow_00001C30:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     fadds f30, f30, f31
 lbl_dialog_renderWindow_00001CC0:
     addi r29, r29, 0x1
@@ -2271,7 +2271,7 @@ lbl_dialog_renderWindow_00001ECC:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     b lbl_dialog_renderWindow_00002178
 lbl_dialog_renderWindow_00001F6C:
     lwz r3, 0x7e0(r24)
@@ -2340,7 +2340,7 @@ lbl_dialog_renderWindow_00001FD4:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     b lbl_dialog_renderWindow_00002178
 lbl_dialog_renderWindow_00002074:
     rlwinm r3, r3, 0, 9, 9
@@ -2409,7 +2409,7 @@ lbl_dialog_renderWindow_000020DC:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_dialog_renderWindow_00002178:
     lbz r4, 0xd75(r24)
     extsb. r3, r4
@@ -2622,7 +2622,7 @@ lbl_dialog_renderWindow_0000240C:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     b lbl_dialog_renderWindow_00002798
 lbl_dialog_renderWindow_00002484:
     lwz r3, lbl_8087F098
@@ -2736,7 +2736,7 @@ lbl_dialog_renderWindow_00002540:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     b lbl_dialog_renderWindow_00002798
 lbl_dialog_renderWindow_0000262C:
     lwz r0, 0x55c(r24)
@@ -2831,7 +2831,7 @@ lbl_dialog_renderWindow_000026AC:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_dialog_renderWindow_00002798:
     li r0, 0xc48
     addi r11, r1, 0xc30

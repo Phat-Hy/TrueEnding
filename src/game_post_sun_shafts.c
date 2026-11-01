@@ -28,10 +28,10 @@ extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013A258(void);
 extern void fn_8013C504(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_80144710(void);
 extern void quest_updateFlow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_8016E484(void);
 extern void actor_setState(void);
 extern void fn_801A03E0(void);
@@ -1243,7 +1243,7 @@ lbl_fn_802D0B84_00000FE4:
     mr r3, r31
     li r5, 0x0
     fmuls f2, f0, f4
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_802D0B84_00000FFC:
     mr r3, r31
     bl fn_802D3370
@@ -2546,7 +2546,7 @@ lbl_fn_802D0B84_00002328:
     stfs f0, 0x538(r31)
 lbl_fn_802D0B84_00002330:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
     bl quest_updateFlow
     lwz r3, lbl_8087F048

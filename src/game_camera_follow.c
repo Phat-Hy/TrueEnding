@@ -19,7 +19,7 @@ extern void system_getNextSequenceId(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015AC48(void);
 extern void debuff_clearStatus(void);
@@ -1445,7 +1445,7 @@ lbl_fn_802E5E94_000012E0:
     bctrl
 lbl_fn_802E5E94_00001300:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
     bl quest_updateFlow
     lfs f2, 0x530(r31)

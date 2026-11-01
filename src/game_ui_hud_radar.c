@@ -28,7 +28,7 @@ extern void fn_8013C394(void);
 extern void fn_8013C3B4(void);
 extern void fn_8013C460(void);
 extern void fn_8013C554(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_8014052C(void);
 extern void fn_801446F0(void);
 extern void fn_801539E0(void);
@@ -915,7 +915,7 @@ lbl_fn_801C074C_00000A54:
     stfs f2, 0x4c(r1)
     lwz r3, 0x4(r28)
     lfs f2, 0x20(r28)
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     mr r3, r30
 lbl_fn_801C074C_00000A88:
     lwz r0, 0x1c4(r1)
@@ -1557,7 +1557,7 @@ lbl_fn_801C1084_00001388:
     lfs f1, lbl_808826A8
     lfs f2, 0x20(r31)
     addi r4, r3, 0x534
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     li r3, 0x1
 lbl_fn_801C1084_000013A4:
     addi r11, r1, 0x140

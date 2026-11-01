@@ -16,11 +16,11 @@ extern void fn_80108F38(void);
 extern void fn_80126214(void);
 extern void fn_8012DB04(void);
 extern void fn_8013A258(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_801426A4(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_80151448(void);
 extern void fn_80158BB4(void);
 extern void actor_setState(void);
@@ -492,7 +492,7 @@ lbl_fn_802F7E0C_00000594:
     bl fn_80040B40
 lbl_fn_802F7E0C_000005B0:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
     bl quest_updateFlow
     lwz r0, 0xc4(r1)
@@ -1582,7 +1582,7 @@ lbl_fn_802F8EBC_0000157C:
     fmr f1, f28
     lfs f0, 0x568(r29)
     fmuls f2, f0, f30
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_802F8EBC_000015A8:
     lwz r0, 0x214(r1)
     psq_l f31, 0x208(r1), 0, 0

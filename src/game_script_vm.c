@@ -12,7 +12,7 @@ extern void dtor_80084684(void);
 extern void sys_copyString(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8004212C(void);
+extern void str_getData(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -1405,7 +1405,7 @@ lbl_fn_802438D4_00001074:
     addi r3, r1, 0x130
     li r4, 0x0
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_parseInt
     mr r25, r3
     b lbl_fn_802438D4_00001558
@@ -1418,7 +1418,7 @@ lbl_fn_802438D4_000010A4:
     addi r3, r1, 0x130
     li r4, 0x0
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_parseInt
     mr r4, r3
     mr r3, r24
@@ -1435,7 +1435,7 @@ lbl_fn_802438D4_000010E4:
     addi r3, r1, 0x130
     li r4, 0x0
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     mr r5, r3
     addi r3, r1, 0x30
     addi r4, r29, 0x22
@@ -1450,7 +1450,7 @@ lbl_fn_802438D4_000010E4:
     addi r3, r1, 0x130
     li r4, 0x1
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_parseInt
     mr r30, r3
     mr r3, r24
@@ -1468,7 +1468,7 @@ lbl_fn_802438D4_00001164:
     addi r3, r1, 0x130
     li r4, 0x0
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_parseInt
     mr r30, r3
     mr r3, r24
@@ -1478,7 +1478,7 @@ lbl_fn_802438D4_00001164:
     addi r3, r1, 0x130
     li r4, 0x1
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_parseInt
     mr r30, r3
     mr r3, r24
@@ -1510,7 +1510,7 @@ lbl_fn_802438D4_00001200:
     addi r3, r1, 0x130
     li r4, 0x0
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
@@ -1520,7 +1520,7 @@ lbl_fn_802438D4_00001200:
     addi r3, r1, 0x130
     li r4, 0x1
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
@@ -1530,7 +1530,7 @@ lbl_fn_802438D4_00001200:
     addi r3, r1, 0x130
     li r4, 0x2
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
@@ -1547,7 +1547,7 @@ lbl_fn_802438D4_00001290:
     addi r3, r1, 0x130
     li r4, 0x0
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
@@ -1557,7 +1557,7 @@ lbl_fn_802438D4_00001290:
     addi r3, r1, 0x130
     li r4, 0x1
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
@@ -1567,7 +1567,7 @@ lbl_fn_802438D4_00001290:
     addi r3, r1, 0x130
     li r4, 0x2
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
@@ -1589,7 +1589,7 @@ lbl_fn_802438D4_00001334:
     addi r3, r1, 0x130
     li r4, 0x0
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
@@ -1606,7 +1606,7 @@ lbl_fn_802438D4_00001374:
     addi r3, r1, 0x130
     li r4, 0x0
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
@@ -1616,7 +1616,7 @@ lbl_fn_802438D4_00001374:
     addi r3, r1, 0x130
     li r4, 0x1
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
@@ -1626,7 +1626,7 @@ lbl_fn_802438D4_00001374:
     addi r3, r1, 0x130
     li r4, 0x2
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
@@ -1636,7 +1636,7 @@ lbl_fn_802438D4_00001374:
     addi r3, r1, 0x130
     li r4, 0x3
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
@@ -1653,7 +1653,7 @@ lbl_fn_802438D4_0000142C:
     addi r3, r1, 0x130
     li r4, 0x0
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_parseInt
     mr r30, r3
     mr r3, r24
@@ -1667,7 +1667,7 @@ lbl_fn_802438D4_0000142C:
     addi r3, r1, 0x14
     bl fn_800E19AC
     addi r3, r1, 0x14
-    bl fn_8004212C
+    bl str_getData
     bl str_findChar
     mr r30, r3
     mr r3, r24
@@ -1677,7 +1677,7 @@ lbl_fn_802438D4_0000142C:
     addi r3, r1, 0x130
     li r4, 0x3
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_parseInt
     mr r30, r3
     mr r3, r24
@@ -1687,7 +1687,7 @@ lbl_fn_802438D4_0000142C:
     addi r3, r1, 0x130
     li r4, 0x4
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_parseInt
     mr r30, r3
     mr r3, r24

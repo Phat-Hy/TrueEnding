@@ -46,7 +46,7 @@ extern void fn_8032B7F0(void);
 extern void fn_8032BE88(void);
 extern void fn_8032C1EC(void);
 extern void world_getGlobalFlag(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_80541BDC(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
@@ -493,7 +493,7 @@ lbl_fn_80547B58_000004C8:
     cmplw r28, r0
     blt lbl_fn_80547B58_000004BC
     addi r3, r4, 0x8c
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     b lbl_fn_80547B58_000004EC
 lbl_fn_80547B58_000004E8:
     li r30, 0x1

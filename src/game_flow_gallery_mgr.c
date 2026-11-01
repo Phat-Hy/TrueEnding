@@ -23,7 +23,7 @@ extern void fn_8050A984(void);
 extern void fn_8050E630(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_806A8E40(void);
+extern void net_getSocket(void);
 extern void net_getMyAid(void);
 extern void fn_806B1250(void);
 
@@ -299,7 +299,7 @@ lbl_fn_804F1568_0000030C:
     li r3, 0x0
     b lbl_fn_804F1568_00000324
 lbl_fn_804F1568_00000320:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804F1568_00000324:
     clrlwi r0, r3, 24
 lbl_fn_804F1568_00000328:
@@ -386,7 +386,7 @@ lbl_fn_804F1568_0000042C:
     li r3, 0x0
     b lbl_fn_804F1568_00000444
 lbl_fn_804F1568_00000440:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804F1568_00000444:
     clrlwi r0, r3, 24
 lbl_fn_804F1568_00000448:
@@ -1008,7 +1008,7 @@ lbl_fn_804F2044_00000CD8:
     li r3, 0x0
     b lbl_fn_804F2044_00000CF0
 lbl_fn_804F2044_00000CEC:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804F2044_00000CF0:
     clrlwi r0, r3, 24
 lbl_fn_804F2044_00000CF4:

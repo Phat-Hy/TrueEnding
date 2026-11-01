@@ -43,7 +43,7 @@ extern void fn_8050A638(void);
 extern void fn_8050BA6C(void);
 extern void __construct_new_array(void);
 extern void __destroy_new_array(void);
-extern void fn_806A8E40(void);
+extern void net_getSocket(void);
 extern void fn_806A8E70(void);
 extern void fn_806B0DE0(void);
 extern void net_getMyAid(void);
@@ -1525,7 +1525,7 @@ lbl_fn_804BC628_00001424:
     beq lbl_fn_804BC628_00001434
     b lbl_fn_804BC628_0000143C
 lbl_fn_804BC628_00001434:
-    bl fn_806A8E40
+    bl net_getSocket
     mr r31, r3
 lbl_fn_804BC628_0000143C:
     clrlwi r31, r31, 24

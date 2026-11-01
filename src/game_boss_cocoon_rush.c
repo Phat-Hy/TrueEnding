@@ -37,7 +37,7 @@ extern void fn_8046DD20(void);
 extern void fn_8046F5CC(void);
 extern void fn_8046F834(void);
 extern void atn_Curve_evalHermite(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
@@ -826,7 +826,7 @@ asm void atn_LH_ColliObject_onNotify(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r3, lbl_8087F518
     mr r4, r31
     li r5, 0x1
@@ -1075,7 +1075,7 @@ asm void atn_LH_ColliTree_onNotify(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r3, lbl_8087F518
     mr r4, r31
     li r5, 0x1
@@ -1934,7 +1934,7 @@ asm void atn_LH_Effect_onNotify(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r3, lbl_8087F518
     mr r4, r31
     li r5, 0x1

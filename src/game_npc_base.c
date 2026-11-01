@@ -34,7 +34,7 @@ extern void fn_8013537C(void);
 extern void fn_801370B8(void);
 extern void fn_80138E1C(void);
 extern void fn_8013A4E8(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_801698E4(void);
 extern void fn_8016BBCC(void);
 extern void actor_setState(void);
@@ -655,7 +655,7 @@ lbl_fn_80139560_00000780:
     lfs f2, 0x10(r1)
     addi r4, r1, 0x6c
     li r5, 0x0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_80139560_00000798:
     lwz r0, 0x54c(r31)
     rlwinm r0, r0, 0, 23, 23

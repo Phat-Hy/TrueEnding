@@ -9,7 +9,7 @@ extern void _savegpr_16(void);
 extern void _savegpr_21(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_80061824(void);
+extern void skill_calcTrajectory(void);
 extern void fn_8006EF48(void);
 extern void mem_alloc(void);
 extern void node_createNamedChild(void);
@@ -2233,7 +2233,7 @@ lbl_fn_8054B328_00001C9C:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     fmr f1, f15
     fmr f2, f17
@@ -2250,7 +2250,7 @@ lbl_fn_8054B328_00001C9C:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     b lbl_fn_8054B328_00002190
 lbl_fn_8054B328_00001D28:
     fmr f1, f19
@@ -2279,7 +2279,7 @@ lbl_fn_8054B328_00001D28:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     fmr f1, f15
     fmr f4, f19
@@ -2296,7 +2296,7 @@ lbl_fn_8054B328_00001D28:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     fmr f2, f17
     fmr f4, f19
@@ -2313,7 +2313,7 @@ lbl_fn_8054B328_00001D28:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     fmr f1, f15
     fmr f4, f19
@@ -2330,7 +2330,7 @@ lbl_fn_8054B328_00001D28:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     oris r5, r17, 0xff
     fmr f1, f15
@@ -2348,7 +2348,7 @@ lbl_fn_8054B328_00001D28:
     fmr f8, f6
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     b lbl_fn_8054B328_00002190
 lbl_fn_8054B328_00001EAC:
     lwz r3, 0x0(r19)
@@ -2427,7 +2427,7 @@ lbl_fn_8054B328_00001F48:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     fmr f1, f15
     fmr f2, f17
@@ -2444,7 +2444,7 @@ lbl_fn_8054B328_00001F48:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     b lbl_fn_8054B328_00002190
 lbl_fn_8054B328_00002018:
     lwz r3, 0x0(r19)
@@ -2529,7 +2529,7 @@ lbl_fn_8054B328_00002108:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     fmr f1, f15
     fmr f2, f17
@@ -2546,7 +2546,7 @@ lbl_fn_8054B328_00002108:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_fn_8054B328_00002190:
     lwz r4, 0xa4(r19)
     cmpwi r4, 0x0
@@ -2895,7 +2895,7 @@ lbl_fn_8054B328_00002664:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     fmr f1, f15
     fmr f2, f17
@@ -2912,7 +2912,7 @@ lbl_fn_8054B328_00002664:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_fn_8054B328_00002720:
     lwz r3, 0x94(r19)
     cmpwi r3, 0x0
@@ -3752,7 +3752,7 @@ lbl_fn_8054B328_00003360:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     oris r5, r17, 0xff
     fmr f1, f15
@@ -3770,7 +3770,7 @@ lbl_fn_8054B328_00003360:
     fmr f8, f6
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_fn_8054B328_00003424:
     lwz r4, 0x14(r19)
     clrlwi r0, r4, 31
@@ -3875,7 +3875,7 @@ lbl_fn_8054B328_0000351C:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     fmr f1, f15
     fmr f4, f16
@@ -3892,7 +3892,7 @@ lbl_fn_8054B328_0000351C:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     fmr f2, f17
     fmr f4, f16
@@ -3909,7 +3909,7 @@ lbl_fn_8054B328_0000351C:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     fmr f1, f15
     fmr f4, f16
@@ -3926,7 +3926,7 @@ lbl_fn_8054B328_0000351C:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     oris r5, r17, 0xff
     fmr f1, f15
@@ -3944,7 +3944,7 @@ lbl_fn_8054B328_0000351C:
     fmr f8, f6
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_fn_8054B328_000036A4:
     lwz r0, 0x14(r19)
     rlwinm r0, r0, 0, 17, 17
@@ -3988,7 +3988,7 @@ lbl_fn_8054B328_000036CC:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     oris r5, r17, 0xff
     fmr f1, f15
@@ -4006,7 +4006,7 @@ lbl_fn_8054B328_000036CC:
     fmr f8, f6
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_fn_8054B328_00003790:
     lwz r0, 0x14(r19)
     rlwinm r3, r0, 0, 10, 10
@@ -4049,7 +4049,7 @@ lbl_fn_8054B328_000037BC:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     fmr f1, f15
     fmr f4, f19
@@ -4066,7 +4066,7 @@ lbl_fn_8054B328_000037BC:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     fmr f2, f17
     fmr f4, f19
@@ -4083,7 +4083,7 @@ lbl_fn_8054B328_000037BC:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     fmr f1, f15
     fmr f4, f19
@@ -4100,7 +4100,7 @@ lbl_fn_8054B328_000037BC:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     oris r5, r17, 0xff
     fmr f1, f15
@@ -4118,7 +4118,7 @@ lbl_fn_8054B328_000037BC:
     fmr f8, f6
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_fn_8054B328_00003944:
     addi r19, r19, 0xb4
 lbl_fn_8054B328_00003948:

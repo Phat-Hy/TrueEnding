@@ -17,7 +17,7 @@ extern void fn_800109E0(void);
 extern void fn_80013410(void);
 extern void str_initFromCStr(void);
 extern void fn_8004203C(void);
-extern void fn_8004212C(void);
+extern void str_getData(void);
 extern void fn_80043014(void);
 extern void talk_parseQuotedString(void);
 extern void fn_8006B0C8(void);
@@ -731,7 +731,7 @@ lbl_fn_804985E4_00000840:
     addi r5, r23, 0x6c
     bl fn_8006D008
     addi r3, r1, 0x24
-    bl fn_8004212C
+    bl str_getData
     mr r22, r3
     mr r4, r24
     addi r3, r21, 0x60

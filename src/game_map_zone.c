@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80061824(void);
+extern void skill_calcTrajectory(void);
 extern void fn_80062C8C(void);
 extern void fn_80063484(void);
 extern void fn_80063764(void);
@@ -1698,7 +1698,7 @@ lbl_fn_8017D13C_000015D0:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_fn_8017D13C_00001628:
     addi r11, r1, 0x3d0
     psq_l f31, 0x3e8(r1), 0, 0

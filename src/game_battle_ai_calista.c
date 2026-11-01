@@ -12,8 +12,8 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void fn_80069758(void);
 extern void fn_800697D8(void);
 extern void mem_alloc(void);
@@ -1330,7 +1330,7 @@ asm void fn_8043239C(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r28, lbl_807540A0@ha
     lfs f31, lbl_80886880
     mr r25, r29
@@ -1496,7 +1496,7 @@ lbl_fn_8043239C_00001384:
     stw r0, 0x3050(r29)
 lbl_fn_8043239C_000013AC:
     addi r3, r1, 0x8
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_8043239C_00001160
     lwz r0, 0x304c(r29)

@@ -10,7 +10,7 @@ extern void mem_free(void);
 extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
 extern void wcs_vformat(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_801CF334(void);
 extern void fn_801CF3C0(void);
@@ -136,7 +136,7 @@ lbl_fn_801D8CC4_00000080:
     lwz r30, lbl_8087F580
     li r3, 0x1
     li r4, 0x111
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     mr r3, r30
     bl fn_804A4294

@@ -9,8 +9,8 @@ extern void actor_dispatchMessage(void);
 extern void fn_80041C0C(void);
 extern void fn_8004B338(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void fn_80069BF4(void);
 extern void atn_normalizePath(char* str);
 extern void fn_8006B404(void);
@@ -41,7 +41,7 @@ extern void fn_804730D4(void);
 extern void fn_80473104(void);
 extern void fn_80473130(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void printf(void);
 extern void strcat(void);
 extern void strcmp(void);
@@ -180,7 +180,7 @@ lbl_fn_80475E14_00000098:
     bl strcat
 lbl_fn_80475E14_000000EC:
     mr r3, r28
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r3, lbl_8087F518
     mr r4, r29
     li r5, 0x1
@@ -784,7 +784,7 @@ asm void atn_LH_Motion_onNotify(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r3, lbl_8087F518
     mr r4, r31
     li r5, 0x1
@@ -1103,7 +1103,7 @@ asm void atn_LH_Model_onNotify(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r3, lbl_8087F518
     mr r4, r31
     li r5, 0x1
@@ -1468,7 +1468,7 @@ asm void fn_80476ED4(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x138(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r3, __files@ha
     lis r20, lbl_80756030@ha
     addi r18, r1, 0x38
@@ -1719,7 +1719,7 @@ lbl_fn_80476ED4_000014C4:
     bl fn_80470364
 lbl_fn_80476ED4_00001504:
     addi r3, r1, 0x138
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_80476ED4_000011AC
     lwz r3, 0x60(r30)
@@ -1824,7 +1824,7 @@ asm void atn_LH_MotionCommandData_onNotify(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r3, lbl_8087F518
     mr r4, r31
     li r5, 0x1
@@ -1992,7 +1992,7 @@ asm void fn_80477694(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r3, lbl_8087F518
     mr r4, r31
     li r5, 0x0

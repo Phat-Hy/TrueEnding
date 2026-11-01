@@ -20,7 +20,7 @@ extern void fn_80105A08(void);
 extern void fn_8010CA24(void);
 extern void fn_801240B4(void);
 extern void fn_80134168(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_801539E0(void);
 extern void debuff_clearStatus(void);
 extern void fn_80192758(void);
@@ -253,7 +253,7 @@ lbl_fn_801A2B58_000001E8:
     lfs f1, lbl_8088216C
     lfs f2, lbl_80882168
     addi r4, r3, 0x534
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     psq_l f31, 0x18(r1), 0, 0
     mr r3, r31
     lfd f31, 0x10(r1)

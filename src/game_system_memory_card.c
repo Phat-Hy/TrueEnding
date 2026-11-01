@@ -20,7 +20,7 @@ extern void fn_800FBA9C(void);
 extern void fn_8013322C(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_80151448(void);
 extern void fn_80158CA4(void);
 extern void fn_8015E4B0(void);
@@ -1408,7 +1408,7 @@ lbl_fn_803563E4_0000123C:
     mtctr r12
     bctrl
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     lwz r0, 0x38(r31)
     clrlwi r0, r0, 31
     cmplwi r0, 0x1

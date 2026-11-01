@@ -20,7 +20,7 @@ extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_8011728C(void);
 extern void fn_801F4CB4(void);
@@ -1222,7 +1222,7 @@ lbl_fn_805811E0_00000F5C:
     slwi r22, r31, 2
     li r3, 0x0
     lwzx r4, r29, r22
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x94(r27)
     mr r31, r3
     addi r3, r1, 0x48
@@ -1290,7 +1290,7 @@ lbl_fn_80581574_00001064:
     lwz r31, lbl_8087F580
     li r3, 0x1
     li r4, 0x15b
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     mr r3, r31
     li r5, 0x0

@@ -54,7 +54,7 @@ extern void fn_80470528(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_8047E5DC(void);
 extern void fn_8047F268(void);
 extern void fn_80547C2C(void);
@@ -206,7 +206,7 @@ lbl_fn_803C01C0_000000F8:
     li r28, 0x0
 lbl_fn_803C01C0_00000114:
     mr r3, r27
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     addi r28, r28, 0x1
     addi r27, r27, 0x8
     cmplwi r28, 0x3

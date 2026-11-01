@@ -91,7 +91,7 @@ extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_804814F0(void);
 extern void fn_8049D68C(void);
 extern void fn_804AC734(void);
@@ -2427,13 +2427,13 @@ lbl_fn_804D25D4_00001BEC:
     addi r3, r24, 0x610
     bl fn_80507314
     addi r3, r24, 0x2b58
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     addi r3, r24, 0x2b60
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     addi r3, r24, 0x2b68
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     addi r3, r24, 0x2b50
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     addi r3, r24, 0x4fc
     li r4, 0x7
     bl fn_804D16A0

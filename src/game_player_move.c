@@ -17,7 +17,7 @@ extern void msg_getMessageString(void);
 extern void ref_releaseHandle(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_8011BBD0(void);
 extern void fn_80124C6C(void);
@@ -235,7 +235,7 @@ lbl_fn_80119F0C_00000210:
     bne lbl_fn_80119F0C_00000268
     li r3, 0x0
     li r4, 0x2777
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x5c(r29)
     mr r31, r3
     addi r3, r28, 0x2be
@@ -249,7 +249,7 @@ lbl_fn_80119F0C_00000210:
 lbl_fn_80119F0C_00000268:
     li r3, 0x0
     li r4, 0x2776
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x5c(r29)
     mr r31, r3
     addi r3, r28, 0x2be
@@ -407,7 +407,7 @@ lbl_fn_80119F0C_00000454:
     bne lbl_fn_80119F0C_000004FC
     li r3, 0x0
     li r4, 0x2777
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x5c(r29)
     mr r28, r3
     addi r3, r30, 0x2be
@@ -421,7 +421,7 @@ lbl_fn_80119F0C_00000454:
 lbl_fn_80119F0C_000004FC:
     li r3, 0x0
     li r4, 0x2776
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x5c(r29)
     mr r28, r3
     addi r3, r30, 0x2be
@@ -621,7 +621,7 @@ lbl_fn_8011A4D0_000007B4:
     bne lbl_fn_8011A4D0_00000924
     li r3, 0x1
     li r4, 0x11d
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x64(r29)
     lis r5, lbl_80736B10@ha
     addi r5, r5, lbl_80736B10@l
@@ -640,7 +640,7 @@ lbl_fn_8011A4D0_00000824:
     beq lbl_fn_8011A4D0_0000086C
     li r3, 0x1
     li r4, 0x114
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x64(r29)
     lis r5, lbl_80736B10@ha
     addi r5, r5, lbl_80736B10@l
@@ -656,7 +656,7 @@ lbl_fn_8011A4D0_00000824:
 lbl_fn_8011A4D0_0000086C:
     li r3, 0x1
     li r4, 0x115
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x64(r29)
     lis r5, lbl_80736B10@ha
     addi r5, r5, lbl_80736B10@l
@@ -674,7 +674,7 @@ lbl_fn_8011A4D0_000008A8:
     bne lbl_fn_8011A4D0_000008EC
     li r3, 0x1
     li r4, 0x119
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x64(r29)
     lis r5, lbl_80736B10@ha
     addi r5, r5, lbl_80736B10@l
@@ -690,7 +690,7 @@ lbl_fn_8011A4D0_000008A8:
 lbl_fn_8011A4D0_000008EC:
     li r3, 0x1
     li r4, 0x116
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x64(r29)
     lis r5, lbl_80736B10@ha
     addi r5, r5, lbl_80736B10@l
@@ -831,7 +831,7 @@ lbl_fn_8011A4D0_00000ADC:
     bne lbl_fn_8011A4D0_00000B6C
     li r3, 0x0
     li r4, 0xc8
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r0, 0x40(r1)
     mr r27, r3
     srwi. r0, r0, 31
@@ -858,7 +858,7 @@ lbl_fn_8011A4D0_00000B38:
 lbl_fn_8011A4D0_00000B6C:
     li r3, 0x0
     li r4, 0xc9
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r0, 0x40(r1)
     mr r27, r3
     srwi. r0, r0, 31
@@ -885,7 +885,7 @@ lbl_fn_8011A4D0_00000B98:
 lbl_fn_8011A4D0_00000BCC:
     li r3, 0x0
     li r4, 0xca
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r0, 0x40(r1)
     mr r27, r3
     srwi. r0, r0, 31
@@ -956,7 +956,7 @@ lbl_fn_8011A4D0_00000CC8:
     bne lbl_fn_8011A4D0_00000D80
     li r3, 0x1
     li r4, 0x118
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x64(r29)
     mr r27, r3
     addi r3, r31, 0x289
@@ -1003,7 +1003,7 @@ lbl_fn_8011A4D0_00000D80:
     bne lbl_fn_8011A4D0_00000E38
     li r3, 0x1
     li r4, 0x11f
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x64(r29)
     mr r27, r3
     addi r3, r31, 0x289

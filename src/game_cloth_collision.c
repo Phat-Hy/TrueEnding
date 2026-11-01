@@ -23,7 +23,7 @@ extern void fn_80108F38(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_80151448(void);
 extern void actor_setState(void);
 extern void fn_8017039C(void);
@@ -1392,7 +1392,7 @@ lbl_fn_8027D838_00001260:
     lfs f0, 0x14e0(r31)
     mr r3, r31
     stfs f0, 0x5b0(r31)
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
     bl quest_updateFlow
     addi r29, r1, 0x80

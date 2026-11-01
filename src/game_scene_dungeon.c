@@ -12,7 +12,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097D40(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A55D4(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_801446F0(void);
 extern void fn_801539E0(void);
 extern void fn_80155DAC(void);
@@ -1518,7 +1518,7 @@ lbl_fn_801ACA74_00001444:
     lfs f1, lbl_808822EC
     li r5, 0x0
     lfs f2, 0x568(r3)
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     psq_l f31, 0x18(r1), 0, 0
     mr r3, r31
     lfd f31, 0x10(r1)
@@ -1802,7 +1802,7 @@ lbl_fn_801ACE88_00001858:
     lfs f1, lbl_808822EC
     li r5, 0x0
     lfs f2, 0x568(r3)
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     psq_l f31, 0x18(r1), 0, 0
     mr r3, r31
     lfd f31, 0x10(r1)

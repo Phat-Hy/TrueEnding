@@ -79,7 +79,7 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_805A38F4(void);
 extern void PSVECSquareMag(void);
 extern void atoi(void);
@@ -834,7 +834,7 @@ lbl_fn_8035E730_00000958:
     mr r3, r31
     bl fn_8035F3D4
     addi r3, r31, 0x48
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x3
     stw r0, 0x50(r31)
     li r3, 0x1

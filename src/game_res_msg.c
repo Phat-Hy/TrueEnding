@@ -27,7 +27,7 @@ extern void fn_80473C20(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void fn_80614790(void);
@@ -1079,7 +1079,7 @@ asm void res_Resource_destructor(void)
     bl fn_8023A2A8
 lbl_res_Resource_destructor_00000D9C:
     addi r3, r30, 0x4
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     stw r0, 0x0(r30)
 lbl_res_Resource_destructor_00000DAC:
@@ -1122,7 +1122,7 @@ asm void res_Resource_unload(void)
     bl fn_8023A2A8
 lbl_res_Resource_unload_00000E24:
     addi r3, r30, 0x4
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     stw r0, 0x0(r30)
 lbl_res_Resource_unload_00000E34:
@@ -1189,7 +1189,7 @@ asm void fn_8023772C(void)
     bl fn_8023A2A8
 lbl_fn_8023772C_00000EF4:
     addi r3, r31, 0x4
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     stw r0, 0x0(r31)
 lbl_fn_8023772C_00000F04:
@@ -1278,7 +1278,7 @@ asm void res_MsgHandle_unload(void)
     bl fn_8023A340
 lbl_res_MsgHandle_unload_00000FE4:
     addi r3, r31, 0x4
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     stw r0, 0x0(r31)
 lbl_res_MsgHandle_unload_00000FF4:

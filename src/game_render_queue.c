@@ -17,11 +17,11 @@ extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void fn_80109828(void);
 extern void fn_8013A258(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_setScriptSlot(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_80151448(void);
 extern void fn_80158BB4(void);
 extern void fn_8015AC48(void);
@@ -1029,7 +1029,7 @@ lbl_fn_802A5A1C_00000DFC:
     mr r3, r31
     addi r0, r4, 0x1
     stw r0, 0x15e4(r31)
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
     bl quest_updateFlow
     mr r3, r31
@@ -1854,7 +1854,7 @@ lbl_fn_802A711C_000019B0:
     addi r4, r1, 0x74
     fmuls f2, f0, f29
     li r5, 0x1
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     lwz r3, 0x1694(r31)
     lwz r0, 0x16ec(r31)
     ori r6, r3, 0x1

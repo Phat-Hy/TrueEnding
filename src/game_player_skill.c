@@ -9,7 +9,7 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void str_initFromCStr(void);
 extern void fn_8004203C(void);
-extern void fn_8004212C(void);
+extern void str_getData(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void mem_free(void);
@@ -1097,7 +1097,7 @@ lbl_fn_8011FFF8_00000B7C:
     mr r4, r24
     addi r3, r1, 0x44
     bl equip_getElementPtr0
-    bl fn_8004212C
+    bl str_getData
     mr r30, r3
     mr r4, r24
     addi r3, r31, 0xc
@@ -1128,7 +1128,7 @@ lbl_fn_8011FFF8_00000BEC:
     mr r4, r24
     addi r3, r1, 0x38
     bl equip_getElementPtr0
-    bl fn_8004212C
+    bl str_getData
     mr r30, r3
     mr r4, r24
     addi r3, r31, 0x18
@@ -1159,7 +1159,7 @@ lbl_fn_8011FFF8_00000C5C:
     mr r4, r24
     addi r3, r1, 0x2c
     bl equip_getElementPtr0
-    bl fn_8004212C
+    bl str_getData
     mr r30, r3
     mr r4, r24
     addi r3, r31, 0x24

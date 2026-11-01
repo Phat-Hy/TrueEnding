@@ -9,7 +9,7 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_80060D58(void);
 extern void skill_calculateDamage(void);
-extern void fn_80061824(void);
+extern void skill_calcTrajectory(void);
 extern void fn_8006F2F0(void);
 extern void str_assignBuffer(void);
 extern void motion_updateFogAdj(void);
@@ -20,7 +20,7 @@ extern void fn_8050B96C(void);
 extern void fn_8050E7E0(void);
 extern void wcslen(void);
 extern void fn_8068B2A0(void);
-extern void fn_806A8E40(void);
+extern void net_getSocket(void);
 extern void fn_806A8E70(void);
 extern void fn_806B0DE0(void);
 extern void net_getMyAid(void);
@@ -1344,7 +1344,7 @@ asm void fn_804F7F58(void)
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_fn_804F7F58_00001154:
     lwz r0, 0x4fc(r31)
     cmpwi r0, 0x1e
@@ -1370,7 +1370,7 @@ lbl_fn_804F7F58_00001194:
     li r3, 0x0
     b lbl_fn_804F7F58_000011AC
 lbl_fn_804F7F58_000011A8:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804F7F58_000011AC:
     clrlwi r0, r3, 24
 lbl_fn_804F7F58_000011B0:
@@ -1714,7 +1714,7 @@ asm void fn_804F8468(void)
     li r9, 0x0
     lis r10, 0xff00
     li r28, 0x1
-    bl fn_80061824
+    bl skill_calcTrajectory
     li r0, 0x0
     addi r14, r14, 0x4a
     stw r0, 0x260(r1)
@@ -1881,7 +1881,7 @@ lbl_fn_804F8468_000018B4:
     li r9, 0x0
     lis r10, 0xff00
     li r28, 0x2
-    bl fn_80061824
+    bl skill_calcTrajectory
     lwz r3, lbl_8087F628
     li r4, 0x3
     lfd f1, lbl_80759748@l(r14)
@@ -2364,7 +2364,7 @@ lbl_fn_804F8468_00001FCC:
     li r9, 0x0
     lis r10, 0xff00
     li r28, 0x4
-    bl fn_80061824
+    bl skill_calcTrajectory
     lwz r0, 0x254(r1)
     la r3, lbl_8087E1C4
     addi r14, r3, 0xe2
@@ -2475,7 +2475,7 @@ lbl_fn_804F8468_00002164:
     li r9, 0x0
     lis r10, 0xff00
     li r28, 0x5
-    bl fn_80061824
+    bl skill_calcTrajectory
     lwz r0, 0x254(r1)
     la r3, lbl_8087E1C4
     addi r14, r3, 0x102
@@ -2635,7 +2635,7 @@ lbl_fn_804F8468_000023B0:
     li r9, 0x0
     lis r10, 0xff00
     li r28, 0x6
-    bl fn_80061824
+    bl skill_calcTrajectory
     lwz r0, 0x520(r25)
     cmpwi r0, 0x0
     beq lbl_fn_804F8468_00002BD4
@@ -2740,7 +2740,7 @@ lbl_fn_804F8468_00002534:
     li r9, 0x0
     lis r10, 0xff00
     li r28, 0x7
-    bl fn_80061824
+    bl skill_calcTrajectory
     lbz r0, 0x154(r1)
     la r21, lbl_8087E1C4
     stw r0, 0x980(r1)
@@ -2805,7 +2805,7 @@ lbl_fn_804F8468_0000266C:
     li r3, 0x0
     b lbl_fn_804F8468_00002684
 lbl_fn_804F8468_00002680:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804F8468_00002684:
     clrlwi r0, r3, 24
 lbl_fn_804F8468_00002688:
@@ -3170,7 +3170,7 @@ lbl_fn_804F8468_00002B54:
     li r9, 0x0
     lis r10, 0xff00
     addi r28, r28, 0x1
-    bl fn_80061824
+    bl skill_calcTrajectory
     addi r27, r27, 0x1
     addi r24, r24, 0x34
 lbl_fn_804F8468_00002BB0:
@@ -3267,7 +3267,7 @@ lbl_fn_804F8468_00002CB4:
     li r9, 0x0
     lis r10, 0xff00
     addi r28, r28, 0x1
-    bl fn_80061824
+    bl skill_calcTrajectory
     lwz r0, 0x5e8(r25)
     li r17, 0x0
     li r19, 0x0
@@ -3327,7 +3327,7 @@ lbl_fn_804F8468_00002DD8:
     li r3, 0x0
     b lbl_fn_804F8468_00002DF0
 lbl_fn_804F8468_00002DEC:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804F8468_00002DF0:
     clrlwi r0, r3, 24
 lbl_fn_804F8468_00002DF4:
@@ -4094,7 +4094,7 @@ lbl_fn_804F8468_00003854:
     li r9, 0x0
     lis r10, 0xff00
     addi r28, r28, 0x1
-    bl fn_80061824
+    bl skill_calcTrajectory
     addi r17, r17, 0x1
     addi r19, r19, 0xd5c
 lbl_fn_804F8468_000038B0:

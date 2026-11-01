@@ -35,7 +35,7 @@ extern void strcmp(void);
 extern void strstr(void);
 extern void atoi(void);
 extern void wcscmp(void);
-extern void fn_806A8E40(void);
+extern void net_getSocket(void);
 extern void fn_806A8E70(void);
 extern void fn_806ABE70(void);
 extern void fn_806ABEE0(void);
@@ -1897,7 +1897,7 @@ lbl_fn_804DD3F4_000017B8:
     li r3, 0x0
     b lbl_fn_804DD3F4_000017D0
 lbl_fn_804DD3F4_000017CC:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804DD3F4_000017D0:
     clrlwi r0, r3, 24
 lbl_fn_804DD3F4_000017D4:

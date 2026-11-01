@@ -14,7 +14,7 @@ extern void ref_releaseHandle(void);
 extern void fn_800CFBA0(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void fn_80117214(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_801CF334(void);
@@ -1253,7 +1253,7 @@ lbl_fn_801D80BC_00000FEC:
     lwz r28, lbl_8087F580
     li r3, 0x1
     li r4, 0x111
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     mr r3, r28
     bl fn_804A4294

@@ -26,7 +26,7 @@ extern void quest_updateFlow(void);
 extern void quest_ctorRewardItem(void);
 extern void quest_checkCondition(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_80151448(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
@@ -771,7 +771,7 @@ lbl_fn_802C7F10_00000910:
     bl fn_802C9BF8
 lbl_fn_802C7F10_00000920:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
     bl quest_updateFlow
     lwz r0, 0x58c(r31)

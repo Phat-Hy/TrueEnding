@@ -33,11 +33,11 @@ extern void fn_80139F4C(void);
 extern void fn_8013A258(void);
 extern void fn_8013C38C(void);
 extern void fn_8013C3B4(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_8014052C(void);
 extern void quest_updateFlow(void);
 extern void dialog_setScriptSlot(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_80151448(void);
 extern void fn_8015D8C0(void);
 extern void fn_8015E4B0(void);
@@ -674,7 +674,7 @@ lbl_fn_80265B00_00000744:
     bl fn_802676BC
 lbl_fn_80265B00_00000760:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
     bl quest_updateFlow
     bl equip_getGlobalManager
@@ -2322,7 +2322,7 @@ lbl_fn_80267134_00001E68:
     addi r4, r1, 0xec
     fmuls f2, f0, f30
     li r5, 0x0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_80267134_00001E84:
     lwz r0, 0x234(r1)
     psq_l f31, 0x228(r1), 0, 0

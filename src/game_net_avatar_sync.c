@@ -30,7 +30,7 @@ extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_80117914(void);
 extern void fn_80119ECC(void);
@@ -344,7 +344,7 @@ asm void fn_80528458(void)
     bl sprintf
     li r3, 0x1
     li r4, 0x135
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r31, r3
     addi r3, r1, 0x18
     bl str_findChar
@@ -356,7 +356,7 @@ asm void fn_80528458(void)
     li r3, 0x1
     stw r0, 0x8(r1)
     li r4, 0x13d
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r0, 0x8(r30)
     li r5, 0x0
     li r4, -0x1
@@ -422,7 +422,7 @@ asm void fn_80528578(void)
     bl sprintf
     li r3, 0x1
     li r4, 0x136
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r31, r3
     addi r3, r1, 0x18
     bl str_findChar
@@ -434,7 +434,7 @@ asm void fn_80528578(void)
     li r3, 0x1
     stw r0, 0x8(r1)
     li r4, 0x13e
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r0, 0x8(r30)
     li r5, 0x0
     li r4, -0x1
@@ -1675,7 +1675,7 @@ lbl_fn_80529528_00001428:
     bl save_computeCrc32
     lwz r4, 0x8(r27)
     li r3, 0x0
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r25, r3
     lwz r3, 0x10(r27)
     bl perf_getMetricValue
@@ -1684,7 +1684,7 @@ lbl_fn_80529528_00001428:
     bl save_findEntryByName
     lwz r4, 0x8(r27)
     li r3, 0x0
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r25, r3
     lwz r3, 0x10(r27)
     bl perf_getMetricValue
@@ -1693,7 +1693,7 @@ lbl_fn_80529528_00001428:
     bl save_findEntryByName
     lwz r4, 0xc(r27)
     li r3, 0x0
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r25, r3
     lwz r3, 0x10(r27)
     bl perf_getMetricValue
@@ -1707,7 +1707,7 @@ lbl_fn_80529528_00001428:
     bl fn_801F6E78
     lwz r4, 0x8(r27)
     li r3, 0x0
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r25, r3
     lwz r3, 0x14(r27)
     bl perf_getMetricValue
@@ -1801,7 +1801,7 @@ lbl_fn_80529528_00001664:
     beq lbl_fn_80529528_00001710
     li r3, 0x0
     li r4, 0x2767
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x1b8(r26)
     lis r5, lbl_8075D1A0@ha
     addi r5, r5, lbl_8075D1A0@l
@@ -1843,7 +1843,7 @@ lbl_fn_80529528_000016C4:
 lbl_fn_80529528_00001710:
     li r3, 0x0
     li r4, 0x2764
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x1b8(r26)
     lis r27, lbl_8075D1A0@ha
     addi r27, r27, lbl_8075D1A0@l

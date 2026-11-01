@@ -9,7 +9,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_8010CA3C(void);
 extern void fn_801240B4(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_80153698(void);
 extern void fn_801539E0(void);
 extern void fn_80153B44(void);
@@ -676,7 +676,7 @@ lbl_fn_801B0ED0_00000820:
     fmr f2, f31
     stfs f0, 0x4c(r1)
     lwz r3, 0x4(r27)
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     psq_l f31, 0x118(r1), 0, 0
     mr r3, r28
     lfd f31, 0x110(r1)
@@ -926,7 +926,7 @@ lbl_fn_801B1230_00000BB4:
     lfs f1, lbl_808823B0
     addi r4, r1, 0x50
     li r5, 0x0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     psq_l f31, 0x148(r1), 0, 0
     mr r3, r30
     lfd f31, 0x140(r1)
@@ -1164,7 +1164,7 @@ lbl_fn_801B1624_00000EF4:
     psq_st f1, 0x0(r31), 0, 0
     lfs f1, lbl_808823B0
     addi r4, r3, 0x534
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     addi r3, r1, 0x5c
     lwz r4, 0x4(r29)
     psq_l f1, 0x0(r3), 0, 0
@@ -1209,7 +1209,7 @@ lbl_fn_801B1624_00000FC4:
     lfs f1, lbl_808823B0
     lfs f2, lbl_808823C4
     addi r4, r3, 0x534
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     mr r3, r30
 lbl_fn_801B1624_00000FE0:
     lwz r0, 0x114(r1)
@@ -1586,7 +1586,7 @@ lbl_fn_801B1AAC_000014CC:
     lwz r3, 0x4(r30)
     lfs f0, 0x568(r3)
     fmuls f2, f31, f0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     lwz r0, 0x14(r30)
     cmpwi r0, 0x1
     bne lbl_fn_801B1AAC_000015C8

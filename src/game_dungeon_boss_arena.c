@@ -12,12 +12,12 @@ extern void actor_dispatchMessage(void);
 extern void str_initFromCStr(void);
 extern void fn_80041C0C(void);
 extern void fn_8004203C(void);
-extern void fn_8004212C(void);
+extern void str_getData(void);
 extern void fn_8004274C(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
+extern void talk_parseQuotes(void);
 extern void fn_8006AA20(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -93,7 +93,7 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_8049D5DC(void);
 extern void strcmp(void);
 extern void strncmp(void);
@@ -1730,7 +1730,7 @@ lbl_fn_803EEEDC_00001458:
     cmpwi r3, 0x0
     bne lbl_fn_803EEEDC_00001070
     addi r3, r18, 0x48
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x1
     stw r0, 0x64(r18)
 lbl_fn_803EEEDC_00001478:
@@ -2195,7 +2195,7 @@ lbl_fn_803EF780_00001A78:
     beq lbl_fn_803EF780_00001B14
 lbl_fn_803EF780_00001AB4:
     addi r3, r1, 0x70
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_803EF780_00001A78
     b lbl_fn_803EF780_00001B14
@@ -2218,12 +2218,12 @@ lbl_fn_803EF780_00001AE0:
     beq lbl_fn_803EF780_00001B14
 lbl_fn_803EF780_00001B04:
     addi r3, r1, 0x70
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_803EF780_00001AE0
 lbl_fn_803EF780_00001B14:
     addi r3, r1, 0x70
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_803EF780_000018A4
     addi r3, r1, 0x2c
@@ -2278,7 +2278,7 @@ lbl_fn_803EF780_00001BC4:
     addi r3, r1, 0x38
     lwz r4, 0xc(r4)
     bl equip_getElementPtr0
-    bl fn_8004212C
+    bl str_getData
     mr r26, r3
     mr r4, r31
     addi r3, r27, 0x8
@@ -2308,7 +2308,7 @@ lbl_fn_803EF780_00001C48:
     addi r3, r1, 0x38
     lwz r4, 0xc(r4)
     bl equip_getElementPtr0
-    bl fn_8004212C
+    bl str_getData
     mr r26, r3
     mr r4, r30
     addi r3, r27, 0x10
@@ -2343,7 +2343,7 @@ lbl_fn_803EF780_00001CCC:
     addi r3, r1, 0x38
     lwz r4, 0xc(r4)
     bl equip_getElementPtr0
-    bl fn_8004212C
+    bl str_getData
     mr r26, r3
     mr r4, r29
     addi r3, r27, 0x20

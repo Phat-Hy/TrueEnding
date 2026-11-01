@@ -12,7 +12,7 @@ extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void fn_80117214(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_801347C8(void);
@@ -281,7 +281,7 @@ lbl_fn_801D5AB0_0000025C:
     lwz r28, lbl_8087F580
     li r3, 0x1
     li r4, 0x105
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     mr r3, r28
     bl fn_804A4294
@@ -333,7 +333,7 @@ lbl_fn_801D5AB0_00000350:
     lwz r28, lbl_8087F580
     li r3, 0x1
     li r4, 0x107
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     mr r3, r28
     bl fn_804A4294
@@ -560,7 +560,7 @@ lbl_fn_801D5F04_00000668:
     lwz r31, lbl_8087F580
     li r3, 0x1
     li r4, 0x105
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     mr r3, r31
     bl fn_804A4294

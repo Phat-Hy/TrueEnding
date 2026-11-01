@@ -7,7 +7,7 @@ extern void _savegpr_27(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void fn_8010C00C(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void fn_8012B988(void);
 extern void fn_8012D8B8(void);
 extern void fn_8013407C(void);
@@ -348,7 +348,7 @@ lbl_fn_8058D170_000002F0:
     bne lbl_fn_8058D170_000003BC
     li r3, 0x0
     li r4, 0x192
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     addis r4, r31, 0x2
     mr r29, r3
     lwz r4, 0x5bec(r4)
@@ -361,7 +361,7 @@ lbl_fn_8058D170_000002F0:
     bl thread_dispatchToQueue
     li r3, 0x0
     li r4, 0x196
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     addis r4, r31, 0x2
     mr r29, r3
     lwz r4, 0x5bec(r4)
@@ -376,7 +376,7 @@ lbl_fn_8058D170_000002F0:
 lbl_fn_8058D170_000003BC:
     li r3, 0x0
     li r4, 0x191
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     addis r4, r31, 0x2
     mr r29, r3
     lwz r4, 0x5bec(r4)
@@ -389,7 +389,7 @@ lbl_fn_8058D170_000003BC:
     bl thread_dispatchToQueue
     li r3, 0x0
     li r4, 0x196
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     addis r4, r31, 0x2
     mr r29, r3
     lwz r4, 0x5bec(r4)

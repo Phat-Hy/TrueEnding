@@ -8,8 +8,8 @@ extern void _savegpr_16(void);
 extern void ui_destroyWidget(void);
 extern void fn_80051BC4(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
@@ -63,7 +63,7 @@ extern void rand(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void __construct_new_array(void);
-extern void fn_806A8E40(void);
+extern void net_getSocket(void);
 extern void net_getMyAid(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -248,7 +248,7 @@ asm void fn_804089A0(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x108(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r30, lbl_80752954@ha
     addi r30, r30, lbl_80752954@l
 lbl_fn_804089A0_00000190:
@@ -398,7 +398,7 @@ lbl_fn_804089A0_00000378:
     bl memcpy
 lbl_fn_804089A0_000003A8:
     addi r3, r1, 0x108
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_804089A0_00000190
     lwz r0, 0x754(r1)
@@ -1568,7 +1568,7 @@ lbl_fn_804096D4_00001430:
     li r3, 0x0
     b lbl_fn_804096D4_00001448
 lbl_fn_804096D4_00001444:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804096D4_00001448:
     clrlwi r0, r3, 24
 lbl_fn_804096D4_0000144C:
@@ -1912,7 +1912,7 @@ lbl_fn_804096D4_000018FC:
     li r3, 0x0
     b lbl_fn_804096D4_00001914
 lbl_fn_804096D4_00001910:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804096D4_00001914:
     clrlwi r0, r3, 24
 lbl_fn_804096D4_00001918:

@@ -26,8 +26,8 @@ void talk_parseDialogue(void);
 void fn_8005B8F8(void);
 void fn_8005B9AC(void);
 void talk_formatQuotedString(void);
-void fn_8005BBF8(void);
-void fn_8005BCE8(void);
+void talk_parseQuotes(void);
+void talk_copySpeakerName(void);
 void fn_8005BD10(void);
 void fn_8005BEF8(void);
 void fn_8005BFAC(void);
@@ -931,49 +931,49 @@ lbl_talk_formatQuotedString_00000B84:
     blr
 }
 
-asm void fn_8005BBF8(void)
+asm void talk_parseQuotes(void)
 {
     nofralloc
     li r6, 0x0
-    b lbl_fn_8005BBF8_00000C74
-lbl_fn_8005BBF8_00000BA4:
+    b lbl_talk_parseQuotes_00000C74
+lbl_talk_parseQuotes_00000BA4:
     cmpwi r6, 0x0
-    beq lbl_fn_8005BBF8_00000C04
+    beq lbl_talk_parseQuotes_00000C04
     lwz r0, 0x4(r3)
     add r4, r0, r5
     lbzx r5, r5, r0
     cmpwi r5, 0x22
-    bne lbl_fn_8005BBF8_00000BE4
+    bne lbl_talk_parseQuotes_00000BE4
     lbz r0, 0x1(r4)
     cmpwi r0, 0x22
-    bne lbl_fn_8005BBF8_00000BDC
+    bne lbl_talk_parseQuotes_00000BDC
     lwz r4, 0xc(r3)
     addi r0, r4, 0x1
     stw r0, 0xc(r3)
-    b lbl_fn_8005BBF8_00000C68
-lbl_fn_8005BBF8_00000BDC:
+    b lbl_talk_parseQuotes_00000C68
+lbl_talk_parseQuotes_00000BDC:
     li r6, 0x0
-    b lbl_fn_8005BBF8_00000C68
-lbl_fn_8005BBF8_00000BE4:
+    b lbl_talk_parseQuotes_00000C68
+lbl_talk_parseQuotes_00000BE4:
     addi r0, r5, 0x80
     clrlwi r0, r0, 24
     cmplwi r0, 0x1f
-    bgt lbl_fn_8005BBF8_00000C68
+    bgt lbl_talk_parseQuotes_00000C68
     lwz r4, 0xc(r3)
     addi r0, r4, 0x1
     stw r0, 0xc(r3)
-    b lbl_fn_8005BBF8_00000C68
-lbl_fn_8005BBF8_00000C04:
+    b lbl_talk_parseQuotes_00000C68
+lbl_talk_parseQuotes_00000C04:
     lwz r4, 0x4(r3)
     lbzx r4, r4, r5
     extsb r0, r4
     cmpwi r0, 0x22
-    bne lbl_fn_8005BBF8_00000C20
+    bne lbl_talk_parseQuotes_00000C20
     li r6, 0x1
-    b lbl_fn_8005BBF8_00000C68
-lbl_fn_8005BBF8_00000C20:
+    b lbl_talk_parseQuotes_00000C68
+lbl_talk_parseQuotes_00000C20:
     cmpwi r0, 0xd
-    bne lbl_fn_8005BBF8_00000C4C
+    bne lbl_talk_parseQuotes_00000C4C
     lwz r5, 0xc(r3)
     lwz r4, 0x8(r3)
     addi r0, r5, 0x2
@@ -983,32 +983,32 @@ lbl_fn_8005BBF8_00000C20:
     slw r0, r4, r0
     srwi r3, r0, 31
     blr
-lbl_fn_8005BBF8_00000C4C:
+lbl_talk_parseQuotes_00000C4C:
     addi r0, r4, 0x80
     clrlwi r0, r0, 24
     cmplwi r0, 0x1f
-    bgt lbl_fn_8005BBF8_00000C68
+    bgt lbl_talk_parseQuotes_00000C68
     lwz r4, 0xc(r3)
     addi r0, r4, 0x1
     stw r0, 0xc(r3)
-lbl_fn_8005BBF8_00000C68:
+lbl_talk_parseQuotes_00000C68:
     lwz r4, 0xc(r3)
     addi r0, r4, 0x1
     stw r0, 0xc(r3)
-lbl_fn_8005BBF8_00000C74:
+lbl_talk_parseQuotes_00000C74:
     lwz r5, 0xc(r3)
     lwz r0, 0x8(r3)
     cmplw r5, r0
-    blt lbl_fn_8005BBF8_00000BA4
+    blt lbl_talk_parseQuotes_00000BA4
     li r3, 0x0
     blr
 }
 
-asm void fn_8005BCE8(void)
+asm void talk_copySpeakerName(void)
 {
     nofralloc
     li r6, 0x0
-lbl_fn_8005BCE8_00000C90:
+lbl_talk_copySpeakerName_00000C90:
     lbz r0, 0x0(r4)
     add r5, r3, r6
     stb r0, 0x610(r5)
@@ -1016,7 +1016,7 @@ lbl_fn_8005BCE8_00000C90:
     beqlr
     addi r6, r6, 0x1
     addi r4, r4, 0x1
-    b lbl_fn_8005BCE8_00000C90
+    b lbl_talk_copySpeakerName_00000C90
     blr
 }
 

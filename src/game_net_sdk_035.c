@@ -76,7 +76,7 @@ void fn_806E8E10(void);
 void fn_806E8EC0(void);
 void fn_806E8FB0(void);
 void fn_806E91A0(void);
-void fn_806E91F0(void);
+void net_copyStringSafe(void);
 void fn_806E9230(void);
 void fn_806E92D0(void);
 void fn_806E93E0(void);
@@ -136,7 +136,7 @@ asm void fn_806E8650(void)
     lis r4, lbl_807C3CD8@ha
     mr r3, r29
     addi r4, r4, lbl_807C3CD8@l
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806E8650_00000140
 lbl_fn_806E8650_00000064:
@@ -333,7 +333,7 @@ lbl_fn_806E8890_000002D4:
     bne lbl_fn_806E8890_00000314
     mr r3, r28
     addi r4, r31, 0x88
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806E8890_0000035C
 lbl_fn_806E8890_00000314:
@@ -420,7 +420,7 @@ lbl_fn_806E89D0_00000414:
     bne lbl_fn_806E89D0_00000454
     mr r3, r28
     addi r4, r31, 0x88
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806E89D0_0000049C
 lbl_fn_806E89D0_00000454:
@@ -958,7 +958,7 @@ asm void fn_806E91A0(void)
     blr
 }
 
-asm void fn_806E91F0(void)
+asm void net_copyStringSafe(void)
 {
     nofralloc
     stwu r1, -0x10(r1)

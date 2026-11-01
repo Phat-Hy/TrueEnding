@@ -22,7 +22,7 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_801070C8(void);
 extern void fn_80107208(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_801539E0(void);
 extern void equip_applyToCharacter(void);
 extern void fn_80155DAC(void);
@@ -141,7 +141,7 @@ lbl_fn_801AD2B4_0000005C:
     lfs f1, lbl_808822EC
     li r5, 0x0
     lfs f2, 0x568(r3)
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     psq_l f31, 0x18(r1), 0, 0
     mr r3, r31
     lfd f31, 0x10(r1)
@@ -1318,7 +1318,7 @@ lbl_fn_801ADC14_0000112C:
     lfs f1, lbl_808822EC
     li r5, 0x0
     lfs f2, 0x568(r3)
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     psq_l f31, 0x1a8(r1), 0, 0
     mr r3, r31
     lfd f31, 0x1a0(r1)
@@ -1714,7 +1714,7 @@ lbl_fn_801AE8C8_00001688:
     lfs f1, lbl_808822EC
     lfs f2, 0x568(r3)
     addi r4, r3, 0x534
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     psq_l f31, 0x18(r1), 0, 0
     mr r3, r31
     lfd f31, 0x10(r1)

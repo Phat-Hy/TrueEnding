@@ -34,9 +34,9 @@ extern void fn_8012B988(void);
 extern void fn_80133130(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013A258(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void quest_updateFlow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_80154654(void);
 extern void equip_applyToCharacter(void);
 extern void fn_80155A88(void);
@@ -1957,7 +1957,7 @@ lbl_fn_80251344_00001A24:
     mr r3, r29
     addi r4, r1, 0x104
     li r5, 0x1
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_80251344_00001A3C:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
@@ -2304,7 +2304,7 @@ lbl_fn_80251344_00001F30:
     bl fn_802531F4
 lbl_fn_80251344_00001F44:
     mr r3, r29
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r29
     bl quest_updateFlow
     lwz r0, 0x14bc(r29)

@@ -20,7 +20,7 @@ extern void fn_80107168(void);
 extern void fn_801092C8(void);
 extern void fn_8012DB04(void);
 extern void fn_8012DD70(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_80140588(void);
 extern void quest_ctorRewardItem(void);
 extern void fn_801595BC(void);
@@ -1372,7 +1372,7 @@ lbl_fn_803123D0_00001278:
     addi r4, r1, 0x90
     fmuls f2, f0, f30
     li r5, 0x0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_803123D0_00001294:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0

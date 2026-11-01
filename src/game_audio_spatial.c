@@ -21,7 +21,7 @@ extern void fn_8012DD70(void);
 extern void fn_8013A258(void);
 extern void fn_8013C38C(void);
 extern void fn_8013C504(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
@@ -974,7 +974,7 @@ lbl_fn_802FF800_00000CA0:
     fmr f2, f30
     addi r4, r1, 0x158
     li r5, 0x1
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     cmpwi r31, 0x0
     beq lbl_fn_802FF800_00000CD4
     addi r3, r1, 0x14c

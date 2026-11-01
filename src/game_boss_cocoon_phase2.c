@@ -19,7 +19,7 @@ extern void fn_80012C88(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
 extern void str_initFromCStr(void);
-extern void fn_8004212C(void);
+extern void str_getData(void);
 extern void fn_8004ECC0(void);
 extern void fn_80051B14(void);
 extern void fn_80051B70(void);
@@ -64,7 +64,7 @@ extern void fn_8013A13C(void);
 extern void quest_updateFlow(void);
 extern void fn_801479E4(void);
 extern void fn_801495E8(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
@@ -1311,7 +1311,7 @@ asm void fn_8045FAB0(void)
 lbl_fn_8045FAB0_00000FFC:
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     addi r4, r30, 0x2d
     li r5, 0x8
     bl strncmp
@@ -1319,7 +1319,7 @@ lbl_fn_8045FAB0_00000FFC:
     bne lbl_fn_8045FAB0_00001038
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     addi r3, r1, 0x20
     addi r4, r4, 0x8
@@ -1348,7 +1348,7 @@ lbl_fn_8045FAB0_00001040:
     addi r5, r1, 0x20
     bl fn_8006AFF8
     addi r3, r1, 0x8
-    bl fn_8004212C
+    bl str_getData
     lwz r12, 0x14b0(r28)
     mr r4, r3
     addi r3, r28, 0x14b0
@@ -2206,7 +2206,7 @@ lbl_fn_80460458_00001CAC:
 lbl_fn_80460458_00001CF4:
     stfs f31, 0x15d0(r31)
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
     bl quest_updateFlow
     lfs f1, lbl_80886D60

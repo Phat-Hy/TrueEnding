@@ -11,8 +11,8 @@ extern void fn_80058078(void);
 extern void fn_800580BC(void);
 extern void fn_800588FC(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
@@ -164,7 +164,7 @@ asm void fn_80414328(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r31, lbl_80752DB8@ha
     mr r29, r23
     mr r28, r23
@@ -290,7 +290,7 @@ lbl_fn_80414328_0000023C:
     addi r24, r24, 0x1
 lbl_fn_80414328_0000026C:
     addi r3, r1, 0x8
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_80414328_000000C4
     lmw r22, 0x648(r1)
@@ -878,7 +878,7 @@ asm void fn_80414C9C(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x108(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r31, lbl_80752E6C@ha
     addi r31, r31, lbl_80752E6C@l
 lbl_fn_80414C9C_00000A24:
@@ -943,7 +943,7 @@ lbl_fn_80414C9C_00000ADC:
     bl res_MsgHandle_destructor
 lbl_fn_80414C9C_00000B04:
     addi r3, r1, 0x108
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_80414C9C_00000A24
     lwz r0, 0x754(r1)
@@ -998,12 +998,12 @@ asm void fn_80414E58(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
 lbl_fn_80414E58_00000BD4:
     addi r3, r1, 0x8
     bl talk_formatQuotedString
     addi r3, r1, 0x8
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_80414E58_00000BD4
     lwz r0, 0x654(r1)
@@ -1813,7 +1813,7 @@ asm void fn_80415974(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r31, lbl_80752EA4@ha
     addi r31, r31, lbl_80752EA4@l
 lbl_fn_80415974_000016FC:
@@ -1844,7 +1844,7 @@ lbl_fn_80415974_000016FC:
     stw r3, 0x194(r29)
 lbl_fn_80415974_00001760:
     addi r3, r1, 0x8
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_80415974_000016FC
     lwz r0, 0x654(r1)

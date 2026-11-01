@@ -23,7 +23,7 @@ extern void msg_getMessageString(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_unlink(void);
 extern void str_findChar(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_80117914(void);
 extern void fn_80119ECC(void);
@@ -729,7 +729,7 @@ lbl_fn_803775DC_00000874:
     lwz r4, 0x0(r31)
 lbl_fn_803775DC_00000878:
     li r3, 0x0
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r20, r3
     lwz r3, lbl_8087EEC8
     lfs f1, lbl_80885820

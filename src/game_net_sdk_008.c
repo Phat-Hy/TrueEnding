@@ -53,7 +53,7 @@ extern u8 lbl_8085FF58[];
 void pad_03_806A8D84_text(void);
 void fn_806A8D90(void);
 void fn_806A8DB0(void);
-void fn_806A8E40(void);
+void net_getSocket(void);
 void fn_806A8E70(void);
 void fn_806A8E80(void);
 void fn_806A8F20(void);
@@ -137,18 +137,18 @@ lbl_fn_806A8DB0_0000009C:
     blr
 }
 
-asm void fn_806A8E40(void)
+asm void net_getSocket(void)
 {
     nofralloc
     lis r3, lbl_8085FF40@ha
     lwz r3, lbl_8085FF40@l(r3)
     lwz r0, 0x0(r3)
     cmpwi r0, 0x8
-    blt lbl_fn_806A8E40_000000DC
+    blt lbl_net_getSocket_000000DC
     lwz r3, 0x174(r3)
     cmpwi r3, 0x0
     bgelr
-lbl_fn_806A8E40_000000DC:
+lbl_net_getSocket_000000DC:
     li r3, -0x1
     blr
 }

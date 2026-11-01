@@ -115,7 +115,7 @@ void fn_80116EA8(void);
 void fn_80116EB0(void);
 void fn_80116EB4(void);
 void fn_80116EB8(void);
-void fn_80116FC0(void);
+void actor_findSpawnTemplate(void);
 void fn_801170C8(void);
 void fn_80117200(void);
 void fn_80117214(void);
@@ -481,7 +481,7 @@ lbl_fn_80116EB8_00000414:
     blr
 }
 
-asm void fn_80116FC0(void)
+asm void actor_findSpawnTemplate(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -494,14 +494,14 @@ asm void fn_80116FC0(void)
     la r30, lbl_8087D988
     lwz r0, lbl_807C78E4@l(r5)
     srwi. r0, r0, 31
-    bne lbl_fn_80116FC0_00000460
+    bne lbl_actor_findSpawnTemplate_00000460
     lbz r0, lbl_807C78E4@l(r5)
     clrlwi r29, r0, 25
-    b lbl_fn_80116FC0_00000468
-lbl_fn_80116FC0_00000460:
+    b lbl_actor_findSpawnTemplate_00000468
+lbl_actor_findSpawnTemplate_00000460:
     addi r3, r5, lbl_807C78E4@l
     lwz r29, 0x4(r3)
-lbl_fn_80116FC0_00000468:
+lbl_actor_findSpawnTemplate_00000468:
     lbz r0, 0xc(r1)
     mr r3, r30
     stb r0, 0x8(r1)
@@ -516,44 +516,44 @@ lbl_fn_80116FC0_00000468:
     li r4, 0x0
     bl str_assignBuffer
     cmpwi r27, 0x0
-    bne lbl_fn_80116FC0_000004E4
+    bne lbl_actor_findSpawnTemplate_000004E4
     lwz r0, lbl_8087F138
     addic. r3, r0, 0x168
-    beq lbl_fn_80116FC0_000004BC
+    beq lbl_actor_findSpawnTemplate_000004BC
     mr r5, r28
     addi r4, r31, lbl_807C78E4@l
     bl fn_801F3E20
-lbl_fn_80116FC0_000004BC:
+lbl_actor_findSpawnTemplate_000004BC:
     lis r3, lbl_807C78E4@ha
     lwz r0, lbl_807C78E4@l(r3)
     srwi. r0, r0, 31
-    bne lbl_fn_80116FC0_000004D8
+    bne lbl_actor_findSpawnTemplate_000004D8
     addi r3, r3, lbl_807C78E4@l
     addi r3, r3, 0x2
-    b lbl_fn_80116FC0_0000051C
-lbl_fn_80116FC0_000004D8:
+    b lbl_actor_findSpawnTemplate_0000051C
+lbl_actor_findSpawnTemplate_000004D8:
     addi r3, r3, lbl_807C78E4@l
     lwz r3, 0x8(r3)
-    b lbl_fn_80116FC0_0000051C
-lbl_fn_80116FC0_000004E4:
+    b lbl_actor_findSpawnTemplate_0000051C
+lbl_actor_findSpawnTemplate_000004E4:
     cmpwi r27, 0x1
-    bne lbl_fn_80116FC0_00000518
+    bne lbl_actor_findSpawnTemplate_00000518
     lwz r0, lbl_8087F1E4
     slwi r3, r28, 3
     add r3, r0, r3
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80116FC0_00000508
-    b lbl_fn_80116FC0_0000050C
-lbl_fn_80116FC0_00000508:
+    beq lbl_actor_findSpawnTemplate_00000508
+    b lbl_actor_findSpawnTemplate_0000050C
+lbl_actor_findSpawnTemplate_00000508:
     la r3, lbl_808813D0
-lbl_fn_80116FC0_0000050C:
+lbl_actor_findSpawnTemplate_0000050C:
     cmpwi r3, 0x0
-    beq lbl_fn_80116FC0_00000518
-    b lbl_fn_80116FC0_0000051C
-lbl_fn_80116FC0_00000518:
+    beq lbl_actor_findSpawnTemplate_00000518
+    b lbl_actor_findSpawnTemplate_0000051C
+lbl_actor_findSpawnTemplate_00000518:
     lwz r3, lbl_8088171C
-lbl_fn_80116FC0_0000051C:
+lbl_actor_findSpawnTemplate_0000051C:
     lmw r27, 0x1c(r1)
     lwz r0, 0x34(r1)
     mtlr r0

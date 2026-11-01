@@ -12,7 +12,7 @@ extern void ref_releaseHandle(void);
 extern void fn_800EFF04(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80106878(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_801446F0(void);
 extern void fn_802097C4(void);
 extern void task_findEntryById(void);
@@ -1645,7 +1645,7 @@ lbl_fn_8018DD34_00001610:
     lwz r3, 0x4(r31)
     lfs f0, 0x568(r3)
     fmuls f2, f31, f0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_8018DD34_00001674:
     lfs f3, 0x38(r31)
     lfs f0, lbl_80881EF4

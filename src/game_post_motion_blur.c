@@ -8,7 +8,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80126214(void);
 extern void fn_8013A258(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_80151448(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
@@ -1301,7 +1301,7 @@ lbl_fn_802C2BCC_0000111C:
     mr r3, r29
     addi r4, r1, 0xec
     li r5, 0x1
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_802C2BCC_00001134:
     lwz r0, 0x224(r1)
     psq_l f31, 0x218(r1), 0, 0

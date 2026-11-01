@@ -13,8 +13,8 @@ extern void actor_dispatchMessage(void);
 extern void fn_80016F48(void);
 extern void fn_8004B338(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void fn_8006AA20(void);
 extern void fn_8006AD24(void);
 extern void fn_8006B174(void);
@@ -36,7 +36,7 @@ extern void str_findChar(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getStatus(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void strcmp(void);
 extern void runtime_registerStaticObject(void);
 extern void __construct_new_array(void);
@@ -903,7 +903,7 @@ asm void fn_80089CE4(void)
     stw r30, 0x8(r1)
     mr r30, r3
     beq lbl_fn_80089CE4_000009D8
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     addic. r0, r30, 0x10
     beq lbl_fn_80089CE4_000009B4
     lwz r3, 0x14(r30)
@@ -1157,7 +1157,7 @@ asm void fn_8008A00C(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x34(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     addi r29, r1, 0x10
     addi r28, r1, 0x1c
     addi r27, r1, 0x28
@@ -1426,7 +1426,7 @@ lbl_fn_8008A00C_000010B4:
     stw r0, 0x0(r23)
 lbl_fn_8008A00C_0000110C:
     addi r3, r1, 0x34
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_8008A00C_00000D3C
     addi r11, r1, 0x690
@@ -1663,7 +1663,7 @@ lbl_fn_8008A76C_00001484:
     addic. r29, r30, 0x1c4
     beq lbl_fn_8008A76C_000014CC
     mr r3, r29
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     addic. r0, r29, 0x10
     beq lbl_fn_8008A76C_000014B8
     lwz r3, 0x14(r29)

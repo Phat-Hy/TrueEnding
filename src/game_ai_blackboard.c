@@ -19,7 +19,7 @@ extern void scissor_clipFrustum(void);
 extern void fn_80139560(void);
 extern void fn_80144710(void);
 extern void quest_updateFlow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void equip_applyToCharacter(void);
 extern void fn_801561E4(void);
 extern void fn_80158BB4(void);
@@ -574,7 +574,7 @@ lbl_fn_8025D648_000006B0:
     lwz r0, 0x14ec(r31)
     mr r3, r31
     stw r0, 0x14f0(r31)
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
     bl quest_updateFlow
     lwz r0, 0x14(r1)

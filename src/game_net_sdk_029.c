@@ -67,7 +67,7 @@ extern void fn_806E8B60(void);
 extern void fn_806E8D30(void);
 extern void fn_806E8E10(void);
 extern void fn_806E91A0(void);
-extern void fn_806E91F0(void);
+extern void net_copyStringSafe(void);
 extern void memmove(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -382,7 +382,7 @@ lbl_fn_806DBCC0_000003E8:
     bne lbl_fn_806DBCC0_0000041C
     mr r3, r27
     addi r4, r29, 0x30
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DBCC0_000006B4
 lbl_fn_806DBCC0_0000041C:
@@ -807,7 +807,7 @@ lbl_fn_806DC260_000009DC:
     bne lbl_fn_806DC260_00000A1C
     mr r3, r26
     addi r4, r30, 0x44
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DC260_00001380
 lbl_fn_806DC260_00000A1C:
@@ -838,7 +838,7 @@ lbl_fn_806DC260_00000A60:
     bne lbl_fn_806DC260_00000A90
     mr r3, r26
     addi r4, r30, 0x44
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DC260_00001380
 lbl_fn_806DC260_00000A90:
@@ -873,7 +873,7 @@ lbl_fn_806DC260_00000AD4:
     bne lbl_fn_806DC260_00000B14
     mr r3, r26
     addi r4, r30, 0x44
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DC260_00001380
 lbl_fn_806DC260_00000B14:
@@ -904,7 +904,7 @@ lbl_fn_806DC260_00000B58:
     bne lbl_fn_806DC260_00000B88
     mr r3, r26
     addi r4, r30, 0x44
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DC260_00001380
 lbl_fn_806DC260_00000B88:
@@ -934,7 +934,7 @@ lbl_fn_806DC260_00000BCC:
     bne lbl_fn_806DC260_00000BF8
     mr r3, r26
     addi r4, r30, 0x44
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DC260_00001380
 lbl_fn_806DC260_00000BF8:
@@ -1012,7 +1012,7 @@ lbl_fn_806DC260_00000CBC:
     bne lbl_fn_806DC260_00000D20
     mr r3, r26
     addi r4, r30, 0x44
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DC260_00001380
 lbl_fn_806DC260_00000D20:
@@ -1048,7 +1048,7 @@ lbl_fn_806DC260_00000D6C:
     bne lbl_fn_806DC260_00000DA8
     mr r3, r26
     addi r4, r30, 0x44
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DC260_00001380
 lbl_fn_806DC260_00000DA8:
@@ -1080,7 +1080,7 @@ lbl_fn_806DC260_00000DE4:
     bne lbl_fn_806DC260_00000E20
     mr r3, r26
     addi r4, r30, 0x44
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DC260_00001380
 lbl_fn_806DC260_00000E20:
@@ -1108,7 +1108,7 @@ lbl_fn_806DC260_00000E5C:
     bne lbl_fn_806DC260_00000E88
     mr r3, r26
     addi r4, r30, 0x44
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DC260_00001380
 lbl_fn_806DC260_00000E88:
@@ -1132,7 +1132,7 @@ lbl_fn_806DC260_00000EA0:
     bne lbl_fn_806DC260_00000EE0
     mr r3, r26
     addi r4, r30, 0x44
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DC260_00001380
 lbl_fn_806DC260_00000EE0:
@@ -1217,7 +1217,7 @@ lbl_fn_806DC260_00000FF4:
     bne lbl_fn_806DC260_0000101C
     mr r3, r26
     addi r4, r30, 0x44
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DC260_00001380
 lbl_fn_806DC260_0000101C:
@@ -1241,7 +1241,7 @@ lbl_fn_806DC260_0000104C:
     bne lbl_fn_806DC260_00001074
     mr r3, r26
     addi r4, r30, 0x44
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DC260_00001380
 lbl_fn_806DC260_00001074:
@@ -1305,7 +1305,7 @@ lbl_fn_806DC260_0000111C:
     bne lbl_fn_806DC260_00001158
     mr r3, r26
     addi r4, r30, 0x44
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DC260_00001380
 lbl_fn_806DC260_00001158:
@@ -1406,7 +1406,7 @@ lbl_fn_806DC260_00001290:
     bne lbl_fn_806DC260_000012D0
     mr r3, r26
     addi r4, r30, 0x44
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DC260_00001380
 lbl_fn_806DC260_000012D0:
@@ -1511,7 +1511,7 @@ lbl_fn_806DCD80_0000141C:
     bne lbl_fn_806DCD80_00001454
     mr r3, r26
     addi r4, r30, 0x44
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DCD80_00001A50
 lbl_fn_806DCD80_00001454:
@@ -1531,7 +1531,7 @@ lbl_fn_806DCD80_00001454:
     bne lbl_fn_806DCD80_000014A0
     mr r3, r26
     addi r4, r30, 0x44
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DCD80_00001A50
 lbl_fn_806DCD80_000014A0:
@@ -1569,7 +1569,7 @@ lbl_fn_806DCD80_000014EC:
     bne lbl_fn_806DCD80_0000152C
     mr r3, r26
     addi r4, r30, 0x44
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DCD80_00001A50
 lbl_fn_806DCD80_0000152C:
@@ -1895,7 +1895,7 @@ lbl_fn_806DCD80_000019C0:
     bne lbl_fn_806DCD80_00001A08
     mr r3, r26
     addi r4, r30, 0x44
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DCD80_00001A50
 lbl_fn_806DCD80_00001A08:
@@ -2050,7 +2050,7 @@ lbl_fn_806DD450_00001C04:
     bne lbl_fn_806DD450_00001C3C
     mr r3, r24
     addi r4, r28, 0x44
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DD450_00001CD4
 lbl_fn_806DD450_00001C3C:
@@ -2061,7 +2061,7 @@ lbl_fn_806DD450_00001C3C:
     bne lbl_fn_806DD450_00001C64
     mr r3, r24
     addi r4, r28, 0x44
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DD450_00001CD4
 lbl_fn_806DD450_00001C64:
@@ -2079,7 +2079,7 @@ lbl_fn_806DD450_00001C64:
     bgt lbl_fn_806DD450_00001CA4
     mr r3, r24
     addi r4, r28, 0x154
-    bl fn_806E91F0
+    bl net_copyStringSafe
     b lbl_fn_806DD450_00001CC4
 lbl_fn_806DD450_00001CA4:
     mr r3, r24

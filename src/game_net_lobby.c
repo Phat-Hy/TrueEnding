@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_20(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80061824(void);
+extern void skill_calcTrajectory(void);
 extern void fn_80062C8C(void);
 extern void fn_80063764(void);
 extern void fn_8006F2F0(void);
@@ -1779,7 +1779,7 @@ lbl_fn_801EAB24_00001658:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lwz r4, 0x7c(r26)
     fadds f24, f24, f30
     lwz r5, 0x0(r28)
@@ -1811,7 +1811,7 @@ lbl_fn_801EAB24_00001658:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     fadds f24, f24, f30
     lfs f1, 0x18(r28)
     lfs f2, 0x1c(r28)
@@ -1841,7 +1841,7 @@ lbl_fn_801EAB24_00001658:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_fn_801EAB24_0000182C:
     addi r27, r27, 0x1
     addi r25, r25, 0x34

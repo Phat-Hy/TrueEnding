@@ -13,8 +13,8 @@ extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
 extern void fn_800588FC(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void fn_8007FAF0(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
@@ -164,7 +164,7 @@ asm void fn_803F33A4(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x14(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r3, lbl_8075215C@ha
     addi r26, r1, 0x24
     li r29, 0x0
@@ -394,7 +394,7 @@ lbl_fn_803F33A4_000003BC:
     beq lbl_fn_803F33A4_00000458
 lbl_fn_803F33A4_000003F8:
     addi r3, r1, 0x14
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_803F33A4_000003BC
     b lbl_fn_803F33A4_00000458
@@ -417,12 +417,12 @@ lbl_fn_803F33A4_00000424:
     beq lbl_fn_803F33A4_00000458
 lbl_fn_803F33A4_00000448:
     addi r3, r1, 0x14
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_803F33A4_00000424
 lbl_fn_803F33A4_00000458:
     addi r3, r1, 0x14
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_803F33A4_000000BC
     lmw r23, 0x64c(r1)

@@ -28,7 +28,7 @@ extern void fn_804730E4(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_getStatus(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void taskManager_updateTasks(void);
 extern void fn_805F9EF0(void);
 extern void memcmp(void);
@@ -2079,7 +2079,7 @@ asm void atn_LH_Binary_onNotify(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r3, lbl_8087F518
     mr r4, r31
     li r5, 0x1

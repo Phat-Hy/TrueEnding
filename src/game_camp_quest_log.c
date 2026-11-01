@@ -13,7 +13,7 @@ extern void fn_8000ECA8(void);
 extern void fn_80013410(void);
 extern void str_initFromCStr(void);
 extern void fn_8004203C(void);
-extern void fn_8004212C(void);
+extern void str_getData(void);
 extern void fn_800422CC(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
@@ -643,7 +643,7 @@ lbl_fn_803C3894_00000614:
     b lbl_fn_803C3894_000006E4
 lbl_fn_803C3894_00000658:
     addi r3, r1, 0xe0
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     mr r19, r3
     mr r4, r18
@@ -708,7 +708,7 @@ lbl_fn_803C3894_0000070C:
     cmpwi r3, 0x0
     bne lbl_fn_803C3894_0000076C
     addi r3, r1, 0xe0
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     mr r4, r3
     addi r3, r28, 0x78
@@ -721,7 +721,7 @@ lbl_fn_803C3894_0000076C:
     bl fn_80089ACC
     mr r18, r3
     addi r3, r1, 0xe0
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     mr r0, r3
     addi r3, r28, 0x78
@@ -750,7 +750,7 @@ lbl_fn_803C3894_000007A4:
     cmpwi r0, 0x3b
     beq lbl_fn_803C3894_00000874
     addi r3, r1, 0xe0
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     add r19, r18, r3
     mr r4, r20
@@ -841,7 +841,7 @@ lbl_fn_803C3894_0000090C:
     addi r3, r1, 0xe0
     bl fn_8020A780
     addi r3, r1, 0xe0
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     stw r3, 0x74(r28)
     mr r4, r3
@@ -869,7 +869,7 @@ lbl_fn_803C3894_00000968:
     cmpwi r0, 0x3b
     beq lbl_fn_803C3894_00000AC8
     addi r3, r1, 0xe0
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     mr r19, r3
     mr r4, r21
@@ -960,7 +960,7 @@ lbl_fn_803C3894_00000ADC:
     addi r3, r1, 0xe0
     bl fn_8020A780
     addi r3, r1, 0xe0
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     stw r3, 0xa8(r28)
     mr r4, r3
@@ -988,7 +988,7 @@ lbl_fn_803C3894_00000B38:
     cmpwi r0, 0x3b
     beq lbl_fn_803C3894_00000C98
     addi r3, r1, 0xe0
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     mr r19, r3
     mr r4, r21
@@ -1101,7 +1101,7 @@ lbl_fn_803C3894_00000CF0:
     cmpwi r0, 0x3b
     beq lbl_fn_803C3894_00000DE0
     addi r3, r1, 0xe0
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     mr r19, r3
     mr r4, r18
@@ -1204,7 +1204,7 @@ lbl_fn_803C3894_00000E78:
     cmpwi r0, 0x3b
     beq lbl_fn_803C3894_00000FA8
     addi r3, r1, 0xe0
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     add r19, r21, r3
     mr r4, r20
@@ -1327,7 +1327,7 @@ lbl_fn_803C3894_00001040:
     bl fn_803C3694
     mr r21, r3
     addi r3, r1, 0xe0
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     add r0, r31, r3
     stw r0, 0x10(r21)
@@ -1379,7 +1379,7 @@ lbl_fn_803C3894_00001040:
 lbl_fn_803C3894_00001158:
     addi r3, r1, 0x248
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     stw r3, 0xc(r1)
     addi r3, r1, 0xb8
@@ -1541,7 +1541,7 @@ lbl_fn_803C3894_00001370:
     bl fn_803C36A4
     mr r18, r3
     addi r3, r1, 0xe0
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     add r0, r30, r3
     stw r0, 0x10(r18)
@@ -1581,7 +1581,7 @@ lbl_fn_803C3894_00001370:
 lbl_fn_803C3894_00001458:
     addi r3, r1, 0x1e0
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     stw r3, 0x8(r1)
     addi r3, r1, 0xa0
@@ -1702,7 +1702,7 @@ lbl_fn_803C3894_000015E4:
     cmpwi r0, 0x3b
     beq lbl_fn_803C3894_00001754
     addi r3, r1, 0xe0
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     mr r19, r3
     mr r4, r20
@@ -1865,7 +1865,7 @@ lbl_fn_803C3894_00001858:
     cmpwi r3, 0x0
     bne lbl_fn_803C3894_000018B8
     addi r3, r1, 0xe0
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     mr r4, r3
     addi r3, r28, 0x104
@@ -1878,7 +1878,7 @@ lbl_fn_803C3894_000018B8:
     bl fn_80089ACC
     mr r20, r3
     addi r3, r1, 0xe0
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     mr r0, r3
     addi r3, r28, 0x104
@@ -1907,7 +1907,7 @@ lbl_fn_803C3894_000018F0:
     cmpwi r0, 0x3b
     beq lbl_fn_803C3894_00001AA0
     addi r3, r1, 0xe0
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     add r19, r20, r3
     mr r4, r21
@@ -2023,7 +2023,7 @@ lbl_fn_803C3894_00001AB4:
     cmpwi r3, 0x0
     bne lbl_fn_803C3894_00001B14
     addi r3, r1, 0xe0
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     mr r4, r3
     addi r3, r28, 0x10c
@@ -2036,7 +2036,7 @@ lbl_fn_803C3894_00001B14:
     bl fn_80089ACC
     mr r20, r3
     addi r3, r1, 0xe0
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     mr r0, r3
     addi r3, r28, 0x10c
@@ -2065,7 +2065,7 @@ lbl_fn_803C3894_00001B4C:
     cmpwi r0, 0x3b
     beq lbl_fn_803C3894_00001D44
     addi r3, r1, 0xe0
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     add r19, r20, r3
     mr r4, r21
@@ -2197,7 +2197,7 @@ lbl_fn_803C3894_00001D58:
     cmpwi r3, 0x0
     bne lbl_fn_803C3894_00001DB8
     addi r3, r1, 0xe0
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     mr r4, r3
     addi r3, r28, 0x114
@@ -2210,7 +2210,7 @@ lbl_fn_803C3894_00001DB8:
     bl fn_80089ACC
     mr r20, r3
     addi r3, r1, 0xe0
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     mr r0, r3
     addi r3, r28, 0x114
@@ -2239,7 +2239,7 @@ lbl_fn_803C3894_00001DF0:
     cmpwi r0, 0x3b
     beq lbl_fn_803C3894_00001FA8
     addi r3, r1, 0xe0
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     add r19, r20, r3
     mr r4, r21
@@ -2849,7 +2849,7 @@ lbl_fn_803C3894_000026DC:
     cmpwi r0, 0x3b
     beq lbl_fn_803C3894_00002760
     addi r3, r1, 0xe0
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     mr r20, r3
     mr r4, r17

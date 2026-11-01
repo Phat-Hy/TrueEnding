@@ -42,7 +42,7 @@ extern void fn_80144710(void);
 extern void quest_updateFlow(void);
 extern void quest_checkCondition(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_80151448(void);
 extern void fn_80158BB4(void);
 extern void fn_80158CA4(void);
@@ -1188,7 +1188,7 @@ lbl_fn_80566CF8_00000DE8:
     mr r3, r31
     psq_st f1, 0x0(r5), 0, 0
     stfs f2, 0x1c(r1)
-    bl fn_8014C540
+    bl dialog_updateScriptState
     lwz r0, 0x7e0(r31)
     rlwinm r0, r0, 0, 26, 26
     cmplwi r0, 0x20

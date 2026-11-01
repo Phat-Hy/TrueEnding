@@ -8,7 +8,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80126214(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_80144710(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -2159,7 +2159,7 @@ lbl_fn_80358A5C_00001EE8:
     addi r4, r1, 0x208
     fmuls f2, f0, f28
     li r5, 0x0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_80358A5C_00001F04:
     li r0, 0xab8
     psq_lx f31, r1, r0, 0, 0

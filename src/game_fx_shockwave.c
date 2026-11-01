@@ -34,7 +34,7 @@ extern void fn_80133B30(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013C504(void);
 extern void quest_updateFlow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void actor_setState(void);
 extern void actor_getMovementFlags(void);
 extern void task_findEntryById(void);
@@ -2072,7 +2072,7 @@ lbl_fn_802946BC_00001B4C:
     bl fn_80296268
 lbl_fn_802946BC_00001B60:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
     bl quest_updateFlow
     lwz r12, 0x0(r31)

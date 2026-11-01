@@ -31,7 +31,7 @@ extern void fn_800D5908(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_80494354(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
@@ -126,7 +126,7 @@ lbl_fn_804923B4_00000094:
     mr r3, r28
     bl fn_80494354
     addi r3, r28, 0x50
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x1
     stw r0, 0x64(r28)
 lbl_fn_804923B4_000000BC:

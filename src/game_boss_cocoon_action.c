@@ -16,12 +16,12 @@ extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void str_initFromCStr(void);
 extern void fn_8004203C(void);
 extern void fn_80042108(void);
-extern void fn_8004212C(void);
+extern void str_getData(void);
 extern void fn_80057A64(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_80061824(void);
+extern void skill_calcTrajectory(void);
 extern void fn_8006AFF8(void);
 extern void fn_8006CA80(void);
 extern void fn_8006EF48(void);
@@ -508,7 +508,7 @@ asm void fn_80452710(void)
 lbl_fn_80452710_00000488:
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     addi r4, r30, 0x2d
     li r5, 0x8
     bl strncmp
@@ -516,7 +516,7 @@ lbl_fn_80452710_00000488:
     bne lbl_fn_80452710_000004C4
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     addi r3, r1, 0x20
     addi r4, r4, 0x8
@@ -545,7 +545,7 @@ lbl_fn_80452710_000004CC:
     addi r5, r1, 0x20
     bl fn_8006AFF8
     addi r3, r1, 0x8
-    bl fn_8004212C
+    bl str_getData
     lwz r12, 0x14b0(r28)
     mr r4, r3
     addi r3, r28, 0x14b0
@@ -929,7 +929,7 @@ lbl_fn_80452B6C_00000A04:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_fn_80452B6C_00000AA0:
     lwz r3, lbl_8087F8A0
     lwz r3, 0x48(r3)
@@ -1178,7 +1178,7 @@ lbl_fn_80452F14_00000D28:
 lbl_fn_80452F14_00000E24:
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     addi r4, r30, 0x2d
     li r5, 0x8
     bl strncmp
@@ -1186,7 +1186,7 @@ lbl_fn_80452F14_00000E24:
     bne lbl_fn_80452F14_00000E60
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     addi r3, r1, 0x20
     addi r4, r4, 0x8
@@ -1215,7 +1215,7 @@ lbl_fn_80452F14_00000E68:
     addi r5, r1, 0x20
     bl fn_8006AFF8
     addi r3, r1, 0x8
-    bl fn_8004212C
+    bl str_getData
     lwz r12, 0x14b0(r31)
     mr r4, r3
     addi r3, r31, 0x14b0

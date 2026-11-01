@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void str_initFromCStr(void);
-extern void fn_8004212C(void);
+extern void str_getData(void);
 extern void fn_800422CC(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
@@ -1903,7 +1903,7 @@ lbl_fn_80209960_000017D0:
 lbl_fn_80209960_0000182C:
     addi r3, r1, 0x26c
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     bl str_skipWhitespace
     lwz r5, lbl_8087F1B8
     add r0, r19, r23
@@ -1966,7 +1966,7 @@ lbl_fn_80209960_000018A0:
 lbl_fn_80209960_0000191C:
     addi r3, r1, 0x230
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     bl str_skipWhitespace
     lwz r5, lbl_8087F1B8
     add r0, r19, r23
@@ -2133,7 +2133,7 @@ lbl_fn_80209960_00001B2C:
 lbl_fn_80209960_00001B90:
     addi r3, r1, 0x1c8
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     stw r3, 0x0(r19)
     addi r19, r19, 0x4

@@ -22,9 +22,9 @@ extern void fn_800E2FE0(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_8011D21C(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void quest_updateFlow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void equip_applyToCharacter(void);
 extern void fn_80161570(void);
 extern void fn_8016D74C(void);
@@ -1218,14 +1218,14 @@ lbl_fn_80333A6C_00000F58:
     mr r3, r31
     bl quest_updateFlow
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     b lbl_fn_80333A6C_000010E4
 lbl_fn_80333A6C_00000F70:
     bl fn_80333D68
     mr r3, r31
     bl quest_updateFlow
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     b lbl_fn_80333A6C_000010E4
 lbl_fn_80333A6C_00000F88:
     lwz r7, 0x38(r3)
@@ -1322,7 +1322,7 @@ lbl_fn_80333A6C_000010D4:
     mr r3, r31
     bl quest_updateFlow
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
 lbl_fn_80333A6C_000010E4:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -1644,7 +1644,7 @@ lbl_fn_80333D68_0000153C:
     lfs f1, lbl_80885140
     stfs f2, 0x84(r1)
     lfs f2, lbl_80885164
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     lfs f3, lbl_80885138
     addi r3, r1, 0x98
     lfs f0, lbl_80885140
@@ -1755,7 +1755,7 @@ lbl_fn_80333D68_00001718:
     addi r4, r3, 0x534
     lfs f2, lbl_80885140
     li r5, 0x1
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     lfs f30, 0x2e4(r31)
     addi r3, r31, 0xb0
     li r4, 0x0

@@ -25,7 +25,7 @@ extern void fn_80139560(void);
 extern void fn_80144710(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_80151448(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015EB2C(void);
@@ -588,7 +588,7 @@ lbl_fn_8054622C_0000067C:
     mr r3, r31
     bl quest_updateFlow
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     lwz r4, 0x14a8(r31)
     lwz r3, 0x12a4(r31)
     lwz r0, 0x54c(r31)
@@ -659,7 +659,7 @@ lbl_fn_8054622C_000006B4:
     mr r3, r31
     bl quest_updateFlow
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     lwz r0, 0x14e8(r31)
     cmpwi r0, 0x3c
     ble lbl_fn_8054622C_00000C94
@@ -715,7 +715,7 @@ lbl_fn_8054622C_00000858:
     mr r3, r31
     bl quest_updateFlow
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     b lbl_fn_8054622C_00000C94
 lbl_fn_8054622C_00000884:
     bl fn_8015EB2C
@@ -729,7 +729,7 @@ lbl_fn_8054622C_00000884:
     mr r3, r31
     bl quest_updateFlow
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     b lbl_fn_8054622C_00000C94
 lbl_fn_8054622C_000008B8:
     lwz r3, lbl_8087F048

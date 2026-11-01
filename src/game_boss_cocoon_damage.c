@@ -5,7 +5,7 @@
 extern void dtor_80013D60(void);
 extern void vec3_copy(void);
 extern void str_initFromCStr(void);
-extern void fn_8004212C(void);
+extern void str_getData(void);
 extern void fn_80056DB8(void);
 extern void fn_80057A64(void);
 extern void atn_ColliCapsule_destructor(void);
@@ -35,7 +35,7 @@ extern void fn_8012DB04(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80144710(void);
 extern void quest_updateFlow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_80151448(void);
 extern void fn_8015AC48(void);
 extern void fn_8015E7A0(void);
@@ -673,7 +673,7 @@ asm void fn_80458270(void)
 lbl_fn_80458270_0000078C:
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     addi r4, r31, 0x2d
     li r5, 0x8
     bl strncmp
@@ -681,7 +681,7 @@ lbl_fn_80458270_0000078C:
     bne lbl_fn_80458270_000007C8
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     addi r3, r1, 0x20
     addi r4, r4, 0x8
@@ -710,7 +710,7 @@ lbl_fn_80458270_000007D0:
     addi r5, r1, 0x20
     bl fn_8006AFF8
     addi r3, r1, 0x8
-    bl fn_8004212C
+    bl str_getData
     lwz r12, 0x14b0(r28)
     mr r4, r3
     addi r3, r28, 0x14b0
@@ -1641,7 +1641,7 @@ lbl_fn_8045883C_000015A4:
     stfs f0, 0x52c(r31)
 lbl_fn_8045883C_000015C4:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
     bl quest_updateFlow
     mr r3, r31

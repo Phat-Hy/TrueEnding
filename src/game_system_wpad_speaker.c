@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
-extern void fn_80061824(void);
+extern void skill_calcTrajectory(void);
 extern void fn_8006A900(void);
 extern void fn_8006EF48(void);
 extern void fn_8006F2F0(void);
@@ -485,7 +485,7 @@ lbl_world_Manager_postUpdate_00000484:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f0, lbl_8088577C
     addi r28, r28, lbl_8078A408@l
     lwz r5, 0x10d0(r27)
@@ -518,7 +518,7 @@ lbl_world_Manager_postUpdate_00000484:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lwz r4, lbl_8087F8A0
     addi r5, r1, 0x40
     lfs f0, lbl_8088577C
@@ -559,7 +559,7 @@ lbl_world_Manager_postUpdate_00000484:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f0, lbl_8088577C
     lwz r0, 0x54e4(r27)
     fadds f31, f31, f0
@@ -628,7 +628,7 @@ lbl_world_Manager_postUpdate_000006E4:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f0, lbl_8088577C
     fadds f31, f31, f0
 lbl_world_Manager_postUpdate_00000750:
@@ -675,7 +675,7 @@ lbl_world_Manager_postUpdate_00000750:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f0, lbl_8088577C
     fadds f31, f31, f0
 lbl_world_Manager_postUpdate_00000808:
@@ -807,7 +807,7 @@ lbl_world_Manager_postUpdate_00000808:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f0, lbl_8088578C
     fmr f1, f26
     fmr f2, f28
@@ -845,7 +845,7 @@ lbl_world_Manager_postUpdate_00000808:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lwz r3, lbl_8087EEB0
     li r0, 0x12
     stw r0, 0xa0(r3)

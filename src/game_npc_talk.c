@@ -102,9 +102,9 @@ extern u32 lbl_80881A54;
 extern u32 lbl_80881A58;
 
 /* Function declarations */
-void fn_8013CB68(void);
+void npc_updateTalkInteraction(void);
 
-asm void fn_8013CB68(void)
+asm void npc_updateTalkInteraction(void)
 {
     nofralloc
     stwu r1, -0x6f0(r1)
@@ -128,21 +128,21 @@ asm void fn_8013CB68(void)
     cmpwi r0, 0x6
     mr r25, r5
     addi r24, r24, lbl_8077A720@l
-    bne lbl_fn_8013CB68_00000070
+    bne lbl_npc_updateTalkInteraction_00000070
     lwz r0, 0x560(r3)
     cmpwi r0, 0x2
-    bne lbl_fn_8013CB68_00000070
+    bne lbl_npc_updateTalkInteraction_00000070
     lwz r0, 0x54c(r3)
     rlwinm r0, r0, 0, 25, 22
     stw r0, 0x54c(r3)
-lbl_fn_8013CB68_00000070:
+lbl_npc_updateTalkInteraction_00000070:
     lwz r0, 0x54c(r3)
     rlwinm r0, r0, 0, 24, 24
     cmplwi r0, 0x80
-    bne lbl_fn_8013CB68_00000088
+    bne lbl_npc_updateTalkInteraction_00000088
     lfs f0, lbl_80881A00
     fmuls f29, f2, f0
-lbl_fn_8013CB68_00000088:
+lbl_npc_updateTalkInteraction_00000088:
     psq_l f1, 0x528(r3), 0, 0
     addi r5, r1, 0x3e0
     lfs f2, 0x530(r3)
@@ -155,12 +155,12 @@ lbl_fn_8013CB68_00000088:
     cmpwi r0, 0x0
     psq_st f1, 0x0(r6), 0, 0
     stfs f2, 0x3dc(r1)
-    beq lbl_fn_8013CB68_000000CC
+    beq lbl_npc_updateTalkInteraction_000000CC
     lfs f3, 0x3d8(r1)
     lfs f0, lbl_80881A0C
     fadds f0, f3, f0
     stfs f0, 0x3d8(r1)
-lbl_fn_8013CB68_000000CC:
+lbl_npc_updateTalkInteraction_000000CC:
     lfs f3, 0x4(r4)
     lis r3, lbl_80737810@ha
     lfs f0, 0x3d8(r1)
@@ -170,16 +170,16 @@ lbl_fn_8013CB68_000000CC:
     frsp f31, f1
     lfs f0, lbl_80881A0C
     fcmpo cr0, f31, f0
-    ble lbl_fn_8013CB68_000000FC
+    ble lbl_npc_updateTalkInteraction_000000FC
     lfs f0, lbl_80881A10
     fsubs f31, f31, f0
-lbl_fn_8013CB68_000000FC:
+lbl_npc_updateTalkInteraction_000000FC:
     lfs f0, lbl_80881A14
     fcmpo cr0, f31, f0
-    bge lbl_fn_8013CB68_00000110
+    bge lbl_npc_updateTalkInteraction_00000110
     lfs f0, lbl_80881A10
     fadds f31, f31, f0
-lbl_fn_8013CB68_00000110:
+lbl_npc_updateTalkInteraction_00000110:
     lwz r3, lbl_8087EFA8
     lwz r0, 0x12a4(r27)
     lfs f0, 0x3a4(r3)
@@ -189,15 +189,15 @@ lbl_fn_8013CB68_00000110:
     fmuls f30, f0, f3
     lfs f5, 0x56c(r27)
     fmuls f29, f29, f30
-    beq lbl_fn_8013CB68_00000154
+    beq lbl_npc_updateTalkInteraction_00000154
     lwz r0, 0x54c(r27)
     rlwinm r3, r0, 0, 10, 10
     subis r0, r3, 0x20
     cmplwi r0, 0x0
-    bne lbl_fn_8013CB68_00000154
+    bne lbl_npc_updateTalkInteraction_00000154
     lfs f0, lbl_80881994
     fmuls f5, f5, f0
-lbl_fn_8013CB68_00000154:
+lbl_npc_updateTalkInteraction_00000154:
     lfs f0, lbl_80881A0C
     lis r3, lbl_80737810@ha
     lfs f3, lbl_808819B4
@@ -215,16 +215,16 @@ lbl_fn_8013CB68_00000154:
     frsp f5, f1
     lfs f0, lbl_80881A0C
     fcmpo cr0, f5, f0
-    ble lbl_fn_8013CB68_000001A4
+    ble lbl_npc_updateTalkInteraction_000001A4
     lfs f0, lbl_80881A10
     fsubs f5, f5, f0
-lbl_fn_8013CB68_000001A4:
+lbl_npc_updateTalkInteraction_000001A4:
     lfs f0, lbl_80881A14
     fcmpo cr0, f5, f0
-    bge lbl_fn_8013CB68_000001B8
+    bge lbl_npc_updateTalkInteraction_000001B8
     lfs f0, lbl_80881A10
     fadds f5, f5, f0
-lbl_fn_8013CB68_000001B8:
+lbl_npc_updateTalkInteraction_000001B8:
     lfs f4, 0x570(r27)
     lfs f3, lbl_80881A18
     lfs f0, lbl_80881A1C
@@ -232,18 +232,18 @@ lbl_fn_8013CB68_000001B8:
     stfs f5, 0x3d8(r1)
     stfs f3, 0x570(r27)
     fcmpo cr0, f3, f0
-    bge lbl_fn_8013CB68_000001E0
+    bge lbl_npc_updateTalkInteraction_000001E0
     lfs f0, lbl_8088196C
     stfs f0, 0x570(r27)
-lbl_fn_8013CB68_000001E0:
+lbl_npc_updateTalkInteraction_000001E0:
     lfs f0, lbl_80881964
     fcmpo cr0, f28, f0
-    ble lbl_fn_8013CB68_000001F0
+    ble lbl_npc_updateTalkInteraction_000001F0
     fmr f28, f0
-lbl_fn_8013CB68_000001F0:
+lbl_npc_updateTalkInteraction_000001F0:
     lfs f0, lbl_808819A0
     fcmpo cr0, f28, f0
-    ble lbl_fn_8013CB68_00000274
+    ble lbl_npc_updateTalkInteraction_00000274
     fsubs f5, f28, f0
     lfs f4, lbl_808819A4
     lfs f3, 0x570(r27)
@@ -252,9 +252,9 @@ lbl_fn_8013CB68_000001F0:
     lfs f4, lbl_80881988
     fcmpo cr0, f3, f0
     fmuls f28, f28, f29
-    bge lbl_fn_8013CB68_00000224
+    bge lbl_npc_updateTalkInteraction_00000224
     lfs f4, lbl_8088196C
-lbl_fn_8013CB68_00000224:
+lbl_npc_updateTalkInteraction_00000224:
     lfs f3, lbl_80881A0C
     lfs f0, lbl_8088196C
     fdivs f3, f31, f3
@@ -262,9 +262,9 @@ lbl_fn_8013CB68_00000224:
     frsp f3, f3
     fsubs f6, f3, f4
     fcmpo cr0, f6, f0
-    bge lbl_fn_8013CB68_00000248
+    bge lbl_npc_updateTalkInteraction_00000248
     fmr f6, f0
-lbl_fn_8013CB68_00000248:
+lbl_npc_updateTalkInteraction_00000248:
     lfs f5, lbl_80881964
     lfs f3, lbl_80881A20
     fsubs f4, f5, f4
@@ -273,12 +273,12 @@ lbl_fn_8013CB68_00000248:
     fnmsubs f3, f3, f6, f5
     fmuls f28, f28, f3
     fcmpo cr0, f28, f0
-    bge lbl_fn_8013CB68_00000278
+    bge lbl_npc_updateTalkInteraction_00000278
     fmr f28, f0
-    b lbl_fn_8013CB68_00000278
-lbl_fn_8013CB68_00000274:
+    b lbl_npc_updateTalkInteraction_00000278
+lbl_npc_updateTalkInteraction_00000274:
     lfs f28, lbl_8088196C
-lbl_fn_8013CB68_00000278:
+lbl_npc_updateTalkInteraction_00000278:
     lfs f3, lbl_808819FC
     lfs f0, lbl_808819A0
     lfs f5, 0x580(r27)
@@ -292,10 +292,10 @@ lbl_fn_8013CB68_00000278:
     fabs f3, f3
     frsp f3, f3
     fcmpo cr0, f3, f0
-    bge lbl_fn_8013CB68_000002B8
+    bge lbl_npc_updateTalkInteraction_000002B8
     lfs f0, lbl_8088196C
     stfs f0, 0x580(r27)
-lbl_fn_8013CB68_000002B8:
+lbl_npc_updateTalkInteraction_000002B8:
     lfs f3, lbl_80881A28
     mr r3, r27
     lfs f4, 0x570(r27)
@@ -312,11 +312,11 @@ lbl_fn_8013CB68_000002B8:
     lfs f4, lbl_80881964
     fmuls f0, f0, f30
     fcmpo cr0, f4, f0
-    bge lbl_fn_8013CB68_00000300
-    b lbl_fn_8013CB68_00000304
-lbl_fn_8013CB68_00000300:
+    bge lbl_npc_updateTalkInteraction_00000300
+    b lbl_npc_updateTalkInteraction_00000304
+lbl_npc_updateTalkInteraction_00000300:
     fmr f4, f0
-lbl_fn_8013CB68_00000304:
+lbl_npc_updateTalkInteraction_00000304:
     lfs f0, lbl_808819FC
     lfs f3, 0x574(r27)
     fmuls f0, f0, f30
@@ -324,11 +324,11 @@ lbl_fn_8013CB68_00000304:
     fnmsubs f3, f3, f4, f3
     fcmpo cr0, f5, f0
     stfs f3, 0x574(r27)
-    bge lbl_fn_8013CB68_00000328
-    b lbl_fn_8013CB68_0000032C
-lbl_fn_8013CB68_00000328:
+    bge lbl_npc_updateTalkInteraction_00000328
+    b lbl_npc_updateTalkInteraction_0000032C
+lbl_npc_updateTalkInteraction_00000328:
     fmr f5, f0
-lbl_fn_8013CB68_0000032C:
+lbl_npc_updateTalkInteraction_0000032C:
     lfs f0, 0x57c(r27)
     lfs f1, 0x3d8(r1)
     fnmsubs f0, f0, f5, f0
@@ -348,38 +348,38 @@ lbl_fn_8013CB68_0000032C:
     fmuls f0, f0, f3
     fcmpo cr0, f4, f30
     stfs f0, 0x3d0(r1)
-    bge lbl_fn_8013CB68_00000380
-    b lbl_fn_8013CB68_00000384
-lbl_fn_8013CB68_00000380:
+    bge lbl_npc_updateTalkInteraction_00000380
+    b lbl_npc_updateTalkInteraction_00000384
+lbl_npc_updateTalkInteraction_00000380:
     fmr f4, f30
-lbl_fn_8013CB68_00000384:
+lbl_npc_updateTalkInteraction_00000384:
     lfs f0, 0x3c8(r1)
     lfs f3, lbl_80881964
     fmuls f0, f0, f4
     fcmpo cr0, f3, f30
     stfs f0, 0x3c8(r1)
-    bge lbl_fn_8013CB68_000003A0
-    b lbl_fn_8013CB68_000003A4
-lbl_fn_8013CB68_000003A0:
+    bge lbl_npc_updateTalkInteraction_000003A0
+    b lbl_npc_updateTalkInteraction_000003A4
+lbl_npc_updateTalkInteraction_000003A0:
     fmr f3, f30
-lbl_fn_8013CB68_000003A4:
+lbl_npc_updateTalkInteraction_000003A4:
     lfs f0, 0x3cc(r1)
     lfs f4, lbl_80881964
     fmuls f0, f0, f3
     fcmpo cr0, f4, f30
     stfs f0, 0x3cc(r1)
-    bge lbl_fn_8013CB68_000003C0
-    b lbl_fn_8013CB68_000003C4
-lbl_fn_8013CB68_000003C0:
+    bge lbl_npc_updateTalkInteraction_000003C0
+    b lbl_npc_updateTalkInteraction_000003C4
+lbl_npc_updateTalkInteraction_000003C0:
     fmr f4, f30
-lbl_fn_8013CB68_000003C4:
+lbl_npc_updateTalkInteraction_000003C4:
     lfs f0, 0x3d0(r1)
     fmuls f0, f0, f4
     stfs f0, 0x3d0(r1)
     lwz r3, 0x958(r27)
     rlwinm r0, r3, 0, 25, 25
     cmplwi r0, 0x40
-    bne lbl_fn_8013CB68_00000424
+    bne lbl_npc_updateTalkInteraction_00000424
     lwz r4, lbl_8087F0A8
     lis r0, 0x4330
     stw r0, 0x560(r1)
@@ -396,34 +396,34 @@ lbl_fn_8013CB68_000003C4:
     fdivs f3, f3, f4
     fsubs f0, f0, f3
     stfs f0, 0x578(r27)
-    b lbl_fn_8013CB68_000004EC
-lbl_fn_8013CB68_00000424:
+    b lbl_npc_updateTalkInteraction_000004EC
+lbl_npc_updateTalkInteraction_00000424:
     clrlwi r0, r3, 31
     cmplwi r0, 0x1
-    beq lbl_fn_8013CB68_000004EC
+    beq lbl_npc_updateTalkInteraction_000004EC
     lwz r0, 0x54c(r27)
     rlwinm r3, r0, 0, 10, 10
     subis r0, r3, 0x20
     cmplwi r0, 0x0
-    beq lbl_fn_8013CB68_000004EC
+    beq lbl_npc_updateTalkInteraction_000004EC
     lwz r0, 0x12a4(r27)
     extrwi. r0, r0, 1, 29
-    beq lbl_fn_8013CB68_00000488
+    beq lbl_npc_updateTalkInteraction_00000488
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    bne lbl_fn_8013CB68_00000488
+    bne lbl_npc_updateTalkInteraction_00000488
     lwz r3, 0x560(r27)
     subi r0, r3, 0xd
     cmplwi r0, 0x2
-    ble lbl_fn_8013CB68_000004EC
+    ble lbl_npc_updateTalkInteraction_000004EC
     subi r0, r3, 0x1d
     cmplwi r0, 0x1
-    ble lbl_fn_8013CB68_000004EC
+    ble lbl_npc_updateTalkInteraction_000004EC
     cmpwi r3, 0xb
-    beq lbl_fn_8013CB68_000004EC
+    beq lbl_npc_updateTalkInteraction_000004EC
     cmpwi r3, 0x32
-    beq lbl_fn_8013CB68_000004EC
-lbl_fn_8013CB68_00000488:
+    beq lbl_npc_updateTalkInteraction_000004EC
+lbl_npc_updateTalkInteraction_00000488:
     lwz r4, lbl_8087F0A8
     lis r0, 0x4330
     stw r0, 0x560(r1)
@@ -442,34 +442,34 @@ lbl_fn_8013CB68_00000488:
     fmadds f3, f30, f4, f3
     stfs f3, 0x578(r27)
     fcmpo cr0, f3, f0
-    bge lbl_fn_8013CB68_000004EC
+    bge lbl_npc_updateTalkInteraction_000004EC
     lfs f0, lbl_80881A30
     fcmpo cr0, f3, f0
-    bge lbl_fn_8013CB68_000004E4
-    b lbl_fn_8013CB68_000004E8
-lbl_fn_8013CB68_000004E4:
+    bge lbl_npc_updateTalkInteraction_000004E4
+    b lbl_npc_updateTalkInteraction_000004E8
+lbl_npc_updateTalkInteraction_000004E4:
     fmr f3, f0
-lbl_fn_8013CB68_000004E8:
+lbl_npc_updateTalkInteraction_000004E8:
     stfs f3, 0x578(r27)
-lbl_fn_8013CB68_000004EC:
+lbl_npc_updateTalkInteraction_000004EC:
     lfs f4, lbl_80881964
     fcmpo cr0, f4, f30
-    bge lbl_fn_8013CB68_000004FC
-    b lbl_fn_8013CB68_00000500
-lbl_fn_8013CB68_000004FC:
+    bge lbl_npc_updateTalkInteraction_000004FC
+    b lbl_npc_updateTalkInteraction_00000500
+lbl_npc_updateTalkInteraction_000004FC:
     fmr f4, f30
-lbl_fn_8013CB68_00000500:
+lbl_npc_updateTalkInteraction_00000500:
     lfs f3, 0x6b8(r27)
     lfs f0, 0x3c8(r1)
     lfs f5, lbl_80881964
     fmadds f0, f3, f4, f0
     fcmpo cr0, f5, f30
     stfs f0, 0x3c8(r1)
-    bge lbl_fn_8013CB68_00000520
-    b lbl_fn_8013CB68_00000524
-lbl_fn_8013CB68_00000520:
+    bge lbl_npc_updateTalkInteraction_00000520
+    b lbl_npc_updateTalkInteraction_00000524
+lbl_npc_updateTalkInteraction_00000520:
     fmr f5, f30
-lbl_fn_8013CB68_00000524:
+lbl_npc_updateTalkInteraction_00000524:
     lfs f4, 0x6c0(r27)
     lfs f3, 0x3d0(r1)
     lfs f0, lbl_80881A34
@@ -482,33 +482,33 @@ lbl_fn_8013CB68_00000524:
     fcmpo cr0, f5, f0
     fadds f3, f4, f3
     stfs f3, 0x3cc(r1)
-    bge lbl_fn_8013CB68_0000055C
-    b lbl_fn_8013CB68_00000560
-lbl_fn_8013CB68_0000055C:
+    bge lbl_npc_updateTalkInteraction_0000055C
+    b lbl_npc_updateTalkInteraction_00000560
+lbl_npc_updateTalkInteraction_0000055C:
     fmr f5, f0
-lbl_fn_8013CB68_00000560:
+lbl_npc_updateTalkInteraction_00000560:
     lfs f0, lbl_80881A34
     lfs f3, 0x6c0(r27)
     fmuls f0, f0, f30
     lfs f4, lbl_80881964
     fmuls f5, f3, f5
     fcmpo cr0, f4, f0
-    bge lbl_fn_8013CB68_00000580
-    b lbl_fn_8013CB68_00000584
-lbl_fn_8013CB68_00000580:
+    bge lbl_npc_updateTalkInteraction_00000580
+    b lbl_npc_updateTalkInteraction_00000584
+lbl_npc_updateTalkInteraction_00000580:
     fmr f4, f0
-lbl_fn_8013CB68_00000584:
+lbl_npc_updateTalkInteraction_00000584:
     lfs f0, lbl_80881A34
     lfs f3, 0x6bc(r27)
     fmuls f0, f0, f30
     lfs f7, lbl_80881964
     fmuls f6, f3, f4
     fcmpo cr0, f7, f0
-    bge lbl_fn_8013CB68_000005A4
-    b lbl_fn_8013CB68_000005A8
-lbl_fn_8013CB68_000005A4:
+    bge lbl_npc_updateTalkInteraction_000005A4
+    b lbl_npc_updateTalkInteraction_000005A8
+lbl_npc_updateTalkInteraction_000005A4:
     fmr f7, f0
-lbl_fn_8013CB68_000005A8:
+lbl_npc_updateTalkInteraction_000005A8:
     lfs f3, 0x6b8(r27)
     addi r3, r27, 0x6b8
     lfs f0, 0x6c0(r27)
@@ -527,12 +527,12 @@ lbl_fn_8013CB68_000005A8:
     lfs f0, lbl_80881994
     fcmpo cr0, f1, f0
     cror eq, gt, eq
-    beq lbl_fn_8013CB68_00000604
+    beq lbl_npc_updateTalkInteraction_00000604
     lfs f0, lbl_8088196C
     stfs f0, 0x6b8(r27)
     stfs f0, 0x6bc(r27)
     stfs f0, 0x6c0(r27)
-lbl_fn_8013CB68_00000604:
+lbl_npc_updateTalkInteraction_00000604:
     lfs f0, 0x578(r27)
     lfs f4, 0x57c(r27)
     fmuls f7, f0, f30
@@ -553,29 +553,29 @@ lbl_fn_8013CB68_00000604:
     stfs f5, 0x3c8(r1)
     stfs f4, 0x3cc(r1)
     stfs f3, 0x3d0(r1)
-    bge lbl_fn_8013CB68_0000065C
+    bge lbl_npc_updateTalkInteraction_0000065C
     stfs f0, 0x3cc(r1)
-lbl_fn_8013CB68_0000065C:
+lbl_npc_updateTalkInteraction_0000065C:
     lwz r3, 0x48(r27)
     li r23, 0x1
     li r0, 0x1
     cmpwi r3, 0x1
-    beq lbl_fn_8013CB68_0000067C
+    beq lbl_npc_updateTalkInteraction_0000067C
     cmpwi r3, 0x4
-    beq lbl_fn_8013CB68_0000067C
+    beq lbl_npc_updateTalkInteraction_0000067C
     li r0, 0x0
-lbl_fn_8013CB68_0000067C:
+lbl_npc_updateTalkInteraction_0000067C:
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_00000690
+    bne lbl_npc_updateTalkInteraction_00000690
     lwz r0, lbl_8087FA20
     cmpwi r0, 0x0
-    beq lbl_fn_8013CB68_00000720
-lbl_fn_8013CB68_00000690:
+    beq lbl_npc_updateTalkInteraction_00000720
+lbl_npc_updateTalkInteraction_00000690:
     lwz r0, 0x12a4(r27)
     extrwi. r0, r0, 1, 19
-    beq lbl_fn_8013CB68_000006A0
+    beq lbl_npc_updateTalkInteraction_000006A0
     li r23, 0x0
-lbl_fn_8013CB68_000006A0:
+lbl_npc_updateTalkInteraction_000006A0:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x304
     lfs f0, 0x530(r27)
@@ -593,13 +593,13 @@ lbl_fn_8013CB68_000006A0:
     bl PSVECSquareMag
     lfs f0, lbl_80881A3C
     fcmpo cr0, f1, f0
-    ble lbl_fn_8013CB68_000006F0
+    ble lbl_npc_updateTalkInteraction_000006F0
     li r23, 0x0
-    b lbl_fn_8013CB68_00000720
-lbl_fn_8013CB68_000006F0:
+    b lbl_npc_updateTalkInteraction_00000720
+lbl_npc_updateTalkInteraction_000006F0:
     lfs f0, lbl_80881A40
     fcmpo cr0, f1, f0
-    ble lbl_fn_8013CB68_00000720
+    ble lbl_npc_updateTalkInteraction_00000720
     lwz r0, 0x80(r27)
     lwz r3, 0x1390(r27)
     add r0, r3, r0
@@ -607,31 +607,31 @@ lbl_fn_8013CB68_000006F0:
     clrlwi r0, r0, 31
     xor r0, r0, r3
     subf. r0, r3, r0
-    beq lbl_fn_8013CB68_00000720
+    beq lbl_npc_updateTalkInteraction_00000720
     li r23, 0x0
-lbl_fn_8013CB68_00000720:
+lbl_npc_updateTalkInteraction_00000720:
     lwz r0, 0x12a8(r27)
     extrwi. r0, r0, 1, 22
-    beq lbl_fn_8013CB68_00000730
+    beq lbl_npc_updateTalkInteraction_00000730
     li r23, 0x0
-lbl_fn_8013CB68_00000730:
+lbl_npc_updateTalkInteraction_00000730:
     lwz r3, lbl_8087FA20
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00000758
+    beq lbl_npc_updateTalkInteraction_00000758
     cmpwi r23, 0x0
-    beq lbl_fn_8013CB68_00000758
+    beq lbl_npc_updateTalkInteraction_00000758
     addi r4, r27, 0x528
     bl fn_805B96AC
     cmpwi r3, 0x0
-    bne lbl_fn_8013CB68_00000758
+    bne lbl_npc_updateTalkInteraction_00000758
     li r23, 0x0
-lbl_fn_8013CB68_00000758:
+lbl_npc_updateTalkInteraction_00000758:
     cmpwi r23, 0x0
     li r31, 0x1
-    beq lbl_fn_8013CB68_000037A0
+    beq lbl_npc_updateTalkInteraction_000037A0
     lwz r0, 0x610(r27)
     cmpwi r0, 0x3
-    ble lbl_fn_8013CB68_00000870
+    ble lbl_npc_updateTalkInteraction_00000870
     addi r4, r1, 0x3e0
     lfs f2, 0x3e8(r1)
     addi r3, r1, 0x3bc
@@ -648,7 +648,7 @@ lbl_fn_8013CB68_00000758:
     lwz r0, 0x958(r27)
     rlwinm r0, r0, 0, 25, 25
     cmplwi r0, 0x40
-    bne lbl_fn_8013CB68_000007D4
+    bne lbl_npc_updateTalkInteraction_000007D4
     frsp f2, f2
     psq_l f1, 0x0(r5), 0, 0
     psq_st f1, 0x0(r3), 0, 0
@@ -657,7 +657,7 @@ lbl_fn_8013CB68_00000758:
     lfs f2, 0x3e8(r1)
     psq_st f1, 0x0(r5), 0, 0
     stfs f2, 0x3b8(r1)
-lbl_fn_8013CB68_000007D4:
+lbl_npc_updateTalkInteraction_000007D4:
     lwz r23, lbl_8087EE98
     mr r3, r27
     bl actor_getMovementFlags
@@ -670,15 +670,15 @@ lbl_fn_8013CB68_000007D4:
     li r9, 0x0
     bl fn_8004ECC0
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00000814
+    beq lbl_npc_updateTalkInteraction_00000814
     lfs f0, 0x3a8(r1)
     stfs f0, 0x3e4(r1)
-    b lbl_fn_8013CB68_00000870
-lbl_fn_8013CB68_00000814:
+    b lbl_npc_updateTalkInteraction_00000870
+lbl_npc_updateTalkInteraction_00000814:
     lwz r0, 0x958(r27)
     rlwinm r0, r0, 0, 25, 25
     cmplwi r0, 0x40
-    beq lbl_fn_8013CB68_00000870
+    beq lbl_npc_updateTalkInteraction_00000870
     lfs f3, 0x3b4(r1)
     mr r3, r27
     lfs f0, 0x5b4(r27)
@@ -695,10 +695,10 @@ lbl_fn_8013CB68_00000814:
     li r9, 0x0
     bl fn_8004ECC0
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00000870
+    beq lbl_npc_updateTalkInteraction_00000870
     lfs f0, 0x3a8(r1)
     stfs f0, 0x3e4(r1)
-lbl_fn_8013CB68_00000870:
+lbl_npc_updateTalkInteraction_00000870:
     li r0, 0x0
     addi r4, r1, 0x3e0
     lfs f2, 0x3e8(r1)
@@ -736,21 +736,21 @@ lbl_fn_8013CB68_00000870:
     stfs f2, 0x1f8(r1)
     rlwinm r0, r0, 0, 25, 25
     cmplwi r0, 0x40
-    bne lbl_fn_8013CB68_00000918
+    bne lbl_npc_updateTalkInteraction_00000918
     lfs f0, 0x38c(r1)
     fsubs f0, f0, f7
     stfs f0, 0x38c(r1)
-    b lbl_fn_8013CB68_00000924
-lbl_fn_8013CB68_00000918:
+    b lbl_npc_updateTalkInteraction_00000924
+lbl_npc_updateTalkInteraction_00000918:
     lfs f0, 0x38c(r1)
     fadds f0, f0, f7
     stfs f0, 0x38c(r1)
-lbl_fn_8013CB68_00000924:
+lbl_npc_updateTalkInteraction_00000924:
     lwz r0, 0x12a8(r27)
     clrlwi. r0, r0, 31
-    beq lbl_fn_8013CB68_00000934
+    beq lbl_npc_updateTalkInteraction_00000934
     li r25, 0x1
-lbl_fn_8013CB68_00000934:
+lbl_npc_updateTalkInteraction_00000934:
     neg r3, r25
     lis r0, 0x8000
     or r4, r3, r25
@@ -761,31 +761,31 @@ lbl_fn_8013CB68_00000934:
     lwz r0, 0x48(r27)
     or r22, r22, r3
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_00000968
+    bne lbl_npc_updateTalkInteraction_00000968
     li r0, 0x1
-    b lbl_fn_8013CB68_000009A4
-lbl_fn_8013CB68_00000968:
+    b lbl_npc_updateTalkInteraction_000009A4
+lbl_npc_updateTalkInteraction_00000968:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_000009A0
+    beq lbl_npc_updateTalkInteraction_000009A0
     lwz r0, 0x48(r3)
     cmpwi r0, 0x2
-    bne lbl_fn_8013CB68_000009A0
+    bne lbl_npc_updateTalkInteraction_000009A0
     lwz r0, 0x4c(r3)
     cmpwi r0, 0x19
-    bne lbl_fn_8013CB68_000009A0
+    bne lbl_npc_updateTalkInteraction_000009A0
     lwz r3, 0x50(r3)
     subi r0, r3, 0x2
     cntlzw r0, r0
     srwi r0, r0, 5
-    b lbl_fn_8013CB68_000009A4
-lbl_fn_8013CB68_000009A0:
+    b lbl_npc_updateTalkInteraction_000009A4
+lbl_npc_updateTalkInteraction_000009A0:
     li r0, 0x0
-lbl_fn_8013CB68_000009A4:
+lbl_npc_updateTalkInteraction_000009A4:
     cmpwi r0, 0x0
-    beq lbl_fn_8013CB68_000009B0
+    beq lbl_npc_updateTalkInteraction_000009B0
     oris r22, r22, 0x200
-lbl_fn_8013CB68_000009B0:
+lbl_npc_updateTalkInteraction_000009B0:
     lwz r3, lbl_8087EE98
     mr r7, r22
     lfs f1, 0x394(r1)
@@ -799,7 +799,7 @@ lbl_fn_8013CB68_000009B0:
     mr r25, r3
     rlwinm r0, r0, 0, 22, 22
     cmplwi r0, 0x200
-    bne lbl_fn_8013CB68_00000A20
+    bne lbl_npc_updateTalkInteraction_00000A20
     lfs f7, lbl_8088196C
     lfs f0, 0x3e4(r1)
     lfs f6, 0x3e0(r1)
@@ -813,8 +813,8 @@ lbl_fn_8013CB68_000009B0:
     stfs f5, 0x3e0(r1)
     stfs f4, 0x3e4(r1)
     stfs f0, 0x3e8(r1)
-    b lbl_fn_8013CB68_00000A90
-lbl_fn_8013CB68_00000A20:
+    b lbl_npc_updateTalkInteraction_00000A90
+lbl_npc_updateTalkInteraction_00000A20:
     addi r5, r1, 0x520
     lfs f2, 0x528(r1)
     addi r4, r1, 0x3e0
@@ -835,46 +835,46 @@ lbl_fn_8013CB68_00000A20:
     lwz r0, 0x958(r27)
     rlwinm r0, r0, 0, 25, 25
     cmplwi r0, 0x40
-    bne lbl_fn_8013CB68_00000A84
+    bne lbl_npc_updateTalkInteraction_00000A84
     lfs f0, 0x394(r1)
     fadds f0, f3, f0
     stfs f0, 0x3e4(r1)
-    b lbl_fn_8013CB68_00000A90
-lbl_fn_8013CB68_00000A84:
+    b lbl_npc_updateTalkInteraction_00000A90
+lbl_npc_updateTalkInteraction_00000A84:
     lfs f0, 0x394(r1)
     fsubs f0, f3, f0
     stfs f0, 0x3e4(r1)
-lbl_fn_8013CB68_00000A90:
+lbl_npc_updateTalkInteraction_00000A90:
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00000BF0
+    beq lbl_npc_updateTalkInteraction_00000BF0
     lwz r3, 0x54c(r1)
     clrlwi r0, r3, 31
     cmplwi r0, 0x1
-    bne lbl_fn_8013CB68_00000AB0
+    bne lbl_npc_updateTalkInteraction_00000AB0
     lfs f0, lbl_8088196C
     stfs f0, 0x3cc(r1)
-lbl_fn_8013CB68_00000AB0:
+lbl_npc_updateTalkInteraction_00000AB0:
     lwz r0, 0x958(r27)
     rlwinm r0, r0, 0, 25, 25
     cmplwi r0, 0x40
-    bne lbl_fn_8013CB68_00000AD4
+    bne lbl_npc_updateTalkInteraction_00000AD4
     rlwinm r0, r3, 0, 23, 23
     cmplwi r0, 0x100
-    bne lbl_fn_8013CB68_00000AD4
+    bne lbl_npc_updateTalkInteraction_00000AD4
     lfs f0, lbl_8088196C
     stfs f0, 0x3cc(r1)
-lbl_fn_8013CB68_00000AD4:
+lbl_npc_updateTalkInteraction_00000AD4:
     rlwinm r0, r3, 0, 29, 29
     cmplwi r0, 0x4
-    bne lbl_fn_8013CB68_00000B54
+    bne lbl_npc_updateTalkInteraction_00000B54
     lfs f3, 0x3cc(r1)
     lfs f0, lbl_80881A44
     fcmpo cr0, f3, f0
-    ble lbl_fn_8013CB68_00000AF4
-    b lbl_fn_8013CB68_00000AF8
-lbl_fn_8013CB68_00000AF4:
+    ble lbl_npc_updateTalkInteraction_00000AF4
+    b lbl_npc_updateTalkInteraction_00000AF8
+lbl_npc_updateTalkInteraction_00000AF4:
     fmr f3, f0
-lbl_fn_8013CB68_00000AF8:
+lbl_npc_updateTalkInteraction_00000AF8:
     stfs f3, 0x3cc(r1)
     lwz r0, 0x54c(r27)
     ori r0, r0, 0x80
@@ -882,27 +882,27 @@ lbl_fn_8013CB68_00000AF8:
     lwz r3, 0x54c(r1)
     rlwinm r0, r3, 0, 28, 28
     cmplwi r0, 0x8
-    bne lbl_fn_8013CB68_00000B54
+    bne lbl_npc_updateTalkInteraction_00000B54
     clrlwi r0, r3, 31
     cmplwi r0, 0x1
-    bne lbl_fn_8013CB68_00000B54
+    bne lbl_npc_updateTalkInteraction_00000B54
     addi r3, r1, 0x3c8
     bl PSVECSquareMag
     lfs f0, lbl_80881994
     fcmpo cr0, f1, f0
-    ble lbl_fn_8013CB68_00000B54
+    ble lbl_npc_updateTalkInteraction_00000B54
     lwz r0, 0x958(r27)
     rlwinm r0, r0, 0, 28, 28
     cmplwi r0, 0x8
-    beq lbl_fn_8013CB68_00000B54
+    beq lbl_npc_updateTalkInteraction_00000B54
     lwz r0, 0x54c(r27)
     ori r0, r0, 0x100
     stw r0, 0x54c(r27)
-lbl_fn_8013CB68_00000B54:
+lbl_npc_updateTalkInteraction_00000B54:
     lwz r0, 0x54c(r1)
     rlwinm r0, r0, 0, 25, 25
     cmplwi r0, 0x40
-    bne lbl_fn_8013CB68_00000B88
+    bne lbl_npc_updateTalkInteraction_00000B88
     lwz r0, 0x54c(r27)
     addi r4, r1, 0x554
     addi r3, r27, 0x13a0
@@ -912,11 +912,11 @@ lbl_fn_8013CB68_00000B54:
     lfs f2, 0x55c(r1)
     stfs f2, 0x13a8(r27)
     psq_st f1, 0x0(r3), 0, 0
-lbl_fn_8013CB68_00000B88:
+lbl_npc_updateTalkInteraction_00000B88:
     lwz r0, 0x54c(r1)
     rlwinm r0, r0, 0, 24, 24
     cmplwi r0, 0x80
-    bne lbl_fn_8013CB68_00000BBC
+    bne lbl_npc_updateTalkInteraction_00000BBC
     lwz r0, 0x54c(r27)
     addi r4, r1, 0x554
     addi r3, r27, 0x13a0
@@ -926,11 +926,11 @@ lbl_fn_8013CB68_00000B88:
     lfs f2, 0x55c(r1)
     stfs f2, 0x13a8(r27)
     psq_st f1, 0x0(r3), 0, 0
-lbl_fn_8013CB68_00000BBC:
+lbl_npc_updateTalkInteraction_00000BBC:
     lwz r0, 0x54c(r1)
     rlwinm r0, r0, 0, 22, 22
     cmplwi r0, 0x200
-    bne lbl_fn_8013CB68_00000BF0
+    bne lbl_npc_updateTalkInteraction_00000BF0
     lwz r0, 0x54c(r27)
     addi r4, r1, 0x554
     addi r3, r27, 0x13a0
@@ -940,26 +940,26 @@ lbl_fn_8013CB68_00000BBC:
     lfs f2, 0x55c(r1)
     stfs f2, 0x13a8(r27)
     psq_st f1, 0x0(r3), 0, 0
-lbl_fn_8013CB68_00000BF0:
+lbl_npc_updateTalkInteraction_00000BF0:
     lwz r4, 0x544(r1)
     li r3, 0x0
     li r0, 0x0
     cmpwi r4, 0x0
-    beq lbl_fn_8013CB68_00000C14
+    beq lbl_npc_updateTalkInteraction_00000C14
     lwz r4, 0x0(r4)
     cmplwi r4, 0x1a
-    bne lbl_fn_8013CB68_00000C14
+    bne lbl_npc_updateTalkInteraction_00000C14
     li r0, 0x1
-lbl_fn_8013CB68_00000C14:
+lbl_npc_updateTalkInteraction_00000C14:
     cmpwi r0, 0x0
-    beq lbl_fn_8013CB68_00000C34
+    beq lbl_npc_updateTalkInteraction_00000C34
     lwz r0, 0x54c(r27)
     rlwinm r4, r0, 0, 5, 5
     subis r0, r4, 0x400
     cmplwi r0, 0x0
-    beq lbl_fn_8013CB68_00000C34
+    beq lbl_npc_updateTalkInteraction_00000C34
     li r3, 0x1
-lbl_fn_8013CB68_00000C34:
+lbl_npc_updateTalkInteraction_00000C34:
     lwz r0, 0x54c(r27)
     lwz r4, 0x12a4(r27)
     rlwimi r4, r3, 3, 28, 28
@@ -967,282 +967,282 @@ lbl_fn_8013CB68_00000C34:
     stw r4, 0x12a4(r27)
     subis r0, r3, 0x20
     cmplwi r0, 0x0
-    bne lbl_fn_8013CB68_00000C5C
+    bne lbl_npc_updateTalkInteraction_00000C5C
     ori r0, r4, 0x8
     stw r0, 0x12a4(r27)
-lbl_fn_8013CB68_00000C5C:
+lbl_npc_updateTalkInteraction_00000C5C:
     lwz r3, 0x544(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00000C70
+    beq lbl_npc_updateTalkInteraction_00000C70
     lwz r0, 0x0(r3)
-    b lbl_fn_8013CB68_00000C74
-lbl_fn_8013CB68_00000C70:
+    b lbl_npc_updateTalkInteraction_00000C74
+lbl_npc_updateTalkInteraction_00000C70:
     li r0, -0x1
-lbl_fn_8013CB68_00000C74:
+lbl_npc_updateTalkInteraction_00000C74:
     cmpwi r25, 0x0
     stw r0, 0x634(r27)
-    beq lbl_fn_8013CB68_00000CE8
+    beq lbl_npc_updateTalkInteraction_00000CE8
     lwz r0, 0x54c(r1)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_8013CB68_00000CE8
+    bne lbl_npc_updateTalkInteraction_00000CE8
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x7
-    bne lbl_fn_8013CB68_00000CE8
+    bne lbl_npc_updateTalkInteraction_00000CE8
     lfs f4, lbl_80881964
     lfs f3, 0x141c(r27)
     lfs f0, lbl_80881A48
     fadds f3, f4, f3
     fcmpo cr0, f3, f0
-    bge lbl_fn_8013CB68_00000CB8
-    b lbl_fn_8013CB68_00000CBC
-lbl_fn_8013CB68_00000CB8:
+    bge lbl_npc_updateTalkInteraction_00000CB8
+    b lbl_npc_updateTalkInteraction_00000CBC
+lbl_npc_updateTalkInteraction_00000CB8:
     fmr f3, f0
-lbl_fn_8013CB68_00000CBC:
+lbl_npc_updateTalkInteraction_00000CBC:
     lwz r3, 0x12a8(r27)
     stfs f3, 0x141c(r27)
     clrlwi. r0, r3, 31
-    bne lbl_fn_8013CB68_00000D3C
+    bne lbl_npc_updateTalkInteraction_00000D3C
     frsp f3, f3
     lfs f0, lbl_808819F0
     fcmpo cr0, f3, f0
-    ble lbl_fn_8013CB68_00000D3C
+    ble lbl_npc_updateTalkInteraction_00000D3C
     ori r0, r3, 0x1
     stw r0, 0x12a8(r27)
-    b lbl_fn_8013CB68_00000D3C
-lbl_fn_8013CB68_00000CE8:
+    b lbl_npc_updateTalkInteraction_00000D3C
+lbl_npc_updateTalkInteraction_00000CE8:
     lfs f4, 0x141c(r27)
     lfs f3, lbl_8088196C
     fcmpo cr0, f4, f3
-    ble lbl_fn_8013CB68_00000D14
+    ble lbl_npc_updateTalkInteraction_00000D14
     lfs f0, lbl_808819FC
     fsubs f0, f4, f0
     fcmpo cr0, f0, f3
-    ble lbl_fn_8013CB68_00000D0C
-    b lbl_fn_8013CB68_00000D10
-lbl_fn_8013CB68_00000D0C:
+    ble lbl_npc_updateTalkInteraction_00000D0C
+    b lbl_npc_updateTalkInteraction_00000D10
+lbl_npc_updateTalkInteraction_00000D0C:
     fmr f0, f3
-lbl_fn_8013CB68_00000D10:
+lbl_npc_updateTalkInteraction_00000D10:
     stfs f0, 0x141c(r27)
-lbl_fn_8013CB68_00000D14:
+lbl_npc_updateTalkInteraction_00000D14:
     lwz r3, 0x12a8(r27)
     clrlwi. r0, r3, 31
-    beq lbl_fn_8013CB68_00000D3C
+    beq lbl_npc_updateTalkInteraction_00000D3C
     lfs f3, 0x141c(r27)
     lfs f0, lbl_80881A4C
     fcmpo cr0, f3, f0
     cror eq, lt, eq
-    bne lbl_fn_8013CB68_00000D3C
+    bne lbl_npc_updateTalkInteraction_00000D3C
     clrrwi r0, r3, 1
     stw r0, 0x12a8(r27)
-lbl_fn_8013CB68_00000D3C:
+lbl_npc_updateTalkInteraction_00000D3C:
     cmpwi r25, 0x0
-    beq lbl_fn_8013CB68_00002EBC
+    beq lbl_npc_updateTalkInteraction_00002EBC
     lwz r0, 0x54c(r1)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_8013CB68_00002EBC
+    bne lbl_npc_updateTalkInteraction_00002EBC
     lwz r0, 0x48(r27)
     lwz r3, 0x548(r1)
     cmpwi r0, 0x0
     lwz r30, 0xc(r3)
-    bne lbl_fn_8013CB68_00000DB4
+    bne lbl_npc_updateTalkInteraction_00000DB4
     lwz r0, 0x648(r27)
     cmpwi r0, 0x0
-    beq lbl_fn_8013CB68_00000DB4
+    beq lbl_npc_updateTalkInteraction_00000DB4
     lwz r0, 0xd18(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_00000DB4
+    bne lbl_npc_updateTalkInteraction_00000DB4
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00000DB4
+    beq lbl_npc_updateTalkInteraction_00000DB4
     lwz r0, 0x48(r30)
     cmpwi r0, 0x3
-    bne lbl_fn_8013CB68_00000DB4
+    bne lbl_npc_updateTalkInteraction_00000DB4
     li r4, 0x3e8
     bl world_getGlobalFlag
     cmpwi r3, 0x30
-    blt lbl_fn_8013CB68_00000DB4
+    blt lbl_npc_updateTalkInteraction_00000DB4
     lwz r3, lbl_8087F430
     li r4, 0x132
     bl fn_803750E4
-lbl_fn_8013CB68_00000DB4:
+lbl_npc_updateTalkInteraction_00000DB4:
     lwz r0, 0x48(r27)
     cmpwi r0, 0x0
-    beq lbl_fn_8013CB68_00000DC8
+    beq lbl_npc_updateTalkInteraction_00000DC8
     cmpwi r0, 0x2
-    bne lbl_fn_8013CB68_00002EBC
-lbl_fn_8013CB68_00000DC8:
+    bne lbl_npc_updateTalkInteraction_00002EBC
+lbl_npc_updateTalkInteraction_00000DC8:
     lwz r0, 0x648(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_00002EBC
+    bne lbl_npc_updateTalkInteraction_00002EBC
     lwz r0, 0x55c(r30)
     li r29, 0x1
     li r28, 0x0
     cmpwi r0, 0x6
-    bne lbl_fn_8013CB68_00000E08
+    bne lbl_npc_updateTalkInteraction_00000E08
     lwz r0, 0x560(r30)
     cmpwi r0, 0x44
-    bne lbl_fn_8013CB68_00000E08
+    bne lbl_npc_updateTalkInteraction_00000E08
     lwz r3, 0xf80(r30)
     bl fn_801C59D4
     cmpwi r3, 0x0
-    bne lbl_fn_8013CB68_00000E08
+    bne lbl_npc_updateTalkInteraction_00000E08
     li r29, 0x0
-lbl_fn_8013CB68_00000E08:
+lbl_npc_updateTalkInteraction_00000E08:
     lfs f3, 0x570(r27)
     lfs f0, lbl_80881984
     fcmpo cr0, f3, f0
-    bge lbl_fn_8013CB68_00000E1C
+    bge lbl_npc_updateTalkInteraction_00000E1C
     li r29, 0x0
-lbl_fn_8013CB68_00000E1C:
+lbl_npc_updateTalkInteraction_00000E1C:
     lwz r0, 0x48(r30)
     cmpwi r0, 0x2
-    bne lbl_fn_8013CB68_00000E68
+    bne lbl_npc_updateTalkInteraction_00000E68
     lwz r3, 0x60(r30)
     lwz r3, 0x24(r3)
     cmpwi r3, 0x35
-    bne lbl_fn_8013CB68_00000E64
+    bne lbl_npc_updateTalkInteraction_00000E64
     lwz r4, 0x14b0(r30)
     li r3, 0x0
     cmpwi r4, 0x1
-    beq lbl_fn_8013CB68_00000E54
+    beq lbl_npc_updateTalkInteraction_00000E54
     cmpwi r4, 0x3
-    beq lbl_fn_8013CB68_00000E54
+    beq lbl_npc_updateTalkInteraction_00000E54
     li r3, 0x1
-lbl_fn_8013CB68_00000E54:
+lbl_npc_updateTalkInteraction_00000E54:
     cmpwi r3, 0x0
-    bne lbl_fn_8013CB68_00000E68
+    bne lbl_npc_updateTalkInteraction_00000E68
     li r29, 0x0
-    b lbl_fn_8013CB68_00000E68
-lbl_fn_8013CB68_00000E64:
+    b lbl_npc_updateTalkInteraction_00000E68
+lbl_npc_updateTalkInteraction_00000E64:
     li r29, 0x0
-lbl_fn_8013CB68_00000E68:
+lbl_npc_updateTalkInteraction_00000E68:
     lwz r3, 0x137c(r30)
     clrlwi r3, r3, 31
     cmplwi r3, 0x1
-    bne lbl_fn_8013CB68_00000E98
+    bne lbl_npc_updateTalkInteraction_00000E98
     lwz r3, 0x55c(r27)
     cmpwi r3, 0x7
-    bne lbl_fn_8013CB68_00000E94
+    bne lbl_npc_updateTalkInteraction_00000E94
     lwz r3, 0x1078(r27)
     rlwinm r3, r3, 0, 24, 24
     cmplwi r3, 0x80
-    beq lbl_fn_8013CB68_00000E98
-lbl_fn_8013CB68_00000E94:
+    beq lbl_npc_updateTalkInteraction_00000E98
+lbl_npc_updateTalkInteraction_00000E94:
     li r29, 0x0
-lbl_fn_8013CB68_00000E98:
+lbl_npc_updateTalkInteraction_00000E98:
     lwz r3, 0x55c(r27)
     cmpwi r3, 0x6
-    bne lbl_fn_8013CB68_00000EA8
+    bne lbl_npc_updateTalkInteraction_00000EA8
     li r29, 0x0
-lbl_fn_8013CB68_00000EA8:
+lbl_npc_updateTalkInteraction_00000EA8:
     lwz r3, 0x55c(r30)
     li r4, 0x0
     cmpwi r3, 0x6
-    bne lbl_fn_8013CB68_00000EFC
+    bne lbl_npc_updateTalkInteraction_00000EFC
     lwz r5, 0x560(r30)
     li r3, 0x1
     cmpwi r5, 0x63
-    beq lbl_fn_8013CB68_00000EF0
+    beq lbl_npc_updateTalkInteraction_00000EF0
     cmpwi r5, 0x27
     li r5, 0x0
-    bne lbl_fn_8013CB68_00000EE4
+    bne lbl_npc_updateTalkInteraction_00000EE4
     lwz r6, 0x2dc(r30)
     cmpwi r6, 0x8e
-    bne lbl_fn_8013CB68_00000EE4
+    bne lbl_npc_updateTalkInteraction_00000EE4
     li r5, 0x1
-lbl_fn_8013CB68_00000EE4:
+lbl_npc_updateTalkInteraction_00000EE4:
     cmpwi r5, 0x0
-    bne lbl_fn_8013CB68_00000EF0
+    bne lbl_npc_updateTalkInteraction_00000EF0
     li r3, 0x0
-lbl_fn_8013CB68_00000EF0:
+lbl_npc_updateTalkInteraction_00000EF0:
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00000EFC
+    beq lbl_npc_updateTalkInteraction_00000EFC
     li r4, 0x1
-lbl_fn_8013CB68_00000EFC:
+lbl_npc_updateTalkInteraction_00000EFC:
     cmpwi r4, 0x0
-    beq lbl_fn_8013CB68_00000F08
+    beq lbl_npc_updateTalkInteraction_00000F08
     li r29, 0x0
-lbl_fn_8013CB68_00000F08:
+lbl_npc_updateTalkInteraction_00000F08:
     lwz r3, lbl_8087F098
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00001348
+    beq lbl_npc_updateTalkInteraction_00001348
     lwz r3, 0x48(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00001348
+    beq lbl_npc_updateTalkInteraction_00001348
     cmpwi r0, 0x0
-    beq lbl_fn_8013CB68_00000F30
+    beq lbl_npc_updateTalkInteraction_00000F30
     cmpwi r0, 0x3
-    bne lbl_fn_8013CB68_00000F34
-lbl_fn_8013CB68_00000F30:
+    bne lbl_npc_updateTalkInteraction_00000F34
+lbl_npc_updateTalkInteraction_00000F30:
     li r29, 0x0
-lbl_fn_8013CB68_00000F34:
+lbl_npc_updateTalkInteraction_00000F34:
     cmplw r30, r27
-    beq lbl_fn_8013CB68_00000F94
+    beq lbl_npc_updateTalkInteraction_00000F94
     lwz r3, lbl_8087F610
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00000F5C
+    beq lbl_npc_updateTalkInteraction_00000F5C
     lwz r3, 0x540(r3)
     cmpwi r3, 0x0
-    bne lbl_fn_8013CB68_00000F5C
+    bne lbl_npc_updateTalkInteraction_00000F5C
     li r3, 0x0
-    b lbl_fn_8013CB68_00000FF0
-lbl_fn_8013CB68_00000F5C:
+    b lbl_npc_updateTalkInteraction_00000FF0
+lbl_npc_updateTalkInteraction_00000F5C:
     lwz r3, 0x7e0(r30)
     rlwinm r3, r3, 0, 30, 30
     cmplwi r3, 0x2
-    beq lbl_fn_8013CB68_00000F8C
+    beq lbl_npc_updateTalkInteraction_00000F8C
     lwz r3, 0x7e0(r27)
     rlwinm r3, r3, 0, 30, 30
     cmplwi r3, 0x2
-    beq lbl_fn_8013CB68_00000F8C
+    beq lbl_npc_updateTalkInteraction_00000F8C
     lwz r3, lbl_8087F0A8
     lwz r3, 0xcc(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00000F94
-lbl_fn_8013CB68_00000F8C:
+    beq lbl_npc_updateTalkInteraction_00000F94
+lbl_npc_updateTalkInteraction_00000F8C:
     li r3, 0x0
-    b lbl_fn_8013CB68_00000FF0
-lbl_fn_8013CB68_00000F94:
+    b lbl_npc_updateTalkInteraction_00000FF0
+lbl_npc_updateTalkInteraction_00000F94:
     lwz r3, 0xf14(r30)
     cmpwi r3, 0x0
-    blt lbl_fn_8013CB68_00000FBC
+    blt lbl_npc_updateTalkInteraction_00000FBC
     lwz r4, 0xf14(r27)
     cmpwi r4, 0x0
-    blt lbl_fn_8013CB68_00000FBC
+    blt lbl_npc_updateTalkInteraction_00000FBC
     subf r3, r3, r4
     cntlzw r3, r3
     srwi r3, r3, 5
-    b lbl_fn_8013CB68_00000FF0
-lbl_fn_8013CB68_00000FBC:
+    b lbl_npc_updateTalkInteraction_00000FF0
+lbl_npc_updateTalkInteraction_00000FBC:
     lwz r4, 0x48(r27)
     li r3, 0x0
     cmpw r0, r4
-    beq lbl_fn_8013CB68_00000FEC
+    beq lbl_npc_updateTalkInteraction_00000FEC
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_00000FDC
+    bne lbl_npc_updateTalkInteraction_00000FDC
     cmpwi r4, 0x3
-    beq lbl_fn_8013CB68_00000FEC
-lbl_fn_8013CB68_00000FDC:
+    beq lbl_npc_updateTalkInteraction_00000FEC
+lbl_npc_updateTalkInteraction_00000FDC:
     cmpwi r0, 0x3
-    bne lbl_fn_8013CB68_00000FF0
+    bne lbl_npc_updateTalkInteraction_00000FF0
     cmpwi r4, 0x0
-    bne lbl_fn_8013CB68_00000FF0
-lbl_fn_8013CB68_00000FEC:
+    bne lbl_npc_updateTalkInteraction_00000FF0
+lbl_npc_updateTalkInteraction_00000FEC:
     li r3, 0x1
-lbl_fn_8013CB68_00000FF0:
+lbl_npc_updateTalkInteraction_00000FF0:
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00000FFC
+    beq lbl_npc_updateTalkInteraction_00000FFC
     li r29, 0x0
-lbl_fn_8013CB68_00000FFC:
+lbl_npc_updateTalkInteraction_00000FFC:
     lwz r3, 0x48(r27)
     cmpwi r3, 0x0
-    bne lbl_fn_8013CB68_00001348
+    bne lbl_npc_updateTalkInteraction_00001348
     cmpwi r0, 0x3
-    bne lbl_fn_8013CB68_00001348
+    bne lbl_npc_updateTalkInteraction_00001348
     cmpwi r29, 0x0
-    beq lbl_fn_8013CB68_00001344
+    beq lbl_npc_updateTalkInteraction_00001344
     lfs f3, 0x530(r30)
     addi r26, r1, 0x2f8
     lfs f0, 0x3a0(r1)
@@ -1265,16 +1265,16 @@ lbl_fn_8013CB68_00000FFC:
     bl PSVECNormalize
     lwz r0, 0x55c(r30)
     cmpwi r0, 0x6
-    bne lbl_fn_8013CB68_00001080
+    bne lbl_npc_updateTalkInteraction_00001080
     lwz r0, 0x560(r30)
     cmpwi r0, 0x68
-    bne lbl_fn_8013CB68_00001344
-lbl_fn_8013CB68_00001080:
+    bne lbl_npc_updateTalkInteraction_00001344
+lbl_npc_updateTalkInteraction_00001080:
     lwz r3, 0x13f8(r30)
     addi r0, r3, 0x2
     stw r0, 0x13f8(r30)
     cmpwi r0, 0x6
-    ble lbl_fn_8013CB68_00001344
+    ble lbl_npc_updateTalkInteraction_00001344
     lis r5, lbl_80737A9C@ha
     li r3, 0x3c
     addi r5, r5, lbl_80737A9C@l
@@ -1285,19 +1285,19 @@ lbl_fn_8013CB68_00001080:
     bl mem_alloc
     cmpwi r3, 0x0
     mr r23, r3
-    beq lbl_fn_8013CB68_000010D4
+    beq lbl_npc_updateTalkInteraction_000010D4
     mr r4, r30
     mr r5, r26
     mr r6, r27
     bl fn_801C61EC
     mr r23, r3
-lbl_fn_8013CB68_000010D4:
+lbl_npc_updateTalkInteraction_000010D4:
     lwz r0, 0x55c(r30)
     cmpwi r0, 0x6
-    bne lbl_fn_8013CB68_00001164
+    bne lbl_npc_updateTalkInteraction_00001164
     lwz r0, 0xf80(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_0000110C
+    bne lbl_npc_updateTalkInteraction_0000110C
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x568(r1)
@@ -1305,8 +1305,8 @@ lbl_fn_8013CB68_000010D4:
     lwz r0, 0x8(r5)
     stw r3, 0x56c(r1)
     stw r0, 0x570(r1)
-    b lbl_fn_8013CB68_00001128
-lbl_fn_8013CB68_0000110C:
+    b lbl_npc_updateTalkInteraction_00001128
+lbl_npc_updateTalkInteraction_0000110C:
     addi r3, r24, 0xec
     lwz r5, 0xec(r24)
     lwz r4, 0x4(r3)
@@ -1314,7 +1314,7 @@ lbl_fn_8013CB68_0000110C:
     stw r5, 0x568(r1)
     stw r4, 0x56c(r1)
     stw r0, 0x570(r1)
-lbl_fn_8013CB68_00001128:
+lbl_npc_updateTalkInteraction_00001128:
     lwz r5, 0x568(r1)
     addi r3, r1, 0x1e4
     lwz r4, 0x56c(r1)
@@ -1324,26 +1324,26 @@ lbl_fn_8013CB68_00001128:
     stw r0, 0x1ec(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00001164
+    beq lbl_npc_updateTalkInteraction_00001164
     lwz r3, 0xf80(r30)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_00001164:
+lbl_npc_updateTalkInteraction_00001164:
     lwz r0, 0x55c(r30)
     cmpwi r0, 0x6
-    beq lbl_fn_8013CB68_00001318
+    beq lbl_npc_updateTalkInteraction_00001318
     cmpwi r0, 0x8
-    beq lbl_fn_8013CB68_0000117C
+    beq lbl_npc_updateTalkInteraction_0000117C
     stw r0, 0x564(r30)
-lbl_fn_8013CB68_0000117C:
+lbl_npc_updateTalkInteraction_0000117C:
     lwz r0, 0x55c(r30)
     cmpwi r0, 0x6
-    bne lbl_fn_8013CB68_00001318
+    bne lbl_npc_updateTalkInteraction_00001318
     lwz r0, 0xf80(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_000011B4
+    bne lbl_npc_updateTalkInteraction_000011B4
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x574(r1)
@@ -1351,8 +1351,8 @@ lbl_fn_8013CB68_0000117C:
     lwz r0, 0x8(r5)
     stw r3, 0x578(r1)
     stw r0, 0x57c(r1)
-    b lbl_fn_8013CB68_000011D0
-lbl_fn_8013CB68_000011B4:
+    b lbl_npc_updateTalkInteraction_000011D0
+lbl_npc_updateTalkInteraction_000011B4:
     addi r3, r24, 0xf8
     lwz r5, 0xf8(r24)
     lwz r4, 0x4(r3)
@@ -1360,7 +1360,7 @@ lbl_fn_8013CB68_000011B4:
     stw r5, 0x574(r1)
     stw r4, 0x578(r1)
     stw r0, 0x57c(r1)
-lbl_fn_8013CB68_000011D0:
+lbl_npc_updateTalkInteraction_000011D0:
     lwz r5, 0x574(r1)
     addi r3, r1, 0x1cc
     lwz r4, 0x578(r1)
@@ -1370,26 +1370,26 @@ lbl_fn_8013CB68_000011D0:
     stw r0, 0x1d4(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_0000120C
+    beq lbl_npc_updateTalkInteraction_0000120C
     lwz r3, 0xf80(r30)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_0000120C:
+lbl_npc_updateTalkInteraction_0000120C:
     lwz r0, 0x55c(r30)
     cmpwi r0, 0x6
-    beq lbl_fn_8013CB68_000012E8
+    beq lbl_npc_updateTalkInteraction_000012E8
     cmpwi r0, 0x8
-    beq lbl_fn_8013CB68_00001224
+    beq lbl_npc_updateTalkInteraction_00001224
     stw r0, 0x564(r30)
-lbl_fn_8013CB68_00001224:
+lbl_npc_updateTalkInteraction_00001224:
     lwz r0, 0x55c(r30)
     cmpwi r0, 0x6
-    bne lbl_fn_8013CB68_000012E8
+    bne lbl_npc_updateTalkInteraction_000012E8
     lwz r0, 0xf80(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_0000125C
+    bne lbl_npc_updateTalkInteraction_0000125C
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x580(r1)
@@ -1397,8 +1397,8 @@ lbl_fn_8013CB68_00001224:
     lwz r0, 0x8(r5)
     stw r3, 0x584(r1)
     stw r0, 0x588(r1)
-    b lbl_fn_8013CB68_00001278
-lbl_fn_8013CB68_0000125C:
+    b lbl_npc_updateTalkInteraction_00001278
+lbl_npc_updateTalkInteraction_0000125C:
     addi r3, r24, 0x104
     lwz r5, 0x104(r24)
     lwz r4, 0x4(r3)
@@ -1406,7 +1406,7 @@ lbl_fn_8013CB68_0000125C:
     stw r5, 0x580(r1)
     stw r4, 0x584(r1)
     stw r0, 0x588(r1)
-lbl_fn_8013CB68_00001278:
+lbl_npc_updateTalkInteraction_00001278:
     lwz r5, 0x580(r1)
     addi r3, r1, 0x1d8
     lwz r4, 0x584(r1)
@@ -1416,13 +1416,13 @@ lbl_fn_8013CB68_00001278:
     stw r0, 0x1e0(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_000012B4
+    beq lbl_npc_updateTalkInteraction_000012B4
     lwz r3, 0xf80(r30)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_000012B4:
+lbl_npc_updateTalkInteraction_000012B4:
     mr r3, r30
     li r4, 0x6
     bl actor_setState
@@ -1430,45 +1430,45 @@ lbl_fn_8013CB68_000012B4:
     li r0, 0x0
     cmpwi r3, 0x0
     stw r0, 0xf80(r30)
-    beq lbl_fn_8013CB68_000012E8
+    beq lbl_npc_updateTalkInteraction_000012E8
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_000012E8:
+lbl_npc_updateTalkInteraction_000012E8:
     li r0, 0x6
     stw r0, 0x55c(r30)
     li r0, 0x0
     lwz r3, 0xf80(r30)
     cmpwi r3, 0x0
     stw r0, 0xf80(r30)
-    beq lbl_fn_8013CB68_00001318
+    beq lbl_npc_updateTalkInteraction_00001318
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_00001318:
+lbl_npc_updateTalkInteraction_00001318:
     li r0, 0x6
     stw r0, 0x55c(r30)
     lwz r3, 0xf80(r30)
     cmpwi r3, 0x0
     stw r23, 0xf80(r30)
-    beq lbl_fn_8013CB68_00001344
+    beq lbl_npc_updateTalkInteraction_00001344
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_00001344:
+lbl_npc_updateTalkInteraction_00001344:
     li r29, 0x0
-lbl_fn_8013CB68_00001348:
+lbl_npc_updateTalkInteraction_00001348:
     cmpwi r29, 0x0
-    beq lbl_fn_8013CB68_000021A4
+    beq lbl_npc_updateTalkInteraction_000021A4
     lwz r0, 0x48(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_000021A4
+    bne lbl_npc_updateTalkInteraction_000021A4
     addi r3, r30, 0xb0
     bl fn_8008B130
     li r0, 0x0
@@ -1500,10 +1500,10 @@ lbl_fn_8013CB68_00001348:
     srwi r0, r0, 5
     cntlzw r0, r0
     srwi. r0, r0, 5
-    beq lbl_fn_8013CB68_000013E4
+    beq lbl_npc_updateTalkInteraction_000013E4
     lwz r3, 0x1c8(r1)
     bl dtor_80084684
-lbl_fn_8013CB68_000013E4:
+lbl_npc_updateTalkInteraction_000013E4:
     lis r3, lbl_80737A9C@ha
     addi r3, r3, lbl_80737A9C@l
     addi r23, r3, 0x2a3
@@ -1517,13 +1517,13 @@ lbl_fn_8013CB68_000013E4:
     srwi r0, r0, 5
     cntlzw r0, r0
     srwi. r0, r0, 5
-    bne lbl_fn_8013CB68_00001428
+    bne lbl_npc_updateTalkInteraction_00001428
     lbz r0, 0x1b4(r1)
     clrlwi r4, r0, 25
-    b lbl_fn_8013CB68_0000142C
-lbl_fn_8013CB68_00001428:
+    b lbl_npc_updateTalkInteraction_0000142C
+lbl_npc_updateTalkInteraction_00001428:
     lwz r4, 0x1b8(r1)
-lbl_fn_8013CB68_0000142C:
+lbl_npc_updateTalkInteraction_0000142C:
     lwz r0, 0x1b4(r1)
     stw r4, 0x10(r1)
     srwi r0, r0, 31
@@ -1531,48 +1531,48 @@ lbl_fn_8013CB68_0000142C:
     srwi r0, r0, 5
     cntlzw r0, r0
     srwi. r0, r0, 5
-    bne lbl_fn_8013CB68_0000145C
+    bne lbl_npc_updateTalkInteraction_0000145C
     lbz r0, 0x1b4(r1)
     addi r6, r1, 0x1b5
     clrlwi r0, r0, 25
-    b lbl_fn_8013CB68_00001464
-lbl_fn_8013CB68_0000145C:
+    b lbl_npc_updateTalkInteraction_00001464
+lbl_npc_updateTalkInteraction_0000145C:
     lwz r6, 0x1bc(r1)
     lwz r0, 0x1b8(r1)
-lbl_fn_8013CB68_00001464:
+lbl_npc_updateTalkInteraction_00001464:
     cmplw r4, r0
     stw r0, 0x18(r1)
     addi r4, r1, 0x18
-    bge lbl_fn_8013CB68_00001478
+    bge lbl_npc_updateTalkInteraction_00001478
     addi r4, r1, 0x10
-lbl_fn_8013CB68_00001478:
+lbl_npc_updateTalkInteraction_00001478:
     lwz r0, 0x0(r4)
     addi r4, r1, 0x1c
     stw r0, 0x1c(r1)
     cmplw r3, r0
-    bge lbl_fn_8013CB68_00001490
+    bge lbl_npc_updateTalkInteraction_00001490
     addi r4, r1, 0x14
-lbl_fn_8013CB68_00001490:
+lbl_npc_updateTalkInteraction_00001490:
     lwz r5, 0x0(r4)
     mr r3, r6
     mr r4, r23
     bl memcmp
     cmpwi r3, 0x0
-    bne lbl_fn_8013CB68_000014CC
+    bne lbl_npc_updateTalkInteraction_000014CC
     lwz r0, 0x1c(r1)
     cmplw r0, r26
-    bge lbl_fn_8013CB68_000014BC
+    bge lbl_npc_updateTalkInteraction_000014BC
     li r3, -0x1
-    b lbl_fn_8013CB68_000014CC
-lbl_fn_8013CB68_000014BC:
-    bne lbl_fn_8013CB68_000014C8
+    b lbl_npc_updateTalkInteraction_000014CC
+lbl_npc_updateTalkInteraction_000014BC:
+    bne lbl_npc_updateTalkInteraction_000014C8
     li r3, 0x0
-    b lbl_fn_8013CB68_000014CC
-lbl_fn_8013CB68_000014C8:
+    b lbl_npc_updateTalkInteraction_000014CC
+lbl_npc_updateTalkInteraction_000014C8:
     li r3, 0x1
-lbl_fn_8013CB68_000014CC:
+lbl_npc_updateTalkInteraction_000014CC:
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00001984
+    beq lbl_npc_updateTalkInteraction_00001984
     lis r3, lbl_80737A9C@ha
     addi r3, r3, lbl_80737A9C@l
     addi r23, r3, 0x2b3
@@ -1586,13 +1586,13 @@ lbl_fn_8013CB68_000014CC:
     srwi r0, r0, 5
     cntlzw r0, r0
     srwi. r0, r0, 5
-    bne lbl_fn_8013CB68_00001518
+    bne lbl_npc_updateTalkInteraction_00001518
     lbz r0, 0x1b4(r1)
     clrlwi r4, r0, 25
-    b lbl_fn_8013CB68_0000151C
-lbl_fn_8013CB68_00001518:
+    b lbl_npc_updateTalkInteraction_0000151C
+lbl_npc_updateTalkInteraction_00001518:
     lwz r4, 0x1b8(r1)
-lbl_fn_8013CB68_0000151C:
+lbl_npc_updateTalkInteraction_0000151C:
     lwz r0, 0x1b4(r1)
     stw r4, 0x20(r1)
     srwi r0, r0, 31
@@ -1600,48 +1600,48 @@ lbl_fn_8013CB68_0000151C:
     srwi r0, r0, 5
     cntlzw r0, r0
     srwi. r0, r0, 5
-    bne lbl_fn_8013CB68_0000154C
+    bne lbl_npc_updateTalkInteraction_0000154C
     lbz r0, 0x1b4(r1)
     addi r6, r1, 0x1b5
     clrlwi r0, r0, 25
-    b lbl_fn_8013CB68_00001554
-lbl_fn_8013CB68_0000154C:
+    b lbl_npc_updateTalkInteraction_00001554
+lbl_npc_updateTalkInteraction_0000154C:
     lwz r6, 0x1bc(r1)
     lwz r0, 0x1b8(r1)
-lbl_fn_8013CB68_00001554:
+lbl_npc_updateTalkInteraction_00001554:
     cmplw r4, r0
     stw r0, 0x28(r1)
     addi r4, r1, 0x28
-    bge lbl_fn_8013CB68_00001568
+    bge lbl_npc_updateTalkInteraction_00001568
     addi r4, r1, 0x20
-lbl_fn_8013CB68_00001568:
+lbl_npc_updateTalkInteraction_00001568:
     lwz r0, 0x0(r4)
     addi r4, r1, 0x2c
     stw r0, 0x2c(r1)
     cmplw r3, r0
-    bge lbl_fn_8013CB68_00001580
+    bge lbl_npc_updateTalkInteraction_00001580
     addi r4, r1, 0x24
-lbl_fn_8013CB68_00001580:
+lbl_npc_updateTalkInteraction_00001580:
     lwz r5, 0x0(r4)
     mr r3, r6
     mr r4, r23
     bl memcmp
     cmpwi r3, 0x0
-    bne lbl_fn_8013CB68_000015BC
+    bne lbl_npc_updateTalkInteraction_000015BC
     lwz r0, 0x2c(r1)
     cmplw r0, r26
-    bge lbl_fn_8013CB68_000015AC
+    bge lbl_npc_updateTalkInteraction_000015AC
     li r3, -0x1
-    b lbl_fn_8013CB68_000015BC
-lbl_fn_8013CB68_000015AC:
-    bne lbl_fn_8013CB68_000015B8
+    b lbl_npc_updateTalkInteraction_000015BC
+lbl_npc_updateTalkInteraction_000015AC:
+    bne lbl_npc_updateTalkInteraction_000015B8
     li r3, 0x0
-    b lbl_fn_8013CB68_000015BC
-lbl_fn_8013CB68_000015B8:
+    b lbl_npc_updateTalkInteraction_000015BC
+lbl_npc_updateTalkInteraction_000015B8:
     li r3, 0x1
-lbl_fn_8013CB68_000015BC:
+lbl_npc_updateTalkInteraction_000015BC:
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00001984
+    beq lbl_npc_updateTalkInteraction_00001984
     lis r3, lbl_80737A9C@ha
     addi r3, r3, lbl_80737A9C@l
     addi r23, r3, 0x2c3
@@ -1655,13 +1655,13 @@ lbl_fn_8013CB68_000015BC:
     srwi r0, r0, 5
     cntlzw r0, r0
     srwi. r0, r0, 5
-    bne lbl_fn_8013CB68_00001608
+    bne lbl_npc_updateTalkInteraction_00001608
     lbz r0, 0x1b4(r1)
     clrlwi r4, r0, 25
-    b lbl_fn_8013CB68_0000160C
-lbl_fn_8013CB68_00001608:
+    b lbl_npc_updateTalkInteraction_0000160C
+lbl_npc_updateTalkInteraction_00001608:
     lwz r4, 0x1b8(r1)
-lbl_fn_8013CB68_0000160C:
+lbl_npc_updateTalkInteraction_0000160C:
     lwz r0, 0x1b4(r1)
     stw r4, 0x30(r1)
     srwi r0, r0, 31
@@ -1669,48 +1669,48 @@ lbl_fn_8013CB68_0000160C:
     srwi r0, r0, 5
     cntlzw r0, r0
     srwi. r0, r0, 5
-    bne lbl_fn_8013CB68_0000163C
+    bne lbl_npc_updateTalkInteraction_0000163C
     lbz r0, 0x1b4(r1)
     addi r6, r1, 0x1b5
     clrlwi r0, r0, 25
-    b lbl_fn_8013CB68_00001644
-lbl_fn_8013CB68_0000163C:
+    b lbl_npc_updateTalkInteraction_00001644
+lbl_npc_updateTalkInteraction_0000163C:
     lwz r6, 0x1bc(r1)
     lwz r0, 0x1b8(r1)
-lbl_fn_8013CB68_00001644:
+lbl_npc_updateTalkInteraction_00001644:
     cmplw r4, r0
     stw r0, 0x38(r1)
     addi r4, r1, 0x38
-    bge lbl_fn_8013CB68_00001658
+    bge lbl_npc_updateTalkInteraction_00001658
     addi r4, r1, 0x30
-lbl_fn_8013CB68_00001658:
+lbl_npc_updateTalkInteraction_00001658:
     lwz r0, 0x0(r4)
     addi r4, r1, 0x3c
     stw r0, 0x3c(r1)
     cmplw r3, r0
-    bge lbl_fn_8013CB68_00001670
+    bge lbl_npc_updateTalkInteraction_00001670
     addi r4, r1, 0x34
-lbl_fn_8013CB68_00001670:
+lbl_npc_updateTalkInteraction_00001670:
     lwz r5, 0x0(r4)
     mr r3, r6
     mr r4, r23
     bl memcmp
     cmpwi r3, 0x0
-    bne lbl_fn_8013CB68_000016AC
+    bne lbl_npc_updateTalkInteraction_000016AC
     lwz r0, 0x3c(r1)
     cmplw r0, r26
-    bge lbl_fn_8013CB68_0000169C
+    bge lbl_npc_updateTalkInteraction_0000169C
     li r3, -0x1
-    b lbl_fn_8013CB68_000016AC
-lbl_fn_8013CB68_0000169C:
-    bne lbl_fn_8013CB68_000016A8
+    b lbl_npc_updateTalkInteraction_000016AC
+lbl_npc_updateTalkInteraction_0000169C:
+    bne lbl_npc_updateTalkInteraction_000016A8
     li r3, 0x0
-    b lbl_fn_8013CB68_000016AC
-lbl_fn_8013CB68_000016A8:
+    b lbl_npc_updateTalkInteraction_000016AC
+lbl_npc_updateTalkInteraction_000016A8:
     li r3, 0x1
-lbl_fn_8013CB68_000016AC:
+lbl_npc_updateTalkInteraction_000016AC:
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00001984
+    beq lbl_npc_updateTalkInteraction_00001984
     lis r3, lbl_80737A9C@ha
     addi r3, r3, lbl_80737A9C@l
     addi r23, r3, 0x2d3
@@ -1724,13 +1724,13 @@ lbl_fn_8013CB68_000016AC:
     srwi r0, r0, 5
     cntlzw r0, r0
     srwi. r0, r0, 5
-    bne lbl_fn_8013CB68_000016F8
+    bne lbl_npc_updateTalkInteraction_000016F8
     lbz r0, 0x1b4(r1)
     clrlwi r4, r0, 25
-    b lbl_fn_8013CB68_000016FC
-lbl_fn_8013CB68_000016F8:
+    b lbl_npc_updateTalkInteraction_000016FC
+lbl_npc_updateTalkInteraction_000016F8:
     lwz r4, 0x1b8(r1)
-lbl_fn_8013CB68_000016FC:
+lbl_npc_updateTalkInteraction_000016FC:
     lwz r0, 0x1b4(r1)
     stw r4, 0x40(r1)
     srwi r0, r0, 31
@@ -1738,48 +1738,48 @@ lbl_fn_8013CB68_000016FC:
     srwi r0, r0, 5
     cntlzw r0, r0
     srwi. r0, r0, 5
-    bne lbl_fn_8013CB68_0000172C
+    bne lbl_npc_updateTalkInteraction_0000172C
     lbz r0, 0x1b4(r1)
     addi r6, r1, 0x1b5
     clrlwi r0, r0, 25
-    b lbl_fn_8013CB68_00001734
-lbl_fn_8013CB68_0000172C:
+    b lbl_npc_updateTalkInteraction_00001734
+lbl_npc_updateTalkInteraction_0000172C:
     lwz r6, 0x1bc(r1)
     lwz r0, 0x1b8(r1)
-lbl_fn_8013CB68_00001734:
+lbl_npc_updateTalkInteraction_00001734:
     cmplw r4, r0
     stw r0, 0x48(r1)
     addi r4, r1, 0x48
-    bge lbl_fn_8013CB68_00001748
+    bge lbl_npc_updateTalkInteraction_00001748
     addi r4, r1, 0x40
-lbl_fn_8013CB68_00001748:
+lbl_npc_updateTalkInteraction_00001748:
     lwz r0, 0x0(r4)
     addi r4, r1, 0x4c
     stw r0, 0x4c(r1)
     cmplw r3, r0
-    bge lbl_fn_8013CB68_00001760
+    bge lbl_npc_updateTalkInteraction_00001760
     addi r4, r1, 0x44
-lbl_fn_8013CB68_00001760:
+lbl_npc_updateTalkInteraction_00001760:
     lwz r5, 0x0(r4)
     mr r3, r6
     mr r4, r23
     bl memcmp
     cmpwi r3, 0x0
-    bne lbl_fn_8013CB68_0000179C
+    bne lbl_npc_updateTalkInteraction_0000179C
     lwz r0, 0x4c(r1)
     cmplw r0, r26
-    bge lbl_fn_8013CB68_0000178C
+    bge lbl_npc_updateTalkInteraction_0000178C
     li r3, -0x1
-    b lbl_fn_8013CB68_0000179C
-lbl_fn_8013CB68_0000178C:
-    bne lbl_fn_8013CB68_00001798
+    b lbl_npc_updateTalkInteraction_0000179C
+lbl_npc_updateTalkInteraction_0000178C:
+    bne lbl_npc_updateTalkInteraction_00001798
     li r3, 0x0
-    b lbl_fn_8013CB68_0000179C
-lbl_fn_8013CB68_00001798:
+    b lbl_npc_updateTalkInteraction_0000179C
+lbl_npc_updateTalkInteraction_00001798:
     li r3, 0x1
-lbl_fn_8013CB68_0000179C:
+lbl_npc_updateTalkInteraction_0000179C:
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00001984
+    beq lbl_npc_updateTalkInteraction_00001984
     lis r3, lbl_80737A9C@ha
     addi r3, r3, lbl_80737A9C@l
     addi r23, r3, 0x2e3
@@ -1793,13 +1793,13 @@ lbl_fn_8013CB68_0000179C:
     srwi r0, r0, 5
     cntlzw r0, r0
     srwi. r0, r0, 5
-    bne lbl_fn_8013CB68_000017E8
+    bne lbl_npc_updateTalkInteraction_000017E8
     lbz r0, 0x1b4(r1)
     clrlwi r4, r0, 25
-    b lbl_fn_8013CB68_000017EC
-lbl_fn_8013CB68_000017E8:
+    b lbl_npc_updateTalkInteraction_000017EC
+lbl_npc_updateTalkInteraction_000017E8:
     lwz r4, 0x1b8(r1)
-lbl_fn_8013CB68_000017EC:
+lbl_npc_updateTalkInteraction_000017EC:
     lwz r0, 0x1b4(r1)
     stw r4, 0x50(r1)
     srwi r0, r0, 31
@@ -1807,48 +1807,48 @@ lbl_fn_8013CB68_000017EC:
     srwi r0, r0, 5
     cntlzw r0, r0
     srwi. r0, r0, 5
-    bne lbl_fn_8013CB68_0000181C
+    bne lbl_npc_updateTalkInteraction_0000181C
     lbz r0, 0x1b4(r1)
     addi r6, r1, 0x1b5
     clrlwi r0, r0, 25
-    b lbl_fn_8013CB68_00001824
-lbl_fn_8013CB68_0000181C:
+    b lbl_npc_updateTalkInteraction_00001824
+lbl_npc_updateTalkInteraction_0000181C:
     lwz r6, 0x1bc(r1)
     lwz r0, 0x1b8(r1)
-lbl_fn_8013CB68_00001824:
+lbl_npc_updateTalkInteraction_00001824:
     cmplw r4, r0
     stw r0, 0x58(r1)
     addi r4, r1, 0x58
-    bge lbl_fn_8013CB68_00001838
+    bge lbl_npc_updateTalkInteraction_00001838
     addi r4, r1, 0x50
-lbl_fn_8013CB68_00001838:
+lbl_npc_updateTalkInteraction_00001838:
     lwz r0, 0x0(r4)
     addi r4, r1, 0x5c
     stw r0, 0x5c(r1)
     cmplw r3, r0
-    bge lbl_fn_8013CB68_00001850
+    bge lbl_npc_updateTalkInteraction_00001850
     addi r4, r1, 0x54
-lbl_fn_8013CB68_00001850:
+lbl_npc_updateTalkInteraction_00001850:
     lwz r5, 0x0(r4)
     mr r3, r6
     mr r4, r23
     bl memcmp
     cmpwi r3, 0x0
-    bne lbl_fn_8013CB68_0000188C
+    bne lbl_npc_updateTalkInteraction_0000188C
     lwz r0, 0x5c(r1)
     cmplw r0, r26
-    bge lbl_fn_8013CB68_0000187C
+    bge lbl_npc_updateTalkInteraction_0000187C
     li r3, -0x1
-    b lbl_fn_8013CB68_0000188C
-lbl_fn_8013CB68_0000187C:
-    bne lbl_fn_8013CB68_00001888
+    b lbl_npc_updateTalkInteraction_0000188C
+lbl_npc_updateTalkInteraction_0000187C:
+    bne lbl_npc_updateTalkInteraction_00001888
     li r3, 0x0
-    b lbl_fn_8013CB68_0000188C
-lbl_fn_8013CB68_00001888:
+    b lbl_npc_updateTalkInteraction_0000188C
+lbl_npc_updateTalkInteraction_00001888:
     li r3, 0x1
-lbl_fn_8013CB68_0000188C:
+lbl_npc_updateTalkInteraction_0000188C:
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00001984
+    beq lbl_npc_updateTalkInteraction_00001984
     lis r3, lbl_80737A9C@ha
     addi r3, r3, lbl_80737A9C@l
     addi r23, r3, 0x2f3
@@ -1862,13 +1862,13 @@ lbl_fn_8013CB68_0000188C:
     srwi r0, r0, 5
     cntlzw r0, r0
     srwi. r0, r0, 5
-    bne lbl_fn_8013CB68_000018D8
+    bne lbl_npc_updateTalkInteraction_000018D8
     lbz r0, 0x1b4(r1)
     clrlwi r4, r0, 25
-    b lbl_fn_8013CB68_000018DC
-lbl_fn_8013CB68_000018D8:
+    b lbl_npc_updateTalkInteraction_000018DC
+lbl_npc_updateTalkInteraction_000018D8:
     lwz r4, 0x1b8(r1)
-lbl_fn_8013CB68_000018DC:
+lbl_npc_updateTalkInteraction_000018DC:
     lwz r0, 0x1b4(r1)
     stw r4, 0x60(r1)
     srwi r0, r0, 31
@@ -1876,97 +1876,97 @@ lbl_fn_8013CB68_000018DC:
     srwi r0, r0, 5
     cntlzw r0, r0
     srwi. r0, r0, 5
-    bne lbl_fn_8013CB68_0000190C
+    bne lbl_npc_updateTalkInteraction_0000190C
     lbz r0, 0x1b4(r1)
     addi r6, r1, 0x1b5
     clrlwi r0, r0, 25
-    b lbl_fn_8013CB68_00001914
-lbl_fn_8013CB68_0000190C:
+    b lbl_npc_updateTalkInteraction_00001914
+lbl_npc_updateTalkInteraction_0000190C:
     lwz r6, 0x1bc(r1)
     lwz r0, 0x1b8(r1)
-lbl_fn_8013CB68_00001914:
+lbl_npc_updateTalkInteraction_00001914:
     cmplw r4, r0
     stw r0, 0x68(r1)
     addi r4, r1, 0x68
-    bge lbl_fn_8013CB68_00001928
+    bge lbl_npc_updateTalkInteraction_00001928
     addi r4, r1, 0x60
-lbl_fn_8013CB68_00001928:
+lbl_npc_updateTalkInteraction_00001928:
     lwz r0, 0x0(r4)
     addi r4, r1, 0x6c
     stw r0, 0x6c(r1)
     cmplw r3, r0
-    bge lbl_fn_8013CB68_00001940
+    bge lbl_npc_updateTalkInteraction_00001940
     addi r4, r1, 0x64
-lbl_fn_8013CB68_00001940:
+lbl_npc_updateTalkInteraction_00001940:
     lwz r5, 0x0(r4)
     mr r3, r6
     mr r4, r23
     bl memcmp
     cmpwi r3, 0x0
-    bne lbl_fn_8013CB68_0000197C
+    bne lbl_npc_updateTalkInteraction_0000197C
     lwz r0, 0x6c(r1)
     cmplw r0, r26
-    bge lbl_fn_8013CB68_0000196C
+    bge lbl_npc_updateTalkInteraction_0000196C
     li r3, -0x1
-    b lbl_fn_8013CB68_0000197C
-lbl_fn_8013CB68_0000196C:
-    bne lbl_fn_8013CB68_00001978
+    b lbl_npc_updateTalkInteraction_0000197C
+lbl_npc_updateTalkInteraction_0000196C:
+    bne lbl_npc_updateTalkInteraction_00001978
     li r3, 0x0
-    b lbl_fn_8013CB68_0000197C
-lbl_fn_8013CB68_00001978:
+    b lbl_npc_updateTalkInteraction_0000197C
+lbl_npc_updateTalkInteraction_00001978:
     li r3, 0x1
-lbl_fn_8013CB68_0000197C:
+lbl_npc_updateTalkInteraction_0000197C:
     cmpwi r3, 0x0
-    bne lbl_fn_8013CB68_000019B0
-lbl_fn_8013CB68_00001984:
+    bne lbl_npc_updateTalkInteraction_000019B0
+lbl_npc_updateTalkInteraction_00001984:
     lwz r0, 0x1b4(r1)
     srwi r0, r0, 31
     cntlzw r0, r0
     srwi r0, r0, 5
     cntlzw r0, r0
     srwi. r0, r0, 5
-    beq lbl_fn_8013CB68_000019A8
+    beq lbl_npc_updateTalkInteraction_000019A8
     lwz r3, 0x1bc(r1)
     bl dtor_80084684
-lbl_fn_8013CB68_000019A8:
+lbl_npc_updateTalkInteraction_000019A8:
     li r0, 0x1
-    b lbl_fn_8013CB68_000019D8
-lbl_fn_8013CB68_000019B0:
+    b lbl_npc_updateTalkInteraction_000019D8
+lbl_npc_updateTalkInteraction_000019B0:
     lwz r0, 0x1b4(r1)
     srwi r0, r0, 31
     cntlzw r0, r0
     srwi r0, r0, 5
     cntlzw r0, r0
     srwi. r0, r0, 5
-    beq lbl_fn_8013CB68_000019D4
+    beq lbl_npc_updateTalkInteraction_000019D4
     lwz r3, 0x1bc(r1)
     bl dtor_80084684
-lbl_fn_8013CB68_000019D4:
+lbl_npc_updateTalkInteraction_000019D4:
     li r0, 0x0
-lbl_fn_8013CB68_000019D8:
+lbl_npc_updateTalkInteraction_000019D8:
     cmpwi r0, 0x0
-    beq lbl_fn_8013CB68_000021A4
+    beq lbl_npc_updateTalkInteraction_000021A4
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x7
-    bne lbl_fn_8013CB68_000019FC
+    bne lbl_npc_updateTalkInteraction_000019FC
     lwz r0, 0x1078(r27)
     rlwinm r0, r0, 0, 24, 24
     cmplwi r0, 0x80
-    beq lbl_fn_8013CB68_000021A4
-lbl_fn_8013CB68_000019FC:
+    beq lbl_npc_updateTalkInteraction_000021A4
+lbl_npc_updateTalkInteraction_000019FC:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00001A14
+    beq lbl_npc_updateTalkInteraction_00001A14
     bl fn_803761DC
     cmpwi r3, 0x2
-    bge lbl_fn_8013CB68_000021A4
-lbl_fn_8013CB68_00001A14:
+    bge lbl_npc_updateTalkInteraction_000021A4
+lbl_npc_updateTalkInteraction_00001A14:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00001DE8
+    beq lbl_npc_updateTalkInteraction_00001DE8
     bl fn_803761DC
     cmpwi r3, 0x1
-    bne lbl_fn_8013CB68_00001DE8
+    bne lbl_npc_updateTalkInteraction_00001DE8
     lfs f3, 0x530(r30)
     addi r3, r1, 0x37c
     lfs f0, 0x3a0(r1)
@@ -1988,7 +1988,7 @@ lbl_fn_8013CB68_00001A14:
     bl PSVECNormalize
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x1
-    bne lbl_fn_8013CB68_000021A4
+    bne lbl_npc_updateTalkInteraction_000021A4
     lfs f3, lbl_8088196C
     addi r3, r1, 0x4e0
     lfs f0, lbl_80881964
@@ -2041,7 +2041,7 @@ lbl_fn_8013CB68_00001A14:
     bl mem_alloc
     cmpwi r3, 0x0
     mr r23, r3
-    beq lbl_fn_8013CB68_00001B74
+    beq lbl_npc_updateTalkInteraction_00001B74
     mr r4, r27
     mr r5, r26
     li r6, 0x1
@@ -2049,13 +2049,13 @@ lbl_fn_8013CB68_00001A14:
     li r8, 0x0
     bl fn_801C48B4
     mr r23, r3
-lbl_fn_8013CB68_00001B74:
+lbl_npc_updateTalkInteraction_00001B74:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    bne lbl_fn_8013CB68_00001C04
+    bne lbl_npc_updateTalkInteraction_00001C04
     lwz r0, 0xf80(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_00001BAC
+    bne lbl_npc_updateTalkInteraction_00001BAC
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x58c(r1)
@@ -2063,8 +2063,8 @@ lbl_fn_8013CB68_00001B74:
     lwz r0, 0x8(r5)
     stw r3, 0x590(r1)
     stw r0, 0x594(r1)
-    b lbl_fn_8013CB68_00001BC8
-lbl_fn_8013CB68_00001BAC:
+    b lbl_npc_updateTalkInteraction_00001BC8
+lbl_npc_updateTalkInteraction_00001BAC:
     addi r3, r24, 0x110
     lwz r5, 0x110(r24)
     lwz r4, 0x4(r3)
@@ -2072,7 +2072,7 @@ lbl_fn_8013CB68_00001BAC:
     stw r5, 0x58c(r1)
     stw r4, 0x590(r1)
     stw r0, 0x594(r1)
-lbl_fn_8013CB68_00001BC8:
+lbl_npc_updateTalkInteraction_00001BC8:
     lwz r5, 0x58c(r1)
     addi r3, r1, 0x1a8
     lwz r4, 0x590(r1)
@@ -2082,26 +2082,26 @@ lbl_fn_8013CB68_00001BC8:
     stw r0, 0x1b0(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00001C04
+    beq lbl_npc_updateTalkInteraction_00001C04
     lwz r3, 0xf80(r27)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_00001C04:
+lbl_npc_updateTalkInteraction_00001C04:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    beq lbl_fn_8013CB68_00001DB8
+    beq lbl_npc_updateTalkInteraction_00001DB8
     cmpwi r0, 0x8
-    beq lbl_fn_8013CB68_00001C1C
+    beq lbl_npc_updateTalkInteraction_00001C1C
     stw r0, 0x564(r27)
-lbl_fn_8013CB68_00001C1C:
+lbl_npc_updateTalkInteraction_00001C1C:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    bne lbl_fn_8013CB68_00001DB8
+    bne lbl_npc_updateTalkInteraction_00001DB8
     lwz r0, 0xf80(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_00001C54
+    bne lbl_npc_updateTalkInteraction_00001C54
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x598(r1)
@@ -2109,8 +2109,8 @@ lbl_fn_8013CB68_00001C1C:
     lwz r0, 0x8(r5)
     stw r3, 0x59c(r1)
     stw r0, 0x5a0(r1)
-    b lbl_fn_8013CB68_00001C70
-lbl_fn_8013CB68_00001C54:
+    b lbl_npc_updateTalkInteraction_00001C70
+lbl_npc_updateTalkInteraction_00001C54:
     addi r3, r24, 0x11c
     lwz r5, 0x11c(r24)
     lwz r4, 0x4(r3)
@@ -2118,7 +2118,7 @@ lbl_fn_8013CB68_00001C54:
     stw r5, 0x598(r1)
     stw r4, 0x59c(r1)
     stw r0, 0x5a0(r1)
-lbl_fn_8013CB68_00001C70:
+lbl_npc_updateTalkInteraction_00001C70:
     lwz r5, 0x598(r1)
     addi r3, r1, 0x190
     lwz r4, 0x59c(r1)
@@ -2128,26 +2128,26 @@ lbl_fn_8013CB68_00001C70:
     stw r0, 0x198(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00001CAC
+    beq lbl_npc_updateTalkInteraction_00001CAC
     lwz r3, 0xf80(r27)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_00001CAC:
+lbl_npc_updateTalkInteraction_00001CAC:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    beq lbl_fn_8013CB68_00001D88
+    beq lbl_npc_updateTalkInteraction_00001D88
     cmpwi r0, 0x8
-    beq lbl_fn_8013CB68_00001CC4
+    beq lbl_npc_updateTalkInteraction_00001CC4
     stw r0, 0x564(r27)
-lbl_fn_8013CB68_00001CC4:
+lbl_npc_updateTalkInteraction_00001CC4:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    bne lbl_fn_8013CB68_00001D88
+    bne lbl_npc_updateTalkInteraction_00001D88
     lwz r0, 0xf80(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_00001CFC
+    bne lbl_npc_updateTalkInteraction_00001CFC
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x5a4(r1)
@@ -2155,8 +2155,8 @@ lbl_fn_8013CB68_00001CC4:
     lwz r0, 0x8(r5)
     stw r3, 0x5a8(r1)
     stw r0, 0x5ac(r1)
-    b lbl_fn_8013CB68_00001D18
-lbl_fn_8013CB68_00001CFC:
+    b lbl_npc_updateTalkInteraction_00001D18
+lbl_npc_updateTalkInteraction_00001CFC:
     addi r3, r24, 0x128
     lwz r5, 0x128(r24)
     lwz r4, 0x4(r3)
@@ -2164,7 +2164,7 @@ lbl_fn_8013CB68_00001CFC:
     stw r5, 0x5a4(r1)
     stw r4, 0x5a8(r1)
     stw r0, 0x5ac(r1)
-lbl_fn_8013CB68_00001D18:
+lbl_npc_updateTalkInteraction_00001D18:
     lwz r5, 0x5a4(r1)
     addi r3, r1, 0x19c
     lwz r4, 0x5a8(r1)
@@ -2174,13 +2174,13 @@ lbl_fn_8013CB68_00001D18:
     stw r0, 0x1a4(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00001D54
+    beq lbl_npc_updateTalkInteraction_00001D54
     lwz r3, 0xf80(r27)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_00001D54:
+lbl_npc_updateTalkInteraction_00001D54:
     mr r3, r27
     li r4, 0x6
     bl actor_setState
@@ -2188,39 +2188,39 @@ lbl_fn_8013CB68_00001D54:
     li r0, 0x0
     cmpwi r3, 0x0
     stw r0, 0xf80(r27)
-    beq lbl_fn_8013CB68_00001D88
+    beq lbl_npc_updateTalkInteraction_00001D88
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_00001D88:
+lbl_npc_updateTalkInteraction_00001D88:
     lwz r3, 0xf80(r27)
     li r4, 0x6
     li r0, 0x0
     stw r4, 0x55c(r27)
     cmpwi r3, 0x0
     stw r0, 0xf80(r27)
-    beq lbl_fn_8013CB68_00001DB8
+    beq lbl_npc_updateTalkInteraction_00001DB8
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_00001DB8:
+lbl_npc_updateTalkInteraction_00001DB8:
     lwz r3, 0xf80(r27)
     li r0, 0x6
     stw r0, 0x55c(r27)
     cmpwi r3, 0x0
     stw r23, 0xf80(r27)
-    beq lbl_fn_8013CB68_000021A4
+    beq lbl_npc_updateTalkInteraction_000021A4
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-    b lbl_fn_8013CB68_000021A4
-lbl_fn_8013CB68_00001DE8:
+    b lbl_npc_updateTalkInteraction_000021A4
+lbl_npc_updateTalkInteraction_00001DE8:
     lfs f3, 0x530(r30)
     addi r3, r1, 0x370
     lfs f0, 0x3a0(r1)
@@ -2242,7 +2242,7 @@ lbl_fn_8013CB68_00001DE8:
     bl PSVECNormalize
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x1
-    bne lbl_fn_8013CB68_00003940
+    bne lbl_npc_updateTalkInteraction_00003940
     lfs f3, lbl_8088196C
     addi r3, r1, 0x4b0
     lfs f0, lbl_80881964
@@ -2295,7 +2295,7 @@ lbl_fn_8013CB68_00001DE8:
     bl mem_alloc
     cmpwi r3, 0x0
     mr r23, r3
-    beq lbl_fn_8013CB68_00001F30
+    beq lbl_npc_updateTalkInteraction_00001F30
     mr r4, r27
     mr r5, r25
     li r6, 0x1
@@ -2303,13 +2303,13 @@ lbl_fn_8013CB68_00001DE8:
     li r8, 0x0
     bl fn_801C48B4
     mr r23, r3
-lbl_fn_8013CB68_00001F30:
+lbl_npc_updateTalkInteraction_00001F30:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    bne lbl_fn_8013CB68_00001FC0
+    bne lbl_npc_updateTalkInteraction_00001FC0
     lwz r0, 0xf80(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_00001F68
+    bne lbl_npc_updateTalkInteraction_00001F68
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x5b0(r1)
@@ -2317,8 +2317,8 @@ lbl_fn_8013CB68_00001F30:
     lwz r0, 0x8(r5)
     stw r3, 0x5b4(r1)
     stw r0, 0x5b8(r1)
-    b lbl_fn_8013CB68_00001F84
-lbl_fn_8013CB68_00001F68:
+    b lbl_npc_updateTalkInteraction_00001F84
+lbl_npc_updateTalkInteraction_00001F68:
     addi r3, r24, 0x134
     lwz r5, 0x134(r24)
     lwz r4, 0x4(r3)
@@ -2326,7 +2326,7 @@ lbl_fn_8013CB68_00001F68:
     stw r5, 0x5b0(r1)
     stw r4, 0x5b4(r1)
     stw r0, 0x5b8(r1)
-lbl_fn_8013CB68_00001F84:
+lbl_npc_updateTalkInteraction_00001F84:
     lwz r5, 0x5b0(r1)
     addi r3, r1, 0x184
     lwz r4, 0x5b4(r1)
@@ -2336,26 +2336,26 @@ lbl_fn_8013CB68_00001F84:
     stw r0, 0x18c(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00001FC0
+    beq lbl_npc_updateTalkInteraction_00001FC0
     lwz r3, 0xf80(r27)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_00001FC0:
+lbl_npc_updateTalkInteraction_00001FC0:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    beq lbl_fn_8013CB68_00002174
+    beq lbl_npc_updateTalkInteraction_00002174
     cmpwi r0, 0x8
-    beq lbl_fn_8013CB68_00001FD8
+    beq lbl_npc_updateTalkInteraction_00001FD8
     stw r0, 0x564(r27)
-lbl_fn_8013CB68_00001FD8:
+lbl_npc_updateTalkInteraction_00001FD8:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    bne lbl_fn_8013CB68_00002174
+    bne lbl_npc_updateTalkInteraction_00002174
     lwz r0, 0xf80(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_00002010
+    bne lbl_npc_updateTalkInteraction_00002010
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x5bc(r1)
@@ -2363,8 +2363,8 @@ lbl_fn_8013CB68_00001FD8:
     lwz r0, 0x8(r5)
     stw r3, 0x5c0(r1)
     stw r0, 0x5c4(r1)
-    b lbl_fn_8013CB68_0000202C
-lbl_fn_8013CB68_00002010:
+    b lbl_npc_updateTalkInteraction_0000202C
+lbl_npc_updateTalkInteraction_00002010:
     addi r3, r24, 0x140
     lwz r5, 0x140(r24)
     lwz r4, 0x4(r3)
@@ -2372,7 +2372,7 @@ lbl_fn_8013CB68_00002010:
     stw r5, 0x5bc(r1)
     stw r4, 0x5c0(r1)
     stw r0, 0x5c4(r1)
-lbl_fn_8013CB68_0000202C:
+lbl_npc_updateTalkInteraction_0000202C:
     lwz r5, 0x5bc(r1)
     addi r3, r1, 0x16c
     lwz r4, 0x5c0(r1)
@@ -2382,26 +2382,26 @@ lbl_fn_8013CB68_0000202C:
     stw r0, 0x174(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00002068
+    beq lbl_npc_updateTalkInteraction_00002068
     lwz r3, 0xf80(r27)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_00002068:
+lbl_npc_updateTalkInteraction_00002068:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    beq lbl_fn_8013CB68_00002144
+    beq lbl_npc_updateTalkInteraction_00002144
     cmpwi r0, 0x8
-    beq lbl_fn_8013CB68_00002080
+    beq lbl_npc_updateTalkInteraction_00002080
     stw r0, 0x564(r27)
-lbl_fn_8013CB68_00002080:
+lbl_npc_updateTalkInteraction_00002080:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    bne lbl_fn_8013CB68_00002144
+    bne lbl_npc_updateTalkInteraction_00002144
     lwz r0, 0xf80(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_000020B8
+    bne lbl_npc_updateTalkInteraction_000020B8
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x5c8(r1)
@@ -2409,8 +2409,8 @@ lbl_fn_8013CB68_00002080:
     lwz r0, 0x8(r5)
     stw r3, 0x5cc(r1)
     stw r0, 0x5d0(r1)
-    b lbl_fn_8013CB68_000020D4
-lbl_fn_8013CB68_000020B8:
+    b lbl_npc_updateTalkInteraction_000020D4
+lbl_npc_updateTalkInteraction_000020B8:
     addi r3, r24, 0x14c
     lwz r5, 0x14c(r24)
     lwz r4, 0x4(r3)
@@ -2418,7 +2418,7 @@ lbl_fn_8013CB68_000020B8:
     stw r5, 0x5c8(r1)
     stw r4, 0x5cc(r1)
     stw r0, 0x5d0(r1)
-lbl_fn_8013CB68_000020D4:
+lbl_npc_updateTalkInteraction_000020D4:
     lwz r5, 0x5c8(r1)
     addi r3, r1, 0x178
     lwz r4, 0x5cc(r1)
@@ -2428,13 +2428,13 @@ lbl_fn_8013CB68_000020D4:
     stw r0, 0x180(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00002110
+    beq lbl_npc_updateTalkInteraction_00002110
     lwz r3, 0xf80(r27)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_00002110:
+lbl_npc_updateTalkInteraction_00002110:
     mr r3, r27
     li r4, 0x6
     bl actor_setState
@@ -2442,64 +2442,64 @@ lbl_fn_8013CB68_00002110:
     li r0, 0x0
     cmpwi r3, 0x0
     stw r0, 0xf80(r27)
-    beq lbl_fn_8013CB68_00002144
+    beq lbl_npc_updateTalkInteraction_00002144
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_00002144:
+lbl_npc_updateTalkInteraction_00002144:
     lwz r3, 0xf80(r27)
     li r4, 0x6
     li r0, 0x0
     stw r4, 0x55c(r27)
     cmpwi r3, 0x0
     stw r0, 0xf80(r27)
-    beq lbl_fn_8013CB68_00002174
+    beq lbl_npc_updateTalkInteraction_00002174
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_00002174:
+lbl_npc_updateTalkInteraction_00002174:
     lwz r3, 0xf80(r27)
     li r0, 0x6
     stw r0, 0x55c(r27)
     cmpwi r3, 0x0
     stw r23, 0xf80(r27)
-    beq lbl_fn_8013CB68_00003940
+    beq lbl_npc_updateTalkInteraction_00003940
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-    b lbl_fn_8013CB68_00003940
-lbl_fn_8013CB68_000021A4:
+    b lbl_npc_updateTalkInteraction_00003940
+lbl_npc_updateTalkInteraction_000021A4:
     cmpwi r29, 0x0
-    beq lbl_fn_8013CB68_00002EBC
+    beq lbl_npc_updateTalkInteraction_00002EBC
     lwz r3, 0x48(r30)
     li r0, 0x1
     cmpwi r3, 0x1
-    beq lbl_fn_8013CB68_000021C8
+    beq lbl_npc_updateTalkInteraction_000021C8
     cmpwi r3, 0x4
-    beq lbl_fn_8013CB68_000021C8
+    beq lbl_npc_updateTalkInteraction_000021C8
     li r0, 0x0
-lbl_fn_8013CB68_000021C8:
+lbl_npc_updateTalkInteraction_000021C8:
     cmpwi r0, 0x0
-    beq lbl_fn_8013CB68_000021DC
+    beq lbl_npc_updateTalkInteraction_000021DC
     lhz r0, 0xd38(r30)
     extrwi. r0, r0, 1, 16
-    bne lbl_fn_8013CB68_000021F4
-lbl_fn_8013CB68_000021DC:
+    bne lbl_npc_updateTalkInteraction_000021F4
+lbl_npc_updateTalkInteraction_000021DC:
     cmpwi r3, 0x3
-    bne lbl_fn_8013CB68_000021F8
+    bne lbl_npc_updateTalkInteraction_000021F8
     lwz r0, 0x137c(r30)
     rlwinm r0, r0, 0, 16, 16
     cmplwi r0, 0x8000
-    bne lbl_fn_8013CB68_000021F8
-lbl_fn_8013CB68_000021F4:
+    bne lbl_npc_updateTalkInteraction_000021F8
+lbl_npc_updateTalkInteraction_000021F4:
     li r28, 0x1
-lbl_fn_8013CB68_000021F8:
+lbl_npc_updateTalkInteraction_000021F8:
     lfs f3, 0x530(r30)
     addi r25, r1, 0x364
     lfs f0, 0x3a0(r1)
@@ -2533,7 +2533,7 @@ lbl_fn_8013CB68_000021F8:
     bl mem_alloc
     cmpwi r3, 0x0
     mr r23, r3
-    beq lbl_fn_8013CB68_0000229C
+    beq lbl_npc_updateTalkInteraction_0000229C
     mr r4, r30
     mr r5, r25
     mr r7, r28
@@ -2541,13 +2541,13 @@ lbl_fn_8013CB68_000021F8:
     li r6, 0x0
     bl fn_801C48B4
     mr r23, r3
-lbl_fn_8013CB68_0000229C:
+lbl_npc_updateTalkInteraction_0000229C:
     lwz r0, 0x55c(r30)
     cmpwi r0, 0x6
-    bne lbl_fn_8013CB68_0000232C
+    bne lbl_npc_updateTalkInteraction_0000232C
     lwz r0, 0xf80(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_000022D4
+    bne lbl_npc_updateTalkInteraction_000022D4
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x5d4(r1)
@@ -2555,8 +2555,8 @@ lbl_fn_8013CB68_0000229C:
     lwz r0, 0x8(r5)
     stw r3, 0x5d8(r1)
     stw r0, 0x5dc(r1)
-    b lbl_fn_8013CB68_000022F0
-lbl_fn_8013CB68_000022D4:
+    b lbl_npc_updateTalkInteraction_000022F0
+lbl_npc_updateTalkInteraction_000022D4:
     addi r3, r24, 0x158
     lwz r5, 0x158(r24)
     lwz r4, 0x4(r3)
@@ -2564,7 +2564,7 @@ lbl_fn_8013CB68_000022D4:
     stw r5, 0x5d4(r1)
     stw r4, 0x5d8(r1)
     stw r0, 0x5dc(r1)
-lbl_fn_8013CB68_000022F0:
+lbl_npc_updateTalkInteraction_000022F0:
     lwz r5, 0x5d4(r1)
     addi r3, r1, 0x160
     lwz r4, 0x5d8(r1)
@@ -2574,26 +2574,26 @@ lbl_fn_8013CB68_000022F0:
     stw r0, 0x168(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_0000232C
+    beq lbl_npc_updateTalkInteraction_0000232C
     lwz r3, 0xf80(r30)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_0000232C:
+lbl_npc_updateTalkInteraction_0000232C:
     lwz r0, 0x55c(r30)
     cmpwi r0, 0x6
-    beq lbl_fn_8013CB68_000024E0
+    beq lbl_npc_updateTalkInteraction_000024E0
     cmpwi r0, 0x8
-    beq lbl_fn_8013CB68_00002344
+    beq lbl_npc_updateTalkInteraction_00002344
     stw r0, 0x564(r30)
-lbl_fn_8013CB68_00002344:
+lbl_npc_updateTalkInteraction_00002344:
     lwz r0, 0x55c(r30)
     cmpwi r0, 0x6
-    bne lbl_fn_8013CB68_000024E0
+    bne lbl_npc_updateTalkInteraction_000024E0
     lwz r0, 0xf80(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_0000237C
+    bne lbl_npc_updateTalkInteraction_0000237C
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x5e0(r1)
@@ -2601,8 +2601,8 @@ lbl_fn_8013CB68_00002344:
     lwz r0, 0x8(r5)
     stw r3, 0x5e4(r1)
     stw r0, 0x5e8(r1)
-    b lbl_fn_8013CB68_00002398
-lbl_fn_8013CB68_0000237C:
+    b lbl_npc_updateTalkInteraction_00002398
+lbl_npc_updateTalkInteraction_0000237C:
     addi r3, r24, 0x164
     lwz r5, 0x164(r24)
     lwz r4, 0x4(r3)
@@ -2610,7 +2610,7 @@ lbl_fn_8013CB68_0000237C:
     stw r5, 0x5e0(r1)
     stw r4, 0x5e4(r1)
     stw r0, 0x5e8(r1)
-lbl_fn_8013CB68_00002398:
+lbl_npc_updateTalkInteraction_00002398:
     lwz r5, 0x5e0(r1)
     addi r3, r1, 0x148
     lwz r4, 0x5e4(r1)
@@ -2620,26 +2620,26 @@ lbl_fn_8013CB68_00002398:
     stw r0, 0x150(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_000023D4
+    beq lbl_npc_updateTalkInteraction_000023D4
     lwz r3, 0xf80(r30)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_000023D4:
+lbl_npc_updateTalkInteraction_000023D4:
     lwz r0, 0x55c(r30)
     cmpwi r0, 0x6
-    beq lbl_fn_8013CB68_000024B0
+    beq lbl_npc_updateTalkInteraction_000024B0
     cmpwi r0, 0x8
-    beq lbl_fn_8013CB68_000023EC
+    beq lbl_npc_updateTalkInteraction_000023EC
     stw r0, 0x564(r30)
-lbl_fn_8013CB68_000023EC:
+lbl_npc_updateTalkInteraction_000023EC:
     lwz r0, 0x55c(r30)
     cmpwi r0, 0x6
-    bne lbl_fn_8013CB68_000024B0
+    bne lbl_npc_updateTalkInteraction_000024B0
     lwz r0, 0xf80(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_00002424
+    bne lbl_npc_updateTalkInteraction_00002424
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x5ec(r1)
@@ -2647,8 +2647,8 @@ lbl_fn_8013CB68_000023EC:
     lwz r0, 0x8(r5)
     stw r3, 0x5f0(r1)
     stw r0, 0x5f4(r1)
-    b lbl_fn_8013CB68_00002440
-lbl_fn_8013CB68_00002424:
+    b lbl_npc_updateTalkInteraction_00002440
+lbl_npc_updateTalkInteraction_00002424:
     addi r3, r24, 0x170
     lwz r5, 0x170(r24)
     lwz r4, 0x4(r3)
@@ -2656,7 +2656,7 @@ lbl_fn_8013CB68_00002424:
     stw r5, 0x5ec(r1)
     stw r4, 0x5f0(r1)
     stw r0, 0x5f4(r1)
-lbl_fn_8013CB68_00002440:
+lbl_npc_updateTalkInteraction_00002440:
     lwz r5, 0x5ec(r1)
     addi r3, r1, 0x154
     lwz r4, 0x5f0(r1)
@@ -2666,13 +2666,13 @@ lbl_fn_8013CB68_00002440:
     stw r0, 0x15c(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_0000247C
+    beq lbl_npc_updateTalkInteraction_0000247C
     lwz r3, 0xf80(r30)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_0000247C:
+lbl_npc_updateTalkInteraction_0000247C:
     mr r3, r30
     li r4, 0x6
     bl actor_setState
@@ -2680,52 +2680,52 @@ lbl_fn_8013CB68_0000247C:
     li r0, 0x0
     cmpwi r3, 0x0
     stw r0, 0xf80(r30)
-    beq lbl_fn_8013CB68_000024B0
+    beq lbl_npc_updateTalkInteraction_000024B0
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_000024B0:
+lbl_npc_updateTalkInteraction_000024B0:
     li r0, 0x6
     stw r0, 0x55c(r30)
     li r0, 0x0
     lwz r3, 0xf80(r30)
     cmpwi r3, 0x0
     stw r0, 0xf80(r30)
-    beq lbl_fn_8013CB68_000024E0
+    beq lbl_npc_updateTalkInteraction_000024E0
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_000024E0:
+lbl_npc_updateTalkInteraction_000024E0:
     li r0, 0x6
     stw r0, 0x55c(r30)
     lwz r3, 0xf80(r30)
     cmpwi r3, 0x0
     stw r23, 0xf80(r30)
-    beq lbl_fn_8013CB68_0000250C
+    beq lbl_npc_updateTalkInteraction_0000250C
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_0000250C:
+lbl_npc_updateTalkInteraction_0000250C:
     lwz r0, 0x48(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_00002824
+    bne lbl_npc_updateTalkInteraction_00002824
     bl fn_8018059C
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00002824
+    beq lbl_npc_updateTalkInteraction_00002824
     bl fn_8018059C
     lwz r0, 0x14b0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8013CB68_00002824
+    beq lbl_npc_updateTalkInteraction_00002824
     lwz r3, lbl_8087F0A8
     lwz r0, 0x580(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8013CB68_00003940
+    beq lbl_npc_updateTalkInteraction_00003940
     lfs f4, 0x36c(r1)
     lis r3, lbl_80737A9C@ha
     lfs f3, 0x368(r1)
@@ -2745,7 +2745,7 @@ lbl_fn_8013CB68_0000250C:
     bl mem_alloc
     cmpwi r3, 0x0
     mr r23, r3
-    beq lbl_fn_8013CB68_000025B0
+    beq lbl_npc_updateTalkInteraction_000025B0
     mr r4, r27
     mr r7, r28
     addi r5, r1, 0x25c
@@ -2753,13 +2753,13 @@ lbl_fn_8013CB68_0000250C:
     li r8, 0x0
     bl fn_801C48B4
     mr r23, r3
-lbl_fn_8013CB68_000025B0:
+lbl_npc_updateTalkInteraction_000025B0:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    bne lbl_fn_8013CB68_00002640
+    bne lbl_npc_updateTalkInteraction_00002640
     lwz r0, 0xf80(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_000025E8
+    bne lbl_npc_updateTalkInteraction_000025E8
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x5f8(r1)
@@ -2767,8 +2767,8 @@ lbl_fn_8013CB68_000025B0:
     lwz r0, 0x8(r5)
     stw r3, 0x5fc(r1)
     stw r0, 0x600(r1)
-    b lbl_fn_8013CB68_00002604
-lbl_fn_8013CB68_000025E8:
+    b lbl_npc_updateTalkInteraction_00002604
+lbl_npc_updateTalkInteraction_000025E8:
     addi r3, r24, 0x17c
     lwz r5, 0x17c(r24)
     lwz r4, 0x4(r3)
@@ -2776,7 +2776,7 @@ lbl_fn_8013CB68_000025E8:
     stw r5, 0x5f8(r1)
     stw r4, 0x5fc(r1)
     stw r0, 0x600(r1)
-lbl_fn_8013CB68_00002604:
+lbl_npc_updateTalkInteraction_00002604:
     lwz r5, 0x5f8(r1)
     addi r3, r1, 0x13c
     lwz r4, 0x5fc(r1)
@@ -2786,26 +2786,26 @@ lbl_fn_8013CB68_00002604:
     stw r0, 0x144(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00002640
+    beq lbl_npc_updateTalkInteraction_00002640
     lwz r3, 0xf80(r27)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_00002640:
+lbl_npc_updateTalkInteraction_00002640:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    beq lbl_fn_8013CB68_000027F4
+    beq lbl_npc_updateTalkInteraction_000027F4
     cmpwi r0, 0x8
-    beq lbl_fn_8013CB68_00002658
+    beq lbl_npc_updateTalkInteraction_00002658
     stw r0, 0x564(r27)
-lbl_fn_8013CB68_00002658:
+lbl_npc_updateTalkInteraction_00002658:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    bne lbl_fn_8013CB68_000027F4
+    bne lbl_npc_updateTalkInteraction_000027F4
     lwz r0, 0xf80(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_00002690
+    bne lbl_npc_updateTalkInteraction_00002690
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x604(r1)
@@ -2813,8 +2813,8 @@ lbl_fn_8013CB68_00002658:
     lwz r0, 0x8(r5)
     stw r3, 0x608(r1)
     stw r0, 0x60c(r1)
-    b lbl_fn_8013CB68_000026AC
-lbl_fn_8013CB68_00002690:
+    b lbl_npc_updateTalkInteraction_000026AC
+lbl_npc_updateTalkInteraction_00002690:
     addi r3, r24, 0x188
     lwz r5, 0x188(r24)
     lwz r4, 0x4(r3)
@@ -2822,7 +2822,7 @@ lbl_fn_8013CB68_00002690:
     stw r5, 0x604(r1)
     stw r4, 0x608(r1)
     stw r0, 0x60c(r1)
-lbl_fn_8013CB68_000026AC:
+lbl_npc_updateTalkInteraction_000026AC:
     lwz r5, 0x604(r1)
     addi r3, r1, 0x124
     lwz r4, 0x608(r1)
@@ -2832,26 +2832,26 @@ lbl_fn_8013CB68_000026AC:
     stw r0, 0x12c(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_000026E8
+    beq lbl_npc_updateTalkInteraction_000026E8
     lwz r3, 0xf80(r27)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_000026E8:
+lbl_npc_updateTalkInteraction_000026E8:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    beq lbl_fn_8013CB68_000027C4
+    beq lbl_npc_updateTalkInteraction_000027C4
     cmpwi r0, 0x8
-    beq lbl_fn_8013CB68_00002700
+    beq lbl_npc_updateTalkInteraction_00002700
     stw r0, 0x564(r27)
-lbl_fn_8013CB68_00002700:
+lbl_npc_updateTalkInteraction_00002700:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    bne lbl_fn_8013CB68_000027C4
+    bne lbl_npc_updateTalkInteraction_000027C4
     lwz r0, 0xf80(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_00002738
+    bne lbl_npc_updateTalkInteraction_00002738
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x610(r1)
@@ -2859,8 +2859,8 @@ lbl_fn_8013CB68_00002700:
     lwz r0, 0x8(r5)
     stw r3, 0x614(r1)
     stw r0, 0x618(r1)
-    b lbl_fn_8013CB68_00002754
-lbl_fn_8013CB68_00002738:
+    b lbl_npc_updateTalkInteraction_00002754
+lbl_npc_updateTalkInteraction_00002738:
     addi r3, r24, 0x194
     lwz r5, 0x194(r24)
     lwz r4, 0x4(r3)
@@ -2868,7 +2868,7 @@ lbl_fn_8013CB68_00002738:
     stw r5, 0x610(r1)
     stw r4, 0x614(r1)
     stw r0, 0x618(r1)
-lbl_fn_8013CB68_00002754:
+lbl_npc_updateTalkInteraction_00002754:
     lwz r5, 0x610(r1)
     addi r3, r1, 0x130
     lwz r4, 0x614(r1)
@@ -2878,13 +2878,13 @@ lbl_fn_8013CB68_00002754:
     stw r0, 0x138(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00002790
+    beq lbl_npc_updateTalkInteraction_00002790
     lwz r3, 0xf80(r27)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_00002790:
+lbl_npc_updateTalkInteraction_00002790:
     mr r3, r27
     li r4, 0x6
     bl actor_setState
@@ -2892,53 +2892,53 @@ lbl_fn_8013CB68_00002790:
     li r0, 0x0
     cmpwi r3, 0x0
     stw r0, 0xf80(r27)
-    beq lbl_fn_8013CB68_000027C4
+    beq lbl_npc_updateTalkInteraction_000027C4
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_000027C4:
+lbl_npc_updateTalkInteraction_000027C4:
     lwz r3, 0xf80(r27)
     li r4, 0x6
     li r0, 0x0
     stw r4, 0x55c(r27)
     cmpwi r3, 0x0
     stw r0, 0xf80(r27)
-    beq lbl_fn_8013CB68_000027F4
+    beq lbl_npc_updateTalkInteraction_000027F4
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_000027F4:
+lbl_npc_updateTalkInteraction_000027F4:
     lwz r3, 0xf80(r27)
     li r0, 0x6
     stw r0, 0x55c(r27)
     cmpwi r3, 0x0
     stw r23, 0xf80(r27)
-    beq lbl_fn_8013CB68_00003940
+    beq lbl_npc_updateTalkInteraction_00003940
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-    b lbl_fn_8013CB68_00003940
-lbl_fn_8013CB68_00002824:
+    b lbl_npc_updateTalkInteraction_00003940
+lbl_npc_updateTalkInteraction_00002824:
     lwz r0, 0x48(r27)
     cmpwi r0, 0x2
-    bne lbl_fn_8013CB68_00002B3C
+    bne lbl_npc_updateTalkInteraction_00002B3C
     bl fn_8018059C
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00002B3C
+    beq lbl_npc_updateTalkInteraction_00002B3C
     bl fn_8018059C
     lwz r0, 0x14b0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8013CB68_00002B3C
+    beq lbl_npc_updateTalkInteraction_00002B3C
     lwz r3, lbl_8087F0A8
     lwz r0, 0x57c(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8013CB68_00003940
+    beq lbl_npc_updateTalkInteraction_00003940
     lfs f4, 0x36c(r1)
     lis r3, lbl_80737A9C@ha
     lfs f3, 0x368(r1)
@@ -2958,7 +2958,7 @@ lbl_fn_8013CB68_00002824:
     bl mem_alloc
     cmpwi r3, 0x0
     mr r23, r3
-    beq lbl_fn_8013CB68_000028C8
+    beq lbl_npc_updateTalkInteraction_000028C8
     mr r4, r27
     mr r7, r28
     addi r5, r1, 0x250
@@ -2966,13 +2966,13 @@ lbl_fn_8013CB68_00002824:
     li r8, 0x0
     bl fn_801C48B4
     mr r23, r3
-lbl_fn_8013CB68_000028C8:
+lbl_npc_updateTalkInteraction_000028C8:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    bne lbl_fn_8013CB68_00002958
+    bne lbl_npc_updateTalkInteraction_00002958
     lwz r0, 0xf80(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_00002900
+    bne lbl_npc_updateTalkInteraction_00002900
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x61c(r1)
@@ -2980,8 +2980,8 @@ lbl_fn_8013CB68_000028C8:
     lwz r0, 0x8(r5)
     stw r3, 0x620(r1)
     stw r0, 0x624(r1)
-    b lbl_fn_8013CB68_0000291C
-lbl_fn_8013CB68_00002900:
+    b lbl_npc_updateTalkInteraction_0000291C
+lbl_npc_updateTalkInteraction_00002900:
     addi r3, r24, 0x1a0
     lwz r5, 0x1a0(r24)
     lwz r4, 0x4(r3)
@@ -2989,7 +2989,7 @@ lbl_fn_8013CB68_00002900:
     stw r5, 0x61c(r1)
     stw r4, 0x620(r1)
     stw r0, 0x624(r1)
-lbl_fn_8013CB68_0000291C:
+lbl_npc_updateTalkInteraction_0000291C:
     lwz r5, 0x61c(r1)
     addi r3, r1, 0x118
     lwz r4, 0x620(r1)
@@ -2999,26 +2999,26 @@ lbl_fn_8013CB68_0000291C:
     stw r0, 0x120(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00002958
+    beq lbl_npc_updateTalkInteraction_00002958
     lwz r3, 0xf80(r27)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_00002958:
+lbl_npc_updateTalkInteraction_00002958:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    beq lbl_fn_8013CB68_00002B0C
+    beq lbl_npc_updateTalkInteraction_00002B0C
     cmpwi r0, 0x8
-    beq lbl_fn_8013CB68_00002970
+    beq lbl_npc_updateTalkInteraction_00002970
     stw r0, 0x564(r27)
-lbl_fn_8013CB68_00002970:
+lbl_npc_updateTalkInteraction_00002970:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    bne lbl_fn_8013CB68_00002B0C
+    bne lbl_npc_updateTalkInteraction_00002B0C
     lwz r0, 0xf80(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_000029A8
+    bne lbl_npc_updateTalkInteraction_000029A8
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x628(r1)
@@ -3026,8 +3026,8 @@ lbl_fn_8013CB68_00002970:
     lwz r0, 0x8(r5)
     stw r3, 0x62c(r1)
     stw r0, 0x630(r1)
-    b lbl_fn_8013CB68_000029C4
-lbl_fn_8013CB68_000029A8:
+    b lbl_npc_updateTalkInteraction_000029C4
+lbl_npc_updateTalkInteraction_000029A8:
     addi r3, r24, 0x1ac
     lwz r5, 0x1ac(r24)
     lwz r4, 0x4(r3)
@@ -3035,7 +3035,7 @@ lbl_fn_8013CB68_000029A8:
     stw r5, 0x628(r1)
     stw r4, 0x62c(r1)
     stw r0, 0x630(r1)
-lbl_fn_8013CB68_000029C4:
+lbl_npc_updateTalkInteraction_000029C4:
     lwz r5, 0x628(r1)
     addi r3, r1, 0x100
     lwz r4, 0x62c(r1)
@@ -3045,26 +3045,26 @@ lbl_fn_8013CB68_000029C4:
     stw r0, 0x108(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00002A00
+    beq lbl_npc_updateTalkInteraction_00002A00
     lwz r3, 0xf80(r27)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_00002A00:
+lbl_npc_updateTalkInteraction_00002A00:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    beq lbl_fn_8013CB68_00002ADC
+    beq lbl_npc_updateTalkInteraction_00002ADC
     cmpwi r0, 0x8
-    beq lbl_fn_8013CB68_00002A18
+    beq lbl_npc_updateTalkInteraction_00002A18
     stw r0, 0x564(r27)
-lbl_fn_8013CB68_00002A18:
+lbl_npc_updateTalkInteraction_00002A18:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    bne lbl_fn_8013CB68_00002ADC
+    bne lbl_npc_updateTalkInteraction_00002ADC
     lwz r0, 0xf80(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_00002A50
+    bne lbl_npc_updateTalkInteraction_00002A50
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x634(r1)
@@ -3072,8 +3072,8 @@ lbl_fn_8013CB68_00002A18:
     lwz r0, 0x8(r5)
     stw r3, 0x638(r1)
     stw r0, 0x63c(r1)
-    b lbl_fn_8013CB68_00002A6C
-lbl_fn_8013CB68_00002A50:
+    b lbl_npc_updateTalkInteraction_00002A6C
+lbl_npc_updateTalkInteraction_00002A50:
     addi r3, r24, 0x1b8
     lwz r5, 0x1b8(r24)
     lwz r4, 0x4(r3)
@@ -3081,7 +3081,7 @@ lbl_fn_8013CB68_00002A50:
     stw r5, 0x634(r1)
     stw r4, 0x638(r1)
     stw r0, 0x63c(r1)
-lbl_fn_8013CB68_00002A6C:
+lbl_npc_updateTalkInteraction_00002A6C:
     lwz r5, 0x634(r1)
     addi r3, r1, 0x10c
     lwz r4, 0x638(r1)
@@ -3091,13 +3091,13 @@ lbl_fn_8013CB68_00002A6C:
     stw r0, 0x114(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00002AA8
+    beq lbl_npc_updateTalkInteraction_00002AA8
     lwz r3, 0xf80(r27)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_00002AA8:
+lbl_npc_updateTalkInteraction_00002AA8:
     mr r3, r27
     li r4, 0x6
     bl actor_setState
@@ -3105,46 +3105,46 @@ lbl_fn_8013CB68_00002AA8:
     li r0, 0x0
     cmpwi r3, 0x0
     stw r0, 0xf80(r27)
-    beq lbl_fn_8013CB68_00002ADC
+    beq lbl_npc_updateTalkInteraction_00002ADC
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_00002ADC:
+lbl_npc_updateTalkInteraction_00002ADC:
     lwz r3, 0xf80(r27)
     li r4, 0x6
     li r0, 0x0
     stw r4, 0x55c(r27)
     cmpwi r3, 0x0
     stw r0, 0xf80(r27)
-    beq lbl_fn_8013CB68_00002B0C
+    beq lbl_npc_updateTalkInteraction_00002B0C
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_00002B0C:
+lbl_npc_updateTalkInteraction_00002B0C:
     lwz r3, 0xf80(r27)
     li r0, 0x6
     stw r0, 0x55c(r27)
     cmpwi r3, 0x0
     stw r23, 0xf80(r27)
-    beq lbl_fn_8013CB68_00003940
+    beq lbl_npc_updateTalkInteraction_00003940
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-    b lbl_fn_8013CB68_00003940
-lbl_fn_8013CB68_00002B3C:
+    b lbl_npc_updateTalkInteraction_00003940
+lbl_npc_updateTalkInteraction_00002B3C:
     lwz r0, 0x48(r27)
     cmpwi r0, 0x2
-    bne lbl_fn_8013CB68_00003940
+    bne lbl_npc_updateTalkInteraction_00003940
     lwz r3, 0x60(r27)
     lwz r0, 0x24(r3)
     cmpwi r0, 0x35
-    bne lbl_fn_8013CB68_00003940
+    bne lbl_npc_updateTalkInteraction_00003940
     lfs f3, lbl_8088196C
     addi r3, r1, 0x480
     lfs f0, lbl_80881964
@@ -3197,7 +3197,7 @@ lbl_fn_8013CB68_00002B3C:
     bl mem_alloc
     cmpwi r3, 0x0
     mr r23, r3
-    beq lbl_fn_8013CB68_00002C48
+    beq lbl_npc_updateTalkInteraction_00002C48
     mr r4, r27
     mr r5, r25
     li r6, 0x1
@@ -3205,13 +3205,13 @@ lbl_fn_8013CB68_00002B3C:
     li r8, 0x0
     bl fn_801C48B4
     mr r23, r3
-lbl_fn_8013CB68_00002C48:
+lbl_npc_updateTalkInteraction_00002C48:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    bne lbl_fn_8013CB68_00002CD8
+    bne lbl_npc_updateTalkInteraction_00002CD8
     lwz r0, 0xf80(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_00002C80
+    bne lbl_npc_updateTalkInteraction_00002C80
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x640(r1)
@@ -3219,8 +3219,8 @@ lbl_fn_8013CB68_00002C48:
     lwz r0, 0x8(r5)
     stw r3, 0x644(r1)
     stw r0, 0x648(r1)
-    b lbl_fn_8013CB68_00002C9C
-lbl_fn_8013CB68_00002C80:
+    b lbl_npc_updateTalkInteraction_00002C9C
+lbl_npc_updateTalkInteraction_00002C80:
     addi r3, r24, 0x1c4
     lwz r5, 0x1c4(r24)
     lwz r4, 0x4(r3)
@@ -3228,7 +3228,7 @@ lbl_fn_8013CB68_00002C80:
     stw r5, 0x640(r1)
     stw r4, 0x644(r1)
     stw r0, 0x648(r1)
-lbl_fn_8013CB68_00002C9C:
+lbl_npc_updateTalkInteraction_00002C9C:
     lwz r5, 0x640(r1)
     addi r3, r1, 0xf4
     lwz r4, 0x644(r1)
@@ -3238,26 +3238,26 @@ lbl_fn_8013CB68_00002C9C:
     stw r0, 0xfc(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00002CD8
+    beq lbl_npc_updateTalkInteraction_00002CD8
     lwz r3, 0xf80(r27)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_00002CD8:
+lbl_npc_updateTalkInteraction_00002CD8:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    beq lbl_fn_8013CB68_00002E8C
+    beq lbl_npc_updateTalkInteraction_00002E8C
     cmpwi r0, 0x8
-    beq lbl_fn_8013CB68_00002CF0
+    beq lbl_npc_updateTalkInteraction_00002CF0
     stw r0, 0x564(r27)
-lbl_fn_8013CB68_00002CF0:
+lbl_npc_updateTalkInteraction_00002CF0:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    bne lbl_fn_8013CB68_00002E8C
+    bne lbl_npc_updateTalkInteraction_00002E8C
     lwz r0, 0xf80(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_00002D28
+    bne lbl_npc_updateTalkInteraction_00002D28
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x64c(r1)
@@ -3265,8 +3265,8 @@ lbl_fn_8013CB68_00002CF0:
     lwz r0, 0x8(r5)
     stw r3, 0x650(r1)
     stw r0, 0x654(r1)
-    b lbl_fn_8013CB68_00002D44
-lbl_fn_8013CB68_00002D28:
+    b lbl_npc_updateTalkInteraction_00002D44
+lbl_npc_updateTalkInteraction_00002D28:
     addi r3, r24, 0x1d0
     lwz r5, 0x1d0(r24)
     lwz r4, 0x4(r3)
@@ -3274,7 +3274,7 @@ lbl_fn_8013CB68_00002D28:
     stw r5, 0x64c(r1)
     stw r4, 0x650(r1)
     stw r0, 0x654(r1)
-lbl_fn_8013CB68_00002D44:
+lbl_npc_updateTalkInteraction_00002D44:
     lwz r5, 0x64c(r1)
     addi r3, r1, 0xdc
     lwz r4, 0x650(r1)
@@ -3284,26 +3284,26 @@ lbl_fn_8013CB68_00002D44:
     stw r0, 0xe4(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00002D80
+    beq lbl_npc_updateTalkInteraction_00002D80
     lwz r3, 0xf80(r27)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_00002D80:
+lbl_npc_updateTalkInteraction_00002D80:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    beq lbl_fn_8013CB68_00002E5C
+    beq lbl_npc_updateTalkInteraction_00002E5C
     cmpwi r0, 0x8
-    beq lbl_fn_8013CB68_00002D98
+    beq lbl_npc_updateTalkInteraction_00002D98
     stw r0, 0x564(r27)
-lbl_fn_8013CB68_00002D98:
+lbl_npc_updateTalkInteraction_00002D98:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    bne lbl_fn_8013CB68_00002E5C
+    bne lbl_npc_updateTalkInteraction_00002E5C
     lwz r0, 0xf80(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_00002DD0
+    bne lbl_npc_updateTalkInteraction_00002DD0
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x658(r1)
@@ -3311,8 +3311,8 @@ lbl_fn_8013CB68_00002D98:
     lwz r0, 0x8(r5)
     stw r3, 0x65c(r1)
     stw r0, 0x660(r1)
-    b lbl_fn_8013CB68_00002DEC
-lbl_fn_8013CB68_00002DD0:
+    b lbl_npc_updateTalkInteraction_00002DEC
+lbl_npc_updateTalkInteraction_00002DD0:
     addi r3, r24, 0x1dc
     lwz r5, 0x1dc(r24)
     lwz r4, 0x4(r3)
@@ -3320,7 +3320,7 @@ lbl_fn_8013CB68_00002DD0:
     stw r5, 0x658(r1)
     stw r4, 0x65c(r1)
     stw r0, 0x660(r1)
-lbl_fn_8013CB68_00002DEC:
+lbl_npc_updateTalkInteraction_00002DEC:
     lwz r5, 0x658(r1)
     addi r3, r1, 0xe8
     lwz r4, 0x65c(r1)
@@ -3330,13 +3330,13 @@ lbl_fn_8013CB68_00002DEC:
     stw r0, 0xf0(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00002E28
+    beq lbl_npc_updateTalkInteraction_00002E28
     lwz r3, 0xf80(r27)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_00002E28:
+lbl_npc_updateTalkInteraction_00002E28:
     mr r3, r27
     li r4, 0x6
     bl actor_setState
@@ -3344,69 +3344,69 @@ lbl_fn_8013CB68_00002E28:
     li r0, 0x0
     cmpwi r3, 0x0
     stw r0, 0xf80(r27)
-    beq lbl_fn_8013CB68_00002E5C
+    beq lbl_npc_updateTalkInteraction_00002E5C
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_00002E5C:
+lbl_npc_updateTalkInteraction_00002E5C:
     lwz r3, 0xf80(r27)
     li r4, 0x6
     li r0, 0x0
     stw r4, 0x55c(r27)
     cmpwi r3, 0x0
     stw r0, 0xf80(r27)
-    beq lbl_fn_8013CB68_00002E8C
+    beq lbl_npc_updateTalkInteraction_00002E8C
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_00002E8C:
+lbl_npc_updateTalkInteraction_00002E8C:
     lwz r3, 0xf80(r27)
     li r0, 0x6
     stw r0, 0x55c(r27)
     cmpwi r3, 0x0
     stw r23, 0xf80(r27)
-    beq lbl_fn_8013CB68_00003940
+    beq lbl_npc_updateTalkInteraction_00003940
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-    b lbl_fn_8013CB68_00003940
-lbl_fn_8013CB68_00002EBC:
+    b lbl_npc_updateTalkInteraction_00003940
+lbl_npc_updateTalkInteraction_00002EBC:
     cmpwi r25, 0x0
     li r23, 0x0
-    beq lbl_fn_8013CB68_00002ED8
+    beq lbl_npc_updateTalkInteraction_00002ED8
     lwz r0, 0x54c(r1)
     clrlwi r0, r0, 31
     cmplwi r0, 0x1
-    beq lbl_fn_8013CB68_00002FB8
-lbl_fn_8013CB68_00002ED8:
+    beq lbl_npc_updateTalkInteraction_00002FB8
+lbl_npc_updateTalkInteraction_00002ED8:
     lwz r0, 0x958(r27)
     rlwinm r0, r0, 0, 26, 26
     cmplwi r0, 0x20
-    beq lbl_fn_8013CB68_00002FB8
+    beq lbl_npc_updateTalkInteraction_00002FB8
     lwz r0, 0x54c(r27)
     rlwinm r3, r0, 0, 10, 10
     subis r0, r3, 0x20
     cmplwi r0, 0x0
-    beq lbl_fn_8013CB68_00002FB8
+    beq lbl_npc_updateTalkInteraction_00002FB8
     lwz r3, 0x48(r27)
     li r0, 0x1
     cmpwi r3, 0x1
-    beq lbl_fn_8013CB68_00002F18
+    beq lbl_npc_updateTalkInteraction_00002F18
     cmpwi r3, 0x4
-    beq lbl_fn_8013CB68_00002F18
+    beq lbl_npc_updateTalkInteraction_00002F18
     li r0, 0x0
-lbl_fn_8013CB68_00002F18:
+lbl_npc_updateTalkInteraction_00002F18:
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_00002FB8
+    bne lbl_npc_updateTalkInteraction_00002FB8
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    beq lbl_fn_8013CB68_00002FB8
+    beq lbl_npc_updateTalkInteraction_00002FB8
     addi r3, r1, 0x3e0
     lfs f2, 0x3e8(r1)
     psq_l f1, 0x0(r3), 0, 0
@@ -3431,26 +3431,26 @@ lbl_fn_8013CB68_00002F18:
     stfs f0, 0x350(r1)
     bl collision_testLineSegment
     cmpwi r3, 0x0
-    bne lbl_fn_8013CB68_00002F94
+    bne lbl_npc_updateTalkInteraction_00002F94
     li r23, 0x1
-lbl_fn_8013CB68_00002F94:
+lbl_npc_updateTalkInteraction_00002F94:
     lwz r0, 0x54c(r27)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_8013CB68_00002FB8
+    bne lbl_npc_updateTalkInteraction_00002FB8
     lfs f3, 0x350(r1)
     lfs f0, lbl_8088196C
     fcmpo cr0, f3, f0
-    bge lbl_fn_8013CB68_00002FB8
+    bge lbl_npc_updateTalkInteraction_00002FB8
     li r23, 0x0
-lbl_fn_8013CB68_00002FB8:
+lbl_npc_updateTalkInteraction_00002FB8:
     cmpwi r23, 0x0
-    beq lbl_fn_8013CB68_00003050
+    beq lbl_npc_updateTalkInteraction_00003050
     lwz r3, 0x630(r27)
     addi r0, r3, 0x1
     stw r0, 0x630(r27)
     cmpwi r0, 0x1
-    ble lbl_fn_8013CB68_0000309C
+    ble lbl_npc_updateTalkInteraction_0000309C
     addi r3, r1, 0x3e0
     lfs f3, lbl_8088196C
     psq_l f1, 0x0(r3), 0, 0
@@ -3471,40 +3471,40 @@ lbl_fn_8013CB68_00002FB8:
     stfs f3, 0x33c(r1)
     bl fn_8004D314
     cmpwi r3, 0x0
-    bne lbl_fn_8013CB68_00003044
+    bne lbl_npc_updateTalkInteraction_00003044
     lwz r12, 0x0(r27)
     mr r3, r27
     addi r4, r1, 0x3c8
     lwz r12, 0x8c(r12)
     mtctr r12
     bctrl
-    b lbl_fn_8013CB68_0000309C
-lbl_fn_8013CB68_00003044:
+    b lbl_npc_updateTalkInteraction_0000309C
+lbl_npc_updateTalkInteraction_00003044:
     li r0, 0x0
     stw r0, 0x630(r27)
-    b lbl_fn_8013CB68_0000309C
-lbl_fn_8013CB68_00003050:
+    b lbl_npc_updateTalkInteraction_0000309C
+lbl_npc_updateTalkInteraction_00003050:
     cmpwi r25, 0x0
     li r0, 0x0
     stw r0, 0x630(r27)
-    beq lbl_fn_8013CB68_0000309C
+    beq lbl_npc_updateTalkInteraction_0000309C
     lwz r0, 0x54c(r1)
     rlwinm r0, r0, 0, 21, 21
     cmplwi r0, 0x400
-    beq lbl_fn_8013CB68_00003080
+    beq lbl_npc_updateTalkInteraction_00003080
     lwz r3, lbl_8087F0A8
     lwz r0, 0x2c0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8013CB68_0000309C
-lbl_fn_8013CB68_00003080:
+    beq lbl_npc_updateTalkInteraction_0000309C
+lbl_npc_updateTalkInteraction_00003080:
     mr r3, r27
     addi r4, r1, 0x3e0
     addi r5, r1, 0x3c8
     bl fn_801749EC
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_0000309C
+    beq lbl_npc_updateTalkInteraction_0000309C
     li r31, 0x0
-lbl_fn_8013CB68_0000309C:
+lbl_npc_updateTalkInteraction_0000309C:
     lfs f5, 0x3e8(r1)
     addi r3, r1, 0x328
     lfs f3, 0x3a0(r1)
@@ -3531,9 +3531,9 @@ lbl_fn_8013CB68_0000309C:
     bl PSVECSquareMag
     lfs f0, lbl_80881A1C
     fcmpo cr0, f1, f0
-    ble lbl_fn_8013CB68_00003324
+    ble lbl_npc_updateTalkInteraction_00003324
     fcmpo cr0, f28, f0
-    ble lbl_fn_8013CB68_00003324
+    ble lbl_npc_updateTalkInteraction_00003324
     addi r3, r1, 0x328
     addi r23, r1, 0x1fc
     psq_l f1, 0x0(r3), 0, 0
@@ -3552,25 +3552,25 @@ lbl_fn_8013CB68_0000309C:
     frsp f3, f3
     stfs f2, 0x210(r1)
     fcmpo cr0, f3, f0
-    bge lbl_fn_8013CB68_00003180
+    bge lbl_npc_updateTalkInteraction_00003180
     lfs f3, 0x208(r1)
     lfs f0, lbl_8088196C
     fcmpo cr0, f3, f0
-    ble lbl_fn_8013CB68_00003174
+    ble lbl_npc_updateTalkInteraction_00003174
     lfs f0, lbl_808819C8
-    b lbl_fn_8013CB68_00003178
-lbl_fn_8013CB68_00003174:
+    b lbl_npc_updateTalkInteraction_00003178
+lbl_npc_updateTalkInteraction_00003174:
     lfs f0, lbl_808819CC
-lbl_fn_8013CB68_00003178:
+lbl_npc_updateTalkInteraction_00003178:
     stfs f0, 0xd4(r1)
-    b lbl_fn_8013CB68_00003194
-lbl_fn_8013CB68_00003180:
+    b lbl_npc_updateTalkInteraction_00003194
+lbl_npc_updateTalkInteraction_00003180:
     frsp f2, f2
     lfs f1, 0x208(r1)
     bl std_atan2
     frsp f0, f1
     stfs f0, 0xd4(r1)
-lbl_fn_8013CB68_00003194:
+lbl_npc_updateTalkInteraction_00003194:
     lfs f0, 0xd4(r1)
     addi r3, r1, 0x410
     li r4, 0x79
@@ -3631,26 +3631,26 @@ lbl_fn_8013CB68_00003194:
     fabs f3, f2
     frsp f3, f3
     fcmpo cr0, f3, f0
-    bge lbl_fn_8013CB68_000032B0
+    bge lbl_npc_updateTalkInteraction_000032B0
     lfs f3, 0xc8(r1)
     lfs f0, lbl_8088196C
     fcmpo cr0, f3, f0
-    ble lbl_fn_8013CB68_000032A0
+    ble lbl_npc_updateTalkInteraction_000032A0
     lfs f0, lbl_808819C8
-    b lbl_fn_8013CB68_000032A4
-lbl_fn_8013CB68_000032A0:
+    b lbl_npc_updateTalkInteraction_000032A4
+lbl_npc_updateTalkInteraction_000032A0:
     lfs f0, lbl_808819CC
-lbl_fn_8013CB68_000032A4:
+lbl_npc_updateTalkInteraction_000032A4:
     fneg f0, f0
     stfs f0, 0xd0(r1)
-    b lbl_fn_8013CB68_000032C4
-lbl_fn_8013CB68_000032B0:
+    b lbl_npc_updateTalkInteraction_000032C4
+lbl_npc_updateTalkInteraction_000032B0:
     lfs f1, 0xc8(r1)
     bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0xd0(r1)
-lbl_fn_8013CB68_000032C4:
+lbl_npc_updateTalkInteraction_000032C4:
     addi r3, r1, 0xd0
     lfs f4, lbl_8088196C
     psq_l f1, 0x0(r3), 0, 0
@@ -3667,16 +3667,16 @@ lbl_fn_8013CB68_000032C4:
     frsp f30, f1
     lfs f0, lbl_80881A0C
     fcmpo cr0, f30, f0
-    ble lbl_fn_8013CB68_00003310
+    ble lbl_npc_updateTalkInteraction_00003310
     lfs f0, lbl_80881A10
     fsubs f30, f30, f0
-lbl_fn_8013CB68_00003310:
+lbl_npc_updateTalkInteraction_00003310:
     lfs f0, lbl_80881A14
     fcmpo cr0, f30, f0
-    bge lbl_fn_8013CB68_00003324
+    bge lbl_npc_updateTalkInteraction_00003324
     lfs f0, lbl_80881A10
     fadds f30, f30, f0
-lbl_fn_8013CB68_00003324:
+lbl_npc_updateTalkInteraction_00003324:
     lfs f0, lbl_808819B0
     lfs f4, lbl_808819A8
     fmuls f30, f30, f0
@@ -3684,24 +3684,24 @@ lbl_fn_8013CB68_00003324:
     lfs f0, lbl_80881A54
     fnmsubs f3, f4, f30, f3
     fcmpo cr0, f3, f0
-    bge lbl_fn_8013CB68_00003348
-    b lbl_fn_8013CB68_0000334C
-lbl_fn_8013CB68_00003348:
+    bge lbl_npc_updateTalkInteraction_00003348
+    b lbl_npc_updateTalkInteraction_0000334C
+lbl_npc_updateTalkInteraction_00003348:
     fmr f3, f0
-lbl_fn_8013CB68_0000334C:
+lbl_npc_updateTalkInteraction_0000334C:
     lfs f4, lbl_80881A58
     fcmpo cr0, f3, f4
-    ble lbl_fn_8013CB68_00003378
+    ble lbl_npc_updateTalkInteraction_00003378
     lfs f4, lbl_808819A8
     lfs f3, 0x584(r27)
     lfs f0, lbl_80881A54
     fnmsubs f4, f4, f30, f3
     fcmpo cr0, f4, f0
-    bge lbl_fn_8013CB68_00003374
-    b lbl_fn_8013CB68_00003378
-lbl_fn_8013CB68_00003374:
+    bge lbl_npc_updateTalkInteraction_00003374
+    b lbl_npc_updateTalkInteraction_00003378
+lbl_npc_updateTalkInteraction_00003374:
     fmr f4, f0
-lbl_fn_8013CB68_00003378:
+lbl_npc_updateTalkInteraction_00003378:
     frsp f3, f4
     lfs f0, lbl_808819BC
     lwz r0, 0x648(r27)
@@ -3710,52 +3710,52 @@ lbl_fn_8013CB68_00003378:
     fmuls f0, f3, f0
     cmpwi r0, 0x0
     stfs f0, 0x584(r27)
-    beq lbl_fn_8013CB68_00003748
+    beq lbl_npc_updateTalkInteraction_00003748
     mr r3, r27
     addi r4, r1, 0x3e0
     addi r5, r1, 0x3c8
     bl fn_80172EFC
     cmpwi r3, 0x0
-    bne lbl_fn_8013CB68_000038B8
+    bne lbl_npc_updateTalkInteraction_000038B8
     mr r3, r27
     addi r4, r1, 0x3e0
     addi r5, r1, 0x3c8
     bl fn_801720AC
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_000033D4
+    beq lbl_npc_updateTalkInteraction_000033D4
     li r31, 0x0
-    b lbl_fn_8013CB68_000038B8
-lbl_fn_8013CB68_000033D4:
+    b lbl_npc_updateTalkInteraction_000038B8
+lbl_npc_updateTalkInteraction_000033D4:
     lwz r0, 0x7e0(r27)
     rlwinm r3, r0, 0, 6, 6
     subis r0, r3, 0x200
     cmplwi r0, 0x0
-    bne lbl_fn_8013CB68_000038B8
+    bne lbl_npc_updateTalkInteraction_000038B8
     lwz r3, 0x55c(r27)
     subi r0, r3, 0x1
     cmplwi r0, 0x1
-    bgt lbl_fn_8013CB68_000038B8
+    bgt lbl_npc_updateTalkInteraction_000038B8
     lwz r0, 0x54c(r27)
     rlwinm r3, r0, 0, 7, 7
     subis r0, r3, 0x100
     cmplwi r0, 0x0
-    beq lbl_fn_8013CB68_000038B8
+    beq lbl_npc_updateTalkInteraction_000038B8
     lwz r0, 0x12a4(r27)
     extrwi. r0, r0, 1, 28
-    bne lbl_fn_8013CB68_000038B8
+    bne lbl_npc_updateTalkInteraction_000038B8
     addi r3, r27, 0x574
     bl PSVECSquareMag
     lfs f0, lbl_80881964
     fcmpo cr0, f1, f0
-    bgt lbl_fn_8013CB68_0000343C
+    bgt lbl_npc_updateTalkInteraction_0000343C
     lfs f3, 0x570(r27)
     lfs f0, lbl_808819A8
     fcmpo cr0, f3, f0
-    ble lbl_fn_8013CB68_000038B8
-lbl_fn_8013CB68_0000343C:
+    ble lbl_npc_updateTalkInteraction_000038B8
+lbl_npc_updateTalkInteraction_0000343C:
     lwz r3, 0x1208(r27)
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00003498
+    beq lbl_npc_updateTalkInteraction_00003498
     lfs f0, lbl_8088196C
     li r23, 0x0
     li r0, 0x3
@@ -3776,7 +3776,7 @@ lbl_fn_8013CB68_0000343C:
     li r0, 0xff
     stb r0, 0x520(r3)
     stw r23, 0x1208(r27)
-lbl_fn_8013CB68_00003498:
+lbl_npc_updateTalkInteraction_00003498:
     lis r5, lbl_80737A9C@ha
     li r3, 0x18
     addi r5, r5, lbl_80737A9C@l
@@ -3787,18 +3787,18 @@ lbl_fn_8013CB68_00003498:
     bl mem_alloc
     cmpwi r3, 0x0
     mr r23, r3
-    beq lbl_fn_8013CB68_000034D4
+    beq lbl_npc_updateTalkInteraction_000034D4
     mr r4, r27
     li r5, 0x0
     bl fn_801C8938
     mr r23, r3
-lbl_fn_8013CB68_000034D4:
+lbl_npc_updateTalkInteraction_000034D4:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    bne lbl_fn_8013CB68_00003564
+    bne lbl_npc_updateTalkInteraction_00003564
     lwz r0, 0xf80(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_0000350C
+    bne lbl_npc_updateTalkInteraction_0000350C
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x664(r1)
@@ -3806,8 +3806,8 @@ lbl_fn_8013CB68_000034D4:
     lwz r0, 0x8(r5)
     stw r3, 0x668(r1)
     stw r0, 0x66c(r1)
-    b lbl_fn_8013CB68_00003528
-lbl_fn_8013CB68_0000350C:
+    b lbl_npc_updateTalkInteraction_00003528
+lbl_npc_updateTalkInteraction_0000350C:
     addi r3, r24, 0x1e8
     lwz r5, 0x1e8(r24)
     lwz r4, 0x4(r3)
@@ -3815,7 +3815,7 @@ lbl_fn_8013CB68_0000350C:
     stw r5, 0x664(r1)
     stw r4, 0x668(r1)
     stw r0, 0x66c(r1)
-lbl_fn_8013CB68_00003528:
+lbl_npc_updateTalkInteraction_00003528:
     lwz r5, 0x664(r1)
     addi r3, r1, 0x88
     lwz r4, 0x668(r1)
@@ -3825,26 +3825,26 @@ lbl_fn_8013CB68_00003528:
     stw r0, 0x90(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00003564
+    beq lbl_npc_updateTalkInteraction_00003564
     lwz r3, 0xf80(r27)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_00003564:
+lbl_npc_updateTalkInteraction_00003564:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    beq lbl_fn_8013CB68_00003718
+    beq lbl_npc_updateTalkInteraction_00003718
     cmpwi r0, 0x8
-    beq lbl_fn_8013CB68_0000357C
+    beq lbl_npc_updateTalkInteraction_0000357C
     stw r0, 0x564(r27)
-lbl_fn_8013CB68_0000357C:
+lbl_npc_updateTalkInteraction_0000357C:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    bne lbl_fn_8013CB68_00003718
+    bne lbl_npc_updateTalkInteraction_00003718
     lwz r0, 0xf80(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_000035B4
+    bne lbl_npc_updateTalkInteraction_000035B4
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x670(r1)
@@ -3852,8 +3852,8 @@ lbl_fn_8013CB68_0000357C:
     lwz r0, 0x8(r5)
     stw r3, 0x674(r1)
     stw r0, 0x678(r1)
-    b lbl_fn_8013CB68_000035D0
-lbl_fn_8013CB68_000035B4:
+    b lbl_npc_updateTalkInteraction_000035D0
+lbl_npc_updateTalkInteraction_000035B4:
     addi r3, r24, 0x1f4
     lwz r5, 0x1f4(r24)
     lwz r4, 0x4(r3)
@@ -3861,7 +3861,7 @@ lbl_fn_8013CB68_000035B4:
     stw r5, 0x670(r1)
     stw r4, 0x674(r1)
     stw r0, 0x678(r1)
-lbl_fn_8013CB68_000035D0:
+lbl_npc_updateTalkInteraction_000035D0:
     lwz r5, 0x670(r1)
     addi r3, r1, 0x70
     lwz r4, 0x674(r1)
@@ -3871,26 +3871,26 @@ lbl_fn_8013CB68_000035D0:
     stw r0, 0x78(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_0000360C
+    beq lbl_npc_updateTalkInteraction_0000360C
     lwz r3, 0xf80(r27)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_0000360C:
+lbl_npc_updateTalkInteraction_0000360C:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    beq lbl_fn_8013CB68_000036E8
+    beq lbl_npc_updateTalkInteraction_000036E8
     cmpwi r0, 0x8
-    beq lbl_fn_8013CB68_00003624
+    beq lbl_npc_updateTalkInteraction_00003624
     stw r0, 0x564(r27)
-lbl_fn_8013CB68_00003624:
+lbl_npc_updateTalkInteraction_00003624:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    bne lbl_fn_8013CB68_000036E8
+    bne lbl_npc_updateTalkInteraction_000036E8
     lwz r0, 0xf80(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8013CB68_0000365C
+    bne lbl_npc_updateTalkInteraction_0000365C
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x67c(r1)
@@ -3898,8 +3898,8 @@ lbl_fn_8013CB68_00003624:
     lwz r0, 0x8(r5)
     stw r3, 0x680(r1)
     stw r0, 0x684(r1)
-    b lbl_fn_8013CB68_00003678
-lbl_fn_8013CB68_0000365C:
+    b lbl_npc_updateTalkInteraction_00003678
+lbl_npc_updateTalkInteraction_0000365C:
     addi r3, r24, 0x200
     lwz r5, 0x200(r24)
     lwz r4, 0x4(r3)
@@ -3907,7 +3907,7 @@ lbl_fn_8013CB68_0000365C:
     stw r5, 0x67c(r1)
     stw r4, 0x680(r1)
     stw r0, 0x684(r1)
-lbl_fn_8013CB68_00003678:
+lbl_npc_updateTalkInteraction_00003678:
     lwz r5, 0x67c(r1)
     addi r3, r1, 0x7c
     lwz r4, 0x680(r1)
@@ -3917,13 +3917,13 @@ lbl_fn_8013CB68_00003678:
     stw r0, 0x84(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_000036B4
+    beq lbl_npc_updateTalkInteraction_000036B4
     lwz r3, 0xf80(r27)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_000036B4:
+lbl_npc_updateTalkInteraction_000036B4:
     mr r3, r27
     li r4, 0x6
     bl actor_setState
@@ -3931,72 +3931,72 @@ lbl_fn_8013CB68_000036B4:
     li r0, 0x0
     cmpwi r3, 0x0
     stw r0, 0xf80(r27)
-    beq lbl_fn_8013CB68_000036E8
+    beq lbl_npc_updateTalkInteraction_000036E8
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_000036E8:
+lbl_npc_updateTalkInteraction_000036E8:
     lwz r3, 0xf80(r27)
     li r4, 0x6
     li r0, 0x0
     stw r4, 0x55c(r27)
     cmpwi r3, 0x0
     stw r0, 0xf80(r27)
-    beq lbl_fn_8013CB68_00003718
+    beq lbl_npc_updateTalkInteraction_00003718
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8013CB68_00003718:
+lbl_npc_updateTalkInteraction_00003718:
     lwz r3, 0xf80(r27)
     li r0, 0x6
     stw r0, 0x55c(r27)
     cmpwi r3, 0x0
     stw r23, 0xf80(r27)
-    beq lbl_fn_8013CB68_00003940
+    beq lbl_npc_updateTalkInteraction_00003940
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-    b lbl_fn_8013CB68_00003940
-lbl_fn_8013CB68_00003748:
+    b lbl_npc_updateTalkInteraction_00003940
+lbl_npc_updateTalkInteraction_00003748:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    bne lbl_fn_8013CB68_00003768
+    bne lbl_npc_updateTalkInteraction_00003768
     lwz r0, 0x560(r27)
     cmpwi r0, 0x3c
-    beq lbl_fn_8013CB68_000038B8
+    beq lbl_npc_updateTalkInteraction_000038B8
     cmpwi r0, 0x3d
-    beq lbl_fn_8013CB68_000038B8
-lbl_fn_8013CB68_00003768:
+    beq lbl_npc_updateTalkInteraction_000038B8
+lbl_npc_updateTalkInteraction_00003768:
     mr r3, r27
     addi r4, r1, 0x3e0
     addi r5, r1, 0x3c8
     bl fn_80174104
     cmpwi r3, 0x0
-    bne lbl_fn_8013CB68_00003940
+    bne lbl_npc_updateTalkInteraction_00003940
     mr r3, r27
     addi r4, r1, 0x3e0
     addi r5, r1, 0x3c8
     bl fn_801720AC
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_000038B8
+    beq lbl_npc_updateTalkInteraction_000038B8
     li r31, 0x0
-    b lbl_fn_8013CB68_000038B8
-lbl_fn_8013CB68_000037A0:
+    b lbl_npc_updateTalkInteraction_000038B8
+lbl_npc_updateTalkInteraction_000037A0:
     lfs f0, lbl_8088196C
     stfs f0, 0x3cc(r1)
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x2
-    bne lbl_fn_8013CB68_00003810
+    bne lbl_npc_updateTalkInteraction_00003810
     addi r3, r27, 0xc64
     bl fn_80125474
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00003810
+    beq lbl_npc_updateTalkInteraction_00003810
     addi r3, r1, 0x3c8
     bl PSVECMag
     lfs f3, 0xcc4(r27)
@@ -4008,22 +4008,22 @@ lbl_fn_8013CB68_000037A0:
     lfs f0, lbl_808819B8
     frsp f3, f1
     fcmpo cr0, f28, f0
-    ble lbl_fn_8013CB68_00003874
+    ble lbl_npc_updateTalkInteraction_00003874
     fcmpo cr0, f3, f0
-    ble lbl_fn_8013CB68_00003874
+    ble lbl_npc_updateTalkInteraction_00003874
     fdivs f3, f3, f28
     lfs f0, 0xcc0(r27)
     fdivs f0, f0, f3
     stfs f0, 0x3cc(r1)
-    b lbl_fn_8013CB68_00003874
-lbl_fn_8013CB68_00003810:
+    b lbl_npc_updateTalkInteraction_00003874
+lbl_npc_updateTalkInteraction_00003810:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x7
-    bne lbl_fn_8013CB68_00003874
+    bne lbl_npc_updateTalkInteraction_00003874
     addi r3, r27, 0x1030
     bl fn_80125474
     cmpwi r3, 0x0
-    beq lbl_fn_8013CB68_00003874
+    beq lbl_npc_updateTalkInteraction_00003874
     addi r3, r1, 0x3c8
     bl PSVECMag
     lfs f3, 0x1090(r27)
@@ -4035,14 +4035,14 @@ lbl_fn_8013CB68_00003810:
     lfs f0, lbl_808819B8
     frsp f3, f1
     fcmpo cr0, f28, f0
-    ble lbl_fn_8013CB68_00003874
+    ble lbl_npc_updateTalkInteraction_00003874
     fcmpo cr0, f3, f0
-    ble lbl_fn_8013CB68_00003874
+    ble lbl_npc_updateTalkInteraction_00003874
     fdivs f3, f3, f28
     lfs f0, 0x108c(r27)
     fdivs f0, f0, f3
     stfs f0, 0x3cc(r1)
-lbl_fn_8013CB68_00003874:
+lbl_npc_updateTalkInteraction_00003874:
     lfs f5, 0x3e0(r1)
     lfs f0, 0x3c8(r1)
     lfs f4, 0x3e4(r1)
@@ -4060,25 +4060,25 @@ lbl_fn_8013CB68_00003874:
     lwz r3, 0x610(r27)
     addi r0, r3, 0x1
     stw r0, 0x610(r27)
-lbl_fn_8013CB68_000038B8:
+lbl_npc_updateTalkInteraction_000038B8:
     lwz r0, 0x54c(r27)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_8013CB68_000038E0
+    bne lbl_npc_updateTalkInteraction_000038E0
     lfs f3, 0x3e4(r1)
     lfs f0, lbl_8088196C
     fcmpo cr0, f3, f0
-    bge lbl_fn_8013CB68_000038E0
+    bge lbl_npc_updateTalkInteraction_000038E0
     stfs f0, 0x3e4(r1)
     stfs f0, 0x3cc(r1)
-lbl_fn_8013CB68_000038E0:
+lbl_npc_updateTalkInteraction_000038E0:
     addi r3, r1, 0x3e0
     lfs f2, 0x3e8(r1)
     psq_l f1, 0x0(r3), 0, 0
     cmpwi r31, 0x0
     psq_st f1, 0x528(r27), 0, 0
     stfs f2, 0x530(r27)
-    beq lbl_fn_8013CB68_0000392C
+    beq lbl_npc_updateTalkInteraction_0000392C
     lwz r0, 0xf54(r27)
     addi r3, r1, 0x3d4
     psq_l f1, 0x0(r3), 0, 0
@@ -4086,18 +4086,18 @@ lbl_fn_8013CB68_000038E0:
     cmpwi r0, 0x0
     psq_st f1, 0x534(r27), 0, 0
     stfs f2, 0x53c(r27)
-    beq lbl_fn_8013CB68_0000392C
+    beq lbl_npc_updateTalkInteraction_0000392C
     lfs f3, 0x538(r27)
     lfs f0, lbl_80881A0C
     fsubs f0, f3, f0
     stfs f0, 0x538(r27)
-lbl_fn_8013CB68_0000392C:
+lbl_npc_updateTalkInteraction_0000392C:
     addi r3, r1, 0x3c8
     lfs f2, 0x3d0(r1)
     psq_l f1, 0x0(r3), 0, 0
     psq_st f1, 0x574(r27), 0, 0
     stfs f2, 0x57c(r27)
-lbl_fn_8013CB68_00003940:
+lbl_npc_updateTalkInteraction_00003940:
     addi r11, r1, 0x6b0
     psq_l f31, 0x6e8(r1), 0, 0
     lfd f31, 0x6e0(r1)

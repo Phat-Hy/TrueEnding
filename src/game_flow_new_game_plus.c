@@ -50,7 +50,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
-extern void fn_806A8E40(void);
+extern void net_getSocket(void);
 extern void net_getMyAid(void);
 
 /* External data declarations */
@@ -1534,7 +1534,7 @@ lbl_fn_804EFF78_00001474:
     li r3, 0x0
     b lbl_fn_804EFF78_0000148C
 lbl_fn_804EFF78_00001488:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804EFF78_0000148C:
     clrlwi r0, r3, 24
 lbl_fn_804EFF78_00001490:

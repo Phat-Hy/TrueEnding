@@ -31,7 +31,7 @@ extern void fn_800E2DD4(void);
 extern void fn_800E2FE0(void);
 extern void fn_800EF73C(void);
 extern void quest_updateFlow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_80151448(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80237518(void);
@@ -1151,7 +1151,7 @@ lbl_fn_8032CBFC_00000E6C:
     mr r3, r31
     bl quest_updateFlow
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     b lbl_fn_8032CBFC_00001060
 lbl_fn_8032CBFC_00000E88:
     lwz r3, 0x1610(r31)
@@ -1166,7 +1166,7 @@ lbl_fn_8032CBFC_00000EA8:
     mr r3, r31
     bl quest_updateFlow
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     b lbl_fn_8032CBFC_00001060
 lbl_fn_8032CBFC_00000EBC:
     lfs f31, 0x2e4(r31)
@@ -1189,7 +1189,7 @@ lbl_fn_8032CBFC_00000EF8:
     mr r3, r31
     bl quest_updateFlow
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     b lbl_fn_8032CBFC_00001060
 lbl_fn_8032CBFC_00000F0C:
     lwz r0, 0x1608(r31)
@@ -1275,7 +1275,7 @@ lbl_fn_8032CBFC_00001044:
     mr r3, r31
     bl quest_updateFlow
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     b lbl_fn_8032CBFC_00001060
 lbl_fn_8032CBFC_00001058:
     mr r3, r31

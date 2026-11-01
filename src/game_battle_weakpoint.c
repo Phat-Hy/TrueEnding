@@ -42,7 +42,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void std_fmod(void);
-extern void fn_806A8E40(void);
+extern void net_getSocket(void);
 extern void net_getMyAid(void);
 extern void fn_806B1250(void);
 
@@ -874,7 +874,7 @@ lbl_fn_803FC134_00000A44:
     li r3, 0x0
     b lbl_fn_803FC134_00000A5C
 lbl_fn_803FC134_00000A58:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_803FC134_00000A5C:
     clrlwi r29, r3, 24
 lbl_fn_803FC134_00000A60:

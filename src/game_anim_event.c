@@ -22,7 +22,7 @@ extern void scissor_clipFrustum(void);
 extern void fn_80109828(void);
 extern void fn_80126214(void);
 extern void fn_8013A258(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_801426A4(void);
 extern void fn_8015C0C0(void);
 extern void fn_8015C6A0(void);
@@ -430,7 +430,7 @@ lbl_fn_802747D0_000004D4:
     fmr f1, f3
     li r5, 0x0
     fmuls f2, f0, f30
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_802747D0_000004E8:
     lwz r0, 0x224(r1)
     psq_l f31, 0x218(r1), 0, 0

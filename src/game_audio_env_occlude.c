@@ -9,7 +9,7 @@ extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void vec3_toEulerAngles(void);
 extern void str_initFromCStr(void);
-extern void fn_8004212C(void);
+extern void str_getData(void);
 extern void collision_testLineSegment(void);
 extern void fn_80057A64(void);
 extern void talk_parseQuotedString(void);
@@ -44,7 +44,7 @@ extern void fn_800F52F0(void);
 extern void system_getNextSequenceId(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_80158E1C(void);
 extern void actor_setState(void);
 extern void fn_8020A780(void);
@@ -1121,7 +1121,7 @@ asm void fn_8031B0A8(void)
 lbl_fn_8031B0A8_00000DDC:
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     addi r4, r30, 0x2d
     li r5, 0x8
     bl strncmp
@@ -1129,7 +1129,7 @@ lbl_fn_8031B0A8_00000DDC:
     bne lbl_fn_8031B0A8_00000E18
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     addi r3, r1, 0x20
     addi r4, r4, 0x8
@@ -1158,7 +1158,7 @@ lbl_fn_8031B0A8_00000E20:
     addi r5, r1, 0x20
     bl fn_8006AFF8
     addi r3, r1, 0x8
-    bl fn_8004212C
+    bl str_getData
     lwz r12, 0x14b0(r29)
     mr r4, r3
     addi r3, r29, 0x14b0
@@ -2140,7 +2140,7 @@ lbl_fn_8031B9B4_00001C5C:
     bl fn_8031D350
 lbl_fn_8031B9B4_00001CA8:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
     bl quest_updateFlow
     lfs f9, 0x52c(r31)

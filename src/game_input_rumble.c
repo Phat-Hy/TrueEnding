@@ -37,7 +37,7 @@ extern void boss_updatePhaseState(void);
 extern void fn_801446F0(void);
 extern void fn_80144710(void);
 extern void quest_updateFlow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_801539E0(void);
 extern void fn_80155DAC(void);
 extern void fn_80158BB4(void);
@@ -2418,7 +2418,7 @@ lbl_fn_802F2294_00001F64:
     bl fn_80040B40
 lbl_fn_802F2294_00001FB0:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
     bl quest_updateFlow
     lwz r0, 0x58c(r31)

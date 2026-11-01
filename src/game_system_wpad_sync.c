@@ -74,7 +74,7 @@ extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_8047E4BC(void);
 extern void fn_80490EB8(void);
 extern void fn_804A1DDC(void);
@@ -1485,7 +1485,7 @@ lbl_world_Manager_destructor_000011F4:
     mr r4, r25
     bl fn_8046F96C
     addi r3, r28, 0x550c
-    bl fn_80473F88
+    bl shockwave_freeEmitter
 lbl_world_Manager_destructor_00001228:
     bl fn_800EF8DC
     bl fn_80442F68

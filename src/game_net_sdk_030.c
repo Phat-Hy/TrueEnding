@@ -68,7 +68,7 @@ extern void fn_806E8B10(void);
 extern void fn_806E8E10(void);
 extern void fn_806E8FB0(void);
 extern void fn_806E91A0(void);
-extern void fn_806E91F0(void);
+extern void net_copyStringSafe(void);
 extern void memmove(void);
 extern int sprintf(char* str, const char* format, ...);
 extern void strchr(void);
@@ -142,7 +142,7 @@ asm void fn_806DDA30(void)
     bne lbl_fn_806DDA30_00000054
     mr r3, r20
     addi r4, r23, 0x154
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x2
     b lbl_fn_806DDA30_00000410
 lbl_fn_806DDA30_00000054:
@@ -432,7 +432,7 @@ asm void fn_806DDE60(void)
     bne lbl_fn_806DDE60_0000047C
     mr r3, r27
     addi r4, r31, 0x154
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x2
     b lbl_fn_806DDE60_0000058C
 lbl_fn_806DDE60_0000047C:
@@ -442,7 +442,7 @@ lbl_fn_806DDE60_0000047C:
     bne lbl_fn_806DDE60_000004A0
     mr r3, r27
     addi r4, r31, 0x154
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x2
     b lbl_fn_806DDE60_0000058C
 lbl_fn_806DDE60_000004A0:
@@ -562,7 +562,7 @@ asm void fn_806DE020(void)
     bne lbl_fn_806DE020_00000644
     mr r3, r28
     addi r4, r30, 0x154
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x2
     b lbl_fn_806DE020_00000844
 lbl_fn_806DE020_00000644:
@@ -598,7 +598,7 @@ lbl_fn_806DE020_000006B0:
     bgt lbl_fn_806DE020_000006C8
     mr r3, r28
     addi r4, r30, 0x154
-    bl fn_806E91F0
+    bl net_copyStringSafe
     b lbl_fn_806DE020_000006EC
 lbl_fn_806DE020_000006C8:
     mr r3, r28
@@ -721,7 +721,7 @@ asm void fn_806DE290(void)
     bgt lbl_fn_806DE290_00000894
     lis r4, lbl_807C2F24@ha
     addi r4, r4, lbl_807C2F24@l
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x2
     b lbl_fn_806DE290_000008B0
 lbl_fn_806DE290_00000894:
@@ -767,7 +767,7 @@ asm void fn_806DE2F0(void)
     lis r4, lbl_807C2FC8@ha
     mr r3, r27
     addi r4, r4, lbl_807C2FC8@l
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DE2F0_00000954
 lbl_fn_806DE2F0_0000092C:
@@ -828,7 +828,7 @@ lbl_fn_806DE3A0_000009D0:
     lis r4, lbl_807C2FC8@ha
     mr r3, r25
     addi r4, r4, lbl_807C2FC8@l
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DE3A0_00000A38
 lbl_fn_806DE3A0_00000A04:
@@ -1137,7 +1137,7 @@ lbl_fn_806DE7F0_00000E08:
     lis r4, lbl_807C2FC8@ha
     mr r3, r19
     addi r4, r4, lbl_807C2FC8@l
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DE7F0_00000EF4
 lbl_fn_806DE7F0_00000E48:
@@ -1163,7 +1163,7 @@ lbl_fn_806DE7F0_00000E50:
     lis r4, lbl_807C3008@ha
     mr r3, r19
     addi r4, r4, lbl_807C3008@l
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x3
     b lbl_fn_806DE7F0_00000EF4
 lbl_fn_806DE7F0_00000EA8:
@@ -1592,7 +1592,7 @@ asm void fn_806DEE40(void)
     lis r4, lbl_807C3048@ha
     mr r3, r26
     addi r4, r4, lbl_807C3048@l
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DEE40_000014CC
 lbl_fn_806DEE40_00001468:
@@ -2167,7 +2167,7 @@ lbl_fn_806DF610_00001C54:
     beq lbl_fn_806DF610_00001C74
     mr r3, r18
     addi r4, r31, 0x160
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x2
     b lbl_fn_806DF610_00001E1C
 lbl_fn_806DF610_00001C74:
@@ -2187,7 +2187,7 @@ lbl_fn_806DF610_00001C94:
 lbl_fn_806DF610_00001CA0:
     mr r3, r18
     addi r4, r31, 0x174
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x2
     b lbl_fn_806DF610_00001E1C
 lbl_fn_806DF610_00001CB4:
@@ -2216,7 +2216,7 @@ lbl_fn_806DF610_00001CB4:
     bne lbl_fn_806DF610_00001D24
     mr r3, r18
     addi r4, r31, 0x188
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DF610_00001E1C
 lbl_fn_806DF610_00001D24:

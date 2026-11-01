@@ -36,7 +36,7 @@ extern void str_findChar(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_80475DF8(void);
 extern void PSMTXConcat(void);
 extern void PSMTXMultVec(void);
@@ -2162,7 +2162,7 @@ lbl_fn_8009FE24_00001D2C:
     mr r3, r24
     bl fn_800A005C
     mr r3, r24
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     stw r29, 0x8(r24)
 lbl_fn_8009FE24_00001D40:
     lwz r0, 0xc(r24)
@@ -2235,7 +2235,7 @@ lbl_fn_8009FFCC_00001E1C:
     mr r3, r31
     bl fn_800A005C
     mr r3, r31
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x1
     stw r0, 0x8(r31)
 lbl_fn_8009FFCC_00001E34:

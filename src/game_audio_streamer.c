@@ -18,7 +18,7 @@ extern void fn_800EB7A0(void);
 extern void fn_800EE360(void);
 extern void atn_LH_Xsca_destructor(void);
 extern void system_getNextSequenceId(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void fn_8016E864(void);
@@ -293,7 +293,7 @@ lbl_fn_802FB39C_000002B0:
     stfs f2, 0x88(r1)
     stfs f2, 0x54(r1)
     lfs f2, lbl_80884994
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     li r0, 0x1e
     stw r0, 0x1434(r30)
 lbl_fn_802FB39C_000002E8:

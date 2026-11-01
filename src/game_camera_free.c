@@ -10,7 +10,7 @@ extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void fn_80126214(void);
 extern void fn_8013A258(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void quest_ctorRewardItem(void);
 extern void fn_80151448(void);
 extern void equip_applyToCharacter(void);
@@ -428,7 +428,7 @@ lbl_fn_802E683C_00000528:
     addi r4, r1, 0xec
     fmuls f2, f30, f0
     li r5, 0x0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_802E683C_00000544:
     lwz r3, 0x14e0(r31)
     lwz r0, 0x1500(r31)
@@ -658,7 +658,7 @@ lbl_fn_802E683C_00000878:
     addi r4, r1, 0x74
     fmuls f2, f29, f0
     li r5, 0x0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_802E683C_00000894:
     mr r3, r31
     bl fn_802E7740

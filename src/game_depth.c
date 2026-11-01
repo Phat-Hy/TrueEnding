@@ -24,7 +24,7 @@ struct atn_LoadHandle; extern void atn_LoadHandle_constructor(void*);
 extern void atn_LoadHandle_destructor(void*, int);
 extern void atn_LoadHandle_getStatus(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void*);
+extern void shockwave_freeEmitter(void*);
 extern void taskManager_updateTasks(void);
 extern void fn_80478158(void);
 extern void PSMTXConcat(void);
@@ -156,7 +156,7 @@ atn_LoadHandle* atn_LH_Texture_destructor(atn_LoadHandle* handle, int flags)
 static inline void atn_LH_Texture_release_inline(atn_LH_Texture* this)
 {
     void* buffer;
-    fn_80473F88(&this->handle);
+    shockwave_freeEmitter(&this->handle);
     buffer = this->field_28;
     this->field_2c = 0;
     if (buffer != NULL) {
@@ -297,7 +297,7 @@ asm void fn_800D5A3C(void)
     lwz r29, 0x40(r4)
     beq lbl_fn_800D5A3C_000003D4
     addi r3, r3, 0x20
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r28, 0x28(r27)
     li r31, 0x0
     stb r31, 0x2c(r27)
@@ -375,7 +375,7 @@ asm void fn_800D5B58(void)
     mr r29, r7
     beq lbl_fn_800D5B58_000004F4
     addi r3, r3, 0x20
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r30, 0x28(r25)
     li r31, 0x0
     stb r31, 0x2c(r25)

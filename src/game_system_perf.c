@@ -40,7 +40,7 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void PSMTXConcat(void);
 extern void PSMTXTrans(void);
 extern void PSMTXScale(void);
@@ -1184,7 +1184,7 @@ asm void fn_802039A0(void)
     cmpwi r31, 0x0
     beq lbl_fn_802039A0_00000F94
     mr r3, r31
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     stw r0, 0x8(r31)
     lwz r31, 0x18(r30)
@@ -1695,7 +1695,7 @@ asm void fn_80204028(void)
     cmpwi r0, 0x0
     beq lbl_fn_80204028_0000160C
     mr r3, r0
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r3, 0x18(r31)
     cmpwi r3, 0x0
     beq lbl_fn_80204028_00001604
@@ -1790,7 +1790,7 @@ asm void fn_80204150(void)
     cmpwi r0, 0x0
     beq lbl_fn_80204150_0000176C
     mr r3, r0
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r3, 0x18(r30)
     cmpwi r3, 0x0
     beq lbl_fn_80204150_00001730

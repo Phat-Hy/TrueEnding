@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
-extern void fn_8004212C(void);
+extern void str_getData(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -712,7 +712,7 @@ asm void fn_80219F84(void)
 lbl_fn_80219F84_00000864:
     addi r3, r1, 0x260
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     bl str_skipWhitespace
     stfs f1, 0x74(r30)
     addi r3, r1, 0x188
@@ -752,11 +752,11 @@ lbl_fn_80219F84_000008CC:
     addi r3, r1, 0x8
     bl fn_8020A780
     addi r3, r1, 0x8
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     stw r3, 0x90(r27)
     addi r3, r1, 0x8
-    bl fn_8004212C
+    bl str_getData
     li r4, 0x3a
     bl strchr
     cmpwi r3, 0x0
@@ -796,7 +796,7 @@ lbl_fn_80219F84_00000934:
 lbl_fn_80219F84_000009A4:
     addi r3, r1, 0x224
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     bl atoi
     stw r3, 0x98(r30)
     addi r3, r1, 0xec

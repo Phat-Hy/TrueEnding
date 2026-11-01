@@ -22,7 +22,7 @@ extern void fn_804FB224(void);
 extern void fn_8050128C(void);
 extern void fn_8050E098(void);
 extern void wcslen(void);
-extern void fn_806A8E40(void);
+extern void net_getSocket(void);
 extern void net_getMyAid(void);
 
 /* External data declarations */
@@ -561,7 +561,7 @@ lbl_fn_804F50E0_00000660:
     beq lbl_fn_804F50E0_00000670
     b lbl_fn_804F50E0_00000674
 lbl_fn_804F50E0_00000670:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804F50E0_00000674:
     clrlwi r3, r3, 24
 lbl_fn_804F50E0_00000678:
@@ -686,7 +686,7 @@ lbl_fn_804F50E0_00000800:
     li r3, 0x0
     b lbl_fn_804F50E0_00000818
 lbl_fn_804F50E0_00000814:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804F50E0_00000818:
     clrlwi r0, r3, 24
 lbl_fn_804F50E0_0000081C:
@@ -744,7 +744,7 @@ lbl_fn_804F50E0_000008C0:
     li r3, 0x0
     b lbl_fn_804F50E0_000008D8
 lbl_fn_804F50E0_000008D4:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804F50E0_000008D8:
     clrlwi r0, r3, 24
 lbl_fn_804F50E0_000008DC:

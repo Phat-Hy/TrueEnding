@@ -6,7 +6,7 @@ extern void _restgpr_14(void);
 extern void _restgpr_27(void);
 extern void _savegpr_14(void);
 extern void _savegpr_27(void);
-extern void fn_80061824(void);
+extern void skill_calcTrajectory(void);
 extern void fn_8006EF48(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
@@ -814,7 +814,7 @@ lbl_fn_804C6E20_00000A18:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     fmr f1, f31
     lwz r3, lbl_8087EEC8
     lfs f2, lbl_808874B4
@@ -839,7 +839,7 @@ lbl_fn_804C6E20_00000A18:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     b lbl_fn_804C6E20_00000D0C
     lwz r3, 0x5c(r3)
     li r4, 0x0

@@ -11,7 +11,7 @@ extern void sys_copyString(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void str_initFromCStr(void);
-extern void fn_8004212C(void);
+extern void str_getData(void);
 extern void fn_80042218(void);
 extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
@@ -1635,7 +1635,7 @@ asm void fn_8046CC90(void)
     cmpwi r0, 0x2f
     bne lbl_fn_8046CC90_00001554
     mr r3, r30
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     addi r3, r1, 0x20
     addi r4, r4, 0x1
@@ -1683,7 +1683,7 @@ lbl_fn_8046CC90_000015AC:
     addi r3, r1, 0x5c
     bl fn_8006BBCC
     addi r3, r1, 0x44
-    bl fn_8004212C
+    bl str_getData
     mr r31, r3
     bl fn_8020A3E4
     bl fn_8046D194
@@ -1694,7 +1694,7 @@ lbl_fn_8046CC90_000015AC:
     addi r6, r6, 0x1
     bl fn_8006C3F0
     addi r3, r1, 0x38
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     addi r3, r1, 0x5c
     li r5, 0x0
@@ -1737,7 +1737,7 @@ lbl_fn_8046CC90_00001698:
     cmpwi r3, 0x0
     bne lbl_fn_8046CC90_00001760
     addi r3, r1, 0x50
-    bl fn_8004212C
+    bl str_getData
     mr r31, r3
     bl fn_8020A3E4
     mr r5, r31
@@ -1758,7 +1758,7 @@ lbl_fn_8046CC90_00001698:
     li r4, -0x1
     bl dtor_80013D60
     addi r3, r1, 0x2c
-    bl fn_8004212C
+    bl str_getData
     bl fn_8046CBC0
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_00001754

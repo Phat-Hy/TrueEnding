@@ -11,8 +11,8 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8000D430(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void mem_realloc(void);
 extern void fn_8008AD4C(void);
 extern void fn_8009076C(void);
@@ -151,7 +151,7 @@ asm void fn_804038D0(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x308(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r3, lbl_80752844@ha
     addi r30, r3, lbl_80752844@l
 lbl_fn_804038D0_000000B4:
@@ -210,7 +210,7 @@ lbl_fn_804038D0_0000015C:
     stw r3, 0xf4(r31)
 lbl_fn_804038D0_00000180:
     addi r3, r1, 0x308
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_804038D0_000000B4
     lwz r3, 0x10c(r31)
