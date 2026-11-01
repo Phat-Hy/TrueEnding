@@ -7,7 +7,7 @@ extern void _savegpr_20(void);
 extern void fn_8000D114(void);
 extern void fn_8000D124(void);
 extern void fn_80011410(void);
-extern void atn_Model_getBoneMatrix(void);
+extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void fn_80013410(void);
 extern void fn_80092814(void);
 extern void fn_80097C08(void);

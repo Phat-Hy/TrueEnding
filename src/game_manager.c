@@ -19,7 +19,7 @@ extern void fn_8000D3A4(void);
 extern void fn_8000D430(void);
 extern void fn_8000DD0C(void);
 extern void fn_800844D8(void);
-extern void fn_80092814(void);
+extern s32 fn_80092814(void*, u32, int);
 extern void fn_800928B0(void);
 extern void fn_800929C0(void);
 extern void fn_80094958(void);
@@ -119,7 +119,7 @@ void fn_80012CBC(void);
 void fn_80012CE4(void);
 void fn_80012D0C(void);
 void fn_80012D34(void);
-void atn_Model_getBoneMatrix(void);
+void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 void fn_80013338(void);
 void fn_8001336C(void);
 void fn_800133B0(void);
@@ -3826,30 +3826,14 @@ lbl_fn_80012D34_00003198:
     blr
 }
 
-asm void atn_Model_getBoneMatrix(void)
+void* atn_Model_getBoneMatrix(void* model, u32 bone_id)
 {
-    nofralloc
-    stwu r1, -0x10(r1)
-    mflr r0
-    li r5, 0x0
-    stw r0, 0x14(r1)
-    stw r31, 0xc(r1)
-    mr r31, r3
-    bl fn_80092814
-    cmpwi r3, 0x0
-    bge lbl_atn_Model_getBoneMatrix_000031FC
-    li r3, 0x0
-    b lbl_atn_Model_getBoneMatrix_00003208
-lbl_atn_Model_getBoneMatrix_000031FC:
-    mulli r0, r3, 0x30
-    lwz r3, 0x3c(r31)
-    add r3, r3, r0
-lbl_atn_Model_getBoneMatrix_00003208:
-    lwz r0, 0x14(r1)
-    lwz r31, 0xc(r1)
-    mtlr r0
-    addi r1, r1, 0x10
-    blr
+    s32 idx = fn_80092814(model, bone_id, 0);
+    if (idx < 0) {
+        return NULL;
+    } else {
+        return (char*)*(void**)((char*)model + 0x3c) + idx * 0x30;
+    }
 }
 
 asm void fn_80013338(void)

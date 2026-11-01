@@ -11,7 +11,7 @@ extern void dtor_80084684(void);
 extern void fn_8000D0F8(void);
 extern void fn_8000D3A4(void);
 extern void fn_8001047C(void);
-extern void atn_Model_getBoneMatrix(void);
+extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void fn_80013338(void);
 extern void fn_80057A68(void);
 extern void fn_800844D8(void);

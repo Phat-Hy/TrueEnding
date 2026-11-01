@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void fn_8000D0F8(void);
 extern void fn_8000D124(void);
-extern void atn_Model_getBoneMatrix(void);
+extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void fn_80092814(void);
 extern void fn_80097C08(void);
 extern void fn_80097D7C(void);

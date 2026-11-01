@@ -811,3 +811,31 @@ Names applied:
   - net_pollEvent (fn_8071DBE0, 156 B, 748 probe hits)
   - net_workerThreadMain (fn_80718C40, 2,164 B, 748 probe hits)
 Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.
+
+## Session 2026-11-01 - Conversion: atn_Model_getBoneMatrix to 100.0% matching C
+Subject:  track-a: decompile atn_Model_getBoneMatrix (76 B) to 100.0% matching C progress 99.30% -> 99.30%
+Function: atn_Model_getBoneMatrix (fn_800132EC, 76 B, in src/game_manager.c)
+Checklist:
+  1. Converted asm void atn_Model_getBoneMatrix to matching C implementation.
+  2. Prototype swept across 19 referencing translation units:
+     void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
+  3. report.json clean, ninja passed (orig/main.dol: OK).
+Self-check: git diff -U0 -- src/ for 'asm void': -1 / +0 (conversion).
+Source:
+`c
+void* atn_Model_getBoneMatrix(void* model, u32 bone_id)
+{
+    s32 idx = fn_80092814(model, bone_id, 0);
+    if (idx < 0) {
+        return NULL;
+    } else {
+        return (char*)*(void**)((char*)model + 0x3c) + idx * 0x30;
+    }
+}
+`
+Analysis for Track B:
+- Retrieves the 3x4 transform matrix (48 bytes, 0x30) for a given bone ID in a model instance.
+- Calls n_80092814(model, bone_id, 0) (in src/game_compass.c) to resolve the bone index.
+- If found (idx >= 0), indexes into the matrix array pointer at model + 0x3c (*(void**)(model + 0x3c) + idx * 48).
+- Returns NULL (0) if the bone was not found (idx < 0).
+Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.
