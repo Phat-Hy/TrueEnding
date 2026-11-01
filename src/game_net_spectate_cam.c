@@ -103,7 +103,7 @@ extern u32 lbl_80887C38;
 /* Function declarations */
 void fn_80533A2C(void);
 void fn_80533BE0(void);
-void fn_80534074(void);
+void spectateCamera_update(void);
 
 asm void fn_80533A2C(void)
 {
@@ -542,7 +542,7 @@ lbl_fn_80533BE0_00000628:
     blr
 }
 
-asm void fn_80534074(void)
+asm void spectateCamera_update(void)
 {
     nofralloc
     stwu r1, -0xa50(r1)
@@ -619,53 +619,53 @@ asm void fn_80534074(void)
     lwz r4, lbl_8087F0A8
     lwz r0, 0x194(r4)
     cmpwi r0, 0x0
-    beq lbl_fn_80534074_00000810
+    beq lbl_spectateCamera_update_00000810
     lwz r0, 0xbb0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80534074_000007A0
+    beq lbl_spectateCamera_update_000007A0
     lwz r4, 0xbac(r3)
     subic. r0, r4, 0x1
     stw r0, 0xbac(r3)
-    bgt lbl_fn_80534074_00000810
+    bgt lbl_spectateCamera_update_00000810
     li r0, 0x0
     stw r0, 0xbac(r3)
     stw r0, 0xbb0(r3)
-    b lbl_fn_80534074_00000810
-lbl_fn_80534074_000007A0:
+    b lbl_spectateCamera_update_00000810
+lbl_spectateCamera_update_000007A0:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0xe
     bl fn_800A55D4
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00000808
+    beq lbl_spectateCamera_update_00000808
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0xc
     bl fn_800A55D4
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00000808
+    beq lbl_spectateCamera_update_00000808
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0xd
     bl fn_800A55D4
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00000808
+    beq lbl_spectateCamera_update_00000808
     lwz r3, 0xbac(r28)
     addi r0, r3, 0x1
     stw r0, 0xbac(r28)
     cmpwi r0, 0x1e
-    ble lbl_fn_80534074_00000810
+    ble lbl_spectateCamera_update_00000810
     li r0, 0x1
     stw r0, 0xbb0(r28)
-    b lbl_fn_80534074_00000810
-lbl_fn_80534074_00000808:
+    b lbl_spectateCamera_update_00000810
+lbl_spectateCamera_update_00000808:
     li r0, 0x0
     stw r0, 0xbac(r28)
-lbl_fn_80534074_00000810:
+lbl_spectateCamera_update_00000810:
     lwz r0, 0x2ac(r28)
     li r29, 0x0
     cmplwi r0, 0x19
-    bgt lbl_fn_80534074_00002308
+    bgt lbl_spectateCamera_update_00002308
     lis r3, jumptable_807939B8@ha
     slwi r0, r0, 2
     addi r3, r3, jumptable_807939B8@l
@@ -677,7 +677,7 @@ lbl_fn_80534074_00000810:
     li r5, 0x4
     bl fn_800A555C
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_000008DC
+    beq lbl_spectateCamera_update_000008DC
     lwz r3, 0x48(r28)
     lfs f9, 0xa0(r3)
     lfs f0, 0x100(r3)
@@ -685,7 +685,7 @@ lbl_fn_80534074_00000810:
     cror eq, gt, eq
     mfcr r0
     extrwi. r0, r0, 1, 2
-    beq lbl_fn_80534074_000008A4
+    beq lbl_spectateCamera_update_000008A4
     mr r3, r28
     li r4, 0x2
     bl fn_80533BE0
@@ -698,8 +698,8 @@ lbl_fn_80534074_00000810:
     addi r3, r1, 0x3c
     li r4, -0x1
     bl fn_800CB3A0
-    b lbl_fn_80534074_000008DC
-lbl_fn_80534074_000008A4:
+    b lbl_spectateCamera_update_000008DC
+lbl_spectateCamera_update_000008A4:
     lwz r0, 0x598(r30)
     stw r0, 0x2c0(r28)
     lfs f0, lbl_80887C20
@@ -714,28 +714,28 @@ lbl_fn_80534074_000008A4:
     add r0, r4, r0
     add r0, r3, r0
     stw r0, 0x4c(r5)
-lbl_fn_80534074_000008DC:
+lbl_spectateCamera_update_000008DC:
     lwz r0, 0x264(r28)
     cmpwi r0, 0x0
-    bne lbl_fn_80534074_0000091C
+    bne lbl_spectateCamera_update_0000091C
     lwz r3, 0x2c0(r28)
     lwz r0, 0x584(r30)
     cmpw r3, r0
-    blt lbl_fn_80534074_0000091C
+    blt lbl_spectateCamera_update_0000091C
     lwz r0, 0x270(r28)
     cmpwi r0, 0x0
-    beq lbl_fn_80534074_0000091C
+    beq lbl_spectateCamera_update_0000091C
     lfs f1, lbl_80887BB8
     addi r3, r28, 0x268
     lwz r4, 0x588(r30)
     bl fn_8004B158
     li r0, 0x1
     stw r0, 0x264(r28)
-lbl_fn_80534074_0000091C:
+lbl_spectateCamera_update_0000091C:
     lwz r3, 0x2c0(r28)
     lwz r0, 0x590(r30)
     cmpw r3, r0
-    blt lbl_fn_80534074_00000948
+    blt lbl_spectateCamera_update_00000948
     lwz r3, 0x48(r28)
     lfs f0, lbl_80887BB8
     lwz r0, 0x38(r3)
@@ -743,11 +743,11 @@ lbl_fn_80534074_0000091C:
     stw r0, 0x38(r3)
     lwz r3, 0x48(r28)
     stfs f0, 0x104(r3)
-lbl_fn_80534074_00000948:
+lbl_spectateCamera_update_00000948:
     lwz r3, 0x2c0(r28)
     lwz r0, 0x594(r30)
     cmpw r3, r0
-    blt lbl_fn_80534074_00000990
+    blt lbl_spectateCamera_update_00000990
     lwz r3, 0x50(r28)
     lfs f9, lbl_80887BB8
     lwz r0, 0x38(r3)
@@ -760,22 +760,22 @@ lbl_fn_80534074_00000948:
     lfs f9, 0x100(r3)
     fcmpo cr0, f9, f0
     cror eq, gt, eq
-    bne lbl_fn_80534074_00000990
+    bne lbl_spectateCamera_update_00000990
     stfs f0, 0x100(r3)
-lbl_fn_80534074_00000990:
+lbl_spectateCamera_update_00000990:
     lwz r3, 0x2c0(r28)
     lwz r0, 0x598(r30)
     cmpw r3, r0
-    blt lbl_fn_80534074_000009A4
+    blt lbl_spectateCamera_update_000009A4
     li r29, 0x1
-lbl_fn_80534074_000009A4:
+lbl_spectateCamera_update_000009A4:
     lwz r3, 0x2c0(r28)
     addi r0, r3, 0x1
     stw r0, 0x2c0(r28)
-    b lbl_fn_80534074_00002308
+    b lbl_spectateCamera_update_00002308
     lwz r0, 0x2c0(r28)
     cmpwi r0, 0x1
-    bne lbl_fn_80534074_00000F90
+    bne lbl_spectateCamera_update_00000F90
     lwz r5, 0x48(r28)
     addi r3, r28, 0x368
     li r0, 0x1
@@ -1111,10 +1111,10 @@ lbl_fn_80534074_000009A4:
     lwz r3, lbl_8087EFB4
     lwz r3, 0x10(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00000F08
+    beq lbl_spectateCamera_update_00000F08
     lwz r0, 0xba8(r28)
     stw r0, 0x4(r3)
-lbl_fn_80534074_00000F08:
+lbl_spectateCamera_update_00000F08:
     lwz r3, lbl_8087F3C0
     mr r4, r28
     li r5, 0x0
@@ -1148,8 +1148,8 @@ lbl_fn_80534074_00000F08:
     stw r11, 0x8(r1)
     stw r0, 0xc(r1)
     bl fn_8023A8B4
-    b lbl_fn_80534074_00001050
-lbl_fn_80534074_00000F90:
+    b lbl_spectateCamera_update_00001050
+lbl_spectateCamera_update_00000F90:
     lwz r3, 0x4c(r28)
     li r26, 0x0
     lfs f0, lbl_80887BB4
@@ -1162,15 +1162,15 @@ lbl_fn_80534074_00000F90:
     stfs f0, 0x100(r3)
     lwz r0, 0x2c0(r28)
     cmpwi r0, 0x3c
-    blt lbl_fn_80534074_00000FC8
+    blt lbl_spectateCamera_update_00000FC8
     li r26, 0x1
-lbl_fn_80534074_00000FC8:
+lbl_spectateCamera_update_00000FC8:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
     bl fn_800A555C
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00001000
+    beq lbl_spectateCamera_update_00001000
     lwz r5, 0x2cc(r28)
     li r26, 0x1
     lwz r4, 0x5c(r5)
@@ -1179,15 +1179,15 @@ lbl_fn_80534074_00000FC8:
     add r0, r4, r0
     add r0, r3, r0
     stw r0, 0x4c(r5)
-lbl_fn_80534074_00001000:
+lbl_spectateCamera_update_00001000:
     cmpwi r26, 0x0
-    beq lbl_fn_80534074_00001050
+    beq lbl_spectateCamera_update_00001050
     mr r3, r28
     li r4, 0x3
     bl fn_80533BE0
     lwz r0, 0x2e8(r28)
     cmpwi r0, 0x0
-    beq lbl_fn_80534074_0000290C
+    beq lbl_spectateCamera_update_0000290C
     lwz r5, 0x2e4(r28)
     lwz r3, 0x258(r28)
     lwz r4, 0x0(r5)
@@ -1196,15 +1196,15 @@ lbl_fn_80534074_00001000:
     bl fn_804A0F58
     lwz r0, 0x2e8(r28)
     cmplwi r0, 0x1
-    ble lbl_fn_80534074_0000290C
+    ble lbl_spectateCamera_update_0000290C
     li r0, 0x1
     stw r0, 0x2dc(r28)
-    b lbl_fn_80534074_0000290C
-lbl_fn_80534074_00001050:
+    b lbl_spectateCamera_update_0000290C
+lbl_spectateCamera_update_00001050:
     lwz r3, 0x2c0(r28)
     addi r0, r3, 0x1
     stw r0, 0x2c0(r28)
-    b lbl_fn_80534074_00002308
+    b lbl_spectateCamera_update_00002308
     lwz r3, 0x4c(r28)
     lfs f0, lbl_80887BB4
     lwz r0, 0x38(r3)
@@ -1217,19 +1217,19 @@ lbl_fn_80534074_00001050:
     lwz r3, 0x2c0(r28)
     lwz r0, 0x6a4(r28)
     cmpw r3, r0
-    bge lbl_fn_80534074_000010A0
+    bge lbl_spectateCamera_update_000010A0
     addi r0, r3, 0x1
     stw r0, 0x2c0(r28)
-    b lbl_fn_80534074_00002308
-lbl_fn_80534074_000010A0:
+    b lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_000010A0:
     lwz r3, 0x2c8(r28)
     bl fn_8006A204
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00002308
+    beq lbl_spectateCamera_update_00002308
     mr r3, r28
     li r4, 0x4
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
+    b lbl_spectateCamera_update_00002308
     lwz r3, 0x4c(r28)
     li r4, 0x0
     lfs f0, lbl_80887BB4
@@ -1244,24 +1244,24 @@ lbl_fn_80534074_000010A0:
     lwz r3, lbl_8087EF70
     bl fn_800A555C
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_000011B8
+    beq lbl_spectateCamera_update_000011B8
     lwz r0, 0x2c4(r28)
     addi r3, r28, 0x6c0
     cmpwi r0, 0x0
-    bne lbl_fn_80534074_0000113C
+    bne lbl_spectateCamera_update_0000113C
     bl fn_803CE44C
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_0000113C
+    beq lbl_spectateCamera_update_0000113C
     mr r3, r28
     li r4, 0x6
     bl fn_80533BE0
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00001194
+    beq lbl_spectateCamera_update_00001194
     li r4, 0xc
     bl fn_80364E7C
-    b lbl_fn_80534074_00001194
-lbl_fn_80534074_0000113C:
+    b lbl_spectateCamera_update_00001194
+lbl_spectateCamera_update_0000113C:
     addi r3, r1, 0x848
     addi r4, r1, 0x84
     bl fn_803B854C
@@ -1271,21 +1271,21 @@ lbl_fn_80534074_0000113C:
     bl fn_800A4BE4
     lwz r0, 0x80(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_80534074_00001188
+    beq lbl_spectateCamera_update_00001188
     mr r3, r28
     li r4, 0x6
     bl fn_80533BE0
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00001194
+    beq lbl_spectateCamera_update_00001194
     li r4, 0xc
     bl fn_80364E7C
-    b lbl_fn_80534074_00001194
-lbl_fn_80534074_00001188:
+    b lbl_spectateCamera_update_00001194
+lbl_spectateCamera_update_00001188:
     mr r3, r28
     li r4, 0x5
     bl fn_80533BE0
-lbl_fn_80534074_00001194:
+lbl_spectateCamera_update_00001194:
     lwz r4, 0x58(r31)
     addi r3, r1, 0x38
     lfs f1, lbl_80887BB8
@@ -1295,7 +1295,7 @@ lbl_fn_80534074_00001194:
     addi r3, r1, 0x38
     li r4, -0x1
     bl fn_800CB3A0
-lbl_fn_80534074_000011B8:
+lbl_spectateCamera_update_000011B8:
     lwz r3, 0x2c0(r28)
     lis r0, 0x4330
     stw r0, 0x948(r1)
@@ -1307,13 +1307,13 @@ lbl_fn_80534074_000011B8:
     fsubs f9, f9, f10
     fcmpo cr0, f9, f0
     cror eq, gt, eq
-    bne lbl_fn_80534074_000011EC
+    bne lbl_spectateCamera_update_000011EC
     li r29, 0x1
-lbl_fn_80534074_000011EC:
+lbl_spectateCamera_update_000011EC:
     lwz r3, 0x2c0(r28)
     addi r0, r3, 0x1
     stw r0, 0x2c0(r28)
-    b lbl_fn_80534074_00002308
+    b lbl_spectateCamera_update_00002308
     lwz r3, 0x4c(r28)
     addi r4, r1, 0x7c
     lfs f0, lbl_80887BB4
@@ -1327,26 +1327,26 @@ lbl_fn_80534074_000011EC:
     lwz r3, lbl_8087EF68
     bl fn_800A4228
     cmpwi r3, 0x0
-    bne lbl_fn_80534074_0000131C
+    bne lbl_spectateCamera_update_0000131C
     lwz r0, 0x7c(r1)
     cmpwi r0, 0x0
-    bne lbl_fn_80534074_000012D8
+    bne lbl_spectateCamera_update_000012D8
     lwz r3, lbl_8087EF68
     addi r4, r1, 0x78
     addi r5, r1, 0x7c
     bl fn_800A472C
     cmpwi r3, 0x0
-    bne lbl_fn_80534074_0000127C
+    bne lbl_spectateCamera_update_0000127C
     mr r3, r28
     li r4, 0x6
     bl fn_80533BE0
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_0000131C
+    beq lbl_spectateCamera_update_0000131C
     li r4, 0xc
     bl fn_80364E7C
-    b lbl_fn_80534074_0000131C
-lbl_fn_80534074_0000127C:
+    b lbl_spectateCamera_update_0000131C
+lbl_spectateCamera_update_0000127C:
     lwz r3, lbl_8087EF68
     addi r4, r1, 0x7c
     bl fn_800A4E08
@@ -1356,42 +1356,42 @@ lbl_fn_80534074_0000127C:
     lwz r3, 0x78(r1)
     lwz r0, 0x74(r1)
     cmplw r3, r0
-    beq lbl_fn_80534074_000012C8
+    beq lbl_spectateCamera_update_000012C8
     mr r3, r28
     li r4, 0x6
     bl fn_80533BE0
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_0000131C
+    beq lbl_spectateCamera_update_0000131C
     li r4, 0xc
     bl fn_80364E7C
-    b lbl_fn_80534074_0000131C
-lbl_fn_80534074_000012C8:
+    b lbl_spectateCamera_update_0000131C
+lbl_spectateCamera_update_000012C8:
     mr r3, r28
     li r4, 0x9
     bl fn_80533BE0
-    b lbl_fn_80534074_0000131C
-lbl_fn_80534074_000012D8:
+    b lbl_spectateCamera_update_0000131C
+lbl_spectateCamera_update_000012D8:
     cmpwi r0, 0x5
-    beq lbl_fn_80534074_000012E8
+    beq lbl_spectateCamera_update_000012E8
     cmpwi r0, 0xe
-    bne lbl_fn_80534074_00001310
-lbl_fn_80534074_000012E8:
+    bne lbl_spectateCamera_update_00001310
+lbl_spectateCamera_update_000012E8:
     mr r3, r28
     li r4, 0x6
     bl fn_80533BE0
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_0000131C
+    beq lbl_spectateCamera_update_0000131C
     lwz r4, 0x7c(r1)
     addi r4, r4, 0x7
     bl fn_80364E7C
-    b lbl_fn_80534074_0000131C
-lbl_fn_80534074_00001310:
+    b lbl_spectateCamera_update_0000131C
+lbl_spectateCamera_update_00001310:
     mr r3, r28
     li r4, 0x9
     bl fn_80533BE0
-lbl_fn_80534074_0000131C:
+lbl_spectateCamera_update_0000131C:
     lwz r3, 0x4c(r28)
     lfs f0, lbl_80887BB4
     lwz r0, 0x38(r3)
@@ -1403,24 +1403,24 @@ lbl_fn_80534074_0000131C:
     stfs f0, 0x100(r3)
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00001350
+    beq lbl_spectateCamera_update_00001350
     bl fn_8036503C
-lbl_fn_80534074_00001350:
+lbl_spectateCamera_update_00001350:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
     bl fn_800A555C
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00001410
+    beq lbl_spectateCamera_update_00001410
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00001378
+    beq lbl_spectateCamera_update_00001378
     bl fn_80365320
-lbl_fn_80534074_00001378:
+lbl_spectateCamera_update_00001378:
     lwz r3, lbl_8087F420
     lwz r0, 0x40(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80534074_000013D8
+    bne lbl_spectateCamera_update_000013D8
     addi r3, r1, 0x648
     addi r4, r1, 0x70
     bl fn_803B854C
@@ -1440,8 +1440,8 @@ lbl_fn_80534074_00001378:
     addi r3, r1, 0x34
     li r4, -0x1
     bl fn_800CB3A0
-    b lbl_fn_80534074_00002308
-lbl_fn_80534074_000013D8:
+    b lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_000013D8:
     mr r3, r28
     li r4, 0x4
     bl fn_80533BE0
@@ -1455,19 +1455,19 @@ lbl_fn_80534074_000013D8:
     addi r3, r1, 0x30
     li r4, -0x1
     bl fn_800CB3A0
-    b lbl_fn_80534074_00002308
-lbl_fn_80534074_00001410:
+    b lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_00001410:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x5
     bl fn_800A555C
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00002308
+    beq lbl_spectateCamera_update_00002308
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00001438
+    beq lbl_spectateCamera_update_00001438
     bl fn_80365320
-lbl_fn_80534074_00001438:
+lbl_spectateCamera_update_00001438:
     mr r3, r28
     li r4, 0x4
     bl fn_80533BE0
@@ -1481,7 +1481,7 @@ lbl_fn_80534074_00001438:
     addi r3, r1, 0x2c
     li r4, -0x1
     bl fn_800CB3A0
-    b lbl_fn_80534074_00002308
+    b lbl_spectateCamera_update_00002308
     lwz r3, 0x4c(r28)
     addi r4, r1, 0x68
     lfs f0, lbl_80887BB4
@@ -1495,10 +1495,10 @@ lbl_fn_80534074_00001438:
     lwz r3, lbl_8087EF68
     bl fn_800A4228
     cmpwi r3, 0x0
-    bne lbl_fn_80534074_00002308
+    bne lbl_spectateCamera_update_00002308
     lwz r0, 0x68(r1)
     cmpwi r0, 0x0
-    bne lbl_fn_80534074_000014DC
+    bne lbl_spectateCamera_update_000014DC
     addi r3, r1, 0x548
     bl fn_803B84DC
     lwz r3, lbl_8087EF68
@@ -1508,14 +1508,14 @@ lbl_fn_80534074_00001438:
     mr r3, r28
     li r4, 0x8
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
-lbl_fn_80534074_000014DC:
+    b lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_000014DC:
     li r0, 0x1
     stw r0, 0x2c4(r28)
     mr r3, r28
     li r4, 0x9
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
+    b lbl_spectateCamera_update_00002308
     lwz r3, 0x4c(r28)
     addi r4, r1, 0x64
     lfs f0, lbl_80887BB4
@@ -1529,39 +1529,39 @@ lbl_fn_80534074_000014DC:
     lwz r3, lbl_8087EF68
     bl fn_800A4228
     cmpwi r3, 0x0
-    bne lbl_fn_80534074_00002308
+    bne lbl_spectateCamera_update_00002308
     addi r3, r28, 0x6c0
     li r4, 0x0
     li r5, 0x20
     bl memset
     lwz r3, lbl_8087F0A8
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00001558
+    beq lbl_spectateCamera_update_00001558
     li r0, 0x0
     stb r0, 0x1140(r3)
     lwz r3, lbl_8087F0A8
     stw r0, 0x113c(r3)
-lbl_fn_80534074_00001558:
+lbl_spectateCamera_update_00001558:
     lwz r3, 0x6e0(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00001570
+    beq lbl_spectateCamera_update_00001570
     bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0x6e0(r28)
-lbl_fn_80534074_00001570:
+lbl_spectateCamera_update_00001570:
     lwz r3, 0x6e4(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00001588
+    beq lbl_spectateCamera_update_00001588
     bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0x6e4(r28)
-lbl_fn_80534074_00001588:
+lbl_spectateCamera_update_00001588:
     li r0, 0x1
     stw r0, 0x2c4(r28)
     mr r3, r28
     li r4, 0x9
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
+    b lbl_spectateCamera_update_00002308
     lwz r3, 0x4c(r28)
     lfs f9, lbl_80887BB8
     lwz r0, 0x38(r3)
@@ -1574,30 +1574,30 @@ lbl_fn_80534074_00001588:
     lfs f9, 0x100(r3)
     fcmpo cr0, f9, f0
     cror eq, gt, eq
-    bne lbl_fn_80534074_000015E4
+    bne lbl_spectateCamera_update_000015E4
     lwz r3, 0x5c(r28)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
-lbl_fn_80534074_000015E4:
+lbl_spectateCamera_update_000015E4:
     lwz r3, 0x5c(r28)
     lfs f0, lbl_80887C30
     lfs f9, 0x100(r3)
     fcmpo cr0, f9, f0
     cror eq, gt, eq
-    bne lbl_fn_80534074_0000160C
+    bne lbl_spectateCamera_update_0000160C
     stfs f0, 0x100(r3)
     lfs f0, lbl_80887BB4
     lwz r3, 0x5c(r28)
     stfs f0, 0x104(r3)
-lbl_fn_80534074_0000160C:
+lbl_spectateCamera_update_0000160C:
     lwz r3, 0x5c(r28)
     li r26, 0x0
     lfs f0, lbl_80887C30
     lfs f9, 0x100(r3)
     fcmpo cr0, f9, f0
     cror eq, gt, eq
-    bne lbl_fn_80534074_00001654
+    bne lbl_spectateCamera_update_00001654
     lwz r3, 0x60(r28)
     lfs f0, lbl_80887C28
     lwz r0, 0x38(r3)
@@ -1607,19 +1607,19 @@ lbl_fn_80534074_0000160C:
     lfs f9, 0x100(r3)
     fcmpo cr0, f9, f0
     cror eq, gt, eq
-    bne lbl_fn_80534074_00001654
+    bne lbl_spectateCamera_update_00001654
     li r26, 0x1
-lbl_fn_80534074_00001654:
+lbl_spectateCamera_update_00001654:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
     bl fn_800A555C
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00001670
+    beq lbl_spectateCamera_update_00001670
     li r26, 0x1
-lbl_fn_80534074_00001670:
+lbl_spectateCamera_update_00001670:
     cmpwi r26, 0x0
-    beq lbl_fn_80534074_00002308
+    beq lbl_spectateCamera_update_00002308
     lwz r5, 0x3e8(r28)
     mr r3, r28
     li r4, 0xb
@@ -1634,7 +1634,7 @@ lbl_fn_80534074_00001670:
     lfs f0, 0x18(r5)
     stfs f0, 0xb4(r28)
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
+    b lbl_spectateCamera_update_00002308
     lwz r3, 0x5c(r28)
     lfs f0, lbl_80887BB4
     lwz r0, 0x38(r3)
@@ -1648,25 +1648,25 @@ lbl_fn_80534074_00001670:
     lfs f9, 0x100(r3)
     fcmpo cr0, f9, f0
     cror eq, lt, eq
-    bne lbl_fn_80534074_000016F0
+    bne lbl_spectateCamera_update_000016F0
     stfs f0, 0x104(r3)
-lbl_fn_80534074_000016F0:
+lbl_spectateCamera_update_000016F0:
     lwz r3, 0x5c(r28)
     lfs f0, lbl_80887BB4
     lfs f9, 0x100(r3)
     fcmpo cr0, f9, f0
     cror eq, lt, eq
-    bne lbl_fn_80534074_00001714
+    bne lbl_spectateCamera_update_00001714
     stfs f0, 0x100(r3)
     lwz r3, 0x5c(r28)
     stfs f0, 0x104(r3)
-lbl_fn_80534074_00001714:
+lbl_spectateCamera_update_00001714:
     lwz r3, 0x5c(r28)
     lfs f0, lbl_80887C34
     lfs f9, 0x100(r3)
     fcmpo cr0, f9, f0
     cror eq, lt, eq
-    bne lbl_fn_80534074_00001748
+    bne lbl_spectateCamera_update_00001748
     lwz r3, 0x4c(r28)
     lfs f0, lbl_80887C24
     lwz r0, 0x38(r3)
@@ -1674,24 +1674,24 @@ lbl_fn_80534074_00001714:
     stw r0, 0x38(r3)
     lwz r3, 0x4c(r28)
     stfs f0, 0x104(r3)
-lbl_fn_80534074_00001748:
+lbl_spectateCamera_update_00001748:
     lwz r3, 0x4c(r28)
     lfs f0, lbl_80887BB4
     lfs f9, 0x100(r3)
     fcmpo cr0, f9, f0
     cror eq, lt, eq
-    bne lbl_fn_80534074_00001770
+    bne lbl_spectateCamera_update_00001770
     mr r3, r28
     li r4, 0x3
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
-lbl_fn_80534074_00001770:
+    b lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_00001770:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
     bl fn_800A555C
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00002308
+    beq lbl_spectateCamera_update_00002308
     lwz r5, 0x3e8(r28)
     mr r3, r28
     li r4, 0x3
@@ -1706,7 +1706,7 @@ lbl_fn_80534074_00001770:
     lfs f0, 0x18(r5)
     stfs f0, 0xb4(r28)
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
+    b lbl_spectateCamera_update_00002308
     lwz r3, 0x5c(r28)
     lfs f0, lbl_80887C30
     lwz r0, 0x38(r3)
@@ -1720,68 +1720,68 @@ lbl_fn_80534074_00001770:
     lfs f9, 0x100(r3)
     fcmpo cr0, f9, f0
     cror eq, lt, eq
-    bne lbl_fn_80534074_0000180C
+    bne lbl_spectateCamera_update_0000180C
     stfs f0, 0x100(r3)
     lfs f0, lbl_80887BB4
     lwz r3, 0x5c(r28)
     stfs f0, 0x104(r3)
-lbl_fn_80534074_0000180C:
+lbl_spectateCamera_update_0000180C:
     lwz r0, 0x2c4(r28)
     li r4, 0x3
     cmpwi r0, 0x0
-    beq lbl_fn_80534074_00001820
+    beq lbl_spectateCamera_update_00001820
     li r4, 0x1
-lbl_fn_80534074_00001820:
+lbl_spectateCamera_update_00001820:
     cmpwi r0, 0x0
     addi r26, r31, 0x68
-    beq lbl_fn_80534074_00001830
+    beq lbl_spectateCamera_update_00001830
     la r26, lbl_80887B80
-lbl_fn_80534074_00001830:
+lbl_spectateCamera_update_00001830:
     cmpwi r0, 0x0
-    bne lbl_fn_80534074_0000185C
+    bne lbl_spectateCamera_update_0000185C
     lwz r3, lbl_8087F0A8
     lwz r0, 0x194(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80534074_0000185C
+    beq lbl_spectateCamera_update_0000185C
     lwz r0, 0x198(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80534074_0000185C
+    bne lbl_spectateCamera_update_0000185C
     li r4, 0x2
     addi r26, r31, 0x78
-lbl_fn_80534074_0000185C:
+lbl_spectateCamera_update_0000185C:
     mr r3, r28
     li r5, 0x1
     bl fn_80533A2C
     cmpwi r3, 0x0
-    bne lbl_fn_80534074_00001954
+    bne lbl_spectateCamera_update_00001954
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
     bl fn_800A555C
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00001904
+    beq lbl_spectateCamera_update_00001904
     lwz r0, 0x2bc(r28)
     slwi r0, r0, 2
     lwzx r0, r26, r0
     cmpwi r0, 0x0
-    beq lbl_fn_80534074_000018B0
+    beq lbl_spectateCamera_update_000018B0
     cmpwi r0, 0x1
-    beq lbl_fn_80534074_000018BC
+    beq lbl_spectateCamera_update_000018BC
     cmpwi r0, 0x2
-    beq lbl_fn_80534074_000018C8
-    b lbl_fn_80534074_000018D0
-lbl_fn_80534074_000018B0:
+    beq lbl_spectateCamera_update_000018C8
+    b lbl_spectateCamera_update_000018D0
+lbl_spectateCamera_update_000018B0:
     li r0, 0x1
     stw r0, 0x2b4(r28)
-    b lbl_fn_80534074_000018D0
-lbl_fn_80534074_000018BC:
+    b lbl_spectateCamera_update_000018D0
+lbl_spectateCamera_update_000018BC:
     li r0, 0x0
     stw r0, 0x2b4(r28)
-    b lbl_fn_80534074_000018D0
-lbl_fn_80534074_000018C8:
+    b lbl_spectateCamera_update_000018D0
+lbl_spectateCamera_update_000018C8:
     li r0, 0x2
     stw r0, 0x2b4(r28)
-lbl_fn_80534074_000018D0:
+lbl_spectateCamera_update_000018D0:
     mr r3, r28
     li r4, 0xc
     bl fn_80533BE0
@@ -1794,14 +1794,14 @@ lbl_fn_80534074_000018D0:
     addi r3, r1, 0x28
     li r4, -0x1
     bl fn_800CB3A0
-    b lbl_fn_80534074_00002308
-lbl_fn_80534074_00001904:
+    b lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_00001904:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x5
     bl fn_800A555C
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00002308
+    beq lbl_spectateCamera_update_00002308
     mr r3, r28
     li r4, 0xa
     bl fn_80533BE0
@@ -1815,11 +1815,11 @@ lbl_fn_80534074_00001904:
     addi r3, r1, 0x24
     li r4, -0x1
     bl fn_800CB3A0
-    b lbl_fn_80534074_00002308
-lbl_fn_80534074_00001954:
+    b lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_00001954:
     lwz r0, 0x2b8(r28)
     stw r0, 0x2bc(r28)
-    b lbl_fn_80534074_00002308
+    b lbl_spectateCamera_update_00002308
     lwz r3, 0x5c(r28)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
@@ -1835,7 +1835,7 @@ lbl_fn_80534074_00001954:
     cror eq, gt, eq
     mfcr r0
     extrwi. r0, r0, 1, 2
-    beq lbl_fn_80534074_00002308
+    beq lbl_spectateCamera_update_00002308
     lwz r3, 0x60(r28)
     lfs f9, 0xa0(r3)
     lfs f0, 0x100(r3)
@@ -1843,66 +1843,66 @@ lbl_fn_80534074_00001954:
     cror eq, gt, eq
     mfcr r0
     extrwi. r0, r0, 1, 2
-    beq lbl_fn_80534074_00002308
+    beq lbl_spectateCamera_update_00002308
     lwz r0, 0x2b4(r28)
     cmpwi r0, 0x0
-    beq lbl_fn_80534074_000019E0
+    beq lbl_spectateCamera_update_000019E0
     cmpwi r0, 0x1
-    beq lbl_fn_80534074_00001A48
+    beq lbl_spectateCamera_update_00001A48
     cmpwi r0, 0x2
-    beq lbl_fn_80534074_00001A58
-    b lbl_fn_80534074_00002308
-lbl_fn_80534074_000019E0:
+    beq lbl_spectateCamera_update_00001A58
+    b lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_000019E0:
     addi r3, r1, 0x448
     addi r4, r1, 0x60
     bl fn_803B854C
     lwz r3, lbl_8087EF68
     li r4, 0x1
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00001A14
+    beq lbl_spectateCamera_update_00001A14
     addi r4, r1, 0x448
     addi r5, r1, 0x5c
     li r6, 0x1
     li r7, 0x0
     bl fn_800A45D0
     mr r4, r3
-lbl_fn_80534074_00001A14:
+lbl_spectateCamera_update_00001A14:
     lwz r0, 0x2c4(r28)
     cmpwi r0, 0x0
-    beq lbl_fn_80534074_00001A38
+    beq lbl_spectateCamera_update_00001A38
     cmpwi r4, 0x0
-    bne lbl_fn_80534074_00001A38
+    bne lbl_spectateCamera_update_00001A38
     mr r3, r28
     li r4, 0x10
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
-lbl_fn_80534074_00001A38:
+    b lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_00001A38:
     mr r3, r28
     li r4, 0x19
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
-lbl_fn_80534074_00001A48:
+    b lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_00001A48:
     mr r3, r28
     li r4, 0xf
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
-lbl_fn_80534074_00001A58:
+    b lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_00001A58:
     mr r3, r28
     li r4, 0xf
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
+    b lbl_spectateCamera_update_00002308
     mr r3, r28
     li r4, 0x2
     li r5, 0x0
     bl fn_80533A2C
     cmpwi r3, 0x0
-    bne lbl_fn_80534074_00002308
+    bne lbl_spectateCamera_update_00002308
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
     bl fn_800A555C
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00001AE8
+    beq lbl_spectateCamera_update_00001AE8
     lwz r0, 0x2b8(r28)
     lis r3, lbl_80793940@ha
     addi r3, r3, lbl_80793940@l
@@ -1922,14 +1922,14 @@ lbl_fn_80534074_00001A58:
     addi r3, r1, 0x20
     li r4, -0x1
     bl fn_800CB3A0
-    b lbl_fn_80534074_00002308
-lbl_fn_80534074_00001AE8:
+    b lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_00001AE8:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x5
     bl fn_800A555C
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00002308
+    beq lbl_spectateCamera_update_00002308
     mr r3, r28
     li r4, 0xb
     bl fn_80533BE0
@@ -1943,21 +1943,21 @@ lbl_fn_80534074_00001AE8:
     addi r3, r1, 0x1c
     li r4, -0x1
     bl fn_800CB3A0
-    b lbl_fn_80534074_00002308
+    b lbl_spectateCamera_update_00002308
     lwz r3, lbl_8087F06C
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00002308
+    beq lbl_spectateCamera_update_00002308
     lwz r0, 0x13c(r3)
     cmpwi r0, 0x7
-    bne lbl_fn_80534074_00001B64
+    bne lbl_spectateCamera_update_00001B64
     bl atn_Task_unlink
     mr r3, r28
     li r4, 0xb
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
-lbl_fn_80534074_00001B64:
+    b lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_00001B64:
     cmpwi r0, 0x8
-    bne lbl_fn_80534074_00002308
+    bne lbl_spectateCamera_update_00002308
     bl atn_Task_unlink
     mr r3, r28
     bl fn_803B8C6C
@@ -1968,37 +1968,37 @@ lbl_fn_80534074_00001B64:
     mr r3, r28
     li r4, 0x15
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
+    b lbl_spectateCamera_update_00002308
     lwz r0, lbl_8087EF68
     cmpwi r0, 0x0
-    beq lbl_fn_80534074_00001BE4
+    beq lbl_spectateCamera_update_00001BE4
     lwz r0, 0x6e8(r28)
     cmpwi r0, 0x0
-    bne lbl_fn_80534074_00001BBC
+    bne lbl_spectateCamera_update_00001BBC
     mr r3, r28
     bl fn_803B8C6C
     stw r3, 0x6e8(r28)
-lbl_fn_80534074_00001BBC:
+lbl_spectateCamera_update_00001BBC:
     lwz r0, lbl_8087F470
     cmpwi r0, 0x0
-    bne lbl_fn_80534074_00001BD4
+    bne lbl_spectateCamera_update_00001BD4
     lwz r4, 0x6e8(r28)
     mr r3, r28
     bl fn_803B9044
-lbl_fn_80534074_00001BD4:
+lbl_spectateCamera_update_00001BD4:
     mr r3, r28
     li r4, 0x11
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
-lbl_fn_80534074_00001BE4:
+    b lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_00001BE4:
     mr r3, r28
     li r4, 0x19
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
+    b lbl_spectateCamera_update_00002308
     mr r3, r28
     bl fn_800D3FA4
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00002308
+    beq lbl_spectateCamera_update_00002308
     addi r3, r1, 0x348
     addi r4, r1, 0x58
     bl fn_803B854C
@@ -2009,7 +2009,7 @@ lbl_fn_80534074_00001BE4:
     cmpwi r4, 0x0
     add r0, r0, r3
     stw r0, 0x58(r1)
-    beq lbl_fn_80534074_00001C4C
+    beq lbl_spectateCamera_update_00001C4C
     li r0, 0x0
     stw r0, 0x168(r4)
     addi r6, r1, 0x54
@@ -2017,54 +2017,54 @@ lbl_fn_80534074_00001BE4:
     lwz r3, lbl_8087EF68
     lwz r4, 0x58(r1)
     bl fn_800A4AD4
-lbl_fn_80534074_00001C4C:
+lbl_spectateCamera_update_00001C4C:
     mr r3, r28
     li r4, 0x12
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
+    b lbl_spectateCamera_update_00002308
     lwz r3, lbl_8087EF68
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00001C78
+    beq lbl_spectateCamera_update_00001C78
     addi r4, r1, 0x50
     bl fn_800A4228
     cmpwi r3, 0x0
-    bne lbl_fn_80534074_00002308
-lbl_fn_80534074_00001C78:
+    bne lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_00001C78:
     lwz r0, lbl_8087EF68
     cmpwi r0, 0x0
-    beq lbl_fn_80534074_00002308
+    beq lbl_spectateCamera_update_00002308
     lwz r4, 0x50(r1)
     cmpwi r4, 0x0
-    bne lbl_fn_80534074_00001CA0
+    bne lbl_spectateCamera_update_00001CA0
     mr r3, r28
     li r4, 0x13
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
-lbl_fn_80534074_00001CA0:
+    b lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_00001CA0:
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00001CB4
+    beq lbl_spectateCamera_update_00001CB4
     addi r4, r4, 0x7
     bl fn_80364E7C
-lbl_fn_80534074_00001CB4:
+lbl_spectateCamera_update_00001CB4:
     mr r3, r28
     li r4, 0x17
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
+    b lbl_spectateCamera_update_00002308
     lwz r3, lbl_8087EF68
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00001CE0
+    beq lbl_spectateCamera_update_00001CE0
     addi r4, r1, 0x4c
     bl fn_800A4228
     cmpwi r3, 0x0
-    bne lbl_fn_80534074_00002308
-lbl_fn_80534074_00001CE0:
+    bne lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_00001CE0:
     lwz r0, lbl_8087EF68
     cmpwi r0, 0x0
-    beq lbl_fn_80534074_00001D80
+    beq lbl_spectateCamera_update_00001D80
     lwz r4, 0x4c(r1)
     cmpwi r4, 0x0
-    bne lbl_fn_80534074_00001D5C
+    bne lbl_spectateCamera_update_00001D5C
     addi r3, r1, 0x248
     addi r4, r1, 0x48
     bl fn_803B854C
@@ -2075,197 +2075,197 @@ lbl_fn_80534074_00001CE0:
     li r7, 0x0
     bl fn_800A45D0
     cmpwi r3, 0x0
-    bne lbl_fn_80534074_00001D38
+    bne lbl_spectateCamera_update_00001D38
     lwz r3, lbl_8087EF68
     addi r4, r1, 0x248
     lwz r5, 0x48(r1)
     addi r6, r1, 0x4c
     bl fn_800A4794
-lbl_fn_80534074_00001D38:
+lbl_spectateCamera_update_00001D38:
     mr r3, r28
     li r4, 0x14
     bl fn_80533BE0
     lwz r3, lbl_8087F9A0
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00002308
+    beq lbl_spectateCamera_update_00002308
     li r0, 0x1
     stw r0, 0x24(r3)
-    b lbl_fn_80534074_00002308
-lbl_fn_80534074_00001D5C:
+    b lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_00001D5C:
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00001D70
+    beq lbl_spectateCamera_update_00001D70
     addi r4, r4, 0x7
     bl fn_80364E7C
-lbl_fn_80534074_00001D70:
+lbl_spectateCamera_update_00001D70:
     mr r3, r28
     li r4, 0x17
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
-lbl_fn_80534074_00001D80:
+    b lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_00001D80:
     mr r3, r28
     li r4, 0x14
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
+    b lbl_spectateCamera_update_00002308
     lwz r3, lbl_8087EF68
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00001DAC
+    beq lbl_spectateCamera_update_00001DAC
     addi r4, r1, 0x44
     bl fn_800A4228
     cmpwi r3, 0x0
-    bne lbl_fn_80534074_00002308
-lbl_fn_80534074_00001DAC:
+    bne lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_00001DAC:
     lwz r0, lbl_8087EF68
     cmpwi r0, 0x0
-    beq lbl_fn_80534074_00001E7C
+    beq lbl_spectateCamera_update_00001E7C
     lwz r4, 0x44(r1)
     cmpwi r4, 0x0
-    bne lbl_fn_80534074_00001E58
+    bne lbl_spectateCamera_update_00001E58
     lwz r3, lbl_8087F0A8
     lwz r0, 0x198(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80534074_00001E48
+    bne lbl_spectateCamera_update_00001E48
     lwz r3, lbl_8087F470
     cmpwi cr1, r3, 0x0
-    beq cr1, lbl_fn_80534074_00001E08
+    beq cr1, lbl_spectateCamera_update_00001E08
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_80534074_00001E08
-    beq cr1, lbl_fn_80534074_00001DF8
+    bne lbl_spectateCamera_update_00001E08
+    beq cr1, lbl_spectateCamera_update_00001DF8
     bl fn_803B9638
-lbl_fn_80534074_00001DF8:
+lbl_spectateCamera_update_00001DF8:
     mr r3, r28
     li r4, 0x16
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
-lbl_fn_80534074_00001E08:
+    b lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_00001E08:
     lwz r0, 0x6e8(r28)
     cmpwi r0, 0x0
-    bne lbl_fn_80534074_00001E20
+    bne lbl_spectateCamera_update_00001E20
     mr r3, r28
     bl fn_803B8C6C
     stw r3, 0x6e8(r28)
-lbl_fn_80534074_00001E20:
+lbl_spectateCamera_update_00001E20:
     lwz r0, lbl_8087F470
     cmpwi r0, 0x0
-    bne lbl_fn_80534074_00001E38
+    bne lbl_spectateCamera_update_00001E38
     lwz r4, 0x6e8(r28)
     mr r3, r28
     bl fn_803B9044
-lbl_fn_80534074_00001E38:
+lbl_spectateCamera_update_00001E38:
     mr r3, r28
     li r4, 0x15
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
-lbl_fn_80534074_00001E48:
+    b lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_00001E48:
     mr r3, r28
     li r4, 0x19
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
-lbl_fn_80534074_00001E58:
+    b lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_00001E58:
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00001E6C
+    beq lbl_spectateCamera_update_00001E6C
     addi r4, r4, 0x7
     bl fn_80364E7C
-lbl_fn_80534074_00001E6C:
+lbl_spectateCamera_update_00001E6C:
     mr r3, r28
     li r4, 0x17
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
-lbl_fn_80534074_00001E7C:
+    b lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_00001E7C:
     mr r3, r28
     li r4, 0x19
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
+    b lbl_spectateCamera_update_00002308
     lwz r3, lbl_8087F470
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00001EA8
+    beq lbl_spectateCamera_update_00001EA8
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_80534074_00002308
-lbl_fn_80534074_00001EA8:
+    bne lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_00001EA8:
     lwz r3, lbl_8087F470
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00001EB8
+    beq lbl_spectateCamera_update_00001EB8
     bl fn_803B9638
-lbl_fn_80534074_00001EB8:
+lbl_spectateCamera_update_00001EB8:
     mr r3, r28
     li r4, 0x16
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
+    b lbl_spectateCamera_update_00002308
     lwz r3, lbl_8087EF68
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00001EE4
+    beq lbl_spectateCamera_update_00001EE4
     addi r4, r1, 0x40
     bl fn_800A4228
     cmpwi r3, 0x0
-    bne lbl_fn_80534074_00002308
-lbl_fn_80534074_00001EE4:
+    bne lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_00001EE4:
     lwz r3, lbl_8087F470
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00001EF4
+    beq lbl_spectateCamera_update_00001EF4
     bl atn_Task_unlink
-lbl_fn_80534074_00001EF4:
+lbl_spectateCamera_update_00001EF4:
     lwz r0, lbl_8087EF68
     cmpwi r0, 0x0
-    beq lbl_fn_80534074_00001F54
+    beq lbl_spectateCamera_update_00001F54
     lwz r4, 0x40(r1)
     cmpwi r4, 0x0
-    bne lbl_fn_80534074_00001F30
+    bne lbl_spectateCamera_update_00001F30
     lwz r3, lbl_8087F9A0
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00001F20
+    beq lbl_spectateCamera_update_00001F20
     li r0, 0x0
     stw r0, 0x24(r3)
-lbl_fn_80534074_00001F20:
+lbl_spectateCamera_update_00001F20:
     mr r3, r28
     li r4, 0x19
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
-lbl_fn_80534074_00001F30:
+    b lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_00001F30:
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00001F44
+    beq lbl_spectateCamera_update_00001F44
     addi r4, r4, 0x7
     bl fn_80364E7C
-lbl_fn_80534074_00001F44:
+lbl_spectateCamera_update_00001F44:
     mr r3, r28
     li r4, 0x17
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
-lbl_fn_80534074_00001F54:
+    b lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_00001F54:
     mr r3, r28
     li r4, 0x19
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
+    b lbl_spectateCamera_update_00002308
     lwz r3, lbl_8087F9A0
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00001F84
+    beq lbl_spectateCamera_update_00001F84
     lwz r0, 0x24(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80534074_00001F84
+    beq lbl_spectateCamera_update_00001F84
     li r0, 0x0
     stw r0, 0x24(r3)
-lbl_fn_80534074_00001F84:
+lbl_spectateCamera_update_00001F84:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
     bl fn_800A555C
     cmpwi r3, 0x0
-    bne lbl_fn_80534074_00001FB4
+    bne lbl_spectateCamera_update_00001FB4
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x5
     bl fn_800A555C
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00002308
-lbl_fn_80534074_00001FB4:
+    beq lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_00001FB4:
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00001FF4
+    beq lbl_spectateCamera_update_00001FF4
     bl fn_80365320
     lwz r3, lbl_8087F420
     li r4, 0x1e
@@ -2279,48 +2279,48 @@ lbl_fn_80534074_00001FB4:
     addi r3, r1, 0x18
     li r4, -0x1
     bl fn_800CB3A0
-lbl_fn_80534074_00001FF4:
+lbl_spectateCamera_update_00001FF4:
     mr r3, r28
     li r4, 0x18
     bl fn_80533BE0
-    b lbl_fn_80534074_00002308
+    b lbl_spectateCamera_update_00002308
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00002014
+    beq lbl_spectateCamera_update_00002014
     bl fn_8036503C
-lbl_fn_80534074_00002014:
+lbl_spectateCamera_update_00002014:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
     bl fn_800A555C
     cmpwi r3, 0x0
-    bne lbl_fn_80534074_00002044
+    bne lbl_spectateCamera_update_00002044
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x5
     bl fn_800A555C
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00002308
-lbl_fn_80534074_00002044:
+    beq lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_00002044:
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00002054
+    beq lbl_spectateCamera_update_00002054
     bl fn_80365320
-lbl_fn_80534074_00002054:
+lbl_spectateCamera_update_00002054:
     lwz r3, lbl_8087F420
     lwz r0, 0x40(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80534074_000020B0
+    bne lbl_spectateCamera_update_000020B0
     lwz r3, lbl_8087F9A0
     li r4, 0x0
     bl fn_805715C8
     lwz r3, lbl_8087EFE8
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00002088
+    beq lbl_spectateCamera_update_00002088
     li r4, 0x19
     li r5, 0x0
     bl fn_800CF45C
-lbl_fn_80534074_00002088:
+lbl_spectateCamera_update_00002088:
     lwz r4, 0x58(r31)
     addi r3, r1, 0x14
     lfs f1, lbl_80887BB8
@@ -2330,8 +2330,8 @@ lbl_fn_80534074_00002088:
     addi r3, r1, 0x14
     li r4, -0x1
     bl fn_800CB3A0
-    b lbl_fn_80534074_00002308
-lbl_fn_80534074_000020B0:
+    b lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_000020B0:
     mr r3, r28
     li r4, 0xb
     bl fn_80533BE0
@@ -2345,24 +2345,24 @@ lbl_fn_80534074_000020B0:
     addi r3, r1, 0x10
     li r4, -0x1
     bl fn_800CB3A0
-    b lbl_fn_80534074_00002308
+    b lbl_spectateCamera_update_00002308
     lwz r3, lbl_8087F9A0
     cmpwi r3, 0x0
-    beq lbl_fn_80534074_00002108
+    beq lbl_spectateCamera_update_00002108
     lwz r0, 0x24(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80534074_00002108
+    beq lbl_spectateCamera_update_00002108
     li r0, 0x0
     stw r0, 0x24(r3)
-lbl_fn_80534074_00002108:
+lbl_spectateCamera_update_00002108:
     lwz r3, 0x2c8(r28)
     lwz r0, 0x4c(r3)
     cmpwi r0, 0x3c
-    blt lbl_fn_80534074_00002308
+    blt lbl_spectateCamera_update_00002308
     addi r3, r28, 0x284
     bl fn_800CB538
     cmpwi r3, 0x0
-    bne lbl_fn_80534074_00002308
+    bne lbl_spectateCamera_update_00002308
     addi r3, r28, 0x270
     bl fn_800CB480
     addi r3, r28, 0x284
@@ -2371,13 +2371,13 @@ lbl_fn_80534074_00002108:
     bl atn_Task_unlink
     lwz r0, 0x2b4(r28)
     cmpwi r0, 0x0
-    beq lbl_fn_80534074_00002160
+    beq lbl_spectateCamera_update_00002160
     cmpwi r0, 0x1
-    beq lbl_fn_80534074_000022DC
+    beq lbl_spectateCamera_update_000022DC
     cmpwi r0, 0x2
-    beq lbl_fn_80534074_000022F4
-    b lbl_fn_80534074_00002308
-lbl_fn_80534074_00002160:
+    beq lbl_spectateCamera_update_000022F4
+    b lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_00002160:
     addi r6, r1, 0x1f4
     addi r3, r1, 0x248
     cmplw r6, r3
@@ -2400,20 +2400,20 @@ lbl_fn_80534074_00002160:
     stw r4, 0x1e8(r1)
     stw r5, 0x1ec(r1)
     stw r5, 0x1f0(r1)
-    bge lbl_fn_80534074_000021E8
+    bge lbl_spectateCamera_update_000021E8
     addi r3, r3, 0xb
     li r0, 0xc
     subf r3, r6, r3
     divwu r3, r3, r0
     mtctr r3
-    bge lbl_fn_80534074_000021E8
-lbl_fn_80534074_000021D4:
+    bge lbl_spectateCamera_update_000021E8
+lbl_spectateCamera_update_000021D4:
     stw r4, 0x0(r6)
     stw r5, 0x4(r6)
     stw r5, 0x8(r6)
     addi r6, r6, 0xc
-    bdnz lbl_fn_80534074_000021D4
-lbl_fn_80534074_000021E8:
+    bdnz lbl_spectateCamera_update_000021D4
+lbl_spectateCamera_update_000021E8:
     lis r10, lbl_807C8458@ha
     lis r3, 0x2
     subi r30, r3, 0x7578
@@ -2464,32 +2464,32 @@ lbl_fn_80534074_000021E8:
     stw r6, 0x30(r9)
     stw r3, 0x34(r9)
     mtctr r0
-lbl_fn_80534074_000022B0:
+lbl_spectateCamera_update_000022B0:
     lwz r3, 0x4(r4)
     lwzu r0, 0x8(r4)
     stw r3, 0x4(r5)
     stwu r0, 0x8(r5)
-    bdnz lbl_fn_80534074_000022B0
+    bdnz lbl_spectateCamera_update_000022B0
     lis r4, lbl_8075D5B0@ha
     lwz r3, lbl_8087F9AC
     addi r4, r4, lbl_8075D5B0@l
     addi r4, r4, 0x21a
     bl fn_80572B70
-    b lbl_fn_80534074_00002308
-lbl_fn_80534074_000022DC:
+    b lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_000022DC:
     lis r4, lbl_8075D5B0@ha
     lwz r3, lbl_8087F9AC
     addi r4, r4, lbl_8075D5B0@l
     addi r4, r4, 0x21a
     bl fn_80572B70
-    b lbl_fn_80534074_00002308
-lbl_fn_80534074_000022F4:
+    b lbl_spectateCamera_update_00002308
+lbl_spectateCamera_update_000022F4:
     lis r4, lbl_8075D5B0@ha
     lwz r3, lbl_8087F9AC
     addi r4, r4, lbl_8075D5B0@l
     addi r4, r4, 0x21f
     bl fn_80572B70
-lbl_fn_80534074_00002308:
+lbl_spectateCamera_update_00002308:
     lwz r4, 0x54(r28)
     addi r3, r1, 0xb8
     li r5, 0x0
@@ -2537,7 +2537,7 @@ lbl_fn_80534074_00002308:
     addi r5, r1, 0xe8
     bl fn_801F48C8
     cmpwi r29, 0x0
-    beq lbl_fn_80534074_0000240C
+    beq lbl_spectateCamera_update_0000240C
     lwz r3, 0x54(r28)
     lfs f9, 0xa0(r3)
     lfs f0, 0x100(r3)
@@ -2545,27 +2545,27 @@ lbl_fn_80534074_00002308:
     cror eq, gt, eq
     mfcr r0
     extrwi. r0, r0, 1, 2
-    beq lbl_fn_80534074_000023FC
+    beq lbl_spectateCamera_update_000023FC
     lwz r3, 0x58(r28)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
-    b lbl_fn_80534074_00002420
-lbl_fn_80534074_000023FC:
+    b lbl_spectateCamera_update_00002420
+lbl_spectateCamera_update_000023FC:
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
-    b lbl_fn_80534074_00002420
-lbl_fn_80534074_0000240C:
+    b lbl_spectateCamera_update_00002420
+lbl_spectateCamera_update_0000240C:
     lwz r3, 0x54(r28)
     lfs f0, lbl_80887BB4
     stfs f0, 0x100(r3)
     lwz r3, 0x58(r28)
     stfs f0, 0x100(r3)
-lbl_fn_80534074_00002420:
+lbl_spectateCamera_update_00002420:
     lwz r0, 0x318(r28)
     cmpwi r0, 0x0
-    beq lbl_fn_80534074_00002468
+    beq lbl_spectateCamera_update_00002468
     lfs f0, 0x340(r28)
     addi r3, r28, 0x64
     stfs f0, 0xb4(r28)
@@ -2580,8 +2580,8 @@ lbl_fn_80534074_00002420:
     lfs f2, 0x80(r28)
     psq_st f1, 0x328(r28), 0, 0
     stfs f2, 0x330(r28)
-    b lbl_fn_80534074_000026C4
-lbl_fn_80534074_00002468:
+    b lbl_spectateCamera_update_000026C4
+lbl_spectateCamera_update_00002468:
     lfs f2, 0x74(r28)
     addi r4, r1, 0x150
     lwz r8, 0x3e8(r28)
@@ -2703,19 +2703,19 @@ lbl_fn_80534074_00002468:
     bl fn_805F9920
     lfs f0, lbl_80887C1C
     fcmpo cr0, f1, f0
-    bge lbl_fn_80534074_00002670
+    bge lbl_spectateCamera_update_00002670
     lwz r0, 0x2ac(r28)
     cmpwi r0, 0xf
-    beq lbl_fn_80534074_00002670
+    beq lbl_spectateCamera_update_00002670
     cmpwi r0, 0x19
-    beq lbl_fn_80534074_00002670
+    beq lbl_spectateCamera_update_00002670
     li r0, 0x0
     stw r0, 0x18c(r1)
-    b lbl_fn_80534074_00002678
-lbl_fn_80534074_00002670:
+    b lbl_spectateCamera_update_00002678
+lbl_spectateCamera_update_00002670:
     li r0, 0x1
     stw r0, 0x18c(r1)
-lbl_fn_80534074_00002678:
+lbl_spectateCamera_update_00002678:
     lwz r3, lbl_8087EFA8
     lwz r0, 0x18c(r1)
     stw r0, 0x240(r3)
@@ -2735,7 +2735,7 @@ lbl_fn_80534074_00002678:
     stfs f0, 0x25c(r3)
     lfs f0, 0x1ac(r1)
     stfs f0, 0x260(r3)
-lbl_fn_80534074_000026C4:
+lbl_spectateCamera_update_000026C4:
     addi r3, r28, 0x64
     bl fn_8004B378
     lwz r6, lbl_8087EFB4
@@ -2872,7 +2872,7 @@ lbl_fn_80534074_000026C4:
     psq_l f1, 0x1ec(r28), 0, 0
     psq_st f1, 0x28c(r6), 0, 0
     stfs f2, 0x294(r6)
-lbl_fn_80534074_000028E4:
+lbl_spectateCamera_update_000028E4:
     lfs f2, 0x8(r4)
     psq_l f1, 0x0(r4), 0, 0
     psq_st f1, 0x0(r5), 0, 0
@@ -2882,8 +2882,8 @@ lbl_fn_80534074_000028E4:
     stfs f0, 0xc(r5)
     addi r5, r5, 0x10
     cmplw r5, r0
-    blt lbl_fn_80534074_000028E4
-lbl_fn_80534074_0000290C:
+    blt lbl_spectateCamera_update_000028E4
+lbl_spectateCamera_update_0000290C:
     li r0, 0xa48
     addi r11, r1, 0x970
     psq_lx f31, r1, r0, 0, 0

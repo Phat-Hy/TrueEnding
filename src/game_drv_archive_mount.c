@@ -142,8 +142,8 @@ extern u32 lbl_80888324;
 extern u32 lbl_80888328;
 
 /* Function declarations */
-void fn_805A6404(void);
-void fn_805A646C(void);
+void arms_attachWeapon(void);
+void arms_updateWeaponState(void);
 void fn_805A6614(void);
 void fn_805A6A84(void);
 void fn_805A6AC0(void);
@@ -164,7 +164,7 @@ void fn_805A7650(void);
 void fn_805A76E4(void);
 void fn_805A7820(void);
 
-asm void fn_805A6404(void)
+asm void arms_attachWeapon(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -176,17 +176,17 @@ asm void fn_805A6404(void)
     li r30, 0x1
     stw r29, 0x14(r1)
     li r29, 0x0
-lbl_fn_805A6404_00000024:
+lbl_arms_attachWeapon_00000024:
     mr r3, r31
     bl atn_LH_Texture_update
     cmpwi r3, 0x0
-    beq lbl_fn_805A6404_00000038
+    beq lbl_arms_attachWeapon_00000038
     li r30, 0x0
-lbl_fn_805A6404_00000038:
+lbl_arms_attachWeapon_00000038:
     addi r29, r29, 0x1
     addi r31, r31, 0x30
     cmpwi r29, 0x2
-    blt lbl_fn_805A6404_00000024
+    blt lbl_arms_attachWeapon_00000024
     mr r3, r30
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -197,7 +197,7 @@ lbl_fn_805A6404_00000038:
     blr
 }
 
-asm void fn_805A646C(void)
+asm void arms_updateWeaponState(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -208,42 +208,42 @@ asm void fn_805A646C(void)
     mr r30, r3
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_805A646C_000000A8
+    beq lbl_arms_updateWeaponState_000000A8
     cmpwi r0, 0x1
-    beq lbl_fn_805A646C_00000108
+    beq lbl_arms_updateWeaponState_00000108
     cmpwi r0, 0x2
-    beq lbl_fn_805A646C_0000016C
+    beq lbl_arms_updateWeaponState_0000016C
     cmpwi r0, 0x3
-    beq lbl_fn_805A646C_000001B0
-    b lbl_fn_805A646C_000001F8
-lbl_fn_805A646C_000000A8:
+    beq lbl_arms_updateWeaponState_000001B0
+    b lbl_arms_updateWeaponState_000001F8
+lbl_arms_updateWeaponState_000000A8:
     lwz r4, 0x50(r3)
     li r31, 0x0
     addi r0, r4, 0x1
     stw r0, 0x50(r3)
     cmpwi r0, 0x1e
-    blt lbl_fn_805A646C_000000DC
+    blt lbl_arms_updateWeaponState_000000DC
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x0
     bl fn_800A5920
     cmpwi r3, 0x0
-    beq lbl_fn_805A646C_000000DC
+    beq lbl_arms_updateWeaponState_000000DC
     li r31, 0x1
-lbl_fn_805A646C_000000DC:
+lbl_arms_updateWeaponState_000000DC:
     lwz r0, 0x50(r30)
     cmpwi r0, 0x257
-    blt lbl_fn_805A646C_000000EC
+    blt lbl_arms_updateWeaponState_000000EC
     li r31, 0x1
-lbl_fn_805A646C_000000EC:
+lbl_arms_updateWeaponState_000000EC:
     cmpwi r31, 0x0
-    beq lbl_fn_805A646C_000001F8
+    beq lbl_arms_updateWeaponState_000001F8
     li r3, 0x2
     li r0, 0x0
     stw r3, 0x48(r30)
     stw r0, 0x4c(r30)
-    b lbl_fn_805A646C_000001F8
-lbl_fn_805A646C_00000108:
+    b lbl_arms_updateWeaponState_000001F8
+lbl_arms_updateWeaponState_00000108:
     lwz r5, lbl_8087EEE0
     lis r0, 0x4330
     stw r0, 0x8(r1)
@@ -256,26 +256,26 @@ lbl_fn_805A646C_00000108:
     lfd f1, 0x8(r1)
     fsubs f1, f1, f2
     fcmpo cr0, f1, f0
-    ble lbl_fn_805A646C_0000014C
+    ble lbl_arms_updateWeaponState_0000014C
     li r4, 0x0
     li r0, 0x3
     stw r4, 0x4c(r3)
     stw r0, 0x48(r3)
-lbl_fn_805A646C_0000014C:
+lbl_arms_updateWeaponState_0000014C:
     lwz r4, 0x4c(r3)
     addi r0, r4, 0x1
     stw r0, 0x4c(r3)
     cmpwi r0, 0xf
-    blt lbl_fn_805A646C_000001F8
+    blt lbl_arms_updateWeaponState_000001F8
     li r0, 0x0
     stw r0, 0x48(r3)
-    b lbl_fn_805A646C_000001F8
-lbl_fn_805A646C_0000016C:
+    b lbl_arms_updateWeaponState_000001F8
+lbl_arms_updateWeaponState_0000016C:
     lwz r4, 0x4c(r3)
     addi r0, r4, 0x1
     stw r0, 0x4c(r3)
     cmpwi r0, 0xf
-    blt lbl_fn_805A646C_000001F8
+    blt lbl_arms_updateWeaponState_000001F8
     bl atn_Task_unlink
     lwz r4, lbl_8087F4E8
     li r0, 0x1
@@ -287,19 +287,19 @@ lbl_fn_805A646C_0000016C:
     stw r0, 0x90(r3)
     lwz r3, lbl_8087F9AC
     bl fn_80572B70
-    b lbl_fn_805A646C_000001F8
-lbl_fn_805A646C_000001B0:
+    b lbl_arms_updateWeaponState_000001F8
+lbl_arms_updateWeaponState_000001B0:
     lwz r4, 0x4c(r3)
     addi r0, r4, 0x1
     stw r0, 0x4c(r3)
     cmpwi r0, 0x2d
-    ble lbl_fn_805A646C_000001F8
+    ble lbl_arms_updateWeaponState_000001F8
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x0
     bl fn_800A5920
     cmpwi r3, 0x0
-    beq lbl_fn_805A646C_000001F8
+    beq lbl_arms_updateWeaponState_000001F8
     li r3, 0xf
     li r0, 0x4
     stw r3, 0x4c(r30)
@@ -307,7 +307,7 @@ lbl_fn_805A646C_000001B0:
     stw r0, 0x48(r30)
     lwz r3, lbl_8087F9A0
     bl fn_80571560
-lbl_fn_805A646C_000001F8:
+lbl_arms_updateWeaponState_000001F8:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

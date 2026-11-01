@@ -155,7 +155,7 @@ void fn_805A52F8(void);
 void fn_805A5378(void);
 void fn_805A620C(void);
 void fn_805A6270(void);
-void fn_805A6370(void);
+void arms_destructorBase(void);
 
 asm void fn_805A49E8(void)
 {
@@ -1888,7 +1888,7 @@ lbl_fn_805A6270_00001970:
     blr
 }
 
-asm void fn_805A6370(void)
+asm void arms_destructorBase(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1899,16 +1899,16 @@ asm void fn_805A6370(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_805A6370_00001A00
+    beq lbl_arms_destructorBase_00001A00
     lis r4, lbl_807975B0@ha
     addi r4, r4, lbl_807975B0@l
     stw r4, 0x0(r3)
     lwz r4, lbl_8087F018
     cmpwi r4, 0x0
-    beq lbl_fn_805A6370_000019CC
+    beq lbl_arms_destructorBase_000019CC
     li r0, 0x1
     stw r0, 0x40e0(r4)
-lbl_fn_805A6370_000019CC:
+lbl_arms_destructorBase_000019CC:
     lis r4, atn_LH_Texture_destructAndFree@ha
     li r5, 0x30
     addi r4, r4, atn_LH_Texture_destructAndFree@l
@@ -1919,10 +1919,10 @@ lbl_fn_805A6370_000019CC:
     li r4, 0x0
     bl atn_Task_destructor
     cmpwi r31, 0x0
-    ble lbl_fn_805A6370_00001A00
+    ble lbl_arms_destructorBase_00001A00
     mr r3, r30
     bl dtor_80084684
-lbl_fn_805A6370_00001A00:
+lbl_arms_destructorBase_00001A00:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

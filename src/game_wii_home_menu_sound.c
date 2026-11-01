@@ -92,7 +92,7 @@ extern u32 lbl_80888080;
 extern u32 lbl_80888084;
 
 /* Function declarations */
-void fn_80570CFC(void);
+void homeMenu_returnToWiiMenu(void);
 void fn_805714E0(void);
 void fn_80571560(void);
 void fn_805715C8(void);
@@ -109,7 +109,7 @@ void fn_80572198(void);
 void fn_80572294(void);
 void fn_80572454(void);
 
-asm void fn_80570CFC(void)
+asm void homeMenu_returnToWiiMenu(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -120,131 +120,131 @@ asm void fn_80570CFC(void)
     stw r30, 0x18(r1)
     lwz r0, 0x24(r3)
     cmpwi cr1, r0, 0x0
-    bne cr1, lbl_fn_80570CFC_00000108
+    bne cr1, lbl_homeMenu_returnToWiiMenu_00000108
     lwz r0, 0x28(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80570CFC_00000094
+    beq lbl_homeMenu_returnToWiiMenu_00000094
     li r4, 0x0
     stw r4, 0x28(r3)
-    beq cr1, lbl_fn_80570CFC_00000048
+    beq cr1, lbl_homeMenu_returnToWiiMenu_00000048
     li r0, 0x1
     stw r0, 0x28(r3)
-    b lbl_fn_80570CFC_00000094
-lbl_fn_80570CFC_00000048:
+    b lbl_homeMenu_returnToWiiMenu_00000094
+lbl_homeMenu_returnToWiiMenu_00000048:
     li r0, 0x1
     stw r0, 0x0(r3)
     stw r4, 0x8(r3)
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_00000064
+    beq lbl_homeMenu_returnToWiiMenu_00000064
     stw r0, 0x20(r3)
-lbl_fn_80570CFC_00000064:
+lbl_homeMenu_returnToWiiMenu_00000064:
     lwz r3, lbl_8087EFC0
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_00000078
+    beq lbl_homeMenu_returnToWiiMenu_00000078
     li r4, 0x1
     bl atn_Task_setActive
-lbl_fn_80570CFC_00000078:
+lbl_homeMenu_returnToWiiMenu_00000078:
     lwz r3, lbl_8087F4E8
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_00000094
+    beq lbl_homeMenu_returnToWiiMenu_00000094
     li r0, 0x0
     stw r0, 0x88(r3)
     lwz r3, lbl_8087F4E8
     stw r0, 0x90(r3)
-lbl_fn_80570CFC_00000094:
+lbl_homeMenu_returnToWiiMenu_00000094:
     lwz r0, 0x2c(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_80570CFC_00000108
+    beq lbl_homeMenu_returnToWiiMenu_00000108
     lwz r0, 0x24(r31)
     li r3, 0x0
     stw r3, 0x2c(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_80570CFC_000000C0
+    beq lbl_homeMenu_returnToWiiMenu_000000C0
     li r0, 0x1
     stw r0, 0x2c(r31)
-    b lbl_fn_80570CFC_00000108
-lbl_fn_80570CFC_000000C0:
+    b lbl_homeMenu_returnToWiiMenu_00000108
+lbl_homeMenu_returnToWiiMenu_000000C0:
     li r0, 0x1
     stw r0, 0x4(r31)
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_000000D8
+    beq lbl_homeMenu_returnToWiiMenu_000000D8
     stw r0, 0x20(r3)
-lbl_fn_80570CFC_000000D8:
+lbl_homeMenu_returnToWiiMenu_000000D8:
     lwz r3, lbl_8087EFC0
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_000000EC
+    beq lbl_homeMenu_returnToWiiMenu_000000EC
     li r4, 0x1
     bl atn_Task_setActive
-lbl_fn_80570CFC_000000EC:
+lbl_homeMenu_returnToWiiMenu_000000EC:
     lwz r3, lbl_8087F4E8
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_00000108
+    beq lbl_homeMenu_returnToWiiMenu_00000108
     li r0, 0x0
     stw r0, 0x88(r3)
     lwz r3, lbl_8087F4E8
     stw r0, 0x90(r3)
-lbl_fn_80570CFC_00000108:
+lbl_homeMenu_returnToWiiMenu_00000108:
     lwz r0, 0x14(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_80570CFC_0000014C
+    beq lbl_homeMenu_returnToWiiMenu_0000014C
     lwz r0, 0x0(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_80570CFC_000007CC
+    beq lbl_homeMenu_returnToWiiMenu_000007CC
     lwz r0, 0x8(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_80570CFC_000007CC
+    beq lbl_homeMenu_returnToWiiMenu_000007CC
     lwz r3, lbl_8087EF68
     addi r4, r1, 0x8
     bl fn_800A4228
     cmpwi r3, 0x0
-    bne lbl_fn_80570CFC_000007CC
+    bne lbl_homeMenu_returnToWiiMenu_000007CC
     li r3, 0x0
     bl fn_805F38A0
-    b lbl_fn_80570CFC_000007CC
-lbl_fn_80570CFC_0000014C:
+    b lbl_homeMenu_returnToWiiMenu_000007CC
+lbl_homeMenu_returnToWiiMenu_0000014C:
     lwz r0, 0x20(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_80570CFC_00000164
+    bne lbl_homeMenu_returnToWiiMenu_00000164
     lwz r0, 0x18(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_80570CFC_00000250
-lbl_fn_80570CFC_00000164:
+    beq lbl_homeMenu_returnToWiiMenu_00000250
+lbl_homeMenu_returnToWiiMenu_00000164:
     lwz r4, 0x18(r31)
     cmpwi r4, 0x0
-    beq lbl_fn_80570CFC_0000019C
+    beq lbl_homeMenu_returnToWiiMenu_0000019C
     lwz r3, lbl_8087F4E8
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_0000019C
+    beq lbl_homeMenu_returnToWiiMenu_0000019C
     lwz r0, 0x84(r3)
     cmpwi r0, 0x1
-    bne lbl_fn_80570CFC_0000019C
+    bne lbl_homeMenu_returnToWiiMenu_0000019C
     lwz r0, 0x38(r4)
     ori r0, r0, 0x22
     stw r0, 0x38(r4)
     lwz r3, 0x18(r31)
     bl fn_8006A0F4
-lbl_fn_80570CFC_0000019C:
+lbl_homeMenu_returnToWiiMenu_0000019C:
     lwz r0, 0x20(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_80570CFC_000001C4
+    bne lbl_homeMenu_returnToWiiMenu_000001C4
     lwz r4, 0x18(r31)
     cmpwi r4, 0x0
-    beq lbl_fn_80570CFC_000007CC
+    beq lbl_homeMenu_returnToWiiMenu_000007CC
     lwz r3, 0x4c(r4)
     lwz r0, 0x54(r4)
     cmpw r3, r0
-    ble lbl_fn_80570CFC_000007CC
-lbl_fn_80570CFC_000001C4:
+    ble lbl_homeMenu_returnToWiiMenu_000007CC
+lbl_homeMenu_returnToWiiMenu_000001C4:
     lwz r3, lbl_8087EF68
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_000001E0
+    beq lbl_homeMenu_returnToWiiMenu_000001E0
     addi r4, r1, 0x8
     bl fn_800A4228
     cmpwi r3, 0x0
-    bne lbl_fn_80570CFC_000007CC
-lbl_fn_80570CFC_000001E0:
+    bne lbl_homeMenu_returnToWiiMenu_000007CC
+lbl_homeMenu_returnToWiiMenu_000001E0:
     li r3, 0x0
     bl fn_806036E0
     li r3, 0x0
@@ -257,48 +257,48 @@ lbl_fn_80570CFC_000001E0:
     bl fn_80603FF0
     lwz r0, 0x0(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_80570CFC_00000220
+    beq lbl_homeMenu_returnToWiiMenu_00000220
     li r3, 0x0
     bl fn_805F38A0
-    b lbl_fn_80570CFC_000007CC
-lbl_fn_80570CFC_00000220:
+    b lbl_homeMenu_returnToWiiMenu_000007CC
+lbl_homeMenu_returnToWiiMenu_00000220:
     lwz r0, 0xc(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_80570CFC_00000234
+    beq lbl_homeMenu_returnToWiiMenu_00000234
     bl OSReturnToMenu
-    b lbl_fn_80570CFC_000007CC
-lbl_fn_80570CFC_00000234:
+    b lbl_homeMenu_returnToWiiMenu_000007CC
+lbl_homeMenu_returnToWiiMenu_00000234:
     lwz r0, 0x10(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_80570CFC_00000248
+    beq lbl_homeMenu_returnToWiiMenu_00000248
     bl fn_805F3C50
-    b lbl_fn_80570CFC_000007CC
-lbl_fn_80570CFC_00000248:
+    b lbl_homeMenu_returnToWiiMenu_000007CC
+lbl_homeMenu_returnToWiiMenu_00000248:
     bl fn_805F3780
-    b lbl_fn_80570CFC_000007CC
-lbl_fn_80570CFC_00000250:
+    b lbl_homeMenu_returnToWiiMenu_000007CC
+lbl_homeMenu_returnToWiiMenu_00000250:
     lwz r0, 0x0(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_80570CFC_000003F0
+    beq lbl_homeMenu_returnToWiiMenu_000003F0
     lwz r3, lbl_8087F4E8
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_00000304
+    beq lbl_homeMenu_returnToWiiMenu_00000304
     lwz r3, 0x84(r3)
     subi r0, r3, 0x1
     cmplwi r0, 0x1
-    bgt lbl_fn_80570CFC_00000304
+    bgt lbl_homeMenu_returnToWiiMenu_00000304
     lwz r0, 0x8(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_80570CFC_000002A4
+    beq lbl_homeMenu_returnToWiiMenu_000002A4
     lwz r3, lbl_8087EF68
     addi r4, r1, 0x8
     bl fn_800A4228
     cmpwi r3, 0x0
-    bne lbl_fn_80570CFC_000006FC
+    bne lbl_homeMenu_returnToWiiMenu_000006FC
     li r3, 0x0
     bl fn_805F38A0
-    b lbl_fn_80570CFC_000006FC
-lbl_fn_80570CFC_000002A4:
+    b lbl_homeMenu_returnToWiiMenu_000006FC
+lbl_homeMenu_returnToWiiMenu_000002A4:
     bl fn_805C3F10
     li r30, 0x1
     stw r30, 0x14(r31)
@@ -308,45 +308,45 @@ lbl_fn_80570CFC_000002A4:
     bl fn_805F69E0
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_000002D0
+    beq lbl_homeMenu_returnToWiiMenu_000002D0
     stw r30, 0x20(r3)
-lbl_fn_80570CFC_000002D0:
+lbl_homeMenu_returnToWiiMenu_000002D0:
     lwz r3, lbl_8087EFC0
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_000002E4
+    beq lbl_homeMenu_returnToWiiMenu_000002E4
     li r4, 0x1
     bl atn_Task_setActive
-lbl_fn_80570CFC_000002E4:
+lbl_homeMenu_returnToWiiMenu_000002E4:
     lwz r3, lbl_8087F4E8
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_000006FC
+    beq lbl_homeMenu_returnToWiiMenu_000006FC
     li r0, 0x0
     stw r0, 0x88(r3)
     lwz r3, lbl_8087F4E8
     stw r0, 0x90(r3)
-    b lbl_fn_80570CFC_000006FC
-lbl_fn_80570CFC_00000304:
+    b lbl_homeMenu_returnToWiiMenu_000006FC
+lbl_homeMenu_returnToWiiMenu_00000304:
     lwz r3, lbl_8087F530
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_000003D4
+    beq lbl_homeMenu_returnToWiiMenu_000003D4
     lwz r5, lbl_8087F420
     cmpwi r5, 0x0
-    beq lbl_fn_80570CFC_000003D4
+    beq lbl_homeMenu_returnToWiiMenu_000003D4
     lwz r0, 0x18(r5)
     li r4, 0x0
     cmpwi r0, 0x0
-    bne lbl_fn_80570CFC_00000344
+    bne lbl_homeMenu_returnToWiiMenu_00000344
     lwz r0, 0x1c(r5)
     cmpwi r0, 0x0
-    bne lbl_fn_80570CFC_00000344
+    bne lbl_homeMenu_returnToWiiMenu_00000344
     lwz r0, 0x34(r5)
     cmpwi r0, 0x0
-    bne lbl_fn_80570CFC_00000348
-lbl_fn_80570CFC_00000344:
+    bne lbl_homeMenu_returnToWiiMenu_00000348
+lbl_homeMenu_returnToWiiMenu_00000344:
     li r4, 0x1
-lbl_fn_80570CFC_00000348:
+lbl_homeMenu_returnToWiiMenu_00000348:
     cmpwi r4, 0x0
-    bne lbl_fn_80570CFC_000003D4
+    bne lbl_homeMenu_returnToWiiMenu_000003D4
     li r4, 0x14
     li r5, 0x0
     lis r6, 0xff00
@@ -365,68 +365,68 @@ lbl_fn_80570CFC_00000348:
     stw r0, 0x48(r3)
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_000003A0
+    beq lbl_homeMenu_returnToWiiMenu_000003A0
     stw r0, 0x20(r3)
-lbl_fn_80570CFC_000003A0:
+lbl_homeMenu_returnToWiiMenu_000003A0:
     lwz r3, lbl_8087EFC0
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_000003B4
+    beq lbl_homeMenu_returnToWiiMenu_000003B4
     li r4, 0x1
     bl atn_Task_setActive
-lbl_fn_80570CFC_000003B4:
+lbl_homeMenu_returnToWiiMenu_000003B4:
     lwz r3, lbl_8087F4E8
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_000003DC
+    beq lbl_homeMenu_returnToWiiMenu_000003DC
     li r0, 0x0
     stw r0, 0x88(r3)
     lwz r3, lbl_8087F4E8
     stw r0, 0x90(r3)
-    b lbl_fn_80570CFC_000003DC
-lbl_fn_80570CFC_000003D4:
+    b lbl_homeMenu_returnToWiiMenu_000003DC
+lbl_homeMenu_returnToWiiMenu_000003D4:
     li r0, 0x1
     stw r0, 0x20(r31)
-lbl_fn_80570CFC_000003DC:
+lbl_homeMenu_returnToWiiMenu_000003DC:
     li r3, 0x0
     bl fn_805F68F0
     li r3, 0x0
     bl fn_805F69E0
-    b lbl_fn_80570CFC_000006FC
-lbl_fn_80570CFC_000003F0:
+    b lbl_homeMenu_returnToWiiMenu_000006FC
+lbl_homeMenu_returnToWiiMenu_000003F0:
     lwz r0, 0xc(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_80570CFC_00000510
+    beq lbl_homeMenu_returnToWiiMenu_00000510
     lwz r0, 0x8(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_80570CFC_00000424
+    beq lbl_homeMenu_returnToWiiMenu_00000424
     lwz r3, lbl_8087EF68
     addi r4, r1, 0x8
     bl fn_800A4228
     cmpwi r3, 0x0
-    bne lbl_fn_80570CFC_000006FC
+    bne lbl_homeMenu_returnToWiiMenu_000006FC
     bl OSReturnToMenu
-    b lbl_fn_80570CFC_000006FC
-lbl_fn_80570CFC_00000424:
+    b lbl_homeMenu_returnToWiiMenu_000006FC
+lbl_homeMenu_returnToWiiMenu_00000424:
     lwz r3, lbl_8087F530
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_000004F4
+    beq lbl_homeMenu_returnToWiiMenu_000004F4
     lwz r5, lbl_8087F420
     cmpwi r5, 0x0
-    beq lbl_fn_80570CFC_000004F4
+    beq lbl_homeMenu_returnToWiiMenu_000004F4
     lwz r0, 0x18(r5)
     li r4, 0x0
     cmpwi r0, 0x0
-    bne lbl_fn_80570CFC_00000464
+    bne lbl_homeMenu_returnToWiiMenu_00000464
     lwz r0, 0x1c(r5)
     cmpwi r0, 0x0
-    bne lbl_fn_80570CFC_00000464
+    bne lbl_homeMenu_returnToWiiMenu_00000464
     lwz r0, 0x34(r5)
     cmpwi r0, 0x0
-    bne lbl_fn_80570CFC_00000468
-lbl_fn_80570CFC_00000464:
+    bne lbl_homeMenu_returnToWiiMenu_00000468
+lbl_homeMenu_returnToWiiMenu_00000464:
     li r4, 0x1
-lbl_fn_80570CFC_00000468:
+lbl_homeMenu_returnToWiiMenu_00000468:
     cmpwi r4, 0x0
-    bne lbl_fn_80570CFC_000004F4
+    bne lbl_homeMenu_returnToWiiMenu_000004F4
     li r4, 0x14
     li r5, 0x0
     lis r6, 0xff00
@@ -445,57 +445,57 @@ lbl_fn_80570CFC_00000468:
     stw r0, 0x48(r3)
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_000004C0
+    beq lbl_homeMenu_returnToWiiMenu_000004C0
     stw r0, 0x20(r3)
-lbl_fn_80570CFC_000004C0:
+lbl_homeMenu_returnToWiiMenu_000004C0:
     lwz r3, lbl_8087EFC0
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_000004D4
+    beq lbl_homeMenu_returnToWiiMenu_000004D4
     li r4, 0x1
     bl atn_Task_setActive
-lbl_fn_80570CFC_000004D4:
+lbl_homeMenu_returnToWiiMenu_000004D4:
     lwz r3, lbl_8087F4E8
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_000004FC
+    beq lbl_homeMenu_returnToWiiMenu_000004FC
     li r0, 0x0
     stw r0, 0x88(r3)
     lwz r3, lbl_8087F4E8
     stw r0, 0x90(r3)
-    b lbl_fn_80570CFC_000004FC
-lbl_fn_80570CFC_000004F4:
+    b lbl_homeMenu_returnToWiiMenu_000004FC
+lbl_homeMenu_returnToWiiMenu_000004F4:
     li r0, 0x1
     stw r0, 0x20(r31)
-lbl_fn_80570CFC_000004FC:
+lbl_homeMenu_returnToWiiMenu_000004FC:
     li r3, 0x0
     bl fn_805F68F0
     li r3, 0x0
     bl fn_805F69E0
-    b lbl_fn_80570CFC_000006FC
-lbl_fn_80570CFC_00000510:
+    b lbl_homeMenu_returnToWiiMenu_000006FC
+lbl_homeMenu_returnToWiiMenu_00000510:
     lwz r0, 0x10(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_80570CFC_00000608
+    beq lbl_homeMenu_returnToWiiMenu_00000608
     lwz r3, lbl_8087F530
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_000005EC
+    beq lbl_homeMenu_returnToWiiMenu_000005EC
     lwz r5, lbl_8087F420
     cmpwi r5, 0x0
-    beq lbl_fn_80570CFC_000005EC
+    beq lbl_homeMenu_returnToWiiMenu_000005EC
     lwz r0, 0x18(r5)
     li r4, 0x0
     cmpwi r0, 0x0
-    bne lbl_fn_80570CFC_0000055C
+    bne lbl_homeMenu_returnToWiiMenu_0000055C
     lwz r0, 0x1c(r5)
     cmpwi r0, 0x0
-    bne lbl_fn_80570CFC_0000055C
+    bne lbl_homeMenu_returnToWiiMenu_0000055C
     lwz r0, 0x34(r5)
     cmpwi r0, 0x0
-    bne lbl_fn_80570CFC_00000560
-lbl_fn_80570CFC_0000055C:
+    bne lbl_homeMenu_returnToWiiMenu_00000560
+lbl_homeMenu_returnToWiiMenu_0000055C:
     li r4, 0x1
-lbl_fn_80570CFC_00000560:
+lbl_homeMenu_returnToWiiMenu_00000560:
     cmpwi r4, 0x0
-    bne lbl_fn_80570CFC_000005EC
+    bne lbl_homeMenu_returnToWiiMenu_000005EC
     li r4, 0x14
     li r5, 0x0
     lis r6, 0xff00
@@ -514,57 +514,57 @@ lbl_fn_80570CFC_00000560:
     stw r0, 0x48(r3)
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_000005B8
+    beq lbl_homeMenu_returnToWiiMenu_000005B8
     stw r0, 0x20(r3)
-lbl_fn_80570CFC_000005B8:
+lbl_homeMenu_returnToWiiMenu_000005B8:
     lwz r3, lbl_8087EFC0
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_000005CC
+    beq lbl_homeMenu_returnToWiiMenu_000005CC
     li r4, 0x1
     bl atn_Task_setActive
-lbl_fn_80570CFC_000005CC:
+lbl_homeMenu_returnToWiiMenu_000005CC:
     lwz r3, lbl_8087F4E8
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_000005F4
+    beq lbl_homeMenu_returnToWiiMenu_000005F4
     li r0, 0x0
     stw r0, 0x88(r3)
     lwz r3, lbl_8087F4E8
     stw r0, 0x90(r3)
-    b lbl_fn_80570CFC_000005F4
-lbl_fn_80570CFC_000005EC:
+    b lbl_homeMenu_returnToWiiMenu_000005F4
+lbl_homeMenu_returnToWiiMenu_000005EC:
     li r0, 0x1
     stw r0, 0x20(r31)
-lbl_fn_80570CFC_000005F4:
+lbl_homeMenu_returnToWiiMenu_000005F4:
     li r3, 0x0
     bl fn_805F68F0
     li r3, 0x0
     bl fn_805F69E0
-    b lbl_fn_80570CFC_000006FC
-lbl_fn_80570CFC_00000608:
+    b lbl_homeMenu_returnToWiiMenu_000006FC
+lbl_homeMenu_returnToWiiMenu_00000608:
     lwz r0, 0x4(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_80570CFC_000006FC
+    beq lbl_homeMenu_returnToWiiMenu_000006FC
     lwz r3, lbl_8087F530
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_000006E4
+    beq lbl_homeMenu_returnToWiiMenu_000006E4
     lwz r5, lbl_8087F420
     cmpwi r5, 0x0
-    beq lbl_fn_80570CFC_000006E4
+    beq lbl_homeMenu_returnToWiiMenu_000006E4
     lwz r0, 0x18(r5)
     li r4, 0x0
     cmpwi r0, 0x0
-    bne lbl_fn_80570CFC_00000654
+    bne lbl_homeMenu_returnToWiiMenu_00000654
     lwz r0, 0x1c(r5)
     cmpwi r0, 0x0
-    bne lbl_fn_80570CFC_00000654
+    bne lbl_homeMenu_returnToWiiMenu_00000654
     lwz r0, 0x34(r5)
     cmpwi r0, 0x0
-    bne lbl_fn_80570CFC_00000658
-lbl_fn_80570CFC_00000654:
+    bne lbl_homeMenu_returnToWiiMenu_00000658
+lbl_homeMenu_returnToWiiMenu_00000654:
     li r4, 0x1
-lbl_fn_80570CFC_00000658:
+lbl_homeMenu_returnToWiiMenu_00000658:
     cmpwi r4, 0x0
-    bne lbl_fn_80570CFC_000006E4
+    bne lbl_homeMenu_returnToWiiMenu_000006E4
     li r4, 0x14
     li r5, 0x0
     lis r6, 0xff00
@@ -583,35 +583,35 @@ lbl_fn_80570CFC_00000658:
     stw r0, 0x48(r3)
     lwz r3, lbl_8087F420
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_000006B0
+    beq lbl_homeMenu_returnToWiiMenu_000006B0
     stw r0, 0x20(r3)
-lbl_fn_80570CFC_000006B0:
+lbl_homeMenu_returnToWiiMenu_000006B0:
     lwz r3, lbl_8087EFC0
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_000006C4
+    beq lbl_homeMenu_returnToWiiMenu_000006C4
     li r4, 0x1
     bl atn_Task_setActive
-lbl_fn_80570CFC_000006C4:
+lbl_homeMenu_returnToWiiMenu_000006C4:
     lwz r3, lbl_8087F4E8
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_000006EC
+    beq lbl_homeMenu_returnToWiiMenu_000006EC
     li r0, 0x0
     stw r0, 0x88(r3)
     lwz r3, lbl_8087F4E8
     stw r0, 0x90(r3)
-    b lbl_fn_80570CFC_000006EC
-lbl_fn_80570CFC_000006E4:
+    b lbl_homeMenu_returnToWiiMenu_000006EC
+lbl_homeMenu_returnToWiiMenu_000006E4:
     li r0, 0x1
     stw r0, 0x20(r31)
-lbl_fn_80570CFC_000006EC:
+lbl_homeMenu_returnToWiiMenu_000006EC:
     li r3, 0x0
     bl fn_805F68F0
     li r3, 0x0
     bl fn_805F69E0
-lbl_fn_80570CFC_000006FC:
+lbl_homeMenu_returnToWiiMenu_000006FC:
     lwz r0, lbl_8087EF70
     cmpwi r0, 0x0
-    beq lbl_fn_80570CFC_000007CC
+    beq lbl_homeMenu_returnToWiiMenu_000007CC
     lwz r3, 0x1c(r31)
     li r4, 0x0
     li r5, 0x1
@@ -620,53 +620,53 @@ lbl_fn_80570CFC_000006FC:
     lwz r3, lbl_8087EF70
     bl fn_800A5920
     cmpwi r3, 0x0
-    bne lbl_fn_80570CFC_00000740
+    bne lbl_homeMenu_returnToWiiMenu_00000740
     lwz r3, lbl_8087EF70
     li r4, 0x0
     bl fn_800A59F0
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_00000748
-lbl_fn_80570CFC_00000740:
+    beq lbl_homeMenu_returnToWiiMenu_00000748
+lbl_homeMenu_returnToWiiMenu_00000740:
     li r0, 0x0
     stw r0, 0x1c(r31)
-lbl_fn_80570CFC_00000748:
+lbl_homeMenu_returnToWiiMenu_00000748:
     lwz r3, lbl_8087F0A8
     lwz r0, 0x194(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80570CFC_000007CC
+    beq lbl_homeMenu_returnToWiiMenu_000007CC
     lwz r0, 0x1c(r31)
     cmpwi r0, 0x1518
-    ble lbl_fn_80570CFC_000007CC
+    ble lbl_homeMenu_returnToWiiMenu_000007CC
     lwz r0, 0x24(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_80570CFC_0000077C
+    beq lbl_homeMenu_returnToWiiMenu_0000077C
     li r0, 0x1
     stw r0, 0x28(r31)
-    b lbl_fn_80570CFC_000007CC
-lbl_fn_80570CFC_0000077C:
+    b lbl_homeMenu_returnToWiiMenu_000007CC
+lbl_homeMenu_returnToWiiMenu_0000077C:
     li r3, 0x1
     li r0, 0x0
     stw r3, 0x0(r31)
     stw r0, 0x8(r31)
     lwz r4, lbl_8087F420
     cmpwi r4, 0x0
-    beq lbl_fn_80570CFC_0000079C
+    beq lbl_homeMenu_returnToWiiMenu_0000079C
     stw r3, 0x20(r4)
-lbl_fn_80570CFC_0000079C:
+lbl_homeMenu_returnToWiiMenu_0000079C:
     lwz r3, lbl_8087EFC0
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_000007B0
+    beq lbl_homeMenu_returnToWiiMenu_000007B0
     li r4, 0x1
     bl atn_Task_setActive
-lbl_fn_80570CFC_000007B0:
+lbl_homeMenu_returnToWiiMenu_000007B0:
     lwz r3, lbl_8087F4E8
     cmpwi r3, 0x0
-    beq lbl_fn_80570CFC_000007CC
+    beq lbl_homeMenu_returnToWiiMenu_000007CC
     li r0, 0x0
     stw r0, 0x88(r3)
     lwz r3, lbl_8087F4E8
     stw r0, 0x90(r3)
-lbl_fn_80570CFC_000007CC:
+lbl_homeMenu_returnToWiiMenu_000007CC:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

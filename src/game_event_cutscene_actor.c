@@ -79,7 +79,7 @@ extern void fn_8047B5CC(void);
 extern void fn_8047B684(void);
 extern void fn_8047B6B0(void);
 extern void fn_80570C54(void);
-extern void fn_80570CFC(void);
+extern void homeMenu_returnToWiiMenu(void);
 extern void fn_805728C0(void);
 extern void fn_8057E8C8(void);
 extern void fn_8057EAF4(void);
@@ -706,7 +706,7 @@ lbl_main_000006C0:
     srwi r4, r0, 5
     bl fn_80071D60
     lwz r3, lbl_8087F9A0
-    bl fn_80570CFC
+    bl homeMenu_returnToWiiMenu
     lwz r18, g_TaskManager
     li r16, 0x0
     li r31, 0x0

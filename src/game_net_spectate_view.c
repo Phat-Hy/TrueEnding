@@ -86,13 +86,13 @@ extern u32 lbl_80887C68;
 extern u32 lbl_80887C6C;
 
 /* Function declarations */
-void fn_805363F8(void);
+void spectateView_update(void);
 void fn_80536CAC(void);
 void fn_8053770C(void);
 void fn_80537784(void);
 void fn_805377F4(void);
 
-asm void fn_805363F8(void)
+asm void spectateView_update(void)
 {
     nofralloc
     stwu r1, -0x390(r1)
@@ -124,13 +124,13 @@ asm void fn_805363F8(void)
     mr r30, r3
     cmpwi r31, 0x0
     stw r0, 0x2e0(r1)
-    beq lbl_fn_805363F8_00000854
+    beq lbl_spectateView_update_00000854
     lwz r0, 0xbb0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_805363F8_000001A8
+    beq lbl_spectateView_update_000001A8
     lwz r0, 0x2ac(r3)
     cmpwi r0, 0x1
-    bne lbl_fn_805363F8_000001A8
+    bne lbl_spectateView_update_000001A8
     lfs f4, lbl_80887C40
     mr r3, r31
     lwz r4, lbl_8087F0A8
@@ -201,10 +201,10 @@ asm void fn_805363F8(void)
     li r8, 0x0
     lfs f6, lbl_80887BB4
     bl fn_800616C0
-lbl_fn_805363F8_000001A8:
+lbl_spectateView_update_000001A8:
     lwz r3, 0x434(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_805363F8_00000268
+    beq lbl_spectateView_update_00000268
     lwz r6, lbl_8087EFA8
     lfs f3, 0x8(r3)
     lwz r5, 0x378(r6)
@@ -250,10 +250,10 @@ lbl_fn_805363F8_000001A8:
     stfs f7, 0x68(r1)
     stfs f4, 0x6c(r1)
     stfs f4, 0x394(r6)
-lbl_fn_805363F8_00000268:
+lbl_spectateView_update_00000268:
     lwz r0, 0x2dc(r30)
     cmpwi r0, 0x0
-    beq lbl_fn_805363F8_000002D8
+    beq lbl_spectateView_update_000002D8
     lwz r3, 0x258(r30)
     lfs f0, lbl_80887BB8
     lfs f1, 0x110(r3)
@@ -261,16 +261,16 @@ lbl_fn_805363F8_00000268:
     cror eq, gt, eq
     mfcr r0
     extrwi. r0, r0, 1, 2
-    beq lbl_fn_805363F8_000002D8
+    beq lbl_spectateView_update_000002D8
     lwz r3, 0x2e0(r30)
     lwz r0, 0x2e8(r30)
     addi r3, r3, 0x1
     stw r3, 0x2e0(r30)
     cmpw r0, r3
-    bgt lbl_fn_805363F8_000002B4
+    bgt lbl_spectateView_update_000002B4
     li r0, 0x0
     stw r0, 0x2e0(r30)
-lbl_fn_805363F8_000002B4:
+lbl_spectateView_update_000002B4:
     lwz r0, 0x2e0(r30)
     lwz r4, 0x2e4(r30)
     slwi r0, r0, 3
@@ -280,16 +280,16 @@ lbl_fn_805363F8_000002B4:
     lwzx r4, r4, r0
     lfs f2, 0x4(r5)
     bl fn_804A0F58
-lbl_fn_805363F8_000002D8:
+lbl_spectateView_update_000002D8:
     lwz r3, lbl_8087EEE0
     lwz r27, 0x44(r3)
     cmpwi r27, 0x0
-    beq lbl_fn_805363F8_000002F0
+    beq lbl_spectateView_update_000002F0
     lfs f25, lbl_80887BB4
-    b lbl_fn_805363F8_000002F4
-lbl_fn_805363F8_000002F0:
+    b lbl_spectateView_update_000002F4
+lbl_spectateView_update_000002F0:
     lfs f25, 0x344(r30)
-lbl_fn_805363F8_000002F4:
+lbl_spectateView_update_000002F4:
     lwz r4, 0x48(r30)
     lis r3, lbl_8075D5B0@ha
     addi r3, r3, lbl_8075D5B0@l
@@ -301,12 +301,12 @@ lbl_fn_805363F8_000002F4:
     mr r3, r28
     bl fn_801FECE0
     cmpwi r27, 0x0
-    beq lbl_fn_805363F8_0000032C
+    beq lbl_spectateView_update_0000032C
     lfs f25, lbl_80887BB4
-    b lbl_fn_805363F8_00000330
-lbl_fn_805363F8_0000032C:
+    b lbl_spectateView_update_00000330
+lbl_spectateView_update_0000032C:
     lfs f25, 0x344(r30)
-lbl_fn_805363F8_00000330:
+lbl_spectateView_update_00000330:
     lwz r4, 0x4c(r30)
     lis r27, lbl_8075D5B0@ha
     addi r27, r27, lbl_8075D5B0@l
@@ -330,11 +330,11 @@ lbl_fn_805363F8_00000330:
     cmpwi r0, 0x19
     lfs f23, lbl_80887C38
     lfs f30, lbl_80887C5C
-    bne lbl_fn_805363F8_00000394
+    bne lbl_spectateView_update_00000394
     lwz r0, 0x2b0(r30)
-lbl_fn_805363F8_00000394:
+lbl_spectateView_update_00000394:
     cmpwi r0, 0xe
-    bne lbl_fn_805363F8_00000574
+    bne lbl_spectateView_update_00000574
     fadds f2, f31, f23
     lfs f0, lbl_80887C38
     lis r29, lbl_80793A90@ha
@@ -387,7 +387,7 @@ lbl_fn_805363F8_00000394:
     addi r29, r29, lbl_80793940@l
     lfs f27, lbl_80887BE0
     li r28, 0x0
-lbl_fn_805363F8_0000046C:
+lbl_spectateView_update_0000046C:
     lwz r3, lbl_8087EEC8
     addi r4, r1, 0xd8
     lwz r5, 0x0(r29)
@@ -441,7 +441,7 @@ lbl_fn_805363F8_0000046C:
     bl fn_80061824
     lwz r0, 0x2b8(r30)
     cmpw r28, r0
-    bne lbl_fn_805363F8_00000564
+    bne lbl_spectateView_update_00000564
     fadds f2, f23, f31
     mr r3, r31
     fmr f1, f24
@@ -450,33 +450,33 @@ lbl_fn_805363F8_0000046C:
     fmr f4, f2
     fadds f3, f24, f25
     bl fn_8006144C
-lbl_fn_805363F8_00000564:
+lbl_spectateView_update_00000564:
     addi r28, r28, 0x1
     addi r29, r29, 0x8
     cmpwi r28, 0x2
-    blt lbl_fn_805363F8_0000046C
-lbl_fn_805363F8_00000574:
+    blt lbl_spectateView_update_0000046C
+lbl_spectateView_update_00000574:
     lwz r0, 0x2c4(r30)
     lis r4, lbl_8075D528@ha
     addi r4, r4, lbl_8075D528@l
     li r31, 0x1
     cmpwi r0, 0x0
-    beq lbl_fn_805363F8_00000590
+    beq lbl_spectateView_update_00000590
     la r4, lbl_80887B80
-lbl_fn_805363F8_00000590:
+lbl_spectateView_update_00000590:
     cmpwi r0, 0x0
-    bne lbl_fn_805363F8_000005C0
+    bne lbl_spectateView_update_000005C0
     lwz r3, lbl_8087F0A8
     lwz r0, 0x194(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_805363F8_000005C0
+    beq lbl_spectateView_update_000005C0
     lwz r0, 0x198(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_805363F8_000005C0
+    bne lbl_spectateView_update_000005C0
     lis r4, lbl_8075D538@ha
     li r31, 0x0
     addi r4, r4, lbl_8075D538@l
-lbl_fn_805363F8_000005C0:
+lbl_spectateView_update_000005C0:
     lwz r0, 0x2bc(r30)
     lis r28, lbl_8075D5B0@ha
     addi r28, r28, lbl_8075D5B0@l
@@ -514,86 +514,86 @@ lbl_fn_805363F8_000005C0:
     lfs f0, lbl_80887BB8
     fcmpo cr0, f2, f0
     cror eq, gt, eq
-    bne lbl_fn_805363F8_00000660
+    bne lbl_spectateView_update_00000660
     li r27, 0xff
-    b lbl_fn_805363F8_00000688
-lbl_fn_805363F8_00000660:
+    b lbl_spectateView_update_00000688
+lbl_spectateView_update_00000660:
     lfs f0, lbl_80887BB4
     fcmpo cr0, f2, f0
     cror eq, lt, eq
-    bne lbl_fn_805363F8_00000674
-    b lbl_fn_805363F8_00000688
-lbl_fn_805363F8_00000674:
+    bne lbl_spectateView_update_00000674
+    b lbl_spectateView_update_00000688
+lbl_spectateView_update_00000674:
     lfs f1, lbl_80887C60
     lfs f0, lbl_80887BE0
     fmadds f1, f1, f2, f0
     bl fn_80695D84
     mr r27, r3
-lbl_fn_805363F8_00000688:
+lbl_spectateView_update_00000688:
     lfs f2, 0x14(r1)
     lfs f0, lbl_80887BB8
     fcmpo cr0, f2, f0
     cror eq, gt, eq
-    bne lbl_fn_805363F8_000006A4
+    bne lbl_spectateView_update_000006A4
     li r29, 0xff
-    b lbl_fn_805363F8_000006D0
-lbl_fn_805363F8_000006A4:
+    b lbl_spectateView_update_000006D0
+lbl_spectateView_update_000006A4:
     lfs f0, lbl_80887BB4
     fcmpo cr0, f2, f0
     cror eq, lt, eq
-    bne lbl_fn_805363F8_000006BC
+    bne lbl_spectateView_update_000006BC
     li r3, 0x0
-    b lbl_fn_805363F8_000006CC
-lbl_fn_805363F8_000006BC:
+    b lbl_spectateView_update_000006CC
+lbl_spectateView_update_000006BC:
     lfs f1, lbl_80887C60
     lfs f0, lbl_80887BE0
     fmadds f1, f1, f2, f0
     bl fn_80695D84
-lbl_fn_805363F8_000006CC:
+lbl_spectateView_update_000006CC:
     mr r29, r3
-lbl_fn_805363F8_000006D0:
+lbl_spectateView_update_000006D0:
     lfs f2, 0x18(r1)
     lfs f0, lbl_80887BB8
     fcmpo cr0, f2, f0
     cror eq, gt, eq
-    bne lbl_fn_805363F8_000006EC
+    bne lbl_spectateView_update_000006EC
     li r28, 0xff
-    b lbl_fn_805363F8_00000718
-lbl_fn_805363F8_000006EC:
+    b lbl_spectateView_update_00000718
+lbl_spectateView_update_000006EC:
     lfs f0, lbl_80887BB4
     fcmpo cr0, f2, f0
     cror eq, lt, eq
-    bne lbl_fn_805363F8_00000704
+    bne lbl_spectateView_update_00000704
     li r3, 0x0
-    b lbl_fn_805363F8_00000714
-lbl_fn_805363F8_00000704:
+    b lbl_spectateView_update_00000714
+lbl_spectateView_update_00000704:
     lfs f1, lbl_80887C60
     lfs f0, lbl_80887BE0
     fmadds f1, f1, f2, f0
     bl fn_80695D84
-lbl_fn_805363F8_00000714:
+lbl_spectateView_update_00000714:
     mr r28, r3
-lbl_fn_805363F8_00000718:
+lbl_spectateView_update_00000718:
     lfs f2, 0x1c(r1)
     lfs f0, lbl_80887BB8
     fcmpo cr0, f2, f0
     cror eq, gt, eq
-    bne lbl_fn_805363F8_00000734
+    bne lbl_spectateView_update_00000734
     li r3, 0xff
-    b lbl_fn_805363F8_0000075C
-lbl_fn_805363F8_00000734:
+    b lbl_spectateView_update_0000075C
+lbl_spectateView_update_00000734:
     lfs f0, lbl_80887BB4
     fcmpo cr0, f2, f0
     cror eq, lt, eq
-    bne lbl_fn_805363F8_0000074C
+    bne lbl_spectateView_update_0000074C
     li r3, 0x0
-    b lbl_fn_805363F8_0000075C
-lbl_fn_805363F8_0000074C:
+    b lbl_spectateView_update_0000075C
+lbl_spectateView_update_0000074C:
     lfs f1, lbl_80887C60
     lfs f0, lbl_80887BE0
     fmadds f1, f1, f2, f0
     bl fn_80695D84
-lbl_fn_805363F8_0000075C:
+lbl_spectateView_update_0000075C:
     slwi r5, r3, 24
     slwi r3, r27, 16
     or r5, r5, r3
@@ -606,7 +606,7 @@ lbl_fn_805363F8_0000075C:
     addi r4, r29, 0x25d
     bl fn_801F4998
     li r28, 0x0
-lbl_fn_805363F8_0000078C:
+lbl_spectateView_update_0000078C:
     mr r5, r28
     addi r3, r1, 0x70
     addi r4, r29, 0x265
@@ -615,12 +615,12 @@ lbl_fn_805363F8_0000078C:
     lwz r3, 0x5c(r30)
     cmpw r28, r26
     addi r27, r3, 0x58
-    bne lbl_fn_805363F8_000007B8
+    bne lbl_spectateView_update_000007B8
     lfs f25, lbl_80887BB8
-    b lbl_fn_805363F8_000007BC
-lbl_fn_805363F8_000007B8:
+    b lbl_spectateView_update_000007BC
+lbl_spectateView_update_000007B8:
     lfs f25, lbl_80887BB4
-lbl_fn_805363F8_000007BC:
+lbl_spectateView_update_000007BC:
     addi r3, r1, 0x70
     bl fn_800DC6B4
     fmr f1, f25
@@ -629,15 +629,15 @@ lbl_fn_805363F8_000007BC:
     bl fn_801FECE0
     addi r28, r28, 0x1
     cmpwi r28, 0x3
-    blt lbl_fn_805363F8_0000078C
+    blt lbl_spectateView_update_0000078C
     lwz r0, 0x2c4(r30)
     cmpwi r0, 0x0
-    beq lbl_fn_805363F8_000007F4
+    beq lbl_spectateView_update_000007F4
     lfs f25, lbl_80887BB8
-    b lbl_fn_805363F8_000007F8
-lbl_fn_805363F8_000007F4:
+    b lbl_spectateView_update_000007F8
+lbl_spectateView_update_000007F4:
     lfs f25, lbl_80887BB4
-lbl_fn_805363F8_000007F8:
+lbl_spectateView_update_000007F8:
     lwz r4, 0x5c(r30)
     lis r29, lbl_8075D5B0@ha
     addi r29, r29, lbl_8075D5B0@l
@@ -652,18 +652,18 @@ lbl_fn_805363F8_000007F8:
     cmpwi r31, 0x0
     addi r3, r29, 0x27a
     addi r27, r4, 0x58
-    beq lbl_fn_805363F8_0000083C
+    beq lbl_spectateView_update_0000083C
     lfs f25, lbl_80887BB8
-    b lbl_fn_805363F8_00000840
-lbl_fn_805363F8_0000083C:
+    b lbl_spectateView_update_00000840
+lbl_spectateView_update_0000083C:
     lfs f25, lbl_80887BB4
-lbl_fn_805363F8_00000840:
+lbl_spectateView_update_00000840:
     bl fn_800DC6B4
     fmr f1, f25
     mr r4, r3
     mr r3, r27
     bl fn_801FECE0
-lbl_fn_805363F8_00000854:
+lbl_spectateView_update_00000854:
     addi r11, r1, 0x300
     psq_l f31, 0x388(r1), 0, 0
     lfd f31, 0x380(r1)

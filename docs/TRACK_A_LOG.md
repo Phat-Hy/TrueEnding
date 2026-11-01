@@ -910,3 +910,32 @@ void skin_initLink(s32* link)
 void <stubName>(void) {}
 `
 Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.
+
+## Session 2026-11-01 - Batch 17: High-yield queue naming (120k+ probe hits)
+Subject:  track-a: Batch 17 - name 16 high-yield queue routines (covers 120k+ probe hits) progress 99.30% -> 99.30%
+Scope:    Rename 16 top-ranking routines hit by Track B instruments across 10 files in src/.
+Checklist:
+  1. symbols.txt: Renamed 16 functions in place.
+  2. All src/ references updated across 10 files.
+  3. Local labels lbl_fn_* -> lbl_<newName>_* normalized.
+  4. External prototypes swept across all translation units.
+  5. report.json clean, ninja passed (orig/main.dol: OK).
+Self-check: git diff -U0 -- src/ for 'asm void': -16 / +16 (balanced).
+Names applied:
+  - spectateCamera_update (fn_80534074, 9,092 B, 30,934 probe hits)
+  - spectateManager_update (fn_80532ABC, 3,952 B, 19,359 probe hits)
+  - spectateManager_init (fn_805327B4, 776 B, 17,131 probe hits)
+  - spectateView_update (fn_805363F8, 2,228 B, 17,131 probe hits)
+  - player_syncPositionAndMotion (fn_801EFBE8, 1,916 B, 10,626 probe hits)
+  - player_syncTimersAndClock (fn_801FF28C, 1,204 B, 10,612 probe hits)
+  - dvd_renderFatalErrorScreen (fn_80363DBC, 2,312 B, 3,497 probe hits)
+  - homeMenu_returnToWiiMenu (fn_80570CFC, 2,020 B, 3,489 probe hits)
+  - dvd_initFatalErrorScreen (fn_803646C4, 1,316 B, 3,489 probe hits)
+  - arms_updateWeaponState (fn_805A646C, 424 B, 3,386 probe hits)
+  - arms_destructorBase (fn_805A6370, 148 B, 3,010 probe hits)
+  - arms_attachWeapon (fn_805A6404, 104 B, 3,010 probe hits)
+  - vec4_zero (fn_801FF740, 28 B)
+  - timer_initField (fn_801FF75C, 20 B)
+  - player_getClockFieldA0 (fn_801FF770, 8 B)
+  - clock_dummyCallback (fn_801FF8EC, 4 B)
+Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.

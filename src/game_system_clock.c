@@ -80,12 +80,12 @@ void fn_801FEEFC(void);
 void fn_801FEF40(void);
 void fn_801FF1B8(void);
 void fn_801FF234(void);
-void fn_801FF28C(void);
-void fn_801FF740(void);
-void fn_801FF75C(void);
-void fn_801FF770(void);
+void player_syncTimersAndClock(void);
+void vec4_zero(void);
+void timer_initField(void);
+void player_getClockFieldA0(void);
 void fn_801FF778(void);
-void fn_801FF8EC(void);
+void clock_dummyCallback(void);
 void fn_801FF8F0(void);
 void fn_801FFA04(void);
 
@@ -363,7 +363,7 @@ lbl_fn_801FF234_00000374:
     blr
 }
 
-asm void fn_801FF28C(void)
+asm void player_syncTimersAndClock(void)
 {
     nofralloc
     stwu r1, -0x70(r1)
@@ -373,15 +373,15 @@ asm void fn_801FF28C(void)
     mr r31, r3
     bl fn_801EDC78
     cmpwi r3, 0x0
-    beq lbl_fn_801FF28C_00000830
+    beq lbl_player_syncTimersAndClock_00000830
     addi r3, r1, 0x48
-    bl fn_801FF740
+    bl vec4_zero
     addi r3, r1, 0x20
     bl fn_80041B8C
     addi r3, r1, 0x8
-    bl fn_801FF75C
+    bl timer_initField
     addi r3, r1, 0x30
-    bl fn_801FF8EC
+    bl clock_dummyCallback
     mr r3, r31
     addi r4, r1, 0x48
     addi r5, r1, 0x20
@@ -392,36 +392,36 @@ asm void fn_801FF28C(void)
     addi r4, r1, 0x38
     bl fn_800D8BB4
     lwz r3, 0xfc(r31)
-    bl fn_801FF770
+    bl player_getClockFieldA0
     cmpwi r3, 0x0
-    beq lbl_fn_801FF28C_00000454
+    beq lbl_player_syncTimersAndClock_00000454
     lhz r0, 0xe(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_801FF28C_00000434
+    bne lbl_player_syncTimersAndClock_00000434
     lwz r3, 0xfc(r31)
-    bl fn_801FF770
+    bl player_getClockFieldA0
     mr r12, r3
     mr r3, r31
     addi r4, r1, 0x20
     li r5, 0x0
     mtctr r12
     bctrl
-    b lbl_fn_801FF28C_00000454
-lbl_fn_801FF28C_00000434:
+    b lbl_player_syncTimersAndClock_00000454
+lbl_player_syncTimersAndClock_00000434:
     lwz r3, 0xfc(r31)
-    bl fn_801FF770
+    bl player_getClockFieldA0
     mr r12, r3
     mr r3, r31
     addi r4, r1, 0x20
     addi r5, r1, 0x10
     mtctr r12
     bctrl
-lbl_fn_801FF28C_00000454:
+lbl_player_syncTimersAndClock_00000454:
     lfs f1, 0x2c(r1)
     lfs f0, lbl_80882CBC
     fcmpo cr0, f1, f0
     cror eq, lt, eq
-    beq lbl_fn_801FF28C_00000830
+    beq lbl_player_syncTimersAndClock_00000830
     lfs f0, 0x1c(r1)
     addi r3, r1, 0x20
     fmuls f0, f0, f1
@@ -439,7 +439,7 @@ lbl_fn_801FF28C_00000454:
     bl fn_801FF8F0
     lhz r0, 0xe(r31)
     cmplwi r0, 0x1
-    bne lbl_fn_801FF28C_000004FC
+    bne lbl_player_syncTimersAndClock_000004FC
     addi r3, r1, 0x10
     bl fn_800F8348
     lfs f1, 0x48(r1)
@@ -458,10 +458,10 @@ lbl_fn_801FF28C_00000454:
     lfs f5, 0x54(r1)
     lwz r6, 0xc(r1)
     bl fn_801FF8F0
-    b lbl_fn_801FF28C_00000830
-lbl_fn_801FF28C_000004FC:
+    b lbl_player_syncTimersAndClock_00000830
+lbl_player_syncTimersAndClock_000004FC:
     cmplwi r0, 0x2
-    bne lbl_fn_801FF28C_00000608
+    bne lbl_player_syncTimersAndClock_00000608
     addi r3, r1, 0x10
     bl fn_800F8348
     lfs f3, 0x48(r1)
@@ -526,10 +526,10 @@ lbl_fn_801FF28C_000004FC:
     lfs f5, 0x54(r1)
     lwz r6, 0xc(r1)
     bl fn_801FF8F0
-    b lbl_fn_801FF28C_00000830
-lbl_fn_801FF28C_00000608:
+    b lbl_player_syncTimersAndClock_00000830
+lbl_player_syncTimersAndClock_00000608:
     cmplwi r0, 0x3
-    bne lbl_fn_801FF28C_00000830
+    bne lbl_player_syncTimersAndClock_00000830
     addi r3, r1, 0x10
     bl fn_800F8348
     lfs f3, 0x48(r1)
@@ -666,7 +666,7 @@ lbl_fn_801FF28C_00000608:
     lfs f5, 0x54(r1)
     lwz r6, 0xc(r1)
     bl fn_801FF8F0
-lbl_fn_801FF28C_00000830:
+lbl_player_syncTimersAndClock_00000830:
     lwz r0, 0x74(r1)
     lwz r31, 0x6c(r1)
     mtlr r0
@@ -674,7 +674,7 @@ lbl_fn_801FF28C_00000830:
     blr
 }
 
-asm void fn_801FF740(void)
+asm void vec4_zero(void)
 {
     nofralloc
     lfs f0, lbl_80882CBC
@@ -686,7 +686,7 @@ asm void fn_801FF740(void)
     blr
 }
 
-asm void fn_801FF75C(void)
+asm void timer_initField(void)
 {
     nofralloc
     lfs f0, lbl_80882CBC
@@ -696,7 +696,7 @@ asm void fn_801FF75C(void)
     blr
 }
 
-asm void fn_801FF770(void)
+asm void player_getClockFieldA0(void)
 {
     nofralloc
     lwz r3, 0xa0(r3)
@@ -816,7 +816,7 @@ lbl_fn_801FF778_000009B8:
     blr
 }
 
-asm void fn_801FF8EC(void)
+asm void clock_dummyCallback(void)
 {
     nofralloc
     blr
