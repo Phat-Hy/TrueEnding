@@ -29,7 +29,7 @@ extern void fn_8008771C(void);
 extern void fn_8008937C(void);
 extern void fn_800C5F5C(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
-extern void fn_800D5808(void);
+extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
 extern void fn_800DC6B4(void);
 extern void fn_800DCA6C(void);
@@ -1087,7 +1087,7 @@ lbl_fn_80080C20_00000D7C:
     cmpwi r3, 0x0
     beq lbl_fn_80080C20_00000DB4
     li r4, 0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     stb r23, 0x11(r24)
     stw r23, 0x4(r24)
 lbl_fn_80080C20_00000DB4:
@@ -1245,7 +1245,7 @@ lbl_fn_80080C20_00000F94:
     cmpwi r3, 0x0
     beq lbl_fn_80080C20_00000FC4
     li r4, 0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     stb r23, 0x11(r15)
     stw r23, 0x4(r15)
 lbl_fn_80080C20_00000FC4:

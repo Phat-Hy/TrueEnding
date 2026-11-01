@@ -11,7 +11,7 @@ extern void fn_8006B2D8(void);
 extern void fn_8006F72C(void);
 extern void fn_800846FC(void);
 extern void fn_80084C24(void);
-extern void fn_800D58A4(void);
+extern void atn_LH_Texture_release(void);
 extern void fn_800D5908(void);
 extern void fn_800D59B8(void);
 extern void fn_800DBF68(void);
@@ -411,7 +411,7 @@ lbl_fn_801FD5A0_00000484:
     b lbl_fn_801FD5A0_000004DC
 lbl_fn_801FD5A0_00000494:
     addi r3, r29, 0x194
-    bl fn_800D58A4
+    bl atn_LH_Texture_release
     lbz r0, 0x70(r1)
     extsb. r0, r0
     bne lbl_fn_801FD5A0_000004C0
@@ -748,7 +748,7 @@ lbl_fn_801FDA20_00000918:
     b lbl_fn_801FDA20_0000094C
 lbl_fn_801FDA20_00000928:
     addi r3, r29, 0x1c4
-    bl fn_800D58A4
+    bl atn_LH_Texture_release
     addi r3, r29, 0x1c4
     addi r4, r1, 0x70
     bl fn_800D5908

@@ -24,7 +24,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
-extern void fn_800D5808(void);
+extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5A3C(void);
 extern void fn_800D5B58(void);
 extern void fn_8046CC90(void);
@@ -1974,7 +1974,7 @@ asm void atn_FadeCapture_destructor(void)
     beq lbl_atn_FadeCapture_destructor_00001960
     li r4, -0x1
     addi r3, r3, 0x7c
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     cmpwi r30, 0x0
     beq lbl_atn_FadeCapture_destructor_00001950
     mr r3, r30

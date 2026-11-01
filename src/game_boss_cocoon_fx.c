@@ -26,7 +26,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800D5808(void);
+extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D59B8(void);
 extern void fn_800DC1DC(void);
 extern void fn_800DC6B4(void);
@@ -947,7 +947,7 @@ lbl_fn_8046A514_00000BB0:
 lbl_fn_8046A514_00000BCC:
     addi r3, r30, 0xc
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     cmpwi r31, 0x0
     ble lbl_fn_8046A514_00000BE8
     mr r3, r30

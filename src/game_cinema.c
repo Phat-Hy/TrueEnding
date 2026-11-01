@@ -12,7 +12,7 @@ extern void fn_800846FC(void);
 extern void fn_80084C24(void);
 extern void fn_800D1C60(void);
 extern void fn_800D1CD4(void);
-extern void fn_800D5808(void);
+extern void atn_LH_Texture_destructAndFree(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -718,7 +718,7 @@ lbl_fn_8007ED30_00000938:
     cmpwi r3, 0x0
     beq lbl_fn_8007ED30_00000964
     li r4, 0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     li r0, 0x0
     stb r0, 0x19(r1)
     stw r0, 0xc(r1)
@@ -1252,7 +1252,7 @@ lbl_fn_8007F464_00001074:
     cmpwi r3, 0x0
     beq lbl_fn_8007F464_0000109C
     li r4, 0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     stb r25, 0x19(r1)
     stw r25, 0xc(r1)
 lbl_fn_8007F464_0000109C:

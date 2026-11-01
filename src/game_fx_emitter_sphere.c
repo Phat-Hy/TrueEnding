@@ -26,7 +26,7 @@ extern void fn_80097C08(void);
 extern void fn_80097CCC(void);
 extern void fn_800CB5C8(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
-extern void fn_800D5808(void);
+extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
 extern void fn_800EB7A0(void);
@@ -1261,7 +1261,7 @@ lbl_fn_802883A4_00001040:
 lbl_fn_802883A4_00001060:
     addi r3, r30, 0x1644
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addic. r29, r30, 0x1634
     beq lbl_fn_802883A4_0000108C
     mr r3, r29

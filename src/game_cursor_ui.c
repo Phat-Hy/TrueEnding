@@ -37,7 +37,7 @@ extern void fn_800BDB58(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_800D3FA4(void);
-extern void fn_800D5808(void);
+extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
 extern void fn_805F93C0(void);
@@ -1343,7 +1343,7 @@ asm void fn_800A9294(void)
     beq lbl_fn_800A9294_000010DC
     li r4, -0x1
     addi r3, r3, 0x38
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     cmpwi r31, 0x0
     ble lbl_fn_800A9294_000010DC
     mr r3, r30
@@ -1394,10 +1394,10 @@ asm void fn_800A9330(void)
     beq lbl_fn_800A9330_000011B0
     li r4, -0x1
     addi r3, r3, 0xb8
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addi r3, r30, 0x88
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addic. r0, r30, 0x80
     beq lbl_fn_800A9330_000011A0
     lwz r3, 0x84(r30)
@@ -1439,19 +1439,19 @@ asm void fn_800A93C4(void)
     beq lbl_fn_800A93C4_0000123C
     li r4, -0x1
     addi r3, r3, 0x320
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addi r3, r30, 0x2f0
     li r4, -0x1
-    bl fn_800D5808
-    lis r4, fn_800D5808@ha
+    bl atn_LH_Texture_destructAndFree
+    lis r4, atn_LH_Texture_destructAndFree@ha
     addi r3, r30, 0x170
-    addi r4, r4, fn_800D5808@l
+    addi r4, r4, atn_LH_Texture_destructAndFree@l
     li r5, 0x30
     li r6, 0x8
     bl fn_806959D8
     addi r3, r30, 0x138
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     cmpwi r31, 0x0
     ble lbl_fn_800A93C4_0000123C
     mr r3, r30
@@ -1483,28 +1483,28 @@ asm void fn_800A9450(void)
     beq lbl_fn_800A9450_000012C4
     addi r3, r31, 0x320
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addi r3, r31, 0x2f0
     li r4, -0x1
-    bl fn_800D5808
-    lis r4, fn_800D5808@ha
+    bl atn_LH_Texture_destructAndFree
+    lis r4, atn_LH_Texture_destructAndFree@ha
     addi r3, r31, 0x170
-    addi r4, r4, fn_800D5808@l
+    addi r4, r4, atn_LH_Texture_destructAndFree@l
     li r5, 0x30
     li r6, 0x8
     bl fn_806959D8
     addi r3, r31, 0x138
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
 lbl_fn_800A9450_000012C4:
     addic. r31, r29, 0x340
     beq lbl_fn_800A9450_00001310
     addi r3, r31, 0xb8
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addi r3, r31, 0x88
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addic. r0, r31, 0x80
     beq lbl_fn_800A9450_00001310
     lwz r3, 0x84(r31)
@@ -1522,7 +1522,7 @@ lbl_fn_800A9450_00001310:
     beq lbl_fn_800A9450_00001324
     addi r3, r3, 0x38
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
 lbl_fn_800A9450_00001324:
     mr r3, r29
     li r4, 0x0

@@ -11,7 +11,7 @@ extern void fn_800902C0(void);
 extern void fn_800C31F4(void);
 extern void fn_800CB3A0(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D58A4(void);
+extern void atn_LH_Texture_release(void);
 extern void fn_800D5908(void);
 extern void fn_800D59B8(void);
 extern void fn_800EF91C(void);
@@ -601,7 +601,7 @@ lbl_fn_800F3170_00000660:
     bl fn_8023781C
     addis r3, r31, 0x1
     subi r3, r3, 0x3484
-    bl fn_800D58A4
+    bl atn_LH_Texture_release
     addis r3, r31, 0x3
     addi r3, r3, 0x64ec
     bl fn_8023781C

@@ -16,7 +16,7 @@ extern void fn_800763FC(void);
 extern void fn_800BDB58(void);
 extern void fn_800BFB70(void);
 extern void fn_800C0FBC(void);
-extern void fn_800D5808(void);
+extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D6BE0(void);
 extern void fn_800DC6B4(void);
 extern void fn_80478198(void);
@@ -1673,7 +1673,7 @@ lbl_fn_800D8458_00001694:
     beq lbl_fn_800D8458_000016C0
     addi r3, r28, 0x18c
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     mr r3, r28
     bl dtor_80084684
 lbl_fn_800D8458_000016C0:

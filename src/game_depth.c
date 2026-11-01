@@ -14,9 +14,9 @@ extern void dtor_80084684(void*);
 extern void fn_8004B290(void);
 extern void fn_8004B338(void);
 extern void fn_8004B378(void);
-extern void fn_800827E0(void);
+extern void* fn_800827E0(void);
 extern void fn_800839EC(void);
-extern void fn_80083AD4(void);
+extern void fn_80083AD4(void*, void*);
 extern void fn_800C2418(void);
 extern void fn_800C2448(void);
 extern void fn_800C2520(void);
@@ -24,7 +24,7 @@ struct atn_LoadHandle; extern void atn_LoadHandle_constructor(void*);
 extern void atn_LoadHandle_destructor(void*, int);
 extern void fn_80473EFC(void);
 extern void fn_80473F50(void);
-extern void fn_80473F88(void);
+extern void fn_80473F88(void*);
 extern void fn_80473FCC(void);
 extern void fn_80478158(void);
 extern void fn_805F89F0(void);
@@ -82,7 +82,7 @@ typedef struct atn_LoadHandle {
 typedef struct atn_LH_Texture {
     u8 raw[0x20];
     atn_LoadHandle handle;
-    u32 field_28;
+    void* field_28;
     u8 field_2c;
     u8 field_2d;
     u8 field_2e;
@@ -91,8 +91,8 @@ typedef struct atn_LH_Texture {
 
 atn_LH_Texture* atn_LH_Texture_constructor(atn_LH_Texture* this);
 atn_LoadHandle* atn_LH_Texture_destructor(atn_LoadHandle* handle, int flags);
-void fn_800D5808(void);
-void fn_800D58A4(void);
+atn_LH_Texture* atn_LH_Texture_destructAndFree(atn_LH_Texture* this, int flags);
+void atn_LH_Texture_release(atn_LH_Texture* this);
 void fn_800D5908(void);
 void fn_800D594C(void);
 void fn_800D59B8(void);
@@ -151,82 +151,38 @@ atn_LoadHandle* atn_LH_Texture_destructor(atn_LoadHandle* handle, int flags)
     return handle;
 }
 
-asm void fn_800D5808(void)
+
+
+static inline void atn_LH_Texture_release_inline(atn_LH_Texture* this)
 {
-    nofralloc
-    stwu r1, -0x20(r1)
-    mflr r0
-    cmpwi r3, 0x0
-    stw r0, 0x24(r1)
-    stw r31, 0x1c(r1)
-    stw r30, 0x18(r1)
-    stw r29, 0x14(r1)
-    mr r29, r4
-    stw r28, 0x10(r1)
-    mr r28, r3
-    beq lbl_fn_800D5808_000001BC
-    addi r3, r3, 0x20
-    bl fn_80473F88
-    lwz r30, 0x28(r28)
-    li r31, 0x0
-    stb r31, 0x2c(r28)
-    cmpwi r30, 0x0
-    beq lbl_fn_800D5808_0000019C
-    bl fn_800827E0
-    mr r4, r30
-    bl fn_80083AD4
-    stw r31, 0x28(r28)
-lbl_fn_800D5808_0000019C:
-    addic. r3, r28, 0x20
-    beq lbl_fn_800D5808_000001AC
-    li r4, 0x0
-    bl atn_LoadHandle_destructor
-lbl_fn_800D5808_000001AC:
-    cmpwi r29, 0x0
-    ble lbl_fn_800D5808_000001BC
-    mr r3, r28
-    bl dtor_80084684
-lbl_fn_800D5808_000001BC:
-    lwz r31, 0x1c(r1)
-    mr r3, r28
-    lwz r30, 0x18(r1)
-    lwz r29, 0x14(r1)
-    lwz r28, 0x10(r1)
-    lwz r0, 0x24(r1)
-    mtlr r0
-    addi r1, r1, 0x20
-    blr
+    void* buffer;
+    fn_80473F88(&this->handle);
+    buffer = this->field_28;
+    this->field_2c = 0;
+    if (buffer != NULL) {
+        void* heap = fn_800827E0();
+        fn_80083AD4(heap, buffer);
+        this->field_28 = NULL;
+    }
 }
 
-asm void fn_800D58A4(void)
+void atn_LH_Texture_release(atn_LH_Texture* this)
 {
-    nofralloc
-    stwu r1, -0x20(r1)
-    mflr r0
-    stw r0, 0x24(r1)
-    stw r31, 0x1c(r1)
-    stw r30, 0x18(r1)
-    stw r29, 0x14(r1)
-    mr r29, r3
-    addi r3, r3, 0x20
-    bl fn_80473F88
-    lwz r30, 0x28(r29)
-    li r31, 0x0
-    stb r31, 0x2c(r29)
-    cmpwi r30, 0x0
-    beq lbl_fn_800D58A4_00000228
-    bl fn_800827E0
-    mr r4, r30
-    bl fn_80083AD4
-    stw r31, 0x28(r29)
-lbl_fn_800D58A4_00000228:
-    lwz r0, 0x24(r1)
-    lwz r31, 0x1c(r1)
-    lwz r30, 0x18(r1)
-    lwz r29, 0x14(r1)
-    mtlr r0
-    addi r1, r1, 0x20
-    blr
+    atn_LH_Texture_release_inline(this);
+}
+
+atn_LH_Texture* atn_LH_Texture_destructAndFree(atn_LH_Texture* this, int flags)
+{
+    if (this) {
+        atn_LH_Texture_release_inline(this);
+        if (&this->handle != NULL) {
+            atn_LoadHandle_destructor(&this->handle, 0);
+        }
+        if (flags > 0) {
+            dtor_80084684(this);
+        }
+    }
+    return this;
 }
 
 asm void fn_800D5908(void)

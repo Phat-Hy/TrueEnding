@@ -10,8 +10,8 @@ extern void fn_800846FC(void);
 extern void fn_80084C24(void);
 extern void fn_800A6BD4(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
-extern void fn_800D5808(void);
-extern void fn_800D58A4(void);
+extern void atn_LH_Texture_destructAndFree(void);
+extern void atn_LH_Texture_release(void);
 extern void fn_800DBF68(void);
 extern void fn_800DC6B4(void);
 extern void fn_800DD3FC(void);
@@ -629,9 +629,9 @@ asm void fn_801F97A8(void)
     addi r4, r4, lbl_80782D80@l
     stw r4, 0x0(r3)
     addi r3, r3, 0x194
-    bl fn_800D58A4
+    bl atn_LH_Texture_release
     addi r3, r30, 0x1c4
-    bl fn_800D58A4
+    bl atn_LH_Texture_release
     lwz r3, 0xfc(r30)
     cmpwi r3, 0x0
     beq lbl_fn_801F97A8_0000082C
@@ -645,10 +645,10 @@ asm void fn_801F97A8(void)
 lbl_fn_801F97A8_0000082C:
     addi r3, r30, 0x1c4
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addi r3, r30, 0x194
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     mr r3, r30
     li r4, 0x0
     bl fn_801EC6C0

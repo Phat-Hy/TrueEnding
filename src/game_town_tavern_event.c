@@ -10,7 +10,7 @@ extern void fn_8008937C(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800D58A4(void);
+extern void atn_LH_Texture_release(void);
 extern void fn_800D5908(void);
 extern void fn_800D59B8(void);
 extern void fn_801F3FF8(void);
@@ -1496,13 +1496,13 @@ asm void fn_803D11B4(void)
     li r30, 0x0
     stw r30, 0xdc8(r3)
     addi r3, r3, 0xdd4
-    bl fn_800D58A4
+    bl atn_LH_Texture_release
     addi r3, r31, 0xe04
-    bl fn_800D58A4
+    bl atn_LH_Texture_release
     addi r3, r31, 0xe34
-    bl fn_800D58A4
+    bl atn_LH_Texture_release
     addi r3, r31, 0xe64
-    bl fn_800D58A4
+    bl atn_LH_Texture_release
     mr r29, r31
     li r27, 0x0
 lbl_fn_803D11B4_000015AC:

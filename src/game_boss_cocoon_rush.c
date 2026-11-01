@@ -20,7 +20,7 @@ extern void fn_8008A4E0(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
-extern void fn_800D5808(void);
+extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
 extern void fn_800D59B8(void);
 extern void fn_800DC6B4(void);
@@ -1442,17 +1442,17 @@ lbl_atn_LoadEffect_constructor_00001218:
     beq cr1, lbl_atn_LoadEffect_constructor_00001254
     addi r3, r28, 0x30
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     mr r3, r28
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     mr r3, r28
     bl dtor_80084684
     b lbl_atn_LoadEffect_constructor_00001254
 lbl_atn_LoadEffect_constructor_00001248:
     mr r3, r28
     li r4, 0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
 lbl_atn_LoadEffect_constructor_00001254:
     lwz r3, 0x90(r25)
     stwx r31, r3, r29

@@ -13,7 +13,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_800D3FA4(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
-extern void fn_800D5808(void);
+extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_80237518(void);
 extern void fn_802375C4(void);
 extern void world_getGlobalFlag(void);
@@ -1685,16 +1685,16 @@ lbl_fn_803CF79C_00001578:
     bl fn_802375C4
     addi r3, r29, 0xe64
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addi r3, r29, 0xe34
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addi r3, r29, 0xe04
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addi r3, r29, 0xdd4
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addic. r3, r29, 0xd90
     beq lbl_fn_803CF79C_00001610
     addic. r0, r3, 0x8

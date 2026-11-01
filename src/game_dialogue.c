@@ -14,7 +14,7 @@ extern void fn_80084320(void);
 extern void fn_800846FC(void);
 extern void fn_80084C24(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
-extern void fn_800D5808(void);
+extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
 extern void fn_800D594C(void);
 extern void fn_800D59B8(void);
@@ -1199,7 +1199,7 @@ asm void fn_8007C018(void)
     cmpwi r3, 0x0
     beq lbl_fn_8007C018_00000FF0
     li r4, 0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     li r0, 0x0
     stb r0, 0x11(r29)
     stw r0, 0x4(r29)

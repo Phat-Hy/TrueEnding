@@ -15,7 +15,7 @@ extern void fn_800C31F4(void);
 extern void fn_800CB3A0(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D5808(void);
+extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D59B8(void);
 extern void fn_800D9560(void);
 extern void fn_800DAA3C(void);
@@ -1094,7 +1094,7 @@ lbl_fn_80229D20_00000DC0:
 lbl_fn_80229D20_00000DCC:
     addi r3, r29, 0x120
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     mr r3, r29
     li r4, 0x0
     bl atn_Task_destructor

@@ -16,7 +16,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
-extern void fn_800D5808(void);
+extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800E2A24(void);
 extern void fn_800EF73C(void);
 extern void fn_800F2BB8(void);
@@ -1198,7 +1198,7 @@ lbl_fn_800F1F94_0000101C:
     addis r3, r30, 0x4
     li r4, -0x1
     subi r3, r3, 0x763c
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addis r29, r30, 0x4
     subic. r29, r29, 0x7658
     beq lbl_fn_800F1F94_00001060
@@ -1375,7 +1375,7 @@ lbl_fn_800F1F94_000012A4:
     addis r3, r30, 0x1
     li r4, -0x1
     subi r3, r3, 0x3484
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addis r3, r30, 0x1
     lis r4, fn_800F1F38@ha
     addi r4, r4, fn_800F1F38@l

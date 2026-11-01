@@ -19,7 +19,7 @@ extern void fn_8008771C(void);
 extern void fn_80087E9C(void);
 extern void fn_80097C08(void);
 extern void fn_80097CCC(void);
-extern void fn_800D5808(void);
+extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
 extern void atn_Curve_evaluate(void);
@@ -2073,7 +2073,7 @@ lbl_fn_8007AA64_00001A88:
     cmpwi r3, 0x0
     beq lbl_fn_8007AA64_00001AB4
     li r4, 0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     li r0, 0x0
     stb r0, 0x11(r30)
     stw r0, 0x4(r30)

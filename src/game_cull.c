@@ -22,7 +22,7 @@ extern void fn_800846FC(void);
 extern void fn_80084C24(void);
 extern void atn_Task_constructor(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
-extern void fn_800D5808(void);
+extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
 extern void fn_800D59B8(void);
 extern void fn_800D5B58(void);
@@ -626,11 +626,11 @@ asm void fn_800D8C14(void)
     addi r3, r30, 0x198
     bl atn_LH_Texture_constructor
     lis r4, atn_LH_Texture_constructor@ha
-    lis r5, fn_800D5808@ha
+    lis r5, atn_LH_Texture_destructAndFree@ha
     addi r3, r30, 0x1c8
     li r6, 0x30
     addi r4, r4, atn_LH_Texture_constructor@l
-    addi r5, r5, fn_800D5808@l
+    addi r5, r5, atn_LH_Texture_destructAndFree@l
     li r7, 0x6
     bl fn_806958E0
     addi r3, r30, 0x2e8
@@ -799,22 +799,22 @@ lbl_fn_800D8E84_000008AC:
     bl fn_800D71D4
     addi r3, r30, 0x338
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addi r3, r30, 0x318
     li r4, -0x1
     bl fn_800D71D4
     addi r3, r30, 0x2e8
     li r4, -0x1
-    bl fn_800D5808
-    lis r4, fn_800D5808@ha
+    bl atn_LH_Texture_destructAndFree
+    lis r4, atn_LH_Texture_destructAndFree@ha
     addi r3, r30, 0x1c8
-    addi r4, r4, fn_800D5808@l
+    addi r4, r4, atn_LH_Texture_destructAndFree@l
     li r5, 0x30
     li r6, 0x6
     bl fn_806959D8
     addi r3, r30, 0x198
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addi r3, r30, 0x10
     li r4, -0x1
     bl fn_800D71D4

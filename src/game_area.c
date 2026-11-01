@@ -27,7 +27,7 @@ extern void fn_80084C24(void);
 extern void fn_800A08E0(void);
 extern void fn_800C49F0(void);
 extern void fn_800C4E50(void);
-extern void fn_800D58A4(void);
+extern void atn_LH_Texture_release(void);
 extern void fn_800D59B8(void);
 extern void fn_800D87C4(void);
 extern void fn_800DC12C(void);
@@ -745,7 +745,7 @@ lbl_fn_80089AD4_00000784:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_80089AD4_0000079C
-    bl fn_800D58A4
+    bl atn_LH_Texture_release
 lbl_fn_80089AD4_0000079C:
     addi r30, r30, 0x18
     addi r28, r28, 0x1

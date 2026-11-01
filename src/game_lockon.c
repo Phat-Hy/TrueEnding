@@ -29,7 +29,7 @@ extern void fn_8008F5F8(void);
 extern void fn_80091C00(void);
 extern void fn_800A03A0(void);
 extern void fn_800A1060(void);
-extern void fn_800D5808(void);
+extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D87A4(void);
 extern void fn_800D87B0(void);
 extern void fn_800D8808(void);
@@ -587,7 +587,7 @@ lbl_fn_800954DC_00000724:
     cmpwi r3, 0x0
     beq lbl_fn_800954DC_00000754
     li r4, 0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     stb r25, 0x11(r24)
     stw r25, 0x4(r24)
 lbl_fn_800954DC_00000754:

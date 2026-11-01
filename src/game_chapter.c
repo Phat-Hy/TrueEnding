@@ -26,7 +26,7 @@ extern void fn_800BFAC8(void);
 extern void fn_800C169C(void);
 extern void fn_800C2448(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
-extern void fn_800D5808(void);
+extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
 extern void fn_800D59B8(void);
 extern void fn_800D69A8(void);
@@ -195,11 +195,11 @@ asm void fn_80077160(void)
     addi r7, r7, lbl_80777D08@l
     stw r7, 0x0(r3)
     lis r7, atn_LH_Texture_constructor@ha
-    lis r6, fn_800D5808@ha
+    lis r6, atn_LH_Texture_destructAndFree@ha
     mr r24, r5
     stw r4, 0x4(r3)
     addi r4, r7, atn_LH_Texture_constructor@l
-    addi r5, r6, fn_800D5808@l
+    addi r5, r6, atn_LH_Texture_destructAndFree@l
     mr r31, r3
     psq_st f1, 0x8(r3), 0, 0
     li r6, 0x30
@@ -390,9 +390,9 @@ asm void atn_LensFlare_destructor(void)
     beq lbl_atn_LensFlare_destructor_0000040C
     bl fn_800897D8
 lbl_atn_LensFlare_destructor_0000040C:
-    lis r4, fn_800D5808@ha
+    lis r4, atn_LH_Texture_destructAndFree@ha
     addi r3, r30, 0x20
-    addi r4, r4, fn_800D5808@l
+    addi r4, r4, atn_LH_Texture_destructAndFree@l
     li r5, 0x30
     li r6, 0x6
     bl fn_806959D8

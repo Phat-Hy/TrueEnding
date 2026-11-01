@@ -23,6 +23,26 @@ Next:     the 3-5 functions worth naming or decompiling next
 
 <!-- newest first -->
 
+### 2026-11-01 — Unit A2: C Decompilation of atn_LH_Texture Lifecycle Methods (256 B)
+
+Numbers:  progress before -> after: 99.30 % -> 99.30 % (7,425,512 / 7,477,608 bytes, 18,054 / 18,155 functions)
+Self-check (asm void): git diff -U0 -- src/ shows -2 / +0 (net conversion: 2 functions converted from asm void to readable C)
+Decompiled (100.0 % byte match):
+- fn_800D58A4 -> atn_LH_Texture_release (100 B, 25 insts) -> readable C in src/game_depth.c (match: 100.0 %, 0 diffs)
+  - Deliverable: Texture buffer cleanup and handle release. Calls fn_80473F88(&this->handle) to unbind handle, zeroes loaded status byte at +0x2C, and if texture buffer pointer at +0x28 is non-NULL, retrieves memory heap via fn_800827E0(), frees texture buffer via fn_80083AD4(heap, buffer), and sets +0x28 = NULL.
+- fn_800D5808 -> atn_LH_Texture_destructAndFree (156 B, 39 insts) -> readable C in src/game_depth.c (match: 100.0 %, 0 diffs)
+  - Deliverable: Complete destructor for texture handle. Inlines buffer release logic, invokes atn_LoadHandle_destructor(&this->handle, 0), and when scalar deletion flag > 0, deallocates object instance memory via dtor_80084684(this).
+Named:
+- fn_800D58A4 -> atn_LH_Texture_release (evidence: called across 6 files to release texture buffer and detach load handle)
+- fn_800D5808 -> atn_LH_Texture_destructAndFree (evidence: passed as deletion callback across 40 files in resource and actor managers)
+Notes:
+- Completes C conversion of the entire atn_LH_Texture lifecycle quartet (constructor: 120 B, destructor: 88 B, release: 100 B, destructAndFree: 156 B = 464 bytes total), achieving 100.0% exact byte match across all four routines.
+- Updated prototypes across all 46 caller translation units.
+Next:
+1. Decompile task registration helper fn_8047AEBC called by taskManager_initSystem.
+2. Batch 11 renames: Event::Puppeteer<atn::Model> and Event::Puppeteer<CharaTask> (lbl_8072F8A8, lbl_8072F8C8) and AI::Script::CharaAi family.
+
+
 ### 2026-11-01 — Unit A2: C Decompilation of atn_LH_Texture and Task Manager Bootstrap Resolution
 
 Numbers:  progress before -> after: 99.30 % -> 99.30 % (7,425,512 / 7,477,608 bytes, 18,054 / 18,155 functions)

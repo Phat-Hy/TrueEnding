@@ -25,7 +25,7 @@ extern void fn_800C289C(void);
 extern void fn_800C2C20(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D5808(void);
+extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
 extern void fn_8037E12C(void);
@@ -915,8 +915,8 @@ lbl_fn_8049F4F4_00000BE4:
     lwz r3, 0x1f0(r1)
     cmpwi r3, 0x0
     beq lbl_fn_8049F4F4_00000C0C
-    lis r4, fn_800D5808@ha
-    addi r4, r4, fn_800D5808@l
+    lis r4, atn_LH_Texture_destructAndFree@ha
+    addi r4, r4, atn_LH_Texture_destructAndFree@l
     bl fn_80695A50
 lbl_fn_8049F4F4_00000C0C:
     stw r31, 0x1f0(r1)

@@ -14,7 +14,7 @@ extern void fn_80084320(void);
 extern void fn_800846FC(void);
 extern void fn_80084C24(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
-extern void fn_800D5808(void);
+extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D594C(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
@@ -1941,13 +1941,13 @@ asm void atn_DrawHelper_destructor(void)
     bl fn_8006C858
     addi r3, r30, 0x70
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addi r3, r30, 0x40
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addi r3, r30, 0x10
     li r4, -0x1
-    bl fn_800D5808
+    bl atn_LH_Texture_destructAndFree
     addic. r0, r30, 0x4
     beq lbl_atn_DrawHelper_destructor_00001918
     lwz r3, 0x4(r30)
