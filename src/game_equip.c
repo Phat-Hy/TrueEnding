@@ -54,9 +54,9 @@ void fn_8005EEA0(void);
 void fn_8005EEE0(void);
 void fn_8005F36C(void);
 void fn_8005F90C(void);
-void fn_8005FD40(void);
+void atn_ComDrawTexture_destructor(void);
 void fn_8005FD80(void);
-void fn_800602A8(void);
+void atn_ComDrawTextureMask_destructor(void);
 void fn_800602E8(void);
 void fn_800607C0(void);
 void fn_80060D58(void);
@@ -2126,7 +2126,7 @@ lbl_fn_8005F90C_00001CE0:
     blr
 }
 
-asm void fn_8005FD40(void)
+asm void atn_ComDrawTexture_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -2135,11 +2135,11 @@ asm void fn_8005FD40(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    beq lbl_fn_8005FD40_00001D68
+    beq lbl_atn_ComDrawTexture_destructor_00001D68
     cmpwi r4, 0x0
-    ble lbl_fn_8005FD40_00001D68
+    ble lbl_atn_ComDrawTexture_destructor_00001D68
     bl dtor_80084684
-lbl_fn_8005FD40_00001D68:
+lbl_atn_ComDrawTexture_destructor_00001D68:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -2504,7 +2504,7 @@ lbl_fn_8005FD80_00002228:
     blr
 }
 
-asm void fn_800602A8(void)
+asm void atn_ComDrawTextureMask_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -2513,11 +2513,11 @@ asm void fn_800602A8(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    beq lbl_fn_800602A8_000022D0
+    beq lbl_atn_ComDrawTextureMask_destructor_000022D0
     cmpwi r4, 0x0
-    ble lbl_fn_800602A8_000022D0
+    ble lbl_atn_ComDrawTextureMask_destructor_000022D0
     bl dtor_80084684
-lbl_fn_800602A8_000022D0:
+lbl_atn_ComDrawTextureMask_destructor_000022D0:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)

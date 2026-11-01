@@ -23,6 +23,46 @@ Next:     the 3-5 functions worth naming or decompiling next
 
 <!-- newest first -->
 
+### 2026-11-01 — Batch 9: atn::DrawHelper Immediate-Mode 2D/3D Rendering Commands Renames (25 functions)
+
+Numbers:  progress before -> after: 99.30 % -> 99.30 % (7,425,512 / 7,477,608 bytes, 18,054 / 18,155 functions)
+Named:
+- fn_8005DE30 -> atn_DrawHelper_destructor (evidence: virtual destructor slot 0 in vtable lbl_807777C0 [atn::DrawHelper])
+- fn_80068D70 -> atn_ComDrawWindow_destructor (evidence: virtual destructor slot 0 in vtable lbl_807777D8 [atn::DrawHelper::ComDrawWindow])
+- fn_800685E4 -> atn_ComDrawWindow_execute (evidence: virtual execute slot 2 in vtable lbl_807777D8 [atn::DrawHelper::ComDrawWindow])
+- fn_80068D30 -> atn_ComDrawD3TextureMask_destructor (evidence: virtual destructor slot 0 in vtable lbl_80777818 [atn::DrawHelper::ComDrawD3TextureMask])
+- fn_80068164 -> atn_ComDrawD3TextureMask_execute (evidence: virtual execute slot 2 in vtable lbl_80777818 [atn::DrawHelper::ComDrawD3TextureMask])
+- fn_80068CF0 -> atn_ComDrawColliTree_destructor (evidence: virtual destructor slot 0 in vtable lbl_80777858 [atn::DrawHelper::ComDrawColliTree])
+- fn_80067FFC -> atn_ComDrawColliTree_execute (evidence: virtual execute slot 2 in vtable lbl_80777858 [atn::DrawHelper::ComDrawColliTree])
+- fn_80068CB0 -> atn_ComDrawColliObject_destructor (evidence: virtual destructor slot 0 in vtable lbl_80777898 [atn::DrawHelper::ComDrawColliObject])
+- fn_80067EB8 -> atn_ComDrawColliObject_execute (evidence: virtual execute slot 2 in vtable lbl_80777898 [atn::DrawHelper::ComDrawColliObject])
+- fn_80068C70 -> atn_ComDrawFontSideFade_destructor (evidence: virtual destructor slot 0 in vtable lbl_807778D8 [atn::DrawHelper::ComDrawFontSideFade])
+- fn_800678BC -> atn_ComDrawFontSideFade_execute (evidence: virtual execute slot 2 in vtable lbl_807778D8 [atn::DrawHelper::ComDrawFontSideFade])
+- fn_80061DEC -> atn_ComDrawFont_destructor (evidence: virtual destructor slot 0 in vtable lbl_80777920 [atn::DrawHelper::ComDrawFont])
+- fn_80067480 -> atn_ComDrawFont_execute (evidence: virtual execute slot 2 in vtable lbl_80777920 [atn::DrawHelper::ComDrawFont])
+- fn_80068C30 -> atn_ComDrawTextureMaskMono_destructor (evidence: virtual destructor slot 0 in vtable lbl_80777960 [atn::DrawHelper::ComDrawTextureMaskMono])
+- fn_80066A74 -> atn_ComDrawTextureMaskMono_execute (evidence: virtual execute slot 2 in vtable lbl_80777960 [atn::DrawHelper::ComDrawTextureMaskMono])
+- fn_80068BF0 -> atn_ComDrawTextureMono_destructor (evidence: virtual destructor slot 0 in vtable lbl_807779A8 [atn::DrawHelper::ComDrawTextureMono])
+- fn_80066098 -> atn_ComDrawTextureMono_execute (evidence: virtual execute slot 2 in vtable lbl_807779A8 [atn::DrawHelper::ComDrawTextureMono])
+- fn_800602A8 -> atn_ComDrawTextureMask_destructor (evidence: virtual destructor slot 0 in vtable lbl_807779F0 [atn::DrawHelper::ComDrawTextureMask])
+- fn_80065B34 -> atn_ComDrawTextureMask_execute (evidence: virtual execute slot 2 in vtable lbl_807779F0 [atn::DrawHelper::ComDrawTextureMask])
+- fn_80068BB0 -> atn_ComDrawTextureAdd_destructor (evidence: virtual destructor slot 0 in vtable lbl_80777A30 [atn::DrawHelper::ComDrawTextureAdd])
+- fn_800656C8 -> atn_ComDrawTextureAdd_execute (evidence: virtual execute slot 2 in vtable lbl_80777A30 [atn::DrawHelper::ComDrawTextureAdd])
+- fn_8005FD40 -> atn_ComDrawTexture_destructor (evidence: virtual destructor slot 0 in vtable lbl_80777A70 [atn::DrawHelper::ComDrawTexture])
+- fn_8006533C -> atn_ComDrawTexture_execute (evidence: virtual execute slot 2 in vtable lbl_80777A70 [atn::DrawHelper::ComDrawTexture])
+- fn_80068B70 -> atn_ComDrawLine_destructor (evidence: virtual destructor slot 0 in vtable lbl_80777AB0 [atn::DrawHelper::ComDrawLine])
+- fn_80065060 -> atn_ComDrawLine_execute (evidence: virtual execute slot 2 in vtable lbl_80777AB0 [atn::DrawHelper::ComDrawLine])
+Decompiled: none in this unit
+Notes:
+- Decodes the `atn::DrawHelper` immediate-mode command drawing engine:
+  - Subclasses implementing `atn::IRender` queue 2D/3D primitive rendering commands: line rendering (`ComDrawLine`), textured quads with blending (`ComDrawTexture`, `ComDrawTextureAdd`, `ComDrawTextureMask`, `ComDrawTextureMono`), debug collision wireframes (`ComDrawColliObject`, `ComDrawColliTree`), text fonts with edge fading (`ComDrawFont`, `ComDrawFontSideFade`), and GUI windows (`ComDrawWindow`).
+  - All 23 local `lbl_fn_*` assembly labels inside caller asm blocks were simultaneously normalized to `lbl_atn_*` across 4 source files (`src/game_enemy.c`, `src/game_equip.c`, `src/game_party.c`, `src/game_skill.c`).
+Next:
+1. `atn_LH_Texture_constructor` (`fn_800D5738`, 120 B) and `atn_LH_Texture_destructor` (`fn_800D57B0`, 88 B) -> decompile to C in `src/game_depth.c`.
+2. `fn_800D7278` (1252 B): character texture bake (EFB copy + `GXDrawDone` + readback).
+3. Batch 10 renames in `atn::Fade*`, `atn::LensFlare`, and `ArenaTask`.
+
+
 ### 2026-11-01 — Batch 8: atn::ColliObject, atn::ColliTree, and atn::*Curve Animation Family Renames (31 functions)
 
 Numbers:  progress before -> after: 99.30 % -> 99.30 % (7,425,512 / 7,477,608 bytes, 18,054 / 18,155 functions)

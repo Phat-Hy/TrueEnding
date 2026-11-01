@@ -16,7 +16,7 @@ extern void fn_8000DD98(void);
 extern void fn_8004B338(void);
 extern void fn_8004B378(void);
 extern void fn_8005ED68(void);
-extern void fn_80065B34(void);
+extern void atn_ComDrawTextureMask_execute(void);
 extern void fn_8006F72C(void);
 extern void fn_80071D68(void);
 extern void fn_80071D74(void);
@@ -441,7 +441,7 @@ lbl_fn_804ABA2C_00000144:
     addi r3, r1, 0x84
     stb r0, 0x98(r1)
     stw r0, 0x9c(r1)
-    bl fn_80065B34
+    bl atn_ComDrawTextureMask_execute
     bl fn_804ABF20
     bl fn_804ABF14
     bl fn_803D71C4

@@ -61,7 +61,7 @@ void atn_CosinusCurve_getDuration(void);
 void atn_SinusCurve_getDerivative(void);
 void atn_SinusCurve_getDuration(void);
 void fn_8005DD60(void);
-void fn_8005DE30(void);
+void atn_DrawHelper_destructor(void);
 void fn_8005DED8(void);
 void fn_8005DF90(void);
 void fn_8005DFC8(void);
@@ -1923,7 +1923,7 @@ lbl_fn_8005DD60_00001888:
     blr
 }
 
-asm void fn_8005DE30(void)
+asm void atn_DrawHelper_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1934,7 +1934,7 @@ asm void fn_8005DE30(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_8005DE30_00001928
+    beq lbl_atn_DrawHelper_destructor_00001928
     lis r4, lbl_807777C0@ha
     addi r4, r4, lbl_807777C0@l
     stw r4, 0x0(r3)
@@ -1949,20 +1949,20 @@ asm void fn_8005DE30(void)
     li r4, -0x1
     bl fn_800D5808
     addic. r0, r30, 0x4
-    beq lbl_fn_8005DE30_00001918
+    beq lbl_atn_DrawHelper_destructor_00001918
     lwz r3, 0x4(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_8005DE30_00001918
+    beq lbl_atn_DrawHelper_destructor_00001918
     bl fn_80084C24
     li r0, 0x0
     stw r0, 0x4(r30)
     stw r0, 0x8(r30)
-lbl_fn_8005DE30_00001918:
+lbl_atn_DrawHelper_destructor_00001918:
     cmpwi r31, 0x0
-    ble lbl_fn_8005DE30_00001928
+    ble lbl_atn_DrawHelper_destructor_00001928
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8005DE30_00001928:
+lbl_atn_DrawHelper_destructor_00001928:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

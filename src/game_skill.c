@@ -59,7 +59,7 @@ void fn_8006144C(void);
 void fn_800616C0(void);
 void fn_80061824(void);
 void fn_80061AE4(void);
-void fn_80061DEC(void);
+void atn_ComDrawFont_destructor(void);
 void fn_80061E2C(void);
 void fn_80062908(void);
 void fn_8006297C(void);
@@ -999,7 +999,7 @@ lbl_fn_80061AE4_00000CDC:
     blr
 }
 
-asm void fn_80061DEC(void)
+asm void atn_ComDrawFont_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1008,11 +1008,11 @@ asm void fn_80061DEC(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    beq lbl_fn_80061DEC_00000D74
+    beq lbl_atn_ComDrawFont_destructor_00000D74
     cmpwi r4, 0x0
-    ble lbl_fn_80061DEC_00000D74
+    ble lbl_atn_ComDrawFont_destructor_00000D74
     bl dtor_80084684
-lbl_fn_80061DEC_00000D74:
+lbl_atn_ComDrawFont_destructor_00000D74:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
