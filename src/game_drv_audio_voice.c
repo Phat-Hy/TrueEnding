@@ -27,7 +27,7 @@ extern void str_findChar(void);
 extern void fn_80116FC0(void);
 extern void actor_setState(void);
 extern void fn_801F4C14(void);
-extern void fn_801FEE08(void);
+extern void thread_dispatchToQueue(void);
 extern void fn_8021F09C(void);
 extern void fn_803957F0(void);
 extern void fn_803C0634(void);
@@ -1631,7 +1631,7 @@ lbl_fn_805BA16C_00001474:
     mr r4, r3
     mr r3, r26
     mr r5, r27
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r4, 0x48(r31)
     li r3, 0x0
     bl fn_80116FC0
@@ -1643,7 +1643,7 @@ lbl_fn_805BA16C_00001474:
     mr r4, r3
     mr r3, r26
     mr r5, r27
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
 lbl_fn_805BA16C_0000151C:
     lwz r3, 0x40(r31)
     cmpwi r3, 0x0

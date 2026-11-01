@@ -44,9 +44,9 @@ extern void fn_801F6C80(void);
 extern void fn_801F72D4(void);
 extern void fn_801F837C(void);
 extern void fn_801F8830(void);
-extern void fn_801FECE0(void);
-extern void fn_801FED24(void);
-extern void fn_801FEE08(void);
+extern void thread_findAndNotify(void);
+extern void thread_findAndNotifySlot(void);
+extern void thread_dispatchToQueue(void);
 extern void fn_80219344(void);
 extern void fn_80219558(void);
 extern void task_findEntryById(void);
@@ -1763,7 +1763,7 @@ lbl_fn_805AC75C_00001658:
     mr r4, r3
     mr r3, r17
     li r5, 0x0
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r4, 0x15b0(r15)
     addi r3, r16, 0xed
     addi r17, r4, 0x58
@@ -1772,7 +1772,7 @@ lbl_fn_805AC75C_00001658:
     mr r4, r3
     mr r3, r17
     li r5, 0x1
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lfs f0, lbl_808882F4
     addi r3, r16, 0xf7
     stfs f0, 0x144(r1)
@@ -1952,7 +1952,7 @@ lbl_fn_805AC75C_00001954:
     fmr f1, f30
     mr r4, r3
     mr r3, r17
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0x15b8(r15)
     addi r3, r16, 0x13e
     addi r16, r4, 0x58
@@ -1960,7 +1960,7 @@ lbl_fn_805AC75C_00001954:
     fmr f1, f30
     mr r4, r3
     mr r3, r16
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_805AC75C_000019FC
 lbl_fn_805AC75C_000019AC:
     lfs f0, lbl_808882F8
@@ -1974,7 +1974,7 @@ lbl_fn_805AC75C_000019AC:
     fmr f1, f30
     mr r4, r3
     mr r3, r17
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0x15b8(r15)
     addi r3, r16, 0x13e
     addi r16, r4, 0x58
@@ -1982,7 +1982,7 @@ lbl_fn_805AC75C_000019AC:
     fmr f1, f30
     mr r4, r3
     mr r3, r16
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_805AC75C_000019FC:
     lwz r16, 0x60(r14)
     cmpwi r16, 0x0
@@ -2000,7 +2000,7 @@ lbl_fn_805AC75C_000019FC:
     lwz r5, 0x8(r16)
     mr r4, r3
     mr r3, r17
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, 0x15b4(r15)
     mr r4, r16
     li r5, 0x4
@@ -2034,7 +2034,7 @@ lbl_fn_805AC75C_00001A54:
     fmr f1, f30
     mr r4, r3
     mr r3, r18
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lfs f0, lbl_80888334
     fcmpo cr0, f30, f0
     bge lbl_fn_805AC75C_00001B14
@@ -2101,7 +2101,7 @@ lbl_fn_805AC75C_00001B94:
     lfs f1, lbl_808882F8
     mr r4, r3
     mr r3, r14
-    bl fn_801FECE0
+    bl thread_findAndNotify
     subfic r0, r16, 0x5
     lis r3, lbl_807639B8@ha
     xoris r0, r0, 0x8000
@@ -2125,7 +2125,7 @@ lbl_fn_805AC75C_00001BF8:
     lfs f1, lbl_808882F4
     mr r4, r3
     mr r3, r17
-    bl fn_801FECE0
+    bl thread_findAndNotify
     subfic r0, r14, 0x2
     lis r3, lbl_807639B8@ha
     xoris r0, r0, 0x8000
@@ -2159,7 +2159,7 @@ lbl_fn_805AC75C_00001C6C:
     lfs f1, lbl_80888354
     mr r4, r3
     mr r3, r16
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0x15b0(r15)
     addi r3, r14, 0x17a
     addi r16, r4, 0x58
@@ -2167,7 +2167,7 @@ lbl_fn_805AC75C_00001C6C:
     lfs f1, lbl_808882F4
     mr r4, r3
     mr r3, r16
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0x15b0(r15)
     addi r3, r14, 0x17f
     addi r14, r4, 0x58
@@ -2175,7 +2175,7 @@ lbl_fn_805AC75C_00001C6C:
     lfs f1, lbl_808882F4
     mr r4, r3
     mr r3, r14
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_805AC75C_00001DBC
 lbl_fn_805AC75C_00001CE0:
     cmpwi r16, 0x2
@@ -2189,7 +2189,7 @@ lbl_fn_805AC75C_00001CE0:
     lfs f1, lbl_80888354
     mr r4, r3
     mr r3, r16
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0x15b0(r15)
     addi r3, r14, 0x17a
     addi r16, r4, 0x58
@@ -2197,7 +2197,7 @@ lbl_fn_805AC75C_00001CE0:
     lfs f1, lbl_8088835C
     mr r4, r3
     mr r3, r16
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0x15b0(r15)
     addi r3, r14, 0x17f
     addi r14, r4, 0x58
@@ -2205,7 +2205,7 @@ lbl_fn_805AC75C_00001CE0:
     lfs f1, lbl_808882F4
     mr r4, r3
     mr r3, r14
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_805AC75C_00001DBC
 lbl_fn_805AC75C_00001D54:
     lwz r4, 0x15b0(r15)
@@ -2217,7 +2217,7 @@ lbl_fn_805AC75C_00001D54:
     lfs f1, lbl_808882F4
     mr r4, r3
     mr r3, r16
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0x15b0(r15)
     addi r3, r14, 0x17a
     addi r16, r4, 0x58
@@ -2225,7 +2225,7 @@ lbl_fn_805AC75C_00001D54:
     lfs f1, lbl_80888354
     mr r4, r3
     mr r3, r16
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0x15b0(r15)
     addi r3, r14, 0x17f
     addi r14, r4, 0x58
@@ -2233,7 +2233,7 @@ lbl_fn_805AC75C_00001D54:
     lfs f1, lbl_8088832C
     mr r4, r3
     mr r3, r14
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_805AC75C_00001DBC:
     lis r3, lbl_807639B8@ha
     lis r4, lbl_807639C0@ha

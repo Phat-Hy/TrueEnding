@@ -12,7 +12,7 @@ extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006AFF8(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void atn_Model_findBoneIndex(void);
@@ -1552,7 +1552,7 @@ lbl_fn_80264DB4_00001494:
     li r6, 0x0
     addi r4, r31, 0x49
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     addi r3, r30, 0x1564
     addi r4, r31, 0x53
     bl res_MsgHandle_destructor

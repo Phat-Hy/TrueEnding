@@ -32,7 +32,7 @@ extern void magic_dispatchActionCommand(void);
 extern void boss_updatePhaseState(void);
 extern void fn_801F3FF8(void);
 extern void fn_801FEC74(void);
-extern void fn_801FECE0(void);
+extern void thread_findAndNotify(void);
 extern void fn_80204230(void);
 extern void fn_8020F130(void);
 extern void fn_8020F71C(void);
@@ -420,7 +420,7 @@ lbl_fn_8053F1B8_0000044C:
     fmr f1, f31
     mr r4, r3
     addi r3, r30, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_8053F1B8_0000046C:
     mr r3, r31
     bl fn_80550258

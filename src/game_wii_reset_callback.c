@@ -13,7 +13,7 @@ extern void fn_8006D008(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800DC880(void);
+extern void str_calcHash(void);
 extern void fn_8020F130(void);
 extern void fn_8020F75C(void);
 extern void boss_getOffset54(void);
@@ -442,7 +442,7 @@ asm void fn_80576404(void)
     lis r30, lbl_80760FC0@ha
     li r4, 0x0
     addi r3, r30, lbl_80760FC0@l
-    bl fn_800DC880
+    bl str_calcHash
     mr r4, r3
     mr r3, r29
     bl fn_80539334
@@ -450,7 +450,7 @@ asm void fn_80576404(void)
     lfs f31, 0x4(r3)
     addi r3, r4, 0x6
     li r4, 0x0
-    bl fn_800DC880
+    bl str_calcHash
     mr r4, r3
     mr r3, r29
     bl fn_80539334
@@ -501,7 +501,7 @@ lbl_fn_80576404_0000059C:
     li r4, 0x0
     addi r30, r30, lbl_80760FC0@l
     addi r3, r30, 0xd
-    bl fn_800DC880
+    bl str_calcHash
     mr r4, r3
     mr r3, r29
     bl fn_80539334
@@ -510,7 +510,7 @@ lbl_fn_80576404_0000059C:
     li r4, 0x0
     stw r31, 0x4(r3)
     mr r3, r30
-    bl fn_800DC880
+    bl str_calcHash
     mr r4, r3
     mr r3, r29
     bl fn_80539334
@@ -520,7 +520,7 @@ lbl_fn_80576404_0000059C:
     li r4, 0x0
     stfs f0, 0x4(r3)
     addi r3, r30, 0x6
-    bl fn_800DC880
+    bl str_calcHash
     mr r4, r3
     mr r3, r29
     bl fn_80539334
@@ -538,7 +538,7 @@ lbl_fn_80576404_00000618:
     li r4, 0x0
     addi r31, r31, lbl_80760FC0@l
     addi r3, r31, 0x14
-    bl fn_800DC880
+    bl str_calcHash
     mr r4, r3
     mr r3, r29
     bl fn_80539334
@@ -548,7 +548,7 @@ lbl_fn_80576404_00000618:
     lwz r30, 0x18(r29)
     addi r3, r31, 0x14
     li r4, 0x0
-    bl fn_800DC880
+    bl str_calcHash
     mr r4, r3
     mr r3, r29
     bl fn_80539334

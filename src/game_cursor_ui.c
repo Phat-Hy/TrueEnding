@@ -14,7 +14,7 @@ extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
 extern void route_interpolatePath(void);
 extern void fn_80087858(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800A9E54(void);
@@ -737,14 +737,14 @@ lbl_fn_800A8A80_000008C4:
     addi r5, r28, 0x4
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     addi r31, r31, lbl_80732A5C@l
     mr r3, r30
     addi r4, r31, 0x7
     addi r5, r28, 0x68
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r30
     addi r4, r31, 0x11
     bl fn_8008937C

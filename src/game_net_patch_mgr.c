@@ -11,7 +11,7 @@ extern void dtor_80084684(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_getAllocSize(void);
-extern void fn_800DC880(void);
+extern void str_calcHash(void);
 extern void fn_800DCA6C(void);
 extern void fn_8053770C(void);
 extern void fn_8053C6A8(void);
@@ -1428,20 +1428,20 @@ asm void fn_8053AF38(void)
     lis r29, lbl_8075DA28@ha
     addi r29, r29, lbl_8075DA28@l
     addi r3, r29, 0x4d
-    bl fn_800DC880
+    bl str_calcHash
     lis r30, lbl_80793B28@ha
     li r4, 0x0
     addi r30, r30, lbl_80793B28@l
     stw r3, 0x4(r30)
     addi r3, r29, 0x52
     stw r29, 0xc(r30)
-    bl fn_800DC880
+    bl str_calcHash
     stw r3, 0x1c(r30)
     li r31, 0x0
     addi r3, r29, 0x57
     li r4, 0x0
     stw r31, 0x24(r30)
-    bl fn_800DC880
+    bl str_calcHash
     stw r31, 0x3c(r30)
     lwz r31, 0x1c(r1)
     stw r3, 0x34(r30)

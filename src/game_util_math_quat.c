@@ -31,9 +31,9 @@ extern void fn_801F7590(void);
 extern void fn_801F7DF0(void);
 extern void fn_801F837C(void);
 extern void fn_801F8598(void);
-extern void fn_801FECE0(void);
-extern void fn_801FED24(void);
-extern void fn_801FEE08(void);
+extern void thread_findAndNotify(void);
+extern void thread_findAndNotifySlot(void);
+extern void thread_dispatchToQueue(void);
 extern void fn_80206B9C(void);
 extern void fn_80206C50(void);
 extern void fn_8020ED84(void);
@@ -962,7 +962,7 @@ lbl_fn_8058100C_00000B58:
     fmr f1, f31
     mr r4, r3
     mr r3, r28
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0x90(r30)
     addi r3, r29, 0x30d
     addi r28, r4, 0x58
@@ -970,7 +970,7 @@ lbl_fn_8058100C_00000B58:
     lfs f1, lbl_808880C0
     mr r4, r3
     mr r3, r28
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_8058100C_00000C14
 lbl_fn_8058100C_00000BEC:
     lwz r4, 0x90(r30)
@@ -982,7 +982,7 @@ lbl_fn_8058100C_00000BEC:
     lfs f1, lbl_808880C4
     mr r4, r3
     mr r3, r28
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_8058100C_00000C14:
     lis r29, lbl_807612E4@ha
     lwz r3, 0x90(r30)
@@ -1231,7 +1231,7 @@ lbl_fn_805811E0_00000F5C:
     mr r4, r3
     mr r3, r25
     mr r5, r31
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     mr r5, r21
     addi r3, r1, 0x48
     addi r4, r26, 0x344
@@ -1384,7 +1384,7 @@ asm void fn_80581678(void)
     mr r4, r3
     mr r3, r29
     li r5, 0x0
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     addis r3, r31, 0x2
     lfs f31, 0xc(r1)
     lwz r4, 0x5b2c(r3)
@@ -1395,7 +1395,7 @@ asm void fn_80581678(void)
     mr r4, r3
     mr r3, r29
     li r5, 0x1
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     addis r5, r31, 0x2
     addi r4, r30, 0x2d2
     lwz r3, 0x5b2c(r5)
@@ -1497,7 +1497,7 @@ lbl_fn_80581820_00001320:
     mr r4, r3
     mr r3, r31
     addi r5, r1, 0x8
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     b lbl_fn_80581820_000013D4
 lbl_fn_80581820_00001358:
     lis r3, lbl_80761230@ha
@@ -1525,7 +1525,7 @@ lbl_fn_80581820_00001388:
     mr r4, r3
     mr r3, r30
     mr r5, r31
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     b lbl_fn_80581820_000013D4
 lbl_fn_80581820_000013BC:
     li r4, -0x1
@@ -1594,7 +1594,7 @@ lbl_fn_80581968_00001474:
     mr r4, r3
     mr r3, r30
     mr r5, r31
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     b lbl_fn_80581968_000014C4
 lbl_fn_80581968_000014A8:
     li r4, 0x0

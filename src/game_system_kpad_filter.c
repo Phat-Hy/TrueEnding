@@ -31,7 +31,7 @@ extern void fn_8016EB48(void);
 extern void fn_801750FC(void);
 extern void fn_80178A6C(void);
 extern void fn_801E97DC(void);
-extern void fn_801FECE0(void);
+extern void thread_findAndNotify(void);
 extern void fn_802085E0(void);
 extern void fn_8021771C(void);
 extern void fn_80219074(void);
@@ -503,7 +503,7 @@ asm void fn_803743AC(void)
     lfs f1, lbl_80885708
     mr r4, r3
     mr r3, r29
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r3, 0xb20(r31)
     lfs f0, lbl_8088570C
     lwz r0, 0x38(r3)

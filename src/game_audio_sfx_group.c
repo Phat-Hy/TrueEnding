@@ -8,7 +8,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_27(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80097D40(void);
@@ -1874,7 +1874,7 @@ lbl_fn_8031348C_00001948:
     addi r4, r4, 0x104
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lwz r0, 0x114(r1)
     lwz r31, 0x10c(r1)
     lwz r30, 0x108(r1)

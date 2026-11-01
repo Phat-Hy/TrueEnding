@@ -26,8 +26,8 @@ extern void fn_801F7590(void);
 extern void fn_801F7DF0(void);
 extern void fn_801F837C(void);
 extern void fn_801F8598(void);
-extern void fn_801FECE0(void);
-extern void fn_801FEE08(void);
+extern void thread_findAndNotify(void);
+extern void thread_dispatchToQueue(void);
 extern void fn_80211480(void);
 extern void fn_804439FC(void);
 extern void fn_8044441C(void);
@@ -385,7 +385,7 @@ lbl_fn_80587E40_0000037C:
     mr r4, r3
     mr r3, r31
     addi r5, r1, 0x18
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
 lbl_fn_80587E40_000003B4:
     addi r3, r1, 0x10
     li r4, 0x19
@@ -542,7 +542,7 @@ asm void fn_805880F4(void)
     lfs f1, lbl_80888114
     mr r4, r3
     mr r3, r24
-    bl fn_801FECE0
+    bl thread_findAndNotify
     addis r5, r29, 0x2
     mr r3, r29
     lwz r6, 0x5bc0(r5)

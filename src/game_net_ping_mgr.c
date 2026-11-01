@@ -26,7 +26,7 @@ extern void fn_801D082C(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801F6C80(void);
 extern void fn_801F6E78(void);
-extern void fn_801FEE08(void);
+extern void thread_dispatchToQueue(void);
 extern void fn_80201E78(void);
 extern void fn_80202118(void);
 extern void fn_80202A6C(void);
@@ -1335,7 +1335,7 @@ lbl_fn_8051531C_00001118:
     mr r4, r3
     mr r5, r20
     addi r3, r15, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwzx r3, r18, r17
     bl fn_80202118
     stfs f30, 0x104(r3)
@@ -1366,7 +1366,7 @@ lbl_fn_8051531C_00001158:
     mr r4, r3
     mr r5, r17
     addi r3, r15, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
 lbl_fn_8051531C_000011B8:
     mr r3, r28
     bl fn_8050FD24

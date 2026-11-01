@@ -34,7 +34,7 @@ extern void fn_801F6C80(void);
 extern void fn_801F6E78(void);
 extern void fn_801F837C(void);
 extern void fn_801F8598(void);
-extern void fn_801FEE08(void);
+extern void thread_dispatchToQueue(void);
 extern void fn_801FEF40(void);
 extern void fn_8020924C(void);
 extern void fn_80216544(void);
@@ -1273,7 +1273,7 @@ lbl_fn_80571C68_00000FAC:
     mr r4, r3
     mr r3, r30
     mr r5, r31
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     b lbl_fn_80571C68_000010A8
 lbl_fn_80571C68_00001000:
     lwz r3, lbl_8087F1E4
@@ -1293,7 +1293,7 @@ lbl_fn_80571C68_00001018:
     mr r4, r3
     mr r3, r31
     mr r5, r30
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     b lbl_fn_80571C68_000010A8
 lbl_fn_80571C68_00001044:
     li r0, 0x0
@@ -1315,7 +1315,7 @@ lbl_fn_80571C68_00001064:
     mr r4, r3
     mr r3, r31
     mr r5, r30
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     b lbl_fn_80571C68_000010A8
 lbl_fn_80571C68_00001090:
     bl fn_8011770C

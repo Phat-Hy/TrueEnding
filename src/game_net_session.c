@@ -28,7 +28,7 @@ extern void fn_8016E800(void);
 extern void fn_801F3FF8(void);
 extern void fn_801F64D0(void);
 extern void fn_801F6D7C(void);
-extern void fn_801FEE08(void);
+extern void thread_dispatchToQueue(void);
 extern void fn_80202118(void);
 extern void fn_8020787C(void);
 extern void fn_80219EB4(void);
@@ -171,7 +171,7 @@ lbl_fn_801E7D78_000000CC:
     mr r4, r3
     mr r5, r26
     addi r3, r31, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     addi r25, r25, 0x1
     addi r27, r27, 0x14
     cmpwi r25, 0x2
@@ -259,7 +259,7 @@ lbl_fn_801E7EA8_000001FC:
     mr r4, r3
     mr r5, r26
     addi r3, r31, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     addi r25, r25, 0x1
     addi r27, r27, 0x14
     cmpwi r25, 0x2

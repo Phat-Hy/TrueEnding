@@ -17,7 +17,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_805C0120(void);
+extern void gx_selectActiveParam(void);
 extern void fn_805C23D0(void);
 extern void fn_805C26A0(void);
 extern void fn_805C3940(void);
@@ -162,7 +162,7 @@ lbl_fn_805CC170_00000084:
     add r3, r31, r0
     lwz r27, 0x260(r3)
     mr r3, r27
-    bl fn_805C0120
+    bl gx_selectActiveParam
     stw r29, 0x14(r27)
     stw r30, 0x20(r26)
 lbl_fn_805CC170_000000A0:
@@ -179,7 +179,7 @@ lbl_fn_805CC170_000000A8:
     beq lbl_fn_805CC170_000000F4
     lwz r27, 0x3e8(r31)
     mr r3, r27
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x1
     stw r0, 0x14(r27)
     li r4, 0x0
@@ -235,7 +235,7 @@ lbl_fn_805CC170_0000018C:
     add r3, r31, r0
     lwz r27, 0x290(r3)
     mr r3, r27
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x1
     stw r0, 0x14(r27)
     li r4, 0x0
@@ -278,7 +278,7 @@ lbl_fn_805CC170_00000224:
     add r3, r31, r0
     lwz r27, 0x290(r3)
     mr r3, r27
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x1
     stw r0, 0x14(r27)
     li r4, 0x0

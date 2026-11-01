@@ -18,7 +18,7 @@ extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006AFF8(void);
 extern void mem_free(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void atn_Model_findBoneIndex(void);
 extern void skin_applyWeights(void);
@@ -155,7 +155,7 @@ lbl_fn_802DDBB0_0000004C:
     li r6, 0x0
     addi r4, r4, 0x32b
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

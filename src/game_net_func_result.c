@@ -27,7 +27,7 @@ extern void fn_800DC1DC(void);
 extern void str_findChar(void);
 extern void fn_800DD3FC(void);
 extern void fn_80117228(void);
-extern void fn_801FEE08(void);
+extern void thread_dispatchToQueue(void);
 extern void fn_80206B9C(void);
 extern void fn_80209184(void);
 extern void fn_8020C07C(void);
@@ -199,7 +199,7 @@ lbl_fn_80505514_00000080:
     mr r4, r3
     mr r3, r29
     mr r5, r28
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, 0x25b4(r31)
     subi r0, r3, 0x1
     stw r0, 0x25b4(r31)
@@ -290,7 +290,7 @@ lbl_fn_80505514_00000244:
     mr r4, r3
     mr r3, r27
     addi r5, r1, 0x30
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     addi r30, r30, 0x2
     addi r25, r25, 0x1
 lbl_fn_80505514_0000028C:
@@ -324,7 +324,7 @@ lbl_fn_80505514_000002C0:
     mr r4, r3
     mr r3, r27
     addi r5, r1, 0x30
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     addi r25, r25, 0x1
 lbl_fn_80505514_00000300:
     cmplwi r25, 0x8
@@ -361,7 +361,7 @@ lbl_fn_80505514_00000324:
     mr r4, r3
     mr r3, r27
     addi r5, r1, 0x30
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, 0x25b4(r31)
     addi r0, r3, 0x1
     stw r0, 0x25b4(r31)
@@ -588,7 +588,7 @@ asm void fn_80505AB8(void)
     mr r4, r3
     mr r3, r30
     mr r5, r31
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, 0x25b4(r29)
     subi r0, r3, 0x1
     stw r0, 0x25b4(r29)

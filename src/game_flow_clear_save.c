@@ -17,10 +17,10 @@ extern void fn_801010E8(void);
 extern void fn_8010EE78(void);
 extern void fn_8014FAD0(void);
 extern void task_findEntryById(void);
-extern void fn_804AE3BC(void);
+extern void net_getPacketManager(void);
 extern void fn_804CF198(void);
 extern void fn_804CF640(void);
-extern void fn_804D1698(void);
+extern void net_getFriendManager(void);
 extern void fn_804D5F44(void);
 extern void fn_804D5F4C(void);
 extern void fn_804D634C(void);
@@ -821,8 +821,8 @@ asm void fn_804EE044(void)
     mr r31, r3
     mr r28, r4
     mr r26, r5
-    bl fn_804D1698
-    bl fn_804AE3BC
+    bl net_getFriendManager
+    bl net_getPacketManager
     mr r4, r31
     clrlwi r5, r26, 16
     bl fn_804EE4E4
@@ -866,24 +866,24 @@ lbl_fn_804EE044_00000998:
     mr r3, r28
     bl fn_804EE4E8
     mr r28, r3
-    bl fn_804D1698
-    bl fn_804AE3BC
+    bl net_getFriendManager
+    bl net_getPacketManager
     mr r4, r28
     mr r5, r26
     bl fn_8050E534
     cmpwi r3, 0x0
     stw r3, 0x8(r1)
     bne lbl_fn_804EE044_000009E0
-    bl fn_804D1698
-    bl fn_804AE3BC
+    bl net_getFriendManager
+    bl net_getPacketManager
     mr r4, r31
     clrlwi r5, r26, 16
     bl fn_804EE4EC
     li r3, 0x0
     b lbl_fn_804EE044_00000D64
 lbl_fn_804EE044_000009E0:
-    bl fn_804D1698
-    bl fn_804AE3BC
+    bl net_getFriendManager
+    bl net_getPacketManager
     lwz r4, 0x8(r1)
     clrlwi r5, r26, 16
     bl fn_804EE4F0
@@ -896,15 +896,15 @@ lbl_fn_804EE044_000009E0:
     lis r29, jumptable_807912DC@ha
 lbl_fn_804EE044_00000A10:
     lwz r26, 0x8(r1)
-    bl fn_804D1698
-    bl fn_804AE3BC
+    bl net_getFriendManager
+    bl net_getPacketManager
     addi r4, r1, 0x8
     li r5, 0x1
     bl fn_8050E414
     clrlwi. r0, r3, 24
     mr r28, r3
     beq lbl_fn_804EE044_00000D24
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D634C
     cmpwi r3, 0x0
     bne lbl_fn_804EE044_00000A84
@@ -917,8 +917,8 @@ lbl_fn_804EE044_00000A10:
     beq lbl_fn_804EE044_00000A84
     cmplwi r0, 0x1e
     beq lbl_fn_804EE044_00000A84
-    bl fn_804D1698
-    bl fn_804AE3BC
+    bl net_getFriendManager
+    bl net_getPacketManager
     mr r4, r31
     mr r5, r26
     bl fn_8050E59C
@@ -935,8 +935,8 @@ lbl_fn_804EE044_00000A84:
     lwzx r3, r3, r0
     mtctr r3
     bctr
-    bl fn_804D1698
-    bl fn_804AE3BC
+    bl net_getFriendManager
+    bl net_getPacketManager
     addi r5, r30, 0x1fd
     li r4, 0x0
     crclr 6
@@ -1099,13 +1099,13 @@ lbl_fn_804EE044_00000D24:
     lbz r0, -0x6650(r3)
     cmplwi r0, 0x1
     bne lbl_fn_804EE044_00000D60
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_800F7F90
     addis r30, r3, 0x1
     bl fn_800F7F90
     addis r3, r3, 0x1
     lbz r31, -0x664f(r3)
-    bl fn_804AE3BC
+    bl net_getPacketManager
     lwz r5, -0x664c(r30)
     mr r4, r31
     bl fn_8050DDE0
@@ -1386,7 +1386,7 @@ asm void fn_804EE838(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_804AE3BC
+    bl net_getPacketManager
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804EE838_00001114
@@ -1405,7 +1405,7 @@ lbl_fn_804EE838_00001114:
     bl fn_804EE4F4
     cmplwi r3, 0x1
     bne lbl_fn_804EE838_00001188
-    bl fn_804AE3BC
+    bl net_getPacketManager
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804EE838_0000115C
@@ -1451,7 +1451,7 @@ asm void fn_804EE908(void)
     lwz r0, 0x4fc(r4)
     cmpwi r0, 0x1e
     bne lbl_fn_804EE908_00001270
-    bl fn_804AE3BC
+    bl net_getPacketManager
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804EE908_000011F8
@@ -1522,7 +1522,7 @@ asm void fn_804EE9F4(void)
     lwz r0, 0x4fc(r4)
     cmpwi r0, 0x1e
     bne lbl_fn_804EE9F4_000013B4
-    bl fn_804AE3BC
+    bl net_getPacketManager
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804EE9F4_000012E4
@@ -1615,7 +1615,7 @@ asm void fn_804EEB38(void)
     lwz r0, 0x4fc(r3)
     cmpwi r0, 0x1e
     bne lbl_fn_804EEB38_000015FC
-    bl fn_804AE3BC
+    bl net_getPacketManager
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804EEB38_00001424
@@ -1781,7 +1781,7 @@ asm void fn_804EED80(void)
     lwz r0, 0x4fc(r3)
     cmpwi r0, 0x1e
     bne lbl_fn_804EED80_00001968
-    bl fn_804AE3BC
+    bl net_getPacketManager
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804EED80_00001674
@@ -2028,7 +2028,7 @@ asm void fn_804EF0F4(void)
     lwz r0, 0x4fc(r4)
     cmpwi r0, 0x1e
     bne lbl_fn_804EF0F4_00002234
-    bl fn_804AE3BC
+    bl net_getPacketManager
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804EF0F4_000019E4
@@ -2519,7 +2519,7 @@ lbl_fn_804EF0F4_00002078:
     stw r0, 0x1d(r1)
     stw r0, 0x21(r1)
 lbl_fn_804EF0F4_00002084:
-    bl fn_804AE3BC
+    bl net_getPacketManager
     mr r4, r26
     mr r6, r25
     li r5, 0x1035
@@ -2591,7 +2591,7 @@ lbl_fn_804EF0F4_00002188:
     stw r0, 0xd(r1)
     stw r0, 0x11(r1)
 lbl_fn_804EF0F4_00002194:
-    bl fn_804AE3BC
+    bl net_getPacketManager
     mr r4, r26
     mr r6, r25
     li r5, 0x1035

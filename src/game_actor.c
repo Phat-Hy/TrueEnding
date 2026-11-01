@@ -29,7 +29,7 @@ extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void atn_Task_constructor(void);
@@ -860,13 +860,13 @@ lbl_fn_80014564_00000960:
     addi r4, r30, 0xb
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r25
     addi r4, r30, 0x15
     addi r5, r31, 0x54
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r25
     addi r4, r30, 0x1e
     bl fn_8008937C
@@ -893,7 +893,7 @@ lbl_fn_80014564_00000960:
     addi r5, r31, 0x7d8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     addi r3, r31, 0x9c
     li r4, 0x0
     li r5, 0x40

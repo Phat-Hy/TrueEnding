@@ -25,7 +25,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_800D3FA4(void);
 extern void str_findChar(void);
-extern void fn_801FECE0(void);
+extern void thread_findAndNotify(void);
 extern void fn_8046C1C8(void);
 extern void atn_Arc_loadEntry(void);
 extern void fn_8046CBB0(void);
@@ -1274,7 +1274,7 @@ lbl_atn_Loader_finish_00000FB0:
     lfs f1, lbl_80886EC0
     mr r4, r3
     mr r3, r30
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0x3ee0(r31)
     addi r3, r29, 0x15f
     addi r29, r4, 0x58
@@ -1282,7 +1282,7 @@ lbl_atn_Loader_finish_00000FB0:
     lfs f1, lbl_80886EC0
     mr r4, r3
     mr r3, r29
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_atn_Loader_finish_00001104
 lbl_atn_Loader_finish_00001030:
     lwz r4, 0x3ee0(r31)
@@ -1294,7 +1294,7 @@ lbl_atn_Loader_finish_00001030:
     lfs f1, lbl_80886ECC
     mr r4, r3
     mr r3, r30
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0x3ee0(r31)
     addi r3, r29, 0x15f
     addi r29, r4, 0x58
@@ -1302,7 +1302,7 @@ lbl_atn_Loader_finish_00001030:
     lfs f1, lbl_80886ED0
     mr r4, r3
     mr r3, r29
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_atn_Loader_finish_00001104
 lbl_atn_Loader_finish_0000107C:
     lwz r6, 0x3ee0(r3)
@@ -1340,7 +1340,7 @@ lbl_atn_Loader_finish_000010DC:
     lfs f1, lbl_80886EC0
     mr r4, r3
     mr r3, r29
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_atn_Loader_finish_00001104:
     li r29, 0x0
     b lbl_atn_Loader_finish_00001118

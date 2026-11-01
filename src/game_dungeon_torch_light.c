@@ -20,9 +20,9 @@ extern void fn_801F5644(void);
 extern void fn_801F583C(void);
 extern void fn_801F5BC8(void);
 extern void fn_801F6350(void);
-extern void fn_801FECE0(void);
-extern void fn_801FED24(void);
-extern void fn_801FEE08(void);
+extern void thread_findAndNotify(void);
+extern void thread_findAndNotifySlot(void);
+extern void thread_dispatchToQueue(void);
 extern void fn_80211480(void);
 extern void task_findEntryById(void);
 extern void world_startMapTransition(void);
@@ -341,7 +341,7 @@ lbl_fn_803E598C_00000314:
     mr r4, r3
     mr r3, r29
     mr r5, r28
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r4, 0x2550(r30)
     addi r3, r31, 0x1130
     addi r29, r4, 0x58
@@ -349,7 +349,7 @@ lbl_fn_803E598C_00000314:
     mr r4, r3
     mr r3, r29
     mr r5, r28
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
 lbl_fn_803E598C_00000364:
     lwz r3, lbl_8087F610
     cmpwi r3, 0x0
@@ -473,7 +473,7 @@ lbl_fn_803E5C60_000004F4:
     mr r4, r3
     addi r3, r31, 0x58
     li r5, 0x0
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lfs f31, 0x10(r1)
     addi r3, r30, 0x1215
     bl str_findChar
@@ -481,7 +481,7 @@ lbl_fn_803E5C60_000004F4:
     mr r4, r3
     addi r3, r31, 0x58
     li r5, 0x1
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lis r3, lbl_80750618@ha
     lfs f0, lbl_80885D58
     addi r3, r3, lbl_80750618@l
@@ -777,7 +777,7 @@ lbl_fn_803E5E64_000008F8:
     mr r4, r3
     mr r3, r28
     addi r5, r1, 0x8
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r4, 0xdb8(r30)
     addi r3, r29, 0x11ab
     addi r28, r4, 0x58
@@ -785,7 +785,7 @@ lbl_fn_803E5E64_000008F8:
     mr r4, r3
     mr r3, r28
     addi r5, r1, 0x8
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r4, 0xdb8(r30)
     addi r3, r29, 0x14d4
     addi r28, r4, 0x58
@@ -793,7 +793,7 @@ lbl_fn_803E5E64_000008F8:
     mr r4, r3
     mr r3, r28
     addi r5, r1, 0x8
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lbz r0, 0xc2(r31)
     extsb. r0, r0
     ble lbl_fn_803E5E64_00000998
@@ -1233,7 +1233,7 @@ lbl_fn_803E668C_00000F48:
     fmr f1, f31
     mr r4, r3
     addi r3, r31, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_803E668C_00000F68:
     lwz r0, 0x24(r1)
     psq_l f31, 0x18(r1), 0, 0
@@ -1470,7 +1470,7 @@ asm void fn_803E6ADC(void)
     mr r4, r3
     mr r3, r30
     li r5, 0x0
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r4, 0xa84(r27)
     addi r3, r31, 0x113e
     addi r30, r4, 0x58
@@ -1479,7 +1479,7 @@ asm void fn_803E6ADC(void)
     mr r4, r3
     mr r3, r30
     li r5, 0x1
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
 lbl_fn_803E6ADC_00001294:
     lwz r3, 0xa88(r27)
     cmpwi r3, 0x0

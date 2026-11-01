@@ -20,8 +20,8 @@ extern void str_findChar(void);
 extern void fn_801F3FF8(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801FEC74(void);
-extern void fn_801FECE0(void);
-extern void fn_801FED24(void);
+extern void thread_findAndNotify(void);
+extern void thread_findAndNotifySlot(void);
 extern void fn_80470604(void);
 extern void fn_804730D4(void);
 extern void fn_804730E4(void);
@@ -204,7 +204,7 @@ asm void fn_8046ECDC(void)
     lfs f1, lbl_80886EC0
     mr r4, r3
     mr r3, r29
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r3, 0x3ee0(r31)
     addi r4, r30, 0x18b
     addi r3, r3, 0x58
@@ -256,7 +256,7 @@ lbl_fn_8046ECDC_000001F8:
     mr r3, r28
     li r5, 0x0
     fadds f1, f0, f31
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
 lbl_fn_8046ECDC_00000228:
     cmpwi r27, 0x0
     beq lbl_fn_8046ECDC_000002E0
@@ -280,7 +280,7 @@ lbl_fn_8046ECDC_00000228:
     lfs f1, lbl_80886EC4
     mr r4, r3
     mr r3, r28
-    bl fn_801FECE0
+    bl thread_findAndNotify
     li r0, 0x1
     stw r0, 0x3ef0(r31)
 lbl_fn_8046ECDC_0000028C:
@@ -307,7 +307,7 @@ lbl_fn_8046ECDC_000002B8:
     fmr f1, f31
     mr r4, r3
     mr r3, r28
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_8046ECDC_000002E0:
     lwz r0, 0x3ef4(r31)
     cmpwi r0, 0x0

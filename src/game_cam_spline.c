@@ -28,7 +28,7 @@ extern void fn_801F6C80(void);
 extern void fn_801F6D7C(void);
 extern void fn_801F837C(void);
 extern void fn_801F8598(void);
-extern void fn_801FED24(void);
+extern void thread_findAndNotifySlot(void);
 extern void fn_80207C34(void);
 extern void fn_802375C4(void);
 extern void fn_802376D0(void);
@@ -1755,7 +1755,7 @@ lbl_fn_800F0D14_00001668:
     mr r4, r3
     mr r3, r24
     li r5, 0x4
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     mr r21, r23
     li r24, 0x0
 lbl_fn_800F0D14_0000169C:

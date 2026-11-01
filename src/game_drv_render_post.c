@@ -23,10 +23,10 @@ extern void fn_805D9BE0(void);
 extern void fn_805D9C70(void);
 extern void fn_805D9CC0(void);
 extern void PSMTXIdentity(void);
-extern void fn_80612E80(void);
+extern void GXSetVtxDesc(void);
 extern void fn_806134E0(void);
-extern void fn_80613520(void);
-extern void fn_80613BB0(void);
+extern void GXSetVtxAttrFmt(void);
+extern void GXClearVtxDesc(void);
 extern void fn_80614790(void);
 extern void fn_806149C0(void);
 extern void fn_80615C40(void);
@@ -283,19 +283,19 @@ asm void fn_805CDDD0(void)
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     cmpwi r29, 0x0
     beq lbl_fn_805CDDD0_00000294
     li r3, 0xb
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
 lbl_fn_805CDDD0_00000294:
     li r31, 0x0
     b lbl_fn_805CDDD0_000002AC
 lbl_fn_805CDDD0_0000029C:
     addi r3, r31, 0xd
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     addi r31, r31, 0x1
 lbl_fn_805CDDD0_000002AC:
     cmpw r31, r30
@@ -305,7 +305,7 @@ lbl_fn_805CDDD0_000002AC:
     li r5, 0x0
     li r6, 0x4
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     cmpwi r29, 0x0
     beq lbl_fn_805CDDD0_000002EC
     li r3, 0x0
@@ -313,7 +313,7 @@ lbl_fn_805CDDD0_000002AC:
     li r5, 0x1
     li r6, 0x5
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
 lbl_fn_805CDDD0_000002EC:
     li r31, 0x0
     b lbl_fn_805CDDD0_00000310
@@ -323,7 +323,7 @@ lbl_fn_805CDDD0_000002F4:
     li r5, 0x1
     li r6, 0x4
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     addi r31, r31, 0x1
 lbl_fn_805CDDD0_00000310:
     cmpw r31, r30
@@ -811,13 +811,13 @@ asm void fn_805CE550(void)
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0x0
     li r4, 0x9
     li r5, 0x0
     li r6, 0x4
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x4
@@ -834,7 +834,7 @@ asm void fn_805CE550(void)
     li r3, 0x4
     bl fn_80615C40
     li r3, 0x0
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0

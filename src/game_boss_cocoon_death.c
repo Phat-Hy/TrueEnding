@@ -43,7 +43,7 @@ extern void fn_80158E1C(void);
 extern void actor_setState(void);
 extern void fn_801F3FF8(void);
 extern void fn_801F64D0(void);
-extern void fn_801FECE0(void);
+extern void thread_findAndNotify(void);
 extern void fn_802375C4(void);
 extern void res_MsgHandle_unload(void);
 extern void res_findResourceSlot(void);
@@ -1882,7 +1882,7 @@ asm void fn_80469650(void)
     lfs f0, lbl_80886EA4
     fsubs f1, f1, f2
     fdivs f1, f1, f0
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_80469650_000018F0
 lbl_fn_80469650_00001878:
     cmpwi r29, 0x3
@@ -1903,7 +1903,7 @@ lbl_fn_80469650_00001878:
     lfs f0, lbl_80886EA4
     fsubs f1, f1, f2
     fdivs f1, f1, f0
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_80469650_000018F0
 lbl_fn_80469650_000018C8:
     lwz r4, 0x84(r30)
@@ -1915,7 +1915,7 @@ lbl_fn_80469650_000018C8:
     lfs f1, lbl_80886E8C
     mr r4, r3
     mr r3, r28
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_80469650_000018F0:
     cmpwi r31, 0x7
     ble lbl_fn_80469650_00001944
@@ -1936,7 +1936,7 @@ lbl_fn_80469650_000018F0:
     lfs f0, lbl_80886EA4
     fsubs f1, f1, f2
     fdivs f1, f1, f0
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_80469650_00001A08
 lbl_fn_80469650_00001944:
     cmpwi r31, 0x3
@@ -1957,7 +1957,7 @@ lbl_fn_80469650_00001944:
     lfs f0, lbl_80886EA4
     fsubs f1, f1, f2
     fdivs f1, f1, f0
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_80469650_00001A08
 lbl_fn_80469650_00001994:
     lwz r4, 0x88(r30)
@@ -1969,7 +1969,7 @@ lbl_fn_80469650_00001994:
     lfs f1, lbl_80886E8C
     mr r4, r3
     mr r3, r28
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_80469650_00001A08
 lbl_fn_80469650_000019C0:
     lwz r4, 0x84(r30)
@@ -1981,7 +1981,7 @@ lbl_fn_80469650_000019C0:
     lfs f1, lbl_80886E88
     mr r4, r3
     mr r3, r28
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0x88(r30)
     addi r3, r31, 0x118
     addi r28, r4, 0x58
@@ -1989,7 +1989,7 @@ lbl_fn_80469650_000019C0:
     lfs f1, lbl_80886E88
     mr r4, r3
     mr r3, r28
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_80469650_00001A08:
     lwz r0, 0x90(r30)
     cmpwi r0, 0x2

@@ -81,7 +81,7 @@ void fn_804AE11C(void);
 void fn_804AE124(void);
 void fn_804AE264(void);
 void fn_804AE2DC(void);
-void fn_804AE3BC(void);
+void net_getPacketManager(void);
 void fn_804AE3C4(void);
 void fn_804AE3CC(void);
 void fn_804AE4C4(void);
@@ -942,13 +942,13 @@ asm void fn_804AE2DC(void)
 lbl_fn_804AE2DC_00000BD8:
     stw r4, 0xc(r1)
 lbl_fn_804AE2DC_00000BDC:
-    bl fn_804AE3BC
+    bl net_getPacketManager
     lwz r12, 0x0(r3)
     lwz r12, 0xc(r12)
     mtctr r12
     bctrl
     clrlwi r31, r3, 24
-    bl fn_804AE3BC
+    bl net_getPacketManager
     addi r4, r1, 0xc
     li r5, 0x0
     bl fn_8050E414
@@ -988,7 +988,7 @@ lbl_fn_804AE2DC_00000C68:
     blr
 }
 
-asm void fn_804AE3BC(void)
+asm void net_getPacketManager(void)
 {
     nofralloc
     lwz r3, lbl_8087F62C

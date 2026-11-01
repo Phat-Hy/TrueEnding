@@ -28,7 +28,7 @@ extern void str_findChar(void);
 extern void fn_801F4728(void);
 extern void fn_801F4998(void);
 extern void fn_801F4F84(void);
-extern void fn_801FECE0(void);
+extern void thread_findAndNotify(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void fn_80473F88(void);
@@ -299,7 +299,7 @@ lbl_spectateView_update_000002F4:
     fmr f1, f25
     mr r4, r3
     mr r3, r28
-    bl fn_801FECE0
+    bl thread_findAndNotify
     cmpwi r27, 0x0
     beq lbl_spectateView_update_0000032C
     lfs f25, lbl_80887BB4
@@ -316,7 +316,7 @@ lbl_spectateView_update_00000330:
     fmr f1, f25
     mr r4, r3
     mr r3, r28
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0x50(r30)
     addi r3, r27, 0x23b
     addi r27, r4, 0x58
@@ -324,7 +324,7 @@ lbl_spectateView_update_00000330:
     lfs f1, lbl_80887BB4
     mr r4, r3
     mr r3, r27
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r0, 0x2ac(r30)
     lfs f31, lbl_80887C58
     cmpwi r0, 0x19
@@ -626,7 +626,7 @@ lbl_spectateView_update_000007BC:
     fmr f1, f25
     mr r4, r3
     mr r3, r27
-    bl fn_801FECE0
+    bl thread_findAndNotify
     addi r28, r28, 0x1
     cmpwi r28, 0x3
     blt lbl_spectateView_update_0000078C
@@ -647,7 +647,7 @@ lbl_spectateView_update_000007F8:
     fmr f1, f25
     mr r4, r3
     mr r3, r27
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0x5c(r30)
     cmpwi r31, 0x0
     addi r3, r29, 0x27a
@@ -662,7 +662,7 @@ lbl_spectateView_update_00000840:
     fmr f1, f25
     mr r4, r3
     mr r3, r27
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_spectateView_update_00000854:
     addi r11, r1, 0x300
     psq_l f31, 0x388(r1), 0, 0

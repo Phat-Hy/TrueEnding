@@ -22,11 +22,11 @@ extern void fn_801F6450(void);
 extern void fn_801F6464(void);
 extern void fn_801FD5A0(void);
 extern void fn_801FDA20(void);
-extern void fn_801FECE0(void);
-extern void fn_801FED24(void);
+extern void thread_findAndNotify(void);
+extern void thread_findAndNotifySlot(void);
 extern void fn_801FED70(void);
 extern void fn_801FEDBC(void);
-extern void fn_801FEE08(void);
+extern void thread_dispatchToQueue(void);
 extern void fn_801FEEFC(void);
 extern void fn_801FEF40(void);
 extern void player_clock_updateIntervals(void);
@@ -484,7 +484,7 @@ asm void fn_801F4728(void)
     mr r4, r3
     addi r3, r29, 0x58
     li r5, 0x0
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lfs f31, 0x4(r31)
     mr r3, r30
     bl str_findChar
@@ -492,7 +492,7 @@ asm void fn_801F4728(void)
     mr r4, r3
     addi r3, r29, 0x58
     li r5, 0x1
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lfs f31, 0x8(r31)
     mr r3, r30
     bl str_findChar
@@ -500,7 +500,7 @@ asm void fn_801F4728(void)
     mr r4, r3
     addi r3, r29, 0x58
     li r5, 0x2
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lfs f31, 0xc(r31)
     mr r3, r30
     bl str_findChar
@@ -508,7 +508,7 @@ asm void fn_801F4728(void)
     mr r4, r3
     addi r3, r29, 0x58
     li r5, 0x3
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lfs f31, 0x10(r31)
     mr r3, r30
     bl str_findChar
@@ -516,7 +516,7 @@ asm void fn_801F4728(void)
     mr r4, r3
     addi r3, r29, 0x58
     li r5, 0x4
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r0, 0x34(r1)
     psq_l f31, 0x28(r1), 0, 0
     lfd f31, 0x20(r1)
@@ -549,7 +549,7 @@ asm void fn_801F4818(void)
     mr r4, r3
     addi r3, r29, 0x58
     li r5, 0x0
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lfs f31, 0x4(r31)
     mr r3, r30
     bl str_findChar
@@ -557,7 +557,7 @@ asm void fn_801F4818(void)
     mr r4, r3
     addi r3, r29, 0x58
     li r5, 0x1
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lfs f31, 0x10(r31)
     mr r3, r30
     bl str_findChar
@@ -565,7 +565,7 @@ asm void fn_801F4818(void)
     mr r4, r3
     addi r3, r29, 0x58
     li r5, 0x4
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r0, 0x34(r1)
     psq_l f31, 0x28(r1), 0, 0
     lfd f31, 0x20(r1)
@@ -840,7 +840,7 @@ lbl_fn_801F4C14_00000A3C:
     mr r4, r3
     mr r5, r31
     addi r3, r29, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r0, 0x8(r1)
     srwi. r0, r0, 31
     beq lbl_fn_801F4C14_00000A68
@@ -905,7 +905,7 @@ lbl_fn_801F4CB4_00000B08:
     mr r4, r3
     addi r3, r29, 0x58
     addi r5, r1, 0x48
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r0, 0x264(r1)
     lwz r31, 0x25c(r1)
     lwz r30, 0x258(r1)
@@ -1505,7 +1505,7 @@ lbl_fn_801F54CC_00001304:
     lfs f1, 0x8(r29)
     lwz r4, 0x4(r29)
     addi r3, r3, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_801F54CC_00001390
 lbl_fn_801F54CC_0000131C:
     lwz r3, 0x48(r31)
@@ -1514,7 +1514,7 @@ lbl_fn_801F54CC_0000131C:
     addi r3, r3, 0x58
     lwz r4, 0x4(r29)
     extsb r5, r5
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     b lbl_fn_801F54CC_00001390
 lbl_fn_801F54CC_0000133C:
     lwz r3, 0x48(r31)
@@ -1563,7 +1563,7 @@ lbl_fn_801F54CC_000013B4:
 lbl_fn_801F54CC_000013D4:
     lwz r5, 0xc(r30)
 lbl_fn_801F54CC_000013D8:
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     addi r30, r30, 0x10
     addi r29, r29, 0x10
     addi r28, r28, 0x1

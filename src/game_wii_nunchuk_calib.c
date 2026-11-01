@@ -20,7 +20,7 @@ extern void str_findChar(void);
 extern void fn_80112974(void);
 extern void fn_80114468(void);
 extern void fn_8011447C(void);
-extern void fn_801FECE0(void);
+extern void thread_findAndNotify(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A680(void);
@@ -1523,7 +1523,7 @@ lbl_fn_8055E258_0000131C:
     fmr f1, f31
     mr r4, r3
     mr r3, r31
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_8055E258_00001330:
     psq_l f31, 0x18(r1), 0, 0
     li r3, 0x0

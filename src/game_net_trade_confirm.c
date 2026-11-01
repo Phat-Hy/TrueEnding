@@ -17,7 +17,7 @@ extern void fn_8006A250(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void route_interpolatePath(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void fn_8008C828(void);
@@ -1706,7 +1706,7 @@ lbl_fn_80531090_00001724:
     addi r4, r31, 0x34
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_80887B30
     mr r3, r30
     lfs f2, lbl_80887B38

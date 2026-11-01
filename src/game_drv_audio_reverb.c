@@ -71,7 +71,7 @@ extern void fn_80179D44(void);
 extern void fn_801F3FF8(void);
 extern void fn_801F45F4(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801FED24(void);
+extern void thread_findAndNotifySlot(void);
 extern void fn_80244CAC(void);
 extern void fn_802A4968(void);
 extern void fn_802A49BC(void);
@@ -307,7 +307,7 @@ lbl_fn_805BA938_00000084:
     mr r4, r3
     mr r3, r28
     li r5, 0x0
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r0, 0x5b0(r29)
     addi r3, r31, 0x43
     lfs f31, 0x1c(r1)
@@ -320,7 +320,7 @@ lbl_fn_805BA938_00000084:
     mr r4, r3
     mr r3, r28
     li r5, 0x1
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r0, 0x5b0(r29)
     addi r3, r31, 0x43
     lfs f31, 0x28(r1)
@@ -333,7 +333,7 @@ lbl_fn_805BA938_00000084:
     mr r4, r3
     mr r3, r28
     li r5, 0x4
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r3, lbl_8087EFE8
     cmpwi r3, 0x0
     beq lbl_fn_805BA938_000002C0

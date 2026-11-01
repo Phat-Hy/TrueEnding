@@ -18,7 +18,7 @@ extern void fn_805D9BE0(void);
 extern void fn_805D9C70(void);
 extern void fn_805D9CC0(void);
 extern void __GXSetVtxDesc(void);
-extern void fn_80613BB0(void);
+extern void GXClearVtxDesc(void);
 extern void fn_80615C40(void);
 extern void fn_80615D20(void);
 extern void fn_80615D50(void);
@@ -626,7 +626,7 @@ lbl_fn_805D1A40_00000738:
     stb r31, 0x65(r1)
     lwz r0, 0x50(r26)
     extrwi r3, r0, 4, 8
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     lwz r0, 0x50(r26)
     extrwi. r0, r0, 4, 8
     beq lbl_fn_805D1A40_0000080C

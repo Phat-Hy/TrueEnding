@@ -17,7 +17,7 @@ extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006AFF8(void);
 extern void mem_alloc(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Task_setActive(void);
@@ -1761,7 +1761,7 @@ lbl_fn_8025FE60_00001790:
     li r6, 0x0
     addi r4, r31, 0x47
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     addi r3, r30, 0x1520
     addi r4, r31, 0x51
     bl res_MsgHandle_destructor

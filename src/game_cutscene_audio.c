@@ -21,7 +21,7 @@ extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_80087E9C(void);
 extern void fn_8008937C(void);
 extern void skin_applyWeights(void);
@@ -622,13 +622,13 @@ lbl_fn_8032DEA0_00000650:
     addi r4, r30, 0x33
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r30, 0x3d
     addi r5, r31, 0x1658
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lis r6, 0xf
     mr r3, r29
     addi r7, r6, 0x4240
@@ -680,7 +680,7 @@ lbl_fn_8032DEA0_00000650:
     addi r5, r31, 0x15ac
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lis r6, 0x2
     mr r3, r29
     subi r7, r6, 0x7960

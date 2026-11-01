@@ -10,7 +10,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
@@ -760,7 +760,7 @@ lbl_fn_80100BF0_00000978:
     li r6, 0x0
     li r7, 0x0
     addi r5, r5, 0x67b4
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_80881494
     addis r5, r28, 0x4
     lfs f2, lbl_80881560
@@ -800,7 +800,7 @@ lbl_fn_80100BF0_00000978:
     li r6, 0x0
     li r7, 0x0
     subi r5, r5, 0x75f8
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_80881494
     addis r5, r28, 0x4
     lfs f2, lbl_80881560
@@ -1000,14 +1000,14 @@ lbl_fn_80100BF0_00000978:
     li r6, 0x0
     li r7, 0x0
     subi r5, r5, 0x6e24
-    bl fn_80087994
+    bl route_createSegment
     addis r5, r28, 0x4
     mr r3, r30
     addi r4, r31, 0x35c
     li r6, 0x0
     li r7, 0x0
     subi r5, r5, 0x1c70
-    bl fn_80087994
+    bl route_createSegment
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

@@ -19,7 +19,7 @@ extern void str_findChar(void);
 extern void fn_80117228(void);
 extern void fn_801D082C(void);
 extern void fn_801F3FF8(void);
-extern void fn_801FECE0(void);
+extern void thread_findAndNotify(void);
 extern void fn_80201E78(void);
 extern void fn_802020B4(void);
 extern void fn_80202118(void);
@@ -1467,7 +1467,7 @@ lbl_fn_80521D48_0000127C:
     fmr f1, f31
     mr r4, r3
     addi r3, r31, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_80521D48_000012C0:
     addi r29, r29, 0x40
     addi r28, r28, 0x1

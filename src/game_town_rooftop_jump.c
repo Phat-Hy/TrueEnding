@@ -18,7 +18,7 @@ extern void fn_801F5E9C(void);
 extern void fn_801F60B8(void);
 extern void fn_801F7590(void);
 extern void fn_801F80A8(void);
-extern void fn_801FECE0(void);
+extern void thread_findAndNotify(void);
 extern void fn_801FEEFC(void);
 extern void task_findEntryById(void);
 extern void fn_803E6D4C(void);
@@ -572,13 +572,13 @@ lbl_fn_803DD160_0000071C:
     lfs f1, lbl_80885D60
     mr r4, r3
     addi r3, r31, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
     addi r3, r30, 0x1335
     bl str_findChar
     lfs f1, lbl_80885D58
     mr r4, r3
     addi r3, r31, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lbz r4, 0x122(r28)
     mr r3, r31
     extsb r4, r4
@@ -592,7 +592,7 @@ lbl_fn_803DD160_0000071C:
     lfs f1, lbl_80885D60
     mr r4, r3
     addi r3, r31, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lfs f1, lbl_80885E28
     mr r3, r31
     lfs f0, lbl_80885DFC
@@ -654,7 +654,7 @@ lbl_fn_803DD160_00000860:
     lfs f1, lbl_80885D60
     mr r4, r3
     addi r3, r31, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lfs f2, lbl_80885DFC
     mr r3, r31
     lfs f1, lbl_80885E28
@@ -718,7 +718,7 @@ lbl_fn_803DD160_0000095C:
     lfs f1, lbl_80885D60
     mr r4, r3
     addi r3, r31, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lfs f3, lbl_80885DE8
     mr r3, r31
     lfs f2, lbl_80885E28
@@ -784,7 +784,7 @@ lbl_fn_803DD160_00000A60:
     lfs f1, lbl_80885D60
     mr r4, r3
     addi r3, r31, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lfs f3, lbl_80885D58
     mr r3, r31
     lfs f2, lbl_80885DFC
@@ -850,7 +850,7 @@ lbl_fn_803DD160_00000B64:
     lfs f1, lbl_80885D60
     mr r4, r3
     addi r3, r31, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lfs f1, lbl_80885E28
     mr r3, r31
     lfs f2, lbl_80885D58
@@ -914,7 +914,7 @@ lbl_fn_803DD160_00000C60:
     lfs f1, lbl_80885D60
     mr r4, r3
     addi r3, r31, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lfs f1, lbl_80885DFC
     mr r3, r31
     lfs f0, lbl_80885DE8
@@ -976,7 +976,7 @@ lbl_fn_803DD160_00000D54:
     lfs f1, lbl_80885D60
     mr r4, r3
     addi r3, r31, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lfs f2, lbl_80885DE8
     mr r3, r31
     lfs f1, lbl_80885DFC
@@ -1038,7 +1038,7 @@ lbl_fn_803DD160_00000E50:
     lfs f1, lbl_80885D58
     mr r4, r3
     addi r3, r31, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_803DD160_00000E68:
     lwz r0, 0x1e4(r1)
     lwz r31, 0x1dc(r1)

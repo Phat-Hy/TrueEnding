@@ -23,11 +23,11 @@ extern void fn_8013C3A8(void);
 extern void fn_80147A00(void);
 extern void world_getLocalFlag(void);
 extern void fn_803CFC58(void);
-extern void fn_804AE3BC(void);
+extern void net_getPacketManager(void);
 extern void fn_804CF374(void);
 extern void fn_804CF424(void);
 extern void fn_804CF468(void);
-extern void fn_804D1698(void);
+extern void net_getFriendManager(void);
 extern void fn_804D5F10(void);
 extern void fn_804D5F44(void);
 extern void fn_804D619C(void);
@@ -717,7 +717,7 @@ lbl_fn_804E67A0_00000844:
     bl memcpy
     lwz r0, 0x598(r26)
     stw r0, 0x44(r1)
-    bl fn_804AE3BC
+    bl net_getPacketManager
     mr r6, r24
     li r4, -0x1
     li r5, 0x1004
@@ -857,7 +857,7 @@ lbl_fn_804E6DD4_00000A18:
     lwz r0, 0xd0(r15)
     rlwimi r3, r0, 25, 26, 26
     stb r3, 0x34(r1)
-    bl fn_804AE3BC
+    bl net_getPacketManager
     mr r6, r16
     li r4, -0x1
     li r5, 0x1015
@@ -973,7 +973,7 @@ lbl_fn_804E6DD4_00000BBC:
     rlwimi r0, r3, 7, 24, 24
     rlwinm r0, r0, 0, 28, 26
     stb r0, 0x24(r1)
-    bl fn_804AE3BC
+    bl net_getPacketManager
     mr r6, r23
     li r4, -0x1
     li r5, 0x101c
@@ -1156,7 +1156,7 @@ lbl_fn_804E6DD4_00000E9C:
     rlwimi r0, r3, 7, 24, 24
     ori r0, r0, 0x10
     stb r0, 0x14(r1)
-    bl fn_804AE3BC
+    bl net_getPacketManager
     addi r6, r1, 0xc
     li r4, -0x1
     li r5, 0x101c
@@ -1410,7 +1410,7 @@ lbl_fn_804E762C_00001264:
     mr r3, r16
     mr r4, r15
     bl fn_804CF468
-    bl fn_804AE3BC
+    bl net_getPacketManager
     mr r6, r16
     li r4, -0x1
     li r5, 0x1014
@@ -1512,7 +1512,7 @@ lbl_fn_804E762C_000013B8:
     lbz r0, 0x3a(r1)
     rlwinm r0, r0, 0, 31, 29
     stb r0, 0x3a(r1)
-    bl fn_804AE3BC
+    bl net_getPacketManager
     mr r6, r22
     li r4, -0x1
     li r5, 0x101a
@@ -1592,7 +1592,7 @@ lbl_fn_804E762C_000014D0:
     lwz r12, 0x110(r12)
     mtctr r12
     bctrl
-    bl fn_804AE3BC
+    bl net_getPacketManager
     mr r6, r17
     li r4, -0x1
     li r5, 0x101b
@@ -1620,7 +1620,7 @@ lbl_fn_804E762C_00001550:
     lbz r0, 0x1e(r1)
     ori r0, r0, 0x2
     stb r0, 0x1e(r1)
-    bl fn_804AE3BC
+    bl net_getPacketManager
     mr r6, r16
     li r4, -0x1
     li r5, 0x101a
@@ -1744,8 +1744,8 @@ lbl_fn_804E7AC4_00001698:
     mr r5, r30
     addi r3, r27, 0x2c
     bl fn_804CF374
-    bl fn_804D1698
-    bl fn_804AE3BC
+    bl net_getFriendManager
+    bl net_getPacketManager
     mr r6, r27
     li r4, -0x1
     li r5, 0x1017
@@ -1768,7 +1768,7 @@ lbl_fn_804E7AC4_0000176C:
     mr r28, r3
     srwi. r0, r0, 31
     beq lbl_fn_804E7AC4_0000195C
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D619C
     lbz r0, 0xcc(r28)
     clrlwi r3, r3, 24
@@ -1874,8 +1874,8 @@ lbl_fn_804E7AC4_00001888:
     lbz r0, 0xcc(r28)
     stw r0, 0x2c(r25)
     stb r29, 0x30(r25)
-    bl fn_804D1698
-    bl fn_804AE3BC
+    bl net_getFriendManager
+    bl net_getPacketManager
     mr r6, r25
     li r4, -0x1
     li r5, 0x101e
@@ -2004,8 +2004,8 @@ lbl_fn_804E7AC4_00001A80:
     bl fn_804CF374
     stw r25, 0x2c(r27)
     stb r30, 0x30(r27)
-    bl fn_804D1698
-    bl fn_804AE3BC
+    bl net_getFriendManager
+    bl net_getPacketManager
     mr r6, r27
     li r4, -0x1
     li r5, 0x101e

@@ -16,9 +16,9 @@ extern void fn_800B5994(void);
 extern void fn_800D5F68(void);
 extern void PSMTXIdentity(void);
 extern void PSMTXMultVecArraySR(void);
-extern void fn_80612E80(void);
+extern void GXSetVtxDesc(void);
 extern void fn_806134E0(void);
-extern void fn_80613520(void);
+extern void GXSetVtxAttrFmt(void);
 extern void fn_80614190(void);
 extern void fn_80614790(void);
 extern void GXSetTexCopySrc(void);
@@ -1011,13 +1011,13 @@ asm void fn_800BFCB4(void)
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0xb
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0xd
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     lfs f2, 0x0(r23)
     lfs f0, lbl_80881098
     fcmpo cr0, f2, f0
@@ -1427,19 +1427,19 @@ lbl_fn_800BFCB4_000011A8:
     stb r0, 0xb(r1)
     lwz r0, 0x8(r1)
     stw r0, 0x18(r1)
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r3, 0x0
     li r4, 0xb
     li r5, 0x1
     li r6, 0x5
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r3, 0x0
     li r4, 0xd
     li r5, 0x1
     li r6, 0x4
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     xoris r0, r31, 0x8000
     stw r0, 0xa4(r1)
     xoris r0, r30, 0x8000

@@ -88,7 +88,7 @@ void fn_800DC3C8(void);
 void fn_800DC3CC(void);
 void fn_800DC500(void);
 void str_findChar(void);
-void fn_800DC880(void);
+void str_calcHash(void);
 void fn_800DC978(void);
 void fn_800DC97C(void);
 void fn_800DC980(void);
@@ -656,7 +656,7 @@ lbl_str_findChar_00000730:
     blr
 }
 
-asm void fn_800DC880(void)
+asm void str_calcHash(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -668,62 +668,62 @@ asm void fn_800DC880(void)
     li r4, -0x1
     mtctr r3
     cmpwi r3, 0x0
-    ble lbl_fn_800DC880_00000830
-lbl_fn_800DC880_0000077C:
+    ble lbl_str_calcHash_00000830
+lbl_str_calcHash_0000077C:
     lbz r0, 0x0(r31)
     slwi r0, r0, 24
     xor r4, r4, r0
     clrrwi. r0, r4, 31
     slwi r4, r4, 1
-    beq lbl_fn_800DC880_0000079C
+    beq lbl_str_calcHash_0000079C
     xoris r4, r4, 0x4c1
     xori r4, r4, 0x1db7
-lbl_fn_800DC880_0000079C:
+lbl_str_calcHash_0000079C:
     clrrwi. r0, r4, 31
     slwi r4, r4, 1
-    beq lbl_fn_800DC880_000007B0
+    beq lbl_str_calcHash_000007B0
     xoris r4, r4, 0x4c1
     xori r4, r4, 0x1db7
-lbl_fn_800DC880_000007B0:
+lbl_str_calcHash_000007B0:
     clrrwi. r0, r4, 31
     slwi r4, r4, 1
-    beq lbl_fn_800DC880_000007C4
+    beq lbl_str_calcHash_000007C4
     xoris r4, r4, 0x4c1
     xori r4, r4, 0x1db7
-lbl_fn_800DC880_000007C4:
+lbl_str_calcHash_000007C4:
     clrrwi. r0, r4, 31
     slwi r4, r4, 1
-    beq lbl_fn_800DC880_000007D8
+    beq lbl_str_calcHash_000007D8
     xoris r4, r4, 0x4c1
     xori r4, r4, 0x1db7
-lbl_fn_800DC880_000007D8:
+lbl_str_calcHash_000007D8:
     clrrwi. r0, r4, 31
     slwi r4, r4, 1
-    beq lbl_fn_800DC880_000007EC
+    beq lbl_str_calcHash_000007EC
     xoris r4, r4, 0x4c1
     xori r4, r4, 0x1db7
-lbl_fn_800DC880_000007EC:
+lbl_str_calcHash_000007EC:
     clrrwi. r0, r4, 31
     slwi r4, r4, 1
-    beq lbl_fn_800DC880_00000800
+    beq lbl_str_calcHash_00000800
     xoris r4, r4, 0x4c1
     xori r4, r4, 0x1db7
-lbl_fn_800DC880_00000800:
+lbl_str_calcHash_00000800:
     clrrwi. r0, r4, 31
     slwi r4, r4, 1
-    beq lbl_fn_800DC880_00000814
+    beq lbl_str_calcHash_00000814
     xoris r4, r4, 0x4c1
     xori r4, r4, 0x1db7
-lbl_fn_800DC880_00000814:
+lbl_str_calcHash_00000814:
     clrrwi. r0, r4, 31
     slwi r4, r4, 1
-    beq lbl_fn_800DC880_00000828
+    beq lbl_str_calcHash_00000828
     xoris r4, r4, 0x4c1
     xori r4, r4, 0x1db7
-lbl_fn_800DC880_00000828:
+lbl_str_calcHash_00000828:
     addi r31, r31, 0x1
-    bdnz lbl_fn_800DC880_0000077C
-lbl_fn_800DC880_00000830:
+    bdnz lbl_str_calcHash_0000077C
+lbl_str_calcHash_00000830:
     li r0, -0x1
     lwz r31, 0xc(r1)
     xor r3, r4, r0

@@ -95,7 +95,7 @@ extern void fn_80473F88(void);
 extern void fn_804814F0(void);
 extern void fn_8049D68C(void);
 extern void fn_804AC734(void);
-extern void fn_804AE3BC(void);
+extern void net_getPacketManager(void);
 extern void fn_804AF520(void);
 extern void fn_804B50C0(void);
 extern void fn_804B6204(void);
@@ -373,7 +373,7 @@ void fn_804D1400(void);
 void fn_804D1414(void);
 void fn_804D147C(void);
 void fn_804D14BC(void);
-void fn_804D1698(void);
+void net_getFriendManager(void);
 void fn_804D16A0(void);
 void fn_804D16D0(void);
 void fn_804D16D8(void);
@@ -593,7 +593,7 @@ lbl_fn_804D14BC_00000280:
     blr
 }
 
-asm void fn_804D1698(void)
+asm void net_getFriendManager(void)
 {
     nofralloc
     lwz r3, lbl_8087F628
@@ -1807,11 +1807,11 @@ lbl_fn_804D25D4_00001338:
     bl fn_804D5F6C
     mr r3, r24
     bl fn_804F5FD0
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_80509300
     bl fn_804D6684
     bl fn_8050C2F8
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D5F80
     cmpwi r3, 0x1
     bne lbl_fn_804D25D4_000013BC
@@ -1827,8 +1827,8 @@ lbl_fn_804D25D4_00001338:
     li r0, 0x1
     stb r0, -0x6688(r3)
 lbl_fn_804D25D4_000013A4:
-    bl fn_804D1698
-    bl fn_804AE3BC
+    bl net_getFriendManager
+    bl net_getPacketManager
     bl fn_8050DE60
     mr r3, r24
     bl fn_804F5A98
@@ -1838,7 +1838,7 @@ lbl_fn_804D25D4_000013BC:
     li r0, 0x0
     stb r0, -0x6688(r3)
 lbl_fn_804D25D4_000013C8:
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D5F9C
     cmpwi r3, 0x3
     beq lbl_fn_804D25D4_000013E8
@@ -1917,7 +1917,7 @@ lbl_fn_804D25D4_000014D0:
     li r4, 0x16
     bl fn_804AF520
     li r27, 0x0
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_8050C0B8
     subi r0, r3, 0x2
     cmplwi r0, 0x1
@@ -1976,11 +1976,11 @@ lbl_fn_804D25D4_000015A4:
     bl fn_804D5FDC
     bl fn_804CF190
 lbl_fn_804D25D4_000015B8:
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D16E8
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00001624
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D16E8
     bl fn_8050CF94
     li r0, 0x0
@@ -2000,7 +2000,7 @@ lbl_fn_804D25D4_000015F0:
     add r3, r0, r22
     bl OSSleepTicks
 lbl_fn_804D25D4_00001610:
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D16E8
     bl fn_804D24AC
     cmpwi r3, 0x0
@@ -2010,15 +2010,15 @@ lbl_fn_804D25D4_00001624:
     li r4, -0x1
     bl fn_804D16A0
     li r21, 0x1
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D5FE4
     cmpwi r3, 0x3
     bne lbl_fn_804D25D4_00001648
     li r21, 0x3
 lbl_fn_804D25D4_00001648:
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D5FF0
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_80509F0C
     mr r3, r24
     mr r4, r21
@@ -2035,7 +2035,7 @@ lbl_fn_804D25D4_00001648:
     cmpwi r0, 0xa2
     beq lbl_fn_804D25D4_00004898
 lbl_fn_804D25D4_00001690:
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_80509AFC
     b lbl_fn_804D25D4_00004898
     li r21, 0x0
@@ -2090,7 +2090,7 @@ lbl_fn_804D25D4_00001718:
     mr r3, r24
     bl fn_804FB678
     b lbl_fn_804D25D4_00004898
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D16E8
     bl fn_804D24AC
     cmpwi r3, 0x1
@@ -2122,7 +2122,7 @@ lbl_fn_804D25D4_000017B8:
     bl fn_80502100
     stw r3, 0x514(r24)
     bl fn_8050270C
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D6028
     bl fn_804D6024
     li r4, 0x9f0
@@ -2134,7 +2134,7 @@ lbl_fn_804D25D4_000017B8:
     bl fn_804F7F1C
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_00004898
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D6028
     bl fn_8050EB30
     cmpwi r3, 0x0
@@ -2335,7 +2335,7 @@ lbl_fn_804D25D4_00001A8C:
     stw r5, -0x6624(r11)
     stw r4, -0x6620(r11)
     stw r3, -0x661c(r11)
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D16E8
     addis r5, r24, 0x1
     li r4, 0x1
@@ -2348,7 +2348,7 @@ lbl_fn_804D25D4_00001A8C:
     bl fn_8020A3E4
     li r4, 0x0
     bl fn_8046ECDC
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D16E8
     bl fn_804D24AC
     cmpwi r3, 0x1
@@ -2362,7 +2362,7 @@ lbl_fn_804D25D4_00001A8C:
     mr r3, r24
     li r4, 0x0
     bl fn_804D6010
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D6028
     mr r21, r3
     bl fn_804D604C
@@ -2439,7 +2439,7 @@ lbl_fn_804D25D4_00001BEC:
     addi r3, r24, 0x4fc
     li r4, 0x7
     bl fn_804D16A0
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D6028
     bl fn_804D60E8
     bl fn_80686A48
@@ -2494,10 +2494,10 @@ lbl_fn_804D25D4_00001D48:
     lwz r0, -0x6640(r3)
     cmpwi r0, 0x0
     beq lbl_fn_804D25D4_00001D78
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D6028
     bl fn_8050EAEC
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D6028
     bl fn_804D6024
     li r4, 0x9f0
@@ -2544,7 +2544,7 @@ lbl_fn_804D25D4_00001DD0:
     mr r3, r24
     bl atn_Task_unlink
     b lbl_fn_804D25D4_00004898
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_80509A9C
     addi r3, r24, 0x4fc
     li r4, 0x9
@@ -2553,7 +2553,7 @@ lbl_fn_804D25D4_00001DD0:
     li r0, 0x0
     stw r0, -0x6894(r3)
     b lbl_fn_804D25D4_00004898
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D5F80
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00004898
@@ -2570,7 +2570,7 @@ lbl_fn_804D25D4_00001DD0:
     bl fn_804D16A0
     li r0, 0x0
     stw r0, 0x53c(r24)
-    bl fn_804D1698
+    bl net_getFriendManager
     li r4, 0x0
     bl fn_804D6164
     bl fn_804D16D0
@@ -2579,19 +2579,19 @@ lbl_fn_804D25D4_00001DD0:
     b lbl_fn_804D25D4_00004898
     li r0, 0x0
     stw r0, 0x53c(r24)
-    bl fn_804D1698
+    bl net_getFriendManager
     li r4, 0x1
     bl fn_804D6164
-    bl fn_804D1698
+    bl net_getFriendManager
     li r4, 0x0
     bl fn_8050A638
     b lbl_fn_804D25D4_00004898
     li r22, 0x0
     stw r22, 0x53c(r24)
-    bl fn_804D1698
+    bl net_getFriendManager
     li r4, 0x1
     bl fn_804D6164
-    bl fn_804D1698
+    bl net_getFriendManager
     li r4, 0x0
     bl fn_8050A638
     li r7, 0x0
@@ -2677,23 +2677,23 @@ lbl_fn_804D25D4_00001DD0:
     stw r0, -0x65cc(r3)
     addis r3, r6, 0x1
     stw r0, -0x65cc(r3)
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D616C
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00002040
     li r21, 0x1
     b lbl_fn_804D25D4_00002070
 lbl_fn_804D25D4_00002040:
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D6194
     cmplwi r3, 0x1
     bne lbl_fn_804D25D4_00002070
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D619C
     clrlwi. r0, r3, 24
     bne lbl_fn_804D25D4_00002070
     li r21, 0x1
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D16E8
     bl fn_8050CF94
 lbl_fn_804D25D4_00002070:
@@ -2701,7 +2701,7 @@ lbl_fn_804D25D4_00002070:
     li r21, 0x0
     li r25, 0x0
     bne lbl_fn_804D25D4_000021C4
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D6204
     mr r4, r3
     addi r3, r24, 0x5e4
@@ -2714,7 +2714,7 @@ lbl_fn_804D25D4_00002070:
     li r4, 0x0
     bl fn_804D620C
     li r21, 0x1
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D619C
     mr r23, r3
     addi r3, r24, 0x5e4
@@ -2757,17 +2757,17 @@ lbl_fn_804D25D4_000020E8:
     addis r3, r3, 0x1
     stb r22, -0x6687(r3)
     stw r23, 0x544(r24)
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D6214
     cmpwi r3, 0x1
     bne lbl_fn_804D25D4_0000219C
     mr r3, r24
     bl fn_804DC35C
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D6194
     cmplwi r3, 0x1
     bne lbl_fn_804D25D4_0000218C
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_8050BDC8
 lbl_fn_804D25D4_0000218C:
     bl fn_804D16D0
@@ -2792,12 +2792,12 @@ lbl_fn_804D25D4_000021C4:
     subic. r0, r3, 0x1
     stw r0, -0x6614(r4)
     bgt lbl_fn_804D25D4_000022C4
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D16E8
     bl fn_804D621C
     cmpwi r3, 0x8
     beq lbl_fn_804D25D4_00002200
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D16E8
     bl fn_804D24AC
     cmpwi r3, 0x1
@@ -2809,11 +2809,11 @@ lbl_fn_804D25D4_00002200:
     bl fn_800A555C
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_000022C4
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D6224
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_000022C4
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D6214
     cmpwi r3, 0x1
     bne lbl_fn_804D25D4_00002244
@@ -2821,7 +2821,7 @@ lbl_fn_804D25D4_00002200:
     li r4, 0x0
     bl fn_804DC454
 lbl_fn_804D25D4_00002244:
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D16E8
     bl fn_8050CF94
     bl fn_800F7F90
@@ -2858,7 +2858,7 @@ lbl_fn_804D25D4_00002274:
 lbl_fn_804D25D4_000022C4:
     cmpwi r21, 0x0
     beq lbl_fn_804D25D4_00004898
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D6214
     cmpwi r3, 0x1
     bne lbl_fn_804D25D4_00004898
@@ -2885,11 +2885,11 @@ lbl_fn_804D25D4_000022F4:
     mr r3, r24
     bl fn_804DC35C
 lbl_fn_804D25D4_00002330:
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D6214
     cmpwi r3, 0x1
     bne lbl_fn_804D25D4_000023B4
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D622C
     mr r22, r3
     bl fn_800F7F90
@@ -2897,7 +2897,7 @@ lbl_fn_804D25D4_00002330:
     lbz r0, -0x6687(r3)
     cmplwi r0, 0xff
     beq lbl_fn_804D25D4_000023AC
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D6194
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_000023AC
@@ -2906,7 +2906,7 @@ lbl_fn_804D25D4_00002330:
     lbz r0, -0x6687(r3)
     cmplw r4, r0
     bne lbl_fn_804D25D4_00002398
-    bl fn_804D1698
+    bl net_getFriendManager
     lbz r4, 0xcc(r27)
     bl fn_804D627C
     cmpwi r3, 0x1
@@ -2928,14 +2928,14 @@ lbl_fn_804D25D4_000023B4:
     subf r0, r0, r4
     cmpwi r0, 0x1
     beq lbl_fn_804D25D4_000023E0
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D5F9C
     cmpwi r3, 0xd
     bne lbl_fn_804D25D4_00002478
 lbl_fn_804D25D4_000023E0:
     cmpwi r27, 0x0
     beq lbl_fn_804D25D4_00002420
-    bl fn_804D1698
+    bl net_getFriendManager
     lbz r4, 0xcc(r27)
     bl fn_804D627C
     cmpwi r3, 0x1
@@ -2961,7 +2961,7 @@ lbl_fn_804D25D4_00002428:
     mr r22, r3
     srwi. r0, r0, 31
     beq lbl_fn_804D25D4_00002464
-    bl fn_804D1698
+    bl net_getFriendManager
     lbz r4, 0xcc(r22)
     bl fn_804D627C
     cmpwi r3, 0x0
@@ -2977,7 +2977,7 @@ lbl_fn_804D25D4_00002468:
     cmplw r21, r3
     blt lbl_fn_804D25D4_00002428
 lbl_fn_804D25D4_00002478:
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D5F9C
     cmpwi r3, 0xd
     bne lbl_fn_804D25D4_000024DC
@@ -3004,12 +3004,12 @@ lbl_fn_804D25D4_000024CC:
     bl fn_804D62FC
     b lbl_fn_804D25D4_0000259C
 lbl_fn_804D25D4_000024DC:
-    bl fn_804D1698
+    bl net_getFriendManager
     lbz r4, 0xcc(r27)
     bl fn_804D627C
     cmpwi r3, 0x1
     bne lbl_fn_804D25D4_0000259C
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D6304
     lwz r0, 0x504(r24)
     mr r22, r3
@@ -3017,7 +3017,7 @@ lbl_fn_804D25D4_000024DC:
     beq lbl_fn_804D25D4_00002598
     cmpwi r3, 0x1
     bgt lbl_fn_804D25D4_00002558
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D634C
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_0000254C
@@ -3047,7 +3047,7 @@ lbl_fn_804D25D4_00002558:
     sth r0, 0x50a(r24)
     bl fn_804FC0D8
 lbl_fn_804D25D4_0000257C:
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D6194
     cmplwi r3, 0x1
     bne lbl_fn_804D25D4_00002598
@@ -3073,7 +3073,7 @@ lbl_fn_804D25D4_0000259C:
     add r4, r0, r4
     bl fn_804C2268
 lbl_fn_804D25D4_000025D8:
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D6360
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_0000261C
@@ -3096,12 +3096,12 @@ lbl_fn_804D25D4_0000261C:
     li r0, 0x0
     stw r0, 0x53c(r24)
 lbl_fn_804D25D4_00002624:
-    bl fn_804D1698
+    bl net_getFriendManager
     lbz r4, 0xcc(r27)
     bl fn_804D627C
     cmpwi r3, 0x1
     bne lbl_fn_804D25D4_000026A0
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D6214
     cmpwi r3, 0x1
     bne lbl_fn_804D25D4_000026A0
@@ -3118,7 +3118,7 @@ lbl_fn_804D25D4_00002664:
     beq lbl_fn_804D25D4_000026A0
     cmpwi r3, 0x9
     beq lbl_fn_804D25D4_000026A0
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D6194
     cmplwi r3, 0x1
     bne lbl_fn_804D25D4_000026A0
@@ -3134,18 +3134,18 @@ lbl_fn_804D25D4_000026A0:
     lwz r21, 0x53c(r24)
     cmpwi r21, 0x0
     beq lbl_fn_804D25D4_000026C8
-    bl fn_804D1698
+    bl net_getFriendManager
     mr r4, r21
     bl fn_804D6164
-    bl fn_804D1698
+    bl net_getFriendManager
     lwz r4, 0x53c(r24)
     bl fn_8050A638
     b lbl_fn_804D25D4_000026E0
 lbl_fn_804D25D4_000026C8:
-    bl fn_804D1698
+    bl net_getFriendManager
     li r4, 0x1
     bl fn_804D6164
-    bl fn_804D1698
+    bl net_getFriendManager
     li r4, 0x0
     bl fn_8050A638
 lbl_fn_804D25D4_000026E0:
@@ -3158,7 +3158,7 @@ lbl_fn_804D25D4_000026E0:
     bl fn_804EB1B0
     cmpwi r3, 0x1
     bne lbl_fn_804D25D4_00002744
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D6360
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_00002744
@@ -3345,10 +3345,10 @@ lbl_fn_804D25D4_0000299C:
     lbz r0, -0x658a(r3)
     cmplwi r0, 0x1
     bne lbl_fn_804D25D4_00002A04
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D619C
     mr r22, r3
-    bl fn_804D1698
+    bl net_getFriendManager
     clrlwi r4, r22, 24
     bl fn_804D627C
     cmpwi r3, 0x0
@@ -3647,8 +3647,8 @@ lbl_fn_804D25D4_00002E0C:
     addi r3, r1, 0x18
     li r4, 0x1010
     bl fn_804D6414
-    bl fn_804D1698
-    bl fn_804AE3BC
+    bl net_getFriendManager
+    bl net_getPacketManager
     li r4, -0x1
     li r5, 0x1010
     li r6, 0x0
@@ -3702,26 +3702,26 @@ lbl_fn_804D25D4_00002ED8:
     mr r3, r24
     bl fn_804EB874
     mr r22, r3
-    bl fn_804D1698
+    bl net_getFriendManager
     lbz r4, 0xcc(r22)
     bl fn_804D627C
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_00002F50
-    bl fn_804D1698
-    bl fn_804D1698
+    bl net_getFriendManager
+    bl net_getFriendManager
     bl fn_804D622C
     clrlwi r22, r3, 24
-    bl fn_804AE3BC
+    bl net_getPacketManager
     mr r4, r22
     li r5, 0x1044
     li r6, 0x0
     li r7, 0x1
     bl fn_8050E098
-    bl fn_804D1698
-    bl fn_804D1698
+    bl net_getFriendManager
+    bl net_getFriendManager
     bl fn_804D622C
     clrlwi r22, r3, 24
-    bl fn_804AE3BC
+    bl net_getPacketManager
     mr r4, r22
     li r5, 0x1
     bl fn_8050DDE0
@@ -3751,7 +3751,7 @@ lbl_fn_804D25D4_00002FA4:
     mr r3, r24
     bl fn_804EB874
     mr r22, r3
-    bl fn_804D1698
+    bl net_getFriendManager
     lbz r4, 0xcc(r22)
     bl fn_804D627C
     cmpwi r3, 0x1
@@ -3816,15 +3816,15 @@ lbl_fn_804D25D4_00003054:
     bl fn_804D16D8
     lwz r4, 0x564(r24)
     bl fn_804B6204
-    bl fn_804D1698
-    bl fn_804AE3BC
+    bl net_getFriendManager
+    bl net_getPacketManager
     li r4, -0x1
     li r5, 0x1045
     li r6, 0x0
     li r7, 0x1
     bl fn_8050E098
-    bl fn_804D1698
-    bl fn_804AE3BC
+    bl net_getFriendManager
+    bl net_getPacketManager
     li r4, -0x1
     li r5, 0x1
     bl fn_8050DDE0
@@ -3904,14 +3904,14 @@ lbl_fn_804D25D4_00003110:
     bl fn_804D16A0
     lwz r0, 0x540(r24)
     stw r0, 0x544(r24)
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D6028
     li r4, 0x1
     bl fn_8050F8C8
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D6028
     bl fn_8050EAEC
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D6028
     bl fn_804D6024
     li r4, 0x9f0
@@ -3976,7 +3976,7 @@ lbl_fn_804D25D4_000032F4:
     bl fn_800F52F0
     stfs f30, 0x1b0(r3)
 lbl_fn_804D25D4_00003314:
-    bl fn_804D1698
+    bl net_getFriendManager
     lwz r12, 0x0(r3)
     lbz r4, 0xcc(r28)
     lwz r12, 0x14(r12)
@@ -4255,7 +4255,7 @@ lbl_fn_804D25D4_000036EC:
     stw r0, 0x5ac(r24)
     stb r0, -0x6589(r4)
     bl fn_804E9364
-    bl fn_804D1698
+    bl net_getFriendManager
     lbz r4, 0xcc(r26)
     bl fn_804D627C
     cmpwi r3, 0x1
@@ -4269,11 +4269,11 @@ lbl_fn_804D25D4_000036EC:
     mr r3, r26
     bl fn_804D64B8
     stb r3, 0x0(r20)
-    bl fn_804D1698
-    bl fn_804D1698
+    bl net_getFriendManager
+    bl net_getFriendManager
     bl fn_804D622C
     clrlwi r25, r3, 24
-    bl fn_804AE3BC
+    bl net_getPacketManager
     mr r4, r25
     mr r6, r20
     li r5, 0x1046
@@ -4302,7 +4302,7 @@ lbl_fn_804D25D4_000036EC:
     bne lbl_fn_804D25D4_000038A4
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_000038A4
-    bl fn_804D1698
+    bl net_getFriendManager
     lbz r4, 0xcc(r31)
     bl fn_804D627C
     cmpwi r3, 0x1
@@ -4496,26 +4496,26 @@ lbl_fn_804D25D4_00003A9C:
     blt lbl_fn_804D25D4_00003A30
     cmpw r21, r20
     bne lbl_fn_804D25D4_0000414C
-    bl fn_804D1698
+    bl net_getFriendManager
     lbz r4, 0xcc(r31)
     bl fn_804D627C
     cmpwi r3, 0x1
     beq lbl_fn_804D25D4_00003B10
-    bl fn_804D1698
-    bl fn_804D1698
+    bl net_getFriendManager
+    bl net_getFriendManager
     bl fn_804D622C
     clrlwi r25, r3, 24
-    bl fn_804AE3BC
+    bl net_getPacketManager
     mr r4, r25
     li r5, 0x1042
     li r6, 0x0
     li r7, 0x1
     bl fn_8050E098
-    bl fn_804D1698
-    bl fn_804D1698
+    bl net_getFriendManager
+    bl net_getFriendManager
     bl fn_804D622C
     clrlwi r25, r3, 24
-    bl fn_804AE3BC
+    bl net_getPacketManager
     mr r4, r25
     li r5, 0x1
     bl fn_8050DDE0
@@ -4536,7 +4536,7 @@ lbl_fn_804D25D4_00003B10:
     bl fn_804D6010
     b lbl_fn_804D25D4_0000414C
 lbl_fn_804D25D4_00003B4C:
-    bl fn_804D1698
+    bl net_getFriendManager
     lbz r4, 0xcc(r31)
     bl fn_804D627C
     cmpwi r3, 0x1
@@ -4614,15 +4614,15 @@ lbl_fn_804D25D4_00003C54:
     blt lbl_fn_804D25D4_00003C1C
     lwz r0, 0x2b80(r24)
     stw r0, 0x10(r20)
-    bl fn_804D1698
-    bl fn_804AE3BC
+    bl net_getFriendManager
+    bl net_getPacketManager
     mr r6, r20
     li r4, -0x1
     li r5, 0x1043
     li r7, 0x1
     bl fn_8050E098
-    bl fn_804D1698
-    bl fn_804AE3BC
+    bl net_getFriendManager
+    bl net_getPacketManager
     li r4, -0x1
     li r5, 0x1
     bl fn_8050DDE0
@@ -4630,7 +4630,7 @@ lbl_fn_804D25D4_00003C54:
     li r4, 0x3
     bl fn_804D6010
     b lbl_fn_804D25D4_0000414C
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D6028
     li r4, 0x0
     bl fn_8050F8C8
@@ -4705,10 +4705,10 @@ lbl_fn_804D25D4_00003D78:
     bl fn_804E4490
     b lbl_fn_804D25D4_00003DE8
 lbl_fn_804D25D4_00003DC8:
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D6028
     bl fn_8050EAEC
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D6028
     bl fn_804D6024
     li r4, 0x9f0
@@ -4972,7 +4972,7 @@ lbl_fn_804D25D4_0000414C:
     li r0, 0x0
     stw r0, -0x668c(r3)
 lbl_fn_804D25D4_000041B0:
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_80509C8C
     addis r3, r24, 0x1
     lbz r0, -0x6618(r3)
@@ -5178,7 +5178,7 @@ lbl_fn_804D25D4_000044A4:
     bl fn_804D63D4
     cmpwi r3, 0x1
     bne lbl_fn_804D25D4_000044F4
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D6214
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_000044F4
@@ -5230,7 +5230,7 @@ lbl_fn_804D25D4_00004568:
     li r5, 0x8
     subi r3, r3, 0x6674
     bl memset
-    bl fn_804D1698
+    bl net_getFriendManager
     li r4, 0x0
     bl fn_8050A3D4
     bl fn_804D16D0
@@ -5326,7 +5326,7 @@ lbl_fn_804D25D4_000046D8:
     bl fn_8050C844
     cmpwi r3, 0x1
     bne lbl_fn_804D25D4_00004734
-    bl fn_804D1698
+    bl net_getFriendManager
     bl fn_804D6028
     mr r20, r3
     bl fn_804D604C

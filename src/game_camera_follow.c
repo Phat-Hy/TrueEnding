@@ -6,7 +6,7 @@ extern void fn_8004ED34(void);
 extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -1129,7 +1129,7 @@ lbl_fn_802E5B38_00000E84:
     li r6, 0x0
     addi r4, r4, 0x78
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lwz r3, 0x1438(r31)
     cmpwi r3, 0x0
     beq lbl_fn_802E5B38_00000EC4

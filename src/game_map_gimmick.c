@@ -14,7 +14,7 @@ extern void route_findNextWaypoint(void);
 extern void fn_800875F8(void);
 extern void route_interpolatePath(void);
 extern void fn_80087858(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_80087BB4(void);
 extern void fn_80087E9C(void);
 extern void fn_80088FAC(void);
@@ -178,13 +178,13 @@ asm void fn_801856B8(void)
     addi r5, r24, 0xb78
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r26
     addi r4, r30, 0x29
     addi r5, r24, 0xb7c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r26
     addi r4, r30, 0x34
     bl fn_8008937C
@@ -1188,7 +1188,7 @@ lbl_fn_80186520_00000F4C:
     addi r5, r31, 0x184
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r30, 0x1ca
     bl fn_8008937C
@@ -1642,7 +1642,7 @@ lbl_fn_80186520_00000F4C:
     addi r5, r31, 0x164
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r30, 0x264
     bl fn_8008937C
@@ -1651,7 +1651,7 @@ lbl_fn_80186520_00000F4C:
     addi r5, r31, 0x304
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r27
     addi r4, r30, 0x27e
     addi r5, r31, 0x250
@@ -1711,7 +1711,7 @@ lbl_fn_80186520_00000F4C:
     addi r5, r31, 0x314
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_80881CFC
     mr r3, r27
     lfs f2, lbl_80881D2C
@@ -1726,7 +1726,7 @@ lbl_fn_80186520_00000F4C:
     addi r5, r31, 0x280
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r27
     addi r4, r30, 0x307
     addi r5, r31, 0x288
@@ -1741,7 +1741,7 @@ lbl_fn_80186520_00000F4C:
     addi r5, r31, 0x290
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r27
     addi r4, r30, 0x31f
     addi r5, r31, 0x294
@@ -1756,13 +1756,13 @@ lbl_fn_80186520_00000F4C:
     addi r5, r31, 0x298
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r27
     addi r4, r30, 0x33d
     addi r5, r31, 0x29c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_80881CFC
     mr r3, r27
     lfs f2, lbl_80881DB0
@@ -1795,7 +1795,7 @@ lbl_fn_80186520_00000F4C:
     addi r5, r31, 0x2b0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_80881CFC
     mr r3, r27
     lfs f2, lbl_80881CE8
@@ -1828,13 +1828,13 @@ lbl_fn_80186520_00000F4C:
     addi r5, r31, 0x2c0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r27
     addi r4, r30, 0x3ce
     addi r5, r31, 0x2c4
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_80881CFC
     mr r3, r27
     lfs f2, lbl_80881D2C
@@ -1861,7 +1861,7 @@ lbl_fn_80186520_00000F4C:
     addi r5, r31, 0x2cc
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     addi r26, r31, 0x2d4
     li r25, 0x0
 lbl_fn_80186520_00001A1C:
@@ -1890,7 +1890,7 @@ lbl_fn_80186520_00001A1C:
     addi r4, r30, 0x40f
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_80881CFC
     mr r3, r27
     lfs f2, lbl_80881D2C
@@ -1914,7 +1914,7 @@ lbl_fn_80186520_00001A1C:
     addi r5, r31, 0x320
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_80881CFC
     mr r3, r27
     lfs f2, lbl_80881DB0
@@ -1947,13 +1947,13 @@ lbl_fn_80186520_00001A1C:
     addi r5, r31, 0x78
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r30, 0x48b
     addi r5, r31, 0x3c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r30, 0x49a
     bl fn_8008937C
@@ -1962,73 +1962,73 @@ lbl_fn_80186520_00001A1C:
     addi r5, r31, 0x214
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r25
     addi r4, r30, 0x4ad
     addi r5, r31, 0x218
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r25
     addi r4, r30, 0x4b7
     addi r5, r31, 0x21c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r25
     addi r4, r30, 0x4c1
     addi r5, r31, 0x224
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r25
     addi r4, r30, 0x4d2
     addi r5, r31, 0x220
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r25
     addi r4, r30, 0x4dc
     addi r5, r31, 0x228
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r25
     addi r4, r30, 0x4eb
     addi r5, r31, 0x22c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r25
     addi r4, r30, 0x4f4
     addi r5, r31, 0x230
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r25
     addi r4, r30, 0x500
     addi r5, r31, 0x234
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r25
     addi r4, r30, 0x507
     addi r5, r31, 0x238
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r25
     addi r4, r30, 0x50f
     addi r5, r31, 0x23c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r25
     addi r4, r30, 0x519
     addi r5, r31, 0x240
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r4, r29
     addi r3, r31, 0x5bc
     bl fn_801856B8
@@ -2037,79 +2037,79 @@ lbl_fn_80186520_00001A1C:
     addi r5, r31, 0x28
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r30, 0x530
     addi r5, r31, 0xc4
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r30, 0x539
     addi r5, r31, 0x8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r30, 0x547
     addi r5, r31, 0xc
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r30, 0x555
     addi r5, r31, 0x10
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r30, 0x568
     addi r5, r31, 0x14
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r30, 0x57a
     addi r5, r31, 0x34
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r30, 0x589
     addi r5, r31, 0x58
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r30, 0x597
     addi r5, r31, 0x38
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r30, 0x5a8
     addi r5, r31, 0x18
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r30, 0x5b0
     addi r5, r31, 0x1c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r30, 0x5be
     addi r5, r31, 0x20
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r30, 0x5c8
     addi r5, r31, 0x54
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r30, 0x5d8
     addi r5, r31, 0x5c
@@ -2154,13 +2154,13 @@ lbl_fn_80186520_00001A1C:
     addi r5, r31, 0x338
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r25
     addi r4, r30, 0x622
     addi r5, r31, 0x33c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_80881CFC
     mr r3, r25
     lfs f2, lbl_80881D2C
@@ -2214,25 +2214,25 @@ lbl_fn_80186520_00001A1C:
     addi r5, r31, 0x354
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r25
     addi r4, r30, 0x68a
     addi r5, r31, 0x358
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r25
     addi r4, r30, 0x69a
     addi r5, r31, 0x35c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r25
     addi r4, r30, 0x6a8
     addi r5, r31, 0x360
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r25
     addi r4, r30, 0x6b8
     addi r5, r31, 0x364
@@ -2286,7 +2286,7 @@ lbl_fn_80186520_00001A1C:
     addi r5, r31, 0x378
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lis r28, lbl_80738230@ha
     addi r27, r31, 0x37c
     addi r28, r28, lbl_80738230@l
@@ -2339,49 +2339,49 @@ lbl_fn_80186520_000020C8:
     addi r5, r31, 0x3d0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r23
     addi r4, r30, 0x741
     addi r5, r31, 0x3d4
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r23
     addi r4, r30, 0x74d
     addi r5, r31, 0x3d8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r23
     addi r4, r30, 0x757
     addi r5, r31, 0x3dc
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r23
     addi r4, r30, 0x766
     addi r5, r31, 0x3e0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r23
     addi r4, r30, 0x772
     addi r5, r31, 0x3e4
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r23
     addi r4, r30, 0x77b
     addi r5, r31, 0x3e8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r23
     addi r4, r30, 0x783
     addi r5, r31, 0x3ec
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r23
     addi r4, r30, 0x791
     addi r5, r31, 0x3f0
@@ -2396,7 +2396,7 @@ lbl_fn_80186520_000020C8:
     addi r5, r31, 0x3f4
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r23
     addi r4, r30, 0x7ad
     addi r5, r31, 0x3f8
@@ -2411,13 +2411,13 @@ lbl_fn_80186520_000020C8:
     addi r5, r31, 0x3fc
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r23
     addi r4, r30, 0x7c5
     addi r5, r31, 0x400
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r23
     addi r4, r30, 0x7cf
     addi r5, r31, 0x404
@@ -2432,7 +2432,7 @@ lbl_fn_80186520_000020C8:
     addi r5, r31, 0x408
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_80881E40
     mr r3, r23
     lfs f2, lbl_80881E44
@@ -2468,7 +2468,7 @@ lbl_fn_80186520_000020C8:
     addi r5, r31, 0x454
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r23
     addi r4, r30, 0x81f
     addi r5, r31, 0x458
@@ -2531,31 +2531,31 @@ lbl_fn_80186520_000020C8:
     addi r5, r31, 0x470
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r23
     addi r4, r30, 0x881
     addi r5, r31, 0x474
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r23
     addi r4, r30, 0x890
     addi r5, r31, 0x480
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r23
     addi r4, r30, 0x89d
     addi r5, r31, 0x478
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r23
     addi r4, r30, 0x8af
     addi r5, r31, 0x47c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_80881E4C
     mr r3, r23
     lfs f2, lbl_80881DBC
@@ -2570,31 +2570,31 @@ lbl_fn_80186520_000020C8:
     addi r5, r31, 0x488
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r30, 0x8c9
     addi r5, r31, 0x4c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r30, 0x8da
     addi r5, r31, 0x74
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r30, 0x8ea
     addi r5, r31, 0x168
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r30, 0x8fa
     addi r5, r31, 0x16c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r30, 0x911
     addi r5, r31, 0x170
@@ -2609,25 +2609,25 @@ lbl_fn_80186520_000020C8:
     addi r5, r31, 0x178
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r30, 0x930
     addi r5, r31, 0x17c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r30, 0x93f
     addi r5, r31, 0x180
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r30, 0x956
     addi r5, r31, 0x190
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     addi r11, r1, 0x40
     bl _restgpr_23
     lwz r0, 0x44(r1)

@@ -19,10 +19,10 @@ extern void fn_805D9E10(void);
 extern void PSMTXInverse(void);
 extern void PSMTXTrans(void);
 extern void PSMTXMultVec(void);
-extern void fn_80612E80(void);
+extern void GXSetVtxDesc(void);
 extern void fn_806134E0(void);
-extern void fn_80613520(void);
-extern void fn_80613BB0(void);
+extern void GXSetVtxAttrFmt(void);
+extern void GXClearVtxDesc(void);
 extern void fn_80614790(void);
 extern void fn_806149C0(void);
 extern void fn_80614A80(void);
@@ -59,7 +59,7 @@ void ESP_GetDataDir(void);
 void ESP_GetTitleId(void);
 void fn_805C0010(void);
 void fn_805C00E0(void);
-void fn_805C0120(void);
+void gx_selectActiveParam(void);
 void fn_805C0140(void);
 void fn_805C0290(void);
 void fn_805C02B0(void);
@@ -353,17 +353,17 @@ lbl_fn_805C00E0_00000330:
     blr
 }
 
-asm void fn_805C0120(void)
+asm void gx_selectActiveParam(void)
 {
     nofralloc
     lwz r0, 0x18(r3)
     cmpwi r0, 0x1
-    bne lbl_fn_805C0120_00000354
+    bne lbl_gx_selectActiveParam_00000354
     lfs f0, 0x4(r3)
-    b lbl_fn_805C0120_00000358
-lbl_fn_805C0120_00000354:
+    b lbl_gx_selectActiveParam_00000358
+lbl_gx_selectActiveParam_00000354:
     lfs f0, 0x8(r3)
-lbl_fn_805C0120_00000358:
+lbl_gx_selectActiveParam_00000358:
     stfs f0, 0xc(r3)
     blr
 }
@@ -576,22 +576,22 @@ asm void fn_805C03A0(void)
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0xb
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
     li r6, 0x4
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r3, 0x0
     li r4, 0xb
     li r5, 0x1
     li r6, 0x5
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r3, 0x0
     bl fn_80614A80
     li r3, 0x1
@@ -605,7 +605,7 @@ asm void fn_805C03A0(void)
     li r9, 0x2
     bl fn_80615D50
     li r3, 0x0
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0

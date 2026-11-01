@@ -16,7 +16,7 @@ extern void fn_80117228(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_801F4CB4(void);
 extern void fn_801FEDBC(void);
-extern void fn_801FEE08(void);
+extern void thread_dispatchToQueue(void);
 extern void fn_804A436C(void);
 extern void fn_804AC734(void);
 extern void fn_804AC79C(void);
@@ -591,7 +591,7 @@ lbl_fn_804BDD68_000006DC:
     mr r4, r3
     mr r3, r26
     mr r5, r29
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, lbl_8087F610
     lwz r5, 0x564(r3)
     cmpwi r5, -0x1
@@ -616,7 +616,7 @@ lbl_fn_804BDD68_000006DC:
     mr r4, r3
     mr r3, r26
     addi r5, r1, 0x8
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
 lbl_fn_804BDD68_00000768:
     lwz r4, 0xd90(r31)
     mr r3, r31

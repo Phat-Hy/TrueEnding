@@ -39,9 +39,9 @@ extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void fn_801F3FF8(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801FECE0(void);
-extern void fn_801FED24(void);
-extern void fn_801FEE08(void);
+extern void thread_findAndNotify(void);
+extern void thread_findAndNotifySlot(void);
+extern void thread_dispatchToQueue(void);
 extern void fn_8037177C(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -56,11 +56,11 @@ extern void PSMTXMultVecArraySR(void);
 extern void PSVECMag(void);
 extern void fn_805FEB00(void);
 extern void fn_805FF120(void);
-extern void fn_80612E80(void);
+extern void GXSetVtxDesc(void);
 extern void fn_806134E0(void);
-extern void fn_80613520(void);
+extern void GXSetVtxAttrFmt(void);
 extern void __GXSetVtxDesc(void);
-extern void fn_80613BB0(void);
+extern void GXClearVtxDesc(void);
 extern void fn_80614790(void);
 extern void fn_80615D20(void);
 extern void fn_80615FF0(void);
@@ -667,7 +667,7 @@ lbl_dvd_renderFatalErrorScreen_000006AC:
     mr r4, r3
     mr r3, r31
     li r5, 0x4
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r3, 0x28(r30)
     li r4, 0x0
     bl atn_Task_setActive
@@ -936,7 +936,7 @@ lbl_dvd_renderFatalErrorScreen_00000AD4:
     mr r4, r3
     mr r3, r29
     addi r5, r1, 0x10
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     addi r26, r26, 0x1
     addi r27, r27, 0x4
     cmpwi r26, 0x4
@@ -1509,7 +1509,7 @@ lbl_dvd_initFatalErrorScreen_00001278:
     li r5, 0x1
     bl GXLoadTexMtxImm
     li r3, 0x1
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -1664,22 +1664,22 @@ lbl_fn_80364BE8_0000149C:
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0xd
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
     li r6, 0x3
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r3, 0x0
     li r4, 0xd
     li r5, 0x1
     li r6, 0x3
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     lwz r0, 0x94(r1)
     lwz r31, 0x8c(r1)
     mtlr r0
@@ -1791,7 +1791,7 @@ lbl_fn_80364E7C_00001704:
     mr r4, r3
     mr r3, r30
     addi r5, r1, 0x208
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     addi r26, r26, 0x1
     addi r28, r28, 0x4
     cmpwi r26, 0x2
@@ -1844,7 +1844,7 @@ lbl_fn_80364E7C_000017D0:
     mr r4, r3
     mr r3, r30
     addi r5, r1, 0x8
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     addi r26, r26, 0x1
     addi r28, r28, 0x4
     cmpwi r26, 0x4
@@ -1950,7 +1950,7 @@ lbl_fn_8036503C_00001964:
     mr r4, r3
     mr r3, r29
     li r5, 0x0
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r4, 0x30(r31)
     addi r3, r30, 0x84
     lfs f31, 0x3c(r1)
@@ -1960,7 +1960,7 @@ lbl_fn_8036503C_00001964:
     mr r4, r3
     mr r3, r29
     li r5, 0x1
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r4, 0x30(r31)
     addi r3, r30, 0x84
     lfs f31, 0x48(r1)
@@ -1970,7 +1970,7 @@ lbl_fn_8036503C_00001964:
     mr r4, r3
     mr r3, r29
     li r5, 0x4
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r4, 0x30(r31)
     addi r3, r30, 0x8f
     lfs f31, 0x40(r1)
@@ -1979,7 +1979,7 @@ lbl_fn_8036503C_00001964:
     fmr f1, f31
     mr r4, r3
     mr r3, r29
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0x30(r31)
     addi r3, r30, 0x95
     lfs f31, 0x44(r1)
@@ -1988,7 +1988,7 @@ lbl_fn_8036503C_00001964:
     fmr f1, f31
     mr r4, r3
     mr r3, r29
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r29, lbl_8087EF70
     cmpwi r29, 0x0
     beq lbl_fn_8036503C_00001B28

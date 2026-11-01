@@ -15,7 +15,7 @@ extern void fn_801F4C14(void);
 extern void fn_801F4CB4(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801FEDBC(void);
-extern void fn_801FEE08(void);
+extern void thread_dispatchToQueue(void);
 extern void fn_8020924C(void);
 extern void fn_804A3C24(void);
 extern void fn_804A4738(void);
@@ -1223,7 +1223,7 @@ lbl_fn_804CC618_00000FBC:
     mr r4, r3
     mr r3, r27
     mr r5, r28
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
 lbl_fn_804CC618_00000FE4:
     addi r23, r23, 0x1
     addi r25, r25, 0x4
@@ -1244,7 +1244,7 @@ lbl_fn_804CC618_00001010:
     mr r4, r3
     mr r3, r27
     mr r5, r29
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     addi r23, r23, 0x1
     addi r31, r31, 0x4
     cmpwi r23, 0x2
@@ -1304,7 +1304,7 @@ lbl_fn_804CC7A4_000010D8:
     mr r4, r3
     mr r3, r23
     mr r5, r22
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
 lbl_fn_804CC7A4_00001100:
     lwz r30, 0x164(r20)
     li r27, 0x0
@@ -1524,7 +1524,7 @@ lbl_fn_804CC7A4_000013B0:
     mr r4, r3
     mr r3, r19
     mr r5, r18
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     addi r11, r1, 0xb0
     bl _restgpr_18
     lwz r0, 0xb4(r1)
@@ -2009,7 +2009,7 @@ lbl_fn_804CCB54_000019F4:
     mr r4, r3
     mr r3, r22
     mr r5, r31
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     addi r29, r29, 0x4
     addi r27, r27, 0x1
 lbl_fn_804CCB54_00001A48:
@@ -2037,7 +2037,7 @@ lbl_fn_804CCB54_00001A80:
     mr r4, r3
     mr r3, r22
     mr r5, r24
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     addi r28, r28, 0x4
     addi r27, r27, 0x1
 lbl_fn_804CCB54_00001AAC:
@@ -2077,7 +2077,7 @@ lbl_fn_804CCB54_00001AFC:
     mr r4, r3
     mr r3, r22
     mr r5, r23
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r4, 0x50(r26)
     addi r23, r27, 0x16
     addi r3, r25, 0x162
@@ -2086,7 +2086,7 @@ lbl_fn_804CCB54_00001AFC:
     mr r4, r3
     mr r3, r22
     mr r5, r23
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, lbl_8087F1E4
     lwz r22, 0xde4(r3)
     cmpwi r22, 0x0
@@ -2104,7 +2104,7 @@ lbl_fn_804CCB54_00001B70:
     mr r4, r3
     mr r3, r23
     mr r5, r22
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lmw r22, 0x48(r1)
     lwz r0, 0x74(r1)
     mtlr r0

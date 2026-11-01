@@ -31,7 +31,7 @@ extern void fn_80116FC0(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_801F3FF8(void);
 extern void fn_801F4C14(void);
-extern void fn_801FED24(void);
+extern void thread_findAndNotifySlot(void);
 extern void fn_8021A4CC(void);
 extern void fn_8021F09C(void);
 extern void boss_getOffset54(void);
@@ -401,7 +401,7 @@ lbl_fn_805BC9F4_000003C0:
     mr r4, r3
     mr r3, r29
     li r5, 0x1
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
 lbl_fn_805BC9F4_00000420:
     addi r27, r27, 0x1
     addi r28, r28, 0x10
@@ -431,7 +431,7 @@ lbl_fn_805BC9F4_00000420:
     mr r4, r3
     mr r3, r29
     li r5, 0x1
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lis r3, 0x89
     lwz r29, lbl_8087EEC8
     addi r4, r3, 0x5472
@@ -454,7 +454,7 @@ lbl_fn_805BC9F4_00000420:
     mr r3, r29
     li r5, 0x0
     fsubs f1, f0, f31
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r4, 0xb0(r31)
     addi r3, r30, 0xa2
     addi r29, r4, 0x58
@@ -464,7 +464,7 @@ lbl_fn_805BC9F4_00000420:
     mr r3, r29
     li r5, 0x0
     fsubs f1, f0, f31
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
 lbl_fn_805BC9F4_00000518:
     lwz r0, 0x68(r31)
     lfs f0, lbl_80888454

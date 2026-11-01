@@ -15,7 +15,7 @@ extern void fn_8006AFF8(void);
 extern void mem_free(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_80088FAC(void);
 extern void fn_8008937C(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -952,7 +952,7 @@ lbl_fn_802EC38C_00000BD0:
     addi r4, r31, 0x1cb
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_808847A8
     mr r3, r30
     lfs f2, lbl_808847AC

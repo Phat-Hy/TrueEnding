@@ -16,7 +16,7 @@ extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_interpolatePath(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_80087BB4(void);
 extern void fn_80087E9C(void);
 extern void fn_80088724(void);
@@ -36,7 +36,7 @@ extern void fn_801F6C80(void);
 extern void fn_801F7590(void);
 extern void fn_801F837C(void);
 extern void fn_801F8598(void);
-extern void fn_801FECE0(void);
+extern void thread_findAndNotify(void);
 extern void fn_80201E78(void);
 extern void fn_80202118(void);
 extern void fn_80202A6C(void);
@@ -658,7 +658,7 @@ lbl_fn_8051B7CC_000006E4:
     fmr f1, f31
     mr r4, r3
     addi r3, r31, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_8051B7CC_00000728:
     addi r28, r28, 0x40
     addi r27, r27, 0x1
@@ -681,7 +681,7 @@ lbl_fn_8051B7CC_00000730:
     fmr f1, f31
     mr r4, r3
     addi r3, r31, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_8051B7CC_0000077C:
     addi r11, r1, 0x20
     psq_l f31, 0x28(r1), 0, 0
@@ -1481,7 +1481,7 @@ lbl_fn_8051C3E0_000012B4:
     addi r5, r28, 0x48a8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_80887970
     mr r3, r30
     lfs f2, lbl_80887974

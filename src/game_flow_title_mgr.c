@@ -12,7 +12,7 @@ extern void fn_8006F2F0(void);
 extern void fn_8006F420(void);
 extern void fn_800DC97C(void);
 extern void fn_8016F3D0(void);
-extern void fn_804AE3BC(void);
+extern void net_getPacketManager(void);
 extern void fn_804D818C(void);
 extern void fn_804FB224(void);
 extern void fn_8050128C(void);
@@ -1632,7 +1632,7 @@ lbl_fn_804DCA58_00001468:
     li r5, 0x8
     subi r4, r4, 0x6674
     bl memcpy
-    bl fn_804AE3BC
+    bl net_getPacketManager
     mr r6, r14
     li r4, -0x1
     li r5, 0x1034

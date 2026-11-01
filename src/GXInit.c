@@ -29,7 +29,7 @@ extern void fn_806136C0(void);
 extern void GXSetArray(void);
 extern void GXInvalidateVtxCache(void);
 extern void __GXSetVtxDesc(void);
-extern void fn_80613BB0(void);
+extern void GXClearVtxDesc(void);
 extern void fn_806141C0(void);
 extern void fn_806141D0(void);
 extern void fn_806141F0(void);
@@ -660,7 +660,7 @@ lbl___GXInitGX_000006D8:
     li r8, 0x7d
     bl __GXSetVtxDesc
     li r3, 0x1
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     bl fn_806134E0
     bl GXInvalidateVtxCache
     li r31, 0x9

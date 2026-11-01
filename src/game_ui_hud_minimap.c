@@ -29,10 +29,10 @@ extern void fn_801F4728(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801F6C80(void);
 extern void fn_801F6E78(void);
-extern void fn_801FECE0(void);
-extern void fn_801FED24(void);
+extern void thread_findAndNotify(void);
+extern void thread_findAndNotifySlot(void);
 extern void fn_801FEDBC(void);
-extern void fn_801FEE08(void);
+extern void thread_dispatchToQueue(void);
 extern void fn_80202118(void);
 extern void fn_80202D00(void);
 extern void fn_802091E8(void);
@@ -251,7 +251,7 @@ lbl_fn_801D162C_000001D8:
     fmr f1, f31
     mr r4, r3
     addi r3, r30, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_801D162C_0000021C:
     addi r27, r27, 0x40
     addi r26, r26, 0x1
@@ -276,7 +276,7 @@ lbl_fn_801D162C_00000224:
     fmr f1, f31
     mr r4, r3
     addi r3, r30, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_801D162C_00000278:
     lwz r3, 0xad0(r31)
     cmpwi r3, 0x0
@@ -295,7 +295,7 @@ lbl_fn_801D162C_00000278:
     fmr f1, f31
     mr r4, r3
     addi r3, r30, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_801D162C_000002C0:
     lwz r3, 0xad4(r31)
     cmpwi r3, 0x0
@@ -314,7 +314,7 @@ lbl_fn_801D162C_000002C0:
     fmr f1, f31
     mr r4, r3
     addi r3, r30, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_801D162C_00000308:
     lwz r3, 0xad8(r31)
     cmpwi r3, 0x0
@@ -333,7 +333,7 @@ lbl_fn_801D162C_00000308:
     fmr f1, f31
     mr r4, r3
     addi r3, r30, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_801D162C_00000350:
     lwz r3, 0xadc(r31)
     cmpwi r3, 0x0
@@ -352,7 +352,7 @@ lbl_fn_801D162C_00000350:
     fmr f1, f31
     mr r4, r3
     addi r3, r30, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_801D162C_00000398:
     lwz r3, 0xae0(r31)
     cmpwi r3, 0x0
@@ -371,7 +371,7 @@ lbl_fn_801D162C_00000398:
     fmr f1, f31
     mr r4, r3
     addi r3, r30, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_801D162C_000003E0:
     lwz r3, 0xb0c(r31)
     cmpwi r3, 0x0
@@ -390,7 +390,7 @@ lbl_fn_801D162C_000003E0:
     fmr f1, f31
     mr r4, r3
     addi r3, r30, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_801D162C_00000428:
     lis r3, lbl_8073C56C@ha
     mr r29, r31
@@ -412,7 +412,7 @@ lbl_fn_801D162C_0000043C:
     fmr f1, f31
     mr r4, r3
     addi r3, r30, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_801D162C_00000478:
     addi r26, r26, 0x1
     addi r29, r29, 0x48
@@ -435,7 +435,7 @@ lbl_fn_801D162C_00000478:
     fmr f1, f31
     mr r4, r3
     addi r3, r30, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_801D162C_000004D0:
     lwz r27, 0xb30(r31)
     cmpwi r27, 0x0
@@ -447,7 +447,7 @@ lbl_fn_801D162C_000004D0:
     fmr f1, f31
     mr r4, r3
     addi r3, r27, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_801D162C_000004FC:
     addi r11, r1, 0x20
     psq_l f31, 0x28(r1), 0, 0
@@ -879,7 +879,7 @@ lbl_fn_801D19F0_00000AEC:
     mr r4, r3
     mr r3, r16
     li r5, 0x0
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r4, 0xb2c(r15)
     addi r3, r14, 0x319
     addi r14, r4, 0x58
@@ -888,7 +888,7 @@ lbl_fn_801D19F0_00000AEC:
     mr r4, r3
     mr r3, r14
     li r5, 0x1
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r0, 0x7c(r15)
     cmpwi r0, 0xb
     bne lbl_fn_801D19F0_00000B84
@@ -927,7 +927,7 @@ lbl_fn_801D19F0_00000BB0:
     mr r4, r3
     mr r3, r14
     li r5, 0x0
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r4, 0xb30(r15)
     addi r3, r16, 0x324
     addi r14, r4, 0x58
@@ -936,7 +936,7 @@ lbl_fn_801D19F0_00000BB0:
     mr r4, r3
     mr r3, r14
     li r5, 0x1
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r14, lbl_8087F4F0
     li r4, 0x0
     mr r3, r14
@@ -971,7 +971,7 @@ lbl_fn_801D19F0_00000C80:
     fmr f1, f30
     mr r4, r3
     mr r3, r16
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lis r3, lbl_8073C56C@ha
     lwz r4, 0xb30(r15)
     cmpwi r14, 0x0
@@ -988,7 +988,7 @@ lbl_fn_801D19F0_00000CBC:
     fmr f1, f30
     mr r4, r3
     mr r3, r14
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r0, 0x7c(r15)
     cmpwi r0, 0xe
     bne lbl_fn_801D19F0_00000CFC
@@ -1103,7 +1103,7 @@ lbl_fn_801D19F0_00000D28:
     mr r4, r3
     addi r3, r14, 0x58
     addi r5, r17, 0x14
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, 0xadc(r15)
     addi r19, r18, 0x348
     bl fn_80202118
@@ -1113,7 +1113,7 @@ lbl_fn_801D19F0_00000D28:
     mr r4, r3
     addi r3, r14, 0x58
     addi r5, r17, 0x14
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r17, 0x8(r16)
     addi r16, r18, 0x355
     lwz r3, 0xadc(r15)
@@ -1124,7 +1124,7 @@ lbl_fn_801D19F0_00000D28:
     mr r4, r3
     mr r5, r17
     addi r3, r14, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, 0xadc(r15)
     addi r16, r18, 0x360
     la r17, lbl_8087DA58
@@ -1135,7 +1135,7 @@ lbl_fn_801D19F0_00000D28:
     mr r4, r3
     mr r5, r17
     addi r3, r14, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     b lbl_fn_801D19F0_00000FD4
 lbl_fn_801D19F0_00000F18:
     lis r16, lbl_8073C56C@ha
@@ -1151,7 +1151,7 @@ lbl_fn_801D19F0_00000F18:
     mr r4, r3
     mr r5, r19
     addi r3, r14, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, 0xadc(r15)
     mr r18, r19
     addi r17, r16, 0x348
@@ -1162,7 +1162,7 @@ lbl_fn_801D19F0_00000F18:
     mr r4, r3
     mr r5, r18
     addi r3, r14, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, 0xadc(r15)
     addi r17, r16, 0x355
     la r18, lbl_8087DA58
@@ -1173,7 +1173,7 @@ lbl_fn_801D19F0_00000F18:
     mr r4, r3
     mr r5, r18
     addi r3, r14, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, 0xadc(r15)
     addi r16, r16, 0x360
     la r17, lbl_8087DA58
@@ -1184,7 +1184,7 @@ lbl_fn_801D19F0_00000F18:
     mr r4, r3
     mr r5, r17
     addi r3, r14, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
 lbl_fn_801D19F0_00000FD4:
     lwz r3, 0xae0(r15)
     cmpwi r3, 0x0
@@ -1223,7 +1223,7 @@ lbl_fn_801D19F0_00000FD4:
     mr r4, r3
     mr r5, r18
     addi r3, r14, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     li r3, 0x0
     li r4, 0x2740
     bl fn_80116FC0
@@ -1237,7 +1237,7 @@ lbl_fn_801D19F0_00000FD4:
     mr r4, r3
     mr r5, r18
     addi r3, r14, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, 0xae0(r15)
     addi r17, r16, 0x355
     la r18, lbl_8087DA58
@@ -1248,7 +1248,7 @@ lbl_fn_801D19F0_00000FD4:
     mr r4, r3
     mr r5, r18
     addi r3, r14, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, 0xae0(r15)
     addi r16, r16, 0x360
     la r17, lbl_8087DA58
@@ -1259,7 +1259,7 @@ lbl_fn_801D19F0_00000FD4:
     mr r4, r3
     mr r5, r17
     addi r3, r14, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     b lbl_fn_801D19F0_00001294
 lbl_fn_801D19F0_00001100:
     cmpwi r17, 0x0
@@ -1282,7 +1282,7 @@ lbl_fn_801D19F0_00001100:
     mr r4, r3
     addi r3, r14, 0x58
     addi r5, r17, 0x14
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, 0xae0(r15)
     addi r18, r16, 0x348
     bl fn_80202118
@@ -1292,7 +1292,7 @@ lbl_fn_801D19F0_00001100:
     mr r4, r3
     addi r3, r14, 0x58
     addi r5, r17, 0x14
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, 0xae0(r15)
     addi r17, r16, 0x355
     la r18, lbl_8087DA58
@@ -1303,7 +1303,7 @@ lbl_fn_801D19F0_00001100:
     mr r4, r3
     mr r5, r18
     addi r3, r14, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, 0xae0(r15)
     addi r16, r16, 0x360
     la r17, lbl_8087DA58
@@ -1314,7 +1314,7 @@ lbl_fn_801D19F0_00001100:
     mr r4, r3
     mr r5, r17
     addi r3, r14, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     b lbl_fn_801D19F0_00001294
 lbl_fn_801D19F0_000011D8:
     lis r16, lbl_8073C56C@ha
@@ -1330,7 +1330,7 @@ lbl_fn_801D19F0_000011D8:
     mr r4, r3
     mr r5, r19
     addi r3, r14, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, 0xae0(r15)
     mr r18, r19
     addi r17, r16, 0x348
@@ -1341,7 +1341,7 @@ lbl_fn_801D19F0_000011D8:
     mr r4, r3
     mr r5, r18
     addi r3, r14, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, 0xae0(r15)
     addi r17, r16, 0x355
     la r18, lbl_8087DA58
@@ -1352,7 +1352,7 @@ lbl_fn_801D19F0_000011D8:
     mr r4, r3
     mr r5, r18
     addi r3, r14, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, 0xae0(r15)
     addi r16, r16, 0x360
     la r17, lbl_8087DA58
@@ -1363,7 +1363,7 @@ lbl_fn_801D19F0_000011D8:
     mr r4, r3
     mr r5, r17
     addi r3, r14, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
 lbl_fn_801D19F0_00001294:
     lis r3, lbl_8073C56C@ha
     lfs f31, lbl_80882A74
@@ -1725,7 +1725,7 @@ lbl_fn_801D19F0_00001738:
     mr r4, r3
     mr r5, r21
     addi r3, r17, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r19, 0x8(r19)
     addi r18, r18, 0x37f
     lwz r3, 0xb0c(r15)
@@ -1736,7 +1736,7 @@ lbl_fn_801D19F0_00001738:
     mr r4, r3
     mr r5, r19
     addi r3, r17, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
 lbl_fn_801D19F0_000017FC:
     lwz r5, 0x50(r15)
     mr r3, r15
@@ -2130,7 +2130,7 @@ lbl_fn_801D19F0_00001BF4:
     lfs f1, lbl_80882A7C
     mr r4, r3
     addi r3, r14, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r3, lbl_8087F1E4
     lwz r17, 0xd14(r3)
     cmpwi r17, 0x0
@@ -2150,7 +2150,7 @@ lbl_fn_801D19F0_00001E08:
     mr r4, r3
     mr r5, r17
     addi r3, r14, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, lbl_8087F1E4
     lwz r17, 0xd1c(r3)
     cmpwi r17, 0x0
@@ -2170,7 +2170,7 @@ lbl_fn_801D19F0_00001E50:
     mr r4, r3
     mr r5, r17
     addi r3, r14, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, lbl_8087F1E4
     lwz r18, 0xd24(r3)
     cmpwi r18, 0x0
@@ -2190,7 +2190,7 @@ lbl_fn_801D19F0_00001E98:
     mr r4, r3
     mr r5, r18
     addi r3, r14, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r0, 0x1bb0(r15)
     cmpwi r0, 0x0
     bne lbl_fn_801D19F0_00001F84
@@ -2203,7 +2203,7 @@ lbl_fn_801D19F0_00001E98:
     lfs f1, lbl_80882A74
     mr r4, r3
     addi r3, r14, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r3, 0xb18(r15)
     addi r16, r16, 0x3f1
     bl fn_80202118
@@ -2213,7 +2213,7 @@ lbl_fn_801D19F0_00001E98:
     lfs f1, lbl_80882A5C
     mr r4, r3
     addi r3, r14, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
     mr r16, r15
     addi r17, r15, 0xbb8
     li r18, 0x0
@@ -2249,7 +2249,7 @@ lbl_fn_801D19F0_00001F84:
     lfs f1, lbl_80882A5C
     mr r4, r3
     addi r3, r14, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r3, 0xb18(r15)
     addi r16, r16, 0x3f1
     bl fn_80202118
@@ -2259,7 +2259,7 @@ lbl_fn_801D19F0_00001F84:
     lfs f1, lbl_80882A74
     mr r4, r3
     addi r3, r14, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
     mr r14, r15
     mr r16, r15
     addi r17, r15, 0xbb8
@@ -2411,7 +2411,7 @@ lbl_fn_801D19F0_000021D0:
     mr r4, r3
     mr r3, r16
     li r5, 0x0
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r4, 0xb1c(r15)
     addi r3, r14, 0x3f9
     lfs f30, 0x138(r1)
@@ -2421,7 +2421,7 @@ lbl_fn_801D19F0_000021D0:
     mr r4, r3
     mr r3, r16
     li r5, 0x1
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r4, 0xb20(r15)
     addi r3, r14, 0x3f9
     lfs f30, 0x134(r1)
@@ -2431,7 +2431,7 @@ lbl_fn_801D19F0_000021D0:
     mr r4, r3
     mr r3, r16
     li r5, 0x0
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r4, 0xb20(r15)
     addi r3, r14, 0x3f9
     lfs f30, 0x138(r1)
@@ -2441,7 +2441,7 @@ lbl_fn_801D19F0_000021D0:
     mr r4, r3
     mr r3, r14
     li r5, 0x1
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     b lbl_fn_801D19F0_00002290
 lbl_fn_801D19F0_0000227C:
     lwz r3, 0xb1c(r15)
@@ -2459,7 +2459,7 @@ lbl_fn_801D19F0_00002290:
     lfs f1, lbl_80882A5C
     mr r4, r3
     mr r3, r16
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0xb1c(r15)
     addi r3, r14, 0x40b
     addi r16, r4, 0x58
@@ -2467,7 +2467,7 @@ lbl_fn_801D19F0_00002290:
     lfs f1, lbl_80882A5C
     mr r4, r3
     mr r3, r16
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0xb20(r15)
     addi r3, r14, 0x404
     addi r16, r4, 0x58
@@ -2475,7 +2475,7 @@ lbl_fn_801D19F0_00002290:
     lfs f1, lbl_80882A5C
     mr r4, r3
     mr r3, r16
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0xb20(r15)
     addi r3, r14, 0x40b
     addi r16, r4, 0x58
@@ -2483,7 +2483,7 @@ lbl_fn_801D19F0_00002290:
     lfs f1, lbl_80882A5C
     mr r4, r3
     mr r3, r16
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lfs f30, 0xf8(r15)
     lfs f0, lbl_80882A5C
     fcmpo cr0, f30, f0
@@ -2495,7 +2495,7 @@ lbl_fn_801D19F0_00002290:
     fmr f1, f30
     mr r4, r3
     mr r3, r16
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0xb20(r15)
     addi r3, r14, 0x40b
     lfs f30, 0xf8(r15)
@@ -2504,7 +2504,7 @@ lbl_fn_801D19F0_00002290:
     fmr f1, f30
     mr r4, r3
     mr r3, r14
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_801D19F0_000023EC
 lbl_fn_801D19F0_00002370:
     bge lbl_fn_801D19F0_000023EC
@@ -2516,7 +2516,7 @@ lbl_fn_801D19F0_00002370:
     fmr f1, f30
     mr r4, r3
     mr r3, r16
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lfs f0, 0xf8(r15)
     addi r3, r14, 0x404
     lwz r4, 0xb20(r15)
@@ -2526,7 +2526,7 @@ lbl_fn_801D19F0_00002370:
     fmr f1, f30
     mr r4, r3
     mr r3, r14
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_801D19F0_000023EC
 lbl_fn_801D19F0_000023C4:
     lwz r3, 0xb1c(r15)
@@ -2624,7 +2624,7 @@ lbl_fn_801D19F0_000024F8:
     mr r4, r3
     mr r3, r16
     mr r5, r14
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     b lbl_fn_801D19F0_0000256C
 lbl_fn_801D19F0_00002534:
     li r3, 0x0
@@ -2640,7 +2640,7 @@ lbl_fn_801D19F0_00002534:
     mr r4, r3
     mr r3, r16
     mr r5, r14
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
 lbl_fn_801D19F0_0000256C:
     li r3, 0x0
     li r4, 0x196
@@ -2655,7 +2655,7 @@ lbl_fn_801D19F0_0000256C:
     mr r4, r3
     mr r3, r17
     mr r5, r16
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r0, 0xb80(r15)
     cmpwi r0, 0x1
     bne lbl_fn_801D19F0_000025F4
@@ -2666,7 +2666,7 @@ lbl_fn_801D19F0_0000256C:
     lfs f1, lbl_80882A5C
     mr r4, r3
     mr r3, r16
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0xb84(r15)
     addi r3, r14, 0x3f1
     addi r14, r4, 0x58
@@ -2674,7 +2674,7 @@ lbl_fn_801D19F0_0000256C:
     lfs f1, lbl_80882A74
     mr r4, r3
     mr r3, r14
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_801D19F0_0000280C
 lbl_fn_801D19F0_000025F4:
     cmpwi r0, 0x0
@@ -2686,7 +2686,7 @@ lbl_fn_801D19F0_000025F4:
     lfs f1, lbl_80882A74
     mr r4, r3
     mr r3, r16
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0xb84(r15)
     addi r3, r14, 0x3f1
     addi r14, r4, 0x58
@@ -2694,7 +2694,7 @@ lbl_fn_801D19F0_000025F4:
     lfs f1, lbl_80882A5C
     mr r4, r3
     mr r3, r14
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_801D19F0_0000280C
 lbl_fn_801D19F0_00002640:
     cmpwi r0, 0x2
@@ -2746,7 +2746,7 @@ lbl_fn_801D19F0_000026C8:
     mr r4, r3
     mr r3, r16
     mr r5, r14
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     b lbl_fn_801D19F0_0000273C
 lbl_fn_801D19F0_00002704:
     li r3, 0x0
@@ -2762,7 +2762,7 @@ lbl_fn_801D19F0_00002704:
     mr r4, r3
     mr r3, r16
     mr r5, r14
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
 lbl_fn_801D19F0_0000273C:
     li r3, 0x0
     li r4, 0x196
@@ -2777,7 +2777,7 @@ lbl_fn_801D19F0_0000273C:
     mr r4, r3
     mr r3, r17
     mr r5, r16
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r0, 0xb7c(r15)
     cmpwi r0, 0x1
     bne lbl_fn_801D19F0_000027C4
@@ -2788,7 +2788,7 @@ lbl_fn_801D19F0_0000273C:
     lfs f1, lbl_80882A5C
     mr r4, r3
     mr r3, r16
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0xb84(r15)
     addi r3, r14, 0x3f1
     addi r14, r4, 0x58
@@ -2796,7 +2796,7 @@ lbl_fn_801D19F0_0000273C:
     lfs f1, lbl_80882A74
     mr r4, r3
     mr r3, r14
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_801D19F0_0000280C
 lbl_fn_801D19F0_000027C4:
     cmpwi r0, 0x0
@@ -2808,7 +2808,7 @@ lbl_fn_801D19F0_000027C4:
     lfs f1, lbl_80882A74
     mr r4, r3
     mr r3, r16
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0xb84(r15)
     addi r3, r14, 0x3f1
     addi r14, r4, 0x58
@@ -2816,7 +2816,7 @@ lbl_fn_801D19F0_000027C4:
     lfs f1, lbl_80882A5C
     mr r4, r3
     mr r3, r14
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_801D19F0_0000280C:
     lwz r0, 0x484(r15)
     cmpwi r0, 0x0

@@ -27,7 +27,7 @@ extern void fn_800D5B58(void);
 extern void atn_LoadHandle_getStatus(void);
 extern void PSMTXScale(void);
 extern void __GXSetVtxDesc(void);
-extern void fn_80613BB0(void);
+extern void GXClearVtxDesc(void);
 extern void fn_80614190(void);
 extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
@@ -506,7 +506,7 @@ asm void fn_800AD648(void)
     li r3, 0x0
     bl __GXSetVtxDesc
     li r3, 0x8
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x8
@@ -701,7 +701,7 @@ asm void fn_800AD834(void)
     srawi r27, r0, 1
     ble lbl_fn_800AD834_00000914
     li r3, 0x1
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x1
@@ -1026,7 +1026,7 @@ lbl_fn_800AD834_00000D20:
     bl fn_80614190
     bl GXDrawDone
     li r3, 0x1
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x1
@@ -1154,7 +1154,7 @@ lbl_fn_800AD834_00000F00:
     mr r3, r26
     bl fn_800AD648
     li r3, 0x2
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x1
@@ -1276,7 +1276,7 @@ lbl_fn_800AD834_00000F00:
     bl fn_80614190
     bl GXDrawDone
     li r3, 0x3
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x2
@@ -1765,7 +1765,7 @@ lbl_fn_800AE568_000017F8:
     li r9, 0x2
     bl fn_80615D50
     li r3, 0x2
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4

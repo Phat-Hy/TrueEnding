@@ -22,7 +22,7 @@ extern void fn_800848B4(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_80087E9C(void);
 extern void fn_80088AF4(void);
 extern void fn_8008937C(void);
@@ -37,7 +37,7 @@ extern void fn_80476194(void);
 extern void fn_804761B0(void);
 extern void PSMTXMultVecArraySR(void);
 extern void __GXSetVtxDesc(void);
-extern void fn_80613BB0(void);
+extern void GXClearVtxDesc(void);
 extern void fn_80614190(void);
 extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
@@ -970,7 +970,7 @@ asm void fn_800B2EA0(void)
     li r8, 0x0
     bl fn_80616250
     li r3, 0x1
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x1
@@ -1066,7 +1066,7 @@ asm void fn_800B2EA0(void)
     fmuls f1, f0, f1
     bl layout_drawPane
     li r3, 0x1
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x1
@@ -1133,7 +1133,7 @@ asm void fn_800B320C(void)
     addi r5, r5, 0x4
     li r6, 0x0
     li r7, 0x0
-    b fn_80087994
+    b route_createSegment
 }
 
 asm void fn_800B3228(void)

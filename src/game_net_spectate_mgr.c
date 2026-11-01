@@ -26,7 +26,7 @@ extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void fn_80087858(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_80087E9C(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
@@ -2338,7 +2338,7 @@ lbl_spectateManager_update_00001FC8:
     addi r4, r28, 0x1a0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_80887C04
     mr r3, r29
     lfs f2, lbl_80887C08

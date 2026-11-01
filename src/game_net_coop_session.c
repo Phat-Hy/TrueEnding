@@ -28,9 +28,9 @@ extern void fn_801F6D7C(void);
 extern void fn_801F7590(void);
 extern void fn_801F791C(void);
 extern void fn_801FEB9C(void);
-extern void fn_801FECE0(void);
+extern void thread_findAndNotify(void);
 extern void fn_801FEDBC(void);
-extern void fn_801FEE08(void);
+extern void thread_dispatchToQueue(void);
 extern void fn_80202D00(void);
 extern void fn_8020303C(void);
 extern void fn_80203260(void);
@@ -540,7 +540,7 @@ lbl_fn_804A3C24_00000648:
     mr r4, r3
     mr r3, r17
     mr r5, r18
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r4, 0x1c8(r15)
     lis r3, lbl_807573D0@ha
     addi r3, r3, lbl_807573D0@l
@@ -556,7 +556,7 @@ lbl_fn_804A3C24_00000680:
     mr r4, r3
     mr r3, r17
     mr r5, r19
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r4, 0x1c8(r15)
     lis r3, lbl_807573D0@ha
     addi r3, r3, lbl_807573D0@l
@@ -572,7 +572,7 @@ lbl_fn_804A3C24_000006B8:
     mr r4, r3
     mr r3, r17
     mr r5, r14
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r4, 0x1c8(r15)
     lis r3, lbl_807573D0@ha
     addi r3, r3, lbl_807573D0@l
@@ -583,7 +583,7 @@ lbl_fn_804A3C24_000006B8:
     mr r4, r3
     mr r3, r17
     mr r5, r14
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     addic. r0, r1, 0x38
     stw r16, 0x1c4(r15)
     beq lbl_fn_804A3C24_0000075C
@@ -663,7 +663,7 @@ asm void fn_804A4294(void)
     mr r4, r3
     mr r3, r31
     mr r5, r30
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     li r0, 0x1
     stw r0, 0x4c(r29)
     lwz r31, 0x1c(r1)
@@ -695,7 +695,7 @@ asm void fn_804A4300(void)
     mr r4, r3
     mr r3, r31
     mr r5, r30
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     li r0, 0x1
     stw r0, 0x54(r29)
     lwz r31, 0x1c(r1)
@@ -1095,13 +1095,13 @@ lbl_fn_804A473C_00000DB4:
     fmr f1, f30
     mr r4, r3
     addi r3, r27, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
     addi r3, r31, 0x194
     bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r27, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
     addi r3, r31, 0x19e
     bl str_findChar
     xoris r0, r28, 0x8000
@@ -1112,7 +1112,7 @@ lbl_fn_804A473C_00000DB4:
     addi r3, r27, 0x58
     lfd f0, 0x8(r1)
     fsubs f1, f0, f1
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_804A473C_00000E18:
     addi r11, r1, 0x30
     psq_l f31, 0x48(r1), 0, 0

@@ -22,8 +22,8 @@ extern void fn_801F3FF8(void);
 extern void fn_801F4728(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801FEC74(void);
-extern void fn_801FED24(void);
-extern void fn_801FEE08(void);
+extern void thread_findAndNotifySlot(void);
+extern void thread_dispatchToQueue(void);
 extern void fn_8020924C(void);
 extern void fn_804A3C24(void);
 extern void fn_804A53D4(void);
@@ -924,7 +924,7 @@ lbl_fn_804CDBFC_00000ABC:
     mr r3, r28
     li r5, 0x0
     fsubs f1, f0, f31
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
 lbl_fn_804CDBFC_00000AEC:
     li r0, 0x5
     stw r0, 0x5c(r31)
@@ -1069,7 +1069,7 @@ lbl_fn_804CDE1C_00000C54:
     mr r4, r3
     mr r3, r28
     li r5, 0x4
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r4, 0x58(r31)
     addi r3, r30, 0x95
     addi r28, r4, 0x58
@@ -1078,7 +1078,7 @@ lbl_fn_804CDE1C_00000C54:
     mr r4, r3
     mr r3, r28
     li r5, 0x4
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r3, lbl_8087F580
     lfs f1, lbl_80887560
     bl fn_804A5CD8
@@ -1825,7 +1825,7 @@ lbl_fn_804CE82C_00001724:
     mr r4, r3
     mr r3, r27
     addi r5, r1, 0x208
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r4, 0x4c(r29)
     addi r3, r28, 0xb4
     addi r27, r4, 0x58
@@ -1833,7 +1833,7 @@ lbl_fn_804CE82C_00001724:
     mr r4, r3
     mr r3, r27
     addi r5, r1, 0x8
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     cmpwi r31, 0x0
     ble lbl_fn_804CE82C_00001784
     lwz r3, 0x4c(r29)
@@ -2071,7 +2071,7 @@ lbl_fn_804CECEC_00001A90:
     mr r4, r3
     mr r3, r29
     mr r5, r30
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, lbl_8087F610
     lwz r0, 0x78(r31)
     lwz r3, 0x5a4(r3)
@@ -2095,7 +2095,7 @@ lbl_fn_804CECEC_00001AE8:
     mr r4, r3
     mr r3, r30
     mr r5, r29
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, lbl_8087F610
     lwz r3, 0x5b0(r3)
     neg r0, r3
@@ -2121,7 +2121,7 @@ lbl_fn_804CECEC_00001B44:
     mr r4, r3
     mr r3, r30
     mr r5, r29
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, 0x78(r31)
     neg r0, r3
     or r0, r0, r3
@@ -2144,7 +2144,7 @@ lbl_fn_804CECEC_00001B98:
     mr r4, r3
     mr r3, r30
     mr r5, r29
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     li r0, 0x1
     stw r0, 0x74(r31)
     lis r3, 0x8889

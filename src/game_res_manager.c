@@ -17,7 +17,7 @@ extern void fn_80013DC4(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8003E4A4(void);
 extern void mem_alloc(void);
-extern void fn_800DC880(void);
+extern void str_calcHash(void);
 extern void fn_800DC980(void);
 extern void fn_800F7250(void);
 extern void fn_80112F54(void);
@@ -1087,7 +1087,7 @@ asm void fn_802245C0(void)
     mr r31, r3
     mr r3, r4
     li r4, 0x0
-    bl fn_800DC880
+    bl str_calcHash
     mr r4, r3
     mr r3, r31
     bl fn_805392C0

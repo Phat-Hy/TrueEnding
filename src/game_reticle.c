@@ -45,7 +45,7 @@ extern void PSMTXInvXpose(void);
 extern void PSVECMag(void);
 extern void GXSetArray(void);
 extern void __GXSetVtxDesc(void);
-extern void fn_80613BB0(void);
+extern void GXClearVtxDesc(void);
 extern void fn_80615B60(void);
 extern void fn_80615C40(void);
 extern void fn_80615D20(void);
@@ -1742,7 +1742,7 @@ lbl_fn_8009CC28_00001674:
     srwi r28, r0, 5
     bl GXSetNumTevStages
     li r3, 0x1
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     lwz r0, 0x38(r31)
     li r3, 0x3
     stw r0, 0xc(r1)
@@ -1830,7 +1830,7 @@ lbl_fn_8009CC28_000017B4:
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1911,7 +1911,7 @@ asm void fn_8009D1A4(void)
     li r4, 0x3
     bl fn_80617340
     li r3, 0x1
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0

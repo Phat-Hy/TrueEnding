@@ -24,7 +24,7 @@ extern void fn_801F3FF8(void);
 extern void fn_801F4728(void);
 extern void fn_801F4CB4(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801FEE08(void);
+extern void thread_dispatchToQueue(void);
 extern void fn_803729B4(void);
 extern void fn_804B4678(void);
 extern void fn_804B4700(void);
@@ -203,7 +203,7 @@ lbl_fn_804C4530_00000138:
     mr r4, r3
     mr r3, r29
     addi r5, r5, lbl_80790DF8@l
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     b lbl_fn_804C4530_000001A8
 lbl_fn_804C4530_00000178:
     lwz r4, 0x48(r31)
@@ -217,7 +217,7 @@ lbl_fn_804C4530_00000178:
     addi r5, r5, lbl_80790DF8@l
     mr r3, r29
     addi r5, r5, 0x8
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
 lbl_fn_804C4530_000001A8:
     lwz r4, 0x48(r31)
     lis r30, lbl_80758D4C@ha
@@ -230,7 +230,7 @@ lbl_fn_804C4530_000001A8:
     addi r29, r29, lbl_80790DF8@l
     mr r3, r28
     addi r5, r29, 0x10
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r4, 0x48(r31)
     addi r3, r30, 0x63
     addi r28, r4, 0x58
@@ -238,7 +238,7 @@ lbl_fn_804C4530_000001A8:
     mr r4, r3
     mr r3, r28
     addi r5, r29, 0x18
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, lbl_8087F86C
     lwz r28, 0x9fc(r3)
     cmpwi r28, 0x0
@@ -256,7 +256,7 @@ lbl_fn_804C4530_00000210:
     mr r4, r3
     mr r3, r29
     mr r5, r28
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, lbl_8087F86C
     lwz r28, 0xa04(r3)
     cmpwi r28, 0x0
@@ -274,7 +274,7 @@ lbl_fn_804C4530_00000250:
     mr r4, r3
     mr r3, r29
     mr r5, r28
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, lbl_8087F86C
     lwz r28, 0xa0c(r3)
     cmpwi r28, 0x0
@@ -292,7 +292,7 @@ lbl_fn_804C4530_00000290:
     mr r4, r3
     mr r3, r29
     mr r5, r28
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, lbl_8087F86C
     lwz r28, 0xa0c(r3)
     cmpwi r28, 0x0
@@ -310,7 +310,7 @@ lbl_fn_804C4530_000002D0:
     mr r4, r3
     mr r3, r29
     mr r5, r28
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lfs f0, lbl_80887470
     stfs f0, 0xb0(r31)
     b lbl_fn_804C4530_00000B1C
@@ -396,7 +396,7 @@ lbl_fn_804C4530_00000400:
     mr r4, r3
     mr r3, r28
     addi r5, r5, lbl_80790DF8@l
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     b lbl_fn_804C4530_00000470
 lbl_fn_804C4530_00000440:
     lwz r4, 0x48(r31)
@@ -410,7 +410,7 @@ lbl_fn_804C4530_00000440:
     addi r5, r5, lbl_80790DF8@l
     mr r3, r28
     addi r5, r5, 0x8
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
 lbl_fn_804C4530_00000470:
     lwz r4, 0x48(r31)
     lis r30, lbl_80758D4C@ha
@@ -423,7 +423,7 @@ lbl_fn_804C4530_00000470:
     addi r29, r29, lbl_80790DF8@l
     mr r3, r28
     addi r5, r29, 0x10
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r4, 0x48(r31)
     addi r3, r30, 0x63
     addi r28, r4, 0x58
@@ -431,7 +431,7 @@ lbl_fn_804C4530_00000470:
     mr r4, r3
     mr r3, r28
     addi r5, r29, 0x18
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, lbl_8087F86C
     lwz r28, 0x9fc(r3)
     cmpwi r28, 0x0
@@ -449,7 +449,7 @@ lbl_fn_804C4530_000004D8:
     mr r4, r3
     mr r3, r29
     mr r5, r28
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, lbl_8087F86C
     lwz r28, 0xa04(r3)
     cmpwi r28, 0x0
@@ -467,7 +467,7 @@ lbl_fn_804C4530_00000518:
     mr r4, r3
     mr r3, r29
     mr r5, r28
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, lbl_8087F86C
     lwz r28, 0xa0c(r3)
     cmpwi r28, 0x0
@@ -485,7 +485,7 @@ lbl_fn_804C4530_00000558:
     mr r4, r3
     mr r3, r29
     mr r5, r28
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, lbl_8087F86C
     lwz r28, 0xa0c(r3)
     cmpwi r28, 0x0
@@ -503,7 +503,7 @@ lbl_fn_804C4530_00000598:
     mr r4, r3
     mr r3, r29
     mr r5, r28
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lfs f0, lbl_80887470
     stfs f0, 0xb0(r31)
     b lbl_fn_804C4530_00000868
@@ -573,7 +573,7 @@ lbl_fn_804C4530_00000688:
     mr r4, r3
     mr r3, r28
     addi r5, r5, lbl_80790DF8@l
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     b lbl_fn_804C4530_000006F8
 lbl_fn_804C4530_000006C8:
     lwz r4, 0x48(r31)
@@ -587,7 +587,7 @@ lbl_fn_804C4530_000006C8:
     addi r5, r5, lbl_80790DF8@l
     mr r3, r28
     addi r5, r5, 0x8
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
 lbl_fn_804C4530_000006F8:
     lwz r4, 0x48(r31)
     lis r30, lbl_80758D4C@ha
@@ -600,7 +600,7 @@ lbl_fn_804C4530_000006F8:
     addi r29, r29, lbl_80790DF8@l
     mr r3, r28
     addi r5, r29, 0x10
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r4, 0x48(r31)
     addi r3, r30, 0x63
     addi r28, r4, 0x58
@@ -608,7 +608,7 @@ lbl_fn_804C4530_000006F8:
     mr r4, r3
     mr r3, r28
     addi r5, r29, 0x18
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, lbl_8087F86C
     lwz r28, 0x9fc(r3)
     cmpwi r28, 0x0
@@ -626,7 +626,7 @@ lbl_fn_804C4530_00000760:
     mr r4, r3
     mr r3, r29
     mr r5, r28
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, lbl_8087F86C
     lwz r28, 0xa04(r3)
     cmpwi r28, 0x0
@@ -644,7 +644,7 @@ lbl_fn_804C4530_000007A0:
     mr r4, r3
     mr r3, r29
     mr r5, r28
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, lbl_8087F86C
     lwz r28, 0xa0c(r3)
     cmpwi r28, 0x0
@@ -662,7 +662,7 @@ lbl_fn_804C4530_000007E0:
     mr r4, r3
     mr r3, r29
     mr r5, r28
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, lbl_8087F86C
     lwz r28, 0xa0c(r3)
     cmpwi r28, 0x0
@@ -680,7 +680,7 @@ lbl_fn_804C4530_00000820:
     mr r4, r3
     mr r3, r29
     mr r5, r28
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lfs f0, lbl_80887470
     stfs f0, 0xb0(r31)
     b lbl_fn_804C4530_00000868
@@ -761,7 +761,7 @@ lbl_fn_804C4530_0000093C:
     mr r4, r3
     mr r3, r28
     addi r5, r5, lbl_80790DF8@l
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     b lbl_fn_804C4530_000009AC
 lbl_fn_804C4530_0000097C:
     lwz r4, 0x48(r31)
@@ -775,7 +775,7 @@ lbl_fn_804C4530_0000097C:
     addi r5, r5, lbl_80790DF8@l
     mr r3, r28
     addi r5, r5, 0x8
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
 lbl_fn_804C4530_000009AC:
     lwz r4, 0x48(r31)
     lis r29, lbl_80758D4C@ha
@@ -788,7 +788,7 @@ lbl_fn_804C4530_000009AC:
     addi r30, r30, lbl_80790DF8@l
     mr r3, r28
     addi r5, r30, 0x10
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r4, 0x48(r31)
     addi r3, r29, 0x63
     addi r28, r4, 0x58
@@ -796,7 +796,7 @@ lbl_fn_804C4530_000009AC:
     mr r4, r3
     mr r3, r28
     addi r5, r30, 0x18
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, lbl_8087F86C
     lwz r28, 0x9fc(r3)
     cmpwi r28, 0x0
@@ -814,7 +814,7 @@ lbl_fn_804C4530_00000A14:
     mr r4, r3
     mr r3, r29
     mr r5, r28
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, lbl_8087F86C
     lwz r28, 0xa04(r3)
     cmpwi r28, 0x0
@@ -832,7 +832,7 @@ lbl_fn_804C4530_00000A54:
     mr r4, r3
     mr r3, r29
     mr r5, r28
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, lbl_8087F86C
     lwz r28, 0xa0c(r3)
     cmpwi r28, 0x0
@@ -850,7 +850,7 @@ lbl_fn_804C4530_00000A94:
     mr r4, r3
     mr r3, r29
     mr r5, r28
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, lbl_8087F86C
     lwz r28, 0xa0c(r3)
     cmpwi r28, 0x0
@@ -868,7 +868,7 @@ lbl_fn_804C4530_00000AD4:
     mr r4, r3
     mr r3, r29
     mr r5, r28
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lfs f0, lbl_80887470
     stfs f0, 0xb0(r31)
     b lbl_fn_804C4530_00000B1C
@@ -1888,7 +1888,7 @@ asm void fn_804C5D74(void)
     mr r4, r3
     mr r3, r29
     mr r5, r30
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r4, 0xc0(r28)
     addi r3, r31, 0x279
     la r30, lbl_8087E118
@@ -1897,7 +1897,7 @@ asm void fn_804C5D74(void)
     mr r4, r3
     mr r3, r29
     mr r5, r30
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     li r3, 0x1
     b lbl_fn_804C5D74_000018CC
 lbl_fn_804C5D74_000018C8:
@@ -2114,7 +2114,7 @@ lbl_fn_804C5E9C_00001BA4:
     mr r4, r3
     mr r3, r30
     mr r5, r29
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     b lbl_fn_804C5E9C_00001BFC
 lbl_fn_804C5E9C_00001BD0:
     lwz r30, 0x48(r31)
@@ -2221,7 +2221,7 @@ lbl_fn_804C5E9C_00001D2C:
     mr r4, r3
     mr r3, r30
     mr r5, r29
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, lbl_8087F610
     addis r3, r3, 0x1
     lwz r0, -0x698c(r3)
@@ -2308,7 +2308,7 @@ lbl_fn_804C5E9C_00001E74:
     mr r4, r3
     mr r3, r30
     mr r5, r29
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, lbl_8087F86C
     lwz r29, 0x834(r3)
     cmpwi r29, 0x0
@@ -2326,7 +2326,7 @@ lbl_fn_804C5E9C_00001EB4:
     mr r4, r3
     mr r3, r30
     mr r5, r29
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     addi r3, r1, 0xc
     li r4, 0xa
     bl fn_80117228
@@ -2378,7 +2378,7 @@ lbl_fn_804C5E9C_00001F74:
     mr r4, r3
     mr r3, r30
     mr r5, r29
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, lbl_8087F86C
     lwz r29, 0x83c(r3)
     cmpwi r29, 0x0
@@ -2396,7 +2396,7 @@ lbl_fn_804C5E9C_00001FB4:
     mr r4, r3
     mr r3, r30
     mr r5, r29
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     addi r3, r1, 0x8
     li r4, 0xc
     bl fn_80117228

@@ -32,7 +32,7 @@ extern void fn_8011B8D4(void);
 extern void fn_801F3E20(void);
 extern void fn_801F3FF8(void);
 extern void fn_801F64D0(void);
-extern void fn_801FECE0(void);
+extern void thread_findAndNotify(void);
 extern void fn_8021771C(void);
 extern void world_getGlobalFlag(void);
 extern void fn_803B27F8(void);
@@ -1872,7 +1872,7 @@ lbl_fn_80117FE4_0000166C:
     lfs f1, lbl_80881748
     mr r4, r3
     mr r3, r21
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0x70(r24)
     addi r3, r25, 0x22c
     addi r21, r4, 0x58
@@ -1880,7 +1880,7 @@ lbl_fn_80117FE4_0000166C:
     lfs f1, lbl_80881748
     mr r4, r3
     mr r3, r21
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0x70(r24)
     addi r3, r25, 0x233
     addi r21, r4, 0x58
@@ -1888,7 +1888,7 @@ lbl_fn_80117FE4_0000166C:
     lfs f1, lbl_80881748
     mr r4, r3
     mr r3, r21
-    bl fn_801FECE0
+    bl thread_findAndNotify
     mr r21, r24
     li r22, 0x0
 lbl_fn_80117FE4_00001734:
@@ -1941,7 +1941,7 @@ lbl_fn_80117FE4_00001734:
     lfs f1, lbl_80881748
     mr r4, r3
     mr r3, r21
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0x68(r24)
     addi r3, r25, 0x233
     addi r21, r4, 0x58
@@ -1949,7 +1949,7 @@ lbl_fn_80117FE4_00001734:
     lfs f1, lbl_80881748
     mr r4, r3
     mr r3, r21
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r3, 0x6c(r24)
     li r4, 0x1
     lfs f1, lbl_80881748

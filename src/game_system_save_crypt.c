@@ -19,7 +19,7 @@ extern void fn_8006AFF8(void);
 extern void fn_8006CA80(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void atn_Model_findBoneIndex(void);
@@ -1062,7 +1062,7 @@ lbl_fn_80344780_00000CD0:
     addi r4, r30, 0x391
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lis r31, 0xf
     mr r3, r29
     addi r4, r30, 0x129

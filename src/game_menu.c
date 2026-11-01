@@ -55,7 +55,7 @@ extern void fn_8014FCC4(void);
 extern void fn_8014FCE8(void);
 extern void fn_80179A34(void);
 extern void fn_801F3FF8(void);
-extern void fn_801FECE0(void);
+extern void thread_findAndNotify(void);
 extern void fn_80206B14(void);
 extern void fn_802072AC(void);
 extern void task_findEntryById(void);
@@ -2629,7 +2629,7 @@ lbl_ArenaTask_draw_00001F44:
     addi r3, r30, 0x58
     lfd f0, 0x210(r1)
     fsubs f1, f0, f1
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r0, 0x2c8(r31)
     cmpwi r0, 0x0
     beq lbl_ArenaTask_draw_00001FB0

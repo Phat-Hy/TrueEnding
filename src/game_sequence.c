@@ -49,7 +49,7 @@ extern void fn_806134E0(void);
 extern void fn_806136C0(void);
 extern void GXInvalidateVtxCache(void);
 extern void __GXSetVtxDesc(void);
-extern void fn_80613BB0(void);
+extern void GXClearVtxDesc(void);
 extern void fn_806140B0(void);
 extern void fn_806149C0(void);
 extern void fn_80614A00(void);
@@ -376,7 +376,7 @@ asm void gx_drawScreenQuad(void)
     li r8, 0x7d
     bl __GXSetVtxDesc
     li r3, 0x1
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     bl fn_806134E0
     bl GXInvalidateVtxCache
     li r3, 0x6
@@ -4561,7 +4561,7 @@ lbl_gx_beginQuadBatch_00003FAC:
     add r0, r3, r0
 lbl_gx_beginQuadBatch_00003FC0:
     clrlwi r3, r0, 24
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     lwz r0, 0x84(r1)
     clrlwi r3, r0, 24
     bl GXSetNumTevStages

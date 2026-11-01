@@ -19,7 +19,7 @@ extern void fn_8005B6E8(void);
 extern void fn_8006AFF8(void);
 extern void fn_8007708C(void);
 extern void route_findNextWaypoint(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void fn_80092954(void);
@@ -1958,13 +1958,13 @@ lbl_fn_802A51F4_000018DC:
     addi r4, r31, 0x17c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r28
     addi r4, r31, 0x101
     addi r5, r30, 0x1854
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r28
     addi r4, r31, 0x186
     addi r5, r30, 0x1858

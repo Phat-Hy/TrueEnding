@@ -16,7 +16,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void fn_800BFAC8(void);
@@ -31,8 +31,8 @@ extern void fn_801EB7C4(void);
 extern void fn_801EB93C(void);
 extern void fn_801F4AA0(void);
 extern void fn_801F4C14(void);
-extern void fn_801FECE0(void);
-extern void fn_801FEE08(void);
+extern void thread_findAndNotify(void);
+extern void thread_dispatchToQueue(void);
 extern void fn_80211480(void);
 extern void fn_80211734(void);
 extern void task_findEntryById(void);
@@ -348,7 +348,7 @@ lbl_fn_801E996C_0000030C:
     lfs f1, lbl_80882B30
     mr r4, r3
     mr r3, r31
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_801E996C_0000036C
 lbl_fn_801E996C_00000344:
     lwz r4, 0x48(r30)
@@ -360,7 +360,7 @@ lbl_fn_801E996C_00000344:
     lfs f1, lbl_80882B40
     mr r4, r3
     mr r3, r31
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_801E996C_0000036C:
     lwz r0, 0x150(r30)
     slwi r0, r0, 2
@@ -451,7 +451,7 @@ lbl_fn_801E9B84_00000494:
     fmr f1, f31
     mr r4, r3
     mr r3, r29
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0x28(r1)
     lis r0, 0x4330
     lis r5, lbl_8073CBD0@ha
@@ -468,7 +468,7 @@ lbl_fn_801E9B84_00000494:
     fmr f1, f31
     mr r4, r3
     mr r3, r29
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lfs f3, lbl_80882B44
     addi r4, r1, 0x40
     lfs f1, 0x2c(r1)
@@ -577,7 +577,7 @@ lbl_fn_801E9B84_00000670:
     mr r4, r3
     mr r3, r29
     addi r5, r1, 0x180
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, 0x48(r30)
     addi r4, r1, 0x100
     addi r5, r1, 0x8
@@ -1210,7 +1210,7 @@ lbl_fn_801EA534_00000F28:
     addi r4, r29, 0x7
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r28
     addi r4, r29, 0xd
     addi r5, r30, 0x70

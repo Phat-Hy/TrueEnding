@@ -25,8 +25,8 @@ extern void fn_801F4AA0(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801FEC08(void);
 extern void fn_801FEC74(void);
-extern void fn_801FECE0(void);
-extern void fn_801FED24(void);
+extern void thread_findAndNotify(void);
+extern void thread_findAndNotifySlot(void);
 extern void fn_804A436C(void);
 extern void fn_804AC734(void);
 extern void fn_804AC79C(void);
@@ -566,7 +566,7 @@ lbl_fn_804B1528_000006A0:
     fadds f1, f1, f31
     li r5, 0x2
     fdivs f1, f1, f0
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r29, 0x50(r31)
     lis r4, lbl_80757B7C@ha
     addi r4, r4, lbl_80757B7C@l
@@ -609,7 +609,7 @@ lbl_fn_804B1528_00000740:
     fadds f1, f1, f31
     li r5, 0x2
     fdivs f1, f1, f0
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r29, 0x50(r31)
     lis r4, lbl_80757B7C@ha
     addi r4, r4, lbl_80757B7C@l
@@ -652,7 +652,7 @@ lbl_fn_804B1528_000007E0:
     fadds f1, f1, f31
     li r5, 0x2
     fdivs f1, f1, f0
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r29, 0x50(r31)
     lis r4, lbl_80757B7C@ha
     addi r4, r4, lbl_80757B7C@l
@@ -695,7 +695,7 @@ lbl_fn_804B1528_00000880:
     fadds f1, f1, f31
     li r5, 0x2
     fdivs f1, f1, f0
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r29, 0x50(r31)
     lis r4, lbl_80757B7C@ha
     addi r4, r4, lbl_80757B7C@l
@@ -738,7 +738,7 @@ lbl_fn_804B1528_00000920:
     fadds f1, f1, f31
     li r5, 0x2
     fdivs f1, f1, f0
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r29, 0x50(r31)
     cmpwi r29, 0x0
     beq lbl_fn_804B1528_00000974
@@ -832,7 +832,7 @@ lbl_fn_804B1528_00000A58:
     mr r4, r3
     mr r3, r29
     li r5, 0x0
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r29, 0x64(r31)
     cmpwi r29, 0x0
     beq lbl_fn_804B1528_00000AD0
@@ -1130,7 +1130,7 @@ lbl_fn_804B1C88_00000E7C:
     lfs f1, lbl_80887334
     mr r4, r3
     mr r3, r29
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_804B1C88_00000ED8:
     addi r11, r1, 0x40
     bl _restgpr_27
@@ -1755,7 +1755,7 @@ lbl_fn_804B1E48_00001754:
     lfs f1, lbl_80887334
     mr r4, r3
     mr r3, r22
-    bl fn_801FECE0
+    bl thread_findAndNotify
     addi r11, r1, 0x160
     bl _restgpr_22
     lwz r0, 0x164(r1)

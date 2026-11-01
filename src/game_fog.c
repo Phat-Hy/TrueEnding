@@ -10,7 +10,7 @@ extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void fn_800CA834(void);
 extern void fn_800CA8B0(void);
@@ -585,13 +585,13 @@ lbl_fn_800D1430_000006D4:
     addi r4, r30, 0xca
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r28
     addi r4, r30, 0xd2
     addi r5, r31, 0x349c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r28
     addi r4, r30, 0xe0
     addi r5, r31, 0x34dc
@@ -645,7 +645,7 @@ lbl_fn_800D1430_000007A8:
     mr r7, r22
     addi r4, r30, 0x11a
     addi r6, r29, fn_800CB800@l
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_8088118C
     mr r3, r19
     lfs f2, lbl_808811A8
@@ -719,7 +719,7 @@ lbl_fn_800D1430_000008CC:
     mr r7, r22
     addi r4, r30, 0x11a
     addi r6, r29, fn_800CBE8C@l
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_8088118C
     mr r3, r21
     lfs f2, lbl_808811A8
@@ -793,7 +793,7 @@ lbl_fn_800D1430_000009F0:
     mr r7, r27
     addi r4, r29, 0x11a
     addi r6, r30, fn_800CC518@l
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_8088118C
     mr r3, r21
     lfs f2, lbl_808811A8
@@ -849,7 +849,7 @@ lbl_fn_800D1430_000009F0:
     addi r5, r31, 0x34a0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_8088118C
     mr r3, r19
     lfs f2, lbl_808811D0
@@ -885,19 +885,19 @@ lbl_fn_800D1430_000009F0:
     addi r5, r31, 0x34b0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r19
     addi r4, r30, 0x1a4
     addi r5, r31, 0x34b4
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r28
     addi r4, r30, 0x1af
     addi r5, r31, 0x34bc
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r28
     addi r4, r30, 0x1ba
     addi r5, r31, 0x34c0

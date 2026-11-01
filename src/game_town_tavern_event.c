@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_80088FAC(void);
 extern void fn_8008937C(void);
 extern void atn_Task_unlink(void);
@@ -113,7 +113,7 @@ lbl_fn_803CFC78_00000084:
     addi r4, r31, 0x8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lfs f2, lbl_80885D60
     mr r3, r29
     lfs f1, lbl_80885D58
@@ -383,7 +383,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r28, 0xd80
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lfs f2, lbl_80885D60
     mr r3, r29
     lfs f1, lbl_80885D58

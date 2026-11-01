@@ -31,11 +31,11 @@ extern void fn_80238560(void);
 extern void PSMTXTranspose(void);
 extern void PSMTXInverse(void);
 extern void PSVECMag(void);
-extern void fn_80612E80(void);
+extern void GXSetVtxDesc(void);
 extern void fn_806134E0(void);
-extern void fn_80613520(void);
+extern void GXSetVtxAttrFmt(void);
 extern void __GXSetVtxDesc(void);
-extern void fn_80613BB0(void);
+extern void GXClearVtxDesc(void);
 extern void fn_80614790(void);
 extern void fn_80615AE0(void);
 extern void fn_80615B60(void);
@@ -695,7 +695,7 @@ lbl_font_renderString_00000730:
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x1
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
@@ -840,22 +840,22 @@ lbl_font_renderString_00000730:
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0xd
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
     li r6, 0x4
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r3, 0x0
     li r4, 0xd
     li r5, 0x1
     li r6, 0x4
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     lwz r3, lbl_8087EFB4
     li r4, 0x0
     lwz r3, 0x2fc(r3)
@@ -959,22 +959,22 @@ lbl_font_renderString_00000B98:
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0xd
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
     li r6, 0x4
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r3, 0x0
     li r4, 0xd
     li r5, 0x1
     li r6, 0x4
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r26, 0x0
 lbl_font_renderString_00000C1C:
     lwz r0, 0x8(r27)
@@ -987,7 +987,7 @@ lbl_font_renderString_00000C1C:
     li r3, 0x2
     bl GXSetNumTevStages
     li r3, 0x2
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r25, 0x1
     b lbl_font_renderString_00000C6C
 lbl_font_renderString_00000C50:
@@ -996,7 +996,7 @@ lbl_font_renderString_00000C50:
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x1
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r25, 0x0
 lbl_font_renderString_00000C6C:
     lwz r22, 0x8(r27)
@@ -1101,31 +1101,31 @@ lbl_font_renderString_00000D88:
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0xa
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0xd
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
     li r6, 0x4
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r3, 0x0
     li r4, 0xa
     li r5, 0x0
     li r6, 0x4
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r3, 0x0
     li r4, 0xd
     li r5, 0x1
     li r6, 0x4
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r26, 0x1
 lbl_font_renderString_00000E44:
     lwz r22, 0x8(r27)
@@ -1521,7 +1521,7 @@ asm void fn_80235BF8(void)
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x2
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x1
@@ -1667,31 +1667,31 @@ asm void fn_80235BF8(void)
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0xd
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0xe
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
     li r6, 0x4
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r3, 0x0
     li r4, 0xd
     li r5, 0x1
     li r6, 0x4
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r3, 0x0
     li r4, 0xe
     li r5, 0x1
     li r6, 0x4
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     lwz r5, lbl_8087EFB4
     li r4, 0x0
     lwz r3, lbl_8087EEE0
@@ -1870,7 +1870,7 @@ lbl_fn_80235BF8_000018D4:
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x8
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x8
     bl GXSetNumTevStages
     li r3, 0x0
@@ -2007,15 +2007,15 @@ lbl_fn_80235BF8_000019E8:
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0xd
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r14, 0x0
 lbl_fn_80235BF8_00001B30:
     addi r3, r14, 0xe
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     addi r14, r14, 0x1
     cmpwi r14, 0x7
     blt lbl_fn_80235BF8_00001B30
@@ -2024,13 +2024,13 @@ lbl_fn_80235BF8_00001B30:
     li r5, 0x1
     li r6, 0x4
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r3, 0x0
     li r4, 0xd
     li r5, 0x1
     li r6, 0x4
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r14, 0x0
 lbl_fn_80235BF8_00001B7C:
     addi r4, r14, 0xe
@@ -2038,7 +2038,7 @@ lbl_fn_80235BF8_00001B7C:
     li r5, 0x1
     li r6, 0x4
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     addi r14, r14, 0x1
     cmpwi r14, 0x7
     blt lbl_fn_80235BF8_00001B7C

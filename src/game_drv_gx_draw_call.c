@@ -9,7 +9,7 @@ extern void _restgpr_14(void);
 extern void _restgpr_27(void);
 extern void _savegpr_14(void);
 extern void _savegpr_27(void);
-extern void fn_805C0120(void);
+extern void gx_selectActiveParam(void);
 extern void fn_805C20A0(void);
 extern void fn_805C2250(void);
 extern void fn_805C2270(void);
@@ -151,7 +151,7 @@ lbl_fn_805C7A10_0000012C:
     add r3, r30, r0
     lwz r29, 0x290(r3)
     mr r3, r29
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x1
     stw r0, 0x14(r29)
     b lbl_fn_805C7A10_000001D0
@@ -190,7 +190,7 @@ lbl_fn_805C7A10_000001B4:
     add r3, r30, r0
     lwz r29, 0x290(r3)
     mr r3, r29
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x1
     stw r0, 0x14(r29)
 lbl_fn_805C7A10_000001D0:
@@ -753,7 +753,7 @@ lbl_fn_805C80F0_000009BC:
     add r3, r15, r0
     lwz r16, 0x290(r3)
     mr r3, r16
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x25
     stw r30, 0x14(r16)
     addi r5, r28, 0x68
@@ -819,7 +819,7 @@ lbl_fn_805C80F0_00000AA4:
     add r3, r15, r0
     lwz r16, 0x290(r3)
     mr r3, r16
-    bl fn_805C0120
+    bl gx_selectActiveParam
     stw r30, 0x14(r16)
     li r3, 0x0
     lwz r4, 0x4(r15)
@@ -1043,7 +1043,7 @@ lbl_fn_805C80F0_00000DE4:
     add r3, r15, r0
     lwz r16, 0x290(r3)
     mr r3, r16
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x25
     stw r30, 0x14(r16)
     addi r5, r28, 0x68
@@ -1077,7 +1077,7 @@ lbl_fn_805C80F0_00000E5C:
     add r3, r15, r0
     lwz r16, 0x290(r3)
     mr r3, r16
-    bl fn_805C0120
+    bl gx_selectActiveParam
     stw r30, 0x14(r16)
     mr r19, r20
     li r16, 0x0
@@ -1289,18 +1289,18 @@ lbl_fn_805C8A30_000010CC:
     bctrl
     lwz r29, 0x3c8(r30)
     mr r3, r29
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r31, 0x1
     stw r31, 0x14(r29)
     li r0, 0x2
     stw r0, 0x18(r30)
     lwz r29, 0x3c0(r30)
     mr r3, r29
-    bl fn_805C0120
+    bl gx_selectActiveParam
     stw r31, 0x14(r29)
     lwz r29, 0x3e4(r30)
     mr r3, r29
-    bl fn_805C0120
+    bl gx_selectActiveParam
     stw r31, 0x14(r29)
     li r3, 0xa
     li r0, 0x0
@@ -1344,7 +1344,7 @@ lbl_fn_805C8A30_0000123C:
     stw r0, 0x18(r30)
     lwz r29, 0x3c8(r30)
     mr r3, r29
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x1
     stw r0, 0x14(r29)
     li r0, 0xe
@@ -1444,7 +1444,7 @@ lbl_fn_805C8A30_000013AC:
     add r3, r30, r0
     lwz r29, 0x290(r3)
     mr r3, r29
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x25
     li r3, 0x1
     stw r3, 0x14(r29)
@@ -1478,7 +1478,7 @@ lbl_fn_805C8A30_00001424:
     add r3, r30, r0
     lwz r29, 0x290(r3)
     mr r3, r29
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x1
     stw r0, 0x14(r29)
     lwz r0, 0x84(r30)
@@ -1646,7 +1646,7 @@ lbl_fn_805C8A30_0000167C:
     add r3, r30, r0
     lwz r29, 0x290(r3)
     mr r3, r29
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x1
     stw r0, 0x14(r29)
     li r0, 0x25
@@ -1684,7 +1684,7 @@ lbl_fn_805C8A30_00001704:
     add r3, r30, r0
     lwz r29, 0x290(r3)
     mr r3, r29
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x1
     stw r0, 0x14(r29)
     lwz r0, 0x84(r30)

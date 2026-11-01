@@ -23,7 +23,7 @@ extern void fn_801F4CB4(void);
 extern void fn_801F6C10(void);
 extern void fn_801F6C80(void);
 extern void fn_801F8598(void);
-extern void fn_801FECE0(void);
+extern void thread_findAndNotify(void);
 extern void fn_80202118(void);
 extern void fn_80202D00(void);
 extern void fn_8021946C(void);
@@ -748,7 +748,7 @@ lbl_fn_805117C0_00000884:
     fmr f1, f31
     mr r4, r3
     addi r3, r31, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_805117C0_000008C8:
     addi r28, r28, 0x40
     addi r27, r27, 0x1
@@ -1007,7 +1007,7 @@ lbl_fn_80511AE0_00000C18:
     lfs f1, lbl_808877D0
     mr r4, r3
     addi r3, r29, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_80511AE0_00000CE0
 lbl_fn_80511AE0_00000C58:
     lfs f0, 0x4(r30)
@@ -1045,7 +1045,7 @@ lbl_fn_80511AE0_00000CB8:
     fmr f1, f31
     mr r4, r3
     addi r3, r29, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_80511AE0_00000CE0:
     lis r28, lbl_8075B2B8@ha
     lwz r5, 0x88(r1)
@@ -1059,7 +1059,7 @@ lbl_fn_80511AE0_00000CE0:
     fmr f1, f30
     mr r4, r3
     addi r3, r29, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lfs f1, lbl_808877CC
     lfs f0, 0x228(r30)
     fcmpo cr0, f1, f0
@@ -1088,7 +1088,7 @@ lbl_fn_80511AE0_00000D54:
     fmr f1, f31
     mr r4, r3
     addi r3, r29, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0xa0(r30)
     mr r3, r31
     li r5, 0x5
@@ -1106,7 +1106,7 @@ lbl_fn_80511AE0_00000D54:
     addi r3, r29, 0x58
     lfd f0, 0xd8(r1)
     fsubs f1, f0, f1
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_80511AE0_00000DBC:
     addi r11, r1, 0x100
     psq_l f31, 0x118(r1), 0, 0

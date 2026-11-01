@@ -31,7 +31,7 @@ extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006AFF8(void);
 extern void fn_8006CA80(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void fn_8008BBD8(void);
@@ -1495,7 +1495,7 @@ lbl_fn_8045FE70_00001294:
     li r6, 0x0
     addi r4, r4, 0xa7
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     addi r3, r31, 0x14b0
     bl boss_getOffset54
     cmpwi r3, 0x0

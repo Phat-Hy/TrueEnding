@@ -34,7 +34,7 @@ extern void fn_801F6C80(void);
 extern void fn_801F6E78(void);
 extern void fn_801F837C(void);
 extern void fn_801F8598(void);
-extern void fn_801FECE0(void);
+extern void thread_findAndNotify(void);
 extern void fn_80201E78(void);
 extern void fn_80202118(void);
 extern void fn_80202A6C(void);
@@ -162,7 +162,7 @@ lbl_fn_8052624C_0000003C:
     fmr f1, f31
     mr r4, r3
     addi r3, r31, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_8052624C_00000080:
     addi r29, r29, 0x40
     addi r28, r28, 0x1
@@ -189,7 +189,7 @@ lbl_fn_8052624C_000000A4:
     fmr f1, f31
     mr r4, r3
     addi r3, r31, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_8052624C_000000E0:
     addi r28, r28, 0x1
     addi r27, r27, 0xc
@@ -1317,7 +1317,7 @@ lbl_fn_80526D98_00001074:
     fmr f1, f27
     mr r4, r3
     mr r3, r25
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0x10c(r29)
     addi r3, r28, 0xb2
     addi r25, r4, 0x58
@@ -1325,7 +1325,7 @@ lbl_fn_80526D98_00001074:
     lfs f1, lbl_80887A60
     mr r4, r3
     mr r3, r25
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_80526D98_00001170
 lbl_fn_80526D98_000010D0:
     bge lbl_fn_80526D98_00001128
@@ -1338,7 +1338,7 @@ lbl_fn_80526D98_000010D0:
     lfs f1, lbl_80887A60
     mr r4, r3
     mr r3, r25
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lfs f0, 0x110(r29)
     addi r3, r28, 0xb2
     lwz r4, 0x10c(r29)
@@ -1348,7 +1348,7 @@ lbl_fn_80526D98_000010D0:
     fmr f1, f27
     mr r4, r3
     mr r3, r25
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_80526D98_00001170
 lbl_fn_80526D98_00001128:
     lwz r4, 0x10c(r29)
@@ -1360,7 +1360,7 @@ lbl_fn_80526D98_00001128:
     lfs f1, lbl_80887A60
     mr r4, r3
     mr r3, r25
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0x10c(r29)
     addi r3, r28, 0xb2
     addi r25, r4, 0x58
@@ -1368,7 +1368,7 @@ lbl_fn_80526D98_00001128:
     lfs f1, lbl_80887A60
     mr r4, r3
     mr r3, r25
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_80526D98_00001170:
     mr r3, r29
     bl fn_80528BF4

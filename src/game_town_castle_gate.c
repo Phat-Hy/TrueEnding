@@ -15,9 +15,9 @@ extern void fn_80134270(void);
 extern void fn_801F0544(void);
 extern void fn_801F6C2C(void);
 extern void fn_801FEB9C(void);
-extern void fn_801FECE0(void);
-extern void fn_801FED24(void);
-extern void fn_801FEE08(void);
+extern void thread_findAndNotify(void);
+extern void thread_findAndNotifySlot(void);
+extern void thread_dispatchToQueue(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A680(void);
 extern void PSMTXConcat(void);
@@ -301,7 +301,7 @@ asm void fn_803D6EF8(void)
     fmr f1, f31
     mr r4, r3
     addi r3, r31, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r0, 0x24(r1)
     lfd f31, 0x18(r1)
     lwz r31, 0x14(r1)
@@ -361,7 +361,7 @@ asm void fn_803D6F78(void)
     mr r4, r3
     mr r5, r31
     addi r3, r30, 0x58
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r0, 0x24(r1)
     lfd f31, 0x18(r1)
     lwz r31, 0x14(r1)
@@ -522,7 +522,7 @@ asm void fn_803D70B4(void)
     mr r4, r3
     mr r5, r31
     addi r3, r30, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

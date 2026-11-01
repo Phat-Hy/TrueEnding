@@ -15,7 +15,7 @@ extern void fn_800A5218(void);
 extern void fn_800DBF68(void);
 extern void fn_800DC500(void);
 extern void fn_800DD3FC(void);
-extern void fn_804AE3BC(void);
+extern void net_getPacketManager(void);
 extern void fn_805089E4(void);
 extern void fn_8050B7F0(void);
 extern void fn_8050BA6C(void);
@@ -599,7 +599,7 @@ lbl_fn_8050E098_00000640:
     subf r0, r31, r21
     cmpw r0, r28
     bge lbl_fn_8050E098_00000754
-    bl fn_804AE3BC
+    bl net_getPacketManager
     lwz r4, 0x8(r1)
     mr r26, r3
     lwz r12, 0x0(r3)
@@ -645,7 +645,7 @@ lbl_fn_8050E098_000006CC:
     mtctr r12
     bctrl
 lbl_fn_8050E098_000006FC:
-    bl fn_804AE3BC
+    bl net_getPacketManager
     lwz r12, 0x0(r3)
     lwz r12, 0xc(r12)
     mtctr r12

@@ -18,7 +18,7 @@ extern void fn_800DC12C(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void fn_801F4728(void);
-extern void fn_801FECE0(void);
+extern void thread_findAndNotify(void);
 extern void world_getGlobalFlag(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -262,7 +262,7 @@ asm void fn_804A9EB4(void)
     fmr f1, f25
     mr r4, r3
     mr r3, r28
-    bl fn_801FECE0
+    bl thread_findAndNotify
     fneg f3, f26
     lfs f0, lbl_808872BC
     lwz r4, 0x5d8(r29)
@@ -273,7 +273,7 @@ asm void fn_804A9EB4(void)
     fmr f1, f25
     mr r4, r3
     mr r3, r28
-    bl fn_801FECE0
+    bl thread_findAndNotify
     fneg f3, f26
     lfs f0, lbl_808872BC
     lwz r4, 0x5d8(r29)
@@ -284,7 +284,7 @@ asm void fn_804A9EB4(void)
     fmr f1, f25
     mr r4, r3
     mr r3, r26
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lfs f30, lbl_80887258
     addi r31, r29, 0x834
     lfs f25, lbl_80887250
