@@ -12,7 +12,7 @@ extern void fn_80012AC4(void);
 extern void fn_80051B70(void);
 extern void msg_getMessageById(void);
 extern void fn_800A5584(void);
-extern void fn_800A55D4(void);
+extern void msg_lookupFormattedEntry(void);
 extern void msg_formatWindowLayout(void);
 extern void msg_isWindowActive(void);
 extern void motion_updateFogAdj(void);
@@ -2281,7 +2281,7 @@ lbl_fn_8055E724_00001D60:
     bne lbl_fn_8055E724_00001DB8
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     bne lbl_fn_8055E724_00001D8C
     lwz r3, lbl_8087F540

@@ -17,10 +17,10 @@ extern void fn_800D5F68(void);
 extern void PSMTXIdentity(void);
 extern void PSMTXMultVecArraySR(void);
 extern void GXSetVtxDesc(void);
-extern void fn_806134E0(void);
+extern void __GXInitVtxDesc(void);
 extern void GXSetVtxAttrFmt(void);
 extern void fn_80614190(void);
-extern void fn_80614790(void);
+extern void GXBegin(void);
 extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
@@ -1005,7 +1005,7 @@ asm void fn_800BFCB4(void)
     bl gx_setRenderStateParam
     lwz r3, lbl_8087EEE0
     bl gx_applyRenderState
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -1466,7 +1466,7 @@ lbl_fn_800BFCB4_000011A8:
     li r3, 0x80
     li r4, 0x0
     li r5, 0x4
-    bl fn_80614790
+    bl GXBegin
     lis r10, 0xcc01
     xoris r9, r30, 0x8000
     stfs f30, -0x8000(r10)

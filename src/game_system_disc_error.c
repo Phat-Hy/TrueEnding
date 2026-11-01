@@ -31,7 +31,7 @@ extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015ECC4(void);
-extern void fn_80161570(void);
+extern void party_updateMemberCoords(void);
 extern void debuff_removeStatusEffect(void);
 extern void battle_applyStatusEffect(void);
 extern void actor_getMovementFlags(void);
@@ -1243,7 +1243,7 @@ lbl_fn_80354AA4_00000E5C:
     stfs f0, 0x6b8(r31)
     stfs f0, 0x6bc(r31)
     stfs f0, 0x6c0(r31)
-    bl fn_80161570
+    bl party_updateMemberCoords
     lwz r3, 0x14f0(r31)
     bl task_findEntryById
     lfs f2, 0x530(r31)

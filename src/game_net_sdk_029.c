@@ -17,7 +17,7 @@ extern void strncmp(void);
 extern void strstr(void);
 extern void atoi(void);
 extern void fn_806A426C(void);
-extern void fn_806A4270(void);
+extern void net_truncateU16(void);
 extern void fn_806D57A0(void);
 extern void fn_806D63A0(void);
 extern void net_socketConnect(void);
@@ -1275,7 +1275,7 @@ lbl_fn_806DC260_000010D4:
     addi r3, r1, 0x78
     bl atoi
     clrlwi r3, r3, 16
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x14(r24)
 lbl_fn_806DC260_000010E8:
     addi r3, r1, 0x188

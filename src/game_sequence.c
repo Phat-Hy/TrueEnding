@@ -45,7 +45,7 @@ extern void fn_806050D0(void);
 extern void fn_80612B60(void);
 extern void fn_80612C00(void);
 extern void fn_806130F0(void);
-extern void fn_806134E0(void);
+extern void __GXInitVtxDesc(void);
 extern void fn_806136C0(void);
 extern void GXInvalidateVtxCache(void);
 extern void __GXSetVtxDesc(void);
@@ -377,7 +377,7 @@ asm void gx_drawScreenQuad(void)
     bl __GXSetVtxDesc
     li r3, 0x1
     bl GXClearVtxDesc
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     bl GXInvalidateVtxCache
     li r3, 0x6
     li r4, 0x0
@@ -5570,7 +5570,7 @@ lbl_fn_80076BE4_00004E04:
     cmplw r0, r4
     beq lbl_fn_80076BE4_00004E2C
     stw r4, 0xdc(r3)
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     addi r3, r31, 0x1b0
     bl fn_806130F0
     mr r4, r31

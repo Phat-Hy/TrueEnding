@@ -20,7 +20,7 @@ extern void boss_recordDamage(void);
 extern void atn_Task_unlink(void);
 extern void cam_findTargetIndex(void);
 extern void viewport_getNextSequenceId(void);
-extern void fn_801162A0(void);
+extern void vec3_sqMag(void);
 extern void fn_8011F8F4(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
@@ -35,7 +35,7 @@ extern void fn_8013C42C(void);
 extern void npc_getDialogController(void);
 extern void dialog_setScriptSlot(void);
 extern void fn_8014C468(void);
-extern void fn_80161570(void);
+extern void party_updateMemberCoords(void);
 extern void party_evalTacticCondition(void);
 extern void fn_8016E484(void);
 extern void battle_applyStatusEffect(void);
@@ -802,7 +802,7 @@ lbl_fn_803A2210_00000930:
     li r5, 0x0
     fmr f2, f1
     li r6, 0x0
-    bl fn_80161570
+    bl party_updateMemberCoords
     lwz r0, 0x34(r29)
     clrlwi r0, r0, 31
     cmpwi r0, 0x1
@@ -1237,7 +1237,7 @@ lbl_fn_803A26F4_00000F54:
     addi r3, r1, 0xe0
     bl vec3_sub
     addi r3, r1, 0xe0
-    bl fn_801162A0
+    bl vec3_sqMag
     bl fn_80011220
     lfs f0, lbl_80885B24
     fcmpo cr0, f1, f0
@@ -1275,7 +1275,7 @@ lbl_fn_803A26F4_00000F98:
     addi r3, r1, 0xd4
     bl vec3_sub
     addi r3, r1, 0xd4
-    bl fn_801162A0
+    bl vec3_sqMag
     bl fn_80011220
     lfs f0, lbl_80885B24
     fcmpo cr0, f1, f0
@@ -1431,7 +1431,7 @@ lbl_fn_803A26F4_0000121C:
     addi r4, r23, 0x4
     bl vec3_sub
     addi r3, r1, 0xa4
-    bl fn_801162A0
+    bl vec3_sqMag
     bl fn_80011220
     lfs f0, lbl_80885B24
     fcmpo cr0, f1, f0
@@ -1495,7 +1495,7 @@ lbl_fn_803A26F4_00001304:
     addi r4, r23, 0x4
     bl vec3_sub
     addi r3, r1, 0x8c
-    bl fn_801162A0
+    bl vec3_sqMag
     bl fn_80011220
     lfs f0, lbl_80885B24
     fcmpo cr0, f1, f0

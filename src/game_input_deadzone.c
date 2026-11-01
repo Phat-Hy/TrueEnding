@@ -15,15 +15,15 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void msg_getMessageById(void);
-extern void fn_800A55D4(void);
+extern void msg_lookupFormattedEntry(void);
 extern void msg_formatWindowLayout(void);
-extern void fn_800F52F8(void);
+extern void proj_getGlobalManager(void);
 extern void vec3_scale(void);
 extern void viewport_getNextSequenceId(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80102824(void);
 extern void fn_801028E4(void);
-extern void fn_801162A0(void);
+extern void vec3_sqMag(void);
 extern void fn_80129978(void);
 extern void fn_80129A48(void);
 extern void fn_8012A190(void);
@@ -1215,7 +1215,7 @@ lbl_fn_802EF5FC_00000FB8:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     beq lbl_fn_802EF5FC_00000FDC
     li r0, 0x1
@@ -1514,7 +1514,7 @@ lbl_fn_802F0328_0000140C:
     addi r5, r31, 0x528
     bl vec3_sub
     addi r3, r1, 0x74
-    bl fn_801162A0
+    bl vec3_sqMag
     bl fn_80011220
     lfs f0, lbl_80884864
     fcmpo cr0, f1, f0
@@ -1600,7 +1600,7 @@ lbl_fn_802F0328_00001548:
     lfs f0, lbl_80884850
     addi r3, r1, 0x5c
     stfs f0, 0x60(r1)
-    bl fn_801162A0
+    bl vec3_sqMag
     bl fn_80011220
     lfs f0, lbl_80884864
     fcmpo cr0, f1, f0
@@ -1800,7 +1800,7 @@ lbl_fn_802F0328_000017C0:
     clrlwi r0, r0, 31
     cmplwi r0, 0x1
     beq lbl_fn_802F0328_00001878
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_802F0998
     lfs f0, 0x14dc(r31)
     fadds f0, f0, f1

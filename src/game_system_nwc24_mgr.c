@@ -32,7 +32,7 @@ extern void fn_801002DC(void);
 extern void fn_80112960(void);
 extern void fn_80113CCC(void);
 extern void fn_80114AA0(void);
-extern void fn_801162A0(void);
+extern void vec3_sqMag(void);
 extern void fn_80116BA4(void);
 extern void fn_80116BD4(void);
 extern void magic_dispatchActionCommand(void);
@@ -273,7 +273,7 @@ lbl_fn_80382A1C_00000174:
     stfs f2, 0x138(r1)
     bge lbl_fn_80382A1C_000001E4
     addi r3, r1, 0x134
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_80885A48
     fcmpo cr0, f1, f0
     bge lbl_fn_80382A1C_000001E4
@@ -412,7 +412,7 @@ lbl_fn_80382A1C_000001E4:
     addi r5, r1, 0x268
     bl vec3_sub
     addi r3, r1, 0xf8
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_808859DC
     fcmpo cr0, f1, f0
     ble lbl_fn_80382A1C_0000054C
@@ -442,7 +442,7 @@ lbl_fn_80382A1C_000001E4:
     addi r4, r1, 0x188
     bl vec3_sub
     addi r3, r1, 0x50
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_808859C4
     fcmpo cr0, f1, f0
     ble lbl_fn_80382A1C_0000054C
@@ -473,7 +473,7 @@ lbl_fn_80382A1C_000004B4:
     addi r4, r1, 0x188
     bl vec3_sub
     addi r3, r1, 0x38
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_808859C4
     fcmpo cr0, f1, f0
     ble lbl_fn_80382A1C_0000054C

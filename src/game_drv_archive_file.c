@@ -10,7 +10,7 @@ extern void fn_800183E0(void);
 extern void fn_800185B4(void);
 extern void fn_80018608(void);
 extern void fn_8003E918(void);
-extern void fn_800A55D4(void);
+extern void msg_lookupFormattedEntry(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void fn_8012D180(void);
@@ -1185,49 +1185,49 @@ lbl_fn_805AA4E8_00000F94:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x0
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     bne lbl_fn_805AA4E8_00001054
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x1
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     bne lbl_fn_805AA4E8_00001054
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x2
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     bne lbl_fn_805AA4E8_00001054
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x3
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     bne lbl_fn_805AA4E8_00001054
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x1a
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     bne lbl_fn_805AA4E8_00001054
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x19
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     bne lbl_fn_805AA4E8_00001054
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x17
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     bne lbl_fn_805AA4E8_00001054
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x18
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     beq lbl_fn_805AA4E8_0000105C
 lbl_fn_805AA4E8_00001054:

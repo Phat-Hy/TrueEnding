@@ -31,7 +31,7 @@ extern void fn_8020C4C8(void);
 extern void fn_8020C5D4(void);
 extern void fn_8020CC64(void);
 extern void fn_8020DE0C(void);
-extern void fn_8020EF4C(void);
+extern void rand_stepEntropy(void);
 extern void task_mapIdToQueue(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -1540,7 +1540,7 @@ lbl_fn_8056556C_000013C8:
     cmpwi r3, 0x0
     bne lbl_fn_8056556C_00001410
     lwz r3, 0x414(r28)
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     lis r4, lbl_8075FB78@ha
     cntlzw r0, r3
     addi r4, r4, lbl_8075FB78@l
@@ -1555,7 +1555,7 @@ lbl_fn_8056556C_00001410:
     cmpwi r3, 0x1
     bne lbl_fn_8056556C_00001464
     lwz r3, 0x414(r28)
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     lis r29, lbl_8075FB78@ha
     cntlzw r0, r3
     addi r29, r29, lbl_8075FB78@l
@@ -1564,7 +1564,7 @@ lbl_fn_8056556C_00001410:
     addi r4, r29, 0xa3
     bl target_findEntryByName
     lwz r3, 0x414(r28)
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cntlzw r0, r3
     mr r3, r31
     srwi r5, r0, 5

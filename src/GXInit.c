@@ -24,7 +24,7 @@ extern void __GXFlushTextureState(void);
 extern void __GXPEInit(void);
 extern void __GXSetIndirectMask(void);
 extern void __GXSetTmemConfig(void);
-extern void fn_806134E0(void);
+extern void __GXInitVtxDesc(void);
 extern void fn_806136C0(void);
 extern void GXSetArray(void);
 extern void GXInvalidateVtxCache(void);
@@ -661,7 +661,7 @@ lbl___GXInitGX_000006D8:
     bl __GXSetVtxDesc
     li r3, 0x1
     bl GXClearVtxDesc
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     bl GXInvalidateVtxCache
     li r31, 0x9
 lbl___GXInitGX_000007E0:

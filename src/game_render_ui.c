@@ -28,12 +28,12 @@ extern void PSMTXTranspose(void);
 extern void PSMTXInverse(void);
 extern void PSMTXScale(void);
 extern void GXSetVtxDesc(void);
-extern void fn_806134E0(void);
+extern void __GXInitVtxDesc(void);
 extern void GXSetVtxAttrFmt(void);
 extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
 extern void fn_80614190(void);
-extern void fn_80614790(void);
+extern void GXBegin(void);
 extern void fn_806149C0(void);
 extern void fn_80614A00(void);
 extern void fn_80614A40(void);
@@ -1248,7 +1248,7 @@ asm void fn_800B1C44(void)
     bl gx_setRenderStateParam
     mr r3, r29
     bl gx_applyRenderState
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
@@ -1482,7 +1482,7 @@ lbl_fn_800B1C44_00001320:
     li r3, 0xb8
     li r4, 0x0
     clrlwi r5, r0, 16
-    bl fn_80614790
+    bl GXBegin
     li r6, 0x0
     li r3, 0x0
     lis r4, 0xcc01
@@ -1508,7 +1508,7 @@ lbl_fn_800B1C44_000013D0:
     li r3, 0xa8
     li r4, 0x0
     clrlslwi r5, r0, 17, 1
-    bl fn_80614790
+    bl GXBegin
     addi r5, r1, 0x4c
     li r7, 0x0
     li r3, 0x0

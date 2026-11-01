@@ -13,7 +13,7 @@ extern void fn_801562A0(void);
 extern void fn_8015783C(void);
 extern void fn_8015802C(void);
 extern void fn_8015C988(void);
-extern void fn_80161570(void);
+extern void party_updateMemberCoords(void);
 extern void fn_8016ADF4(void);
 extern void fn_8016D74C(void);
 extern void battle_updateTargetAggro(void);
@@ -1061,7 +1061,7 @@ lbl_fn_80331DAC_00000E28:
     stw r0, 0x12a4(r31)
     li r5, 0x1
     li r6, 0x0
-    bl fn_80161570
+    bl party_updateMemberCoords
     mr r3, r31
     li r4, 0x3e8
     bl sound_initGlobalInstances
@@ -1340,7 +1340,7 @@ lbl_fn_80331DAC_00001240:
     stw r0, 0x12a4(r31)
     li r5, 0x1
     li r6, 0x0
-    bl fn_80161570
+    bl party_updateMemberCoords
     mr r3, r31
     li r4, 0x3e8
     bl sound_initGlobalInstances
@@ -1432,7 +1432,7 @@ lbl_fn_803323A0_00001390:
     stw r0, 0x12a4(r30)
     li r5, 0x0
     li r6, 0x0
-    bl fn_80161570
+    bl party_updateMemberCoords
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x3e8
@@ -1469,7 +1469,7 @@ lbl_fn_803323A0_0000141C:
     stw r0, 0x12a4(r30)
     li r5, 0x0
     li r6, 0x0
-    bl fn_80161570
+    bl party_updateMemberCoords
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x3e8

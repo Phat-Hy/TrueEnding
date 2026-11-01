@@ -18,7 +18,7 @@ extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80101340(void);
 extern void hurtbox_testCollisionLayer(void);
-extern void fn_801162A0(void);
+extern void vec3_sqMag(void);
 extern void fn_8012DF7C(void);
 extern void npc_getPosition(void);
 extern void quest_evaluateConditions(void);
@@ -569,7 +569,7 @@ lbl_fn_804541A0_00000630:
     addi r5, r31, 0x528
     bl vec3_sub
     addi r3, r1, 0x8
-    bl fn_801162A0
+    bl vec3_sqMag
     fcmpo cr0, f1, f31
     bge lbl_fn_804541A0_000006BC
     mr r4, r30

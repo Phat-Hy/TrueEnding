@@ -26,11 +26,11 @@ extern void fn_806077A0(void);
 extern void fn_806077F0(void);
 extern void fn_80607870(void);
 extern void GXSetVtxDesc(void);
-extern void fn_806134E0(void);
+extern void __GXInitVtxDesc(void);
 extern void GXSetVtxAttrFmt(void);
 extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
-extern void fn_80614790(void);
+extern void GXBegin(void);
 extern void fn_80615400(void);
 extern void GXInitLightDistAttn(void);
 extern void GXInitLightObj(void);
@@ -276,7 +276,7 @@ asm void fn_805B4F0C(void)
     li r8, 0x7d
     bl __GXSetVtxDesc
     bl GXDrawDone
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -580,7 +580,7 @@ asm void fn_805B53D0(void)
     li r3, 0x80
     li r4, 0x7
     li r5, 0x4
-    bl fn_80614790
+    bl GXBegin
     lis r4, 0xcc01
     li r3, 0x0
     sth r24, -0x8000(r4)

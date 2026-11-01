@@ -27,7 +27,7 @@ extern void vec3_scale(void);
 extern void vec3_normalize(void);
 extern void viewport_getNextSequenceId(void);
 extern void system_getNextSequenceId(void);
-extern void fn_801162A0(void);
+extern void vec3_sqMag(void);
 extern void skill_findNodeById(void);
 extern void enemy_stepBehavior(void);
 extern void enemy_updateCombatBehavior(void);
@@ -2097,7 +2097,7 @@ lbl_fn_8030F564_00001B4C:
     addi r3, r1, 0x104
     bl vec3_assign
     addi r3, r1, 0x104
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_80884C5C
     fcmpo cr0, f1, f0
     ble lbl_fn_8030F564_00001BB0
@@ -2122,7 +2122,7 @@ lbl_fn_8030F564_00001BB0:
     addi r5, r30, 0xd50
     bl vec3_sub
     addi r3, r1, 0x80
-    bl fn_801162A0
+    bl vec3_sqMag
     fmuls f0, f29, f29
     fcmpo cr0, f1, f0
     bge lbl_fn_8030F564_00001BEC
@@ -2194,7 +2194,7 @@ lbl_fn_8030F564_00001C78:
     addi r5, r30, 0x528
     bl vec3_sub
     addi r3, r1, 0xec
-    bl fn_801162A0
+    bl vec3_sqMag
     bl fn_80011220
     lfs f0, lbl_80884C98
     fcmpo cr0, f1, f0
@@ -2296,7 +2296,7 @@ lbl_fn_8030F564_00001DFC:
     addi r5, r30, 0x528
     bl vec3_sub
     addi r3, r1, 0xe0
-    bl fn_801162A0
+    bl vec3_sqMag
     bl fn_80011220
     lfs f0, lbl_80884C98
     fcmpo cr0, f1, f0

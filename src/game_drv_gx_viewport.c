@@ -11,7 +11,7 @@ extern void fn_805CE420(void);
 extern void fn_805D2A40(void);
 extern void fn_805D9830(void);
 extern void GXSetVtxDesc(void);
-extern void fn_806134E0(void);
+extern void __GXInitVtxDesc(void);
 extern void GXSetVtxAttrFmt(void);
 extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
@@ -1804,7 +1804,7 @@ lbl_fn_805D8520_00001784:
     li r6, 0x2
     li r7, 0xf
     bl GXSetVtxAttrFmt
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -1911,7 +1911,7 @@ lbl_fn_805D8520_00001984:
     li r6, 0x2
     li r7, 0xf
     bl GXSetVtxAttrFmt
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -2018,7 +2018,7 @@ lbl_fn_805D8520_00001B28:
     li r6, 0x2
     li r7, 0xf
     bl GXSetVtxAttrFmt
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -2125,7 +2125,7 @@ lbl_fn_805D8520_00001CCC:
     li r6, 0x2
     li r7, 0xf
     bl GXSetVtxAttrFmt
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -2232,7 +2232,7 @@ lbl_fn_805D8520_00001E70:
     li r6, 0x2
     li r7, 0xf
     bl GXSetVtxAttrFmt
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc

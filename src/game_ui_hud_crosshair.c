@@ -58,7 +58,7 @@ extern void assert_generateId(void);
 extern void fn_8020BE40(void);
 extern void fn_8020BF20(void);
 extern void time_wrapMilliseconds(void);
-extern void fn_8020EF4C(void);
+extern void rand_stepEntropy(void);
 extern void random_generateValue(void);
 extern void event_findEntryById(void);
 extern void world_getGlobalFlag(void);
@@ -1351,7 +1351,7 @@ lbl_fn_801D4E74_00001218:
     mr r4, r29
     li r5, 0x0
     bl fn_801CFAA8
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_801D4E74_00001268
     mr r3, r27
@@ -1719,7 +1719,7 @@ lbl_fn_801D54C0_00001754:
     lwz r4, -0x7d70(r3)
     li r3, 0x0
     bl time_wrapMilliseconds
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_801D54C0_000017A4
     lwz r31, lbl_8087F580
@@ -1758,7 +1758,7 @@ lbl_fn_801D54C0_000017E4:
     lwz r4, -0x7d70(r3)
     li r3, 0x0
     bl time_wrapMilliseconds
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_801D54C0_00001834
     lwz r31, lbl_8087F580
@@ -1825,7 +1825,7 @@ lbl_fn_801D54C0_000018DC:
     lwz r4, -0x7d70(r3)
     li r3, 0x0
     bl time_wrapMilliseconds
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_801D54C0_0000192C
     lwz r31, lbl_8087F580
@@ -1874,7 +1874,7 @@ lbl_fn_801D54C0_00001994:
     lwz r4, -0x7d70(r3)
     li r3, 0x0
     bl time_wrapMilliseconds
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_801D54C0_000019E4
     lwz r31, lbl_8087F580
@@ -1903,7 +1903,7 @@ lbl_fn_801D54C0_00001A00:
     lwz r4, -0x7d70(r3)
     li r3, 0x0
     bl time_wrapMilliseconds
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_801D54C0_00001A50
     lwz r31, lbl_8087F580

@@ -17,7 +17,7 @@ extern void item_useConsumable(void);
 extern void fn_8008B964(void);
 extern void msg_formatWindowLayout(void);
 extern void msg_isWindowActive(void);
-extern void fn_800F52F8(void);
+extern void proj_getGlobalManager(void);
 extern void fn_800F7260(void);
 extern void fn_800F8524(void);
 extern void fn_8010F6FC(void);
@@ -103,7 +103,7 @@ void fn_801156E0(void);
 void fn_801156F8(void);
 void fn_80115704(void);
 void fn_801157DC(void);
-f32 fn_801162A0(const void *v);
+f32 vec3_sqMag(const void *v);
 void fn_801162A4(void);
 
 asm void fn_801151A4(void)
@@ -1302,7 +1302,7 @@ lbl_fn_801157DC_000010C8:
     blr
 }
 
-f32 fn_801162A0(const void *v)
+f32 vec3_sqMag(const void *v)
 {
     return PSVECSquareMag(v);
 }
@@ -1388,7 +1388,7 @@ lbl_fn_801162A4_000011FC:
     b lbl_fn_801162A4_000012D0
 lbl_fn_801162A4_00001224:
     addi r3, r29, 0x274
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_808816B0
     fcmpu cr0, f0, f1
     bne lbl_fn_801162A4_00001240
@@ -1623,7 +1623,7 @@ lbl_fn_801162A4_00001568:
     stfs f0, 0x10(r1)
 lbl_fn_801162A4_00001578:
     lfs f29, lbl_808816B0
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_80116BAC
     li r4, 0x7
     bl player_evaluateStatusCondition

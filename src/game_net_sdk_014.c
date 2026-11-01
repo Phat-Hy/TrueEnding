@@ -16,7 +16,7 @@ extern void memcmp(void);
 extern void snprintf(void);
 extern void fn_8068446C(void);
 extern void fn_806A4264(void);
-extern void fn_806A4270(void);
+extern void net_truncateU16(void);
 extern void fn_806A6E40(void);
 extern void net_checkConnectionSession(void);
 extern void net_formatLog(void);
@@ -110,7 +110,7 @@ lbl_fn_806B8430_00000048:
     stb r0, 0x9(r1)
     mr r3, r30
     stw r27, 0xc(r1)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0xa(r1)
     lbz r30, 0x0(r28)
     cmplwi r30, 0xfe

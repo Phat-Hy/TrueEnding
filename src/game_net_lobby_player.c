@@ -35,7 +35,7 @@ extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void fn_800D5B58(void);
 extern void str_findChar(void);
-extern void fn_8021771C(void);
+extern void task_findNextReady(void);
 extern void fn_8037DD00(void);
 extern void fn_803EE5AC(void);
 extern void fn_80470528(void);
@@ -907,7 +907,7 @@ lbl_fn_8049D974_00000A70:
     mr r3, r29
     mr r4, r30
     mr r5, r31
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     stw r3, 0x54(r28)
     beq lbl_fn_8049D974_00000BE4

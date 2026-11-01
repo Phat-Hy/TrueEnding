@@ -32,7 +32,7 @@ extern void strncmp(void);
 extern void __construct_new_array(void);
 extern void __destroy_new_array(void);
 extern void fn_806A426C(void);
-extern void fn_806A4270(void);
+extern void net_truncateU16(void);
 extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
@@ -372,7 +372,7 @@ lbl_fn_80703900_00000340:
 lbl_fn_80703900_00000354:
     addi r0, r31, 0x9
     clrlwi r3, r0, 16
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0xe(r1)
     addi r3, r1, 0x10
     addi r4, r1, 0xe

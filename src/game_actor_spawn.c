@@ -33,7 +33,7 @@ extern void fn_801F3E20(void);
 extern void save_validateHeader(void);
 extern void save_createWorkerTask(void);
 extern void thread_findAndNotify(void);
-extern void fn_8021771C(void);
+extern void task_findNextReady(void);
 extern void world_getGlobalFlag(void);
 extern void fn_803B27F8(void);
 extern void fn_803B7944(void);
@@ -1734,7 +1734,7 @@ lbl_fn_80117FE4_000014E4:
     lbz r3, 0x30(r22)
     lhz r4, 0x32(r22)
     lbz r5, 0x31(r22)
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r23, r3
     beq lbl_fn_80117FE4_0000164C

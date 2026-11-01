@@ -8,7 +8,7 @@ extern void _restgpr_16(void);
 extern void _savegpr_16(void);
 extern void snprintf(void);
 extern void fn_806A420C(void);
-extern void fn_806A4270(void);
+extern void net_truncateU16(void);
 extern void net_checkConnectionSession(void);
 extern void net_formatLog(void);
 extern void fn_806AB920(void);
@@ -1949,7 +1949,7 @@ lbl_fn_806BCD40_00001BD0:
     mr r3, r26
     stb r0, 0x808(r4)
     stw r28, 0x14(r1)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x12(r1)
     li r0, 0x1
     lwz r3, lbl_80860898@l(r22)

@@ -36,7 +36,7 @@ extern void fn_8014FB60(void);
 extern void fn_80155A88(void);
 extern void party_configureMemberSlot(void);
 extern void fn_801603CC(void);
-extern void fn_80161570(void);
+extern void party_updateMemberCoords(void);
 extern void fn_80164B00(void);
 extern void battle_updateTargetAggro(void);
 extern void battle_generateLootDrops(void);
@@ -1218,7 +1218,7 @@ lbl_fn_800E2FE0_00000DB8:
     li r5, 0x1
     fmr f2, f1
     li r6, 0x78
-    bl fn_80161570
+    bl party_updateMemberCoords
     li r0, 0x0
     sth r0, 0x1470(r30)
     b lbl_fn_800E2FE0_000016E0

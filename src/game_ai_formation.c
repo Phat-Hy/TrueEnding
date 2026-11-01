@@ -23,7 +23,7 @@ extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_800F84D0(void);
 extern void system_getNextSequenceId(void);
-extern void fn_801162A0(void);
+extern void vec3_sqMag(void);
 extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
 extern void enemy_updateCombatBehavior(void);
@@ -1486,7 +1486,7 @@ lbl_fn_80266A24_000012B0:
     li r5, 0x1
     bl world_setLocalFlag
     addi r3, r30, 0x6b8
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_80883674
     fcmpo cr0, f1, f0
     ble lbl_fn_80266A24_000012F4

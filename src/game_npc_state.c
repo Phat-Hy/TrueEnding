@@ -10,7 +10,7 @@ extern void enemy_evalAnimTrack(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_80140588(void);
 extern void fn_80141674(void);
-extern void fn_801426A4(void);
+extern void quest_evaluateMilestoneData(void);
 extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
 extern void fn_80171F3C(void);
@@ -682,7 +682,7 @@ lbl_fn_8013C564_000006FC:
     mr r3, r29
     fmr f2, f31
     mr r4, r30
-    bl fn_801426A4
+    bl quest_evaluateMilestoneData
     b lbl_fn_8013C564_0000072C
 lbl_fn_8013C564_00000714:
     fmr f1, f30

@@ -30,7 +30,7 @@ extern void fn_800F80B8(void);
 extern void fn_800F8290(void);
 extern void hurtbox_dispatchHitEvent(void);
 extern void fn_8010EDFC(void);
-extern void fn_801162A0(void);
+extern void vec3_sqMag(void);
 extern void enemy_updateAnimTimer(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
@@ -1652,7 +1652,7 @@ lbl_fn_80279280_0000160C:
     addi r5, r1, 0xb4
     bl vec3_sub
     addi r3, r1, 0x90
-    bl fn_801162A0
+    bl vec3_sqMag
     fmr f30, f1
     addi r3, r1, 0x54
     addi r4, r1, 0xb4

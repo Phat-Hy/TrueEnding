@@ -33,7 +33,7 @@ extern void assert_formatLocation(void);
 extern void mem_findBlockById(void);
 extern void time_wrapMilliseconds(void);
 extern void rand_scaleRangeInt(void);
-extern void fn_8020EF4C(void);
+extern void rand_stepEntropy(void);
 extern void random_generateValue(void);
 extern void time_ticksToSeconds(void);
 extern void event_findEntryById(void);
@@ -612,7 +612,7 @@ lbl_fn_801D9388_00000750:
     add r4, r4, r0
     lwz r4, -0x7d70(r4)
     bl time_wrapMilliseconds
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     bne lbl_fn_801D9388_000007D8
     mr r3, r29
@@ -996,7 +996,7 @@ lbl_fn_801D94D0_00000CA4:
     cmpwi r0, 0x0
     bne lbl_fn_801D94D0_00000D38
     mr r3, r18
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_801D94D0_00000D30
     lwz r0, 0xa8(r18)
@@ -1600,7 +1600,7 @@ lbl_fn_801D94D0_0000153C:
     add r4, r4, r0
     lwz r4, -0x7d70(r4)
     bl time_wrapMilliseconds
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     bne lbl_fn_801D94D0_000015C4
     mr r3, r15

@@ -31,7 +31,7 @@ extern void ref_releaseHandle(void);
 extern void wcs_vformat(void);
 extern void fn_800E0000(void);
 extern void proj_getMatrix(void);
-extern void fn_800F52F8(void);
+extern void proj_getGlobalManager(void);
 extern void fn_800F530C(void);
 extern void fn_800F7260(void);
 extern void vec3_scale(void);
@@ -47,7 +47,7 @@ extern void phys_scaleGravity(void);
 extern void fn_80113CCC(void);
 extern void fn_801156BC(void);
 extern void fn_801156C4(void);
-extern void fn_801162A0(void);
+extern void vec3_sqMag(void);
 extern void fn_80116BAC(void);
 extern void fn_80116E6C(void);
 extern void equip_getGlobalManager(void);
@@ -1229,7 +1229,7 @@ lbl_fn_803D2A6C_00000D80:
     li r5, 0x0
     li r7, 0x0
     bl fn_803E3468
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_803D6F60
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0
@@ -1677,7 +1677,7 @@ lbl_fn_803D2A6C_00001414:
     lwz r0, 0x728(r24)
     cmpwi r0, 0x0
     beq lbl_fn_803D2A6C_000014E4
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl magic_getOffset244
     bl fn_801156C4
     bl fn_803D6FE4
@@ -1740,7 +1740,7 @@ lbl_fn_803D2A6C_000014EC:
     fmr f3, f1
     fmr f4, f1
     bl fn_803D6FEC
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_80116BAC
     mr r4, r3
     addi r3, r1, 0x258
@@ -2038,7 +2038,7 @@ lbl_fn_803D2A6C_0000195C:
     bl fn_803D215C
     stw r30, 0x334(r21)
 lbl_fn_803D2A6C_00001978:
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_803D6F60
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
@@ -2305,7 +2305,7 @@ lbl_fn_803D2A6C_00001D20:
 lbl_fn_803D2A6C_00001D48:
     li r20, 0x1
 lbl_fn_803D2A6C_00001D4C:
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_803D6F60
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
@@ -2623,7 +2623,7 @@ lbl_fn_803D2A6C_000021EC:
     mr r4, r3
     addi r3, r1, 0x580
     bl wcscpy
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_80116BAC
     mr r4, r3
     addi r3, r1, 0x1c8
@@ -2640,7 +2640,7 @@ lbl_fn_803D2A6C_0000222C:
     mr r4, r3
     addi r3, r1, 0x580
     bl wcscpy
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_80116BAC
     mr r4, r3
     addi r3, r1, 0x1b8
@@ -3716,7 +3716,7 @@ lbl_fn_803D2A6C_000031D8:
     addi r4, r1, 0x320
     bl vec3_sub
     addi r3, r1, 0x108
-    bl fn_801162A0
+    bl vec3_sqMag
     fmr f28, f1
     mr r3, r19
     bl fn_803D717C
@@ -3868,7 +3868,7 @@ lbl_fn_803D2A6C_000033FC:
     addi r4, r1, 0x320
     bl vec3_sub
     addi r3, r1, 0xfc
-    bl fn_801162A0
+    bl vec3_sqMag
     fmr f28, f1
     mr r3, r19
     bl fn_803D717C
@@ -4146,7 +4146,7 @@ lbl_fn_803D2A6C_00003800:
     addi r21, r21, 0x4
     blt lbl_fn_803D2A6C_000035CC
 lbl_fn_803D2A6C_00003814:
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_803D6F60
     lwz r0, 0x10(r3)
     cmpwi r0, 0x0

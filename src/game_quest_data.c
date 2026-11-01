@@ -82,10 +82,10 @@ extern u32 lbl_80881A6C;
 extern u32 lbl_80881A70;
 
 /* Function declarations */
-void fn_801426A4(void);
+void quest_evaluateMilestoneData(void);
 void fn_801437D0(void);
 
-asm void fn_801426A4(void)
+asm void quest_evaluateMilestoneData(void)
 {
     nofralloc
     stwu r1, -0x2c0(r1)
@@ -133,17 +133,17 @@ asm void fn_801426A4(void)
     stfs f2, 0x134(r1)
     stfs f4, 0x130(r1)
     stfs f3, 0x570(r3)
-    bge lbl_fn_801426A4_000000BC
+    bge lbl_quest_evaluateMilestoneData_000000BC
     stfs f30, 0x570(r3)
-lbl_fn_801426A4_000000BC:
+lbl_quest_evaluateMilestoneData_000000BC:
     lfs f0, lbl_80881964
     fcmpo cr0, f29, f0
-    ble lbl_fn_801426A4_000000CC
+    ble lbl_quest_evaluateMilestoneData_000000CC
     fmr f29, f0
-lbl_fn_801426A4_000000CC:
+lbl_quest_evaluateMilestoneData_000000CC:
     lfs f0, lbl_808819A0
     fcmpo cr0, f29, f0
-    ble lbl_fn_801426A4_00000104
+    ble lbl_quest_evaluateMilestoneData_00000104
     fsubs f5, f29, f0
     lfs f4, lbl_808819A4
     lfs f3, lbl_80881A20
@@ -152,10 +152,10 @@ lbl_fn_801426A4_000000CC:
     fmuls f29, f29, f6
     fmuls f29, f29, f3
     fcmpo cr0, f29, f0
-    bge lbl_fn_801426A4_000002F4
+    bge lbl_quest_evaluateMilestoneData_000002F4
     fmr f29, f0
-    b lbl_fn_801426A4_000002F4
-lbl_fn_801426A4_00000104:
+    b lbl_quest_evaluateMilestoneData_000002F4
+lbl_quest_evaluateMilestoneData_00000104:
     lfs f29, lbl_8088196C
     addi r3, r3, 0x574
     bl PSVECSquareMag
@@ -163,7 +163,7 @@ lbl_fn_801426A4_00000104:
     lfs f0, lbl_808819C4
     frsp f3, f3
     fcmpo cr0, f3, f0
-    blt lbl_fn_801426A4_000002F4
+    blt lbl_quest_evaluateMilestoneData_000002F4
     psq_l f1, 0x574(r29), 0, 0
     addi r31, r1, 0x98
     lfs f2, 0x57c(r29)
@@ -181,25 +181,25 @@ lbl_fn_801426A4_00000104:
     frsp f3, f3
     stfs f2, 0xac(r1)
     fcmpo cr0, f3, f0
-    bge lbl_fn_801426A4_00000190
+    bge lbl_quest_evaluateMilestoneData_00000190
     lfs f3, 0xa4(r1)
     lfs f0, lbl_8088196C
     fcmpo cr0, f3, f0
-    ble lbl_fn_801426A4_00000184
+    ble lbl_quest_evaluateMilestoneData_00000184
     lfs f0, lbl_808819C8
-    b lbl_fn_801426A4_00000188
-lbl_fn_801426A4_00000184:
+    b lbl_quest_evaluateMilestoneData_00000188
+lbl_quest_evaluateMilestoneData_00000184:
     lfs f0, lbl_808819CC
-lbl_fn_801426A4_00000188:
+lbl_quest_evaluateMilestoneData_00000188:
     stfs f0, 0x78(r1)
-    b lbl_fn_801426A4_000001A4
-lbl_fn_801426A4_00000190:
+    b lbl_quest_evaluateMilestoneData_000001A4
+lbl_quest_evaluateMilestoneData_00000190:
     frsp f2, f2
     lfs f1, 0xa4(r1)
     bl std_atan2
     frsp f0, f1
     stfs f0, 0x78(r1)
-lbl_fn_801426A4_000001A4:
+lbl_quest_evaluateMilestoneData_000001A4:
     lfs f0, 0x78(r1)
     addi r3, r1, 0x168
     li r4, 0x79
@@ -260,26 +260,26 @@ lbl_fn_801426A4_000001A4:
     fabs f3, f2
     frsp f3, f3
     fcmpo cr0, f3, f0
-    bge lbl_fn_801426A4_000002C0
+    bge lbl_quest_evaluateMilestoneData_000002C0
     lfs f3, 0x6c(r1)
     lfs f0, lbl_8088196C
     fcmpo cr0, f3, f0
-    ble lbl_fn_801426A4_000002B0
+    ble lbl_quest_evaluateMilestoneData_000002B0
     lfs f0, lbl_808819C8
-    b lbl_fn_801426A4_000002B4
-lbl_fn_801426A4_000002B0:
+    b lbl_quest_evaluateMilestoneData_000002B4
+lbl_quest_evaluateMilestoneData_000002B0:
     lfs f0, lbl_808819CC
-lbl_fn_801426A4_000002B4:
+lbl_quest_evaluateMilestoneData_000002B4:
     fneg f0, f0
     stfs f0, 0x74(r1)
-    b lbl_fn_801426A4_000002D4
-lbl_fn_801426A4_000002C0:
+    b lbl_quest_evaluateMilestoneData_000002D4
+lbl_quest_evaluateMilestoneData_000002C0:
     lfs f1, 0x6c(r1)
     bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x74(r1)
-lbl_fn_801426A4_000002D4:
+lbl_quest_evaluateMilestoneData_000002D4:
     addi r3, r1, 0x74
     lfs f2, lbl_8088196C
     psq_l f1, 0x0(r3), 0, 0
@@ -288,7 +288,7 @@ lbl_fn_801426A4_000002D4:
     stfs f2, 0x7c(r1)
     stfs f2, 0xac(r1)
     stfs f0, 0x130(r1)
-lbl_fn_801426A4_000002F4:
+lbl_quest_evaluateMilestoneData_000002F4:
     lfs f3, lbl_808819FC
     lfs f0, lbl_808819A0
     lfs f5, 0x580(r29)
@@ -302,10 +302,10 @@ lbl_fn_801426A4_000002F4:
     fabs f3, f3
     frsp f3, f3
     fcmpo cr0, f3, f0
-    bge lbl_fn_801426A4_00000334
+    bge lbl_quest_evaluateMilestoneData_00000334
     lfs f0, lbl_8088196C
     stfs f0, 0x580(r29)
-lbl_fn_801426A4_00000334:
+lbl_quest_evaluateMilestoneData_00000334:
     lfs f3, lbl_80881A28
     mr r3, r29
     lfs f4, 0x570(r29)
@@ -322,11 +322,11 @@ lbl_fn_801426A4_00000334:
     lfs f4, lbl_80881964
     fmuls f0, f0, f31
     fcmpo cr0, f4, f0
-    bge lbl_fn_801426A4_0000037C
-    b lbl_fn_801426A4_00000380
-lbl_fn_801426A4_0000037C:
+    bge lbl_quest_evaluateMilestoneData_0000037C
+    b lbl_quest_evaluateMilestoneData_00000380
+lbl_quest_evaluateMilestoneData_0000037C:
     fmr f4, f0
-lbl_fn_801426A4_00000380:
+lbl_quest_evaluateMilestoneData_00000380:
     lfs f0, lbl_808819FC
     lfs f3, 0x574(r29)
     fmuls f0, f0, f31
@@ -334,11 +334,11 @@ lbl_fn_801426A4_00000380:
     fnmsubs f3, f3, f4, f3
     fcmpo cr0, f5, f0
     stfs f3, 0x574(r29)
-    bge lbl_fn_801426A4_000003A4
-    b lbl_fn_801426A4_000003A8
-lbl_fn_801426A4_000003A4:
+    bge lbl_quest_evaluateMilestoneData_000003A4
+    b lbl_quest_evaluateMilestoneData_000003A8
+lbl_quest_evaluateMilestoneData_000003A4:
     fmr f5, f0
-lbl_fn_801426A4_000003A8:
+lbl_quest_evaluateMilestoneData_000003A8:
     lfs f0, 0x57c(r29)
     lfs f1, 0x130(r1)
     fnmsubs f0, f0, f5, f0
@@ -366,7 +366,7 @@ lbl_fn_801426A4_000003A8:
     lwz r3, 0x958(r29)
     rlwinm r0, r3, 0, 25, 25
     cmplwi r0, 0x40
-    bne lbl_fn_801426A4_0000045C
+    bne lbl_quest_evaluateMilestoneData_0000045C
     lwz r4, lbl_8087F0A8
     lis r0, 0x4330
     stw r0, 0x228(r1)
@@ -383,16 +383,16 @@ lbl_fn_801426A4_000003A8:
     fdivs f3, f3, f4
     fsubs f0, f0, f3
     stfs f0, 0x578(r29)
-    b lbl_fn_801426A4_000004BC
-lbl_fn_801426A4_0000045C:
+    b lbl_quest_evaluateMilestoneData_000004BC
+lbl_quest_evaluateMilestoneData_0000045C:
     clrlwi r0, r3, 31
     cmplwi r0, 0x1
-    beq lbl_fn_801426A4_000004BC
+    beq lbl_quest_evaluateMilestoneData_000004BC
     lwz r0, 0x54c(r29)
     rlwinm r3, r0, 0, 10, 10
     subis r0, r3, 0x20
     cmplwi r0, 0x0
-    beq lbl_fn_801426A4_000004BC
+    beq lbl_quest_evaluateMilestoneData_000004BC
     lwz r4, lbl_8087F0A8
     lis r0, 0x4330
     stw r0, 0x228(r1)
@@ -409,7 +409,7 @@ lbl_fn_801426A4_0000045C:
     fdivs f3, f3, f4
     fadds f0, f0, f3
     stfs f0, 0x578(r29)
-lbl_fn_801426A4_000004BC:
+lbl_quest_evaluateMilestoneData_000004BC:
     lfs f4, 0x120(r1)
     lfs f3, 0x6b8(r29)
     lfs f0, lbl_80881A34
@@ -426,33 +426,33 @@ lbl_fn_801426A4_000004BC:
     lfs f3, 0x6c0(r29)
     fadds f3, f4, f3
     stfs f3, 0x128(r1)
-    bge lbl_fn_801426A4_00000504
-    b lbl_fn_801426A4_00000508
-lbl_fn_801426A4_00000504:
+    bge lbl_quest_evaluateMilestoneData_00000504
+    b lbl_quest_evaluateMilestoneData_00000508
+lbl_quest_evaluateMilestoneData_00000504:
     fmr f6, f0
-lbl_fn_801426A4_00000508:
+lbl_quest_evaluateMilestoneData_00000508:
     lfs f0, lbl_80881A34
     lfs f3, 0x6c0(r29)
     fmuls f0, f0, f31
     lfs f4, lbl_80881964
     fmuls f5, f3, f6
     fcmpo cr0, f4, f0
-    bge lbl_fn_801426A4_00000528
-    b lbl_fn_801426A4_0000052C
-lbl_fn_801426A4_00000528:
+    bge lbl_quest_evaluateMilestoneData_00000528
+    b lbl_quest_evaluateMilestoneData_0000052C
+lbl_quest_evaluateMilestoneData_00000528:
     fmr f4, f0
-lbl_fn_801426A4_0000052C:
+lbl_quest_evaluateMilestoneData_0000052C:
     lfs f0, lbl_80881A34
     lfs f3, 0x6bc(r29)
     fmuls f0, f0, f31
     lfs f7, lbl_80881964
     fmuls f6, f3, f4
     fcmpo cr0, f7, f0
-    bge lbl_fn_801426A4_0000054C
-    b lbl_fn_801426A4_00000550
-lbl_fn_801426A4_0000054C:
+    bge lbl_quest_evaluateMilestoneData_0000054C
+    b lbl_quest_evaluateMilestoneData_00000550
+lbl_quest_evaluateMilestoneData_0000054C:
     fmr f7, f0
-lbl_fn_801426A4_00000550:
+lbl_quest_evaluateMilestoneData_00000550:
     lfs f3, 0x6b8(r29)
     addi r3, r29, 0x6b8
     lfs f0, 0x6c0(r29)
@@ -471,12 +471,12 @@ lbl_fn_801426A4_00000550:
     lfs f0, lbl_80881994
     fcmpo cr0, f1, f0
     cror eq, gt, eq
-    beq lbl_fn_801426A4_000005AC
+    beq lbl_quest_evaluateMilestoneData_000005AC
     lfs f0, lbl_8088196C
     stfs f0, 0x6b8(r29)
     stfs f0, 0x6bc(r29)
     stfs f0, 0x6c0(r29)
-lbl_fn_801426A4_000005AC:
+lbl_quest_evaluateMilestoneData_000005AC:
     lfs f3, 0x120(r1)
     lfs f0, 0x574(r29)
     lfs f5, 0x124(r1)
@@ -491,9 +491,9 @@ lbl_fn_801426A4_000005AC:
     lfs f3, 0x57c(r29)
     fadds f3, f4, f3
     stfs f3, 0x128(r1)
-    bge lbl_fn_801426A4_000005EC
+    bge lbl_quest_evaluateMilestoneData_000005EC
     stfs f0, 0x124(r1)
-lbl_fn_801426A4_000005EC:
+lbl_quest_evaluateMilestoneData_000005EC:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x80
     lfs f0, 0x530(r29)
@@ -511,10 +511,10 @@ lbl_fn_801426A4_000005EC:
     bl PSVECSquareMag
     lfs f0, lbl_80881A3C
     fcmpo cr0, f1, f0
-    bge lbl_fn_801426A4_00000FF8
+    bge lbl_quest_evaluateMilestoneData_00000FF8
     lwz r0, 0x610(r29)
     cmpwi r0, 0x4
-    ble lbl_fn_801426A4_000006E0
+    ble lbl_quest_evaluateMilestoneData_000006E0
     addi r4, r1, 0x138
     lfs f2, 0x140(r1)
     addi r3, r1, 0x114
@@ -531,7 +531,7 @@ lbl_fn_801426A4_000005EC:
     lwz r0, 0x958(r29)
     rlwinm r0, r0, 0, 25, 25
     cmplwi r0, 0x40
-    bne lbl_fn_801426A4_000006A4
+    bne lbl_quest_evaluateMilestoneData_000006A4
     frsp f2, f2
     psq_l f1, 0x0(r5), 0, 0
     psq_st f1, 0x0(r3), 0, 0
@@ -540,7 +540,7 @@ lbl_fn_801426A4_000005EC:
     lfs f2, 0x140(r1)
     psq_st f1, 0x0(r5), 0, 0
     stfs f2, 0x110(r1)
-lbl_fn_801426A4_000006A4:
+lbl_quest_evaluateMilestoneData_000006A4:
     lwz r28, lbl_8087EE98
     mr r3, r29
     bl actor_getMovementFlags
@@ -553,10 +553,10 @@ lbl_fn_801426A4_000006A4:
     li r9, 0x0
     bl item_testLineOfSight
     cmpwi r3, 0x0
-    beq lbl_fn_801426A4_000006E0
+    beq lbl_quest_evaluateMilestoneData_000006E0
     lfs f0, 0x100(r1)
     stfs f0, 0x13c(r1)
-lbl_fn_801426A4_000006E0:
+lbl_quest_evaluateMilestoneData_000006E0:
     li r0, 0x0
     addi r4, r1, 0x138
     lfs f2, 0x140(r1)
@@ -594,46 +594,46 @@ lbl_fn_801426A4_000006E0:
     stfs f2, 0x34(r1)
     rlwinm r0, r0, 0, 25, 25
     cmplwi r0, 0x40
-    bne lbl_fn_801426A4_00000788
+    bne lbl_quest_evaluateMilestoneData_00000788
     lfs f0, 0xe4(r1)
     fsubs f0, f0, f7
     stfs f0, 0xe4(r1)
-    b lbl_fn_801426A4_00000794
-lbl_fn_801426A4_00000788:
+    b lbl_quest_evaluateMilestoneData_00000794
+lbl_quest_evaluateMilestoneData_00000788:
     lfs f0, 0xe4(r1)
     fadds f0, f0, f7
     stfs f0, 0xe4(r1)
-lbl_fn_801426A4_00000794:
+lbl_quest_evaluateMilestoneData_00000794:
     mr r3, r29
     bl actor_getMovementFlags
     lwz r0, 0x48(r29)
     mr r7, r3
     cmpwi r0, 0x0
-    bne lbl_fn_801426A4_000007B4
+    bne lbl_quest_evaluateMilestoneData_000007B4
     li r0, 0x1
-    b lbl_fn_801426A4_000007F0
-lbl_fn_801426A4_000007B4:
+    b lbl_quest_evaluateMilestoneData_000007F0
+lbl_quest_evaluateMilestoneData_000007B4:
     lwz r4, lbl_8087F430
     cmpwi r4, 0x0
-    beq lbl_fn_801426A4_000007EC
+    beq lbl_quest_evaluateMilestoneData_000007EC
     lwz r0, 0x48(r4)
     cmpwi r0, 0x2
-    bne lbl_fn_801426A4_000007EC
+    bne lbl_quest_evaluateMilestoneData_000007EC
     lwz r0, 0x4c(r4)
     cmpwi r0, 0x19
-    bne lbl_fn_801426A4_000007EC
+    bne lbl_quest_evaluateMilestoneData_000007EC
     lwz r4, 0x50(r4)
     subi r0, r4, 0x2
     cntlzw r0, r0
     srwi r0, r0, 5
-    b lbl_fn_801426A4_000007F0
-lbl_fn_801426A4_000007EC:
+    b lbl_quest_evaluateMilestoneData_000007F0
+lbl_quest_evaluateMilestoneData_000007EC:
     li r0, 0x0
-lbl_fn_801426A4_000007F0:
+lbl_quest_evaluateMilestoneData_000007F0:
     cmpwi r0, 0x0
-    beq lbl_fn_801426A4_000007FC
+    beq lbl_quest_evaluateMilestoneData_000007FC
     oris r7, r3, 0x200
-lbl_fn_801426A4_000007FC:
+lbl_quest_evaluateMilestoneData_000007FC:
     lwz r3, lbl_8087EE98
     addi r4, r1, 0x1d8
     lfs f1, 0xec(r1)
@@ -646,7 +646,7 @@ lbl_fn_801426A4_000007FC:
     mr r31, r3
     rlwinm r0, r0, 0, 22, 22
     cmplwi r0, 0x200
-    bne lbl_fn_801426A4_00000868
+    bne lbl_quest_evaluateMilestoneData_00000868
     lfs f7, lbl_8088196C
     lfs f0, 0x13c(r1)
     lfs f6, 0x138(r1)
@@ -660,8 +660,8 @@ lbl_fn_801426A4_000007FC:
     stfs f5, 0x138(r1)
     stfs f4, 0x13c(r1)
     stfs f0, 0x140(r1)
-    b lbl_fn_801426A4_000008D8
-lbl_fn_801426A4_00000868:
+    b lbl_quest_evaluateMilestoneData_000008D8
+lbl_quest_evaluateMilestoneData_00000868:
     addi r5, r1, 0x1e8
     lfs f2, 0x1f0(r1)
     addi r4, r1, 0x138
@@ -682,60 +682,60 @@ lbl_fn_801426A4_00000868:
     lwz r0, 0x958(r29)
     rlwinm r0, r0, 0, 25, 25
     cmplwi r0, 0x40
-    bne lbl_fn_801426A4_000008CC
+    bne lbl_quest_evaluateMilestoneData_000008CC
     lfs f0, 0xec(r1)
     fadds f0, f3, f0
     stfs f0, 0x13c(r1)
-    b lbl_fn_801426A4_000008D8
-lbl_fn_801426A4_000008CC:
+    b lbl_quest_evaluateMilestoneData_000008D8
+lbl_quest_evaluateMilestoneData_000008CC:
     lfs f0, 0xec(r1)
     fsubs f0, f3, f0
     stfs f0, 0x13c(r1)
-lbl_fn_801426A4_000008D8:
+lbl_quest_evaluateMilestoneData_000008D8:
     cmpwi r3, 0x0
-    beq lbl_fn_801426A4_00000A08
+    beq lbl_quest_evaluateMilestoneData_00000A08
     lwz r3, 0x214(r1)
     clrlwi r4, r3, 31
     cmplwi r4, 0x1
-    bne lbl_fn_801426A4_000008F8
+    bne lbl_quest_evaluateMilestoneData_000008F8
     lfs f0, lbl_8088196C
     stfs f0, 0x124(r1)
-lbl_fn_801426A4_000008F8:
+lbl_quest_evaluateMilestoneData_000008F8:
     lwz r0, 0x958(r29)
     rlwinm r0, r0, 0, 25, 25
     cmplwi r0, 0x40
-    bne lbl_fn_801426A4_0000091C
+    bne lbl_quest_evaluateMilestoneData_0000091C
     rlwinm r0, r3, 0, 23, 23
     cmplwi r0, 0x100
-    bne lbl_fn_801426A4_0000091C
+    bne lbl_quest_evaluateMilestoneData_0000091C
     lfs f0, lbl_8088196C
     stfs f0, 0x124(r1)
-lbl_fn_801426A4_0000091C:
+lbl_quest_evaluateMilestoneData_0000091C:
     rlwinm r0, r3, 0, 29, 29
     cmplwi r0, 0x4
-    bne lbl_fn_801426A4_0000096C
+    bne lbl_quest_evaluateMilestoneData_0000096C
     rlwinm r0, r3, 0, 28, 28
     cmplwi r0, 0x8
-    bne lbl_fn_801426A4_0000096C
+    bne lbl_quest_evaluateMilestoneData_0000096C
     cmplwi r4, 0x1
-    bne lbl_fn_801426A4_0000096C
+    bne lbl_quest_evaluateMilestoneData_0000096C
     addi r3, r1, 0x120
     bl PSVECSquareMag
     lfs f0, lbl_80881994
     fcmpo cr0, f1, f0
-    ble lbl_fn_801426A4_0000096C
+    ble lbl_quest_evaluateMilestoneData_0000096C
     lwz r0, 0x958(r29)
     rlwinm r0, r0, 0, 28, 28
     cmplwi r0, 0x8
-    beq lbl_fn_801426A4_0000096C
+    beq lbl_quest_evaluateMilestoneData_0000096C
     lwz r0, 0x54c(r29)
     ori r0, r0, 0x100
     stw r0, 0x54c(r29)
-lbl_fn_801426A4_0000096C:
+lbl_quest_evaluateMilestoneData_0000096C:
     lwz r0, 0x214(r1)
     rlwinm r0, r0, 0, 25, 25
     cmplwi r0, 0x40
-    bne lbl_fn_801426A4_000009A0
+    bne lbl_quest_evaluateMilestoneData_000009A0
     lwz r0, 0x54c(r29)
     addi r4, r1, 0x21c
     addi r3, r29, 0x13a0
@@ -745,11 +745,11 @@ lbl_fn_801426A4_0000096C:
     lfs f2, 0x224(r1)
     stfs f2, 0x13a8(r29)
     psq_st f1, 0x0(r3), 0, 0
-lbl_fn_801426A4_000009A0:
+lbl_quest_evaluateMilestoneData_000009A0:
     lwz r0, 0x214(r1)
     rlwinm r0, r0, 0, 24, 24
     cmplwi r0, 0x80
-    bne lbl_fn_801426A4_000009D4
+    bne lbl_quest_evaluateMilestoneData_000009D4
     lwz r0, 0x54c(r29)
     addi r4, r1, 0x21c
     addi r3, r29, 0x13a0
@@ -759,11 +759,11 @@ lbl_fn_801426A4_000009A0:
     lfs f2, 0x224(r1)
     stfs f2, 0x13a8(r29)
     psq_st f1, 0x0(r3), 0, 0
-lbl_fn_801426A4_000009D4:
+lbl_quest_evaluateMilestoneData_000009D4:
     lwz r0, 0x214(r1)
     rlwinm r0, r0, 0, 22, 22
     cmplwi r0, 0x200
-    bne lbl_fn_801426A4_00000A08
+    bne lbl_quest_evaluateMilestoneData_00000A08
     lwz r0, 0x54c(r29)
     addi r4, r1, 0x21c
     addi r3, r29, 0x13a0
@@ -773,26 +773,26 @@ lbl_fn_801426A4_000009D4:
     lfs f2, 0x224(r1)
     stfs f2, 0x13a8(r29)
     psq_st f1, 0x0(r3), 0, 0
-lbl_fn_801426A4_00000A08:
+lbl_quest_evaluateMilestoneData_00000A08:
     lwz r4, 0x20c(r1)
     li r3, 0x0
     li r0, 0x0
     cmpwi r4, 0x0
-    beq lbl_fn_801426A4_00000A2C
+    beq lbl_quest_evaluateMilestoneData_00000A2C
     lwz r4, 0x0(r4)
     cmplwi r4, 0x1a
-    bne lbl_fn_801426A4_00000A2C
+    bne lbl_quest_evaluateMilestoneData_00000A2C
     li r0, 0x1
-lbl_fn_801426A4_00000A2C:
+lbl_quest_evaluateMilestoneData_00000A2C:
     cmpwi r0, 0x0
-    beq lbl_fn_801426A4_00000A4C
+    beq lbl_quest_evaluateMilestoneData_00000A4C
     lwz r0, 0x54c(r29)
     rlwinm r4, r0, 0, 5, 5
     subis r0, r4, 0x400
     cmplwi r0, 0x0
-    beq lbl_fn_801426A4_00000A4C
+    beq lbl_quest_evaluateMilestoneData_00000A4C
     li r3, 0x1
-lbl_fn_801426A4_00000A4C:
+lbl_quest_evaluateMilestoneData_00000A4C:
     lwz r0, 0x54c(r29)
     lwz r4, 0x12a4(r29)
     rlwimi r4, r3, 3, 28, 28
@@ -800,49 +800,49 @@ lbl_fn_801426A4_00000A4C:
     stw r4, 0x12a4(r29)
     subis r0, r3, 0x20
     cmplwi r0, 0x0
-    bne lbl_fn_801426A4_00000A74
+    bne lbl_quest_evaluateMilestoneData_00000A74
     ori r0, r4, 0x8
     stw r0, 0x12a4(r29)
-lbl_fn_801426A4_00000A74:
+lbl_quest_evaluateMilestoneData_00000A74:
     lwz r3, 0x20c(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_801426A4_00000A88
+    beq lbl_quest_evaluateMilestoneData_00000A88
     lwz r0, 0x0(r3)
-    b lbl_fn_801426A4_00000A8C
-lbl_fn_801426A4_00000A88:
+    b lbl_quest_evaluateMilestoneData_00000A8C
+lbl_quest_evaluateMilestoneData_00000A88:
     li r0, -0x1
-lbl_fn_801426A4_00000A8C:
+lbl_quest_evaluateMilestoneData_00000A8C:
     cmpwi r31, 0x0
     stw r0, 0x634(r29)
     li r28, 0x0
-    beq lbl_fn_801426A4_00000AAC
+    beq lbl_quest_evaluateMilestoneData_00000AAC
     lwz r0, 0x214(r1)
     clrlwi r0, r0, 31
     cmplwi r0, 0x1
-    beq lbl_fn_801426A4_00000B8C
-lbl_fn_801426A4_00000AAC:
+    beq lbl_quest_evaluateMilestoneData_00000B8C
+lbl_quest_evaluateMilestoneData_00000AAC:
     lwz r0, 0x958(r29)
     rlwinm r0, r0, 0, 26, 26
     cmplwi r0, 0x20
-    beq lbl_fn_801426A4_00000B8C
+    beq lbl_quest_evaluateMilestoneData_00000B8C
     lwz r0, 0x54c(r29)
     rlwinm r3, r0, 0, 10, 10
     subis r0, r3, 0x20
     cmplwi r0, 0x0
-    beq lbl_fn_801426A4_00000B8C
+    beq lbl_quest_evaluateMilestoneData_00000B8C
     lwz r3, 0x48(r29)
     li r0, 0x1
     cmpwi r3, 0x1
-    beq lbl_fn_801426A4_00000AEC
+    beq lbl_quest_evaluateMilestoneData_00000AEC
     cmpwi r3, 0x4
-    beq lbl_fn_801426A4_00000AEC
+    beq lbl_quest_evaluateMilestoneData_00000AEC
     li r0, 0x0
-lbl_fn_801426A4_00000AEC:
+lbl_quest_evaluateMilestoneData_00000AEC:
     cmpwi r0, 0x0
-    bne lbl_fn_801426A4_00000B8C
+    bne lbl_quest_evaluateMilestoneData_00000B8C
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    beq lbl_fn_801426A4_00000B8C
+    beq lbl_quest_evaluateMilestoneData_00000B8C
     addi r3, r1, 0x138
     lfs f2, 0x140(r1)
     psq_l f1, 0x0(r3), 0, 0
@@ -867,26 +867,26 @@ lbl_fn_801426A4_00000AEC:
     stfs f0, 0xcc(r1)
     bl collision_testLineSegment
     cmpwi r3, 0x0
-    bne lbl_fn_801426A4_00000B68
+    bne lbl_quest_evaluateMilestoneData_00000B68
     li r28, 0x1
-lbl_fn_801426A4_00000B68:
+lbl_quest_evaluateMilestoneData_00000B68:
     lwz r0, 0x54c(r29)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_801426A4_00000B8C
+    bne lbl_quest_evaluateMilestoneData_00000B8C
     lfs f3, 0xcc(r1)
     lfs f0, lbl_8088196C
     fcmpo cr0, f3, f0
-    bge lbl_fn_801426A4_00000B8C
+    bge lbl_quest_evaluateMilestoneData_00000B8C
     li r28, 0x0
-lbl_fn_801426A4_00000B8C:
+lbl_quest_evaluateMilestoneData_00000B8C:
     cmpwi r28, 0x0
-    beq lbl_fn_801426A4_00000C24
+    beq lbl_quest_evaluateMilestoneData_00000C24
     lwz r3, 0x630(r29)
     addi r0, r3, 0x1
     stw r0, 0x630(r29)
     cmpwi r0, 0x1
-    ble lbl_fn_801426A4_00000C64
+    ble lbl_quest_evaluateMilestoneData_00000C64
     addi r3, r1, 0x138
     lfs f3, lbl_8088196C
     psq_l f1, 0x0(r3), 0, 0
@@ -907,37 +907,37 @@ lbl_fn_801426A4_00000B8C:
     stfs f3, 0xb8(r1)
     bl fn_8004D314
     cmpwi r3, 0x0
-    bne lbl_fn_801426A4_00000C18
+    bne lbl_quest_evaluateMilestoneData_00000C18
     lwz r12, 0x0(r29)
     mr r3, r29
     addi r4, r1, 0x120
     lwz r12, 0x8c(r12)
     mtctr r12
     bctrl
-    b lbl_fn_801426A4_00000C64
-lbl_fn_801426A4_00000C18:
+    b lbl_quest_evaluateMilestoneData_00000C64
+lbl_quest_evaluateMilestoneData_00000C18:
     li r0, 0x0
     stw r0, 0x630(r29)
-    b lbl_fn_801426A4_00000C64
-lbl_fn_801426A4_00000C24:
+    b lbl_quest_evaluateMilestoneData_00000C64
+lbl_quest_evaluateMilestoneData_00000C24:
     cmpwi r31, 0x0
     li r0, 0x0
     stw r0, 0x630(r29)
-    beq lbl_fn_801426A4_00000C64
+    beq lbl_quest_evaluateMilestoneData_00000C64
     lwz r0, 0x214(r1)
     rlwinm r0, r0, 0, 21, 21
     cmplwi r0, 0x400
-    beq lbl_fn_801426A4_00000C54
+    beq lbl_quest_evaluateMilestoneData_00000C54
     lwz r3, lbl_8087F0A8
     lwz r0, 0x2c0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_801426A4_00000C64
-lbl_fn_801426A4_00000C54:
+    beq lbl_quest_evaluateMilestoneData_00000C64
+lbl_quest_evaluateMilestoneData_00000C54:
     mr r3, r29
     addi r4, r1, 0x138
     addi r5, r1, 0x120
     bl fn_801749EC
-lbl_fn_801426A4_00000C64:
+lbl_quest_evaluateMilestoneData_00000C64:
     li r0, 0x0
     stw r0, 0x610(r29)
     mr r3, r29
@@ -945,37 +945,37 @@ lbl_fn_801426A4_00000C64:
     addi r5, r1, 0x120
     bl fn_801720AC
     cmpwi r3, 0x0
-    bne lbl_fn_801426A4_00001094
+    bne lbl_quest_evaluateMilestoneData_00001094
     lwz r0, 0x7e0(r29)
     rlwinm r3, r0, 0, 6, 6
     subis r0, r3, 0x200
     cmplwi r0, 0x0
-    bne lbl_fn_801426A4_00001094
+    bne lbl_quest_evaluateMilestoneData_00001094
     lwz r3, 0x55c(r29)
     subi r0, r3, 0x1
     cmplwi r0, 0x1
-    bgt lbl_fn_801426A4_00001094
+    bgt lbl_quest_evaluateMilestoneData_00001094
     lwz r0, 0x54c(r29)
     rlwinm r3, r0, 0, 7, 7
     subis r0, r3, 0x100
     cmplwi r0, 0x0
-    beq lbl_fn_801426A4_00001094
+    beq lbl_quest_evaluateMilestoneData_00001094
     lwz r0, 0x12a4(r29)
     extrwi. r0, r0, 1, 28
-    bne lbl_fn_801426A4_00001094
+    bne lbl_quest_evaluateMilestoneData_00001094
     addi r3, r29, 0x574
     bl PSVECSquareMag
     lfs f0, lbl_80881964
     fcmpo cr0, f1, f0
-    bgt lbl_fn_801426A4_00000CEC
+    bgt lbl_quest_evaluateMilestoneData_00000CEC
     lfs f3, 0x570(r29)
     lfs f0, lbl_808819A8
     fcmpo cr0, f3, f0
-    ble lbl_fn_801426A4_00001094
-lbl_fn_801426A4_00000CEC:
+    ble lbl_quest_evaluateMilestoneData_00001094
+lbl_quest_evaluateMilestoneData_00000CEC:
     lwz r3, 0x1208(r29)
     cmpwi r3, 0x0
-    beq lbl_fn_801426A4_00000D48
+    beq lbl_quest_evaluateMilestoneData_00000D48
     lfs f0, lbl_8088196C
     li r31, 0x0
     li r0, 0x3
@@ -996,7 +996,7 @@ lbl_fn_801426A4_00000CEC:
     li r0, 0xff
     stb r0, 0x520(r3)
     stw r31, 0x1208(r29)
-lbl_fn_801426A4_00000D48:
+lbl_quest_evaluateMilestoneData_00000D48:
     lis r5, lbl_80737A9C@ha
     li r3, 0x18
     addi r5, r5, lbl_80737A9C@l
@@ -1007,18 +1007,18 @@ lbl_fn_801426A4_00000D48:
     bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
-    beq lbl_fn_801426A4_00000D84
+    beq lbl_quest_evaluateMilestoneData_00000D84
     mr r4, r29
     li r5, 0x0
     bl fn_801C8938
     mr r31, r3
-lbl_fn_801426A4_00000D84:
+lbl_quest_evaluateMilestoneData_00000D84:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    bne lbl_fn_801426A4_00000E14
+    bne lbl_quest_evaluateMilestoneData_00000E14
     lwz r0, 0xf80(r29)
     cmpwi r0, 0x0
-    bne lbl_fn_801426A4_00000DBC
+    bne lbl_quest_evaluateMilestoneData_00000DBC
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x230(r1)
@@ -1026,8 +1026,8 @@ lbl_fn_801426A4_00000D84:
     lwz r0, 0x8(r5)
     stw r3, 0x234(r1)
     stw r0, 0x238(r1)
-    b lbl_fn_801426A4_00000DD8
-lbl_fn_801426A4_00000DBC:
+    b lbl_quest_evaluateMilestoneData_00000DD8
+lbl_quest_evaluateMilestoneData_00000DBC:
     addi r3, r30, 0x230
     lwz r5, 0x230(r30)
     lwz r4, 0x4(r3)
@@ -1035,7 +1035,7 @@ lbl_fn_801426A4_00000DBC:
     stw r5, 0x230(r1)
     stw r4, 0x234(r1)
     stw r0, 0x238(r1)
-lbl_fn_801426A4_00000DD8:
+lbl_quest_evaluateMilestoneData_00000DD8:
     lwz r5, 0x230(r1)
     addi r3, r1, 0x20
     lwz r4, 0x234(r1)
@@ -1045,26 +1045,26 @@ lbl_fn_801426A4_00000DD8:
     stw r0, 0x28(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_801426A4_00000E14
+    beq lbl_quest_evaluateMilestoneData_00000E14
     lwz r3, 0xf80(r29)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_801426A4_00000E14:
+lbl_quest_evaluateMilestoneData_00000E14:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    beq lbl_fn_801426A4_00000FC8
+    beq lbl_quest_evaluateMilestoneData_00000FC8
     cmpwi r0, 0x8
-    beq lbl_fn_801426A4_00000E2C
+    beq lbl_quest_evaluateMilestoneData_00000E2C
     stw r0, 0x564(r29)
-lbl_fn_801426A4_00000E2C:
+lbl_quest_evaluateMilestoneData_00000E2C:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    bne lbl_fn_801426A4_00000FC8
+    bne lbl_quest_evaluateMilestoneData_00000FC8
     lwz r0, 0xf80(r29)
     cmpwi r0, 0x0
-    bne lbl_fn_801426A4_00000E64
+    bne lbl_quest_evaluateMilestoneData_00000E64
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x23c(r1)
@@ -1072,8 +1072,8 @@ lbl_fn_801426A4_00000E2C:
     lwz r0, 0x8(r5)
     stw r3, 0x240(r1)
     stw r0, 0x244(r1)
-    b lbl_fn_801426A4_00000E80
-lbl_fn_801426A4_00000E64:
+    b lbl_quest_evaluateMilestoneData_00000E80
+lbl_quest_evaluateMilestoneData_00000E64:
     addi r3, r30, 0x23c
     lwz r5, 0x23c(r30)
     lwz r4, 0x4(r3)
@@ -1081,7 +1081,7 @@ lbl_fn_801426A4_00000E64:
     stw r5, 0x23c(r1)
     stw r4, 0x240(r1)
     stw r0, 0x244(r1)
-lbl_fn_801426A4_00000E80:
+lbl_quest_evaluateMilestoneData_00000E80:
     lwz r5, 0x23c(r1)
     addi r3, r1, 0x8
     lwz r4, 0x240(r1)
@@ -1091,26 +1091,26 @@ lbl_fn_801426A4_00000E80:
     stw r0, 0x10(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_801426A4_00000EBC
+    beq lbl_quest_evaluateMilestoneData_00000EBC
     lwz r3, 0xf80(r29)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_801426A4_00000EBC:
+lbl_quest_evaluateMilestoneData_00000EBC:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    beq lbl_fn_801426A4_00000F98
+    beq lbl_quest_evaluateMilestoneData_00000F98
     cmpwi r0, 0x8
-    beq lbl_fn_801426A4_00000ED4
+    beq lbl_quest_evaluateMilestoneData_00000ED4
     stw r0, 0x564(r29)
-lbl_fn_801426A4_00000ED4:
+lbl_quest_evaluateMilestoneData_00000ED4:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    bne lbl_fn_801426A4_00000F98
+    bne lbl_quest_evaluateMilestoneData_00000F98
     lwz r0, 0xf80(r29)
     cmpwi r0, 0x0
-    bne lbl_fn_801426A4_00000F0C
+    bne lbl_quest_evaluateMilestoneData_00000F0C
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x248(r1)
@@ -1118,8 +1118,8 @@ lbl_fn_801426A4_00000ED4:
     lwz r0, 0x8(r5)
     stw r3, 0x24c(r1)
     stw r0, 0x250(r1)
-    b lbl_fn_801426A4_00000F28
-lbl_fn_801426A4_00000F0C:
+    b lbl_quest_evaluateMilestoneData_00000F28
+lbl_quest_evaluateMilestoneData_00000F0C:
     addi r3, r30, 0x248
     lwz r5, 0x248(r30)
     lwz r4, 0x4(r3)
@@ -1127,7 +1127,7 @@ lbl_fn_801426A4_00000F0C:
     stw r5, 0x248(r1)
     stw r4, 0x24c(r1)
     stw r0, 0x250(r1)
-lbl_fn_801426A4_00000F28:
+lbl_quest_evaluateMilestoneData_00000F28:
     lwz r5, 0x248(r1)
     addi r3, r1, 0x14
     lwz r4, 0x24c(r1)
@@ -1137,13 +1137,13 @@ lbl_fn_801426A4_00000F28:
     stw r0, 0x1c(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_801426A4_00000F64
+    beq lbl_quest_evaluateMilestoneData_00000F64
     lwz r3, 0xf80(r29)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_801426A4_00000F64:
+lbl_quest_evaluateMilestoneData_00000F64:
     mr r3, r29
     li r4, 0x6
     bl actor_setState
@@ -1151,45 +1151,45 @@ lbl_fn_801426A4_00000F64:
     li r0, 0x0
     cmpwi r3, 0x0
     stw r0, 0xf80(r29)
-    beq lbl_fn_801426A4_00000F98
+    beq lbl_quest_evaluateMilestoneData_00000F98
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_801426A4_00000F98:
+lbl_quest_evaluateMilestoneData_00000F98:
     lwz r3, 0xf80(r29)
     li r4, 0x6
     li r0, 0x0
     stw r4, 0x55c(r29)
     cmpwi r3, 0x0
     stw r0, 0xf80(r29)
-    beq lbl_fn_801426A4_00000FC8
+    beq lbl_quest_evaluateMilestoneData_00000FC8
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_801426A4_00000FC8:
+lbl_quest_evaluateMilestoneData_00000FC8:
     lwz r3, 0xf80(r29)
     li r0, 0x6
     stw r0, 0x55c(r29)
     cmpwi r3, 0x0
     stw r31, 0xf80(r29)
-    beq lbl_fn_801426A4_000010E4
+    beq lbl_quest_evaluateMilestoneData_000010E4
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-    b lbl_fn_801426A4_000010E4
-lbl_fn_801426A4_00000FF8:
+    b lbl_quest_evaluateMilestoneData_000010E4
+lbl_quest_evaluateMilestoneData_00000FF8:
     lfs f0, lbl_8088196C
     addi r3, r29, 0xc64
     stfs f0, 0x124(r1)
     bl fn_80125474
     cmpwi r3, 0x0
-    beq lbl_fn_801426A4_00001058
+    beq lbl_quest_evaluateMilestoneData_00001058
     addi r3, r1, 0x120
     bl PSVECMag
     lfs f3, 0xcc4(r29)
@@ -1201,14 +1201,14 @@ lbl_fn_801426A4_00000FF8:
     lfs f0, lbl_808819B8
     frsp f3, f1
     fcmpo cr0, f29, f0
-    ble lbl_fn_801426A4_00001058
+    ble lbl_quest_evaluateMilestoneData_00001058
     fcmpo cr0, f3, f0
-    ble lbl_fn_801426A4_00001058
+    ble lbl_quest_evaluateMilestoneData_00001058
     fdivs f3, f3, f29
     lfs f0, 0xcc0(r29)
     fdivs f0, f0, f3
     stfs f0, 0x124(r1)
-lbl_fn_801426A4_00001058:
+lbl_quest_evaluateMilestoneData_00001058:
     lfs f3, 0x138(r1)
     lfs f0, 0x120(r1)
     lfs f5, 0x13c(r1)
@@ -1224,18 +1224,18 @@ lbl_fn_801426A4_00001058:
     lwz r3, 0x610(r29)
     addi r0, r3, 0x1
     stw r0, 0x610(r29)
-lbl_fn_801426A4_00001094:
+lbl_quest_evaluateMilestoneData_00001094:
     lwz r0, 0x54c(r29)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_801426A4_000010BC
+    bne lbl_quest_evaluateMilestoneData_000010BC
     lfs f3, 0x13c(r1)
     lfs f0, lbl_8088196C
     fcmpo cr0, f3, f0
-    bge lbl_fn_801426A4_000010BC
+    bge lbl_quest_evaluateMilestoneData_000010BC
     stfs f0, 0x13c(r1)
     stfs f0, 0x124(r1)
-lbl_fn_801426A4_000010BC:
+lbl_quest_evaluateMilestoneData_000010BC:
     addi r3, r1, 0x138
     lfs f2, 0x140(r1)
     psq_l f1, 0x0(r3), 0, 0
@@ -1246,7 +1246,7 @@ lbl_fn_801426A4_000010BC:
     lfs f2, 0x128(r1)
     stfs f2, 0x57c(r29)
     psq_st f1, 0x574(r29), 0, 0
-lbl_fn_801426A4_000010E4:
+lbl_quest_evaluateMilestoneData_000010E4:
     lwz r0, 0x2c4(r1)
     psq_l f31, 0x2b8(r1), 0, 0
     lfd f31, 0x2b0(r1)

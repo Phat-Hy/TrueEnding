@@ -14,7 +14,7 @@ extern void fn_806825FC(void);
 extern void strstr(void);
 extern void atoi(void);
 extern void fn_806A426C(void);
-extern void fn_806A4270(void);
+extern void net_truncateU16(void);
 extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
@@ -726,12 +726,12 @@ lbl_fn_806F50D0_00000880:
     sth r30, 0x16(r1)
     bl strlen
     clrlwi r3, r3, 16
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x18(r1)
     addi r3, r31, 0x100
     bl strlen
     clrlwi r3, r3, 16
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x1a(r1)
     lwz r3, 0x0(r27)
     lwz r3, 0x8(r3)
@@ -860,12 +860,12 @@ lbl_fn_806F50D0_00000A60:
     lwz r3, 0x4(r3)
     bl strlen
     clrlwi r3, r3, 16
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0xc(r1)
     mr r3, r30
     bl strlen
     clrlwi r3, r3, 16
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0xe(r1)
     mr r3, r26
     bl fn_806A426C
@@ -1636,7 +1636,7 @@ lbl_fn_806F5D90_0000150C:
     cmpwi r0, 0x0
     beq lbl_fn_806F5D90_00001540
     lhz r3, 0x190(r31)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x1a(r1)
     b lbl_fn_806F5D90_00001570
 lbl_fn_806F5D90_00001540:
@@ -1646,12 +1646,12 @@ lbl_fn_806F5D90_00001540:
     beq lbl_fn_806F5D90_00001564
     lis r3, lbl_80862124@ha
     lhz r3, lbl_80862124@l(r3)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x1a(r1)
     b lbl_fn_806F5D90_00001570
 lbl_fn_806F5D90_00001564:
     lhz r3, 0x20(r31)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x1a(r1)
 lbl_fn_806F5D90_00001570:
     lwz r0, 0x1c(r31)

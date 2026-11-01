@@ -12,7 +12,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void memcmp(void);
 extern void fn_806A4264(void);
-extern void fn_806A4270(void);
+extern void net_truncateU16(void);
 extern void fn_806D57A0(void);
 extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
@@ -2184,7 +2184,7 @@ lbl_fn_806EE2A0_00001C9C:
     stb r3, 0x19(r1)
     lhz r3, 0x8(r1)
     stw r0, 0x1c(r1)
-    bl fn_806A4270
+    bl net_truncateU16
     cmpwi r30, 0x3
     sth r3, 0x1a(r1)
     beq lbl_fn_806EE2A0_00001D10

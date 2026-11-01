@@ -48,7 +48,7 @@ extern void fn_800D8BB4(void);
 extern void str_skipWhitespace(void);
 extern void cam_findTargetIndex(void);
 extern void cam_destroyMsgHandle(void);
-extern void fn_800F52F8(void);
+extern void proj_getGlobalManager(void);
 extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
@@ -1973,7 +1973,7 @@ lbl_fn_8041766C_000018C4:
     lwz r0, 0x89c(r29)
     cmpwi r0, 0x1
     bne lbl_fn_8041766C_00001B3C
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_802F0998
     lfs f0, 0x8b0(r29)
     mr r4, r28
@@ -2354,7 +2354,7 @@ lbl_fn_8041766C_00001D5C:
     lfs f0, 0x84(r1)
     lfs f1, 0x8(r3)
     fsubs f29, f1, f0
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_802F0998
     fdivs f0, f29, f28
     lfs f2, lbl_808864B0

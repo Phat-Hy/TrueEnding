@@ -11,7 +11,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_8012476C(void);
-extern void fn_801426A4(void);
+extern void quest_evaluateMilestoneData(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
 extern void debuff_clearStatus(void);
@@ -1293,7 +1293,7 @@ lbl_fn_80199AFC_00001134:
     lfs f2, lbl_8088200C
     stfs f0, 0x94(r1)
     lwz r3, 0x4(r30)
-    bl fn_801426A4
+    bl quest_evaluateMilestoneData
     b lbl_fn_80199AFC_000013CC
 lbl_fn_80199AFC_00001168:
     lwz r3, 0x4(r30)

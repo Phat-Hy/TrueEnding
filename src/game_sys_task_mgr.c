@@ -95,7 +95,7 @@ void fn_80216AFC(void);
 void fn_80216CD0(void);
 void fn_802174E8(void);
 void fn_802174F4(void);
-void fn_8021771C(void);
+void task_findNextReady(void);
 void fn_80217778(void);
 void fn_802178C4(void);
 void fn_802179B4(void);
@@ -1501,34 +1501,34 @@ lbl_fn_802174F4_000012C8:
     blr
 }
 
-asm void fn_8021771C(void)
+asm void task_findNextReady(void)
 {
     nofralloc
     cmpwi r3, 0x4
-    bne lbl_fn_8021771C_000012E8
+    bne lbl_task_findNextReady_000012E8
     li r3, 0x3
-lbl_fn_8021771C_000012E8:
+lbl_task_findNextReady_000012E8:
     lwz r0, lbl_8087F274
     lwz r6, lbl_8087F270
     mtctr r0
     cmplwi r0, 0x0
-    ble lbl_fn_8021771C_00001330
-lbl_fn_8021771C_000012FC:
+    ble lbl_task_findNextReady_00001330
+lbl_task_findNextReady_000012FC:
     lwz r0, 0x44(r6)
     cmpw r0, r3
-    bne lbl_fn_8021771C_00001328
+    bne lbl_task_findNextReady_00001328
     lwz r0, 0x48(r6)
     cmpw r0, r4
-    bne lbl_fn_8021771C_00001328
+    bne lbl_task_findNextReady_00001328
     lwz r0, 0x4c(r6)
     cmpw r0, r5
-    bne lbl_fn_8021771C_00001328
+    bne lbl_task_findNextReady_00001328
     mr r3, r6
     blr
-lbl_fn_8021771C_00001328:
+lbl_task_findNextReady_00001328:
     addi r6, r6, 0xcc
-    bdnz lbl_fn_8021771C_000012FC
-lbl_fn_8021771C_00001330:
+    bdnz lbl_task_findNextReady_000012FC
+lbl_task_findNextReady_00001330:
     li r3, 0x0
     blr
 }

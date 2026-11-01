@@ -33,7 +33,7 @@ extern void fn_80128930(void);
 extern void enemy_updateAnimTimer(void);
 extern void boss_updatePhaseState(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_801426A4(void);
+extern void quest_evaluateMilestoneData(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
@@ -3540,7 +3540,7 @@ lbl_fn_803073C4_000030E0:
     mr r3, r24
     fmr f2, f29
     addi r4, r1, 0x328
-    bl fn_801426A4
+    bl quest_evaluateMilestoneData
     b lbl_fn_803073C4_0000311C
 lbl_fn_803073C4_00003100:
     lfs f0, 0x568(r24)

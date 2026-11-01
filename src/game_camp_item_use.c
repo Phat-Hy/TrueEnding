@@ -29,7 +29,7 @@ extern void atn_Task_setActive(void);
 extern void fn_800DC500(void);
 extern void fn_80117E34(void);
 extern void fn_80183D00(void);
-extern void fn_8021771C(void);
+extern void task_findNextReady(void);
 extern void fn_8035E858(void);
 extern void fn_8035F33C(void);
 extern void fn_80366364(void);
@@ -999,7 +999,7 @@ lbl_fn_803BEC40_00000CC0:
     mr r3, r18
     mr r4, r19
     mr r5, r20
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     stw r3, 0x144(r17)
     beq lbl_fn_803BEC40_00000CF8
@@ -1271,7 +1271,7 @@ lbl_fn_803BF9D4_00001004:
     lwz r3, 0x5514(r5)
     lwz r4, 0x5518(r5)
     lwz r5, 0x551c(r5)
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     beq lbl_fn_803BF9D4_0000107C
     lwz r0, 0x44(r3)

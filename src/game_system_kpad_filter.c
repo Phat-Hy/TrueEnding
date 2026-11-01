@@ -33,7 +33,7 @@ extern void battle_updateActorStatus(void);
 extern void fn_801E97DC(void);
 extern void thread_findAndNotify(void);
 extern void fn_802085E0(void);
-extern void fn_8021771C(void);
+extern void task_findNextReady(void);
 extern void fn_80219074(void);
 extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
@@ -1709,7 +1709,7 @@ lbl_fn_803754F0_000015FC:
     mr r4, r28
     li r30, 0x0
     mr r5, r24
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_803754F0_000018C4
@@ -1720,7 +1720,7 @@ lbl_fn_803754F0_000015FC:
     mr r4, r28
     mr r5, r24
     li r30, 0x0
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r26, r3
     beq lbl_fn_803754F0_0000182C
@@ -1939,7 +1939,7 @@ asm void fn_8037587C(void)
     mr r4, r27
     mr r5, r26
     li r30, 0x0
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_8037587C_00001BE8
@@ -1950,7 +1950,7 @@ asm void fn_8037587C(void)
     mr r4, r27
     mr r5, r26
     li r30, 0x0
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_8037587C_00001B50

@@ -71,7 +71,7 @@ extern u32 lbl_80881510;
 
 /* Function declarations */
 void proj_getMatrix(void);
-void fn_800F52F8(void);
+void proj_getGlobalManager(void);
 void fn_800F5300(void);
 void fn_800F530C(void);
 void fn_800F5314(void);
@@ -83,7 +83,7 @@ asm void proj_getMatrix(void)
     blr
 }
 
-asm void fn_800F52F8(void)
+asm void proj_getGlobalManager(void)
 {
     nofralloc
     lwz r3, lbl_8087F0A8

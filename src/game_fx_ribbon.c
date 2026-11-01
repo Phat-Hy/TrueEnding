@@ -19,7 +19,7 @@ extern void fn_800E0AB0(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_800F8524(void);
 extern void system_getNextSequenceId(void);
-extern void fn_801162A0(void);
+extern void vec3_sqMag(void);
 extern void equip_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void actor_setState(void);
@@ -222,7 +222,7 @@ lbl_fn_8028AA38_00000170:
     addi r5, r31, 0x18
     bl vec3_sub
     addi r3, r1, 0x88
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_80883B18
     fcmpo cr0, f1, f0
     bge lbl_fn_8028AA38_000001CC
@@ -231,7 +231,7 @@ lbl_fn_8028AA38_00000170:
     bl vec3_copy
 lbl_fn_8028AA38_000001CC:
     addi r3, r1, 0x70
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_80883B18
     fcmpo cr0, f1, f0
     bge lbl_fn_8028AA38_000001EC

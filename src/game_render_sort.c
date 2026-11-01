@@ -14,7 +14,7 @@ extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void hurtbox_dispatchHitEvent(void);
 extern void actor_testBitFlag(void);
-extern void fn_801426A4(void);
+extern void quest_evaluateMilestoneData(void);
 extern void fn_801595BC(void);
 extern void fn_8015AC48(void);
 extern void fn_80166A54(void);
@@ -1308,7 +1308,7 @@ lbl_fn_802A820C_0000110C:
     mr r3, r31
     addi r4, r1, 0x8c
     fmuls f2, f0, f31
-    bl fn_801426A4
+    bl quest_evaluateMilestoneData
     lwz r3, 0x1694(r31)
     lwz r0, 0x16ec(r31)
     ori r6, r3, 0x1
@@ -1627,7 +1627,7 @@ lbl_fn_802A8718_000015B0:
     mr r3, r31
     addi r4, r1, 0x64
     fmuls f2, f0, f31
-    bl fn_801426A4
+    bl quest_evaluateMilestoneData
     lwz r3, 0x1694(r31)
     lwz r0, 0x16ec(r31)
     ori r6, r3, 0x1

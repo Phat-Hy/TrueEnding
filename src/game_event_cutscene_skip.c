@@ -34,7 +34,7 @@ extern void fn_8016DF3C(void);
 extern void actor_setState(void);
 extern void fn_801839FC(void);
 extern void fn_80183D00(void);
-extern void fn_8021771C(void);
+extern void task_findNextReady(void);
 extern void task_getWorkerByIndex(void);
 extern void fn_80334B38(void);
 extern void fn_80365464(void);
@@ -1298,7 +1298,7 @@ asm void fn_804805F0(void)
     lbz r19, 0x37(r1)
     mr r4, r20
     mr r5, r19
-    bl fn_8021771C
+    bl task_findNextReady
     rlwinm. r0, r17, 0, 27, 27
     stw r3, 0x2a8(r1)
     beq lbl_fn_804805F0_00001114

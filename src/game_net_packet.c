@@ -33,7 +33,7 @@ extern void assert_generateId(void);
 extern void assert_formatLocation(void);
 extern void mem_findBlockById(void);
 extern void time_wrapMilliseconds(void);
-extern void fn_8020EF4C(void);
+extern void rand_stepEntropy(void);
 extern void random_generateValue(void);
 extern void event_findEntryById(void);
 extern void task_getWorkerByIndex(void);
@@ -1307,7 +1307,7 @@ lbl_fn_801E714C_00001144:
     li r3, 0x1
     bl time_wrapMilliseconds
     mr r24, r3
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_801E714C_00001170
     lwz r4, -0x7d70(r27)
@@ -1484,7 +1484,7 @@ lbl_fn_801E75F8_000013D0:
     li r24, 0x0
     bne lbl_fn_801E75F8_00001450
     lwz r3, 0x0(r20)
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_801E75F8_0000140C
     lwz r24, 0x8(r20)
@@ -1496,7 +1496,7 @@ lbl_fn_801E75F8_0000140C:
     slwi r0, r3, 3
     lwzx r4, r22, r0
     bl time_wrapMilliseconds
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_801E75F8_00001450
     mr r3, r26

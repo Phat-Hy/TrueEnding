@@ -24,10 +24,10 @@ extern void fn_805D9C70(void);
 extern void fn_805D9CC0(void);
 extern void PSMTXIdentity(void);
 extern void GXSetVtxDesc(void);
-extern void fn_806134E0(void);
+extern void __GXInitVtxDesc(void);
 extern void GXSetVtxAttrFmt(void);
 extern void GXClearVtxDesc(void);
-extern void fn_80614790(void);
+extern void GXBegin(void);
 extern void fn_806149C0(void);
 extern void fn_80615C40(void);
 extern void GXInitLightDistAttn(void);
@@ -280,7 +280,7 @@ asm void fn_805CDDD0(void)
     mr r30, r4
     stw r29, 0x14(r1)
     mr r29, r3
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -353,7 +353,7 @@ asm void fn_805CDEC0(void)
     li r3, 0x80
     li r4, 0x0
     li r5, 0x4
-    bl fn_80614790
+    bl GXBegin
     lis r3, 0xcc01
     lfs f0, 0x0(r27)
     stfs f0, -0x8000(r3)
@@ -808,7 +808,7 @@ asm void fn_805CE550(void)
     mr r30, r4
     stw r29, 0x14(r1)
     mr r29, r3
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -876,7 +876,7 @@ asm void fn_805CE550(void)
     li r3, 0xb0
     li r4, 0x0
     li r5, 0x5
-    bl fn_80614790
+    bl GXBegin
     lis r3, 0xcc01
     lfs f1, 0x0(r29)
     lfs f0, 0x0(r30)

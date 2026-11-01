@@ -27,7 +27,7 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
 extern void proj_getMatrix(void);
-extern void fn_800F52F8(void);
+extern void proj_getGlobalManager(void);
 extern void fn_800F7260(void);
 extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
@@ -37,7 +37,7 @@ extern void viewport_getNextSequenceId(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80109950(void);
-extern void fn_801162A0(void);
+extern void vec3_sqMag(void);
 extern void enemy_stepBehavior(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80128930(void);
@@ -1890,7 +1890,7 @@ lbl_fn_80314BD8_00001848:
     bl vec3_copy
     b lbl_fn_80314BD8_0000207C
 lbl_fn_80314BD8_00001878:
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_8013C434
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
@@ -1985,7 +1985,7 @@ lbl_fn_80314BD8_000019C0:
     addi r4, r1, 0x80
     bl vec3_copy
 lbl_fn_80314BD8_000019D8:
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_8013C434
     lfs f29, 0x18(r3)
     b lbl_fn_80314BD8_0000207C
@@ -2231,7 +2231,7 @@ lbl_fn_80314BD8_00001D4C:
     addi r5, r30, 0x528
     bl vec3_sub
     addi r3, r1, 0x134
-    bl fn_801162A0
+    bl vec3_sqMag
     bl fn_80011220
     lfs f0, lbl_80884D50
     fcmpo cr0, f1, f0

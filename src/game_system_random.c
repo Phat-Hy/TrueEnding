@@ -82,7 +82,7 @@ void fn_8020EE58(void);
 void fn_8020EE60(void);
 void fn_8020EE8C(void);
 void rand_scaleRangeInt(void);
-void fn_8020EF4C(void);
+void rand_stepEntropy(void);
 void random_generateValue(void);
 
 asm void fn_8020D688(void)
@@ -1865,14 +1865,14 @@ asm void rand_scaleRangeInt(void)
     blr
 }
 
-asm void fn_8020EF4C(void)
+asm void rand_stepEntropy(void)
 {
     nofralloc
     cmpwi r3, 0x0
-    bne lbl_fn_8020EF4C_000018D4
+    bne lbl_rand_stepEntropy_000018D4
     li r3, 0x0
     blr
-lbl_fn_8020EF4C_000018D4:
+lbl_rand_stepEntropy_000018D4:
     lwz r4, 0xa8(r3)
     li r3, 0x2
     subi r4, r4, 0x8

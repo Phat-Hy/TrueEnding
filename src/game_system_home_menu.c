@@ -50,7 +50,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
-extern void fn_800F52F8(void);
+extern void proj_getGlobalManager(void);
 extern void str_appendString(void);
 extern void res_MsgHandle_unload(void);
 extern void entity_Instance_destructor(void);
@@ -2145,7 +2145,7 @@ lbl_fn_8035F3D4_00001BCC:
     mr r27, r3
     addi r4, r1, 0x20
     bl fn_80362FA4
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_8035FBF8
     cmpwi r3, 0x0
     beq lbl_fn_8035F3D4_00001C44

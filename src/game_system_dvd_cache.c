@@ -25,7 +25,7 @@ extern void sky_renderStub(void);
 extern void save_validateHeader(void);
 extern void fn_802085E0(void);
 extern void fn_80208694(void);
-extern void fn_8021771C(void);
+extern void task_findNextReady(void);
 extern void fn_8021F09C(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
@@ -148,7 +148,7 @@ asm void fn_80375B78(void)
     lwz r3, 0x48(r3)
     lwz r4, 0x4c(r29)
     lwz r5, 0x50(r29)
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_80375B78_0000017C
@@ -305,7 +305,7 @@ lbl_fn_80375D0C_00000228:
     mr r4, r28
     li r30, 0x0
     mr r5, r22
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_80375D0C_000004F0
@@ -316,7 +316,7 @@ lbl_fn_80375D0C_00000228:
     mr r4, r28
     mr r5, r22
     li r30, 0x0
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r24, r3
     beq lbl_fn_80375D0C_00000458
@@ -547,7 +547,7 @@ lbl_fn_80375D0C_00000590:
     lwz r3, 0x48(r25)
     lwz r4, 0x4c(r25)
     lwz r5, 0x50(r25)
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     beq lbl_fn_80375D0C_000005BC
     lwz r0, 0x44(r3)

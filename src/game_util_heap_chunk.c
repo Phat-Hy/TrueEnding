@@ -44,7 +44,7 @@ extern void fn_80206D18(void);
 extern void mem_findBlockById(void);
 extern void time_wrapMilliseconds(void);
 extern void rand_scaleRangeInt(void);
-extern void fn_8020EF4C(void);
+extern void rand_stepEntropy(void);
 extern void time_ticksToSeconds(void);
 extern void event_findEntryById(void);
 extern void fn_80217D9C(void);
@@ -1164,7 +1164,7 @@ lbl_fn_805866F8_00000E40:
     mr r4, r28
     bl time_wrapMilliseconds
     mr r29, r3
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_805866F8_00000F44
     cmpwi r28, 0x3e8

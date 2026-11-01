@@ -23,7 +23,7 @@ extern void fn_806A420C(void);
 extern void fn_806A4260(void);
 extern void fn_806A4264(void);
 extern void fn_806A426C(void);
-extern void fn_806A4270(void);
+extern void net_truncateU16(void);
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D62F0(void);
@@ -222,7 +222,7 @@ asm void fn_806FD090(void)
     lwz r30, 0x18(r31)
     clrlwi r3, r3, 16
     stb r0, 0x19(r1)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x1a(r1)
     mr r3, r30
     addi r4, r1, 0x6c
@@ -283,7 +283,7 @@ lbl_fn_806FD090_000001D0:
     lwz r0, 0x3c(r31)
     stw r0, 0x2c(r1)
     lhz r3, 0x40(r31)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x30(r1)
     lbz r0, 0x42(r31)
     stb r0, 0x32(r1)
@@ -310,7 +310,7 @@ lbl_fn_806FD090_00000294:
 lbl_fn_806FD090_00000298:
     li r0, 0x2
     stb r0, 0x11(r1)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x12(r1)
     mr r3, r30
     addi r4, r1, 0x20
@@ -405,7 +405,7 @@ lbl_fn_806FD2D0_000003D4:
     lwz r31, 0x18(r31)
     clrlwi r3, r3, 16
     stb r0, 0x9(r1)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0xa(r1)
     mr r3, r31
     mr r4, r29
@@ -551,7 +551,7 @@ lbl_fn_806FD420_00000560:
     lwz r0, 0x3c(r31)
     stw r0, 0x2c(r1)
     lhz r3, 0x40(r31)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x30(r1)
     li r3, 0x0
     lbz r0, 0x42(r31)
@@ -580,7 +580,7 @@ lbl_fn_806FD420_00000664:
 lbl_fn_806FD420_00000668:
     li r0, 0x2
     stb r0, 0x19(r1)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x1a(r1)
     mr r3, r29
     addi r4, r1, 0x20

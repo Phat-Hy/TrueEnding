@@ -20,7 +20,7 @@ extern void enemy_updateCombatBehavior(void);
 extern void boss_updatePhaseState(void);
 extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_801426A4(void);
+extern void quest_evaluateMilestoneData(void);
 extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
@@ -2088,7 +2088,7 @@ lbl_fn_80270B8C_00001C4C:
     stfs f2, 0x10(r1)
     fmuls f2, f0, f30
     stfs f3, 0x538(r29)
-    bl fn_801426A4
+    bl quest_evaluateMilestoneData
     b lbl_fn_80270B8C_00001CAC
 lbl_fn_80270B8C_00001C88:
     cmpwi r0, 0x6

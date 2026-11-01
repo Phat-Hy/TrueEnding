@@ -25,7 +25,7 @@ extern void fn_800DBC1C(void);
 extern void fn_800DC3C8(void);
 extern void fn_8016E484(void);
 extern void time_wrapMilliseconds(void);
-extern void fn_8020EF4C(void);
+extern void rand_stepEntropy(void);
 extern void task_mapIdToQueue(void);
 extern void fn_80228AF4(void);
 extern void fn_80228AF8(void);
@@ -1250,7 +1250,7 @@ lbl_fn_805634D4_00000DAC:
     stw r0, 0x424(r28)
 lbl_fn_805634D4_00000DB4:
     lwz r3, 0x414(r28)
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_805634D4_00000DE0
     cmpwi r29, 0x0

@@ -8,7 +8,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void collision_testLineSegment(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800F52F8(void);
+extern void proj_getGlobalManager(void);
 extern void fn_800F84C8(void);
 extern void fn_800F8524(void);
 extern void phys_scaleGravity(void);
@@ -2092,7 +2092,7 @@ lbl_fn_8038F52C_00001CFC:
     bl fn_803830A0
     cmpwi r3, 0x0
     beq lbl_fn_8038F52C_00001D30
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_80116BAC
     li r4, 0x24
     bl player_evaluateStatusCondition

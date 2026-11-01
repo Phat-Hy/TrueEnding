@@ -33,7 +33,7 @@ extern void fn_801FEC74(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
-extern void fn_8021771C(void);
+extern void task_findNextReady(void);
 extern void fn_803BEAB4(void);
 extern void fn_803BEB54(void);
 extern void strcmp(void);
@@ -136,7 +136,7 @@ lbl_fn_80119F0C_00000088:
     lbz r3, 0x30(r30)
     lhz r4, 0x32(r30)
     lbz r5, 0x31(r30)
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_80119F0C_000001D4
@@ -1352,7 +1352,7 @@ lbl_fn_8011B018_000011BC:
     lbz r3, 0x30(r28)
     lhz r4, 0x32(r28)
     lbz r5, 0x31(r28)
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r25, r3
     beq lbl_fn_8011B018_000013E4

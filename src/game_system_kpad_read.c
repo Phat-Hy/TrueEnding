@@ -17,7 +17,7 @@ extern void fn_800F3490(void);
 extern void hurtbox_processHitDamage(void);
 extern void fn_8011770C(void);
 extern void fn_802085E0(void);
-extern void fn_8021771C(void);
+extern void task_findNextReady(void);
 extern void task_mapIdToQueue(void);
 extern void fn_8037D34C(void);
 extern void fn_8037D3E8(void);
@@ -1139,7 +1139,7 @@ lbl_world_updateMapTransition_00000E6C:
     lwz r4, 0x4c(r31)
     li r19, 0x0
     lwz r5, 0x50(r31)
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r18, r3
     beq lbl_world_updateMapTransition_00001068

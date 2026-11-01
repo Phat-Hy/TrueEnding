@@ -38,7 +38,7 @@ extern void thread_dispatchToQueue(void);
 extern void fn_801FEF40(void);
 extern void mem_findBlockById(void);
 extern void fn_80216544(void);
-extern void fn_8021771C(void);
+extern void task_findNextReady(void);
 extern void fn_80217D9C(void);
 extern void task_getWorkerByIndex(void);
 extern void world_getGlobalFlag(void);
@@ -1798,7 +1798,7 @@ lbl_fn_80572294_00001700:
     lbz r4, 0x1(r5)
     lbz r3, 0x0(r3)
     lbz r5, 0x2(r5)
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     beq lbl_fn_80572294_0000173C
     lwz r0, 0x54(r3)

@@ -16,7 +16,7 @@ extern void fn_801DC8C8(void);
 extern void fn_801DCE88(void);
 extern void fn_801DD26C(void);
 extern void time_wrapMilliseconds(void);
-extern void fn_8020EF4C(void);
+extern void rand_stepEntropy(void);
 extern void random_generateValue(void);
 extern void event_findEntryById(void);
 extern void gmk_registerSlot(void);
@@ -1672,7 +1672,7 @@ lbl_fn_801DC42C_000015DC:
     lwz r4, 0x0(r4)
     li r3, 0x0
     bl time_wrapMilliseconds
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_801DC42C_00001604
     li r23, 0x1
@@ -1683,7 +1683,7 @@ lbl_fn_801DC42C_00001604:
     lwz r4, 0x8(r28)
     li r3, 0x0
     bl time_wrapMilliseconds
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_801DC42C_0000162C
     li r24, 0x1

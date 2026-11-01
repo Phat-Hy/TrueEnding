@@ -71,7 +71,7 @@ void fn_800A5554(void);
 void msg_getMessageById(void);
 void fn_800A5584(void);
 void msg_getMessageString(void);
-void fn_800A55D4(void);
+void msg_lookupFormattedEntry(void);
 void fn_800A55FC(void);
 void fn_800A5648(void);
 void msg_formatWindowLayout(void);
@@ -528,7 +528,7 @@ asm void msg_getMessageString(void)
     b fn_800DEF2C
 }
 
-asm void fn_800A55D4(void)
+asm void msg_lookupFormattedEntry(void)
 {
     nofralloc
     lis r7, lbl_80732898@ha

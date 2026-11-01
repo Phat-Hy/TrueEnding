@@ -25,7 +25,7 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void cam_destroyMsgHandle(void);
-extern void fn_80161570(void);
+extern void party_updateMemberCoords(void);
 extern void save_createWorkerTask(void);
 extern void task_lookupTagIndex(void);
 extern void sound_initGlobalInstances(void);
@@ -1540,7 +1540,7 @@ lbl_fn_804096D4_000013C0:
     li r5, 0x0
     fmr f2, f1
     li r6, 0x0
-    bl fn_80161570
+    bl party_updateMemberCoords
     lfs f0, lbl_808862F4
     stfs f0, 0x2e8(r22)
 lbl_fn_804096D4_000013F0:

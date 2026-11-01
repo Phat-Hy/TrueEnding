@@ -27,7 +27,7 @@ extern void fn_8011F8F4(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void skill_findNodeByTag(void);
-extern void fn_80161570(void);
+extern void party_updateMemberCoords(void);
 extern void fn_80162A08(void);
 extern void fn_80163B88(void);
 extern void fn_8016939C(void);
@@ -1682,7 +1682,7 @@ lbl_fn_803A48A8_00001534:
     li r5, 0x0
     fmr f2, f1
     li r6, 0x0
-    bl fn_80161570
+    bl party_updateMemberCoords
     li r0, 0x0
     stw r0, 0xb4(r22)
     li r27, 0x1

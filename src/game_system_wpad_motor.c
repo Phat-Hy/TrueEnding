@@ -54,7 +54,7 @@ extern void fn_80183774(void);
 extern void fn_801E97DC(void);
 extern void fn_802085E0(void);
 extern void fn_80208634(void);
-extern void fn_8021771C(void);
+extern void task_findNextReady(void);
 extern void fn_80218268(void);
 extern void task_getWorkerByIndex(void);
 extern void fn_80239C14(void);
@@ -367,7 +367,7 @@ lbl_world_Manager_draw_00000170:
     lwz r3, 0x5514(r28)
     lwz r4, 0x5518(r28)
     lwz r5, 0x551c(r28)
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_world_Manager_draw_0000055C
@@ -1074,7 +1074,7 @@ lbl_world_Manager_draw_00000B94:
     li r30, 0x0
     lwz r4, 0x5518(r28)
     lwz r5, 0x551c(r28)
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_world_Manager_draw_00000DC8
@@ -1222,7 +1222,7 @@ lbl_world_Manager_draw_00000DC8:
     lwz r3, 0x5514(r28)
     lwz r4, 0x5518(r28)
     lwz r5, 0x551c(r28)
-    bl fn_8021771C
+    bl task_findNextReady
     mr r27, r3
     lwz r24, 0x934(r25)
     lwz r3, 0x5514(r28)
@@ -1335,7 +1335,7 @@ lbl_world_Manager_draw_00000F04:
     li r29, 0x0
     lwz r4, 0x4c(r28)
     lwz r5, 0x50(r28)
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_world_Manager_draw_00001184
@@ -1701,7 +1701,7 @@ lbl_world_Manager_draw_000014E4:
     li r30, 0x0
     lwz r4, 0x5518(r28)
     lwz r3, 0x5514(r28)
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_world_Manager_draw_000016E4
@@ -1849,7 +1849,7 @@ lbl_world_Manager_draw_000016E4:
     lwz r3, 0x5514(r28)
     lwz r4, 0x5518(r28)
     lwz r5, 0x551c(r28)
-    bl fn_8021771C
+    bl task_findNextReady
     mr r27, r3
     lwz r24, 0x934(r25)
     lwz r3, 0x5514(r28)
@@ -2074,7 +2074,7 @@ lbl_world_Manager_draw_00001A30:
     mr r4, r29
     li r25, 0x0
     mr r5, r26
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_world_Manager_draw_00001CF8
@@ -2085,7 +2085,7 @@ lbl_world_Manager_draw_00001A30:
     mr r4, r29
     mr r5, r26
     li r25, 0x0
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_world_Manager_draw_00001C60

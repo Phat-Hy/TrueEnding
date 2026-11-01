@@ -42,14 +42,14 @@ extern void fn_800CB6E4(void);
 extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void str_skipWhitespace(void);
-extern void fn_800F52F8(void);
+extern void proj_getGlobalManager(void);
 extern void vec3_scale(void);
 extern void fn_800F7F90(void);
 extern void vec3_normalize(void);
 extern void fn_800F80A8(void);
 extern void fn_800F80B8(void);
 extern void fn_800F84C8(void);
-extern void fn_801162A0(void);
+extern void vec3_sqMag(void);
 extern void equip_getGlobalManager(void);
 extern void fn_8013A18C(void);
 extern void npc_getPosition(void);
@@ -968,7 +968,7 @@ lbl_fn_803FA5C8_00000B08:
     lwz r0, 0x54(r31)
     cmpwi r0, 0x3
     bne lbl_fn_803FA5C8_00000BA8
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_802F0998
     lfs f2, 0x4d4(r31)
     addi r3, r1, 0xf0
@@ -1011,7 +1011,7 @@ lbl_fn_803FA5C8_00000BA8:
     addi r3, r1, 0xd8
     addi r4, r31, 0x6c
     bl vec3_assign
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_802F0998
     lfs f0, 0x4e8(r31)
     addi r3, r1, 0xd8
@@ -1156,7 +1156,7 @@ lbl_fn_803FA5C8_00000DC8:
     addi r3, r31, 0x6c
     addi r4, r31, 0x4e4
     bl fn_80012C88
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_802F0998
     lfs f2, lbl_8088605C
     addi r3, r1, 0xc
@@ -1208,7 +1208,7 @@ lbl_fn_803FA5C8_00000E6C:
     lfs f30, 0x18(r3)
     addi r3, r1, 0x9c
     fadds f30, f30, f31
-    bl fn_801162A0
+    bl vec3_sqMag
     fmuls f0, f30, f30
     fcmpo cr0, f1, f0
     bge lbl_fn_803FA5C8_00000ED0
@@ -1246,7 +1246,7 @@ lbl_fn_803FA5C8_00000EF8:
     lfs f30, 0x18(r3)
     addi r3, r1, 0x90
     fadds f30, f30, f31
-    bl fn_801162A0
+    bl vec3_sqMag
     fmuls f0, f30, f30
     fcmpo cr0, f1, f0
     bge lbl_fn_803FA5C8_00000F5C

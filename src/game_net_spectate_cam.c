@@ -23,7 +23,7 @@ extern void fn_800A4E08(void);
 extern void fn_800A4F0C(void);
 extern void msg_getMessageById(void);
 extern void msg_getMessageString(void);
-extern void fn_800A55D4(void);
+extern void msg_lookupFormattedEntry(void);
 extern void skeleton_getGlobalManager(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
@@ -635,19 +635,19 @@ lbl_spectateCamera_update_000007A0:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0xe
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     beq lbl_spectateCamera_update_00000808
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0xc
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     beq lbl_spectateCamera_update_00000808
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0xd
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     beq lbl_spectateCamera_update_00000808
     lwz r3, 0xbac(r28)

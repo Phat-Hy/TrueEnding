@@ -32,11 +32,11 @@ extern void PSMTXTranspose(void);
 extern void PSMTXInverse(void);
 extern void PSVECMag(void);
 extern void GXSetVtxDesc(void);
-extern void fn_806134E0(void);
+extern void __GXInitVtxDesc(void);
 extern void GXSetVtxAttrFmt(void);
 extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
-extern void fn_80614790(void);
+extern void GXBegin(void);
 extern void fn_80615AE0(void);
 extern void fn_80615B60(void);
 extern void fn_80615C40(void);
@@ -837,7 +837,7 @@ lbl_font_renderString_00000730:
     bl GXLoadPosMtxImm
     li r3, 0x0
     bl GXSetCurrentMtx
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -956,7 +956,7 @@ lbl_font_renderString_00000B98:
     li r8, 0x0
     li r9, 0x2
     bl GXInitLightSpot
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -1098,7 +1098,7 @@ lbl_font_renderString_00000D88:
     li r8, 0x0
     li r9, 0x2
     bl GXInitLightSpot
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -1664,7 +1664,7 @@ asm void fn_80235BF8(void)
     bl GXLoadPosMtxImm
     li r3, 0x0
     bl GXSetCurrentMtx
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -1820,7 +1820,7 @@ lbl_fn_80235BF8_00001790:
     li r3, 0x98
     li r4, 0x0
     clrlwi r5, r0, 16
-    bl fn_80614790
+    bl GXBegin
     li r19, 0x0
     b lbl_fn_80235BF8_000018C0
 lbl_fn_80235BF8_00001850:
@@ -2004,7 +2004,7 @@ lbl_fn_80235BF8_000019E8:
     stfs f2, 0x6c(r1)
     stw r0, 0x1c(r1)
     bl fn_806175F0
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc
@@ -2134,7 +2134,7 @@ lbl_fn_80235BF8_00001CC0:
     li r3, 0x98
     li r4, 0x0
     clrlwi r5, r0, 16
-    bl fn_80614790
+    bl GXBegin
     li r0, 0x5
     lfs f28, 0x4c(r1)
     xoris r30, r0, 0x8000

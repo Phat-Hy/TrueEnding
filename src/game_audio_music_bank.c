@@ -32,7 +32,7 @@ extern void vec3_normalize(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_800F8348(void);
 extern void fn_800F8524(void);
-extern void fn_801162A0(void);
+extern void vec3_sqMag(void);
 extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
 extern void actor_testBitFlag(void);
@@ -1328,7 +1328,7 @@ lbl_fn_8030B74C_00001108:
     addi r5, r31, 0x18
     bl vec3_sub
     addi r3, r1, 0x4c
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_80884C10
     fcmpo cr0, f1, f0
     bge lbl_fn_8030B74C_0000118C
@@ -1337,7 +1337,7 @@ lbl_fn_8030B74C_00001108:
     bl vec3_copy
 lbl_fn_8030B74C_0000118C:
     addi r3, r1, 0x34
-    bl fn_801162A0
+    bl vec3_sqMag
     lfs f0, lbl_80884C10
     fcmpo cr0, f1, f0
     bge lbl_fn_8030B74C_000011AC

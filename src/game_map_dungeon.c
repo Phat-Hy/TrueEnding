@@ -21,7 +21,7 @@ extern void fn_80129978(void);
 extern void fn_80129A48(void);
 extern void npc_calcTargetDistance(void);
 extern void party_configureMemberSlot(void);
-extern void fn_80161570(void);
+extern void party_updateMemberCoords(void);
 extern void battle_applyStatusEffect(void);
 extern void fn_80182874(void);
 extern void fn_80183860(void);
@@ -484,7 +484,7 @@ lbl_fn_8017E9D8_000005B4:
     li r5, 0x0
     fmr f2, f1
     li r6, 0x0
-    bl fn_80161570
+    bl party_updateMemberCoords
     lfs f0, lbl_80881BC8
     stfs f0, 0x2e8(r31)
     b lbl_fn_8017E9D8_000006B4

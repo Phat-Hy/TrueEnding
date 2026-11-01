@@ -21,7 +21,7 @@ extern void strncmp(void);
 extern void fn_8068B1F8(void);
 extern void fn_8068B1FC(void);
 extern void fn_806A426C(void);
-extern void fn_806A4270(void);
+extern void net_truncateU16(void);
 extern void fn_806D57A0(void);
 extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
@@ -1019,7 +1019,7 @@ asm void fn_806FFCA0(void)
     mr r3, r5
     mr r29, r6
     mr r30, r7
-    bl fn_806A4270
+    bl net_truncateU16
     mr r31, r3
     mr r3, r28
     bl fn_806D7EE0
@@ -1051,7 +1051,7 @@ asm void fn_806FFD10(void)
     stw r28, 0x10(r1)
     mr r28, r3
     mr r3, r5
-    bl fn_806A4270
+    bl net_truncateU16
     mr r31, r3
     mr r3, r29
     bl fn_806D7EE0
@@ -2063,7 +2063,7 @@ lbl_fn_80700A00_000019A0:
     li r0, 0x2
     stb r0, 0x9(r1)
     li r3, 0x70ee
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0xa(r1)
     addi r3, r1, 0x10
     bl fn_806D7EE0
@@ -2611,7 +2611,7 @@ lbl_fn_80700F50_00002134:
     addi r28, r28, 0x4
 lbl_fn_80700F50_00002178:
     clrlwi r3, r28, 16
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0x8(r1)
     addi r3, r1, 0x30
     addi r4, r1, 0x8

@@ -24,7 +24,7 @@ extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
 extern void time_wrapMilliseconds(void);
 extern void rand_scaleRangeInt(void);
-extern void fn_8020EF4C(void);
+extern void rand_stepEntropy(void);
 extern void time_ticksToSeconds(void);
 extern void event_findEntryById(void);
 extern void fn_80211770(void);
@@ -1738,7 +1738,7 @@ lbl_fn_80597558_00001778:
     mr r21, r3
     beq lbl_fn_80597558_00001BD8
     mr r3, r18
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_80597558_00001BD8
     lwz r4, 0x7c(r18)
@@ -1959,7 +1959,7 @@ lbl_fn_80597558_00001B88:
     stw r3, 0x5bf8(r4)
     beq lbl_fn_80597558_00001BD4
     mr r3, r18
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_80597558_00001BD4
     lwz r4, 0x7c(r18)
@@ -2203,7 +2203,7 @@ lbl_fn_80597558_00001F1C:
     bl time_ticksToSeconds
     mr r24, r3
     mr r19, r18
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_80597558_00001F60
     lwz r4, 0x7c(r24)

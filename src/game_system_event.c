@@ -27,7 +27,7 @@ extern void time_wrapMilliseconds(void);
 extern void fn_8020EE58(void);
 extern void fn_8020EE60(void);
 extern void rand_scaleRangeInt(void);
-extern void fn_8020EF4C(void);
+extern void rand_stepEntropy(void);
 extern void time_ticksToSeconds(void);
 extern void fn_80219F1C(void);
 extern void fn_80219F84(void);
@@ -1882,7 +1882,7 @@ lbl_fn_80211940_000018C4:
     lwz r4, 0x7c(r30)
     add r0, r4, r0
     stw r0, 0x7c(r31)
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_80211940_00001944
     add r27, r27, r27

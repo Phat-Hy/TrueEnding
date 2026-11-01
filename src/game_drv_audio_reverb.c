@@ -48,7 +48,7 @@ extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void fn_800DCA70(void);
-extern void fn_800F52F8(void);
+extern void proj_getGlobalManager(void);
 extern void fn_800F7260(void);
 extern void fn_800F80A8(void);
 extern void fn_800F8524(void);
@@ -747,7 +747,7 @@ lbl_fn_805BAC18_00000864:
     lwz r0, 0x34(r3)
     cmpwi r0, 0x1
     bne lbl_fn_805BAC18_000008E8
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_80116BAC
     li r4, 0x25
     bl magic_dispatchActionCommand
@@ -758,7 +758,7 @@ lbl_fn_805BAC18_00000864:
     bl fn_80122280
     stw r28, 0x4(r3)
 lbl_fn_805BAC18_000008AC:
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_80116BAC
     li r4, 0x26
     bl magic_dispatchActionCommand
@@ -782,7 +782,7 @@ lbl_fn_805BAC18_000008E8:
     lwz r0, 0x5bc(r29)
     cmpwi r0, 0x0
     bne lbl_fn_805BAC18_0000095C
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_80116BAC
     li r4, 0x29
     bl magic_dispatchActionCommand
@@ -806,7 +806,7 @@ lbl_fn_805BAC18_00000924:
     stw r0, 0x5bc(r29)
     b lbl_fn_805BAC18_00000A1C
 lbl_fn_805BAC18_0000095C:
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_80116BAC
     li r4, 0x2a
     bl magic_dispatchActionCommand
@@ -828,7 +828,7 @@ lbl_fn_805BAC18_00000978:
     li r30, 0x1
     b lbl_fn_805BAC18_00000A1C
 lbl_fn_805BAC18_000009AC:
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_80116BAC
     li r4, 0x1
     bl magic_dispatchActionCommand
@@ -838,7 +838,7 @@ lbl_fn_805BAC18_000009AC:
     stw r0, 0x5bc(r29)
     b lbl_fn_805BAC18_00000A1C
 lbl_fn_805BAC18_000009D0:
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_80116BAC
     li r4, 0x0
     bl magic_dispatchActionCommand

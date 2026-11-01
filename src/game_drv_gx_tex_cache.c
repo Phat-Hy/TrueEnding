@@ -69,7 +69,7 @@ extern void fn_80607900(void);
 extern void fn_80607D70(void);
 extern void fn_80609D00(void);
 extern void GXSetVtxDesc(void);
-extern void fn_806134E0(void);
+extern void __GXInitVtxDesc(void);
 extern void GXSetVtxAttrFmt(void);
 extern void GXClearVtxDesc(void);
 extern void fn_80614A80(void);
@@ -1121,7 +1121,7 @@ asm void fn_805C3FE0(void)
     bl GXLoadPosMtxImm
     li r3, 0x0
     bl GXSetCurrentMtx
-    bl fn_806134E0
+    bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1
     bl GXSetVtxDesc

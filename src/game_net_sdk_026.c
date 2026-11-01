@@ -11,7 +11,7 @@ extern void _savegpr_23(void);
 extern void _savegpr_24(void);
 extern void _savegpr_27(void);
 extern void qsort(void);
-extern void fn_806A4270(void);
+extern void net_truncateU16(void);
 extern void net_socketConnect(void);
 extern void fn_806D7AA0(void);
 extern void net_socketClose(void);
@@ -2332,7 +2332,7 @@ lbl_fn_806D76E0_00001FB0:
     li r0, 0x2
     stb r0, 0x5(r30)
     li r3, 0x6cfc
-    bl fn_806A4270
+    bl net_truncateU16
     cmpwi r31, 0x0
     sth r3, 0x6(r30)
     addi r3, r1, 0x8

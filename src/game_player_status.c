@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void fn_800A5584(void);
-extern void fn_800A55D4(void);
+extern void msg_lookupFormattedEntry(void);
 extern void msg_formatWindowLayout(void);
 extern void fn_800A5870(void);
 extern void msg_isWindowActive(void);
@@ -430,7 +430,7 @@ lbl_player_evaluateStatusCondition_00000514:
     lwz r3, lbl_8087EF70
     mr r5, r31
     li r4, 0x0
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -479,7 +479,7 @@ lbl_player_evaluateStatusCondition_000005C0:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0xb
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -531,7 +531,7 @@ lbl_player_evaluateStatusCondition_00000674:
     lwz r3, lbl_8087EF70
     mr r5, r31
     li r4, 0x0
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -582,7 +582,7 @@ lbl_player_evaluateStatusCondition_00000724:
     lwz r3, lbl_8087EF70
     mr r5, r31
     li r4, 0x0
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -630,7 +630,7 @@ lbl_player_evaluateStatusCondition_000007CC:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x9
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r0, r0, 31
@@ -682,7 +682,7 @@ lbl_player_evaluateStatusCondition_00000880:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x6
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r0, r0, 31
@@ -734,7 +734,7 @@ lbl_player_evaluateStatusCondition_00000934:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r0, r0, 31
@@ -799,7 +799,7 @@ lbl_player_evaluateStatusCondition_00000A14:
     lwz r3, lbl_8087EF70
     mr r5, r31
     li r4, 0x0
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -848,7 +848,7 @@ lbl_player_evaluateStatusCondition_00000ABC:
     lwz r3, lbl_8087EF70
     mr r5, r31
     li r4, 0x0
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31

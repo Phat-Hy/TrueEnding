@@ -13,7 +13,7 @@ extern void mem_free(void);
 extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800A55D4(void);
+extern void msg_lookupFormattedEntry(void);
 extern void fn_80105950(void);
 extern void colli_findDynamicSlot(void);
 extern void fn_80105A08(void);
@@ -1053,7 +1053,7 @@ lbl_fn_801A34D4_00000D50:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x0
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cntlzw r0, r3
     srwi r3, r0, 5
     b lbl_fn_801A34D4_00000E00

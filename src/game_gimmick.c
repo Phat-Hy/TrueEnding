@@ -36,7 +36,7 @@ extern void PSMTXMultVec(void);
 extern void fn_805F9EF0(void);
 extern void fn_805FA710(void);
 extern void fn_805FA770(void);
-extern void fn_80614790(void);
+extern void GXBegin(void);
 extern void strcat(void);
 extern void strcmp(void);
 extern void strstr(void);
@@ -1764,7 +1764,7 @@ lbl_gimmick_updateAll_000016D0:
     clrlslwi r5, r17, 18, 2
     li r3, 0x80
     li r4, 0x0
-    bl fn_80614790
+    bl GXBegin
     mr r3, r29
     mtctr r17
     cmpwi r17, 0x0
@@ -1833,7 +1833,7 @@ lbl_gimmick_updateAll_000017E8:
     clrlslwi r5, r17, 18, 2
     li r3, 0x80
     li r4, 0x0
-    bl fn_80614790
+    bl GXBegin
     mr r3, r29
     mtctr r17
     cmpwi r17, 0x0
@@ -2196,7 +2196,7 @@ lbl_gimmick_updateAll_00001D58:
     clrlslwi r5, r17, 18, 2
     li r3, 0x80
     li r4, 0x0
-    bl fn_80614790
+    bl GXBegin
     mr r3, r29
     mtctr r17
     cmpwi r17, 0x0
@@ -2265,7 +2265,7 @@ lbl_gimmick_updateAll_00001E78:
     clrlslwi r5, r17, 18, 2
     li r3, 0x80
     li r4, 0x0
-    bl fn_80614790
+    bl GXBegin
     mr r3, r29
     mtctr r17
     cmpwi r17, 0x0
@@ -2509,7 +2509,7 @@ lbl_gimmick_updateAll_00002208:
     clrlslwi r5, r17, 18, 2
     li r3, 0x80
     li r4, 0x0
-    bl fn_80614790
+    bl GXBegin
     mr r3, r29
     mtctr r17
     cmpwi r17, 0x0
@@ -2578,7 +2578,7 @@ lbl_gimmick_updateAll_00002328:
     clrlslwi r5, r17, 18, 2
     li r3, 0x80
     li r4, 0x0
-    bl fn_80614790
+    bl GXBegin
     mr r3, r29
     mtctr r17
     cmpwi r17, 0x0
@@ -3015,7 +3015,7 @@ lbl_gimmick_updateAll_00002980:
     clrlslwi r5, r17, 18, 2
     li r3, 0x80
     li r4, 0x0
-    bl fn_80614790
+    bl GXBegin
     lis r3, 0xcc01
     mtctr r17
     cmpwi r17, 0x0
@@ -3084,7 +3084,7 @@ lbl_gimmick_updateAll_00002AB8:
     clrlslwi r5, r17, 18, 2
     li r3, 0x80
     li r4, 0x0
-    bl fn_80614790
+    bl GXBegin
     lis r3, 0xcc01
     mtctr r17
     cmpwi r17, 0x0

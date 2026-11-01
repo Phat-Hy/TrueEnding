@@ -21,7 +21,7 @@ extern void proj_getMatrix(void);
 extern void vec3_scale(void);
 extern void fn_800F7F80(void);
 extern void fn_800F7FB4(void);
-extern void fn_801162A0(void);
+extern void vec3_sqMag(void);
 extern void equip_getGlobalManager(void);
 extern void fn_80133EE8(void);
 extern void fn_80133F18(void);
@@ -1328,7 +1328,7 @@ lbl_fn_8015076C_00000FE0:
     b lbl_fn_8015076C_000018D4
 lbl_fn_8015076C_00001030:
     mr r3, r25
-    bl fn_801162A0
+    bl vec3_sqMag
     fmr f30, f1
     mr r3, r23
     bl fn_80160324

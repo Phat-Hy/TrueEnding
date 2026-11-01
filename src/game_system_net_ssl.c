@@ -8,7 +8,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_22(void);
 extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
-extern void fn_800A55D4(void);
+extern void msg_lookupFormattedEntry(void);
 extern void msg_formatWindowLayout(void);
 extern void msg_isWindowActive(void);
 extern void kpad_getClampData(void);
@@ -1491,7 +1491,7 @@ lbl_fn_80390A88_00001488:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x2
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     beq lbl_fn_80390A88_000014A8
     lfs f0, lbl_8088592C
@@ -1500,7 +1500,7 @@ lbl_fn_80390A88_000014A8:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x3
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     beq lbl_fn_80390A88_000014C8
     lfs f0, lbl_8088592C

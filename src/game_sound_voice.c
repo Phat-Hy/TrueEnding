@@ -43,7 +43,7 @@ extern void mem_findBlockById(void);
 extern void fn_8020BCEC(void);
 extern void fn_8020BD14(void);
 extern void time_wrapMilliseconds(void);
-extern void fn_8020EF4C(void);
+extern void rand_stepEntropy(void);
 extern void random_generateValue(void);
 extern void event_findEntryById(void);
 extern void task_mapIdToQueue(void);
@@ -1285,7 +1285,7 @@ lbl_fn_801D80BC_00001084:
     lwz r4, -0x7d70(r3)
     li r3, 0x0
     bl time_wrapMilliseconds
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_801D80BC_000010E0
     addi r3, r1, 0x14
@@ -1465,7 +1465,7 @@ lbl_fn_801D8560_00001334:
     lwz r4, -0x7d70(r3)
     li r3, 0x0
     bl time_wrapMilliseconds
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_801D8560_000013A0
     lwz r4, lbl_8087F1E4
@@ -1554,7 +1554,7 @@ lbl_fn_801D8560_0000143C:
     stw r4, 0x38(r1)
     stw r5, 0x3c(r1)
     stw r0, 0x40(r1)
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_801D8560_000014F0
     mr r3, r26

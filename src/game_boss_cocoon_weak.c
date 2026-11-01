@@ -20,7 +20,7 @@ extern void town_updateInteractionPoints(void);
 extern void mem_alloc(void);
 extern void node_destroy(void);
 extern void fn_800A4460(void);
-extern void fn_800A55D4(void);
+extern void msg_lookupFormattedEntry(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void bloom_processPasses(void);
@@ -1227,7 +1227,7 @@ lbl_atn_Loader_finish_00000F24:
     beq lbl_atn_Loader_finish_00000F78
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     beq lbl_atn_Loader_finish_00000F78
     lwz r3, 0x3ee0(r31)

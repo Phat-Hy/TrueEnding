@@ -7,7 +7,7 @@ extern void _savegpr_21(void);
 extern void item_useConsumable(void);
 extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
-extern void fn_800A55D4(void);
+extern void msg_lookupFormattedEntry(void);
 extern void msg_formatWindowLayout(void);
 extern void msg_isWindowActive(void);
 extern void fn_80116BD4(void);
@@ -1762,7 +1762,7 @@ lbl_fn_8037F9AC_000017F0:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x2
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     beq lbl_fn_8037F9AC_00001814
     lfs f0, lbl_80885A04
@@ -1772,7 +1772,7 @@ lbl_fn_8037F9AC_00001814:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x3
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     cmpwi r3, 0x0
     beq lbl_fn_8037F9AC_00001834
     lfs f0, lbl_80885A04

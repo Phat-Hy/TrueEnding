@@ -43,7 +43,7 @@ extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void PSVECCrossProduct(void);
-extern void fn_80614790(void);
+extern void GXBegin(void);
 
 /* External data declarations */
 extern u8 lbl_80777588[];
@@ -1057,7 +1057,7 @@ lbl_fn_800584D8_00000B24:
     psq_l f1, 0x0(r20), 0, 0
     psq_st f1, 0x0(r21), 0, 0
     stfs f2, 0x70(r1)
-    bl fn_80614790
+    bl GXBegin
     lfs f0, 0x80(r1)
     addi r19, r19, 0x1
     stfs f0, -0x8000(r30)
@@ -1903,7 +1903,7 @@ lbl_fn_80059264_00001894:
     li r3, 0xb0
     li r4, 0x0
     li r5, 0x4
-    bl fn_80614790
+    bl GXBegin
     lfs f2, 0x10(r19)
     rotlwi r0, r21, 8
     lfs f1, 0xc(r19)

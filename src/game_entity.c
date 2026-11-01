@@ -81,7 +81,7 @@ extern void str_initFromCStr(void);
 extern void fn_8003F440(void);
 extern void mem_alloc(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80161570(void);
+extern void party_updateMemberCoords(void);
 extern void fn_80161880(void);
 extern void fn_80176428(void);
 extern void task_lookupTagIndex(void);
@@ -241,7 +241,7 @@ lbl_fn_8001B508_000000D8:
     li r5, 0x0
     fmr f2, f1
     li r6, 0x0
-    bl fn_80161570
+    bl party_updateMemberCoords
 lbl_fn_8001B508_000000F8:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

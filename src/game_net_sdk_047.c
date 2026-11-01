@@ -18,7 +18,7 @@ extern void memcmp(void);
 extern void strncmp(void);
 extern void fn_806A4260(void);
 extern void fn_806A4264(void);
-extern void fn_806A4270(void);
+extern void net_truncateU16(void);
 extern void fn_806D57A0(void);
 extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
@@ -239,7 +239,7 @@ lbl_fn_80701470_00000204:
     b lbl_fn_80701470_00000260
 lbl_fn_80701470_0000020C:
     clrlwi r3, r29, 16
-    bl fn_806A4270
+    bl net_truncateU16
     cmpwi r31, 0x1
     sth r3, 0x2a(r1)
     bne lbl_fn_80701470_00000240

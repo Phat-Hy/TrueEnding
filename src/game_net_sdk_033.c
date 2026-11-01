@@ -15,7 +15,7 @@ extern void strncmp(void);
 extern void strstr(void);
 extern void atoi(void);
 extern void fn_806A420C(void);
-extern void fn_806A4270(void);
+extern void net_truncateU16(void);
 extern void fn_806D57A0(void);
 extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
@@ -2377,7 +2377,7 @@ lbl_fn_806E5F90_00001E6C:
     lwz r4, 0x0(r4)
     lwz r0, 0x0(r4)
     stw r0, 0xc(r1)
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0xa(r1)
     addi r4, r1, 0x8
     li r5, 0x8

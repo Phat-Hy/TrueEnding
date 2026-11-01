@@ -17,7 +17,7 @@ extern void fn_800C61C0(void);
 extern void fn_800C622C(void);
 extern void fn_800C7CA8(void);
 extern void sky_renderStub(void);
-extern void fn_800F52F8(void);
+extern void proj_getGlobalManager(void);
 extern void fn_800F7F60(void);
 extern void fn_800F7F80(void);
 extern void fn_800F7F90(void);
@@ -214,7 +214,7 @@ lbl_npc_calcTargetDistance_00000124:
     beq lbl_npc_calcTargetDistance_000001BC
     lfs f0, lbl_80881964
     stfs f0, 0x10(r1)
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_80116BAC
     li r4, 0x1f
     bl magic_dispatchActionCommand
@@ -224,7 +224,7 @@ lbl_npc_calcTargetDistance_00000124:
     bl fn_801750FC
     b lbl_npc_calcTargetDistance_00000700
 lbl_npc_calcTargetDistance_00000160:
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_80116BAC
     li r4, 0x20
     bl magic_dispatchActionCommand

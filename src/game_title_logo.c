@@ -16,7 +16,7 @@ extern void fn_8011F8F4(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void skill_findNodeByTag(void);
-extern void fn_80161570(void);
+extern void party_updateMemberCoords(void);
 extern void fn_80161B70(void);
 extern void battle_resolveAggroHierarchy(void);
 extern void fn_80170F20(void);
@@ -2467,7 +2467,7 @@ lbl_fn_803A8470_00002024:
     li r5, 0x0
     fmr f2, f1
     li r6, 0x0
-    bl fn_80161570
+    bl party_updateMemberCoords
     b lbl_fn_803A8470_00002284
 lbl_fn_803A8470_00002050:
     lfs f1, lbl_80885B14
@@ -2476,7 +2476,7 @@ lbl_fn_803A8470_00002050:
     li r5, 0x0
     fmr f2, f1
     li r6, 0x0
-    bl fn_80161570
+    bl party_updateMemberCoords
     b lbl_fn_803A8470_00002284
 lbl_fn_803A8470_00002070:
     lwz r0, 0x648(r31)
@@ -2549,7 +2549,7 @@ lbl_fn_803A8470_0000215C:
     li r5, 0x0
     fmr f2, f1
     li r6, 0x0
-    bl fn_80161570
+    bl party_updateMemberCoords
     b lbl_fn_803A8470_00002284
 lbl_fn_803A8470_00002188:
     lfs f1, lbl_80885B14
@@ -2558,7 +2558,7 @@ lbl_fn_803A8470_00002188:
     li r5, 0x0
     fmr f2, f1
     li r6, 0x0
-    bl fn_80161570
+    bl party_updateMemberCoords
     b lbl_fn_803A8470_00002284
 lbl_fn_803A8470_000021A8:
     lfs f3, lbl_80885B10

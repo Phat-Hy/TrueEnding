@@ -28,7 +28,7 @@ extern void fn_80112958(void);
 extern void fn_80112960(void);
 extern void fn_80113CCC(void);
 extern void fn_80114AA0(void);
-extern void fn_801162A0(void);
+extern void vec3_sqMag(void);
 extern void fn_80116BA4(void);
 extern void fn_80116BD4(void);
 extern void player_evaluateStatusCondition(void);
@@ -434,7 +434,7 @@ lbl_fn_80387910_00000454:
     lfs f0, lbl_808858E8
     addi r3, r1, 0x104
     stfs f0, 0x108(r1)
-    bl fn_801162A0
+    bl vec3_sqMag
     bl fn_80011220
     lfs f0, lbl_808859C8
     fcmpo cr0, f1, f0
@@ -592,7 +592,7 @@ lbl_fn_80387910_000006E4:
     lfs f0, lbl_808858E8
     addi r3, r1, 0x104
     stfs f0, 0x114(r1)
-    bl fn_801162A0
+    bl vec3_sqMag
     bl fn_80011220
     lfs f0, lbl_808859C8
     fcmpo cr0, f1, f0

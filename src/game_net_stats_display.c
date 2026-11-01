@@ -29,7 +29,7 @@ extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015EB2C(void);
-extern void fn_80161570(void);
+extern void party_updateMemberCoords(void);
 extern void fn_8016AB0C(void);
 extern void fn_8016DDB0(void);
 extern void debuff_removeStatusEffect(void);
@@ -1486,7 +1486,7 @@ lbl_fn_80546B88_000012D4:
     li r4, 0x2
     li r5, 0x0
     li r6, 0x0
-    bl fn_80161570
+    bl party_updateMemberCoords
     lfs f0, lbl_80887CE4
     mr r3, r18
     stfs f0, 0x2ec(r18)

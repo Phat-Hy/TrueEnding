@@ -23,7 +23,7 @@ extern void dialog_selectChoice(void);
 extern void fn_8014EF48(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015D8C0(void);
-extern void fn_80161570(void);
+extern void party_updateMemberCoords(void);
 extern void debuff_clearStatus(void);
 extern void fn_8016DDB0(void);
 extern void actor_setState(void);
@@ -2955,7 +2955,7 @@ lbl_fn_8026DB8C_00002988:
     fmr f2, f1
     li r5, 0x0
     li r6, 0x0
-    bl fn_80161570
+    bl party_updateMemberCoords
     lis r4, lbl_80744608@ha
     lfs f1, lbl_80883670
     addi r4, r4, lbl_80744608@l

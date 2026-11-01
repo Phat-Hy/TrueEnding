@@ -7,10 +7,10 @@ extern void fn_80013404(void);
 extern void fn_8008B964(void);
 extern void msg_getMessageById(void);
 extern void msg_getMessageString(void);
-extern void fn_800A55D4(void);
+extern void msg_lookupFormattedEntry(void);
 extern void msg_formatWindowLayout(void);
 extern void msg_isWindowActive(void);
-extern void fn_800F52F8(void);
+extern void proj_getGlobalManager(void);
 extern void fn_800F7258(void);
 extern void fn_801156BC(void);
 extern void fn_801156C4(void);
@@ -344,7 +344,7 @@ lbl_fn_8012256C_00000394:
     lwz r3, lbl_8087EF70
     mr r5, r26
     li r4, 0x0
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -393,7 +393,7 @@ lbl_fn_8012256C_00000440:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0xb
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -445,7 +445,7 @@ lbl_fn_8012256C_000004F4:
     lwz r3, lbl_8087EF70
     mr r5, r26
     li r4, 0x0
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -496,7 +496,7 @@ lbl_fn_8012256C_000005A4:
     lwz r3, lbl_8087EF70
     mr r5, r26
     li r4, 0x0
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -544,7 +544,7 @@ lbl_fn_8012256C_0000064C:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x9
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r0, r0, 31
@@ -596,7 +596,7 @@ lbl_fn_8012256C_00000700:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x6
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r0, r0, 31
@@ -648,7 +648,7 @@ lbl_fn_8012256C_000007B4:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r0, r0, 31
@@ -715,7 +715,7 @@ lbl_fn_8012256C_0000089C:
     lwz r3, lbl_8087EF70
     mr r5, r26
     li r4, 0x0
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -766,7 +766,7 @@ lbl_fn_8012256C_0000094C:
     lwz r3, lbl_8087EF70
     mr r5, r26
     li r4, 0x0
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -1173,7 +1173,7 @@ asm void magic_dispatchActionCommand(void)
     mr r30, r4
     stw r29, 0x14(r1)
     mr r29, r3
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl magic_getOffset244
     subi r0, r30, 0x4
     cmplwi r0, 0x2b
@@ -1700,7 +1700,7 @@ lbl_fn_801237F0_00001688:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x9
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r0, r0, 31
@@ -1752,7 +1752,7 @@ lbl_fn_801237F0_0000173C:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x6
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r0, r0, 31
@@ -1804,7 +1804,7 @@ lbl_fn_801237F0_000017F0:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     neg r0, r3
     or r0, r0, r3
     srwi r0, r0, 31

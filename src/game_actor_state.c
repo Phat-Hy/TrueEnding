@@ -10,7 +10,7 @@ extern void fn_80061AE4(void);
 extern void script_executeOpcode(void);
 extern void fn_800A4450(void);
 extern void msg_getMessageById(void);
-extern void fn_800A55D4(void);
+extern void msg_lookupFormattedEntry(void);
 extern void msg_isWindowActive(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_unlink(void);
@@ -404,7 +404,7 @@ lbl_fn_801189B4_00000448:
     beq lbl_fn_801189B4_00000464
     li r4, 0x0
     li r5, 0x9
-    bl fn_800A55D4
+    bl msg_lookupFormattedEntry
     b lbl_fn_801189B4_00000468
 lbl_fn_801189B4_00000464:
     li r3, 0x0

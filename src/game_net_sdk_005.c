@@ -104,7 +104,7 @@ void fn_806A420C(void);
 void fn_806A4260(void);
 void fn_806A4264(void);
 void fn_806A426C(void);
-void fn_806A4270(void);
+void net_truncateU16(void);
 void fn_806A4278(void);
 
 asm void fn_806A236C(void)
@@ -2481,7 +2481,7 @@ asm void fn_806A4264(void)
 void fn_806A426C(void) {
 }
 
-asm void fn_806A4270(void)
+asm void net_truncateU16(void)
 {
     nofralloc
     clrlwi r3, r3, 16

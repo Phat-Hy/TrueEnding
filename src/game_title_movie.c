@@ -21,7 +21,7 @@ extern void skill_findNodeById(void);
 extern void skill_findNodeByTag(void);
 extern void fn_8013310C(void);
 extern void actor_testBitFlag(void);
-extern void fn_80161570(void);
+extern void party_updateMemberCoords(void);
 extern void actor_setState(void);
 extern void battle_resolveAggroHierarchy(void);
 extern void fn_80170F20(void);
@@ -1455,7 +1455,7 @@ lbl_fn_803A9DBC_00001288:
     li r5, 0x0
     fmr f2, f1
     li r6, 0x0
-    bl fn_80161570
+    bl party_updateMemberCoords
 lbl_fn_803A9DBC_000012B8:
     lwz r3, 0xb8(r25)
     addi r0, r3, 0x1

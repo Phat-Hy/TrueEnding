@@ -42,7 +42,7 @@ extern void equip_applyToCharacter(void);
 extern void fn_80155A88(void);
 extern void fn_801561E4(void);
 extern void fn_80158EF0(void);
-extern void fn_80161570(void);
+extern void party_updateMemberCoords(void);
 extern void fn_801644D4(void);
 extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
@@ -1008,7 +1008,7 @@ lbl_fn_80251344_00000BF8:
     li r5, 0x0
     fmr f2, f1
     li r6, 0x0
-    bl fn_80161570
+    bl party_updateMemberCoords
 lbl_fn_80251344_00000C64:
     lwz r3, 0x1540(r29)
     li r22, 0x0
@@ -1608,7 +1608,7 @@ lbl_fn_80251344_00001510:
     li r5, 0x0
     fmr f2, f1
     li r6, 0x0
-    bl fn_80161570
+    bl party_updateMemberCoords
     li r0, 0x0
     sth r0, 0x1470(r29)
     b lbl_fn_80251344_00001684

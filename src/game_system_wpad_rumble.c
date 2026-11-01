@@ -24,7 +24,7 @@ extern void fn_8020FCE8(void);
 extern void fn_80214394(void);
 extern void fn_802143EC(void);
 extern void fn_8021446C(void);
-extern void fn_8021771C(void);
+extern void task_findNextReady(void);
 extern void fn_80218268(void);
 extern void task_getWorkerByIndex(void);
 extern void task_mapIdToQueue(void);
@@ -414,7 +414,7 @@ lbl_world_Manager_update_00000404:
     li r29, 0x0
     lwz r4, 0x4c(r30)
     lwz r5, 0x50(r30)
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_world_Manager_update_00000604
@@ -836,7 +836,7 @@ lbl_world_Manager_update_00000A08:
     li r29, 0x0
     lwz r4, 0x4c(r30)
     lwz r5, 0x50(r30)
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_world_Manager_update_00000C08
@@ -984,7 +984,7 @@ lbl_world_Manager_update_00000C08:
     lwz r3, 0x48(r30)
     lwz r4, 0x4c(r30)
     lwz r5, 0x50(r30)
-    bl fn_8021771C
+    bl task_findNextReady
     mr r31, r3
     lwz r25, 0x934(r25)
     lwz r3, 0x48(r30)

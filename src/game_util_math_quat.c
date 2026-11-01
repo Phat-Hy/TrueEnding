@@ -38,7 +38,7 @@ extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
 extern void time_wrapMilliseconds(void);
 extern void rand_scaleRangeInt(void);
-extern void fn_8020EF4C(void);
+extern void rand_stepEntropy(void);
 extern void time_ticksToSeconds(void);
 extern void event_findEntryById(void);
 extern void fn_8021C6A4(void);
@@ -1125,7 +1125,7 @@ lbl_fn_805811E0_00000DF0:
     li r28, 0x0
     beq lbl_fn_805811E0_00000E3C
     mr r3, r29
-    bl fn_8020EF4C
+    bl rand_stepEntropy
     cmpwi r3, 0x0
     beq lbl_fn_805811E0_00000E34
     lwz r4, 0x7c(r29)

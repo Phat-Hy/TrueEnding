@@ -57,7 +57,7 @@ extern void fn_806A37F4(void);
 extern void fn_806A39B8(void);
 extern void fn_806A3B44(void);
 extern void fn_806A3D50(void);
-extern void fn_806A4270(void);
+extern void net_truncateU16(void);
 extern void fn_806A4C5C(void);
 extern void fn_806A5798(void);
 
@@ -2606,7 +2606,7 @@ asm void fn_8069C04C(void)
     mr r30, r6
     mr r31, r7
     clrlwi r3, r8, 16
-    bl fn_806A4270
+    bl net_truncateU16
     sth r3, 0xa(r1)
     mr r3, r30
     addi r4, r1, 0x8

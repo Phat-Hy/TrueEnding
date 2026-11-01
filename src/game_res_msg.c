@@ -30,7 +30,7 @@ extern void atn_LoadHandle_isLoading(void);
 extern void shockwave_freeEmitter(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
-extern void fn_80614790(void);
+extern void GXBegin(void);
 extern void fn_80615C40(void);
 extern void fn_8068B770(void);
 extern void fn_8068BC30(void);
@@ -222,7 +222,7 @@ lbl_msg_drawText_00000110:
     clrlwi r5, r28, 16
     li r3, 0x98
     li r4, 0x0
-    bl fn_80614790
+    bl GXBegin
     addi r25, r1, 0x4c
     addi r24, r1, 0x28
     addi r23, r1, 0x40

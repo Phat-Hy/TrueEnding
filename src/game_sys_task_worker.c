@@ -19,7 +19,7 @@ extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void fn_8011FFF8(void);
-extern void fn_8021771C(void);
+extern void task_findNextReady(void);
 extern void fn_8021AF98(void);
 extern void fn_8021AFF4(void);
 extern void boss_loadWeakpointResource(void);
@@ -471,7 +471,7 @@ lbl_fn_80218268_0000046C:
     lwz r0, lbl_8087F298
     add r6, r8, r0
     stb r7, 0x1(r6)
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     beq lbl_fn_80218268_000007CC
     lwz r0, 0xb4(r3)

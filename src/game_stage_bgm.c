@@ -28,7 +28,7 @@ extern void atn_Matrix_copy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800F52F8(void);
+extern void proj_getGlobalManager(void);
 extern void vec3_scale(void);
 extern void fn_800F7F80(void);
 extern void viewport_getNextSequenceId(void);
@@ -1275,7 +1275,7 @@ lbl_fn_8019FEC4_00000F7C:
     bl fn_800F7F80
     cmpwi r3, 0x0
     beq lbl_fn_8019FEC4_00000FA8
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_80116BAC
     li r4, 0x7
     bl player_evaluateStatusCondition

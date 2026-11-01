@@ -30,7 +30,7 @@ extern void fn_800EFD04(void);
 extern void fn_800EFDA0(void);
 extern void fn_800EFF04(void);
 extern void proj_getMatrix(void);
-extern void fn_800F52F8(void);
+extern void proj_getGlobalManager(void);
 extern void fn_800F5300(void);
 extern void fn_800F530C(void);
 extern void fn_80102890(void);
@@ -456,7 +456,7 @@ lbl_fn_800F72F4_000004A0:
     bl fn_80134270
     cmpwi r3, 0x0
     beq lbl_fn_800F72F4_000004DC
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_800F8098
     mr r4, r3
     addi r3, r1, 0x138
@@ -472,7 +472,7 @@ lbl_fn_800F72F4_000004DC:
     bl fn_80134250
     cmpwi r3, 0x0
     beq lbl_fn_800F72F4_00000518
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_800F8098
     mr r4, r3
     addi r3, r1, 0x128
@@ -483,7 +483,7 @@ lbl_fn_800F72F4_000004DC:
     bl fn_80042108
     b lbl_fn_800F72F4_0000053C
 lbl_fn_800F72F4_00000518:
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_800F8098
     mr r4, r3
     addi r3, r1, 0x118
@@ -498,7 +498,7 @@ lbl_fn_800F72F4_0000053C:
     subi r0, r3, 0x11
     cmplwi r0, 0x1
     bgt lbl_fn_800F72F4_000005C4
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_800F8098
     mr r4, r3
     addi r3, r1, 0x108
@@ -509,7 +509,7 @@ lbl_fn_800F72F4_0000053C:
     bl fn_80042108
     b lbl_fn_800F72F4_000005C4
 lbl_fn_800F72F4_00000578:
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_800F8098
     mr r4, r3
     addi r3, r1, 0xf8
@@ -520,7 +520,7 @@ lbl_fn_800F72F4_00000578:
     bl fn_80042108
     b lbl_fn_800F72F4_000005C4
 lbl_fn_800F72F4_000005A0:
-    bl fn_800F52F8
+    bl proj_getGlobalManager
     bl fn_800F8098
     mr r4, r3
     addi r3, r1, 0xe8

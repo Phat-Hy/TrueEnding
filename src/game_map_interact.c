@@ -41,7 +41,7 @@ extern void fn_801856B4(void);
 extern void fn_8020B1E0(void);
 extern void fn_8020B208(void);
 extern void fn_8020B27C(void);
-extern void fn_8021771C(void);
+extern void task_findNextReady(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_ctor(void);
 extern void res_Resource_destructor(void);
@@ -480,7 +480,7 @@ lbl_fn_80183D00_00000418:
     mr r3, r26
     mr r4, r27
     mr r5, r28
-    bl fn_8021771C
+    bl task_findNextReady
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_80183D00_00000490
