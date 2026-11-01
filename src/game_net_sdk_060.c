@@ -562,10 +562,7 @@ lbl_fn_8071C4D0_0000058C:
     blr
 }
 
-asm void fn_8071C520(void)
-{
-    nofralloc
-    blr
+void fn_8071C520(void) {
 }
 
 asm void fn_8071C530(void)

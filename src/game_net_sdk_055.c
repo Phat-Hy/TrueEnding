@@ -1347,10 +1347,7 @@ asm void fn_80712C30(void)
     bctr
 }
 
-asm void fn_80712C60(void)
-{
-    nofralloc
-    blr
+void fn_80712C60(void) {
 }
 
 asm void fn_80712C70(void)

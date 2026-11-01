@@ -52,10 +52,7 @@ void fn_805455D0(void);
 void fn_80545B94(void);
 void fn_80545C40(void);
 
-asm void fn_80544294(void)
-{
-    nofralloc
-    blr
+void fn_80544294(void) {
 }
 
 asm void fn_80544298(void)

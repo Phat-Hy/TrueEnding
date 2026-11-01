@@ -1357,10 +1357,7 @@ asm void fn_800D7F18(void)
     blr
 }
 
-asm void fn_800D8100(void)
-{
-    nofralloc
-    blr
+void fn_800D8100(void) {
 }
 
 asm void fn_800D8104(void)

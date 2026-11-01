@@ -311,10 +311,7 @@ asm void fn_804D6018(void)
     blr
 }
 
-asm void fn_804D6024(void)
-{
-    nofralloc
-    blr
+void fn_804D6024(void) {
 }
 
 asm void fn_804D6028(void)

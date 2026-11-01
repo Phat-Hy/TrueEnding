@@ -879,10 +879,7 @@ asm void fn_80722E70(void)
     bctr
 }
 
-asm void fn_80722E80(void)
-{
-    nofralloc
-    blr
+void fn_80722E80(void) {
 }
 
 asm void fn_80722E90(void)

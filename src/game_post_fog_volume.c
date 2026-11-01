@@ -149,10 +149,7 @@ lbl_fn_802D7058_00000094:
     blr
 }
 
-asm void fn_802D70FC(void)
-{
-    nofralloc
-    blr
+void fn_802D70FC(void) {
 }
 
 asm void fn_802D7100(void)

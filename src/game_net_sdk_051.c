@@ -1936,10 +1936,7 @@ lbl_fn_8070AF30_00001854:
     bctr
 }
 
-asm void fn_8070AF64(void)
-{
-    nofralloc
-    blr
+void fn_8070AF64(void) {
 }
 
 asm void fn_8070AF70(void)

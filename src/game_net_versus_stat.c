@@ -95,16 +95,10 @@ void fn_804BE4A4(void);
 void fn_804BE610(void);
 void fn_804BEDB8(void);
 
-asm void fn_804BD9B0(void)
-{
-    nofralloc
-    blr
+void fn_804BD9B0(void) {
 }
 
-asm void fn_804BD9B4(void)
-{
-    nofralloc
-    blr
+void fn_804BD9B4(void) {
 }
 
 asm void fn_804BD9B8(void)
