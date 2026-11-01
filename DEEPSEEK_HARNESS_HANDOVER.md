@@ -16396,3 +16396,29 @@ The four **geometry** frames (the even ones: 2794, 2796, 2798, 2800 — 22 553 d
 |---|---|---|
 | 1 | field 2794..2801, per-frame feed (this change), `TLS_AURORA_SHOTS` at all eight frames, 2 812 frames | 8 feeds (22 345/6 044/22 553/5 835/14 192/14 184/22 553/5 819 draws); 8 readbacks; diagonal 7.51/57.78/7.54/58.38/6.20/65.15/7.59/56.39; layer 2800 = `B4646917…` |
 | 2 | gate, idle host, nothing else running | **PASS attempt 1** (`gate_bj.log`) |
+
+### AP-BJ addendum. The remaining difference is the **composite blur**, measured: on the odd frames the layer's picture has **1.75-1.82** gradient energy against **20.8-22.4** for aurora (11.5-12.8x) while both sides' *geometry* frames sit at **7.80-7.84** and **9.29-9.32** (ratio 1.19) — so the composite half is a full-screen blur in the layer that aurora does not apply, and the 3D shading is not what is left
+
+AP-BJ left two differences named and unquantified: the water/foreground inside the geometry half, and the composite half. This addendum measures both at a common resolution (both images BOX-resized to the 640x448 EFB before differencing, because gradient energy is scale-dependent and the layer's shot is 1280x720):
+
+| guest | kind | layer luma | layer gradient | aurora luma | aurora gradient | ratio |
+|---|---|---|---|---|---|---|
+| 2794 | geometry | 35.77 | 7.804 | 36.82 | 9.287 | **1.19** |
+| 2795 | composite | 40.34 | 1.804 | 87.11 | 20.820 | **11.54** |
+| 2796 | geometry | 35.79 | 7.817 | 36.85 | 9.306 | **1.19** |
+| 2797 | composite | 39.36 | 1.749 | 87.07 | 20.831 | **11.91** |
+| 2798 | geometry (black frame) | 1.96 | 1.083 | 4.19 | 0.098 | 0.09 |
+| 2799 | composite | 40.65 | 1.745 | 99.29 | 22.363 | **12.81** |
+| 2800 | geometry | 35.83 | 7.835 | 37.00 | 9.323 | **1.19** |
+| 2801 | composite | 43.13 | 1.820 | 86.98 | 20.889 | **11.48** |
+
+(`logs_ap/sharpness.py` is the instrument: mean |dx| + |dy| on luma, lower = blurrier.)
+
+**1. The geometry frames agree in level AND in structure.** Ratio 1.19 on every one of them - aurora is 19 % sharper, which is what a native 640x448 EFB against a 16:9 1280x720 image BOX-reduced to the EFB should give - and the luma agrees to 1.2. The 18-37 % of pixels above the difference threshold that AP-BJ reported are therefore *local*, not a level or a sharpness difference: the water/foreground region (the layer's lower half is black, aurora's has rippled water). That region is a batch-level question this section does **not** answer. One run was spent on it (logs_ap/bk_water.log: 83 batches, 301 605 vertices at guest 2800; biggest b32 56 070 verts /  x9111F960, b12 50 835 /  x91EBC460, b31 38 610 /  x91EEEDE0), and it produced an instrument caveat worth recording: TLS_BATCH_RECT's 
+dc= column is not NDC for perspective batches - it prints the decoded clip-space x/y, so most of that table reads as off-screen rectangles thousands of units wide and only the 2D batches can be matched to a screen region. Identifying which batch paints the lower half needs the per-batch bitmap dump (TLS_BATCH_DUMP=<present>) or a rect computed after the w divide; that is the next batch-level step.
+
+**2. The composite frames are a different composition, and the word is measurable now.** The layer's odd frames are **4.3-4.5x blurrier than its own geometry frames** (1.75-1.82 against 7.80-7.84), while aurora's odd frames are **2.2x sharper than its own geometry frames** (20.8-22.4 against 9.29-9.32) and 2.1-2.4x brighter. So the layer applies the guest's full-screen blur composite and aurora does not; aurora's odd frame is a *sharp* picture with the subtitle on it. That is the AP-AP "composite tail" seen from the comparing end: the tail is a chain of EFB downscale copies (320x224 / 160x112 / 80x56) that a full-screen quad then samples, and a blur is exactly what sampling a downscaled copy produces.
+
+**3. What that implies, and the one experiment that splits it.** Two causes remain and they are the same two AP-AZ split for the title: either the downscaled copy's **content** is not a downscale in aurora, or the quad's **sampling** of the copy texture reads the wrong resolution. The instruments already exist on both sides and do not need the live path: the layer prints every copy with its destination average (`TLS_EFB_CHAIN_GUEST=2800`), and the harness can dump one copy's bytes from a same-run capture (`--copy-record N` / `--copy-out`). Comparing one 80x56 copy's bytes between them answers it in one replay, with no runner launch. **That is the next measurement, and it is a copy-content/sampling split on a frame whose 3D already matches.**
+
+**4. Run log.** No new run: this addendum is computed from the AP-BJ launch's eight layer shots and eight aurora readbacks (`logs_ap/align_run2.log`, `tools/aurora_spike/align_matrix.py`, `logs_ap/sharpness.py`). Same-run control unchanged: the layer's guest-2800 shot is `B4646917…`.
