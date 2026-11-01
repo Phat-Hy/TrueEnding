@@ -13,7 +13,7 @@ extern void strcat(void);
 extern void strncmp(void);
 extern void strstr(void);
 extern void atoi(void);
-extern void fn_806D5850(void);
+extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5C90(void);
@@ -25,7 +25,7 @@ extern void fn_806D7B30(void);
 extern void fn_806D7B70(void);
 extern void fn_806D7F20(void);
 extern void fn_806D8E30(void);
-extern void fn_806D8F30(void);
+extern void net_getTimestampMs(void);
 extern void fn_806F2070(void);
 extern void fn_806F2600(void);
 extern void fn_806F27E0(void);
@@ -717,7 +717,7 @@ asm void fn_806F72F0(void)
     addi r11, r1, 0x30
     bl _savegpr_26
     mr r30, r3
-    bl fn_806D8F30
+    bl net_getTimestampMs
     li r26, 0x0
     stw r26, 0x8(r1)
     mr r27, r3
@@ -750,16 +750,16 @@ lbl_fn_806F72F0_00000950:
     lwz r0, 0x1cc(r30)
     cmpwi r0, 0x0
     bne lbl_fn_806F72F0_00000968
-    bl fn_806D8F30
+    bl net_getTimestampMs
     stw r3, 0x1cc(r30)
     b lbl_fn_806F72F0_00000B18
 lbl_fn_806F72F0_00000968:
-    bl fn_806D8F30
+    bl net_getTimestampMs
     lwz r0, 0x1cc(r30)
     subf r0, r0, r3
     cmplwi r0, 0x7530
     blt lbl_fn_806F72F0_00000B18
-    bl fn_806D8F30
+    bl net_getTimestampMs
     li r4, 0x0
     li r3, 0x1
     li r0, 0x13
@@ -858,7 +858,7 @@ lbl_fn_806F72F0_00000ABC:
     bl net_socketClose
     b lbl_fn_806F72F0_00000B18
 lbl_fn_806F72F0_00000AE8:
-    bl fn_806D8F30
+    bl net_getTimestampMs
     subf r26, r27, r3
 lbl_fn_806F72F0_00000AF0:
     lwz r0, 0x124(r30)
@@ -2486,7 +2486,7 @@ lbl_fn_806F87A0_00001FEC:
     cmpwi r29, 0x0
     bge lbl_fn_806F87A0_00001E08
     lwz r3, 0x228(r30)
-    bl fn_806D5850
+    bl net_pollActiveSockets
     li r0, 0x0
     stw r0, 0x228(r30)
 lbl_fn_806F87A0_00002004:

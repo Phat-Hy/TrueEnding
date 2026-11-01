@@ -3,25 +3,25 @@
 
 /* External function declarations */
 extern void vec3_copy(void);
-extern void fn_8000DD0C(void);
+extern void scene_getRootNode(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
 extern void vec3_sub(void);
 extern void collision_queryGeometry(void);
 extern void mission_updateStub(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void fn_80063484(void);
 extern void atn_Matrix_copy(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_800EB7A0(void);
+extern void sound_playSpatialEffect(void);
 extern void fn_800EC1F4(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80103F60(void);
 extern void fn_801079C0(void);
 extern void fn_80107A68(void);
 extern void fn_80108378(void);
-extern void fn_801125F8(void);
+extern void phys_scaleGravity(void);
 extern void fn_8011BF3C(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80129978(void);
@@ -29,7 +29,7 @@ extern void fn_80129A48(void);
 extern void fn_80133130(void);
 extern void actor_testBitFlag(void);
 extern void fn_80133EE8(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void npc_initScriptContext(void);
 extern void quest_updateFlow(void);
 extern void fn_801495E8(void);
@@ -44,7 +44,7 @@ extern void fn_8016D454(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void battle_applyStatusEffect(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void battle_updateActorStatus(void);
 extern void fn_802657FC(void);
 extern void fn_80266154(void);
@@ -74,7 +74,7 @@ extern void fn_80329ED8(void);
 extern void fn_8032A650(void);
 extern void fn_8032A894(void);
 extern void fn_8032C3CC(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void world_setLocalFlag(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
@@ -157,7 +157,7 @@ void fn_803235AC(void);
 void fn_803235D8(void);
 void fn_80323690(void);
 void fn_80323C18(void);
-void fn_80323C2C(void);
+u32 fn_80323C2C(void);
 void fn_80323C34(void);
 void fn_80323C6C(void);
 void fn_80323CDC(void);
@@ -428,7 +428,7 @@ lbl_fn_80323690_00000274:
     stw r0, 0x14f8(r30)
     bl fn_8032C3CC
     stw r29, 0x14d0(r30)
-    bl fn_8013A194
+    bl npc_getGlobalManager
     bl system_getNextSequenceId
     stw r3, 0x15f8(r30)
     b lbl_fn_80323690_000003C0
@@ -440,7 +440,7 @@ lbl_fn_80323690_000003A0:
     addi r3, r30, 0x14e8
     lfs f2, 0x8(r1)
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
 lbl_fn_80323690_000003C0:
     lwz r0, 0x15d4(r30)
     cmpwi r0, 0x0
@@ -567,7 +567,7 @@ lbl_fn_80323690_0000057C:
     b lbl_fn_80323690_000005B8
 lbl_fn_80323690_0000058C:
     lwz r3, 0x14bc(r30)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     lis r5, lbl_80749D10@ha
     lis r6, lbl_807C7030@ha
     addi r5, r5, lbl_80749D10@l
@@ -587,13 +587,13 @@ lbl_fn_80323690_000005B8:
     bl fn_800EC1F4
 lbl_fn_80323690_000005D4:
     bl fn_80323C2C
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     lfs f31, lbl_80884F1C
     mr r29, r3
     lfs f30, lbl_80884F10
     b lbl_fn_80323690_0000064C
 lbl_fn_80323690_000005EC:
-    bl fn_8013A194
+    bl npc_getGlobalManager
     mr r4, r29
     bl fn_80103F60
     cmpwi r3, 0x0
@@ -631,7 +631,7 @@ lbl_fn_80323690_0000064C:
     lfs f2, 0x50(r1)
     fadds f2, f2, f3
     fsubs f30, f2, f0
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f31, f1
     fmr f1, f30
     bl fn_80011220
@@ -699,11 +699,9 @@ asm void fn_80323C18(void)
     blr
 }
 
-asm void fn_80323C2C(void)
+u32 fn_80323C2C(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F428
-    blr
+    return lbl_8087F428;
 }
 
 asm void fn_80323C34(void)
@@ -1078,7 +1076,7 @@ lbl_fn_80323E50_00000BE4:
     bl battle_applyStatusEffect
 lbl_fn_80323E50_00000CA4:
     mr r3, r30
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
 lbl_fn_80323E50_00000CAC:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -1961,7 +1959,7 @@ lbl_fn_80324A38_00001930:
     stw r0, 0x168(r1)
     stw r0, 0x16c(r1)
     stw r0, 0x170(r1)
-    bl fn_80176548
+    bl battle_calcExpPosition
     lwz r4, 0x48(r30)
     neg r0, r28
     or r3, r0, r28

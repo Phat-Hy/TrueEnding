@@ -6,7 +6,7 @@ extern void _restgpr_20(void);
 extern void _savegpr_20(void);
 extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_add(void);
 extern void atn_Model_findBoneIndex(void);
@@ -17,7 +17,7 @@ extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_800EFD04(void);
 extern void fn_800EFDA0(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_800F8524(void);
@@ -28,8 +28,8 @@ extern void fn_801010A0(void);
 extern void fn_8010B250(void);
 extern void fn_8010EE78(void);
 extern void npc_updateDialogueTarget(void);
-extern void fn_8013A194(void);
-extern void fn_8014052C(void);
+extern void npc_getGlobalManager(void);
+extern void quest_initMarkerCoords(void);
 extern void actor_setState(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -188,7 +188,7 @@ lbl_fn_80348FF4_000000B4:
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x60
-    bl fn_80011410
+    bl mtx_multVec
     mr r3, r31
     addi r4, r1, 0x60
     bl fn_803489F4
@@ -222,7 +222,7 @@ lbl_fn_80348FF4_000000B4:
     li r4, -0x1
     bl ref_releaseHandle
     stw r30, 0x1a24(r31)
-    bl fn_8013A194
+    bl npc_getGlobalManager
     bl system_getNextSequenceId
     lwz r4, 0x14b4(r31)
     stw r3, 0x1a20(r31)
@@ -251,18 +251,18 @@ lbl_fn_80348FF4_000001AC:
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x54
-    bl fn_80011410
+    bl mtx_multVec
     mr r3, r31
     addi r4, r1, 0x54
     bl fn_803489F4
-    bl fn_8013A194
+    bl npc_getGlobalManager
     bl fn_801010A0
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_80348FF4_000002A0
     addi r3, r1, 0x6c
     bl fn_80349424
-    bl fn_8013A194
+    bl npc_getGlobalManager
     lwz r4, 0x152c(r31)
     li r5, 0x0
     lwz r4, 0x3c(r4)
@@ -343,11 +343,11 @@ lbl_fn_80348FF4_00000340:
     fmr f31, f1
     mr r4, r31
     addi r3, r1, 0x1c
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     fmr f1, f31
     addi r3, r1, 0x28
     addi r4, r1, 0x1c
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x48
     addi r4, r31, 0x528
     addi r5, r1, 0x28

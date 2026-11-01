@@ -14,7 +14,7 @@ extern void fn_806A4264(void);
 extern void fn_806A426C(void);
 extern void fn_806A4270(void);
 extern void fn_806D57A0(void);
-extern void fn_806D5850(void);
+extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
@@ -30,7 +30,7 @@ extern void fn_806D8060(void);
 extern void fn_806D8650(void);
 extern void fn_806D86F0(void);
 extern void fn_806D8850(void);
-extern void fn_806D8F30(void);
+extern void net_getTimestampMs(void);
 extern void fn_806D8FC0(void);
 extern void fn_806D8FE0(void);
 extern void fn_806F7560(void);
@@ -1180,7 +1180,7 @@ asm void fn_806FBDB0(void)
     beq lbl_fn_806FBDB0_00000EF4
     bl net_bufferGetCount
     lwz r3, lbl_808627E0@l(r31)
-    bl fn_806D5850
+    bl net_pollActiveSockets
     li r0, 0x0
     stw r0, lbl_808627E0@l(r31)
 lbl_fn_806FBDB0_00000EF4:
@@ -1320,7 +1320,7 @@ lbl_fn_806FBE00_00001090:
     bl fn_806D7DA0
     li r0, 0x7
     stw r0, 0x1c(r30)
-    bl fn_806D8F30
+    bl net_getTimestampMs
     lwz r12, 0x10(r30)
     addi r3, r3, 0x1f4
     li r4, 0x0
@@ -1373,7 +1373,7 @@ asm void fn_806FC030(void)
     cmpwi r0, 0x0
     stb r3, 0x24(r1)
     bne lbl_fn_806FC030_000011C0
-    bl fn_806D8F30
+    bl net_getTimestampMs
     bl fn_806D8FC0
     lis r4, 0x8000
     li r3, 0x1
@@ -1407,14 +1407,14 @@ lbl_fn_806FC030_000011C0:
     lwz r0, 0x1c(r31)
     cmpwi r0, 0x1
     bne lbl_fn_806FC030_00001240
-    bl fn_806D8F30
+    bl net_getTimestampMs
     addi r3, r3, 0x2710
     li r0, 0xc
     stw r3, 0x38(r31)
     stw r0, 0x34(r31)
     b lbl_fn_806FC030_0000125C
 lbl_fn_806FC030_00001240:
-    bl fn_806D8F30
+    bl net_getTimestampMs
     addi r4, r3, 0x1f4
     li r3, 0xa
     li r0, 0x0
@@ -1641,7 +1641,7 @@ lbl_fn_806FC170_00001520:
 lbl_fn_806FC170_00001580:
     li r0, 0x2
     stw r0, 0x1c(r28)
-    bl fn_806D8F30
+    bl net_getTimestampMs
     addi r3, r3, 0x1f4
     li r0, 0xa
     stw r3, 0x38(r28)
@@ -1672,7 +1672,7 @@ asm void fn_806FC4B0(void)
     stw r28, 0xe0(r1)
     mr r28, r3
     beq lbl_fn_806FC4B0_000016B8
-    bl fn_806D8F30
+    bl net_getTimestampMs
     lwz r0, 0xf8(r31)
     subf r0, r0, r3
     cmplwi r0, 0x2710
@@ -2101,7 +2101,7 @@ lbl_fn_806FC9C0_00001BC0:
     cmpwi r0, 0x4
     bne lbl_fn_806FC9C0_00001D40
 lbl_fn_806FC9C0_00001BD4:
-    bl fn_806D8F30
+    bl net_getTimestampMs
     lwz r0, 0x38(r30)
     cmplw r3, r0
     ble lbl_fn_806FC9C0_00001D40
@@ -2194,7 +2194,7 @@ lbl_fn_806FC9C0_00001CFC:
     li r6, 0x0
     li r8, 0x8
     bl fn_806D7DA0
-    bl fn_806D8F30
+    bl net_getTimestampMs
     addi r3, r3, 0x2bc
     li r0, 0x7
     stw r3, 0x38(r30)
@@ -2203,7 +2203,7 @@ lbl_fn_806FC9C0_00001D40:
     lwz r0, 0x1c(r30)
     cmpwi r0, 0x3
     bne lbl_fn_806FC9C0_00001D70
-    bl fn_806D8F30
+    bl net_getTimestampMs
     lwz r0, 0x38(r30)
     cmplw r3, r0
     ble lbl_fn_806FC9C0_00001D70
@@ -2216,7 +2216,7 @@ lbl_fn_806FC9C0_00001D70:
     lwz r0, 0x1c(r30)
     cmpwi r0, 0x4
     bne lbl_fn_806FC9C0_00001EA4
-    bl fn_806D8F30
+    bl net_getTimestampMs
     lwz r0, 0x38(r30)
     cmplw r3, r0
     ble lbl_fn_806FC9C0_00001EA4
@@ -2286,19 +2286,19 @@ lbl_fn_806FC9C0_00001E54:
     li r6, 0x0
     li r8, 0x8
     bl fn_806D7DA0
-    bl fn_806D8F30
+    bl net_getTimestampMs
     addi r3, r3, 0x2bc
     li r0, 0x7
     stw r3, 0x38(r30)
     stw r0, 0x34(r30)
-    bl fn_806D8F30
+    bl net_getTimestampMs
     addi r0, r3, 0x2bc
     stw r0, 0x38(r30)
 lbl_fn_806FC9C0_00001EA4:
     lwz r0, 0x1c(r30)
     cmpwi r0, 0x7
     bne lbl_fn_806FC9C0_00001FC0
-    bl fn_806D8F30
+    bl net_getTimestampMs
     lwz r0, 0x38(r30)
     cmplw r3, r0
     ble lbl_fn_806FC9C0_00001FC0
@@ -2365,7 +2365,7 @@ lbl_fn_806FC9C0_00001F5C:
     lwz r3, 0x30(r30)
     addi r0, r3, 0x1
     stw r0, 0x30(r30)
-    bl fn_806D8F30
+    bl net_getTimestampMs
     addi r0, r3, 0x1f4
     stw r0, 0x38(r30)
 lbl_fn_806FC9C0_00001FC0:
@@ -2378,7 +2378,7 @@ lbl_fn_806FC9C0_00001FD4:
     lbz r0, 0x43(r30)
     cmpwi r0, 0x0
     bne lbl_fn_806FC9C0_00001FE4
-    bl fn_806D8F30
+    bl net_getTimestampMs
 lbl_fn_806FC9C0_00001FE4:
     lwz r0, 0x0(r30)
     cmpwi r0, -0x1

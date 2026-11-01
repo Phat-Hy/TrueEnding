@@ -10,9 +10,9 @@ extern void mtx_getTranslation(void);
 extern void vec3_set(void);
 extern void scene_transformPoint(void);
 extern void fn_8000DCF4(void);
-extern void fn_8000DD0C(void);
+extern void scene_getRootNode(void);
 extern void fn_800109E0(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void fn_80012C88(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void fn_8001336C(void);
@@ -24,9 +24,9 @@ extern void fn_800E0AA8(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
-extern void fn_801125F8(void);
+extern void phys_scaleGravity(void);
 extern void fn_8013A13C(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void fn_8013C480(void);
 extern void actor_setState(void);
 extern void battle_canTargetActor(void);
@@ -1932,7 +1932,7 @@ lbl_fn_802A3D80_00001A34:
     bl fn_802A4184
     lwz r28, 0x0(r3)
     mr r3, r27
-    bl fn_8000DD0C
+    bl scene_getRootNode
     addi r4, r30, 0x277
     bl atn_Model_getBoneMatrix
     mr r4, r3
@@ -1948,9 +1948,9 @@ lbl_fn_802A3D80_00001A34:
     bl fn_800109E0
     addi r3, r1, 0x20
     addi r4, r1, 0x108
-    bl fn_80011410
+    bl mtx_multVec
     mr r3, r27
-    bl fn_8000DD0C
+    bl scene_getRootNode
     addi r4, r30, 0x277
     bl atn_Model_getBoneMatrix
     mr r4, r3
@@ -1958,7 +1958,7 @@ lbl_fn_802A3D80_00001A34:
     bl fn_8001336C
     addi r3, r1, 0x20
     addi r4, r1, 0xd8
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x2c
     addi r4, r1, 0x20
     bl fn_80012C88
@@ -1972,25 +1972,25 @@ lbl_fn_802A3D80_00001A34:
     fmr f2, f1
     bl vec3_set
     lfs f1, lbl_80883E18
-    bl fn_801125F8
+    bl phys_scaleGravity
     addi r3, r1, 0xa8
     bl fn_8013A13C
     addi r3, r1, 0x14
     addi r4, r1, 0xa8
-    bl fn_80011410
+    bl mtx_multVec
     fmr f1, f28
-    bl fn_801125F8
+    bl phys_scaleGravity
     addi r3, r1, 0x78
     bl fn_802A3D64
     addi r3, r1, 0x14
     addi r4, r1, 0x78
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x48
     addi r4, r27, 0x534
     bl fn_800109E0
     addi r3, r1, 0x14
     addi r4, r1, 0x48
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x138
     bl fn_802A4120
     stw r28, 0x138(r1)
@@ -2007,9 +2007,9 @@ lbl_fn_802A3D80_00001A34:
     fsubs f0, f0, f31
     stfs f0, 0x14c(r1)
     lfs f1, 0x1694(r27)
-    bl fn_801125F8
+    bl phys_scaleGravity
     stfs f1, 0x148(r1)
-    bl fn_8013A194
+    bl npc_getGlobalManager
     lwz r5, 0x14e8(r27)
     mr r4, r27
     lfs f1, lbl_80883D28

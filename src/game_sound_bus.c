@@ -15,7 +15,7 @@ extern void fn_801CFAA8(void);
 extern void fn_801DC8C8(void);
 extern void fn_801DCE88(void);
 extern void fn_801DD26C(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void fn_8020EF4C(void);
 extern void random_generateValue(void);
 extern void event_findEntryById(void);
@@ -1671,7 +1671,7 @@ lbl_fn_801DC42C_000015DC:
     bne lbl_fn_801DC42C_00001604
     lwz r4, 0x0(r4)
     li r3, 0x0
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     bl fn_8020EF4C
     cmpwi r3, 0x0
     beq lbl_fn_801DC42C_00001604
@@ -1682,7 +1682,7 @@ lbl_fn_801DC42C_00001604:
     bne lbl_fn_801DC42C_0000162C
     lwz r4, 0x8(r28)
     li r3, 0x0
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     bl fn_8020EF4C
     cmpwi r3, 0x0
     beq lbl_fn_801DC42C_0000162C
@@ -1806,7 +1806,7 @@ lbl_fn_801DC42C_000017D4:
     beq lbl_fn_801DC42C_00001800
     lwz r4, 0x8(r28)
     mr r3, r31
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     lwz r29, lbl_8087F4F0
     bl random_generateValue
     mr r4, r3

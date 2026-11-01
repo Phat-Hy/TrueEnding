@@ -12,7 +12,7 @@ extern void actor_dispatchMessage(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800A56A8(void);
+extern void msg_formatWindowLayout(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
@@ -34,7 +34,7 @@ extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void world_getGlobalFlag(void);
 extern void kpad_getClampData(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void atn_LoadHandle_constructor(void);
 extern void fn_8050F940(void);
 extern void fn_8050FB3C(void);
@@ -170,7 +170,7 @@ lbl_fn_80520B08_000000E4:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_80520B08_0000013C
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     bne lbl_fn_80520B08_00000138
     lwz r3, lbl_8087F430
@@ -682,13 +682,13 @@ asm void fn_805212C0(void)
     mr r30, r3
     stw r29, 0xc4(r1)
     lwz r3, lbl_8087EF70
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     stfs f1, 0xb4(r1)
     li r4, 0x0
     lwz r3, lbl_8087EF70
     li r5, 0x1
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     lfs f0, 0xb4(r1)
     lfs f3, lbl_80887904
     fabs f4, f0

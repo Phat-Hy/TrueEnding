@@ -14,7 +14,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_8012476C(void);
 extern void fn_8013310C(void);
 extern void actor_testBitFlag(void);
-extern void fn_801446F0(void);
+extern void quest_resetObjectiveBounds(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
 extern void debuff_clearStatus(void);
@@ -96,7 +96,7 @@ void fn_80191E38(void);
 void fn_80191EA4(void);
 void fn_80191FF8(void);
 void fn_80192130(void);
-void fn_80192190(void);
+u32 fn_80192190(void);
 void fn_80192198(void);
 void fn_80192378(void);
 void fn_801923B8(void);
@@ -459,7 +459,7 @@ lbl_fn_80191D30_0000046C:
     lfs f0, lbl_80881F7C
     stfs f0, 0x238(r31)
     lwz r3, 0x4(r30)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -714,11 +714,9 @@ asm void fn_80192130(void)
     blr
 }
 
-asm void fn_80192190(void)
+u32 fn_80192190(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_80192198(void)

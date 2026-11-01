@@ -16,7 +16,7 @@ extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
 extern void fn_80105AB0(void);
-extern void fn_801446F0(void);
+extern void quest_resetObjectiveBounds(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
 extern void debuff_clearStatus(void);
@@ -709,7 +709,7 @@ lbl_fn_801BB1C8_0000083C:
     stfs f2, 0x53c(r3)
     psq_st f1, 0x0(r31), 0, 0
     lwz r3, 0x4(r28)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     psq_l f31, 0x108(r1), 0, 0
     mr r3, r28
     lfd f31, 0x100(r1)
@@ -1423,7 +1423,7 @@ lbl_fn_801BBC48_000012AC:
     stfs f2, 0x53c(r3)
     psq_st f1, 0x0(r31), 0, 0
     lwz r3, 0x4(r28)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     psq_l f31, 0x108(r1), 0, 0
     mr r3, r28
     lfd f31, 0x100(r1)

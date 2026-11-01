@@ -11,7 +11,7 @@ extern void fn_8000D7DC(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void ui_destroyWidget(void);
-extern void fn_8004B290(void);
+extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void atn_ColliBase_destructor(void);
 extern void talk_formatQuotedString(void);
@@ -32,14 +32,14 @@ extern void map_debugLog(void);
 extern void fn_80091CFC(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092EC8(void);
-extern void fn_80092F1C(void);
+extern void target_pushPointToHistory(void);
 extern void fn_80095D44(void);
 extern void cursor_Object_constructor(void);
 extern void fn_80097510(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerTrack(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void fn_80099E9C(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_destructor(void);
@@ -56,12 +56,12 @@ extern void fn_801298EC(void);
 extern void fn_8012B3A8(void);
 extern void fn_8012B3E8(void);
 extern void fn_8012B988(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void fn_801352F8(void);
 extern void fn_80137E68(void);
 extern void fn_80137FC0(void);
 extern void fn_80138528(void);
-extern void fn_8014C228(void);
+extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
 extern void fn_8014FD30(void);
 extern void fn_8014FF9C(void);
@@ -777,7 +777,7 @@ lbl_boss_updatePhaseState_0000083C:
     li r4, 0x0
     li r5, 0x0
     addi r3, r3, 0x8
-    bl fn_8004B290
+    bl sound_initChannelParams
 lbl_boss_updatePhaseState_00000878:
     lwz r27, 0x2b8(r30)
     cmpwi r27, 0x0
@@ -804,7 +804,7 @@ lbl_boss_updatePhaseState_000008B4:
     mr r3, r30
     bl fn_80137FC0
     mr r3, r30
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     lbz r0, lbl_8087F088
     lis r4, lbl_8077A72C@ha
     lwzu r9, lbl_8077A72C@l(r4)
@@ -1127,7 +1127,7 @@ lbl_boss_updatePhaseState_00000CE4:
 lbl_boss_updatePhaseState_00000D8C:
     addi r3, r30, 0xb0
     li r4, 0x1
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     li r0, 0x0
     stw r0, 0x12c(r1)
     addi r3, r30, 0xb0
@@ -1304,7 +1304,7 @@ lbl_boss_updatePhaseState_00001000:
     addi r3, r30, 0x7d4
     bl fn_8012B988
     addi r3, r30, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lwz r0, 0x954(r30)
     mr r3, r30
     stw r0, 0x9f8(r30)
@@ -1548,7 +1548,7 @@ lbl_fn_801371AC_0000130C:
     addi r3, r17, 0xb0
     addi r4, r1, 0x270
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_801371AC_00001AE8
 lbl_fn_801371AC_00001368:
     addi r3, r1, 0x870
@@ -1557,7 +1557,7 @@ lbl_fn_801371AC_00001368:
     addi r3, r17, 0xb0
     addi r4, r1, 0x270
     addi r5, r1, 0x770
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_801371AC_00001AE8
 lbl_fn_801371AC_00001388:
     mr r3, r16
@@ -1597,7 +1597,7 @@ lbl_fn_801371AC_000013CC:
     addi r3, r17, 0xb0
     addi r4, r1, 0x170
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_801371AC_00001AE8
 lbl_fn_801371AC_0000141C:
     addi r3, r1, 0x870
@@ -1606,7 +1606,7 @@ lbl_fn_801371AC_0000141C:
     addi r3, r17, 0xb0
     addi r4, r1, 0x170
     addi r5, r1, 0x770
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_801371AC_00001AE8
 lbl_fn_801371AC_0000143C:
     mr r3, r16
@@ -1646,7 +1646,7 @@ lbl_fn_801371AC_00001480:
     addi r3, r17, 0xb0
     addi r4, r1, 0x70
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_801371AC_00001AE8
 lbl_fn_801371AC_000014D0:
     addi r3, r1, 0x870
@@ -1655,7 +1655,7 @@ lbl_fn_801371AC_000014D0:
     addi r3, r17, 0xb0
     addi r4, r1, 0x70
     addi r5, r1, 0x770
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_801371AC_00001AE8
 lbl_fn_801371AC_000014F0:
     mr r3, r16

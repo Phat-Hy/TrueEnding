@@ -19,7 +19,7 @@ extern void fn_800BB994(void);
 extern void fn_800BBBB0(void);
 extern void fn_800BBD90(void);
 extern void fn_800BBFE8(void);
-extern void fn_800C16B4(void);
+extern void skeleton_getGlobalManager(void);
 extern void fn_800C2108(void);
 extern void fn_800C2448(void);
 extern void fn_800C2634(void);
@@ -27,7 +27,7 @@ extern void fn_800C289C(void);
 extern void fn_800C2B24(void);
 extern void fn_800C2C20(void);
 extern void bloom_processPasses(void);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -66,15 +66,13 @@ extern u32 lbl_808870A0;
 extern u32 lbl_808870A4;
 
 /* Function declarations */
-void fn_804923AC(void);
+void *fn_804923AC(void *obj);
 void fn_804923B4(void);
 void fn_8049248C(void);
 
-asm void fn_804923AC(void)
+void *fn_804923AC(void *obj)
 {
-    nofralloc
-    lwz r3, 0x2fc(r3)
-    blr
+    return *(void **)((char *)obj + 0x2fc);
 }
 
 asm void fn_804923B4(void)
@@ -411,7 +409,7 @@ lbl_fn_8049248C_00000470:
     cmpwi r3, 0x0
     bne lbl_fn_8049248C_00000514
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     lwz r0, 0x70(r3)
     cmpwi r0, 0x0
     beq lbl_fn_8049248C_000004E8
@@ -851,7 +849,7 @@ lbl_fn_8049248C_00000A9C:
     lwz r0, 0x40(r4)
     mr r4, r3
     add r3, r0, r31
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     addi r17, r17, 0x1
     addi r31, r31, 0x30
 lbl_fn_8049248C_00000AB4:

@@ -28,8 +28,8 @@ extern void fn_801E07A4(void);
 extern void assert_generateId(void);
 extern void assert_formatLocation(void);
 extern void fn_80206D18(void);
-extern void fn_8020ED84(void);
-extern void fn_8020EF04(void);
+extern void time_wrapMilliseconds(void);
+extern void rand_scaleRangeInt(void);
 extern void fn_8020EF4C(void);
 extern void random_generateValue(void);
 extern void fn_8020EFEC(void);
@@ -40,7 +40,7 @@ extern void fn_802114E0(void);
 extern void fn_80218BB4(void);
 extern void fn_80218BC4(void);
 extern void fn_80219544(void);
-extern void fn_804444E8(void);
+extern void gmk_findSlotByIndex(void);
 extern void fn_8044D034(void);
 extern void wcscmp(void);
 
@@ -83,11 +83,11 @@ asm void fn_801DC8C8(void)
     add r4, r3, r0
     lwz r4, -0x7d70(r4)
     mr r3, r29
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     mr r31, r3
     mr r3, r29
     mr r4, r30
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     cmpwi r31, 0x0
     slwi r0, r28, 2
     add r4, r29, r0
@@ -841,7 +841,7 @@ lbl_fn_801DD26C_00000A40:
     lwzx r4, r28, r23
     mr r18, r3
     mr r3, r25
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     mr r16, r3
     addi r3, r1, 0x68
     bl fn_801D8C90
@@ -884,7 +884,7 @@ lbl_fn_801DD26C_00000AF0:
     mr r31, r3
     beq lbl_fn_801DD26C_00000C5C
     lwz r3, 0x4(r3)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_801DD26C_00000C5C
     lwz r3, 0x4(r31)
@@ -954,7 +954,7 @@ lbl_fn_801DD26C_00000BF4:
     blt lbl_fn_801DD26C_00000BBC
     bl fn_801D80B4
     lwz r4, 0x4(r31)
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     mr r18, r3
     li r16, 0x0
     b lbl_fn_801DD26C_00000C54
@@ -990,7 +990,7 @@ lbl_fn_801DD26C_00000C60:
     blt lbl_fn_801DD26C_00000A24
     lwz r4, 0x0(r29)
     li r3, 0x0
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     bl fn_8020EF4C
     cmpwi r3, 0x0
     beq lbl_fn_801DD26C_00000D54
@@ -1032,7 +1032,7 @@ lbl_fn_801DD26C_00000CF0:
     mr r4, r3
     li r3, 0x0
     lwz r4, 0x8(r4)
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     bl fn_8020EF4C
     cmpwi r3, 0x0
     bne lbl_fn_801DD26C_00000D40

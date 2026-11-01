@@ -12,7 +12,7 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void fn_800638B0(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -27,10 +27,10 @@ extern void clip_calculateFrustum(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
 extern void skill_findNodeById(void);
-extern void fn_801255C8(void);
+extern void enemy_stepBehavior(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80128930(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void boss_updatePhaseState(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_801426A4(void);
@@ -39,8 +39,8 @@ extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
 extern void equip_applyToCharacter(void);
 extern void actor_setState(void);
-extern void fn_80176548(void);
-extern void fn_80176ACC(void);
+extern void battle_calcExpPosition(void);
+extern void battle_activateExpReward(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
@@ -50,7 +50,7 @@ extern void res_registerResource(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_805A3C58(void);
+extern void rand_Mersenne_constructor(void);
 extern void fn_805A3D6C(void);
 extern void fn_805A40BC(void);
 extern void fn_805A4258(void);
@@ -185,7 +185,7 @@ asm void fn_80305BB8(void)
     lfs f1, 0x16e0(r31)
     li r5, -0x1
     lfs f2, lbl_80884A70
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_80305BB8_000000A8:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
@@ -205,7 +205,7 @@ asm void fn_80305C74(void)
     stw r30, 0x218(r1)
     stw r29, 0x214(r1)
     mr r29, r5
-    bl fn_805A3C58
+    bl rand_Mersenne_constructor
     lfs f1, lbl_80884B20
     lis r3, lbl_80787DF0@ha
     li r30, 0x0
@@ -942,10 +942,9 @@ lbl_fn_8030646C_00000B18:
     blr
 }
 
-asm void fn_803066F0(void)
+void fn_803066F0(void)
 {
-    nofralloc
-    b dialog_renderWindow
+    dialog_renderWindow();
 }
 
 asm void fn_803066F4(void)
@@ -1303,7 +1302,7 @@ asm void fn_80306B40(void)
     lfs f0, 0x14e4(r31)
     fmuls f0, f3, f0
     stfs f0, 0xc8c(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     lwz r0, 0x14cc(r31)
     oris r0, r0, 0x4000
     stw r0, 0x14cc(r31)
@@ -2976,7 +2975,7 @@ lbl_fn_803073C4_0000289C:
     mr r4, r24
     addi r3, r1, 0x2d0
     addi r5, r24, 0x528
-    bl fn_80176548
+    bl battle_calcExpPosition
     li r20, 0x0
     stw r20, 0x6ac(r1)
     lfs f5, lbl_80884B88
@@ -3453,13 +3452,13 @@ lbl_fn_803073C4_00002F4C:
     stfs f2, 0x28c(r1)
     bl PSMTXMultVec
     mr r3, r25
-    bl fn_80176ACC
+    bl battle_activateExpReward
     mr r3, r25
     li r4, 0x0
     bl atn_Task_setActive
     stw r20, 0x58c(r25)
     addi r3, r25, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     mr r3, r25
     li r4, 0x0
     li r5, 0x1

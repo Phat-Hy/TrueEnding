@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void fn_8000E18C(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8004203C(void);
+extern void menu_initWindowBuffer(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -22,12 +22,12 @@ extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800E0AA8(void);
 extern void fn_800E0AB0(void);
-extern void fn_800EC204(void);
+extern void cam_findTargetIndex(void);
 extern void cam_destroyMsgHandle(void);
 extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void fn_801A03E0(void);
 extern void fn_8020A81C(void);
 extern void res_MsgHandle_ctor(void);
@@ -45,7 +45,7 @@ extern void fn_802DDBB0(void);
 extern void fn_802E2468(void);
 extern void entity_Instance_constructor(void);
 extern void entity_Instance_destructor(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
@@ -124,7 +124,7 @@ lbl_fn_802D7058_0000004C:
     bdnz lbl_fn_802D7058_00000020
 lbl_fn_802D7058_00000054:
     lwz r3, lbl_8087F428
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     b lbl_fn_802D7058_00000088
 lbl_fn_802D7058_00000060:
     lwz r4, 0x7e0(r3)
@@ -1199,7 +1199,7 @@ asm void fn_802D7E80(void)
     cmpwi r3, 0x0
     beq lbl_fn_802D7E80_00001420
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     cmpwi r3, 0x0
     beq lbl_fn_802D7E80_00001420
     addi r3, r31, 0x1684
@@ -1210,7 +1210,7 @@ asm void fn_802D7E80(void)
     mr r4, r3
     mr r5, r29
     addi r3, r1, 0x28
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     lis r3, lbl_80747654@ha
     li r29, 0x0
     addi r30, r3, lbl_80747654@l
@@ -1228,9 +1228,9 @@ lbl_fn_802D7E80_00000FF8:
     bl str_parseInt
     mr r28, r3
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r28
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     stw r3, 0x18(r1)
     beq lbl_fn_802D7E80_00001030
@@ -1262,9 +1262,9 @@ lbl_fn_802D7E80_00001074:
     bl str_parseInt
     mr r28, r3
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r28
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     stw r3, 0x14(r1)
     beq lbl_fn_802D7E80_000010AC
@@ -1406,9 +1406,9 @@ lbl_fn_802D7E80_00001264:
     bl str_parseInt
     mr r28, r3
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r28
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     beq lbl_fn_802D7E80_00001410
     stw r3, 0x15d4(r31)

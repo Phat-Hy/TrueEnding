@@ -11,8 +11,8 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void talk_parseDialogue(void);
-extern void fn_8005B8F8(void);
-extern void fn_8005B9AC(void);
+extern void talk_parseDialogueTokens(void);
+extern void talk_copyUtf16String(void);
 extern void fn_8006A250(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
@@ -21,12 +21,12 @@ extern void route_createSegment(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
 extern void fn_8008C828(void);
-extern void fn_800C16B4(void);
+extern void skeleton_getGlobalManager(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void atn_LH_Texture_update(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
@@ -130,7 +130,7 @@ asm void fn_8052FA48(void)
     stw r30, 0x8(r1)
     mr r30, r3
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     mr r31, r3
     addi r4, r30, 0x258
     bl fn_804741C0
@@ -1718,7 +1718,7 @@ lbl_fn_80531090_00001724:
     bl route_interpolatePath
     addi r3, r29, 0x7c
     addi r4, r31, 0x42
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     lwz r31, 0x1c(r1)
     mr r3, r29
     lwz r30, 0x18(r1)
@@ -1929,7 +1929,7 @@ lbl_fn_80531398_00001A10:
     stw r3, 0x8(r1)
     mr r3, r25
     addi r4, r4, lbl_8077A0A8@l
-    bl fn_8005B9AC
+    bl talk_copyUtf16String
     lis r28, lbl_807938C0@ha
     li r23, 0x0
     addi r27, r28, lbl_807938C0@l
@@ -1975,7 +1975,7 @@ lbl_fn_80531398_00001AC8:
     addi r23, r23, 0x1
 lbl_fn_80531398_00001AD4:
     addi r3, r1, 0x8
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_80531398_00001A50
     addi r3, r1, 0x18
@@ -2162,7 +2162,7 @@ lbl_fn_80531398_00001D78:
     addi r27, r27, 0x1
 lbl_fn_80531398_00001D80:
     addi r3, r1, 0x8
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_80531398_00001BB4
 lbl_fn_80531398_00001D90:

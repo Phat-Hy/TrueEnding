@@ -9,10 +9,10 @@ extern void dtor_80013D60(void);
 extern void scene_traverseNode(void);
 extern void fn_8000EC88(void);
 extern void str_initFromCStr(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void ui_destroyWidget(void);
 extern void fn_80041A28(void);
-extern void fn_8004203C(void);
+extern void menu_initWindowBuffer(void);
 extern void str_getData(void);
 extern void fn_80044BD4(void);
 extern void fn_80044C30(void);
@@ -27,34 +27,34 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
 extern void fn_800EC1F4(void);
-extern void fn_800EC204(void);
+extern void cam_findTargetIndex(void);
 extern void fn_800EC24C(void);
 extern void fn_800EC254(void);
-extern void fn_800EC2C4(void);
-extern void fn_800EC440(void);
-extern void fn_800EC534(void);
-extern void fn_800EC5BC(void);
-extern void fn_800EC654(void);
-extern void fn_800ED42C(void);
+extern void cam_registerTarget(void);
+extern void cam_initTrajectoryParams(void);
+extern void cam_bindPathTarget(void);
+extern void cam_bindRotationTarget(void);
+extern void cam_evalControllerSpline(void);
+extern void cam_setLookAtTarget(void);
 extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
-extern void fn_800EDFE8(void);
-extern void fn_800EE360(void);
+extern void cam_evalLookAtMatrix(void);
+extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80105BD8(void);
 extern void fn_8011BF94(void);
 extern void fn_8011CD84(void);
 extern void fn_8011D21C(void);
 extern void fn_8012539C(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void fn_8013310C(void);
 extern void fn_80133B30(void);
 extern void fn_80133BD8(void);
 extern void fn_80134134(void);
 extern void fn_80137B78(void);
 extern void fn_801388B8(void);
-extern void fn_80139560(void);
-extern void fn_801446F0(void);
+extern void npc_calcTargetDistance(void);
+extern void quest_resetObjectiveBounds(void);
 extern void dialog_selectChoice(void);
 extern void fn_8014EEC4(void);
 extern void inventory_unequipItem(void);
@@ -63,7 +63,7 @@ extern void inventory_calcTotalStats(void);
 extern void fn_801561E4(void);
 extern void fn_801562A0(void);
 extern void fn_8015783C(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void fn_8015EB2C(void);
 extern void fn_80164DCC(void);
 extern void fn_80165C5C(void);
@@ -81,7 +81,7 @@ extern void world_getGlobalFlag(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void world_initMapTransitionParams(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void fn_803754F0(void);
 extern void fn_80375D0C(void);
 extern void fn_803E2110(void);
@@ -135,7 +135,7 @@ void fn_800EB270(void);
 void fn_800EB488(void);
 void fn_800EB49C(void);
 void fn_800EB4AC(void);
-void fn_800EB7A0(void);
+void sound_playSpatialEffect(void);
 void fn_800EBA5C(void);
 void fn_800EBD00(void);
 void fn_800EBE84(void);
@@ -156,7 +156,7 @@ asm void fn_800EA9D4(void)
     cmpwi r3, 0x0
     bne lbl_fn_800EA9D4_00000040
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
     li r0, 0x0
     stw r0, 0x1450(r31)
     b lbl_fn_800EA9D4_000002F8
@@ -278,7 +278,7 @@ lbl_fn_800EA9D4_0000019C:
     stw r11, 0x1c(r1)
     stw r0, 0x24(r1)
     stw r11, 0x20(r1)
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     b lbl_fn_800EA9D4_000002F8
 lbl_fn_800EA9D4_000001F8:
     lbz r0, lbl_8087EE74
@@ -352,7 +352,7 @@ lbl_fn_800EA9D4_000002E4:
     b lbl_fn_800EA9D4_000002F8
 lbl_fn_800EA9D4_000002F0:
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
 lbl_fn_800EA9D4_000002F8:
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
@@ -377,7 +377,7 @@ asm void fn_800EACEC(void)
     cmpwi r3, 0x0
     bne lbl_fn_800EACEC_00000350
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
     li r0, 0x0
     stw r0, 0x1450(r31)
     b lbl_fn_800EACEC_000004E0
@@ -453,7 +453,7 @@ lbl_fn_800EACEC_00000408:
     stw r11, 0x1c(r1)
     stw r0, 0x24(r1)
     stw r11, 0x20(r1)
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r0, 0x48(r31)
     cmpwi r0, 0x3
     bne lbl_fn_800EACEC_000004E0
@@ -466,7 +466,7 @@ lbl_fn_800EACEC_00000408:
     bne lbl_fn_800EACEC_000004E0
     lwz r3, lbl_8087F430
     li r4, 0x1b7
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
     b lbl_fn_800EACEC_000004E0
 lbl_fn_800EACEC_00000498:
     lwz r0, 0x9f8(r31)
@@ -482,7 +482,7 @@ lbl_fn_800EACEC_000004B4:
     b lbl_fn_800EACEC_000004E0
 lbl_fn_800EACEC_000004C0:
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
     b lbl_fn_800EACEC_000004E0
 lbl_fn_800EACEC_000004CC:
     lwz r0, 0x12a4(r31)
@@ -515,7 +515,7 @@ asm void fn_800EAECC(void)
     bne lbl_fn_800EAECC_0000059C
     cmpwi r4, 0x1e
     bne lbl_fn_800EAECC_00000534
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     b lbl_fn_800EAECC_0000059C
 lbl_fn_800EAECC_00000534:
     cmpwi r4, 0xf
@@ -562,7 +562,7 @@ lbl_fn_800EAECC_000005AC:
     beq lbl_fn_800EAECC_000005D8
 lbl_fn_800EAECC_000005D0:
     mr r3, r31
-    bl fn_800EE360
+    bl camera_updateTargetMode
 lbl_fn_800EAECC_000005D8:
     lwz r0, 0x12a4(r31)
     mr r3, r31
@@ -636,7 +636,7 @@ lbl_fn_800EAFD4_0000069C:
     stfs f3, 0x10(r1)
     stfs f0, 0x8(r1)
     stfs f1, 0xc(r1)
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
 lbl_fn_800EAFD4_000006D8:
     lwz r12, 0x0(r30)
     mr r3, r30
@@ -1118,7 +1118,7 @@ lbl_fn_800EB4AC_00000D98:
     bl fn_80165C5C
 lbl_fn_800EB4AC_00000DAC:
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
     addi r11, r1, 0xe0
     bl _restgpr_27
     lwz r0, 0xe4(r1)
@@ -1127,7 +1127,7 @@ lbl_fn_800EB4AC_00000DAC:
     blr
 }
 
-asm void fn_800EB7A0(void)
+asm void sound_playSpatialEffect(void)
 {
     nofralloc
     stwu r1, -0xf0(r1)
@@ -1140,45 +1140,45 @@ asm void fn_800EB7A0(void)
     lwz r0, lbl_8087F430
     mr r29, r3
     cmpwi r0, 0x0
-    beq lbl_fn_800EB7A0_00000E08
+    beq lbl_sound_playSpatialEffect_00000E08
     mr r3, r0
     bl fn_803754F0
     cmpwi r3, 0x0
-    bne lbl_fn_800EB7A0_00001068
-lbl_fn_800EB7A0_00000E08:
+    bne lbl_sound_playSpatialEffect_00001068
+lbl_sound_playSpatialEffect_00000E08:
     lwz r3, lbl_8087F0A8
     lwz r0, 0x280(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_800EB7A0_00001068
+    beq lbl_sound_playSpatialEffect_00001068
     lwz r0, lbl_8087F610
     cmpwi r0, 0x0
-    bne lbl_fn_800EB7A0_00001068
+    bne lbl_sound_playSpatialEffect_00001068
     lwz r0, 0x12a4(r29)
     extrwi. r0, r0, 1, 15
-    bne lbl_fn_800EB7A0_00001068
+    bne lbl_sound_playSpatialEffect_00001068
     lwz r0, 0x48(r29)
     cmpwi r0, 0x2
-    bne lbl_fn_800EB7A0_00001068
+    bne lbl_sound_playSpatialEffect_00001068
     lwz r3, 0x7e0(r29)
     rlwinm r0, r3, 0, 23, 23
     cmplwi r0, 0x100
-    beq lbl_fn_800EB7A0_00001068
+    beq lbl_sound_playSpatialEffect_00001068
     rlwinm r3, r3, 0, 15, 15
     subis r0, r3, 0x1
     cmplwi r0, 0x0
-    beq lbl_fn_800EB7A0_00001068
+    beq lbl_sound_playSpatialEffect_00001068
     lwz r3, 0x13b0(r29)
     cmpwi r3, 0x0
-    beq lbl_fn_800EB7A0_00000E88
+    beq lbl_sound_playSpatialEffect_00000E88
     lwz r0, 0x48(r3)
     cmpwi r0, 0x2
-    bne lbl_fn_800EB7A0_00000E88
+    bne lbl_sound_playSpatialEffect_00000E88
     lwz r0, 0x7e0(r3)
     rlwinm r3, r0, 0, 15, 15
     subis r0, r3, 0x1
     cmplwi r0, 0x0
-    bne lbl_fn_800EB7A0_00001068
-lbl_fn_800EB7A0_00000E88:
+    bne lbl_sound_playSpatialEffect_00001068
+lbl_sound_playSpatialEffect_00000E88:
     addi r3, r29, 0x7d4
     li r4, 0x0
     bl fn_80133BD8
@@ -1199,18 +1199,18 @@ lbl_fn_800EB7A0_00000E88:
     bl fn_804491F4
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_800EB7A0_00000EE4
+    beq lbl_sound_playSpatialEffect_00000EE4
     bl fn_80375D0C
     mr r27, r3
-lbl_fn_800EB7A0_00000EE4:
+lbl_sound_playSpatialEffect_00000EE4:
     cmpw r31, r27
-    ble lbl_fn_800EB7A0_00000F00
+    ble lbl_sound_playSpatialEffect_00000F00
     lwz r3, lbl_8087F0A8
     lwz r0, 0xd4(r3)
     cmpwi r0, 0x3
-    bne lbl_fn_800EB7A0_00000F00
+    bne lbl_sound_playSpatialEffect_00000F00
     mr r27, r31
-lbl_fn_800EB7A0_00000F00:
+lbl_sound_playSpatialEffect_00000F00:
     lwz r5, 0x874(r28)
     mr r6, r27
     addi r3, r1, 0x24
@@ -1241,38 +1241,38 @@ lbl_fn_800EB7A0_00000F00:
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
     stfs f3, 0x30(r1)
-    beq lbl_fn_800EB7A0_00000F9C
+    beq lbl_sound_playSpatialEffect_00000F9C
     addi r3, r29, 0xd74
     bl fn_8011D21C
     cmpwi r3, 0x0
-    bne lbl_fn_800EB7A0_00000FC0
+    bne lbl_sound_playSpatialEffect_00000FC0
     lwz r0, 0xd94(r29)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_800EB7A0_00000FC0
-lbl_fn_800EB7A0_00000F9C:
+    bne lbl_sound_playSpatialEffect_00000FC0
+lbl_sound_playSpatialEffect_00000F9C:
     lwz r4, lbl_8087F0A8
     li r27, 0x2
     lwz r3, lbl_8087F430
     lfs f0, 0x30c(r4)
     cmpwi r3, 0x0
     fmuls f31, f31, f0
-    beq lbl_fn_800EB7A0_00000FC0
+    beq lbl_sound_playSpatialEffect_00000FC0
     li r4, 0xeb
-    bl fn_803750E4
-lbl_fn_800EB7A0_00000FC0:
+    bl kpad_validateButtonIndex
+lbl_sound_playSpatialEffect_00000FC0:
     mr r3, r29
     bl fn_8017CB2C
     cmpwi r3, 0x0
-    beq lbl_fn_800EB7A0_00000FE0
+    beq lbl_sound_playSpatialEffect_00000FE0
     lwz r3, lbl_8087F0A8
     li r27, 0x2
     lfs f0, 0x310(r3)
     fmuls f31, f31, f0
-lbl_fn_800EB7A0_00000FE0:
+lbl_sound_playSpatialEffect_00000FE0:
     lwz r0, lbl_8087F8A8
     cmpwi r0, 0x0
-    beq lbl_fn_800EB7A0_0000104C
+    beq lbl_sound_playSpatialEffect_0000104C
     lis r5, lbl_80779CA0@ha
     lwz r6, 0x24(r1)
     addi r3, r1, 0x40
@@ -1297,7 +1297,7 @@ lbl_fn_800EB7A0_00000FE0:
     stw r0, 0x18(r1)
     lwz r3, lbl_8087F8A8
     bl fn_8054D798
-lbl_fn_800EB7A0_0000104C:
+lbl_sound_playSpatialEffect_0000104C:
     fmr f1, f31
     lwz r3, lbl_8087F4F0
     lwz r4, 0x13b0(r29)
@@ -1305,7 +1305,7 @@ lbl_fn_800EB7A0_0000104C:
     mr r6, r30
     li r7, 0x0
     bl fn_80449A18
-lbl_fn_800EB7A0_00001068:
+lbl_sound_playSpatialEffect_00001068:
     addi r11, r1, 0xe0
     psq_l f31, 0xe8(r1), 0, 0
     lfd f31, 0xe0(r1)
@@ -1327,7 +1327,7 @@ asm void fn_800EBA5C(void)
     stw r30, 0x28(r1)
     bl battle_awardExp
     mr r3, r31
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     lwz r0, 0x12a4(r31)
     srwi. r0, r0, 31
     beq lbl_fn_800EBA5C_000010C0
@@ -1370,7 +1370,7 @@ lbl_fn_800EBA5C_0000110C:
     stfs f0, 0x568(r31)
     bl fn_80133B30
     addi r3, r31, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lwz r0, 0x954(r31)
     mr r3, r31
     lfs f0, lbl_808812DC
@@ -1686,17 +1686,17 @@ asm void fn_800EBF1C(void)
     li r5, 0x0
     addi r4, r29, 0x83
     li r6, 0x0
-    bl fn_800EC440
+    bl cam_initTrajectoryParams
     addi r3, r1, 0xd4
     addi r4, r1, 0x2c
     addi r5, r1, 0x74
-    bl fn_800EC2C4
+    bl cam_registerTarget
     addi r3, r1, 0x74
     li r4, -0x1
-    bl fn_800EC534
+    bl cam_bindPathTarget
     addi r3, r1, 0x98
     addi r4, r1, 0xd4
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     li r30, 0x2
     b lbl_fn_800EBF1C_000017B8
 lbl_fn_800EBF1C_000015C0:
@@ -1723,7 +1723,7 @@ lbl_fn_800EBF1C_000015C0:
     mr r5, r31
     addi r3, r1, 0xd68
     addi r4, r4, 0x5
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     stb r30, 0xd74(r27)
     addi r3, r1, 0xd68
     bl talk_parseQuotedString
@@ -1780,13 +1780,13 @@ lbl_fn_800EBF1C_000016A0:
     mr r5, r31
     addi r3, r1, 0x734
     addi r4, r4, 0xd
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     addi r3, r1, 0x734
     bl talk_parseQuotedString
     bl atoi
     mr r4, r3
     mr r3, r28
-    bl fn_800EC204
+    bl cam_findTargetIndex
     stw r3, 0x1464(r27)
     addi r3, r1, 0x14
     li r4, -0x1
@@ -1816,7 +1816,7 @@ lbl_fn_800EBF1C_0000172C:
     mr r5, r31
     addi r3, r1, 0x100
     addi r4, r4, 0xe
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     addi r3, r1, 0x100
     bl talk_parseQuotedString
     bl atoi
@@ -1832,22 +1832,22 @@ lbl_fn_800EBF1C_000017B0:
 lbl_fn_800EBF1C_000017B8:
     addi r3, r1, 0x38
     addi r4, r1, 0xd4
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     addi r3, r1, 0x98
     addi r4, r1, 0x38
     bl fn_800EC254
     mr r31, r3
     addi r3, r1, 0x38
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     cmpwi r31, 0x0
     bne lbl_fn_800EBF1C_000015C0
     addi r3, r1, 0x98
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     addi r3, r1, 0xd4
     li r4, -0x1
-    bl fn_800EC5BC
+    bl cam_bindRotationTarget
     addi r3, r1, 0x2c
     li r4, -0x1
     bl dtor_80013D60

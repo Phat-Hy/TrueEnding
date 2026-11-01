@@ -18,7 +18,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8004B290(void);
+extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void fn_80071088(void);
@@ -77,7 +77,7 @@ extern void fn_80617030(void);
 extern void fn_80617130(void);
 extern void fn_80617200(void);
 extern void GXInitTexObjDefault(void);
-extern void fn_80617340(void);
+extern void GXSetTevDirect(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
@@ -784,7 +784,7 @@ lbl_gx_drawScreenQuad_000007AC:
     bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0x3
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x7
     li r4, 0x0
     li r5, 0x0
@@ -1764,7 +1764,7 @@ lbl_fn_80073194_0000170C:
     addi r3, r1, 0x310
     li r4, 0x0
     li r5, 0x0
-    bl fn_8004B290
+    bl sound_initChannelParams
     addi r3, r1, 0x90
     li r0, 0x1
     stw r0, 0x314(r1)

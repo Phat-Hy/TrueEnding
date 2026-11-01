@@ -11,7 +11,7 @@ extern void fn_8000D760(void);
 extern void scene_transformPoint(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_80056DB8(void);
+extern void path_Object_constructor(void);
 extern void atn_ColliBase_destructor(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
@@ -22,7 +22,7 @@ extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
-extern void fn_80092954(void);
+extern void compass_findMarkerByName(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void morph_reset(void);
 extern void ref_releaseHandle(void);
@@ -73,7 +73,7 @@ extern void fn_802A3D6C(void);
 extern void fn_802A7970(void);
 extern void entity_Instance_constructor(void);
 extern void entity_Instance_destructor(void);
-extern void fn_8037D4C0(void);
+extern void dvd_showDiskErrorDialog(void);
 extern void craft_forgeUpgradeWeapon(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -559,7 +559,7 @@ lbl_fn_802A4478_00000518:
     li r5, 0xf
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_802A4478_00000554:
     lwz r5, 0x0(r29)
     lwz r4, 0x4(r29)
@@ -1069,29 +1069,29 @@ asm void fn_802A4BBC(void)
     stw r31, 0x167c(r29)
     stw r0, 0x1684(r29)
     stw r31, 0x1688(r29)
-    bl fn_80056DB8
+    bl path_Object_constructor
     lis r28, lbl_80777630@ha
     addi r26, r29, 0x16e4
     addi r28, r28, lbl_80777630@l
     stw r28, 0x0(r27)
     mr r3, r26
     li r4, 0x1
-    bl fn_80056DB8
+    bl path_Object_constructor
     addi r27, r29, 0x173c
     stw r28, 0x0(r26)
     mr r3, r27
     li r4, 0x1
-    bl fn_80056DB8
+    bl path_Object_constructor
     addi r26, r29, 0x1794
     stw r28, 0x0(r27)
     mr r3, r26
     li r4, 0x1
-    bl fn_80056DB8
+    bl path_Object_constructor
     addi r27, r29, 0x17ec
     stw r28, 0x0(r26)
     mr r3, r27
     li r4, 0x1
-    bl fn_80056DB8
+    bl path_Object_constructor
     addi r26, r29, 0x1844
     stw r28, 0x0(r27)
     mr r3, r26
@@ -1896,7 +1896,7 @@ lbl_fn_802A51F4_00001810:
     addi r3, r30, 0xb0
     addi r31, r31, lbl_80745FE4@l
     addi r4, r31, 0x16a
-    bl fn_80092954
+    bl compass_findMarkerByName
     lwz r0, 0x18(r3)
     lis r6, lbl_80745FC0@ha
     stw r0, 0x8(r1)

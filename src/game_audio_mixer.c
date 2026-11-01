@@ -5,7 +5,7 @@
 extern void fn_80040B40(void);
 extern void fn_8004D314(void);
 extern void collision_testLineSegment(void);
-extern void fn_80092954(void);
+extern void compass_findMarkerByName(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -14,7 +14,7 @@ extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void fn_80108F38(void);
 extern void enemy_updateCombatBehavior(void);
-extern void fn_8012DB04(void);
+extern void enemy_evalAnimTrack(void);
 extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_801426A4(void);
@@ -22,11 +22,11 @@ extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
-extern void fn_80158BB4(void);
+extern void shop_canPurchaseItem(void);
 extern void actor_setState(void);
 extern void battle_resolveAggroHierarchy(void);
 extern void battle_updateTargetAggro(void);
-extern void fn_801781B0(void);
+extern void battle_calcAABBCenter(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -168,7 +168,7 @@ lbl_fn_802F7E0C_000000C8:
     mtctr r4
     bctr
     mr r3, r31
-    bl fn_80158BB4
+    bl shop_canPurchaseItem
     cmpwi r3, 0x0
     beq lbl_fn_802F7E0C_00000168
     lwz r3, 0x14f4(r31)
@@ -516,12 +516,12 @@ asm void fn_802F83E4(void)
     lis r30, lbl_80748780@ha
     addi r30, r30, lbl_80748780@l
     addi r4, r30, 0x201
-    bl fn_80092954
+    bl compass_findMarkerByName
     cmpwi r3, 0x0
     beq lbl_fn_802F83E4_0000084C
     addi r3, r31, 0xb0
     addi r4, r30, 0x20c
-    bl fn_80092954
+    bl compass_findMarkerByName
     cmpwi r3, 0x0
     beq lbl_fn_802F83E4_0000084C
     lwz r5, 0x7e0(r31)
@@ -618,7 +618,7 @@ lbl_fn_802F83E4_00000690:
     stfs f6, 0x15ec(r31)
     stfs f7, 0x15f0(r31)
     stw r0, 0x14(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lbz r0, 0x14(r1)
     addi r4, r30, 0x20c
     stb r0, 0x18(r3)
@@ -656,7 +656,7 @@ lbl_fn_802F83E4_00000690:
     stb r0, 0xb(r1)
     lwz r0, 0x8(r1)
     stw r0, 0x10(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lbz r0, 0x10(r1)
     stb r0, 0x18(r3)
     lbz r0, 0x11(r1)
@@ -1086,7 +1086,7 @@ lbl_fn_802F8A60_00000D74:
     lwz r30, lbl_8087F048
     mr r4, r31
     addi r3, r1, 0x10
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     mr r3, r30
     addi r4, r1, 0x10
     li r5, 0x80
@@ -1269,7 +1269,7 @@ asm void fn_802F8EBC(void)
     fmuls f30, f30, f0
 lbl_fn_802F8EBC_0000110C:
     addi r3, r3, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lwz r0, 0x55c(r29)
     fmuls f30, f30, f1
     cmpwi r0, 0x7
@@ -1556,7 +1556,7 @@ lbl_fn_802F8EBC_0000150C:
     fmuls f30, f30, f0
 lbl_fn_802F8EBC_00001540:
     addi r3, r29, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     fmuls f30, f30, f1
     lfs f0, 0x568(r29)
     fmr f1, f31

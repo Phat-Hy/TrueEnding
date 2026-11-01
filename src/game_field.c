@@ -7,7 +7,7 @@ extern void fn_80082970(void);
 extern void fn_80082BE0(void);
 extern void fn_80082CAC(void);
 extern void fn_800832AC(void);
-extern void fn_80083AD4(void);
+extern void town_updateInteractionPoints(void);
 extern void fn_8008510C(void);
 extern void str_parseInt(void);
 extern void fn_8022AB18(void);
@@ -36,13 +36,13 @@ void mem_free(void);
 void dtor_80084684(void);
 void mem_realloc(void);
 void fn_800848B4(void);
-void fn_80084A78(void);
+void field_initGridPoints(void);
 void mem_getAllocSize(void);
 void fn_80084DC8(void);
-void fn_80084E00(void);
+u32 fn_80084E00(const void *p);
 void fn_80084E08(void);
 void fn_80084E0C(void);
-void fn_80084E44(void);
+u32 fn_80084E44(const void *p);
 void fn_80084E4C(void);
 void fn_80084E50(void);
 void fn_80084E78(void);
@@ -191,7 +191,7 @@ lbl_fn_80084110_000001E0:
     lis r3, lbl_807C709C@ha
     mr r4, r29
     addi r3, r3, lbl_807C709C@l
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
 lbl_fn_80084110_000001F0:
     lwz r31, 0x1c(r1)
     mr r3, r29
@@ -467,7 +467,7 @@ lbl_dtor_80084684_000005C4:
     lis r3, lbl_807C709C@ha
     mr r4, r30
     addi r3, r3, lbl_807C709C@l
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -719,7 +719,7 @@ lbl_fn_800848B4_00000930:
     blr
 }
 
-asm void fn_80084A78(void)
+asm void field_initGridPoints(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -730,7 +730,7 @@ asm void fn_80084A78(void)
     mr r30, r3
     lbz r0, lbl_8087EF08
     extsb. r0, r0
-    bne lbl_fn_80084A78_00000AE4
+    bne lbl_field_initGridPoints_00000AE4
     lis r8, lbl_807C709C@ha
     lis r5, lbl_80778598@ha
     addi r31, r8, lbl_807C709C@l
@@ -753,20 +753,20 @@ asm void fn_80084A78(void)
     stw r7, 0x54(r31)
     stw r7, 0x48(r31)
     stw r7, 0x4c(r31)
-    bge lbl_fn_80084A78_00000A14
+    bge lbl_field_initGridPoints_00000A14
     addi r0, r3, 0xf
     subf r0, r9, r0
     srwi r0, r0, 4
     mtctr r0
-    bge lbl_fn_80084A78_00000A14
-lbl_fn_80084A78_000009FC:
+    bge lbl_field_initGridPoints_00000A14
+lbl_field_initGridPoints_000009FC:
     stw r7, 0x8(r9)
     stw r7, 0xc(r9)
     stw r7, 0x0(r9)
     stw r7, 0x4(r9)
     addi r9, r9, 0x10
-    bdnz lbl_fn_80084A78_000009FC
-lbl_fn_80084A78_00000A14:
+    bdnz lbl_field_initGridPoints_000009FC
+lbl_field_initGridPoints_00000A14:
     addi r7, r31, 0xe8
     addi r3, r31, 0x138
     lis r6, lbl_80778560@ha
@@ -784,20 +784,20 @@ lbl_fn_80084A78_00000A14:
     stw r5, 0xe4(r31)
     stw r5, 0xd8(r31)
     stw r5, 0xdc(r31)
-    bge lbl_fn_80084A78_00000A88
+    bge lbl_field_initGridPoints_00000A88
     addi r0, r3, 0xf
     subf r0, r7, r0
     srwi r0, r0, 4
     mtctr r0
-    bge lbl_fn_80084A78_00000A88
-lbl_fn_80084A78_00000A70:
+    bge lbl_field_initGridPoints_00000A88
+lbl_field_initGridPoints_00000A70:
     stw r5, 0x8(r7)
     stw r5, 0xc(r7)
     stw r5, 0x0(r7)
     stw r5, 0x4(r7)
     addi r7, r7, 0x10
-    bdnz lbl_fn_80084A78_00000A70
-lbl_fn_80084A78_00000A88:
+    bdnz lbl_field_initGridPoints_00000A70
+lbl_field_initGridPoints_00000A88:
     addi r3, r31, 0x138
     bl fn_80084E50
     addi r3, r31, 0x150
@@ -821,7 +821,7 @@ lbl_fn_80084A78_00000A88:
     bl __register_global_object
     li r0, 0x1
     stb r0, lbl_8087EF08
-lbl_fn_80084A78_00000AE4:
+lbl_field_initGridPoints_00000AE4:
     lis r3, lbl_807C709C@ha
     mr r4, r30
     addi r3, r3, lbl_807C709C@l
@@ -942,7 +942,7 @@ lbl_mem_getAllocSize_00000C90:
     lis r3, lbl_807C709C@ha
     mr r4, r30
     addi r3, r3, lbl_807C709C@l
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -970,11 +970,9 @@ asm void fn_80084DC8(void)
     blr
 }
 
-asm void fn_80084E00(void)
+u32 fn_80084E00(const void *p)
 {
-    nofralloc
-    lwz r3, 0x14(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x14);
 }
 
 void fn_80084E08(void) {
@@ -999,11 +997,9 @@ asm void fn_80084E0C(void)
     blr
 }
 
-asm void fn_80084E44(void)
+u32 fn_80084E44(const void *p)
 {
-    nofralloc
-    lwz r3, 0x14(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x14);
 }
 
 void fn_80084E4C(void) {

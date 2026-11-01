@@ -16,16 +16,16 @@ extern void node_destroy(void);
 extern void fn_800D03AC(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
-extern void fn_8011FE3C(void);
+extern void skill_findNodeByTag(void);
 extern void fn_80124B60(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void world_getGlobalFlag(void);
 extern void kpad_getClampData(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void fn_803761FC(void);
-extern void fn_8037D4C0(void);
+extern void dvd_showDiskErrorDialog(void);
 extern void fn_803AC230(void);
 extern void fn_803AC3D8(void);
 extern void fn_803AC708(void);
@@ -439,12 +439,12 @@ lbl_fn_803CCCC0_000003E8:
 lbl_fn_803CCCC0_00000414:
     lwz r3, lbl_8087F8A0
     lwz r4, 0x198(r31)
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     b lbl_fn_803CCCC0_00000450
 lbl_fn_803CCCC0_00000424:
     lwz r3, lbl_8087F890
     lwz r4, 0x198(r31)
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     b lbl_fn_803CCCC0_00000450
 lbl_fn_803CCCC0_00000434:
     lwz r3, lbl_8087F408
@@ -454,12 +454,12 @@ lbl_fn_803CCCC0_00000434:
 lbl_fn_803CCCC0_00000444:
     lwz r3, lbl_8087F8A0
     lwz r4, 0x198(r31)
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
 lbl_fn_803CCCC0_00000450:
     cmpwi r3, 0x0
     beq lbl_fn_803CCCC0_00000460
     li r4, 0x1
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
 lbl_fn_803CCCC0_00000460:
     addi r31, r31, 0x8
     addi r30, r30, 0x1
@@ -1479,7 +1479,7 @@ lbl_fn_803CDAE4_0000123C:
     li r5, 0x0
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_803CDAE4_00001254:
     lwz r0, 0x14(r1)
     mtlr r0
@@ -1523,7 +1523,7 @@ asm void fn_803CDB68(void)
     li r5, 0x0
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_803CDB68_00001338
 lbl_fn_803CDB68_000012E8:
     lfs f1, lbl_80885D4C
@@ -1531,7 +1531,7 @@ lbl_fn_803CDB68_000012E8:
     li r5, 0x0
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_803CDB68_00001338
 lbl_fn_803CDB68_00001304:
     lfs f1, lbl_80885D4C
@@ -1539,7 +1539,7 @@ lbl_fn_803CDB68_00001304:
     li r5, 0x0
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_803CDB68_00001338
 lbl_fn_803CDB68_00001320:
     lfs f1, lbl_80885D4C
@@ -1547,7 +1547,7 @@ lbl_fn_803CDB68_00001320:
     li r5, 0x0
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_803CDB68_00001338:
     lwz r0, 0x14(r1)
     mtlr r0
@@ -1575,7 +1575,7 @@ asm void fn_803CDC48(void)
     li r5, 0x0
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_803CDC48_00001390:
     lwz r0, 0x14(r1)
     mtlr r0
@@ -1817,7 +1817,7 @@ lbl_fn_803CDF84_000016AC:
     bne lbl_fn_803CDF84_000016D4
     b lbl_fn_803CDF84_00001760
 lbl_fn_803CDF84_000016D4:
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_803CDF84_00001760
     lwz r3, lbl_8087F430
@@ -1844,7 +1844,7 @@ lbl_fn_803CDF84_00001724:
     li r5, 0x0
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_803CDF84_00001760
 lbl_fn_803CDF84_00001744:
     lwz r3, lbl_8087F448
@@ -1853,7 +1853,7 @@ lbl_fn_803CDF84_00001744:
     li r5, 0x0
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_803CDF84_00001760:
     lwz r0, 0x14(r1)
     mtlr r0

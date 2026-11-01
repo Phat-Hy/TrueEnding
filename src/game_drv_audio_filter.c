@@ -12,7 +12,7 @@ extern void sound_releaseChannel(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_8006AA20(void);
+extern void boss_triggerEventSequence(void);
 extern void fn_8006AC08(void);
 extern void fn_8006B46C(void);
 extern void script_executeOpcode(void);
@@ -874,7 +874,7 @@ lbl_fn_805BCF08_00000AA8:
 lbl_fn_805BCF08_00000AC8:
     lwz r3, 0x54(r1)
 lbl_fn_805BCF08_00000ACC:
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_805BCF08_00000ADC
     li r26, 0x1

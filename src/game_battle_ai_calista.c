@@ -29,7 +29,7 @@ extern void bloom_processPasses(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800DD8A8(void);
-extern void fn_801092C8(void);
+extern void hurtbox_processHitDamage(void);
 extern void fn_8011D424(void);
 extern void fn_801354B4(void);
 extern void fn_80136544(void);
@@ -37,14 +37,14 @@ extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void battle_awardExp(void);
-extern void fn_80176ACC(void);
+extern void battle_activateExpReward(void);
 extern void fn_8017C974(void);
 extern void event_findEntryById(void);
 extern void fn_8021DE88(void);
 extern void fn_8021DECC(void);
 extern void res_MsgHandle_unload(void);
 extern void world_setGlobalFlag(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void fn_803CC6B4(void);
 extern void fn_803E3BE8(void);
 extern void fn_803E5E64(void);
@@ -110,7 +110,7 @@ void fn_80431458(void);
 void fn_80431760(void);
 void fn_80431774(void);
 void fn_80432390(void);
-void fn_80432394(void);
+u32 fn_80432394(void);
 void fn_8043239C(void);
 void fn_80432728(void);
 void fn_80432840(void);
@@ -871,7 +871,7 @@ lbl_fn_80431774_000009AC:
     lfs f0, lbl_8088686C
     mr r3, r27
     stfs f0, 0x2e8(r27)
-    bl fn_80176ACC
+    bl battle_activateExpReward
     lwz r3, 0x784(r29)
     cmpwi r3, 0x0
     beq lbl_fn_80431774_00000C84
@@ -1087,7 +1087,7 @@ lbl_fn_80431774_00000D3C:
     cmpwi r3, 0x0
     beq lbl_fn_80431774_00000DD4
     li r4, 0xdc
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_80431774_00000DD4:
     li r3, 0x1
     li r0, 0x2
@@ -1274,11 +1274,9 @@ void fn_80432390(void)
 {
 }
 
-asm void fn_80432394(void)
+u32 fn_80432394(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8043239C(void)
@@ -1575,7 +1573,7 @@ lbl_fn_80432728_00001464:
     li r4, 0x1
     lwz r7, 0x2ebc(r30)
     li r5, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
 lbl_fn_80432728_000014CC:
     lwz r3, lbl_8087F490
     li r6, 0x1
@@ -1909,16 +1907,14 @@ lbl_fn_80432C38_00001944:
     blr
 }
 
-asm void fn_80432C60(void)
+void fn_80432C60(void)
 {
-    nofralloc
-    b dialog_renderWindow
+    dialog_renderWindow();
 }
 
-asm void fn_80432C64(void)
+void fn_80432C64(void)
 {
-    nofralloc
-    b quest_updateFlow
+    quest_updateFlow();
 }
 
 asm void fn_80432C68(void)

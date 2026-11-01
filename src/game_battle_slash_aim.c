@@ -4,12 +4,12 @@
 /* External function declarations */
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
-extern void fn_8004B290(void);
+extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void fn_80058078(void);
-extern void fn_800580BC(void);
-extern void fn_800588FC(void);
+extern void mission_isObjectiveActive(void);
+extern void mission_updateObjectiveTarget(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
@@ -24,7 +24,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void motion_updateFogAdj(void);
 extern void fn_800C122C(void);
 extern void fn_800C2C20(void);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void atn_LH_Texture_update(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
@@ -34,10 +34,10 @@ extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
-extern void fn_803EC7A0(void);
+extern void barrier_formatDialogString(void);
 extern void task_initWorkerContext(void);
-extern void fn_803ED5D0(void);
-extern void fn_803ED774(void);
+extern void barrier_bindFieldAnimation(void);
+extern void dungeon_updateBarrierField(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void PSMTXTranspose(void);
@@ -201,7 +201,7 @@ lbl_fn_803F4D98_0000017C:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     addi r3, r31, 0x54c
     psq_l f1, 0xfc(r31), 0, 0
     psq_l f2, 0x104(r31), 0, 0
@@ -215,7 +215,7 @@ lbl_fn_803F4D98_0000017C:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     lwz r0, 0x5e4(r31)
     cmpwi r0, 0x0
     beq lbl_fn_803F4D98_00000234
@@ -233,7 +233,7 @@ lbl_fn_803F4D98_0000017C:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_803F4D98_00000234:
     mr r3, r31
     bl fn_803F53E0
@@ -560,7 +560,7 @@ lbl_fn_803F53E0_000006B8:
     addi r3, r1, 0x2d4
     li r4, 0x0
     li r5, 0x1
-    bl fn_8004B290
+    bl sound_initChannelParams
     lwz r3, lbl_8087F490
     lwz r27, lbl_8087F430
     lwz r0, 0x10fc(r3)
@@ -788,7 +788,7 @@ lbl_fn_803F53E0_000009C8:
     addi r3, r1, 0xe0
     li r4, 0x0
     li r5, 0x0
-    bl fn_8004B290
+    bl sound_initChannelParams
     lfs f2, 0x2e4(r1)
     addi r3, r1, 0xe8
     psq_l f1, 0x0(r29), 0, 0
@@ -1011,7 +1011,7 @@ asm void fn_803F5AD8(void)
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_803F5AD8_00000D9C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -1039,11 +1039,11 @@ asm void fn_803F5B48(void)
     b lbl_fn_803F5B48_00000E74
 lbl_fn_803F5B48_00000DE8:
     addi r3, r28, 0x4c4
-    bl fn_800580BC
+    bl mission_isObjectiveActive
     cmpwi r3, 0x0
     bne lbl_fn_803F5B48_00000E08
     addi r3, r28, 0x54c
-    bl fn_800580BC
+    bl mission_isObjectiveActive
     cmpwi r3, 0x0
     beq lbl_fn_803F5B48_00000E10
 lbl_fn_803F5B48_00000E08:
@@ -1156,7 +1156,7 @@ lbl_fn_803F5C2C_00000F40:
     mr r3, r31
     addi r4, r31, 0xf4
     addi r5, r1, 0x108
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     b lbl_fn_803F5C2C_0000132C
 lbl_fn_803F5C2C_00000F94:
     mr r3, r28
@@ -1388,7 +1388,7 @@ lbl_fn_803F5C2C_000012B8:
     bl talk_formatQuotedString
     mr r4, r3
     addi r3, r31, 0x6a0
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     stw r30, 0x6d0(r31)
     b lbl_fn_803F5C2C_0000132C
 lbl_fn_803F5C2C_000012E8:
@@ -1744,7 +1744,7 @@ lbl_fn_803F6448_00001774:
     bctrl
     mr r4, r3
     mr r3, r28
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_803F6448_000017E4:
     li r0, 0x0
     stw r0, 0x5e4(r28)
@@ -1788,7 +1788,7 @@ lbl_fn_803F6448_00001808:
     bctrl
     mr r4, r3
     mr r3, r28
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_803F6448_00001884:
     li r0, 0x0
     stw r0, 0x5e4(r28)
@@ -1828,7 +1828,7 @@ lbl_fn_803F6448_00001898:
     bctrl
     mr r4, r3
     mr r3, r28
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_803F6448_00001918:
     li r0, 0x0
     stw r0, 0x5e4(r28)

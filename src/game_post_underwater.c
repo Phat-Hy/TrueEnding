@@ -17,15 +17,15 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void wcs_vformat(void);
-extern void fn_800EE360(void);
+extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80107850(void);
-extern void fn_80108C10(void);
-extern void fn_80109828(void);
+extern void hurtbox_testCollisionLayer(void);
+extern void hurtbox_dispatchHitEvent(void);
 extern void fn_8012DF7C(void);
-extern void fn_80148B0C(void);
-extern void fn_8015E7A0(void);
+extern void quest_getRewardItemSlot(void);
+extern void party_configureMemberSlot(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
 extern void task_findEntryById(void);
@@ -459,7 +459,7 @@ lbl_fn_802DAA38_00000564:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x3d0
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
 lbl_fn_802DAA38_00000584:
     lwz r3, 0x14c4(r29)
     cmpwi r3, 0x14
@@ -629,7 +629,7 @@ lbl_fn_802DAA38_0000077C:
     stfs f0, 0xe0(r1)
     stfs f3, 0xe4(r1)
     stfs f4, 0xe8(r1)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     lwz r3, lbl_8087F048
     addi r4, r26, 0xb0
     bl fn_80107850
@@ -768,7 +768,7 @@ lbl_fn_802DAA38_00000998:
     li r6, 0x0
     stfs f3, 0x138(r1)
     stfs f0, 0x13c(r1)
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
     addi r30, r30, 0x1
     addi r28, r28, 0x1c
 lbl_fn_802DAA38_00000A2C:
@@ -780,7 +780,7 @@ lbl_fn_802DAA38_00000A2C:
     stw r31, 0x144(r1)
     mr r3, r29
     li r4, 0x0
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     lfs f2, 0xc(r3)
     addi r21, r1, 0x128
     psq_l f1, 0x4(r3), 0, 0
@@ -810,7 +810,7 @@ lbl_fn_802DAA38_00000A2C:
     li r6, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     addi r3, r1, 0x1d0
     li r4, 0x0
     li r5, 0x200
@@ -830,7 +830,7 @@ lbl_fn_802DAA38_00000AF4:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x1d0
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
 lbl_fn_802DAA38_00000B10:
     li r28, 0x0
     stw r28, 0x14c8(r29)
@@ -1668,7 +1668,7 @@ asm void fn_802DBE04(void)
     stw r4, 0x12a4(r3)
     clrrwi r0, r0, 1
     stw r0, 0x5c0(r3)
-    bl fn_800EE360
+    bl camera_updateTargetMode
     lwz r0, 0x12a4(r31)
     mr r3, r31
     ori r0, r0, 0x8000
@@ -1900,7 +1900,7 @@ lbl_fn_802DC014_00001A74:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x40
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lwz r0, 0x254(r1)
     lwz r31, 0x24c(r1)
     lwz r30, 0x248(r1)

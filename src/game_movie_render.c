@@ -17,7 +17,7 @@ extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void actor_setState(void);
 extern void battle_canTargetActor(void);
-extern void fn_801781B0(void);
+extern void battle_calcAABBCenter(void);
 extern void task_findEntryById(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A254(void);
@@ -591,7 +591,7 @@ lbl_fn_8033DB8C_0000066C:
     stw r0, 0x98(r1)
     stfs f25, 0xb0(r1)
     stw r28, 0xb8(r1)
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     lwz r3, 0x14cc(r21)
     lwz r3, 0x6c(r3)
     bl task_findEntryById

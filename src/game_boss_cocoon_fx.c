@@ -11,8 +11,8 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void talk_parseDialogue(void);
-extern void fn_8005B8F8(void);
-extern void fn_8005B9AC(void);
+extern void talk_parseDialogueTokens(void);
+extern void talk_copyUtf16String(void);
 extern void script_executeOpcode(void);
 extern void fn_8006F420(void);
 extern void str_assignBuffer(void);
@@ -39,7 +39,7 @@ extern void fn_801F4DDC(void);
 extern void fn_801F4E30(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
-extern void fn_801F6E78(void);
+extern void save_calculateBlockCrc(void);
 extern void save_findEntryByName(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
@@ -261,7 +261,7 @@ lbl_fn_80469AB8_000001E0:
     lwz r3, 0x80(r31)
     addi r4, r30, 0x134
     addi r5, r1, 0x8
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     lwz r3, 0x80(r31)
     addi r4, r30, 0x13c
     lfs f1, lbl_80886EA8
@@ -433,7 +433,7 @@ lbl_fn_80469D60_00000454:
     stw r3, 0xc0(r1)
     mr r3, r19
     addi r4, r4, lbl_8077A0A8@l
-    bl fn_8005B9AC
+    bl talk_copyUtf16String
     lis r3, __files@ha
     lis r4, lbl_80755394@ha
     addi r19, r1, 0x14
@@ -695,7 +695,7 @@ lbl_fn_80469D60_000007F0:
     bl dtor_80084684
 lbl_fn_80469D60_00000844:
     addi r3, r1, 0xc0
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_80469D60_000004B4
     lmw r17, 0xd24(r1)
@@ -754,7 +754,7 @@ lbl_fn_8046A20C_000008B8:
     stfs f1, 0x28(r1)
     stfs f0, 0x2c(r1)
     lwz r3, 0x58(r27)
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     lwz r3, 0x98(r31)
     lwz r0, 0xa0(r31)
     add r3, r26, r3

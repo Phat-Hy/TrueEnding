@@ -16,7 +16,7 @@ extern void vec3_copy(void);
 extern void fn_800109E0(void);
 extern void vec3_add(void);
 extern void str_initFromCStr(void);
-extern void fn_8004203C(void);
+extern void menu_initWindowBuffer(void);
 extern void str_getData(void);
 extern void fn_80043014(void);
 extern void talk_parseQuotedString(void);
@@ -26,11 +26,11 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_8009EE30(void);
+extern void hud_drawTargetMarker(void);
 extern void str_skipWhitespace(void);
 extern void fn_800E0AA8(void);
 extern void fn_800F80A8(void);
-extern void fn_801125F8(void);
+extern void phys_scaleGravity(void);
 extern void fn_8012044C(void);
 extern void fn_801495E8(void);
 extern void res_MsgHandle_ctor(void);
@@ -439,15 +439,15 @@ lbl_fn_804985E4_00000468:
 lbl_fn_804985E4_00000494:
     lwz r3, 0x8(r1)
     lfs f1, 0x18(r3)
-    bl fn_801125F8
+    bl phys_scaleGravity
     lwz r3, 0x8(r1)
     fmr f31, f1
     lfs f1, 0x14(r3)
-    bl fn_801125F8
+    bl phys_scaleGravity
     lwz r3, 0x8(r1)
     fmr f30, f1
     lfs f1, 0x10(r3)
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f2, f30
     addi r3, r1, 0x84
     fmr f3, f31
@@ -460,7 +460,7 @@ lbl_fn_804985E4_00000494:
     mr r5, r3
     mr r4, r22
     addi r3, r1, 0xdb0
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     addi r3, r1, 0xdb0
     li r4, 0x1
     bl fn_80499388
@@ -556,13 +556,13 @@ lbl_fn_804985E4_0000061C:
     bl atoi
     lfs f1, 0x18(r25)
     mr r27, r3
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f31, f1
     lfs f1, 0x14(r25)
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f30, f1
     lfs f1, 0x10(r25)
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f2, f30
     addi r3, r1, 0x78
     fmr f3, f31
@@ -574,7 +574,7 @@ lbl_fn_804985E4_0000061C:
     mr r5, r3
     mr r4, r22
     addi r3, r1, 0x77c
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     addi r3, r1, 0x77c
     li r4, 0x1
     bl fn_80499388
@@ -643,7 +643,7 @@ lbl_fn_804985E4_00000740:
     lwz r3, 0x0(r3)
     bl fn_80498F08
     addi r4, r1, 0x118
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
     mr r4, r24
     addi r3, r21, 0x68
     bl fn_80497238
@@ -692,18 +692,18 @@ lbl_fn_804985E4_00000840:
     mr r5, r3
     mr r4, r22
     addi r3, r1, 0x148
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     addi r3, r1, 0x148
     li r4, 0x1
     bl fn_80499388
     lfs f1, 0x18(r25)
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f30, f1
     lfs f1, 0x14(r25)
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f31, f1
     lfs f1, 0x10(r25)
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f2, f31
     addi r3, r1, 0x60
     fmr f3, f30

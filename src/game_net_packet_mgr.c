@@ -9,7 +9,7 @@ extern void _savefpr_28(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_80083AD4(void);
+extern void town_updateInteractionPoints(void);
 extern void mem_alloc(void);
 extern void fn_800A2664(void);
 extern void msg_getMessageById(void);
@@ -1021,7 +1021,7 @@ asm void fn_804AE3CC(void)
     beq lbl_fn_804AE3CC_00000CE8
     bl dungeon_initGlobalContext
     mr r4, r31
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     li r0, 0x0
     stw r0, 0x14(r29)
 lbl_fn_804AE3CC_00000CE8:
@@ -1030,7 +1030,7 @@ lbl_fn_804AE3CC_00000CE8:
     beq lbl_fn_804AE3CC_00000D08
     bl dungeon_initGlobalContext
     mr r4, r31
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     li r0, 0x0
     stw r0, 0x18(r29)
 lbl_fn_804AE3CC_00000D08:
@@ -1044,7 +1044,7 @@ lbl_fn_804AE3CC_00000D08:
     beq lbl_fn_804AE3CC_00000D3C
     bl dungeon_initGlobalContext
     mr r4, r31
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     li r0, 0x0
     stw r0, 0x8(r29)
 lbl_fn_804AE3CC_00000D3C:
@@ -1053,7 +1053,7 @@ lbl_fn_804AE3CC_00000D3C:
     beq lbl_fn_804AE3CC_00000D5C
     bl dungeon_initGlobalContext
     mr r4, r31
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     li r0, 0x0
     stw r0, 0xc(r29)
 lbl_fn_804AE3CC_00000D5C:
@@ -1093,7 +1093,7 @@ asm void fn_804AE4C4(void)
     beq lbl_fn_804AE4C4_00000DE0
     bl dungeon_initGlobalContext
     mr r4, r31
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     li r0, 0x0
     stw r0, 0x8(r29)
 lbl_fn_804AE4C4_00000DE0:
@@ -1102,7 +1102,7 @@ lbl_fn_804AE4C4_00000DE0:
     beq lbl_fn_804AE4C4_00000E00
     bl dungeon_initGlobalContext
     mr r4, r31
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     li r0, 0x0
     stw r0, 0xc(r29)
 lbl_fn_804AE4C4_00000E00:

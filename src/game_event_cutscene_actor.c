@@ -31,7 +31,7 @@ extern void dungeon_initGlobalContext(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void fn_80089620(void);
 extern void map_debugLog(void);
@@ -57,7 +57,7 @@ extern void atn_Fog_apply(void);
 extern void atn_Task_pause(void);
 extern void fn_800D2D7C(void);
 extern void env_updateAtmosphere(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void fn_80185AD4(void);
 extern void fn_80186520(void);
 extern void fn_80187C44(void);
@@ -724,7 +724,7 @@ lbl_main_0000078C:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     stw r3, 0x1c(r1)
     mr r26, r3
     stw r3, 0x10(r1)
@@ -750,7 +750,7 @@ lbl_main_00000808:
     bl strcpy
     stw r30, 0x18(r1)
     addi r3, r1, 0x18
-    bl fn_800DCA6C
+    bl sky_renderStub
     cmpwi r17, 0x0
     beq lbl_main_00000844
     addic. r3, r17, 0x4

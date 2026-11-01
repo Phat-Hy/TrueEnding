@@ -8,31 +8,31 @@ extern void _savegpr_27(void);
 extern void ui_destroyWidget(void);
 extern void fn_800577D8(void);
 extern void fn_80058078(void);
-extern void fn_800580BC(void);
-extern void fn_800588FC(void);
+extern void mission_isObjectiveActive(void);
+extern void mission_updateObjectiveTarget(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void mem_alloc(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void fn_80092F1C(void);
+extern void target_pushPointToHistory(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void fn_80097B34(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
 extern void fn_8011BE54(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void fn_8012B3E8(void);
 extern void fn_8012B988(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void quest_updateFlow(void);
 extern void equip_applyToCharacter(void);
 extern void fn_801644D4(void);
-extern void fn_80176ACC(void);
+extern void battle_activateExpReward(void);
 extern void fn_8017CB2C(void);
 extern void task_lookupTagIndex(void);
 extern void sound_initGlobalInstances(void);
@@ -46,9 +46,9 @@ extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_803E598C(void);
 extern void task_createWorker(void);
-extern void fn_803EC7A0(void);
+extern void barrier_formatDialogString(void);
 extern void task_updateWorker(void);
-extern void fn_803ED774(void);
+extern void dungeon_updateBarrierField(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void fn_80499B9C(void);
@@ -98,7 +98,7 @@ void fn_803F8C98(void);
 void fn_803F8E68(void);
 void fn_803F8F30(void);
 void fn_803F93E4(void);
-void fn_803F9400(void);
+u32 fn_803F9400(void);
 void fn_803F9408(void);
 void fn_803F940C(void);
 void fn_803F9420(void);
@@ -330,7 +330,7 @@ lbl_fn_803F8324_00000314:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     b lbl_fn_803F8324_000003A4
 lbl_fn_803F8324_00000368:
     addi r4, r31, 0x938
@@ -347,7 +347,7 @@ lbl_fn_803F8324_00000368:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
 lbl_fn_803F8324_000003A4:
     lwz r0, 0x204(r1)
     lwz r31, 0x1fc(r1)
@@ -401,7 +401,7 @@ lbl_fn_803F86E0_00000420:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_803F86E0_0000045C:
     lwz r3, lbl_8087F0A8
     lwz r0, 0x8(r3)
@@ -421,7 +421,7 @@ lbl_fn_803F86E0_0000045C:
     lfs f1, lbl_80886020
     li r5, -0x100
     lfs f2, lbl_80886018
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_803F86E0_000004A8:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -446,7 +446,7 @@ asm void fn_803F87E0(void)
     b lbl_fn_803F87E0_00000558
 lbl_fn_803F87E0_000004E8:
     addi r3, r31, 0x4c8
-    bl fn_800580BC
+    bl mission_isObjectiveActive
     cmpwi r3, 0x0
     beq lbl_fn_803F87E0_00000500
     li r3, 0x1
@@ -554,7 +554,7 @@ lbl_fn_803F8890_00000624:
     mr r3, r28
     addi r4, r28, 0xf4
     addi r5, r1, 0x108
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     stw r31, 0x4c4(r28)
     b lbl_fn_803F8890_0000070C
 lbl_fn_803F8890_0000067C:
@@ -574,7 +574,7 @@ lbl_fn_803F8890_0000067C:
     addi r3, r28, 0xf4
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_803F8890_0000070C
 lbl_fn_803F8890_000006C4:
     mr r3, r29
@@ -1307,11 +1307,9 @@ lbl_fn_803F93E4_000010D4:
     blr
 }
 
-asm void fn_803F9400(void)
+u32 fn_803F9400(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 void fn_803F9408(void)
@@ -1461,7 +1459,7 @@ lbl_fn_803F957C_000012A0:
 lbl_fn_803F957C_000012B4:
     lwz r3, lbl_8087F8A0
     lwz r4, 0x24(r4)
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     stw r3, 0xf8(r31)
 lbl_fn_803F957C_000012C4:
     lwz r3, 0xf8(r31)
@@ -1752,7 +1750,7 @@ lbl_fn_803F9624_000016CC:
     bl fn_8012B988
 lbl_fn_803F9624_000016EC:
     lwz r3, 0xf8(r30)
-    bl fn_80176ACC
+    bl battle_activateExpReward
     lwz r3, 0xf8(r30)
     li r4, 0x0
     bl atn_Task_setActive
@@ -1766,7 +1764,7 @@ lbl_fn_803F9624_000016EC:
 lbl_fn_803F9624_0000171C:
     lwz r3, 0xf8(r30)
     addi r3, r3, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lwz r7, 0xf8(r30)
     li r0, 0x0
     li r4, 0x0
@@ -1862,7 +1860,7 @@ lbl_fn_803F9624_00001878:
     b lbl_fn_803F9624_000018A0
 lbl_fn_803F9624_00001898:
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
 lbl_fn_803F9624_000018A0:
     cmpwi r3, 0x0
     beq lbl_fn_803F9624_000019F0

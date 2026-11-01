@@ -29,25 +29,25 @@ extern void atn_Model_findBoneIndex(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
-extern void fn_800EB7A0(void);
+extern void sound_playSpatialEffect(void);
 extern void fn_800EC254(void);
-extern void fn_800EC2C4(void);
-extern void fn_800EC440(void);
-extern void fn_800EC534(void);
-extern void fn_800EC5BC(void);
-extern void fn_800EC654(void);
-extern void fn_800ED42C(void);
+extern void cam_registerTarget(void);
+extern void cam_initTrajectoryParams(void);
+extern void cam_bindPathTarget(void);
+extern void cam_bindRotationTarget(void);
+extern void cam_evalControllerSpline(void);
+extern void cam_setLookAtTarget(void);
 extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
-extern void fn_800EDFE8(void);
-extern void fn_800F52F0(void);
+extern void cam_evalLookAtMatrix(void);
+extern void proj_getMatrix(void);
 extern void system_getNextSequenceId(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void fn_80158E1C(void);
 extern void actor_setState(void);
-extern void fn_8020A780(void);
+extern void str_appendString(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_ctor(void);
 extern void res_Resource_destructor(void);
@@ -57,7 +57,7 @@ extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
-extern void fn_80239D58(void);
+extern void res_Shader_findParameter(void);
 extern void res_findResourceSlot(void);
 extern void fn_802660FC(void);
 extern void fn_802BABC0(void);
@@ -273,7 +273,7 @@ lbl_fn_8031A484_00000148:
     stw r0, 0x15b4(r31)
 lbl_fn_8031A484_000001CC:
     mr r3, r31
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     lwz r30, 0x38(r1)
@@ -1087,7 +1087,7 @@ asm void fn_8031B0A8(void)
     stw r30, 0x15c4(r29)
     stw r4, 0x15c8(r29)
     stw r0, 0x15cc(r29)
-    bl fn_800F52F0
+    bl proj_getMatrix
     li r4, 0x10
     addi r3, r3, 0xe8
     bl fn_802660FC
@@ -1106,17 +1106,17 @@ asm void fn_8031B0A8(void)
     addi r4, r30, 0x2b
     li r5, 0x0
     li r6, 0x0
-    bl fn_800EC440
+    bl cam_initTrajectoryParams
     addi r3, r1, 0xd4
     addi r4, r1, 0x14
     addi r5, r1, 0x74
-    bl fn_800EC2C4
+    bl cam_registerTarget
     addi r3, r1, 0x74
     li r4, -0x1
-    bl fn_800EC534
+    bl cam_bindPathTarget
     addi r3, r1, 0x98
     addi r4, r1, 0xd4
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     b lbl_fn_8031B0A8_00000E20
 lbl_fn_8031B0A8_00000DDC:
     addi r3, r1, 0x98
@@ -1133,26 +1133,26 @@ lbl_fn_8031B0A8_00000DDC:
     mr r4, r3
     addi r3, r1, 0x20
     addi r4, r4, 0x8
-    bl fn_8020A780
+    bl str_appendString
 lbl_fn_8031B0A8_00000E18:
     addi r3, r1, 0x98
     bl fn_800ED4E0
 lbl_fn_8031B0A8_00000E20:
     addi r3, r1, 0x38
     addi r4, r1, 0xd4
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     addi r3, r1, 0x98
     addi r4, r1, 0x38
     bl fn_800EC254
     mr r31, r3
     addi r3, r1, 0x38
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     cmpwi r31, 0x0
     bne lbl_fn_8031B0A8_00000DDC
     addi r3, r1, 0x98
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     addi r3, r1, 0x8
     addi r4, r1, 0x2c
     addi r5, r1, 0x20
@@ -1194,7 +1194,7 @@ lbl_fn_8031B0A8_00000E20:
     bl dtor_80013D60
     addi r3, r1, 0xd4
     li r4, -0x1
-    bl fn_800EC5BC
+    bl cam_bindRotationTarget
     addi r3, r1, 0x14
     li r4, -0x1
     bl dtor_80013D60
@@ -1269,7 +1269,7 @@ lbl_fn_8031B3CC_00000FEC:
     lwz r3, lbl_8087F3C0
     addi r4, r28, 0x1538
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_8031B3CC_00001030
     lwz r3, lbl_8087F3C0
@@ -1377,7 +1377,7 @@ lbl_fn_8031B3CC_0000117C:
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_8031B3CC_000011C0
     lwz r3, lbl_8087F3C0
@@ -1785,7 +1785,7 @@ lbl_fn_8031B9B4_00001758:
     lwz r3, lbl_8087F3C0
     addi r4, r31, 0x1538
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_8031B9B4_0000179C
     lwz r3, lbl_8087F3C0
@@ -2329,7 +2329,7 @@ lbl_fn_8031B9B4_00001F78:
     lwz r3, lbl_8087F3C0
     addi r4, r31, 0x1538
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_8031B9B4_00001FB0
     lwz r3, lbl_8087F3C0

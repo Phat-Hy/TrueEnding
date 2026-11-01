@@ -8,13 +8,13 @@ extern void dtor_80084684(void);
 extern void fn_80041C0C(void);
 extern void fn_80042740(void);
 extern void mem_realloc(void);
-extern void fn_800928B0(void);
+extern void compass_findWaypointIndex(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void msg_getMessageById(void);
 extern void fn_800A5584(void);
 extern void msg_getMessageString(void);
 extern void fn_800A55D4(void);
-extern void fn_800A58D0(void);
+extern void msg_isWindowActive(void);
 extern void skin_applyWeights(void);
 extern void morph_reset(void);
 extern void ref_releaseHandle(void);
@@ -842,7 +842,7 @@ lbl_fn_8012133C_000009A8:
     lwz r4, 0x28(r24)
     mr r3, r23
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_8012133C_000009E0
     li r7, 0x0
@@ -1188,7 +1188,7 @@ lbl_fn_8012133C_00000EA4:
     lwz r4, 0x28(r24)
     mr r3, r23
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_8012133C_00000ED0
     li r19, 0x0
@@ -1679,7 +1679,7 @@ asm void fn_80122238(void)
     li r4, 0x0
     stw r0, 0x14(r1)
     lwz r3, lbl_8087EF70
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_fn_80122238_0000153C
     li r3, 0xf

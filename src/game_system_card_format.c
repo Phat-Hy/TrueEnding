@@ -25,9 +25,9 @@ extern void fn_800E2D4C(void);
 extern void fn_8011FAF0(void);
 extern void fn_8011FB18(void);
 extern void boss_updatePhaseState(void);
-extern void fn_801446F0(void);
+extern void quest_resetObjectiveBounds(void);
 extern void equip_applyToCharacter(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void fn_801AFAC0(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -831,7 +831,7 @@ asm void fn_8035B368(void)
     mr r4, r3
 lbl_fn_8035B368_00000A10:
     mr r3, r30
-    bl fn_80178208
+    bl battle_generateLootDrops
     li r0, 0x6
     stw r0, 0x58c(r30)
 lbl_fn_8035B368_00000A20:
@@ -1463,7 +1463,7 @@ asm void fn_8035BBCC(void)
     mr r4, r3
 lbl_fn_8035BBCC_00001270:
     mr r3, r30
-    bl fn_80178208
+    bl battle_generateLootDrops
 lbl_fn_8035BBCC_00001278:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1516,7 +1516,7 @@ asm void fn_8035BC84(void)
     bl atn_Anim_getLayerDuration
     stfs f1, 0x8(r29)
     lwz r3, 0x4(r29)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     lwz r5, 0x4(r29)
     lis r3, lbl_8074B3B8@ha
     lwz r4, lbl_8074B3B8@l(r3)

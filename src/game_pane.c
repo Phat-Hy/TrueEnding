@@ -16,7 +16,7 @@ extern void fn_80075DEC(void);
 extern void fn_80075F58(void);
 extern void fn_800763FC(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800839EC(void);
+extern void town_registerInteractionPoint(void);
 extern void fn_800A96AC(void);
 extern void layout_drawPane(void);
 extern void fn_800BFB70(void);
@@ -35,8 +35,8 @@ extern void GXCopyTex(void);
 extern void GXInitLightDistAttn(void);
 extern void GXInitLightSpot(void);
 extern void fn_80615E00(void);
-extern void fn_80615FF0(void);
-extern void fn_80616250(void);
+extern void GXInitLightObj(void);
+extern void GXClampLightAngle(void);
 extern void GXDrawDone(void);
 extern void fn_80616EF0(void);
 extern void fn_80617030(void);
@@ -44,7 +44,7 @@ extern void fn_80617130(void);
 extern void fn_80617200(void);
 extern void GXInitTexObjDefault(void);
 extern void fn_80617270(void);
-extern void fn_80617340(void);
+extern void GXSetTevDirect(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
@@ -579,7 +579,7 @@ lbl_fn_800ABD94_000006A0:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80880D78
     addi r3, r29, lbl_807C7440@l
     li r4, 0x1
@@ -589,7 +589,7 @@ lbl_fn_800ABD94_000006A0:
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     srwi r3, r30, 31
     srwi r0, r31, 31
     add r4, r3, r30
@@ -610,7 +610,7 @@ lbl_fn_800ABD94_000006A0:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80880D78
     addi r3, r1, 0x40
     li r4, 0x1
@@ -620,7 +620,7 @@ lbl_fn_800ABD94_000006A0:
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     slwi r27, r22, 1
     slwi r28, r23, 1
     lwz r3, lbl_8087EF8C
@@ -637,7 +637,7 @@ lbl_fn_800ABD94_000006A0:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     clrlslwi r26, r22, 16, 1
     clrlslwi r25, r23, 16, 1
     clrlslwi r5, r23, 17, 1
@@ -691,7 +691,7 @@ lbl_fn_800ABD94_000006A0:
     bl __GXSetVtxDesc
     li r3, 0x0
     li r4, 0x3
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -753,7 +753,7 @@ lbl_fn_800ABD94_000006A0:
     bl __GXSetVtxDesc
     li r3, 0x0
     li r4, 0x0
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1105,7 +1105,7 @@ asm void fn_800AC5F4(void)
     li r6, 0x6
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     stw r3, 0x68(r30)
     mr r4, r3
     addi r3, r30, 0x48
@@ -1115,7 +1115,7 @@ asm void fn_800AC5F4(void)
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80880DA8
     addi r3, r30, 0x48
     li r4, 0x1
@@ -1125,7 +1125,7 @@ asm void fn_800AC5F4(void)
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1168,7 +1168,7 @@ asm void fn_800AC6DC(void)
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80880DA8
     addi r3, r29, 0x8
     li r4, 0x1
@@ -1178,7 +1178,7 @@ asm void fn_800AC6DC(void)
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     lwz r3, lbl_8087EF8C
     mr r4, r28
     mr r5, r27
@@ -1193,7 +1193,7 @@ asm void fn_800AC6DC(void)
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80880DA8
     addi r3, r29, 0x28
     li r4, 0x1
@@ -1203,7 +1203,7 @@ asm void fn_800AC6DC(void)
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     bl fn_80614190
     bl GXDrawDone
     lwz r3, lbl_8087EFB4
@@ -1299,7 +1299,7 @@ asm void fn_800AC6DC(void)
     bl fn_800763FC
     li r3, 0x0
     li r4, 0x3
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1347,7 +1347,7 @@ asm void fn_800AC6DC(void)
     bl fn_80616EF0
     li r3, 0x1
     li r4, 0x4
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x1
     li r4, 0xf
     li r5, 0xf
@@ -1711,7 +1711,7 @@ lbl_fn_800ACCB8_000017F0:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80880DA8
     addi r3, r27, 0x48
     li r4, 0x1
@@ -1721,7 +1721,7 @@ lbl_fn_800ACCB8_000017F0:
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     addi r11, r1, 0x40
     bl _restgpr_26
     lwz r0, 0x44(r1)

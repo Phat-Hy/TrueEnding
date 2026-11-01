@@ -12,16 +12,16 @@ extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void viewport_updateCulling(void);
-extern void fn_80108C10(void);
+extern void hurtbox_testCollisionLayer(void);
 extern void fn_8010B250(void);
 extern void fn_8010CF28(void);
 extern void fn_8010F4BC(void);
 extern void fn_80119ECC(void);
 extern void fn_8012B0B0(void);
 extern void fn_8012B3A8(void);
-extern void fn_80148B0C(void);
+extern void quest_getRewardItemSlot(void);
 extern void fn_8015D8C0(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void fn_8018D4AC(void);
 extern void fn_8020BD3C(void);
 extern void fn_8020C000(void);
@@ -92,10 +92,10 @@ void fn_80441E88(void);
 void fn_80441E8C(void);
 void fn_80441F24(void);
 void fn_80442A9C(void);
-void fn_80442B48(void);
+void *fn_80442B48(void *obj);
 void fn_80442B50(void);
 void fn_80442E64(void);
-void fn_80442EA4(void);
+void *fn_80442EA4(void *obj);
 void fn_80442EAC(void);
 void fn_80442ECC(void);
 void fn_80442F10(void);
@@ -273,12 +273,12 @@ lbl_fn_80441F24_000001FC:
     beq lbl_fn_80441F24_00000BCC
     mr r3, r20
     li r4, 0x0
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     cmpwi r3, 0x0
     beq lbl_fn_80441F24_0000028C
     mr r3, r20
     li r4, 0x0
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     psq_l f1, 0x4(r3), 0, 0
     addi r4, r1, 0xf4
     lfs f2, 0xc(r3)
@@ -327,7 +327,7 @@ lbl_fn_80441F24_000002A0:
     lwz r6, 0x88(r19)
     stfs f9, 0xb0(r1)
     stfs f10, 0xb4(r1)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     cmpwi r18, 0x2
     bne lbl_fn_80441F24_00000494
     lwz r0, 0x48(r20)
@@ -366,7 +366,7 @@ lbl_fn_80441F24_0000034C:
     mr r4, r3
 lbl_fn_80441F24_000003BC:
     mr r3, r20
-    bl fn_80178208
+    bl battle_generateLootDrops
     lfs f8, lbl_80886A80
     addi r3, r1, 0x2c0
     lfs f7, lbl_80886AAC
@@ -990,11 +990,9 @@ asm void fn_80442A9C(void)
     blr
 }
 
-asm void fn_80442B48(void)
+void *fn_80442B48(void *obj)
 {
-    nofralloc
-    lwz r3, 0xa0(r3)
-    blr
+    return *(void **)((char *)obj + 0xa0);
 }
 
 asm void fn_80442B50(void)
@@ -1235,11 +1233,9 @@ lbl_fn_80442E64_00001038:
     blr
 }
 
-asm void fn_80442EA4(void)
+void *fn_80442EA4(void *obj)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(void **)((char *)obj + 4);
 }
 
 asm void fn_80442EAC(void)

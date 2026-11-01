@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_19(void);
 extern void _savegpr_19(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void collision_queryGeometry(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -14,17 +14,17 @@ extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
-extern void fn_80108C10(void);
+extern void hurtbox_testCollisionLayer(void);
 extern void quest_evaluateConditions(void);
-extern void fn_80148B0C(void);
+extern void quest_getRewardItemSlot(void);
 extern void fn_80155D70(void);
 extern void fn_8015CF98(void);
 extern void fn_8015D2A0(void);
 extern void fn_8015D5B0(void);
 extern void actor_setState(void);
 extern void battle_canTargetActor(void);
-extern void fn_80176548(void);
-extern void fn_801781B0(void);
+extern void battle_calcExpPosition(void);
+extern void battle_calcAABBCenter(void);
 extern void fn_8017A450(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -460,7 +460,7 @@ lbl_fn_802692B4_00000408:
     stw r0, 0x98(r1)
     stfs f25, 0xb0(r1)
     stw r28, 0xb8(r1)
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     lwz r3, 0x6c(r22)
     bl task_findEntryById
     lfs f1, lbl_80883674
@@ -839,7 +839,7 @@ lbl_fn_802696F8_00000A20:
     li r7, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r3, 0x150c(r31)
     lwz r0, 0x7e0(r3)
     rlwinm r0, r0, 0, 26, 26
@@ -852,7 +852,7 @@ lbl_fn_802696F8_00000A20:
 lbl_fn_802696F8_00000AA4:
     lwz r3, 0x150c(r31)
     li r4, 0x0
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     lfs f2, 0xc(r3)
     addi r5, r1, 0x5c
     psq_l f1, 0x4(r3), 0, 0
@@ -876,7 +876,7 @@ lbl_fn_802696F8_00000AA4:
     lwz r7, 0x150c(r31)
     stfs f5, 0xc(r1)
     stfs f6, 0x10(r1)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
 lbl_fn_802696F8_00000B10:
     lwz r0, 0x1a4(r1)
     psq_l f31, 0x198(r1), 0, 0
@@ -1295,7 +1295,7 @@ lbl_fn_8026A010_000010C0:
     fdivs f0, f0, f3
     fadds f0, f5, f0
     stfs f0, 0x2c(r1)
-    bl fn_80176548
+    bl battle_calcExpPosition
     lwz r3, lbl_8087EE98
     addi r4, r1, 0x38
     lfs f1, 0x24(r1)

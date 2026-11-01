@@ -10,7 +10,7 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void ui_destroyWidget(void);
 extern void fn_8004829C(void);
-extern void fn_8004B290(void);
+extern void sound_initChannelParams(void);
 extern void fn_8005C220(void);
 extern void fn_8006A250(void);
 extern void chapter_updateProgression(void);
@@ -339,16 +339,14 @@ lbl_fn_804CF078_000001F4:
     blr
 }
 
-asm void fn_804CF190(void)
+void fn_804CF190(void)
 {
-    nofralloc
-    b atn_Task_unlink
+    atn_Task_unlink();
 }
 
-asm void fn_804CF194(void)
+void fn_804CF194(void)
 {
-    nofralloc
-    b OSGetTime
+    OSGetTime();
 }
 
 asm void fn_804CF198(void)
@@ -1848,7 +1846,7 @@ lbl_fn_804D0328_00001618:
     li r4, 0x0
     li r5, 0x0
     subi r3, r3, 0x688c
-    bl fn_8004B290
+    bl sound_initChannelParams
     addis r3, r29, 0x1
     subi r3, r3, 0x6698
     bl res_MsgHandle_constructor

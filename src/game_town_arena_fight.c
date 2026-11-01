@@ -12,7 +12,7 @@ extern void scene_transformPoint(void);
 extern void fn_8000D9F8(void);
 extern void fn_8000DB1C(void);
 extern void fn_8000DCF4(void);
-extern void fn_8000DD0C(void);
+extern void scene_getRootNode(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
@@ -20,21 +20,21 @@ extern void vec3_sub(void);
 extern void fn_80013404(void);
 extern void vec3_add(void);
 extern void mission_updateStub(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void script_executeOpcode(void);
 extern void fn_8006FA4C(void);
 extern void fn_8008B964(void);
-extern void fn_800A58D0(void);
+extern void msg_isWindowActive(void);
 extern void motion_updateFogAdj(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void wcs_vformat(void);
 extern void fn_800E0000(void);
-extern void fn_800F52F0(void);
+extern void proj_getMatrix(void);
 extern void fn_800F52F8(void);
 extern void fn_800F530C(void);
 extern void fn_800F7260(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void fn_800F7F80(void);
 extern void fn_800F7F90(void);
 extern void fn_800F7FB4(void);
@@ -43,7 +43,7 @@ extern void fn_800F84BC(void);
 extern void fn_800F8524(void);
 extern void fn_8010D320(void);
 extern void fn_8010F6FC(void);
-extern void fn_801125F8(void);
+extern void phys_scaleGravity(void);
 extern void fn_80113CCC(void);
 extern void fn_801156BC(void);
 extern void fn_801156C4(void);
@@ -60,16 +60,16 @@ extern void fn_80139F4C(void);
 extern void fn_80139F60(void);
 extern void fn_8013A13C(void);
 extern void fn_8013A158(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_8013C3A8(void);
 extern void fn_8013C42C(void);
 extern void fn_8013C43C(void);
 extern void fn_8013C458(void);
 extern void fn_8013C480(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void fn_80140518(void);
-extern void fn_8014052C(void);
+extern void quest_initMarkerCoords(void);
 extern void fn_801479D8(void);
 extern void fn_80151210(void);
 extern void fn_801799BC(void);
@@ -108,7 +108,7 @@ extern void fn_80315644(void);
 extern void fn_80318F90(void);
 extern void fn_80323C2C(void);
 extern void fn_80339F04(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void fn_80366DA4(void);
 extern void fn_80366DAC(void);
 extern void fn_80366E08(void);
@@ -775,7 +775,7 @@ lbl_fn_803D2A6C_00000704:
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00000930
     mr r3, r31
-    bl fn_800F52F0
+    bl proj_getMatrix
     lwz r0, 0x16c(r3)
     lis r3, lbl_80750650@ha
     lfd f1, lbl_80750650@l(r3)
@@ -784,7 +784,7 @@ lbl_fn_803D2A6C_00000704:
     stw r0, 0xa64(r1)
     lfd f0, 0xa60(r1)
     fsubs f26, f0, f1
-    bl fn_800F52F0
+    bl proj_getMatrix
     lfs f0, 0x4(r3)
     mr r3, r31
     fdivs f26, f0, f26
@@ -901,7 +901,7 @@ lbl_fn_803D2A6C_000008B4:
     fmr f26, f1
     lfs f0, lbl_80885E14
     fmadds f1, f2, f1, f0
-    bl fn_801125F8
+    bl phys_scaleGravity
     lfs f2, lbl_80885E18
     addi r3, r1, 0x5c8
     stfs f1, 0x5d8(r1)
@@ -944,7 +944,7 @@ lbl_fn_803D2A6C_0000096C:
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00000B60
     lwz r3, 0x18(r1)
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_80139F4C
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00000B4C
@@ -1026,7 +1026,7 @@ lbl_fn_803D2A6C_00000A5C:
     bl viewport_getNextSequenceId
     mr r4, r31
     addi r3, r1, 0x2a8
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     addi r3, r1, 0x470
     addi r4, r1, 0x2a8
     bl fn_801A03E8
@@ -1259,16 +1259,16 @@ lbl_fn_803D2A6C_00000DE8:
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000E64
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000E64
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     bl fn_80244CA0
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000E64
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     bl fn_803CC900
     cmpwi r3, 0x0
     ble lbl_fn_803D2A6C_00000E64
@@ -1332,7 +1332,7 @@ lbl_fn_803D2A6C_00000EDC:
     beq lbl_fn_803D2A6C_0000100C
     bl fn_803D6E2C
     lwz r3, 0x770(r24)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     lis r4, lbl_807506A0@ha
     addi r4, r4, lbl_807506A0@l
     addi r4, r4, 0x10c1
@@ -1438,7 +1438,7 @@ lbl_fn_803D2A6C_00001090:
     addi r3, r24, 0x85c
     bl fn_803D7260
     lwz r3, 0x0(r3)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     addi r4, r21, 0x10c1
     bl atn_Model_getBoneMatrix
     cmpwi r3, 0x0
@@ -1825,7 +1825,7 @@ lbl_fn_803D2A6C_00001634:
     bl scene_transformPoint
     bl fn_8000DCF4
     mr r19, r3
-    bl fn_8000DD0C
+    bl scene_getRootNode
     lis r4, lbl_807506A0@ha
     addi r4, r4, lbl_807506A0@l
     addi r4, r4, 0x10c1
@@ -1858,7 +1858,7 @@ lbl_fn_803D2A6C_00001698:
     addi r4, r1, 0x1fc
     bl vec3_copy
     mr r3, r19
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_80139F4C
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000016F4
@@ -1890,7 +1890,7 @@ lbl_fn_803D2A6C_000016F4:
     li r5, 0x1
     bl fn_803D6F78
     mr r3, r19
-    bl fn_800F52F0
+    bl proj_getMatrix
     lwz r0, 0x16c(r3)
     lis r3, lbl_80750650@ha
     lfd f1, lbl_80750650@l(r3)
@@ -1899,7 +1899,7 @@ lbl_fn_803D2A6C_000016F4:
     stw r0, 0xa6c(r1)
     lfd f0, 0xa68(r1)
     fsubs f26, f0, f1
-    bl fn_800F52F0
+    bl proj_getMatrix
     lfs f0, 0x4(r3)
     addi r4, r21, 0x10d6
     lwz r3, 0x5b8(r24)
@@ -2014,7 +2014,7 @@ lbl_fn_803D2A6C_000018F4:
     b lbl_fn_803D2A6C_00001BCC
 lbl_fn_803D2A6C_0000191C:
     mr r3, r25
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_80139F4C
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00001978
@@ -2228,7 +2228,7 @@ lbl_fn_803D2A6C_00001BEC:
     b lbl_fn_803D2A6C_00001E24
 lbl_fn_803D2A6C_00001C2C:
     mr r3, r19
-    bl fn_800F52F0
+    bl proj_getMatrix
     lwz r0, 0x16c(r3)
     mr r25, r3
     lwz r4, 0x170(r3)
@@ -2249,7 +2249,7 @@ lbl_fn_803D2A6C_00001C2C:
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00001CB8
     mr r3, r19
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_80139F4C
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00001CB8
@@ -2373,7 +2373,7 @@ lbl_fn_803D2A6C_00001E2C:
     bl fn_803D6EDC
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00001E70
-    bl fn_8013A194
+    bl npc_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00001E70
     addi r3, r24, 0x8d0
@@ -2383,7 +2383,7 @@ lbl_fn_803D2A6C_00001E2C:
     addi r3, r1, 0x1f0
     bl vec3_assign
     mr r23, r3
-    bl fn_8013A194
+    bl npc_getGlobalManager
     mr r4, r23
     bl fn_8010D320
 lbl_fn_803D2A6C_00001E70:
@@ -2605,7 +2605,7 @@ lbl_fn_803D2A6C_00002194:
     bl fn_803D6FEC
     bl fn_801156BC
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     addi r3, r1, 0x580
     li r4, 0x0
     li r5, 0x40
@@ -3019,7 +3019,7 @@ lbl_fn_803D2A6C_000027AC:
     lfs f1, lbl_80885E58
     addi r3, r1, 0x168
     addi r4, r1, 0x398
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x38c
     addi r4, r31, 0x4
     addi r5, r1, 0x168
@@ -3555,7 +3555,7 @@ lbl_fn_803D2A6C_00002F80:
     bl fn_803D7840
     mr r25, r3
     lwz r3, 0x8(r3)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     addi r4, r23, 0x10c1
     bl atn_Model_getBoneMatrix
     cmpwi r3, 0x0
@@ -3675,7 +3675,7 @@ lbl_fn_803D2A6C_000030EC:
     b lbl_fn_803D2A6C_00003374
 lbl_fn_803D2A6C_00003150:
     mr r3, r19
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_80139F4C
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00003368
@@ -3836,7 +3836,7 @@ lbl_fn_803D2A6C_00003374:
     b lbl_fn_803D2A6C_0000358C
 lbl_fn_803D2A6C_00003398:
     mr r3, r19
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_80139F4C
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00003580
@@ -3993,7 +3993,7 @@ lbl_fn_803D2A6C_000035CC:
     lwz r3, 0x0(r21)
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00003800
-    bl fn_8000DD0C
+    bl scene_getRootNode
     addi r4, r23, 0x10c1
     bl atn_Model_getBoneMatrix
     cmpwi r3, 0x0
@@ -4044,14 +4044,14 @@ lbl_fn_803D2A6C_00003610:
     lfs f1, lbl_80885D58
     bl save_computeCrc32
     lwz r3, 0x0(r21)
-    bl fn_800F52F0
+    bl proj_getMatrix
     lwz r0, 0x16c(r3)
     lwz r3, 0x0(r21)
     xoris r0, r0, 0x8000
     stw r0, 0xa64(r1)
     lfd f0, 0xa60(r1)
     fsubs f29, f0, f30
-    bl fn_800F52F0
+    bl proj_getMatrix
     lfs f0, 0x244(r3)
     addi r4, r23, 0x10d6
     lwz r3, 0x574(r22)
@@ -4157,7 +4157,7 @@ lbl_fn_803D2A6C_00003814:
     addi r3, r1, 0x2f0
     bl mission_updateStub
     bl fn_80323C2C
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     lis r4, lbl_807506A0@ha
     lfs f31, lbl_80885DDC
     lfs f29, lbl_80885D60
@@ -4180,7 +4180,7 @@ lbl_fn_803D2A6C_00003864:
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00003A38
     mr r3, r19
-    bl fn_8000DD0C
+    bl scene_getRootNode
     addi r4, r23, 0x119b
     bl atn_Model_getBoneMatrix
     mr r4, r3
@@ -4216,7 +4216,7 @@ lbl_fn_803D2A6C_00003864:
     li r5, 0x1
     bl save_verifyBlockCrc
     mr r3, r19
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_80139F4C
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00003A28
@@ -4234,7 +4234,7 @@ lbl_fn_803D2A6C_00003864:
     bl fn_803D7384
 lbl_fn_803D2A6C_00003968:
     mr r3, r19
-    bl fn_800F52F0
+    bl proj_getMatrix
     lwz r0, 0x224(r3)
     cmpwi r0, 0x0
     ble lbl_fn_803D2A6C_000039D4
@@ -4333,7 +4333,7 @@ lbl_fn_803D2A6C_00003A84:
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00003C80
     mr r3, r19
-    bl fn_8000DD0C
+    bl scene_getRootNode
     addi r4, r23, 0x119b
     bl atn_Model_getBoneMatrix
     mr r4, r3
@@ -4369,7 +4369,7 @@ lbl_fn_803D2A6C_00003A84:
     li r5, 0x1
     bl save_verifyBlockCrc
     mr r3, r19
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_80139F4C
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00003C70
@@ -4387,7 +4387,7 @@ lbl_fn_803D2A6C_00003A84:
     bl fn_803D7384
 lbl_fn_803D2A6C_00003BB0:
     mr r3, r19
-    bl fn_800F52F0
+    bl proj_getMatrix
     lwz r0, 0x224(r3)
     cmpwi r0, 0x0
     ble lbl_fn_803D2A6C_00003C1C
@@ -4572,7 +4572,7 @@ lbl_fn_803D2A6C_00003E5C:
     addi r3, r24, 0xd60
     fmr f2, f1
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
     lwz r0, 0xd3c(r24)
     cmpwi r0, 0x0
     beq lbl_fn_803D2A6C_00003F50
@@ -4582,7 +4582,7 @@ lbl_fn_803D2A6C_00003E5C:
     lwz r3, 0xd50(r24)
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00003F2C
-    bl fn_8000DD0C
+    bl scene_getRootNode
     lis r4, lbl_807506A0@ha
     addi r4, r4, lbl_807506A0@l
     addi r4, r4, 0x10c1

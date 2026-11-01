@@ -14,7 +14,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_800EE360(void);
+extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
@@ -23,7 +23,7 @@ extern void dialog_updateScriptState(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015AC48(void);
 extern void debuff_clearStatus(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
 extern void battle_updateActorStatus(void);
@@ -38,7 +38,7 @@ extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_805A3C58(void);
+extern void rand_Mersenne_constructor(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void strcmp(void);
@@ -88,7 +88,7 @@ void fn_802E55B0(void);
 void fn_802E58C8(void);
 void fn_802E5970(void);
 void fn_802E59E0(void);
-void fn_802E5B30(void);
+void fn_802E5B30(void *p, u32 val);
 void fn_802E5B38(void);
 void fn_802E5CD0(void);
 void fn_802E5E94(void);
@@ -921,7 +921,7 @@ lbl_fn_802E58C8_00000BC4:
     mr r3, r31
     bl battle_awardExp
     mr r3, r31
-    bl fn_800EE360
+    bl camera_updateTargetMode
     b lbl_fn_802E58C8_00000BE8
 lbl_fn_802E58C8_00000BE0:
     li r0, 0x1e
@@ -982,7 +982,7 @@ asm void fn_802E59E0(void)
     mr r29, r5
     stw r28, 0x110(r1)
     mr r28, r3
-    bl fn_805A3C58
+    bl rand_Mersenne_constructor
     lis r3, lbl_80787290@ha
     addi r31, r28, 0x14d4
     addi r3, r3, lbl_80787290@l
@@ -1061,11 +1061,9 @@ lbl_fn_802E59E0_00000D74:
     blr
 }
 
-asm void fn_802E5B30(void)
+void fn_802E5B30(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x14f0(r3)
-    blr
+    *(u32 *)((char *)p + 0x14f0) = val;
 }
 
 asm void fn_802E5B38(void)
@@ -1609,7 +1607,7 @@ lbl_fn_802E6228_00001514:
     bl actor_setState
     mr r3, r31
     li r4, 0x1
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     lwz r0, 0x5c0(r31)
     mr r3, r31
     stb r30, 0x1508(r31)

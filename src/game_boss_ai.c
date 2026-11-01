@@ -9,7 +9,7 @@ extern void _savegpr_22(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_80056DB8(void);
+extern void path_Object_constructor(void);
 extern void boss_recordDamage(void);
 extern void fn_8006AD24(void);
 extern void fn_8007A75C(void);
@@ -32,11 +32,11 @@ extern void fn_8013459C(void);
 extern void fn_80204E04(void);
 extern void fn_80206B14(void);
 extern void fn_8020787C(void);
-extern void fn_8020924C(void);
+extern void mem_findBlockById(void);
 extern void fn_802092C0(void);
 extern void fn_8020A81C(void);
 extern void fn_8020A888(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void task_lookupTagIndex(void);
 extern void fn_80218260(void);
 extern void fn_80219EB4(void);
@@ -44,7 +44,7 @@ extern void fn_80219EBC(void);
 extern void fn_8021FC00(void);
 extern void fn_8036823C(void);
 extern void world_getGlobalFlag(void);
-extern void fn_804444E8(void);
+extern void gmk_findSlotByIndex(void);
 extern void fn_804446BC(void);
 extern void atn_LoadHandle_constructor(void);
 extern void rand(void);
@@ -547,7 +547,7 @@ lbl_fn_80134800_0000062C:
     mr r4, r30
 lbl_fn_80134800_00000640:
     mr r3, r20
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     mr r5, r3
     mr r3, r23
     mr r4, r22
@@ -648,7 +648,7 @@ lbl_fn_80134800_00000794:
     mr r4, r30
 lbl_fn_80134800_000007A8:
     mr r3, r20
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     cmpwi r3, 0x0
     beq lbl_fn_80134800_00000890
     lwz r4, 0xe4(r3)
@@ -1077,7 +1077,7 @@ lbl_fn_8013539C_00000D2C:
     mr r4, r3
     beq lbl_fn_8013539C_00000D60
     lwz r3, lbl_8087F4F0
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     ble lbl_fn_8013539C_00000D60
     li r3, 0x1
@@ -1090,7 +1090,7 @@ lbl_fn_8013539C_00000D68:
     blt lbl_fn_8013539C_00000D2C
     lwz r3, lbl_8087F4F0
     li r4, 0x19c
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     ble lbl_fn_8013539C_00000DCC
     li r3, 0x1
@@ -1103,7 +1103,7 @@ lbl_fn_8013539C_00000D98:
     lwz r4, 0x8(r31)
     lwz r3, lbl_8087F4F0
     lwzx r4, r4, r30
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     ble lbl_fn_8013539C_00000DB8
     li r3, 0x1
@@ -1263,7 +1263,7 @@ lbl_fn_801354B4_00000F14:
     stb r26, 0x59e(r29)
     stb r26, 0x59f(r29)
     stfs f3, 0x5a0(r29)
-    bl fn_80056DB8
+    bl path_Object_constructor
     lfs f0, lbl_8088196C
     lis r3, lbl_80777630@ha
     addi r3, r3, lbl_80777630@l
@@ -1514,7 +1514,7 @@ lbl_fn_801354B4_000013AC:
     cmpwi r31, -0x1
     beq lbl_fn_801354B4_000014A0
     lwz r3, 0x50(r29)
-    bl fn_8020924C
+    bl mem_findBlockById
     cmpwi r3, 0x0
     stw r3, 0x60(r29)
     bne lbl_fn_801354B4_00001454
@@ -1550,7 +1550,7 @@ lbl_fn_801354B4_000013AC:
     bl boss_recordDamage
 lbl_fn_801354B4_00001448:
     li r3, 0x0
-    bl fn_8020924C
+    bl mem_findBlockById
     stw r3, 0x60(r29)
 lbl_fn_801354B4_00001454:
     lwz r4, 0x60(r29)

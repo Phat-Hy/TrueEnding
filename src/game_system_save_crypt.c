@@ -13,8 +13,8 @@ extern void str_initFromCStr(void);
 extern void str_getData(void);
 extern void collision_testLineSegment(void);
 extern void mission_updateStub(void);
-extern void fn_80057A68(void);
-extern void fn_80063D3C(void);
+extern void vec3_initValues(void);
+extern void magic_castSpellCircle(void);
 extern void boss_initActionStream(void);
 extern void fn_8006CA80(void);
 extern void route_findNextWaypoint(void);
@@ -26,24 +26,24 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Task_setActive(void);
 extern void fn_800EC254(void);
-extern void fn_800EC2C4(void);
-extern void fn_800EC440(void);
-extern void fn_800EC534(void);
-extern void fn_800EC5BC(void);
-extern void fn_800EC654(void);
-extern void fn_800ED42C(void);
+extern void cam_registerTarget(void);
+extern void cam_initTrajectoryParams(void);
+extern void cam_bindPathTarget(void);
+extern void cam_bindRotationTarget(void);
+extern void cam_evalControllerSpline(void);
+extern void cam_setLookAtTarget(void);
 extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
-extern void fn_800EDFE8(void);
+extern void cam_evalLookAtMatrix(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
 extern void equip_getGlobalManager(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
 extern void save_validateHeader(void);
-extern void fn_8020A780(void);
+extern void str_appendString(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_ctor(void);
 extern void res_Resource_destructor(void);
@@ -735,7 +735,7 @@ lbl_fn_803441AC_00000784:
     stfs f0, 0x10(r1)
     lwz r6, 0x14d8(r27)
     lfs f1, 0x58(r6)
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_803441AC_0000086C:
     addi r28, r28, 0x1
     cmpwi r28, 0xb4
@@ -1507,7 +1507,7 @@ asm void fn_80344DF4(void)
     stb r31, 0x16b4(r3)
     ori r0, r0, 0x2000
     stw r0, 0x54c(r3)
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     lwz r6, 0x6a8(r30)
     addi r3, r30, 0xb0
     lfs f0, lbl_80885260
@@ -2032,17 +2032,17 @@ lbl_fn_80345384_000019B0:
     addi r4, r29, 0x31
     li r5, 0x0
     li r6, 0x0
-    bl fn_800EC440
+    bl cam_initTrajectoryParams
     addi r3, r1, 0xd4
     addi r4, r1, 0x14
     addi r5, r1, 0x74
-    bl fn_800EC2C4
+    bl cam_registerTarget
     addi r3, r1, 0x74
     li r4, -0x1
-    bl fn_800EC534
+    bl cam_bindPathTarget
     addi r3, r1, 0x98
     addi r4, r1, 0xd4
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     b lbl_fn_80345384_00001B20
 lbl_fn_80345384_00001ADC:
     addi r3, r1, 0x98
@@ -2059,26 +2059,26 @@ lbl_fn_80345384_00001ADC:
     mr r4, r3
     addi r3, r1, 0x20
     addi r4, r4, 0x8
-    bl fn_8020A780
+    bl str_appendString
 lbl_fn_80345384_00001B18:
     addi r3, r1, 0x98
     bl fn_800ED4E0
 lbl_fn_80345384_00001B20:
     addi r3, r1, 0x38
     addi r4, r1, 0xd4
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     addi r3, r1, 0x98
     addi r4, r1, 0x38
     bl fn_800EC254
     mr r30, r3
     addi r3, r1, 0x38
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     cmpwi r30, 0x0
     bne lbl_fn_80345384_00001ADC
     addi r3, r1, 0x98
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     addi r3, r1, 0x8
     addi r4, r1, 0x2c
     addi r5, r1, 0x20
@@ -2175,7 +2175,7 @@ lbl_fn_80345384_00001B20:
     addi r3, r31, 0x160c
     fmr f2, f1
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
     lwz r5, 0x12a8(r31)
     addi r3, r1, 0x8
     lwz r0, 0x12a4(r31)
@@ -2187,7 +2187,7 @@ lbl_fn_80345384_00001B20:
     bl dtor_80013D60
     addi r3, r1, 0xd4
     li r4, -0x1
-    bl fn_800EC5BC
+    bl cam_bindRotationTarget
     addi r3, r1, 0x14
     li r4, -0x1
     bl dtor_80013D60

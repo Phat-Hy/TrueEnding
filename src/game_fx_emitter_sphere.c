@@ -15,8 +15,8 @@ extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8004203C(void);
-extern void fn_80057A68(void);
+extern void menu_initWindowBuffer(void);
+extern void vec3_initValues(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -29,15 +29,15 @@ struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct 
 extern void atn_LH_Texture_destructAndFree(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_800EB7A0(void);
-extern void fn_800EC204(void);
+extern void sound_playSpatialEffect(void);
+extern void cam_findTargetIndex(void);
 extern void fn_800EC24C(void);
-extern void fn_800F7FD8(void);
+extern void vec3_normalize(void);
 extern void system_getNextSequenceId(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
@@ -457,7 +457,7 @@ lbl_fn_80287788_000003F8:
     lfs f2, 0x8(r4)
     stfs f2, 0x6c0(r31)
     psq_st f1, 0x6b8(r31), 0, 0
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -1435,7 +1435,7 @@ asm void fn_802885EC(void)
     oris r0, r0, 0x380
     stw r0, 0x7ec(r31)
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r30, r3
     addi r3, r31, 0x1984
     bl boss_getOffset54
@@ -1451,7 +1451,7 @@ asm void fn_802885EC(void)
     mr r4, r3
     mr r5, r30
     addi r3, r1, 0x38
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     lis r30, lbl_80745314@ha
     addi r30, r30, lbl_80745314@l
 lbl_fn_802885EC_00001334:
@@ -1633,7 +1633,7 @@ lbl_fn_802885EC_00001594:
     mr r29, r3
     bl scene_transformPoint
     mr r4, r29
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     stw r3, 0x1630(r31)
     b lbl_fn_802885EC_00001928
 lbl_fn_802885EC_000015CC:
@@ -1648,9 +1648,9 @@ lbl_fn_802885EC_000015E0:
     bl str_parseInt
     mr r29, r3
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r29
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     stw r3, 0xc(r1)
     beq lbl_fn_802885EC_00001618
@@ -1673,9 +1673,9 @@ lbl_fn_802885EC_00001638:
     bl str_parseInt
     mr r29, r3
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r29
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     stw r3, 0x8(r1)
     beq lbl_fn_802885EC_00001670
@@ -1697,9 +1697,9 @@ lbl_fn_802885EC_0000167C:
     bl str_parseInt
     mr r29, r3
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r29
-    bl fn_800EC204
+    bl cam_findTargetIndex
     stw r3, 0x1500(r31)
     b lbl_fn_802885EC_00001928
 lbl_fn_802885EC_000016B8:
@@ -1884,9 +1884,9 @@ lbl_fn_802885EC_00001938:
     mr r3, r31
     bl fn_802914F8
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     li r4, 0x3e9
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_802885EC_0000196C
@@ -1899,7 +1899,7 @@ lbl_fn_802885EC_0000196C:
     addi r3, r31, 0x1978
     lfs f2, lbl_80883AAC
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
 lbl_fn_802885EC_00001980:
     addi r3, r1, 0x14
     addi r4, r31, 0x1978
@@ -1907,7 +1907,7 @@ lbl_fn_802885EC_00001980:
     bl vec3_sub
     addi r3, r1, 0x20
     addi r4, r1, 0x14
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x2c
     addi r4, r1, 0x20
     bl vec3_toEulerAngles

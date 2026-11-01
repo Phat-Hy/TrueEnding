@@ -10,10 +10,10 @@ extern void _savegpr_25(void);
 extern void vec3_copy(void);
 extern void scene_transformPoint(void);
 extern void fn_8000DCF4(void);
-extern void fn_8000DD0C(void);
+extern void scene_getRootNode(void);
 extern void vec3_assign(void);
 extern void vec3_sub(void);
-extern void fn_800133B0(void);
+extern void math_wrapAngle(void);
 extern void msg_getMessageById(void);
 extern void fn_8012A190(void);
 extern void fn_8012A1B8(void);
@@ -1655,11 +1655,11 @@ asm void fn_804E7AC4(void)
     bl scene_transformPoint
     bl fn_8000DCF4
     mr r29, r3
-    bl fn_8000DD0C
+    bl scene_getRootNode
     bl fn_804CF424
     mr r30, r3
     mr r3, r29
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r4, r30
     bl fn_80139F2C
     cmpwi r3, 0x0
@@ -1713,13 +1713,13 @@ lbl_fn_804E7AC4_00001698:
     li r4, 0x0
     bl fn_804E80AC
     fsubs f1, f1, f31
-    bl fn_800133B0
+    bl math_wrapAngle
     stfs f1, 0x28(r27)
     mr r3, r29
     bl fn_804E80BC
     mulli r28, r3, 0x2c
     mr r3, r29
-    bl fn_8000DD0C
+    bl scene_getRootNode
     bl fn_80147A00
     add r4, r3, r28
     addi r3, r1, 0x44
@@ -1739,7 +1739,7 @@ lbl_fn_804E7AC4_00001698:
     addi r3, r27, 0x1e
     bl fn_804E80CC
     mr r3, r29
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r4, r3
     mr r5, r30
     addi r3, r27, 0x2c
@@ -1782,11 +1782,11 @@ lbl_fn_804E7AC4_0000176C:
     cmpwi r3, 0x0
     bne lbl_fn_804E7AC4_0000195C
     lwz r3, 0x0(r28)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     bl fn_804CF424
     mr r26, r3
     lwz r3, 0x0(r28)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r4, r26
     bl fn_80139F2C
     cmpwi r3, 0x0
@@ -1840,13 +1840,13 @@ lbl_fn_804E7AC4_00001888:
     li r4, 0x0
     bl fn_804E80AC
     fsubs f1, f1, f31
-    bl fn_800133B0
+    bl math_wrapAngle
     stfs f1, 0x28(r25)
     lwz r3, 0x0(r28)
     bl fn_804E80BC
     mulli r30, r3, 0x2c
     lwz r3, 0x0(r28)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     bl fn_80147A00
     add r4, r3, r30
     addi r3, r1, 0x38
@@ -1866,7 +1866,7 @@ lbl_fn_804E7AC4_00001888:
     addi r3, r25, 0x1e
     bl fn_804E80CC
     lwz r3, 0x0(r28)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r4, r3
     mr r5, r26
     addi r3, r25, 0x31
@@ -1913,11 +1913,11 @@ lbl_fn_804E7AC4_0000197C:
     beq lbl_fn_804E7AC4_00001B50
 lbl_fn_804E7AC4_000019C8:
     lwz r3, 0x10c(r1)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     bl fn_804CF424
     mr r26, r3
     lwz r3, 0x10c(r1)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r4, r26
     bl fn_80139F2C
     cmpwi r3, 0x0
@@ -1971,13 +1971,13 @@ lbl_fn_804E7AC4_00001A80:
     li r4, 0x0
     bl fn_804E80AC
     fsubs f1, f1, f31
-    bl fn_800133B0
+    bl math_wrapAngle
     stfs f1, 0x28(r27)
     lwz r3, 0x10c(r1)
     bl fn_804E80BC
     mulli r29, r3, 0x2c
     lwz r3, 0x10c(r1)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     bl fn_80147A00
     add r4, r3, r29
     addi r3, r1, 0x2c
@@ -1997,7 +1997,7 @@ lbl_fn_804E7AC4_00001A80:
     addi r3, r27, 0x1e
     bl fn_804E80CC
     lwz r3, 0x10c(r1)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r4, r3
     mr r5, r26
     addi r3, r27, 0x31

@@ -6,7 +6,7 @@ extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void dtor_80084684(void);
 extern void scene_traverseNode(void);
-extern void fn_80056DB8(void);
+extern void path_Object_constructor(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
 extern void talk_formatQuotedString(void);
@@ -17,7 +17,7 @@ extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
-extern void fn_8009EE30(void);
+extern void hud_drawTargetMarker(void);
 extern void skin_applyWeights(void);
 extern void morph_reset(void);
 extern void ref_releaseHandle(void);
@@ -38,10 +38,10 @@ extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
-extern void fn_803EC7A0(void);
+extern void barrier_formatDialogString(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
-extern void fn_803ED5D0(void);
+extern void barrier_bindFieldAnimation(void);
 extern void fn_803EDB18(void);
 extern void fn_803EDCF4(void);
 extern void fn_803F8324(void);
@@ -84,7 +84,7 @@ extern u32 lbl_8088601C;
 void fn_803F68B4(void);
 void fn_803F699C(void);
 void fn_803F69C8(void);
-void fn_803F69DC(void);
+void *fn_803F69DC(void *p);
 void fn_803F69E4(void);
 void fn_803F6AC4(void);
 void fn_803F6B04(void);
@@ -203,11 +203,9 @@ asm void fn_803F69C8(void)
     blr
 }
 
-asm void fn_803F69DC(void)
+void *fn_803F69DC(void *p)
 {
-    nofralloc
-    addi r3, r3, 0xf4
-    blr
+    return (char *)p + 0xf4;
 }
 
 asm void fn_803F69E4(void)
@@ -610,7 +608,7 @@ lbl_fn_803F6E0C_00000654:
     lwz r4, 0x174(r31)
     mr r3, r31
     addi r5, r1, 0x8
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     b lbl_fn_803F6E0C_0000080C
 lbl_fn_803F6E0C_00000684:
     mr r3, r28
@@ -1119,7 +1117,7 @@ asm void fn_803F75B8(void)
     stw r31, 0x550(r28)
     li r4, 0x2
     mr r3, r30
-    bl fn_80056DB8
+    bl path_Object_constructor
     lis r3, lbl_807775F8@ha
     addi r29, r28, 0x8d0
     addi r3, r3, lbl_807775F8@l
@@ -1127,7 +1125,7 @@ asm void fn_803F75B8(void)
     mr r3, r29
     li r4, 0x0
     stw r31, 0x8cc(r28)
-    bl fn_80056DB8
+    bl path_Object_constructor
     lis r3, lbl_80777668@ha
     stw r31, 0x91c(r28)
     addi r3, r3, lbl_80777668@l
@@ -1618,7 +1616,7 @@ lbl_fn_803F77B8_0000144C:
     stfs f0, 0x344(r1)
     stfs f7, 0x354(r1)
     stfs f8, 0x364(r1)
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
     addi r17, r17, 0x1
     addi r31, r31, 0x4
 lbl_fn_803F77B8_000014B8:
@@ -1836,7 +1834,7 @@ lbl_fn_803F7F30_00001770:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_803F7F30_000017AC:
     lwz r0, 0x4c4(r31)
     cmpwi r0, 0x0

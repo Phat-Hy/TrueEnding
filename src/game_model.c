@@ -15,12 +15,12 @@ extern void fn_80075DEC(void);
 extern void fn_8007A100(void);
 extern void fn_8007A4CC(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800839EC(void);
+extern void town_registerInteractionPoint(void);
 extern void fn_80083F50(void);
 extern void fn_80084110(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void atn_Reticle_updateDraw(void);
 extern void fn_800BC468(void);
@@ -29,12 +29,12 @@ extern void fn_800BF0EC(void);
 extern void fn_800C5644(void);
 extern void fn_800D5B58(void);
 extern void fn_800D5F68(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void fn_805ED390(void);
 extern void PSMTXConcat(void);
 extern void fn_80615E00(void);
-extern void fn_80615FF0(void);
-extern void fn_80616250(void);
+extern void GXInitLightObj(void);
+extern void GXClampLightAngle(void);
 extern void msl_releaseRefCount(void);
 extern void runtime_clampDouble(void);
 extern char* strcpy(char* dest, const char* src);
@@ -159,7 +159,7 @@ asm void fn_800BD9C0(void)
     li r6, 0x6
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     stw r3, 0x79c(r27)
     addi r6, r31, lbl_807336B0@l
     addi r8, r6, 0xe8
@@ -178,7 +178,7 @@ asm void fn_800BD9C0(void)
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     mr r3, r27
     addi r4, r27, 0x530
     bl fn_800BC468
@@ -195,7 +195,7 @@ asm void fn_800BD9C0(void)
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80881088
     addi r3, r27, 0x77c
     li r4, 0x0
@@ -205,7 +205,7 @@ asm void fn_800BD9C0(void)
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     addi r11, r1, 0x30
     bl _restgpr_27
     lwz r0, 0x34(r1)
@@ -858,7 +858,7 @@ lbl_atn_Model_updateAnimation_00000A84:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x14
     stw r3, 0x70(r1)
     mr r24, r3
@@ -890,7 +890,7 @@ lbl_atn_Model_updateAnimation_00000B60:
     addi r3, r1, 0x6c
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x6c(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x6c
     beq lbl_atn_Model_updateAnimation_00000BA8
     addic. r3, r3, 0x4
@@ -1230,7 +1230,7 @@ lbl_atn_Model_updateAnimation_00001030:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x10
     stw r3, 0x64(r1)
     mr r24, r3
@@ -1262,7 +1262,7 @@ lbl_atn_Model_updateAnimation_000010DC:
     addi r3, r1, 0x60
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x60(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x60
     beq lbl_atn_Model_updateAnimation_00001124
     addic. r3, r3, 0x4
@@ -1310,7 +1310,7 @@ lbl_atn_Model_updateAnimation_0000113C:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0xc
     stw r3, 0x58(r1)
     mr r24, r3
@@ -1342,7 +1342,7 @@ lbl_atn_Model_updateAnimation_0000120C:
     addi r3, r1, 0x54
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x54(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x54
     beq lbl_atn_Model_updateAnimation_00001254
     addic. r3, r3, 0x4
@@ -1378,7 +1378,7 @@ lbl_atn_Model_updateAnimation_0000126C:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x4c(r1)
     mr r24, r3
@@ -1410,7 +1410,7 @@ lbl_atn_Model_updateAnimation_0000130C:
     addi r3, r1, 0x48
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x48(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x48
     beq lbl_atn_Model_updateAnimation_00001354
     addic. r3, r3, 0x4

@@ -15,11 +15,11 @@ extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
 extern void fn_8011BEB8(void);
 extern void fn_8011C044(void);
-extern void fn_801255C8(void);
+extern void enemy_stepBehavior(void);
 extern void fn_80127EF4(void);
 extern void fn_80128A30(void);
 extern void fn_80128B20(void);
-extern void fn_8014C228(void);
+extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
 extern void actor_setState(void);
 extern void fn_801B192C(void);
@@ -99,7 +99,7 @@ asm void fn_80170F20(void)
     stfs f31, 0x1058(r31)
 lbl_fn_80170F20_00000048:
     addi r3, r31, 0x1030
-    bl fn_801255C8
+    bl enemy_stepBehavior
     cmpwi r3, 0x0
     beq lbl_fn_80170F20_000004E0
     addi r3, r31, 0xc58
@@ -183,7 +183,7 @@ lbl_fn_80170F20_0000016C:
     mr r3, r31
     stw r0, 0x648(r31)
     stw r0, 0x64c(r31)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_fn_80170F20_000001AC
 lbl_fn_80170F20_0000018C:
     lwz r0, 0x674(r31)
@@ -445,7 +445,7 @@ asm void fn_80171420(void)
     addi r5, r31, 0x528
     bl fn_80128B20
     addi r3, r31, 0x1030
-    bl fn_801255C8
+    bl enemy_stepBehavior
     cmpwi r3, 0x0
     beq lbl_fn_80171420_000009C0
     addi r3, r31, 0xc58
@@ -529,7 +529,7 @@ lbl_fn_80171420_0000064C:
     mr r3, r31
     stw r0, 0x648(r31)
     stw r0, 0x64c(r31)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_fn_80171420_0000068C
 lbl_fn_80171420_0000066C:
     lwz r0, 0x674(r31)
@@ -865,7 +865,7 @@ lbl_fn_801718F8_00000B04:
     mr r3, r31
     stw r0, 0x648(r31)
     stw r0, 0x64c(r31)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_fn_801718F8_00000B44
 lbl_fn_801718F8_00000B24:
     lwz r0, 0x674(r31)

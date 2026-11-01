@@ -16,8 +16,8 @@ extern void fn_80075DEC(void);
 extern void fn_80075F58(void);
 extern void fn_800763FC(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800839EC(void);
-extern void fn_80083AD4(void);
+extern void town_registerInteractionPoint(void);
+extern void town_updateInteractionPoints(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800A96AC(void);
@@ -44,8 +44,8 @@ extern void GXCopyTex(void);
 extern void GXInitLightDistAttn(void);
 extern void GXInitLightSpot(void);
 extern void fn_80615E00(void);
-extern void fn_80615FF0(void);
-extern void fn_80616250(void);
+extern void GXInitLightObj(void);
+extern void GXClampLightAngle(void);
 extern void GXDrawDone(void);
 extern void fn_80616EF0(void);
 extern void fn_80617030(void);
@@ -53,7 +53,7 @@ extern void fn_80617130(void);
 extern void fn_80617200(void);
 extern void GXInitTexObjDefault(void);
 extern void fn_80617270(void);
-extern void fn_80617340(void);
+extern void GXSetTevDirect(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
@@ -588,7 +588,7 @@ lbl_fn_800AF544_0000065C:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80880E10
     addi r3, r24, 0x8
     li r4, 0x1
@@ -598,7 +598,7 @@ lbl_fn_800AF544_0000065C:
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     lwz r3, lbl_8087EF8C
     mr r4, r27
     mr r5, r26
@@ -613,7 +613,7 @@ lbl_fn_800AF544_0000065C:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80880E10
     addi r3, r1, 0x38
     li r4, 0x1
@@ -623,7 +623,7 @@ lbl_fn_800AF544_0000065C:
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     lwz r3, lbl_8087EFB4
     li r4, 0x1
     bl fn_800C0508
@@ -1206,7 +1206,7 @@ lbl_fn_800AFEBC_00000FA0:
     beq lbl_fn_800AFEBC_00000FB8
     bl dungeon_initGlobalContext
     mr r4, r28
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
 lbl_fn_800AFEBC_00000FB8:
     clrlwi r3, r27, 16
     clrlwi r4, r26, 16
@@ -1223,7 +1223,7 @@ lbl_fn_800AFEBC_00000FB8:
     li r6, 0x6
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     stw r3, 0x84(r30)
     mr r4, r3
     mr r3, r29
@@ -1233,7 +1233,7 @@ lbl_fn_800AFEBC_00000FB8:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80880E40
     mr r3, r29
     li r4, 0x1
@@ -1243,7 +1243,7 @@ lbl_fn_800AFEBC_00000FB8:
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     addi r25, r25, 0x1
     addi r29, r29, 0x20
     cmpwi r25, 0x4
@@ -1598,7 +1598,7 @@ lbl_fn_800AFFEC_000014D0:
     bl fn_80617200
     li r3, 0x0
     li r4, 0x3
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1656,7 +1656,7 @@ lbl_fn_800AFFEC_000014D0:
     bl fn_80617200
     li r3, 0x0
     li r4, 0x0
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0

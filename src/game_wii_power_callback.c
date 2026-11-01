@@ -4,10 +4,10 @@
 /* External function declarations */
 extern void dtor_80084684(void);
 extern void mem_free(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void fn_800C411C(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void fn_80365708(void);
 extern void fn_803B27F8(void);
 extern void fn_803B29A8(void);
@@ -530,7 +530,7 @@ asm void fn_80574AF0(void)
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x1c(r1)
     mr r22, r3
@@ -562,7 +562,7 @@ lbl_fn_80574AF0_000006BC:
     addi r3, r1, 0x18
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x18(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x18
     beq lbl_fn_80574AF0_00000704
     addic. r3, r3, 0x4
@@ -664,7 +664,7 @@ asm void power_handleShutdownEvent(void)
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x1c(r1)
     mr r29, r3
@@ -696,7 +696,7 @@ lbl_power_handleShutdownEvent_000008B4:
     addi r3, r1, 0x18
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x18(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x18
     beq lbl_power_handleShutdownEvent_000008FC
     addic. r3, r3, 0x4
@@ -768,7 +768,7 @@ asm void power_handleResetEvent(void)
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x1c(r1)
     mr r31, r3
@@ -800,7 +800,7 @@ lbl_power_handleResetEvent_00000A34:
     addi r3, r1, 0x18
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x18(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x18
     beq lbl_power_handleResetEvent_00000A7C
     addic. r3, r3, 0x4

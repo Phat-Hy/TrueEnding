@@ -10,7 +10,7 @@ extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void vec3_sub(void);
 extern void vec3_add(void);
 extern void fn_80017F18(void);
@@ -21,21 +21,21 @@ extern void fn_8003F440(void);
 extern void mission_updateStub(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800EC204(void);
-extern void fn_800F52F0(void);
+extern void cam_findTargetIndex(void);
+extern void proj_getMatrix(void);
 extern void fn_800F52F8(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void fn_800F7F60(void);
-extern void fn_800F7FD8(void);
+extern void vec3_normalize(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_80109950(void);
 extern void fn_8010C948(void);
-extern void fn_801125F8(void);
+extern void phys_scaleGravity(void);
 extern void fn_801162A0(void);
 extern void fn_8011BF3C(void);
 extern void equip_getGlobalManager(void);
 extern void f32_abs(void);
-extern void fn_801255C8(void);
+extern void enemy_stepBehavior(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80127D8C(void);
 extern void fn_80128818(void);
@@ -53,7 +53,7 @@ extern void fn_80139F2C(void);
 extern void fn_80139F3C(void);
 extern void fn_80139F58(void);
 extern void fn_8013A13C(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_8013C394(void);
 extern void fn_8013C3A8(void);
@@ -74,7 +74,7 @@ extern void fn_8013C460(void);
 extern void fn_8013C470(void);
 extern void fn_8013C478(void);
 extern void fn_8013C480(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void fn_8013C50C(void);
 extern void fn_8013C514(void);
 extern void fn_8013C53C(void);
@@ -189,7 +189,7 @@ lbl_fn_8013A4E8_000000B8:
     mr r28, r3
     addi r3, r1, 0x234
     addi r4, r1, 0x384
-    bl fn_800F7FD8
+    bl vec3_normalize
     mr r5, r28
     addi r3, r1, 0x240
     addi r4, r1, 0x234
@@ -374,7 +374,7 @@ lbl_fn_8013A4E8_00000354:
     ble lbl_fn_8013A4E8_000003C4
     addi r3, r1, 0x360
     addi r4, r1, 0x36c
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x1ec
     addi r4, r1, 0x360
     bl vec3_toEulerAngles
@@ -559,7 +559,7 @@ lbl_fn_8013A4E8_00000620:
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
     beq lbl_fn_8013A4E8_000007F4
-    bl fn_8013A194
+    bl npc_getGlobalManager
     mr r4, r3
     mr r5, r27
     addi r3, r1, 0x348
@@ -620,7 +620,7 @@ lbl_fn_8013A4E8_000006CC:
     bge lbl_fn_8013A4E8_0000072C
     addi r3, r1, 0x1b0
     addi r4, r1, 0x33c
-    bl fn_800F7FD8
+    bl vec3_normalize
     mr r3, r27
     addi r4, r1, 0x1b0
     bl fn_80155790
@@ -727,7 +727,7 @@ lbl_fn_8013A4E8_00000870:
     ble lbl_fn_8013A4E8_000008C8
     addi r3, r1, 0x12c
     addi r4, r1, 0x330
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x138
     addi r4, r1, 0x12c
     bl vec3_toEulerAngles
@@ -778,7 +778,7 @@ lbl_fn_8013A4E8_00000940:
     mr r3, r27
     fsubs f0, f0, f1
     stfs f0, 0x0(r28)
-    bl fn_800F52F0
+    bl proj_getMatrix
     lfs f1, 0x110(r3)
     lfs f0, 0x0(r28)
     fcmpo cr0, f0, f1
@@ -811,7 +811,7 @@ lbl_fn_8013A4E8_000009B0:
     li r6, 0x0
     bl fn_80128930
     mr r3, r31
-    bl fn_801255C8
+    bl enemy_stepBehavior
     b lbl_fn_8013A4E8_00001E78
 lbl_fn_8013A4E8_000009E8:
     cmpwi r0, 0x2
@@ -1108,7 +1108,7 @@ lbl_fn_8013A4E8_00000DF4:
 lbl_fn_8013A4E8_00000E08:
     addi r3, r1, 0xd8
     addi r4, r1, 0x300
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x2f4
     addi r4, r27, 0xd50
     addi r5, r1, 0xd8
@@ -1203,7 +1203,7 @@ lbl_fn_8013A4E8_00000F48:
     stfs f0, 0x28(r31)
 lbl_fn_8013A4E8_00000F68:
     mr r3, r31
-    bl fn_801255C8
+    bl enemy_stepBehavior
     b lbl_fn_8013A4E8_0000103C
 lbl_fn_8013A4E8_00000F74:
     cmpwi r0, 0x1
@@ -1328,13 +1328,13 @@ lbl_fn_8013A4E8_000010F8:
     fsubs f3, f1, f3
     lfs f1, lbl_808819F0
     fmsubs f31, f2, f3, f0
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmuls f1, f1, f31
     addi r3, r1, 0x390
     bl fn_8013A13C
     addi r3, r1, 0x2d0
     addi r4, r1, 0x390
-    bl fn_80011410
+    bl mtx_multVec
     mr r3, r27
     addi r4, r1, 0x2d0
     bl fn_80155790
@@ -1353,7 +1353,7 @@ lbl_fn_8013A4E8_00001170:
     cmpwi r3, 0x0
     beq lbl_fn_8013A4E8_000011A4
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     b lbl_fn_8013A4E8_000011A8
 lbl_fn_8013A4E8_000011A4:
     li r3, 0x0
@@ -1361,7 +1361,7 @@ lbl_fn_8013A4E8_000011A8:
     cmpwi r3, 0x0
     beq lbl_fn_8013A4E8_000011C0
     lwz r4, 0xd5c(r27)
-    bl fn_800EC204
+    bl cam_findTargetIndex
     mr r28, r3
     b lbl_fn_8013A4E8_000011C4
 lbl_fn_8013A4E8_000011C0:
@@ -1388,7 +1388,7 @@ lbl_fn_8013A4E8_000011E0:
     cmpwi r3, 0x0
     beq lbl_fn_8013A4E8_0000121C
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     b lbl_fn_8013A4E8_00001220
 lbl_fn_8013A4E8_0000121C:
     li r3, 0x0
@@ -1396,7 +1396,7 @@ lbl_fn_8013A4E8_00001220:
     cmpwi r3, 0x0
     beq lbl_fn_8013A4E8_00001234
     lwz r4, 0xd5c(r27)
-    bl fn_800EC204
+    bl cam_findTargetIndex
     b lbl_fn_8013A4E8_00001238
 lbl_fn_8013A4E8_00001234:
     li r3, 0x0
@@ -1411,7 +1411,7 @@ lbl_fn_8013A4E8_00001238:
     lfs f0, 0xd60(r27)
     mr r3, r31
     stfs f0, 0x28(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     li r0, 0x1
     sth r0, 0xd3e(r27)
     b lbl_fn_8013A4E8_00001E78
@@ -1569,7 +1569,7 @@ lbl_fn_8013A4E8_00001474:
     lfs f0, 0xd60(r27)
     mr r3, r31
     stfs f0, 0x28(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     li r0, 0x1
     sth r0, 0xd3e(r27)
     b lbl_fn_8013A4E8_00001E78
@@ -1651,7 +1651,7 @@ lbl_fn_8013A4E8_0000158C:
     ble lbl_fn_8013A4E8_000015F8
     addi r3, r1, 0x60
     addi r4, r1, 0x2a0
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x6c
     addi r4, r1, 0x60
     bl vec3_toEulerAngles
@@ -1678,7 +1678,7 @@ lbl_fn_8013A4E8_00001604:
     lfs f0, 0xd60(r27)
     fmuls f0, f1, f0
     stfs f0, 0x28(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     b lbl_fn_8013A4E8_00001E78
     lha r0, 0xd3e(r27)
     cmpwi r0, 0x0
@@ -1705,7 +1705,7 @@ lbl_fn_8013A4E8_00001604:
     lfs f0, 0x8(r1)
     fmuls f0, f1, f0
     stfs f0, 0x28(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     b lbl_fn_8013A4E8_00001E78
 lbl_fn_8013A4E8_000016B4:
     lhz r0, 0xd38(r27)
@@ -1778,7 +1778,7 @@ lbl_fn_8013A4E8_00001744:
     lfs f0, lbl_80881974
     mr r3, r31
     stfs f0, 0x28(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     b lbl_fn_8013A4E8_00001E78
 lbl_fn_8013A4E8_000017CC:
     lhz r0, 0xd38(r27)
@@ -1844,7 +1844,7 @@ lbl_fn_8013A4E8_00001898:
     addi r3, r27, 0xd50
     addi r4, r27, 0x528
     bl vec3_copy
-    bl fn_8013A194
+    bl npc_getGlobalManager
     mr r4, r27
     bl fn_8010C948
     lwz r0, 0xd68(r27)
@@ -2020,7 +2020,7 @@ lbl_fn_8013A4E8_00001B38:
     lfs f0, 0xd60(r27)
     fmuls f0, f1, f0
     stfs f0, 0x28(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     b lbl_fn_8013A4E8_00001E78
 lbl_fn_8013A4E8_00001B54:
     cmpwi r0, 0x2
@@ -2090,7 +2090,7 @@ lbl_fn_8013A4E8_00001BC4:
     lfs f0, 0xd60(r27)
     fmuls f0, f1, f0
     stfs f0, 0x28(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     b lbl_fn_8013A4E8_00001E78
 lbl_fn_8013A4E8_00001C60:
     lhz r0, 0xd38(r27)
@@ -2115,7 +2115,7 @@ lbl_fn_8013A4E8_00001C78:
     lfs f0, 0xd60(r27)
     fmuls f0, f1, f0
     stfs f0, 0x28(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     b lbl_fn_8013A4E8_00001E78
 lbl_fn_8013A4E8_00001CBC:
     lhz r0, 0xd38(r27)

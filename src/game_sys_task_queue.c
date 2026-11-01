@@ -9,8 +9,8 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void talk_parseDialogue(void);
-extern void fn_8005B8F8(void);
-extern void fn_8005B9AC(void);
+extern void talk_parseDialogueTokens(void);
+extern void talk_copyUtf16String(void);
 extern void fn_8006BA8C(void);
 extern void fn_8006BB6C(void);
 extern void mem_realloc(void);
@@ -18,23 +18,23 @@ extern void mem_getAllocSize(void);
 extern void str_skipWhitespace(void);
 extern void wcs_vformat(void);
 extern void fn_800EC254(void);
-extern void fn_800EC2C4(void);
-extern void fn_800EC440(void);
-extern void fn_800EC534(void);
-extern void fn_800EC5BC(void);
-extern void fn_800EC654(void);
-extern void fn_800ED42C(void);
+extern void cam_registerTarget(void);
+extern void cam_initTrajectoryParams(void);
+extern void cam_bindPathTarget(void);
+extern void cam_bindRotationTarget(void);
+extern void cam_evalControllerSpline(void);
+extern void cam_setLookAtTarget(void);
 extern void fn_800ED4D8(void);
-extern void fn_800EDFE8(void);
-extern void fn_801125F8(void);
+extern void cam_evalLookAtMatrix(void);
+extern void phys_scaleGravity(void);
 extern void fn_80205BE8(void);
 extern void fn_802089C4(void);
 extern void fn_8020A5D4(void);
-extern void fn_8020A780(void);
+extern void str_appendString(void);
 extern void fn_8020C07C(void);
 extern void fn_8020C4B0(void);
 extern void fn_8046DC5C(void);
-extern void fn_8046DD20(void);
+extern void boss_bindArenaInteractions(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void wcslen(void);
@@ -369,9 +369,9 @@ lbl_fn_80219C30_00000390:
     stw r3, 0x14(r1)
     mr r3, r30
     addi r4, r4, lbl_8077A0A8@l
-    bl fn_8005B9AC
+    bl talk_copyUtf16String
     addi r3, r1, 0x14
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     li r0, 0x0
     stw r0, 0xc(r1)
     stw r0, 0x8(r1)
@@ -389,7 +389,7 @@ lbl_fn_80219C30_000003D4:
     bl fn_80219F1C
 lbl_fn_80219C30_000003FC:
     addi r3, r1, 0x14
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_80219C30_000003D4
     lis r3, lbl_80742540@ha
@@ -419,7 +419,7 @@ lbl_fn_80219C30_0000045C:
     stw r3, 0x1c(r1)
     addi r3, r1, 0x14
     stw r31, 0x20(r1)
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     stw r31, 0xc(r1)
     li r29, 0x0
     stw r31, 0x8(r1)
@@ -444,7 +444,7 @@ lbl_fn_80219C30_00000480:
     addi r29, r29, 0xd0
 lbl_fn_80219C30_000004C4:
     addi r3, r1, 0x14
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_80219C30_00000480
     mr r3, r28
@@ -653,7 +653,7 @@ asm void fn_80219F84(void)
     mr r3, r28
     bl talk_parseQuotedString
     bl str_skipWhitespace
-    bl fn_801125F8
+    bl phys_scaleGravity
     stfs f1, 0x50(r27)
     mr r3, r28
     bl talk_parseQuotedString
@@ -685,20 +685,20 @@ asm void fn_80219F84(void)
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8020A780
+    bl str_appendString
     lis r4, lbl_80742560@ha
     addi r3, r1, 0x1c4
     addi r4, r4, lbl_80742560@l
     li r5, 0x0
     li r6, 0x0
-    bl fn_800EC440
+    bl cam_initTrajectoryParams
     addi r3, r1, 0x29c
     addi r4, r1, 0x8
     addi r5, r1, 0x1c4
-    bl fn_800EC2C4
+    bl cam_registerTarget
     addi r3, r1, 0x1c4
     li r4, -0x1
-    bl fn_800EC534
+    bl cam_bindPathTarget
     addi r3, r27, 0x74
     li r29, 0x0
     li r4, 0x0
@@ -706,7 +706,7 @@ asm void fn_80219F84(void)
     bl memset
     addi r3, r1, 0x260
     addi r4, r1, 0x29c
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     mr r30, r27
     b lbl_fn_80219F84_0000089C
 lbl_fn_80219F84_00000864:
@@ -723,11 +723,11 @@ lbl_fn_80219F84_00000864:
     bl fn_80205BE8
     addi r3, r1, 0x188
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
 lbl_fn_80219F84_0000089C:
     addi r3, r1, 0x14c
     addi r4, r1, 0x29c
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     addi r3, r1, 0x260
     addi r4, r1, 0x14c
     li r31, 0x0
@@ -740,17 +740,17 @@ lbl_fn_80219F84_0000089C:
 lbl_fn_80219F84_000008CC:
     addi r3, r1, 0x14c
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     cmpwi r31, 0x0
     bne lbl_fn_80219F84_00000864
     addi r3, r1, 0x260
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     mr r3, r28
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0x8
     bl str_getData
     bl atoi
@@ -773,24 +773,24 @@ lbl_fn_80219F84_00000934:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8020A780
+    bl str_appendString
     lis r4, lbl_80742560@ha
     addi r3, r1, 0x128
     addi r4, r4, lbl_80742560@l
     li r5, 0x0
     li r6, 0x0
-    bl fn_800EC440
+    bl cam_initTrajectoryParams
     addi r3, r1, 0x29c
     addi r4, r1, 0x8
     addi r5, r1, 0x128
     bl fn_8020A5D4
     addi r3, r1, 0x128
     li r4, -0x1
-    bl fn_800EC534
+    bl cam_bindPathTarget
     addi r3, r1, 0x224
     addi r4, r1, 0x29c
     li r29, 0x0
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     mr r30, r27
     b lbl_fn_80219F84_000009DC
 lbl_fn_80219F84_000009A4:
@@ -807,11 +807,11 @@ lbl_fn_80219F84_000009A4:
     bl fn_80205BE8
     addi r3, r1, 0xec
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
 lbl_fn_80219F84_000009DC:
     addi r3, r1, 0xb0
     addi r4, r1, 0x29c
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     addi r3, r1, 0x224
     addi r4, r1, 0xb0
     li r31, 0x0
@@ -824,33 +824,33 @@ lbl_fn_80219F84_000009DC:
 lbl_fn_80219F84_00000A0C:
     addi r3, r1, 0xb0
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     cmpwi r31, 0x0
     bne lbl_fn_80219F84_000009A4
     addi r3, r1, 0x224
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     mr r3, r28
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8020A780
+    bl str_appendString
     lis r4, lbl_80742560@ha
     addi r3, r1, 0x8c
     addi r4, r4, lbl_80742560@l
     li r5, 0x0
     li r6, 0x0
-    bl fn_800EC440
+    bl cam_initTrajectoryParams
     addi r3, r1, 0x29c
     addi r4, r1, 0x8
     addi r5, r1, 0x8c
     bl fn_8020A5D4
     addi r3, r1, 0x8c
     li r4, -0x1
-    bl fn_800EC534
+    bl cam_bindPathTarget
     addi r3, r1, 0x1e8
     addi r4, r1, 0x29c
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     b lbl_fn_80219F84_00000AA0
 lbl_fn_80219F84_00000A84:
     addi r3, r1, 0x50
@@ -859,23 +859,23 @@ lbl_fn_80219F84_00000A84:
     bl fn_80205BE8
     addi r3, r1, 0x50
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
 lbl_fn_80219F84_00000AA0:
     addi r3, r1, 0x14
     addi r4, r1, 0x29c
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     addi r3, r1, 0x1e8
     addi r4, r1, 0x14
     bl fn_800EC254
     mr r31, r3
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     cmpwi r31, 0x0
     bne lbl_fn_80219F84_00000A84
     addi r3, r1, 0x1e8
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     mr r3, r28
     bl talk_parseQuotedString
     bl atoi
@@ -900,7 +900,7 @@ lbl_fn_80219F84_00000AA0:
     stw r3, 0x24(r27)
     addi r3, r1, 0x29c
     li r4, -0x1
-    bl fn_800EC5BC
+    bl cam_bindRotationTarget
     addi r3, r1, 0x8
     li r4, -0x1
     bl dtor_80013D60
@@ -1462,7 +1462,7 @@ asm void fn_8021AAB8(void)
     stw r3, 0xc(r1)
     addi r3, r1, 0xc
     addi r4, r4, lbl_807830B8@l
-    bl fn_8005B9AC
+    bl talk_copyUtf16String
     lwz r0, lbl_8087F2D8
     cmpwi r0, 0x0
     bne lbl_fn_8021AAB8_00001570
@@ -1561,7 +1561,7 @@ lbl_fn_8021AAB8_0000136C:
     bne lbl_fn_8021AAB8_00001308
     lwz r3, lbl_8087F518
     mr r4, r26
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     lwz r3, lbl_8087F518
     addi r5, r1, 0x8
     lwz r4, lbl_80882F7C
@@ -1608,7 +1608,7 @@ lbl_fn_8021AAB8_000013E4:
     addi r26, r3, 0x1
 lbl_fn_8021AAB8_00001428:
     addi r3, r1, 0xc
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_8021AAB8_000013E4
     lis r5, lbl_807425F8@ha
@@ -1688,12 +1688,12 @@ lbl_fn_8021AAB8_000014A4:
     addi r30, r3, 0x1
 lbl_fn_8021AAB8_00001554:
     addi r3, r1, 0xc
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_8021AAB8_000014A4
     lwz r3, lbl_8087F518
     mr r4, r31
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
 lbl_fn_8021AAB8_00001570:
     lmw r25, 0x12a4(r1)
     lwz r0, 0x12c4(r1)
@@ -1864,7 +1864,7 @@ asm void fn_8021B060(void)
     stw r3, 0xc(r1)
     addi r3, r1, 0xc
     addi r4, r4, lbl_807830B8@l
-    bl fn_8005B9AC
+    bl talk_copyUtf16String
     lis r29, lbl_80742658@ha
     li r3, 0x258
     addi r5, r29, lbl_80742658@l
@@ -1936,7 +1936,7 @@ lbl_fn_8021B060_00001834:
     addi r25, r3, 0x1
 lbl_fn_8021B060_00001864:
     addi r3, r1, 0xc
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_8021B060_00001834
     lis r5, lbl_80742658@ha
@@ -2004,12 +2004,12 @@ lbl_fn_8021B060_00001944:
     addi r28, r28, 0x8
 lbl_fn_8021B060_0000195C:
     addi r3, r1, 0xc
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_8021B060_000018E4
     lwz r3, lbl_8087F518
     mr r4, r30
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
 lbl_fn_8021B060_00001978:
     lmw r25, 0xc64(r1)
     lwz r0, 0xc84(r1)

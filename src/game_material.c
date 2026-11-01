@@ -37,8 +37,8 @@ extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
 extern void fn_80615190(void);
 extern void GXCopyTex(void);
-extern void fn_80615FF0(void);
-extern void fn_80616250(void);
+extern void GXInitLightObj(void);
+extern void GXClampLightAngle(void);
 extern void GXSetZCompLoc(void);
 extern void fn_80618570(void);
 
@@ -1740,7 +1740,7 @@ asm void fn_800B8964(void)
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80880F7C
     addi r3, r29, 0x460
     li r4, 0x1
@@ -1750,7 +1750,7 @@ asm void fn_800B8964(void)
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     lwz r4, lbl_8087EFB4
     addi r3, r29, 0x480
     clrlwi r5, r31, 16
@@ -1760,7 +1760,7 @@ asm void fn_800B8964(void)
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80880F7C
     addi r3, r29, 0x480
     li r4, 0x0
@@ -1770,7 +1770,7 @@ asm void fn_800B8964(void)
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     lwz r3, lbl_8087EFB4
     lwz r0, 0x268(r29)
     stw r0, 0x104(r3)
@@ -2123,7 +2123,7 @@ asm void fn_800B8F40(void)
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
 lbl_fn_800B8F40_00001F64:
     clrlwi r5, r30, 16
     clrlwi r6, r29, 16
@@ -2150,7 +2150,7 @@ lbl_fn_800B8F40_00001F64:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     bl fn_80614190
     li r0, 0x0
     stb r0, lbl_8087EFB0

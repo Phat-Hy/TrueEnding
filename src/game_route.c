@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_80060D58(void);
+extern void equip_calcTotalStatBonuses(void);
 extern void skill_calculateDamage(void);
 extern void mem_alloc(void);
 extern void fn_8008510C(void);
@@ -112,7 +112,7 @@ asm void fn_80086560(void)
     addi r0, r5, -0x8000
 lbl_fn_80086560_000000BC:
     mr r4, r0
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
 lbl_fn_80086560_000000C4:
     xoris r0, r28, 0x8000
     stw r0, 0x34(r1)
@@ -349,7 +349,7 @@ asm void fn_8008689C(void)
     addi r0, r5, -0x8000
 lbl_fn_8008689C_000003F8:
     mr r4, r0
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
 lbl_fn_8008689C_00000400:
     xoris r0, r28, 0x8000
     stw r0, 0x34(r1)
@@ -588,7 +588,7 @@ asm void fn_80086BE0(void)
     addi r0, r5, -0x8000
 lbl_fn_80086BE0_0000073C:
     mr r4, r0
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
 lbl_fn_80086BE0_00000744:
     xoris r0, r28, 0x8000
     stw r0, 0x34(r1)
@@ -760,7 +760,7 @@ asm void fn_80086E70(void)
     lfs f4, 0x8(r4)
     subi r4, r5, 0x7f01
     lfs f3, lbl_80880BD4
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
 lbl_fn_80086E70_000009BC:
     xoris r3, r29, 0x8000
     lis r0, 0x4330
@@ -914,7 +914,7 @@ asm void fn_80087098(void)
     lfs f4, 0x8(r4)
     subi r4, r5, 0x7f01
     lfs f3, lbl_80880BD4
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
 lbl_fn_80087098_00000BE4:
     xoris r3, r28, 0x8000
     lis r0, 0x4330
@@ -1099,7 +1099,7 @@ asm void fn_80087320(void)
     lfs f4, 0x8(r4)
     subi r4, r5, 0x7f01
     lfs f3, lbl_80880BD4
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
 lbl_fn_80087320_00000E6C:
     lwz r0, 0x60(r28)
     lis r4, lbl_807321F0@ha

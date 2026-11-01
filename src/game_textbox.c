@@ -34,8 +34,8 @@ extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
 extern void GXInitLightDistAttn(void);
 extern void GXInitLightSpot(void);
-extern void fn_80615FF0(void);
-extern void fn_80616250(void);
+extern void GXInitLightObj(void);
+extern void GXClampLightAngle(void);
 extern void fn_806163C0(void);
 extern void fn_806163E0(void);
 extern void fn_80616400(void);
@@ -47,7 +47,7 @@ extern void fn_80617130(void);
 extern void fn_80617200(void);
 extern void GXInitTexObjDefault(void);
 extern void fn_80617270(void);
-extern void fn_80617340(void);
+extern void GXSetTevDirect(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevIndirect(void);
 extern void fn_806175F0(void);
@@ -163,7 +163,7 @@ asm void fn_800AD0F0(void)
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     addi r30, r30, lbl_80732C4C@l
     li r28, 0x0
     li r29, 0x0
@@ -186,7 +186,7 @@ lbl_fn_800AD0F0_000000CC:
     li r6, 0x0
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     addi r28, r28, 0x1
     addi r29, r29, 0x30
     cmpwi r28, 0x8
@@ -209,7 +209,7 @@ lbl_fn_800AD0F0_000000CC:
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     addi r3, r31, 0x320
     addi r8, r30, 0x1d
     li r4, 0x40
@@ -226,7 +226,7 @@ lbl_fn_800AD0F0_000000CC:
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     lwz r5, lbl_8087EFA8
     mr r3, r31
     lwz r0, 0x3dc(r5)
@@ -710,7 +710,7 @@ asm void fn_800AD834(void)
     bl fn_80617200
     li r3, 0x0
     li r4, 0x3
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -765,7 +765,7 @@ lbl_fn_800AD834_00000914:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80880DD0
     mr r3, r30
     li r4, 0x1
@@ -775,7 +775,7 @@ lbl_fn_800AD834_00000914:
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     lwz r3, 0x100(r1)
     li r4, 0x1
     bl GXCopyTex
@@ -1035,7 +1035,7 @@ lbl_fn_800AD834_00000D20:
     bl fn_80617200
     li r3, 0x0
     li r4, 0x3
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1114,7 +1114,7 @@ lbl_fn_800AD834_00000E44:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80880DD0
     mr r3, r17
     li r4, 0x1
@@ -1124,7 +1124,7 @@ lbl_fn_800AD834_00000E44:
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     lwz r3, lbl_8087EEE0
     mr r4, r17
     li r5, 0x0
@@ -1188,7 +1188,7 @@ lbl_fn_800AD834_00000F00:
     bl __GXSetVtxDesc
     li r3, 0x0
     li r4, 0x3
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1340,7 +1340,7 @@ lbl_fn_800AD834_00000F00:
     bl GXLoadTexMtxImm
     li r3, 0x0
     li r4, 0x3
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     bl GXInitTexObjDefault
     li r3, 0x0
@@ -2106,7 +2106,7 @@ lbl_fn_800AECD4_00001CD8:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80880E10
     mr r3, r31
     li r4, 0x0
@@ -2116,7 +2116,7 @@ lbl_fn_800AECD4_00001CD8:
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

@@ -7,11 +7,11 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void ui_destroyWidget(void);
-extern void fn_8004B290(void);
+extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
-extern void fn_800588FC(void);
+extern void mission_updateObjectiveTarget(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
@@ -21,10 +21,10 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void route_createWaypoint(void);
-extern void fn_80088724(void);
+extern void zone_testPointInBounds(void);
 extern void node_createNamedChild(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80092954(void);
+extern void compass_findMarkerByName(void);
 extern void fn_80095D44(void);
 extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
@@ -52,7 +52,7 @@ extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
-extern void fn_803ED5D0(void);
+extern void barrier_bindFieldAnimation(void);
 extern void fn_803EDB18(void);
 extern void fn_803F11F8(void);
 extern void boss_getOffset54(void);
@@ -113,7 +113,7 @@ void fn_803F4698(void);
 void fn_803F46DC(void);
 void fn_803F46F8(void);
 void fn_803F4700(void);
-void fn_803F4714(void);
+void *fn_803F4714(void *obj);
 void fn_803F471C(void);
 void fn_803F47A0(void);
 void fn_803F4894(void);
@@ -288,7 +288,7 @@ lbl_fn_803F33A4_0000023C:
     bl talk_formatQuotedString
     mr r4, r3
     addi r3, r25, 0x65c
-    bl fn_80092954
+    bl compass_findMarkerByName
     cmpwi r3, 0x0
     stw r3, 0x0(r23)
     beq lbl_fn_803F33A4_000002F0
@@ -484,7 +484,7 @@ lbl_fn_803F3820_000004F0:
     bl atn_Anim_setLayerAnimation
     mr r3, r30
     addi r4, r30, 0x65c
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
     mr r3, r30
     addi r4, r30, 0x65c
     li r5, 0x1
@@ -507,7 +507,7 @@ lbl_fn_803F3820_0000054C:
     bl atn_Anim_setLayerAnimation
     mr r3, r30
     addi r4, r30, 0x65c
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
     mr r3, r30
     addi r4, r30, 0x65c
     li r5, 0x1
@@ -525,7 +525,7 @@ lbl_fn_803F3820_000005A0:
     bl atn_Anim_setLayerAnimation
     mr r3, r30
     addi r4, r30, 0x28c
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
     mr r3, r30
     addi r4, r30, 0x28c
     li r5, 0x1
@@ -804,7 +804,7 @@ lbl_fn_803F3820_00000980:
     bctrl
     mr r4, r3
     mr r3, r30
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_803F3820_000009F4:
     lwz r12, 0x0(r30)
     mr r3, r30
@@ -1026,7 +1026,7 @@ lbl_fn_803F3FBC_00000C80:
     addi r5, r28, 0x78
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_80885FCC
     mr r3, r30
     lfs f2, lbl_80885FD0
@@ -1503,11 +1503,9 @@ asm void fn_803F4700(void)
     blr
 }
 
-asm void fn_803F4714(void)
+void *fn_803F4714(void *obj)
 {
-    nofralloc
-    addi r3, r3, 0x214
-    blr
+    return (char *)obj + 0x214;
 }
 
 asm void fn_803F471C(void)
@@ -1795,7 +1793,7 @@ lbl_fn_803F4A4C_00001710:
     li r4, 0x0
     li r5, 0x0
     addi r3, r3, 0x8
-    bl fn_8004B290
+    bl sound_initChannelParams
 lbl_fn_803F4A4C_00001754:
     lwz r30, 0x2fc(r29)
     cmpwi r30, 0x0
@@ -1879,7 +1877,7 @@ lbl_fn_803F4B80_00001840:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     addi r3, r31, 0x54c
     psq_l f1, 0xfc(r31), 0, 0
     psq_l f2, 0x104(r31), 0, 0
@@ -1893,7 +1891,7 @@ lbl_fn_803F4B80_00001840:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     lwz r0, 0x5dc(r31)
     cmpwi r0, 0x0
     beq lbl_fn_803F4B80_000018CC

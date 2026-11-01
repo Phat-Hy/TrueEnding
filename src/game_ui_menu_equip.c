@@ -24,7 +24,7 @@ extern void fn_8010607C(void);
 extern void fn_801070C8(void);
 extern void fn_80134168(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_801446F0(void);
+extern void quest_resetObjectiveBounds(void);
 extern void equip_applyToCharacter(void);
 extern void fn_80164B00(void);
 extern void fn_80164DCC(void);
@@ -327,7 +327,7 @@ asm void fn_801B73F0(void)
     li r4, -0x1
     bl ref_releaseHandle
     lwz r3, 0x4(r30)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     lwz r3, lbl_8087F048
     mr r5, r31
     lwz r4, 0x4(r30)
@@ -590,7 +590,7 @@ asm void fn_801B77DC(void)
     stfs f0, 0x238(r3)
     bl atn_Anim_setLayerAnimation
     lwz r3, 0x4(r31)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     lwz r3, 0x4(r31)
     li r4, 0x0
     li r5, 0x1
@@ -1253,7 +1253,7 @@ asm void fn_801B805C(void)
     stfs f4, 0xc(r31)
     stfs f3, 0x10(r31)
     stfs f0, 0x14(r31)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     lwz r0, lbl_8087F498
     cmpwi r0, 0x0
     beq lbl_fn_801B805C_00001008
@@ -1347,7 +1347,7 @@ asm void fn_801B8244(void)
     stfs f2, 0x2c(r29)
     stfs f0, 0x3c(r29)
     stw r0, 0x8(r29)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     lwz r31, 0x5c(r1)
     mr r3, r29
     lwz r30, 0x58(r1)
@@ -1558,7 +1558,7 @@ lbl_fn_801B8360_00001410:
     stfs f2, 0x53c(r3)
     psq_st f1, 0x0(r30), 0, 0
     lwz r3, 0x4(r31)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     lwz r0, lbl_8087F498
     cmpwi r0, 0x0
     beq lbl_fn_801B8360_00001480
@@ -1791,7 +1791,7 @@ lbl_fn_801B86CC_0000177C:
     stfs f2, 0x53c(r3)
     psq_st f1, 0x0(r30), 0, 0
     lwz r3, 0x4(r31)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     lwz r0, lbl_8087F498
     cmpwi r0, 0x0
     beq lbl_fn_801B86CC_000017EC
@@ -2066,7 +2066,7 @@ lbl_fn_801B8AD0_00001B80:
     stfs f2, 0x53c(r3)
     psq_st f1, 0x0(r31), 0, 0
     lwz r3, 0x4(r28)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     psq_l f31, 0x108(r1), 0, 0
     mr r3, r28
     lfd f31, 0x100(r1)

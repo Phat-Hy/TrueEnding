@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void fn_8012B988(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void fn_801342D0(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
@@ -15,12 +15,12 @@ extern void fn_80208740(void);
 extern void fn_8021150C(void);
 extern void world_getGlobalFlag(void);
 extern void kpad_getClampData(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void fn_803752F4(void);
 extern void fn_803754F0(void);
 extern void fn_80375B78(void);
 extern void fn_80375D0C(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
@@ -1791,7 +1791,7 @@ lbl_fn_804490E0_000017B8:
 lbl_fn_804490E0_000017BC:
     mr r3, r6
     mr r4, r31
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     beq lbl_fn_804490E0_000017D8
     addi r31, r3, 0x7d4
@@ -1810,12 +1810,12 @@ lbl_fn_804490E0_000017E4:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_804490E0_00001814
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     bne lbl_fn_804490E0_0000181C
 lbl_fn_804490E0_00001814:
     mr r3, r31
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
 lbl_fn_804490E0_0000181C:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

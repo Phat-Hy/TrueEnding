@@ -18,7 +18,7 @@ extern void fn_8001296C(void);
 extern void fn_80012D34(void);
 extern void fn_80013530(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_800928B0(void);
+extern void compass_findWaypointIndex(void);
 extern void fn_8048B3B8(void);
 extern void fn_8048BD04(void);
 extern void fn_8048C884(void);
@@ -1208,7 +1208,7 @@ lbl_fn_8055408C_00000F2C:
     mr r27, r3
     mr r4, r29
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_8055408C_00000F8C
     li r5, 0x0

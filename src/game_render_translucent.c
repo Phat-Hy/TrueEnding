@@ -18,11 +18,11 @@ extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
-extern void fn_801255C8(void);
+extern void enemy_stepBehavior(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80128930(void);
 extern void fn_80128A30(void);
-extern void fn_8012DB04(void);
+extern void enemy_evalAnimTrack(void);
 extern void boss_updatePhaseState(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_updateFlow(void);
@@ -45,7 +45,7 @@ extern void fn_803EEE10(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_805A3C58(void);
+extern void rand_Mersenne_constructor(void);
 extern void fn_805A3D6C(void);
 extern void fn_805A40BC(void);
 extern void fn_805A418C(void);
@@ -132,7 +132,7 @@ asm void fn_802B77AC(void)
     mr r31, r3
     stw r30, 0x208(r1)
     mr r30, r5
-    bl fn_805A3C58
+    bl rand_Mersenne_constructor
     lwz r0, 0x7ec(r31)
     li r7, 0x0
     lfs f1, lbl_80884100
@@ -775,7 +775,7 @@ lbl_fn_802B7F94_000008CC:
     addi r3, r31, 0xc64
     fmuls f0, f0, f3
     stfs f0, 0xc8c(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     lwz r0, 0x14cc(r31)
     mr r3, r31
     li r4, 0x2
@@ -933,7 +933,7 @@ lbl_fn_802B7F94_00000AF4:
     fmuls f3, f4, f3
     fmuls f0, f0, f3
     stfs f0, 0xc8c(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     li r0, 0x1
     stw r0, 0x14fc(r31)
     b lbl_fn_802B7F94_00000B60
@@ -1508,12 +1508,12 @@ asm void fn_802B8AA4(void)
     addi r3, r3, 0x7d4
     stfs f2, 0x1bc(r1)
     psq_st f1, 0x0(r4), 0, 0
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lfs f31, lbl_80884128
     fcmpo cr0, f1, f31
     ble lbl_fn_802B8AA4_00001378
     addi r3, r31, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     fmr f31, f1
 lbl_fn_802B8AA4_00001378:
     lwz r0, 0x55c(r31)
@@ -1704,7 +1704,7 @@ lbl_fn_802B8AA4_00001618:
     lfs f29, lbl_80884138
 lbl_fn_802B8AA4_00001628:
     addi r3, r31, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     fmuls f29, f29, f1
     b lbl_fn_802B8AA4_0000209C
 lbl_fn_802B8AA4_00001638:

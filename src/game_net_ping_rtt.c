@@ -20,7 +20,7 @@ extern void mem_getAllocSize(void);
 extern void route_createWaypoint(void);
 extern void fn_80088FAC(void);
 extern void node_createNamedChild(void);
-extern void fn_8009EE30(void);
+extern void hud_drawTargetMarker(void);
 extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
@@ -33,7 +33,7 @@ extern void save_validateHeader(void);
 extern void save_parseSlotHeader(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
-extern void fn_801F6E78(void);
+extern void save_calculateBlockCrc(void);
 extern void fn_801F7590(void);
 extern void fn_801F791C(void);
 extern void fn_801F7DF0(void);
@@ -1338,7 +1338,7 @@ lbl_fn_80516E0C_000010E4:
     li r3, 0x0
 lbl_fn_80516E0C_000010E8:
     addi r4, r1, 0x158
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
 lbl_fn_80516E0C_000010F0:
     lwz r12, 0x0(r30)
     mr r3, r30
@@ -1534,7 +1534,7 @@ lbl_fn_80516E0C_00001364:
     bl perf_getMetricValue
     addi r4, r29, 0xd5
     addi r5, r1, 0x100
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     stfs f30, 0x20(r1)
     mr r3, r30
     addi r6, r1, 0x2c
@@ -1632,7 +1632,7 @@ lbl_fn_80516E0C_000014E0:
     bl perf_getMetricValue
     addi r4, r29, 0xfb
     addi r5, r1, 0x100
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     lwz r3, 0x124(r30)
     bl perf_getMetricValue
     lfs f1, lbl_808878CC

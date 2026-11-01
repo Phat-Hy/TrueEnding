@@ -26,7 +26,7 @@ extern void fn_801F6C2C(void);
 extern void fn_801F6C38(void);
 extern void save_computeCrc32(void);
 extern void save_findEntryByName(void);
-extern void fn_8020924C(void);
+extern void mem_findBlockById(void);
 extern void fn_8021F3E8(void);
 extern void world_setGlobalFlag(void);
 extern void world_setLocalFlag(void);
@@ -1642,7 +1642,7 @@ lbl_fn_803B710C_0000157C:
 lbl_fn_803B710C_00001590:
     lwz r3, 0x4c(r29)
     lwz r3, 0xc(r3)
-    bl fn_8020924C
+    bl mem_findBlockById
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_803B710C_00001660

@@ -24,7 +24,7 @@ extern void motion_updateFogAdj(void);
 extern void env_updateAtmosphere(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
-extern void fn_800F52F0(void);
+extern void proj_getMatrix(void);
 extern void fn_800F530C(void);
 extern void fn_800F7FB4(void);
 extern void viewport_getNextSequenceId(void);
@@ -32,7 +32,7 @@ extern void fn_80139EFC(void);
 extern void fn_80139F4C(void);
 extern void fn_8013A16C(void);
 extern void fn_8013C480(void);
-extern void fn_801781B0(void);
+extern void battle_calcAABBCenter(void);
 extern void fn_801A03E0(void);
 extern void fn_801A03EC(void);
 extern void fn_801A0408(void);
@@ -61,7 +61,7 @@ extern void fn_803D6ED4(void);
 extern void fn_803DDD54(void);
 extern void fn_803E4978(void);
 extern void fn_804A4AEC(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void fn_8059D310(void);
 extern void fn_805A6D24(void);
 extern void fn_805A7604(void);
@@ -117,7 +117,7 @@ void fn_805AB1C4(void);
 void fn_805AB1DC(void);
 void fn_805AB50C(void);
 void fn_805AB82C(void);
-void fn_805ABD70(void);
+u32 fn_805ABD70(const void *p);
 void fn_805ABD78(void);
 void fn_805ABD8C(void);
 void fn_805ABDEC(void);
@@ -634,67 +634,67 @@ lbl_fn_805AB82C_000006DC:
     bl fn_805AB50C
     bl scene_transformPoint
     li r4, 0x0
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
     bl scene_transformPoint
     li r4, 0x2
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
     bl scene_transformPoint
     li r4, 0x3
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
     bl scene_transformPoint
     li r4, 0x6
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
     bl scene_transformPoint
     li r4, 0x1
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
     bl scene_transformPoint
     li r4, 0x9
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
     bl scene_transformPoint
     li r4, 0xa
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
     bl scene_transformPoint
     li r4, 0x4
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
     bl scene_transformPoint
     li r4, 0x5
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
     bl scene_transformPoint
     li r4, 0xb
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
     bl scene_transformPoint
     li r4, 0xe
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
@@ -752,30 +752,30 @@ lbl_fn_805AB82C_0000087C:
     cmpwi r3, 0x0
     beq lbl_fn_805AB82C_000009B4
     mr r3, r28
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_80139F4C
     cmpwi r3, 0x0
     beq lbl_fn_805AB82C_000008EC
     mr r3, r28
-    bl fn_800F52F0
+    bl proj_getMatrix
     lwz r0, 0x224(r3)
     cmpwi r0, 0x0
     ble lbl_fn_805AB82C_000009B4
 lbl_fn_805AB82C_000008EC:
     mr r3, r28
-    bl fn_800F52F0
+    bl proj_getMatrix
     li r4, 0x100
     bl fn_8013A16C
     cmpwi r3, 0x0
     bne lbl_fn_805AB82C_000009B4
     mr r3, r28
-    bl fn_800F52F0
+    bl proj_getMatrix
     lis r4, 0x1
     bl fn_8013A16C
     cmpwi r3, 0x0
     bne lbl_fn_805AB82C_000009B4
     mr r3, r28
-    bl fn_800F52F0
+    bl proj_getMatrix
     li r4, 0x40
     bl fn_8013A16C
     cmpwi r3, 0x0
@@ -961,11 +961,9 @@ lbl_fn_805AB82C_00000B7C:
     blr
 }
 
-asm void fn_805ABD70(void)
+u32 fn_805ABD70(const void *p)
 {
-    nofralloc
-    lwz r3, 0xf94(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0xf94);
 }
 
 asm void fn_805ABD78(void)
@@ -1723,7 +1721,7 @@ asm void fn_805AC75C(void)
     bne lbl_fn_805AC75C_00001620
     lwz r4, 0x4c(r15)
     mr r3, r16
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     b lbl_fn_805AC75C_00001658
 lbl_fn_805AC75C_00001620:
     cmpwi r0, 0x1

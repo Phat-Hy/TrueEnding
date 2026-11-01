@@ -6,13 +6,13 @@ extern void _restgpr_22(void);
 extern void _savegpr_22(void);
 extern void dtor_80084684(void);
 extern void fn_8004B20C(void);
-extern void fn_8004B290(void);
+extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void boss_recordDamage(void);
 extern void chapter_updateProgression(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void node_destroy(void);
 extern void fn_800CFBA0(void);
@@ -21,7 +21,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void save_validateHeader(void);
 extern void fn_802085E0(void);
 extern void fn_80208694(void);
@@ -1189,7 +1189,7 @@ lbl_fn_80376804_00000D34:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x1c(r1)
     mr r30, r3
@@ -1221,7 +1221,7 @@ lbl_fn_80376804_00000DF0:
     addi r3, r1, 0x18
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x18(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x18
     beq lbl_fn_80376804_00000E38
     addic. r3, r3, 0x4
@@ -1430,7 +1430,7 @@ asm void fn_80376BE8(void)
     stw r30, 0x70(r29)
     stw r30, 0x78(r29)
     stw r30, 0x7c(r29)
-    bl fn_8004B290
+    bl sound_initChannelParams
     lis r31, lbl_8074DEC0@ha
     stw r30, 0x288(r29)
     addi r31, r31, lbl_8074DEC0@l

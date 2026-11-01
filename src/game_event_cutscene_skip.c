@@ -15,7 +15,7 @@ extern void fn_80049654(void);
 extern void fn_8004B1EC(void);
 extern void fn_8006A204(void);
 extern void fn_8006A900(void);
-extern void fn_8006AA20(void);
+extern void boss_triggerEventSequence(void);
 extern void fn_8006BA8C(void);
 extern void fn_8006BB6C(void);
 extern void mem_free(void);
@@ -122,7 +122,7 @@ void fn_8047FF70(void);
 void fn_804803A4(void);
 void fn_80480438(void);
 void fn_80480468(void);
-void fn_804805AC(void);
+u32 fn_804805AC(const void *p);
 void fn_804805B4(void);
 void fn_804805CC(void);
 void fn_804805F0(void);
@@ -1247,11 +1247,9 @@ lbl_fn_80480468_00000ED8:
     blr
 }
 
-asm void fn_804805AC(void)
+u32 fn_804805AC(const void *p)
 {
-    nofralloc
-    lwz r3, 0x58(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x58);
 }
 
 asm void fn_804805B4(void)
@@ -1353,7 +1351,7 @@ asm void fn_804805F0(void)
     crclr 6
     bl sprintf
     addi r3, r1, 0x1a8
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_804805F0_0000109C
     addi r3, r1, 0x1a8
@@ -1377,7 +1375,7 @@ lbl_fn_804805F0_0000109C:
     crclr 6
     bl sprintf
     addi r3, r1, 0x1a8
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_804805F0_000010F8
     addi r3, r1, 0x1a8

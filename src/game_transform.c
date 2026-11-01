@@ -11,10 +11,10 @@ extern void _savegpr_26(void);
 extern void fn_800551BC(void);
 extern void fn_800E2A24(void);
 extern void fn_800FDF14(void);
-extern void fn_80108C10(void);
+extern void hurtbox_testCollisionLayer(void);
 extern void fn_8010B250(void);
 extern void fn_80134234(void);
-extern void fn_80148B0C(void);
+extern void quest_getRewardItemSlot(void);
 extern void fn_801533C8(void);
 extern void fn_80154E38(void);
 extern void fn_8016F368(void);
@@ -172,7 +172,7 @@ lbl_fn_800FBE70_0000019C:
 lbl_fn_800FBE70_000001B0:
     mr r3, r25
     mr r4, r28
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     cmpwi r3, 0x0
     beq lbl_fn_800FBE70_00000228
     lwz r0, 0x4(r26)
@@ -383,7 +383,7 @@ lbl_fn_800FC1D0_0000049C:
 lbl_fn_800FC1D0_000004AC:
     mr r3, r29
     mr r4, r27
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     cmpwi r3, 0x0
     beq lbl_fn_800FC1D0_0000056C
     lwz r0, 0x4(r30)
@@ -507,7 +507,7 @@ asm void fn_800FC410(void)
 lbl_fn_800FC410_0000066C:
     mr r3, r27
     mr r4, r28
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     psq_l f1, 0x4(r3), 0, 0
     lfs f2, 0xc(r3)
     psq_st f1, 0x0(r24), 0, 0
@@ -577,7 +577,7 @@ lbl_fn_800FC410_00000688:
 lbl_fn_800FC410_0000077C:
     mr r3, r27
     mr r4, r28
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     psq_l f1, 0x4(r3), 0, 0
     lfs f2, 0xc(r3)
     psq_st f1, 0x0(r24), 0, 0
@@ -732,7 +732,7 @@ lbl_fn_800FC410_0000094C:
 lbl_fn_800FC410_000009D0:
     mr r3, r27
     mr r4, r28
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     psq_l f1, 0x4(r3), 0, 0
     lfs f2, 0xc(r3)
     psq_st f1, 0x0(r24), 0, 0
@@ -1122,7 +1122,7 @@ lbl_fn_800FCD24_00000F30:
     stw r11, 0xf0(r1)
     stw r12, 0xdc(r1)
     stw r0, 0xd8(r1)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     b lbl_fn_800FCD24_000017C8
 lbl_fn_800FCD24_00000F88:
     addis r3, r3, 0x4
@@ -1166,7 +1166,7 @@ lbl_fn_800FCD24_00000F88:
 lbl_fn_800FCD24_00001020:
     mr r3, r25
     mr r4, r26
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     psq_l f1, 0x4(r3), 0, 0
     lfs f2, 0xc(r3)
     psq_st f1, 0x0(r22), 0, 0
@@ -1236,7 +1236,7 @@ lbl_fn_800FCD24_0000103C:
 lbl_fn_800FCD24_00001130:
     mr r3, r25
     mr r4, r26
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     psq_l f1, 0x4(r3), 0, 0
     lfs f2, 0xc(r3)
     psq_st f1, 0x0(r22), 0, 0
@@ -1391,7 +1391,7 @@ lbl_fn_800FCD24_00001300:
 lbl_fn_800FCD24_00001384:
     mr r3, r25
     mr r4, r26
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     psq_l f1, 0x4(r3), 0, 0
     lfs f2, 0xc(r3)
     psq_st f1, 0x0(r22), 0, 0

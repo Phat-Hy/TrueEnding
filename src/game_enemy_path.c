@@ -10,22 +10,22 @@ extern void dtor_80084684(void);
 extern void mtx_getTranslation(void);
 extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_8000DD0C(void);
+extern void scene_getRootNode(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void fn_80012C88(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
 extern void fn_8001336C(void);
-extern void fn_800133B0(void);
+extern void math_wrapAngle(void);
 extern void fn_80013404(void);
 extern void mission_updateStub(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800F7260(void);
 extern void viewport_getNextSequenceId(void);
-extern void fn_801125F8(void);
+extern void phys_scaleGravity(void);
 extern void battle_applyStatusEffect(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
@@ -71,7 +71,7 @@ void fn_80129978(void);
 void fn_80129A48(void);
 void fn_80129A6C(void);
 void fn_8012A190(void);
-void fn_8012A1B8(void);
+void *fn_8012A1B8(void *p);
 void fn_8012A1C0(void);
 void fn_8012A1E0(void);
 void fn_8012A218(void);
@@ -880,7 +880,7 @@ lbl_fn_80129A6C_00000AC0:
     b lbl_fn_80129A6C_00000B6C
 lbl_fn_80129A6C_00000AEC:
     lwz r3, 0x0(r31)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r4, r27
     bl fn_8012A1C0
     mr r4, r3
@@ -913,16 +913,16 @@ lbl_fn_80129A6C_00000B4C:
     addi r4, r1, 0x58
     bl vec3_copy
 lbl_fn_80129A6C_00000B6C:
-    lis r29, fn_800133B0@ha
+    lis r29, math_wrapAngle@ha
     addi r3, r1, 0xf4
-    addi r4, r29, fn_800133B0@l
+    addi r4, r29, math_wrapAngle@l
     bl fn_8012A218
     lwz r3, 0x0(r31)
     bl fn_8012A1B8
     lfs f1, 0x4(r3)
     addi r3, r1, 0xf4
     lfs f0, 0xf8(r1)
-    addi r4, r29, fn_800133B0@l
+    addi r4, r29, math_wrapAngle@l
     fsubs f0, f0, f1
     stfs f0, 0xf8(r1)
     bl fn_8012A218
@@ -999,19 +999,19 @@ lbl_fn_80129A6C_00000C90:
     stb r0, 0x34(r31)
 lbl_fn_80129A6C_00000C98:
     lfs f1, lbl_808818E8
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f31, f1
     lfs f1, lbl_808818E4
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f2, f31
     lfs f3, lbl_808818A8
     addi r3, r1, 0xc4
     bl vec3_set
     lfs f1, lbl_808818F0
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f31, f1
     lfs f1, lbl_808818EC
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f2, f31
     lfs f3, lbl_808818A8
     addi r3, r1, 0xb8
@@ -1049,7 +1049,7 @@ lbl_fn_80129A6C_00000D18:
     bl fn_80012C88
 lbl_fn_80129A6C_00000D58:
     lwz r3, 0x0(r31)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     lis r4, lbl_80737200@ha
     li r5, 0x0
     addi r29, r4, lbl_80737200@l
@@ -1057,7 +1057,7 @@ lbl_fn_80129A6C_00000D58:
     bl atn_Model_findBoneIndex
     stw r3, 0x8(r1)
     lwz r3, 0x0(r31)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     addi r4, r29, 0xb
     li r5, 0x0
     bl atn_Model_findBoneIndex
@@ -1065,7 +1065,7 @@ lbl_fn_80129A6C_00000D58:
     addi r27, r1, 0x8
     addi r28, r1, 0x100
     li r25, 0x0
-    lis r30, fn_800133B0@ha
+    lis r30, math_wrapAngle@ha
 lbl_fn_80129A6C_00000DA0:
     addi r3, r1, 0xa0
     bl mission_updateStub
@@ -1080,7 +1080,7 @@ lbl_fn_80129A6C_00000DA0:
     b lbl_fn_80129A6C_00000E4C
 lbl_fn_80129A6C_00000DCC:
     lwz r3, 0x0(r31)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r4, r26
     bl fn_8012A1C0
     mr r4, r3
@@ -1114,7 +1114,7 @@ lbl_fn_80129A6C_00000E2C:
     bl vec3_copy
 lbl_fn_80129A6C_00000E4C:
     mr r3, r28
-    addi r4, r30, fn_800133B0@l
+    addi r4, r30, math_wrapAngle@l
     bl fn_8012A218
     lfs f1, lbl_808818A8
     addi r3, r1, 0x94
@@ -1122,7 +1122,7 @@ lbl_fn_80129A6C_00000E4C:
     fmr f2, f1
     bl vec3_set
     lwz r3, 0x0(r31)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     addi r4, r29, 0x11
     bl atn_Model_getBoneMatrix
     mr r4, r3
@@ -1130,17 +1130,17 @@ lbl_fn_80129A6C_00000E4C:
     bl fn_8001336C
     addi r3, r1, 0x94
     addi r4, r1, 0x118
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x88
     addi r4, r1, 0x94
     bl vec3_toEulerAngles
     addi r3, r1, 0x88
-    addi r4, r30, fn_800133B0@l
+    addi r4, r30, math_wrapAngle@l
     bl fn_8012A218
     lfs f1, 0x4(r28)
     mr r3, r28
     lfs f0, 0x8c(r1)
-    addi r4, r30, fn_800133B0@l
+    addi r4, r30, math_wrapAngle@l
     fsubs f0, f1, f0
     stfs f0, 0x4(r28)
     bl fn_8012A218
@@ -1202,12 +1202,12 @@ lbl_fn_80129A6C_00000F74:
     addi r3, r1, 0x100
     fmr f2, f1
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
     lfs f1, lbl_808818A8
     addi r3, r1, 0x10c
     fmr f2, f1
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
 lbl_fn_80129A6C_00000F9C:
     li r0, 0x0
     stb r0, 0x35(r31)
@@ -1274,11 +1274,9 @@ asm void fn_8012A190(void)
     blr
 }
 
-asm void fn_8012A1B8(void)
+void *fn_8012A1B8(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x534
-    blr
+    return (char *)p + 0x534;
 }
 
 asm void fn_8012A1C0(void)

@@ -13,7 +13,7 @@ extern void fn_80103F60(void);
 extern void fn_80108378(void);
 extern void fn_80133130(void);
 extern void fn_80133EE8(void);
-extern void fn_80139560(void);
+extern void npc_calcTargetDistance(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
@@ -558,7 +558,7 @@ lbl_fn_8024B4F0_0000068C:
     mr r3, r31
     ori r0, r0, 0x10
     stw r0, 0x12a4(r31)
-    bl fn_80139560
+    bl npc_calcTargetDistance
     b lbl_fn_8024B4F0_0000095C
     lwz r3, 0x55c(r31)
     subi r0, r3, 0x6
@@ -577,7 +577,7 @@ lbl_fn_8024B4F0_000006D4:
     mr r3, r31
     ori r0, r0, 0x10
     stw r0, 0x12a4(r31)
-    bl fn_80139560
+    bl npc_calcTargetDistance
     b lbl_fn_8024B4F0_0000095C
 lbl_fn_8024B4F0_000006EC:
     lwz r3, 0x55c(r31)
@@ -744,7 +744,7 @@ lbl_fn_8024B4F0_00000940:
     mr r3, r31
     ori r0, r0, 0x10
     stw r0, 0x12a4(r31)
-    bl fn_80139560
+    bl npc_calcTargetDistance
     mr r3, r31
     bl fn_8024D120
 lbl_fn_8024B4F0_0000095C:

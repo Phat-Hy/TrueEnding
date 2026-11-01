@@ -24,7 +24,7 @@ extern void debuff_clearStatus(void);
 extern void fn_80178864(void);
 extern void fn_801789D8(void);
 extern void fn_80192758(void);
-extern void fn_8020924C(void);
+extern void mem_findBlockById(void);
 extern void task_lookupTagIndex(void);
 extern void fn_80219544(void);
 extern void task_findEntryById(void);
@@ -1812,7 +1812,7 @@ lbl_fn_801CC0AC_000016B0:
     addi r4, r30, 0x15
     bl res_MsgHandle_destructor
     lwz r3, 0x20(r31)
-    bl fn_8020924C
+    bl mem_findBlockById
     addi r27, r30, 0x2a
     stw r28, 0x2c(r1)
     mr r30, r3

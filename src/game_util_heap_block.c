@@ -19,13 +19,13 @@ extern void save_validateHeader(void);
 extern void saveSlot_readSummary(void);
 extern void save_createWorkerTask(void);
 extern void save_computeCrc32(void);
-extern void fn_801F6E78(void);
+extern void save_calculateBlockCrc(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
-extern void fn_8020EF04(void);
+extern void rand_scaleRangeInt(void);
 extern void fn_804439FC(void);
 extern void fn_8044441C(void);
-extern void fn_804444E8(void);
+extern void gmk_findSlotByIndex(void);
 extern void fn_80444564(void);
 extern void fn_8044D490(void);
 extern void fn_8044D678(void);
@@ -551,7 +551,7 @@ asm void fn_80584754(void)
     lwz r3, 0x68(r26)
     addi r4, r31, 0x2a9
     addi r5, r1, 0x8
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     lwz r3, 0x68(r26)
     addi r4, r31, 0x2b1
     lfs f1, lbl_808880D4
@@ -616,7 +616,7 @@ lbl_fn_80584830_000006E8:
     cmpwi r3, 0x0
     bne lbl_fn_80584830_00000708
     lwz r3, 0x0(r31)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_80584830_00000724
 lbl_fn_80584830_00000708:
@@ -630,7 +630,7 @@ lbl_fn_80584830_00000708:
 lbl_fn_80584830_00000724:
     lwz r3, lbl_8087F4F0
     lwz r4, 0x0(r31)
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x63
     blt lbl_fn_80584830_00000740
     li r3, 0x2
@@ -669,7 +669,7 @@ asm void fn_805848E4(void)
     cmpwi r3, 0x0
     bne lbl_fn_805848E4_000007B4
     lwz r3, 0x0(r28)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_805848E4_000007B8
 lbl_fn_805848E4_000007B4:
@@ -689,7 +689,7 @@ lbl_fn_805848E4_000007C8:
 lbl_fn_805848E4_000007E0:
     lwz r4, 0x0(r28)
     mr r3, r29
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
 lbl_fn_805848E4_000007EC:
     lwz r4, 0x58(r28)
     subf r5, r3, r31
@@ -2032,7 +2032,7 @@ lbl_fn_80585994_00001A90:
     beq lbl_fn_80585994_00001ACC
     lwz r3, lbl_8087F4F0
     lwz r4, 0x3300(r4)
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     addis r4, r31, 0x2
     stw r3, 0x5b28(r4)
     b lbl_fn_80585994_00001AD0

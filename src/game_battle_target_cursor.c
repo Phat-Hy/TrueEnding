@@ -14,7 +14,7 @@ extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
 extern void route_createWaypoint(void);
-extern void fn_80088724(void);
+extern void zone_testPointInBounds(void);
 extern void node_createNamedChild(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
@@ -32,7 +32,7 @@ extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
-extern void fn_80239D58(void);
+extern void res_Shader_findParameter(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A1F4(void);
 extern void res_registerResource(void);
@@ -41,8 +41,8 @@ extern void task_createWorker(void);
 extern void fn_803EC758(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
-extern void fn_803ED5D0(void);
-extern void fn_803ED774(void);
+extern void barrier_bindFieldAnimation(void);
+extern void dungeon_updateBarrierField(void);
 extern void fn_8040B200(void);
 extern void fn_8044D710(void);
 extern void fn_8044D9BC(void);
@@ -154,7 +154,7 @@ asm void fn_804088C0(void)
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_804088C0_0000004C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -508,7 +508,7 @@ lbl_fn_80408D58_00000500:
     bl atn_Anim_setLayerAnimation
     mr r3, r30
     addi r4, r30, 0xf4
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
     lfs f0, lbl_80886294
     stfs f0, 0x328(r30)
     b lbl_fn_80408D58_00000854
@@ -847,7 +847,7 @@ lbl_fn_804091FC_000009A0:
     addi r5, r29, 0x78
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_808862A0
     mr r3, r30
     lfs f2, lbl_808862A4
@@ -1748,7 +1748,7 @@ lbl_fn_804096D4_0000169C:
     lwz r3, lbl_8087F3C0
     mr r4, r17
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     bne lbl_fn_804096D4_00001A18
     lwz r5, lbl_8087F3C0
@@ -1782,7 +1782,7 @@ lbl_fn_804096D4_00001728:
     lwz r3, lbl_8087F3C0
     mr r4, r17
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_804096D4_00001A18
     lwz r3, lbl_8087F3C0
@@ -1863,7 +1863,7 @@ lbl_fn_804096D4_00001858:
     lwz r3, lbl_8087F3C0
     mr r4, r17
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     bne lbl_fn_804096D4_00001A18
     lwz r3, lbl_8087F3C0

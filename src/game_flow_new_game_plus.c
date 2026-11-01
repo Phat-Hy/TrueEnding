@@ -9,7 +9,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void ui_destroyWidget(void);
 extern void fn_8003F1E4(void);
 extern void dungeon_initGlobalContext(void);
@@ -21,15 +21,15 @@ extern void fn_801018E4(void);
 extern void fn_80101CDC(void);
 extern void fn_80102EAC(void);
 extern void fn_801031D0(void);
-extern void fn_80108C10(void);
+extern void hurtbox_testCollisionLayer(void);
 extern void fn_80109864(void);
 extern void fn_8012DF7C(void);
 extern void fn_80133EE8(void);
 extern void fn_80133F18(void);
-extern void fn_80148B0C(void);
+extern void quest_getRewardItemSlot(void);
 extern void fn_80150460(void);
 extern void fn_8015076C(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void fn_801681B0(void);
 extern void fn_8016D0A0(void);
 extern void fn_801750FC(void);
@@ -38,8 +38,8 @@ extern void task_findEntryById(void);
 extern void fn_8021A684(void);
 extern void fn_8021A77C(void);
 extern void fn_8021A8D0(void);
-extern void fn_803750E4(void);
-extern void fn_8037D4C0(void);
+extern void kpad_validateButtonIndex(void);
+extern void dvd_showDiskErrorDialog(void);
 extern void fn_803E9B7C(void);
 extern void net_getPacketManager(void);
 extern void net_voiceCodec_destroy(void);
@@ -925,7 +925,7 @@ lbl_fn_804EFF78_00000B6C:
     addi r8, r1, 0xf0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r3, lbl_8087F610
     lwz r0, 0x540(r3)
     cmpwi r0, 0x2
@@ -1017,7 +1017,7 @@ lbl_fn_804EFF78_00000C50:
     stfs f8, 0xc4(r1)
     stfs f7, 0xc8(r1)
     stfs f0, 0xcc(r1)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
 lbl_fn_804EFF78_00000D00:
     cmpwi r27, 0x0
     beq lbl_fn_804EFF78_0000116C
@@ -1069,7 +1069,7 @@ lbl_fn_804EFF78_00000D00:
 lbl_fn_804EFF78_00000DBC:
     mr r3, r26
     li r4, 0x0
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     psq_l f1, 0x4(r3), 0, 0
     lfs f2, 0xc(r3)
     psq_st f1, 0x0(r25), 0, 0
@@ -1237,7 +1237,7 @@ lbl_fn_804EFF78_00000FD4:
 lbl_fn_804EFF78_00001040:
     mr r3, r26
     li r4, 0x0
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     psq_l f1, 0x4(r3), 0, 0
     lfs f2, 0xc(r3)
     psq_st f1, 0x0(r25), 0, 0
@@ -1388,7 +1388,7 @@ lbl_fn_804EFF78_000011FC:
     addi r5, r1, 0x4c
     li r7, 0x0
     li r9, 0x0
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     b lbl_fn_804EFF78_000012C4
 lbl_fn_804EFF78_00001294:
     cmplwi r25, 0xb
@@ -1447,7 +1447,7 @@ lbl_fn_804EFF78_00001344:
     li r6, 0x0
     stfs f0, 0x44(r1)
     stfs f7, 0x48(r1)
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
 lbl_fn_804EFF78_0000136C:
     lwz r12, 0x0(r26)
     mr r3, r26
@@ -1823,7 +1823,7 @@ lbl_fn_804F1128_0000180C:
     li r5, 0xf
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_804F1128_0000185C:
     lwz r3, lbl_8087F628
     lwz r4, 0xc2c(r3)
@@ -1856,7 +1856,7 @@ lbl_fn_804F1128_000018AC:
     li r4, 0x1b0
     stw r0, 0x7c(r3)
     lwz r3, lbl_8087F430
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
     lwz r3, lbl_8087F9C0
     li r0, 0x0
     stw r0, 0x7c(r3)

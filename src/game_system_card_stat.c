@@ -14,7 +14,7 @@ extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void fn_800FB4B0(void);
 extern void actor_testBitFlag(void);
-extern void fn_80139560(void);
+extern void npc_calcTargetDistance(void);
 extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
@@ -23,13 +23,13 @@ extern void fn_80155790(void);
 extern void fn_80155A88(void);
 extern void fn_801562A0(void);
 extern void fn_8015783C(void);
-extern void fn_80158BB4(void);
+extern void shop_canPurchaseItem(void);
 extern void fn_80158CA4(void);
 extern void fn_80161880(void);
 extern void fn_8016D74C(void);
 extern void actor_setState(void);
 extern void battle_updateTargetAggro(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void actor_getMovementFlags(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -362,7 +362,7 @@ lbl_fn_8035C47C_000003B8:
     bl fn_8035C8CC
 lbl_fn_8035C47C_000003C0:
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
     mr r3, r31
     bl dialog_updateScriptState
     mr r3, r31
@@ -675,7 +675,7 @@ lbl_fn_8035C8CC_000007E4:
     mr r4, r3
 lbl_fn_8035C8CC_0000085C:
     mr r3, r31
-    bl fn_80178208
+    bl battle_generateLootDrops
     lwz r3, lbl_8087F430
     li r4, 0x67
     li r5, 0x1
@@ -875,7 +875,7 @@ asm void fn_8035CF78(void)
     beq lbl_fn_8035CF78_00000CEC
     b lbl_fn_8035CF78_00000DEC
 lbl_fn_8035CF78_00000B30:
-    bl fn_80158BB4
+    bl shop_canPurchaseItem
     cmpwi r3, 0x0
     bne lbl_fn_8035CF78_00000CB4
     lwz r0, 0x560(r31)

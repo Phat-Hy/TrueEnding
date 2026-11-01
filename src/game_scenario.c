@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void fn_800641CC(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
@@ -637,7 +637,7 @@ lbl_fn_800795DC_000006F8:
     lwz r3, lbl_8087EEB0
     addi r4, r31, 0x8
     or r5, r5, r0
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     b lbl_fn_800795DC_00000880
 lbl_fn_800795DC_00000728:
     lfs f2, 0x34(r3)

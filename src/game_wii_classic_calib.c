@@ -7,7 +7,7 @@ extern void _restgpr_22(void);
 extern void _savegpr_21(void);
 extern void _savegpr_22(void);
 extern void dtor_80084684(void);
-extern void fn_8004B290(void);
+extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
@@ -20,11 +20,11 @@ extern void map_debugLog(void);
 extern void fn_80096218(void);
 extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
-extern void fn_800C16B4(void);
+extern void skeleton_getGlobalManager(void);
 extern void fn_800DBC1C(void);
 extern void fn_800DC3C8(void);
 extern void fn_8016E484(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void fn_8020EF4C(void);
 extern void task_mapIdToQueue(void);
 extern void fn_80228AF4(void);
@@ -182,7 +182,7 @@ asm void fn_805628E0(void)
     mr r30, r3
     bne lbl_fn_805628E0_000001C8
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     lwz r0, 0x30(r31)
     cmpwi r0, 0x0
     ble lbl_fn_805628E0_00000064
@@ -1205,7 +1205,7 @@ asm void fn_805634D4(void)
 lbl_fn_805634D4_00000D04:
     mr r3, r29
     mr r4, r22
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     stw r3, 0x414(r28)
     lwz r4, 0x88(r3)
     lwz r0, 0x8c(r3)
@@ -2033,7 +2033,7 @@ lbl_fn_80564060_00001848:
     li r4, 0x0
     li r5, 0x0
     addi r3, r3, 0x8
-    bl fn_8004B290
+    bl sound_initChannelParams
 lbl_fn_80564060_0000188C:
     lwz r30, 0x22c(r29)
     cmpwi r30, 0x0

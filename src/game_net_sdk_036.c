@@ -12,7 +12,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void memcmp(void);
 extern void fn_806A4260(void);
-extern void fn_806D5850(void);
+extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
@@ -21,7 +21,7 @@ extern void fn_806D5C90(void);
 extern void fn_806D6560(void);
 extern void fn_806D66B0(void);
 extern void net_socketClose(void);
-extern void fn_806D8F30(void);
+extern void net_getTimestampMs(void);
 extern void fn_806D8F80(void);
 extern void fn_806E92D0(void);
 extern void fn_806E93E0(void);
@@ -215,22 +215,22 @@ lbl_fn_806EA790_0000014C:
     lwz r3, 0x5c(r31)
     cmpwi r3, 0x0
     beq lbl_fn_806EA790_0000015C
-    bl fn_806D5850
+    bl net_pollActiveSockets
 lbl_fn_806EA790_0000015C:
     lwz r3, 0x60(r31)
     cmpwi r3, 0x0
     beq lbl_fn_806EA790_0000016C
-    bl fn_806D5850
+    bl net_pollActiveSockets
 lbl_fn_806EA790_0000016C:
     lwz r3, 0x98(r31)
     cmpwi r3, 0x0
     beq lbl_fn_806EA790_0000017C
-    bl fn_806D5850
+    bl net_pollActiveSockets
 lbl_fn_806EA790_0000017C:
     lwz r3, 0x9c(r31)
     cmpwi r3, 0x0
     beq lbl_fn_806EA790_0000018C
-    bl fn_806D5850
+    bl net_pollActiveSockets
 lbl_fn_806EA790_0000018C:
     mr r3, r31
     bl net_socketClose
@@ -1185,7 +1185,7 @@ lbl_fn_806EB1B0_00000DCC:
 lbl_fn_806EB1B0_00000DDC:
     li r0, 0x4
     stw r0, 0xc(r31)
-    bl fn_806D8F30
+    bl net_getTimestampMs
     lwz r0, 0x8c(r31)
     mr r4, r31
     lwz r5, 0x0(r31)
@@ -2011,7 +2011,7 @@ lbl_fn_806EBE60_00001924:
     bne lbl_fn_806EBE60_00001950
     li r0, 0x1
     stw r0, 0x90(r30)
-    bl fn_806D8F30
+    bl net_getTimestampMs
     stw r3, 0x94(r30)
 lbl_fn_806EBE60_00001950:
     mr r3, r30
@@ -2109,7 +2109,7 @@ lbl_fn_806EBE60_00001A7C:
     bne lbl_fn_806EBE60_00001AA4
     li r0, 0x1
     stw r0, 0x90(r30)
-    bl fn_806D8F30
+    bl net_getTimestampMs
     stw r3, 0x94(r30)
 lbl_fn_806EBE60_00001AA4:
     li r3, 0x1
@@ -2491,7 +2491,7 @@ lbl_fn_806EC4B0_00001FCC:
     addi r4, r30, 0x4
     li r5, 0x4
     bl memcpy
-    bl fn_806D8F30
+    bl net_getTimestampMs
     lwz r0, 0x8(r1)
     subf r4, r0, r3
     mr r3, r31

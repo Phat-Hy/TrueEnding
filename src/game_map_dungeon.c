@@ -12,15 +12,15 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
-extern void fn_801255C8(void);
+extern void enemy_stepBehavior(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80128508(void);
 extern void fn_80128A30(void);
 extern void fn_80129954(void);
 extern void fn_80129978(void);
 extern void fn_80129A48(void);
-extern void fn_80139560(void);
-extern void fn_8015E7A0(void);
+extern void npc_calcTargetDistance(void);
+extern void party_configureMemberSlot(void);
 extern void fn_80161570(void);
 extern void battle_applyStatusEffect(void);
 extern void fn_80182874(void);
@@ -539,7 +539,7 @@ lbl_fn_8017E9D8_00000698:
     addi r4, r1, 0xbc
     li r5, 0x38
     li r6, 0x0
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
     lfs f0, lbl_80881B80
     stfs f0, 0x2e8(r31)
 lbl_fn_8017E9D8_000006B4:
@@ -550,7 +550,7 @@ lbl_fn_8017E9D8_000006B4:
     cmpwi r0, 0x2
     beq lbl_fn_8017E9D8_000006D8
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
     b lbl_fn_8017E9D8_00000714
 lbl_fn_8017E9D8_000006D8:
     lwz r3, lbl_8087F430
@@ -785,7 +785,7 @@ lbl_fn_8017F348_000009D4:
     lwzx r4, r4, r0
     bl fn_80128508
     addi r3, r31, 0xc64
-    bl fn_801255C8
+    bl enemy_stepBehavior
 lbl_fn_8017F348_00000A30:
     lwz r5, lbl_8087F0A8
     addi r3, r31, 0x10d8
@@ -881,7 +881,7 @@ lbl_fn_8017F4A0_00000B6C:
     li r6, 0x8
     bl fn_80128A30
     addi r3, r30, 0xc64
-    bl fn_801255C8
+    bl enemy_stepBehavior
     stw r28, 0xd18(r30)
     addi r4, r30, 0x528
     lwz r3, lbl_8087F098
@@ -930,7 +930,7 @@ lbl_fn_8017F4A0_00000C20:
     bl fn_80128A30
 lbl_fn_8017F4A0_00000C38:
     addi r3, r30, 0xc64
-    bl fn_801255C8
+    bl enemy_stepBehavior
     lwz r25, lbl_8087F490
     cmpwi r25, 0x0
     beq lbl_fn_8017F4A0_000011B8
@@ -1267,7 +1267,7 @@ lbl_fn_8017F4A0_00001134:
     li r6, 0x8
     bl fn_80128A30
     addi r3, r30, 0xc64
-    bl fn_801255C8
+    bl enemy_stepBehavior
     lwz r25, lbl_8087F490
     cmpwi r25, 0x0
     beq lbl_fn_8017F4A0_000011B8

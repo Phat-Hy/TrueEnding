@@ -18,7 +18,7 @@ extern void clip_calculateFrustum(void);
 extern void fn_800FB4B0(void);
 extern void fn_8010653C(void);
 extern void fn_80133130(void);
-extern void fn_801446F0(void);
+extern void quest_resetObjectiveBounds(void);
 extern void inventory_unequipItem(void);
 extern void debuff_clearStatus(void);
 extern void fn_80178864(void);
@@ -1809,7 +1809,7 @@ lbl_fn_801A5E90_000017C0:
     lfs f0, lbl_80882204
     stfs f0, 0x234(r29)
     lwz r3, 0x4(r31)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     cmpwi r30, 0x0
     beq lbl_fn_801A5E90_000019C8
     lwz r3, 0x4(r31)

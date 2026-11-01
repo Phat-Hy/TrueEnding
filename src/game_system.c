@@ -17,7 +17,7 @@ extern void fn_8000D9F0(void);
 extern void fn_8000DB1C(void);
 extern void fn_8000DB24(void);
 extern void fn_8000DD04(void);
-extern void fn_8000DD0C(void);
+extern void scene_getRootNode(void);
 extern void fn_8000DD14(void);
 extern void fn_8000DD98(void);
 extern void fn_8000DDA0(void);
@@ -45,7 +45,7 @@ extern void str_findChar(void);
 extern void fn_8011EDE0(void);
 extern void fn_80129A48(void);
 extern void fn_8012AC40(void);
-extern void fn_801446F0(void);
+extern void quest_resetObjectiveBounds(void);
 extern void quest_evaluateConditions(void);
 extern void quest_checkCondition(void);
 extern void dialog_selectChoice(void);
@@ -56,15 +56,15 @@ extern void fn_80150178(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
 extern void fn_80164DCC(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void fn_8016E5F0(void);
 extern void actor_setState(void);
 extern void battle_applyStatusEffect(void);
 extern void fn_801750FC(void);
 extern void battle_awardExp(void);
-extern void fn_80176ACC(void);
+extern void battle_activateExpReward(void);
 extern void fn_80176DFC(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void fn_8017A33C(void);
 extern void fn_8017AC44(void);
 extern void fn_8047FF70(void);
@@ -363,7 +363,7 @@ lbl_fn_8000E474_0000036C:
     bl fn_8000DDA0
     stw r3, 0x1c(r27)
     bl fn_8000DE3C
-    bl fn_8000DD0C
+    bl scene_getRootNode
     bl fn_8000DD04
     cmpwi r3, 0x0
     mr r30, r3
@@ -377,7 +377,7 @@ lbl_fn_8000E474_0000039C:
     mr r28, r3
     lwz r3, 0x1c(r27)
     bl fn_8000DE3C
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r4, r28
     bl fn_800929C0
     bl fn_8000DD98
@@ -393,7 +393,7 @@ lbl_fn_8000E474_0000039C:
     bl fn_8000DE44
     lwz r3, 0x1c(r27)
     bl fn_8000DE3C
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r4, r28
     bl fn_80093E90
     stw r3, 0xc(r1)
@@ -640,7 +640,7 @@ lbl_fn_8000E820_000006E8:
     bl fn_8000DDA0
     stw r3, 0x1c(r30)
     bl fn_8000DE3C
-    bl fn_8000DD0C
+    bl scene_getRootNode
     bl fn_8000DD04
     cmpwi r3, 0x0
     mr r31, r3
@@ -654,7 +654,7 @@ lbl_fn_8000E820_00000740:
     mr r27, r3
     lwz r3, 0x1c(r30)
     bl fn_8000DE3C
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r4, r27
     bl fn_800929C0
     bl fn_8000DD98
@@ -670,7 +670,7 @@ lbl_fn_8000E820_00000740:
     bl fn_8000DE44
     lwz r3, 0x1c(r30)
     bl fn_8000DE3C
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r4, r27
     bl fn_80093E90
     stw r3, 0xc(r1)
@@ -1404,7 +1404,7 @@ lbl_fn_8000F1EC_00001110:
     bne lbl_fn_8000F1EC_00001150
     lwz r3, 0x48(r5)
     li r4, 0x0
-    bl fn_80178208
+    bl battle_generateLootDrops
 lbl_fn_8000F1EC_00001150:
     lwz r6, 0x1c(r29)
     li r5, 0x0
@@ -1836,7 +1836,7 @@ lbl_fn_8000F1EC_00001720:
     stw r0, 0x958(r3)
     lwz r3, 0x1c(r29)
     lwz r3, 0x48(r3)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     lwz r3, 0x1c(r29)
     lfs f1, lbl_80880674
     lwz r3, 0x48(r3)
@@ -2015,7 +2015,7 @@ lbl_fn_8000FAE8_000019F4:
     lwz r0, 0x18(r31)
     lwz r3, 0x48(r3)
     extrwi r4, r0, 1, 18
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     lwz r0, 0x18(r31)
     lwz r3, 0x1c(r31)
     extrwi r0, r0, 1, 19
@@ -2313,7 +2313,7 @@ lbl_fn_8000FAE8_00001E3C:
     cmpwi r0, 0x0
     beq lbl_fn_8000FAE8_00001EF8
     lwz r3, 0x13fc(r30)
-    bl fn_80176ACC
+    bl battle_activateExpReward
     lwz r3, 0x13fc(r30)
     lis r4, lbl_8072F924@ha
     addi r4, r4, lbl_8072F924@l

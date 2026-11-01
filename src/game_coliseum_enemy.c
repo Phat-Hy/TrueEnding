@@ -10,12 +10,12 @@ extern void talk_formatQuotedString(void);
 extern void fn_800709F4(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void fn_8009E5A0(void);
 extern void hud_updateTargetReticle(void);
 extern void fn_8009EB20(void);
-extern void fn_8009EE30(void);
+extern void hud_drawTargetMarker(void);
 extern void fn_8009F788(void);
 extern void fn_8009FFCC(void);
 extern void fn_800C1FB4(void);
@@ -23,7 +23,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void bloom_processPasses(void);
 extern void str_findChar(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void kpad_getClampData(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
@@ -235,7 +235,7 @@ lbl_fn_80490884_000001E4:
     bl PSMTXConcat
     mr r3, r29
     addi r4, r1, 0x198
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
     lwz r4, 0x2c(r30)
     lfs f8, lbl_8088705C
     lfs f9, 0xc(r4)
@@ -426,7 +426,7 @@ lbl_fn_80490B0C_000004C0:
     bl PSMTXConcat
     mr r3, r29
     addi r4, r1, 0x1c8
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
     lwz r4, 0x2c(r30)
     lfs f8, lbl_8088705C
     lfs f9, 0xc(r4)
@@ -471,7 +471,7 @@ asm void fn_80490DE8(void)
 lbl_fn_80490DE8_00000590:
     mr r3, r31
     addi r4, r31, 0x30
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
     li r3, 0x1
 lbl_fn_80490DE8_000005A0:
     lwz r0, 0x14(r1)
@@ -922,10 +922,9 @@ lbl_fn_80491324_00000B74:
     blr
 }
 
-asm void fn_80491414(void)
+void fn_80491414(void)
 {
-    nofralloc
-    b bloom_processPasses
+    bloom_processPasses();
 }
 
 asm void fn_80491418(void)
@@ -1110,7 +1109,7 @@ lbl_fn_80491528_00000DB4:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     stw r3, 0x30(r1)
     mr r15, r3
     stw r3, 0x18(r1)
@@ -1136,7 +1135,7 @@ lbl_fn_80491528_00000E2C:
     bl strcpy
     stw r22, 0x2c(r1)
     addi r3, r1, 0x2c
-    bl fn_800DCA6C
+    bl sky_renderStub
     cmpwi r20, 0x0
     beq lbl_fn_80491528_00000E68
     addic. r3, r20, 0x4
@@ -1204,7 +1203,7 @@ lbl_fn_80491528_00000F0C:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     stw r3, 0x24(r1)
     mr r15, r3
     stw r3, 0x10(r1)
@@ -1230,7 +1229,7 @@ lbl_fn_80491528_00000F84:
     bl strcpy
     stw r28, 0x20(r1)
     addi r3, r1, 0x20
-    bl fn_800DCA6C
+    bl sky_renderStub
     cmpwi r21, 0x0
     beq lbl_fn_80491528_00000FC0
     addic. r3, r21, 0x4

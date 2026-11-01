@@ -19,7 +19,7 @@ extern void fn_800704DC(void);
 extern void fn_80075DEC(void);
 extern void fn_80075F58(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800839EC(void);
+extern void town_registerInteractionPoint(void);
 extern void fn_800B3978(void);
 extern void fn_800B64DC(void);
 extern void motion_updateFogAdj(void);
@@ -29,8 +29,8 @@ extern void PSMTXMultVecArray(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
 extern void fn_80615E00(void);
-extern void fn_80615FF0(void);
-extern void fn_80616250(void);
+extern void GXInitLightObj(void);
+extern void GXClampLightAngle(void);
 extern void memcmp(void);
 extern void fn_8068A6D8(void);
 extern void fn_8068A918(void);
@@ -199,7 +199,7 @@ lbl_fn_800B4134_0000010C:
     li r6, 0x6
     li r10, 0x0
     mr r8, r7
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     stw r3, lbl_8087EFA4
     lis r31, lbl_807C7580@ha
     mr r4, r3
@@ -210,7 +210,7 @@ lbl_fn_800B4134_0000010C:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80880F48
     addi r3, r31, lbl_807C7580@l
     li r4, 0x0
@@ -220,7 +220,7 @@ lbl_fn_800B4134_0000010C:
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     li r0, 0x1
     stb r0, lbl_8087EFA0
 lbl_fn_800B4134_000001F8:

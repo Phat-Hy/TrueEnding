@@ -17,7 +17,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_80112784(void);
 extern void fn_80117E34(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void fn_8016E71C(void);
 extern void fn_8020F130(void);
 extern void fn_8020F71C(void);
@@ -1851,7 +1851,7 @@ lbl_fn_8053E8D4_000015D8:
     bl fn_803CCC84
     mr r3, r29
     li r4, 0x0
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
 lbl_fn_8053E8D4_00001608:
     lwz r29, 0x14ac(r29)
 lbl_fn_8053E8D4_0000160C:

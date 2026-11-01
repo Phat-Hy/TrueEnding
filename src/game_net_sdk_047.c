@@ -20,7 +20,7 @@ extern void fn_806A4260(void);
 extern void fn_806A4264(void);
 extern void fn_806A4270(void);
 extern void fn_806D57A0(void);
-extern void fn_806D5850(void);
+extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
@@ -38,7 +38,7 @@ extern void fn_806D7DA0(void);
 extern void fn_806D7EE0(void);
 extern void fn_806D88D0(void);
 extern void fn_806D8E30(void);
-extern void fn_806D8F30(void);
+extern void net_getTimestampMs(void);
 extern void fn_806FD910(void);
 extern void fn_806FDBC0(void);
 extern void fn_806FE840(void);
@@ -162,7 +162,7 @@ lbl_fn_80701470_000000EC:
     cmpw r27, r3
     blt lbl_fn_80701470_0000009C
     lwz r3, 0x8(r28)
-    bl fn_806D5850
+    bl net_pollActiveSockets
     li r0, 0x0
     stw r0, 0x8(r28)
 lbl_fn_80701470_0000010C:
@@ -267,7 +267,7 @@ lbl_fn_80701470_00000260:
     ble lbl_fn_80701470_0000020C
     li r0, 0x0
     stw r0, 0x0(r28)
-    bl fn_806D8F30
+    bl net_getTimestampMs
     stw r3, 0x6b8(r28)
     li r3, 0x0
 lbl_fn_80701470_00000280:
@@ -340,7 +340,7 @@ lbl_fn_80701700_00000358:
     cmpw r30, r3
     blt lbl_fn_80701700_00000308
     lwz r3, 0x8(r31)
-    bl fn_806D5850
+    bl net_pollActiveSockets
     li r0, 0x0
     stw r0, 0x8(r31)
 lbl_fn_80701700_00000378:
@@ -446,7 +446,7 @@ lbl_fn_80701870_000004CC:
     cmpw r30, r3
     blt lbl_fn_80701870_0000047C
     lwz r3, 0x8(r31)
-    bl fn_806D5850
+    bl net_pollActiveSockets
     li r0, 0x0
     stw r0, 0x8(r31)
 lbl_fn_80701870_000004EC:
@@ -532,7 +532,7 @@ lbl_fn_80701870_000005F8:
     lwz r3, 0x4(r31)
     cmpwi r3, 0x0
     beq lbl_fn_80701870_00000610
-    bl fn_806D5850
+    bl net_pollActiveSockets
 lbl_fn_80701870_00000610:
     li r0, 0x0
     stw r0, 0x4(r31)
@@ -1741,7 +1741,7 @@ lbl_fn_80702A90_000016B4:
     cmpw r26, r3
     blt lbl_fn_80702A90_00001664
     lwz r3, 0x8(r27)
-    bl fn_806D5850
+    bl net_pollActiveSockets
     li r0, 0x0
     stw r0, 0x8(r27)
 lbl_fn_80702A90_000016D4:
@@ -2496,7 +2496,7 @@ lbl_fn_807031B0_000020F8:
     cmpw r26, r3
     blt lbl_fn_807031B0_000020A8
     lwz r3, 0x8(r30)
-    bl fn_806D5850
+    bl net_pollActiveSockets
     li r0, 0x0
     stw r0, 0x8(r30)
 lbl_fn_807031B0_00002118:

@@ -17,19 +17,19 @@ extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800FD658(void);
 extern void fn_80107168(void);
-extern void fn_801092C8(void);
-extern void fn_8012DB04(void);
+extern void hurtbox_processHitDamage(void);
+extern void enemy_evalAnimTrack(void);
 extern void fn_8012DD70(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_80140588(void);
 extern void quest_ctorRewardItem(void);
 extern void fn_801595BC(void);
-extern void fn_8015E7A0(void);
-extern void fn_8016E4C4(void);
-extern void fn_801781B0(void);
+extern void party_configureMemberSlot(void);
+extern void debuff_removeStatusEffect(void);
+extern void battle_calcAABBCenter(void);
 extern void task_findEntryById(void);
 extern void fn_80310314(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void chest_spawnLoot(void);
 extern void fn_8044D6AC(void);
 extern void fn_805A40BC(void);
@@ -99,7 +99,7 @@ asm void fn_80311BB8(void)
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_80311BB8_00000068
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     bne lbl_fn_80311BB8_00000068
     lwz r0, 0x58c(r27)
@@ -676,12 +676,12 @@ asm void fn_803123D0(void)
     addi r3, r3, 0x7d4
     stfs f2, 0x98(r1)
     psq_st f1, 0x0(r4), 0, 0
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lfs f0, lbl_80884CC4
     fcmpo cr0, f1, f0
     ble lbl_fn_803123D0_00000894
     addi r3, r29, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     b lbl_fn_803123D0_00000898
 lbl_fn_803123D0_00000894:
     fmr f1, f0
@@ -775,7 +775,7 @@ lbl_fn_803123D0_0000099C:
 lbl_fn_803123D0_000009DC:
     mr r3, r29
     li r4, 0x0
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     lwz r0, 0x12a4(r29)
     lwz r3, 0x5c0(r29)
     extrwi. r0, r0, 1, 13
@@ -824,7 +824,7 @@ lbl_fn_803123D0_00000A6C:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_803123D0_00001300
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_803123D0_00001300
     lwz r3, 0x54c(r29)
@@ -1086,7 +1086,7 @@ lbl_fn_803123D0_00000E30:
     stw r0, 0x55b8(r3)
 lbl_fn_803123D0_00000E6C:
     addi r3, r29, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lwz r4, 0x14f8(r29)
     lis r0, 0x4330
     stw r0, 0x110(r1)
@@ -1166,7 +1166,7 @@ lbl_fn_803123D0_00000F54:
     stfs f0, 0x58(r1)
     stfs f0, 0x5c(r1)
     lwz r4, 0x14e4(r29)
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     lis r9, lbl_807C7030@ha
     lfs f1, lbl_80884CA4
     mr r3, r30
@@ -1183,7 +1183,7 @@ lbl_fn_803123D0_00000F54:
     li r5, 0x0
     li r6, 0xa
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
 lbl_fn_803123D0_00000FF4:
     lwz r6, 0x14e4(r29)
     li r30, 0x270f
@@ -1755,7 +1755,7 @@ lbl_fn_803132D0_000017A0:
     stfs f31, 0x10(r1)
     stfs f31, 0x14(r1)
     lwz r4, 0x14e4(r31)
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     lfs f1, lbl_80884CA4
     mr r3, r29
     addi r8, r1, 0x18
@@ -1774,7 +1774,7 @@ lbl_fn_803132D0_000017A0:
     li r4, 0x4
     li r5, 0x0
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
 lbl_fn_803132D0_0000180C:
     lfs f1, lbl_80884CA8
     addi r3, r1, 0x30
@@ -1814,7 +1814,7 @@ lbl_fn_803132D0_00001890:
     mr r5, r27
     addi r4, r1, 0x24
     li r6, 0x0
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
     lwz r3, 0x14e4(r31)
     li r0, 0x0
     stw r0, 0xf1c(r3)

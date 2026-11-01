@@ -12,7 +12,7 @@ extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void fn_800629F0(void);
 extern void fn_80063764(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB518(void);
@@ -23,7 +23,7 @@ extern void res_Resource_unload(void);
 extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
-extern void fn_80239D58(void);
+extern void res_Shader_findParameter(void);
 extern void res_findResourceSlot(void);
 extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
@@ -250,7 +250,7 @@ lbl_fn_80438814_00000230:
     lfs f1, lbl_80886908
     stfs f0, 0x64(r1)
     lfs f2, lbl_80886900
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     lfs f28, lbl_80886900
     b lbl_fn_80438814_000005B0
 lbl_fn_80438814_00000278:
@@ -2088,7 +2088,7 @@ lbl_fn_8043A08C_00001C94:
     beq lbl_fn_8043A08C_00001CF4
     mr r4, r31
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_8043A08C_00001CF4
     lwz r3, lbl_8087F3C0

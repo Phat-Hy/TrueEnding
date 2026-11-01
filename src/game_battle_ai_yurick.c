@@ -19,7 +19,7 @@ extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
 extern void route_createWaypoint(void);
-extern void fn_80088724(void);
+extern void zone_testPointInBounds(void);
 extern void node_createNamedChild(void);
 extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
@@ -30,17 +30,17 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cam_destroyMsgHandle(void);
 extern void fn_8010653C(void);
-extern void fn_8011FE3C(void);
+extern void skill_findNodeByTag(void);
 extern void fn_80155A88(void);
 extern void fn_8016B8D4(void);
-extern void fn_801781B0(void);
+extern void battle_calcAABBCenter(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void fn_803CCA84(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
@@ -163,7 +163,7 @@ lbl_fn_8043A530_00000068:
     b lbl_fn_8043A530_00000210
 lbl_fn_8043A530_00000078:
     addi r3, r1, 0x20
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     lfs f31, lbl_80886920
     addi r29, r1, 0x14
     addi r27, r1, 0x20
@@ -690,7 +690,7 @@ lbl_fn_8043AAE0_00000778:
     cmpwi r3, 0x0
     beq lbl_fn_8043AAE0_000007D8
     li r4, 0x1bd
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_8043AAE0_000007D8:
     lwz r3, 0x12a4(r29)
     extrwi. r0, r3, 1, 25
@@ -1183,7 +1183,7 @@ lbl_fn_8043B164_00000EA8:
     cmpwi r3, 0x0
     beq lbl_fn_8043B164_00000ECC
     lwz r4, 0x20(r4)
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     b lbl_fn_8043B164_00000ED0
 lbl_fn_8043B164_00000ECC:
     li r3, 0x0
@@ -1392,7 +1392,7 @@ lbl_fn_8043B614_00001148:
     addi r5, r29, 0x78
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_80886974
     mr r3, r30
     lfs f2, lbl_80886978

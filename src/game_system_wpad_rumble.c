@@ -16,9 +16,9 @@ extern void bloom_processPasses(void);
 extern void fn_8011F8F4(void);
 extern void fn_8012B3E8(void);
 extern void fn_8012B988(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void fn_802085E0(void);
-extern void fn_8020924C(void);
+extern void mem_findBlockById(void);
 extern void fn_8020A81C(void);
 extern void fn_8020FCE8(void);
 extern void fn_80214394(void);
@@ -266,7 +266,7 @@ lbl_world_Manager_update_000001F0:
 lbl_world_Manager_update_000001F4:
     mr r3, r28
     bl fn_80219544
-    bl fn_8020924C
+    bl mem_findBlockById
     cmpwi r3, 0x0
     beq lbl_world_Manager_update_00000218
     lwz r3, 0x14(r3)
@@ -1083,7 +1083,7 @@ asm void fn_80367A40(void)
 lbl_fn_80367A40_00000D7C:
     mr r3, r27
     bl fn_80219544
-    bl fn_8020924C
+    bl mem_findBlockById
     lwz r3, 0x14(r3)
     bl fn_8020A81C
     lwz r3, 0x10d4(r25)
@@ -1112,7 +1112,7 @@ lbl_fn_80367A40_00000D7C:
 lbl_fn_80367A40_00000DEC:
     mr r3, r28
     bl fn_80219544
-    bl fn_8020924C
+    bl mem_findBlockById
     lwz r3, 0x14(r3)
     bl fn_8020A81C
     lwz r0, 0x28(r24)
@@ -1155,7 +1155,7 @@ lbl_fn_80367A40_00000E54:
     addi r3, r27, 0x7d4
     bl fn_8012B988
     addi r3, r27, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
 lbl_fn_80367A40_00000EA0:
     lwz r27, 0x14ac(r27)
 lbl_fn_80367A40_00000EA4:
@@ -1186,7 +1186,7 @@ lbl_fn_80367A40_00000ED4:
 lbl_fn_80367A40_00000EF8:
     mr r3, r28
     bl fn_80219544
-    bl fn_8020924C
+    bl mem_findBlockById
     lwz r3, 0x14(r3)
     bl fn_8020A81C
     lwz r4, lbl_8087F4F0
@@ -1338,7 +1338,7 @@ lbl_fn_80367A40_00001024:
     addi r3, r26, 0x7d4
     bl fn_8012B988
     addi r3, r26, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lwz r0, lbl_8087F4F0
     addi r5, r26, 0x7f8
     lfs f0, 0x7d8(r26)
@@ -1572,7 +1572,7 @@ lbl_fn_80367A40_000014B0:
     addi r3, r26, 0x7d4
     bl fn_8012B988
     addi r3, r26, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
 lbl_fn_80367A40_000014C8:
     lwz r26, 0x14ac(r26)
 lbl_fn_80367A40_000014CC:

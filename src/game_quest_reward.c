@@ -8,10 +8,10 @@ extern void mtx_getTranslation(void);
 extern void vec3_set(void);
 extern void fn_8000DD04(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011410(void);
-extern void fn_800133B0(void);
+extern void mtx_multVec(void);
+extern void math_wrapAngle(void);
 extern void fn_80013404(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
@@ -23,7 +23,7 @@ extern void fn_80139F60(void);
 extern void fn_8013A13C(void);
 extern void fn_8013C394(void);
 extern void fn_8013C43C(void);
-extern void fn_8014052C(void);
+extern void quest_initMarkerCoords(void);
 extern void fn_80144ED4(void);
 extern void fn_801495E8(void);
 extern void fn_80149624(void);
@@ -87,7 +87,7 @@ void fn_80148334(void);
 void fn_80148340(void);
 void quest_ctorRewardItem(void);
 void fn_801489CC(void);
-void fn_80148B0C(void);
+void quest_getRewardItemSlot(void);
 void quest_checkCondition(void);
 void fn_80148CC4(void);
 
@@ -1328,19 +1328,19 @@ lbl_fn_801489CC_00001120:
     blr
 }
 
-asm void fn_80148B0C(void)
+asm void quest_getRewardItemSlot(void)
 {
     nofralloc
     cmpwi r4, 0x0
-    blt lbl_fn_80148B0C_00001158
+    blt lbl_quest_getRewardItemSlot_00001158
     lwz r0, 0x624(r3)
     cmpw r4, r0
-    bge lbl_fn_80148B0C_00001158
+    bge lbl_quest_getRewardItemSlot_00001158
     mulli r0, r4, 0x14
     lwz r3, 0x62c(r3)
     add r3, r3, r0
     blr
-lbl_fn_80148B0C_00001158:
+lbl_quest_getRewardItemSlot_00001158:
     li r3, 0x0
     blr
 }
@@ -1547,7 +1547,7 @@ lbl_fn_80148CC4_000013F8:
     mr r28, r3
     mr r4, r30
     addi r3, r1, 0x74
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     mr r5, r28
     addi r3, r1, 0x160
     addi r4, r1, 0x74
@@ -1594,7 +1594,7 @@ lbl_fn_80148CC4_0000149C:
     lfs f1, 0x158(r1)
     lfs f0, 0x538(r30)
     fsubs f1, f1, f0
-    bl fn_800133B0
+    bl math_wrapAngle
     fmr f31, f1
     bl fn_80013404
     lfs f2, lbl_80881ABC
@@ -1666,7 +1666,7 @@ lbl_fn_80148CC4_000015A8:
     lfs f1, 0x134(r1)
     lfs f0, 0x538(r30)
     fsubs f1, f1, f0
-    bl fn_800133B0
+    bl math_wrapAngle
     fmr f31, f1
     bl fn_80013404
     lfs f2, lbl_80881ABC
@@ -2001,7 +2001,7 @@ lbl_fn_80148CC4_000019B0:
     bl fn_80147A08
     addi r3, r1, 0x8c
     addi r4, r1, 0x1c0
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x8c
     bl fn_80139F60
     b lbl_fn_80148CC4_00001AF8
@@ -2010,7 +2010,7 @@ lbl_fn_80148CC4_00001AE4:
     addi r3, r1, 0x8c
     fmr f2, f1
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
 lbl_fn_80148CC4_00001AF8:
     lfs f1, lbl_8088196C
     addi r3, r1, 0x80
@@ -2052,7 +2052,7 @@ lbl_fn_80148CC4_00001AF8:
     bl fn_80147A08
     addi r3, r1, 0x80
     addi r4, r1, 0x190
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x80
     bl fn_80139F60
     b lbl_fn_80148CC4_00001BBC
@@ -2061,7 +2061,7 @@ lbl_fn_80148CC4_00001BA8:
     addi r3, r1, 0x80
     fmr f2, f1
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
 lbl_fn_80148CC4_00001BBC:
     lfs f2, 0x90(r1)
     mr r3, r31

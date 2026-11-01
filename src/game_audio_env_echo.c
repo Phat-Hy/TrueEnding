@@ -16,7 +16,7 @@ extern void mission_updateStub(void);
 extern void atn_Matrix_copy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800E932C(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void viewport_getNextSequenceId(void);
@@ -26,18 +26,18 @@ extern void fn_800F8290(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void fn_800FBA9C(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
-extern void fn_8014052C(void);
+extern void quest_initMarkerCoords(void);
 extern void fn_80158CA4(void);
 extern void fn_80158E1C(void);
 extern void actor_setState(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void battle_awardExp(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80239D58(void);
+extern void res_Shader_findParameter(void);
 extern void res_findResourceSlot(void);
 extern void res_Shader_bindParams(void);
 extern void fn_80267B20(void);
@@ -92,7 +92,7 @@ extern u32 lbl_80884DD8;
 /* Function declarations */
 void fn_80318A30(void);
 void fn_80318AA4(void);
-void fn_80318F90(void);
+u32 fn_80318F90(const void *p);
 void fn_80318F98(void);
 void fn_80318F9C(void);
 void fn_80319090(void);
@@ -482,11 +482,9 @@ lbl_fn_80318AA4_00000534:
     blr
 }
 
-asm void fn_80318F90(void)
+u32 fn_80318F90(const void *p)
 {
-    nofralloc
-    lwz r3, 0xf80(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0xf80);
 }
 
 void fn_80318F98(void)
@@ -597,7 +595,7 @@ lbl_fn_80319090_000006BC:
     addi r5, r31, 0x528
     stw r0, 0x54(r1)
     stw r0, 0x58(r1)
-    bl fn_80176548
+    bl battle_calcExpPosition
     lis r0, 0x8000
     lwz r3, lbl_8087EE98
     lfs f1, 0x14(r1)
@@ -978,18 +976,18 @@ lbl_fn_8031958C_00000BE8:
     fadds f0, f1, f0
     stfs f0, 0xe8(r1)
     lwz r4, 0x15b4(r31)
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     lfs f1, lbl_80884DCC
     addi r3, r1, 0xa8
     addi r4, r1, 0x9c
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0xe4
     addi r4, r1, 0xa8
     bl fn_80012C88
     lfs f1, 0x5b0(r31)
     addi r3, r1, 0x78
     addi r4, r31, 0x155c
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x84
     addi r4, r31, 0x528
     addi r5, r1, 0x78
@@ -1013,7 +1011,7 @@ lbl_fn_8031958C_00000BE8:
     lfs f1, 0x5b0(r31)
     addi r3, r1, 0x60
     addi r4, r31, 0x155c
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x6c
     addi r4, r31, 0x528
     addi r5, r1, 0x60
@@ -1053,7 +1051,7 @@ lbl_fn_8031958C_00000D38:
     mulli r0, r0, 0xa
     subf. r0, r0, r4
     bne lbl_fn_8031958C_00000D8C
-    bl fn_8013A194
+    bl npc_getGlobalManager
     lwz r5, 0x157c(r31)
     mr r4, r31
     lfs f1, lbl_80884D60
@@ -1073,7 +1071,7 @@ lbl_fn_8031958C_00000D8C:
     lfs f1, lbl_80884DD4
     addi r3, r1, 0x54
     addi r4, r31, 0x155c
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0xc0
     addi r4, r1, 0xcc
     addi r5, r1, 0x54
@@ -1101,7 +1099,7 @@ lbl_fn_8031958C_00000E08:
     lfs f1, 0x5b0(r31)
     addi r3, r1, 0x30
     addi r4, r31, 0x155c
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x3c
     addi r4, r31, 0x528
     addi r5, r1, 0x30
@@ -1125,7 +1123,7 @@ lbl_fn_8031958C_00000E08:
     lfs f1, 0x5b0(r31)
     addi r3, r1, 0x18
     addi r4, r31, 0x155c
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x24
     addi r4, r31, 0x528
     addi r5, r1, 0x18
@@ -1156,7 +1154,7 @@ lbl_fn_8031958C_00000E08:
     bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e9
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     bne lbl_fn_8031958C_00000F4C
     bl viewport_getGlobalContext

@@ -12,7 +12,7 @@ extern void actor_dispatchMessage(void);
 extern void atn_LH_Binary_destructor(void);
 extern void fn_8004318C(void);
 extern void fn_800431F4(void);
-extern void fn_8006AA20(void);
+extern void boss_triggerEventSequence(void);
 extern void fn_8006AD24(void);
 extern void fn_8006B2D8(void);
 extern void fn_8006CA80(void);
@@ -33,7 +33,7 @@ extern void fn_8021771C(void);
 extern void fn_8035E858(void);
 extern void fn_8035F33C(void);
 extern void fn_80366364(void);
-extern void fn_8037D4C0(void);
+extern void dvd_showDiskErrorDialog(void);
 extern void fn_80393610(void);
 extern void fn_80393BEC(void);
 extern void fn_803B3C10(void);
@@ -364,7 +364,7 @@ lbl_fn_803BEC40_000003BC:
     crclr 6
     bl sprintf
     addi r3, r1, 0x3e0
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_803BEC40_00000424
     lwz r3, lbl_8087F0A8
@@ -406,7 +406,7 @@ lbl_fn_803BEC40_00000454:
     bl sprintf
 lbl_fn_803BEC40_0000046C:
     addi r3, r1, 0x3e0
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_803BEC40_000004A8
     add r3, r17, r16
@@ -426,7 +426,7 @@ lbl_fn_803BEC40_000004A8:
     lis r21, lbl_807500DC@ha
     addi r21, r21, lbl_807500DC@l
     addi r3, r21, 0x32
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_803BEC40_000004E0
     addi r3, r17, 0x9ac
@@ -507,7 +507,7 @@ lbl_fn_803BEC40_0000053C:
 lbl_fn_803BEC40_000005E4:
     lwz r3, 0xb8(r1)
 lbl_fn_803BEC40_000005E8:
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_803BEC40_00000628
     cmpwi r19, 0x3
@@ -558,7 +558,7 @@ lbl_fn_803BEC40_00000650:
 lbl_fn_803BEC40_00000694:
     lwz r3, 0xb8(r1)
 lbl_fn_803BEC40_00000698:
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_803BEC40_000006D0
     lwz r0, 0xb0(r1)
@@ -708,7 +708,7 @@ lbl_fn_803BEC40_00000868:
 lbl_fn_803BEC40_000008A8:
     lwz r3, 0xac(r1)
 lbl_fn_803BEC40_000008AC:
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_803BEC40_000008E8
     lwz r0, 0xa4(r1)
@@ -864,7 +864,7 @@ lbl_fn_803BEC40_00000AD8:
 lbl_fn_803BEC40_00000AEC:
     lwz r3, 0x94(r1)
 lbl_fn_803BEC40_00000AF0:
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_803BEC40_00000B24
     lwz r3, lbl_8087F418
@@ -1359,7 +1359,7 @@ lbl_fn_803BF9D4_00001164:
     li r5, 0x3c
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     li r0, 0x0
     stw r0, 0x140(r30)
 lbl_fn_803BF9D4_0000118C:

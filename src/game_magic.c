@@ -16,7 +16,7 @@ extern void _savegpr_22(void);
 extern void _savegpr_23(void);
 extern void _savegpr_24(void);
 extern void _savegpr_27(void);
-extern void fn_8004B290(void);
+extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void fn_8005E3E0(void);
@@ -65,7 +65,7 @@ void fn_80063200(void);
 void fn_80063484(void);
 void fn_80063764(void);
 void fn_800638B0(void);
-void fn_80063D3C(void);
+void magic_castSpellCircle(void);
 void fn_800641CC(void);
 void fn_8006471C(void);
 void fn_80064AC4(void);
@@ -846,7 +846,7 @@ lbl_fn_800638B0_00000AEC:
     blr
 }
 
-asm void fn_80063D3C(void)
+asm void magic_castSpellCircle(void)
 {
     nofralloc
     stwu r1, -0x1c0(r1)
@@ -878,33 +878,33 @@ asm void fn_80063D3C(void)
     stw r7, 0x130(r1)
     mr r26, r4
     mr r27, r5
-    ble lbl_fn_80063D3C_00000BBC
+    ble lbl_magic_castSpellCircle_00000BBC
     li r30, 0x0
-    b lbl_fn_80063D3C_00000BE0
-lbl_fn_80063D3C_00000BBC:
+    b lbl_magic_castSpellCircle_00000BE0
+lbl_magic_castSpellCircle_00000BBC:
     lwz r0, 0x4(r3)
     add. r30, r0, r8
-    beq lbl_fn_80063D3C_00000BD4
+    beq lbl_magic_castSpellCircle_00000BD4
     lis r4, lbl_80777AB0@ha
     addi r4, r4, lbl_80777AB0@l
     stw r4, 0x0(r30)
-lbl_fn_80063D3C_00000BD4:
+lbl_magic_castSpellCircle_00000BD4:
     lwz r4, 0xc(r3)
     addi r0, r4, 0x20
     stw r0, 0xc(r3)
-lbl_fn_80063D3C_00000BE0:
+lbl_magic_castSpellCircle_00000BE0:
     cmpwi r30, 0x0
-    beq lbl_fn_80063D3C_00000F84
+    beq lbl_magic_castSpellCircle_00000F84
     lwz r6, 0xc(r3)
     li r29, 0x8
     lwz r0, 0x8(r3)
     li r28, 0x43
     addi r4, r6, 0x444
     cmpw r4, r0
-    ble lbl_fn_80063D3C_00000C0C
+    ble lbl_magic_castSpellCircle_00000C0C
     li r31, 0x0
-    b lbl_fn_80063D3C_00000C3C
-lbl_fn_80063D3C_00000C0C:
+    b lbl_magic_castSpellCircle_00000C3C
+lbl_magic_castSpellCircle_00000C0C:
     lwz r0, 0x4(r3)
     lis r4, fn_800610A0@ha
     addi r4, r4, fn_800610A0@l
@@ -917,9 +917,9 @@ lbl_fn_80063D3C_00000C0C:
     mr r31, r3
     addi r0, r4, 0x444
     stw r0, 0xc(r25)
-lbl_fn_80063D3C_00000C3C:
+lbl_magic_castSpellCircle_00000C3C:
     cmpwi r31, 0x0
-    beq lbl_fn_80063D3C_00000F84
+    beq lbl_magic_castSpellCircle_00000F84
     lfs f0, 0x4(r26)
     lis r3, lbl_80731158@ha
     lfs f2, 0x8(r26)
@@ -939,7 +939,7 @@ lbl_fn_80063D3C_00000C3C:
     lfs f30, lbl_808809C8
     stfs f2, 0x10(r1)
     stw r27, 0xc(r31)
-lbl_fn_80063D3C_00000C90:
+lbl_magic_castSpellCircle_00000C90:
     stw r23, 0x12c(r1)
     addi r3, r1, 0xf8
     li r4, 0x79
@@ -949,7 +949,7 @@ lbl_fn_80063D3C_00000C90:
     bl PSMTXRotRad
     mullw r25, r23, r29
     li r22, 0x0
-lbl_fn_80063D3C_00000CB4:
+lbl_magic_castSpellCircle_00000CB4:
     stw r29, 0x12c(r1)
     addi r0, r22, 0x1
     addi r3, r1, 0x98
@@ -995,10 +995,10 @@ lbl_fn_80063D3C_00000CB4:
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x8(r3)
     stw r27, 0xc(r3)
-    blt lbl_fn_80063D3C_00000CB4
+    blt lbl_magic_castSpellCircle_00000CB4
     addi r23, r23, 0x1
     cmplwi r23, 0x4
-    blt lbl_fn_80063D3C_00000C90
+    blt lbl_magic_castSpellCircle_00000C90
     lis r3, lbl_80731158@ha
     lfs f29, lbl_808809A0
     lfd f28, lbl_80731158@l(r3)
@@ -1006,7 +1006,7 @@ lbl_fn_80063D3C_00000CB4:
     lfs f26, lbl_808809B8
     li r22, 0x0
     li r25, 0x2
-lbl_fn_80063D3C_00000D94:
+lbl_magic_castSpellCircle_00000D94:
     stw r29, 0x12c(r1)
     addi r0, r22, 0x1
     addi r3, r1, 0x68
@@ -1047,7 +1047,7 @@ lbl_fn_80063D3C_00000D94:
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x8(r3)
     stw r27, 0xc(r3)
-    blt lbl_fn_80063D3C_00000D94
+    blt lbl_magic_castSpellCircle_00000D94
     lis r3, lbl_80731158@ha
     fneg f29, f31
     lfs f30, lbl_808809A0
@@ -1056,7 +1056,7 @@ lbl_fn_80063D3C_00000D94:
     li r22, 0x0
     lfs f26, lbl_808809B8
     lfs f28, lbl_808809C8
-lbl_fn_80063D3C_00000E58:
+lbl_magic_castSpellCircle_00000E58:
     stw r22, 0x134(r1)
     addi r3, r1, 0xc8
     li r4, 0x78
@@ -1067,7 +1067,7 @@ lbl_fn_80063D3C_00000E58:
     addi r0, r22, 0x4
     li r23, 0x0
     mullw r25, r0, r29
-lbl_fn_80063D3C_00000E80:
+lbl_magic_castSpellCircle_00000E80:
     stw r29, 0x134(r1)
     addi r0, r23, 0x1
     addi r3, r1, 0x38
@@ -1114,10 +1114,10 @@ lbl_fn_80063D3C_00000E80:
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x8(r3)
     stw r27, 0xc(r3)
-    blt lbl_fn_80063D3C_00000E80
+    blt lbl_magic_castSpellCircle_00000E80
     addi r22, r22, 0x1
     cmplwi r22, 0x4
-    blt lbl_fn_80063D3C_00000E58
+    blt lbl_magic_castSpellCircle_00000E58
     li r0, 0x0
     stw r0, 0x4(r30)
     li r0, 0xb0
@@ -1133,7 +1133,7 @@ lbl_fn_80063D3C_00000E80:
     stb r0, 0x18(r30)
     lwz r3, lbl_8087EFB4
     bl model_updateBoneTransforms
-lbl_fn_80063D3C_00000F84:
+lbl_magic_castSpellCircle_00000F84:
     addi r11, r1, 0x160
     psq_l f31, 0x1b8(r1), 0, 0
     lfd f31, 0x1b0(r1)
@@ -1291,7 +1291,7 @@ lbl_fn_800641CC_00001144:
     li r4, 0x0
     li r5, 0x0
     stfs f2, 0xa0(r1)
-    bl fn_8004B290
+    bl sound_initChannelParams
     lfs f2, lbl_808809A0
     addi r4, r1, 0x14
     stfs f2, 0x14(r1)
@@ -1528,7 +1528,7 @@ asm void fn_8006471C(void)
     mr r27, r3
     mr r24, r4
     mr r5, r26
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     lfs f3, 0x0(r24)
     li r0, 0x0
     lfs f0, 0x0(r25)
@@ -1551,7 +1551,7 @@ lbl_fn_8006471C_000015A0:
     fmr f2, f30
     mr r4, r25
     mr r5, r26
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     lwz r4, 0xc(r27)
     lwz r0, 0x8(r27)
     addi r3, r4, 0x20

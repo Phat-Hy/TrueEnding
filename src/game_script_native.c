@@ -11,7 +11,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800E8630(void);
-extern void fn_800EB7A0(void);
+extern void sound_playSpatialEffect(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void enemy_updateCombatBehavior(void);
@@ -22,12 +22,12 @@ extern void quest_evaluateConditions(void);
 extern void fn_801489CC(void);
 extern void dialog_renderWindow(void);
 extern void inventory_applyItemStats(void);
-extern void fn_80158BB4(void);
+extern void shop_canPurchaseItem(void);
 extern void fn_80158CA4(void);
 extern void fn_8015DEC0(void);
 extern void fn_8015E4B0(void);
 extern void fn_801656A4(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
 extern void actor_getMovementFlags(void);
@@ -342,7 +342,7 @@ lbl_fn_80252C40_00000304:
     stfs f0, 0x2e8(r31)
     bl atn_Anim_setLayerAnimation
     mr r3, r31
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     b lbl_fn_80252C40_00000468
 lbl_fn_80252C40_00000364:
     lwz r0, 0x14bc(r31)
@@ -921,7 +921,7 @@ lbl_fn_802531F4_00000BBC:
     li r4, 0x1
     li r4, 0x0
     mr r3, r29
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     b lbl_fn_802531F4_00000C84
 lbl_fn_802531F4_00000BD8:
     li r4, 0x3
@@ -1110,7 +1110,7 @@ lbl_fn_80253684_00000E68:
     stw r0, 0x14bc(r31)
     li r4, 0x1
     mr r3, r31
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
 lbl_fn_80253684_00000E9C:
     lwz r0, 0x84(r1)
     psq_l f31, 0x78(r1), 0, 0
@@ -1142,7 +1142,7 @@ asm void fn_80253884(void)
     psq_l f1, 0x534(r3), 0, 0
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x88(r1)
-    bl fn_80158BB4
+    bl shop_canPurchaseItem
     cmpwi r3, 0x0
     beq lbl_fn_80253884_00000FC8
     lwz r3, 0x560(r31)

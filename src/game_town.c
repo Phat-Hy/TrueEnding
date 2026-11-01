@@ -28,8 +28,8 @@ void atn_SmallAllocator_allocate(void);
 void fn_80083760(void);
 void fn_800838AC(void);
 void town_synchronizedDispatch(void);
-void fn_800839EC(void);
-void fn_80083AD4(void);
+void town_registerInteractionPoint(void);
+void town_updateInteractionPoints(void);
 void fn_80083E10(void);
 void fn_80083EB0(void);
 void fn_80083F50(void);
@@ -570,7 +570,7 @@ lbl_town_synchronizedDispatch_00000728:
     blr
 }
 
-asm void fn_800839EC(void)
+asm void town_registerInteractionPoint(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -585,17 +585,17 @@ asm void fn_800839EC(void)
     mr r29, r10
     lwz r0, 0x1b0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_800839EC_0000077C
+    beq lbl_town_registerInteractionPoint_0000077C
     addi r31, r3, 0x1b4
-    b lbl_fn_800839EC_00000780
-lbl_fn_800839EC_0000077C:
+    b lbl_town_registerInteractionPoint_00000780
+lbl_town_registerInteractionPoint_0000077C:
     li r31, 0x0
-lbl_fn_800839EC_00000780:
+lbl_town_registerInteractionPoint_00000780:
     cmpwi r31, 0x0
-    beq lbl_fn_800839EC_00000790
+    beq lbl_town_registerInteractionPoint_00000790
     mr r3, r31
     bl OSLockMutex
-lbl_fn_800839EC_00000790:
+lbl_town_registerInteractionPoint_00000790:
     lwz r12, 0x150(r24)
     addi r3, r24, 0x150
     mr r4, r25
@@ -607,7 +607,7 @@ lbl_fn_800839EC_00000790:
     bctrl
     cmpwi r3, 0x0
     mr r30, r3
-    bne lbl_fn_800839EC_000007E8
+    bne lbl_town_registerInteractionPoint_000007E8
     lwz r12, 0x168(r24)
     addi r3, r24, 0x168
     mr r4, r25
@@ -618,21 +618,21 @@ lbl_fn_800839EC_00000790:
     mtctr r12
     bctrl
     mr r30, r3
-lbl_fn_800839EC_000007E8:
+lbl_town_registerInteractionPoint_000007E8:
     cmpwi r31, 0x0
-    beq lbl_fn_800839EC_000007F8
+    beq lbl_town_registerInteractionPoint_000007F8
     mr r3, r31
     bl OSUnlockMutex
-lbl_fn_800839EC_000007F8:
+lbl_town_registerInteractionPoint_000007F8:
     cmpwi r29, 0x0
-    beq lbl_fn_800839EC_00000810
+    beq lbl_town_registerInteractionPoint_00000810
     cmpwi r30, 0x0
-    bne lbl_fn_800839EC_00000810
+    bne lbl_town_registerInteractionPoint_00000810
     li r3, 0x0
-    b lbl_fn_800839EC_00000814
-lbl_fn_800839EC_00000810:
+    b lbl_town_registerInteractionPoint_00000814
+lbl_town_registerInteractionPoint_00000810:
     mr r3, r30
-lbl_fn_800839EC_00000814:
+lbl_town_registerInteractionPoint_00000814:
     lmw r24, 0x10(r1)
     lwz r0, 0x34(r1)
     mtlr r0
@@ -640,7 +640,7 @@ lbl_fn_800839EC_00000814:
     blr
 }
 
-asm void fn_80083AD4(void)
+asm void town_updateInteractionPoints(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -653,20 +653,20 @@ asm void fn_80083AD4(void)
     mr r29, r4
     stw r28, 0x10(r1)
     mr r28, r3
-    beq lbl_fn_80083AD4_00000B44
+    beq lbl_town_updateInteractionPoints_00000B44
     lwz r0, 0x1b0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80083AD4_00000868
+    beq lbl_town_updateInteractionPoints_00000868
     addi r30, r3, 0x1b4
-    b lbl_fn_80083AD4_0000086C
-lbl_fn_80083AD4_00000868:
+    b lbl_town_updateInteractionPoints_0000086C
+lbl_town_updateInteractionPoints_00000868:
     li r30, 0x0
-lbl_fn_80083AD4_0000086C:
+lbl_town_updateInteractionPoints_0000086C:
     cmpwi r30, 0x0
-    beq lbl_fn_80083AD4_0000087C
+    beq lbl_town_updateInteractionPoints_0000087C
     mr r3, r30
     bl OSLockMutex
-lbl_fn_80083AD4_0000087C:
+lbl_town_updateInteractionPoints_0000087C:
     lwz r12, 0x38(r28)
     addi r3, r28, 0x38
     li r31, 0x0
@@ -674,26 +674,26 @@ lbl_fn_80083AD4_0000087C:
     mtctr r12
     bctrl
     cmplw r29, r3
-    blt lbl_fn_80083AD4_000008BC
+    blt lbl_town_updateInteractionPoints_000008BC
     lwz r12, 0x38(r28)
     addi r3, r28, 0x38
     lwz r12, 0x14(r12)
     mtctr r12
     bctrl
     cmplw r29, r3
-    bgt lbl_fn_80083AD4_000008BC
+    bgt lbl_town_updateInteractionPoints_000008BC
     li r31, 0x1
-lbl_fn_80083AD4_000008BC:
+lbl_town_updateInteractionPoints_000008BC:
     cmpwi r31, 0x0
-    beq lbl_fn_80083AD4_000008E0
+    beq lbl_town_updateInteractionPoints_000008E0
     lwz r12, 0x38(r28)
     addi r3, r28, 0x38
     mr r4, r29
     lwz r12, 0x10(r12)
     mtctr r12
     bctrl
-    b lbl_fn_80083AD4_00000B34
-lbl_fn_80083AD4_000008E0:
+    b lbl_town_updateInteractionPoints_00000B34
+lbl_town_updateInteractionPoints_000008E0:
     lwz r12, 0xc8(r28)
     addi r3, r28, 0xc8
     li r31, 0x0
@@ -701,26 +701,26 @@ lbl_fn_80083AD4_000008E0:
     mtctr r12
     bctrl
     cmplw r29, r3
-    blt lbl_fn_80083AD4_00000920
+    blt lbl_town_updateInteractionPoints_00000920
     lwz r12, 0xc8(r28)
     addi r3, r28, 0xc8
     lwz r12, 0x14(r12)
     mtctr r12
     bctrl
     cmplw r29, r3
-    bgt lbl_fn_80083AD4_00000920
+    bgt lbl_town_updateInteractionPoints_00000920
     li r31, 0x1
-lbl_fn_80083AD4_00000920:
+lbl_town_updateInteractionPoints_00000920:
     cmpwi r31, 0x0
-    beq lbl_fn_80083AD4_00000944
+    beq lbl_town_updateInteractionPoints_00000944
     lwz r12, 0xc8(r28)
     addi r3, r28, 0xc8
     mr r4, r29
     lwz r12, 0x10(r12)
     mtctr r12
     bctrl
-    b lbl_fn_80083AD4_00000B34
-lbl_fn_80083AD4_00000944:
+    b lbl_town_updateInteractionPoints_00000B34
+lbl_town_updateInteractionPoints_00000944:
     lwz r12, 0x138(r28)
     addi r3, r28, 0x138
     li r31, 0x0
@@ -728,26 +728,26 @@ lbl_fn_80083AD4_00000944:
     mtctr r12
     bctrl
     cmplw r29, r3
-    blt lbl_fn_80083AD4_00000984
+    blt lbl_town_updateInteractionPoints_00000984
     lwz r12, 0x138(r28)
     addi r3, r28, 0x138
     lwz r12, 0x14(r12)
     mtctr r12
     bctrl
     cmplw r29, r3
-    bgt lbl_fn_80083AD4_00000984
+    bgt lbl_town_updateInteractionPoints_00000984
     li r31, 0x1
-lbl_fn_80083AD4_00000984:
+lbl_town_updateInteractionPoints_00000984:
     cmpwi r31, 0x0
-    beq lbl_fn_80083AD4_000009A8
+    beq lbl_town_updateInteractionPoints_000009A8
     lwz r12, 0x138(r28)
     addi r3, r28, 0x138
     mr r4, r29
     lwz r12, 0x10(r12)
     mtctr r12
     bctrl
-    b lbl_fn_80083AD4_00000B34
-lbl_fn_80083AD4_000009A8:
+    b lbl_town_updateInteractionPoints_00000B34
+lbl_town_updateInteractionPoints_000009A8:
     lwz r12, 0x198(r28)
     addi r3, r28, 0x198
     li r31, 0x0
@@ -755,26 +755,26 @@ lbl_fn_80083AD4_000009A8:
     mtctr r12
     bctrl
     cmplw r29, r3
-    blt lbl_fn_80083AD4_000009E8
+    blt lbl_town_updateInteractionPoints_000009E8
     lwz r12, 0x198(r28)
     addi r3, r28, 0x198
     lwz r12, 0x14(r12)
     mtctr r12
     bctrl
     cmplw r29, r3
-    bgt lbl_fn_80083AD4_000009E8
+    bgt lbl_town_updateInteractionPoints_000009E8
     li r31, 0x1
-lbl_fn_80083AD4_000009E8:
+lbl_town_updateInteractionPoints_000009E8:
     cmpwi r31, 0x0
-    beq lbl_fn_80083AD4_00000A0C
+    beq lbl_town_updateInteractionPoints_00000A0C
     lwz r12, 0x198(r28)
     addi r3, r28, 0x198
     mr r4, r29
     lwz r12, 0x10(r12)
     mtctr r12
     bctrl
-    b lbl_fn_80083AD4_00000B34
-lbl_fn_80083AD4_00000A0C:
+    b lbl_town_updateInteractionPoints_00000B34
+lbl_town_updateInteractionPoints_00000A0C:
     lwz r12, 0x150(r28)
     addi r3, r28, 0x150
     li r31, 0x0
@@ -782,26 +782,26 @@ lbl_fn_80083AD4_00000A0C:
     mtctr r12
     bctrl
     cmplw r29, r3
-    blt lbl_fn_80083AD4_00000A4C
+    blt lbl_town_updateInteractionPoints_00000A4C
     lwz r12, 0x150(r28)
     addi r3, r28, 0x150
     lwz r12, 0x14(r12)
     mtctr r12
     bctrl
     cmplw r29, r3
-    bgt lbl_fn_80083AD4_00000A4C
+    bgt lbl_town_updateInteractionPoints_00000A4C
     li r31, 0x1
-lbl_fn_80083AD4_00000A4C:
+lbl_town_updateInteractionPoints_00000A4C:
     cmpwi r31, 0x0
-    beq lbl_fn_80083AD4_00000A70
+    beq lbl_town_updateInteractionPoints_00000A70
     lwz r12, 0x150(r28)
     addi r3, r28, 0x150
     mr r4, r29
     lwz r12, 0x10(r12)
     mtctr r12
     bctrl
-    b lbl_fn_80083AD4_00000B34
-lbl_fn_80083AD4_00000A70:
+    b lbl_town_updateInteractionPoints_00000B34
+lbl_town_updateInteractionPoints_00000A70:
     lwz r12, 0x168(r28)
     addi r3, r28, 0x168
     li r31, 0x0
@@ -809,26 +809,26 @@ lbl_fn_80083AD4_00000A70:
     mtctr r12
     bctrl
     cmplw r29, r3
-    blt lbl_fn_80083AD4_00000AB0
+    blt lbl_town_updateInteractionPoints_00000AB0
     lwz r12, 0x168(r28)
     addi r3, r28, 0x168
     lwz r12, 0x14(r12)
     mtctr r12
     bctrl
     cmplw r29, r3
-    bgt lbl_fn_80083AD4_00000AB0
+    bgt lbl_town_updateInteractionPoints_00000AB0
     li r31, 0x1
-lbl_fn_80083AD4_00000AB0:
+lbl_town_updateInteractionPoints_00000AB0:
     cmpwi r31, 0x0
-    beq lbl_fn_80083AD4_00000AD4
+    beq lbl_town_updateInteractionPoints_00000AD4
     lwz r12, 0x168(r28)
     addi r3, r28, 0x168
     mr r4, r29
     lwz r12, 0x10(r12)
     mtctr r12
     bctrl
-    b lbl_fn_80083AD4_00000B34
-lbl_fn_80083AD4_00000AD4:
+    b lbl_town_updateInteractionPoints_00000B34
+lbl_town_updateInteractionPoints_00000AD4:
     lwz r12, 0x180(r28)
     addi r3, r28, 0x180
     li r31, 0x0
@@ -836,30 +836,30 @@ lbl_fn_80083AD4_00000AD4:
     mtctr r12
     bctrl
     cmplw r29, r3
-    blt lbl_fn_80083AD4_00000B14
+    blt lbl_town_updateInteractionPoints_00000B14
     lwz r12, 0x180(r28)
     addi r3, r28, 0x180
     lwz r12, 0x14(r12)
     mtctr r12
     bctrl
     cmplw r29, r3
-    bgt lbl_fn_80083AD4_00000B14
+    bgt lbl_town_updateInteractionPoints_00000B14
     li r31, 0x1
-lbl_fn_80083AD4_00000B14:
+lbl_town_updateInteractionPoints_00000B14:
     cmpwi r31, 0x0
-    beq lbl_fn_80083AD4_00000B34
+    beq lbl_town_updateInteractionPoints_00000B34
     lwz r12, 0x180(r28)
     addi r3, r28, 0x180
     mr r4, r29
     lwz r12, 0x10(r12)
     mtctr r12
     bctrl
-lbl_fn_80083AD4_00000B34:
+lbl_town_updateInteractionPoints_00000B34:
     cmpwi r30, 0x0
-    beq lbl_fn_80083AD4_00000B44
+    beq lbl_town_updateInteractionPoints_00000B44
     mr r3, r30
     bl OSUnlockMutex
-lbl_fn_80083AD4_00000B44:
+lbl_town_updateInteractionPoints_00000B44:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

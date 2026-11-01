@@ -10,7 +10,7 @@ extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_80060D58(void);
+extern void equip_calcTotalStatBonuses(void);
 extern void str_assignBuffer(void);
 extern void fn_8006FA4C(void);
 extern void mem_alloc(void);
@@ -22,7 +22,7 @@ extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void env_updateAtmosphere(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
@@ -101,17 +101,17 @@ extern u32 lbl_80881754;
 
 /* Function declarations */
 void fn_80116B98(void);
-void fn_80116BA4(void);
-void fn_80116BAC(void);
+f32 fn_80116BA4(const void *p);
+void *fn_80116BAC(void *p);
 void fn_80116BB4(void);
 void fn_80116BB8(void);
 void fn_80116BC8(void);
 void fn_80116BD4(void);
-void fn_80116E64(void);
-void fn_80116E6C(void);
+u32 fn_80116E64(void);
+void *fn_80116E6C(void *p);
 void fn_80116E74(void);
 void fn_80116E7C(void);
-void fn_80116EA8(void);
+u32 fn_80116EA8(void);
 void fn_80116EB0(void);
 void fn_80116EB4(void);
 void fn_80116EB8(void);
@@ -143,18 +143,14 @@ asm void fn_80116B98(void)
     blr
 }
 
-asm void fn_80116BA4(void)
+f32 fn_80116BA4(const void *p)
 {
-    nofralloc
-    lfs f1, 0x50(r3)
-    blr
+    return *(const f32 *)((const char *)p + 0x50);
 }
 
-asm void fn_80116BAC(void)
+void *fn_80116BAC(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x48c
-    blr
+    return (char *)p + 0x48c;
 }
 
 void fn_80116BB4(void)
@@ -348,18 +344,14 @@ lbl_fn_80116BD4_0000027C:
     blr
 }
 
-asm void fn_80116E64(void)
+u32 fn_80116E64(void)
 {
-    nofralloc
-    lwz r3, lbl_8087EFE8
-    blr
+    return lbl_8087EFE8;
 }
 
-asm void fn_80116E6C(void)
+void *fn_80116E6C(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x2c
-    blr
+    return (char *)p + 0x2c;
 }
 
 asm void fn_80116E74(void)
@@ -386,11 +378,9 @@ lbl_fn_80116E7C_00000308:
     blr
 }
 
-asm void fn_80116EA8(void)
+u32 fn_80116EA8(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 void fn_80116EB0(void)
@@ -1825,7 +1815,7 @@ lbl_fn_80117FE4_000015E8:
 lbl_fn_80117FE4_00001630:
     lwz r4, 0x28(r1)
 lbl_fn_80117FE4_00001634:
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     lwz r0, 0x20(r1)
     srwi. r0, r0, 31
     beq lbl_fn_80117FE4_0000164C
@@ -2088,7 +2078,7 @@ lbl_fn_80117FE4_000019B8:
     stw r5, 0x38(r1)
     lfd f0, 0x38(r1)
     fsubs f5, f0, f5
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
 lbl_fn_80117FE4_00001A2C:
     li r3, 0x0
 lbl_fn_80117FE4_00001A30:

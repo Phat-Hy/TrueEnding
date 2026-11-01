@@ -17,15 +17,15 @@ extern void fn_80089ACC(void);
 extern void str_skipWhitespace(void);
 extern void fn_800E0AA8(void);
 extern void fn_800EC254(void);
-extern void fn_800EC2C4(void);
-extern void fn_800EC440(void);
-extern void fn_800EC534(void);
-extern void fn_800EC5BC(void);
-extern void fn_800EC654(void);
-extern void fn_800ED42C(void);
+extern void cam_registerTarget(void);
+extern void cam_initTrajectoryParams(void);
+extern void cam_bindPathTarget(void);
+extern void cam_bindRotationTarget(void);
+extern void cam_evalControllerSpline(void);
+extern void cam_setLookAtTarget(void);
 extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
-extern void fn_800EDFE8(void);
+extern void cam_evalLookAtMatrix(void);
 extern void fn_80288390(void);
 extern void fn_8028B74C(void);
 extern void fn_803C0624(void);
@@ -67,28 +67,28 @@ void fn_803C5FE4(void);
 void fn_803C6028(void);
 void fn_803C606C(void);
 void fn_803C6380(void);
-void fn_803C63C8(void);
+u32 fn_803C63C8(const void *p);
 void fn_803C63D0(void);
 void fn_803C6478(void);
 void fn_803C647C(void);
 void fn_803C65DC(void);
 void fn_803C65EC(void);
 void fn_803C6894(void);
-void fn_803C68DC(void);
+u32 fn_803C68DC(const void *p);
 void fn_803C68E4(void);
 void fn_803C698C(void);
 void fn_803C6990(void);
 void fn_803C6AD8(void);
 void fn_803C6AE8(void);
 void fn_803C6D90(void);
-void fn_803C6DD8(void);
+u32 fn_803C6DD8(const void *p);
 void fn_803C6DE0(void);
 void fn_803C6E88(void);
 void fn_803C6E8C(void);
 void fn_803C6FD4(void);
 void fn_803C6FE4(void);
 void fn_803C728C(void);
-void fn_803C72D4(void);
+u32 fn_803C72D4(const void *p);
 void fn_803C72DC(void);
 void fn_803C7384(void);
 void fn_803C7388(void);
@@ -260,17 +260,17 @@ lbl_fn_803C606C_000001AC:
     addi r4, r25, 0x24d
     li r5, 0x0
     li r6, 0x0
-    bl fn_800EC440
+    bl cam_initTrajectoryParams
     addi r3, r1, 0xbc
     addi r4, r1, 0x8
     addi r5, r1, 0x5c
-    bl fn_800EC2C4
+    bl cam_registerTarget
     addi r3, r1, 0x5c
     li r4, -0x1
-    bl fn_800EC534
+    bl cam_bindPathTarget
     addi r3, r1, 0x80
     addi r4, r1, 0xbc
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     li r24, 0x0
     b lbl_fn_803C606C_00000298
 lbl_fn_803C606C_00000240:
@@ -300,20 +300,20 @@ lbl_fn_803C606C_00000290:
 lbl_fn_803C606C_00000298:
     addi r3, r1, 0x20
     addi r4, r1, 0xbc
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     addi r3, r1, 0x80
     addi r4, r1, 0x20
     bl fn_800EC254
     mr r26, r3
     addi r3, r1, 0x20
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     cmpwi r26, 0x0
     bne lbl_fn_803C606C_00000240
 lbl_fn_803C606C_000002C8:
     addi r3, r1, 0x80
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     mr r3, r30
     bl talk_parseQuotedString
     bl atoi
@@ -356,7 +356,7 @@ lbl_fn_803C606C_000002C8:
     addi r3, r1, 0xbc
     li r4, -0x1
     addi r31, r31, 0x1
-    bl fn_800EC5BC
+    bl cam_bindRotationTarget
     addi r3, r1, 0x8
     li r4, -0x1
     bl dtor_80013D60
@@ -402,11 +402,9 @@ lbl_fn_803C6380_000003FC:
     blr
 }
 
-asm void fn_803C63C8(void)
+u32 fn_803C63C8(const void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x4);
 }
 
 asm void fn_803C63D0(void)
@@ -669,17 +667,17 @@ lbl_fn_803C65EC_0000072C:
     addi r4, r30, 0x24d
     li r5, 0x0
     li r6, 0x0
-    bl fn_800EC440
+    bl cam_initTrajectoryParams
     addi r3, r1, 0xbc
     addi r4, r1, 0x8
     addi r5, r1, 0x5c
-    bl fn_800EC2C4
+    bl cam_registerTarget
     addi r3, r1, 0x5c
     li r4, -0x1
-    bl fn_800EC534
+    bl cam_bindPathTarget
     addi r3, r1, 0x80
     addi r4, r1, 0xbc
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     li r29, 0x0
     b lbl_fn_803C65EC_00000818
 lbl_fn_803C65EC_000007C0:
@@ -709,20 +707,20 @@ lbl_fn_803C65EC_00000810:
 lbl_fn_803C65EC_00000818:
     addi r3, r1, 0x20
     addi r4, r1, 0xbc
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     addi r3, r1, 0x80
     addi r4, r1, 0x20
     bl fn_800EC254
     mr r31, r3
     addi r3, r1, 0x20
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     cmpwi r31, 0x0
     bne lbl_fn_803C65EC_000007C0
 lbl_fn_803C65EC_00000848:
     addi r3, r1, 0x80
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     mr r3, r26
     bl talk_parseQuotedString
     bl atoi
@@ -738,7 +736,7 @@ lbl_fn_803C65EC_00000848:
     addi r3, r1, 0xbc
     li r4, -0x1
     addi r28, r28, 0x1
-    bl fn_800EC5BC
+    bl cam_bindRotationTarget
     addi r3, r1, 0x8
     li r4, -0x1
     bl dtor_80013D60
@@ -784,11 +782,9 @@ lbl_fn_803C6894_00000910:
     blr
 }
 
-asm void fn_803C68DC(void)
+u32 fn_803C68DC(const void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x4);
 }
 
 asm void fn_803C68E4(void)
@@ -1045,17 +1041,17 @@ lbl_fn_803C6AE8_00000C28:
     addi r4, r30, 0x24d
     li r5, 0x0
     li r6, 0x0
-    bl fn_800EC440
+    bl cam_initTrajectoryParams
     addi r3, r1, 0xbc
     addi r4, r1, 0x8
     addi r5, r1, 0x5c
-    bl fn_800EC2C4
+    bl cam_registerTarget
     addi r3, r1, 0x5c
     li r4, -0x1
-    bl fn_800EC534
+    bl cam_bindPathTarget
     addi r3, r1, 0x80
     addi r4, r1, 0xbc
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     li r29, 0x0
     b lbl_fn_803C6AE8_00000D14
 lbl_fn_803C6AE8_00000CBC:
@@ -1085,20 +1081,20 @@ lbl_fn_803C6AE8_00000D0C:
 lbl_fn_803C6AE8_00000D14:
     addi r3, r1, 0x20
     addi r4, r1, 0xbc
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     addi r3, r1, 0x80
     addi r4, r1, 0x20
     bl fn_800EC254
     mr r31, r3
     addi r3, r1, 0x20
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     cmpwi r31, 0x0
     bne lbl_fn_803C6AE8_00000CBC
 lbl_fn_803C6AE8_00000D44:
     addi r3, r1, 0x80
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     mr r3, r26
     bl talk_parseQuotedString
     bl atoi
@@ -1114,7 +1110,7 @@ lbl_fn_803C6AE8_00000D44:
     addi r3, r1, 0xbc
     li r4, -0x1
     addi r28, r28, 0x1
-    bl fn_800EC5BC
+    bl cam_bindRotationTarget
     addi r3, r1, 0x8
     li r4, -0x1
     bl dtor_80013D60
@@ -1160,11 +1156,9 @@ lbl_fn_803C6D90_00000E0C:
     blr
 }
 
-asm void fn_803C6DD8(void)
+u32 fn_803C6DD8(const void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x4);
 }
 
 asm void fn_803C6DE0(void)
@@ -1421,17 +1415,17 @@ lbl_fn_803C6FE4_00001124:
     addi r4, r30, 0x24d
     li r5, 0x0
     li r6, 0x0
-    bl fn_800EC440
+    bl cam_initTrajectoryParams
     addi r3, r1, 0xbc
     addi r4, r1, 0x8
     addi r5, r1, 0x5c
-    bl fn_800EC2C4
+    bl cam_registerTarget
     addi r3, r1, 0x5c
     li r4, -0x1
-    bl fn_800EC534
+    bl cam_bindPathTarget
     addi r3, r1, 0x80
     addi r4, r1, 0xbc
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     li r29, 0x0
     b lbl_fn_803C6FE4_00001210
 lbl_fn_803C6FE4_000011B8:
@@ -1461,20 +1455,20 @@ lbl_fn_803C6FE4_00001208:
 lbl_fn_803C6FE4_00001210:
     addi r3, r1, 0x20
     addi r4, r1, 0xbc
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     addi r3, r1, 0x80
     addi r4, r1, 0x20
     bl fn_800EC254
     mr r31, r3
     addi r3, r1, 0x20
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     cmpwi r31, 0x0
     bne lbl_fn_803C6FE4_000011B8
 lbl_fn_803C6FE4_00001240:
     addi r3, r1, 0x80
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     mr r3, r26
     bl talk_parseQuotedString
     bl atoi
@@ -1490,7 +1484,7 @@ lbl_fn_803C6FE4_00001240:
     addi r3, r1, 0xbc
     li r4, -0x1
     addi r28, r28, 0x1
-    bl fn_800EC5BC
+    bl cam_bindRotationTarget
     addi r3, r1, 0x8
     li r4, -0x1
     bl dtor_80013D60
@@ -1536,11 +1530,9 @@ lbl_fn_803C728C_00001308:
     blr
 }
 
-asm void fn_803C72D4(void)
+u32 fn_803C72D4(const void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x4);
 }
 
 asm void fn_803C72DC(void)
@@ -1835,17 +1827,17 @@ lbl_fn_803C74E0_00001630:
     addi r4, r31, 0x24d
     li r5, 0x0
     li r6, 0x0
-    bl fn_800EC440
+    bl cam_initTrajectoryParams
     addi r3, r1, 0xcc
     addi r4, r1, 0x18
     addi r5, r1, 0x6c
-    bl fn_800EC2C4
+    bl cam_registerTarget
     addi r3, r1, 0x6c
     li r4, -0x1
-    bl fn_800EC534
+    bl cam_bindPathTarget
     addi r3, r1, 0x90
     addi r4, r1, 0xcc
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     b lbl_fn_803C74E0_00001770
 lbl_fn_803C74E0_00001748:
     addi r3, r1, 0x90
@@ -1861,19 +1853,19 @@ lbl_fn_803C74E0_00001748:
 lbl_fn_803C74E0_00001770:
     addi r3, r1, 0x30
     addi r4, r1, 0xcc
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     addi r3, r1, 0x90
     addi r4, r1, 0x30
     bl fn_800EC254
     mr r23, r3
     addi r3, r1, 0x30
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     cmpwi r23, 0x0
     bne lbl_fn_803C74E0_00001748
     addi r3, r1, 0x90
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     addi r3, r1, 0xc
     bl fn_800E0AA8
     mr r23, r3
@@ -1981,7 +1973,7 @@ lbl_fn_803C74E0_000018E8:
     addi r3, r1, 0xcc
     li r4, -0x1
     addi r28, r28, 0x1
-    bl fn_800EC5BC
+    bl cam_bindRotationTarget
     addi r3, r1, 0xc
     li r4, -0x1
     bl fn_8000D760

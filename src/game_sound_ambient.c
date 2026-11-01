@@ -30,9 +30,9 @@ extern void fn_801E7098(void);
 extern void fn_801E7D78(void);
 extern void assert_generateId(void);
 extern void assert_formatLocation(void);
-extern void fn_8020924C(void);
-extern void fn_8020ED84(void);
-extern void fn_8020EF04(void);
+extern void mem_findBlockById(void);
+extern void time_wrapMilliseconds(void);
+extern void rand_scaleRangeInt(void);
 extern void fn_8020EF4C(void);
 extern void random_generateValue(void);
 extern void fn_8020EFEC(void);
@@ -41,7 +41,7 @@ extern void fn_802114D8(void);
 extern void fn_802114E0(void);
 extern void task_mapIdToQueue(void);
 extern void fn_804439FC(void);
-extern void fn_804444E8(void);
+extern void gmk_findSlotByIndex(void);
 extern void fn_804A3C24(void);
 extern void fn_804A4294(void);
 extern void fn_804A4300(void);
@@ -196,7 +196,7 @@ lbl_fn_801D8CC4_000001B4:
     b lbl_fn_801D8CC4_0000055C
 lbl_fn_801D8CC4_000001BC:
     lwz r3, 0xc(r28)
-    bl fn_8020924C
+    bl mem_findBlockById
     lwz r4, lbl_8087F1E4
     mr r31, r3
     lwz r28, 0x894(r4)
@@ -611,7 +611,7 @@ lbl_fn_801D9388_00000750:
     addis r4, r4, 0x1
     add r4, r4, r0
     lwz r4, -0x7d70(r4)
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     bl fn_8020EF4C
     cmpwi r3, 0x0
     bne lbl_fn_801D9388_000007D8
@@ -977,7 +977,7 @@ lbl_fn_801D94D0_00000CA4:
     mr r25, r3
     beq lbl_fn_801D94D0_00001030
     lwz r3, 0x4(r3)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_801D94D0_00001030
     lwz r3, 0x4(r25)
@@ -987,7 +987,7 @@ lbl_fn_801D94D0_00000CA4:
     beq lbl_fn_801D94D0_00001030
     lwz r3, lbl_8087F4F0
     lwz r4, 0x4(r25)
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     mr r26, r3
     ble lbl_fn_801D94D0_00001030
@@ -1599,7 +1599,7 @@ lbl_fn_801D94D0_0000153C:
     addis r4, r4, 0x1
     add r4, r4, r0
     lwz r4, -0x7d70(r4)
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     bl fn_8020EF4C
     cmpwi r3, 0x0
     bne lbl_fn_801D94D0_000015C4

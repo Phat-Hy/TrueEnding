@@ -14,10 +14,10 @@ extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void wcs_vformat(void);
-extern void fn_800EB7A0(void);
-extern void fn_800F7FD8(void);
+extern void sound_playSpatialEffect(void);
+extern void vec3_normalize(void);
 extern void system_getNextSequenceId(void);
-extern void fn_80109828(void);
+extern void hurtbox_dispatchHitEvent(void);
 extern void fn_8012A1B8(void);
 extern void npc_getPosition(void);
 extern void equip_applyToCharacter(void);
@@ -37,7 +37,7 @@ extern void fn_802A7964(void);
 extern void fn_802AC550(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_805A3C58(void);
+extern void rand_Mersenne_constructor(void);
 extern void fn_805A3D6C(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
@@ -677,7 +677,7 @@ lbl_fn_802AB354_00000824:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x8
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lwz r0, 0x214(r1)
     lwz r31, 0x20c(r1)
     mtlr r0
@@ -740,7 +740,7 @@ lbl_fn_802AB42C_00000904:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x8
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lwz r0, 0x214(r1)
     lwz r31, 0x20c(r1)
     lwz r30, 0x208(r1)
@@ -912,7 +912,7 @@ lbl_fn_802AB5E8_00000B84:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x38
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
 lbl_fn_802AB5E8_00000BA0:
     lwz r0, 0x254(r1)
     lwz r31, 0x24c(r1)
@@ -1027,7 +1027,7 @@ lbl_fn_802AB794_00000D2C:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x38
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
 lbl_fn_802AB794_00000D4C:
     lwz r29, 0x1580(r31)
     bl rand
@@ -1176,7 +1176,7 @@ lbl_fn_802AB97C_00000F64:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x58
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lwz r0, 0x1854(r31)
     cmpwi r0, 0x0
     beq lbl_fn_802AB97C_00000F9C
@@ -1551,7 +1551,7 @@ lbl_fn_802ABF6C_000013C8:
     stw r0, 0x1644(r30)
 lbl_fn_802ABF6C_000014E8:
     mr r3, r30
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1589,7 +1589,7 @@ asm void fn_802AC0E0(void)
     lfs f31, 0x4(r3)
     addi r3, r1, 0x8
     addi r4, r1, 0x20
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x14
     addi r4, r1, 0x8
     bl vec3_toEulerAngles
@@ -1750,7 +1750,7 @@ asm void fn_802AC364(void)
     mr r30, r5
     stw r29, 0x214(r1)
     mr r29, r3
-    bl fn_805A3C58
+    bl rand_Mersenne_constructor
     lfs f4, lbl_80883F30
     lis r3, lbl_80785F0C@ha
     li r31, 0x0

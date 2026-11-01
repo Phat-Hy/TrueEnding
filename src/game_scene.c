@@ -12,16 +12,16 @@ extern void actor_dispatchMessage(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_getAllocSize(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void fn_800902C0(void);
 extern void fn_800929C0(void);
 extern void fn_80093E90(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void atn_Task_constructor(void);
 extern void str_findChar(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void fn_803CC5E4(void);
 extern void fn_8047FF70(void);
 extern void PSMTXConcat(void);
@@ -81,7 +81,7 @@ void fn_8000DB24(void);
 void fn_8000DCF4(void);
 void fn_8000DCFC(void);
 void fn_8000DD04(void);
-void fn_8000DD0C(void);
+void *scene_getRootNode(void *obj);
 void fn_8000DD14(void);
 void fn_8000DD98(void);
 void fn_8000DDA0(void);
@@ -615,7 +615,7 @@ lbl_fn_8000D1A8_00000744:
 lbl_fn_8000D1A8_00000748:
     lwz r3, 0x48(r30)
     li r4, 0x1
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     li r0, 0x0
     stw r0, 0x38(r1)
     addi r4, r1, 0x38
@@ -774,7 +774,7 @@ lbl_fn_8000D4D4_00000944:
     beqlr
 lbl_fn_8000D4D4_0000094C:
     lwz r3, 0x48(r3)
-    b fn_8008CD60
+    b minimap_renderOverlay
     blr
 }
 
@@ -1082,7 +1082,7 @@ lbl_fn_8000D8C0_00000D84:
     lwz r3, lbl_8087F428
     cmpwi r3, 0x0
     beq lbl_fn_8000D8C0_00000DC0
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     b lbl_fn_8000D8C0_00000DB8
 lbl_fn_8000D8C0_00000D98:
     lwz r0, 0x48(r3)
@@ -1181,7 +1181,7 @@ lbl_fn_8000DA00_00000E8C:
     lwz r3, lbl_8087F428
     cmpwi r3, 0x0
     beq lbl_fn_8000DA00_00000EC8
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     b lbl_fn_8000DA00_00000EC0
 lbl_fn_8000DA00_00000EA0:
     lwz r0, 0x48(r3)
@@ -1326,7 +1326,7 @@ lbl_fn_8000DB24_00001048:
     bl fn_8000DDA0
     stw r3, 0x1c(r26)
     bl fn_8000DE3C
-    bl fn_8000DD0C
+    bl scene_getRootNode
     bl fn_8000DD04
     cmpwi r3, 0x0
     mr r30, r3
@@ -1340,7 +1340,7 @@ lbl_fn_8000DB24_0000107C:
     mr r28, r3
     lwz r3, 0x1c(r26)
     bl fn_8000DE3C
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r4, r28
     bl fn_800929C0
     bl fn_8000DD98
@@ -1356,7 +1356,7 @@ lbl_fn_8000DB24_0000107C:
     bl fn_8000DE44
     lwz r3, 0x1c(r26)
     bl fn_8000DE3C
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r4, r28
     bl fn_80093E90
     stw r3, 0xc(r1)
@@ -1402,11 +1402,9 @@ asm void fn_8000DD04(void)
     blr
 }
 
-asm void fn_8000DD0C(void)
+void *scene_getRootNode(void *obj)
 {
-    nofralloc
-    addi r3, r3, 0xb0
-    blr
+    return (char *)obj + 0xb0;
 }
 
 asm void fn_8000DD14(void)

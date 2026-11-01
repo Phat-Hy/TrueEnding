@@ -6,13 +6,13 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80069BF4(void);
-extern void fn_8006B174(void);
+extern void boss_decodePhaseBitfield(void);
 extern void fn_8006B2D8(void);
 extern void str_assignBuffer(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_LH_Texture_release(void);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void atn_LH_Texture_update(void);
 extern void env_updateAtmosphere(void);
 extern void str_findChar(void);
@@ -159,7 +159,7 @@ lbl_fn_801FD5A0_000000B8:
     bl actor_dispatchMessage
     mr r4, r27
     addi r3, r1, 0x58
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0x64(r1)
     srwi. r3, r0, 31
     bne lbl_fn_801FD5A0_0000016C
@@ -417,12 +417,12 @@ lbl_fn_801FD5A0_00000494:
     addi r3, r29, 0x194
     addi r4, r4, lbl_8073E57C@l
     addi r4, r4, 0x26
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     b lbl_fn_801FD5A0_000004CC
 lbl_fn_801FD5A0_000004C0:
     addi r3, r29, 0x194
     addi r4, r1, 0x70
-    bl fn_800D5908
+    bl depth_resetRenderTarget
 lbl_fn_801FD5A0_000004CC:
     li r0, 0x1
     stb r0, 0x1c1(r29)
@@ -496,7 +496,7 @@ lbl_fn_801FDA20_0000054C:
     bl actor_dispatchMessage
     mr r4, r27
     addi r3, r1, 0x58
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0x64(r1)
     srwi. r3, r0, 31
     bne lbl_fn_801FDA20_00000600
@@ -749,7 +749,7 @@ lbl_fn_801FDA20_00000928:
     bl atn_LH_Texture_release
     addi r3, r29, 0x1c4
     addi r4, r1, 0x70
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     li r0, 0x1
     stb r0, 0x1f1(r29)
     li r3, 0x1

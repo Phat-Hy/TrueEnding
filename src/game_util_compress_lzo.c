@@ -9,7 +9,7 @@ extern void wcs_vformat(void);
 extern void fn_8010C00C(void);
 extern void actor_findSpawnTemplate(void);
 extern void fn_8012B988(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void fn_8013407C(void);
 extern void quest_checkCondition(void);
 extern void fn_8014FAD0(void);
@@ -23,8 +23,8 @@ extern void fn_80206B14(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_generateId(void);
 extern void assert_formatLocation(void);
-extern void fn_8020ED84(void);
-extern void fn_8020EF04(void);
+extern void time_wrapMilliseconds(void);
+extern void rand_scaleRangeInt(void);
 extern void random_generateValue(void);
 extern void fn_8020EFEC(void);
 extern void event_findEntryById(void);
@@ -36,7 +36,7 @@ extern void world_getGlobalFlag(void);
 extern void fn_804438E0(void);
 extern void fn_804439FC(void);
 extern void fn_8044441C(void);
-extern void fn_804444E8(void);
+extern void gmk_findSlotByIndex(void);
 extern void fn_8044453C(void);
 extern void fn_80444564(void);
 extern void fn_8044D500(void);
@@ -203,7 +203,7 @@ lbl_fn_8058CF64_0000011C:
     cmpwi r0, 0x0
     bge lbl_fn_8058CF64_00000148
     addi r3, r3, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
 lbl_fn_8058CF64_00000148:
     addis r3, r30, 0x2
     lwz r3, 0x60bc(r3)
@@ -758,7 +758,7 @@ lbl_fn_8058D7FC_00000914:
     ble lbl_fn_8058D7FC_00000994
     lwz r3, lbl_8087F4F0
     li r4, 0x143
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x1
     bge lbl_fn_8058D7FC_00000954
     li r3, 0xe
@@ -795,7 +795,7 @@ lbl_fn_8058D7FC_0000099C:
     beq lbl_fn_8058D7FC_000009E4
     lwz r3, lbl_8087F4F0
     lwz r4, 0x4(r4)
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     add r4, r29, r28
     lbz r0, 0x12c(r4)
     extsb r0, r0
@@ -1126,7 +1126,7 @@ lbl_fn_8058DB14_00000E2C:
 lbl_fn_8058DB14_00000E4C:
     lwzx r4, r24, r25
     mr r3, r28
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     cmpwi r3, 0x0
     beq lbl_fn_8058DB14_00000EF0
     addis r4, r27, 0x2
@@ -1188,7 +1188,7 @@ lbl_fn_8058DB14_00000F18:
     beq lbl_fn_8058DB14_00000FE8
     lwz r25, 0x4(r3)
     mr r3, r25
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_8058DB14_00000FE8
     mr r3, r25

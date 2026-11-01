@@ -17,7 +17,7 @@ extern void fn_800BB6C0(void);
 extern void fn_800BBD90(void);
 extern void fn_800BBFE8(void);
 extern void fn_800BC328(void);
-extern void fn_800C16B4(void);
+extern void skeleton_getGlobalManager(void);
 extern void fn_800C16C0(void);
 extern void fn_800C18BC(void);
 extern void fn_800C2448(void);
@@ -176,7 +176,7 @@ lbl_fn_8049EBAC_0000011C:
     lwz r0, 0x74(r4)
     cmpwi r0, 0x0
     bne lbl_fn_8049EBAC_000001A8
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     lwz r0, 0x70(r3)
     cmpwi r0, 0x0
     beq lbl_fn_8049EBAC_00000164
@@ -193,7 +193,7 @@ lbl_fn_8049EBAC_00000168:
     cmpwi r0, 0x0
     beq lbl_fn_8049EBAC_000001A8
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     lwz r0, 0x70(r3)
     cmpwi r0, 0x0
     beq lbl_fn_8049EBAC_0000019C
@@ -280,7 +280,7 @@ asm void fn_8049ED90(void)
     cmpwi r0, 0x0
     bne lbl_fn_8049ED90_00000920
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     cmpwi r30, 0x0
     stw r30, 0x74(r3)
     bne lbl_fn_8049ED90_000002B4
@@ -292,7 +292,7 @@ lbl_fn_8049ED90_000002B4:
 lbl_fn_8049ED90_000002B8:
     stw r30, 0x70(r3)
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     li r4, 0x0
     bl fn_800C289C
     lwz r7, lbl_8087EFA8

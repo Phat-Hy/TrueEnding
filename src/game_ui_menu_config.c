@@ -19,7 +19,7 @@ extern void fn_80105B4C(void);
 extern void fn_801070C8(void);
 extern void fn_8010CB2C(void);
 extern void fn_8011BF3C(void);
-extern void fn_801240B4(void);
+extern void player_evaluateStatusCondition(void);
 extern void debuff_clearStatus(void);
 extern void battle_canTargetActor(void);
 extern void fn_801B2EDC(void);
@@ -333,7 +333,7 @@ lbl_fn_801BC97C_0000031C:
     lwz r3, lbl_8087F0A8
     li r4, 0x5
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_801BC97C_00000434
     lwz r5, lbl_8087EFA8

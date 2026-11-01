@@ -18,16 +18,16 @@ extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
-extern void fn_800EB7A0(void);
-extern void fn_800F72CC(void);
+extern void sound_playSpatialEffect(void);
+extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
-extern void fn_800F7FD8(void);
+extern void vec3_normalize(void);
 extern void viewport_getNextSequenceId(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800FDB20(void);
 extern void fn_80101434(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void npc_getPosition(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
@@ -37,7 +37,7 @@ extern void fn_801533C8(void);
 extern void actor_setState(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80239D58(void);
+extern void res_Shader_findParameter(void);
 extern void res_findResourceSlot(void);
 extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
@@ -99,10 +99,9 @@ void fn_8031D4F4(void);
 void fn_8031D57C(void);
 void fn_8031D6DC(void);
 
-asm void fn_8031C530(void)
+void fn_8031C530(void)
 {
-    nofralloc
-    b dialog_renderWindow
+    dialog_renderWindow();
 }
 
 asm void fn_8031C534(void)
@@ -209,7 +208,7 @@ lbl_fn_8031C584_00000130:
     fmuls f3, f3, f6
     fmuls f0, f0, f3
     stfs f0, 0x14fc(r31)
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x65
@@ -352,7 +351,7 @@ asm void fn_8031C894(void)
     cmpwi r0, 0x78
     blt lbl_fn_8031C894_000004A4
     addi r3, r3, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     li r0, 0x0
     stw r0, 0x14bc(r29)
     lis r30, lbl_807C7030@ha
@@ -1110,7 +1109,7 @@ asm void fn_8031D350(void)
     lfs f1, lbl_80884E34
     addi r3, r1, 0x50
     addi r4, r31, 0x1524
-    bl fn_800F72CC
+    bl vec3_scale
     lwz r3, 0x14b8(r31)
     bl npc_getPosition
     mr r4, r3
@@ -1126,14 +1125,14 @@ asm void fn_8031D350(void)
     bl vec3_sub
     addi r3, r1, 0x44
     addi r4, r1, 0x38
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x74
     addi r4, r1, 0x44
     bl vec3_copy
     lfs f1, lbl_80884E38
     addi r3, r1, 0x2c
     addi r4, r1, 0x74
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x68
     addi r4, r31, 0x528
     addi r5, r1, 0x2c
@@ -1161,7 +1160,7 @@ asm void fn_8031D350(void)
     bl vec3_sub
     addi r3, r1, 0x14
     addi r4, r1, 0x8
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x20
     addi r4, r1, 0x14
     bl vec3_toEulerAngles
@@ -1273,7 +1272,7 @@ lbl_fn_8031D57C_000010EC:
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_8031D57C_00001130
     lwz r3, lbl_8087F3C0
@@ -1378,7 +1377,7 @@ lbl_fn_8031D6DC_00001268:
     lwz r3, lbl_8087F3C0
     mr r4, r28
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_8031D6DC_000012AC
     lwz r3, lbl_8087F3C0

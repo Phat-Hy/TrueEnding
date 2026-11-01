@@ -16,7 +16,7 @@ extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void fn_8021A984(void);
 extern void fn_8021A9CC(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void fn_803E0250(void);
 extern void fn_803E0AB4(void);
 extern void fn_804EB874(void);
@@ -1226,7 +1226,7 @@ asm void fn_803DF648(void)
     stw r28, 0x30(r1)
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F428
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     b lbl_fn_803DF648_000010B4
 lbl_fn_803DF648_00001034:
     lwz r0, 0x38(r3)

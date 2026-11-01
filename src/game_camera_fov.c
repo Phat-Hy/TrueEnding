@@ -11,8 +11,8 @@ extern void dtor_80084684(void);
 extern void fn_8000E18C(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8003EA3C(void);
-extern void fn_8004203C(void);
+extern void ui_drawColoredQuad(void);
+extern void menu_initWindowBuffer(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -29,12 +29,12 @@ extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800E0AA8(void);
 extern void fn_800E0AB0(void);
-extern void fn_800EC204(void);
+extern void cam_findTargetIndex(void);
 extern void system_getNextSequenceId(void);
 extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
@@ -61,7 +61,7 @@ extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_805A3C58(void);
+extern void rand_Mersenne_constructor(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void strncmp(void);
@@ -313,7 +313,7 @@ asm void fn_802DDDB8(void)
     bl _savegpr_25
     mr r30, r3
     mr r31, r5
-    bl fn_805A3C58
+    bl rand_Mersenne_constructor
     lfs f0, lbl_80884678
     lis r3, lbl_80786F9C@ha
     li r29, 0x0
@@ -680,7 +680,7 @@ asm void fn_802DE27C(void)
     cmpwi r3, 0x0
     beq lbl_fn_802DE27C_00000B94
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     cmpwi r3, 0x0
     beq lbl_fn_802DE27C_00000B94
     addi r3, r31, 0x1630
@@ -691,7 +691,7 @@ asm void fn_802DE27C(void)
     mr r4, r3
     mr r5, r29
     addi r3, r1, 0x28
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     lis r3, lbl_80747B10@ha
     li r29, 0x0
     addi r30, r3, lbl_80747B10@l
@@ -709,9 +709,9 @@ lbl_fn_802DE27C_000007FC:
     bl str_parseInt
     mr r28, r3
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r28
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     stw r3, 0x18(r1)
     beq lbl_fn_802DE27C_00000834
@@ -817,9 +817,9 @@ lbl_fn_802DE27C_0000097C:
     bl str_parseInt
     mr r28, r3
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r28
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r28, 0x0
     stw r3, 0x8(r1)
     beq lbl_fn_802DE27C_000009BC
@@ -882,9 +882,9 @@ lbl_fn_802DE27C_00000A58:
     bl str_parseInt
     mr r28, r3
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r28
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     beq lbl_fn_802DE27C_00000B84
     stw r3, 0x15ac(r31)
@@ -1726,7 +1726,7 @@ lbl_fn_802DEE28_000015F4:
     li r7, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
 lbl_fn_802DEE28_00001674:
     lwz r12, 0x0(r31)
     mr r3, r31

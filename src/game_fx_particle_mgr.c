@@ -5,7 +5,7 @@
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void morph_updateMesh(void);
-extern void fn_800EE360(void);
+extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
@@ -15,7 +15,7 @@ extern void res_registerResource(void);
 extern void fn_8027EB14(void);
 extern void fn_802826A0(void);
 extern void fn_802829DC(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
@@ -1053,7 +1053,7 @@ lbl_fn_80280EF8_00000E90:
     mr r3, r31
     bl battle_awardExp
     mr r3, r31
-    bl fn_800EE360
+    bl camera_updateTargetMode
     b lbl_fn_80280EF8_00000EB4
 lbl_fn_80280EF8_00000EAC:
     li r0, 0x1e
@@ -1853,7 +1853,7 @@ lbl_fn_80281924_00001A08:
     lfs f2, 0x530(r6)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0xdc(r1)
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     b lbl_fn_80281924_00001A8C
 lbl_fn_80281924_00001A44:
     lwz r0, 0x7e0(r3)

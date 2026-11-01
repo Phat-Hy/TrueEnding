@@ -17,7 +17,7 @@ extern void magic_dispatchActionCommand(void);
 extern void fn_8015ECC4(void);
 extern void fn_8016DDB0(void);
 extern void actor_setState(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void fn_80194E2C(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -647,7 +647,7 @@ lbl_fn_8034ECE8_000007F4:
     mr r4, r3
 lbl_fn_8034ECE8_0000085C:
     mr r3, r27
-    bl fn_80178208
+    bl battle_generateLootDrops
     lwz r3, lbl_8087F430
     li r4, 0x6f
     li r5, 0x1

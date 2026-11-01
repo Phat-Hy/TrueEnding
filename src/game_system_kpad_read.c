@@ -14,7 +14,7 @@ extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void fn_800F3490(void);
-extern void fn_801092C8(void);
+extern void hurtbox_processHitDamage(void);
 extern void fn_8011770C(void);
 extern void fn_802085E0(void);
 extern void fn_8021771C(void);
@@ -1941,7 +1941,7 @@ lbl_fn_803701E0_000018F4:
     mr r6, r28
     li r4, 0x14
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
     b lbl_fn_803701E0_000019A0
 lbl_fn_803701E0_00001968:
     srawi r0, r28, 5

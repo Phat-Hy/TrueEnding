@@ -18,7 +18,7 @@ extern void fn_80010490(void);
 extern void fn_80010B68(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_8001122C(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void fn_80011420(void);
 extern void fn_800119C0(void);
 extern void fn_800121F0(void);
@@ -26,11 +26,11 @@ extern void fn_8001296C(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
 extern void vec3_add(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void mem_free(void);
 extern void atn_Matrix_copy_2(void);
 extern void atn_Matrix_copy(void);
-extern void fn_800928B0(void);
+extern void compass_findWaypointIndex(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_8010F668(void);
 extern void fn_801479E4(void);
@@ -271,7 +271,7 @@ lbl_fn_80551198_000001BC:
     addi r3, r1, 0x248
     fmr f2, f1
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
 lbl_fn_80551198_00000228:
     addi r3, r1, 0x248
     addi r4, r1, 0x254
@@ -537,7 +537,7 @@ lbl_fn_80551198_000005F4:
     bl fn_80551E98
     addi r3, r1, 0x254
     addi r4, r1, 0x330
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x248
     addi r4, r1, 0x254
     bl vec3_copy
@@ -740,7 +740,7 @@ lbl_fn_80551198_00000894:
     beq lbl_fn_80551198_00000920
     addi r3, r1, 0x194
     addi r4, r1, 0x300
-    bl fn_80011410
+    bl mtx_multVec
 lbl_fn_80551198_00000920:
     addi r3, r1, 0x1a0
     addi r4, r1, 0x194
@@ -1019,7 +1019,7 @@ asm void fn_80551D94(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_80551D94_00000CC4
     li r3, 0x0

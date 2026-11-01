@@ -9,7 +9,7 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void item_testLineOfSight(void);
 extern void mem_free(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void skin_applyWeights(void);
 extern void morph_reset(void);
@@ -17,7 +17,7 @@ extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB6E4(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void fn_800EFC64(void);
 extern void fn_800EFE3C(void);
 extern void fn_800EFEA0(void);
@@ -1045,7 +1045,7 @@ lbl_fn_805991E4_00000D10:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x1c(r1)
     mr r30, r3
@@ -1077,7 +1077,7 @@ lbl_fn_805991E4_00000DC8:
     addi r3, r1, 0x18
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x18(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x18
     beq lbl_fn_805991E4_00000E10
     addic. r3, r3, 0x4

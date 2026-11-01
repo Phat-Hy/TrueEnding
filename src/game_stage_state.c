@@ -5,12 +5,12 @@
 extern void __files(void);
 extern void dtor_80084684(void);
 extern void mem_free(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void fn_8012476C(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
@@ -1587,7 +1587,7 @@ asm void fn_8019D42C(void)
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x24(r1)
     mr r30, r3
@@ -1619,7 +1619,7 @@ lbl_fn_8019D42C_00001548:
     addi r3, r1, 0x20
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x20(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x20
     beq lbl_fn_8019D42C_00001590
     addic. r3, r3, 0x4
@@ -1649,7 +1649,7 @@ lbl_fn_8019D42C_00001590:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0xc
     stw r3, 0x30(r1)
     mr r30, r3
@@ -1681,7 +1681,7 @@ lbl_fn_8019D42C_00001634:
     addi r3, r1, 0x2c
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x2c(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x2c
     beq lbl_fn_8019D42C_0000167C
     addic. r3, r3, 0x4

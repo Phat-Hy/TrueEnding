@@ -10,7 +10,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void scene_traverseNode(void);
-extern void fn_80056DB8(void);
+extern void path_Object_constructor(void);
 extern void atn_ColliBase_destructor(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
@@ -20,11 +20,11 @@ extern void mem_realloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
 extern void route_createWaypoint(void);
-extern void fn_80088724(void);
+extern void zone_testPointInBounds(void);
 extern void node_createNamedChild(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void fn_80092A4C(void);
 extern void fn_80094F98(void);
 extern void lockon_updateTarget(void);
@@ -32,7 +32,7 @@ extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void str_skipWhitespace(void);
 extern void task_lookupTagIndex(void);
 extern void craft_forgeUpgradeWeapon(void);
@@ -111,7 +111,7 @@ void fn_804273A4(void);
 void fn_804274C8(void);
 void fn_80427520(void);
 void fn_80427550(void);
-void fn_80427568(void);
+void *fn_80427568(void *obj);
 void fn_80427570(void);
 void fn_8042758C(void);
 void fn_804275BC(void);
@@ -278,11 +278,9 @@ asm void fn_80427550(void)
     blr
 }
 
-asm void fn_80427568(void)
+void *fn_80427568(void *obj)
 {
-    nofralloc
-    addi r3, r3, 0x898
-    blr
+    return (char *)obj + 0x898;
 }
 
 asm void fn_80427570(void)
@@ -382,7 +380,7 @@ lbl_fn_804275D0_00000290:
     addi r5, r29, 0x78
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_808866B8
     mr r3, r30
     lfs f2, lbl_808866BC
@@ -431,7 +429,7 @@ asm void fn_80427730(void)
     stw r30, 0x8(r1)
     mr r30, r3
     mr r3, r31
-    bl fn_80056DB8
+    bl path_Object_constructor
     lfs f0, lbl_808866D0
     lis r3, lbl_80777668@ha
     addi r3, r3, lbl_80777668@l
@@ -902,7 +900,7 @@ lbl_fn_80427870_00000A7C:
 lbl_fn_80427870_00000A84:
     addi r3, r31, 0x54
     li r4, 0x1
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     lfs f2, 0x42c(r31)
     addi r3, r1, 0xa4
     psq_l f1, 0x424(r31), 0, 0
@@ -1312,7 +1310,7 @@ lbl_fn_80428338_00001000:
     cmpwi r0, 0x0
     beq lbl_fn_80428338_00001018
     addi r3, r4, 0x54
-    bl fn_8008CD60
+    bl minimap_renderOverlay
 lbl_fn_80428338_00001018:
     addi r31, r31, 0x450
     addi r30, r30, 0x1

@@ -13,7 +13,7 @@ extern void script_executeOpcode(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_800DC3C8(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void fn_8032BE88(void);
 extern void fn_8048A290(void);
 extern void fn_8048A584(void);
@@ -147,7 +147,7 @@ lbl_fn_80540A0C_000000EC:
     addi r3, r3, lbl_80793BC8@l
     stw r3, 0x20(r1)
     mr r3, r30
-    bl fn_800DCA6C
+    bl sky_renderStub
     cmpwi cr6, r30, 0x0
 lbl_fn_80540A0C_00000108:
     mr r4, r25

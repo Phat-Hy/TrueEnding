@@ -19,7 +19,7 @@ extern void fn_8010A308(void);
 extern void fn_80129978(void);
 extern void fn_80129A48(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_801446F0(void);
+extern void quest_resetObjectiveBounds(void);
 extern void inventory_unequipItem(void);
 extern void equip_applyToCharacter(void);
 extern void inventory_calcTotalStats(void);
@@ -30,7 +30,7 @@ extern void fn_80188F08(void);
 extern void fn_80188F40(void);
 extern void fn_80191960(void);
 extern void fn_8019198C(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -818,7 +818,7 @@ lbl_fn_801AF888_0000098C:
     stw r0, 0x560(r4)
     lwz r3, 0x4(r3)
     addi r31, r3, 0xb0
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     li r0, 0x1
     stw r0, 0x34c(r31)
     lfs f0, lbl_808822F0
@@ -1133,7 +1133,7 @@ lbl_fn_801AFAC0_00000DE0:
     cmpwi r3, 0x0
     beq lbl_fn_801AFAC0_00000E30
     li r4, 0xb5
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_801AFAC0_00000E30:
     lwz r3, 0x4(r30)
     li r4, 0x1

@@ -15,14 +15,14 @@ extern void str_assignBuffer(void);
 extern void fn_8006FA4C(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800A58D0(void);
+extern void msg_isWindowActive(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void atn_LH_Texture_update(void);
 extern void env_updateAtmosphere(void);
 extern void str_findChar(void);
@@ -165,12 +165,12 @@ asm void fn_801F0DF0(void)
     addi r3, r27, 0x48
     stw r30, 0x1ac(r27)
     addi r4, r31, 0x1
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     stb r30, 0x75(r27)
     addi r3, r27, 0x78
     addi r4, r31, 0x12
     stb r30, 0x76(r27)
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     stb r30, 0xa5(r27)
     addi r3, r27, 0x168
     addi r4, r31, 0x23
@@ -390,7 +390,7 @@ asm void fn_801F10E0(void)
     bne lbl_fn_801F10E0_000003C8
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_fn_801F10E0_000003C8
     li r28, 0x9
@@ -492,7 +492,7 @@ lbl_fn_801F10E0_000003C8:
     bl thread_findAndNotify
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     bne lbl_fn_801F10E0_000005E0
     mulli r3, r26, 0x34

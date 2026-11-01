@@ -10,11 +10,11 @@ extern void vec3_copy(void);
 extern void vec3_assign(void);
 extern void fn_800109E0(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void fn_80012C88(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void fn_80063764(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
@@ -25,15 +25,15 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void viewport_getGlobalContext(void);
-extern void fn_800F7FD8(void);
+extern void vec3_normalize(void);
 extern void clip_calculateFrustum(void);
-extern void fn_801125F8(void);
+extern void phys_scaleGravity(void);
 extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
 extern void npc_updateDialogueTarget(void);
 extern void fn_80139F24(void);
 extern void fn_80139F3C(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void fn_8013C554(void);
 extern void dialog_updateScriptState(void);
 extern void fn_8017A300(void);
@@ -125,7 +125,7 @@ lbl_fn_803041C8_00000050:
     bl vec3_sub
     addi r3, r1, 0x80
     addi r4, r1, 0x74
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x104
     addi r4, r1, 0x80
     bl vec3_toEulerAngles
@@ -135,7 +135,7 @@ lbl_fn_803041C8_00000050:
     bl vec3_sub
     addi r3, r1, 0x68
     addi r4, r1, 0x5c
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0xf8
     addi r4, r1, 0x68
     bl vec3_toEulerAngles
@@ -207,7 +207,7 @@ lbl_fn_803041C8_00000108:
     bl vec3_sub
     addi r3, r1, 0x50
     addi r4, r1, 0x44
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0xec
     addi r4, r1, 0x50
     bl vec3_toEulerAngles
@@ -217,7 +217,7 @@ lbl_fn_803041C8_00000108:
     bl vec3_sub
     addi r3, r1, 0x38
     addi r4, r1, 0x2c
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0xe0
     addi r4, r1, 0x38
     bl vec3_toEulerAngles
@@ -233,13 +233,13 @@ lbl_fn_803041C8_00000108:
     stfs f1, 0xd4(r1)
     fmr f2, f1
     lfs f3, 0x16c4(r31)
-    bl fn_80057A68
+    bl vec3_initValues
     addi r3, r1, 0x150
     addi r4, r1, 0xd4
     bl fn_800109E0
     addi r3, r31, 0x15d8
     addi r4, r1, 0x150
-    bl fn_80011410
+    bl mtx_multVec
     lwz r3, 0x1628(r31)
     slwi r0, r3, 2
     cmpwi r3, 0x1
@@ -274,7 +274,7 @@ lbl_fn_803041C8_00000284:
     lfs f0, lbl_80884AC4
     fmr f1, f31
     stfs f0, 0x52c(r31)
-    bl fn_801125F8
+    bl phys_scaleGravity
     lfs f0, 0x534(r31)
     lwz r0, 0x1624(r31)
     fadds f0, f0, f1
@@ -367,7 +367,7 @@ lbl_fn_803041C8_000003E8:
     bl vec3_sub
     addi r3, r1, 0x14
     addi r4, r1, 0xa4
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x20
     addi r4, r1, 0x14
     bl vec3_toEulerAngles
@@ -400,13 +400,13 @@ lbl_fn_803041C8_00000438:
     stfs f1, 0x98(r1)
     fmr f2, f1
     lfs f3, 0x16c4(r31)
-    bl fn_80057A68
+    bl vec3_initValues
     addi r3, r1, 0x120
     addi r4, r1, 0x98
     bl fn_800109E0
     addi r3, r31, 0x15d8
     addi r4, r1, 0x120
-    bl fn_80011410
+    bl mtx_multVec
     lfs f0, lbl_80884A20
     stfs f0, 0x15dc(r31)
     bl equip_getGlobalManager
@@ -427,7 +427,7 @@ lbl_fn_803041C8_000004CC:
     li r3, 0x64d
     bl task_findEntryById
     mr r30, r3
-    bl fn_8013A194
+    bl npc_getGlobalManager
     li r0, -0x1
     stw r0, 0x8(r1)
     lfs f1, lbl_80884A20

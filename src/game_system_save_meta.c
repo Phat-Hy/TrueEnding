@@ -8,8 +8,8 @@ extern void fn_8000D3A8(void);
 extern void scene_traverseNode(void);
 extern void scene_transformPoint(void);
 extern void fn_8000DCF4(void);
-extern void fn_8000DD0C(void);
-extern void fn_8004203C(void);
+extern void scene_getRootNode(void);
+extern void menu_initWindowBuffer(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void mem_free(void);
@@ -23,21 +23,21 @@ extern void bloom_processPasses(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void equip_getGlobalManager(void);
 extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
 extern void npc_updateDialogueTarget(void);
 extern void npc_getPosition(void);
 extern void fn_8013C480(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void quest_checkCondition(void);
 extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
 extern void fn_8015ECC4(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_isLoading(void);
@@ -531,7 +531,7 @@ asm void fn_80345BA8(void)
     cmpwi r3, 0x0
     beq lbl_fn_80345BA8_00000528
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r31, r3
     b lbl_fn_80345BA8_0000052C
 lbl_fn_80345BA8_00000528:
@@ -551,7 +551,7 @@ lbl_fn_80345BA8_0000052C:
     mr r4, r3
     mr r5, r31
     addi r3, r1, 0x10
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     lis r31, lbl_8074AA58@ha
     addi r31, r31, lbl_8074AA58@l
 lbl_fn_80345BA8_00000570:
@@ -568,7 +568,7 @@ lbl_fn_80345BA8_00000570:
     mr r30, r3
     bl scene_transformPoint
     mr r4, r30
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     stw r3, 0x14c4(r29)
     b lbl_fn_80345BA8_00000AC8
 lbl_fn_80345BA8_000005B0:
@@ -985,7 +985,7 @@ asm void fn_80346384(void)
     bne lbl_fn_80346384_00000BC8
     mr r3, r31
     li r4, 0x1
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     addi r3, r31, 0xb0
     li r4, 0x0
     bl atn_Anim_getLayerDuration
@@ -1320,7 +1320,7 @@ lbl_fn_80346384_00000FE0:
     li r4, 0x0
     bl fn_80317034
     lwz r3, 0x17e4(r31)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     addi r4, r1, 0x8
     bl scene_traverseNode
     addi r3, r1, 0x8

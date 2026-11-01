@@ -147,7 +147,7 @@ void entity_isActive(void);
 void fn_8001BE90(void);
 void fn_8001BEB0(void);
 void fn_8001BEE0(void);
-void fn_8001BF44(void);
+u32 fn_8001BF44(void);
 void fn_8001BF4C(void);
 void fn_8001BF58(void);
 void fn_8001BF64(void);
@@ -982,11 +982,9 @@ lbl_fn_8001BEE0_00000A94:
     blr
 }
 
-asm void fn_8001BF44(void)
+u32 fn_8001BF44(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8001BF4C(void)

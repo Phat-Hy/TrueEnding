@@ -7,7 +7,7 @@ extern void mem_alloc(void);
 extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
 extern void fn_8011BEB8(void);
-extern void fn_8014C228(void);
+extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
 extern void fn_80164DCC(void);
 extern void actor_setState(void);
@@ -19,7 +19,7 @@ extern void fn_801A90BC(void);
 extern void fn_801A9A94(void);
 extern void fn_801AD34C(void);
 extern void world_getGlobalFlag(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void vec3_isNonZero(void);
 
 /* External data declarations */
@@ -1177,7 +1177,7 @@ lbl_fn_8015A46C_00000FF0:
     mr r3, r28
     stw r0, 0x648(r28)
     stw r0, 0x64c(r28)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_fn_8015A46C_00001030
 lbl_fn_8015A46C_00001010:
     lwz r0, 0x674(r28)
@@ -1596,7 +1596,7 @@ lbl_fn_8015A46C_000015D8:
     cmpwi r3, 0x0
     beq lbl_fn_8015A46C_00001600
     li r4, 0xb5
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_8015A46C_00001600:
     mr r3, r28
     li r4, 0x1

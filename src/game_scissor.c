@@ -17,7 +17,7 @@ extern void fn_800FBA9C(void);
 extern void fn_800FC410(void);
 extern void fn_80133EE8(void);
 extern void fn_80134134(void);
-extern void fn_80148B0C(void);
+extern void quest_getRewardItemSlot(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_registerResource(void);
@@ -147,7 +147,7 @@ lbl_scissor_clipFrustum_00000120:
     blt lbl_scissor_clipFrustum_000004D8
     mr r3, r21
     mr r4, r20
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     lfs f3, 0x530(r16)
     mr r30, r3
     lfs f0, 0xc(r3)
@@ -425,7 +425,7 @@ lbl_scissor_clipFrustum_00000528:
     blt lbl_scissor_clipFrustum_000008CC
     mr r3, r21
     mr r4, r20
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     lfs f3, 0x530(r16)
     mr r30, r3
     lfs f0, 0xc(r3)
@@ -724,7 +724,7 @@ lbl_scissor_clipFrustum_00000994:
     add r4, r0, r31
     lwzx r3, r31, r0
     lwz r4, 0x4(r4)
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     cmpwi r3, 0x0
     beq lbl_scissor_clipFrustum_00001194
     addis r5, r15, 0x4
@@ -751,7 +751,7 @@ lbl_scissor_clipFrustum_00000994:
     add r4, r0, r31
     lwzx r3, r31, r0
     lwz r4, 0x4(r4)
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     lfs f3, 0xc(r3)
     li r4, 0x28
     lfs f0, 0x140(r1)
@@ -857,7 +857,7 @@ lbl_scissor_clipFrustum_00000B84:
     bne lbl_scissor_clipFrustum_00000CBC
     mr r3, r19
     li r4, 0x2
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     cmpwi r3, 0x0
     beq lbl_scissor_clipFrustum_00000CBC
     lwz r4, lbl_8087F048
@@ -883,14 +883,14 @@ lbl_scissor_clipFrustum_00000BD4:
     bl PSMTXMultVec
     mr r3, r19
     li r4, 0x2
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     lfs f0, 0x10(r3)
     mr r3, r19
     stfs f29, 0x114(r1)
     li r4, 0x2
     stfs f0, 0x118(r1)
     stfs f29, 0x11c(r1)
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     frsp f0, f29
     lfs f3, 0xc(r3)
     lfs f5, 0x8(r3)

@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void str_initFromCStr(void);
-extern void fn_8004203C(void);
+extern void menu_initWindowBuffer(void);
 extern void str_getData(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
@@ -74,7 +74,7 @@ void fn_8011F82C(void);
 void fn_8011F87C(void);
 void fn_8011F8BC(void);
 void fn_8011F8F4(void);
-void fn_8011F91C(void);
+void skill_findNodeBySlotId(void);
 void fn_8011F944(void);
 void fn_8011F970(void);
 void fn_8011F9CC(void);
@@ -93,7 +93,7 @@ void fn_8011FD5C(void);
 void fn_8011FD84(void);
 void fn_8011FDB4(void);
 void fn_8011FE04(void);
-void fn_8011FE3C(void);
+void skill_findNodeByTag(void);
 void fn_8011FE64(void);
 void fn_8011FEBC(void);
 void fn_8011FEC0(void);
@@ -265,19 +265,19 @@ lbl_fn_8011F8F4_00000190:
     blr
 }
 
-asm void fn_8011F91C(void)
+asm void skill_findNodeBySlotId(void)
 {
     nofralloc
     lwz r3, 0x48(r3)
-    b lbl_fn_8011F91C_000001B8
-lbl_fn_8011F91C_000001A8:
+    b lbl_skill_findNodeBySlotId_000001B8
+lbl_skill_findNodeBySlotId_000001A8:
     lwz r0, 0x58(r3)
     cmpw r4, r0
     beqlr
     lwz r3, 0x14ac(r3)
-lbl_fn_8011F91C_000001B8:
+lbl_skill_findNodeBySlotId_000001B8:
     cmpwi r3, 0x0
-    bne lbl_fn_8011F91C_000001A8
+    bne lbl_skill_findNodeBySlotId_000001A8
     li r3, 0x0
     blr
 }
@@ -728,19 +728,19 @@ lbl_fn_8011FE04_000006B0:
     blr
 }
 
-asm void fn_8011FE3C(void)
+asm void skill_findNodeByTag(void)
 {
     nofralloc
     lwz r3, 0x48(r3)
-    b lbl_fn_8011FE3C_000006D8
-lbl_fn_8011FE3C_000006C8:
+    b lbl_skill_findNodeByTag_000006D8
+lbl_skill_findNodeByTag_000006C8:
     lwz r0, 0x58(r3)
     cmpw r4, r0
     beqlr
     lwz r3, 0x1424(r3)
-lbl_fn_8011FE3C_000006D8:
+lbl_skill_findNodeByTag_000006D8:
     cmpwi r3, 0x0
-    bne lbl_fn_8011FE3C_000006C8
+    bne lbl_skill_findNodeByTag_000006C8
     li r3, 0x0
     blr
 }
@@ -899,7 +899,7 @@ asm void fn_8011FFF8(void)
     mr r26, r4
     mr r25, r5
     addi r3, r1, 0x50
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     li r24, 0x0
     b lbl_fn_8011FFF8_000008D4
 lbl_fn_8011FFF8_000008A8:

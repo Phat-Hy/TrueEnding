@@ -15,9 +15,9 @@ extern void fn_80105B3C(void);
 extern void fn_80107CA8(void);
 extern void fn_8010CA34(void);
 extern void fn_8011BEB8(void);
-extern void fn_8012DB04(void);
+extern void enemy_evalAnimTrack(void);
 extern void fn_8013A21C(void);
-extern void fn_8014C228(void);
+extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
 extern void fn_801A2CEC(void);
 extern void fn_801C8F10(void);
@@ -60,7 +60,7 @@ void fn_8016DCD4(void);
 void fn_8016DDB0(void);
 void fn_8016DF3C(void);
 void fn_8016E484(void);
-void fn_8016E4C4(void);
+void debuff_removeStatusEffect(void);
 void fn_8016E5F0(void);
 void fn_8016E71C(void);
 void fn_8016E800(void);
@@ -1002,7 +1002,7 @@ lbl_fn_8016DF3C_00000CB0:
     mr r3, r30
     stw r0, 0x648(r30)
     stw r0, 0x64c(r30)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_fn_8016DF3C_00000CF0
 lbl_fn_8016DF3C_00000CD0:
     lwz r0, 0x674(r30)
@@ -1183,7 +1183,7 @@ lbl_fn_8016DF3C_00000F30:
     mr r3, r30
     stw r0, 0x648(r30)
     stw r0, 0x64c(r30)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_fn_8016DF3C_00000F70
 lbl_fn_8016DF3C_00000F50:
     lwz r0, 0x674(r30)
@@ -1302,7 +1302,7 @@ lbl_fn_8016E484_000010B8:
     blr
 }
 
-asm void fn_8016E4C4(void)
+asm void debuff_removeStatusEffect(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1314,7 +1314,7 @@ asm void fn_8016E4C4(void)
     mr r30, r4
     stw r29, 0x14(r1)
     mr r29, r3
-    beq lbl_fn_8016E4C4_00001114
+    beq lbl_debuff_removeStatusEffect_00001114
     lwz r0, 0x54c(r3)
     rlwinm r0, r0, 0, 29, 27
     stw r0, 0x54c(r3)
@@ -1322,8 +1322,8 @@ asm void fn_8016E4C4(void)
     lwz r12, 0x98(r12)
     mtctr r12
     bctrl
-    b lbl_fn_8016E4C4_00001134
-lbl_fn_8016E4C4_00001114:
+    b lbl_debuff_removeStatusEffect_00001134
+lbl_debuff_removeStatusEffect_00001114:
     lwz r0, 0x54c(r3)
     li r4, 0x0
     ori r0, r0, 0x8
@@ -1332,55 +1332,55 @@ lbl_fn_8016E4C4_00001114:
     lwz r12, 0x9c(r12)
     mtctr r12
     bctrl
-lbl_fn_8016E4C4_00001134:
+lbl_debuff_removeStatusEffect_00001134:
     cmpwi r30, 0x0
-    beq lbl_fn_8016E4C4_00001164
+    beq lbl_debuff_removeStatusEffect_00001164
     lwz r3, 0x648(r29)
     cmpwi r3, 0x0
-    beq lbl_fn_8016E4C4_000011DC
+    beq lbl_debuff_removeStatusEffect_000011DC
     mr r4, r29
     bl fn_80044C50
     cmpwi r3, 0x0
-    beq lbl_fn_8016E4C4_000011DC
+    beq lbl_debuff_removeStatusEffect_000011DC
     lwz r3, 0x648(r29)
     bl fn_80044CCC
-    b lbl_fn_8016E4C4_000011DC
-lbl_fn_8016E4C4_00001164:
+    b lbl_debuff_removeStatusEffect_000011DC
+lbl_debuff_removeStatusEffect_00001164:
     lwz r3, 0x648(r29)
     cmpwi r3, 0x0
-    beq lbl_fn_8016E4C4_00001178
+    beq lbl_debuff_removeStatusEffect_00001178
     li r4, 0x1
     bl menu_renderLayout
-lbl_fn_8016E4C4_00001178:
+lbl_debuff_removeStatusEffect_00001178:
     lwz r3, 0x64c(r29)
     cmpwi r3, 0x0
-    beq lbl_fn_8016E4C4_0000118C
+    beq lbl_debuff_removeStatusEffect_0000118C
     li r4, 0x1
     bl menu_renderLayout
-lbl_fn_8016E4C4_0000118C:
+lbl_debuff_removeStatusEffect_0000118C:
     addi r30, r29, 0x680
     li r31, 0x0
-lbl_fn_8016E4C4_00001194:
+lbl_debuff_removeStatusEffect_00001194:
     lwz r3, 0x0(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_8016E4C4_000011A8
+    beq lbl_debuff_removeStatusEffect_000011A8
     li r4, 0x0
     bl fn_8056639C
-lbl_fn_8016E4C4_000011A8:
+lbl_debuff_removeStatusEffect_000011A8:
     addi r31, r31, 0x1
     addi r30, r30, 0x4
     cmplwi r31, 0x8
-    blt lbl_fn_8016E4C4_00001194
+    blt lbl_debuff_removeStatusEffect_00001194
     lwz r3, 0x12a8(r29)
     extrwi. r0, r3, 1, 13
-    beq lbl_fn_8016E4C4_000011DC
+    beq lbl_debuff_removeStatusEffect_000011DC
     rlwinm r0, r3, 0, 14, 12
     stw r0, 0x12a8(r29)
     mr r4, r29
     li r5, 0x0
     lwz r3, lbl_8087F048
     bl fn_80107CA8
-lbl_fn_8016E4C4_000011DC:
+lbl_debuff_removeStatusEffect_000011DC:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -1634,7 +1634,7 @@ lbl_fn_8016E864_0000151C:
     fmuls f31, f31, f0
 lbl_fn_8016E864_00001530:
     addi r3, r3, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lwz r0, 0x7e8(r31)
     fmuls f31, f31, f1
     rlwinm r0, r0, 0, 18, 18
@@ -2312,7 +2312,7 @@ lbl_battle_applyStatusEffect_00001EB8:
     mr r3, r27
     stw r0, 0x648(r27)
     stw r0, 0x64c(r27)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_battle_applyStatusEffect_00001EF8
 lbl_battle_applyStatusEffect_00001ED8:
     lwz r0, 0x674(r27)

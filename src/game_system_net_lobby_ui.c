@@ -18,21 +18,21 @@ extern void vec3_add(void);
 extern void mission_updateStub(void);
 extern void boss_recordDamage(void);
 extern void atn_Task_unlink(void);
-extern void fn_800EC204(void);
+extern void cam_findTargetIndex(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_801162A0(void);
 extern void fn_8011F8F4(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
-extern void fn_8011FE3C(void);
+extern void skill_findNodeByTag(void);
 extern void equip_getGlobalManager(void);
 extern void fn_8012A190(void);
 extern void fn_8012A1B8(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void npc_getPosition(void);
 extern void fn_8013C404(void);
 extern void fn_8013C42C(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void dialog_setScriptSlot(void);
 extern void fn_8014C468(void);
 extern void fn_80161570(void);
@@ -58,7 +58,7 @@ extern void fn_80373118(void);
 extern void kpad_getClampData(void);
 extern void fn_8037529C(void);
 extern void fn_803761FC(void);
-extern void fn_8037D4C0(void);
+extern void dvd_showDiskErrorDialog(void);
 extern void fn_8037EF30(void);
 extern void fn_80392D2C(void);
 extern void fn_8039CCB4(void);
@@ -652,7 +652,7 @@ lbl_fn_803A1DB0_00000750:
     cmplwi r0, 0x20
     bne lbl_fn_803A1DB0_0000077C
     addi r3, r27, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     stw r28, 0x58c(r27)
 lbl_fn_803A1DB0_0000077C:
     lwz r27, 0x14ac(r27)
@@ -705,7 +705,7 @@ lbl_fn_803A2154_000007F4:
     li r7, 0x0
     lfs f1, 0xc(r31)
     lwz r5, 0x10(r31)
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_803A2154_00000820:
     lwz r4, 0x0(r31)
     lis r3, lbl_8074ED24@ha
@@ -764,7 +764,7 @@ lbl_fn_803A2210_000008D4:
     b lbl_fn_803A2210_00000930
 lbl_fn_803A2210_000008DC:
     lwz r3, lbl_8087F890
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r31, r3
     cmpwi r0, 0x0
@@ -784,7 +784,7 @@ lbl_fn_803A2210_00000914:
     b lbl_fn_803A2210_00000930
 lbl_fn_803A2210_00000924:
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r31, r3
 lbl_fn_803A2210_00000930:
     cmpwi r31, 0x0
@@ -865,7 +865,7 @@ lbl_fn_803A2378_00000A34:
     b lbl_fn_803A2378_00000A90
 lbl_fn_803A2378_00000A3C:
     lwz r3, lbl_8087F890
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r5, r3
     cmpwi r0, 0x0
@@ -885,7 +885,7 @@ lbl_fn_803A2378_00000A74:
     b lbl_fn_803A2378_00000A90
 lbl_fn_803A2378_00000A84:
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r5, r3
 lbl_fn_803A2378_00000A90:
     cmpwi r5, 0x0
@@ -1316,7 +1316,7 @@ lbl_fn_803A26F4_00001064:
     cmpwi r3, 0x0
     beq lbl_fn_803A26F4_000010B8
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r23, r3
     b lbl_fn_803A26F4_000010BC
 lbl_fn_803A26F4_000010B8:
@@ -1376,7 +1376,7 @@ lbl_fn_803A26F4_00001174:
     cmpwi r3, 0x0
     beq lbl_fn_803A26F4_0000118C
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     b lbl_fn_803A26F4_00001190
 lbl_fn_803A26F4_0000118C:
     li r3, 0x0
@@ -1384,7 +1384,7 @@ lbl_fn_803A26F4_00001190:
     cmpwi r3, 0x0
     beq lbl_fn_803A26F4_000011A8
     lwz r4, 0x28(r26)
-    bl fn_800EC204
+    bl cam_findTargetIndex
     mr r23, r3
     b lbl_fn_803A26F4_000011AC
 lbl_fn_803A26F4_000011A8:
@@ -1408,7 +1408,7 @@ lbl_fn_803A26F4_000011AC:
     cmpwi r3, 0x0
     beq lbl_fn_803A26F4_000011FC
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     b lbl_fn_803A26F4_00001200
 lbl_fn_803A26F4_000011FC:
     li r3, 0x0
@@ -1416,7 +1416,7 @@ lbl_fn_803A26F4_00001200:
     cmpwi r3, 0x0
     beq lbl_fn_803A26F4_00001218
     lwz r4, 0x28(r26)
-    bl fn_800EC204
+    bl cam_findTargetIndex
     mr r23, r3
     b lbl_fn_803A26F4_0000121C
 lbl_fn_803A26F4_00001218:
@@ -1472,7 +1472,7 @@ lbl_fn_803A26F4_00001294:
     cmpwi r3, 0x0
     beq lbl_fn_803A26F4_000012E4
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     b lbl_fn_803A26F4_000012E8
 lbl_fn_803A26F4_000012E4:
     li r3, 0x0
@@ -1634,7 +1634,7 @@ lbl_fn_803A2E20_000014E8:
 lbl_fn_803A2E20_000014F0:
     lwz r3, lbl_8087F890
     mr r4, r0
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r31, r3
     cmpwi r0, 0x0
@@ -1656,7 +1656,7 @@ lbl_fn_803A2E20_0000152C:
 lbl_fn_803A2E20_00001540:
     lwz r3, lbl_8087F8A0
     mr r4, r0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r31, r3
 lbl_fn_803A2E20_00001550:
     cmpwi r31, 0x0
@@ -1744,7 +1744,7 @@ lbl_fn_803A2E20_00001680:
     b lbl_fn_803A2E20_000016DC
 lbl_fn_803A2E20_00001688:
     lwz r3, lbl_8087F890
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r26, r3
     cmpwi r0, 0x0
@@ -1764,7 +1764,7 @@ lbl_fn_803A2E20_000016C0:
     b lbl_fn_803A2E20_000016DC
 lbl_fn_803A2E20_000016D0:
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r26, r3
 lbl_fn_803A2E20_000016DC:
     lfs f3, 0x5b0(r26)
@@ -1985,7 +1985,7 @@ lbl_fn_803A330C_000019C8:
     b lbl_fn_803A330C_00001A24
 lbl_fn_803A330C_000019D0:
     lwz r3, lbl_8087F890
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r5, r3
     cmpwi r0, 0x0
@@ -2005,7 +2005,7 @@ lbl_fn_803A330C_00001A08:
     b lbl_fn_803A330C_00001A24
 lbl_fn_803A330C_00001A18:
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r5, r3
 lbl_fn_803A330C_00001A24:
     cmpwi r5, 0x0

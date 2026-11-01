@@ -54,10 +54,10 @@ void fn_801088B8(void);
 void fn_8010895C(void);
 void fn_80108A54(void);
 void fn_80108A5C(void);
-void fn_80108C10(void);
+void hurtbox_testCollisionLayer(void);
 void fn_80108F38(void);
-void fn_801092C8(void);
-void fn_80109828(void);
+void hurtbox_processHitDamage(void);
+void hurtbox_dispatchHitEvent(void);
 void fn_80109864(void);
 void fn_80109950(void);
 
@@ -320,7 +320,7 @@ lbl_fn_80108A5C_0000033C:
     blr
 }
 
-asm void fn_80108C10(void)
+asm void hurtbox_testCollisionLayer(void)
 {
     nofralloc
     stwu r1, -0x80(r1)
@@ -336,175 +336,175 @@ asm void fn_80108C10(void)
     subi r5, r3, 0x1
     li r3, 0x0
     cmplwi r5, 0x4
-    bgt lbl_fn_80108C10_000003A4
+    bgt lbl_hurtbox_testCollisionLayer_000003A4
     li r0, 0x1
     slw r0, r0, r5
     andi. r0, r0, 0x19
-    beq lbl_fn_80108C10_000003A4
+    beq lbl_hurtbox_testCollisionLayer_000003A4
     li r3, 0x1
-lbl_fn_80108C10_000003A4:
+lbl_hurtbox_testCollisionLayer_000003A4:
     cmpwi r3, 0x0
-    beq lbl_fn_80108C10_0000066C
+    beq lbl_hurtbox_testCollisionLayer_0000066C
     cmpwi r9, 0x0
-    beq lbl_fn_80108C10_000003D0
+    beq lbl_hurtbox_testCollisionLayer_000003D0
     lwz r0, 0x4(r4)
     cmpwi r0, 0x0
-    bne lbl_fn_80108C10_000003D0
+    bne lbl_hurtbox_testCollisionLayer_000003D0
     lwz r0, 0xc(r4)
     cmpwi r0, 0x0
-    bne lbl_fn_80108C10_000003D0
-    b lbl_fn_80108C10_0000066C
-lbl_fn_80108C10_000003D0:
+    bne lbl_hurtbox_testCollisionLayer_000003D0
+    b lbl_hurtbox_testCollisionLayer_0000066C
+lbl_hurtbox_testCollisionLayer_000003D0:
     lwz r3, lbl_8087F610
     cmpwi r3, 0x0
-    bne lbl_fn_80108C10_00000430
+    bne lbl_hurtbox_testCollisionLayer_00000430
     cmpwi r7, 0x0
-    beq lbl_fn_80108C10_00000408
+    beq lbl_hurtbox_testCollisionLayer_00000408
     lwz r0, 0x48(r7)
     cmpwi r0, 0x0
-    beq lbl_fn_80108C10_000003F8
+    beq lbl_hurtbox_testCollisionLayer_000003F8
     cmpwi r0, 0x3
-    bne lbl_fn_80108C10_00000408
-lbl_fn_80108C10_000003F8:
+    bne lbl_hurtbox_testCollisionLayer_00000408
+lbl_hurtbox_testCollisionLayer_000003F8:
     lwz r3, lbl_8087F9C0
     lwz r0, 0x64(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80108C10_0000066C
-lbl_fn_80108C10_00000408:
+    beq lbl_hurtbox_testCollisionLayer_0000066C
+lbl_hurtbox_testCollisionLayer_00000408:
     cmpwi r7, 0x0
-    beq lbl_fn_80108C10_00000588
+    beq lbl_hurtbox_testCollisionLayer_00000588
     lwz r0, 0x48(r7)
     cmpwi r0, 0x2
-    bne lbl_fn_80108C10_00000588
+    bne lbl_hurtbox_testCollisionLayer_00000588
     lwz r3, lbl_8087F9C0
     lwz r0, 0x60(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80108C10_00000588
-    b lbl_fn_80108C10_0000066C
-lbl_fn_80108C10_00000430:
+    bne lbl_hurtbox_testCollisionLayer_00000588
+    b lbl_hurtbox_testCollisionLayer_0000066C
+lbl_hurtbox_testCollisionLayer_00000430:
     lwz r4, lbl_8087F8A0
     cmpwi r4, 0x0
-    beq lbl_fn_80108C10_00000444
+    beq lbl_hurtbox_testCollisionLayer_00000444
     lwz r26, 0x48(r4)
-    b lbl_fn_80108C10_00000448
-lbl_fn_80108C10_00000444:
+    b lbl_hurtbox_testCollisionLayer_00000448
+lbl_hurtbox_testCollisionLayer_00000444:
     li r26, 0x0
-lbl_fn_80108C10_00000448:
+lbl_hurtbox_testCollisionLayer_00000448:
     cmpwi r6, 0x0
-    beq lbl_fn_80108C10_00000520
+    beq lbl_hurtbox_testCollisionLayer_00000520
     lwz r0, 0x12a4(r6)
     extrwi. r0, r0, 1, 29
-    bne lbl_fn_80108C10_00000520
+    bne lbl_hurtbox_testCollisionLayer_00000520
     lwz r4, lbl_8087F610
     lwz r0, 0x540(r4)
     cmpwi r0, 0x2
-    beq lbl_fn_80108C10_000004D8
+    beq lbl_hurtbox_testCollisionLayer_000004D8
     cmpwi r26, 0x0
-    beq lbl_fn_80108C10_00000588
+    beq lbl_hurtbox_testCollisionLayer_00000588
     cmpwi r7, 0x0
-    beq lbl_fn_80108C10_000004A4
+    beq lbl_hurtbox_testCollisionLayer_000004A4
     mr r3, r30
     mr r4, r26
     li r5, 0x1
     bl battle_canTargetActor
     cmpwi r3, 0x0
-    beq lbl_fn_80108C10_000004A4
+    beq lbl_hurtbox_testCollisionLayer_000004A4
     lwz r3, lbl_8087F9C0
     lwz r0, 0x64(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80108C10_0000066C
-lbl_fn_80108C10_000004A4:
+    beq lbl_hurtbox_testCollisionLayer_0000066C
+lbl_hurtbox_testCollisionLayer_000004A4:
     cmpwi r30, 0x0
-    beq lbl_fn_80108C10_00000588
+    beq lbl_hurtbox_testCollisionLayer_00000588
     mr r3, r30
     mr r4, r26
     li r5, 0x1
     bl battle_canTargetActor
     cmpwi r3, 0x0
-    bne lbl_fn_80108C10_00000588
+    bne lbl_hurtbox_testCollisionLayer_00000588
     lwz r3, lbl_8087F9C0
     lwz r0, 0x60(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80108C10_00000588
-    b lbl_fn_80108C10_0000066C
-lbl_fn_80108C10_000004D8:
+    bne lbl_hurtbox_testCollisionLayer_00000588
+    b lbl_hurtbox_testCollisionLayer_0000066C
+lbl_hurtbox_testCollisionLayer_000004D8:
     mr r4, r30
     bl fn_804EB7C8
     cmpwi r3, 0x0
-    beq lbl_fn_80108C10_000004F8
+    beq lbl_hurtbox_testCollisionLayer_000004F8
     lwz r3, lbl_8087F9C0
     lwz r0, 0x64(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80108C10_0000066C
-lbl_fn_80108C10_000004F8:
+    beq lbl_hurtbox_testCollisionLayer_0000066C
+lbl_hurtbox_testCollisionLayer_000004F8:
     lwz r3, lbl_8087F610
     mr r4, r30
     bl fn_804EB818
     cmpwi r3, 0x0
-    beq lbl_fn_80108C10_00000588
+    beq lbl_hurtbox_testCollisionLayer_00000588
     lwz r3, lbl_8087F9C0
     lwz r0, 0x60(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80108C10_00000588
-    b lbl_fn_80108C10_0000066C
-lbl_fn_80108C10_00000520:
+    bne lbl_hurtbox_testCollisionLayer_00000588
+    b lbl_hurtbox_testCollisionLayer_0000066C
+lbl_hurtbox_testCollisionLayer_00000520:
     cmpwi r26, 0x0
-    beq lbl_fn_80108C10_00000588
+    beq lbl_hurtbox_testCollisionLayer_00000588
     cmpwi r6, 0x0
-    beq lbl_fn_80108C10_00000558
+    beq lbl_hurtbox_testCollisionLayer_00000558
     mr r3, r29
     mr r4, r26
     li r5, 0x1
     bl battle_canTargetActor
     cmpwi r3, 0x0
-    bne lbl_fn_80108C10_00000558
+    bne lbl_hurtbox_testCollisionLayer_00000558
     lwz r3, lbl_8087F9C0
     lwz r0, 0x64(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80108C10_0000066C
-lbl_fn_80108C10_00000558:
+    beq lbl_hurtbox_testCollisionLayer_0000066C
+lbl_hurtbox_testCollisionLayer_00000558:
     cmpwi r29, 0x0
-    beq lbl_fn_80108C10_00000588
+    beq lbl_hurtbox_testCollisionLayer_00000588
     mr r3, r29
     mr r4, r26
     li r5, 0x1
     bl battle_canTargetActor
     cmpwi r3, 0x0
-    beq lbl_fn_80108C10_00000588
+    beq lbl_hurtbox_testCollisionLayer_00000588
     lwz r3, lbl_8087F9C0
     lwz r0, 0x60(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80108C10_0000066C
-lbl_fn_80108C10_00000588:
+    beq lbl_hurtbox_testCollisionLayer_0000066C
+lbl_hurtbox_testCollisionLayer_00000588:
     lwz r26, 0x4(r27)
     li r25, 0x0
     cmpwi r26, 0x0
-    bge lbl_fn_80108C10_000005A0
+    bge lbl_hurtbox_testCollisionLayer_000005A0
     li r25, 0x1
     neg r26, r26
-lbl_fn_80108C10_000005A0:
+lbl_hurtbox_testCollisionLayer_000005A0:
     cmpwi r29, 0x0
     li r24, 0x1
-    beq lbl_fn_80108C10_000005C4
+    beq lbl_hurtbox_testCollisionLayer_000005C4
     lwz r0, 0x48(r29)
     cmpwi r0, 0x0
-    bne lbl_fn_80108C10_000005C4
+    bne lbl_hurtbox_testCollisionLayer_000005C4
     cmpwi r25, 0x1
-    beq lbl_fn_80108C10_000005C4
+    beq lbl_hurtbox_testCollisionLayer_000005C4
     li r24, 0x0
-lbl_fn_80108C10_000005C4:
+lbl_hurtbox_testCollisionLayer_000005C4:
     rlwinm r3, r31, 0, 10, 10
     subis r0, r3, 0x20
     cmplwi r0, 0x0
-    bne lbl_fn_80108C10_000005F0
+    bne lbl_hurtbox_testCollisionLayer_000005F0
     cmpwi r30, 0x0
     rlwinm r31, r31, 0, 29, 27
-    beq lbl_fn_80108C10_000005F0
+    beq lbl_hurtbox_testCollisionLayer_000005F0
     lwz r0, 0x48(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_80108C10_000005F0
+    bne lbl_hurtbox_testCollisionLayer_000005F0
     li r24, 0x0
-lbl_fn_80108C10_000005F0:
+lbl_hurtbox_testCollisionLayer_000005F0:
     addi r3, r1, 0x20
     li r4, 0x0
     li r5, 0x40
@@ -536,7 +536,7 @@ lbl_fn_80108C10_000005F0:
     or r0, r0, r10
     srwi r10, r0, 31
     bl fn_8054D798
-lbl_fn_80108C10_0000066C:
+lbl_hurtbox_testCollisionLayer_0000066C:
     lmw r24, 0x60(r1)
     lwz r0, 0x84(r1)
     mtlr r0
@@ -825,7 +825,7 @@ lbl_fn_80108F38_00000A00:
     blr
 }
 
-asm void fn_801092C8(void)
+asm void hurtbox_processHitDamage(void)
 {
     nofralloc
     stwu r1, -0x220(r1)
@@ -839,12 +839,12 @@ asm void fn_801092C8(void)
     lwz r3, lbl_8087F0A8
     lwz r0, 0x6c(r3)
     cmpwi r0, 0x0
-    ble lbl_fn_801092C8_00000F5C
+    ble lbl_hurtbox_processHitDamage_00000F5C
     lwz r0, lbl_8087F528
     cmpwi r0, 0x0
-    bne lbl_fn_801092C8_00000A50
-    b lbl_fn_801092C8_00000F5C
-lbl_fn_801092C8_00000A50:
+    bne lbl_hurtbox_processHitDamage_00000A50
+    b lbl_hurtbox_processHitDamage_00000F5C
+lbl_hurtbox_processHitDamage_00000A50:
     mulli r0, r4, 0xc
     lis r4, lbl_80735AB0@ha
     addi r3, r1, 0x8
@@ -855,7 +855,7 @@ lbl_fn_801092C8_00000A50:
     li r5, 0x200
     bl memset
     cmplwi r26, 0x1f
-    bgt lbl_fn_801092C8_00000F44
+    bgt lbl_hurtbox_processHitDamage_00000F44
     lis r3, jumptable_80779D18@ha
     slwi r0, r26, 2
     addi r3, r3, jumptable_80779D18@l
@@ -864,28 +864,28 @@ lbl_fn_801092C8_00000A50:
     bctr
     subi r0, r28, 0x43
     cmplwi r0, 0x1
-    bgt lbl_fn_801092C8_00000AA4
+    bgt lbl_hurtbox_processHitDamage_00000AA4
     li r31, 0x1
-lbl_fn_801092C8_00000AA4:
+lbl_hurtbox_processHitDamage_00000AA4:
     lwz r0, lbl_8087F1E4
     slwi r4, r28, 3
     addi r3, r1, 0x8
     add r4, r0, r4
     lwz r4, 0x4(r4)
     cmpwi r4, 0x0
-    beq lbl_fn_801092C8_00000AC4
-    b lbl_fn_801092C8_00000AC8
-lbl_fn_801092C8_00000AC4:
+    beq lbl_hurtbox_processHitDamage_00000AC4
+    b lbl_hurtbox_processHitDamage_00000AC8
+lbl_hurtbox_processHitDamage_00000AC4:
     la r4, lbl_808813D0
-lbl_fn_801092C8_00000AC8:
+lbl_hurtbox_processHitDamage_00000AC8:
     bl wcscpy
-    b lbl_fn_801092C8_00000F44
+    b lbl_hurtbox_processHitDamage_00000F44
     mr r3, r28
     li r31, 0x1
     bl event_findEntryById
     cmpwi r3, 0x0
     mr r5, r3
-    beq lbl_fn_801092C8_00000B24
+    beq lbl_hurtbox_processHitDamage_00000B24
     lwz r0, 0x0(r30)
     addi r3, r1, 0x8
     lwz r4, lbl_8087F1E4
@@ -893,35 +893,35 @@ lbl_fn_801092C8_00000AC8:
     add r4, r4, r0
     lwz r4, 0x4(r4)
     cmpwi r4, 0x0
-    beq lbl_fn_801092C8_00000B0C
-    b lbl_fn_801092C8_00000B10
-lbl_fn_801092C8_00000B0C:
+    beq lbl_hurtbox_processHitDamage_00000B0C
+    b lbl_hurtbox_processHitDamage_00000B10
+lbl_hurtbox_processHitDamage_00000B0C:
     la r4, lbl_808813D0
-lbl_fn_801092C8_00000B10:
+lbl_hurtbox_processHitDamage_00000B10:
     lwz r5, 0x8(r5)
     mr r6, r29
     crclr 6
     bl wcs_vformat
-    b lbl_fn_801092C8_00000F44
-lbl_fn_801092C8_00000B24:
+    b lbl_hurtbox_processHitDamage_00000F44
+lbl_hurtbox_processHitDamage_00000B24:
     lwz r4, lbl_8087F1E4
     addi r3, r1, 0x8
     lwz r4, 0xbc(r4)
     cmpwi r4, 0x0
-    beq lbl_fn_801092C8_00000B3C
-    b lbl_fn_801092C8_00000B40
-lbl_fn_801092C8_00000B3C:
+    beq lbl_hurtbox_processHitDamage_00000B3C
+    b lbl_hurtbox_processHitDamage_00000B40
+lbl_hurtbox_processHitDamage_00000B3C:
     la r4, lbl_808813D0
-lbl_fn_801092C8_00000B40:
+lbl_hurtbox_processHitDamage_00000B40:
     mr r5, r28
     crclr 6
     bl wcs_vformat
-    b lbl_fn_801092C8_00000F44
+    b lbl_hurtbox_processHitDamage_00000F44
     mr r3, r28
     li r31, 0x1
     bl assert_formatLocation
     cmpwi r3, 0x0
-    beq lbl_fn_801092C8_00000BCC
+    beq lbl_hurtbox_processHitDamage_00000BCC
     lwz r3, 0xb8(r3)
     lwz r7, lbl_8087F1E4
     addi r0, r3, 0xeb
@@ -929,43 +929,43 @@ lbl_fn_801092C8_00000B40:
     addi r4, r7, 0x4
     lwzx r0, r4, r3
     cmpwi r0, 0x0
-    beq lbl_fn_801092C8_00000B90
+    beq lbl_hurtbox_processHitDamage_00000B90
     add r3, r7, r3
     lwz r5, 0x4(r3)
-    b lbl_fn_801092C8_00000B94
-lbl_fn_801092C8_00000B90:
+    b lbl_hurtbox_processHitDamage_00000B94
+lbl_hurtbox_processHitDamage_00000B90:
     la r5, lbl_808813D0
-lbl_fn_801092C8_00000B94:
+lbl_hurtbox_processHitDamage_00000B94:
     lwz r0, 0x0(r30)
     addi r3, r1, 0x8
     slwi r6, r0, 3
     lwzx r0, r4, r6
     cmpwi r0, 0x0
-    beq lbl_fn_801092C8_00000BB8
+    beq lbl_hurtbox_processHitDamage_00000BB8
     add r4, r7, r6
     lwz r4, 0x4(r4)
-    b lbl_fn_801092C8_00000BBC
-lbl_fn_801092C8_00000BB8:
+    b lbl_hurtbox_processHitDamage_00000BBC
+lbl_hurtbox_processHitDamage_00000BB8:
     la r4, lbl_808813D0
-lbl_fn_801092C8_00000BBC:
+lbl_hurtbox_processHitDamage_00000BBC:
     mr r6, r29
     crclr 6
     bl wcs_vformat
-    b lbl_fn_801092C8_00000F44
-lbl_fn_801092C8_00000BCC:
+    b lbl_hurtbox_processHitDamage_00000F44
+lbl_hurtbox_processHitDamage_00000BCC:
     lwz r4, lbl_8087F1E4
     addi r3, r1, 0x8
     lwz r4, 0xbc(r4)
     cmpwi r4, 0x0
-    beq lbl_fn_801092C8_00000BE4
-    b lbl_fn_801092C8_00000BE8
-lbl_fn_801092C8_00000BE4:
+    beq lbl_hurtbox_processHitDamage_00000BE4
+    b lbl_hurtbox_processHitDamage_00000BE8
+lbl_hurtbox_processHitDamage_00000BE4:
     la r4, lbl_808813D0
-lbl_fn_801092C8_00000BE8:
+lbl_hurtbox_processHitDamage_00000BE8:
     mr r5, r28
     crclr 6
     bl wcs_vformat
-    b lbl_fn_801092C8_00000F44
+    b lbl_hurtbox_processHitDamage_00000F44
     lwz r0, 0x0(r30)
     addi r3, r1, 0x8
     lwz r4, lbl_8087F1E4
@@ -974,15 +974,15 @@ lbl_fn_801092C8_00000BE8:
     add r4, r4, r0
     lwz r4, 0x4(r4)
     cmpwi r4, 0x0
-    beq lbl_fn_801092C8_00000C20
-    b lbl_fn_801092C8_00000C24
-lbl_fn_801092C8_00000C20:
+    beq lbl_hurtbox_processHitDamage_00000C20
+    b lbl_hurtbox_processHitDamage_00000C24
+lbl_hurtbox_processHitDamage_00000C20:
     la r4, lbl_808813D0
-lbl_fn_801092C8_00000C24:
+lbl_hurtbox_processHitDamage_00000C24:
     mr r5, r28
     crclr 6
     bl wcs_vformat
-    b lbl_fn_801092C8_00000F44
+    b lbl_hurtbox_processHitDamage_00000F44
     lwz r0, 0x0(r30)
     addi r3, r1, 0x8
     lwz r4, lbl_8087F1E4
@@ -990,14 +990,14 @@ lbl_fn_801092C8_00000C24:
     add r4, r4, r0
     lwz r4, 0x4(r4)
     cmpwi r4, 0x0
-    beq lbl_fn_801092C8_00000C58
-    b lbl_fn_801092C8_00000C5C
-lbl_fn_801092C8_00000C58:
+    beq lbl_hurtbox_processHitDamage_00000C58
+    b lbl_hurtbox_processHitDamage_00000C5C
+lbl_hurtbox_processHitDamage_00000C58:
     la r4, lbl_808813D0
-lbl_fn_801092C8_00000C5C:
+lbl_hurtbox_processHitDamage_00000C5C:
     crclr 6
     bl wcs_vformat
-    b lbl_fn_801092C8_00000F44
+    b lbl_hurtbox_processHitDamage_00000F44
     lwz r0, 0x0(r30)
     addi r3, r1, 0x8
     lwz r4, lbl_8087F1E4
@@ -1006,15 +1006,15 @@ lbl_fn_801092C8_00000C5C:
     add r4, r4, r0
     lwz r4, 0x4(r4)
     cmpwi r4, 0x0
-    beq lbl_fn_801092C8_00000C90
-    b lbl_fn_801092C8_00000C94
-lbl_fn_801092C8_00000C90:
+    beq lbl_hurtbox_processHitDamage_00000C90
+    b lbl_hurtbox_processHitDamage_00000C94
+lbl_hurtbox_processHitDamage_00000C90:
     la r4, lbl_808813D0
-lbl_fn_801092C8_00000C94:
+lbl_hurtbox_processHitDamage_00000C94:
     crclr 6
     bl wcs_vformat
-    b lbl_fn_801092C8_00000F44
-    b lbl_fn_801092C8_00000F5C
+    b lbl_hurtbox_processHitDamage_00000F44
+    b lbl_hurtbox_processHitDamage_00000F5C
     lwz r0, 0x0(r30)
     addi r3, r1, 0x8
     lwz r4, lbl_8087F1E4
@@ -1023,25 +1023,25 @@ lbl_fn_801092C8_00000C94:
     add r4, r4, r0
     lwz r4, 0x4(r4)
     cmpwi r4, 0x0
-    beq lbl_fn_801092C8_00000CCC
-    b lbl_fn_801092C8_00000CD0
-lbl_fn_801092C8_00000CCC:
+    beq lbl_hurtbox_processHitDamage_00000CCC
+    b lbl_hurtbox_processHitDamage_00000CD0
+lbl_hurtbox_processHitDamage_00000CCC:
     la r4, lbl_808813D0
-lbl_fn_801092C8_00000CD0:
+lbl_hurtbox_processHitDamage_00000CD0:
     lwz r5, 0x4(r5)
     crclr 6
     bl wcs_vformat
-    b lbl_fn_801092C8_00000F44
+    b lbl_hurtbox_processHitDamage_00000F44
     mr r3, r28
     bl task_findEntryById
     cmpwi r3, 0x0
     mr r6, r3
-    beq lbl_fn_801092C8_00000D44
+    beq lbl_hurtbox_processHitDamage_00000D44
     cmpwi r27, 0x0
-    beq lbl_fn_801092C8_00000D44
+    beq lbl_hurtbox_processHitDamage_00000D44
     lwz r5, 0x60(r27)
     cmpwi r5, 0x0
-    beq lbl_fn_801092C8_00000D44
+    beq lbl_hurtbox_processHitDamage_00000D44
     lwz r0, 0x0(r30)
     addi r3, r1, 0x8
     lwz r4, lbl_8087F1E4
@@ -1049,46 +1049,46 @@ lbl_fn_801092C8_00000CD0:
     add r4, r4, r0
     lwz r4, 0x4(r4)
     cmpwi r4, 0x0
-    beq lbl_fn_801092C8_00000D2C
-    b lbl_fn_801092C8_00000D30
-lbl_fn_801092C8_00000D2C:
+    beq lbl_hurtbox_processHitDamage_00000D2C
+    b lbl_hurtbox_processHitDamage_00000D30
+lbl_hurtbox_processHitDamage_00000D2C:
     la r4, lbl_808813D0
-lbl_fn_801092C8_00000D30:
+lbl_hurtbox_processHitDamage_00000D30:
     lwz r5, 0x4(r5)
     lwz r6, 0x8(r6)
     crclr 6
     bl wcs_vformat
-    b lbl_fn_801092C8_00000F44
-lbl_fn_801092C8_00000D44:
+    b lbl_hurtbox_processHitDamage_00000F44
+lbl_hurtbox_processHitDamage_00000D44:
     lwz r4, lbl_8087F1E4
     addi r3, r1, 0x8
     lwz r4, 0xc4(r4)
     cmpwi r4, 0x0
-    beq lbl_fn_801092C8_00000D5C
-    b lbl_fn_801092C8_00000D60
-lbl_fn_801092C8_00000D5C:
+    beq lbl_hurtbox_processHitDamage_00000D5C
+    b lbl_hurtbox_processHitDamage_00000D60
+lbl_hurtbox_processHitDamage_00000D5C:
     la r4, lbl_808813D0
-lbl_fn_801092C8_00000D60:
+lbl_hurtbox_processHitDamage_00000D60:
     mr r5, r28
     crclr 6
     bl wcs_vformat
-    b lbl_fn_801092C8_00000F44
+    b lbl_hurtbox_processHitDamage_00000F44
     mr r3, r28
     bl fn_8021AF50
     cmpwi r3, 0x0
-    beq lbl_fn_801092C8_00000DE0
+    beq lbl_hurtbox_processHitDamage_00000DE0
     cmpwi r27, 0x0
-    beq lbl_fn_801092C8_00000DE0
+    beq lbl_hurtbox_processHitDamage_00000DE0
     lwz r5, 0x60(r27)
     cmpwi r5, 0x0
-    beq lbl_fn_801092C8_00000DE0
+    beq lbl_hurtbox_processHitDamage_00000DE0
     lwz r6, 0xc(r3)
     cmpwi r6, 0x0
-    beq lbl_fn_801092C8_00000DA4
-    b lbl_fn_801092C8_00000DA8
-lbl_fn_801092C8_00000DA4:
+    beq lbl_hurtbox_processHitDamage_00000DA4
+    b lbl_hurtbox_processHitDamage_00000DA8
+lbl_hurtbox_processHitDamage_00000DA4:
     la r6, lbl_808813D0
-lbl_fn_801092C8_00000DA8:
+lbl_hurtbox_processHitDamage_00000DA8:
     lwz r0, 0x0(r30)
     addi r3, r1, 0x8
     lwz r4, lbl_8087F1E4
@@ -1096,34 +1096,34 @@ lbl_fn_801092C8_00000DA8:
     add r4, r4, r0
     lwz r4, 0x4(r4)
     cmpwi r4, 0x0
-    beq lbl_fn_801092C8_00000DCC
-    b lbl_fn_801092C8_00000DD0
-lbl_fn_801092C8_00000DCC:
+    beq lbl_hurtbox_processHitDamage_00000DCC
+    b lbl_hurtbox_processHitDamage_00000DD0
+lbl_hurtbox_processHitDamage_00000DCC:
     la r4, lbl_808813D0
-lbl_fn_801092C8_00000DD0:
+lbl_hurtbox_processHitDamage_00000DD0:
     lwz r5, 0x4(r5)
     crclr 6
     bl wcs_vformat
-    b lbl_fn_801092C8_00000F44
-lbl_fn_801092C8_00000DE0:
+    b lbl_hurtbox_processHitDamage_00000F44
+lbl_hurtbox_processHitDamage_00000DE0:
     lwz r4, lbl_8087F1E4
     addi r3, r1, 0x8
     lwz r4, 0xc4(r4)
     cmpwi r4, 0x0
-    beq lbl_fn_801092C8_00000DF8
-    b lbl_fn_801092C8_00000DFC
-lbl_fn_801092C8_00000DF8:
+    beq lbl_hurtbox_processHitDamage_00000DF8
+    b lbl_hurtbox_processHitDamage_00000DFC
+lbl_hurtbox_processHitDamage_00000DF8:
     la r4, lbl_808813D0
-lbl_fn_801092C8_00000DFC:
+lbl_hurtbox_processHitDamage_00000DFC:
     mr r5, r28
     crclr 6
     bl wcs_vformat
-    b lbl_fn_801092C8_00000F44
+    b lbl_hurtbox_processHitDamage_00000F44
     cmpwi r27, 0x0
-    beq lbl_fn_801092C8_00000F44
+    beq lbl_hurtbox_processHitDamage_00000F44
     lwz r5, 0x60(r27)
     cmpwi r5, 0x0
-    beq lbl_fn_801092C8_00000F44
+    beq lbl_hurtbox_processHitDamage_00000F44
     lwz r0, 0x0(r30)
     addi r3, r1, 0x8
     lwz r4, lbl_8087F1E4
@@ -1131,16 +1131,16 @@ lbl_fn_801092C8_00000DFC:
     add r4, r4, r0
     lwz r4, 0x4(r4)
     cmpwi r4, 0x0
-    beq lbl_fn_801092C8_00000E44
-    b lbl_fn_801092C8_00000E48
-lbl_fn_801092C8_00000E44:
+    beq lbl_hurtbox_processHitDamage_00000E44
+    b lbl_hurtbox_processHitDamage_00000E48
+lbl_hurtbox_processHitDamage_00000E44:
     la r4, lbl_808813D0
-lbl_fn_801092C8_00000E48:
+lbl_hurtbox_processHitDamage_00000E48:
     lwz r5, 0x4(r5)
     mr r6, r28
     crclr 6
     bl wcs_vformat
-    b lbl_fn_801092C8_00000F44
+    b lbl_hurtbox_processHitDamage_00000F44
     lwz r0, 0x0(r30)
     addi r3, r1, 0x8
     lwz r4, lbl_8087F1E4
@@ -1148,16 +1148,16 @@ lbl_fn_801092C8_00000E48:
     add r4, r4, r0
     lwz r4, 0x4(r4)
     cmpwi r4, 0x0
-    beq lbl_fn_801092C8_00000E80
-    b lbl_fn_801092C8_00000E84
-lbl_fn_801092C8_00000E80:
+    beq lbl_hurtbox_processHitDamage_00000E80
+    b lbl_hurtbox_processHitDamage_00000E84
+lbl_hurtbox_processHitDamage_00000E80:
     la r4, lbl_808813D0
-lbl_fn_801092C8_00000E84:
+lbl_hurtbox_processHitDamage_00000E84:
     mr r5, r28
     mr r6, r29
     crclr 6
     bl wcs_vformat
-    b lbl_fn_801092C8_00000F44
+    b lbl_hurtbox_processHitDamage_00000F44
     lwz r0, 0x0(r30)
     addi r3, r1, 0x8
     lwz r4, lbl_8087F1E4
@@ -1166,32 +1166,32 @@ lbl_fn_801092C8_00000E84:
     add r4, r4, r0
     lwz r4, 0x4(r4)
     cmpwi r4, 0x0
-    beq lbl_fn_801092C8_00000EC0
-    b lbl_fn_801092C8_00000EC4
-lbl_fn_801092C8_00000EC0:
+    beq lbl_hurtbox_processHitDamage_00000EC0
+    b lbl_hurtbox_processHitDamage_00000EC4
+lbl_hurtbox_processHitDamage_00000EC0:
     la r4, lbl_808813D0
-lbl_fn_801092C8_00000EC4:
+lbl_hurtbox_processHitDamage_00000EC4:
     lwz r5, 0x4(r5)
     mr r6, r28
     crclr 6
     bl wcs_vformat
-    b lbl_fn_801092C8_00000F44
+    b lbl_hurtbox_processHitDamage_00000F44
     mr r3, r28
     bl fn_8021AF50
     cmpwi r27, 0x0
-    beq lbl_fn_801092C8_00000F44
+    beq lbl_hurtbox_processHitDamage_00000F44
     lwz r5, 0x60(r27)
     cmpwi r5, 0x0
-    beq lbl_fn_801092C8_00000F44
+    beq lbl_hurtbox_processHitDamage_00000F44
     cmpwi r3, 0x0
-    beq lbl_fn_801092C8_00000F44
+    beq lbl_hurtbox_processHitDamage_00000F44
     lwz r6, 0xc(r3)
     cmpwi r6, 0x0
-    beq lbl_fn_801092C8_00000F0C
-    b lbl_fn_801092C8_00000F10
-lbl_fn_801092C8_00000F0C:
+    beq lbl_hurtbox_processHitDamage_00000F0C
+    b lbl_hurtbox_processHitDamage_00000F10
+lbl_hurtbox_processHitDamage_00000F0C:
     la r6, lbl_808813D0
-lbl_fn_801092C8_00000F10:
+lbl_hurtbox_processHitDamage_00000F10:
     lwz r0, 0x0(r30)
     addi r3, r1, 0x8
     lwz r4, lbl_8087F1E4
@@ -1199,22 +1199,22 @@ lbl_fn_801092C8_00000F10:
     add r4, r4, r0
     lwz r4, 0x4(r4)
     cmpwi r4, 0x0
-    beq lbl_fn_801092C8_00000F34
-    b lbl_fn_801092C8_00000F38
-lbl_fn_801092C8_00000F34:
+    beq lbl_hurtbox_processHitDamage_00000F34
+    b lbl_hurtbox_processHitDamage_00000F38
+lbl_hurtbox_processHitDamage_00000F34:
     la r4, lbl_808813D0
-lbl_fn_801092C8_00000F38:
+lbl_hurtbox_processHitDamage_00000F38:
     lwz r5, 0x4(r5)
     crclr 6
     bl wcs_vformat
-lbl_fn_801092C8_00000F44:
+lbl_hurtbox_processHitDamage_00000F44:
     lwz r3, lbl_8087F528
     mr r7, r31
     lwz r5, 0x4(r30)
     addi r4, r1, 0x8
     lwz r6, 0x8(r30)
     bl fn_8047961C
-lbl_fn_801092C8_00000F5C:
+lbl_hurtbox_processHitDamage_00000F5C:
     lmw r26, 0x208(r1)
     lwz r0, 0x224(r1)
     mtlr r0
@@ -1222,7 +1222,7 @@ lbl_fn_801092C8_00000F5C:
     blr
 }
 
-asm void fn_80109828(void)
+asm void hurtbox_dispatchHitEvent(void)
 {
     nofralloc
     lwz r3, lbl_8087F0A8
@@ -1231,9 +1231,9 @@ asm void fn_80109828(void)
     blelr
     lwz r3, lbl_8087F528
     cmpwi r3, 0x0
-    bne lbl_fn_80109828_00000F90
+    bne lbl_hurtbox_dispatchHitEvent_00000F90
     blr
-lbl_fn_80109828_00000F90:
+lbl_hurtbox_dispatchHitEvent_00000F90:
     cmpwi r4, 0x0
     beqlr
     li r5, -0x3301

@@ -16,7 +16,7 @@ extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
-extern void fn_8020924C(void);
+extern void mem_findBlockById(void);
 extern void fn_804B4700(void);
 extern void fn_804B4770(void);
 extern void fn_804B47E0(void);
@@ -1280,7 +1280,7 @@ lbl_fn_804C76EC_00001124:
     subi r3, r3, 0x51a0
     mulli r0, r0, 0x34
     add r15, r4, r0
-    bl fn_8020924C
+    bl mem_findBlockById
     mr r19, r3
     lwz r3, lbl_8087F610
     mr r4, r30

@@ -12,7 +12,7 @@ extern void fn_8010C00C(void);
 extern void fn_8012B988(void);
 extern void fn_8013407C(void);
 extern void dialog_setScriptSlot(void);
-extern void fn_8014C228(void);
+extern void dialog_initScriptSlot(void);
 extern void fn_8014FD30(void);
 extern void fn_80206B14(void);
 extern void assert_generateId(void);
@@ -1158,7 +1158,7 @@ lbl_fn_8014EEC4_00001028:
     stw r0, 0x64c(r30)
     bne lbl_fn_8014EEC4_0000104C
     mr r3, r30
-    bl fn_8014C228
+    bl dialog_initScriptSlot
 lbl_fn_8014EEC4_0000104C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

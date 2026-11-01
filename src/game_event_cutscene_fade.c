@@ -66,7 +66,7 @@ void fn_8047DC98(void);
 void fn_8047DF70(void);
 void fn_8047E4BC(void);
 void fn_8047E528(void);
-void fn_8047E5D4(void);
+u32 fn_8047E5D4(const void *p);
 void fn_8047E5DC(void);
 void fn_8047E964(void);
 void fn_8047EA34(void);
@@ -750,11 +750,9 @@ lbl_fn_8047E528_000008BC:
     blr
 }
 
-asm void fn_8047E5D4(void)
+u32 fn_8047E5D4(const void *p)
 {
-    nofralloc
-    lwz r3, 0x190(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x190);
 }
 
 asm void fn_8047E5DC(void)

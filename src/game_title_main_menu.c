@@ -23,10 +23,10 @@ extern void fn_80051CD8(void);
 extern void mem_free(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_8011F8F4(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
-extern void fn_8011FE3C(void);
-extern void fn_801240B4(void);
+extern void skill_findNodeByTag(void);
+extern void player_evaluateStatusCondition(void);
 extern void world_getGlobalFlag(void);
 extern void fn_803E3C78(void);
 extern void fn_8047F580(void);
@@ -259,7 +259,7 @@ lbl_fn_803AC3D8_00000270:
     beq lbl_fn_803AC3D8_00000298
     addi r3, r3, 0x48c
     li r4, 0x24
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     b lbl_fn_803AC3D8_000002CC
 lbl_fn_803AC3D8_00000298:
     lwz r4, lbl_8087F430
@@ -1032,7 +1032,7 @@ lbl_fn_803AD05C_00000CDC:
 lbl_fn_803AD05C_00000CE4:
     lwz r3, lbl_8087F890
     mr r4, r5
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r6, r3
     cmpwi r0, 0x0
@@ -1054,7 +1054,7 @@ lbl_fn_803AD05C_00000D20:
 lbl_fn_803AD05C_00000D34:
     lwz r3, lbl_8087F8A0
     mr r4, r5
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r6, r3
 lbl_fn_803AD05C_00000D44:
     lwz r0, 0x14(r1)
@@ -1595,7 +1595,7 @@ lbl_fn_803AD750_0000142C:
     blt lbl_fn_803AD750_00001840
     lwz r4, 0x0(r28)
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     cmpwi r3, 0x0
     mr r25, r3
     beq lbl_fn_803AD750_00001840

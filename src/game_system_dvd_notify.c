@@ -14,7 +14,7 @@ extern void fn_8004AE84(void);
 extern void fn_8004B0E4(void);
 extern void fn_8004B158(void);
 extern void fn_8004B1EC(void);
-extern void fn_8004B290(void);
+extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void fn_80076FF8(void);
 extern void mem_alloc(void);
@@ -127,7 +127,7 @@ void fn_8037D274(void);
 void fn_8037D34C(void);
 void fn_8037D3E8(void);
 void fn_8037D49C(void);
-void fn_8037D4C0(void);
+void dvd_showDiskErrorDialog(void);
 void fn_8037D684(void);
 void fn_8037D758(void);
 void fn_8037D808(void);
@@ -928,7 +928,7 @@ lbl_fn_8037CB38_00000AD0:
     li r5, 0x0
     li r6, 0x0
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     li r0, 0x0
     stw r0, 0x80(r31)
 lbl_fn_8037CB38_00000B10:
@@ -1166,7 +1166,7 @@ asm void fn_8037D49C(void)
     blr
 }
 
-asm void fn_8037D4C0(void)
+asm void dvd_showDiskErrorDialog(void)
 {
     nofralloc
     stwu r1, -0x40(r1)
@@ -1183,51 +1183,51 @@ asm void fn_8037D4C0(void)
     mr r23, r5
     mr r24, r6
     mr r25, r7
-    ble lbl_fn_8037D4C0_00000E84
+    ble lbl_dvd_showDiskErrorDialog_00000E84
     cmpwi r4, 0x6
-    bgt lbl_fn_8037D4C0_00000E84
+    bgt lbl_dvd_showDiskErrorDialog_00000E84
     lis r5, lbl_8074DFD0@ha
     slwi r0, r4, 2
     addi r5, r5, lbl_8074DFD0@l
     lwzx r22, r5, r0
-lbl_fn_8037D4C0_00000E84:
+lbl_dvd_showDiskErrorDialog_00000E84:
     lwz r28, lbl_8087EE90
     li r27, 0x0
     li r26, 0x0
     cmpwi r28, 0x0
-    beq lbl_fn_8037D4C0_00000F28
+    beq lbl_dvd_showDiskErrorDialog_00000F28
     lwz r0, lbl_8087EFE8
     cmpwi r0, 0x0
-    beq lbl_fn_8037D4C0_00000F28
+    beq lbl_dvd_showDiskErrorDialog_00000F28
     lwz r29, 0x90(r3)
     li r30, 0x0
     cmpwi r29, 0x0
-    beq lbl_fn_8037D4C0_00000EC8
+    beq lbl_dvd_showDiskErrorDialog_00000EC8
     mr r3, r29
     bl strlen
     cmpwi r3, 0x0
-    beq lbl_fn_8037D4C0_00000EC8
+    beq lbl_dvd_showDiskErrorDialog_00000EC8
     li r30, 0x1
-lbl_fn_8037D4C0_00000EC8:
+lbl_dvd_showDiskErrorDialog_00000EC8:
     cmpwi r30, 0x0
-    beq lbl_fn_8037D4C0_00000EE0
+    beq lbl_dvd_showDiskErrorDialog_00000EE0
     mr r3, r28
     mr r4, r29
     bl fn_80049B74
     mr r27, r3
-lbl_fn_8037D4C0_00000EE0:
+lbl_dvd_showDiskErrorDialog_00000EE0:
     mr r3, r22
     bl fn_8037C71C
     cmpwi r3, 0x0
     li r30, 0x0
-    beq lbl_fn_8037D4C0_00000F04
+    beq lbl_dvd_showDiskErrorDialog_00000F04
     bl strlen
     cmpwi r3, 0x0
-    beq lbl_fn_8037D4C0_00000F04
+    beq lbl_dvd_showDiskErrorDialog_00000F04
     li r30, 0x1
-lbl_fn_8037D4C0_00000F04:
+lbl_dvd_showDiskErrorDialog_00000F04:
     cmpwi r30, 0x0
-    beq lbl_fn_8037D4C0_00000F28
+    beq lbl_dvd_showDiskErrorDialog_00000F28
     lwz r30, lbl_8087EE90
     mr r3, r22
     bl fn_8037C71C
@@ -1235,9 +1235,9 @@ lbl_fn_8037D4C0_00000F04:
     mr r3, r30
     bl fn_80049B74
     mr r26, r3
-lbl_fn_8037D4C0_00000F28:
+lbl_dvd_showDiskErrorDialog_00000F28:
     cmplw r27, r26
-    beq lbl_fn_8037D4C0_00000F98
+    beq lbl_dvd_showDiskErrorDialog_00000F98
     stw r22, 0xc4(r31)
     mr r3, r22
     bl fn_8037C71C
@@ -1247,17 +1247,17 @@ lbl_fn_8037D4C0_00000F28:
     stw r23, 0xd0(r31)
     stw r25, 0xd4(r31)
     stw r24, 0xd8(r31)
-    ble lbl_fn_8037D4C0_00000F70
+    ble lbl_dvd_showDiskErrorDialog_00000F70
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
     bl fn_803CE160
     cmpwi r3, 0x0
-    beq lbl_fn_8037D4C0_00000F78
-lbl_fn_8037D4C0_00000F70:
+    beq lbl_dvd_showDiskErrorDialog_00000F78
+lbl_dvd_showDiskErrorDialog_00000F70:
     li r0, 0x0
     stw r0, 0xd8(r31)
-lbl_fn_8037D4C0_00000F78:
+lbl_dvd_showDiskErrorDialog_00000F78:
     mr r3, r22
     bl fn_80207F34
     li r0, 0x1
@@ -1265,8 +1265,8 @@ lbl_fn_8037D4C0_00000F78:
     li r3, 0x1
     stw r0, 0x80(r31)
     stw r0, 0x84(r31)
-    b lbl_fn_8037D4C0_00000FD4
-lbl_fn_8037D4C0_00000F98:
+    b lbl_dvd_showDiskErrorDialog_00000FD4
+lbl_dvd_showDiskErrorDialog_00000F98:
     lwz r3, 0x74(r31)
     frsp f0, f31
     stw r22, 0x8c(r31)
@@ -1274,16 +1274,16 @@ lbl_fn_8037D4C0_00000F98:
     stw r23, 0x98(r31)
     stfs f0, 0xe0(r31)
     stfs f31, 0x94(r31)
-    beq lbl_fn_8037D4C0_00000FC8
+    beq lbl_dvd_showDiskErrorDialog_00000FC8
     fmr f1, f31
     mr r4, r23
     addi r3, r3, 0x8
     bl fn_800CB5B4
-lbl_fn_8037D4C0_00000FC8:
+lbl_dvd_showDiskErrorDialog_00000FC8:
     li r0, 0x0
     stw r0, 0x84(r31)
     li r3, 0x0
-lbl_fn_8037D4C0_00000FD4:
+lbl_dvd_showDiskErrorDialog_00000FD4:
     addi r11, r1, 0x30
     psq_l f31, 0x38(r1), 0, 0
     lfd f31, 0x30(r1)
@@ -1345,7 +1345,7 @@ lbl_fn_8037D684_00001090:
     li r5, 0x2d
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_8037D684_000010AC:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1397,7 +1397,7 @@ lbl_fn_8037D758_000010FC:
     li r5, 0x3c
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_8037D758_00001160:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1472,11 +1472,11 @@ asm void fn_8037D8B8(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     mr r29, r3
-    bl fn_8004B290
+    bl sound_initChannelParams
     addi r3, r29, 0x1f4
     li r4, 0x0
     li r5, 0x0
-    bl fn_8004B290
+    bl sound_initChannelParams
     lfs f5, lbl_808858E8
     li r30, 0x0
     lfs f0, lbl_808858EC
@@ -1597,7 +1597,7 @@ asm void fn_8037D8B8(void)
     stfs f5, 0xa14(r29)
     stfs f5, 0xa18(r29)
     stfs f5, 0xa1c(r29)
-    bl fn_8004B290
+    bl sound_initChannelParams
     lfs f1, lbl_80885918
     li r3, 0x140
     lfs f6, lbl_808858E8

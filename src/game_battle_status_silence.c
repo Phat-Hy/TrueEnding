@@ -6,24 +6,24 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80051CD8(void);
-extern void fn_80056DB8(void);
+extern void path_Object_constructor(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_800575BC(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
-extern void fn_8006AA20(void);
+extern void boss_triggerEventSequence(void);
 extern void fn_8007FAF0(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
 extern void route_createWaypoint(void);
-extern void fn_80088724(void);
+extern void zone_testPointInBounds(void);
 extern void node_createNamedChild(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void fn_80092954(void);
-extern void fn_80092F1C(void);
+extern void compass_findMarkerByName(void);
+extern void target_pushPointToHistory(void);
 extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
@@ -41,17 +41,17 @@ extern void fn_80136544(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void task_lookupTagIndex(void);
 extern void kpad_getClampData(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
-extern void fn_803EC7A0(void);
+extern void barrier_formatDialogString(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
-extern void fn_803ED5D0(void);
-extern void fn_803ED774(void);
+extern void barrier_bindFieldAnimation(void);
+extern void dungeon_updateBarrierField(void);
 extern void fn_803EDB18(void);
 extern void fn_803EDCF4(void);
 extern void fn_803F11F8(void);
@@ -132,14 +132,14 @@ void fn_8042CC10(void);
 void fn_8042CC40(void);
 void fn_8042CC98(void);
 void fn_8042CCAC(void);
-void fn_8042CE28(void);
+void *fn_8042CE28(void *p);
 void fn_8042CE30(void);
 void fn_8042CEE8(void);
 void fn_8042CF40(void);
 void fn_8042CFB4(void);
 void fn_8042D0DC(void);
 void fn_8042D114(void);
-void fn_8042D138(void);
+u32 fn_8042D138(void);
 void fn_8042D140(void);
 void fn_8042D3EC(void);
 void fn_8042D41C(void);
@@ -469,7 +469,7 @@ lbl_fn_8042C5AC_0000040C:
     mr r4, r30
     addi r5, r30, 0x528
     addi r3, r1, 0x20
-    bl fn_80176548
+    bl battle_calcExpPosition
     lfs f0, 0x24(r1)
     addi r3, r1, 0x20
     addi r4, r31, 0x500
@@ -585,7 +585,7 @@ lbl_fn_8042C5AC_00000588:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_8042C5AC_0000060C:
     lwz r12, 0x0(r31)
     mr r3, r31
@@ -657,7 +657,7 @@ asm void fn_8042C9B4(void)
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_8042C9B4_00000704:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -750,7 +750,7 @@ lbl_fn_8042CA54_000007F8:
     mr r3, r29
     addi r4, r29, 0xf4
     addi r5, r1, 0x108
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     b lbl_fn_8042CA54_000008D8
 lbl_fn_8042CA54_0000084C:
     mr r3, r30
@@ -769,7 +769,7 @@ lbl_fn_8042CA54_0000084C:
     addi r3, r29, 0xf4
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_8042CA54_000008D8
 lbl_fn_8042CA54_00000894:
     mr r3, r30
@@ -920,7 +920,7 @@ lbl_fn_8042CCAC_00000A10:
     addi r5, r29, 0x78
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_8088677C
     mr r3, r30
     lfs f2, lbl_80886780
@@ -962,11 +962,9 @@ lbl_fn_8042CCAC_00000B00:
     blr
 }
 
-asm void fn_8042CE28(void)
+void *fn_8042CE28(void *p)
 {
-    nofralloc
-    addi r3, r3, 0xf4
-    blr
+    return (char *)p + 0xf4;
 }
 
 asm void fn_8042CE30(void)
@@ -1203,11 +1201,9 @@ asm void fn_8042D114(void)
     blr
 }
 
-asm void fn_8042D138(void)
+u32 fn_8042D138(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8042D140(void)
@@ -1277,7 +1273,7 @@ lbl_fn_8042D140_00000EF0:
     addi r3, r1, 0x20
     bl strcpy
     addi r3, r1, 0x20
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_8042D140_000010BC
     stw r31, 0x10(r1)
@@ -1509,7 +1505,7 @@ lbl_fn_8042D488_000011E0:
     addi r5, r29, 0x78
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_808867A4
     mr r3, r30
     lfs f2, lbl_808867A8
@@ -1528,16 +1524,14 @@ lbl_fn_8042D488_000011E0:
     blr
 }
 
-asm void fn_8042D5A0(void)
+void fn_8042D5A0(void)
 {
-    nofralloc
-    b dialog_renderWindow
+    dialog_renderWindow();
 }
 
-asm void fn_8042D5A4(void)
+void fn_8042D5A4(void)
 {
-    nofralloc
-    b quest_updateFlow
+    quest_updateFlow();
 }
 
 asm void fn_8042D5A8(void)
@@ -1622,7 +1616,7 @@ asm void fn_8042D628(void)
     addi r30, r31, 0x4c4
     li r4, 0x2
     mr r3, r30
-    bl fn_80056DB8
+    bl path_Object_constructor
     lis r3, lbl_807775F8@ha
     addi r5, r31, 0x86c
     addi r3, r3, lbl_807775F8@l
@@ -2056,7 +2050,7 @@ lbl_fn_8042D93C_0000197C:
 lbl_fn_8042D93C_00001990:
     mr r4, r30
     addi r3, r31, 0xf4
-    bl fn_80092954
+    bl compass_findMarkerByName
     cmpwi r3, 0x0
     beq lbl_fn_8042D93C_00001A7C
     lwz r0, 0x18(r3)

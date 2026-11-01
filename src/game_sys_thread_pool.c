@@ -5,8 +5,8 @@
 extern void __register_global_object(void);
 extern void dtor_80084684(void);
 extern void talk_parseDialogue(void);
-extern void fn_8005B8F8(void);
-extern void fn_8005B9AC(void);
+extern void talk_parseDialogueTokens(void);
+extern void talk_copyUtf16String(void);
 extern void fn_8006BA30(void);
 extern void mem_realloc(void);
 extern void wcs_parseInt(void);
@@ -15,7 +15,7 @@ extern void fn_80206B14(void);
 extern void fn_80209294(void);
 extern void fn_802092F8(void);
 extern void fn_8046DC5C(void);
-extern void fn_8046DD20(void);
+extern void boss_bindArenaInteractions(void);
 extern void atoi(void);
 extern void wcslen(void);
 extern void runtime_registerStaticObject(void);
@@ -97,7 +97,7 @@ asm void fn_8021B2F8(void)
     stw r3, 0xc(r1)
     addi r3, r1, 0xc
     addi r4, r4, lbl_807830B8@l
-    bl fn_8005B9AC
+    bl talk_copyUtf16String
     lwz r0, lbl_8087F2F4
     cmpwi r0, 0x0
     bne lbl_fn_8021B2F8_00000B34
@@ -462,7 +462,7 @@ lbl_fn_8021B2F8_00000588:
     addi r30, r30, 0x1
 lbl_fn_8021B2F8_00000590:
     addi r3, r1, 0xc
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_8021B2F8_00000104
 lbl_fn_8021B2F8_000005A0:
@@ -839,13 +839,13 @@ lbl_fn_8021B2F8_00000B10:
     addi r28, r28, 0x1
 lbl_fn_8021B2F8_00000B18:
     addi r3, r1, 0xc
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_8021B2F8_000006A8
 lbl_fn_8021B2F8_00000B28:
     lwz r3, lbl_8087F518
     mr r4, r27
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
 lbl_fn_8021B2F8_00000B34:
     lmw r18, 0xc68(r1)
     lwz r0, 0xca4(r1)
@@ -1317,7 +1317,7 @@ asm void fn_8021C3F4(void)
     stw r3, 0xc(r1)
     addi r3, r1, 0xc
     addi r4, r4, lbl_807830B8@l
-    bl fn_8005B9AC
+    bl talk_copyUtf16String
     lwz r3, lbl_8087F518
     addi r5, r1, 0x8
     lwz r4, lbl_80882F88
@@ -1367,7 +1367,7 @@ lbl_fn_8021C3F4_000011C8:
     stw r0, lbl_8087F2FC
 lbl_fn_8021C3F4_00001214:
     addi r3, r1, 0xc
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_8021C3F4_000011C8
     lis r25, lbl_80742658@ha
@@ -1462,12 +1462,12 @@ lbl_fn_8021C3F4_000012B0:
     stw r3, 0x10(r4)
 lbl_fn_8021C3F4_0000137C:
     addi r3, r1, 0xc
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_8021C3F4_000012B0
     lwz r3, lbl_8087F518
     mr r4, r30
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     lmw r23, 0xc6c(r1)
     lwz r0, 0xc94(r1)
     mtlr r0

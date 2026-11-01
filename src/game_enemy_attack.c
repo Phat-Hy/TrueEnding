@@ -11,12 +11,12 @@ extern void fn_800FDE60(void);
 extern void fn_801061BC(void);
 extern void fn_8010652C(void);
 extern void fn_80107FC8(void);
-extern void fn_80108C10(void);
-extern void fn_801092C8(void);
+extern void hurtbox_testCollisionLayer(void);
+extern void hurtbox_processHitDamage(void);
 extern void fn_8010CCD0(void);
 extern void fn_8012476C(void);
 extern void fn_8012F440(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void fn_80166544(void);
 extern void fn_80166A54(void);
 extern void fn_80167038(void);
@@ -33,7 +33,7 @@ extern void fn_8017AC2C(void);
 extern void fn_80219344(void);
 extern void fn_8021A8D0(void);
 extern void fn_8021A960(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 
@@ -378,7 +378,7 @@ lbl_fn_8012DF7C_000003E4:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_8012DF7C_000004BC
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_8012DF7C_000004BC
     lwz r3, lbl_8087F048
@@ -393,13 +393,13 @@ lbl_fn_8012DF7C_000003E4:
     li r4, 0x8
     li r6, 0x0
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
     b lbl_fn_8012DF7C_000004BC
 lbl_fn_8012DF7C_00000470:
     li r4, 0x9
     li r6, 0x0
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
     b lbl_fn_8012DF7C_000004BC
 lbl_fn_8012DF7C_00000484:
     bge lbl_fn_8012DF7C_000004BC
@@ -410,13 +410,13 @@ lbl_fn_8012DF7C_00000484:
     li r4, 0xa
     li r6, 0x0
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
     b lbl_fn_8012DF7C_000004BC
 lbl_fn_8012DF7C_000004AC:
     li r4, 0xb
     li r6, 0x0
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
 lbl_fn_8012DF7C_000004BC:
     addi r11, r1, 0x40
     bl _restgpr_24
@@ -1107,7 +1107,7 @@ lbl_fn_8012E540_00000E18:
     addi r4, r1, 0x2c
     li r5, -0x1
     li r6, 0x0
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
     b lbl_fn_8012E540_00000F8C
 lbl_fn_8012E540_00000E80:
     clrrwi r0, r26, 31
@@ -1256,7 +1256,7 @@ lbl_fn_8012E540_00001048:
     li r6, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
 lbl_fn_8012E540_0000109C:
     lwz r3, 0x2f0(r24)
     cmpwi r3, 0x0
@@ -1531,7 +1531,7 @@ asm void fn_8012F188(void)
     cmpwi r0, 0x0
     beq lbl_fn_8012F188_0000146C
     mr r3, r0
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_8012F188_00001634
 lbl_fn_8012F188_0000146C:

@@ -20,7 +20,7 @@ extern void fn_806D7DA0(void);
 extern void fn_806D7EE0(void);
 extern void fn_806D8060(void);
 extern void fn_806D8F10(void);
-extern void fn_806D8F30(void);
+extern void net_getTimestampMs(void);
 extern void fn_806D9590(void);
 extern void memmove(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -37,7 +37,7 @@ extern u8 lbl_80860DD0[];
 /* Function declarations */
 void pad_03_806D5798_text(void);
 void fn_806D57A0(void);
-void fn_806D5850(void);
+void net_pollActiveSockets(void);
 u32 net_bufferGetCount(const u32 *buf);
 void net_bufferGetElement(void);
 void fn_806D5930(void);
@@ -123,7 +123,7 @@ lbl_fn_806D57A0_00000094:
     blr
 }
 
-asm void fn_806D5850(void)
+asm void net_pollActiveSockets(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -133,37 +133,37 @@ asm void fn_806D5850(void)
     li r31, 0x0
     stw r30, 0x8(r1)
     mr r30, r3
-    b lbl_fn_806D5850_00000118
-lbl_fn_806D5850_000000D8:
+    b lbl_net_pollActiveSockets_00000118
+lbl_net_pollActiveSockets_000000D8:
     lwz r12, 0x10(r30)
     cmpwi r12, 0x0
-    beq lbl_fn_806D5850_00000114
+    beq lbl_net_pollActiveSockets_00000114
     cmpwi r31, 0x0
-    blt lbl_fn_806D5850_000000F4
+    blt lbl_net_pollActiveSockets_000000F4
     cmpw r31, r0
-    blt lbl_fn_806D5850_000000FC
-lbl_fn_806D5850_000000F4:
+    blt lbl_net_pollActiveSockets_000000FC
+lbl_net_pollActiveSockets_000000F4:
     li r3, 0x0
-    b lbl_fn_806D5850_0000010C
-lbl_fn_806D5850_000000FC:
+    b lbl_net_pollActiveSockets_0000010C
+lbl_net_pollActiveSockets_000000FC:
     lwz r0, 0x8(r30)
     lwz r3, 0x14(r30)
     mullw r0, r0, r31
     add r3, r3, r0
-lbl_fn_806D5850_0000010C:
+lbl_net_pollActiveSockets_0000010C:
     mtctr r12
     bctrl
-lbl_fn_806D5850_00000114:
+lbl_net_pollActiveSockets_00000114:
     addi r31, r31, 0x1
-lbl_fn_806D5850_00000118:
+lbl_net_pollActiveSockets_00000118:
     lwz r0, 0x0(r30)
     cmpw r31, r0
-    blt lbl_fn_806D5850_000000D8
+    blt lbl_net_pollActiveSockets_000000D8
     lwz r3, 0x14(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_806D5850_00000134
+    beq lbl_net_pollActiveSockets_00000134
     bl net_socketClose
-lbl_fn_806D5850_00000134:
+lbl_net_pollActiveSockets_00000134:
     mr r3, r30
     bl net_socketClose
     lwz r0, 0x14(r1)
@@ -1021,7 +1021,7 @@ asm void fn_806D63A0(void)
 lbl_fn_806D63A0_00000C38:
     lwz r3, 0x0(r29)
     lwzx r3, r3, r31
-    bl fn_806D5850
+    bl net_pollActiveSockets
     addi r31, r31, 0x4
     addi r30, r30, 0x1
 lbl_fn_806D63A0_00000C4C:
@@ -2391,7 +2391,7 @@ lbl_fn_806D76E0_0000202C:
     li r6, 0x0
     li r8, 0x8
     bl fn_806D7DA0
-    bl fn_806D8F30
+    bl net_getTimestampMs
     li r0, 0x0
     stw r3, 0x50(r30)
     stw r0, 0x54(r30)

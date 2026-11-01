@@ -33,10 +33,10 @@ extern void GXClearVtxDesc(void);
 extern void fn_80614790(void);
 extern void fn_80615400(void);
 extern void GXInitLightDistAttn(void);
-extern void fn_80615FF0(void);
-extern void fn_80616250(void);
+extern void GXInitLightObj(void);
+extern void GXClampLightAngle(void);
 extern void GXDrawDone(void);
-extern void fn_80617340(void);
+extern void GXSetTevDirect(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
@@ -133,7 +133,7 @@ asm void fn_805B4DF4(void)
     bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x3
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -514,7 +514,7 @@ asm void fn_805B53D0(void)
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_808883CC
     addi r3, r1, 0x48
     li r4, 0x1
@@ -524,7 +524,7 @@ asm void fn_805B53D0(void)
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     lwz r3, lbl_8087EEE0
     addi r4, r1, 0x48
     li r5, 0x0
@@ -539,7 +539,7 @@ asm void fn_805B53D0(void)
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_808883CC
     addi r3, r1, 0x28
     li r4, 0x1
@@ -549,7 +549,7 @@ asm void fn_805B53D0(void)
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     lwz r3, lbl_8087EEE0
     addi r4, r1, 0x28
     li r5, 0x1
@@ -562,7 +562,7 @@ asm void fn_805B53D0(void)
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_808883CC
     addi r3, r1, 0x8
     li r4, 0x1
@@ -572,7 +572,7 @@ asm void fn_805B53D0(void)
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     lwz r3, lbl_8087EEE0
     addi r4, r1, 0x8
     li r5, 0x2

@@ -9,7 +9,7 @@ extern void vec3_set(void);
 extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
 extern void vec3_add(void);
@@ -20,25 +20,25 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_setActive(void);
-extern void fn_800EB7A0(void);
-extern void fn_800EC204(void);
+extern void sound_playSpatialEffect(void);
+extern void cam_findTargetIndex(void);
 extern void fn_800F530C(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void viewport_updateCulling(void);
 extern void fn_8010A308(void);
 extern void fn_8010F668(void);
 extern void equip_getGlobalManager(void);
-extern void fn_8012D8B8(void);
-extern void fn_8013A194(void);
+extern void enemy_updateAnimTimer(void);
+extern void npc_getGlobalManager(void);
 extern void fn_8013C480(void);
-extern void fn_8013C504(void);
-extern void fn_8014052C(void);
+extern void npc_getDialogController(void);
+extern void quest_initMarkerCoords(void);
 extern void quest_updateFlow(void);
 extern void quest_ctorRewardItem(void);
 extern void fn_80149624(void);
 extern void equip_applyToCharacter(void);
 extern void actor_setState(void);
-extern void fn_80176ACC(void);
+extern void battle_activateExpReward(void);
 extern void fn_801A03E0(void);
 extern void fn_801A03EC(void);
 extern void fn_801A0408(void);
@@ -55,7 +55,7 @@ extern void fn_8030B92C(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_803C17FC(void);
-extern void fn_805A3C58(void);
+extern void rand_Mersenne_constructor(void);
 extern void fn_805A3D6C(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
@@ -147,7 +147,7 @@ asm void fn_8030C1A4(void)
     mr r3, r29
     rlwinm r0, r0, 0, 17, 15
     stw r0, 0x12a4(r4)
-    bl fn_80176ACC
+    bl battle_activateExpReward
     mr r3, r29
     li r4, 0x0
     bl atn_Task_setActive
@@ -161,7 +161,7 @@ lbl_fn_8030C1A4_00000084:
     lfs f0, lbl_80884C1C
     addi r3, r29, 0x7d4
     stfs f0, 0x570(r29)
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     li r0, 0x0
     stw r0, 0x58c(r29)
     mr r3, r29
@@ -345,7 +345,7 @@ asm void fn_8030C490(void)
     bl _savegpr_27
     mr r30, r3
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r31, r3
     mr r3, r30
     li r4, 0x3
@@ -363,22 +363,22 @@ asm void fn_8030C490(void)
     li r28, 0x0
 lbl_fn_8030C490_0000037C:
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r27, r3
     mr r4, r30
     addi r3, r1, 0x14
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     lfs f1, lbl_80884BCC
     addi r3, r1, 0x20
     addi r4, r1, 0x14
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0xc8
     addi r4, r30, 0x528
     addi r5, r1, 0x20
     bl vec3_add
     lwz r4, 0x1538(r31)
     mr r3, r27
-    bl fn_800EC204
+    bl cam_findTargetIndex
     mr r4, r3
     addi r3, r1, 0xbc
     addi r4, r4, 0x4
@@ -417,7 +417,7 @@ lbl_fn_8030C490_00000420:
 lbl_fn_8030C490_00000448:
     lwz r4, 0x1534(r30)
     mr r3, r31
-    bl fn_800EC204
+    bl cam_findTargetIndex
     mr r4, r3
     addi r3, r1, 0xb0
     addi r4, r4, 0x4
@@ -495,8 +495,8 @@ lbl_fn_8030C490_0000053C:
     bl vec3_set
     addi r3, r1, 0x8c
     addi r4, r1, 0x198
-    bl fn_80011410
-    bl fn_8013A194
+    bl mtx_multVec
+    bl npc_getGlobalManager
     lfs f1, lbl_80884BAC
     mr r4, r30
     lfs f2, lbl_80884BA8
@@ -528,7 +528,7 @@ lbl_fn_8030C490_000005E0:
     bne lbl_fn_8030C490_0000080C
     lwz r4, 0x1530(r30)
     mr r3, r31
-    bl fn_800EC204
+    bl cam_findTargetIndex
     mr r4, r3
     addi r3, r1, 0x80
     addi r4, r4, 0x4
@@ -612,10 +612,10 @@ lbl_fn_8030C490_0000069C:
     bl fn_80149624
     addi r3, r1, 0x5c
     addi r4, r1, 0x138
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x50
     addi r4, r1, 0x108
-    bl fn_80011410
+    bl mtx_multVec
     cmpwi r27, 0x4
     bge lbl_fn_8030C490_00000760
     lwz r4, 0x1504(r30)
@@ -653,7 +653,7 @@ lbl_fn_8030C490_0000077C:
     bl fn_80149624
     addi r3, r1, 0x44
     addi r4, r1, 0x168
-    bl fn_80011410
+    bl mtx_multVec
     lwz r4, 0x1500(r30)
     mr r3, r30
     addi r5, r1, 0x44
@@ -670,7 +670,7 @@ lbl_fn_8030C490_000007E8:
     stw r0, 0x14b8(r30)
 lbl_fn_8030C490_0000080C:
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     lwz r4, 0x1528(r30)
     bl fn_803C17FC
     mr r4, r3
@@ -1016,7 +1016,7 @@ lbl_fn_8030CBC0_00000CC8:
     stw r4, 0x14ec(r31)
     stb r4, 0x15f0(r31)
     stw r0, 0x14e8(r31)
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lwz r3, lbl_8087F430
     li r5, 0x0
     lwz r4, 0x1514(r31)
@@ -1327,7 +1327,7 @@ lbl_fn_8030D0D8_0000116C:
     stfs f2, 0x10(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x15ec(r30)
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     lwz r0, 0x74(r1)
     lwz r31, 0x6c(r1)
     lwz r30, 0x68(r1)
@@ -1824,7 +1824,7 @@ asm void fn_8030DA20(void)
     stw r29, 0x214(r1)
     stw r28, 0x210(r1)
     mr r28, r5
-    bl fn_805A3C58
+    bl rand_Mersenne_constructor
     addi r6, r31, 0x14fc
     addi r3, r31, 0x152c
     lfs f1, lbl_80884C40

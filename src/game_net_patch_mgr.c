@@ -12,7 +12,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_getAllocSize(void);
 extern void str_calcHash(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void fn_8053770C(void);
 extern void fn_8053C6A8(void);
 extern void printf(void);
@@ -713,7 +713,7 @@ lbl_fn_8053A514_000008D8:
     addi r3, r3, lbl_80793BC8@l
     stw r3, 0x20(r1)
     mr r3, r30
-    bl fn_800DCA6C
+    bl sky_renderStub
     cmpwi cr6, r30, 0x0
 lbl_fn_8053A514_000008F4:
     mr r4, r25
@@ -1562,7 +1562,7 @@ lbl_fn_8053B034_00001424:
     addi r3, r3, lbl_80793BC8@l
     stw r3, 0x20(r1)
     mr r3, r30
-    bl fn_800DCA6C
+    bl sky_renderStub
     cmpwi cr6, r30, 0x0
 lbl_fn_8053B034_00001440:
     mr r4, r25

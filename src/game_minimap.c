@@ -6,7 +6,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void fn_8004FF58(void);
 extern void fn_80063764(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void boss_recordDamage(void);
 extern void fn_8006FEBC(void);
 extern void fn_80080048(void);
@@ -59,7 +59,7 @@ void atn_AABB_getMin(void);
 void atn_Matrix_copy_2(void);
 void atn_Matrix_copy(void);
 void atn_Matrix_concat(void);
-void fn_8008CD60(void);
+void minimap_renderOverlay(void);
 void fn_8008D6C0(void);
 void fn_8008D784(void);
 void fn_8008D78C(void);
@@ -460,7 +460,7 @@ asm void atn_Matrix_concat(void)
     b PSMTXConcat
 }
 
-asm void fn_8008CD60(void)
+asm void minimap_renderOverlay(void)
 {
     nofralloc
     stwu r1, -0x290(r1)
@@ -502,17 +502,17 @@ asm void fn_8008CD60(void)
     addi r3, r3, 0x164
     bl fn_804761B0
     cmpwi r3, 0x0
-    beq lbl_fn_8008CD60_000005F0
+    beq lbl_minimap_renderOverlay_000005F0
     lwz r3, lbl_8087EFB4
     mr r4, r31
     lfs f1, 0x98(r31)
     li r5, 0x0
     bl model_updateBoneTransforms
-    b lbl_fn_8008CD60_00000E08
-lbl_fn_8008CD60_000005F0:
+    b lbl_minimap_renderOverlay_00000E08
+lbl_minimap_renderOverlay_000005F0:
     lwz r0, 0x16c(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_8008CD60_00000E08
+    beq lbl_minimap_renderOverlay_00000E08
     lwz r3, lbl_8087EFB4
     mr r4, r31
     lfs f1, lbl_80880BF8
@@ -525,7 +525,7 @@ lbl_fn_8008CD60_000005F0:
     subf r0, r0, r4
     or r0, r3, r0
     srwi. r0, r0, 31
-    beq lbl_fn_8008CD60_00000888
+    beq lbl_minimap_renderOverlay_00000888
     psq_l f1, 0x8(r31), 0, 0
     addi r4, r1, 0xf8
     psq_l f2, 0x10(r31), 0, 0
@@ -542,10 +542,10 @@ lbl_fn_8008CD60_000005F0:
     psq_st f5, 0x20(r4), 0, 0
     lwz r7, 0xb0(r31)
     cmpwi r7, 0x0
-    blt lbl_fn_8008CD60_0000082C
+    blt lbl_minimap_renderOverlay_0000082C
     lwz r0, 0xb4(r31)
     cmpwi r0, 0x0
-    blt lbl_fn_8008CD60_000007F0
+    blt lbl_minimap_renderOverlay_000007F0
     mulli r0, r0, 0x30
     lwz r6, 0x3c(r31)
     lfs f20, lbl_80880C08
@@ -637,8 +637,8 @@ lbl_fn_8008CD60_000005F0:
     psq_st f4, 0x18(r4), 0, 0
     psq_st f5, 0x20(r4), 0, 0
     psq_st f6, 0x28(r4), 0, 0
-    b lbl_fn_8008CD60_0000082C
-lbl_fn_8008CD60_000007F0:
+    b lbl_minimap_renderOverlay_0000082C
+lbl_minimap_renderOverlay_000007F0:
     mulli r0, r7, 0x30
     lwz r3, 0x3c(r31)
     add r3, r3, r0
@@ -654,7 +654,7 @@ lbl_fn_8008CD60_000007F0:
     psq_st f3, 0x10(r4), 0, 0
     psq_st f4, 0x18(r4), 0, 0
     psq_st f5, 0x20(r4), 0, 0
-lbl_fn_8008CD60_0000082C:
+lbl_minimap_renderOverlay_0000082C:
     lfs f7, 0x54(r31)
     addi r29, r1, 0x14
     lfs f0, 0xac(r31)
@@ -678,135 +678,135 @@ lbl_fn_8008CD60_0000082C:
     stfs f0, 0x54(r1)
     bl fn_800C122C
     stw r3, 0x1dc(r31)
-lbl_fn_8008CD60_00000888:
+lbl_minimap_renderOverlay_00000888:
     lwz r3, 0x4(r31)
     rlwinm r4, r3, 0, 9, 9
     subis r0, r4, 0x40
     cmplwi r0, 0x0
-    bne lbl_fn_8008CD60_000008B4
+    bne lbl_minimap_renderOverlay_000008B4
     lwz r3, lbl_8087EFB4
     mr r4, r31
     lfs f1, 0x98(r31)
     li r5, 0x10
     bl model_updateBoneTransforms
-    b lbl_fn_8008CD60_00000E08
-lbl_fn_8008CD60_000008B4:
+    b lbl_minimap_renderOverlay_00000E08
+lbl_minimap_renderOverlay_000008B4:
     rlwinm r0, r3, 0, 30, 30
     li r29, 0x1
     cmplwi r0, 0x2
     li r30, 0x1
-    beq lbl_fn_8008CD60_000008DC
+    beq lbl_minimap_renderOverlay_000008DC
     addi r3, r31, 0x164
     bl fn_80476194
     cmpwi r3, 0x0
-    bne lbl_fn_8008CD60_000008DC
+    bne lbl_minimap_renderOverlay_000008DC
     li r30, 0x0
-lbl_fn_8008CD60_000008DC:
+lbl_minimap_renderOverlay_000008DC:
     cmpwi r30, 0x0
-    bne lbl_fn_8008CD60_000008F8
+    bne lbl_minimap_renderOverlay_000008F8
     addi r3, r31, 0x164
     bl fn_804761B0
     cmpwi r3, 0x0
-    bne lbl_fn_8008CD60_000008F8
+    bne lbl_minimap_renderOverlay_000008F8
     li r29, 0x0
-lbl_fn_8008CD60_000008F8:
+lbl_minimap_renderOverlay_000008F8:
     cmpwi r29, 0x0
-    beq lbl_fn_8008CD60_00000918
+    beq lbl_minimap_renderOverlay_00000918
     lwz r3, lbl_8087EFB4
     mr r4, r31
     lfs f1, 0x98(r31)
     li r5, 0x0
     bl model_updateBoneTransforms
-    b lbl_fn_8008CD60_00000AA4
-lbl_fn_8008CD60_00000918:
+    b lbl_minimap_renderOverlay_00000AA4
+lbl_minimap_renderOverlay_00000918:
     lwz r3, lbl_8087EFA8
     lwz r0, 0x14(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_8008CD60_00000AA4
+    bne lbl_minimap_renderOverlay_00000AA4
     lwz r0, 0x4(r31)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    bne lbl_fn_8008CD60_0000094C
+    bne lbl_minimap_renderOverlay_0000094C
     lwz r3, lbl_8087EFB4
     mr r4, r31
     lfs f1, 0x98(r31)
     li r5, 0x3
     bl model_updateBoneTransforms
-lbl_fn_8008CD60_0000094C:
+lbl_minimap_renderOverlay_0000094C:
     lwz r6, 0x4(r31)
     li r3, 0x0
     li r0, 0x1
     rlwinm r4, r6, 0, 21, 21
     cmplwi r4, 0x400
-    beq lbl_fn_8008CD60_00000974
+    beq lbl_minimap_renderOverlay_00000974
     rlwinm r4, r6, 0, 20, 20
     cmplwi r4, 0x800
-    beq lbl_fn_8008CD60_00000974
+    beq lbl_minimap_renderOverlay_00000974
     li r0, 0x0
-lbl_fn_8008CD60_00000974:
+lbl_minimap_renderOverlay_00000974:
     cmpwi r0, 0x0
-    beq lbl_fn_8008CD60_000009BC
+    beq lbl_minimap_renderOverlay_000009BC
     lwz r5, 0x1dc(r31)
     li r4, 0x1
     cmpwi r5, 0x0
-    bne lbl_fn_8008CD60_00000994
+    bne lbl_minimap_renderOverlay_00000994
     lwz r5, lbl_8087EFB4
     lwz r5, 0x2fc(r5)
-lbl_fn_8008CD60_00000994:
+lbl_minimap_renderOverlay_00000994:
     lwz r0, 0x120(r5)
     cmpwi r0, 0x0
-    bne lbl_fn_8008CD60_000009B0
+    bne lbl_minimap_renderOverlay_000009B0
     rlwinm r0, r6, 0, 19, 19
     cmplwi r0, 0x1000
-    beq lbl_fn_8008CD60_000009B0
+    beq lbl_minimap_renderOverlay_000009B0
     li r4, 0x0
-lbl_fn_8008CD60_000009B0:
+lbl_minimap_renderOverlay_000009B0:
     cmpwi r4, 0x0
-    beq lbl_fn_8008CD60_000009BC
+    beq lbl_minimap_renderOverlay_000009BC
     li r3, 0x1
-lbl_fn_8008CD60_000009BC:
+lbl_minimap_renderOverlay_000009BC:
     cmpwi r3, 0x0
-    beq lbl_fn_8008CD60_000009D8
+    beq lbl_minimap_renderOverlay_000009D8
     lwz r3, lbl_8087EFB4
     mr r4, r31
     lfs f1, 0x98(r31)
     li r5, 0x4
     bl model_updateBoneTransforms
-lbl_fn_8008CD60_000009D8:
+lbl_minimap_renderOverlay_000009D8:
     lwz r0, 0x4(r31)
     rlwinm r3, r0, 0, 7, 7
     subis r0, r3, 0x100
     cmplwi r0, 0x0
-    beq lbl_fn_8008CD60_00000A10
+    beq lbl_minimap_renderOverlay_00000A10
     lwz r0, 0x4(r31)
     rlwinm r0, r0, 0, 27, 27
     cmplwi r0, 0x10
-    bne lbl_fn_8008CD60_00000A10
+    bne lbl_minimap_renderOverlay_00000A10
     lwz r3, lbl_8087EFB4
     mr r4, r31
     lfs f1, 0x98(r31)
     li r5, 0x8
     bl model_updateBoneTransforms
-lbl_fn_8008CD60_00000A10:
+lbl_minimap_renderOverlay_00000A10:
     lwz r0, 0x4(r31)
     rlwinm r3, r0, 0, 7, 7
     subis r0, r3, 0x100
     cmplwi r0, 0x0
-    beq lbl_fn_8008CD60_00000A48
+    beq lbl_minimap_renderOverlay_00000A48
     lwz r0, 0x4(r31)
     rlwinm r0, r0, 0, 26, 26
     cmplwi r0, 0x20
-    bne lbl_fn_8008CD60_00000A48
+    bne lbl_minimap_renderOverlay_00000A48
     lwz r3, lbl_8087EFB4
     mr r4, r31
     lfs f1, 0x98(r31)
     li r5, 0x6
     bl model_updateBoneTransforms
-lbl_fn_8008CD60_00000A48:
+lbl_minimap_renderOverlay_00000A48:
     lwz r0, 0x4(r31)
     rlwinm r0, r0, 0, 17, 17
     cmplwi r0, 0x4000
-    bne lbl_fn_8008CD60_00000A80
+    bne lbl_minimap_renderOverlay_00000A80
     lwz r3, lbl_8087EFB4
     mr r4, r31
     lfs f1, 0x98(r31)
@@ -817,34 +817,34 @@ lbl_fn_8008CD60_00000A48:
     lfs f1, 0x98(r31)
     li r5, 0x5
     bl model_updateBoneTransforms
-lbl_fn_8008CD60_00000A80:
+lbl_minimap_renderOverlay_00000A80:
     lwz r0, 0x4(r31)
     rlwinm r0, r0, 0, 18, 18
     cmplwi r0, 0x2000
-    bne lbl_fn_8008CD60_00000AA4
+    bne lbl_minimap_renderOverlay_00000AA4
     lwz r3, lbl_8087EFB4
     mr r4, r31
     lfs f1, 0x98(r31)
     li r5, 0x9
     bl model_updateBoneTransforms
-lbl_fn_8008CD60_00000AA4:
+lbl_minimap_renderOverlay_00000AA4:
     lwz r3, lbl_8087EFA8
     lwz r0, 0xc(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8008CD60_00000B9C
+    beq lbl_minimap_renderOverlay_00000B9C
     li r27, 0x0
     li r30, 0x0
     li r28, 0x0
-    b lbl_fn_8008CD60_00000B8C
-lbl_fn_8008CD60_00000AC4:
+    b lbl_minimap_renderOverlay_00000B8C
+lbl_minimap_renderOverlay_00000AC4:
     cmpwi r27, 0x0
-    bge lbl_fn_8008CD60_00000AD4
+    bge lbl_minimap_renderOverlay_00000AD4
     li r29, 0x0
-    b lbl_fn_8008CD60_00000ADC
-lbl_fn_8008CD60_00000AD4:
+    b lbl_minimap_renderOverlay_00000ADC
+lbl_minimap_renderOverlay_00000AD4:
     lwz r0, 0x3c(r31)
     add r29, r0, r30
-lbl_fn_8008CD60_00000ADC:
+lbl_minimap_renderOverlay_00000ADC:
     lwz r3, 0x48(r3)
     addi r4, r1, 0x38
     lfs f0, 0x2c(r29)
@@ -858,18 +858,18 @@ lbl_fn_8008CD60_00000ADC:
     lfs f1, lbl_80880C08
     stfs f0, 0x40(r1)
     lfs f2, 0x98(r31)
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     lwz r0, 0x1c(r26)
     cmpwi r0, 0x0
-    blt lbl_fn_8008CD60_00000B80
-    bge lbl_fn_8008CD60_00000B2C
+    blt lbl_minimap_renderOverlay_00000B80
+    bge lbl_minimap_renderOverlay_00000B2C
     li r7, 0x0
-    b lbl_fn_8008CD60_00000B38
-lbl_fn_8008CD60_00000B2C:
+    b lbl_minimap_renderOverlay_00000B38
+lbl_minimap_renderOverlay_00000B2C:
     mulli r0, r0, 0x30
     lwz r3, 0x3c(r31)
     add r7, r3, r0
-lbl_fn_8008CD60_00000B38:
+lbl_minimap_renderOverlay_00000B38:
     lfs f0, 0x2c(r29)
     addi r4, r1, 0x2c
     lfs f7, 0x1c(r29)
@@ -888,20 +888,20 @@ lbl_fn_8008CD60_00000B38:
     stfs f0, 0x34(r1)
     lfs f1, 0x98(r31)
     bl fn_80063764
-lbl_fn_8008CD60_00000B80:
+lbl_minimap_renderOverlay_00000B80:
     addi r28, r28, 0x4
     addi r27, r27, 0x1
     addi r30, r30, 0x30
-lbl_fn_8008CD60_00000B8C:
+lbl_minimap_renderOverlay_00000B8C:
     lwz r3, 0x16c(r31)
     lwz r0, 0x44(r3)
     cmpw r27, r0
-    blt lbl_fn_8008CD60_00000AC4
-lbl_fn_8008CD60_00000B9C:
+    blt lbl_minimap_renderOverlay_00000AC4
+lbl_minimap_renderOverlay_00000B9C:
     lwz r3, lbl_8087EFA8
     lwz r0, 0x10(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8008CD60_00000E08
+    beq lbl_minimap_renderOverlay_00000E08
     psq_l f1, 0x8(r31), 0, 0
     addi r4, r1, 0x68
     psq_l f2, 0x10(r31), 0, 0
@@ -918,10 +918,10 @@ lbl_fn_8008CD60_00000B9C:
     psq_st f5, 0x20(r4), 0, 0
     lwz r7, 0xb0(r31)
     cmpwi r7, 0x0
-    blt lbl_fn_8008CD60_00000DA8
+    blt lbl_minimap_renderOverlay_00000DA8
     lwz r0, 0xb4(r31)
     cmpwi r0, 0x0
-    blt lbl_fn_8008CD60_00000D6C
+    blt lbl_minimap_renderOverlay_00000D6C
     mulli r0, r0, 0x30
     lwz r6, 0x3c(r31)
     lfs f21, lbl_80880C08
@@ -1013,8 +1013,8 @@ lbl_fn_8008CD60_00000B9C:
     psq_st f4, 0x18(r4), 0, 0
     psq_st f5, 0x20(r4), 0, 0
     psq_st f6, 0x28(r4), 0, 0
-    b lbl_fn_8008CD60_00000DA8
-lbl_fn_8008CD60_00000D6C:
+    b lbl_minimap_renderOverlay_00000DA8
+lbl_minimap_renderOverlay_00000D6C:
     mulli r0, r7, 0x30
     lwz r3, 0x3c(r31)
     add r3, r3, r0
@@ -1030,7 +1030,7 @@ lbl_fn_8008CD60_00000D6C:
     psq_st f3, 0x10(r4), 0, 0
     psq_st f4, 0x18(r4), 0, 0
     psq_st f5, 0x20(r4), 0, 0
-lbl_fn_8008CD60_00000DA8:
+lbl_minimap_renderOverlay_00000DA8:
     lfs f7, 0x54(r31)
     addi r30, r1, 0x8
     lfs f0, 0xac(r31)
@@ -1054,8 +1054,8 @@ lbl_fn_8008CD60_00000DA8:
     fmuls f1, f0, f17
     stfs f1, 0x64(r1)
     lfs f2, 0x98(r31)
-    bl fn_80063D3C
-lbl_fn_8008CD60_00000E08:
+    bl magic_castSpellCircle
+lbl_minimap_renderOverlay_00000E08:
     addi r11, r1, 0x1a0
     psq_l f31, 0x288(r1), 0, 0
     lfd f31, 0x280(r1)

@@ -20,7 +20,7 @@ extern void talk_copySpeakerName(void);
 extern void skill_calculateDamage(void);
 extern void fn_800629F0(void);
 extern void fn_80063764(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void fn_8006AC08(void);
 extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
@@ -803,7 +803,7 @@ asm void fn_80362598(void)
     lis r5, 0xff81
     subi r5, r5, 0x80
 lbl_fn_80362598_00000944:
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x8
     addi r5, r31, 0x64
@@ -1458,7 +1458,7 @@ asm void fn_80362E8C(void)
     lis r5, 0xff81
     subi r5, r5, 0x7f01
 lbl_fn_80362E8C_0000123C:
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     lwz r5, 0x50(r31)
     addi r3, r1, 0x8
     lwz r4, lbl_8087EFB4

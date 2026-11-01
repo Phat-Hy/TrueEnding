@@ -11,7 +11,7 @@ extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void scene_traverseNode(void);
 extern void fn_80058078(void);
-extern void fn_800580BC(void);
+extern void mission_isObjectiveActive(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
@@ -24,7 +24,7 @@ extern void map_processTrigger(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_8009EE30(void);
+extern void hud_drawTargetMarker(void);
 extern void task_lookupTagIndex(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_destructor(void);
@@ -33,11 +33,11 @@ extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
-extern void fn_803EC7A0(void);
+extern void barrier_formatDialogString(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
-extern void fn_803ED5D0(void);
-extern void fn_803ED774(void);
+extern void barrier_bindFieldAnimation(void);
+extern void dungeon_updateBarrierField(void);
 extern void fn_80425498(void);
 extern void fn_80425878(void);
 extern void boss_getOffset54(void);
@@ -118,7 +118,7 @@ asm void fn_804238E8(void)
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_804238E8_0000005C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -148,7 +148,7 @@ lbl_fn_80423958_000000A4:
     b lbl_fn_80423958_000000D8
 lbl_fn_80423958_000000AC:
     addi r3, r31, 0x894
-    bl fn_800580BC
+    bl mission_isObjectiveActive
     cmpwi r3, 0x0
     beq lbl_fn_80423958_000000C4
     li r3, 0x1
@@ -234,7 +234,7 @@ lbl_fn_804239D4_0000019C:
     mr r3, r29
     addi r4, r29, 0xf4
     addi r5, r1, 0x108
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     b lbl_fn_804239D4_000002CC
 lbl_fn_804239D4_000001F0:
     mr r3, r30
@@ -251,7 +251,7 @@ lbl_fn_804239D4_000001F0:
     mr r3, r29
     addi r4, r29, 0x4c4
     addi r5, r1, 0x108
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     b lbl_fn_804239D4_000002CC
 lbl_fn_804239D4_00000230:
     mr r3, r30
@@ -463,7 +463,7 @@ lbl_fn_80423BE0_00000508:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
     b lbl_fn_80423BE0_000005A4
 lbl_fn_80423BE0_00000548:
     lfs f1, lbl_8088665C
@@ -967,7 +967,7 @@ lbl_fn_80424254_00000C04:
 lbl_fn_80424254_00000C0C:
     lwz r3, 0x4(r26)
     addi r4, r26, 0x20
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
     b lbl_fn_80424254_00000CA0
 lbl_fn_80424254_00000C1C:
     lwz r3, 0x4(r26)
@@ -2002,7 +2002,7 @@ lbl_fn_80424FB4_00001ACC:
 lbl_fn_80424FB4_00001AD4:
     lwz r3, 0x4(r17)
     addi r4, r1, 0x200
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
     b lbl_fn_80424FB4_00001B5C
 lbl_fn_80424FB4_00001AE4:
     stfs f0, 0x50(r1)

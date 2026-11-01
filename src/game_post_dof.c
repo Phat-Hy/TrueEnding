@@ -7,8 +7,8 @@ extern void _restgpr_27(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8003EA3C(void);
-extern void fn_80056DB8(void);
+extern void ui_drawColoredQuad(void);
+extern void path_Object_constructor(void);
 extern void atn_ColliCapsule_destructor(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
@@ -56,7 +56,7 @@ extern void fn_802C6DF4(void);
 extern void entity_Instance_constructor(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_8037D4C0(void);
+extern void dvd_showDiskErrorDialog(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_804DA490(void);
 extern void fn_805A3D00(void);
@@ -852,7 +852,7 @@ lbl_fn_802C07F8_00000984:
     li r7, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r3, lbl_8087F448
     cmpwi r3, 0x0
     beq lbl_fn_802C07F8_00000A2C
@@ -861,7 +861,7 @@ lbl_fn_802C07F8_00000984:
     li r5, 0xf
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_802C07F8_00000A2C:
     lwz r0, 0x0(r31)
     cmpwi r0, 0xf
@@ -1035,14 +1035,14 @@ asm void fn_802C0C38(void)
     stw r30, 0x15f4(r28)
     stw r30, 0x15f8(r28)
     stw r30, 0x15fc(r28)
-    bl fn_80056DB8
+    bl path_Object_constructor
     lis r3, lbl_80777668@ha
     addi r29, r28, 0x164c
     addi r3, r3, lbl_80777668@l
     stw r3, 0x0(r31)
     mr r3, r29
     li r4, 0x1
-    bl fn_80056DB8
+    bl path_Object_constructor
     lis r4, lbl_80777630@ha
     addi r3, r28, 0x16a4
     addi r4, r4, lbl_80777630@l

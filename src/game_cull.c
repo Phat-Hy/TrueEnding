@@ -23,7 +23,7 @@ extern void mem_getAllocSize(void);
 extern void atn_Task_constructor(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void atn_LH_Texture_update(void);
 extern void fn_800D5B58(void);
 extern void fn_800D71A4(void);
@@ -103,7 +103,7 @@ void fn_800D8894(void);
 void fn_800D8B80(void);
 void fn_800D8BB4(void);
 void fn_800D8BD8(void);
-void fn_800D8C0C(void);
+void fn_800D8C0C(void *obj, void *val);
 void fn_800D8C14(void);
 void fn_800D8E84(void);
 void fn_800D8F5C(void);
@@ -118,7 +118,7 @@ void fn_800D9560(void);
 void fn_800D9880(void);
 void fn_800D9890(void);
 void fn_800D98B0(void);
-void fn_800D98C0(void);
+void *fn_800D98C0(void *obj);
 void fn_800D98C8(void);
 void fn_800D98DC(void);
 void fn_800D98F4(void);
@@ -595,11 +595,9 @@ asm void fn_800D8BD8(void)
     blr
 }
 
-asm void fn_800D8C0C(void)
+void fn_800D8C0C(void *obj, void *val)
 {
-    nofralloc
-    stw r4, 0x10(r3)
-    blr
+    *(void **)((char *)obj + 0x10) = val;
 }
 
 asm void fn_800D8C14(void)
@@ -694,7 +692,7 @@ lbl_fn_800D8C14_00000724:
     bl fn_800D8448
     mr r4, r28
     addi r3, r30, 0x198
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     li r27, 0x0
     li r29, 0x0
     li r28, 0x0
@@ -745,7 +743,7 @@ lbl_fn_800D8C14_00000804:
     add r3, r30, r29
     lwz r4, 0x0(r31)
     addi r3, r3, 0x1c8
-    bl fn_800D5908
+    bl depth_resetRenderTarget
 lbl_fn_800D8C14_00000814:
     addi r31, r31, 0x40
     addi r29, r29, 0x30
@@ -1534,11 +1532,9 @@ asm void fn_800D98B0(void)
     blr
 }
 
-asm void fn_800D98C0(void)
+void *fn_800D98C0(void *obj)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(void **)((char *)obj + 4);
 }
 
 asm void fn_800D98C8(void)

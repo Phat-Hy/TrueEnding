@@ -30,7 +30,7 @@ extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void save_createWorkerTask(void);
 extern void save_computeCrc32(void);
-extern void fn_801F6E78(void);
+extern void save_calculateBlockCrc(void);
 extern void fn_801F7590(void);
 extern void fn_801F7DF0(void);
 extern void save_findEntryByName(void);
@@ -41,15 +41,15 @@ extern void fn_80206B14(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
 extern void fn_80206D18(void);
-extern void fn_8020924C(void);
-extern void fn_8020ED84(void);
-extern void fn_8020EF04(void);
+extern void mem_findBlockById(void);
+extern void time_wrapMilliseconds(void);
+extern void rand_scaleRangeInt(void);
 extern void fn_8020EF4C(void);
 extern void fn_8020EFEC(void);
 extern void event_findEntryById(void);
 extern void fn_80217D9C(void);
 extern void fn_80219544(void);
-extern void fn_804444E8(void);
+extern void gmk_findSlotByIndex(void);
 extern void fn_80444564(void);
 extern void fn_80444BE8(void);
 extern void fn_80444C48(void);
@@ -643,7 +643,7 @@ lbl_fn_80586220_000006A8:
     stfs f3, 0x64(r1)
     stfs f0, 0x68(r1)
     lwz r3, 0xac(r18)
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     lwz r3, 0x5b0c(r26)
     lwz r0, 0xf8(r31)
     add r3, r16, r3
@@ -919,7 +919,7 @@ asm void fn_805866F8(void)
     stfs f0, 0x7c(r1)
     stfs f0, 0x80(r1)
     bl fn_80219544
-    bl fn_8020924C
+    bl mem_findBlockById
     addis r5, r20, 0x2
     slwi r0, r22, 2
     add r4, r5, r0
@@ -1138,7 +1138,7 @@ lbl_fn_805866F8_00000DE8:
     b lbl_fn_805866F8_00001044
 lbl_fn_805866F8_00000E40:
     mr r3, r21
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_805866F8_00001024
     lis r3, lbl_807616DC@ha
@@ -1162,7 +1162,7 @@ lbl_fn_805866F8_00000E40:
     mr r3, r23
     lwzx r28, r28, r0
     mr r4, r28
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     mr r29, r3
     bl fn_8020EF4C
     cmpwi r3, 0x0
@@ -1171,7 +1171,7 @@ lbl_fn_805866F8_00000E40:
     blt lbl_fn_805866F8_00000F44
     mr r4, r28
     li r3, 0x0
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     lis r4, 0x1062
     mr r31, r3
     addi r0, r4, 0x4dd3
@@ -1182,7 +1182,7 @@ lbl_fn_805866F8_00000E40:
     add r0, r0, r4
     mulli r0, r0, 0x3e8
     subf r4, r0, r28
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     cmpwi r31, 0x0
     beq lbl_fn_805866F8_00000F20
     cmpwi r3, 0x0
@@ -1318,7 +1318,7 @@ lbl_fn_805866F8_00001094:
     addi r5, r1, 0x5c
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r24)
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     mr r3, r24
     mr r5, r25
     addi r4, r21, 0x1c8
@@ -2061,7 +2061,7 @@ lbl_fn_80587628_00001B18:
     blt lbl_fn_80587628_00001B18
     lwz r3, lbl_8087F4F0
     lwz r4, 0x28(r1)
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     ble lbl_fn_80587628_00001B64
     stw r24, 0x44(r1)
@@ -2080,7 +2080,7 @@ lbl_fn_80587628_00001B7C:
 lbl_fn_80587628_00001B84:
     lwz r3, lbl_8087F4F0
     lwz r4, 0x4(r18)
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     ble lbl_fn_80587628_00001BA0
     stw r24, 0x48(r1)

@@ -43,7 +43,7 @@ extern u32 lbl_80880020;
 /* Function declarations */
 void fn_8060A120(void);
 void fn_8060A180(void);
-void fn_8060A2E0(void);
+u32 fn_8060A2E0(void);
 void fn_8060A2F0(void);
 void fn_8060A840(void);
 
@@ -166,11 +166,9 @@ asm void fn_8060A180(void)
     blr
 }
 
-asm void fn_8060A2E0(void)
+u32 fn_8060A2E0(void)
 {
-    nofralloc
-    lwz r3, lbl_80880018
-    blr
+    return lbl_80880018;
 }
 
 asm void fn_8060A2F0(void)

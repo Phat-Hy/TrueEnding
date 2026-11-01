@@ -32,7 +32,7 @@ extern void fn_801546F4(void);
 extern void fn_8016DF3C(void);
 extern void battle_applyStatusEffect(void);
 extern void battle_awardExp(void);
-extern void fn_80176ACC(void);
+extern void battle_activateExpReward(void);
 extern void save_validateHeader(void);
 extern void fn_801F4484(void);
 extern void fn_801F465C(void);
@@ -40,7 +40,7 @@ extern void fn_801FEC74(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
-extern void fn_8020924C(void);
+extern void mem_findBlockById(void);
 extern void fn_80219544(void);
 extern void fn_80365390(void);
 extern void fn_80371320(void);
@@ -131,7 +131,7 @@ void fn_80549EEC(void);
 void fn_80549F18(void);
 void fn_8054A004(void);
 void fn_8054A0A0(void);
-void fn_8054A340(void);
+void dlc_findItemInCatalog(void);
 void fn_8054A39C(void);
 void fn_8054A3E0(void);
 void fn_8054A530(void);
@@ -374,7 +374,7 @@ lbl_fn_8054A004_000002C4:
     li r4, 0x0
     bl atn_Task_setActive
     mr r3, r31
-    bl fn_80176ACC
+    bl battle_activateExpReward
     lwz r31, 0x14ac(r31)
 lbl_fn_8054A004_000002F0:
     cmpwi r31, 0x0
@@ -412,7 +412,7 @@ asm void fn_8054A0A0(void)
     cmplwi r0, 0x4
     bne lbl_fn_8054A0A0_0000036C
     mr r3, r30
-    bl fn_80176ACC
+    bl battle_activateExpReward
 lbl_fn_8054A0A0_0000036C:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
@@ -561,7 +561,7 @@ lbl_fn_8054A0A0_00000550:
     stw r0, 0x58(r30)
     bne lbl_fn_8054A0A0_00000574
     mr r3, r30
-    bl fn_80176ACC
+    bl battle_activateExpReward
 lbl_fn_8054A0A0_00000574:
     mr r3, r29
     mr r4, r30
@@ -581,7 +581,7 @@ lbl_fn_8054A0A0_00000598:
     blr
 }
 
-asm void fn_8054A340(void)
+asm void dlc_findItemInCatalog(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -592,20 +592,20 @@ asm void fn_8054A340(void)
     mr r3, r4
     bl fn_80219544
     lwz r4, 0x48(r31)
-    b lbl_fn_8054A340_000005EC
-lbl_fn_8054A340_000005D4:
+    b lbl_dlc_findItemInCatalog_000005EC
+lbl_dlc_findItemInCatalog_000005D4:
     lwz r0, 0x50(r4)
     cmpw r3, r0
-    bne lbl_fn_8054A340_000005E8
+    bne lbl_dlc_findItemInCatalog_000005E8
     mr r3, r4
-    b lbl_fn_8054A340_000005F8
-lbl_fn_8054A340_000005E8:
+    b lbl_dlc_findItemInCatalog_000005F8
+lbl_dlc_findItemInCatalog_000005E8:
     lwz r4, 0x14ac(r4)
-lbl_fn_8054A340_000005EC:
+lbl_dlc_findItemInCatalog_000005EC:
     cmpwi r4, 0x0
-    bne lbl_fn_8054A340_000005D4
+    bne lbl_dlc_findItemInCatalog_000005D4
     li r3, 0x0
-lbl_fn_8054A340_000005F8:
+lbl_dlc_findItemInCatalog_000005F8:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -653,7 +653,7 @@ asm void fn_8054A3E0(void)
     mr r28, r3
     beq lbl_fn_8054A3E0_0000077C
     mr r3, r30
-    bl fn_8020924C
+    bl mem_findBlockById
     cmpwi r3, 0x0
     beq lbl_fn_8054A3E0_000006D4
     lwz r0, 0x24(r3)

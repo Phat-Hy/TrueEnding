@@ -24,7 +24,7 @@ extern void fn_806A5798(void);
 extern void fn_806A5AF8(void);
 extern void fn_806A5BC0(void);
 extern void fn_806D57A0(void);
-extern void fn_806D5850(void);
+extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
@@ -39,7 +39,7 @@ extern void fn_806D7F20(void);
 extern void fn_806D8650(void);
 extern void fn_806D8D20(void);
 extern void fn_806D8E30(void);
-extern void fn_806D8F30(void);
+extern void net_getTimestampMs(void);
 extern void fn_806D8F80(void);
 extern void fn_806DA870(void);
 extern void fn_806F1E10(void);
@@ -244,7 +244,7 @@ asm void fn_806F2A10(void)
     cmpwi r0, 0x0
     subi r30, r3, 0x1
     beq lbl_fn_806F2A10_000001D8
-    bl fn_806D8F30
+    bl net_getTimestampMs
     lis r4, lbl_807C578C@ha
     lwz r5, 0x160(r31)
     lwz r0, lbl_807C578C@l(r4)
@@ -2504,7 +2504,7 @@ lbl_fn_806F47B0_00002008:
     cmpwi r28, 0x0
     bge lbl_fn_806F47B0_00001FD0
     lwz r3, 0x168(r31)
-    bl fn_806D5850
+    bl net_pollActiveSockets
     li r0, 0x0
     stw r0, 0x168(r31)
     li r3, 0x0

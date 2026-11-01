@@ -9,7 +9,7 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void boss_recordDamage(void);
 extern void fn_8006B0C8(void);
-extern void fn_8006B174(void);
+extern void boss_decodePhaseBitfield(void);
 extern void fn_8007C144(void);
 extern void fn_800804D0(void);
 extern void fn_80080584(void);
@@ -74,8 +74,8 @@ extern u32 lbl_80880BF8;
 void fn_8008B130(void);
 void fn_8008B138(void);
 void map_processTrigger(void);
-void fn_8008B964(void);
-void fn_8008B96C(void);
+u32 fn_8008B964(void);
+u32 fn_8008B96C(void);
 void fn_8008B974(void);
 void fn_8008B978(void);
 void map_debugLog(void);
@@ -693,18 +693,14 @@ lbl_map_processTrigger_00000820:
     blr
 }
 
-asm void fn_8008B964(void)
+u32 fn_8008B964(void)
 {
-    nofralloc
-    lwz r3, lbl_8087EFB4
-    blr
+    return lbl_8087EFB4;
 }
 
-asm void fn_8008B96C(void)
+u32 fn_8008B96C(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 void fn_8008B974(void) {
@@ -1542,7 +1538,7 @@ lbl_fn_8008BD10_00001338:
     bl actor_dispatchMessage
     mr r4, r22
     addi r3, r1, 0x10
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0x10(r1)
     srwi. r0, r0, 31
     bne lbl_fn_8008BD10_000013D4
@@ -1735,7 +1731,7 @@ lbl_fn_8008C62C_000015FC:
     bl actor_dispatchMessage
     mr r4, r28
     addi r3, r1, 0x10
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0x10(r1)
     addi r3, r1, 0x28
     addi r4, r31, 0x138

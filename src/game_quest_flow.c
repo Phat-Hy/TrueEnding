@@ -7,7 +7,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void scene_traverseNode(void);
 extern void ui_destroyWidget(void);
-extern void fn_8004B290(void);
+extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void collision_queryGeometry(void);
@@ -21,7 +21,7 @@ extern void fn_8009757C(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void fn_80098698(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
@@ -129,7 +129,7 @@ extern u32 lbl_80881AA8;
 
 /* Function declarations */
 void fn_801446E8(void);
-void fn_801446F0(void);
+void quest_resetObjectiveBounds(void *p);
 void quest_evaluateConditions(void);
 void fn_80144ED4(void);
 void fn_80144F4C(void);
@@ -142,17 +142,15 @@ asm void fn_801446E8(void)
     blr
 }
 
-asm void fn_801446F0(void)
+void quest_resetObjectiveBounds(void *p)
 {
-    nofralloc
-    lfs f0, lbl_8088196C
-    stfs f0, 0x574(r3)
-    stfs f0, 0x578(r3)
-    stfs f0, 0x57c(r3)
-    stfs f0, 0x570(r3)
-    stfs f0, 0x580(r3)
-    stfs f0, 0x584(r3)
-    blr
+    f32 f = lbl_8088196C;
+    *(f32 *)((char *)p + 0x574) = f;
+    *(f32 *)((char *)p + 0x578) = f;
+    *(f32 *)((char *)p + 0x57c) = f;
+    *(f32 *)((char *)p + 0x570) = f;
+    *(f32 *)((char *)p + 0x580) = f;
+    *(f32 *)((char *)p + 0x584) = f;
 }
 
 asm void quest_evaluateConditions(void)
@@ -741,7 +739,7 @@ asm void fn_80144F4C(void)
     stw r29, 0x404(r1)
     mr r29, r3
     addi r3, r1, 0x204
-    bl fn_8004B290
+    bl sound_initChannelParams
     fadds f9, f29, f30
     lfs f28, lbl_8088196C
     lfs f0, lbl_808819A8
@@ -771,7 +769,7 @@ asm void fn_80144F4C(void)
     addi r3, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_8004B290
+    bl sound_initChannelParams
     addi r4, r1, 0x20c
     addi r3, r1, 0x25c
     lfs f2, 0x214(r1)
@@ -2725,7 +2723,7 @@ lbl_quest_updateFlow_00002540:
 lbl_quest_updateFlow_00002578:
     mr r4, r27
     addi r3, r26, 0xb0
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     lwz r0, 0x55c(r26)
     mr r31, r3
     cmpwi r0, 0x6

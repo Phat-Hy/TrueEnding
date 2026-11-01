@@ -20,7 +20,7 @@ extern void mem_getAllocSize(void);
 extern void node_destroy(void);
 extern void fn_800A5B30(void);
 extern void fn_800AFEBC(void);
-extern void fn_800C16B4(void);
+extern void skeleton_getGlobalManager(void);
 extern void fn_800C289C(void);
 extern void morph_reset(void);
 extern void ref_releaseHandle(void);
@@ -169,7 +169,7 @@ void fn_80365424(void);
 void fn_8036545C(void);
 void fn_80365464(void);
 void fn_803654EC(void);
-void fn_8036554C(void);
+void wpad_getActiveDevice(void);
 void fn_8036555C(void);
 void fn_8036562C(void);
 void fn_80365708(void);
@@ -360,7 +360,7 @@ lbl_fn_803654EC_00000210:
     blr
 }
 
-asm void fn_8036554C(void)
+asm void wpad_getActiveDevice(void)
 {
     nofralloc
     lwz r3, lbl_8087F8A0
@@ -1526,7 +1526,7 @@ lbl_world_Manager_destructor_000012A8:
     li r30, 0x0
     stw r30, lbl_8087F460
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     cmpwi r30, 0x0
     stw r30, 0x74(r3)
     bne lbl_world_Manager_destructor_000012D0
@@ -1538,7 +1538,7 @@ lbl_world_Manager_destructor_000012D0:
 lbl_world_Manager_destructor_000012D4:
     stw r30, 0x70(r3)
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     li r4, 0x0
     bl fn_800C289C
     lwz r3, lbl_8087EFB4

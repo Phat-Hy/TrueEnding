@@ -31,7 +31,7 @@ extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void atn_Matrix_copy_2(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80092F1C(void);
+extern void target_pushPointToHistory(void);
 extern void lockon_updateTarget(void);
 extern void skin_applyWeights(void);
 extern void morph_reset(void);
@@ -43,9 +43,9 @@ extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void str_skipWhitespace(void);
 extern void fn_800F52F8(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void fn_800F7F90(void);
-extern void fn_800F7FD8(void);
+extern void vec3_normalize(void);
 extern void fn_800F80A8(void);
 extern void fn_800F80B8(void);
 extern void fn_800F84C8(void);
@@ -79,12 +79,12 @@ extern void fn_80315644(void);
 extern void fn_80316E38(void);
 extern void fn_80317034(void);
 extern void kpad_getClampData(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void fn_803D6E24(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
 extern void task_updateWorker(void);
-extern void fn_803ED774(void);
+extern void dungeon_updateBarrierField(void);
 extern void fn_803EFDA4(void);
 extern void fn_803EFDAC(void);
 extern void fn_803FB870(void);
@@ -148,7 +148,7 @@ void fn_803FA5C8(void);
 void fn_803FADF4(void);
 void fn_803FAE08(void);
 void fn_803FAE38(void);
-void fn_803FAE84(void);
+void fn_803FAE84(void *obj, u8 val);
 void fn_803FAE8C(void);
 void fn_803FAEB4(void);
 void fn_803FAEFC(void);
@@ -549,7 +549,7 @@ lbl_fn_803FA214_000004F4:
     addi r3, r29, 0xf4
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_803FA214_00000590
 lbl_fn_803FA214_0000053C:
     mr r3, r30
@@ -1071,14 +1071,14 @@ lbl_fn_803FA5C8_00000C08:
     lfs f1, lbl_80886050
     addi r3, r1, 0x48
     addi r4, r1, 0xb4
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x54
     addi r4, r1, 0xc0
     bl fn_8013C3B4
     lfs f1, lbl_8088604C
     addi r3, r1, 0x60
     addi r4, r1, 0x54
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x6c
     addi r4, r1, 0x60
     addi r5, r1, 0x48
@@ -1135,7 +1135,7 @@ lbl_fn_803FA5C8_00000D88:
     stw r0, 0x4cc(r31)
     addi r3, r1, 0x24
     addi r4, r31, 0x4e4
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x30
     addi r4, r1, 0x24
     bl vec3_toEulerAngles
@@ -1164,7 +1164,7 @@ lbl_fn_803FA5C8_00000DC8:
     addi r4, r31, 0x4e4
     fmadds f0, f2, f1, f0
     stfs f0, 0x4e8(r31)
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x18
     addi r4, r1, 0xc
     bl vec3_toEulerAngles
@@ -1348,11 +1348,9 @@ lbl_fn_803FAE38_0000105C:
     blr
 }
 
-asm void fn_803FAE84(void)
+void fn_803FAE84(void *obj, u8 val)
 {
-    nofralloc
-    stb r4, 0x520(r3)
-    blr
+    *(u8 *)((char *)obj + 0x520) = val;
 }
 
 asm void fn_803FAE8C(void)
@@ -1428,7 +1426,7 @@ lbl_fn_803FAEFC_00001128:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_803FAEFC_00001164:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -1688,11 +1686,11 @@ lbl_fn_803FAF8C_000014EC:
     cmpwi r0, 0x3
     bne lbl_fn_803FAF8C_00001538
     li r4, 0xf4
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
     b lbl_fn_803FAF8C_00001540
 lbl_fn_803FAF8C_00001538:
     li r4, 0x94
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_803FAF8C_00001540:
     lwz r3, 0x4c8(r30)
     cmpwi r3, 0x0

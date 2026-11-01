@@ -12,11 +12,11 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void wcs_vformat(void);
-extern void fn_800EE360(void);
+extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
-extern void fn_80109828(void);
+extern void hurtbox_dispatchHitEvent(void);
 extern void quest_evaluateConditions(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
 extern void fn_8017A300(void);
@@ -142,7 +142,7 @@ lbl_fn_80300654_000000B4:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x8
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lwz r0, 0x214(r1)
     lwz r31, 0x20c(r1)
     lwz r30, 0x208(r1)
@@ -395,7 +395,7 @@ lbl_fn_803009F4_00000454:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x8
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lwz r0, 0x214(r1)
     lwz r31, 0x20c(r1)
     mtlr r0
@@ -568,7 +568,7 @@ lbl_fn_80300AD8_000006E0:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x188
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lwz r0, 0x12a4(r30)
     extrwi. r0, r0, 1, 9
     beq lbl_fn_80300AD8_00000718
@@ -858,7 +858,7 @@ lbl_fn_803010BC_00000B28:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x8
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lwz r4, lbl_8087F1E4
     addi r3, r1, 0x8
     lwz r4, 0x52c(r4)
@@ -874,7 +874,7 @@ lbl_fn_803010BC_00000B60:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x8
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lwz r0, 0x12a4(r31)
     extrwi. r0, r0, 1, 9
     beq lbl_fn_803010BC_00000B98
@@ -1028,7 +1028,7 @@ lbl_fn_803012AC_00000DA0:
     bne lbl_fn_803012AC_00001010
     mr r3, r30
     li r4, 0x0
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     b lbl_fn_803012AC_00001010
 lbl_fn_803012AC_00000DB8:
     lwz r3, lbl_8087F430
@@ -1045,7 +1045,7 @@ lbl_fn_803012AC_00000DB8:
     stw r0, 0x12a4(r30)
     bl battle_awardExp
     mr r3, r30
-    bl fn_800EE360
+    bl camera_updateTargetMode
     b lbl_fn_803012AC_00001010
 lbl_fn_803012AC_00000DF8:
     lwz r3, lbl_8087EFA8
@@ -1788,7 +1788,7 @@ lbl_fn_80301DDC_00001910:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x3b8
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
 lbl_fn_80301DDC_0000192C:
     lwz r0, 0x2dc(r31)
     cmpwi r0, 0x145

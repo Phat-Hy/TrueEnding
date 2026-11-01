@@ -19,7 +19,7 @@ extern void GXInitLightDistAttn(void);
 extern void GXInitLightSpot(void);
 extern void fn_80617200(void);
 extern void GXInitTexObjDefault(void);
-extern void fn_80617340(void);
+extern void GXSetTevDirect(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
@@ -67,8 +67,8 @@ void fn_805D80B0(void);
 void fn_805D80D0(void);
 void fn_805D8130(void);
 void fn_805D84C0(void);
-void fn_805D8500(void);
-void fn_805D8510(void);
+void fn_805D8500(void *p, u32 val);
+u32 fn_805D8510(const void *p);
 void fn_805D8520(void);
 
 asm void fn_805D6E60(void)
@@ -1627,18 +1627,14 @@ lbl_fn_805D84C0_00001688:
     blr
 }
 
-asm void fn_805D8500(void)
+void fn_805D8500(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x48(r3)
-    blr
+    *(u32 *)((char *)p + 0x48) = val;
 }
 
-asm void fn_805D8510(void)
+u32 fn_805D8510(const void *p)
 {
-    nofralloc
-    lwz r3, 0x48(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x48);
 }
 
 asm void fn_805D8520(void)
@@ -1896,7 +1892,7 @@ lbl_fn_805D8520_00001984:
     bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x0
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
@@ -2003,7 +1999,7 @@ lbl_fn_805D8520_00001B28:
     bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x0
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
@@ -2110,7 +2106,7 @@ lbl_fn_805D8520_00001CCC:
     bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x0
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
@@ -2217,7 +2213,7 @@ lbl_fn_805D8520_00001E70:
     bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x0
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1

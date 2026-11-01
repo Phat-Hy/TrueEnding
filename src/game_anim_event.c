@@ -16,10 +16,10 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void wcs_vformat(void);
-extern void fn_800EB7A0(void);
-extern void fn_800EE360(void);
+extern void sound_playSpatialEffect(void);
+extern void camera_updateTargetMode(void);
 extern void scissor_clipFrustum(void);
-extern void fn_80109828(void);
+extern void hurtbox_dispatchHitEvent(void);
 extern void enemy_updateCombatBehavior(void);
 extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
@@ -30,7 +30,7 @@ extern void fn_8015EFAC(void);
 extern void actor_setState(void);
 extern void battle_updateTargetAggro(void);
 extern void battle_awardExp(void);
-extern void fn_80176ACC(void);
+extern void battle_activateExpReward(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_Shader_bindParams(void);
@@ -659,7 +659,7 @@ lbl_fn_80274F54_00000800:
     lwz r3, 0x1908(r27)
     lwzx r28, r3, r31
     mr r3, r28
-    bl fn_80176ACC
+    bl battle_activateExpReward
     lfs f2, 0x530(r27)
     addi r3, r28, 0xb0
     psq_l f1, 0x528(r27), 0, 0
@@ -692,9 +692,9 @@ lbl_fn_80274F54_00000868:
     stw r0, 0x12a4(r27)
     bl battle_awardExp
     mr r3, r27
-    bl fn_800EE360
+    bl camera_updateTargetMode
     mr r3, r27
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     b lbl_fn_80274F54_000008A4
 lbl_fn_80274F54_0000089C:
     li r0, 0x5
@@ -1036,7 +1036,7 @@ lbl_fn_80275228_00000D58:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x238
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lwz r5, 0x18ec(r22)
     li r4, 0x6e
     lwz r3, lbl_8087F430
@@ -1849,7 +1849,7 @@ lbl_fn_8027606C_00001914:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x28
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lwz r3, 0x190c(r30)
     li r0, 0x258
     lwz r4, 0x1910(r30)

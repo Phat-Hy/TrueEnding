@@ -57,7 +57,7 @@ extern void fn_80615B60(void);
 extern void fn_80615C40(void);
 extern void GXInitLightDistAttn(void);
 extern void GXInitLightSpot(void);
-extern void fn_80615FF0(void);
+extern void GXInitLightObj(void);
 extern void fn_806165B0(void);
 extern void GXDrawDone(void);
 extern void fn_80616800(void);
@@ -65,7 +65,7 @@ extern void fn_80616820(void);
 extern void fn_80617030(void);
 extern void fn_80617200(void);
 extern void GXInitTexObjDefault(void);
-extern void fn_80617340(void);
+extern void GXSetTevDirect(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevKAlphaSel(void);
 extern void GXSetTevSwapMode(void);
@@ -828,7 +828,7 @@ lbl___GXInitGX_00000800:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     addi r3, r1, 0x20
     li r4, 0x0
     bl fn_806165B0
@@ -937,7 +937,7 @@ lbl___GXInitGX_00000800:
     bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0x3
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x7
     li r4, 0x0
     li r5, 0x0

@@ -8,11 +8,11 @@ extern void _savegpr_14(void);
 extern void _savegpr_18(void);
 extern void dtor_80084684(void);
 extern void fn_800185B4(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void fn_80057F28(void);
 extern void fn_80058078(void);
-extern void fn_800580BC(void);
-extern void fn_800588FC(void);
+extern void mission_isObjectiveActive(void);
+extern void mission_updateObjectiveTarget(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -30,10 +30,10 @@ extern void system_getNextSequenceId(void);
 extern void fn_801028E4(void);
 extern void skill_findNodeById(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80139560(void);
+extern void npc_calcTargetDistance(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void fn_8015ECC4(void);
 extern void fn_80166A54(void);
 extern void debuff_clearStatus(void);
@@ -402,7 +402,7 @@ lbl_fn_802561C4_000003E0:
     lwz r3, 0x1528(r28)
     cmpwi r3, 0x0
     beq lbl_fn_802561C4_00000400
-    bl fn_800580BC
+    bl mission_isObjectiveActive
     cmpwi r3, 0x0
     beq lbl_fn_802561C4_00000400
     li r3, 0x0
@@ -897,7 +897,7 @@ lbl_fn_80256384_00000A4C:
     psq_st f5, 0x68(r3), 0, 0
     psq_l f6, 0x28(r26), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
 lbl_fn_80256384_00000AFC:
     addi r29, r29, 0x1
     addi r18, r18, 0xc
@@ -1499,7 +1499,7 @@ lbl_fn_80256C04_0000137C:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     lwz r6, 0x38(r15)
     li r4, 0x0
     li r3, 0x0
@@ -1654,7 +1654,7 @@ lbl_fn_80256C04_00001564:
     li r7, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r0, 0x7e0(r16)
     rlwinm r0, r0, 0, 26, 26
     cmplwi r0, 0x20
@@ -1689,7 +1689,7 @@ lbl_fn_80256C04_0000163C:
     li r6, 0x0
     stfs f0, 0x18(r1)
     stfs f7, 0x1c(r1)
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
     lwz r12, 0x0(r16)
     mr r3, r16
     lwz r12, 0x44(r12)
@@ -1879,7 +1879,7 @@ lbl_fn_80256C04_00001948:
     cmpwi r0, 0x0
     beq lbl_fn_80256C04_000019DC
     mr r3, r15
-    bl fn_80139560
+    bl npc_calcTargetDistance
     b lbl_fn_80256C04_000019DC
 lbl_fn_80256C04_0000198C:
     lwz r0, 0x55c(r15)
@@ -1903,7 +1903,7 @@ lbl_fn_80256C04_000019C8:
     cmpwi r0, 0x3
     beq lbl_fn_80256C04_000019DC
     mr r3, r15
-    bl fn_80139560
+    bl npc_calcTargetDistance
 lbl_fn_80256C04_000019DC:
     mr r3, r15
     bl dialog_updateScriptState

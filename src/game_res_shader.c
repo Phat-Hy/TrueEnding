@@ -14,7 +14,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800928B0(void);
+extern void compass_findWaypointIndex(void);
 extern void model_updateBoneTransforms(void);
 extern void fn_8022BEAC(void);
 extern void fn_8022C3F0(void);
@@ -70,7 +70,7 @@ void fn_80239C14(void);
 void fn_80239C20(void);
 void fn_80239C6C(void);
 void fn_80239D1C(void);
-void fn_80239D58(void);
+void res_Shader_findParameter(void);
 void res_findResourceSlot(void);
 void fn_8023A02C(void);
 void fn_8023A098(void);
@@ -218,31 +218,31 @@ asm void fn_80239D1C(void)
     blr
 }
 
-asm void fn_80239D58(void)
+asm void res_Shader_findParameter(void)
 {
     nofralloc
     lwz r0, 0xd8(r3)
     lwz r7, 0xe0(r3)
     mulli r0, r0, 0x64
     add r6, r7, r0
-    b lbl_fn_80239D58_000001C8
-lbl_fn_80239D58_0000019C:
+    b lbl_res_Shader_findParameter_000001C8
+lbl_res_Shader_findParameter_0000019C:
     lwz r0, 0x8(r7)
     cmplw r0, r4
-    bne lbl_fn_80239D58_000001C4
+    bne lbl_res_Shader_findParameter_000001C4
     lwz r0, 0xc(r7)
     cmpw r0, r5
-    beq lbl_fn_80239D58_000001BC
+    beq lbl_res_Shader_findParameter_000001BC
     cmpwi r5, -0x2
-    bne lbl_fn_80239D58_000001C4
-lbl_fn_80239D58_000001BC:
+    bne lbl_res_Shader_findParameter_000001C4
+lbl_res_Shader_findParameter_000001BC:
     li r3, 0x1
     blr
-lbl_fn_80239D58_000001C4:
+lbl_res_Shader_findParameter_000001C4:
     addi r7, r7, 0x64
-lbl_fn_80239D58_000001C8:
+lbl_res_Shader_findParameter_000001C8:
     cmplw r7, r6
-    bne lbl_fn_80239D58_0000019C
+    bne lbl_res_Shader_findParameter_0000019C
     addi r3, r3, 0x4c
     b fn_80232B98
     blr
@@ -1680,7 +1680,7 @@ lbl_fn_8023AE34_0000155C:
     li r5, 0x0
     lwz r4, 0x3c(r22)
     addi r3, r3, 0x10
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     blt lbl_fn_8023AE34_000015A0
     lwz r4, 0x4(r20)
@@ -1700,7 +1700,7 @@ lbl_fn_8023AE34_000015A8:
     lwz r4, 0x3c(r22)
     mr r3, r16
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_8023AE34_000015D0
     li r0, 0x0

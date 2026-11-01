@@ -23,16 +23,16 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Task_setActive(void);
 extern void wcs_vformat(void);
 extern void viewport_updateCulling(void);
-extern void fn_80109828(void);
+extern void hurtbox_dispatchHitEvent(void);
 extern void actor_testBitFlag(void);
 extern void fn_80134674(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80139560(void);
+extern void npc_calcTargetDistance(void);
 extern void inventory_applyItemStats(void);
 extern void fn_8015E4B0(void);
 extern void fn_8016D74C(void);
 extern void actor_setState(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void fn_801B2480(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_constructor(void);
@@ -613,7 +613,7 @@ lbl_fn_8025F07C_000006FC:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0xe8
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lfs f3, 0x530(r30)
     addi r3, r1, 0x50
     lfs f0, 0x1598(r30)
@@ -763,7 +763,7 @@ lbl_fn_8025F07C_000008E0:
     mr r4, r3
 lbl_fn_8025F07C_00000948:
     mr r3, r30
-    bl fn_80178208
+    bl battle_generateLootDrops
     lwz r0, 0x314(r1)
     psq_l f31, 0x308(r1), 0, 0
     lfd f31, 0x300(r1)
@@ -840,7 +840,7 @@ lbl_fn_8025F35C_00000A08:
     stw r0, 0x14d0(r31)
 lbl_fn_8025F35C_00000A5C:
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -891,7 +891,7 @@ lbl_fn_8025F45C_00000AF4:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x30
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lwz r0, 0x15bc(r31)
     cmpwi r0, 0x0
     beq lbl_fn_8025F45C_00000BC4
@@ -1084,7 +1084,7 @@ asm void fn_8025F754(void)
     bl res_findResourceSlot
 lbl_fn_8025F754_00000DD0:
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

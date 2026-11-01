@@ -10,16 +10,16 @@ extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
-extern void fn_800133B0(void);
+extern void math_wrapAngle(void);
 extern void fn_80063484(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void node_destroy(void);
 extern void map_debugLog(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void fn_80091CFC(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_800928B0(void);
+extern void compass_findWaypointIndex(void);
 extern void fn_80094F98(void);
 extern void fn_800C258C(void);
 extern void atn_Task_setActive(void);
@@ -27,13 +27,13 @@ extern void fn_800EAECC(void);
 extern void fn_800EB270(void);
 extern void fn_800EB49C(void);
 extern void fn_800F29D0(void);
-extern void fn_800F7FD8(void);
+extern void vec3_normalize(void);
 extern void scissor_clipFrustum(void);
-extern void fn_801125F8(void);
+extern void phys_scaleGravity(void);
 extern void fn_8011C044(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80129978(void);
-extern void fn_8012DB04(void);
+extern void enemy_evalAnimTrack(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80139F4C(void);
 extern void fn_80139F58(void);
@@ -44,9 +44,9 @@ extern void quest_checkCondition(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
-extern void fn_80158BB4(void);
+extern void shop_canPurchaseItem(void);
 extern void fn_80158CA4(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void fn_8015EB2C(void);
 extern void fn_8016D454(void);
 extern void battle_applyStatusEffect(void);
@@ -203,7 +203,7 @@ lbl_fn_80565F38_000000A8:
     stw r0, 0x28(r3)
 lbl_fn_80565F38_000000BC:
     addi r3, r30, 0x24
-    bl fn_8008CD60
+    bl minimap_renderOverlay
 lbl_fn_80565F38_000000C4:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -258,7 +258,7 @@ lbl_fn_80566014_0000015C:
     lwz r4, 0x48(r4)
     lwzx r4, r4, r30
     lwz r4, 0x14(r4)
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     lwz r4, 0x3fc(r26)
     addi r30, r30, 0x4
     addi r27, r27, 0x1
@@ -1352,7 +1352,7 @@ lbl_fn_80566F04_00001024:
     stfs f3, 0x10(r1)
     stfs f0, 0x8(r1)
     stfs f1, 0xc(r1)
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
 lbl_fn_80566F04_00001060:
     mr r3, r30
     bl fn_800EB49C
@@ -1588,7 +1588,7 @@ lbl_fn_80566FB8_000013B0:
     stw r0, 0xf08(r31)
     b lbl_fn_80566FB8_000014D8
 lbl_fn_80566FB8_000013BC:
-    bl fn_80158BB4
+    bl shop_canPurchaseItem
     cmpwi r3, 0x0
     beq lbl_fn_80566FB8_00001420
     lwz r3, 0x560(r31)
@@ -1910,7 +1910,7 @@ lbl_fn_80567600_00001828:
     lfs f1, 0x34(r1)
     lfs f0, 0x538(r31)
     fsubs f1, f1, f0
-    bl fn_800133B0
+    bl math_wrapAngle
     lha r3, 0xd3a(r31)
     fmr f29, f1
     subi r0, r3, 0x3
@@ -1918,7 +1918,7 @@ lbl_fn_80567600_00001828:
     cmplwi r0, 0x1
     bgt lbl_fn_80567600_00001880
     lfs f1, lbl_80887F88
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f31, f1
     fmr f1, f29
     bl fn_80011220
@@ -1933,7 +1933,7 @@ lbl_fn_80567600_00001880:
     cmpwi r3, 0x1
     bne lbl_fn_80567600_000019C8
     lfs f1, lbl_80887F8C
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f31, f1
     fmr f1, f29
     bl fn_80011220
@@ -1941,30 +1941,30 @@ lbl_fn_80567600_00001880:
     cror eq, gt, eq
     bne lbl_fn_80567600_000019C8
     lfs f1, lbl_80887F90
-    bl fn_801125F8
+    bl phys_scaleGravity
     fcmpo cr0, f1, f29
     bge lbl_fn_80567600_000018C8
     lfs f1, lbl_80887F90
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f31, f1
     b lbl_fn_80567600_000018CC
 lbl_fn_80567600_000018C8:
     fmr f31, f29
 lbl_fn_80567600_000018CC:
     lfs f1, lbl_80887F94
-    bl fn_801125F8
+    bl phys_scaleGravity
     fcmpo cr0, f1, f31
     ble lbl_fn_80567600_000018E8
     lfs f1, lbl_80887F94
-    bl fn_801125F8
+    bl phys_scaleGravity
     b lbl_fn_80567600_00001908
 lbl_fn_80567600_000018E8:
     lfs f1, lbl_80887F90
-    bl fn_801125F8
+    bl phys_scaleGravity
     fcmpo cr0, f1, f29
     bge lbl_fn_80567600_00001904
     lfs f1, lbl_80887F90
-    bl fn_801125F8
+    bl phys_scaleGravity
     b lbl_fn_80567600_00001908
 lbl_fn_80567600_00001904:
     fmr f1, f29
@@ -2002,7 +2002,7 @@ lbl_fn_80567600_00001944:
     ble lbl_fn_80567600_000019A4
     addi r3, r1, 0xc
     addi r4, r1, 0x24
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x18
     addi r4, r1, 0xc
     bl vec3_toEulerAngles
@@ -2023,7 +2023,7 @@ lbl_fn_80567600_000019B4:
     b lbl_fn_80567600_000019F8
 lbl_fn_80567600_000019C8:
     addi r3, r31, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     fmuls f30, f30, f1
     lwz r12, 0x0(r31)
     mr r3, r31

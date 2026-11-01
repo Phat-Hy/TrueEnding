@@ -16,13 +16,13 @@ extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
-extern void fn_80139560(void);
+extern void npc_calcTargetDistance(void);
 extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void equip_applyToCharacter(void);
 extern void fn_801561E4(void);
-extern void fn_80158BB4(void);
+extern void shop_canPurchaseItem(void);
 extern void fn_80158CA4(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
@@ -1122,7 +1122,7 @@ asm void fn_8025DE54(void)
     stw r4, 0x12a4(r3)
     stw r0, 0xfc0(r3)
 lbl_fn_8025DE54_00000E84:
-    b fn_80139560
+    b npc_calcTargetDistance
 }
 
 asm void fn_8025DE7C(void)
@@ -1133,7 +1133,7 @@ asm void fn_8025DE7C(void)
     stw r0, 0x34(r1)
     stw r31, 0x2c(r1)
     mr r31, r3
-    bl fn_80158BB4
+    bl shop_canPurchaseItem
     cmpwi r3, 0x0
     beq lbl_fn_8025DE7C_00000EF0
     li r0, 0x0
@@ -1156,7 +1156,7 @@ asm void fn_8025DE7C(void)
     b lbl_fn_8025DE7C_00001000
 lbl_fn_8025DE7C_00000EF0:
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
     lwz r0, lbl_8087F048
     cmpwi r0, 0x0
     beq lbl_fn_8025DE7C_00001000

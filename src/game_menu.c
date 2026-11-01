@@ -38,10 +38,10 @@ extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void fn_800902C0(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80092F1C(void);
+extern void target_pushPointToHistory(void);
 extern void fn_800C0A50(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
@@ -66,7 +66,7 @@ extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void fn_803B6970(void);
 extern void fn_803B78B4(void);
 extern void fn_803CC6B4(void);
@@ -164,7 +164,7 @@ void fn_80041C0C(void);
 void AreaEffConfig_destructor(void);
 void AreaEffConfig_execute(void);
 void fn_80041D44(void);
-void fn_8004203C(void);
+void menu_initWindowBuffer(void);
 void fn_800420F4(void);
 void fn_80042108(void);
 void str_getData(void);
@@ -487,7 +487,7 @@ asm void fn_80041D44(void)
     mr r4, r3
     mr r5, r30
     addi r3, r1, 0x80
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     addi r3, r1, 0x34
     bl fn_80042148
     lis r3, lbl_80730CB4@ha
@@ -678,7 +678,7 @@ lbl_fn_80041D44_000005B0:
     blr
 }
 
-asm void fn_8004203C(void)
+asm void menu_initWindowBuffer(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -3478,7 +3478,7 @@ lbl_fn_8004439C_00002A98:
     addi r3, r31, 0x10
     addi r4, r1, 0x208
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_8004439C_00002C44
 lbl_fn_8004439C_00002AF4:
     addi r3, r1, 0x308
@@ -3487,7 +3487,7 @@ lbl_fn_8004439C_00002AF4:
     addi r3, r31, 0x10
     addi r4, r1, 0x208
     addi r5, r1, 0x108
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_8004439C_00002C44
 lbl_fn_8004439C_00002B14:
     mr r3, r29
@@ -3938,7 +3938,7 @@ asm void Arms_slot3(void)
     cmpwi r0, 0x0
     beqlr
     addi r3, r3, 0x10
-    b fn_8008CD60
+    b minimap_renderOverlay
     blr
 }
 
@@ -4689,7 +4689,7 @@ lbl_fn_80045510_00003B48:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_80045510_00003BDC
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_80045510_00003C30
 lbl_fn_80045510_00003BDC:

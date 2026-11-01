@@ -14,8 +14,8 @@ extern void __files(void);
 extern void dtor_80084684(void);
 extern void dungeon_initGlobalContext(void);
 extern void town_synchronizedDispatch(void);
-extern void fn_800839EC(void);
-extern void fn_80083AD4(void);
+extern void town_registerInteractionPoint(void);
+extern void town_updateInteractionPoints(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_80084E50(void);
@@ -1491,7 +1491,7 @@ lbl_fn_8050D3EC_000012C4:
     li r6, 0x5
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     mr r4, r3
     addi r5, r31, lbl_8075B180@l
     addi r6, r5, 0x1
@@ -1523,7 +1523,7 @@ asm void fn_8050D488(void)
     mr r31, r3
     bl dungeon_initGlobalContext
     mr r4, r31
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     lwz r3, lbl_8087F878
     cmpwi r3, 0x0
     beq lbl_fn_8050D488_0000137C
@@ -1580,7 +1580,7 @@ asm void fn_8050D504(void)
     li r6, 0x5
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     mr r30, r3
 lbl_fn_8050D504_0000142C:
     mr r3, r30
@@ -1640,7 +1640,7 @@ lbl_fn_8050D5BC_000014B8:
 lbl_fn_8050D5BC_000014EC:
     bl dungeon_initGlobalContext
     mr r4, r29
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
 lbl_fn_8050D5BC_000014F8:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1687,7 +1687,7 @@ asm void fn_8050D680(void)
     li r6, 0x5
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     mr r30, r3
 lbl_fn_8050D680_000015A0:
     mr r3, r30
@@ -1746,7 +1746,7 @@ lbl_fn_8050D72C_00001628:
 lbl_fn_8050D72C_0000165C:
     bl dungeon_initGlobalContext
     mr r4, r29
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
 lbl_fn_8050D72C_00001668:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1975,7 +1975,7 @@ lbl_fn_8050D7F0_00001920:
     beq lbl_fn_8050D7F0_000019C4
     bl dungeon_initGlobalContext
     mr r4, r29
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     li r0, 0x0
     stw r0, 0x48(r1)
 lbl_fn_8050D7F0_000019C4:
@@ -1984,7 +1984,7 @@ lbl_fn_8050D7F0_000019C4:
     beq lbl_fn_8050D7F0_000019E4
     bl dungeon_initGlobalContext
     mr r4, r29
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     li r0, 0x0
     stw r0, 0x4c(r1)
 lbl_fn_8050D7F0_000019E4:

@@ -6,7 +6,7 @@ extern void __files(void);
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_8004203C(void);
+extern void menu_initWindowBuffer(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void mem_alloc(void);
@@ -21,9 +21,9 @@ extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
-extern void fn_800EB7A0(void);
-extern void fn_800EC204(void);
-extern void fn_800EE360(void);
+extern void sound_playSpatialEffect(void);
+extern void cam_findTargetIndex(void);
+extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80105BD8(void);
@@ -33,7 +33,7 @@ extern void enemy_updateCombatBehavior(void);
 extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
 extern void npc_initScriptContext(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
@@ -43,7 +43,7 @@ extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void battle_updateActorStatus(void);
 extern void fn_801A03E0(void);
 extern void fn_801C02F4(void);
@@ -311,7 +311,7 @@ asm void fn_80244898(void)
     cmpwi r3, 0x0
     beq lbl_fn_80244898_0000052C
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     cmpwi r3, 0x0
     beq lbl_fn_80244898_0000052C
     addi r3, r28, 0x14b0
@@ -322,7 +322,7 @@ asm void fn_80244898(void)
     mr r4, r3
     mr r5, r31
     addi r3, r1, 0x118
-    bl fn_8004203C
+    bl menu_initWindowBuffer
 lbl_fn_80244898_000002C4:
     addi r3, r1, 0x118
     bl talk_parseQuotedString
@@ -359,9 +359,9 @@ lbl_fn_80244898_00000330:
     bl str_parseInt
     mr r31, r3
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r31
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     stw r3, 0x14(r1)
     beq lbl_fn_80244898_00000368
@@ -384,9 +384,9 @@ lbl_fn_80244898_00000388:
     bl str_parseInt
     mr r31, r3
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r31
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     stw r3, 0x10(r1)
     beq lbl_fn_80244898_000003C0
@@ -1206,7 +1206,7 @@ lbl_fn_80245340_00000EC8:
     cmpwi r0, 0x2
     beq lbl_fn_80245340_000011FC
     mr r3, r31
-    bl fn_800EE360
+    bl camera_updateTargetMode
     b lbl_fn_80245340_000011FC
     mr r3, r31
     bl fn_80246594
@@ -1292,7 +1292,7 @@ lbl_fn_80245340_00000FC4:
     mr r4, r3
 lbl_fn_80245340_00001044:
     mr r3, r31
-    bl fn_80178208
+    bl battle_generateLootDrops
     b lbl_fn_80245340_000011FC
     lwz r0, 0x1574(r31)
     cmpwi r0, 0x0
@@ -1770,7 +1770,7 @@ lbl_fn_80245BBC_00001714:
     li r8, 0x1
     bl atn_Anim_setLayerAnimation
     mr r3, r31
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     b lbl_fn_80245BBC_00001880
 lbl_fn_80245BBC_00001744:
     lfs f31, lbl_8088318C
@@ -1837,7 +1837,7 @@ lbl_fn_80245BBC_00001814:
     li r8, 0x1
     bl atn_Anim_setLayerAnimation
     mr r3, r27
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
 lbl_fn_80245BBC_00001840:
     addi r28, r28, 0x4
     addi r26, r26, 0x1

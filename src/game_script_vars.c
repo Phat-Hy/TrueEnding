@@ -6,7 +6,7 @@ extern void __files(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80056DB8(void);
+extern void path_Object_constructor(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void atn_Model_findBoneIndex(void);
@@ -14,10 +14,10 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800E2DD4(void);
 extern void fn_800E2FE0(void);
 extern void system_getNextSequenceId(void);
-extern void fn_801092C8(void);
+extern void hurtbox_processHitDamage(void);
 extern void enemy_updateCombatBehavior(void);
-extern void fn_8012D8B8(void);
-extern void fn_80139560(void);
+extern void enemy_updateAnimTimer(void);
+extern void npc_calcTargetDistance(void);
 extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
@@ -29,17 +29,17 @@ extern void battle_applyStatusEffect(void);
 extern void battle_updateTargetAggro(void);
 extern void fn_80170F20(void);
 extern void fn_80175A38(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void battle_updateActorStatus(void);
 extern void fn_8019AFE8(void);
 extern void task_mapIdToQueue(void);
 extern void res_registerResource(void);
 extern void fn_80249588(void);
 extern void entity_Instance_constructor(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -275,7 +275,7 @@ asm void fn_80247DA4(void)
 lbl_fn_80247DA4_00000204:
     lwz r3, lbl_8087F428
     li r30, 0x0
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     mr r29, r3
     b lbl_fn_80247DA4_000002C8
 lbl_fn_80247DA4_00000218:
@@ -929,7 +929,7 @@ lbl_fn_8024845C_00000B44:
 lbl_fn_8024845C_00000B80:
     lwz r3, 0xf54(r29)
     addi r3, r3, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lwz r3, 0xf54(r29)
     lwz r3, 0x50(r3)
     bl task_mapIdToQueue
@@ -1017,7 +1017,7 @@ asm void fn_80248854(void)
     stw r29, 0x14c8(r27)
     stw r4, 0x5c0(r27)
     stw r0, 0x12a4(r27)
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lfs f3, lbl_808831D8
     addi r3, r1, 0x70
     lfs f0, lbl_8088320C
@@ -1161,7 +1161,7 @@ asm void fn_80248A4C(void)
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_80248A4C_00000F08
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_80248A4C_00000F08
     lwz r3, lbl_8087F048
@@ -1169,7 +1169,7 @@ asm void fn_80248A4C(void)
     li r4, 0x6
     li r6, 0x0
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
 lbl_fn_80248A4C_00000F08:
     lwz r0, 0xf54(r30)
     cmpwi r0, 0x0
@@ -1423,7 +1423,7 @@ asm void fn_80248E88(void)
     stw r3, 0x0(r30)
     mr r3, r31
     li r4, 0x0
-    bl fn_80056DB8
+    bl path_Object_constructor
     lwz r0, 0x54c(r30)
     li r4, 0x0
     lis r3, lbl_80777668@ha
@@ -1649,7 +1649,7 @@ lbl_fn_80249004_00001598:
     mr r4, r3
 lbl_fn_80249004_000015E4:
     lwz r3, 0x14fc(r30)
-    bl fn_80178208
+    bl battle_generateLootDrops
     li r0, 0x0
     stw r0, 0x14fc(r30)
 lbl_fn_80249004_000015F4:
@@ -1864,7 +1864,7 @@ lbl_fn_80249394_000018D0:
     mr r3, r31
     addi r0, r4, 0x1
     stw r0, 0x1504(r31)
-    bl fn_80139560
+    bl npc_calcTargetDistance
     b lbl_fn_80249394_0000196C
 lbl_fn_80249394_000018E8:
     lwz r0, 0x1504(r3)
@@ -1899,7 +1899,7 @@ lbl_fn_80249394_000018FC:
     mr r4, r3
 lbl_fn_80249394_0000195C:
     lwz r3, 0x14fc(r31)
-    bl fn_80178208
+    bl battle_generateLootDrops
     li r0, 0x0
     stw r0, 0x14fc(r31)
 lbl_fn_80249394_0000196C:

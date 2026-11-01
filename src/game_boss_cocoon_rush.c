@@ -21,7 +21,7 @@ extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void atn_LH_Texture_update(void);
 extern void str_findChar(void);
 extern void fn_8022D754(void);
@@ -33,7 +33,7 @@ extern void fn_8043FA08(void);
 extern void fn_8043FE90(void);
 extern void atn_Arc_decompressChunk(void);
 extern void fn_8046D1EC(void);
-extern void fn_8046DD20(void);
+extern void boss_bindArenaInteractions(void);
 extern void fn_8046F5CC(void);
 extern void fn_8046F834(void);
 extern void atn_Curve_evalHermite(void);
@@ -1293,7 +1293,7 @@ asm void fn_8047304C(void)
     cmpwi r0, 0x0
     bne lbl_fn_8047304C_00001070
     lwz r3, lbl_8087F518
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
 lbl_fn_8047304C_00001070:
     cmpwi r31, 0x0
     li r0, 0x0
@@ -1365,7 +1365,7 @@ asm void fn_80473130(void)
     cmpwi r0, 0x0
     bne lbl_fn_80473130_00001138
     lwz r3, lbl_8087F518
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
 lbl_fn_80473130_00001138:
     li r0, 0x0
     stw r0, 0x54(r31)
@@ -1740,7 +1740,7 @@ lbl_atn_LoadEffect_destructor_0000161C:
 lbl_atn_LoadEffect_destructor_00001644:
     lwz r4, 0x7c(r1)
 lbl_atn_LoadEffect_destructor_00001648:
-    bl fn_800D5908
+    bl depth_resetRenderTarget
 lbl_atn_LoadEffect_destructor_0000164C:
     stb r30, 0x2d(r26)
     addi r3, r1, 0x38
@@ -1813,7 +1813,7 @@ lbl_atn_LoadEffect_destructor_00001724:
 lbl_atn_LoadEffect_destructor_0000173C:
     lwz r4, 0x7c(r1)
 lbl_atn_LoadEffect_destructor_00001740:
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     stb r30, 0x5d(r26)
     stb r30, 0x5e(r26)
     lwz r3, 0x90(r17)
@@ -1873,7 +1873,7 @@ lbl_atn_LoadEffect_destructor_00001800:
 lbl_atn_LoadEffect_destructor_00001818:
     lwz r4, 0x7c(r1)
 lbl_atn_LoadEffect_destructor_0000181C:
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     stb r30, 0x2d(r18)
     stb r30, 0x2e(r18)
     lwz r3, 0x90(r17)

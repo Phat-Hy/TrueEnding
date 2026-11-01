@@ -32,7 +32,7 @@ extern void fn_8035B534(void);
 extern void fn_8035E730(void);
 extern void fn_8035E7CC(void);
 extern void fn_8036FE74(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void fn_80376194(void);
 extern void fn_803761BC(void);
 extern void fn_80394C68(void);
@@ -1252,7 +1252,7 @@ lbl_fn_803C0F48_00000F74:
     cmpwi r3, 0x0
     beq lbl_fn_803C0F48_00000FB0
     lwz r3, lbl_8087F430
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_803C0F48_00000FB0
     mr r30, r29

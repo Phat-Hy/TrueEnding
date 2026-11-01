@@ -10,9 +10,9 @@ extern void fn_80063764(void);
 extern void mem_alloc(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void dialog_setScriptSlot(void);
-extern void fn_8014C228(void);
+extern void dialog_initScriptSlot(void);
 extern void fn_801598B4(void);
 extern void fn_80159E9C(void);
 extern void fn_8015A184(void);
@@ -22,7 +22,7 @@ extern void res_Resource_destructor(void);
 extern void res_Resource_unload(void);
 extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
-extern void fn_80239D58(void);
+extern void res_Shader_findParameter(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A098(void);
 extern void res_Shader_bindParams(void);
@@ -458,7 +458,7 @@ asm void fn_801825F0(void)
     lwz r3, 0x48(r3)
     cmpwi r3, 0x0
     beq lbl_fn_801825F0_00000514
-    bl fn_8014C228
+    bl dialog_initScriptSlot
 lbl_fn_801825F0_00000514:
     lwz r3, lbl_8087F418
     cmpwi r3, 0x0
@@ -661,7 +661,7 @@ lbl_fn_80182890_0000077C:
     lwz r3, 0x48(r3)
     cmpwi r3, 0x0
     beq lbl_fn_80182890_000007B8
-    bl fn_8014C228
+    bl dialog_initScriptSlot
 lbl_fn_80182890_000007B8:
     lwz r3, lbl_8087F418
     cmpwi r3, 0x0
@@ -1395,7 +1395,7 @@ lbl_fn_801829B4_000011C4:
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_801829B4_00001288
     lwz r3, lbl_8087F3C0
@@ -1433,7 +1433,7 @@ lbl_fn_801829B4_000012EC:
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     bne lbl_fn_801829B4_000013BC
     mr r3, r31
@@ -1493,7 +1493,7 @@ lbl_fn_801829B4_000013D0:
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_801829B4_000013FC
     lwz r3, lbl_8087F3C0
@@ -1553,7 +1553,7 @@ lbl_fn_80183588_00001490:
     b lbl_fn_80183588_000014D0
 lbl_fn_80183588_000014A0:
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     lwz r0, 0x1c4(r31)
     slwi r0, r0, 2
     add r0, r31, r0

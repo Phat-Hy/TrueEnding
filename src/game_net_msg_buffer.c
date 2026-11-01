@@ -9,17 +9,17 @@ extern void _savegpr_14(void);
 extern void dtor_80084684(void);
 extern void ui_destroyWidget(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_80083AD4(void);
+extern void town_updateInteractionPoints(void);
 extern void atn_Task_setActive(void);
 extern void fn_800E2FE0(void);
 extern void fn_800EE5AC(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80139560(void);
+extern void npc_calcTargetDistance(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
 extern void fn_8015EB2C(void);
-extern void fn_80176ACC(void);
+extern void battle_activateExpReward(void);
 extern void entity_Instance_destructor(void);
 extern void fn_8050128C(void);
 extern void fn_80508F0C(void);
@@ -162,7 +162,7 @@ lbl_fn_804FC2F4_00000130:
     beq lbl_fn_804FC2F4_0000014C
     bl dungeon_initGlobalContext
     mr r4, r27
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     stw r29, 0x28(r26)
 lbl_fn_804FC2F4_0000014C:
     lwz r27, 0x2c(r26)
@@ -170,7 +170,7 @@ lbl_fn_804FC2F4_0000014C:
     beq lbl_fn_804FC2F4_00000168
     bl dungeon_initGlobalContext
     mr r4, r27
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     stw r29, 0x2c(r26)
 lbl_fn_804FC2F4_00000168:
     lwz r26, 0x4(r26)
@@ -197,7 +197,7 @@ lbl_fn_804FC2F4_000001A4:
     beq lbl_fn_804FC2F4_000001C8
     bl dungeon_initGlobalContext
     mr r4, r26
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     stw r29, 0x8(r27)
 lbl_fn_804FC2F4_000001C8:
     lwz r26, 0xc(r27)
@@ -205,7 +205,7 @@ lbl_fn_804FC2F4_000001C8:
     beq lbl_fn_804FC2F4_000001E4
     bl dungeon_initGlobalContext
     mr r4, r26
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     stw r29, 0xc(r27)
 lbl_fn_804FC2F4_000001E4:
     mr r3, r25
@@ -243,7 +243,7 @@ lbl_fn_804FC2F4_00000248:
     beq lbl_fn_804FC2F4_0000026C
     bl dungeon_initGlobalContext
     mr r4, r26
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     stw r29, 0x8(r27)
 lbl_fn_804FC2F4_0000026C:
     lwz r26, 0xc(r27)
@@ -251,7 +251,7 @@ lbl_fn_804FC2F4_0000026C:
     beq lbl_fn_804FC2F4_00000288
     bl dungeon_initGlobalContext
     mr r4, r26
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     stw r29, 0xc(r27)
 lbl_fn_804FC2F4_00000288:
     mr r3, r24
@@ -355,7 +355,7 @@ asm void fn_804FC5AC(void)
     lwz r0, 0x14b0(r3)
     cmpwi r0, 0x0
     bne lbl_fn_804FC5AC_000003A0
-    bl fn_80176ACC
+    bl battle_activateExpReward
     li r0, 0x1
     stw r0, 0x14b0(r31)
 lbl_fn_804FC5AC_000003A0:
@@ -403,7 +403,7 @@ lbl_fn_804FC5AC_00000418:
     cmpwi r0, 0x0
     bne lbl_fn_804FC5AC_00000454
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
     li r0, 0x0
     stw r0, 0x1450(r31)
     b lbl_fn_804FC5AC_00000538

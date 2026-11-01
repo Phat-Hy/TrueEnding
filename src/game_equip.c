@@ -59,7 +59,7 @@ void fn_8005FD80(void);
 void atn_ComDrawTextureMask_destructor(void);
 void fn_800602E8(void);
 void fn_800607C0(void);
-void fn_80060D58(void);
+void equip_calcTotalStatBonuses(void);
 
 asm void fn_8005E000(void)
 {
@@ -3269,7 +3269,7 @@ lbl_fn_800607C0_00002CB0:
     blr
 }
 
-asm void fn_80060D58(void)
+asm void equip_calcTotalStatBonuses(void)
 {
     nofralloc
     stwu r1, -0x110(r1)
@@ -3298,31 +3298,31 @@ asm void fn_80060D58(void)
     cmpw r5, r0
     mr r29, r3
     mr r30, r4
-    ble lbl_fn_80060D58_00002DCC
+    ble lbl_equip_calcTotalStatBonuses_00002DCC
     li r31, 0x0
-    b lbl_fn_80060D58_00002DF0
-lbl_fn_80060D58_00002DCC:
+    b lbl_equip_calcTotalStatBonuses_00002DF0
+lbl_equip_calcTotalStatBonuses_00002DCC:
     lwz r0, 0x4(r3)
     add. r31, r0, r6
-    beq lbl_fn_80060D58_00002DE4
+    beq lbl_equip_calcTotalStatBonuses_00002DE4
     lis r4, lbl_80777AB0@ha
     addi r4, r4, lbl_80777AB0@l
     stw r4, 0x0(r31)
-lbl_fn_80060D58_00002DE4:
+lbl_equip_calcTotalStatBonuses_00002DE4:
     lwz r4, 0xc(r3)
     addi r0, r4, 0x20
     stw r0, 0xc(r3)
-lbl_fn_80060D58_00002DF0:
+lbl_equip_calcTotalStatBonuses_00002DF0:
     cmpwi r31, 0x0
-    beq lbl_fn_80060D58_00003060
+    beq lbl_equip_calcTotalStatBonuses_00003060
     lwz r6, 0xc(r3)
     lwz r0, 0x8(r3)
     addi r4, r6, 0x54
     cmpw r4, r0
-    ble lbl_fn_80060D58_00002E14
+    ble lbl_equip_calcTotalStatBonuses_00002E14
     li r28, 0x0
-    b lbl_fn_80060D58_00002E44
-lbl_fn_80060D58_00002E14:
+    b lbl_equip_calcTotalStatBonuses_00002E44
+lbl_equip_calcTotalStatBonuses_00002E14:
     lwz r0, 0x4(r3)
     lis r4, fn_800610A0@ha
     addi r4, r4, fn_800610A0@l
@@ -3335,9 +3335,9 @@ lbl_fn_80060D58_00002E14:
     mr r28, r3
     addi r0, r4, 0x54
     stw r0, 0xc(r29)
-lbl_fn_80060D58_00002E44:
+lbl_equip_calcTotalStatBonuses_00002E44:
     cmpwi r28, 0x0
-    beq lbl_fn_80060D58_00003060
+    beq lbl_equip_calcTotalStatBonuses_00003060
     stfs f27, 0x50(r1)
     addi r27, r1, 0x5c
     addi r6, r1, 0x50
@@ -3440,14 +3440,14 @@ lbl_fn_80060D58_00002E44:
     stw r30, 0x3c(r28)
     lwz r0, 0xa0(r29)
     cmpwi r0, 0x6
-    beq lbl_fn_80060D58_00002FF8
+    beq lbl_equip_calcTotalStatBonuses_00002FF8
     cmpwi r0, 0x8
-    beq lbl_fn_80060D58_00002FF8
+    beq lbl_equip_calcTotalStatBonuses_00002FF8
     cmpwi r0, 0xd
-    bne lbl_fn_80060D58_00002FFC
-lbl_fn_80060D58_00002FF8:
+    bne lbl_equip_calcTotalStatBonuses_00002FFC
+lbl_equip_calcTotalStatBonuses_00002FF8:
     li r5, 0x0
-lbl_fn_80060D58_00002FFC:
+lbl_equip_calcTotalStatBonuses_00002FFC:
     stw r5, 0x4(r31)
     li r4, 0x80
     li r3, 0x2
@@ -3457,26 +3457,26 @@ lbl_fn_80060D58_00002FFC:
     stw r3, 0x10(r31)
     stw r0, 0x14(r31)
     stw r28, 0x8(r31)
-    beq lbl_fn_80060D58_00003038
+    beq lbl_equip_calcTotalStatBonuses_00003038
     lwz r0, 0xa0(r29)
     cmpwi r0, 0x8
-    beq lbl_fn_80060D58_00003038
+    beq lbl_equip_calcTotalStatBonuses_00003038
     cmpwi r0, 0xd
-    bne lbl_fn_80060D58_00003044
-lbl_fn_80060D58_00003038:
+    bne lbl_equip_calcTotalStatBonuses_00003044
+lbl_equip_calcTotalStatBonuses_00003038:
     li r0, 0x0
     stb r0, 0x18(r31)
-    b lbl_fn_80060D58_0000304C
-lbl_fn_80060D58_00003044:
+    b lbl_equip_calcTotalStatBonuses_0000304C
+lbl_equip_calcTotalStatBonuses_00003044:
     li r0, 0x1
     stb r0, 0x18(r31)
-lbl_fn_80060D58_0000304C:
+lbl_equip_calcTotalStatBonuses_0000304C:
     fmr f1, f29
     lwz r3, lbl_8087EFB4
     lwz r5, 0xa0(r29)
     mr r4, r31
     bl model_updateBoneTransforms
-lbl_fn_80060D58_00003060:
+lbl_equip_calcTotalStatBonuses_00003060:
     addi r11, r1, 0xc0
     psq_l f31, 0x108(r1), 0, 0
     lfd f31, 0x100(r1)

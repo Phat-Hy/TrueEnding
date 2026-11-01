@@ -8,7 +8,7 @@ extern void _savegpr_19(void);
 extern void _savegpr_24(void);
 extern void mtx_getTranslation(void);
 extern void vec3_mag(void);
-extern void fn_8000DD0C(void);
+extern void scene_getRootNode(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
@@ -23,15 +23,15 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void wcs_vformat(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_800F80B8(void);
 extern void fn_800F8290(void);
-extern void fn_80109828(void);
+extern void hurtbox_dispatchHitEvent(void);
 extern void fn_8010EDFC(void);
 extern void fn_801162A0(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
 extern void quest_updateFlow(void);
@@ -39,7 +39,7 @@ extern void fn_801479E4(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015C0C0(void);
 extern void fn_8015C6A0(void);
-extern void fn_80176ACC(void);
+extern void battle_activateExpReward(void);
 extern void fn_801A03E8(void);
 extern void fn_801A03F4(void);
 extern void fn_801A0400(void);
@@ -57,7 +57,7 @@ extern void fn_80279798(void);
 extern void fn_802797A0(void);
 extern void fn_802797A8(void);
 extern void fn_802797D4(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void PSMTXConcat(void);
@@ -288,7 +288,7 @@ lbl_fn_80277DC4_0000026C:
     stfs f0, 0x60(r1)
     stfs f29, 0x64(r1)
     stw r0, 0x38(r23)
-    bl fn_80176ACC
+    bl battle_activateExpReward
     mr r3, r23
     li r4, 0x0
     bl atn_Task_setActive
@@ -300,7 +300,7 @@ lbl_fn_80277DC4_0000026C:
     stw r0, 0x12a4(r23)
 lbl_fn_80277DC4_000002D4:
     addi r3, r23, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     stw r19, 0x58c(r23)
     mr r3, r23
     li r4, 0x0
@@ -355,7 +355,7 @@ lbl_fn_80277DC4_0000038C:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x120
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
 lbl_fn_80277DC4_000003A8:
     addi r11, r1, 0x360
     psq_l f31, 0x388(r1), 0, 0
@@ -434,7 +434,7 @@ asm void fn_80278218(void)
     stfs f2, 0x8(r4)
     psq_st f1, 0x0(r4), 0, 0
     lwz r3, lbl_8087F428
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     b lbl_fn_80278218_00000500
 lbl_fn_80278218_000004AC:
     lwz r0, 0x7e0(r3)
@@ -523,7 +523,7 @@ asm void fn_80278330(void)
     psq_st f1, 0x0(r3), 0, 0
     lwz r3, lbl_8087F428
     stfs f2, 0x1c(r1)
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     b lbl_fn_80278330_00000644
 lbl_fn_80278330_000005F0:
     lwz r0, 0x7e0(r3)
@@ -1573,7 +1573,7 @@ lbl_fn_80279280_0000151C:
     lwz r3, 0x88(r25)
     cmpwi r3, 0x0
     beq lbl_fn_80279280_000018FC
-    bl fn_8000DD0C
+    bl scene_getRootNode
     addi r4, r26, 0x1c9
     bl atn_Model_getBoneMatrix
     mr r4, r3
@@ -1669,7 +1669,7 @@ lbl_fn_80279280_0000160C:
     bge lbl_fn_80279280_00001740
     addi r3, r1, 0x48
     addi r4, r1, 0x90
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x84
     addi r4, r1, 0xb4
     addi r5, r1, 0x48
@@ -1787,7 +1787,7 @@ lbl_fn_80279280_0000174C:
     li r5, 0x66
     bl fn_800F7FA8
     lwz r3, 0x88(r25)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r29, r3
     bl viewport_getGlobalContext
     mr r5, r29
@@ -1799,7 +1799,7 @@ lbl_fn_80279280_0000174C:
     li r5, 0x67
     bl fn_800F7FA8
     lwz r3, 0x88(r25)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r29, r3
     bl viewport_getGlobalContext
     mr r5, r29

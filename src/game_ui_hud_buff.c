@@ -8,7 +8,7 @@ extern void _savegpr_23(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void scene_traverseNode(void);
-extern void fn_8004B290(void);
+extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void fn_80063484(void);
 extern void fn_80076FF8(void);
@@ -22,7 +22,7 @@ extern void str_findChar(void);
 extern void fn_8010C00C(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_8012B988(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void fn_8013407C(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
@@ -37,7 +37,7 @@ extern void fn_801E91A0(void);
 extern void fn_801E91B4(void);
 extern void fn_801E9218(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801F6E78(void);
+extern void save_calculateBlockCrc(void);
 extern void fn_80201E78(void);
 extern void profile_getMetricValue(void);
 extern void fn_80202A6C(void);
@@ -903,7 +903,7 @@ lbl_fn_801CCE50_00000ABC:
     stw r29, 0x1ec(r31)
     stw r29, 0x1f0(r31)
     stw r29, 0x1f4(r31)
-    bl fn_8004B290
+    bl sound_initChannelParams
     lwz r3, lbl_8087EEE0
     bl fn_80076FF8
     lfs f3, lbl_808829C8
@@ -1189,7 +1189,7 @@ lbl_fn_801CD210_00000ECC:
     bne lbl_fn_801CD210_00000F08
 lbl_fn_801CD210_00000F00:
     addi r3, r4, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
 lbl_fn_801CD210_00000F08:
     addi r30, r30, 0xc
     addi r28, r28, 0x1
@@ -1802,7 +1802,7 @@ lbl_fn_801CDA00_00001620:
     bl perf_getMetricValue
     addi r4, r29, 0xf6
     addi r5, r1, 0x78
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
 lbl_fn_801CDA00_000017A8:
     lis r29, lbl_8073BCF0@ha
     lfs f30, lbl_808829F8
@@ -1863,7 +1863,7 @@ lbl_fn_801CDA00_000017C0:
     bl perf_getMetricValue
     addi r4, r29, 0x10a
     addi r5, r1, 0x78
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
 lbl_fn_801CDA00_00001894:
     addi r24, r24, 0x1
     addi r27, r27, 0x4

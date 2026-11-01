@@ -56,18 +56,18 @@ extern u8 lbl_807CA130[];
 /* Function declarations */
 void fn_805C1900(void);
 void fn_805C1A00(void);
-void fn_805C1A10(void);
+void *fn_805C1A10(void *obj);
 void fn_805C1A20(void);
 void fn_805C1B00(void);
 void fn_805C1B10(void);
-void fn_805C1B20(void);
-void fn_805C1B30(void);
+u32 fn_805C1B20(void);
+void fn_805C1B30(void *obj, void *val);
 void fn_805C1B40(void);
-void fn_805C1B50(void);
+void *fn_805C1B50(void *obj);
 void fn_805C1B60(void);
-void fn_805C1B90(void);
-void fn_805C1BA0(void);
-void fn_805C1BB0(void);
+void fn_805C1B90(void *obj, void *val);
+u32 fn_805C1BA0(void);
+void fn_805C1BB0(void *p, u32 val);
 void fn_805C1BC0(void);
 void fn_805C1CC0(void);
 void fn_805C1DC0(void);
@@ -80,7 +80,7 @@ void fn_805C2250(void);
 void fn_805C2270(void);
 void fn_805C2290(void);
 void fn_805C22A0(void);
-void fn_805C22B0(void);
+void fn_805C22B0(void *p, f32 val);
 void fn_805C22C0(void);
 void fn_805C2360(void);
 void fn_805C23C0(void);
@@ -199,11 +199,9 @@ asm void fn_805C1A00(void)
     blr
 }
 
-asm void fn_805C1A10(void)
+void *fn_805C1A10(void *obj)
 {
-    nofralloc
-    lwz r3, 0xc(r3)
-    blr
+    return *(void **)((char *)obj + 0xc);
 }
 
 asm void fn_805C1A20(void)
@@ -282,29 +280,23 @@ void fn_805C1B10(void)
 {
 }
 
-asm void fn_805C1B20(void)
+u32 fn_805C1B20(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_805C1B30(void)
+void fn_805C1B30(void *obj, void *val)
 {
-    nofralloc
-    stw r4, 0x1c(r3)
-    blr
+    *(void **)((char *)obj + 0x1c) = val;
 }
 
 void fn_805C1B40(void)
 {
 }
 
-asm void fn_805C1B50(void)
+void *fn_805C1B50(void *obj)
 {
-    nofralloc
-    lwz r3, 0x2c(r3)
-    blr
+    return *(void **)((char *)obj + 0x2c);
 }
 
 asm void fn_805C1B60(void)
@@ -323,25 +315,19 @@ asm void fn_805C1B60(void)
     blr
 }
 
-asm void fn_805C1B90(void)
+void fn_805C1B90(void *obj, void *val)
 {
-    nofralloc
-    stw r4, 0x4(r3)
-    blr
+    *(void **)((char *)obj + 4) = val;
 }
 
-asm void fn_805C1BA0(void)
+u32 fn_805C1BA0(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_805C1BB0(void)
+void fn_805C1BB0(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x24(r3)
-    blr
+    *(u32 *)((char *)p + 0x24) = val;
 }
 
 asm void fn_805C1BC0(void)
@@ -859,11 +845,9 @@ void fn_805C22A0(void)
 {
 }
 
-asm void fn_805C22B0(void)
+void fn_805C22B0(void *p, f32 val)
 {
-    nofralloc
-    stfs f1, 0x4(r3)
-    blr
+    *(f32 *)((char *)p + 0x4) = val;
 }
 
 asm void fn_805C22C0(void)

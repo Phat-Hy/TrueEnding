@@ -21,7 +21,7 @@ extern void fn_8007FE5C(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void fn_800875F8(void);
@@ -30,9 +30,9 @@ extern void node_createNamedChild(void);
 extern void fn_800C5F5C(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void str_findChar(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void memcmp(void);
 extern void strcat(void);
 extern void std_cos(void);
@@ -1030,7 +1030,7 @@ lbl_fn_80080C20_00000C60:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x44(r1)
     mr r15, r3
@@ -1057,7 +1057,7 @@ lbl_fn_80080C20_00000D24:
     bl strcpy
     stw r22, 0x40(r1)
     addi r3, r1, 0x40
-    bl fn_800DCA6C
+    bl sky_renderStub
     cmpwi r17, 0x0
     beq lbl_fn_80080C20_00000D60
     addic. r3, r17, 0x4
@@ -1263,7 +1263,7 @@ lbl_fn_80080C20_00000FC4:
 lbl_fn_80080C20_00000FF0:
     stw r3, 0x4(r15)
     addi r4, r1, 0x58
-    bl fn_800D5908
+    bl depth_resetRenderTarget
 lbl_fn_80080C20_00000FFC:
     lwz r0, 0x4c(r1)
     srwi. r0, r0, 31

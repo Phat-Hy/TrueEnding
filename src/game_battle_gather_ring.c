@@ -5,12 +5,12 @@
 extern void _restgpr_25(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
-extern void fn_80056DB8(void);
+extern void path_Object_constructor(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
 extern void fn_80058078(void);
-extern void fn_800580BC(void);
-extern void fn_800588FC(void);
+extern void mission_isObjectiveActive(void);
+extern void mission_updateObjectiveTarget(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
@@ -21,7 +21,7 @@ extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092A00(void);
-extern void fn_80092F1C(void);
+extern void target_pushPointToHistory(void);
 extern void fn_80095D44(void);
 extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
@@ -43,11 +43,11 @@ extern void fn_803EBE74(void);
 extern void fn_803EC0F8(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
-extern void fn_803EC7A0(void);
+extern void barrier_formatDialogString(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
-extern void fn_803ED5D0(void);
-extern void fn_803ED774(void);
+extern void barrier_bindFieldAnimation(void);
+extern void dungeon_updateBarrierField(void);
 extern void fn_803EDB18(void);
 extern void fn_803F42C8(void);
 extern void boss_getOffset54(void);
@@ -285,7 +285,7 @@ asm void fn_803F1C38(void)
     stfs f0, 0x208(r29)
     stw r31, 0x20c(r29)
     stw r31, 0x210(r29)
-    bl fn_80056DB8
+    bl path_Object_constructor
     lis r3, lbl_80777668@ha
     stw r31, 0x288(r29)
     addi r3, r3, lbl_80777668@l
@@ -668,7 +668,7 @@ lbl_fn_803F2110_00000740:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     addi r3, r30, 0x17c
     psq_l f1, 0x0(r31), 0, 0
     psq_l f2, 0x8(r31), 0, 0
@@ -682,7 +682,7 @@ lbl_fn_803F2110_00000740:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     lfs f8, 0x8c(r1)
     addi r3, r1, 0x90
     lfs f7, 0x7c(r1)
@@ -881,7 +881,7 @@ lbl_fn_803F2344_00000A68:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     addi r3, r31, 0x17c
     psq_l f1, 0x0(r30), 0, 0
     psq_l f2, 0x8(r30), 0, 0
@@ -895,7 +895,7 @@ lbl_fn_803F2344_00000A68:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     lfs f8, 0xdc(r1)
     addi r3, r1, 0xe0
     lfs f7, 0xcc(r1)
@@ -1048,7 +1048,7 @@ lbl_fn_803F2344_00000CEC:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_803F2344_00000D3C:
     li r30, 0x0
     li r29, 0x0
@@ -1087,7 +1087,7 @@ lbl_fn_803F2344_00000D70:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_803F2344_00000DC8:
     li r30, 0x0
     li r29, 0x0
@@ -1246,7 +1246,7 @@ lbl_fn_803F2344_00000FE4:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_803F2344_00001020:
     li r30, 0x0
     li r29, 0x0
@@ -1371,7 +1371,7 @@ asm void fn_803F2BA0(void)
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_803F2BA0_000011D0:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -1417,11 +1417,11 @@ lbl_fn_803F2C1C_00001250:
     b lbl_fn_803F2C1C_00001284
 lbl_fn_803F2C1C_00001258:
     addi r3, r31, 0xf4
-    bl fn_800580BC
+    bl mission_isObjectiveActive
     cmpwi r3, 0x0
     bne lbl_fn_803F2C1C_00001278
     addi r3, r31, 0x17c
-    bl fn_800580BC
+    bl mission_isObjectiveActive
     cmpwi r3, 0x0
     beq lbl_fn_803F2C1C_00001280
 lbl_fn_803F2C1C_00001278:
@@ -1507,7 +1507,7 @@ lbl_fn_803F2CD0_00001354:
     mr r3, r29
     addi r4, r29, 0x65c
     addi r5, r1, 0x108
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     b lbl_fn_803F2CD0_0000179C
 lbl_fn_803F2CD0_000013A8:
     mr r3, r26
@@ -1526,7 +1526,7 @@ lbl_fn_803F2CD0_000013A8:
     addi r3, r29, 0x65c
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_803F2CD0_0000179C
 lbl_fn_803F2CD0_000013F0:
     mr r3, r26
@@ -1543,7 +1543,7 @@ lbl_fn_803F2CD0_000013F0:
     mr r3, r29
     addi r4, r29, 0x28c
     addi r5, r1, 0x108
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     b lbl_fn_803F2CD0_0000179C
 lbl_fn_803F2CD0_00001430:
     mr r3, r26
@@ -1562,7 +1562,7 @@ lbl_fn_803F2CD0_00001430:
     addi r3, r29, 0x28c
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_803F2CD0_0000179C
 lbl_fn_803F2CD0_00001478:
     mr r3, r26

@@ -29,7 +29,7 @@ extern void fn_80072D74(void);
 extern void fn_80072E08(void);
 extern void dungeon_initGlobalContext(void);
 extern void town_synchronizedDispatch(void);
-extern void fn_800839EC(void);
+extern void town_registerInteractionPoint(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void PSMTX44Inverse(void);
@@ -2911,7 +2911,7 @@ lbl_fn_800713D4_000026B4:
     li r6, 0x6
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     stw r3, 0x70(r30)
     bl dungeon_initGlobalContext
     addi r7, r27, lbl_807317C0@l
@@ -2921,7 +2921,7 @@ lbl_fn_800713D4_000026B4:
     li r6, 0x6
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     stw r3, 0x74(r30)
     li r4, 0x0
     lwz r3, 0x54(r30)

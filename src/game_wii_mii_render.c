@@ -9,7 +9,7 @@ extern void _savegpr_27(void);
 extern void scene_traverseNode(void);
 extern void map_debugLog(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void fn_800F29D0(void);
 extern void fn_8011BF3C(void);
 extern void enemy_updateCombatBehavior(void);
@@ -1993,7 +1993,7 @@ lbl_fn_8056A9E8_00001BA4:
     li r4, 0x1
     rlwinm r0, r0, 0, 26, 24
     stw r0, 0x4(r26)
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     cmpwi r31, 0x0
     beq lbl_fn_8056A9E8_00001CA0
     lis r4, lbl_8075FF7C@ha

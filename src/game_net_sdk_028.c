@@ -15,7 +15,7 @@ extern void _savegpr_27(void);
 extern void srand(void);
 extern void strcmp(void);
 extern void fn_806D57A0(void);
-extern void fn_806D5850(void);
+extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
@@ -26,7 +26,7 @@ extern void fn_806D63A0(void);
 extern void net_socketConnect(void);
 extern void net_socketClose(void);
 extern void fn_806D8F10(void);
-extern void fn_806D8F30(void);
+extern void net_getTimestampMs(void);
 extern void fn_806D9610(void);
 extern void fn_806D9620(void);
 extern void fn_806D9630(void);
@@ -1022,9 +1022,9 @@ lbl_fn_806DA4D0_00000C6C:
     lwz r3, 0x0(r31)
     bl fn_806EA850
     lwz r3, 0x8(r31)
-    bl fn_806D5850
+    bl net_pollActiveSockets
     lwz r3, 0x4(r31)
-    bl fn_806D5850
+    bl net_pollActiveSockets
     li r0, 0x0
     stw r0, 0xc(r31)
     li r3, 0x0
@@ -2594,7 +2594,7 @@ lbl_fn_806DB810_00002040:
     b lbl_fn_806DB810_00002134
 lbl_fn_806DB810_0000211C:
     bl fn_806D8F10
-    bl fn_806D8F30
+    bl net_getTimestampMs
     bl srand
     lwz r0, 0x8(r1)
     li r3, 0x0

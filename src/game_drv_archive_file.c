@@ -18,7 +18,7 @@ extern void dialog_selectChoice(void);
 extern void fn_80160170(void);
 extern void fn_80160324(void);
 extern void battle_canTargetActor(void);
-extern void fn_801781B0(void);
+extern void battle_calcAABBCenter(void);
 extern void fn_80178864(void);
 extern void fn_8017ABD4(void);
 extern void fn_8017AC08(void);
@@ -26,7 +26,7 @@ extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void fn_8021A77C(void);
 extern void fn_8021A888(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void fn_803E4A20(void);
 extern void fn_803E5C60(void);
 extern void fn_8059A268(void);
@@ -77,7 +77,7 @@ void fn_805AA394(void);
 void fn_805AA4CC(void);
 void fn_805AA4E8(void);
 void fn_805AA738(void);
-void fn_805AA828(void);
+u32 fn_805AA828(void);
 void fn_805AA830(void);
 void fn_805AA950(void);
 
@@ -1177,10 +1177,10 @@ lbl_fn_805AA4E8_00000F68:
     cmpwi r3, 0x0
     beq lbl_fn_805AA4E8_00000F94
     li r4, 0xbb
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
     lwz r3, lbl_8087F430
     li r4, 0xbc
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_805AA4E8_00000F94:
     lwz r3, lbl_8087EF70
     li r4, 0x0
@@ -1309,11 +1309,9 @@ lbl_fn_805AA738_0000114C:
     blr
 }
 
-asm void fn_805AA828(void)
+u32 fn_805AA828(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_805AA830(void)
@@ -1804,7 +1802,7 @@ lbl_fn_805AA950_0000184C:
     bne lbl_fn_805AA950_00001868
     lwz r4, 0x4(r21)
     mr r3, r24
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     b lbl_fn_805AA950_00001898
 lbl_fn_805AA950_00001868:
     cmpwi r0, 0x1

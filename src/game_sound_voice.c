@@ -31,7 +31,7 @@ extern void fn_801F45F4(void);
 extern void save_parseSlotStats(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
-extern void fn_801F6E78(void);
+extern void save_calculateBlockCrc(void);
 extern void fn_801F7590(void);
 extern void fn_801F7DF0(void);
 extern void fn_801F8830(void);
@@ -39,18 +39,18 @@ extern void profile_getMetricValue(void);
 extern void perf_getMetricValue(void);
 extern void assert_generateId(void);
 extern void fn_802091E8(void);
-extern void fn_8020924C(void);
+extern void mem_findBlockById(void);
 extern void fn_8020BCEC(void);
 extern void fn_8020BD14(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void fn_8020EF4C(void);
 extern void random_generateValue(void);
 extern void event_findEntryById(void);
 extern void task_mapIdToQueue(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
-extern void fn_803750E4(void);
-extern void fn_804444E8(void);
+extern void kpad_validateButtonIndex(void);
+extern void gmk_findSlotByIndex(void);
 extern void fn_8044493C(void);
 extern void fn_804A3C24(void);
 extern void fn_804A4294(void);
@@ -178,12 +178,12 @@ lbl_fn_801D7354_00000094:
     bl perf_getMetricValue
     addi r4, r29, 0x2e
     addi r5, r1, 0x1c
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     lwz r3, 0x4(r25)
     bl perf_getMetricValue
     addi r4, r29, 0x2e
     addi r5, r1, 0x1c
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     cmpwi r28, 0x0
     beq lbl_fn_801D7354_00000178
     lwz r3, lbl_8087F4F0
@@ -191,7 +191,7 @@ lbl_fn_801D7354_00000094:
     bl fn_8044493C
     mr r4, r3
     lwz r3, lbl_8087F4F0
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     bgt lbl_fn_801D7354_00000170
     lwz r0, 0x8(r25)
@@ -337,7 +337,7 @@ lbl_fn_801D7560_000002DC:
     bl perf_getMetricValue
     addi r4, r29, 0x2e
     addi r5, r1, 0x4c
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
 lbl_fn_801D7560_00000370:
     lwz r3, 0x1378(r30)
     bl perf_getMetricValue
@@ -374,7 +374,7 @@ lbl_fn_801D7560_00000370:
     bl perf_getMetricValue
     addi r4, r29, 0x2e
     addi r5, r1, 0x38
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     cmpwi r26, 0x0
     ble lbl_fn_801D7560_00000420
     lwz r3, 0x1378(r30)
@@ -555,7 +555,7 @@ lbl_fn_801D77A4_00000610:
     bl perf_getMetricValue
     addi r4, r25, 0x2e
     addi r5, r1, 0x60
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     mr r3, r23
     bl fn_80117214
     slwi r0, r3, 2
@@ -769,7 +769,7 @@ lbl_fn_801D7AC0_0000092C:
     bl perf_getMetricValue
     addi r4, r25, 0x2e
     addi r5, r1, 0x60
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     mr r3, r22
     bl fn_80117214
     slwi r0, r3, 2
@@ -1208,7 +1208,7 @@ lbl_fn_801D80BC_00000F28:
     cmpwi r3, 0x0
     beq lbl_fn_801D80BC_000011EC
     li r4, 0x159
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
     b lbl_fn_801D80BC_000011EC
 lbl_fn_801D80BC_00000F9C:
     addi r3, r1, 0x24
@@ -1269,7 +1269,7 @@ lbl_fn_801D80BC_00001054:
     cmpwi r3, 0x0
     beq lbl_fn_801D80BC_000011EC
     li r4, 0x159
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
     b lbl_fn_801D80BC_000011EC
 lbl_fn_801D80BC_00001084:
     mr r3, r31
@@ -1284,7 +1284,7 @@ lbl_fn_801D80BC_00001084:
     bne lbl_fn_801D80BC_000010E0
     lwz r4, -0x7d70(r3)
     li r3, 0x0
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     bl fn_8020EF4C
     cmpwi r3, 0x0
     beq lbl_fn_801D80BC_000010E0
@@ -1464,7 +1464,7 @@ lbl_fn_801D8560_00001334:
     bne lbl_fn_801D8560_000013A0
     lwz r4, -0x7d70(r3)
     li r3, 0x0
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     bl fn_8020EF4C
     cmpwi r3, 0x0
     beq lbl_fn_801D8560_000013A0
@@ -1504,7 +1504,7 @@ lbl_fn_801D8560_000013A0:
     li r4, -0x1
     bl ref_releaseHandle
     lwz r3, 0xc(r29)
-    bl fn_8020924C
+    bl mem_findBlockById
     lwz r4, lbl_8087F1E4
     mr r26, r3
     lwz r27, 0x894(r4)

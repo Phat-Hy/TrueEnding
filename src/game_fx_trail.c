@@ -8,7 +8,7 @@ extern void vec3_copy(void);
 extern void vec3_assign(void);
 extern void fn_800109E0(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
 extern void vec3_add(void);
@@ -19,23 +19,23 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void wcs_vformat(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_800F8524(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
-extern void fn_80108C10(void);
-extern void fn_80109828(void);
-extern void fn_801125F8(void);
+extern void hurtbox_testCollisionLayer(void);
+extern void hurtbox_dispatchHitEvent(void);
+extern void phys_scaleGravity(void);
 extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
 extern void fn_8012AFE8(void);
 extern void npc_updateDialogueTarget(void);
 extern void fn_80139F24(void);
 extern void fn_80139F3C(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_8013C554(void);
 extern void fn_801404F8(void);
@@ -230,7 +230,7 @@ lbl_fn_8028C834_00000154:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x30
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lis r4, lbl_80745314@ha
     addi r3, r31, 0xb0
     addi r4, r4, lbl_80745314@l
@@ -394,10 +394,10 @@ asm void fn_8028CB38(void)
     bl fn_80290674
     li r0, 0x0
     stw r0, 0x14b8(r31)
-    bl fn_8013A194
+    bl npc_getGlobalManager
     bl system_getNextSequenceId
     stw r3, 0x1550(r31)
-    bl fn_8013A194
+    bl npc_getGlobalManager
     bl system_getNextSequenceId
     stw r3, 0x1554(r31)
     bl equip_getGlobalManager
@@ -519,18 +519,18 @@ lbl_fn_8028CB38_00000574:
     la r3, lbl_8087DC38
     la r4, lbl_8087DC3C
     bl fn_800F8524
-    bl fn_801125F8
+    bl phys_scaleGravity
     addi r3, r1, 0xf0
     bl fn_8028CFB0
     addi r3, r1, 0x84
     addi r4, r1, 0xf0
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0xc0
     addi r4, r31, 0x534
     bl fn_800109E0
     addi r3, r1, 0x84
     addi r4, r1, 0xc0
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x3c
     addi r4, r1, 0x84
     bl vec3_toEulerAngles
@@ -581,7 +581,7 @@ lbl_fn_8028CB38_00000644:
     lfs f1, lbl_80883AF0
     addi r3, r1, 0x18
     addi r4, r1, 0x84
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x24
     addi r4, r1, 0x6c
     addi r5, r1, 0x18
@@ -604,7 +604,7 @@ lbl_fn_8028CB38_00000644:
     addi r3, r1, 0x54
     addi r4, r1, 0x124
     bl vec3_assign
-    bl fn_8013A194
+    bl npc_getGlobalManager
     li r0, -0x1
     stw r0, 0x8(r1)
     lfs f1, lbl_80883A98
@@ -1429,7 +1429,7 @@ asm void fn_8028D5C8(void)
     stfs f0, 0x44(r1)
     stfs f1, 0x48(r1)
     stfs f2, 0x4c(r1)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     lwz r3, 0x1630(r30)
     lis r4, lbl_80745314@ha
     addi r4, r4, lbl_80745314@l

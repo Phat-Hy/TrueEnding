@@ -17,8 +17,8 @@ extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void fn_80093F1C(void);
 extern void fn_80094778(void);
-extern void fn_800F52F0(void);
-extern void fn_800F72CC(void);
+extern void proj_getMatrix(void);
+extern void vec3_scale(void);
 extern void fn_800F7F80(void);
 extern void fn_800F7FB4(void);
 extern void fn_801162A0(void);
@@ -39,7 +39,7 @@ extern void fn_801404E0(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
 extern void fn_80140518(void);
-extern void fn_8014052C(void);
+extern void quest_initMarkerCoords(void);
 extern void fn_80148334(void);
 extern void dialog_setScriptSlot(void);
 extern void dialog_selectChoice(void);
@@ -54,7 +54,7 @@ extern void fn_8015D8C0(void);
 extern void fn_8015DEC0(void);
 extern void fn_8015E1B8(void);
 extern void fn_8015E4B0(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void fn_80160324(void);
 extern void fn_801681B0(void);
 extern void fn_80168824(void);
@@ -64,7 +64,7 @@ extern void fn_8016F5EC(void);
 extern void fn_801750FC(void);
 extern void fn_80175A38(void);
 extern void fn_8017B16C(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void random_generateValue(void);
 extern void event_findEntryById(void);
 extern void fn_80211940(void);
@@ -124,7 +124,7 @@ void fn_8015061C(void);
 void fn_8015076C(void);
 void fn_8015115C(void);
 void fn_80151168(void);
-void fn_80151180(void);
+u32 fn_80151180(void);
 void fn_80151188(void);
 void fn_80151194(void);
 
@@ -722,7 +722,7 @@ lbl_fn_8014FF9C_00000784:
     blt lbl_fn_8014FF9C_0000084C
     mr r3, r26
     mr r4, r27
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     cmpwi r3, 0x0
     bne lbl_fn_8014FF9C_0000084C
     lis r24, 0x1062
@@ -734,7 +734,7 @@ lbl_fn_8014FF9C_00000784:
     add r0, r0, r4
     mulli r0, r0, 0x3e8
     subf r4, r0, r27
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     bl random_generateValue
     bl event_findEntryById
     addi r0, r24, 0x4dd3
@@ -1286,7 +1286,7 @@ asm void fn_8015076C(void)
     lfs f1, lbl_808819F8
     addi r3, r1, 0xbc
     addi r4, r28, 0x28
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x124
     addi r4, r1, 0xbc
     bl vec3_copy
@@ -1437,7 +1437,7 @@ lbl_fn_8015076C_00001158:
     lfs f1, lbl_80881B0C
     mr r4, r25
     addi r3, r1, 0x8c
-    bl fn_800F72CC
+    bl vec3_scale
     lfs f1, lbl_8088196C
     addi r3, r1, 0x98
     lfs f2, lbl_808819F8
@@ -1535,22 +1535,22 @@ lbl_fn_8015076C_00001310:
     bl fn_80140500
     mr r4, r23
     addi r3, r1, 0x44
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     lfs f1, lbl_808819DC
     addi r3, r1, 0x50
     addi r4, r1, 0x44
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0xd4
     addi r4, r23, 0x528
     addi r5, r1, 0x50
     bl vec3_add
     mr r4, r23
     addi r3, r1, 0x2c
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     lfs f1, lbl_80881A80
     addi r3, r1, 0x38
     addi r4, r1, 0x2c
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0xc8
     addi r4, r23, 0x528
     addi r5, r1, 0x38
@@ -1613,7 +1613,7 @@ lbl_fn_8015076C_00001454:
     lwz r3, 0x0(r28)
     cmpwi r3, 0x0
     beq lbl_fn_8015076C_000014BC
-    bl fn_800F52F0
+    bl proj_getMatrix
     li r4, 0x18
     bl fn_80133EE8
     cmpwi r3, 0x0
@@ -1624,7 +1624,7 @@ lbl_fn_8015076C_00001454:
     cmpwi r3, 0x0
     beq lbl_fn_8015076C_000014BC
     lwz r3, 0x0(r28)
-    bl fn_800F52F0
+    bl proj_getMatrix
     li r4, 0x18
     li r5, -0x1
     bl fn_80133F18
@@ -1648,7 +1648,7 @@ lbl_fn_8015076C_000014BC:
     srwi. r0, r0, 31
     bne lbl_fn_8015076C_000017C0
     mr r3, r23
-    bl fn_800F52F0
+    bl proj_getMatrix
     li r4, 0x10
     addi r3, r3, 0xe8
     bl fn_801404E0
@@ -1672,7 +1672,7 @@ lbl_fn_8015076C_00001530:
     srwi. r0, r0, 31
     bne lbl_fn_8015076C_000017C0
     mr r3, r23
-    bl fn_800F52F0
+    bl proj_getMatrix
     li r4, 0x10
     addi r3, r3, 0xe8
     bl fn_801404E0
@@ -1763,7 +1763,7 @@ lbl_fn_8015076C_00001680:
     li r5, -0x1
 lbl_fn_8015076C_00001684:
     li r6, 0x0
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
 lbl_fn_8015076C_0000168C:
     lwz r3, 0xd1c(r23)
     cmpwi r3, 0x0
@@ -1958,11 +1958,9 @@ asm void fn_80151168(void)
     blr
 }
 
-asm void fn_80151180(void)
+u32 fn_80151180(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_80151188(void)

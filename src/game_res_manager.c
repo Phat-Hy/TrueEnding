@@ -24,7 +24,7 @@ extern void fn_80112F54(void);
 extern void fn_801207D4(void);
 extern void npc_updateDialogueTarget(void);
 extern void fn_80139F2C(void);
-extern void fn_8020A780(void);
+extern void str_appendString(void);
 extern void fn_80218218(void);
 extern void fn_8021A4CC(void);
 extern void fn_8022051C(void);
@@ -263,13 +263,13 @@ asm void fn_80223A10(void)
     bl sprintf
     addi r3, r1, 0x50
     addi r4, r1, 0x170
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0x60
     addi r4, r1, 0x50
     bl fn_801207D4
     addi r3, r1, 0x50
     addi r4, r30, 0x14
-    bl fn_8020A780
+    bl str_appendString
     li r29, 0x0
 lbl_fn_80223A10_00000220:
     addi r3, r1, 0x60

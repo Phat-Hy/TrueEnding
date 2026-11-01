@@ -34,20 +34,20 @@ extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void fn_80102824(void);
 extern void boss_updatePhaseState(void);
-extern void fn_801446F0(void);
+extern void quest_resetObjectiveBounds(void);
 extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
-extern void fn_80158BB4(void);
+extern void shop_canPurchaseItem(void);
 extern void fn_80164DCC(void);
 extern void fn_8016C1E0(void);
 extern void actor_setState(void);
 extern void battle_resolveAggroHierarchy(void);
 extern void battle_updateTargetAggro(void);
 extern void fn_801750FC(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void actor_getMovementFlags(void);
 extern void fn_8017A33C(void);
 extern void fn_8017AC3C(void);
@@ -163,7 +163,7 @@ extern u32 lbl_80884908;
 /* Function declarations */
 void fn_802F0964(void);
 void fn_802F0988(void);
-void fn_802F0990(void);
+u32 fn_802F0990(void);
 void fn_802F0998(void);
 void fn_802F09D4(void);
 void fn_802F0F60(void);
@@ -197,11 +197,9 @@ asm void fn_802F0988(void)
     blr
 }
 
-asm void fn_802F0990(void)
+u32 fn_802F0990(void)
 {
-    nofralloc
-    lwz r3, lbl_8087EFA8
-    blr
+    return lbl_8087EFA8;
 }
 
 asm void fn_802F0998(void)
@@ -480,7 +478,7 @@ lbl_fn_802F09D4_000003BC:
     stw r0, 0xf0(r1)
     stw r0, 0xf4(r1)
     stw r0, 0xf8(r1)
-    bl fn_80176548
+    bl battle_calcExpPosition
     mr r3, r30
     bl actor_getMovementFlags
     mr r7, r3
@@ -926,7 +924,7 @@ lbl_fn_802F1320_00000A14:
     bl actor_setState
 lbl_fn_802F1320_00000A30:
     lwz r3, 0x152c(r29)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     lwz r4, 0x152c(r29)
     li r31, 0x0
     lfs f3, lbl_80884850
@@ -2027,7 +2025,7 @@ lbl_fn_802F2294_000019D4:
     mtctr r4
     bctr
     mr r3, r31
-    bl fn_80158BB4
+    bl shop_canPurchaseItem
     cmpwi r3, 0x0
     beq lbl_fn_802F2294_00001A4C
     lwz r3, 0x14ec(r31)

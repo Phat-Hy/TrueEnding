@@ -36,7 +36,7 @@ void fn_806123E0(void);
 void GXSetCPUFifo(void);
 void GXSetGPFifo(void);
 void GXSaveCPUFifo(void);
-void fn_80612A50(void);
+u8 fn_80612A50(void);
 void GXGetFifoStatus(void);
 void GXGetFifoCount(void);
 void fn_80612B10(void);
@@ -540,11 +540,9 @@ lbl_GXSaveCPUFifo_000006EC:
     blr
 }
 
-asm void fn_80612A50(void)
+u8 fn_80612A50(void)
 {
-    nofralloc
-    lbz r3, lbl_80880081
-    blr
+    return lbl_80880081;
 }
 
 asm void GXGetFifoStatus(void)

@@ -14,7 +14,7 @@ extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_8029F148(void);
 extern void fn_802A42CC(void);
-extern void fn_8037D4C0(void);
+extern void dvd_showDiskErrorDialog(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -904,7 +904,7 @@ asm void fn_802A16A4(void)
     li r5, 0xf
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_802A16A4_00000C0C:
     lfs f31, 0x2e4(r30)
     addi r3, r30, 0xb0

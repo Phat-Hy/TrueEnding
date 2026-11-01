@@ -11,9 +11,9 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_800502A8(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8006AA20(void);
+extern void boss_triggerEventSequence(void);
 extern void fn_8006B0C8(void);
-extern void fn_8006B174(void);
+extern void boss_decodePhaseBitfield(void);
 extern void fn_8006B2D8(void);
 extern void fn_80070C98(void);
 extern void mem_alloc(void);
@@ -23,19 +23,19 @@ extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void fn_800902C0(void);
 extern void fn_80092A4C(void);
 extern void fn_80095300(void);
 extern void fn_8009E690(void);
-extern void fn_800C16B4(void);
+extern void skeleton_getGlobalManager(void);
 extern void atn_Task_destructor(void);
 extern void bloom_processPasses(void);
 extern void fn_800D4558(void);
 extern void fn_800D4DB8(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void atn_LH_Texture_update(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
@@ -131,7 +131,7 @@ lbl_fn_80499D60_0000002C:
     b lbl_fn_80499D60_00000088
 lbl_fn_80499D60_00000074:
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     lwz r4, 0x6c(r27)
     lwzx r4, r4, r31
     stw r3, 0x64(r4)
@@ -184,7 +184,7 @@ asm void fn_80499E14(void)
     bl actor_dispatchMessage
     mr r4, r29
     addi r3, r1, 0x1c
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0x10(r1)
     srwi. r0, r0, 31
     beq lbl_fn_80499E14_00000148
@@ -447,7 +447,7 @@ lbl_fn_8049A09C_0000045C:
     bl actor_dispatchMessage
     mr r4, r28
     addi r3, r1, 0x48
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     addi r3, r1, 0x3c
     addi r4, r1, 0x48
     bl fn_8006B2D8
@@ -484,7 +484,7 @@ lbl_fn_8049A09C_0000052C:
     bl dtor_80084684
 lbl_fn_8049A09C_00000540:
     addi r3, r1, 0x160
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_8049A09C_0000056C
     lwz r0, 0x340(r29)
@@ -521,7 +521,7 @@ lbl_fn_8049A09C_0000056C:
     bl actor_dispatchMessage
     mr r4, r28
     addi r3, r1, 0x24
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     addi r3, r1, 0x18
     addi r4, r1, 0x24
     bl fn_8006B2D8
@@ -558,7 +558,7 @@ lbl_fn_8049A09C_0000063C:
     bl dtor_80084684
 lbl_fn_8049A09C_00000650:
     addi r3, r1, 0x60
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_8049A09C_000006D0
     lwz r0, 0x340(r29)
@@ -1114,14 +1114,14 @@ asm void fn_8049AAFC(void)
     beq lbl_fn_8049AAFC_00000DF8
     li r31, 0x0
     addi r3, r3, 0x110
-    bl fn_8008CD60
+    bl minimap_renderOverlay
 lbl_fn_8049AAFC_00000DF8:
     lwz r0, 0x340(r30)
     extlwi r0, r0, 2, 5
     srawi. r0, r0, 31
     beq lbl_fn_8049AAFC_00000E14
     lwz r3, 0x324(r30)
-    bl fn_8008CD60
+    bl minimap_renderOverlay
     b lbl_fn_8049AAFC_00000E98
 lbl_fn_8049AAFC_00000E14:
     lwz r3, lbl_8087FA20
@@ -1808,7 +1808,7 @@ lbl_fn_8049B1F0_00001818:
     bne lbl_fn_8049B1F0_0000182C
     addi r3, r27, 0xdc
     addi r4, r27, 0x9c
-    bl fn_800D5908
+    bl depth_resetRenderTarget
 lbl_fn_8049B1F0_0000182C:
     lwz r0, 0x340(r27)
     extlwi r0, r0, 2, 5

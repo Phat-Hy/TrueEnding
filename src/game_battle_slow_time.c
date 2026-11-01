@@ -10,12 +10,12 @@ extern void ui_destroyWidget(void);
 extern void collision_queryGeometry(void);
 extern void fn_8004FF58(void);
 extern void fn_80058078(void);
-extern void fn_800580BC(void);
-extern void fn_800588FC(void);
+extern void mission_isObjectiveActive(void);
+extern void mission_updateObjectiveTarget(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void mem_alloc(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
@@ -44,8 +44,8 @@ extern void task_createWorker(void);
 extern void task_destroyWorker(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
-extern void fn_803ED5D0(void);
-extern void fn_803ED774(void);
+extern void barrier_bindFieldAnimation(void);
+extern void dungeon_updateBarrierField(void);
 extern void fn_803EDB18(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -144,7 +144,7 @@ lbl_fn_80406EC4_0000002C:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_80406EC4_00000068:
     lwz r3, lbl_8087F0A8
     lwz r0, 0x8(r3)
@@ -171,7 +171,7 @@ lbl_fn_80406EC4_00000068:
     stfs f2, 0x28(r1)
     fmr f2, f0
     stfs f0, 0x24(r1)
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     lfs f6, 0x954(r31)
     addi r4, r1, 0x14
     lfs f4, 0x28(r1)
@@ -197,7 +197,7 @@ lbl_fn_80406EC4_00000068:
     stfs f3, 0x14(r1)
     stfs f4, 0x18(r1)
     stfs f5, 0x1c(r1)
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_80406EC4_00000138:
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
@@ -228,7 +228,7 @@ lbl_fn_80407010_00000188:
     li r31, 0x1
 lbl_fn_80407010_0000018C:
     addi r3, r30, 0x894
-    bl fn_800580BC
+    bl mission_isObjectiveActive
     cmpwi r3, 0x0
     beq lbl_fn_80407010_000001A0
     li r31, 0x1
@@ -588,10 +588,10 @@ lbl_fn_80407408_00000610:
     bl task_initWorkerContext
     mr r3, r30
     addi r4, r30, 0xf4
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
     mr r3, r30
     addi r4, r30, 0x4c4
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
     lfs f0, lbl_80886258
     addi r3, r30, 0x894
     psq_l f1, 0xfc(r30), 0, 0
@@ -608,7 +608,7 @@ lbl_fn_80407408_00000610:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     lwz r0, 0x89c(r30)
     li r29, 0x1
     mr r4, r30
@@ -1836,7 +1836,7 @@ lbl_fn_80408578_000017FC:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_80408578_00001838:
     lfs f31, 0x328(r31)
     addi r3, r31, 0xf4
@@ -1903,7 +1903,7 @@ lbl_fn_80408578_000018FC:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_80408578_00001938:
     lfs f31, 0x328(r31)
     addi r3, r31, 0xf4

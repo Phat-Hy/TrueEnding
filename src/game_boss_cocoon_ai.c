@@ -12,17 +12,17 @@ extern void mem_free(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80094958(void);
 extern void fn_80094B6C(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80101340(void);
-extern void fn_80108C10(void);
+extern void hurtbox_testCollisionLayer(void);
 extern void fn_801162A0(void);
 extern void fn_8012DF7C(void);
 extern void npc_getPosition(void);
 extern void quest_evaluateConditions(void);
-extern void fn_80148B0C(void);
+extern void quest_getRewardItemSlot(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
 extern void actor_setState(void);
@@ -98,14 +98,14 @@ extern u32 lbl_80886BD4;
 extern u32 lbl_80886BD8;
 
 /* Function declarations */
-void fn_80453DB4(void);
+void *fn_80453DB4(void *obj);
 void fn_80453DBC(void);
 void fn_80453E20(void);
 void fn_804541A0(void);
 void fn_80454514(void);
 void fn_80454538(void);
 void fn_80454554(void);
-void fn_80454564(void);
+void *fn_80454564(void *obj);
 void fn_8045456C(void);
 void fn_804549E8(void);
 void fn_804549F8(void);
@@ -115,11 +115,9 @@ void fn_80454F08(void);
 void fn_8045531C(void);
 void fn_80455638(void);
 
-asm void fn_80453DB4(void)
+void *fn_80453DB4(void *obj)
 {
-    nofralloc
-    addi r3, r3, 0x54
-    blr
+    return (char *)obj + 0x54;
 }
 
 asm void fn_80453DBC(void)
@@ -679,11 +677,9 @@ asm void fn_80454554(void)
     blr
 }
 
-asm void fn_80454564(void)
+void *fn_80454564(void *obj)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(void **)((char *)obj + 4);
 }
 
 asm void fn_8045456C(void)
@@ -1115,7 +1111,7 @@ lbl_fn_804549F8_00000CD0:
     stw r0, 0x970(r7)
     stfs f0, 0x974(r7)
     stfs f0, 0x978(r7)
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     lfs f2, 0xc(r3)
     lis r5, lbl_8078F77C@ha
     addi r6, r1, 0x7c
@@ -1307,7 +1303,7 @@ lbl_fn_80454D4C_000010B8:
     li r4, 0x1
     stw r0, 0x16f8(r30)
     stw r31, 0x153c(r30)
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     stw r31, 0x38(r1)
     addi r3, r30, 0x14ec
     addi r4, r1, 0x38
@@ -2027,7 +2023,7 @@ lbl_fn_80455638_00001AE0:
     stfs f4, 0x80(r1)
     stfs f28, 0x74(r1)
     lwz r7, 0x0(r23)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     lwz r3, 0x0(r23)
     fmr f1, f29
     addi r4, r20, 0x1988
@@ -2266,7 +2262,7 @@ lbl_fn_80455638_00001DFC:
     stfd f0, 0xe8(r1)
     lwz r0, 0xec(r1)
     stw r0, 0xac(r1)
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     lfs f2, 0xc(r3)
     li r5, 0x0
     psq_l f1, 0x4(r3), 0, 0
@@ -2293,7 +2289,7 @@ lbl_fn_80455638_00001DFC:
     addi r4, r1, 0xa8
     li r8, 0x0
     li r9, 0x0
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     stw r22, 0x0(r23)
 lbl_fn_80455638_00001F6C:
     addi r24, r24, 0x1

@@ -20,7 +20,7 @@ extern void fn_8015C6A0(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void battle_resolveAggroHierarchy(void);
-extern void fn_801781B0(void);
+extern void battle_calcAABBCenter(void);
 extern void battle_updateActorStatus(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -29,7 +29,7 @@ extern void fn_80277DC4(void);
 extern void fn_802790A0(void);
 extern void world_setLocalFlag(void);
 extern void world_initMapTransitionParams(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
@@ -816,7 +816,7 @@ lbl_fn_80276D58_00000974:
     b lbl_fn_80276D58_000009F0
 lbl_fn_80276D58_000009AC:
     lwz r3, lbl_8087F8A0
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     beq lbl_fn_80276D58_000009E8
     lwz r5, 0x38(r3)
@@ -1701,7 +1701,7 @@ asm void fn_80277968(void)
     lwz r31, lbl_8087F048
     mr r4, r30
     addi r3, r1, 0x38
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     mr r3, r31
     addi r4, r1, 0x38
     li r5, 0x80

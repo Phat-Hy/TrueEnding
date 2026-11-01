@@ -26,10 +26,10 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void wcs_vformat(void);
-extern void fn_800EB7A0(void);
+extern void sound_playSpatialEffect(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
-extern void fn_80109828(void);
+extern void hurtbox_dispatchHitEvent(void);
 extern void enemy_updateCombatBehavior(void);
 extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
@@ -42,7 +42,7 @@ extern void fn_8015E4B0(void);
 extern void fn_801603CC(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void battle_updateActorStatus(void);
 extern void fn_801C02F4(void);
 extern void task_findEntryById(void);
@@ -125,10 +125,9 @@ void fn_8025C998(void);
 void fn_8025CDE0(void);
 void fn_8025CEF8(void);
 
-asm void fn_8025B5D4(void)
+void fn_8025B5D4(void)
 {
-    nofralloc
-    b dialog_renderWindow
+    dialog_renderWindow();
 }
 
 asm void fn_8025B5D8(void)
@@ -386,7 +385,7 @@ lbl_fn_8025B7DC_000002F0:
     stfs f0, 0x2e8(r30)
     bl atn_Anim_setLayerAnimation
     mr r3, r30
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     b lbl_fn_8025B7DC_00000400
 lbl_fn_8025B7DC_000003B4:
     addi r3, r30, 0x7d4
@@ -854,7 +853,7 @@ asm void fn_8025BF58(void)
     mr r4, r3
 lbl_fn_8025BF58_00000A68:
     mr r3, r30
-    bl fn_80178208
+    bl battle_generateLootDrops
     b lbl_fn_8025BF58_00000CA8
 lbl_fn_8025BF58_00000A74:
     lfs f4, 0x2e4(r30)
@@ -987,7 +986,7 @@ lbl_fn_8025BF58_00000C54:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0xb8
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     li r0, -0x1
     stw r0, 0x8(r1)
     lfs f1, lbl_808834A8

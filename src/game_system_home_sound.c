@@ -24,9 +24,9 @@ extern void fn_80075DEC(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void fn_80089EE4(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_800928B0(void);
+extern void compass_findWaypointIndex(void);
 extern void fn_80093F58(void);
 extern void fn_80097D9C(void);
 extern void fn_800A4228(void);
@@ -63,10 +63,10 @@ extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
 extern void fn_80614790(void);
 extern void GXInitLightDistAttn(void);
-extern void fn_80615FF0(void);
-extern void fn_80616250(void);
+extern void GXInitLightObj(void);
+extern void GXClampLightAngle(void);
 extern void fn_806165B0(void);
-extern void fn_80617340(void);
+extern void GXSetTevDirect(void);
 extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void GXSetTevAlphaIn(void);
@@ -261,7 +261,7 @@ asm void fn_80363960(void)
     stw r4, 0x3d4(r3)
     mr r3, r4
     lwz r4, 0x3d8(r31)
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     stw r3, 0x3d8(r31)
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -448,7 +448,7 @@ asm void fn_80363C10(void)
     cmpwi r0, 0x0
     bltlr
     addi r3, r3, 0x4
-    b fn_8008CD60
+    b minimap_renderOverlay
     blr
 }
 
@@ -1474,7 +1474,7 @@ lbl_dvd_initFatalErrorScreen_00001278:
     li r9, 0x0
     lhz r7, 0x18(r7)
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_808856DC
     addi r3, r1, 0x38
     li r4, 0x1
@@ -1484,7 +1484,7 @@ lbl_dvd_initFatalErrorScreen_00001278:
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     addi r3, r1, 0x38
     li r4, 0x0
     bl fn_806165B0
@@ -1650,7 +1650,7 @@ lbl_fn_80364BE8_0000149C:
     bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0x3
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0

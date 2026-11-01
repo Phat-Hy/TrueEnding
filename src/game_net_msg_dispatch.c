@@ -7,7 +7,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_14(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_80060D58(void);
+extern void equip_calcTotalStatBonuses(void);
 extern void skill_calculateDamage(void);
 extern void skill_calcTrajectory(void);
 extern void fn_8006F2F0(void);
@@ -1688,7 +1688,7 @@ asm void fn_804F8468(void)
     lfs f4, lbl_80887640
     fmr f3, f1
     lfs f5, lbl_80887644
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
     xoris r0, r28, 0x8000
     stw r0, 0x974(r1)
     lis r3, lbl_80759748@ha

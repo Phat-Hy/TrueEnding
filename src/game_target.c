@@ -10,7 +10,7 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void boss_recordDamage(void);
 extern void fn_80069BF4(void);
-extern void fn_8006B174(void);
+extern void boss_decodePhaseBitfield(void);
 extern void fn_8007FAF0(void);
 extern void fn_80081514(void);
 extern void mem_realloc(void);
@@ -42,7 +42,7 @@ extern u32 lbl_80880C14;
 
 /* Function declarations */
 void fn_80092EC8(void);
-void fn_80092F1C(void);
+void target_pushPointToHistory(void);
 void fn_80092F90(void);
 void fn_80093014(void);
 void fn_8009303C(void);
@@ -97,7 +97,7 @@ asm void fn_80092EC8(void)
     blr
 }
 
-asm void fn_80092F1C(void)
+asm void target_pushPointToHistory(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -302,7 +302,7 @@ asm void fn_80093158(void)
     bl actor_dispatchMessage
     mr r4, r20
     addi r3, r1, 0x74
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0x5c(r1)
     srwi. r0, r0, 31
     beq lbl_fn_80093158_00000324
@@ -438,7 +438,7 @@ lbl_fn_80093158_00000488:
     bl actor_dispatchMessage
     mr r4, r20
     addi r3, r1, 0x68
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0x44(r1)
     srwi. r0, r0, 31
     beq lbl_fn_80093158_00000500

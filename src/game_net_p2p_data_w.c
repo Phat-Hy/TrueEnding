@@ -7,7 +7,7 @@ extern void _savegpr_21(void);
 extern void dtor_80084684(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_8009EE30(void);
+extern void hud_drawTargetMarker(void);
 extern void fn_800A03E4(void);
 extern void fn_800A0548(void);
 extern void atn_Anim_getDuration(void);
@@ -1152,7 +1152,7 @@ lbl_fn_80510130_00000C10:
     li r3, 0x0
 lbl_fn_80510130_00000D8C:
     addi r4, r1, 0xf0
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
 lbl_fn_80510130_00000D94:
     lwz r6, 0x8(r29)
     cmpwi r6, 0x0
@@ -1783,7 +1783,7 @@ lbl_fn_805109D0_00001634:
     li r3, 0x0
 lbl_fn_805109D0_0000168C:
     addi r4, r1, 0xf0
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
     lwz r3, 0x0(r29)
     cmpwi r3, 0x0
     beq lbl_fn_805109D0_000016EC
@@ -1809,7 +1809,7 @@ lbl_fn_805109D0_000016E0:
     li r3, 0x0
 lbl_fn_805109D0_000016E4:
     addi r4, r4, 0xc
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
 lbl_fn_805109D0_000016EC:
     lwz r0, 0x134(r1)
     lwz r31, 0x12c(r1)

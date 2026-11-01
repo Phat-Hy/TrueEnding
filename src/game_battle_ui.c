@@ -13,7 +13,7 @@ extern void fn_801C1578(void);
 extern void fn_801C9B24(void);
 extern void fn_801C9F6C(void);
 extern void world_getGlobalFlag(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void fn_803CC3BC(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXRotAxis(void);
@@ -216,7 +216,7 @@ lbl_fn_80172EFC_000001F4:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_80172EFC_00000214
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     bne lbl_fn_80172EFC_00000218
 lbl_fn_80172EFC_00000214:

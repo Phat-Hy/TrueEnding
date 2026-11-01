@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -18,10 +18,10 @@ extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800E854C(void);
 extern void system_getNextSequenceId(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void fn_8011F9CC(void);
 extern void skill_findNodeById(void);
-extern void fn_801255C8(void);
+extern void enemy_stepBehavior(void);
 extern void fn_80128930(void);
 extern void fn_80129978(void);
 extern void fn_80129A48(void);
@@ -38,7 +38,7 @@ extern void fn_8015E4B0(void);
 extern void fn_80168F3C(void);
 extern void fn_8016D74C(void);
 extern void actor_setState(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void fn_8017BC58(void);
 extern void fn_8018E438(void);
 extern void task_findEntryById(void);
@@ -54,7 +54,7 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_8059C2AC(void);
-extern void fn_805A3C58(void);
+extern void rand_Mersenne_constructor(void);
 extern void fn_805A3D6C(void);
 extern void fn_805A4984(void);
 extern void fn_805A49E8(void);
@@ -391,7 +391,7 @@ asm void fn_80334CD8(void)
     mr r30, r5
     stw r29, 0x214(r1)
     mr r29, r3
-    bl fn_805A3C58
+    bl rand_Mersenne_constructor
     lfs f1, lbl_80885190
     lis r3, lbl_807891D4@ha
     li r31, 0x0
@@ -649,7 +649,7 @@ lbl_fn_80334FDC_000006A4:
     bl str_parseInt
     mr r4, r3
     mr r3, r30
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     stw r3, 0x1580(r29)
     b lbl_fn_80334FDC_00000970
 lbl_fn_80334FDC_000006E4:
@@ -1232,7 +1232,7 @@ lbl_fn_80335788_00000E4C:
     mr r4, r3
 lbl_fn_80335788_00000F10:
     mr r3, r30
-    bl fn_80178208
+    bl battle_generateLootDrops
     lfs f0, lbl_808851BC
     stfs f0, 0x2e4(r30)
 lbl_fn_80335788_00000F20:
@@ -1354,7 +1354,7 @@ asm void fn_80335988(void)
     lfs f0, lbl_808851E0
     addi r3, r31, 0xc64
     stfs f0, 0xc8c(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     lwz r0, 0x14cc(r31)
     oris r0, r0, 0x4000
     stw r0, 0x14cc(r31)
@@ -1420,7 +1420,7 @@ asm void fn_80335988(void)
     mr r4, r3
 lbl_fn_80335988_000011C8:
     mr r3, r31
-    bl fn_80178208
+    bl battle_generateLootDrops
     b lbl_fn_80335988_000011EC
 lbl_fn_80335988_000011D4:
     lwz r5, 0x14e4(r31)
@@ -1698,7 +1698,7 @@ lbl_fn_80335988_00001558:
     slwi r0, r0, 2
     add r4, r31, r0
     lwz r4, 0x1520(r4)
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r0, 0x14d8(r31)
     cmpwi r0, 0x0
     bne lbl_fn_80335988_00001610
@@ -1757,7 +1757,7 @@ lbl_fn_80335988_00001650:
     lfs f0, lbl_808851E0
     addi r3, r31, 0xc64
     stfs f0, 0xc8c(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     lwz r0, 0x58c(r31)
     lwz r3, 0x14cc(r31)
     cmpwi r0, 0xa

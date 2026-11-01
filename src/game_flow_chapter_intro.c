@@ -9,7 +9,7 @@ extern void _restgpr_14(void);
 extern void _restgpr_18(void);
 extern void _savegpr_14(void);
 extern void _savegpr_18(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void ui_destroyWidget(void);
 extern void fn_80051C78(void);
 extern void ref_releaseHandle(void);
@@ -23,14 +23,14 @@ extern void fn_80178668(void);
 extern void fn_80178864(void);
 extern void fn_8017C7F8(void);
 extern void game_initGlobalDatabases(void);
-extern void fn_8020EF04(void);
+extern void rand_scaleRangeInt(void);
 extern void event_findEntryById(void);
 extern void task_findEntryById(void);
 extern void world_setGlobalFlag(void);
 extern void world_getLocalFlag(void);
 extern void fn_803748E0(void);
-extern void fn_803750E4(void);
-extern void fn_8037D4C0(void);
+extern void kpad_validateButtonIndex(void);
+extern void dvd_showDiskErrorDialog(void);
 extern void fn_803BD2B0(void);
 extern void fn_803BD49C(void);
 extern void fn_803E9608(void);
@@ -328,7 +328,7 @@ lbl_fn_804E4490_000002E4:
     bne lbl_fn_804E4490_00000328
     addis r3, r28, 0x1
     lwz r3, -0x698c(r3)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_804E4490_000003D0
 lbl_fn_804E4490_00000328:
@@ -1383,7 +1383,7 @@ lbl_fn_804E4EB4_000010D8:
     li r5, 0xf
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_804E4EB4_00001128:
     lwz r3, lbl_8087F628
     lwz r4, 0xc2c(r3)
@@ -1415,7 +1415,7 @@ lbl_fn_804E4EB4_00001178:
     li r4, 0x1b0
     stw r27, 0x7c(r3)
     lwz r3, lbl_8087F430
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
     lwz r3, lbl_8087F9C0
     stw r28, 0x7c(r3)
     b lbl_fn_804E4EB4_0000124C
@@ -1555,7 +1555,7 @@ lbl_fn_804E4EB4_00001344:
     stw r30, 0x88(r1)
     lwz r5, 0x0(r23)
     mr r6, r5
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r3, 0x0(r23)
     li r4, 0xa
     bl fn_8015EFAC
@@ -1630,7 +1630,7 @@ lbl_fn_804E4EB4_00001490:
     li r9, 0x0
     li r10, 0x0
     mr r6, r5
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lbz r0, lbl_8087EE74
     extsb. r0, r0
     bne lbl_fn_804E4EB4_000014F4
@@ -1736,7 +1736,7 @@ lbl_fn_804E4EB4_00001634:
     li r4, 0x1bf
     stw r27, 0x7c(r3)
     lwz r3, lbl_8087F430
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
     lwz r3, lbl_8087F9C0
     stw r28, 0x7c(r3)
 lbl_fn_804E4EB4_0000165C:
@@ -2457,7 +2457,7 @@ lbl_fn_804E5BC8_00002020:
     li r4, 0x1be
     stw r0, 0x7c(r3)
     lwz r3, lbl_8087F430
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
     lwz r3, lbl_8087F9C0
     li r0, 0x0
     stw r0, 0x7c(r3)

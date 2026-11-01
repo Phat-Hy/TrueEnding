@@ -8,8 +8,8 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8004203C(void);
-extern void fn_80056DB8(void);
+extern void menu_initWindowBuffer(void);
+extern void path_Object_constructor(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void mem_free(void);
@@ -27,7 +27,7 @@ extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
 extern void fn_801588A0(void);
-extern void fn_8020A780(void);
+extern void str_appendString(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_update(void);
@@ -89,7 +89,7 @@ asm void fn_802AC550(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_80056DB8
+    bl path_Object_constructor
     lis r4, lbl_80777630@ha
     mr r3, r31
     addi r4, r4, lbl_80777630@l
@@ -353,7 +353,7 @@ asm void fn_802AC8E8(void)
     stw r29, 0x684(r1)
     mr r29, r3
     addi r3, r1, 0x44
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     lis r31, lbl_807462A8@ha
     addi r31, r31, lbl_807462A8@l
 lbl_fn_802AC8E8_000003C4:
@@ -542,12 +542,12 @@ lbl_fn_802AC8E8_00000640:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x28
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0x44
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x34
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0x44
     bl talk_parseQuotedString
     bl str_skipWhitespace
@@ -571,7 +571,7 @@ lbl_fn_802AC8E8_000006B0:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0x44
     bl talk_parseQuotedString
     bl str_skipWhitespace

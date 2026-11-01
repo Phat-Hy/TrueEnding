@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void mem_free(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void atn_Model_findBoneIndex(void);
 extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
@@ -159,7 +159,7 @@ lbl_fn_80317040_000000BC:
     fcmpo cr0, f1, f31
     ble lbl_fn_80317040_0000011C
     mr r3, r31
-    bl fn_8008CD60
+    bl minimap_renderOverlay
 lbl_fn_80317040_0000011C:
     addi r30, r30, 0x1
     addi r31, r31, 0x214

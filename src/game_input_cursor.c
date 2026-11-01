@@ -20,10 +20,10 @@ extern void actor_testBitFlag(void);
 extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_801426A4(void);
-extern void fn_80148B0C(void);
+extern void quest_getRewardItemSlot(void);
 extern void dialog_renderWindow(void);
 extern void inventory_applyItemStats(void);
-extern void fn_80158BB4(void);
+extern void shop_canPurchaseItem(void);
 extern void actor_setState(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -89,17 +89,16 @@ void fn_802F2C50(void);
 void fn_802F2D1C(void);
 void fn_802F2FA4(void);
 void fn_802F31D4(void);
-void fn_802F3394(void);
+u32 fn_802F3394(void);
 void fn_802F339C(void);
 void fn_802F33A0(void);
 void fn_802F389C(void);
 void fn_802F3BE8(void);
 void fn_802F42CC(void);
 
-asm void fn_802F2AF4(void)
+void fn_802F2AF4(void)
 {
-    nofralloc
-    b dialog_renderWindow
+    dialog_renderWindow();
 }
 
 asm void fn_802F2AF8(void)
@@ -700,11 +699,9 @@ lbl_fn_802F31D4_00000724:
     blr
 }
 
-asm void fn_802F3394(void)
+u32 fn_802F3394(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 void fn_802F339C(void) {
@@ -1421,7 +1418,7 @@ lbl_fn_802F3BE8_00001258:
     bl atn_Anim_setLayerAnimation
     b lbl_fn_802F3BE8_00001790
 lbl_fn_802F3BE8_000012F0:
-    bl fn_80158BB4
+    bl shop_canPurchaseItem
     cmpwi r3, 0x0
     beq lbl_fn_802F3BE8_00001344
     lwz r3, 0x14ec(r31)
@@ -1477,7 +1474,7 @@ lbl_fn_802F3BE8_0000139C:
     stfs f7, 0xb0(r1)
     stfs f0, 0xb4(r1)
     lwz r3, 0x1580(r31)
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     lfs f7, 0xc(r3)
     addi r4, r1, 0x88
     lfs f0, 0xb4(r1)

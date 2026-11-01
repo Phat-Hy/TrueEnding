@@ -12,8 +12,8 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void talk_parseDialogue(void);
-extern void fn_8005B8F8(void);
-extern void fn_8005B9AC(void);
+extern void talk_parseDialogueTokens(void);
+extern void talk_copyUtf16String(void);
 extern void fn_8006A004(void);
 extern void fn_8006B53C(void);
 extern void fn_8006F5E8(void);
@@ -23,7 +23,7 @@ extern void mem_getAllocSize(void);
 extern void wcs_parseInt(void);
 extern void str_findChar(void);
 extern void fn_8046DC5C(void);
-extern void fn_8046DD20(void);
+extern void boss_bindArenaInteractions(void);
 extern void printf(void);
 extern void rand(void);
 extern void strcmp(void);
@@ -214,7 +214,7 @@ lbl_fn_8021EB04_00000194:
     bne lbl_fn_8021EB04_0000012C
     lwz r3, lbl_8087F518
     mr r4, r30
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
 lbl_fn_8021EB04_000001B0:
     lwz r0, 0x654(r1)
     lwz r31, 0x64c(r1)
@@ -315,7 +315,7 @@ lbl_fn_8021ED08_000002CC:
     stw r3, 0x18(r1)
     mr r3, r28
     addi r4, r4, lbl_8077A0A8@l
-    bl fn_8005B9AC
+    bl talk_copyUtf16String
     b lbl_fn_8021ED08_0000031C
 lbl_fn_8021ED08_000002FC:
     addi r3, r1, 0x18
@@ -328,7 +328,7 @@ lbl_fn_8021ED08_000002FC:
     stw r0, lbl_8087F344
 lbl_fn_8021ED08_0000031C:
     addi r3, r1, 0x18
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_8021ED08_000002FC
     lwz r28, lbl_8087F344
@@ -456,12 +456,12 @@ lbl_fn_8021ED08_000004F4:
     addi r31, r31, 0xec
 lbl_fn_8021ED08_000004F8:
     addi r3, r1, 0x18
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_8021ED08_000003C8
     lwz r3, lbl_8087F518
     mr r4, r29
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     lwz r0, 0xc(r1)
     srwi. r0, r0, 31
     beq lbl_fn_8021ED08_00000528
@@ -742,7 +742,7 @@ lbl_fn_8021F100_00000898:
     bne lbl_fn_8021F100_00000840
     lwz r3, lbl_8087F518
     mr r4, r29
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     lwz r0, 0x28(r1)
     srwi. r0, r0, 31
     beq lbl_fn_8021F100_000008C8
@@ -1164,7 +1164,7 @@ lbl_fn_8021F47C_00000E70:
     bne lbl_fn_8021F47C_00000BC0
     lwz r3, lbl_8087F518
     mr r4, r20
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     addic. r18, r1, 0x44
     beq lbl_fn_8021F47C_00000FCC
     beq lbl_fn_8021F47C_00000FCC

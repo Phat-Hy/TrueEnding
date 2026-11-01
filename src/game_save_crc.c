@@ -59,7 +59,7 @@ void fn_801F6C2C(void);
 void fn_801F6C38(void);
 void save_computeCrc32(void);
 void save_verifyBlockCrc(void);
-void fn_801F6E78(void);
+void save_calculateBlockCrc(void);
 void fn_801F72D4(void);
 
 asm void fn_801F5BC8(void)
@@ -1461,7 +1461,7 @@ lbl_save_verifyBlockCrc_00001298:
     blr
 }
 
-asm void fn_801F6E78(void)
+asm void save_calculateBlockCrc(void)
 {
     nofralloc
     stwu r1, -0x70(r1)
@@ -1493,45 +1493,45 @@ asm void fn_801F6E78(void)
     stfs f31, 0x40(r1)
     mtctr r8
     cmplwi r8, 0x0
-    ble lbl_fn_801F6E78_00001374
-lbl_fn_801F6E78_00001328:
+    ble lbl_save_calculateBlockCrc_00001374
+lbl_save_calculateBlockCrc_00001328:
     lbz r0, 0x5c(r7)
     extsb r0, r0
     cmpw r5, r0
-    bne lbl_fn_801F6E78_00001368
+    bne lbl_save_calculateBlockCrc_00001368
     lbz r0, 0x5d(r7)
     extsb r0, r0
     cmpw r4, r0
-    bne lbl_fn_801F6E78_00001368
+    bne lbl_save_calculateBlockCrc_00001368
     lwz r0, 0x60(r7)
     cmplw r3, r0
-    bne lbl_fn_801F6E78_00001368
+    bne lbl_save_calculateBlockCrc_00001368
     mulli r0, r6, 0xc
     lwz r4, 0x40(r1)
     add r3, r29, r0
     stw r4, 0x64(r3)
-    b lbl_fn_801F6E78_000013AC
-lbl_fn_801F6E78_00001368:
+    b lbl_save_calculateBlockCrc_000013AC
+lbl_save_calculateBlockCrc_00001368:
     addi r7, r7, 0xc
     addi r6, r6, 0x1
-    bdnz lbl_fn_801F6E78_00001328
-lbl_fn_801F6E78_00001374:
+    bdnz lbl_save_calculateBlockCrc_00001328
+lbl_save_calculateBlockCrc_00001374:
     lwz r0, 0x58(r29)
     mulli r0, r0, 0xc
     add r0, r29, r0
     addic. r3, r0, 0x5c
-    beq lbl_fn_801F6E78_000013A0
+    beq lbl_save_calculateBlockCrc_000013A0
     lwz r0, 0x38(r1)
     stw r0, 0x0(r3)
     lwz r0, 0x3c(r1)
     stw r0, 0x4(r3)
     lwz r0, 0x40(r1)
     stw r0, 0x8(r3)
-lbl_fn_801F6E78_000013A0:
+lbl_save_calculateBlockCrc_000013A0:
     lwz r3, 0x58(r29)
     addi r0, r3, 0x1
     stw r0, 0x58(r29)
-lbl_fn_801F6E78_000013AC:
+lbl_save_calculateBlockCrc_000013AC:
     li r0, 0x1
     stb r0, 0x2c(r1)
     lfs f31, 0x4(r31)
@@ -1549,45 +1549,45 @@ lbl_fn_801F6E78_000013AC:
     stfs f31, 0x34(r1)
     mtctr r8
     cmplwi r8, 0x0
-    ble lbl_fn_801F6E78_00001440
-lbl_fn_801F6E78_000013F4:
+    ble lbl_save_calculateBlockCrc_00001440
+lbl_save_calculateBlockCrc_000013F4:
     lbz r0, 0x5c(r7)
     extsb r0, r0
     cmpw r5, r0
-    bne lbl_fn_801F6E78_00001434
+    bne lbl_save_calculateBlockCrc_00001434
     lbz r0, 0x5d(r7)
     extsb r0, r0
     cmpw r4, r0
-    bne lbl_fn_801F6E78_00001434
+    bne lbl_save_calculateBlockCrc_00001434
     lwz r0, 0x60(r7)
     cmplw r3, r0
-    bne lbl_fn_801F6E78_00001434
+    bne lbl_save_calculateBlockCrc_00001434
     mulli r0, r6, 0xc
     lwz r4, 0x34(r1)
     add r3, r29, r0
     stw r4, 0x64(r3)
-    b lbl_fn_801F6E78_00001478
-lbl_fn_801F6E78_00001434:
+    b lbl_save_calculateBlockCrc_00001478
+lbl_save_calculateBlockCrc_00001434:
     addi r7, r7, 0xc
     addi r6, r6, 0x1
-    bdnz lbl_fn_801F6E78_000013F4
-lbl_fn_801F6E78_00001440:
+    bdnz lbl_save_calculateBlockCrc_000013F4
+lbl_save_calculateBlockCrc_00001440:
     lwz r0, 0x58(r29)
     mulli r0, r0, 0xc
     add r0, r29, r0
     addic. r3, r0, 0x5c
-    beq lbl_fn_801F6E78_0000146C
+    beq lbl_save_calculateBlockCrc_0000146C
     lwz r0, 0x2c(r1)
     stw r0, 0x0(r3)
     lwz r0, 0x30(r1)
     stw r0, 0x4(r3)
     lwz r0, 0x34(r1)
     stw r0, 0x8(r3)
-lbl_fn_801F6E78_0000146C:
+lbl_save_calculateBlockCrc_0000146C:
     lwz r3, 0x58(r29)
     addi r0, r3, 0x1
     stw r0, 0x58(r29)
-lbl_fn_801F6E78_00001478:
+lbl_save_calculateBlockCrc_00001478:
     li r3, 0x1
     li r0, 0x2
     stb r3, 0x20(r1)
@@ -1606,45 +1606,45 @@ lbl_fn_801F6E78_00001478:
     stfs f31, 0x28(r1)
     mtctr r8
     cmplwi r8, 0x0
-    ble lbl_fn_801F6E78_00001510
-lbl_fn_801F6E78_000014C4:
+    ble lbl_save_calculateBlockCrc_00001510
+lbl_save_calculateBlockCrc_000014C4:
     lbz r0, 0x5c(r7)
     extsb r0, r0
     cmpw r5, r0
-    bne lbl_fn_801F6E78_00001504
+    bne lbl_save_calculateBlockCrc_00001504
     lbz r0, 0x5d(r7)
     extsb r0, r0
     cmpw r4, r0
-    bne lbl_fn_801F6E78_00001504
+    bne lbl_save_calculateBlockCrc_00001504
     lwz r0, 0x60(r7)
     cmplw r3, r0
-    bne lbl_fn_801F6E78_00001504
+    bne lbl_save_calculateBlockCrc_00001504
     mulli r0, r6, 0xc
     lwz r4, 0x28(r1)
     add r3, r29, r0
     stw r4, 0x64(r3)
-    b lbl_fn_801F6E78_00001548
-lbl_fn_801F6E78_00001504:
+    b lbl_save_calculateBlockCrc_00001548
+lbl_save_calculateBlockCrc_00001504:
     addi r7, r7, 0xc
     addi r6, r6, 0x1
-    bdnz lbl_fn_801F6E78_000014C4
-lbl_fn_801F6E78_00001510:
+    bdnz lbl_save_calculateBlockCrc_000014C4
+lbl_save_calculateBlockCrc_00001510:
     lwz r0, 0x58(r29)
     mulli r0, r0, 0xc
     add r0, r29, r0
     addic. r3, r0, 0x5c
-    beq lbl_fn_801F6E78_0000153C
+    beq lbl_save_calculateBlockCrc_0000153C
     lwz r0, 0x20(r1)
     stw r0, 0x0(r3)
     lwz r0, 0x24(r1)
     stw r0, 0x4(r3)
     lwz r0, 0x28(r1)
     stw r0, 0x8(r3)
-lbl_fn_801F6E78_0000153C:
+lbl_save_calculateBlockCrc_0000153C:
     lwz r3, 0x58(r29)
     addi r0, r3, 0x1
     stw r0, 0x58(r29)
-lbl_fn_801F6E78_00001548:
+lbl_save_calculateBlockCrc_00001548:
     li r3, 0x1
     li r0, 0x3
     stb r3, 0x14(r1)
@@ -1663,45 +1663,45 @@ lbl_fn_801F6E78_00001548:
     stfs f31, 0x1c(r1)
     mtctr r8
     cmplwi r8, 0x0
-    ble lbl_fn_801F6E78_000015E0
-lbl_fn_801F6E78_00001594:
+    ble lbl_save_calculateBlockCrc_000015E0
+lbl_save_calculateBlockCrc_00001594:
     lbz r0, 0x5c(r7)
     extsb r0, r0
     cmpw r5, r0
-    bne lbl_fn_801F6E78_000015D4
+    bne lbl_save_calculateBlockCrc_000015D4
     lbz r0, 0x5d(r7)
     extsb r0, r0
     cmpw r4, r0
-    bne lbl_fn_801F6E78_000015D4
+    bne lbl_save_calculateBlockCrc_000015D4
     lwz r0, 0x60(r7)
     cmplw r3, r0
-    bne lbl_fn_801F6E78_000015D4
+    bne lbl_save_calculateBlockCrc_000015D4
     mulli r0, r6, 0xc
     lwz r4, 0x1c(r1)
     add r3, r29, r0
     stw r4, 0x64(r3)
-    b lbl_fn_801F6E78_00001618
-lbl_fn_801F6E78_000015D4:
+    b lbl_save_calculateBlockCrc_00001618
+lbl_save_calculateBlockCrc_000015D4:
     addi r7, r7, 0xc
     addi r6, r6, 0x1
-    bdnz lbl_fn_801F6E78_00001594
-lbl_fn_801F6E78_000015E0:
+    bdnz lbl_save_calculateBlockCrc_00001594
+lbl_save_calculateBlockCrc_000015E0:
     lwz r0, 0x58(r29)
     mulli r0, r0, 0xc
     add r0, r29, r0
     addic. r3, r0, 0x5c
-    beq lbl_fn_801F6E78_0000160C
+    beq lbl_save_calculateBlockCrc_0000160C
     lwz r0, 0x14(r1)
     stw r0, 0x0(r3)
     lwz r0, 0x18(r1)
     stw r0, 0x4(r3)
     lwz r0, 0x1c(r1)
     stw r0, 0x8(r3)
-lbl_fn_801F6E78_0000160C:
+lbl_save_calculateBlockCrc_0000160C:
     lwz r3, 0x58(r29)
     addi r0, r3, 0x1
     stw r0, 0x58(r29)
-lbl_fn_801F6E78_00001618:
+lbl_save_calculateBlockCrc_00001618:
     li r3, 0x1
     li r0, 0x4
     stb r3, 0x8(r1)
@@ -1720,45 +1720,45 @@ lbl_fn_801F6E78_00001618:
     stfs f31, 0x10(r1)
     mtctr r8
     cmplwi r8, 0x0
-    ble lbl_fn_801F6E78_000016B0
-lbl_fn_801F6E78_00001664:
+    ble lbl_save_calculateBlockCrc_000016B0
+lbl_save_calculateBlockCrc_00001664:
     lbz r0, 0x5c(r7)
     extsb r0, r0
     cmpw r5, r0
-    bne lbl_fn_801F6E78_000016A4
+    bne lbl_save_calculateBlockCrc_000016A4
     lbz r0, 0x5d(r7)
     extsb r0, r0
     cmpw r4, r0
-    bne lbl_fn_801F6E78_000016A4
+    bne lbl_save_calculateBlockCrc_000016A4
     lwz r0, 0x60(r7)
     cmplw r3, r0
-    bne lbl_fn_801F6E78_000016A4
+    bne lbl_save_calculateBlockCrc_000016A4
     mulli r0, r6, 0xc
     lwz r4, 0x10(r1)
     add r3, r29, r0
     stw r4, 0x64(r3)
-    b lbl_fn_801F6E78_000016E8
-lbl_fn_801F6E78_000016A4:
+    b lbl_save_calculateBlockCrc_000016E8
+lbl_save_calculateBlockCrc_000016A4:
     addi r7, r7, 0xc
     addi r6, r6, 0x1
-    bdnz lbl_fn_801F6E78_00001664
-lbl_fn_801F6E78_000016B0:
+    bdnz lbl_save_calculateBlockCrc_00001664
+lbl_save_calculateBlockCrc_000016B0:
     lwz r0, 0x58(r29)
     mulli r0, r0, 0xc
     add r0, r29, r0
     addic. r3, r0, 0x5c
-    beq lbl_fn_801F6E78_000016DC
+    beq lbl_save_calculateBlockCrc_000016DC
     lwz r0, 0x8(r1)
     stw r0, 0x0(r3)
     lwz r0, 0xc(r1)
     stw r0, 0x4(r3)
     lwz r0, 0x10(r1)
     stw r0, 0x8(r3)
-lbl_fn_801F6E78_000016DC:
+lbl_save_calculateBlockCrc_000016DC:
     lwz r3, 0x58(r29)
     addi r0, r3, 0x1
     stw r0, 0x58(r29)
-lbl_fn_801F6E78_000016E8:
+lbl_save_calculateBlockCrc_000016E8:
     lwz r0, 0x74(r1)
     psq_l f31, 0x68(r1), 0, 0
     lfd f31, 0x60(r1)

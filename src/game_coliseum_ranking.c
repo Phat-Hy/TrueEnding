@@ -39,7 +39,7 @@ extern void atn_Task_destructor(void);
 extern void bloom_processPasses(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void atn_LH_Texture_update(void);
 extern void str_skipWhitespace(void);
 extern void sound_initGlobalInstances(void);
@@ -49,7 +49,7 @@ extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
-extern void fn_80239D58(void);
+extern void res_Shader_findParameter(void);
 extern void fn_8023A02C(void);
 extern void fn_8023A108(void);
 extern void res_Shader_bindParams(void);
@@ -125,13 +125,13 @@ void fn_80495EA8(void);
 void fn_80495F78(void);
 void fn_804961B4(void);
 void fn_804962B0(void);
-void fn_8049638C(void);
+u32 fn_8049638C(void);
 void fn_80496394(void);
 void fn_80496398(void);
-void fn_8049639C(void);
+u32 fn_8049639C(void);
 void fn_804963A4(void);
 void fn_804963F8(void);
-void fn_80496414(void);
+void fn_80496414(void *obj, void *val);
 void fn_8049641C(void);
 void fn_80496420(void);
 void fn_80496500(void);
@@ -539,11 +539,9 @@ lbl_fn_804962B0_000004D0:
     blr
 }
 
-asm void fn_8049638C(void)
+u32 fn_8049638C(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 void fn_80496394(void)
@@ -554,11 +552,9 @@ void fn_80496398(void)
 {
 }
 
-asm void fn_8049639C(void)
+u32 fn_8049639C(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_804963A4(void)
@@ -601,11 +597,9 @@ lbl_fn_804963F8_00000558:
     blr
 }
 
-asm void fn_80496414(void)
+void fn_80496414(void *obj, void *val)
 {
-    nofralloc
-    stw r4, 0x4c(r3)
-    blr
+    *(void **)((char *)obj + 0x4c) = val;
 }
 
 void fn_8049641C(void)
@@ -1026,7 +1020,7 @@ lbl_fn_8049682C_00000ADC:
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     bne lbl_fn_8049682C_00000B64
     mr r3, r30
@@ -2016,7 +2010,7 @@ lbl_fn_80497374_00001820:
     bne lbl_fn_80497374_00001834
     addi r3, r30, 0xf0
     addi r4, r30, 0x70
-    bl fn_800D5908
+    bl depth_resetRenderTarget
 lbl_fn_80497374_00001834:
     li r0, 0x1
     stw r0, 0x50(r30)

@@ -19,7 +19,7 @@ extern void fn_80092A4C(void);
 extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void motion_updateFogAdj(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
@@ -31,7 +31,7 @@ extern void fn_801F791C(void);
 extern void save_findEntryByName(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
-extern void fn_8020EF04(void);
+extern void rand_scaleRangeInt(void);
 extern void fn_8020EFEC(void);
 extern void event_findEntryById(void);
 extern void fn_8021E4E4(void);
@@ -39,11 +39,11 @@ extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
-extern void fn_80239D58(void);
+extern void res_Shader_findParameter(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void task_destroyWorker(void);
-extern void fn_803ED774(void);
+extern void dungeon_updateBarrierField(void);
 extern void fn_8040BE88(void);
 extern void fn_8040C058(void);
 extern void fn_8040C610(void);
@@ -127,7 +127,7 @@ void fn_8040A32C(void);
 void fn_8040A994(void);
 void fn_8040AA10(void);
 void fn_8040AB64(void);
-void fn_8040B1F8(void);
+void fn_8040B1F8(void *obj, void *val);
 void fn_8040B200(void);
 void fn_8040B394(void);
 void fn_8040B4B4(void);
@@ -194,7 +194,7 @@ lbl_fn_8040A32C_00000098:
     bctrl
     mr r4, r3
     mr r3, r30
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_8040A32C_000000D4:
     addi r4, r30, 0x294
     b lbl_fn_8040A32C_000000F8
@@ -851,7 +851,7 @@ lbl_fn_8040AB64_0000092C:
     b lbl_fn_8040AB64_000009F4
 lbl_fn_8040AB64_000009CC:
     lwz r3, 0x158(r28)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     bne lbl_fn_8040AB64_000009F4
     lwz r0, 0x158(r28)
@@ -1019,7 +1019,7 @@ lbl_fn_8040AB64_00000BD8:
     lwz r3, lbl_8087F3C0
     mr r4, r28
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     bne lbl_fn_8040AB64_00000DE8
     lwz r5, lbl_8087F3C0
@@ -1075,7 +1075,7 @@ lbl_fn_8040AB64_00000D10:
     li r5, 0x0
     stfs f0, 0x164(r3)
     lwz r3, lbl_8087F3C0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_8040AB64_00000D48
     lwz r3, lbl_8087F3C0
@@ -1113,7 +1113,7 @@ lbl_fn_8040AB64_00000DAC:
     lwz r3, lbl_8087F3C0
     mr r4, r28
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_8040AB64_00000DD8
     lwz r3, lbl_8087F3C0
@@ -1193,11 +1193,9 @@ lbl_fn_8040AB64_00000EB4:
     blr
 }
 
-asm void fn_8040B1F8(void)
+void fn_8040B1F8(void *obj, void *val)
 {
-    nofralloc
-    stw r4, 0x154(r3)
-    blr
+    *(void **)((char *)obj + 0x154) = val;
 }
 
 asm void fn_8040B200(void)
@@ -1351,7 +1349,7 @@ lbl_fn_8040B394_000010D4:
     b lbl_fn_8040B394_00001150
 lbl_fn_8040B394_000010DC:
     mr r3, r29
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_8040B394_00001120
     mr r3, r29
@@ -1814,7 +1812,7 @@ lbl_fn_8040B668_0000174C:
     stfs f8, 0x58(r31)
     addi r3, r31, 0x4
     li r4, 0x1
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     li r0, 0x0
     stw r0, 0x74(r1)
     addi r3, r31, 0x4

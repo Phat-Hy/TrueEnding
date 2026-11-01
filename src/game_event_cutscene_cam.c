@@ -11,7 +11,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_20(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
-extern void fn_8004B290(void);
+extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void skill_calcTrajectory(void);
@@ -42,7 +42,7 @@ extern void fn_80473104(void);
 extern void shockwave_freeEmitter(void);
 extern void fn_805BDD20(void);
 extern void fn_805BDD78(void);
-extern void fn_80615FF0(void);
+extern void GXInitLightObj(void);
 extern void printf(void);
 extern void wmemcpy(void);
 extern void wcslen(void);
@@ -128,7 +128,7 @@ void fn_80478714(void);
 void fn_804787CC(void);
 void fn_804787EC(void);
 void fn_8047882C(void);
-void fn_804788B4(void);
+u32 fn_804788B4(void);
 void fn_804788BC(void);
 void fn_80478A70(void);
 
@@ -521,7 +521,7 @@ asm void fn_80477DAC(void)
     nofralloc
     li r4, 0x0
     li r5, 0x0
-    b fn_8004B290
+    b sound_initChannelParams
 }
 
 asm void fn_80477DB8(void)
@@ -839,7 +839,7 @@ asm void fn_80478158(void)
     clrlwi r5, r5, 16
     lwz r7, 0x20(r7)
     clrlwi r6, r0, 16
-    b fn_80615FF0
+    b GXInitLightObj
     blr
 }
 
@@ -1391,11 +1391,9 @@ lbl_fn_8047882C_0000106C:
     blr
 }
 
-asm void fn_804788B4(void)
+u32 fn_804788B4(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_804788BC(void)

@@ -16,7 +16,7 @@ extern void inventory_unequipItem(void);
 extern void fn_80154344(void);
 extern void equip_applyToCharacter(void);
 extern void inventory_calcTotalStats(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void fn_80192758(void);
 extern void fn_801B2EDC(void);
 extern void fn_801B618C(void);
@@ -1711,7 +1711,7 @@ asm void fn_801B5370(void)
     mr r4, r3
 lbl_fn_801B5370_00001644:
     lwz r3, 0x14(r30)
-    bl fn_80178208
+    bl battle_generateLootDrops
     li r3, 0x1
     b lbl_fn_801B5370_00001658
 lbl_fn_801B5370_00001654:

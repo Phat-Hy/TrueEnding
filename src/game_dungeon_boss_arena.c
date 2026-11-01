@@ -11,18 +11,18 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void str_initFromCStr(void);
 extern void fn_80041C0C(void);
-extern void fn_8004203C(void);
+extern void menu_initWindowBuffer(void);
 extern void str_getData(void);
 extern void fn_8004274C(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
-extern void fn_8006AA20(void);
+extern void boss_triggerEventSequence(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
@@ -35,14 +35,14 @@ extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
-extern void fn_800DCA6C(void);
-extern void fn_800EC2C4(void);
-extern void fn_800EC440(void);
-extern void fn_800EC534(void);
-extern void fn_800EC5BC(void);
-extern void fn_800EC654(void);
-extern void fn_800ED42C(void);
-extern void fn_800EDFE8(void);
+extern void sky_renderStub(void);
+extern void cam_registerTarget(void);
+extern void cam_initTrajectoryParams(void);
+extern void cam_bindPathTarget(void);
+extern void cam_bindRotationTarget(void);
+extern void cam_evalControllerSpline(void);
+extern void cam_setLookAtTarget(void);
+extern void cam_evalLookAtMatrix(void);
 extern void cam_destroyMsgHandle(void);
 extern void fn_8012044C(void);
 extern void fn_801206EC(void);
@@ -151,7 +151,7 @@ void fn_803EDF40(void);
 void fn_803EDF5C(void);
 void fn_803EDF6C(void);
 void fn_803EDF70(void);
-void fn_803EDF74(void);
+u32 fn_803EDF74(void);
 void fn_803EDF7C(void);
 void fn_803EDFBC(void);
 void fn_803EE024(void);
@@ -231,11 +231,9 @@ void fn_803EDF70(void)
 {
 }
 
-asm void fn_803EDF74(void)
+u32 fn_803EDF74(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_803EDF7C(void)
@@ -778,7 +776,7 @@ lbl_fn_803EE5AC_00000718:
     cmpwi r0, 0x0
     beq lbl_fn_803EE5AC_000008CC
     addi r3, r1, 0x88
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_803EE5AC_000008CC
     lwz r3, 0x64(r28)
@@ -1437,7 +1435,7 @@ lbl_fn_803EEEDC_00000FEC:
     mr r5, r20
     mr r4, r19
     addi r3, r1, 0x280
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     lwz r12, 0x280(r1)
     mr r4, r19
     mr r5, r20
@@ -1590,17 +1588,17 @@ lbl_fn_803EEEDC_000011BC:
     la r4, lbl_8087DF0C
     li r5, 0x0
     li r6, 0x0
-    bl fn_800EC440
+    bl cam_initTrajectoryParams
     mr r4, r21
     addi r3, r1, 0x30
     addi r5, r1, 0x98
-    bl fn_800EC2C4
+    bl cam_registerTarget
     addi r3, r1, 0x98
     li r4, -0x1
-    bl fn_800EC534
+    bl cam_bindPathTarget
     addi r3, r1, 0x5c
     addi r4, r1, 0x30
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     b lbl_fn_803EEEDC_0000138C
 lbl_fn_803EEEDC_0000129C:
     mr r3, r19
@@ -1668,11 +1666,11 @@ lbl_fn_803EEEDC_00001370:
     bl fn_80205BE8
     addi r3, r1, 0xbc
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
 lbl_fn_803EEEDC_0000138C:
     addi r3, r1, 0xf8
     addi r4, r1, 0x30
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     lbz r4, 0x124(r1)
     li r3, 0x0
     cmpwi r4, 0x0
@@ -1703,12 +1701,12 @@ lbl_fn_803EEEDC_000013EC:
 lbl_fn_803EEEDC_000013FC:
     addi r3, r1, 0xf8
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     cmpwi r20, 0x0
     beq lbl_fn_803EEEDC_0000129C
     addi r3, r1, 0x5c
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     addi r3, r1, 0x280
     bl talk_parseQuotedString
     bl atoi
@@ -1718,7 +1716,7 @@ lbl_fn_803EEEDC_000013FC:
     bl fn_803EF3B0
     addi r3, r1, 0x30
     li r4, -0x1
-    bl fn_800EC5BC
+    bl cam_bindRotationTarget
     lwz r0, 0x10(r1)
     srwi. r0, r0, 31
     beq lbl_fn_803EEEDC_00001458
@@ -1769,7 +1767,7 @@ asm void fn_803EF3B0(void)
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x1c(r1)
     mr r31, r3
@@ -1801,7 +1799,7 @@ lbl_fn_803EF3B0_00001544:
     addi r3, r1, 0x18
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x18(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x18
     beq lbl_fn_803EF3B0_0000158C
     addic. r3, r3, 0x4

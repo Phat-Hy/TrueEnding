@@ -7,21 +7,21 @@ extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80017064(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800C61C0(void);
 extern void fn_800C622C(void);
 extern void fn_800C7CA8(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void fn_800F52F8(void);
 extern void fn_800F7F60(void);
 extern void fn_800F7F80(void);
 extern void fn_800F7F90(void);
-extern void fn_800F7FD8(void);
+extern void vec3_normalize(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80116BAC(void);
@@ -42,7 +42,7 @@ extern void fn_80171F3C(void);
 extern void fn_801750FC(void);
 extern void fn_80178018(void);
 extern void fn_80178078(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void fn_8017B3C0(void);
 extern void fn_8017B434(void);
 extern void fn_8017C974(void);
@@ -90,7 +90,7 @@ extern u32 lbl_808819CC;
 
 /* Function declarations */
 void npc_updateDialogueTarget(void);
-void fn_80139560(void);
+void npc_calcTargetDistance(void);
 void fn_80139E90(void);
 void fn_80139E9C(void);
 void fn_80139EB0(void);
@@ -114,8 +114,8 @@ void fn_8013A158(void);
 void fn_8013A16C(void);
 void fn_8013A184(void);
 void fn_8013A18C(void);
-void fn_8013A194(void);
-void fn_8013A19C(void);
+u32 npc_getGlobalManager(void);
+void fn_8013A19C(void *p, u32 val);
 void fn_8013A1A8(void);
 void fn_8013A214(void);
 void fn_8013A21C(void);
@@ -131,7 +131,7 @@ asm void npc_updateDialogueTarget(void)
     blr
 }
 
-asm void fn_80139560(void)
+asm void npc_calcTargetDistance(void)
 {
     nofralloc
     stwu r1, -0xa0(r1)
@@ -150,44 +150,44 @@ asm void fn_80139560(void)
     stfs f0, 0x10(r1)
     lwz r0, 0x12a4(r31)
     extrwi. r0, r0, 1, 20
-    bne lbl_fn_80139560_00000924
+    bne lbl_npc_calcTargetDistance_00000924
     lwz r3, 0x1394(r31)
     bl fn_8013537C
     lwz r3, 0x55c(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_80139560_00000084
+    beq lbl_npc_calcTargetDistance_00000084
     cmpwi r3, 0x5
-    beq lbl_fn_80139560_00000084
+    beq lbl_npc_calcTargetDistance_00000084
     cmpwi r3, 0x9
-    beq lbl_fn_80139560_00000084
+    beq lbl_npc_calcTargetDistance_00000084
     lwz r0, 0x12a4(r31)
     extrwi. r0, r0, 1, 29
-    beq lbl_fn_80139560_00000094
-lbl_fn_80139560_00000084:
+    beq lbl_npc_calcTargetDistance_00000094
+lbl_npc_calcTargetDistance_00000084:
     addi r3, r1, 0x6c
     addi r4, r31, 0x534
     bl vec3_copy
-    b lbl_fn_80139560_00000700
-lbl_fn_80139560_00000094:
+    b lbl_npc_calcTargetDistance_00000700
+lbl_npc_calcTargetDistance_00000094:
     cmpwi r3, 0x1
-    bne lbl_fn_80139560_000002D4
+    bne lbl_npc_calcTargetDistance_000002D4
     mr r3, r31
     bl fn_8017C974
     cmpwi r3, 0x0
-    bne lbl_fn_80139560_000000C8
+    bne lbl_npc_calcTargetDistance_000000C8
     lwz r0, 0x12a4(r31)
     extrwi. r0, r0, 1, 25
-    bne lbl_fn_80139560_000000C8
+    bne lbl_npc_calcTargetDistance_000000C8
     mr r3, r31
     bl fn_80139E90
     cmpwi r3, 0x0
-    beq lbl_fn_80139560_000000D8
-lbl_fn_80139560_000000C8:
+    beq lbl_npc_calcTargetDistance_000000D8
+lbl_npc_calcTargetDistance_000000C8:
     addi r3, r1, 0x6c
     addi r4, r31, 0x534
     bl vec3_copy
-    b lbl_fn_80139560_00000700
-lbl_fn_80139560_000000D8:
+    b lbl_npc_calcTargetDistance_00000700
+lbl_npc_calcTargetDistance_000000D8:
     mr r3, r31
     bl fn_80178078
     stfs f1, 0x14(r1)
@@ -200,18 +200,18 @@ lbl_fn_80139560_000000D8:
     lfs f0, 0x14(r1)
     lfs f2, lbl_808819A0
     fcmpo cr0, f0, f2
-    blt lbl_fn_80139560_00000124
+    blt lbl_npc_calcTargetDistance_00000124
     fsubs f0, f0, f2
     lfs f1, lbl_808819A4
     fdivs f0, f0, f1
     fmuls f0, f0, f0
     fmadds f0, f1, f0, f2
     stfs f0, 0x14(r1)
-lbl_fn_80139560_00000124:
+lbl_npc_calcTargetDistance_00000124:
     mr r3, r31
     bl fn_80139E9C
     cmpwi r3, 0x0
-    beq lbl_fn_80139560_000001BC
+    beq lbl_npc_calcTargetDistance_000001BC
     lfs f0, lbl_80881964
     stfs f0, 0x10(r1)
     bl fn_800F52F8
@@ -219,17 +219,17 @@ lbl_fn_80139560_00000124:
     li r4, 0x1f
     bl magic_dispatchActionCommand
     cmpwi r3, 0x0
-    beq lbl_fn_80139560_00000160
+    beq lbl_npc_calcTargetDistance_00000160
     mr r3, r31
     bl fn_801750FC
-    b lbl_fn_80139560_00000700
-lbl_fn_80139560_00000160:
+    b lbl_npc_calcTargetDistance_00000700
+lbl_npc_calcTargetDistance_00000160:
     bl fn_800F52F8
     bl fn_80116BAC
     li r4, 0x20
     bl magic_dispatchActionCommand
     cmpwi r3, 0x0
-    beq lbl_fn_80139560_00000700
+    beq lbl_npc_calcTargetDistance_00000700
     lis r5, lbl_80737A9C@ha
     li r3, 0x30
     addi r5, r5, lbl_80737A9C@l
@@ -240,109 +240,109 @@ lbl_fn_80139560_00000160:
     bl mem_alloc
     cmpwi r3, 0x0
     mr r4, r3
-    beq lbl_fn_80139560_000001B0
+    beq lbl_npc_calcTargetDistance_000001B0
     mr r4, r31
     bl fn_801A1BE4
     mr r4, r3
-lbl_fn_80139560_000001B0:
+lbl_npc_calcTargetDistance_000001B0:
     mr r3, r31
-    bl fn_80178208
-    b lbl_fn_80139560_00000924
-lbl_fn_80139560_000001BC:
+    bl battle_generateLootDrops
+    b lbl_npc_calcTargetDistance_00000924
+lbl_npc_calcTargetDistance_000001BC:
     mr r3, r31
     bl fn_80139EB0
     cmpwi r3, 0x0
-    beq lbl_fn_80139560_000001D8
+    beq lbl_npc_calcTargetDistance_000001D8
     lfs f0, lbl_80881964
     stfs f0, 0x10(r1)
-    b lbl_fn_80139560_00000700
-lbl_fn_80139560_000001D8:
+    b lbl_npc_calcTargetDistance_00000700
+lbl_npc_calcTargetDistance_000001D8:
     mr r3, r31
     bl fn_80139EBC
     cmpwi r3, 0x0
-    beq lbl_fn_80139560_000001F4
+    beq lbl_npc_calcTargetDistance_000001F4
     lfs f0, lbl_80881964
     stfs f0, 0x10(r1)
-    b lbl_fn_80139560_00000700
-lbl_fn_80139560_000001F4:
+    b lbl_npc_calcTargetDistance_00000700
+lbl_npc_calcTargetDistance_000001F4:
     bl equip_getGlobalManager
     cmpwi r3, 0x0
-    beq lbl_fn_80139560_00000220
+    beq lbl_npc_calcTargetDistance_00000220
     bl equip_getGlobalManager
     li r4, 0x3
     bl world_getGlobalFlag
     cmpwi r3, 0x1
-    bne lbl_fn_80139560_00000220
+    bne lbl_npc_calcTargetDistance_00000220
     lfs f0, lbl_808819A0
     stfs f0, 0x10(r1)
-    b lbl_fn_80139560_00000700
-lbl_fn_80139560_00000220:
+    b lbl_npc_calcTargetDistance_00000700
+lbl_npc_calcTargetDistance_00000220:
     bl equip_getGlobalManager
     cmpwi r3, 0x0
-    beq lbl_fn_80139560_0000024C
+    beq lbl_npc_calcTargetDistance_0000024C
     bl equip_getGlobalManager
     li r4, 0x3
     bl world_getGlobalFlag
     cmpwi r3, 0x2
-    bne lbl_fn_80139560_0000024C
+    bne lbl_npc_calcTargetDistance_0000024C
     lfs f0, lbl_808819A8
     stfs f0, 0x10(r1)
-    b lbl_fn_80139560_00000700
-lbl_fn_80139560_0000024C:
+    b lbl_npc_calcTargetDistance_00000700
+lbl_npc_calcTargetDistance_0000024C:
     mr r3, r31
     bl fn_80139ED0
     cmpwi r3, 0x0
-    bne lbl_fn_80139560_00000298
+    bne lbl_npc_calcTargetDistance_00000298
     mr r3, r31
     bl fn_80139EDC
     cmpwi r3, 0x0
-    bne lbl_fn_80139560_00000298
+    bne lbl_npc_calcTargetDistance_00000298
     lfs f0, lbl_808819AC
     mr r3, r31
     stfs f0, 0x10(r1)
     bl fn_80139EE8
     cmpwi r3, 0x0
-    beq lbl_fn_80139560_000002A0
+    beq lbl_npc_calcTargetDistance_000002A0
     lfs f1, 0x10(r1)
     lfs f0, lbl_808819B0
     fmuls f0, f1, f0
     stfs f0, 0x10(r1)
-    b lbl_fn_80139560_000002A0
-lbl_fn_80139560_00000298:
+    b lbl_npc_calcTargetDistance_000002A0
+lbl_npc_calcTargetDistance_00000298:
     lfs f0, lbl_80881984
     stfs f0, 0x10(r1)
-lbl_fn_80139560_000002A0:
+lbl_npc_calcTargetDistance_000002A0:
     bl equip_getGlobalManager
     cmpwi r3, 0x0
-    beq lbl_fn_80139560_00000700
+    beq lbl_npc_calcTargetDistance_00000700
     bl equip_getGlobalManager
     li r4, 0x3
     bl world_getGlobalFlag
     cmpwi r3, 0x3
-    bne lbl_fn_80139560_00000700
+    bne lbl_npc_calcTargetDistance_00000700
     lfs f1, 0x10(r1)
     lfs f0, lbl_808819B4
     fmuls f0, f1, f0
     stfs f0, 0x10(r1)
-    b lbl_fn_80139560_00000700
-lbl_fn_80139560_000002D4:
+    b lbl_npc_calcTargetDistance_00000700
+lbl_npc_calcTargetDistance_000002D4:
     cmpwi r3, 0x2
-    bne lbl_fn_80139560_00000438
+    bne lbl_npc_calcTargetDistance_00000438
     bl fn_80139EF4
     cmpwi r3, 0x0
-    beq lbl_fn_80139560_00000700
+    beq lbl_npc_calcTargetDistance_00000700
     mr r3, r31
     bl fn_80139EFC
     cmpwi r3, 0x0
-    bne lbl_fn_80139560_000003B0
+    bne lbl_npc_calcTargetDistance_000003B0
     mr r3, r31
     bl fn_800F7F60
     cmpwi r3, 0x0
-    beq lbl_fn_80139560_000003B0
+    beq lbl_npc_calcTargetDistance_000003B0
     mr r3, r31
     bl fn_80139F04
     cmpwi r3, 0x0
-    bne lbl_fn_80139560_000003B0
+    bne lbl_npc_calcTargetDistance_000003B0
     addi r3, r31, 0xb0
     li r4, 0x1
     bl fn_80139F24
@@ -354,7 +354,7 @@ lbl_fn_80139560_000002D4:
     li r4, 0x0
     bl fn_80139F2C
     cmpw r3, r30
-    beq lbl_fn_80139560_00000388
+    beq lbl_npc_calcTargetDistance_00000388
     mr r3, r31
     li r4, 0x0
     bl fn_801370B8
@@ -371,7 +371,7 @@ lbl_fn_80139560_000002D4:
     addi r3, r31, 0xb0
     li r4, 0x0
     bl fn_80139F3C
-lbl_fn_80139560_00000388:
+lbl_npc_calcTargetDistance_00000388:
     mr r3, r31
     li r4, 0x0
     bl fn_80138E1C
@@ -380,37 +380,37 @@ lbl_fn_80139560_00000388:
     stfs f1, 0x570(r31)
     fmr f2, f1
     fmr f3, f1
-    bl fn_80057A68
-    b lbl_fn_80139560_00000924
-lbl_fn_80139560_000003B0:
+    bl vec3_initValues
+    b lbl_npc_calcTargetDistance_00000924
+lbl_npc_calcTargetDistance_000003B0:
     mr r3, r31
     bl fn_80139F04
     cmpwi r3, 0x0
-    beq lbl_fn_80139560_000003DC
+    beq lbl_npc_calcTargetDistance_000003DC
     mr r3, r31
     bl fn_8017B3C0
     cmpwi r3, 0x0
-    beq lbl_fn_80139560_000003DC
+    beq lbl_npc_calcTargetDistance_000003DC
     mr r3, r31
     bl fn_8017B434
-    b lbl_fn_80139560_00000700
-lbl_fn_80139560_000003DC:
+    b lbl_npc_calcTargetDistance_00000700
+lbl_npc_calcTargetDistance_000003DC:
     addi r3, r31, 0xd74
     bl fn_8011D1FC
     cmpwi r3, 0x0
-    beq lbl_fn_80139560_000003FC
+    beq lbl_npc_calcTargetDistance_000003FC
     addi r3, r31, 0xd74
     bl fn_8011D21C
     cmpwi r3, 0x0
-    beq lbl_fn_80139560_00000700
-lbl_fn_80139560_000003FC:
+    beq lbl_npc_calcTargetDistance_00000700
+lbl_npc_calcTargetDistance_000003FC:
     lwz r0, 0xc58(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_80139560_00000414
+    bne lbl_npc_calcTargetDistance_00000414
     bl fn_80139EF4
     mr r4, r31
     bl fn_80017064
-lbl_fn_80139560_00000414:
+lbl_npc_calcTargetDistance_00000414:
     bl fn_80139EF4
     mr r4, r31
     bl fn_80017064
@@ -419,21 +419,21 @@ lbl_fn_80139560_00000414:
     addi r5, r1, 0x6c
     addi r6, r1, 0x10
     bl fn_8013A4E8
-    b lbl_fn_80139560_00000700
-lbl_fn_80139560_00000438:
+    b lbl_npc_calcTargetDistance_00000700
+lbl_npc_calcTargetDistance_00000438:
     cmpwi r3, 0x7
-    bne lbl_fn_80139560_00000550
+    bne lbl_npc_calcTargetDistance_00000550
     addi r3, r31, 0x7d4
     bl fn_80139F4C
     cmpwi r3, 0x0
-    beq lbl_fn_80139560_00000468
+    beq lbl_npc_calcTargetDistance_00000468
     lfs f0, lbl_8088196C
     addi r3, r1, 0x6c
     stfs f0, 0x14(r1)
     addi r4, r31, 0x534
     bl vec3_copy
-    b lbl_fn_80139560_00000700
-lbl_fn_80139560_00000468:
+    b lbl_npc_calcTargetDistance_00000700
+lbl_npc_calcTargetDistance_00000468:
     addi r3, r31, 0x1030
     bl enemy_updateCombatBehavior
     addi r3, r31, 0x1030
@@ -447,65 +447,65 @@ lbl_fn_80139560_00000468:
     lfs f0, lbl_808819B8
     stfs f1, 0x14(r1)
     fcmpo cr0, f2, f0
-    ble lbl_fn_80139560_000004C8
+    ble lbl_npc_calcTargetDistance_000004C8
     addi r3, r1, 0x3c
     addi r4, r1, 0x60
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x48
     addi r4, r1, 0x3c
     bl vec3_toEulerAngles
     addi r3, r1, 0x6c
     addi r4, r1, 0x48
     bl vec3_copy
-    b lbl_fn_80139560_000004D4
-lbl_fn_80139560_000004C8:
+    b lbl_npc_calcTargetDistance_000004D4
+lbl_npc_calcTargetDistance_000004C8:
     addi r3, r1, 0x6c
     addi r4, r31, 0x534
     bl vec3_copy
-lbl_fn_80139560_000004D4:
+lbl_npc_calcTargetDistance_000004D4:
     mr r3, r31
     bl fn_800F7F80
     cmpwi r3, 0x0
-    beq lbl_fn_80139560_0000050C
+    beq lbl_npc_calcTargetDistance_0000050C
     bl equip_getGlobalManager
     cmpwi r3, 0x0
-    beq lbl_fn_80139560_0000050C
+    beq lbl_npc_calcTargetDistance_0000050C
     bl equip_getGlobalManager
     li r4, 0x3
     bl world_getGlobalFlag
     cmpwi r3, 0x1
-    bne lbl_fn_80139560_0000050C
+    bne lbl_npc_calcTargetDistance_0000050C
     lfs f0, lbl_808819A0
     stfs f0, 0x10(r1)
-lbl_fn_80139560_0000050C:
+lbl_npc_calcTargetDistance_0000050C:
     addi r3, r31, 0xd74
     bl fn_8013A144
     cmpwi r3, 0x0
-    beq lbl_fn_80139560_00000700
+    beq lbl_npc_calcTargetDistance_00000700
     lbz r0, 0xd74(r31)
     cmpwi r0, 0x6
-    bne lbl_fn_80139560_0000053C
+    bne lbl_npc_calcTargetDistance_0000053C
     lfs f1, 0x10(r1)
     lfs f0, lbl_808819A4
     fmuls f0, f1, f0
     stfs f0, 0x10(r1)
-    b lbl_fn_80139560_00000700
-lbl_fn_80139560_0000053C:
+    b lbl_npc_calcTargetDistance_00000700
+lbl_npc_calcTargetDistance_0000053C:
     lfs f1, 0x10(r1)
     lfs f0, lbl_808819A0
     fmuls f0, f1, f0
     stfs f0, 0x10(r1)
-    b lbl_fn_80139560_00000700
-lbl_fn_80139560_00000550:
+    b lbl_npc_calcTargetDistance_00000700
+lbl_npc_calcTargetDistance_00000550:
     cmpwi r3, 0x6
-    bne lbl_fn_80139560_000006F8
+    bne lbl_npc_calcTargetDistance_000006F8
     addi r3, r1, 0x30
     addi r4, r31, 0xf80
     bl fn_8013A1A8
     addi r3, r1, 0x30
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_80139560_000006D8
+    beq lbl_npc_calcTargetDistance_000006D8
     addi r3, r31, 0xf80
     bl fn_8013A214
     lwz r12, 0x0(r3)
@@ -513,7 +513,7 @@ lbl_fn_80139560_00000550:
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    beq lbl_fn_80139560_00000624
+    beq lbl_npc_calcTargetDistance_00000624
     addi r3, r31, 0xf80
     bl fn_8013A214
     mr r4, r3
@@ -531,77 +531,77 @@ lbl_fn_80139560_00000550:
     addi r3, r1, 0x24
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_80139560_000005E4
+    beq lbl_npc_calcTargetDistance_000005E4
     addi r3, r1, 0x78
     bl fn_800C7CA8
-lbl_fn_80139560_000005E4:
+lbl_npc_calcTargetDistance_000005E4:
     lwz r0, 0x55c(r31)
     cmpwi r0, 0x6
-    bne lbl_fn_80139560_00000614
+    bne lbl_npc_calcTargetDistance_00000614
     addi r3, r31, 0xf80
     bl fn_8013A248
     cmpwi r3, 0x0
-    beq lbl_fn_80139560_00000614
+    beq lbl_npc_calcTargetDistance_00000614
     mr r3, r31
     bl fn_8013A150
     mr r4, r3
     mr r3, r31
     bl actor_setState
-lbl_fn_80139560_00000614:
+lbl_npc_calcTargetDistance_00000614:
     addi r3, r1, 0x78
     li r4, -0x1
     bl fn_800C622C
-    b lbl_fn_80139560_000006D8
-lbl_fn_80139560_00000624:
+    b lbl_npc_calcTargetDistance_000006D8
+lbl_npc_calcTargetDistance_00000624:
     lwz r3, 0x560(r31)
     subi r0, r3, 0x16
     cmplwi r0, 0x1
-    bgt lbl_fn_80139560_000006C0
+    bgt lbl_npc_calcTargetDistance_000006C0
     lwz r0, 0x54c(r31)
     rlwinm r0, r0, 0, 23, 23
     cmplwi r0, 0x100
-    bne lbl_fn_80139560_000006AC
+    bne lbl_npc_calcTargetDistance_000006AC
     mr r3, r31
     bl fn_8013A158
     cmpwi r3, 0x0
-    beq lbl_fn_80139560_0000069C
+    beq lbl_npc_calcTargetDistance_0000069C
     addi r3, r31, 0x7d4
     li r4, 0x100
     bl fn_8013A16C
     cmpwi r3, 0x0
-    bne lbl_fn_80139560_0000069C
+    bne lbl_npc_calcTargetDistance_0000069C
     addi r3, r31, 0x7d4
     bl fn_80139F4C
     cmpwi r3, 0x0
-    bne lbl_fn_80139560_0000069C
+    bne lbl_npc_calcTargetDistance_0000069C
     bl fn_800F7F90
     cmpwi r3, 0x0
-    bne lbl_fn_80139560_0000069C
+    bne lbl_npc_calcTargetDistance_0000069C
     addi r3, r1, 0x18
     addi r4, r31, 0x574
     bl vec3_toEulerAngles
     mr r3, r31
     addi r4, r1, 0x18
     bl fn_801698E4
-lbl_fn_80139560_0000069C:
+lbl_npc_calcTargetDistance_0000069C:
     lwz r0, 0x54c(r31)
     rlwinm r0, r0, 0, 24, 22
     stw r0, 0x54c(r31)
-    b lbl_fn_80139560_000006D8
-lbl_fn_80139560_000006AC:
+    b lbl_npc_calcTargetDistance_000006D8
+lbl_npc_calcTargetDistance_000006AC:
     mr r3, r31
     addi r4, r31, 0x528
     addi r5, r31, 0x6b8
     bl fn_80171F3C
-    b lbl_fn_80139560_000006D8
-lbl_fn_80139560_000006C0:
+    b lbl_npc_calcTargetDistance_000006D8
+lbl_npc_calcTargetDistance_000006C0:
     cmpwi r3, 0x68
-    bne lbl_fn_80139560_000006D8
+    bne lbl_npc_calcTargetDistance_000006D8
     mr r3, r31
     addi r4, r31, 0x528
     addi r5, r31, 0x574
     bl fn_80171F3C
-lbl_fn_80139560_000006D8:
+lbl_npc_calcTargetDistance_000006D8:
     lfs f1, 0x580(r31)
     lfs f2, lbl_808819BC
     lfs f0, 0x584(r31)
@@ -609,36 +609,36 @@ lbl_fn_80139560_000006D8:
     fmuls f0, f0, f2
     stfs f1, 0x580(r31)
     stfs f0, 0x584(r31)
-    b lbl_fn_80139560_00000924
-lbl_fn_80139560_000006F8:
+    b lbl_npc_calcTargetDistance_00000924
+lbl_npc_calcTargetDistance_000006F8:
     cmpwi r3, 0xa
-    beq lbl_fn_80139560_00000924
-lbl_fn_80139560_00000700:
+    beq lbl_npc_calcTargetDistance_00000924
+lbl_npc_calcTargetDistance_00000700:
     lwz r0, 0x55c(r31)
     cmpwi r0, 0x5
-    beq lbl_fn_80139560_00000714
+    beq lbl_npc_calcTargetDistance_00000714
     cmpwi r0, 0x1
-    bne lbl_fn_80139560_0000074C
-lbl_fn_80139560_00000714:
+    bne lbl_npc_calcTargetDistance_0000074C
+lbl_npc_calcTargetDistance_00000714:
     mr r3, r31
     bl fn_80139E9C
     cmpwi r3, 0x0
-    beq lbl_fn_80139560_0000074C
+    beq lbl_npc_calcTargetDistance_0000074C
     lwz r3, 0x1208(r31)
     bl fn_8013A184
     cmpwi r3, 0x2
-    bne lbl_fn_80139560_00000744
+    bne lbl_npc_calcTargetDistance_00000744
     lwz r3, 0x1208(r31)
     bl fn_8013A18C
     cmpwi r3, 0x0
-    bne lbl_fn_80139560_0000074C
-lbl_fn_80139560_00000744:
+    bne lbl_npc_calcTargetDistance_0000074C
+lbl_npc_calcTargetDistance_00000744:
     li r0, 0x0
     stw r0, 0x1208(r31)
-lbl_fn_80139560_0000074C:
+lbl_npc_calcTargetDistance_0000074C:
     lwz r0, 0x12a4(r31)
     extrwi. r0, r0, 1, 29
-    bne lbl_fn_80139560_00000780
+    bne lbl_npc_calcTargetDistance_00000780
     lwz r12, 0x0(r31)
     mr r3, r31
     addi r4, r1, 0x6c
@@ -648,54 +648,54 @@ lbl_fn_80139560_0000074C:
     lfs f2, 0x10(r1)
     mtctr r12
     bctrl
-    b lbl_fn_80139560_00000798
-lbl_fn_80139560_00000780:
+    b lbl_npc_calcTargetDistance_00000798
+lbl_npc_calcTargetDistance_00000780:
     lfs f1, 0x14(r1)
     mr r3, r31
     lfs f2, 0x10(r1)
     addi r4, r1, 0x6c
     li r5, 0x0
     bl npc_updateTalkInteraction
-lbl_fn_80139560_00000798:
+lbl_npc_calcTargetDistance_00000798:
     lwz r0, 0x54c(r31)
     rlwinm r0, r0, 0, 23, 23
     cmplwi r0, 0x100
-    bne lbl_fn_80139560_000007F4
+    bne lbl_npc_calcTargetDistance_000007F4
     lwz r0, 0x55c(r31)
     cmpwi r0, 0x1
-    bne lbl_fn_80139560_000007CC
+    bne lbl_npc_calcTargetDistance_000007CC
     mr r3, r31
     addi r4, r31, 0x574
     li r5, 0xf
     li r6, -0x1
     bl fn_8016BBCC
-    b lbl_fn_80139560_000007E8
-lbl_fn_80139560_000007CC:
+    b lbl_npc_calcTargetDistance_000007E8
+lbl_npc_calcTargetDistance_000007CC:
     cmpwi r0, 0x2
-    bne lbl_fn_80139560_000007E8
+    bne lbl_npc_calcTargetDistance_000007E8
     mr r3, r31
     addi r4, r31, 0x574
     li r5, 0x3e8
     li r6, -0x1
     bl fn_8016BBCC
-lbl_fn_80139560_000007E8:
+lbl_npc_calcTargetDistance_000007E8:
     lwz r0, 0x54c(r31)
     rlwinm r0, r0, 0, 24, 22
     stw r0, 0x54c(r31)
-lbl_fn_80139560_000007F4:
+lbl_npc_calcTargetDistance_000007F4:
     lwz r4, 0x54c(r31)
     rlwinm r3, r4, 0, 14, 14
     subis r0, r3, 0x2
     cmplwi r0, 0x0
-    beq lbl_fn_80139560_00000818
+    beq lbl_npc_calcTargetDistance_00000818
     rlwinm r3, r4, 0, 13, 13
     subis r0, r3, 0x4
     cmplwi r0, 0x0
-    bne lbl_fn_80139560_000008A8
-lbl_fn_80139560_00000818:
-    bl fn_8013A194
+    bne lbl_npc_calcTargetDistance_000008A8
+lbl_npc_calcTargetDistance_00000818:
+    bl npc_getGlobalManager
     cmpwi r3, 0x0
-    beq lbl_fn_80139560_0000089C
+    beq lbl_npc_calcTargetDistance_0000089C
     li r3, 0x7de
     bl task_findEntryById
     lfs f1, 0x13a4(r31)
@@ -703,13 +703,13 @@ lbl_fn_80139560_00000818:
     lfs f0, lbl_808819C0
     fadds f0, f1, f0
     stfs f0, 0x13a4(r31)
-    bl fn_8013A194
+    bl npc_getGlobalManager
     li r4, 0x1
     bl fn_8013A19C
-    bl fn_8013A194
+    bl npc_getGlobalManager
     bl system_getNextSequenceId
     mr r30, r3
-    bl fn_8013A194
+    bl npc_getGlobalManager
     li r0, -0x1
     stw r0, 0x8(r1)
     lfs f1, lbl_8088196C
@@ -723,29 +723,29 @@ lbl_fn_80139560_00000818:
     li r9, 0x0
     li r10, 0x1e
     bl clip_calculateFrustum
-    bl fn_8013A194
+    bl npc_getGlobalManager
     li r4, 0x0
     bl fn_8013A19C
-lbl_fn_80139560_0000089C:
+lbl_npc_calcTargetDistance_0000089C:
     lwz r0, 0x54c(r31)
     rlwinm r0, r0, 0, 15, 12
     stw r0, 0x54c(r31)
-lbl_fn_80139560_000008A8:
+lbl_npc_calcTargetDistance_000008A8:
     lwz r0, 0x54c(r31)
     rlwinm r3, r0, 0, 11, 11
     subis r0, r3, 0x10
     cmplwi r0, 0x0
-    bne lbl_fn_80139560_00000924
-    bl fn_8013A194
+    bne lbl_npc_calcTargetDistance_00000924
+    bl npc_getGlobalManager
     cmpwi r3, 0x0
-    beq lbl_fn_80139560_00000918
+    beq lbl_npc_calcTargetDistance_00000918
     li r3, 0x7e8
     bl task_findEntryById
     mr r29, r3
-    bl fn_8013A194
+    bl npc_getGlobalManager
     bl system_getNextSequenceId
     mr r30, r3
-    bl fn_8013A194
+    bl npc_getGlobalManager
     li r0, -0x1
     stw r0, 0x8(r1)
     lfs f1, lbl_8088196C
@@ -759,11 +759,11 @@ lbl_fn_80139560_000008A8:
     li r9, 0x0
     li r10, 0x1e
     bl clip_calculateFrustum
-lbl_fn_80139560_00000918:
+lbl_npc_calcTargetDistance_00000918:
     lwz r0, 0x54c(r31)
     rlwinm r0, r0, 0, 12, 10
     stw r0, 0x54c(r31)
-lbl_fn_80139560_00000924:
+lbl_npc_calcTargetDistance_00000924:
     lwz r0, 0xa4(r1)
     lwz r31, 0x9c(r1)
     lwz r30, 0x98(r1)
@@ -1089,19 +1089,14 @@ asm void fn_8013A18C(void)
     blr
 }
 
-asm void fn_8013A194(void)
+u32 npc_getGlobalManager(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F048
-    blr
+    return lbl_8087F048;
 }
 
-asm void fn_8013A19C(void)
+void fn_8013A19C(void *p, u32 val)
 {
-    nofralloc
-    addis r3, r3, 0x4
-    stw r4, -0x1c64(r3)
-    blr
+    *(u32 *)((char *)p + 0x3e39c) = val;
 }
 
 asm void fn_8013A1A8(void)
@@ -1265,7 +1260,7 @@ lbl_npc_initScriptContext_00000E08:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x1c(r1)
     mr r31, r3
@@ -1297,7 +1292,7 @@ lbl_npc_initScriptContext_00000EC0:
     addi r3, r1, 0x18
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x18(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x18
     beq lbl_npc_initScriptContext_00000F08
     addic. r3, r3, 0x4

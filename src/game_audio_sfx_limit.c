@@ -28,25 +28,25 @@ extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void fn_800902C0(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80092954(void);
+extern void compass_findMarkerByName(void);
 extern void fn_80094D88(void);
 extern void str_parseInt(void);
 extern void fn_800EC254(void);
-extern void fn_800EC2C4(void);
-extern void fn_800EC440(void);
-extern void fn_800EC534(void);
-extern void fn_800EC5BC(void);
-extern void fn_800EC654(void);
-extern void fn_800ED42C(void);
+extern void cam_registerTarget(void);
+extern void cam_initTrajectoryParams(void);
+extern void cam_bindPathTarget(void);
+extern void cam_bindRotationTarget(void);
+extern void cam_evalControllerSpline(void);
+extern void cam_setLookAtTarget(void);
 extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
-extern void fn_800EDFE8(void);
-extern void fn_8011F91C(void);
+extern void cam_evalLookAtMatrix(void);
+extern void skill_findNodeBySlotId(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void actor_setState(void);
-extern void fn_8020A780(void);
+extern void str_appendString(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_ctor(void);
@@ -55,7 +55,7 @@ extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
-extern void fn_80239D58(void);
+extern void res_Shader_findParameter(void);
 extern void res_findResourceSlot(void);
 extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
@@ -133,8 +133,8 @@ extern u32 lbl_80884D80;
 extern u32 lbl_80884D84;
 
 /* Function declarations */
-void fn_80315644(void);
-void fn_8031564C(void);
+void *fn_80315644(void *obj);
+void fn_8031564C(void *obj, void *val);
 void fn_80315654(void);
 void fn_80315964(void);
 void fn_80315FE0(void);
@@ -149,18 +149,14 @@ void fn_80316E38(void);
 void fn_80316F74(void);
 void fn_80316F9C(void);
 
-asm void fn_80315644(void)
+void *fn_80315644(void *obj)
 {
-    nofralloc
-    addi r3, r3, 0x3c
-    blr
+    return (char *)obj + 0x3c;
 }
 
-asm void fn_8031564C(void)
+void fn_8031564C(void *obj, void *val)
 {
-    nofralloc
-    stw r4, 0xc4(r3)
-    blr
+    *(void **)((char *)obj + 0xc4) = val;
 }
 
 asm void fn_80315654(void)
@@ -398,7 +394,7 @@ asm void fn_80315964(void)
     stw r29, 0x374(r1)
     stw r28, 0x370(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_80315964_000003A4
     lwz r3, lbl_8087F3C0
@@ -814,7 +810,7 @@ asm void fn_80315FE0(void)
     mr r31, r3
     mr r4, r31
     lwz r3, lbl_8087F3C0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_80315FE0_000009DC
     lwz r3, lbl_8087F3C0
@@ -1082,17 +1078,17 @@ asm void fn_803161F8(void)
     addi r4, r29, 0x2b
     li r5, 0x0
     li r6, 0x0
-    bl fn_800EC440
+    bl cam_initTrajectoryParams
     addi r3, r1, 0xd4
     addi r4, r1, 0x14
     addi r5, r1, 0x74
-    bl fn_800EC2C4
+    bl cam_registerTarget
     addi r3, r1, 0x74
     li r4, -0x1
-    bl fn_800EC534
+    bl cam_bindPathTarget
     addi r3, r1, 0x98
     addi r4, r1, 0xd4
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     b lbl_fn_803161F8_00000E54
 lbl_fn_803161F8_00000DD4:
     addi r3, r1, 0x98
@@ -1109,7 +1105,7 @@ lbl_fn_803161F8_00000DD4:
     mr r4, r3
     addi r3, r1, 0x20
     addi r4, r4, 0x8
-    bl fn_8020A780
+    bl str_appendString
     b lbl_fn_803161F8_00000E4C
 lbl_fn_803161F8_00000E14:
     addi r3, r1, 0x98
@@ -1132,19 +1128,19 @@ lbl_fn_803161F8_00000E4C:
 lbl_fn_803161F8_00000E54:
     addi r3, r1, 0x38
     addi r4, r1, 0xd4
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     addi r3, r1, 0x98
     addi r4, r1, 0x38
     bl fn_800EC254
     mr r30, r3
     addi r3, r1, 0x38
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     cmpwi r30, 0x0
     bne lbl_fn_803161F8_00000DD4
     addi r3, r1, 0x98
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     addi r3, r1, 0x8
     addi r4, r1, 0x2c
     addi r5, r1, 0x20
@@ -1194,7 +1190,7 @@ lbl_fn_803161F8_00000F0C:
     bl dtor_80013D60
     addi r3, r1, 0xd4
     li r4, -0x1
-    bl fn_800EC5BC
+    bl cam_bindRotationTarget
     addi r3, r1, 0x14
     li r4, -0x1
     bl dtor_80013D60
@@ -1467,7 +1463,7 @@ lbl_fn_803165EC_000012FC:
     b lbl_fn_803165EC_0000133C
 lbl_fn_803165EC_00001330:
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     stw r3, 0x14d4(r30)
 lbl_fn_803165EC_0000133C:
     lwz r0, 0x54c(r30)
@@ -1673,7 +1669,7 @@ lbl_fn_80316A68_00001610:
     addi r3, r30, 0xb0
     addi r4, r4, lbl_8074959C@l
     addi r4, r4, 0xf9
-    bl fn_80092954
+    bl compass_findMarkerByName
     mr r28, r3
     bl fn_8000DD98
     stw r3, 0x18(r1)
@@ -1725,7 +1721,7 @@ lbl_fn_80316A68_000016C4:
     addi r3, r30, 0xb0
     addi r4, r4, lbl_8074959C@l
     addi r4, r4, 0xf9
-    bl fn_80092954
+    bl compass_findMarkerByName
     mr r28, r3
     bl fn_8000DD98
     stw r3, 0x10(r1)
@@ -1778,11 +1774,11 @@ lbl_fn_80316A68_00001774:
 lbl_fn_80316A68_00001780:
     mr r3, r31
     addi r4, r29, 0xf9
-    bl fn_80092954
+    bl compass_findMarkerByName
     mr r27, r3
     addi r3, r30, 0xb0
     addi r4, r29, 0xf9
-    bl fn_80092954
+    bl compass_findMarkerByName
     bl fn_8000DD98
     stw r3, 0x8(r1)
     mr r3, r27

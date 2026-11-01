@@ -44,11 +44,11 @@ extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
 extern void GXInitLightDistAttn(void);
 extern void GXInitLightSpot(void);
-extern void fn_80615FF0(void);
-extern void fn_80616250(void);
+extern void GXInitLightObj(void);
+extern void GXClampLightAngle(void);
 extern void fn_80617200(void);
 extern void GXInitTexObjDefault(void);
-extern void fn_80617340(void);
+extern void GXSetTevDirect(void);
 extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void GXSetTevAlphaIn(void);
@@ -929,7 +929,7 @@ asm void fn_800B2EA0(void)
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80880F28
     addi r3, r1, 0x28
     li r4, 0x1
@@ -939,7 +939,7 @@ asm void fn_800B2EA0(void)
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     lwz r3, lbl_8087EF8C
     mr r4, r31
     mr r5, r30
@@ -954,7 +954,7 @@ asm void fn_800B2EA0(void)
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80880F28
     addi r3, r1, 0x8
     li r4, 0x1
@@ -964,7 +964,7 @@ asm void fn_800B2EA0(void)
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     li r3, 0x1
     bl GXClearVtxDesc
     li r3, 0x0
@@ -975,7 +975,7 @@ asm void fn_800B2EA0(void)
     bl fn_80617200
     li r3, 0x0
     li r4, 0x3
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1075,7 +1075,7 @@ asm void fn_800B2EA0(void)
     bl fn_800763FC
     li r3, 0x0
     li r4, 0x3
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0

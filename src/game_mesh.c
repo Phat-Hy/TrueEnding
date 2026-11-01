@@ -7,13 +7,13 @@ extern void __files(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8004B290(void);
+extern void sound_initChannelParams(void);
 extern void talk_formatQuotedString(void);
 extern void fn_80079044(void);
 extern void fn_800790D0(void);
 extern void fn_80079BC8(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800839EC(void);
+extern void town_registerInteractionPoint(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void route_findNextWaypoint(void);
@@ -41,8 +41,8 @@ extern void str_skipWhitespace(void);
 extern void PSVECNormalize(void);
 extern void fn_806052C0(void);
 extern void fn_80615E00(void);
-extern void fn_80615FF0(void);
-extern void fn_80616250(void);
+extern void GXInitLightObj(void);
+extern void GXClampLightAngle(void);
 extern void fn_806249F0(void);
 extern void printf(void);
 extern void strcmp(void);
@@ -1231,7 +1231,7 @@ asm void fn_800BC468(void)
     li r6, 0x6
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     b lbl_fn_800BC468_00000FE4
 lbl_fn_800BC468_00000FE0:
     mr r3, r0
@@ -1300,7 +1300,7 @@ lbl_fn_800BC468_00001088:
     li r8, 0x0
     li r9, 0x1
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80881088
     mr r3, r29
     li r4, 0x1
@@ -1310,7 +1310,7 @@ lbl_fn_800BC468_00001088:
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     mr r3, r31
     mr r4, r30
     bl DCFlushRange
@@ -1353,7 +1353,7 @@ asm void fn_800BC618(void)
     li r6, 0x6
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     mr r28, r3
 lbl_fn_800BC618_00001190:
     lis r6, 0x1
@@ -1407,7 +1407,7 @@ lbl_fn_800BC618_000011FC:
     li r8, 0x0
     li r9, 0x1
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80881088
     mr r3, r30
     li r4, 0x0
@@ -1417,7 +1417,7 @@ lbl_fn_800BC618_000011FC:
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     mr r3, r28
     mr r4, r27
     bl DCFlushRange
@@ -1515,7 +1515,7 @@ asm void fn_800BC874(void)
     stfs f0, 0xfc(r3)
     stfs f0, 0x100(r3)
     addi r3, r3, 0x104
-    bl fn_8004B290
+    bl sound_initChannelParams
     li r0, -0x1
     stw r0, 0x2f8(r29)
     addi r3, r29, 0x318
@@ -1523,14 +1523,14 @@ asm void fn_800BC874(void)
     stw r30, 0x300(r29)
     li r5, 0x0
     stw r30, 0x314(r29)
-    bl fn_8004B290
+    bl sound_initChannelParams
     stw r30, 0x52c(r29)
     addi r3, r29, 0x558
     li r4, 0x0
     li r5, 0x0
     stw r30, 0x550(r29)
     stw r30, 0x554(r29)
-    bl fn_8004B290
+    bl sound_initChannelParams
     addi r3, r29, 0x74c
     bl atn_LH_Texture_constructor
     lfs f3, lbl_80881094

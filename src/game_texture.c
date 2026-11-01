@@ -5,7 +5,7 @@
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_8004B290(void);
+extern void sound_initChannelParams(void);
 extern void mission_updateStub(void);
 extern void fn_8005DFC8(void);
 extern void fn_8006FEBC(void);
@@ -27,7 +27,7 @@ extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
 extern void fn_80615190(void);
 extern void GXCopyTex(void);
-extern void fn_80616250(void);
+extern void GXClampLightAngle(void);
 extern void fn_806163C0(void);
 extern void fn_806163E0(void);
 extern void GXSetZMode(void);
@@ -673,7 +673,7 @@ asm void fn_800B68BC(void)
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -875,11 +875,11 @@ asm void fn_800B6BEC(void)
     stw r0, 0x18(r3)
     stw r6, 0x0(r3)
     addi r3, r3, 0x74
-    bl fn_8004B290
+    bl sound_initChannelParams
     addi r3, r31, 0x268
     li r4, 0x0
     li r5, 0x0
-    bl fn_8004B290
+    bl sound_initChannelParams
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)

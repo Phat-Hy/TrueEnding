@@ -19,14 +19,14 @@ extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void str_parseInt(void);
 extern void fn_80125474(void);
-extern void fn_801255C8(void);
+extern void enemy_stepBehavior(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80128818(void);
-extern void fn_80139560(void);
+extern void npc_calcTargetDistance(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_setScriptSlot(void);
-extern void fn_8014C228(void);
+extern void dialog_initScriptSlot(void);
 extern void fn_801598B4(void);
 extern void fn_80159BA4(void);
 extern void actor_getMovementFlags(void);
@@ -90,8 +90,8 @@ extern u32 lbl_80881C38;
 extern u32 lbl_80881C3C;
 
 /* Function declarations */
-void fn_80180594(void);
-void fn_8018059C(void);
+u32 fn_80180594(void);
+u32 fn_8018059C(void);
 void fn_801805A4(void);
 void fn_80180960(void);
 void fn_801809F4(void);
@@ -105,18 +105,14 @@ void fn_8018161C(void);
 void fn_80181A64(void);
 void fn_80181D94(void);
 
-asm void fn_80180594(void)
+u32 fn_80180594(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_8018059C(void)
+u32 fn_8018059C(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F090
-    blr
+    return lbl_8087F090;
 }
 
 asm void fn_801805A4(void)
@@ -471,7 +467,7 @@ asm void fn_801809F4(void)
     b lbl_fn_801809F4_00000534
 lbl_fn_801809F4_00000514:
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
     mr r3, r31
     bl quest_updateFlow
     b lbl_fn_801809F4_00000534
@@ -487,10 +483,9 @@ lbl_fn_801809F4_00000534:
     blr
 }
 
-asm void fn_80180ADC(void)
+void fn_80180ADC(void)
 {
-    nofralloc
-    b dialog_renderWindow
+    dialog_renderWindow();
 }
 
 asm void fn_80180AE0(void)
@@ -529,7 +524,7 @@ asm void fn_80180AE0(void)
     beq lbl_fn_80180AE0_0000069C
     b lbl_fn_80180AE0_000006A0
 lbl_fn_80180AE0_000005CC:
-    bl fn_80139560
+    bl npc_calcTargetDistance
     b lbl_fn_80180AE0_000006A0
 lbl_fn_80180AE0_000005D4:
     lwz r4, lbl_8087F8A0
@@ -1417,9 +1412,9 @@ lbl_fn_8018161C_000011AC:
 lbl_fn_8018161C_000011EC:
     lwz r3, lbl_8087F8A0
     lwz r3, 0x48(r3)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     mr r3, r30
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     lwz r5, lbl_8087F8A0
     addi r3, r1, 0x1c8
     lfs f7, lbl_80881C04
@@ -1815,7 +1810,7 @@ lbl_fn_80181A64_000017A0:
     lwzx r4, r4, r0
     bl fn_80128818
     addi r3, r20, 0xc64
-    bl fn_801255C8
+    bl enemy_stepBehavior
     addi r11, r1, 0x70
     psq_l f31, 0x98(r1), 0, 0
     lfd f31, 0x90(r1)
@@ -1912,7 +1907,7 @@ lbl_fn_80181D94_00001900:
     lwzx r4, r4, r0
     bl fn_80128818
     addi r3, r30, 0xc64
-    bl fn_801255C8
+    bl enemy_stepBehavior
 lbl_fn_80181D94_00001928:
     mr r3, r31
     bl enemy_updateCombatBehavior

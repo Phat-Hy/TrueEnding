@@ -33,7 +33,7 @@ extern f32 lbl_808885B0;
 extern f64 lbl_808885B8;
 
 /* Function declarations */
-void fn_8060AB50(void);
+u32 fn_8060AB50(void);
 void fn_8060AB60(void);
 void fn_8060ABA0(void);
 void fn_8060ABD0(void);
@@ -41,11 +41,9 @@ void fn_8060AE60(void);
 void fn_8060AED0(void);
 void fn_8060AFC0(void);
 
-asm void fn_8060AB50(void)
+u32 fn_8060AB50(void)
 {
-    nofralloc
-    lwz r3, lbl_80880008
-    blr
+    return lbl_80880008;
 }
 
 asm void fn_8060AB60(void)

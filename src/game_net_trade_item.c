@@ -16,11 +16,11 @@ extern void item_useConsumable(void);
 extern void fn_8004BF64(void);
 extern void fn_8008B964(void);
 extern void fn_800A97C4(void);
-extern void fn_800C16B4(void);
+extern void skeleton_getGlobalManager(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB58C(void);
 extern void morph_updateMesh(void);
-extern void fn_800F52F0(void);
+extern void proj_getMatrix(void);
 extern void fn_800F7260(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_800F8524(void);
@@ -73,7 +73,7 @@ extern void fn_8052EEC0(void);
 extern void fn_8052F890(void);
 extern void fn_8052FA48(void);
 extern void fn_80530DB8(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void fn_805BDCC0(void);
 extern void fn_805BF414(void);
 
@@ -166,7 +166,7 @@ asm void fn_8052C10C(void)
     stw r0, 0x10(r1)
     bl scene_transformPoint
     lwz r4, 0x10(r1)
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     stw r3, 0x14(r1)
     addi r3, r31, 0x1224
     addi r4, r1, 0x10
@@ -296,7 +296,7 @@ lbl_fn_8052C10C_0000024C:
     bne lbl_fn_8052C10C_00000208
     b lbl_fn_8052C10C_00000298
 lbl_fn_8052C10C_00000258:
-    bl fn_800F52F0
+    bl proj_getMatrix
     mr r30, r3
     bl fn_801D80B4
     lwz r4, 0x10(r1)
@@ -865,7 +865,7 @@ asm void fn_8052CA70(void)
     bl fn_8036E624
 lbl_fn_8052CA70_000009B8:
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     mr r31, r3
     addi r4, r30, 0xd74
     bl fn_804741C0

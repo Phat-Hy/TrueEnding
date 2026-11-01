@@ -8,10 +8,10 @@ extern void atn_normalizePath(char* str);
 extern void fn_8006B404(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void str_findChar(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void atn_Arc_decompressChunk(void);
 extern void fn_8046D1EC(void);
 extern void fn_8046F5CC(void);
@@ -1326,7 +1326,7 @@ lbl_fn_804714B0_00000F90:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     stw r3, 0x1c(r1)
     mr r27, r3
     stw r3, 0x10(r1)
@@ -1352,7 +1352,7 @@ lbl_fn_804714B0_0000102C:
     bl strcpy
     stw r31, 0x18(r1)
     addi r3, r1, 0x18
-    bl fn_800DCA6C
+    bl sky_renderStub
     cmpwi r21, 0x0
     beq lbl_fn_804714B0_00001068
     addic. r3, r21, 0x4

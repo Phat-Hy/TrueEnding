@@ -11,7 +11,7 @@ extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80092954(void);
+extern void compass_findMarkerByName(void);
 extern void fn_8009373C(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void skin_applyWeights(void);
@@ -36,8 +36,8 @@ extern void equip_applyToCharacter(void);
 extern void actor_setState(void);
 extern void battle_resolveAggroHierarchy(void);
 extern void battle_awardExp(void);
-extern void fn_80176ACC(void);
-extern void fn_801781B0(void);
+extern void battle_activateExpReward(void);
+extern void battle_calcAABBCenter(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -62,7 +62,7 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_804DA490(void);
 extern void fn_804DA4A4(void);
-extern void fn_805A3C58(void);
+extern void rand_Mersenne_constructor(void);
 extern void fn_805A3D00(void);
 extern void fn_805A3D6C(void);
 extern void PSMTXRotRad(void);
@@ -731,7 +731,7 @@ lbl_fn_802EDB34_000007A4:
     stfs f0, 0x2c(r1)
     stfs f0, 0x30(r1)
     stfs f1, 0x34(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     cmpwi r3, 0x0
     beq lbl_fn_802EDB34_000008DC
     lfs f4, lbl_80884830
@@ -763,7 +763,7 @@ lbl_fn_802EDB34_000007A4:
     stb r0, 0xf(r1)
     lwz r0, 0xc(r1)
     stw r0, 0x14(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lbz r0, 0x14(r1)
     stb r0, 0x18(r3)
     lbz r0, 0x15(r1)
@@ -777,7 +777,7 @@ lbl_fn_802EDB34_000008DC:
     addi r3, r31, 0xb0
     addi r30, r30, lbl_80748250@l
     addi r4, r30, 0x1aa
-    bl fn_80092954
+    bl compass_findMarkerByName
     cmpwi r3, 0x0
     beq lbl_fn_802EDB34_00000990
     lfs f4, lbl_80884830
@@ -809,7 +809,7 @@ lbl_fn_802EDB34_000008DC:
     stb r0, 0xb(r1)
     lwz r0, 0x8(r1)
     stw r0, 0x10(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lbz r0, 0x10(r1)
     stb r0, 0x18(r3)
     lbz r0, 0x11(r1)
@@ -1104,7 +1104,7 @@ lbl_fn_802EDFE4_00000CF4:
     lwz r29, lbl_8087F048
     mr r4, r30
     addi r3, r1, 0x60
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     mr r3, r29
     addi r4, r1, 0x60
     li r5, 0x80
@@ -1429,7 +1429,7 @@ asm void fn_802EE604(void)
     mr r31, r5
     stw r30, 0x208(r1)
     mr r30, r3
-    bl fn_805A3C58
+    bl rand_Mersenne_constructor
     lfs f0, lbl_80884850
     lis r3, lbl_8078778C@ha
     li r9, 0x0
@@ -2055,7 +2055,7 @@ lbl_fn_802EEBA8_00001AEC:
     rlwinm r0, r0, 0, 26, 26
     cmplwi r0, 0x20
     bne lbl_fn_802EEBA8_00001BC4
-    bl fn_80176ACC
+    bl battle_activateExpReward
     lwz r3, 0x14e8(r31)
     li r30, 0x0
     lfs f1, lbl_80884860

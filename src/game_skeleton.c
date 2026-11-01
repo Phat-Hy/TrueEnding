@@ -9,7 +9,7 @@ extern void sound_releaseChannel(void);
 extern void fn_800795DC(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
@@ -17,9 +17,9 @@ extern void route_createWaypoint(void);
 extern void fn_800B6218(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void atn_LH_Texture_update(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void atn_Curve_evaluate(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
@@ -90,7 +90,7 @@ void fn_800C122C(void);
 void fn_800C1424(void);
 void fn_800C1660(void);
 void fn_800C169C(void);
-void fn_800C16B4(void);
+u32 skeleton_getGlobalManager(void);
 void fn_800C16BC(void);
 void fn_800C16C0(void);
 void fn_800C1720(void);
@@ -182,7 +182,7 @@ lbl_fn_800C122C_00000070:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x1c(r1)
     mr r31, r3
@@ -214,7 +214,7 @@ lbl_fn_800C122C_0000014C:
     addi r3, r1, 0x18
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x18(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x18
     beq lbl_fn_800C122C_00000194
     addic. r3, r3, 0x4
@@ -339,7 +339,7 @@ lbl_fn_800C1424_000002AC:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x4c(r1)
     mr r30, r3
@@ -371,7 +371,7 @@ lbl_fn_800C1424_00000388:
     addi r3, r1, 0x48
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x48(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x48
     beq lbl_fn_800C1424_000003D0
     addic. r3, r3, 0x4
@@ -444,11 +444,9 @@ lbl_fn_800C169C_00000480:
     blr
 }
 
-asm void fn_800C16B4(void)
+u32 skeleton_getGlobalManager(void)
 {
-    nofralloc
-    lwz r3, lbl_8087EFB8
-    blr
+    return lbl_8087EFB8;
 }
 
 void fn_800C16BC(void) {
@@ -541,7 +539,7 @@ lbl_fn_800C1720_00000574:
 lbl_fn_800C1720_000005C0:
     lwz r3, 0x40(r30)
     mr r4, r31
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -591,7 +589,7 @@ lbl_fn_800C1814_00000620:
 lbl_fn_800C1814_0000066C:
     lwz r3, 0x40(r30)
     mr r4, r31
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1214,7 +1212,7 @@ lbl_fn_800C2108_00000F4C:
     lis r4, lbl_807337B0@ha
     addi r3, r27, 0x164
     addi r4, r4, lbl_807337B0@l
-    bl fn_800D5908
+    bl depth_resetRenderTarget
 lbl_fn_800C2108_00000F64:
     addi r3, r27, 0x164
     bl atn_LH_Texture_update
@@ -1908,7 +1906,7 @@ lbl_fn_800C289C_000018B8:
 lbl_fn_800C289C_000018D0:
     lwz r3, 0xb8(r30)
     mr r4, r31
-    bl fn_800D5908
+    bl depth_resetRenderTarget
 lbl_fn_800C289C_000018DC:
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
@@ -1974,7 +1972,7 @@ lbl_fn_800C2B24_0000196C:
 lbl_fn_800C2B24_000019B8:
     lwz r3, 0x110(r30)
     mr r4, r31
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     lfs f0, lbl_808810D0
     addi r3, r1, 0x8
     stfs f0, 0x8(r1)

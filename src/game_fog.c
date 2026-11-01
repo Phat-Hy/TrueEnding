@@ -6,7 +6,7 @@ extern void _restgpr_19(void);
 extern void _savegpr_19(void);
 extern void dtor_80084684(void);
 extern void mem_free(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
@@ -24,7 +24,7 @@ extern void atn_Task_deleteLater(void);
 extern void atn_TaskBase_constructor(void);
 extern void atn_TaskBase_destructor(void);
 extern void atn_TaskBase_isValid(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void msl_releaseRefCount(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
@@ -124,7 +124,7 @@ lbl_fn_800D0DB0_00000098:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     stw r3, 0x1c(r1)
     mr r22, r3
     stw r3, 0x10(r1)
@@ -150,7 +150,7 @@ lbl_fn_800D0DB0_0000010C:
     bl strcpy
     stw r26, 0x18(r1)
     addi r3, r1, 0x18
-    bl fn_800DCA6C
+    bl sky_renderStub
     cmpwi r30, 0x0
     beq lbl_fn_800D0DB0_00000148
     addic. r3, r30, 0x4
@@ -236,7 +236,7 @@ lbl_fn_800D0F34_0000021C:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     stw r3, 0x1c(r1)
     mr r22, r3
     stw r3, 0x10(r1)
@@ -262,7 +262,7 @@ lbl_fn_800D0F34_00000290:
     bl strcpy
     stw r26, 0x18(r1)
     addi r3, r1, 0x18
-    bl fn_800DCA6C
+    bl sky_renderStub
     cmpwi r30, 0x0
     beq lbl_fn_800D0F34_000002CC
     addic. r3, r30, 0x4
@@ -348,7 +348,7 @@ lbl_fn_800D10B8_000003A0:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     stw r3, 0x1c(r1)
     mr r22, r3
     stw r3, 0x10(r1)
@@ -374,7 +374,7 @@ lbl_fn_800D10B8_00000414:
     bl strcpy
     stw r26, 0x18(r1)
     addi r3, r1, 0x18
-    bl fn_800DCA6C
+    bl sky_renderStub
     cmpwi r30, 0x0
     beq lbl_fn_800D10B8_00000450
     addic. r3, r30, 0x4
@@ -496,7 +496,7 @@ lbl_fn_800D123C_00000594:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     stw r3, 0x1c(r1)
     mr r17, r3
     stw r3, 0x10(r1)
@@ -522,7 +522,7 @@ lbl_fn_800D123C_00000608:
     bl strcpy
     stw r21, 0x18(r1)
     addi r3, r1, 0x18
-    bl fn_800DCA6C
+    bl sky_renderStub
     cmpwi r25, 0x0
     beq lbl_fn_800D123C_00000644
     addic. r3, r25, 0x4

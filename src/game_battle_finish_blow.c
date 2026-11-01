@@ -17,21 +17,21 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void route_createWaypoint(void);
-extern void fn_80088724(void);
+extern void zone_testPointInBounds(void);
 extern void node_createNamedChild(void);
 extern void map_processTrigger(void);
 extern void fn_80092A4C(void);
 extern void cursor_Object_constructor(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void fn_80158CA4(void);
 extern void world_getLocalFlag(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
 extern void task_updateWorker(void);
-extern void fn_803ED774(void);
+extern void dungeon_updateBarrierField(void);
 extern void fn_8040161C(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
@@ -707,10 +707,9 @@ lbl_fn_804023E0_000008A8:
     blr
 }
 
-asm void fn_80402764(void)
+void fn_80402764(void)
 {
-    nofralloc
-    b fn_8040161C
+    fn_8040161C();
 }
 
 asm void fn_80402768(void)
@@ -771,7 +770,7 @@ lbl_fn_80402768_0000097C:
     addi r5, r29, 0x78
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_8088617C
     mr r3, r30
     lfs f2, lbl_80886180
@@ -1450,7 +1449,7 @@ lbl_fn_80402BD0_0000137C:
     lwz r0, 0x10c(r23)
     add r3, r0, r22
     addi r3, r3, 0x10
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     stw r21, 0xa4(r1)
     addi r4, r1, 0xa4
     lwz r0, 0x10c(r23)
@@ -1521,7 +1520,7 @@ lbl_fn_80403280_00001458:
     beq lbl_fn_80403280_00001488
     mr r3, r29
     addi r4, r4, 0x10
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_80403280_00001488:
     addi r30, r30, 0x1
     addi r31, r31, 0x42c
@@ -1870,7 +1869,7 @@ lbl_fn_80403308_000019A4:
     lwz r0, 0x10c(r18)
     add r3, r0, r17
     addi r3, r3, 0x10
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     stw r27, 0x50(r1)
     addi r4, r1, 0x50
     lwz r0, 0x10c(r18)

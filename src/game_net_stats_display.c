@@ -19,9 +19,9 @@ extern void fn_800E854C(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80105BD8(void);
-extern void fn_8012D8B8(void);
-extern void fn_8012DB04(void);
-extern void fn_80139560(void);
+extern void enemy_updateAnimTimer(void);
+extern void enemy_evalAnimTrack(void);
+extern void npc_calcTargetDistance(void);
 extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
@@ -32,7 +32,7 @@ extern void fn_8015EB2C(void);
 extern void fn_80161570(void);
 extern void fn_8016AB0C(void);
 extern void fn_8016DDB0(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void battle_applyStatusEffect(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -535,7 +535,7 @@ lbl_fn_8054622C_00000590:
     stw r0, 0x54c(r31)
     b lbl_fn_8054622C_00000CB4
 lbl_fn_8054622C_000005BC:
-    bl fn_80139560
+    bl npc_calcTargetDistance
     lwz r0, 0x55c(r31)
     cmpwi r0, 0x6
     beq lbl_fn_8054622C_0000067C
@@ -944,7 +944,7 @@ lbl_fn_8054622C_00000B94:
 lbl_fn_8054622C_00000BC0:
     mr r3, r31
     li r4, 0x0
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     li r0, 0x6
     stw r17, 0x14dc(r31)
     lfs f3, lbl_80887CD8
@@ -980,7 +980,7 @@ lbl_fn_8054622C_00000BC0:
     stfs f0, 0x52c(r31)
     bl quest_evaluateConditions
     addi r3, r31, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lfs f0, 0x14ec(r31)
     li r4, 0xfa
     stfs f0, 0x7d8(r31)
@@ -1466,7 +1466,7 @@ lbl_fn_80546B88_000012D4:
     stfs f2, 0x53c(r18)
     psq_st f1, 0x534(r18), 0, 0
     stw r0, 0x58c(r18)
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lwz r0, 0x5c0(r18)
     li r19, 0x0
     stw r19, 0x9f8(r18)
@@ -1491,7 +1491,7 @@ lbl_fn_80546B88_000012D4:
     mr r3, r18
     stfs f0, 0x2ec(r18)
     li r4, 0x1
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     lwz r0, 0x12a4(r18)
     mr r3, r18
     rlwinm r0, r0, 0, 7, 5
@@ -1533,7 +1533,7 @@ lbl_fn_80546B88_0000143C:
     lfs f30, lbl_80887CD8
 lbl_fn_80546B88_00001440:
     addi r3, r18, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     fmuls f5, f30, f1
     lfs f3, 0x98(r1)
     lfs f0, 0x94(r1)

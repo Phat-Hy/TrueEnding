@@ -4,16 +4,16 @@
 /* External function declarations */
 extern void _restgpr_16(void);
 extern void _savegpr_16(void);
-extern void fn_80060D58(void);
+extern void equip_calcTotalStatBonuses(void);
 extern void skill_calculateDamage(void);
 extern void skill_calcTrajectory(void);
 extern void fn_80062C8C(void);
 extern void fn_80063484(void);
 extern void fn_80063764(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void script_executeOpcode(void);
 extern void fn_8006F2F0(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void motion_updateFogAdj(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
@@ -70,13 +70,13 @@ extern u32 lbl_8088150C;
 extern u32 lbl_80881510;
 
 /* Function declarations */
-void fn_800F52F0(void);
+void proj_getMatrix(void);
 void fn_800F52F8(void);
 void fn_800F5300(void);
 void fn_800F530C(void);
 void fn_800F5314(void);
 
-asm void fn_800F52F0(void)
+asm void proj_getMatrix(void)
 {
     nofralloc
     addi r3, r3, 0x7d4
@@ -498,7 +498,7 @@ lbl_fn_800F5314_00000530:
     lwz r3, lbl_8087EEB0
     fmr f2, f1
     lfs f3, lbl_80881488
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
     addis r3, r31, 0x4
     lfs f1, lbl_808814EC
     lfs f3, -0x75fc(r3)
@@ -511,7 +511,7 @@ lbl_fn_800F5314_00000530:
     lfs f3, lbl_80881488
     addi r4, r4, 0x66ff
     fdivs f4, f4, f0
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
     addis r4, r31, 0x4
     addi r3, r1, 0x2c8
     lfs f1, -0x75fc(r4)
@@ -2050,7 +2050,7 @@ lbl_fn_800F5314_00001CC4:
     add r4, r20, r0
     lfs f1, 0x24(r4)
     addi r4, r4, 0xc
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_800F5314_00001CF8:
     lwz r5, 0x50(r1)
     addi r3, r1, 0x22c
@@ -2137,7 +2137,7 @@ lbl_fn_800F5314_00001E1C:
     cmpwi r0, 0x0
     beq lbl_fn_800F5314_00001E40
     mr r3, r20
-    bl fn_8008CD60
+    bl minimap_renderOverlay
 lbl_fn_800F5314_00001E40:
     addi r16, r16, 0x1
     addi r20, r20, 0x21c

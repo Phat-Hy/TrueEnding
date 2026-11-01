@@ -39,14 +39,14 @@ extern void magic_getOffset6C(void);
 extern void fn_8012A1B8(void);
 extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80139560(void);
-extern void fn_8013A194(void);
+extern void npc_calcTargetDistance(void);
+extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
-extern void fn_8014052C(void);
+extern void quest_initMarkerCoords(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void fn_801513D0(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void fn_8016D74C(void);
 extern void actor_setState(void);
 extern void battle_updateTargetAggro(void);
@@ -161,14 +161,14 @@ extern u32 lbl_808850B4;
 
 /* Function declarations */
 void fn_8032DAA0(void);
-void fn_8032DDC8(void);
+u32 fn_8032DDC8(void);
 void fn_8032DDD0(void);
 void fn_8032DEA0(void);
 void fn_8032E2D4(void);
 void fn_8032E3DC(void);
 void fn_8032E938(void);
 void fn_8032EC94(void);
-void fn_8032ECA0(void);
+void *fn_8032ECA0(void *obj);
 void fn_8032ECA8(void);
 void fn_8032ECB8(void);
 void fn_8032ECBC(void);
@@ -267,7 +267,7 @@ lbl_fn_8032DAA0_00000134:
     addi r4, r29, 0x10
     li r5, -0x1
     li r6, 0x0
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
 lbl_fn_8032DAA0_00000148:
     li r0, 0x0
     stw r0, 0x58c(r31)
@@ -394,11 +394,9 @@ lbl_fn_8032DAA0_00000304:
     blr
 }
 
-asm void fn_8032DDC8(void)
+u32 fn_8032DDC8(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8032DDD0(void)
@@ -1282,17 +1280,17 @@ lbl_fn_8032E938_00000FC0:
     lwz r4, 0xd1c(r31)
     mr r29, r3
     addi r3, r1, 0x10
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     lwz r3, 0xd1c(r31)
     bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x1c
     addi r5, r1, 0x10
     bl vec3_add
-    bl fn_8013A194
+    bl npc_getGlobalManager
     bl system_getNextSequenceId
     mr r30, r3
-    bl fn_8013A194
+    bl npc_getGlobalManager
     li r0, -0x1
     stw r0, 0x8(r1)
     lfs f1, lbl_80885078
@@ -1377,7 +1375,7 @@ lbl_fn_8032E938_0000116C:
     bl fn_8032EF38
 lbl_fn_8032E938_0000117C:
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
     mr r3, r31
     bl dialog_updateScriptState
     mr r3, r31
@@ -1418,11 +1416,9 @@ asm void fn_8032EC94(void)
     blr
 }
 
-asm void fn_8032ECA0(void)
+void *fn_8032ECA0(void *obj)
 {
-    nofralloc
-    addi r3, r3, 0x46c
-    blr
+    return (char *)obj + 0x46c;
 }
 
 asm void fn_8032ECA8(void)

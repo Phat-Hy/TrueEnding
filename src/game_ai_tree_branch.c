@@ -13,7 +13,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void collision_testLineSegment(void);
-extern void fn_80056DB8(void);
+extern void path_Object_constructor(void);
 extern void atn_ColliBase_destructor(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
@@ -31,12 +31,12 @@ extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void wcs_vformat(void);
-extern void fn_800EE360(void);
+extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80102EAC(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
-extern void fn_80109828(void);
+extern void hurtbox_dispatchHitEvent(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
@@ -1031,7 +1031,7 @@ asm void fn_8025A060(void)
     addi r28, r30, 0x1580
     li r4, 0x0
     mr r3, r28
-    bl fn_80056DB8
+    bl path_Object_constructor
     lwz r4, 0x12a4(r30)
     li r5, 0x1
     lwz r0, 0x14c4(r30)
@@ -1969,7 +1969,7 @@ lbl_fn_8025ACA0_00001A20:
     stw r0, 0x12a4(r31)
     bl battle_awardExp
     mr r3, r31
-    bl fn_800EE360
+    bl camera_updateTargetMode
     b lbl_fn_8025ACA0_00001FCC
 lbl_fn_8025ACA0_00001A6C:
     mr r3, r31
@@ -2164,7 +2164,7 @@ lbl_fn_8025ACA0_00001D28:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0xc0
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     b lbl_fn_8025ACA0_00001FCC
 lbl_fn_8025ACA0_00001D4C:
     addi r3, r31, 0xb0

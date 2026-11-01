@@ -21,7 +21,7 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
-extern void fn_800928B0(void);
+extern void compass_findWaypointIndex(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
@@ -104,26 +104,26 @@ extern u32 lbl_80885FA8;
 /* Function declarations */
 void fn_803EFCA8(void);
 void fn_803EFD60(void);
-void fn_803EFD9C(void);
-void fn_803EFDA4(void);
-void fn_803EFDAC(void);
+u32 fn_803EFD9C(const void *p);
+u32 fn_803EFDA4(const void *p);
+u32 fn_803EFDAC(const void *p);
 void fn_803EFDB4(void);
 void fn_803EFDD0(void);
 void fn_803EFDE4(void);
-void fn_803EFE5C(void);
+u32 fn_803EFE5C(const void *p);
 void fn_803EFE64(void);
 void fn_803F0280(void);
 void fn_803F0328(void);
 void fn_803F03D8(void);
 void fn_803F0488(void);
 void fn_803F0538(void);
-void fn_803F05E8(void);
+u32 fn_803F05E8(const void *p);
 void fn_803F05F0(void);
-void fn_803F05FC(void);
+u32 fn_803F05FC(const void *p);
 void fn_803F0604(void);
 void fn_803F0614(void);
 void fn_803F0624(void);
-void fn_803F0634(void);
+u32 fn_803F0634(const void *p);
 void fn_803F063C(void);
 void fn_803F0688(void);
 void fn_803F069C(void);
@@ -208,25 +208,19 @@ asm void fn_803EFD60(void)
     blr
 }
 
-asm void fn_803EFD9C(void)
+u32 fn_803EFD9C(const void *p)
 {
-    nofralloc
-    lwz r3, 0x48(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x48);
 }
 
-asm void fn_803EFDA4(void)
+u32 fn_803EFDA4(const void *p)
 {
-    nofralloc
-    lwz r3, 0x4c(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x4c);
 }
 
-asm void fn_803EFDAC(void)
+u32 fn_803EFDAC(const void *p)
 {
-    nofralloc
-    lwz r3, 0x50(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x50);
 }
 
 asm void fn_803EFDB4(void)
@@ -288,11 +282,9 @@ lbl_fn_803EFDE4_00000198:
     blr
 }
 
-asm void fn_803EFE5C(void)
+u32 fn_803EFE5C(const void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x4);
 }
 
 asm void fn_803EFE64(void)
@@ -839,11 +831,9 @@ lbl_fn_803F0538_00000924:
     blr
 }
 
-asm void fn_803F05E8(void)
+u32 fn_803F05E8(const void *p)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(const u32 *)p;
 }
 
 asm void fn_803F05F0(void)
@@ -854,11 +844,9 @@ asm void fn_803F05F0(void)
     blr
 }
 
-asm void fn_803F05FC(void)
+u32 fn_803F05FC(const void *p)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(const u32 *)p;
 }
 
 asm void fn_803F0604(void)
@@ -888,11 +876,9 @@ asm void fn_803F0624(void)
     blr
 }
 
-asm void fn_803F0634(void)
+u32 fn_803F0634(const void *p)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(const u32 *)p;
 }
 
 asm void fn_803F063C(void)
@@ -1156,7 +1142,7 @@ lbl_fn_803F0764_00000D08:
     lwz r4, 0x20(r23)
     mr r3, r20
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_803F0764_00000D28
     li r17, 0x0
@@ -1303,7 +1289,7 @@ lbl_fn_803F0764_00000EFC:
     lwz r4, 0x20(r23)
     mr r3, r20
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_803F0764_00000F4C
     li r3, 0x0
@@ -1408,7 +1394,7 @@ lbl_fn_803F0764_0000106C:
     lwz r4, 0x20(r23)
     mr r3, r20
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_803F0764_000010D4
     li r3, 0x0
@@ -1537,7 +1523,7 @@ lbl_fn_803F0764_00001254:
     lwz r4, 0x20(r23)
     mr r3, r20
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_803F0764_000012A4
     li r3, 0x0
@@ -2192,7 +2178,7 @@ lbl_fn_803F1508_00001AE4:
     mr r23, r3
     mr r4, r22
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_803F1508_00001BA0
     li r22, 0x0

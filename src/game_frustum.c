@@ -12,7 +12,7 @@ extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void atn_LH_Texture_release(void);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void atn_LH_Texture_update(void);
 extern void fn_800EF91C(void);
 extern void fn_80103600(void);
@@ -40,9 +40,9 @@ extern void fn_8023772C(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void world_getGlobalFlag(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void fn_803761BC(void);
 extern void fn_8059AFDC(void);
 extern void fn_8059B0F4(void);
@@ -331,7 +331,7 @@ lbl_fn_800F2C9C_00000228:
     addis r3, r31, 0x1
     lwz r4, lbl_808813DC
     subi r3, r3, 0x3484
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     addis r3, r31, 0x3
     lwz r4, lbl_808813F0
     addi r3, r3, 0x64ec
@@ -1156,7 +1156,7 @@ asm void fn_800F39A4(void)
     addi r31, r31, lbl_80736040@l
     addi r4, r31, 0x169
     subi r3, r3, 0x763c
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     lwz r4, lbl_808813D4
     mr r3, r28
     li r5, 0x0
@@ -1927,7 +1927,7 @@ lbl_fn_800F3EF4_00001940:
     cmpwi r25, 0x0
     bne lbl_fn_800F3EF4_0000182C
     lwz r3, lbl_8087F428
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     lfs f26, lbl_808814C0
     mr r25, r3
     lfs f30, lbl_808814C8
@@ -2112,7 +2112,7 @@ lbl_fn_800F3EF4_00001BE0:
     cmpwi r28, 0x0
     bne lbl_fn_800F3EF4_00001AC8
     lwz r3, lbl_8087F428
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     mr r26, r3
     b lbl_fn_800F3EF4_00001CF4
 lbl_fn_800F3EF4_00001BF8:
@@ -2548,7 +2548,7 @@ lbl_fn_800F3EF4_000021BC:
     mr r3, r31
     bl fn_80109F7C
     lwz r3, lbl_8087F430
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_800F3EF4_0000232C
     lwz r3, lbl_8087F408

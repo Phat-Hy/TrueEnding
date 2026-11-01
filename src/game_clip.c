@@ -21,7 +21,7 @@ extern void fn_800EFE3C(void);
 extern void fn_800FBE70(void);
 extern void fn_800FCD24(void);
 extern void fn_800FD658(void);
-extern void fn_80148B0C(void);
+extern void quest_getRewardItemSlot(void);
 extern void fn_801533C8(void);
 extern void fn_80154E38(void);
 extern void battle_canTargetActor(void);
@@ -68,7 +68,7 @@ extern u32 lbl_80881538;
 
 /* Function declarations */
 void fn_800FA4EC(void);
-void fn_800FA4F4(void);
+u32 fn_800FA4F4(void);
 void fn_800FA4FC(void);
 void fn_800FA9F4(void);
 void clip_calculateFrustum(void);
@@ -84,11 +84,9 @@ asm void fn_800FA4EC(void)
     blr
 }
 
-asm void fn_800FA4F4(void)
+u32 fn_800FA4F4(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_800FA4FC(void)
@@ -1718,7 +1716,7 @@ lbl_fn_800FBA9C_000016E0:
 lbl_fn_800FBA9C_00001710:
     mr r3, r30
     mr r4, r26
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_800FBA9C_00001908

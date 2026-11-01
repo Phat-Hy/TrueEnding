@@ -8,7 +8,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_20(void);
 extern void _savegpr_22(void);
 extern void _savegpr_27(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void boss_recordDamage(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_8009373C(void);
@@ -22,11 +22,11 @@ extern void fn_800EFC64(void);
 extern void fn_800EFDA0(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
-extern void fn_801092C8(void);
+extern void hurtbox_processHitDamage(void);
 extern void fn_8011F8F4(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
-extern void fn_8011FE3C(void);
+extern void skill_findNodeByTag(void);
 extern void fn_80161570(void);
 extern void fn_80162A08(void);
 extern void fn_80163B88(void);
@@ -34,7 +34,7 @@ extern void fn_8016939C(void);
 extern void fn_801696E0(void);
 extern void fn_8016CDB8(void);
 extern void fn_8016D3F8(void);
-extern void fn_801781B0(void);
+extern void battle_calcAABBCenter(void);
 extern void game_initGlobalDatabases(void);
 extern void event_findEntryById(void);
 extern void task_findEntryById(void);
@@ -55,7 +55,7 @@ extern void fn_803C18DC(void);
 extern void fn_803E5E64(void);
 extern void fn_804439FC(void);
 extern void fn_8044441C(void);
-extern void fn_804444E8(void);
+extern void gmk_findSlotByIndex(void);
 extern void fn_804A04AC(void);
 extern void fn_8059C2AC(void);
 extern void fn_805AA4E8(void);
@@ -825,7 +825,7 @@ lbl_fn_803A3D20_00000958:
 lbl_fn_803A3D20_00000960:
     lwz r3, lbl_8087F890
     mr r4, r0
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r4, r3
     cmpwi r0, 0x0
@@ -847,7 +847,7 @@ lbl_fn_803A3D20_0000099C:
 lbl_fn_803A3D20_000009B0:
     lwz r3, lbl_8087F8A0
     mr r4, r0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r4, r3
 lbl_fn_803A3D20_000009C0:
     cmpwi r4, 0x0
@@ -1127,7 +1127,7 @@ lbl_fn_803A3FFC_00000DA8:
     lwz r6, 0x8(r30)
     li r4, 0x2
     li r5, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
     lwz r3, lbl_8087F430
     lwz r28, 0x10(r30)
     cmpwi r3, 0x0
@@ -1200,7 +1200,7 @@ lbl_fn_803A3FFC_00000EA8:
     mr r7, r28
     li r4, 0x1
     li r5, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
     lwz r3, lbl_8087F430
     lwz r28, 0x10(r30)
     cmpwi r3, 0x0
@@ -1324,7 +1324,7 @@ asm void fn_803A4474(void)
     bne lbl_fn_803A4474_00001088
     lwz r3, lbl_8087F4F0
     lwz r4, 0x8(r5)
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     lwz r4, 0x10(r31)
     mr r8, r3
     lwz r5, 0x14(r31)
@@ -1419,7 +1419,7 @@ lbl_fn_803A4568_0000119C:
     b lbl_fn_803A4568_000011F8
 lbl_fn_803A4568_000011A4:
     lwz r3, lbl_8087F890
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r29, r3
     cmpwi r0, 0x0
@@ -1439,7 +1439,7 @@ lbl_fn_803A4568_000011DC:
     b lbl_fn_803A4568_000011F8
 lbl_fn_803A4568_000011EC:
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r29, r3
 lbl_fn_803A4568_000011F8:
     cmpwi r29, 0x0
@@ -1844,7 +1844,7 @@ lbl_fn_803A4A7C_00001748:
     stw r22, 0xd4(r1)
     stw r0, 0xdc(r1)
     stw r22, 0xd8(r1)
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     b lbl_fn_803A4A7C_0000187C
 lbl_fn_803A4A7C_000017AC:
     cmpwi r0, 0x1
@@ -1867,7 +1867,7 @@ lbl_fn_803A4A7C_000017AC:
     bl PSMTXMultVec
     mr r4, r29
     addi r3, r1, 0xa4
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     lfs f3, 0xac(r1)
     lfs f2, 0xa0(r1)
     lfs f1, 0xa8(r1)
@@ -2122,7 +2122,7 @@ lbl_fn_803A4A7C_00001B88:
     b lbl_fn_803A4A7C_00001BE4
 lbl_fn_803A4A7C_00001B90:
     lwz r3, lbl_8087F890
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r21, r3
     cmpwi r0, 0x0
@@ -2142,7 +2142,7 @@ lbl_fn_803A4A7C_00001BC8:
     b lbl_fn_803A4A7C_00001BE4
 lbl_fn_803A4A7C_00001BD8:
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r21, r3
 lbl_fn_803A4A7C_00001BE4:
     cmpwi r21, 0x0

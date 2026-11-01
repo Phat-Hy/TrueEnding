@@ -18,7 +18,7 @@ extern void scene_traverseNode(void);
 extern void scene_transformPoint(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
 extern void vec3_add(void);
@@ -32,24 +32,24 @@ extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void fn_8008CD60(void);
-extern void fn_80092F1C(void);
+extern void minimap_renderOverlay(void);
+extern void target_pushPointToHistory(void);
 extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB688(void);
 extern void fn_800D8814(void);
 extern void fn_800D8BB4(void);
 extern void str_skipWhitespace(void);
-extern void fn_800EC204(void);
+extern void cam_findTargetIndex(void);
 extern void cam_destroyMsgHandle(void);
 extern void fn_800F52F8(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void viewport_getNextSequenceId(void);
@@ -62,7 +62,7 @@ extern void npc_updateDialogueTarget(void);
 extern void fn_80139F3C(void);
 extern void fn_8013A13C(void);
 extern void npc_getPosition(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
 extern void fn_801A03E0(void);
@@ -169,7 +169,7 @@ void fn_80416AA8(void);
 void fn_80416C84(void);
 void fn_80416CB8(void);
 void fn_80416F40(void);
-void fn_80416F6C(void);
+void *fn_80416F6C(void *p);
 void fn_80416F74(void);
 void fn_80417098(void);
 void fn_804170D8(void);
@@ -944,7 +944,7 @@ lbl_fn_804167FC_00000AB0:
     addi r3, r29, 0xf4
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
 lbl_fn_804167FC_00000AF4:
     addi r3, r1, 0x108
     bl talk_parseQuotes
@@ -1204,7 +1204,7 @@ asm void fn_80416C84(void)
     blr
 lbl_fn_80416C84_00000E6C:
     addi r3, r3, 0xf4
-    b fn_8008CD60
+    b minimap_renderOverlay
     blr
 }
 
@@ -1401,11 +1401,9 @@ lbl_fn_80416F40_00001124:
     blr
 }
 
-asm void fn_80416F6C(void)
+void *fn_80416F6C(void *p)
 {
-    nofralloc
-    addi r3, r3, 0xf4
-    blr
+    return (char *)p + 0xf4;
 }
 
 asm void fn_80416F74(void)
@@ -2140,7 +2138,7 @@ lbl_fn_8041766C_00001B3C:
     bne lbl_fn_8041766C_00001BB8
     mr r3, r26
     li r4, 0x1
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     addi r3, r1, 0xf0
     li r4, 0x0
     bl fn_80317034
@@ -2231,10 +2229,10 @@ lbl_fn_8041766C_00001C3C:
     bl task_findEntryById
     mr r31, r3
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     lwz r4, 0xf4(r24)
     lwz r4, 0x24(r4)
-    bl fn_800EC204
+    bl cam_findTargetIndex
     mr r26, r3
     addi r3, r1, 0x80
     bl mission_updateStub
@@ -2329,7 +2327,7 @@ lbl_fn_8041766C_00001D5C:
     bl fn_8013A13C
     addi r3, r1, 0x74
     addi r4, r1, 0x118
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x80
     addi r4, r1, 0x74
     bl fn_80012C88
@@ -2395,7 +2393,7 @@ lbl_fn_8041766C_00001EF8:
     fmr f1, f27
     addi r3, r1, 0x20
     addi r4, r1, 0x68
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r25, 0x3e0
     addi r4, r1, 0x20
     bl vec3_copy
@@ -2414,7 +2412,7 @@ lbl_fn_8041766C_00001EF8:
     bl fn_80139F3C
     mr r3, r25
     li r4, 0x1
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     addi r3, r1, 0x5c
     addi r4, r25, 0x3e0
     bl vec3_toEulerAngles

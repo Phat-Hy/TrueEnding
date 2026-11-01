@@ -8,12 +8,12 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void talk_parseDialogue(void);
-extern void fn_8005B8F8(void);
-extern void fn_8005B9AC(void);
+extern void talk_parseDialogueTokens(void);
+extern void talk_copyUtf16String(void);
 extern void fn_8006BA8C(void);
 extern void fn_8006BB6C(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800839EC(void);
+extern void town_registerInteractionPoint(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void str_skipWhitespace(void);
@@ -23,10 +23,10 @@ extern void fn_80206B68(void);
 extern void fn_80206B70(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void fn_8020EE58(void);
 extern void fn_8020EE60(void);
-extern void fn_8020EF04(void);
+extern void rand_scaleRangeInt(void);
 extern void fn_8020EF4C(void);
 extern void fn_8020EFEC(void);
 extern void fn_80219F1C(void);
@@ -183,7 +183,7 @@ lbl_event_processScriptAction_00000124:
     li r9, 0x0
     mr r8, r7
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     stw r3, lbl_8087F220
     addi r5, r26, 0x1d
     lwz r3, 0xc(r1)
@@ -677,9 +677,9 @@ lbl_fn_80211244_0000084C:
     stw r3, 0x14(r1)
     mr r3, r30
     addi r4, r4, lbl_8077A0A8@l
-    bl fn_8005B9AC
+    bl talk_copyUtf16String
     addi r3, r1, 0x14
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     li r0, 0x0
     stw r0, 0xc(r1)
     stw r0, 0x8(r1)
@@ -697,7 +697,7 @@ lbl_fn_80211244_00000890:
     bl fn_80219F1C
 lbl_fn_80211244_000008B8:
     addi r3, r1, 0x14
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_80211244_00000890
     lis r3, lbl_8073FA60@ha
@@ -727,7 +727,7 @@ lbl_fn_80211244_00000918:
     stw r3, 0x1c(r1)
     addi r3, r1, 0x14
     stw r31, 0x20(r1)
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     stw r31, 0xc(r1)
     li r29, 0x0
     stw r31, 0x8(r1)
@@ -752,7 +752,7 @@ lbl_fn_80211244_0000093C:
     addi r29, r29, 0x138
 lbl_fn_80211244_00000980:
     addi r3, r1, 0x14
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_80211244_0000093C
     mr r3, r28
@@ -970,7 +970,7 @@ lbl_fn_80211648_00000BF4:
     b lbl_fn_80211648_00000C5C
 lbl_fn_80211648_00000C28:
     lwz r3, 0x4(r31)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_80211648_00000C58
     lwz r3, 0x4(r31)
@@ -1701,7 +1701,7 @@ lbl_fn_80211940_0000165C:
     b lbl_fn_80211940_000019B8
 lbl_fn_80211940_0000166C:
     lwz r3, 0x4(r29)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_80211940_000019B8
     li r28, 0x0
@@ -1729,7 +1729,7 @@ lbl_fn_80211940_00001680:
     add r0, r0, r4
     mulli r0, r0, 0x3e8
     subf r4, r0, r5
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     lwz r0, 0x7c(r27)
     addi r4, r25, 0x4dd3
     lfs f0, 0x0(r3)

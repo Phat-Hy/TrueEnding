@@ -11,25 +11,25 @@ extern void vec3_copy(void);
 extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
-extern void fn_800133B0(void);
+extern void math_wrapAngle(void);
 extern void fn_80013404(void);
 extern void vec3_add(void);
 extern void fn_80013484(void);
 extern void collision_testLineSegment(void);
 extern void mission_updateStub(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_8008B964(void);
 extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800A56A8(void);
+extern void msg_formatWindowLayout(void);
 extern void fn_800F7258(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_801156BC(void);
 extern void fn_80116E6C(void);
@@ -37,8 +37,8 @@ extern void fn_8012A1B8(void);
 extern void fn_8013A13C(void);
 extern void fn_8013C3B4(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_8014052C(void);
-extern void fn_801446F0(void);
+extern void quest_initMarkerCoords(void);
+extern void quest_resetObjectiveBounds(void);
 extern void actor_getMovementFlags(void);
 extern void fn_80188A70(void);
 extern void fn_80188AA0(void);
@@ -363,7 +363,7 @@ asm void fn_801C1DCC(void)
     rlwinm r0, r0, 0, 28, 26
     stw r0, 0x12a4(r4)
     lwz r3, 0x4(r3)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     lfs f1, lbl_808826A4
     mr r3, r30
     lfs f2, lbl_808826AC
@@ -1968,7 +1968,7 @@ asm void fn_801C346C(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fneg f1, f1
     lfs f0, lbl_80882748
     stfs f0, 0xfc(r1)
@@ -1977,7 +1977,7 @@ asm void fn_801C346C(void)
     li r4, 0x0
     li r5, 0x1
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fneg f0, f1
     addi r3, r1, 0xf8
     stfs f0, 0x100(r1)
@@ -2039,7 +2039,7 @@ lbl_fn_801C346C_00001A68:
     bl fn_8013A13C
     addi r3, r1, 0xe0
     addi r4, r1, 0x138
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0xd4
     addi r4, r30, 0x8
     addi r5, r1, 0xe0
@@ -2075,7 +2075,7 @@ lbl_fn_801C346C_00001AD4:
     addi r3, r1, 0x80
     addi r4, r1, 0xe0
     fadds f1, f0, f29
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x8c
     addi r4, r1, 0x80
     addi r5, r30, 0x14
@@ -2118,7 +2118,7 @@ lbl_fn_801C346C_00001B84:
     fmr f1, f30
     addi r3, r1, 0x50
     addi r4, r1, 0xe0
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x5c
     addi r4, r30, 0x14
     addi r5, r1, 0x50
@@ -2144,7 +2144,7 @@ lbl_fn_801C346C_00001BE4:
     bl viewport_getNextSequenceId
     lwz r4, 0x4(r30)
     addi r3, r1, 0xc8
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     lfs f0, lbl_80882748
     fcmpo cr0, f31, f0
     bge lbl_fn_801C346C_00001C50
@@ -2174,7 +2174,7 @@ lbl_fn_801C346C_00001C50:
     bl vec3_toEulerAngles
     lfs f28, 0x24(r1)
     fsubs f1, f27, f28
-    bl fn_800133B0
+    bl math_wrapAngle
     lfs f0, lbl_80882748
     fmr f29, f1
     fcmpo cr0, f1, f0
@@ -2203,13 +2203,13 @@ lbl_fn_801C346C_00001CF4:
     lfs f1, lbl_80882748
     addi r3, r1, 0xe0
     fmr f2, f1
-    bl fn_80057A68
+    bl vec3_initValues
     fmr f1, f28
     addi r3, r1, 0x108
     bl fn_8013A13C
     addi r3, r1, 0xe0
     addi r4, r1, 0x108
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x14
     addi r4, r30, 0x14
     addi r5, r1, 0xe0

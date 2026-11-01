@@ -11,8 +11,8 @@ extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
-extern void fn_8003EA3C(void);
-extern void fn_80057A68(void);
+extern void ui_drawColoredQuad(void);
+extern void vec3_initValues(void);
 extern void mem_free(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -24,7 +24,7 @@ extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void npc_getPosition(void);
 extern void fn_8013C480(void);
-extern void fn_8014052C(void);
+extern void quest_initMarkerCoords(void);
 extern void actor_setState(void);
 extern void fn_801A03E8(void);
 extern void res_findResourceSlot(void);
@@ -173,7 +173,7 @@ lbl_fn_8029F148_000000A4:
     addi r3, r1, 0x14
     lfs f3, lbl_80883D30
     fmr f2, f1
-    bl fn_80057A68
+    bl vec3_initValues
     lfs f30, lbl_80883D60
     b lbl_fn_8029F148_0000012C
 lbl_fn_8029F148_00000124:
@@ -190,7 +190,7 @@ lbl_fn_8029F148_00000140:
 lbl_fn_8029F148_00000144:
     mr r4, r31
     addi r3, r1, 0x8
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     addi r3, r1, 0x14
     addi r4, r1, 0x8
     bl fn_801A03E8
@@ -747,7 +747,7 @@ lbl_fn_8029F738_000008F8:
     stw r11, 0x4c(r1)
     stw r0, 0x54(r1)
     stw r11, 0x50(r1)
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
 lbl_fn_8029F738_00000958:
     lwz r0, 0x84(r1)
     psq_l f31, 0x78(r1), 0, 0

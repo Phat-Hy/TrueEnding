@@ -14,8 +14,8 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void ref_releaseHandle(void);
-extern void fn_800EE360(void);
-extern void fn_800F7FD8(void);
+extern void camera_updateTargetMode(void);
+extern void vec3_normalize(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
@@ -33,7 +33,7 @@ extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_802A7910(void);
 extern void fn_802A7964(void);
-extern void fn_8037D4C0(void);
+extern void dvd_showDiskErrorDialog(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_804DA490(void);
 extern void fn_805A3D00(void);
@@ -850,7 +850,7 @@ lbl_fn_802B6758_00000AB4:
     mr r3, r31
     bl battle_awardExp
     mr r3, r31
-    bl fn_800EE360
+    bl camera_updateTargetMode
     b lbl_fn_802B6758_00000B68
 lbl_fn_802B6758_00000AD0:
     lwz r0, 0x2dc(r31)
@@ -1373,7 +1373,7 @@ asm void fn_802B6F80(void)
     lfs f31, 0x4(r3)
     addi r3, r1, 0x8
     addi r4, r1, 0x20
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x14
     addi r4, r1, 0x8
     bl vec3_toEulerAngles
@@ -1635,7 +1635,7 @@ lbl_fn_802B725C_000015B8:
     li r5, 0xf
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_802B725C_000015F4:
     lha r4, 0x8(r29)
     lwz r6, 0x0(r29)

@@ -6,12 +6,12 @@ extern void menu_renderLayout(void);
 extern void collision_testLineSegment(void);
 extern void fn_8010CA3C(void);
 extern void fn_801279E8(void);
-extern void fn_8012DB04(void);
+extern void enemy_evalAnimTrack(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_80140588(void);
 extern void fn_80141674(void);
 extern void fn_801426A4(void);
-extern void fn_8014C228(void);
+extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
 extern void fn_80171F3C(void);
 extern void actor_getMovementFlags(void);
@@ -59,8 +59,8 @@ void fn_8013C460(void);
 void fn_8013C470(void);
 void fn_8013C478(void);
 void fn_8013C480(void);
-void fn_8013C504(void);
-void fn_8013C50C(void);
+void *npc_getDialogController(const void *p);
+f32 fn_8013C50C(const void *p);
 void fn_8013C514(void);
 void fn_8013C53C(void);
 void fn_8013C544(void);
@@ -263,18 +263,14 @@ lbl_fn_8013C480_00000170:
     blr
 }
 
-asm void fn_8013C504(void)
+void *npc_getDialogController(const void *p)
 {
-    nofralloc
-    lwz r3, 0x10d8(r3)
-    blr
+    return *(void **)((const char *)p + 0x10d8);
 }
 
-asm void fn_8013C50C(void)
+f32 fn_8013C50C(const void *p)
 {
-    nofralloc
-    lfs f1, 0x48(r3)
-    blr
+    return *(const f32 *)((const char *)p + 0x48);
 }
 
 asm void fn_8013C514(void)
@@ -409,7 +405,7 @@ lbl_fn_8013C564_00000308:
     fmuls f31, f31, f0
 lbl_fn_8013C564_00000320:
     addi r3, r29, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lwz r0, 0x55c(r29)
     fmuls f31, f31, f1
     cmpwi r0, 0x7
@@ -570,7 +566,7 @@ lbl_fn_8013C564_00000564:
     mr r3, r29
     stw r0, 0x648(r29)
     stw r0, 0x64c(r29)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_fn_8013C564_0000072C
 lbl_fn_8013C564_00000584:
     lwz r0, 0x674(r29)

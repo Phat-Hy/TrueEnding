@@ -18,7 +18,7 @@ extern void fn_80079044(void);
 extern void fn_800790D0(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
-extern void fn_800928B0(void);
+extern void compass_findWaypointIndex(void);
 extern void fn_80094F98(void);
 extern void fn_800C122C(void);
 extern void fn_800C1A1C(void);
@@ -29,10 +29,10 @@ extern void fn_800CB688(void);
 extern void atn_Task_destructor(void);
 extern void bloom_processPasses(void);
 extern void fn_800D8814(void);
-extern void fn_800F7FD8(void);
+extern void vec3_normalize(void);
 extern void fn_800F833C(void);
 extern void fn_800F84BC(void);
-extern void fn_801125F8(void);
+extern void phys_scaleGravity(void);
 extern void actor_getMovementFlags(void);
 extern void fn_80185628(void);
 extern void fn_801856A4(void);
@@ -289,10 +289,9 @@ lbl_fn_80183B2C_00000184:
     blr
 }
 
-asm void fn_80183C54(void)
+void fn_80183C54(void)
 {
-    nofralloc
-    b bloom_processPasses
+    bloom_processPasses();
 }
 
 asm void fn_80183C58(void)
@@ -1205,7 +1204,7 @@ asm void fn_80184864(void)
     li r5, 0x0
     stfs f0, 0x3c(r1)
     stfs f3, 0x40(r1)
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_80184864_00000E20
     li r5, 0x0
@@ -1516,7 +1515,7 @@ asm void fn_80184C30(void)
     addi r3, r30, 0x28
     bl vec3_copy
     lfs f1, lbl_80881D6C
-    bl fn_801125F8
+    bl phys_scaleGravity
     stfs f1, 0x34(r30)
     addi r3, r1, 0x20
     lfs f1, lbl_80881D4C
@@ -1557,7 +1556,7 @@ asm void fn_80184C30(void)
     addi r3, r30, 0x60
     bl vec3_copy
     lfs f1, lbl_80881D6C
-    bl fn_801125F8
+    bl phys_scaleGravity
     stfs f1, 0x6c(r30)
     addi r3, r1, 0x10
     lfs f1, lbl_80881D4C
@@ -1598,7 +1597,7 @@ asm void fn_80184C30(void)
     addi r3, r30, 0x98
     bl vec3_copy
     lfs f1, lbl_80881D6C
-    bl fn_801125F8
+    bl phys_scaleGravity
     stfs f1, 0xa4(r30)
     addi r3, r1, 0x2d4
     bl fn_80079044
@@ -1616,7 +1615,7 @@ asm void fn_80184C30(void)
     bl vec3_set
     mr r4, r3
     addi r3, r1, 0x14c
-    bl fn_800F7FD8
+    bl vec3_normalize
     mr r5, r31
     addi r3, r1, 0x2d4
     addi r4, r1, 0x14c
@@ -1663,7 +1662,7 @@ asm void fn_80184C30(void)
     bl vec3_set
     mr r4, r3
     addi r3, r1, 0x104
-    bl fn_800F7FD8
+    bl vec3_normalize
     mr r5, r31
     addi r3, r1, 0x2d4
     addi r4, r1, 0x104
@@ -1710,7 +1709,7 @@ asm void fn_80184C30(void)
     bl vec3_set
     mr r4, r3
     addi r3, r1, 0xbc
-    bl fn_800F7FD8
+    bl vec3_normalize
     mr r5, r31
     addi r3, r1, 0x2d4
     addi r4, r1, 0xbc
@@ -1757,7 +1756,7 @@ asm void fn_80184C30(void)
     bl vec3_set
     mr r4, r3
     addi r3, r1, 0x74
-    bl fn_800F7FD8
+    bl vec3_normalize
     mr r5, r31
     addi r3, r1, 0x2d4
     addi r4, r1, 0x74

@@ -15,8 +15,8 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void sound_releaseChannel(void);
 extern void fn_80069BF4(void);
-extern void fn_8006AA20(void);
-extern void fn_8006B174(void);
+extern void boss_triggerEventSequence(void);
+extern void boss_decodePhaseBitfield(void);
 extern void script_executeOpcode(void);
 extern void str_assignBuffer(void);
 extern void fn_8007A748(void);
@@ -28,7 +28,7 @@ extern void atn_Anim_getLayerTrack(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_setActive(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void fn_800DAA3C(void);
 extern void fn_800DAB68(void);
 extern void fn_800DC980(void);
@@ -636,7 +636,7 @@ asm void fn_80227A94(void)
     bl actor_dispatchMessage
     mr r4, r26
     addi r3, r1, 0x2c
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     addi r3, r1, 0x20
     addi r4, r1, 0x2c
     li r5, 0x0
@@ -746,7 +746,7 @@ lbl_fn_80227A94_000008B4:
     crclr 6
     bl sprintf
     mr r3, r28
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     lwz r0, 0x44(r1)
     mr r27, r3
     srwi. r0, r0, 31
@@ -1460,7 +1460,7 @@ lbl_fn_802280B4_000011D4:
 lbl_fn_802280B4_0000120C:
     lwz r3, 0x24(r1)
 lbl_fn_802280B4_00001210:
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_802280B4_00001258
     mr r3, r26
@@ -1541,7 +1541,7 @@ lbl_fn_802280B4_000012F4:
     addi r4, r14, lbl_80742EA8@l
     addi r3, r21, 0x120
     addi r4, r4, 0x24
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     lwz r3, 0x194(r21)
     li r0, 0x0
     stb r0, 0x14d(r21)

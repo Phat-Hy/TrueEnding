@@ -11,22 +11,22 @@ extern void collision_testLineSegment(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void wcs_vformat(void);
-extern void fn_800EB7A0(void);
-extern void fn_800EE360(void);
+extern void sound_playSpatialEffect(void);
+extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_801031D0(void);
 extern void fn_801079C0(void);
 extern void fn_80107A68(void);
-extern void fn_80108C10(void);
-extern void fn_80109828(void);
+extern void hurtbox_testCollisionLayer(void);
+extern void hurtbox_dispatchHitEvent(void);
 extern void fn_8012DF7C(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_80148B0C(void);
+extern void quest_getRewardItemSlot(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015BAF0(void);
 extern void fn_8015BDD8(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
@@ -257,7 +257,7 @@ lbl_fn_802CB1CC_00000224:
     addi r4, r1, 0x20
     li r5, -0x1
     li r6, 0x0
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
     li r0, 0x0
     stw r0, 0x14d0(r31)
 lbl_fn_802CB1CC_00000254:
@@ -394,7 +394,7 @@ lbl_fn_802CB43C_0000042C:
     bl fn_8012DF7C
     lwz r3, 0x14d0(r31)
     li r4, 0x0
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     psq_l f1, 0x4(r3), 0, 0
     addi r30, r1, 0x20
     lfs f2, 0xc(r3)
@@ -451,7 +451,7 @@ lbl_fn_802CB43C_0000042C:
     stw r0, 0x38(r1)
     stw r29, 0x3c(r1)
     lwz r7, 0x14d0(r31)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
 lbl_fn_802CB43C_0000052C:
     lfs f3, 0x14cc(r31)
     lfs f0, lbl_808843F4
@@ -834,7 +834,7 @@ lbl_fn_802CB8A0_00000A8C:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x260
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lwz r3, lbl_8087F8A0
     lwz r29, 0x48(r3)
     b lbl_fn_802CB8A0_00000AD0
@@ -1178,7 +1178,7 @@ lbl_fn_802CC0F4_00000F84:
     stw r0, 0x5c0(r31)
     bl battle_awardExp
     mr r3, r31
-    bl fn_800EE360
+    bl camera_updateTargetMode
     b lbl_fn_802CC0F4_00000FB4
 lbl_fn_802CC0F4_00000FAC:
     li r0, 0xf
@@ -1647,7 +1647,7 @@ asm void fn_802CC708(void)
     stw r0, 0x14d0(r31)
 lbl_fn_802CC708_0000164C:
     mr r3, r31
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     mtlr r0

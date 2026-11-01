@@ -6,10 +6,10 @@ extern void dtor_80013D60(void);
 extern void vec3_copy(void);
 extern void str_initFromCStr(void);
 extern void str_getData(void);
-extern void fn_80056DB8(void);
+extern void path_Object_constructor(void);
 extern void mission_updateStub(void);
 extern void atn_ColliCapsule_destructor(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void boss_initActionStream(void);
 extern void fn_8006CA80(void);
 extern void route_interpolatePath(void);
@@ -19,29 +19,29 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800EC254(void);
-extern void fn_800EC2C4(void);
-extern void fn_800EC440(void);
-extern void fn_800EC534(void);
-extern void fn_800EC5BC(void);
-extern void fn_800EC654(void);
-extern void fn_800ED42C(void);
+extern void cam_registerTarget(void);
+extern void cam_initTrajectoryParams(void);
+extern void cam_bindPathTarget(void);
+extern void cam_bindRotationTarget(void);
+extern void cam_evalControllerSpline(void);
+extern void cam_setLookAtTarget(void);
 extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
-extern void fn_800EDFE8(void);
+extern void cam_evalLookAtMatrix(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
-extern void fn_8012DB04(void);
+extern void enemy_evalAnimTrack(void);
 extern void boss_updatePhaseState(void);
 extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
 extern void fn_8015AC48(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void actor_setState(void);
 extern void battle_updateTargetAggro(void);
-extern void fn_8020A780(void);
+extern void str_appendString(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
@@ -492,7 +492,7 @@ lbl_fn_80457E98_00000468:
     addi r4, r1, 0x20
     li r5, 0x39
     li r6, 0x0
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
     li r0, 0x0
     stw r0, 0x1908(r31)
 lbl_fn_80457E98_00000518:
@@ -658,17 +658,17 @@ asm void fn_80458270(void)
     addi r4, r31, 0x2b
     li r5, 0x0
     li r6, 0x0
-    bl fn_800EC440
+    bl cam_initTrajectoryParams
     addi r3, r1, 0xd4
     addi r4, r1, 0x14
     addi r5, r1, 0x74
-    bl fn_800EC2C4
+    bl cam_registerTarget
     addi r3, r1, 0x74
     li r4, -0x1
-    bl fn_800EC534
+    bl cam_bindPathTarget
     addi r3, r1, 0x98
     addi r4, r1, 0xd4
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     b lbl_fn_80458270_000007D0
 lbl_fn_80458270_0000078C:
     addi r3, r1, 0x98
@@ -685,26 +685,26 @@ lbl_fn_80458270_0000078C:
     mr r4, r3
     addi r3, r1, 0x20
     addi r4, r4, 0x8
-    bl fn_8020A780
+    bl str_appendString
 lbl_fn_80458270_000007C8:
     addi r3, r1, 0x98
     bl fn_800ED4E0
 lbl_fn_80458270_000007D0:
     addi r3, r1, 0x38
     addi r4, r1, 0xd4
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     addi r3, r1, 0x98
     addi r4, r1, 0x38
     bl fn_800EC254
     mr r30, r3
     addi r3, r1, 0x38
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     cmpwi r30, 0x0
     bne lbl_fn_80458270_0000078C
     addi r3, r1, 0x98
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     addi r3, r1, 0x8
     addi r4, r1, 0x2c
     addi r5, r1, 0x20
@@ -749,7 +749,7 @@ lbl_fn_80458270_000007D0:
     bl dtor_80013D60
     addi r3, r1, 0xd4
     li r4, -0x1
-    bl fn_800EC5BC
+    bl cam_bindRotationTarget
     addi r3, r1, 0x14
     li r4, -0x1
     bl dtor_80013D60
@@ -779,7 +779,7 @@ asm void fn_80458550(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_80056DB8
+    bl path_Object_constructor
     lis r4, lbl_80777668@ha
     mr r3, r31
     addi r4, r4, lbl_80777668@l
@@ -1207,7 +1207,7 @@ lbl_fn_8045883C_00000F28:
     bl fn_8045ABB4
     b lbl_fn_8045883C_000014E4
     addi r3, r3, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     stfs f1, 0x2e8(r31)
     addi r3, r31, 0xb0
     lfs f31, 0x2e4(r31)
@@ -1262,7 +1262,7 @@ lbl_fn_8045883C_00000F94:
     lwz r3, lbl_8087EEB0
     fadds f1, f3, f0
     lfs f2, lbl_80886C34
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     b lbl_fn_8045883C_000014E4
     mr r3, r31
     bl fn_8045E780

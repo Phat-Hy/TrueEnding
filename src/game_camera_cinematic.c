@@ -19,9 +19,9 @@ extern void dialog_renderWindow(void);
 extern void inventory_applyItemStats(void);
 extern void fn_801595BC(void);
 extern void fn_8015AC48(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void fn_8016C4D8(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
 extern void fn_802DC5B4(void);
 extern void fn_802DC8B0(void);
@@ -91,10 +91,9 @@ void fn_802E3E38(void);
 void fn_802E3EE8(void);
 void fn_802E470C(void);
 
-asm void fn_802E2E84(void)
+void fn_802E2E84(void)
 {
-    nofralloc
-    b dialog_renderWindow
+    dialog_renderWindow();
 }
 
 asm void fn_802E2E88(void)
@@ -1166,7 +1165,7 @@ asm void fn_802E3D60(void)
     bl actor_setState
     mr r3, r31
     li r4, 0x1
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     lwz r0, 0x5c0(r31)
     mr r3, r31
     ori r0, r0, 0x1
@@ -1723,7 +1722,7 @@ lbl_fn_802E3EE8_000016CC:
     stfs f0, 0x98(r1)
     stfs f3, 0x9c(r1)
     lwz r3, 0x14d0(r31)
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
     li r30, 0x0
     stw r30, 0x14b8(r31)
     stw r30, 0x14bc(r31)

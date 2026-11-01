@@ -13,7 +13,7 @@ extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void fn_80108F38(void);
 extern void enemy_updateCombatBehavior(void);
-extern void fn_8012DB04(void);
+extern void enemy_evalAnimTrack(void);
 extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_evaluateConditions(void);
@@ -22,7 +22,7 @@ extern void inventory_applyItemStats(void);
 extern void actor_setState(void);
 extern void battle_resolveAggroHierarchy(void);
 extern void battle_updateTargetAggro(void);
-extern void fn_801781B0(void);
+extern void battle_calcAABBCenter(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -424,7 +424,7 @@ lbl_fn_802E9FC8_000003FC:
     lwz r30, lbl_8087F048
     mr r4, r31
     addi r3, r1, 0x10
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     mr r3, r30
     addi r4, r1, 0x10
     li r5, 0x80
@@ -910,7 +910,7 @@ lbl_fn_802EA490_00000BDC:
     cmpwi r0, 0x0
     beq lbl_fn_802EA490_00000C04
     addi r3, r31, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     fmuls f30, f30, f1
     b lbl_fn_802EA490_00000C04
 lbl_fn_802EA490_00000BF4:

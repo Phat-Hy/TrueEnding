@@ -20,11 +20,11 @@ extern void mem_getAllocSize(void);
 extern void fn_8009E5A0(void);
 extern void hud_updateTargetReticle(void);
 extern void fn_8009EB20(void);
-extern void fn_8009EE30(void);
+extern void hud_drawTargetMarker(void);
 extern void fn_8009F788(void);
 extern void fn_8009FFCC(void);
 extern void str_skipWhitespace(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
 extern void task_updateWorker(void);
@@ -714,7 +714,7 @@ lbl_fn_8040099C_000007DC:
     stfs f0, 0x84(r1)
     stfs f10, 0xa4(r1)
     lwzx r3, r3, r30
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
 lbl_fn_8040099C_00000850:
     addi r24, r24, 0x1
     addi r30, r30, 0x30
@@ -1802,7 +1802,7 @@ lbl_fn_80401BF0_0000183C:
     lwz r3, lbl_8087F428
     cmpwi r3, 0x0
     beq lbl_fn_80401BF0_000018F0
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     mr r30, r3
     b lbl_fn_80401BF0_000018E8
 lbl_fn_80401BF0_00001854:

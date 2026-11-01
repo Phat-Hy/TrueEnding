@@ -10,7 +10,7 @@ extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
 extern void msg_getMessageById(void);
 extern void msg_getMessageString(void);
-extern void fn_800A58D0(void);
+extern void msg_isWindowActive(void);
 extern void ref_releaseHandle(void);
 extern void fn_80116EB8(void);
 extern void actor_findSpawnTemplate(void);
@@ -19,7 +19,7 @@ extern void fn_801F6C2C(void);
 extern void save_computeCrc32(void);
 extern void save_findEntryByName(void);
 extern void perf_getMetricValue(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_804A3C24(void);
 extern void fn_804A62C8(void);
@@ -1618,7 +1618,7 @@ lbl_fn_80525A0C_00001598:
     bne lbl_fn_80525A0C_000015D0
     lwz r3, lbl_8087F430
     li r4, 0x155
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_80525A0C_000015D0:
     mr r3, r31
     li r4, 0x0
@@ -1655,7 +1655,7 @@ lbl_fn_80525A0C_00001610:
     bne lbl_fn_80525A0C_000016AC
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_fn_80525A0C_0000168C
     lis r3, 0xf
@@ -1708,7 +1708,7 @@ asm void fn_80525F0C(void)
     mr r30, r3
     stw r29, 0x14(r1)
     lwz r3, lbl_8087EF70
-    bl fn_800A58D0
+    bl msg_isWindowActive
     lwz r5, 0xe4(r30)
     lfs f3, lbl_808879F0
     slwi r0, r5, 2

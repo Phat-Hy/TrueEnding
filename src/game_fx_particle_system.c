@@ -30,7 +30,7 @@ extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_800EB7A0(void);
+extern void sound_playSpatialEffect(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void boss_updatePhaseState(void);
@@ -38,7 +38,7 @@ extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void equip_applyToCharacter(void);
-extern void fn_80158BB4(void);
+extern void shop_canPurchaseItem(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void battle_resolveAggroHierarchy(void);
@@ -59,7 +59,7 @@ extern void fn_80285FA0(void);
 extern void fn_802868A0(void);
 extern void entity_Instance_constructor(void);
 extern void entity_Instance_destructor(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
@@ -444,7 +444,7 @@ lbl_fn_80281F88_00000428:
     psq_st f1, 0x0(r3), 0, 0
     lwz r3, lbl_8087F428
     stfs f2, 0x94(r1)
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     b lbl_fn_80281F88_000004C0
 lbl_fn_80281F88_00000478:
     lwz r0, 0x7e0(r3)
@@ -967,7 +967,7 @@ lbl_fn_802829DC_00000B44:
     li r8, 0x1
     bl atn_Anim_setLayerAnimation
     mr r3, r31
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -1945,7 +1945,7 @@ lbl_fn_802837F4_000019CC:
     mtctr r4
     bctr
     mr r3, r31
-    bl fn_80158BB4
+    bl shop_canPurchaseItem
     cmpwi r3, 0x0
     beq lbl_fn_802837F4_00001A2C
     lwz r0, 0x55c(r31)

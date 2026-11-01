@@ -6,7 +6,7 @@ extern void _restgpr_21(void);
 extern void _savegpr_21(void);
 extern void dtor_80084684(void);
 extern void atn_LH_Binary_destructor(void);
-extern void fn_80060D58(void);
+extern void equip_calcTotalStatBonuses(void);
 extern void skill_calculateDamage(void);
 extern void fn_800638B0(void);
 extern void fn_8006CA80(void);
@@ -19,9 +19,9 @@ extern void node_destroy(void);
 extern void msg_getMessageById(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
-extern void fn_8011FE3C(void);
+extern void skill_findNodeByTag(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_805AE270(void);
@@ -72,7 +72,7 @@ extern u32 lbl_808883BC;
 
 /* Function declarations */
 void fn_805B33BC(void);
-void fn_805B3424(void);
+u32 fn_805B3424(void);
 void fn_805B342C(void);
 void fn_805B3518(void);
 void fn_805B3658(void);
@@ -124,11 +124,9 @@ lbl_fn_805B33BC_00000058:
     blr
 }
 
-asm void fn_805B3424(void)
+u32 fn_805B3424(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_805B342C(void)
@@ -1109,7 +1107,7 @@ lbl_fn_805B3FD4_00000CC8:
 lbl_fn_805B3FD4_00000CD8:
     lwz r3, lbl_8087F890
     lwz r4, 0x14(r4)
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     stw r3, 0xc(r1)
     b lbl_fn_805B3FD4_00000D10
 lbl_fn_805B3FD4_00000CEC:
@@ -1121,7 +1119,7 @@ lbl_fn_805B3FD4_00000CEC:
 lbl_fn_805B3FD4_00000D00:
     lwz r3, lbl_8087F8A0
     lwz r4, 0x14(r4)
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     stw r3, 0xc(r1)
 lbl_fn_805B3FD4_00000D10:
     lwz r0, 0x18(r30)
@@ -1270,7 +1268,7 @@ lbl_fn_805B41A8_00000EC0:
     lfs f28, lbl_808883A0
     fmr f4, f31
     lfs f27, lbl_808883A4
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
     lfs f8, lbl_808883A8
     lis r27, lbl_80763D00@ha
     lfs f0, lbl_808883AC

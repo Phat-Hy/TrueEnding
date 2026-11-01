@@ -12,8 +12,8 @@ extern void fn_8000D760(void);
 extern void fn_8000E18C(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8004203C(void);
-extern void fn_80057A68(void);
+extern void menu_initWindowBuffer(void);
+extern void vec3_initValues(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -24,7 +24,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800DB3EC(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_800EC204(void);
+extern void cam_findTargetIndex(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void equip_getGlobalManager(void);
@@ -32,7 +32,7 @@ extern void fn_8012F034(void);
 extern void actor_testBitFlag(void);
 extern void fn_80133B30(void);
 extern void boss_updatePhaseState(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void actor_setState(void);
@@ -77,7 +77,7 @@ extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_804A04AC(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void strcmp(void);
@@ -963,7 +963,7 @@ asm void fn_80293E30(void)
     cmpwi r3, 0x0
     beq lbl_fn_80293E30_00000B84
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r29, r3
     b lbl_fn_80293E30_00000B88
 lbl_fn_80293E30_00000B84:
@@ -983,7 +983,7 @@ lbl_fn_80293E30_00000B88:
     mr r4, r3
     mr r5, r30
     addi r3, r1, 0x20
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     lis r30, lbl_80745818@ha
     lfs f31, lbl_80883BE8
     addi r30, r30, lbl_80745818@l
@@ -1299,7 +1299,7 @@ lbl_fn_80293E30_00001020:
     mr r28, r3
     mr r3, r29
     mr r4, r28
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     stw r3, 0xc(r1)
     beq lbl_fn_80293E30_00001054
@@ -1340,7 +1340,7 @@ lbl_fn_80293E30_000010A4:
     bl str_parseInt
     mr r4, r3
     mr r3, r29
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_80293E30_000012B8
@@ -1481,7 +1481,7 @@ lbl_fn_80293E30_000012C8:
     beq lbl_fn_80293E30_000012E4
     mr r3, r29
     li r4, 0x258
-    bl fn_800EC204
+    bl cam_findTargetIndex
     mr r4, r3
     b lbl_fn_80293E30_000012E8
 lbl_fn_80293E30_000012E4:
@@ -1498,7 +1498,7 @@ lbl_fn_80293E30_00001300:
     addi r3, r27, 0x1654
     fmr f2, f1
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
 lbl_fn_80293E30_00001314:
     lwz r12, 0x0(r27)
     mr r3, r27
@@ -1655,7 +1655,7 @@ lbl_fn_802946BC_000014AC:
     stw r0, 0x14c4(r31)
     li r4, 0x1
     lwz r3, lbl_8087F8A0
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     mr r28, r3
     bne lbl_fn_802946BC_00001578
@@ -1712,7 +1712,7 @@ lbl_fn_802946BC_00001618:
     cmpwi r3, 0x0
     beq lbl_fn_802946BC_00001674
     li r4, 0x1
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_802946BC_00001674

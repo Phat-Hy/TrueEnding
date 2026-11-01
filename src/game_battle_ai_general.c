@@ -23,7 +23,7 @@ extern void mission_updateStub(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void fn_80063200(void);
-extern void fn_8006AA20(void);
+extern void boss_triggerEventSequence(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
@@ -31,12 +31,12 @@ extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
 extern void route_createWaypoint(void);
-extern void fn_80088724(void);
+extern void zone_testPointInBounds(void);
 extern void node_createNamedChild(void);
 extern void fn_8008A4E0(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void fn_800902C0(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_8009373C(void);
@@ -49,13 +49,13 @@ extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800E0AA8(void);
 extern void fn_8011D424(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
-extern void fn_8011FE3C(void);
+extern void skill_findNodeByTag(void);
 extern void fn_801207D4(void);
 extern void fn_801354B4(void);
 extern void fn_80136544(void);
-extern void fn_8020A780(void);
+extern void str_appendString(void);
 extern void task_findEntryById(void);
 extern void fn_80223EE0(void);
 extern void fn_8032AC1C(void);
@@ -77,7 +77,7 @@ extern void fn_80442E64(void);
 extern void fn_80442EA4(void);
 extern void fn_80442EAC(void);
 extern void fn_80442ECC(void);
-extern void fn_804444E8(void);
+extern void gmk_findSlotByIndex(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void PSMTXConcat(void);
@@ -185,7 +185,7 @@ void fn_8043D940(void);
 void fn_8043D9F8(void);
 void fn_8043DB84(void);
 void fn_8043DC9C(void);
-void fn_8043DD70(void);
+u32 fn_8043DD70(void);
 void fn_8043DD78(void);
 void fn_8043E07C(void);
 void fn_8043E0E8(void);
@@ -203,7 +203,7 @@ void fn_8043F0F4(void);
 void fn_8043F178(void);
 void fn_8043F244(void);
 void fn_8043F24C(void);
-void fn_8043F5BC(void);
+void *fn_8043F5BC(void *obj);
 void fn_8043F5C4(void);
 void fn_8043F63C(void);
 void fn_8043F694(void);
@@ -272,7 +272,7 @@ lbl_fn_8043C368_000000BC:
     bne lbl_fn_8043C368_000000D8
     lwz r3, lbl_8087F890
     lwz r4, 0x24(r4)
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     stw r3, 0x30c(r31)
     b lbl_fn_8043C368_0000010C
 lbl_fn_8043C368_000000D8:
@@ -288,7 +288,7 @@ lbl_fn_8043C368_000000F4:
     bne lbl_fn_8043C368_0000010C
     lwz r3, lbl_8087F8A0
     lwz r4, 0x24(r4)
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     stw r3, 0x30c(r31)
 lbl_fn_8043C368_0000010C:
     lwz r3, 0x30c(r31)
@@ -2071,11 +2071,9 @@ lbl_fn_8043DC9C_00001A14:
     blr
 }
 
-asm void fn_8043DD70(void)
+u32 fn_8043DD70(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8043DD78(void)
@@ -2124,7 +2122,7 @@ lbl_fn_8043DD78_00001AAC:
     addi r3, r1, 0x30
     bl strcpy
     addi r3, r1, 0x30
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_8043DD78_00001CC8
     mr r5, r31
@@ -2168,7 +2166,7 @@ lbl_fn_8043DD78_00001B70:
     bl talk_formatQuotedString
     mr r4, r3
     addi r3, r29, 0x108
-    bl fn_8020A780
+    bl str_appendString
     b lbl_fn_8043DD78_00001CC8
 lbl_fn_8043DD78_00001B9C:
     mr r3, r30
@@ -2719,7 +2717,7 @@ lbl_fn_8043E580_000022B0:
     addi r5, r29, 0x78
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_808869D8
     mr r3, r30
     lfs f2, lbl_808869DC
@@ -3603,7 +3601,7 @@ lbl_fn_8043F24C_00002F8C:
     cmpwi r3, 0x0
     beq lbl_fn_8043F24C_00002FB0
     li r4, 0x70
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     cmpwi r3, 0x0
     ble lbl_fn_8043F24C_00002FB0
     li r30, 0x1
@@ -3790,7 +3788,7 @@ lbl_fn_8043F24C_00003248:
     stw r0, 0x50(r1)
 lbl_fn_8043F24C_00003250:
     lwz r3, 0x2a8(r31)
-    bl fn_8008CD60
+    bl minimap_renderOverlay
 lbl_fn_8043F24C_00003258:
     mr r3, r31
     bl Arms_slot3
@@ -3807,11 +3805,9 @@ lbl_fn_8043F24C_00003260:
     blr
 }
 
-asm void fn_8043F5BC(void)
+void *fn_8043F5BC(void *obj)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(void **)(obj);
 }
 
 asm void fn_8043F5C4(void)

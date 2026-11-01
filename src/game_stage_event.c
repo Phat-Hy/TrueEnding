@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void __files(void);
 extern void dtor_80084684(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void map_debugLog(void);
@@ -12,10 +12,10 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void msg_getMessageById(void);
-extern void fn_80108C10(void);
+extern void hurtbox_testCollisionLayer(void);
 extern void fn_8012476C(void);
 extern void fn_8012DF7C(void);
-extern void fn_80148B0C(void);
+extern void quest_getRewardItemSlot(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
 extern void debuff_clearStatus(void);
@@ -360,10 +360,10 @@ lbl_fn_8019DBA4_0000036C:
     stw r30, 0x90(r1)
     lwz r4, 0x20(r31)
     lwz r5, 0x1c(r31)
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r3, 0x4(r31)
     li r4, 0x0
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     lfs f2, 0xc(r3)
     addi r28, r1, 0x5c
     psq_l f1, 0x4(r3), 0, 0
@@ -388,7 +388,7 @@ lbl_fn_8019DBA4_0000036C:
     stfs f5, 0x48(r1)
     lwz r7, 0x4(r31)
     stfs f6, 0x4c(r1)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     lwz r3, 0x1c(r31)
     li r5, 0x0
     lwz r0, 0x7c(r1)
@@ -398,7 +398,7 @@ lbl_fn_8019DBA4_0000036C:
     bl fn_8012DF7C
     lwz r3, 0x1c(r31)
     li r4, 0x0
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     lfs f2, 0xc(r3)
     lis r5, lbl_8077EFA8@ha
     psq_l f1, 0x4(r3), 0, 0

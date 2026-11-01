@@ -8,13 +8,13 @@ extern void _savegpr_14(void);
 extern void _savegpr_27(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Task_setActive(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void quest_updateFlow(void);
 extern void fn_80154654(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
-extern void fn_80176ACC(void);
-extern void fn_801781B0(void);
+extern void battle_activateExpReward(void);
+extern void battle_calcAABBCenter(void);
 extern void fn_80395848(void);
 extern void fn_80396F44(void);
 extern void fn_80399148(void);
@@ -429,7 +429,7 @@ lbl_fn_803972A8_000004C4:
     lwz r5, 0x24(r21)
     bl fn_80154654
     mr r3, r22
-    bl fn_80176ACC
+    bl battle_activateExpReward
     lwz r0, 0x4(r16)
     add r3, r0, r29
     lwz r0, 0x4(r3)
@@ -641,7 +641,7 @@ lbl_fn_803972A8_000007B8:
     cmpwi r23, 0x0
     beq lbl_fn_803972A8_00000810
     addi r3, r22, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lwz r0, 0x954(r22)
     mr r3, r22
     stw r0, 0x9f8(r22)
@@ -663,7 +663,7 @@ lbl_fn_803972A8_000007FC:
     bl quest_updateFlow
 lbl_fn_803972A8_00000810:
     mr r3, r22
-    bl fn_80176ACC
+    bl battle_activateExpReward
     b lbl_fn_803972A8_00000834
 lbl_fn_803972A8_0000081C:
     lwz r0, 0x38(r22)
@@ -1110,7 +1110,7 @@ lbl_fn_80397BEC_00000E08:
     lwz r5, 0x24(r21)
     bl fn_80154654
     mr r3, r22
-    bl fn_80176ACC
+    bl battle_activateExpReward
     lwz r0, 0x4(r16)
     add r3, r0, r29
     lwz r0, 0x4(r3)
@@ -1322,7 +1322,7 @@ lbl_fn_80397BEC_000010FC:
     cmpwi r23, 0x0
     beq lbl_fn_80397BEC_00001154
     addi r3, r22, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lwz r0, 0x954(r22)
     mr r3, r22
     stw r0, 0x9f8(r22)
@@ -1344,7 +1344,7 @@ lbl_fn_80397BEC_00001140:
     bl quest_updateFlow
 lbl_fn_80397BEC_00001154:
     mr r3, r22
-    bl fn_80176ACC
+    bl battle_activateExpReward
     b lbl_fn_80397BEC_00001178
 lbl_fn_80397BEC_00001160:
     lwz r0, 0x38(r22)
@@ -1696,7 +1696,7 @@ lbl_fn_80398704_000015B8:
 lbl_fn_80398704_0000160C:
     mr r4, r29
     addi r3, r1, 0x4c
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     addi r3, r1, 0x4c
 lbl_fn_80398704_0000161C:
     lwz r4, lbl_8087F430

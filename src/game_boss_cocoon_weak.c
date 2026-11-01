@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8006A9A4(void);
-extern void fn_8006B174(void);
+extern void boss_decodePhaseBitfield(void);
 extern void fn_8006BBCC(void);
 extern void atn_FileList_destructor(void);
 extern void fn_8006C300(void);
@@ -16,7 +16,7 @@ extern void fn_8006C3F0(void);
 extern void fn_8006D008(void);
 extern void dungeon_initGlobalContext(void);
 extern void fn_800838AC(void);
-extern void fn_80083AD4(void);
+extern void town_updateInteractionPoints(void);
 extern void mem_alloc(void);
 extern void node_destroy(void);
 extern void fn_800A4460(void);
@@ -71,7 +71,7 @@ extern u32 lbl_80886ED4;
 
 /* Function declarations */
 void fn_8046D19C(void);
-void fn_8046D1C4(void);
+void *fn_8046D1C4(void *obj);
 void fn_8046D1CC(void);
 void fn_8046D1EC(void);
 void fn_8046D7D8(void);
@@ -79,7 +79,7 @@ void fn_8046D84C(void);
 void atn_Loader_constructor(void);
 void fn_8046DBF8(void);
 void fn_8046DC5C(void);
-void fn_8046DD20(void);
+void boss_bindArenaInteractions(void);
 void atn_Loader_destructor(void);
 void atn_Loader_execute(void);
 void atn_Loader_finish(void);
@@ -103,11 +103,9 @@ lbl_fn_8046D19C_00000020:
     blr
 }
 
-asm void fn_8046D1C4(void)
+void *fn_8046D1C4(void *obj)
 {
-    nofralloc
-    addi r3, r3, 0x4010
-    blr
+    return (char *)obj + 0x4010;
 }
 
 asm void fn_8046D1CC(void)
@@ -191,7 +189,7 @@ lbl_fn_8046D1EC_000000CC:
     bl actor_dispatchMessage
     mr r4, r28
     addi r3, r1, 0x48
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0x30(r1)
     srwi. r0, r0, 31
     beq lbl_fn_8046D1EC_00000154
@@ -939,7 +937,7 @@ asm void fn_8046DC5C(void)
     blr
 }
 
-asm void fn_8046DD20(void)
+asm void boss_bindArenaInteractions(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -948,11 +946,11 @@ asm void fn_8046DD20(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r4
-    beq lbl_fn_8046DD20_00000BAC
+    beq lbl_boss_bindArenaInteractions_00000BAC
     bl dungeon_initGlobalContext
     mr r4, r31
-    bl fn_80083AD4
-lbl_fn_8046DD20_00000BAC:
+    bl town_updateInteractionPoints
+lbl_boss_bindArenaInteractions_00000BAC:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -960,10 +958,9 @@ lbl_fn_8046DD20_00000BAC:
     blr
 }
 
-asm void atn_Loader_destructor(void)
+void atn_Loader_destructor(void)
 {
-    nofralloc
-    b bloom_processPasses
+    bloom_processPasses();
 }
 
 asm void atn_Loader_execute(void)

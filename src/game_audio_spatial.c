@@ -6,21 +6,21 @@ extern void vec3_mag(void);
 extern void scene_transformPoint(void);
 extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
-extern void fn_800133B0(void);
+extern void math_wrapAngle(void);
 extern void fn_80013404(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
-extern void fn_801092C8(void);
-extern void fn_801125F8(void);
+extern void hurtbox_processHitDamage(void);
+extern void phys_scaleGravity(void);
 extern void equip_getGlobalManager(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80127D8C(void);
 extern void fn_8012DD70(void);
 extern void npc_initScriptContext(void);
 extern void npc_getPosition(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void npc_updateTalkInteraction(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
@@ -35,7 +35,7 @@ extern void fn_8030073C(void);
 extern void fn_803009F4(void);
 extern void fn_80304B40(void);
 extern void world_getLocalFlag(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
@@ -201,7 +201,7 @@ lbl_fn_802FF2E4_00000190:
     lfs f1, lbl_80884A38
     addi r4, r6, 0x18
     lfs f2, lbl_80884A70
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_802FF2E4_000001BC:
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
@@ -288,7 +288,7 @@ asm void fn_802FF550(void)
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_802FF550_0000030C
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_802FF550_0000030C
     lwz r0, 0x48(r31)
@@ -299,7 +299,7 @@ asm void fn_802FF550(void)
     li r4, 0x6
     li r6, 0x0
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
 lbl_fn_802FF550_0000030C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -1034,7 +1034,7 @@ asm void fn_802FFFF8(void)
     beq lbl_fn_802FFFF8_00001318
 lbl_fn_802FFFF8_00000D84:
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     bl scene_transformPoint
     bl fn_802A36B0
     lfs f28, lbl_80884AB0
@@ -1088,7 +1088,7 @@ lbl_fn_802FFFF8_00000E18:
     lfs f1, 0x30(r1)
     lfs f0, 0x538(r29)
     fsubs f1, f1, f0
-    bl fn_800133B0
+    bl math_wrapAngle
     fmr f30, f1
 lbl_fn_802FFFF8_00000E64:
     cmpwi r31, 0x0
@@ -1108,7 +1108,7 @@ lbl_fn_802FFFF8_00000E64:
     lfs f1, 0x24(r1)
     lfs f0, 0x538(r29)
     fsubs f1, f1, f0
-    bl fn_800133B0
+    bl math_wrapAngle
     fmr f25, f1
 lbl_fn_802FFFF8_00000EB0:
     lwz r0, 0x14f8(r29)
@@ -1273,7 +1273,7 @@ lbl_fn_802FFFF8_000010D0:
     fcmpo cr0, f26, f0
     bge lbl_fn_802FFFF8_00001238
     lfs f1, lbl_80884AB8
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f29, f1
     fmr f1, f25
     bl fn_80013404
@@ -1286,7 +1286,7 @@ lbl_fn_802FFFF8_0000111C:
     fcmpo cr0, f26, f0
     bge lbl_fn_802FFFF8_0000114C
     lfs f1, lbl_80884AB8
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f29, f1
     fmr f1, f25
     bl fn_80013404
@@ -1316,7 +1316,7 @@ lbl_fn_802FFFF8_0000114C:
     b lbl_fn_802FFFF8_00001238
 lbl_fn_802FFFF8_00001198:
     lfs f1, lbl_80884A28
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f31, f1
     fmr f1, f30
     bl fn_80013404
@@ -1350,7 +1350,7 @@ lbl_fn_802FFFF8_000011BC:
     b lbl_fn_802FFFF8_00001238
 lbl_fn_802FFFF8_00001218:
     lfs f1, lbl_80884A28
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f31, f1
     fmr f1, f30
     bl fn_80013404

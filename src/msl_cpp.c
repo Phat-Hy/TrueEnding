@@ -11,7 +11,7 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8001A270(void);
 extern void mem_free(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void fn_800E1A48(void);
 extern void fn_800E1D5C(void);
@@ -5576,7 +5576,7 @@ asm void fn_8068B39C(void)
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x1c(r1)
     mr r31, r3
@@ -7261,7 +7261,7 @@ lbl_fn_8068C9A0_00005B28:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r31, 0x18
     stw r3, 0x48(r31)
     mr r29, r3
@@ -7392,7 +7392,7 @@ lbl_fn_8068C9A0_00005D24:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r31, 0xc
     stw r3, 0x3c(r31)
     mr r29, r3
@@ -7523,7 +7523,7 @@ lbl_fn_8068CD2C_00005EB4:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r31, 0x18
     stw r3, 0x48(r31)
     mr r29, r3
@@ -7654,7 +7654,7 @@ lbl_fn_8068CD2C_000060B0:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r31, 0xc
     stw r3, 0x3c(r31)
     mr r29, r3
@@ -7844,7 +7844,7 @@ lbl_fn_8068D170_00006354:
     lwz r0, 0x0(r4)
     stw r0, 0x24(r29)
     slwi r3, r0, 1
-    bl fn_80084A78
+    bl field_initGridPoints
     neg r0, r30
     li r4, 0x1
     or r0, r0, r30
@@ -8522,7 +8522,7 @@ lbl_fn_8068DA74_00006C44:
 lbl_fn_8068DA74_00006C58:
     lwz r3, 0x0(r4)
     stw r3, 0x24(r29)
-    bl fn_80084A78
+    bl field_initGridPoints
     neg r0, r30
     li r4, 0x1
     or r0, r0, r30
@@ -10254,7 +10254,7 @@ asm void fn_8068F138(void)
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r31, 0x18
     stw r3, 0x40(r31)
     mr r28, r3
@@ -10382,7 +10382,7 @@ lbl_fn_8068F138_00008444:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r31, 0xc
     stw r3, 0x34(r31)
     mr r29, r3
@@ -11039,7 +11039,7 @@ asm void fn_8068FB84(void)
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r31, 0x18
     stw r3, 0x40(r31)
     mr r28, r3
@@ -11167,7 +11167,7 @@ lbl_fn_8068FB84_00008E90:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r31, 0xc
     stw r3, 0x34(r31)
     mr r29, r3
@@ -11843,7 +11843,7 @@ asm void fn_80690630(void)
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r31, 0x18
     stw r3, 0x40(r31)
     mr r28, r3
@@ -11996,7 +11996,7 @@ lbl_fn_80690630_00009994:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r31, 0xc
     stw r3, 0x34(r31)
     mr r30, r3
@@ -12769,7 +12769,7 @@ asm void fn_806912D8(void)
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r31, 0x18
     stw r3, 0x40(r31)
     mr r28, r3
@@ -12922,7 +12922,7 @@ lbl_fn_806912D8_0000A63C:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r31, 0xc
     stw r3, 0x34(r31)
     mr r30, r3
@@ -13860,7 +13860,7 @@ lbl_fn_806920C0_0000B23C:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r31, 0xc
     stw r3, 0x6c(r31)
     mr r23, r3
@@ -13951,7 +13951,7 @@ lbl_fn_806920C0_0000B378:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r31, 0x30
     stw r3, 0x84(r31)
     mr r23, r3
@@ -14050,7 +14050,7 @@ lbl_fn_806920C0_0000B510:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r31, 0x28
     stw r3, 0x78(r31)
     mr r23, r3
@@ -16773,7 +16773,7 @@ asm void fn_80694790(void)
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x10
     stw r3, 0x54(r1)
     mr r24, r3
@@ -16878,7 +16878,7 @@ lbl_fn_80694790_0000DA34:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0xc
     stw r3, 0x48(r1)
     mr r24, r3
@@ -16974,7 +16974,7 @@ lbl_fn_80694790_0000DBB4:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x3c(r1)
     mr r30, r3
@@ -17096,7 +17096,7 @@ asm void fn_80694C38(void)
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x10
     stw r3, 0x54(r1)
     mr r24, r3
@@ -17201,7 +17201,7 @@ lbl_fn_80694C38_0000DEDC:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0xc
     stw r3, 0x48(r1)
     mr r24, r3
@@ -17297,7 +17297,7 @@ lbl_fn_80694C38_0000E05C:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x3c(r1)
     mr r30, r3

@@ -15,20 +15,20 @@ extern void fn_80013484(void);
 extern void item_testLineOfSight(void);
 extern void collision_testLineSegment(void);
 extern void mission_updateStub(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getDuration(void);
-extern void fn_800F72CC(void);
-extern void fn_800F7FD8(void);
+extern void vec3_scale(void);
+extern void vec3_normalize(void);
 extern void system_getNextSequenceId(void);
 extern void equip_getGlobalManager(void);
 extern void fn_8012A1B8(void);
 extern void fn_8012A288(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
@@ -1653,11 +1653,11 @@ lbl_fn_803267E8_0000163C:
     addi r4, r1, 0x150
     fadds f0, f1, f0
     stfs f0, 0x148(r1)
-    bl fn_800F7FD8
+    bl vec3_normalize
     lfs f1, lbl_80884FC8
     addi r3, r1, 0xf0
     addi r4, r1, 0xe4
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x138
     addi r4, r1, 0x144
     addi r5, r1, 0xf0
@@ -1674,11 +1674,11 @@ lbl_fn_803267E8_0000163C:
     beq lbl_fn_803267E8_00001770
     addi r3, r1, 0xcc
     addi r4, r1, 0x150
-    bl fn_800F7FD8
+    bl vec3_normalize
     lfs f1, 0x620(r31)
     addi r3, r1, 0xd8
     addi r4, r1, 0xcc
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x1bc
     addi r4, r1, 0xd8
     bl fn_80013484
@@ -1703,7 +1703,7 @@ lbl_fn_803267E8_0000163C:
     addi r3, r31, 0x1518
     lfs f2, 0xb8(r1)
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
     mr r3, r31
     bl fn_803279D4
     li r30, 0x1
@@ -1739,11 +1739,11 @@ lbl_fn_803267E8_00001788:
     addi r4, r1, 0x150
     fadds f0, f1, f0
     stfs f0, 0x130(r1)
-    bl fn_800F7FD8
+    bl vec3_normalize
     lfs f1, lbl_80884FC8
     addi r3, r1, 0xa8
     addi r4, r1, 0x9c
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x120
     addi r4, r1, 0x12c
     addi r5, r1, 0xa8
@@ -1760,11 +1760,11 @@ lbl_fn_803267E8_00001788:
     beq lbl_fn_803267E8_00001B58
     addi r3, r1, 0x84
     addi r4, r1, 0x150
-    bl fn_800F7FD8
+    bl vec3_normalize
     lfs f1, 0x620(r31)
     addi r3, r1, 0x90
     addi r4, r1, 0x84
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x16c
     addi r4, r1, 0x90
     bl fn_80013484
@@ -1789,7 +1789,7 @@ lbl_fn_803267E8_00001788:
     addi r3, r31, 0x1518
     lfs f2, 0x70(r1)
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
     mr r3, r31
     bl fn_803279D4
     b lbl_fn_803267E8_00001B58
@@ -1816,7 +1816,7 @@ lbl_fn_803267E8_000018CC:
     addi r3, r31, 0x14e8
     lfs f2, 0x8(r1)
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
     mr r3, r31
     bl fn_803271A4
     b lbl_fn_803267E8_00001B58
@@ -1876,7 +1876,7 @@ lbl_fn_803267E8_000019B8:
     mulli r0, r0, 0x3
     subf. r0, r0, r4
     bne lbl_fn_803267E8_00001A04
-    bl fn_8013A194
+    bl npc_getGlobalManager
     bl system_getNextSequenceId
     stw r3, 0x15f8(r31)
 lbl_fn_803267E8_00001A04:
@@ -1917,7 +1917,7 @@ lbl_fn_803267E8_00001A74:
     lfs f31, 0x4(r3)
     addi r3, r1, 0xc
     addi r4, r1, 0x150
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x18
     addi r4, r1, 0xc
     bl vec3_toEulerAngles

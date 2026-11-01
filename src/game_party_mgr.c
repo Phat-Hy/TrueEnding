@@ -11,7 +11,7 @@ extern void menu_renderLayout(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_8014C228(void);
+extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
 extern void fn_80153B44(void);
 extern void fn_80164DCC(void);
@@ -31,7 +31,7 @@ extern void fn_801BE10C(void);
 extern void fn_8021A8D0(void);
 extern void fn_8021A918(void);
 extern void world_getGlobalFlag(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void fn_803761BC(void);
 extern void fn_805ADCC4(void);
 extern void fn_805ADD84(void);
@@ -66,7 +66,7 @@ extern u32 lbl_80881B28;
 
 /* Function declarations */
 void fn_8015E4B0(void);
-void fn_8015E7A0(void);
+void party_configureMemberSlot(void);
 void fn_8015EB2C(void);
 void fn_8015ECC4(void);
 void fn_8015EFAC(void);
@@ -280,7 +280,7 @@ lbl_fn_8015E4B0_000002D4:
     blr
 }
 
-asm void fn_8015E7A0(void)
+asm void party_configureMemberSlot(void)
 {
     nofralloc
     stwu r1, -0x90(r1)
@@ -304,20 +304,20 @@ asm void fn_8015E7A0(void)
     bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
-    beq lbl_fn_8015E7A0_00000360
+    beq lbl_party_configureMemberSlot_00000360
     mr r4, r29
     mr r5, r26
     mr r6, r27
     mr r7, r28
     bl fn_801AD34C
     mr r30, r3
-lbl_fn_8015E7A0_00000360:
+lbl_party_configureMemberSlot_00000360:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    bne lbl_fn_8015E7A0_000003F0
+    bne lbl_party_configureMemberSlot_000003F0
     lwz r0, 0xf80(r29)
     cmpwi r0, 0x0
-    bne lbl_fn_8015E7A0_00000398
+    bne lbl_party_configureMemberSlot_00000398
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x50(r1)
@@ -325,8 +325,8 @@ lbl_fn_8015E7A0_00000360:
     lwz r0, 0x8(r5)
     stw r3, 0x54(r1)
     stw r0, 0x58(r1)
-    b lbl_fn_8015E7A0_000003B4
-lbl_fn_8015E7A0_00000398:
+    b lbl_party_configureMemberSlot_000003B4
+lbl_party_configureMemberSlot_00000398:
     addi r3, r31, 0xf24
     lwz r5, 0xf24(r31)
     lwz r4, 0x4(r3)
@@ -334,7 +334,7 @@ lbl_fn_8015E7A0_00000398:
     stw r5, 0x50(r1)
     stw r4, 0x54(r1)
     stw r0, 0x58(r1)
-lbl_fn_8015E7A0_000003B4:
+lbl_party_configureMemberSlot_000003B4:
     lwz r5, 0x50(r1)
     addi r3, r1, 0x8
     lwz r4, 0x54(r1)
@@ -344,26 +344,26 @@ lbl_fn_8015E7A0_000003B4:
     stw r0, 0x10(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8015E7A0_000003F0
+    beq lbl_party_configureMemberSlot_000003F0
     lwz r3, 0xf80(r29)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8015E7A0_000003F0:
+lbl_party_configureMemberSlot_000003F0:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    beq lbl_fn_8015E7A0_000005A4
+    beq lbl_party_configureMemberSlot_000005A4
     cmpwi r0, 0x8
-    beq lbl_fn_8015E7A0_00000408
+    beq lbl_party_configureMemberSlot_00000408
     stw r0, 0x564(r29)
-lbl_fn_8015E7A0_00000408:
+lbl_party_configureMemberSlot_00000408:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    bne lbl_fn_8015E7A0_000005A4
+    bne lbl_party_configureMemberSlot_000005A4
     lwz r0, 0xf80(r29)
     cmpwi r0, 0x0
-    bne lbl_fn_8015E7A0_00000440
+    bne lbl_party_configureMemberSlot_00000440
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x5c(r1)
@@ -371,8 +371,8 @@ lbl_fn_8015E7A0_00000408:
     lwz r0, 0x8(r5)
     stw r3, 0x60(r1)
     stw r0, 0x64(r1)
-    b lbl_fn_8015E7A0_0000045C
-lbl_fn_8015E7A0_00000440:
+    b lbl_party_configureMemberSlot_0000045C
+lbl_party_configureMemberSlot_00000440:
     addi r3, r31, 0xf30
     lwz r5, 0xf30(r31)
     lwz r4, 0x4(r3)
@@ -380,7 +380,7 @@ lbl_fn_8015E7A0_00000440:
     stw r5, 0x5c(r1)
     stw r4, 0x60(r1)
     stw r0, 0x64(r1)
-lbl_fn_8015E7A0_0000045C:
+lbl_party_configureMemberSlot_0000045C:
     lwz r5, 0x5c(r1)
     addi r3, r1, 0x20
     lwz r4, 0x60(r1)
@@ -390,26 +390,26 @@ lbl_fn_8015E7A0_0000045C:
     stw r0, 0x28(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8015E7A0_00000498
+    beq lbl_party_configureMemberSlot_00000498
     lwz r3, 0xf80(r29)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8015E7A0_00000498:
+lbl_party_configureMemberSlot_00000498:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    beq lbl_fn_8015E7A0_00000574
+    beq lbl_party_configureMemberSlot_00000574
     cmpwi r0, 0x8
-    beq lbl_fn_8015E7A0_000004B0
+    beq lbl_party_configureMemberSlot_000004B0
     stw r0, 0x564(r29)
-lbl_fn_8015E7A0_000004B0:
+lbl_party_configureMemberSlot_000004B0:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    bne lbl_fn_8015E7A0_00000574
+    bne lbl_party_configureMemberSlot_00000574
     lwz r0, 0xf80(r29)
     cmpwi r0, 0x0
-    bne lbl_fn_8015E7A0_000004E8
+    bne lbl_party_configureMemberSlot_000004E8
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x68(r1)
@@ -417,8 +417,8 @@ lbl_fn_8015E7A0_000004B0:
     lwz r0, 0x8(r5)
     stw r3, 0x6c(r1)
     stw r0, 0x70(r1)
-    b lbl_fn_8015E7A0_00000504
-lbl_fn_8015E7A0_000004E8:
+    b lbl_party_configureMemberSlot_00000504
+lbl_party_configureMemberSlot_000004E8:
     addi r3, r31, 0xf3c
     lwz r5, 0xf3c(r31)
     lwz r4, 0x4(r3)
@@ -426,7 +426,7 @@ lbl_fn_8015E7A0_000004E8:
     stw r5, 0x68(r1)
     stw r4, 0x6c(r1)
     stw r0, 0x70(r1)
-lbl_fn_8015E7A0_00000504:
+lbl_party_configureMemberSlot_00000504:
     lwz r5, 0x68(r1)
     addi r3, r1, 0x14
     lwz r4, 0x6c(r1)
@@ -436,13 +436,13 @@ lbl_fn_8015E7A0_00000504:
     stw r0, 0x1c(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8015E7A0_00000540
+    beq lbl_party_configureMemberSlot_00000540
     lwz r3, 0xf80(r29)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8015E7A0_00000540:
+lbl_party_configureMemberSlot_00000540:
     mr r3, r29
     li r4, 0x6
     bl actor_setState
@@ -450,56 +450,56 @@ lbl_fn_8015E7A0_00000540:
     li r0, 0x0
     cmpwi r3, 0x0
     stw r0, 0xf80(r29)
-    beq lbl_fn_8015E7A0_00000574
+    beq lbl_party_configureMemberSlot_00000574
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8015E7A0_00000574:
+lbl_party_configureMemberSlot_00000574:
     lwz r3, 0xf80(r29)
     li r4, 0x6
     li r0, 0x0
     stw r4, 0x55c(r29)
     cmpwi r3, 0x0
     stw r0, 0xf80(r29)
-    beq lbl_fn_8015E7A0_000005A4
+    beq lbl_party_configureMemberSlot_000005A4
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8015E7A0_000005A4:
+lbl_party_configureMemberSlot_000005A4:
     lwz r3, 0xf80(r29)
     li r0, 0x6
     stw r0, 0x55c(r29)
     cmpwi r3, 0x0
     stw r30, 0xf80(r29)
-    beq lbl_fn_8015E7A0_000005D0
+    beq lbl_party_configureMemberSlot_000005D0
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8015E7A0_000005D0:
+lbl_party_configureMemberSlot_000005D0:
     lwz r0, 0x12a4(r29)
     li r3, 0x0
     stw r3, 0x638(r29)
     extrwi. r0, r0, 1, 3
-    beq lbl_fn_8015E7A0_000005F8
+    beq lbl_party_configureMemberSlot_000005F8
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_8015E7A0_000005F8
+    beq lbl_party_configureMemberSlot_000005F8
     li r4, 0xb5
-    bl fn_803750E4
-lbl_fn_8015E7A0_000005F8:
+    bl kpad_validateButtonIndex
+lbl_party_configureMemberSlot_000005F8:
     mr r3, r29
     li r4, 0x1
     bl fn_80164DCC
     lwz r3, 0x1208(r29)
     cmpwi r3, 0x0
-    beq lbl_fn_8015E7A0_00000664
-    beq lbl_fn_8015E7A0_00000664
+    beq lbl_party_configureMemberSlot_00000664
+    beq lbl_party_configureMemberSlot_00000664
     lfs f0, lbl_8088196C
     li r30, 0x0
     li r0, 0x3
@@ -520,7 +520,7 @@ lbl_fn_8015E7A0_000005F8:
     li r0, 0xff
     stb r0, 0x520(r3)
     stw r30, 0x1208(r29)
-lbl_fn_8015E7A0_00000664:
+lbl_party_configureMemberSlot_00000664:
     addi r11, r1, 0x90
     bl _restgpr_26
     lwz r0, 0x94(r1)
@@ -1489,7 +1489,7 @@ lbl_fn_8015F568_00001414:
     mr r3, r27
     stw r0, 0x648(r27)
     stw r0, 0x64c(r27)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_fn_8015F568_00001454
 lbl_fn_8015F568_00001434:
     lwz r0, 0x674(r27)

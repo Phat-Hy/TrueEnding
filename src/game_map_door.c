@@ -13,7 +13,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_8010A308(void);
 extern void magic_dispatchActionCommand(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void actor_getMovementFlags(void);
 extern void fn_80389838(void);
 extern void printf(void);
@@ -77,8 +77,8 @@ void fn_80187E2C(void);
 void fn_80187FF4(void);
 void fn_80188060(void);
 void fn_80188064(void);
-void fn_80188080(void);
-void fn_80188088(void);
+u32 fn_80188080(void);
+u32 fn_80188088(void);
 void fn_80188090(void);
 void fn_801880D0(void);
 void fn_801881C4(void);
@@ -416,18 +416,14 @@ asm void fn_80188064(void)
     blr
 }
 
-asm void fn_80188080(void)
+u32 fn_80188080(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_80188088(void)
+u32 fn_80188088(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_80188090(void)
@@ -1594,7 +1590,7 @@ asm void fn_8018906C(void)
     clrrwi r0, r0, 1
     stw r0, 0x5c0(r5)
     lwz r3, 0x4(r3)
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     lwz r4, 0x4(r30)
     mr r3, r30
     psq_l f1, 0x0(r31), 0, 0
@@ -1630,7 +1626,7 @@ asm void fn_8018910C(void)
     bgt lbl_fn_8018910C_00001564
     lwz r3, 0x4(r3)
     li r4, 0x1
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     lwz r3, 0x4(r30)
     li r0, 0x1
     lfs f1, lbl_80881E78
@@ -1697,7 +1693,7 @@ asm void fn_801891FC(void)
     beq lbl_fn_801891FC_000015FC
     mr r3, r0
     li r4, 0x1
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     lwz r3, 0x4(r30)
     lwz r0, 0x5c0(r3)
     ori r0, r0, 0x1
@@ -1834,7 +1830,7 @@ asm void fn_801893F4(void)
     beq lbl_fn_801893F4_000017EC
     mr r3, r0
     li r4, 0x1
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     lwz r3, 0x4(r31)
     lwz r0, 0x5c0(r3)
     ori r0, r0, 0x1
@@ -1871,7 +1867,7 @@ asm void fn_80189444(void)
     clrrwi r0, r0, 1
     stw r0, 0x5c0(r5)
     lwz r3, 0x4(r3)
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     lwz r4, 0x4(r30)
     mr r3, r30
     psq_l f1, 0x0(r31), 0, 0
@@ -1905,7 +1901,7 @@ asm void fn_801894DC(void)
     ori r0, r0, 0x1
     stw r0, 0x5c0(r5)
     lwz r3, 0x4(r3)
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     li r3, 0x1
     b lbl_fn_801894DC_000018E0
 lbl_fn_801894DC_000018D4:

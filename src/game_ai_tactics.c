@@ -12,16 +12,16 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void str_findChar(void);
-extern void fn_800F52F0(void);
+extern void proj_getMatrix(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
 extern void npc_getPosition(void);
-extern void fn_8014052C(void);
+extern void quest_initMarkerCoords(void);
 extern void quest_evaluateConditions(void);
 extern void actor_setState(void);
 extern void battle_updateTargetAggro(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void fn_801A03E8(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -89,8 +89,8 @@ extern u32 lbl_808836F0;
 
 /* Function declarations */
 void fn_802676BC(void);
-void fn_80267B20(void);
-void fn_80267B28(void);
+u32 fn_80267B20(const void *p);
+u32 fn_80267B28(const void *p);
 void fn_80267B30(void);
 void fn_80267B60(void);
 void fn_80267B88(void);
@@ -241,7 +241,7 @@ lbl_fn_802676BC_000001DC:
     bne lbl_fn_802676BC_000002EC
     mr r4, r31
     addi r3, r1, 0x8
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     addi r3, r1, 0x14
     addi r4, r1, 0x8
     bl fn_801A03E8
@@ -289,7 +289,7 @@ lbl_fn_802676BC_00000284:
     b lbl_fn_802676BC_000002DC
 lbl_fn_802676BC_0000029C:
     lwz r3, 0x14b8(r31)
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_80267B30
     cmpwi r3, 0x0
     bne lbl_fn_802676BC_000002C8
@@ -391,7 +391,7 @@ lbl_fn_802676BC_000003DC:
     b lbl_fn_802676BC_0000043C
 lbl_fn_802676BC_00000400:
     lwz r3, 0x14b8(r31)
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_80267B30
     cmpwi r3, 0x0
     bne lbl_fn_802676BC_00000434
@@ -420,18 +420,14 @@ lbl_fn_802676BC_00000448:
     blr
 }
 
-asm void fn_80267B20(void)
+u32 fn_80267B20(const void *p)
 {
-    nofralloc
-    lwz r3, 0x55c(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x55c);
 }
 
-asm void fn_80267B28(void)
+u32 fn_80267B28(const void *p)
 {
-    nofralloc
-    lwz r3, 0x560(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x560);
 }
 
 asm void fn_80267B30(void)
@@ -1941,7 +1937,7 @@ lbl_fn_80268CB4_000019E0:
     addi r5, r31, 0x528
     stw r0, 0x1c4(r1)
     stw r0, 0x1c8(r1)
-    bl fn_80176548
+    bl battle_calcExpPosition
     lwz r3, lbl_8087EE98
     addi r4, r1, 0x188
     lfs f1, 0x24(r1)

@@ -17,11 +17,11 @@ extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
 extern void route_createWaypoint(void);
-extern void fn_80088724(void);
+extern void zone_testPointInBounds(void);
 extern void node_createNamedChild(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -41,20 +41,20 @@ extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
-extern void fn_80239D58(void);
+extern void res_Shader_findParameter(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_8036E098(void);
 extern void fn_8036E92C(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
-extern void fn_803750E4(void);
-extern void fn_80375184(void);
+extern void kpad_validateButtonIndex(void);
+extern void kpad_testActiveFlags(void);
 extern void fn_803E3050(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
-extern void fn_803EC7A0(void);
+extern void barrier_formatDialogString(void);
 extern void task_updateWorker(void);
 extern void fn_803ECBD4(void);
 extern void fn_804392C0(void);
@@ -296,7 +296,7 @@ lbl_fn_804360D4_000001C4:
     beq lbl_fn_804360D4_000005B4
     mr r4, r31
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_804360D4_000005B4
     lwz r3, lbl_8087F3C0
@@ -337,7 +337,7 @@ lbl_fn_804360D4_0000025C:
     lwz r0, 0x32c(r31)
     cmpwi r0, 0x0
     beq lbl_fn_804360D4_00000368
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     bne lbl_fn_804360D4_0000029C
     lwz r3, lbl_8087F430
@@ -431,12 +431,12 @@ lbl_fn_804360D4_00000380:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_804360D4_000005A4
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_804360D4_000005A4
     lwz r3, lbl_8087F430
     li r4, 0x145
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
     b lbl_fn_804360D4_000005A4
 lbl_fn_804360D4_00000400:
     cmpwi r0, 0x1
@@ -591,7 +591,7 @@ asm void fn_804365FC(void)
     cmpwi r0, 0x0
     bnelr
     addi r3, r3, 0xf4
-    b fn_8008CD60
+    b minimap_renderOverlay
     blr
 }
 
@@ -701,7 +701,7 @@ lbl_fn_804366A0_0000074C:
     mr r3, r27
     addi r4, r27, 0xf4
     addi r5, r1, 0x8
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     b lbl_fn_804366A0_000007DC
 lbl_fn_804366A0_000007A0:
     mr r3, r28
@@ -1155,7 +1155,7 @@ lbl_fn_80436D04_00000D68:
     addi r5, r29, 0x78
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_808868E4
     mr r3, r30
     lfs f2, lbl_808868E8
@@ -1763,7 +1763,7 @@ lbl_fn_804375C0_00001654:
     beq lbl_fn_804375C0_00001698
     mr r4, r17
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_804375C0_00001698
     lwz r3, lbl_8087F3C0
@@ -2902,7 +2902,7 @@ lbl_fn_804375C0_00002714:
     beq lbl_fn_804375C0_000027A4
     mr r4, r16
     li r5, 0x0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_804375C0_000027A4
     lwz r3, lbl_8087F3C0

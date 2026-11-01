@@ -11,7 +11,7 @@ extern void _savegpr_26(void);
 extern void menu_renderLayout(void);
 extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
-extern void fn_801092C8(void);
+extern void hurtbox_processHitDamage(void);
 extern void fn_80121E14(void);
 extern void fn_80135384(void);
 extern void actor_setState(void);
@@ -23,7 +23,7 @@ extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void kpad_getClampData(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void fn_80376150(void);
 extern void fn_803CC718(void);
 extern void PSMTXRotRad(void);
@@ -68,9 +68,9 @@ extern u32 lbl_80881B54;
 void fn_8017639C(void);
 void fn_801763E0(void);
 void fn_80176428(void);
-void fn_80176548(void);
+void battle_calcExpPosition(void);
 void battle_awardExp(void);
-void fn_80176ACC(void);
+void battle_activateExpReward(void);
 void fn_80176B68(void);
 void fn_80176D2C(void);
 void fn_80176DFC(void);
@@ -215,7 +215,7 @@ lbl_fn_80176428_00000198:
     blr
 }
 
-asm void fn_80176548(void)
+asm void battle_calcExpPosition(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -244,16 +244,16 @@ asm void fn_80176548(void)
     stfs f2, 0x10(r1)
     rlwinm r0, r0, 0, 25, 25
     cmplwi r0, 0x40
-    bne lbl_fn_80176548_00000228
+    bne lbl_battle_calcExpPosition_00000228
     lfs f0, 0x4(r3)
     fsubs f0, f0, f7
     stfs f0, 0x4(r3)
-    b lbl_fn_80176548_00000234
-lbl_fn_80176548_00000228:
+    b lbl_battle_calcExpPosition_00000234
+lbl_battle_calcExpPosition_00000228:
     lfs f0, 0x4(r3)
     fadds f0, f0, f7
     stfs f0, 0x4(r3)
-lbl_fn_80176548_00000234:
+lbl_battle_calcExpPosition_00000234:
     addi r1, r1, 0x20
     blr
 }
@@ -608,7 +608,7 @@ lbl_battle_awardExp_00000718:
     blr
 }
 
-asm void fn_80176ACC(void)
+asm void battle_activateExpReward(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -634,18 +634,18 @@ asm void fn_80176ACC(void)
     bctrl
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_80176ACC_000007B8
+    beq lbl_battle_activateExpReward_000007B8
     lwz r3, 0x10d8(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80176ACC_000007B8
+    beq lbl_battle_activateExpReward_000007B8
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_80176ACC_000007B8
+    bne lbl_battle_activateExpReward_000007B8
     mr r4, r31
     li r5, 0x1
     bl fn_803CC718
-lbl_fn_80176ACC_000007B8:
+lbl_battle_activateExpReward_000007B8:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -1374,7 +1374,7 @@ lbl_fn_80176E30_000011D0:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_80176E30_00001234
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_80176E30_00001234
     lwz r3, lbl_8087F048
@@ -1382,7 +1382,7 @@ lbl_fn_80176E30_000011D0:
     li r4, 0x5
     li r6, 0x0
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
 lbl_fn_80176E30_00001234:
     lwz r0, 0x48(r23)
     li r3, 0x1e

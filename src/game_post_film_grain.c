@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void collision_queryGeometry(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -11,18 +11,18 @@ extern void wcs_vformat(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80105BD8(void);
-extern void fn_80108C10(void);
-extern void fn_80109828(void);
+extern void hurtbox_testCollisionLayer(void);
+extern void hurtbox_dispatchHitEvent(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_8012DF7C(void);
 extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_evaluateConditions(void);
-extern void fn_80148B0C(void);
+extern void quest_getRewardItemSlot(void);
 extern void fn_80155D70(void);
 extern void fn_8015B808(void);
 extern void actor_setState(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void battle_awardExp(void);
 extern void task_findEntryById(void);
 extern void fn_802CC19C(void);
@@ -484,7 +484,7 @@ lbl_fn_802C9BF8_00000564:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x1d0
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lwz r0, 0x14c4(r31)
     cmpwi r0, 0x1
     bne lbl_fn_802C9BF8_000005C8
@@ -503,7 +503,7 @@ lbl_fn_802C9BF8_000005A8:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x1d0
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     b lbl_fn_802C9BF8_00000600
 lbl_fn_802C9BF8_000005C8:
     lwz r4, lbl_8087F1E4
@@ -521,7 +521,7 @@ lbl_fn_802C9BF8_000005E4:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x1d0
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
 lbl_fn_802C9BF8_00000600:
     li r30, 0x0
     stw r30, 0x14b8(r31)
@@ -731,7 +731,7 @@ lbl_fn_802C9BF8_000008EC:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x1d0
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lfs f0, lbl_808843E8
     mr r3, r31
     stfs f0, 0xb0(r1)
@@ -792,7 +792,7 @@ lbl_fn_802C9BF8_000009C8:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x1d0
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     mr r3, r31
     li r4, 0x6
     li r5, 0x0
@@ -827,7 +827,7 @@ lbl_fn_802C9BF8_00000A44:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x1d0
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
 lbl_fn_802C9BF8_00000A64:
     lwz r0, 0x14bc(r31)
     cmpwi r0, 0x2d
@@ -850,7 +850,7 @@ lbl_fn_802C9BF8_00000A94:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x1d0
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     li r0, 0x0
     stw r0, 0x14b8(r31)
     stw r0, 0x14bc(r31)
@@ -1069,7 +1069,7 @@ lbl_fn_802CA490_00000DC4:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0xb0
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
 lbl_fn_802CA490_00000DE0:
     li r0, 0x0
     stw r0, 0x14b8(r31)
@@ -1125,7 +1125,7 @@ lbl_fn_802CA490_00000E10:
     fdivs f3, f3, f4
     fadds f0, f0, f3
     stfs f0, 0x54(r1)
-    bl fn_80176548
+    bl battle_calcExpPosition
     lwz r3, lbl_8087EE98
     mr r6, r30
     lfs f1, 0x4c(r1)
@@ -1300,7 +1300,7 @@ lbl_fn_802CA490_00001120:
     addi r4, r31, 0x528
     lfs f2, lbl_808843E8
     lis r5, 0xffff
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_802CA490_00001150:
     lwz r0, 0x2d4(r1)
     psq_l f31, 0x2c8(r1), 0, 0
@@ -1773,7 +1773,7 @@ lbl_fn_802CA8C0_00001798:
     lfs f1, lbl_80884438
     stfs f0, 0x80(r1)
     lfs f2, lbl_808843E8
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_802CA8C0_00001834:
     lwz r0, 0x1d4(r1)
     psq_l f31, 0x1c8(r1), 0, 0
@@ -1854,7 +1854,7 @@ lbl_fn_802CAFB8_000018D4:
     stfd f0, 0x40(r1)
     lwz r0, 0x44(r1)
     stw r0, 0x24(r1)
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     lfs f2, 0xc(r3)
     addi r31, r1, 0x14
     psq_l f1, 0x4(r3), 0, 0
@@ -1884,7 +1884,7 @@ lbl_fn_802CAFB8_000018D4:
     addi r4, r1, 0x20
     li r8, 0x0
     li r9, 0x0
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     lwz r4, 0x14d0(r30)
     lwz r3, lbl_8087F048
     addi r4, r4, 0xb0

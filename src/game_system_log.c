@@ -10,8 +10,8 @@ extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void skill_calculateDamage(void);
 extern void fn_8006A004(void);
-extern void fn_8006AA20(void);
-extern void fn_8006B174(void);
+extern void boss_triggerEventSequence(void);
+extern void boss_decodePhaseBitfield(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void atn_Task_constructor(void);
@@ -20,12 +20,12 @@ extern void atn_Task_unlink(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800DCA70(void);
-extern void fn_800EC654(void);
-extern void fn_800EDFE8(void);
+extern void cam_evalControllerSpline(void);
+extern void cam_evalLookAtMatrix(void);
 extern void fn_8020685C(void);
 extern void fn_8020689C(void);
 extern void fn_8046DC5C(void);
-extern void fn_8046DD20(void);
+extern void boss_bindArenaInteractions(void);
 extern void strncpy(void);
 extern void strcmp(void);
 extern void strncmp(void);
@@ -253,7 +253,7 @@ lbl_fn_80204690_000001DC:
     addi r4, r30, 0x8
     stw r0, 0x4c(r31)
     stb r0, 0x50(r31)
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0x8(r1)
     srwi. r0, r0, 31
     bne lbl_fn_80204690_00000260
@@ -287,7 +287,7 @@ lbl_fn_80204690_000002A0:
 lbl_fn_80204690_000002B4:
     lwz r3, 0x10(r30)
 lbl_fn_80204690_000002B8:
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_80204690_00000390
     lis r5, lbl_8073E780@ha
@@ -710,7 +710,7 @@ lbl_fn_80204958_00000890:
     bne lbl_fn_80204958_00000564
     lwz r3, lbl_8087F518
     mr r4, r28
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     lmw r23, 0x66c(r1)
     lwz r0, 0x694(r1)
     mtlr r0
@@ -1116,7 +1116,7 @@ lbl_fn_80204E54_00000E74:
     addi r3, r1, 0xd4
     addi r4, r1, 0x110
     li r15, 0x0
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     mr r18, r16
     addi r30, r23, 0x30
     addi r29, r24, 0x30
@@ -1166,7 +1166,7 @@ lbl_fn_80204E54_00000F0C:
 lbl_fn_80204E54_00000F28:
     addi r3, r1, 0x38
     addi r4, r1, 0x110
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     lbz r4, 0x64(r1)
     li r21, 0x0
     li r3, 0x0
@@ -1584,7 +1584,7 @@ lbl_fn_80204E54_00001504:
     blt lbl_fn_80204E54_000014F0
     lwz r3, lbl_8087F518
     lwz r4, 0x770(r1)
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     bl fn_8020689C
     lmw r14, 0x778(r1)
     lwz r0, 0x7c4(r1)

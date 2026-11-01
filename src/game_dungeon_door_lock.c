@@ -8,7 +8,7 @@ extern void fn_8012B028(void);
 extern void fn_8016E484(void);
 extern void fn_801F6C2C(void);
 extern void save_computeCrc32(void);
-extern void fn_801F6E78(void);
+extern void save_calculateBlockCrc(void);
 extern void fn_801F7590(void);
 extern void fn_801F7A18(void);
 extern void fn_801F7DF0(void);
@@ -1714,7 +1714,7 @@ lbl_fn_803E0E10_0000170C:
     addi r5, r1, 0x5c
     addi r31, r31, lbl_807506A0@l
     addi r4, r31, 0x12cb
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     cmpwi r28, 0x0
     beq lbl_fn_803E0E10_000017F8
     lwz r0, 0x4(r28)
@@ -1775,7 +1775,7 @@ lbl_fn_803E0E10_000017F8:
     addi r5, r1, 0x5c
     addi r25, r25, lbl_807506A0@l
     addi r4, r25, 0x12cb
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     lwz r3, 0x14(r24)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
@@ -1929,7 +1929,7 @@ lbl_fn_803E0E10_00001A34:
     addi r5, r1, 0x5c
     addi r4, r4, lbl_807506A0@l
     addi r4, r4, 0x12cb
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     lwz r0, 0x7e0(r23)
     rlwinm r0, r0, 0, 26, 26
     cmplwi r0, 0x20
@@ -2023,7 +2023,7 @@ lbl_fn_803E0E10_00001B98:
     addi r5, r1, 0x5c
     addi r4, r4, lbl_807506A0@l
     addi r4, r4, 0x12cb
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     lwz r0, 0x12a4(r23)
     extrwi. r0, r0, 1, 3
     beq lbl_fn_803E0E10_00001BD4
@@ -2088,7 +2088,7 @@ lbl_fn_803E0E10_00001C88:
     addi r5, r1, 0x5c
     addi r4, r4, lbl_807506A0@l
     addi r4, r4, 0x12cb
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     lwz r0, 0x944(r23)
     cmpwi r0, 0x0
     ble lbl_fn_803E0E10_00001CE0
@@ -2120,7 +2120,7 @@ lbl_fn_803E0E10_00001D04:
     addi r5, r1, 0x5c
     addi r4, r4, lbl_807506A0@l
     addi r4, r4, 0x12cb
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     lwz r3, 0x1c(r24)
     lfs f0, lbl_80885EEC
     stfs f0, 0x54(r3)
@@ -2154,7 +2154,7 @@ lbl_fn_803E0E10_00001D80:
     addi r5, r1, 0x5c
     addi r4, r4, lbl_807506A0@l
     addi r4, r4, 0x12cb
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     lwz r0, 0x54(r24)
     cmpw r0, r26
     bge lbl_fn_803E0E10_00001DC8
@@ -2194,7 +2194,7 @@ lbl_fn_803E0E10_00001E14:
     addi r5, r1, 0x5c
     addi r4, r4, lbl_807506A0@l
     addi r4, r4, 0x12cb
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     lwz r3, 0x58(r24)
     lwz r0, 0x874(r23)
     cmpw r3, r0

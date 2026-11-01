@@ -56,9 +56,9 @@ void fn_800920B8(void);
 void fn_8009246C(void);
 void fn_80092768(void);
 void atn_Model_findBoneIndex(void);
-void fn_800928B0(void);
+void compass_findWaypointIndex(void);
 void fn_8009290C(void);
-void fn_80092954(void);
+void compass_findMarkerByName(void);
 void fn_800929C0(void);
 void fn_80092A00(void);
 void fn_80092A4C(void);
@@ -1754,24 +1754,24 @@ lbl_atn_Model_findBoneIndex_000017C0:
     blr
 }
 
-asm void fn_800928B0(void)
+asm void compass_findWaypointIndex(void)
 {
     nofralloc
     mulli r0, r5, 0x18
     add r3, r3, r0
     lwz r6, 0x16c(r3)
     cmpwi r6, 0x0
-    bne lbl_fn_800928B0_000017F8
+    bne lbl_compass_findWaypointIndex_000017F8
     li r3, -0x1
     blr
-lbl_fn_800928B0_000017F8:
+lbl_compass_findWaypointIndex_000017F8:
     lwz r0, 0x44(r6)
     li r3, 0x0
     li r7, 0x0
     mtctr r0
     cmpwi r0, 0x0
-    ble lbl_fn_800928B0_00001830
-lbl_fn_800928B0_00001810:
+    ble lbl_compass_findWaypointIndex_00001830
+lbl_compass_findWaypointIndex_00001810:
     lwz r5, 0x48(r6)
     lwzx r5, r5, r7
     lwz r0, 0x14(r5)
@@ -1779,8 +1779,8 @@ lbl_fn_800928B0_00001810:
     beqlr
     addi r7, r7, 0x4
     addi r3, r3, 0x1
-    bdnz lbl_fn_800928B0_00001810
-lbl_fn_800928B0_00001830:
+    bdnz lbl_compass_findWaypointIndex_00001810
+lbl_compass_findWaypointIndex_00001830:
     li r3, -0x1
     blr
 }
@@ -1811,7 +1811,7 @@ lbl_fn_8009290C_00001878:
     blr
 }
 
-asm void fn_80092954(void)
+asm void compass_findMarkerByName(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1825,20 +1825,20 @@ asm void fn_80092954(void)
     li r5, 0x0
     mtctr r0
     cmplwi r0, 0x0
-    ble lbl_fn_80092954_000018D0
-lbl_fn_80092954_000018B0:
+    ble lbl_compass_findMarkerByName_000018D0
+lbl_compass_findMarkerByName_000018B0:
     lwz r4, 0x108(r31)
     lwzx r4, r4, r5
     lwz r0, 0x0(r4)
     cmplw r3, r0
-    bne lbl_fn_80092954_000018C8
-    b lbl_fn_80092954_000018D4
-lbl_fn_80092954_000018C8:
+    bne lbl_compass_findMarkerByName_000018C8
+    b lbl_compass_findMarkerByName_000018D4
+lbl_compass_findMarkerByName_000018C8:
     addi r5, r5, 0x4
-    bdnz lbl_fn_80092954_000018B0
-lbl_fn_80092954_000018D0:
+    bdnz lbl_compass_findMarkerByName_000018B0
+lbl_compass_findMarkerByName_000018D0:
     li r4, 0x0
-lbl_fn_80092954_000018D4:
+lbl_compass_findMarkerByName_000018D4:
     lwz r31, 0xc(r1)
     mr r3, r4
     lwz r0, 0x14(r1)

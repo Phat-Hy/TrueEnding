@@ -9,8 +9,8 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void talk_parseDialogue(void);
-extern void fn_8005B8F8(void);
-extern void fn_8005B9AC(void);
+extern void talk_parseDialogueTokens(void);
+extern void talk_copyUtf16String(void);
 extern void fn_8006BA8C(void);
 extern void fn_8006BB6C(void);
 extern void mem_alloc(void);
@@ -18,12 +18,12 @@ extern void mem_realloc(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
-extern void fn_800EC654(void);
-extern void fn_800EDFE8(void);
+extern void cam_evalControllerSpline(void);
+extern void cam_evalLookAtMatrix(void);
 extern void fn_80205BE8(void);
 extern void fn_8020F064(void);
 extern void fn_8046DC5C(void);
-extern void fn_8046DD20(void);
+extern void boss_bindArenaInteractions(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
@@ -77,11 +77,11 @@ void fn_8020DF88(void);
 void fn_8020E990(void);
 void fn_8020EACC(void);
 void fn_8020EB0C(void);
-void fn_8020ED84(void);
+void time_wrapMilliseconds(void);
 void fn_8020EE58(void);
 void fn_8020EE60(void);
 void fn_8020EE8C(void);
-void fn_8020EF04(void);
+void rand_scaleRangeInt(void);
 void fn_8020EF4C(void);
 void random_generateValue(void);
 
@@ -204,7 +204,7 @@ lbl_fn_8020D688_00000194:
     stw r3, 0x10(r1)
     mr r3, r27
     addi r4, r4, lbl_8077A0A8@l
-    bl fn_8005B9AC
+    bl talk_copyUtf16String
     lis r3, lbl_8073F678@ha
     lis r28, lbl_8073F668@ha
     li r29, 0x1
@@ -212,7 +212,7 @@ lbl_fn_8020D688_00000194:
     b lbl_fn_8020D688_00000344
 lbl_fn_8020D688_000001D4:
     addi r3, r1, 0x10
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     addi r3, r1, 0xc64
     bl talk_parseQuotedString
     lbz r0, 0x0(r3)
@@ -316,10 +316,10 @@ lbl_fn_8020D688_00000344:
     bne lbl_fn_8020D688_000001D4
     lwz r3, lbl_8087F518
     mr r4, r31
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     lwz r3, lbl_8087F518
     mr r4, r30
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     lmw r22, 0x1298(r1)
     lwz r0, 0x12c4(r1)
     mtlr r0
@@ -615,7 +615,7 @@ lbl_fn_8020DB58_00000740:
     bne lbl_fn_8020DB58_000005F4
     lwz r3, lbl_8087F518
     mr r4, r20
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     addi r21, r21, 0x1
     addi r26, r26, 0x40
     cmpwi r21, 0xb
@@ -1093,7 +1093,7 @@ lbl_fn_8020DF88_00000E14:
     addi r3, r1, 0xd4
     addi r4, r1, 0x110
     li r15, 0x0
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     mr r18, r16
     addi r31, r23, 0x30
     addi r30, r24, 0x30
@@ -1143,7 +1143,7 @@ lbl_fn_8020DF88_00000EAC:
 lbl_fn_8020DF88_00000EC8:
     addi r3, r1, 0x38
     addi r4, r1, 0x110
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     lbz r4, 0x64(r1)
     li r21, 0x0
     li r3, 0x0
@@ -1428,7 +1428,7 @@ lbl_fn_8020DF88_000012D8:
     blt lbl_fn_8020DF88_000012C4
     lwz r3, lbl_8087F518
     lwz r4, 0x770(r1)
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     bl fn_8020EB0C
     lmw r14, 0x778(r1)
     lwz r0, 0x7c4(r1)
@@ -1603,7 +1603,7 @@ lbl_fn_8020EB0C_0000152C:
     stw r3, 0xc(r1)
     mr r3, r29
     addi r4, r4, lbl_8077A0A8@l
-    bl fn_8005B9AC
+    bl talk_copyUtf16String
     li r28, 0x0
     b lbl_fn_8020EB0C_000015AC
 lbl_fn_8020EB0C_00001560:
@@ -1628,7 +1628,7 @@ lbl_fn_8020EB0C_00001560:
     addi r28, r3, 0x1
 lbl_fn_8020EB0C_000015AC:
     addi r3, r1, 0xc
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_8020EB0C_00001560
     lis r5, lbl_8073F814@ha
@@ -1702,7 +1702,7 @@ lbl_fn_8020EB0C_00001624:
     addi r30, r3, 0x1
 lbl_fn_8020EB0C_000016CC:
     addi r3, r1, 0xc
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_8020EB0C_00001624
     mr r3, r31
@@ -1716,13 +1716,13 @@ lbl_fn_8020EB0C_000016E8:
     blr
 }
 
-asm void fn_8020ED84(void)
+asm void time_wrapMilliseconds(void)
 {
     nofralloc
     cmpwi r4, 0x3e8
-    blt lbl_fn_8020ED84_0000177C
+    blt lbl_time_wrapMilliseconds_0000177C
     cmpwi r3, 0x2
-    blt lbl_fn_8020ED84_00001730
+    blt lbl_time_wrapMilliseconds_00001730
     lis r5, 0x1062
     addi r0, r5, 0x4dd3
     mulhw r0, r0, r4
@@ -1731,10 +1731,10 @@ asm void fn_8020ED84(void)
     add r0, r0, r5
     mulli r0, r0, 0x3e8
     subf r4, r0, r4
-    b lbl_fn_8020ED84_0000177C
-lbl_fn_8020ED84_00001730:
+    b lbl_time_wrapMilliseconds_0000177C
+lbl_time_wrapMilliseconds_00001730:
     cmpwi r3, 0x1
-    bne lbl_fn_8020ED84_0000177C
+    bne lbl_time_wrapMilliseconds_0000177C
     lis r5, 0x1062
     addi r0, r5, 0x4dd3
     mulhw r6, r0, r4
@@ -1744,37 +1744,37 @@ lbl_fn_8020ED84_00001730:
     mulli r0, r0, 0x3e8
     subf r0, r0, r4
     cmpwi r0, 0x1c2
-    blt lbl_fn_8020ED84_0000177C
+    blt lbl_time_wrapMilliseconds_0000177C
     cmpwi r0, 0x1e0
-    bgt lbl_fn_8020ED84_0000177C
+    bgt lbl_time_wrapMilliseconds_0000177C
     srawi r0, r6, 6
     srwi r5, r0, 31
     add r0, r0, r5
     mulli r0, r0, 0x3e8
     subf r4, r0, r4
-lbl_fn_8020ED84_0000177C:
+lbl_time_wrapMilliseconds_0000177C:
     lwz r6, lbl_8087F1F0
     li r7, 0x0
     lwz r0, lbl_8087F1F8
     mr r5, r6
     mtctr r0
     cmplwi r0, 0x0
-    ble lbl_fn_8020ED84_000017C8
-lbl_fn_8020ED84_00001798:
+    ble lbl_time_wrapMilliseconds_000017C8
+lbl_time_wrapMilliseconds_00001798:
     lwz r0, 0x78(r5)
     cmpw r3, r0
-    bne lbl_fn_8020ED84_000017BC
+    bne lbl_time_wrapMilliseconds_000017BC
     lwz r0, 0x7c(r5)
     cmpw r4, r0
-    bne lbl_fn_8020ED84_000017BC
+    bne lbl_time_wrapMilliseconds_000017BC
     mulli r0, r7, 0x10c
     add r3, r6, r0
     blr
-lbl_fn_8020ED84_000017BC:
+lbl_time_wrapMilliseconds_000017BC:
     addi r5, r5, 0x10c
     addi r7, r7, 0x1
-    bdnz lbl_fn_8020ED84_00001798
-lbl_fn_8020ED84_000017C8:
+    bdnz lbl_time_wrapMilliseconds_00001798
+lbl_time_wrapMilliseconds_000017C8:
     li r3, 0x0
     blr
 }
@@ -1842,7 +1842,7 @@ lbl_fn_8020EE8C_00001860:
     blr
 }
 
-asm void fn_8020EF04(void)
+asm void rand_scaleRangeInt(void)
 {
     nofralloc
     lis r5, 0x14f9

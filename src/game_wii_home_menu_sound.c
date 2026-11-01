@@ -31,12 +31,12 @@ extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void save_createWorkerTask(void);
 extern void save_computeCrc32(void);
-extern void fn_801F6E78(void);
+extern void save_calculateBlockCrc(void);
 extern void save_findEntryByName(void);
 extern void fn_801F8598(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_801FEF40(void);
-extern void fn_8020924C(void);
+extern void mem_findBlockById(void);
 extern void fn_80216544(void);
 extern void fn_8021771C(void);
 extern void fn_80217D9C(void);
@@ -44,7 +44,7 @@ extern void fn_80219544(void);
 extern void world_getGlobalFlag(void);
 extern void fn_804A436C(void);
 extern void fn_804A53D4(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void fn_805C3F10(void);
 extern void fn_805F3780(void);
 extern void fn_805F38A0(void);
@@ -1932,11 +1932,11 @@ lbl_fn_80572454_000018A0:
     stfs f1, 0x30(r1)
     stfs f0, 0x34(r1)
     lwz r3, 0x4c(r29)
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     add r31, r27, r26
     lwz r3, 0x70(r31)
     bl fn_80219544
-    bl fn_8020924C
+    bl mem_findBlockById
     lwz r5, 0x4c(r29)
     mr r6, r3
     addi r4, r30, 0xde
@@ -1948,7 +1948,7 @@ lbl_fn_80572454_000018A0:
     bl save_findEntryByName
     lwz r3, lbl_8087F8A0
     lwz r4, 0x70(r31)
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     beq lbl_fn_80572454_00001964
     addi r23, r3, 0x7d4

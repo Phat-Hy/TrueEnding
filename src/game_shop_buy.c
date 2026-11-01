@@ -9,7 +9,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
 extern void fn_8011BEB8(void);
-extern void fn_8014C228(void);
+extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
 extern void actor_setState(void);
 extern void fn_8018B48C(void);
@@ -54,7 +54,7 @@ extern u32 lbl_80881B04;
 void fn_80157C34(void);
 void fn_8015802C(void);
 void fn_801588A0(void);
-void fn_80158BB4(void);
+void shop_canPurchaseItem(void);
 void fn_80158C9C(void);
 void fn_80158CA4(void);
 void fn_80158D58(void);
@@ -658,7 +658,7 @@ lbl_fn_8015802C_00000860:
     mr r3, r29
     stw r0, 0x648(r29)
     stw r0, 0x64c(r29)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_fn_8015802C_000008A0
 lbl_fn_8015802C_00000880:
     lwz r0, 0x674(r29)
@@ -1158,7 +1158,7 @@ lbl_fn_801588A0_00000F60:
     blr
 }
 
-asm void fn_80158BB4(void)
+asm void shop_canPurchaseItem(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1168,20 +1168,20 @@ asm void fn_80158BB4(void)
     psq_st f31, 0x18(r1), 0, 0
     lwz r0, 0x55c(r3)
     cmpwi r0, 0x6
-    bne lbl_fn_80158BB4_0000104C
+    bne lbl_shop_canPurchaseItem_0000104C
     lwz r4, 0x560(r3)
     subi r0, r4, 0x4
     cmplwi r0, 0x6
-    ble lbl_fn_80158BB4_00000FC4
+    ble lbl_shop_canPurchaseItem_00000FC4
     cmpwi r4, 0x8d
-    beq lbl_fn_80158BB4_00000FC4
+    beq lbl_shop_canPurchaseItem_00000FC4
     cmpwi r4, 0xb
-    beq lbl_fn_80158BB4_00001020
-    b lbl_fn_80158BB4_0000104C
-lbl_fn_80158BB4_00000FC4:
+    beq lbl_shop_canPurchaseItem_00001020
+    b lbl_shop_canPurchaseItem_0000104C
+lbl_shop_canPurchaseItem_00000FC4:
     lwz r0, 0x2dc(r3)
     cmpwi r0, 0x162
-    bne lbl_fn_80158BB4_00000FFC
+    bne lbl_shop_canPurchaseItem_00000FFC
     lfs f31, 0x2e4(r3)
     li r4, 0x0
     addi r3, r3, 0xb0
@@ -1192,8 +1192,8 @@ lbl_fn_80158BB4_00000FC4:
     cror eq, gt, eq
     mfcr r3
     extrwi r3, r3, 1, 2
-    b lbl_fn_80158BB4_00001050
-lbl_fn_80158BB4_00000FFC:
+    b lbl_shop_canPurchaseItem_00001050
+lbl_shop_canPurchaseItem_00000FFC:
     lfs f31, 0x2e4(r3)
     li r4, 0x0
     addi r3, r3, 0xb0
@@ -1202,8 +1202,8 @@ lbl_fn_80158BB4_00000FFC:
     cror eq, gt, eq
     mfcr r3
     extrwi r3, r3, 1, 2
-    b lbl_fn_80158BB4_00001050
-lbl_fn_80158BB4_00001020:
+    b lbl_shop_canPurchaseItem_00001050
+lbl_shop_canPurchaseItem_00001020:
     lfs f31, 0x2e4(r3)
     li r4, 0x0
     addi r3, r3, 0xb0
@@ -1214,10 +1214,10 @@ lbl_fn_80158BB4_00001020:
     cror eq, gt, eq
     mfcr r3
     extrwi r3, r3, 1, 2
-    b lbl_fn_80158BB4_00001050
-lbl_fn_80158BB4_0000104C:
+    b lbl_shop_canPurchaseItem_00001050
+lbl_shop_canPurchaseItem_0000104C:
     li r3, 0x1
-lbl_fn_80158BB4_00001050:
+lbl_shop_canPurchaseItem_00001050:
     lwz r0, 0x24(r1)
     psq_l f31, 0x18(r1), 0, 0
     lfd f31, 0x10(r1)

@@ -16,7 +16,7 @@ extern void fn_801010A0(void);
 extern void fn_8010EE78(void);
 extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_80158BB4(void);
+extern void shop_canPurchaseItem(void);
 extern void actor_setState(void);
 extern void task_findEntryById(void);
 extern void res_findResourceSlot(void);
@@ -1250,7 +1250,7 @@ lbl_fn_802B52D8_00001098:
     stfs f4, 0x28(r1)
     stfs f3, 0x2c(r1)
     stfs f0, 0x30(r1)
-    bl fn_80158BB4
+    bl shop_canPurchaseItem
     cmpwi r3, 0x0
     beq lbl_fn_802B52D8_00001120
     li r0, 0x6

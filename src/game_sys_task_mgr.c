@@ -8,8 +8,8 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void talk_parseDialogue(void);
-extern void fn_8005B8F8(void);
-extern void fn_8005B9AC(void);
+extern void talk_parseDialogueTokens(void);
+extern void talk_copyUtf16String(void);
 extern void fn_8006F420(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -21,7 +21,7 @@ extern void fn_801360D8(void);
 extern void fn_80208A3C(void);
 extern void fn_80208B70(void);
 extern void fn_8046DC5C(void);
-extern void fn_8046DD20(void);
+extern void boss_bindArenaInteractions(void);
 extern void strncpy(void);
 extern void strcmp(void);
 extern void strncmp(void);
@@ -847,7 +847,7 @@ lbl_fn_80216CD0_0000093C:
     stw r3, 0xce0(r1)
     mr r3, r28
     addi r4, r4, lbl_8077A0A8@l
-    bl fn_8005B9AC
+    bl talk_copyUtf16String
     lis r29, lbl_8073FBF0@ha
     addi r29, r29, lbl_8073FBF0@l
     b lbl_fn_80216CD0_00000AFC
@@ -952,7 +952,7 @@ lbl_fn_80216CD0_00000974:
     stw r0, lbl_8087F274
 lbl_fn_80216CD0_00000AFC:
     addi r3, r1, 0xce0
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_80216CD0_00000974
     lwz r28, lbl_8087F274
@@ -1115,12 +1115,12 @@ lbl_fn_80216CD0_00000D44:
     stw r30, 0xbc(r25)
 lbl_fn_80216CD0_00000D70:
     addi r3, r1, 0xce0
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_80216CD0_00000BBC
     lwz r3, lbl_8087F518
     mr r4, r31
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     lwz r3, lbl_8087F518
     addi r5, r1, 0x14
     lwz r4, lbl_80882F24
@@ -1219,7 +1219,7 @@ lbl_fn_80216CD0_00000EE4:
     bne lbl_fn_80216CD0_00000E28
     lwz r3, lbl_8087F518
     mr r4, r31
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     lwz r3, lbl_8087F518
     addi r5, r1, 0x14
     lwz r4, lbl_80882F1C
@@ -1328,7 +1328,7 @@ lbl_fn_80216CD0_00001074:
     bne lbl_fn_80216CD0_00000FA0
     lwz r3, lbl_8087F518
     mr r4, r31
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     bl fn_802174F4
     lmw r24, 0x1940(r1)
     lwz r0, 0x1964(r1)
@@ -1492,7 +1492,7 @@ lbl_fn_802174F4_000012AC:
     bne lbl_fn_802174F4_000011EC
     lwz r3, lbl_8087F518
     mr r4, r31
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
 lbl_fn_802174F4_000012C8:
     lmw r25, 0x644(r1)
     lwz r0, 0x664(r1)
@@ -1616,7 +1616,7 @@ lbl_fn_80217778_00001424:
 lbl_fn_80217778_00001464:
     lwz r3, lbl_8087F518
     mr r4, r29
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     lmw r26, 0x648(r1)
     lwz r0, 0x664(r1)
     mtlr r0
@@ -1851,7 +1851,7 @@ lbl_fn_802179FC_00001794:
     bne lbl_fn_802179FC_00001700
     lwz r3, lbl_8087F518
     mr r4, r30
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     lwz r3, lbl_8087F518
     addi r5, r1, 0x8
     lwz r4, lbl_80882F3C
@@ -1948,7 +1948,7 @@ lbl_fn_802179FC_000018F4:
     bne lbl_fn_802179FC_000017EC
     lwz r3, lbl_8087F518
     mr r4, r30
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
 lbl_fn_802179FC_00001910:
     lmw r27, 0x64c(r1)
     lwz r0, 0x664(r1)

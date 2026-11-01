@@ -5,14 +5,14 @@
 extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void mem_free(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void fn_80098948(void);
 extern void fn_800A0548(void);
 extern void atn_Anim_getDuration(void);
 extern void fn_800A08E0(void);
 extern void str_findChar(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void fn_805ED460(void);
 extern void fn_805ED5A0(void);
 extern void PSMTXConcat(void);
@@ -845,7 +845,7 @@ lbl_fn_800991D0_00000B2C:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0xc
     stw r3, 0x94(r1)
     mr r18, r3
@@ -877,7 +877,7 @@ lbl_fn_800991D0_00000BEC:
     lwz r0, 0x234(r1)
     addi r3, r1, 0x90
     stw r0, 0x90(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r0, r1, 0x90
     beq lbl_fn_800991D0_00000C34
     mr r3, r0
@@ -1843,7 +1843,7 @@ lbl_fn_8009A5CC_00001938:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x54(r1)
     mr r31, r3
@@ -1875,7 +1875,7 @@ lbl_fn_8009A5CC_000019E0:
     lwz r0, 0x224(r1)
     addi r3, r1, 0x50
     stw r0, 0x50(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r0, r1, 0x50
     beq lbl_fn_8009A5CC_00001A28
     mr r3, r0
@@ -2532,7 +2532,7 @@ lbl_fn_8009ADA4_00002350:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x10
     stw r3, 0x90(r1)
     mr r27, r3
@@ -2563,7 +2563,7 @@ lbl_fn_8009ADA4_000023F8:
     lwz r0, 0x2c8(r1)
     addi r3, r1, 0x8c
     stw r0, 0x8c(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r0, r1, 0x8c
     beq lbl_fn_8009ADA4_00002440
     mr r3, r0
@@ -2705,7 +2705,7 @@ lbl_fn_8009ADA4_000025B8:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0xc
     stw r3, 0x84(r1)
     mr r27, r3
@@ -2736,7 +2736,7 @@ lbl_fn_8009ADA4_00002684:
     lwz r0, 0x2c8(r1)
     addi r3, r1, 0x80
     stw r0, 0x80(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r0, r1, 0x80
     beq lbl_fn_8009ADA4_000026CC
     mr r3, r0

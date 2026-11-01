@@ -9,9 +9,9 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_8000DD0C(void);
+extern void scene_getRootNode(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_800133B0(void);
+extern void math_wrapAngle(void);
 extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void mission_updateStub(void);
@@ -29,11 +29,11 @@ extern void fn_8013C3B4(void);
 extern void fn_8013C460(void);
 extern void fn_8013C554(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_8014052C(void);
-extern void fn_801446F0(void);
+extern void quest_initMarkerCoords(void);
+extern void quest_resetObjectiveBounds(void);
 extern void inventory_unequipItem(void);
 extern void equip_applyToCharacter(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void actor_getMovementFlags(void);
 extern void fn_801A03E8(void);
 extern void fn_801B2EDC(void);
@@ -1079,7 +1079,7 @@ asm void fn_801C0D80(void)
     li r4, 0x2d
     bl fn_801C0730
     lwz r3, 0x4(r29)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r31, r3
     lwz r3, 0x4(r29)
     li r4, 0x0
@@ -1088,13 +1088,13 @@ asm void fn_801C0D80(void)
     li r4, 0x0
     bl fn_801C1050
     lwz r3, 0x4(r29)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     mr r4, r30
     addi r3, r29, 0x8
     bl vec3_copy
     lwz r4, 0x4(r29)
     addi r3, r1, 0x80
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     mr r4, r30
     addi r3, r1, 0x80
     bl fn_801A03E8
@@ -1132,7 +1132,7 @@ lbl_fn_801C0D80_00000D34:
     bl fn_8012A1B8
     lfs f0, 0x4(r3)
     fsubs f1, f31, f0
-    bl fn_800133B0
+    bl math_wrapAngle
     lfs f0, lbl_808826A4
     fcmpo cr0, f1, f0
     ble lbl_fn_801C0D80_00000DD8
@@ -1481,7 +1481,7 @@ lbl_fn_801C1084_000011B0:
     psq_l f1, 0x0(r5), 0, 0
     psq_st f1, 0x0(r6), 0, 0
     stfs f2, 0x90(r1)
-    bl fn_80176548
+    bl battle_calcExpPosition
     lwz r3, 0x4(r31)
     bl actor_getMovementFlags
     lwz r5, 0x4(r31)
@@ -1633,7 +1633,7 @@ asm void fn_801C1578(void)
     rlwinm r0, r0, 0, 28, 26
     stw r0, 0x12a4(r4)
     lwz r3, 0x4(r3)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     lfs f1, lbl_808826A4
     mr r3, r28
     lfs f2, lbl_808826AC

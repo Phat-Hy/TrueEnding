@@ -5,7 +5,7 @@
 extern void _restgpr_18(void);
 extern void _savegpr_18(void);
 extern void dtor_80084684(void);
-extern void fn_80056DB8(void);
+extern void path_Object_constructor(void);
 extern void atn_ColliBase_destructor(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
@@ -16,7 +16,7 @@ extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void fn_80087BB4(void);
 extern void route_createWaypoint(void);
-extern void fn_80088724(void);
+extern void zone_testPointInBounds(void);
 extern void node_createNamedChild(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
@@ -44,10 +44,10 @@ extern void res_registerResource(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
-extern void fn_803EC7A0(void);
+extern void barrier_formatDialogString(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
-extern void fn_803ED774(void);
+extern void dungeon_updateBarrierField(void);
 extern void fn_803F11F8(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -119,7 +119,7 @@ void fn_804211B0(void);
 void fn_80421308(void);
 void fn_8042140C(void);
 void fn_80421438(void);
-void fn_8042144C(void);
+void *fn_8042144C(void *p);
 void fn_80421454(void);
 void fn_804214FC(void);
 void fn_80421554(void);
@@ -526,7 +526,7 @@ lbl_fn_80420934_00000508:
     addi r5, r29, 0x78
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_808865C4
     mr r3, r30
     lfs f2, lbl_808865C8
@@ -631,7 +631,7 @@ asm void fn_80420ADC(void)
     stw r31, 0x4e8(r30)
     stw r31, 0x4ec(r30)
     stfs f0, 0x4f0(r30)
-    bl fn_80056DB8
+    bl path_Object_constructor
     lis r4, lbl_80777668@ha
     lis r3, 0x8
     addi r4, r4, lbl_80777668@l
@@ -840,7 +840,7 @@ lbl_fn_80420D0C_000009A0:
     mr r3, r28
     addi r4, r28, 0xf4
     addi r5, r1, 0x8
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     stw r31, 0x4ec(r28)
     b lbl_fn_80420D0C_00000A08
 lbl_fn_80420D0C_000009E4:
@@ -1077,7 +1077,7 @@ asm void fn_80421128(void)
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_80421128_00000D0C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -1283,11 +1283,9 @@ asm void fn_80421438(void)
     blr
 }
 
-asm void fn_8042144C(void)
+void *fn_8042144C(void *p)
 {
-    nofralloc
-    addi r3, r3, 0xf4
-    blr
+    return (char *)p + 0xf4;
 }
 
 asm void fn_80421454(void)

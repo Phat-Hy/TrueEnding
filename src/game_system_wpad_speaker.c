@@ -44,7 +44,7 @@ extern void fn_803DAB4C(void);
 extern void fn_803E4478(void);
 extern void fn_8046ECDC(void);
 extern void fn_80541214(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void fn_8056BF90(void);
 extern void fn_8056F2FC(void);
 extern void PSMTXRotRad(void);
@@ -1520,7 +1520,7 @@ lbl_world_Manager_postUpdate_00001414:
     blt lbl_world_Manager_postUpdate_000015BC
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_world_Manager_postUpdate_000015BC

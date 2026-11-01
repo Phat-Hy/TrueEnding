@@ -12,11 +12,11 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8006B174(void);
+extern void boss_decodePhaseBitfield(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void* area_refresh(void*);
 extern void fn_8008A76C(void);
@@ -34,7 +34,7 @@ extern void fn_800A787C(void);
 extern void fn_800A8BE4(void);
 extern void str_parseInt(void);
 extern void str_findChar(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void atn_LoadHandle_getName(void);
 extern void shockwave_freeEmitter(void);
 extern void fn_804741C0(void);
@@ -100,7 +100,7 @@ void cursor_updateSlotState(void);
 void atn_Anim_getLayerTrack(void);
 void atn_Anim_getLayerDuration(void);
 void fn_80097D9C(void);
-void fn_80097E80(void);
+void cursor_applyAnimationTrack(void);
 void fn_80098698(void);
 void fn_80098948(void);
 void fn_80098C90(void);
@@ -1069,7 +1069,7 @@ lbl_fn_80097D9C_00000C98:
     blr
 }
 
-asm void fn_80097E80(void)
+asm void cursor_applyAnimationTrack(void)
 {
     nofralloc
     stwu r1, -0x110(r1)
@@ -1089,22 +1089,22 @@ asm void fn_80097E80(void)
     mr r24, r3
     mr r25, r4
     cmpwi r0, 0x0
-    bne lbl_fn_80097E80_00000CFC
+    bne lbl_cursor_applyAnimationTrack_00000CFC
     li r3, 0x0
-    b lbl_fn_80097E80_0000148C
-lbl_fn_80097E80_00000CFC:
+    b lbl_cursor_applyAnimationTrack_0000148C
+lbl_cursor_applyAnimationTrack_00000CFC:
     lwz r0, 0x4(r3)
     rlwinm r0, r0, 0, 25, 25
     cmplwi r0, 0x40
-    bne lbl_fn_80097E80_00000D28
+    bne lbl_cursor_applyAnimationTrack_00000D28
     lwz r0, 0x20c(r3)
     extlwi r0, r0, 2, 25
     srawi. r0, r0, 31
-    bne lbl_fn_80097E80_00000D28
+    bne lbl_cursor_applyAnimationTrack_00000D28
     bl fn_80098698
     li r3, 0x0
-    b lbl_fn_80097E80_0000148C
-lbl_fn_80097E80_00000D28:
+    b lbl_cursor_applyAnimationTrack_0000148C
+lbl_cursor_applyAnimationTrack_00000D28:
     lis r14, lbl_80732368@ha
     addi r14, r14, lbl_80732368@l
     addi r3, r14, 0x260
@@ -1115,7 +1115,7 @@ lbl_fn_80097E80_00000D28:
     lwz r0, 0x230(r24)
     mr r20, r3
     cmpwi r0, 0x0
-    beq lbl_fn_80097E80_00001300
+    beq lbl_cursor_applyAnimationTrack_00001300
     lwz r0, 0x50(r24)
     li r26, 0x0
     lwz r3, lbl_8087EFA8
@@ -1138,35 +1138,35 @@ lbl_fn_80097E80_00000D28:
     lfs f31, lbl_80880BFC
     li r23, 0x0
     subi r29, r29, 0x7c00
-    b lbl_fn_80097E80_000011E8
-lbl_fn_80097E80_00000DB0:
+    b lbl_cursor_applyAnimationTrack_000011E8
+lbl_cursor_applyAnimationTrack_00000DB0:
     lwz r31, 0x4(r15)
     cmpwi r31, 0x0
-    beq lbl_fn_80097E80_000011DC
+    beq lbl_cursor_applyAnimationTrack_000011DC
     cmpwi r25, 0x0
-    beq lbl_fn_80097E80_00000DD4
+    beq lbl_cursor_applyAnimationTrack_00000DD4
     lfs f1, 0x14(r15)
     lfs f0, 0x10(r15)
     fmadds f0, f1, f29, f0
     stfs f0, 0x10(r15)
-lbl_fn_80097E80_00000DD4:
+lbl_cursor_applyAnimationTrack_00000DD4:
     lfs f1, 0x10(r15)
     lfs f0, 0x1c(r15)
     fcmpo cr0, f1, f0
-    ble lbl_fn_80097E80_00000DE8
+    ble lbl_cursor_applyAnimationTrack_00000DE8
     stfs f0, 0x10(r15)
-lbl_fn_80097E80_00000DE8:
+lbl_cursor_applyAnimationTrack_00000DE8:
     lwz r0, 0x34c(r24)
     cmpwi r0, 0x1
-    bne lbl_fn_80097E80_00000FB0
+    bne lbl_cursor_applyAnimationTrack_00000FB0
     lfs f0, 0x10(r15)
     fsubs f0, f0, f30
     fabs f0, f0
     frsp f0, f0
     fcmpo cr0, f0, f31
-    bge lbl_fn_80097E80_00000E10
+    bge lbl_cursor_applyAnimationTrack_00000E10
     lwz r29, 0x220(r24)
-lbl_fn_80097E80_00000E10:
+lbl_cursor_applyAnimationTrack_00000E10:
     lwz r0, 0x21c(r24)
     mr r3, r29
     li r4, 0x0
@@ -1174,28 +1174,28 @@ lbl_fn_80097E80_00000E10:
     bl memset
     li r17, 0x0
     li r16, 0x0
-    b lbl_fn_80097E80_00000EC0
-lbl_fn_80097E80_00000E30:
+    b lbl_cursor_applyAnimationTrack_00000EC0
+lbl_cursor_applyAnimationTrack_00000E30:
     lbz r0, 0x19(r15)
     lwz r3, 0x48(r28)
     cmpwi r0, 0x0
     lwzx r3, r3, r16
-    bne lbl_fn_80097E80_00000E58
+    bne lbl_cursor_applyAnimationTrack_00000E58
     lwz r0, 0x14(r3)
     cmplw r0, r19
-    beq lbl_fn_80097E80_00000EB8
+    beq lbl_cursor_applyAnimationTrack_00000EB8
     cmplw r0, r20
-    beq lbl_fn_80097E80_00000EB8
-lbl_fn_80097E80_00000E58:
+    beq lbl_cursor_applyAnimationTrack_00000EB8
+lbl_cursor_applyAnimationTrack_00000E58:
     cmpwi r27, 0x0
-    beq lbl_fn_80097E80_00000E70
+    beq lbl_cursor_applyAnimationTrack_00000E70
     lwz r0, 0x18(r3)
     slwi r0, r0, 2
     lwzx r7, r27, r0
-    b lbl_fn_80097E80_00000E74
-lbl_fn_80097E80_00000E70:
+    b lbl_cursor_applyAnimationTrack_00000E74
+lbl_cursor_applyAnimationTrack_00000E70:
     lwz r7, 0x18(r3)
-lbl_fn_80097E80_00000E74:
+lbl_cursor_applyAnimationTrack_00000E74:
     lwz r3, 0x0(r15)
     slwi r0, r7, 1
     lwz r4, 0x358(r24)
@@ -1204,7 +1204,7 @@ lbl_fn_80097E80_00000E74:
     lwz r3, 0x8(r3)
     lhax r5, r3, r0
     cmpwi r5, 0x0
-    blt lbl_fn_80097E80_00000EB8
+    blt lbl_cursor_applyAnimationTrack_00000EB8
     mulli r4, r7, 0x2c
     lwz r6, 0x218(r24)
     lfs f1, 0x8(r15)
@@ -1213,16 +1213,16 @@ lbl_fn_80097E80_00000E74:
     add r4, r29, r4
     add r6, r6, r0
     bl atn_Anim_evalNode
-lbl_fn_80097E80_00000EB8:
+lbl_cursor_applyAnimationTrack_00000EB8:
     addi r16, r16, 0x4
     addi r17, r17, 0x1
-lbl_fn_80097E80_00000EC0:
+lbl_cursor_applyAnimationTrack_00000EC0:
     lwz r0, 0x44(r28)
     cmpw r17, r0
-    blt lbl_fn_80097E80_00000E30
+    blt lbl_cursor_applyAnimationTrack_00000E30
     lwz r0, 0x3c0(r24)
     cmpwi r0, 0x0
-    blt lbl_fn_80097E80_00001140
+    blt lbl_cursor_applyAnimationTrack_00001140
     mr r3, r31
     bl atn_LoadHandle_getName
     stw r21, 0x64(r1)
@@ -1245,34 +1245,34 @@ lbl_fn_80097E80_00000EC0:
     bl actor_dispatchMessage
     addi r4, r1, 0x64
     addi r3, r1, 0x58
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     addi r3, r24, 0x3c8
     bl strlen
     lwz r0, 0x58(r1)
     mr r5, r3
     addi r4, r24, 0x3c8
     srwi. r16, r0, 31
-    bne lbl_fn_80097E80_00000F58
+    bne lbl_cursor_applyAnimationTrack_00000F58
     addi r3, r1, 0x59
-    b lbl_fn_80097E80_00000F5C
-lbl_fn_80097E80_00000F58:
+    b lbl_cursor_applyAnimationTrack_00000F5C
+lbl_cursor_applyAnimationTrack_00000F58:
     lwz r3, 0x60(r1)
-lbl_fn_80097E80_00000F5C:
+lbl_cursor_applyAnimationTrack_00000F5C:
     bl strncmp
     cmpwi r16, 0x0
     mr r16, r3
-    beq lbl_fn_80097E80_00000F74
+    beq lbl_cursor_applyAnimationTrack_00000F74
     lwz r3, 0x60(r1)
     bl dtor_80084684
-lbl_fn_80097E80_00000F74:
+lbl_cursor_applyAnimationTrack_00000F74:
     lwz r0, 0x64(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_80097E80_00000F88
+    beq lbl_cursor_applyAnimationTrack_00000F88
     lwz r3, 0x6c(r1)
     bl dtor_80084684
-lbl_fn_80097E80_00000F88:
+lbl_cursor_applyAnimationTrack_00000F88:
     cmpwi r16, 0x0
-    beq lbl_fn_80097E80_00001140
+    beq lbl_cursor_applyAnimationTrack_00001140
     lwz r0, 0x3c0(r24)
     lfs f0, 0x3c4(r24)
     mulli r0, r0, 0x2c
@@ -1280,13 +1280,13 @@ lbl_fn_80097E80_00000F88:
     lfs f1, 0x8(r3)
     fmuls f0, f1, f0
     stfs f0, 0x8(r3)
-    b lbl_fn_80097E80_00001140
-lbl_fn_80097E80_00000FB0:
+    b lbl_cursor_applyAnimationTrack_00001140
+lbl_cursor_applyAnimationTrack_00000FB0:
     lfs f0, 0x20(r15)
     lwz r0, lbl_8087EF18
     fcmpo cr0, f0, f28
     add r18, r0, r23
-    ble lbl_fn_80097E80_00001060
+    ble lbl_cursor_applyAnimationTrack_00001060
     lwz r0, 0x21c(r24)
     mr r3, r18
     li r4, 0x0
@@ -1294,19 +1294,19 @@ lbl_fn_80097E80_00000FB0:
     bl memset
     li r17, 0x0
     li r16, 0x0
-    b lbl_fn_80097E80_00001054
-lbl_fn_80097E80_00000FE4:
+    b lbl_cursor_applyAnimationTrack_00001054
+lbl_cursor_applyAnimationTrack_00000FE4:
     lwz r3, 0x48(r28)
     cmpwi r27, 0x0
     lwzx r3, r3, r16
-    beq lbl_fn_80097E80_00001004
+    beq lbl_cursor_applyAnimationTrack_00001004
     lwz r0, 0x18(r3)
     slwi r0, r0, 2
     lwzx r0, r27, r0
-    b lbl_fn_80097E80_00001008
-lbl_fn_80097E80_00001004:
+    b lbl_cursor_applyAnimationTrack_00001008
+lbl_cursor_applyAnimationTrack_00001004:
     lwz r0, 0x18(r3)
-lbl_fn_80097E80_00001008:
+lbl_cursor_applyAnimationTrack_00001008:
     lwz r4, 0x0(r15)
     slwi r3, r0, 1
     lwz r5, 0x358(r24)
@@ -1315,7 +1315,7 @@ lbl_fn_80097E80_00001008:
     lwz r4, 0x8(r4)
     lhax r5, r4, r3
     cmpwi r5, 0x0
-    blt lbl_fn_80097E80_0000104C
+    blt lbl_cursor_applyAnimationTrack_0000104C
     mulli r4, r0, 0x2c
     lwz r6, 0x218(r24)
     lfs f1, 0x8(r15)
@@ -1324,17 +1324,17 @@ lbl_fn_80097E80_00001008:
     add r4, r18, r4
     add r6, r6, r0
     bl atn_Anim_evalNode
-lbl_fn_80097E80_0000104C:
+lbl_cursor_applyAnimationTrack_0000104C:
     addi r16, r16, 0x4
     addi r17, r17, 0x1
-lbl_fn_80097E80_00001054:
+lbl_cursor_applyAnimationTrack_00001054:
     lwz r0, 0x44(r28)
     cmpw r17, r0
-    blt lbl_fn_80097E80_00000FE4
-lbl_fn_80097E80_00001060:
+    blt lbl_cursor_applyAnimationTrack_00000FE4
+lbl_cursor_applyAnimationTrack_00001060:
     lwz r0, 0x3c0(r24)
     cmpwi r0, 0x0
-    blt lbl_fn_80097E80_00001140
+    blt lbl_cursor_applyAnimationTrack_00001140
     mr r3, r31
     bl atn_LoadHandle_getName
     stw r22, 0x4c(r1)
@@ -1357,34 +1357,34 @@ lbl_fn_80097E80_00001060:
     bl actor_dispatchMessage
     mr r4, r14
     addi r3, r1, 0x40
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     addi r3, r24, 0x3c8
     bl strlen
     lwz r0, 0x40(r1)
     mr r5, r3
     addi r4, r24, 0x3c8
     srwi. r16, r0, 31
-    bne lbl_fn_80097E80_000010EC
+    bne lbl_cursor_applyAnimationTrack_000010EC
     addi r3, r1, 0x41
-    b lbl_fn_80097E80_000010F0
-lbl_fn_80097E80_000010EC:
+    b lbl_cursor_applyAnimationTrack_000010F0
+lbl_cursor_applyAnimationTrack_000010EC:
     lwz r3, 0x48(r1)
-lbl_fn_80097E80_000010F0:
+lbl_cursor_applyAnimationTrack_000010F0:
     bl strncmp
     cmpwi r16, 0x0
     mr r16, r3
-    beq lbl_fn_80097E80_00001108
+    beq lbl_cursor_applyAnimationTrack_00001108
     lwz r3, 0x48(r1)
     bl dtor_80084684
-lbl_fn_80097E80_00001108:
+lbl_cursor_applyAnimationTrack_00001108:
     lwz r0, 0x4c(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_80097E80_0000111C
+    beq lbl_cursor_applyAnimationTrack_0000111C
     lwz r3, 0x54(r1)
     bl dtor_80084684
-lbl_fn_80097E80_0000111C:
+lbl_cursor_applyAnimationTrack_0000111C:
     cmpwi r16, 0x0
-    beq lbl_fn_80097E80_00001140
+    beq lbl_cursor_applyAnimationTrack_00001140
     lwz r0, 0x3c0(r24)
     lfs f0, 0x3c4(r24)
     mulli r0, r0, 0x2c
@@ -1392,110 +1392,110 @@ lbl_fn_80097E80_0000111C:
     lfs f1, 0x8(r3)
     fmuls f0, f1, f0
     stfs f0, 0x8(r3)
-lbl_fn_80097E80_00001140:
+lbl_cursor_applyAnimationTrack_00001140:
     cmpwi r25, 0x0
-    beq lbl_fn_80097E80_00001170
+    beq lbl_cursor_applyAnimationTrack_00001170
     lfs f1, 0xc(r15)
     lfs f0, 0x8(r15)
     fmadds f0, f1, f29, f0
     stfs f0, 0x8(r15)
-    b lbl_fn_80097E80_00001170
-lbl_fn_80097E80_0000115C:
+    b lbl_cursor_applyAnimationTrack_00001170
+lbl_cursor_applyAnimationTrack_0000115C:
     mr r3, r31
     bl atn_Anim_getDuration
     lfs f0, 0x8(r15)
     fsubs f0, f0, f1
     stfs f0, 0x8(r15)
-lbl_fn_80097E80_00001170:
+lbl_cursor_applyAnimationTrack_00001170:
     lbz r0, 0x18(r15)
     cmpwi r0, 0x0
-    beq lbl_fn_80097E80_000011B8
+    beq lbl_cursor_applyAnimationTrack_000011B8
     mr r3, r31
     bl atn_Anim_getDuration
     lfs f0, 0x8(r15)
     fcmpo cr0, f0, f1
     cror eq, gt, eq
-    bne lbl_fn_80097E80_000011B8
+    bne lbl_cursor_applyAnimationTrack_000011B8
     lfs f0, 0xc(r15)
     fcmpo cr0, f0, f28
-    bgt lbl_fn_80097E80_0000115C
-    b lbl_fn_80097E80_000011B8
-lbl_fn_80097E80_000011A4:
+    bgt lbl_cursor_applyAnimationTrack_0000115C
+    b lbl_cursor_applyAnimationTrack_000011B8
+lbl_cursor_applyAnimationTrack_000011A4:
     mr r3, r31
     bl atn_Anim_getDuration
     lfs f0, 0x8(r15)
     fadds f0, f0, f1
     stfs f0, 0x8(r15)
-lbl_fn_80097E80_000011B8:
+lbl_cursor_applyAnimationTrack_000011B8:
     lbz r0, 0x18(r15)
     cmpwi r0, 0x0
-    beq lbl_fn_80097E80_000011DC
+    beq lbl_cursor_applyAnimationTrack_000011DC
     lfs f0, 0x8(r15)
     fcmpo cr0, f0, f28
-    bge lbl_fn_80097E80_000011DC
+    bge lbl_cursor_applyAnimationTrack_000011DC
     lfs f0, 0xc(r15)
     fcmpo cr0, f0, f28
-    blt lbl_fn_80097E80_000011A4
-lbl_fn_80097E80_000011DC:
+    blt lbl_cursor_applyAnimationTrack_000011A4
+lbl_cursor_applyAnimationTrack_000011DC:
     addi r15, r15, 0x30
     addi r23, r23, 0x2c00
     addi r26, r26, 0x1
-lbl_fn_80097E80_000011E8:
+lbl_cursor_applyAnimationTrack_000011E8:
     lwz r0, 0x34c(r24)
     cmpw r26, r0
-    blt lbl_fn_80097E80_00000DB0
+    blt lbl_cursor_applyAnimationTrack_00000DB0
     cmpwi r0, 0x1
-    beq lbl_fn_80097E80_000012AC
+    beq lbl_cursor_applyAnimationTrack_000012AC
     lfs f29, lbl_80880BF8
     mr r15, r24
     li r16, 0x1
     li r17, 0x0
     li r14, 0x0
-    b lbl_fn_80097E80_000012A0
-lbl_fn_80097E80_00001214:
+    b lbl_cursor_applyAnimationTrack_000012A0
+lbl_cursor_applyAnimationTrack_00001214:
     lwz r0, 0x4(r30)
     cmpwi r0, 0x0
-    beq lbl_fn_80097E80_00001290
+    beq lbl_cursor_applyAnimationTrack_00001290
     lfs f1, 0x20(r30)
     fcmpo cr0, f1, f29
     cror eq, lt, eq
-    beq lbl_fn_80097E80_00001290
+    beq lbl_cursor_applyAnimationTrack_00001290
     lwz r5, lbl_8087EF18
     cmpwi r16, 0x0
     add r6, r5, r14
-    beq lbl_fn_80097E80_0000125C
+    beq lbl_cursor_applyAnimationTrack_0000125C
     lwz r0, 0x21c(r24)
     mr r3, r29
     mr r4, r6
     mulli r5, r0, 0x2c
     bl memcpy
     li r16, 0x0
-    b lbl_fn_80097E80_00001290
-lbl_fn_80097E80_0000125C:
+    b lbl_cursor_applyAnimationTrack_00001290
+lbl_cursor_applyAnimationTrack_0000125C:
     lfs f0, 0x21c(r15)
     cmpwi r17, 0x1
     fadds f0, f1, f0
     fdivs f1, f1, f0
-    bne lbl_fn_80097E80_00001280
+    bne lbl_cursor_applyAnimationTrack_00001280
     lwz r4, 0x21c(r24)
     mr r3, r29
     bl fn_80098948
-    b lbl_fn_80097E80_00001290
-lbl_fn_80097E80_00001280:
+    b lbl_cursor_applyAnimationTrack_00001290
+lbl_cursor_applyAnimationTrack_00001280:
     lwz r4, 0x21c(r24)
     mr r3, r29
     mr r5, r29
     bl fn_80098948
-lbl_fn_80097E80_00001290:
+lbl_cursor_applyAnimationTrack_00001290:
     addi r30, r30, 0x30
     addi r14, r14, 0x2c00
     addi r15, r15, 0x30
     addi r17, r17, 0x1
-lbl_fn_80097E80_000012A0:
+lbl_cursor_applyAnimationTrack_000012A0:
     lwz r0, 0x34c(r24)
     cmpw r17, r0
-    blt lbl_fn_80097E80_00001214
-lbl_fn_80097E80_000012AC:
+    blt lbl_cursor_applyAnimationTrack_00001214
+lbl_cursor_applyAnimationTrack_000012AC:
     lfs f1, 0x23c(r24)
     lfs f2, lbl_80880C00
     lfs f0, lbl_80880BFC
@@ -1503,22 +1503,22 @@ lbl_fn_80097E80_000012AC:
     fabs f2, f2
     frsp f2, f2
     fcmpo cr0, f2, f0
-    bge lbl_fn_80097E80_000012EC
+    bge lbl_cursor_applyAnimationTrack_000012EC
     cmpwi r0, 0x1
-    beq lbl_fn_80097E80_00001300
+    beq lbl_cursor_applyAnimationTrack_00001300
     lwz r0, 0x21c(r24)
     mr r4, r29
     lwz r3, 0x220(r24)
     mulli r5, r0, 0x2c
     bl memcpy
-    b lbl_fn_80097E80_00001300
-lbl_fn_80097E80_000012EC:
+    b lbl_cursor_applyAnimationTrack_00001300
+lbl_cursor_applyAnimationTrack_000012EC:
     lwz r3, 0x220(r24)
     mr r6, r29
     lwz r4, 0x21c(r24)
     mr r5, r3
     bl fn_80098948
-lbl_fn_80097E80_00001300:
+lbl_cursor_applyAnimationTrack_00001300:
     mr r3, r24
     mr r4, r25
     bl fn_80098DD8
@@ -1527,7 +1527,7 @@ lbl_fn_80097E80_00001300:
     bl fn_800991D0
     lwz r0, 0x35c(r24)
     cmpwi r0, 0x0
-    bne lbl_fn_80097E80_00001344
+    bne lbl_cursor_applyAnimationTrack_00001344
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x70(r1)
@@ -1535,8 +1535,8 @@ lbl_fn_80097E80_00001300:
     lwz r0, 0x8(r5)
     stw r3, 0x74(r1)
     stw r0, 0x78(r1)
-    b lbl_fn_80097E80_00001360
-lbl_fn_80097E80_00001344:
+    b lbl_cursor_applyAnimationTrack_00001360
+lbl_cursor_applyAnimationTrack_00001344:
     lis r5, lbl_80778864@ha
     lwzu r4, lbl_80778864@l(r5)
     stw r4, 0x70(r1)
@@ -1544,7 +1544,7 @@ lbl_fn_80097E80_00001344:
     lwz r0, 0x8(r5)
     stw r3, 0x74(r1)
     stw r0, 0x78(r1)
-lbl_fn_80097E80_00001360:
+lbl_cursor_applyAnimationTrack_00001360:
     lwz r5, 0x70(r1)
     addi r3, r1, 0x34
     lwz r4, 0x74(r1)
@@ -1554,13 +1554,13 @@ lbl_fn_80097E80_00001360:
     stw r0, 0x3c(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_80097E80_00001488
+    beq lbl_cursor_applyAnimationTrack_00001488
     lwz r0, 0x35c(r24)
     lwz r3, 0x16c(r24)
     cmpwi r0, 0x0
     lwz r16, 0x220(r24)
     lwz r15, 0x44(r3)
-    bne lbl_fn_80097E80_0000146C
+    bne lbl_cursor_applyAnimationTrack_0000146C
     lis r4, lbl_80775B60@ha
     li r0, 0x0
     addi r4, r4, lbl_80775B60@l
@@ -1572,7 +1572,7 @@ lbl_fn_80097E80_00001360:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x2c(r1)
     mr r14, r3
@@ -1581,7 +1581,7 @@ lbl_fn_80097E80_00001360:
     stw r0, 0x24(r1)
     bl mem_free
     cmpwi r3, 0x0
-    beq lbl_fn_80097E80_00001410
+    beq lbl_cursor_applyAnimationTrack_00001410
     li r0, 0x1
     stw r0, 0x4(r3)
     lis r4, lbl_80775B98@ha
@@ -1589,13 +1589,13 @@ lbl_fn_80097E80_00001360:
     addi r4, r4, lbl_80775B98@l
     stw r4, 0x0(r3)
     stw r14, 0xc(r3)
-lbl_fn_80097E80_00001410:
+lbl_cursor_applyAnimationTrack_00001410:
     li r0, 0x0
     stw r3, 0x30(r1)
     stw r0, 0x20(r1)
-    b lbl_fn_80097E80_00001424
+    b lbl_cursor_applyAnimationTrack_00001424
     bl mem_getAllocSize
-lbl_fn_80097E80_00001424:
+lbl_cursor_applyAnimationTrack_00001424:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x2c(r1)
     addi r4, r4, lbl_80775BC8@l
@@ -1604,17 +1604,17 @@ lbl_fn_80097E80_00001424:
     addi r3, r1, 0x28
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x28(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x28
-    beq lbl_fn_80097E80_0000146C
+    beq lbl_cursor_applyAnimationTrack_0000146C
     addic. r3, r3, 0x4
-    beq lbl_fn_80097E80_0000146C
-    beq lbl_fn_80097E80_0000146C
+    beq lbl_cursor_applyAnimationTrack_0000146C
+    beq lbl_cursor_applyAnimationTrack_0000146C
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80097E80_0000146C
+    beq lbl_cursor_applyAnimationTrack_0000146C
     bl msl_releaseRefCount
-lbl_fn_80097E80_0000146C:
+lbl_cursor_applyAnimationTrack_0000146C:
     lwz r6, 0x35c(r24)
     mr r4, r16
     mr r5, r15
@@ -1622,9 +1622,9 @@ lbl_fn_80097E80_0000146C:
     lwz r12, 0x4(r6)
     mtctr r12
     bctrl
-lbl_fn_80097E80_00001488:
+lbl_cursor_applyAnimationTrack_00001488:
     li r3, 0x1
-lbl_fn_80097E80_0000148C:
+lbl_cursor_applyAnimationTrack_0000148C:
     addi r11, r1, 0xd0
     psq_l f31, 0x108(r1), 0, 0
     lfd f31, 0x100(r1)

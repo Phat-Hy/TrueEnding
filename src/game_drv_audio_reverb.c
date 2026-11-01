@@ -12,10 +12,10 @@ extern void vec3_copy(void);
 extern void vec3_mag(void);
 extern void fn_8000D3A8(void);
 extern void scene_traverseNode(void);
-extern void fn_8000DD0C(void);
+extern void scene_getRootNode(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void vec3_sub(void);
 extern void vec3_add(void);
 extern void actor_validateIndex(void);
@@ -39,7 +39,7 @@ extern void atn_Matrix_copy(void);
 extern void atn_Matrix_concat(void);
 extern void fn_80097A20(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void fn_800A03E4(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
@@ -158,12 +158,12 @@ void fn_805BAC18(void);
 void fn_805BB510(void);
 void fn_805BB548(void);
 void fn_805BB55C(void);
-void fn_805BB568(void);
-void fn_805BB570(void);
+u32 fn_805BB568(const void *p);
+u32 fn_805BB570(const void *p);
 void fn_805BB578(void);
 void fn_805BB584(void);
-void fn_805BB590(void);
-void fn_805BB598(void);
+u32 fn_805BB590(void);
+void fn_805BB598(void *p, u32 val);
 void fn_805BB5A0(void);
 void fn_805BB658(void);
 void fn_805BBD80(void);
@@ -465,10 +465,10 @@ lbl_fn_805BAC18_00000420:
     bl fn_80147A08
     addi r3, r1, 0x108
     addi r4, r1, 0x1b8
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0xfc
     addi r4, r1, 0x1b8
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r29, 0x8c
     bl fn_80113CCC
     mr r28, r3
@@ -519,7 +519,7 @@ lbl_fn_805BAC18_00000420:
     bl fn_80147A08
     addi r3, r1, 0x68
     addi r4, r1, 0x158
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x38
     addi r4, r1, 0xf0
     addi r5, r1, 0xfc
@@ -579,11 +579,11 @@ lbl_fn_805BAC18_00000420:
     addi r3, r1, 0x188
     bl fn_80372754
     lwz r3, 0x50(r29)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     addi r4, r1, 0x188
     bl fn_80316E38
     lwz r3, 0x50(r29)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     lwz r5, 0x5b0(r29)
     li r4, 0x0
     lfs f1, lbl_80888454
@@ -594,19 +594,19 @@ lbl_fn_805BAC18_00000420:
     li r8, 0x1
     bl atn_Anim_setLayerAnimation
     lwz r3, 0x50(r29)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     lfs f1, 0x14(r31)
     li r4, 0x0
     bl fn_80357F38
     lwz r3, 0x50(r29)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     li r4, 0x1
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     addi r3, r1, 0x114
     li r4, 0x0
     bl fn_80317034
     lwz r3, 0x50(r29)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     addi r4, r1, 0x114
     bl scene_traverseNode
     addi r3, r1, 0x114
@@ -1025,18 +1025,14 @@ asm void fn_805BB55C(void)
     blr
 }
 
-asm void fn_805BB568(void)
+u32 fn_805BB568(const void *p)
 {
-    nofralloc
-    lwz r3, 0x1c(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x1c);
 }
 
-asm void fn_805BB570(void)
+u32 fn_805BB570(const void *p)
 {
-    nofralloc
-    lwz r3, 0x8(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x8);
 }
 
 asm void fn_805BB578(void)
@@ -1055,18 +1051,14 @@ asm void fn_805BB584(void)
     blr
 }
 
-asm void fn_805BB590(void)
+u32 fn_805BB590(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F580
-    blr
+    return lbl_8087F580;
 }
 
-asm void fn_805BB598(void)
+void fn_805BB598(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x563c(r3)
-    blr
+    *(u32 *)((char *)p + 0x563c) = val;
 }
 
 asm void fn_805BB5A0(void)

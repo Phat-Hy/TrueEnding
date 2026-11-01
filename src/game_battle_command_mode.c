@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void fn_8004D314(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
-extern void fn_800588FC(void);
+extern void mission_updateObjectiveTarget(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
@@ -18,7 +18,7 @@ extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
@@ -39,7 +39,7 @@ extern void task_createWorker(void);
 extern void task_destroyWorker(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
-extern void fn_803ED5D0(void);
+extern void barrier_bindFieldAnimation(void);
 extern void fn_804047A4(void);
 extern void fn_80404864(void);
 extern void fn_804048CC(void);
@@ -1462,7 +1462,7 @@ lbl_fn_80406560_000012B8:
     cmpwi r0, 0x0
     beq lbl_fn_80406560_000012E4
     addi r3, r4, 0x4
-    bl fn_8008CD60
+    bl minimap_renderOverlay
 lbl_fn_80406560_000012E4:
     addi r30, r30, 0x1
     addi r31, r31, 0x43c
@@ -1944,7 +1944,7 @@ lbl_fn_80406ACC_00001944:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_80406ACC_00001980:
     lwz r0, 0x940(r31)
     cmpwi r0, 0x0
@@ -2067,7 +2067,7 @@ lbl_fn_80406ACC_00001B18:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_80406ACC_00001B54:
     mr r3, r31
     bl fn_80407E8C
@@ -2092,7 +2092,7 @@ lbl_fn_80406ACC_00001B78:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
 lbl_fn_80406ACC_00001BB0:
     lwz r0, 0xb4(r1)
     psq_l f31, 0xa8(r1), 0, 0

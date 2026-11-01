@@ -7,7 +7,7 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
-extern void fn_800588FC(void);
+extern void mission_updateObjectiveTarget(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
@@ -18,7 +18,7 @@ extern void node_createNamedChild(void);
 extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C16B4(void);
+extern void skeleton_getGlobalManager(void);
 extern void fn_800C16C0(void);
 extern void fn_800C1814(void);
 extern void fn_800C1990(void);
@@ -29,25 +29,25 @@ extern void morph_updateMesh(void);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
-extern void fn_8011FE3C(void);
+extern void skill_findNodeByTag(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_unload(void);
-extern void fn_80239D58(void);
+extern void res_Shader_findParameter(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void fn_80376730(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
-extern void fn_803ED5D0(void);
+extern void barrier_bindFieldAnimation(void);
 extern void fn_803EDB18(void);
 extern void fn_8041D180(void);
 extern void fn_8041D198(void);
@@ -355,7 +355,7 @@ lbl_fn_80422084_000002C4:
     mr r4, r31
     li r5, 0x2
     lwz r3, lbl_8087F3C0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_80422084_000002F4
     lwz r3, lbl_8087F3C0
@@ -367,7 +367,7 @@ lbl_fn_80422084_000002F4:
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x4
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_80422084_00000320
     lwz r3, lbl_8087F3C0
@@ -386,7 +386,7 @@ lbl_fn_80422084_00000334:
     mr r4, r31
     li r5, 0x2
     lwz r3, lbl_8087F3C0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     bne lbl_fn_80422084_000003B8
     lwz r5, lbl_8087F3C0
@@ -419,7 +419,7 @@ lbl_fn_80422084_000003B8:
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x4
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_80422084_000003E4
     lwz r3, lbl_8087F3C0
@@ -465,7 +465,7 @@ lbl_fn_80422084_00000458:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_80422084_00000494
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     bne lbl_fn_80422084_00000494
     lwz r3, lbl_8087F9C0
@@ -516,7 +516,7 @@ lbl_fn_80422084_00000524:
     mr r4, r31
     li r5, 0x2
     lwz r3, lbl_8087F3C0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_80422084_00000554
     lwz r3, lbl_8087F3C0
@@ -528,7 +528,7 @@ lbl_fn_80422084_00000554:
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x4
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     bne lbl_fn_80422084_000005D4
     lwz r5, lbl_8087F3C0
@@ -843,7 +843,7 @@ asm void fn_804227A4(void)
     addi r4, r4, lbl_8078E2A8@l
     stw r4, 0x0(r3)
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     li r4, 0x0
     stw r4, 0x74(r3)
     lwz r0, 0x70(r3)
@@ -988,7 +988,7 @@ asm void fn_804229A8(void)
     stw r31, 0x4c(r1)
     mr r31, r3
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     addic. r0, r31, 0xf8
     li r4, 0x0
     stw r0, 0x74(r3)
@@ -1001,7 +1001,7 @@ lbl_fn_804229A8_00000B8C:
 lbl_fn_804229A8_00000B90:
     stw r4, 0x70(r3)
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     li r0, -0x1
     stw r0, 0xc8(r3)
     li r3, 0x0
@@ -1089,7 +1089,7 @@ lbl_fn_804229A8_00000CB8:
 lbl_fn_804229A8_00000CC8:
     lwz r3, lbl_8087F890
     lwz r4, 0x24(r4)
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     stw r3, 0x148(r31)
     b lbl_fn_804229A8_00000D00
 lbl_fn_804229A8_00000CDC:
@@ -1101,7 +1101,7 @@ lbl_fn_804229A8_00000CDC:
 lbl_fn_804229A8_00000CF0:
     lwz r4, 0x24(r4)
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     stw r3, 0x148(r31)
 lbl_fn_804229A8_00000D00:
     lwz r7, 0xf4(r31)
@@ -1898,7 +1898,7 @@ lbl_fn_8042357C_0000178C:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     lfs f0, lbl_80886658
     li r0, 0x0
     li r3, 0x1
@@ -1998,7 +1998,7 @@ lbl_fn_80423684_000018F8:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     lwz r0, 0x54(r31)
     cmpwi r0, 0x3
     beq lbl_fn_80423684_00001948
@@ -2020,7 +2020,7 @@ lbl_fn_80423684_00001948:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_80423684_00001984:
     lfs f31, 0x6f8(r31)
     addi r3, r31, 0x4c4
@@ -2062,7 +2062,7 @@ lbl_fn_80423684_000019E8:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_80423684_00001A24:
     lfs f7, 0x6f8(r31)
     lfs f0, lbl_80886658

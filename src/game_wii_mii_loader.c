@@ -12,7 +12,7 @@ extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void fn_80069BF4(void);
-extern void fn_8006B174(void);
+extern void boss_decodePhaseBitfield(void);
 extern void fn_8006B2D8(void);
 extern void fn_8006D008(void);
 extern void mem_alloc(void);
@@ -20,7 +20,7 @@ extern void area_updateZoneState(void);
 extern void fn_8008B130(void);
 extern void fn_80091C10(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80092F1C(void);
+extern void target_pushPointToHistory(void);
 extern void fn_8009373C(void);
 extern void fn_80093D98(void);
 extern void fn_80093EEC(void);
@@ -209,7 +209,7 @@ lbl_fn_80564344_00000180:
     mr r27, r3
     addi r3, r1, 0xa4
     addi r4, r1, 0xc8
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     addi r3, r1, 0x98
     addi r4, r1, 0xa4
     bl fn_8006B2D8
@@ -345,7 +345,7 @@ lbl_fn_80564344_00000390:
     beq lbl_fn_80564344_0000072C
     addi r3, r1, 0x8c
     addi r4, r1, 0xbc
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     addi r3, r1, 0x80
     addi r4, r1, 0x8c
     bl fn_8006B2D8
@@ -722,7 +722,7 @@ lbl_fn_80564344_00000890:
     mr r4, r20
     addi r3, r22, 0x24
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_80564344_00000940
 lbl_fn_80564344_000008B0:
     cmpwi r27, 0x0
@@ -746,7 +746,7 @@ lbl_fn_80564344_000008DC:
     mr r4, r21
     mr r5, r20
     addi r3, r22, 0x24
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_80564344_00000940
 lbl_fn_80564344_000008FC:
     mr r3, r20
@@ -899,7 +899,7 @@ lbl_fn_80564344_00000A6C:
     bl actor_dispatchMessage
     mr r4, r23
     addi r3, r1, 0x74
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     addi r3, r1, 0x68
     addi r4, r1, 0x74
     bl fn_8006B2D8
@@ -1455,7 +1455,7 @@ lbl_fn_8056556C_00001264:
     bl actor_dispatchMessage
     mr r4, r29
     addi r3, r1, 0x10
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     addi r3, r1, 0x34
     addi r4, r1, 0x10
     li r5, 0x0

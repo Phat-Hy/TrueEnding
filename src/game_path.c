@@ -9,7 +9,7 @@ extern void _savegpr_20(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void fn_8004CB70(void);
 extern void fn_8004CBB0(void);
 extern void fn_800523A0(void);
@@ -20,9 +20,9 @@ extern void fn_800551BC(void);
 extern void fn_80055810(void);
 extern void fn_80055C40(void);
 extern void mission_updateStub(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void fn_80057A78(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void fn_8006471C(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
@@ -49,7 +49,7 @@ extern u32 lbl_80880970;
 /* Function declarations */
 void fn_8005691C(void);
 void fn_80056AE8(void);
-void fn_80056DB8(void);
+void path_Object_constructor(void);
 void atn_ColliBase_destructor(void);
 void fn_80056EB0(void);
 void atn_ColliSphere_testRay(void);
@@ -380,7 +380,7 @@ lbl_fn_80056AE8_00000474:
     blr
 }
 
-asm void fn_80056DB8(void)
+asm void path_Object_constructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -408,10 +408,10 @@ asm void fn_80056DB8(void)
     bl memset
     lwz r3, lbl_8087EE98
     cmpwi r3, 0x0
-    beq lbl_fn_80056DB8_0000050C
+    beq lbl_path_Object_constructor_0000050C
     mr r4, r31
     bl fn_8004CB70
-lbl_fn_80056DB8_0000050C:
+lbl_path_Object_constructor_0000050C:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -607,7 +607,7 @@ asm void atn_ColliSphere_testBox(void)
     lfs f1, 0x48(r6)
     subi r5, r5, 0x100
     lfs f2, lbl_80880960
-    b fn_80063D3C
+    b magic_castSpellCircle
 }
 
 asm void atn_ColliSphere_getAABB(void)
@@ -1157,57 +1157,57 @@ asm void fn_800577D8(void)
     fneg f1, f1
     fneg f2, f2
     fneg f3, f0
-    bl fn_80057A68
+    bl vec3_initValues
     lfs f1, 0x3c(r29)
     addi r3, r1, 0x14
     lfs f0, 0x44(r29)
     fneg f1, f1
     lfs f2, 0x40(r29)
     fneg f3, f0
-    bl fn_80057A68
+    bl vec3_initValues
     lfs f1, 0x40(r29)
     addi r3, r1, 0x20
     lfs f0, 0x44(r29)
     fneg f2, f1
     lfs f1, 0x3c(r29)
     fneg f3, f0
-    bl fn_80057A68
+    bl vec3_initValues
     lfs f0, 0x44(r29)
     addi r3, r1, 0x2c
     lfs f1, 0x3c(r29)
     fneg f3, f0
     lfs f2, 0x40(r29)
-    bl fn_80057A68
+    bl vec3_initValues
     lfs f1, 0x3c(r29)
     addi r3, r1, 0x38
     lfs f0, 0x40(r29)
     fneg f1, f1
     lfs f3, 0x44(r29)
     fneg f2, f0
-    bl fn_80057A68
+    bl vec3_initValues
     lfs f0, 0x3c(r29)
     addi r3, r1, 0x44
     lfs f2, 0x40(r29)
     fneg f1, f0
     lfs f3, 0x44(r29)
-    bl fn_80057A68
+    bl vec3_initValues
     lfs f0, 0x40(r29)
     addi r3, r1, 0x50
     lfs f1, 0x3c(r29)
     fneg f2, f0
     lfs f3, 0x44(r29)
-    bl fn_80057A68
+    bl vec3_initValues
     lfs f1, 0x3c(r29)
     addi r3, r1, 0x5c
     lfs f2, 0x40(r29)
     lfs f3, 0x44(r29)
-    bl fn_80057A68
+    bl vec3_initValues
     addi r31, r1, 0x8
     li r30, 0x0
 lbl_fn_800577D8_00000FF0:
     mr r3, r31
     addi r4, r29, 0x48
-    bl fn_80011410
+    bl mtx_multVec
     addi r30, r30, 0x1
     addi r31, r31, 0xc
     cmpwi r30, 0x8

@@ -15,7 +15,7 @@ extern void fn_8004B0E4(void);
 extern void fn_8004B1EC(void);
 extern void talk_parseQuotedString(void);
 extern void skill_calculateDamage(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
@@ -46,8 +46,8 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void bloom_processPasses(void);
 extern void str_skipWhitespace(void);
-extern void fn_800EC654(void);
-extern void fn_800EDFE8(void);
+extern void cam_evalControllerSpline(void);
+extern void cam_evalLookAtMatrix(void);
 extern void fn_80205BE8(void);
 extern void fn_80214ED4(void);
 extern void fn_80214F38(void);
@@ -1941,7 +1941,7 @@ asm void fn_803612F4(void)
     beq lbl_fn_803612F4_00001758
     li r5, -0x7f80
 lbl_fn_803612F4_00001758:
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     lwz r5, 0x50(r31)
     addi r3, r1, 0x8
     lwz r4, lbl_8087EFB4
@@ -2221,7 +2221,7 @@ lbl_fn_803614E8_00001B38:
 lbl_fn_803614E8_00001B54:
     addi r3, r1, 0xfc
     addi r4, r1, 0x138
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     lis r3, __files@ha
     lis r4, lbl_8074B6B8@ha
     addi r30, r1, 0x60
@@ -2434,7 +2434,7 @@ lbl_fn_803614E8_00001E48:
 lbl_fn_803614E8_00001E64:
     addi r3, r1, 0x60
     addi r4, r1, 0x138
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     lbz r4, 0x8c(r1)
     li r3, 0x0
     cmpwi r4, 0x0

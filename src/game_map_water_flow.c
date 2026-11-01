@@ -20,12 +20,12 @@ extern void fn_80107A68(void);
 extern void fn_80107A78(void);
 extern void fn_80107FD8(void);
 extern void fn_80108080(void);
-extern void fn_80109828(void);
+extern void hurtbox_dispatchHitEvent(void);
 extern void fn_8012476C(void);
 extern void fn_8013310C(void);
 extern void fn_80133130(void);
 extern void actor_testBitFlag(void);
-extern void fn_801446F0(void);
+extern void quest_resetObjectiveBounds(void);
 extern void inventory_unequipItem(void);
 extern void fn_80154344(void);
 extern void fn_80154654(void);
@@ -97,7 +97,7 @@ extern u32 lbl_80881F9C;
 extern u32 lbl_80881FA0;
 
 /* Function declarations */
-void fn_8018FF64(void);
+u32 fn_8018FF64(void);
 void fn_8018FF6C(void);
 void fn_80190150(void);
 void fn_80190270(void);
@@ -108,7 +108,7 @@ void fn_80190728(void);
 void fn_80190844(void);
 void fn_801908F0(void);
 void fn_80190A2C(void);
-void fn_80190AB0(void);
+u32 fn_80190AB0(void);
 void fn_80190AB8(void);
 void fn_80190D34(void);
 void fn_80190D64(void);
@@ -120,11 +120,9 @@ void fn_801915B8(void);
 void fn_8019163C(void);
 void fn_80191828(void);
 
-asm void fn_8018FF64(void)
+u32 fn_8018FF64(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_8018FF6C(void)
@@ -197,7 +195,7 @@ lbl_fn_8018FF6C_000000EC:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x10
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lwz r3, 0x4(r31)
     li r0, 0x1
     lfs f0, lbl_80881F7C
@@ -950,11 +948,9 @@ lbl_fn_80190A2C_00000B30:
     blr
 }
 
-asm void fn_80190AB0(void)
+u32 fn_80190AB0(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_80190AB8(void)
@@ -1714,7 +1710,7 @@ lbl_fn_80191170_000015FC:
     stfs f0, 0xc(r30)
 lbl_fn_80191170_00001600:
     lwz r3, 0x4(r30)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_80191170_00001620

@@ -28,7 +28,7 @@ extern void save_formatSlotTitle(void);
 extern void fn_801F4D80(void);
 extern void saveSlot_readSummary(void);
 extern void save_verifyBlockCrc(void);
-extern void fn_801F6E78(void);
+extern void save_calculateBlockCrc(void);
 extern void fn_801FEC74(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
@@ -1103,7 +1103,7 @@ lbl_fn_8011AD38_00000EB0:
     lwz r3, 0xf4(r31)
     addi r4, r27, 0x360
     addi r5, r1, 0x8
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     lwz r0, 0x13c(r28)
     lwz r4, 0x74(r31)
     cmpwi r0, 0x0

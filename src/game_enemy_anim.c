@@ -36,8 +36,8 @@ void fn_8012CE4C(void);
 void fn_8012D180(void);
 void fn_8012D628(void);
 void fn_8012D714(void);
-void fn_8012D8B8(void);
-void fn_8012DB04(void);
+void enemy_updateAnimTimer(void);
+void enemy_evalAnimTrack(void);
 
 asm void fn_8012C6D4(void)
 {
@@ -1307,7 +1307,7 @@ lbl_fn_8012D714_00001054:
     blr
 }
 
-asm void fn_8012D8B8(void)
+asm void enemy_updateAnimTimer(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1327,14 +1327,14 @@ asm void fn_8012D8B8(void)
     lfd f0, 0x8(r1)
     fsubs f0, f0, f1
     stfs f0, 0x4(r3)
-    beq lbl_fn_8012D8B8_00001244
+    beq lbl_enemy_updateAnimTimer_00001244
     lwz r0, 0x48(r6)
     cmpwi r0, 0x0
-    bne lbl_fn_8012D8B8_00001244
+    bne lbl_enemy_updateAnimTimer_00001244
     lfs f0, lbl_80881900
     stfs f0, 0x8(r3)
-    b lbl_fn_8012D8B8_0000126C
-lbl_fn_8012D8B8_00001244:
+    b lbl_enemy_updateAnimTimer_0000126C
+lbl_enemy_updateAnimTimer_00001244:
     lwz r5, 0x170(r3)
     lis r0, 0x4330
     stw r0, 0x8(r1)
@@ -1345,7 +1345,7 @@ lbl_fn_8012D8B8_00001244:
     lfd f0, 0x8(r1)
     fsubs f0, f0, f1
     stfs f0, 0x8(r3)
-lbl_fn_8012D8B8_0000126C:
+lbl_enemy_updateAnimTimer_0000126C:
     li r0, 0x4
     li r5, 0x0
     mr r7, r31
@@ -1354,60 +1354,60 @@ lbl_fn_8012D8B8_0000126C:
     li r4, 0x1
     stw r5, 0x10(r3)
     mtctr r0
-lbl_fn_8012D8B8_0000128C:
+lbl_enemy_updateAnimTimer_0000128C:
     slw r0, r4, r6
     cmplw r0, r0
-    bne lbl_fn_8012D8B8_0000129C
+    bne lbl_enemy_updateAnimTimer_0000129C
     stw r5, 0x24c(r7)
-lbl_fn_8012D8B8_0000129C:
+lbl_enemy_updateAnimTimer_0000129C:
     addi r6, r6, 0x1
     slw r0, r4, r6
     cmplw r0, r0
-    bne lbl_fn_8012D8B8_000012B0
+    bne lbl_enemy_updateAnimTimer_000012B0
     stw r5, 0x250(r7)
-lbl_fn_8012D8B8_000012B0:
+lbl_enemy_updateAnimTimer_000012B0:
     addi r6, r6, 0x1
     slw r0, r4, r6
     cmplw r0, r0
-    bne lbl_fn_8012D8B8_000012C4
+    bne lbl_enemy_updateAnimTimer_000012C4
     stw r5, 0x254(r7)
-lbl_fn_8012D8B8_000012C4:
+lbl_enemy_updateAnimTimer_000012C4:
     addi r6, r6, 0x1
     slw r0, r4, r6
     cmplw r0, r0
-    bne lbl_fn_8012D8B8_000012D8
+    bne lbl_enemy_updateAnimTimer_000012D8
     stw r5, 0x258(r7)
-lbl_fn_8012D8B8_000012D8:
+lbl_enemy_updateAnimTimer_000012D8:
     addi r6, r6, 0x1
     slw r0, r4, r6
     cmplw r0, r0
-    bne lbl_fn_8012D8B8_000012EC
+    bne lbl_enemy_updateAnimTimer_000012EC
     stw r5, 0x25c(r7)
-lbl_fn_8012D8B8_000012EC:
+lbl_enemy_updateAnimTimer_000012EC:
     addi r6, r6, 0x1
     slw r0, r4, r6
     cmplw r0, r0
-    bne lbl_fn_8012D8B8_00001300
+    bne lbl_enemy_updateAnimTimer_00001300
     stw r5, 0x260(r7)
-lbl_fn_8012D8B8_00001300:
+lbl_enemy_updateAnimTimer_00001300:
     addi r6, r6, 0x1
     slw r0, r4, r6
     cmplw r0, r0
-    bne lbl_fn_8012D8B8_00001314
+    bne lbl_enemy_updateAnimTimer_00001314
     stw r5, 0x264(r7)
-lbl_fn_8012D8B8_00001314:
+lbl_enemy_updateAnimTimer_00001314:
     addi r6, r6, 0x1
     slw r0, r4, r6
     cmplw r0, r0
-    bne lbl_fn_8012D8B8_00001328
+    bne lbl_enemy_updateAnimTimer_00001328
     stw r5, 0x268(r7)
-lbl_fn_8012D8B8_00001328:
+lbl_enemy_updateAnimTimer_00001328:
     addi r7, r7, 0x20
     addi r6, r6, 0x1
-    bdnz lbl_fn_8012D8B8_0000128C
+    bdnz lbl_enemy_updateAnimTimer_0000128C
     lwz r5, 0x2f0(r3)
     cmpwi r5, 0x0
-    beq lbl_fn_8012D8B8_000013AC
+    beq lbl_enemy_updateAnimTimer_000013AC
     lwz r4, 0xc(r3)
     li r6, 0x0
     lwz r0, 0x10(r3)
@@ -1416,54 +1416,54 @@ lbl_fn_8012D8B8_00001328:
     stw r4, 0xc(r3)
     rlwinm r0, r0, 0, 12, 10
     stw r0, 0x10(r3)
-    b lbl_fn_8012D8B8_000013A0
-lbl_fn_8012D8B8_00001364:
+    b lbl_enemy_updateAnimTimer_000013A0
+lbl_enemy_updateAnimTimer_00001364:
     add r4, r5, r7
     lwz r4, 0x654(r4)
     lwz r4, 0x274(r4)
     lwz r0, 0xf0(r4)
     cmpwi r0, 0x0
-    beq lbl_fn_8012D8B8_00001398
+    beq lbl_enemy_updateAnimTimer_00001398
     lwz r4, 0xc(r3)
     lwz r0, 0x10(r3)
     oris r4, r4, 0x10
     stw r4, 0xc(r3)
     oris r0, r0, 0x10
     stw r0, 0x10(r3)
-    b lbl_fn_8012D8B8_000013AC
-lbl_fn_8012D8B8_00001398:
+    b lbl_enemy_updateAnimTimer_000013AC
+lbl_enemy_updateAnimTimer_00001398:
     addi r7, r7, 0x4
     addi r6, r6, 0x1
-lbl_fn_8012D8B8_000013A0:
+lbl_enemy_updateAnimTimer_000013A0:
     lwz r0, 0x650(r5)
     cmplw r6, r0
-    blt lbl_fn_8012D8B8_00001364
-lbl_fn_8012D8B8_000013AC:
+    blt lbl_enemy_updateAnimTimer_00001364
+lbl_enemy_updateAnimTimer_000013AC:
     lwz r3, 0x2f0(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_8012D8B8_000013C8
+    beq lbl_enemy_updateAnimTimer_000013C8
     lwz r12, 0x0(r3)
     lwz r12, 0x48(r12)
     mtctr r12
     bctrl
-lbl_fn_8012D8B8_000013C8:
+lbl_enemy_updateAnimTimer_000013C8:
     lwz r0, 0x380(r31)
     addi r4, r31, 0x384
     li r3, 0x0
     mtctr r0
     cmplwi r0, 0x0
-    ble lbl_fn_8012D8B8_00001400
-lbl_fn_8012D8B8_000013E0:
+    ble lbl_enemy_updateAnimTimer_00001400
+lbl_enemy_updateAnimTimer_000013E0:
     lwz r5, 0x0(r4)
     lwz r0, 0x0(r5)
     cmpwi r0, 0x39
-    bne lbl_fn_8012D8B8_000013F8
+    bne lbl_enemy_updateAnimTimer_000013F8
     lwz r0, 0x4(r5)
     add r3, r3, r0
-lbl_fn_8012D8B8_000013F8:
+lbl_enemy_updateAnimTimer_000013F8:
     addi r4, r4, 0x14
-    bdnz lbl_fn_8012D8B8_000013E0
-lbl_fn_8012D8B8_00001400:
+    bdnz lbl_enemy_updateAnimTimer_000013E0
+lbl_enemy_updateAnimTimer_00001400:
     lfs f1, lbl_80881900
     li r0, 0x0
     lfs f0, 0x4(r31)
@@ -1478,7 +1478,7 @@ lbl_fn_8012D8B8_00001400:
     blr
 }
 
-asm void fn_8012DB04(void)
+asm void enemy_evalAnimTrack(void)
 {
     nofralloc
     lwz r6, 0xc(r3)
@@ -1489,21 +1489,21 @@ asm void fn_8012DB04(void)
     cmplwi r0, 0x8
     stw r4, 0x8(r1)
     stw r4, 0x10(r1)
-    bne lbl_fn_8012DB04_0000145C
+    bne lbl_enemy_evalAnimTrack_0000145C
     addi r5, r5, 0x3
-    b lbl_fn_8012DB04_0000146C
-lbl_fn_8012DB04_0000145C:
+    b lbl_enemy_evalAnimTrack_0000146C
+lbl_enemy_evalAnimTrack_0000145C:
     rlwinm r0, r6, 0, 22, 22
     cmplwi r0, 0x200
-    bne lbl_fn_8012DB04_0000146C
+    bne lbl_enemy_evalAnimTrack_0000146C
     addi r5, r5, 0x2
-lbl_fn_8012DB04_0000146C:
+lbl_enemy_evalAnimTrack_0000146C:
     rlwinm r4, r6, 0, 8, 8
     subis r0, r4, 0x80
     cmplwi r0, 0x0
-    bne lbl_fn_8012DB04_00001480
+    bne lbl_enemy_evalAnimTrack_00001480
     addi r5, r5, 0x4
-lbl_fn_8012DB04_00001480:
+lbl_enemy_evalAnimTrack_00001480:
     xoris r0, r5, 0x8000
     stw r0, 0xc(r1)
     lis r4, lbl_80737348@ha
@@ -1515,16 +1515,16 @@ lbl_fn_8012DB04_00001480:
     fsubs f2, f0, f2
     lfs f0, lbl_80881904
     fnmsubs f1, f1, f2, f0
-    bne lbl_fn_8012DB04_00001680
+    bne lbl_enemy_evalAnimTrack_00001680
     rlwinm. r0, r5, 0, 8, 8
-    bne lbl_fn_8012DB04_00001680
+    bne lbl_enemy_evalAnimTrack_00001680
     rlwinm r0, r6, 0, 20, 20
     cmplwi r0, 0x800
-    bne lbl_fn_8012DB04_0000153C
+    bne lbl_enemy_evalAnimTrack_0000153C
     lfs f0, 0x434(r3)
     lfs f4, lbl_80881924
     fcmpo cr0, f0, f4
-    bge lbl_fn_8012DB04_0000153C
+    bge lbl_enemy_evalAnimTrack_0000153C
     fsubs f3, f4, f0
     lfs f2, lbl_80881928
     lfs f0, lbl_8088192C
@@ -1532,14 +1532,14 @@ lbl_fn_8012DB04_00001480:
     fdivs f2, f2, f4
     fsubs f2, f1, f2
     fcmpo cr0, f2, f0
-    ble lbl_fn_8012DB04_000014F8
-    b lbl_fn_8012DB04_000014FC
-lbl_fn_8012DB04_000014F8:
+    ble lbl_enemy_evalAnimTrack_000014F8
+    b lbl_enemy_evalAnimTrack_000014FC
+lbl_enemy_evalAnimTrack_000014F8:
     fmr f2, f0
-lbl_fn_8012DB04_000014FC:
+lbl_enemy_evalAnimTrack_000014FC:
     lfs f3, lbl_80881904
     fcmpo cr0, f2, f3
-    bge lbl_fn_8012DB04_00001538
+    bge lbl_enemy_evalAnimTrack_00001538
     lfs f4, lbl_80881924
     lfs f0, 0x434(r3)
     lfs f2, lbl_80881928
@@ -1549,57 +1549,57 @@ lbl_fn_8012DB04_000014FC:
     fdivs f2, f2, f4
     fsubs f3, f1, f2
     fcmpo cr0, f3, f0
-    ble lbl_fn_8012DB04_00001534
-    b lbl_fn_8012DB04_00001538
-lbl_fn_8012DB04_00001534:
+    ble lbl_enemy_evalAnimTrack_00001534
+    b lbl_enemy_evalAnimTrack_00001538
+lbl_enemy_evalAnimTrack_00001534:
     fmr f3, f0
-lbl_fn_8012DB04_00001538:
+lbl_enemy_evalAnimTrack_00001538:
     fmr f1, f3
-lbl_fn_8012DB04_0000153C:
+lbl_enemy_evalAnimTrack_0000153C:
     cmplwi r0, 0x800
-    bne lbl_fn_8012DB04_00001680
+    bne lbl_enemy_evalAnimTrack_00001680
     lwz r3, 0x2f0(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_8012DB04_00001680
+    beq lbl_enemy_evalAnimTrack_00001680
     lwz r5, 0xd1c(r3)
     cmpwi r5, 0x0
-    beq lbl_fn_8012DB04_00001680
+    beq lbl_enemy_evalAnimTrack_00001680
     lwz r0, 0xb54(r5)
     addi r4, r5, 0xb58
     mtctr r0
     cmplwi r0, 0x0
-    ble lbl_fn_8012DB04_0000158C
-lbl_fn_8012DB04_00001570:
+    ble lbl_enemy_evalAnimTrack_0000158C
+lbl_enemy_evalAnimTrack_00001570:
     lwz r3, 0x0(r4)
     lwz r0, 0x0(r3)
     cmpwi r0, 0x44
-    bne lbl_fn_8012DB04_00001584
-    b lbl_fn_8012DB04_00001590
-lbl_fn_8012DB04_00001584:
+    bne lbl_enemy_evalAnimTrack_00001584
+    b lbl_enemy_evalAnimTrack_00001590
+lbl_enemy_evalAnimTrack_00001584:
     addi r4, r4, 0x14
-    bdnz lbl_fn_8012DB04_00001570
-lbl_fn_8012DB04_0000158C:
+    bdnz lbl_enemy_evalAnimTrack_00001570
+lbl_enemy_evalAnimTrack_0000158C:
     li r4, 0x0
-lbl_fn_8012DB04_00001590:
+lbl_enemy_evalAnimTrack_00001590:
     cmpwi r4, 0x0
-    beq lbl_fn_8012DB04_00001680
+    beq lbl_enemy_evalAnimTrack_00001680
     lwz r0, 0xb54(r5)
     addi r3, r5, 0xb58
     li r4, 0x0
     mtctr r0
     cmplwi r0, 0x0
-    ble lbl_fn_8012DB04_000015D0
-lbl_fn_8012DB04_000015B0:
+    ble lbl_enemy_evalAnimTrack_000015D0
+lbl_enemy_evalAnimTrack_000015B0:
     lwz r5, 0x0(r3)
     lwz r0, 0x0(r5)
     cmpwi r0, 0x44
-    bne lbl_fn_8012DB04_000015C8
+    bne lbl_enemy_evalAnimTrack_000015C8
     lwz r0, 0x4(r5)
     add r4, r4, r0
-lbl_fn_8012DB04_000015C8:
+lbl_enemy_evalAnimTrack_000015C8:
     addi r3, r3, 0x14
-    bdnz lbl_fn_8012DB04_000015B0
-lbl_fn_8012DB04_000015D0:
+    bdnz lbl_enemy_evalAnimTrack_000015B0
+lbl_enemy_evalAnimTrack_000015D0:
     xoris r0, r4, 0x8000
     stw r0, 0x14(r1)
     lis r3, lbl_80737348@ha
@@ -1613,17 +1613,17 @@ lbl_fn_8012DB04_000015D0:
     fdivs f0, f0, f2
     fsubs f0, f1, f0
     fcmpo cr0, f0, f5
-    ble lbl_fn_8012DB04_00001620
+    ble lbl_enemy_evalAnimTrack_00001620
     stw r0, 0xc(r1)
     lfd f0, 0x8(r1)
     fsubs f0, f0, f4
     fmuls f0, f3, f0
     fdivs f0, f0, f2
     fsubs f5, f1, f0
-lbl_fn_8012DB04_00001620:
+lbl_enemy_evalAnimTrack_00001620:
     lfs f6, lbl_80881904
     fcmpo cr0, f5, f6
-    bge lbl_fn_8012DB04_0000167C
+    bge lbl_enemy_evalAnimTrack_0000167C
     xoris r0, r4, 0x8000
     stw r0, 0x14(r1)
     lis r3, lbl_80737348@ha
@@ -1637,22 +1637,22 @@ lbl_fn_8012DB04_00001620:
     fdivs f0, f0, f2
     fsubs f0, f1, f0
     fcmpo cr0, f0, f6
-    ble lbl_fn_8012DB04_0000167C
+    ble lbl_enemy_evalAnimTrack_0000167C
     stw r0, 0xc(r1)
     lfd f0, 0x8(r1)
     fsubs f0, f0, f4
     fmuls f0, f3, f0
     fdivs f0, f0, f2
     fsubs f6, f1, f0
-lbl_fn_8012DB04_0000167C:
+lbl_enemy_evalAnimTrack_0000167C:
     fmr f1, f6
-lbl_fn_8012DB04_00001680:
+lbl_enemy_evalAnimTrack_00001680:
     rlwinm r3, r6, 0, 7, 7
     subis r0, r3, 0x100
     cmplwi r0, 0x0
-    bne lbl_fn_8012DB04_00001694
+    bne lbl_enemy_evalAnimTrack_00001694
     lfs f1, lbl_8088192C
-lbl_fn_8012DB04_00001694:
+lbl_enemy_evalAnimTrack_00001694:
     addi r1, r1, 0x20
     blr
 }

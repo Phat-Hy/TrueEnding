@@ -70,7 +70,7 @@ void fn_805E3960(void);
 void fn_805E3DF0(void);
 void fn_805E3E80(void);
 void fn_805E3F20(void);
-void fn_805E4070(void);
+void *fn_805E4070(void *obj);
 void fn_805E4080(void);
 void fn_805E4090(void);
 void fn_805E4360(void);
@@ -1354,11 +1354,9 @@ lbl_fn_805E3F20_00001198:
     blr
 }
 
-asm void fn_805E4070(void)
+void *fn_805E4070(void *obj)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(void **)((char *)obj + 4);
 }
 
 asm void fn_805E4080(void)

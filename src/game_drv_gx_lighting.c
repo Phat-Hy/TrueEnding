@@ -52,17 +52,17 @@ void fn_805DB270(void);
 void fn_805DB2D0(void);
 void fn_805DB330(void);
 void fn_805DB3D0(void);
-void fn_805DB460(void);
-void fn_805DB470(void);
-void fn_805DB480(void);
-void fn_805DB490(void);
-void fn_805DB4A0(void);
-void fn_805DB4B0(void);
-void fn_805DB4C0(void);
-void fn_805DB4D0(void);
-void fn_805DB4E0(void);
+void fn_805DB460(void *p, f32 val);
+void fn_805DB470(void *p, f32 val);
+f32 fn_805DB480(const void *p);
+f32 fn_805DB490(const void *p);
+void fn_805DB4A0(void *p, u32 val);
+u32 fn_805DB4B0(const void *p);
+void fn_805DB4C0(void *p, u32 val);
+u32 fn_805DB4D0(const void *p);
+void fn_805DB4E0(void *p, u32 val);
 void fn_805DB4F0(void);
-void fn_805DB500(void);
+u32 fn_805DB500(const void *p);
 void fn_805DB510(void);
 void fn_805DB710(void);
 void fn_805DB910(void);
@@ -861,67 +861,49 @@ lbl_fn_805DB3D0_00000AB0:
     blr
 }
 
-asm void fn_805DB460(void)
+void fn_805DB460(void *p, f32 val)
 {
-    nofralloc
-    stfs f1, 0x50(r3)
-    blr
+    *(f32 *)((char *)p + 0x50) = val;
 }
 
-asm void fn_805DB470(void)
+void fn_805DB470(void *p, f32 val)
 {
-    nofralloc
-    stfs f1, 0x4c(r3)
-    blr
+    *(f32 *)((char *)p + 0x4c) = val;
 }
 
-asm void fn_805DB480(void)
+f32 fn_805DB480(const void *p)
 {
-    nofralloc
-    lfs f1, 0x50(r3)
-    blr
+    return *(const f32 *)((const char *)p + 0x50);
 }
 
-asm void fn_805DB490(void)
+f32 fn_805DB490(const void *p)
 {
-    nofralloc
-    lfs f1, 0x4c(r3)
-    blr
+    return *(const f32 *)((const char *)p + 0x4c);
 }
 
-asm void fn_805DB4A0(void)
+void fn_805DB4A0(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x54(r3)
-    blr
+    *(u32 *)((char *)p + 0x54) = val;
 }
 
-asm void fn_805DB4B0(void)
+u32 fn_805DB4B0(const void *p)
 {
-    nofralloc
-    lwz r3, 0x54(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x54);
 }
 
-asm void fn_805DB4C0(void)
+void fn_805DB4C0(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x58(r3)
-    blr
+    *(u32 *)((char *)p + 0x58) = val;
 }
 
-asm void fn_805DB4D0(void)
+u32 fn_805DB4D0(const void *p)
 {
-    nofralloc
-    lwz r3, 0x58(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x58);
 }
 
-asm void fn_805DB4E0(void)
+void fn_805DB4E0(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x5c(r3)
-    blr
+    *(u32 *)((char *)p + 0x5c) = val;
 }
 
 asm void fn_805DB4F0(void)
@@ -933,11 +915,9 @@ asm void fn_805DB4F0(void)
     blr
 }
 
-asm void fn_805DB500(void)
+u32 fn_805DB500(const void *p)
 {
-    nofralloc
-    lwz r3, 0x5c(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x5c);
 }
 
 asm void fn_805DB510(void)

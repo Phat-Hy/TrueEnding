@@ -15,7 +15,7 @@ extern void fn_8004895C(void);
 extern void fn_80049654(void);
 extern void sound_releaseChannel(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_80083AD4(void);
+extern void town_updateInteractionPoints(void);
 extern void mem_getAllocSize(void);
 extern void node_destroy(void);
 extern void fn_80089ACC(void);
@@ -32,30 +32,30 @@ extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void fn_800D8814(void);
 extern void fn_800EC1F4(void);
-extern void fn_800F52F0(void);
+extern void proj_getMatrix(void);
 extern void fn_800F530C(void);
 extern void fn_800F7F90(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
-extern void fn_801125F8(void);
+extern void phys_scaleGravity(void);
 extern void fn_80112960(void);
 extern void fn_80114AA0(void);
 extern void fn_801156BC(void);
 extern void magic_getOffset6C(void);
 extern void fn_8012B3E8(void);
 extern void fn_8012B988(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void fn_80139F4C(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void dialog_selectChoice(void);
-extern void fn_8016E4C4(void);
-extern void fn_80176ACC(void);
+extern void debuff_removeStatusEffect(void);
+extern void battle_activateExpReward(void);
 extern void fn_8017A300(void);
 extern void fn_80198C00(void);
 extern void fn_80206B14(void);
 extern void fn_8020A3E4(void);
 extern void fn_8020A81C(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void sound_initGlobalInstances(void);
 extern void res_Resource_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -77,7 +77,7 @@ extern void world_setLocalFlag(void);
 extern void fn_8037308C(void);
 extern void fn_80373118(void);
 extern void kpad_getClampData(void);
-extern void fn_8037D4C0(void);
+extern void dvd_showDiskErrorDialog(void);
 extern void fn_8037EF30(void);
 extern void fn_8037F688(void);
 extern void fn_803BE590(void);
@@ -375,16 +375,16 @@ void fn_804D147C(void);
 void fn_804D14BC(void);
 u32 net_getFriendManager(void);
 void fn_804D16A0(void);
-void fn_804D16D0(void);
-void fn_804D16D8(void);
-void fn_804D16E0(void);
+u32 fn_804D16D0(void);
+u32 fn_804D16D8(void);
+u32 fn_804D16E0(void);
 void fn_804D16E8(void);
-void fn_804D16F4(void);
+u32 fn_804D16F4(void);
 void fn_804D16FC(void);
 void fn_804D1F70(void);
 void fn_804D1FDC(void);
 void fn_804D201C(void);
-void fn_804D24AC(void);
+void *fn_804D24AC(void *obj);
 void fn_804D24B4(void);
 void fn_804D250C(void);
 void fn_804D25D4(void);
@@ -478,7 +478,7 @@ lbl_fn_804D14BC_000000F8:
     beq lbl_fn_804D14BC_00000114
     bl dungeon_initGlobalContext
     mr r4, r27
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     stw r29, 0x28(r26)
 lbl_fn_804D14BC_00000114:
     lwz r27, 0x2c(r26)
@@ -486,7 +486,7 @@ lbl_fn_804D14BC_00000114:
     beq lbl_fn_804D14BC_00000130
     bl dungeon_initGlobalContext
     mr r4, r27
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     stw r29, 0x2c(r26)
 lbl_fn_804D14BC_00000130:
     lwz r26, 0x4(r26)
@@ -513,7 +513,7 @@ lbl_fn_804D14BC_0000016C:
     beq lbl_fn_804D14BC_00000190
     bl dungeon_initGlobalContext
     mr r4, r26
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     stw r29, 0x8(r27)
 lbl_fn_804D14BC_00000190:
     lwz r26, 0xc(r27)
@@ -521,7 +521,7 @@ lbl_fn_804D14BC_00000190:
     beq lbl_fn_804D14BC_000001AC
     bl dungeon_initGlobalContext
     mr r4, r26
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     stw r29, 0xc(r27)
 lbl_fn_804D14BC_000001AC:
     mr r3, r25
@@ -559,7 +559,7 @@ lbl_fn_804D14BC_00000210:
     beq lbl_fn_804D14BC_00000234
     bl dungeon_initGlobalContext
     mr r4, r26
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     stw r29, 0x8(r27)
 lbl_fn_804D14BC_00000234:
     lwz r26, 0xc(r27)
@@ -567,7 +567,7 @@ lbl_fn_804D14BC_00000234:
     beq lbl_fn_804D14BC_00000250
     bl dungeon_initGlobalContext
     mr r4, r26
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     stw r29, 0xc(r27)
 lbl_fn_804D14BC_00000250:
     mr r3, r24
@@ -615,25 +615,19 @@ asm void fn_804D16A0(void)
     blr
 }
 
-asm void fn_804D16D0(void)
+u32 fn_804D16D0(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F59C
-    blr
+    return lbl_8087F59C;
 }
 
-asm void fn_804D16D8(void)
+u32 fn_804D16D8(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F5A8
-    blr
+    return lbl_8087F5A8;
 }
 
-asm void fn_804D16E0(void)
+u32 fn_804D16E0(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F588
-    blr
+    return lbl_8087F588;
 }
 
 asm void fn_804D16E8(void)
@@ -644,11 +638,9 @@ asm void fn_804D16E8(void)
     blr
 }
 
-asm void fn_804D16F4(void)
+u32 fn_804D16F4(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F420
-    blr
+    return lbl_8087F420;
 }
 
 asm void fn_804D16FC(void)
@@ -1603,11 +1595,9 @@ lbl_fn_804D201C_00001094:
     blr
 }
 
-asm void fn_804D24AC(void)
+void *fn_804D24AC(void *obj)
 {
-    nofralloc
-    lwz r3, 0x324(r3)
-    blr
+    return *(void **)((char *)obj + 0x324);
 }
 
 asm void fn_804D24B4(void)
@@ -1744,7 +1734,7 @@ lbl_fn_804D25D4_00001270:
     cmplwi r3, 0x1
     bne lbl_fn_804D25D4_000012A0
     lwz r3, 0x0(r22)
-    bl fn_80176ACC
+    bl battle_activateExpReward
     lwz r3, 0x0(r22)
     li r4, 0x0
     bl fn_804D5F5C
@@ -1775,7 +1765,7 @@ lbl_fn_804D25D4_000012BC:
     lwz r3, 0x0(r3)
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00001334
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_80139F4C
     cmpwi r3, 0x1
     beq lbl_fn_804D25D4_00001310
@@ -2510,7 +2500,7 @@ lbl_fn_804D25D4_00001D78:
     li r5, 0x0
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_804D25D4_00001DA0:
     bl fn_8020A3E4
     li r4, 0x0
@@ -3258,7 +3248,7 @@ lbl_fn_804D25D4_00002834:
     li r5, 0xa
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_804D25D4_00004898
     bl fn_804D5FC4
     cmpwi r3, 0x0
@@ -3563,7 +3553,7 @@ lbl_fn_804D25D4_00002CC0:
     add r4, r3, r21
     mr r3, r25
     lwz r4, 0x108(r4)
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     mr r22, r3
     lwz r3, 0x0(r23)
     mr r4, r25
@@ -3577,7 +3567,7 @@ lbl_fn_804D25D4_00002D1C:
     blt lbl_fn_804D25D4_00002CC0
 lbl_fn_804D25D4_00002D2C:
     lwz r3, 0x0(r23)
-    bl fn_800F52F0
+    bl proj_getMatrix
     lhz r0, 0xec(r23)
     extrwi r4, r0, 8, 18
     bl fn_804D6404
@@ -3609,7 +3599,7 @@ lbl_fn_804D25D4_00002D74:
     li r5, 0x0
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_804D25D4_00002DF4
 lbl_fn_804D25D4_00002DAC:
     lwz r0, 0x560(r24)
@@ -3621,7 +3611,7 @@ lbl_fn_804D25D4_00002DAC:
     li r5, 0x0
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_804D25D4_00002DF4
 lbl_fn_804D25D4_00002DD8:
     bl fn_804814F0
@@ -3630,7 +3620,7 @@ lbl_fn_804D25D4_00002DD8:
     li r5, 0x0
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_804D25D4_00002DF4:
     bl fn_804D640C
     cmpwi r3, 0x0
@@ -3947,13 +3937,13 @@ lbl_fn_804D25D4_00003278:
     bl fn_804D6424
     mr r23, r3
     lwz r3, 0x0(r28)
-    bl fn_800F52F0
+    bl proj_getMatrix
     stw r23, 0x224(r3)
     lwz r0, 0x604(r24)
     cmpwi r0, 0x0
     beq lbl_fn_804D25D4_0000346C
     lwz r3, 0x0(r28)
-    bl fn_800F52F0
+    bl proj_getMatrix
     lwz r0, 0x540(r24)
     lwz r3, 0x160(r3)
     cmplwi r0, 0x1
@@ -3971,7 +3961,7 @@ lbl_fn_804D25D4_000032F4:
     stw r29, 0x168(r1)
     lfd f0, 0x168(r1)
     fsubs f30, f0, f31
-    bl fn_800F52F0
+    bl proj_getMatrix
     stfs f30, 0x1b0(r3)
 lbl_fn_804D25D4_00003314:
     bl net_getFriendManager
@@ -4048,7 +4038,7 @@ lbl_fn_804D25D4_00003418:
     bl fn_804D63DC
     add r23, r3, r21
     lwz r3, 0x0(r28)
-    bl fn_800F52F0
+    bl proj_getMatrix
     mr r4, r20
     addi r5, r23, 0xe8
     bl fn_803396FC
@@ -4057,14 +4047,14 @@ lbl_fn_804D25D4_00003418:
     cmpwi r20, 0x4
     blt lbl_fn_804D25D4_00003418
     lwz r3, 0x0(r28)
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_8012B3E8
     lwz r3, 0x0(r28)
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_8012B988
     lwz r3, 0x0(r28)
-    bl fn_800F52F0
-    bl fn_8012D8B8
+    bl proj_getMatrix
+    bl enemy_updateAnimTimer
 lbl_fn_804D25D4_0000346C:
     lwz r3, 0x0(r28)
     bl fn_800F530C
@@ -4086,7 +4076,7 @@ lbl_fn_804D25D4_0000346C:
     bne lbl_fn_804D25D4_00003544
 lbl_fn_804D25D4_000034B4:
     lwz r3, 0x5e0(r24)
-    bl fn_8013C504
+    bl npc_getDialogController
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00003544
     bl fn_804D64A0
@@ -4209,18 +4199,18 @@ lbl_fn_804D25D4_0000362C:
     stw r28, 0x168(r1)
     lfd f0, 0x168(r1)
     fsubs f31, f0, f30
-    bl fn_800F52F0
+    bl proj_getMatrix
     stfs f31, 0x1b0(r3)
 lbl_fn_804D25D4_0000367C:
     lwz r3, 0x0(r30)
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_8012B3E8
     lwz r3, 0x0(r30)
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_8012B988
     lwz r3, 0x0(r30)
-    bl fn_800F52F0
-    bl fn_8012D8B8
+    bl proj_getMatrix
+    bl enemy_updateAnimTimer
     lwz r3, 0x0(r30)
     bl fn_800F530C
     stw r27, 0xc0(r3)
@@ -4238,7 +4228,7 @@ lbl_fn_804D25D4_0000367C:
     bne lbl_fn_804D25D4_000036E8
     lwz r3, 0x0(r30)
     li r4, 0x1
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
 lbl_fn_804D25D4_000036E8:
     addi r20, r20, 0x1
 lbl_fn_804D25D4_000036EC:
@@ -4395,7 +4385,7 @@ lbl_fn_804D25D4_000038F0:
     li r5, 0xf
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     mr r3, r24
     li r4, 0x6
     bl fn_804DA490
@@ -4727,7 +4717,7 @@ lbl_fn_804D25D4_00003E08:
     li r5, 0xf
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_804D25D4_00003E74
 lbl_fn_804D25D4_00003E28:
     cmpwi r0, 0x1
@@ -4741,7 +4731,7 @@ lbl_fn_804D25D4_00003E38:
     li r5, 0xf
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_804D25D4_00003E74
 lbl_fn_804D25D4_00003E58:
     bl fn_804814F0
@@ -4750,7 +4740,7 @@ lbl_fn_804D25D4_00003E58:
     li r5, 0xf
     li r6, 0x1
     li r7, 0x21fc
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_804D25D4_00003E74:
     bl fn_804D5FD4
     bl fn_804C5E1C
@@ -5254,7 +5244,7 @@ lbl_fn_804D25D4_000045A8:
     subi r3, r3, 0x688c
     bl fn_80112960
     lfs f1, lbl_808875D8
-    bl fn_801125F8
+    bl phys_scaleGravity
     addis r3, r24, 0x1
     subi r3, r3, 0x688c
     bl fn_8037F688
@@ -5267,7 +5257,7 @@ lbl_fn_804D25D4_000045A8:
     li r5, 0xf
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_804D25D4_0000462C:
     addis r3, r24, 0x1
     lbz r0, -0x6610(r3)
@@ -5514,7 +5504,7 @@ lbl_fn_804D25D4_000049A4:
     li r5, 0x1e
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_804D25D4_00004AD4
 lbl_fn_804D25D4_000049C4:
     addi r3, r24, 0x4fc
@@ -5539,7 +5529,7 @@ lbl_fn_804D25D4_000049C4:
     li r5, 0x1e
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_804D25D4_00004AD4
 lbl_fn_804D25D4_00004A24:
     bl fn_804814F0
@@ -5548,7 +5538,7 @@ lbl_fn_804D25D4_00004A24:
     li r5, 0x1e
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_804D25D4_00004AD4
 lbl_fn_804D25D4_00004A44:
     mr r3, r24
@@ -5567,7 +5557,7 @@ lbl_fn_804D25D4_00004A68:
     li r5, 0x1e
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_804D25D4_00004AD4
 lbl_fn_804D25D4_00004A88:
     cmpwi r0, 0x1
@@ -5581,7 +5571,7 @@ lbl_fn_804D25D4_00004A98:
     li r5, 0x1e
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_804D25D4_00004AD4
 lbl_fn_804D25D4_00004AB8:
     bl fn_804814F0
@@ -5590,7 +5580,7 @@ lbl_fn_804D25D4_00004AB8:
     li r5, 0x1e
     li r6, 0x1
     li r7, 0x21fc
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_804D25D4_00004AD4:
     lwz r3, 0x5cc(r24)
     addi r0, r3, 0x1

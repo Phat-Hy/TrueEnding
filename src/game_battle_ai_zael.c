@@ -9,7 +9,7 @@ extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void fn_80069758(void);
-extern void fn_8006AA20(void);
+extern void boss_triggerEventSequence(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -18,7 +18,7 @@ extern void route_interpolatePath(void);
 extern void fn_80087858(void);
 extern void route_createSegment(void);
 extern void route_createWaypoint(void);
-extern void fn_80088724(void);
+extern void zone_testPointInBounds(void);
 extern void node_createNamedChild(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
@@ -42,11 +42,11 @@ extern void fn_803EC0F8(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
-extern void fn_803EC7A0(void);
+extern void barrier_formatDialogString(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
-extern void fn_803ED5D0(void);
-extern void fn_803ED774(void);
+extern void barrier_bindFieldAnimation(void);
+extern void dungeon_updateBarrierField(void);
 extern void fn_803F3334(void);
 extern void fn_803F3360(void);
 extern void fn_8041524C(void);
@@ -343,7 +343,7 @@ lbl_fn_8042FAC4_000002A8:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_8042FAC4_000002F0:
     li r30, 0x0
     li r29, 0x0
@@ -838,7 +838,7 @@ asm void fn_804302FC(void)
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_804302FC_00000A44:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -943,7 +943,7 @@ lbl_fn_80430428_00000B5C:
     mr r3, r31
     addi r4, r31, 0x104
     addi r5, r1, 0x108
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     b lbl_fn_80430428_00000D44
 lbl_fn_80430428_00000BB0:
     mr r3, r27
@@ -960,7 +960,7 @@ lbl_fn_80430428_00000BB0:
     mr r3, r31
     addi r4, r31, 0x4d4
     addi r5, r1, 0x108
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     b lbl_fn_80430428_00000D44
 lbl_fn_80430428_00000BF0:
     mr r3, r27
@@ -1250,7 +1250,7 @@ lbl_fn_804308F8_00000FC8:
     bl atn_Anim_setLayerAnimation
     mr r3, r31
     addi r4, r31, 0x4d4
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
     lfs f0, lbl_80886818
     mr r3, r31
     stfs f0, 0x708(r31)
@@ -1352,7 +1352,7 @@ lbl_fn_804308F8_00001108:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_804308F8_00001178:
     lwz r12, 0x0(r31)
     mr r3, r31
@@ -1633,7 +1633,7 @@ lbl_fn_80430DE4_000014CC:
     addi r5, r29, 0x78
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_80886848
     mr r3, r30
     lfs f2, lbl_8088684C
@@ -1808,7 +1808,7 @@ asm void fn_804310B0(void)
     crclr 6
     bl sprintf
     addi r3, r1, 0x8
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     bne lbl_fn_804310B0_000017C0
     addi r0, r31, 0x4dd3

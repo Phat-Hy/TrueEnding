@@ -10,7 +10,7 @@ extern void fn_80153698(void);
 extern void battle_awardExp(void);
 extern void fn_80206B14(void);
 extern void assert_generateId(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void random_generateValue(void);
 extern void event_findEntryById(void);
 extern void fn_8021150C(void);
@@ -2014,7 +2014,7 @@ lbl_fn_803BC2D4_00001D98:
     cmpwi r4, 0x3e8
     blt lbl_fn_803BC2D4_00001E0C
     mr r3, r23
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     cmpwi r3, 0x0
     bne lbl_fn_803BC2D4_00001E0C
     addis r3, r26, 0x1
@@ -2027,7 +2027,7 @@ lbl_fn_803BC2D4_00001D98:
     add r0, r0, r4
     mulli r0, r0, 0x3e8
     subf r4, r0, r5
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     bl random_generateValue
     bl event_findEntryById
     addis r4, r26, 0x1

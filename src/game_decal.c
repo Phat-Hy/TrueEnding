@@ -8,13 +8,13 @@ extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void fn_800E70EC(void);
 extern void fn_800E7214(void);
 extern void fn_800E73EC(void);
@@ -30,13 +30,13 @@ extern void fn_8010CA34(void);
 extern void fn_8011E81C(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_801237F0(void);
-extern void fn_801240B4(void);
+extern void player_evaluateStatusCondition(void);
 extern void fn_80134134(void);
-extern void fn_80139560(void);
+extern void npc_calcTargetDistance(void);
 extern void quest_evaluateConditions(void);
 extern void fn_80155790(void);
 extern void inventory_calcTotalStats(void);
-extern void fn_80158BB4(void);
+extern void shop_canPurchaseItem(void);
 extern void fn_80158CA4(void);
 extern void fn_8016AFE8(void);
 extern void fn_8016D74C(void);
@@ -47,7 +47,7 @@ extern void fn_8016E484(void);
 extern void actor_setState(void);
 extern void fn_80178018(void);
 extern void fn_80178078(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void fn_801A72EC(void);
 extern void fn_801E97DC(void);
 extern void fn_801E9ECC(void);
@@ -59,7 +59,7 @@ extern void fn_8021AF98(void);
 extern void world_getGlobalFlag(void);
 extern void fn_80373FC4(void);
 extern void fn_803748E0(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void fn_803761AC(void);
 extern void fn_8037EF30(void);
 extern void PSMTXRotRad(void);
@@ -116,8 +116,8 @@ extern u32 lbl_80881374;
 
 /* Function declarations */
 void fn_800E589C(void);
-void fn_800E60FC(void);
-void fn_800E6104(void);
+u32 fn_800E60FC(void);
+void *fn_800E6104(void *obj);
 void fn_800E610C(void);
 void fn_800E62AC(void);
 
@@ -173,7 +173,7 @@ lbl_fn_800E589C_00000078:
     bl fn_8011E81C
 lbl_fn_800E589C_000000B4:
     mr r3, r30
-    bl fn_80139560
+    bl npc_calcTargetDistance
     cmpwi r29, 0x0
     beq lbl_fn_800E589C_00000838
     lwz r0, 0x55c(r30)
@@ -202,7 +202,7 @@ lbl_fn_800E589C_0000010C:
     mr r3, r30
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x34(r1)
-    bl fn_80158BB4
+    bl shop_canPurchaseItem
     cmpwi r3, 0x0
     beq lbl_fn_800E589C_000001AC
     lwz r0, 0x55c(r30)
@@ -496,7 +496,7 @@ lbl_fn_800E589C_00000528:
     lwz r3, lbl_8087F0A8
     li r4, 0x7
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     bne lbl_fn_800E589C_00000590
 lbl_fn_800E589C_00000564:
@@ -578,7 +578,7 @@ lbl_fn_800E589C_00000664:
     stfs f31, 0x2e8(r30)
 lbl_fn_800E589C_00000668:
     mr r3, r30
-    bl fn_80139560
+    bl npc_calcTargetDistance
     lwz r0, lbl_8087F048
     cmpwi r0, 0x0
     beq lbl_fn_800E589C_00000838
@@ -703,7 +703,7 @@ lbl_fn_800E589C_00000818:
     b lbl_fn_800E589C_00000838
 lbl_fn_800E589C_00000830:
     mr r3, r30
-    bl fn_80139560
+    bl npc_calcTargetDistance
 lbl_fn_800E589C_00000838:
     addi r11, r1, 0xf0
     psq_l f31, 0x108(r1), 0, 0
@@ -717,18 +717,14 @@ lbl_fn_800E589C_00000838:
     blr
 }
 
-asm void fn_800E60FC(void)
+u32 fn_800E60FC(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_800E6104(void)
+void *fn_800E6104(void *obj)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(void **)(obj);
 }
 
 asm void fn_800E610C(void)
@@ -866,7 +862,7 @@ asm void fn_800E62AC(void)
     li r29, 0x1
     bne lbl_fn_800E62AC_00000DB8
     lwz r3, lbl_8087F430
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_800E62AC_00000DB8
     lwz r0, 0x944(r25)
@@ -1015,7 +1011,7 @@ lbl_fn_800E62AC_00000C28:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     addi r0, r1, 0x8
     stw r3, 0x24(r1)
     mr r30, r3
@@ -1047,7 +1043,7 @@ lbl_fn_800E62AC_00000CE0:
     addi r3, r1, 0x20
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x20(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x20
     beq lbl_fn_800E62AC_00000D28
     addic. r3, r3, 0x4
@@ -1157,7 +1153,7 @@ lbl_fn_800E62AC_00000E74:
     li r4, 0x7
     lwz r3, lbl_8087F0A8
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     lwz r0, 0x55c(r25)
     cntlzw r3, r3
     srwi r4, r3, 5
@@ -1258,7 +1254,7 @@ lbl_fn_800E62AC_00000FD0:
     stw r0, 0x12a4(r25)
     lwz r3, lbl_8087F0A8
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     bne lbl_fn_800E62AC_00001018
     mr r3, r25
@@ -1465,7 +1461,7 @@ lbl_fn_800E62AC_000012F4:
     lwz r3, lbl_8087F0A8
     li r4, 0x7
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     bne lbl_fn_800E62AC_00001390
     lwz r0, 0x12a8(r25)
@@ -1555,7 +1551,7 @@ lbl_fn_800E62AC_00001434:
     lwz r3, lbl_8087F0A8
     li r4, 0x9
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_800E62AC_000017C8
     mr r3, r26
@@ -1606,7 +1602,7 @@ lbl_fn_800E62AC_000014F0:
     cmpwi r3, 0x0
     beq lbl_fn_800E62AC_000017B4
     mr r3, r26
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_800E62AC_000017B4
     lwz r0, 0x944(r25)
@@ -1755,7 +1751,7 @@ lbl_fn_800E62AC_000016E8:
     mr r4, r3
 lbl_fn_800E62AC_0000172C:
     mr r3, r25
-    bl fn_80178208
+    bl battle_generateLootDrops
     b lbl_fn_800E62AC_000017B4
 lbl_fn_800E62AC_00001738:
     lwz r0, 0x944(r25)

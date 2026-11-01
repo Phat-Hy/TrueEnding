@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_80056DB8(void);
+extern void path_Object_constructor(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_800575BC(void);
 extern void talk_parseQuotedString(void);
@@ -16,12 +16,12 @@ extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
 extern void route_createWaypoint(void);
-extern void fn_80088724(void);
+extern void zone_testPointInBounds(void);
 extern void node_createNamedChild(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80092F1C(void);
+extern void target_pushPointToHistory(void);
 extern void fn_80094F98(void);
 extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
@@ -32,9 +32,9 @@ extern void fn_800C2C20(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void str_skipWhitespace(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
-extern void fn_8011FE3C(void);
+extern void skill_findNodeByTag(void);
 extern void task_lookupTagIndex(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -45,11 +45,11 @@ extern void world_setLocalFlag(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
-extern void fn_803EC7A0(void);
+extern void barrier_formatDialogString(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
-extern void fn_803ED5D0(void);
-extern void fn_803ED774(void);
+extern void barrier_bindFieldAnimation(void);
+extern void dungeon_updateBarrierField(void);
 extern void fn_803EDB18(void);
 extern void fn_803F11F8(void);
 extern void boss_getOffset54(void);
@@ -122,7 +122,7 @@ void fn_8042E2C4(void);
 void fn_8042E2F4(void);
 void fn_8042E34C(void);
 void fn_8042E360(void);
-void fn_8042E364(void);
+void *fn_8042E364(void *p);
 void fn_8042E36C(void);
 void fn_8042E47C(void);
 void fn_8042E51C(void);
@@ -135,7 +135,7 @@ void fn_8042EBDC(void);
 void fn_8042EDF4(void);
 void fn_8042EEF4(void);
 void fn_8042EF4C(void);
-void fn_8042F0AC(void);
+void *fn_8042F0AC(void *p);
 void fn_8042F0B4(void);
 void fn_8042F128(void);
 void fn_8042F240(void);
@@ -172,7 +172,7 @@ asm void fn_8042DFD4(void)
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_8042DFD4_0000004C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -266,7 +266,7 @@ lbl_fn_8042E064_00000144:
     mr r3, r28
     addi r4, r28, 0xf4
     addi r5, r1, 0x8
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     b lbl_fn_8042E064_000002C0
 lbl_fn_8042E064_00000198:
     mr r3, r30
@@ -422,11 +422,9 @@ void fn_8042E360(void)
 {
 }
 
-asm void fn_8042E364(void)
+void *fn_8042E364(void *p)
 {
-    nofralloc
-    addi r3, r3, 0xf4
-    blr
+    return (char *)p + 0xf4;
 }
 
 asm void fn_8042E36C(void)
@@ -468,7 +466,7 @@ asm void fn_8042E36C(void)
     addi r30, r31, 0x4d0
     li r4, 0x2
     mr r3, r30
-    bl fn_80056DB8
+    bl path_Object_constructor
     lis r3, lbl_807775F8@ha
     lfs f0, lbl_808867D8
     addi r3, r3, lbl_807775F8@l
@@ -671,7 +669,7 @@ lbl_fn_8042E640_000006A4:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_8042E640_000006E0:
     lwz r12, 0x0(r31)
     mr r3, r31
@@ -868,7 +866,7 @@ asm void fn_8042E930(void)
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_8042E930_000009B8:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -972,7 +970,7 @@ lbl_fn_8042E9F4_00000AD0:
     mr r3, r29
     addi r4, r29, 0xf4
     addi r5, r1, 0x108
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     b lbl_fn_8042E9F4_00000BDC
 lbl_fn_8042E9F4_00000B24:
     mr r3, r30
@@ -991,7 +989,7 @@ lbl_fn_8042E9F4_00000B24:
     addi r3, r29, 0xf4
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_8042E9F4_00000BDC
 lbl_fn_8042E9F4_00000B6C:
     mr r3, r30
@@ -1337,7 +1335,7 @@ lbl_fn_8042EF4C_00000FDC:
     addi r5, r29, 0x78
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_808867E8
     mr r3, r30
     lfs f2, lbl_808867EC
@@ -1374,11 +1372,9 @@ lbl_fn_8042EF4C_00000FDC:
     blr
 }
 
-asm void fn_8042F0AC(void)
+void *fn_8042F0AC(void *p)
 {
-    nofralloc
-    addi r3, r3, 0xf4
-    blr
+    return (char *)p + 0xf4;
 }
 
 asm void fn_8042F0B4(void)
@@ -1724,7 +1720,7 @@ lbl_fn_8042F4D4_00001568:
     lwz r4, 0x24(r4)
     stw r4, 0xfc(r3)
     lwz r3, lbl_8087F890
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     stw r3, 0xf8(r31)
     b lbl_fn_8042F4D4_000015A4
 lbl_fn_8042F4D4_00001580:
@@ -1736,7 +1732,7 @@ lbl_fn_8042F4D4_00001580:
 lbl_fn_8042F4D4_00001594:
     lwz r3, lbl_8087F8A0
     lwz r4, 0xfc(r31)
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     stw r3, 0xf8(r31)
 lbl_fn_8042F4D4_000015A4:
     lwz r3, 0xf4(r31)

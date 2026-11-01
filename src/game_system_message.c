@@ -15,16 +15,16 @@ extern void fn_80206B68(void);
 extern void fn_80206B70(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void fn_8020EE58(void);
 extern void fn_8020EE60(void);
-extern void fn_8020EF04(void);
+extern void rand_scaleRangeInt(void);
 extern void fn_8020EF4C(void);
 extern void fn_8020EFEC(void);
 extern void event_findEntryById(void);
 extern void fn_80216AFC(void);
 extern void fn_8046DC5C(void);
-extern void fn_8046DD20(void);
+extern void boss_bindArenaInteractions(void);
 extern void strncmp(void);
 extern void atoi(void);
 extern void runtime_registerStaticObject(void);
@@ -211,7 +211,7 @@ lbl_fn_802124B4_000001C4:
     b lbl_fn_802124B4_0000022C
 lbl_fn_802124B4_000001D4:
     lwz r3, 0x4(r31)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_802124B4_0000022C
     li r29, 0x0
@@ -273,7 +273,7 @@ asm void fn_80212714(void)
     b lbl_fn_80212714_000002C0
 lbl_fn_80212714_000002A0:
     lwz r3, 0x4(r31)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_80212714_000002C0
     lwz r3, 0x4(r31)
@@ -323,7 +323,7 @@ lbl_fn_80212790_000002FC:
     b lbl_fn_80212790_00000360
 lbl_fn_80212790_00000344:
     lwz r3, 0x4(r30)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_80212790_00000360
     lwz r3, 0x4(r30)
@@ -632,7 +632,7 @@ asm void fn_80212C34(void)
     add r0, r0, r4
     mulli r0, r0, 0x3e8
     subf r4, r0, r6
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     lfs f0, 0x0(r3)
     addi r5, r30, 0x4dd3
     stfs f0, 0x0(r28)
@@ -1398,7 +1398,7 @@ lbl_fn_802130BC_000012F8:
     bne lbl_fn_802130BC_00000D50
     lwz r3, lbl_8087F518
     mr r4, r31
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     lmw r23, 0x66c(r1)
     lwz r0, 0x694(r1)
     mtlr r0
@@ -1754,7 +1754,7 @@ lbl_fn_80213B78_000017DC:
     b lbl_fn_80213B78_00001988
 lbl_fn_80213B78_000017EC:
     lwz r3, 0x4(r31)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_80213B78_000018C0
     lwz r3, 0x4(r31)

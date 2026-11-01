@@ -76,9 +76,9 @@ extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
 extern void GXInitLightDistAttn(void);
-extern void fn_80615FF0(void);
-extern void fn_80616250(void);
-extern void fn_80617340(void);
+extern void GXInitLightObj(void);
+extern void GXClampLightAngle(void);
+extern void GXSetTevDirect(void);
 extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void GXSetTevAlphaIn(void);
@@ -124,22 +124,22 @@ extern u32 lbl_80887300;
 
 /* Function declarations */
 void fn_804ABA2C(void);
-void fn_804ABEE4(void);
+void *fn_804ABEE4(void *obj);
 void fn_804ABEEC(void);
-void fn_804ABEF8(void);
-void fn_804ABF00(void);
+void *fn_804ABEF8(void *obj);
+void fn_804ABF00(void *obj, void *val);
 void fn_804ABF08(void);
 void fn_804ABF14(void);
-void fn_804ABF20(void);
+u32 fn_804ABF20(void);
 void fn_804ABF28(void);
 void fn_804ABF34(void);
 void fn_804ABF40(void);
-void fn_804ABF44(void);
+void *fn_804ABF44(void *obj);
 void fn_804ABF4C(void);
 void fn_804ABF74(void);
 void fn_804ABF84(void);
-void fn_804AC3C8(void);
-void fn_804AC3D0(void);
+void *fn_804AC3C8(void *obj);
+void *fn_804AC3D0(void *obj);
 void fn_804AC3D8(void);
 void fn_804AC3E8(void);
 void fn_804AC3F8(void);
@@ -270,7 +270,7 @@ lbl_fn_804ABA2C_00000144:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80887250
     addi r3, r1, 0xa0
     li r4, 0x1
@@ -280,7 +280,7 @@ lbl_fn_804ABA2C_00000144:
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     subi r3, r26, 0x100
     subi r0, r27, 0x100
     extrwi r3, r3, 15, 16
@@ -320,7 +320,7 @@ lbl_fn_804ABA2C_00000144:
     bl fn_804ABF34
     li r3, 0x0
     li r4, 0x3
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -474,11 +474,9 @@ lbl_fn_804ABA2C_00000490:
     blr
 }
 
-asm void fn_804ABEE4(void)
+void *fn_804ABEE4(void *obj)
 {
-    nofralloc
-    addi r3, r3, 0x88
-    blr
+    return (char *)obj + 0x88;
 }
 
 asm void fn_804ABEEC(void)
@@ -489,18 +487,14 @@ asm void fn_804ABEEC(void)
     blr
 }
 
-asm void fn_804ABEF8(void)
+void *fn_804ABEF8(void *obj)
 {
-    nofralloc
-    lwz r3, 0xc(r3)
-    blr
+    return *(void **)((char *)obj + 0xc);
 }
 
-asm void fn_804ABF00(void)
+void fn_804ABF00(void *obj, void *val)
 {
-    nofralloc
-    stw r4, 0xc(r3)
-    blr
+    *(void **)((char *)obj + 0xc) = val;
 }
 
 asm void fn_804ABF08(void)
@@ -519,11 +513,9 @@ asm void fn_804ABF14(void)
     blr
 }
 
-asm void fn_804ABF20(void)
+u32 fn_804ABF20(void)
 {
-    nofralloc
-    lwz r3, lbl_8087EF8C
-    blr
+    return lbl_8087EF8C;
 }
 
 asm void fn_804ABF28(void)
@@ -545,11 +537,9 @@ asm void fn_804ABF34(void)
 void fn_804ABF40(void) {
 }
 
-asm void fn_804ABF44(void)
+void *fn_804ABF44(void *obj)
 {
-    nofralloc
-    addi r3, r3, 0x74c
-    blr
+    return (char *)obj + 0x74c;
 }
 
 asm void fn_804ABF4C(void)
@@ -860,18 +850,14 @@ lbl_fn_804ABF84_00000908:
     blr
 }
 
-asm void fn_804AC3C8(void)
+void *fn_804AC3C8(void *obj)
 {
-    nofralloc
-    addi r3, r3, 0x104
-    blr
+    return (char *)obj + 0x104;
 }
 
-asm void fn_804AC3D0(void)
+void *fn_804AC3D0(void *obj)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(void **)(obj);
 }
 
 asm void fn_804AC3D8(void)

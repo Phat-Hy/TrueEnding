@@ -14,7 +14,7 @@ extern void quest_checkCondition(void);
 extern void dialog_selectChoice(void);
 extern void fn_8014EEC4(void);
 extern void fn_8016E484(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void fn_8056A9E8(void);
 extern void fn_8056D070(void);
 extern void fn_8056D440(void);
@@ -1411,7 +1411,7 @@ asm void fn_8056C3DC(void)
     lwz r4, 0x48(r4)
     bl fn_8056CB24
     lwz r3, lbl_8087F428
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     mr r22, r3
     b lbl_fn_8056C3DC_000012B4
 lbl_fn_8056C3DC_00001264:

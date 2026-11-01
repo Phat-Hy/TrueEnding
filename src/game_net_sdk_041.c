@@ -15,7 +15,7 @@ extern void strstr(void);
 extern void atoi(void);
 extern void fn_806A426C(void);
 extern void fn_806A4270(void);
-extern void fn_806D5850(void);
+extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void net_socketClose(void);
@@ -138,7 +138,7 @@ lbl_fn_806F4980_00000080:
     cmpw r28, r29
     blt lbl_fn_806F4980_00000048
     lwz r3, 0x168(r27)
-    bl fn_806D5850
+    bl net_pollActiveSockets
     li r0, 0x0
     stw r0, 0x168(r27)
 lbl_fn_806F4980_00000098:
@@ -151,7 +151,7 @@ lbl_fn_806F4980_00000098:
     lwz r3, 0x0(r29)
     cmpwi r3, 0x0
     beq lbl_fn_806F4980_000000C0
-    bl fn_806D5850
+    bl net_pollActiveSockets
 lbl_fn_806F4980_000000C0:
     li r31, 0x0
     stw r31, 0x0(r29)

@@ -8,18 +8,18 @@ extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void fn_8000D3A8(void);
 extern void scene_traverseNode(void);
-extern void fn_8000DD0C(void);
+extern void scene_getRootNode(void);
 extern void vec3_assign(void);
 extern void fn_800109E0(void);
-extern void fn_80011410(void);
-extern void fn_800133B0(void);
+extern void mtx_multVec(void);
+extern void math_wrapAngle(void);
 extern void vec3_add(void);
 extern void fn_80043D58(void);
 extern void collision_testLineSegment(void);
 extern void mission_updateStub(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
@@ -29,10 +29,10 @@ extern void fn_800CFA28(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
 extern void fn_800E0AA8(void);
-extern void fn_800EC204(void);
+extern void cam_findTargetIndex(void);
 extern void fn_800EFE3C(void);
-extern void fn_800F52F0(void);
-extern void fn_800F72CC(void);
+extern void proj_getMatrix(void);
+extern void vec3_scale(void);
 extern void fn_800F7F90(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F80A8(void);
@@ -43,12 +43,12 @@ extern void fn_8010F6FC(void);
 extern void fn_80129A48(void);
 extern void fn_80129A6C(void);
 extern void fn_8012A1B8(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void fn_801370B8(void);
 extern void fn_80139F24(void);
 extern void fn_80139F3C(void);
 extern void fn_8013A13C(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_8013C3A8(void);
 extern void fn_8013C554(void);
@@ -516,7 +516,7 @@ asm void fn_803729B4(void)
     mr r30, r3
     mr r31, r4
     beq lbl_fn_803729B4_00000AD8
-    bl fn_8013A194
+    bl npc_getGlobalManager
     bl fn_801011B8
     bl fn_80356FFC
     li r4, 0x0
@@ -542,7 +542,7 @@ asm void fn_803729B4(void)
     lis r4, 0x2
     lwz r3, 0x10d8(r30)
     subi r4, r4, 0x7969
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_803729B4_00000504
@@ -563,7 +563,7 @@ lbl_fn_803729B4_0000050C:
     addi r3, r1, 0x74
     lfs f2, 0x14(r28)
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
     b lbl_fn_803729B4_0000060C
 lbl_fn_803729B4_00000540:
     mr r3, r31
@@ -592,11 +592,11 @@ lbl_fn_803729B4_00000564:
     bl fn_8013A13C
     addi r3, r1, 0x5c
     addi r4, r1, 0xf8
-    bl fn_80011410
+    bl mtx_multVec
     lfs f1, lbl_8088574C
     addi r3, r1, 0x20
     addi r4, r1, 0x5c
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x50
     addi r4, r1, 0x68
     addi r5, r1, 0x20
@@ -613,7 +613,7 @@ lbl_fn_803729B4_00000564:
     beq lbl_fn_803729B4_0000060C
     lfs f0, 0x78(r1)
     fadds f1, f28, f0
-    bl fn_800133B0
+    bl math_wrapAngle
     addi r29, r29, 0x1
     stfs f1, 0x78(r1)
     cmpwi r29, 0x4
@@ -662,8 +662,8 @@ lbl_fn_803729B4_00000694:
     bl fn_802A4184
     lwz r26, 0x0(r3)
     mr r3, r26
-    bl fn_800F52F0
-    bl fn_8012D8B8
+    bl proj_getMatrix
+    bl enemy_updateAnimTimer
     mr r3, r26
     bl battle_updateActorStatus
     mr r3, r26
@@ -713,7 +713,7 @@ lbl_fn_803729B4_00000724:
     cmpwi r27, 0x0
     bne lbl_fn_803729B4_00000790
     mr r3, r26
-    bl fn_8000DD0C
+    bl scene_getRootNode
     lfs f1, lbl_80885708
     li r4, 0x0
     lfs f2, lbl_808857B4
@@ -729,7 +729,7 @@ lbl_fn_803729B4_00000790:
     bl fn_801370B8
     mr r28, r3
     mr r3, r26
-    bl fn_8000DD0C
+    bl scene_getRootNode
     lfs f1, lbl_80885708
     mr r5, r28
     lfs f2, lbl_808857B4
@@ -740,16 +740,16 @@ lbl_fn_803729B4_00000790:
     bl atn_Anim_setLayerAnimation
 lbl_fn_803729B4_000007C8:
     mr r3, r26
-    bl fn_8000DD0C
+    bl scene_getRootNode
     li r4, 0x1
     bl fn_80139F24
     mr r3, r26
-    bl fn_8000DD0C
+    bl scene_getRootNode
     lfs f1, lbl_80885708
     li r4, 0x0
     bl fn_8013C554
     mr r3, r26
-    bl fn_8000DD0C
+    bl scene_getRootNode
     lfs f1, lbl_80885708
     li r4, 0x0
     bl fn_80139F3C
@@ -761,7 +761,7 @@ lbl_fn_803729B4_000007C8:
     addi r3, r1, 0x38
     fmr f2, f1
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
     b lbl_fn_803729B4_000008B8
 lbl_fn_803729B4_00000828:
     clrlwi r0, r27, 31
@@ -783,7 +783,7 @@ lbl_fn_803729B4_00000848:
     lfd f0, 0x1d0(r1)
     fsubs f0, f0, f28
     fmadds f1, f29, f0, f30
-    bl fn_80057A68
+    bl vec3_initValues
     b lbl_fn_803729B4_000008B8
 lbl_fn_803729B4_00000874:
     cmpwi r0, 0x0
@@ -804,7 +804,7 @@ lbl_fn_803729B4_00000890:
     lfd f0, 0x1d0(r1)
     fsubs f0, f0, f28
     fnmsubs f1, f29, f0, f31
-    bl fn_80057A68
+    bl vec3_initValues
 lbl_fn_803729B4_000008B8:
     addi r3, r1, 0xc8
     addi r4, r1, 0x74
@@ -829,18 +829,18 @@ lbl_fn_803729B4_000008B8:
     addi r3, r1, 0x150
     bl fn_80372754
     mr r3, r26
-    bl fn_8000DD0C
+    bl scene_getRootNode
     addi r4, r1, 0x150
     bl fn_80316E38
     mr r3, r26
-    bl fn_8000DD0C
+    bl scene_getRootNode
     li r4, 0x1
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     addi r3, r1, 0x8c
     li r4, 0x0
     bl fn_80317034
     mr r3, r26
-    bl fn_8000DD0C
+    bl scene_getRootNode
     addi r4, r1, 0x8c
     bl scene_traverseNode
     addi r3, r1, 0x8c
@@ -850,7 +850,7 @@ lbl_fn_803729B4_000008B8:
     mr r3, r26
     bl quest_checkCondition
     mr r3, r26
-    bl fn_8000DD0C
+    bl scene_getRootNode
     lfs f1, lbl_8088570C
     li r4, 0x0
     bl fn_80357F38
@@ -905,7 +905,7 @@ lbl_fn_803729B4_000009B4:
     bl fn_8036EE04
     li r4, 0x1
     bl fn_803B6C88
-    bl fn_8013A194
+    bl npc_getGlobalManager
     bl fn_80371664
     bl fn_8036635C
     bl fn_8054E520

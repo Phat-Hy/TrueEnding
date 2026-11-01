@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void mem_alloc(void);
-extern void fn_800EE360(void);
+extern void camera_updateTargetMode(void);
 extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
 extern void fn_80107274(void);
@@ -29,7 +29,7 @@ extern void fn_801AAB64(void);
 extern void fn_801AD34C(void);
 extern void fn_801AF264(void);
 extern void fn_801B2EDC(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void vec3_isNonZero(void);
@@ -1123,7 +1123,7 @@ lbl_fn_80168FCC_00000E4C:
     cmpwi r3, 0x0
     beq lbl_fn_80168FCC_00000E74
     li r4, 0xb5
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_80168FCC_00000E74:
     mr r3, r29
     li r4, 0x1
@@ -1748,7 +1748,7 @@ lbl_fn_801698E4_0000171C:
     cmplwi r0, 0x400
     beq lbl_fn_801698E4_0000174C
     mr r3, r29
-    bl fn_800EE360
+    bl camera_updateTargetMode
 lbl_fn_801698E4_0000174C:
     lwz r0, 0x64(r1)
     lwz r31, 0x5c(r1)

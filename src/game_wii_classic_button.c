@@ -11,9 +11,9 @@ extern void fn_8001260C(void);
 extern void fn_8001296C(void);
 extern void item_testLineOfSight(void);
 extern void map_debugLog(void);
-extern void fn_800928B0(void);
+extern void compass_findWaypointIndex(void);
 extern void msg_getMessageById(void);
-extern void fn_800C16B4(void);
+extern void skeleton_getGlobalManager(void);
 extern void fn_80480438(void);
 extern void fn_80483F70(void);
 extern void fn_80484088(void);
@@ -365,7 +365,7 @@ lbl_fn_80560FEC_00000364:
     beq lbl_fn_80560FEC_000003D4
     mr r4, r28
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_80560FEC_00000394
     li r5, 0x0
@@ -1593,7 +1593,7 @@ lbl_fn_80561BD4_0000136C:
     stfsu f8, 0x20(r4)
     bdnz lbl_fn_80561BD4_0000136C
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     lwz r0, 0x260(r3)
     cmpwi r0, 0x0
     beq lbl_fn_80561BD4_0000142C

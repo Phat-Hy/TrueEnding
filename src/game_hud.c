@@ -14,7 +14,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8004FF58(void);
-extern void fn_8006B174(void);
+extern void boss_decodePhaseBitfield(void);
 extern void fn_80070B60(void);
 extern void fn_80079ECC(void);
 extern void fn_8007A36C(void);
@@ -78,14 +78,14 @@ void fn_8009E690(void);
 void hud_updateTargetReticle(void);
 void fn_8009EB20(void);
 void fn_8009EC2C(void);
-void fn_8009EE30(void);
+void hud_drawTargetMarker(void);
 void hud_projectWorldPoints(void);
 void hud_copyBoneMatrices(void);
 void atn_HUD_projectWorldPoints(void);
-void fn_8009F688(void);
+u32 fn_8009F688(void);
 void fn_8009F690(void);
 void fn_8009F694(void);
-void fn_8009F704(void);
+u32 fn_8009F704(void);
 void fn_8009F70C(void);
 void fn_8009F788(void);
 void fn_8009FE24(void);
@@ -972,7 +972,7 @@ lbl_fn_8009EC2C_00000C30:
     blr
 }
 
-asm void fn_8009EE30(void)
+asm void hud_drawTargetMarker(void)
 {
     nofralloc
     stwu r1, -0x1b0(r1)
@@ -1030,28 +1030,28 @@ asm void fn_8009EE30(void)
     stfs f31, 0xc0(r1)
     fcmpo cr0, f11, f10
     stfs f30, 0xc4(r1)
-    ble lbl_fn_8009EE30_00000D30
-    b lbl_fn_8009EE30_00000D34
-lbl_fn_8009EE30_00000D30:
+    ble lbl_hud_drawTargetMarker_00000D30
+    b lbl_hud_drawTargetMarker_00000D34
+lbl_hud_drawTargetMarker_00000D30:
     fmr f11, f10
-lbl_fn_8009EE30_00000D34:
+lbl_hud_drawTargetMarker_00000D34:
     lfs f30, 0xbc(r1)
     fcmpo cr0, f30, f11
-    ble lbl_fn_8009EE30_00000D44
-    b lbl_fn_8009EE30_00000D5C
-lbl_fn_8009EE30_00000D44:
+    ble lbl_hud_drawTargetMarker_00000D44
+    b lbl_hud_drawTargetMarker_00000D5C
+lbl_hud_drawTargetMarker_00000D44:
     lfs f30, 0xc0(r1)
     lfs f10, 0xc4(r1)
     fcmpo cr0, f30, f10
-    ble lbl_fn_8009EE30_00000D58
-    b lbl_fn_8009EE30_00000D5C
-lbl_fn_8009EE30_00000D58:
+    ble lbl_hud_drawTargetMarker_00000D58
+    b lbl_hud_drawTargetMarker_00000D5C
+lbl_hud_drawTargetMarker_00000D58:
     fmr f30, f10
-lbl_fn_8009EE30_00000D5C:
+lbl_hud_drawTargetMarker_00000D5C:
     lwz r3, 0x4(r22)
     bl fn_8009FFCC
     cmpwi r3, 0x0
-    bne lbl_fn_8009EE30_00001238
+    bne lbl_hud_drawTargetMarker_00001238
     lwz r6, 0x4(r22)
     addi r4, r22, 0x8
     mr r3, r23
@@ -1072,7 +1072,7 @@ lbl_fn_8009EE30_00000D5C:
     stfs f10, 0x14(r22)
     lwz r3, 0x17c(r4)
     cmpwi r3, 0x0
-    beq lbl_fn_8009EE30_00001238
+    beq lbl_hud_drawTargetMarker_00001238
     lfs f2, 0x18(r3)
     addi r24, r1, 0xf8
     psq_l f1, 0x10(r3), 0, 0
@@ -1359,7 +1359,7 @@ lbl_fn_8009EE30_00000D5C:
     lfs f2, 0xdc(r1)
     stfs f2, 0x2c(r22)
     psq_st f1, 0x24(r22), 0, 0
-lbl_fn_8009EE30_00001238:
+lbl_hud_drawTargetMarker_00001238:
     addi r11, r1, 0x190
     psq_l f31, 0x1a8(r1), 0, 0
     lfd f31, 0x1a0(r1)
@@ -1539,11 +1539,9 @@ lbl_atn_HUD_projectWorldPoints_0000148C:
     blr
 }
 
-asm void fn_8009F688(void)
+u32 fn_8009F688(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 void fn_8009F690(void) {
@@ -1583,11 +1581,9 @@ lbl_fn_8009F694_0000150C:
     blr
 }
 
-asm void fn_8009F704(void)
+u32 fn_8009F704(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_8009F70C(void)
@@ -1658,7 +1654,7 @@ asm void fn_8009F788(void)
     bl actor_dispatchMessage
     mr r4, r24
     addi r3, r1, 0x48
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0x3c(r1)
     srwi. r0, r0, 31
     beq lbl_fn_8009F788_00001628
@@ -1779,7 +1775,7 @@ lbl_fn_8009F788_00001710:
     bl actor_dispatchMessage
     mr r4, r25
     addi r3, r1, 0x24
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0x30(r1)
     srwi. r0, r0, 31
     beq lbl_fn_8009F788_000017E8

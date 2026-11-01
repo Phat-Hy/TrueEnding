@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8004D124(void);
-extern void fn_80056DB8(void);
+extern void path_Object_constructor(void);
 extern void atn_ColliCapsule_destructor(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
@@ -21,7 +21,7 @@ extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80092954(void);
+extern void compass_findMarkerByName(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -44,11 +44,11 @@ extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
 extern void equip_applyToCharacter(void);
-extern void fn_80158BB4(void);
+extern void shop_canPurchaseItem(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void battle_updateTargetAggro(void);
-extern void fn_801781B0(void);
+extern void battle_calcAABBCenter(void);
 extern void battle_updateActorStatus(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -71,14 +71,14 @@ extern void fn_802B596C(void);
 extern void fn_802B5DA4(void);
 extern void fn_802B6104(void);
 extern void fn_802B6AF8(void);
-extern void fn_8037D4C0(void);
+extern void dvd_showDiskErrorDialog(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_804DA490(void);
-extern void fn_805A3C58(void);
+extern void rand_Mersenne_constructor(void);
 extern void fn_805A3D00(void);
 extern void fn_805A507C(void);
 extern void fn_805A5224(void);
@@ -504,7 +504,7 @@ asm void fn_802B23E8(void)
     bl _savegpr_25
     mr r30, r3
     mr r31, r5
-    bl fn_805A3C58
+    bl rand_Mersenne_constructor
     lfs f0, lbl_80884020
     lis r3, lbl_80786204@ha
     li r28, 0x0
@@ -551,29 +551,29 @@ asm void fn_802B23E8(void)
     stw r0, 0x1604(r30)
     stw r28, 0x1608(r30)
     stw r28, 0x1684(r30)
-    bl fn_80056DB8
+    bl path_Object_constructor
     lis r29, lbl_80777630@ha
     addi r26, r30, 0x16f0
     addi r29, r29, lbl_80777630@l
     stw r29, 0x0(r27)
     mr r3, r26
     li r4, 0x1
-    bl fn_80056DB8
+    bl path_Object_constructor
     addi r27, r30, 0x1748
     stw r29, 0x0(r26)
     mr r3, r27
     li r4, 0x1
-    bl fn_80056DB8
+    bl path_Object_constructor
     addi r26, r30, 0x17a0
     stw r29, 0x0(r27)
     mr r3, r26
     li r4, 0x1
-    bl fn_80056DB8
+    bl path_Object_constructor
     addi r27, r30, 0x17f8
     stw r29, 0x0(r26)
     mr r3, r27
     li r4, 0x1
-    bl fn_80056DB8
+    bl path_Object_constructor
     addi r26, r30, 0x1850
     stw r29, 0x0(r27)
     mr r3, r26
@@ -1528,7 +1528,7 @@ asm void fn_802B3248(void)
 lbl_fn_802B3248_0000136C:
     lwz r4, 0x0(r31)
     addi r3, r28, 0xb0
-    bl fn_80092954
+    bl compass_findMarkerByName
     cmpwi r3, 0x0
     beq lbl_fn_802B3248_00001518
     lwz r0, 0x1518(r28)
@@ -1626,7 +1626,7 @@ lbl_fn_802B3248_000013F8:
     stfs f6, 0x38(r1)
     stfs f7, 0x3c(r1)
     stw r0, 0xc(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lbz r0, 0xc(r1)
     stb r0, 0x18(r3)
     lbz r0, 0xd(r1)
@@ -1919,7 +1919,7 @@ lbl_fn_802B3764_000018D0:
     li r5, 0xf
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_802B3764_00001914:
     lwz r0, 0xd18(r31)
     lwz r3, 0x14e0(r31)
@@ -1989,7 +1989,7 @@ lbl_fn_802B3764_000019EC:
     mtctr r3
     bctr
     mr r3, r31
-    bl fn_80158BB4
+    bl shop_canPurchaseItem
     cmpwi r3, 0x0
     beq lbl_fn_802B3764_00001A94
     li r29, 0x1
@@ -2638,7 +2638,7 @@ lbl_fn_802B3764_000023DC:
     bl fn_802B43C8
     mr r4, r31
     addi r3, r1, 0x10
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     addi r3, r1, 0x10
     lfs f3, lbl_80884028
     lfs f2, 0x18(r1)

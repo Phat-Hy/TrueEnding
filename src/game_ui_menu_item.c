@@ -8,14 +8,14 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void vec3_set(void);
 extern void vec3_assign(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void collision_queryGeometry(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800F52F0(void);
+extern void proj_getMatrix(void);
 extern void fn_8012476C(void);
 extern void fn_8012A1B8(void);
 extern void fn_80139F4C(void);
@@ -24,8 +24,8 @@ extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
 extern void fn_8015E4B0(void);
 extern void debuff_clearStatus(void);
-extern void fn_80176548(void);
-extern void fn_80178208(void);
+extern void battle_calcExpPosition(void);
+extern void battle_generateLootDrops(void);
 extern void fn_801B4BC8(void);
 extern void fn_801B4C00(void);
 extern void PSMTXConcat(void);
@@ -857,7 +857,7 @@ lbl_fn_801B6278_00000A80:
 lbl_fn_801B6278_00000B1C:
     lwz r3, 0x8(r31)
     mr r4, r30
-    bl fn_80178208
+    bl battle_generateLootDrops
     li r3, 0x1
     b lbl_fn_801B6278_00000BE4
 lbl_fn_801B6278_00000B30:
@@ -933,7 +933,7 @@ asm void fn_801B6494(void)
     stw r29, 0x134(r1)
     mr r29, r3
     lwz r3, 0x4(r4)
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_80139F4C
     cmpwi r3, 0x0
     beq lbl_fn_801B6494_00000CC8
@@ -949,7 +949,7 @@ asm void fn_801B6494(void)
     bl fn_8013A13C
     addi r3, r1, 0x50
     addi r4, r1, 0x100
-    bl fn_80011410
+    bl mtx_multVec
     addi r4, r31, 0x18
     lwz r6, 0x18(r31)
     lwz r5, 0x4(r4)
@@ -988,7 +988,7 @@ lbl_fn_801B6494_00000CC8:
     bl fn_8013A13C
     addi r3, r1, 0x44
     addi r4, r1, 0xa8
-    bl fn_80011410
+    bl mtx_multVec
     addi r4, r31, 0x24
     lwz r6, 0x24(r31)
     lwz r5, 0x4(r4)
@@ -1777,7 +1777,7 @@ lbl_fn_801B6E70_000017EC:
     stw r0, 0x1d0(r1)
     lwz r4, 0x4(r30)
     addi r5, r4, 0x528
-    bl fn_80176548
+    bl battle_calcExpPosition
     lwz r6, 0x4(r30)
     addi r4, r1, 0x190
     lwz r3, lbl_8087EE98

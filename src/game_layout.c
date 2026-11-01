@@ -24,12 +24,12 @@ extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
 extern void GXInitLightDistAttn(void);
 extern void GXInitLightSpot(void);
-extern void fn_80615FF0(void);
-extern void fn_80616250(void);
+extern void GXInitLightObj(void);
+extern void GXClampLightAngle(void);
 extern void GXDrawDone(void);
 extern void fn_80617200(void);
 extern void GXInitTexObjDefault(void);
-extern void fn_80617340(void);
+extern void GXSetTevDirect(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevIndirect(void);
 extern void fn_806175F0(void);
@@ -558,7 +558,7 @@ asm void fn_800A9E64(void)
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80880D28
     addi r3, r22, 0x4
     li r4, 0x1
@@ -568,7 +568,7 @@ asm void fn_800A9E64(void)
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     lwz r3, lbl_8087EF8C
     mr r4, r25
     mr r5, r24
@@ -583,7 +583,7 @@ asm void fn_800A9E64(void)
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80880D28
     addi r3, r22, 0x24
     li r4, 0x1
@@ -593,7 +593,7 @@ asm void fn_800A9E64(void)
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     srwi r3, r30, 31
     srwi r0, r31, 31
     add r4, r3, r30
@@ -614,7 +614,7 @@ asm void fn_800A9E64(void)
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80880D28
     addi r3, r1, 0x50
     li r4, 0x1
@@ -624,7 +624,7 @@ asm void fn_800A9E64(void)
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     slwi r29, r24, 1
     slwi r28, r25, 1
     lwz r3, lbl_8087EF8C
@@ -641,7 +641,7 @@ asm void fn_800A9E64(void)
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     clrlslwi r20, r24, 16, 1
     clrlslwi r21, r25, 16, 1
     clrlslwi r5, r25, 17, 1
@@ -695,7 +695,7 @@ asm void fn_800A9E64(void)
     bl __GXSetVtxDesc
     li r3, 0x0
     li r4, 0x3
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -747,7 +747,7 @@ asm void fn_800A9E64(void)
     bl __GXSetVtxDesc
     li r3, 0x0
     li r4, 0x3
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -924,7 +924,7 @@ lbl_fn_800A9E64_00000A28:
     bl __GXSetVtxDesc
     li r3, 0x0
     li r4, 0x0
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0

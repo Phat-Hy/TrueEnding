@@ -8,7 +8,7 @@ extern void item_testLineOfSight(void);
 extern void collision_testLineSegment(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800EE360(void);
+extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
@@ -1622,7 +1622,7 @@ asm void fn_80329E34(void)
     mr r3, r31
     ori r0, r0, 0x8000
     stw r0, 0x12a4(r31)
-    bl fn_800EE360
+    bl camera_updateTargetMode
     b lbl_fn_80329E34_000015F8
 lbl_fn_80329E34_000015F0:
     li r0, 0x0

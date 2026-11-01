@@ -11,8 +11,8 @@ extern void fn_8012AFE8(void);
 extern void fn_80206B14(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_generateId(void);
-extern void fn_8020ED84(void);
-extern void fn_8020EF04(void);
+extern void time_wrapMilliseconds(void);
+extern void rand_scaleRangeInt(void);
 extern void random_generateValue(void);
 extern void fn_802114E0(void);
 extern void fn_8021150C(void);
@@ -39,7 +39,7 @@ extern void fn_803CE768(void);
 extern void fn_803CE7E0(void);
 extern void fn_804A1C4C(void);
 extern void fn_804A1D2C(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void fn_8057F19C(void);
 extern void fn_8057F1B8(void);
 extern void __construct_new_array(void);
@@ -230,7 +230,7 @@ lbl_fn_803BD2B0_000001F8:
     cmpwi r3, 0x0
     bne lbl_fn_803BD2B0_00000218
     mr r3, r28
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_803BD2B0_00000234
 lbl_fn_803BD2B0_00000218:
@@ -461,7 +461,7 @@ lbl_fn_803BD49C_00000524:
     blt lbl_fn_803BD49C_000004BC
 lbl_fn_803BD49C_00000544:
     mr r3, r30
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_803BD49C_000005AC
     addis r27, r29, 0x1
@@ -473,7 +473,7 @@ lbl_fn_803BD49C_00000560:
 lbl_fn_803BD49C_00000568:
     lwz r4, 0x0(r28)
     mr r3, r24
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     cmpwi r3, 0x0
     beq lbl_fn_803BD49C_0000058C
     bl random_generateValue
@@ -1112,7 +1112,7 @@ lbl_fn_803BDEE4_00000E5C:
 lbl_fn_803BDEE4_00000E84:
     lwz r3, lbl_8087F8A0
     mr r4, r29
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     beq lbl_fn_803BDEE4_00000FA4
     lfs f0, 0x7d8(r3)

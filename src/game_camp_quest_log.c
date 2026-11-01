@@ -12,7 +12,7 @@ extern void sys_copyString(void);
 extern void fn_8000ECA8(void);
 extern void vec3_add(void);
 extern void str_initFromCStr(void);
-extern void fn_8004203C(void);
+extern void menu_initWindowBuffer(void);
 extern void str_getData(void);
 extern void fn_800422CC(void);
 extern void talk_parseQuotedString(void);
@@ -25,17 +25,17 @@ extern void lockon_updateTarget(void);
 extern void str_skipWhitespace(void);
 extern void fn_800E0AA8(void);
 extern void fn_800EC254(void);
-extern void fn_800EC2C4(void);
-extern void fn_800EC440(void);
-extern void fn_800EC534(void);
-extern void fn_800EC5BC(void);
-extern void fn_800EC654(void);
-extern void fn_800ED42C(void);
+extern void cam_registerTarget(void);
+extern void cam_initTrajectoryParams(void);
+extern void cam_bindPathTarget(void);
+extern void cam_bindRotationTarget(void);
+extern void cam_evalControllerSpline(void);
+extern void cam_setLookAtTarget(void);
 extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
-extern void fn_800EDFE8(void);
-extern void fn_800F72CC(void);
-extern void fn_8020A780(void);
+extern void cam_evalLookAtMatrix(void);
+extern void vec3_scale(void);
+extern void str_appendString(void);
 extern void fn_8021A4CC(void);
 extern void fn_80288390(void);
 extern void fn_8028B74C(void);
@@ -371,7 +371,7 @@ asm void fn_803C3894(void)
     mr r28, r3
     mr r29, r6
     addi r3, r1, 0x2b0
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     addi r3, r1, 0xe0
     bl fn_8021A4CC
     mulli r23, r29, 0x2710
@@ -387,7 +387,7 @@ lbl_fn_803C3894_00000288:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xe0
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0xe0
     addi r4, r25, 0xf1
     bl sys_copyString
@@ -397,7 +397,7 @@ lbl_fn_803C3894_00000288:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xe0
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0xe0
     addi r4, r25, 0xf7
     bl sys_copyString
@@ -411,7 +411,7 @@ lbl_fn_803C3894_000002E4:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xe0
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
     bl sys_copyString
@@ -444,7 +444,7 @@ lbl_fn_803C3894_0000035C:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xe0
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
     bl sys_copyString
@@ -515,7 +515,7 @@ lbl_fn_803C3894_00000458:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xe0
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0xe0
     li r4, 0x0
     bl fn_8000ECA8
@@ -632,7 +632,7 @@ lbl_fn_803C3894_00000614:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xe0
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0xe0
     li r4, 0x0
     bl fn_8000ECA8
@@ -701,7 +701,7 @@ lbl_fn_803C3894_0000070C:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xe0
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r28, 0x78
     li r18, 0x0
     bl fn_803C7F30
@@ -737,7 +737,7 @@ lbl_fn_803C3894_000007A4:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xe0
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
     bl sys_copyString
@@ -839,7 +839,7 @@ lbl_fn_803C3894_0000090C:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xe0
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0xe0
     bl str_getData
     bl atoi
@@ -856,7 +856,7 @@ lbl_fn_803C3894_00000968:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xe0
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
     bl sys_copyString
@@ -958,7 +958,7 @@ lbl_fn_803C3894_00000ADC:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xe0
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0xe0
     bl str_getData
     bl atoi
@@ -975,7 +975,7 @@ lbl_fn_803C3894_00000B38:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xe0
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
     bl sys_copyString
@@ -1088,7 +1088,7 @@ lbl_fn_803C3894_00000CF0:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xe0
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
     bl sys_copyString
@@ -1191,7 +1191,7 @@ lbl_fn_803C3894_00000E78:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xe0
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
     bl sys_copyString
@@ -1310,7 +1310,7 @@ lbl_fn_803C3894_00001040:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xe0
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
     bl sys_copyString
@@ -1364,17 +1364,17 @@ lbl_fn_803C3894_00001040:
     addi r4, r25, 0x24d
     li r5, 0x0
     li r6, 0x0
-    bl fn_800EC440
+    bl cam_initTrajectoryParams
     addi r3, r1, 0x284
     addi r4, r1, 0xc4
     addi r5, r1, 0x1bc
-    bl fn_800EC2C4
+    bl cam_registerTarget
     addi r3, r1, 0x1bc
     li r4, -0x1
-    bl fn_800EC534
+    bl cam_bindPathTarget
     addi r3, r1, 0x248
     addi r4, r1, 0x284
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     b lbl_fn_803C3894_00001180
 lbl_fn_803C3894_00001158:
     addi r3, r1, 0x248
@@ -1390,19 +1390,19 @@ lbl_fn_803C3894_00001158:
 lbl_fn_803C3894_00001180:
     addi r3, r1, 0x180
     addi r4, r1, 0x284
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     addi r3, r1, 0x248
     addi r4, r1, 0x180
     bl fn_800EC254
     mr r19, r3
     addi r3, r1, 0x180
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     cmpwi r19, 0x0
     bne lbl_fn_803C3894_00001158
     addi r3, r1, 0x248
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     addi r3, r1, 0xb8
     bl fn_800E0AA8
     mr r4, r3
@@ -1470,7 +1470,7 @@ lbl_fn_803C3894_00001224:
     addi r3, r1, 0x284
     li r4, -0x1
     addi r20, r20, 0x1
-    bl fn_800EC5BC
+    bl cam_bindRotationTarget
     addi r3, r1, 0xb8
     li r4, -0x1
     bl fn_8000D760
@@ -1524,7 +1524,7 @@ lbl_fn_803C3894_00001370:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xe0
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
     bl sys_copyString
@@ -1566,17 +1566,17 @@ lbl_fn_803C3894_00001370:
     addi r4, r25, 0x24d
     li r5, 0x0
     li r6, 0x0
-    bl fn_800EC440
+    bl cam_initTrajectoryParams
     addi r3, r1, 0x21c
     addi r4, r1, 0xac
     addi r5, r1, 0x15c
-    bl fn_800EC2C4
+    bl cam_registerTarget
     addi r3, r1, 0x15c
     li r4, -0x1
-    bl fn_800EC534
+    bl cam_bindPathTarget
     addi r3, r1, 0x1e0
     addi r4, r1, 0x21c
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     b lbl_fn_803C3894_00001480
 lbl_fn_803C3894_00001458:
     addi r3, r1, 0x1e0
@@ -1592,19 +1592,19 @@ lbl_fn_803C3894_00001458:
 lbl_fn_803C3894_00001480:
     addi r3, r1, 0x120
     addi r4, r1, 0x21c
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     addi r3, r1, 0x1e0
     addi r4, r1, 0x120
     bl fn_800EC254
     mr r19, r3
     addi r3, r1, 0x120
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     cmpwi r19, 0x0
     bne lbl_fn_803C3894_00001458
     addi r3, r1, 0x1e0
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     addi r3, r1, 0xa0
     bl fn_800E0AA8
     mr r4, r3
@@ -1653,7 +1653,7 @@ lbl_fn_803C3894_00001524:
     addi r3, r1, 0x21c
     li r4, -0x1
     addi r20, r20, 0x1
-    bl fn_800EC5BC
+    bl cam_bindRotationTarget
     addi r3, r1, 0xa0
     li r4, -0x1
     bl fn_8000D760
@@ -1689,7 +1689,7 @@ lbl_fn_803C3894_000015E4:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xe0
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
     bl sys_copyString
@@ -1858,7 +1858,7 @@ lbl_fn_803C3894_00001858:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xe0
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r28, 0x104
     li r20, 0x0
     bl fn_803C8BB8
@@ -1894,7 +1894,7 @@ lbl_fn_803C3894_000018F0:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xe0
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
     bl sys_copyString
@@ -2016,7 +2016,7 @@ lbl_fn_803C3894_00001AB4:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xe0
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r28, 0x10c
     li r20, 0x0
     bl fn_803C8E64
@@ -2052,7 +2052,7 @@ lbl_fn_803C3894_00001B4C:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xe0
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
     bl sys_copyString
@@ -2190,7 +2190,7 @@ lbl_fn_803C3894_00001D58:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xe0
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r28, 0x114
     li r20, 0x0
     bl fn_803C90BC
@@ -2226,7 +2226,7 @@ lbl_fn_803C3894_00001DF0:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xe0
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
     bl sys_copyString
@@ -2359,7 +2359,7 @@ lbl_fn_803C3894_00001FF8:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xe0
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
     bl sys_copyString
@@ -2453,7 +2453,7 @@ lbl_fn_803C3894_00002150:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xe0
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
     bl sys_copyString
@@ -2498,7 +2498,7 @@ lbl_fn_803C3894_000021F8:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xe0
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
     bl sys_copyString
@@ -2548,7 +2548,7 @@ lbl_fn_803C3894_000021F8:
     lfs f1, lbl_80885CCC
     addi r3, r1, 0x34
     addi r4, r1, 0x28
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x114
     addi r4, r1, 0x34
     bl vec3_copy
@@ -2633,7 +2633,7 @@ lbl_fn_803C3894_000023F4:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xe0
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0x64
     bl fn_803C9E84
     lwz r4, 0xa8(r28)
@@ -2647,7 +2647,7 @@ lbl_fn_803C3894_00002428:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xe0
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
     bl sys_copyString
@@ -2719,7 +2719,7 @@ lbl_fn_803C3894_000024D4:
     lfs f1, lbl_80885CCC
     addi r3, r1, 0x1c
     addi r4, r1, 0x10
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0xfc
     addi r4, r1, 0x1c
     bl vec3_copy
@@ -2836,7 +2836,7 @@ lbl_fn_803C3894_000026DC:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xe0
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
     bl sys_copyString

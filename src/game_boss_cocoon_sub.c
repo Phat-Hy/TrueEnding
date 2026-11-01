@@ -13,13 +13,13 @@ extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void magic_dispatchActionCommand(void);
-extern void fn_8012DB04(void);
+extern void enemy_evalAnimTrack(void);
 extern void quest_evaluateConditions(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void fn_8016DDB0(void);
 extern void actor_setState(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void battle_updateActorStatus(void);
 extern void fn_80196428(void);
 extern void task_findEntryById(void);
@@ -1386,7 +1386,7 @@ lbl_fn_8045DF34_000012BC:
     mr r4, r3
 lbl_fn_8045DF34_00001314:
     mr r3, r28
-    bl fn_80178208
+    bl battle_generateLootDrops
     mr r3, r31
     bl fn_8045ECC4
     lwz r3, lbl_8087F490
@@ -1573,7 +1573,7 @@ asm void fn_8045E780(void)
     stw r30, 0x128(r1)
     mr r30, r3
     addi r3, r3, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     stfs f1, 0x2e8(r30)
     addi r3, r30, 0xb0
     lfs f29, 0x2e4(r30)

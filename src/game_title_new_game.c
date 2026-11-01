@@ -17,12 +17,12 @@ extern void atn_Model_findBoneIndex(void);
 extern void motion_updateFogAdj(void);
 extern void ref_releaseHandle(void);
 extern void fn_8011F8F4(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
-extern void fn_8011FE3C(void);
+extern void skill_findNodeByTag(void);
 extern void magic_dispatchActionCommand(void);
 extern void boss_updatePhaseState(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void world_getGlobalFlag(void);
 extern void fn_8037F690(void);
 extern void fn_803935FC(void);
@@ -146,7 +146,7 @@ lbl_fn_803AE1D4_000000B8:
     blt lbl_fn_803AE1D4_000004CC
     lwz r4, 0x0(r27)
     mr r3, r21
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_803AE1D4_000004CC
@@ -787,7 +787,7 @@ lbl_fn_803AEA24_000009C4:
     b lbl_fn_803AEA24_00000A20
 lbl_fn_803AEA24_000009CC:
     lwz r3, lbl_8087F890
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r5, r3
     cmpwi r0, 0x0
@@ -807,7 +807,7 @@ lbl_fn_803AEA24_00000A04:
     b lbl_fn_803AEA24_00000A20
 lbl_fn_803AEA24_00000A14:
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r5, r3
 lbl_fn_803AEA24_00000A20:
     cmpwi r5, 0x0
@@ -962,7 +962,7 @@ lbl_fn_803AED54_00000C20:
     mr r3, r22
     rlwinm r0, r0, 0, 27, 25
     stw r0, 0x4(r4)
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     mr r25, r3
     b lbl_fn_803AED54_00000C6C
 lbl_fn_803AED54_00000C58:
@@ -1778,7 +1778,7 @@ lbl_fn_803AF83C_000017A4:
     cmpwi r0, 0x0
     blt lbl_fn_803AF83C_00001970
     mr r3, r24
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     mr r19, r3
     b lbl_fn_803AF83C_000017E0
 lbl_fn_803AF83C_000017CC:
@@ -1985,7 +1985,7 @@ lbl_fn_803AF83C_00001A6C:
     blt lbl_fn_803AF83C_000025AC
     stw r0, 0xa4(r23)
     mr r3, r24
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     mr r28, r3
     b lbl_fn_803AF83C_00001AB8
 lbl_fn_803AF83C_00001AA4:

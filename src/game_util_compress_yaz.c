@@ -17,8 +17,8 @@ extern void fn_8014EEC4(void);
 extern void fn_8014F5D4(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
-extern void fn_8020ED84(void);
-extern void fn_8020EF04(void);
+extern void time_wrapMilliseconds(void);
+extern void rand_scaleRangeInt(void);
 extern void fn_8020EF4C(void);
 extern void fn_8020EFEC(void);
 extern void event_findEntryById(void);
@@ -26,7 +26,7 @@ extern void fn_80211940(void);
 extern void fn_80219544(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
-extern void fn_804444E8(void);
+extern void gmk_findSlotByIndex(void);
 extern void fn_8044D034(void);
 extern void fn_8044D060(void);
 extern void fn_8044D104(void);
@@ -35,7 +35,7 @@ extern void boss_getOffset50(void);
 extern void fn_804A39EC(void);
 extern void fn_804A3A68(void);
 extern void fn_804A5824(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void fn_805634D4(void);
 extern void fn_8057F7AC(void);
 extern void fn_8057F884(void);
@@ -783,7 +783,7 @@ lbl_fn_8058BBB4_000009C0:
     beq lbl_fn_8058BBB4_000009FC
     lwz r3, lbl_8087F4F0
     lwz r4, 0x3300(r4)
-    bl fn_804444E8
+    bl gmk_findSlotByIndex
     addis r4, r31, 0x2
     stw r3, 0x5b28(r4)
     b lbl_fn_8058BBB4_00000A00
@@ -869,7 +869,7 @@ lbl_fn_8058BE7C_00000AF0:
     mr r29, r3
 lbl_fn_8058BE7C_00000B0C:
     mr r3, r29
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_8058BE7C_00000FF8
     mr r3, r29
@@ -888,7 +888,7 @@ lbl_fn_8058BE7C_00000B3C:
     bne lbl_fn_8058BE7C_00000B60
     lwz r4, 0x7c(r22)
     li r3, 0x2
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     mr r23, r3
     b lbl_fn_8058BE7C_00000B78
 lbl_fn_8058BE7C_00000B60:
@@ -896,7 +896,7 @@ lbl_fn_8058BE7C_00000B60:
     bne lbl_fn_8058BE7C_00000B78
     lwz r4, 0x7c(r22)
     li r3, 0x3
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     mr r23, r3
 lbl_fn_8058BE7C_00000B78:
     lwz r21, 0x50(r31)
@@ -908,7 +908,7 @@ lbl_fn_8058BE7C_00000B78:
     lwz r3, lbl_8087F8A0
     mr r4, r21
     add r26, r5, r0
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     mr r25, r3
     beq lbl_fn_8058BE7C_00000C6C
@@ -978,7 +978,7 @@ lbl_fn_8058BE7C_00000C6C:
     lwz r3, lbl_8087F8A0
     mr r4, r20
     add r25, r5, r0
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     mr r24, r3
     beq lbl_fn_8058BE7C_00000D78
@@ -1048,11 +1048,11 @@ lbl_fn_8058BE7C_00000D78:
     beq lbl_fn_8058BE7C_00000FE4
     lwz r4, 0x7c(r22)
     li r3, 0x1
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     lwz r4, 0x7c(r22)
     mr r25, r3
     li r3, 0x3
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     lwz r20, 0x50(r31)
     mr r26, r3
     mr r3, r20
@@ -1063,7 +1063,7 @@ lbl_fn_8058BE7C_00000D78:
     lwz r3, lbl_8087F8A0
     mr r4, r20
     add r23, r5, r0
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     mr r24, r3
     beq lbl_fn_8058BE7C_00000EC0
@@ -1133,7 +1133,7 @@ lbl_fn_8058BE7C_00000EC0:
     lwz r3, lbl_8087F8A0
     mr r4, r20
     add r23, r5, r0
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     mr r22, r3
     beq lbl_fn_8058BE7C_00000FCC
@@ -1215,7 +1215,7 @@ lbl_fn_8058BE7C_00000FF8:
     mr r23, r3
     lwz r3, lbl_8087F8A0
     mr r4, r21
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     mr r21, r3
     lwz r3, lbl_8087F4F0
     lwz r5, 0x80(r22)

@@ -20,7 +20,7 @@ extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
 extern void fn_8013310C(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
 extern void task_findEntryById(void);
@@ -1796,7 +1796,7 @@ lbl_fn_803412AC_000018BC:
     bne lbl_fn_803412AC_000018FC
     mr r3, r30
     li r4, 0x0
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     b lbl_fn_803412AC_000018FC
 lbl_fn_803412AC_000018E0:
     lwz r0, 0x8a0(r31)

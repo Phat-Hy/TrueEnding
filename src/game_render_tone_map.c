@@ -4,9 +4,9 @@
 /* External function declarations */
 extern void _restgpr_22(void);
 extern void _savegpr_22(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void collision_queryGeometry(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80094958(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -15,19 +15,19 @@ extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
-extern void fn_8012DB04(void);
+extern void enemy_evalAnimTrack(void);
 extern void npc_initScriptContext(void);
 extern void quest_evaluateConditions(void);
 extern void actor_setState(void);
 extern void battle_updateTargetAggro(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void battle_awardExp(void);
 extern void actor_getMovementFlags(void);
 extern void task_findEntryById(void);
 extern void fn_802BC4EC(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_8037D4C0(void);
+extern void dvd_showDiskErrorDialog(void);
 extern void fn_804DA490(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -780,7 +780,7 @@ lbl_fn_802BD480_00000880:
     li r7, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r3, lbl_8087F610
     cmpwi r3, 0x0
     beq lbl_fn_802BD480_00000950
@@ -795,7 +795,7 @@ lbl_fn_802BD480_00000950:
     li r5, 0xf
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
     b lbl_fn_802BD480_00000CA0
 lbl_fn_802BD480_00000978:
     lwz r0, 0x14f4(r3)
@@ -1580,7 +1580,7 @@ asm void fn_802BE180(void)
     stw r30, 0x8(r1)
     mr r30, r3
     addi r3, r3, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     stfs f1, 0x2e8(r30)
     addi r3, r30, 0xb0
     lfs f31, 0x2e4(r30)
@@ -1635,7 +1635,7 @@ lbl_fn_802BE180_000014B8:
     lwz r3, lbl_8087EEB0
     fadds f1, f1, f0
     lfs f2, lbl_80884190
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_802BE180_00001544:
     lwz r0, 0x24(r1)
     psq_l f31, 0x18(r1), 0, 0
@@ -1663,7 +1663,7 @@ asm void fn_802BE2A0(void)
     stw r30, 0x1d8(r1)
     mr r30, r3
     addi r3, r3, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     stfs f1, 0x2e8(r30)
     addi r3, r30, 0xb0
     lfs f29, 0x2e4(r30)
@@ -2766,7 +2766,7 @@ lbl_fn_802BEE44_00002554:
     addi r5, r1, 0xc0
     stw r0, 0x1e4(r1)
     stw r0, 0x1e8(r1)
-    bl fn_80176548
+    bl battle_calcExpPosition
     mr r3, r31
     lis r29, 0x8000
     bl actor_getMovementFlags
@@ -3365,7 +3365,7 @@ lbl_fn_802BF5C0_00002DF0:
     stw r0, 0x268(r1)
     stw r0, 0x26c(r1)
     stw r0, 0x270(r1)
-    bl fn_80176548
+    bl battle_calcExpPosition
     mr r3, r31
     lis r29, 0x8000
     bl actor_getMovementFlags

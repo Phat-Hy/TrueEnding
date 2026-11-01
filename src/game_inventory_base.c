@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void fn_80041A28(void);
 extern void mem_alloc(void);
 extern void fn_8010CD3C(void);
@@ -55,7 +55,7 @@ extern u32 lbl_80881B18;
 /* Function declarations */
 void fn_801511C4(void);
 void fn_80151204(void);
-void fn_80151210(void);
+u32 fn_80151210(void);
 void fn_80151218(void);
 void fn_8015121C(void);
 void fn_8015123C(void);
@@ -94,11 +94,9 @@ asm void fn_80151204(void)
     b fn_803E2110
 }
 
-asm void fn_80151210(void)
+u32 fn_80151210(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F490
-    blr
+    return lbl_8087F490;
 }
 
 void fn_80151218(void) {
@@ -795,7 +793,7 @@ lbl_inventory_applyItemStats_00000964:
     lwz r4, 0x8(r27)
     lwz r5, 0x0(r27)
     lwz r6, 0x4(r27)
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r0, 0x80(r27)
     extrwi. r0, r0, 1, 1
     beq lbl_inventory_applyItemStats_000009E4
@@ -1020,7 +1018,7 @@ lbl_inventory_applyItemStats_00000CE4:
     addi r8, r1, 0xd8
     li r9, 0x0
     li r10, 0x0
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r0, 0x80(r27)
     extrwi. r0, r0, 1, 1
     beq lbl_inventory_applyItemStats_00000D1C
@@ -1391,7 +1389,7 @@ lbl_inventory_applyItemStats_00001214:
     lwz r4, 0x8(r27)
     lwz r5, 0x0(r27)
     lwz r6, 0x4(r27)
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r0, 0x80(r27)
     extrwi. r0, r0, 1, 1
     beq lbl_inventory_applyItemStats_00001278
@@ -1681,7 +1679,7 @@ lbl_inventory_applyItemStats_00001664:
     addi r8, r8, lbl_807C6B90@l
     li r9, 0x0
     li r10, 0x0
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r0, 0x80(r27)
     extrwi. r0, r0, 1, 1
     beq lbl_inventory_applyItemStats_000016A8

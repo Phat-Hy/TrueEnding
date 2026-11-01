@@ -17,10 +17,10 @@ extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void vec3_mag(void);
 extern void scene_traverseNode(void);
-extern void fn_8000DD0C(void);
+extern void scene_getRootNode(void);
 extern void mem_free(void);
 extern s32 atn_Model_findBoneIndex(void*, u32, int);
-extern void fn_800928B0(void);
+extern void compass_findWaypointIndex(void);
 extern void fn_800929C0(void);
 extern void fn_80094958(void);
 extern void fn_80097A9C(void);
@@ -46,7 +46,7 @@ extern void atn_LoadHandle_getName(void);
 extern void fn_804768D0(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
-extern void PSMTXMultVec(void);
+extern void PSMTXMultVec(const void *m, const void *src, void *dst);
 extern void PSMTX44Identity(void);
 extern void PSVECMag(void);
 extern void printf(void);
@@ -87,10 +87,10 @@ void vec3_toEulerAngles(void);
 void fn_80011220(void);
 void fn_8001122C(void);
 void fn_800112E0(void);
-void fn_80011410(void);
+void mtx_multVec(void *v, const void *m);
 void fn_80011420(void);
 void fn_80011964(void);
-void fn_800119B8(void);
+u32 fn_800119B8(void);
 void fn_800119C0(void);
 void fn_80011E98(void);
 void fn_80012054(void);
@@ -102,7 +102,7 @@ void fn_800125C8(void);
 void fn_8001260C(void);
 void fn_80012638(void);
 void fn_8001268C(void);
-void fn_80012714(void);
+u32 fn_80012714(void);
 void fn_8001271C(void);
 void fn_80012774(void);
 void fn_800127CC(void);
@@ -110,7 +110,7 @@ void fn_8001282C(void);
 void fn_800128FC(void);
 void fn_80012934(void);
 void fn_8001296C(void);
-void fn_80012A14(void);
+u32 fn_80012A14(void);
 void fn_80012A1C(void);
 void fn_80012AC4(void);
 void fn_80012C3C(void);
@@ -122,7 +122,7 @@ void fn_80012D34(void);
 void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 void vec3_sub(void);
 void fn_8001336C(void);
-void fn_800133B0(void);
+void math_wrapAngle(void);
 void fn_80013404(void);
 void vec3_add(void);
 void fn_80013444(void);
@@ -1476,13 +1476,9 @@ lbl_fn_800112E0_000012E0:
     blr
 }
 
-asm void fn_80011410(void)
+void mtx_multVec(void *v, const void *m)
 {
-    nofralloc
-    mr r5, r3
-    mr r3, r4
-    mr r4, r5
-    b PSMTXMultVec
+    PSMTXMultVec(m, v, v);
 }
 
 asm void fn_80011420(void)
@@ -1874,11 +1870,9 @@ lbl_fn_80011964_00001894:
     blr
 }
 
-asm void fn_800119B8(void)
+u32 fn_800119B8(void)
 {
-    nofralloc
-    li r3, 0x8
-    blr
+    return 8;
 }
 
 asm void fn_800119C0(void)
@@ -2911,11 +2905,9 @@ lbl_fn_8001268C_000025E8:
     blr
 }
 
-asm void fn_80012714(void)
+u32 fn_80012714(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8001271C(void)
@@ -3172,11 +3164,9 @@ lbl_fn_8001296C_000028F0:
     blr
 }
 
-asm void fn_80012A14(void)
+u32 fn_80012A14(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_80012A1C(void)
@@ -3264,7 +3254,7 @@ lbl_fn_80012AC4_000029F0:
     lwz r3, 0x48(r3)
     addi r31, r3, 0xb0
     mr r3, r31
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_80012AC4_00002A24
     li r3, 0x0
@@ -3290,7 +3280,7 @@ lbl_fn_80012AC4_00002A44:
     mr r31, r3
     mr r4, r30
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_80012AC4_00002A80
     li r3, 0x0
@@ -3315,7 +3305,7 @@ lbl_fn_80012AC4_00002AAC:
     li r5, 0x0
     lwz r31, 0x48(r3)
     mr r3, r31
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_80012AC4_00002AD8
     li r3, 0x0
@@ -3354,7 +3344,7 @@ asm void fn_80012C3C(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_80012C3C_00002B4C
     li r3, 0x0
@@ -3474,7 +3464,7 @@ lbl_fn_80012D34_00002C80:
     bl vec3_assign
     mr r3, r26
     bl fn_800128FC
-    bl fn_8000DD0C
+    bl scene_getRootNode
     lis r4, lbl_8072F924@ha
     addi r4, r4, lbl_8072F924@l
     addi r4, r4, 0x7c
@@ -3499,7 +3489,7 @@ lbl_fn_80012D34_00002C80:
     bl fn_8001336C
     addi r3, r1, 0x164
     addi r4, r1, 0x278
-    bl fn_80011410
+    bl mtx_multVec
     mr r4, r31
     addi r3, r1, 0xb0
     bl mtx_getTranslation
@@ -3516,7 +3506,7 @@ lbl_fn_80012D34_00002C80:
     lfs f1, 0xa4(r1)
     lfs f0, 0x158(r1)
     fsubs f1, f0, f1
-    bl fn_800133B0
+    bl math_wrapAngle
     fmr f31, f1
     addi r3, r1, 0x98
     addi r4, r1, 0x164
@@ -3524,7 +3514,7 @@ lbl_fn_80012D34_00002C80:
     lfs f1, 0x9c(r1)
     lfs f0, 0x15c(r1)
     fsubs f1, f0, f1
-    bl fn_800133B0
+    bl math_wrapAngle
     fmr f30, f1
     fmr f1, f31
     bl fn_80013404
@@ -3592,7 +3582,7 @@ lbl_fn_80012D34_00002E44:
     bl fn_800109E0
     addi r3, r1, 0x164
     addi r4, r1, 0x248
-    bl fn_80011410
+    bl mtx_multVec
     mr r4, r31
     addi r3, r1, 0x80
     bl mtx_getTranslation
@@ -3622,7 +3612,7 @@ lbl_fn_80012D34_00002E84:
     bl fn_800109E0
     addi r3, r1, 0x134
     addi r4, r1, 0x218
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x74
     addi r4, r1, 0x140
     addi r5, r1, 0x134
@@ -3684,7 +3674,7 @@ lbl_fn_80012D34_00002F00:
     bl fn_800109E0
     addi r3, r1, 0x11c
     addi r4, r1, 0x1e8
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x11c
     addi r4, r1, 0x110
     bl fn_80012C88
@@ -3736,7 +3726,7 @@ lbl_fn_80012D34_00003000:
     bl fn_800109E0
     addi r3, r1, 0x104
     addi r4, r1, 0x1b8
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x104
     addi r4, r1, 0xf8
     bl fn_80012C88
@@ -3796,7 +3786,7 @@ lbl_fn_80012D34_00003120:
     bl fn_800109E0
     addi r3, r1, 0xd4
     addi r4, r1, 0x188
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x8
     addi r4, r1, 0xec
     addi r5, r1, 0xd4
@@ -3876,7 +3866,7 @@ asm void fn_8001336C(void)
     blr
 }
 
-asm void fn_800133B0(void)
+asm void math_wrapAngle(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -3888,16 +3878,16 @@ asm void fn_800133B0(void)
     frsp f1, f1
     lfs f0, lbl_80880690
     fcmpo cr0, f1, f0
-    ble lbl_fn_800133B0_000032C4
+    ble lbl_math_wrapAngle_000032C4
     lfs f0, lbl_80880694
     fsubs f1, f1, f0
-lbl_fn_800133B0_000032C4:
+lbl_math_wrapAngle_000032C4:
     lfs f0, lbl_80880698
     fcmpo cr0, f1, f0
-    bge lbl_fn_800133B0_000032D8
+    bge lbl_math_wrapAngle_000032D8
     lfs f0, lbl_80880694
     fadds f1, f1, f0
-lbl_fn_800133B0_000032D8:
+lbl_math_wrapAngle_000032D8:
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10

@@ -13,7 +13,7 @@ extern void fn_800EFF04(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80106878(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_801446F0(void);
+extern void quest_resetObjectiveBounds(void);
 extern void fn_802097C4(void);
 extern void task_findEntryById(void);
 extern void chest_spawnLoot(void);
@@ -448,7 +448,7 @@ asm void fn_8018CEF8(void)
     bctrl
     stfs f1, 0x238(r30)
     lwz r3, 0x4(r31)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     mr r3, r29
     bl PSVECSquareMag
     lfs f0, lbl_80881F3C
@@ -836,7 +836,7 @@ asm void fn_8018D4AC(void)
     lfs f0, lbl_80881F14
     stfs f0, 0x234(r29)
     lwz r3, 0x4(r30)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     lfs f2, 0x8(r28)
     addi r29, r1, 0x54
     psq_l f1, 0x0(r28), 0, 0
@@ -1289,7 +1289,7 @@ asm void fn_8018DAE4(void)
     lfs f0, lbl_80881EC4
     stfs f0, 0x238(r30)
     lwz r3, 0x4(r31)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     lwz r6, 0x4(r31)
     addi r3, r31, 0x10
     lwz r7, 0x1c(r31)

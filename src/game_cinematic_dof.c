@@ -11,13 +11,13 @@ extern void vec3_set(void);
 extern void fn_8000D760(void);
 extern void scene_transformPoint(void);
 extern void fn_8000DCF4(void);
-extern void fn_8000DD0C(void);
+extern void scene_getRootNode(void);
 extern void str_initFromCStr(void);
-extern void fn_8004203C(void);
+extern void menu_initWindowBuffer(void);
 extern void str_getData(void);
 extern void collision_testLineSegment(void);
 extern void mission_updateStub(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void boss_initActionStream(void);
@@ -35,16 +35,16 @@ extern void bloom_processPasses(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800EC254(void);
-extern void fn_800EC2C4(void);
-extern void fn_800EC440(void);
-extern void fn_800EC534(void);
-extern void fn_800EC5BC(void);
-extern void fn_800EC654(void);
-extern void fn_800ED42C(void);
+extern void cam_registerTarget(void);
+extern void cam_initTrajectoryParams(void);
+extern void cam_bindPathTarget(void);
+extern void cam_bindRotationTarget(void);
+extern void cam_evalControllerSpline(void);
+extern void cam_setLookAtTarget(void);
 extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
-extern void fn_800EDFE8(void);
-extern void fn_800F52F0(void);
+extern void cam_evalLookAtMatrix(void);
+extern void proj_getMatrix(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void skill_findNodeById(void);
@@ -58,14 +58,14 @@ extern void npc_updateDialogueTarget(void);
 extern void fn_80139F3C(void);
 extern void npc_getPosition(void);
 extern void fn_8013C480(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void fn_8015ECC4(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
 extern void fn_801A03E0(void);
-extern void fn_8020A780(void);
+extern void str_appendString(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_ctor(void);
 extern void res_Resource_unload(void);
@@ -137,7 +137,7 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_804A04AC(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void fn_805A3D00(void);
 extern void fn_805A5224(void);
 extern void PSVECNormalize(void);
@@ -675,17 +675,17 @@ asm void fn_803388A4(void)
     addi r4, r29, 0x32
     li r5, 0x0
     li r6, 0x0
-    bl fn_800EC440
+    bl cam_initTrajectoryParams
     addi r3, r1, 0xd4
     addi r4, r1, 0x14
     addi r5, r1, 0x74
-    bl fn_800EC2C4
+    bl cam_registerTarget
     addi r3, r1, 0x74
     li r4, -0x1
-    bl fn_800EC534
+    bl cam_bindPathTarget
     addi r3, r1, 0x98
     addi r4, r1, 0xd4
-    bl fn_800EC654
+    bl cam_evalControllerSpline
     b lbl_fn_803388A4_00000730
 lbl_fn_803388A4_000006EC:
     addi r3, r1, 0x98
@@ -702,26 +702,26 @@ lbl_fn_803388A4_000006EC:
     mr r4, r3
     addi r3, r1, 0x20
     addi r4, r4, 0x8
-    bl fn_8020A780
+    bl str_appendString
 lbl_fn_803388A4_00000728:
     addi r3, r1, 0x98
     bl fn_800ED4E0
 lbl_fn_803388A4_00000730:
     addi r3, r1, 0x38
     addi r4, r1, 0xd4
-    bl fn_800EDFE8
+    bl cam_evalLookAtMatrix
     addi r3, r1, 0x98
     addi r4, r1, 0x38
     bl fn_800EC254
     mr r30, r3
     addi r3, r1, 0x38
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     cmpwi r30, 0x0
     bne lbl_fn_803388A4_000006EC
     addi r3, r1, 0x98
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     addi r3, r1, 0x8
     addi r4, r1, 0x2c
     addi r5, r1, 0x20
@@ -792,7 +792,7 @@ lbl_fn_803388A4_00000730:
     addi r3, r31, 0x1598
     fmr f2, f1
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
     lwz r5, 0x12a8(r31)
     addi r3, r1, 0x8
     lwz r0, 0x12a4(r31)
@@ -804,7 +804,7 @@ lbl_fn_803388A4_00000730:
     bl dtor_80013D60
     addi r3, r1, 0xd4
     li r4, -0x1
-    bl fn_800EC5BC
+    bl cam_bindRotationTarget
     addi r3, r1, 0x14
     li r4, -0x1
     bl dtor_80013D60
@@ -1152,7 +1152,7 @@ asm void fn_80338FD0(void)
     cmpwi r3, 0x0
     beq lbl_fn_80338FD0_00000DA0
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r29, r3
     b lbl_fn_80338FD0_00000DA4
 lbl_fn_80338FD0_00000DA0:
@@ -1172,7 +1172,7 @@ lbl_fn_80338FD0_00000DA4:
     mr r4, r3
     mr r5, r29
     addi r3, r1, 0x10
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     lis r29, lbl_8074A4C0@ha
     addi r29, r29, lbl_8074A4C0@l
 lbl_fn_80338FD0_00000DE8:
@@ -1513,7 +1513,7 @@ lbl_fn_80338FD0_000012A0:
     stw r0, 0x16c0(r31)
     bl scene_transformPoint
     li r4, 0x4
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     lwz r4, 0x14d8(r31)
     stw r3, 0x14c4(r31)
     cmpwi r4, 0x0
@@ -1608,7 +1608,7 @@ asm void fn_80339760(void)
     bge lbl_fn_80339760_000013E0
     mr r3, r31
     li r4, 0x0
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     li r0, 0x0
     stw r0, 0x14b4(r31)
     b lbl_fn_80339760_000014BC
@@ -1643,7 +1643,7 @@ lbl_fn_80339760_0000143C:
     bl fn_80139F3C
     mr r3, r31
     li r4, 0x1
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     addi r3, r31, 0xb0
     li r4, 0x0
     bl npc_updateDialogueTarget
@@ -1819,14 +1819,14 @@ lbl_fn_80339760_0000163C:
     li r6, 0x0
     bl world_setGlobalFlag
     lwz r3, 0x14c4(r31)
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_8012D180
     lfs f31, lbl_80885260
     lwz r3, 0x14c4(r31)
-    bl fn_800F52F0
+    bl proj_getMatrix
     stfs f31, 0x228(r3)
     lwz r3, 0x14c4(r31)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     lis r4, lbl_8074A4C0@ha
     li r5, 0x0
     addi r4, r4, lbl_8074A4C0@l
@@ -1877,7 +1877,7 @@ lbl_fn_80339760_000017A8:
     cmpwi r0, 0x1
     bne lbl_fn_80339760_00001860
     lwz r3, 0x14c4(r31)
-    bl fn_800F52F0
+    bl proj_getMatrix
     lfs f1, 0x228(r3)
     lfs f0, lbl_80885260
     fcmpo cr0, f1, f0
@@ -2003,7 +2003,7 @@ lbl_fn_80339760_0000197C:
     lwz r3, 0x14b0(r31)
     cmpwi r3, 0x0
     beq lbl_fn_80339760_000019CC
-    bl fn_8000DD0C
+    bl scene_getRootNode
     lis r5, lbl_8074A4C0@ha
     lis r6, lbl_807C7030@ha
     addi r5, r5, lbl_8074A4C0@l

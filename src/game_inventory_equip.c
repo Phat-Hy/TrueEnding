@@ -19,7 +19,7 @@ extern void fn_80134270(void);
 extern void fn_80134290(void);
 extern void fn_801342B0(void);
 extern void fn_8013539C(void);
-extern void fn_8014C228(void);
+extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
 extern void actor_setState(void);
 extern void fn_8017A9A8(void);
@@ -346,7 +346,7 @@ lbl_equip_applyToCharacter_000003AC:
     mr r3, r29
     stw r0, 0x648(r29)
     stw r0, 0x64c(r29)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_equip_applyToCharacter_000003EC
 lbl_equip_applyToCharacter_000003CC:
     lwz r0, 0x674(r29)
@@ -1935,7 +1935,7 @@ lbl_inventory_calcTotalStats_000019C4:
     mr r3, r31
     stw r0, 0x648(r31)
     stw r0, 0x64c(r31)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_inventory_calcTotalStats_00001A04
 lbl_inventory_calcTotalStats_000019E4:
     lwz r0, 0x674(r31)

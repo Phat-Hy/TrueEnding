@@ -8,8 +8,8 @@ extern void dtor_80084684(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
 extern void fn_80058078(void);
-extern void fn_800580BC(void);
-extern void fn_800588FC(void);
+extern void mission_isObjectiveActive(void);
+extern void mission_updateObjectiveTarget(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
@@ -18,7 +18,7 @@ extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void map_debugLog(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80092F1C(void);
+extern void target_pushPointToHistory(void);
 extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
@@ -37,11 +37,11 @@ extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
-extern void fn_803EC7A0(void);
+extern void barrier_formatDialogString(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
-extern void fn_803ED5D0(void);
-extern void fn_803ED774(void);
+extern void barrier_bindFieldAnimation(void);
+extern void dungeon_updateBarrierField(void);
 extern void fn_803EDB18(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -101,7 +101,7 @@ void fn_8040F994(void);
 void fn_8040F9C0(void);
 void fn_8040F9EC(void);
 void fn_8040FAA4(void);
-void fn_8040FAB8(void);
+void *fn_8040FAB8(void *obj);
 void fn_8040FAC0(void);
 void fn_8040FB44(void);
 void fn_8040FC30(void);
@@ -114,7 +114,7 @@ void fn_80410358(void);
 void fn_8041044C(void);
 void fn_80410698(void);
 void fn_804109AC(void);
-void fn_80410A60(void);
+void *fn_80410A60(void *obj);
 void fn_80410A68(void);
 void fn_80410B38(void);
 void fn_80410BA0(void);
@@ -142,7 +142,7 @@ asm void fn_8040F3CC(void)
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_8040F3CC_0000004C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -167,7 +167,7 @@ asm void fn_8040F42C(void)
     b lbl_fn_8040F42C_000000B8
 lbl_fn_8040F42C_0000008C:
     addi r3, r31, 0x4c4
-    bl fn_800580BC
+    bl mission_isObjectiveActive
     cmpwi r3, 0x0
     beq lbl_fn_8040F42C_000000A4
     li r3, 0x1
@@ -253,7 +253,7 @@ lbl_fn_8040F498_0000017C:
     mr r3, r29
     addi r4, r29, 0xf4
     addi r5, r1, 0x108
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     b lbl_fn_8040F498_00000298
 lbl_fn_8040F498_000001D0:
     mr r3, r30
@@ -272,7 +272,7 @@ lbl_fn_8040F498_000001D0:
     addi r3, r29, 0xf4
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_8040F498_00000298
 lbl_fn_8040F498_00000218:
     mr r3, r30
@@ -633,11 +633,9 @@ asm void fn_8040FAA4(void)
     blr
 }
 
-asm void fn_8040FAB8(void)
+void *fn_8040FAB8(void *obj)
 {
-    nofralloc
-    addi r3, r3, 0xf4
-    blr
+    return (char *)obj + 0xf4;
 }
 
 asm void fn_8040FAC0(void)
@@ -900,7 +898,7 @@ lbl_fn_8040FD30_00000A38:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_8040FD30_00000A74:
     lwz r3, 0x558(r31)
     lwz r0, 0x560(r31)
@@ -943,7 +941,7 @@ lbl_fn_8040FD30_00000AD8:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_8040FD30_00000B14:
     lwz r3, 0x55c(r31)
     lwz r0, 0x564(r31)
@@ -1001,7 +999,7 @@ asm void fn_8040FF5C(void)
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_8040FF5C_00000BDC:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -1025,7 +1023,7 @@ asm void fn_8040FFBC(void)
     cmpwi r3, 0x0
     bne lbl_fn_8040FFBC_00000C3C
     addi r3, r30, 0x4c4
-    bl fn_800580BC
+    bl mission_isObjectiveActive
     cmpwi r3, 0x0
     bne lbl_fn_8040FFBC_00000C3C
     addi r3, r30, 0x54c
@@ -1114,7 +1112,7 @@ lbl_fn_80410028_00000D18:
     mr r3, r31
     addi r4, r31, 0xf4
     addi r5, r1, 0x108
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     b lbl_fn_80410028_00000F58
 lbl_fn_80410028_00000D6C:
     mr r3, r30
@@ -1305,7 +1303,7 @@ lbl_fn_80410358_00000FF0:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     lfs f0, lbl_808863AC
     li r0, 0x0
     li r3, 0x1
@@ -1567,7 +1565,7 @@ lbl_fn_80410698_000013AC:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     lwz r12, 0x0(r30)
     mr r3, r30
     lwz r12, 0x38(r12)
@@ -1582,7 +1580,7 @@ lbl_fn_80410698_000013AC:
     bctrl
     mr r4, r3
     mr r3, r30
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_80410698_00001420:
     lwz r0, 0x4cc(r30)
     clrrwi r0, r0, 1
@@ -1688,7 +1686,7 @@ lbl_fn_80410698_00001578:
     bctrl
     mr r4, r3
     mr r3, r30
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_80410698_000015B4:
     lwz r0, 0x4cc(r30)
     ori r0, r0, 0x1
@@ -1758,11 +1756,9 @@ lbl_fn_804109AC_00001680:
     blr
 }
 
-asm void fn_80410A60(void)
+void *fn_80410A60(void *obj)
 {
-    nofralloc
-    addi r3, r3, 0xf4
-    blr
+    return (char *)obj + 0xf4;
 }
 
 asm void fn_80410A68(void)
@@ -1956,7 +1952,7 @@ lbl_fn_80410BF8_000018DC:
     mr r3, r29
     addi r4, r29, 0xf4
     addi r5, r1, 0x108
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     b lbl_fn_80410BF8_000019E8
 lbl_fn_80410BF8_00001930:
     mr r3, r30
@@ -1975,7 +1971,7 @@ lbl_fn_80410BF8_00001930:
     addi r3, r29, 0xf4
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_80410BF8_000019E8
 lbl_fn_80410BF8_00001978:
     mr r3, r30

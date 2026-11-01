@@ -4,9 +4,9 @@
 /* External function declarations */
 extern void fn_800A5584(void);
 extern void fn_800A55D4(void);
-extern void fn_800A56A8(void);
+extern void msg_formatWindowLayout(void);
 extern void fn_800A5870(void);
-extern void fn_800A58D0(void);
+extern void msg_isWindowActive(void);
 extern void fn_80122C70(void);
 extern void fn_8017C974(void);
 extern void PSMTXRotRad(void);
@@ -37,7 +37,7 @@ extern u32 lbl_80881850;
 
 /* Function declarations */
 void fn_80123C7C(void);
-void fn_801240B4(void);
+void player_evaluateStatusCondition(void);
 void fn_8012476C(void);
 void fn_801248DC(void);
 void fn_80124B60(void);
@@ -362,7 +362,7 @@ lbl_fn_80123C7C_00000424:
     blr
 }
 
-asm void fn_801240B4(void)
+asm void player_evaluateStatusCondition(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -374,59 +374,59 @@ asm void fn_801240B4(void)
     mr r31, r3
     stw r30, 0x8(r1)
     mr r30, r4
-    ble lbl_fn_801240B4_00000970
+    ble lbl_player_evaluateStatusCondition_00000970
     cmpwi r4, 0x4
-    beq lbl_fn_801240B4_0000048C
+    beq lbl_player_evaluateStatusCondition_0000048C
     cmpwi r4, 0x7
-    beq lbl_fn_801240B4_00000534
+    beq lbl_player_evaluateStatusCondition_00000534
     cmpwi r4, 0x24
-    beq lbl_fn_801240B4_00000534
+    beq lbl_player_evaluateStatusCondition_00000534
     cmpwi r4, 0x12
-    beq lbl_fn_801240B4_00000744
+    beq lbl_player_evaluateStatusCondition_00000744
     cmpwi r4, 0x23
-    beq lbl_fn_801240B4_000008BC
-    b lbl_fn_801240B4_00000A34
-lbl_fn_801240B4_0000048C:
+    beq lbl_player_evaluateStatusCondition_000008BC
+    b lbl_player_evaluateStatusCondition_00000A34
+lbl_player_evaluateStatusCondition_0000048C:
     bl fn_80122C70
     cmpwi r3, 0x21
     mr r31, r3
-    beq lbl_fn_801240B4_0000050C
+    beq lbl_player_evaluateStatusCondition_0000050C
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_00000500
+    beq lbl_player_evaluateStatusCondition_00000500
     lwz r0, 0x54e4(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_801240B4_00000500
+    bne lbl_player_evaluateStatusCondition_00000500
     lwz r3, lbl_8087F9F8
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_00000500
+    beq lbl_player_evaluateStatusCondition_00000500
     lwz r0, 0xa70(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_801240B4_00000500
+    bne lbl_player_evaluateStatusCondition_00000500
     lwz r3, lbl_8087F8A0
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_000004E0
+    beq lbl_player_evaluateStatusCondition_000004E0
     lwz r3, 0x48(r3)
-    b lbl_fn_801240B4_000004E4
-lbl_fn_801240B4_000004E0:
+    b lbl_player_evaluateStatusCondition_000004E4
+lbl_player_evaluateStatusCondition_000004E0:
     li r3, 0x0
-lbl_fn_801240B4_000004E4:
+lbl_player_evaluateStatusCondition_000004E4:
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_00000500
+    beq lbl_player_evaluateStatusCondition_00000500
     bl fn_8017C974
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
-    b lbl_fn_801240B4_00000504
-lbl_fn_801240B4_00000500:
+    b lbl_player_evaluateStatusCondition_00000504
+lbl_player_evaluateStatusCondition_00000500:
     li r0, 0x0
-lbl_fn_801240B4_00000504:
+lbl_player_evaluateStatusCondition_00000504:
     cmpwi r0, 0x0
-    beq lbl_fn_801240B4_00000514
-lbl_fn_801240B4_0000050C:
+    beq lbl_player_evaluateStatusCondition_00000514
+lbl_player_evaluateStatusCondition_0000050C:
     li r3, 0x0
-    b lbl_fn_801240B4_00000AD8
-lbl_fn_801240B4_00000514:
+    b lbl_player_evaluateStatusCondition_00000AD8
+lbl_player_evaluateStatusCondition_00000514:
     lwz r3, lbl_8087EF70
     mr r5, r31
     li r4, 0x0
@@ -434,48 +434,48 @@ lbl_fn_801240B4_00000514:
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
-    b lbl_fn_801240B4_00000AD8
-lbl_fn_801240B4_00000534:
+    b lbl_player_evaluateStatusCondition_00000AD8
+lbl_player_evaluateStatusCondition_00000534:
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_00000694
+    beq lbl_player_evaluateStatusCondition_00000694
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_000005AC
+    beq lbl_player_evaluateStatusCondition_000005AC
     lwz r0, 0x54e4(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_801240B4_000005AC
+    bne lbl_player_evaluateStatusCondition_000005AC
     lwz r3, lbl_8087F9F8
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_000005AC
+    beq lbl_player_evaluateStatusCondition_000005AC
     lwz r0, 0xa70(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_801240B4_000005AC
+    bne lbl_player_evaluateStatusCondition_000005AC
     lwz r3, lbl_8087F8A0
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_0000058C
+    beq lbl_player_evaluateStatusCondition_0000058C
     lwz r3, 0x48(r3)
-    b lbl_fn_801240B4_00000590
-lbl_fn_801240B4_0000058C:
+    b lbl_player_evaluateStatusCondition_00000590
+lbl_player_evaluateStatusCondition_0000058C:
     li r3, 0x0
-lbl_fn_801240B4_00000590:
+lbl_player_evaluateStatusCondition_00000590:
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_000005AC
+    beq lbl_player_evaluateStatusCondition_000005AC
     bl fn_8017C974
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
-    b lbl_fn_801240B4_000005B0
-lbl_fn_801240B4_000005AC:
+    b lbl_player_evaluateStatusCondition_000005B0
+lbl_player_evaluateStatusCondition_000005AC:
     li r0, 0x0
-lbl_fn_801240B4_000005B0:
+lbl_player_evaluateStatusCondition_000005B0:
     cmpwi r0, 0x0
-    beq lbl_fn_801240B4_000005C0
+    beq lbl_player_evaluateStatusCondition_000005C0
     li r3, 0x0
-    b lbl_fn_801240B4_000005DC
-lbl_fn_801240B4_000005C0:
+    b lbl_player_evaluateStatusCondition_000005DC
+lbl_player_evaluateStatusCondition_000005C0:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0xb
@@ -483,51 +483,51 @@ lbl_fn_801240B4_000005C0:
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
-lbl_fn_801240B4_000005DC:
+lbl_player_evaluateStatusCondition_000005DC:
     cmpwi r3, 0x0
-    bne lbl_fn_801240B4_00000AD8
+    bne lbl_player_evaluateStatusCondition_00000AD8
     mr r3, r31
     mr r4, r30
     bl fn_80122C70
     cmpwi r3, 0x21
     mr r31, r3
-    beq lbl_fn_801240B4_0000066C
+    beq lbl_player_evaluateStatusCondition_0000066C
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_00000660
+    beq lbl_player_evaluateStatusCondition_00000660
     lwz r0, 0x54e4(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_801240B4_00000660
+    bne lbl_player_evaluateStatusCondition_00000660
     lwz r3, lbl_8087F9F8
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_00000660
+    beq lbl_player_evaluateStatusCondition_00000660
     lwz r0, 0xa70(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_801240B4_00000660
+    bne lbl_player_evaluateStatusCondition_00000660
     lwz r3, lbl_8087F8A0
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_00000640
+    beq lbl_player_evaluateStatusCondition_00000640
     lwz r3, 0x48(r3)
-    b lbl_fn_801240B4_00000644
-lbl_fn_801240B4_00000640:
+    b lbl_player_evaluateStatusCondition_00000644
+lbl_player_evaluateStatusCondition_00000640:
     li r3, 0x0
-lbl_fn_801240B4_00000644:
+lbl_player_evaluateStatusCondition_00000644:
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_00000660
+    beq lbl_player_evaluateStatusCondition_00000660
     bl fn_8017C974
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
-    b lbl_fn_801240B4_00000664
-lbl_fn_801240B4_00000660:
+    b lbl_player_evaluateStatusCondition_00000664
+lbl_player_evaluateStatusCondition_00000660:
     li r0, 0x0
-lbl_fn_801240B4_00000664:
+lbl_player_evaluateStatusCondition_00000664:
     cmpwi r0, 0x0
-    beq lbl_fn_801240B4_00000674
-lbl_fn_801240B4_0000066C:
+    beq lbl_player_evaluateStatusCondition_00000674
+lbl_player_evaluateStatusCondition_0000066C:
     li r3, 0x0
-    b lbl_fn_801240B4_00000AD8
-lbl_fn_801240B4_00000674:
+    b lbl_player_evaluateStatusCondition_00000AD8
+lbl_player_evaluateStatusCondition_00000674:
     lwz r3, lbl_8087EF70
     mr r5, r31
     li r4, 0x0
@@ -535,50 +535,50 @@ lbl_fn_801240B4_00000674:
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
-    b lbl_fn_801240B4_00000AD8
-lbl_fn_801240B4_00000694:
+    b lbl_player_evaluateStatusCondition_00000AD8
+lbl_player_evaluateStatusCondition_00000694:
     mr r3, r31
     mr r4, r30
     bl fn_80122C70
     cmpwi r3, 0x21
     mr r31, r3
-    beq lbl_fn_801240B4_0000071C
+    beq lbl_player_evaluateStatusCondition_0000071C
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_00000710
+    beq lbl_player_evaluateStatusCondition_00000710
     lwz r0, 0x54e4(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_801240B4_00000710
+    bne lbl_player_evaluateStatusCondition_00000710
     lwz r3, lbl_8087F9F8
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_00000710
+    beq lbl_player_evaluateStatusCondition_00000710
     lwz r0, 0xa70(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_801240B4_00000710
+    bne lbl_player_evaluateStatusCondition_00000710
     lwz r3, lbl_8087F8A0
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_000006F0
+    beq lbl_player_evaluateStatusCondition_000006F0
     lwz r3, 0x48(r3)
-    b lbl_fn_801240B4_000006F4
-lbl_fn_801240B4_000006F0:
+    b lbl_player_evaluateStatusCondition_000006F4
+lbl_player_evaluateStatusCondition_000006F0:
     li r3, 0x0
-lbl_fn_801240B4_000006F4:
+lbl_player_evaluateStatusCondition_000006F4:
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_00000710
+    beq lbl_player_evaluateStatusCondition_00000710
     bl fn_8017C974
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
-    b lbl_fn_801240B4_00000714
-lbl_fn_801240B4_00000710:
+    b lbl_player_evaluateStatusCondition_00000714
+lbl_player_evaluateStatusCondition_00000710:
     li r0, 0x0
-lbl_fn_801240B4_00000714:
+lbl_player_evaluateStatusCondition_00000714:
     cmpwi r0, 0x0
-    beq lbl_fn_801240B4_00000724
-lbl_fn_801240B4_0000071C:
+    beq lbl_player_evaluateStatusCondition_00000724
+lbl_player_evaluateStatusCondition_0000071C:
     li r3, 0x0
-    b lbl_fn_801240B4_00000AD8
-lbl_fn_801240B4_00000724:
+    b lbl_player_evaluateStatusCondition_00000AD8
+lbl_player_evaluateStatusCondition_00000724:
     lwz r3, lbl_8087EF70
     mr r5, r31
     li r4, 0x0
@@ -586,47 +586,47 @@ lbl_fn_801240B4_00000724:
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
-    b lbl_fn_801240B4_00000AD8
-lbl_fn_801240B4_00000744:
+    b lbl_player_evaluateStatusCondition_00000AD8
+lbl_player_evaluateStatusCondition_00000744:
     lwz r3, lbl_8087F9C0
     lwz r0, 0x34(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_801240B4_00000808
+    bne lbl_player_evaluateStatusCondition_00000808
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_000007B8
+    beq lbl_player_evaluateStatusCondition_000007B8
     lwz r0, 0x54e4(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_801240B4_000007B8
+    bne lbl_player_evaluateStatusCondition_000007B8
     lwz r3, lbl_8087F9F8
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_000007B8
+    beq lbl_player_evaluateStatusCondition_000007B8
     lwz r0, 0xa70(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_801240B4_000007B8
+    bne lbl_player_evaluateStatusCondition_000007B8
     lwz r3, lbl_8087F8A0
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_00000798
+    beq lbl_player_evaluateStatusCondition_00000798
     lwz r3, 0x48(r3)
-    b lbl_fn_801240B4_0000079C
-lbl_fn_801240B4_00000798:
+    b lbl_player_evaluateStatusCondition_0000079C
+lbl_player_evaluateStatusCondition_00000798:
     li r3, 0x0
-lbl_fn_801240B4_0000079C:
+lbl_player_evaluateStatusCondition_0000079C:
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_000007B8
+    beq lbl_player_evaluateStatusCondition_000007B8
     bl fn_8017C974
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
-    b lbl_fn_801240B4_000007BC
-lbl_fn_801240B4_000007B8:
+    b lbl_player_evaluateStatusCondition_000007BC
+lbl_player_evaluateStatusCondition_000007B8:
     li r0, 0x0
-lbl_fn_801240B4_000007BC:
+lbl_player_evaluateStatusCondition_000007BC:
     cmpwi r0, 0x0
-    beq lbl_fn_801240B4_000007CC
+    beq lbl_player_evaluateStatusCondition_000007CC
     li r0, 0x0
-    b lbl_fn_801240B4_000007E8
-lbl_fn_801240B4_000007CC:
+    b lbl_player_evaluateStatusCondition_000007E8
+lbl_player_evaluateStatusCondition_000007CC:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x9
@@ -634,51 +634,51 @@ lbl_fn_801240B4_000007CC:
     neg r0, r3
     or r0, r0, r3
     srwi r0, r0, 31
-lbl_fn_801240B4_000007E8:
+lbl_player_evaluateStatusCondition_000007E8:
     cmpwi r0, 0x0
     li r3, 0x0
-    beq lbl_fn_801240B4_00000AD8
+    beq lbl_player_evaluateStatusCondition_00000AD8
     lwz r0, 0x0(r31)
     cmpwi r0, 0xa
-    blt lbl_fn_801240B4_00000AD8
+    blt lbl_player_evaluateStatusCondition_00000AD8
     li r3, 0x1
-    b lbl_fn_801240B4_00000AD8
-lbl_fn_801240B4_00000808:
+    b lbl_player_evaluateStatusCondition_00000AD8
+lbl_player_evaluateStatusCondition_00000808:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_0000086C
+    beq lbl_player_evaluateStatusCondition_0000086C
     lwz r0, 0x54e4(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_801240B4_0000086C
+    bne lbl_player_evaluateStatusCondition_0000086C
     lwz r3, lbl_8087F9F8
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_0000086C
+    beq lbl_player_evaluateStatusCondition_0000086C
     lwz r0, 0xa70(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_801240B4_0000086C
+    bne lbl_player_evaluateStatusCondition_0000086C
     lwz r3, lbl_8087F8A0
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_0000084C
+    beq lbl_player_evaluateStatusCondition_0000084C
     lwz r3, 0x48(r3)
-    b lbl_fn_801240B4_00000850
-lbl_fn_801240B4_0000084C:
+    b lbl_player_evaluateStatusCondition_00000850
+lbl_player_evaluateStatusCondition_0000084C:
     li r3, 0x0
-lbl_fn_801240B4_00000850:
+lbl_player_evaluateStatusCondition_00000850:
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_0000086C
+    beq lbl_player_evaluateStatusCondition_0000086C
     bl fn_8017C974
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
-    b lbl_fn_801240B4_00000870
-lbl_fn_801240B4_0000086C:
+    b lbl_player_evaluateStatusCondition_00000870
+lbl_player_evaluateStatusCondition_0000086C:
     li r0, 0x0
-lbl_fn_801240B4_00000870:
+lbl_player_evaluateStatusCondition_00000870:
     cmpwi r0, 0x0
-    beq lbl_fn_801240B4_00000880
+    beq lbl_player_evaluateStatusCondition_00000880
     li r0, 0x0
-    b lbl_fn_801240B4_0000089C
-lbl_fn_801240B4_00000880:
+    b lbl_player_evaluateStatusCondition_0000089C
+lbl_player_evaluateStatusCondition_00000880:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x6
@@ -686,51 +686,51 @@ lbl_fn_801240B4_00000880:
     neg r0, r3
     or r0, r0, r3
     srwi r0, r0, 31
-lbl_fn_801240B4_0000089C:
+lbl_player_evaluateStatusCondition_0000089C:
     cmpwi r0, 0x0
     li r3, 0x0
-    beq lbl_fn_801240B4_00000AD8
+    beq lbl_player_evaluateStatusCondition_00000AD8
     lwz r0, 0x0(r31)
     cmpwi r0, 0xa
-    blt lbl_fn_801240B4_00000AD8
+    blt lbl_player_evaluateStatusCondition_00000AD8
     li r3, 0x1
-    b lbl_fn_801240B4_00000AD8
-lbl_fn_801240B4_000008BC:
+    b lbl_player_evaluateStatusCondition_00000AD8
+lbl_player_evaluateStatusCondition_000008BC:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_00000920
+    beq lbl_player_evaluateStatusCondition_00000920
     lwz r0, 0x54e4(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_801240B4_00000920
+    bne lbl_player_evaluateStatusCondition_00000920
     lwz r3, lbl_8087F9F8
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_00000920
+    beq lbl_player_evaluateStatusCondition_00000920
     lwz r0, 0xa70(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_801240B4_00000920
+    bne lbl_player_evaluateStatusCondition_00000920
     lwz r3, lbl_8087F8A0
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_00000900
+    beq lbl_player_evaluateStatusCondition_00000900
     lwz r3, 0x48(r3)
-    b lbl_fn_801240B4_00000904
-lbl_fn_801240B4_00000900:
+    b lbl_player_evaluateStatusCondition_00000904
+lbl_player_evaluateStatusCondition_00000900:
     li r3, 0x0
-lbl_fn_801240B4_00000904:
+lbl_player_evaluateStatusCondition_00000904:
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_00000920
+    beq lbl_player_evaluateStatusCondition_00000920
     bl fn_8017C974
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
-    b lbl_fn_801240B4_00000924
-lbl_fn_801240B4_00000920:
+    b lbl_player_evaluateStatusCondition_00000924
+lbl_player_evaluateStatusCondition_00000920:
     li r0, 0x0
-lbl_fn_801240B4_00000924:
+lbl_player_evaluateStatusCondition_00000924:
     cmpwi r0, 0x0
-    beq lbl_fn_801240B4_00000934
+    beq lbl_player_evaluateStatusCondition_00000934
     li r0, 0x0
-    b lbl_fn_801240B4_00000950
-lbl_fn_801240B4_00000934:
+    b lbl_player_evaluateStatusCondition_00000950
+lbl_player_evaluateStatusCondition_00000934:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x4
@@ -738,64 +738,64 @@ lbl_fn_801240B4_00000934:
     neg r0, r3
     or r0, r0, r3
     srwi r0, r0, 31
-lbl_fn_801240B4_00000950:
+lbl_player_evaluateStatusCondition_00000950:
     cmpwi r0, 0x0
     li r3, 0x0
-    beq lbl_fn_801240B4_00000AD8
+    beq lbl_player_evaluateStatusCondition_00000AD8
     lwz r0, 0x8(r31)
     cmpwi r0, 0x8
-    blt lbl_fn_801240B4_00000AD8
+    blt lbl_player_evaluateStatusCondition_00000AD8
     li r3, 0x1
-    b lbl_fn_801240B4_00000AD8
-lbl_fn_801240B4_00000970:
+    b lbl_player_evaluateStatusCondition_00000AD8
+lbl_player_evaluateStatusCondition_00000970:
     lwz r5, lbl_8087F9C0
     lwz r5, 0x80(r5)
     subi r0, r5, 0x1
     cmplwi r0, 0x1
-    ble lbl_fn_801240B4_0000098C
+    ble lbl_player_evaluateStatusCondition_0000098C
     li r3, 0x0
-    b lbl_fn_801240B4_00000AD8
-lbl_fn_801240B4_0000098C:
+    b lbl_player_evaluateStatusCondition_00000AD8
+lbl_player_evaluateStatusCondition_0000098C:
     bl fn_80122C70
     cmpwi r3, 0x21
     mr r31, r3
-    beq lbl_fn_801240B4_00000A0C
+    beq lbl_player_evaluateStatusCondition_00000A0C
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_00000A00
+    beq lbl_player_evaluateStatusCondition_00000A00
     lwz r0, 0x54e4(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_801240B4_00000A00
+    bne lbl_player_evaluateStatusCondition_00000A00
     lwz r3, lbl_8087F9F8
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_00000A00
+    beq lbl_player_evaluateStatusCondition_00000A00
     lwz r0, 0xa70(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_801240B4_00000A00
+    bne lbl_player_evaluateStatusCondition_00000A00
     lwz r3, lbl_8087F8A0
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_000009E0
+    beq lbl_player_evaluateStatusCondition_000009E0
     lwz r3, 0x48(r3)
-    b lbl_fn_801240B4_000009E4
-lbl_fn_801240B4_000009E0:
+    b lbl_player_evaluateStatusCondition_000009E4
+lbl_player_evaluateStatusCondition_000009E0:
     li r3, 0x0
-lbl_fn_801240B4_000009E4:
+lbl_player_evaluateStatusCondition_000009E4:
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_00000A00
+    beq lbl_player_evaluateStatusCondition_00000A00
     bl fn_8017C974
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
-    b lbl_fn_801240B4_00000A04
-lbl_fn_801240B4_00000A00:
+    b lbl_player_evaluateStatusCondition_00000A04
+lbl_player_evaluateStatusCondition_00000A00:
     li r0, 0x0
-lbl_fn_801240B4_00000A04:
+lbl_player_evaluateStatusCondition_00000A04:
     cmpwi r0, 0x0
-    beq lbl_fn_801240B4_00000A14
-lbl_fn_801240B4_00000A0C:
+    beq lbl_player_evaluateStatusCondition_00000A14
+lbl_player_evaluateStatusCondition_00000A0C:
     li r3, 0x0
-    b lbl_fn_801240B4_00000AD8
-lbl_fn_801240B4_00000A14:
+    b lbl_player_evaluateStatusCondition_00000AD8
+lbl_player_evaluateStatusCondition_00000A14:
     lwz r3, lbl_8087EF70
     mr r5, r31
     li r4, 0x0
@@ -803,48 +803,48 @@ lbl_fn_801240B4_00000A14:
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
-    b lbl_fn_801240B4_00000AD8
-lbl_fn_801240B4_00000A34:
+    b lbl_player_evaluateStatusCondition_00000AD8
+lbl_player_evaluateStatusCondition_00000A34:
     bl fn_80122C70
     cmpwi r3, 0x21
     mr r31, r3
-    beq lbl_fn_801240B4_00000AB4
+    beq lbl_player_evaluateStatusCondition_00000AB4
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_00000AA8
+    beq lbl_player_evaluateStatusCondition_00000AA8
     lwz r0, 0x54e4(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_801240B4_00000AA8
+    bne lbl_player_evaluateStatusCondition_00000AA8
     lwz r3, lbl_8087F9F8
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_00000AA8
+    beq lbl_player_evaluateStatusCondition_00000AA8
     lwz r0, 0xa70(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_801240B4_00000AA8
+    bne lbl_player_evaluateStatusCondition_00000AA8
     lwz r3, lbl_8087F8A0
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_00000A88
+    beq lbl_player_evaluateStatusCondition_00000A88
     lwz r3, 0x48(r3)
-    b lbl_fn_801240B4_00000A8C
-lbl_fn_801240B4_00000A88:
+    b lbl_player_evaluateStatusCondition_00000A8C
+lbl_player_evaluateStatusCondition_00000A88:
     li r3, 0x0
-lbl_fn_801240B4_00000A8C:
+lbl_player_evaluateStatusCondition_00000A8C:
     cmpwi r3, 0x0
-    beq lbl_fn_801240B4_00000AA8
+    beq lbl_player_evaluateStatusCondition_00000AA8
     bl fn_8017C974
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
-    b lbl_fn_801240B4_00000AAC
-lbl_fn_801240B4_00000AA8:
+    b lbl_player_evaluateStatusCondition_00000AAC
+lbl_player_evaluateStatusCondition_00000AA8:
     li r0, 0x0
-lbl_fn_801240B4_00000AAC:
+lbl_player_evaluateStatusCondition_00000AAC:
     cmpwi r0, 0x0
-    beq lbl_fn_801240B4_00000ABC
-lbl_fn_801240B4_00000AB4:
+    beq lbl_player_evaluateStatusCondition_00000ABC
+lbl_player_evaluateStatusCondition_00000AB4:
     li r3, 0x0
-    b lbl_fn_801240B4_00000AD8
-lbl_fn_801240B4_00000ABC:
+    b lbl_player_evaluateStatusCondition_00000AD8
+lbl_player_evaluateStatusCondition_00000ABC:
     lwz r3, lbl_8087EF70
     mr r5, r31
     li r4, 0x0
@@ -852,7 +852,7 @@ lbl_fn_801240B4_00000ABC:
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
-lbl_fn_801240B4_00000AD8:
+lbl_player_evaluateStatusCondition_00000AD8:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -992,7 +992,7 @@ asm void fn_801248DC(void)
     stw r29, 0xd4(r1)
     mr r29, r3
     lwz r3, lbl_8087EF70
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fneg f3, f1
     lfs f0, lbl_80881818
     stfs f0, 0x54(r1)
@@ -1001,7 +1001,7 @@ asm void fn_801248DC(void)
     li r5, 0x1
     stfs f3, 0x50(r1)
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fneg f0, f1
     addi r3, r1, 0x50
     stfs f0, 0x58(r1)
@@ -1253,7 +1253,7 @@ asm void fn_80124C6C(void)
     bctr
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     lis r4, lbl_8077A3B0@ha
     cmpwi r3, 0x0
     addi r4, r4, lbl_8077A3B0@l
@@ -1268,7 +1268,7 @@ lbl_fn_80124C6C_00001048:
     b lbl_fn_80124C6C_0000136C
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     lis r4, lbl_8077A3B0@ha
     cmpwi r3, 0x0
     addi r4, r4, lbl_8077A3B0@l
@@ -1283,7 +1283,7 @@ lbl_fn_80124C6C_00001080:
     b lbl_fn_80124C6C_0000136C
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     lis r4, lbl_8077A3B0@ha
     cmpwi r3, 0x0
     addi r4, r4, lbl_8077A3B0@l
@@ -1310,7 +1310,7 @@ lbl_fn_80124C6C_000010B8:
 lbl_fn_80124C6C_000010F8:
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     lis r4, lbl_8077A3B0@ha
     cmpwi r3, 0x0
     addi r4, r4, lbl_8077A3B0@l
@@ -1325,7 +1325,7 @@ lbl_fn_80124C6C_0000111C:
     b lbl_fn_80124C6C_0000136C
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     lis r4, lbl_8077A3B0@ha
     cmpwi r3, 0x0
     addi r4, r4, lbl_8077A3B0@l
@@ -1340,7 +1340,7 @@ lbl_fn_80124C6C_00001154:
     b lbl_fn_80124C6C_0000136C
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     lis r4, lbl_8077A3B0@ha
     cmpwi r3, 0x0
     addi r4, r4, lbl_8077A3B0@l
@@ -1359,7 +1359,7 @@ lbl_fn_80124C6C_0000118C:
     bne lbl_fn_80124C6C_000011E8
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     lis r4, lbl_8077A3B0@ha
     cmpwi r3, 0x0
     addi r4, r4, lbl_8077A3B0@l
@@ -1375,7 +1375,7 @@ lbl_fn_80124C6C_000011D4:
 lbl_fn_80124C6C_000011E8:
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     lis r4, lbl_8077A3B0@ha
     cmpwi r3, 0x0
     addi r4, r4, lbl_8077A3B0@l
@@ -1390,7 +1390,7 @@ lbl_fn_80124C6C_0000120C:
     b lbl_fn_80124C6C_0000136C
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     lis r4, lbl_8077A3B0@ha
     cmpwi r3, 0x0
     addi r4, r4, lbl_8077A3B0@l
@@ -1405,7 +1405,7 @@ lbl_fn_80124C6C_00001244:
     b lbl_fn_80124C6C_0000136C
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     lis r4, lbl_8077A3B0@ha
     cmpwi r3, 0x0
     addi r4, r4, lbl_8077A3B0@l
@@ -1427,7 +1427,7 @@ lbl_fn_80124C6C_0000127C:
     b lbl_fn_80124C6C_0000136C
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     lis r4, lbl_8077A3B0@ha
     cmpwi r3, 0x0
     addi r4, r4, lbl_8077A3B0@l
@@ -1442,7 +1442,7 @@ lbl_fn_80124C6C_000012D0:
     b lbl_fn_80124C6C_0000136C
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     lis r4, lbl_8077A3B0@ha
     cmpwi r3, 0x0
     addi r4, r4, lbl_8077A3B0@l
@@ -1457,7 +1457,7 @@ lbl_fn_80124C6C_00001308:
     b lbl_fn_80124C6C_0000136C
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     lis r4, lbl_8077A3B0@ha
     cmpwi r3, 0x0
     addi r4, r4, lbl_8077A3B0@l

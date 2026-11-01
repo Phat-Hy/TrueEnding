@@ -13,7 +13,7 @@ extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void mem_free(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -27,9 +27,9 @@ extern void viewport_getNextSequenceId(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
-extern void fn_80109828(void);
+extern void hurtbox_dispatchHitEvent(void);
 extern void npc_getPosition(void);
-extern void fn_8014052C(void);
+extern void quest_initMarkerCoords(void);
 extern void actor_setState(void);
 extern void fn_801A03E8(void);
 extern void sound_initGlobalInstances(void);
@@ -140,7 +140,7 @@ asm void fn_80296B8C(void)
     addi r3, r1, 0x14
     lfs f3, lbl_80883BF0
     fmr f2, f1
-    bl fn_80057A68
+    bl vec3_initValues
     lfs f30, lbl_80883BF8
     b lbl_fn_80296B8C_000000B8
 lbl_fn_80296B8C_000000B0:
@@ -182,7 +182,7 @@ lbl_fn_80296B8C_00000128:
 lbl_fn_80296B8C_0000012C:
     mr r4, r31
     addi r3, r1, 0x8
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     addi r3, r1, 0x14
     addi r4, r1, 0x8
     bl fn_801A03E8
@@ -638,7 +638,7 @@ lbl_fn_80297114_000007CC:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x38
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lis r4, lbl_80745818@ha
     addi r3, r31, 0xb0
     addi r4, r4, lbl_80745818@l
@@ -904,7 +904,7 @@ lbl_fn_80297474_00000BB4:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x68
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x3ea

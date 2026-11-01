@@ -9,18 +9,18 @@ extern void _savegpr_24(void);
 extern void dtor_80084684(void);
 extern void vec3_set(void);
 extern void vec3_mag(void);
-extern void fn_8000DD0C(void);
+extern void scene_getRootNode(void);
 extern void vec3_assign(void);
 extern void fn_800109E0(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
-extern void fn_800133B0(void);
+extern void math_wrapAngle(void);
 extern void vec3_add(void);
 extern void ui_destroyWidget(void);
 extern void collision_testLineSegment(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void map_debugLog(void);
@@ -29,7 +29,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800F52F8(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void fn_800F7F80(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_800F80A8(void);
@@ -38,19 +38,19 @@ extern void fn_800F8290(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80116BAC(void);
-extern void fn_801240B4(void);
+extern void player_evaluateStatusCondition(void);
 extern void fn_8012A1B8(void);
 extern void fn_8012A218(void);
 extern void npc_updateDialogueTarget(void);
 extern void fn_80139F3C(void);
 extern void fn_8013A158(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_8013C480(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
-extern void fn_8014052C(void);
-extern void fn_801446F0(void);
+extern void quest_initMarkerCoords(void);
+extern void quest_resetObjectiveBounds(void);
 extern void fn_80178018(void);
 extern void fn_80178078(void);
 extern void fn_80198514(void);
@@ -1004,7 +1004,7 @@ asm void fn_8019FEC4(void)
 lbl_fn_8019FEC4_00000B80:
     lwz r3, 0x4(r3)
     li r29, 0x0
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r30, r3
     li r4, 0x0
     bl atn_Anim_getLayerDuration
@@ -1022,11 +1022,11 @@ lbl_fn_8019FEC4_00000B80:
 lbl_fn_8019FEC4_00000BC4:
     lwz r4, 0x4(r28)
     addi r3, r1, 0x40
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     lfs f1, lbl_80882118
     addi r3, r1, 0x4c
     addi r4, r1, 0x40
-    bl fn_800F72CC
+    bl vec3_scale
     lwz r3, 0x4(r28)
     addi r4, r1, 0x4c
     bl fn_80198514
@@ -1052,11 +1052,11 @@ lbl_fn_8019FEC4_00000BC4:
     fadds f0, f1, f0
     stfs f0, 0xbc(r1)
     lwz r4, 0x4(r28)
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     lfs f1, lbl_80882110
     addi r3, r1, 0x34
     addi r4, r1, 0x28
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0xb8
     addi r4, r1, 0x34
     bl fn_80012C88
@@ -1085,7 +1085,7 @@ lbl_fn_8019FEC4_00000BC4:
     bl fn_800109E0
     addi r3, r1, 0x94
     addi r4, r1, 0x128
-    bl fn_80011410
+    bl mtx_multVec
     lfs f29, lbl_8088211C
     li r30, 0x0
     bl fn_801A03E0
@@ -1144,9 +1144,9 @@ lbl_fn_8019FEC4_00000D5C:
     addi r4, r1, 0x1c
     addi r5, r1, 0xac
     bl vec3_sub
-    lis r4, fn_800133B0@ha
+    lis r4, math_wrapAngle@ha
     addi r3, r1, 0x70
-    addi r4, r4, fn_800133B0@l
+    addi r4, r4, math_wrapAngle@l
     bl fn_8012A218
     lfs f1, 0x74(r1)
     lfs f0, lbl_80881FCC
@@ -1197,13 +1197,13 @@ lbl_fn_8019FEC4_00000E3C:
     addi r3, r28, 0x8
     lfs f3, lbl_80881FBC
     fmr f2, f1
-    bl fn_80057A68
+    bl vec3_initValues
     addi r3, r1, 0xf8
     addi r4, r1, 0xac
     bl fn_800109E0
     addi r3, r28, 0x8
     addi r4, r1, 0xf8
-    bl fn_80011410
+    bl mtx_multVec
 lbl_fn_8019FEC4_00000E78:
     addi r3, r1, 0x158
     bl fn_80140500
@@ -1213,7 +1213,7 @@ lbl_fn_8019FEC4_00000E78:
     lfs f1, lbl_80882128
     addi r3, r1, 0x10
     addi r4, r28, 0x8
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x58
     addi r4, r1, 0xb8
     addi r5, r1, 0x10
@@ -1249,13 +1249,13 @@ lbl_fn_8019FEC4_00000E78:
     bl fn_8013C480
     cmpwi r3, 0x0
     beq lbl_fn_8019FEC4_00000F7C
-    bl fn_8013A194
+    bl npc_getGlobalManager
     bl system_getNextSequenceId
     mr r30, r3
     li r3, 0x76f
     bl task_findEntryById
     mr r31, r3
-    bl fn_8013A194
+    bl npc_getGlobalManager
     li r0, -0x1
     stw r0, 0x8(r1)
     lis r8, lbl_807C7030@ha
@@ -1278,7 +1278,7 @@ lbl_fn_8019FEC4_00000F7C:
     bl fn_800F52F8
     bl fn_80116BAC
     li r4, 0x7
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     bne lbl_fn_8019FEC4_00000FA8
     li r29, 0x1
@@ -2089,7 +2089,7 @@ asm void fn_801A0BA8(void)
     lfs f0, lbl_8088213C
     stfs f0, 0x238(r31)
     lwz r3, 0x4(r30)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -2380,7 +2380,7 @@ lbl_fn_801A0C54_00001C88:
     lwz r3, lbl_8087F0A8
     li r4, 0x20
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_801A0C54_00001CB8
     li r0, 0x1

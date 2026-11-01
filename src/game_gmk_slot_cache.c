@@ -4,10 +4,10 @@
 /* External function declarations */
 extern void _restgpr_18(void);
 extern void _savegpr_18(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void wcs_vformat(void);
-extern void fn_80108C10(void);
-extern void fn_801092C8(void);
+extern void hurtbox_testCollisionLayer(void);
+extern void hurtbox_processHitDamage(void);
 extern void fn_80206B14(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_generateId(void);
@@ -16,8 +16,8 @@ extern void fn_802085E0(void);
 extern void fn_8020BD3C(void);
 extern void fn_8020BD78(void);
 extern void fn_8020BDAC(void);
-extern void fn_8020ED84(void);
-extern void fn_8020EF04(void);
+extern void time_wrapMilliseconds(void);
+extern void rand_scaleRangeInt(void);
 extern void random_generateValue(void);
 extern void fn_8020EFEC(void);
 extern void fn_80210AC4(void);
@@ -31,7 +31,7 @@ extern void fn_8021E444(void);
 extern void fn_8021E5A4(void);
 extern void world_getGlobalFlag(void);
 extern void kpad_getClampData(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void fn_80445F44(void);
 extern void fn_804490E0(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -71,7 +71,7 @@ void fn_804438E0(void);
 void fn_804439FC(void);
 void fn_80444020(void);
 void fn_8044441C(void);
-void fn_804444E8(void);
+void gmk_findSlotByIndex(void);
 void fn_8044453C(void);
 void fn_80444564(void);
 void fn_804446BC(void);
@@ -82,7 +82,7 @@ void fn_8044493C(void);
 void fn_80444A50(void);
 void fn_80444B64(void);
 void fn_80444BE8(void);
-void fn_80444C48(void);
+u32 fn_80444C48(void);
 void fn_80444C50(void);
 void fn_80444CF8(void);
 void fn_80444EFC(void);
@@ -333,7 +333,7 @@ lbl_fn_804439FC_00000344:
     cmpwi r3, 0x0
     bne lbl_fn_804439FC_00000364
     lwz r3, 0x8(r1)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_804439FC_000003A8
 lbl_fn_804439FC_00000364:
@@ -503,7 +503,7 @@ lbl_fn_804439FC_000005B0:
     cmpwi r3, 0x0
     beq lbl_fn_804439FC_000005D0
     li r4, 0xa1
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_804439FC_000005D0:
     cmpwi r26, 0x0
     beq lbl_fn_804439FC_000005DC
@@ -516,21 +516,21 @@ lbl_fn_804439FC_000005DC:
     cmpwi r0, 0x74
     bne lbl_fn_804439FC_000005FC
     li r4, 0x91
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_804439FC_000005FC:
     lwz r0, 0x8(r1)
     cmpwi r0, 0x143
     bne lbl_fn_804439FC_00000614
     lwz r3, lbl_8087F430
     li r4, 0x1b8
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_804439FC_00000614:
     lwz r3, 0x8(r1)
     bl game_initGlobalDatabases
     cmpwi r3, 0x0
     bne lbl_fn_804439FC_00000634
     lwz r3, 0x8(r1)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_804439FC_00000654
 lbl_fn_804439FC_00000634:
@@ -541,7 +541,7 @@ lbl_fn_804439FC_00000634:
     cmpw r4, r0
     blt lbl_fn_804439FC_00000654
     li r4, 0x148
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_804439FC_00000654:
     lha r0, 0xbc(r30)
     cmpwi r0, 0x6
@@ -551,7 +551,7 @@ lbl_fn_804439FC_00000654:
     bne lbl_fn_804439FC_00000678
     lwz r3, lbl_8087F430
     li r4, 0x146
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_804439FC_00000678:
     lwz r3, 0x8(r1)
     bl game_initGlobalDatabases
@@ -569,10 +569,10 @@ lbl_fn_804439FC_00000678:
     cmpw r4, r0
     blt lbl_fn_804439FC_000006BC
     li r4, 0x151
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_804439FC_000006BC:
     lwz r3, 0x8(r1)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_804439FC_00000728
     lwz r3, 0x8(r1)
@@ -599,7 +599,7 @@ lbl_fn_804439FC_000006F4:
 lbl_fn_804439FC_0000071C:
     lwz r3, lbl_8087F430
     li r4, 0x1af
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_804439FC_00000728:
     lwz r3, 0x8(r1)
     bl game_initGlobalDatabases
@@ -632,7 +632,7 @@ lbl_fn_804439FC_00000770:
 lbl_fn_804439FC_00000790:
     lwz r3, lbl_8087F430
     li r4, 0x1b4
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_804439FC_0000079C:
     lwz r3, 0xc(r1)
 lbl_fn_804439FC_000007A0:
@@ -769,7 +769,7 @@ lbl_fn_80444020_0000091C:
     stw r20, 0x34(r1)
     stw r0, 0x3c(r1)
     stw r20, 0x38(r1)
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r19, lbl_8087F048
     cmpwi r19, 0x0
     beq lbl_fn_80444020_000009F0
@@ -800,7 +800,7 @@ lbl_fn_80444020_000009B8:
     addi r5, r1, 0x14
     li r8, 0x0
     li r9, 0x0
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
 lbl_fn_80444020_000009F0:
     cmpwi r28, 0x0
     beq lbl_fn_80444020_00000A00
@@ -850,7 +850,7 @@ lbl_fn_80444020_00000A20:
     lwz r6, 0x10(r1)
     li r5, 0x0
     lwz r7, 0xc(r1)
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
     b lbl_fn_80444020_00000AD0
 lbl_fn_80444020_00000AAC:
     lha r0, 0xbc(r31)
@@ -861,7 +861,7 @@ lbl_fn_80444020_00000AAC:
     lwz r6, 0x10(r1)
     li r5, 0x0
     lwz r7, 0xc(r1)
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
 lbl_fn_80444020_00000AD0:
     cmpwi r28, 0x0
     beq lbl_fn_80444020_00000AE0
@@ -906,7 +906,7 @@ lbl_fn_80444020_00000B48:
     li r4, 0x3
     li r5, 0x0
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
 lbl_fn_80444020_00000B68:
     cmpwi r28, 0x0
     beq lbl_fn_80444020_00000B78
@@ -995,7 +995,7 @@ lbl_fn_8044441C_00000C5C:
     blr
 }
 
-asm void fn_804444E8(void)
+asm void gmk_findSlotByIndex(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1006,17 +1006,17 @@ asm void fn_804444E8(void)
     mr r3, r4
     bl fn_8021150C
     cmpwi r3, 0x0
-    blt lbl_fn_804444E8_00000CA8
+    blt lbl_gmk_findSlotByIndex_00000CA8
     cmpwi r3, 0x600
-    blt lbl_fn_804444E8_00000CB0
-lbl_fn_804444E8_00000CA8:
+    blt lbl_gmk_findSlotByIndex_00000CB0
+lbl_gmk_findSlotByIndex_00000CA8:
     li r3, -0x1
-    b lbl_fn_804444E8_00000CBC
-lbl_fn_804444E8_00000CB0:
+    b lbl_gmk_findSlotByIndex_00000CBC
+lbl_gmk_findSlotByIndex_00000CB0:
     slwi r0, r3, 4
     add r3, r31, r0
     lwz r3, 0x4(r3)
-lbl_fn_804444E8_00000CBC:
+lbl_gmk_findSlotByIndex_00000CBC:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -1105,7 +1105,7 @@ lbl_fn_80444564_00000DA8:
     blt lbl_fn_80444564_00000D54
 lbl_fn_80444564_00000DC8:
     mr r3, r31
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_80444564_00000E38
     li r26, 0x0
@@ -1119,7 +1119,7 @@ lbl_fn_80444564_00000DE0:
 lbl_fn_80444564_00000DF4:
     lwz r4, 0x0(r29)
     mr r3, r27
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     cmpwi r3, 0x0
     beq lbl_fn_80444564_00000E18
     bl random_generateValue
@@ -1576,11 +1576,9 @@ lbl_fn_80444BE8_00001390:
     blr
 }
 
-asm void fn_80444C48(void)
+u32 fn_80444C48(void)
 {
-    nofralloc
-    li r3, 0x58
-    blr
+    return 0x58;
 }
 
 asm void fn_80444C50(void)
@@ -1709,7 +1707,7 @@ lbl_fn_80444CF8_00001584:
     b lbl_fn_80444CF8_0000166C
 lbl_fn_80444CF8_00001590:
     lwz r3, 0x4(r31)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_80444CF8_000015CC
     lwz r4, lbl_8087F1E4

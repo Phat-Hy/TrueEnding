@@ -16,7 +16,7 @@ extern u8 lbl_80778808[];
 
 /* Function declarations */
 void fn_8008826C(void);
-void fn_80088724(void);
+void zone_testPointInBounds(void);
 void fn_80088AF4(void);
 void fn_80088FAC(void);
 
@@ -347,7 +347,7 @@ lbl_fn_8008826C_00000498:
     blr
 }
 
-asm void fn_80088724(void)
+asm void zone_testPointInBounds(void)
 {
     nofralloc
     stwu r1, -0x40(r1)
@@ -375,13 +375,13 @@ asm void fn_80088724(void)
     bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
-    beq lbl_fn_80088724_00000588
+    beq lbl_zone_testPointInBounds_00000588
     addi r0, r3, 0x4
     lis r4, lbl_80778808@ha
     cmplw r25, r0
     addi r4, r4, lbl_80778808@l
     stw r4, 0x0(r3)
-    beq lbl_fn_80088724_00000554
+    beq lbl_zone_testPointInBounds_00000554
     mr r3, r25
     bl strlen
     mr r5, r3
@@ -389,7 +389,7 @@ asm void fn_80088724(void)
     addi r3, r31, 0x4
     addi r5, r5, 0x1
     bl memcpy
-lbl_fn_80088724_00000554:
+lbl_zone_testPointInBounds_00000554:
     li r4, 0x0
     stw r4, 0x44(r31)
     lis r3, lbl_80778610@ha
@@ -403,9 +403,9 @@ lbl_fn_80088724_00000554:
     stw r4, 0x58(r31)
     stw r4, 0x5c(r31)
     stw r4, 0x60(r31)
-lbl_fn_80088724_00000588:
+lbl_zone_testPointInBounds_00000588:
     cmpwi r31, 0x0
-    beq lbl_fn_80088724_00000868
+    beq lbl_zone_testPointInBounds_00000868
     lis r8, lbl_807321F0@ha
     li r3, 0xa8
     addi r8, r8, lbl_807321F0@l
@@ -417,13 +417,13 @@ lbl_fn_80088724_00000588:
     bl mem_alloc
     cmpwi r3, 0x0
     mr r25, r3
-    beq lbl_fn_80088724_0000062C
+    beq lbl_zone_testPointInBounds_0000062C
     addi r0, r3, 0x4
     lis r4, lbl_80778808@ha
     cmplw r26, r0
     addi r4, r4, lbl_80778808@l
     stw r4, 0x0(r3)
-    beq lbl_fn_80088724_000005F4
+    beq lbl_zone_testPointInBounds_000005F4
     mr r3, r26
     bl strlen
     mr r5, r3
@@ -431,7 +431,7 @@ lbl_fn_80088724_00000588:
     addi r3, r25, 0x4
     addi r5, r5, 0x1
     bl memcpy
-lbl_fn_80088724_000005F4:
+lbl_zone_testPointInBounds_000005F4:
     li r0, 0x0
     stw r0, 0x44(r25)
     lis r3, lbl_80778658@ha
@@ -446,9 +446,9 @@ lbl_fn_80088724_000005F4:
     stfs f30, 0x60(r25)
     stfs f31, 0x64(r25)
     stb r0, 0x68(r25)
-lbl_fn_80088724_0000062C:
+lbl_zone_testPointInBounds_0000062C:
     cmpwi r25, 0x0
-    beq lbl_fn_80088724_00000674
+    beq lbl_zone_testPointInBounds_00000674
     lwz r12, 0x0(r25)
     mr r3, r25
     mr r4, r29
@@ -458,15 +458,15 @@ lbl_fn_80088724_0000062C:
     bctrl
     lwz r0, 0x58(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_80088724_00000668
+    bne lbl_zone_testPointInBounds_00000668
     stw r25, 0x58(r31)
     stw r25, 0x5c(r31)
-    b lbl_fn_80088724_00000674
-lbl_fn_80088724_00000668:
+    b lbl_zone_testPointInBounds_00000674
+lbl_zone_testPointInBounds_00000668:
     lwz r3, 0x5c(r31)
     stw r25, 0x44(r3)
     stw r25, 0x5c(r31)
-lbl_fn_80088724_00000674:
+lbl_zone_testPointInBounds_00000674:
     lis r8, lbl_807321F0@ha
     li r3, 0xa8
     addi r8, r8, lbl_807321F0@l
@@ -478,13 +478,13 @@ lbl_fn_80088724_00000674:
     bl mem_alloc
     cmpwi r3, 0x0
     mr r26, r3
-    beq lbl_fn_80088724_00000714
+    beq lbl_zone_testPointInBounds_00000714
     addi r0, r3, 0x4
     lis r4, lbl_80778808@ha
     cmplw r25, r0
     addi r4, r4, lbl_80778808@l
     stw r4, 0x0(r3)
-    beq lbl_fn_80088724_000006D8
+    beq lbl_zone_testPointInBounds_000006D8
     mr r3, r25
     bl strlen
     mr r5, r3
@@ -492,7 +492,7 @@ lbl_fn_80088724_00000674:
     addi r3, r26, 0x4
     addi r5, r5, 0x1
     bl memcpy
-lbl_fn_80088724_000006D8:
+lbl_zone_testPointInBounds_000006D8:
     li r4, 0x0
     stw r4, 0x44(r26)
     lis r3, lbl_80778658@ha
@@ -508,9 +508,9 @@ lbl_fn_80088724_000006D8:
     stfs f30, 0x60(r26)
     stfs f31, 0x64(r26)
     stb r4, 0x68(r26)
-lbl_fn_80088724_00000714:
+lbl_zone_testPointInBounds_00000714:
     cmpwi r26, 0x0
-    beq lbl_fn_80088724_0000075C
+    beq lbl_zone_testPointInBounds_0000075C
     lwz r12, 0x0(r26)
     mr r3, r26
     mr r4, r29
@@ -520,15 +520,15 @@ lbl_fn_80088724_00000714:
     bctrl
     lwz r0, 0x58(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_80088724_00000750
+    bne lbl_zone_testPointInBounds_00000750
     stw r26, 0x58(r31)
     stw r26, 0x5c(r31)
-    b lbl_fn_80088724_0000075C
-lbl_fn_80088724_00000750:
+    b lbl_zone_testPointInBounds_0000075C
+lbl_zone_testPointInBounds_00000750:
     lwz r3, 0x5c(r31)
     stw r26, 0x44(r3)
     stw r26, 0x5c(r31)
-lbl_fn_80088724_0000075C:
+lbl_zone_testPointInBounds_0000075C:
     lis r8, lbl_807321F0@ha
     li r3, 0xa8
     addi r8, r8, lbl_807321F0@l
@@ -540,13 +540,13 @@ lbl_fn_80088724_0000075C:
     bl mem_alloc
     cmpwi r3, 0x0
     mr r26, r3
-    beq lbl_fn_80088724_000007FC
+    beq lbl_zone_testPointInBounds_000007FC
     addi r0, r3, 0x4
     lis r4, lbl_80778808@ha
     cmplw r25, r0
     addi r4, r4, lbl_80778808@l
     stw r4, 0x0(r3)
-    beq lbl_fn_80088724_000007C0
+    beq lbl_zone_testPointInBounds_000007C0
     mr r3, r25
     bl strlen
     mr r5, r3
@@ -554,7 +554,7 @@ lbl_fn_80088724_0000075C:
     addi r3, r26, 0x4
     addi r5, r5, 0x1
     bl memcpy
-lbl_fn_80088724_000007C0:
+lbl_zone_testPointInBounds_000007C0:
     li r4, 0x0
     stw r4, 0x44(r26)
     lis r3, lbl_80778658@ha
@@ -570,9 +570,9 @@ lbl_fn_80088724_000007C0:
     stfs f30, 0x60(r26)
     stfs f31, 0x64(r26)
     stb r4, 0x68(r26)
-lbl_fn_80088724_000007FC:
+lbl_zone_testPointInBounds_000007FC:
     cmpwi r26, 0x0
-    beq lbl_fn_80088724_00000844
+    beq lbl_zone_testPointInBounds_00000844
     lwz r12, 0x0(r26)
     mr r3, r26
     mr r4, r29
@@ -582,26 +582,26 @@ lbl_fn_80088724_000007FC:
     bctrl
     lwz r0, 0x58(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_80088724_00000838
+    bne lbl_zone_testPointInBounds_00000838
     stw r26, 0x58(r31)
     stw r26, 0x5c(r31)
-    b lbl_fn_80088724_00000844
-lbl_fn_80088724_00000838:
+    b lbl_zone_testPointInBounds_00000844
+lbl_zone_testPointInBounds_00000838:
     lwz r3, 0x5c(r31)
     stw r26, 0x44(r3)
     stw r26, 0x5c(r31)
-lbl_fn_80088724_00000844:
+lbl_zone_testPointInBounds_00000844:
     lwz r0, 0x58(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_80088724_0000085C
+    bne lbl_zone_testPointInBounds_0000085C
     stw r31, 0x58(r27)
     stw r31, 0x5c(r27)
-    b lbl_fn_80088724_00000868
-lbl_fn_80088724_0000085C:
+    b lbl_zone_testPointInBounds_00000868
+lbl_zone_testPointInBounds_0000085C:
     lwz r3, 0x5c(r27)
     stw r31, 0x44(r3)
     stw r31, 0x5c(r27)
-lbl_fn_80088724_00000868:
+lbl_zone_testPointInBounds_00000868:
     lfd f31, 0x38(r1)
     lfd f30, 0x30(r1)
     lfd f29, 0x28(r1)

@@ -7,9 +7,9 @@ extern void dtor_80084684(void);
 extern void actor_dispatchMessage(void);
 extern void talk_formatQuotedString(void);
 extern void fn_800638B0(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800839EC(void);
+extern void town_registerInteractionPoint(void);
 extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
 extern void route_interpolatePath(void);
@@ -96,8 +96,8 @@ void fn_800A8C48(void);
 void fn_800A8CB8(void);
 void fn_800A8FA4(void);
 void fn_800A8FC4(void);
-void fn_800A8FE0(void);
-void fn_800A8FE8(void);
+void *fn_800A8FE0(void *obj);
+void fn_800A8FE8(void *obj, void *val);
 void fn_800A8FF0(void);
 void fn_800A90FC(void);
 void fn_800A9100(void);
@@ -119,7 +119,7 @@ void fn_800A9788(void);
 void fn_800A9794(void);
 void fn_800A97C4(void);
 void fn_800A97FC(void);
-void fn_800A9800(void);
+void *fn_800A9800(void *obj);
 void fn_800A9808(void);
 void fn_800A9818(void);
 
@@ -551,7 +551,7 @@ lbl_fn_800A8740_000005B0:
     stfs f8, 0xa4(r1)
     stfs f7, 0xa8(r1)
     stfs f0, 0xac(r1)
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     lfs f0, 0x2c(r29)
     addi r4, r1, 0x98
     lfs f7, 0x1c(r29)
@@ -563,7 +563,7 @@ lbl_fn_800A8740_000005B0:
     lfs f1, lbl_80880CE8
     stfs f0, 0xa0(r1)
     lfs f2, lbl_80880CD4
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     lfs f0, lbl_80880CD4
     addi r4, r1, 0xb0
     lfs f7, lbl_80880CD8
@@ -1093,18 +1093,14 @@ lbl_fn_800A8FC4_00000DE0:
     blr
 }
 
-asm void fn_800A8FE0(void)
+void *fn_800A8FE0(void *obj)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(void **)((char *)obj + 4);
 }
 
-asm void fn_800A8FE8(void)
+void fn_800A8FE8(void *obj, void *val)
 {
-    nofralloc
-    stw r4, 0x4(r3)
-    blr
+    *(void **)((char *)obj + 4) = val;
 }
 
 asm void fn_800A8FF0(void)
@@ -1141,7 +1137,7 @@ asm void fn_800A8FF0(void)
     li r6, 0x6
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     lis r5, lbl_80778CA8@ha
     subi r4, r31, 0x3600
     addi r5, r5, lbl_80778CA8@l
@@ -1180,10 +1176,9 @@ lbl_fn_800A8FF0_00000EE0:
     blr
 }
 
-asm void fn_800A90FC(void)
+void fn_800A90FC(void)
 {
-    nofralloc
-    b bloom_processPasses
+    bloom_processPasses();
 }
 
 void fn_800A9100(void)
@@ -1750,11 +1745,9 @@ void fn_800A97FC(void)
 {
 }
 
-asm void fn_800A9800(void)
+void *fn_800A9800(void *obj)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(void **)((char *)obj + 4);
 }
 
 asm void fn_800A9808(void)

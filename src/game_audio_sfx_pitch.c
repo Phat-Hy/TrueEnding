@@ -12,13 +12,13 @@ extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
-extern void fn_800133B0(void);
+extern void math_wrapAngle(void);
 extern void collision_testLineSegment(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void node_destroy(void);
-extern void fn_80092954(void);
+extern void compass_findMarkerByName(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_80099E9C(void);
@@ -26,28 +26,28 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
-extern void fn_800F52F0(void);
+extern void proj_getMatrix(void);
 extern void fn_800F52F8(void);
 extern void fn_800F7260(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
-extern void fn_800F7FD8(void);
+extern void vec3_normalize(void);
 extern void viewport_getNextSequenceId(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80109950(void);
 extern void fn_801162A0(void);
-extern void fn_801255C8(void);
+extern void enemy_stepBehavior(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80128930(void);
-extern void fn_8012DB04(void);
+extern void enemy_evalAnimTrack(void);
 extern void boss_updatePhaseState(void);
 extern void npc_updateDialogueTarget(void);
 extern void fn_80139F2C(void);
 extern void fn_80139F3C(void);
 extern void fn_80139F58(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_8013C394(void);
 extern void fn_8013C3B4(void);
@@ -57,7 +57,7 @@ extern void fn_8013C478(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
-extern void fn_8014052C(void);
+extern void quest_initMarkerCoords(void);
 extern void fn_80140588(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
@@ -78,7 +78,7 @@ extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
-extern void fn_80239D58(void);
+extern void res_Shader_findParameter(void);
 extern void res_findResourceSlot(void);
 extern void fn_80267B20(void);
 extern void fn_80267B28(void);
@@ -94,7 +94,7 @@ extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_805A3C58(void);
+extern void rand_Mersenne_constructor(void);
 extern void fn_805A3D00(void);
 extern void fn_805A3D6C(void);
 extern void fn_805A40BC(void);
@@ -178,7 +178,7 @@ asm void fn_80313544(void)
     stw r30, 0x218(r1)
     stw r29, 0x214(r1)
     mr r29, r5
-    bl fn_805A3C58
+    bl rand_Mersenne_constructor
     lis r4, lbl_807885D0@ha
     addi r3, r31, 0x1564
     addi r4, r4, lbl_807885D0@l
@@ -714,7 +714,7 @@ lbl_fn_80313AAC_000007AC:
     beq lbl_fn_80313AAC_000008BC
     addi r3, r31, 0xb0
     addi r4, r30, 0x148
-    bl fn_80092954
+    bl compass_findMarkerByName
     cmpwi r3, 0x0
     stw r3, 0x1658(r31)
     beq lbl_fn_80313AAC_000008BC
@@ -903,10 +903,9 @@ void fn_80313FC0(void)
 {
 }
 
-asm void fn_80313FC4(void)
+void fn_80313FC4(void)
 {
-    nofralloc
-    b dialog_renderWindow
+    dialog_renderWindow();
 }
 
 asm void fn_80313FC8(void)
@@ -943,7 +942,7 @@ asm void fn_80313FE8(void)
     stw r0, 0x15f4(r31)
     li r5, 0x0
     lwz r3, lbl_8087F3C0
-    bl fn_80239D58
+    bl res_Shader_findParameter
     cmpwi r3, 0x0
     beq lbl_fn_80313FE8_00000B0C
     lwz r3, lbl_8087F3C0
@@ -1069,7 +1068,7 @@ asm void fn_80314130(void)
     addi r3, r31, 0xc64
     lfs f0, 0x30(r4)
     stfs f0, 0xc8c(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     lwz r0, 0x14cc(r31)
     oris r0, r0, 0x4000
     stw r0, 0x14cc(r31)
@@ -1814,7 +1813,7 @@ asm void fn_80314BD8(void)
     ble lbl_fn_80314BD8_00001778
     addi r3, r1, 0x110
     addi r4, r1, 0x194
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x11c
     addi r4, r1, 0x110
     bl vec3_toEulerAngles
@@ -1896,7 +1895,7 @@ lbl_fn_80314BD8_00001878:
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
     beq lbl_fn_80314BD8_000019E8
-    bl fn_8013A194
+    bl npc_getGlobalManager
     mr r4, r3
     mr r5, r30
     addi r3, r1, 0x17c
@@ -2000,8 +1999,8 @@ lbl_fn_80314BD8_000019E8:
     bl vec3_copy
     b lbl_fn_80314BD8_0000207C
     mr r3, r30
-    bl fn_800F52F0
-    bl fn_8012DB04
+    bl proj_getMatrix
+    bl enemy_evalAnimTrack
     addi r3, r30, 0xb0
     li r4, 0x0
     bl fn_80139F3C
@@ -2022,11 +2021,11 @@ lbl_fn_80314BD8_000019E8:
     bl mtx_getTranslation
     mr r4, r30
     addi r3, r1, 0x50
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     lfs f1, lbl_80884D24
     addi r3, r1, 0x5c
     addi r4, r1, 0x50
-    bl fn_800F72CC
+    bl vec3_scale
     lwz r3, 0x161c(r30)
     bl npc_getPosition
     mr r4, r3
@@ -2092,8 +2091,8 @@ lbl_fn_80314BD8_00001B38:
     lfs f0, lbl_80884D2C
     fsubs f0, f1, f0
     stfs f0, 0x1604(r30)
-    bl fn_800F52F0
-    bl fn_8012DB04
+    bl proj_getMatrix
+    bl enemy_evalAnimTrack
     fmr f30, f1
     bl fn_802F0990
     bl fn_802F0988
@@ -2106,7 +2105,7 @@ lbl_fn_80314BD8_00001B38:
     stfs f2, 0x538(r30)
     fsubs f1, f1, f0
     stfs f3, 0x52c(r30)
-    bl fn_800133B0
+    bl math_wrapAngle
     lfs f2, lbl_80884D30
     lfs f0, lbl_80884D34
     fmuls f2, f2, f1
@@ -2159,7 +2158,7 @@ lbl_fn_80314BD8_00001C48:
     lwz r3, 0x15d8(r30)
     bl task_findEntryById
     mr r29, r3
-    bl fn_8013A194
+    bl npc_getGlobalManager
     li r0, -0x1
     stw r0, 0x8(r1)
     lis r8, lbl_807C7030@ha
@@ -2348,7 +2347,7 @@ lbl_fn_80314BD8_00001ED0:
     ble lbl_fn_80314BD8_00001F5C
     addi r3, r1, 0x14
     addi r4, r1, 0x128
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x20
     addi r4, r1, 0x14
     bl vec3_toEulerAngles

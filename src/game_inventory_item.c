@@ -28,7 +28,7 @@ extern void fn_8011BEB8(void);
 extern void fn_8012DD70(void);
 extern void actor_testBitFlag(void);
 extern void fn_8013539C(void);
-extern void fn_8014C228(void);
+extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
 extern void fn_8015487C(void);
 extern void fn_80154C08(void);
@@ -191,7 +191,7 @@ lbl_fn_80152D10_00000150:
     mr r3, r31
     stw r0, 0x648(r31)
     stw r0, 0x64c(r31)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_fn_80152D10_00000190
 lbl_fn_80152D10_00000170:
     lwz r0, 0x674(r31)
@@ -1083,7 +1083,7 @@ lbl_inventory_unequipItem_00000DE0:
     mr r3, r31
     stw r0, 0x648(r31)
     stw r0, 0x64c(r31)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_inventory_unequipItem_00000E20
 lbl_inventory_unequipItem_00000E00:
     lwz r0, 0x674(r31)
@@ -1735,7 +1735,7 @@ lbl_fn_80154344_00001710:
     mr r3, r31
     stw r0, 0x648(r31)
     stw r0, 0x64c(r31)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_fn_80154344_00001750
 lbl_fn_80154344_00001730:
     lwz r0, 0x674(r31)

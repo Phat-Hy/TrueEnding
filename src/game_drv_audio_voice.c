@@ -11,8 +11,8 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_8003E120(void);
-extern void fn_8004B290(void);
-extern void fn_8006AA20(void);
+extern void sound_initChannelParams(void);
+extern void boss_triggerEventSequence(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_80097A9C(void);
@@ -149,7 +149,7 @@ lbl_fn_805B8DB8_000000A0:
     crclr 6
     bl sprintf
     addi r3, r1, 0x250
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_805B8DB8_000000F4
     mr r3, r22
@@ -491,7 +491,7 @@ lbl_fn_805B8DB8_0000056C:
     crclr 6
     bl sprintf
     addi r3, r1, 0x50
-    bl fn_8006AA20
+    bl boss_triggerEventSequence
     cmpwi r3, 0x0
     beq lbl_fn_805B8DB8_000005F0
     stw r24, 0x4(r28)
@@ -1460,11 +1460,11 @@ asm void fn_805B9FC8(void)
     stw r29, 0x50(r28)
     stfs f0, 0x84(r28)
     stw r30, 0x88(r28)
-    bl fn_8004B290
+    bl sound_initChannelParams
     addi r3, r28, 0x280
     li r4, 0x0
     li r5, 0x0
-    bl fn_8004B290
+    bl sound_initChannelParams
     lis r4, fn_805BA11C@ha
     lis r5, fn_805B9ECC@ha
     addi r3, r28, 0x474

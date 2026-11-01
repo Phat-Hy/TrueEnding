@@ -27,19 +27,19 @@ extern void fn_8011D21C(void);
 extern void fn_801354B4(void);
 extern void fn_80136138(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80139560(void);
+extern void npc_calcTargetDistance(void);
 extern void quest_updateFlow(void);
 extern void quest_checkCondition(void);
 extern void dialog_updateScriptState(void);
 extern void fn_8014F2B4(void);
 extern void fn_8014FB60(void);
 extern void fn_80155A88(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void fn_801603CC(void);
 extern void fn_80161570(void);
 extern void fn_80164B00(void);
 extern void battle_updateTargetAggro(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void fn_80179A34(void);
 extern void fn_80179AB4(void);
 extern void fn_801A59F4(void);
@@ -117,11 +117,11 @@ void fn_800E24CC(void);
 void fn_800E24D0(void);
 void fn_800E24D4(void);
 void fn_800E24EC(void);
-void fn_800E2504(void);
+u32 fn_800E2504(void);
 void fn_800E250C(void);
-void fn_800E2608(void);
+s32 fn_800E2608(void);
 void fn_800E2610(void);
-void fn_800E2668(void);
+s32 fn_800E2668(void);
 void fn_800E2670(void);
 void fn_800E2778(void);
 void fn_800E29B4(void);
@@ -304,11 +304,9 @@ asm void fn_800E24EC(void)
     blr
 }
 
-asm void fn_800E2504(void)
+u32 fn_800E2504(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_800E250C(void)
@@ -385,11 +383,9 @@ lbl_fn_800E250C_00000300:
     blr
 }
 
-asm void fn_800E2608(void)
+s32 fn_800E2608(void)
 {
-    nofralloc
-    li r3, -0x1
-    blr
+    return -1;
 }
 
 asm void fn_800E2610(void)
@@ -421,11 +417,9 @@ lbl_fn_800E2610_0000036C:
     blr
 }
 
-asm void fn_800E2668(void)
+s32 fn_800E2668(void)
 {
-    nofralloc
-    li r3, -0x1
-    blr
+    return -1;
 }
 
 asm void fn_800E2670(void)
@@ -1317,7 +1311,7 @@ lbl_fn_800E2FE0_00000F7C:
     mr r4, r3
 lbl_fn_800E2FE0_00000FF0:
     mr r3, r30
-    bl fn_80178208
+    bl battle_generateLootDrops
     li r0, 0x0
     sth r0, 0x1470(r30)
     b lbl_fn_800E2FE0_000016E0
@@ -1582,7 +1576,7 @@ lbl_fn_800E2FE0_00001324:
     mr r4, r3
 lbl_fn_800E2FE0_000013DC:
     mr r3, r30
-    bl fn_80178208
+    bl battle_generateLootDrops
     li r0, 0x0
     sth r0, 0x1470(r30)
     b lbl_fn_800E2FE0_000016E0
@@ -1895,7 +1889,7 @@ lbl_fn_800E2FE0_0000183C:
     b lbl_fn_800E2FE0_00001868
 lbl_fn_800E2FE0_00001860:
     mr r3, r30
-    bl fn_80139560
+    bl npc_calcTargetDistance
 lbl_fn_800E2FE0_00001868:
     mr r3, r30
     addi r4, r1, 0x1c0
@@ -1954,7 +1948,7 @@ lbl_fn_800E2FE0_00001910:
     b lbl_fn_800E2FE0_0000193C
 lbl_fn_800E2FE0_00001934:
     mr r3, r30
-    bl fn_80139560
+    bl npc_calcTargetDistance
 lbl_fn_800E2FE0_0000193C:
     lwz r0, 0x48(r30)
     cmpwi r0, 0x2
@@ -2102,7 +2096,7 @@ lbl_fn_800E2FE0_00001A94:
     li r6, 0x0
     stfs f0, 0x140(r1)
     stfs f3, 0x144(r1)
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
 lbl_fn_800E2FE0_00001B64:
     lwz r0, 0x314(r1)
     psq_l f31, 0x308(r1), 0, 0

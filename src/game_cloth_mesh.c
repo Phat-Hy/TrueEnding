@@ -30,7 +30,7 @@ extern void npc_updateTalkInteraction(void);
 extern void fn_801426A4(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015C3A8(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void actor_setState(void);
 extern void battle_applyStatusEffect(void);
 extern void battle_resolveAggroHierarchy(void);
@@ -1654,7 +1654,7 @@ lbl_fn_8027C38C_00001560:
     stfs f3, 0x44(r1)
     lwz r3, 0x1908(r30)
     lwzx r3, r3, r29
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
     lwz r3, 0x1908(r30)
     lwzx r3, r3, r29
     lwz r0, 0x48(r3)

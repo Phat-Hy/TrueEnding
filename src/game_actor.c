@@ -17,7 +17,7 @@ extern void fn_8001C1B4(void);
 extern void fn_8001C1B8(void);
 extern void fn_8001C1BC(void);
 extern void fn_8003E918(void);
-extern void fn_80060D58(void);
+extern void equip_calcTotalStatBonuses(void);
 extern void skill_calculateDamage(void);
 extern void fn_80062C8C(void);
 extern void fn_80063200(void);
@@ -41,11 +41,11 @@ extern void fn_801083D8(void);
 extern void fn_8011F8BC(void);
 extern void fn_8011FBD8(void);
 extern void fn_8011FE04(void);
-extern void fn_8012DB04(void);
+extern void enemy_evalAnimTrack(void);
 extern void battle_canTargetActor(void);
 extern void fn_8017C904(void);
 extern void fn_8035B854(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void fn_803C11A4(void);
 extern void fn_803C1884(void);
 extern void atn_LoadHandle_constructor(void);
@@ -132,8 +132,8 @@ void dtor_80013D60(void);
 void actor_validateIndex(void);
 void actor_dispatchMessage(void);
 void dtor_80014250(void);
-void fn_800142C4(void);
-void fn_800142CC(void);
+void fn_800142C4(u32 val);
+void fn_800142CC(u32 val);
 void fn_800142D4(void);
 void fn_800143E8(void);
 void fn_800144FC(void);
@@ -558,18 +558,14 @@ lbl_dtor_80014250_00000548:
     blr
 }
 
-asm void fn_800142C4(void)
+void fn_800142C4(u32 val)
 {
-    nofralloc
-    stw r3, lbl_8087EE60
-    blr
+    lbl_8087EE60 = val;
 }
 
-asm void fn_800142CC(void)
+void fn_800142CC(u32 val)
 {
-    nofralloc
-    stw r3, lbl_8087EE64
-    blr
+    lbl_8087EE64 = val;
 }
 
 asm void fn_800142D4(void)
@@ -590,17 +586,17 @@ asm void fn_800142D4(void)
     lwz r31, 0xa4(r4)
 lbl_fn_800142D4_000005A8:
     addi r3, r3, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lfs f0, lbl_808806A0
     fcmpo cr0, f0, f1
     bge lbl_fn_800142D4_0000066C
     addi r3, r30, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lfs f0, lbl_808806A4
     fcmpo cr0, f1, f0
     bge lbl_fn_800142D4_0000066C
     addi r3, r30, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lfs f0, lbl_808806A8
     lfs f2, lbl_808806A4
     fadds f1, f0, f1
@@ -609,7 +605,7 @@ lbl_fn_800142D4_000005A8:
     fcmpo cr0, f1, f0
     ble lbl_fn_800142D4_0000060C
     addi r3, r30, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lfs f2, lbl_808806A8
     lfs f0, lbl_808806A4
     fadds f1, f2, f1
@@ -619,7 +615,7 @@ lbl_fn_800142D4_0000060C:
     fcmpo cr0, f0, f2
     bge lbl_fn_800142D4_00000654
     addi r3, r30, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lfs f2, lbl_808806A8
     lfs f0, lbl_808806A4
     fadds f1, f2, f1
@@ -628,7 +624,7 @@ lbl_fn_800142D4_0000060C:
     fcmpo cr0, f0, f2
     ble lbl_fn_800142D4_00000654
     addi r3, r30, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lfs f2, lbl_808806A8
     lfs f0, lbl_808806A4
     fadds f1, f2, f1
@@ -668,17 +664,17 @@ asm void fn_800143E8(void)
     lwz r31, 0xa4(r4)
 lbl_fn_800143E8_000006BC:
     addi r3, r3, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lfs f0, lbl_808806A0
     fcmpo cr0, f0, f1
     bge lbl_fn_800143E8_00000780
     addi r3, r30, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lfs f0, lbl_808806A4
     fcmpo cr0, f1, f0
     bge lbl_fn_800143E8_00000780
     addi r3, r30, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lfs f0, lbl_808806A8
     lfs f2, lbl_808806A4
     fadds f1, f0, f1
@@ -687,7 +683,7 @@ lbl_fn_800143E8_000006BC:
     fcmpo cr0, f1, f0
     ble lbl_fn_800143E8_00000720
     addi r3, r30, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lfs f2, lbl_808806A8
     lfs f0, lbl_808806A4
     fadds f1, f2, f1
@@ -697,7 +693,7 @@ lbl_fn_800143E8_00000720:
     fcmpo cr0, f0, f2
     bge lbl_fn_800143E8_00000768
     addi r3, r30, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lfs f2, lbl_808806A8
     lfs f0, lbl_808806A4
     fadds f1, f2, f1
@@ -706,7 +702,7 @@ lbl_fn_800143E8_00000720:
     fcmpo cr0, f0, f2
     ble lbl_fn_800143E8_00000768
     addi r3, r30, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lfs f2, lbl_808806A8
     lfs f0, lbl_808806A4
     fadds f1, f2, f1
@@ -1462,7 +1458,7 @@ lbl_fn_80014A5C_0000115C:
     b lbl_fn_80014A5C_000011E8
 lbl_fn_80014A5C_0000117C:
     lwz r3, lbl_8087F428
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     stw r3, 0x80(r22)
     b lbl_fn_80014A5C_000011E8
 lbl_fn_80014A5C_0000118C:
@@ -1521,7 +1517,7 @@ lbl_fn_80014A5C_00001214:
     fmr f4, f29
     fmr f5, f28
     lfs f26, lbl_808806D4
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
     lfs f0, lbl_808806DC
     lis r3, 0xd100
     lfs f4, lbl_808806D8
@@ -2885,7 +2881,7 @@ lbl_fn_80014A5C_000026F4:
     fmr f5, f28
     lis r4, 0x9000
     fadds f1, f30, f29
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
     fadds f25, f25, f29
     lis r3, lbl_8072FD8C@ha
     addi r31, r3, lbl_8072FD8C@l
@@ -3033,7 +3029,7 @@ lbl_fn_80014A5C_000028F8:
     lfs f26, lbl_8088070C
     lfs f4, lbl_80880714
     lfs f5, lbl_80880718
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
     lfs f0, lbl_808806D8
     lis r23, lbl_8072FD8C@ha
     lfs f24, lbl_808806BC
@@ -3179,7 +3175,7 @@ asm void fn_80016888(void)
     lwz r4, 0x48(r4)
     bl fn_80017064
     lwz r3, lbl_8087F428
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     mr r28, r3
     addi r29, r1, 0x1c
     li r30, 0x0
@@ -3278,7 +3274,7 @@ lbl_fn_80016888_00002CA8:
     lwz r0, 0x48(r3)
     stw r0, 0x8c(r31)
     lwz r3, lbl_8087F428
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     stw r3, 0x80(r31)
     lwz r3, lbl_8087F8A0
     lwz r0, 0x48(r3)
@@ -3737,10 +3733,9 @@ lbl_fn_80016FB4_000032E8:
     blr
 }
 
-asm void fn_80017060(void)
+void fn_80017060(void)
 {
-    nofralloc
-    b fn_80016FB4
+    fn_80016FB4();
 }
 
 asm void fn_80017064(void)

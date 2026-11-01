@@ -85,12 +85,12 @@ extern u32 lbl_808813AC;
 extern u32 lbl_808813B0;
 
 /* Function declarations */
-void fn_800EDFE8(void);
+void cam_evalLookAtMatrix(void);
 void fn_800EE180(void);
-void fn_800EE360(void);
+void camera_updateTargetMode(void);
 void fn_800EE494(void);
 void fn_800EE4D8(void);
-void fn_800EE5A4(void);
+u32 fn_800EE5A4(void);
 void fn_800EE5AC(void);
 void fn_800EE640(void);
 void fn_800EE794(void);
@@ -101,9 +101,9 @@ void fn_800EF2AC(void);
 void fn_800EF2B4(void);
 void fn_800EF2F0(void);
 void fn_800EF304(void);
-void fn_800EF308(void);
+u32 fn_800EF308(void);
 void fn_800EF310(void);
-void fn_800EF31C(void);
+u32 fn_800EF31C(void);
 void fn_800EF324(void);
 void fn_800EF368(void);
 void fn_800EF370(void);
@@ -111,14 +111,14 @@ void fn_800EF38C(void);
 void fn_800EF394(void);
 void fn_800EF3D8(void);
 void fn_800EF3DC(void);
-void fn_800EF3E0(void);
+u32 fn_800EF3E0(void);
 void fn_800EF3E8(void);
 void cam_initStickBindings(void);
 void camera_setMode(void);
 void fn_800EF6BC(void);
 void cam_destroyMsgHandle(void);
 
-asm void fn_800EDFE8(void)
+asm void cam_evalLookAtMatrix(void)
 {
     nofralloc
     stwu r1, -0x60(r1)
@@ -133,14 +133,14 @@ asm void fn_800EDFE8(void)
     stw r29, 0x54(r1)
     addi r29, r1, 0x20
     stw r28, 0x50(r1)
-    bne lbl_fn_800EDFE8_0000004C
+    bne lbl_cam_evalLookAtMatrix_0000004C
     lwz r3, 0xc(r4)
     lwz r0, 0x10(r4)
     stw r5, 0x20(r1)
     stw r3, 0x24(r1)
     stw r0, 0x28(r1)
-    b lbl_fn_800EDFE8_00000090
-lbl_fn_800EDFE8_0000004C:
+    b lbl_cam_evalLookAtMatrix_00000090
+lbl_cam_evalLookAtMatrix_0000004C:
     li r0, 0x0
     stw r0, 0x20(r1)
     lwz r4, 0xc(r4)
@@ -158,17 +158,17 @@ lbl_fn_800EDFE8_0000004C:
     li r5, 0x0
     add r7, r6, r0
     bl actor_dispatchMessage
-lbl_fn_800EDFE8_00000090:
+lbl_cam_evalLookAtMatrix_00000090:
     lwz r4, 0x14(r31)
     srwi. r0, r4, 31
-    bne lbl_fn_800EDFE8_000000B4
+    bne lbl_cam_evalLookAtMatrix_000000B4
     lwz r3, 0x18(r31)
     lwz r0, 0x1c(r31)
     stw r4, 0x2c(r1)
     stw r3, 0x30(r1)
     stw r0, 0x34(r1)
-    b lbl_fn_800EDFE8_000000FC
-lbl_fn_800EDFE8_000000B4:
+    b lbl_cam_evalLookAtMatrix_000000FC
+lbl_cam_evalLookAtMatrix_000000B4:
     li r0, 0x0
     stw r0, 0xc(r29)
     lwz r4, 0x18(r31)
@@ -187,7 +187,7 @@ lbl_fn_800EDFE8_000000B4:
     li r5, 0x0
     add r7, r6, r0
     bl actor_dispatchMessage
-lbl_fn_800EDFE8_000000FC:
+lbl_cam_evalLookAtMatrix_000000FC:
     lwz r0, 0x4(r31)
     mr r3, r30
     lbz r10, 0x20(r31)
@@ -206,21 +206,21 @@ lbl_fn_800EDFE8_000000FC:
     bl fn_800EC7F0
     addi r29, r1, 0x20
     addic. r0, r29, 0xc
-    beq lbl_fn_800EDFE8_0000015C
+    beq lbl_cam_evalLookAtMatrix_0000015C
     lwz r0, 0x2c(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_800EDFE8_0000015C
+    beq lbl_cam_evalLookAtMatrix_0000015C
     lwz r3, 0x34(r1)
     bl dtor_80084684
-lbl_fn_800EDFE8_0000015C:
+lbl_cam_evalLookAtMatrix_0000015C:
     cmpwi r29, 0x0
-    beq lbl_fn_800EDFE8_00000178
+    beq lbl_cam_evalLookAtMatrix_00000178
     lwz r0, 0x20(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_800EDFE8_00000178
+    beq lbl_cam_evalLookAtMatrix_00000178
     lwz r3, 0x28(r1)
     bl dtor_80084684
-lbl_fn_800EDFE8_00000178:
+lbl_cam_evalLookAtMatrix_00000178:
     lwz r0, 0x64(r1)
     lwz r31, 0x5c(r1)
     lwz r30, 0x58(r1)
@@ -375,7 +375,7 @@ lbl_fn_800EE180_00000368:
     blr
 }
 
-asm void fn_800EE360(void)
+asm void camera_updateTargetMode(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -385,55 +385,55 @@ asm void fn_800EE360(void)
     mr r31, r3
     lwz r0, lbl_8087F610
     cmpwi r0, 0x0
-    beq lbl_fn_800EE360_000003A8
+    beq lbl_camera_updateTargetMode_000003A8
     mr r3, r0
     bl fn_804EB1B0
     cmpwi r3, 0x0
-    beq lbl_fn_800EE360_00000498
-lbl_fn_800EE360_000003A8:
+    beq lbl_camera_updateTargetMode_00000498
+lbl_camera_updateTargetMode_000003A8:
     lwz r0, 0x12a4(r31)
     extrwi r0, r0, 1, 9
     cmplwi r0, 0x1
-    beq lbl_fn_800EE360_000003D4
+    beq lbl_camera_updateTargetMode_000003D4
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_800EE360_000003D4
+    beq lbl_camera_updateTargetMode_000003D4
     li r4, 0x399
     bl world_getGlobalFlag
     cmpwi r3, 0x0
-    bgt lbl_fn_800EE360_00000498
-lbl_fn_800EE360_000003D4:
+    bgt lbl_camera_updateTargetMode_00000498
+lbl_camera_updateTargetMode_000003D4:
     lwz r3, 0x5c(r31)
     lwz r0, 0x9c(r3)
     rlwinm r0, r0, 0, 17, 17
     cmplwi r0, 0x4000
-    bne lbl_fn_800EE360_0000042C
+    bne lbl_camera_updateTargetMode_0000042C
     lwz r5, lbl_8087F040
     cmpwi r5, 0x0
-    beq lbl_fn_800EE360_00000498
+    beq lbl_camera_updateTargetMode_00000498
     lwz r0, 0x170(r5)
     lwz r3, 0xd0(r3)
     cmplwi r0, 0x2
-    bge lbl_fn_800EE360_00000498
+    bge lbl_camera_updateTargetMode_00000498
     lwz r0, 0x170(r5)
     slwi r0, r0, 2
     add r0, r5, r0
     addic. r4, r0, 0x174
-    beq lbl_fn_800EE360_0000041C
+    beq lbl_camera_updateTargetMode_0000041C
     stw r3, 0x0(r4)
-lbl_fn_800EE360_0000041C:
+lbl_camera_updateTargetMode_0000041C:
     lwz r3, 0x170(r5)
     addi r0, r3, 0x1
     stw r0, 0x170(r5)
-    b lbl_fn_800EE360_00000498
-lbl_fn_800EE360_0000042C:
+    b lbl_camera_updateTargetMode_00000498
+lbl_camera_updateTargetMode_0000042C:
     lwz r5, 0x1438(r31)
     cmpwi r5, 0x0
-    beq lbl_fn_800EE360_00000498
+    beq lbl_camera_updateTargetMode_00000498
     lwz r0, 0x38(r5)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    bne lbl_fn_800EE360_00000498
+    bne lbl_camera_updateTargetMode_00000498
     lwz r4, 0x38(r5)
     li r3, 0x0
     lfs f0, lbl_808812DC
@@ -454,7 +454,7 @@ lbl_fn_800EE360_0000042C:
     lwz r12, 0x40(r12)
     mtctr r12
     bctrl
-lbl_fn_800EE360_00000498:
+lbl_camera_updateTargetMode_00000498:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
     mtlr r0
@@ -545,11 +545,9 @@ lbl_fn_800EE4D8_000005A8:
     blr
 }
 
-asm void fn_800EE5A4(void)
+u32 fn_800EE5A4(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_800EE5AC(void)
@@ -1516,11 +1514,9 @@ void fn_800EF304(void)
 {
 }
 
-asm void fn_800EF308(void)
+u32 fn_800EF308(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_800EF310(void)
@@ -1531,11 +1527,9 @@ asm void fn_800EF310(void)
     blr
 }
 
-asm void fn_800EF31C(void)
+u32 fn_800EF31C(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_800EF324(void)
@@ -1616,11 +1610,9 @@ void fn_800EF3DC(void)
 {
 }
 
-asm void fn_800EF3E0(void)
+u32 fn_800EF3E0(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_800EF3E8(void)

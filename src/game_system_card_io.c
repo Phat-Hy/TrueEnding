@@ -6,14 +6,14 @@ extern void _restgpr_22(void);
 extern void _savegpr_22(void);
 extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void collision_testLineSegment(void);
 extern void cursor_updateSlotState(void);
 extern void system_getNextSequenceId(void);
-extern void fn_801255C8(void);
+extern void enemy_stepBehavior(void);
 extern void fn_80127D8C(void);
 extern void fn_80128930(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void fn_8013C460(void);
 extern void fn_80161880(void);
 extern void actor_setState(void);
@@ -610,7 +610,7 @@ asm void fn_803579FC(void)
     lfs f0, lbl_80885588
     addi r3, r31, 0xc64
     stfs f0, 0xc8c(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     lwz r0, 0x14cc(r31)
     oris r0, r0, 0x4000
     stw r0, 0x14cc(r31)
@@ -708,7 +708,7 @@ asm void fn_803579FC(void)
     li r7, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r0, 0x14e0(r31)
     cmpwi r0, 0x0
     bne lbl_fn_803579FC_0000094C
@@ -767,7 +767,7 @@ lbl_fn_803579FC_000009A8:
     mr r3, r31
     lfs f2, lbl_8088552C
     bl fn_8035738C
-    bl fn_8013A194
+    bl npc_getGlobalManager
     bl system_getNextSequenceId
     stw r3, 0x590(r31)
     mr r3, r31

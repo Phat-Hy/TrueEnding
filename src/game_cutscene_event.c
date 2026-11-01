@@ -13,8 +13,8 @@ extern void dtor_80084684(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80057F28(void);
 extern void fn_80058078(void);
-extern void fn_800580BC(void);
-extern void fn_800588FC(void);
+extern void mission_isObjectiveActive(void);
+extern void mission_updateObjectiveTarget(void);
 extern void atn_ColliObject_destructor(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
@@ -46,7 +46,7 @@ extern void res_registerResource(void);
 extern void entity_Instance_constructor(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
@@ -833,7 +833,7 @@ lbl_fn_8032C850_00000A04:
     li r30, 0x0
 lbl_fn_8032C850_00000A1C:
     mr r3, r31
-    bl fn_800580BC
+    bl mission_isObjectiveActive
     cmpwi r3, 0x0
     beq lbl_fn_8032C850_00000A34
     li r3, 0x0
@@ -1161,7 +1161,7 @@ lbl_fn_8032CBFC_00000E88:
     blt lbl_fn_8032CBFC_00000EA8
     lwz r3, lbl_8087F430
     li r4, 0xf7
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_8032CBFC_00000EA8:
     mr r3, r31
     bl quest_updateFlow
@@ -1466,7 +1466,7 @@ lbl_fn_8032CF10_00001264:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
 lbl_fn_8032CF10_0000132C:
     addi r27, r27, 0x1
     addi r30, r30, 0x88

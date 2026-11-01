@@ -10,9 +10,9 @@ extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void fn_800109E0(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void vec3_sub(void);
-extern void fn_800133B0(void);
+extern void math_wrapAngle(void);
 extern void vec3_add(void);
 extern void skill_calculateDamage(void);
 extern void fn_80063764(void);
@@ -25,10 +25,10 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800D8814(void);
-extern void fn_800EB7A0(void);
-extern void fn_800EC204(void);
+extern void sound_playSpatialEffect(void);
+extern void cam_findTargetIndex(void);
 extern void fn_800F7250(void);
-extern void fn_800F7FD8(void);
+extern void vec3_normalize(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_800F8348(void);
 extern void fn_800F8524(void);
@@ -37,7 +37,7 @@ extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
 extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void quest_updateFlow(void);
 extern void fn_80149624(void);
 extern void dialog_renderWindow(void);
@@ -675,7 +675,7 @@ lbl_fn_8030A848_000007C8:
     stfs f2, 0x34(r1)
     psq_st f1, 0x0(r5), 0, 0
     stfs f2, 0x15ec(r30)
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
 lbl_fn_8030A848_000007FC:
     lwz r3, lbl_8087EEF0
     li r30, 0x0
@@ -838,7 +838,7 @@ lbl_fn_8030AF10_0000095C:
     bl vec3_set
     addi r3, r1, 0x100
     addi r4, r1, 0x1c0
-    bl fn_80011410
+    bl mtx_multVec
     lfs f1, lbl_80884BA8
     addi r3, r1, 0x90
     fmr f2, f1
@@ -862,13 +862,13 @@ lbl_fn_8030AF10_0000095C:
     bl fn_80149624
     addi r3, r1, 0xf4
     addi r4, r1, 0x190
-    bl fn_80011410
+    bl mtx_multVec
     lfs f1, lbl_80884BEC
     addi r3, r1, 0x160
     bl fn_80149624
     addi r3, r1, 0xe8
     addi r4, r1, 0x160
-    bl fn_80011410
+    bl mtx_multVec
     lfs f1, lbl_80884BA8
     addi r3, r1, 0x70
     lfs f2, lbl_80884BAC
@@ -917,7 +917,7 @@ lbl_fn_8030AF10_0000095C:
     li r25, 0x64
 lbl_fn_8030AF10_00000B8C:
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     lfs f1, lbl_80884BAC
     mr r30, r3
     addi r3, r1, 0xd8
@@ -946,7 +946,7 @@ lbl_fn_8030AF10_00000B8C:
     bl vec3_toEulerAngles
     addi r3, r1, 0xcc
     addi r4, r1, 0x40
-    bl fn_800F7FD8
+    bl vec3_normalize
     stfs f31, 0xcc(r1)
     addi r3, r1, 0x130
     addi r4, r1, 0xcc
@@ -959,13 +959,13 @@ lbl_fn_8030AF10_00000B8C:
     bl vec3_set
     addi r3, r1, 0xc0
     addi r4, r1, 0x130
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0xd8
     bl fn_800F8348
     lwz r4, 0x1538(r26)
     mr r28, r3
     mr r3, r30
-    bl fn_800EC204
+    bl cam_findTargetIndex
     mr r4, r3
     addi r3, r1, 0x34
     addi r4, r4, 0x4
@@ -973,7 +973,7 @@ lbl_fn_8030AF10_00000B8C:
     bl vec3_add
     lwz r4, 0x1538(r26)
     mr r3, r30
-    bl fn_800EC204
+    bl cam_findTargetIndex
     mr r30, r3
     bl fn_800F7250
     lfs f1, lbl_80884BF4
@@ -990,7 +990,7 @@ lbl_fn_8030AF10_00000B8C:
     bl vec3_sub
     addi r3, r1, 0x28
     addi r4, r1, 0x1c
-    bl fn_800F7FD8
+    bl vec3_normalize
     lfs f1, 0x2c(r1)
     bl fn_802A7964
     mr r5, r24
@@ -1364,10 +1364,10 @@ lbl_fn_8030B74C_000011AC:
     bl vec3_toEulerAngles
     fsubs f1, f30, f31
     lfs f31, 0x14(r1)
-    bl fn_800133B0
+    bl math_wrapAngle
     stfs f1, 0xc(r1)
     fsubs f1, f31, f30
-    bl fn_800133B0
+    bl math_wrapAngle
     stfs f1, 0x8(r1)
     fmr f1, f29
     addi r3, r1, 0xc

@@ -7,7 +7,7 @@ extern void _savegpr_24(void);
 extern void fn_80010374(void);
 extern void fn_80010B68(void);
 extern void fn_80012A1C(void);
-extern void fn_800928B0(void);
+extern void compass_findWaypointIndex(void);
 extern void fn_801162A4(void);
 extern void fn_8048B048(void);
 extern void fn_8048BCA4(void);
@@ -40,7 +40,7 @@ extern u32 lbl_808816D0;
 /* Function declarations */
 void fn_8011375C(void);
 void fn_801139E4(void);
-void fn_80113CCC(void);
+void *fn_80113CCC(void *p);
 void fn_80113CD4(void);
 void fn_801140A0(void);
 void fn_80114468(void);
@@ -120,7 +120,7 @@ lbl_fn_8011375C_000000E4:
     beq lbl_fn_8011375C_00000124
     lwz r4, 0x214(r31)
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_8011375C_00000114
     li r5, 0x0
@@ -294,7 +294,7 @@ lbl_fn_801139E4_00000360:
     beq lbl_fn_801139E4_000003A0
     lwz r4, 0x244(r31)
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_801139E4_00000390
     li r5, 0x0
@@ -428,11 +428,9 @@ lbl_fn_801139E4_00000544:
     blr
 }
 
-asm void fn_80113CCC(void)
+void *fn_80113CCC(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x8
-    blr
+    return (char *)p + 0x8;
 }
 
 asm void fn_80113CD4(void)
@@ -510,7 +508,7 @@ lbl_fn_80113CD4_00000678:
     beq lbl_fn_80113CD4_000006B4
     lwz r4, 0x214(r30)
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_80113CD4_000006A4
     li r5, 0x0
@@ -605,7 +603,7 @@ lbl_fn_80113CD4_000007D8:
     beq lbl_fn_80113CD4_00000814
     lwz r4, 0x244(r30)
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_80113CD4_00000804
     li r5, 0x0
@@ -771,7 +769,7 @@ lbl_fn_801140A0_00000A34:
     beq lbl_fn_801140A0_00000A74
     lwz r4, 0x214(r30)
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_801140A0_00000A64
     li r5, 0x0
@@ -866,7 +864,7 @@ lbl_fn_801140A0_00000B98:
     beq lbl_fn_801140A0_00000BD4
     lwz r4, 0x244(r30)
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_801140A0_00000BC4
     li r5, 0x0

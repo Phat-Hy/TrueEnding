@@ -6,7 +6,7 @@ extern void _restgpr_22(void);
 extern void _restgpr_27(void);
 extern void _savegpr_22(void);
 extern void _savegpr_27(void);
-extern void fn_800A56A8(void);
+extern void msg_formatWindowLayout(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB688(void);
@@ -878,14 +878,14 @@ lbl_fn_8010220C_00000A98:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fneg f0, f1
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x1
     stfs f0, 0x28(r1)
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     stfs f1, 0x2c(r1)
 lbl_fn_8010220C_00000B88:
     addis r4, r31, 0x1

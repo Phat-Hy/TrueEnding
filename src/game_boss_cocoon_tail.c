@@ -13,14 +13,14 @@ extern void vec3_sub(void);
 extern void item_testLineOfSight(void);
 extern void collision_testLineSegment(void);
 extern void mission_updateStub(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void atn_Anim_getDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800F7FD8(void);
+extern void vec3_normalize(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void fn_80107A68(void);
@@ -116,8 +116,8 @@ extern u32 lbl_80886E3C;
 void fn_804628B4(void);
 void fn_80462CCC(void);
 void fn_80463174(void);
-void fn_804635A4(void);
-void fn_804635AC(void);
+void *fn_804635A4(void *obj);
+void *fn_804635AC(void *obj);
 void fn_804635B4(void);
 void fn_80463610(void);
 void fn_804638A4(void);
@@ -830,7 +830,7 @@ lbl_fn_80463174_000009CC:
     lfs f29, 0x4(r3)
     addi r3, r1, 0x2c
     addi r4, r1, 0x68
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x38
     addi r4, r1, 0x2c
     bl vec3_toEulerAngles
@@ -933,7 +933,7 @@ lbl_fn_80463174_00000B8C:
     lfs f31, 0x4(r3)
     addi r3, r1, 0x8
     addi r4, r1, 0x5c
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x14
     addi r4, r1, 0x8
     bl vec3_toEulerAngles
@@ -1014,18 +1014,14 @@ lbl_fn_80463174_00000CB8:
     blr
 }
 
-asm void fn_804635A4(void)
+void *fn_804635A4(void *obj)
 {
-    nofralloc
-    lwz r3, 0x48(r3)
-    blr
+    return *(void **)((char *)obj + 0x48);
 }
 
-asm void fn_804635AC(void)
+void *fn_804635AC(void *obj)
 {
-    nofralloc
-    lwz r3, 0x4c(r3)
-    blr
+    return *(void **)((char *)obj + 0x4c);
 }
 
 asm void fn_804635B4(void)
@@ -2153,7 +2149,7 @@ lbl_fn_80463F20_00001CA0:
     lwz r3, lbl_8087EEB0
     fadds f1, f3, f0
     lfs f2, lbl_80886D60
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_80463F20_00001D2C:
     lwz r0, 0x144(r1)
     psq_l f31, 0x138(r1), 0, 0

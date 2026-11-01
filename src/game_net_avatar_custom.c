@@ -16,11 +16,11 @@ extern void actor_dispatchMessage(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_8009EE30(void);
+extern void hud_drawTargetMarker(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
-extern void fn_800F52F0(void);
+extern void proj_getMatrix(void);
 extern void fn_80116EB8(void);
 extern void fn_8012CE4C(void);
 extern void fn_801346C8(void);
@@ -31,7 +31,7 @@ extern void fn_801D80B4(void);
 extern void save_validateHeader(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
-extern void fn_801F6E78(void);
+extern void save_calculateBlockCrc(void);
 extern void save_findEntryByName(void);
 extern void fn_801F8598(void);
 extern void thread_findAndNotify(void);
@@ -39,7 +39,7 @@ extern void fn_80201E78(void);
 extern void profile_getMetricValue(void);
 extern void fn_80202A6C(void);
 extern void perf_getMetricValue(void);
-extern void fn_8020924C(void);
+extern void mem_findBlockById(void);
 extern void fn_8020A81C(void);
 extern void fn_80219544(void);
 extern void fn_8021AF50(void);
@@ -72,7 +72,7 @@ extern void fn_805288C0(void);
 extern void fn_805289AC(void);
 extern void fn_80528A94(void);
 extern void fn_80528BF4(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void fn_805BA358(void);
 extern void strcmp(void);
 extern void runtime_registerStaticObject(void);
@@ -248,7 +248,7 @@ lbl_fn_8052635C_00000160:
     mr r3, r30
     addi r4, r27, 0x2a5
     addi r5, r1, 0x8
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     lwz r3, 0x0(r28)
     subi r0, r3, 0xa
     cmplwi r0, 0x1
@@ -1129,7 +1129,7 @@ lbl_fn_80526D98_00000DDC:
     li r3, 0x0
 lbl_fn_80526D98_00000DE0:
     addi r4, r1, 0xc8
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
 lbl_fn_80526D98_00000DE8:
     lwz r12, 0x0(r29)
     mr r3, r29
@@ -1792,10 +1792,10 @@ asm void fn_8052793C(void)
     mr r31, r3
     bl scene_transformPoint
     li r4, 0x0
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     beq lbl_fn_8052793C_00001724
-    bl fn_800F52F0
+    bl proj_getMatrix
     b lbl_fn_8052793C_00001730
 lbl_fn_8052793C_00001724:
     bl fn_801D80B4
@@ -1829,11 +1829,11 @@ lbl_fn_8052793C_00001750:
     beq lbl_fn_8052793C_00002030
     bl scene_transformPoint
     lwz r4, 0x4(r23)
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     mr r20, r3
     beq lbl_fn_8052793C_000017B4
-    bl fn_800F52F0
+    bl proj_getMatrix
     mr r29, r3
     b lbl_fn_8052793C_000017C4
 lbl_fn_8052793C_000017B4:
@@ -1844,7 +1844,7 @@ lbl_fn_8052793C_000017B4:
 lbl_fn_8052793C_000017C4:
     lwz r3, 0x4(r23)
     bl fn_80219544
-    bl fn_8020924C
+    bl mem_findBlockById
     mr r19, r3
     bl fn_801D80B4
     lwz r4, 0x4(r23)

@@ -8,16 +8,16 @@ extern void dtor_80084684(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8004203C(void);
+extern void menu_initWindowBuffer(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void boss_initActionStream(void);
-extern void fn_80092954(void);
+extern void compass_findMarkerByName(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_800EC204(void);
+extern void cam_findTargetIndex(void);
 extern void cam_destroyMsgHandle(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
@@ -27,7 +27,7 @@ extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
 extern void npc_initScriptContext(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
@@ -57,7 +57,7 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_804A04AC(void);
-extern void fn_805A3C58(void);
+extern void rand_Mersenne_constructor(void);
 extern void fn_805A4984(void);
 extern void fn_805A4A20(void);
 extern void fn_805A4A58(void);
@@ -274,7 +274,7 @@ asm void fn_802D0038(void)
     bl _savegpr_25
     mr r30, r3
     mr r31, r5
-    bl fn_805A3C58
+    bl rand_Mersenne_constructor
     lis r3, lbl_80786C44@ha
     li r28, 0x0
     addi r3, r3, lbl_80786C44@l
@@ -703,7 +703,7 @@ asm void fn_802D0594(void)
     cmpwi r3, 0x0
     beq lbl_fn_802D0594_00000C6C
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     cmpwi r3, 0x0
     beq lbl_fn_802D0594_00000C6C
     addi r3, r29, 0x1650
@@ -714,7 +714,7 @@ asm void fn_802D0594(void)
     mr r4, r3
     mr r5, r31
     addi r3, r1, 0x14
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     lis r31, lbl_807470A4@ha
     addi r31, r31, lbl_807470A4@l
 lbl_fn_802D0594_0000088C:
@@ -731,9 +731,9 @@ lbl_fn_802D0594_000008A8:
     bl str_parseInt
     mr r30, r3
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r30
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     stw r3, 0x10(r1)
     beq lbl_fn_802D0594_000008E0
@@ -767,9 +767,9 @@ lbl_fn_802D0594_00000928:
     bl str_parseInt
     mr r30, r3
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r30
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     stw r3, 0xc(r1)
     beq lbl_fn_802D0594_00000960
@@ -1318,7 +1318,7 @@ lbl_fn_802D0B84_000010FC:
     addi r3, r31, 0xb0
     addi r4, r4, lbl_807470A4@l
     addi r4, r4, 0x2cb
-    bl fn_80092954
+    bl compass_findMarkerByName
     lwz r0, 0x18(r3)
     lis r4, lbl_80747088@ha
     stw r0, 0x84(r1)
@@ -1426,7 +1426,7 @@ lbl_fn_802D0B84_0000121C:
     stb r0, 0x3f(r1)
     lwz r0, 0x3c(r1)
     stw r0, 0x80(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lfs f3, 0x1b4(r1)
     addi r4, r30, 0x2cb
     lfs f5, lbl_80884558
@@ -1473,7 +1473,7 @@ lbl_fn_802D0B84_0000121C:
     stfs f7, 0x170(r1)
     stfs f6, 0x174(r1)
     stw r0, 0x7c(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lbz r0, 0x7c(r1)
     addi r4, r30, 0x2d7
     stb r0, 0x1c(r3)
@@ -1484,7 +1484,7 @@ lbl_fn_802D0B84_0000121C:
     lbz r0, 0x7f(r1)
     stb r0, 0x1f(r3)
     addi r3, r31, 0xb0
-    bl fn_80092954
+    bl compass_findMarkerByName
     lwz r0, 0x18(r3)
     lis r4, lbl_80747088@ha
     stw r0, 0x78(r1)
@@ -1596,7 +1596,7 @@ lbl_fn_802D0B84_000014A4:
     stb r0, 0x37(r1)
     lwz r0, 0x34(r1)
     stw r0, 0x74(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lfs f3, 0x1b4(r1)
     addi r4, r30, 0x2d7
     lfs f5, lbl_80884558
@@ -1643,7 +1643,7 @@ lbl_fn_802D0B84_000014A4:
     stfs f7, 0x150(r1)
     stfs f6, 0x154(r1)
     stw r0, 0x70(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lbz r0, 0x70(r1)
     stb r0, 0x1c(r3)
     lbz r0, 0x71(r1)
@@ -1661,7 +1661,7 @@ lbl_fn_802D0B84_00001608:
     addi r3, r31, 0xb0
     addi r4, r4, lbl_807470A4@l
     addi r4, r4, 0x2cb
-    bl fn_80092954
+    bl compass_findMarkerByName
     lwz r0, 0x18(r3)
     lis r4, lbl_80747088@ha
     stw r0, 0x6c(r1)
@@ -1769,7 +1769,7 @@ lbl_fn_802D0B84_00001734:
     stb r0, 0x2f(r1)
     lwz r0, 0x2c(r1)
     stw r0, 0x68(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lfs f3, 0x1a4(r1)
     addi r4, r30, 0x2cb
     lfs f5, lbl_80884558
@@ -1816,7 +1816,7 @@ lbl_fn_802D0B84_00001734:
     stfs f7, 0x140(r1)
     stfs f6, 0x144(r1)
     stw r0, 0x64(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lbz r0, 0x64(r1)
     addi r4, r30, 0x2d7
     stb r0, 0x1c(r3)
@@ -1827,7 +1827,7 @@ lbl_fn_802D0B84_00001734:
     lbz r0, 0x67(r1)
     stb r0, 0x1f(r3)
     addi r3, r31, 0xb0
-    bl fn_80092954
+    bl compass_findMarkerByName
     lwz r0, 0x18(r3)
     lis r4, lbl_80747088@ha
     stw r0, 0x60(r1)
@@ -1939,7 +1939,7 @@ lbl_fn_802D0B84_000019BC:
     stb r0, 0x27(r1)
     lwz r0, 0x24(r1)
     stw r0, 0x5c(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lfs f3, 0x1a4(r1)
     addi r4, r30, 0x2d7
     lfs f5, lbl_80884558
@@ -1986,7 +1986,7 @@ lbl_fn_802D0B84_000019BC:
     stfs f7, 0x120(r1)
     stfs f6, 0x124(r1)
     stw r0, 0x58(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lbz r0, 0x58(r1)
     stb r0, 0x1c(r3)
     lbz r0, 0x59(r1)
@@ -2001,7 +2001,7 @@ lbl_fn_802D0B84_00001B20:
     addi r3, r31, 0xb0
     addi r4, r4, lbl_807470A4@l
     addi r4, r4, 0x2cb
-    bl fn_80092954
+    bl compass_findMarkerByName
     lwz r0, 0x18(r3)
     lis r4, lbl_80747088@ha
     stw r0, 0x54(r1)
@@ -2109,7 +2109,7 @@ lbl_fn_802D0B84_00001C40:
     stb r0, 0x1f(r1)
     lwz r0, 0x1c(r1)
     stw r0, 0x50(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lfs f3, 0x194(r1)
     addi r4, r30, 0x2cb
     lfs f5, lbl_80884558
@@ -2156,7 +2156,7 @@ lbl_fn_802D0B84_00001C40:
     stfs f7, 0x110(r1)
     stfs f6, 0x114(r1)
     stw r0, 0x4c(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lbz r0, 0x4c(r1)
     addi r4, r30, 0x2d7
     stb r0, 0x1c(r3)
@@ -2167,7 +2167,7 @@ lbl_fn_802D0B84_00001C40:
     lbz r0, 0x4f(r1)
     stb r0, 0x1f(r3)
     addi r3, r31, 0xb0
-    bl fn_80092954
+    bl compass_findMarkerByName
     lwz r0, 0x18(r3)
     lis r4, lbl_80747088@ha
     stw r0, 0x48(r1)
@@ -2279,7 +2279,7 @@ lbl_fn_802D0B84_00001EC8:
     stb r0, 0x17(r1)
     lwz r0, 0x14(r1)
     stw r0, 0x44(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lfs f3, 0x194(r1)
     addi r4, r30, 0x2d7
     lfs f5, lbl_80884558
@@ -2326,7 +2326,7 @@ lbl_fn_802D0B84_00001EC8:
     stfs f7, 0xf0(r1)
     stfs f6, 0xf4(r1)
     stw r0, 0x40(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lbz r0, 0x40(r1)
     stb r0, 0x1c(r3)
     lbz r0, 0x41(r1)

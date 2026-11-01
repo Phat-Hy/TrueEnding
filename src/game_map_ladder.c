@@ -116,9 +116,9 @@ void fn_8018F6D0(void);
 void fn_8018F700(void);
 void fn_8018F81C(void);
 void fn_8018F84C(void);
-void fn_8018F968(void);
+u32 fn_8018F968(void);
 void fn_8018F970(void);
-void fn_8018FAA4(void);
+u32 fn_8018FAA4(void);
 void fn_8018FAAC(void);
 void fn_8018FB0C(void);
 void fn_8018FD70(void);
@@ -1577,11 +1577,9 @@ lbl_fn_8018F84C_00001390:
     blr
 }
 
-asm void fn_8018F968(void)
+u32 fn_8018F968(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_8018F970(void)
@@ -1670,11 +1668,9 @@ lbl_fn_8018F970_00001478:
     blr
 }
 
-asm void fn_8018FAA4(void)
+u32 fn_8018FAA4(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8018FAAC(void)

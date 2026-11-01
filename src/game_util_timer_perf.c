@@ -12,7 +12,7 @@ extern void fn_80051B70(void);
 extern void mem_alloc(void);
 extern void route_interpolatePath(void);
 extern void route_createWaypoint(void);
-extern void fn_80088724(void);
+extern void zone_testPointInBounds(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void motion_updateFogAdj(void);
 extern void skin_playAnimationByName(void);
@@ -21,11 +21,11 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void fn_8017CB9C(void);
 extern void fn_801805A4(void);
 extern void fn_801CC0AC(void);
-extern void fn_8020924C(void);
+extern void mem_findBlockById(void);
 extern void fn_80244228(void);
 extern void fn_802476D0(void);
 extern void fn_80248E88(void);
@@ -774,7 +774,7 @@ asm void fn_805A5224(void)
     addi r5, r29, 0x534
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_8088827C
     mr r3, r30
     lfs f2, lbl_80888280
@@ -856,7 +856,7 @@ asm void fn_805A5378(void)
     mr r28, r3
     lwz r31, 0x20(r4)
     mr r3, r31
-    bl fn_8020924C
+    bl mem_findBlockById
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_00001800
     lwz r30, 0x24(r3)
@@ -1865,7 +1865,7 @@ lbl_fn_805A6270_0000192C:
     add r3, r27, r29
     addi r4, r1, 0x8
     addi r3, r3, 0x54
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     addi r28, r28, 0x1
     addi r29, r29, 0x30
     cmpwi r28, 0x2

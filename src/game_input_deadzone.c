@@ -6,9 +6,9 @@ extern void vec3_copy(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void vec3_sub(void);
-extern void fn_800133B0(void);
+extern void math_wrapAngle(void);
 extern void fn_80013484(void);
 extern void collision_queryGeometry(void);
 extern void atn_Model_findBoneIndex(void);
@@ -16,9 +16,9 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void msg_getMessageById(void);
 extern void fn_800A55D4(void);
-extern void fn_800A56A8(void);
+extern void msg_formatWindowLayout(void);
 extern void fn_800F52F8(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void viewport_getNextSequenceId(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80102824(void);
@@ -29,21 +29,21 @@ extern void fn_80129A48(void);
 extern void fn_8012A190(void);
 extern void npc_updateDialogueTarget(void);
 extern void fn_8013A13C(void);
-extern void fn_8013A194(void);
+extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_8013C480(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
-extern void fn_801446F0(void);
+extern void quest_resetObjectiveBounds(void);
 extern void dialog_renderWindow(void);
 extern void fn_801533C8(void);
 extern void equip_applyToCharacter(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void fn_80163E70(void);
 extern void fn_8016DDB0(void);
 extern void actor_setState(void);
-extern void fn_80176ACC(void);
+extern void battle_activateExpReward(void);
 extern void fn_801A03E8(void);
 extern void task_findEntryById(void);
 extern void fn_802F0964(void);
@@ -471,7 +471,7 @@ lbl_fn_802EF16C_000004D4:
     rlwinm r0, r0, 0, 2, 0
     stw r0, 0x14cc(r31)
     beq lbl_fn_802EF16C_000005F4
-    bl fn_80176ACC
+    bl battle_activateExpReward
     lwz r3, 0x14e8(r31)
     li r30, 0x0
     lfs f1, lbl_80884860
@@ -1031,7 +1031,7 @@ lbl_fn_802EF5FC_00000D0C:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fneg f3, f1
     lfs f0, lbl_80884850
     stfs f0, 0xc(r1)
@@ -1040,7 +1040,7 @@ lbl_fn_802EF5FC_00000D0C:
     li r5, 0x1
     stfs f3, 0x8(r1)
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fneg f0, f1
     addi r3, r1, 0x8
     stfs f0, 0x10(r1)
@@ -1269,7 +1269,7 @@ lbl_fn_802EF5FC_0000107C:
     li r4, 0x1
     bl actor_setState
     lwz r3, 0x152c(r31)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     lwz r4, 0x152c(r31)
     li r30, 0x0
     lfs f3, lbl_80884850
@@ -1313,7 +1313,7 @@ lbl_fn_802EF5FC_0000107C:
     psq_st f1, 0x574(r3), 0, 0
     stfs f2, 0x57c(r3)
     lwz r3, 0x152c(r31)
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
     lwz r0, 0x155c(r31)
     stw r30, 0x152c(r31)
     cmpwi r0, 0x0
@@ -1344,7 +1344,7 @@ lbl_fn_802EF5FC_000011A4:
     lwz r3, 0x14e8(r31)
     cmpwi r3, 0x0
     beq lbl_fn_802EF5FC_000012D4
-    bl fn_80176ACC
+    bl battle_activateExpReward
     lwz r3, 0x14e8(r31)
     li r30, 0x0
     lfs f1, lbl_80884860
@@ -1392,7 +1392,7 @@ lbl_fn_802EF5FC_000011A4:
     psq_st f1, 0x574(r3), 0, 0
     stfs f2, 0x57c(r3)
     lwz r3, 0x14e8(r31)
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
     stw r30, 0x14e8(r31)
     mr r5, r31
     li r4, 0x0
@@ -1620,7 +1620,7 @@ lbl_fn_802F0328_0000158C:
     addi r5, r1, 0x14
     bl vec3_sub
     lfs f1, 0x54(r1)
-    bl fn_800133B0
+    bl math_wrapAngle
     frsp f2, f1
     lfs f0, lbl_80884850
     stfs f1, 0x54(r1)
@@ -1635,7 +1635,7 @@ lbl_fn_802F0328_000015E4:
     bl fn_8013A13C
     addi r3, r31, 0x14d8
     addi r4, r1, 0x98
-    bl fn_80011410
+    bl mtx_multVec
     lfs f30, lbl_80884858
     addi r3, r1, 0x8
     addi r4, r31, 0x14d8
@@ -1701,7 +1701,7 @@ lbl_fn_802F0328_000016D8:
     lwz r3, 0x14ec(r31)
     bl task_findEntryById
     mr r30, r3
-    bl fn_8013A194
+    bl npc_getGlobalManager
     lwz r6, 0x14c8(r31)
     mr r4, r31
     lfs f1, lbl_80884850
@@ -1737,7 +1737,7 @@ lbl_fn_802F0328_0000175C:
     lwz r3, 0x14ec(r31)
     bl task_findEntryById
     mr r30, r3
-    bl fn_8013A194
+    bl npc_getGlobalManager
     lwz r6, 0x14c8(r31)
     mr r4, r31
     lfs f1, lbl_80884850
@@ -1771,7 +1771,7 @@ lbl_fn_802F0328_000017C0:
     addi r3, r1, 0x44
     fmr f1, f29
     addi r4, r31, 0x14d8
-    bl fn_800F72CC
+    bl vec3_scale
     fmr f1, f30
     addi r3, r1, 0x44
     bl fn_8012A190

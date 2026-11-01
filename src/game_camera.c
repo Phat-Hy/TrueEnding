@@ -21,20 +21,20 @@ extern u8 lbl_807C6A40[];
 extern u32 lbl_80880798;
 
 /* Function declarations */
-void fn_8001EDE8(void);
-void fn_8001EDF0(void);
-void fn_8001EDF8(void);
-void fn_8001EE00(void);
-void fn_8001EE08(void);
-void fn_8001EE10(void);
-void fn_8001EE18(void);
-void fn_8001EE20(void);
-void fn_8001EE28(void);
-void fn_8001EE30(void);
-void fn_8001EE38(void);
-void fn_8001EE40(void);
-void fn_8001EE48(void);
-void fn_8001EE50(void);
+s32 fn_8001EDE8(void);
+s32 fn_8001EDF0(void);
+s32 fn_8001EDF8(void);
+s32 fn_8001EE00(void);
+s32 fn_8001EE08(void);
+s32 fn_8001EE10(void);
+s32 fn_8001EE18(void);
+s32 fn_8001EE20(void);
+s32 fn_8001EE28(void);
+s32 fn_8001EE30(void);
+s32 fn_8001EE38(void);
+s32 fn_8001EE40(void);
+s32 fn_8001EE48(void);
+s32 fn_8001EE50(void);
 void fn_8001EE58(void);
 void fn_8001EEBC(void);
 void fn_8001F248(void);
@@ -48,102 +48,74 @@ void fn_8001FB08(void);
 void fn_8001FC40(void);
 void fn_8001FCB4(void);
 
-asm void fn_8001EDE8(void)
+s32 fn_8001EDE8(void)
 {
-    nofralloc
-    li r3, -0x1
-    blr
+    return -1;
 }
 
-asm void fn_8001EDF0(void)
+s32 fn_8001EDF0(void)
 {
-    nofralloc
-    li r3, -0x1
-    blr
+    return -1;
 }
 
-asm void fn_8001EDF8(void)
+s32 fn_8001EDF8(void)
 {
-    nofralloc
-    li r3, -0x1
-    blr
+    return -1;
 }
 
-asm void fn_8001EE00(void)
+s32 fn_8001EE00(void)
 {
-    nofralloc
-    li r3, -0x1
-    blr
+    return -1;
 }
 
-asm void fn_8001EE08(void)
+s32 fn_8001EE08(void)
 {
-    nofralloc
-    li r3, -0x1
-    blr
+    return -1;
 }
 
-asm void fn_8001EE10(void)
+s32 fn_8001EE10(void)
 {
-    nofralloc
-    li r3, -0x1
-    blr
+    return -1;
 }
 
-asm void fn_8001EE18(void)
+s32 fn_8001EE18(void)
 {
-    nofralloc
-    li r3, -0x1
-    blr
+    return -1;
 }
 
-asm void fn_8001EE20(void)
+s32 fn_8001EE20(void)
 {
-    nofralloc
-    li r3, -0x1
-    blr
+    return -1;
 }
 
-asm void fn_8001EE28(void)
+s32 fn_8001EE28(void)
 {
-    nofralloc
-    li r3, -0x1
-    blr
+    return -1;
 }
 
-asm void fn_8001EE30(void)
+s32 fn_8001EE30(void)
 {
-    nofralloc
-    li r3, -0x1
-    blr
+    return -1;
 }
 
-asm void fn_8001EE38(void)
+s32 fn_8001EE38(void)
 {
-    nofralloc
-    li r3, -0x1
-    blr
+    return -1;
 }
 
-asm void fn_8001EE40(void)
+s32 fn_8001EE40(void)
 {
-    nofralloc
-    li r3, -0x1
-    blr
+    return -1;
 }
 
-asm void fn_8001EE48(void)
+s32 fn_8001EE48(void)
 {
-    nofralloc
-    li r3, -0x1
-    blr
+    return -1;
 }
 
-asm void fn_8001EE50(void)
+s32 fn_8001EE50(void)
 {
-    nofralloc
-    li r3, -0x1
-    blr
+    return -1;
 }
 
 asm void fn_8001EE58(void)

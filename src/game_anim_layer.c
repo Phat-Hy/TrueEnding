@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void dtor_80084684(void);
 extern void collision_testLineSegment(void);
-extern void fn_80092954(void);
+extern void compass_findMarkerByName(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
@@ -28,7 +28,7 @@ extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
 extern void actor_setState(void);
 extern void battle_updateTargetAggro(void);
-extern void fn_801781B0(void);
+extern void battle_calcAABBCenter(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_ctor(void);
@@ -1439,7 +1439,7 @@ lbl_fn_80270500_00001204:
     stfs f7, 0x14fc(r3)
     addi r3, r3, 0xb0
     stw r0, 0x14(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lbz r0, 0x14(r1)
     addi r4, r30, 0x7a
     stb r0, 0x18(r3)
@@ -1477,7 +1477,7 @@ lbl_fn_80270500_00001204:
     stb r0, 0xb(r1)
     lwz r0, 0x8(r1)
     stw r0, 0x10(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lbz r0, 0x10(r1)
     stb r0, 0x18(r3)
     lbz r0, 0x11(r1)
@@ -1766,7 +1766,7 @@ lbl_fn_802709E0_000016E4:
     lwz r31, lbl_8087F048
     mr r4, r30
     addi r3, r1, 0x10
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     mr r3, r31
     addi r4, r1, 0x10
     li r5, 0x80

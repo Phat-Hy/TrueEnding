@@ -10,10 +10,10 @@ extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void fn_800109E0(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
-extern void fn_800133B0(void);
+extern void math_wrapAngle(void);
 extern void vec3_add(void);
 extern void fn_80013484(void);
 extern void item_useConsumable(void);
@@ -22,11 +22,11 @@ extern void collision_testLineSegment(void);
 extern void fn_80050900(void);
 extern void fn_80051B70(void);
 extern void mission_updateStub(void);
-extern void fn_800A56A8(void);
-extern void fn_800A58D0(void);
+extern void msg_formatWindowLayout(void);
+extern void msg_isWindowActive(void);
 extern void fn_800F7260(void);
-extern void fn_800F72CC(void);
-extern void fn_800F7FD8(void);
+extern void vec3_scale(void);
+extern void vec3_normalize(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_801002DC(void);
 extern void fn_80112960(void);
@@ -36,7 +36,7 @@ extern void fn_801162A0(void);
 extern void fn_80116BA4(void);
 extern void fn_80116BD4(void);
 extern void magic_dispatchActionCommand(void);
-extern void fn_801240B4(void);
+extern void player_evaluateStatusCondition(void);
 extern void fn_8012A1B8(void);
 extern void fn_8013A13C(void);
 extern void fn_8013C3B4(void);
@@ -295,7 +295,7 @@ lbl_fn_80382A1C_000001E4:
     bl fn_800109E0
     addi r3, r1, 0x11c
     addi r4, r1, 0x228
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x110
     bl mission_updateStub
     addi r3, r1, 0xd4
@@ -306,10 +306,10 @@ lbl_fn_80382A1C_000001E4:
     addi r4, r1, 0xd4
     bl vec3_copy
     lfs f1, 0x144(r1)
-    bl fn_800133B0
+    bl math_wrapAngle
     lfs f0, 0x12c(r1)
     fsubs f1, f0, f1
-    bl fn_800133B0
+    bl math_wrapAngle
     fneg f29, f1
     addi r3, r1, 0x104
     addi r4, r1, 0x110
@@ -321,7 +321,7 @@ lbl_fn_80382A1C_000001E4:
     bl fn_8013A13C
     addi r3, r1, 0x104
     addi r4, r1, 0x1f8
-    bl fn_80011410
+    bl mtx_multVec
     lfs f1, 0x728(r30)
     addi r3, r1, 0x1c8
     lfs f0, 0x12c(r1)
@@ -330,7 +330,7 @@ lbl_fn_80382A1C_000001E4:
     bl fn_8013A13C
     addi r3, r1, 0x104
     addi r4, r1, 0x1c8
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0xc8
     addi r4, r1, 0x104
     addi r5, r1, 0x17c
@@ -388,7 +388,7 @@ lbl_fn_80382A1C_000001E4:
     bl fn_800109E0
     addi r3, r1, 0x170
     addi r4, r1, 0x198
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x80
     addi r4, r1, 0x170
     addi r5, r1, 0x17c
@@ -425,11 +425,11 @@ lbl_fn_80382A1C_000001E4:
     bl vec3_sub
     addi r3, r1, 0x68
     addi r4, r1, 0x5c
-    bl fn_800F7FD8
+    bl vec3_normalize
     lfs f1, lbl_8088593C
     addi r3, r1, 0x74
     addi r4, r1, 0x68
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x188
     addi r4, r1, 0x74
     bl fn_80012C88
@@ -559,7 +559,7 @@ lbl_fn_80382A1C_0000058C:
     ble lbl_fn_80382A1C_00000648
     addi r3, r1, 0x8
     addi r4, r1, 0x11c
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x188
     addi r4, r1, 0x8
     bl fn_80013484
@@ -754,7 +754,7 @@ lbl_fn_803830A8_000008F8:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fabs f0, f1
     lfs f3, lbl_808859E0
     frsp f0, f0
@@ -821,7 +821,7 @@ lbl_fn_803830A8_000009F8:
     li r4, 0x0
     li r5, 0x1
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fabs f0, f1
     lfs f3, lbl_808859E0
     frsp f0, f0
@@ -1877,7 +1877,7 @@ lbl_fn_80384188_00001978:
     li r31, 0x0
     li r4, 0x24
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_80384188_000019B0
     lwz r3, lbl_8087F0A8
@@ -2072,18 +2072,18 @@ lbl_fn_80384188_00001C5C:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fmr f26, f1
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_fn_80384188_00001CA0
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x2
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fadds f26, f26, f1
 lbl_fn_80384188_00001CA0:
     lwz r3, lbl_8087F9C0
@@ -2127,18 +2127,18 @@ lbl_fn_80384188_00001D18:
     li r4, 0x0
     li r5, 0x1
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fmr f27, f1
     lwz r3, lbl_8087EF70
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_fn_80384188_00001D5C
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x3
     li r6, 0x0
-    bl fn_800A56A8
+    bl msg_formatWindowLayout
     fadds f27, f27, f1
 lbl_fn_80384188_00001D5C:
     lwz r3, lbl_8087F9C0

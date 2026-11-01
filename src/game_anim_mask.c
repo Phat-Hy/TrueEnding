@@ -21,8 +21,8 @@ extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
-extern void fn_800EB7A0(void);
-extern void fn_800EE360(void);
+extern void sound_playSpatialEffect(void);
+extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void equip_applyToCharacter(void);
@@ -41,7 +41,7 @@ extern void res_registerResource(void);
 extern void fn_80272C6C(void);
 extern void fn_80272CF0(void);
 extern void entity_Instance_constructor(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void atn_LoadHandle_constructor(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -602,7 +602,7 @@ lbl_fn_80271654_000006E8:
     mr r3, r31
     bl battle_awardExp
     mr r3, r31
-    bl fn_800EE360
+    bl camera_updateTargetMode
     b lbl_fn_80271654_0000070C
 lbl_fn_80271654_00000704:
     li r0, 0x1e
@@ -1088,7 +1088,7 @@ lbl_fn_80271DAC_00000DD0:
     lfs f2, 0x530(r6)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x7c(r1)
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     b lbl_fn_80271DAC_00000E54
 lbl_fn_80271DAC_00000E0C:
     lwz r0, 0x7e0(r3)
@@ -1703,7 +1703,7 @@ lbl_fn_80272660_0000162C:
     li r8, 0x1
     bl atn_Anim_setLayerAnimation
     mr r3, r31
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

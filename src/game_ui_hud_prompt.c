@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void atn_Model_findBoneIndex(void);
@@ -15,12 +15,12 @@ extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
 extern void fn_800FB4B0(void);
-extern void fn_801092C8(void);
+extern void hurtbox_processHitDamage(void);
 extern void fn_8011BF3C(void);
 extern void magic_dispatchActionCommand(void);
-extern void fn_801240B4(void);
+extern void player_evaluateStatusCondition(void);
 extern void inventory_unequipItem(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void fn_80178018(void);
 extern void fn_80178078(void);
 extern void actor_getMovementFlags(void);
@@ -30,7 +30,7 @@ extern void fn_801C3458(void);
 extern void task_findEntryById(void);
 extern void world_getGlobalFlag(void);
 extern void kpad_getClampData(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -425,7 +425,7 @@ lbl_fn_801C900C_000003BC:
     stfs f0, 0x1c(r1)
     lwz r4, 0x4(r31)
     addi r5, r4, 0x528
-    bl fn_80176548
+    bl battle_calcExpPosition
     lwz r5, 0x4(r31)
     lis r7, 0x8000
     lwz r3, lbl_8087EE98
@@ -885,7 +885,7 @@ lbl_fn_801C951C_00000A78:
     stw r5, 0xd0(r1)
     lwz r5, 0x4(r29)
     mr r6, r5
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     b lbl_fn_801C951C_00000B20
 lbl_fn_801C951C_00000AE8:
     lwz r28, lbl_8087F048
@@ -906,7 +906,7 @@ lbl_fn_801C951C_00000B20:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_801C951C_00000B7C
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_801C951C_00000B7C
     lwz r5, 0x4(r29)
@@ -920,13 +920,13 @@ lbl_fn_801C951C_00000B20:
     lwz r3, lbl_8087F048
     li r4, 0xc
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
     b lbl_fn_801C951C_00000B7C
 lbl_fn_801C951C_00000B6C:
     lwz r3, lbl_8087F048
     li r4, 0xd
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
 lbl_fn_801C951C_00000B7C:
     lwz r0, 0xac(r30)
     rlwinm r3, r0, 0, 13, 13
@@ -1853,7 +1853,7 @@ lbl_fn_801CA1E0_0000187C:
     lwz r3, lbl_8087F0A8
     li r4, 0x0
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_801CA1E0_000018EC
     li r0, 0x1
@@ -1966,7 +1966,7 @@ lbl_fn_801CA1E0_00001A6C:
     lwz r3, lbl_8087F0A8
     li r4, 0x9
     addi r3, r3, 0x48c
-    bl fn_801240B4
+    bl player_evaluateStatusCondition
     cmpwi r3, 0x0
     beq lbl_fn_801CA1E0_00001A98
     li r0, 0x0

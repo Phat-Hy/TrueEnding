@@ -8,8 +8,8 @@ extern void dtor_80084684(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
 extern void fn_80058078(void);
-extern void fn_800580BC(void);
-extern void fn_800588FC(void);
+extern void mission_isObjectiveActive(void);
+extern void mission_updateObjectiveTarget(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
@@ -17,7 +17,7 @@ extern void mem_alloc(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void map_debugLog(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
@@ -43,11 +43,11 @@ extern void res_registerResource(void);
 extern void world_getGlobalFlag(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
-extern void fn_803EC7A0(void);
+extern void barrier_formatDialogString(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
-extern void fn_803ED5D0(void);
-extern void fn_803ED774(void);
+extern void barrier_bindFieldAnimation(void);
+extern void dungeon_updateBarrierField(void);
 extern void fn_803EDB18(void);
 extern void fn_8040F9C0(void);
 extern void fn_8040F9EC(void);
@@ -116,9 +116,9 @@ void fn_8040E31C(void);
 void fn_8040E4E8(void);
 void fn_8040E620(void);
 void fn_8040EB2C(void);
-void fn_8040EBD8(void);
+u32 fn_8040EBD8(const void *p);
 void fn_8040EBE0(void);
-void fn_8040EC28(void);
+void *fn_8040EC28(void *p);
 void fn_8040EC30(void);
 void fn_8040ED00(void);
 void fn_8040EE00(void);
@@ -154,7 +154,7 @@ lbl_fn_8040DA48_00000044:
     cmpwi r0, 0x0
     beq lbl_fn_8040DA48_00000064
     addi r3, r3, 0x4
-    bl fn_8008CD60
+    bl minimap_renderOverlay
 lbl_fn_8040DA48_00000064:
     addi r30, r30, 0x1
     addi r31, r31, 0x434
@@ -513,7 +513,7 @@ lbl_fn_8040DE48_00000510:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_8040DE48_0000054C:
     lfs f31, 0x328(r31)
     addi r3, r31, 0xf4
@@ -587,7 +587,7 @@ lbl_fn_8040DE48_00000620:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_8040DE48_0000065C:
     addi r3, r31, 0xf4
     li r4, 0x1
@@ -672,7 +672,7 @@ lbl_fn_8040DE48_00000768:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     lwz r0, 0x54(r31)
     cmpwi r0, 0x6
     beq lbl_fn_8040DE48_000007BC
@@ -725,7 +725,7 @@ asm void fn_8040E244(void)
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_8040E244_00000854:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -749,7 +749,7 @@ asm void fn_8040E2B0(void)
     cmpwi r3, 0x0
     bne lbl_fn_8040E2B0_000008B4
     addi r3, r30, 0x4c4
-    bl fn_800580BC
+    bl mission_isObjectiveActive
     cmpwi r3, 0x0
     bne lbl_fn_8040E2B0_000008B4
     addi r3, r30, 0x54c
@@ -835,7 +835,7 @@ lbl_fn_8040E31C_00000984:
     mr r3, r29
     addi r4, r29, 0xf4
     addi r5, r1, 0x108
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     b lbl_fn_8040E31C_00000A74
 lbl_fn_8040E31C_000009D8:
     mr r3, r30
@@ -930,7 +930,7 @@ lbl_fn_8040E4E8_00000AF0:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     lwz r0, 0x54(r31)
     cmpwi r0, 0x6
     beq lbl_fn_8040E4E8_00000B44
@@ -1094,7 +1094,7 @@ lbl_fn_8040E620_00000D40:
     bctrl
     mr r4, r3
     mr r3, r30
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
     b lbl_fn_8040E620_000010C4
 lbl_fn_8040E620_00000D88:
     lwz r3, lbl_8087F3C0
@@ -1268,7 +1268,7 @@ lbl_fn_8040E620_00000F88:
     bctrl
     mr r4, r3
     mr r3, r30
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
     b lbl_fn_8040E620_000010C4
 lbl_fn_8040E620_00001018:
     lwz r3, lbl_8087F3C0
@@ -1380,11 +1380,9 @@ lbl_fn_8040EB2C_0000117C:
     blr
 }
 
-asm void fn_8040EBD8(void)
+u32 fn_8040EBD8(const void *p)
 {
-    nofralloc
-    lwz r3, 0x55c(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x55c);
 }
 
 asm void fn_8040EBE0(void)
@@ -1412,11 +1410,9 @@ lbl_fn_8040EBE0_000011CC:
     blr
 }
 
-asm void fn_8040EC28(void)
+void *fn_8040EC28(void *p)
 {
-    nofralloc
-    addi r3, r3, 0xf4
-    blr
+    return (char *)p + 0xf4;
 }
 
 asm void fn_8040EC30(void)
@@ -1673,7 +1669,7 @@ lbl_fn_8040EF00_0000151C:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     lwz r4, 0x4cc(r31)
     li r3, 0x0
     stw r3, 0x560(r31)
@@ -1955,7 +1951,7 @@ lbl_fn_8040F018_00001934:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     lwz r0, 0x144(r1)
     lwz r31, 0x13c(r1)
     lwz r30, 0x138(r1)

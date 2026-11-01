@@ -8,12 +8,12 @@ extern void fn_800119B8(void);
 extern void mem_alloc(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void motion_updateFogAdj(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -555,7 +555,7 @@ lbl_fn_801E8244_00000634:
     li r4, 0x1
     lwz r3, 0x48(r31)
     addi r3, r3, 0xb0
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x44
     lfs f9, 0x7c(r31)
@@ -984,7 +984,7 @@ lbl_fn_801E8534_00000C80:
     stw r30, 0x100(r5)
     lwz r3, 0x48(r31)
     addi r3, r3, 0xb0
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     stw r30, 0x160(r1)
     addi r4, r1, 0x160
     lwz r3, 0x48(r31)
@@ -1407,7 +1407,7 @@ lbl_fn_801E8F9C_0000129C:
     stfs f0, 0xc(r1)
     stfs f0, 0x10(r1)
     stfs f0, 0x14(r1)
-    bl fn_8008CD60
+    bl minimap_renderOverlay
     lwz r3, 0x48(r31)
     li r28, 0x0
     li r30, 0x1
@@ -1461,7 +1461,7 @@ lbl_fn_801E8F9C_00001380:
     cmpwi r3, 0x0
     bne lbl_fn_801E8F9C_00001398
     addi r3, r31, 0xa4
-    bl fn_8008CD60
+    bl minimap_renderOverlay
 lbl_fn_801E8F9C_00001398:
     lwz r3, 0x474(r31)
     cmpwi r3, 0x0

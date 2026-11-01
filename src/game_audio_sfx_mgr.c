@@ -19,18 +19,18 @@ extern void node_createNamedChild(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void skin_applyWeights(void);
 extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void quest_ctorRewardItem(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
 extern void fn_8015AC48(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
 extern void battle_canTargetActor(void);
 extern void battle_updateActorStatus(void);
@@ -45,7 +45,7 @@ extern void fn_803CD958(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_805A3C58(void);
+extern void rand_Mersenne_constructor(void);
 extern void fn_805A3D00(void);
 extern void fn_805A3D6C(void);
 extern void fn_805A4984(void);
@@ -439,7 +439,7 @@ asm void fn_80310330(void)
     mr r31, r5
     stw r30, 0x208(r1)
     mr r30, r3
-    bl fn_805A3C58
+    bl rand_Mersenne_constructor
     lis r3, lbl_807883D0@ha
     lfs f1, lbl_80884CA8
     addi r3, r3, lbl_807883D0@l
@@ -1564,7 +1564,7 @@ lbl_fn_803111AC_00001438:
     cmplwi r0, 0x20
     bne lbl_fn_803111AC_0000145C
     addi r3, r31, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lwz r0, 0x54c(r31)
     ori r0, r0, 0x2000
     stw r0, 0x54c(r31)
@@ -1634,7 +1634,7 @@ asm void fn_80311364(void)
     stw r0, 0x14cc(r3)
     b lbl_fn_80311364_00001CEC
     li r4, 0x1
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     lwz r0, 0x5c0(r27)
     mr r3, r27
     ori r0, r0, 0x1
@@ -2060,7 +2060,7 @@ lbl_fn_80311364_00001AC4:
     addi r3, r27, 0xb0
     li r4, 0x1
     stfs f0, 0x2e4(r27)
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     b lbl_fn_80311364_00001CEC
     bl battle_updateActorStatus
     lwz r25, 0x151c(r27)

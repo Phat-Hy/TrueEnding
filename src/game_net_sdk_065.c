@@ -23,12 +23,12 @@ extern void GXClearVtxDesc(void);
 extern void fn_80614790(void);
 extern void GXInitLightDistAttn(void);
 extern void GXInitLightSpot(void);
-extern void fn_80615FF0(void);
-extern void fn_80616250(void);
+extern void GXInitLightObj(void);
+extern void GXClampLightAngle(void);
 extern void fn_806165B0(void);
 extern void fn_80617200(void);
 extern void GXInitTexObjDefault(void);
-extern void fn_80617340(void);
+extern void GXSetTevDirect(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
@@ -826,7 +826,7 @@ lbl_fn_80726B90_00000954:
     bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x0
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
@@ -932,7 +932,7 @@ lbl_fn_80726B90_00000AF4:
     bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x0
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
@@ -1038,7 +1038,7 @@ lbl_fn_80726B90_00000C94:
     bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x0
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
@@ -1144,7 +1144,7 @@ lbl_fn_80726B90_00000E34:
     bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x0
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
@@ -1477,7 +1477,7 @@ lbl_fn_80727790_000013D4:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_80615FF0
+    bl GXInitLightObj
     lfs f1, lbl_80889358
     addi r3, r1, 0x18
     lwz r4, 0x38(r27)
@@ -1487,7 +1487,7 @@ lbl_fn_80727790_000013D4:
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     addi r3, r1, 0x18
     li r4, 0x0
     bl fn_806165B0

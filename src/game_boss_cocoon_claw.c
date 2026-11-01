@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void collision_queryGeometry(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -11,13 +11,13 @@ extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
 extern void fn_80107A68(void);
-extern void fn_80108C10(void);
+extern void hurtbox_testCollisionLayer(void);
 extern void fn_8012DF7C(void);
 extern void quest_evaluateConditions(void);
-extern void fn_80148B0C(void);
+extern void quest_getRewardItemSlot(void);
 extern void fn_8015B238(void);
 extern void actor_setState(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -548,7 +548,7 @@ lbl_fn_80464608_00000634:
     lwz r3, lbl_8087EEB0
     fadds f1, f3, f0
     lfs f2, lbl_80886D60
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_80464608_000006C0:
     lwz r0, 0x144(r1)
     psq_l f31, 0x138(r1), 0, 0
@@ -710,7 +710,7 @@ lbl_fn_80464CF0_00000888:
     fdivs f7, f7, f8
     fadds f0, f0, f7
     stfs f0, 0x6c(r1)
-    bl fn_80176548
+    bl battle_calcExpPosition
     lfs f8, 0x64(r1)
     lis r7, 0x8000
     lfs f7, lbl_80886DB8
@@ -892,7 +892,7 @@ lbl_fn_80464CF0_00000BB0:
     addi r5, r31, 0x528
     stw r0, 0x204(r1)
     stw r0, 0x208(r1)
-    bl fn_80176548
+    bl battle_calcExpPosition
     lfs f8, 0x44(r1)
     lis r7, 0x8000
     lfs f7, lbl_80886DB8
@@ -1053,13 +1053,13 @@ lbl_fn_80465294_00000D68:
     stfs f0, 0x20(r1)
     stfs f3, 0x24(r1)
     stfs f4, 0x28(r1)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     lwz r0, 0x3c(r1)
     mr r3, r31
     li r4, 0x0
     divw r0, r0, r30
     stw r0, 0x3c(r1)
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     lfs f2, 0xc(r3)
     addi r30, r1, 0x2c
     psq_l f1, 0x4(r3), 0, 0
@@ -1089,7 +1089,7 @@ lbl_fn_80465294_00000D68:
     addi r4, r1, 0x38
     li r8, 0x0
     li r9, 0x0
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
 lbl_fn_80465294_00000ED0:
     lwz r0, 0x74(r1)
     lwz r31, 0x6c(r1)

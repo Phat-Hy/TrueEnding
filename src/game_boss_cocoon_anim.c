@@ -4,17 +4,17 @@
 /* External function declarations */
 extern void _restgpr_14(void);
 extern void _savegpr_14(void);
-extern void fn_8003EA3C(void);
-extern void fn_80108C10(void);
-extern void fn_801092C8(void);
+extern void ui_drawColoredQuad(void);
+extern void hurtbox_testCollisionLayer(void);
+extern void hurtbox_processHitDamage(void);
 extern void fn_80206B68(void);
 extern void fn_80206B70(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_generateId(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void fn_8020EE58(void);
 extern void fn_8020EE60(void);
-extern void fn_8020EF04(void);
+extern void rand_scaleRangeInt(void);
 extern void random_generateValue(void);
 extern void fn_802114D8(void);
 extern void fn_802114E0(void);
@@ -228,7 +228,7 @@ lbl_fn_80450778_00000234:
     li r4, 0x3
     li r5, 0x0
     li r7, 0x0
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
     b lbl_fn_80450778_0000047C
 lbl_fn_80450778_00000264:
     beq cr1, lbl_fn_80450778_00000274
@@ -317,7 +317,7 @@ lbl_fn_80450778_00000344:
     stw r11, 0x2c(r1)
     stw r0, 0x34(r1)
     stw r11, 0x30(r1)
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r29, lbl_8087F048
     cmpwi r29, 0x0
     beq lbl_fn_80450778_0000047C
@@ -334,7 +334,7 @@ lbl_fn_80450778_00000344:
     li r7, 0x0
     li r8, 0x0
     li r9, 0x1
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     b lbl_fn_80450778_0000047C
 lbl_fn_80450778_000003E4:
     lwz r0, 0xec(r31)
@@ -363,7 +363,7 @@ lbl_fn_80450778_000003E4:
     li r5, 0x0
     lwz r6, 0x4(r6)
     lwz r7, 0x24(r31)
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
     b lbl_fn_80450778_0000047C
 lbl_fn_80450778_00000454:
     lwz r5, 0x20(r31)
@@ -375,7 +375,7 @@ lbl_fn_80450778_00000454:
     lwz r3, lbl_8087F048
     li r5, 0x0
     lwz r7, 0x24(r31)
-    bl fn_801092C8
+    bl hurtbox_processHitDamage
 lbl_fn_80450778_0000047C:
     lwz r4, 0x20(r31)
     cmpwi r4, 0x0
@@ -2066,7 +2066,7 @@ lbl_fn_804515A8_00001BF4:
 lbl_fn_804515A8_00001C18:
     lwz r3, 0x20(r15)
     lwz r3, 0x4(r3)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_804515A8_00001C94
     bl fn_8020EE58
@@ -2081,14 +2081,14 @@ lbl_fn_804515A8_00001C18:
     bne lbl_fn_804515A8_00001C64
     lwz r4, 0x7c(r3)
     li r3, 0x0
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     b lbl_fn_804515A8_00001C78
 lbl_fn_804515A8_00001C64:
     cmpwi r0, 0x3
     bne lbl_fn_804515A8_00001C78
     lwz r4, 0x7c(r3)
     li r3, 0x1
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
 lbl_fn_804515A8_00001C78:
     bl random_generateValue
     mr r4, r3

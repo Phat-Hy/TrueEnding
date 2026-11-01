@@ -4,15 +4,15 @@
 /* External function declarations */
 extern void _restgpr_14(void);
 extern void _savegpr_14(void);
-extern void fn_80056DB8(void);
+extern void path_Object_constructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void quest_updateFlow(void);
 extern void fn_80154654(void);
 extern void battle_awardExp(void);
-extern void fn_80176ACC(void);
+extern void battle_activateExpReward(void);
 extern void fn_8021ECD0(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void world_getGlobalFlag(void);
 extern void fn_803972A8(void);
 extern void fn_80397BEC(void);
@@ -64,7 +64,7 @@ asm void fn_803957B0(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_80056DB8
+    bl path_Object_constructor
     lis r4, lbl_807775F8@ha
     mr r3, r31
     addi r4, r4, lbl_807775F8@l
@@ -1368,7 +1368,7 @@ lbl_fn_803965FC_00001178:
     bl fn_80396F44
     mr r19, r3
     lwz r3, 0x8(r1)
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     mr r22, r3
     b lbl_fn_803965FC_000011C4
 lbl_fn_803965FC_000011B0:
@@ -1488,7 +1488,7 @@ lbl_fn_803965FC_00001330:
     lwz r5, 0x24(r21)
     bl fn_80154654
     mr r3, r22
-    bl fn_80176ACC
+    bl battle_activateExpReward
     lwz r0, 0x4(r16)
     add r3, r0, r29
     lwz r0, 0x4(r3)
@@ -1700,7 +1700,7 @@ lbl_fn_803965FC_00001624:
     cmpwi r23, 0x0
     beq lbl_fn_803965FC_0000167C
     addi r3, r22, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lwz r0, 0x954(r22)
     mr r3, r22
     stw r0, 0x9f8(r22)
@@ -1722,7 +1722,7 @@ lbl_fn_803965FC_00001668:
     bl quest_updateFlow
 lbl_fn_803965FC_0000167C:
     mr r3, r22
-    bl fn_80176ACC
+    bl battle_activateExpReward
     b lbl_fn_803965FC_000016A0
 lbl_fn_803965FC_00001688:
     lwz r0, 0x38(r22)

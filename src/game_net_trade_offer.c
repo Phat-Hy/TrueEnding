@@ -11,13 +11,13 @@ extern void dtor_80084684(void);
 extern void sound_releaseChannel(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
-extern void fn_800C16B4(void);
+extern void skeleton_getGlobalManager(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void actor_spawnActorWithId(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void fn_80453DBC(void);
 extern void fn_804741C0(void);
 extern void fn_804786F8(void);
@@ -125,19 +125,19 @@ asm void fn_8052DEF0(void)
     b lbl_fn_8052DEF0_00000138
     lwz r3, lbl_8087F430
     li r4, 0x146
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
     lwz r0, 0x11d4(r29)
     stw r0, 0x11f0(r29)
     b lbl_fn_8052DEF0_00000138
     lwz r3, lbl_8087F430
     li r4, 0xec
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
     lwz r0, lbl_8087FA20
     cmpwi r0, 0x0
     beq lbl_fn_8052DEF0_000000E4
     lwz r3, lbl_8087F430
     li r4, 0x1ba
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_8052DEF0_000000E4:
     lwz r0, 0x11d8(r29)
     stw r0, 0x11f0(r29)
@@ -292,7 +292,7 @@ asm void fn_8052E1A4(void)
     stw r30, 0x8(r1)
     mr r30, r3
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     mr r31, r3
     addi r3, r30, 0x258
     mr r4, r31

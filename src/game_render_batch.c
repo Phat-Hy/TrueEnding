@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_22(void);
 extern void _savegpr_22(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void collision_testLineSegment(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -15,16 +15,16 @@ extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB688(void);
 extern void fn_800CB6E4(void);
-extern void fn_800EE360(void);
+extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_801010A0(void);
-extern void fn_80108C10(void);
+extern void hurtbox_testCollisionLayer(void);
 extern void fn_8010EE78(void);
 extern void fn_8012DF7C(void);
 extern void quest_evaluateConditions(void);
-extern void fn_80148B0C(void);
-extern void fn_80158BB4(void);
+extern void quest_getRewardItemSlot(void);
+extern void shop_canPurchaseItem(void);
 extern void fn_8015A46C(void);
 extern void fn_8015AC48(void);
 extern void actor_setState(void);
@@ -36,7 +36,7 @@ extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -190,7 +190,7 @@ lbl_fn_802A91D0_0000014C:
     bl fn_8012DF7C
     lwz r3, 0x1644(r31)
     li r4, 0x0
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     lfs f2, 0xc(r3)
     addi r5, r1, 0x14
     psq_l f1, 0x4(r3), 0, 0
@@ -227,7 +227,7 @@ lbl_fn_802A91D0_0000014C:
     lwz r7, 0x1644(r31)
     stfs f5, 0xc(r1)
     stfs f6, 0x10(r1)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
 lbl_fn_802A91D0_000001FC:
     lwz r3, 0x1644(r31)
     cmpwi r3, 0x0
@@ -305,7 +305,7 @@ asm void fn_802A94C8(void)
     mr r31, r3
     stw r30, 0xf8(r1)
     stw r29, 0xf4(r1)
-    bl fn_80158BB4
+    bl shop_canPurchaseItem
     cmpwi r3, 0x0
     beq lbl_fn_802A94C8_000003BC
     li r0, 0x6
@@ -386,10 +386,10 @@ lbl_fn_802A94C8_000003BC:
     li r7, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r3, 0x14b0(r31)
     li r4, 0x0
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     lfs f2, 0xc(r3)
     addi r5, r1, 0x38
     psq_l f1, 0x4(r3), 0, 0
@@ -413,7 +413,7 @@ lbl_fn_802A94C8_000003BC:
     lwz r7, 0x1644(r31)
     stfs f5, 0xc(r1)
     stfs f6, 0x10(r1)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     lfs f3, lbl_80883E40
     addi r3, r1, 0x68
     lfs f0, lbl_80883EC0
@@ -606,7 +606,7 @@ lbl_fn_802A97C8_00000778:
     stfs f4, 0x28(r1)
     stfs f3, 0x2c(r1)
     stfs f0, 0x30(r1)
-    bl fn_80158BB4
+    bl shop_canPurchaseItem
     cmpwi r3, 0x0
     beq lbl_fn_802A97C8_0000083C
     li r0, 0x6
@@ -852,7 +852,7 @@ lbl_fn_802A9ADC_00000B18:
     lwz r3, lbl_8087F8A0
     stfs f7, 0x70(r1)
     stfs f0, 0x74(r1)
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_802A9ADC_00000B8C
@@ -1747,7 +1747,7 @@ lbl_fn_802AA89C_00001844:
     mr r3, r31
     bl battle_awardExp
     mr r3, r31
-    bl fn_800EE360
+    bl camera_updateTargetMode
     b lbl_fn_802AA89C_000019E8
 lbl_fn_802AA89C_00001860:
     lwz r3, 0x2dc(r31)

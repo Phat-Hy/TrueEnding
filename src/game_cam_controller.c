@@ -14,17 +14,17 @@ extern u8 lbl_807BB380[];
 
 /* Function declarations */
 void fn_800EC1F4(void);
-void fn_800EC204(void);
-void fn_800EC24C(void);
+void cam_findTargetIndex(void);
+void fn_800EC24C(void *obj, void *val);
 void fn_800EC254(void);
-void fn_800EC2C4(void);
-void fn_800EC440(void);
-void fn_800EC534(void);
-void fn_800EC5BC(void);
-void fn_800EC654(void);
+void cam_registerTarget(void);
+void cam_initTrajectoryParams(void);
+void cam_bindPathTarget(void);
+void cam_bindRotationTarget(void);
+void cam_evalControllerSpline(void);
 void fn_800EC7F0(void);
-void fn_800ED42C(void);
-void fn_800ED4D8(void);
+void cam_setLookAtTarget(void);
+void *fn_800ED4D8(void *obj);
 void fn_800ED4E0(void);
 
 asm void fn_800EC1F4(void)
@@ -36,7 +36,7 @@ asm void fn_800EC1F4(void)
     blr
 }
 
-asm void fn_800EC204(void)
+asm void cam_findTargetIndex(void)
 {
     nofralloc
     lwz r0, 0x78(r3)
@@ -44,29 +44,27 @@ asm void fn_800EC204(void)
     li r7, 0x0
     mtctr r0
     cmplwi r0, 0x0
-    ble lbl_fn_800EC204_00000050
-lbl_fn_800EC204_00000028:
+    ble lbl_cam_findTargetIndex_00000050
+lbl_cam_findTargetIndex_00000028:
     lwz r5, 0x7c(r3)
     lwzx r0, r5, r7
     cmpw r4, r0
-    bne lbl_fn_800EC204_00000044
+    bne lbl_cam_findTargetIndex_00000044
     mulli r0, r6, 0x28
     add r3, r5, r0
     blr
-lbl_fn_800EC204_00000044:
+lbl_cam_findTargetIndex_00000044:
     addi r7, r7, 0x28
     addi r6, r6, 0x1
-    bdnz lbl_fn_800EC204_00000028
-lbl_fn_800EC204_00000050:
+    bdnz lbl_cam_findTargetIndex_00000028
+lbl_cam_findTargetIndex_00000050:
     li r3, 0x0
     blr
 }
 
-asm void fn_800EC24C(void)
+void fn_800EC24C(void *obj, void *val)
 {
-    nofralloc
-    stw r4, 0xa0(r3)
-    blr
+    *(void **)((char *)obj + 0xa0) = val;
 }
 
 asm void fn_800EC254(void)
@@ -105,7 +103,7 @@ lbl_fn_800EC254_000000C4:
     blr
 }
 
-asm void fn_800EC2C4(void)
+asm void cam_registerTarget(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -118,37 +116,37 @@ asm void fn_800EC2C4(void)
     mr r29, r3
     lwz r0, 0x0(r4)
     srwi. r0, r0, 31
-    bne lbl_fn_800EC2C4_00000104
+    bne lbl_cam_registerTarget_00000104
     addi r0, r4, 0x1
-    b lbl_fn_800EC2C4_00000108
-lbl_fn_800EC2C4_00000104:
+    b lbl_cam_registerTarget_00000108
+lbl_cam_registerTarget_00000104:
     lwz r0, 0x8(r4)
-lbl_fn_800EC2C4_00000108:
+lbl_cam_registerTarget_00000108:
     stw r0, 0x0(r3)
     lwz r0, 0x0(r4)
     srwi. r0, r0, 31
-    bne lbl_fn_800EC2C4_00000128
+    bne lbl_cam_registerTarget_00000128
     lbz r0, 0x0(r4)
     addi r6, r4, 0x1
     clrlwi r0, r0, 25
-    b lbl_fn_800EC2C4_00000130
-lbl_fn_800EC2C4_00000128:
+    b lbl_cam_registerTarget_00000130
+lbl_cam_registerTarget_00000128:
     lwz r6, 0x8(r4)
     lwz r0, 0x4(r4)
-lbl_fn_800EC2C4_00000130:
+lbl_cam_registerTarget_00000130:
     lwz r4, 0x0(r5)
     add r0, r6, r0
     stw r0, 0x4(r3)
     addi r31, r3, 0x8
     srwi. r0, r4, 31
-    bne lbl_fn_800EC2C4_00000160
+    bne lbl_cam_registerTarget_00000160
     lwz r3, 0x4(r5)
     lwz r0, 0x8(r5)
     stw r4, 0x0(r31)
     stw r3, 0x4(r31)
     stw r0, 0x8(r31)
-    b lbl_fn_800EC2C4_000001A4
-lbl_fn_800EC2C4_00000160:
+    b lbl_cam_registerTarget_000001A4
+lbl_cam_registerTarget_00000160:
     li r0, 0x0
     stw r0, 0x0(r31)
     lwz r4, 0x4(r5)
@@ -166,17 +164,17 @@ lbl_fn_800EC2C4_00000160:
     li r5, 0x0
     add r7, r6, r0
     bl actor_dispatchMessage
-lbl_fn_800EC2C4_000001A4:
+lbl_cam_registerTarget_000001A4:
     lwz r4, 0xc(r30)
     srwi. r0, r4, 31
-    bne lbl_fn_800EC2C4_000001C8
+    bne lbl_cam_registerTarget_000001C8
     lwz r3, 0x10(r30)
     lwz r0, 0x14(r30)
     stw r4, 0xc(r31)
     stw r3, 0x10(r31)
     stw r0, 0x14(r31)
-    b lbl_fn_800EC2C4_0000020C
-lbl_fn_800EC2C4_000001C8:
+    b lbl_cam_registerTarget_0000020C
+lbl_cam_registerTarget_000001C8:
     li r0, 0x0
     stw r0, 0xc(r31)
     lwz r4, 0x10(r30)
@@ -194,7 +192,7 @@ lbl_fn_800EC2C4_000001C8:
     li r5, 0x0
     add r7, r6, r0
     bl actor_dispatchMessage
-lbl_fn_800EC2C4_0000020C:
+lbl_cam_registerTarget_0000020C:
     lbz r6, 0x18(r30)
     mr r3, r29
     lbz r5, 0x19(r30)
@@ -213,7 +211,7 @@ lbl_fn_800EC2C4_0000020C:
     blr
 }
 
-asm void fn_800EC440(void)
+asm void cam_initTrajectoryParams(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -251,16 +249,16 @@ asm void fn_800EC440(void)
     stb r31, 0x19(r26)
     stw r29, 0x1c(r26)
     stb r31, 0x20(r26)
-    beq lbl_fn_800EC440_00000328
+    beq lbl_cam_initTrajectoryParams_00000328
     lwz r0, 0x0(r26)
     srwi. r0, r0, 31
-    bne lbl_fn_800EC440_000002F4
+    bne lbl_cam_initTrajectoryParams_000002F4
     lbz r0, 0x0(r26)
     clrlwi r30, r0, 25
-    b lbl_fn_800EC440_000002F8
-lbl_fn_800EC440_000002F4:
+    b lbl_cam_initTrajectoryParams_000002F8
+lbl_cam_initTrajectoryParams_000002F4:
     lwz r30, 0x4(r26)
-lbl_fn_800EC440_000002F8:
+lbl_cam_initTrajectoryParams_000002F8:
     lbz r0, 0xc(r1)
     mr r3, r28
     stb r0, 0x8(r1)
@@ -273,7 +271,7 @@ lbl_fn_800EC440_000002F8:
     addi r8, r1, 0x8
     li r4, 0x0
     bl actor_dispatchMessage
-lbl_fn_800EC440_00000328:
+lbl_cam_initTrajectoryParams_00000328:
     mr r3, r26
     lmw r26, 0x18(r1)
     lwz r0, 0x34(r1)
@@ -282,7 +280,7 @@ lbl_fn_800EC440_00000328:
     blr
 }
 
-asm void fn_800EC534(void)
+asm void cam_bindPathTarget(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -293,28 +291,28 @@ asm void fn_800EC534(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_800EC534_000003AC
+    beq lbl_cam_bindPathTarget_000003AC
     addic. r0, r3, 0xc
-    beq lbl_fn_800EC534_00000380
+    beq lbl_cam_bindPathTarget_00000380
     lwz r0, 0xc(r3)
     srwi. r0, r0, 31
-    beq lbl_fn_800EC534_00000380
+    beq lbl_cam_bindPathTarget_00000380
     lwz r3, 0x14(r3)
     bl dtor_80084684
-lbl_fn_800EC534_00000380:
+lbl_cam_bindPathTarget_00000380:
     cmpwi r30, 0x0
-    beq lbl_fn_800EC534_0000039C
+    beq lbl_cam_bindPathTarget_0000039C
     lwz r0, 0x0(r30)
     srwi. r0, r0, 31
-    beq lbl_fn_800EC534_0000039C
+    beq lbl_cam_bindPathTarget_0000039C
     lwz r3, 0x8(r30)
     bl dtor_80084684
-lbl_fn_800EC534_0000039C:
+lbl_cam_bindPathTarget_0000039C:
     cmpwi r31, 0x0
-    ble lbl_fn_800EC534_000003AC
+    ble lbl_cam_bindPathTarget_000003AC
     mr r3, r30
     bl dtor_80084684
-lbl_fn_800EC534_000003AC:
+lbl_cam_bindPathTarget_000003AC:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -324,7 +322,7 @@ lbl_fn_800EC534_000003AC:
     blr
 }
 
-asm void fn_800EC5BC(void)
+asm void cam_bindRotationTarget(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -336,30 +334,30 @@ asm void fn_800EC5BC(void)
     mr r30, r4
     stw r29, 0x14(r1)
     mr r29, r3
-    beq lbl_fn_800EC5BC_00000440
+    beq lbl_cam_bindRotationTarget_00000440
     addic. r31, r3, 0x8
-    beq lbl_fn_800EC5BC_00000430
+    beq lbl_cam_bindRotationTarget_00000430
     addic. r0, r31, 0xc
-    beq lbl_fn_800EC5BC_00000414
+    beq lbl_cam_bindRotationTarget_00000414
     lwz r0, 0xc(r31)
     srwi. r0, r0, 31
-    beq lbl_fn_800EC5BC_00000414
+    beq lbl_cam_bindRotationTarget_00000414
     lwz r3, 0x14(r31)
     bl dtor_80084684
-lbl_fn_800EC5BC_00000414:
+lbl_cam_bindRotationTarget_00000414:
     cmpwi r31, 0x0
-    beq lbl_fn_800EC5BC_00000430
+    beq lbl_cam_bindRotationTarget_00000430
     lwz r0, 0x0(r31)
     srwi. r0, r0, 31
-    beq lbl_fn_800EC5BC_00000430
+    beq lbl_cam_bindRotationTarget_00000430
     lwz r3, 0x8(r31)
     bl dtor_80084684
-lbl_fn_800EC5BC_00000430:
+lbl_cam_bindRotationTarget_00000430:
     cmpwi r30, 0x0
-    ble lbl_fn_800EC5BC_00000440
+    ble lbl_cam_bindRotationTarget_00000440
     mr r3, r29
     bl dtor_80084684
-lbl_fn_800EC5BC_00000440:
+lbl_cam_bindRotationTarget_00000440:
     lwz r31, 0x1c(r1)
     mr r3, r29
     lwz r30, 0x18(r1)
@@ -370,7 +368,7 @@ lbl_fn_800EC5BC_00000440:
     blr
 }
 
-asm void fn_800EC654(void)
+asm void cam_evalControllerSpline(void)
 {
     nofralloc
     stwu r1, -0x60(r1)
@@ -385,14 +383,14 @@ asm void fn_800EC654(void)
     stw r29, 0x54(r1)
     addi r29, r1, 0x20
     stw r28, 0x50(r1)
-    bne lbl_fn_800EC654_000004AC
+    bne lbl_cam_evalControllerSpline_000004AC
     lwz r3, 0xc(r4)
     lwz r0, 0x10(r4)
     stw r5, 0x20(r1)
     stw r3, 0x24(r1)
     stw r0, 0x28(r1)
-    b lbl_fn_800EC654_000004F0
-lbl_fn_800EC654_000004AC:
+    b lbl_cam_evalControllerSpline_000004F0
+lbl_cam_evalControllerSpline_000004AC:
     li r0, 0x0
     stw r0, 0x20(r1)
     lwz r4, 0xc(r4)
@@ -410,17 +408,17 @@ lbl_fn_800EC654_000004AC:
     li r5, 0x0
     add r7, r6, r0
     bl actor_dispatchMessage
-lbl_fn_800EC654_000004F0:
+lbl_cam_evalControllerSpline_000004F0:
     lwz r4, 0x14(r31)
     srwi. r0, r4, 31
-    bne lbl_fn_800EC654_00000514
+    bne lbl_cam_evalControllerSpline_00000514
     lwz r3, 0x18(r31)
     lwz r0, 0x1c(r31)
     stw r4, 0x2c(r1)
     stw r3, 0x30(r1)
     stw r0, 0x34(r1)
-    b lbl_fn_800EC654_0000055C
-lbl_fn_800EC654_00000514:
+    b lbl_cam_evalControllerSpline_0000055C
+lbl_cam_evalControllerSpline_00000514:
     li r0, 0x0
     stw r0, 0xc(r29)
     lwz r4, 0x18(r31)
@@ -439,7 +437,7 @@ lbl_fn_800EC654_00000514:
     li r5, 0x0
     add r7, r6, r0
     bl actor_dispatchMessage
-lbl_fn_800EC654_0000055C:
+lbl_cam_evalControllerSpline_0000055C:
     lbz r11, 0x20(r31)
     mr r3, r30
     lbz r10, 0x21(r31)
@@ -459,21 +457,21 @@ lbl_fn_800EC654_0000055C:
     bl fn_800EC7F0
     addi r29, r1, 0x20
     addic. r0, r29, 0xc
-    beq lbl_fn_800EC654_000005C0
+    beq lbl_cam_evalControllerSpline_000005C0
     lwz r0, 0x2c(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_800EC654_000005C0
+    beq lbl_cam_evalControllerSpline_000005C0
     lwz r3, 0x34(r1)
     bl dtor_80084684
-lbl_fn_800EC654_000005C0:
+lbl_cam_evalControllerSpline_000005C0:
     cmpwi r29, 0x0
-    beq lbl_fn_800EC654_000005DC
+    beq lbl_cam_evalControllerSpline_000005DC
     lwz r0, 0x20(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_800EC654_000005DC
+    beq lbl_cam_evalControllerSpline_000005DC
     lwz r3, 0x28(r1)
     bl dtor_80084684
-lbl_fn_800EC654_000005DC:
+lbl_cam_evalControllerSpline_000005DC:
     lwz r0, 0x64(r1)
     lwz r31, 0x5c(r1)
     lwz r30, 0x58(r1)
@@ -1426,7 +1424,7 @@ lbl_fn_800EC7F0_00001210:
     blr
 }
 
-asm void fn_800ED42C(void)
+asm void cam_setLookAtTarget(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1437,38 +1435,38 @@ asm void fn_800ED42C(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_800ED42C_000012C8
+    beq lbl_cam_setLookAtTarget_000012C8
     addic. r0, r3, 0x30
-    beq lbl_fn_800ED42C_00001278
+    beq lbl_cam_setLookAtTarget_00001278
     lwz r0, 0x30(r3)
     srwi. r0, r0, 31
-    beq lbl_fn_800ED42C_00001278
+    beq lbl_cam_setLookAtTarget_00001278
     lwz r3, 0x38(r3)
     bl dtor_80084684
-lbl_fn_800ED42C_00001278:
+lbl_cam_setLookAtTarget_00001278:
     cmpwi r30, 0x0
-    beq lbl_fn_800ED42C_000012B8
+    beq lbl_cam_setLookAtTarget_000012B8
     addic. r0, r30, 0xc
-    beq lbl_fn_800ED42C_0000129C
+    beq lbl_cam_setLookAtTarget_0000129C
     lwz r0, 0xc(r30)
     srwi. r0, r0, 31
-    beq lbl_fn_800ED42C_0000129C
+    beq lbl_cam_setLookAtTarget_0000129C
     lwz r3, 0x14(r30)
     bl dtor_80084684
-lbl_fn_800ED42C_0000129C:
+lbl_cam_setLookAtTarget_0000129C:
     cmpwi r30, 0x0
-    beq lbl_fn_800ED42C_000012B8
+    beq lbl_cam_setLookAtTarget_000012B8
     lwz r0, 0x0(r30)
     srwi. r0, r0, 31
-    beq lbl_fn_800ED42C_000012B8
+    beq lbl_cam_setLookAtTarget_000012B8
     lwz r3, 0x8(r30)
     bl dtor_80084684
-lbl_fn_800ED42C_000012B8:
+lbl_cam_setLookAtTarget_000012B8:
     cmpwi r31, 0x0
-    ble lbl_fn_800ED42C_000012C8
+    ble lbl_cam_setLookAtTarget_000012C8
     mr r3, r30
     bl dtor_80084684
-lbl_fn_800ED42C_000012C8:
+lbl_cam_setLookAtTarget_000012C8:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1478,11 +1476,9 @@ lbl_fn_800ED42C_000012C8:
     blr
 }
 
-asm void fn_800ED4D8(void)
+void *fn_800ED4D8(void *obj)
 {
-    nofralloc
-    addi r3, r3, 0x30
-    blr
+    return (char *)obj + 0x30;
 }
 
 asm void fn_800ED4E0(void)

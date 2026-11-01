@@ -14,12 +14,12 @@ extern void str_initFromCStr(void);
 extern void str_getData(void);
 extern void fn_80042218(void);
 extern void talk_parseDialogue(void);
-extern void fn_8005B8F8(void);
-extern void fn_8005B9AC(void);
+extern void talk_parseDialogueTokens(void);
+extern void talk_copyUtf16String(void);
 extern void fn_8006A9A4(void);
 extern void fn_8006AC08(void);
 extern void fn_8006AF38(void);
-extern void fn_8006B174(void);
+extern void boss_decodePhaseBitfield(void);
 extern void fn_8006BBCC(void);
 extern void atn_FileList_destructor(void);
 extern void fn_8006C300(void);
@@ -28,12 +28,12 @@ extern void fn_8006D008(void);
 extern void fn_8006F420(void);
 extern void str_assignBuffer(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800839EC(void);
+extern void town_registerInteractionPoint(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void env_updateAtmosphere(void);
 extern void wcs_parseInt(void);
 extern void fn_800E19AC(void);
@@ -97,9 +97,9 @@ void fn_8046CBB0(void);
 void fn_8046CBBC(void);
 void fn_8046CBC0(void);
 void fn_8046CC90(void);
-void fn_8046D184(void);
-void fn_8046D18C(void);
-void fn_8046D194(void);
+void *fn_8046D184(void *obj);
+void *fn_8046D18C(void *obj);
+void *fn_8046D194(void *obj);
 
 asm void fn_8046B798(void)
 {
@@ -161,7 +161,7 @@ lbl_fn_8046B798_000000AC:
     stw r3, 0x130(r1)
     mr r3, r26
     addi r4, r4, lbl_8077A0A8@l
-    bl fn_8005B9AC
+    bl talk_copyUtf16String
     li r24, 0x0
 lbl_fn_8046B798_000000DC:
     addi r3, r1, 0x130
@@ -174,7 +174,7 @@ lbl_fn_8046B798_000000DC:
     addi r24, r24, 0x1
 lbl_fn_8046B798_000000FC:
     addi r3, r1, 0x130
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_8046B798_000000DC
     lwz r3, 0x9c(r25)
@@ -264,7 +264,7 @@ lbl_fn_8046B798_000001B4:
     bl strcat
     addi r3, r28, 0xc
     addi r4, r1, 0x30
-    bl fn_800D5908
+    bl depth_resetRenderTarget
 lbl_fn_8046B798_00000254:
     addi r3, r1, 0x130
     bl talk_parseDialogue
@@ -360,7 +360,7 @@ lbl_fn_8046B798_0000038C:
     bl dtor_80084684
 lbl_fn_8046B798_000003A4:
     addi r3, r1, 0x130
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_8046B798_000001B4
     lmw r23, 0xd8c(r1)
@@ -958,7 +958,7 @@ asm void atn_Arc_loadEntry(void)
     li r6, 0x2
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     mr r28, r3
 lbl_atn_Arc_loadEntry_00000BC8:
     mr r3, r25
@@ -1328,7 +1328,7 @@ lbl_atn_Arc_decompressChunk_000010B0:
     li r6, 0x2
     li r9, 0x0
     li r10, 0x1
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     cmpwi r3, 0x0
     stw r3, 0x8(r30)
     bne lbl_atn_Arc_decompressChunk_00001124
@@ -1679,7 +1679,7 @@ lbl_fn_8046CC90_000015AC:
     beq lbl_fn_8046CC90_00001698
     addi r3, r1, 0x38
     addi r4, r1, 0x50
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     addi r3, r1, 0x5c
     bl fn_8006BBCC
     addi r3, r1, 0x44
@@ -1930,7 +1930,7 @@ lbl_fn_8046CC90_00001960:
     beq lbl_fn_8046CC90_000019AC
     addi r3, r1, 0x8
     addi r4, r1, 0x50
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     mr r3, r29
     mr r4, r30
     addi r5, r1, 0x8
@@ -1965,23 +1965,17 @@ lbl_fn_8046CC90_000019D0:
     blr
 }
 
-asm void fn_8046D184(void)
+void *fn_8046D184(void *obj)
 {
-    nofralloc
-    lwz r3, 0x400c(r3)
-    blr
+    return *(void **)((char *)obj + 0x400c);
 }
 
-asm void fn_8046D18C(void)
+void *fn_8046D18C(void *obj)
 {
-    nofralloc
-    lwz r3, 0x4008(r3)
-    blr
+    return *(void **)((char *)obj + 0x4008);
 }
 
-asm void fn_8046D194(void)
+void *fn_8046D194(void *obj)
 {
-    nofralloc
-    addi r3, r3, 0x3f08
-    blr
+    return (char *)obj + 0x3f08;
 }

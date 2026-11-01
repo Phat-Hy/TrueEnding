@@ -18,7 +18,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800E41FC(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_800F84D0(void);
@@ -34,7 +34,7 @@ extern void npc_initScriptContext(void);
 extern void npc_getPosition(void);
 extern void fn_8013C3B4(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_8014052C(void);
+extern void quest_initMarkerCoords(void);
 extern void quest_updateFlow(void);
 extern void dialog_setScriptSlot(void);
 extern void dialog_updateScriptState(void);
@@ -85,7 +85,7 @@ extern void fn_803E6850(void);
 extern void fn_804439FC(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
-extern void fn_8054A340(void);
+extern void dlc_findItemInCatalog(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
@@ -127,40 +127,36 @@ extern u32 lbl_808836A4;
 extern u32 lbl_808836A8;
 
 /* Function declarations */
-void fn_802657FC(void);
-void fn_80265804(void);
+void fn_802657FC(void *p, u32 val);
+void fn_80265804(void *p, f32 val);
 void fn_8026580C(void);
 void fn_80265B00(void);
 void fn_8026607C(void);
 void fn_802660EC(void);
 void fn_802660FC(void);
 void fn_8026610C(void);
-void fn_80266154(void);
-void fn_8026615C(void);
-void fn_80266164(void);
-void fn_8026616C(void);
+void *fn_80266154(void *p);
+void *fn_8026615C(void *p);
+void *fn_80266164(void *p);
+void fn_8026616C(void *p, u32 val);
 void fn_80266174(void);
 void fn_8026618C(void);
 void fn_80266254(void);
 void fn_80266A24(void);
-void fn_80266FA4(void);
-void fn_80266FAC(void);
+void *fn_80266FA4(void *p);
+u32 fn_80266FAC(const void *p);
 void fn_80266FB4(void);
 void fn_80266FC4(void);
 void fn_80267134(void);
 
-asm void fn_802657FC(void)
+void fn_802657FC(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x58c(r3)
-    blr
+    *(u32 *)((char *)p + 0x58c) = val;
 }
 
-asm void fn_80265804(void)
+void fn_80265804(void *p, f32 val)
 {
-    nofralloc
-    stfs f1, 0x2fc(r3)
-    blr
+    *(f32 *)((char *)p + 0x2fc) = val;
 }
 
 asm void fn_8026580C(void)
@@ -826,32 +822,24 @@ lbl_fn_8026610C_00000950:
     blr
 }
 
-asm void fn_80266154(void)
+void *fn_80266154(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x8
-    blr
+    return (char *)p + 0x8;
 }
 
-asm void fn_8026615C(void)
+void *fn_8026615C(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x10
-    blr
+    return (char *)p + 0x10;
 }
 
-asm void fn_80266164(void)
+void *fn_80266164(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x910
-    blr
+    return (char *)p + 0x910;
 }
 
-asm void fn_8026616C(void)
+void fn_8026616C(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x834(r3)
-    blr
+    *(u32 *)((char *)p + 0x834) = val;
 }
 
 asm void fn_80266174(void)
@@ -1510,7 +1498,7 @@ lbl_fn_80266A24_000012B0:
 lbl_fn_80266A24_000012F4:
     mr r4, r30
     addi r3, r1, 0x2c
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     addi r3, r1, 0x38
     addi r4, r1, 0x2c
     bl fn_8013C3B4
@@ -1610,7 +1598,7 @@ lbl_fn_80266A24_00001458:
     lfs f1, lbl_8088369C
     addi r3, r1, 0x20
     addi r4, r1, 0x50
-    bl fn_800F72CC
+    bl vec3_scale
     mr r3, r30
     addi r4, r1, 0x20
     bl fn_80198514
@@ -1829,18 +1817,14 @@ lbl_fn_80266A24_00001790:
     blr
 }
 
-asm void fn_80266FA4(void)
+void *fn_80266FA4(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x650
-    blr
+    return (char *)p + 0x650;
 }
 
-asm void fn_80266FAC(void)
+u32 fn_80266FAC(const void *p)
 {
-    nofralloc
-    lwz r3, 0x274(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x274);
 }
 
 asm void fn_80266FB4(void)
@@ -1869,7 +1853,7 @@ asm void fn_80266FC4(void)
     stw r0, 0xd20(r3)
     lwz r3, lbl_8087F8A0
     lwz r30, 0x48(r3)
-    bl fn_8054A340
+    bl dlc_findItemInCatalog
     lwz r0, 0x12a4(r30)
     extrwi. r0, r0, 1, 3
     bne lbl_fn_80266FC4_00001828

@@ -75,7 +75,7 @@ extern u32 lbl_80880C24;
 
 /* Function declarations */
 void fn_80094F98(void);
-void fn_800952F8(void);
+void *fn_800952F8(void *obj);
 void fn_80095300(void);
 void atn_Lockon_updateTargetTextures(void);
 void fn_80095750(void);
@@ -312,11 +312,9 @@ lbl_fn_80094F98_00000288:
     blr
 }
 
-asm void fn_800952F8(void)
+void *fn_800952F8(void *obj)
 {
-    nofralloc
-    addi r3, r3, 0x8
-    blr
+    return (char *)obj + 8;
 }
 
 asm void fn_80095300(void)

@@ -33,7 +33,7 @@ extern void clip_calculateFrustum(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
 extern void battle_resolveAggroHierarchy(void);
 extern void battle_updateTargetAggro(void);
@@ -56,7 +56,7 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_805A3C58(void);
+extern void rand_Mersenne_constructor(void);
 extern void fn_805A3D00(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
@@ -213,7 +213,7 @@ asm void fn_802E8354(void)
     bl actor_setState
     mr r3, r30
     li r4, 0x1
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     lwz r0, 0x5c0(r30)
     mr r3, r30
     stb r31, 0x1508(r30)
@@ -367,7 +367,7 @@ asm void fn_802E8580(void)
     bl _savegpr_25
     mr r29, r3
     mr r30, r5
-    bl fn_805A3C58
+    bl rand_Mersenne_constructor
     lis r3, lbl_807873E8@ha
     addi r31, r29, 0x14d4
     addi r3, r3, lbl_807873E8@l

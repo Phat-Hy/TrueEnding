@@ -12,8 +12,8 @@ extern void fn_8000D760(void);
 extern void fn_8000E18C(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8004203C(void);
-extern void fn_80057A68(void);
+extern void menu_initWindowBuffer(void);
+extern void vec3_initValues(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -22,12 +22,12 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_800DB3EC(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_800EC204(void);
+extern void cam_findTargetIndex(void);
 extern void viewport_updateCulling(void);
 extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void actor_getMovementFlags(void);
 extern void fn_801A03E0(void);
 extern void task_findEntryById(void);
@@ -42,7 +42,7 @@ extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_805A3C58(void);
+extern void rand_Mersenne_constructor(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -1075,7 +1075,7 @@ asm void fn_8029CB00(void)
     bl _savegpr_25
     mr r29, r3
     mr r30, r5
-    bl fn_805A3C58
+    bl rand_Mersenne_constructor
     lis r3, lbl_80785B38@ha
     li r28, 0x0
     addi r3, r3, lbl_80785B38@l
@@ -1373,7 +1373,7 @@ asm void fn_8029CF00(void)
     cmpwi r3, 0x0
     beq lbl_fn_8029CF00_000011CC
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r26, r3
     b lbl_fn_8029CF00_000011D0
 lbl_fn_8029CF00_000011CC:
@@ -1394,7 +1394,7 @@ lbl_fn_8029CF00_000011D0:
     mr r4, r3
     mr r5, r27
     addi r3, r1, 0x2c
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     lis r27, lbl_80745C70@ha
     lfs f31, lbl_80883D28
     addi r27, r27, lbl_80745C70@l
@@ -1723,7 +1723,7 @@ lbl_fn_8029CF00_0000168C:
     bl str_parseInt
     mr r4, r3
     mr r3, r26
-    bl fn_800EC204
+    bl cam_findTargetIndex
     mr r25, r3
     b lbl_fn_8029CF00_00001968
 lbl_fn_8029CF00_000016C0:
@@ -1739,7 +1739,7 @@ lbl_fn_8029CF00_000016D4:
     mr r30, r3
     mr r3, r26
     mr r4, r30
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     stw r3, 0xc(r1)
     beq lbl_fn_8029CF00_00001708
@@ -1928,7 +1928,7 @@ lbl_fn_8029CF00_00001990:
     addi r3, r31, 0x1638
     fmr f2, f1
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
 lbl_fn_8029CF00_000019A4:
     lwz r12, 0x0(r31)
     mr r3, r31

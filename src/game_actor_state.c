@@ -5,13 +5,13 @@
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_80060D58(void);
+extern void equip_calcTotalStatBonuses(void);
 extern void fn_80061AE4(void);
 extern void script_executeOpcode(void);
 extern void fn_800A4450(void);
 extern void msg_getMessageById(void);
 extern void fn_800A55D4(void);
-extern void fn_800A58D0(void);
+extern void msg_isWindowActive(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
@@ -823,7 +823,7 @@ lbl_fn_801189B4_000009AC:
     stw r5, 0x78(r1)
     lfd f0, 0x78(r1)
     fsubs f5, f0, f5
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
 lbl_fn_801189B4_00000A20:
     addi r11, r1, 0xa0
     psq_l f31, 0xc8(r1), 0, 0
@@ -1088,7 +1088,7 @@ lbl_fn_801191A8_00000D98:
     b lbl_fn_801191A8_00000E00
 lbl_fn_801191A8_00000DAC:
     li r4, 0x0
-    bl fn_800A58D0
+    bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_fn_801191A8_00000DE0
     lwz r3, lbl_8087EF70

@@ -8,28 +8,28 @@ extern void dtor_80084684(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
 extern void fn_80058078(void);
-extern void fn_800580BC(void);
-extern void fn_800588FC(void);
+extern void mission_isObjectiveActive(void);
+extern void mission_updateObjectiveTarget(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80092F1C(void);
+extern void target_pushPointToHistory(void);
 extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_8009E5A0(void);
 extern void fn_8009E690(void);
 extern void hud_updateTargetReticle(void);
-extern void fn_8009EE30(void);
+extern void hud_drawTargetMarker(void);
 extern void fn_8009F788(void);
 extern void fn_8009FFCC(void);
 extern void str_skipWhitespace(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void fn_80187D04(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
@@ -44,7 +44,7 @@ extern void task_createWorker(void);
 extern void task_destroyWorker(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
-extern void fn_803ED5D0(void);
+extern void barrier_bindFieldAnimation(void);
 extern void fn_80415F6C(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -94,7 +94,7 @@ void fn_80414328(void);
 void fn_804145B8(void);
 void fn_804145E8(void);
 void fn_804146E4(void);
-void fn_80414824(void);
+u32 fn_80414824(void);
 void fn_8041482C(void);
 void fn_80414974(void);
 void fn_80414994(void);
@@ -111,7 +111,7 @@ void fn_8041502C(void);
 void fn_804150BC(void);
 void fn_804150D4(void);
 void fn_80415214(void);
-void fn_80415244(void);
+void *fn_80415244(void *p);
 void fn_8041524C(void);
 void fn_8041537C(void);
 void fn_804154AC(void);
@@ -450,7 +450,7 @@ asm void fn_804146E4(void)
     bctrl
     mr r4, r3
     mr r3, r30
-    bl fn_803ED5D0
+    bl barrier_bindFieldAnimation
 lbl_fn_804146E4_00000490:
     lwz r12, 0x0(r30)
     mr r3, r30
@@ -483,11 +483,9 @@ lbl_fn_804146E4_000004E4:
     blr
 }
 
-asm void fn_80414824(void)
+u32 fn_80414824(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8041482C(void)
@@ -571,7 +569,7 @@ lbl_fn_8041482C_000005C8:
     mr r4, r3
 lbl_fn_8041482C_0000062C:
     mr r3, r31
-    bl fn_80178208
+    bl battle_generateLootDrops
 lbl_fn_8041482C_00000634:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
@@ -814,7 +812,7 @@ asm void fn_80414C38(void)
     cmpwi r3, 0x0
     bne lbl_fn_80414C38_00000954
     addi r3, r31, 0x4c4
-    bl fn_800580BC
+    bl mission_isObjectiveActive
     cmpwi r3, 0x0
     bne lbl_fn_80414C38_00000954
     addi r3, r31, 0x54c
@@ -916,7 +914,7 @@ lbl_fn_80414C9C_00000A68:
     addi r3, r29, 0xf4
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_80414C9C_00000B04
 lbl_fn_80414C9C_00000AB0:
     mr r3, r30
@@ -1078,7 +1076,7 @@ lbl_fn_80414F54_00000CA4:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     lwz r0, 0x4cc(r31)
     clrrwi r0, r0, 1
     stw r0, 0x4cc(r31)
@@ -1139,7 +1137,7 @@ asm void fn_804150BC(void)
     cmplwi r0, 0x2
     blelr
     addi r3, r3, 0xf4
-    b fn_8008CD60
+    b minimap_renderOverlay
     blr
 }
 
@@ -1253,11 +1251,9 @@ lbl_fn_80415214_00000F14:
     blr
 }
 
-asm void fn_80415244(void)
+void *fn_80415244(void *p)
 {
-    nofralloc
-    addi r3, r3, 0xf4
-    blr
+    return (char *)p + 0xf4;
 }
 
 asm void fn_8041524C(void)
@@ -1714,7 +1710,7 @@ lbl_fn_8041553C_00001578:
     stfs f0, 0x2e4(r1)
     stfs f7, 0x2f4(r1)
     stfs f8, 0x304(r1)
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
     lfs f7, 0x70(r30)
     lfs f0, lbl_8088644C
     lwz r0, 0x54(r30)
@@ -2085,7 +2081,7 @@ lbl_fn_80415AB4_00001ACC:
     stfs f0, 0x2e4(r1)
     stfs f7, 0x2f4(r1)
     stfs f8, 0x304(r1)
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
     lwz r0, 0x314(r1)
     lwz r31, 0x30c(r1)
     lwz r30, 0x308(r1)

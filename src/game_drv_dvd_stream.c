@@ -16,7 +16,7 @@ extern void fn_8016F824(void);
 extern void fn_8016FDCC(void);
 extern void battle_resolveAggroHierarchy(void);
 extern void fn_80171DB0(void);
-extern void fn_801781B0(void);
+extern void battle_calcAABBCenter(void);
 extern void fn_80219EC4(void);
 extern void fn_805A70D8(void);
 extern void fn_805AF618(void);
@@ -574,7 +574,7 @@ asm void fn_805AE13C(void)
     cmpwi r0, 0x0
     bne lbl_fn_805AE13C_00000624
     lwz r4, 0x4(r4)
-    b fn_801781B0
+    b battle_calcAABBCenter
 lbl_fn_805AE13C_00000624:
     cmpwi r0, 0x1
     bne lbl_fn_805AE13C_00000644

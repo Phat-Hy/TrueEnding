@@ -8,7 +8,7 @@ extern void _savegpr_20(void);
 extern void _savegpr_23(void);
 extern void dtor_80084684(void);
 extern void scene_traverseNode(void);
-extern void fn_8004B290(void);
+extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void fn_8005E3E4(void);
@@ -25,7 +25,7 @@ extern void node_createNamedChild(void);
 extern void node_destroy(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void fn_80092954(void);
+extern void compass_findMarkerByName(void);
 extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
 extern void model_updateBoneTransforms(void);
@@ -35,7 +35,7 @@ extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void atn_LH_Texture_update(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
@@ -1200,7 +1200,7 @@ asm void fn_804A7F18(void)
     stfs f2, 0x634(r30)
     stfs f1, 0x638(r30)
     stfs f0, 0x63c(r30)
-    bl fn_8004B290
+    bl sound_initChannelParams
     addi r7, r30, 0x860
     addi r3, r30, 0x1334
     cmplw r7, r3
@@ -1360,28 +1360,28 @@ lbl_fn_804A7F18_00001074:
     addi r3, r30, 0xe8
     addi r31, r31, lbl_8075765C@l
     addi r4, r31, 0x1
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     addi r3, r30, 0xb8
     addi r4, r31, 0x1f
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     addi r3, r30, 0x148
     addi r4, r31, 0x3c
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     addi r3, r30, 0x88
     addi r4, r31, 0x5e
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     addi r3, r30, 0x118
     addi r4, r31, 0x7d
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     addi r3, r30, 0x1a8
     addi r4, r31, 0xa1
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     addi r3, r30, 0x178
     addi r4, r31, 0xc2
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     addi r3, r30, 0x1d8
     addi r4, r31, 0xe5
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     addi r3, r30, 0x208
     addi r4, r31, 0x105
     li r5, 0x0
@@ -1951,7 +1951,7 @@ lbl_fn_804A894C_000018E4:
     addi r4, r4, 0x14c
     stw r0, 0x20c(r3)
     addi r3, r3, 0x208
-    bl fn_80092954
+    bl compass_findMarkerByName
     cmpwi r3, 0x0
     beq lbl_fn_804A894C_00001A18
     lwz r0, 0x18(r3)
@@ -2026,7 +2026,7 @@ lbl_fn_804A894C_00001A18:
     addi r4, r4, lbl_8075765C@l
     addi r3, r24, 0x208
     addi r4, r4, 0x15a
-    bl fn_80092954
+    bl compass_findMarkerByName
     cmpwi r3, 0x0
     beq lbl_fn_804A894C_00001B3C
     lwz r0, 0x18(r3)
@@ -2101,7 +2101,7 @@ lbl_fn_804A894C_00001B3C:
     addi r4, r4, lbl_8075765C@l
     addi r3, r24, 0x208
     addi r4, r4, 0x167
-    bl fn_80092954
+    bl compass_findMarkerByName
     cmpwi r3, 0x0
     beq lbl_fn_804A894C_00001C60
     lwz r0, 0x18(r3)

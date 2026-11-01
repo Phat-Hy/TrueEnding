@@ -16,10 +16,10 @@ extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void fn_800FDE60(void);
 extern void actor_findSpawnTemplate(void);
-extern void fn_8012D8B8(void);
-extern void fn_801446F0(void);
-extern void fn_8016E4C4(void);
-extern void fn_80176ACC(void);
+extern void enemy_updateAnimTimer(void);
+extern void quest_resetObjectiveBounds(void);
+extern void debuff_removeStatusEffect(void);
+extern void battle_activateExpReward(void);
 extern void save_validateHeader(void);
 extern void fn_801F4AA0(void);
 extern void save_formatSlotTitle(void);
@@ -271,24 +271,24 @@ extern u32 lbl_808876B4;
 
 /* Function declarations */
 void fn_804FFE08(void);
-void fn_80500628(void);
+u32 fn_80500628(void);
 void fn_80500630(void);
 void fn_805006C4(void);
-void fn_80500720(void);
-void fn_80500728(void);
-void fn_80500730(void);
-void fn_80500738(void);
-void fn_80500740(void);
-void fn_80500748(void);
-void fn_80500750(void);
-void fn_80500758(void);
-void fn_80500760(void);
-void fn_80500768(void);
-void fn_80500770(void);
-void fn_80500778(void);
-void fn_80500780(void);
-void fn_80500788(void);
-void fn_80500790(void);
+u32 fn_80500720(void);
+u32 fn_80500728(void);
+u32 fn_80500730(void);
+u32 fn_80500738(void);
+u32 fn_80500740(void);
+u32 fn_80500748(void);
+u32 fn_80500750(void);
+u32 fn_80500758(void);
+u32 fn_80500760(void);
+u32 fn_80500768(void);
+u32 fn_80500770(void);
+u32 fn_80500778(void);
+u32 fn_80500780(void);
+u32 fn_80500788(void);
+u32 fn_80500790(void);
 void fn_80500798(void);
 void fn_805007A0(void);
 void fn_805007A8(void);
@@ -1073,11 +1073,9 @@ lbl_fn_804FFE08_0000080C:
     blr
 }
 
-asm void fn_80500628(void)
+u32 fn_80500628(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_80500630(void)
@@ -1152,109 +1150,79 @@ lbl_fn_805006C4_00000900:
     blr
 }
 
-asm void fn_80500720(void)
+u32 fn_80500720(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_80500728(void)
+u32 fn_80500728(void)
 {
-    nofralloc
-    li r3, 0x3e
-    blr
+    return 0x3e;
 }
 
-asm void fn_80500730(void)
+u32 fn_80500730(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_80500738(void)
+u32 fn_80500738(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
-asm void fn_80500740(void)
+u32 fn_80500740(void)
 {
-    nofralloc
-    li r3, 0x3d
-    blr
+    return 0x3d;
 }
 
-asm void fn_80500748(void)
+u32 fn_80500748(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_80500750(void)
+u32 fn_80500750(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_80500758(void)
+u32 fn_80500758(void)
 {
-    nofralloc
-    li r3, 0x3c
-    blr
+    return 0x3c;
 }
 
-asm void fn_80500760(void)
+u32 fn_80500760(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_80500768(void)
+u32 fn_80500768(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_80500770(void)
+u32 fn_80500770(void)
 {
-    nofralloc
-    li r3, 0x3b
-    blr
+    return 0x3b;
 }
 
-asm void fn_80500778(void)
+u32 fn_80500778(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_80500780(void)
+u32 fn_80500780(void)
 {
-    nofralloc
-    li r3, 0x14
-    blr
+    return 0x14;
 }
 
-asm void fn_80500788(void)
+u32 fn_80500788(void)
 {
-    nofralloc
-    li r3, 0x39
-    blr
+    return 0x39;
 }
 
-asm void fn_80500790(void)
+u32 fn_80500790(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_80500798(void)
@@ -2868,7 +2836,7 @@ asm void fn_805011D0(void)
     cmpwi r4, 0x0
     beq lbl_fn_805011D0_00001470
     addi r3, r4, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lwz r3, 0x0(r31)
     li r4, 0x0
     bl atn_Task_setActive
@@ -2876,7 +2844,7 @@ asm void fn_805011D0(void)
     li r0, 0x0
     stw r0, 0x58c(r3)
     lwz r3, 0x0(r31)
-    bl fn_801446F0
+    bl quest_resetObjectiveBounds
     lwz r3, 0x0(r31)
     lwz r0, 0x5c0(r3)
     ori r0, r0, 0x1
@@ -2886,7 +2854,7 @@ asm void fn_805011D0(void)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
     bne lbl_fn_805011D0_00001470
-    bl fn_80176ACC
+    bl battle_activateExpReward
     lwz r3, 0x0(r31)
     li r4, 0x0
     bl atn_Task_setActive
@@ -2900,7 +2868,7 @@ asm void fn_805011D0(void)
     rlwinm r0, r0, 0, 7, 5
     stw r0, 0x12a4(r3)
     lwz r3, 0x0(r31)
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
 lbl_fn_805011D0_00001470:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

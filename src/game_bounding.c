@@ -19,7 +19,7 @@ extern void fn_801018E4(void);
 extern void fn_80101CDC(void);
 extern void fn_80102EAC(void);
 extern void fn_8010895C(void);
-extern void fn_80108C10(void);
+extern void hurtbox_testCollisionLayer(void);
 extern void fn_80109864(void);
 extern void fn_8010B180(void);
 extern void fn_8010B250(void);
@@ -33,7 +33,7 @@ extern void fn_80133EE8(void);
 extern void fn_80133F18(void);
 extern void fn_80133F6C(void);
 extern void fn_80134168(void);
-extern void fn_80148B0C(void);
+extern void quest_getRewardItemSlot(void);
 extern void fn_801533C8(void);
 extern void battle_canTargetActor(void);
 extern void fn_801789D8(void);
@@ -47,7 +47,7 @@ extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void fn_8021A8D0(void);
 extern void fn_8021E48C(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void fn_80376238(void);
 extern void fn_803E2110(void);
 extern void fn_803E5E64(void);
@@ -209,7 +209,7 @@ lbl_fn_800FD658_00000064:
 lbl_fn_800FD658_00000180:
     mr r3, r29
     li r4, 0x0
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     psq_l f1, 0x4(r3), 0, 0
     lfs f2, 0xc(r3)
     psq_st f1, 0x0(r27), 0, 0
@@ -362,7 +362,7 @@ lbl_fn_800FD658_00000350:
 lbl_fn_800FD658_000003CC:
     mr r3, r29
     li r4, 0x0
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     psq_l f1, 0x4(r3), 0, 0
     lfs f2, 0xc(r3)
     psq_st f1, 0x0(r27), 0, 0
@@ -476,7 +476,7 @@ lbl_fn_800FDB20_00000520:
     bne lbl_fn_800FDB20_00000580
     lwz r3, lbl_8087F430
     li r4, 0x13c
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_800FDB20_00000580:
     lwz r3, 0x24(r1)
     li r12, 0x0
@@ -498,7 +498,7 @@ lbl_fn_800FDB20_00000580:
     stw r11, 0x20(r1)
     stw r12, 0xc(r1)
     stw r0, 0x8(r1)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
     li r3, 0x4
     b lbl_fn_800FDB20_000007F0
 lbl_fn_800FDB20_000005DC:
@@ -1518,12 +1518,12 @@ lbl_fn_800FDF14_000013A4:
     beq lbl_fn_800FDF14_000014E0
     lwz r4, 0x40(r26)
     mr r3, r29
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     cmpwi r3, 0x0
     beq lbl_fn_800FDF14_00001474
     lwz r4, 0x40(r26)
     mr r3, r29
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     psq_l f1, 0x4(r3), 0, 0
     addi r4, r1, 0xa0
     lfs f2, 0xc(r3)
@@ -1558,7 +1558,7 @@ lbl_fn_800FDF14_00001488:
     stfs f4, 0xa0(r1)
     stfs f3, 0xa4(r1)
     stfs f0, 0xa8(r1)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
 lbl_fn_800FDF14_000014E0:
     cmpwi r29, 0x0
     beq lbl_fn_800FDF14_00001684
@@ -1727,12 +1727,12 @@ lbl_fn_800FDF14_00001720:
     bl fn_8012DF7C
     lwz r4, 0x40(r26)
     mr r3, r28
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     cmpwi r3, 0x0
     beq lbl_fn_800FDF14_0000179C
     lwz r4, 0x40(r26)
     mr r3, r28
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     psq_l f1, 0x4(r3), 0, 0
     addi r4, r1, 0x80
     lfs f2, 0xc(r3)
@@ -1767,7 +1767,7 @@ lbl_fn_800FDF14_000017B0:
     stfs f4, 0x80(r1)
     stfs f3, 0x84(r1)
     stfs f0, 0x88(r1)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
 lbl_fn_800FDF14_00001808:
     cmpwi r29, 0x0
     beq lbl_fn_800FDF14_00001C34
@@ -1991,12 +1991,12 @@ lbl_fn_800FDF14_00001B14:
     beq lbl_fn_800FDF14_00001BCC
     lwz r4, 0x40(r26)
     mr r3, r21
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     cmpwi r3, 0x0
     beq lbl_fn_800FDF14_00001B6C
     lwz r4, 0x40(r26)
     mr r3, r21
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     psq_l f1, 0x4(r3), 0, 0
     lfs f2, 0xc(r3)
     stfs f2, 0x7c(r1)
@@ -2027,7 +2027,7 @@ lbl_fn_800FDF14_00001B7C:
     stfs f4, 0x74(r1)
     stfs f3, 0x78(r1)
     stfs f0, 0x7c(r1)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
 lbl_fn_800FDF14_00001BCC:
     addi r31, r31, 0x1
     addi r27, r27, 0x4
@@ -2068,12 +2068,12 @@ lbl_fn_800FDF14_00001C34:
     beq lbl_fn_800FDF14_00001CF0
     lwz r4, 0x40(r26)
     mr r3, r28
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     cmpwi r3, 0x0
     beq lbl_fn_800FDF14_00001C84
     lwz r4, 0x40(r26)
     mr r3, r28
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     psq_l f1, 0x4(r3), 0, 0
     addi r4, r1, 0x68
     lfs f2, 0xc(r3)
@@ -2108,7 +2108,7 @@ lbl_fn_800FDF14_00001C98:
     stfs f5, 0x24(r1)
     lwz r8, 0x94(r26)
     stfs f6, 0x28(r1)
-    bl fn_80108C10
+    bl hurtbox_testCollisionLayer
 lbl_fn_800FDF14_00001CF0:
     mr r3, r25
     mr r4, r26

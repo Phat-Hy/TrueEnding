@@ -11,12 +11,12 @@ extern void fn_80063484(void);
 extern void fn_80063764(void);
 extern void fn_8006F2F0(void);
 extern void motion_updateFogAdj(void);
-extern void fn_801255C8(void);
+extern void enemy_stepBehavior(void);
 extern void fn_80128A30(void);
-extern void fn_80139560(void);
+extern void npc_calcTargetDistance(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void battle_applyStatusEffect(void);
 extern void fn_8017E9D8(void);
 extern void fn_8017F118(void);
@@ -143,7 +143,7 @@ asm void fn_8017D0B0(void)
     lwz r0, 0x55c(r3)
     cmpwi r0, 0x6
     bne lbl_fn_8017D0B0_00000110
-    bl fn_80139560
+    bl npc_calcTargetDistance
     mr r3, r31
     bl quest_updateFlow
     b lbl_fn_8017D0B0_00000124
@@ -1798,7 +1798,7 @@ lbl_fn_8017E650_00001750:
     stfs f0, 0x4c(r1)
     stfs f4, 0x44(r1)
     stfs f3, 0x48(r1)
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
     lfs f0, lbl_80881B80
     li r0, 0x0
     stfs f0, 0x2e8(r31)
@@ -1944,7 +1944,7 @@ lbl_fn_8017E650_0000198C:
     li r6, 0x8
     bl fn_80128A30
     addi r3, r31, 0xc64
-    bl fn_801255C8
+    bl enemy_stepBehavior
     mr r3, r31
     bl fn_8017FED0
 lbl_fn_8017E650_000019B4:

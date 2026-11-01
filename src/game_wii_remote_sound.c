@@ -16,7 +16,7 @@ extern void fn_80012D0C(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_800928B0(void);
+extern void compass_findWaypointIndex(void);
 extern void fn_80093F1C(void);
 extern void fn_80094420(void);
 extern void fn_800948F0(void);
@@ -853,7 +853,7 @@ lbl_fn_80555B88_00000AC8:
     mr r27, r3
     mr r4, r31
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_80555B88_00000B20
     li r5, 0x0
@@ -1060,7 +1060,7 @@ lbl_fn_80555B88_00000DF4:
     mr r27, r3
     mr r4, r28
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_80555B88_00000E38
     li r5, 0x0
@@ -1908,7 +1908,7 @@ lbl_fn_80556C08_000019B4:
     stfs f5, 0xe8(r1)
     stfs f4, 0xec(r1)
     stfs f0, 0xf0(r1)
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     lwz r4, 0x48(r29)
     slwi r0, r3, 2
     mr r31, r3

@@ -10,11 +10,11 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_800499D0(void);
-extern void fn_8006B174(void);
+extern void boss_decodePhaseBitfield(void);
 extern void fn_8006BA30(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800839EC(void);
-extern void fn_80083AD4(void);
+extern void town_registerInteractionPoint(void);
+extern void town_updateInteractionPoints(void);
 extern void fn_80087BB4(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
@@ -92,7 +92,7 @@ void str_calcHash(void);
 void fn_800DC978(void);
 void fn_800DC97C(void);
 void fn_800DC980(void);
-void fn_800DCA6C(void);
+void sky_renderStub(void);
 void fn_800DCA70(void);
 void fn_800DCC54(void);
 void fn_800DCCE0(void);
@@ -810,7 +810,7 @@ lbl_fn_800DC980_00000890:
     blr
 }
 
-void fn_800DCA6C(void) {
+void sky_renderStub(void) {
 }
 
 asm void fn_800DCA70(void)
@@ -880,7 +880,7 @@ lbl_fn_800DCA70_000009C0:
     bl actor_dispatchMessage
     mr r4, r30
     addi r3, r1, 0x10
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0x10(r1)
     srwi. r0, r0, 31
     bne lbl_fn_800DCA70_00000A58
@@ -1018,7 +1018,7 @@ asm void fn_800DCCE0(void)
     mr r8, r7
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     cmpwi r3, 0x0
     stw r3, 0x3c(r29)
     bne lbl_fn_800DCCE0_00000C44
@@ -1065,7 +1065,7 @@ lbl_fn_800DCDA0_00000CAC:
     bl fn_805B56C4
     bl dungeon_initGlobalContext
     lwz r4, 0x3c(r31)
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     li r0, 0x0
     stw r0, 0x8(r31)
     stw r0, lbl_8087F010

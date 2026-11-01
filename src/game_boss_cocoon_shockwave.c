@@ -16,12 +16,12 @@ extern void fn_8007C46C(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
-extern void fn_80084A78(void);
+extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void fn_800904E0(void);
 extern void fn_8009A584(void);
 extern void str_findChar(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void fn_8024373C(void);
 extern void fn_80243758(void);
 extern void fn_802437B4(void);
@@ -546,7 +546,7 @@ lbl_taskManager_updateTasks_00000540:
     addi r3, r3, 0x1
     slwi r0, r3, 1
     subf r3, r3, r0
-    bl fn_80084A78
+    bl field_initGridPoints
     stw r3, 0x1c(r1)
     mr r16, r3
     stw r3, 0x10(r1)
@@ -572,7 +572,7 @@ lbl_taskManager_updateTasks_000005BC:
     bl strcpy
     stw r31, 0x18(r1)
     addi r3, r1, 0x18
-    bl fn_800DCA6C
+    bl sky_renderStub
     cmpwi r24, 0x0
     beq lbl_taskManager_updateTasks_000005F8
     addic. r3, r24, 0x4

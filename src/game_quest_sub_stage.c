@@ -12,14 +12,14 @@ extern void fn_80079044(void);
 extern void fn_800791B4(void);
 extern void fn_8007A154(void);
 extern void mem_free(void);
-extern void fn_800C16B4(void);
+extern void skeleton_getGlobalManager(void);
 extern void fn_800C2448(void);
 extern void fn_800CF680(void);
 extern void fn_800DAA3C(void);
 extern void fn_803606CC(void);
 extern void fn_80360780(void);
 extern void kpad_getClampData(void);
-extern void fn_8037D4C0(void);
+extern void dvd_showDiskErrorDialog(void);
 extern void fn_8041D180(void);
 extern void fn_8041D198(void);
 extern void fn_804827D8(void);
@@ -314,7 +314,7 @@ lbl_fn_80483714_00000168:
     stfs f5, 0x44(r1)
     stfs f4, 0x48(r1)
     stfs f3, 0x4c(r1)
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     lwz r0, 0x1bd0(r29)
     addi r7, r29, 0x1c54
     stw r0, 0x3c(r3)
@@ -607,7 +607,7 @@ lbl_fn_80483714_000007A0:
 lbl_fn_80483714_000007C4:
     lwz r28, 0x1bcc(r29)
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     cmpwi r28, 0x0
     stw r28, 0x74(r3)
     li r4, 0x0
@@ -673,7 +673,7 @@ asm void fn_80483E94(void)
     li r5, 0x3c
     li r6, 0x1
     li r7, 0x0
-    bl fn_8037D4C0
+    bl dvd_showDiskErrorDialog
 lbl_fn_80483E94_000008A4:
     lwz r3, lbl_8087EFE8
     cmpwi r3, 0x0
@@ -1259,7 +1259,7 @@ asm void fn_804846FC(void)
     stw r0, 0x30(r1)
     lwz r3, lbl_8087EFB4
     stw r0, 0x38(r1)
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     li r4, 0x0
     bl fn_800C2448
     extrwi r0, r31, 8, 8
@@ -1612,7 +1612,7 @@ asm void fn_80484BF4(void)
     stw r31, 0x2c(r1)
     mr r31, r3
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     addic. r0, r31, 0x1eb8
     li r4, 0x0
     stw r0, 0x74(r3)
@@ -1625,7 +1625,7 @@ lbl_fn_80484BF4_000015E8:
 lbl_fn_80484BF4_000015EC:
     stw r4, 0x70(r3)
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     li r0, -0x1
     stw r0, 0xc8(r3)
     li r3, 0x0
@@ -1809,7 +1809,7 @@ asm void fn_80484E88(void)
     mflr r0
     stw r0, 0x24(r1)
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     li r4, 0x0
     stw r4, 0x74(r3)
     lwz r0, 0x70(r3)

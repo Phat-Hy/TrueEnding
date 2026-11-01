@@ -10,7 +10,7 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void item_testLineOfSight(void);
 extern void mem_free(void);
-extern void fn_8020924C(void);
+extern void mem_findBlockById(void);
 extern void fn_8020A81C(void);
 extern void fn_8020FCE8(void);
 extern void fn_8036E430(void);
@@ -140,7 +140,7 @@ asm void fn_803AAAE4(void)
     cmpwi r3, 0x0
     bne lbl_fn_803AAAE4_000001B0
     lwz r3, 0x8(r31)
-    bl fn_8020924C
+    bl mem_findBlockById
     cmpwi r3, 0x0
     beq lbl_fn_803AAAE4_000000C4
     lwz r3, 0x14(r3)

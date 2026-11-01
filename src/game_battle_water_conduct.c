@@ -8,10 +8,10 @@ extern void _restgpr_27(void);
 extern void _savegpr_22(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_80056DB8(void);
+extern void path_Object_constructor(void);
 extern void fn_80057F28(void);
 extern void fn_80058078(void);
-extern void fn_800580BC(void);
+extern void mission_isObjectiveActive(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
@@ -20,11 +20,11 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void route_createWaypoint(void);
-extern void fn_80088724(void);
+extern void zone_testPointInBounds(void);
 extern void node_createNamedChild(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void fn_80092F1C(void);
+extern void target_pushPointToHistory(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void str_skipWhitespace(void);
@@ -38,8 +38,8 @@ extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_803EC758(void);
-extern void fn_803EC7A0(void);
-extern void fn_803ED774(void);
+extern void barrier_formatDialogString(void);
+extern void dungeon_updateBarrierField(void);
 extern void fn_803F11F8(void);
 extern void fn_8041B4D8(void);
 extern void fn_8041B724(void);
@@ -107,8 +107,8 @@ void fn_8041AFA8(void);
 void fn_8041B018(void);
 void fn_8041B058(void);
 void fn_8041B094(void);
-void fn_8041B27C(void);
-void fn_8041B284(void);
+void *fn_8041B27C(void *p);
+u32 fn_8041B284(const void *p);
 void fn_8041B28C(void);
 
 asm void fn_80419A48(void)
@@ -155,7 +155,7 @@ lbl_fn_80419A48_0000003C:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_80419A48_000000A0:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -211,7 +211,7 @@ lbl_fn_80419AFC_0000012C:
     cmpwi r3, 0x0
     beq lbl_fn_80419AFC_0000016C
     lwz r3, 0x4c4(r30)
-    bl fn_800580BC
+    bl mission_isObjectiveActive
     cmpwi r3, 0x0
     beq lbl_fn_80419AFC_0000016C
     li r3, 0x1
@@ -321,7 +321,7 @@ lbl_fn_80419C00_0000029C:
     mr r3, r23
     addi r4, r23, 0xf4
     addi r5, r1, 0x210
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     b lbl_fn_80419C00_00000A00
 lbl_fn_80419C00_000002F0:
     mr r3, r22
@@ -340,7 +340,7 @@ lbl_fn_80419C00_000002F0:
     addi r3, r23, 0xf4
     addi r4, r1, 0x110
     li r5, 0x0
-    bl fn_80092F1C
+    bl target_pushPointToHistory
     b lbl_fn_80419C00_00000A00
 lbl_fn_80419C00_00000338:
     mr r3, r22
@@ -525,7 +525,7 @@ lbl_fn_80419C00_00000500:
     mr r22, r3
     beq lbl_fn_80419C00_00000600
     li r4, 0x0
-    bl fn_80056DB8
+    bl path_Object_constructor
     stw r31, 0x0(r22)
 lbl_fn_80419C00_00000600:
     stw r22, 0xfc(r1)
@@ -1758,7 +1758,7 @@ lbl_fn_8041B094_000016AC:
     addi r5, r27, 0x78
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_80886514
     mr r3, r30
     lfs f2, lbl_80886518
@@ -1832,18 +1832,14 @@ lbl_fn_8041B094_0000180C:
     blr
 }
 
-asm void fn_8041B27C(void)
+void *fn_8041B27C(void *p)
 {
-    nofralloc
-    addi r3, r3, 0xf4
-    blr
+    return (char *)p + 0xf4;
 }
 
-asm void fn_8041B284(void)
+u32 fn_8041B284(const void *p)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(const u32 *)p;
 }
 
 asm void fn_8041B28C(void)

@@ -7,7 +7,7 @@ extern void _restgpr_20(void);
 extern void _savegpr_17(void);
 extern void _savegpr_20(void);
 extern void dtor_80084684(void);
-extern void fn_8004B290(void);
+extern void sound_initChannelParams(void);
 extern void item_useConsumable(void);
 extern void collision_queryGeometry(void);
 extern void item_testLineOfSight(void);
@@ -1153,7 +1153,7 @@ asm void fn_80378474(void)
     mr r29, r3
     stw r31, 0x0(r3)
     addi r3, r3, 0x8
-    bl fn_8004B290
+    bl sound_initChannelParams
     lfs f0, lbl_80885830
     stw r31, 0x1fc(r29)
     stw r31, 0x214(r29)

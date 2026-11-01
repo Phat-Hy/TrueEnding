@@ -15,15 +15,15 @@ extern void skill_calculateDamage(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
 extern void route_createWaypoint(void);
-extern void fn_80088724(void);
+extern void zone_testPointInBounds(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
 extern void fn_8008B130(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void fn_800902C0(void);
 extern void fn_80092A4C(void);
 extern void atn_Lockon_updateTargetTextures(void);
-extern void fn_80097E80(void);
+extern void cursor_applyAnimationTrack(void);
 extern void motion_updateFogAdj(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -94,17 +94,17 @@ extern u32 lbl_80885F84;
 void task_createWorker(void);
 void task_destroyWorker(void);
 void fn_803EC758(void);
-void fn_803EC7A0(void);
+void barrier_formatDialogString(void);
 void task_updateWorker(void);
-void fn_803ECB7C(void);
+u32 fn_803ECB7C(void);
 void fn_803ECB84(void);
 void fn_803ECBCC(void);
 void fn_803ECBD0(void);
 void fn_803ECBD4(void);
 void task_initWorkerContext(void);
-void fn_803ED5D0(void);
+void barrier_bindFieldAnimation(void);
 void fn_803ED610(void);
-void fn_803ED774(void);
+void dungeon_updateBarrierField(void);
 void fn_803ED8D8(void);
 void fn_803ED8F4(void);
 void fn_803ED92C(void);
@@ -277,7 +277,7 @@ asm void fn_803EC758(void)
     b sprintf
 }
 
-asm void fn_803EC7A0(void)
+asm void barrier_formatDialogString(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -293,94 +293,94 @@ asm void fn_803EC7A0(void)
     mr r26, r3
     li r31, 0x1
     addi r27, r4, lbl_80751DD0@l
-    b lbl_fn_803EC7A0_0000036C
-lbl_fn_803EC7A0_00000270:
+    b lbl_barrier_formatDialogString_0000036C
+lbl_barrier_formatDialogString_00000270:
     mr r3, r26
     addi r4, r27, 0x12
     bl strcmp
     cmpwi r3, 0x0
-    bne lbl_fn_803EC7A0_0000028C
+    bne lbl_barrier_formatDialogString_0000028C
     stw r31, 0xa4(r28)
-    b lbl_fn_803EC7A0_00000360
-lbl_fn_803EC7A0_0000028C:
+    b lbl_barrier_formatDialogString_00000360
+lbl_barrier_formatDialogString_0000028C:
     mr r3, r26
     addi r4, r27, 0x1a
     bl strcmp
     cmpwi r3, 0x0
-    bne lbl_fn_803EC7A0_000002B0
+    bne lbl_barrier_formatDialogString_000002B0
     lwz r0, 0x4(r29)
     ori r0, r0, 0x1800
     stw r0, 0x4(r29)
-    b lbl_fn_803EC7A0_00000360
-lbl_fn_803EC7A0_000002B0:
+    b lbl_barrier_formatDialogString_00000360
+lbl_barrier_formatDialogString_000002B0:
     mr r3, r26
     addi r4, r27, 0x22
     bl strcmp
     cmpwi r3, 0x0
-    bne lbl_fn_803EC7A0_000002D4
+    bne lbl_barrier_formatDialogString_000002D4
     lwz r0, 0x4(r29)
     ori r0, r0, 0x4
     stw r0, 0x4(r29)
-    b lbl_fn_803EC7A0_00000360
-lbl_fn_803EC7A0_000002D4:
+    b lbl_barrier_formatDialogString_00000360
+lbl_barrier_formatDialogString_000002D4:
     mr r3, r26
     addi r4, r27, 0x30
     bl strcmp
     cmpwi r3, 0x0
-    bne lbl_fn_803EC7A0_000002F8
+    bne lbl_barrier_formatDialogString_000002F8
     lwz r0, 0x4(r29)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x4(r29)
-    b lbl_fn_803EC7A0_00000360
-lbl_fn_803EC7A0_000002F8:
+    b lbl_barrier_formatDialogString_00000360
+lbl_barrier_formatDialogString_000002F8:
     mr r3, r26
     addi r4, r27, 0x42
     bl strcmp
     cmpwi r3, 0x0
-    bne lbl_fn_803EC7A0_0000031C
+    bne lbl_barrier_formatDialogString_0000031C
     lwz r0, 0x4(r29)
     ori r0, r0, 0x8
     stw r0, 0x4(r29)
-    b lbl_fn_803EC7A0_00000360
-lbl_fn_803EC7A0_0000031C:
+    b lbl_barrier_formatDialogString_00000360
+lbl_barrier_formatDialogString_0000031C:
     mr r3, r26
     addi r4, r27, 0x52
     bl strcmp
     cmpwi r3, 0x0
-    bne lbl_fn_803EC7A0_00000340
+    bne lbl_barrier_formatDialogString_00000340
     lwz r0, 0x4(r29)
     rlwinm r0, r0, 0, 29, 27
     stw r0, 0x4(r29)
-    b lbl_fn_803EC7A0_00000360
-lbl_fn_803EC7A0_00000340:
+    b lbl_barrier_formatDialogString_00000360
+lbl_barrier_formatDialogString_00000340:
     mr r3, r26
     addi r4, r27, 0x66
     bl strcmp
     cmpwi r3, 0x0
-    bne lbl_fn_803EC7A0_00000360
+    bne lbl_barrier_formatDialogString_00000360
     lwz r0, 0x4(r29)
     oris r0, r0, 0x10
     stw r0, 0x4(r29)
-lbl_fn_803EC7A0_00000360:
+lbl_barrier_formatDialogString_00000360:
     mr r3, r30
     bl talk_formatQuotedString
     mr r26, r3
-lbl_fn_803EC7A0_0000036C:
+lbl_barrier_formatDialogString_0000036C:
     cmpwi r26, 0x0
-    beq lbl_fn_803EC7A0_00000388
+    beq lbl_barrier_formatDialogString_00000388
     mr r4, r26
     addi r3, r27, 0x6f
     bl strcmp
     cmpwi r3, 0x0
-    bne lbl_fn_803EC7A0_00000270
-lbl_fn_803EC7A0_00000388:
+    bne lbl_barrier_formatDialogString_00000270
+lbl_barrier_formatDialogString_00000388:
     lwz r0, 0xa4(r28)
     cmpwi r0, 0x0
-    beq lbl_fn_803EC7A0_000003A0
+    beq lbl_barrier_formatDialogString_000003A0
     lwz r0, 0x4(r29)
     ori r0, r0, 0x1400
     stw r0, 0x4(r29)
-lbl_fn_803EC7A0_000003A0:
+lbl_barrier_formatDialogString_000003A0:
     lmw r26, 0x8(r1)
     lwz r0, 0x24(r1)
     mtlr r0
@@ -557,11 +557,9 @@ lbl_task_updateWorker_000005F4:
     blr
 }
 
-asm void fn_803ECB7C(void)
+u32 fn_803ECB7C(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_803ECB84(void)
@@ -1271,7 +1269,7 @@ lbl_task_initWorkerContext_00001038:
     blr
 }
 
-asm void fn_803ED5D0(void)
+asm void barrier_bindFieldAnimation(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1284,7 +1282,7 @@ asm void fn_803ED5D0(void)
     bl fn_803F0764
     mr r3, r31
     li r4, 0x1
-    bl fn_80097E80
+    bl cursor_applyAnimationTrack
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -1305,7 +1303,7 @@ asm void fn_803ED610(void)
     cmpwi r0, 0x0
     beq lbl_fn_803ED610_000011F4
     mr r3, r4
-    bl fn_8008CD60
+    bl minimap_renderOverlay
     lwz r3, lbl_8087F0A8
     lwz r0, 0x74(r3)
     cmpwi r0, 0x0
@@ -1387,7 +1385,7 @@ lbl_fn_803ED610_000011F4:
     blr
 }
 
-asm void fn_803ED774(void)
+asm void dungeon_updateBarrierField(void)
 {
     nofralloc
     stwu r1, -0x70(r1)
@@ -1398,13 +1396,13 @@ asm void fn_803ED774(void)
     mr r30, r3
     lwz r0, 0x9c(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_803ED774_00001358
+    beq lbl_dungeon_updateBarrierField_00001358
     mr r3, r4
-    bl fn_8008CD60
+    bl minimap_renderOverlay
     lwz r3, lbl_8087F0A8
     lwz r0, 0x74(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_803ED774_00001358
+    beq lbl_dungeon_updateBarrierField_00001358
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x8
     lfs f0, 0x74(r30)
@@ -1422,7 +1420,7 @@ asm void fn_803ED774(void)
     bl PSVECSquareMag
     lfs f0, lbl_80885F5C
     fcmpo cr0, f1, f0
-    bge lbl_fn_803ED774_00001358
+    bge lbl_dungeon_updateBarrierField_00001358
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x14
     addi r5, r30, 0x6c
@@ -1430,10 +1428,10 @@ asm void fn_803ED774(void)
     lfs f0, lbl_80885F54
     lfs f1, 0x1c(r1)
     fcmpo cr0, f0, f1
-    bge lbl_fn_803ED774_00001358
+    bge lbl_dungeon_updateBarrierField_00001358
     lfs f0, lbl_80885F58
     fcmpo cr0, f1, f0
-    bge lbl_fn_803ED774_00001358
+    bge lbl_dungeon_updateBarrierField_00001358
     lis r3, 0x1062
     lwz r9, 0x48(r30)
     addi r0, r3, 0x4dd3
@@ -1473,7 +1471,7 @@ asm void fn_803ED774(void)
     li r7, 0x1
     li r8, 0x0
     bl skill_calculateDamage
-lbl_fn_803ED774_00001358:
+lbl_dungeon_updateBarrierField_00001358:
     lwz r0, 0x74(r1)
     lwz r31, 0x6c(r1)
     lwz r30, 0x68(r1)
@@ -1592,7 +1590,7 @@ lbl_fn_803ED92C_00001468:
     addi r5, r29, 0x78
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_80885F70
     mr r3, r30
     lfs f2, lbl_80885F74
@@ -1601,7 +1599,7 @@ lbl_fn_803ED92C_00001468:
     addi r5, r29, 0x84
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_80885F64
     mr r3, r30
     lfs f2, lbl_80885F68
