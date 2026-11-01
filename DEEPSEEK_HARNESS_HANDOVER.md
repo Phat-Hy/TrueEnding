@@ -16138,3 +16138,35 @@ The only input left is the **texture** - either the texel is zero, or the TEV co
 | 2 | `TLS_AURORA_TEST_MAT_WHITE=1` + `TLS_AURORA_STATS=1`, same window | 250 s; readback **10.38** - raster is not the cause |
 
 Neither run touches the default path (both are env-gated inside the aurora DLL), so the gate is unaffected; the last gate on this build is `gate_apbc2.log`, PASS attempt 1.
+
+---
+
+### AP-BG. THE AURORA ADAPTER'S CONSTANT `texObjId = 0` LOOKS WRONG BY READING AURORA'S OWN CACHE — AND CHANGING IT TO A PER-TEXTURE IDENTITY CHANGED THE FIELD READBACK BY **0.00**, so it is not the content gap and the change is REVERTED to keep the harness reference stable
+
+AP-BF narrowed the dark field frame to the **texture input**. Reading aurora's texture path suggested a concrete, checkable cause in *our* adapter, so it was tested end to end rather than argued.
+
+**1. The suspicion, from aurora's source (not from screenshots).** `tools/aurora_spike/aurora_replay.cpp`'s `emit_texobj` sent `texObjId = 0` and `texDataVersion = 0` for **every** texture. In aurora:
+
+* `lib/gx/texture.cpp:612-614` and `:836` reuse a cached texture handle when `entry.texDataVersion == obj.texDataVersion` and the sampler binding when `texObjId`/`texDataVersion` match — so a constant `0/0` for all textures would make every textured draw share one cache slot and one version;
+* `texture.cpp:170` `clear_texture_dependency()` **returns early when `texObjId == 0`**, so an EFB copy that rewrites a texture's content could never invalidate the draws that sample it;
+* real GX never produces 0: `GXTexture.cpp` assigns ids from `sNextTexObjId` starting at 1 and versions from 1.
+
+That is exactly the shape of AP-BF's symptom (geometry fine, shading dark) and AP-AN's "68 % zero texels", and it is *our* code, so it was worth one build and one run.
+
+**2. The change, measured.** `emit_texobj` was given an identity keyed by the guest address (two maps sampling one texture share an id, correctly) with a version that increments when that texture's size/format changes, ids starting at `0x40000000` so "no object" stays 0. The DLL rebuilt in **4 s** (`cmake --build build2 --target tls_aurora_live`, which `build.ps1` does not build — it only builds `tls_gx_replay`) and the ids are visibly distinct:
+
+```
+[replay] texobj map 0 -> 0x91884100 128x128 fmt 14 id 0x40000000 v1
+[replay] texobj map 1 -> 0x9194F5A0 128x128 fmt 14 id 0x40000001 v1
+[replay] texobj map 2 -> 0x904E6D00 128x128 fmt  1 id 0x40000002 v1
+[replay] texobj map 3 -> 0x91FA00E0 512x512 fmt 14 id 0x40000003 v1
+[replay] texobj map 4 -> 0x904E6D00 128x128 fmt  1 id 0x40000002 v1   <- same address, same id: intended
+```
+
+and the field frame came back **`mean=(10.37, 12.72, 7.09)` — identical to the digit** to the run before the change. **So the texture-cache identity is not what makes the field dark.** The reading of aurora's cache was right and the conclusion was wrong, which is why the run mattered.
+
+**3. Reverted, deliberately.** The source change is reverted and the DLL rebuilt back (byte-identical size, `5c.46` reference behaviour restored), because the harness (`tls_gx_replay`) uses the *same* `emit_texobj`, and the equality instrument's numbers must not move without a measurement of their own. A correctness change with a measured `0.00` effect does not earn a reference re-record.
+
+**4. What it narrows, and the next candidate.** Not texture identity. The remaining candidates for "the sampled texel is zero" are: (a) the **texture content** never reaching aurora's upload — the guest's texture bytes are read by aurora through the mapped MEM2 plane, so a wrong address mapping (`image3` decode → cached alias) would sample zeros; (b) the **copy-resolution path** (`resolve_sampled_textures` binding a copy destination's shadow texture) not matching these draws; (c) the **TEV stage's texture coordinate** selecting a texel outside the image. (a) is checkable statically against one emitted texobj: `0x904E6D00` and `0x91884100` are MEM2 addresses, so the next step is to read those texels out of the guest plane in the same run and compare them with what the layer's decoder produces for the same address — the same "content vs sampling" split that closed priority B.
+
+**5. Run log.** DLL rebuild 4 s; run 2 810 frames, exit code 0 in 280 s, feeds whole-frame (203 draws at 2801), readback identical to AP-BF's baseline. Source reverted, DLL rebuilt back, tree clean.
