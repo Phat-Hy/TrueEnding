@@ -152,9 +152,9 @@ void fn_8068204C(void);
 void fn_806820D4(void);
 void fn_80682204(void);
 void strcpy(void);
-void strncpy(void);
-void strcat(void);
-void strncat(void);
+char* strncpy(char* dst, const char* src, u32 n);
+char* strcat(char* dst, const char* src);
+char* strncat(char* dst, const char* src, u32 n);
 void strcmp(void);
 void strncmp(void);
 void strchr(void);
@@ -183,7 +183,7 @@ void fn_80685ECC(void);
 void fn_80686858(void);
 void swprintf(void);
 void vswprintf(void);
-void wcslen(void);
+u32 wcslen(const u16* str);
 void fn_80686A64(void);
 void fn_80686A80(void);
 void fn_80686AC4(void);
@@ -8518,76 +8518,50 @@ lbl_strcpy_00006EEC:
     blr
 }
 
-asm void strncpy(void)
+char* strncpy(char* dst, const char* src, u32 n)
 {
-    nofralloc
-    subi r4, r4, 0x1
-    subi r6, r3, 0x1
-    addi r5, r5, 0x1
-    b lbl_strncpy_00006F38
-lbl_strncpy_00006F10:
-    lbzu r0, 0x1(r4)
-    stbu r0, 0x1(r6)
-    cmpwi r0, 0x0
-    bne lbl_strncpy_00006F38
-    li r0, 0x0
-    b lbl_strncpy_00006F2C
-lbl_strncpy_00006F28:
-    stbu r0, 0x1(r6)
-lbl_strncpy_00006F2C:
-    subic. r5, r5, 0x1
-    bne lbl_strncpy_00006F28
-    blr
-lbl_strncpy_00006F38:
-    subic. r5, r5, 0x1
-    bne lbl_strncpy_00006F10
-    blr
+    const u8* s = (const u8*)src - 1;
+    u8* d = (u8*)dst - 1;
+    n++;
+    while (--n != 0) {
+        if ((*++d = *++s) == 0) {
+            while (--n != 0) {
+                *++d = 0;
+            }
+            break;
+        }
+    }
+    return dst;
 }
 
-asm void strcat(void)
+char* strcat(char* dst, const char* src)
 {
-    nofralloc
-    subi r4, r4, 0x1
-    subi r5, r3, 0x1
-lbl_strcat_00006F4C:
-    lbzu r0, 0x1(r5)
-    cmpwi r0, 0x0
-    bne lbl_strcat_00006F4C
-    subi r5, r5, 0x1
-lbl_strcat_00006F5C:
-    lbzu r0, 0x1(r4)
-    stbu r0, 0x1(r5)
-    cmpwi r0, 0x0
-    bne lbl_strcat_00006F5C
-    blr
+    const u8* s = (const u8*)src - 1;
+    u8* d = (u8*)dst - 1;
+    do {
+    } while (*++d != 0);
+    d--;
+    do {
+    } while ((*++d = *++s) != 0);
+    return dst;
 }
 
-asm void strncat(void)
+char* strncat(char* dst, const char* src, u32 n)
 {
-    nofralloc
-    subi r4, r4, 0x1
-    subi r6, r3, 0x1
-lbl_strncat_00006F78:
-    lbzu r0, 0x1(r6)
-    cmpwi r0, 0x0
-    bne lbl_strncat_00006F78
-    subi r6, r6, 0x1
-    addi r5, r5, 0x1
-    b lbl_strncat_00006FA8
-lbl_strncat_00006F90:
-    lbzu r0, 0x1(r4)
-    stbu r0, 0x1(r6)
-    cmpwi r0, 0x0
-    bne lbl_strncat_00006FA8
-    subi r6, r6, 0x1
-    b lbl_strncat_00006FB0
-lbl_strncat_00006FA8:
-    subic. r5, r5, 0x1
-    bne lbl_strncat_00006F90
-lbl_strncat_00006FB0:
-    li r0, 0x0
-    stb r0, 0x1(r6)
-    blr
+    const u8* s = (const u8*)src - 1;
+    u8* d = (u8*)dst - 1;
+    do {
+    } while (*++d != 0);
+    d--;
+    n++;
+    while (--n != 0) {
+        if ((*++d = *++s) == 0) {
+            d--;
+            break;
+        }
+    }
+    *++d = 0;
+    return dst;
 }
 
 asm void strcmp(void)
@@ -13831,17 +13805,14 @@ lbl_vswprintf_0000B5C0:
     blr
 }
 
-asm void wcslen(void)
+u32 wcslen(const u16* str)
 {
-    nofralloc
-    subi r4, r3, 0x2
-    li r3, -0x1
-lbl_wcslen_0000B5E4:
-    lhzu r0, 0x2(r4)
-    addi r3, r3, 0x1
-    cmpwi r0, 0x0
-    bne lbl_wcslen_0000B5E4
-    blr
+    u32 len = -1;
+    const u16* p = str - 1;
+    do {
+        len++;
+    } while (*++p != 0);
+    return len;
 }
 
 asm void fn_80686A64(void)
