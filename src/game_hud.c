@@ -82,10 +82,10 @@ void hud_drawTargetMarker(void);
 void hud_projectWorldPoints(void);
 void hud_copyBoneMatrices(void);
 void atn_HUD_projectWorldPoints(void);
-void fn_8009F688(void);
+u32 fn_8009F688(void);
 void fn_8009F690(void);
 void fn_8009F694(void);
-void fn_8009F704(void);
+u32 fn_8009F704(void);
 void fn_8009F70C(void);
 void fn_8009F788(void);
 void fn_8009FE24(void);
@@ -1539,11 +1539,9 @@ lbl_atn_HUD_projectWorldPoints_0000148C:
     blr
 }
 
-asm void fn_8009F688(void)
+u32 fn_8009F688(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 void fn_8009F690(void) {
@@ -1583,11 +1581,9 @@ lbl_fn_8009F694_0000150C:
     blr
 }
 
-asm void fn_8009F704(void)
+u32 fn_8009F704(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_8009F70C(void)

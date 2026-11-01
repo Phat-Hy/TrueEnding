@@ -117,7 +117,7 @@ void fn_8017C974(void);
 void fn_8017C9A0(void);
 void fn_8017C9AC(void);
 void fn_8017CB2C(void);
-void fn_8017CB6C(void);
+u32 fn_8017CB6C(void);
 void fn_8017CB74(void);
 void fn_8017CB9C(void);
 
@@ -1794,11 +1794,9 @@ lbl_fn_8017CB2C_000017A4:
     blr
 }
 
-asm void fn_8017CB6C(void)
+u32 fn_8017CB6C(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8017CB74(void)

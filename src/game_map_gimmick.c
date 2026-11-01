@@ -95,8 +95,8 @@ extern u32 lbl_80881E4C;
 
 /* Function declarations */
 void fn_80185628(void);
-void fn_801856A4(void);
-void fn_801856AC(void);
+void *fn_801856A4(void *obj);
+void *fn_801856AC(void *obj);
 void fn_801856B4(void);
 void fn_801856B8(void);
 void fn_80185AD4(void);
@@ -139,18 +139,14 @@ asm void fn_80185628(void)
     blr
 }
 
-asm void fn_801856A4(void)
+void *fn_801856A4(void *obj)
 {
-    nofralloc
-    addi r3, r3, 0xc
-    blr
+    return (char *)obj + 0xc;
 }
 
-asm void fn_801856AC(void)
+void *fn_801856AC(void *obj)
 {
-    nofralloc
-    addi r3, r3, 0x1c
-    blr
+    return (char *)obj + 0x1c;
 }
 
 void fn_801856B4(void) {

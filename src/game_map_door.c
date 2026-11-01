@@ -77,8 +77,8 @@ void fn_80187E2C(void);
 void fn_80187FF4(void);
 void fn_80188060(void);
 void fn_80188064(void);
-void fn_80188080(void);
-void fn_80188088(void);
+u32 fn_80188080(void);
+u32 fn_80188088(void);
 void fn_80188090(void);
 void fn_801880D0(void);
 void fn_801881C4(void);
@@ -416,18 +416,14 @@ asm void fn_80188064(void)
     blr
 }
 
-asm void fn_80188080(void)
+u32 fn_80188080(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_80188088(void)
+u32 fn_80188088(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_80188090(void)

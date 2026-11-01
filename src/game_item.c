@@ -93,10 +93,10 @@ void fn_8004CB70(void);
 void fn_8004CBB0(void);
 void fn_8004CCA0(void);
 void fn_8004CD5C(void);
-void atn_ColliBase_testRay(void);
+u32 atn_ColliBase_testRay(void);
 void fn_8004CF3C(void);
-void atn_ColliBase_testSphere(void);
-void atn_ColliBase_testCapsule(void);
+u32 atn_ColliBase_testSphere(void);
+u32 atn_ColliBase_testCapsule(void);
 void fn_8004D124(void);
 void atn_ColliBase_getAABB(void);
 void fn_8004D258(void);
@@ -2004,11 +2004,9 @@ lbl_fn_8004CD5C_00001BA8:
     blr
 }
 
-asm void atn_ColliBase_testRay(void)
+u32 atn_ColliBase_testRay(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8004CF3C(void)
@@ -2147,18 +2145,14 @@ lbl_fn_8004CF3C_00001D88:
     blr
 }
 
-asm void atn_ColliBase_testSphere(void)
+u32 atn_ColliBase_testSphere(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void atn_ColliBase_testCapsule(void)
+u32 atn_ColliBase_testCapsule(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8004D124(void)

@@ -92,10 +92,10 @@ void fn_80441E88(void);
 void fn_80441E8C(void);
 void fn_80441F24(void);
 void fn_80442A9C(void);
-void fn_80442B48(void);
+void *fn_80442B48(void *obj);
 void fn_80442B50(void);
 void fn_80442E64(void);
-void fn_80442EA4(void);
+void *fn_80442EA4(void *obj);
 void fn_80442EAC(void);
 void fn_80442ECC(void);
 void fn_80442F10(void);
@@ -990,11 +990,9 @@ asm void fn_80442A9C(void)
     blr
 }
 
-asm void fn_80442B48(void)
+void *fn_80442B48(void *obj)
 {
-    nofralloc
-    lwz r3, 0xa0(r3)
-    blr
+    return *(void **)((char *)obj + 0xa0);
 }
 
 asm void fn_80442B50(void)
@@ -1235,11 +1233,9 @@ lbl_fn_80442E64_00001038:
     blr
 }
 
-asm void fn_80442EA4(void)
+void *fn_80442EA4(void *obj)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(void **)((char *)obj + 4);
 }
 
 asm void fn_80442EAC(void)

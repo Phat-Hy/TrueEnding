@@ -90,8 +90,8 @@ extern u32 lbl_80881C38;
 extern u32 lbl_80881C3C;
 
 /* Function declarations */
-void fn_80180594(void);
-void fn_8018059C(void);
+u32 fn_80180594(void);
+u32 fn_8018059C(void);
 void fn_801805A4(void);
 void fn_80180960(void);
 void fn_801809F4(void);
@@ -105,18 +105,14 @@ void fn_8018161C(void);
 void fn_80181A64(void);
 void fn_80181D94(void);
 
-asm void fn_80180594(void)
+u32 fn_80180594(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_8018059C(void)
+u32 fn_8018059C(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F090
-    blr
+    return lbl_8087F090;
 }
 
 asm void fn_801805A4(void)
@@ -487,10 +483,9 @@ lbl_fn_801809F4_00000534:
     blr
 }
 
-asm void fn_80180ADC(void)
+void fn_80180ADC(void)
 {
-    nofralloc
-    b dialog_renderWindow
+    dialog_renderWindow();
 }
 
 asm void fn_80180AE0(void)

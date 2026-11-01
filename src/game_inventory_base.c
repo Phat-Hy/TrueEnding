@@ -55,7 +55,7 @@ extern u32 lbl_80881B18;
 /* Function declarations */
 void fn_801511C4(void);
 void fn_80151204(void);
-void fn_80151210(void);
+u32 fn_80151210(void);
 void fn_80151218(void);
 void fn_8015121C(void);
 void fn_8015123C(void);
@@ -94,11 +94,9 @@ asm void fn_80151204(void)
     b fn_803E2110
 }
 
-asm void fn_80151210(void)
+u32 fn_80151210(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F490
-    blr
+    return lbl_8087F490;
 }
 
 void fn_80151218(void) {

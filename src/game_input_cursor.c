@@ -89,17 +89,16 @@ void fn_802F2C50(void);
 void fn_802F2D1C(void);
 void fn_802F2FA4(void);
 void fn_802F31D4(void);
-void fn_802F3394(void);
+u32 fn_802F3394(void);
 void fn_802F339C(void);
 void fn_802F33A0(void);
 void fn_802F389C(void);
 void fn_802F3BE8(void);
 void fn_802F42CC(void);
 
-asm void fn_802F2AF4(void)
+void fn_802F2AF4(void)
 {
-    nofralloc
-    b dialog_renderWindow
+    dialog_renderWindow();
 }
 
 asm void fn_802F2AF8(void)
@@ -700,11 +699,9 @@ lbl_fn_802F31D4_00000724:
     blr
 }
 
-asm void fn_802F3394(void)
+u32 fn_802F3394(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 void fn_802F339C(void) {

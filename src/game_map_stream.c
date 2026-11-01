@@ -96,7 +96,7 @@ void fn_80191E38(void);
 void fn_80191EA4(void);
 void fn_80191FF8(void);
 void fn_80192130(void);
-void fn_80192190(void);
+u32 fn_80192190(void);
 void fn_80192198(void);
 void fn_80192378(void);
 void fn_801923B8(void);
@@ -714,11 +714,9 @@ asm void fn_80192130(void)
     blr
 }
 
-asm void fn_80192190(void)
+u32 fn_80192190(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_80192198(void)

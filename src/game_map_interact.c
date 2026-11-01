@@ -289,10 +289,9 @@ lbl_fn_80183B2C_00000184:
     blr
 }
 
-asm void fn_80183C54(void)
+void fn_80183C54(void)
 {
-    nofralloc
-    b bloom_processPasses
+    bloom_processPasses();
 }
 
 asm void fn_80183C58(void)

@@ -90,7 +90,7 @@ void fn_800112E0(void);
 void mtx_multVec(void *v, const void *m);
 void fn_80011420(void);
 void fn_80011964(void);
-void fn_800119B8(void);
+u32 fn_800119B8(void);
 void fn_800119C0(void);
 void fn_80011E98(void);
 void fn_80012054(void);
@@ -102,7 +102,7 @@ void fn_800125C8(void);
 void fn_8001260C(void);
 void fn_80012638(void);
 void fn_8001268C(void);
-void fn_80012714(void);
+u32 fn_80012714(void);
 void fn_8001271C(void);
 void fn_80012774(void);
 void fn_800127CC(void);
@@ -110,7 +110,7 @@ void fn_8001282C(void);
 void fn_800128FC(void);
 void fn_80012934(void);
 void fn_8001296C(void);
-void fn_80012A14(void);
+u32 fn_80012A14(void);
 void fn_80012A1C(void);
 void fn_80012AC4(void);
 void fn_80012C3C(void);
@@ -1870,11 +1870,9 @@ lbl_fn_80011964_00001894:
     blr
 }
 
-asm void fn_800119B8(void)
+u32 fn_800119B8(void)
 {
-    nofralloc
-    li r3, 0x8
-    blr
+    return 8;
 }
 
 asm void fn_800119C0(void)
@@ -2907,11 +2905,9 @@ lbl_fn_8001268C_000025E8:
     blr
 }
 
-asm void fn_80012714(void)
+u32 fn_80012714(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8001271C(void)
@@ -3168,11 +3164,9 @@ lbl_fn_8001296C_000028F0:
     blr
 }
 
-asm void fn_80012A14(void)
+u32 fn_80012A14(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_80012A1C(void)
