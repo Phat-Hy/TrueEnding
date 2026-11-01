@@ -45,7 +45,7 @@ extern void thread_findAndNotifySlot(void);
 extern void fn_801FEDBC(void);
 extern void printf(void);
 extern void wcslen(void);
-extern void fn_80686B24(void);
+extern void wcsncmp(void);
 extern void abort(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
@@ -612,7 +612,7 @@ lbl_fn_801F1418_000006E4:
     bgt lbl_fn_801F1418_00000744
     mr r3, r28
     addi r4, r29, 0x2
-    bl fn_80686B24
+    bl wcsncmp
     cmpwi r3, 0x0
     bne lbl_fn_801F1418_00000744
     mulli r0, r27, 0x34
@@ -694,7 +694,7 @@ lbl_fn_801F14FC_00000804:
     bgt lbl_fn_801F14FC_00000854
     mr r3, r24
     addi r4, r25, 0x2
-    bl fn_80686B24
+    bl wcsncmp
     cmpwi r3, 0x0
     bne lbl_fn_801F14FC_00000854
     mulli r0, r27, 0x34
@@ -795,7 +795,7 @@ lbl_fn_801F1658_0000095C:
     mr r5, r20
     add r3, r3, r21
     addi r4, r22, 0x2
-    bl fn_80686B24
+    bl wcsncmp
     cmpwi r3, 0x0
     bne lbl_fn_801F1658_00000A04
     subi r0, r31, 0x1

@@ -33,7 +33,7 @@ extern void fn_801F4AA0(void);
 extern void fn_801F4C14(void);
 extern void thread_findAndNotify(void);
 extern void thread_dispatchToQueue(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void fn_80211734(void);
 extern void task_findEntryById(void);
 extern void world_getGlobalFlag(void);
@@ -149,7 +149,7 @@ lbl_fn_801E97E8_00000044:
     b lbl_fn_801E97E8_00000090
 lbl_fn_801E97E8_00000054:
     lwz r3, 0x50(r30)
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     beq lbl_fn_801E97E8_00000088
     bl fn_80211734
@@ -424,7 +424,7 @@ asm void fn_801E9B84(void)
     slwi r0, r31, 2
     add r29, r30, r0
     lwz r3, 0x50(r29)
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_801E9B84_000006A0
@@ -679,7 +679,7 @@ lbl_fn_801E9ECC_000007C4:
     slwi r0, r0, 2
     add r3, r30, r0
     lwz r3, 0x50(r3)
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_fn_801E9ECC_00000810
@@ -731,7 +731,7 @@ asm void fn_801EA01C(void)
     cmpwi r3, 0x0
     ble lbl_fn_801EA01C_000008BC
     mr r3, r30
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r30, 0x71
     lwz r31, 0xc4(r3)
     bne lbl_fn_801EA01C_000008BC
@@ -768,7 +768,7 @@ asm void fn_801EA0B4(void)
     cmpwi r31, 0x0
     beq lbl_fn_801EA0B4_0000092C
     mr r3, r31
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     beq lbl_fn_801EA0B4_0000092C
     bl fn_80211734

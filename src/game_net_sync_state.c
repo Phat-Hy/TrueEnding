@@ -13,7 +13,7 @@ extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void morph_updateMesh(void);
 extern void str_findChar(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_801F4728(void);
 extern void fn_801F4CB4(void);
@@ -200,7 +200,7 @@ lbl_fn_804C9C88_000001A4:
     beq lbl_fn_804C9C88_000001D0
     addi r3, r1, 0x10
     li r4, 0x3
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -222,7 +222,7 @@ lbl_fn_804C9C88_000001D0:
 lbl_fn_804C9C88_00000200:
     addi r3, r1, 0xc
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -237,7 +237,7 @@ lbl_fn_804C9C88_00000220:
     beq lbl_fn_804C9C88_00000254
     addi r3, r1, 0x8
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -289,7 +289,7 @@ lbl_fn_804C9EF8_000002D0:
     beq lbl_fn_804C9EF8_00000310
     addi r3, r1, 0x14
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -318,7 +318,7 @@ lbl_fn_804C9EF8_0000034C:
     stw r29, lbl_8087F5D8
     addi r3, r1, 0x10
     li r4, 0x3
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -345,7 +345,7 @@ lbl_fn_804C9EF8_000003AC:
     stw r29, lbl_8087F5D8
     addi r3, r1, 0xc
     li r4, 0x3
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -862,7 +862,7 @@ lbl_fn_804CA250_00000AAC:
     addi r3, r1, 0xc
     stfs f0, 0x170(r29)
     li r4, 0x3
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle

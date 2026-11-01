@@ -6,7 +6,7 @@ extern void __files(void);
 extern void dtor_80084684(void);
 extern void mem_free(void);
 extern void fn_8011728C(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void fn_802114E0(void);
 extern void fn_8021150C(void);
 extern void fn_80444804(void);
@@ -462,7 +462,7 @@ lbl_fn_80517B40_00000594:
     subf r0, r30, r27
     mr r28, r3
     clrlwi r29, r0, 16
-    bl fn_80211480
+    bl event_findEntryById
     mr r22, r3
     mr r3, r28
     bl fn_8021150C

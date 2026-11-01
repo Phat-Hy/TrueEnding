@@ -13,7 +13,7 @@ extern void fn_8001271C(void);
 extern void fn_8001282C(void);
 extern void fn_800128FC(void);
 extern void fn_8001296C(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80069BF4(void);
 extern void fn_8006B174(void);
@@ -459,7 +459,7 @@ asm void fn_80557F88(void)
     mr r23, r3
     mr r3, r30
     mr r4, r23
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r3, r30
     stb r0, 0x10(r1)

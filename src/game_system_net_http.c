@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void atn_LH_Binary_destructor(void);
 extern void item_useConsumable(void);
@@ -1695,7 +1695,7 @@ asm void fn_803936A4(void)
     mr r23, r3
     mr r3, r24
     mr r4, r23
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x34(r1)
     mr r3, r24
     stb r0, 0x30(r1)
@@ -1811,7 +1811,7 @@ lbl_fn_803936A4_0000190C:
     mr r20, r3
     addi r3, r1, 0x48
     mr r4, r20
-    bl fn_80013DC4
+    bl actor_validateIndex
     stb r28, 0x20(r1)
     mr r6, r22
     addi r3, r1, 0x48

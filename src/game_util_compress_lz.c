@@ -21,7 +21,7 @@ extern void atn_Task_setActive(void);
 extern void str_findChar(void);
 extern void fn_80116FC0(void);
 extern void fn_801170C8(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void fn_801F3FF8(void);
 extern void fn_801F48C8(void);
 extern void fn_801F4CB4(void);
@@ -41,7 +41,7 @@ extern void fn_80206B9C(void);
 extern void fn_80206C50(void);
 extern void fn_8020EF04(void);
 extern void fn_8020EFEC(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void fn_8021154C(void);
 extern void fn_80211648(void);
 extern void fn_80212714(void);
@@ -148,7 +148,7 @@ asm void fn_805895B8(void)
     cmpwi r0, 0x0
     beq lbl_fn_805895B8_000000BC
     lwz r3, 0x4(r30)
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     beq lbl_fn_805895B8_00000098
     bl fn_80211648
@@ -180,7 +180,7 @@ lbl_fn_805895B8_000000D8:
     bne lbl_fn_805895B8_00000128
     addi r3, r1, 0x14
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -201,7 +201,7 @@ lbl_fn_805895B8_00000128:
     bne lbl_fn_805895B8_00000178
     addi r3, r1, 0x10
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -220,7 +220,7 @@ lbl_fn_805895B8_00000128:
 lbl_fn_805895B8_00000178:
     addi r3, r1, 0xc
     li r4, 0xb
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -245,7 +245,7 @@ lbl_fn_805895B8_000001C0:
     beq lbl_fn_805895B8_00000208
     addi r3, r1, 0x8
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -338,7 +338,7 @@ lbl_fn_805897D8_0000030C:
     bl fn_8044D56C
     addi r3, r1, 0x8
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -562,7 +562,7 @@ lbl_fn_80589AF8_000005B4:
     slwi r0, r4, 4
     add r23, r3, r0
     lwz r3, 0x4(r23)
-    bl fn_80211480
+    bl event_findEntryById
     lwz r0, 0xc(r23)
     mr r21, r3
     cmpwi r0, 0x0
@@ -714,7 +714,7 @@ asm void fn_80589DE4(void)
     lwz r5, 0x6000(r5)
     bl fn_801F4CB4
     lwz r3, 0x4(r30)
-    bl fn_80211480
+    bl event_findEntryById
     lwz r0, 0xc(r30)
     mr r26, r3
     cmpwi r0, 0x0
@@ -863,7 +863,7 @@ lbl_fn_80589DE4_00000A68:
     cmpwi r0, 0x0
     beq lbl_fn_80589DE4_00000AE0
     lwz r3, 0x4(r30)
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_80589DE4_00000B00
@@ -918,7 +918,7 @@ asm void fn_8058A0F4(void)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
     lwz r3, 0x4(r4)
-    bl fn_80211480
+    bl event_findEntryById
     mr r31, r3
     lwz r3, 0x4(r27)
     bl fn_80206C50
@@ -1666,7 +1666,7 @@ lbl_fn_8058AAC0_00001608:
     cmpwi r25, 0x0
     bne lbl_fn_8058AAC0_00001620
     lwz r3, 0x0(r27)
-    bl fn_80211480
+    bl event_findEntryById
     bl fn_80212714
     stw r30, 0x0(r27)
 lbl_fn_8058AAC0_00001620:

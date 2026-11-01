@@ -27,7 +27,7 @@ extern void fn_800E0908(void);
 extern void fn_80119ECC(void);
 extern void fn_8012AFE8(void);
 extern void fn_80209120(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void fn_8021E444(void);
 extern void fn_80366364(void);
 extern void world_getGlobalFlag(void);
@@ -57,7 +57,7 @@ extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_80572B70(void);
 extern void wcslen(void);
-extern void fn_80686A64(void);
+extern void wcscpy(void);
 extern void fn_8068B2A0(void);
 extern void fn_8068B770(void);
 extern void fn_8068BC30(void);
@@ -1434,7 +1434,7 @@ lbl_fn_803B35FC_000010A8:
     bl talk_parseDialogue
     mr r4, r3
     lwz r3, 0x8(r30)
-    bl fn_80686A64
+    bl wcscpy
     lwz r3, 0x8(r30)
     bl wcslen
     li r6, 0x0
@@ -2083,7 +2083,7 @@ lbl_fn_803B3D2C_00001980:
     b lbl_fn_803B3D2C_00001ACC
 lbl_fn_803B3D2C_000019B8:
     mr r3, r21
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     beq lbl_fn_803B3D2C_00001ACC
     lwz r0, 0x54(r1)

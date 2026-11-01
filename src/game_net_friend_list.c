@@ -84,7 +84,7 @@ extern void fn_8050CDD4(void);
 extern void fn_8050CFCC(void);
 extern void fn_8050E514(void);
 extern void printf(void);
-extern void fn_80686A64(void);
+extern void wcscpy(void);
 extern void abort(void);
 extern void fn_806958E0(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -1703,7 +1703,7 @@ lbl_fn_804D0328_000014A4:
     stw r28, 0x8(r27)
     stw r28, 0xc(r27)
     stw r28, 0x30(r27)
-    bl fn_80686A64
+    bl wcscpy
     addi r27, r27, 0x34
     cmplw r27, r26
     blt lbl_fn_804D0328_000014A4

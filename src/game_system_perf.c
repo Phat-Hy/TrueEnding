@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void dtor_80084684(void);
 extern void fn_8000FAE4(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8004FF58(void);
 extern void fn_8006AD24(void);
@@ -81,7 +81,7 @@ void fn_80202A6C(void);
 void fn_80202AF0(void);
 void fn_80202C4C(void);
 void fn_80202CA4(void);
-void fn_80202D00(void);
+void perf_getMetricValue(void);
 void fn_80202D20(void);
 void fn_80202DB8(void);
 void fn_80202E48(void);
@@ -297,16 +297,16 @@ asm void fn_80202CA4(void)
     blr
 }
 
-asm void fn_80202D00(void)
+asm void perf_getMetricValue(void)
 {
     nofralloc
     lwz r0, 0x104(r3)
     srawi r0, r0, 24
     cmpwi r0, 0x1
-    bne lbl_fn_80202D00_000002AC
+    bne lbl_perf_getMetricValue_000002AC
     li r3, 0x0
     blr
-lbl_fn_80202D00_000002AC:
+lbl_perf_getMetricValue_000002AC:
     lwz r3, 0x48(r3)
     blr
 }
@@ -1251,7 +1251,7 @@ lbl_fn_80203A44_00001014:
     mr r3, r29
     stw r0, 0x2c(r1)
     lwz r4, 0xc(r30)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r3, r29
     stb r0, 0x10(r1)
@@ -1276,7 +1276,7 @@ lbl_fn_80203A44_0000105C:
     mr r27, r3
     mr r3, r28
     mr r4, r27
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r28
     stb r0, 0x8(r1)

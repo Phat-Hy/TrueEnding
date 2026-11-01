@@ -44,7 +44,7 @@ extern void PSMTXTrans(void);
 extern void PSMTXScale(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_80686A64(void);
+extern void wcscpy(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -136,14 +136,14 @@ lbl_fn_801E7D78_00000074:
     bne lbl_fn_801E7D78_0000008C
     mr r3, r28
     addi r4, r29, 0x12
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_801E7D78_000000CC
 lbl_fn_801E7D78_0000008C:
     cmpwi r24, 0x0
     bne lbl_fn_801E7D78_000000A4
     mr r3, r28
     addi r4, r29, 0x1e
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_801E7D78_000000CC
 lbl_fn_801E7D78_000000A4:
     cmpwi r27, 0x0
@@ -156,7 +156,7 @@ lbl_fn_801E7D78_000000A4:
 lbl_fn_801E7D78_000000C0:
     mr r3, r28
     addi r4, r29, 0x12
-    bl fn_80686A64
+    bl wcscpy
 lbl_fn_801E7D78_000000CC:
     mr r5, r25
     addi r3, r1, 0x8
@@ -224,14 +224,14 @@ lbl_fn_801E7EA8_000001A4:
     bne lbl_fn_801E7EA8_000001BC
     mr r3, r28
     addi r4, r29, 0x12
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_801E7EA8_000001FC
 lbl_fn_801E7EA8_000001BC:
     cmpwi r24, 0x0
     bne lbl_fn_801E7EA8_000001D4
     mr r3, r28
     addi r4, r29, 0x1e
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_801E7EA8_000001FC
 lbl_fn_801E7EA8_000001D4:
     cmpwi r27, 0x0
@@ -244,7 +244,7 @@ lbl_fn_801E7EA8_000001D4:
 lbl_fn_801E7EA8_000001F0:
     mr r3, r28
     addi r4, r29, 0x12
-    bl fn_80686A64
+    bl wcscpy
 lbl_fn_801E7EA8_000001FC:
     mr r5, r25
     addi r3, r1, 0x8

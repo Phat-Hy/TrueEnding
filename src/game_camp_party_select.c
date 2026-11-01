@@ -51,7 +51,7 @@ extern void fn_80620030(void);
 extern void fn_80621CD0(void);
 extern void wmemcpy(void);
 extern void wcslen(void);
-extern void fn_80686AF0(void);
+extern void wcscmp(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -2023,7 +2023,7 @@ lbl_fn_803B9324_00001930:
     cmpwi r0, 0x0
     beq lbl_fn_803B9324_00001B30
     addi r4, r29, lbl_8078B658@l
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_803B9324_00001994
     addi r3, r1, 0x108
@@ -2042,7 +2042,7 @@ lbl_fn_803B9324_00001930:
 lbl_fn_803B9324_00001994:
     mr r3, r23
     addi r4, r30, 0xc
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_803B9324_000019DC
     addi r3, r1, 0x108
@@ -2061,7 +2061,7 @@ lbl_fn_803B9324_00001994:
 lbl_fn_803B9324_000019DC:
     mr r3, r23
     addi r4, r30, 0x1c
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_803B9324_00001A2C
     lwz r23, lbl_8087EEC8
@@ -2082,7 +2082,7 @@ lbl_fn_803B9324_000019DC:
 lbl_fn_803B9324_00001A2C:
     mr r3, r23
     addi r4, r30, 0x2a
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_803B9324_00001AF8
     lwz r23, lbl_8087EEC8
@@ -2105,7 +2105,7 @@ lbl_fn_803B9324_00001A2C:
     bl fn_8005BD10
     mr r23, r3
     addi r4, r30, 0x34
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_803B9324_00001AB0
     lwz r0, 0xc0(r28)
@@ -2116,7 +2116,7 @@ lbl_fn_803B9324_00001A2C:
 lbl_fn_803B9324_00001AB0:
     mr r3, r23
     addi r4, r30, 0x3e
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_803B9324_00001AD8
     lwz r0, 0xc0(r28)
@@ -2137,13 +2137,13 @@ lbl_fn_803B9324_00001AE8:
 lbl_fn_803B9324_00001AF8:
     mr r3, r23
     addi r4, r30, 0x48
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_803B9324_00001B30
     addi r3, r1, 0x108
     bl fn_8005BD10
     addi r4, r30, 0x5c
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_803B9324_00001B2C
     stw r26, 0x144(r28)

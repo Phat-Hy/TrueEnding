@@ -22,11 +22,11 @@ extern void fn_801DC074(void);
 extern void fn_801DC07C(void);
 extern void fn_801DFFA4(void);
 extern void fn_801E057C(void);
-extern void fn_8020EF80(void);
-extern void fn_80211480(void);
+extern void random_generateValue(void);
+extern void event_findEntryById(void);
 extern void wcslen(void);
-extern void fn_80686AF0(void);
-extern void fn_80686B64(void);
+extern void wcscmp(void);
+extern void wcschr(void);
 
 /* External data declarations */
 extern u8 lbl_80782898[];
@@ -122,16 +122,16 @@ lbl_fn_801DE38C_000000F0:
     frsp f2, f2
     fcmpo cr0, f2, f31
     bge lbl_fn_801DE38C_00000144
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r22, r3
     lwz r3, 0x0(r25)
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r22)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_801DE38C_00000150
 lbl_fn_801DE38C_00000144:
@@ -269,16 +269,16 @@ lbl_fn_801DE38C_00000300:
     frsp f2, f2
     fcmpo cr0, f2, f31
     bge lbl_fn_801DE38C_00000354
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r22, r3
     lwz r3, 0x0(r29)
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r22)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_801DE38C_00000360
 lbl_fn_801DE38C_00000354:
@@ -326,16 +326,16 @@ lbl_fn_801DE38C_000003CC:
     frsp f2, f2
     fcmpo cr0, f2, f31
     bge lbl_fn_801DE38C_00000420
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r22, r3
     lwz r3, 0x0(r29)
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r22)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_801DE38C_0000042C
 lbl_fn_801DE38C_00000420:
@@ -411,16 +411,16 @@ lbl_fn_801DE38C_00000500:
     frsp f2, f2
     fcmpo cr0, f2, f31
     bge lbl_fn_801DE38C_00000554
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r22, r3
     lwz r3, 0x0(r29)
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r22)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_801DE38C_00000560
 lbl_fn_801DE38C_00000554:
@@ -466,16 +466,16 @@ lbl_fn_801DE38C_000005C4:
     frsp f2, f2
     fcmpo cr0, f2, f31
     bge lbl_fn_801DE38C_00000618
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r22, r3
     lwz r3, 0x0(r29)
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r22)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_801DE38C_00000624
 lbl_fn_801DE38C_00000618:
@@ -582,16 +582,16 @@ lbl_fn_801DE38C_0000077C:
     frsp f2, f2
     fcmpo cr0, f2, f31
     bge lbl_fn_801DE38C_000007D0
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r29, r3
     lwz r3, 0x0(r30)
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r29)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_801DE38C_000007DC
 lbl_fn_801DE38C_000007D0:
@@ -643,16 +643,16 @@ lbl_fn_801DE38C_00000854:
     frsp f2, f2
     fcmpo cr0, f2, f31
     bge lbl_fn_801DE38C_000008A8
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r29, r3
     lwz r3, 0x0(r23)
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r29)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_801DE38C_000008B4
 lbl_fn_801DE38C_000008A8:
@@ -731,16 +731,16 @@ lbl_fn_801DE38C_00000990:
     frsp f2, f2
     fcmpo cr0, f2, f31
     bge lbl_fn_801DE38C_000009E4
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r29, r3
     lwz r3, 0x0(r23)
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r29)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_801DE38C_000009F0
 lbl_fn_801DE38C_000009E4:
@@ -787,16 +787,16 @@ lbl_fn_801DE38C_00000A58:
     frsp f2, f2
     fcmpo cr0, f2, f31
     bge lbl_fn_801DE38C_00000AAC
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r29, r3
     lwz r3, 0x0(r30)
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r29)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_801DE38C_00000AB8
 lbl_fn_801DE38C_00000AAC:
@@ -931,16 +931,16 @@ lbl_fn_801DEF68_00000C5C:
     frsp f3, f3
     fcmpo cr0, f3, f0
     bge lbl_fn_801DEF68_00000CB4
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r27, r3
     lwz r3, 0x0(r31)
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r27)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_801DEF68_00000CC0
 lbl_fn_801DEF68_00000CB4:
@@ -987,16 +987,16 @@ lbl_fn_801DEF68_00000D28:
     frsp f3, f3
     fcmpo cr0, f3, f0
     bge lbl_fn_801DEF68_00000D80
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r27, r3
     lwz r3, 0x0(r26)
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r27)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_801DEF68_00000D8C
 lbl_fn_801DEF68_00000D80:
@@ -1080,16 +1080,16 @@ lbl_fn_801DEF68_00000E80:
     frsp f3, f3
     fcmpo cr0, f3, f0
     bge lbl_fn_801DEF68_00000ED8
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r27, r3
     lwz r3, 0x0(r26)
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r27)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_801DEF68_00000EE4
 lbl_fn_801DEF68_00000ED8:
@@ -1587,12 +1587,12 @@ lbl_fn_801DF904_000015E4:
     b lbl_fn_801DF904_000016CC
 lbl_fn_801DF904_000015EC:
     lwz r3, 0x0(r4)
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r29, r3
     lwz r3, 0x0(r30)
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     lis r4, lbl_80782898@ha
     lwz r5, 0x8(r29)
     mr r30, r3
@@ -1602,7 +1602,7 @@ lbl_fn_801DF904_000015EC:
     bl fn_800DD3FC
     addi r3, r1, 0x88
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_801DF904_00001640
     li r0, 0x0
@@ -1616,7 +1616,7 @@ lbl_fn_801DF904_00001640:
     bl fn_800DD3FC
     addi r3, r1, 0x8
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_801DF904_00001674
     li r0, 0x0
@@ -1624,7 +1624,7 @@ lbl_fn_801DF904_00001640:
 lbl_fn_801DF904_00001674:
     addi r3, r1, 0x88
     addi r4, r1, 0x8
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_801DF904_000016BC
     lwz r3, 0x8(r29)
@@ -1643,7 +1643,7 @@ lbl_fn_801DF904_00001674:
 lbl_fn_801DF904_000016BC:
     lwz r3, 0x8(r29)
     lwz r4, 0x8(r30)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r3, r3, 31
 lbl_fn_801DF904_000016CC:
     lwz r0, 0x124(r1)

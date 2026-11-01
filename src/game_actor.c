@@ -129,7 +129,7 @@ extern u32 lbl_80880728;
 
 /* Function declarations */
 void dtor_80013D60(void);
-void fn_80013DC4(void);
+void actor_validateIndex(void);
 void actor_dispatchMessage(void);
 void dtor_80014250(void);
 void fn_800142C4(void);
@@ -185,7 +185,7 @@ lbl_dtor_80013D60_00000048:
     blr
 }
 
-asm void fn_80013DC4(void)
+asm void actor_validateIndex(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -197,7 +197,7 @@ asm void fn_80013DC4(void)
     stmw r25, 0x14(r1)
     mr r31, r3
     mr r25, r4
-    ble lbl_fn_80013DC4_000000B0
+    ble lbl_actor_validateIndex_000000B0
     lis r4, lbl_8072F924@ha
     lis r3, __files@ha
     addi r4, r4, lbl_8072F924@l
@@ -207,44 +207,44 @@ asm void fn_80013DC4(void)
     crclr 6
     bl printf
     bl abort
-lbl_fn_80013DC4_000000B0:
+lbl_actor_validateIndex_000000B0:
     lwz r0, 0x0(r31)
     srwi. r29, r0, 31
-    bne lbl_fn_80013DC4_000000CC
+    bne lbl_actor_validateIndex_000000CC
     lbz r0, 0x0(r31)
     li r3, 0xb
     clrlwi r28, r0, 25
-    b lbl_fn_80013DC4_000000D4
-lbl_fn_80013DC4_000000CC:
+    b lbl_actor_validateIndex_000000D4
+lbl_actor_validateIndex_000000CC:
     lwz r28, 0x4(r31)
     clrlwi r3, r0, 1
-lbl_fn_80013DC4_000000D4:
+lbl_actor_validateIndex_000000D4:
     cmplw r25, r28
-    bge lbl_fn_80013DC4_000000E0
+    bge lbl_actor_validateIndex_000000E0
     mr r25, r28
-lbl_fn_80013DC4_000000E0:
+lbl_actor_validateIndex_000000E0:
     addi r0, r25, 0x1
     li r30, 0xb
     cmplwi r0, 0xb
-    ble lbl_fn_80013DC4_000000F8
+    ble lbl_actor_validateIndex_000000F8
     addi r0, r25, 0x10
     clrrwi r30, r0, 4
-lbl_fn_80013DC4_000000F8:
+lbl_actor_validateIndex_000000F8:
     cmplw cr1, r30, r3
-    beq cr1, lbl_fn_80013DC4_00000204
+    beq cr1, lbl_actor_validateIndex_00000204
     cmplwi r30, 0xb
-    bne lbl_fn_80013DC4_00000118
+    bne lbl_actor_validateIndex_00000118
     lwz r26, 0x8(r31)
     addi r27, r31, 0x1
     li r25, 0x0
-    b lbl_fn_80013DC4_000001A8
-lbl_fn_80013DC4_00000118:
-    ble cr1, lbl_fn_80013DC4_00000154
+    b lbl_actor_validateIndex_000001A8
+lbl_actor_validateIndex_00000118:
+    ble cr1, lbl_actor_validateIndex_00000154
     mr r3, r30
     bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
-    bne lbl_fn_80013DC4_00000190
+    bne lbl_actor_validateIndex_00000190
     lis r3, __files@ha
     lis r4, lbl_80775AC0@ha
     addi r3, r3, __files@l
@@ -253,13 +253,13 @@ lbl_fn_80013DC4_00000118:
     crclr 6
     bl printf
     bl abort
-    b lbl_fn_80013DC4_00000190
-lbl_fn_80013DC4_00000154:
+    b lbl_actor_validateIndex_00000190
+lbl_actor_validateIndex_00000154:
     mr r3, r30
     bl mem_free
     cmpwi r3, 0x0
     mr r27, r3
-    bne lbl_fn_80013DC4_00000188
+    bne lbl_actor_validateIndex_00000188
     lis r3, __files@ha
     lis r4, lbl_80775AC0@ha
     addi r3, r3, __files@l
@@ -268,18 +268,18 @@ lbl_fn_80013DC4_00000154:
     crclr 6
     bl printf
     bl abort
-lbl_fn_80013DC4_00000188:
+lbl_actor_validateIndex_00000188:
     cmpwi r27, 0x0
-    beq lbl_fn_80013DC4_00000204
-lbl_fn_80013DC4_00000190:
+    beq lbl_actor_validateIndex_00000204
+lbl_actor_validateIndex_00000190:
     cmpwi r29, 0x0
     li r25, 0x1
-    beq lbl_fn_80013DC4_000001A4
+    beq lbl_actor_validateIndex_000001A4
     lwz r26, 0x8(r31)
-    b lbl_fn_80013DC4_000001A8
-lbl_fn_80013DC4_000001A4:
+    b lbl_actor_validateIndex_000001A8
+lbl_actor_validateIndex_000001A4:
     addi r26, r31, 0x1
-lbl_fn_80013DC4_000001A8:
+lbl_actor_validateIndex_000001A8:
     mr r3, r27
     mr r4, r26
     mr r5, r28
@@ -287,25 +287,25 @@ lbl_fn_80013DC4_000001A8:
     cmpwi r29, 0x0
     li r0, 0x0
     stbx r0, r27, r28
-    beq lbl_fn_80013DC4_000001D0
+    beq lbl_actor_validateIndex_000001D0
     mr r3, r26
     bl dtor_80084684
-lbl_fn_80013DC4_000001D0:
+lbl_actor_validateIndex_000001D0:
     lwz r0, 0x0(r31)
     cmpwi r25, 0x0
     rlwimi r0, r25, 31, 0, 0
     stw r0, 0x0(r31)
-    bne lbl_fn_80013DC4_000001F4
+    bne lbl_actor_validateIndex_000001F4
     lbz r0, 0x0(r31)
     rlwimi r0, r28, 0, 25, 31
     stb r0, 0x0(r31)
-    b lbl_fn_80013DC4_00000204
-lbl_fn_80013DC4_000001F4:
+    b lbl_actor_validateIndex_00000204
+lbl_actor_validateIndex_000001F4:
     rlwimi r0, r30, 0, 1, 31
     stw r27, 0x8(r31)
     stw r28, 0x4(r31)
     stw r0, 0x0(r31)
-lbl_fn_80013DC4_00000204:
+lbl_actor_validateIndex_00000204:
     lmw r25, 0x14(r1)
     lwz r0, 0x34(r1)
     mtlr r0

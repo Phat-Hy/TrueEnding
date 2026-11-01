@@ -9,7 +9,7 @@ extern void _savegpr_27(void);
 extern void atn_Task_setActive(void);
 extern void fn_801F6C2C(void);
 extern void fn_801F6C80(void);
-extern void fn_80202D00(void);
+extern void perf_getMetricValue(void);
 extern void fn_803DF5B4(void);
 
 /* External data declarations */
@@ -584,7 +584,7 @@ lbl_fn_803D164C_00000838:
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, 0xb38(r30)
-    bl fn_80202D00
+    bl perf_getMetricValue
     stb r31, 0x4d(r3)
     li r4, 0x0
     lwz r3, 0xb3c(r30)
@@ -601,7 +601,7 @@ lbl_fn_803D164C_00000838:
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, 0xb40(r30)
-    bl fn_80202D00
+    bl perf_getMetricValue
     stb r31, 0x4d(r3)
     li r4, 0x0
     lwz r3, 0xb44(r30)
@@ -618,7 +618,7 @@ lbl_fn_803D164C_00000838:
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, 0xb48(r30)
-    bl fn_80202D00
+    bl perf_getMetricValue
     stb r31, 0x4d(r3)
     li r4, 0x0
     lwz r3, 0xb4c(r30)
@@ -635,7 +635,7 @@ lbl_fn_803D164C_00000838:
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, 0xb50(r30)
-    bl fn_80202D00
+    bl perf_getMetricValue
     stb r31, 0x4d(r3)
     li r4, 0x0
     lwz r3, 0xb54(r30)

@@ -13,7 +13,7 @@ extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void fn_8000DB1C(void);
 extern void fn_80012A1C(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8003E4A4(void);
 extern void mem_alloc(void);
@@ -1463,7 +1463,7 @@ asm void fn_80224A2C(void)
     mr r25, r3
     mr r3, r26
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xb4(r1)
     mr r3, r26
     stb r0, 0xb0(r1)
@@ -1482,7 +1482,7 @@ asm void fn_80224A2C(void)
     mr r25, r3
     addi r3, r26, 0x10
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xac(r1)
     mr r6, r27
     stb r0, 0xa8(r1)
@@ -1501,7 +1501,7 @@ asm void fn_80224A2C(void)
     mr r25, r3
     addi r3, r26, 0x20
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xa4(r1)
     mr r6, r27
     stb r0, 0xa0(r1)
@@ -1520,7 +1520,7 @@ asm void fn_80224A2C(void)
     mr r25, r3
     addi r3, r26, 0x30
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x9c(r1)
     mr r6, r27
     stb r0, 0x98(r1)
@@ -1539,7 +1539,7 @@ asm void fn_80224A2C(void)
     mr r25, r3
     addi r3, r26, 0x40
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x94(r1)
     mr r6, r27
     stb r0, 0x90(r1)
@@ -1558,7 +1558,7 @@ asm void fn_80224A2C(void)
     mr r25, r3
     addi r3, r26, 0x50
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x8c(r1)
     mr r6, r27
     stb r0, 0x88(r1)
@@ -1583,7 +1583,7 @@ asm void fn_80224A2C(void)
     mr r25, r3
     mr r3, r27
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x84(r1)
     mr r3, r27
     stb r0, 0x80(r1)
@@ -1602,7 +1602,7 @@ asm void fn_80224A2C(void)
     mr r25, r3
     addi r3, r27, 0x10
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x7c(r1)
     mr r6, r26
     stb r0, 0x78(r1)
@@ -1621,7 +1621,7 @@ asm void fn_80224A2C(void)
     mr r25, r3
     addi r3, r27, 0x20
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x74(r1)
     mr r6, r26
     stb r0, 0x70(r1)
@@ -1640,7 +1640,7 @@ asm void fn_80224A2C(void)
     mr r25, r3
     addi r3, r27, 0x30
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x6c(r1)
     mr r6, r26
     stb r0, 0x68(r1)
@@ -1659,7 +1659,7 @@ asm void fn_80224A2C(void)
     mr r25, r3
     addi r3, r27, 0x40
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x64(r1)
     mr r6, r26
     stb r0, 0x60(r1)
@@ -1678,7 +1678,7 @@ asm void fn_80224A2C(void)
     mr r25, r3
     addi r3, r27, 0x50
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x5c(r1)
     mr r6, r26
     stb r0, 0x58(r1)
@@ -1703,7 +1703,7 @@ asm void fn_80224A2C(void)
     mr r25, r3
     mr r3, r27
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x54(r1)
     mr r3, r27
     stb r0, 0x50(r1)
@@ -1722,7 +1722,7 @@ asm void fn_80224A2C(void)
     mr r25, r3
     addi r3, r27, 0x10
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x4c(r1)
     mr r6, r26
     stb r0, 0x48(r1)
@@ -1741,7 +1741,7 @@ asm void fn_80224A2C(void)
     mr r25, r3
     addi r3, r27, 0x20
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x44(r1)
     mr r6, r26
     stb r0, 0x40(r1)
@@ -1760,7 +1760,7 @@ asm void fn_80224A2C(void)
     mr r25, r3
     addi r3, r27, 0x30
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x3c(r1)
     mr r6, r26
     stb r0, 0x38(r1)
@@ -1779,7 +1779,7 @@ asm void fn_80224A2C(void)
     mr r25, r3
     addi r3, r27, 0x40
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x34(r1)
     mr r6, r26
     stb r0, 0x30(r1)
@@ -1798,7 +1798,7 @@ asm void fn_80224A2C(void)
     mr r25, r3
     addi r3, r27, 0x50
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x2c(r1)
     mr r6, r26
     stb r0, 0x28(r1)
@@ -1817,7 +1817,7 @@ asm void fn_80224A2C(void)
     mr r25, r3
     addi r3, r27, 0x60
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x24(r1)
     mr r6, r26
     stb r0, 0x20(r1)
@@ -1836,7 +1836,7 @@ asm void fn_80224A2C(void)
     mr r25, r3
     addi r3, r27, 0x70
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x1c(r1)
     mr r6, r26
     stb r0, 0x18(r1)
@@ -1855,7 +1855,7 @@ asm void fn_80224A2C(void)
     mr r25, r3
     addi r3, r27, 0x80
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r6, r26
     stb r0, 0x10(r1)
@@ -1874,7 +1874,7 @@ asm void fn_80224A2C(void)
     mr r25, r3
     addi r3, r27, 0x90
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r6, r26
     stb r0, 0x8(r1)

@@ -41,7 +41,7 @@ extern void fn_806163C0(void);
 extern void fn_806163E0(void);
 extern void printf(void);
 extern void wcslen(void);
-extern void fn_80686A64(void);
+extern void wcscpy(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
@@ -1808,7 +1808,7 @@ lbl_fn_800D9960_000015F8:
 lbl_fn_800D9960_00001610:
     lwz r4, 0x10(r20)
 lbl_fn_800D9960_00001614:
-    bl fn_80686A64
+    bl wcscpy
     subic. r0, r15, 0x1
     addi r4, r1, 0x80
     li r3, 0xa

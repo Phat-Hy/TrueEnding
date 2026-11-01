@@ -7,7 +7,7 @@ extern void _restgpr_25(void);
 extern void _savegpr_19(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void skill_calculateDamage(void);
 extern void fn_800DC980(void);
@@ -886,7 +886,7 @@ lbl_fn_80222A38_00000B24:
     lwz r4, 0x1e80(r4)
     stw r0, 0x4(r3)
     stw r0, 0x8(r3)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0xc(r1)
     mr r3, r30
     stb r5, 0x8(r1)
@@ -1256,7 +1256,7 @@ lbl_fn_80222AD0_00001088:
     mr r26, r3
     mr r3, r31
     mr r4, r26
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r31
     stb r0, 0x8(r1)

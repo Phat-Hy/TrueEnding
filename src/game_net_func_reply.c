@@ -34,7 +34,7 @@ extern void OSLockMutex(void);
 extern void OSUnlockMutex(void);
 extern void fn_80624D40(void);
 extern void strcat(void);
-extern void fn_80686A64(void);
+extern void wcscpy(void);
 extern void fn_806959D8(void);
 extern void fn_806A2790(void);
 extern void fn_806A295C(void);
@@ -1501,7 +1501,7 @@ lbl_fn_80509F4C_000012B4:
     bl fn_806AF6A0
     addi r3, r1, 0x8
     addi r4, r31, 0x5f0
-    bl fn_80686A64
+    bl wcscpy
     lis r5, fn_8050AAE4@ha
     addi r3, r1, 0x8
     addi r5, r5, fn_8050AAE4@l

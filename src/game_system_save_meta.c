@@ -11,7 +11,7 @@ extern void fn_8000DCF4(void);
 extern void fn_8000DD0C(void);
 extern void fn_8004203C(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void mem_free(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -937,7 +937,7 @@ lbl_fn_80345BA8_00000AA4:
     b lbl_fn_80345BA8_00000AA4
 lbl_fn_80345BA8_00000AC8:
     addi r3, r1, 0x10
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_00000570
 lbl_fn_80345BA8_00000AD8:

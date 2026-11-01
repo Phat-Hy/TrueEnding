@@ -21,9 +21,9 @@ extern void fn_8050B7F0(void);
 extern void fn_8050BA6C(void);
 extern void fn_8050D7F0(void);
 extern void wcslen(void);
-extern void fn_80686A64(void);
-extern void fn_80686A80(void);
-extern void fn_80686AF0(void);
+extern void wcscpy(void);
+extern void wcsncpy(void);
+extern void wcscmp(void);
 extern void fn_8069641C(void);
 extern void fn_806A8E40(void);
 extern void fn_806ABCF0(void);
@@ -1275,7 +1275,7 @@ lbl_fn_8050E998_00000F20:
     addi r4, r4, lbl_807931B4@l
     li r5, 0x10
     addi r4, r4, 0x18
-    bl fn_80686A80
+    bl wcsncpy
     addi r3, r24, 0x7f0
     li r4, 0x0
     li r5, 0x1e0
@@ -1679,12 +1679,12 @@ asm void fn_8050EFD0(void)
     stw r28, 0x130(r1)
     mr r28, r3
     addi r3, r3, 0x1c0
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     beq lbl_fn_8050EFD0_00001604
     mr r4, r30
     addi r3, r28, 0x1c0
-    bl fn_80686A64
+    bl wcscpy
     cmpwi r29, 0x0
     beq lbl_fn_8050EFD0_000014EC
     mr r3, r28

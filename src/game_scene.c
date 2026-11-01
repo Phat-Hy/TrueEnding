@@ -7,7 +7,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_8000E18C(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -807,7 +807,7 @@ asm void fn_8000D528(void)
     mr r30, r3
     addi r3, r28, 0x8
     mr r4, r30
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x8(r1)
     mr r6, r31
     stb r0, 0xc(r1)

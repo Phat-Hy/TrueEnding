@@ -36,7 +36,7 @@ extern void fn_800EC204(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800FBA9C(void);
 extern void fn_800FBE70(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void fn_80121F00(void);
 extern void fn_8013C504(void);
 extern void fn_80158E1C(void);
@@ -1747,7 +1747,7 @@ lbl_fn_80469494_00001658:
     beq lbl_fn_80469494_000016E8
     addi r3, r1, 0x8
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

@@ -51,7 +51,7 @@ extern void fn_8050F5AC(void);
 extern void fn_80624D40(void);
 extern void wmemcpy(void);
 extern void wcslen(void);
-extern void fn_80686B24(void);
+extern void wcsncmp(void);
 extern void fn_806959D8(void);
 
 /* External data declarations */
@@ -1998,7 +1998,7 @@ lbl_fn_804B0A78_00001A98:
     li r5, 0x8
     addi r30, r3, 0x430
     addi r3, r30, 0x1c0
-    bl fn_80686B24
+    bl wcsncmp
     cmpwi r3, 0x0
     beq lbl_fn_804B0A78_00001B44
     mr r3, r30

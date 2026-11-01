@@ -18,7 +18,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
 extern void fn_800DD3FC(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void fn_801F3FF8(void);
 extern void saveSlot_readSummary(void);
 extern void atn_LoadHandle_constructor(void);
@@ -110,7 +110,7 @@ lbl_fn_804AD738_00000030:
     stw r0, 0x4c(r3)
     addi r3, r1, 0xc
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -120,7 +120,7 @@ lbl_fn_804AD738_00000054:
     stw r0, 0x4c(r3)
     addi r3, r1, 0x8
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -298,7 +298,7 @@ lbl_fn_804AD8CC_000002BC:
     bne lbl_fn_804AD8CC_000002EC
     addi r3, r1, 0xc
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -306,7 +306,7 @@ lbl_fn_804AD8CC_000002BC:
 lbl_fn_804AD8CC_000002EC:
     addi r3, r1, 0x8
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

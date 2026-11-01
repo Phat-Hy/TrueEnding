@@ -34,11 +34,11 @@ extern void thread_findAndNotifySlot(void);
 extern void fn_801FEDBC(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_80202118(void);
-extern void fn_80202D00(void);
+extern void perf_getMetricValue(void);
 extern void fn_802091E8(void);
 extern void fn_8020BCEC(void);
 extern void fn_8020BD14(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void fn_80219558(void);
 extern void fn_804444E8(void);
 extern void fn_80444828(void);
@@ -224,12 +224,12 @@ lbl_fn_801D162C_00000190:
     lwz r3, 0x0(r3)
     cmpwi r3, 0x0
     beq lbl_fn_801D162C_0000021C
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_801D162C_0000021C
     lwz r3, 0x50(r31)
     lwzx r3, r3, r27
-    bl fn_80202D00
+    bl perf_getMetricValue
     fmr f1, f31
     addi r4, r29, 0x307
     bl fn_801F6C80
@@ -1083,7 +1083,7 @@ lbl_fn_801D19F0_00000D28:
     lwz r4, 0x8(r14)
     bl fn_80444828
     mr r14, r3
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r17, 0x0
     mr r16, r3
     beq lbl_fn_801D19F0_00000F18
@@ -1204,7 +1204,7 @@ lbl_fn_801D19F0_00000FD4:
     lwz r4, 0x8(r14)
     bl fn_8044493C
     mr r16, r3
-    bl fn_80211480
+    bl event_findEntryById
     lwz r0, 0x8(r14)
     cmpwi r0, 0x1f
     bne lbl_fn_801D19F0_00001100
@@ -1927,7 +1927,7 @@ lbl_fn_801D19F0_00001A34:
     addi r3, r1, 0x1b8
     bl saveSlot_readSummary
     lwz r3, 0xb94(r19)
-    bl fn_80202D00
+    bl perf_getMetricValue
     addi r4, r18, 0x396
     addi r5, r1, 0x1b8
     bl fn_801F6E78

@@ -13,7 +13,7 @@ extern void mem_realloc(void);
 extern void fn_800A55AC(void);
 extern void ref_releaseHandle(void);
 extern void fn_800DC1DC(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void fn_80117E88(void);
 extern void fn_80125320(void);
 extern void fn_8012539C(void);
@@ -36,7 +36,7 @@ extern void fn_8016F5EC(void);
 extern void fn_803BEB54(void);
 extern void rand(void);
 extern void wcslen(void);
-extern void fn_80686AF0(void);
+extern void wcscmp(void);
 extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 
@@ -141,7 +141,7 @@ lbl_fn_8011B570_00000074:
 lbl_fn_8011B570_00000094:
     addi r3, r1, 0x14
     li r4, 0x3
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -187,7 +187,7 @@ lbl_fn_8011B570_0000010C:
 lbl_fn_8011B570_00000130:
     addi r3, r1, 0x10
     li r4, 0x3
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -258,7 +258,7 @@ lbl_fn_8011B570_000001EC:
 lbl_fn_8011B570_00000228:
     addi r3, r1, 0xc
     li r4, 0x3
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -326,7 +326,7 @@ lbl_fn_8011B570_000002FC:
 lbl_fn_8011B570_00000314:
     addi r3, r1, 0x8
     li r4, 0x3
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -407,7 +407,7 @@ lbl_fn_8011B8D4_00000428:
     addi r3, r1, 0x10
     bl talk_parseDialogue
     addi r4, r28, 0x90
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_8011B8D4_00000470
     addi r3, r1, 0x10
@@ -477,7 +477,7 @@ lbl_fn_8011B8D4_00000524:
     addi r3, r1, 0x10
     bl talk_parseDialogue
     addi r4, r27, 0x90
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_8011B8D4_000005E8
     addi r3, r1, 0x10

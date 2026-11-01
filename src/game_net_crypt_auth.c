@@ -20,7 +20,7 @@ extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void str_findChar(void);
 extern void fn_800DD3FC(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_801F3FF8(void);
 extern void fn_801F4728(void);
@@ -1881,7 +1881,7 @@ lbl_fn_804B79F4_00001868:
     beq lbl_fn_804B79F4_000018D0
     addi r3, r1, 0x8
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1896,7 +1896,7 @@ lbl_fn_804B79F4_000018D0:
     beq lbl_fn_804B79F4_00001904
     addi r3, r1, 0xc
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -2086,7 +2086,7 @@ lbl_fn_804B79F4_00001B70:
 lbl_fn_804B79F4_00001B88:
     addi r3, r1, 0x14
     li r4, 0x3
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -2170,7 +2170,7 @@ lbl_fn_804B79F4_00001C80:
     bge lbl_fn_804B79F4_00001CD8
     addi r3, r1, 0x10
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle

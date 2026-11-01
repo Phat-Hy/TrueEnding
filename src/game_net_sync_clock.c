@@ -25,7 +25,7 @@ extern void fn_801F4CB4(void);
 extern void saveSlot_readSummary(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_8020924C(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void fn_80444BE8(void);
 extern void fn_80444C50(void);
 extern void fn_804A29C4(void);
@@ -314,7 +314,7 @@ lbl_fn_804C822C_000002C8:
     cmpwi r18, 0x0
     ble lbl_fn_804C822C_000003DC
     mr r3, r18
-    bl fn_80211480
+    bl event_findEntryById
     mr r29, r3
     lwz r3, lbl_8087F4F0
     mr r4, r29

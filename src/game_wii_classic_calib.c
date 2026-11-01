@@ -50,7 +50,7 @@ extern void fn_80565068(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void wcslen(void);
-extern void fn_80686A64(void);
+extern void wcscpy(void);
 extern void fn_806959D8(void);
 extern void fn_80695B00(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -611,7 +611,7 @@ lbl_fn_80562D50_000005A4:
     beq lbl_fn_80562D50_000006CC
     lwz r4, 0x8(r3)
     addi r3, r1, 0x218
-    bl fn_80686A64
+    bl wcscpy
     addi r3, r1, 0x218
     bl wcslen
     subic. r0, r3, 0x1
@@ -665,7 +665,7 @@ lbl_fn_80562D50_00000638:
     mr r4, r21
     addi r3, r1, 0x18
     li r25, 0x0
-    bl fn_80686A64
+    bl wcscpy
     addi r5, r1, 0x10
     li r3, 0x0
     la r4, lbl_8087E678

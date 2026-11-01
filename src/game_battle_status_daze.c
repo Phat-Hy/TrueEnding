@@ -7,7 +7,7 @@ extern void fn_80056DB8(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_800575BC(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
@@ -1652,7 +1652,7 @@ lbl_fn_8042F2DC_00001480:
     stw r0, 0x110(r31)
 lbl_fn_8042F2DC_0000148C:
     addi r3, r1, 0x48
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8042F2DC_000013C0
 lbl_fn_8042F2DC_0000149C:

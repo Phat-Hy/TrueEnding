@@ -15,7 +15,7 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
 extern void fn_800DD3FC(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void fn_801F4998(void);
 extern void fn_801F4CB4(void);
 extern void saveSlot_readSummary(void);
@@ -41,7 +41,7 @@ extern void fn_804FC014(void);
 extern void fn_805075C8(void);
 extern void fn_8050BA6C(void);
 extern void rand(void);
-extern void fn_80686AF0(void);
+extern void wcscmp(void);
 extern void fn_806A8E70(void);
 extern void fn_806B0DE0(void);
 extern void fn_806B1250(void);
@@ -1116,7 +1116,7 @@ lbl_fn_804C18A8_00000DB8:
 lbl_fn_804C18A8_00000E48:
     addi r3, r25, 0x10
     addi r4, r27, 0x18
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_804C18A8_00000F1C
     lwz r3, lbl_8087F86C
@@ -1942,7 +1942,7 @@ lbl_fn_804C28A0_00001970:
     addi r3, r1, 0xc
     li r4, 0x1
     stw r0, 0xd90(r31)
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -1955,7 +1955,7 @@ lbl_fn_804C28A0_000019D8:
     stw r0, 0xdcc(r3)
     addi r3, r1, 0x8
     li r4, 0x3
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

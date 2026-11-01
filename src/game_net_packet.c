@@ -28,14 +28,14 @@ extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_80202118(void);
-extern void fn_80202D00(void);
-extern void fn_80206BE4(void);
+extern void perf_getMetricValue(void);
+extern void assert_generateId(void);
 extern void fn_80206C50(void);
 extern void fn_8020924C(void);
 extern void fn_8020ED84(void);
 extern void fn_8020EF4C(void);
-extern void fn_8020EF80(void);
-extern void fn_80211480(void);
+extern void random_generateValue(void);
+extern void event_findEntryById(void);
 extern void fn_80219544(void);
 extern void fn_80444B64(void);
 extern void fn_80444BE8(void);
@@ -440,7 +440,7 @@ lbl_fn_801E6714_000004B4:
 lbl_fn_801E6714_000004F4:
     add r3, r22, r21
     lwz r3, 0x108(r3)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lwz r0, 0x88(r22)
     mr r24, r3
     add. r5, r0, r25
@@ -464,9 +464,9 @@ lbl_fn_801E6714_000004F4:
 lbl_fn_801E6714_00000550:
     li r23, 0x1
 lbl_fn_801E6714_00000554:
-    bl fn_8020EF80
+    bl random_generateValue
     mr r19, r3
-    bl fn_80211480
+    bl event_findEntryById
     mr r20, r3
     lwz r3, lbl_8087F4F0
     mr r4, r19
@@ -708,7 +708,7 @@ lbl_fn_801E6B10_00000884:
 lbl_fn_801E6B10_000008D0:
     add r3, r23, r22
     lwz r3, 0x108(r3)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lwz r0, 0x88(r23)
     mr r24, r3
     add. r4, r0, r25
@@ -720,7 +720,7 @@ lbl_fn_801E6B10_000008D0:
     lwz r3, 0xb4c(r23)
     add r26, r3, r0
     lwz r3, 0x4(r26)
-    bl fn_80211480
+    bl event_findEntryById
     mr r20, r3
     lwz r3, 0x4(r26)
     bl fn_80206C50
@@ -1100,8 +1100,8 @@ asm void fn_801E714C(void)
     stfs f0, 0xd4(r1)
     bl fn_801CFA5C
     mr r24, r3
-    bl fn_80206BE4
-    bl fn_80211480
+    bl assert_generateId
+    bl event_findEntryById
     cmpwi r24, 0x0
     mr r24, r3
     beq lbl_fn_801E714C_00000EC8
@@ -1170,8 +1170,8 @@ lbl_fn_801E714C_00000F2C:
     li r5, 0x1
     bl fn_801CFA5C
     mr r24, r3
-    bl fn_80206BE4
-    bl fn_80211480
+    bl assert_generateId
+    bl event_findEntryById
     cmpwi r24, 0x0
     mr r24, r3
     beq lbl_fn_801E714C_00000FD8
@@ -1239,9 +1239,9 @@ lbl_fn_801E714C_0000103C:
     li r3, 0x0
     bl fn_8020ED84
     mr r24, r3
-    bl fn_8020EF80
+    bl random_generateValue
     mr r28, r3
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r24, 0x0
     beq lbl_fn_801E714C_000010E0
     cmpwi r3, 0x0
@@ -1316,9 +1316,9 @@ lbl_fn_801E714C_00001144:
     mr r24, r3
 lbl_fn_801E714C_00001170:
     mr r3, r24
-    bl fn_8020EF80
+    bl random_generateValue
     mr r27, r3
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r24, 0x0
     beq lbl_fn_801E714C_00001208
     cmpwi r3, 0x0

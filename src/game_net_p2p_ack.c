@@ -16,7 +16,7 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
 extern void fn_800EF73C(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void fn_8012B028(void);
 extern void fn_80134800(void);
 extern void fn_801F4CB4(void);
@@ -25,7 +25,7 @@ extern void fn_801F6C80(void);
 extern void fn_801F8598(void);
 extern void thread_findAndNotify(void);
 extern void fn_80202118(void);
-extern void fn_80202D00(void);
+extern void perf_getMetricValue(void);
 extern void fn_8021946C(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -241,7 +241,7 @@ lbl_fn_80510FBC_00000208:
     beq lbl_fn_80510FBC_0000023C
     mr r4, r30
     addi r3, r1, 0x8
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -487,35 +487,35 @@ asm void fn_805114D8(void)
     rlwimi r0, r30, 23, 8, 8
     stw r0, 0x104(r29)
     mr r3, r29
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_805114D8_000005F4
     mr r3, r29
-    bl fn_80202D00
+    bl perf_getMetricValue
     neg r0, r31
     or r0, r0, r31
     srwi r0, r0, 31
     stb r0, 0x4d(r3)
     mr r3, r29
-    bl fn_80202D00
+    bl perf_getMetricValue
     stfs f31, 0x54(r3)
     mr r3, r29
-    bl fn_80202D00
+    bl perf_getMetricValue
     stfs f30, 0x50(r3)
     mr r3, r29
-    bl fn_80202D00
+    bl perf_getMetricValue
     bl fn_801F6C10
     lis r4, fn_8051166C@ha
     addi r4, r4, fn_8051166C@l
     stw r4, 0x9c(r3)
     mr r3, r29
-    bl fn_80202D00
+    bl perf_getMetricValue
     bl fn_801F6C10
     lis r4, fn_80511708@ha
     addi r4, r4, fn_80511708@l
     stw r4, 0xa0(r3)
     mr r3, r29
-    bl fn_80202D00
+    bl perf_getMetricValue
     bl fn_801F6C10
     lis r4, fn_80511710@ha
     addi r4, r4, fn_80511710@l
@@ -721,12 +721,12 @@ lbl_fn_805117C0_0000083C:
     lwz r3, 0x0(r3)
     cmpwi r3, 0x0
     beq lbl_fn_805117C0_000008C8
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_805117C0_000008C8
     lwz r3, 0x50(r26)
     lwzx r3, r3, r28
-    bl fn_80202D00
+    bl perf_getMetricValue
     fmr f1, f31
     addi r4, r30, 0x34
     bl fn_801F6C80

@@ -6,7 +6,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -21,7 +21,7 @@ extern void fn_8020EE60(void);
 extern void fn_8020EF04(void);
 extern void fn_8020EF4C(void);
 extern void fn_8020EFEC(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void fn_80216AFC(void);
 extern void fn_8046DC5C(void);
 extern void fn_8046DD20(void);
@@ -976,7 +976,7 @@ lbl_fn_802130BC_00000CAC:
     addi r23, r23, 0x1
 lbl_fn_802130BC_00000CC4:
     addi r3, r1, 0x28
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_802130BC_00000CAC
     lis r3, lbl_8073FA9C@ha
@@ -1393,7 +1393,7 @@ lbl_fn_802130BC_000012F4:
     addi r23, r23, 0x18
 lbl_fn_802130BC_000012F8:
     addi r3, r1, 0x28
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_802130BC_00000D50
     lwz r3, lbl_8087F518
@@ -1682,7 +1682,7 @@ asm void fn_80213B78(void)
     mr r29, r5
     stw r28, 0x10(r1)
     mr r28, r4
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_80213B78_00001704

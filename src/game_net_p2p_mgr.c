@@ -13,7 +13,7 @@ extern void fn_8050EAE8(void);
 extern void fn_8050EAEC(void);
 extern void fn_8050EB8C(void);
 extern void fn_8050F19C(void);
-extern void fn_80686A64(void);
+extern void wcscpy(void);
 extern void fn_806A8E40(void);
 extern void fn_806A8E80(void);
 extern void fn_806AC070(void);
@@ -1971,7 +1971,7 @@ lbl_fn_8050BDC8_00001810:
     lwz r0, 0x1f8(r30)
     rlwimi r5, r0, 7, 4, 4
     stw r5, 0xc(r31)
-    bl fn_80686A64
+    bl wcscpy
     lwz r0, 0xe30(r30)
     lis r4, lbl_80791B0C@ha
     stw r0, 0x30(r31)
@@ -1987,7 +1987,7 @@ lbl_fn_8050BDC8_00001810:
     stw r5, 0x14(r1)
     stw r5, 0x18(r1)
     stw r5, 0x3c(r1)
-    bl fn_80686A64
+    bl wcscpy
     lbz r0, lbl_8087F5F8
     extsb. r0, r0
     bne lbl_fn_8050BDC8_000018C8

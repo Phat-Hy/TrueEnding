@@ -6,12 +6,12 @@ extern void __files(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8004203C(void);
 extern void fn_80056DB8(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void mem_free(void);
 extern void route_interpolatePath(void);
 extern void fn_8008937C(void);
@@ -588,7 +588,7 @@ lbl_fn_802AC8E8_000006B0:
     bl fn_802AD36C
 lbl_fn_802AC8E8_00000718:
     addi r3, r1, 0x44
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_802AC8E8_000003C4
     lwz r0, 0x694(r1)
@@ -689,7 +689,7 @@ lbl_fn_802ACD3C_0000084C:
     mr r3, r27
     stw r0, 0x4(r27)
     stw r0, 0x8(r27)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x34(r1)
     mr r3, r27
     stb r5, 0x30(r1)
@@ -717,7 +717,7 @@ lbl_fn_802ACD3C_000008B4:
     addi r3, r27, 0xc
     stw r0, 0x10(r27)
     stw r0, 0x14(r27)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x2c(r1)
     addi r3, r27, 0xc
     stb r5, 0x28(r1)
@@ -875,7 +875,7 @@ lbl_fn_802ACD3C_00000AFC:
     lwz r4, 0x4(r29)
     stw r27, 0x4(r30)
     stw r27, 0x8(r30)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x8(r1)
     mr r3, r30
     stb r5, 0xc(r1)
@@ -902,7 +902,7 @@ lbl_fn_802ACD3C_00000B60:
     lwz r4, 0x10(r29)
     stw r27, 0x10(r30)
     stw r27, 0x14(r30)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x10(r1)
     addi r3, r30, 0xc
     stb r5, 0x14(r1)
@@ -949,7 +949,7 @@ lbl_fn_802ACD3C_00000C0C:
     stw r27, 0x4(r30)
     stw r27, 0x8(r30)
     lwz r4, 0x4(r31)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x18(r1)
     mr r3, r30
     stb r0, 0x1c(r1)
@@ -976,7 +976,7 @@ lbl_fn_802ACD3C_00000C70:
     stw r27, 0x10(r30)
     stw r27, 0x14(r30)
     lwz r4, 0x10(r31)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x20(r1)
     addi r3, r30, 0xc
     stb r0, 0x24(r1)
@@ -1167,7 +1167,7 @@ lbl_fn_802AD3D4_00000EF4:
     mr r3, r31
     stw r0, 0x4(r31)
     stw r0, 0x8(r31)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x1c(r1)
     mr r3, r31
     stb r5, 0x18(r1)
@@ -1357,7 +1357,7 @@ lbl_fn_802AD3D4_000011B4:
     lwz r4, 0x4(r30)
     stw r0, 0x4(r27)
     stw r0, 0x8(r27)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x8(r1)
     mr r3, r27
     stb r5, 0xc(r1)
@@ -1410,7 +1410,7 @@ lbl_fn_802AD3D4_00001278:
     stw r30, 0x4(r27)
     stw r30, 0x8(r27)
     lwz r4, 0x4(r28)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x10(r1)
     mr r3, r27
     stb r0, 0x14(r1)

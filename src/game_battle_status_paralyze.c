@@ -8,7 +8,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_18(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
@@ -1817,7 +1817,7 @@ lbl_fn_8042A360_0000173C:
     mr r18, r3
     mr r3, r23
     mr r4, r18
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x1c(r1)
     mr r3, r23
     stb r0, 0x18(r1)
@@ -1850,7 +1850,7 @@ lbl_fn_8042A360_000017E4:
     stw r24, 0x4(r17)
     stw r24, 0x8(r17)
     lwz r4, 0x30(r1)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0xc(r1)
     mr r3, r17
     stb r5, 0x8(r1)
@@ -1981,7 +1981,7 @@ lbl_fn_8042A360_000019C0:
     stw r24, 0x4(r17)
     stw r24, 0x8(r17)
     lwz r4, 0x30(r1)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x10(r1)
     mr r3, r17
     stb r5, 0x14(r1)

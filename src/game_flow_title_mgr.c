@@ -34,7 +34,7 @@ extern void rand(void);
 extern void strcmp(void);
 extern void strstr(void);
 extern void atoi(void);
-extern void fn_80686AF0(void);
+extern void wcscmp(void);
 extern void fn_806A8E40(void);
 extern void fn_806A8E70(void);
 extern void fn_806ABE70(void);
@@ -1091,7 +1091,7 @@ lbl_fn_804DC85C_00000CFC:
     bl fn_8050F728
     mr r4, r3
     addi r3, r1, 0x270
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     beq lbl_fn_804DC85C_00000D6C
     mr r3, r31

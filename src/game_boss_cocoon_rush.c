@@ -6,7 +6,7 @@ extern void __files(void);
 extern void _restgpr_15(void);
 extern void _savegpr_15(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_800698DC(void);
 extern void atn_normalizePath(char* str);
@@ -1585,7 +1585,7 @@ lbl_atn_LoadEffect_destructor_000013F0:
     mr r20, r3
     mr r3, r18
     mr r4, r20
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x1c(r1)
     mr r3, r18
     stb r0, 0x18(r1)
@@ -1833,7 +1833,7 @@ lbl_atn_LoadEffect_destructor_00001758:
     mr r26, r3
     mr r3, r25
     mr r4, r26
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r25
     stb r0, 0x8(r1)

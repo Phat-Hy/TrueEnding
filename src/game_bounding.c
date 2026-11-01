@@ -42,7 +42,7 @@ extern void fn_8017A5D8(void);
 extern void thread_findAndNotify(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_80210220(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void fn_80219558(void);
 extern void task_findEntryById(void);
 extern void fn_8021A8D0(void);
@@ -1024,7 +1024,7 @@ lbl_fn_800FDF14_00000CC4:
     ble lbl_fn_800FDF14_00000D38
     mr r3, r0
 lbl_fn_800FDF14_00000D38:
-    bl fn_80211480
+    bl event_findEntryById
     lwz r0, 0x1c(r1)
     mr r30, r3
     cmpwi r0, 0x0

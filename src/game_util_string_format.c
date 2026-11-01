@@ -6,11 +6,11 @@ extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void fn_800DD3FC(void);
 extern void fn_80206C50(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void fn_80595F7C(void);
 extern void wcslen(void);
-extern void fn_80686AF0(void);
-extern void fn_80686B64(void);
+extern void wcscmp(void);
+extern void wcschr(void);
 
 /* External data declarations */
 extern u8 lbl_80796ACC[];
@@ -96,10 +96,10 @@ lbl_fn_80593030_000000EC:
     li r0, 0x0
     b lbl_fn_80593030_000001B8
 lbl_fn_80593030_000000F4:
-    bl fn_80211480
+    bl event_findEntryById
     mr r18, r3
     lwz r3, 0x0(r29)
-    bl fn_80211480
+    bl event_findEntryById
     lwz r5, 0x8(r18)
     mr r17, r3
     addi r3, r1, 0xe8
@@ -108,7 +108,7 @@ lbl_fn_80593030_000000F4:
     bl fn_800DD3FC
     addi r3, r1, 0xe8
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_80593030_00000134
     sth r31, 0x0(r3)
@@ -120,14 +120,14 @@ lbl_fn_80593030_00000134:
     bl fn_800DD3FC
     addi r3, r1, 0x68
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_80593030_00000160
     sth r31, 0x0(r3)
 lbl_fn_80593030_00000160:
     addi r3, r1, 0xe8
     addi r4, r1, 0x68
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_80593030_000001A8
     lwz r3, 0x8(r18)
@@ -146,7 +146,7 @@ lbl_fn_80593030_00000160:
 lbl_fn_80593030_000001A8:
     lwz r3, 0x8(r18)
     lwz r4, 0x8(r17)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
 lbl_fn_80593030_000001B8:
     cmpwi r0, 0x0
@@ -385,14 +385,14 @@ lbl_fn_805933EC_000004FC:
     fcmpo cr0, f2, f31
     bge lbl_fn_805933EC_00000544
     mr r3, r4
-    bl fn_80211480
+    bl event_findEntryById
     mr r19, r3
     lwz r3, 0x0(r17)
-    bl fn_80211480
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r19)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_805933EC_00000550
 lbl_fn_805933EC_00000544:
@@ -634,14 +634,14 @@ lbl_fn_805933EC_0000089C:
     fcmpo cr0, f2, f31
     bge lbl_fn_805933EC_000008E4
     mr r3, r4
-    bl fn_80211480
+    bl event_findEntryById
     mr r15, r3
     lwz r3, 0x0(r30)
-    bl fn_80211480
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r15)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_805933EC_000008F0
 lbl_fn_805933EC_000008E4:
@@ -707,14 +707,14 @@ lbl_fn_805933EC_000009A0:
     fcmpo cr0, f2, f31
     bge lbl_fn_805933EC_000009E8
     mr r3, r4
-    bl fn_80211480
+    bl event_findEntryById
     mr r15, r3
     lwz r3, 0x0(r30)
-    bl fn_80211480
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r15)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_805933EC_000009F4
 lbl_fn_805933EC_000009E8:
@@ -892,14 +892,14 @@ lbl_fn_805933EC_00000C5C:
     fcmpo cr0, f2, f31
     bge lbl_fn_805933EC_00000CA4
     mr r3, r4
-    bl fn_80211480
+    bl event_findEntryById
     mr r15, r3
     lwz r3, 0x0(r30)
-    bl fn_80211480
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r15)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_805933EC_00000CB0
 lbl_fn_805933EC_00000CA4:
@@ -962,14 +962,14 @@ lbl_fn_805933EC_00000D54:
     fcmpo cr0, f2, f31
     bge lbl_fn_805933EC_00000D9C
     mr r3, r4
-    bl fn_80211480
+    bl event_findEntryById
     mr r15, r3
     lwz r3, 0x0(r30)
-    bl fn_80211480
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r15)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_805933EC_00000DA8
 lbl_fn_805933EC_00000D9C:
@@ -1262,14 +1262,14 @@ lbl_fn_805933EC_000011E4:
     fcmpo cr0, f2, f31
     bge lbl_fn_805933EC_0000122C
     mr r3, r4
-    bl fn_80211480
+    bl event_findEntryById
     mr r16, r3
     lwz r3, 0x0(r15)
-    bl fn_80211480
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r16)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_805933EC_00001238
 lbl_fn_805933EC_0000122C:
@@ -1339,14 +1339,14 @@ lbl_fn_805933EC_000012F4:
     fcmpo cr0, f2, f31
     bge lbl_fn_805933EC_0000133C
     mr r3, r4
-    bl fn_80211480
+    bl event_findEntryById
     mr r16, r3
     lwz r3, 0x0(r28)
-    bl fn_80211480
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r16)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_805933EC_00001348
 lbl_fn_805933EC_0000133C:
@@ -1527,14 +1527,14 @@ lbl_fn_805933EC_000015B8:
     fcmpo cr0, f2, f31
     bge lbl_fn_805933EC_00001600
     mr r3, r4
-    bl fn_80211480
+    bl event_findEntryById
     mr r16, r3
     lwz r3, 0x0(r28)
-    bl fn_80211480
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r16)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_805933EC_0000160C
 lbl_fn_805933EC_00001600:
@@ -1599,14 +1599,14 @@ lbl_fn_805933EC_000016B8:
     fcmpo cr0, f2, f31
     bge lbl_fn_805933EC_00001700
     mr r3, r4
-    bl fn_80211480
+    bl event_findEntryById
     mr r16, r3
     lwz r3, 0x0(r15)
-    bl fn_80211480
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r16)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_805933EC_0000170C
 lbl_fn_805933EC_00001700:
@@ -1877,14 +1877,14 @@ lbl_fn_805949B4_00001AC4:
     fcmpo cr0, f2, f31
     bge lbl_fn_805949B4_00001B0C
     mr r3, r4
-    bl fn_80211480
+    bl event_findEntryById
     mr r19, r3
     lwz r3, 0x0(r17)
-    bl fn_80211480
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r19)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_805949B4_00001B18
 lbl_fn_805949B4_00001B0C:
@@ -2126,14 +2126,14 @@ lbl_fn_805949B4_00001E64:
     fcmpo cr0, f2, f31
     bge lbl_fn_805949B4_00001EAC
     mr r3, r4
-    bl fn_80211480
+    bl event_findEntryById
     mr r15, r3
     lwz r3, 0x0(r30)
-    bl fn_80211480
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r15)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_805949B4_00001EB8
 lbl_fn_805949B4_00001EAC:
@@ -2199,14 +2199,14 @@ lbl_fn_805949B4_00001F68:
     fcmpo cr0, f2, f31
     bge lbl_fn_805949B4_00001FB0
     mr r3, r4
-    bl fn_80211480
+    bl event_findEntryById
     mr r15, r3
     lwz r3, 0x0(r30)
-    bl fn_80211480
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r15)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_805949B4_00001FBC
 lbl_fn_805949B4_00001FB0:
@@ -2384,14 +2384,14 @@ lbl_fn_805949B4_00002224:
     fcmpo cr0, f2, f31
     bge lbl_fn_805949B4_0000226C
     mr r3, r4
-    bl fn_80211480
+    bl event_findEntryById
     mr r15, r3
     lwz r3, 0x0(r30)
-    bl fn_80211480
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r15)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_805949B4_00002278
 lbl_fn_805949B4_0000226C:
@@ -2454,14 +2454,14 @@ lbl_fn_805949B4_0000231C:
     fcmpo cr0, f2, f31
     bge lbl_fn_805949B4_00002364
     mr r3, r4
-    bl fn_80211480
+    bl event_findEntryById
     mr r15, r3
     lwz r3, 0x0(r30)
-    bl fn_80211480
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r15)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_805949B4_00002370
 lbl_fn_805949B4_00002364:
@@ -2754,14 +2754,14 @@ lbl_fn_805949B4_000027AC:
     fcmpo cr0, f2, f31
     bge lbl_fn_805949B4_000027F4
     mr r3, r4
-    bl fn_80211480
+    bl event_findEntryById
     mr r16, r3
     lwz r3, 0x0(r15)
-    bl fn_80211480
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r16)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_805949B4_00002800
 lbl_fn_805949B4_000027F4:
@@ -2831,14 +2831,14 @@ lbl_fn_805949B4_000028BC:
     fcmpo cr0, f2, f31
     bge lbl_fn_805949B4_00002904
     mr r3, r4
-    bl fn_80211480
+    bl event_findEntryById
     mr r16, r3
     lwz r3, 0x0(r28)
-    bl fn_80211480
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r16)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_805949B4_00002910
 lbl_fn_805949B4_00002904:
@@ -3019,14 +3019,14 @@ lbl_fn_805949B4_00002B80:
     fcmpo cr0, f2, f31
     bge lbl_fn_805949B4_00002BC8
     mr r3, r4
-    bl fn_80211480
+    bl event_findEntryById
     mr r16, r3
     lwz r3, 0x0(r28)
-    bl fn_80211480
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r16)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_805949B4_00002BD4
 lbl_fn_805949B4_00002BC8:
@@ -3091,14 +3091,14 @@ lbl_fn_805949B4_00002C80:
     fcmpo cr0, f2, f31
     bge lbl_fn_805949B4_00002CC8
     mr r3, r4
-    bl fn_80211480
+    bl event_findEntryById
     mr r16, r3
     lwz r3, 0x0(r15)
-    bl fn_80211480
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r16)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_805949B4_00002CD4
 lbl_fn_805949B4_00002CC8:

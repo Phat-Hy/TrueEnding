@@ -9,7 +9,7 @@ extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void actor_dispatchMessage(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006A900(void);
 extern void fn_8009EE30(void);
@@ -18,7 +18,7 @@ extern void ref_releaseHandle(void);
 extern void fn_800CB5B4(void);
 extern void atn_Task_unlink(void);
 extern void fn_800DC12C(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void fn_801F4D80(void);
 extern void fn_80202118(void);
 extern void res_findResourceSlot(void);
@@ -1074,7 +1074,7 @@ lbl_fn_8051F7D4_00000DE8:
     bne lbl_fn_8051F7D4_00000E20
     addi r3, r1, 0x8
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1085,7 +1085,7 @@ lbl_fn_8051F7D4_00000DE8:
 lbl_fn_8051F7D4_00000E20:
     addi r3, r1, 0xc
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -1137,7 +1137,7 @@ lbl_fn_8051F7D4_00000EC4:
     beq lbl_fn_8051F7D4_00000F18
     addi r3, r1, 0x10
     li r4, 0x21
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1259,7 +1259,7 @@ lbl_fn_8051FB80_0000105C:
 lbl_fn_8051FB80_00001080:
     addi r3, r1, 0x8
     li r4, 0x7
-    bl fn_80117228
+    bl actor_spawnActorWithId
     lfs f1, lbl_80887904
     addi r3, r1, 0x8
     li r4, 0x37
@@ -1323,7 +1323,7 @@ lbl_fn_8051FD24_00001128:
     bl fn_80530330
     addi r3, r1, 0x14
     li r4, 0x8
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -1417,14 +1417,14 @@ lbl_fn_8051FD24_0000129C:
     bl fn_8051FB80
     addi r3, r1, 0x10
     li r4, 0x9
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
 lbl_fn_8051FD24_000012C0:
     addi r3, r1, 0xc
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -1432,7 +1432,7 @@ lbl_fn_8051FD24_000012C0:
 lbl_fn_8051FD24_000012DC:
     addi r3, r1, 0x8
     li r4, 0xb
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -2279,7 +2279,7 @@ lbl_fn_80520638_00001E5C:
     bl dtor_80084684
 lbl_fn_80520638_00001E7C:
     addi r3, r1, 0xb0
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_80520638_00001B08
     addi r3, r23, 0x19c4

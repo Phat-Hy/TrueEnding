@@ -59,7 +59,7 @@ extern void fn_804A4930(void);
 extern void fn_804A55FC(void);
 extern void printf(void);
 extern void wcslen(void);
-extern void fn_80686A64(void);
+extern void wcscpy(void);
 extern void abort(void);
 extern void fn_80695A50(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -486,7 +486,7 @@ lbl_fn_80469D60_00000518:
     bl talk_parseDialogue
     mr r4, r3
     addi r3, r1, 0x3c
-    bl fn_80686A64
+    bl wcscpy
     lwz r4, 0xa0(r17)
     lwz r3, 0xa4(r17)
     cmplw r4, r3

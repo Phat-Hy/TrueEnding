@@ -38,7 +38,7 @@ extern void thread_findAndNotify(void);
 extern void fn_80201E78(void);
 extern void fn_80202118(void);
 extern void fn_80202A6C(void);
-extern void fn_80202D00(void);
+extern void perf_getMetricValue(void);
 extern void fn_8020924C(void);
 extern void fn_8020A81C(void);
 extern void fn_80219544(void);
@@ -217,7 +217,7 @@ asm void fn_8052635C(void)
     lwz r3, 0x18(r3)
     mr r29, r4
     mr r26, r5
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8052635C_000003FC
@@ -281,7 +281,7 @@ lbl_fn_8052635C_000001E0:
 lbl_fn_8052635C_0000021C:
     lwz r26, 0x8(r28)
     lwz r3, 0x18(r28)
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_8052635C_00000360
@@ -291,7 +291,7 @@ lbl_fn_8052635C_0000021C:
     lwz r3, 0x18(r28)
     cmpwi r3, 0x0
     beq lbl_fn_8052635C_00000290
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_8052635C_00000290
     lwz r3, 0x0(r28)
@@ -299,7 +299,7 @@ lbl_fn_8052635C_0000021C:
     cmplwi r0, 0x1
     ble lbl_fn_8052635C_00000290
     lwz r3, 0x18(r28)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f1, 0x54(r3)
     lfs f0, lbl_80887A00
     fabs f1, f1
@@ -1821,7 +1821,7 @@ lbl_fn_8052793C_00001750:
     bl fn_80202118
     mr r22, r3
     lwz r3, 0xd8(r26)
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r22, 0x0
     mr r21, r3
     beq lbl_fn_8052793C_00002030

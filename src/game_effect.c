@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void __files(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8001A464(void);
 extern void fn_8001A65C(void);
@@ -5033,7 +5033,7 @@ lbl_fn_8003DD50_000044C4:
     mr r3, r25
     stw r0, 0x4(r25)
     stw r0, 0x8(r25)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0xc(r1)
     mr r3, r25
     stb r5, 0x8(r1)
@@ -5531,7 +5531,7 @@ asm void fn_8003E4A4(void)
     mr r31, r3
     mr r3, r29
     mr r4, r31
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x8(r1)
     mr r3, r29
     stb r0, 0xc(r1)

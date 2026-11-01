@@ -33,7 +33,7 @@ extern void fn_8015E7A0(void);
 extern void fn_801681B0(void);
 extern void fn_8016D0A0(void);
 extern void fn_801750FC(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void task_findEntryById(void);
 extern void fn_8021A684(void);
 extern void fn_8021A77C(void);
@@ -1394,7 +1394,7 @@ lbl_fn_804EFF78_00001294:
     cmplwi r25, 0xb
     bne lbl_fn_804EFF78_000012C4
     lwz r3, 0x0(r28)
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     beq lbl_fn_804EFF78_000012C4
     lwz r7, 0x4(r28)

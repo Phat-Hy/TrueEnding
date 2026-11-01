@@ -13,7 +13,7 @@ extern void dtor_80084684(void);
 extern void fn_80008210(void);
 extern void fn_8004AE84(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006144C(void);
 extern void skill_calculateDamage(void);
@@ -1391,7 +1391,7 @@ lbl_spectateView_renderInterface_00001298:
     bl dtor_80084684
 lbl_spectateView_renderInterface_000012DC:
     addi r3, r1, 0x50
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_0000099C
     addi r3, r15, 0x438

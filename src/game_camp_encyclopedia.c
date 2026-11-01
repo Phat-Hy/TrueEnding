@@ -10,7 +10,7 @@ extern void fn_8000ECA8(void);
 extern void fn_8003E4A4(void);
 extern void fn_8004212C(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_80089ACC(void);
@@ -365,7 +365,7 @@ lbl_fn_803C606C_000002C8:
     bl dtor_80013D60
 lbl_fn_803C606C_00000398:
     mr r3, r30
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_803C606C_0000014C
 lbl_fn_803C606C_000003A8:
@@ -749,7 +749,7 @@ lbl_fn_803C65EC_00000848:
     bl dtor_80013D60
 lbl_fn_803C65EC_000008AC:
     mr r3, r26
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_803C65EC_000006CC
 lbl_fn_803C65EC_000008BC:
@@ -1127,7 +1127,7 @@ lbl_fn_803C6AE8_00000D44:
     bl dtor_80013D60
 lbl_fn_803C6AE8_00000DA8:
     mr r3, r26
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_803C6AE8_00000BC8
 lbl_fn_803C6AE8_00000DB8:
@@ -1505,7 +1505,7 @@ lbl_fn_803C6FE4_00001240:
     bl dtor_80013D60
 lbl_fn_803C6FE4_000012A4:
     mr r3, r26
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_803C6FE4_000010C4
 lbl_fn_803C6FE4_000012B4:
@@ -2001,7 +2001,7 @@ lbl_fn_803C74E0_000018E8:
     bl dtor_80013D60
 lbl_fn_803C74E0_00001970:
     mr r3, r26
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_803C74E0_000015D0
 lbl_fn_803C74E0_00001980:

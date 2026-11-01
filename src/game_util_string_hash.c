@@ -4,12 +4,12 @@
 /* External function declarations */
 extern void fn_800DD3FC(void);
 extern void fn_8020EFEC(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void fn_80590AAC(void);
 extern void fn_80591508(void);
 extern void wcslen(void);
-extern void fn_80686AF0(void);
-extern void fn_80686B64(void);
+extern void wcscmp(void);
+extern void wcschr(void);
 
 /* External data declarations */
 extern u8 lbl_80796ACC[];
@@ -261,10 +261,10 @@ lbl_fn_8058EF0C_000002EC:
     li r0, 0x0
     b lbl_fn_8058EF0C_000003C8
 lbl_fn_8058EF0C_000002F4:
-    bl fn_80211480
+    bl event_findEntryById
     mr r16, r3
     lwz r3, 0x0(r15)
-    bl fn_80211480
+    bl event_findEntryById
     lis r4, lbl_80796ACC@ha
     lwz r5, 0x8(r16)
     mr r15, r3
@@ -274,7 +274,7 @@ lbl_fn_8058EF0C_000002F4:
     bl fn_800DD3FC
     addi r3, r1, 0x368
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_8058EF0C_0000033C
     li r0, 0x0
@@ -288,7 +288,7 @@ lbl_fn_8058EF0C_0000033C:
     bl fn_800DD3FC
     addi r3, r1, 0x3e8
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_8058EF0C_00000370
     li r0, 0x0
@@ -296,7 +296,7 @@ lbl_fn_8058EF0C_0000033C:
 lbl_fn_8058EF0C_00000370:
     addi r3, r1, 0x368
     addi r4, r1, 0x3e8
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_8058EF0C_000003B8
     lwz r3, 0x8(r16)
@@ -315,7 +315,7 @@ lbl_fn_8058EF0C_00000370:
 lbl_fn_8058EF0C_000003B8:
     lwz r3, 0x8(r16)
     lwz r4, 0x8(r15)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
 lbl_fn_8058EF0C_000003C8:
     lwz r16, 0x0(r29)
@@ -366,10 +366,10 @@ lbl_fn_8058EF0C_0000046C:
     li r0, 0x0
     b lbl_fn_8058EF0C_00000548
 lbl_fn_8058EF0C_00000474:
-    bl fn_80211480
+    bl event_findEntryById
     mr r16, r3
     lwz r3, 0x0(r15)
-    bl fn_80211480
+    bl event_findEntryById
     lis r4, lbl_80796ACC@ha
     lwz r5, 0x8(r16)
     mr r15, r3
@@ -379,7 +379,7 @@ lbl_fn_8058EF0C_00000474:
     bl fn_800DD3FC
     addi r3, r1, 0x268
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_8058EF0C_000004BC
     li r0, 0x0
@@ -393,7 +393,7 @@ lbl_fn_8058EF0C_000004BC:
     bl fn_800DD3FC
     addi r3, r1, 0x2e8
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_8058EF0C_000004F0
     li r0, 0x0
@@ -401,7 +401,7 @@ lbl_fn_8058EF0C_000004BC:
 lbl_fn_8058EF0C_000004F0:
     addi r3, r1, 0x268
     addi r4, r1, 0x2e8
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_8058EF0C_00000538
     lwz r3, 0x8(r16)
@@ -420,7 +420,7 @@ lbl_fn_8058EF0C_000004F0:
 lbl_fn_8058EF0C_00000538:
     lwz r3, 0x8(r16)
     lwz r4, 0x8(r15)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
 lbl_fn_8058EF0C_00000548:
     cmpwi r31, 0x0
@@ -592,10 +592,10 @@ lbl_fn_8058EF0C_000007C8:
     li r0, 0x0
     b lbl_fn_8058EF0C_000008A4
 lbl_fn_8058EF0C_000007D0:
-    bl fn_80211480
+    bl event_findEntryById
     mr r16, r3
     lwz r3, 0x0(r15)
-    bl fn_80211480
+    bl event_findEntryById
     lis r4, lbl_80796ACC@ha
     lwz r5, 0x8(r16)
     mr r15, r3
@@ -605,7 +605,7 @@ lbl_fn_8058EF0C_000007D0:
     bl fn_800DD3FC
     addi r3, r1, 0x110
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_8058EF0C_00000818
     li r0, 0x0
@@ -619,7 +619,7 @@ lbl_fn_8058EF0C_00000818:
     bl fn_800DD3FC
     addi r3, r1, 0x190
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_8058EF0C_0000084C
     li r0, 0x0
@@ -627,7 +627,7 @@ lbl_fn_8058EF0C_00000818:
 lbl_fn_8058EF0C_0000084C:
     addi r3, r1, 0x110
     addi r4, r1, 0x190
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_8058EF0C_00000894
     lwz r3, 0x8(r16)
@@ -646,7 +646,7 @@ lbl_fn_8058EF0C_0000084C:
 lbl_fn_8058EF0C_00000894:
     lwz r3, 0x8(r16)
     lwz r4, 0x8(r15)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
 lbl_fn_8058EF0C_000008A4:
     cmpwi r0, 0x0
@@ -1067,10 +1067,10 @@ lbl_fn_8058FAD4_00000EE8:
     li r0, 0x0
     b lbl_fn_8058FAD4_00000FB4
 lbl_fn_8058FAD4_00000EF0:
-    bl fn_80211480
+    bl event_findEntryById
     mr r18, r3
     lwz r3, 0x0(r29)
-    bl fn_80211480
+    bl event_findEntryById
     lwz r5, 0x8(r18)
     mr r17, r3
     addi r3, r1, 0xe8
@@ -1079,7 +1079,7 @@ lbl_fn_8058FAD4_00000EF0:
     bl fn_800DD3FC
     addi r3, r1, 0xe8
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_8058FAD4_00000F30
     sth r31, 0x0(r3)
@@ -1091,14 +1091,14 @@ lbl_fn_8058FAD4_00000F30:
     bl fn_800DD3FC
     addi r3, r1, 0x68
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_8058FAD4_00000F5C
     sth r31, 0x0(r3)
 lbl_fn_8058FAD4_00000F5C:
     addi r3, r1, 0xe8
     addi r4, r1, 0x68
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_8058FAD4_00000FA4
     lwz r3, 0x8(r18)
@@ -1117,7 +1117,7 @@ lbl_fn_8058FAD4_00000F5C:
 lbl_fn_8058FAD4_00000FA4:
     lwz r3, 0x8(r18)
     lwz r4, 0x8(r17)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
 lbl_fn_8058FAD4_00000FB4:
     cmpwi r0, 0x0
@@ -1756,14 +1756,14 @@ lbl_fn_8059044C_00001830:
     fcmpo cr0, f3, f0
     bge lbl_fn_8059044C_0000187C
     mr r3, r4
-    bl fn_80211480
+    bl event_findEntryById
     mr r31, r3
     lwz r3, 0x0(r30)
-    bl fn_80211480
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r31)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r3, r3, 31
     b lbl_fn_8059044C_00001888
 lbl_fn_8059044C_0000187C:

@@ -13,8 +13,8 @@ extern void fn_8051900C(void);
 extern void fn_805190A4(void);
 extern void fn_80519390(void);
 extern void wcslen(void);
-extern void fn_80686AF0(void);
-extern void fn_80686B64(void);
+extern void wcscmp(void);
+extern void wcschr(void);
 
 /* External data declarations */
 extern u8 lbl_807934F4[];
@@ -606,7 +606,7 @@ lbl_fn_8051994C_00000784:
     bl fn_800DD3FC
     addi r3, r1, 0x88
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_8051994C_000007B8
     li r0, 0x0
@@ -620,7 +620,7 @@ lbl_fn_8051994C_000007B8:
     bl fn_800DD3FC
     addi r3, r1, 0x8
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_8051994C_000007EC
     li r0, 0x0
@@ -628,7 +628,7 @@ lbl_fn_8051994C_000007B8:
 lbl_fn_8051994C_000007EC:
     addi r3, r1, 0x88
     addi r4, r1, 0x8
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_8051994C_00000890
     lwz r0, 0x8(r27)
@@ -641,7 +641,7 @@ lbl_fn_8051994C_000007EC:
     lwz r30, 0x8(r31)
     mr r4, r29
     mr r3, r30
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_8051994C_00000848
     lhz r3, 0x4(r27)
@@ -652,7 +652,7 @@ lbl_fn_8051994C_000007EC:
 lbl_fn_8051994C_00000848:
     mr r3, r30
     mr r4, r29
-    bl fn_80686AF0
+    bl wcscmp
     srwi r3, r3, 31
     b lbl_fn_8051994C_000008A0
 lbl_fn_8051994C_0000085C:
@@ -672,7 +672,7 @@ lbl_fn_8051994C_0000085C:
 lbl_fn_8051994C_00000890:
     mr r3, r29
     mr r4, r26
-    bl fn_80686AF0
+    bl wcscmp
     srwi r3, r3, 31
 lbl_fn_8051994C_000008A0:
     lmw r25, 0x114(r1)
@@ -1192,7 +1192,7 @@ lbl_fn_8051A19C_00000FE0:
     bl fn_800DD3FC
     addi r3, r1, 0x268
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_8051A19C_00001014
     li r0, 0x0
@@ -1206,7 +1206,7 @@ lbl_fn_8051A19C_00001014:
     bl fn_800DD3FC
     addi r3, r1, 0x2e8
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_8051A19C_00001048
     li r0, 0x0
@@ -1214,7 +1214,7 @@ lbl_fn_8051A19C_00001014:
 lbl_fn_8051A19C_00001048:
     addi r3, r1, 0x268
     addi r4, r1, 0x2e8
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_8051A19C_000010EC
     lwz r0, 0x8(r24)
@@ -1227,7 +1227,7 @@ lbl_fn_8051A19C_00001048:
     lwz r22, 0x8(r26)
     mr r4, r21
     mr r3, r22
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_8051A19C_000010A4
     lhz r3, 0x4(r24)
@@ -1238,7 +1238,7 @@ lbl_fn_8051A19C_00001048:
 lbl_fn_8051A19C_000010A4:
     mr r3, r22
     mr r4, r21
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_8051A19C_000010FC
 lbl_fn_8051A19C_000010B8:
@@ -1258,7 +1258,7 @@ lbl_fn_8051A19C_000010B8:
 lbl_fn_8051A19C_000010EC:
     mr r3, r28
     mr r4, r22
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
 lbl_fn_8051A19C_000010FC:
     lwz r23, 0x0(r30)
@@ -1403,7 +1403,7 @@ lbl_fn_8051A19C_000012E4:
     bl fn_800DD3FC
     addi r3, r1, 0x168
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_8051A19C_00001318
     li r0, 0x0
@@ -1417,7 +1417,7 @@ lbl_fn_8051A19C_00001318:
     bl fn_800DD3FC
     addi r3, r1, 0x1e8
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_8051A19C_0000134C
     li r0, 0x0
@@ -1425,7 +1425,7 @@ lbl_fn_8051A19C_00001318:
 lbl_fn_8051A19C_0000134C:
     addi r3, r1, 0x168
     addi r4, r1, 0x1e8
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_8051A19C_000013F0
     lwz r0, 0x8(r23)
@@ -1438,7 +1438,7 @@ lbl_fn_8051A19C_0000134C:
     lwz r22, 0x8(r25)
     mr r4, r21
     mr r3, r22
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_8051A19C_000013A8
     lhz r3, 0x4(r23)
@@ -1449,7 +1449,7 @@ lbl_fn_8051A19C_0000134C:
 lbl_fn_8051A19C_000013A8:
     mr r3, r22
     mr r4, r21
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_8051A19C_00001400
 lbl_fn_8051A19C_000013BC:
@@ -1469,7 +1469,7 @@ lbl_fn_8051A19C_000013BC:
 lbl_fn_8051A19C_000013F0:
     mr r3, r26
     mr r4, r22
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
 lbl_fn_8051A19C_00001400:
     cmpwi r28, 0x0
@@ -1662,7 +1662,7 @@ lbl_fn_8051A19C_000016A0:
     bl fn_800DD3FC
     addi r3, r1, 0x68
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_8051A19C_000016D4
     li r0, 0x0
@@ -1676,7 +1676,7 @@ lbl_fn_8051A19C_000016D4:
     bl fn_800DD3FC
     addi r3, r1, 0xe8
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_8051A19C_00001708
     li r0, 0x0
@@ -1684,7 +1684,7 @@ lbl_fn_8051A19C_000016D4:
 lbl_fn_8051A19C_00001708:
     addi r3, r1, 0x68
     addi r4, r1, 0xe8
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_8051A19C_000017AC
     lwz r0, 0x8(r24)
@@ -1697,7 +1697,7 @@ lbl_fn_8051A19C_00001708:
     lwz r22, 0x8(r27)
     mr r4, r21
     mr r3, r22
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_8051A19C_00001764
     lhz r3, 0x4(r24)
@@ -1708,7 +1708,7 @@ lbl_fn_8051A19C_00001708:
 lbl_fn_8051A19C_00001764:
     mr r3, r22
     mr r4, r21
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_8051A19C_000017BC
 lbl_fn_8051A19C_00001778:
@@ -1728,7 +1728,7 @@ lbl_fn_8051A19C_00001778:
 lbl_fn_8051A19C_000017AC:
     mr r3, r25
     mr r4, r21
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
 lbl_fn_8051A19C_000017BC:
     cmpwi r0, 0x0
@@ -2019,7 +2019,7 @@ lbl_fn_8051AD58_00001BC8:
     bl fn_800DD3FC
     addi r3, r1, 0xa0
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_8051AD58_00001BF4
     sth r31, 0x0(r3)
@@ -2031,14 +2031,14 @@ lbl_fn_8051AD58_00001BF4:
     bl fn_800DD3FC
     addi r3, r1, 0x20
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_8051AD58_00001C20
     sth r31, 0x0(r3)
 lbl_fn_8051AD58_00001C20:
     addi r3, r1, 0xa0
     addi r4, r1, 0x20
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_8051AD58_00001CC4
     lwz r0, 0x8(r21)
@@ -2051,7 +2051,7 @@ lbl_fn_8051AD58_00001C20:
     lwz r24, 0x8(r27)
     mr r4, r19
     mr r3, r24
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_8051AD58_00001C7C
     lhz r3, 0x4(r21)
@@ -2062,7 +2062,7 @@ lbl_fn_8051AD58_00001C20:
 lbl_fn_8051AD58_00001C7C:
     mr r3, r24
     mr r4, r19
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_8051AD58_00001CD4
 lbl_fn_8051AD58_00001C90:
@@ -2082,7 +2082,7 @@ lbl_fn_8051AD58_00001C90:
 lbl_fn_8051AD58_00001CC4:
     mr r3, r24
     mr r4, r19
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
 lbl_fn_8051AD58_00001CD4:
     cmpwi r0, 0x0

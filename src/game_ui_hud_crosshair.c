@@ -15,7 +15,7 @@ extern void fn_800CFBA0(void);
 extern void str_findChar(void);
 extern void fn_80116FC0(void);
 extern void fn_80117214(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void fn_801CDD9C(void);
 extern void fn_801CDE14(void);
 extern void fn_801CE4CC(void);
@@ -53,14 +53,14 @@ extern void saveSlot_readSummary(void);
 extern void fn_801F6C80(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_80202118(void);
-extern void fn_80202D00(void);
-extern void fn_80206BE4(void);
+extern void perf_getMetricValue(void);
+extern void assert_generateId(void);
 extern void fn_8020BE40(void);
 extern void fn_8020BF20(void);
 extern void fn_8020ED84(void);
 extern void fn_8020EF4C(void);
-extern void fn_8020EF80(void);
-extern void fn_80211480(void);
+extern void random_generateValue(void);
+extern void event_findEntryById(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
 extern void fn_803750E4(void);
@@ -242,7 +242,7 @@ asm void fn_801D3DF4(void)
     stfs f1, 0xe0(r1)
     stfs f0, 0xe4(r1)
     lwz r3, 0x140(r28)
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     mr r26, r3
     beq lbl_fn_801D3DF4_00000218
@@ -261,7 +261,7 @@ lbl_fn_801D3DF4_00000218:
     slwi r0, r0, 2
     add r3, r28, r0
     lwz r3, 0x108(r3)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lwz r5, 0x50(r28)
     mr r4, r3
     mr r3, r28
@@ -273,7 +273,7 @@ lbl_fn_801D3DF4_00000218:
     b lbl_fn_801D3DF4_00000768
 lbl_fn_801D3DF4_00000258:
     lwz r3, 0x140(r3)
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     mr r26, r3
     beq lbl_fn_801D3DF4_00000768
@@ -323,7 +323,7 @@ lbl_fn_801D3DF4_00000258:
     stfs f1, 0xe0(r1)
     stfs f0, 0xe4(r1)
     lwz r3, 0x1d0(r28)
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     mr r26, r3
     beq lbl_fn_801D3DF4_00000354
@@ -342,7 +342,7 @@ lbl_fn_801D3DF4_00000354:
     slwi r0, r0, 2
     add r3, r28, r0
     lwz r3, 0x198(r3)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lwz r5, 0x50(r28)
     mr r4, r3
     mr r3, r28
@@ -354,7 +354,7 @@ lbl_fn_801D3DF4_00000354:
     b lbl_fn_801D3DF4_00000768
 lbl_fn_801D3DF4_00000394:
     lwz r3, 0x1d0(r3)
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     mr r26, r3
     beq lbl_fn_801D3DF4_00000768
@@ -448,7 +448,7 @@ lbl_fn_801D3DF4_00000494:
     stfs f1, 0xe0(r1)
     stfs f0, 0xe4(r1)
     lwz r3, 0x150(r3)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lwz r5, 0x50(r28)
     mr r4, r3
     mr r3, r28
@@ -489,7 +489,7 @@ lbl_fn_801D3DF4_00000494:
     slwi r0, r0, 2
     add r3, r28, r0
     lwz r3, 0x150(r3)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lwz r5, 0x50(r28)
     mr r4, r3
     mr r3, r28
@@ -863,7 +863,7 @@ lbl_fn_801D4700_00000AD0:
     bl fn_801CDE14
     addi r3, r1, 0x8
     li r4, 0xa
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -960,7 +960,7 @@ asm void fn_801D4A0C(void)
     bl fn_8052DEF0
     addi r3, r1, 0x8
     li r4, 0x8
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1251,8 +1251,8 @@ asm void fn_801D4E74(void)
     bl fn_801CFA5C
     cmpwi r3, 0x0
     beq lbl_fn_801D4E74_0000117C
-    bl fn_80206BE4
-    bl fn_80211480
+    bl assert_generateId
+    bl event_findEntryById
     mr r28, r3
     lwz r3, lbl_8087F4F0
     mr r4, r28
@@ -1361,9 +1361,9 @@ lbl_fn_801D4E74_00001218:
     mr r28, r3
 lbl_fn_801D4E74_00001268:
     mr r3, r28
-    bl fn_8020EF80
+    bl random_generateValue
     mr r28, r3
-    bl fn_80211480
+    bl event_findEntryById
     mr r30, r3
     lwz r3, lbl_8087F4F0
     mr r4, r28
@@ -1451,9 +1451,9 @@ lbl_fn_801D4E74_00001380:
 lbl_fn_801D4E74_000013B4:
     li r5, 0x2
     bl fn_801CFAA8
-    bl fn_8020EF80
+    bl random_generateValue
     mr r28, r3
-    bl fn_80211480
+    bl event_findEntryById
     mr r30, r3
     lwz r3, lbl_8087F4F0
     mr r4, r28
@@ -1731,7 +1731,7 @@ lbl_fn_801D54C0_00001754:
     bl fn_804A4294
     addi r3, r1, 0x34
     li r4, 0xb
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x34
     li r4, -0x1
     bl ref_releaseHandle
@@ -1770,7 +1770,7 @@ lbl_fn_801D54C0_000017E4:
     bl fn_804A4294
     addi r3, r1, 0x30
     li r4, 0xb
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x30
     li r4, -0x1
     bl ref_releaseHandle
@@ -1816,7 +1816,7 @@ lbl_fn_801D54C0_000018A4:
 lbl_fn_801D54C0_000018C0:
     addi r3, r1, 0x2c
     li r4, 0xb
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x2c
     li r4, -0x1
     bl ref_releaseHandle
@@ -1837,7 +1837,7 @@ lbl_fn_801D54C0_000018DC:
     bl fn_804A4294
     addi r3, r1, 0x28
     li r4, 0xb
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x28
     li r4, -0x1
     bl ref_releaseHandle
@@ -1857,7 +1857,7 @@ lbl_fn_801D54C0_0000192C:
     bl fn_804A4294
     addi r3, r1, 0x24
     li r4, 0xb
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x24
     li r4, -0x1
     bl ref_releaseHandle
@@ -1886,7 +1886,7 @@ lbl_fn_801D54C0_00001994:
     bl fn_804A4294
     addi r3, r1, 0x20
     li r4, 0xb
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x20
     li r4, -0x1
     bl ref_releaseHandle
@@ -1915,7 +1915,7 @@ lbl_fn_801D54C0_00001A00:
     bl fn_804A4294
     addi r3, r1, 0x1c
     li r4, 0xb
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x1c
     li r4, -0x1
     bl ref_releaseHandle
@@ -1930,13 +1930,13 @@ lbl_fn_801D54C0_00001A50:
 lbl_fn_801D54C0_00001A68:
     addi r3, r1, 0x18
     li r4, 0xa
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x18
     li r4, -0x1
     bl ref_releaseHandle
     addi r3, r1, 0x14
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -1953,13 +1953,13 @@ lbl_fn_801D54C0_00001A9C:
     bne lbl_fn_801D54C0_00001B0C
     addi r3, r1, 0x10
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
     addi r3, r1, 0xc
     li r4, 0xa
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -1973,7 +1973,7 @@ lbl_fn_801D54C0_00001A9C:
 lbl_fn_801D54C0_00001B0C:
     addi r3, r1, 0x8
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

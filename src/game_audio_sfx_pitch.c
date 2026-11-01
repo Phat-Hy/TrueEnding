@@ -15,7 +15,7 @@ extern void vec3_sub(void);
 extern void fn_800133B0(void);
 extern void fn_8004ED34(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void fn_800897D8(void);
 extern void fn_80092954(void);
@@ -771,7 +771,7 @@ lbl_fn_80313AAC_000007AC:
     stb r0, 0x1b(r3)
 lbl_fn_80313AAC_000008BC:
     addi r3, r1, 0x28
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_80313AAC_0000063C
     lwz r0, 0x6d4(r1)

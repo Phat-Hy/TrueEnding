@@ -23,7 +23,7 @@ extern void fn_801F6350(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void task_findEntryById(void);
 extern void world_startMapTransition(void);
 extern void world_reloadMapTransition(void);
@@ -521,7 +521,7 @@ asm void fn_803E5E64(void)
     mr r28, r6
     ble lbl_fn_803E5E64_000005D4
     mr r3, r27
-    bl fn_80211480
+    bl event_findEntryById
     mr r31, r3
     b lbl_fn_803E5E64_000005D8
 lbl_fn_803E5E64_000005D4:

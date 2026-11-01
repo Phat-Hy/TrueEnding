@@ -6,7 +6,7 @@ extern void __files(void);
 extern void _restgpr_25(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void mem_free(void);
 extern void printf(void);
@@ -60,7 +60,7 @@ asm void fn_80577CC4(void)
     mr r29, r3
     mr r3, r30
     mr r4, r29
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r3, r30
     stb r0, 0x10(r1)
@@ -161,7 +161,7 @@ asm void fn_80577E00(void)
     mr r24, r3
     mr r3, r31
     mr r4, r24
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x8(r1)
     mr r3, r31
     stb r0, 0xc(r1)
@@ -203,7 +203,7 @@ lbl_fn_80577E00_00000240:
     stw r25, 0xc(r28)
     stw r25, 0x10(r28)
     lwz r4, 0x44(r1)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x20(r1)
     addi r3, r28, 0x8
     stb r5, 0x24(r1)
@@ -374,7 +374,7 @@ lbl_fn_80577E00_000004B8:
     stw r0, 0xc(r26)
     stw r0, 0x10(r26)
     lwz r4, 0x44(r1)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x14(r1)
     addi r3, r26, 0x8
     stb r5, 0x10(r1)
@@ -433,7 +433,7 @@ lbl_fn_80577E00_00000594:
     stw r25, 0xc(r29)
     stw r25, 0x10(r29)
     lwz r4, 0xc(r30)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x1c(r1)
     addi r3, r29, 0x8
     stb r0, 0x18(r1)
@@ -572,7 +572,7 @@ asm void fn_80578410(void)
     mr r29, r3
     mr r3, r30
     mr r4, r29
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r3, r30
     stb r0, 0x10(r1)
@@ -673,7 +673,7 @@ asm void fn_8057854C(void)
     mr r24, r3
     mr r3, r31
     mr r4, r24
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x8(r1)
     mr r3, r31
     stb r0, 0xc(r1)
@@ -717,7 +717,7 @@ lbl_fn_8057854C_00000994:
     stw r26, 0xc(r29)
     stw r26, 0x10(r29)
     lwz r4, 0x74(r1)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x38(r1)
     addi r3, r29, 0x8
     stb r5, 0x3c(r1)
@@ -750,7 +750,7 @@ lbl_fn_8057854C_00000A0C:
     stw r0, 0x1c(r29)
     stw r0, 0x20(r29)
     lwz r4, 0x84(r1)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x34(r1)
     addi r3, r29, 0x18
     stb r5, 0x30(r1)
@@ -914,7 +914,7 @@ lbl_fn_8057854C_00000C6C:
     stw r28, 0xc(r27)
     stw r28, 0x10(r27)
     lwz r4, 0x74(r1)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x14(r1)
     addi r3, r27, 0x8
     stb r5, 0x10(r1)
@@ -944,7 +944,7 @@ lbl_fn_8057854C_00000CDC:
     stw r28, 0x1c(r27)
     stw r28, 0x20(r27)
     lwz r4, 0x84(r1)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x18(r1)
     addi r3, r27, 0x18
     stb r5, 0x1c(r1)
@@ -998,7 +998,7 @@ lbl_fn_8057854C_00000DA4:
     stw r30, 0xc(r27)
     stw r30, 0x10(r27)
     lwz r4, 0xc(r28)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x24(r1)
     addi r3, r27, 0x8
     stb r0, 0x20(r1)
@@ -1028,7 +1028,7 @@ lbl_fn_8057854C_00000E14:
     stw r30, 0x1c(r27)
     stw r30, 0x20(r27)
     lwz r4, 0x1c(r28)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x28(r1)
     addi r3, r27, 0x18
     stb r0, 0x2c(r1)
@@ -1190,7 +1190,7 @@ asm void fn_80578CE0(void)
     mr r29, r3
     mr r3, r30
     mr r4, r29
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r3, r30
     stb r0, 0x10(r1)
@@ -1281,7 +1281,7 @@ asm void fn_80578E1C(void)
     mr r29, r3
     mr r3, r30
     mr r4, r29
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r3, r30
     stb r0, 0x10(r1)
@@ -1383,7 +1383,7 @@ asm void fn_80578F58(void)
     mr r31, r3
     mr r3, r30
     mr r4, r31
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x8(r1)
     mr r3, r30
     stb r0, 0xc(r1)
@@ -1442,7 +1442,7 @@ lbl_fn_80578F58_000013DC:
     stw r0, 0xc(r26)
     stw r0, 0x10(r26)
     lwz r4, 0x64(r1)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x20(r1)
     addi r3, r26, 0x8
     stb r5, 0x24(r1)
@@ -1650,7 +1650,7 @@ lbl_fn_80578F58_000016E4:
     stw r0, 0xc(r28)
     stw r0, 0x10(r28)
     lwz r4, 0x64(r1)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x14(r1)
     addi r3, r28, 0x8
     stb r5, 0x10(r1)
@@ -1717,7 +1717,7 @@ lbl_fn_80578F58_000017E0:
     stw r25, 0xc(r29)
     stw r25, 0x10(r29)
     lwz r4, 0xc(r30)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x1c(r1)
     addi r3, r29, 0x8
     stb r0, 0x18(r1)
@@ -1866,7 +1866,7 @@ asm void fn_80579684(void)
     mr r29, r3
     mr r3, r30
     mr r4, r29
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r3, r30
     stb r0, 0x10(r1)

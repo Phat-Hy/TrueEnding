@@ -18,7 +18,7 @@ extern void atn_Task_setActive(void);
 extern void fn_800DBF68(void);
 extern void str_findChar(void);
 extern void fn_800E0000(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void fn_801F0544(void);
 extern void fn_801F48C8(void);
 extern void fn_801F6C2C(void);
@@ -31,7 +31,7 @@ extern void fn_801FEB9C(void);
 extern void thread_findAndNotify(void);
 extern void fn_801FEDBC(void);
 extern void thread_dispatchToQueue(void);
-extern void fn_80202D00(void);
+extern void perf_getMetricValue(void);
 extern void fn_8020303C(void);
 extern void fn_80203260(void);
 extern void fn_802091E8(void);
@@ -781,7 +781,7 @@ lbl_fn_804A436C_0000096C:
     beq lbl_fn_804A436C_00000990
     mr r4, r29
     addi r3, r1, 0x8
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -972,7 +972,7 @@ lbl_fn_804A4494_00000C10:
     beq lbl_fn_804A4494_00000C34
     mr r4, r29
     addi r3, r1, 0x8
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1564,7 +1564,7 @@ asm void fn_804A4EEC(void)
     lwz r3, 0x78(r29)
     bl fn_80203260
     lwz r3, 0x78(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lis r30, lbl_807573D0@ha
     fmr f1, f27
     addi r30, r30, lbl_807573D0@l
@@ -1572,36 +1572,36 @@ asm void fn_804A4EEC(void)
     addi r4, r30, 0x128
     bl fn_801F6D7C
     lwz r3, 0x78(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     fmr f1, f28
     addi r4, r30, 0x128
     li r5, 0x1
     bl fn_801F6D7C
     lwz r3, 0x78(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     fmr f1, f31
     addi r4, r30, 0x128
     li r5, 0x4
     bl fn_801F6D7C
     lwz r3, 0x78(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     fmr f1, f29
     addi r4, r30, 0x133
     bl fn_801F6C80
     lwz r3, 0x78(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     fmr f1, f30
     addi r4, r30, 0x139
     bl fn_801F6C80
     cmpwi r28, 0x0
     beq lbl_fn_804A4EEC_00001538
     lwz r3, 0x78(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     bl fn_801F6C2C
     lfs f0, lbl_80887220
     lwz r3, 0x78(r29)
     fsubs f31, f1, f0
-    bl fn_80202D00
+    bl perf_getMetricValue
     stfs f31, 0x50(r3)
 lbl_fn_804A4EEC_00001538:
     cmpwi r26, 0x0
@@ -1730,7 +1730,7 @@ asm void fn_804A5160(void)
     lwz r3, 0x78(r29)
     bl fn_80203260
     lwz r3, 0x78(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lis r30, lbl_807573D0@ha
     fmr f1, f27
     addi r30, r30, lbl_807573D0@l
@@ -1738,36 +1738,36 @@ asm void fn_804A5160(void)
     addi r4, r30, 0x128
     bl fn_801F6D7C
     lwz r3, 0x78(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     fmr f1, f28
     addi r4, r30, 0x128
     li r5, 0x1
     bl fn_801F6D7C
     lwz r3, 0x78(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     fmr f1, f31
     addi r4, r30, 0x128
     li r5, 0x4
     bl fn_801F6D7C
     lwz r3, 0x78(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     fmr f1, f29
     addi r4, r30, 0x133
     bl fn_801F6C80
     lwz r3, 0x78(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     fmr f1, f30
     addi r4, r30, 0x139
     bl fn_801F6C80
     cmpwi r28, 0x0
     beq lbl_fn_804A5160_000017AC
     lwz r3, 0x78(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     bl fn_801F6C2C
     lfs f0, lbl_80887220
     lwz r3, 0x78(r29)
     fsubs f31, f1, f0
-    bl fn_80202D00
+    bl perf_getMetricValue
     stfs f31, 0x50(r3)
 lbl_fn_804A5160_000017AC:
     cmpwi r26, 0x0

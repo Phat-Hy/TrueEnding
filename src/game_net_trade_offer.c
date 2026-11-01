@@ -16,7 +16,7 @@ extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void fn_803750E4(void);
 extern void fn_80453DBC(void);
 extern void fn_804741C0(void);
@@ -185,7 +185,7 @@ lbl_fn_8052DEF0_00000178:
     beq lbl_fn_8052DEF0_000001B0
     addi r3, r1, 0x8
     li r4, 0x7
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r29, 0x1340
     addi r4, r1, 0x8
     bl fn_800CB440

@@ -26,7 +26,7 @@ extern void fn_8020ED84(void);
 extern void fn_8020EF04(void);
 extern void fn_8020EF4C(void);
 extern void fn_8020EFEC(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void fn_80211770(void);
 extern void fn_80212840(void);
 extern void fn_80212C34(void);
@@ -39,7 +39,7 @@ extern void fn_804A7DD4(void);
 extern void fn_80584754(void);
 extern void fn_80598534(void);
 extern void printf(void);
-extern void fn_80686AF0(void);
+extern void wcscmp(void);
 extern void fn_80686CF8(void);
 extern void abort(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -141,14 +141,14 @@ lbl_fn_80595F7C_000000C4:
     fcmpo cr0, f3, f0
     bge lbl_fn_80595F7C_00000110
     mr r3, r4
-    bl fn_80211480
+    bl event_findEntryById
     mr r14, r3
     lwz r3, 0x0(r15)
-    bl fn_80211480
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r14)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_80595F7C_0000011C
 lbl_fn_80595F7C_00000110:
@@ -213,14 +213,14 @@ lbl_fn_80595F7C_000001C8:
     fcmpo cr0, f3, f0
     bge lbl_fn_80595F7C_00000214
     mr r3, r4
-    bl fn_80211480
+    bl event_findEntryById
     mr r14, r3
     lwz r3, 0x0(r15)
-    bl fn_80211480
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r14)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_80595F7C_00000220
 lbl_fn_80595F7C_00000214:
@@ -406,14 +406,14 @@ lbl_fn_80595F7C_000004A8:
     fcmpo cr0, f3, f0
     bge lbl_fn_80595F7C_000004F4
     mr r3, r4
-    bl fn_80211480
+    bl event_findEntryById
     mr r14, r3
     lwz r3, 0x0(r15)
-    bl fn_80211480
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r14)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_80595F7C_00000500
 lbl_fn_80595F7C_000004F4:
@@ -789,12 +789,12 @@ asm void fn_805969D8(void)
     stw r25, 0x2c(r1)
     bl memset
     mr r3, r28
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     mr r26, r3
     beq lbl_fn_805969D8_0000110C
     lwz r3, 0x134(r3)
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     bne lbl_fn_805969D8_00000B90
     lwz r3, lbl_8087F430
@@ -1461,7 +1461,7 @@ lbl_fn_8059726C_000013B8:
     lwz r3, 0x60a4(r31)
     add r29, r3, r0
     lwzx r3, r3, r0
-    bl fn_80211480
+    bl event_findEntryById
     mr r25, r3
     mr r3, r27
     lwz r4, 0x4(r25)
@@ -1716,10 +1716,10 @@ lbl_fn_80597558_00001778:
     blt lbl_fn_80597558_00001778
     lwz r3, 0x0(r16)
     li r19, 0x0
-    bl fn_80211480
+    bl event_findEntryById
     mr r17, r3
     lwz r3, 0x134(r3)
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     mr r14, r3
     li r18, 0x0
@@ -2005,7 +2005,7 @@ lbl_fn_80597558_00001C0C:
     cmpwi r19, 0x0
     beq lbl_fn_80597558_00001CEC
     li r3, 0x143
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     mr r19, r3
     beq lbl_fn_80597558_00001DCC
@@ -2047,7 +2047,7 @@ lbl_fn_80597558_00001CEC:
     li r24, 0x0
 lbl_fn_80597558_00001CF8:
     lwz r3, 0x11c(r19)
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_80597558_00001DA0

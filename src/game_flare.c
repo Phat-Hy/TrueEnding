@@ -45,7 +45,7 @@ extern void fn_80178018(void);
 extern void fn_80178668(void);
 extern void fn_80179FA8(void);
 extern void fn_8017C9AC(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void fn_80211734(void);
 extern void fn_80219558(void);
 extern void task_findEntryById(void);
@@ -1391,7 +1391,7 @@ lbl_fn_800E4278_000011EC:
     mr r25, r3
     ble lbl_fn_800E4278_00001254
     li r3, 0x190
-    bl fn_80211480
+    bl event_findEntryById
     lwz r0, 0x150(r1)
     addi r4, r1, 0x154
     slwi r0, r0, 2

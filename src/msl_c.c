@@ -173,7 +173,7 @@ void* wmemcpy(void* dest, const void* src, u32 n);
 void* wmemmove(void* dest, const void* src, u32 n);
 u16* wmemchr(const u16* s, u16 c, u32 n);
 int wmemcmp(const u16* s1, const u16* s2, u32 n);
-void wcscmp(void);
+void wcs_parseFormat(void);
 void fn_80684CC0(void);
 void fn_80684F04(void);
 void fn_806851C0(void);
@@ -184,12 +184,12 @@ void fn_80686858(void);
 void swprintf(void);
 void vswprintf(void);
 u32 wcslen(const u16* str);
-void fn_80686A64(void);
-void fn_80686A80(void);
-void fn_80686AC4(void);
-void fn_80686AF0(void);
-void fn_80686B24(void);
-void fn_80686B64(void);
+void wcscpy(void);
+void wcsncpy(void);
+void wcscat(void);
+void wcscmp(void);
+void wcsncmp(void);
+void wcschr(void);
 void fn_80686B90(void);
 void fn_80686CF8(void);
 void fwide(void);
@@ -11220,7 +11220,7 @@ int wmemcmp(const u16* s1, const u16* s2, u32 n)
     return diff;
 }
 
-asm void wcscmp(void)
+asm void wcs_parseFormat(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -11243,7 +11243,7 @@ asm void wcscmp(void)
     stb r6, 0xc(r1)
     stw r6, 0x10(r1)
     stw r6, 0x14(r1)
-    bne lbl_wcscmp_0000933C
+    bne lbl_wcs_parseFormat_0000933C
     sth r0, 0xe(r1)
     addi r3, r31, 0x2
     lwz r4, 0x8(r1)
@@ -11252,96 +11252,96 @@ asm void wcscmp(void)
     stw r0, 0x4(r5)
     stw r6, 0x8(r5)
     stw r6, 0xc(r5)
-    b lbl_wcscmp_00009838
-lbl_wcscmp_0000933C:
+    b lbl_wcs_parseFormat_00009838
+lbl_wcs_parseFormat_0000933C:
     li r3, 0x2
-lbl_wcscmp_00009340:
+lbl_wcs_parseFormat_00009340:
     cmpwi r0, 0x2d
     li r5, 0x1
-    beq lbl_wcscmp_00009370
+    beq lbl_wcs_parseFormat_00009370
     cmpwi r0, 0x2b
-    beq lbl_wcscmp_00009378
+    beq lbl_wcs_parseFormat_00009378
     cmpwi r0, 0x20
-    beq lbl_wcscmp_00009380
+    beq lbl_wcs_parseFormat_00009380
     cmpwi r0, 0x23
-    beq lbl_wcscmp_00009394
+    beq lbl_wcs_parseFormat_00009394
     cmpwi r0, 0x30
-    beq lbl_wcscmp_0000939C
-    b lbl_wcscmp_000093B0
-lbl_wcscmp_00009370:
+    beq lbl_wcs_parseFormat_0000939C
+    b lbl_wcs_parseFormat_000093B0
+lbl_wcs_parseFormat_00009370:
     stb r6, 0x8(r1)
-    b lbl_wcscmp_000093B4
-lbl_wcscmp_00009378:
+    b lbl_wcs_parseFormat_000093B4
+lbl_wcs_parseFormat_00009378:
     stb r7, 0x9(r1)
-    b lbl_wcscmp_000093B4
-lbl_wcscmp_00009380:
+    b lbl_wcs_parseFormat_000093B4
+lbl_wcs_parseFormat_00009380:
     lbz r4, 0x9(r1)
     cmplwi r4, 0x1
-    beq lbl_wcscmp_000093B4
+    beq lbl_wcs_parseFormat_000093B4
     stb r3, 0x9(r1)
-    b lbl_wcscmp_000093B4
-lbl_wcscmp_00009394:
+    b lbl_wcs_parseFormat_000093B4
+lbl_wcs_parseFormat_00009394:
     stb r7, 0xb(r1)
-    b lbl_wcscmp_000093B4
-lbl_wcscmp_0000939C:
+    b lbl_wcs_parseFormat_000093B4
+lbl_wcs_parseFormat_0000939C:
     lbz r4, 0x8(r1)
     cmpwi r4, 0x0
-    beq lbl_wcscmp_000093B4
+    beq lbl_wcs_parseFormat_000093B4
     stb r3, 0x8(r1)
-    b lbl_wcscmp_000093B4
-lbl_wcscmp_000093B0:
+    b lbl_wcs_parseFormat_000093B4
+lbl_wcs_parseFormat_000093B0:
     li r5, 0x0
-lbl_wcscmp_000093B4:
+lbl_wcs_parseFormat_000093B4:
     cmpwi r5, 0x0
-    beq lbl_wcscmp_000093C4
+    beq lbl_wcs_parseFormat_000093C4
     lhzu r0, 0x2(r31)
-    b lbl_wcscmp_00009340
-lbl_wcscmp_000093C4:
+    b lbl_wcs_parseFormat_00009340
+lbl_wcs_parseFormat_000093C4:
     cmplwi r0, 0x2a
-    bne lbl_wcscmp_00009400
+    bne lbl_wcs_parseFormat_00009400
     mr r3, r29
     li r4, 0x1
     bl __va_arg
     lwz r0, 0x0(r3)
     stw r0, 0x10(r1)
     cmpwi r0, 0x0
-    bge lbl_wcscmp_000093F8
+    bge lbl_wcs_parseFormat_000093F8
     neg r0, r0
     li r3, 0x0
     stb r3, 0x8(r1)
     stw r0, 0x10(r1)
-lbl_wcscmp_000093F8:
+lbl_wcs_parseFormat_000093F8:
     lhzu r0, 0x2(r31)
-    b lbl_wcscmp_00009450
-lbl_wcscmp_00009400:
+    b lbl_wcs_parseFormat_00009450
+lbl_wcs_parseFormat_00009400:
     lis r3, lbl_807BB380@ha
     addi r3, r3, lbl_807BB380@l
     lwz r5, 0x38(r3)
-    b lbl_wcscmp_00009428
-lbl_wcscmp_00009410:
+    b lbl_wcs_parseFormat_00009428
+lbl_wcs_parseFormat_00009410:
     lwz r3, 0x10(r1)
     mulli r3, r3, 0xa
     add r3, r0, r3
     lhzu r0, 0x2(r31)
     subi r3, r3, 0x30
     stw r3, 0x10(r1)
-lbl_wcscmp_00009428:
+lbl_wcs_parseFormat_00009428:
     cmplwi r0, 0x100
-    bge lbl_wcscmp_00009444
+    bge lbl_wcs_parseFormat_00009444
     lwz r4, 0x14(r5)
     clrlslwi r3, r0, 16, 1
     lhzx r3, r4, r3
     rlwinm r3, r3, 0, 28, 28
-    b lbl_wcscmp_00009448
-lbl_wcscmp_00009444:
+    b lbl_wcs_parseFormat_00009448
+lbl_wcs_parseFormat_00009444:
     li r3, 0x0
-lbl_wcscmp_00009448:
+lbl_wcs_parseFormat_00009448:
     cmpwi r3, 0x0
-    bne lbl_wcscmp_00009410
-lbl_wcscmp_00009450:
+    bne lbl_wcs_parseFormat_00009410
+lbl_wcs_parseFormat_00009450:
     lwz r6, 0x10(r1)
     cmpwi r6, 0x1fd
-    ble lbl_wcscmp_0000948C
+    ble lbl_wcs_parseFormat_0000948C
     lis r3, 0x1
     lwz r5, 0x8(r1)
     subi r0, r3, 0x1
@@ -11353,117 +11353,117 @@ lbl_wcscmp_00009450:
     stw r4, 0x4(r30)
     stw r6, 0x8(r30)
     stw r0, 0xc(r30)
-    b lbl_wcscmp_00009838
-lbl_wcscmp_0000948C:
+    b lbl_wcs_parseFormat_00009838
+lbl_wcs_parseFormat_0000948C:
     cmplwi r0, 0x2e
-    bne lbl_wcscmp_00009524
+    bne lbl_wcs_parseFormat_00009524
     lhzu r0, 0x2(r31)
     li r3, 0x1
     stb r3, 0xa(r1)
     cmplwi r0, 0x2a
-    bne lbl_wcscmp_000094D4
+    bne lbl_wcs_parseFormat_000094D4
     mr r3, r29
     li r4, 0x1
     bl __va_arg
     lwz r0, 0x0(r3)
     stw r0, 0x14(r1)
     cmpwi r0, 0x0
-    bge lbl_wcscmp_000094CC
+    bge lbl_wcs_parseFormat_000094CC
     li r0, 0x0
     stb r0, 0xa(r1)
-lbl_wcscmp_000094CC:
+lbl_wcs_parseFormat_000094CC:
     lhzu r0, 0x2(r31)
-    b lbl_wcscmp_00009524
-lbl_wcscmp_000094D4:
+    b lbl_wcs_parseFormat_00009524
+lbl_wcs_parseFormat_000094D4:
     lis r3, lbl_807BB380@ha
     addi r3, r3, lbl_807BB380@l
     lwz r5, 0x38(r3)
-    b lbl_wcscmp_000094FC
-lbl_wcscmp_000094E4:
+    b lbl_wcs_parseFormat_000094FC
+lbl_wcs_parseFormat_000094E4:
     lwz r3, 0x14(r1)
     mulli r3, r3, 0xa
     add r3, r0, r3
     lhzu r0, 0x2(r31)
     subi r3, r3, 0x30
     stw r3, 0x14(r1)
-lbl_wcscmp_000094FC:
+lbl_wcs_parseFormat_000094FC:
     cmplwi r0, 0x100
-    bge lbl_wcscmp_00009518
+    bge lbl_wcs_parseFormat_00009518
     lwz r4, 0x14(r5)
     clrlslwi r3, r0, 16, 1
     lhzx r3, r4, r3
     rlwinm r3, r3, 0, 28, 28
-    b lbl_wcscmp_0000951C
-lbl_wcscmp_00009518:
+    b lbl_wcs_parseFormat_0000951C
+lbl_wcs_parseFormat_00009518:
     li r3, 0x0
-lbl_wcscmp_0000951C:
+lbl_wcs_parseFormat_0000951C:
     cmpwi r3, 0x0
-    bne lbl_wcscmp_000094E4
-lbl_wcscmp_00009524:
+    bne lbl_wcs_parseFormat_000094E4
+lbl_wcs_parseFormat_00009524:
     cmpwi r0, 0x68
     li r5, 0x1
-    beq lbl_wcscmp_0000955C
+    beq lbl_wcs_parseFormat_0000955C
     cmpwi r0, 0x6c
-    beq lbl_wcscmp_00009584
+    beq lbl_wcs_parseFormat_00009584
     cmpwi r0, 0x4c
-    beq lbl_wcscmp_000095AC
+    beq lbl_wcs_parseFormat_000095AC
     cmpwi r0, 0x6a
-    beq lbl_wcscmp_000095B8
+    beq lbl_wcs_parseFormat_000095B8
     cmpwi r0, 0x74
-    beq lbl_wcscmp_000095C4
+    beq lbl_wcs_parseFormat_000095C4
     cmpwi r0, 0x7a
-    beq lbl_wcscmp_000095D0
-    b lbl_wcscmp_000095DC
-lbl_wcscmp_0000955C:
+    beq lbl_wcs_parseFormat_000095D0
+    b lbl_wcs_parseFormat_000095DC
+lbl_wcs_parseFormat_0000955C:
     lhz r3, 0x2(r31)
     li r4, 0x2
     stb r4, 0xc(r1)
     cmplwi r3, 0x68
-    bne lbl_wcscmp_000095E0
+    bne lbl_wcs_parseFormat_000095E0
     li r0, 0x1
     stb r0, 0xc(r1)
     mr r0, r3
     addi r31, r31, 0x2
-    b lbl_wcscmp_000095E0
-lbl_wcscmp_00009584:
+    b lbl_wcs_parseFormat_000095E0
+lbl_wcs_parseFormat_00009584:
     lhz r3, 0x2(r31)
     li r4, 0x3
     stb r4, 0xc(r1)
     cmplwi r3, 0x6c
-    bne lbl_wcscmp_000095E0
+    bne lbl_wcs_parseFormat_000095E0
     li r0, 0x4
     stb r0, 0xc(r1)
     mr r0, r3
     addi r31, r31, 0x2
-    b lbl_wcscmp_000095E0
-lbl_wcscmp_000095AC:
+    b lbl_wcs_parseFormat_000095E0
+lbl_wcs_parseFormat_000095AC:
     li r3, 0x9
     stb r3, 0xc(r1)
-    b lbl_wcscmp_000095E0
-lbl_wcscmp_000095B8:
+    b lbl_wcs_parseFormat_000095E0
+lbl_wcs_parseFormat_000095B8:
     li r3, 0x6
     stb r3, 0xc(r1)
-    b lbl_wcscmp_000095E0
-lbl_wcscmp_000095C4:
+    b lbl_wcs_parseFormat_000095E0
+lbl_wcs_parseFormat_000095C4:
     li r3, 0x8
     stb r3, 0xc(r1)
-    b lbl_wcscmp_000095E0
-lbl_wcscmp_000095D0:
+    b lbl_wcs_parseFormat_000095E0
+lbl_wcs_parseFormat_000095D0:
     li r3, 0x7
     stb r3, 0xc(r1)
-    b lbl_wcscmp_000095E0
-lbl_wcscmp_000095DC:
+    b lbl_wcs_parseFormat_000095E0
+lbl_wcs_parseFormat_000095DC:
     li r5, 0x0
-lbl_wcscmp_000095E0:
+lbl_wcs_parseFormat_000095E0:
     cmpwi r5, 0x0
-    beq lbl_wcscmp_000095EC
+    beq lbl_wcs_parseFormat_000095EC
     lhzu r0, 0x2(r31)
-lbl_wcscmp_000095EC:
+lbl_wcs_parseFormat_000095EC:
     clrlwi r3, r0, 16
     sth r0, 0xe(r1)
     subi r0, r3, 0x41
     cmplwi r0, 0x37
-    bgt lbl_wcscmp_00009808
+    bgt lbl_wcs_parseFormat_00009808
     lis r3, jumptable_807BB868@ha
     slwi r0, r0, 2
     addi r3, r3, jumptable_807BB868@l
@@ -11472,95 +11472,95 @@ lbl_wcscmp_000095EC:
     bctr
     lbz r0, 0xc(r1)
     cmplwi r0, 0x9
-    bne lbl_wcscmp_0000962C
+    bne lbl_wcs_parseFormat_0000962C
     li r0, 0x4
     stb r0, 0xc(r1)
-lbl_wcscmp_0000962C:
+lbl_wcs_parseFormat_0000962C:
     lbz r0, 0xa(r1)
     cmpwi r0, 0x0
-    bne lbl_wcscmp_00009644
+    bne lbl_wcs_parseFormat_00009644
     li r0, 0x1
     stw r0, 0x14(r1)
-    b lbl_wcscmp_00009814
-lbl_wcscmp_00009644:
+    b lbl_wcs_parseFormat_00009814
+lbl_wcs_parseFormat_00009644:
     lbz r0, 0x8(r1)
     cmplwi r0, 0x2
-    bne lbl_wcscmp_00009814
+    bne lbl_wcs_parseFormat_00009814
     li r0, 0x1
     stb r0, 0x8(r1)
-    b lbl_wcscmp_00009814
+    b lbl_wcs_parseFormat_00009814
     lbz r3, 0xc(r1)
     addi r0, r3, 0xfa
     clrlwi r0, r0, 24
     cmplwi r0, 0x2
-    ble lbl_wcscmp_00009680
+    ble lbl_wcs_parseFormat_00009680
     cmplwi r3, 0x2
-    beq lbl_wcscmp_00009680
+    beq lbl_wcs_parseFormat_00009680
     cmplwi r3, 0x4
-    bne lbl_wcscmp_00009690
-lbl_wcscmp_00009680:
+    bne lbl_wcs_parseFormat_00009690
+lbl_wcs_parseFormat_00009680:
     lis r3, 0x1
     subi r0, r3, 0x1
     sth r0, 0xe(r1)
-    b lbl_wcscmp_00009814
-lbl_wcscmp_00009690:
+    b lbl_wcs_parseFormat_00009814
+lbl_wcs_parseFormat_00009690:
     lbz r0, 0xa(r1)
     cmpwi r0, 0x0
-    bne lbl_wcscmp_00009814
+    bne lbl_wcs_parseFormat_00009814
     li r0, 0x6
     stw r0, 0x14(r1)
-    b lbl_wcscmp_00009814
+    b lbl_wcs_parseFormat_00009814
     lbz r0, 0xa(r1)
     cmpwi r0, 0x0
-    bne lbl_wcscmp_000096BC
+    bne lbl_wcs_parseFormat_000096BC
     li r0, 0xd
     stw r0, 0x14(r1)
-lbl_wcscmp_000096BC:
+lbl_wcs_parseFormat_000096BC:
     lbz r3, 0xc(r1)
     addi r0, r3, 0xfa
     clrlwi r0, r0, 24
     cmplwi r0, 0x2
-    ble lbl_wcscmp_000096E8
+    ble lbl_wcs_parseFormat_000096E8
     addi r0, r3, 0xff
     clrlwi r0, r0, 24
     cmplwi r0, 0x1
-    ble lbl_wcscmp_000096E8
+    ble lbl_wcs_parseFormat_000096E8
     cmplwi r3, 0x4
-    bne lbl_wcscmp_00009814
-lbl_wcscmp_000096E8:
+    bne lbl_wcs_parseFormat_00009814
+lbl_wcs_parseFormat_000096E8:
     lis r3, 0x1
     subi r0, r3, 0x1
     sth r0, 0xe(r1)
-    b lbl_wcscmp_00009814
+    b lbl_wcs_parseFormat_00009814
     lwz r0, 0x14(r1)
     cmpwi r0, 0x0
-    bne lbl_wcscmp_0000970C
+    bne lbl_wcs_parseFormat_0000970C
     li r0, 0x1
     stw r0, 0x14(r1)
-lbl_wcscmp_0000970C:
+lbl_wcs_parseFormat_0000970C:
     lbz r3, 0xc(r1)
     addi r0, r3, 0xfa
     clrlwi r0, r0, 24
     cmplwi r0, 0x2
-    ble lbl_wcscmp_00009738
+    ble lbl_wcs_parseFormat_00009738
     addi r0, r3, 0xff
     clrlwi r0, r0, 24
     cmplwi r0, 0x1
-    ble lbl_wcscmp_00009738
+    ble lbl_wcs_parseFormat_00009738
     cmplwi r3, 0x4
-    bne lbl_wcscmp_00009748
-lbl_wcscmp_00009738:
+    bne lbl_wcs_parseFormat_00009748
+lbl_wcs_parseFormat_00009738:
     lis r3, 0x1
     subi r0, r3, 0x1
     sth r0, 0xe(r1)
-    b lbl_wcscmp_00009814
-lbl_wcscmp_00009748:
+    b lbl_wcs_parseFormat_00009814
+lbl_wcs_parseFormat_00009748:
     lbz r0, 0xa(r1)
     cmpwi r0, 0x0
-    bne lbl_wcscmp_00009814
+    bne lbl_wcs_parseFormat_00009814
     li r0, 0x6
     stw r0, 0x14(r1)
-    b lbl_wcscmp_00009814
+    b lbl_wcs_parseFormat_00009814
     li r5, 0x3
     li r4, 0x1
     li r3, 0x78
@@ -11569,48 +11569,48 @@ lbl_wcscmp_00009748:
     stb r4, 0xb(r1)
     sth r3, 0xe(r1)
     stw r0, 0x14(r1)
-    b lbl_wcscmp_00009814
+    b lbl_wcs_parseFormat_00009814
     lbz r3, 0xc(r1)
     cmplwi r3, 0x3
-    bne lbl_wcscmp_0000979C
+    bne lbl_wcs_parseFormat_0000979C
     li r0, 0x5
     stb r0, 0xc(r1)
-    b lbl_wcscmp_00009814
-lbl_wcscmp_0000979C:
+    b lbl_wcs_parseFormat_00009814
+lbl_wcs_parseFormat_0000979C:
     lbz r0, 0xa(r1)
     cmpwi r0, 0x0
-    bne lbl_wcscmp_000097B0
+    bne lbl_wcs_parseFormat_000097B0
     cmpwi r3, 0x0
-    beq lbl_wcscmp_00009814
-lbl_wcscmp_000097B0:
+    beq lbl_wcs_parseFormat_00009814
+lbl_wcs_parseFormat_000097B0:
     lis r3, 0x1
     subi r0, r3, 0x1
     sth r0, 0xe(r1)
-    b lbl_wcscmp_00009814
+    b lbl_wcs_parseFormat_00009814
     lbz r0, 0xc(r1)
     cmplwi r0, 0x3
-    bne lbl_wcscmp_000097D8
+    bne lbl_wcs_parseFormat_000097D8
     li r0, 0x5
     stb r0, 0xc(r1)
-    b lbl_wcscmp_00009814
-lbl_wcscmp_000097D8:
+    b lbl_wcs_parseFormat_00009814
+lbl_wcs_parseFormat_000097D8:
     cmpwi r0, 0x0
-    beq lbl_wcscmp_00009814
+    beq lbl_wcs_parseFormat_00009814
     lis r3, 0x1
     subi r0, r3, 0x1
     sth r0, 0xe(r1)
-    b lbl_wcscmp_00009814
+    b lbl_wcs_parseFormat_00009814
     lbz r0, 0xc(r1)
     cmplwi r0, 0x9
-    bne lbl_wcscmp_00009814
+    bne lbl_wcs_parseFormat_00009814
     li r0, 0x4
     stb r0, 0xc(r1)
-    b lbl_wcscmp_00009814
-lbl_wcscmp_00009808:
+    b lbl_wcs_parseFormat_00009814
+lbl_wcs_parseFormat_00009808:
     lis r3, 0x1
     subi r0, r3, 0x1
     sth r0, 0xe(r1)
-lbl_wcscmp_00009814:
+lbl_wcs_parseFormat_00009814:
     lwz r6, 0x8(r1)
     addi r3, r31, 0x2
     lwz r5, 0xc(r1)
@@ -11620,7 +11620,7 @@ lbl_wcscmp_00009814:
     stw r5, 0x4(r30)
     stw r4, 0x8(r30)
     stw r0, 0xc(r30)
-lbl_wcscmp_00009838:
+lbl_wcs_parseFormat_00009838:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
     lwz r30, 0x28(r1)
@@ -12056,14 +12056,14 @@ lbl_fn_806851C0_00009DE4:
     lis r4, lbl_807BBA98@ha
     mr r3, r28
     addi r4, r4, lbl_807BBA98@l
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_806851C0_00009E6C
 lbl_fn_806851C0_00009E18:
     lis r4, lbl_807BBA98@ha
     mr r3, r28
     addi r4, r4, lbl_807BBA98@l
     addi r4, r4, 0xa
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_806851C0_00009E6C
 lbl_fn_806851C0_00009E30:
     lhz r0, 0x6(r30)
@@ -12074,14 +12074,14 @@ lbl_fn_806851C0_00009E30:
     mr r3, r28
     addi r4, r4, lbl_807BBA98@l
     addi r4, r4, 0x14
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_806851C0_00009E6C
 lbl_fn_806851C0_00009E58:
     lis r4, lbl_807BBA98@ha
     mr r3, r28
     addi r4, r4, lbl_807BBA98@l
     addi r4, r4, 0x1c
-    bl fn_80686A64
+    bl wcscpy
 lbl_fn_806851C0_00009E6C:
     mr r3, r28
     b lbl_fn_806851C0_0000A180
@@ -12097,14 +12097,14 @@ lbl_fn_806851C0_00009E74:
     mr r3, r28
     addi r4, r4, lbl_807BBA98@l
     addi r4, r4, 0x24
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_806851C0_00009EFC
 lbl_fn_806851C0_00009EA8:
     lis r4, lbl_807BBA98@ha
     mr r3, r28
     addi r4, r4, lbl_807BBA98@l
     addi r4, r4, 0x2e
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_806851C0_00009EFC
 lbl_fn_806851C0_00009EC0:
     lhz r0, 0x6(r30)
@@ -12115,14 +12115,14 @@ lbl_fn_806851C0_00009EC0:
     mr r3, r28
     addi r4, r4, lbl_807BBA98@l
     addi r4, r4, 0x38
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_806851C0_00009EFC
 lbl_fn_806851C0_00009EE8:
     lis r4, lbl_807BBA98@ha
     mr r3, r28
     addi r4, r4, lbl_807BBA98@l
     addi r4, r4, 0x40
-    bl fn_80686A64
+    bl wcscpy
 lbl_fn_806851C0_00009EFC:
     mr r3, r28
     b lbl_fn_806851C0_0000A180
@@ -12138,14 +12138,14 @@ lbl_fn_806851C0_00009F04:
     mr r3, r28
     addi r4, r4, lbl_807BBA98@l
     addi r4, r4, 0x48
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_806851C0_00009F8C
 lbl_fn_806851C0_00009F38:
     lis r4, lbl_807BBA98@ha
     mr r3, r28
     addi r4, r4, lbl_807BBA98@l
     addi r4, r4, 0x52
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_806851C0_00009F8C
 lbl_fn_806851C0_00009F50:
     lhz r0, 0x6(r30)
@@ -12156,14 +12156,14 @@ lbl_fn_806851C0_00009F50:
     mr r3, r28
     addi r4, r4, lbl_807BBA98@l
     addi r4, r4, 0x5c
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_806851C0_00009F8C
 lbl_fn_806851C0_00009F78:
     lis r4, lbl_807BBA98@ha
     mr r3, r28
     addi r4, r4, lbl_807BBA98@l
     addi r4, r4, 0x64
-    bl fn_80686A64
+    bl wcscpy
 lbl_fn_806851C0_00009F8C:
     mr r3, r28
     b lbl_fn_806851C0_0000A180
@@ -12499,14 +12499,14 @@ lbl_fn_8068573C_0000A3E4:
     mr r3, r31
     addi r4, r4, lbl_807BBA98@l
     addi r4, r4, 0x24
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_8068573C_0000A484
 lbl_fn_8068573C_0000A404:
     lis r4, lbl_807BBA98@ha
     mr r3, r31
     addi r4, r4, lbl_807BBA98@l
     addi r4, r4, 0x2e
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_8068573C_0000A484
 lbl_fn_8068573C_0000A41C:
     lhz r0, 0x6(r29)
@@ -12530,14 +12530,14 @@ lbl_fn_8068573C_0000A450:
     mr r3, r31
     addi r4, r4, lbl_807BBA98@l
     addi r4, r4, 0x38
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_8068573C_0000A484
 lbl_fn_8068573C_0000A470:
     lis r4, lbl_807BBA98@ha
     mr r3, r31
     addi r4, r4, lbl_807BBA98@l
     addi r4, r4, 0x40
-    bl fn_80686A64
+    bl wcscpy
 lbl_fn_8068573C_0000A484:
     mr r3, r31
     b lbl_fn_8068573C_0000AA3C
@@ -12566,14 +12566,14 @@ lbl_fn_8068573C_0000A4CC:
     mr r3, r31
     addi r4, r4, lbl_807BBA98@l
     addi r4, r4, 0x48
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_8068573C_0000A56C
 lbl_fn_8068573C_0000A4EC:
     lis r4, lbl_807BBA98@ha
     mr r3, r31
     addi r4, r4, lbl_807BBA98@l
     addi r4, r4, 0x52
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_8068573C_0000A56C
 lbl_fn_8068573C_0000A504:
     lhz r0, 0x6(r29)
@@ -12597,14 +12597,14 @@ lbl_fn_8068573C_0000A538:
     mr r3, r31
     addi r4, r4, lbl_807BBA98@l
     addi r4, r4, 0x5c
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_8068573C_0000A56C
 lbl_fn_8068573C_0000A558:
     lis r4, lbl_807BBA98@ha
     mr r3, r31
     addi r4, r4, lbl_807BBA98@l
     addi r4, r4, 0x64
-    bl fn_80686A64
+    bl wcscpy
 lbl_fn_8068573C_0000A56C:
     mr r3, r31
     b lbl_fn_8068573C_0000AA3C
@@ -13001,7 +13001,7 @@ asm void fn_80685ECC(void)
 lbl_fn_80685ECC_0000AAAC:
     mr r3, r30
     li r4, 0x25
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_80685ECC_0000AB00
@@ -13040,7 +13040,7 @@ lbl_fn_80685ECC_0000AB3C:
     mr r3, r29
     mr r4, r22
     addi r5, r1, 0x70
-    bl wcscmp
+    bl wcs_parseFormat
     lhz r4, 0x76(r1)
     mr r30, r3
     subi r0, r4, 0x25
@@ -13815,120 +13815,120 @@ u32 wcslen(const u16* str)
     return len;
 }
 
-asm void fn_80686A64(void)
+asm void wcscpy(void)
 {
     nofralloc
     subi r4, r4, 0x2
     subi r5, r3, 0x2
-lbl_fn_80686A64_0000B600:
+lbl_wcscpy_0000B600:
     lhzu r0, 0x2(r4)
     sthu r0, 0x2(r5)
     cmpwi r0, 0x0
-    bne lbl_fn_80686A64_0000B600
+    bne lbl_wcscpy_0000B600
     blr
 }
 
-asm void fn_80686A80(void)
+asm void wcsncpy(void)
 {
     nofralloc
     subi r4, r4, 0x2
     subi r6, r3, 0x2
     addi r5, r5, 0x1
-    b lbl_fn_80686A80_0000B64C
-lbl_fn_80686A80_0000B624:
+    b lbl_wcsncpy_0000B64C
+lbl_wcsncpy_0000B624:
     lhzu r0, 0x2(r4)
     sthu r0, 0x2(r6)
     cmpwi r0, 0x0
-    bne lbl_fn_80686A80_0000B64C
+    bne lbl_wcsncpy_0000B64C
     li r0, 0x0
-    b lbl_fn_80686A80_0000B640
-lbl_fn_80686A80_0000B63C:
+    b lbl_wcsncpy_0000B640
+lbl_wcsncpy_0000B63C:
     sthu r0, 0x2(r6)
-lbl_fn_80686A80_0000B640:
+lbl_wcsncpy_0000B640:
     subic. r5, r5, 0x1
-    bne lbl_fn_80686A80_0000B63C
+    bne lbl_wcsncpy_0000B63C
     blr
-lbl_fn_80686A80_0000B64C:
+lbl_wcsncpy_0000B64C:
     subic. r5, r5, 0x1
-    bne lbl_fn_80686A80_0000B624
+    bne lbl_wcsncpy_0000B624
     blr
 }
 
-asm void fn_80686AC4(void)
+asm void wcscat(void)
 {
     nofralloc
     subi r4, r4, 0x2
     subi r5, r3, 0x2
-lbl_fn_80686AC4_0000B660:
+lbl_wcscat_0000B660:
     lhzu r0, 0x2(r5)
     cmpwi r0, 0x0
-    bne lbl_fn_80686AC4_0000B660
+    bne lbl_wcscat_0000B660
     subi r5, r5, 0x2
-lbl_fn_80686AC4_0000B670:
+lbl_wcscat_0000B670:
     lhzu r0, 0x2(r4)
     sthu r0, 0x2(r5)
     cmpwi r0, 0x0
-    bne lbl_fn_80686AC4_0000B670
+    bne lbl_wcscat_0000B670
     blr
 }
 
-asm void fn_80686AF0(void)
+asm void wcscmp(void)
 {
     nofralloc
     subi r5, r3, 0x2
     subi r4, r4, 0x2
-    b lbl_fn_80686AF0_0000B6A0
-lbl_fn_80686AF0_0000B690:
+    b lbl_wcscmp_0000B6A0
+lbl_wcscmp_0000B690:
     cmpwi r3, 0x0
-    bne lbl_fn_80686AF0_0000B6A0
+    bne lbl_wcscmp_0000B6A0
     li r3, 0x0
     blr
-lbl_fn_80686AF0_0000B6A0:
+lbl_wcscmp_0000B6A0:
     lhzu r3, 0x2(r5)
     lhzu r0, 0x2(r4)
     cmplw r3, r0
-    beq lbl_fn_80686AF0_0000B690
+    beq lbl_wcscmp_0000B690
     subf r3, r0, r3
     blr
 }
 
-asm void fn_80686B24(void)
+asm void wcsncmp(void)
 {
     nofralloc
     subi r6, r3, 0x2
     subi r4, r4, 0x2
     addi r5, r5, 0x1
-    b lbl_fn_80686B24_0000B6E8
-lbl_fn_80686B24_0000B6C8:
+    b lbl_wcsncmp_0000B6E8
+lbl_wcsncmp_0000B6C8:
     lhzu r3, 0x2(r6)
     lhzu r0, 0x2(r4)
     cmplw r3, r0
-    beq lbl_fn_80686B24_0000B6E0
+    beq lbl_wcsncmp_0000B6E0
     subf r3, r0, r3
     blr
-lbl_fn_80686B24_0000B6E0:
+lbl_wcsncmp_0000B6E0:
     cmpwi r3, 0x0
-    beq lbl_fn_80686B24_0000B6F0
-lbl_fn_80686B24_0000B6E8:
+    beq lbl_wcsncmp_0000B6F0
+lbl_wcsncmp_0000B6E8:
     subic. r5, r5, 0x1
-    bne lbl_fn_80686B24_0000B6C8
-lbl_fn_80686B24_0000B6F0:
+    bne lbl_wcsncmp_0000B6C8
+lbl_wcsncmp_0000B6F0:
     li r3, 0x0
     blr
 }
 
-asm void fn_80686B64(void)
+asm void wcschr(void)
 {
     nofralloc
     subi r3, r3, 0x2
-    b lbl_fn_80686B64_0000B708
-lbl_fn_80686B64_0000B700:
+    b lbl_wcschr_0000B708
+lbl_wcschr_0000B700:
     cmplw r0, r4
     beqlr
-lbl_fn_80686B64_0000B708:
+lbl_wcschr_0000B708:
     lhzu r0, 0x2(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80686B64_0000B700
+    bne lbl_wcschr_0000B700
     cmpwi r4, 0x0
     beqlr
     li r3, 0x0

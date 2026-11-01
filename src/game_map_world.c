@@ -36,7 +36,7 @@ extern void fn_80563A64(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void atoi(void);
-extern void fn_80686A64(void);
+extern void wcscpy(void);
 extern void vec3_isNonZero(void);
 
 /* External data declarations */
@@ -1868,7 +1868,7 @@ asm void fn_8017B0F8(void)
     beq lbl_fn_8017B0F8_00001798
     lwz r4, 0x8(r3)
     mr r3, r31
-    bl fn_80686A64
+    bl wcscpy
     li r3, 0x1
     b lbl_fn_8017B0F8_0000179C
 lbl_fn_8017B0F8_00001798:

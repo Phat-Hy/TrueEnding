@@ -27,7 +27,7 @@ extern void PSMTXMultVec(void);
 extern void printf(void);
 extern void atoi(void);
 extern void wcslen(void);
-extern void fn_80686A64(void);
+extern void wcscpy(void);
 extern void abort(void);
 extern void runtime_clampDouble(void);
 
@@ -1039,7 +1039,7 @@ lbl_fn_8054158C_00000C64:
     beq lbl_fn_8054158C_00001130
     mr r4, r23
     addi r3, r1, 0x20
-    bl fn_80686A64
+    bl wcscpy
     subic. r0, r26, 0x1
     addi r4, r1, 0x20
     li r5, 0x1

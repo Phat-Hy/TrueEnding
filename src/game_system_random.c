@@ -3,10 +3,10 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
@@ -29,7 +29,7 @@ extern void strncmp(void);
 extern void atoi(void);
 extern void wmemcpy(void);
 extern void wcslen(void);
-extern void fn_80686A64(void);
+extern void wcscpy(void);
 extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
@@ -83,7 +83,7 @@ void fn_8020EE60(void);
 void fn_8020EE8C(void);
 void fn_8020EF04(void);
 void fn_8020EF4C(void);
-void fn_8020EF80(void);
+void random_generateValue(void);
 
 asm void fn_8020D688(void)
 {
@@ -311,7 +311,7 @@ lbl_fn_8020D688_00000338:
     stw r0, 0x540(r22)
 lbl_fn_8020D688_00000344:
     addi r3, r1, 0xc64
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8020D688_000001D4
     lwz r3, lbl_8087F518
@@ -610,7 +610,7 @@ lbl_fn_8020DB58_00000720:
     li r22, 0x0
 lbl_fn_8020DB58_00000740:
     addi r3, r1, 0x110
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8020DB58_000005F4
     lwz r3, lbl_8087F518
@@ -802,7 +802,7 @@ lbl_fn_8020DF88_000009B0:
     addi r15, r15, 0x1
 lbl_fn_8020DF88_000009CC:
     addi r3, r1, 0x13c
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8020DF88_000009B0
     addi r14, r15, 0x80
@@ -953,7 +953,7 @@ lbl_fn_8020DF88_00000B30:
     mr r18, r3
     mr r3, r14
     mr r4, r18
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x24(r1)
     mr r3, r14
     stb r0, 0x20(r1)
@@ -976,7 +976,7 @@ lbl_fn_8020DF88_00000B30:
     mr r18, r3
     addi r3, r1, 0xbc
     mr r4, r18
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x18(r1)
     mr r6, r15
     stb r0, 0x1c(r1)
@@ -1027,7 +1027,7 @@ lbl_fn_8020DF88_00000D18:
     lwz r4, 0xb4(r1)
     stw r29, 0x11c(r1)
     stw r29, 0x120(r1)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x14(r1)
     mr r3, r26
     stb r5, 0x10(r1)
@@ -1054,7 +1054,7 @@ lbl_fn_8020DF88_00000D7C:
     stw r29, 0xc(r26)
     stw r29, 0x10(r26)
     stw r29, 0x14(r26)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0xc(r1)
     addi r3, r26, 0xc
     stb r5, 0x8(r1)
@@ -1410,7 +1410,7 @@ lbl_fn_8020DF88_00001294:
     bl dtor_80084684
 lbl_fn_8020DF88_000012A8:
     addi r3, r1, 0x13c
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8020DF88_00000A74
     mulli r5, r17, 0x10c
@@ -1673,7 +1673,7 @@ lbl_fn_8020EB0C_00001624:
     lwz r0, lbl_8087F1F4
     mr r4, r3
     add r3, r0, r29
-    bl fn_80686A64
+    bl wcscpy
     lwz r0, lbl_8087F1F4
     add r0, r0, r29
     stw r0, 0x80(r27)
@@ -1690,7 +1690,7 @@ lbl_fn_8020EB0C_00001624:
     lwz r0, lbl_8087F1F4
     mr r4, r3
     add r3, r0, r29
-    bl fn_80686A64
+    bl wcscpy
     lwz r0, lbl_8087F1F4
     add r0, r0, r29
     stw r0, 0x84(r27)
@@ -1884,14 +1884,14 @@ lbl_fn_8020EF4C_000018D4:
     blr
 }
 
-asm void fn_8020EF80(void)
+asm void random_generateValue(void)
 {
     nofralloc
     cmpwi r3, 0x0
-    bne lbl_fn_8020EF80_00001908
+    bne lbl_random_generateValue_00001908
     li r3, 0x0
     blr
-lbl_fn_8020EF80_00001908:
+lbl_random_generateValue_00001908:
     lis r4, 0x1062
     lwz r8, 0x7c(r3)
     addi r0, r4, 0x4dd3

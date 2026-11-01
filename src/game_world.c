@@ -9,7 +9,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_23(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_800697D8(void);
 extern void fn_8007AA64(void);
@@ -1009,7 +1009,7 @@ lbl_fn_80080C20_00000C60:
     mr r15, r3
     addi r3, r1, 0x4c
     mr r4, r15
-    bl fn_80013DC4
+    bl actor_validateIndex
     stb r18, 0xc(r1)
     mr r6, r24
     addi r3, r1, 0x4c

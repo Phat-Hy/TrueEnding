@@ -9,12 +9,12 @@ extern void __files(void);
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8003E120(void);
 extern void item_useConsumable(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void fn_800697D8(void);
 extern void fn_8006A9A4(void);
@@ -1275,7 +1275,7 @@ lbl_fn_80046EE0_00000D30:
     mr r27, r3
     mr r3, r26
     mr r4, r27
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x34(r1)
     mr r3, r26
     stb r0, 0x30(r1)
@@ -1485,7 +1485,7 @@ lbl_fn_80046EE0_0000105C:
     lwz r4, 0x80(r1)
     stw r0, 0x74(r1)
     stw r0, 0x78(r1)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x14(r1)
     mr r3, r26
     stb r5, 0x10(r1)
@@ -1510,7 +1510,7 @@ lbl_fn_80046EE0_000010A4:
     mr r28, r3
     mr r3, r27
     mr r4, r28
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r27
     stb r0, 0x8(r1)
@@ -5293,7 +5293,7 @@ lbl_fn_8004A3FC_000043C4:
     stw r31, 0x4(r5)
     addi r3, r1, 0x130
     stw r26, 0x8(r5)
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8004A3FC_000042B8
     lwz r3, lbl_8087F518

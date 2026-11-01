@@ -16,7 +16,7 @@ extern void fn_800A56A8(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void fn_801D082C(void);
 extern void fn_801F3FF8(void);
 extern void thread_findAndNotify(void);
@@ -822,7 +822,7 @@ lbl_fn_805212C0_000009BC:
     beq lbl_fn_805212C0_000009F0
     addi r3, r1, 0x8
     li r4, 0x3
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

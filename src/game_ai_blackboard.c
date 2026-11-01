@@ -6,7 +6,7 @@ extern void _restgpr_25(void);
 extern void _savegpr_25(void);
 extern void fn_8004ED34(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -532,7 +532,7 @@ lbl_fn_8025CFF4_00000608:
     stfs f1, 0x1568(r27)
 lbl_fn_8025CFF4_0000062C:
     addi r3, r1, 0x8
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8025CFF4_000000B8
     addi r11, r1, 0x660

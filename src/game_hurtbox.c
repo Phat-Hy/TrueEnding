@@ -10,7 +10,7 @@ extern void fn_800DD3FC(void);
 extern void fn_800FFE68(void);
 extern void fn_8016F3D0(void);
 extern void fn_80206C50(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void task_findEntryById(void);
 extern void fn_8021AF50(void);
 extern void fn_8021BE98(void);
@@ -23,7 +23,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
 extern void swprintf(void);
-extern void fn_80686A64(void);
+extern void wcscpy(void);
 extern void std_fmod(void);
 
 /* External data declarations */
@@ -878,11 +878,11 @@ lbl_fn_801092C8_00000AA4:
 lbl_fn_801092C8_00000AC4:
     la r4, lbl_808813D0
 lbl_fn_801092C8_00000AC8:
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_801092C8_00000F44
     mr r3, r28
     li r31, 0x1
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     mr r5, r3
     beq lbl_fn_801092C8_00000B24

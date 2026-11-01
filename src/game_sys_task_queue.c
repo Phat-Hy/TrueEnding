@@ -6,7 +6,7 @@ extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void fn_8004212C(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
@@ -38,7 +38,7 @@ extern void fn_8046DD20(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void wcslen(void);
-extern void fn_80686AF0(void);
+extern void wcscmp(void);
 extern void runtime_registerStaticObject(void);
 extern void strchr(void);
 
@@ -170,7 +170,7 @@ asm void fn_8021996C(void)
     mr r25, r3
 lbl_fn_8021996C_000000D4:
     addi r3, r1, 0x14
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     li r0, 0x0
     lis r28, lbl_80742540@ha
     stw r0, lbl_8087F2CC
@@ -190,7 +190,7 @@ lbl_fn_8021996C_000000F8:
     stw r0, lbl_8087F2CC
 lbl_fn_8021996C_0000011C:
     addi r3, r1, 0x14
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8021996C_000000F8
     lwz r29, lbl_8087F2CC
@@ -225,7 +225,7 @@ lbl_fn_8021996C_0000011C:
     mtctr r12
     bctrl
     addi r3, r1, 0x14
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     li r29, 0x0
     stw r29, 0xc(r1)
     addi r26, r1, 0x26
@@ -287,7 +287,7 @@ lbl_fn_8021996C_00000244:
     addi r27, r27, 0xd0
 lbl_fn_8021996C_00000290:
     addi r3, r1, 0x14
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8021996C_000001CC
     mr r3, r31
@@ -380,7 +380,7 @@ lbl_fn_80219C30_000003D4:
     addi r3, r1, 0x14
     bl talk_parseDialogue
     la r4, lbl_8087DB98
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     beq lbl_fn_80219C30_000003FC
     addi r3, r1, 0x14
@@ -1499,7 +1499,7 @@ lbl_fn_8021AAB8_00001254:
     stw r0, lbl_8087F2DC
 lbl_fn_8021AAB8_00001290:
     addi r3, r1, 0xc60
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8021AAB8_00001254
     lwz r29, lbl_8087F2DC
@@ -1556,7 +1556,7 @@ lbl_fn_8021AAB8_00001308:
     addi r29, r29, 0x18
 lbl_fn_8021AAB8_0000136C:
     addi r3, r1, 0xc60
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8021AAB8_00001308
     lwz r3, lbl_8087F518

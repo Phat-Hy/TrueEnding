@@ -38,7 +38,7 @@ extern void fn_800D3FA4(void);
 extern void fn_801125F8(void);
 extern void fn_80112960(void);
 extern void fn_80114AA0(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_801CFD68(void);
 extern void fn_801D0BAC(void);
@@ -1915,7 +1915,7 @@ lbl_fn_8052BD00_00001998:
     stw r0, 0x133c(r31)
     addi r3, r1, 0x8
     li r4, 0x20
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

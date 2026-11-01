@@ -13,7 +13,7 @@ extern void fn_8000DB1C(void);
 extern void fn_80010374(void);
 extern void fn_80010B68(void);
 extern void fn_80012A1C(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8004B290(void);
 extern void fn_8004ED34(void);
@@ -270,7 +270,7 @@ asm void fn_80112254(void)
     mr r28, r3
     addi r3, r31, 0x2a4
     mr r4, r28
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r6, r25
     stb r0, 0x10(r1)
@@ -318,7 +318,7 @@ asm void fn_80112254(void)
     mr r27, r3
     addi r3, r31, 0x328
     mr r4, r27
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r6, r25
     stb r0, 0x8(r1)
@@ -1338,7 +1338,7 @@ lbl_fn_80113128_000010DC:
     lwz r4, 0xc(r4)
     stw r0, 0x4(r3)
     stw r0, 0x8(r3)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x10(r1)
     addi r3, r27, 0x8
     stb r5, 0x14(r1)
@@ -1377,7 +1377,7 @@ lbl_fn_80113128_0000116C:
     addi r3, r27, 0x1c
     stw r0, 0x20(r27)
     stw r0, 0x24(r27)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0xc(r1)
     addi r3, r27, 0x1c
     stb r5, 0x8(r1)

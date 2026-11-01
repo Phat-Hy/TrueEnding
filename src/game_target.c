@@ -6,7 +6,7 @@ extern void _restgpr_23(void);
 extern void _savegpr_23(void);
 extern void dtor_80084684(void);
 extern void fn_8000FAE4(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_800697D8(void);
 extern void fn_80069BF4(void);
@@ -290,7 +290,7 @@ asm void fn_80093158(void)
     mr r23, r3
     mr r3, r20
     mr r4, r23
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x24(r1)
     mr r3, r20
     stb r0, 0x20(r1)
@@ -426,7 +426,7 @@ lbl_fn_80093158_00000488:
     mr r23, r3
     mr r3, r20
     mr r4, r23
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r3, r20
     stb r0, 0x10(r1)

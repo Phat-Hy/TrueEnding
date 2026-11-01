@@ -7,7 +7,7 @@ extern void _savegpr_14(void);
 extern void fn_800DD3FC(void);
 extern void fn_80206C50(void);
 extern void fn_8020EFEC(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void fn_8058ECD8(void);
 extern void fn_8058ECF0(void);
 extern void fn_8058ED10(void);
@@ -23,8 +23,8 @@ extern void fn_8058FF04(void);
 extern void fn_8058FF0C(void);
 extern void fn_80593030(void);
 extern void wcslen(void);
-extern void fn_80686AF0(void);
-extern void fn_80686B64(void);
+extern void wcscmp(void);
+extern void wcschr(void);
 
 /* External data declarations */
 extern u8 lbl_80796ACC[];
@@ -108,14 +108,14 @@ lbl_fn_80590AAC_000000C4:
     fcmpo cr0, f3, f0
     bge lbl_fn_80590AAC_00000110
     mr r3, r4
-    bl fn_80211480
+    bl event_findEntryById
     mr r14, r3
     lwz r3, 0x0(r15)
-    bl fn_80211480
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r14)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_80590AAC_0000011C
 lbl_fn_80590AAC_00000110:
@@ -180,14 +180,14 @@ lbl_fn_80590AAC_000001C8:
     fcmpo cr0, f3, f0
     bge lbl_fn_80590AAC_00000214
     mr r3, r4
-    bl fn_80211480
+    bl event_findEntryById
     mr r14, r3
     lwz r3, 0x0(r15)
-    bl fn_80211480
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r14)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_80590AAC_00000220
 lbl_fn_80590AAC_00000214:
@@ -373,14 +373,14 @@ lbl_fn_80590AAC_000004A8:
     fcmpo cr0, f3, f0
     bge lbl_fn_80590AAC_000004F4
     mr r3, r4
-    bl fn_80211480
+    bl event_findEntryById
     mr r14, r3
     lwz r3, 0x0(r15)
-    bl fn_80211480
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r14)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_80590AAC_00000500
 lbl_fn_80590AAC_000004F4:
@@ -815,14 +815,14 @@ lbl_fn_80591508_00000B50:
     fcmpo cr0, f2, f31
     bge lbl_fn_80591508_00000B98
     mr r3, r4
-    bl fn_80211480
+    bl event_findEntryById
     mr r16, r3
     lwz r3, 0x0(r31)
-    bl fn_80211480
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r16)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_80591508_00000BA4
 lbl_fn_80591508_00000B98:
@@ -1384,10 +1384,10 @@ lbl_fn_80591D8C_00001394:
     li r3, 0x0
     b lbl_fn_80591D8C_00001470
 lbl_fn_80591D8C_0000139C:
-    bl fn_80211480
+    bl event_findEntryById
     mr r29, r3
     lwz r3, 0x0(r30)
-    bl fn_80211480
+    bl event_findEntryById
     lis r4, lbl_80796ACC@ha
     lwz r5, 0x8(r29)
     mr r30, r3
@@ -1397,7 +1397,7 @@ lbl_fn_80591D8C_0000139C:
     bl fn_800DD3FC
     addi r3, r1, 0x88
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_80591D8C_000013E4
     li r0, 0x0
@@ -1411,7 +1411,7 @@ lbl_fn_80591D8C_000013E4:
     bl fn_800DD3FC
     addi r3, r1, 0x8
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_80591D8C_00001418
     li r0, 0x0
@@ -1419,7 +1419,7 @@ lbl_fn_80591D8C_000013E4:
 lbl_fn_80591D8C_00001418:
     addi r3, r1, 0x88
     addi r4, r1, 0x8
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_80591D8C_00001460
     lwz r3, 0x8(r29)
@@ -1438,7 +1438,7 @@ lbl_fn_80591D8C_00001418:
 lbl_fn_80591D8C_00001460:
     lwz r3, 0x8(r29)
     lwz r4, 0x8(r30)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r3, r3, 31
 lbl_fn_80591D8C_00001470:
     lwz r0, 0x124(r1)
@@ -1866,10 +1866,10 @@ lbl_fn_80592468_00001A74:
     li r0, 0x0
     b lbl_fn_80592468_00001B50
 lbl_fn_80592468_00001A7C:
-    bl fn_80211480
+    bl event_findEntryById
     mr r16, r3
     lwz r3, 0x0(r15)
-    bl fn_80211480
+    bl event_findEntryById
     lis r4, lbl_80796ACC@ha
     lwz r5, 0x8(r16)
     mr r15, r3
@@ -1879,7 +1879,7 @@ lbl_fn_80592468_00001A7C:
     bl fn_800DD3FC
     addi r3, r1, 0x368
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_80592468_00001AC4
     li r0, 0x0
@@ -1893,7 +1893,7 @@ lbl_fn_80592468_00001AC4:
     bl fn_800DD3FC
     addi r3, r1, 0x3e8
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_80592468_00001AF8
     li r0, 0x0
@@ -1901,7 +1901,7 @@ lbl_fn_80592468_00001AC4:
 lbl_fn_80592468_00001AF8:
     addi r3, r1, 0x368
     addi r4, r1, 0x3e8
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_80592468_00001B40
     lwz r3, 0x8(r16)
@@ -1920,7 +1920,7 @@ lbl_fn_80592468_00001AF8:
 lbl_fn_80592468_00001B40:
     lwz r3, 0x8(r16)
     lwz r4, 0x8(r15)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
 lbl_fn_80592468_00001B50:
     lwz r16, 0x0(r29)
@@ -1971,10 +1971,10 @@ lbl_fn_80592468_00001BF4:
     li r0, 0x0
     b lbl_fn_80592468_00001CD0
 lbl_fn_80592468_00001BFC:
-    bl fn_80211480
+    bl event_findEntryById
     mr r16, r3
     lwz r3, 0x0(r15)
-    bl fn_80211480
+    bl event_findEntryById
     lis r4, lbl_80796ACC@ha
     lwz r5, 0x8(r16)
     mr r15, r3
@@ -1984,7 +1984,7 @@ lbl_fn_80592468_00001BFC:
     bl fn_800DD3FC
     addi r3, r1, 0x268
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_80592468_00001C44
     li r0, 0x0
@@ -1998,7 +1998,7 @@ lbl_fn_80592468_00001C44:
     bl fn_800DD3FC
     addi r3, r1, 0x2e8
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_80592468_00001C78
     li r0, 0x0
@@ -2006,7 +2006,7 @@ lbl_fn_80592468_00001C44:
 lbl_fn_80592468_00001C78:
     addi r3, r1, 0x268
     addi r4, r1, 0x2e8
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_80592468_00001CC0
     lwz r3, 0x8(r16)
@@ -2025,7 +2025,7 @@ lbl_fn_80592468_00001C78:
 lbl_fn_80592468_00001CC0:
     lwz r3, 0x8(r16)
     lwz r4, 0x8(r15)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
 lbl_fn_80592468_00001CD0:
     cmpwi r31, 0x0
@@ -2197,10 +2197,10 @@ lbl_fn_80592468_00001F50:
     li r0, 0x0
     b lbl_fn_80592468_0000202C
 lbl_fn_80592468_00001F58:
-    bl fn_80211480
+    bl event_findEntryById
     mr r16, r3
     lwz r3, 0x0(r15)
-    bl fn_80211480
+    bl event_findEntryById
     lis r4, lbl_80796ACC@ha
     lwz r5, 0x8(r16)
     mr r15, r3
@@ -2210,7 +2210,7 @@ lbl_fn_80592468_00001F58:
     bl fn_800DD3FC
     addi r3, r1, 0x110
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_80592468_00001FA0
     li r0, 0x0
@@ -2224,7 +2224,7 @@ lbl_fn_80592468_00001FA0:
     bl fn_800DD3FC
     addi r3, r1, 0x190
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_80592468_00001FD4
     li r0, 0x0
@@ -2232,7 +2232,7 @@ lbl_fn_80592468_00001FA0:
 lbl_fn_80592468_00001FD4:
     addi r3, r1, 0x110
     addi r4, r1, 0x190
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_80592468_0000201C
     lwz r3, 0x8(r16)
@@ -2251,7 +2251,7 @@ lbl_fn_80592468_00001FD4:
 lbl_fn_80592468_0000201C:
     lwz r3, 0x8(r16)
     lwz r4, 0x8(r15)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
 lbl_fn_80592468_0000202C:
     cmpwi r0, 0x0

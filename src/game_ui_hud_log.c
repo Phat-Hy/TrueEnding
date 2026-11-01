@@ -24,7 +24,7 @@ extern void fn_801E9168(void);
 extern void fn_801E917C(void);
 extern void fn_801E92D4(void);
 extern void fn_80206B14(void);
-extern void fn_80206BE4(void);
+extern void assert_generateId(void);
 extern void fn_80206C50(void);
 extern void fn_80219558(void);
 extern void fn_804439FC(void);
@@ -1694,7 +1694,7 @@ lbl_fn_801CF3C0_0000165C:
     beq lbl_fn_801CF3C0_0000169C
     cmpwi r3, 0x0
     beq lbl_fn_801CF3C0_0000169C
-    bl fn_80206BE4
+    bl assert_generateId
     cmpwi r3, 0x0
     mr r4, r3
     ble lbl_fn_801CF3C0_0000169C

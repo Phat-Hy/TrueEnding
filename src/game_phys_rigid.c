@@ -28,7 +28,7 @@ extern void fn_801341B8(void);
 extern void fn_8014FCE8(void);
 extern void fn_8016F3D0(void);
 extern void fn_80171DB0(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80239D58(void);
 extern void res_findResourceSlot(void);
@@ -2036,7 +2036,7 @@ lbl_fn_8010B398_00001AD4:
     slwi r0, r0, 2
     add r3, r3, r0
     lwz r3, 0x50(r3)
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     beq lbl_fn_8010B398_00001BEC
     addi r21, r3, 0xec

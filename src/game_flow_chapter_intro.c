@@ -24,7 +24,7 @@ extern void fn_80178864(void);
 extern void fn_8017C7F8(void);
 extern void fn_80206B9C(void);
 extern void fn_8020EF04(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void task_findEntryById(void);
 extern void world_setGlobalFlag(void);
 extern void world_getLocalFlag(void);
@@ -480,7 +480,7 @@ asm void fn_804E49A8(void)
     lwz r3, -0x698c(r4)
     cmpwi r3, 0x0
     ble lbl_fn_804E49A8_00000580
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     beq lbl_fn_804E49A8_00000580
     lwz r3, 0x514(r31)

@@ -11,7 +11,7 @@ extern void SCGetLanguage(void);
 extern void _restgpr_24(void);
 extern void _savegpr_24(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_800463A8(void);
 extern void fn_80047DCC(void);
@@ -1689,7 +1689,7 @@ lbl_taskManager_initSystem_00001464:
     mr r29, r3
     mr r3, r31
     mr r4, r29
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r3, r31
     stb r0, 0x10(r1)
@@ -1723,7 +1723,7 @@ lbl_taskManager_initSystem_00001594:
     mr r31, r3
     mr r3, r30
     mr r4, r31
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r30
     stb r0, 0x8(r1)

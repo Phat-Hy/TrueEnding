@@ -18,7 +18,7 @@ extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_801FEEFC(void);
 extern void fn_80202118(void);
-extern void fn_80202D00(void);
+extern void perf_getMetricValue(void);
 extern void fn_802168BC(void);
 extern void fn_8021771C(void);
 extern void world_getGlobalFlag(void);
@@ -1366,13 +1366,13 @@ lbl_fn_8051D868_00001238:
     stw r0, 0x104(r3)
     lwz r3, 0x19ec(r20)
     lwz r3, 0x0(r3)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f1, lbl_808879A8
     addi r4, r23, 0x271
     bl fn_801F6C80
     lwz r3, 0x19ec(r20)
     lwz r3, 0x0(r3)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f1, lbl_808879AC
     addi r4, r23, 0x277
     bl fn_801F6C80
@@ -1511,13 +1511,13 @@ lbl_fn_8051D868_00001474:
     stw r0, 0x104(r3)
     lwz r3, 0x19f0(r20)
     lwz r3, 0x0(r3)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f1, lbl_808879A8
     addi r4, r23, 0x271
     bl fn_801F6C80
     lwz r3, 0x19f0(r20)
     lwz r3, 0x0(r3)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f1, lbl_808879AC
     addi r4, r23, 0x277
     bl fn_801F6C80
@@ -1594,21 +1594,21 @@ lbl_fn_8051D868_000015BC:
     stw r0, 0x104(r3)
     lwz r3, 0x19f4(r20)
     lwz r3, 0x0(r3)
-    bl fn_80202D00
+    bl perf_getMetricValue
     stfs f30, 0x54(r3)
     lwz r3, 0x19f4(r20)
     lwz r3, 0x0(r3)
-    bl fn_80202D00
+    bl perf_getMetricValue
     stfs f30, 0x50(r3)
     lwz r3, 0x19f4(r20)
     lwz r3, 0x0(r3)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f1, lbl_808879A8
     addi r4, r23, 0x271
     bl fn_801F6C80
     lwz r3, 0x19f4(r20)
     lwz r3, 0x0(r3)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f1, lbl_808879AC
     addi r4, r23, 0x277
     bl fn_801F6C80

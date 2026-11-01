@@ -9,7 +9,7 @@ extern void _savegpr_24(void);
 extern void dtor_80084684(void);
 extern void actor_dispatchMessage(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
@@ -28,7 +28,7 @@ extern void strncpy(void);
 extern void strcmp(void);
 extern void wmemcpy(void);
 extern void wcslen(void);
-extern void fn_80686AF0(void);
+extern void wcscmp(void);
 extern void fn_806958E0(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
@@ -991,7 +991,7 @@ lbl_fn_8020A90C_00000C28:
     stw r3, 0x580(r29)
 lbl_fn_8020A90C_00000C50:
     addi r3, r1, 0xc
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8020A90C_00000674
     mr r3, r30
@@ -1128,7 +1128,7 @@ lbl_fn_8020AFF4_00000DBC:
     bl strncpy
 lbl_fn_8020AFF4_00000E50:
     addi r3, r1, 0xc
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8020AFF4_00000DBC
     lwz r3, lbl_8087F518
@@ -1381,7 +1381,7 @@ lbl_fn_8020B2BC_00001138:
     stwx r31, r3, r4
 lbl_fn_8020B2BC_000011B4:
     addi r3, r1, 0x2324
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8020B2BC_000010B0
     lwz r3, lbl_8087F518
@@ -1456,7 +1456,7 @@ lbl_fn_8020B2BC_000012B0:
     cmplwi r0, 0x23
     beq lbl_fn_8020B2BC_00001370
     la r4, lbl_8087DB30
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     beq lbl_fn_8020B2BC_00001370
     lwz r3, lbl_8087EEC8
@@ -1633,7 +1633,7 @@ lbl_fn_8020B2BC_00001544:
     stwx r25, r3, r0
 lbl_fn_8020B2BC_00001564:
     addi r3, r1, 0x109c
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8020B2BC_000014BC
     lwz r3, lbl_8087F518
@@ -1708,7 +1708,7 @@ lbl_fn_8020B2BC_00001660:
     cmplwi r0, 0x23
     beq lbl_fn_8020B2BC_00001720
     la r4, lbl_8087DB30
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     beq lbl_fn_8020B2BC_00001720
     lwz r3, lbl_8087EEC8
@@ -1917,7 +1917,7 @@ lbl_fn_8020BB0C_00001944:
     addi r28, r28, 0x4
 lbl_fn_8020BB0C_00001958:
     addi r3, r1, 0x150
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8020BB0C_000018B8
     lwz r3, lbl_8087F518

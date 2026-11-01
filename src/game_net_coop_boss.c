@@ -40,7 +40,7 @@ extern void atn_LH_Texture_update(void);
 extern void str_findChar(void);
 extern void fn_800DD3FC(void);
 extern void fn_801F3FF8(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void world_getGlobalFlag(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
@@ -1029,7 +1029,7 @@ asm void fn_804A7DD4(void)
     stfd f31, 0x110(r1)
     psq_st f31, 0x118(r1), 0, 0
     mr r3, r4
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     mr r5, r3
     beq lbl_fn_804A7DD4_00000C9C

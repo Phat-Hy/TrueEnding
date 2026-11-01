@@ -18,7 +18,7 @@ extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void str_findChar(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_801F3FF8(void);
 extern void fn_801F4728(void);
@@ -699,7 +699,7 @@ lbl_fn_804C4530_00000868:
     beq lbl_fn_804C4530_00000B1C
     addi r3, r1, 0x8
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -2329,7 +2329,7 @@ lbl_fn_804C5E9C_00001EB4:
     bl thread_dispatchToQueue
     addi r3, r1, 0xc
     li r4, 0xa
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -2399,7 +2399,7 @@ lbl_fn_804C5E9C_00001FB4:
     bl thread_dispatchToQueue
     addi r3, r1, 0x8
     li r4, 0xc
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

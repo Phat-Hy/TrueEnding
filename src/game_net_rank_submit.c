@@ -32,7 +32,7 @@ extern void thread_findAndNotify(void);
 extern void fn_801FEDBC(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_80202118(void);
-extern void fn_80202D00(void);
+extern void perf_getMetricValue(void);
 extern void fn_8044D878(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -50,7 +50,7 @@ extern void fn_8052635C(void);
 extern void PSMTXConcat(void);
 extern void wmemcpy(void);
 extern void wcslen(void);
-extern void fn_80686B24(void);
+extern void wcsncmp(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -375,7 +375,7 @@ lbl_fn_8052293C_00000384:
     bl talk_parseDialogue
     la r4, lbl_8087E498
     li r5, 0x1
-    bl fn_80686B24
+    bl wcsncmp
     cmpwi r3, 0x0
     beq lbl_fn_8052293C_00000708
     stw r26, 0x8(r1)
@@ -940,7 +940,7 @@ lbl_fn_805231F4_00000BA0:
     cmpwi r28, 0x0
     beq lbl_fn_805231F4_00000BF8
     mr r3, r28
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_805231F4_00000BF8
     lwz r3, 0x0(r29)
@@ -948,7 +948,7 @@ lbl_fn_805231F4_00000BA0:
     cmplwi r0, 0x1
     ble lbl_fn_805231F4_00000BF8
     lwz r3, 0x18(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f0, 0x54(r3)
     fabs f0, f0
     frsp f0, f0
@@ -962,11 +962,11 @@ lbl_fn_805231F4_00000BFC:
     cmpwi r0, 0x0
     beq lbl_fn_805231F4_00000C68
     mr r3, r28
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_805231F4_00000C68
     mr r3, r28
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f0, 0x54(r3)
     mr r28, r3
     fcmpo cr0, f0, f31
@@ -1468,7 +1468,7 @@ lbl_fn_805233FC_0000131C:
     addi r21, r21, 0x4
     blt lbl_fn_805233FC_00001294
     lwz r3, 0x18(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_805233FC_00001470
@@ -1478,7 +1478,7 @@ lbl_fn_805233FC_0000131C:
     lwz r3, 0x18(r29)
     cmpwi r3, 0x0
     beq lbl_fn_805233FC_000013A0
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_805233FC_000013A0
     lwz r3, 0x0(r29)
@@ -1486,7 +1486,7 @@ lbl_fn_805233FC_0000131C:
     cmplwi r0, 0x1
     ble lbl_fn_805233FC_000013A0
     lwz r3, 0x18(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f7, 0x54(r3)
     lfs f0, lbl_80887A00
     fabs f7, f7
@@ -2087,25 +2087,25 @@ lbl_fn_805233FC_00001C34:
     cmpwi r0, 0x2
     bne lbl_fn_805233FC_00001CA0
     lwz r3, 0x18(r21)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f1, lbl_80887A1C
     addi r4, r31, 0x320
     li r5, 0x0
     bl fn_801F6D7C
     lwz r3, 0x18(r21)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f1, lbl_80887A20
     addi r4, r31, 0x32b
     li r5, 0x0
     bl fn_801F6D7C
     lwz r3, 0x18(r21)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f1, lbl_80887A24
     addi r4, r31, 0x336
     li r5, 0x0
     bl fn_801F6D7C
     lwz r3, 0x18(r21)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f1, lbl_80887A28
     addi r4, r31, 0x336
     li r5, 0x2
@@ -2118,7 +2118,7 @@ lbl_fn_805233FC_00001CA0:
     crclr 6
     bl sprintf
     lwz r3, 0x18(r21)
-    bl fn_80202D00
+    bl perf_getMetricValue
     mr r4, r3
     addi r3, r1, 0xdc
     addi r5, r1, 0x1b0
@@ -2143,7 +2143,7 @@ lbl_fn_805233FC_00001D10:
     lwz r4, 0x50(r25)
     lwz r3, 0x18(r21)
     addi r21, r4, 0xc0
-    bl fn_80202D00
+    bl perf_getMetricValue
     lis r5, lbl_8075C6C4@ha
     mr r4, r3
     addi r5, r5, lbl_8075C6C4@l
@@ -2158,7 +2158,7 @@ lbl_fn_805233FC_00001D48:
     lwz r4, 0x50(r25)
     lwz r3, 0x18(r21)
     addi r21, r4, 0xc0
-    bl fn_80202D00
+    bl perf_getMetricValue
     mr r4, r3
     mr r3, r25
     mr r6, r21
@@ -2192,7 +2192,7 @@ lbl_fn_805233FC_00001DC8:
     lwz r4, 0x50(r25)
     lwz r3, 0x18(r21)
     addi r21, r4, 0xc0
-    bl fn_80202D00
+    bl perf_getMetricValue
     lis r5, lbl_8075C6C4@ha
     mr r4, r3
     addi r5, r5, lbl_8075C6C4@l
@@ -2207,7 +2207,7 @@ lbl_fn_805233FC_00001E00:
     lwz r4, 0x50(r25)
     lwz r3, 0x18(r21)
     addi r21, r4, 0xc0
-    bl fn_80202D00
+    bl perf_getMetricValue
     mr r4, r3
     mr r3, r25
     mr r6, r21

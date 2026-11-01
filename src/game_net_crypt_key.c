@@ -6,7 +6,7 @@ extern void _restgpr_20(void);
 extern void _savegpr_20(void);
 extern void dtor_80084684(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void fn_80060D58(void);
 extern void mem_realloc(void);
@@ -44,7 +44,7 @@ extern void fn_8050F5AC(void);
 extern void fn_8050F668(void);
 extern void strcmp(void);
 extern void atoi(void);
-extern void fn_80686AF0(void);
+extern void wcscmp(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -177,7 +177,7 @@ lbl_fn_804B2C20_00000048:
     mr r30, r3
     addi r4, r4, lbl_80790B70@l
     addi r4, r4, 0x6
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     beq lbl_fn_804B2C20_0000078C
     lwz r3, lbl_8087F580
@@ -234,7 +234,7 @@ lbl_fn_804B2C20_00000048:
     mr r30, r3
     addi r4, r4, lbl_80790B70@l
     addi r4, r4, 0x6
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     beq lbl_fn_804B2C20_0000078C
     lwz r3, lbl_8087F580
@@ -353,7 +353,7 @@ lbl_fn_804B2C20_0000033C:
     mr r30, r3
     addi r4, r4, lbl_80790B70@l
     addi r4, r4, 0x6
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     beq lbl_fn_804B2C20_0000078C
     lwz r3, lbl_8087F580
@@ -740,7 +740,7 @@ lbl_fn_804B3494_0000090C:
     mr r29, r3
     addi r4, r4, lbl_80790B70@l
     addi r4, r4, 0x6
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     beq lbl_fn_804B3494_000009CC
     lwz r3, lbl_8087F580
@@ -1080,7 +1080,7 @@ asm void fn_804B39F8(void)
     mr r30, r3
     addi r4, r4, lbl_80790B70@l
     addi r4, r4, 0x6
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     beq lbl_fn_804B39F8_00000EC4
     lwz r3, lbl_8087F580
@@ -1839,7 +1839,7 @@ lbl_fn_804B4400_00001920:
     addi r26, r26, 0xc
 lbl_fn_804B4400_0000194C:
     addi r3, r1, 0x8
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r25, 0x8
     bge lbl_fn_804B4400_00001978
     addi r3, r1, 0x8
@@ -1902,7 +1902,7 @@ lbl_fn_804B4400_000019DC:
     bge lbl_fn_804B4400_00001A44
 lbl_fn_804B4400_00001A34:
     addi r3, r1, 0x8
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_804B4400_000019DC
 lbl_fn_804B4400_00001A44:

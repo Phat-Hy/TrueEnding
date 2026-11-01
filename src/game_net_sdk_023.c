@@ -21,7 +21,7 @@ extern void fn_8061E8C0(void);
 extern void fn_8061FBE0(void);
 extern void snprintf(void);
 extern void strncpy(void);
-extern void fn_80686A80(void);
+extern void wcsncpy(void);
 extern void fn_80697D34(void);
 extern void fn_8069FFF8(void);
 extern void fn_806A0084(void);
@@ -1584,7 +1584,7 @@ lbl_fn_806D0980_00001534:
     mr r4, r24
     li r5, 0x1a
     addi r3, r3, 0x415e
-    bl fn_80686A80
+    bl wcsncpy
     lwz r3, 0x380(r28)
     mr r4, r25
     li r5, 0xc

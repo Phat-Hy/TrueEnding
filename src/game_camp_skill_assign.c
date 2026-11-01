@@ -9,10 +9,10 @@ extern void fn_8014DEE4(void);
 extern void fn_80153698(void);
 extern void fn_801765D8(void);
 extern void fn_80206B14(void);
-extern void fn_80206BE4(void);
+extern void assert_generateId(void);
 extern void fn_8020ED84(void);
-extern void fn_8020EF80(void);
-extern void fn_80211480(void);
+extern void random_generateValue(void);
+extern void event_findEntryById(void);
 extern void fn_8021150C(void);
 extern void fn_80211940(void);
 extern void fn_80212790(void);
@@ -1350,7 +1350,7 @@ lbl_fn_803BC2D4_00001350:
     add r0, r0, r3
     mullw r0, r0, r4
     subf r3, r0, r5
-    bl fn_80211480
+    bl event_findEntryById
     lwz r0, 0x60f4(r26)
     subi r4, r24, 0x217d
     mulhw r0, r4, r0
@@ -2028,8 +2028,8 @@ lbl_fn_803BC2D4_00001D98:
     mulli r0, r0, 0x3e8
     subf r4, r0, r5
     bl fn_8020ED84
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     addis r4, r26, 0x1
     addi r5, r30, 0x4dd3
     lwz r0, -0x6f0c(r4)
@@ -2058,8 +2058,8 @@ lbl_fn_803BC2D4_00001E0C:
     mulli r0, r0, 0x3e8
     subf r4, r0, r5
     bl fn_80206B14
-    bl fn_80206BE4
-    bl fn_80211480
+    bl assert_generateId
+    bl event_findEntryById
     addis r4, r26, 0x1
     addi r5, r30, 0x4dd3
     lwz r0, -0x6eec(r4)

@@ -8,7 +8,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8005ED6C(void);
 extern void fn_80060D58(void);
@@ -962,7 +962,7 @@ asm void fn_800698DC(void)
     mr r26, r3
     mr r3, r27
     mr r4, r26
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x24(r1)
     mr r3, r27
     stb r0, 0x20(r1)
@@ -981,7 +981,7 @@ asm void fn_800698DC(void)
     mr r26, r3
     mr r3, r27
     mr r4, r26
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x1c(r1)
     mr r3, r27
     stb r0, 0x18(r1)
@@ -1206,7 +1206,7 @@ lbl_fn_80069BF4_00000EC8:
     li r4, 0x0
 lbl_fn_80069BF4_00000ECC:
     mr r3, r30
-    bl fn_80013DC4
+    bl actor_validateIndex
     lwz r0, 0x1c(r1)
     stw r0, 0x14(r1)
     lwz r0, 0x0(r28)
@@ -2341,7 +2341,7 @@ asm void fn_8006AB54(void)
     mr r30, r3
     mr r3, r31
     mr r4, r30
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r31
     stb r0, 0x8(r1)
@@ -2435,7 +2435,7 @@ lbl_fn_8006AC08_00001F04:
     mr r29, r3
     mr r3, r31
     mr r4, r29
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r31
     stb r0, 0x8(r1)
@@ -2643,7 +2643,7 @@ lbl_fn_8006AF38_000021DC:
 lbl_fn_8006AF38_000021E4:
     mr r3, r27
     add r4, r31, r30
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r3, r27
     stb r0, 0x10(r1)
@@ -2704,7 +2704,7 @@ lbl_fn_8006AFF8_000022AC:
 lbl_fn_8006AFF8_000022B4:
     mr r3, r27
     add r4, r31, r30
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r3, r27
     stb r0, 0x10(r1)
@@ -2867,7 +2867,7 @@ lbl_fn_8006B174_000024B4:
     stw r0, 0x8(r3)
     mr r3, r30
     lwz r4, 0x4(r4)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r30
     stb r0, 0x8(r1)
@@ -2964,7 +2964,7 @@ lbl_fn_8006B2D8_000025F8:
     stw r0, 0x8(r3)
     mr r3, r30
     lwz r4, 0x4(r4)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r30
     stb r0, 0x8(r1)
@@ -3058,7 +3058,7 @@ lbl_fn_8006B46C_00002724:
     mr r31, r3
     mr r3, r30
     mr r4, r31
-    bl fn_80013DC4
+    bl actor_validateIndex
     addi r6, r1, 0x10
     lbz r0, 0xc(r1)
     mr r7, r6
@@ -3133,7 +3133,7 @@ lbl_fn_8006B594_0000282C:
     lwz r4, 0x4(r4)
     stw r0, 0x4(r3)
     stw r0, 0x8(r3)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x54(r1)
     mr r3, r31
     stb r5, 0x50(r1)
@@ -3160,7 +3160,7 @@ lbl_fn_8006B594_0000286C:
     mr r28, r3
     mr r3, r29
     mr r4, r28
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x4c(r1)
     mr r3, r29
     stb r0, 0x48(r1)
@@ -3786,7 +3786,7 @@ lbl_fn_8006BD78_000030E0:
     stw r0, 0x8(r27)
     stw r0, 0xc(r27)
     lwz r4, 0xa0(r1)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x68(r1)
     addi r3, r27, 0x4
     stb r5, 0x6c(r1)
@@ -3943,7 +3943,7 @@ lbl_fn_8006BD78_00003328:
     stw r0, 0x8(r29)
     stw r0, 0xc(r29)
     lwz r4, 0xa0(r1)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x7c(r1)
     addi r3, r29, 0x4
     stb r5, 0x78(r1)
@@ -3989,7 +3989,7 @@ lbl_fn_8006BD78_000033D4:
     stw r29, 0x8(r28)
     stw r29, 0xc(r28)
     lwz r4, 0x8(r27)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x74(r1)
     addi r3, r28, 0x4
     stb r0, 0x70(r1)

@@ -9,7 +9,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_17(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
@@ -48,7 +48,7 @@ extern void fn_80473F88(void);
 extern void taskManager_updateTasks(void);
 extern void printf(void);
 extern void wcslen(void);
-extern void fn_80686A64(void);
+extern void wcscpy(void);
 extern void abort(void);
 extern void runtime_clampDouble(void);
 extern u32 strlen(const char* str);
@@ -1710,7 +1710,7 @@ lbl_fn_801F36C8_000015B0:
 lbl_fn_801F36C8_000015FC:
     lwz r4, 0xc(r4)
 lbl_fn_801F36C8_00001600:
-    bl fn_80686A64
+    bl wcscpy
     lwz r0, 0x40(r1)
     add r3, r0, r17
     lwz r0, 0x4(r3)
@@ -1999,7 +1999,7 @@ asm void fn_801F407C(void)
     mr r27, r3
     mr r3, r29
     mr r4, r27
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r3, r29
     stb r0, 0x10(r1)
@@ -2021,7 +2021,7 @@ asm void fn_801F407C(void)
     mr r30, r3
     mr r3, r27
     mr r4, r30
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r27
     stb r0, 0x8(r1)

@@ -21,7 +21,7 @@ extern void snprintf(void);
 extern void strncpy(void);
 extern void fn_8068446C(void);
 extern void wcslen(void);
-extern void fn_80686A64(void);
+extern void wcscpy(void);
 extern void fn_80696324(void);
 extern void fn_806A7110(void);
 extern void fn_806A7130(void);
@@ -1143,7 +1143,7 @@ lbl_fn_806D42F0_00000E90:
     slwi r0, r23, 1
     lwz r4, 0x0(r26)
     add r3, r24, r0
-    bl fn_80686A64
+    bl wcscpy
     lwz r3, 0x0(r26)
     bl wcslen
     add r23, r23, r3

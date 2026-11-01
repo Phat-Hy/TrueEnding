@@ -6,7 +6,7 @@ extern void dtor_80084684(void);
 extern void fn_8003F538(void);
 extern void fn_8004ED34(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
@@ -2018,7 +2018,7 @@ lbl_fn_8035C1B4_00001A50:
     stw r0, 0x1540(r31)
 lbl_fn_8035C1B4_00001A5C:
     addi r3, r1, 0x14
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8035C1B4_00001870
     lwz r0, 0x664(r1)

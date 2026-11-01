@@ -25,7 +25,7 @@ extern void fn_8059A268(void);
 extern void fn_805AA828(void);
 extern void fn_805AE038(void);
 extern void PSVECSquareMag(void);
-extern void fn_80686A64(void);
+extern void wcscpy(void);
 extern void std_fmod(void);
 extern void runtime_clampDouble(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -1208,30 +1208,30 @@ lbl_fn_803DAB4C_00000FA0:
     addi r3, r1, 0xa8
     addi r25, r25, lbl_8078C638@l
     addi r4, r25, 0x20
-    bl fn_80686A64
+    bl wcscpy
     addi r3, r1, 0x10
     addi r4, r25, 0x30
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_803DAB4C_00001008
 lbl_fn_803DAB4C_00000FC4:
     lis r25, lbl_8078C638@ha
     addi r3, r1, 0xa8
     addi r25, r25, lbl_8078C638@l
     addi r4, r25, 0x34
-    bl fn_80686A64
+    bl wcscpy
     addi r3, r1, 0x10
     addi r4, r25, 0x30
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_803DAB4C_00001008
 lbl_fn_803DAB4C_00000FE8:
     lis r25, lbl_8078C638@ha
     addi r3, r1, 0xa8
     addi r25, r25, lbl_8078C638@l
     addi r4, r25, 0x44
-    bl fn_80686A64
+    bl wcscpy
     addi r3, r1, 0x10
     addi r4, r25, 0x30
-    bl fn_80686A64
+    bl wcscpy
 lbl_fn_803DAB4C_00001008:
     lwz r4, 0x2544(r26)
     lis r25, lbl_807506A0@ha

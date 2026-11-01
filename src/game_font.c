@@ -5,7 +5,7 @@
 extern void NANDSetAutoErrorMessaging(void);
 extern void __register_global_object(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8006B0C8(void);
 extern void fn_8006B174(void);
@@ -454,7 +454,7 @@ lbl_fn_800A2DE0_00000588:
     mr r28, r3
     mr r3, r30
     mr r4, r28
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x34(r1)
     mr r3, r30
     stb r0, 0x30(r1)
@@ -595,7 +595,7 @@ lbl_fn_800A2DE0_00000794:
     mr r29, r3
     mr r3, r30
     mr r4, r29
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x28(r1)
     mr r3, r30
     stb r0, 0x2c(r1)
@@ -736,7 +736,7 @@ lbl_fn_800A2DE0_0000099C:
     mr r29, r3
     mr r3, r30
     mr r4, r29
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x20(r1)
     mr r3, r30
     stb r0, 0x24(r1)
@@ -825,7 +825,7 @@ lbl_fn_800A2DE0_00000AF0:
     mr r29, r3
     mr r3, r30
     mr r4, r29
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x18(r1)
     mr r3, r30
     stb r0, 0x1c(r1)
@@ -1555,7 +1555,7 @@ lbl_fn_800A2DE0_000015E0:
     mr r30, r3
     mr r3, r29
     mr r4, r30
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x10(r1)
     mr r3, r29
     stb r0, 0x14(r1)
@@ -1607,7 +1607,7 @@ lbl_fn_800A2DE0_0000169C:
     mr r30, r3
     mr r3, r29
     mr r4, r30
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x8(r1)
     mr r3, r29
     stb r0, 0xc(r1)

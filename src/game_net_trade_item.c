@@ -31,7 +31,7 @@ extern void fn_80114AA0(void);
 extern void fn_801156BC(void);
 extern void fn_801156C4(void);
 extern void fn_80116BD4(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void fn_8011F970(void);
 extern void fn_80121F00(void);
 extern void fn_801D80B4(void);
@@ -152,7 +152,7 @@ asm void fn_8052C10C(void)
     mr r24, r4
     addi r3, r1, 0x8
     li r4, 0x1f
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -818,7 +818,7 @@ lbl_fn_8052C9C8_00000910:
     stw r0, 0x133c(r3)
     addi r3, r1, 0x8
     li r4, 0x20
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

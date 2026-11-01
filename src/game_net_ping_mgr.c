@@ -30,7 +30,7 @@ extern void thread_dispatchToQueue(void);
 extern void fn_80201E78(void);
 extern void fn_80202118(void);
 extern void fn_80202A6C(void);
-extern void fn_80202D00(void);
+extern void perf_getMetricValue(void);
 extern void fn_8021F094(void);
 extern void fn_8021F0D4(void);
 extern void world_getGlobalFlag(void);
@@ -998,7 +998,7 @@ lbl_fn_80514C90_00000B68:
     li r25, 0x0
 lbl_fn_80514C90_00000C58:
     lwz r3, 0xf4(r31)
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_80514C90_00000D10
     addi r3, r1, 0x100
@@ -1026,7 +1026,7 @@ lbl_fn_80514C90_00000C58:
     stfs f7, 0xf4(r1)
     stfs f0, 0xf8(r1)
     lwz r3, 0xf4(r31)
-    bl fn_80202D00
+    bl perf_getMetricValue
     addi r4, r29, 0xc2
     addi r5, r1, 0xe8
     bl fn_801F6E78
@@ -1084,7 +1084,7 @@ lbl_fn_80514C90_00000D10:
     stfs f7, 0xf4(r1)
     stfs f0, 0xf8(r1)
     lwz r3, 0xf4(r3)
-    bl fn_80202D00
+    bl perf_getMetricValue
     subfic r4, r26, 0x1
     subi r0, r26, 0x1
     or r0, r4, r0
@@ -1097,7 +1097,7 @@ lbl_fn_80514C90_00000D10:
     bl fn_805119CC
 lbl_fn_80514C90_00000DDC:
     lwz r3, 0x124(r30)
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_80514C90_00000E90
     lis r29, lbl_8075B7A4@ha
@@ -1126,17 +1126,17 @@ lbl_fn_80514C90_00000DDC:
     stfs f7, 0xf4(r1)
     stfs f0, 0xf8(r1)
     lwz r3, 0x124(r30)
-    bl fn_80202D00
+    bl perf_getMetricValue
     addi r4, r29, 0xe8
     addi r5, r1, 0xe8
     bl fn_801F6E78
     lwz r3, 0x124(r30)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f1, lbl_80887884
     addi r4, r29, 0xf0
     bl fn_801F6C80
     lwz r3, 0x124(r30)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lwz r4, 0xf0(r30)
     li r6, 0xa
     lwz r5, 0x130(r30)

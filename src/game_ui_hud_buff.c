@@ -20,7 +20,7 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
 extern void fn_8010C00C(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void fn_8012B988(void);
 extern void fn_8012D8B8(void);
 extern void fn_8013407C(void);
@@ -41,7 +41,7 @@ extern void fn_801F6E78(void);
 extern void fn_80201E78(void);
 extern void fn_80202118(void);
 extern void fn_80202A6C(void);
-extern void fn_80202D00(void);
+extern void perf_getMetricValue(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
@@ -1216,7 +1216,7 @@ lbl_fn_801CD210_00000F40:
     cmpwi r4, 0x0
     blt lbl_fn_801CD210_00000F8C
     addi r3, r1, 0x8
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1778,7 +1778,7 @@ lbl_fn_801CDA00_00001620:
     stfs f0, 0x34(r1)
     bl fn_805112AC
     mr r3, r27
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_801CDA00_000017A8
     addi r3, r1, 0x90
@@ -1805,7 +1805,7 @@ lbl_fn_801CDA00_00001620:
     stfs f2, 0x80(r1)
     stfs f1, 0x84(r1)
     stfs f0, 0x88(r1)
-    bl fn_80202D00
+    bl perf_getMetricValue
     addi r4, r29, 0xf6
     addi r5, r1, 0x78
     bl fn_801F6E78
@@ -1838,7 +1838,7 @@ lbl_fn_801CDA00_000017C0:
     stfs f31, 0x1c(r1)
     bl fn_805112AC
     mr r3, r23
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_801CDA00_00001894
     addi r3, r1, 0x90
@@ -1866,7 +1866,7 @@ lbl_fn_801CDA00_000017C0:
     stfs f2, 0x80(r1)
     stfs f1, 0x84(r1)
     stfs f0, 0x88(r1)
-    bl fn_80202D00
+    bl perf_getMetricValue
     addi r4, r29, 0x10a
     addi r5, r1, 0x78
     bl fn_801F6E78

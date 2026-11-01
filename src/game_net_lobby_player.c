@@ -7,7 +7,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_800458D4(void);
 extern void fn_800458F4(void);
@@ -1140,7 +1140,7 @@ lbl_fn_8049DEE4_00000D84:
     mr r29, r3
     mr r3, r28
     mr r4, r29
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r28
     stb r0, 0x8(r1)
@@ -1611,7 +1611,7 @@ lbl_fn_8049E480_00001408:
     mr r15, r3
     mr r3, r18
     mr r4, r15
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x20(r1)
     mr r3, r18
     stb r0, 0x1c(r1)
@@ -1751,7 +1751,7 @@ lbl_fn_8049E480_000015F0:
     mr r19, r3
     mr r3, r17
     mr r4, r19
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x18(r1)
     mr r3, r17
     stb r0, 0x14(r1)
@@ -1890,7 +1890,7 @@ lbl_fn_8049E480_000017C8:
     mr r19, r3
     mr r3, r16
     mr r4, r19
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x10(r1)
     mr r3, r16
     stb r0, 0xc(r1)

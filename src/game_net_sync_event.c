@@ -21,7 +21,7 @@ extern void fn_804A3C24(void);
 extern void fn_804A4738(void);
 extern void fn_804C54FC(void);
 extern void fn_804CB0B8(void);
-extern void fn_80686AF0(void);
+extern void wcscmp(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -369,7 +369,7 @@ lbl_fn_804CBA1C_00000450:
 lbl_fn_804CBA1C_00000454:
     mr r3, r31
     la r4, lbl_8087E140
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     beq lbl_fn_804CBA1C_00000478
     lwz r3, lbl_8087F580

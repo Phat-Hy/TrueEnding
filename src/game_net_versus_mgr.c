@@ -22,7 +22,7 @@ extern void fn_800A55AC(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void fn_801F4728(void);
 extern void fn_801F4CB4(void);
 extern void saveSlot_readSummary(void);
@@ -370,7 +370,7 @@ lbl_fn_804B7F88_000003CC:
 lbl_fn_804B7F88_000003F4:
     addi r3, r1, 0x14
     li r4, 0xc
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -473,7 +473,7 @@ lbl_fn_804B83F4_00000560:
     stw r0, 0x2cc(r29)
     addi r3, r1, 0x28
     li r4, 0x3
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x28
     li r4, -0x1
     bl ref_releaseHandle
@@ -511,7 +511,7 @@ lbl_fn_804B83F4_000005EC:
     stw r0, 0x2d0(r29)
     addi r3, r1, 0x24
     li r4, 0x3
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x24
     li r4, -0x1
     bl ref_releaseHandle
@@ -558,7 +558,7 @@ lbl_fn_804B83F4_00000690:
     beq lbl_fn_804B83F4_000006B8
     addi r3, r1, 0x20
     li r4, 0x3
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x20
     li r4, -0x1
     bl ref_releaseHandle
@@ -647,7 +647,7 @@ lbl_fn_804B83F4_000006E8:
     bl fn_804B9694
     addi r3, r1, 0x1c
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x1c
     li r4, -0x1
     bl ref_releaseHandle
@@ -674,7 +674,7 @@ lbl_fn_804B83F4_00000854:
     bl fn_804AD1EC
     addi r3, r1, 0x18
     li r4, 0xb
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x18
     li r4, -0x1
     bl ref_releaseHandle
@@ -694,7 +694,7 @@ lbl_fn_804B83F4_00000898:
     bl fn_804AD1EC
     addi r3, r1, 0x14
     li r4, 0xb
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -714,7 +714,7 @@ lbl_fn_804B83F4_000008DC:
     bl fn_804AD1EC
     addi r3, r1, 0x10
     li r4, 0xb
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -741,7 +741,7 @@ lbl_fn_804B83F4_000008FC:
     stw r0, 0x30c(r29)
     stw r0, 0x310(r29)
     stw r0, 0x314(r29)
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -780,7 +780,7 @@ lbl_fn_804B83F4_000009CC:
     bl fn_804AD1EC
     addi r3, r1, 0x8
     li r4, 0xc
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

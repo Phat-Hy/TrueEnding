@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8006BA30(void);
 extern void fn_8006EF48(void);
@@ -18,7 +18,7 @@ extern void ref_releaseHandle(void);
 extern void str_findChar(void);
 extern void fn_800DD3FC(void);
 extern void fn_80116FC0(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void fn_8011BBD0(void);
 extern void fn_80124C6C(void);
 extern void fn_801F4728(void);
@@ -1372,7 +1372,7 @@ lbl_fn_8011B018_000011BC:
     mr r23, r3
     mr r3, r24
     mr r4, r23
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x1c(r1)
     mr r3, r24
     stb r0, 0x18(r1)
@@ -1585,7 +1585,7 @@ lbl_fn_8011B3D8_000015B8:
 lbl_fn_8011B3D8_000015C0:
     addi r3, r1, 0xc
     li r4, 0x3
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -1638,7 +1638,7 @@ lbl_fn_8011B3D8_0000166C:
 lbl_fn_8011B3D8_00001674:
     addi r3, r1, 0x8
     li r4, 0x3
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

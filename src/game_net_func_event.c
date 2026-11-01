@@ -5,7 +5,7 @@
 extern void _restgpr_22(void);
 extern void _savegpr_22(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -16,7 +16,7 @@ extern void fn_8050E680(void);
 extern void fn_8050E8CC(void);
 extern void strcmp(void);
 extern void atoi(void);
-extern void fn_80686A64(void);
+extern void wcscpy(void);
 extern void fn_8068B100(void);
 extern void fn_806958E0(void);
 extern void fn_80699E24(void);
@@ -210,7 +210,7 @@ lbl_fn_80507314_00000180:
     stw r3, 0x10(r27)
 lbl_fn_80507314_000001FC:
     addi r3, r1, 0x8
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_80507314_00000180
 lbl_fn_80507314_0000020C:
@@ -271,12 +271,12 @@ lbl_fn_80507314_000002AC:
     addi r27, r27, 0xc
 lbl_fn_80507314_000002CC:
     addi r3, r1, 0x8
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_80507314_00000278
 lbl_fn_80507314_000002DC:
     addi r3, r1, 0x8
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_80507314_000000E8
     lmw r25, 0x644(r1)
@@ -1919,7 +1919,7 @@ lbl_fn_80508B78_00001944:
     stw r29, 0x8(r28)
     stw r29, 0xc(r28)
     stw r29, 0x30(r28)
-    bl fn_80686A64
+    bl wcscpy
     addi r28, r28, 0x34
     cmplw r28, r27
     blt lbl_fn_80508B78_00001944

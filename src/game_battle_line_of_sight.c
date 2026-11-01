@@ -33,7 +33,7 @@ extern void fn_80206B9C(void);
 extern void fn_80206C50(void);
 extern void fn_8020EF04(void);
 extern void fn_8020EFEC(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void fn_8021E4E4(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_destructor(void);
@@ -810,7 +810,7 @@ lbl_fn_8040AB64_0000090C:
     bl fn_80445130
 lbl_fn_8040AB64_0000092C:
     lwz r3, 0x158(r28)
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     stw r3, 0x160(r28)
     beq lbl_fn_8040AB64_000009F8
@@ -1327,7 +1327,7 @@ asm void fn_8040B394(void)
     stw r29, 0x14(r1)
     mr r29, r3
     ble lbl_fn_8040B394_0000109C
-    bl fn_80211480
+    bl event_findEntryById
     mr r31, r3
     b lbl_fn_8040B394_000010A0
 lbl_fn_8040B394_0000109C:

@@ -29,7 +29,7 @@ extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void str_findChar(void);
 extern void fn_80116FC0(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void fn_801D082C(void);
 extern void fn_801F3FF8(void);
 extern void fn_801F6C80(void);
@@ -40,9 +40,9 @@ extern void thread_findAndNotify(void);
 extern void fn_80201E78(void);
 extern void fn_80202118(void);
 extern void fn_80202A6C(void);
-extern void fn_80202D00(void);
+extern void perf_getMetricValue(void);
 extern void fn_80206C50(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void fn_8021175C(void);
 extern void fn_80237518(void);
 extern void fn_802375C4(void);
@@ -169,7 +169,7 @@ asm void fn_8051B168(void)
 lbl_fn_8051B168_00000034:
     add r3, r28, r27
     lwz r3, 0xf4(r3)
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_8051B168_000001A8
@@ -183,7 +183,7 @@ lbl_fn_8051B168_00000034:
     lwz r3, 0xd4(r28)
     add r26, r3, r0
     lwzx r3, r3, r0
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     mr r22, r3
     beq lbl_fn_8051B168_00000194
@@ -401,7 +401,7 @@ lbl_fn_8051B440_00000338:
 lbl_fn_8051B440_0000036C:
     addi r3, r1, 0xc
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -418,7 +418,7 @@ lbl_fn_8051B440_00000388:
     bl fn_8052DEF0
     addi r3, r1, 0x8
     li r4, 0x8
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -471,7 +471,7 @@ lbl_fn_8051B548_0000043C:
     bl fn_8051B168
     addi r3, r1, 0x10
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -485,7 +485,7 @@ lbl_fn_8051B548_00000480:
     beq lbl_fn_8051B548_00000520
     addi r3, r1, 0xc
     li r4, 0x12
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -526,7 +526,7 @@ lbl_fn_8051B548_00000520:
     beq lbl_fn_8051B548_000005BC
     addi r3, r1, 0x8
     li r4, 0x12
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -569,7 +569,7 @@ lbl_fn_8051B548_000005BC:
     cmpwi r0, 0x0
     beq lbl_fn_8051B548_0000060C
     lwz r3, 0x0(r30)
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_8051B548_0000062C
@@ -631,12 +631,12 @@ lbl_fn_8051B7CC_0000069C:
     lwz r3, 0x0(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8051B7CC_00000728
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_8051B7CC_00000728
     lwz r3, 0x50(r26)
     lwzx r3, r3, r28
-    bl fn_80202D00
+    bl perf_getMetricValue
     fmr f1, f31
     addi r4, r30, 0x167
     bl fn_801F6C80

@@ -7,7 +7,7 @@ extern void __register_global_object(void);
 extern void _restfpr_23(void);
 extern void _savefpr_23(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8001A270(void);
 extern void mem_free(void);
@@ -14308,7 +14308,7 @@ lbl_fn_806926D4_0000B878:
     mr r28, r3
     addi r3, r29, 0xc
     mr r4, r28
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r31)
     mr r6, r30
     stb r0, 0x8(r31)
@@ -15648,7 +15648,7 @@ lbl_fn_80693884_0000CA0C:
     bl fn_8067C590
     lbz r4, 0x1c(r1)
     mr r3, r28
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r31, 0x10(r1)
     addi r30, r1, 0x18
     li r29, 0x0
@@ -15819,7 +15819,7 @@ lbl_fn_80693AB8_0000CC3C:
     addi r4, r1, 0x24
 lbl_fn_80693AB8_0000CC54:
     lwz r4, 0x0(r4)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lwz r0, 0x30(r1)
     stw r0, 0x28(r1)
     lwz r0, 0x0(r29)
@@ -16145,7 +16145,7 @@ lbl_fn_80693AB8_0000D09C:
     stw r0, 0x4(r28)
     stw r0, 0x8(r28)
     lwz r4, 0x38(r1)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0xc(r1)
     mr r3, r28
     stb r5, 0x8(r1)

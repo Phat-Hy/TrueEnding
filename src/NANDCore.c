@@ -29,8 +29,8 @@ extern void fn_80620FD0(void);
 extern void strncpy(void);
 extern void strcmp(void);
 extern void strncmp(void);
-extern void fn_80686A80(void);
-extern void fn_80686AF0(void);
+extern void wcsncpy(void);
+extern void wcscmp(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -1318,35 +1318,35 @@ asm void fn_80622180(void)
     la r4, lbl_8087E918
     stw r0, 0x0(r28)
     mr r3, r30
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_80622180_000010A4
     addi r3, r28, 0x20
     la r4, lbl_8087E91C
     li r5, 0x20
-    bl fn_80686A80
+    bl wcsncpy
     b lbl_fn_80622180_000010B4
 lbl_fn_80622180_000010A4:
     mr r4, r30
     addi r3, r28, 0x20
     li r5, 0x20
-    bl fn_80686A80
+    bl wcsncpy
 lbl_fn_80622180_000010B4:
     mr r3, r31
     la r4, lbl_8087E918
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_80622180_000010DC
     addi r3, r28, 0x60
     la r4, lbl_8087E91C
     li r5, 0x20
-    bl fn_80686A80
+    bl wcsncpy
     b lbl_fn_80622180_000010EC
 lbl_fn_80622180_000010DC:
     mr r4, r31
     addi r3, r28, 0x60
     li r5, 0x20
-    bl fn_80686A80
+    bl wcsncpy
 lbl_fn_80622180_000010EC:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

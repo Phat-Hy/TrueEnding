@@ -5,7 +5,7 @@
 extern void _restgpr_25(void);
 extern void _savegpr_25(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
@@ -36,9 +36,9 @@ extern void fn_8021A5F8(void);
 extern void world_getGlobalFlag(void);
 extern void strcmp(void);
 extern void atoi(void);
-extern void fn_80686A64(void);
-extern void fn_80686AF0(void);
-extern void fn_80686B64(void);
+extern void wcscpy(void);
+extern void wcscmp(void);
+extern void wcschr(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -70,7 +70,7 @@ extern u32 lbl_80882EEC;
 void fn_80210AC4(void);
 void event_processScriptAction(void);
 void fn_80211244(void);
-void fn_80211480(void);
+void event_findEntryById(void);
 void fn_802114D8(void);
 void fn_802114E0(void);
 void fn_8021150C(void);
@@ -146,7 +146,7 @@ asm void event_processScriptAction(void)
     mr r21, r3
 lbl_event_processScriptAction_000000DC:
     addi r3, r1, 0x14
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     li r0, 0x0
     lis r19, lbl_8073FA60@ha
     stw r0, lbl_8087F224
@@ -166,7 +166,7 @@ lbl_event_processScriptAction_00000100:
     stw r0, lbl_8087F224
 lbl_event_processScriptAction_00000124:
     addi r3, r1, 0x14
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_event_processScriptAction_00000100
     lwz r3, lbl_8087F224
@@ -201,7 +201,7 @@ lbl_event_processScriptAction_00000124:
     bctrl
     addi r3, r1, 0x14
     li r20, 0x0
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     li r27, 0x0
     stw r27, 0xc(r1)
     addi r24, r26, 0x1e
@@ -575,7 +575,7 @@ lbl_event_processScriptAction_000006A8:
     addi r20, r20, 0x1
 lbl_event_processScriptAction_00000704:
     addi r3, r1, 0x14
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_event_processScriptAction_000001E0
     mulli r7, r20, 0x138
@@ -688,7 +688,7 @@ lbl_fn_80211244_00000890:
     addi r3, r1, 0x14
     bl talk_parseDialogue
     la r4, lbl_8087DB40
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     beq lbl_fn_80211244_000008B8
     addi r3, r1, 0x14
@@ -769,7 +769,7 @@ lbl_fn_80211244_0000099C:
     blr
 }
 
-asm void fn_80211480(void)
+asm void event_findEntryById(void)
 {
     nofralloc
     lwz r6, lbl_8087F220
@@ -778,25 +778,25 @@ asm void fn_80211480(void)
     mr r5, r6
     mtctr r0
     cmpwi r0, 0x0
-    ble lbl_fn_80211480_000009F4
-lbl_fn_80211480_000009D8:
+    ble lbl_event_findEntryById_000009F4
+lbl_event_findEntryById_000009D8:
     lwz r0, 0x4(r5)
     cmpw r3, r0
-    bne lbl_fn_80211480_000009E8
-    b lbl_fn_80211480_000009F8
-lbl_fn_80211480_000009E8:
+    bne lbl_event_findEntryById_000009E8
+    b lbl_event_findEntryById_000009F8
+lbl_event_findEntryById_000009E8:
     addi r5, r5, 0x138
     addi r4, r4, 0x1
-    bdnz lbl_fn_80211480_000009D8
-lbl_fn_80211480_000009F4:
+    bdnz lbl_event_findEntryById_000009D8
+lbl_event_findEntryById_000009F4:
     li r4, -0x1
-lbl_fn_80211480_000009F8:
+lbl_event_findEntryById_000009F8:
     cmpwi r4, 0x0
-    blt lbl_fn_80211480_00000A0C
+    blt lbl_event_findEntryById_00000A0C
     mulli r0, r4, 0x138
     add r3, r6, r0
     blr
-lbl_fn_80211480_00000A0C:
+lbl_event_findEntryById_00000A0C:
     li r3, 0x0
     blr
 }
@@ -1097,11 +1097,11 @@ lbl_fn_80211770_00000DA8:
     lwz r4, 0x8(r29)
     add r29, r3, r0
     mr r3, r29
-    bl fn_80686A64
+    bl wcscpy
     mr r3, r29
     li r30, 0x0
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_80211770_00000E0C
     lhz r6, 0x4(r3)
@@ -1140,7 +1140,7 @@ lbl_fn_80211770_00000E34:
 lbl_fn_80211770_00000E50:
     mr r3, r29
     addi r4, r1, 0x8
-    bl fn_80686A64
+    bl wcscpy
     mr r3, r29
 lbl_fn_80211770_00000E60:
     lwz r0, 0x64(r1)

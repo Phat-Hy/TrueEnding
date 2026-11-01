@@ -8,7 +8,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_14(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void mem_free(void);
 extern void mem_getAllocSize(void);
@@ -1478,7 +1478,7 @@ lbl_fn_805455D0_000013DC:
     stw r25, 0xc(r21)
     stw r25, 0x10(r21)
     lwz r4, 0xc(r23)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     addi r3, r21, 0x8
     stb r0, 0x8(r1)
@@ -1510,7 +1510,7 @@ lbl_fn_805455D0_00001454:
     stw r25, 0x20(r21)
     stw r25, 0x24(r21)
     lwz r4, 0x20(r23)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x10(r1)
     addi r3, r21, 0x1c
     stb r0, 0x14(r1)

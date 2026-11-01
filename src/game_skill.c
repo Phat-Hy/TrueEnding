@@ -25,7 +25,7 @@ extern void PSMTXMultVec(void);
 extern void fn_806163C0(void);
 extern void fn_806163E0(void);
 extern void wcslen(void);
-extern void fn_80686A64(void);
+extern void wcscpy(void);
 extern void runtime_registerStaticObject(void);
 extern u32 strlen(const char* str);
 
@@ -678,7 +678,7 @@ lbl_fn_80061824_000008B8:
     beq lbl_fn_80061824_000009EC
     mr r3, r22
     mr r4, r24
-    bl fn_80686A64
+    bl wcscpy
     lwz r0, 0xa0(r23)
     li r3, 0x1
     cmpwi r0, 0x6
@@ -882,7 +882,7 @@ lbl_fn_80061AE4_00000B9C:
     beq lbl_fn_80061AE4_00000CDC
     mr r3, r22
     mr r4, r24
-    bl fn_80686A64
+    bl wcscpy
     lwz r0, 0xa0(r23)
     li r3, 0x1
     cmpwi r0, 0x6

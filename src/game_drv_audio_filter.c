@@ -6,11 +6,11 @@ extern void __files(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8004B338(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006AA20(void);
 extern void fn_8006AC08(void);
@@ -202,7 +202,7 @@ lbl_fn_805BC740_0000011C:
     mr r27, r3
     mr r3, r29
     mr r4, r27
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r29
     stb r0, 0x8(r1)
@@ -765,7 +765,7 @@ lbl_fn_805BCF08_000008FC:
     mr r31, r3
     mr r3, r25
     mr r4, r31
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r3, r25
     stb r0, 0x10(r1)
@@ -794,7 +794,7 @@ lbl_fn_805BCF08_00000990:
     mr r31, r3
     mr r3, r24
     mr r4, r31
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r24
     stb r0, 0x8(r1)
@@ -939,7 +939,7 @@ lbl_fn_805BCF08_00000B5C:
     bl dtor_80084684
 lbl_fn_805BCF08_00000BAC:
     addi r3, r1, 0x58
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_805BCF08_000008FC
     lmw r21, 0x694(r1)

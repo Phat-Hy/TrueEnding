@@ -26,7 +26,7 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
 extern void fn_80116FC0(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void fn_8011745C(void);
 extern void fn_801D082C(void);
 extern void fn_801F3FF8(void);
@@ -43,7 +43,7 @@ extern void thread_dispatchToQueue(void);
 extern void fn_80201E78(void);
 extern void fn_80202118(void);
 extern void fn_80202A6C(void);
-extern void fn_80202D00(void);
+extern void perf_getMetricValue(void);
 extern void fn_8021F094(void);
 extern void fn_8021F0D4(void);
 extern void world_getGlobalFlag(void);
@@ -431,7 +431,7 @@ lbl_fn_80516008_0000041C:
     beq lbl_fn_80516008_00000468
     addi r3, r1, 0x1c
     li r4, 0x8
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x1c
     li r4, -0x1
     bl ref_releaseHandle
@@ -453,7 +453,7 @@ lbl_fn_80516008_00000468:
     bne lbl_fn_80516008_000004A8
     addi r3, r1, 0x18
     li r4, 0xb
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x18
     li r4, -0x1
     bl ref_releaseHandle
@@ -461,7 +461,7 @@ lbl_fn_80516008_00000468:
 lbl_fn_80516008_000004A8:
     addi r3, r1, 0x14
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -510,7 +510,7 @@ lbl_fn_80516410_00000538:
     beq lbl_fn_80516410_00000578
     addi r3, r1, 0x10
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -539,7 +539,7 @@ lbl_fn_80516410_00000578:
     blt lbl_fn_80516410_000005E8
     addi r3, r1, 0xc
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -550,7 +550,7 @@ lbl_fn_80516410_00000578:
 lbl_fn_80516410_000005E8:
     addi r3, r1, 0x8
     li r4, 0xb
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -588,7 +588,7 @@ asm void fn_80516548(void)
     li r28, 0x0
 lbl_fn_80516548_00000668:
     lwz r3, 0xf4(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_fn_80516548_000007A4
@@ -1503,7 +1503,7 @@ lbl_fn_80516E0C_00001270:
     li r25, 0x0
 lbl_fn_80516E0C_00001364:
     lwz r3, 0xf4(r28)
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_80516E0C_00001420
     addi r3, r1, 0x118
@@ -1531,7 +1531,7 @@ lbl_fn_80516E0C_00001364:
     stfs f7, 0x10c(r1)
     stfs f0, 0x110(r1)
     lwz r3, 0xf4(r28)
-    bl fn_80202D00
+    bl perf_getMetricValue
     addi r4, r29, 0xd5
     addi r5, r1, 0x100
     bl fn_801F6E78
@@ -1589,7 +1589,7 @@ lbl_fn_80516E0C_00001420:
     stfs f7, 0x10c(r1)
     stfs f0, 0x110(r1)
     lwz r3, 0xf4(r3)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lwz r5, 0x50(r30)
     mr r4, r3
     mr r3, r30
@@ -1600,7 +1600,7 @@ lbl_fn_80516E0C_00001420:
     bl fn_805119CC
 lbl_fn_80516E0C_000014E0:
     lwz r3, 0x124(r30)
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_80516E0C_00001594
     lis r29, lbl_8075BB80@ha
@@ -1629,17 +1629,17 @@ lbl_fn_80516E0C_000014E0:
     stfs f7, 0x10c(r1)
     stfs f0, 0x110(r1)
     lwz r3, 0x124(r30)
-    bl fn_80202D00
+    bl perf_getMetricValue
     addi r4, r29, 0xfb
     addi r5, r1, 0x100
     bl fn_801F6E78
     lwz r3, 0x124(r30)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f1, lbl_808878CC
     addi r4, r29, 0x103
     bl fn_801F6C80
     lwz r3, 0x124(r30)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lwz r4, 0xe8(r30)
     li r6, 0xa
     lwz r5, 0xd8(r30)

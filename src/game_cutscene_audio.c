@@ -12,12 +12,12 @@ extern void fn_8000D9E8(void);
 extern void fn_8000DCF4(void);
 extern void vec3_sub(void);
 extern void fn_80013410(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8004ED34(void);
 extern void atn_ColliObject_destructor(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
@@ -1052,7 +1052,7 @@ lbl_fn_8032E3DC_00000C74:
     mr r25, r3
     mr r3, r29
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r3, r29
     stb r0, 0x10(r1)
@@ -1082,7 +1082,7 @@ lbl_fn_8032E3DC_00000D1C:
     stw r30, 0x4(r26)
     stw r30, 0x8(r26)
     lwz r4, 0x1c(r1)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x8(r1)
     mr r3, r26
     stb r5, 0xc(r1)
@@ -1167,7 +1167,7 @@ lbl_fn_8032E3DC_00000D80:
     stfs f1, 0x169c(r25)
 lbl_fn_8032E3DC_00000E74:
     addi r3, r1, 0x38
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8032E3DC_000009EC
     lmw r25, 0x674(r1)

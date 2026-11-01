@@ -51,7 +51,7 @@ extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void wmemcpy(void);
 extern void wcslen(void);
-extern void fn_80686A64(void);
+extern void wcscpy(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern void runtime_clampDouble(void);
@@ -3723,7 +3723,7 @@ lbl_fn_8054B328_0000335C:
     la r4, lbl_808813D0
 lbl_fn_8054B328_00003360:
     addi r3, r1, 0x70
-    bl fn_80686A64
+    bl wcscpy
     lfd f0, 0x158(r1)
     addi r4, r1, 0x70
     lwz r3, lbl_8087EEC8
@@ -3802,7 +3802,7 @@ lbl_fn_8054B328_00003488:
     la r4, lbl_808813D0
 lbl_fn_8054B328_0000348C:
     addi r3, r1, 0x70
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_8054B328_0000351C
 lbl_fn_8054B328_00003498:
     rlwinm r3, r4, 0, 1, 1
@@ -3818,7 +3818,7 @@ lbl_fn_8054B328_000034BC:
     la r4, lbl_808813D0
 lbl_fn_8054B328_000034C0:
     addi r3, r1, 0x70
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_8054B328_0000351C
 lbl_fn_8054B328_000034CC:
     rlwinm r0, r4, 0, 23, 23
@@ -3833,7 +3833,7 @@ lbl_fn_8054B328_000034EC:
     la r4, lbl_808813D0
 lbl_fn_8054B328_000034F0:
     addi r3, r1, 0x70
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_8054B328_0000351C
 lbl_fn_8054B328_000034FC:
     lwz r3, lbl_8087F1E4
@@ -3845,7 +3845,7 @@ lbl_fn_8054B328_00003510:
     la r4, lbl_808813D0
 lbl_fn_8054B328_00003514:
     addi r3, r1, 0x70
-    bl fn_80686A64
+    bl wcscpy
 lbl_fn_8054B328_0000351C:
     lfd f0, 0x160(r1)
     addi r4, r1, 0x70
@@ -3959,7 +3959,7 @@ lbl_fn_8054B328_000036C8:
     la r4, lbl_808813D0
 lbl_fn_8054B328_000036CC:
     addi r3, r1, 0x70
-    bl fn_80686A64
+    bl wcscpy
     lfd f0, 0x158(r1)
     addi r4, r1, 0x70
     lwz r3, lbl_8087EEC8
@@ -4022,7 +4022,7 @@ lbl_fn_8054B328_000037B8:
     la r4, lbl_808813D0
 lbl_fn_8054B328_000037BC:
     addi r3, r1, 0x70
-    bl fn_80686A64
+    bl wcscpy
     fmr f1, f19
     lwz r3, lbl_8087EEC8
     lfs f2, lbl_80887D60

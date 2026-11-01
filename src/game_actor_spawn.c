@@ -8,7 +8,7 @@ extern void _restgpr_25(void);
 extern void _savegpr_21(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80060D58(void);
 extern void fn_8006F72C(void);
@@ -119,7 +119,7 @@ void fn_80116FC0(void);
 void fn_801170C8(void);
 void fn_80117200(void);
 void fn_80117214(void);
-void fn_80117228(void);
+void actor_spawnActorWithId(void);
 void fn_8011728C(void);
 void fn_801173A8(void);
 void fn_8011745C(void);
@@ -673,7 +673,7 @@ asm void fn_80117214(void)
     blr
 }
 
-asm void fn_80117228(void)
+asm void actor_spawnActorWithId(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -681,10 +681,10 @@ asm void fn_80117228(void)
     stw r0, 0x14(r1)
     lwz r5, lbl_8087EFE8
     cmpwi r5, 0x0
-    beq lbl_fn_80117228_000006B0
+    beq lbl_actor_spawnActorWithId_000006B0
     li r0, 0x5
     stw r0, 0x34d0(r5)
-lbl_fn_80117228_000006B0:
+lbl_actor_spawnActorWithId_000006B0:
     lis r5, lbl_807368F8@ha
     slwi r0, r4, 2
     addi r5, r5, lbl_807368F8@l
@@ -695,10 +695,10 @@ lbl_fn_80117228_000006B0:
     bl fn_800C31F4
     lwz r3, lbl_8087EFE8
     cmpwi r3, 0x0
-    beq lbl_fn_80117228_000006E4
+    beq lbl_actor_spawnActorWithId_000006E4
     li r0, 0x0
     stw r0, 0x34d0(r3)
-lbl_fn_80117228_000006E4:
+lbl_actor_spawnActorWithId_000006E4:
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10
@@ -1762,7 +1762,7 @@ lbl_fn_80117FE4_000014E4:
     mr r21, r3
     mr r3, r29
     mr r4, r21
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x1c(r1)
     mr r3, r29
     stb r0, 0x18(r1)

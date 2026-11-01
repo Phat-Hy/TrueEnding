@@ -19,7 +19,7 @@ extern void fn_8010A828(void);
 extern void fn_801F64D0(void);
 extern void fn_801F6C2C(void);
 extern void fn_801F791C(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void fn_8021150C(void);
 extern void fn_80213E60(void);
 extern void fn_80219558(void);
@@ -427,7 +427,7 @@ asm void fn_8044D404(void)
     stw r30, 0x8(r1)
     mr r30, r3
     lwz r3, 0x0(r4)
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     beq lbl_fn_8044D404_00000450
     lha r0, 0xbc(r3)

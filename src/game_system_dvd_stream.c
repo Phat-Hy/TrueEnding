@@ -24,7 +24,7 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_unlink(void);
 extern void str_findChar(void);
 extern void fn_80116FC0(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void fn_80117914(void);
 extern void fn_80119ECC(void);
 extern void fn_8012AFE8(void);
@@ -369,7 +369,7 @@ lbl_fn_803775DC_00000360:
 lbl_fn_803775DC_0000037C:
     addi r3, r1, 0x20
     li r4, 0x3
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x20
     li r4, -0x1
     bl ref_releaseHandle
@@ -399,7 +399,7 @@ lbl_fn_803775DC_000003C8:
 lbl_fn_803775DC_000003E8:
     addi r3, r1, 0x1c
     li r4, 0x3
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x1c
     li r4, -0x1
     bl ref_releaseHandle
@@ -440,7 +440,7 @@ lbl_fn_803775DC_00000470:
 lbl_fn_803775DC_00000478:
     addi r3, r1, 0x18
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x18
     li r4, -0x1
     bl ref_releaseHandle
@@ -468,7 +468,7 @@ lbl_fn_803775DC_000004C0:
 lbl_fn_803775DC_000004DC:
     addi r3, r1, 0x14
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -476,7 +476,7 @@ lbl_fn_803775DC_000004DC:
 lbl_fn_803775DC_000004F8:
     addi r3, r1, 0x10
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -641,7 +641,7 @@ lbl_fn_803775DC_0000070C:
 lbl_fn_803775DC_00000744:
     addi r3, r1, 0xc
     li r4, 0xb
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -682,7 +682,7 @@ lbl_fn_803775DC_000007BC:
 lbl_fn_803775DC_000007D8:
     addi r3, r1, 0x8
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

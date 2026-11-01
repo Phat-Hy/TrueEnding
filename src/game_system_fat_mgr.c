@@ -9,7 +9,7 @@ extern void _savegpr_27(void);
 extern void item_useConsumable(void);
 extern void fn_8004ED34(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
@@ -532,7 +532,7 @@ lbl_fn_8037E12C_00000650:
     stw r28, 0x424(r24)
 lbl_fn_8037E12C_00000660:
     addi r3, r1, 0x170
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8037E12C_0000014C
     cmpwi r26, 0x0
