@@ -1152,10 +1152,7 @@ lbl_fn_800C79DC_00000D50:
     blr
 }
 
-asm void fn_800C7A2C(void)
-{
-    nofralloc
-    blr
+void fn_800C7A2C(void) {
 }
 
 asm void fn_800C7A30(void)
@@ -1247,10 +1244,7 @@ lbl_fn_800C7A30_00000E60:
     blr
 }
 
-asm void fn_800C7B74(void)
-{
-    nofralloc
-    blr
+void fn_800C7B74(void) {
 }
 
 asm void fn_800C7B78(void)
@@ -1336,10 +1330,7 @@ lbl_fn_800C7B78_00000F9C:
     blr
 }
 
-asm void fn_800C7CA4(void)
-{
-    nofralloc
-    blr
+void fn_800C7CA4(void) {
 }
 
 asm void fn_800C7CA8(void)

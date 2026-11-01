@@ -1119,28 +1119,16 @@ lbl_fn_804EE044_00000D64:
     blr
 }
 
-asm void fn_804EE4E4(void)
-{
-    nofralloc
-    blr
+void fn_804EE4E4(void) {
 }
 
-asm void fn_804EE4E8(void)
-{
-    nofralloc
-    blr
+void fn_804EE4E8(void) {
 }
 
-asm void fn_804EE4EC(void)
-{
-    nofralloc
-    blr
+void fn_804EE4EC(void) {
 }
 
-asm void fn_804EE4F0(void)
-{
-    nofralloc
-    blr
+void fn_804EE4F0(void) {
 }
 
 asm void fn_804EE4F4(void)

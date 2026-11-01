@@ -120,10 +120,7 @@ asm void fn_80441E54(void)
     blr
 }
 
-asm void fn_80441E88(void)
-{
-    nofralloc
-    blr
+void fn_80441E88(void) {
 }
 
 asm void fn_80441E8C(void)

@@ -276,16 +276,10 @@ lbl_fn_800E22E8_000001D4:
     blr
 }
 
-asm void fn_800E24CC(void)
-{
-    nofralloc
-    blr
+void fn_800E24CC(void) {
 }
 
-asm void fn_800E24D0(void)
-{
-    nofralloc
-    blr
+void fn_800E24D0(void) {
 }
 
 asm void fn_800E24D4(void)
@@ -1121,10 +1115,7 @@ lbl_fn_800E2DD4_00000CD8:
     blr
 }
 
-asm void fn_800E2FDC(void)
-{
-    nofralloc
-    blr
+void fn_800E2FDC(void) {
 }
 
 asm void fn_800E2FE0(void)

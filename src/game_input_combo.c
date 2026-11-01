@@ -1106,28 +1106,16 @@ lbl_fn_802EC38C_00000BD0:
     blr
 }
 
-asm void fn_802EC660(void)
-{
-    nofralloc
-    blr
+void fn_802EC660(void) {
 }
 
-asm void fn_802EC664(void)
-{
-    nofralloc
-    blr
+void fn_802EC664(void) {
 }
 
-asm void fn_802EC668(void)
-{
-    nofralloc
-    blr
+void fn_802EC668(void) {
 }
 
-asm void fn_802EC66C(void)
-{
-    nofralloc
-    blr
+void fn_802EC66C(void) {
 }
 
 asm void fn_802EC670(void)

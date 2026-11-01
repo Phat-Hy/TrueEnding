@@ -707,10 +707,7 @@ asm void fn_802F3394(void)
     blr
 }
 
-asm void fn_802F339C(void)
-{
-    nofralloc
-    blr
+void fn_802F339C(void) {
 }
 
 asm void fn_802F33A0(void)

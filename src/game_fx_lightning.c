@@ -341,10 +341,7 @@ lbl_fn_8029D7AC_0000038C:
     blr
 }
 
-asm void fn_8029DB54(void)
-{
-    nofralloc
-    blr
+void fn_8029DB54(void) {
 }
 
 asm void fn_8029DB58(void)

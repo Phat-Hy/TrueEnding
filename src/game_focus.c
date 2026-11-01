@@ -999,10 +999,7 @@ asm void fn_80099F68(void)
     blr
 }
 
-asm void fn_80099F70(void)
-{
-    nofralloc
-    blr
+void fn_80099F70(void) {
 }
 
 asm void fn_80099F74(void)
