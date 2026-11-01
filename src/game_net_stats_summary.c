@@ -14,7 +14,7 @@ extern void fn_800128FC(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8004B0E4(void);
 extern void fn_80069BF4(void);
-extern void fn_8006A250(void);
+extern void boss_dispatchActionTransition(void);
 extern void boss_triggerEventSequence(void);
 extern void fn_8006B2D8(void);
 extern void fn_8006D008(void);
@@ -45,7 +45,7 @@ extern void fn_803B5470(void);
 extern void fn_803CCCC0(void);
 extern void fn_803EB234(void);
 extern void fn_80470364(void);
-extern void fn_80470528(void);
+extern void boss_releaseLaserTarget(void);
 extern void fn_8047054C(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_8047F580(void);
@@ -347,7 +347,7 @@ lbl_fn_8053F1B8_00000344:
     cmpwi r3, 0x0
     beq lbl_fn_8053F1B8_00000560
     addi r3, r31, 0x29c
-    bl fn_80470528
+    bl boss_releaseLaserTarget
     lwz r0, 0x98(r31)
     extrwi r0, r0, 1, 11
     cmplwi r0, 0x1
@@ -472,7 +472,7 @@ lbl_fn_8053F1B8_000004C8:
     li r5, -0x1
     lis r6, 0xff00
     stw r0, 0x2c4(r31)
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     li r4, 0x1
     stw r4, 0x48(r3)
     li r0, 0xa
@@ -1862,7 +1862,7 @@ asm void fn_805406C0(void)
     rlwimi r5, r0, 27, 5, 5
     stw r5, 0x98(r3)
     addi r3, r3, 0x29c
-    bl fn_80470528
+    bl boss_releaseLaserTarget
     li r28, 0x0
     li r29, 0x0
     b lbl_fn_805406C0_000017C4

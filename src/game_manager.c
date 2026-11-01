@@ -22,7 +22,7 @@ extern void mem_free(void);
 extern s32 atn_Model_findBoneIndex(void*, u32, int);
 extern void compass_findWaypointIndex(void);
 extern void fn_800929C0(void);
-extern void fn_80094958(void);
+extern void target_registerCandidate(void);
 extern void fn_80097A9C(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
@@ -32,7 +32,7 @@ extern void str_findChar(void);
 extern void fn_8011E81C(void);
 extern void fn_80129930(void);
 extern void fn_80129954(void);
-extern void fn_80129A48(void);
+extern void path_resetWaypointVelocity(void);
 extern void fn_8012ABD0(void);
 extern void fn_8012ABF4(void);
 extern void fn_8012AC18(void);
@@ -3423,7 +3423,7 @@ lbl_fn_80012D0C_00002C04:
     lwz r3, 0x1c(r3)
     lwz r3, 0x48(r3)
     addi r3, r3, 0x10d8
-    b fn_80129A48
+    b path_resetWaypointVelocity
     blr
 }
 
@@ -4507,7 +4507,7 @@ lbl_fn_80013558_00003A3C:
     lwz r4, 0x50(r19)
     add r5, r0, r31
     addi r3, r3, 0xb0
-    bl fn_80094958
+    bl target_registerCandidate
     addi r19, r19, 0x4
     addi r16, r16, 0x1
     addi r31, r31, 0x10

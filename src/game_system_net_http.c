@@ -16,7 +16,7 @@ extern void mem_alloc(void);
 extern void fn_8008B964(void);
 extern void skin_playAnimationByName(void);
 extern void atn_Task_constructor(void);
-extern void fn_80116BD4(void);
+extern void actor_calcSpawnTransform(void);
 extern void fn_803918EC(void);
 extern void fn_80393BEC(void);
 extern void PSMTXRotRad(void);
@@ -702,7 +702,7 @@ lbl_fn_80392964_0000090C:
     bl item_useConsumable
     bl fn_8008B964
     addi r4, r27, 0x1f4
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     lmw r27, 0xc(r1)
     lwz r0, 0x24(r1)
     mtlr r0

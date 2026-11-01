@@ -21,7 +21,7 @@ extern void save_findEntryByName(void);
 extern void perf_getMetricValue(void);
 extern void kpad_validateButtonIndex(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_804A3C24(void);
+extern void net_initCoopSession(void);
 extern void fn_804A62C8(void);
 extern void fn_80510D68(void);
 extern void fn_80510E98(void);
@@ -1666,7 +1666,7 @@ lbl_fn_80525A0C_00001610:
     mr r4, r3
     mr r3, r28
     li r5, 0x1
-    bl fn_804A3C24
+    bl net_initCoopSession
     b lbl_fn_80525A0C_000016C8
 lbl_fn_80525A0C_0000168C:
     lwz r28, lbl_8087F580
@@ -1675,7 +1675,7 @@ lbl_fn_80525A0C_0000168C:
     mr r4, r3
     mr r3, r28
     li r5, 0x1
-    bl fn_804A3C24
+    bl net_initCoopSession
     b lbl_fn_80525A0C_000016C8
 lbl_fn_80525A0C_000016AC:
     lwz r28, lbl_8087F580
@@ -1684,7 +1684,7 @@ lbl_fn_80525A0C_000016AC:
     mr r4, r3
     mr r3, r28
     li r5, 0x1
-    bl fn_804A3C24
+    bl net_initCoopSession
 lbl_fn_80525A0C_000016C8:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
@@ -1835,7 +1835,7 @@ lbl_fn_80525F0C_000018CC:
     mr r4, r3
     mr r3, r30
     li r5, 0x1
-    bl fn_804A3C24
+    bl net_initCoopSession
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

@@ -39,7 +39,7 @@ extern void fn_8008A76C(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void minimap_renderOverlay(void);
-extern void fn_800902C0(void);
+extern void radar_addBlipEntry(void);
 extern void atn_Model_findBoneIndex(void);
 extern void target_pushPointToHistory(void);
 extern void fn_800C0A50(void);
@@ -3897,7 +3897,7 @@ lbl_fn_80044780_000030D0:
     addi r3, r29, 0x10
     addi r5, r1, 0x38
     li r4, 0x0
-    bl fn_800902C0
+    bl radar_addBlipEntry
     addic. r3, r1, 0x38
     beq lbl_fn_80044780_00003134
     lwz r4, 0x38(r1)

@@ -14,7 +14,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_80129930(void);
 extern void fn_80129954(void);
 extern void fn_80129978(void);
-extern void fn_80129A48(void);
+extern void path_resetWaypointVelocity(void);
 extern void actor_setState(void);
 extern void fn_801A0BA8(void);
 extern void fn_801A17A4(void);
@@ -1318,7 +1318,7 @@ asm void fn_80175B18(void)
     beq lbl_fn_80175B18_00001990
     lfs f1, lbl_80881A00
     addi r3, r3, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     b lbl_fn_80175B18_00001990
 lbl_fn_80175B18_0000118C:
     lwz r0, 0x12bc(r3)
@@ -1333,7 +1333,7 @@ lbl_fn_80175B18_0000118C:
     stfs f3, 0x580(r3)
     stfs f0, 0x584(r3)
     addi r3, r3, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     b lbl_fn_80175B18_00001990
 lbl_fn_80175B18_000011C4:
     lwz r4, 0x48(r3)
@@ -1439,7 +1439,7 @@ lbl_fn_80175B18_000012FC:
 lbl_fn_80175B18_0000132C:
     lfs f1, lbl_80881A00
     addi r3, r29, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     b lbl_fn_80175B18_00001990
 lbl_fn_80175B18_0000133C:
     lwz r0, 0x12a4(r29)
@@ -1447,7 +1447,7 @@ lbl_fn_80175B18_0000133C:
     beq lbl_fn_80175B18_00001358
     lfs f1, lbl_80881A00
     addi r3, r29, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     b lbl_fn_80175B18_00001990
 lbl_fn_80175B18_00001358:
     lwz r3, lbl_8087F430
@@ -1470,7 +1470,7 @@ lbl_fn_80175B18_00001374:
     stfs f3, 0x580(r29)
     lfs f1, lbl_80881964
     stfs f0, 0x584(r29)
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     b lbl_fn_80175B18_00001990
 lbl_fn_80175B18_000013AC:
     lwz r3, lbl_8087EFA8
@@ -1480,7 +1480,7 @@ lbl_fn_80175B18_000013AC:
     ble lbl_fn_80175B18_000013D0
     lfs f1, lbl_80881A00
     addi r3, r29, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     b lbl_fn_80175B18_00001990
 lbl_fn_80175B18_000013D0:
     lwz r3, lbl_8087F098
@@ -1883,7 +1883,7 @@ lbl_fn_80175B18_0000197C:
     bne lbl_fn_80175B18_00001990
     lfs f1, lbl_80881A00
     addi r3, r29, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
 lbl_fn_80175B18_00001990:
     addi r11, r1, 0x100
     psq_l f31, 0x108(r1), 0, 0

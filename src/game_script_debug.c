@@ -24,7 +24,7 @@ extern void fn_800E9ED8(void);
 extern void fn_800EFC64(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
-extern void fn_80103F60(void);
+extern void bsp_findLeafNode(void);
 extern void fn_80108378(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
@@ -2329,7 +2329,7 @@ lbl_fn_80251344_00001F68:
 lbl_fn_80251344_00001F9C:
     lwz r3, lbl_8087F048
     mr r4, r29
-    bl fn_80103F60
+    bl bsp_findLeafNode
     cmpwi r3, 0x0
     mr r23, r3
     beq lbl_fn_80251344_00002024

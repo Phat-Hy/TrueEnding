@@ -48,7 +48,7 @@ extern void fn_803CF734(void);
 extern void fn_803D6EF8(void);
 extern void fn_803D70B4(void);
 extern void fn_803DD160(void);
-extern void fn_804A3C24(void);
+extern void net_initCoopSession(void);
 extern void fn_804A4AEC(void);
 extern void fn_804A5E40(void);
 extern void fn_8050F940(void);
@@ -1178,7 +1178,7 @@ lbl_fn_80526D98_00000E44:
     beq lbl_fn_80526D98_00000EA4
     lwz r3, lbl_8087F580
     li r5, 0x0
-    bl fn_804A3C24
+    bl net_initCoopSession
 lbl_fn_80526D98_00000EA4:
     lwz r3, 0x50(r29)
     cmpwi r30, 0x0

@@ -9,7 +9,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_25(void);
 extern void vec3_copy(void);
 extern void scene_transformPoint(void);
-extern void fn_8000DCF4(void);
+extern void scene_getCamera(void);
 extern void scene_getRootNode(void);
 extern void vec3_assign(void);
 extern void vec3_sub(void);
@@ -1653,7 +1653,7 @@ asm void fn_804E7AC4(void)
     mr r31, r3
     bl fn_804EB874
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     mr r29, r3
     bl scene_getRootNode
     bl fn_804CF424

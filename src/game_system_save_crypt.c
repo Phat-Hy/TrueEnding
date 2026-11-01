@@ -37,7 +37,7 @@ extern void cam_updateLookAtMatrix(void);
 extern void cam_evalLookAtMatrix(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
-extern void fn_80103F60(void);
+extern void bsp_findLeafNode(void);
 extern void fn_80108378(void);
 extern void equip_getGlobalManager(void);
 extern void debuff_removeStatusEffect(void);
@@ -1189,7 +1189,7 @@ asm void fn_803449AC(void)
     mr r29, r3
     mr r4, r29
     lwz r3, lbl_8087F048
-    bl fn_80103F60
+    bl bsp_findLeafNode
     lbz r0, 0x14c8(r29)
     mr r31, r3
     cmpwi r0, 0x0

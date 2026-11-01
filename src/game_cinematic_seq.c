@@ -24,7 +24,7 @@ extern void skill_findNodeById(void);
 extern void enemy_stepBehavior(void);
 extern void fn_80128930(void);
 extern void fn_80129978(void);
-extern void fn_80129A48(void);
+extern void path_resetWaypointVelocity(void);
 extern void actor_testBitFlag(void);
 extern void fn_80134674(void);
 extern void boss_updatePhaseState(void);
@@ -989,7 +989,7 @@ lbl_fn_80335374_00000B6C:
 lbl_fn_80335374_00000BA0:
     lfs f1, lbl_808851A8
     addi r3, r31, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
 lbl_fn_80335374_00000BAC:
     lwz r0, 0x157c(r31)
     cmpwi r0, 0x0

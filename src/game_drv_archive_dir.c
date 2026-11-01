@@ -12,7 +12,7 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void scene_transformPoint(void);
 extern void fn_8000D9F8(void);
-extern void fn_8000DCF4(void);
+extern void scene_getCamera(void);
 extern void vec3_assign(void);
 extern void vec3_sub(void);
 extern void script_executeOpcode(void);
@@ -616,7 +616,7 @@ lbl_fn_805AB82C_000006C0:
     cmpwi r3, 0x0
     beq lbl_fn_805AB82C_000006D8
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     b lbl_fn_805AB82C_000006DC
 lbl_fn_805AB82C_000006D8:
     li r3, 0x0

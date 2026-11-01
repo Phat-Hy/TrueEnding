@@ -7,7 +7,7 @@ extern void dtor_80084684(void);
 extern void fn_8000D3A8(void);
 extern void scene_traverseNode(void);
 extern void scene_transformPoint(void);
-extern void fn_8000DCF4(void);
+extern void scene_getCamera(void);
 extern void scene_getRootNode(void);
 extern void menu_initWindowBuffer(void);
 extern void talk_parseQuotedString(void);
@@ -1038,7 +1038,7 @@ lbl_fn_80346384_00000BEC:
     cmpwi r0, 0x0
     bne lbl_fn_80346384_00000C54
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     stw r3, 0x14b0(r31)
     stw r3, 0xd1c(r31)
 lbl_fn_80346384_00000C54:
@@ -1150,7 +1150,7 @@ lbl_fn_80346384_00000DC4:
     bl fn_80265804
 lbl_fn_80346384_00000DD0:
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     lbz r0, 0x1808(r31)
     cmpwi r0, 0x0
     bne lbl_fn_80346384_00000E04
@@ -1264,7 +1264,7 @@ lbl_fn_80346384_00000F68:
     bl kpad_getClampData
     mr r28, r3
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     bl npc_getPosition
     lfs f2, 0x4(r3)
     lfs f1, 0x52c(r31)

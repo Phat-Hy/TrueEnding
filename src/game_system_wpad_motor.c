@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void fn_80017060(void);
 extern void fn_80047B54(void);
 extern void boss_recordDamage(void);
-extern void fn_8006A250(void);
+extern void boss_dispatchActionTransition(void);
 extern void fn_8006A900(void);
 extern void boss_triggerEventSequence(void);
 extern void fn_8006D0C8(void);
@@ -120,7 +120,7 @@ extern void fn_8046ECDC(void);
 extern void fn_8046F8B8(void);
 extern void fn_8046F96C(void);
 extern void fn_80470364(void);
-extern void fn_80470528(void);
+extern void boss_releaseLaserTarget(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -1321,7 +1321,7 @@ lbl_world_Manager_draw_00000F04:
     cmpwi r3, 0x0
     beq lbl_world_Manager_draw_000031A0
     addi r3, r28, 0x5690
-    bl fn_80470528
+    bl boss_releaseLaserTarget
     li r0, 0x8
     stw r0, 0x5538(r28)
     b lbl_world_Manager_draw_000031A0
@@ -2475,7 +2475,7 @@ lbl_world_Manager_draw_00001FC8:
     li r4, 0x3c
     li r5, 0x0
     lis r6, 0xff00
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     stw r3, 0x575c(r28)
     lis r4, 0x2
     lfs f0, lbl_80885758

@@ -14,7 +14,7 @@ extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void skill_calcTrajectory(void);
-extern void fn_8006A250(void);
+extern void boss_dispatchActionTransition(void);
 extern void fn_8006BA30(void);
 extern void fn_8006F2F0(void);
 extern void fn_8007192C(void);
@@ -713,7 +713,7 @@ lbl_dvd_renderFatalErrorScreen_000007D4:
     li r4, 0x1
     li r5, 0x0
     lis r6, 0xff00
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     stw r3, 0x44(r30)
     lfs f0, lbl_808856D0
     stfs f0, 0x74(r3)

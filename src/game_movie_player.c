@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void scene_transformPoint(void);
-extern void fn_8000DCF4(void);
+extern void scene_getCamera(void);
 extern void vec3_assign(void);
 extern void vec3_sub(void);
 extern void mem_realloc(void);
@@ -722,7 +722,7 @@ asm void fn_8033A7A0(void)
     cmpwi r0, 0x0
     beq lbl_fn_8033A7A0_00000C64
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     lwz r3, 0x14b0(r30)
     bl npc_getPosition
     mr r4, r3

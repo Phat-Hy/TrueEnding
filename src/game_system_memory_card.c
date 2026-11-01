@@ -22,7 +22,7 @@ extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
-extern void fn_80158CA4(void);
+extern void shop_loadCatalogItem(void);
 extern void party_initFormationSlots(void);
 extern void party_configureMemberSlot(void);
 extern void fn_8015ECC4(void);
@@ -1346,7 +1346,7 @@ lbl_fn_803563E4_00001148:
     cmpwi r3, 0x0
     bne lbl_fn_803563E4_00001188
     mr r3, r30
-    bl fn_80158CA4
+    bl shop_loadCatalogItem
     cmpwi r3, 0x0
     beq lbl_fn_803563E4_000011B4
 lbl_fn_803563E4_00001188:

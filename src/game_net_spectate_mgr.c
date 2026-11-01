@@ -17,7 +17,7 @@ extern void fn_8005E7F4(void);
 extern void equip_calcTotalStatBonuses(void);
 extern void skill_calcTrajectory(void);
 extern void boss_recordDamage(void);
-extern void fn_8006A250(void);
+extern void boss_dispatchActionTransition(void);
 extern void fn_8006A5A8(void);
 extern void script_executeOpcode(void);
 extern void fn_80076FF8(void);
@@ -64,7 +64,7 @@ extern void fn_803EEE10(void);
 extern void fn_80453DBC(void);
 extern void fn_8046ECDC(void);
 extern void fn_8047043C(void);
-extern void fn_80470528(void);
+extern void boss_releaseLaserTarget(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -1049,7 +1049,7 @@ asm void fn_80531F48(void)
     stw r30, 0x2dc(r28)
     stw r30, 0x2e0(r28)
     stw r0, 0x2e8(r28)
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     stw r3, 0x2c8(r28)
     lis r5, 0x3b9b
     lis r4, 0x100
@@ -1373,7 +1373,7 @@ lbl_spectateManager_init_0000115C:
 lbl_spectateManager_init_00001170:
     addic. r3, r30, 0x6a0
     beq lbl_spectateManager_init_0000117C
-    bl fn_80470528
+    bl boss_releaseLaserTarget
 lbl_spectateManager_init_0000117C:
     addic. r3, r30, 0x438
     beq lbl_spectateManager_init_0000118C
@@ -2172,7 +2172,7 @@ lbl_spectateManager_update_00001D40:
     li r4, 0x0
     bl atn_Task_setActive
     addi r3, r30, 0x6a0
-    bl fn_80470528
+    bl boss_releaseLaserTarget
     mr r3, r30
     li r4, 0x1
     bl fn_80533BE0

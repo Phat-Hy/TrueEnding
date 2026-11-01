@@ -9,7 +9,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_22(void);
 extern void _savegpr_26(void);
 extern void scene_transformPoint(void);
-extern void fn_8000DCF4(void);
+extern void scene_getCamera(void);
 extern void collision_queryGeometry(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -19,7 +19,7 @@ extern void fn_800E0AA8(void);
 extern void fn_800E0AB0(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
-extern void fn_80103F60(void);
+extern void bsp_findLeafNode(void);
 extern void fn_80108378(void);
 extern void fn_8013A158(void);
 extern void npc_getGlobalManager(void);
@@ -530,7 +530,7 @@ asm void fn_802BB92C(void)
     stw r0, 0x14e0(r3)
     bne lbl_fn_802BB92C_00000608
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     stw r3, 0xd1c(r31)
 lbl_fn_802BB92C_00000608:
     lwz r0, 0xd18(r31)
@@ -629,7 +629,7 @@ lbl_fn_802BB92C_00000740:
     stw r0, 0x1918(r31)
     bl npc_getGlobalManager
     mr r4, r31
-    bl fn_80103F60
+    bl bsp_findLeafNode
     mr r30, r3
     addi r3, r1, 0x10
     bl fn_802A4170
@@ -719,7 +719,7 @@ lbl_fn_802BB92C_000008A8:
     stw r0, 0x1918(r31)
     bl npc_getGlobalManager
     mr r4, r31
-    bl fn_80103F60
+    bl bsp_findLeafNode
     mr r30, r3
     bl scene_transformPoint
     bl fn_802A36B0

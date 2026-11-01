@@ -38,7 +38,7 @@ extern void str_findChar(void);
 extern void task_findNextReady(void);
 extern void fn_8037DD00(void);
 extern void fn_803EE5AC(void);
-extern void fn_80470528(void);
+extern void boss_releaseLaserTarget(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getName(void);
@@ -1060,7 +1060,7 @@ lbl_fn_8049DDD8_00000C84:
     bl shockwave_freeEmitter
     addic. r3, r30, 0xfc
     beq lbl_fn_8049DDD8_00000CA8
-    bl fn_80470528
+    bl boss_releaseLaserTarget
 lbl_fn_8049DDD8_00000CA8:
     addi r3, r30, 0xd0
     li r4, -0x1

@@ -2,14 +2,14 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_80094958(void);
+extern void target_registerCandidate(void);
 extern void fn_80094B6C(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void scissor_clipFrustum(void);
-extern void fn_80103F60(void);
+extern void bsp_findLeafNode(void);
 extern void fn_80108378(void);
 extern void fn_80133130(void);
 extern void fn_80133EE8(void);
@@ -119,7 +119,7 @@ asm void fn_8024B4F0(void)
     stw r30, 0x178(r1)
     stw r29, 0x174(r1)
     lwz r3, lbl_8087F048
-    bl fn_80103F60
+    bl bsp_findLeafNode
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_8024B4F0_00000080
@@ -904,7 +904,7 @@ lbl_fn_8024BE94_00000A80:
     stfs f1, 0x78(r1)
     fdivs f0, f0, f31
     stfs f0, 0x7c(r1)
-    bl fn_80094958
+    bl target_registerCandidate
     addi r29, r29, 0x1
     addi r30, r30, 0x4
     cmplwi r29, 0x6
@@ -1048,7 +1048,7 @@ lbl_fn_8024BE94_00000C94:
     stfs f1, 0x58(r1)
     fdivs f0, f0, f4
     stfs f0, 0x5c(r1)
-    bl fn_80094958
+    bl target_registerCandidate
     lwz r0, 0x58c(r31)
     cmpwi r0, 0x1
     beq lbl_fn_8024BE94_00000DC0
@@ -1158,7 +1158,7 @@ lbl_fn_8024BE94_00000E24:
     stfs f1, 0x38(r1)
     fdivs f0, f0, f4
     stfs f0, 0x3c(r1)
-    bl fn_80094958
+    bl target_registerCandidate
 lbl_fn_8024BE94_00000F44:
     lwz r0, 0x104(r1)
     psq_l f31, 0xf8(r1), 0, 0

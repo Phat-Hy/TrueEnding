@@ -14,7 +14,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_8009290C(void);
 extern void fn_80093D98(void);
 extern void fn_80093E90(void);
-extern void fn_80094958(void);
+extern void target_registerCandidate(void);
 extern void fn_80094B6C(void);
 extern void str_findChar(void);
 extern void fn_80112918(void);
@@ -274,7 +274,7 @@ lbl_fn_80559B30_000001D4:
     fdivs f0, f0, f4
     stfs f0, 0xa4(r1)
     lwz r4, 0x50(r29)
-    bl fn_80094958
+    bl target_registerCandidate
     b lbl_fn_80559B30_00000898
 lbl_fn_80559B30_000002D4:
     mr r3, r25
@@ -408,7 +408,7 @@ lbl_fn_80559B30_00000398:
     fdivs f0, f0, f4
     stfs f0, 0x84(r1)
     lwz r4, 0x50(r30)
-    bl fn_80094958
+    bl target_registerCandidate
     lwz r5, 0x17c(r27)
     slwi r0, r29, 2
     lwz r4, 0x50(r30)
@@ -500,7 +500,7 @@ lbl_fn_80559B30_000004FC:
     fdivs f0, f0, f4
     stfs f0, 0x64(r1)
     lwz r4, 0x50(r30)
-    bl fn_80094958
+    bl target_registerCandidate
     lwz r5, 0x164(r27)
     slwi r31, r29, 2
     lwz r4, 0x50(r30)

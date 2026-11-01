@@ -7,7 +7,7 @@ extern void _savegpr_26(void);
 extern void vec3_copy(void);
 extern void fn_80042108(void);
 extern void fn_8004AD9C(void);
-extern void fn_8006A250(void);
+extern void boss_dispatchActionTransition(void);
 extern void fn_80079044(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
@@ -2599,7 +2599,7 @@ lbl_fn_8047CF7C_000020F0:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     stw r3, 0x1aa8(r31)
     li r4, 0x1
     bl atn_Task_setActive

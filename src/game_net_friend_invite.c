@@ -9,7 +9,7 @@ extern void _savegpr_20(void);
 extern void dtor_80084684(void);
 extern void vec3_set(void);
 extern void scene_transformPoint(void);
-extern void fn_8000DCF4(void);
+extern void scene_getCamera(void);
 extern void ui_destroyWidget(void);
 extern void fn_8004895C(void);
 extern void fn_80049654(void);
@@ -3465,7 +3465,7 @@ lbl_fn_804D25D4_00002B58:
     mr r22, r3
     beq lbl_fn_804D25D4_00002BD0
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     stw r3, 0x0(r22)
     li r4, 0x1
     bl fn_804D63AC
@@ -4397,7 +4397,7 @@ lbl_fn_804D25D4_00003960:
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_0000414C
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     mr r4, r3
     mr r3, r24
     bl fn_804FB96C

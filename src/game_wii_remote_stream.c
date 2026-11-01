@@ -27,7 +27,7 @@ extern void fn_80093D28(void);
 extern void fn_80093D98(void);
 extern void fn_80093F1C(void);
 extern void fn_800948F0(void);
-extern void fn_80094958(void);
+extern void target_registerCandidate(void);
 extern void fn_80094B6C(void);
 extern void fn_80097750(void);
 extern void fn_8011EE58(void);
@@ -2457,7 +2457,7 @@ lbl_fn_805594A4_00002030:
     addi r5, r1, 0x68
     addi r6, r1, 0x48
     addi r7, r1, 0x58
-    bl fn_80094958
+    bl target_registerCandidate
 lbl_fn_805594A4_00002048:
     psq_l f31, 0xf8(r1), 0, 0
     li r3, 0x0

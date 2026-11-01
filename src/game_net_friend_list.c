@@ -12,7 +12,7 @@ extern void ui_destroyWidget(void);
 extern void fn_8004829C(void);
 extern void sound_initChannelParams(void);
 extern void fn_8005C220(void);
-extern void fn_8006A250(void);
+extern void boss_dispatchActionTransition(void);
 extern void chapter_updateProgression(void);
 extern void dungeon_initGlobalContext(void);
 extern void town_synchronizedDispatch(void);
@@ -2729,7 +2729,7 @@ lbl_fn_804D0328_00002428:
     li r4, 0xf
     lis r5, 0xff00
     li r6, 0x0
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     stw r3, 0x2b7c(r29)
     li r5, 0x1
     lis r4, 0x2

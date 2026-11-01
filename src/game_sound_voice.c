@@ -52,7 +52,7 @@ extern void world_setGlobalFlag(void);
 extern void kpad_validateButtonIndex(void);
 extern void gmk_findSlotByIndex(void);
 extern void fn_8044493C(void);
-extern void fn_804A3C24(void);
+extern void net_initCoopSession(void);
 extern void fn_804A4294(void);
 extern void fn_804A4300(void);
 extern void fn_804A4494(void);
@@ -1098,7 +1098,7 @@ lbl_fn_801D80BC_00000DA8:
     lwz r3, lbl_8087F580
     li r5, 0x0
     lwz r4, 0xc(r4)
-    bl fn_804A3C24
+    bl net_initCoopSession
     b lbl_fn_801D80BC_00000E84
 lbl_fn_801D80BC_00000E0C:
     li r30, 0x0
@@ -1127,7 +1127,7 @@ lbl_fn_801D80BC_00000E18:
     lwz r3, lbl_8087F580
     li r5, 0x0
     lwz r4, 0xc(r4)
-    bl fn_804A3C24
+    bl net_initCoopSession
     b lbl_fn_801D80BC_00000E84
 lbl_fn_801D80BC_00000E74:
     lwz r3, 0xacc(r3)
@@ -1410,7 +1410,7 @@ asm void fn_801D8560(void)
     lwz r3, lbl_8087F580
     li r5, 0x0
     lwz r4, 0xc(r4)
-    bl fn_804A3C24
+    bl net_initCoopSession
 lbl_fn_801D8560_0000128C:
     lwz r25, lbl_8087EF70
     li r4, 0x0

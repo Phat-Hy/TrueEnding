@@ -12,7 +12,7 @@ extern void fn_80051B70(void);
 extern void msg_formatWindowLayout(void);
 extern void msg_isWindowActive(void);
 extern void fn_801002DC(void);
-extern void fn_80116BD4(void);
+extern void actor_calcSpawnTransform(void);
 extern void magic_dispatchActionCommand(void);
 extern void player_evaluateStatusCondition(void);
 extern void world_getGlobalFlag(void);
@@ -190,7 +190,7 @@ lbl_fn_80385B48_000000BC:
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r28, 0x1f4
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     b lbl_fn_80385B48_000019A0
 lbl_fn_80385B48_000001B8:
     lwz r3, lbl_8087F0A8
@@ -1794,7 +1794,7 @@ lbl_fn_80385B48_0000195C:
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r28, 0x1f4
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
 lbl_fn_80385B48_000019A0:
     li r0, 0x8f8
     addi r11, r1, 0x8a0

@@ -86,7 +86,7 @@ void fn_80470264(void);
 void fn_804702BC(void);
 void fn_80470364(void);
 void fn_8047043C(void);
-void fn_80470528(void);
+void boss_releaseLaserTarget(void);
 void fn_8047054C(void);
 void fn_80470564(void);
 void boss_getOffset54(void);
@@ -2003,16 +2003,16 @@ lbl_fn_8047043C_00001944:
     blr
 }
 
-asm void fn_80470528(void)
+asm void boss_releaseLaserTarget(void)
 {
     nofralloc
     lwz r5, 0x0(r3)
     cmpwi r5, 0x0
-    beq lbl_fn_80470528_0000197C
+    beq lbl_boss_releaseLaserTarget_0000197C
     lwz r4, 0x2c(r5)
     subi r0, r4, 0x1
     stw r0, 0x2c(r5)
-lbl_fn_80470528_0000197C:
+lbl_boss_releaseLaserTarget_0000197C:
     li r0, 0x0
     stw r0, 0x0(r3)
     blr

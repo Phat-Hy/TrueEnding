@@ -23,7 +23,7 @@ extern void dialog_updateScriptState(void);
 extern void equip_applyToCharacter(void);
 extern void fn_801561E4(void);
 extern void shop_canPurchaseItem(void);
-extern void fn_80158CA4(void);
+extern void shop_loadCatalogItem(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void task_findEntryById(void);
@@ -1161,7 +1161,7 @@ lbl_fn_8025DE7C_00000EF0:
     cmpwi r0, 0x0
     beq lbl_fn_8025DE7C_00001000
     mr r3, r31
-    bl fn_80158CA4
+    bl shop_loadCatalogItem
     cmpwi r3, 0x0
     beq lbl_fn_8025DE7C_00001000
     lwz r0, 0xf80(r31)

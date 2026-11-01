@@ -19,7 +19,7 @@ extern void node_createNamedChild(void);
 extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void compass_findMarkerByName(void);
-extern void fn_80094958(void);
+extern void target_registerCandidate(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
@@ -1635,7 +1635,7 @@ lbl_fn_802CD73C_00001478:
     stfs f3, 0xc0(r1)
     fdivs f0, f0, f6
     stfs f0, 0xc4(r1)
-    bl fn_80094958
+    bl target_registerCandidate
 lbl_fn_802CD73C_00001598:
     lis r30, lbl_80746EE0@ha
     addi r3, r31, 0xb0
@@ -1704,7 +1704,7 @@ lbl_fn_802CD73C_00001598:
     stfs f3, 0xa0(r1)
     fdivs f0, f0, f6
     stfs f0, 0xa4(r1)
-    bl fn_80094958
+    bl target_registerCandidate
 lbl_fn_802CD73C_000016A8:
     lwz r6, 0x38(r31)
     li r4, 0x0

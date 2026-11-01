@@ -78,7 +78,7 @@ void fn_80103484(void);
 void fn_80103600(void);
 void fn_80103B58(void);
 void fn_80103E60(void);
-void fn_80103F60(void);
+void bsp_findLeafNode(void);
 void fn_80103FD4(void);
 
 asm void fn_80102EAC(void)
@@ -1336,42 +1336,42 @@ lbl_fn_80103E60_000010AC:
     blr
 }
 
-asm void fn_80103F60(void)
+asm void bsp_findLeafNode(void)
 {
     nofralloc
     cmpwi r4, 0x0
-    bne lbl_fn_80103F60_000010C4
+    bne lbl_bsp_findLeafNode_000010C4
     li r6, -0x1
-    b lbl_fn_80103F60_00001104
-lbl_fn_80103F60_000010C4:
+    b lbl_bsp_findLeafNode_00001104
+lbl_bsp_findLeafNode_000010C4:
     addis r5, r3, 0x3
     mr r7, r3
     lwz r0, 0x63b0(r5)
     li r6, 0x0
     mtctr r0
     cmpwi r0, 0x0
-    ble lbl_fn_80103F60_00001100
-lbl_fn_80103F60_000010E0:
+    ble lbl_bsp_findLeafNode_00001100
+lbl_bsp_findLeafNode_000010E0:
     addis r5, r7, 0x1
     lwz r0, -0x3410(r5)
     cmplw r0, r4
-    bne lbl_fn_80103F60_000010F4
-    b lbl_fn_80103F60_00001104
-lbl_fn_80103F60_000010F4:
+    bne lbl_bsp_findLeafNode_000010F4
+    b lbl_bsp_findLeafNode_00001104
+lbl_bsp_findLeafNode_000010F4:
     addi r7, r7, 0x934
     addi r6, r6, 0x1
-    bdnz lbl_fn_80103F60_000010E0
-lbl_fn_80103F60_00001100:
+    bdnz lbl_bsp_findLeafNode_000010E0
+lbl_bsp_findLeafNode_00001100:
     li r6, -0x1
-lbl_fn_80103F60_00001104:
+lbl_bsp_findLeafNode_00001104:
     cmpwi r6, 0x0
-    blt lbl_fn_80103F60_00001120
+    blt lbl_bsp_findLeafNode_00001120
     mulli r0, r6, 0x934
     addis r3, r3, 0x1
     add r3, r3, r0
     subi r3, r3, 0x3410
     blr
-lbl_fn_80103F60_00001120:
+lbl_bsp_findLeafNode_00001120:
     li r3, 0x0
     blr
 }

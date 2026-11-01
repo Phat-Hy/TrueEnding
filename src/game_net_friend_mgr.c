@@ -25,7 +25,7 @@ extern void fn_801FEC74(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
 extern void mem_findBlockById(void);
-extern void fn_804A3C24(void);
+extern void net_initCoopSession(void);
 extern void fn_804A53D4(void);
 extern void fn_804A5CD8(void);
 extern void fn_804AC79C(void);
@@ -1963,7 +1963,7 @@ lbl_fn_804CEAA0_0000194C:
     la r4, lbl_808813D0
 lbl_fn_804CEAA0_00001950:
     li r5, 0x0
-    bl fn_804A3C24
+    bl net_initCoopSession
     b lbl_fn_804CEAA0_000019DC
 lbl_fn_804CEAA0_0000195C:
     lwz r3, 0x68(r31)
@@ -1980,7 +1980,7 @@ lbl_fn_804CEAA0_00001984:
     la r4, lbl_808813D0
 lbl_fn_804CEAA0_00001988:
     li r5, 0x0
-    bl fn_804A3C24
+    bl net_initCoopSession
     b lbl_fn_804CEAA0_000019DC
 lbl_fn_804CEAA0_00001994:
     lwz r12, 0x0(r31)

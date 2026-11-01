@@ -6,7 +6,7 @@ extern void _restgpr_23(void);
 extern void _savegpr_23(void);
 extern void scene_traverseNode(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80094958(void);
+extern void target_registerCandidate(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
@@ -2103,25 +2103,25 @@ lbl_fn_8045CB24_00001CF8:
     stfs f0, 0xc(r1)
     stfs f0, 0x10(r1)
     stfs f0, 0x14(r1)
-    bl fn_80094958
+    bl target_registerCandidate
     addi r6, r1, 0x8
     addi r3, r31, 0xb0
     mr r7, r6
     addi r4, r30, 0xae
     addi r5, r1, 0x38
-    bl fn_80094958
+    bl target_registerCandidate
     addi r6, r1, 0x8
     addi r3, r31, 0xb0
     mr r7, r6
     addi r4, r30, 0xbb
     addi r5, r1, 0x28
-    bl fn_80094958
+    bl target_registerCandidate
     addi r6, r1, 0x8
     addi r3, r31, 0xb0
     mr r7, r6
     addi r4, r30, 0xc8
     addi r5, r1, 0x18
-    bl fn_80094958
+    bl target_registerCandidate
     lwz r3, 0x1978(r31)
     addi r0, r3, 0x1
     stw r0, 0x1978(r31)

@@ -43,7 +43,7 @@ extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
 extern void fn_8011EDE0(void);
-extern void fn_80129A48(void);
+extern void path_resetWaypointVelocity(void);
 extern void fn_8012AC40(void);
 extern void quest_resetObjectiveBounds(void);
 extern void quest_evaluateConditions(void);
@@ -1841,7 +1841,7 @@ lbl_fn_8000F1EC_00001720:
     lfs f1, lbl_80880674
     lwz r3, 0x48(r3)
     addi r3, r3, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     lwz r3, 0x1c(r29)
     li r4, 0x0
     lwz r3, 0x48(r3)
@@ -2195,7 +2195,7 @@ lbl_fn_8000FAE8_00001CA0:
     lfs f1, lbl_80880674
     lwz r3, 0x48(r3)
     addi r3, r3, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
 lbl_fn_8000FAE8_00001CB4:
     lwz r0, 0x20(r31)
     cmpwi r0, 0x7

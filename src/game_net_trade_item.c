@@ -30,7 +30,7 @@ extern void fn_80113CCC(void);
 extern void fn_80114AA0(void);
 extern void fn_801156BC(void);
 extern void fn_801156C4(void);
-extern void fn_80116BD4(void);
+extern void actor_calcSpawnTransform(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_8011F970(void);
 extern void equip_getGlobalManager(void);
@@ -455,7 +455,7 @@ lbl_fn_8052C10C_00000408:
     bl item_useConsumable
     bl fn_8008B964
     addi r4, r31, 0x6c
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     addi r3, r31, 0x260
     addi r4, r31, 0x6c
     bl fn_80392A04
@@ -1943,7 +1943,7 @@ lbl_fn_8052D46C_000019A8:
     bl item_useConsumable
     bl fn_8008B964
     addi r4, r31, 0x6c
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     addi r3, r1, 0x1e8
     li r4, -0x1
     bl sound_releaseChannel

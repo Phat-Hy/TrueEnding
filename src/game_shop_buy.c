@@ -56,7 +56,7 @@ void fn_8015802C(void);
 void fn_801588A0(void);
 void shop_canPurchaseItem(void);
 void fn_80158C9C(void);
-void fn_80158CA4(void);
+void shop_loadCatalogItem(void);
 void fn_80158D58(void);
 void fn_80158D60(void);
 void fn_80158E14(void);
@@ -1233,7 +1233,7 @@ asm void fn_80158C9C(void)
     blr
 }
 
-asm void fn_80158CA4(void)
+asm void shop_loadCatalogItem(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -1243,7 +1243,7 @@ asm void fn_80158CA4(void)
     mr r31, r3
     lwz r0, 0xf80(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80158CA4_000010B0
+    bne lbl_shop_loadCatalogItem_000010B0
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x14(r1)
@@ -1251,8 +1251,8 @@ asm void fn_80158CA4(void)
     lwz r0, 0x8(r5)
     stw r3, 0x18(r1)
     stw r0, 0x1c(r1)
-    b lbl_fn_80158CA4_000010CC
-lbl_fn_80158CA4_000010B0:
+    b lbl_shop_loadCatalogItem_000010CC
+lbl_shop_loadCatalogItem_000010B0:
     lis r5, lbl_8077B1F4@ha
     lwzu r4, lbl_8077B1F4@l(r5)
     stw r4, 0x14(r1)
@@ -1260,7 +1260,7 @@ lbl_fn_80158CA4_000010B0:
     lwz r0, 0x8(r5)
     stw r3, 0x18(r1)
     stw r0, 0x1c(r1)
-lbl_fn_80158CA4_000010CC:
+lbl_shop_loadCatalogItem_000010CC:
     lwz r5, 0x14(r1)
     addi r3, r1, 0x8
     lwz r4, 0x18(r1)
@@ -1270,16 +1270,16 @@ lbl_fn_80158CA4_000010CC:
     stw r0, 0x10(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_80158CA4_0000110C
+    beq lbl_shop_loadCatalogItem_0000110C
     lwz r3, 0xf80(r31)
     lwz r12, 0x0(r3)
     lwz r12, 0x24(r12)
     mtctr r12
     bctrl
-    b lbl_fn_80158CA4_00001110
-lbl_fn_80158CA4_0000110C:
+    b lbl_shop_loadCatalogItem_00001110
+lbl_shop_loadCatalogItem_0000110C:
     li r3, 0x0
-lbl_fn_80158CA4_00001110:
+lbl_shop_loadCatalogItem_00001110:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
     mtlr r0

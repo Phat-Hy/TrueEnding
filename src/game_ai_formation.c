@@ -6,7 +6,7 @@ extern void mtx_getTranslation(void);
 extern void vec3_copy(void);
 extern void vec3_mag(void);
 extern void scene_transformPoint(void);
-extern void fn_8000DCF4(void);
+extern void scene_getCamera(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
@@ -677,7 +677,7 @@ lbl_fn_80265B00_00000760:
     bl magic_getOffset6C
     mr r29, r3
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     lwz r0, 0x163c(r31)
     cmpwi r0, 0x0
     bne lbl_fn_80265B00_00000838
@@ -1780,7 +1780,7 @@ lbl_fn_80266A24_000016C4:
     li r5, 0x1
     bl world_setLocalFlag
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     cmpwi r3, 0x0
     beq lbl_fn_80266A24_00001788
     bl fn_80266FA4

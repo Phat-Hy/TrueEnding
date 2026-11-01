@@ -15,7 +15,7 @@ extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
 extern void map_processTrigger(void);
 extern void map_debugLog(void);
-extern void fn_800902C0(void);
+extern void radar_addBlipEntry(void);
 extern void fn_800920B8(void);
 extern void compass_findWaypointIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -2058,7 +2058,7 @@ lbl_fn_803FEC54_00001BB4:
     addi r3, r31, 0xf4
     addi r5, r1, 0x14
     li r4, 0x0
-    bl fn_800902C0
+    bl radar_addBlipEntry
     addic. r3, r1, 0x14
     beq lbl_fn_803FEC54_00001C28
     lwz r4, 0x14(r1)

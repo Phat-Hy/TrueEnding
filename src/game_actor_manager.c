@@ -38,7 +38,7 @@ extern void fn_80116BAC(void);
 extern void fn_80116BB4(void);
 extern void fn_80116BB8(void);
 extern void fn_80116BC8(void);
-extern void fn_80116BD4(void);
+extern void actor_calcSpawnTransform(void);
 extern void fn_80116E64(void);
 extern void fn_80116E6C(void);
 extern void fn_80116E74(void);
@@ -1882,7 +1882,7 @@ lbl_fn_801162A4_00001924:
     bne lbl_fn_801162A4_000019A8
     bl fn_8008B964
     mr r4, r29
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     bl fn_80116E64
     cmpwi r3, 0x0
     beq lbl_fn_801162A4_000019A8

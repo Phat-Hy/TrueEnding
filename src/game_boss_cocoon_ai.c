@@ -10,7 +10,7 @@ extern void scene_traverseNode(void);
 extern void vec3_sub(void);
 extern void mem_free(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80094958(void);
+extern void target_registerCandidate(void);
 extern void fn_80094B6C(void);
 extern void cursor_applyAnimationTrack(void);
 extern void skin_applyWeights(void);
@@ -1816,7 +1816,7 @@ lbl_fn_8045531C_00001770:
     stfs f1, 0x50(r1)
     fdivs f0, f0, f4
     stfs f0, 0x54(r1)
-    bl fn_80094958
+    bl target_registerCandidate
 lbl_fn_8045531C_0000186C:
     lwz r0, 0xc4(r1)
     lwz r31, 0xbc(r1)

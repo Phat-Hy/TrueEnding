@@ -10,7 +10,7 @@ extern void collision_testLineSegment(void);
 extern void msg_lookupFormattedEntry(void);
 extern void msg_formatWindowLayout(void);
 extern void msg_isWindowActive(void);
-extern void fn_80116BD4(void);
+extern void actor_calcSpawnTransform(void);
 extern void fn_8015EB2C(void);
 extern void fn_80178088(void);
 extern void fn_8037F830(void);
@@ -3350,7 +3350,7 @@ lbl_fn_8037F9AC_00002EE0:
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r29, 0x1f4
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     li r0, 0x0
     stw r0, 0x8ec(r29)
 lbl_fn_8037F9AC_00002F9C:

@@ -11,7 +11,7 @@ extern void vec3_mag(void);
 extern void scene_transformPoint(void);
 extern void fn_8000D9F8(void);
 extern void fn_8000DB1C(void);
-extern void fn_8000DCF4(void);
+extern void scene_getCamera(void);
 extern void scene_getRootNode(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
@@ -669,7 +669,7 @@ lbl_fn_803D2A6C_0000057C:
     li r29, 0x1
 lbl_fn_803D2A6C_00000580:
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     mr r31, r3
     bl equip_getGlobalManager
     bl magic_getOffset6C
@@ -1823,7 +1823,7 @@ lbl_fn_803D2A6C_00001634:
     addi r3, r1, 0x3d0
     bl mission_updateStub
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     mr r19, r3
     bl scene_getRootNode
     lis r4, lbl_807506A0@ha
@@ -3638,11 +3638,11 @@ lbl_fn_803D2A6C_000030BC:
     addi r3, r1, 0x320
     bl mission_updateStub
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000030EC
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x320
@@ -4747,7 +4747,7 @@ lbl_fn_803D2A6C_000040DC:
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00004118
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     mr r25, r3
     b lbl_fn_803D2A6C_0000411C
 lbl_fn_803D2A6C_00004118:
@@ -4830,7 +4830,7 @@ lbl_fn_803D2A6C_00004218:
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00004254
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     mr r25, r3
     b lbl_fn_803D2A6C_00004258
 lbl_fn_803D2A6C_00004254:

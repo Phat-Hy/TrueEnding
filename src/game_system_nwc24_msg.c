@@ -30,7 +30,7 @@ extern void fn_80113CCC(void);
 extern void fn_80114AA0(void);
 extern void vec3_sqMag(void);
 extern void fn_80116BA4(void);
-extern void fn_80116BD4(void);
+extern void actor_calcSpawnTransform(void);
 extern void player_evaluateStatusCondition(void);
 extern void fn_8013A13C(void);
 extern void fn_8013C3B4(void);
@@ -364,7 +364,7 @@ lbl_fn_80387548_000001C8:
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r30, 0x1f4
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
 lbl_fn_80387548_000003AC:
     lwz r0, 0x114(r1)
     psq_l f31, 0x108(r1), 0, 0
@@ -1553,7 +1553,7 @@ lbl_fn_803884B8_000014CC:
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r29, 0x1f4
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     lwz r0, 0x174(r1)
     psq_l f31, 0x168(r1), 0, 0
     lfd f31, 0x160(r1)
@@ -1682,7 +1682,7 @@ lbl_fn_80388A88_000016B0:
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r31, 0x1f4
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     lwz r0, 0x74(r1)
     psq_l f31, 0x68(r1), 0, 0
     lfd f31, 0x60(r1)
@@ -1953,7 +1953,7 @@ lbl_fn_80388C44_00001A88:
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r31, 0x1f4
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     lwz r0, 0x1b4(r1)
     psq_l f31, 0x1a8(r1), 0, 0
     lfd f31, 0x1a0(r1)

@@ -53,7 +53,7 @@ extern void fn_80444BE8(void);
 extern void fn_80444C48(void);
 extern void fn_80444C50(void);
 extern void fn_8044D56C(void);
-extern void fn_804A3C24(void);
+extern void net_initCoopSession(void);
 extern void fn_804A55FC(void);
 extern void fn_804A7DD4(void);
 extern void fn_8057F284(void);
@@ -870,7 +870,7 @@ lbl_fn_80589DE4_00000A68:
     lwz r3, lbl_8087F580
     li r5, 0x0
     lwz r4, 0xc(r4)
-    bl fn_804A3C24
+    bl net_initCoopSession
     b lbl_fn_80589DE4_00000B00
 lbl_fn_80589DE4_00000AE0:
     lwz r27, lbl_8087F580
@@ -880,7 +880,7 @@ lbl_fn_80589DE4_00000AE0:
     mr r4, r3
     mr r3, r27
     li r5, 0x0
-    bl fn_804A3C24
+    bl net_initCoopSession
 lbl_fn_80589DE4_00000B00:
     lwz r3, lbl_8087F0A8
     lwz r0, 0x488(r3)

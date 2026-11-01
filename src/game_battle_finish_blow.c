@@ -25,7 +25,7 @@ extern void cursor_Object_constructor(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void cursor_applyAnimationTrack(void);
-extern void fn_80158CA4(void);
+extern void shop_loadCatalogItem(void);
 extern void world_getLocalFlag(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
@@ -164,7 +164,7 @@ lbl_fn_80401E50_000000C0:
     neg r0, r4
     or r0, r0, r4
     srwi r26, r0, 31
-    bl fn_80158CA4
+    bl shop_loadCatalogItem
     and r4, r26, r3
     lis r3, lbl_807527C0@ha
     neg r0, r4

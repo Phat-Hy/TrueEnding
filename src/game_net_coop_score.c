@@ -45,7 +45,7 @@ extern void env_updateAtmosphere(void);
 extern void str_findChar(void);
 extern void fn_800E0000(void);
 extern void fn_800F7258(void);
-extern void fn_80116BD4(void);
+extern void actor_calcSpawnTransform(void);
 extern void save_validateHeader(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
@@ -193,7 +193,7 @@ lbl_fn_804ABA2C_00000048:
     bl fn_804AB79C
     mr r3, r29
     addi r4, r28, 0x640
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     addi r3, r28, 0x640
     bl fn_804ABEE4
     mr r26, r3
@@ -451,7 +451,7 @@ lbl_fn_804ABA2C_00000144:
     bl fn_804ABF00
     mr r3, r29
     addi r4, r1, 0x140
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     addi r3, r1, 0x140
     bl fn_804ABEE4
     mr r28, r3
@@ -647,7 +647,7 @@ asm void fn_804ABF84(void)
     bl item_useConsumable
     mr r3, r27
     addi r4, r1, 0x38
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     addi r3, r1, 0x38
     bl fn_804ABEE4
     mr r31, r3
@@ -825,7 +825,7 @@ lbl_fn_804ABF84_00000908:
     bl fn_804ABF00
     mr r3, r27
     addi r4, r1, 0x22c
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     addi r3, r1, 0x22c
     bl fn_804ABEE4
     mr r31, r3

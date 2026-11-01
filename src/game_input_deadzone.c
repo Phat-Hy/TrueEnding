@@ -25,7 +25,7 @@ extern void fn_80102824(void);
 extern void fn_801028E4(void);
 extern void vec3_sqMag(void);
 extern void fn_80129978(void);
-extern void fn_80129A48(void);
+extern void path_resetWaypointVelocity(void);
 extern void fn_8012A190(void);
 extern void npc_updateDialogueTarget(void);
 extern void fn_8013A13C(void);
@@ -478,7 +478,7 @@ lbl_fn_802EF16C_000004D4:
     stw r30, 0xf1c(r3)
     lwz r3, 0x14e8(r31)
     addi r3, r3, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     stw r30, 0x14e8(r31)
     b lbl_fn_802EF16C_000005F4
     oris r0, r6, 0x4000
@@ -1351,7 +1351,7 @@ lbl_fn_802EF5FC_000011A4:
     stw r30, 0xf1c(r3)
     lwz r3, 0x14e8(r31)
     addi r3, r3, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     lwz r5, 0x14e8(r31)
     addi r3, r1, 0xa8
     lfs f3, lbl_80884850

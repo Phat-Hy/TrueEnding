@@ -40,7 +40,7 @@ extern void fn_801011B8(void);
 extern void fn_8010129C(void);
 extern void fn_8010AB34(void);
 extern void fn_8010F6FC(void);
-extern void fn_80129A48(void);
+extern void path_resetWaypointVelocity(void);
 extern void fn_80129A6C(void);
 extern void fn_8012A1B8(void);
 extern void enemy_updateAnimTimer(void);
@@ -699,7 +699,7 @@ lbl_fn_803729B4_00000724:
     mr r3, r26
     bl fn_80373094
     lfs f1, lbl_80885708
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     mr r3, r26
     bl fn_80373094
     bl fn_80129A6C

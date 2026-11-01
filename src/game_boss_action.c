@@ -27,7 +27,7 @@ extern void fn_80093014(void);
 extern void target_findEntryByName(void);
 extern void fn_80093D98(void);
 extern void fn_80093F58(void);
-extern void fn_80094958(void);
+extern void target_registerCandidate(void);
 extern void fn_80095D44(void);
 extern void fn_800973C0(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -551,7 +551,7 @@ lbl_fn_80137FC0_00000570:
     addi r7, r1, 0x18
     stfs f31, 0x20(r1)
     stfs f1, 0x24(r1)
-    bl fn_80094958
+    bl target_registerCandidate
     b lbl_fn_80137FC0_00000904
 lbl_fn_80137FC0_00000698:
     mr r3, r28

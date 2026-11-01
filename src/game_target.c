@@ -64,7 +64,7 @@ void fn_80093F58(void);
 void fn_80094420(void);
 void fn_80094778(void);
 void fn_800948F0(void);
-void fn_80094958(void);
+void target_registerCandidate(void);
 void fn_80094B6C(void);
 void fn_80094BD8(void);
 void fn_80094D88(void);
@@ -2094,7 +2094,7 @@ lbl_fn_800948F0_00001A7C:
     blr
 }
 
-asm void fn_80094958(void)
+asm void target_registerCandidate(void)
 {
     nofralloc
     stwu r1, -0xb0(r1)
@@ -2111,13 +2111,13 @@ asm void fn_80094958(void)
     lfs f0, lbl_80880C14
     li r5, 0x0
     li r4, 0x0
-    b lbl_fn_80094958_00001C80
-lbl_fn_80094958_00001ACC:
+    b lbl_target_registerCandidate_00001C80
+lbl_target_registerCandidate_00001ACC:
     lwz r6, 0x108(r28)
     lwzx r6, r6, r4
     lwz r0, 0x0(r6)
     cmplw r0, r3
-    bne lbl_fn_80094958_00001C78
+    bne lbl_target_registerCandidate_00001C78
     lfs f1, 0x0(r29)
     lfs f3, 0x4(r29)
     fmuls f6, f0, f1
@@ -2220,13 +2220,13 @@ lbl_fn_80094958_00001ACC:
     stb r0, 0x1e(r6)
     lbz r0, 0x17(r1)
     stb r0, 0x1f(r6)
-lbl_fn_80094958_00001C78:
+lbl_target_registerCandidate_00001C78:
     addi r4, r4, 0x4
     addi r5, r5, 0x1
-lbl_fn_80094958_00001C80:
+lbl_target_registerCandidate_00001C80:
     lwz r0, 0x104(r28)
     cmplw r5, r0
-    blt lbl_fn_80094958_00001ACC
+    blt lbl_target_registerCandidate_00001ACC
     addi r11, r1, 0xb0
     bl _restgpr_23
     lwz r0, 0xb4(r1)

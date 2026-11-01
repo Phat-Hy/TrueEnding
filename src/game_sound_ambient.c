@@ -42,7 +42,7 @@ extern void fn_802114E0(void);
 extern void task_mapIdToQueue(void);
 extern void gmk_registerSlot(void);
 extern void gmk_findSlotByIndex(void);
-extern void fn_804A3C24(void);
+extern void net_initCoopSession(void);
 extern void fn_804A4294(void);
 extern void fn_804A4300(void);
 extern void fn_804A4494(void);
@@ -110,7 +110,7 @@ asm void fn_801D8CC4(void)
     lwz r3, lbl_8087F580
     li r5, 0x0
     lwz r4, 0xc(r4)
-    bl fn_804A3C24
+    bl net_initCoopSession
 lbl_fn_801D8CC4_00000080:
     lwz r28, lbl_8087EF70
     li r4, 0x0

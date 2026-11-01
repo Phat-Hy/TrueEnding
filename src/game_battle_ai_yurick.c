@@ -25,7 +25,7 @@ extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void fn_800902C0(void);
+extern void radar_addBlipEntry(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cam_destroyMsgHandle(void);
@@ -1708,7 +1708,7 @@ lbl_fn_8043B9E0_000015E8:
     addi r5, r1, 0xa0
     stw r0, 0xa0(r1)
     li r4, 0x0
-    bl fn_800902C0
+    bl radar_addBlipEntry
     addic. r3, r1, 0xa0
     beq lbl_fn_8043B9E0_00001640
     lwz r4, 0xa0(r1)

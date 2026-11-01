@@ -25,7 +25,7 @@ extern void str_parseInt(void);
 extern void fn_801028E4(void);
 extern void fn_80108F38(void);
 extern void skill_findNodeById(void);
-extern void fn_80129A48(void);
+extern void path_resetWaypointVelocity(void);
 extern void fn_80129A6C(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
@@ -2062,7 +2062,7 @@ lbl_fn_802EEBA8_00001AEC:
     stw r30, 0xf1c(r3)
     lwz r3, 0x14e8(r31)
     addi r3, r3, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     lwz r3, 0x14e8(r31)
     li r0, 0x1
     lfs f0, lbl_80884858

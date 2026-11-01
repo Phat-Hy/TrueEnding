@@ -18,7 +18,7 @@ extern void npc_initScriptContext(void);
 extern void quest_evaluateConditions(void);
 extern void inventory_applyItemStats(void);
 extern void shop_canPurchaseItem(void);
-extern void fn_80158CA4(void);
+extern void shop_loadCatalogItem(void);
 extern void party_initFormationSlots(void);
 extern void party_configureMemberSlot(void);
 extern void fn_8015EB2C(void);
@@ -598,7 +598,7 @@ lbl_fn_8031FE4C_000006B4:
     cmpwi r0, 0x0
     beq lbl_fn_8031FE4C_0000080C
     mr r3, r31
-    bl fn_80158CA4
+    bl shop_loadCatalogItem
     cmpwi r3, 0x0
     beq lbl_fn_8031FE4C_0000080C
     lwz r0, 0x594(r31)

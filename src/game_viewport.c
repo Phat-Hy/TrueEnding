@@ -9,7 +9,7 @@ extern void _savegpr_21(void);
 extern void vec3_copy(void);
 extern void vec3_mag(void);
 extern void scene_transformPoint(void);
-extern void fn_8000DCF4(void);
+extern void scene_getCamera(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void vec3_addAssign(void);
@@ -255,7 +255,7 @@ lbl_fn_800F72F4_000001B0:
     b lbl_fn_800F72F4_000001E0
 lbl_fn_800F72F4_000001B8:
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     bl fn_800F5300
     cmpwi r3, 0x0
     beq lbl_fn_800F72F4_000001D4

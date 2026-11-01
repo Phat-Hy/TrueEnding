@@ -13,7 +13,7 @@ extern void fn_80049654(void);
 extern void fn_800498D4(void);
 extern void sound_releaseChannel(void);
 extern void boss_recordDamage(void);
-extern void fn_8006A250(void);
+extern void boss_dispatchActionTransition(void);
 extern void fn_8006A5A8(void);
 extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
@@ -69,7 +69,7 @@ extern void fn_80442F10(void);
 extern void fn_80442F68(void);
 extern void fn_8046F96C(void);
 extern void fn_8047043C(void);
-extern void fn_80470528(void);
+extern void boss_releaseLaserTarget(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
@@ -1172,7 +1172,7 @@ lbl_world_Manager_constructor_00000DCC:
     li r4, 0xa
     lis r5, 0xff00
     li r6, 0x0
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     stw r3, 0x5620(r29)
     mr r3, r29
     li r4, 0x1e
@@ -1918,7 +1918,7 @@ lbl_world_Manager_destructor_00001894:
 lbl_world_Manager_destructor_000018B4:
     addic. r3, r28, 0x5690
     beq lbl_world_Manager_destructor_000018C0
-    bl fn_80470528
+    bl boss_releaseLaserTarget
 lbl_world_Manager_destructor_000018C0:
     addic. r0, r28, 0x562c
     beq lbl_world_Manager_destructor_000018D0

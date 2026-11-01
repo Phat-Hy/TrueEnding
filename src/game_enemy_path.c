@@ -68,7 +68,7 @@ void fn_801298EC(void);
 void fn_80129930(void);
 void fn_80129954(void);
 void fn_80129978(void);
-void fn_80129A48(void);
+void path_resetWaypointVelocity(void);
 void fn_80129A6C(void);
 void fn_8012A190(void);
 void *fn_8012A1B8(void *p);
@@ -736,7 +736,7 @@ lbl_fn_80129978_000008E0:
     blr
 }
 
-asm void fn_80129A48(void)
+asm void path_resetWaypointVelocity(void)
 {
     nofralloc
     lfs f0, lbl_808818A8

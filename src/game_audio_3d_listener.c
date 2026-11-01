@@ -18,7 +18,7 @@ extern void map_debugLog(void);
 extern void atn_Matrix_copy(void);
 extern void fn_80091CFC(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80094958(void);
+extern void target_registerCandidate(void);
 extern void fn_80094B6C(void);
 extern void fn_800CB6E4(void);
 extern void atn_Task_setActive(void);
@@ -1934,7 +1934,7 @@ asm void fn_8031F810(void)
     stfs f1, 0x30(r1)
     fdivs f0, f0, f4
     stfs f0, 0x34(r1)
-    bl fn_80094958
+    bl target_registerCandidate
     lwz r3, lbl_8087F0A8
     lwz r0, 0x34(r3)
     cmpwi r0, 0x0

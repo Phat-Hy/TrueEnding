@@ -34,7 +34,7 @@ extern void wcs_vformat(void);
 extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80102EAC(void);
-extern void fn_80103F60(void);
+extern void bsp_findLeafNode(void);
 extern void fn_80108378(void);
 extern void hurtbox_dispatchHitEvent(void);
 extern void boss_updatePhaseState(void);
@@ -2386,7 +2386,7 @@ lbl_fn_8025ACA0_00002074:
     beq lbl_fn_8025ACA0_000020B0
     lwz r3, lbl_8087F048
     mr r4, r29
-    bl fn_80103F60
+    bl bsp_findLeafNode
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8025ACA0_000020B0

@@ -31,7 +31,7 @@ extern void npc_getPosition(void);
 extern void quest_getGlobalManager(void);
 extern void fn_80140500(void);
 extern void quest_initMarkerCoords(void);
-extern void fn_80158CA4(void);
+extern void shop_loadCatalogItem(void);
 extern void fn_80158E1C(void);
 extern void actor_setState(void);
 extern void battle_calcExpPosition(void);
@@ -238,7 +238,7 @@ lbl_fn_80318AA4_000001BC:
     cmpwi r3, 0x0
     bne lbl_fn_80318AA4_000001E8
     mr r3, r31
-    bl fn_80158CA4
+    bl shop_loadCatalogItem
     cmpwi r3, 0x0
     beq lbl_fn_80318AA4_00000468
 lbl_fn_80318AA4_000001E8:

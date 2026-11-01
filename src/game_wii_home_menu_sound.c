@@ -7,7 +7,7 @@ extern void _restgpr_22(void);
 extern void _savegpr_22(void);
 extern void dtor_80084684(void);
 extern void fn_8006A0F4(void);
-extern void fn_8006A250(void);
+extern void boss_dispatchActionTransition(void);
 extern void mem_alloc(void);
 extern void fn_800A4228(void);
 extern void msg_getMessageById(void);
@@ -350,7 +350,7 @@ lbl_homeMenu_returnToWiiMenu_00000348:
     li r4, 0x14
     li r5, 0x0
     lis r6, 0xff00
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     stw r3, 0x18(r31)
     lis r4, 0x5
     subi r0, r4, 0x6c20
@@ -430,7 +430,7 @@ lbl_homeMenu_returnToWiiMenu_00000468:
     li r4, 0x14
     li r5, 0x0
     lis r6, 0xff00
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     stw r3, 0x18(r31)
     lis r4, 0x5
     subi r0, r4, 0x6c20
@@ -499,7 +499,7 @@ lbl_homeMenu_returnToWiiMenu_00000560:
     li r4, 0x14
     li r5, 0x0
     lis r6, 0xff00
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     stw r3, 0x18(r31)
     lis r4, 0x5
     subi r0, r4, 0x6c20
@@ -568,7 +568,7 @@ lbl_homeMenu_returnToWiiMenu_00000658:
     li r4, 0x14
     li r5, 0x0
     lis r6, 0xff00
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     stw r3, 0x18(r31)
     lis r4, 0x5
     subi r0, r4, 0x6c20

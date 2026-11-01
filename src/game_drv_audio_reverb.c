@@ -59,7 +59,7 @@ extern void fn_80114AA0(void);
 extern void fn_801156C4(void);
 extern void fn_80116BA4(void);
 extern void fn_80116BAC(void);
-extern void fn_80116BD4(void);
+extern void actor_calcSpawnTransform(void);
 extern void equip_getGlobalManager(void);
 extern void fn_80122280(void);
 extern void magic_isField28Zero(void);
@@ -562,7 +562,7 @@ lbl_fn_805BAC18_00000420:
     bl item_useConsumable
     bl fn_8008B964
     addi r4, r29, 0x280
-    bl fn_80116BD4
+    bl actor_calcSpawnTransform
     addi r3, r1, 0x188
     addi r4, r1, 0xf0
     bl fn_800F80A8

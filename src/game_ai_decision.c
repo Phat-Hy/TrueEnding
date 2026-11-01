@@ -11,7 +11,7 @@ extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void boss_initActionStream(void);
 extern void node_destroy(void);
-extern void fn_80094958(void);
+extern void target_registerCandidate(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_setActive(void);
@@ -1060,7 +1060,7 @@ lbl_fn_80262CF8_00000C90:
     stfs f0, 0x2c(r1)
     stfs f0, 0x30(r1)
     stfs f1, 0x34(r1)
-    bl fn_80094958
+    bl target_registerCandidate
     lwz r0, 0x16cc(r30)
     cmpwi r0, 0x1
     bne lbl_fn_80262CF8_00000D74

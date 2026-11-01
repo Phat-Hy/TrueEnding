@@ -9,7 +9,7 @@ extern void _savegpr_26(void);
 extern void scene_traverseNode(void);
 extern void collision_testLineSegment(void);
 extern void boss_recordDamage(void);
-extern void fn_8006A250(void);
+extern void boss_dispatchActionTransition(void);
 extern void fn_8006A900(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_applyAnimationTrack(void);
@@ -1253,7 +1253,7 @@ asm void fn_803712BC(void)
     stw r31, 0xc(r1)
     mr r31, r3
     lwz r3, 0x20(r3)
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     li r0, 0x1
     stw r0, 0x48(r3)
     lis r4, lbl_8074DC1C@ha

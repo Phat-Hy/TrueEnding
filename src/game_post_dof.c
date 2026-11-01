@@ -14,7 +14,7 @@ extern void route_createSegment(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80094958(void);
+extern void target_registerCandidate(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
@@ -1085,26 +1085,26 @@ asm void fn_802C0C38(void)
     stfs f1, 0xc(r1)
     stfs f1, 0x20(r1)
     stfs f0, 0x34(r1)
-    bl fn_80094958
+    bl target_registerCandidate
     addi r31, r31, lbl_80746C90@l
     addi r3, r28, 0xb0
     addi r4, r31, 0xd
     addi r5, r1, 0x68
     addi r6, r1, 0x58
     addi r7, r1, 0x48
-    bl fn_80094958
+    bl target_registerCandidate
     addi r3, r28, 0xb0
     addi r4, r31, 0x1a
     addi r5, r1, 0x68
     addi r6, r1, 0x58
     addi r7, r1, 0x48
-    bl fn_80094958
+    bl target_registerCandidate
     addi r3, r28, 0xb0
     addi r4, r31, 0x27
     addi r5, r1, 0x68
     addi r6, r1, 0x58
     addi r7, r1, 0x48
-    bl fn_80094958
+    bl target_registerCandidate
     addi r3, r28, 0x156c
     addi r4, r31, 0x34
     bl res_Resource_unload

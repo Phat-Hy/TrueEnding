@@ -24,7 +24,7 @@ extern void fn_800E41FC(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
-extern void fn_80103F60(void);
+extern void bsp_findLeafNode(void);
 extern void fn_80108378(void);
 extern void skill_findNodeById(void);
 extern void enemy_stepBehavior(void);
@@ -907,7 +907,7 @@ lbl_fn_8030646C_00000AB4:
     beq lbl_fn_8030646C_00000B18
     lwz r3, lbl_8087F048
     mr r4, r31
-    bl fn_80103F60
+    bl bsp_findLeafNode
     lwz r4, lbl_8087F8A0
     mr r31, r3
     lwz r30, 0x48(r4)

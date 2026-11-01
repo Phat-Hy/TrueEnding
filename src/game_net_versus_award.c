@@ -24,7 +24,7 @@ extern void thread_findAndNotifySlot(void);
 extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void mem_findBlockById(void);
-extern void fn_804A3C24(void);
+extern void net_initCoopSession(void);
 extern void fn_804A53D4(void);
 extern void fn_804A5D34(void);
 extern void fn_804BC628(void);
@@ -342,7 +342,7 @@ lbl_fn_804C0F88_0000034C:
     la r4, lbl_808813D0
 lbl_fn_804C0F88_00000350:
     li r5, 0x0
-    bl fn_804A3C24
+    bl net_initCoopSession
 lbl_fn_804C0F88_00000358:
     cmpwi r31, 0x0
     bne lbl_fn_804C0F88_00000388

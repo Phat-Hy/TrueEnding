@@ -37,7 +37,7 @@ extern void quest_evaluateConditions(void);
 extern void fn_80155790(void);
 extern void inventory_calcTotalStats(void);
 extern void shop_canPurchaseItem(void);
-extern void fn_80158CA4(void);
+extern void shop_loadCatalogItem(void);
 extern void fn_8016AFE8(void);
 extern void fn_8016D74C(void);
 extern void debuff_clearStatus(void);
@@ -583,7 +583,7 @@ lbl_fn_800E589C_00000668:
     cmpwi r0, 0x0
     beq lbl_fn_800E589C_00000838
     mr r3, r30
-    bl fn_80158CA4
+    bl shop_loadCatalogItem
     cmpwi r3, 0x0
     beq lbl_fn_800E589C_00000838
     lwz r0, 0x560(r30)

@@ -7,7 +7,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_8006A250(void);
+extern void boss_dispatchActionTransition(void);
 extern void mem_alloc(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -623,7 +623,7 @@ lbl_fn_804BBC28_00000754:
     li r4, 0xf
     li r5, 0x0
     lis r6, 0xff00
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     stw r3, 0x7c(r27)
     addi r11, r1, 0x20
     lfs f0, lbl_808873FC

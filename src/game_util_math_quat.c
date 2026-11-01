@@ -51,7 +51,7 @@ extern void fn_804A24C4(void);
 extern void fn_804A251C(void);
 extern void fn_804A26DC(void);
 extern void fn_804A2724(void);
-extern void fn_804A3C24(void);
+extern void net_initCoopSession(void);
 extern void fn_804A4930(void);
 extern void fn_804A55FC(void);
 extern void strcmp(void);
@@ -1284,7 +1284,7 @@ asm void fn_80581574(void)
     lwz r3, lbl_8087F580
     li r5, 0x0
     lwz r4, 0x88(r4)
-    bl fn_804A3C24
+    bl net_initCoopSession
     b lbl_fn_80581574_000010D0
 lbl_fn_80581574_00001064:
     lwz r31, lbl_8087F580
@@ -1294,7 +1294,7 @@ lbl_fn_80581574_00001064:
     mr r4, r3
     mr r3, r31
     li r5, 0x0
-    bl fn_804A3C24
+    bl net_initCoopSession
     b lbl_fn_80581574_000010D0
 lbl_fn_80581574_00001088:
     lwz r3, 0x4(r31)
@@ -1309,13 +1309,13 @@ lbl_fn_80581574_00001088:
     lwz r3, lbl_8087F580
     li r5, 0x0
     lwz r4, 0x84(r4)
-    bl fn_804A3C24
+    bl net_initCoopSession
     b lbl_fn_80581574_000010D0
 lbl_fn_80581574_000010C0:
     lwz r3, lbl_8087F580
     li r5, 0x0
     lwz r4, 0xc(r31)
-    bl fn_804A3C24
+    bl net_initCoopSession
 lbl_fn_80581574_000010D0:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

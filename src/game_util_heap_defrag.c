@@ -42,7 +42,7 @@ extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void fn_804A39EC(void);
 extern void fn_804A3A68(void);
-extern void fn_804A3C24(void);
+extern void net_initCoopSession(void);
 extern void fn_804A55FC(void);
 extern void fn_804A5824(void);
 extern void fn_8057F284(void);
@@ -732,7 +732,7 @@ asm void fn_805883DC(void)
     lwz r3, lbl_8087F580
     li r5, 0x0
     lwz r4, 0xc(r4)
-    bl fn_804A3C24
+    bl net_initCoopSession
 lbl_fn_805883DC_000008AC:
     lfs f0, lbl_80888110
     lis r30, lbl_80761914@ha

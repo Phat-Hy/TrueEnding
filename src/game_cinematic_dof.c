@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void vec3_set(void);
 extern void fn_8000D760(void);
 extern void scene_transformPoint(void);
-extern void fn_8000DCF4(void);
+extern void scene_getCamera(void);
 extern void scene_getRootNode(void);
 extern void str_initFromCStr(void);
 extern void menu_initWindowBuffer(void);
@@ -51,7 +51,7 @@ extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
 extern void fn_80129978(void);
-extern void fn_80129A48(void);
+extern void path_resetWaypointVelocity(void);
 extern void fn_8012D180(void);
 extern void boss_updatePhaseState(void);
 extern void npc_updateDialogueTarget(void);
@@ -1713,7 +1713,7 @@ lbl_fn_80339760_00001524:
     cmpwi r0, 0x0
     bne lbl_fn_80339760_00001568
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     stw r3, 0x14b0(r31)
     stw r3, 0xd1c(r31)
 lbl_fn_80339760_00001568:
@@ -1923,7 +1923,7 @@ lbl_fn_80339760_00001834:
     stb r0, 0x14c8(r31)
 lbl_fn_80339760_00001860:
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     lwz r0, 0xd18(r31)
     li r30, 0x0
     cmpwi r0, 0x0
@@ -2017,7 +2017,7 @@ lbl_fn_80339760_0000197C:
 lbl_fn_80339760_000019C0:
     lfs f1, lbl_80885274
     addi r3, r31, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
 lbl_fn_80339760_000019CC:
     lwz r3, 0x58c(r31)
     li r4, 0x1
@@ -2032,7 +2032,7 @@ lbl_fn_80339760_000019E4:
     bl kpad_getClampData
     mr r28, r3
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     bl npc_getPosition
     lfs f2, 0x4(r3)
     lfs f1, 0x52c(r31)

@@ -6,7 +6,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void menu_renderLayout(void);
 extern void collision_testLineSegment(void);
-extern void fn_800902C0(void);
+extern void radar_addBlipEntry(void);
 extern void atn_Model_findBoneIndex(void);
 extern void target_findEntryByName(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -3071,7 +3071,7 @@ lbl_fn_8026DB8C_00002B38:
     li r4, 0x0
     lwz r3, 0x1624(r28)
     addi r3, r3, 0x10
-    bl fn_800902C0
+    bl radar_addBlipEntry
     addic. r3, r1, 0x2c0
     beq lbl_fn_8026DB8C_00002B90
     lwz r4, 0x2c0(r1)

@@ -24,7 +24,7 @@ extern void fn_8008A76C(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void minimap_renderOverlay(void);
-extern void fn_800902C0(void);
+extern void radar_addBlipEntry(void);
 extern void fn_80092A4C(void);
 extern void fn_80095300(void);
 extern void fn_8009E690(void);
@@ -1047,7 +1047,7 @@ asm void fn_8049AA1C(void)
     addi r5, r1, 0x8
     li r4, 0x0
     lwz r3, 0x324(r29)
-    bl fn_800902C0
+    bl radar_addBlipEntry
     addic. r3, r1, 0x8
     beq lbl_fn_8049AA1C_00000D80
     lwz r4, 0x8(r1)

@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void mtx_getTranslation(void);
 extern void vec3_set(void);
 extern void scene_transformPoint(void);
-extern void fn_8000DCF4(void);
+extern void scene_getCamera(void);
 extern void scene_getRootNode(void);
 extern void fn_800109E0(void);
 extern void mtx_multVec(void);
@@ -1861,7 +1861,7 @@ asm void fn_802A3D80(void)
     cmpwi r28, 0x0
     beq lbl_fn_802A3D80_00001968
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     stw r3, 0x8(r1)
     addi r3, r1, 0x38
     addi r4, r1, 0x8

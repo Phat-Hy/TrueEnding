@@ -20,7 +20,7 @@ extern void node_createNamedChild(void);
 extern void node_destroy(void);
 extern void map_getArchiveName(void);
 extern void minimap_renderOverlay(void);
-extern void fn_800902C0(void);
+extern void radar_addBlipEntry(void);
 extern void fn_80092A4C(void);
 extern void atn_Lockon_updateTargetTextures(void);
 extern void cursor_applyAnimationTrack(void);
@@ -900,7 +900,7 @@ lbl_fn_803ECBD4_00000ADC:
     mr r3, r29
     addi r5, r1, 0x38
     li r4, 0x0
-    bl fn_800902C0
+    bl radar_addBlipEntry
     addic. r3, r1, 0x38
     beq lbl_fn_803ECBD4_00000B3C
     lwz r4, 0x38(r1)

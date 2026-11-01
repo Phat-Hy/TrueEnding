@@ -27,7 +27,7 @@ extern void ref_releaseHandle(void);
 extern void fn_800CF45C(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
-extern void fn_80103F60(void);
+extern void bsp_findLeafNode(void);
 extern void fn_80108378(void);
 extern void actor_setState(void);
 extern void fn_80194E2C(void);
@@ -2015,7 +2015,7 @@ lbl_fn_8035359C_00001AE0:
 lbl_fn_8035359C_00001AE8:
     lwz r3, lbl_8087F048
     mr r4, r31
-    bl fn_80103F60
+    bl bsp_findLeafNode
     lwz r0, 0x17e4(r31)
     mr r30, r3
     cmpwi r0, 0x0

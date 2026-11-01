@@ -18,7 +18,7 @@ extern void fn_80079994(void);
 extern void mem_realloc(void);
 extern void route_interpolatePath(void);
 extern void node_createNamedChild(void);
-extern void fn_800902C0(void);
+extern void radar_addBlipEntry(void);
 extern void fn_80094D88(void);
 extern void fn_80094F14(void);
 extern void motion_updateFogAdj(void);
@@ -555,7 +555,7 @@ lbl_font_renderString_000005BC:
     addi r5, r1, 0x44
     li r4, 0x0
     stw r24, 0x44(r1)
-    bl fn_800902C0
+    bl radar_addBlipEntry
     cmpwi r25, 0x0
     beq lbl_font_renderString_0000060C
     lwz r3, 0x44(r1)

@@ -57,7 +57,7 @@ extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
 extern void player_evaluateStatusCondition(void);
 extern void fn_80129978(void);
-extern void fn_80129A48(void);
+extern void path_resetWaypointVelocity(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80139F2C(void);
 extern void fn_8013A13C(void);
@@ -2026,7 +2026,7 @@ lbl_fn_80460458_00001A40:
     beq lbl_fn_80460458_00001A64
     lfs f1, lbl_80886D70
     addi r3, r31, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     b lbl_fn_80460458_00001A90
 lbl_fn_80460458_00001A64:
     lwz r3, 0x14b8(r31)

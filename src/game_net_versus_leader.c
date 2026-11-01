@@ -23,7 +23,7 @@ extern void fn_801F4F08(void);
 extern void thread_findAndNotify(void);
 extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
-extern void fn_804A3C24(void);
+extern void net_initCoopSession(void);
 extern void fn_804AC734(void);
 extern void fn_804AC83C(void);
 extern void fn_804ACD10(void);
@@ -1920,7 +1920,7 @@ lbl_fn_804C0EA4_000019F0:
     la r4, lbl_808813D0
 lbl_fn_804C0EA4_000019F4:
     li r5, 0x0
-    bl fn_804A3C24
+    bl net_initCoopSession
     b lbl_fn_804C0EA4_00001A24
 lbl_fn_804C0EA4_00001A00:
     lwz r4, lbl_8087F86C
@@ -1933,7 +1933,7 @@ lbl_fn_804C0EA4_00001A18:
     la r4, lbl_808813D0
 lbl_fn_804C0EA4_00001A1C:
     li r5, 0x0
-    bl fn_804A3C24
+    bl net_initCoopSession
 lbl_fn_804C0EA4_00001A24:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

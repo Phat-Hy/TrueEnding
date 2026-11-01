@@ -7,7 +7,7 @@ extern void _restgpr_23(void);
 extern void _savegpr_22(void);
 extern void _savegpr_23(void);
 extern void map_processTrigger(void);
-extern void fn_800902C0(void);
+extern void radar_addBlipEntry(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
@@ -2878,7 +2878,7 @@ lbl_fn_800F3EF4_00002688:
     stw r28, 0xd8(r1)
     subi r3, r3, 0x45ac
     li r4, 0x0
-    bl fn_800902C0
+    bl radar_addBlipEntry
     cmpwi r30, 0x0
     beq lbl_fn_800F3EF4_000026E0
     lwz r3, 0xd8(r1)

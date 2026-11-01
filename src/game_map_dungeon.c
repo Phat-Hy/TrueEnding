@@ -18,7 +18,7 @@ extern void fn_80128508(void);
 extern void fn_80128A30(void);
 extern void fn_80129954(void);
 extern void fn_80129978(void);
-extern void fn_80129A48(void);
+extern void path_resetWaypointVelocity(void);
 extern void npc_calcTargetDistance(void);
 extern void party_configureMemberSlot(void);
 extern void party_updateMemberCoords(void);
@@ -861,7 +861,7 @@ asm void fn_8017F4A0(void)
     mr r31, r4
     stw r28, 0x14d4(r3)
     addi r3, r3, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     cmpwi r31, 0x4
     beq lbl_fn_8017F4A0_00000B6C
     cmpwi r31, 0x5

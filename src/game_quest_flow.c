@@ -29,7 +29,7 @@ extern void fn_80106728(void);
 extern void fn_8010743C(void);
 extern void fn_80107574(void);
 extern void fn_8012111C(void);
-extern void fn_80129A48(void);
+extern void path_resetWaypointVelocity(void);
 extern void fn_80129A6C(void);
 extern void fn_80147A18(void);
 extern void quest_checkCondition(void);
@@ -3115,7 +3115,7 @@ lbl_quest_updateFlow_00002AE8:
 lbl_quest_updateFlow_00002B34:
     lfs f1, lbl_80881A00
     addi r3, r26, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     addi r3, r26, 0x10d8
     bl fn_80129A6C
     cmpwi r27, 0x0

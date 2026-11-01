@@ -33,7 +33,7 @@ extern void fn_80212C34(void);
 extern void fn_8021C6A4(void);
 extern void world_getGlobalFlag(void);
 extern void gmk_findSlotByIndex(void);
-extern void fn_804A3C24(void);
+extern void net_initCoopSession(void);
 extern void fn_804A4CE4(void);
 extern void fn_804A7DD4(void);
 extern void fn_80584754(void);
@@ -2181,7 +2181,7 @@ lbl_fn_80597558_00001E80:
     lwz r3, lbl_8087F580
     li r5, 0x0
     lwz r4, 0x88(r24)
-    bl fn_804A3C24
+    bl net_initCoopSession
     b lbl_fn_80597558_00001FA8
 lbl_fn_80597558_00001EF8:
     lwz r17, lbl_8087F580
@@ -2191,7 +2191,7 @@ lbl_fn_80597558_00001EF8:
     mr r4, r3
     mr r3, r17
     li r5, 0x0
-    bl fn_804A3C24
+    bl net_initCoopSession
     b lbl_fn_80597558_00001FA8
 lbl_fn_80597558_00001F1C:
     lwz r3, 0x4(r17)
@@ -2220,7 +2220,7 @@ lbl_fn_80597558_00001F60:
     lwz r3, lbl_8087F580
     li r5, 0x0
     lwz r4, 0x84(r24)
-    bl fn_804A3C24
+    bl net_initCoopSession
     b lbl_fn_80597558_00001FA8
 lbl_fn_80597558_00001F88:
     lwz r17, lbl_8087F580
@@ -2230,7 +2230,7 @@ lbl_fn_80597558_00001F88:
     mr r4, r3
     mr r3, r17
     li r5, 0x0
-    bl fn_804A3C24
+    bl net_initCoopSession
 lbl_fn_80597558_00001FA8:
     addi r3, r1, 0x80
     li r4, 0x0

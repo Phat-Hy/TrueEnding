@@ -21,7 +21,7 @@ extern void fn_80127D8C(void);
 extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_evaluateConditions(void);
-extern void fn_80158CA4(void);
+extern void shop_loadCatalogItem(void);
 extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
@@ -1875,7 +1875,7 @@ lbl_fn_80336C8C_000019D8:
     stw r0, 0x14cc(r30)
 lbl_fn_80336C8C_00001A00:
     mr r3, r30
-    bl fn_80158CA4
+    bl shop_loadCatalogItem
     cmpwi r3, 0x0
     beq lbl_fn_80336C8C_00001C90
     lwz r0, 0xf80(r30)

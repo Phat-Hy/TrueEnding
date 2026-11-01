@@ -40,7 +40,7 @@ extern void fn_803B3C10(void);
 extern void fn_803CD918(void);
 extern void fn_803CE160(void);
 extern void fn_80470364(void);
-extern void fn_80470528(void);
+extern void boss_releaseLaserTarget(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_8049D52C(void);
@@ -1371,7 +1371,7 @@ lbl_fn_803BF9D4_0000118C:
     bl __destroy_new_array
     addic. r3, r30, 0x994
     beq lbl_fn_803BF9D4_000011B0
-    bl fn_80470528
+    bl boss_releaseLaserTarget
 lbl_fn_803BF9D4_000011B0:
     addic. r0, r30, 0x188
     beq lbl_fn_803BF9D4_000011D4

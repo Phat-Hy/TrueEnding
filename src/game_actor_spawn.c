@@ -41,7 +41,7 @@ extern void fn_803B8758(void);
 extern void fn_803B87A8(void);
 extern void fn_803BEAB4(void);
 extern void fn_80470364(void);
-extern void fn_80470528(void);
+extern void boss_releaseLaserTarget(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
@@ -106,7 +106,7 @@ void *fn_80116BAC(void *p);
 void fn_80116BB4(void);
 void fn_80116BB8(void);
 void fn_80116BC8(void);
-void fn_80116BD4(void);
+void actor_calcSpawnTransform(void);
 u32 fn_80116E64(void);
 void *fn_80116E6C(void *p);
 void fn_80116E74(void);
@@ -174,7 +174,7 @@ asm void fn_80116BC8(void)
     blr
 }
 
-asm void fn_80116BD4(void)
+asm void actor_calcSpawnTransform(void)
 {
     nofralloc
     stwu r1, -0x50(r1)
@@ -321,7 +321,7 @@ asm void fn_80116BD4(void)
     stfs f0, 0x78(r8)
     psq_st f1, 0x88(r8), 0, 0
     stfs f2, 0x90(r8)
-lbl_fn_80116BD4_0000027C:
+lbl_actor_calcSpawnTransform_0000027C:
     psq_l f1, 0x0(r6), 0, 0
     psq_st f1, 0x0(r5), 0, 0
     lfs f2, 0x8(r6)
@@ -331,7 +331,7 @@ lbl_fn_80116BD4_0000027C:
     stfs f0, 0xc(r5)
     addi r5, r5, 0x10
     cmplw r5, r0
-    blt lbl_fn_80116BD4_0000027C
+    blt lbl_actor_calcSpawnTransform_0000027C
     psq_l f31, 0x48(r1), 0, 0
     lfd f31, 0x40(r1)
     psq_l f30, 0x38(r1), 0, 0
@@ -1148,7 +1148,7 @@ lbl_fn_801177E8_00000CF0:
 lbl_fn_801177E8_00000D00:
     addic. r3, r30, 0x4ac
     beq lbl_fn_801177E8_00000D0C
-    bl fn_80470528
+    bl boss_releaseLaserTarget
 lbl_fn_801177E8_00000D0C:
     lis r4, atn_LH_Texture_destructAndFree@ha
     addi r3, r30, 0x17c
@@ -1330,7 +1330,7 @@ lbl_fn_80117A48_00000F50:
 lbl_fn_80117A48_00000F60:
     addic. r3, r30, 0x4ac
     beq lbl_fn_80117A48_00000F6C
-    bl fn_80470528
+    bl boss_releaseLaserTarget
 lbl_fn_80117A48_00000F6C:
     lis r4, atn_LH_Texture_destructAndFree@ha
     addi r3, r30, 0x17c
@@ -1559,7 +1559,7 @@ asm void fn_80117E34(void)
     stw r30, 0x8(r1)
     mr r30, r3
     beq lbl_fn_80117E34_000012D4
-    bl fn_80470528
+    bl boss_releaseLaserTarget
     cmpwi r31, 0x0
     ble lbl_fn_80117E34_000012D4
     mr r3, r30
@@ -1654,7 +1654,7 @@ lbl_fn_80117EF4_000013E0:
 lbl_fn_80117EF4_000013F0:
     addic. r3, r30, 0x4ac
     beq lbl_fn_80117EF4_000013FC
-    bl fn_80470528
+    bl boss_releaseLaserTarget
 lbl_fn_80117EF4_000013FC:
     lis r4, atn_LH_Texture_destructAndFree@ha
     addi r3, r30, 0x17c
@@ -2046,7 +2046,7 @@ lbl_fn_80117FE4_0000198C:
     cmpwi r21, 0x9
     blt lbl_fn_80117FE4_00001964
     addi r3, r24, 0x4ac
-    bl fn_80470528
+    bl boss_releaseLaserTarget
     li r3, 0x1
     b lbl_fn_80117FE4_00001A30
 lbl_fn_80117FE4_000019B8:

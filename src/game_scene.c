@@ -13,7 +13,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_getAllocSize(void);
 extern void minimap_renderOverlay(void);
-extern void fn_800902C0(void);
+extern void radar_addBlipEntry(void);
 extern void fn_800929C0(void);
 extern void fn_80093E90(void);
 extern void cursor_applyAnimationTrack(void);
@@ -78,7 +78,7 @@ void fn_8000DA00(void);
 void fn_8000DAF0(void);
 void fn_8000DB1C(void);
 void fn_8000DB24(void);
-void fn_8000DCF4(void);
+void scene_getCamera(void);
 void fn_8000DCFC(void);
 void fn_8000DD04(void);
 void *scene_getRootNode(void *obj);
@@ -724,7 +724,7 @@ lbl_scene_traverseNode_000008A4:
     lwz r4, 0x220(r31)
     mr r3, r31
     addi r5, r1, 0x8
-    bl fn_800902C0
+    bl radar_addBlipEntry
     addic. r3, r1, 0x8
     beq lbl_scene_traverseNode_000008F0
     lwz r4, 0x8(r1)
@@ -1288,7 +1288,7 @@ lbl_fn_8000DB24_00000F9C:
     cmpwi r3, 0x0
     beq lbl_fn_8000DB24_00000FE4
     bl scene_transformPoint
-    bl fn_8000DCF4
+    bl scene_getCamera
     mr r30, r3
     b lbl_fn_8000DB24_00000FE8
 lbl_fn_8000DB24_00000FE4:
@@ -1381,7 +1381,7 @@ lbl_fn_8000DB24_0000110C:
     blr
 }
 
-asm void fn_8000DCF4(void)
+asm void scene_getCamera(void)
 {
     nofralloc
     lwz r3, 0x48(r3)

@@ -48,7 +48,7 @@ extern void fn_8044386C(void);
 extern void fn_8044D0DC(void);
 extern void fn_8044D184(void);
 extern void fn_8046ECDC(void);
-extern void fn_80470528(void);
+extern void boss_releaseLaserTarget(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80547984(void);
 extern void fn_80547B58(void);
@@ -617,7 +617,7 @@ lbl_world_Manager_update_000006BC:
     cmpwi r3, 0x0
     bne lbl_world_Manager_update_00000CE4
     addi r3, r30, 0x5690
-    bl fn_80470528
+    bl boss_releaseLaserTarget
     lwz r5, 0x10dc(r30)
     mr r3, r30
     lwz r4, 0x48(r30)

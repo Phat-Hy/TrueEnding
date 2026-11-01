@@ -59,7 +59,7 @@ extern void fn_80444C50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_804A3C24(void);
+extern void net_initCoopSession(void);
 extern void fn_804A436C(void);
 extern void fn_804A4494(void);
 extern void fn_804A7DD4(void);
@@ -576,7 +576,7 @@ lbl_fn_8051B548_000005BC:
     lwz r3, lbl_8087F580
     li r5, 0x0
     lwz r4, 0xc(r4)
-    bl fn_804A3C24
+    bl net_initCoopSession
     b lbl_fn_8051B548_0000062C
 lbl_fn_8051B548_0000060C:
     lwz r31, lbl_8087F580
@@ -586,7 +586,7 @@ lbl_fn_8051B548_0000060C:
     mr r4, r3
     mr r3, r31
     li r5, 0x0
-    bl fn_804A3C24
+    bl net_initCoopSession
 lbl_fn_8051B548_0000062C:
     lwz r3, lbl_8087F0A8
     lwz r0, 0x488(r3)

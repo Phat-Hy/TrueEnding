@@ -16,7 +16,7 @@ extern void PSMTXConcat(void);
 
 /* Function declarations */
 void fn_800902BC(void);
-void fn_800902C0(void);
+void radar_addBlipEntry(void);
 void fn_800904E0(void);
 void fn_80090584(void);
 void fn_8009076C(void);
@@ -28,7 +28,7 @@ void fn_80090C58(void);
 void fn_800902BC(void) {
 }
 
-asm void fn_800902C0(void)
+asm void radar_addBlipEntry(void)
 {
     nofralloc
     stwu r1, -0xa0(r1)
@@ -45,12 +45,12 @@ asm void fn_800902C0(void)
     lwz r27, 0x16c(r4)
     lwz r28, 0x178(r4)
     cmpwi r27, 0x0
-    beq lbl_fn_800902C0_00000210
+    beq lbl_radar_addBlipEntry_00000210
     li r0, 0x0
     stw r0, 0x1c(r1)
     lwz r6, 0xb8(r3)
     cmpwi r6, 0x0
-    beq lbl_fn_800902C0_00000070
+    beq lbl_radar_addBlipEntry_00000070
     stw r6, 0x1c(r1)
     addi r4, r1, 0x20
     li r5, 0x0
@@ -58,7 +58,7 @@ asm void fn_800902C0(void)
     mtctr r12
     addi r3, r3, 0xbc
     bctrl
-lbl_fn_800902C0_00000070:
+lbl_radar_addBlipEntry_00000070:
     lwz r5, 0x34(r29)
     mr r4, r27
     lwz r8, 0xd4(r30)
@@ -68,28 +68,28 @@ lbl_fn_800902C0_00000070:
     addi r7, r1, 0x1c
     bl fn_800904E0
     addic. r3, r1, 0x1c
-    beq lbl_fn_800902C0_000000CC
+    beq lbl_radar_addBlipEntry_000000CC
     lwz r4, 0x1c(r1)
     cmpwi r4, 0x0
-    beq lbl_fn_800902C0_000000CC
+    beq lbl_radar_addBlipEntry_000000CC
     lwz r12, 0x0(r4)
     cmpwi r12, 0x0
-    beq lbl_fn_800902C0_000000C4
+    beq lbl_radar_addBlipEntry_000000C4
     addi r3, r3, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_800902C0_000000C4:
+lbl_radar_addBlipEntry_000000C4:
     li r0, 0x0
     stw r0, 0x1c(r1)
-lbl_fn_800902C0_000000CC:
+lbl_radar_addBlipEntry_000000CC:
     lwz r6, 0x0(r26)
     cmpwi r6, 0x0
-    beq lbl_fn_800902C0_00000148
+    beq lbl_radar_addBlipEntry_00000148
     li r0, 0x0
     stw r0, 0x8(r1)
-    beq lbl_fn_800902C0_00000100
+    beq lbl_radar_addBlipEntry_00000100
     stw r6, 0x8(r1)
     addi r3, r26, 0x4
     addi r4, r1, 0xc
@@ -97,84 +97,84 @@ lbl_fn_800902C0_000000CC:
     lwz r12, 0x0(r6)
     mtctr r12
     bctrl
-lbl_fn_800902C0_00000100:
+lbl_radar_addBlipEntry_00000100:
     addi r3, r1, 0x30
     addi r4, r1, 0x8
     bl fn_80090584
     addic. r3, r1, 0x8
-    beq lbl_fn_800902C0_00000148
+    beq lbl_radar_addBlipEntry_00000148
     lwz r4, 0x8(r1)
     cmpwi r4, 0x0
-    beq lbl_fn_800902C0_00000148
+    beq lbl_radar_addBlipEntry_00000148
     lwz r12, 0x0(r4)
     cmpwi r12, 0x0
-    beq lbl_fn_800902C0_00000140
+    beq lbl_radar_addBlipEntry_00000140
     addi r3, r3, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_800902C0_00000140:
+lbl_radar_addBlipEntry_00000140:
     li r0, 0x0
     stw r0, 0x8(r1)
-lbl_fn_800902C0_00000148:
+lbl_radar_addBlipEntry_00000148:
     lwz r4, 0xd8(r30)
     cmpwi r4, 0x0
-    beq lbl_fn_800902C0_00000168
+    beq lbl_radar_addBlipEntry_00000168
     lwz r3, 0xe8(r30)
     lwz r0, 0xe0(r30)
     stw r0, 0x40(r1)
     stw r4, 0x44(r1)
     stw r3, 0x3c(r1)
-lbl_fn_800902C0_00000168:
+lbl_radar_addBlipEntry_00000168:
     cmpwi r31, 0x0
-    bne lbl_fn_800902C0_00000180
+    bne lbl_radar_addBlipEntry_00000180
     mr r4, r29
     addi r3, r1, 0x30
     bl fn_8009A584
-    b lbl_fn_800902C0_00000190
-lbl_fn_800902C0_00000180:
+    b lbl_radar_addBlipEntry_00000190
+lbl_radar_addBlipEntry_00000180:
     mr r4, r29
     mr r5, r31
     addi r3, r1, 0x30
     bl fn_8009A5A8
-lbl_fn_800902C0_00000190:
+lbl_radar_addBlipEntry_00000190:
     addic. r3, r1, 0x5c
-    beq lbl_fn_800902C0_000001D0
-    beq lbl_fn_800902C0_000001D0
+    beq lbl_radar_addBlipEntry_000001D0
+    beq lbl_radar_addBlipEntry_000001D0
     lwz r4, 0x5c(r1)
     cmpwi r4, 0x0
-    beq lbl_fn_800902C0_000001D0
+    beq lbl_radar_addBlipEntry_000001D0
     lwz r12, 0x0(r4)
     cmpwi r12, 0x0
-    beq lbl_fn_800902C0_000001C8
+    beq lbl_radar_addBlipEntry_000001C8
     addi r3, r3, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_800902C0_000001C8:
+lbl_radar_addBlipEntry_000001C8:
     li r0, 0x0
     stw r0, 0x5c(r1)
-lbl_fn_800902C0_000001D0:
+lbl_radar_addBlipEntry_000001D0:
     addic. r3, r1, 0x48
-    beq lbl_fn_800902C0_00000210
-    beq lbl_fn_800902C0_00000210
+    beq lbl_radar_addBlipEntry_00000210
+    beq lbl_radar_addBlipEntry_00000210
     lwz r4, 0x48(r1)
     cmpwi r4, 0x0
-    beq lbl_fn_800902C0_00000210
+    beq lbl_radar_addBlipEntry_00000210
     lwz r12, 0x0(r4)
     cmpwi r12, 0x0
-    beq lbl_fn_800902C0_00000208
+    beq lbl_radar_addBlipEntry_00000208
     addi r3, r3, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_800902C0_00000208:
+lbl_radar_addBlipEntry_00000208:
     li r0, 0x0
     stw r0, 0x48(r1)
-lbl_fn_800902C0_00000210:
+lbl_radar_addBlipEntry_00000210:
     lmw r26, 0x88(r1)
     lwz r0, 0xa4(r1)
     mtlr r0

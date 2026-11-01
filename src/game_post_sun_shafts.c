@@ -21,7 +21,7 @@ extern void cam_findTargetIndex(void);
 extern void cam_destroyMsgHandle(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
-extern void fn_80103F60(void);
+extern void bsp_findLeafNode(void);
 extern void fn_80108378(void);
 extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
@@ -2551,7 +2551,7 @@ lbl_fn_802D0B84_00002330:
     bl quest_updateFlow
     lwz r3, lbl_8087F048
     mr r4, r31
-    bl fn_80103F60
+    bl bsp_findLeafNode
     lwz r4, lbl_8087F8A0
     mr r29, r3
     lfs f31, lbl_8088458C

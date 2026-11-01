@@ -17,7 +17,7 @@ extern void mem_free(void);
 extern void fn_800FDE60(void);
 extern void fn_80102890(void);
 extern void fn_80102A40(void);
-extern void fn_80103F60(void);
+extern void bsp_findLeafNode(void);
 extern void fn_801333E4(void);
 extern void fn_8014FCC4(void);
 extern void fn_8014FCE8(void);
@@ -1794,7 +1794,7 @@ lbl_fn_805B27A4_0000170C:
 lbl_fn_805B27A4_0000171C:
     lwz r3, lbl_8087F048
     lwz r4, 0x250(r24)
-    bl fn_80103F60
+    bl bsp_findLeafNode
     cmpwi r3, 0x0
     beq lbl_fn_805B27A4_000017CC
     addi r4, r1, 0x8

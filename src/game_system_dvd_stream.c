@@ -12,7 +12,7 @@ extern void item_useConsumable(void);
 extern void collision_queryGeometry(void);
 extern void item_testLineOfSight(void);
 extern void collision_testLineSegment(void);
-extern void fn_8006A250(void);
+extern void boss_dispatchActionTransition(void);
 extern void script_executeOpcode(void);
 extern void fn_80076FF8(void);
 extern void route_interpolatePath(void);
@@ -887,7 +887,7 @@ lbl_fn_803775DC_00000ABC:
     li r5, 0x0
     lis r6, 0xff00
     lwz r3, 0x20(r3)
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     stw r3, 0x28c(r29)
     li r4, 0x2
     li r0, 0x1

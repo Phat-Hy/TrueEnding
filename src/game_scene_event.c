@@ -17,7 +17,7 @@ extern void ref_releaseHandle(void);
 extern void fn_800FDE60(void);
 extern void fn_8010A308(void);
 extern void fn_80129978(void);
-extern void fn_80129A48(void);
+extern void path_resetWaypointVelocity(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_resetObjectiveBounds(void);
 extern void inventory_unequipItem(void);
@@ -1933,7 +1933,7 @@ asm void fn_801B07D4(void)
     bgt lbl_fn_801B07D4_000018E4
     lfs f1, lbl_80882388
     addi r3, r6, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     li r3, 0x1
     b lbl_fn_801B07D4_00001904
 lbl_fn_801B07D4_000018E4:

@@ -97,7 +97,7 @@ void fn_8006A004(void);
 void atn_FadeCommon_destructor(void);
 void fn_8006A0F4(void);
 void fn_8006A204(void);
-void fn_8006A250(void);
+void boss_dispatchActionTransition(void);
 void atn_FadeColor_destructor(void);
 void atn_FadeColor_draw(void);
 void fn_8006A5A8(void);
@@ -1647,7 +1647,7 @@ lbl_fn_8006A204_0000148C:
     blr
 }
 
-asm void fn_8006A250(void)
+asm void boss_dispatchActionTransition(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1668,7 +1668,7 @@ asm void fn_8006A250(void)
     bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
-    beq lbl_fn_8006A250_0000154C
+    beq lbl_boss_dispatchActionTransition_0000154C
     mr r4, r27
     bl atn_Task_constructor
     lis r4, lbl_80777B88@ha
@@ -1693,7 +1693,7 @@ asm void fn_8006A250(void)
     stfs f0, 0x74(r31)
     stw r3, 0x0(r31)
     stw r4, 0x78(r31)
-lbl_fn_8006A250_0000154C:
+lbl_boss_dispatchActionTransition_0000154C:
     addi r11, r1, 0x20
     mr r3, r31
     bl _restgpr_27

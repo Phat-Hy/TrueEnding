@@ -12,7 +12,7 @@ extern void vec3_assign(void);
 extern void vec3_add(void);
 extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
-extern void fn_8006A250(void);
+extern void boss_dispatchActionTransition(void);
 extern void gmk_LoadHandle_constructor(void);
 extern void fn_80076FF8(void);
 extern void fn_80079044(void);
@@ -53,7 +53,7 @@ extern void fn_803D6E3C(void);
 extern void fn_803D71C4(void);
 extern void fn_8046ECDC(void);
 extern void fn_80470364(void);
-extern void fn_80470528(void);
+extern void boss_releaseLaserTarget(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_8048A264(void);
@@ -550,7 +550,7 @@ lbl_fn_8052A8F0_000004C4:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     stw r3, 0x64(r29)
     li r0, -0x1
     addi r3, r29, 0x12b0
@@ -835,7 +835,7 @@ asm void fn_8052B014(void)
     beq lbl_fn_8052B014_00000B04
     addic. r3, r3, 0x134c
     beq lbl_fn_8052B014_000009DC
-    bl fn_80470528
+    bl boss_releaseLaserTarget
 lbl_fn_8052B014_000009DC:
     addic. r3, r29, 0x1344
     beq lbl_fn_8052B014_000009EC

@@ -23,7 +23,7 @@ extern void fn_801489CC(void);
 extern void dialog_renderWindow(void);
 extern void inventory_applyItemStats(void);
 extern void shop_canPurchaseItem(void);
-extern void fn_80158CA4(void);
+extern void shop_loadCatalogItem(void);
 extern void fn_8015DEC0(void);
 extern void party_initFormationSlots(void);
 extern void fn_801656A4(void);
@@ -1363,7 +1363,7 @@ lbl_fn_80253884_0000122C:
     cmpwi r0, 0x0
     beq lbl_fn_80253884_0000129C
     mr r3, r31
-    bl fn_80158CA4
+    bl shop_loadCatalogItem
     cmpwi r3, 0x0
     beq lbl_fn_80253884_0000129C
     mr r3, r31

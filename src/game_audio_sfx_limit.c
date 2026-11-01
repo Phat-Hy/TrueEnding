@@ -26,7 +26,7 @@ extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void fn_800902C0(void);
+extern void radar_addBlipEntry(void);
 extern void atn_Model_findBoneIndex(void);
 extern void compass_findMarkerByName(void);
 extern void fn_80094D88(void);
@@ -1563,7 +1563,7 @@ lbl_fn_80316A68_00001470:
     mr r3, r29
     addi r5, r1, 0x40
     li r4, 0x0
-    bl fn_800902C0
+    bl radar_addBlipEntry
     addi r3, r1, 0x40
     li r4, -0x1
     bl fn_8000D3A8

@@ -14,7 +14,7 @@ extern void fn_8004FF58(void);
 extern void fn_80070B60(void);
 extern void fn_80070C98(void);
 extern void gx_setRenderStateParam(void);
-extern void fn_800902C0(void);
+extern void radar_addBlipEntry(void);
 extern void atn_Model_updateMatrices(void);
 extern void fn_80091A90(void);
 extern void atn_Model_drawSubNodes(void);
@@ -362,7 +362,7 @@ lbl_fn_8008E304_0000042C:
     mr r3, r29
     addi r5, r1, 0x24
     li r4, 0x0
-    bl fn_800902C0
+    bl radar_addBlipEntry
     addic. r3, r1, 0x24
     beq lbl_fn_8008E304_000004A8
     lwz r4, 0x24(r1)

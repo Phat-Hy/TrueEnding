@@ -12,7 +12,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8006A250(void);
+extern void boss_dispatchActionTransition(void);
 extern void script_executeOpcode(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
@@ -2283,7 +2283,7 @@ lbl_fn_80529C74_00001D20:
     lwz r3, lbl_8087F430
     li r6, 0x0
     lwz r3, 0x20(r3)
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     li r7, 0x1
     stw r7, 0x68(r3)
     li r6, 0x0
@@ -2392,7 +2392,7 @@ lbl_fn_80529C74_00001EA0:
     li r5, 0x0
     li r6, 0x0
     lwz r3, 0x20(r3)
-    bl fn_8006A250
+    bl boss_dispatchActionTransition
     li r7, 0x1
     stw r7, 0x68(r3)
     li r6, 0x0

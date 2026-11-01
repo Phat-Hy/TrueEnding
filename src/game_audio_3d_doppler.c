@@ -17,7 +17,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void sound_playSpatialEffect(void);
 extern void fn_800EC1F4(void);
 extern void system_getNextSequenceId(void);
-extern void fn_80103F60(void);
+extern void bsp_findLeafNode(void);
 extern void fn_801079C0(void);
 extern void fn_80107A68(void);
 extern void fn_80108378(void);
@@ -25,7 +25,7 @@ extern void phys_scaleGravity(void);
 extern void fn_8011BF3C(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80129978(void);
-extern void fn_80129A48(void);
+extern void path_resetWaypointVelocity(void);
 extern void fn_80133130(void);
 extern void actor_testBitFlag(void);
 extern void fn_80133EE8(void);
@@ -563,7 +563,7 @@ lbl_fn_80323690_0000054C:
 lbl_fn_80323690_0000057C:
     lfs f1, lbl_80884F28
     addi r3, r30, 0x10d8
-    bl fn_80129A48
+    bl path_resetWaypointVelocity
     b lbl_fn_80323690_000005B8
 lbl_fn_80323690_0000058C:
     lwz r3, 0x14bc(r30)
@@ -595,7 +595,7 @@ lbl_fn_80323690_000005D4:
 lbl_fn_80323690_000005EC:
     bl npc_getGlobalManager
     mr r4, r29
-    bl fn_80103F60
+    bl bsp_findLeafNode
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_80323690_00000640
