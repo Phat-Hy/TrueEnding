@@ -30,9 +30,9 @@ extern u32 lbl_80882CB0;
 extern u32 lbl_80882CB4;
 
 /* Function declarations */
-void fn_801F9FB0(void);
+void player_updateEquipment(void);
 
-asm void fn_801F9FB0(void)
+asm void player_updateEquipment(void)
 {
     nofralloc
     stwu r1, -0xc0(r1)
@@ -43,20 +43,20 @@ asm void fn_801F9FB0(void)
     mr r31, r3
     bl fn_801EDC78
     cmpwi r3, 0x0
-    beq lbl_fn_801F9FB0_00003568
+    beq lbl_player_updateEquipment_00003568
     addi r3, r31, 0x194
     bl atn_LH_Texture_update
     cmpwi r3, 0x0
-    bne lbl_fn_801F9FB0_00003568
+    bne lbl_player_updateEquipment_00003568
     lwz r0, 0x10(r31)
     rlwinm r0, r0, 0, 28, 28
     cmplwi r0, 0x8
-    bne lbl_fn_801F9FB0_00000054
+    bne lbl_player_updateEquipment_00000054
     addi r3, r31, 0x1c4
     bl atn_LH_Texture_update
     cmpwi r3, 0x0
-    bne lbl_fn_801F9FB0_00003568
-lbl_fn_801F9FB0_00000054:
+    bne lbl_player_updateEquipment_00003568
+lbl_player_updateEquipment_00000054:
     lfs f0, lbl_80882CA0
     li r0, 0x0
     stfs f0, 0x88(r1)
@@ -87,28 +87,28 @@ lbl_fn_801F9FB0_00000054:
     lwz r3, 0xfc(r31)
     lwz r12, 0xa4(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_801F9FB0_00000108
+    beq lbl_player_updateEquipment_00000108
     lhz r0, 0xe(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_801F9FB0_000000F4
+    bne lbl_player_updateEquipment_000000F4
     mr r3, r31
     addi r4, r1, 0x60
     li r5, 0x0
     mtctr r12
     bctrl
-    b lbl_fn_801F9FB0_00000108
-lbl_fn_801F9FB0_000000F4:
+    b lbl_player_updateEquipment_00000108
+lbl_player_updateEquipment_000000F4:
     mr r3, r31
     addi r4, r1, 0x60
     addi r5, r1, 0x30
     mtctr r12
     bctrl
-lbl_fn_801F9FB0_00000108:
+lbl_player_updateEquipment_00000108:
     lfs f4, 0x6c(r1)
     lfs f3, lbl_80882CA0
     fcmpo cr0, f4, f3
     cror eq, lt, eq
-    beq lbl_fn_801F9FB0_00003568
+    beq lbl_player_updateEquipment_00003568
     lfs f1, 0x3c(r1)
     lfs f2, 0x60(r1)
     lfs f0, lbl_80882CA4
@@ -116,87 +116,87 @@ lbl_fn_801F9FB0_00000108:
     fcmpo cr0, f2, f0
     stfs f1, 0x3c(r1)
     cror eq, gt, eq
-    bne lbl_fn_801F9FB0_00000144
+    bne lbl_player_updateEquipment_00000144
     li r30, 0xff
-    b lbl_fn_801F9FB0_0000016C
-lbl_fn_801F9FB0_00000144:
+    b lbl_player_updateEquipment_0000016C
+lbl_player_updateEquipment_00000144:
     fcmpo cr0, f2, f3
     cror eq, lt, eq
-    bne lbl_fn_801F9FB0_00000158
+    bne lbl_player_updateEquipment_00000158
     li r3, 0x0
-    b lbl_fn_801F9FB0_00000168
-lbl_fn_801F9FB0_00000158:
+    b lbl_player_updateEquipment_00000168
+lbl_player_updateEquipment_00000158:
     lfs f1, lbl_80882CAC
     lfs f0, lbl_80882CA8
     fmadds f1, f1, f2, f0
     bl fn_80695D84
-lbl_fn_801F9FB0_00000168:
+lbl_player_updateEquipment_00000168:
     mr r30, r3
-lbl_fn_801F9FB0_0000016C:
+lbl_player_updateEquipment_0000016C:
     lfs f2, 0x64(r1)
     lfs f0, lbl_80882CA4
     fcmpo cr0, f2, f0
     cror eq, gt, eq
-    bne lbl_fn_801F9FB0_00000188
+    bne lbl_player_updateEquipment_00000188
     li r29, 0xff
-    b lbl_fn_801F9FB0_000001B4
-lbl_fn_801F9FB0_00000188:
+    b lbl_player_updateEquipment_000001B4
+lbl_player_updateEquipment_00000188:
     lfs f0, lbl_80882CA0
     fcmpo cr0, f2, f0
     cror eq, lt, eq
-    bne lbl_fn_801F9FB0_000001A0
+    bne lbl_player_updateEquipment_000001A0
     li r3, 0x0
-    b lbl_fn_801F9FB0_000001B0
-lbl_fn_801F9FB0_000001A0:
+    b lbl_player_updateEquipment_000001B0
+lbl_player_updateEquipment_000001A0:
     lfs f1, lbl_80882CAC
     lfs f0, lbl_80882CA8
     fmadds f1, f1, f2, f0
     bl fn_80695D84
-lbl_fn_801F9FB0_000001B0:
+lbl_player_updateEquipment_000001B0:
     mr r29, r3
-lbl_fn_801F9FB0_000001B4:
+lbl_player_updateEquipment_000001B4:
     lfs f2, 0x68(r1)
     lfs f0, lbl_80882CA4
     fcmpo cr0, f2, f0
     cror eq, gt, eq
-    bne lbl_fn_801F9FB0_000001D0
+    bne lbl_player_updateEquipment_000001D0
     li r28, 0xff
-    b lbl_fn_801F9FB0_000001FC
-lbl_fn_801F9FB0_000001D0:
+    b lbl_player_updateEquipment_000001FC
+lbl_player_updateEquipment_000001D0:
     lfs f0, lbl_80882CA0
     fcmpo cr0, f2, f0
     cror eq, lt, eq
-    bne lbl_fn_801F9FB0_000001E8
+    bne lbl_player_updateEquipment_000001E8
     li r3, 0x0
-    b lbl_fn_801F9FB0_000001F8
-lbl_fn_801F9FB0_000001E8:
+    b lbl_player_updateEquipment_000001F8
+lbl_player_updateEquipment_000001E8:
     lfs f1, lbl_80882CAC
     lfs f0, lbl_80882CA8
     fmadds f1, f1, f2, f0
     bl fn_80695D84
-lbl_fn_801F9FB0_000001F8:
+lbl_player_updateEquipment_000001F8:
     mr r28, r3
-lbl_fn_801F9FB0_000001FC:
+lbl_player_updateEquipment_000001FC:
     lfs f2, 0x6c(r1)
     lfs f0, lbl_80882CA4
     fcmpo cr0, f2, f0
     cror eq, gt, eq
-    bne lbl_fn_801F9FB0_00000218
+    bne lbl_player_updateEquipment_00000218
     li r3, 0xff
-    b lbl_fn_801F9FB0_00000240
-lbl_fn_801F9FB0_00000218:
+    b lbl_player_updateEquipment_00000240
+lbl_player_updateEquipment_00000218:
     lfs f0, lbl_80882CA0
     fcmpo cr0, f2, f0
     cror eq, lt, eq
-    bne lbl_fn_801F9FB0_00000230
+    bne lbl_player_updateEquipment_00000230
     li r3, 0x0
-    b lbl_fn_801F9FB0_00000240
-lbl_fn_801F9FB0_00000230:
+    b lbl_player_updateEquipment_00000240
+lbl_player_updateEquipment_00000230:
     lfs f1, lbl_80882CAC
     lfs f0, lbl_80882CA8
     fmadds f1, f1, f2, f0
     bl fn_80695D84
-lbl_fn_801F9FB0_00000240:
+lbl_player_updateEquipment_00000240:
     lfs f2, 0x30(r1)
     slwi r3, r3, 24
     lfs f0, lbl_80882CA4
@@ -207,88 +207,88 @@ lbl_fn_801F9FB0_00000240:
     or r0, r0, r3
     or r27, r28, r0
     cror eq, gt, eq
-    bne lbl_fn_801F9FB0_00000274
+    bne lbl_player_updateEquipment_00000274
     li r28, 0xff
-    b lbl_fn_801F9FB0_000002A0
-lbl_fn_801F9FB0_00000274:
+    b lbl_player_updateEquipment_000002A0
+lbl_player_updateEquipment_00000274:
     lfs f0, lbl_80882CA0
     fcmpo cr0, f2, f0
     cror eq, lt, eq
-    bne lbl_fn_801F9FB0_0000028C
+    bne lbl_player_updateEquipment_0000028C
     li r3, 0x0
-    b lbl_fn_801F9FB0_0000029C
-lbl_fn_801F9FB0_0000028C:
+    b lbl_player_updateEquipment_0000029C
+lbl_player_updateEquipment_0000028C:
     lfs f1, lbl_80882CAC
     lfs f0, lbl_80882CA8
     fmadds f1, f1, f2, f0
     bl fn_80695D84
-lbl_fn_801F9FB0_0000029C:
+lbl_player_updateEquipment_0000029C:
     mr r28, r3
-lbl_fn_801F9FB0_000002A0:
+lbl_player_updateEquipment_000002A0:
     lfs f2, 0x34(r1)
     lfs f0, lbl_80882CA4
     fcmpo cr0, f2, f0
     cror eq, gt, eq
-    bne lbl_fn_801F9FB0_000002BC
+    bne lbl_player_updateEquipment_000002BC
     li r29, 0xff
-    b lbl_fn_801F9FB0_000002E8
-lbl_fn_801F9FB0_000002BC:
+    b lbl_player_updateEquipment_000002E8
+lbl_player_updateEquipment_000002BC:
     lfs f0, lbl_80882CA0
     fcmpo cr0, f2, f0
     cror eq, lt, eq
-    bne lbl_fn_801F9FB0_000002D4
+    bne lbl_player_updateEquipment_000002D4
     li r3, 0x0
-    b lbl_fn_801F9FB0_000002E4
-lbl_fn_801F9FB0_000002D4:
+    b lbl_player_updateEquipment_000002E4
+lbl_player_updateEquipment_000002D4:
     lfs f1, lbl_80882CAC
     lfs f0, lbl_80882CA8
     fmadds f1, f1, f2, f0
     bl fn_80695D84
-lbl_fn_801F9FB0_000002E4:
+lbl_player_updateEquipment_000002E4:
     mr r29, r3
-lbl_fn_801F9FB0_000002E8:
+lbl_player_updateEquipment_000002E8:
     lfs f2, 0x38(r1)
     lfs f0, lbl_80882CA4
     fcmpo cr0, f2, f0
     cror eq, gt, eq
-    bne lbl_fn_801F9FB0_00000304
+    bne lbl_player_updateEquipment_00000304
     li r30, 0xff
-    b lbl_fn_801F9FB0_00000330
-lbl_fn_801F9FB0_00000304:
+    b lbl_player_updateEquipment_00000330
+lbl_player_updateEquipment_00000304:
     lfs f0, lbl_80882CA0
     fcmpo cr0, f2, f0
     cror eq, lt, eq
-    bne lbl_fn_801F9FB0_0000031C
+    bne lbl_player_updateEquipment_0000031C
     li r3, 0x0
-    b lbl_fn_801F9FB0_0000032C
-lbl_fn_801F9FB0_0000031C:
+    b lbl_player_updateEquipment_0000032C
+lbl_player_updateEquipment_0000031C:
     lfs f1, lbl_80882CAC
     lfs f0, lbl_80882CA8
     fmadds f1, f1, f2, f0
     bl fn_80695D84
-lbl_fn_801F9FB0_0000032C:
+lbl_player_updateEquipment_0000032C:
     mr r30, r3
-lbl_fn_801F9FB0_00000330:
+lbl_player_updateEquipment_00000330:
     lfs f2, 0x3c(r1)
     lfs f0, lbl_80882CA4
     fcmpo cr0, f2, f0
     cror eq, gt, eq
-    bne lbl_fn_801F9FB0_0000034C
+    bne lbl_player_updateEquipment_0000034C
     li r3, 0xff
-    b lbl_fn_801F9FB0_00000374
-lbl_fn_801F9FB0_0000034C:
+    b lbl_player_updateEquipment_00000374
+lbl_player_updateEquipment_0000034C:
     lfs f0, lbl_80882CA0
     fcmpo cr0, f2, f0
     cror eq, lt, eq
-    bne lbl_fn_801F9FB0_00000364
+    bne lbl_player_updateEquipment_00000364
     li r3, 0x0
-    b lbl_fn_801F9FB0_00000374
-lbl_fn_801F9FB0_00000364:
+    b lbl_player_updateEquipment_00000374
+lbl_player_updateEquipment_00000364:
     lfs f1, lbl_80882CAC
     lfs f0, lbl_80882CA8
     fmadds f1, f1, f2, f0
     bl fn_80695D84
-lbl_fn_801F9FB0_00000374:
+lbl_player_updateEquipment_00000374:
     lwz r7, 0x10(r31)
     slwi r6, r3, 24
     slwi r5, r28, 16
@@ -300,13 +300,13 @@ lbl_fn_801F9FB0_00000374:
     or r4, r4, r5
     cmplwi r0, 0x1
     or r28, r30, r4
-    beq lbl_fn_801F9FB0_00001908
+    beq lbl_player_updateEquipment_00001908
     rlwinm r0, r7, 0, 28, 28
     cmplwi r0, 0x8
-    beq lbl_fn_801F9FB0_00000C80
+    beq lbl_player_updateEquipment_00000C80
     lwz r6, 0x2c(r1)
     cmpwi r6, 0x0
-    blt lbl_fn_801F9FB0_00000854
+    blt lbl_player_updateEquipment_00000854
     lfs f0, 0x5c(r1)
     mr r4, r27
     stfs f0, 0x8(r1)
@@ -323,7 +323,7 @@ lbl_fn_801F9FB0_00000374:
     bl fn_8005E3E4
     lhz r0, 0xe(r31)
     cmplwi r0, 0x1
-    bne lbl_fn_801F9FB0_0000045C
+    bne lbl_player_updateEquipment_0000045C
     lfs f0, 0x5c(r1)
     mr r4, r28
     stfs f0, 0x8(r1)
@@ -346,10 +346,10 @@ lbl_fn_801F9FB0_00000374:
     lfs f8, 0x58(r1)
     lwz r6, 0x2c(r1)
     bl fn_8005E3E4
-    b lbl_fn_801F9FB0_00003568
-lbl_fn_801F9FB0_0000045C:
+    b lbl_player_updateEquipment_00003568
+lbl_player_updateEquipment_0000045C:
     cmplwi r0, 0x2
-    bne lbl_fn_801F9FB0_000005A8
+    bne lbl_player_updateEquipment_000005A8
     lfs f0, 0x5c(r1)
     mr r4, r28
     stfs f0, 0x8(r1)
@@ -430,10 +430,10 @@ lbl_fn_801F9FB0_0000045C:
     lfs f8, 0x58(r1)
     lwz r6, 0x2c(r1)
     bl fn_8005E3E4
-    b lbl_fn_801F9FB0_00003568
-lbl_fn_801F9FB0_000005A8:
+    b lbl_player_updateEquipment_00003568
+lbl_player_updateEquipment_000005A8:
     cmplwi r0, 0x3
-    bne lbl_fn_801F9FB0_00003568
+    bne lbl_player_updateEquipment_00003568
     lfs f0, 0x5c(r1)
     mr r4, r28
     stfs f0, 0x8(r1)
@@ -602,8 +602,8 @@ lbl_fn_801F9FB0_000005A8:
     lfs f8, 0x58(r1)
     lwz r6, 0x2c(r1)
     bl fn_8005E3E4
-    b lbl_fn_801F9FB0_00003568
-lbl_fn_801F9FB0_00000854:
+    b lbl_player_updateEquipment_00003568
+lbl_player_updateEquipment_00000854:
     lfs f0, 0x5c(r1)
     mr r4, r27
     stfs f0, 0x8(r1)
@@ -619,7 +619,7 @@ lbl_fn_801F9FB0_00000854:
     bl fn_8005F90C
     lhz r0, 0xe(r31)
     cmplwi r0, 0x1
-    bne lbl_fn_801F9FB0_000008E8
+    bne lbl_player_updateEquipment_000008E8
     lfs f0, 0x5c(r1)
     mr r4, r28
     stfs f0, 0x8(r1)
@@ -640,10 +640,10 @@ lbl_fn_801F9FB0_00000854:
     lfs f7, 0x54(r1)
     lfs f8, 0x58(r1)
     bl fn_8005F90C
-    b lbl_fn_801F9FB0_00003568
-lbl_fn_801F9FB0_000008E8:
+    b lbl_player_updateEquipment_00003568
+lbl_player_updateEquipment_000008E8:
     cmplwi r0, 0x2
-    bne lbl_fn_801F9FB0_00000A14
+    bne lbl_player_updateEquipment_00000A14
     lfs f0, 0x5c(r1)
     mr r4, r28
     stfs f0, 0x8(r1)
@@ -716,10 +716,10 @@ lbl_fn_801F9FB0_000008E8:
     lfs f7, 0x54(r1)
     lfs f8, 0x58(r1)
     bl fn_8005F90C
-    b lbl_fn_801F9FB0_00003568
-lbl_fn_801F9FB0_00000A14:
+    b lbl_player_updateEquipment_00003568
+lbl_player_updateEquipment_00000A14:
     cmplwi r0, 0x3
-    bne lbl_fn_801F9FB0_00003568
+    bne lbl_player_updateEquipment_00003568
     lfs f0, 0x5c(r1)
     mr r4, r28
     stfs f0, 0x8(r1)
@@ -872,11 +872,11 @@ lbl_fn_801F9FB0_00000A14:
     lfs f7, 0x54(r1)
     lfs f8, 0x58(r1)
     bl fn_8005F90C
-    b lbl_fn_801F9FB0_00003568
-lbl_fn_801F9FB0_00000C80:
+    b lbl_player_updateEquipment_00003568
+lbl_player_updateEquipment_00000C80:
     lwz r7, 0x2c(r1)
     cmpwi r7, 0x0
-    blt lbl_fn_801F9FB0_000012E4
+    blt lbl_player_updateEquipment_000012E4
     lfs f0, 0x5c(r1)
     mr r4, r27
     stfs f0, 0x8(r1)
@@ -901,7 +901,7 @@ lbl_fn_801F9FB0_00000C80:
     bl fn_8005E838
     lhz r0, 0xe(r31)
     cmplwi r0, 0x1
-    bne lbl_fn_801F9FB0_00000D6C
+    bne lbl_player_updateEquipment_00000D6C
     lfs f0, 0x5c(r1)
     mr r4, r28
     stfs f0, 0x8(r1)
@@ -932,10 +932,10 @@ lbl_fn_801F9FB0_00000C80:
     lfs f8, 0x58(r1)
     lwz r7, 0x2c(r1)
     bl fn_8005E838
-    b lbl_fn_801F9FB0_00003568
-lbl_fn_801F9FB0_00000D6C:
+    b lbl_player_updateEquipment_00003568
+lbl_player_updateEquipment_00000D6C:
     cmplwi r0, 0x2
-    bne lbl_fn_801F9FB0_00000F38
+    bne lbl_player_updateEquipment_00000F38
     lfs f0, 0x5c(r1)
     mr r4, r28
     stfs f0, 0x8(r1)
@@ -1048,10 +1048,10 @@ lbl_fn_801F9FB0_00000D6C:
     lfs f8, 0x58(r1)
     lwz r7, 0x2c(r1)
     bl fn_8005E838
-    b lbl_fn_801F9FB0_00003568
-lbl_fn_801F9FB0_00000F38:
+    b lbl_player_updateEquipment_00003568
+lbl_player_updateEquipment_00000F38:
     cmplwi r0, 0x3
-    bne lbl_fn_801F9FB0_00003568
+    bne lbl_player_updateEquipment_00003568
     lfs f0, 0x5c(r1)
     mr r4, r28
     stfs f0, 0x8(r1)
@@ -1284,8 +1284,8 @@ lbl_fn_801F9FB0_00000F38:
     lfs f8, 0x58(r1)
     lwz r7, 0x2c(r1)
     bl fn_8005E838
-    b lbl_fn_801F9FB0_00003568
-lbl_fn_801F9FB0_000012E4:
+    b lbl_player_updateEquipment_00003568
+lbl_player_updateEquipment_000012E4:
     lfs f0, 0x5c(r1)
     mr r4, r27
     stfs f0, 0x8(r1)
@@ -1310,7 +1310,7 @@ lbl_fn_801F9FB0_000012E4:
     bl fn_8005FD80
     lhz r0, 0xe(r31)
     cmplwi r0, 0x1
-    bne lbl_fn_801F9FB0_000013C0
+    bne lbl_player_updateEquipment_000013C0
     lfs f0, 0x5c(r1)
     mr r4, r28
     stfs f0, 0x8(r1)
@@ -1340,10 +1340,10 @@ lbl_fn_801F9FB0_000012E4:
     lfs f7, 0x54(r1)
     lfs f8, 0x58(r1)
     bl fn_8005FD80
-    b lbl_fn_801F9FB0_00003568
-lbl_fn_801F9FB0_000013C0:
+    b lbl_player_updateEquipment_00003568
+lbl_player_updateEquipment_000013C0:
     cmplwi r0, 0x2
-    bne lbl_fn_801F9FB0_0000157C
+    bne lbl_player_updateEquipment_0000157C
     lfs f0, 0x5c(r1)
     mr r4, r28
     stfs f0, 0x8(r1)
@@ -1452,10 +1452,10 @@ lbl_fn_801F9FB0_000013C0:
     lfs f7, 0x54(r1)
     lfs f8, 0x58(r1)
     bl fn_8005FD80
-    b lbl_fn_801F9FB0_00003568
-lbl_fn_801F9FB0_0000157C:
+    b lbl_player_updateEquipment_00003568
+lbl_player_updateEquipment_0000157C:
     cmplwi r0, 0x3
-    bne lbl_fn_801F9FB0_00003568
+    bne lbl_player_updateEquipment_00003568
     lfs f0, 0x5c(r1)
     mr r4, r28
     stfs f0, 0x8(r1)
@@ -1680,14 +1680,14 @@ lbl_fn_801F9FB0_0000157C:
     lfs f7, 0x54(r1)
     lfs f8, 0x58(r1)
     bl fn_8005FD80
-    b lbl_fn_801F9FB0_00003568
-lbl_fn_801F9FB0_00001908:
+    b lbl_player_updateEquipment_00003568
+lbl_player_updateEquipment_00001908:
     rlwinm r0, r7, 0, 28, 28
     cmplwi r0, 0x8
-    beq lbl_fn_801F9FB0_00002564
+    beq lbl_player_updateEquipment_00002564
     lwz r6, 0x2c(r1)
     cmpwi r6, 0x0
-    blt lbl_fn_801F9FB0_00001F78
+    blt lbl_player_updateEquipment_00001F78
     lfs f2, 0x28(r1)
     mr r4, r27
     lfs f0, 0x50(r1)
@@ -1712,7 +1712,7 @@ lbl_fn_801F9FB0_00001908:
     bl fn_8005EEA0
     lhz r0, 0xe(r31)
     cmplwi r0, 0x1
-    bne lbl_fn_801F9FB0_00001A00
+    bne lbl_player_updateEquipment_00001A00
     lfs f2, 0x28(r1)
     mr r4, r28
     lfs f0, 0x50(r1)
@@ -1743,10 +1743,10 @@ lbl_fn_801F9FB0_00001908:
     lfs f7, 0xb4(r31)
     lwz r6, 0x2c(r1)
     bl fn_8005EEA0
-    b lbl_fn_801F9FB0_00003568
-lbl_fn_801F9FB0_00001A00:
+    b lbl_player_updateEquipment_00003568
+lbl_player_updateEquipment_00001A00:
     cmplwi r0, 0x2
-    bne lbl_fn_801F9FB0_00001BCC
+    bne lbl_player_updateEquipment_00001BCC
     lfs f2, 0x28(r1)
     mr r4, r28
     lfs f0, 0x50(r1)
@@ -1859,10 +1859,10 @@ lbl_fn_801F9FB0_00001A00:
     lfs f7, 0xb4(r31)
     lwz r6, 0x2c(r1)
     bl fn_8005EEA0
-    b lbl_fn_801F9FB0_00003568
-lbl_fn_801F9FB0_00001BCC:
+    b lbl_player_updateEquipment_00003568
+lbl_player_updateEquipment_00001BCC:
     cmplwi r0, 0x3
-    bne lbl_fn_801F9FB0_00003568
+    bne lbl_player_updateEquipment_00003568
     lfs f2, 0x28(r1)
     mr r4, r28
     lfs f0, 0x50(r1)
@@ -2095,8 +2095,8 @@ lbl_fn_801F9FB0_00001BCC:
     lfs f7, 0xb4(r31)
     lwz r6, 0x2c(r1)
     bl fn_8005EEA0
-    b lbl_fn_801F9FB0_00003568
-lbl_fn_801F9FB0_00001F78:
+    b lbl_player_updateEquipment_00003568
+lbl_player_updateEquipment_00001F78:
     lfs f2, 0x28(r1)
     mr r4, r27
     lfs f0, 0x50(r1)
@@ -2120,7 +2120,7 @@ lbl_fn_801F9FB0_00001F78:
     bl fn_800602E8
     lhz r0, 0xe(r31)
     cmplwi r0, 0x1
-    bne lbl_fn_801F9FB0_0000204C
+    bne lbl_player_updateEquipment_0000204C
     lfs f2, 0x28(r1)
     mr r4, r28
     lfs f0, 0x50(r1)
@@ -2149,10 +2149,10 @@ lbl_fn_801F9FB0_00001F78:
     lfs f6, 0xb0(r31)
     lfs f7, 0xb4(r31)
     bl fn_800602E8
-    b lbl_fn_801F9FB0_00003568
-lbl_fn_801F9FB0_0000204C:
+    b lbl_player_updateEquipment_00003568
+lbl_player_updateEquipment_0000204C:
     cmplwi r0, 0x2
-    bne lbl_fn_801F9FB0_000021F8
+    bne lbl_player_updateEquipment_000021F8
     lfs f2, 0x28(r1)
     mr r4, r28
     lfs f0, 0x50(r1)
@@ -2257,10 +2257,10 @@ lbl_fn_801F9FB0_0000204C:
     lfs f6, 0xb0(r31)
     lfs f7, 0xb4(r31)
     bl fn_800602E8
-    b lbl_fn_801F9FB0_00003568
-lbl_fn_801F9FB0_000021F8:
+    b lbl_player_updateEquipment_00003568
+lbl_player_updateEquipment_000021F8:
     cmplwi r0, 0x3
-    bne lbl_fn_801F9FB0_00003568
+    bne lbl_player_updateEquipment_00003568
     lfs f2, 0x28(r1)
     mr r4, r28
     lfs f0, 0x50(r1)
@@ -2477,11 +2477,11 @@ lbl_fn_801F9FB0_000021F8:
     lfs f6, 0xb0(r31)
     lfs f7, 0xb4(r31)
     bl fn_800602E8
-    b lbl_fn_801F9FB0_00003568
-lbl_fn_801F9FB0_00002564:
+    b lbl_player_updateEquipment_00003568
+lbl_player_updateEquipment_00002564:
     lwz r7, 0x2c(r1)
     cmpwi r7, 0x0
-    blt lbl_fn_801F9FB0_00002D88
+    blt lbl_player_updateEquipment_00002D88
     lfs f2, 0x28(r1)
     mr r4, r27
     lfs f0, 0x50(r1)
@@ -2514,7 +2514,7 @@ lbl_fn_801F9FB0_00002564:
     bl fn_8005F36C
     lhz r0, 0xe(r31)
     cmplwi r0, 0x1
-    bne lbl_fn_801F9FB0_00002690
+    bne lbl_player_updateEquipment_00002690
     lfs f2, 0x28(r1)
     mr r4, r28
     lfs f0, 0x50(r1)
@@ -2553,10 +2553,10 @@ lbl_fn_801F9FB0_00002564:
     lfs f7, 0xb4(r31)
     lwz r7, 0x2c(r1)
     bl fn_8005F36C
-    b lbl_fn_801F9FB0_00003568
-lbl_fn_801F9FB0_00002690:
+    b lbl_player_updateEquipment_00003568
+lbl_player_updateEquipment_00002690:
     cmplwi r0, 0x2
-    bne lbl_fn_801F9FB0_000028DC
+    bne lbl_player_updateEquipment_000028DC
     lfs f2, 0x28(r1)
     mr r4, r28
     lfs f0, 0x50(r1)
@@ -2701,10 +2701,10 @@ lbl_fn_801F9FB0_00002690:
     lfs f7, 0xb4(r31)
     lwz r7, 0x2c(r1)
     bl fn_8005F36C
-    b lbl_fn_801F9FB0_00003568
-lbl_fn_801F9FB0_000028DC:
+    b lbl_player_updateEquipment_00003568
+lbl_player_updateEquipment_000028DC:
     cmplwi r0, 0x3
-    bne lbl_fn_801F9FB0_00003568
+    bne lbl_player_updateEquipment_00003568
     lfs f2, 0x28(r1)
     mr r4, r28
     lfs f0, 0x50(r1)
@@ -3001,8 +3001,8 @@ lbl_fn_801F9FB0_000028DC:
     lfs f7, 0xb4(r31)
     lwz r7, 0x2c(r1)
     bl fn_8005F36C
-    b lbl_fn_801F9FB0_00003568
-lbl_fn_801F9FB0_00002D88:
+    b lbl_player_updateEquipment_00003568
+lbl_player_updateEquipment_00002D88:
     lfs f2, 0x28(r1)
     mr r4, r27
     lfs f0, 0x50(r1)
@@ -3035,7 +3035,7 @@ lbl_fn_801F9FB0_00002D88:
     bl fn_800607C0
     lhz r0, 0xe(r31)
     cmplwi r0, 0x1
-    bne lbl_fn_801F9FB0_00002EA4
+    bne lbl_player_updateEquipment_00002EA4
     lfs f2, 0x28(r1)
     mr r4, r28
     lfs f0, 0x50(r1)
@@ -3073,10 +3073,10 @@ lbl_fn_801F9FB0_00002D88:
     lfs f6, 0xb0(r31)
     lfs f7, 0xb4(r31)
     bl fn_800607C0
-    b lbl_fn_801F9FB0_00003568
-lbl_fn_801F9FB0_00002EA4:
+    b lbl_player_updateEquipment_00003568
+lbl_player_updateEquipment_00002EA4:
     cmplwi r0, 0x2
-    bne lbl_fn_801F9FB0_000030E0
+    bne lbl_player_updateEquipment_000030E0
     lfs f2, 0x28(r1)
     mr r4, r28
     lfs f0, 0x50(r1)
@@ -3217,10 +3217,10 @@ lbl_fn_801F9FB0_00002EA4:
     lfs f6, 0xb0(r31)
     lfs f7, 0xb4(r31)
     bl fn_800607C0
-    b lbl_fn_801F9FB0_00003568
-lbl_fn_801F9FB0_000030E0:
+    b lbl_player_updateEquipment_00003568
+lbl_player_updateEquipment_000030E0:
     cmplwi r0, 0x3
-    bne lbl_fn_801F9FB0_00003568
+    bne lbl_player_updateEquipment_00003568
     lfs f2, 0x28(r1)
     mr r4, r28
     lfs f0, 0x50(r1)
@@ -3509,7 +3509,7 @@ lbl_fn_801F9FB0_000030E0:
     lfs f6, 0xb0(r31)
     lfs f7, 0xb4(r31)
     bl fn_800607C0
-lbl_fn_801F9FB0_00003568:
+lbl_player_updateEquipment_00003568:
     addi r11, r1, 0xc0
     bl _restgpr_27
     lwz r0, 0xc4(r1)

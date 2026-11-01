@@ -132,7 +132,7 @@ void fn_800134E0(void);
 void fn_80013508(void);
 void fn_80013530(void);
 void fn_80013558(void);
-void fn_80013CAC(void);
+void world_dummyEventCallback(void);
 void fn_80013CB0(void);
 void fn_80013D08(void);
 
@@ -4539,7 +4539,7 @@ lbl_fn_80013558_00003B68:
     blr
 }
 
-asm void fn_80013CAC(void)
+asm void world_dummyEventCallback(void)
 {
     nofralloc
     blr

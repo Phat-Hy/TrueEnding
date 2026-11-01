@@ -839,3 +839,36 @@ Analysis for Track B:
 - If found (idx >= 0), indexes into the matrix array pointer at model + 0x3c (*(void**)(model + 0x3c) + idx * 48).
 - Returns NULL (0) if the bone was not found (idx < 0).
 Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.
+
+## Session 2026-11-01 - Batch 16: High-yield queue naming (575k+ probe hits)
+Subject:  track-a: Batch 16 - name 16 high-yield queue routines (covers 575k+ probe hits) progress 99.30% -> 99.30%
+Scope:    Rename 16 top-ranking routines hit by Track B instruments across 15 files in src/.
+Checklist:
+  1. symbols.txt: Renamed 16 functions in place.
+  2. All src/ references updated across 15 files.
+  3. Local labels lbl_fn_* -> lbl_<newName>_* normalized.
+  4. External prototypes swept across all translation units.
+  5. report.json clean, ninja passed (orig/main.dol: OK).
+Self-check: git diff -U0 -- src/ for 'asm void': -16 / +16 (balanced).
+Names applied:
+  - player_updateEquipment (fn_801F9FB0, 13,696 B, 108,082 probe hits)
+  - player_dummyCallback (fn_801F9E6C, 4 B, 101,848 probe hits)
+  - net_playerDummyCallback (fn_801ED90C, 4 B, 74,007 probe hits)
+  - save_dummyCallback (fn_801F2A88, 4 B, 65,200 probe hits)
+  - save_updateHeader (fn_801F2A8C, 2,332 B, 64,710 probe hits)
+  - save_dummyCallback2 (fn_801F3FF4, 4 B, 52,225 probe hits)
+  - world_dummyEventCallback (fn_80013CAC, 4 B, 30,069 probe hits)
+  - skin_updateWeights (fn_800C3720, 184 B, 13,488 probe hits)
+  - perf_recordElapsedTime (fn_804799CC, 76 B, 12,350 probe hits)
+  - skin_initLink (fn_800C442C, 24 B, 10,395 probe hits)
+  - world_Manager_update (fn_80366E54, 3,052 B, 9,728 probe hits)
+  - world_Manager_draw (fn_80368280, 12,728 B, 8,822 probe hits)
+  - world_Manager_destructor (fn_80366454, 2,284 B, 8,791 probe hits)
+  - world_Manager_postUpdate (fn_8036B7F4, 4,716 B, 8,791 probe hits)
+  - __AXGetBufferSamples (fn_80609D50, 44 B, 6,958 probe hits)
+  - __GXGetOverflowCount (fn_80612E70, 16 B, 3,691 probe hits)
+Key Architectural Findings:
+  - WorldManager vtable (lbl_8078A3D0) fully resolved:
+    [2]=world_Manager_destructor, [3]=world_Manager_update, [4]=world_Manager_draw,
+    [5]=world_Manager_postUpdate, [6]=world_dummyEventCallback.
+Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.

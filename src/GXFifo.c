@@ -44,7 +44,7 @@ void fn_80612B60(void);
 void fn_80612C00(void);
 void __GXFifoInit(void);
 void fn_80612CD0(void);
-void fn_80612E70(void);
+void __GXGetOverflowCount(void);
 
 asm void GXInitFifoBase(void)
 {
@@ -837,7 +837,7 @@ lbl_fn_80612CD0_00000B00:
     blr
 }
 
-asm void fn_80612E70(void)
+asm void __GXGetOverflowCount(void)
 {
     nofralloc
     lwz r3, lbl_80880084

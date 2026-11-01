@@ -155,7 +155,7 @@ extern u32 lbl_80886F78;
 void fn_8047961C(void);
 void fn_80479940(void);
 void fn_80479998(void);
-void fn_804799CC(void);
+void perf_recordElapsedTime(void);
 void main(void);
 void fn_80479EA0(void);
 void fn_8047A158(void);
@@ -436,7 +436,7 @@ asm void fn_80479998(void)
     blr
 }
 
-asm void fn_804799CC(void)
+asm void perf_recordElapsedTime(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -474,7 +474,7 @@ asm void main(void)
     lis r29, lbl_80775B98@ha
     lis r30, lbl_80775B30@ha
     lis r22, fn_80479998@ha
-    lis r14, fn_804799CC@ha
+    lis r14, perf_recordElapsedTime@ha
     li r0, 0x0
     stw r0, 0x4c(r1)
     lis r19, lbl_807C8A98@ha
@@ -486,7 +486,7 @@ asm void main(void)
     addi r20, r20, fn_8047A410@l
     addi r21, r21, fn_8047A424@l
     addi r22, r22, fn_80479998@l
-    addi r14, r14, fn_804799CC@l
+    addi r14, r14, perf_recordElapsedTime@l
     li r24, 0x0
     lis r25, lbl_80775BC8@ha
     li r28, 0x1

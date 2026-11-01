@@ -177,7 +177,7 @@ void world_Manager_constructor(void);
 void fn_8036635C(void);
 void fn_80366364(void);
 void fn_803663A4(void);
-void fn_80366454(void);
+void world_Manager_destructor(void);
 
 asm void fn_80365320(void)
 {
@@ -1417,7 +1417,7 @@ lbl_fn_803663A4_00001118:
     blr
 }
 
-asm void fn_80366454(void)
+asm void world_Manager_destructor(void)
 {
     nofralloc
     stwu r1, -0x270(r1)
@@ -1428,7 +1428,7 @@ asm void fn_80366454(void)
     cmpwi r3, 0x0
     mr r28, r3
     mr r29, r4
-    beq lbl_fn_80366454_00001A04
+    beq lbl_world_Manager_destructor_00001A04
     lis r4, lbl_8078A3D0@ha
     li r0, 0x0
     addi r4, r4, lbl_8078A3D0@l
@@ -1436,34 +1436,34 @@ asm void fn_80366454(void)
     stw r0, lbl_8087F430
     lwz r3, 0x10e0(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_0000117C
+    beq lbl_world_Manager_destructor_0000117C
     bl atn_Task_unlink
-lbl_fn_80366454_0000117C:
+lbl_world_Manager_destructor_0000117C:
     lwz r3, lbl_8087F3C0
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_00001198
+    beq lbl_world_Manager_destructor_00001198
     li r0, 0x0
     stw r0, 0xf0(r3)
     lwz r3, lbl_8087F3C0
     stw r0, 0xcc(r3)
-lbl_fn_80366454_00001198:
+lbl_world_Manager_destructor_00001198:
     lwz r3, lbl_8087EE98
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_000011B0
+    beq lbl_world_Manager_destructor_000011B0
     addis r3, r3, 0x1
     li r0, 0x1
     stw r0, -0x6fcc(r3)
-lbl_fn_80366454_000011B0:
+lbl_world_Manager_destructor_000011B0:
     lwz r3, 0x5590(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_000011C4
+    beq lbl_world_Manager_destructor_000011C4
     li r4, 0x1
     bl fn_8056C39C
-lbl_fn_80366454_000011C4:
+lbl_world_Manager_destructor_000011C4:
     lwz r25, 0x5628(r28)
     cmpwi r25, 0x0
-    beq lbl_fn_80366454_000011F4
-    beq lbl_fn_80366454_000011F4
+    beq lbl_world_Manager_destructor_000011F4
+    beq lbl_world_Manager_destructor_000011F4
     lis r4, fn_8012AFE8@ha
     mr r3, r25
     addi r4, r4, fn_8012AFE8@l
@@ -1472,7 +1472,7 @@ lbl_fn_80366454_000011C4:
     bl fn_806959D8
     mr r3, r25
     bl dtor_80084684
-lbl_fn_80366454_000011F4:
+lbl_world_Manager_destructor_000011F4:
     addi r3, r28, 0x550c
     bl fn_80470580
     mr r25, r3
@@ -1480,30 +1480,30 @@ lbl_fn_80366454_000011F4:
     bl fn_8047059C
     cmpwi r25, 0x0
     srwi r5, r3, 2
-    beq lbl_fn_80366454_00001228
+    beq lbl_world_Manager_destructor_00001228
     lwz r3, lbl_8087F518
     mr r4, r25
     bl fn_8046F96C
     addi r3, r28, 0x550c
     bl fn_80473F88
-lbl_fn_80366454_00001228:
+lbl_world_Manager_destructor_00001228:
     bl fn_800EF8DC
     bl fn_80442F68
     lwz r3, lbl_8087EE90
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_0000124C
+    beq lbl_world_Manager_destructor_0000124C
     lwz r0, lbl_8087F610
     cmpwi r0, 0x0
-    bne lbl_fn_80366454_0000124C
+    bne lbl_world_Manager_destructor_0000124C
     bl fn_8004895C
-lbl_fn_80366454_0000124C:
+lbl_world_Manager_destructor_0000124C:
     lwz r3, lbl_8087EE90
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_00001264
+    beq lbl_world_Manager_destructor_00001264
     bl fn_80049654
     lwz r3, lbl_8087EE90
     bl fn_800498D4
-lbl_fn_80366454_00001264:
+lbl_world_Manager_destructor_00001264:
     lwz r3, lbl_8087EFE8
     bl fn_800CE368
     lwz r3, lbl_8087EFE8
@@ -1513,29 +1513,29 @@ lbl_fn_80366454_00001264:
     stw r0, 0x2a10(r3)
     lwz r3, lbl_8087F3C0
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_00001290
+    beq lbl_world_Manager_destructor_00001290
     bl atn_Task_unlink
-lbl_fn_80366454_00001290:
+lbl_world_Manager_destructor_00001290:
     lis r3, lbl_807C8458@ha
     lwz r0, lbl_807C8458@l(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80366454_000012A8
+    beq lbl_world_Manager_destructor_000012A8
     li r0, 0x0
     stw r0, lbl_807C8458@l(r3)
-lbl_fn_80366454_000012A8:
+lbl_world_Manager_destructor_000012A8:
     li r30, 0x0
     stw r30, lbl_8087F460
     lwz r3, lbl_8087EFB4
     bl fn_800C16B4
     cmpwi r30, 0x0
     stw r30, 0x74(r3)
-    bne lbl_fn_80366454_000012D0
+    bne lbl_world_Manager_destructor_000012D0
     lwz r0, 0x70(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80366454_000012D4
-lbl_fn_80366454_000012D0:
+    beq lbl_world_Manager_destructor_000012D4
+lbl_world_Manager_destructor_000012D0:
     li r30, 0x1
-lbl_fn_80366454_000012D4:
+lbl_world_Manager_destructor_000012D4:
     stw r30, 0x70(r3)
     lwz r3, lbl_8087EFB4
     bl fn_800C16B4
@@ -1878,25 +1878,25 @@ lbl_fn_80366454_000012D4:
     stfs f5, 0x100(r1)
     stfs f4, 0x104(r1)
     stfs f3, 0x108(r1)
-    bne lbl_fn_80366454_00001840
+    bne lbl_world_Manager_destructor_00001840
     lwz r3, lbl_8087F4E8
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_00001840
+    beq lbl_world_Manager_destructor_00001840
     stw r31, 0x88(r3)
-lbl_fn_80366454_00001840:
+lbl_world_Manager_destructor_00001840:
     lwz r3, lbl_8087EF70
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_00001854
+    beq lbl_world_Manager_destructor_00001854
     li r4, 0x5
     bl fn_800A5B30
-lbl_fn_80366454_00001854:
+lbl_world_Manager_destructor_00001854:
     li r3, 0x1
     bl fn_80605540
     li r3, 0x0
     bl fn_806055A0
     lwz r0, lbl_8087F610
     cmpwi r0, 0x0
-    bne lbl_fn_80366454_00001894
+    bne lbl_world_Manager_destructor_00001894
     lwz r3, lbl_8087F9C0
     bl fn_8057EF44
     lwz r3, lbl_8087F420
@@ -1904,105 +1904,105 @@ lbl_fn_80366454_00001854:
     stw r0, 0xc(r3)
     lwz r3, lbl_8087F018
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_00001894
+    beq lbl_world_Manager_destructor_00001894
     stw r0, 0x40e0(r3)
-lbl_fn_80366454_00001894:
+lbl_world_Manager_destructor_00001894:
     lwz r3, lbl_8087EF8C
     li r4, 0x2
     addi r3, r3, 0x118
     bl fn_800AFEBC
     addic. r3, r28, 0x56dc
-    beq lbl_fn_80366454_000018B4
+    beq lbl_world_Manager_destructor_000018B4
     li r4, 0x0
     bl atn_LoadHandle_destructor
-lbl_fn_80366454_000018B4:
+lbl_world_Manager_destructor_000018B4:
     addic. r3, r28, 0x5690
-    beq lbl_fn_80366454_000018C0
+    beq lbl_world_Manager_destructor_000018C0
     bl fn_80470528
-lbl_fn_80366454_000018C0:
+lbl_world_Manager_destructor_000018C0:
     addic. r0, r28, 0x562c
-    beq lbl_fn_80366454_000018D0
+    beq lbl_world_Manager_destructor_000018D0
     lwz r3, 0x562c(r28)
     bl dtor_80084684
-lbl_fn_80366454_000018D0:
+lbl_world_Manager_destructor_000018D0:
     addi r3, r28, 0x55a8
     li r4, -0x1
     bl fn_800CB3A0
     addic. r0, r28, 0x558c
-    beq lbl_fn_80366454_000018F0
+    beq lbl_world_Manager_destructor_000018F0
     lwz r3, 0x558c(r28)
     li r4, 0x1
     bl fn_8056B398
-lbl_fn_80366454_000018F0:
+lbl_world_Manager_destructor_000018F0:
     addic. r25, r28, 0x550c
-    beq lbl_fn_80366454_0000193C
+    beq lbl_world_Manager_destructor_0000193C
     addic. r0, r25, 0x44
-    beq lbl_fn_80366454_00001910
+    beq lbl_world_Manager_destructor_00001910
     lwz r3, 0x4c(r25)
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_00001910
+    beq lbl_world_Manager_destructor_00001910
     bl fn_80084C24
-lbl_fn_80366454_00001910:
+lbl_world_Manager_destructor_00001910:
     addic. r0, r25, 0x38
-    beq lbl_fn_80366454_00001928
+    beq lbl_world_Manager_destructor_00001928
     lwz r3, 0x40(r25)
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_00001928
+    beq lbl_world_Manager_destructor_00001928
     bl fn_80084C24
-lbl_fn_80366454_00001928:
+lbl_world_Manager_destructor_00001928:
     cmpwi r25, 0x0
-    beq lbl_fn_80366454_0000193C
+    beq lbl_world_Manager_destructor_0000193C
     mr r3, r25
     li r4, 0x0
     bl atn_LoadHandle_destructor
-lbl_fn_80366454_0000193C:
+lbl_world_Manager_destructor_0000193C:
     addic. r25, r28, 0x54f4
-    beq lbl_fn_80366454_000019A4
+    beq lbl_world_Manager_destructor_000019A4
     addic. r3, r25, 0x10
-    beq lbl_fn_80366454_00001954
+    beq lbl_world_Manager_destructor_00001954
     li r4, 0x0
     bl atn_LoadHandle_destructor
-lbl_fn_80366454_00001954:
+lbl_world_Manager_destructor_00001954:
     addic. r0, r25, 0x8
-    beq lbl_fn_80366454_00001980
+    beq lbl_world_Manager_destructor_00001980
     lwz r3, 0xc(r25)
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_00001974
+    beq lbl_world_Manager_destructor_00001974
     lis r4, fn_80366364@ha
     addi r4, r4, fn_80366364@l
     bl fn_80695A50
-lbl_fn_80366454_00001974:
+lbl_world_Manager_destructor_00001974:
     li r0, 0x0
     stw r0, 0xc(r25)
     stw r0, 0x8(r25)
-lbl_fn_80366454_00001980:
+lbl_world_Manager_destructor_00001980:
     cmpwi r25, 0x0
-    beq lbl_fn_80366454_000019A4
+    beq lbl_world_Manager_destructor_000019A4
     lwz r3, 0x4(r25)
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_00001998
+    beq lbl_world_Manager_destructor_00001998
     bl fn_80084C24
-lbl_fn_80366454_00001998:
+lbl_world_Manager_destructor_00001998:
     li r0, 0x0
     stw r0, 0x4(r25)
     stw r0, 0x0(r25)
-lbl_fn_80366454_000019A4:
+lbl_world_Manager_destructor_000019A4:
     addic. r25, r28, 0xd18
-    beq lbl_fn_80366454_000019DC
+    beq lbl_world_Manager_destructor_000019DC
     addic. r0, r25, 0x1fc
-    beq lbl_fn_80366454_000019D0
+    beq lbl_world_Manager_destructor_000019D0
     lwz r4, 0x1fc(r25)
     cmpwi r4, 0x0
-    beq lbl_fn_80366454_000019D0
+    beq lbl_world_Manager_destructor_000019D0
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
-    beq lbl_fn_80366454_000019D0
+    beq lbl_world_Manager_destructor_000019D0
     bl fn_800897D8
-lbl_fn_80366454_000019D0:
+lbl_world_Manager_destructor_000019D0:
     addi r3, r25, 0x8
     li r4, -0x1
     bl fn_8004B338
-lbl_fn_80366454_000019DC:
+lbl_world_Manager_destructor_000019DC:
     addi r3, r28, 0x6c
     li r4, -0x1
     bl fn_8037DC68
@@ -2010,10 +2010,10 @@ lbl_fn_80366454_000019DC:
     li r4, 0x0
     bl atn_Task_destructor
     cmpwi r29, 0x0
-    ble lbl_fn_80366454_00001A04
+    ble lbl_world_Manager_destructor_00001A04
     mr r3, r28
     bl dtor_80084684
-lbl_fn_80366454_00001A04:
+lbl_world_Manager_destructor_00001A04:
     addi r11, r1, 0x270
     mr r3, r28
     bl _restgpr_25

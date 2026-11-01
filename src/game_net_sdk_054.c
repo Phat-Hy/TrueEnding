@@ -21,7 +21,7 @@ extern void fn_805EC3B0(void);
 extern void fn_805EC870(void);
 extern void OSLockMutex(void);
 extern void OSUnlockMutex(void);
-extern void fn_80609D50(void);
+extern void __AXGetBufferSamples(void);
 extern void fn_80609D80(void);
 extern void fn_80609E50(void);
 extern void fn_80625910(void);
@@ -2115,7 +2115,7 @@ lbl_net_resetAllSockets_00001AA0:
 lbl_net_resetAllSockets_00001AD8:
     lis r30, lbl_80862FB0@ha
     addi r30, r30, lbl_80862FB0@l
-    bl fn_80609D50
+    bl __AXGetBufferSamples
     cmpwi r3, 0x28
     blt lbl_net_resetAllSockets_00001B40
     addi r29, r30, 0x38

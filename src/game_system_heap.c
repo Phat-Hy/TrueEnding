@@ -44,7 +44,7 @@ void fn_801F9488(void);
 void fn_801F94F4(void);
 void fn_801F97A8(void);
 void fn_801F9860(void);
-void fn_801F9E6C(void);
+void player_dummyCallback(void);
 void fn_801F9E70(void);
 
 asm void fn_801F8FE4(void)
@@ -1089,7 +1089,7 @@ lbl_fn_801F9860_00000E68:
     blr
 }
 
-asm void fn_801F9E6C(void)
+asm void player_dummyCallback(void)
 {
     nofralloc
     blr

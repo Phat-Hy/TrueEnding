@@ -123,7 +123,7 @@ void fn_800C344C(void);
 void fn_800C3610(void);
 void fn_800C36B8(void);
 void fn_800C3718(void);
-void fn_800C3720(void);
+void skin_updateWeights(void);
 void fn_800C37D8(void);
 void fn_800C37E0(void);
 void fn_800C37E4(void);
@@ -139,7 +139,7 @@ void fn_800C3FF0(void);
 void fn_800C411C(void);
 void fn_800C41B4(void);
 void atn_Skin_init(void);
-void fn_800C442C(void);
+void skin_initLink(void);
 void fn_800C4444(void);
 void fn_800C4894(void);
 void fn_800C49F0(void);
@@ -668,7 +668,7 @@ asm void fn_800C3718(void)
     blr
 }
 
-asm void fn_800C3720(void)
+asm void skin_updateWeights(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -679,29 +679,29 @@ asm void fn_800C3720(void)
     mr r30, r3
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_800C3720_0000072C
+    bne lbl_skin_updateWeights_0000072C
     lwz r31, 0x54(r3)
     cmpwi r31, 0x0
-    bne lbl_fn_800C3720_000006F4
+    bne lbl_skin_updateWeights_000006F4
     lwz r3, 0x4c(r3)
     lwz r4, 0x50(r30)
     bl fn_800C3E84
     cmpwi r3, 0x0
-    beq lbl_fn_800C3720_000006E0
+    beq lbl_skin_updateWeights_000006E0
     li r0, 0x0
     stw r0, 0x50(r30)
     mr r31, r3
-    b lbl_fn_800C3720_000006FC
-lbl_fn_800C3720_000006E0:
+    b lbl_skin_updateWeights_000006FC
+lbl_skin_updateWeights_000006E0:
     lwz r3, 0x4c(r30)
     li r4, 0x0
     bl fn_800C3FB0
     mr r31, r3
-    b lbl_fn_800C3720_000006FC
-lbl_fn_800C3720_000006F4:
+    b lbl_skin_updateWeights_000006FC
+lbl_skin_updateWeights_000006F4:
     li r0, 0x0
     stw r0, 0x54(r3)
-lbl_fn_800C3720_000006FC:
+lbl_skin_updateWeights_000006FC:
     lwz r12, 0x0(r31)
     mr r3, r31
     mr r4, r30
@@ -714,7 +714,7 @@ lbl_fn_800C3720_000006FC:
     mr r3, r30
     stw r0, 0x58(r30)
     bl fn_800D3F28
-lbl_fn_800C3720_0000072C:
+lbl_skin_updateWeights_0000072C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1501,9 +1501,9 @@ lbl_atn_Skin_init_0000117C:
     addi r3, r3, 0x10
     li r7, 0x0
     bl fn_800846FC
-    lis r4, fn_800C442C@ha
+    lis r4, skin_initLink@ha
     mr r7, r28
-    addi r4, r4, fn_800C442C@l
+    addi r4, r4, skin_initLink@l
     li r5, 0x0
     li r6, 0xc
     bl fn_80695720
@@ -1640,7 +1640,7 @@ lbl_atn_Skin_init_00001374:
     blr
 }
 
-asm void fn_800C442C(void)
+asm void skin_initLink(void)
 {
     nofralloc
     li r4, -0x1

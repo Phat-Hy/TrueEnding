@@ -49,7 +49,7 @@ extern u32 lbl_80880004;
 /* Function declarations */
 void fn_80609B00(void);
 void fn_80609D00(void);
-void fn_80609D50(void);
+void __AXGetBufferSamples(void);
 void fn_80609D80(void);
 void fn_80609E50(void);
 void fn_80609EB0(void);
@@ -217,15 +217,15 @@ asm void fn_80609D00(void)
     blr
 }
 
-asm void fn_80609D50(void)
+asm void __AXGetBufferSamples(void)
 {
     nofralloc
     lwz r3, lbl_8087FF80
     subic. r3, r3, 0x24
-    bge lbl_fn_80609D50_00000264
+    bge lbl___AXGetBufferSamples_00000264
     lwz r0, lbl_8087FF84
     add r3, r3, r0
-lbl_fn_80609D50_00000264:
+lbl___AXGetBufferSamples_00000264:
     lwz r0, lbl_8087FF7C
     subf. r3, r0, r3
     bgelr

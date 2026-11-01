@@ -37,7 +37,7 @@ extern u32 lbl_80882C04;
 extern u32 lbl_80882C08;
 
 /* Function declarations */
-void fn_801ED90C(void);
+void net_playerDummyCallback(void);
 void fn_801ED910(void);
 void fn_801ED928(void);
 void fn_801EDC74(void);
@@ -52,7 +52,7 @@ void fn_801EEF04(void);
 void fn_801EEF74(void);
 void fn_801EF15C(void);
 
-asm void fn_801ED90C(void)
+asm void net_playerDummyCallback(void)
 {
     nofralloc
     blr

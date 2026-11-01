@@ -48,7 +48,7 @@ extern void GXGetFifoStatus(void);
 extern void GXGetFifoCount(void);
 extern void fn_80612B10(void);
 extern void fn_80612B60(void);
-extern void fn_80612E70(void);
+extern void __GXGetOverflowCount(void);
 extern void GXInvalidateVtxCache(void);
 extern void GXFlush(void);
 extern void GXSetDrawSync(void);
@@ -3343,7 +3343,7 @@ lbl_gx_syncFrameFifo_00002CD0:
     lwz r3, 0x74(r27)
 lbl_gx_syncFrameFifo_00002D98:
     stw r3, 0x78(r27)
-    bl fn_80612E70
+    bl __GXGetOverflowCount
     bl OSDisableInterrupts
     lis r27, lbl_807C6F68@ha
     lis r28, lbl_807C6F60@ha
