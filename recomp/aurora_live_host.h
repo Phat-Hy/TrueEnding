@@ -43,17 +43,21 @@ void tls_aurora_set_guest_ram(const void* mem1, uint32_t mem1_size, const void* 
 
 void tls_aurora_tap_byte(uint8_t byte, int idle);
 
-/* Frame boundary. `guest_frame` is the runner's current guest frame counter; `at_present` says
- * whether this boundary is the guest's own present (`1`) or a mid-frame GXDrawDone flush (`0`).
+/* Frame boundary. `guest_frame` is the runner's current guest frame counter; `at_present` is
+ * three-valued: 1 = present with an XFB/scanout copy, 2 = present without one, 0 = a mid-frame
+ * GXDrawDone flush.
  *
- * THE FLAG EXISTS BECAUSE THE BOUNDARY IS NOT THE PRESENT. gx_pipeline_end_frame() runs on both
- * paths, so without it the tap closed an aurora "frame" at every mid-frame flush - measured on the
- * gate's script at counters 2794..2800: 2794 fed 0 draws / 3 copies, 2795 fed 220 draws, 2796 0,
- * 2797 219, 2798 0, 2799 207, 2800 0 draws / 3 copies. Aurora clears per fed frame, so a feed that
- * lands on the copy-only half renders black *by construction* - which is what the previous session
- * recorded as "the cave frame renders BLACK live (mean 1.92)" and blamed on depth state (5c.46
- * AP-AZ C). With the flag the bytes accumulate across the flush and the frame is fed ONCE, at the
- * present, as the whole guest frame the layer also renders. */
+ * WHY THE FLAG EXISTS. gx_pipeline_end_frame() runs on both the flush and the present path, so
+ * without it the tap closed an aurora "frame" at every mid-frame flush - measured on the gate's
+ * script at counters 2794..2800: 2794 fed 0 draws / 3 copies, 2795 fed 220 draws, 2796 0, 2797 219,
+ * 2798 0, 2799 207, 2800 0 draws / 3 copies. Bytes accumulate across a flush and the frame is fed
+ * ONCE, at the present (5c.46 AP-AZ C).
+ *
+ * WHY THE THIRD VALUE (5c.46 AP-BJ). 1 and 2 are both PRESENTS and both end a guest frame, and the
+ * default feed model closes on both - one aurora frame per guest frame, which is what the harness
+ * does with a recorded capture and what measures 7.66 mean |d| against the layer. Closing only on 1
+ * (AP-BC's display-boundary model, still available as TLS_AURORA_LEGACY_FEED=1) merges the pair into
+ * one aurora frame and measures 63-66. 0 remains a flush, which never ends an aurora frame. */
 void tls_aurora_frame_end(uint32_t guest_frame, int at_present);
 
 /* Joins aurora's own threads and frees the DLL. MUST be called before the process exits:

@@ -57,6 +57,8 @@ static long s_from = -2, s_to = -2;
  * present at/after s_to, the pre-AP-BI behaviour. */
 static long s_shots[32];
 static int s_nshot;
+/* TLS_AURORA_LEGACY_FEED=1: AP-BC's display-boundary feed model (see the comment at its use). */
+static int s_legacy_feed = -1;
 
 
 /* Display-list call skipping: a 0x40 opcode costs 9 bytes and is NOT forwarded. The parser feeds
@@ -204,18 +206,29 @@ void tls_aurora_frame_end(uint32_t guest_frame, int at_present) {
      * `s_to`. A range rather than one frame because a single frame into a fresh processor is missing
      * the GX state its draws inherit - the harness has the same trap and answers it with a window.
      *
-     * WHY `at or after` AND NOT `== s_to`: the guest renders a frame in two halves, so the counter
-     * that lands exactly on `s_to` may be the half that issues only EFB copies (measured on the
-     * field: alternate presents fed 0 draws and 3 copies). Taking the picture at the next boundary
-     * that the guest itself displays (an XFB copy) is the frame the layer also presents. */
+     * WHY `at or after` AND NOT `== s_to`: a feed can be configured to close only on XFB presents, and
+     * the counter that lands exactly on `s_to` may then be a frame that issues only EFB copies. */
     if (s_from >= 0 && (long)guest_frame < s_from) { s_len = 0; return; }
     if (s_to >= 0 && (long)guest_frame > s_to + 8) { s_len = 0; return; }
     if (s_from < 0 && s_len < 4096) { s_len = 0; return; }
 
-    /* A frame that is NOT the guest's own display boundary keeps its bytes: the guest renders a
-     * frame in two halves, so the half that issues only EFB copies must not become an aurora frame
-     * (aurora clears per fed frame, which is what turned the field frame black - 5c.46 AP-AZ C). */
-    if (!at_present) {
+    /* THE FEED MODEL, and it is the one measured thing this file has changed on (5c.46 AP-BJ).
+     *
+     * `at_present` is now three-valued at the call site: 1 = present with an XFB/scanout copy,
+     * 2 = present without one, 0 = a mid-frame GXDrawDone flush. Both 1 and 2 END A GUEST FRAME.
+     *
+     * DEFAULT (feed one aurora frame per guest frame): close on every present, 1 or 2, and let a
+     * flush accumulate. This is exactly what the harness does with a recorded capture - one aurora
+     * frame per recorded frame - and that model measures **7.66 mean |d|** against the layer's
+     * same-run shot at the same guest frame.
+     *
+     * TLS_AURORA_LEGACY_FEED=1 restores AP-BC's display-boundary model (close only on 1), which
+     * merges the pair into one aurora frame: measured **63.14-65.77** against the same layer shots,
+     * because the composite half's copies then run over a populated EFB where the layer (and the
+     * harness) start from a cleared one. The two numbers are the reason this is a default change
+     * and not a switch. */
+    if (s_legacy_feed < 0) s_legacy_feed = getenv("TLS_AURORA_LEGACY_FEED") ? 1 : 0;
+    if (s_legacy_feed ? (at_present != 1) : (at_present == 0)) {
         if (s_len > (8u << 20)) s_len = 0;   /* safety valve: a loop that never presents is broken */
         return;
     }

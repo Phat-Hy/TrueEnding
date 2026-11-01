@@ -96,9 +96,16 @@ void gx_pipeline_get_clear_color(float* rgba);
 
 // Reset per-frame primitive buffers
 void gx_pipeline_begin_frame(void);
-/* `at_present` distinguishes the guest's own frame boundary (1, the present path) from a mid-frame
- * GXDrawDone flush (0). The GX capture closes on both - that is its recorded format - while the
- * aurora feed closes only at the present, or it feeds half-frames (5c.46 AP-AZ C). */
+/* `at_present` distinguishes the three boundaries a frame can end on:
+ *   0 = a mid-frame GXDrawDone flush (not a guest frame boundary);
+ *   1 = the present path, on a frame where the guest also issued an XFB/scanout copy;
+ *   2 = the present path, on a frame with no XFB copy.
+ * The three-way value exists because 1 and 2 are both PRESENTS and only 1 is a DISPLAY BOUNDARY.
+ * The GX capture closes a record on every frame boundary (that is its format), while the aurora
+ * feed needs to know which of the two it is: the harness replay of a recorded capture feeds ONE
+ * AURORA FRAME PER RECORDED FRAME (one present), which is the model that matches the layer to
+ * 7.66 mean |d|, whereas feeding only the XFB presents merges two guest frames into one aurora
+ * frame and measured 63-66 (5c.46 AP-BI/AP-BJ). */
 void gx_pipeline_end_frame(int at_present);
 
 // Feed data written to WGPIPE (0xCC008000)

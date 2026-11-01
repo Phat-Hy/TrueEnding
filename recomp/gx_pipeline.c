@@ -810,7 +810,9 @@ void gx_pipeline_end_frame(int at_present) {
     if (tls_gxcap_on) tls_gxcap_frame_end((uint32_t)g_runner_current_frame);
     /* The aurora feed needs the distinction the capture does not: a GXDrawDone flush also lands
      * here (gfx_d3d11.c's flush-only path), so `at_present` keeps aurora's frame boundary at the
-     * guest's own present and lets the flush bytes accumulate into the same frame. */
+     * guest's own present and lets the flush bytes accumulate into the same frame. 1 and 2 are
+     * both presents (with / without an XFB copy) - see the declaration for why the feed needs
+     * that apart. */
     tls_aurora_frame_end((uint32_t)g_runner_current_frame, at_present);
 }
 

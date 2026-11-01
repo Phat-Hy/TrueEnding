@@ -36,17 +36,25 @@
 > **§5c.46 AP-BD is now answered by AP-BI's matrix**, and its "read a live-vs-layer number and you are reading
 > the half-frame" warning still holds for every comparison that is not a same-run, same-frame pair:
 >
+> **THE FEED MODEL IS FIXED (AP-BJ): READ IT BEFORE ANY FURTHER LIVE MEASUREMENT.** AP-BC's accumulate rule is
+> gone as a default — `gx_pipeline_end_frame` now takes a three-valued boundary (1 = present with an XFB copy,
+> 2 = present without one, 0 = flush) and the aurora feed closes on **every present**, i.e. one aurora frame per
+> guest frame, which is what the harness does with a recorded capture. Measured in one launch: the four geometry
+> frames of the window match the layer **on the diagonal at 6.20-7.59 mean |d|** (it was 63-66), the same order
+> as the harness's 7.66; the four composite frames are the remaining difference (aurora luma 87-99 against the
+> layer's 39-43, and their best match is a *geometry* frame at 40.1-40.5). `TLS_AURORA_LEGACY_FEED=1` restores
+> the accumulate model for an A/B. Gate PASS attempt 1 after the change (`logs_ap/gate_bj.log`).
+>
 > **PRIORITY ORDER for the next session.** (1) gate on an idle host, **with nothing else running** (AP-BI's
-> row 1 is a launch that was not evidence because a capture census ran beside it); (2) **change the live feed
-> from the accumulate model to one aurora frame per guest frame** — the harness already does this and matches
-> the layer to 7.66 mean |d| at the same frame, while the live path's accumulated pair measures 63-66, so this
-> is the highest-value renderer change left and its exit criterion is the live-vs-layer pair at the same guest
-> frame coming down towards 7.66; (3) re-run P1's equality on a fresh **same-run capture** (`--probe-copy`) and
-> only then (4) P4. Two cheap checks exist and are worth using before any 2 810-frame run: the title window
-> (440..452, 460 frames, 30 s) for the readback path, and `tools/aurora_spike/capinfo.py` on a capture for its
-> per-frame FIFO sizes (the field alternates 0.79 MB and 1.06 MB frames).
-> `TLS_AURORA_FROM/TO` are **guest-keyed** (guest 2800 = present 2864, the documented 64 offset) and the feed
-> closes at the guest's own display boundary (an XFB copy), so a feed is now one whole guest frame.
+> row 1 is a launch that was not evidence because a capture census ran beside it); (2) characterise the
+> **composite half** — the odd frames, where the EFB downscale/upscale tail plus the subtitle makes aurora
+> 2.1-2.4x brighter than the layer; the instruments are the 8x8 matrix (`tools/aurora_spike/align_matrix.py`)
+> and a harness replay of a same-run capture; (3) P1's equality on a fresh **same-run capture**
+> (`--probe-copy`), then (4) P4. Two cheap checks exist and are worth using before any 2 810-frame run: the
+> title window (440..452, 460 frames, 30 s) for the readback path, and `tools/aurora_spike/capinfo.py` on a
+> capture for its per-frame FIFO sizes (the field alternates 0.79 MB and 1.06 MB frames).
+> `TLS_AURORA_FROM/TO` are **guest-keyed** (guest 2800 = present 2864, the documented 64 offset) and a feed is
+> one whole guest frame.
 >
 > **WORKING IN PARALLEL WITH TRACK A? READ `CONTRIBUTING_TRACKS.md`.** Track A works in its **own clone**
 > (`G:\Program\TrueEnding-TrackA`, branch `track-a`); read it only through `git grep … origin/track-a`, never
@@ -16354,3 +16362,37 @@ Two conclusions, both load-bearing. (a) The two aurora paths now parse the **sam
 | 7 | field capture 2794..2801, same-run layer shots, 2 812 frames | 7 417 471 FIFO bytes, 8 frames, both MEM planes; layer 2800 = `74F0CAED…` (the cutscene drifted this run) |
 | 8 | harness replay of row 7 (`--stop-after 8 --probe-copy`) | 113 851 draws / 861 490 vertices; probe mean `(29.16,30.31,29.97)`; **7.66 mean &#124;d&#124; vs the same-run layer 2801** |
 | 9 | harness replay of the title capture 440..452 | probe `205.68` vs live `205.69` vs layer `90.43` |
+
+---
+
+### AP-BJ. THE LIVE FEED NOW CLOSES ON EVERY PRESENT, NOT ONLY ON XFB DISPLAY BOUNDARIES — and the geometry frames of the two implementations meet on the diagonal at **6.20-7.59 mean |d|** (from 63-66), the same order as the harness's 7.66, while the four composite frames remain the difference (aurora luma 87-99 against the layer's 40-43)
+
+AP-BI named this as the next change and gave it an exit criterion: the live path accumulated the two guest frames between XFB boundaries into ONE aurora frame (AP-BC's rule), which measured 63-66 against the layer's same-run shots, while the harness feeds one aurora frame per recorded frame and measured 7.66. This section closes it.
+
+**1. The change is three-valued, because the flag had one bit too few.** `at_present` distinguished the present path (1) from a GXDrawDone flush (0) — but a present on a frame with **no XFB copy** is not a display boundary and still ends a guest frame, and that is exactly the frame AP-BC's model merged into its neighbour. `gx_pipeline_end_frame` now receives **1 = present with an XFB copy, 2 = present without one, 0 = flush** (`gfx_d3d11.c` passes `xfb_boundary_this_frame > 0 ? 1 : 2`; the flush still passes 0). The aurora feed closes on **1 or 2** by default and accumulates across a flush; `TLS_AURORA_LEGACY_FEED=1` restores AP-BC's display-boundary model, which is the code path that produced AP-BI's 63-66 numbers. Nothing else reads the value (the capture closes on its own calls), and the default renderer does not touch it: the gate is unchanged below.
+
+**2. The measurement, one launch (2 812 frames, `logs_ap/align_run2.log`).** `TLS_AURORA_FROM/TO 2794..2801` + `TLS_AURORA_SHOTS 2794..2801` + the layer's shots of the same eight guest frames. Eight fed frames, one per guest frame, and they now alternate the way the layer's do:
+
+| guest | fed bytes | draws | aurora luma | layer luma | **mean &#124;d&#124; on the diagonal** |
+|---|---|---|---|---|---|
+| 2794 | 1 303 669 | 22 345 | 36.82 | 35.58 | **7.51** |
+| 2795 | 588 897 | 6 044 | 87.11 | 40.35 | 57.78 |
+| 2796 | 1 317 788 | 22 553 | 36.85 | 35.60 | **7.54** |
+| 2797 | 574 926 | 5 835 | 87.07 | 39.37 | 58.38 |
+| 2798 | 721 514 | 14 192 | 4.19 | 1.94 | **6.20** |
+| 2799 | 1 169 618 | 14 184 | 99.29 | 40.68 | 65.15 |
+| 2800 | 1 318 078 | 22 553 | 37.00 | 35.63 | **7.59** |
+| 2801 | 572 526 | 5 819 | 86.98 | 43.16 | 56.39 |
+
+The four **geometry** frames (the even ones: 2794, 2796, 2798, 2800 — 22 553 draws, luma ~37) agree on the diagonal at **6.20-7.59**, i.e. the live path is now as close to the layer as the harness replay is (7.66). The four **composite** frames (odd: ~5 800 draws, aurora luma 87-99 against the layer's 39-43) do not: their best match in the whole 8x8 matrix is **A2796 at 40.13-40.47**, not their own column (56.4-65.2), so what they show is closer to *a geometry frame* than to the layer's composite of the same frame. The full matrix is in `logs_ap/bj_align.txt`, the 8x8 difference contact sheet in `logs_ap/bj_align.png`.
+
+**3. What that localises, and what it does not claim.** The 3D shading question AP-BH left open is now answered twice over: the geometry frames match the layer to 6-8 mean |d| with real texels, so there is no "near-black 3D" left; and the remaining difference is the **composite half**, a frame whose content is produced by the EFB downscale/upscale tail plus the subtitle, where aurora renders 2.1-2.4x brighter than the layer (luma 87-99 vs 39-43). That is a copy-chain/composite-semantics difference — AP-AP's tail, Aurora's territory — and it is the next thing to characterise, not a shading defect. Not claimed: byte equality. The layer image is 1280x720 (16:9) resized to the 640x448 EFB with BOX; aurora's is the native EFB. And a comparison is only valid within one launch (the layer's guest-2800 shot in THIS run is `B4646917…`, the gate's content reference exactly, which is the control that the run is the reference scene rather than a drifted one).
+
+**4. Changes.** `recomp/gx_pipeline.h` / `.c` (the three-valued boundary and its rationale), `recomp/gfx_d3d11.c` (the present passes 1 or 2), `recomp/aurora_live_host.c` / `.h` (the per-present feed rule, `TLS_AURORA_LEGACY_FEED`), `tools/invariant.ps1` (the new switch in the scrub list), this file. **0 changes to `src/`.** Build green (472 objects, 0 chunks recompiled). Gate **PASS attempt 1** at the unchanged references (`logs_ap/gate_bj.log`): handover 1 680, content `B4646917…`, popup `22B1CE31…`, save 1 348 992 / 29 344.
+
+**5. Run log.**
+
+| # | what | result |
+|---|---|---|
+| 1 | field 2794..2801, per-frame feed (this change), `TLS_AURORA_SHOTS` at all eight frames, 2 812 frames | 8 feeds (22 345/6 044/22 553/5 835/14 192/14 184/22 553/5 819 draws); 8 readbacks; diagonal 7.51/57.78/7.54/58.38/6.20/65.15/7.59/56.39; layer 2800 = `B4646917…` |
+| 2 | gate, idle host, nothing else running | **PASS attempt 1** (`gate_bj.log`) |

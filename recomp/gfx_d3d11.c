@@ -4621,7 +4621,11 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
         if (!s_on_xfb || s_xfbs_this_frame > 0)
             IDXGISwapChain_Present(s_d3d11.swap_chain, s_d3d11.vsync ? 1 : 0, 0);
     }
-    gx_pipeline_end_frame(xfb_boundary_this_frame > 0 ? 1 : 0);   /* the guest's own display boundary */
+    /* 1 = present WITH an XFB/scanout copy (a display boundary), 2 = present without one. Both are
+     * presents and both end a guest frame; the aurora feed needs them apart because the harness
+     * replay of a recorded capture feeds one aurora frame per recorded frame (one present), which
+     * is the model that matches the layer (5c.46 AP-BI/AP-BJ). A flush passes 0. */
+    gx_pipeline_end_frame(xfb_boundary_this_frame > 0 ? 1 : 2);   /* the guest's own display boundary */
     return true;
 }
 
